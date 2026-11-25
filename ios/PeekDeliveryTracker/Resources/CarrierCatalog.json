@@ -7653,6 +7653,10 @@
           "confidence": "low"
         },
         {
+          "pattern": "^[A-Z]{2}\\d{8}$",
+          "confidence": "low"
+        },
+        {
           "pattern": "^[A-Z]\\d{10}$",
           "confidence": "low"
         }
@@ -70006,6 +70010,344 @@
         }
       ],
       "trackingSearchUrl": "https://asltrack.com/"
+    },
+    "bulongguoji": {
+      "displayName": "BULONGGUOJI",
+      "aliases": [
+        "Bulong Guoji",
+        "布龙国际",
+        "深圳市布龙国际供应链有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#fd1916",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "bulongguoji"
+      },
+      "linkRules": [
+        {
+          "domains": [
+            "106.52.54.99"
+          ],
+          "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+          "params": [
+            "documentCode"
+          ]
+        }
+      ],
+      "detectionRules": []
+    },
+    "huayutong": {
+      "displayName": "Huayutong",
+      "aliases": [
+        "HYT",
+        "华羽通",
+        "深圳华羽通",
+        "深圳市华羽通国际供应链有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#0a94dd",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "huayutong"
+      },
+      "linkRules": [
+        {
+          "domains": [
+            "szhyt.rtb56.com"
+          ],
+          "pathPattern": "^/track_query\\.aspx$",
+          "params": [
+            "track_number"
+          ]
+        }
+      ],
+      "detectionRules": []
+    },
+    "jytd": {
+      "displayName": "Jieyi Tongda",
+      "aliases": [
+        "JYTD",
+        "JYD",
+        "捷易通达",
+        "捷易通达国际物流",
+        "深圳市捷易通达国际物流有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#29c2eb",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "jytd"
+      },
+      "linkRules": [
+        {
+          "domains": [
+            "123.207.50.250"
+          ],
+          "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+          "params": [
+            "documentCode"
+          ]
+        }
+      ],
+      "detectionRules": []
+    },
+    "keke-international": {
+      "displayName": "Keke International",
+      "aliases": [
+        "科科国际",
+        "科科国际物流",
+        "浙江科科国际物流有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#c9151e",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "keke-international"
+      },
+      "linkRules": [
+        {
+          "domains": [
+            "ywkk.rtb56.com"
+          ],
+          "pathPattern": "^/track_query\\.aspx$",
+          "params": [
+            "track_number"
+          ]
+        }
+      ],
+      "detectionRules": []
+    },
+    "meitongda": {
+      "displayName": "MEITONGDA",
+      "aliases": [
+        "美通达"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#1c3881",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "meitongda"
+      },
+      "linkRules": [
+        {
+          "domains": [
+            "119.91.196.60"
+          ],
+          "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+          "params": [
+            "documentCode"
+          ]
+        }
+      ],
+      "detectionRules": []
+    },
+    "sdh-express": {
+      "displayName": "Lightning Monkey",
+      "aliases": [
+        "SDH Express",
+        "闪电猴",
+        "闪电猴跨境物流",
+        "浙江闪电猴供应链有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#e50015",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "sdh-express"
+      },
+      "linkRules": [
+        {
+          "domains": [
+            "182.254.152.160"
+          ],
+          "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+          "params": [
+            "documentCode"
+          ]
+        }
+      ],
+      "detectionRules": []
+    },
+    "sdk-express": {
+      "displayName": "SDK Express",
+      "aliases": [
+        "斯德克",
+        "斯德克（深圳）国际物流有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#073b7e",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "sdk-express"
+      },
+      "linkRules": [
+        {
+          "domains": [
+            "8.129.105.101"
+          ],
+          "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+          "params": [
+            "documentCode"
+          ]
+        }
+      ],
+      "detectionRules": []
+    },
+    "wcxex": {
+      "displayName": "WCXEX",
+      "aliases": [
+        "伟成国际",
+        "Weicheng International",
+        "浙江伟成国际货运代理有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#e60012",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "wcxex"
+      },
+      "linkRules": [
+        {
+          "domains": [
+            "www.wcxex.com"
+          ],
+          "pathPattern": "^/track\\.html$",
+          "params": [
+            "c"
+          ]
+        },
+        {
+          "domains": [
+            "wc.kjeclub.com"
+          ],
+          "pathPattern": "^/track_query\\.aspx$",
+          "params": [
+            "track_number"
+          ]
+        }
+      ],
+      "detectionRules": []
+    },
+    "we-logistics": {
+      "displayName": "WE Logistics",
+      "aliases": [
+        "世航国际",
+        "Shihang International"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#4264c0",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "we-logistics"
+      },
+      "linkRules": [
+        {
+          "domains": [
+            "shgj.rtb56.com"
+          ],
+          "pathPattern": "^/track_query\\.aspx$",
+          "params": [
+            "track_number"
+          ]
+        }
+      ],
+      "detectionRules": []
+    },
+    "xys-logistics": {
+      "displayName": "XYS Logistics",
+      "aliases": [
+        "XYS",
+        "新源晟",
+        "新源晟（深圳）国际物流有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#002cc0",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "xys-logistics"
+      },
+      "linkRules": [
+        {
+          "domains": [
+            "szxys.rtb56.com"
+          ],
+          "pathPattern": "^/track_query\\.aspx$",
+          "params": [
+            "track_number"
+          ]
+        }
+      ],
+      "detectionRules": []
+    },
+    "ycex": {
+      "displayName": "YCEX",
+      "aliases": [
+        "永财国际物流",
+        "广州永财国际供应链有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#1a218b",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "ycex"
+      },
+      "linkRules": [
+        {
+          "domains": [
+            "159.75.78.252"
+          ],
+          "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+          "params": [
+            "documentCode"
+          ]
+        }
+      ],
+      "detectionRules": []
     }
   }
 }

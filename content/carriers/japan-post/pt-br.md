@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Japan Post: códigos EMS e status explicados
-description: Rastreie um pacote ou EMS da Japan Post vindo do Japão: formato do código JP, significado dos status, quem entrega no seu país e alfândega.
+description: Rastreie um pacote ou EMS da Japan Post vindo do Japão: formato do código JP, significado dos status, quem entrega no seu país, alfândega e a quem perguntar.
 slug: rastreamento-japan-post
 published: 2026-11-24
 updated: 2026-11-24
@@ -37,18 +37,18 @@ O rastreador em inglês da Japan Post lista primeiro o evento mais antigo, com d
 | `Departure from inward office of exchange` | A caminho da entrega. |
 | `Item out of sorting centre` | Saiu de um centro de triagem no país de destino. |
 | `Arrival`, `Processing at delivery Post Office` | Na agência postal responsável pela entrega. |
-| `Item held at delivery depot/delivery office` | Está na agência de entrega; o texto não significa que você já pode retirar. |
+| `Item held at delivery depot/delivery office` | Está na agência de entrega; o texto não diz que você pode retirar. |
 | `Item out for physical delivery` | Saiu para entrega. |
 | `Final delivery` | Entregue. |
 | `Final delivery - Collected at counter` | Retirado no balcão de uma agência no Japão. |
-| `Retention` | Guardado em uma agência no Japão após tentativa perdida, para retirada ou até uma data escolhida por você; o texto não diferencia qual. |
+| `Retention` | Guardado em uma agência no Japão após entrega não realizada, para retirada ou até uma data escolhida por você; o texto não diferencia qual. |
 | `Returned to sender` | Voltando ao remetente. |
 
-Envios entrando no Japão têm mais três linhas. `Transported in bond` indica transporte ainda sob controle aduaneiro até a unidade internacional que desembaraça sua região; `Arrived in bond` significa que chegou lá. O desembaraço segue em andamento até surgir `Dispatched from Exchange Office`. Mais em [o que significam os status de rastreamento](guide:tracking-statuses).
+Envios entrando no Japão têm mais três linhas. `Transported in bond` indica transporte ainda sob controle aduaneiro até a unidade internacional que desembaraça as remessas para o seu endereço; `Arrived in bond` significa que chegou lá. O desembaraço segue em andamento até surgir `Dispatched from Exchange Office`. Mais em [o que significam os status de rastreamento](guide:tracking-statuses).
 
 ## Encomendas da Japan Post no exterior: quem entrega e alfândega
 
-Depois de `Dispatch from outward office of exchange`, os correios do seu país assumem. Para EMS, a Japan Post indica acompanhar no site desses correios, onde o rastreamento costuma atualizar mais rápido — como [USPS](carrier:usps), Parcelforce no Reino Unido, An Post, Canada Post, [Australia Post](carrier:australia-post) e NZ Post — usando o mesmo número terminado em `JP`. Tentativas e retirada passam a seguir as regras dos correios locais: veja [entrega perdida](guide:missed-delivery).
+Depois de `Dispatch from outward office of exchange`, os correios do seu país assumem. Para EMS, a Japan Post indica acompanhar no site desses correios, onde, segundo ela, o rastreamento é mais rápido — como [USPS](carrier:usps), Parcelforce no Reino Unido, An Post, Canada Post, [Australia Post](carrier:australia-post) e NZ Post — usando o mesmo número terminado em `JP`. Tentativas e retirada passam a seguir as regras dos correios locais: veja [entrega não realizada](guide:missed-delivery).
 
 **Mostrado como entregue.** Um International Air Packet vai para a caixa de correio sem assinatura (salvo se houver imposto a pagar) e aparece como entregue. A Japan Post avisa que envios EMS para o Reino Unido ou a França cuja entrega falhou também podem aparecer como entregues enquanto aguardam na agência mais próxima, e EMS para a Alemanha podem aparecer como devolvidos ou entregues enquanto estão com despachante ou outra transportadora. Como a entrega é feita pelos correios locais, consulte-os primeiro: veja [entregue, mas não recebido](guide:delivered-not-received).
 
@@ -60,13 +60,13 @@ Depois de `Dispatch from outward office of exchange`, os correios do seu país a
 
 **Alfândega.** Remessas do exterior são desembaraçadas em uma das seis unidades internacionais de troca no Japão. Quando há imposto, você paga na entrega ou na agência usando o aviso de cobrança entregue pela Japan Post. Itens acima de ¥ 200.000 exigem declaração de importação.
 
-**Entrega perdida.** Uma encomenda do exterior aguarda na agência de entrega por 15 dias — ou um mês se houver imposto a pagar — para retirada ou reagendamento. O formulário em inglês da Japan Post aceita o número de 6 ou de 11 a 13 dígitos do aviso e reentrega apenas em casa; para outro local, ligue 0570-046-111. Veja [encomendas não retiradas](guide:uncollected-parcel).
+**Entrega não realizada.** Uma encomenda do exterior aguarda na agência de entrega por 15 dias — ou um mês se houver imposto a pagar — para retirada ou reagendamento. O formulário em inglês da Japan Post aceita o número de 6 ou de 11 a 13 dígitos do aviso e reentrega apenas em casa; para outro local, ligue 0570-046-111. Veja [encomendas não retiradas](guide:uncollected-parcel).
 
 ## Rastreamento Japan Post parado, extraviado ou devolvido
 
-**Sem movimento após sair do Japão.** A partir daí os eventos vêm dos correios do seu país. A Japan Post alerta que dados do exterior podem chegar incompletos ou atrasados e fora de ordem por causa do fuso horário. Consulte o rastreamento dos seus correios com o mesmo número: veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
+**Sem movimento após sair do Japão.** A partir daí os eventos vêm dos correios do seu país. A Japan Post alerta que dados do exterior podem chegar incompletos ou atrasados, e que as linhas podem aparecer fora de ordem por causa da diferença de fuso horário. Consulte o rastreamento dos seus correios com o mesmo número: veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
-**Sem rastreamento nenhum.** Small Packets comuns não têm rastreamento, e desde 31 de dezembro de 2025 a Japan Post não aceita mais pequenos pacotes de mercadorias como correspondência registrada. Pequenos pacotes rastreados seguem como International Air Packet. Envios por superfície só têm rastreamento como encomenda internacional.
+**Sem rastreamento nenhum.** Small Packets não têm rastreamento, e desde 31 de dezembro de 2025 a Japan Post não aceita mais pequenos pacotes de mercadorias como correspondência registrada. Pequenos pacotes rastreados seguem como International Air Packet. Envios por superfície só têm rastreamento como encomenda internacional.
 
 **Extraviado ou avariado.** O remetente pede investigação em formulário na agência onde postou (não por telefone): em até 6 meses para carta registrada, envio com seguro e encomenda internacional; no EMS, o país de destino define o prazo. A indenização cobre cartas registradas e com seguro, encomendas internacionais e EMS (cobertura gratuita até ¥ 20.000, segurável até ¥ 2 milhões); o International Air Packet não tem cobertura. Em compras online, fale com a loja: veja [encomendas extraviadas](guide:lost-parcel). Se chegar avariado ou com itens faltando, guarde tudo e comunique à agência local: veja [encomendas avariadas](guide:damaged-parcel).
 
@@ -84,13 +84,13 @@ De fora do Japão, peça ao remetente ou à loja para solicitar investigação n
 
 ## Como rastrear um pacote da Japan Post no Peek
 
-O [Peek](/) identifica duas letras, nove dígitos e `JP` como Japan Post quando o dígito verificador está correto e mostra "Transportadora detectada"; "Trocar" escolhe outra. Se o dígito verificador falhar, exibe "O dígito verificador deste código não confere.": confira a mensagem de envio ou escolha "Rastrear como digitado". Links do rastreador da Japan Post também funcionam. Códigos iniciados por `U` não são reconhecidos como da Japan Post e o Peek não consulta por eles, pois a Japan Post não rastreia números `U`.
+O [Peek](/) identifica duas letras, nove dígitos e `JP` como Japan Post quando o dígito verificador está correto e mostra "Transportadora detectada"; "Trocar" escolhe outra. Se o dígito verificador falhar, exibe "O dígito verificador deste código não confere.": confira a mensagem de envio ou escolha "Rastrear como digitado". Links do rastreador da Japan Post também funcionam. Códigos iniciados por `U` não são reconhecidos como da Japan Post e o Peek não os consulta na Japan Post, pois a Japan Post não rastreia números `U`.
 
-Um código doméstico de 12 dígitos não identifica a Japan Post sozinho. Cole-o mesmo assim: o Peek acompanha mais de 4.500 transportadoras. Ele consulta as que usam esse formato — Yamato e Japan Post primeiro se você estiver no Japão — e mostra "Japan Post está com esta encomenda" quando a Japan Post reconhece o código. Para códigos de 11 dígitos, o Peek não consulta a Japan Post automaticamente: selecione-a em "Trocar". Cadastrado na Japan Post, o pacote mostra "Aguardando Japan Post" até a primeira leitura, ou "Confira o código de rastreamento" se ela ainda não reconhecer o código após dois dias.
+Um código doméstico de 12 dígitos não identifica a Japan Post sozinho. Cole-o mesmo assim: o Peek acompanha mais de 4.500 transportadoras. Ele consulta as que usam esse formato — Yamato e Japan Post primeiro se você estiver no Japão — e mostra "Japan Post está com esta encomenda." quando a Japan Post reconhece o código. Para códigos de 11 dígitos, o Peek não consulta a Japan Post: selecione-a em "Trocar". Cadastrado na Japan Post, o pacote mostra "Aguardando Japan Post" até a primeira leitura, ou "Confira o código de rastreamento" se ela ainda não reconhecer o código após dois dias.
 
 O Peek exibe cada leitura no texto em inglês da Japan Post, com agência e local, e classifica os termos da tabela acima em etapas próprias como "Em trânsito" ou "Na alfândega". Ele omite a coluna Details da Japan Post, que pode trazer motivos como endereço desconhecido. Cada horário é lido no relógio local do lugar indicado ou dos eventos vizinhos. Em envios domésticos com dia de entrega escolhido pelo remetente, o Peek exibe esse dia e a faixa de horário como previsão até a entrega ou o fim do dia.
 
-Em muitos países, o Peek também consulta os correios nacionais com o mesmo número `JP`: USPS nos EUA, [Royal Mail](carrier:royal-mail) no Reino Unido (ou Parcelforce, indicada pela Japan Post para EMS, em códigos iniciados por `E`), An Post na Irlanda, Canada Post, Australia Post, NZ Post, [DHL](carrier:dhl) na Alemanha, [La Poste](carrier:la-poste) na França e os correios de todos os outros países da UE exceto a Holanda. Ele migra para esses correios assim que surgem novas leituras e preserva o histórico da Japan Post. Para Coreia, China, Hong Kong e Singapura não consulta outros correios. No sentido inverso, quando o rastreamento de outros correios indica o Japão como destino — ou não indica destino e você rastreia do Japão —, o Peek consulta a Japan Post com aquele código, exceto se começar por `U`.
+Em muitos países, o Peek também consulta os correios nacionais com o mesmo número `JP`: USPS nos EUA, [Royal Mail](carrier:royal-mail) no Reino Unido (ou Parcelforce, indicada pela Japan Post para EMS, em códigos iniciados por `E`), An Post na Irlanda, Canada Post, Australia Post, NZ Post, [DHL](carrier:dhl) na Alemanha, [La Poste](carrier:la-poste) na França e os correios de todos os outros países da UE exceto a Holanda. Ele migra para esses correios assim que surgem novas leituras e preserva o histórico da Japan Post. Quando você rastreia da Coreia, da China, de Hong Kong ou de Singapura, o Peek não consulta outros correios. No sentido inverso, quando o rastreamento de outros correios indica o Japão como destino — ou não indica destino e você rastreia do Japão —, o Peek consulta a Japan Post com aquele código, exceto se começar por `U`.
 
 Enquanto o pacote estiver aberto, ou no dia da entrega com alertas ligados, o Peek verifica a Japan Post até a cada 10 minutos, e até a cada 2 minutos a partir das 6h no horário da última leitura (horário do Japão no Japão; havendo faixa de horário escolhida pelo remetente, meia hora antes de abrir) no dia da saída para entrega, enquanto o rastreador da Japan Post responder; quando os correios do seu país assumem, o Peek segue o ritmo deles. Nos demais casos, e após dois dias sem novidade (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Por serviços de rastreamento, verifica de hora em hora, a cada 3 horas após um dia sem movimento e até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados. Alertas: "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode falar com a Japan Post, os correios locais nem a loja por você.
 
@@ -106,7 +106,7 @@ Se a última linha for `Dispatch from outward office of exchange`, o pacote já 
 
 ### Posso rastrear um pequeno pacote da Japan Post?
 
-Somente se foi enviado como International Air Packet. Um Small Packet comum não tem rastreamento, e um código de barras iniciado por `U` não é número de rastreamento. Confirme com o remetente qual serviço foi usado.
+Somente se foi enviado como International Air Packet. Um Small Packet não tem rastreamento, e um código de barras iniciado por `U` não é número de rastreamento. Confirme com o remetente qual serviço foi usado.
 
 ### Quanto tempo a Japan Post leva para entregar?
 
@@ -135,4 +135,5 @@ Cerca de 5 a 21 dias no International Air Packet, informa a Japan Post. O EMS é
 - [Japan Post: Corporate Information](https://www.post.japanpost.jp/about/profile_en.html) – empresa e agências
 - [Comissão Europeia: Reforma aduaneira da UE](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – imposto de € 3 e taxa de manuseio de € 2
 - [Comissão Europeia: Orientação sobre o imposto de € 3 e a taxa de manuseio da União (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – por item e definição de item
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – textos dos eventos, o que o Peek lê e quais correios ele consulta em seguida
 :::

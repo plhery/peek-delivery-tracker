@@ -36,7 +36,7 @@ O rastreamento da DPD UK está disponível apenas em inglês. Estas são as linh
 | `Your parcel is at our depot ready for delivery` | No depósito, pronto para a rota. Depois a mesma linha muda para `Your parcel is at our depot`. | "Em trânsito" |
 | `A notification has been sent to advise you when the delivery will take place` | A DPD enviou o SMS ou e-mail com o dia da entrega ou a janela de uma hora. | Mantém o status anterior |
 | `As requested, your parcel will now be delivered on Thu 05 November 2026 at 11:00` | Você escolheu outro dia de entrega, às vezes com horário. Dia e hora variam. | Mantém o status anterior |
-| `Your parcel will be with you today`, `Your parcel will be with you today between 14:18 and 15:18` | Saiu para entrega hoje, com a faixa de horário prevista quando informada. | "Saiu para entrega" |
+| `Your parcel will be with you today`, `Your parcel will be with you today between 14:18 and 15:18` | Saiu para entrega hoje, com a faixa de horário prevista quando informada. Os horários variam. | "Saiu para entrega" |
 | `As requested, your parcel will now be left in your selected safe place` | Você (ou as configurações do aplicativo DPD) definiu um local seguro, e o motorista deixará o pacote lá. | Mantém o status anterior |
 | `We missed you. Your driver won't be back today but we'll be back Wed 28 October with your parcel` | O motorista não conseguiu entregar e volta no dia indicado (o dia varia). A linha da DPD também informa o nome do motorista, que o Peek omite. | "Tentativa de entrega" |
 | `Your parcel has been delivered` | Entregue. O destaque acrescenta hora e dia. | "Entregue" |
@@ -45,7 +45,7 @@ O rastreamento da DPD UK está disponível apenas em inglês. Estas são as linh
 
 `We have X-rayed your parcel as part of our normal security procedures` é uma verificação de rotina, sem nada a fazer ("Em trânsito" no Peek). Em pacotes que a DPD UK envia para fora do Reino Unido, `Your parcel has left our sortation facility and is on it's onwards journey` (grafia da própria DPD) indica saída do Reino Unido, seguida pelas linhas da parceira local: `The parcel is in transit to its final destination`, `The parcel is undergoing customs clearance` e `Duties and Taxes paid` ("Na alfândega" no Peek), `The parcel has now cleared customs`, `The parcel has arrived at the delivery depot`, `The parcel is on the vehicle for delivery` ("Saiu para entrega") e `The parcel has been delivered` ("Entregue"). As linhas sem etapa entre parênteses aparecem como "Em trânsito".
 
-## Opções de entrega da DPD, lojas Pickup e entregas perdidas
+## Opções de entrega da DPD, lojas Pickup e entregas não realizadas
 
 **Predict.** A DPD envia uma janela de entrega de uma hora por SMS e e-mail. Ela chega no dia assim que o motorista carrega a van, geralmente até o meio-dia. Um mapa ao vivo reduz depois essa janela para 15 minutos. Não é possível alterar o horário da janela em si.
 
@@ -63,7 +63,7 @@ O rastreamento da DPD UK está disponível apenas em inglês. Estas são as linh
 
 **Não entregue.** A DPD pode devolver um pacote que não consegue entregar após pelo menos 5 dias corridos.
 
-**Encargos de importação.** Pacotes vindos de fora do Reino Unido podem ter IVA ou imposto cobrado pela transportadora. Segundo GOV.UK, ela normalmente guarda o pacote por cerca de 3 semanas antes de devolvê-lo se não houver pagamento.
+**Encargos de importação.** Pacotes vindos de fora do Reino Unido podem ter IVA ou imposto cobrado pela transportadora. Segundo GOV.UK, ela normalmente guarda o pacote por cerca de 3 semanas antes de devolvê-lo ao remetente se não houver pagamento.
 
 > A DPD nunca pede para você pagar "taxa de reentrega" por link em e-mail, SMS ou iMessage. Mensagens vindas de um endereço de e-mail ou número aleatório em vez de "DPD" são golpe. Encaminhe SMS suspeitos para 7726. A DPD afirma que seus alertas automáticos chegam por SMS — nunca iMessage — e seus links usam apenas dpd.co.uk, dpdlocal.co.uk e dpdgroup.co.uk: grafias parecidas são golpe. Denuncie e-mails suspeitos em report@phishing.gov.uk.
 
@@ -72,7 +72,7 @@ O rastreamento da DPD UK está disponível apenas em inglês. Estas são as linh
 Canais divulgados em dpd.co.uk:
 
 - **Telefone:** 0121 275 0500, de segunda a sexta-feira das 8h às 18h30, sábado das 8h às 16h e domingo das 9h às 15h, exceto feriados bancários. A DPD estima espera de 5 a 10 minutos; tenha em mãos o número do pacote e o código postal.
-- **Chat:** na [página de contato](https://www.dpd.co.uk/content/how-can-we-help/contact.jsp), disponível 24 horas por dia, 7 dias por semana; digite a referência e o código postal para iniciar.
+- **Chat:** na [página de contato](https://www.dpd.co.uk/content/how-can-we-help/contact.jsp), que informa funcionar 24 horas por dia, 7 dias por semana; digite a referência e o código postal de entrega para iniciar.
 - **Aplicativo DPD:** chat ou ligação pelos botões abaixo do mapa de rastreamento; a DPD afirma que ligações pelo app vão para a frente da fila.
 - **Correio:** Customer Services, DPD UK, Roebuck Lane, Smethwick, B66 1BY.
 
@@ -82,9 +82,9 @@ O [Peek](/) reconhece códigos DPD de 14 dígitos, mas como o formato é compart
 
 As leituras da DPD UK não trazem fuso horário: o Peek as lê no horário do Reino Unido, converte para o seu fuso e exibe o histórico da própria DPD. Em peektracker.com e nos aplicativos para iPhone e Android, o histórico termina com "Horários no seu fuso horário:" e o nome dele. Os textos mantêm o inglês da DPD, entregas canceladas aparecem como "Precisa de atenção" e você pode ativar notificações de mudança de status.
 
-A DPD não informa localidade nos eventos, e o Peek não lê o dia previsto nem a janela Predict da DPD. Ele omite seus dados, referências e fotos da entrega. O Peek mostra a loja que reservou o envio como "De …", conforme o nome na página da DPD, exceto em pacotes deixados pelo remetente em uma Pickup Shop (pois a conta que gerou a etiqueta não é quem enviou; em etiquetas de devolução, mostra a loja de destino). A DPD reutiliza códigos após alguns meses, então um número antigo pode exibir um pacote mais novo.
+A DPD não informa localidade nos eventos, e o Peek não lê o dia previsto nem a janela Predict da DPD. Ele omite seus dados, referências e fotos da entrega. O Peek mostra a loja que reservou o envio como "De …", conforme o nome na página da DPD, exceto em pacotes deixados pelo remetente em uma Pickup Shop (pois a conta que gerou a etiqueta não é quem enviou; em uma etiqueta de devolução, essa conta é a loja para onde o pacote volta). A DPD reutiliza códigos após alguns meses, então um número antigo pode exibir um pacote mais novo.
 
-Enquanto o pacote estiver aberto, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos, ou até a cada 2 minutos a partir das 6h no horário britânico no dia em que a DPD indica saída para entrega, enquanto o rastreador da DPD UK responder (por serviços de rastreamento, até a cada 15 minutos enquanto o pacote estiver aberto ou com alertas ligados); fora disso, de hora em hora. Após dois dias sem novidade (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Os alertas cobrem "Cada movimentação", "Etapas importantes" (entrega, retirada, alfândega, tentativas perdidas e devoluções) ou "Só a entrega". Ele não pode alterar a entrega por você: use a página ou o aplicativo da DPD.
+Enquanto o pacote estiver aberto, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos, ou até a cada 2 minutos a partir das 6h no horário britânico no dia em que a DPD indica saída para entrega, enquanto o rastreador da DPD UK responder (por serviços de rastreamento, até a cada 15 minutos); fora disso, de hora em hora. Após dois dias sem novidade (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Os alertas podem cobrir cada movimentação, só as etapas importantes (entrega, retirada, alfândega, tentativas sem sucesso e devoluções) ou só o dia da entrega. Ele não pode alterar a entrega por você: use a página ou o aplicativo da DPD.
 
 ## Perguntas sobre o rastreamento DPD UK
 
@@ -105,18 +105,20 @@ No dia da entrega, o SMS ou e-mail do DPD Predict traz o nome do motorista, sua 
 A DPD UK não publica um prazo fixo. A página de rastreamento informa a data limite até a qual você deve retirar o pacote.
 
 :::sources
-- [DPD UK: Help](https://www.dpd.co.uk/content/how-can-we-help/index.jsp) – número do pacote, cartão de ausência, janela de uma hora, vizinho, local seguro, lojas Pickup, documentos, entrega perdida, onde o cartão foi deixado, mudança de endereço e empresa
+- [DPD UK: Help](https://www.dpd.co.uk/content/how-can-we-help/index.jsp) – número do pacote, cartão de ausência, janela de uma hora, vizinho, local seguro, lojas Pickup, documentos, entrega não realizada, onde o cartão foi deixado, mudança de endereço e empresa
 - [DPD UK: Contact Us](https://www.dpd.co.uk/content/how-can-we-help/contact.jsp) – telefone, horários, espera estimada, chat 24/7 e prioridade de ligações pelo app
-- [DPD UK: Predict & Follow My Parcel](https://www.dpd.co.uk/content/products_services/predict_fmp.jsp) – janela de uma hora, faixa de 15 minutos, nome do motorista, opções de entrega, upgrades antes das 10h30 ou 12h, tarde, sábado ou domingo e endereço registrado
+- [DPD UK: Predict & Follow My Parcel](https://www.dpd.co.uk/content/products_services/predict_fmp.jsp) – janela de uma hora, faixa de 15 minutos, nome do motorista, opções de entrega, upgrades antes das 10h30 ou 12h, tarde, sábado ou domingo
 - [DPD UK: Follow My Parcel](https://track.dpd.co.uk/) – campos de rastreamento, data limite de retirada, atrasos, encargos de importação e textos de status
 - [DPD UK: Cyber Security, phishing and smishing](https://www.dpd.co.uk/content/about_dpd/phishing.jsp) – remetentes de SMS, alerta de golpe, 7726, alertas por SMS, domínios oficiais e report@phishing.gov.uk
 - [DPD UK: DPD Pickup](https://www.dpd.co.uk/content/products_services/dpd_pickup.jsp) – redirecionamento em trânsito para ponto Pickup
 - [DPD UK: The DPD app](https://www.dpd.co.uk/dpdapp/) – opções no app e armários
 - [DPD UK: App FAQs](https://www.dpd.co.uk/lp/app/index.html) – pacotes DPD UK e DPD Local, ligação e chat no app
 - [DPD UK: Standard Terms & Conditions of Carriage](https://www.dpd.co.uk/pdf/dpd-stcc.pdf) – cliente e destinatário, vizinho, estimativas e prazos de reclamação
+- [DPD UK: Complaints Charter](https://www.dpd.co.uk/pdf/dpd-complaints-charter.pdf) – prazos de reclamação, horário do chat e endereço postal
 - [DPD UK: Return, Disposal and Destruction of Goods Policy](https://www.dpd.co.uk/return-disposal-of-goods-policy.jsp) – devolução após 5 dias corridos
 - [DPD UK: UK Delivery Services](https://www.dpd.co.uk/content/products_services/uk_delivery_services.jsp) – Next Day, 10h30, 12h e prazos para ilhas
 - [DPD UK: Service Disruption](https://www.dpd.co.uk/content/products_services/uk_issues.jsp) – consulta de interrupções por código postal
 - [GOV.UK: Tax and customs for goods sent from abroad](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – cobrança pela transportadora e guarda por cerca de 3 semanas
 - [Geopost: About us](https://www.geopost.com/en/about-us/) – parte do La Poste Groupe
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê: números iniciados por 1550 ou 1597, reconhecimento, textos de status e suas etapas, avisos e o nome da loja
 :::

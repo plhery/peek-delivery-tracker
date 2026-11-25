@@ -12,7 +12,7 @@ DPD UK 是一家英国包裹快递公司，为众多网店提供派送服务。�
 
 发货商家掌握你的运单号，你也可以直接点击 DPD 邮件或短信里的链接。如果司机留下了“sorry we missed you”通知卡，单号就印在条码旁边，DPD 查询页同样支持输入通知卡号查询。找不到单号？查看[如何查找运单号](guide:find-tracking-number)（英文）。
 
-DPD 官网未专门说明单号规则。在 DPD UK 跟踪页上看到的包裹单号通常为 14 位数字，其中很多以 `1550` 或 `1597` 开头；DPD 页面有时还会在末尾附带一个校验字符。
+DPD 官网未说明单号格式。在 DPD UK 跟踪页上看到的包裹单号为 14 位数字，其中很多以 `1550` 或 `1597` 开头；DPD 页面可能还会在末尾附带一个校验字符。
 
 | 单号（示例） | 说明 |
 | --- | --- |
@@ -36,7 +36,7 @@ DPD UK 查询页仅提供英文版本。以下是大多数包裹依次会出现�
 | `Your parcel is at our depot ready for delivery` | 已在分拨中心备派，之后同一条会变为 `Your parcel is at our depot`。 | “运输中” |
 | `A notification has been sent to advise you when the delivery will take place` | DPD 已向你发送含派送日期或一小时时间段的短信或邮件。 | 保持之前的状态 |
 | `As requested, your parcel will now be delivered on Thu 05 November 2026 at 11:00` | 你已改约其他派送日期（有时附带具体时间）；日期和时间因件而异。 | 保持之前的状态 |
-| `Your parcel will be with you today`、`Your parcel will be with you today between 14:18 and 15:18` | 今日派送中，若给出预计时段会一并注明。 | “派送中” |
+| `Your parcel will be with you today`、`Your parcel will be with you today between 14:18 and 15:18` | 今日派送中，若 DPD 给出预计送达时段会一并注明；时段因件而异。 | “派送中” |
 | `As requested, your parcel will now be left in your selected safe place` | 你（或你的 DPD App 偏好设置）指定了安全放置点，司机将把包裹放在那里。 | 保持之前的状态 |
 | `We missed you. Your driver won't be back today but we'll be back Wed 28 October with your parcel` | 司机未能送达，将于所示日期再次派送（日期因件而异）。DPD 原文还会列出司机姓名，Peek 会将其隐去。 | “派送未成功” |
 | `Your parcel has been delivered` | 已送达；标题还会补充送达日期和时间。 | “已签收” |
@@ -47,9 +47,9 @@ DPD UK 查询页仅提供英文版本。以下是大多数包裹依次会出现�
 
 ## DPD 派送选项、Pickup 门店与派送未成功
 
-**Predict 精准时段预告。** DPD 会通过短信和邮件发给你一个 1 小时预计派送窗口；通常在当天司机装车完成后（一般中午前）发出，随后实时地图还会进一步缩小到 15 分钟时段。你无法自行更改该时段本身。
+**Predict 时段预告。** DPD 会通过短信和邮件发给你一个 1 小时预计派送窗口；在当天司机装车完成后发出，一般在中午 12 点前，随后实时地图还会进一步缩小到 15 分钟时段。你无法自行更改该时段本身。
 
-**更改派送。** 在派送前一晚及当天，你可以通过短信、邮件或 DPD App 改约日期、指定邻居代收、选择安全放置点、转投 DPD Pickup Shop，或付费升级为 10:30 前、12:00 前、下午以及周六/周日派送。如果寄件人要求签收，部分选项不会开放。如需[更改收件地址](guide:change-delivery-address)（英文），请联系商家。
+**更改派送。** 在派送前一晚及当天，你可以通过短信、邮件或 DPD App 改约日期、指定邻居代收、选择安全放置点、转投 DPD Pickup Shop，或升级为 10:30 前、12:00 前、下午以及周六/周日派送。如果寄件人要求签收，部分选项不会开放。如需[更改收件地址](guide:change-delivery-address)（英文），请联系商家。
 
 **家中无人。** DPD 会自动尝试交由邻居代收——其条款将邻居定义为步行 50 米范围内居住或工作的人。你可以提前指定首选邻居或安全放置点。否则司机会留下通知卡，你可以凭参考号和邮编改约日期、选择安全放置点、指定邻居或转投 Pickup Shop。DPD 官网未写明派送尝试次数。如果你当时在家却没等到司机，DPD 跟踪页会显示司机留下通知卡的位置并允许预约重派或自提；司机当天无法折返。显示已签收但找不到？由于 DPD 会自动找邻居代收，请先检查安全放置点并询问邻居，再参考[显示已签收但未收到](guide:delivered-not-received)（英文）。
 
@@ -78,13 +78,13 @@ dpd.co.uk 公布的联系方式如下：
 
 ## 使用 Peek 跟踪 DPD UK 包裹
 
-[Peek](/) 会识别 14 位 DPD 单号，但由于该格式为多家快递共用，Peek 会向相关快递查询确认：以 `1550` 或 `1597` 开头时优先询问 DPD UK，其他情况则优先询问你所在国家的承运商。当 DPD UK 确认有记录时，快递栏会显示“DPD UK 有这个包裹的记录”并持续跟进。如果显示“暂未找到 · Peek 会继续查询”或显示了别家快递，点击“更换”选择“DPD UK”即可。带有 `reference=` 或 `parcelNumber=` 的 track.dpd.co.uk 或 tracking.dpd.co.uk 链接会直接识别为 DPD UK。需要邮编才能查的订单号或取件参考号无法跟踪。
+[Peek](/) 会识别 14 位 DPD 单号，但由于该格式为多家快递共用，Peek 会向相关快递查询确认：以 `1550` 或 `1597` 开头时优先询问 DPD UK，其他情况则优先询问你所在国家的承运商。当 DPD UK 确认有记录时，快递栏会显示 DPD UK“查到了这个包裹”并持续跟进。如果显示“暂未找到 · Peek 会继续查询”或显示了别家快递，点击“更换”选择“DPD UK”即可。带有 `reference=` 或 `parcelNumber=` 的 track.dpd.co.uk 或 tracking.dpd.co.uk 链接会直接识别为 DPD UK。需要邮编才能查的订单号或取件参考号无法跟踪。
 
 DPD UK 的扫描记录不带时区：Peek 按英国时间解析，换算为你设备的时区后按 DPD 原轨迹展示。在 peektracker.com 以及 iPhone 和 Android App 中，轨迹末尾会注明“时间按你所在的时区显示：”及对应时区名称。状态保留 DPD 英文原文，已取消的派送会显示为“需要留意”，支持开启状态变化通知。
 
-DPD 不提供扫描地点，Peek 也不读取 DPD 的预计派送日或 Predict 1 小时时段，并会隐去你的个人信息、参考号和签收照片。Peek 会按 DPD 页面上的名称以“来自 …”显示下单商家，但由寄件人在 Pickup Shop 自投的包裹除外（预订该面单的账号并非实际发件方；退货面单上显示的则是收退件的商家）。DPD 会在数月后复用旧单号，因此旧单号可能会查到更新的包裹。
+DPD 不提供扫描地点，Peek 也不读取 DPD 的预计派送日或 Predict 1 小时时段，并会隐去你的个人信息、参考号和签收照片。Peek 会按 DPD 页面上的名称以“来自 …”显示下单商家，但由寄件人在 Pickup Shop 自投的包裹除外（预订该面单的账号并非实际发件方；在退货面单上，该账号就是包裹退回的商家）。DPD 会在数月后复用旧单号，因此旧单号可能会查到更新的包裹。
 
-在你打开页面或开启派送当天提醒的情况下，只要 DPD UK 官网正常响应，Peek 最高每 10 分钟检查一次，在 DPD 标注今日派送当天自英国时间早上 6 点起最高每 2 分钟检查一次（通过物流跟踪服务查询时，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次）；其余时候每小时检查一次。连续两天无新动态后（若仍停留在“已生成面单”或“已揽收”，则为 12 小时后），改为每小时检查一次。通知支持“每次扫描”、“重要环节”（派送、自提、清关、派送未成功与退件）或“仅派送当天”。Peek 无法代你更改派送，请在 DPD 官网或 App 中操作。
+在你打开包裹页面时，或在派送当天开启了通知时，Peek 最高每 10 分钟检查一次；在 DPD 标注今日派送的当天，只要 DPD UK 自己的查询系统有响应，自英国时间早上 6 点起最高每 2 分钟检查一次（通过物流查询服务时，最高每 15 分钟检查一次）；其余时候每小时检查一次。连续两天无新动态后（若仍停留在“已生成面单”或“已揽收”，则为 12 小时后），改为每小时检查一次。通知支持“每次扫描”、“重要环节”（派送、自提、清关、派送未成功与退件）或“仅派送当天”。Peek 无法代你更改派送，请在 DPD 官网或 App 中操作。
 
 ## DPD UK 快递查询常见问题
 
@@ -107,16 +107,18 @@ DPD UK 未公布固定天数，跟踪页面上会明确标注该包裹的最晚�
 :::sources
 - [DPD UK: Help](https://www.dpd.co.uk/content/how-can-we-help/index.jsp) – 包裹单号、通知卡、1 小时窗口、邻居代收、安全放置点、Pickup 门店、证件、未妥投、通知卡位置、改地址与公司信息
 - [DPD UK: Contact Us](https://www.dpd.co.uk/content/how-can-we-help/contact.jsp) – 客服电话、服务时间、预计等候、24/7 在线聊天与 App 优先排队
-- [DPD UK: Predict & Follow My Parcel](https://www.dpd.co.uk/content/products_services/predict_fmp.jsp) – 1 小时窗口、15 分钟时段、司机姓名、改派选项、10:30/12:00/下午/周末升级与注册地址
+- [DPD UK: Predict & Follow My Parcel](https://www.dpd.co.uk/content/products_services/predict_fmp.jsp) – 1 小时窗口、15 分钟时段、司机姓名、改派选项、10:30/12:00/下午/周六或周日升级
 - [DPD UK: Follow My Parcel](https://track.dpd.co.uk/) – 查询字段、最晚取件日、延误、进口费与状态表述
-- [DPD UK: Cyber Security, phishing and smishing](https://www.dpd.co.uk/content/about_dpd/phishing.jsp) – 短信发件人名称、防诈骗警示、7726、官方域名与 report@phishing.gov.uk
+- [DPD UK: Cyber Security, phishing and smishing](https://www.dpd.co.uk/content/about_dpd/phishing.jsp) – 短信发件人名称、防诈骗警示、7726、短信提醒、官方链接域名与 report@phishing.gov.uk
 - [DPD UK: DPD Pickup](https://www.dpd.co.uk/content/products_services/dpd_pickup.jsp) – 途中改投 Pickup 自提点
 - [DPD UK: The DPD app](https://www.dpd.co.uk/dpdapp/) – App 派送选项与自提柜
 - [DPD UK: App FAQs](https://www.dpd.co.uk/lp/app/index.html) – DPD UK 与 DPD Local 包裹及 App 聊天/致电
 - [DPD UK: Standard Terms & Conditions of Carriage](https://www.dpd.co.uk/pdf/dpd-stcc.pdf) – 客户与收件人、邻居定义、预计时效与索赔时限
+- [DPD UK: Complaints Charter](https://www.dpd.co.uk/pdf/dpd-complaints-charter.pdf) – 投诉处理时限、在线聊天时间与邮寄地址
 - [DPD UK: Return, Disposal and Destruction of Goods Policy](https://www.dpd.co.uk/return-disposal-of-goods-policy.jsp) – 5 个自然日后退回规则
 - [DPD UK: UK Delivery Services](https://www.dpd.co.uk/content/products_services/uk_delivery_services.jsp) – Next Day、10:30 与 12:00 服务及离岛时效
 - [DPD UK: Service Disruption](https://www.dpd.co.uk/content/products_services/uk_issues.jsp) – 按邮编查询受影响区域
 - [GOV.UK: Tax and customs for goods sent from abroad](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – 派送公司账单与约 3 周保留期
 - [Geopost: About us](https://www.geopost.com/en/about-us/) – 隶属 La Poste Groupe
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取的内容：以 1550 或 1597 开头的单号、识别方式、状态原文及其对应阶段、提示信息与商家名称
 :::

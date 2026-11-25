@@ -11,6 +11,7 @@ import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZoneId
+import java.time.ZoneOffset
 import java.time.temporal.ChronoUnit
 import java.util.Locale
 import kotlin.math.floor
@@ -30,6 +31,22 @@ private fun dateOf(day: String): LocalDate? = runCatching { LocalDate.parse(day.
 
 /** A day on this phone's calendar, as the server writes days. */
 private fun isoDay(at: Instant, zone: ZoneId = ZoneId.systemDefault()): String = at.atZone(zone).toLocalDate().toString()
+
+/** The offset a time states at its end ("…T08:12:00+01:00"). */
+private val statedOffset = Regex("""T[\d:.]+([+-])(\d{2}):?(\d{2})$""")
+
+/**
+ * The hour [now] is, its minutes as a fraction, on the clock a time states by its offset ("…T08:12:00+01:00"), the
+ * clock Peek AI gives its hours on; on this phone's clock for a time that states none ("Z", "-00:00").
+ */
+private fun peekAiHour(now: Instant, stated: String?): Double {
+    val offset = stated?.let(statedOffset::find)?.destructured?.let { (sign, hours, minutes) ->
+        val seconds = hours.toInt() * 3_600 + minutes.toInt() * 60
+        if (sign == "-" && seconds == 0) null else runCatching { ZoneOffset.ofTotalSeconds(if (sign == "-") -seconds else seconds) }.getOrNull()
+    }
+    val at = now.atZone(offset ?: ZoneId.systemDefault())
+    return at.hour + at.minute / 60.0
+}
 
 /** When the estimate stops holding, as the server gives it (`ends_at`, a moment with the parcel's offset); none where it doesn't. */
 private val PeekAi.endsAtMoment: Instant? get() = endsAt?.let(DateParser::date)
@@ -291,7 +308,7 @@ private const val UNSHADED_BELOW = 0.03
 /**
  * Each cell's shade, from its chance against the likeliest cell still to come (`cells`, each its chance and whether it
  * has passed): 4 at 85 % of it or more (the likeliest), 3 from 55 %, 2 from 25 %, 1 below that, and none under 3 in
- * 100. Four steps a reader tells apart at a glance. Hours gone by are unshaded: the parcel did not come in them.
+ * 100. Four steps a reader tells apart at a glance. Days and hours gone by are unshaded: the parcel did not come in them.
  */
 fun peekAiShades(cells: List<Pair<Double, Boolean>>): List<Int> {
     val top = cells.filterNot { (_, past) -> past }.maxOfOrNull { (chance, _) -> chance }?.coerceAtLeast(0.0) ?: 0.0
@@ -330,12 +347,14 @@ private fun List<PeekAiCell>.shaded(): List<PeekAiCell> {
     return mapIndexed { index, cell -> cell.copy(level = levels[index]) }
 }
 
-/** Days shaded by their chance, the carrier's date ringed; or, out for delivery, two hours to a cell. */
+/**
+ * Days shaded by their chance, the carrier's date ringed, a day gone by on this phone's calendar marked and unshaded;
+ * or, out for delivery, two hours to a cell, the ones gone by on the parcel's clock ([peekAiHour]) marked and unshaded.
+ */
 fun Localizer.peekAiStrip(ai: PeekAi, now: Instant = AppClock.now()): PeekAiStrip? {
     val hours = ai.hours.orEmpty()
     if (hours.isNotEmpty()) {
-        val at = now.atZone(ZoneId.systemDefault())
-        val hour = at.hour + at.minute / 60.0
+        val hour = peekAiHour(now, ai.outSince ?: ai.endsAt)
         val cells = hours.chunked(2).map { pair ->
             val start = pair.first().time.take(2).toIntOrNull() ?: 0
             PeekAiCell(
@@ -347,13 +366,14 @@ fun Localizer.peekAiStrip(ai: PeekAi, now: Instant = AppClock.now()): PeekAiStri
     }
     val days = ai.days.orEmpty().ifEmpty { return null }
     val weekdays = FormatData.language(language).weekdays
+    val today = isoDay(now)
     return PeekAiStrip(
         PeekAiStrip.Kind.Days,
         days.mapNotNull { entry ->
             val date = dateOf(entry.day) ?: return@mapNotNull null
             PeekAiCell(
                 key = entry.day, over = weekdays[date.dayOfWeek.value % 7].replace(".", ""), main = date.dayOfMonth.toString(),
-                chance = entry.p, level = 0, carrier = entry.day == ai.carrierDay, past = false,
+                chance = entry.p, level = 0, carrier = entry.day == ai.carrierDay, past = entry.day < today,
             )
         }.shaded(),
     )

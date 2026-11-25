@@ -286,6 +286,40 @@ class PeekAiTests {
         assertEquals("Hours, likeliest first: 2:00 PM, 4:00 PM", twelveHours.peekAiStripSpoken(strip, "DPD").replace(Regex("\\s"), " "))
     }
 
+    /**
+     * The hours are the parcel's wall clock: out in Tokyo at 14:30 there, the morning hours have gone by and 14:00 and
+     * 16:00 are still to come, whatever this phone's zone.
+     */
+    @Test
+    fun tellsTheHoursGoneByOnTheParcelsClock() {
+        val tokyoNow = requireNotNull(DateParser.date("2026-11-24T14:30:00+09:00"))
+        val tokyo = byTime.copy(outSince = "2026-11-24T08:12:00+09:00")
+        val strip = requireNotNull(english.peekAiStrip(tokyo, tokyoNow))
+        assertEquals(listOf(true, true, true, false, false), strip.cells.map { it.past })
+        assertEquals(listOf(0, 0, 0, 4, 2), strip.cells.map { it.level })
+        assertEquals("Hours, likeliest first: 14:00, 16:00", english.peekAiStripSpoken(strip, "DPD"))
+        // Without the time it went out, the clock of the moment the estimate ends.
+        val ending = byTime.copy(outSince = null, endsAt = "2026-11-24T16:00:00+09:00")
+        assertEquals(listOf(true, true, true, false, false), requireNotNull(english.peekAiStrip(ending, tokyoNow)).cells.map { it.past })
+        // A time that states no clock of its own ("Z", "-00:00") leaves the hours on this phone's.
+        for (stated in listOf("2026-11-24T07:12:00Z", "2026-11-24T07:12:00-00:00")) {
+            val unstated = requireNotNull(english.peekAiStrip(byTime.copy(outSince = stated), at(24, 16, 30)))
+            assertEquals(stated, listOf(true, true, true, true, false), unstated.cells.map { it.past })
+        }
+    }
+
+    /** A copy kept past midnight fades the days gone by and names none of them. */
+    @Test
+    fun fadesTheDaysGoneByOfACopyKeptPastMidnight() {
+        val kept = sooner.copy(
+            days = listOf("2026-11-24" to 0.4, "2026-11-25" to 0.3, "2026-11-26" to 0.2, "2026-11-27" to 0.1).map { (day, p) -> PeekAiDay(day, p) },
+        )
+        val strip = requireNotNull(english.peekAiStrip(kept, at(25, 9)))
+        assertEquals(listOf(true, false, false, false), strip.cells.map { it.past })
+        assertEquals(listOf(0, 4, 3, 2), strip.cells.map { it.level })
+        assertEquals("Days, likeliest first: Wed 25, Thu 26, Fri 27. DPD’s date: Fri 27", english.peekAiStripSpoken(strip, "DPD"))
+    }
+
     private fun parcel(stage: TrackingStage, ai: PeekAi?, archivedAt: String? = null, expectedDelivery: String? = null): Parcel {
         val id = UUID.randomUUID()
         return Parcel(

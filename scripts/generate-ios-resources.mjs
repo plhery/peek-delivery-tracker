@@ -103,6 +103,9 @@ const outputs = new Map([
   // The parcel map draws the same Natural Earth countries as the web map.
   ['World.json', fs.readFileSync(path.join(root, 'src', 'components', 'map', 'world.json'), 'utf8')],
   ['WorldDetail.pack', worldDetailPack()],
+  // The passport's country inks, outlines, stamp glyphs and the cases all three platforms replay.
+  ['Passport.json', fs.readFileSync(path.join(root, 'shared', 'passport.json'), 'utf8')],
+  ['PassportCases.json', fs.readFileSync(path.join(root, 'shared', 'passport-cases.json'), 'utf8')],
 ]);
 const files = new Map([
   ...[...outputs].map(([name, contents]) => [path.join(resources, name), contents]),

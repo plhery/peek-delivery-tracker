@@ -1,0 +1,1076 @@
+{
+ "//": "The passport's rules, replayed by the web (src/lib/passport.cases.test.ts), the iPhone and Android: each case's parcels as scans [stage, when, location, the country the server placed it in], and what its passport holds. Regenerate the expectations with WRITE_PASSPORT_CASES=1 npx vitest run src/lib/passport.cases.test.ts, then read the diff.",
+ "cases": [
+  {
+   "name": "a year of parcels, transit countries included",
+   "timeZone": "Europe/Zurich",
+   "parcels": [
+    {
+     "id": "p1",
+     "label": "Sneakers",
+     "carrier": "dhl",
+     "scans": [
+      [
+       "registered",
+       "2026-03-01T08:00:00Z",
+       "Guangzhou, CN"
+      ],
+      [
+       "accepted",
+       "2026-03-02T08:00:00Z",
+       "Shenzhen, CN"
+      ],
+      [
+       "in_transit",
+       "2026-03-03T10:00:00Z",
+       "Hong Kong",
+       "HK"
+      ],
+      [
+       "in_transit",
+       "2026-03-05T06:00:00Z",
+       "Leipzig",
+       "DE"
+      ],
+      [
+       "customs",
+       "2026-03-05T12:00:00Z",
+       "Zürich, Switzerland"
+      ],
+      [
+       "delivered",
+       "2026-03-06T09:30:00Z",
+       "Bern",
+       "CH"
+      ]
+     ]
+    },
+    {
+     "id": "p2",
+     "label": "Coffee",
+     "carrier": "swiss-post",
+     "scans": [
+      [
+       "accepted",
+       "2026-03-10T07:00:00Z",
+       "Zürich, Schweiz"
+      ],
+      [
+       "delivered",
+       "2026-03-10T15:00:00Z",
+       "Bern",
+       "CH"
+      ]
+     ]
+    },
+    {
+     "id": "p3",
+     "label": "Socks",
+     "carrier": "unknown",
+     "scans": [
+      [
+       "in_transit",
+       "2026-03-11T07:00:00Z",
+       "Paris, France"
+      ]
+     ]
+    },
+    {
+     "id": "p4",
+     "label": "Lamp",
+     "carrier": "dhl",
+     "scans": [
+      [
+       "accepted",
+       "2026-04-01T08:00:00Z",
+       "Lyon, France"
+      ],
+      [
+       "failed_attempt",
+       "2026-04-03T09:00:00Z",
+       "Genève",
+       "CH"
+      ],
+      [
+       "delivered",
+       "2026-04-04T10:00:00Z",
+       "Genève",
+       "CH"
+      ]
+     ]
+    },
+    {
+     "id": "p5",
+     "label": "Tea",
+     "carrier": "colissimo",
+     "scans": [
+      [
+       "accepted",
+       "2026-06-01T08:00:00Z",
+       "Lyon, France"
+      ],
+      [
+       "delivered",
+       "2026-06-03T08:00:00Z",
+       "Lyon, France"
+      ]
+     ]
+    },
+    {
+     "id": "p6",
+     "label": "Jacket",
+     "carrier": "dhl",
+     "archivedAt": "2026-09-20T08:00:00Z",
+     "scans": [
+      [
+       "accepted",
+       "2026-09-10T08:00:00Z",
+       "Köln, Germany"
+      ],
+      [
+       "delivered",
+       "2026-09-15T12:00:00Z",
+       "Zürich, Switzerland"
+      ]
+     ]
+    },
+    {
+     "id": "p7",
+     "label": "Gift",
+     "carrier": "swiss-post",
+     "scans": [
+      [
+       "accepted",
+       "2026-12-18T08:00:00Z",
+       "Basel, Switzerland"
+      ],
+      [
+       "delivered",
+       "2026-12-20T09:00:00Z",
+       "Bern",
+       "CH"
+      ]
+     ]
+    },
+    {
+     "id": "p8",
+     "label": "Book",
+     "carrier": "swiss-post",
+     "scans": [
+      [
+       "accepted",
+       "2027-03-07T08:00:00Z",
+       "Zürich, Switzerland"
+      ],
+      [
+       "delivered",
+       "2027-03-08T10:00:00Z",
+       "Bern",
+       "CH"
+      ]
+     ]
+    },
+    {
+     "id": "p9",
+     "label": "Returned shoes",
+     "carrier": "dhl",
+     "scans": [
+      [
+       "accepted",
+       "2026-05-01T08:00:00Z",
+       "Milano, Italia"
+      ],
+      [
+       "delivered",
+       "2026-05-03T08:00:00Z",
+       "Zürich, Switzerland"
+      ],
+      [
+       "returned",
+       "2026-05-04T08:00:00Z",
+       "Zürich, Switzerland"
+      ]
+     ]
+    }
+   ],
+   "expect": {
+    "deliveredCount": 7,
+    "carrierCount": 3,
+    "stamps": {
+     "first": {
+      "count": 7,
+      "earned": true,
+      "earnedAt": "2026-03-06T09:30:00.000Z",
+      "parcel": "p1"
+     },
+     "rightNextDoor": {
+      "count": 4,
+      "earned": true,
+      "earnedAt": "2026-03-10T15:00:00.000Z",
+      "parcel": "p2"
+     },
+     "express": {
+      "count": 1,
+      "earned": true,
+      "earnedAt": "2026-03-10T15:00:00.000Z",
+      "parcel": "p2"
+     },
+     "familiarFace": {
+      "count": 3,
+      "earned": true,
+      "earnedAt": "2026-09-15T12:00:00.000Z",
+      "parcel": "p6"
+     },
+     "pickedUp": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "acrossBorders": {
+      "count": 3,
+      "earned": true,
+      "earnedAt": "2026-03-06T09:30:00.000Z",
+      "parcel": "p1"
+     },
+     "connected": {
+      "count": 3,
+      "earned": true,
+      "earnedAt": "2026-06-03T08:00:00.000Z",
+      "parcel": "p5"
+     },
+     "secondTry": {
+      "count": 1,
+      "earned": true,
+      "earnedAt": "2026-04-04T10:00:00.000Z",
+      "parcel": "p4"
+     },
+     "worthTheWait": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "aroundWorld": {
+      "count": 5,
+      "earned": true,
+      "earnedAt": "2026-04-04T10:00:00.000Z",
+      "parcel": "p4"
+     },
+     "newHorizons": {
+      "count": 1,
+      "earned": true,
+      "earnedAt": "2026-03-06T09:30:00.000Z",
+      "parcel": "p1"
+     },
+     "ten": {
+      "count": 7,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "fourSeasons": {
+      "count": 4,
+      "earned": true,
+      "earnedAt": "2026-12-20T09:00:00.000Z",
+      "parcel": "p7"
+     },
+     "theRegular": {
+      "count": 7,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "busyDoorstep": {
+      "count": 1,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "homeForHolidays": {
+      "count": 1,
+      "earned": true,
+      "earnedAt": "2026-12-20T09:00:00.000Z",
+      "parcel": "p7"
+     },
+     "tenCountries": {
+      "count": 5,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "firstAnniversary": {
+      "count": 12,
+      "earned": true,
+      "earnedAt": "2027-03-08T10:00:00.000Z",
+      "parcel": "p8"
+     },
+     "fifty": {
+      "count": 7,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     }
+    },
+    "countries": [
+     {
+      "code": "CN",
+      "number": 1,
+      "firstAt": "2026-03-02T08:00:00.000Z",
+      "parcel": "p1",
+      "count": 1,
+      "continent": "asia"
+     },
+     {
+      "code": "HK",
+      "number": 2,
+      "firstAt": "2026-03-03T10:00:00.000Z",
+      "parcel": "p1",
+      "count": 1,
+      "continent": "asia"
+     },
+     {
+      "code": "DE",
+      "number": 3,
+      "firstAt": "2026-03-05T06:00:00.000Z",
+      "parcel": "p1",
+      "count": 2,
+      "continent": "europe"
+     },
+     {
+      "code": "CH",
+      "number": 4,
+      "firstAt": "2026-03-05T12:00:00.000Z",
+      "parcel": "p1",
+      "count": 6,
+      "continent": "europe"
+     },
+     {
+      "code": "FR",
+      "number": 5,
+      "firstAt": "2026-04-01T08:00:00.000Z",
+      "parcel": "p4",
+      "count": 2,
+      "continent": "europe"
+     }
+    ]
+   }
+  },
+  {
+   "name": "Well connected counts delivered parcels and real carriers only",
+   "timeZone": "UTC",
+   "parcels": [
+    {
+     "id": "a",
+     "label": "A",
+     "carrier": "unknown",
+     "scans": [
+      [
+       "accepted",
+       "2026-10-01T08:00:00Z",
+       "CH"
+      ],
+      [
+       "delivered",
+       "2026-10-02T08:00:00Z",
+       "CH"
+      ]
+     ]
+    },
+    {
+     "id": "b",
+     "label": "B",
+     "carrier": "intl-post",
+     "scans": [
+      [
+       "accepted",
+       "2026-10-03T08:00:00Z",
+       "CH"
+      ],
+      [
+       "delivered",
+       "2026-10-04T08:00:00Z",
+       "CH"
+      ]
+     ]
+    },
+    {
+     "id": "c",
+     "label": "C",
+     "carrier": "dhl",
+     "scans": [
+      [
+       "accepted",
+       "2026-10-05T08:00:00Z",
+       "CH"
+      ],
+      [
+       "delivered",
+       "2026-10-06T08:00:00Z",
+       "CH"
+      ]
+     ]
+    },
+    {
+     "id": "d",
+     "label": "D",
+     "carrier": "ups",
+     "scans": [
+      [
+       "in_transit",
+       "2026-10-07T08:00:00Z",
+       "DE"
+      ]
+     ]
+    },
+    {
+     "id": "e",
+     "label": "E",
+     "carrier": "fedex",
+     "scans": [
+      [
+       "accepted",
+       "2026-10-07T08:00:00Z",
+       "DE"
+      ],
+      [
+       "out_for_delivery",
+       "2026-10-08T08:00:00Z",
+       "CH"
+      ]
+     ]
+    }
+   ],
+   "expect": {
+    "deliveredCount": 3,
+    "carrierCount": 1,
+    "stamps": {
+     "first": {
+      "count": 3,
+      "earned": true,
+      "earnedAt": "2026-10-02T08:00:00.000Z",
+      "parcel": "a"
+     },
+     "rightNextDoor": {
+      "count": 3,
+      "earned": true,
+      "earnedAt": "2026-10-02T08:00:00.000Z",
+      "parcel": "a"
+     },
+     "express": {
+      "count": 1,
+      "earned": true,
+      "earnedAt": "2026-10-02T08:00:00.000Z",
+      "parcel": "a"
+     },
+     "familiarFace": {
+      "count": 1,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "pickedUp": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "acrossBorders": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "connected": {
+      "count": 1,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "secondTry": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "worthTheWait": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "aroundWorld": {
+      "count": 1,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "newHorizons": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "ten": {
+      "count": 3,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "fourSeasons": {
+      "count": 1,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "theRegular": {
+      "count": 3,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "busyDoorstep": {
+      "count": 1,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "homeForHolidays": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "tenCountries": {
+      "count": 1,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "firstAnniversary": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "fifty": {
+      "count": 3,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     }
+    },
+    "countries": [
+     {
+      "code": "CH",
+      "number": 1,
+      "firstAt": "2026-10-01T08:00:00.000Z",
+      "parcel": "a",
+      "count": 3,
+      "continent": "europe"
+     }
+    ]
+   }
+  },
+  {
+   "name": "three on one day of the reader's calendar, ten in all, listed out of order",
+   "timeZone": "America/New_York",
+   "parcels": [
+    {
+     "id": "n10",
+     "label": "Ten",
+     "carrier": "usps",
+     "scans": [
+      [
+       "accepted",
+       "2026-07-08T12:00:00Z",
+       "US"
+      ],
+      [
+       "delivered",
+       "2026-07-09T16:00:00Z",
+       "US"
+      ]
+     ]
+    },
+    {
+     "id": "n1",
+     "label": "One",
+     "carrier": "usps",
+     "scans": [
+      [
+       "accepted",
+       "2026-07-01T12:00:00Z",
+       "US"
+      ],
+      [
+       "delivered",
+       "2026-07-02T16:00:00Z",
+       "US"
+      ]
+     ]
+    },
+    {
+     "id": "n2",
+     "label": "Two",
+     "carrier": "ups",
+     "scans": [
+      [
+       "accepted",
+       "2026-07-02T12:00:00Z",
+       "US"
+      ],
+      [
+       "delivered",
+       "2026-07-04T14:00:00Z",
+       "US"
+      ]
+     ]
+    },
+    {
+     "id": "n3",
+     "label": "Three",
+     "carrier": "fedex",
+     "scans": [
+      [
+       "accepted",
+       "2026-07-02T12:00:00Z",
+       "US"
+      ],
+      [
+       "delivered",
+       "2026-07-04T20:00:00Z",
+       "US"
+      ]
+     ]
+    },
+    {
+     "id": "n4",
+     "label": "Four",
+     "carrier": "usps",
+     "scans": [
+      [
+       "accepted",
+       "2026-07-03T12:00:00Z",
+       "US"
+      ],
+      [
+       "delivered",
+       "2026-07-05T02:00:00Z",
+       "US"
+      ]
+     ]
+    },
+    {
+     "id": "n5",
+     "label": "Five",
+     "carrier": "usps",
+     "scans": [
+      [
+       "accepted",
+       "2026-07-04T12:00:00Z",
+       "Toronto, CA",
+       "CA"
+      ],
+      [
+       "delivered",
+       "2026-07-06T16:00:00Z",
+       "New York, NY",
+       "US"
+      ]
+     ]
+    },
+    {
+     "id": "n6",
+     "label": "Six",
+     "carrier": "usps",
+     "scans": [
+      [
+       "accepted",
+       "2026-07-05T12:00:00Z",
+       "US"
+      ],
+      [
+       "delivered",
+       "2026-07-07T16:00:00Z",
+       "US"
+      ]
+     ]
+    },
+    {
+     "id": "n7",
+     "label": "Seven",
+     "carrier": "usps",
+     "scans": [
+      [
+       "accepted",
+       "2026-07-05T12:00:00Z",
+       "US"
+      ],
+      [
+       "delivered",
+       "2026-07-07T17:00:00Z",
+       "US"
+      ]
+     ]
+    },
+    {
+     "id": "n8",
+     "label": "Eight",
+     "carrier": "usps",
+     "scans": [
+      [
+       "accepted",
+       "2026-07-06T12:00:00Z",
+       "US"
+      ],
+      [
+       "delivered",
+       "2026-07-08T16:00:00Z",
+       "US"
+      ]
+     ]
+    },
+    {
+     "id": "n9",
+     "label": "Nine",
+     "carrier": "usps",
+     "scans": [
+      [
+       "accepted",
+       "2026-07-06T12:00:00Z",
+       "Wilmington, DE",
+       "US"
+      ],
+      [
+       "delivered",
+       "2026-07-08T18:00:00Z",
+       "US"
+      ]
+     ]
+    }
+   ],
+   "expect": {
+    "deliveredCount": 10,
+    "carrierCount": 3,
+    "stamps": {
+     "first": {
+      "count": 10,
+      "earned": true,
+      "earnedAt": "2026-07-02T16:00:00.000Z",
+      "parcel": "n1"
+     },
+     "rightNextDoor": {
+      "count": 9,
+      "earned": true,
+      "earnedAt": "2026-07-02T16:00:00.000Z",
+      "parcel": "n1"
+     },
+     "express": {
+      "count": 1,
+      "earned": true,
+      "earnedAt": "2026-07-02T16:00:00.000Z",
+      "parcel": "n1"
+     },
+     "familiarFace": {
+      "count": 8,
+      "earned": true,
+      "earnedAt": "2026-07-06T16:00:00.000Z",
+      "parcel": "n5"
+     },
+     "pickedUp": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "acrossBorders": {
+      "count": 1,
+      "earned": true,
+      "earnedAt": "2026-07-06T16:00:00.000Z",
+      "parcel": "n5"
+     },
+     "connected": {
+      "count": 3,
+      "earned": true,
+      "earnedAt": "2026-07-04T20:00:00.000Z",
+      "parcel": "n3"
+     },
+     "secondTry": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "worthTheWait": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "aroundWorld": {
+      "count": 2,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "newHorizons": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "ten": {
+      "count": 10,
+      "earned": true,
+      "earnedAt": "2026-07-09T16:00:00.000Z",
+      "parcel": "n10"
+     },
+     "fourSeasons": {
+      "count": 1,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "theRegular": {
+      "count": 10,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "busyDoorstep": {
+      "count": 3,
+      "earned": true,
+      "earnedAt": "2026-07-05T02:00:00.000Z",
+      "parcel": "n4"
+     },
+     "homeForHolidays": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "tenCountries": {
+      "count": 2,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "firstAnniversary": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "fifty": {
+      "count": 10,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     }
+    },
+    "countries": [
+     {
+      "code": "US",
+      "number": 1,
+      "firstAt": "2026-07-01T12:00:00.000Z",
+      "parcel": "n1",
+      "count": 10,
+      "continent": "northAmerica"
+     },
+     {
+      "code": "CA",
+      "number": 2,
+      "firstAt": "2026-07-04T12:00:00.000Z",
+      "parcel": "n5",
+      "count": 1,
+      "continent": "northAmerica"
+     }
+    ]
+   }
+  },
+  {
+   "name": "tied scans in two countries are both kept, but prove no crossing",
+   "timeZone": "UTC",
+   "parcels": [
+    {
+     "id": "t",
+     "label": "Tied",
+     "carrier": "dhl",
+     "scans": [
+      [
+       "accepted",
+       "2026-11-01T00:00:00Z",
+       "DE"
+      ],
+      [
+       "ready_for_pickup",
+       "2026-11-01T00:00:00Z",
+       "CH"
+      ],
+      [
+       "delivered",
+       "2026-11-01T00:00:00Z",
+       "CH"
+      ]
+     ]
+    },
+    {
+     "id": "u",
+     "label": "Undated",
+     "carrier": "dhl",
+     "scans": [
+      [
+       "accepted",
+       "invalid",
+       "JP"
+      ],
+      [
+       "delivered",
+       "2026-11-03T00:00:00Z",
+       "CH"
+      ]
+     ]
+    }
+   ],
+   "expect": {
+    "deliveredCount": 2,
+    "carrierCount": 1,
+    "stamps": {
+     "first": {
+      "count": 2,
+      "earned": true,
+      "earnedAt": "2026-11-01T00:00:00.000Z",
+      "parcel": "t"
+     },
+     "rightNextDoor": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "express": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "familiarFace": {
+      "count": 1,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "pickedUp": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "acrossBorders": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "connected": {
+      "count": 1,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "secondTry": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "worthTheWait": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "aroundWorld": {
+      "count": 2,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "newHorizons": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "ten": {
+      "count": 2,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "fourSeasons": {
+      "count": 1,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "theRegular": {
+      "count": 2,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "busyDoorstep": {
+      "count": 1,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "homeForHolidays": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "tenCountries": {
+      "count": 2,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "firstAnniversary": {
+      "count": 0,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     },
+     "fifty": {
+      "count": 2,
+      "earned": false,
+      "earnedAt": null,
+      "parcel": null
+     }
+    },
+    "countries": [
+     {
+      "code": "CH",
+      "number": 1,
+      "firstAt": "2026-11-01T00:00:00.000Z",
+      "parcel": "t",
+      "count": 1,
+      "continent": "europe"
+     },
+     {
+      "code": "DE",
+      "number": 2,
+      "firstAt": "2026-11-01T00:00:00.000Z",
+      "parcel": "t",
+      "count": 1,
+      "continent": "europe"
+     }
+    ]
+   }
+  }
+ ]
+}

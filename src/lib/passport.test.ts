@@ -33,7 +33,8 @@ describe('passport journeys', () => {
       parcel('delaware', [['accepted', '2026-08-04T10:00:00Z', 'Wilmington, DE', 'US'], ['delivered', '2026-08-06T10:00:00Z', 'Los Angeles, CA', 'US']]),
       parcel('unplaced', [['accepted', '2026-08-04T10:00:00Z', 'Hannover, DE'], ['delivered', '2026-08-06T10:00:00Z']]),
     ], 'UTC');
-    expect(stats).toMatchObject({ originCountries: [{ code: 'CA', count: 1 }, { code: 'DE', count: 1 }], domesticDeliveryCount: 1, crossBorderCount: 0 });
+    // Delaware stays in the United States it was placed in, so that parcel never left it.
+    expect(stats).toMatchObject({ originCountries: [{ code: 'CA', count: 1 }, { code: 'DE', count: 1 }], domesticDeliveryCount: 2, crossBorderCount: 0 });
   });
 
   it('does not manufacture durations from partial, invalid, or zero-length histories', () => {

@@ -650,6 +650,42 @@ class DeviceParcelTests {
     }
 
     /**
+     * A suggestion the service no longer makes: its postcode files nothing (the 409 read gives the parcel as it stands,
+     * under no carrier), and the carrier the owner picked moves the link as any other change, with the postcode.
+     */
+    @Test
+    fun aPostcodeForASuggestionNoLongerMadeMovesTheLinkToThePickedCarrier() = runTest {
+        val id = UUID.randomUUID()
+        // Synthetic: eight digits, as Mondial Relay's shipment numbers.
+        val number = "99999990"
+        val suggesting = link("22222222222A").copy(inputSuggested = ParcelLinkInputSuggested(CarrierId.MondialRelay, ParcelLinkInputSuggestedField.DpdPostcode))
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(
+            DeviceParcel(
+                linkId = "22222222222A", label = "", archivedAt = null,
+                parcel = Parcel(shared = pkg(id, number = number, carrier = CarrierId.Unknown, stage = null), link = suggesting), checkedAt = date(),
+            ),
+        )
+        val calls = Calls()
+        val device = device(
+            client(
+                calls,
+                // Nothing is suggested any more: the parcel as it now stands.
+                postcode = { linkId, _ -> PublicParcelResponse(link = link(linkId), parcel = pkg(id, number = number, carrier = CarrierId.Unknown, stage = null)) },
+                move = { linkId, change -> PublicParcelResponse(link = link(linkId), parcel = pkg(id, number = number, carrier = change.carrier)) },
+            ),
+            storage, this,
+        )
+
+        val parcel = device.changeCarrier(id = id, carrier = CarrierId.MondialRelay, trackingUrl = null, dpdPostcode = "75001", dpdPostcodeCountry = "FR")
+
+        assertEquals(CarrierId.MondialRelay, parcel.carrier)
+        assertEquals(listOf("postcode 22222222222A k mondial-relay 75001 FR", "carrier 22222222222A k mondial-relay"), calls.all)
+        assertEquals(listOf<String?>("75001"), calls.lookupPostcodes)
+    }
+
+    /**
      * The carrier a lookup's link suggests with the last 4 digits of a phone (J&T China for a JT number) shows on the
      * parcel as the postcode's does; its digits move the link to that carrier (`PATCH …/carrier`), as any carrier's
      * input does, never through the postcode's route. A viewer is offered nothing.

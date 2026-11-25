@@ -1050,7 +1050,8 @@ class DeviceParcels(
      * (`PATCH …/carrier`), keeping its address, sharing and notifications, as on the website; where the service no
      * longer has that link for its key, a new lookup takes the old one's place and name. The postcode the link asks
      * for or suggests, given alone for the carrier that asks, goes to the link instead (`POST …/postcode`), as on the
-     * website: the service tries it with that carrier first, and one it refuses changes nothing ([DevicePostcodeRefusal]).
+     * website: the service tries it with that carrier first, and one it refuses changes nothing ([DevicePostcodeRefusal]);
+     * once it asks for nothing any more, a link it still shows under another carrier moves with the postcode.
      * The phone digits a link suggests go with the move, as any carrier's do.
      */
     suspend fun changeCarrier(
@@ -1080,7 +1081,8 @@ class DeviceParcels(
         }
         if (key != null && give != null && postcode != null) {
             val response = give(entry.linkId, key, ParcelLinkPostcodeRequest(carrier = carrier, postcode = postcode, postcodeCountry = dpdPostcodeCountry))
-            if (response != null) {
+            // Once the service asks for nothing any more, a link it shows under another carrier moves as any other change.
+            if (response != null && response.parcel.carrier == carrier) {
                 val parcel = refiled(entry.linkId, id, response, postcodeGiven = true)
                 postcodes.remember(postcode, carrier, dpdPostcodeCountry)
                 return parcel

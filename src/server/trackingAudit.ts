@@ -238,6 +238,8 @@ export class TrackingSyncAudit {
   /** The carrier the check's last write filed the parcel under, and the one that confirmed its number; null before any write. */
   #filed: { carrier: string; answeredBy: string | null } | null = null;
   readonly #healthSamples = new Map<string, HealthSample>();
+  /** The carriers the check left resting from a spell of refusals (carrierRests.ts). */
+  readonly #rested = new Set<string>();
   /** Routing signals reported during the check, once each, saved when it completes. */
   readonly #signals = new Map<string, RoutingSignal>();
   readonly #signal = (signal: RoutingSignal): void => {
@@ -477,6 +479,11 @@ export class TrackingSyncAudit {
     }
   }
 
+  /** Notes a carrier the check left resting from a spell of its refusals (carrierRests.ts). */
+  noteRested(carrier: string): void {
+    this.#rested.add(carrier);
+  }
+
   async finish(completion: SyncAuditCompletion): Promise<void> {
     // A check that shutdown interrupted has ended, whatever its carrier answers afterwards.
     if (this.#ended) return;
@@ -560,7 +567,10 @@ export class TrackingSyncAudit {
       const waits = !answered && values.error_type === 'RoutingDeferredError' && waitsOnRateLimit(completion.providerFailures)
         && [...this.#healthSamples.values()].every((sample) => sample.kind !== 'provider' || sample.healthy);
       const unconfirmed = this.unanswered && (!ownAnswer || ownAnswer.healthy || ownAnswer.details.category === 'indeterminate');
-      const apart = answered ? null : waits ? 'rate_limit_wait' : unconfirmed ? 'unanswered' : null;
+      // A check that left the parcel's carrier resting from a spell of its refusals asked it nothing: whatever the
+      // providers answered in its place, it waits for the carrier as for a rate limit.
+      const rested = this.#rested.has(subject);
+      const apart = answered ? null : waits || rested ? 'rate_limit_wait' : unconfirmed ? 'unanswered' : null;
       const healthy = answered || apart !== null;
       // A carrier whose adapter declined its verification on purpose, in this check or in the one whose
       // cooldown deferred it, failed no refresh while every other source answered: the check keeps its

@@ -134,7 +134,8 @@ provider lookup incident, which counts each lookup by its final outcome, is the 
     direct step records no sample.
   - `rate_limit_wait`: a scheduled check routing holds back only for rate limits, the carrier's own or a partner's
     (AliExpress's or Spring GDS's for a parcel relayed between them), refreshed nothing yet. Every failing source
-    is rate limited or has no history, and none of the check's lookups failed otherwise.
+    is rate limited or has no history, and none of the check's lookups failed otherwise. So is a scheduled check that
+    left the parcel's carrier resting from a spell of its refusals and that the providers did not answer in its place.
   - `unanswered`: a failed check of a parcel nothing has answered for since it was added, no answer and no scan
     saved, whose carrier was not asked or answered without confirming it (a number Evri UK never confirms as one of
     its domestic parcels), says nothing of the carrier. A carrier that fails otherwise, as when it is down, still

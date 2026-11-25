@@ -2831,7 +2831,11 @@ export class TrackingSyncService {
             health: this.client, now: this.now, refusals: providerRefusals, misses: providerMisses, observed: observedCoverage,
             askedElsewhere: probeAsked, onAsk: (carrier: string) => { routerAsks.set(carrier, this.now().getTime()); },
             // Only a scheduled check leaves a carrier resting from a spell of refusals: a release's re-check reads it.
-            ...(context.trigger === 'scheduled' ? { restsUntil: (carrier: string) => carrierRests.until(carrier, this.now().getTime()) } : {}),
+            ...(context.trigger === 'scheduled' ? { restsUntil: (carrier: string) => {
+              const end = carrierRests.until(carrier, this.now().getTime());
+              if (end) audit.noteRested(carrier);
+              return end;
+            } } : {}),
             ...(unseen !== null ? { hourlyUntil: now.getTime() - unseen + UNSEEN_HOURLY_MS } : {}),
             takePrefetchedUniversal: takePreflightHistory, preflightInputNeeded, refuses: refusesNumber,
             ...(this.adapter.plannedScans ? { plannedScans: (carrier: string) => this.adapter.plannedScans!(carrier) } : {}),

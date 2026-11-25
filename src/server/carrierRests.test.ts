@@ -181,4 +181,23 @@ describe('checks during a spell of USPS refusals', () => {
     expect(adapter.fetch).toHaveBeenCalledTimes(1);
     carrierRests.noteLookup('usps', undefined, now);
   });
+
+  it('counts a rested check the providers leave unanswered apart, as a wait for rate limits', async () => {
+    const now = start;
+    carrierRests.noteLookup('usps', undefined, now);
+    const client = fakeClient();
+    const adapter = { fetch: vi.fn(async () => { throw challenge(); }),
+      fetchUniversal: vi.fn(async () => { throw new TransportError('17TRACK', 'socket hang up'); }) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date(now));
+    for (let index = 0; index < REST_AFTER; index++) await service.syncPackage(usps(), { trigger: 'refresh' });
+    adapter.fetch.mockClear();
+    client.recordTrackingHealth.mockClear();
+
+    await service.syncPackage(usps(), { trigger: 'scheduled' });
+    expect(adapter.fetch).not.toHaveBeenCalled();
+    const samples = client.recordTrackingHealth.mock.calls.flatMap((call: unknown[]) => call[2] as JsonObject[]);
+    expect(samples.find((sample) => sample.kind === 'refresh')).toMatchObject({
+      subject: 'usps', healthy: true, details: { category: 'rate_limit_wait' } });
+    carrierRests.noteLookup('usps', undefined, now);
+  });
 });

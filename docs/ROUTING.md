@@ -455,7 +455,8 @@ the USPS lookups in a row that end without its answer: a challenge, a page it co
 rate limit, our own `self_paced` included. An answer ends the count, `not_found` and no history
 included; a transport error or a timeout neither counts nor ends it. After 5 in a row, scheduled
 checks rest USPS for 3 minutes (`carrier_rested`). As while a carrier's failure waits for its retry,
-they ask the providers and count no failure. The parcel's own carrier is asked again at the first
+they ask the providers and count no failure; one they leave unanswered counts apart in the refresh rate, as a wait
+for rate limits (`rate_limit_wait`). The parcel's own carrier is asked again at the first
 scheduled check after the rest, not 6 h after a provider's answer. A check someone asked for
 (opened, added, refreshed), a release's re-check and a handoff to USPS read it all the same, and
 count. The first lookup after the rest reads it again: a refusal rests it again, and an answer ends

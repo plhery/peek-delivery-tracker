@@ -902,7 +902,7 @@ class ParcelShareTests {
         assertNull(ApiJson.decodeFromString(ParcelShareResponse.serializer(), """{"link":null}""").link)
         val words = GiftWords(name = "Moon lamp", note = "Enjoy", from = null)
         assertEquals(
-            """{"gift":true,"giftWords":{"from":null,"name":"Moon lamp","note":"Enjoy"},"showNumber":true}""",
+            """{"gift":true,"giftWords":{"early":null,"from":null,"name":"Moon lamp","note":"Enjoy"},"showNumber":true}""",
             JsonEncoder.deliveryTracker.encode(
                 ShareParcelRequest.serializer(),
                 ParcelShareModel.Settings(showNumber = true, gift = true, giftWords = words).request,

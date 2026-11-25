@@ -114,7 +114,7 @@ test('fits a phone at 320 px, in German and in the dark', async ({ page }) => {
   await expect(bubble.getByRole('button')).toHaveCount(7);
   expect(await fits(page)).toBe(true);
   await bubble.getByRole('button', { name: 'Falscher Paketdienst' }).click();
-  await bubble.getByRole('button', { name: 'Notiz hinzufügen' }).click();
+  await bubble.getByRole('button', { name: 'Details hinzufügen' }).click();
   const sheet = page.getByRole('dialog', { name: 'Was stimmt nicht?' });
   await expect(sheet.getByRole('button', { name: 'Senden' })).toBeVisible();
   expect(await fits(page)).toBe(true);

@@ -400,8 +400,11 @@ export function shareSwitches<Field extends 'showNumber' | 'gift' | 'shared'>(
         ? value.replace(/[\p{Cc}\p{Cf}]/gu, ' ').replace(/\s+/g, ' ').trim() || null : null;
     }
     // The note and its sender shown before delivery, the parcel's name still kept for it.
+    // An app that encodes every field sends null for a gift that waits.
     const { early } = payload.giftWords;
-    if (early !== undefined && typeof early !== 'boolean') throw new HttpError(400, 'giftWords.early must be true or false');
+    if (early !== undefined && early !== null && typeof early !== 'boolean') {
+      throw new HttpError(400, 'giftWords.early must be true, false or null');
+    }
     if (early === true) words.early = true;
     switches.giftWords = words;
   }

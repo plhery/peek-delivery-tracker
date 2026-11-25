@@ -150,6 +150,9 @@ it('keeps a gift\'s note shown before delivery when its sender says so', async (
   store.mockClear();
   expect((await request(PUT, 'PUT', { giftWords: { ...giftWords, early: 'yes' } })).status).toBe(400);
   expect(store).not.toHaveBeenCalled();
+  // An app that encodes every field sends null: off too.
+  expect((await request(PUT, 'PUT', { giftWords: { ...giftWords, early: null } })).status).toBe(200);
+  expect(store).toHaveBeenCalledExactlyOnceWith(packageId, { giftWords: { name: 'Trail shoes', note: 'Happy birthday!', from: 'Sam' } });
 });
 
 it('rejects malformed or oversized gift words before any write', async () => {

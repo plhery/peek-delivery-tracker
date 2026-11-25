@@ -16,7 +16,7 @@ A MRW pede o "número de envío", exibido nos resultados como "Número de albar�
 | --- | --- |
 | `482910573649` | Número de envio da MRW sob o código de barras. Digite assim. |
 | `48291/0573649` | O mesmo código ao lado de "N.º Etiqueta". Retire a barra antes de rastrear. |
-| `48291A057364` | Cinco dígitos, uma letra e seis dígitos: formato observado em pacotes MRW, embora o site não o ilustre. |
+| `48291A573649` | Cinco dígitos, uma letra e seis dígitos: formato relatado em pacotes MRW, embora as páginas da MRW não o mostrem. |
 
 Onde localizar:
 
@@ -46,7 +46,7 @@ Os status aparecem em espanhol em mrw.es e em português em mrw.pt. Estes são o
 
 `Pendiente de recoger` costuma confundir: significa que a MRW ainda não coletou o volume com o remetente, não que está esperando você retirar. Para entender cada etapa geral, veja [o que significam os status de rastreamento](guide:tracking-statuses).
 
-## Entrega da MRW, MRW Point e entregas sem sucesso
+## Entrega da MRW, MRW Point e entregas não realizadas
 
 **Em domicílio:** pelos termos da MRW, a entrega é considerada concluída quando qualquer pessoa capaz no endereço recebe e assina (destinatário ou não), nunca menores de 18 anos. A MRW só deixa pacotes em lockers com sua autorização prévia e explícita ou quando a loja repassou essa escolha.
 
@@ -58,12 +58,12 @@ Os status aparecem em espanhol em mrw.es e em português em mrw.pt. Estes são o
 
 **Se não puder ser entregue:** a MRW avisa o remetente, que tem até 15 dias para optar por devolução ou novo destino. As páginas da MRW não fixam número de tentativas nem prazo de guarda — consulte a agência indicada no rastreamento.
 
-## Encomenda atrasada, extraviada ou avariada na MRW
+## Encomenda atrasada, extraviada ou danificada na MRW
 
 Os termos da MRW vinculam o remetente (em compras online, a loja): comece por lá.
 
 - **Reclamações:** o [formulário de reclamação da MRW](https://www.mrw.es/empresa_mensajeria_urgente/MRW_formulario_reclamacion.asp) pede o número de envio e cobre pacotes comprados via lojas como Amazon, além de envios de agência, por atraso, extravio, quebra, furto ou "aviso falso" quando ninguém compareceu. Em Portugal, mrw.pt também direciona ao livro oficial livroreclamacoes.pt.
-- **Avaria:** anote danos visíveis por escrito no recebimento. Os termos da MRW dão 7 dias corridos para dano oculto e 21 dias da entrega para atraso, recusando pedidos fora do prazo.
+- **Dano:** anote danos visíveis por escrito no recebimento. Os termos da MRW dão 7 dias corridos para dano oculto e 21 dias da entrega para atraso, recusando pedidos fora do prazo.
 - **Entregue mas não recebida:** veja [encomenda entregue mas não recebida](guide:delivered-not-received).
 
 > A MRW afirma nunca cobrar por link para liberar entrega nem pedir ligações telefônicas para localizar um envio (tributos alfandegários ou IVA podem, porém, ser cobrados na entrega). Para testar um SMS suspeito, digite o número no site da MRW: sem resultado, não é da MRW.
@@ -80,7 +80,7 @@ A MRW recomenda consultar seus telefones sempre em mrw.es ou mrw.pt, nunca por r
 
 ## Como rastrear encomendas da MRW no Peek
 
-O [Peek](/) identifica na hora o formato de cinco dígitos, letra e seis dígitos como MRW. Um código de 12 dígitos cabe em muitas transportadoras e o Peek não pode sondar a MRW automaticamente, portanto não a seleciona sozinho: escolha MRW em "Trocar" e digite os 12 dígitos sem a barra. Links de mrw.es funcionam apenas quando trazem o formato com letra; links de SMS da MRW não são lidos.
+O [Peek](/) identifica o formato de cinco dígitos, letra e seis dígitos como MRW. Um código de 12 dígitos cabe em muitas transportadoras e o Peek não pode perguntar à MRW se ela o conhece, portanto não a seleciona sozinho: escolha MRW em "Trocar" e digite os 12 dígitos sem a barra. Links de mrw.es funcionam apenas quando trazem o formato com letra; links de SMS da MRW não são lidos.
 
 Os status aparecem em espanhol; textos desconhecidos surgem como "Actualización de seguimiento". O Peek mostra o status, o histórico e cada agência (código postal, cidade e "(Plataforma)" em hubs) no mapa, com alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". Ele omite o endereço do ponto de retirada e não exibe previsão de entrega.
 
@@ -117,4 +117,5 @@ O buscador de agências lista as franquias; já o MRW Point é escolhido na fina
 - [MRW Portugal: Contate-nos](https://www.mrw.pt/empresa_mensajeria_urgente/MRW_contacto_paqueteria.asp) – telefone e tarifa em Portugal, sem e-mail
 - [MRW: FAQ envíos nacionales](https://www.mrw.es/enviar/nacional/faqs/index.asp) – telefones, horários, X e prazo até 19h do dia útil seguinte
 - [MRW: Nuestras oficinas](https://www.mrw.es/oficina_transporte_urgente/MRW_franquicia.asp) – 550 agências, buscador e horários em feriados
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra
 :::

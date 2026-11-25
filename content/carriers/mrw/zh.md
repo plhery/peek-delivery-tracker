@@ -16,9 +16,9 @@ MRW 官网要求输入 “número de envío”（运单号），查询结果中�
 | --- | --- |
 | `482910573649` | 印在条码下方的 MRW 运单号，直接按此格式输入。 |
 | `48291/0573649` | 印在 “N.º Etiqueta” 旁的同一单号，查件时请去掉斜杠。 |
-| `48291A057364` | 5 位数字 + 1 位字母 + 6 位数字：实际 MRW 包裹中也存在这种格式，尽管官网示例未展示。 |
+| `48291A573649` | 5 位数字 + 1 位字母 + 6 位数字：有报告称 MRW 包裹使用这种格式，但 MRW 的页面未展示。 |
 
-常见查找位置：
+可以在这些地方找到：
 
 - **在 MRW 网点自行寄出：** 印在交寄回执上；若遗失，MRW 建议咨询发件网点。
 - **网店发货：** 在发货邮件或订单详情页中。
@@ -30,7 +30,7 @@ MRW 官网要求输入 “número de envío”（运单号），查询结果中�
 
 ## MRW 西班牙语物流状态中文解读
 
-mrw.es 的状态以西班牙语显示，mrw.pt 以葡萄牙语显示。以下为 Peek 记录的西班牙语常见状态（按流转顺序排列）：
+mrw.es 的状态以西班牙语显示，mrw.pt 以葡萄牙语显示。以下为 Peek 记录到的西班牙语状态，按通常顺序排列：
 
 | MRW 状态原文 | 中文含义 |
 | --- | --- |
@@ -41,18 +41,18 @@ mrw.es 的状态以西班牙语显示，mrw.pt 以葡萄牙语显示。以下为
 | `Envío en reparto` | 派送中：快递员已接单准备当天派送。 |
 | `Destinatario ausente o cerrado` | 收件人不在或已关门：派送员上门无人应答或商户未营业。 |
 | `Depositado en punto MRW` | 已存入 MRW Point 自提点，等待领取。 |
-| `Depositado en PointCorner destino` | 已存入目的地 PointCorner 合作店，等待领取。 |
+| `Depositado en PointCorner destino` | 已存入目的地 PointCorner 店铺，等待领取。 |
 | `Envío entregado` | 已签收送达。 |
 
 `Pendiente de recoger` 很容易让人误解：它表示 MRW 还没拿到寄件人的包裹，并不是“等你去自提”。更多通用阶段说明见[物流状态说明](guide:tracking-statuses)（英文）。
 
-## MRW 派送、MRW Point 自提点与错过派送
+## MRW 派送、MRW Point 自提点与派送未成功
 
 **送货上门：** 按 MRW 条款，只要收件地址处任何具备完全行为能力的人员签收即视为送达（不限于收件人本人），但不会交付给 18 岁以下未成年人。MRW 仅在获得你的事先明确授权或商家下单时已选定的情况下，才会将包裹投入快递柜。
 
 **更改派送日期：** MRW 短信中会提供链接或编号；在 “Concertar entrega” 页面操作需要短信里的验证码。
 
-**MRW Point 自提点：** 合作自提网络分为 PointOffice、PointCorner 和 PointMatic 三类。结账时选好网点，包裹到达后会收到短信或邮件通知（PointMatic 快递柜的取件 PIN 码就在短信里）。在 PointOffice 或 PointCorner 取件需出示身份证或护照；代他人领取需携收件人证件复印件及签字授权书。
+**MRW Point 自提点：** 自提网络分为 PointOffice、PointCorner 和 PointMatic 三类。结账时选好网点，包裹到达后会收到短信或邮件通知（PointMatic 快递柜的取件 PIN 码就在短信里）。在 PointOffice 或 PointCorner 取件需出示身份证或护照；代他人领取需携收件人证件复印件及签字授权书。
 
 **MRW 营业网点自提：** 证件与代领规则相同。MRW 分拨枢纽（“Plataforma”）不对外发件。可在 [MRW 网点查找器](https://www.mrw.es/oficina_transporte_urgente/MRW_franquicia.asp)查询营业网点。
 
@@ -80,11 +80,11 @@ MRW 提醒应直接从 mrw.es 或 mrw.pt 获取官方电话，不要轻信搜索
 
 ## 用 Peek 查询和跟踪 MRW 包裹
 
-[Peek](/) 会把“5 位数字 + 1 位字母 + 6 位数字”的编号立即识别为 MRW。12 位纯数字则与多家快递重叠且 Peek 无法自动探测 MRW 是否有记录，因此不会自动选定 MRW：请点击“更换”手动选择 MRW，输入 12 位数字时去掉斜杠。mrw.es 查件链接仅在包含带字母格式单号时可直接解析；MRW 短信链接无法直接解析。
+[Peek](/) 会把“5 位数字 + 1 位字母 + 6 位数字”的编号识别为 MRW。12 位纯数字与多家快递重叠，Peek 也无法询问 MRW 是否有这个单号，因此不会自行选定 MRW：请点击“更换”手动选择 MRW，输入 12 位数字时去掉斜杠。mrw.es 查件链接仅在包含带字母格式单号时可直接解析；MRW 短信链接无法直接解析。
 
-轨迹状态保留西班牙语原文，未知状态会显示为 “Actualización de seguimiento”。Peek 展示物流状态、完整历史并在地图上标出各个网点（含邮编和城镇，分拨中心标为 “(Plataforma)”），支持设置“每次扫描”、“重要环节”或“仅派送当天”通知。Peek 不显示自提点具体地址，也不提供预计送达日期。
+轨迹状态保留西班牙语原文，未知状态会显示为 “Actualización de seguimiento”。Peek 展示物流状态、完整历史并在地图上标出各个网点（含邮编和城镇，分拨中心标为 “(Plataforma)”），可以设置“每次扫描”、“重要环节”或“仅派送当天”通知。Peek 不显示自提点具体地址，也不提供预计送达日期。
 
-MRW 时间戳不含时区信息，Peek 按各网点所在地时钟解析并列出 MRW 官方历史。若 MRW 仅返回摘要，历史轨迹将由综合跟踪服务补全；若均无详情，则仅展示 MRW 当前状态。MRW 西班牙查询接口同样支持查询 MRW 葡萄牙包裹。
+MRW 时间戳不含时区信息，Peek 按各网点所在地时钟解析并列出 MRW 官方历史。若 MRW 仅返回摘要，历史轨迹来自物流查询服务；若均无详情，则仅展示 MRW 当前状态。MRW 西班牙的查询也能查到 MRW 葡萄牙的包裹。
 
 ## MRW 查询常见问题
 
@@ -102,7 +102,7 @@ MRW 官网未对电商包裹公布统一派送时段。对于在 MRW 官网下�
 
 ### 怎么找我附近的 MRW 自提点？
 
-可通过 MRW 网点查找器查找营业网点；MRW Point 合作自提点需在网店结账时选定，包裹送达后 MRW 会发短信或邮件通知你取件。
+可通过 MRW 网点查找器查找营业网点；MRW Point 自提点需在网店结账时选定，包裹送达后 MRW 会发短信或邮件通知你取件。
 
 :::sources
 - [MRW: Seguimiento de envíos](https://www.mrw.es/seguimiento/) – 查件表单、语种、分拨中心与单号说明
@@ -117,4 +117,5 @@ MRW 官网未对电商包裹公布统一派送时段。对于在 MRW 官网下�
 - [MRW Portugal: Contate-nos](https://www.mrw.pt/empresa_mensajeria_urgente/MRW_contacto_paqueteria.asp) – 葡萄牙电话资费与无邮箱说明
 - [MRW: FAQ envíos nacionales](https://www.mrw.es/enviar/nacional/faqs/index.asp) – 客服电话、时间、X 账号与次日 19:00 前送达
 - [MRW: Nuestras oficinas](https://www.mrw.es/oficina_transporte_urgente/MRW_franquicia.asp) – 550+ 网点、查找器与节假日时间
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取和显示的信息
 :::

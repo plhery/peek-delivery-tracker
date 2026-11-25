@@ -71,7 +71,7 @@ Contactos listados nas páginas da Colis Privé:
 
 ## Seguir uma encomenda Colis Privé com o Peek
 
-O [Peek](/) acompanha mais de 4500 transportadoras e precisa do número de 12 caracteres e do código postal de entrega. Introduz o número e escolhe Colis Privé: surge o campo do código postal — cinco dígitos em França, quatro na Bélgica ou `L` e quatro dígitos no Luxemburgo. Ou escreve número seguido de código postal: `KL4829173648 75001` (França), `KL4829173648 B1000` (Bélgica) ou `KL4829173648 L1234` (Luxemburgo), todos inventados. Mantendo `B` ou `L`, o Peek deteta a Colis Privé sozinho. Ligações de `colisprive.com` ou `colisprive.fr` também funcionam.
+O [Peek](/) acompanha mais de 4500 transportadoras e precisa do número de 12 caracteres e do código postal de entrega. Introduz o número e escolhe Colis Privé: surge o campo do código postal — cinco dígitos em França, quatro na Bélgica ou `L` e quatro dígitos no Luxemburgo. Ou escreve número seguido de código postal: `KL4829173648 75001` (França), `KL4829173648 B1000` (Bélgica) ou `KL4829173648 L4829` (Luxemburgo), todos inventados. Mantendo `B` ou `L`, o Peek deteta a Colis Privé sozinho. Ligações de `colisprive.com` ou `colisprive.fr` também funcionam.
 
 O Peek mostra o estado, o histórico em francês (apenas data, sem hora) e a entrega prevista; só a ti mostra também o nome do destinatário (em «Destinatário»).
 

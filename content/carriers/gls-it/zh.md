@@ -1,6 +1,6 @@
 ---
 title: GLS 意大利快递查询：单号、状态、GLS Point 与客服
-description: 查询意大利 GLS Italy 包裹：国内与国际单号格式、英语物流状态中文解读、错过派送、GLS Point 自提点、滞留保管与客服电话。
+description: 查询意大利 GLS Italy 包裹：国内与国际单号格式、英语物流状态中文解读、派送未成功、GLS Point 自提点、滞留保管与客服电话。
 slug: gls-yidali-kuaidi-chaxun
 published: 2026-11-24
 updated: 2026-11-24
@@ -10,9 +10,9 @@ GLS 意大利（GLS Italy）是 GLS 包裹物流集团在意大利的分支机�
 
 ## GLS 意大利运单号在哪里找？
 
-请在网店的发货邮件或订单详情页查找，寄件人在包裹发出时会提供运单号。该编号也印在面单条码下方，以及错过派送后司机留下的纸质通知单（*avviso di passaggio*）上，通知单同时附有当地 Sede 网点的电话与邮箱。如果找不到单号，请联系寄件人或参阅[如何查找运单号](guide:find-tracking-number)（英文）。GLS 不支持按姓名或地址查件。
+请在网店的发货邮件或订单详情页查找，寄件人在包裹发出时会提供运单号。该编号也印在面单条码下方，以及派送未成功后司机留下的纸质通知单（*avviso di passaggio*）上，通知单同时附有当地 Sede 网点的电话与邮箱。如果找不到单号，请联系寄件人或参阅[如何查找运单号](guide:find-tracking-number)（英文）。GLS 不能按姓名或地址查件。
 
-GLS 官网查件表单支持以下几种编号：
+GLS 官网查件表单接受以下几种编号：
 
 | 单号示例（虚构） | 说明 |
 | --- | --- |
@@ -44,15 +44,15 @@ GLS 意大利官网在 gls-group.com/IT/en 显示英语状态（/IT/it 显示意
 
 GLS 常见问题页还解释了其他几种状态：`AWAITING SENDER’S INSTRUCTIONS – SHIPMENT IN STORAGE` 表示包裹已进入滞留保管，必须由寄件人安排重派（网购订单请联系商家）；`REFUSED` 和 `INCOMPLETE OR INCORRECT ADDRESS` 也只能由寄件人解除并放行；`SHIPMENT WAITING IN STORAGE` 表示包裹在网点等你携带身份证件和 GLS 单号自提。
 
-## 意大利派送、错过派送、GLS Point 与滞留保管（Giacenza）
+## 意大利派送、派送未成功、GLS Point 与滞留保管（Giacenza）
 
 GLS 意大利在周一至周五白天派送（公共假日除外，大致为意大利时间 8:30 至 18:30）。指定时段派送或周六派送仅在寄件人额外付费购买时提供。
 
-**错过派送：** 司机会留下通知单，并在下一个工作日自动进行第二次派送。如果寄件人开通了 GLS Flex Delivery，你可以点击邮件或短信里的链接另选日期或改投自提点（Sede 网点或 GLS Shop）；在寄件人合同允许时，还能改选新地址、安全存放处或邻居代收。否则如需修改地址，请联系寄件人。
+**派送未成功：** 司机会留下通知单，下一个工作日再派送一次。如果寄件人开通了 GLS Flex Delivery，你可以点击邮件或短信里的链接另选日期或改投自提点（Sede 网点或 GLS Shop）；在寄件人合同允许时，还能改选新地址、安全存放处或邻居代收。否则如需修改地址，请联系寄件人。
 
 **滞留保管（Giacenza）：** 若第二次派送仍失败，包裹进入滞留保管，寄件人有 10 个工作日下达指示。依据 GLS 服务章程，滞留包裹免费保管 **10 个工作日**（境外寄入件为 8 个工作日），期满无指示则退回寄件人。如需重新派送，请联系寄件方。
 
-**GLS Point 与快递柜：** 网购结账时可选 GLS Shop，包裹到达后会收到短信或邮件提醒。GLS 在意大利拥有超过 10,000 家合作网点，取件期限为 **10 个工作日**（满 5 天发一次提醒），逾期退回 Sede 网点。具体网点与快递柜可在 [Trova Sede e GLS Point 查找页](https://gls-group.com/IT/it/trova-sede-parcelshop/)查询。
+**GLS Point 与快递柜：** 网购结账时可选 GLS Shop，包裹到达后会收到短信或邮件提醒。GLS 称在意大利有超过 10,000 家店铺，取件期限为 **10 个工作日**（满 5 天发一次提醒），逾期退回 Sede 网点。具体网点与快递柜可在 [Trova Sede e GLS Point 查找页](https://gls-group.com/IT/it/trova-sede-parcelshop/)查询。
 
 **网点自提（Fermo Deposito）：** 若寄件人选择网点自提，须在第 3 个工作日前携带身份证件与运单号前往 Sede 领取。营业时间为意大利时间周一至周五 8:30–13:00 及 14:30–18:30，周六 8:30–12:00。
 
@@ -71,7 +71,7 @@ GLS 意大利在周一至周五白天派送（公共假日除外，大致为意�
 GLS 意大利官方客服渠道：
 
 - **免费客服热线：** 800 184726（GLS 意大利客户服务中心）。
-- **24 小时自动查件语音线：** 02 98 03 55 56（境外拨打 +39 02 98 03 55 56）。
+- **24 小时语音查件线：** 02 98 03 55 56（境外拨打 +39 02 98 03 55 56）。
 - **电子邮件与在线表单：** customerservice@gls-italy.com，或在 GLS [客服联系页面](https://gls-group.com/IT/en/online-services/contacts/)点击 “Continue and contact Customer Service” 填写表单。服务章程写明人工时段为意大利时间周一至周五 9:00–13:00 和 14:30–17:30（节假日除外）。
 - **当地 Sede 网点：** 在 Trova Sede 查找器中查询其电话与邮箱。
 
@@ -79,11 +79,11 @@ GLS 意大利官方客服渠道：
 
 ## 用 Peek 查询和跟踪 GLS 意大利包裹
 
-[Peek](/) 会针对“两位字母 + 9 位数字”以及“一位字母 + 一位数字 + 9 位数字”的单号询问 GLS Italy，确认后显示“GLS Italy 有这个包裹的记录”。如果国内单号不足 9 位数字，请点击“更换”手动选择 GLS Italy；Peek 不支持查询 ID Collo，请输入正式运单号。支持粘贴路径含 `/IT/` 的 gls-group.com 或 gls-group.eu 查件链接（不支持 gls-italy.com 链接）。对于 11 位国际单号，Peek 会询问法国、德国和瑞士 GLS 而不会问 GLS 意大利；若德国 GLS 查到你的包裹，Peek 会提示输入收件邮编。
+[Peek](/) 会针对“两位字母 + 9 位数字”以及“一位字母 + 一位数字 + 9 位数字”的单号询问 GLS Italy，GLS 查到时显示“GLS Italy 有这个包裹的记录。”如果国内单号不足 9 位数字，请点击“更换”手动选择 GLS Italy；Peek 无法查询 ID Collo，请输入运单号。也可以粘贴路径含 `/IT/` 的 gls-group.com 或 gls-group.eu 查件链接（gls-italy.com 链接不行）。对于 11 位国际单号，Peek 会询问法国、德国和瑞士 GLS 而不会问 GLS 意大利；若德国 GLS 查到你的包裹，Peek 会提示输入收件邮编。
 
-GLS 意大利扫描时间不带时区，Peek 按意大利时间解析并展示 GLS 意大利官方历史。当最新扫描只给日期不给时刻时，Peek 会借助综合跟踪服务补全时间轴。轨迹保留 GLS 英文原文，主状态则以中文展示（如“已签收”），同时显示包裹重量。
+GLS 意大利扫描时间不带时区，Peek 按意大利时间解析并展示 GLS 意大利官方历史。当最新扫描只给日期不给时刻时，Peek 会借助查到该包裹的物流查询服务补全时间轴。轨迹保留 GLS 英文原文，主状态则以中文展示（如“已签收”），同时显示包裹重量。
 
-Peek 唯一显示的预计派送日期是你错过派送后自行预约的新派送日：GLS 即使在英文轨迹中也以意大利语写作 `Consegna prenotata il` 加日期。Peek 不显示自提点名称或寄件人，也会隐去你的姓名；GLS 随收件地址给出的城镇只用于在你本人的地图上标出路线终点，绝不会出现在分享链接里。转单改派或退回时若更换了新单号不会自动续接，过久的历史运单也会返回未找到。
+Peek 唯一显示的预计派送日期是派送未成功后你自行预约的新派送日：GLS 即使在英文轨迹中也以意大利语写作 `Consegna prenotata il` 加日期。Peek 不显示自提点名称或寄件人，也会隐去你的姓名；GLS 随收件地址给出的城镇只用于在你本人的地图上标出路线终点，绝不会出现在分享链接里。转寄或退回时若换了新单号，Peek 不会继续跟踪，过久的历史运单也会返回未找到。
 
 ## GLS 意大利查询常见问题
 
@@ -119,4 +119,5 @@ GLS 标准服务的参考时效为意大利本土 24 小时，西西里、卡拉
 - [GLS Italy: Customer Service updates](https://gls-group.com/IT/en/online-services/contacts/) – 客服联系表单
 - [GLS Italia: Aggiornamenti operativi](https://gls-group.com/IT/it/aggiornamenti_operativi/) – 当地运营延误通告
 - [GLS Italia: Trova Sede e GLS Point](https://gls-group.com/IT/it/trova-sede-parcelshop/) – Sede 网点、合作店与快递柜查找器
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取和显示的信息
 :::

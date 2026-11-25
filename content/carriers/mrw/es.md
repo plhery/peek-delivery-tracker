@@ -14,9 +14,9 @@ El formulario de MRW pide el «Núm. envío», y la página de resultados lo lla
 
 | Lo que tienes | Qué es |
 | --- | --- |
-| `123456789012` | El número de envío tal como sale bajo el código de barras. Escríbelo así. |
-| `12345/1234567` | El mismo número, tal como sale junto a «N.º Etiqueta». Quita la barra antes de buscarlo. |
-| `12345A123456` | Cinco cifras, una letra y seis cifras: una forma que se ha visto en paquetes de MRW, aunque las páginas de MRW no la muestran. |
+| `482910573649` | El número de envío tal como sale bajo el código de barras. Escríbelo así. |
+| `48291/0573649` | El mismo número, tal como sale junto a «N.º Etiqueta». Quita la barra antes de buscarlo. |
+| `48291A573649` | Cinco cifras, una letra y seis cifras: una forma que se ha visto en paquetes de MRW, aunque las páginas de MRW no la muestran. |
 
 Dónde aparece:
 
@@ -82,7 +82,7 @@ Las condiciones de MRW son un contrato con el remitente, que en una compra onlin
 
 ## MRW teléfono y atención al cliente
 
-Así lo indicaban las webs de MRW el 10 de noviembre de 2026:
+Así lo indican las webs de MRW:
 
 - **Teléfono:** +34 91 829 66 89. La página de fraude de MRW dice que es su único número de atención al cliente.
 - **Otro número:** las preguntas frecuentes de su servicio de envíos online dan como teléfono de Atención al Cliente el +34 91 829 66 89 y el 900 103 668, con horario de lunes a viernes de 8:00 a 20:00 y sábados de 9:00 a 13:00.

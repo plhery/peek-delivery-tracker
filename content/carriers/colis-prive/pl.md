@@ -71,7 +71,7 @@ Dane ze stron Colis Privé:
 
 ## Śledzenie paczki Colis Privé w Peek
 
-[Peek](/) obsługuje ponad 4500 przewoźników i wymaga 12-znakowego numeru oraz kodu pocztowego doręczenia. Wpisz numer i wybierz Colis Privé: pojawi się pole kodu pocztowego — pięć cyfr we Francji, cztery w Belgii albo `L` i cztery cyfry w Luksemburgu. Możesz też wpisać numer z kodem pocztowym: `KL4829173648 75001` (Francja), `KL4829173648 B1000` (Belgia) lub `KL4829173648 L1234` (Luksemburg) — wszystkie przykłady są wymyślone. Z literą `B` lub `L` Peek sam rozpozna Colis Privé. Działają też linki z `colisprive.com` i `colisprive.fr`.
+[Peek](/) obsługuje ponad 4500 przewoźników i wymaga 12-znakowego numeru oraz kodu pocztowego doręczenia. Wpisz numer i wybierz Colis Privé: pojawi się pole kodu pocztowego — pięć cyfr we Francji, cztery w Belgii albo `L` i cztery cyfry w Luksemburgu. Możesz też wpisać numer z kodem pocztowym: `KL4829173648 75001` (Francja), `KL4829173648 B1000` (Belgia) lub `KL4829173648 L4829` (Luksemburg) — wszystkie przykłady są wymyślone. Z literą `B` lub `L` Peek sam rozpozna Colis Privé. Działają też linki z `colisprive.com` i `colisprive.fr`.
 
 Peek pokazuje status, francuską historię (z datą bez godziny) oraz przewidywaną dostawę; tylko tobie pokazuje też imię i nazwisko odbiorcy (w polu „Odbiorca”).
 

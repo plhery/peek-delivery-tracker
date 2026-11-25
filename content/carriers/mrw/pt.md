@@ -14,9 +14,9 @@ O formulário da MRW pede o «Núm. expedição» e, no resultado, chama-lhe «N
 
 | O que tens | O que é |
 | --- | --- |
-| `123456789012` | O número de envio tal como está por baixo do código de barras. Escreve-o assim. |
-| `12345/1234567` | O mesmo número, como aparece ao lado de «N.º Etiqueta». Tira a barra antes de o seguir. |
-| `12345A123456` | Cinco algarismos, uma letra e seis algarismos: uma forma vista em encomendas MRW, embora as páginas da MRW não a mostrem. |
+| `482910573649` | O número de envio tal como está por baixo do código de barras. Escreve-o assim. |
+| `48291/0573649` | O mesmo número, como aparece ao lado de «N.º Etiqueta». Tira a barra antes de o seguir. |
+| `48291A573649` | Cinco algarismos, uma letra e seis algarismos: uma forma vista em encomendas MRW, embora as páginas da MRW não a mostrem. |
 
 Onde o encontras:
 
@@ -70,7 +70,7 @@ As condições da MRW são um contrato com o remetente, que numa compra online �
 
 ## MRW Portugal contactos: telefone e apoio ao cliente
 
-Tal como o site português da MRW os indicava a 11 de outubro de 2026:
+Tal como o site português da MRW os indica:
 
 - **Telefone:** +351 219 587 279, que a página de fraude chama o único número de apoio ao cliente. O custo «corresponde ao valor de uma chamada para rede fixa nacional». Não está publicado nenhum horário.
 - **Formulários:** a página [Contate-nos](https://www.mrw.pt/empresa_mensajeria_urgente/MRW_contacto_paqueteria.asp), com temas como «Quero fazer uma reclamação».

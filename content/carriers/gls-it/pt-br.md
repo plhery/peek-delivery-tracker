@@ -1,6 +1,6 @@
 ---
 title: Rastreamento GLS Itália: códigos, status e pontos GLS
-description: Rastreie encomendas da GLS na Itália: formatos de código, status em inglês explicados, tentativas falhas, GLS Points, giacenza, reclamações e contatos.
+description: Rastreie encomendas da GLS na Itália: formatos de código, status em inglês explicados, entregas não realizadas, GLS Points, giacenza, reclamações e contatos.
 slug: rastreamento-gls-italia
 published: 2026-11-24
 updated: 2026-11-24
@@ -10,7 +10,7 @@ A GLS Itália é o braço italiano do grupo GLS, uma rede de depósitos locais (
 
 ## Código de rastreamento da GLS Itália: onde encontrar
 
-Confira o e-mail de envio da loja ou a página do pedido: o remetente informa o código ao despachar. Ele também vem impresso sob o código de barras do documento de envio e no aviso em papel (*aviso di passaggio*) deixado após tentativa falha, junto ao telefone e e-mail da sua Sede local. Sem número? Peça ao remetente ou veja [como encontrar seu código de rastreamento](guide:find-tracking-number). A GLS não pesquisa por nome nem endereço.
+Confira o e-mail de envio da loja ou a página do pedido: o remetente informa o código ao despachar. Ele também vem impresso sob o código de barras do documento de envio e no aviso em papel (*avviso di passaggio*) deixado após uma entrega não realizada, junto ao telefone e e-mail da sua Sede local. Sem número? Peça ao remetente ou veja [como encontrar seu código de rastreamento](guide:find-tracking-number). A GLS não pesquisa por nome nem endereço.
 
 O formulário da GLS aceita estes códigos:
 
@@ -44,11 +44,11 @@ O rastreamento da GLS Itália exibe estes textos em inglês em gls-group.com/IT/
 
 O FAQ da GLS traz outros rótulos. `AWAITING SENDER’S INSTRUCTIONS – SHIPMENT IN STORAGE` indica pacote retido aguardando instruções do remetente — em compras online, avise a loja. `REFUSED` e `INCOMPLETE OR INCORRECT ADDRESS` também só podem ser liberados pelo remetente. Já `SHIPMENT WAITING IN STORAGE` significa que aguarda retirada na base mediante documento e número GLS.
 
-## Entrega da GLS na Itália: tentativas falhas, GLS Points e giacenza
+## Entrega da GLS na Itália: entregas não realizadas, GLS Points e giacenza
 
 A GLS entrega de segunda a sexta (exceto feriados), durante o dia (aproximadamente das 8h30 às 18h30, horário da Itália). Horário marcado ou sábado só ocorrem se o remetente contratou esse adicional.
 
-**Tentativa sem sucesso.** O motorista deixa um aviso e uma segunda tentativa acontece no dia útil seguinte. Se o remetente ativou o Flex Delivery, um link por e-mail ou SMS permite escolher nova data ou ponto de retirada (Sede ou GLS Shop) — e, se previsto em contrato, novo endereço, local seguro ou vizinho. Caso contrário, peça alteração de endereço ao remetente.
+**Entrega não realizada.** O motorista deixa um aviso e uma segunda tentativa acontece no dia útil seguinte. Se o remetente ativou o Flex Delivery, um link por e-mail ou SMS permite escolher nova data ou ponto de retirada (Sede ou GLS Shop) — e, se previsto em contrato, novo endereço, local seguro ou vizinho. Caso contrário, peça alteração de endereço ao remetente.
 
 **Giacenza (em espera).** Se a segunda tentativa também falhar, a encomenda fica em *giacenza* e o remetente tem 10 dias úteis para passar instruções. A carta de serviços mantém pacotes retidos gratuitamente por **10 dias úteis** (8 dias para envios do exterior) antes de devolver sem instruções. Para nova entrega, contate o remetente.
 
@@ -56,13 +56,13 @@ A GLS entrega de segunda a sexta (exceto feriados), durante o dia (aproximadamen
 
 **Fermo Deposito.** Quando contratada retirada na base, retire na Sede até o 3º dia útil com documento e código de envio. Horário: segunda a sexta 8h30–13h e 14h30–18h30; sábado 8h30–12h (horário da Itália).
 
-## Encomenda atrasada, extraviada ou avariada na GLS Itália
+## Encomenda atrasada, extraviada ou danificada na GLS Itália
 
 O rastreamento atualiza a cada leitura, podendo levar alguns dias entre scans na Itália ou em rotas internacionais. A [página de avisos operacionais](https://gls-group.com/IT/it/aggiornamenti_operativi/) lista lentidões locais. Continua parado? Avise o remetente ou pagador do frete para abrir reclamação; a GLS não garante data vinculante nem indeniza atrasos. Veja [rastreamento que não atualiza](guide:tracking-not-updating).
 
 Consta entregue mas nada chegou? Avise o remetente imediatamente: apenas o pagador pode solicitar o comprovante de entrega e reclamar. Veja [encomenda entregue mas não recebida](guide:delivered-not-received).
 
-Embalagem avariada: recuse o volume ou assine com ressalva escrita detalhada junto ao motorista; sem isso, perde-se o direito sobre danos visíveis. Para avaria descoberta ao abrir, avise o remetente rapidamente — ele tem 8 dias corridos após o dia da entrega para reclamar.
+Embalagem danificada: recuse o volume ou assine com ressalva escrita detalhada junto ao motorista; sem isso, perde-se o direito sobre danos visíveis. Para dano descoberto ao abrir, avise o remetente rapidamente — ele tem 8 dias corridos após o dia da entrega para reclamar.
 
 Você também pode reclamar diretamente usando o formulário da carta de serviços em até 90 dias da expedição, pelo e-mail customerservice@gls-italy.com. A GLS responde em até 45 dias; depois há conciliação e recurso à reguladora AGCOM.
 
@@ -79,11 +79,11 @@ Canais oficiais da GLS Itália:
 
 ## Como rastrear encomendas da GLS Itália no Peek
 
-O [Peek](/) consulta a GLS Itália para códigos de duas letras e nove dígitos, ou uma letra, um dígito e nove dígitos, exibindo "GLS Italy está com esta encomenda" quando ela confirma. Para códigos nacionais com menos de nove dígitos, escolha GLS Italy em "Trocar"; o Peek não rastreia ID Collo, então use o número de envio. Links de gls-group.com ou gls-group.eu com `/IT/` no caminho funcionam (links de gls-italy.com não). Para códigos internacionais de 11 dígitos, o Peek consulta GLS França, Alemanha e Suíça, nunca a GLS Itália; se a GLS Alemanha reconhecer o envio, o Peek solicita o código postal de entrega.
+O [Peek](/) consulta a GLS Itália para códigos de duas letras e nove dígitos, ou uma letra, um dígito e nove dígitos, exibindo "GLS Italy está com esta encomenda." quando ela confirma. Para códigos nacionais com menos de nove dígitos, escolha GLS Italy em "Trocar"; o Peek não rastreia ID Collo, então use o número de envio. Links de gls-group.com ou gls-group.eu com `/IT/` no caminho funcionam (links de gls-italy.com não). Para códigos internacionais de 11 dígitos, o Peek consulta GLS França, Alemanha e Suíça, nunca a GLS Itália; se a GLS Alemanha reconhecer o envio, o Peek solicita o código postal de entrega.
 
 Os horários da GLS Itália não trazem fuso: o Peek lê no horário italiano e mostra o histórico oficial. Quando a leitura mais recente tem data sem hora, o Peek complementa as datas pelos serviços universais de rastreamento. As linhas mantêm o inglês da GLS, enquanto o status principal aparece no seu idioma (como "Entregue"), junto ao peso.
 
-A única previsão de entrega exibida é a data que você agenda para reentrega após tentativa falha — registrada pela GLS como `Consegna prenotata il` seguida da data, em italiano mesmo entre textos em inglês. Não aparecem ponto de retirada, remetente nem seu nome; a cidade informada pela GLS marca o fim da rota apenas no seu mapa, nunca em links compartilhados. Pacotes reencaminhados ou devolvidos sob novo código não são seguidos adiante, e envios antigos retornam como não encontrados.
+A única previsão de entrega exibida é a data que você agenda para reentrega após uma entrega não realizada — registrada pela GLS como `Consegna prenotata il` seguida da data, em italiano mesmo entre textos em inglês. Não aparecem ponto de retirada, remetente nem seu nome; a cidade informada pela GLS marca o fim da rota apenas no seu mapa, nunca em links compartilhados. Pacotes reencaminhados ou devolvidos sob novo código não são seguidos adiante, e envios antigos retornam como não encontrados.
 
 ## Perguntas frequentes sobre rastreamento GLS na Itália
 
@@ -100,7 +100,7 @@ O prazo indicativo do serviço padrão é de 24 horas na Itália continental e 4
 Somente se o remetente pagou pelo adicional de sábado, disponível nas capitais de província. Fora isso, o sábado de manhã serve apenas para retirar envios Fermo Deposito na Sede.
 
 :::sources
-- [GLS Italy: Frequently asked questions](https://gls-group.com/IT/en/faq/) – códigos, status, atrasos, avarias e contatos
+- [GLS Italy: Frequently asked questions](https://gls-group.com/IT/en/faq/) – códigos, status, atrasos, danos e contatos
 - [GLS Italia: Domande frequenti](https://gls-group.com/IT/it/faq/) – perguntas frequentes em italiano
 - [GLS Italy: Track & Trace](https://gls-group.com/IT/en/online-services/track-trace/) – rastreamento e status em inglês
 - [GLS Italia: Ricerca Spedizione](https://gls-group.com/IT/it/servizi-online/ricerca-spedizioni/) – rastreamento em italiano e alerta de golpe
@@ -119,4 +119,5 @@ Somente se o remetente pagou pelo adicional de sábado, disponível nas capitais
 - [GLS Italy: Customer Service updates](https://gls-group.com/IT/en/online-services/contacts/) – formulário de atendimento
 - [GLS Italia: Aggiornamenti operativi](https://gls-group.com/IT/it/aggiornamenti_operativi/) – lentidões locais
 - [GLS Italia: Trova Sede e GLS Point](https://gls-group.com/IT/it/trova-sede-parcelshop/) – bases, lojas e lockers
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra
 :::

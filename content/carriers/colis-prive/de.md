@@ -71,7 +71,7 @@ Kontaktdaten laut den Seiten von Colis Privé:
 
 ## Colis-Privé-Paket mit Peek verfolgen
 
-[Peek](/) verfolgt über 4.500 Paketdienste und benötigt für Colis Privé die 12-stellige Nummer sowie die Lieferpostleitzahl. Gib die Nummer ein und wähle Colis Privé: Dann erscheint das Postleitzahlfeld — fünf Ziffern in Frankreich, vier in Belgien oder `L` plus vier Ziffern in Luxemburg. Oder tippe Nummer und Postleitzahl zusammen ein: `KL4829173648 75001` (Frankreich), `KL4829173648 B1000` (Belgien) oder `KL4829173648 L1234` (Luxemburg), alle erfunden. Mit `B` oder `L` erkennt Peek Colis Privé direkt selbst. Links von `colisprive.com` oder `colisprive.fr` funktionieren ebenfalls.
+[Peek](/) verfolgt über 4.500 Paketdienste und benötigt für Colis Privé die 12-stellige Nummer sowie die Lieferpostleitzahl. Gib die Nummer ein und wähle Colis Privé: Dann erscheint das Postleitzahlfeld — fünf Ziffern in Frankreich, vier in Belgien oder `L` plus vier Ziffern in Luxemburg. Oder tippe Nummer und Postleitzahl zusammen ein: `KL4829173648 75001` (Frankreich), `KL4829173648 B1000` (Belgien) oder `KL4829173648 L4829` (Luxemburg), alle erfunden. Mit `B` oder `L` erkennt Peek Colis Privé direkt selbst. Links von `colisprive.com` oder `colisprive.fr` funktionieren ebenfalls.
 
 Peek zeigt Status, den französischen Verlauf (mit Datum ohne Uhrzeit) sowie das erwartete Lieferdatum; nur dir zeigt es auch den Namen des Empfängers (unter „Empfänger“).
 

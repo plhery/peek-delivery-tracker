@@ -14,9 +14,9 @@ MRW asks for the "número de envío" (shipment number), shown on results as "Nú
 
 | What you have | What it is |
 | --- | --- |
-| `123456789012` | MRW's shipment number as printed under the barcode. Type it like this. |
-| `12345/1234567` | The same number as printed next to "N.º Etiqueta". Drop the slash before tracking it. |
-| `12345A123456` | Five digits, a letter, six digits: reported for MRW parcels, though MRW's pages don't show it. |
+| `482910573649` | MRW's shipment number as printed under the barcode. Type it like this. |
+| `48291/0573649` | The same number as printed next to "N.º Etiqueta". Drop the slash before tracking it. |
+| `48291A573649` | Five digits, a letter, six digits: reported for MRW parcels, though MRW's pages don't show it. |
 
 Where it turns up:
 
@@ -70,7 +70,7 @@ MRW's terms are a contract with the sender, which for an order is the shop: star
 
 ## MRW contact number and customer service
 
-As MRW's sites listed them on 11 October 2026:
+As MRW's sites list them:
 
 - **Spain:** +34 91 829 66 89, which MRW's fraud page calls its only customer service number. Its FAQ gives both +34 91 829 66 89 and 900 103 668 as the customer service phone, open 8:00 to 20:00 Monday to Friday and 9:00 to 13:00 on Saturdays. Email: informacion@mrw.es, which the contact page gives as customer service's. On X: @mrw_clientes. Topic forms are on the [contact page](https://www.mrw.es/empresa_mensajeria_urgente/MRW_contacto_paqueteria.asp).
 - **Portugal:** +351 219 587 279, charged as a national landline call, @mrw_portugal on X, and the [Contate-nos page](https://www.mrw.pt/empresa_mensajeria_urgente/MRW_contacto_paqueteria.asp).

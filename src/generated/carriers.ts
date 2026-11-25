@@ -14950,6 +14950,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#db3830"
     },
     {
+      "id": "austrian-post",
+      "catalog": "austrian-post",
+      "slug": "rastreamento-austrian-post",
+      "title": "Rastreamento Austrian Post: códigos, status e retirada",
+      "name": "Austrian Post",
+      "color": "#ffdc00"
+    },
+    {
       "id": "tipsa",
       "catalog": "tipsa",
       "slug": "rastreamento-tipsa",
@@ -15372,6 +15380,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento GEODIS Poland: código, status e entregas",
       "name": "GEODIS Poland",
       "color": "#3100e6"
+    },
+    {
+      "id": "sending",
+      "catalog": "sending",
+      "slug": "rastreamento-sending",
+      "title": "Rastreamento Sending na Espanha: código, status e contato",
+      "name": "Sending",
+      "color": "#e52021"
     },
     {
       "id": "ywe",
@@ -18364,6 +18380,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#db3830"
     },
     {
+      "id": "austrian-post",
+      "catalog": "austrian-post",
+      "slug": "austrian-post-kuaidi-chaxun",
+      "title": "奥地利邮政（Austrian Post）查询：单号、状态与取件",
+      "name": "Austrian Post",
+      "color": "#ffdc00"
+    },
+    {
       "id": "tipsa",
       "catalog": "tipsa",
       "slug": "tipsa-kuaidi-chaxun",
@@ -18874,6 +18898,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GEODIS Poland 波兰物流查询：PL 单号、状态与派送",
       "name": "GEODIS Poland",
       "color": "#3100e6"
+    },
+    {
+      "id": "sending",
+      "catalog": "sending",
+      "slug": "sending-kuaidi-chaxun",
+      "title": "Sending 西班牙快递查询：12 位单号、状态与电话",
+      "name": "Sending",
+      "color": "#e52021"
     },
     {
       "id": "hywl",

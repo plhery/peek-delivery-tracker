@@ -80,11 +80,11 @@ Packeta 官方公布的各国客服渠道如下：
 
 ## 用 Peek 查询和跟踪 Packeta 包裹
 
-[Peek](/) 会把 `Z` 加 10 位数字立刻识别为 Packeta。去掉 `Z` 的 10 位纯数字匹配多家承运商，Peek 会同时向它们询问（只要第一位不为 0 且按连续数字或 3-4-3 分段输入，也会询问 Packeta），并标出查到记录的那一家；你也可以点击“更换”手动选择 Packeta。支持粘贴 tracking.packeta.com 链接、带 `id=` 参数的 packeta.com 链接，以及含 `Z` 单号的 zasilkovna.cz 链接，无需填写邮编。
+[Peek](/) 会把 `Z` 加 10 位数字立刻识别为 Packeta。去掉 `Z` 的 10 位纯数字匹配多家承运商，Peek 会同时向它们询问（只要第一位不为 0 且按连续数字或 3-4-3 分段输入，也会询问 Packeta），并标出查到记录的那一家；你也可以点击“更换”手动选择 Packeta。粘贴 tracking.packeta.com 链接和带 `id=` 参数的 packeta.com 链接也可以；zasilkovna.cz 链接须含 `Z` 单号。无需填写邮编。
 
 Peek 以英文读取 Packeta 官网数据并保留其原文措辞：展示总体状态、最新 20 条扫描、发货网店名称、签收时间，以及发往自提点或 Z-BOX 时的网点地址（送货上门和退件不显示）。Peek 会隐去你的姓名、地址、电话和签名。
 
-带分拨网点或自提点名称的扫描会显示具体地点，写明城镇的扫描还会标在地图上。Packeta 不提供预计送达时间。扫描时间统一按布拉格时间解析并换算为你设备的本地时区（罗马尼亚网点扫描可能有一小时时差）。当轨迹附带 Peek 支持的合作承运商查件链接时，Peek 会标明由该合作方派送，并在该合作方出现更新进展后自动衔接跟进。Peek 最高每 10 分钟检查一次 Packeta，并在状态变化时发送通知。若连续两天无新动态（或在“已生成面单”、“已揽收”状态下满 12 小时），改为每小时检查一次。
+带分拨网点或自提点名称的扫描会显示具体地点，写明城镇的扫描还会标在地图上。Packeta 不提供预计送达时间。扫描时间统一按布拉格时间解析并换算为你设备的本地时区（罗马尼亚网点扫描可能有一小时时差）。当某条扫描附带 Peek 认识的合作承运商查件链接时，Peek 会标明由该合作方派送；如果 Peek 能直接查询该合作方，会在它出现新进展后接着在那里跟踪。Peek 最高每 10 分钟检查一次 Packeta，并在状态变化时发送通知。若连续两天无新动态（或在“已生成面单”、“已揽收”状态下满 12 小时），改为每小时检查一次。
 
 ## Packeta 查询常见问题
 
@@ -94,7 +94,7 @@ Peek 以英文读取 Packeta 官网数据并保留其原文措辞：展示总体
 
 ### Packeta 是正规快递公司吗？
 
-是的。Packeta 是捷克知名物流品牌 Zásilkovna 背后的集团品牌，业务覆盖 33 个国家。Zásilkovna 官方短信发件人名称为 “Zásilkovna”。
+是的。Packeta 是捷克物流品牌 Zásilkovna 背后的集团品牌，业务覆盖 33 个国家。Zásilkovna 官方短信发件人名称为 “Zásilkovna”。
 
 ### Packeta 和 FOXPOST 是一家吗？
 
@@ -138,4 +138,5 @@ Peek 以英文读取 Packeta 官网数据并保留其原文措辞：展示总体
 - [Packeta.sk: Reklamačný poriadok](https://files.packeta.com/web/files/SK_Reklamacny_poriadok_20_10_2026.pdf) – 斯洛伐克收件人索赔与隐蔽破损次工作日期限
 - [Packeta.sk: Doručenie domov](https://www.packeta.sk/domov) – 斯洛伐克精确到分钟的预计时间与实时跟踪
 - [Packeta.de: Support, häufige Fragen](https://www.packeta.de/support/suche) – 捷克自有司机与其他国家合作方说明
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取和显示的信息
 :::

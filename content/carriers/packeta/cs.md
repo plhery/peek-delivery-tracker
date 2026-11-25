@@ -14,9 +14,9 @@ Sledování zásilky přijme jediný tvar: písmeno `Z` a za ním 10 číslic. K
 
 | Tvar (vymyšlený) | Co to je |
 | --- | --- |
-| `Z0000000000` | Trasovací číslo Zásilkovny: `Z` a 10 číslic. |
-| `1000000000` | 10 číslic bez `Z`. Tenhle tvar mají i čísla jiných dopravců, třeba DHL, takže `Z` na začátek připište. |
-| `Z000000000` | Za `Z` jen 9 číslic (nebo naopak 11). To číslo Zásilkovny není: zkontrolujte, jestli jste číslici nevynechali nebo nepřidali. |
+| `Z4829173640` | Trasovací číslo Zásilkovny: `Z` a 10 číslic. |
+| `4829173640` | 10 číslic bez `Z`. Tenhle tvar mají i čísla jiných dopravců, třeba DHL, takže `Z` na začátek připište. |
+| `Z482917364` | Za `Z` jen 9 číslic (nebo naopak 11). To číslo Zásilkovny není: zkontrolujte, jestli jste číslici nevynechali nebo nepřidali. |
 
 **Kód k vyzvednutí**, kterému Zásilkovna říká i heslo, je něco jiného. Přijde vám, až zásilka dorazí na výdejní místo nebo do Z-BOXu, a slouží jen k vyzvednutí.
 
@@ -83,7 +83,7 @@ Na adresu to Zásilkovna zkouší jen jednou. Když vás řidič nezastihne, ulo
 
 ## Kontakt na Zásilkovnu
 
-Kontakty, jak je Zásilkovna uváděla na svém webu 25. října 2026:
+Kontakty, jak je Zásilkovna uvádí na svém webu:
 
 - **Zákaznická linka** +420 216 216 516. V pracovní dny od 8 do 18 hodin vám odpoví živý operátor. Volat ale můžete 24/7: mimo pracovní dobu to vezme ZET, asistent s umělou inteligencí.
 - **Kontaktní formulář** na zasilkovna.cz/kontaktni-formular, i večer a o víkendu.

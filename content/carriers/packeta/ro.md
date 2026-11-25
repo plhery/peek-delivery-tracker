@@ -14,9 +14,9 @@ Pagina de urmărire acceptă un singur format: litera `Z` urmată de 10 cifre. D
 
 | Număr (inventat) | Ce este |
 | --- | --- |
-| `Z0000000000` | Număr de urmărire Packeta: `Z` și 10 cifre. |
-| `1000000000` | Cele 10 cifre fără `Z`. Așa arată și AWB-urile altor curieri, de exemplu [Cargus](carrier:cargus): pe pagina Packeta, pune `Z` în față. |
-| `Z000000000` | Doar 9 cifre după `Z` (sau 11): nu e un număr Packeta. Verifică dacă n-ai sărit sau adăugat o cifră. |
+| `Z4829173640` | Număr de urmărire Packeta: `Z` și 10 cifre. |
+| `4829173640` | Cele 10 cifre fără `Z`. Așa arată și AWB-urile altor curieri, de exemplu [Cargus](carrier:cargus): pe pagina Packeta, pune `Z` în față. |
+| `Z482917364` | Doar 9 cifre după `Z` (sau 11): nu e un număr Packeta. Verifică dacă n-ai sărit sau adăugat o cifră. |
 
 **Parola de ridicare**, numită uneori și cod, e altceva: o primești abia când coletul te așteaptă și îți trebuie doar ca să-l ridici, nu ca să-l urmărești.
 
@@ -85,7 +85,7 @@ Locul de livrare îl alegi în magazin, când comanzi: un punct pick-up, un Z-BO
 
 ## Contact Packeta
 
-Pe packeta.ro, la 26 octombrie 2026:
+Pe packeta.ro:
 
 - **Telefon:** +40 316 300 402, de luni până vineri, 9:00–17:00.
 - **[Formularul de contact](https://www.packeta.ro/formular-de-contact)**, pentru orice altă întrebare.

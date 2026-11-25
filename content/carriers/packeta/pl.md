@@ -14,10 +14,10 @@ Strona śledzenia Packeta przyjmuje jeden kształt numeru: „Numer śledzenia m
 
 | Numer | Co to jest |
 | --- | --- |
-| `Z1234567890` | Numer przesyłki Packeta. |
-| `1234567890` | Te same cyfry bez `Z`: taki kształt mają też [DHL](carrier:dhl-express), Relais Colis i inni, więc dopisz `Z`. |
-| `Z123456789` | Tylko dziewięć cyfr: to nie Packeta (taki kształt ma Australia Post). |
-| `Z12345678901` | Jedenaście cyfr: to nie Packeta (kształt Colis Privé). |
+| `Z4829173640` | Numer przesyłki Packeta. |
+| `4829173640` | Te same cyfry bez `Z`: taki kształt mają też [DHL](carrier:dhl-express), Relais Colis i inni, więc dopisz `Z`. |
+| `Z482917364` | Tylko dziewięć cyfr: to nie Packeta (taki kształt ma Australia Post). |
+| `Z48291736401` | Jedenaście cyfr: to nie Packeta (kształt Colis Privé). |
 
 Według polskiej strony śledzenia numer jest w e-mailu, który Packeta do ciebie wysłała, albo w SMS-ie; packeta.pl dodaje, że e-mail z numerem przychodzi, gdy sklep przekaże paczkę do transportu. Nie myl go z **kodem odbioru**: ten Packeta wysyła SMS-em i e-mailem dopiero, gdy paczka dotrze do punktu, i podajesz go przy odbiorze, nie przy śledzeniu. Nie masz numeru `Z`? Zapytaj sklep albo sprawdź, [gdzie jeszcze szukać numeru przesyłki](guide:find-tracking-number).
 

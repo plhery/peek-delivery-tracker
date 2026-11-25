@@ -14,9 +14,9 @@ A csomagszámot a Packeta e-mailben küldi el, amint a webáruház átadta neki 
 
 | Szám (kitalált példa) | Mit jelent |
 | --- | --- |
-| `Z0000000000` | `Z` és 10 számjegy: Packeta-csomagszám. |
-| `1000000000` | 10 számjegy `Z` nélkül. Más szállítók számai is így néznek ki; a Packeta Csomagkövetésében írja elé a `Z`-t. |
-| `Z000000000` | `Z` után 9 (vagy 11) számjegy: ez nem Packeta-szám. Ellenőrizze, nem hagyott-e ki vagy nem írt-e be fölöslegesen egy számjegyet. |
+| `Z4829173640` | `Z` és 10 számjegy: Packeta-csomagszám. |
+| `4829173640` | 10 számjegy `Z` nélkül. Más szállítók számai is így néznek ki; a Packeta Csomagkövetésében írja elé a `Z`-t. |
+| `Z482917364` | `Z` után 9 (vagy 11) számjegy: ez nem Packeta-szám. Ellenőrizze, nem hagyott-e ki vagy nem írt-e be fölöslegesen egy számjegyet. |
 | `CLFOX000000000000000` | FOXPOST-csomagszám: ezt a [FOXPOST](carrier:foxpost) Csomagkövetése mutatja, nem a Packetáé. |
 
 Az **átvételi kód**, amelyet a Packeta jelszónak is nevez, nem azonos a csomagszámmal: akkor kapja meg, amikor a csomag megérkezett az átvételi pontra, és csak az átvételhez kell. Ha nem jött e-mail a csomagszámmal, kérdezze meg a webáruházat.

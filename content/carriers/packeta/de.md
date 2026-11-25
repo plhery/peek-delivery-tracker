@@ -14,9 +14,9 @@ Packetas Sendungsverfolgung nimmt nur eine Form an: `Z` und zehn Ziffern. Alles 
 
 | Nummer (erfunden) | Was sie ist |
 | --- | --- |
-| `Z0000000000` | Eine Packeta-Sendungsnummer. |
-| `1000000000` | Die zehn Ziffern ohne `Z`. Diese Form nutzen auch andere Paketdienste, setz also das `Z` davor. |
-| `Z000000000` | Nur neun Ziffern (oder elf): keine Packeta-Nummer. Prüf, ob eine Ziffer fehlt oder zu viel ist. |
+| `Z4829173640` | Eine Packeta-Sendungsnummer. |
+| `4829173640` | Die zehn Ziffern ohne `Z`. Diese Form nutzen auch andere Paketdienste, setz also das `Z` davor. |
+| `Z482917364` | Nur neun Ziffern (oder elf): keine Packeta-Nummer. Prüf, ob eine Ziffer fehlt oder zu viel ist. |
 
 Der **Abholcode** ist etwas anderes. Packeta schickt ihn per SMS und E-Mail, sobald das Paket an deinem Pick-Up Point liegt; in den AGB heißt er „Kennwort“. Du brauchst ihn zum Abholen, nicht zum Verfolgen. Keine E-Mail mit `Z`-Nummer bekommen? Dann frag den Shop. Mehr dazu unter [Sendungsnummer finden](guide:find-tracking-number).
 

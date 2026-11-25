@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Packeta (Zásilkovna): códigos Z e pontos
-description: Rastreie encomendas da Packeta (Zásilkovna): formato do código Z, status explicados, prazo em pontos e Z-BOX, avarias e telefones de atendimento.
+description: Rastreie encomendas da Packeta (Zásilkovna): formato do código Z, status explicados, prazo em pontos e Z-BOX, danos e telefones de atendimento.
 slug: rastreamento-packeta
 published: 2026-11-24
 updated: 2026-11-24
@@ -56,13 +56,13 @@ A Packeta informa prazo de **7 dias** para retirada, com o código do SMS ou e-m
 
 **Fins de semana.** A Zásilkovna entrega em endereços apenas em dias úteis. Em Praga, Brno e Ostrava, também abastece Z-BOX e alguns pontos de retirada aos sábados.
 
-## Encomenda da Packeta parada, avariada ou devolvida
+## Encomenda da Packeta parada, danificada ou devolvida
 
 **Dias sem atualização.** Na República Tcheca, após mais de 24 horas sem movimentação, a Zásilkovna orienta escrever pelo formulário de contato (assunto "Kde je moje zásilka?") descrevendo o conteúdo. Como a loja contratou o frete, ela também pode acionar a transportadora. Veja [rastreamento que não atualiza](guide:tracking-not-updating).
 
 **Não recebida.** O remetente abre reclamação por extravio, então procure a loja. O destinatário também pode reclamar na Eslováquia; na Romênia, pelos termos, em até 6 meses da postagem (embora uma resposta do FAQ atribua ao remetente); e na Hungria com cessão escrita do remetente ou confirmação do pedido com o valor total pago. Nos termos da Zásilkovna para lojas, a loja deve reportar não entrega em até 20 dias da postagem e reclamar em até 3 meses. Consta entregue mas sumiu? Veja [encomenda entregue mas não recebida](guide:delivered-not-received).
 
-**Avaria.** Reclame diretamente em claims.packeta.com/en ("I am the recipient"): na República Tcheca em até cinco dias úteis do recebimento; na Eslováquia, dano oculto até o dia útil seguinte; na Hungria, dano oculto em até 3 dias úteis (dano visível deve ser registrado na entrega); na Romênia, dentro dos 6 meses acima. A Packeta responde em até 30 dias. Pontos de retirada não aceitam reclamações. Na Polônia, a Packeta encaminha destinatários à loja.
+**Dano.** Reclame diretamente em claims.packeta.com/en ("I am the recipient"): na República Tcheca em até cinco dias úteis do recebimento; na Eslováquia, dano oculto até o dia útil seguinte; na Hungria, dano oculto em até 3 dias úteis (dano visível deve ser registrado na entrega); na Romênia, dentro dos 6 meses acima. A Packeta responde em até 30 dias. Pontos de retirada não aceitam reclamações. Na Polônia, a Packeta encaminha destinatários à loja.
 
 **Devolvida.** Peça reenvio ou reembolso à loja.
 
@@ -80,11 +80,11 @@ Canais oficiais da Packeta por país:
 
 ## Como rastrear encomendas da Packeta no Peek
 
-O [Peek](/) identifica `Z` seguido de dez dígitos como Packeta na hora. Dez dígitos sem o `Z` combinam com várias transportadoras, então o Peek consulta todas (incluindo a Packeta se o primeiro dígito não for 0 e o número vier contínuo ou em blocos 3-4-3) e indica quem reconhece o pacote; você também pode selecionar Packeta em "Trocar". Links de tracking.packeta.com e links de packeta.com com `id=` funcionam; links de zasilkovna.cz funcionam apenas se trouxerem o código `Z`. Não exige código postal.
+O [Peek](/) identifica `Z` seguido de dez dígitos como Packeta na hora. Dez dígitos sem o `Z` combinam com várias transportadoras, então o Peek consulta essas transportadoras (incluindo a Packeta se o primeiro dígito não for 0 e o número vier contínuo ou em blocos 3-4-3) e indica quem reconhece o pacote; você também pode selecionar Packeta em "Trocar". Links de tracking.packeta.com e links de packeta.com com `id=` funcionam; links de zasilkovna.cz funcionam apenas se trouxerem o código `Z`. Não exige código postal.
 
 O Peek consulta a Packeta em inglês e mantém o texto original: status geral, as 20 leituras mais recentes, loja remetente, horário da entrega e endereço do ponto de retirada ou Z-BOX quando destinado a um deles (nenhum em entrega domiciliar ou devolução). Ele omite seu nome, endereço, telefone e assinatura.
 
-Leituras com nome de depósito ou ponto exibem o local, e as que citam uma cidade entram no mapa. A Packeta não fornece previsão de entrega. Os horários são lidos no fuso de Praga e convertidos para o fuso do seu dispositivo (leituras de depósitos na Romênia podem ficar defasadas em uma hora). Quando uma leitura traz link de uma transportadora parceira conhecida pelo Peek, ele indica esse parceiro como entregador e passa a acompanhá-lo assim que surge nova atualização. O Peek verifica a Packeta até a cada 10 minutos e avisa mudanças. Após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora.
+Leituras com nome de depósito ou ponto exibem o local, e as que citam uma cidade entram no mapa. A Packeta não fornece previsão de entrega. Os horários são lidos no fuso de Praga e convertidos para o fuso do seu dispositivo (leituras de depósitos na Romênia podem ficar defasadas em uma hora). Quando uma leitura traz link de uma transportadora parceira conhecida pelo Peek, ele indica esse parceiro como entregador e, quando consegue consultar esse parceiro, passa a acompanhar o pacote nele assim que surge uma atualização nova. O Peek verifica a Packeta até a cada 10 minutos e avisa mudanças. Após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora.
 
 ## Perguntas frequentes sobre rastreamento Packeta
 
@@ -113,7 +113,7 @@ Sim, como Packeta Poland, com linha telefônica própria e pontos de retirada; l
 - [Zásilkovna: Glossary of terms, Packeta](https://www.zasilkovna.cz/en/glossary-of-terms/packeta) – Packeta e Zásilkovna, telefone e horários tchecos
 - [Zásilkovna: Fraudulent SMS](https://www.zasilkovna.cz/en/cybersecurity/sms) – alerta contra SMS falsos
 - [Packeta: General terms and conditions](https://www.packeta.com/general-terms-conditions) – direitos e prazos de reclamação, resposta em 30 dias e pontos
-- [Zásilkovna: Obchodní podmínky](https://files.packeta.com/web/files/VOP_Zasilkovna.pdf) – termos para lojas: 20 dias para reportar, 3 meses para extravio e 5 dias úteis para avaria
+- [Zásilkovna: Obchodní podmínky](https://files.packeta.com/web/files/VOP_Zasilkovna.pdf) – termos para lojas: 20 dias para reportar, 3 meses para extravio e 5 dias úteis para dano
 - [Zásilkovna: Zákaznická podpora](https://www.zasilkovna.cz/zakaznicky-servis/vyhledavani) – uma tentativa, formulário após 24h e código Z-BOX de 6 dígitos
 - [Zásilkovna: Doručení domů](https://www.zasilkovna.cz/domu) – duas ligações e dias úteis
 - [Zásilkovna: Doručujeme i v sobotu](https://www.zasilkovna.cz/blog/v-praze-brne-a-ostrave-dorucujeme-i-v-sobotu) – entrega aos sábados em Z-BOX e pontos
@@ -134,8 +134,9 @@ Sim, como Packeta Poland, com linha telefônica própria e pontos de retirada; l
 - [Packeta Hungary: A Packeta Z-BOX-ok hamarosan átalakulnak FOXPOST Z-BOX-okká](https://www.packeta.hu/blog/packeta-z-box-atalakulas-foxpost-zbox) – Hungria: FOXPOST Z-BOX
 - [Packeta Hungary: Megérkezett: adj fel csomagot a FOXPOST applikációval](https://www.packeta.hu/blog/megerkezett-adj-fel-csomagot-a-foxpost-applikacioval) – Hungria: app FOXPOST substitui o da Packeta
 - [Packeta Hungary: Rólunk](https://www.packeta.hu/rolunk) – Hungria: fusão Packeta e FOXPOST
-- [Packeta Hungary: Általános Szerződési Feltételek](https://files.packeta.com/web/files/packetahu/2026/FoxPost_ASZF-20260826.pdf) – Hungria: FoxPost Kft., guarda, quem reclama e prazos de avaria
+- [Packeta Hungary: Általános Szerződési Feltételek](https://files.packeta.com/web/files/packetahu/2026/FoxPost_ASZF-20260826.pdf) – Hungria: FoxPost Kft., guarda, quem reclama e prazos de dano
 - [Packeta.sk: Reklamačný poriadok](https://files.packeta.com/web/files/SK_Reklamacny_poriadok_20_10_2026.pdf) – Eslováquia: destinatário pode reclamar, dano oculto no dia útil seguinte
 - [Packeta.sk: Doručenie domov](https://www.packeta.sk/domov) – Eslováquia: previsão por minuto e rastreamento ao vivo na última hora
 - [Packeta.de: Support, häufige Fragen](https://www.packeta.de/support/suche) – motoristas próprios na República Tcheca, parceiros nos demais países
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra
 :::

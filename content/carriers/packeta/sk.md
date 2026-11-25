@@ -14,9 +14,9 @@ Sledovanie zásielky prijíma len jeden tvar čísla: písmeno `Z` a za ním 10 
 
 | Tvar (vymyslený) | Čo to je |
 | --- | --- |
-| `Z0000000000` | Trasovacie číslo Packety: `Z` a 10 číslic. |
-| `1000000000` | 10 číslic bez `Z`. Taký tvar majú aj čísla iných prepravcov, preto `Z` na začiatok dopíšte. |
-| `Z000000000` | Za `Z` len 9 číslic (alebo 11). To nie je číslo Packety: skontrolujte, či ste číslicu nevynechali alebo nepridali. |
+| `Z4829173640` | Trasovacie číslo Packety: `Z` a 10 číslic. |
+| `4829173640` | 10 číslic bez `Z`. Taký tvar majú aj čísla iných prepravcov, preto `Z` na začiatok dopíšte. |
+| `Z482917364` | Za `Z` len 9 číslic (alebo 11). To nie je číslo Packety: skontrolujte, či ste číslicu nevynechali alebo nepridali. |
 
 **Kód na vyzdvihnutie**, ktorý Packeta volá aj heslo (u kuriéra PIN), je iné číslo. Dostanete ho, až keď zásielka dorazí na výdajné miesto alebo do Z-BOXu; ak ju vezie kuriér, v deň doručenia. Slúži len na prevzatie zásielky, nie na sledovanie.
 
@@ -87,7 +87,7 @@ Nie ste doma? Dohodnite sa s kuriérom, že zásielku uloží na najbližšom v�
 
 ## Kontakt na Packetu
 
-Kontakty podľa packeta.sk k 26. októbru 2026:
+Kontakty podľa packeta.sk:
 
 - **Zákaznícky servis** +421 221 201 135. V pracovné dni od 8 do 18 hodín vám odpovedajú živí operátori, večer a cez víkend voicebot Paula.
 - **Kontaktný formulár** na packeta.sk/kontaktny-formular, s témami ako „Kde je moja zásielka“, „Presmerovanie zásielky“ alebo „Zmena kontaktných údajov“.

@@ -15,7 +15,7 @@ DPD 通常会通过电子邮件把包裹单号发给你。如果错过了派送�
 | 单号示例（虚构） | 说明 |
 | --- | --- |
 | `09558473629104` | 以 0955 至 0988 开头的 14 位数字：DPD Portugal 包裹单号。 |
-| `09558473629104S` | 同一单号末尾附带一位校验字符，常见于包裹面单印刷。 |
+| `09558473629104S` | 同一单号末尾附带校验字符，即面单上印的形式。 |
 
 其他 14 位数字（无论是否带末尾校验字符）也可能属于 [DPD UK](carrier:dpd-uk)、[DPD Germany](carrier:dpd-de)、Chronopost 或其他 DPD 分支网络，请核对商家邮件中注明的承运商。
 
@@ -45,7 +45,7 @@ DPD 官方查询页默认显示葡萄牙语，另提供英语和法语切换。P
 | `DEVOLUÇÃO AO EXPEDIDOR` | 已下达退回寄件人指令。 |
 | `PROVA DE ENTREGA` | 签收凭证：包裹已送达。 |
 
-`PEDIDO DE NOVA ENTREGA` 和 `PEDIDO DE ALTERAÇÃO DE MORADA` 仅记录改期或改址申请；`MORADA CORRIGIDA PELO EXPEDIDOR` 表示一次派送失败后商家更正了地址；错过派送后出现的 `RETORNO ARMAZÉM (PÁRA AEP)` 指退回网点仓库待处理，并非退回商家；而在 `DEVOLUÇÃO AO EXPEDIDOR` 之后出现的 `PROVA DE ENTREGA` 则是包裹退还到商家的签收记录。
+`PEDIDO DE NOVA ENTREGA` 和 `PEDIDO DE ALTERAÇÃO DE MORADA` 仅记录改期或改址申请；`MORADA CORRIGIDA PELO EXPEDIDOR` 表示一次派送未成功后商家更正了地址；派送未成功后出现的 `RETORNO ARMAZÉM (PÁRA AEP)` 指退回网点仓库待处理，并非退回商家；而在 `DEVOLUÇÃO AO EXPEDIDOR` 之后出现的 `PROVA DE ENTREGA` 则是包裹退还到商家的签收记录。
 
 ## 葡萄牙境内派送：Predict 预约、Pickup 自提点与快递柜
 
@@ -55,7 +55,7 @@ DPD 官方查询页默认显示葡萄牙语，另提供英语和法语切换。P
 
 **更改派送：** 凭包裹单号访问 dpd.pt 的 “Receiving parcels” 或打开 myDPD 应用，可将派送改期或转投 Pickup 自提点。DPD 创新介绍页称最多可延后 5 个工作日。最晚何时能改？英文常见问题称部分情况下即便进入派送当天也可修改，葡语常见问题则称最晚提前一天；具体以你单号页面上显示的可选改派项为准。若多次更改，以最后一次生效。
 
-**错过派送：** 司机留下带单号的通知卡，可在网上改投。出于安全原因，DPD 不允许收件人直接到分拨中心自提包裹。
+**派送未成功：** 司机留下带单号的通知卡，可在网上改投。出于安全原因，DPD 不允许收件人直接到分拨中心自提包裹。
 
 **Pickup 自提点：** DPD 自提点专页称葡萄牙有约 2,300 家 Pickup 合作店和快递柜（派送介绍页仍写约 2,000 家），其中许多营业时间较长或位于商场内。包裹入点后会收到短信或邮件通知。英文常见问题给出 **10 个工作日**保管期，而葡语常见问题两处分别写 7 个工作日和 10 个工作日且可按客户要求调整：稳妥起见请按 **7 个工作日**准备。10 天版本写明到期前两天会发第二次短信提醒，逾期退回寄件人。
 
@@ -85,17 +85,17 @@ DPD Portugal [联系页面](https://www.dpd.com/pt/pt/ajuda/contactos/)公布的
 - **电子邮件与表单：** suporte.cliente@dpd.pt，另设在线**联系表单**（可填单号提交咨询和投诉）。
 - **智能助手 Maria：** 全天候 24 小时服务，可查包裹位置、送达时间、改期改址；联系页面也引导收件人通过 Maria 更正收件地址。
 
-无论是葡语还是英语联系页，均未写明热线支持哪些语种。
+无论是葡语还是英语联系页，均未写明热线使用哪些语言。
 
 > DPD Portugal 警示防范冒用其名义的诈骗短信和邮件，骗子甚至可能伪造发件人名称显示为 “DPD”。DPD 绝不会发消息索要运费或改派手续费。只有货到付款包裹才需付款，且仅在送货上门时当面支付给 DPD 司机。另见[防范快递诈骗短信](guide:delivery-scam-texts)（英文）。
 
 ## 用 Peek 查询和跟踪 DPD Portugal 包裹
 
-对于以 0955 至 0988 开头的 14 位数字（无论是否带校验字符），[Peek](/) 会同时询问可能匹配的快递公司并优先询问 DPD Portugal，确认后显示“DPD Portugal 有这个包裹的记录”。如果是其他 DPD 单号也照样可以粘贴：Peek 支持查询 4,500 多家快递。若未自动出现 DPD Portugal，请点击“更换”手动选择（或在已添加包裹页点击“更换快递公司”）。也支持粘贴带 `reference=` 的 tracking.dpd.pt/track-and-trace 链接，以及带 `parcelNumber=` 的 dpd.com/pt/ 或 dpdgroup.com/pt/ 链接。
+对于以 0955 至 0988 开头的 14 位数字（无论是否带校验字符），[Peek](/) 会同时询问可能匹配的快递公司并优先询问 DPD Portugal，DPD 有记录时显示“DPD Portugal 有这个包裹的记录。”如果是其他 DPD 单号也照样可以粘贴：Peek 跟踪 4,500 多家快递公司。若没有出现 DPD Portugal，请点击“更换”手动选择（或在已添加包裹页点击“更换快递公司”）。粘贴带 `reference=` 的 tracking.dpd.pt/track-and-trace 链接，以及带 `parcelNumber=` 的 dpd.com/pt/ 或 dpdgroup.com/pt/ 链接也可以。
 
-Peek 直接读取 DPD 葡萄牙语查件页，因此轨迹保留葡萄牙语原文。包裹到达 Pickup 自提点后，Peek 会展示该自提点名称。派送当天会显示随 `HORÁRIO DE ENTREGA ENVIADA AO DESTINATÁRIO` 发出的 1 小时派送时段，直到包裹签收、退回仓库或派送失败为止。DPD 自带地图与签收人姓名保留在 DPD 官网不予展示。当你打开包裹页面或在派送当天开启提醒时，Peek 最高每 10 分钟检查一次，进入派送中后每 2 分钟检查一次（需用浏览器打开查件页时每 5 分钟一次），支持设置“每次扫描”、“重要环节”或“仅派送当天”通知。高频检查在 DPD 扫描进入派送的当天自里斯本时间早上 6 点起启动（若已发送派送时段，则从窗口开启前半小时起），且仅在 DPD 官方系统响应时执行。连续两天无新动态（或在“已生成面单”、“已揽收”状态下满 12 小时），Peek 改为每小时检查一次。
+Peek 直接读取 DPD 葡萄牙语查件页，因此轨迹保留葡萄牙语原文。包裹到达 Pickup 自提点后，Peek 会展示该自提点名称。派送当天会显示随 `HORÁRIO DE ENTREGA ENVIADA AO DESTINATÁRIO` 发出的 1 小时派送时段，直到包裹签收、退回仓库或派送失败为止。DPD 自带地图与签收人姓名保留在 DPD 官网不予展示。当你打开包裹页面或在派送当天开启提醒时，Peek 最高每 10 分钟检查一次，进入派送中后每 2 分钟检查一次（需用浏览器打开查件页时每 5 分钟一次），可以设置“每次扫描”、“重要环节”或“仅派送当天”通知。高频检查在 DPD 扫描进入派送的当天自里斯本时间早上 6 点起启动（若已发送派送时段，则从窗口开启前半小时起），且仅在 DPD 自己的查件系统正常响应时执行。连续两天无新动态（或在“已生成面单”、“已揽收”状态下满 12 小时），Peek 改为每小时检查一次。
 
-当法国邮政（La Poste）轨迹标明由 DPD Portugal 派送并给出其单号时，只要 DPD 出现进展，Peek 就会无缝接续跟进。Chronopost 包裹同理：当 Chronopost 给出 DPD 单号且派送国为葡萄牙时，Peek 会标出 DPD Portugal 为末端派送方及其单号，并在 DPD 出现不早于 Chronopost 最新扫描的记录后切换至 DPD Portugal。Peek 无法代你改派或申请理赔。
+当法国邮政（La Poste）轨迹标明由 DPD Portugal 派送并给出其单号时，Peek 可以在 DPD 出现进展后接着在那里跟踪。Chronopost 包裹同理：当 Chronopost 给出 DPD 单号且派送国为葡萄牙时，Peek 会标出 DPD Portugal 为末端派送方及其单号，并在 DPD 出现不早于 Chronopost 最新扫描的记录后切换至 DPD Portugal。Peek 无法代你改派或申请理赔。
 
 ## DPD Portugal 查询常见问题
 
@@ -113,7 +113,7 @@ DPD 官网表示，揽收后葡萄牙本土次个工作日送达，马德拉与�
 
 ### DPD 派送到马德拉和亚速尔群岛吗？
 
-派送。DPD Portugal 支持将包裹送货上门或送至岛上的 Pickup 自提点，时效为 2 至 5 天。
+派送。DPD Portugal 会把包裹送货上门或送到岛上的 Pickup 自提点，时效为 2 至 5 天。
 
 :::sources
 - [DPD Portugal: Track & Trace](https://tracking.dpd.pt/track-and-trace) – 查件页、英法语切换、未找到提示与状态词
@@ -129,7 +129,7 @@ DPD 官网表示，揽收后葡萄牙本土次个工作日送达，马德拉与�
 - [DPD Portugal: Com quanto tempo de antecedência devo alterar o dia de entrega?](https://www.dpd.com/pt/pt/faq/com-quanto-tempo-de-antecedencia-devo-alterar-o-dia-de-entrega-para-que-a-encomenda-nao-seja-entregu/) – 提前一天改派说明
 - [DPD Portugal: O que acontece se o destinatário não estiver em casa?](https://www.dpd.com/pt/pt/faq/o-que-acontece-se-o-destinatario-nao-estiver-em-casa/) – 通知卡与 dpd.pt 改投
 - [DPD Portugal: Se necessário, posso alterar a entrega?](https://www.dpd.com/pt/pt/faq/se-necessario-posso-alterar-a-entrega/) – 以最后一次修改为准
-- [DPD Portugal: Posso levantar a minha encomenda no centro de distribuição também?](https://www.dpd.com/pt/pt/faq/posso-levantar-a-minha-encomenda-no-centro-de-distribuicao-tambem/) – 分拨中心不支持自提
+- [DPD Portugal: Posso levantar a minha encomenda no centro de distribuição também?](https://www.dpd.com/pt/pt/faq/posso-levantar-a-minha-encomenda-no-centro-de-distribuicao-tambem/) – 分拨中心不提供自提
 - [DPD Portugal: Pontos Pickup](https://www.dpd.com/pt/pt/pickup-parcelshops/) – 约 2,300 个自提点与快递柜、短信邮件通知
 - [DPD Portugal: How long will my parcel be stored at the Pickup parcelshop?](https://www.dpd.com/pt/en/faq/how-long-will-my-parcel-be-stored-at-the-pickup-parcelshop/) – 10 个工作日与快递柜 72 小时
 - [DPD Portugal: Por quanto tempo a minha encomenda ficará armazenada no ponto Pickup?](https://www.dpd.com/pt/pt/faq/por-quanto-tempo-a-minha-encomenda-ficara-armazenada-no-ponto-pickup/) – 7 个工作日、可调整与快递柜 72 小时
@@ -145,4 +145,5 @@ DPD 官网表示，揽收后葡萄牙本土次个工作日送达，马德拉与�
 - [DPD Portugal: Contact](https://www.dpd.com/pt/en/support/contact/) – 英文联系页相同电话与时间
 - [DPD Portugal: Aviso legal](https://www.dpd.com/pt/pt/aviso-legal-e-copyright/) – 境外拨号
 - [DPD Portugal: Ajuda](https://www.dpd.com/pt/pt/ajuda/) – 防钓鱼警示、伪造发件人与货到付款
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取和显示的信息
 :::

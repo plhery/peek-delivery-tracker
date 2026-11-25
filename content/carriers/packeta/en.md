@@ -14,10 +14,10 @@ Packeta's tracking page accepts one shape: `Z` followed by 10 digits.
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `Z1234567890` | A Packeta tracking number. |
-| `1234567890` | The ten digits without the `Z`: the shape also fits [DHL](carrier:dhl-express), Relais Colis and others, so add the `Z`. |
-| `Z123456789` | Nine digits: not Packeta ([Australia Post](carrier:australia-post)'s shape). |
-| `Z12345678901` | Eleven digits: not Packeta (Colis Privé's shape). |
+| `Z4829173640` | A Packeta tracking number. |
+| `4829173640` | The ten digits without the `Z`: the shape also fits [DHL](carrier:dhl-express), Relais Colis and others, so add the `Z`. |
+| `Z482917364` | Nine digits: not Packeta ([Australia Post](carrier:australia-post)'s shape). |
+| `Z48291736401` | Eleven digits: not Packeta (Colis Privé's shape). |
 
 The **pick-up code** is different: Packeta sends it by SMS and email once the parcel reaches your point, and you need it to pick the parcel up, not to track it. No `Z` number in the shop's email? Ask the shop. More in [how to find a tracking number](guide:find-tracking-number).
 
@@ -68,7 +68,7 @@ Packeta says you have 7 days to pick a parcel up, with the code from the SMS or 
 
 ## Packeta customer service and contact numbers
 
-As read on 11 October 2026:
+As Packeta's sites list them:
 
 - **Czechia (Zásilkovna):** +420 216 216 516, Monday to Friday 8:00 to 18:00. Out of hours its assistant ZET answers, 24/7. Contact form too.
 - **Poland:** +48 334 457 020, Monday to Friday 8:00 to 17:00, and forms on [packeta.pl](https://www.packeta.pl/kontakt).

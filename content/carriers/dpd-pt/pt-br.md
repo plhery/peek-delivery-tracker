@@ -45,7 +45,7 @@ O rastreador abre em português, com versões em inglês e francês. O Peek exib
 | `DEVOLUÇÃO AO EXPEDIDOR` | Devolução ao remetente acionada. |
 | `PROVA DE ENTREGA` | Comprovante de entrega: entregue. |
 
-`PEDIDO DE NOVA ENTREGA` e `PEDIDO DE ALTERAÇÃO DE MORADA` apenas registram solicitação de novo dia ou endereço. `MORADA CORRIGIDA PELO EXPEDIDOR` significa que a loja ajustou o endereço após tentativa falha. `RETORNO ARMAZÉM (PÁRA AEP)` após ausência indica retorno ao armazém, não devolução à loja. Já `PROVA DE ENTREGA` depois de `DEVOLUÇÃO AO EXPEDIDOR` marca a devolução concluída na loja.
+`PEDIDO DE NOVA ENTREGA` e `PEDIDO DE ALTERAÇÃO DE MORADA` apenas registram solicitação de novo dia ou endereço. `MORADA CORRIGIDA PELO EXPEDIDOR` significa que a loja ajustou o endereço após uma entrega não realizada. `RETORNO ARMAZÉM (PÁRA AEP)` após ausência indica retorno ao armazém, não devolução à loja. Já `PROVA DE ENTREGA` depois de `DEVOLUÇÃO AO EXPEDIDOR` marca a devolução concluída na loja.
 
 ## Entrega DPD em Portugal: Predict, pontos e lockers Pickup
 
@@ -63,13 +63,13 @@ O rastreador abre em português, com versões em inglês e francês. O Peek exib
 
 **Retirada por terceiros.** Leve documento de identidade e autorização preenchida pelo destinatário.
 
-## Encomenda atrasada, extraviada, avariada ou devolvida na DPD Portugal
+## Encomenda atrasada, extraviada, danificada ou devolvida na DPD Portugal
 
 **Parada.** Se o status não mudar por muito tempo ou perder o horário informado, a DPD pede contato. No dia da entrega, uma pausa pode ser apenas perda de GPS ou parada prolongada; após várias horas, fale com o atendimento informando o código. Veja também [rastreamento que não atualiza](guide:tracking-not-updating).
 
 **Entregue, mas não chegou.** A DPD orienta usar o formulário de contato; consulte [encomenda entregue mas não recebida](guide:delivered-not-received).
 
-**Avaria ou extravio.** Na entrega, anote ressalvas precisas, datadas e assinadas na guia do motorista; assinar sem ressalvas presume recebimento intacto. Avaria deve ser reclamada por escrito em até **7 dias** da entrega real ou prevista; extravio ou atraso em até **30 dias** da expedição, com guia e fatura. Como o contrato é com o remetente, peça à loja para reclamar; em Portugal, a indenização máxima é de €10 por kg e €300 por volume. Veja mais em [encomenda avariada](guide:damaged-parcel) e [encomenda extraviada](guide:lost-parcel).
+**Dano ou extravio.** Na entrega, anote ressalvas precisas, datadas e assinadas na guia do motorista; assinar sem ressalvas presume recebimento intacto. O dano deve ser reclamado por escrito em até **7 dias** da entrega real ou prevista; extravio ou atraso em até **30 dias** da expedição, com guia e fatura. Como o contrato é com o remetente, peça à loja para reclamar; em Portugal, a indenização máxima é de €10 por kg e €300 por volume. Veja mais em [encomenda danificada](guide:damaged-parcel) e [encomenda extraviada](guide:lost-parcel).
 
 **Devolvida.** Após `DATA DE PERMANÊNCIA EM LOJA EXPIRADA` ou `DEVOLUÇÃO AO EXPEDIDOR`, o volume volta à loja; solicite reenvio ou reembolso ([devolvida ao remetente](guide:returned-to-sender)).
 
@@ -91,9 +91,9 @@ Nem a página em português nem a em inglês informam quais idiomas a linha tele
 
 ## Como rastrear uma encomenda da DPD Portugal no Peek
 
-Para 14 dígitos começando de 0955 a 0988, com ou sem caractere verificador, o [Peek](/) consulta as transportadoras prováveis com a DPD Portugal primeiro e mostra "DPD Portugal está com esta encomenda" quando ela confirma. Para qualquer outro código DPD, cole-o assim mesmo: o Peek acompanha mais de 4.500 transportadoras. Se DPD Portugal não aparecer, escolha-a em "Trocar", ou em "Trocar transportadora" na tela do pacote. Links de tracking.dpd.pt/track-and-trace com `reference=` e de dpd.com/pt/ ou dpdgroup.com/pt/ com `parcelNumber=` também funcionam.
+Para 14 dígitos começando de 0955 a 0988, com ou sem caractere verificador, o [Peek](/) consulta as transportadoras prováveis com a DPD Portugal primeiro e mostra "DPD Portugal está com esta encomenda." quando a DPD conhece o código. Para qualquer outro código DPD, cole-o assim mesmo: o Peek acompanha mais de 4.500 transportadoras. Se DPD Portugal não aparecer, escolha-a em "Trocar", ou em "Trocar transportadora" na tela do pacote. Links de tracking.dpd.pt/track-and-trace com `reference=` e de dpd.com/pt/ ou dpdgroup.com/pt/ com `parcelNumber=` também funcionam.
 
-O Peek lê o rastreamento português da DPD, mantendo os textos originais em português. Assim que um ponto Pickup recebe o pacote, o Peek exibe o nome dele. No dia da entrega, mostra a janela recebida em `HORÁRIO DE ENTREGA ENVIADA AO DESTINATÁRIO` até a entrega, retorno ao depósito ou tentativa falha. O mapa da DPD e o nome de quem assinou ficam apenas no site oficial. Enquanto o pacote está aberto no Peek, ou no dia da entrega com alertas ligados, a verificação ocorre até a cada 10 minutos, ou a cada 2 minutos quando sai para entrega (a cada 5 quando precisa abrir o site da DPD no navegador), com alertas em "Cada movimentação", "Etapas importantes" ou "Só a entrega". As checagens rápidas valem no dia em que a DPD registra saída para entrega, a partir das 6h de Lisboa (ou meia hora antes da janela enviada), apenas enquanto o rastreador oficial responde. Após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora.
+O Peek lê o rastreamento português da DPD, mantendo os textos originais em português. Assim que um ponto Pickup recebe o pacote, o Peek exibe o nome dele. No dia da entrega, mostra a janela recebida em `HORÁRIO DE ENTREGA ENVIADA AO DESTINATÁRIO` até a entrega, retorno ao depósito ou entrega não realizada. O mapa da DPD e o nome de quem assinou ficam no site da DPD. Enquanto o pacote está aberto no Peek, ou no dia da entrega com alertas ligados, a verificação ocorre até a cada 10 minutos, ou a cada 2 minutos quando sai para entrega (a cada 5 quando precisa abrir o site da DPD no navegador), com alertas em "Cada movimentação", "Etapas importantes" ou "Só a entrega". As checagens rápidas valem no dia em que a DPD registra saída para entrega, a partir das 6h de Lisboa (ou meia hora antes da janela enviada), apenas enquanto o rastreador da própria DPD responde. Após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora.
 
 Quando o rastreamento da La Poste indica DPD Portugal com seu código, o Peek segue a encomenda ali assim que a DPD registra progresso. O mesmo ocorre com a Chronopost: informando código DPD e entrega em Portugal, o Peek identifica DPD Portugal como entregadora e alterna para ela quando há leitura tão recente quanto a última da Chronopost. O Peek não altera entregas nem abre reclamações por você.
 
@@ -145,4 +145,5 @@ Sim. A DPD Portugal entrega nas ilhas, em domicílio ou em ponto Pickup, em 2 a 
 - [DPD Portugal: Contact](https://www.dpd.com/pt/en/support/contact/) – mesma linha e horários em inglês
 - [DPD Portugal: Aviso legal](https://www.dpd.com/pt/pt/aviso-legal-e-copyright/) – telefone do exterior
 - [DPD Portugal: Ajuda](https://www.dpd.com/pt/pt/ajuda/) – alerta de phishing, remetente falso e pagamento na entrega
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra
 :::

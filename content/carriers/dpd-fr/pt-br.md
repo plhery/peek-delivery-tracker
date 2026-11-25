@@ -1,6 +1,6 @@
 ---
 title: Rastreamento DPD France: códigos, status e pontos Pickup
-description: Rastreie encomendas da DPD France: onde achar o código, status em francês traduzidos, Predict, pontos e lockers Pickup, reentrega, reclamações e contato.
+description: Rastreie encomendas da DPD France: onde achar o código, status em francês traduzidos, Predict, pontos e lockers Pickup, entrega não realizada, reclamações e contato.
 slug: rastreamento-dpd-france
 published: 2026-11-24
 updated: 2026-11-24
@@ -41,7 +41,7 @@ Estes são os textos em francês da DPD, exibidos no Peek. O site trace.dpd.fr t
 | `Colis livré` | Entregue no endereço ou retirada no ponto Pickup. |
 | `Colis en retour vers l'adresse d'expédition, en attente de livraison chez l'expéditeur` | Em devolução ao remetente. |
 
-Antes de a encomenda ser entregue à DPD, apenas o remetente pode responder a dúvidas. `Colis en agence DPD France` pode se repetir enquanto o pacote permanece na base. Já `Numéro de colis inconnu` costuma indicar que a DPD ainda não recebeu o volume: aguarde algumas horas e confira o código.
+Segundo a DPD, antes de a encomenda ser entregue, apenas o remetente pode responder a dúvidas. `Colis en agence DPD France` pode se repetir enquanto o pacote permanece na base. Já `Numéro de colis inconnu` costuma indicar que a DPD ainda não recebeu o volume: aguarde algumas horas e confira o código.
 
 ## Encomenda não entregue na DPD: Predict, pontos e lockers Pickup
 
@@ -49,9 +49,9 @@ A DPD France faz entregas de segunda a sexta, das 8h às 18h (horário da Franç
 
 **Predict.** Quando contratado pelo remetente, você recebe SMS e e-mail com o dia previsto e, no dia da entrega, uma janela de 3 horas. Pelo link ou pelo app myDPD, dá para escolher outro dia ou endereço, um ponto Pickup, a agência, um vizinho ou local seguro (conforme autorizado pelo remetente) até as 23h do horário francês no dia da mensagem.
 
-**Tentativa sem sucesso.** O entregador deixa um aviso na caixa de correio para reagendar online. Com o Predict, o pacote pode ir diretamente a um ponto Pickup próximo. A DPD France não fixa um número de tentativas: seus termos dizem que a entrega ocorre novamente no dia seguinte ou na data informada por você ou pelo remetente.
+**Tentativa sem sucesso.** O entregador deixa um aviso na caixa de correio para reagendar online. Com o Predict, o pacote pode ir para um ponto Pickup próximo em vez disso. A DPD France não fixa um número de tentativas: seus termos dizem que a entrega ocorre novamente no dia seguinte ou na data informada por você ou pelo remetente.
 
-**Pontos Pickup** guardam a encomenda por 9 dias corridos. Leve documento de identidade: a DPD informa que o QR code Pickup Pass ou o código do pacote sozinho não basta. Terceiros precisam de procuração, do seu documento e do documento próprio.
+**Pontos Pickup** guardam a encomenda por 9 dias corridos. Leve documento de identidade: a DPD informa que o QR code Pickup Pass ou o código do pacote sozinho não basta. Outra pessoa precisa de procuração, do seu documento e do documento dela.
 
 **Lockers Pickup**, em sua maioria abertos 24 horas, aceitam pacotes de até 20 kg; abra usando o código ou QR code enviado pela DPD. O prazo de retirada é de 5 dias corridos.
 
@@ -79,13 +79,13 @@ Esses canais atendem encomendas da rede DPD France; a empresa não divulga telef
 
 ## Como rastrear encomendas da DPD France no Peek
 
-O [Peek](/) identifica imediatamente o código de 15 dígitos começando com 250. Os outros formatos são compartilhados com outras transportadoras. Para códigos de 14 dígitos iniciados em 0 ou de 11 a 19, como `14829173640582`, o Peek pergunta à DPD France se ela reconhece o número; usando a caixa desta página, consulta a DPD France primeiro. Para 14 dígitos começando em 10 e para o formato de etiqueta de 16 dígitos, o Peek consulta antes as transportadoras de resposta rápida que usam o padrão (SEUR, BRT e Ciblex em 14 dígitos) e depois os serviços de rastreamento; se nenhuma encontrar, abre o rastreador da DPD France no navegador (o que pode levar até 20 segundos a mais) e seleciona a DPD France quando há movimentações datadas recentes. Fora do Brasil, a Jadlog — que usa 14 dígitos no país — entra por último, só se a DPD France também não encontrar. O Peek não consulta automaticamente a DPD France para o formato de 12 dígitos: toque em "Trocar" e escolha DPD France, ou use "Trocar transportadora" numa encomenda já adicionada. Links de trace.dpd.fr funcionam (`/fr/trace/` e `/trace-particuliers/`). Outros links, como `/en/trace/` ou de www.dpd.fr, só funcionam se trouxerem o código de 15 dígitos começando em `250`; links de dpd.com ou dpdgroup.com com `parcelNumber=` abrem como DPD France quando o caminho começa em `/fr/` e como DPD Switzerland quando começa em `/ch/`.
+O [Peek](/) identifica imediatamente o código de 15 dígitos começando com 250. Os outros formatos são compartilhados com outras transportadoras. Para códigos de 14 dígitos iniciados em 0 ou de 11 a 19, como `14829173640582`, o Peek pergunta à DPD France se ela reconhece o número; usando a caixa desta página, consulta a DPD France primeiro. Para 14 dígitos começando em 10 e para o formato de etiqueta de 16 dígitos, o Peek consulta antes as transportadoras de resposta rápida que usam o padrão (SEUR, BRT e Ciblex em 14 dígitos) e depois os serviços de rastreamento; se nenhuma encontrar, abre o rastreador da DPD France no navegador (o que pode levar até 20 segundos a mais) e seleciona a DPD France quando há movimentações datadas recentes. Fora do Brasil, a Jadlog — que usa 14 dígitos no país — entra por último, só se a DPD France também não encontrar. O Peek não consegue consultar a DPD France para o formato de 12 dígitos: toque em "Trocar" e escolha DPD France, ou use "Trocar transportadora" numa encomenda já adicionada. Links de trace.dpd.fr funcionam (`/fr/trace/` e `/trace-particuliers/`). Outros links, como `/en/trace/` ou de www.dpd.fr, só funcionam se trouxerem o código de 15 dígitos começando em `250`; links de dpd.com ou dpdgroup.com com `parcelNumber=` abrem como DPD France quando o caminho começa em `/fr/` e como DPD Switzerland quando começa em `/ch/`.
 
-O Peek exibe o status, o histórico com cada base das movimentações, o dia previsto, o peso e a hora da entrega, além de marcar a base entregadora no mapa. Os status permanecem em francês; os horários são lidos no fuso de Paris e mostrados no fuso do seu dispositivo. O Peek omite nome e endereço do destinatário, assinatura e referência do cliente, e não mostra nome nem endereço do ponto Pickup — apenas "Pronta para retirada". Se a DPD listar uma viagem de ida e outra de devolução, o Peek mantém a correspondente ao seu código e não acompanha outra transportadora.
+O Peek exibe o status, o histórico com cada base das movimentações, o dia previsto, o peso e a hora da entrega, além de marcar a base entregadora no mapa. Os status permanecem em francês; os horários são lidos no fuso de Paris e mostrados no fuso do seu dispositivo. O Peek omite nome e endereço do destinatário, assinatura e referência do cliente, e não mostra nome nem endereço do ponto Pickup — apenas "Pronta para retirada". Se a DPD listar uma viagem de ida e outra de devolução, o Peek mantém a correspondente ao seu código. O Peek não acompanha nenhuma outra transportadora.
 
 Enquanto você mantém a encomenda aberta no Peek, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos; no dia em que a DPD France registra saída para entrega, a partir das 6h no horário francês, a cada 2 minutos enquanto o rastreador oficial responde, ou a cada 5 minutos quando precisa abrir o rastreador no navegador. Fora disso, verifica de hora em hora. Após 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora", ou dois dias sem novidades, passa a consultar de hora em hora de qualquer forma, e a cada 6 horas depois de sete dias em "Etiqueta criada". Quando apenas os serviços de rastreamento respondem, o Peek verifica de hora em hora, a cada 3 horas após um dia sem nova movimentação e, no dia da saída para entrega, até a cada 15 minutos enquanto o pacote estiver aberto ou com alertas ligados.
 
-Quando a movimentação mais recente tem quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek destaca a data da última leitura, como "Sem atualizações desde seg., 12 de out.", exibindo "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando DPD France." com o link "Pedir ajuda a DPD France" para a página de suporte. Passadas três semanas sem nova movimentação, aparece "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando DPD France."
+Quando a movimentação mais recente tem quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek destaca a data da última leitura, como "Sem atualizações desde seg., 12 de out.", exibindo "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando DPD France." com o link "Pedir ajuda a DPD France" para a página de atendimento ao cliente da DPD France. Passadas três semanas sem nova movimentação, aparece "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando DPD France."
 
 Você pode receber alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega".
 
@@ -110,6 +110,7 @@ Sim: ligue para 09 70 80 85 66 no horário de funcionamento, ou use o formulári
 :::sources
 - [DPD France: Où puis-je trouver mon numéro de colis ?](https://www.dpd.com/fr/en/faq/ou-puis-je-trouver-mon-numero-de-colis/) – formatos de código e onde encontrar
 - [DPD France: Comment puis-je suivre la livraison de mon colis ?](https://www.dpd.com/fr/en/faq/comment-puis-je-suivre-la-livraison-de-mon-colis/) – número do aviso e código Predict
+- [DPD France: Suivre mon colis](https://trace.dpd.fr/fr/trace) – versões em francês e inglês, 25 códigos, sem código postal, ajuda sobre os status, sábados
 - [DPD France: Suivi colis DPD](https://www.dpd.com/fr/fr/recevoir-des-colis/) – o que o rastreamento mostra
 - [DPD France: Pourquoi mon suivi colis indique-t-il « numéro de colis inconnu » ?](https://www.dpd.com/fr/fr/faq/pourquoi-mon-suivi-colis-indique-t-il-numero-de-colis-inconnu/) – código desconhecido e Chronopost
 - [DPD France: Quand mon colis sera-t-il livré ?](https://www.dpd.com/fr/en/faq/quand-mon-colis-sera-t-il-livre-2/) – horários, prazo de 24 a 48h e janela de 3 horas
@@ -133,4 +134,5 @@ Sim: ligue para 09 70 80 85 66 no horário de funcionamento, ou use o formulári
 - [DPD France: Alerte aux fraudes](https://www.dpd.com/fr/fr/alerte-aux-fraudes/) – SMS falsos e 33700
 - [DPD France: Scam alert](https://www.dpd.com/fr/en/scam-alert/) – número do exterior
 - [DPD France: About DPD France](https://www.dpd.com/fr/en/about-dpd-france/) – Geopost, La Poste e Exapaq
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê
 :::

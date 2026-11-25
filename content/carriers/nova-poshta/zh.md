@@ -6,13 +6,13 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-Nova Poshta（英文官网品牌名为 “Nova Post”）是乌克兰知名的快递物流公司，在乌克兰全国提供营业网点、快递柜和送货上门服务，并在波兰及其他欧洲国家设有门店。你可以凭快递运单号（EW）在 [novaposhta.ua 英文查件页](https://novaposhta.ua/en/tracking/)、官方手机应用中查询，或直接粘贴到上方输入框。运单号印在面单顶部，也会出现在手机应用与到件通知里。
+Nova Poshta（英文官网品牌名为 “Nova Post”）是乌克兰的快递公司，在乌克兰全国提供营业网点、快递柜和送货上门服务，并在波兰及其他欧洲国家设有门店。你可以凭快递运单号（EW）在 [novaposhta.ua 英文查件页](https://novaposhta.ua/en/tracking/)、官方手机应用中查询，或直接粘贴到上方输入框。运单号印在面单顶部，也会出现在手机应用与到件通知里。
 
 ## Nova Poshta 运单号：EW 编号格式
 
 Nova Poshta 将运单号称为快递运单（Express Waybill，简称 EW；乌克兰语为 ЕН 或 ТТН）。到件短信或应用推送通知会同时写明网点编号和 EW 单号。
 
-Nova Poshta 未公布官方编号规则，Peek 目录收录了以下常见格式（均为虚构示例）：
+Nova Poshta 未公布官方编号规则，Peek 目录收录了以下格式（均为虚构示例）：
 
 | 单号示例（虚构） | 说明 |
 | --- | --- |
@@ -31,7 +31,7 @@ Nova Poshta 未公布官方编号规则，Peek 目录收录了以下常见格式
 
 ## Nova Poshta 英文物流状态中文解读
 
-novaposhta.ua 支持乌克兰语和英语查询，最新动态排在最前，每条记录均附日期、时间和城市。文案里的数字代表具体网点编号：
+novaposhta.ua 提供乌克兰语和英语版本，最新动态排在最前，每条记录均附日期、时间和城市。文案里的数字代表具体网点编号：
 
 | Nova Poshta 状态原文 | 中文含义 |
 | --- | --- |
@@ -55,11 +55,11 @@ novaposhta.ua 支持乌克兰语和英语查询，最新动态排在最前，每
 
 **快递柜：** 限重 20 公斤，开启手机蓝牙和定位后在应用里点击 “Open the locker” 开柜，保管期 **5 天**，逾期将移至附近网点。位于商店、药店和加油站的合作自提点同样保管最多 5 天，逾期转存最近网点。
 
-**送货上门：** 30 公斤以内包裹加收 60 ₴，工作日派送时段为 9:00 至 21:00，周末按特别时段安排。如果错过派送，可重新预约时间或改存最近网点；多次未妥投后也会自动转存网点。
+**送货上门：** 30 公斤以内包裹加收 60 ₴，工作日派送时段为 9:00 至 21:00，周末按特别时段安排。如果派送时你不在，可重新预约时间或改存最近网点；多次派送未成功后，包裹也会转存网点。
 
 **中途转寄：** 包裹尚未抵达原目的网点前，转寄至另一网点免费（转寄至收件地址收 60 ₴）；到达原目的网点后再转寄则按新寄件收费。
 
-**波兰境内：** Nova Post 支持派送至自有门店、InPost Paczkomat 快递柜、合作自提点或送货上门，开柜码通过短信和邮件发送。包裹在 Paczkomat 快递柜保管 **2 个自然日**，逾期后 Nova Post 会转存至旗下门店并通知你；领取此类转存件请拨打 +48 573 504 069。
+**波兰境内：** Nova Post 可派送至自有门店、InPost Paczkomat 快递柜、合作自提点或送货上门，开柜码通过短信和邮件发送。包裹在 Paczkomat 快递柜保管 **2 个自然日**，逾期后 Nova Post 会转存至旗下门店并通知你；领取此类转存件请拨打 +48 573 504 069。
 
 ## 包裹延误、丢失、清关与破损怎么办？
 
@@ -84,9 +84,9 @@ Nova Poshta 与 Nova Post 波兰官网公布的联系渠道：
 
 ## 用 Peek 查询和跟踪 Nova Poshta 包裹
 
-由于多家快递共用 14 位数字格式，[Peek](/) 不会仅凭数字就盲目断定为 Nova Poshta，而是同时询问可能匹配的快递公司：如果你从乌克兰或摩尔多瓦查询，或单号以 `595000` 开头，会优先询问 Nova Poshta；其他情况下则会询问同格式的其他承运商而不会自动问 Nova Poshta。对于 `SH` 或 `TN` 开头的国际单号，Peek 只询问 Nova Poshta。若 Nova Poshta 确认有记录，界面显示“Nova Poshta (Ukraine) 有这个包裹的记录”；如果没出现，请点“更换”手动选择 “Nova Poshta (Ukraine)”。支持直接粘贴 novaposhta.ua 或 novapost.com 查件链接。Peek 覆盖乌克兰运单（含在境外 Nova Post 门店交寄的运单）以及 Nova Post 的 `SH`、`TN` 国际单号，不支持 Nova Poshta Global 参考号。
+由于多家快递共用 14 位数字格式，[Peek](/) 从不只凭数字认定是 Nova Poshta，而是询问使用这些格式的快递公司：如果你从乌克兰或摩尔多瓦查询，或单号以 `595000` 开头，会优先询问 Nova Poshta；其他情况下询问同格式的其他承运商，不询问 Nova Poshta。对于 `SH` 或 `TN` 开头的国际单号，Peek 只询问 Nova Poshta。若 Nova Poshta 有记录，界面显示“Nova Poshta (Ukraine) 有这个包裹的记录。”如果没出现，请点“更换”手动选择 “Nova Poshta (Ukraine)”。直接粘贴 novaposhta.ua 或 novapost.com 查件链接也可以。Peek 覆盖乌克兰运单（含在境外 Nova Post 门店交寄的运单）以及 Nova Post 的 `SH`、`TN` 国际单号，不包括 Nova Poshta Global 参考号。
 
-Peek 展示 Nova Poshta 的英文原文轨迹、带扫描城市的地图、预计到达时间、重量、当前存放的网点或快递柜以及签收时间，同时隐去姓名、地址和付款金额。当出口件指明境外合作承运商为 [UPS](carrier:ups) 或 [GOFO Express](carrier:gofo) 时，Peek 会自动衔接追踪。当你打开包裹页面或在派送当天开启提醒，且 Nova Poshta 官方查询响应时，Peek 最高每 10 分钟检查一次，在包裹进入派送当天自基辅时间早上 6 点起最高每 2 分钟检查一次；其余情况每小时一次。若仅通过综合跟踪服务获取更新，则每小时检查一次，满一天无新动态后每 3 小时一次，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次。状态变动时可推送提醒。一旦转由其他承运商接手派送，Peek 改按该承运商的节奏检查。连续两天无新动态（或在“已生成面单”、“已揽收”状态下满 12 小时），Peek 改为每小时检查一次。
+Peek 展示 Nova Poshta 的英文原文轨迹、带扫描城市的地图、预计到达时间、重量、当前存放的网点或快递柜以及签收时间，同时隐去姓名、地址和付款金额。当出口件指明境外合作承运商为 [UPS](carrier:ups) 或 [GOFO Express](carrier:gofo) 时，Peek 可以接着在那里跟踪。当你打开包裹页面或在派送当天开启提醒时，Peek 最高每 10 分钟检查一次；在 Nova Poshta 扫描包裹进入派送的当天，只要 Nova Poshta 自己的查询系统正常响应，自基辅时间早上 6 点起最高每 2 分钟检查一次；其余情况每小时一次。通过物流查询服务时，每小时检查一次，满一天无新动态后每 3 小时一次，派送当天在打开页面或开启提醒时最高每 15 分钟检查一次。状态变动时可推送提醒。一旦转由其他承运商接手派送，Peek 改按该承运商的节奏检查。连续两天无新动态（或在“已生成面单”、“已揽收”状态下满 12 小时），Peek 改为每小时检查一次。
 
 ## Nova Poshta 查询常见问题
 
@@ -126,4 +126,5 @@ Peek 展示 Nova Poshta 的英文原文轨迹、带扫描城市的地图、预�
 - [Nova Post Poland: Odbiór w urządzeniach Paczkomat](https://novapost.com/pl-pl/receive/at-parcel-locker/) – 2 天保管与客服电话
 - [Nova Post Poland: Regulamin](https://novapost.com/pl-pl/more/offer/) – Paczkomat 2 天保管与波兰索赔时限
 - [Nova Post Poland: O firmie](https://novapost.com/pl-pl/more/about) – 成立年份、NOVA 集团与业务规模
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取和显示的信息
 :::

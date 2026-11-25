@@ -65,13 +65,13 @@ Após o desembaraço aduaneiro de importação, a 17FEIA repassa o volume à tra
 
 ## Encomenda da 17FEIA parada, extraviada ou devolvida
 
-A 17FEIA presta serviço a quem contratou o frete: o vendedor ou seu redirecionador. Em caso de atraso, extravio, avaria ou devolução, fale com eles primeiro.
+A 17FEIA presta serviço a quem contratou o frete: o vendedor ou seu redirecionador. Em caso de atraso, extravio, dano ou devolução, fale com eles primeiro.
 
-**Código não encontrado.** Quando não conhece o número, o rastreador da 17FEIA não mostra histórico. O pacote fica em "Aguardando 17FEIA" e o Peek continua verificando. Se após dois dias nem a 17FEIA nem outro serviço responderem, o Peek avisa: "Depois de dois dias, a transportadora ainda não reconhece este código. Confira o código, escolha outra transportadora ou exclua a encomenda." Conferir o formato na mensagem de envio: `FEI`, duas letras, dez dígitos e `YQ`.
+**Código não encontrado.** Quando não conhece o número, o rastreador da 17FEIA não mostra histórico. O pacote fica em "Aguardando 17FEIA" e o Peek continua verificando. Se após dois dias nem a 17FEIA nem outro serviço responderem, o Peek avisa: "Depois de dois dias, a transportadora ainda não reconhece este código. Confira o código, escolha outra transportadora ou exclua a encomenda." Confira o formato na mensagem de envio: `FEI`, duas letras, dez dígitos e `YQ`.
 
 **Parado em `The order has information pending customer confirmation.`** Se você usou um redirecionador, confira sua conta ou mensagens por lá; caso contrário, fale com o vendedor.
 
-**Pausa após o voo.** Depois de `Flight has departed.`, podem passar vários dias sem novidade. Após quatro dias sem nova leitura, o Peek marca a data da última linha ("Sem atualizações desde seg., 12 de out."). Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating) e [como rastrear encomendas da China](guide:tracking-from-china).
+**Pausa após o voo.** Depois de `Flight has departed.`, podem passar vários dias sem novidade. Após quatro dias sem nova leitura, o Peek marca a data da última linha ("Sem atualizações desde seg 12 out"). Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating) e [como rastrear encomendas da China](guide:tracking-from-china).
 
 **Entregue, mas não chegou.** Verifique ao redor do endereço e pergunte aos vizinhos, depois contate a transportadora entregadora e o vendedor. Veja [encomenda entregue mas não recebida](guide:delivered-not-received).
 
@@ -91,7 +91,7 @@ O Peek exibe o status, cada linha no inglês da 17FEIA com o local quando inform
 
 Quando a 17FEIA indica DPD Germany, DHL ou FedEx com código compatível, o cartão exibe isso ("Entrega por DPD Germany", por exemplo) e lista o novo código após o da 17FEIA (ou "Anunciada a …, ainda não recebida" enquanto o parceiro só recebeu o aviso). Assim que esse parceiro mostra leitura tão recente quanto ou mais nova que a última da 17FEIA, o Peek segue a encomenda ali mantendo o histórico da 17FEIA. Se o site da 17FEIA estiver indisponível, o Peek consulta serviços de rastreamento e mostra o histórico no texto deles.
 
-Enquanto o pacote está aberto no Peek, ou no dia da entrega com alertas ligados, verifica até a cada 10 minutos, e até a cada 2 minutos a partir das 6h no horário local no dia da saída para entrega, enquanto o rastreador oficial responde (pelos serviços de rastreamento, até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados); fora disso, de hora em hora. Após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Você pode escolher alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega" ("Etapas importantes" inclui a alfândega no porto de desembaraço, não a declaração de exportação na China). O Peek não pode falar com a 17FEIA, o vendedor nem o redirecionador por você.
+Enquanto o pacote está aberto no Peek, ou no dia da entrega com alertas ligados, verifica até a cada 10 minutos, e até a cada 2 minutos a partir das 6h no horário local no dia da saída para entrega, enquanto o rastreador da própria 17FEIA responde (pelos serviços de rastreamento, até a cada 15 minutos nesse dia); fora disso, de hora em hora. Após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Você pode escolher alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega" ("Etapas importantes" inclui a alfândega no porto de desembaraço, não a declaração de exportação na China). O Peek não pode falar com a 17FEIA, o vendedor nem o redirecionador por você.
 
 ## Perguntas frequentes sobre rastreamento 17FEIA
 
@@ -101,7 +101,7 @@ Enquanto o pacote está aberto no Peek, ou no dia da entrega com alertas ligados
 
 ### Onde rastrear um código FEI…YQ?
 
-Na caixa acima ou no rastreador oficial da 17FEIA em www.17feia.com. Digite o código completo: `FEI`, duas letras, dez dígitos e `YQ`.
+Na caixa acima ou no rastreador da própria 17FEIA em www.17feia.com. Digite o código completo: `FEI`, duas letras, dez dígitos e `YQ`.
 
 ### O que significa "Awaiting carrie scan" na 17FEIA?
 
@@ -114,4 +114,5 @@ A transportadora para a qual a 17FEIA transfere o pacote após a alfândega de i
 :::sources
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – direito aduaneiro de €3 por item até €150 desde 1º de julho de 2026 e taxa de manuseio da União de €2 desde 1º de novembro de 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 por item qualquer que seja o valor e definição de item
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra
 :::

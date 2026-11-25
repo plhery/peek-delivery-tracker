@@ -17,7 +17,7 @@ Todo código SpeedPAK lido no rastreador da Orange Connex tem 28 letras e dígit
 | `ES4829173640582917364058290N` | `ES` e 26 letras e dígitos: SpeedPAK. |
 | `EE4829173640582917364058295X` | `EE` e 26 letras e dígitos: também SpeedPAK. |
 | `EX4829173640582917364058291A` | `EX` e 26 letras e dígitos: SpeedPAK. Nos registros observados até hoje, a [DHL Express](carrier:dhl-express) fez todo o transporte. |
-| `EE482917367CN` | Duas letras, nove dígitos e duas letras: código postal internacional, não SpeedPAK. |
+| `EE482917367CN` | Duas letras, nove dígitos e duas letras: número postal internacional, não SpeedPAK. |
 
 As páginas do eBay para vendedores citam ainda códigos SpeedPAK começando com `EM`, que o Peek não rastreia como SpeedPAK.
 
@@ -44,7 +44,7 @@ O rastreador da Orange Connex existe apenas em inglês ou chinês; se abrir em c
 
 Algumas frases mudam conforme a remessa: `Arrived at destination country` e `The consignment has arrived in the country of destination` equivalem a `Arrived at Destination Hub`. `Shipment Picked Up (A-SCAN)` é a primeira leitura física após a coleta.
 
-Uma linha como `LM Carrier: [transportadora] , LM tracking No.: [código]` indica a transferência: *LM* significa *last mile* (última milha) e informa quem entrega na sua porta junto ao código dela. Depois disso, o histórico repassa as leituras desse parceiro nas palavras dele, como `The item is received by PostNL`. Na rota internacional da PostNL, seguem-se as etapas do correio de destino em inglês: `Item is cleared by customs` (liberado pela alfândega) e `Arrival at Delivery Post Office` (na agência entregadora), ambas exibidas como "Em trânsito" no Peek, e após tentativa falha surge `The item is being held, addressee being notified`: aguarda naquela agência para retirada ("Pronta para retirada"). Algumas linhas aparecem em chinês mesmo na interface em inglês: `货物运输中` significa simplesmente "mercadoria em trânsito". `Delivered. (Recipient's front door)` indica onde o volume foi deixado.
+Uma linha como `LM Carrier: [transportadora] , LM tracking No.: [código]` indica a transferência: *LM* significa *last mile* (última milha) e informa quem entrega na sua porta junto ao código dela. Depois disso, o histórico repassa as leituras desse parceiro nas palavras dele, como `The item is received by PostNL`. Na rota internacional da PostNL, seguem-se as etapas do correio de destino em inglês: `Item is cleared by customs` (liberado pela alfândega) e `Arrival at Delivery Post Office` (na agência entregadora), ambas exibidas como "Em trânsito" no Peek, e após uma entrega não realizada surge `The item is being held, addressee being notified`: aguarda naquela agência para retirada ("Pronta para retirada"). Algumas linhas aparecem em chinês mesmo na interface em inglês: `货物运输中` significa simplesmente "mercadoria em trânsito". `Delivered. (Recipient's front door)` indica onde o volume foi deixado.
 
 O rastreamento pode ficar parado em `Arrived at Destination Hub` ou numa etapa aduaneira por vários dias até a transportadora local escanear o pacote. Entenda o trâmite em [encomendas retidas na alfândega](guide:customs).
 
@@ -80,7 +80,7 @@ Canais de suporte divulgados no site da Orange Connex:
 - **Horário:** segunda a sábado, das 9h às 18h (horário padrão da China); fechado aos domingos e feriados nacionais.
 - **E-mail:** CS@orangeconnex.com.
 
-O eBay publica o mesmo e-mail e horário (horário da China) numa página para vendedores. Uma vez informada a transportadora final, é o atendimento dela que resolve entregas falhas.
+O eBay publica o mesmo e-mail e horário (horário da China) numa página para vendedores. Uma vez informada a transportadora final, é o atendimento dela que resolve entregas não realizadas.
 
 ## Como rastrear uma encomenda SpeedPAK no Peek
 
@@ -88,9 +88,9 @@ O [Peek](/) reconhece códigos `ES`, `EE` ou `EX` de 28 caracteres na hora, pois
 
 Quando o SpeedPAK informa a transportadora entregadora, o Peek pode consultá-la e migrar para ela assim que surgir progresso mais recente. O pacote mantém o código original, a página indica "Entrega por" seguido da transportadora e lista o novo código com link para o site dela (enquanto o parceiro só tiver o aviso prévio sem leitura própria, exibe "Anunciada a …, ainda não recebida"). Isso depende do que o SpeedPAK publicar, não ocorrendo em todos os envios.
 
-Enquanto o pacote está aberto no Peek, ou no dia da entrega com alertas ligados, a verificação acontece até a cada 10 minutos; no dia da saída para entrega, a partir das 6h locais, a cada 2 minutos enquanto o rastreador oficial do SpeedPAK responde. Fora disso, de hora em hora. Após 12 horas apenas em "Etiqueta criada" ou "Recebida pela transportadora", ou dois dias sem novidades, verifica de hora em hora de qualquer modo, e a cada 6 horas depois de sete dias em "Etiqueta criada" (salvo se estiver aberto ou previsto para aquele dia). Quando só os serviços de rastreamento respondem, verifica de hora em hora, a cada 3 horas após um dia sem nova movimentação e, no dia da entrega, até a cada 15 minutos enquanto o pacote estiver aberto ou com alertas ligados. Quando outra transportadora assume, o Peek segue o ritmo dela.
+Enquanto o pacote está aberto no Peek, ou no dia da entrega com alertas ligados, a verificação acontece até a cada 10 minutos; no dia da saída para entrega, a partir das 6h locais, a cada 2 minutos enquanto o rastreador do próprio SpeedPAK responde. Fora disso, de hora em hora. Após 12 horas apenas em "Etiqueta criada" ou "Recebida pela transportadora", ou dois dias sem novidades, verifica de hora em hora de qualquer modo, e a cada 6 horas depois de sete dias em "Etiqueta criada" (salvo se estiver aberto ou previsto para aquele dia). Quando só os serviços de rastreamento respondem, verifica de hora em hora, a cada 3 horas após um dia sem nova movimentação e, no dia da entrega, até a cada 15 minutos enquanto o pacote estiver aberto ou com alertas ligados. Quando outra transportadora assume, o Peek segue o ritmo dela.
 
-**Dias sem nova leitura.** Quando a leitura mais recente completa quatro dias e a encomenda continua em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek destaca o dia da leitura, como "Sem atualizações desde seg., 12 de out.", com a mensagem "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando SpeedPAK." e o link "Pedir ajuda a SpeedPAK" apontando para a ajuda de item não recebido do eBay (ou para a transportadora final assim que ela assume). Após três semanas sem novidade, exibe "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando SpeedPAK."
+**Dias sem nova leitura.** Quando a leitura mais recente completa quatro dias e a encomenda continua em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek destaca o dia da leitura, como "Sem atualizações desde seg 12 out", com a mensagem "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando SpeedPAK." e o link "Pedir ajuda a SpeedPAK" apontando para a ajuda de item não recebido do eBay (ou para a transportadora final assim que ela assume). Após três semanas sem novidade, exibe "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando SpeedPAK."
 
 O Peek coloca cada leitura no mapa e oferece alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". Ele não fala com o SpeedPAK ou vendedor nem abre reclamações por você.
 
@@ -123,4 +123,5 @@ O site da Orange Connex oferece inglês ou chinês e abre em chinês a menos que
 - [eBay UK: International purchases and postage](https://www.ebay.co.uk/help/buying/postage-delivery/changing-delivery-address-method/international-purchases-postage-buy?id=4057) – SpeedPAK da Alemanha para EUA, Reino Unido e Austrália
 - [eBay UK: Tracking your item](https://www.ebay.co.uk/help/buying/postage-delivery/tracking-item?id=4027) – Histórico de compras, pedidos de convidado e código ausente
 - [eBay UK: Get help with an item that hasn't arrived](https://www.ebay.co.uk/help/buying/returns-refunds/get-help-item-hasnt-arrived?id=4042) – 30 dias, 3 e 21 dias úteis, reembolsos e vizinhos
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra
 :::

@@ -22,7 +22,7 @@ A Nova Poshta não divulga tamanho ou formato oficial. Os padrões conhecidos pe
 
 Códigos parecidos que pertencem a outras transportadoras:
 
-- **Terminando em `UA`**, como `RR482917367UA`: código postal internacional da Ukrposhta (correio estatal), não da Nova Poshta.
+- **Terminando em `UA`**, como `RR482917367UA`: número postal internacional da Ukrposhta (correio estatal), não da Nova Poshta.
 - **13 dígitos:** formato doméstico da Ukrposhta, não um EW.
 - **Terminando em `G`**, como `KL4829173MN48291G`: código da Meest.
 - **Outros códigos de 14 dígitos** podem ser DPD, SEUR, BRT e outras: confira qual transportadora o SMS ou e-mail menciona.
@@ -55,21 +55,21 @@ O site novaposhta.ua rastreia em ucraniano ou inglês, da leitura mais recente p
 
 **Lockers** aceitam até 20 kg. Abra o compartimento tocando em "Open the locker" no app, com Bluetooth e localização ligados, em até **5 dias**; depois disso, o volume segue para a agência mais próxima. Pontos de retirada em lojas, farmácias e postos também guardam até 5 dias antes de transferir à agência mais próxima.
 
-**Entrega em domicílio** acrescenta 60 ₴ para volumes de até 30 kg e ocorre das 9h às 21h em dias úteis (horário especial nos fins de semana). Não estava? Reagende ou redirecione para a agência mais próxima; após tentativas falhas o pacote vai para lá de qualquer modo.
+**Entrega em domicílio** acrescenta 60 ₴ para volumes de até 30 kg e ocorre das 9h às 21h em dias úteis (horário especial nos fins de semana). Não estava? Reagende ou redirecione para a agência mais próxima; após entregas não realizadas o pacote vai para lá de qualquer modo.
 
 **Redirecionamento** para outra agência é gratuito antes de chegar ao destino (60 ₴ para um endereço); depois disso custa como novo envio.
 
 **Na Polônia**, a Nova Post entrega em agência, locker InPost Paczkomat, ponto de retirada ou domicílio. O código de abertura chega por SMS e e-mail. O volume aguarda no Paczkomat por **2 dias corridos**, depois segue para uma agência Nova Post com aviso ao destinatário; para retirar um pacote transferido assim, ligue para +48 573 504 069.
 
-## Encomenda atrasada, extraviada ou avariada na Nova Poshta
+## Encomenda atrasada, extraviada ou danificada na Nova Poshta
 
 As páginas da Nova Poshta não trazem um guia específico para rastreamento parado; o FAQ polonês cita dados incorretos do destinatário e itens proibidos como causas de atraso. Fale primeiro com o remetente e veja [rastreamento que não atualiza](guide:tracking-not-updating).
 
 Em pacotes enviados à Ucrânia, a Nova Poshta informa que o destinatário paga eventuais tributos e recebe aviso por SMS, Viber ou e-mail: acima de €150, incide 10% de direito aduaneiro sobre o excedente mais 20% de IVA. Saiba mais em [encomendas retidas na alfândega](guide:customs).
 
-Para extravio ou avaria na Ucrânia, reclame no app ou na página de rastreamento ("Manage Parcel" e depois "Submit a Report"), por telefone ou numa agência, com seu número fiscal ou passaporte. A Nova Poshta responde em até 3 dias úteis e indeniza até o valor declarado.
+Para extravio ou dano na Ucrânia, reclame no app ou na página de rastreamento ("Manage Parcel" e depois "Submit a Report"), por telefone ou numa agência, com seu número fiscal ou passaporte. A Nova Poshta responde em até 3 dias úteis e indeniza até o valor declarado.
 
-Na Polônia, quem reclama é o remetente; o destinatário só pode reclamar se já recebeu a encomenda ou se o remetente ceder o direito. Os termos da Nova Post Polônia dão 12 meses a partir da postagem (2 meses para falta de conteúdo ou avaria em entrega domiciliar).
+Na Polônia, quem reclama é o remetente; o destinatário só pode reclamar se já recebeu a encomenda ou se o remetente ceder o direito. Os termos da Nova Post Polônia dão 12 meses a partir da postagem (2 meses para falta de conteúdo ou dano em entrega domiciliar).
 
 ## Atendimento e telefone da Nova Poshta
 
@@ -84,9 +84,9 @@ Canais listados nos sites da Nova Poshta e da Nova Post Polônia:
 
 ## Como rastrear encomendas da Nova Poshta no Peek
 
-Outras transportadoras compartilham os formatos de 14 dígitos, por isso o [Peek](/) nunca atribui um número à Nova Poshta só pelo formato. Ele consulta as transportadoras prováveis: Nova Poshta primeiro se você pesquisar da Ucrânia ou da Moldávia ou se o número começar em `595000`; nos demais casos, consulta outras transportadoras sem incluir a Nova Poshta automaticamente. Para códigos `SH` ou `TN`, a Nova Poshta é a única consultada. Quando ela encontra o registro, o Peek exibe "Nova Poshta (Ukraine) está com esta encomenda". Se não aparecer, toque em "Trocar" e escolha "Nova Poshta (Ukraine)". Links de novaposhta.ua ou novapost.com funcionam também. O suporte cobre conhecimentos ucranianos (inclusive postados em agências Nova Post no exterior) e códigos internacionais `SH`/`TN`, não referências Nova Poshta Global.
+Outras transportadoras compartilham os formatos de 14 dígitos, por isso o [Peek](/) nunca atribui um número à Nova Poshta só pelo formato. Ele consulta as transportadoras prováveis: Nova Poshta primeiro se você pesquisar da Ucrânia ou da Moldávia ou se o número começar em `595000`; nos demais casos, consulta outras transportadoras, sem a Nova Poshta. Para códigos `SH` ou `TN`, a Nova Poshta é a única consultada. Quando ela encontra o registro, o Peek exibe "Nova Poshta (Ukraine) está com esta encomenda." Se não aparecer, toque em "Trocar" e escolha "Nova Poshta (Ukraine)". Links de novaposhta.ua ou novapost.com funcionam também. O Peek cobre conhecimentos ucranianos (inclusive postados em agências Nova Post no exterior) e códigos internacionais `SH`/`TN`, não referências Nova Poshta Global.
 
-O Peek mostra os textos em inglês da Nova Poshta, cada cidade no mapa, chegada prevista, peso, agência ou locker onde aguarda e hora da entrega, omitindo nomes, endereços e pagamentos. Quando uma exportação indica o parceiro no exterior — [UPS](carrier:ups) ou [GOFO Express](carrier:gofo) —, o Peek pode acompanhar por lá. Enquanto o pacote está aberto no Peek, ou no dia da entrega com alertas ligados, verifica até a cada 10 minutos — ou a cada 2 minutos a partir das 6h de Kiev no dia em que a Nova Poshta registra saída para entrega — enquanto o rastreador oficial responde; fora disso, de hora em hora. Pelos serviços de rastreamento, verifica de hora em hora, a cada 3 horas após um dia sem movimentação e até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados. Ele avisa mudanças de status e, se outra transportadora assumir, segue o ritmo dela. Após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora.
+O Peek mostra os textos em inglês da Nova Poshta, cada cidade no mapa, chegada prevista, peso, agência ou locker onde aguarda e hora da entrega, omitindo nomes, endereços e pagamentos. Quando uma exportação indica o parceiro no exterior — [UPS](carrier:ups) ou [GOFO Express](carrier:gofo) —, o Peek pode acompanhar por lá. Enquanto o pacote está aberto no Peek, ou no dia da entrega com alertas ligados, verifica até a cada 10 minutos; no dia em que a Nova Poshta registra saída para entrega, enquanto o rastreador da própria Nova Poshta responde, a cada 2 minutos a partir das 6h de Kiev; fora disso, de hora em hora. Pelos serviços de rastreamento, verifica de hora em hora, a cada 3 horas após um dia sem movimentação e até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados. Ele avisa mudanças de status e, se outra transportadora assumir, segue o ritmo dela. Após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora.
 
 ## Perguntas frequentes sobre rastreamento Nova Poshta
 
@@ -126,4 +126,5 @@ Na Ucrânia, por 5 dias gratuitos a partir do dia seguinte à chegada, com taxa 
 - [Nova Post Poland: Odbiór w urządzeniach Paczkomat](https://novapost.com/pl-pl/receive/at-parcel-locker/) – 2 dias no Paczkomat e telefone
 - [Nova Post Poland: Regulamin](https://novapost.com/pl-pl/more/offer/) – 2 dias no Paczkomat, reclamações e prazos
 - [Nova Post Poland: O firmie](https://novapost.com/pl-pl/more/about) – fundação, grupo NOVA e volume diário
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra
 :::

@@ -401,6 +401,52 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(device.postcodeGiven(id: filedID), false)
     }
 
+    /// A suggestion the service no longer makes: its postcode files nothing, and the carrier the owner picked moves the
+    /// link as any other change, with the postcode.
+    func testAPostcodeForASuggestionNoLongerMadeMovesTheLinkToThePickedCarrier() async throws {
+        let (defaults, suite) = defaults()
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let transport = PostcodeTestURLProtocol.transport()
+        defer { transport.invalidateAndCancel() }
+        let id = UUID()
+        let number = "99999990"
+        var suggesting = link("22222222222A")
+        suggesting.inputSuggested = ParcelLinkInputSuggested(carrier: .mondialRelay, field: .dpdPostcode)
+        let storage = Memory()
+        storage.keys = ["22222222222A": key]
+        storage.parcels = [DeviceParcel(linkID: "22222222222A", label: "", archivedAt: nil,
+                                        parcel: Parcel(shared: package(id, number: number, carrier: .unknown, stage: nil), link: suggesting),
+                                        checkedAt: Date())]
+        // The service no longer suggests anything: the parcel stands under no carrier.
+        let current = try JSONEncoder.deliveryTracker.encode(PublicParcelResponse(
+            link: link("22222222222A"), package: package(id, number: number, carrier: .unknown, stage: nil)))
+        let moved = try JSONEncoder.deliveryTracker.encode(PublicParcelResponse(
+            link: link("22222222222A"), package: package(id, number: number, carrier: .mondialRelay, stage: nil)))
+        nonisolated(unsafe) var sent: [String] = []
+        nonisolated(unsafe) var change: [String: Any] = [:]
+        PostcodeTestURLProtocol.handler = { request in
+            sent.append("\(request.httpMethod ?? "-") \(request.url?.path ?? "")")
+            switch (request.httpMethod, request.url?.path) {
+            case ("POST", "/api/public/parcels/22222222222A/postcode"):
+                return (409, Data(#"{"error":"No postcode is asked for this parcel"}"#.utf8))
+            case ("GET", "/api/public/parcels/22222222222A"): return (200, current)
+            case ("PATCH", "/api/public/parcels/22222222222A/carrier"):
+                change = (try? JSONSerialization.jsonObject(with: PostcodeTestURLProtocol.body(of: request)) as? [String: Any]) ?? [:]
+                return (200, moved)
+            default: return (404, Data(#"{"error":"Parcel not found"}"#.utf8))
+            }
+        }
+        let device = DeviceParcels(client: DeviceParcelClient.api(configuration: PostcodeTestURLProtocol.configuration, transport: transport),
+                                   storage: storage, postcodes: PostcodeMemory(defaults: defaults))
+
+        let parcel = try await device.changeCarrier(id: id, carrier: .mondialRelay, trackingURL: nil, dpdPostcode: "75001",
+                                                    dpdPostcodeCountry: "FR")
+        XCTAssertEqual(parcel.carrier, .mondialRelay)
+        XCTAssertEqual(sent.last, "PATCH /api/public/parcels/22222222222A/carrier")
+        XCTAssertEqual(change["carrier"] as? String, "mondial-relay")
+        XCTAssertEqual(change["dpdPostcode"] as? String, "75001")
+    }
+
     /// The postcode a carrier asks the owner's link for goes to the link; one the carrier refuses changes nothing and
     /// says so. Another carrier, or that carrier with a link, moves the link as before.
     func testThePostcodeALinkAsksForGoesToTheLinkAndARefusedOneChangesNothing() async throws {

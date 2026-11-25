@@ -865,6 +865,7 @@ final class DeviceParcels {
         let given = { (value: String?) in value?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty }
         // The postcode the link asks for, or its suggested carrier may have the parcel with, given alone for that
         // carrier, goes to the link: the service tries it with the carrier first, and one it refuses changes nothing.
+        // Once the service asks for nothing any more, a link it shows under another carrier moves as any other change.
         // The phone digits a suggested carrier shows the parcel with move the link to it, as any other change does.
         let suggestsPostcode = entry.parcel.inputSuggestedPrompt.map { $0.carrier == carrier && $0.field == .dpdPostcode } ?? false
         if let give = client.addPostcode, let postcode = given(dpdPostcode),
@@ -872,7 +873,7 @@ final class DeviceParcels {
            given(trackingURL) == nil, given(phoneDigits) == nil,
            let response = try await give(entry.linkID, key, ParcelLinkPostcodeRequest(
                carrier: carrier, postcode: postcode, postcodeCountry: dpdPostcodeCountry
-           )) {
+           )), response.package.carrier == carrier {
             let parcel = try refiled(entry, id: id, key: key, response, postcodeGiven: true, client)
             postcodes.remember(postcode, for: carrier, country: dpdPostcodeCountry)
             return parcel

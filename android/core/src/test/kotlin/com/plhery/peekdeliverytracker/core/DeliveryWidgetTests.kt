@@ -11,6 +11,7 @@ import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import java.io.File
 import java.nio.file.Files
 import java.time.Instant
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.Locale
@@ -153,9 +154,22 @@ class DeliveryWidgetTests {
     /**
      * `testTheWidgetGalleryShowsTheDemosNextDeliveries`: the gallery's sample is the demo's next deliveries, with the words
      * the app publishes for them in each language. The iPhone's tests redraw it (PEEK_WIDGET_SAMPLE) when they change.
+     * Read at midday: in the two hours after midnight, the demo's courier, out since two hours before, set out the day
+     * before, a round that is over.
      */
     @Test
     fun theWidgetGalleryShowsTheDemosNextDeliveries() {
+        val savedClock = AppClock.source
+        val midday = LocalDate.now().atTime(12, 0).atZone(ZoneId.systemDefault()).toInstant()
+        AppClock.source = { midday }
+        try {
+            galleryShowsTheDemosNextDeliveries()
+        } finally {
+            AppClock.source = savedClock
+        }
+    }
+
+    private fun galleryShowsTheDemosNextDeliveries() {
         val bytes = requireNotNull(javaClass.getResourceAsStream("/peek/${DeliveryWidgetSample.folderName}/${DeliveryWidgetSample.snapshotsFile}"))
             .use { it.readBytes() }
         fun words(parcels: List<DeliveryWidgetParcel>?) = parcels?.map {

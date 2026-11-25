@@ -15070,6 +15070,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0f2345"
     },
     {
+      "id": "slovenska-posta",
+      "catalog": "slovenska-posta",
+      "slug": "rastreamento-slovenska-posta",
+      "title": "Rastreamento Slovenská pošta: códigos e status",
+      "name": "Slovenská pošta",
+      "color": "#f9bb00"
+    },
+    {
       "id": "posta-slovenije",
       "catalog": "posta-slovenije",
       "slug": "rastreamento-posta-slovenije",
@@ -15156,6 +15164,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento UniUni: status, entrega não realizada e contato",
       "name": "UniUni",
       "color": "#f68841"
+    },
+    {
+      "id": "ontrac",
+      "catalog": "ontrac",
+      "slug": "rastreamento-ontrac",
+      "title": "Rastreamento OnTrac: códigos, status e entregas nos EUA",
+      "name": "OnTrac",
+      "color": "#cc2027"
     },
     {
       "id": "gofo",
@@ -18460,6 +18476,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0f2345"
     },
     {
+      "id": "slovenska-posta",
+      "catalog": "slovenska-posta",
+      "slug": "slovenska-posta-kuaidi-chaxun",
+      "title": "斯洛伐克邮政（Slovenská pošta）查询：单号、状态与取件",
+      "name": "Slovenská pošta",
+      "color": "#f9bb00"
+    },
+    {
       "id": "posta-slovenije",
       "catalog": "posta-slovenije",
       "slug": "posta-slovenije-siluowenniya-youzheng-chaxun",
@@ -18546,6 +18570,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "UniUni 快递查询：北美单号格式、物流状态与客服电话",
       "name": "UniUni",
       "color": "#f68841"
+    },
+    {
+      "id": "ontrac",
+      "catalog": "ontrac",
+      "slug": "ontrac-kuaidi-chaxun",
+      "title": "OnTrac 快递查询：单号、物流状态与未妥投处理",
+      "name": "OnTrac",
+      "color": "#cc2027"
     },
     {
       "id": "gofo",

@@ -209,7 +209,8 @@ order by by_hand, over_provider, steps desc, carrier, from_stage, to_stage;
 
 \echo '== Expected days dropped in the window from parcels still on their way, by short id'
 \echo '   a day stays through answers without one until it passes on the carrier''s clock, the parcel is delivered,'
-\echo '   held or waiting to be collected, or its carrier changes. By the day the check that dropped it found, read on'
+\echo '   held (unless the carrier named it after the hold''s scans) or waiting to be collected, or its carrier changes.'
+\echo '   By the day the check that dropped it found, read on'
 \echo '   the parcel''s clock as the server read it (the date the check began on, which it records; for a check before'
 \echo '   that, the zone its answer declares, else the offset its newest scan states): passed, or early (still ahead:'
 \echo '   the ones to read). Without either: passed or early on every clock, or edge (passed on some clocks only).'

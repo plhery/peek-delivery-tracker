@@ -177,6 +177,7 @@ const EARLY_IDLE_AFTER_MS = 12 * 60 * 60 * 1_000;
 const NOT_YET_MOVING = new Set(['registered', 'accepted']);
 /** The stages a delivery date is shown at: a parcel on its way, not one held, at a pickup point or done. */
 const ON_THE_WAY: ReadonlySet<string> = new Set(['registered', 'accepted', 'in_transit', 'customs', 'out_for_delivery']);
+const HELD_STAGES: ReadonlySet<string> = new Set(['failed_attempt', 'exception']);
 /** A lookup without an account that nobody watches is checked this often. */
 const UNWATCHED_ONE_OFF_HOURS = 3;
 /**
@@ -3437,11 +3438,13 @@ export class TrackingSyncService {
         }
         // An answer without a date says nothing of the day an earlier one gave: a carrier may name it once, or only on
         // some of its pages, and a provider relaying its scans names none. The day stays while the parcel is on its way
-        // and the day has not passed. It goes once the parcel is delivered, held or waiting to be collected, once a new
-        // scan tells of a failed attempt or a hold, and with a carrier the router swapped to, as another shipment's. A
-        // handover keeps it: the parcel is the same, and the delivery carrier's day stays while it or a provider
-        // relaying it answers without one. The day dates from the check that first gave it: an answer repeating it is no
-        // newer estimate, so a failed attempt published hours late, after a check that still gave the day, drops it.
+        // and the day has not passed. It goes once the parcel is delivered or waiting to be collected, once a new scan
+        // tells of a failed attempt or a hold, and with a carrier the router swapped to, as another shipment's. A held
+        // parcel keeps a day its carrier named after every scan of a failed attempt or hold it has: the day of the hold,
+        // which a carrier may name on only some of its answers. A handover keeps it: the
+        // parcel is the same, and the delivery carrier's day stays while it or a provider relaying it answers without one.
+        // The day dates from the check that first gave it: an answer repeating it is no newer estimate, so a failed
+        // attempt published hours late, after a check that still gave the day, drops it.
         const supplied = Date.parse(String(previousData.expected_delivery_supplied_at));
         if (result.expected_delivery) {
           carrierData.expected_delivery_supplied_at = Number.isFinite(supplied) && values.expected_delivery != null
@@ -3449,10 +3452,12 @@ export class TrackingSyncService {
             ? previousData.expected_delivery_supplied_at : now.toISOString();
         }
         const held = persistedEvents.some((event) => !storedIds.has(String(event.provider_event_id))
-          && ['failed_attempt', 'exception'].includes(String(event.stage))
-          && !(Date.parse(String(event.occurred_at)) < supplied));
-        if (!result.expected_delivery && !held && !fetched.correction
-          && expectedDayAhead(parcel, now) && ON_THE_WAY.has(String(values.current_stage ?? previousStage))) {
+          && HELD_STAGES.has(String(event.stage)) && !(Date.parse(String(event.occurred_at)) < supplied));
+        const stageNow = String(values.current_stage ?? previousStage);
+        const holds = HELD_STAGES.has(stageNow) ? rowsOnceSaved().filter((row) => HELD_STAGES.has(String(row.stage))) : [];
+        const namedInHold = holds.length > 0 && holds.every((row) => Date.parse(String(row.occurred_at)) < supplied);
+        if (!result.expected_delivery && !held && !fetched.correction && expectedDayAhead(parcel, now)
+          && (ON_THE_WAY.has(stageNow) || namedInHold)) {
           values.expected_delivery = parcel.expected_delivery;
           if (Number.isFinite(supplied)) carrierData.expected_delivery_supplied_at = previousData.expected_delivery_supplied_at;
           if (typeof previousData.expected_delivery_from === 'string' && carrierData.expected_delivery_from == null) {

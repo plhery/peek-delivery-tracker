@@ -2050,6 +2050,28 @@ describe('TrackingSyncService', () => {
       }
     });
 
+    it('stays on a held parcel when the carrier named it after the hold, until a newer scan tells of another', async () => {
+      for (const [stage, description] of [['failed_attempt', 'Recipient not at home'], ['exception', 'Clearance delay']] as const) {
+        const check = parcel();
+        const hold = { time: '2026-10-27T11:00:00Z', description, stage };
+        await check('2026-10-26T20:00:00Z', answer('in_transit', {}));
+        // The carrier names the day while the parcel is held, then answers without it.
+        const named = await check('2026-10-27T13:00:00Z', answer('exception', { expected_delivery: '2026-10-30' }, hold, hub));
+        expect(named).toMatchObject({ current_stage: stage, expected_delivery: '2026-10-30' });
+        const kept = await check('2026-10-27T16:00:00Z', answer('exception', {}, hold, hub));
+        expect(kept).toMatchObject({ current_stage: stage, expected_delivery: '2026-10-30' });
+        // A hold scanned after it takes it back.
+        const again = await check('2026-10-28T10:00:00Z', answer('exception', {},
+          { time: '2026-10-28T09:00:00Z', description, stage }, hold, hub));
+        expect(again).toMatchObject({ current_stage: stage, expected_delivery: null });
+      }
+      // A hold the carrier states without a scan of it still takes back a day named before.
+      const check = parcel();
+      await check('2026-10-26T20:00:00Z', answer('in_transit', dated));
+      const stated = await check('2026-10-27T13:00:00Z', { ...answer('in_transit', {}, hub), status: 'exception', current_stage: 'exception' });
+      expect(stated).toMatchObject({ current_stage: 'exception', expected_delivery: null });
+    });
+
     it('goes once a provider shows the parcel delivered or held', async () => {
       for (const [status, stage, description] of [['delivered', 'delivered', 'Delivered'], ['exception', 'exception', 'Delivery exception']] as const) {
         const check = parcel();

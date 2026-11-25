@@ -1024,7 +1024,8 @@ Android app's [`APIClient.kt`](../android/core/src/main/kotlin/com/plhery/peekde
   zone its answer or the catalog gives, else its newest scan's offset, or after an earlier leg answered the offset or
   place of its own newest scan). It goes once the parcel is delivered,
   held or waiting to be collected, once a new scan tells of a failed attempt or a hold, and
-  when the router changes the carrier. A handover keeps it (`src/server/trackingSync.ts`).
+  when the router changes the carrier. A held parcel keeps a day its carrier named after every
+  scan of a failed attempt or hold it has. A handover keeps it (`src/server/trackingSync.ts`).
   A day that passed and goes this way is kept apart (`last_expected_delivery`) until the
   carrier names a day again, the parcel arrives or goes back, or the router changes the carrier.
 - A parcel's page says when the parcel was expected once that day has passed, muted ("Was

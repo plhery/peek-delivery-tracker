@@ -24,6 +24,22 @@ extension PeekAi {
         return calendar.date(from: DateComponents(year: parts[0], month: parts[1], day: parts[2]))
     }
 
+    /// The hour `now` is, its minutes as a fraction, on the clock a time states by its offset ("…T08:12:00+01:00"), the
+    /// clock Peek AI gives its hours on; on this device's clock for a time that states none ("Z", "-00:00").
+    static func hour(at now: Date, on stated: String?) -> Double {
+        var calendar = Self.calendar
+        if let stated, stated.range(of: #"T[\d:.]+[+-]\d{2}:?\d{2}$"#, options: .regularExpression) != nil,
+           let sign = stated.last(where: { $0 == "+" || $0 == "-" }) {
+            let digits = stated.suffix(5).filter(\.isNumber)
+            let seconds = (Int(digits.prefix(2)) ?? 0) * 3_600 + (Int(digits.suffix(2)) ?? 0) * 60
+            if !(sign == "-" && seconds == 0), let zone = TimeZone(secondsFromGMT: sign == "-" ? -seconds : seconds) {
+                calendar.timeZone = zone
+            }
+        }
+        let clock = calendar.dateComponents([.hour, .minute], from: now)
+        return Double(clock.hour ?? 0) + Double(clock.minute ?? 0) / 60
+    }
+
     /// The day a time with its offset names, on its own clock: "2026-11-24T08:12:00+01:00" is the 24th.
     private static func dayNamed(_ value: String?) -> String? { value.map { String($0.prefix(10)) } }
 
@@ -132,8 +148,8 @@ struct PeekAiStrip: Equatable {
 private let peekAiUnshadedBelow = 0.03
 
 /// Each cell's shade, from its chance against the likeliest cell still to come: 4 at 85 % of it or more (the likeliest),
-/// 3 from 55 %, 2 from 25 %, 1 below that, and none under 3 in 100. Four steps a reader tells apart at a glance. Hours
-/// gone by are unshaded: the parcel did not come in them.
+/// 3 from 55 %, 2 from 25 %, 1 below that, and none under 3 in 100. Four steps a reader tells apart at a glance. Days
+/// and hours gone by are unshaded: the parcel did not come in them.
 func peekAiShades(_ cells: [(chance: Double, past: Bool)]) -> [Int] {
     let top = max(0, cells.filter { !$0.past }.map(\.chance).max() ?? 0)
     return cells.map { chance, past in
@@ -311,8 +327,9 @@ extension Localizer {
         return parts.joined(separator: stop)
     }
 
-    /// Days shaded by their chance, the carrier's date ringed; or, out for delivery, two hours to a cell, the past ones
-    /// marked and unshaded.
+    /// Days shaded by their chance, the carrier's date ringed, a day gone by on this device's calendar marked and
+    /// unshaded; or, out for delivery, two hours to a cell, the ones gone by on the parcel's clock (`PeekAi.hour`) marked
+    /// and unshaded.
     func peekAiStrip(_ ai: PeekAi, now: Date = Date()) -> PeekAiStrip? {
         let shaded = { (cells: [PeekAiStrip.Cell]) in
             zip(cells, peekAiShades(cells.map { ($0.chance, $0.past) })).map { cell, level in
@@ -322,8 +339,7 @@ extension Localizer {
             }
         }
         if let hours = ai.hours, !hours.isEmpty {
-            let clock = PeekAi.calendar.dateComponents([.hour, .minute], from: now)
-            let hour = Double(clock.hour ?? 0) + Double(clock.minute ?? 0) / 60
+            let hour = PeekAi.hour(at: now, on: ai.outSince ?? ai.endsAt)
             let cells = stride(from: 0, to: hours.count, by: 2).map { index in
                 let pair = hours[index..<min(index + 2, hours.count)]
                 let first = pair[index]
@@ -336,12 +352,13 @@ extension Localizer {
             return PeekAiStrip(kind: .hours, cells: shaded(cells))
         }
         guard let days = ai.days, !days.isEmpty else { return nil }
+        let today = PeekAi.day(of: now)
         return PeekAiStrip(kind: .days, cells: shaded(days.map { entry in
             let date = PeekAi.date(of: entry.day)
             return PeekAiStrip.Cell(
                 key: entry.day, over: date.map(shortWeekday) ?? "",
                 main: date.map { String(PeekAi.calendar.component(.day, from: $0)) } ?? "",
-                chance: entry.p, carrier: entry.day == ai.carrierDay, past: false
+                chance: entry.p, carrier: entry.day == ai.carrierDay, past: entry.day < today
             )
         }))
     }

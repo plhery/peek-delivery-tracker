@@ -230,7 +230,7 @@ const UNSHADED_BELOW = 0.03;
 /**
  * Each cell's shade, from its chance against the likeliest cell still to come: 4 at 85 % of it or more (the likeliest),
  * 3 from 55 %, 2 from 25 %, 1 below that, and none under 3 in 100. Four steps a reader tells apart at a glance.
- * Hours gone by are unshaded: the parcel did not come in them.
+ * Days and hours gone by are unshaded: the parcel did not come in them.
  */
 export function peekAiShades(cells: ReadonlyArray<{ chance: number; past: boolean }>): number[] {
   const top = Math.max(0, ...cells.filter((cell) => !cell.past).map((cell) => cell.chance));
@@ -253,7 +253,24 @@ export function peekAiStripSpoken(strip: { kind: 'days' | 'hours'; cells: PeekAi
   ].filter(Boolean).join('. ');
 }
 
-/** Days shaded by their chance, the carrier's date ringed; or, out for delivery, two hours to a cell. */
+/**
+ * The hour `now` is, its minutes as a fraction, on the clock a time states by its offset ("…T08:12:00+01:00"), the
+ * clock Peek AI gives its hours on; on this device's clock for a time that states none ("Z", "-00:00").
+ */
+function hourOn(stated: string | undefined, now: number): number {
+  const offset = /T[\d:.]+([+-])(\d{2}):?(\d{2})$/.exec(stated ?? '');
+  if (!offset || (offset[1] === '-' && offset[2] === '00' && offset[3] === '00')) {
+    const at = new Date(now);
+    return at.getHours() + at.getMinutes() / 60;
+  }
+  const at = new Date(now + (offset[1] === '-' ? -1 : 1) * (Number(offset[2]) * 60 + Number(offset[3])) * 60_000);
+  return at.getUTCHours() + at.getUTCMinutes() / 60;
+}
+
+/**
+ * Days shaded by their chance, the carrier's date ringed, a day gone by on this device's calendar faded and unshaded;
+ * or, out for delivery, two hours to a cell, the ones gone by on the parcel's clock (`hourOn`) faded and unshaded.
+ */
 export function peekAiStrip(ai: PeekAi, wording: PeekAiWording): { kind: 'days' | 'hours'; cells: PeekAiCell[] } | null {
   const { languageTag, use24HourTime, now = Date.now() } = wording;
   const shaded = (cells: Array<Omit<PeekAiCell, 'level'>>) => {
@@ -261,8 +278,7 @@ export function peekAiStrip(ai: PeekAi, wording: PeekAiWording): { kind: 'days' 
     return cells.map((cell, index) => ({ ...cell, level: levels[index]! }));
   };
   if (ai.hours?.length) {
-    const at = new Date(now);
-    const hour = at.getHours() + at.getMinutes() / 60;
+    const hour = hourOn(ai.out_since ?? ai.ends_at, now);
     const cells: Array<Omit<PeekAiCell, 'level'>> = [];
     for (let index = 0; index < ai.hours.length; index += 2) {
       const pair = ai.hours.slice(index, index + 2);
@@ -276,11 +292,12 @@ export function peekAiStrip(ai: PeekAi, wording: PeekAiWording): { kind: 'days' 
   }
   if (!ai.days?.length) return null;
   const weekday = new Intl.DateTimeFormat(languageTag, { weekday: 'short' });
+  const today = isoDay(new Date(now));
   return {
     kind: 'days',
     cells: shaded(ai.days.map(({ day, p }) => ({
       key: day, over: weekday.format(dateOf(day)).replaceAll('.', ''), main: String(dateOf(day).getDate()),
-      chance: p, carrier: day === ai.carrier_day, past: false,
+      chance: p, carrier: day === ai.carrier_day, past: day < today,
     }))),
   };
 }

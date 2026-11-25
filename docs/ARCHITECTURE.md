@@ -883,7 +883,8 @@ number, which no carrier tracks.
   as `peekAi` unless the account switched it off. Cards show one line under the carrier's
   date or in its place (beside the status on Next up), guests' lists too, and the parcel's
   page a short card that opens what Peek AI expects, the days or hours shaded by their
-  chance, why (what parcels like it did) and how sure. Each estimate ends at
+  chance, those gone by faded (hours on the parcel's clock), why (what parcels like it did)
+  and how sure. Each estimate ends at
   `ends_at`, a moment on the parcel's clock, and the apps drop it then, even on a screen left
   open and whatever the device's zone. Settings can switch it off: the device keeps the
   choice, and an account's follows it to its other devices (`show_peek_ai`).

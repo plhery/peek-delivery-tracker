@@ -149,15 +149,30 @@ describe('the strip in Peek AI’s sheet', () => {
   });
 
   it('shows the hours out for delivery two to a cell, the past ones faded and unshaded', () => {
-    const strip = peekAiStrip(BY_TIME, words())!;
+    // 15:30 on the parcel's clock, the one its hours are on (+01:00).
+    const strip = peekAiStrip(BY_TIME, words({ now: Date.parse('2026-11-24T14:30:00Z') }))!;
     expect(strip.kind).toBe('hours');
     expect(strip.cells.map(({ main }) => main)).toEqual(['08:00', '10:00', '12:00', '14:00', '16:00']);
     expect(strip.cells.map(({ level, past }) => [level, past])).toEqual([[0, true], [0, true], [0, true], [4, false], [2, false]]);
     expect(peekAiStripSpoken(strip, 'DPD', words())).toBe('Hours, likeliest first: 14:00, 16:00');
     // In the morning the midday hours are the likeliest.
-    const morning = peekAiStrip(BY_TIME, words({ now: new Date(2026, 10, 24, 9, 30).getTime() }))!;
+    const morning = peekAiStrip(BY_TIME, words({ now: Date.parse('2026-11-24T08:30:00Z') }))!;
     expect(morning.cells.map(({ level }) => level)).toEqual([1, 3, 4, 2, 1]);
     expect(peekAiStripSpoken(morning, 'DPD', words())).toBe('Hours, likeliest first: 12:00, 10:00, 14:00, 08:00, 16:00');
     expect(peekAiStrip(NOT_TODAY, words())).toBeNull();
+  });
+
+  it('tells the hours gone by on the parcel’s clock, not on this device’s', () => {
+    // Out in Tokyo; 14:30 there is 05:30 on this device's clock (UTC), when no hour of the round has gone by.
+    const tokyo = peekAiStrip({ ...BY_TIME, out_since: '2026-11-24T08:12:00+09:00' }, words({ now: Date.parse('2026-11-24T05:30:00Z') }))!;
+    expect(tokyo.cells.map(({ level, past }) => [level, past])).toEqual([[0, true], [0, true], [0, true], [4, false], [2, false]]);
+    expect(peekAiStripSpoken(tokyo, 'DPD', words())).toBe('Hours, likeliest first: 14:00, 16:00');
+  });
+
+  it('fades the days gone by of a copy kept past midnight, and names none of them', () => {
+    const kept: PeekAi = { ...SOONER, days: [{ day: '2026-11-24', p: 0.4 }, { day: '2026-11-25', p: 0.3 }, { day: '2026-11-26', p: 0.2 }, { day: '2026-11-27', p: 0.1 }] };
+    const strip = peekAiStrip(kept, words({ now: new Date(2026, 10, 25, 9).getTime() }))!;
+    expect(strip.cells.map(({ level, past }) => [level, past])).toEqual([[0, true], [4, false], [3, false], [2, false]]);
+    expect(peekAiStripSpoken(strip, 'DPD', words())).toBe('Days, likeliest first: Wed 25, Thu 26, Fri 27. DPD’s date: Fri 27');
   });
 });

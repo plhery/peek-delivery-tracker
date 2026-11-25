@@ -7,6 +7,8 @@ import XCTest
 final class PeekAiTests: XCTestCase {
     /// Tuesday 24 November 2026, 15:30 on this device's clock.
     private let now = PeekAiTests.local(2026, 11, 24, 15, 30)
+    /// 15:30 on the clock `byTime` went out on (+01:00), which its hours are on, whatever this device's zone.
+    private let afternoonOut = DateParser.date("2026-11-24T15:30:00+01:00")!
     private var suite = ""
     private var defaults: UserDefaults!
     private var english: Localizer!
@@ -281,7 +283,7 @@ final class PeekAiTests: XCTestCase {
     func testTheStripIsSpokenLikeliestFirstThenTheCarriers() throws {
         let days = try XCTUnwrap(english.peekAiStrip(with(noDate) { $0.carrierDay = "2026-11-27" }, now: now))
         XCTAssertEqual(english.peekAiStripSpoken(days, carrier: "DPD"), "Days, likeliest first: Thu 26, Wed 25, Fri 27, Tue 24. DPD’s date: Fri 27")
-        let hours = try XCTUnwrap(english.peekAiStrip(byTime, now: now))
+        let hours = try XCTUnwrap(english.peekAiStrip(byTime, now: afternoonOut))
         XCTAssertEqual(english.peekAiStripSpoken(hours, carrier: "FedEx"), "Hours, likeliest first: 14:00, 16:00")
 
         english.language = .zh
@@ -293,16 +295,37 @@ final class PeekAiTests: XCTestCase {
     }
 
     func testTheStripShowsTheHoursOutForDeliveryTwoToACellThePastOnesFadedAndUnshaded() throws {
-        let strip = try XCTUnwrap(english.peekAiStrip(byTime, now: now))
+        let strip = try XCTUnwrap(english.peekAiStrip(byTime, now: afternoonOut))
         XCTAssertEqual(strip.kind, .hours)
         XCTAssertEqual(strip.cells.map(\.main), ["08:00", "10:00", "12:00", "14:00", "16:00"])
         XCTAssertEqual(strip.cells.map(\.level), [0, 0, 0, 4, 2])
         XCTAssertEqual(strip.cells.map(\.past), [true, true, true, false, false])
         // In the morning the midday hours are the likeliest; cells as likely as each other keep their order in time.
-        let morning = try XCTUnwrap(english.peekAiStrip(byTime, now: at(2026, 11, 24, 9, 30)))
+        let morning = try XCTUnwrap(english.peekAiStrip(byTime, now: DateParser.date("2026-11-24T09:30:00+01:00")!))
         XCTAssertEqual(morning.cells.map(\.level), [1, 3, 4, 2, 1])
         XCTAssertEqual(english.peekAiStripSpoken(morning, carrier: "DPD"), "Hours, likeliest first: 12:00, 10:00, 14:00, 08:00, 16:00")
         XCTAssertNil(english.peekAiStrip(notToday, now: now))
+    }
+
+    /// The hours are the parcel's wall clock: out in Tokyo at 14:30 there, the morning hours have gone by and 14:00 and
+    /// 16:00 are still to come, whatever this device's zone.
+    func testTheStripTellsTheHoursGoneByOnTheParcelsClock() throws {
+        let tokyo = with(byTime) { $0.outSince = "2026-11-24T08:12:00+09:00" }
+        let strip = try XCTUnwrap(english.peekAiStrip(tokyo, now: DateParser.date("2026-11-24T14:30:00+09:00")!))
+        XCTAssertEqual(strip.cells.map(\.past), [true, true, true, false, false])
+        XCTAssertEqual(strip.cells.map(\.level), [0, 0, 0, 4, 2])
+        XCTAssertEqual(english.peekAiStripSpoken(strip, carrier: "DPD"), "Hours, likeliest first: 14:00, 16:00")
+    }
+
+    /// A copy kept past midnight fades the days gone by and names none of them.
+    func testTheStripFadesTheDaysGoneByOfACopyKeptPastMidnight() throws {
+        let kept = with(sooner) {
+            $0.days = [("2026-11-24", 0.4), ("2026-11-25", 0.3), ("2026-11-26", 0.2), ("2026-11-27", 0.1)].map { PeekAiDay(day: $0, p: $1) }
+        }
+        let strip = try XCTUnwrap(english.peekAiStrip(kept, now: at(2026, 11, 25, 9)))
+        XCTAssertEqual(strip.cells.map(\.past), [true, false, false, false])
+        XCTAssertEqual(strip.cells.map(\.level), [0, 4, 3, 2])
+        XCTAssertEqual(english.peekAiStripSpoken(strip, carrier: "DPD"), "Days, likeliest first: Wed 25, Thu 26, Fri 27. DPD’s date: Fri 27")
     }
 
     // MARK: Cards and the widgets

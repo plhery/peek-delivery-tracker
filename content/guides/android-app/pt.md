@@ -74,7 +74,7 @@ Adiciona «Encomendas», o único widget do Peek, a partir do seletor de widgets
 
 A Google avisa que alguns destes passos só funcionam no Android 14 e em versões posteriores.
 
-«Encomendas» começa com quatro células por duas e pode encolher até duas por duas. Lista as encomendas a caminho e depois as entregues no último dia, pela ordem do Peek. Cada encomenda abre a sua página; o resto do widget abre a tua lista. É redesenhado pelo menos de 20 em 20 minutos, e os dias mudam à meia-noite mesmo com a app fechada.
+«Encomendas» começa com quatro células por duas e pode encolher até duas por duas. Lista as encomendas a caminho e depois as entregues no último dia, pela ordem do Peek. Cada encomenda abre a sua página; o resto do widget abre a tua lista. É redesenhado pelo menos de 20 em 20 minutos, e os dias mudam à meia-noite mesmo com a app fechada. Quando o [Peek IA](guide:peek-ai) tem uma estimativa para uma encomenda, o widget acrescenta «✦ Peek IA» e algumas palavras ao lado da data, onde couberem; «Definições» › «Preferências» › «Peek IA» desliga-o.
 
 | O widget mostra | O que significa |
 | --- | --- |
@@ -112,7 +112,8 @@ Só a versão do Google Play. Toca no ícone de código de barras no fim do camp
 - [Peek: textos em português](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/pt.json) – cada etiqueta do Peek citada aqui
 - [Peek: manifesto Android](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/AndroidManifest.xml) – Adicionar ao Peek, ligações de encomendas, câmara, cópias de segurança
 - [Peek: o widget Encomendas](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/res/xml/parcels_widget.xml) – só no ecrã principal, os tamanhos
-- [Peek: Definições](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – Esquecer todas, Idioma, sem Atividades em direto
+- [Peek: Peek IA no widget](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/widget/WidgetPeekAi.kt) – «✦ Peek IA» ao lado da data de uma encomenda, onde couber
+- [Peek: Definições](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – Esquecer todas, Idioma, sem Atividades em direto, Peek IA
 - [Peek: o leitor da versão do Google Play](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/play/kotlin/com/plhery/peekdeliverytracker/platform/CameraLabelScanner.kt) – códigos de barras, autorização da câmara
 - [Peek: Support (em inglês)](https://peektracker.com/support.html) – sem conta, Forget all
 - [Android Help: Add apps, shortcuts and widgets to your Home screens (em inglês)](https://support.google.com/android/answer/9450271?hl=en) – adicionar um widget, fixar um atalho, Android 14

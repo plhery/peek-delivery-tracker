@@ -74,7 +74,7 @@ Aggiungi «Pacchi», l'unico widget di Peek, dal selettore dei widget, dove si l
 
 Google avverte che «alcuni di questi passaggi funzionano soltanto su Android 14 e versioni successive».
 
-«Pacchi» parte da quattro celle per due e si riduce fino a due per due. Elenca i pacchi in arrivo, poi quelli consegnati nell'ultimo giorno, nell'ordine di Peek. Ogni pacco apre la sua pagina; il resto del widget apre la tua lista. Viene ridisegnato almeno ogni 20 minuti, e i suoi giorni cambiano a mezzanotte anche con l'app chiusa.
+«Pacchi» parte da quattro celle per due e si riduce fino a due per due. Elenca i pacchi in arrivo, poi quelli consegnati nell'ultimo giorno, nell'ordine di Peek. Ogni pacco apre la sua pagina; il resto del widget apre la tua lista. Viene ridisegnato almeno ogni 20 minuti, e i suoi giorni cambiano a mezzanotte anche con l'app chiusa. Quando [Peek IA](guide:peek-ai) ha una stima per un pacco, il widget aggiunge «✦ Peek IA» e qualche parola accanto alla data, dove c'è spazio; «Impostazioni» › «Preferenze» › «Peek IA» la disattiva.
 
 | Il widget mostra | Cosa significa |
 | --- | --- |
@@ -112,7 +112,8 @@ Solo la versione Google Play. Tocca l'icona del codice a barre alla fine del cam
 - [Peek: testi in italiano](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/it.json) – tutte le etichette di Peek citate qui
 - [Peek: manifest Android](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/AndroidManifest.xml) – «Aggiungi a Peek», link ai pacchi, fotocamera, backup
 - [Peek: il widget «Pacchi»](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/res/xml/parcels_widget.xml) – solo schermata Home, le sue dimensioni
-- [Peek: Impostazioni](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – «Dimentica tutti», «Lingua», niente Attività Live
+- [Peek: Peek IA nel widget](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/widget/WidgetPeekAi.kt) – «✦ Peek IA» accanto alla data di un pacco, dove c'è spazio
+- [Peek: Impostazioni](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – «Dimentica tutti», «Lingua», niente Attività Live, «Peek IA»
 - [Peek: lo scanner della versione Play](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/play/kotlin/com/plhery/peekdeliverytracker/platform/CameraLabelScanner.kt) – codici a barre, permesso della fotocamera
 - [Peek: assistenza (in inglese)](https://peektracker.com/support.html) – nessun account necessario, «Dimentica tutti»
 - [Guida di Android: Aggiungere app, scorciatoie e widget alle schermate Home](https://support.google.com/android/answer/9450271?hl=it) – aggiungere un widget, fissare una scorciatoia, Android 14

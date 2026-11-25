@@ -4,12 +4,12 @@ description: Peek AI is Peek's own estimate of when your parcel will come, besid
 slug: when-will-my-parcel-arrive
 picture: Pip, the parcel with a face, peering at a phone where a parcel's card shows a small sparkle and "Peek AI by 16:00" under the carrier's date.
 published: 2026-11-24
-updated: 2026-11-24
+updated: 2026-11-25
 ---
 
 When [Peek](/) has a strong hint about when your parcel will arrive, Peek AI says so beside the carrier's date, or in its place when the carrier gives none: "likely by 16:00", "likely today or tomorrow", "maybe sooner" or "today is unlikely". It is Peek's own estimate, never a promise from the carrier, and most parcels show none.
 
-It's on by default, with or without an account, on peektracker.com, in the iPhone, iPad and Mac app, and in the [Android beta](guide:android-app) from Peek's own F-Droid repository and GitHub.
+It's on by default, with or without an account, on peektracker.com, in the iPhone, iPad and Mac app, and in the [Android beta](guide:android-app), from the Google Play test, Peek's own F-Droid repository or GitHub.
 
 :::steps
 - Look at your list | Under the carrier's date on a parcel's card, or beside the status on "Next up": "✦ Peek AI" and a few words, such as "by 16:00".
@@ -100,6 +100,6 @@ With an account, the choice follows you to your other devices, and connected ass
 - [Peek: assistants' tools](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/assistants/tools.ts) – the estimate in an assistant's parcel list
 - [App Store: Peek](https://apps.apple.com/app/id6823615370) – Peek AI in the app's notes
 - [Peek: Android notes](https://github.com/plhery/peek-delivery-tracker/blob/main/fastlane/metadata/android/en-US/changelogs/21.txt) – Peek AI in the Android beta
-- [Peek: Try Peek for Android](https://peektracker.com/android) – the beta from F-Droid and GitHub
+- [Peek: Try Peek for Android](https://peektracker.com/android) – the beta from the Google Play test, F-Droid and GitHub
 - [Peek: demo](https://peektracker.com/demo) – sample parcels with an estimate
 :::

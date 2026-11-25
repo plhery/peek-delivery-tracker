@@ -74,7 +74,7 @@ Ajoute « Colis », l'unique widget de Peek, depuis le sélecteur de widgets, o�
 
 Google prévient : « Certaines de ces étapes ne s'appliquent qu'à Android 14 ou version ultérieure. »
 
-« Colis » fait d'abord quatre cases sur deux et se réduit jusqu'à deux sur deux. Il liste les colis en route, puis ceux livrés dans la dernière journée, dans l'ordre de Peek. Chaque colis ouvre sa page ; le reste du widget ouvre ta liste. Il est redessiné au moins toutes les 20 minutes, et ses jours changent à minuit, même quand l'app est fermée.
+« Colis » fait d'abord quatre cases sur deux et se réduit jusqu'à deux sur deux. Il liste les colis en route, puis ceux livrés dans la dernière journée, dans l'ordre de Peek. Chaque colis ouvre sa page ; le reste du widget ouvre ta liste. Il est redessiné au moins toutes les 20 minutes, et ses jours changent à minuit, même quand l'app est fermée. Quand [Peek IA](guide:peek-ai) a une estimation pour un colis, le widget ajoute « ✦ Peek IA » et quelques mots à côté de la date, là où ils tiennent ; « Réglages » › « Préférences » › « Peek IA » le désactive.
 
 | Le widget affiche | Ce que ça veut dire |
 | --- | --- |
@@ -112,7 +112,8 @@ Seule la version Google Play le peut. Touche l'icône de code-barres au bout du 
 - [Peek : textes en français](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/fr.json) – chaque libellé de Peek cité ici
 - [Peek : manifeste Android](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/AndroidManifest.xml) – « Ajouter à Peek », liens de colis, appareil photo, sauvegardes
 - [Peek : le widget « Colis »](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/res/xml/parcels_widget.xml) – écran d'accueil seulement, ses tailles
-- [Peek : Réglages](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – « Tout oublier », « Langue », pas d'activités en direct
+- [Peek : Peek IA dans le widget](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/widget/WidgetPeekAi.kt) – « ✦ Peek IA » à côté de la date d'un colis, là où il tient
+- [Peek : Réglages](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – « Tout oublier », « Langue », pas d'activités en direct, « Peek IA »
 - [Peek : le scanner de la version Play](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/play/kotlin/com/plhery/peekdeliverytracker/platform/CameraLabelScanner.kt) – codes-barres, autorisation de l'appareil photo
 - [Peek : aide (en anglais)](https://peektracker.com/support.html) – pas besoin de compte, « Tout oublier »
 - [Aide Android : Ajouter des applications, des raccourcis et des widgets aux écrans d'accueil](https://support.google.com/android/answer/9450271?hl=fr) – ajouter un widget, épingler un raccourci, Android 14

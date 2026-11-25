@@ -74,7 +74,7 @@ Add "Parcels", Peek's one widget, from the widget picker, where it reads "See th
 
 Google warns that "Some of these steps only work on Android 14 and up."
 
-"Parcels" starts at four cells by two and shrinks to two by two. It lists the parcels on their way, then those delivered within a day, in Peek's order. Each parcel opens its page; the rest of the widget opens your list. It's redrawn at least every 20 minutes, and its days change at midnight even with the app closed.
+"Parcels" starts at four cells by two and shrinks to two by two. It lists the parcels on their way, then those delivered within a day, in Peek's order. Each parcel opens its page; the rest of the widget opens your list. It's redrawn at least every 20 minutes, and its days change at midnight even with the app closed. When [Peek AI](guide:peek-ai) has an estimate for a parcel, the widget adds "✦ Peek AI" and its few words beside the date, where they fit; "Settings" › "Preferences" › "Peek AI" turns it off.
 
 | The widget shows | What it means |
 | --- | --- |
@@ -112,7 +112,8 @@ Only the Google Play build can. Tap the barcode icon at the end of the tracking 
 - [Peek: English copy](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/en.json) – every Peek label quoted here
 - [Peek: Android manifest](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/AndroidManifest.xml) – Add to Peek, parcel links, camera, backups
 - [Peek: the Parcels widget](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/res/xml/parcels_widget.xml) – home screen only, its sizes
-- [Peek: Settings](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – Forget all, Language, no Live Activities
+- [Peek: Peek AI on the widget](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/widget/WidgetPeekAi.kt) – "✦ Peek AI" beside a parcel's date where it fits
+- [Peek: Settings](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – Forget all, Language, no Live Activities, Peek AI
 - [Peek: the Play build's scanner](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/play/kotlin/com/plhery/peekdeliverytracker/platform/CameraLabelScanner.kt) – barcodes, camera permission
 - [Peek: Support](https://peektracker.com/support.html) – no account needed, Forget all
 - [Android Help: Add apps, shortcuts and widgets to your Home screens](https://support.google.com/android/answer/9450271?hl=en) – adding a widget, pinning a shortcut, Android 14

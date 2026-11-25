@@ -4,12 +4,12 @@ description: Peek IA es la estimación del propio Peek de cuándo llegará tu pa
 slug: cuando-llega-mi-paquete
 picture: Pip, el paquete con cara, asomado a un móvil en el que la tarjeta de un paquete muestra un pequeño destello y «Peek IA antes de las 16:00» bajo la fecha del transportista.
 published: 2026-11-24
-updated: 2026-11-24
+updated: 2026-11-25
 ---
 
 Cuando [Peek](/) tiene una pista clara de cuándo llegará tu paquete, Peek IA lo dice junto a la fecha del transportista, o en su lugar si el transportista no da ninguna: «probablemente antes de las 16:00», «probablemente hoy o mañana», «quizá antes» o «hoy es poco probable». Es una estimación del propio Peek, nunca una promesa del transportista, y la mayoría de los paquetes no muestran ninguna.
 
-Está activado de forma predeterminada, con o sin cuenta, en peektracker.com, en la app para iPhone, iPad y Mac y en la [beta de Android](guide:android-app), que se instala desde el repositorio de F-Droid del propio Peek o desde GitHub.
+Está activado de forma predeterminada, con o sin cuenta, en peektracker.com, en la app para iPhone, iPad y Mac y en la [beta de Android](guide:android-app), que se instala desde la prueba de Google Play, desde el repositorio de F-Droid del propio Peek o desde GitHub.
 
 :::steps
 - Mira tu lista | Bajo la fecha del transportista, en la tarjeta de un paquete, o junto al estado en «Lo próximo»: «✦ Peek IA» y unas pocas palabras, como «antes de las 16:00».
@@ -100,6 +100,6 @@ Con una cuenta, tu elección te sigue a tus otros dispositivos, y los asistentes
 - [Peek: herramientas de los asistentes](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/assistants/tools.ts) – la estimación en la lista de paquetes de un asistente
 - [App Store: Peek](https://apps.apple.com/es/app/id6823615370) – Peek IA en las novedades de la app
 - [Peek: notas de Android (en inglés)](https://github.com/plhery/peek-delivery-tracker/blob/main/fastlane/metadata/android/en-US/changelogs/21.txt) – Peek IA en la beta de Android
-- [Peek: Prueba Peek para Android](https://peektracker.com/android) – la beta de F-Droid y GitHub
+- [Peek: Prueba Peek para Android](https://peektracker.com/android) – la beta de la prueba de Google Play, de F-Droid y de GitHub
 - [Peek: demo](https://peektracker.com/demo) – paquetes de ejemplo con una estimación
 :::

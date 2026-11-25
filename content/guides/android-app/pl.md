@@ -74,7 +74,7 @@ Dodaj „Przesyłki”, jedyny widżet Peeka, z selektora widżetów, gdzie ma o
 
 Google uprzedza: „niektóre z opisanych tu czynności można wykonać tylko na urządzeniach z Androidem 14 lub nowszym”.
 
-Widżet „Przesyłki” ma na start rozmiar cztery na dwie komórki i można go zmniejszyć do dwóch na dwie. Pokazuje przesyłki w drodze, a potem te doręczone w ciągu ostatniej doby, w kolejności z Peeka. Każda przesyłka otwiera swoją stronę; reszta widżetu otwiera twoją listę. Widżet odrysowuje się co najmniej co 20 minut, a dni zmieniają się w nim o północy, nawet przy zamkniętej aplikacji.
+Widżet „Przesyłki” ma na start rozmiar cztery na dwie komórki i można go zmniejszyć do dwóch na dwie. Pokazuje przesyłki w drodze, a potem te doręczone w ciągu ostatniej doby, w kolejności z Peeka. Każda przesyłka otwiera swoją stronę; reszta widżetu otwiera twoją listę. Widżet odrysowuje się co najmniej co 20 minut, a dni zmieniają się w nim o północy, nawet przy zamkniętej aplikacji. Gdy [Peek AI](guide:peek-ai) ma prognozę dla przesyłki, widżet dodaje „✦ Peek AI” i kilka słów obok daty, tam gdzie się zmieszczą; „Ustawienia” › „Preferencje” › „Peek AI” to wyłącza.
 
 | Widżet pokazuje | Co to znaczy |
 | --- | --- |
@@ -112,7 +112,8 @@ Tylko w wersji z Google Play. Stuknij ikonę kodu kreskowego na końcu pola śle
 - [Peek: teksty po polsku](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/pl.json) – każda cytowana tu etykieta Peeka
 - [Peek: manifest Androida](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/AndroidManifest.xml) – Dodaj do Peeka, linki do przesyłek, aparat, kopie zapasowe
 - [Peek: widżet Przesyłki](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/res/xml/parcels_widget.xml) – tylko ekran główny, jego rozmiary
-- [Peek: Ustawienia](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – Zapomnij o wszystkich, Język, brak Aktywności na żywo
+- [Peek: Peek AI w widżecie](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/widget/WidgetPeekAi.kt) – „✦ Peek AI” obok daty przesyłki, tam gdzie się mieści
+- [Peek: Ustawienia](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – Zapomnij o wszystkich, Język, brak Aktywności na żywo, Peek AI
 - [Peek: skaner w wersji z Google Play](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/play/kotlin/com/plhery/peekdeliverytracker/platform/CameraLabelScanner.kt) – kody kreskowe, dostęp do aparatu
 - [Peek: Support](https://peektracker.com/support.html) – bez konta, Forget all
 - [Android – Pomoc: Dodawanie aplikacji, skrótów i widżetów do ekranów głównych](https://support.google.com/android/answer/9450271?hl=pl) – dodawanie widżetu (Widżety), przypinanie skrótu, Android 14

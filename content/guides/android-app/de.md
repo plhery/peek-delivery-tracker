@@ -74,7 +74,7 @@ Füge „Pakete“, Peeks einziges Widget, aus der Widget-Auswahl hinzu, wo dazu
 
 Google warnt: „Einige dieser Schritte funktionieren nur unter Android 14 oder höher.“
 
-„Pakete“ startet mit vier mal zwei Feldern und lässt sich auf zwei mal zwei verkleinern. Es listet die Pakete, die unterwegs sind, dann die am letzten Tag zugestellten, in Peeks Reihenfolge. Jedes Paket öffnet seine Seite; der Rest des Widgets öffnet deine Liste. Es wird mindestens alle 20 Minuten neu gezeichnet, und seine Tage wechseln um Mitternacht, auch bei geschlossener App.
+„Pakete“ startet mit vier mal zwei Feldern und lässt sich auf zwei mal zwei verkleinern. Es listet die Pakete, die unterwegs sind, dann die am letzten Tag zugestellten, in Peeks Reihenfolge. Jedes Paket öffnet seine Seite; der Rest des Widgets öffnet deine Liste. Es wird mindestens alle 20 Minuten neu gezeichnet, und seine Tage wechseln um Mitternacht, auch bei geschlossener App. Hat [Peek AI](guide:peek-ai) eine Schätzung für ein Paket, zeigt das Widget „✦ Peek AI“ und ein paar Worte neben dem Datum, wo sie hinpassen; „Einstellungen“ › „Präferenzen“ › „Peek AI“ schaltet das aus.
 
 | Das Widget zeigt | Was es bedeutet |
 | --- | --- |
@@ -112,7 +112,8 @@ Nur die Google-Play-Version kann das. Tippe auf das Barcode-Symbol am Ende des S
 - [Peek: deutsche Texte](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/de.json) – jede hier zitierte Peek-Beschriftung
 - [Peek: Android-Manifest](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/AndroidManifest.xml) – „Zu Peek hinzufügen“, Paketlinks, Kamera, Backups
 - [Peek: das Widget „Pakete“](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/res/xml/parcels_widget.xml) – nur auf dem Startbildschirm, seine Größen
-- [Peek: Einstellungen](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – „Alle vergessen“, „Sprache“, keine Live-Aktivitäten
+- [Peek: Peek AI im Widget](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/widget/WidgetPeekAi.kt) – „✦ Peek AI“ neben dem Datum eines Pakets, wo es hinpasst
+- [Peek: Einstellungen](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – „Alle vergessen“, „Sprache“, keine Live-Aktivitäten, „Peek AI“
 - [Peek: der Scanner der Play-Version](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/play/kotlin/com/plhery/peekdeliverytracker/platform/CameraLabelScanner.kt) – Barcodes, Kameraberechtigung
 - [Peek: Hilfe (auf Englisch)](https://peektracker.com/support.html) – kein Konto nötig, „Alle vergessen“
 - [Android-Hilfe: Apps, Verknüpfungen und Widgets auf Startbildschirmen hinzufügen](https://support.google.com/android/answer/9450271?hl=de) – ein Widget hinzufügen, eine Verknüpfung anheften, Android 14

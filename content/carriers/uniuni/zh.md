@@ -12,7 +12,7 @@ UniUni（Uni Express Inc.，总部位于加拿大不列颠哥伦比亚省列治�
 
 ## UniUni 运单号格式与查找位置
 
-包裹到达 UniUni 时已由卖家贴好面单，因此单号位于订单的物流信息中。找不到单号？请看[去哪里查找运单号](guide:find-tracking-number)（英文）。常见单号格式（示例数字）如下：
+包裹到达 UniUni 时已由卖家贴好面单，因此单号位于订单的物流信息中。找不到单号？请看[去哪里查找运单号](guide:find-tracking-number)（英文）。单号格式如下（数字为虚构）：
 
 | 格式（示例） | 说明 |
 | --- | --- |
@@ -36,7 +36,7 @@ UniUni（Uni Express Inc.，总部位于加拿大不列颠哥伦比亚省列治�
 | --- | --- |
 | `Order received` | 卖家已向 UniUni 发送面单信息，UniUni 尚未收到实物包裹。 |
 | `Parcel dropped off at Uni Store` | 寄件人已将包裹投寄至 UniUni 门店。 |
-| `Gateway transit in` | 包裹已抵达 UniUni 口岸/枢纽仓库。 |
+| `Gateway transit in` | 包裹已抵达 UniUni 枢纽仓库（gateway）。 |
 | `Gateway transit out` | 已离开枢纽仓库，发往负责派送的仓库。 |
 | `Parcel in transit to local UniUni warehouse for delivery` | 正运往你所在片区的本地 UniUni 仓库。 |
 | `Arrival scan` | 已扫描进入本地仓库。 |
@@ -47,19 +47,19 @@ UniUni（Uni Express Inc.，总部位于加拿大不列颠哥伦比亚省列治�
 | `The parcel will be transferred to a third-party courier for delivery.` | UniUni 将把包裹转交给第三方快递完成派送。 |
 | `Parcel has been handed over to a third-party courier` | 已正式移交给第三方快递。 |
 
-具体措辞可能略有不同：部分跨境发货方使用的 `Shipping information received. Your parcel is on its way to UniUni for delivery to you` 与 `Order received` 含义相同；`Parcel received by UniUni` 表示 UniUni 已实际收到包裹；`Parcel has been delivered` 等同于 `Delivered`。UniUni 页面有时还会注明放置位置，例如 `Delivered. (Recipient's front door)`。
+具体措辞可能略有不同：部分跨境发货方使用的 `Shipping information received. Your parcel is on its way to UniUni for delivery to you` 与 `Order received` 含义相同；`Parcel received by UniUni` 表示 UniUni 已实际收到包裹；`Parcel has been delivered` 等同于 `Delivered`。UniUni 页面还可能注明放置位置，例如 `Delivered. (Recipient's front door)`。
 
 派送失败记录在 UniUni 页面上会用括号标出原因。第二次派送失败后，状态会变为 `storage`。一旦包裹移交给第三方快递，后续扫描会按该快递自己的表述显示，例如 `Item out for delivery` 或 `Parcel is ready for pickup`。
 
 ## UniUni 派送时效、自提与派送未成功
 
-UniUni 向发件商家说明其时效为次日至 7 天，覆盖 80% 的加拿大人口和 65% 的美国人口。只有在 UniUni 实际收到包裹后才会出现预计送达日期，查询页有时也会给出预计派送时间段。
+UniUni 向发件商家说明其时效为次日至 7 天，覆盖加拿大的 80% 和美国的 65%。只有在 UniUni 实际收到包裹后才会出现预计送达日期，查询页也可能显示派送时间段。
 
-**派送未成功。** 首次派送失败后，UniUni 表示多数情况下会在 48 小时内自动再次派送，除非需要修改派送信息，否则你无需任何操作。第二次派送失败后，包裹会退回 UniUni 仓库；一旦跟踪显示 `storage`，请通过 UniUni 聊天机器人预约重新派送，并附上收件地址、联系方式及派送说明。仓库免费保留 30 天。若地址是 USPS 邮政信箱（PO box）或地址有误，派送也会被拒收，需要及时更正派送资料。
+**派送未成功。** 首次派送失败后，UniUni 表示多数情况下会在 48 小时内再次派送，除非需要修改派送信息，否则你无需任何操作。第二次派送失败后，包裹会退回 UniUni 仓库；一旦跟踪显示 `storage`，请通过 UniUni 聊天机器人预约重新派送，并附上收件地址、联系方式及派送说明。包裹会保留 30 天。若地址是 USPS 邮政信箱（PO box）或地址有误，派送也可能被拒，请更新派送资料。
 
 **地址与派送说明。** 如需补充单元号、门禁码、对讲机号或电话，请通过 UniUni 聊天机器人提交；不过一旦进入派送中，司机可能来不及收到更新。UniUni 不派送至邮局或邮政信箱，其法语 FAQ 还注明不派送至军事基地。
 
-**仓库自提。** UniUni 仅在加拿大少数城市（如蒙特利尔、多伦多和北约克）提供自提；其他地区请申请重新派送。
+**自提。** UniUni 仅在加拿大少数城市（如蒙特利尔、多伦多和北约克）提供自提；其他地区请申请重新派送。
 
 **签收 PIN 码。** 在加拿大，寄件人可以要求凭 PIN 码签收：PIN 码会通过邮件发给你，如果寄件人提供了手机号也可能同步发短信。司机本人不知道该 PIN 码，你需要口头报给司机，司机也可以将其重新发送至同一邮箱或手机号。若无法提供 PIN 码，本次派送将记为失败并改排后续路线，包裹不会被无人放置。
 
@@ -90,23 +90,23 @@ UniUni 官方渠道如下：
 
 遇到 `UUS`、`UUSC`、`4C`（以 `US` 结尾）、`U9999` 开头单号、`UR` 单号，以及 `CAA0` 后紧跟 `U` 的格式时，[Peek](/) 会立刻识别为 UniUni。对于其他 `U` 加 15 位数字、其他 `CAA0`、`USA0` 以及 `JY` 格式的单号，Peek 会向 UniUni 查询并在确认归属后选中 UniUni。粘贴含单号的 uniuni.com 查询链接同样有效。一票多件的主单号无法整体跟踪，请分别添加每件包裹各自的单号。
 
-Peek 直接读取 UniUni 跟踪数据，显示包裹状态、每条扫描的城镇与省/州并在地图上标出、预计送达日或派送时段、签收时间以及目的地国家。时间按你的设备时区换算显示；在 peektracker.com 以及 iPhone 和 Android App 中，轨迹末尾会注明“时间按你所在的时区显示：”及对应时区名称。Peek 会隐藏具体街道地址、司机姓名和签收照片，如需查看照片请前往 UniUni 官网。`Delivered` 和 `Out for delivery` 会以 Peek 自身的“已签收”和“派送中”显示，其余扫描保留 UniUni 原文（不显示括号里的失败原因）。
+Peek 读取 UniUni 跟踪数据，显示包裹状态、每条扫描的城镇与省/州并在地图上标出、预计送达日或派送时段、签收时间以及目的地国家。时间按你的设备时区换算显示；在 peektracker.com 以及 iPhone 和 Android App 中，轨迹末尾会注明“时间按你所在的时区显示：”及对应时区名称。Peek 会隐藏具体街道地址、司机姓名和签收照片，如需查看照片请前往 UniUni 官网。`Delivered` 和 `Out for delivery` 会以 Peek 自身的“已签收”和“派送中”显示，其余扫描保留 UniUni 原文（不显示括号里的失败原因）。
 
-当 UniUni 将包裹转交给第三方快递时，该快递的扫描会出现在 UniUni 的轨迹中，但 Peek 不会单独跟进第三方快递的新单号。通过 [SpeedPAK](carrier:speedpak) 或 DHL eCommerce 发出的包裹若指定 UniUni 负责尾程派送，Peek 则可以继续在 UniUni 上跟进。在你打开页面或开启派送当天提醒期间，只要 UniUni 官网正常响应，Peek 最高每 10 分钟检查一次，并在 UniUni 扫描进入派送当天自当地时间早上 6 点起（若 UniUni 给出了派送时段，则从时段开始前半小时起）最高每 2 分钟检查一次（通过物流跟踪服务查询时，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次）；其余时候以及连续两天无新动态后（若仍处于“已生成面单”或“已揽收”，则为 12 小时后）每小时检查一次，并在状态变化时向你发出提醒。
+当 UniUni 将包裹转交给第三方快递时，该快递的扫描会出现在 UniUni 的轨迹中，但 Peek 不会单独跟进第三方快递的新单号。通过 [SpeedPAK](carrier:speedpak) 或 DHL eCommerce 发出的包裹若指定 UniUni 负责尾程派送，Peek 则可以继续在 UniUni 上跟进。在你打开页面或开启派送当天提醒期间，只要 UniUni 官网正常响应，Peek 最高每 10 分钟检查一次，并在 UniUni 扫描进入派送当天自当地时间早上 6 点起（若 UniUni 给出了派送时段，则从时段开始前半小时起）最高每 2 分钟检查一次（通过物流查询服务时，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次）；其余时候以及连续两天无新动态后（若仍处于“已生成面单”或“已揽收”，则为 12 小时后）每小时检查一次。状态变化时，Peek 可以提醒你。
 
 ## UniUni 快递查询常见问题
 
 ### UniUni 包裹是由 USPS 派送的吗？
 
-UniUni 主要由自己的司机派送。部分包裹会转交给第三方快递完成最后派送，UniUni 也表示误分拣的包裹可能会移交给 [USPS](carrier:usps) 或 Canada Post。
+UniUni 由自己的司机派送。部分包裹会转交给第三方快递完成最后派送，UniUni 也表示误分拣的包裹可能会移交给 [USPS](carrier:usps) 或 Canada Post。
 
 ### UniUni 仓库会帮我保管包裹多久？
 
-第二次派送失败后，UniUni 会在仓库保管 30 天。跟踪显示 `storage` 后，请尽快联系客服预约重新派送。
+第二次派送失败后，UniUni 会在仓库保管 30 天。跟踪显示 `storage` 后，请联系客服预约重新派送。
 
 ### UniUni 是正规快递公司吗？
 
-是的。UniUni 由总部位于加拿大不列颠哥伦比亚省列治文市的 Uni Express Inc. 运营，为 Shein、Temu 等众多平台提供派送服务。
+是的。UniUni 由总部位于加拿大不列颠哥伦比亚省列治文市的 Uni Express Inc. 运营，为 Shein、Temu 等平台提供派送服务。
 
 ### 为什么我的 UniUni 单号一直没有更新？
 
@@ -122,4 +122,5 @@ UniUni 主要由自己的司机派送。部分包裹会转交给第三方快递�
 - [UniUni Platform: Delivery Verification](https://help.ship.uniuni.com/en/shipments/canada/delivery-verification) – 加拿大签收 PIN 码、邮件与短信发送、司机可重发及不可无人放置
 - [UniUni Platform: Filing a Claim](https://help.ship.uniuni.com/en/services/add-on/filing-a-claim) – 面向购买保障服务的发件商家理赔说明
 - [UniUni: Termes et conditions](https://www.uniuni.com/fr/termes-et-conditions/) – Uni Express Inc.，总部位于不列颠哥伦比亚省列治文市
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 从 UniUni 读取的信息、Uni Store 投寄、跨境发货提示
 :::

@@ -1,6 +1,6 @@
 ---
 title: Rastreamento GOFO Canada: códigos GFCA, status e atrasos
-description: Rastreie um pacote da GOFO no Canadá: formato do código GFCA, significado dos status no Peek, entregas perdidas, atrasos e contato.
+description: Rastreie um pacote da GOFO no Canadá: formato do código GFCA, significado dos status no Peek, o que fazer com atraso, entrega não realizada ou extravio.
 slug: rastreamento-gofo-canada
 published: 2026-11-24
 updated: 2026-11-24
@@ -41,7 +41,7 @@ A GOFO inclui seu telefone e e-mail de suporte em algumas linhas de evento; o Pe
 
 **Sem movimento.** Se só aparecer `Shipping Label Created`, a GOFO ainda não tem o pacote: a loja precisa entregá-lo. O Peek continua consultando a GOFO e, se passarem quatro dias sem nova leitura antes da saída para entrega, a página do pacote no Peek avisa. Mais em [rastreamento que não atualiza](guide:tracking-not-updating).
 
-**Entrega perdida.** Uma tentativa sem sucesso aparece como "Tentativa de entrega", com o motivo informado pela GOFO na linha do evento. A GOFO afirma que um pacote que já saiu para entrega normalmente recebe nova tentativa em até 24 horas; quando há problema de endereço, como falta do número do apartamento, ele pode voltar ao depósito local enquanto o endereço é conferido. O passo seguinte depende da GOFO e da loja: veja [entregas perdidas](guide:missed-delivery) para saber o que checar. Se chegar um SMS cobrando pagamento para reentregar um pacote da GOFO, leia [golpes de SMS de entrega](guide:delivery-scam-texts) antes de clicar em qualquer link.
+**Entrega não realizada.** Uma tentativa sem sucesso aparece como "Tentativa de entrega", com o motivo informado pela GOFO na linha do evento. A GOFO afirma que um pacote que já saiu para entrega normalmente recebe nova tentativa em até 24 horas; quando há problema de endereço, como falta do número do apartamento, ele pode voltar ao depósito local enquanto o endereço é conferido. O passo seguinte depende da GOFO e da loja: veja [entregas não realizadas](guide:missed-delivery) para saber o que checar. Se chegar um SMS cobrando pagamento para reentregar um pacote da GOFO, leia [golpes de SMS de entrega](guide:delivery-scam-texts) antes de clicar em qualquer link.
 
 **Entregue, mas não recebido.** O Peek mostra quando a GOFO registrou a entrega, mas não traz a foto nem os detalhes adicionados pela GOFO na linha de entrega. A página de rastreamento da própria GOFO em gofo.com/ca/track exibe o comprovante de entrega — na maioria das vezes uma foto de onde o pacote foi deixado — pedindo o nome do destinatário usado no pedido. Olhe ao redor de casa primeiro: caixa de correio ou área compartilhada de correspondência, vizinhos, moradores da casa e portaria ou segurança do prédio. Se continuar sem achar, avise a GOFO (contatos abaixo), se possível com foto da fachada da casa ou prédio, e contate a loja com o número do pedido e o código `GFCA`. Veja [entregue, mas não recebido](guide:delivered-not-received).
 
@@ -68,7 +68,7 @@ O Peek lê o rastreamento próprio da GOFO Canada: o status, cada movimentação
 
 Enquanto o pacote estiver aberto no Peek, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos; no dia em que a GOFO registra saída para entrega, a partir das 6h no horário local da movimentação mais recente, a cada 2 minutos enquanto o rastreador da GOFO responder. Nos demais casos, verifica de hora em hora. Após 12 horas apenas em "Etiqueta criada" ou "Recebida pela transportadora", ou dois dias sem novidade, verifica de hora em hora em qualquer modo, e a cada 6 horas depois de sete dias em "Etiqueta criada".
 
-Quando o registro mais recente completa quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza com a data desse registro, como "Sem atualizações desde seg., 12 de out.". A página passa a exibir "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando GOFO Canada." junto com o link "Pedir ajuda a GOFO Canada" para a página canadense de suporte. Após três semanas sem novidade, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando GOFO Canada."
+Quando o registro mais recente completa quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza com a data desse registro, como "Sem atualizações desde seg 12 out". A página passa a exibir "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando GOFO Canada." junto com o link "Pedir ajuda a GOFO Canada" para a página canadense de suporte. Após três semanas sem novidade, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando GOFO Canada."
 
 O Peek pode avisar em "Cada movimentação", "Etapas importantes" ou "Só a entrega". Ele não pode agendar reentrega nem falar com a GOFO ou a loja por você.
 
@@ -90,4 +90,5 @@ Confira primeiro o formato: um código da GOFO Canada tem `GFCA` e 14 dígitos. 
 - [Corporations Canada: GOFO EXPRESS CANADA INC.](https://ised-isde.canada.ca/cc/lgcy/fdrlCrpDtls.html?corpId=18073627) – empresa federal ativa 1807362-7, continuada de Ontário sob a CBCA em 2026-07-08, sede em Mississauga
 - [GOFO Canada: Customer Service](https://www.gofo.com/ca/customer-service) – e-mail, telefone e horários para destinatários, WhatsApp, formulário e chat; comprovante de entrega, onde procurar, nova tentativa em 24 horas, 1–2 dias a partir da estação, atrasos e perdas pelo remetente e devoluções que não podem ser interceptadas
 - [GOFO Canada](https://www.gofo.com/ca) – operando em Toronto e Vancouver, mais cobertura a caminho
+- [Universal Parcel Scraper: GOFO Canada](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/gofo-ca) – formato do código, links, textos dos eventos e etapas em comum com a GOFO dos EUA, a linha de atendimento, o que o Peek mantém e omite, os códigos MGP da GOFO dos EUA, o link de ajuda da GOFO Canada
 :::

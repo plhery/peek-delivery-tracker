@@ -1,6 +1,6 @@
 ---
 title: GOFO Canada 加拿大快递查询：GFCA 单号、状态与延误
-description: 查询加拿大 GOFO Canada 包裹：GFCA 单号格式、物流扫描状态说明、派送未成功或延误处理以及官方客服电话与 WhatsApp。
+description: 查询加拿大 GOFO Canada 包裹：GFCA 单号格式、物流扫描状态说明、包裹延误、派送未成功或丢失时该怎么办，以及如何联系 GOFO。
 slug: gofo-ca-tracking
 published: 2026-11-24
 updated: 2026-11-24
@@ -12,9 +12,9 @@ GOFO Canada 是多国快递网络 GOFO 在加拿大运营的分支，并与美�
 
 当单号符合以下格式（不区分大小写，带或不带空格）时，Peek 会归入 GOFO Canada：
 
-| 格式（示例） | 说明 |
+| 格式（虚构） | 说明 |
 | --- | --- |
-| `GFCA48291736405829` | `GFCA` 加 14 位数字，即 GOFO Canada 运单号。若在 `GFCA` 后紧接着误输入了字母 O，Peek 会自动当作数字 0 处理。 |
+| `GFCA48291736405829` | `GFCA` 加 14 位数字，即 GOFO Canada 运单号。若在 `GFCA` 后紧接着输入了字母 O，Peek 会当作数字 0 处理。 |
 
 GOFO 还会为每个包裹提供一个跟踪编号，它要么重复 `GFCA` 运单号，要么是商家自己的参考号。Peek 仅跟踪 `GFCA` 运单号，因此请粘贴 `GFCA` 开头的号码。
 
@@ -26,14 +26,14 @@ GOFO Canada 与美国 GOFO 共用同一套扫描代码，Peek 也用同一张映
 
 | GOFO 扫描状态 | Peek 显示阶段 | 中文含义 |
 | --- | --- | --- |
-| `Shipping Label Created` | 已生成面单 | 商家已打印面单，GOFO 尚未拿到包裹。 |
+| `Shipping Label Created` | 已生成面单 | 商家已创建面单，GOFO 尚未拿到包裹。 |
 | `Arrived at GOFO Regional Hub` | 运输中 | 已抵达 GOFO 区域分拨中心。 |
 | `Loaded on Vehicle` | 运输中 | 已装车在 GOFO 站点间转运，正前往派送站。 |
 | `Arrived at GOFO Delivery Station` | 运输中 | 已到达负责派送的 GOFO 站点。GOFO 表示通常会在 1–2 个自然日内派送。 |
 | `Out for Delivery` | 派送中 | 快递员正在派送。 |
 | `Delivered` | 已签收 | 已送达。 |
 
-由于代码共用，美国 GOFO 常见的扫描若出现在加拿大包裹上也会按同样方式显示。`Delivery Exception, Business Closed` 属于派送失败，显示为“派送未成功”，逗号后的具体原因会随情况变化。`Label Cancelled` 表示面单创建后已被作废，该单号下不会有包裹寄出，Peek 显示为“需要留意”。
+由于代码共用，美国 GOFO 包裹上出现过的扫描若出现在加拿大包裹上也会按同样方式显示。`Delivery Exception, Business Closed` 属于派送失败，显示为“派送未成功”，逗号后的具体原因会随情况变化。`Label Cancelled` 表示面单创建后已被作废，该单号下不会有包裹寄出，Peek 显示为“需要留意”。
 
 GOFO 会在部分扫描文本里附上客服电话和邮箱，Peek 会像 GOFO 官网查询页一样去掉这行内容。签收扫描只显示简洁的 `Delivered`，Peek 会省去 GOFO 在逗号后附加的说明。
 
@@ -62,13 +62,13 @@ GOFO 会在部分扫描文本里附上客服电话和邮箱，Peek 会像 GOFO �
 
 ## 使用 Peek 跟踪 GOFO Canada 包裹
 
-[Peek](/) 会按格式自动识别 GOFO Canada 单号：`GFCA` 加 14 位数字，不区分大小写，带或不带空格均可。也支持粘贴 gofo.com 上带 `searchID=` 和单号的 GOFO Canada 查询链接。Peek 仅跟踪 `GFCA` 运单号，不跟踪商家参考号。
+[Peek](/) 会按格式识别 GOFO Canada 单号：`GFCA` 加 14 位数字，不区分大小写，带或不带空格均可。也支持粘贴 gofo.com 上带 `searchID=` 和单号的 GOFO Canada 查询链接。Peek 仅跟踪 `GFCA` 运单号，不跟踪商家参考号。
 
 Peek 直接读取 GOFO Canada 官网数据，展示包裹状态、每条扫描的时间及 GOFO 给出的城镇和省份、地图标记、签收时间以及目的地国家。扫描文本保留 GOFO 原文（去掉客服电话行）。在包裹进入派送、签收、退回或待自提前，Peek 会显示 GOFO 的预计送达日，但会省略签收照片、经纬度坐标和重量。
 
-在你打开 Peek 页面或开启派送当天提醒的情况下，只要 GOFO 官网正常响应，Peek 最高每 10 分钟检查一次；在 GOFO 扫描进入派送当天，自最新扫描所在地当地时间早上 6 点起每 2 分钟检查一次。其余时候每小时检查一次。若停留在“已生成面单”或“已揽收”超过 12 小时，或连续两天无新动态，无论怎么跟进都改为每小时检查一次；若在“已生成面单”停留满七天，则改为每 6 小时检查一次。
+在你打开 Peek 页面时，或在派送当天开启提醒时，Peek 最高每 10 分钟检查一次；在 GOFO 扫描进入派送当天，自最新扫描所在地当地时间早上 6 点起，只要 GOFO 官方查询正常响应，每 2 分钟检查一次。其余时候每小时检查一次。若停留在“已生成面单”或“已揽收”超过 12 小时，或连续两天无新动态，无论怎么跟进都改为每小时检查一次；若在“已生成面单”停留满七天，则改为每 6 小时检查一次。
 
-当包裹仍停留在“已生成面单”、“已揽收”或“运输中”且最新一条扫描已过去四天时，Peek 会标出最后扫描日期（例如“自 10 月 12 日起没有物流更新”）。包裹页随后会提示：“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 GOFO Canada 查询。”并附上指向 GOFO 加拿大客服页的“向 GOFO Canada 寻求帮助”链接。如果超过三周仍无新扫描，页面会显示：“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 GOFO Canada 查询。”
+当包裹仍停留在“已生成面单”、“已揽收”或“运输中”且最新一条扫描已过去四天时，Peek 会标出最后扫描日期（例如“自10月12日周一起没有物流更新”）。包裹页随后会提示：“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 GOFO Canada 查询。”并附上指向 GOFO 加拿大客服页的“向 GOFO Canada 寻求帮助”链接。如果超过三周仍无新扫描，页面会显示：“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 GOFO Canada 查询。”
 
 Peek 支持开启“每次扫描”、“重要环节”或“仅派送当天”通知，但无法代你预约重派或联系 GOFO 与商家。
 
@@ -90,4 +90,5 @@ Peek 支持开启“每次扫描”、“重要环节”或“仅派送当天”
 - [Corporations Canada: GOFO EXPRESS CANADA INC.](https://ised-isde.canada.ca/cc/lgcy/fdrlCrpDtls.html?corpId=18073627) – 存续联邦注册公司 1807362-7，2026 年 7 月 8 日自安大略省转入 CBCA，注册办公地位于密西沙加
 - [GOFO Canada: Customer Service](https://www.gofo.com/ca/customer-service) – 邮箱、收件人热线与时间、WhatsApp、表单与聊天、签收证明、排查位置、24 小时内重派、派送站后 1–2 天送达、寄件人发起延误/丢失查件及退件不可拦截
 - [GOFO Canada](https://www.gofo.com/ca) – 已在多伦多和温哥华上线，覆盖持续扩展
+- [Universal Parcel Scraper: GOFO Canada](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/gofo-ca) – 单号格式、链接、与美国 GOFO 共用的扫描文案及阶段、客服电话、Peek 保留和省略的内容、美国 GOFO 的 MGP 单号、GOFO Canada 的帮助链接
 :::

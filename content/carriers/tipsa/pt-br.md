@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-A TIPSA é uma transportadora expressa espanhola do grupo Geopost, com agências na Espanha, em Portugal e em Andorra. Você pode rastrear uma encomenda com o código de 22 dígitos no [localizador de entregas](https://www.tip-sa.com/en/delivery-locator) da TIPSA ou colá-lo na caixa acima. O código vem da loja ou de quem enviou o pacote, geralmente no e-mail ou SMS de envio. Se não tiver o número, fale com a loja ou com a agência da TIPSA que entrega na sua região — encontre-a pelo código postal no [buscador de agências](https://www.tip-sa.com/es/agencias-de-transporte). Também é com essa agência que você combina uma nova entrega após um `Ausente` ou combina a retirada presencial; em caso de extravio ou avaria, avise a loja.
+A TIPSA é uma transportadora expressa espanhola do grupo Geopost, com agências na Espanha, em Portugal e em Andorra. Você pode rastrear uma encomenda com o código de 22 dígitos no [localizador de entregas](https://www.tip-sa.com/en/delivery-locator) da TIPSA ou colá-lo na caixa acima. O código vem da loja ou de quem enviou o pacote, por exemplo no e-mail ou SMS de envio. Se não tiver o número, fale com a loja ou com a agência da TIPSA que entrega na sua região — encontre-a pelo código postal no [buscador de agências](https://www.tip-sa.com/es/agencias-de-transporte). Também é com essa agência que você combina uma nova entrega após um `Ausente` ou combina a retirada presencial; se a encomenda for extraviada ou chegar danificada, avise a loja.
 
 ## Como é o código de rastreamento da TIPSA
 
@@ -14,7 +14,7 @@ O localizador da TIPSA pede o número de envio de 22 dígitos e também marca o 
 
 :::anatomy 028145 028145 4829105736
 - 028145 | Primeiro código de agência: uma agência TIPSA ligada ao envio
-- 028145 | Segundo código de agência: outra agência da rota do envio
+- 028145 | Segundo código de agência: outra agência ligada ao envio
 - 4829105736 | Conhecimento (albarán): o número próprio da remessa
 :::
 
@@ -24,7 +24,7 @@ O localizador da TIPSA pede o número de envio de 22 dígitos e também marca o 
 | `028145 028145 4829105736` | O mesmo código com espaços. O Peek aceita; o campo do site da TIPSA só comporta 22 caracteres, então digite sem espaços lá. |
 | `4829105736` | Apenas o *albarán* de 10 dígitos. Nem o localizador da TIPSA nem o Peek aceitam esse formato para a TIPSA. |
 
-As lojas podem configurar a TIPSA para mandar e-mails e SMS quando o pacote sai, chega à agência, sofre uma ocorrência ou é entregue, com links diretos para a página da remessa. Sem o número de 22 dígitos, o localizador da TIPSA permite buscar pela referência do envio, mas exige um identificador (agência + cliente) que só o remetente pode informar. Veja mais dicas em [como encontrar seu código de rastreamento](guide:find-tracking-number).
+As lojas podem configurar a TIPSA para mandar e-mails e SMS quando o pacote sai, chega à agência, sofre uma ocorrência ou é entregue, com links diretos para a página da remessa. Sem o número de 22 dígitos, o localizador da TIPSA permite buscar pela referência do envio, mas exige um identificador (agência + cliente) que você teria de pedir ao remetente. Veja mais dicas em [como encontrar seu código de rastreamento](guide:find-tracking-number).
 
 Códigos de 22 dígitos também combinam com Austrian Post, [USPS](carrier:usps) e Estafeta. Quando ambos os códigos de agência começam com `00`, o formato coincide com o da [CTT Express](carrier:ctt-express), outra transportadora espanhola — confirme no e-mail da loja qual transportadora foi usada. Muita gente busca por "TIPSA 10 dígitos", mas apenas a forma completa de 22 dígitos funciona: procure-a no e-mail ou peça ao remetente.
 
@@ -45,31 +45,31 @@ A página de detalhes da TIPSA fica apenas em espanhol, mesmo abrindo o localiza
 | `Faltan Datos / Datos incorrectos` | Faltam dados no endereço ou há informações erradas; anotado na rota antes de nova tentativa. |
 | `Cerrado` | O endereço estava fechado na hora da visita; anotado na rota após `REPARTO`. |
 | `Solicitada en otra dirección` | Foi pedida entrega em outro endereço e a encomenda está sendo redirecionada. |
-| `DISPONIBLE` ou `Pendiente de recoger en Tipsa` | Após entrega sem sucesso, o pacote aguarda retirada na agência. |
+| `DISPONIBLE` ou `Pendiente de recoger en Tipsa` | Após uma entrega não realizada, o pacote aguarda retirada na agência. |
 | `Devolver a Origen` | Em devolução ao remetente. |
 | `ENTREGADO` | Entregue. |
 
 `Ausente` traz uma nota da própria TIPSA informando que não foi possível contatar você, que haverá nova tentativa no dia útil seguinte e que você pode ligar para a agência de destino para combinar a entrega. O nome e o endereço dessa agência aparecem em "AGENCIA DESTINO".
 
-## Tentativa falha, agências e pontos Pickup da TIPSA
+## Entrega não realizada, agências e pontos Pickup da TIPSA
 
 A TIPSA opera com rede própria na Espanha e em Portugal continentais, Ilhas Baleares, Canárias, Ceuta e Melilla, e no exterior via DPDgroup. Após um `Ausente`, a segunda tentativa ocorre no dia útil seguinte; a tarifa paga pelas lojas inclui duas tentativas, ou três no serviço Premium para e-commerce.
 
-**Retirada na agência.** Se você for viajar ou preferir retirar pessoalmente, o FAQ da TIPSA informa que a encomenda fica na agência mais próxima do seu código postal por 15 dias corridos a partir da postagem — não da chegada. Depois disso, volta ao remetente. Leve seu documento oficial (DNI ou passaporte); terceiros precisam levar uma fotocópia do seu documento. O [buscador de agências](https://www.tip-sa.com/es/agencias-de-transporte) pesquisa por província ou código postal.
+**Retirada na agência.** Se você não estiver em casa ou preferir retirar pessoalmente, o FAQ da TIPSA informa que a encomenda fica na agência mais próxima do seu código postal por 15 dias a partir da postagem — não da chegada. Depois disso, volta ao remetente. Leve seu documento oficial (DNI ou passaporte); quem retirar por você precisa levar uma fotocópia do seu documento. O [buscador de agências](https://www.tip-sa.com/es/agencias-de-transporte) pesquisa por província ou código postal.
 
 **Alteração de endereço.** Segundo a TIPSA, apenas o remetente pode mudar endereço ou dados da entrega, então solicite à loja.
 
-**Pontos Pickup e lockers.** A TIPSA compartilha a rede de pontos Pickup com a [SEUR](carrier:seur), em comércios parceiros e lockers abertos 24 horas. A maioria dos pontos abre pelo menos seis dias por semana e guarda o pacote por 7 dias. A entrega em ponto precisa ser oferecida pela loja no checkout; consulte locais no [mapa de pontos Pickup](https://aplicaciones.tip-sa.com/puntospickup/).
+**Pontos Pickup e lockers.** A TIPSA compartilha a rede de pontos Pickup com a [SEUR](carrier:seur), em lojas e em lockers abertos 24 horas por dia, 7 dias por semana. A maioria dos pontos abre pelo menos seis dias por semana, e você tem 7 dias para retirar o pacote. A entrega em ponto é uma opção oferecida pela loja; consulte locais no [mapa de pontos Pickup](https://aplicaciones.tip-sa.com/puntospickup/).
 
 Algumas lojas contratam entrega aos sábados ou pré-alerta (SMS e e-mail avisando o dia em que o pacote chega ao destino). No serviço Premium também é possível escolher uma janela horária (com margem de uma hora); como a TIPSA não informa onde selecionar, pergunte à agência de destino.
 
-**Pagamento na entrega.** No pagamento contra entrega (*contrarreembolso*), a TIPSA cobra na entrega o valor definido pela loja, até €1.000 por remessa; no frete a cobrar (*portes debidos*), cobra o frete no destino. A empresa não especifica se o pagamento é em dinheiro ou cartão: confirme com a loja ou a agência. Ambos são pagos presencialmente no recebimento — portanto, SMS ou e-mail "da TIPSA" pedindo pagamento por link não corresponde a nenhum deles. Não pague e confira o número direto em tip-sa.com. Saiba mais em [golpes de SMS de entrega](guide:delivery-scam-texts).
+**Pagamento na entrega.** No pagamento contra entrega (*contrarreembolso*), a TIPSA cobra na entrega o valor definido pela loja, até €1.000 por remessa; no frete a cobrar (*portes debidos*), cobra o frete no destino. A empresa não especifica se o pagamento é em dinheiro ou cartão: confirme com a loja ou a agência. Ambos são pagos presencialmente no recebimento — portanto, SMS ou e-mail "da TIPSA" pedindo pagamento por link não corresponde a nenhum deles. Não pague e confira o número no localizador de tip-sa.com. Saiba mais em [golpes de SMS de entrega](guide:delivery-scam-texts).
 
 ## Encomenda atrasada, extraviada ou devolvida na TIPSA
 
 As páginas da TIPSA não detalham o que fazer quando o rastreamento para de se mover. Ligue para a agência de destino indicada na página da remessa ou fale com a loja; [rastreamento que não atualiza](guide:tracking-not-updating) ajuda a avaliar quando agir.
 
-Para extravio ou avaria, o FAQ da TIPSA é direto: contate o remetente e avise o ocorrido. A loja detém o contrato com a TIPSA e abre a reclamação; a transportadora não publica procedimento nem prazo de indenização para destinatários. A TIPSA também não tem página para pacote marcado como `ENTREGADO` que não chegou — avise o remetente nesse caso também.
+Para extravio ou danos, o FAQ da TIPSA é direto: contate o remetente e avise o ocorrido. A loja detém o contrato com a TIPSA e abre a reclamação; a transportadora não publica procedimento nem prazo de reclamação para destinatários. A TIPSA também não tem página para pacote marcado como `ENTREGADO` que não chegou — avise o remetente nesse caso também.
 
 Pacotes não retirados em até 15 dias da postagem voltam ao remetente; combine reembolso ou reenvio com a loja.
 
@@ -86,11 +86,11 @@ Portugal não tem linha separada: a página portuguesa de contato exibe os mesmo
 
 ## Como rastrear encomendas da TIPSA no Peek
 
-O [Peek](/) aceita o código de 22 dígitos com ou sem espaços. Como outras transportadoras compartilham esse formato, o Peek consulta as prováveis ao mesmo tempo, começando pela TIPSA: você vê "consultando…" e depois "TIPSA está com esta encomenda" quando a TIPSA reconhece o código. Um código cujos dois códigos de agência começam com `00`, com o segundo na lista de agências da CTT Express, vai direto para a CTT Express; nos demais códigos com ambos começando em `00`, o Peek consulta TIPSA, CTT Express e Austrian Post ao mesmo tempo, com a TIPSA primeiro. Se a loja informou TIPSA, toque em "Trocar" e selecione-a. Não é preciso código postal.
+O [Peek](/) aceita o código de 22 dígitos com ou sem espaços. Como outras transportadoras compartilham esse formato, o Peek consulta as prováveis ao mesmo tempo, começando pela TIPSA: você vê "consultando…" e depois "TIPSA está com esta encomenda." quando a TIPSA reconhece o código. Um código cujos dois códigos de agência começam com `00`, com o segundo na lista de agências da CTT Express, vai direto para a CTT Express; nos demais códigos com ambos começando em `00`, o Peek consulta TIPSA, CTT Express e Austrian Post ao mesmo tempo, com a TIPSA primeiro. Se a loja informou TIPSA, toque em "Trocar" e selecione-a. Não é preciso código postal.
 
-Um *albarán* de 10 dígitos não pode ser rastreado pela TIPSA, nem usando "Trocar" nem por link. O Peek não sugere nem consulta a TIPSA para 10 dígitos; se você selecionar TIPSA manualmente, o Peek avisa que ela "não emite códigos como este" e recorre aos serviços de rastreamento. Procure o código completo de 22 dígitos ou o link de rastreamento no e-mail ou SMS da loja, ou peça ao remetente. Links de tip-sa.com vindos do e-mail da loja funcionam quando trazem `id=` em páginas terminadas em `datos_env.php`, `datos_prestashop.php` ou `datos.php`, ou no endereço raiz de tip-sa.com. Links do localizador da TIPSA ou de páginas em tipsa-dinapaq.com não são lidos.
+Um *albarán* de 10 dígitos não pode ser rastreado pela TIPSA, nem usando "Trocar" nem por link. O Peek não sugere nem consulta a TIPSA para 10 dígitos; se você selecionar TIPSA manualmente, o Peek avisa que ela "não emite códigos como este" e recorre aos serviços de rastreamento. Procure o código completo de 22 dígitos ou o link de rastreamento no e-mail ou SMS da loja, ou peça à loja. Links de tip-sa.com vindos do e-mail da loja funcionam quando trazem `id=` em páginas terminadas em `datos_env.php`, `datos_prestashop.php` ou `datos.php`, ou no endereço raiz de tip-sa.com. Links do localizador da TIPSA ou de páginas em tipsa-dinapaq.com não são lidos.
 
-O Peek mostra o status, o histórico com cada cidade no mapa, o nome do remetente (salvo se a TIPSA o mascarar) e o peso. Os status ficam no espanhol original da TIPSA, e o Peek resume cada etapa no seu idioma: `PENDIENTE DE ENTREGAR A TIPSA` aparece como "Etiqueta criada"; `REPARTO` como "Saiu para entrega"; `Ausente`, `Cerrado` e `Faltan Datos / Datos incorrectos` como "Tentativa de entrega"; `DISPONIBLE` e `Pendiente de recoger en Tipsa` como "Pronta para retirada"; `Devolver a Origen` como "Precisa de atenção"; `ENTREGADO` como "Entregue"; e as demais leituras como "Em trânsito". O Peek interpreta todos os horários no fuso de Madri (inclusive de agências portuguesas) e converte para o seu fuso horário; em peektracker.com e nos apps de iPhone e Android, o histórico termina com "Horários no seu fuso horário:" e o nome do fuso. Ele descarta destinatário, endereço, códigos postais, referência, quantidade de volumes, cubagem e comprovante de entrega, não exibe previsão de entrega nem acompanha troca de transportadora. Enquanto o pacote está aberto no Peek, ou no dia da entrega com alertas ligados, e o rastreador oficial da TIPSA responde, ele verifica até a cada 10 minutos, e até a cada 2 minutos a partir das 6h de Madri no dia em que a TIPSA marca saída para entrega; fora disso, de hora em hora. Quando só os serviços de rastreamento respondem, verifica de hora em hora, a cada 3 horas depois de um dia sem nova movimentação, e até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados. Ele pode avisar sempre que o status muda. Após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), o Peek verifica de hora em hora.
+O Peek mostra o status, o histórico com cada cidade no mapa, o nome do remetente (salvo se a TIPSA o mascarar) e o peso. Os status ficam no espanhol original da TIPSA, e o Peek resume cada um com as próprias palavras: `PENDIENTE DE ENTREGAR A TIPSA` aparece como "Etiqueta criada"; `REPARTO` como "Saiu para entrega"; `Ausente`, `Cerrado` e `Faltan Datos / Datos incorrectos` como "Tentativa de entrega"; `DISPONIBLE` e `Pendiente de recoger en Tipsa` como "Pronta para retirada"; `Devolver a Origen` como "Precisa de atenção"; `ENTREGADO` como "Entregue"; e as demais leituras como "Em trânsito". O Peek interpreta todos os horários no fuso de Madri (inclusive de agências portuguesas) e converte para o seu fuso horário; em peektracker.com e nos apps de iPhone e Android, o histórico termina com "Horários no seu fuso horário:" e o nome do fuso. Ele descarta destinatário, endereço, códigos postais, referência, quantidade de volumes, cubagem e comprovante de entrega, não exibe previsão de entrega nem acompanha troca de transportadora. Enquanto o pacote está aberto no Peek, ou no dia da entrega com alertas ligados, e o próprio rastreador da TIPSA responde, ele verifica até a cada 10 minutos, e até a cada 2 minutos a partir das 6h de Madri no dia em que a TIPSA marca saída para entrega; fora disso, de hora em hora. Quando só os serviços de rastreamento respondem, verifica de hora em hora, a cada 3 horas depois de um dia sem nova movimentação, e até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados. Ele pode avisar sempre que o status muda. Após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), o Peek verifica de hora em hora.
 
 ## Perguntas frequentes sobre rastreamento TIPSA
 
@@ -108,11 +108,11 @@ Não: o localizador da TIPSA exige o código completo de 22 dígitos, e o Peek t
 
 ### A TIPSA tem pontos de retirada?
 
-Sim, pontos Pickup em lojas parceiras e lockers, compartilhados com a SEUR, com prazo de retirada de 7 dias. Essa opção só está disponível quando a loja a oferece no envio.
+Sim, pontos Pickup em lojas e lockers, compartilhados com a SEUR, com prazo de retirada de 7 dias. Essa opção só está disponível quando a loja a oferece no envio.
 
 :::sources
 - [TIPSA: Delivery locator](https://www.tip-sa.com/en/delivery-locator) – código de 22 dígitos, formulário e busca por referência com identificador (agência + cliente)
-- [TIPSA: Frequently Asked Questions](https://www.tip-sa.com/en/recursos/faqs) – código ausente, guarda de 15 dias, documento, mudança de endereço, extravio/avaria, telefones e e-mail
+- [TIPSA: Frequently Asked Questions](https://www.tip-sa.com/en/recursos/faqs) – código ausente, guarda de 15 dias, documento, mudança de endereço, extravio/danos, telefones e e-mail
 - [TIPSA: Contact](https://www.tip-sa.com/en/contact) – telefones e motivos do formulário
 - [TIPSA: Collection points](https://www.tip-sa.com/en/services/collection-points) – rede Pickup
 - [TIPSA: Pre-alert](https://www.tip-sa.com/en/services/pre-alert) – aviso por SMS/e-mail e prazos em Portugal
@@ -131,4 +131,5 @@ Sim, pontos Pickup em lojas parceiras e lockers, compartilhados com a SEUR, com 
 - [TIPSA: Portes debidos](https://www.tip-sa.com/es/envios-de-paquetes/portes-debidos) – frete cobrado no destino
 - [TIPSA: Aviso legal](https://www.tip-sa.com/es/tipsa-aviso-legal) – razão social
 - [TIPSA: Contacto (Portugal)](https://www.tip-sa.com/pt/contacto) – mesmos telefones para Portugal
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê, `Cerrado`, a etapa de cada status
 :::

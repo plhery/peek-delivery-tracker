@@ -18111,7 +18111,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "tipsa",
       "catalog": "tipsa",
       "slug": "tipsa-kuaidi-chaxun",
-      "title": "TIPSA 快递查询：22 位单号、西班牙语状态与网点自提",
+      "title": "TIPSA 快递查询：22 位单号、西班牙语状态与派送失败",
       "name": "TIPSA",
       "color": "#001e62"
     },

@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-A ePost Global é uma empresa norte-americana de logística cujos códigos de rastreamento começam com `EPG`. Nos históricos conhecidos pelo código do Peek, um centro de processamento da ePost Global nos Estados Unidos registra a entrada da encomenda e depois a transfere a um parceiro — um serviço postal ou transportadora — que realiza a entrega final. A loja ou o remetente informa o código: cole-o na caixa acima. O rastreador oficial da ePost Global fica em epgtrack.com. O catálogo do Peek também reconhece a ePost Global como PPX Track e como RR Donnelley, RRD Donnelley ou RRD International Logistics: buscar qualquer um desses nomes ao escolher a transportadora no Peek leva à ePost Global.
+A ePost Global é uma empresa norte-americana de logística cujos códigos de rastreamento começam com `EPG`. Nos históricos conhecidos pelo código do Peek, um centro de processamento da ePost Global nos Estados Unidos registra a entrada da encomenda e depois a transfere a um parceiro — um serviço postal ou transportadora — que segue com o transporte. A loja ou o remetente informa o código: cole-o na caixa acima. O rastreador oficial da ePost Global fica em epgtrack.com. O catálogo do Peek também reconhece a ePost Global como PPX Track e como RR Donnelley, RRD Donnelley ou RRD International Logistics: buscar qualquer um desses nomes ao escolher a transportadora no Peek leva à ePost Global.
 
 ## Como é o código de rastreamento da ePost Global
 
@@ -18,7 +18,7 @@ O Peek reconhece um formato para a ePost Global: `EPG` seguido de 10 a 15 dígit
 | `EPG4829105736` | `EPG` e 10 dígitos: também da ePost Global, o formato mais curto aceito pelo Peek. |
 | `EPG482910573` | Apenas 9 dígitos: fora do padrão da ePost Global. Três letras e nove dígitos combinam com Purolator e TNT Australia, entre outras, então o Peek consulta Purolator e TNT Australia para ver quem conhece o código. Se você escolher ePost Global manualmente, o Peek avisa que ela "não emite códigos como este". Confira se falta um dígito. |
 | `EPG4829105736491827` | 16 dígitos, um a mais: o Peek não reconhece nenhuma transportadora. Confira se há dígito sobrando. |
-| `LZ482910576US` | Duas letras, nove dígitos e `US`: código postal dos EUA. O Peek identifica a [USPS](carrier:usps) na maioria dos códigos iniciados em `C`, `E`, `L` ou `R`. Para ver também as etapas da ePost Global, adicione o código `EPG`. |
+| `LZ482910576US` | Duas letras, nove dígitos e `US`: código de rastreamento postal dos EUA. O Peek identifica a [USPS](carrier:usps) na maioria dos códigos iniciados em `C`, `E`, `L` ou `R`. Para ver também as etapas da ePost Global, adicione o código `EPG`. |
 
 Espaços, traços e letras minúsculas não fazem diferença ao colar o código no Peek.
 
@@ -34,7 +34,7 @@ O rastreador da ePost Global lista cada movimentação com horário, descrição
 | `Shipment in Transit to the ePost Global Processing Center` | Adicionado sempre um minuto após os dados: faz parte da emissão da etiqueta, não indica que o pacote já está em movimento. | "Etiqueta criada" |
 | `Parcel Received and Processing` | Um centro de processamento da ePost Global recebeu o volume; a linha informa cidade e estado. | "Recebida pela transportadora" |
 | `Parcel Shipped` | A encomenda saiu do centro de processamento. | "Em trânsito" |
-| `In transit to … tracking #: …` | Entregue ao parceiro que segue com o transporte, um minuto após o despacho. A linha traz o serviço do parceiro e o novo código (às vezes escrita como `In transit via …` ou `tracking#:`). | "Em trânsito" |
+| `In transit to … tracking #: …` | Entregue ao parceiro que segue com o transporte, um minuto após o despacho. A linha traz o serviço do parceiro e o novo código (também pode aparecer como `In transit via …` ou `tracking#:`). | "Em trânsito" |
 | `In transit` | A mesma transferência, sem nome do serviço nem código do parceiro. | "Em trânsito" |
 
 **Etapas do parceiro.** Após a transferência, o rastreador da ePost Global repassa as leituras do próprio parceiro. Estas são as reconhecidas no código do Peek:
@@ -63,9 +63,9 @@ Um recebimento do parceiro depois de `Parcel Shipped` conta como "Em trânsito",
 
 ## Quem faz a entrega das encomendas da ePost Global
 
-A ePost Global afirma manter parcerias postais e de última milha em seis continentes. Nos históricos conhecidos pelo Peek, constam OSM Worldwide, DAI Post na Nova Zelândia, ECMS Express, rede europeia da GLS, Royal Mail no Reino Unido e PostNL via Spring, com a [La Poste](carrier:la-poste) assumindo na França após a PostNL. Quando a ePost Global não nomeia o parceiro mas fornece um código postal (duas letras, nove dígitos, duas letras), o Peek consulta o correio do país de destino — como [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), An Post, Canada Post ou [Australia Post](carrier:australia-post), conforme explicado abaixo.
+A ePost Global afirma manter parcerias postais e de última milha em seis continentes. Nos históricos conhecidos pelo Peek, constam OSM Worldwide, DAI Post na Nova Zelândia, ECMS Express, rede europeia da GLS, Royal Mail no Reino Unido e PostNL via Spring, com a [La Poste](carrier:la-poste) assumindo na França após a PostNL. Quando a ePost Global não nomeia o parceiro mas fornece um código de rastreamento postal (duas letras, nove dígitos, duas letras), o Peek consulta o correio do país de destino — como [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), An Post, Canada Post ou [Australia Post](carrier:australia-post), conforme explicado abaixo.
 
-**Tentativas de entrega e retirada.** O número de tentativas e o local de guarda seguem as regras do parceiro final: consulte o parceiro com o código dele. Veja [tentativa de entrega sem sucesso](guide:missed-delivery) e [encomenda não retirada](guide:uncollected-parcel).
+**Tentativas de entrega e retirada.** O número de tentativas e o local de guarda seguem as regras do parceiro final: consulte o parceiro com o código dele. Veja [entrega não realizada](guide:missed-delivery) e [encomenda não retirada](guide:uncollected-parcel).
 
 **Alfândega na União Europeia.** Compras online vindas de fora da UE pagam taxa aduaneira de €3 por item em pacotes de até €150, desde 1º de julho de 2026, e taxa de manuseio da União de €2 por item, qualquer que seja o valor, desde 1º de novembro de 2026. Considera-se um item as mercadorias com a mesma classificação tarifária, descrição e, quando exigido, origem. Na área de IVA da UE também incide IVA de importação, salvo se já cobrado na compra via IOSS. Segundo a ePost Global, tanto remessas DDP quanto DDU devem o imposto e a taxa: no DDP o remetente quita antes da chegada e você nada paga na entrega; no DDU você paga ao receber. A Alemanha não aceita mais remessas DDU, e a ePost desligou o envio DDU para lá em 26 de outubro. Nos demais países, o valor varia conforme as regras locais. Veja [encomendas retidas na alfândega](guide:customs).
 
@@ -73,9 +73,9 @@ A ePost Global afirma manter parcerias postais e de última milha em seis contin
 
 **Nada ainda.** Quando o rastreador da ePost Global ainda não traz atualizações para o código, o Peek exibe "Aguardando ePost Global" e continua consultando. Confira o código: `EPG` mais 10 a 15 dígitos. Se após dois dias a ePost Global continuar sem reconhecer o código e nenhum serviço de rastreamento encontrá-lo, o Peek informa: "Depois de dois dias, a transportadora ainda não reconhece este código. Confira o código, escolha outra transportadora ou exclua a encomenda." Se nada aparecer após alguns dias, confirme com a loja se o pacote realmente foi postado.
 
-**Sem novidades após a transferência.** O parceiro já está com a encomenda e o rastreamento próprio dele pode estar mais adiantado que o da ePost Global. O Peek acompanha o parceiro automaticamente quando possível (veja abaixo); caso contrário, busque o nome e o código do parceiro na linha de transferência.
+**Sem novidades após a transferência.** O parceiro já está com a encomenda e o rastreamento próprio dele pode estar mais adiantado que o da ePost Global. O Peek acompanha a encomenda por lá quando possível (veja abaixo); caso contrário, busque o nome e o código do parceiro na linha de transferência.
 
-**Dias sem atualização.** Após quatro dias sem nova linha, o Peek destaca a data da última leitura ("Sem atualizações desde seg., 12 de out."), avisa que encomendas costumam ficar quietas em voos longos, na alfândega ou no fim de semana (após três semanas sem novidade, orienta falar com o vendedor) e exibe o link "Pedir ajuda a ePost Global" — ou o do parceiro quando o Peek já segue a encomenda com um parceiro de suporte conhecido. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
+**Dias sem atualização.** Após quatro dias sem nova linha, o Peek destaca a data da última leitura ("Sem atualizações desde seg., 12 de out."), avisa que encomendas costumam ficar quietas em voos longos, na alfândega ou no fim de semana (após três semanas sem novidade, orienta falar com o vendedor) e exibe o link "Pedir ajuda a ePost Global" — ou o do parceiro quando o Peek já segue a encomenda com um parceiro cuja página de ajuda ele conhece. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
 **Entregue, mas não chegou.** Fale com o parceiro final e depois com a loja. Veja [encomenda entregue mas não recebida](guide:delivered-not-received).
 
@@ -83,7 +83,7 @@ A ePost Global afirma manter parcerias postais e de última milha em seis contin
 
 ## Atendimento e contato da ePost Global
 
-Em epostglobalshipping.com, a ePost Global divulga uma linha gratuita nos EUA, +1 866-784-8444, e um telefone local, +1 310-784-8485, sem horários nem e-mail de suporte publicados. Seu assistente online, o ePost Assist, fica em epostassist.epgtrack.com, e a página de suporte traz um formulário de contato. Quando um pacote para de atualizar, o Peek vincula essa página de suporte no botão "Pedir ajuda a ePost Global".
+Em epostglobalshipping.com, a ePost Global divulga uma linha gratuita, +1 866-784-8444, e um telefone local, +1 310-784-8485, sem horários nem e-mail de suporte publicados. Seu assistente online, o ePost Assist, fica em epostassist.epgtrack.com, e a página de suporte traz um formulário de contato. Quando um pacote para de atualizar, o Peek vincula essa página de suporte no link "Pedir ajuda a ePost Global".
 
 Em compras de loja, fale primeiro com a loja: foi ela quem contratou o envio. Depois que um parceiro assume o pacote, trate dúvidas da entrega diretamente com o parceiro.
 
@@ -95,15 +95,15 @@ O Peek exibe o status, cada movimentação com local, o país de destino e o par
 
 O rastreador mostra horários sem fuso horário. O Peek lê `Parcel Received and Processing` e `Parcel Shipped` no horário do estado do centro de processamento (quando o estado adota um único fuso), as linhas da GLS no horário da Europa Central, as da Royal Mail no horário do Reino Unido e as demais no relógio do local ou do trecho percorrido. Todos os horários aparecem convertidos para o fuso do seu dispositivo; em peektracker.com e nos apps de iPhone e Android, o histórico termina com "Horários no seu fuso horário:" seguido do nome do fuso.
 
-Quando a ePost Global indica um parceiro conhecido pelo Peek, o cartão da encomenda avisa ("Entrega por PostNL", por exemplo, ou "Anunciada a PostNL, ainda não recebida" enquanto o parceiro tem apenas o aviso prévio sem leitura própria) e lista o código do parceiro logo após o código `EPG`, se informado. O Peek passa a consultar esse parceiro usando o código dele, ou o código `EPG` se nenhum novo código vier. Sem parceiro nomeado, consulta o correio do país de destino em códigos postais e, noutros formatos, a única transportadora correspondente ao padrão — sempre apenas entre transportadoras cujo rastreamento o Peek lê diretamente. Assim que esse parceiro mostra uma leitura tão recente quanto ou mais recente que a última da ePost Global, o Peek acompanha o pacote por lá preservando o histórico da ePost Global; caso contrário, mantém o rastreador da ePost Global e as cópias das linhas do parceiro. O mesmo vale para entregas pela rede europeia da GLS, já que a ePost Global não indica qual empresa nacional da GLS fará a entrega.
+Quando a ePost Global indica um parceiro conhecido pelo Peek, o cartão da encomenda avisa ("Entrega por PostNL", por exemplo, ou "Anunciada a PostNL, ainda não recebida" enquanto o parceiro tem apenas o aviso prévio sem leitura própria) e lista o código do parceiro logo após o código `EPG`, se informado. O Peek então consulta também esse parceiro usando o código dele, ou o código `EPG` se nenhum novo código vier. Sem parceiro nomeado, consulta o correio do país de destino para um código de rastreamento postal e, para outros formatos, a única transportadora correspondente ao padrão — sempre apenas entre transportadoras cujo rastreamento o Peek lê diretamente. Assim que essa transportadora mostra uma leitura tão recente quanto ou mais recente que a última da ePost Global, o Peek acompanha o pacote por lá preservando o histórico da ePost Global; caso contrário, mantém o rastreador da ePost Global e as cópias das linhas do parceiro. O mesmo vale para entregas pela rede europeia da GLS, já que a ePost Global não indica qual empresa nacional da GLS fará a entrega.
 
-Enquanto você mantém o pacote aberto no Peek, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos, e até a cada 2 minutos a partir das 6h no horário local no dia da saída para entrega, enquanto o rastreador da ePost Global responder (pelos serviços de rastreamento, até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados); fora disso, de hora em hora. Quando outra transportadora assume, o Peek segue o ritmo dela. Após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Você pode ativar alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode contatar a ePost Global nem a loja em seu nome.
+Enquanto você mantém o pacote aberto no Peek, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos, e até a cada 2 minutos a partir das 6h no horário local no dia da saída para entrega, enquanto o próprio rastreador da ePost Global responder (pelos serviços de rastreamento, até a cada 15 minutos); fora disso, de hora em hora. Quando outra transportadora assume, o Peek segue o ritmo dela. Após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Você pode ativar alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode contatar a ePost Global nem a loja em seu nome.
 
 ## Perguntas frequentes sobre rastreamento ePost Global
 
 ### O que é PPX Track?
 
-É outro nome que o catálogo do Peek dá à ePost Global. O Peek lê links de rastreamento da PPX Track como links da ePost Global e extrai o código automaticamente.
+É outro nome que o catálogo do Peek dá à ePost Global. O Peek lê links de rastreamento da PPX Track como links da ePost Global e extrai o código dele.
 
 ### O que significa "In transit to" no rastreamento da ePost Global?
 
@@ -115,13 +115,15 @@ A loja enviou os dados da encomenda à ePost Global, mas nenhum centro de proces
 
 ### Quem entrega encomendas da ePost Global no meu país?
 
-Um parceiro local, informado na linha de transferência da ePost Global. Nos históricos conhecidos pelo Peek aparecem OSM Worldwide, DAI Post na Nova Zelândia, ECMS Express, rede europeia da GLS, Royal Mail no Reino Unido, PostNL via Spring e La Poste na França.
+Um parceiro, informado na linha de transferência da ePost Global. Nos históricos conhecidos pelo Peek aparecem OSM Worldwide, DAI Post na Nova Zelândia, ECMS Express, rede europeia da GLS, Royal Mail no Reino Unido, PostNL via Spring e La Poste na França.
 
 ### Como entro em contato com a ePost Global?
 
-Procure a loja primeiro, pois foi ela quem contratou o envio. Para falar direto com a ePost Global, use os telefones +1 866-784-8444 ou +1 310-784-8485, o assistente ePost Assist em epostassist.epgtrack.com ou o link "Pedir ajuda a ePost Global" do Peek, que abre o formulário de suporte quando o pacote para de atualizar.
+Procure a loja primeiro, pois foi ela quem contratou o envio. A ePost Global divulga dois telefones, +1 866-784-8444 e +1 310-784-8485, mas nenhum e-mail de suporte; numa encomenda que parou de atualizar, o link "Pedir ajuda a ePost Global" do Peek abre a página de suporte da ePost Global.
 
 :::sources
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – taxa aduaneira de €3 por item até €150 desde 1º de julho de 2026 e taxa de manuseio da União de €2 desde 1º de novembro de 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 por item qualquer que seja o valor e definição de item
+- [Universal Parcel Scraper: ePost Global](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/epost-global) – nomes, o formato EPG, links de rastreamento, o rastreador, textos e suas etapas, linhas dos parceiros, fusos horários, o parceiro e o código dele, país de destino, o que fica de fora, página de ajuda
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formatos de código da Purolator e da USPS, transferência ao parceiro ou ao correio do seu país
 :::

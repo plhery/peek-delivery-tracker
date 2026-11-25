@@ -16,7 +16,7 @@ Peek knows one shape for ePost Global: EPG and 10 to 15 digits. With invented di
 | --- | --- |
 | `EPG482910573649182` | EPG and 15 digits: an ePost Global number. |
 | `EPG4829105736` | EPG and 10 digits: also ePost Global's, the shortest Peek takes. |
-| `EPG482910573` | Only nine digits: not ePost Global's shape. Three letters and nine digits fit [Purolator](carrier:purolator) and other carriers, TNT Australia among them, so Peek asks Purolator, [Colis Privé](carrier:colis-prive) and TNT Australia which one knows the number. If you choose ePost Global for it, Peek says it "doesn’t issue numbers like this one". Check for a missing digit. |
+| `EPG482910573` | Only nine digits: not ePost Global's shape. Three letters and nine digits fit [Purolator](carrier:purolator) and other carriers, TNT Australia among them, so Peek asks Purolator and TNT Australia which one knows the number. If you choose ePost Global for it, Peek says it "doesn’t issue numbers like this one". Check for a missing digit. |
 | `EPG4829105736491827` | 16 digits, one too many: Peek recognises no carrier. Check for an extra digit. |
 | `LZ482910576US` | Two letters, nine digits and US: a US postal number. Peek names [USPS](carrier:usps) for most starting with C, E, L or R. To see ePost Global's own lines as well, add the EPG number. |
 
@@ -119,7 +119,7 @@ A partner, which ePost Global's handover line names. In the histories Peek's cod
 
 ### How do I contact ePost Global?
 
-Ask the shop first: it booked the delivery. This page gives no phone number or email, but on a parcel that has stopped moving, Peek's "Get help from ePost Global" link opens ePost Global's contact-support page.
+Ask the shop first: it booked the delivery. ePost Global gives two phone numbers, +1 866-784-8444 and +1 310-784-8485, but no support email, and on a parcel that has stopped moving, Peek's "Get help from ePost Global" link opens ePost Global's contact-support page.
 
 :::sources
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026

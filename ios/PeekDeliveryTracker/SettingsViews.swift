@@ -1216,7 +1216,8 @@ private struct SettingsAppearancePicker: View {
 }
 
 #if os(macOS)
-/// A Mac's Settings window, where iOS has the Account sheet: General, Notifications for an account, then the account.
+/// A Mac's Settings window, where iOS has the Account sheet: General, Notifications (for an account, the demo, or the
+/// parcels followed without one), Add parcels by email and Assistants once the server offers them, then the account.
 struct SettingsWindow: View {
     @EnvironmentObject private var session: SessionStore
     @EnvironmentObject private var store: ParcelStore

@@ -15179,6 +15179,24 @@
     ]
   },
   {
+    "input": "1029999999999",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-fr",
+      "correos-chile",
+      "yunda",
+      "korea-post",
+      "apple-express",
+      "econt",
+      "ozon-logistics",
+      "paquetexpress"
+    ],
+    "asked": [
+      "apple-express"
+    ]
+  },
+  {
     "input": "103024281026650620001108013",
     "carrier": "transaher",
     "confidence": "high",
@@ -85631,6 +85649,20 @@
     "candidates": [
       "precision-deliveries"
     ]
+  },
+  {
+    "input": "ASL42613845454",
+    "carrier": "asl-track",
+    "confidence": "high",
+    "candidates": [
+      "asl-track"
+    ]
+  },
+  {
+    "input": "ASL42613845455",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "ASO1000GB02486320001",

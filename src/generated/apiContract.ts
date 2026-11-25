@@ -27383,6 +27383,11 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^APPL\\d{13}$",
         "confidence": "high"
+      },
+      {
+        "pattern": "^102\\d{10}$",
+        "confidence": "low",
+        "servedCountriesOnly": true
       }
     ],
     "trackingSearchUrl": "https://track.appleexpress.com/",
@@ -69963,6 +69968,40 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": []
+  },
+  "asl-track": {
+    "displayName": "ASL Track",
+    "aliases": [
+      "ASLTrack"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#17538f",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "asl-track"
+    },
+    "trackingUrlTemplate": "https://asltrack.com/track/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "asltrack.com",
+          "www.asltrack.com"
+        ],
+        "path": "^/track/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^ASL\\d{11}$",
+        "confidence": "high",
+        "checksum": "luhn-digits"
+      }
+    ],
+    "trackingSearchUrl": "https://asltrack.com/"
   }
 } as const;
 
@@ -72096,7 +72135,8 @@ export const CARRIER_IDS = [
   "vyang",
   "wokexp",
   "xs-express",
-  "zxsy"
+  "zxsy",
+  "asl-track"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

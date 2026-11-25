@@ -61148,7 +61148,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Riyadh",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "gfs-express"
     },
     "trackingUrlTemplate": "https://track.gfsxpress.com/#/track-order?trackingStr={trackingNumber}",
     "linkRules": [
@@ -61160,7 +61160,12 @@ export const CARRIER_CAPABILITIES = {
         "fragment": "^/track-order\\?trackingStr=([A-Za-z0-9-]+)$"
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^CGD\\d{11}$",
+        "confidence": "high"
+      }
+    ],
     "trackingSearchUrl": "https://track.gfsxpress.com/"
   },
   "jana-post": {

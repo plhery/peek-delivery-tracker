@@ -14,6 +14,7 @@ import { DIRECT_HISTORY, heldRows } from './providerCopies';
 import { providerLimit } from './providerPolicy';
 import { withReviewDemo } from './reviewDemo';
 import { keptStage } from './stageNotices';
+import { ASSISTANT_NOTE_EMBED, NOTE_EMBED, withOwnerNote } from './parcelNotes';
 import type { SyncReason } from './trackingAudit';
 import { isRecord, type JsonObject } from './types';
 
@@ -248,6 +249,7 @@ function parcelShare(value: unknown): ParcelShare {
       name: typeof words.name === 'string' ? words.name : null,
       note: typeof words.note === 'string' ? words.note : null,
       from: typeof words.from === 'string' ? words.from : null,
+      ...(words.early === true ? { early: true } : {}),
     } } : {}),
   };
 }
@@ -474,9 +476,14 @@ export class SupabaseClient {
     return payload as T | null;
   }
 
+  /** What a read of whole parcels selects: the API's package shape. The owner's own client adds its note. */
+  protected packageSelect(): string {
+    return PACKAGE_SELECT;
+  }
+
   async listPackages(includeArchived = false): Promise<JsonObject[]> {
     const params: Array<[string, string]> = [
-      ['select', PACKAGE_SELECT],
+      ['select', this.packageSelect()],
       ['order', 'created_at.desc'],
     ];
     if (!includeArchived) params.push(['archived_at', 'is.null']);
@@ -485,27 +492,27 @@ export class SupabaseClient {
 
   async getPackage(packageId: string): Promise<JsonObject | null> {
     const params: Array<[string, string]> = [
-      ['select', PACKAGE_SELECT],
+      ['select', this.packageSelect()],
       ['id', `eq.${packageId}`],
       ['limit', '1'],
     ];
     const parcel = rows(await this.request(`/rest/v1/packages?${query(params)}`))[0];
     if (parcel) return parcel;
     return rows(await this.request(`/rest/v1/packages?${query({
-      select: PACKAGE_SELECT, 'carrier_data->>original_package_id': `eq.${packageId}`, limit: '1',
+      select: this.packageSelect(), 'carrier_data->>original_package_id': `eq.${packageId}`, limit: '1',
     })}`))[0] ?? null;
   }
 
   async getPackageByTrackingNumber(trackingNumber: string): Promise<JsonObject | null> {
     const params: Array<[string, string]> = [
-      ['select', PACKAGE_SELECT],
+      ['select', this.packageSelect()],
       ['tracking_number', `eq.${trackingNumber}`],
       ['limit', '1'],
     ];
     const parcel = rows(await this.request(`/rest/v1/packages?${query(params)}`))[0];
     if (parcel) return parcel;
     return rows(await this.request(`/rest/v1/packages?${query({
-      select: PACKAGE_SELECT, 'carrier_data->>original_tracking_number': `eq.${trackingNumber}`, limit: '1',
+      select: this.packageSelect(), 'carrier_data->>original_tracking_number': `eq.${trackingNumber}`, limit: '1',
     })}`))[0] ?? null;
   }
 
@@ -1296,10 +1303,10 @@ export class SupabaseServiceClient extends SupabaseClient {
     });
   }
 
-  /** The account's open parcels added from this sign-in since `since`, with their scans' stages. */
+  /** The account's open parcels added from this sign-in since `since`, with their scans' stages and whether they hold a note. */
   async listAddedFromSession(userId: string, sessionId: string, since: Date): Promise<JsonObject[]> {
     return rows(await this.request(`/rest/v1/packages?${query({
-      select: 'id,tracking_number,label,archived_at,current_stage,created_at,tracking_events(stage)',
+      select: 'id,tracking_number,label,archived_at,current_stage,created_at,tracking_events(stage),package_notes(package_id),package_files(id)',
       user_id: `eq.${userId}`,
       added_session: `eq.${sessionId}`,
       archived_at: 'is.null',
@@ -1832,8 +1839,13 @@ export class SupabaseServiceClient extends SupabaseClient {
    * One parcel of an account in the shape the API gives its owner, events
    * included. Null when the parcel is gone or belongs to someone else.
    */
-  async getOwnedPackage(packageId: string, userId: string): Promise<JsonObject | null> {
-    const params = query({ select: PACKAGE_SELECT, id: `eq.${packageId}`, user_id: `eq.${userId}`, limit: '1' });
+  /**
+   * One parcel of the account as its apps read it. `note`: with its private note's text and files' names, which only an
+   * assistant the owner connected reads (`ASSISTANT_NOTE_EMBED`); an e-mail never does.
+   */
+  async getOwnedPackage(packageId: string, userId: string, { note = false }: { note?: boolean } = {}): Promise<JsonObject | null> {
+    const select = note ? `${PACKAGE_SELECT},${ASSISTANT_NOTE_EMBED}` : PACKAGE_SELECT;
+    const params = query({ select, id: `eq.${packageId}`, user_id: `eq.${userId}`, limit: '1' });
     const parcel = rows(await this.request(`/rest/v1/packages?${params}`))[0];
     return parcel ? withReviewDemo(parcel, userId) : null;
   }
@@ -1864,9 +1876,10 @@ export class SupabaseServiceClient extends SupabaseClient {
     return rows(await this.request(`/rest/v1/notification_preferences?${params}`))[0]?.show_peek_ai !== false;
   }
 
-  /** An account's parcels as its apps read them, archived ones included. */
-  async listAccountPackages(userId: string): Promise<JsonObject[]> {
-    const params = query({ select: PACKAGE_SELECT, user_id: `eq.${userId}`, order: 'created_at.desc' });
+  /** An account's parcels as its apps read them, archived ones included; `note` as `getOwnedPackage` reads it. */
+  async listAccountPackages(userId: string, { note = false }: { note?: boolean } = {}): Promise<JsonObject[]> {
+    const select = note ? `${PACKAGE_SELECT},${ASSISTANT_NOTE_EMBED}` : PACKAGE_SELECT;
+    const params = query({ select, user_id: `eq.${userId}`, order: 'created_at.desc' });
     return rows(await this.request(`/rest/v1/packages?${params}`)).map((parcel) => withReviewDemo(parcel, userId));
   }
 
@@ -3171,19 +3184,59 @@ export class SupabaseServiceClient extends SupabaseClient {
     const params = { select: 'id', package_id: `in.(${packageIds.join(',')})`, state: 'in.(queued,running)', limit: '1' };
     return rows(await this.request(`/rest/v1/sync_jobs?${query(params)}`)).length > 0;
   }
+
+  /** A file of a parcel's note: whose it is, its name, type and size; never its bytes. */
+  async packageFile(fileId: string): Promise<PackageFileRow | null> {
+    const file = rows(await this.request(`/rest/v1/package_files?${query({
+      select: 'id,user_id,name,content_type,size', id: `eq.${fileId}`, limit: '1',
+    })}`))[0];
+    return file && typeof file.user_id === 'string' && typeof file.name === 'string' && typeof file.content_type === 'string'
+      ? { id: String(file.id), userId: file.user_id, name: file.name, contentType: file.content_type, size: Number(file.size) || 0 }
+      : null;
+  }
+
+  /** The bytes of a file of `userId`, or of its thumbnail; null when there are none. */
+  async packageFileContent(fileId: string, userId: string, thumbnail: boolean): Promise<Buffer | null> {
+    const content = await this.request('/rest/v1/rpc/package_file_content', {
+      method: 'POST', body: { p_file_id: fileId, p_user_id: userId, p_thumbnail: thumbnail },
+    });
+    return typeof content === 'string' && content ? Buffer.from(content, 'base64') : null;
+  }
+}
+
+/** A file of a parcel's note as the server reads it before serving its bytes. */
+export interface PackageFileRow { id: string; userId: string; name: string; contentType: string; size: number }
+
+/** A file to add to a parcel's note, as it is stored (parcelFiles.ts). */
+export interface NewPackageFile {
+  name: string;
+  type: string;
+  content: Uint8Array;
+  thumbnail: Uint8Array | null;
+  width: number | null;
+  height: number | null;
 }
 
 export class SupabaseUserClient extends SupabaseClient {
   /** The account the token signs in, when the server read it: a review demo parcel reads as its scenario (reviewDemo.ts). */
   ownerId: string | null = null;
 
+  /** The owner's reads carry the parcel's private note and its files (parcelNotes.ts); nobody else's do. */
+  protected override packageSelect(): string {
+    return `${PACKAGE_SELECT},${NOTE_EMBED}`;
+  }
+
+  private owned(parcel: JsonObject): JsonObject {
+    return withOwnerNote(withReviewDemo(parcel, this.ownerId), this.ownerId);
+  }
+
   override async listPackages(includeArchived = false): Promise<JsonObject[]> {
-    return (await super.listPackages(includeArchived)).map((parcel) => withReviewDemo(parcel, this.ownerId));
+    return (await super.listPackages(includeArchived)).map((parcel) => this.owned(parcel));
   }
 
   override async getPackage(packageId: string): Promise<JsonObject | null> {
     const parcel = await super.getPackage(packageId);
-    return parcel ? withReviewDemo(parcel, this.ownerId) : null;
+    return parcel ? this.owned(parcel) : null;
   }
 
   /**
@@ -3198,7 +3251,42 @@ export class SupabaseUserClient extends SupabaseClient {
 
   override async getPackageByTrackingNumber(trackingNumber: string): Promise<JsonObject | null> {
     const parcel = await super.getPackageByTrackingNumber(trackingNumber);
-    return parcel ? withReviewDemo(parcel, this.ownerId) : null;
+    return parcel ? this.owned(parcel) : null;
+  }
+
+  /** Writes the parcel's private note; null or blank deletes its text. False for a parcel that is not the account's. */
+  async setPackageNote(packageId: string, note: string | null): Promise<boolean> {
+    return await this.request('/rest/v1/rpc/set_package_note', {
+      method: 'POST', body: { p_package_id: packageId, p_body: note },
+    }) === true;
+  }
+
+  /**
+   * Adds a file to the parcel's note: the stored row, without its bytes. The database refuses past its limits with its
+   * own codes (PF001 the parcel's five, PF002 the account's 200 MB, PF003 10 MB, PF004 a type its bytes don't show), and
+   * a parcel not the account's with P0002.
+   */
+  async addPackageFile(packageId: string, file: NewPackageFile): Promise<JsonObject> {
+    const added = await this.request('/rest/v1/rpc/add_package_file', {
+      method: 'POST',
+      body: {
+        p_package_id: packageId,
+        p_name: file.name,
+        p_content_type: file.type,
+        p_content: Buffer.from(file.content).toString('base64'),
+        p_thumbnail: file.thumbnail ? Buffer.from(file.thumbnail).toString('base64') : null,
+        p_width: file.width,
+        p_height: file.height,
+      },
+      timeoutMs: 60_000,
+    }).catch(ownedPackageError);
+    if (!isRecord(added) || typeof added.id !== 'string') throw new SupabaseError('Supabase did not return the added file');
+    return added;
+  }
+
+  /** Deletes a file of the account's notes; false when it is not the account's. */
+  async deletePackageFile(fileId: string): Promise<boolean> {
+    return await this.request('/rest/v1/rpc/delete_package_file', { method: 'POST', body: { p_file_id: fileId } }) === true;
   }
 
   /**
@@ -3209,11 +3297,13 @@ export class SupabaseUserClient extends SupabaseClient {
     linkId: string,
     ownerKeyHash: string | null,
     label: string,
+    note: string | null = null,
   ): Promise<{ outcome: 'kept' | 'already' | 'quota'; packageId: string | null } | null> {
     let result: unknown;
     try {
       result = await this.request('/rest/v1/rpc/claim_parcel_link', {
-        method: 'POST', body: { p_link_id: linkId, p_owner_key_hash: ownerKeyHash, p_label: label },
+        method: 'POST',
+        body: { p_link_id: linkId, p_owner_key_hash: ownerKeyHash, p_label: label, ...(note ? { p_note: note } : {}) },
       });
     } catch (error) {
       if (error instanceof SupabaseError && error.code === 'P0002') return null;

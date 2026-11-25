@@ -21,6 +21,8 @@ interface Row {
   created_at: string;
   added_session: string | null;
   tracking_events: { stage: string }[];
+  package_notes?: { package_id: string } | null;
+  package_files?: { id: string }[];
 }
 
 const row = (id: string, values: Partial<Row> = {}): Row => ({
@@ -86,6 +88,8 @@ describe('an account parcel added from Add', () => {
     ['added another way, as from an email', row('start', { added_session: null })],
     ['named', row('start', { label: 'Shoes' })],
     ['archived', row('start', { archived_at: minutesAgo(1) })],
+    ['with a note', row('start', { package_notes: { package_id: 'start' }, package_files: [] })],
+    ['with a file on its note', row('start', { package_notes: null, package_files: [{ id: '56000000-0000-4000-c000-000000000001' }] })],
     ['with a scan', row('start', { current_stage: 'in_transit', tracking_events: [{ stage: 'pending' }, { stage: 'in_transit' }] })],
     ['with a label scan', row('start', { current_stage: 'registered', tracking_events: [{ stage: 'registered' }] })],
     ['with a number that is not the start of the new one', row('start', { tracking_number: 'TEST1299' })],

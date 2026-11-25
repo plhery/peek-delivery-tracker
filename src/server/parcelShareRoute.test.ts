@@ -136,6 +136,22 @@ it('saves and reads a protected gift message through the account sharing route',
   expect((await (await request(GET, 'GET')).json()).link.giftWords).toEqual(giftWords);
 });
 
+it('keeps a gift\'s note shown before delivery when its sender says so', async () => {
+  const giftWords = { name: 'Trail shoes', note: 'Happy birthday!', from: 'Sam', early: true };
+  const store = vi.spyOn(SupabaseUserClient.prototype, 'sharePackage').mockResolvedValue({ ...share, giftWords, created: false });
+  const response = await request(PUT, 'PUT', { gift: true, giftWords });
+  expect(response.status).toBe(200);
+  expect(store).toHaveBeenCalledExactlyOnceWith(packageId, { gift: true, giftWords });
+  expect((await response.json()).link.giftWords).toEqual(giftWords);
+  // Off is the default: it is not stored at all.
+  store.mockClear();
+  await request(PUT, 'PUT', { giftWords: { ...giftWords, early: false } });
+  expect(store).toHaveBeenCalledExactlyOnceWith(packageId, { giftWords: { name: 'Trail shoes', note: 'Happy birthday!', from: 'Sam' } });
+  store.mockClear();
+  expect((await request(PUT, 'PUT', { giftWords: { ...giftWords, early: 'yes' } })).status).toBe(400);
+  expect(store).not.toHaveBeenCalled();
+});
+
 it('rejects malformed or oversized gift words before any write', async () => {
   const store = vi.spyOn(SupabaseUserClient.prototype, 'sharePackage');
   for (const giftWords of [null, [], 'message', {}, { name: null, note: 1, from: null },

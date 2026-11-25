@@ -59,14 +59,40 @@ it('keeps each link under the caller\'s own token and queues a check for every k
   ] });
   // The database sees the key's hash and the trimmed name; a malformed key is no key, a malformed id no link.
   expect(decide.mock.calls).toEqual([
-    ['keptLink2345', keyHash, 'Sneakers'],
-    ['ownedLink234', keyHash, ''],
-    ['quotaLink234', null, ''],
-    ['unknownLink2', null, ''],
+    ['keptLink2345', keyHash, 'Sneakers', null],
+    ['ownedLink234', keyHash, '', null],
+    ['quotaLink234', null, '', null],
+    ['unknownLink2', null, '', null],
   ]);
   expect(enqueue).toHaveBeenCalledExactlyOnceWith({ userId, packageId: kept, reason: 'added' });
   expect(wake).toHaveBeenCalledOnce();
   expect(counted.mock.calls.map(([outcome]) => outcome)).toEqual(['kept', 'already', 'quota', 'unavailable', 'unavailable']);
+});
+
+it('keeps the note each parcel had on the device with it, its lines kept and the rest trimmed', async () => {
+  const decide = vi.spyOn(SupabaseUserClient.prototype, 'claimParcelLink').mockResolvedValue({ outcome: 'kept', packageId: kept });
+  const note = 'é'.repeat(1_000);
+  // Twenty links with a name and a note of 1,000 characters each fit in one request.
+  const links = Array.from({ length: 20 }, (_, index) => ({
+    id: `keptLinkab${'abcdefghijkmnopqrstu'[index]}${'abcdefghijkmnopqrstu'[19 - index]}`, key: ownerKey, label: 'ü'.repeat(80), note,
+  }));
+  links[0] = { ...links[0]!, note: '  Size 42\r\nReturn by Friday\u0007  ' };
+  links[1] = { ...links[1]!, note: '   ' };
+  const response = await claim({ links });
+  expect(response.status).toBe(200);
+  expect(decide).toHaveBeenCalledTimes(20);
+  expect(decide.mock.calls[0]).toEqual(['keptLinkabau', keyHash, 'ü'.repeat(80), 'Size 42\nReturn by Friday']);
+  expect(decide.mock.calls[1]![3]).toBeNull();
+  expect(decide.mock.calls[2]![3]).toBe(note);
+});
+
+it.each([
+  [{ links: [{ id: 'keptLink2345', note: 'n'.repeat(1_001) }] }],
+  [{ links: [{ id: 'keptLink2345', note: 42 }] }],
+])('refuses a note that is not text of at most 1,000 characters before asking the database', async (body) => {
+  const decide = vi.spyOn(SupabaseUserClient.prototype, 'claimParcelLink');
+  expect((await claim(body)).status).toBe(400);
+  expect(decide).not.toHaveBeenCalled();
 });
 
 it('keeps the parcel when its check cannot be queued', async () => {

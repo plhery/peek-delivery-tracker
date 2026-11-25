@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { databaseCall, STORED_EVENT_IDENTITIES, SupabaseError, SupabaseServiceClient, SupabaseUserClient } from './supabase';
 import { postgrestTables } from '../test/postgrest';
+import { ASSISTANT_NOTE_EMBED, NOTE_EMBED } from './parcelNotes';
 import type { JsonObject } from './types';
 
 describe('guarded tracking writes', () => {
@@ -201,10 +202,15 @@ describe('guarded tracking writes', () => {
       + 'time:raw_data->>time,local_time:raw_data->>local_time,observed:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,'
       + 'recipient_action:raw_data->>recipient_action,tie_order:raw_data->tie_order,stage_source:raw_data->>stage_source,kept_stage:raw_data->kept_stage,'
       + 'retimed_from:raw_data->>retimed_from,provider_code:raw_data->>provider_code,written_at:raw_data->>written_at)';
-    expect(select(userRequest, 0)).toBe(apiShape);
-    expect(select(userRequest, 1)).toBe(apiShape);
-    expect(select(userRequest, 2)).toBe(apiShape);
+    // The owner's own reads add the parcel's private note and its files; the service role's never do.
+    const ownerShape = `${apiShape},${NOTE_EMBED}`;
+    expect(select(userRequest, 0)).toBe(ownerShape);
+    expect(select(userRequest, 1)).toBe(ownerShape);
+    expect(select(userRequest, 2)).toBe(ownerShape);
     expect(select(userRequest, 3)).not.toContain('provider_event_id');
+    expect(select(userRequest, 3)).not.toContain('package_notes');
+    expect(select(serviceRequest, 0)).not.toMatch(/package_notes|package_files/);
+    expect(select(serviceRequest, 1)).not.toMatch(/package_notes|package_files/);
   });
 
   it('always scopes batch status reads to the requesting owner', async () => {
@@ -1155,7 +1161,11 @@ describe('delivery emails', () => {
     const owned = user();
     const ownerRequest = vi.spyOn(owned, 'request').mockResolvedValue([{ id: parcel }]);
     await owned.getPackage(parcel);
-    expect(params.get('select')).toBe(new URL(`https://database.example${ownerRequest.mock.calls[0]![0]}`).searchParams.get('select'));
+    // The owner's own read adds the note; an assistant's asks for it (tools.ts).
+    expect(`${params.get('select')},${NOTE_EMBED}`).toBe(new URL(`https://database.example${ownerRequest.mock.calls[0]![0]}`).searchParams.get('select'));
+    await client.getOwnedPackage(parcel, owner, { note: true });
+    expect(new URL(`https://database.example${request.mock.calls[2]![0]}`).searchParams.get('select'))
+      .toBe(`${params.get('select')},${ASSISTANT_NOTE_EMBED}`);
   });
 
   it('saves the email choice only when a request makes one', async () => {
@@ -1546,8 +1556,10 @@ describe('Friends passports', () => {
     const owned = user();
     const ownerRequest = vi.spyOn(owned, 'request').mockResolvedValue([]);
     await owned.listPackages(true);
-    const scans = (select: string | null) => select?.slice(select.indexOf('tracking_events('));
+    const scans = (select: string | null) => select?.slice(select.indexOf('tracking_events(')).replace(`,${NOTE_EMBED}`, '');
     expect(scans(read.get('select'))).toBe(scans(params(ownerRequest.mock.calls[0]![0]).searchParams.get('select')));
+    // Never the owner's private note.
+    expect(read.get('select')).not.toMatch(/package_notes|package_files/);
     expect(parcels.get(friend)![0]!.tracking_events).not.toEqual([]);
     // No account: nothing to read.
     await expect(client.passportParcels([])).resolves.toEqual(new Map());

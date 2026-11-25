@@ -26,6 +26,7 @@ import { withEventPlaces } from '../eventPlaces';
 import { wakeAssistantAddedWorker } from '../background';
 import { captureOperationalError, errorType, logOperationalEvent } from '../observability';
 import { addParcelsFromText, MOST_TEXT_LENGTH, type ParcelAddition } from '../parcelsFromText';
+import { assistantNote, type AssistantNote } from '../parcelNotes';
 import { holdsPostcodeCountry, savePostcodeCountry } from '../postcodeCountry';
 import { privateValues, redactedScans, viewerStatusText } from '../privateDetails';
 import { assistantServerTitle } from '../siteSettings';
@@ -68,7 +69,7 @@ function displayReference(parcel: { carrier: string; trackingNumber: string }): 
  * A parcel as a tool describes it: what an assistant needs to answer, without the recipient's name or postcode, and
  * without Peek AI's estimate when the account switched it off (`showPeekAi`).
  */
-function parcelSummary(parcel: ParcelWithEvents, showPeekAi: boolean, now = Date.now()): ApiTokenParcel {
+function parcelSummary(parcel: ParcelWithEvents, showPeekAi: boolean, now = Date.now(), noted = false): ApiTokenParcel {
   const latest = currentEvent(parcel.events, parcel.returnHeld);
   const delivered = latest?.stage === 'delivered' ? latest : null;
   return {
@@ -91,6 +92,8 @@ function parcelSummary(parcel: ParcelWithEvents, showPeekAi: boolean, now = Date
     sender: parcel.senderName ?? null,
     archived: Boolean(parcel.archivedAt),
     addedAt: parcel.createdAt,
+    // A list says only that the user wrote a note or added a file; get_parcel reads them.
+    ...(noted ? { hasNote: true } : {}),
   };
 }
 
@@ -165,7 +168,7 @@ function defaultSort(status: ParcelStatus): ParcelSort {
 /**
  * The account's parcels that answer a query, as `list_parcels` and `GET /api/parcels` give them. Without a status a
  * list holds the parcels on their way, or with a search all of them; a search matches the parcel's name, shop,
- * carrier, tracking number and scans.
+ * carrier, tracking number and scans, and the user's own note and its files' names.
  */
 export async function listParcels(
   service: SupabaseServiceClient, userId: string, query: ParcelQuery = {},
@@ -178,14 +181,34 @@ export async function listParcels(
   // "Today" is the user's: the timezone given, else the one the account chose for its notifications.
   const timeZone = status === 'today' || status === 'week' ? query.timeZone ?? await service.accountTimeZone(userId) : null;
   const days = daysAhead(now, timeZone && knownTimeZone(timeZone) ? timeZone : DEFAULT_TIME_ZONE);
-  const [stored, showPeekAi] = await Promise.all([service.listAccountPackages(userId), service.accountShowsPeekAi(userId)]);
-  const parcels = stored.map(asParcel)
+  const [stored, showPeekAi] = await Promise.all([
+    service.listAccountPackages(userId, { note: true }), service.accountShowsPeekAi(userId),
+  ]);
+  const notes = new Map<string, AssistantNote>();
+  const parcels = stored.map((row) => {
+    const parcel = asParcel(row);
+    notes.set(parcel.id, assistantNote(row));
+    return parcel;
+  })
     .filter((parcel) => hasStatus(parcel, status, now, days))
-    .filter((parcel) => !words || parcelMatchesSearch(parcel, words) || (parcel.senderName ?? '').toLocaleLowerCase().includes(words))
+    .filter((parcel) => !words || parcelMatchesSearch(parcel, words) || (parcel.senderName ?? '').toLocaleLowerCase().includes(words)
+      || noteMatches(notes.get(parcel.id), words))
     .sort(ORDERS[sort]);
   return {
-    total: parcels.length, status, sort, parcels: parcels.slice(0, query.limit ?? 20).map((parcel) => parcelSummary(parcel, showPeekAi, now)),
+    total: parcels.length,
+    status,
+    sort,
+    parcels: parcels.slice(0, query.limit ?? 20).map((parcel) => {
+      const note = notes.get(parcel.id);
+      return parcelSummary(parcel, showPeekAi, now, Boolean(note && (note.note || note.files.length)));
+    }),
   };
+}
+
+/** Whether a search's words are in the user's note on a parcel, or in the name of one of its files. */
+function noteMatches(note: AssistantNote | undefined, words: string): boolean {
+  return Boolean(note && [note.note ?? '', ...note.files.map((file) => file.name)]
+    .some((text) => text.toLocaleLowerCase().includes(words)));
 }
 
 const ENGLISH: Record<string, string> = en;
@@ -209,8 +232,10 @@ function asParcel(row: Parameters<typeof withEventPlaces>[0]): ParcelWithEvents 
   return { ...parcel, trackingNumber: displayReference(parcel), lastStatusText: statusText ?? undefined };
 }
 
-/** The account's stored parcel a tool's `parcel` names: its id, or its tracking number. */
-async function ownedRow(service: SupabaseServiceClient, userId: string, named: string): Promise<JsonObject | null> {
+/** The account's stored parcel a tool's `parcel` names: its id, or its tracking number. With `note`, the user's note on it. */
+async function ownedRow(
+  service: SupabaseServiceClient, userId: string, named: string, { note = false }: { note?: boolean } = {},
+): Promise<JsonObject | null> {
   const value = named.trim();
   let id: string | null = UUID.test(value) ? value.toLowerCase() : null;
   if (!id) {
@@ -218,7 +243,8 @@ async function ownedRow(service: SupabaseServiceClient, userId: string, named: s
     if (!number) return null;
     id = (await service.accountTrackingNumbers(userId, [number])).get(number) ?? null;
   }
-  return id ? await service.getOwnedPackage(id, userId) : null;
+  if (!id) return null;
+  return note ? await service.getOwnedPackage(id, userId, { note }) : await service.getOwnedPackage(id, userId);
 }
 
 /** The account's parcel a tool's `parcel` names, as the tools read it. */
@@ -718,6 +744,7 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
     description: 'The user\'s parcels in Peek, with each one\'s status, expected delivery day (expectedDelivery), delivery '
       + 'time once delivered (deliveredAt) and latest scan, and, when Peek has a strong hint and the account shows it, '
       + 'Peek AI\'s own estimate of when it will come (peekAi): Peek\'s, not the carrier\'s, so say it as Peek AI\'s. '
+      + 'hasNote says the user keeps a private note on the parcel, which get_parcel gives. '
       + 'Choose the status, sort and search that answer the question, '
       + 'and a small limit when one parcel will do; total says how many match. For example: the latest delivered parcel '
       + 'is status "delivered" with limit 1; what arrives this week is status "week"; the parcel from IKEA is search "IKEA".',
@@ -729,7 +756,7 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
       sort: z.enum(PARCEL_SORTS).optional().describe('The order: "expected" soonest expected day first (the default for '
         + 'parcels on their way); "delivered" latest delivery first (the default for "delivered"); "updated" latest scan '
         + 'first (the default for "archived", "all" and a search); "added" latest added first.'),
-      search: z.string().max(MOST_SEARCH_LENGTH).optional().describe('Words the parcel\'s name, shop, carrier, tracking number or scans hold, such as a shop\'s name'),
+      search: z.string().max(MOST_SEARCH_LENGTH).optional().describe('Words the parcel\'s name, shop, carrier, tracking number, scans or the user\'s note on it hold, such as a shop\'s name'),
       limit: z.number().int().min(1).max(MOST_LISTED).optional().describe('How many at most; 20 unless given'),
       timeZone: z.string().max(64).optional().describe('The user\'s timezone, such as "Europe/Paris", when you know it: '
         + '"today" and "week" are its days. Without it they are the days of the timezone the user chose in Peek'),
@@ -744,13 +771,18 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
   server.registerTool('get_parcel', {
     title: 'Get a parcel',
     description: 'One of the user\'s parcels: its status, expected delivery day, pickup point and the carrier\'s scans, newest first. Each scan is listed once: '
-      + 'when another carrier told it in other words, those come as also.',
+      + 'when another carrier told it in other words, those come as also. note is the user\'s own private note on the parcel, '
+      + 'and files the names and types of the photos and PDFs on it.',
     inputSchema: z.object({ parcel: z.string().min(1).max(100).describe('The parcel\'s id from list_parcels, or its tracking number') }),
     annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
     _meta: security('get_parcel'),
   }, allowed('get_parcel', async ({ parcel: named }: { parcel: string }) => {
-    const [parcel, showPeekAi] = await Promise.all([ownedParcel(service, caller.userId, named), service.accountShowsPeekAi(caller.userId)]);
-    if (!parcel) return refusal('No such parcel in this Peek account.');
+    const [row, showPeekAi] = await Promise.all([
+      ownedRow(service, caller.userId, named, { note: true }), service.accountShowsPeekAi(caller.userId),
+    ]);
+    if (!row) return refusal('No such parcel in this Peek account.');
+    const parcel = asParcel(row);
+    const { note, files } = assistantNote(row);
     // Each scan once, as the journal lists it: another carrier's copy of a scan, its repeat or its notice is that scan,
     // and its words come as `also` when they are other words.
     const { listed, relays } = withRelays(parcel.events);
@@ -765,7 +797,7 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
         ...also.length ? { also } : {},
       };
     });
-    return answer({ ...parcelSummary(parcel, showPeekAi), history });
+    return answer({ ...parcelSummary(parcel, showPeekAi), note, files, history });
   }));
 
   server.registerTool('find_carriers', {

@@ -319,7 +319,9 @@ Key server modules:
   like a missing one. A lookup's owner changes its link with the owner key.
   - A viewer's answer uses the same allow-list for both kinds of link. A public name can
     travel after `#n=…`. Gift names, messages and signatures are stored with the link,
-    saved before sharing or copying, and sent only to its owner or after delivery. Gift
+    saved before sharing or copying, and sent only to its owner or after delivery; a sender
+    who shows the note early (`gift_words.early`) has its message and signature sent from the
+    start, the name still after delivery. Gift
     links carry no words in their address. Old links retain the words already in their URL.
   - An account's link is made when its owner shares or copies it, not when the share sheet
     opens.
@@ -910,6 +912,19 @@ number, which no carrier tracks.
   provider. A partner reached since, or a carrier the owner or a correction chose instead,
   never shows it. A point the carrier names later replaces it
   ([`collectedPickupPoint.ts`](../src/server/collectedPickupPoint.ts)).
+- **A parcel's note**: its owner's private text (1,000 characters) and up to five photos or
+  PDFs, in `package_notes`, `package_files` and `package_file_contents`, which only the
+  service role reads. The owner reads and writes them under their own token
+  (`set_package_note`, `add_package_file`, `delete_package_file`); the database keeps the
+  limits (10 MB a file, 200 MB an account). The server writes each photo again upright,
+  within 2,560 px and without its metadata, with a 384 px copy (`src/server/parcelFiles.ts`),
+  and refuses what its first bytes do not show to be a JPEG, PNG, WebP or PDF. Only the
+  owner's reads embed them (`SupabaseUserClient`), so links, passports, emails, notifications
+  and previews never carry them. A file's bytes come from `/api/files/{id}`, at an address
+  the server signs for the owner that stays the same for a quarter of an hour
+  (`src/server/parcelNotes.ts`). They follow the parcel when its two legs join (the notes
+  joined, oldest first) and when a kept link's note comes with the claim; they go with the
+  parcel or the account. A half-typed parcel with a note or file is never replaced.
 - **Archiving** keeps the parcel and its history, still checked daily for a while
   ([ROUTING.md](ROUTING.md)).
 - **A lookup without an account** stores the number once per carrier and inputs, with one
@@ -966,8 +981,8 @@ number, which no carrier tracks.
   from what the parcel carries when it is first listed and at its first answer (in the browser,
   `src/peek/recents.ts`).
 - **Deleting an account** removes the Auth user. Foreign-key cascades remove parcels,
-  jobs, events, push registrations, Live Activity tokens, delivery email rows, the
-  forwarding address, connected assistants and audit rows. Other audit rows expire after 90 days.
+  jobs, events, notes and their files, push registrations, Live Activity tokens, delivery
+  email rows, the forwarding address, connected assistants and audit rows. Other audit rows expire after 90 days.
 - **Share target**: the PWA receives shared text via `POST`. The service worker keeps each
   share in a cache entry of its own, under a random id that is read once and expires after
   ten minutes, so tracking text never appears in a URL or HTTP log and a second share

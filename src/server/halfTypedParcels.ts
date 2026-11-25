@@ -1,5 +1,6 @@
 import { normalizeTrackingNumber } from '../lib/carriers';
 import { captureOperationalError } from './observability';
+import { hasNote } from './parcelNotes';
 import { SupabaseError, type SupabaseServiceClient } from './supabase';
 import type { JsonObject } from './types';
 
@@ -9,7 +10,7 @@ export const HALF_TYPED_MS = 10 * 60_000;
 /**
  * Notes the sign-in an account's parcel was just added from with Add, and deletes for good the account's parcels whose
  * number the new one starts with that the same sign-in added at most 10 minutes before, while they have no scan yet,
- * no name and no archive date: they were the number half typed. Older parcels, and ones added another way or from
+ * no name, note or file and no archive date: they were the number half typed. Older parcels, and ones added another way or from
  * another sign-in, stay. A token that names no sign-in replaces nothing. Returns the ids deleted; the account's apps
  * drop them with their next read of the list.
  */
@@ -44,6 +45,6 @@ function halfTyped(row: JsonObject, typed: string): boolean {
   const start = normalizeTrackingNumber(String(row.tracking_number ?? ''));
   const events = Array.isArray(row.tracking_events) ? row.tracking_events : [];
   return start.length > 0 && typed.length > start.length && typed.startsWith(start)
-    && row.label === '' && row.archived_at === null && row.current_stage === 'pending'
+    && row.label === '' && row.archived_at === null && row.current_stage === 'pending' && !hasNote(row)
     && events.every((event) => typeof event === 'object' && event !== null && (event as JsonObject).stage === 'pending');
 }

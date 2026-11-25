@@ -6,7 +6,7 @@ import type { Breadcrumb, ErrorEvent } from '@sentry/node';
 import { sourceUrl } from './siteSettings';
 import { carrierErrorReason } from './trackingFailure';
 import { healthMessage, healthReviewSignal } from './trackingHealth';
-import type { JsonObject } from './types';
+import { isRecord, type JsonObject } from './types';
 import { scrubAddress, scrubQuery, scrubQueryString, scrubValue, withoutCredentials } from '../lib/credentials';
 import { UpstreamHttpError, type UpstreamHttpDiagnostics } from 'universal-parcel-scraper/node';
 
@@ -279,15 +279,34 @@ export function scrubSentryEvent(event: ErrorEvent): ErrorEvent {
   const { sdkProcessingMetadata, ...rest } = event;
   const scrubbed = scrubValue(rest);
   const request = rest.request;
+  let path = '';
+  try { path = new URL(request?.url ?? '', 'http://localhost').pathname; } catch { /* no address */ }
   if (request?.query_string !== undefined) {
-    let path = '';
-    try { path = new URL(request.url ?? '', 'http://localhost').pathname; } catch { /* no address */ }
     scrubbed.request = { ...scrubbed.request, query_string: scrubQueryString(request.query_string, path) as typeof request.query_string };
+  }
+  if (scrubbed.request && 'data' in scrubbed.request && !readableBody(request!, path)) {
+    scrubbed.request = { ...scrubbed.request };
+    delete scrubbed.request.data;
   }
   if (scrubbed.transaction) {
     scrubbed.transaction = scrubbed.transaction.replace(/(^|\s)(\/\S*)/g, (_, space: string, path: string) => space + scrubAddress(path));
   }
   return { ...scrubbed, sdkProcessingMetadata };
+}
+
+/**
+ * Whether a request's body is text worth reading in an event: JSON, a form or plain text. A file's bytes, a photo or
+ * PDF of a parcel's note above all, never leave, whatever it was sent as: no body of a route under `/files` does.
+ */
+function readableBody(request: NonNullable<ErrorEvent['request']>, path: string): boolean {
+  if (/(?:^|\/)files(?:\/|$)/.test(path)) return false;
+  const { data } = request;
+  if (data !== undefined && data !== null && typeof data !== 'string' && !(isRecord(data) && Object.getPrototypeOf(data) === Object.prototype)) {
+    return false;
+  }
+  const type = Object.entries(request.headers ?? {}).find(([name]) => name.toLowerCase() === 'content-type')?.[1];
+  return typeof type !== 'string'
+    || /^\s*(?:application\/(?:[\w.+-]+\+)?json|application\/x-www-form-urlencoded|text\/[\w.+-]+)\s*(?:;|$)/i.test(type);
 }
 
 /**

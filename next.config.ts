@@ -86,6 +86,14 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        // A file of a parcel's private note: its signed address is the capability to read it.
+        source: '/api/files/:path*',
+        headers: [
+          { key: 'Referrer-Policy', value: 'no-referrer' },
+          { key: 'X-Robots-Tag', value: 'noindex' },
+        ],
+      },
+      {
         // The way out of the delivery email: its link names one account, after the `#`.
         source: '/email/off',
         headers: [

@@ -81,6 +81,44 @@ it('leaves the request out of a report for a route whose address or body carries
   expect(rest).not.toContain('OWNER-KEY');
 });
 
+it('keeps a JSON or text body in a report, never a file\'s bytes', async () => {
+  vi.stubEnv('SENTRY_DSN', 'https://public@example.test/1');
+  expect(initObservability()).toBe(true);
+  // What the SDK's HTTP integration records: a body as text, a photo's bytes read as text too.
+  const photo = '\u00ff\u00d8\u00ff\u00e0 SYNTHETIC-PHOTO-BYTES';
+  const capture = (path: string, type: string | null, data: unknown) => {
+    let id: string | null = null;
+    Sentry.withIsolationScope((isolation) => {
+      isolation.setSDKProcessingMetadata({ normalizedRequest: {
+        url: `https://delivery.example.test${path}`, method: 'POST', headers: type ? { 'content-type': type } : {}, data,
+      } });
+      id = captureOperationalError(new Error('database down'), { component: 'api', operation: 'request' });
+    });
+    return id;
+  };
+  const parcel = '7c000000-0000-4000-a000-000000000001';
+  const reports = {
+    note: capture(`/api/packages/${parcel}`, 'application/json', '{"note":"Size 42"}'),
+    form: capture('/oauth/token', 'application/x-www-form-urlencoded', 'grant_type=refresh_token'),
+    upload: capture(`/api/packages/${parcel}/files`, 'image/jpeg', photo),
+    // Even sent as text, or as JSON, a file route's body stays out.
+    disguised: capture(`/api/packages/${parcel}/files`, 'text/plain', photo),
+    file: capture(`/api/files/${parcel}`, 'application/json', '{}'),
+    binary: capture('/api/inbound/email', 'application/octet-stream', photo),
+    pdf: capture('/api/somewhere', 'application/pdf; name=x', '%PDF-1.4 SYNTHETIC-PDF-BYTES'),
+  };
+  expect(await flushObservability()).toBe(true);
+  const sent = (id: string | null) => captured.events.find((event) => event.event_id === id)!;
+  expect(sent(reports.note).request?.data).toBe('{"note":"Size 42"}');
+  expect(sent(reports.form).request?.data).toBeDefined();
+  for (const id of [reports.upload, reports.disguised, reports.file, reports.binary, reports.pdf]) {
+    expect(sent(id).request).toBeDefined();
+    expect(sent(id).request).not.toHaveProperty('data');
+  }
+  // The stack frames quote this file; nothing else of the reports holds the bytes.
+  expect(JSON.stringify(captured.events.map((event) => ({ ...event, exception: undefined })))).not.toMatch(/SYNTHETIC-PHOTO-BYTES|SYNTHETIC-PDF-BYTES/);
+});
+
 it('reports a background job woken by a request with its own scope and trace, not the request\'s', async () => {
   vi.stubEnv('SENTRY_DSN', 'https://public@example.test/1');
   expect(initObservability()).toBe(true);

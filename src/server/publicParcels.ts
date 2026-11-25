@@ -613,7 +613,13 @@ export function publicParcelResponse(
     ...((owner || (link.gift === true && !wrapped)) && isRecord(link.gift_words)
       ? { giftWords: {
         name: optionalText(link.gift_words.name), note: optionalText(link.gift_words.note), from: optionalText(link.gift_words.from),
-      } } : {}),
+        ...(link.gift_words.early === true ? { early: true } : {}),
+      } }
+      // A gift whose sender shows its note early: the note and who it is from, what is inside still kept for delivery.
+      : wrapped && isRecord(link.gift_words) && link.gift_words.early === true
+        ? { giftWords: {
+          name: null, note: optionalText(link.gift_words.note), from: optionalText(link.gift_words.from), early: true,
+        } } : {}),
     // The stored link's own `shared` says that it belongs to an account: the kind above.
     shared: link.stopped !== true,
     alerts,

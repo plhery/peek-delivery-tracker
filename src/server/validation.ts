@@ -20,6 +20,7 @@ import { normalizedLookupCountry } from './lookupCountry';
 import { isPublicHost, urlHost } from './publicAddress';
 import type { WebPushKeys } from './supabase';
 import { isRecord, type JsonObject } from './types';
+import { MAX_NOTE_LENGTH } from './parcelNotes';
 
 const VALID_CARRIERS = new Set<string>(CARRIER_IDS);
 /** Why a placeholder or a phone number is refused; clients show their own wording for it (userErrorKey). */
@@ -168,6 +169,30 @@ export function packageLabel(payload: JsonObject): string {
     throw new HttpError(400, 'Parcel names can be at most 80 characters');
   }
   return payload.label.trim();
+}
+
+/**
+ * A parcel's private note as it is stored: its lines kept, other control characters and the spaces around it
+ * dropped, at most 1,000 characters (Unicode code points). Null, or nothing left, deletes it.
+ */
+export function packageNote(value: unknown): string | null {
+  if (value === null) return null;
+  if (typeof value !== 'string') throw new HttpError(400, 'A note must be text or null');
+  const note = value
+    .replace(/\r\n?/g, '\n')
+    .replace(/[\p{Cc}]/gu, (character) => (character === '\n' || character === '\t' ? character : ' '))
+    .trim();
+  if (codePointLength(note) > MAX_NOTE_LENGTH) throw new HttpError(400, 'Notes can be at most 1,000 characters');
+  return note || null;
+}
+
+/** What a PATCH of a parcel changes: its name, its note (null deletes it), or both. */
+export function packageChanges(payload: JsonObject): { label?: string; note?: string | null } {
+  const changes: { label?: string; note?: string | null } = {};
+  if (payload.label !== undefined) changes.label = packageLabel(payload);
+  if (payload.note !== undefined) changes.note = packageNote(payload.note);
+  if (Object.keys(changes).length === 0) throw new HttpError(400, 'Send a label or a note to change');
+  return changes;
 }
 
 export function pushEndpoint(value: unknown): string {
@@ -374,6 +399,10 @@ export function shareSwitches<Field extends 'showNumber' | 'gift' | 'shared'>(
       words[field] = typeof value === 'string'
         ? value.replace(/[\p{Cc}\p{Cf}]/gu, ' ').replace(/\s+/g, ' ').trim() || null : null;
     }
+    // The note and its sender shown before delivery, the parcel's name still kept for it.
+    const { early } = payload.giftWords;
+    if (early !== undefined && typeof early !== 'boolean') throw new HttpError(400, 'giftWords.early must be true or false');
+    if (early === true) words.early = true;
     switches.giftWords = words;
   }
   if (!optional && Object.keys(switches).length === 0) {

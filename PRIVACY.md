@@ -1,6 +1,6 @@
 # Peek privacy notice
 
-Effective: 22 November 2026
+Effective: 25 November 2026
 
 Peek follows parcels, on the web and in its iPhone and Android apps. This
 notice says what the official service at peektracker.com processes to do that.
@@ -21,6 +21,11 @@ using Peek involves.
   locker that performed the scan — plus sender or business names, the
   recipient's name and address, who signed for the parcel, pickup-point
   details, parcel weight and dimensions where the carrier provides them.
+- A private note you write on one of your parcels, up to 1,000 characters, and
+  the photos and PDFs you add to it, with their names, types, sizes and when you
+  added them. A photo is stored written again, without the details it came
+  with, such as where it was taken. They are stored with your account, as your
+  parcels are, and are not end-to-end encrypted.
 - What some carriers need besides the number, when you supply it: a delivery
   postcode, a private tracking link, a reference that itself contains the
   postcode, or the last four digits of the recipient's or sender's phone.
@@ -75,7 +80,7 @@ using Peek involves.
   numbers, postcodes and phone digits given to carriers, carrier,
   synchronization outcomes, and error details to diagnose tracking failures.
   A Sentry report of a failed request also keeps its address, query, headers
-  and body, your IP address and your account's id. Reports and logs may retain
+  and body, your IP address and your account's id, but never a file's content. Reports and logs may retain
   carriers' requests and responses, including personal data present in them.
   Passwords, keys, tokens, sessions and cookies are filtered out.
 - A review list of tracking numbers Peek could not follow well: a number no
@@ -110,7 +115,8 @@ and passes them to the service. An assistant you connect, such as Claude or
 ChatGPT, receives what you allowed it: your parcels' names, senders, carriers,
 tracking numbers, statuses, expected days, pickup points and scans, whose places
 can name the delivery town and its postcode, never the recipient's name or the
-postcode or phone digits you gave. Its provider's own privacy terms then apply to what it receives.
+postcode or phone digits you gave. Of your private note on a parcel it receives
+the text and the names of its photos and PDFs, never the files themselves. Its provider's own privacy terms then apply to what it receives.
 Home Assistant, connected through Peek's integration, and a tool you give a personal token receive the same.
 
 To check and improve how it reads the emails you forward, Peek may send some of
@@ -321,8 +327,10 @@ you entered are never shown through a link.
 
 Your browser, or the iPhone or Android app, keeps a list of the parcels you
 followed or opened this way: each link, its key if this device made the
-lookup, the name you gave it, whether you archived it and the last tracking
-history it showed, so the parcel is still there offline. For each parcel they looked up, the iPhone and
+lookup, the name you gave it, your note on it and its photos and PDFs, whether
+you archived it and the last tracking history it showed, so the parcel is still
+there offline. A note and its files reach the service only when you keep the
+parcel in your account. For each parcel they looked up, the iPhone and
 Android apps also note whether you gave a postcode with the lookup, so they
 don't ask for one again. The note is a yes or no and never holds the postcode.
 The list stays on the device until the parcel is forgotten or kept in an
@@ -381,7 +389,10 @@ not sent to the service. A gift's link carries nothing there: the name you
 show, a note and who the gift is from go to the service, which keeps them with
 the link and shows them to its viewers only once the parcel is delivered. They
 are deleted with the link. The browser or app you share from remembers what you
-chose to send along, until the parcel is forgotten on that device.
+chose to send along, until the parcel is forgotten on that device. You can
+choose to show a gift's note and who it is from right away; the name you show
+still waits for the delivery. Your private note on a parcel and its files are
+never shown through a link.
 
 Anyone who has a link can turn on notifications for that one parcel, without an
 account, in their browser or in the iPhone or Android app. The service then
@@ -460,7 +471,8 @@ card could still have kept a screenshot or copy.
 ## Retention and control
 
 Parcel data remains until you delete the parcel or the account. Archiving a
-parcel only hides it from the active list and retains its history. The time
+parcel only hides it from the active list and retains its history. A parcel's
+note and its files are deleted with the parcel, or when you remove them. The time
 your apps last loaded your parcels is overwritten at each visit and deleted
 with the account. Turning off
 Live Activities or signing out removes that installation's ActivityKit tokens;
@@ -487,9 +499,10 @@ keys. A connection unused for 60 days, whose keys have all expired, is removed
 the next time you open the list or connect an assistant.
 
 Use **Download my data** in the account menu for a machine-readable export,
-including your Friends profile and connections. Use **Delete account** to
+including your Friends profile and connections, and each parcel's note with
+its files' names, types and sizes. Use **Delete account** to
 permanently delete the Auth user and, with it, your parcels, tracking events,
-shared links, browser subscriptions, native device registrations, delivery
+notes and their files, shared links, browser subscriptions, native device registrations, delivery
 acknowledgements, delivery email records, forwarding address and kept emails, connected
 assistants and personal tokens, and your Friends
 profile, connections and invitations. If you use Sign in with Apple, the iPhone app asks you to

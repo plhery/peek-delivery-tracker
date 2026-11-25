@@ -109,6 +109,10 @@ function ratePolicy(method: string, pathname: string): {
   if (pathname === '/api/sync' || pathname.endsWith('/sync')) {
     return { bucket: 'sync', limit: 12, window: 300 };
   }
+  // Each file added to a note is decoded and written again.
+  if (method === 'POST' && /^\/api\/packages\/[^/]+\/files$/.test(pathname)) {
+    return { bucket: 'files', limit: 20, window: 60 };
+  }
   if (method === 'GET' || method === 'HEAD') {
     return { bucket: 'read', limit: 240, window: 60 };
   }
@@ -529,12 +533,16 @@ export async function readJsonObject(request: Request, limit = MAX_JSON_BODY): P
   return (await readJsonBody(request, limit)).value;
 }
 
-/** Reads a body of any type, at most `limit` bytes of it; a longer one is refused with 413 and cancelled. */
-export async function readBodyBytes(request: Request, limit: number): Promise<Uint8Array> {
+/**
+ * Reads a body of any type, at most `limit` bytes of it; a longer one is refused with 413, `tooLarge` when given,
+ * and cancelled.
+ */
+export async function readBodyBytes(request: Request, limit: number, tooLarge?: () => HttpError): Promise<Uint8Array> {
+  const refusal = () => tooLarge?.() ?? new HttpError(413, 'The request is too large');
   const declaredLength = request.headers.get('content-length');
   if (declaredLength !== null && Number(declaredLength) > limit) {
     void request.body?.cancel().catch(() => undefined);
-    throw new HttpError(413, 'The request is too large');
+    throw refusal();
   }
   const reader = request.body?.getReader();
   if (!reader) throw new HttpError(400, 'Invalid request size');
@@ -547,7 +555,7 @@ export async function readBodyBytes(request: Request, limit: number): Promise<Ui
       receivedBytes += value.byteLength;
       if (receivedBytes > limit) {
         void reader.cancel().catch(() => undefined);
-        throw new HttpError(413, 'The request is too large');
+        throw refusal();
       }
       chunks.push(value);
     }

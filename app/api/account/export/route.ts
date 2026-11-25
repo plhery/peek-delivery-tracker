@@ -9,6 +9,7 @@ import {
 import { withoutEventSources } from '../../../../src/server/eventPlaces';
 import { friendsRPC, friendsSnapshot } from '../../../../src/server/friends';
 import { inboundEmailConfigured, inboxAddress } from '../../../../src/server/inboundEmail/settings';
+import { withExportedNote } from '../../../../src/server/parcelNotes';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -37,7 +38,8 @@ export const GET = apiRoute(async (context) => {
     assistants,
     // The two numbers an email named for one package, kept with the parcel that follows it.
     twinNumbers: await requireService(context).twinNumbers(user.id),
-    packages: (await client.listPackages(true)).map(withoutEventSources),
+    // Each parcel's private note, and its files' names, types, sizes and dates: their bytes are read in the app.
+    packages: (await client.listPackages(true)).map((row) => withExportedNote(withoutEventSources(row))),
   }, 200, {
     'Content-Disposition': 'attachment; filename="peek-export.json"',
   });

@@ -151,7 +151,7 @@ it('is served by the account\'s own parcel routes alone: no link, friend, email,
     entry.isDirectory() ? files(path.join(directory, entry.name)) : /\.tsx?$/.test(entry.name) && !/\.test\.tsx?$/.test(entry.name) ? [path.join(directory, entry.name)] : []);
   const importers = [...files('app'), ...files('src')].filter((file) => /from '[./]+(?:src\/server\/)?usualPlace'/.test(readFileSync(path.join(root, file), 'utf8')));
   expect(importers.sort()).toEqual([
-    'app/api/packages/[id]/carrier/route.ts', 'app/api/packages/[id]/notifications/route.ts', 'app/api/packages/[id]/restore/route.ts',
-    'app/api/packages/[id]/route.ts', 'app/api/packages/route.ts',
+    'app/api/packages/[id]/carrier/route.ts', 'app/api/packages/[id]/files/route.ts', 'app/api/packages/[id]/notifications/route.ts',
+    'app/api/packages/[id]/restore/route.ts', 'app/api/packages/[id]/route.ts', 'app/api/packages/route.ts',
   ]);
 });

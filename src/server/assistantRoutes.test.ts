@@ -401,7 +401,7 @@ describe('the MCP endpoint', () => {
     ]);
     const secret = connect(['parcels:read']);
     const answer = await call(secret, 'list_parcels');
-    expect(list).toHaveBeenCalledWith(userId);
+    expect(list).toHaveBeenCalledWith(userId, { note: true });
     expect(answer.result!.structuredContent).toEqual({
       total: 1,
       status: 'active',
@@ -466,6 +466,39 @@ describe('the MCP endpoint', () => {
     vi.mocked(service.accountShowsPeekAi).mockResolvedValue(false);
     expect((await listed())[0]).not.toHaveProperty('peekAi');
     expect((await call(connect(['parcels:read']), 'get_parcel', { parcel: parcel.id })).result!.structuredContent).not.toHaveProperty('peekAi');
+  });
+
+  it('says which parcels have the user\'s note, finds them by its words, and reads it with its files\' names in get_parcel', async () => {
+    const noted = {
+      ...stored(21, 'in_transit', { label: 'Synthetic boots' }),
+      package_notes: { body: 'Return by Friday, size 42' },
+      package_files: [{ name: 'Receipt.jpg', content_type: 'image/jpeg', created_at: ago(3) }],
+    };
+    const filed = { ...stored(22, 'in_transit'), package_notes: null, package_files: [{ name: 'Warranty card.pdf', content_type: 'application/pdf', created_at: ago(3) }] };
+    const plain = { ...stored(23, 'in_transit'), package_notes: null, package_files: [] };
+    const list = vi.spyOn(service, 'listAccountPackages').mockResolvedValue([noted, filed, plain]);
+    const owned = vi.spyOn(service, 'getOwnedPackage').mockImplementation(async (id) => (id === noted.id ? noted : null));
+    const secret = connect(['parcels:read']);
+
+    const listed = await call(secret, 'list_parcels');
+    expect(list).toHaveBeenCalledWith(userId, { note: true });
+    const parcels = listed.result!.structuredContent!.parcels as Array<Record<string, unknown>>;
+    expect(Object.fromEntries(parcels.map((parcel) => [parcel.id, parcel.hasNote ?? false])))
+      .toEqual({ [noted.id]: true, [filed.id]: true, [plain.id]: false });
+    // A list says there is a note, never what it says.
+    expect(JSON.stringify(listed)).not.toMatch(/Friday|Receipt|Warranty/);
+
+    const search = async (words: string) => ((await call(secret, 'list_parcels', { search: words })).result!.structuredContent!.parcels as Array<{ id: string }>)
+      .map(({ id }) => id);
+    expect(await search('friday')).toEqual([noted.id]);
+    expect(await search('Warranty')).toEqual([filed.id]);
+
+    const read = await call(secret, 'get_parcel', { parcel: noted.id });
+    expect(owned).toHaveBeenCalledWith(noted.id, userId, { note: true });
+    expect(read.result!.structuredContent).toMatchObject({
+      id: noted.id, note: 'Return by Friday, size 42', files: [{ name: 'Receipt.jpg', type: 'image/jpeg' }],
+    });
+    expect(JSON.stringify(read)).not.toMatch(/api\/files|package_notes|package_files/);
   });
 
   it('answers "my latest delivered parcel", "what arrives this week" and "the one from a shop" in one call each', async () => {

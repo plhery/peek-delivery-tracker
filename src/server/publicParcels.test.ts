@@ -905,3 +905,27 @@ it('withholds stored gift words from viewers until delivery, including unknown a
   expect(publicParcelResponse({ ...found, link: { ...found.link, gift: false }, package: { ...found.package, current_stage: 'delivered' } }, alerts).link)
     .not.toHaveProperty('giftWords');
 });
+
+it('gives a gift\'s viewer its note and who it is from before delivery when its sender shows them early, never its name', () => {
+  const words = { name: 'Trail shoes', note: 'Happy birthday!', from: 'Sam', early: true };
+  const found = {
+    // As the database serves a viewer before delivery: the note and its sender, no name.
+    link: { id: 'k7Qm2xHd9RtW', gift: true, gift_words: { note: words.note, from: words.from, early: true }, created_at: '2026-10-02T08:00:00Z' },
+    package: { id: 'parcel', tracking_number: 'TESTPARCEL983456', carrier: 'unknown', sync_status: 'ok',
+      created_at: '2026-10-02T08:00:00Z', carrier_data: {}, tracking_events: [], current_stage: 'in_transit' },
+  };
+  const early = publicParcelResponse(found, alerts);
+  expect(early.link.giftWords).toEqual({ name: null, note: 'Happy birthday!', from: 'Sam', early: true });
+  // Should the name come along anyway, it waits for delivery.
+  const named = publicParcelResponse({ ...found, link: { ...found.link, gift_words: words } }, alerts);
+  expect(named.link.giftWords).toEqual({ name: null, note: 'Happy birthday!', from: 'Sam', early: true });
+  expect(JSON.stringify(named)).not.toContain('Trail shoes');
+  // Delivered, and to its owner, all of it.
+  expect(publicParcelResponse({ ...found, link: { ...found.link, gift_words: words }, package: { ...found.package, current_stage: 'delivered' } }, alerts)
+    .link.giftWords).toEqual(words);
+  expect(publicParcelResponse({ ...found, link: { ...found.link, gift_words: words, owner: true } }, alerts).link.giftWords).toEqual(words);
+  // Without early, or early not true, nothing before delivery.
+  for (const stored of [{ ...words, early: false }, { name: words.name, note: words.note, from: words.from }, { ...words, early: 'yes' }]) {
+    expect(publicParcelResponse({ ...found, link: { ...found.link, gift_words: stored } }, alerts).link).not.toHaveProperty('giftWords');
+  }
+});

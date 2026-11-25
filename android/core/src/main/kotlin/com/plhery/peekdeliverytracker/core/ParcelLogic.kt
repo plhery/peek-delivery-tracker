@@ -817,16 +817,14 @@ enum class ParcelAttention(val rawValue: String) {
     val localizationKey: String get() = "attention.$rawValue"
 
     /**
-     * What `parcel`'s flag says (`attentionLabel`). One that went quiet names the day of its current scan, with the year
-     * when it isn't `now`'s ("No tracking update since Mon 12 Oct"), so a parcel silent for a month doesn't read as
-     * four days.
+     * What `parcel`'s flag says (`attentionLabel`). One that went quiet names the day of its current scan as a short
+     * date ([Localizer.shortDate]): "No tracking update since Mon 12 Oct", so a parcel silent for a month doesn't read
+     * as four days.
      */
     fun label(parcel: Parcel, localizer: Localizer, now: Instant = AppClock.now()): String {
         val latest = if (this == Stalled) parcel.currentEvent?.displayDate else null
         if (latest == null) return localizer.text(localizationKey)
-        val zone = ZoneId.systemDefault()
-        val withYear = FoundationDates.dateFields(latest, zone).yearOfEra != FoundationDates.dateFields(now, zone).yearOfEra
-        return localizer.text("attention.stalledSince", mapOf("date" to localizer.shortDate(latest, withYear)))
+        return localizer.text("attention.stalledSince", mapOf("date" to localizer.shortDate(latest, now)))
     }
 
     companion object {

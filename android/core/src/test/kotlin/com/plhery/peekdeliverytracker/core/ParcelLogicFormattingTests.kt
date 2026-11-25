@@ -220,8 +220,8 @@ class ParcelLogicFormattingTests {
         assertNull(DateParser.date("2026-09-12"))
         assertEquals(day, DateParser.deliveryDate("2026-09-12"))
         repeat(3) {
-            assertEquals("Sat 12 Sep", localizer.shortDate(day))
-            assertEquals("Sat 12 Sep, 00:00", localizer.dateTime(DateParser.isoString(day)))
+            assertEquals("Sat 12 Sep", localizer.shortDate(day, now = day))
+            assertEquals("Sat 12 Sep, 00:00", localizer.dateTime(DateParser.isoString(day), now = day))
         }
     }
 }

@@ -17,6 +17,7 @@ import java.util.Locale
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
 import java.util.regex.Pattern
+import kotlin.math.abs
 import kotlin.math.floor
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -446,7 +447,8 @@ class Localizer(
         }
         val days = windowDays(from, to)
         if (days != null && days.first < today(now)) {
-            fun dated(value: String, day: LocalDate) = if (value.contains("T") && DateParser.date(value) != null) dateTime(value) else shortDate(dayStart(day))
+            fun dated(value: String, day: LocalDate) =
+                if (value.contains("T") && DateParser.date(value) != null) dateTime(value, now) else shortDate(dayStart(day), now)
             return "${dated(from, days.first)} – ${dated(to, days.second)}"
         }
         return "${expectedDelivery(from, now)} – $end"
@@ -475,7 +477,7 @@ class Localizer(
         return when (days.second) {
             today -> text("time.today")
             today.plusDays(1) -> text("parcel.byTomorrow")
-            else -> text("parcel.byDate", mapOf("date" to shortDate(dayStart(days.second))))
+            else -> text("parcel.byDate", mapOf("date" to shortDate(dayStart(days.second), now)))
         }
     }
 
@@ -486,7 +488,7 @@ class Localizer(
         if (seconds < 3_600) return text("time.minutesAgo", mapOf("count" to maxOf(1, (seconds / 60).toInt())))
         if (seconds < 86_400) return text("time.hoursAgo", mapOf("count" to maxOf(1, (seconds / 3_600).toInt())))
         if (seconds < 604_800) return text("time.daysAgo", mapOf("count" to maxOf(1, (seconds / 86_400).toInt())))
-        return shortDate(date)
+        return shortDate(date, now)
     }
 
     /** How long ago a scan happened, or its day when the carrier gave no clock time. */
@@ -564,21 +566,23 @@ class Localizer(
         if (day == today) return text("time.today")
         if (day == today.minusDays(1)) return text("time.yesterday")
         if (day == today.plusDays(1)) return text("time.tomorrow")
-        return shortDate(date)
+        return shortDate(date, now)
     }
 
     /**
      * Compact dates with explicit weekdays and months: "Sat 12 Sep", "Sa 12. Sept", "sam 12 sept", with the year after
-     * them when asked ("Sat 12 Sep 2025"). Names keep the language's own case, since the date often sits mid-sentence,
-     * and the day keeps the period German writes after it. The names and the period are the iPhone's "EEE", "MMM" and
-     * "dMMM" (FormatData.kt), not the phone's CLDR. Chinese writes its own order, as the web's
-     * `localizedCalendarDate` does: "9月12日周六", "2025年9月12日周六", where the iPhone writes "周六 12 9月".
+     * them when the date is in another year and more than a month from `now` ([showsYear]): "Sat 12 Sep 2025". Names
+     * keep the language's own case, since the date often sits mid-sentence, and the day keeps the period German writes
+     * after it. The names and the period are the iPhone's "EEE", "MMM" and "dMMM" (FormatData.kt), not the phone's CLDR.
+     * Chinese writes its own order, as the web's `localizedCalendarDate` does: "9月12日周六", "2025年9月12日周六", where
+     * the iPhone writes "周六 12 9月".
      */
-    fun shortDate(date: Instant, withYear: Boolean = false): String {
+    fun shortDate(date: Instant, now: Instant = AppClock.now()): String {
         val fields = fields(date)
         val format = FormatData.language(language)
         val weekday = format.weekdays[fields.weekday - 1].replace(".", "")
         val month = format.months[fields.month - 1].replace(".", "")
+        val withYear = showsYear(date, now)
         if (language == AppLanguage.Zh) return (if (withYear) "${fields.yearOfEra}年" else "") + "$month${fields.dayOfMonth}日$weekday"
         return "$weekday ${fields.dayOfMonth}${format.dayPeriod} $month" + if (withYear) " ${fields.yearOfEra}" else ""
     }
@@ -606,15 +610,15 @@ class Localizer(
         return foundationPattern(datePattern, fields(date), format) + clockTime(date)
     }
 
-    fun dateTime(value: String): String {
+    fun dateTime(value: String, now: Instant = AppClock.now()): String {
         val date = DateParser.date(value) ?: return value
-        return dayAndTime(shortDate(date), clockTime(date))
+        return dayAndTime(shortDate(date, now), clockTime(date))
     }
 
     /**
      * When the carrier planned a step, in the phone's zone: "today", "tomorrow", "yesterday" or the journal's short
-     * date, with its year when it isn't `now`'s ([journalDays]), then its clock time unless the carrier dated it by its
-     * day alone: "Fri 6 Nov, 07:54". Nothing for a date that doesn't read.
+     * date ([shortDate], [journalDays]), then its clock time unless the carrier dated it by its day alone: "Fri 6 Nov,
+     * 07:54". Nothing for a date that doesn't read.
      */
     fun plannedDate(step: PlannedTrackingEvent, now: Instant = AppClock.now()): String {
         val date = step.displayDate ?: return ""
@@ -624,7 +628,7 @@ class Localizer(
             today -> text("time.today")
             today.plusDays(1) -> text("time.tomorrow")
             today.minusDays(1) -> text("time.yesterday")
-            else -> shortDate(date, withYear = FoundationDates.dateFields(date, zone).yearOfEra != FoundationDates.dateFields(now, zone).yearOfEra)
+            else -> shortDate(date, now)
         }
         return if (step.calendarDay == null) dayAndTime(day, clockTime(date)) else day
     }
@@ -702,7 +706,7 @@ class Localizer(
         val day = DateParser.deliveryDate(value)?.atZone(zone)?.toLocalDate() ?: return null
         val today = now.atZone(zone).toLocalDate()
         if (day >= today || day < today.minusDays(PASSED_ESTIMATE_DAYS)) return null
-        return text("parcel.wasExpected", mapOf("date" to shortDate(day.atStartOfDay(zone).toInstant())))
+        return text("parcel.wasExpected", mapOf("date" to shortDate(day.atStartOfDay(zone).toInstant(), now)))
     }
 
     /** The carrier's estimate while the parcel is on its way and the estimate's last day has not passed. */
@@ -887,6 +891,19 @@ class Localizer(
 
         private fun twoDigits(value: Int): String = value.toString().padStart(2, '0')
     }
+}
+
+/**
+ * Whether a short date names its year ([Localizer.shortDate]), the same rule on the web and the iPhone: when it falls in
+ * another calendar year than `now` and more than 31 calendar days from `now`'s day, before or after, in `zone`. "Sun 28
+ * Dec" seen on 3 January stays short, as does an estimate for 2 January seen on 28 December; a scan from last November
+ * reads "Sat 15 Nov 2025".
+ */
+fun showsYear(date: Instant, now: Instant, zone: ZoneId = ZoneId.systemDefault()): Boolean {
+    if (FoundationDates.dateFields(date, zone).yearOfEra == FoundationDates.dateFields(now, zone).yearOfEra) return false
+    val day = FoundationDates.calendarDate(date, zone)?.day ?: return true
+    val today = FoundationDates.calendarDate(now, zone)?.day ?: return true
+    return abs(day - today) > 31
 }
 
 /** The line a parcel's import charges read as, and whether they can still be paid online. */

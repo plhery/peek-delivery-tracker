@@ -477,7 +477,7 @@ class LocalizationTests {
         )
         for ((language, expected) in cases) {
             localizer.language = language
-            assertEquals(expected, localizer.shortDate(date))
+            assertEquals(expected, localizer.shortDate(date, now = date))
             assertEquals(expected, localizer.expectedDelivery("2026-09-12", now = date.minusSeconds(3 * 86_400)))
         }
     }
@@ -560,16 +560,62 @@ class LocalizationTests {
     fun chineseDatesReadAsChineseWritesThem() {
         val localizer = Localizer(AppLanguage.Zh)
         val day = assertNotNull(DateParser.deliveryDate("2026-09-12"))
-        assertEquals("9月12日周六", localizer.shortDate(day))
-        assertEquals("2026年9月12日周六", localizer.shortDate(day, withYear = true))
         val now = assertNotNull(DateParser.deliveryDate("2026-09-08"))
+        val nextYear = assertNotNull(DateParser.deliveryDate("2027-03-01"))
+        assertEquals("9月12日周六", localizer.shortDate(day, now))
+        assertEquals("2026年9月12日周六", localizer.shortDate(day, nextYear))
         assertEquals("9月12日周六 14:00–16:00", localizer.expectedDelivery("2026-09-12 14:00-16:00", now = now))
         assertEquals("明天 14:00–16:00", localizer.expectedDelivery("2026-09-09 14:00-16:00", now = now))
         assertEquals("明天 14:00–16:00 – 9月12日周六", localizer.deliveryWindow("2026-09-09 14:00-16:00", "2026-09-12", now = now))
-        assertEquals("9月12日周六 14:05", localizer.dateTime(DateParser.isoString(settingTime(day, hour = 14, minute = 5))))
-        assertEquals("Сб 12 сент 2026", Localizer(AppLanguage.Ru).shortDate(day, withYear = true))
-        assertEquals("Сб 12 сент, 14:05", Localizer(AppLanguage.Ru).dateTime(DateParser.isoString(settingTime(day, hour = 14, minute = 5))))
-        assertEquals("sáb 12 set 2026", Localizer(AppLanguage.PtBr).shortDate(day, withYear = true))
+        assertEquals("9月12日周六 14:05", localizer.dateTime(DateParser.isoString(settingTime(day, hour = 14, minute = 5)), now))
+        assertEquals("Сб 12 сент 2026", Localizer(AppLanguage.Ru).shortDate(day, nextYear))
+        assertEquals("Сб 12 сент, 14:05", Localizer(AppLanguage.Ru).dateTime(DateParser.isoString(settingTime(day, hour = 14, minute = 5)), now))
+        assertEquals("sáb 12 set 2026", Localizer(AppLanguage.PtBr).shortDate(day, nextYear))
+    }
+
+    /**
+     * As on the web and the iPhone, a short date names its year only when it is in another year than now and more than
+     * 31 calendar days from today, before or after: late December seen in early January stays short.
+     */
+    @Test
+    fun shortDatesNameTheirYearOnlyInAnotherYearAndMoreThanAMonthAway() {
+        val english = Localizer(AppLanguage.En)
+        fun day(value: String) = assertNotNull(DateParser.deliveryDate(value))
+        fun short(value: String, today: String, localizer: Localizer = english) = localizer.shortDate(day(value), now = day(today))
+        // 31 days away stays short, 32 days in another year names it, before and after.
+        assertEquals("Tue 1 Dec", short("2026-12-01", "2027-01-01"))
+        assertEquals("Mon 30 Nov 2026", short("2026-11-30", "2027-01-01"))
+        assertEquals("Fri 1 Jan", short("2027-01-01", "2026-12-01"))
+        assertEquals("Sat 2 Jan 2027", short("2027-01-02", "2026-12-01"))
+        // New Year, both ways.
+        assertEquals("Mon 28 Dec", short("2026-12-28", "2027-01-03"))
+        assertEquals("Sat 2 Jan", short("2027-01-02", "2026-12-28"))
+        // Far in the past and in the future.
+        assertEquals("Sat 15 Nov 2025", short("2025-11-15", "2026-11-25"))
+        assertEquals("Wed 1 Mar 2028", short("2028-03-01", "2026-11-25"))
+        // The same year, however far, stays short.
+        assertEquals("Mon 5 Jan", short("2026-01-05", "2026-12-20"))
+        assertEquals("Sun 20 Dec", short("2026-12-20", "2026-01-05"))
+        // Each language keeps its own order, the year after the date, or first in Chinese.
+        assertEquals("Mo 30. Nov 2026", short("2026-11-30", "2027-01-01", Localizer(AppLanguage.De)))
+        assertEquals("Di 1. Dez", short("2026-12-01", "2027-01-01", Localizer(AppLanguage.De)))
+        assertEquals("2026年11月30日周一", short("2026-11-30", "2027-01-01", Localizer(AppLanguage.Zh)))
+        assertEquals("12月28日周一", short("2026-12-28", "2027-01-03", Localizer(AppLanguage.Zh)))
+        // The rule reaches the days the app writes relative to now.
+        assertEquals("Mon 28 Dec", english.expectedDelivery("2026-12-28", now = day("2027-01-03")))
+        assertEquals("Sat 15 Nov 2025", english.expectedDelivery("2025-11-15", now = day("2026-11-25")))
+        assertEquals("Sat 15 Nov 2025, 14:05", english.dateTime(DateParser.isoString(settingTime(day("2025-11-15"), hour = 14, minute = 5)), day("2026-11-25")))
+    }
+
+    /** The days are counted on the calendar of the zone: the same two moments are 31 days apart in one and 32 in another. */
+    @Test
+    fun theYearRuleCountsCalendarDaysInTheZone() {
+        val now = Instant.parse("2027-01-01T10:00:00Z")
+        val date = Instant.parse("2026-11-30T11:30:00Z")
+        // 1 December 00:30 and 1 January 23:00 in Auckland; 30 November 03:30 and 1 January 02:00 in Los Angeles.
+        assertFalse(showsYear(date, now, ZoneId.of("Pacific/Auckland")))
+        assertTrue(showsYear(date, now, ZoneId.of("America/Los_Angeles")))
+        assertFalse(showsYear(now, now, ZoneId.of("Europe/Zurich")))
     }
 
     @Test

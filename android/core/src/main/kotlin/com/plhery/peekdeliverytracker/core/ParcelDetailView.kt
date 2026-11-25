@@ -140,15 +140,14 @@ data class JournalDay(
 
 /**
  * The journal's rows by day (`journalDays`), in the phone's zone: each day headed "today", "yesterday" or its short
- * date, with its year when that isn't `now`'s. A scan dated by its day alone sits under that day, wherever the reader
- * is; scans without a readable date group under their raw `occurredAt` and stay last. Days newest first, and days that
- * start together in the rows' order: a scan dated by its day alone can sort among the day before's scans, west of the
+ * date ([Localizer.shortDate]). A scan dated by its day alone sits under that day, wherever the reader is; scans
+ * without a readable date group under their raw `occurredAt` and stay last. Days newest first, and days that start
+ * together in the rows' order: a scan dated by its day alone can sort among the day before's scans, west of the
  * carrier's zone.
  */
 fun Localizer.journalDays(entries: List<JournalEntry>, now: Instant = AppClock.now()): List<JournalDay> {
     val zone = ZoneId.systemDefault()
     val today = now.atZone(zone).toLocalDate()
-    val year = FoundationDates.dateFields(now, zone).yearOfEra
     val days = mutableListOf<JournalDay>()
     for (entry in entries) {
         val event = entry.event
@@ -166,7 +165,7 @@ fun Localizer.journalDays(entries: List<JournalEntry>, now: Instant = AppClock.n
             when (date.atZone(zone).toLocalDate()) {
                 today -> text("time.today")
                 today.minusDays(1) -> text("time.yesterday")
-                else -> shortDate(date, withYear = FoundationDates.dateFields(date, zone).yearOfEra != year)
+                else -> shortDate(date, now)
             }
         }
         days += JournalDay(key, label, start, listOf(entry))

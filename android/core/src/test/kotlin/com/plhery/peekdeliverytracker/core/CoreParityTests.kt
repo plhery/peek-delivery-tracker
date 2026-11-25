@@ -257,7 +257,7 @@ class CoreParityTests {
         )
         for ((value, texts) in expected) {
             val date = DateParser.date(value)!!
-            assertEquals(value, texts, AppLanguage.entries.map { Localizer(it).shortDate(date) })
+            assertEquals(value, texts, AppLanguage.entries.map { Localizer(it).shortDate(date, now = date) })
         }
     }
 
@@ -507,9 +507,10 @@ class CoreParityTests {
         val now = referenceDate(8e8)
         for ((language, texts) in expected) {
             val localizer = Localizer(language)
-            assertEquals("$language", texts.dropLast(1), dates.map { localizer.shortDate(it) })
-            assertEquals("$language", texts.last(), localizer.expectedDelivery("1500-03-01", now))
-            assertEquals("$language", texts.last(), localizer.expectedDelivery("1500-03-01T12:00:00Z", now).substringBefore(", "))
+            assertEquals("$language", texts.dropLast(1), dates.map { localizer.shortDate(it, now = it) })
+            // Centuries from now, the day names its year.
+            assertEquals("$language", "${texts.last()} 1500", localizer.expectedDelivery("1500-03-01", now))
+            assertEquals("$language", "${texts.last()} 1500", localizer.expectedDelivery("1500-03-01T12:00:00Z", now).substringBefore(", "))
             assertEquals("$language", "", localizer.clockTime(referenceDate(1e15)))
             assertEquals("$language", "", localizer.clockTime(referenceDate(183_881_190_614_400.25)))
             assertEquals("$language", 5, localizer.clockTime(referenceDate(183_881_190_614_400.0)).length)

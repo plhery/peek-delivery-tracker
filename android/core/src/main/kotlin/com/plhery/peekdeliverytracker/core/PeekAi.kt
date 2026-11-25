@@ -128,8 +128,8 @@ fun peekAiChanges(parcel: Parcel, now: Instant = AppClock.now()): List<Instant> 
 private fun Localizer.peekAiClock(value: String): String =
     deliveryWallClock(if (value.length > 5) value.substring(11, 16) else value)
 
-private fun Localizer.calendar(day: String): String =
-    dateOf(day)?.let { shortDate(it.atStartOfDay(ZoneId.systemDefault()).toInstant()) } ?: day
+private fun Localizer.calendar(day: String, now: Instant = AppClock.now()): String =
+    dateOf(day)?.let { shortDate(it.atStartOfDay(ZoneId.systemDefault()).toInstant(), now) } ?: day
 
 /**
  * The few words after the name on a card: "unlikely" beside the carrier's date when it says today (`estimate`, the
@@ -143,7 +143,7 @@ fun Localizer.peekAiCardWords(ai: PeekAi, estimate: String?, now: Instant = AppC
         text(if (day != null && day == now.atZone(zone).toLocalDate()) "peekAi.card.unlikely" else "peekAi.card.notToday")
     }
     PeekAiSays.ByTime -> text("peekAi.card.byTime", mapOf("time" to peekAiClock(ai.time ?: "")))
-    PeekAiSays.ByDay -> ai.day?.let { text("peekAi.card.byDay", mapOf("date" to calendar(it))) } ?: text("peekAi.card.todayOrTomorrow")
+    PeekAiSays.ByDay -> ai.day?.let { text("peekAi.card.byDay", mapOf("date" to calendar(it, now))) } ?: text("peekAi.card.todayOrTomorrow")
     PeekAiSays.TodayOrTomorrow -> text("peekAi.card.todayOrTomorrow")
     PeekAiSays.ThisWeek -> text("peekAi.card.thisWeek")
     PeekAiSays.ByEndOfNextWeek -> text("peekAi.card.byEndOfNextWeek")
@@ -166,7 +166,7 @@ fun Localizer.parcelPeekAiWords(parcel: Parcel, show: Boolean, now: Instant = Ap
 fun Localizer.peekAiClaim(ai: PeekAi, now: Instant = AppClock.now()): String = when (ai.says) {
     PeekAiSays.NotToday -> text("peekAi.claim.notToday")
     PeekAiSays.ByTime -> text("peekAi.claim.byTime", mapOf("time" to peekAiClock(ai.time ?: "")))
-    PeekAiSays.ByDay -> ai.day?.let { text("peekAi.claim.byDay", mapOf("date" to calendar(it))) } ?: text("peekAi.claim.todayOrTomorrow")
+    PeekAiSays.ByDay -> ai.day?.let { text("peekAi.claim.byDay", mapOf("date" to calendar(it, now))) } ?: text("peekAi.claim.todayOrTomorrow")
     PeekAiSays.TodayOrTomorrow -> text("peekAi.claim.todayOrTomorrow")
     PeekAiSays.ThisWeek -> text("peekAi.claim.thisWeek")
     PeekAiSays.ByEndOfNextWeek -> text("peekAi.claim.byEndOfNextWeek")
@@ -177,7 +177,7 @@ fun Localizer.peekAiClaim(ai: PeekAi, now: Instant = AppClock.now()): String = w
             // A copy kept since its first day has gone by names no day.
             day == null || day < today.toString() -> text("peekAi.claim.sooner")
             day == today.plusDays(1).toString() -> text("peekAi.claim.soonerTomorrow")
-            else -> text("peekAi.claim.soonerFrom", mapOf("date" to calendar(day)))
+            else -> text("peekAi.claim.soonerFrom", mapOf("date" to calendar(day, now)))
         }
     }
 }
@@ -253,7 +253,7 @@ fun Localizer.peekAiWhy(ai: PeekAi, carrier: String, now: Instant = AppClock.now
         PeekAiWhy.OutForDelivery -> text("peekAi.why.outForDelivery", named + ("time" to peekAiClock(ai.outSince ?: "")))
         PeekAiWhy.LateOut -> text("peekAi.why.lateOut", named)
         PeekAiWhy.MissedDate -> text("peekAi.why.missedDate", named)
-        PeekAiWhy.Ahead -> text("peekAi.why.ahead", named + ("date" to (ai.carrierDay?.let { calendar(it) } ?: "")))
+        PeekAiWhy.Ahead -> text("peekAi.why.ahead", named + ("date" to (ai.carrierDay?.let { calendar(it, now) } ?: "")))
         PeekAiWhy.NoDate -> withLastStep(text("peekAi.why.noDate", named), ai, now)
     }
 }

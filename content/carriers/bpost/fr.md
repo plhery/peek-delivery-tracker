@@ -16,12 +16,12 @@ Les formes les plus courantes selon bpost (numéros inventés) :
 
 | Forme | Exemple | Ce que c'est |
 | --- | --- | --- |
-| 24 chiffres commençant par 3232 ou 3299 | `323200000000000000000000` | Code-barres d'un colis |
-| 18 chiffres commençant par 3232 | `323200000000000000` | Code-barres d'un colis |
-| 27 caractères commençant par JJBEA | `JJBEA0000000000000000000001` | Code-barres d'un colis |
-| 2 lettres, 9 chiffres, BE | `CE000000005BE` | Numéro postal international venu de Belgique |
-| R, une lettre, 9 chiffres, 2 lettres | `RR000000005BE` | Recommandé international |
-| 30 chiffres commençant par 010 | `010000000000000000000000000000` | Recommandé en Belgique |
+| 24 chiffres commençant par 3232 ou 3299 | `323248291057364918273649` | Code-barres d'un colis |
+| 18 chiffres commençant par 3232 | `323248291057364918` | Code-barres d'un colis |
+| 27 caractères commençant par JJBEA | `JJBEA4829105736491827364918` | Code-barres d'un colis |
+| 2 lettres, 9 chiffres, BE | `CE482910576BE` | Numéro postal international venu de Belgique |
+| R, une lettre, 9 chiffres, 2 lettres | `RR482910576BE` | Recommandé international |
+| 30 chiffres commençant par 010 | `010482910573649182736491827364` | Recommandé en Belgique |
 
 Un code-barres qui commence par U sert seulement au passage en douane : l'expéditeur ou l'acheteur a choisi un envoi sans Track & Trace. Selon bpost, il arrive au plus tard 5 jours ouvrables après le dédouanement.
 
@@ -81,7 +81,7 @@ Dans Peek, qui affiche les libellés anglais de bpost, une tournée interrompue 
 
 ## bpost contact : téléphone, chat et plainte
 
-Relevé sur les pages françaises de bpost le 27 octobre 2026 :
+D'après les pages françaises de bpost :
 
 - **Téléphone :** 02 278 51 27 sur les pages françaises et allemandes de bpost, 02 278 51 26 sur ses pages anglaises et néerlandaises ; du lundi au vendredi de 8 h à 12 h 30 et de 13 h à 18 h, le samedi de 9 h à 13 h, au tarif zonal. Le temps d'attente varie.
 - **Chat :** pour certains services, dont le Track & Trace. bpost ne publie pas d'horaires pour le chat.

@@ -16,12 +16,12 @@ De barcodes die bpost zelf het vaakst noemt (voorbeelden verzonnen):
 
 | Vorm | Voorbeeld | Wat het is |
 | --- | --- | --- |
-| 24 cijfers, begint met 3232 of 3299 | `323200000000000000000000` | Barcode van een pakje |
-| 18 cijfers, begint met 3232 | `323200000000000000` | Barcode van een pakje |
-| 27 tekens, begint met JJBEA | `JJBEA0000000000000000000001` | Barcode van een pakje |
-| 2 letters, 9 cijfers, BE | `CE000000005BE` | Internationaal postnummer uit België |
-| R, een letter, 9 cijfers, 2 letters | `RR000000005BE` | Internationale aangetekende zending |
-| 30 cijfers, begint met 010 | `010000000000000000000000000000` | Aangetekende zending binnen België |
+| 24 cijfers, begint met 3232 of 3299 | `323248291057364918273649` | Barcode van een pakje |
+| 18 cijfers, begint met 3232 | `323248291057364918` | Barcode van een pakje |
+| 27 tekens, begint met JJBEA | `JJBEA4829105736491827364918` | Barcode van een pakje |
+| 2 letters, 9 cijfers, BE | `CE482910576BE` | Internationaal postnummer uit België |
+| R, een letter, 9 cijfers, 2 letters | `RR482910576BE` | Internationale aangetekende zending |
+| 30 cijfers, begint met 010 | `010482910573649182736491827364` | Aangetekende zending binnen België |
 
 **Begint je barcode met een U?** Dan kan je de zending niet volgen. bpost maakt zo'n barcode alleen aan om de zending door de douane te laten gaan: de afzender, of jij bij je aankoop, koos voor levering zonder Track & Trace. Ze wordt verwerkt als een brief en komt binnen maximaal 5 werkdagen nadat de douane ze vrijgeeft.
 
@@ -89,7 +89,7 @@ In Peek, en in de Engelstalige Track & Trace, lees je de scans in het Engels. Di
 
 ## Klantendienst van bpost contacteren
 
-Zo stond het op de Nederlandstalige pagina's van bpost op 27 oktober 2026:
+Zo staat het op de Nederlandstalige pagina's van bpost:
 
 - **Telefoon:** 02 278 51 26 op de Nederlandstalige en Engelstalige pagina's van bpost, 02 278 51 27 op de Franstalige en Duitstalige; maandag tot vrijdag van 08.00 tot 12.30 u. en van 13.00 tot 18.00 u., zaterdag van 09.00 tot 13.00 u. Zonaal tarief.
 - **Chat:** voor sommige diensten, waaronder Track & Trace.

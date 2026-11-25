@@ -19,13 +19,13 @@ Os formatos mais comuns divulgados pela bpost (exemplos fictícios):
 | 24 dígitos começando em 3232 ou 3299 | `323248291057364918273649` | Código de barras de encomenda |
 | 18 dígitos começando em 3232 | `323248291057364918` | Código de barras de encomenda |
 | 27 caracteres começando em JJBEA | `JJBEA4829105736491827364918` | Código de barras de encomenda |
-| Duas letras, nove dígitos, `BE` | `CE482910576BE` | Código postal internacional da Bélgica |
+| Duas letras, nove dígitos, `BE` | `CE482910576BE` | Número postal internacional da Bélgica |
 | `R`, uma letra, nove dígitos, duas letras | `RR482910576BE` | Correspondência registrada internacional |
 | 30 dígitos começando em 010 | `010482910573649182736491827364` | Correspondência registrada dentro da Bélgica |
 
 Um código começando por `U` existe apenas para a alfândega: o remetente ou comprador escolheu envio sem Track & Trace, e o item chega em até 5 dias úteis após o desembaraço aduaneiro, segundo a bpost.
 
-Um código postal terminado nas letras de outro país pertence ao correio daquele país. Um dígito trocado num código terminado em `BE` invalida o dígito verificador e faz o Peek não sugerir nenhuma transportadora. Alguns códigos de 24 dígitos pertencem à [InPost](carrier:inpost) ou à Ciblex.
+Um número postal terminado nas letras de outro país pertence ao correio daquele país. Um dígito trocado num código terminado em `BE` invalida o dígito verificador e faz o Peek não sugerir nenhuma transportadora. Alguns códigos de 24 dígitos pertencem à [InPost](carrier:inpost) ou à Ciblex.
 
 ## Status do Track & Trace da bpost explicados
 
@@ -63,9 +63,9 @@ Se você não estiver em casa e não tiver definido preferências, o carteiro co
 
 **Rota interrompida.** Após `Delivery interrupted due to unforeseen circumstances`, a rota parou do lado da bpost e ganha nova data em `New delivery scheduled`. O Peek mostra "Precisa de atenção" na primeira linha e volta a "Em trânsito" na segunda.
 
-**Quem reclama.** Como destinatário você não pode abrir reclamação própria. A maioria das lojas tem acordo com a bpost para extravio ou avaria, então peça reenvio ou reembolso à loja; apenas o remetente pode iniciar uma investigação.
+**Quem reclama.** Como destinatário você não pode abrir reclamação própria. A maioria das lojas tem acordo com a bpost para extravio ou dano, então peça reenvio ou reembolso à loja; apenas o remetente pode iniciar uma investigação.
 
-**Avaria.** Contate o remetente em até 7 dias com fotos; em pacotes vindos do exterior, avise a bpost também.
+**Dano.** Contate o remetente em até 7 dias com fotos; em pacotes vindos do exterior, avise a bpost também.
 
 **Entregue, mas não chegou.** Pergunte aos vizinhos, confira a caixa de correio (volumes pequenos entram sem tocar a campainha), suas preferências e a foto do local seguro no app ou Track & Trace. A bpost oferece ainda um formulário para envios não entregues — tenha em mãos o código de barras e o código postal.
 
@@ -88,7 +88,7 @@ Tenha o código de barras em mãos. A bpost não divulga e-mail de atendimento.
 
 O [Peek](/) reconhece a bpost na hora em códigos válidos de duas letras, nove dígitos e `BE`, e em `JJBE` seguido de uma letra e 18 ou 22 dígitos. Códigos de 24 dígitos iniciados em 3232 ou 3299 são consultados na bpost, Austrian Post, InPost e Ciblex; códigos de 18 dígitos iniciados em 3232, na bpost — e na Ecoscooting quando os dígitos 6 a 9 são zeros, padrão da Ecoscooting. Quando a bpost encontra o número, o Peek a seleciona; só quando a Ecoscooting também reconhece esse código de 18 dígitos você escolhe em "Escolher". Os códigos registrados de 30 dígitos só funcionam após escolher bpost em "Trocar". Links de bpost.be ou do Track & Trace com `itemCodes` abrem como bpost. Um código iniciado em `U` não vai para a bpost (pois ela não o rastreia); o Peek sugere apenas Chronopost.
 
-O Peek consulta a bpost diretamente, sem código postal. Você vê as leituras em inglês da bpost com local, peso e dimensões; leituras na Bélgica usam o horário belga e aparecem no fuso do seu dispositivo. Enquanto o pacote aguarda num ponto de retirada ou locker, o Peek mostra o nome e o endereço do ponto, mantendo-os mesmo após a retirada. Entregas na Bélgica exibem o horário de entrega, e devoluções ao remetente aparecem como devolvidas. O Peek verifica até a cada 10 minutos, ou a cada 2 minutos a partir das 6h locais no dia em que a bpost marca saída para entrega, enquanto o rastreador oficial responde (pelos serviços de rastreamento, até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados), e avisa quando o status muda. Após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora.
+O Peek consulta a bpost diretamente, sem código postal. Você vê as leituras em inglês da bpost com local, peso e dimensões; leituras na Bélgica usam o horário belga e aparecem no fuso do seu dispositivo. Enquanto o pacote aguarda num ponto de retirada ou locker, o Peek mostra o nome e o endereço do ponto, mantendo-os mesmo após a retirada. Entregas na Bélgica exibem o horário de entrega, e devoluções ao remetente aparecem como devolvidas. O Peek verifica até a cada 10 minutos, ou a cada 2 minutos a partir das 6h locais no dia em que a bpost marca saída para entrega, enquanto o rastreador da própria bpost responde (pelos serviços de rastreamento, a cada 15 minutos), e avisa quando o status muda. Após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora.
 
 O Peek não exibe dia previsto de entrega e omite remetente, destinatário, endereço, contatos, preferências de entrega e comprovante de entrega.
 
@@ -128,7 +128,7 @@ Normalmente o remetente ainda não entregou o pacote à bpost. Códigos iniciado
 - [bpost: Your delivery preferences, your rules](https://www.bpost.be/en/mybpostapp-pref-parcel) – prazos para alterar preferências
 - [bpost: Receive a parcel](https://www.bpost.be/en/receive-parcel) – 14 dias para pagar custos de importação
 - [bpost: My parcel stopped moving in Track & Trace](https://www.bpost.be/en/faq/my-parcel-seems-be-stuck-somewhere-it-has-not-moved-while-track-trace) – 5 e 10 dias úteis e reclamação pelo remetente
-- [bpost: How to file a complaint about a parcel](https://www.bpost.be/en/faq/how-do-i-file-complaint-if-my-parcel-damaged-or-lost-or-hasnt-been-delivered) – destinatário não reclama, avaria em 7 dias e horários
+- [bpost: How to file a complaint about a parcel](https://www.bpost.be/en/faq/how-do-i-file-complaint-if-my-parcel-damaged-or-lost-or-hasnt-been-delivered) – destinatário não reclama, dano em 7 dias e horários
 - [bpost: Parcel delivered, but didn't receive anything](https://www.bpost.be/en/faq/i-get-message-my-parcel-has-been-delivered-i-havent-received-anything-what-now) – verificações, foto do local seguro e formulário
 - [bpost: Parcel must pass through customs](https://www.bpost.be/en/receive-parcel/customs) – pagamento antecipado na importação
 - [bpost: A parcel from outside the EU?](https://www.bpost.be/en/shopping-outside-eu) – €3 e €2 por item, €21,50 e €40 de administração
@@ -137,4 +137,5 @@ Normalmente o remetente ainda não entregou o pacote à bpost. Códigos iniciado
 - [bpost: Comment contacter le service clientèle de bpost ?](https://www.bpost.be/fr/faq/comment-contacter-le-service-clientele-de-bpost) – 02 278 51 27 (página em francês)
 - [bpost: Phishing, received suspicious text or email?](https://www.bpost.be/en/faq/i-received-suspicious-text-message-or-email-allegedly-bpost-what-should-i-do) – alerta de golpes e abuse@bpost.be
 - [bnode: bpostgroup becomes bnode](https://press.bnode.com/bpostgroup-becomes-bnode) – nome do grupo, marca bpost e Landmark Global
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra
 :::

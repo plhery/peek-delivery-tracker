@@ -16,12 +16,12 @@ Formatos más habituales según bpost (ejemplos inventados):
 
 | Formato | Ejemplo | Qué identifica |
 | --- | --- | --- |
-| 24 cifras que empiezan por `3232` o `3299` | `323200000000000000000001` | Código de barras de paquete de bpost |
+| 24 cifras que empiezan por `3232` o `3299` | `323248291057364918273649` | Código de barras de paquete de bpost |
 | 18 cifras que empiezan por `3232` | `323212345000000001` | Código de barras de paquete de bpost |
-| 23 o 27 caracteres con `JJBE` + letra | `JJBEA0000000000000000000001` | Matrícula nacional de bpost (paquete o certificado) |
+| 23 o 27 caracteres con `JJBE` + letra | `JJBEA4829105736491827364918` | Matrícula nacional de bpost (paquete o certificado) |
 | 2 letras (salvo `U`), 9 cifras y `BE` | `CE482910576BE` | Paquete postal internacional enviado desde Bélgica |
 | `R` + letra, 9 cifras y `BE` | `RR482910576BE` | Certificado internacional desde Bélgica |
-| 30 cifras que empiezan por `010` | `010000000000000000000000000001` | Certificado nacional dentro de Bélgica |
+| 30 cifras que empiezan por `010` | `010482910573649182736491827364` | Certificado nacional dentro de Bélgica |
 
 Un código que empieza por `U` (`UA…BE`) solo sirve para aduanas: no tiene Track & Trace, viaja como correo ordinario y llega en un máximo de 5 días laborables tras el despacho aduanero.
 

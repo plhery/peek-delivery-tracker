@@ -16,12 +16,12 @@ Diese Formen nennt bpost, hier mit erfundenen Ziffern:
 
 | Form | Beispiel | Was es ist |
 | --- | --- | --- |
-| 24 Ziffern, beginnend mit 3232 oder 3299 | `323200000000000000000000` | Paket |
-| 18 Ziffern, beginnend mit 3232 | `323200000000000000` | Paket |
-| 27 Zeichen, beginnend mit JJBEA | `JJBEA0000000000000000000000` | Paket |
-| 13 Zeichen: CE, EE, CD oder CZ, neun Ziffern, zwei Buchstaben | `CE000000005BE` | Paket |
-| 13 Zeichen, beginnend mit R | `RR000000005BE` | Internationales Einschreiben |
-| 30 Ziffern, beginnend mit 010 | `010000000000000000000000000000` | Einschreiben innerhalb Belgiens |
+| 24 Ziffern, beginnend mit 3232 oder 3299 | `323248291057364918273649` | Paket |
+| 18 Ziffern, beginnend mit 3232 | `323248291057364918` | Paket |
+| 27 Zeichen, beginnend mit JJBEA | `JJBEA4829105736491827364918` | Paket |
+| 13 Zeichen: CE, EE, CD oder CZ, neun Ziffern, zwei Buchstaben | `CE482910576BE` | Paket |
+| 13 Zeichen, beginnend mit R | `RR482910576BE` | Internationales Einschreiben |
+| 30 Ziffern, beginnend mit 010 | `010482910573649182736491827364` | Einschreiben innerhalb Belgiens |
 
 Beginnt dein Strichcode mit U, dient er nur dem Zoll: Absender oder Käufer haben beim Bestellen eine Zustellung ohne Track & Trace gewählt. bpost behandelt die Sendung dann wie einen Brief und stellt sie innerhalb von 5 Werktagen nach der Zollabfertigung zu.
 
@@ -104,7 +104,7 @@ Ein Geschenk von einer Privatperson an eine andere, ohne kommerziellen Charakter
 
 ## bpost Kontakt: Telefon, Formular, Ombudsdienst
 
-So nennen die deutschen Seiten von bpost ihre Kanäle (gelesen am 27. Oktober 2026):
+So nennen die deutschen Seiten von bpost ihre Kanäle:
 
 - **Telefon:** 02 278 51 27, aus dem Ausland 00 32 2 278 51 27, so auf den deutschen und französischen Seiten von bpost; die englischen und niederländischen nennen 02 278 51 26. Montags bis freitags 8.00 bis 12.30 und 13.00 bis 18.00 Uhr, samstags 9.00 bis 13.00 Uhr, zum Ortstarif.
 - **Online:** das Online-Formular und die Beschwerdeformulare.

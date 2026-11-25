@@ -16,12 +16,12 @@ The most common shapes bpost lists (examples invented):
 
 | Shape | Example | What it is |
 | --- | --- | --- |
-| 24 digits starting 3232 or 3299 | `323200000000000000000000` | Parcel barcode |
-| 18 digits starting 3232 | `323200000000000000` | Parcel barcode |
-| 27 characters starting JJBEA | `JJBEA0000000000000000000001` | Parcel barcode |
-| Two letters, nine digits, BE | `CE000000005BE` | International postal number from Belgium |
-| R, a letter, nine digits, two letters | `RR000000005BE` | International registered mail |
-| 30 digits starting 010 | `010000000000000000000000000000` | Registered mail within Belgium |
+| 24 digits starting 3232 or 3299 | `323248291057364918273649` | Parcel barcode |
+| 18 digits starting 3232 | `323248291057364918` | Parcel barcode |
+| 27 characters starting JJBEA | `JJBEA4829105736491827364918` | Parcel barcode |
+| Two letters, nine digits, BE | `CE482910576BE` | International postal number from Belgium |
+| R, a letter, nine digits, two letters | `RR482910576BE` | International registered mail |
+| 30 digits starting 010 | `010482910573649182736491827364` | Registered mail within Belgium |
 
 A barcode starting with U exists only for customs: the sender or buyer chose delivery without Track & Trace, and the item arrives within 5 working days of customs clearance, says bpost.
 
@@ -75,7 +75,7 @@ If you're out and set no preferences, the postman will generally try a neighbour
 
 ## bpost customer service number and contact
 
-As bpost's English pages listed them on 27 October 2026:
+As bpost's English pages list them:
 
 - **Phone:** 02 278 51 26 on bpost's English and Dutch pages, 02 278 51 27 on its French and German ones; Monday to Friday 08.00 to 12.30 and 13.00 to 18.00, Saturday 09.00 to 13.00, zonal rate.
 - **Chat:** for some services, Track & Trace included.

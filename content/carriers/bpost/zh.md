@@ -12,7 +12,7 @@ updated: 2026-11-24
 
 bpost 把运单号称为条码（barcode），常见于包裹面单、邮局交寄回执、未妥投通知单及确认邮件中。网店通常会发邮件告知，有时直接附带 Track & Trace 链接。如果没有条码，请联系商家。更多方法见[如何查找运单号](guide:find-tracking-number)（英文）。
 
-bpost 公布的常见单号格式如下（以下均为虚构示例）：
+bpost 公布的单号格式如下（以下均为虚构示例）：
 
 | 格式 | 示例 | 类型 |
 | --- | --- | --- |
@@ -29,7 +29,7 @@ bpost 公布的常见单号格式如下（以下均为虚构示例）：
 
 ## bpost Track & Trace 物流状态中文解读
 
-bpost Track & Trace 支持英语、法语、荷兰语和德语。以下为包裹常见英文状态（按流转顺序排列）：
+bpost Track & Trace 提供英语、法语、荷兰语和德语版本。以下为包裹的英文状态（按流转顺序排列）：
 
 | bpost 状态原文 | 中文含义 |
 | --- | --- |
@@ -53,9 +53,9 @@ bpost Track & Trace 支持英语、法语、荷兰语和德语。以下为包裹
 
 **保管期限：** 自提点（Pick-up point）保管 14 个自然日，Bbox 快递柜保管 5 个自然日且不可延期，逾期均退回寄件人。任何持条码的人都可代取普通包裹；挂号邮件则需收件人本人身份证，或在通知单上签字授权代领。
 
-**Bbox 快递柜：** 全天候 24 小时开放，无需注册账号。扫描 My bpost 应用或邮件中的二维码即可开柜；无屏幕快递柜仅支持通过 My bpost 应用蓝牙开启。
+**Bbox 快递柜：** 全天候 24 小时开放，无需注册账号。扫描 My bpost 应用或邮件中的二维码即可开柜；无屏幕快递柜只能通过 My bpost 应用以蓝牙开启。
 
-**修改派送偏好：** 可在 MyPreferences 或 My bpost 应用中预先设定安全存放处、邻居代收、自提点或快递柜。包裹在途期间也可改送至附近其他地址，或免费延期一个工作日一次。邻居代收与安全存放处最迟可在派送前 5 分钟修改，自提点或快递柜则须在前一晚午夜前修改。
+**修改派送偏好：** 可在 MyPreferences 或 My bpost 应用中预先设定安全存放处、邻居代收、自提点或快递柜。包裹在途期间也可改送至附近其他地址，或延期一个工作日（仅限一次）。邻居代收与安全存放处最迟可在派送前 5 分钟修改，自提点或快递柜则须在前一晚午夜前修改。
 
 ## 包裹延误、丢失、破损与欧盟海关税费
 
@@ -88,7 +88,7 @@ bpost 官网列出的客服渠道如下：
 
 对于两位字母 + 九位数字 + `BE` 且校验位正确的单号，以及 `JJBE` 后跟一位字母和 18 或 22 位数字的单号，[Peek](/) 会立刻识别为 bpost。3232 或 3299 开头的 24 位单号会同时向 bpost、奥地利邮政、InPost 和 Ciblex 询问；3232 开头的 18 位单号会询问 bpost（当第 6 至 9 位为零、与 Ecoscooting 格式重叠时也会询问 Ecoscooting）。只要 bpost 有记录，Peek 就会选中 bpost；仅当 Ecoscooting 也同时查到该 18 位单号时，才会让你点“选择”自行确定。30 位比利时国内挂号单号须先点击“更换”手动选择 bpost 才可查询。粘贴 bpost.be 或 Track & Trace 页面带 `itemCodes` 的链接也会直接按 bpost 解析。`U` 开头条码因 bpost 不提供跟踪，Peek 不会将其归为 bpost，仅建议 Chronopost。
 
-Peek 会直接向 bpost 查询，无需填写邮编。你将看到 bpost 的英文原文轨迹、扫描地点、重量和尺寸；比利时境内扫描按比利时时间解析并换算为你设备的本地时区。包裹停放在自提点或快递柜时，Peek 会显示该自提点名称和地址，取件后也会保留。比利时境内签收的包裹会显示签收时间，退回寄件人的包裹会标记为已退回。当 bpost 官方系统响应时，Peek 最高每 10 分钟检查一次，在包裹扫描进入派送当天自当地时间早上 6 点起最高每 2 分钟检查一次；若仅通过综合跟踪服务获取更新，则在派送当天打开页面或开启提醒时最高每 15 分钟检查一次，状态变化时可推送通知。连续两天无新动态（或在“已生成面单”、“已揽收”状态下满 12 小时），Peek 会改为每小时检查一次。
+Peek 会直接向 bpost 查询，无需填写邮编。你将看到 bpost 的英文原文轨迹、扫描地点、重量和尺寸；比利时境内扫描按比利时时间解析并换算为你设备的本地时区。包裹停放在自提点或快递柜时，Peek 会显示该自提点名称和地址，取件后也会保留。比利时境内签收的包裹会显示签收时间，退回寄件人的包裹会标记为已退回。Peek 最高每 10 分钟检查一次；在 bpost 扫描包裹进入派送的当天，只要 bpost 自己的查询系统正常响应，自当地时间早上 6 点起最高每 2 分钟检查一次（通过物流查询服务时每 15 分钟一次）。状态变化时可推送通知。连续两天无新动态（或在“已生成面单”、“已揽收”状态下满 12 小时），Peek 会改为每小时检查一次。
 
 Peek 不显示预计送达日期，也会隐去寄件人、收件人、收件地址、联系方式、派送偏好和签收凭证。
 
@@ -137,4 +137,5 @@ bpost 是 bnode 集团（原 bpostgroup）旗下负责比利时和荷兰包裹�
 - [bpost: Comment contacter le service clientèle de bpost ?](https://www.bpost.be/fr/faq/comment-contacter-le-service-clientele-de-bpost) – 法语客服电话 02 278 51 27
 - [bpost: Phishing, received suspicious text or email?](https://www.bpost.be/en/faq/i-received-suspicious-text-message-or-email-allegedly-bpost-what-should-i-do) – 防钓鱼提示与 abuse@bpost.be
 - [bnode: bpostgroup becomes bnode](https://press.bnode.com/bpostgroup-becomes-bnode) – 集团更名、bpost 品牌与 Landmark Global
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取和显示的信息
 :::

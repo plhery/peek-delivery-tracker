@@ -15,8 +15,8 @@ The number is in DHL's shipping email or the shop's order email. On the label it
 | Shape (invented) | What it is |
 | --- | --- |
 | `JVGL4829173648` | `JVGL` followed by letters and digits: the usual DHL eCommerce parcel number. |
-| `3SABC12345678` | `3S`, three letters, then digits: a DHL barcode shape. |
-| `JJD00009012345678901234` | `JJD000090` followed by 14 to 16 digits: a `JJD` label number of DHL's Dutch network. |
+| `3SKLM48291736` | `3S`, three letters, then digits: a DHL barcode shape. |
+| `JJD00009048291736482917` | `JJD000090` followed by 14 to 16 digits: a `JJD` label number of DHL's Dutch network. |
 | `MDP48291736` | `MDP` and 8 more characters (digits 1 to 9 and some capital letters): a shape Peek's catalog gives to DHL eCommerce Netherlands. |
 | Code on the yellow card | The delivery code on a missed-delivery card. Enter it with your postcode in track and trace. |
 
@@ -77,7 +77,7 @@ As listed on DHL's consumer pages:
 
 ## Tracking DHL eCommerce parcels with Peek
 
-[Peek](/) names DHL eCommerce Netherlands at once for `JVGL` numbers, for `3S` with three letters and 8 to 10 digits, for `JJD000090` followed by 14 to 16 digits, and for `MDP` codes of the shape in the table above. Other `3S` codes are asked of DHL eCommerce Netherlands (with Colis Privé for some lengths). Some also fit PostNL, which can't be asked, and a DHL barcode with four letters after `3S` reads as PostNL's or matches nothing: pick DHL eCommerce Netherlands with "Change". Other `JJD` numbers are mostly named DHL unless you change the carrier. Links from my.dhlecommerce.nl, dhlparcel.nl, dhlecommerce.be and dhlparcel.be ending in `/home/tracktrace/` and the number work too.
+[Peek](/) names DHL eCommerce Netherlands at once for `JVGL` numbers, for `3S` with three letters and 8 to 10 digits, for `JJD000090` followed by 14 to 16 digits, and for `MDP` codes of the shape in the table above. Other `3S` codes are asked of DHL eCommerce Netherlands. Some also fit PostNL, which can't be asked, and a DHL barcode with four letters after `3S` reads as PostNL's or matches nothing: pick DHL eCommerce Netherlands with "Change". Other `JJD` numbers are mostly named DHL unless you change the carrier. Links from my.dhlecommerce.nl, dhlparcel.nl, dhlecommerce.be and dhlparcel.be ending in `/home/tracktrace/` and the number work too.
 
 It asks without your postcode, so DHL leaves out the recipient, address, signature and ServicePoint. You see the status, the history, the expected delivery (a time window or moment, when DHL plans one) and the delivery time. DHL gives no place for its scans. While you have the parcel open, or on its delivery day with notifications on, it's checked up to every 10 minutes, and up to every 2 minutes from 6 a.m. Dutch time on the day DHL scans it out for delivery (when DHL plans a time window, from half an hour before it opens), while DHL's own tracker answers; otherwise hourly. Through tracking services, it's checked hourly, every 3 hours after a day without a new scan, and up to every 15 minutes on the day it's out for delivery, under the same condition. Notifications tell you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Scans keep DHL's English wording, under Peek's own headline, such as "In transit" or "Ready for pickup"; Peek counts `Delivered at DHL ServicePoint` as ready for pickup. A Belgian parcel isn't followed on to bpost.
 

@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import type { ParcelWithEvents, TrackingEvent } from '../../types';
 import { ParcelCard } from '../ParcelCard';
+import { ListSearch } from '../SearchMark';
 import { NameWithMark } from './NoteMark';
 
 const scan: TrackingEvent = { id: 'scan', parcelId: 'parcel', stage: 'in_transit', description: 'Scan', occurredAt: '2026-11-24T08:00:00Z' };
@@ -38,5 +39,39 @@ describe("the list's note mark", () => {
     expect(document.querySelector('.parcel-card__label .note-mark')).not.toBeNull();
     // The note itself is never on the card.
     expect(document.body).not.toHaveTextContent('Door code');
+  });
+
+  it("shows the note's words a search found the card by, the match marked, only in the reader's searched list", () => {
+    const noted = { ...parcel, note: 'Order 48213 from the record shop. Ask the neighbour if nobody is home, the neighbour has a key.' };
+    const searched = (query: string) => render(<ListSearch.Provider value={query}><ParcelCard parcel={noted} onOpen={vi.fn()} /></ListSearch.Provider>);
+    const marks = () => [...document.querySelectorAll('mark')].map((mark) => [mark.closest('.note-match') ? 'note' : 'name', mark.textContent]);
+
+    // A match in the note: its words under the name, every match marked, and the row says them.
+    const { unmount } = searched('NEIGHBOUR');
+    // A few words before the first match, so a one-line row still shows it.
+    expect(document.querySelector('.note-match')).toHaveTextContent(/^Your note: …record shop\. Ask the neighbour if nobody is home, the neighbour has a key\.$/);
+    expect(marks()).toEqual([['note', 'neighbour'], ['note', 'neighbour']]);
+    expect(screen.getByRole('button', { name: /^Kind of Blue · vinyl, Your note: …record shop\. Ask .* has a key\. — / })).toBeVisible();
+    unmount();
+
+    // In the name and the note: both marked.
+    const both = render(<ListSearch.Provider value="record"><ParcelCard parcel={{ ...noted, label: 'Record player' }} onOpen={vi.fn()} /></ListSearch.Provider>);
+    expect(marks()).toEqual([['name', 'Record'], ['note', 'record']]);
+    both.unmount();
+
+    // In the name only: marked there, and the note stays off the card.
+    const name = searched('blue');
+    expect(marks()).toEqual([['name', 'Blue']]);
+    expect(document.querySelector('.note-match')).toBeNull();
+    expect(document.body).not.toHaveTextContent('Order 48213');
+    name.unmount();
+
+    // Not searching, or a card outside the reader's list (a shared link, a friend's view): no mark, no note.
+    const idle = searched('  ');
+    expect(document.querySelector('mark, .note-match')).toBeNull();
+    idle.unmount();
+    render(<ParcelCard parcel={noted} onOpen={vi.fn()} />);
+    expect(document.querySelector('mark, .note-match')).toBeNull();
+    expect(document.body).not.toHaveTextContent('Order 48213');
   });
 });

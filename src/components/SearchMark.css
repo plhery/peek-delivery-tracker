@@ -1,0 +1,7 @@
+/* A search's match in a row of the list: Peek's yellow under the words, in the text's own colour. */
+.search-mark { padding: 0; background: none; color: inherit; text-decoration: underline .18em var(--yellow); text-decoration-skip-ink: none; text-underline-offset: .12em; }
+@media (forced-colors: active) { .search-mark { background: Mark; color: MarkText; forced-color-adjust: none; } }
+
+/* The note's words a search found the parcel by: one quiet line under the name. */
+.note-match { display: block; overflow: hidden; color: var(--ink-soft); font-size: 13px; font-weight: 400; letter-spacing: 0; line-height: 1.4; text-overflow: ellipsis; white-space: nowrap; }
+.parcel-card__note-match { margin-top: -3px; }

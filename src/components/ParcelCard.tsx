@@ -18,6 +18,8 @@ import { bindSwipeRow, type SwipeRow } from '../lib/swipeRow';
 import { Glyph } from '../peek/parcel/glyphs';
 import { NameWithMark } from './note/NoteMark';
 import { hasNote } from '../lib/parcelNote';
+import { searchRanges } from '../lib/searchMatch';
+import { NoteMatch, SearchMarked, useListSearch, useNoteMatch } from './SearchMark';
 import { peekAiCardWords } from '../lib/peekAi';
 import { PeekAiPhrase, useParcelPeekAi } from './PeekAi';
 
@@ -100,9 +102,14 @@ export function ParcelCard({ parcel, onOpen, onArchive, notice, variant = 'regul
     : pickupPlace ? `${statusLabel} · ${pickupPlace}` : statusLabel;
   // A private note shows as a quiet mark after the name, and the row says so.
   const noted = hasNote(parcel);
-  const spokenName = noted ? `${parcelName}, ${t('note.hasNote')}` : parcelName;
+  // While the reader's own list is searching, the name marks the match, and a match in the note shows its few words.
+  const nameRanges = searchRanges(parcel.label ?? '', useListSearch());
+  const noteHit = useNoteMatch(parcel.note, parcel.files?.map((file) => file.name) ?? []);
+  const spokenName = noteHit ? `${parcelName}, ${t('note.title')}: ${noteHit.text}` : noted ? `${parcelName}, ${t('note.hasNote')}` : parcelName;
   const statusAria = expectedDelivery ? t('parcel.ariaExpected', { name: spokenName, status: statusSummary, date: expectedDelivery }) : t('parcel.aria', { name: spokenName, status: statusSummary });
-  const shownName = noted ? <NameWithMark name={parcelName} files={Boolean(parcel.files?.length)} /> : parcelName;
+  const shownName = noted ? <NameWithMark name={parcelName} files={Boolean(parcel.files?.length)} ranges={nameRanges} />
+    : <SearchMarked text={parcelName} ranges={nameRanges} />;
+  const noteMatch = noteHit && <NoteMatch snippet={noteHit} className="parcel-card__note-match" />;
 
   // New since the parcel was last opened: a dot before the status line, which a screen reader hears first.
   const marked = useMarkNewUpdates() && hasNewUpdate(parcel);
@@ -130,6 +137,7 @@ export function ParcelCard({ parcel, onOpen, onArchive, notice, variant = 'regul
           {placed && <NextUpEngraving route={route} stage={current?.stage} />}
           <span className="parcel-card__hero-top"><CarrierMark carrier={carrier} /><span className="parcel-card__next-label">{t('app.nextUp')}</span></span>
           <span className="parcel-card__hero-main"><strong className="parcel-card__label">{shownName}</strong><ParcelStamp parcel={parcel} /></span>
+          {noteMatch}
           {deliveryLabel && <span className="parcel-card__sender">{deliveryLabel}</span>}
           <AutoCarrierNotice parcel={parcel} className="parcel-card__sender" />
           <span className="parcel-card__summary"><span className="parcel-card__state">{mark}{arrived && check}{statusLabel}</span>{pickupPlace && <><span aria-hidden="true">·</span><span className="parcel-card__place">{pickupPlace}</span></>}{(expectedDelivery || (arrived && completionDate)) && <><span aria-hidden="true">·</span><span className="parcel-card__eta">{expectedDelivery || completionDate}</span></>}{peekAiWords && <><span aria-hidden="true">·</span><PeekAiPhrase words={peekAiWords} className="parcel-card__eta" /></>}</span>
@@ -140,6 +148,7 @@ export function ParcelCard({ parcel, onOpen, onArchive, notice, variant = 'regul
             ? <span className="parcel-card__dates">{expectedDelivery && <span className="parcel-card__eta">{expectedDelivery}</span>}<PeekAiPhrase words={peekAiWords} /></span>
             : (expectedDelivery || completionDate) && <span className={completionDate ? 'parcel-card__completion' : 'parcel-card__eta'}>{expectedDelivery || completionDate}</span>}</span>
           <strong className="parcel-card__label">{shownName}</strong>
+          {noteMatch}
           {deliveryLabel && <span className="parcel-card__sender">{deliveryLabel}</span>}
           <AutoCarrierNotice parcel={parcel} className="parcel-card__sender" />
           {(!flag || parcelHasCarrierUpdate(parcel)) && <span className="parcel-card__state">{mark}{check}{statusLabel}{pickupPlace && <><span aria-hidden="true">·</span><span className="parcel-card__place">{pickupPlace}</span></>}</span>}

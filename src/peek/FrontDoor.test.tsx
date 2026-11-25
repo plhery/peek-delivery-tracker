@@ -1075,11 +1075,22 @@ describe('FrontDoor: on this device', () => {
     expect(within(list).getAllByRole('link', { name: /has a note/ })).toHaveLength(2);
     await user.click(within(list).getByRole('button', { name: 'Search parcels' }));
     const field = within(list).getByRole('searchbox', { name: 'Search parcels' });
+    expect(list.querySelector('.note-match')).toBeNull();
     await user.type(field, 'neighbour');
     expect(within(list).getAllByRole('link').map((link) => link.getAttribute('href'))).toEqual([`/p/${LINK_ID}`]);
+    // The row shows where the search matched: the note's words under the name, the word marked.
+    const found = within(list).getByRole('link', { name: /New sneakers, has a note\s*Your note:\s*…4812, leave it with the neighbour/ });
+    expect(found.querySelector('.note-match')).toHaveTextContent(/^Your note: …4812, leave it with the neighbour$/);
+    expect([...found.querySelectorAll('.note-match mark')].map((mark) => mark.textContent)).toEqual(['neighbour']);
     await user.clear(field);
     await user.type(field, 'receipt');
     expect(within(list).getAllByRole('link').map((link) => link.getAttribute('href'))).toEqual([`/p/${ids[1]}`]);
+    expect([...list.querySelectorAll('.note-match mark')].map((mark) => mark.textContent)).toEqual(['Receipt']);
+    // A match in the name is marked there, and the note, which doesn't hold it, stays off the row.
+    await user.clear(field);
+    await user.type(field, 'sneak');
+    expect([...list.querySelectorAll('mark')].map((mark) => [mark.closest('strong') ? 'name' : 'note', mark.textContent])).toEqual([['name', 'sneak']]);
+    expect(list.querySelector('.note-match')).toBeNull();
   });
 
   it('offers no search for a short list', () => {

@@ -3,6 +3,8 @@ import { CarrierMark } from '../../components/CarrierMark';
 import { Icon } from '../../components/Icon';
 import { MaintenanceStrip } from '../../components/MaintenanceStrip';
 import { NameWithMark } from '../../components/note/NoteMark';
+import { ListSearch, NoteMatch, SearchMarked, useListSearch, useNoteMatch } from '../../components/SearchMark';
+import { searchRanges } from '../../lib/searchMatch';
 import { pipMood } from '../../components/map/Pip';
 import { defaultMode } from '../../components/map/route';
 import { WorldMap } from '../../components/map/WorldMap';
@@ -55,8 +57,16 @@ function useParcelTitle(recent: RecentParcel): string {
 function CardName({ recent, title }: { recent: RecentParcel; title: string }) {
   const { t } = useI18n();
   const files = deviceNoteFilesOf(useAllDeviceNoteFiles(), recent.id).length > 0;
-  if (!recent.note?.trim() && !files) return title;
-  return <><NameWithMark name={title} files={files} /><span className="sr-only">{`, ${t('note.hasNote')}`}</span></>;
+  // A search marks its match in a name this device gave, not in the shortened number standing in for one.
+  const ranges = searchRanges(recent.name ?? '', useListSearch());
+  if (!recent.note?.trim() && !files) return <SearchMarked text={title} ranges={ranges} />;
+  return <><NameWithMark name={title} files={files} ranges={ranges} /><span className="sr-only">{`, ${t('note.hasNote')}`}</span></>;
+}
+
+/** The few words of this device's note a search found the parcel by, under its name. */
+function CardNoteMatch({ recent }: { recent: RecentParcel }) {
+  const snippet = useNoteMatch(recent.note, deviceNoteFilesOf(useAllDeviceNoteFiles(), recent.id).map((file) => file.name));
+  return snippet && <NoteMatch snippet={snippet} className="door-parcel__note-match" />;
 }
 
 /**
@@ -108,6 +118,7 @@ function DeviceParcel({ recent, arrived = false, archived = false }: { recent: R
       ? <span className="door-parcel__dates">{when && <span className="door-parcel__when">{when}</span>}<PeekAiPhrase words={peekAiWords} /></span>
       : when && <span className="door-parcel__when">{when}</span>}</span>
     <strong><CardName recent={recent} title={title} /></strong>
+    <CardNoteMatch recent={recent} />
     <span className="door-parcel__state">{news.dot}{parcelStatusLabel(parcel, t, locale)}{stale && ` · ${t('link.frozen.label')}`}{archived && ` · ${t('app.archived')}`}</span>
   </a>;
 }
@@ -299,9 +310,9 @@ export function DeviceParcels({ onSignIn, onForgotten, covered = false }: {
     {down && listed && <MaintenanceStrip notice={down} at={deviceListReadAt(recents)} />}
     {/* A search lists what it found in the list's order, archived parcels said so, and no card leads. */}
     {matches && (matches.length
-      ? <ul className="door-device__list door-device__found">
+      ? <ListSearch.Provider value={query}><ul className="door-device__list door-device__found">
         {matches.map((recent) => <li key={recent.id}><DeviceParcel recent={recent} archived={!!recent.archivedAt} /></li>)}
-      </ul>
+      </ul></ListSearch.Provider>
       : <p className="door-message">{t('view.noResultsTitle')}</p>)}
     <ul ref={cards} className="door-device__list" hidden={!active.length || !!matches}>
       {lead && <li key={lead.id} className="door-device__lead"><LeadParcel recent={lead} arrived={arrived(lead)} /></li>}

@@ -499,10 +499,11 @@ describe('App', () => {
 
     await user.type(screen.getByRole('searchbox', { name: 'Search parcels' }), 'birthday');
 
+    // The card marks where the search matched in its name.
     expect(
       within(screen.getByRole('region', { name: 'Needs attention' }))
-        .getByText('Birthday gift 🎁'),
-    ).toBeInTheDocument();
+        .getByText('Birthday', { selector: 'mark' }).closest('.parcel-card__label'),
+    ).toHaveTextContent(/^Birthday gift 🎁$/);
     expect(screen.queryByText('Coffee beans ☕')).not.toBeInTheDocument();
     expect(screen.queryByText('New trainers 👟')).not.toBeInTheDocument();
     expect(screen.getByText('1 shown')).toBeInTheDocument();

@@ -17,6 +17,7 @@ import { ParcelCard } from './components/ParcelCard';
 import { ParcelDetail } from './components/ParcelDetail';
 import { Passport } from './components/Passport';
 import { Friends } from './components/Friends';
+import { ListSearch } from './components/SearchMark';
 import { createFriendsClient } from './lib/friends';
 import { captureCardOrigin, type CardOrigin } from './lib/cardTransition';
 import { Icon, ParcelIllustration } from './components/Icon';
@@ -578,6 +579,8 @@ export default function App({
         )}
 
         <PullToRefresh hidden={tab !== 'deliveries'} enabled={!loading && !refreshing && !refreshAnimating && !adding && !openParcelId} onRefresh={() => refreshOutcome(refresh())}>
+        {/* The reader's own list, the one place a search marks its matches and shows a note's words. */}
+        <ListSearch.Provider value={searched ? query : ''}>
         <div ref={deliveriesPage} className="deliveries-page">
         <div className="delivery-active" role={activeParcels.length ? 'region' : undefined} aria-labelledby={activeParcels.length ? 'active-parcels-title' : undefined}>
         <div className="delivery-overview">
@@ -769,6 +772,7 @@ export default function App({
         )}
         </div>
         </div>
+        </ListSearch.Provider>
         {/* The foot ends the deliveries and moves with them when they are pulled. */}
         {openLanding && <AppFoot onOpenLanding={openLanding} />}
         </PullToRefresh>

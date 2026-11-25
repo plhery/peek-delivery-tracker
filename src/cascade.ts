@@ -29,4 +29,5 @@ import './components/AndroidTest.css';
 import './peek/Unlock.css';
 import './components/PeekAi.css';
 import './components/note/NoteMark.css';
+import './components/SearchMark.css';
 import './components/note/ParcelNote.css';

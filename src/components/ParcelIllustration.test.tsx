@@ -58,7 +58,7 @@ describe('Pip with its carrier’s label', () => {
 
   it('leaves the number line out for a parcel whose number is not shown', () => {
     const { container } = render(<ParcelIllustration label={{ carrier: carrierInfo('ups'), number: null }} />);
-    expect(container.querySelector('.parcel-illustration__label-name')).toHaveTextContent('ups');
+    expect(container.querySelector('.parcel-illustration__label-name')).toHaveTextContent('UPS');
     expect(container.querySelector('.parcel-illustration__label-number')).toBeNull();
   });
 });

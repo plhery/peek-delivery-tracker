@@ -149,7 +149,7 @@ describe('FrontDoor', () => {
     // The recognise beat: the field shows the number alone, the label is on the box, the card is on its way.
     expect(document.querySelector('.door-field__number')).toHaveTextContent(UPS);
     expect(document.querySelector('.door-field__check')).toBeInTheDocument();
-    expect(document.querySelector('.door-pip .parcel-illustration__label-name')).toHaveTextContent('ups');
+    expect(document.querySelector('.door-pip .parcel-illustration__label-name')).toHaveTextContent('UPS');
     expect(document.querySelector('.door-wash')).toBeInTheDocument();
     expect(document.querySelector('.door-skeleton')).toBeInTheDocument();
     expect(screen.getByText('Opening your parcel…')).toHaveAttribute('role', 'status');

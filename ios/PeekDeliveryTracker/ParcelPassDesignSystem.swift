@@ -471,7 +471,7 @@ struct CarrierVisualIdentity {
         let assets = CarrierBrandAssets.shared
         family = assets.families[id] ?? id
         fullName = carrier.displayName
-        name = ["dhl": "DHL", "gls": "GLS", "ups": "ups"][family] ?? carrier.displayName
+        name = ["dhl": "DHL", "gls": "GLS", "ups": "UPS"][family] ?? carrier.displayName
         decal = assets.decals[id] ?? "default"
         colors = assets.derivation.map { step in
             assets.palettes[id]?[step.property] ?? Self.derived(carrier.color, step)

@@ -9,6 +9,10 @@ describe('carrier branding', () => {
     expect(brands[0].style).toEqual(brands[1].style);
     expect(brands[1].style).toEqual(brands[2].style);
   });
+  it('writes the hand-set names in capitals, UPS too, never a lowercase logo or a bare id', () => {
+    expect((['dhl', 'dhl-express', 'gls-de', 'ups', 'usps', 'dpd-de', 'tnt', 'fedex'] as const).map((id) => carrierBrand(carrierInfo(id)).name))
+      .toEqual(['DHL', 'DHL', 'GLS', 'UPS', 'USPS', 'DPD Germany', 'TNT', 'FedEx']);
+  });
   it('keeps the DHL and UPS truck liveries distinct from their readable text colors', () => {
     expect(carrierBrand(carrierInfo('dhl')).style).toMatchObject({ '--carrier-truck': '#ffcc00', '--carrier-brand-light': '#d40511' });
     expect(carrierBrand(carrierInfo('ups')).style).toMatchObject({ '--carrier-truck': '#573626', '--carrier-accent': '#f5c86b' });

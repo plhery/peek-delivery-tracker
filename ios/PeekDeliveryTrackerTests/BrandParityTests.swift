@@ -172,6 +172,10 @@ final class BrandParityTests: XCTestCase {
         }
     }
 
+    func testHandSetNamesAreInCapitalsUPSToo() throws {
+        XCTAssertEqual(try ["dhl", "gls-de", "ups", "usps", "tnt"].map { try identity($0).name }, ["DHL", "GLS", "UPS", "USPS", "TNT"])
+    }
+
     func testCarriersWithoutAPaletteUseTheSharedMixAmounts() throws {
         let brand = try brand()
         let sampled = ["swiss-post", "fedex", "dpd", "la-poste"].filter { brand.palettes[$0] == nil }

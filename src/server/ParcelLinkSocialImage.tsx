@@ -13,7 +13,7 @@ import { siteName } from './siteSettings';
 const HEADERS = { 'Cache-Control': 'private, no-store', 'X-Robots-Tag': 'noindex, nofollow' };
 const INK = '#20251e';
 /** The wordmarks the app sets by hand, by brand family. */
-const WORDMARKS: Record<string, string> = { dhl: 'DHL', gls: 'GLS', ups: 'ups' };
+const WORDMARKS: Record<string, string> = { dhl: 'DHL', gls: 'GLS', ups: 'UPS' };
 /** The parcel's 300 × 310 frame, as the app draws Pip. */
 const BOX = {
   backFlap: '150,95 245,142 197.5,166 102.5,118.5',

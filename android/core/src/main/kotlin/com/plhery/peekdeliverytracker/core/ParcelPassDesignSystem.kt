@@ -283,7 +283,7 @@ class CarrierVisualIdentity private constructor(
 
     private constructor(id: String, carrier: CarrierDefinition, assets: CarrierBrandAssets) : this(
         family = assets.families[id] ?: id,
-        name = mapOf("dhl" to "DHL", "gls" to "GLS", "ups" to "ups")[assets.families[id] ?: id] ?: carrier.displayName,
+        name = mapOf("dhl" to "DHL", "gls" to "GLS", "ups" to "UPS")[assets.families[id] ?: id] ?: carrier.displayName,
         fullName = carrier.displayName,
         colors = assets.derivation.map { step -> assets.palettes[id]?.get(step.property) ?: derived(carrier.color, step) },
         decal = assets.decals[id] ?: "default",

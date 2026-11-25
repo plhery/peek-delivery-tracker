@@ -42,7 +42,7 @@ const INK = '#20251e';
 /** A card whose carrier is not known, as the app paints it. */
 const NEUTRAL: Tint = { tone: '#657060', surface: '#eceee7' };
 /** The wordmarks the app sets by hand, by brand family. */
-const WORDMARKS: Record<string, string> = { dhl: 'DHL', gls: 'GLS', ups: 'ups' };
+const WORDMARKS: Record<string, string> = { dhl: 'DHL', gls: 'GLS', ups: 'UPS' };
 
 /** CSS pixels of the card as pixels of the picture. */
 const u = (value: number) => value * SCALE;

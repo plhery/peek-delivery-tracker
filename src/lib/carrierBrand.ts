@@ -11,8 +11,11 @@ import type { CarrierInfo } from './carriers';
 
 export { DEFAULT_CARRIER_COLOR, carrierBrandFamily, carrierDecal };
 
-/** The wordmarks we set by hand; every other carrier shows its catalog name. */
-const WORDMARKS: Record<string, string> = { dhl: 'DHL', gls: 'GLS', ups: 'ups' };
+/**
+ * The names we set by hand for a brand family, in capitals as readers write them (not UPS's lowercase logo); every
+ * other carrier shows its catalog name.
+ */
+const WORDMARKS: Record<string, string> = { dhl: 'DHL', gls: 'GLS', ups: 'UPS' };
 
 /**
  * Only the approved wordmarks need special treatment; new carriers use catalog

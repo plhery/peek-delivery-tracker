@@ -126,6 +126,11 @@ class BrandParityTests {
     private fun points(pairs: List<List<Double>>): List<Point> = pairs.map { Point(it[0], it[1]) }
 
     @Test
+    fun handSetNamesAreInCapitalsUpsToo() {
+        assertEquals(listOf("DHL", "GLS", "UPS", "USPS", "TNT"), listOf("dhl", "gls-de", "ups", "usps", "tnt").map { identity(it).name })
+    }
+
+    @Test
     fun declaredPalettesFamiliesAndLiveriesMatchTheCarrierFolders() {
         val brand = brand()
         assertEquals(9, brand.properties.size)

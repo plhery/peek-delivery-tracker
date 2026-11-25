@@ -14926,6 +14926,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "gls-fr",
+      "catalog": "gls-fr",
+      "slug": "rastreamento-gls-france",
+      "title": "Rastreamento GLS France: status, Relais GLS e contato",
+      "name": "GLS France",
+      "color": "#ffdd00"
+    },
+    {
       "id": "gls-it",
       "catalog": "gls-it",
       "slug": "rastreamento-gls-italia",
@@ -15036,6 +15044,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Allegro One: One Box, One Punkt e One Kurier",
       "name": "Allegro One",
       "color": "#006d57"
+    },
+    {
+      "id": "sunyou",
+      "catalog": "sunyou",
+      "slug": "rastreamento-sunyou",
+      "title": "Rastreamento SunYou (SYPost): códigos SY, status e entrega",
+      "name": "SunYou",
+      "color": "#02a232"
     },
     {
       "id": "amazon-shipping",
@@ -18354,6 +18370,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DPD France 快递查询：单号、法语状态与 Pickup 自提点",
       "name": "DPD France",
       "color": "#dc0032"
+    },
+    {
+      "id": "gls-fr",
+      "catalog": "gls-fr",
+      "slug": "gls-faguo-kuaidi-chaxun",
+      "title": "GLS 法国（GLS France）快递查询：单号、状态与自提",
+      "name": "GLS France",
+      "color": "#ffdd00"
     },
     {
       "id": "gls-it",

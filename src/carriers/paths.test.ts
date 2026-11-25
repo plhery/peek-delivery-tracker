@@ -1,7 +1,7 @@
 import { expect, it, vi } from 'vitest';
 import { CARRIER_LINKS } from '../generated/carriers';
 import { PAGE_ONLY_LANGUAGES, SUPPORTED_LOCALES } from '../lib/locale';
-import { carrierPageLanguage, carrierPath, carrierPathLanguage, namesNoCarrier } from './paths';
+import { carrierDestination, carrierPageLanguage, carrierPath, carrierPathLanguage, namesNoCarrier } from './paths';
 
 // A carrier's page in Finnish, a language with pages alone, as the list would hold one.
 vi.mock('../generated/carriers', async (original) => {
@@ -61,4 +61,20 @@ it('puts a page in a language with pages alone under its prefix, and shows it in
   for (const path of ['/fi/carriers', '/fi/carriers/', '/fi/carriers/no-such-carrier', carrierPath('fi', CARRIER_LINKS.en[0].slug), '/fi/carriers/lahetysten-seuranta/more', '/sv/carriers', '/sv/carriers/lahetysten-seuranta']) {
     expect(namesNoCarrier(path), path).toBe(true);
   }
+});
+
+it('leads a carrier named by its id or another language’s slug to its page in the address’s language, else in English', () => {
+  const page = (language: 'en' | 'de' | 'es' | 'zh', id: string) => CARRIER_LINKS[language].find((link) => link.id === id)!.slug;
+  // Another language's slug under a language the carrier is written in.
+  expect(carrierDestination(`/de/carriers/${page('en', 'j-and-t-de')}`)).toBe(`/de/carriers/${page('de', 'j-and-t-de')}`);
+  expect(carrierDestination(`/es/carriers/${page('zh', 'jrt')}`)).toBe(`/es/carriers/${page('es', 'jrt')}`);
+  // The carrier's id.
+  expect(carrierDestination('/carriers/yanwen')).toBe(`/carriers/${page('en', 'yanwen')}`);
+  expect(carrierDestination('/de/carriers/yanwen')).toBe(`/de/carriers/${page('de', 'yanwen')}`);
+  // A language the carrier is not written in: its English page.
+  const englishOnly = CARRIER_LINKS.en.find((link) => !CARRIER_LINKS.de.some(({ id }) => id === link.id))!;
+  expect(carrierDestination(`/de/carriers/${englishOnly.id}`)).toBe(`/carriers/${englishOnly.slug}`);
+  // A carrier's own page, a name no carrier has, anything below a page and any other address lead nowhere.
+  for (const path of [`/carriers/${page('en', 'yanwen')}`, `/de/carriers/${page('de', 'jrt')}`, '/carriers', '/de/carriers', '/carriers/no-such-carrier',
+    `/carriers/yanwen/more`, '/guides/yanwen', '/en/carriers/yanwen', '/yanwen']) expect(carrierDestination(path), path).toBeNull();
 });

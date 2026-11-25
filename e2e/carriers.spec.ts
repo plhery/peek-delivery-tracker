@@ -132,7 +132,7 @@ test('a carrier’s page in a language with pages alone declares its language, a
   expect(await missing.text()).toMatch(/<html[^>]* lang="en"/);
 });
 
-test('a slug without a carrier’s page, or a carrier in a language it is not written in, is the site’s 404 page', async ({ page, request }) => {
+test('a slug without a carrier’s page is the site’s 404 page, and a carrier named in another language leads to its page', async ({ page, request }) => {
   // A carrier written in some languages and not in others, whose slug in another language is not its English one.
   const translatedSlug = (id: string, slug: string) => (language: Language) =>
     language !== 'en' && CARRIER_LINKS[language].some((link) => link.id === id && link.slug !== slug);
@@ -142,9 +142,16 @@ test('a slug without a carrier’s page, or a carrier in a language it is not wr
   const translated = LANGUAGES.find(translatedSlug(carrier.id, carrier.slug))!;
   const slugIn = (language: Language) => CARRIER_LINKS[language].find((link) => link.id === carrier.id)!.slug;
   for (const address of ['/carriers/no-such-carrier', '/de/carriers/no-such-carrier', '/en/carriers', '/en/carriers/x', '/nl/carriers',
-    `/carriers/${carrier.slug.toUpperCase()}`, `/carriers/${carrier.slug}/more`, `/${missing}/carriers/${carrier.slug}`,
-    `/carriers/${slugIn(translated)}`, `/${missing}/carriers/${slugIn(translated)}`]) {
+    `/carriers/${carrier.slug.toUpperCase()}`, `/carriers/${carrier.slug}/more`]) {
     expect((await request.get(address)).status(), address).toBe(404);
+  }
+  // Its id, or its slug in another language, leads for good to its page in the address's language, else in English.
+  for (const [address, destination] of [[`/${missing}/carriers/${carrier.slug}`, `/carriers/${carrier.slug}`],
+    [`/carriers/${slugIn(translated)}`, `/carriers/${carrier.slug}`], [`/${missing}/carriers/${slugIn(translated)}`, `/carriers/${carrier.slug}`],
+    [`/${translated}/carriers/${carrier.id}`, `/${translated}/carriers/${slugIn(translated)}`]]) {
+    const response = await request.get(address, { maxRedirects: 0 });
+    expect(response.status(), address).toBe(308);
+    expect(new URL(response.headers().location!, 'https://peek.example.test').pathname, address).toBe(destination);
   }
   for (const language of LANGUAGES) expect((await request.get(hub(language))).status(), language).toBe(200);
 

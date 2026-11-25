@@ -2,7 +2,7 @@ import { analyticsConfiguration } from './src/server/analytics';
 import { NextRequest, NextResponse } from 'next/server';
 import { createHash } from 'node:crypto';
 import { assistantsPathLanguage } from './src/assistants/paths';
-import { carrierPageLanguage, carrierPathLanguage, namesNoCarrier } from './src/carriers/paths';
+import { carrierDestination, carrierPageLanguage, carrierPathLanguage, namesNoCarrier } from './src/carriers/paths';
 import { guideIdDestination, guidePathLanguage, namesNoGuide } from './src/guides/paths';
 import { APPEARANCE_BOOTSTRAP } from './src/lib/appearanceConfig';
 import { ENTRY_HINT_BOOTSTRAP } from './src/lib/entryHintConfig';
@@ -39,6 +39,9 @@ export function proxy(request: NextRequest) {
   const pages = guidePagesOn();
   const guide = pages && guideIdDestination(request.nextUrl.pathname);
   if (guide) return NextResponse.redirect(new URL(guide, request.url), { status: 308 });
+  // A carrier named by its id or another language's slug leads to its page in the address's language, else in English.
+  const carrier = pages && carrierDestination(request.nextUrl.pathname);
+  if (carrier) return NextResponse.redirect(new URL(carrier, request.url), { status: 308 });
 
   // The landing's code to scan sends a phone on to its own app; the page at `/app` is for anyone else. A site without
   // an iPhone app has no such code, and the address is its 404 page.

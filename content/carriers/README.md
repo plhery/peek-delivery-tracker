@@ -4,7 +4,8 @@ One page per carrier, for people who searched for its tracking: what its numbers
 what its statuses mean, and what to do when a parcel gets stuck. They live at
 `/carriers/<slug>` in English and `/<language>/carriers/<slug>` in the other languages it
 is written in; `/carriers` and `/<language>/carriers` list them in each language a page is
-written in. A language of the app with no page yet keeps its readers on the English list: its
+written in. An address naming a carrier by its id or by another language's slug leads, permanently, to its
+page in the address's language, else to its English page. A language of the app with no page yet keeps its readers on the English list: its
 own list shows the English pages, out of search engines and the sitemap, and no other page links to it.
 It comes back with the language's first page.
 

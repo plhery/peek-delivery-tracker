@@ -35,6 +35,25 @@ export function carrierPathLanguage(pathname: string): Locale | null {
 }
 
 /**
+ * Where an address below a language's carriers leads when it names a carrier by its id, or by its page's slug in
+ * another language (readers and other sites put a language's prefix before the English slug): the carrier's page
+ * in that language, else its English page. Null for a carrier's own page there, and for a name no carrier has.
+ */
+export function carrierDestination(pathname: string): string | null {
+  const language = carrierPageLanguage(pathname);
+  if (!language) return null;
+  const name = /^\/([^/]+)$/.exec(pathname.slice(carrierPath(language).length))?.[1];
+  if (!name || CARRIER_LINKS[language].some(({ slug }) => slug === name)) return null;
+  const ids = new Set(Object.values(CARRIER_LINKS).flatMap((links) => links.filter((link) => link.id === name || link.slug === name).map(({ id }) => id)));
+  if (ids.size !== 1) return null;
+  const [id] = ids;
+  const own = CARRIER_LINKS[language].find((link) => link.id === id);
+  if (own) return carrierPath(language, own.slug);
+  const english = CARRIER_LINKS.en.find((link) => link.id === id);
+  return english ? carrierPath('en', english.slug) : null;
+}
+
+/**
  * Whether an address below a language's carriers names no carrier written in that language, letter for
  * letter: the proxy answers it with the site's 404 page, as it does an address that names no guide
  * (`namesNoGuide`). A carrier's page in a language it is not written in is no page either, and a language

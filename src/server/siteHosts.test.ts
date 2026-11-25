@@ -263,11 +263,10 @@ describe('the page proxy', () => {
 
   it('answers an address below a language’s carriers that names no carrier written in it with the 404 page, in that language', () => {
     const rewrite = (path: string) => page(`https://peek.example.test${path}`, { headers: { host: 'peek.example.test', cookie: 'sdt.locale=de' } });
-    const everySlug = SUPPORTED_LOCALES.flatMap((locale) => CARRIER_LINKS[locale].map(({ slug }) => slug));
     for (const locale of SUPPORTED_LOCALES) {
       const own = CARRIER_LINKS[locale].map(({ slug }) => slug);
-      // A made-up carrier, a carrier of another language, and below a carrier's page.
-      const missing = ['no-such-carrier', ...everySlug.filter((slug) => !own.includes(slug)), ...own.slice(0, 1).flatMap((slug) => [slug.toUpperCase(), `${slug}/more`])];
+      // A made-up carrier, and below a carrier's page.
+      const missing = ['no-such-carrier', ...own.slice(0, 1).flatMap((slug) => [slug.toUpperCase(), `${slug}/more`])];
       for (const path of missing.map((slug) => carrierPath(locale, slug))) {
         const response = rewrite(path);
         expect(response.headers.get('x-middleware-rewrite'), path).toBe('https://peek.example.test/_not-found');
@@ -279,12 +278,29 @@ describe('the page proxy', () => {
     for (const path of ['/en/carriers/x', '/carriersmore', '/api/carriers']) expect(rewrite(path).headers.get('x-middleware-rewrite'), path).toBeNull();
   });
 
+  it('leads a carrier named by its id or another language’s slug, permanently, to its page in the address’s language, else in English', () => {
+    const answer = (path: string) => page(`https://peek.example.test${path}`, { headers: { host: 'peek.example.test' } });
+    for (const locale of SUPPORTED_LOCALES) {
+      for (const other of SUPPORTED_LOCALES.filter((language) => language !== locale)) {
+        for (const link of CARRIER_LINKS[other].filter(({ slug }) => !CARRIER_LINKS[locale].some((own) => own.slug === slug)).slice(0, 3)) {
+          const own = CARRIER_LINKS[locale].find(({ id }) => id === link.id);
+          const destination = own ? carrierPath(locale, own.slug) : carrierPath('en', CARRIER_LINKS.en.find(({ id }) => id === link.id)!.slug);
+          for (const path of [carrierPath(locale, link.slug), carrierPath(locale, link.id)].filter((path) => path !== destination)) {
+            const response = answer(path);
+            expect(response.status, path).toBe(308);
+            expect(response.headers.get('location'), path).toBe(`https://peek.example.test${destination}`);
+          }
+        }
+      }
+    }
+  });
+
   it('renders a carrier’s page in a language with pages alone in English around its text, and any other address there as the 404 page', () => {
     const answer = (path: string) => page(`https://peek.example.test${path}`, { headers: { host: 'peek.example.test', cookie: 'sdt.locale=de; other=1', 'accept-language': 'de' } });
     for (const language of Object.keys(PAGE_ONLY_LANGUAGES) as PageOnlyLanguage[]) {
       const own = CARRIER_LINKS[language].map(({ slug }) => carrierPath(language, slug));
       // It has no carriers' own page.
-      for (const path of [carrierPath(language), carrierPath(language, 'no-such-carrier'), carrierPath(language, CARRIER_LINKS.en[0].slug)]) {
+      for (const path of [carrierPath(language), carrierPath(language, 'no-such-carrier')]) {
         const response = answer(path);
         expect(response.headers.get('x-middleware-rewrite'), path).toBe('https://peek.example.test/_not-found');
         expect(response.headers.get('x-middleware-request-cookie'), path).toBe('sdt.locale=en; other=1');

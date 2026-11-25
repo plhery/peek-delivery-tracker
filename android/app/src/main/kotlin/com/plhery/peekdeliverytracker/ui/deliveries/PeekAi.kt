@@ -98,6 +98,8 @@ import com.plhery.peekdeliverytracker.ui.sheet.Sheet
 import com.plhery.peekdeliverytracker.ui.sheet.SheetDetent
 import com.plhery.peekdeliverytracker.ui.sheet.sheetBottomInset
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
+import com.plhery.peekdeliverytracker.ui.theme.CappedDynamicTypeSize
+import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.MinimumScale
@@ -505,14 +507,14 @@ private fun PeekAiFact(icon: String, title: String, words: String) {
  * The days Peek AI expects, each with its weekday over its date, or the hours two to a cell, each shaded by its chance in
  * four steps of the ink (`peekAiShades`, [stripFill]), the likeliest in bold: the weight says it without colour. The
  * carrier's day is ringed and the hours gone faded. Under them, the scale from "Less likely" to "More likely" and the
- * ring. A cell's words keep to one line, shrinking to 70 % ("10:00 PM" on a narrow phone). TalkBack hears the shades in
+ * ring. A cell's words keep to one line, shrinking to 70 % ("10:00 PM" on a narrow phone), and grow no further than
+ * xxLarge (`.dynamicTypeSize(...xxLarge)`), past which no hour fits whole. TalkBack hears the shades in
  * words ([peekAiStripSpoken]), likeliest first, and not the key.
  */
 @Composable
 private fun PeekAiStripBox(strip: PeekAiStrip, carrier: String) {
     val localizer = LocalLocalizer.current
     val colors = PeekTheme.colors
-    val type = PeekTheme.type
     val ink = colors.label
     // With more contrast asked for, every word takes the ink.
     val soft = if (colors.highContrast) ink else colors.secondaryText
@@ -526,35 +528,39 @@ private fun PeekAiStripBox(strip: PeekAiStrip, carrier: String) {
             .padding(horizontal = 14.dp, vertical = 12.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-            for (cell in strip.cells) {
-                val shape = ContinuousRoundedShape(9.dp)
-                val likeliest = cell.level == 4
-                Column(
-                    Modifier
-                        .weight(1f)
-                        .alpha(if (cell.past) 0.45f else 1f)
-                        .background(stripFill(cell.level), shape)
-                        .then(
-                            when {
-                                !cell.carrier -> Modifier
-                                colors.highContrast -> Modifier.border(1.5.dp, ink, shape)
-                                else -> Modifier.border(1.2.dp, soft, shape)
-                            },
-                        )
-                        .padding(top = 5.dp, bottom = 6.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(1.dp),
-                ) {
-                    // On the two strongest shades the weekday takes the ink, which the soft grey would lack contrast against.
-                    if (cell.over.isNotEmpty()) {
-                        CellWords(
-                            cell.over,
-                            (if (likeliest) type.style(IosTextStyle.Caption2, FontWeight.SemiBold) else type.caption2).sfLines()
-                                .copy(color = if (cell.level >= 3) ink else soft),
-                        )
+        // Five hours side by side, "10:00 AM" among them, have no room for larger type: TalkBack reads them in words.
+        CappedDynamicTypeSize(DynamicTypeSize.XXLarge) {
+            val type = PeekTheme.type
+            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                for (cell in strip.cells) {
+                    val shape = ContinuousRoundedShape(9.dp)
+                    val likeliest = cell.level == 4
+                    Column(
+                        Modifier
+                            .weight(1f)
+                            .alpha(if (cell.past) 0.45f else 1f)
+                            .background(stripFill(cell.level), shape)
+                            .then(
+                                when {
+                                    !cell.carrier -> Modifier
+                                    colors.highContrast -> Modifier.border(1.5.dp, ink, shape)
+                                    else -> Modifier.border(1.2.dp, soft, shape)
+                                },
+                            )
+                            .padding(top = 5.dp, bottom = 6.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(1.dp),
+                    ) {
+                        // On the two strongest shades the weekday takes the ink, which the soft grey would lack contrast against.
+                        if (cell.over.isNotEmpty()) {
+                            CellWords(
+                                cell.over,
+                                (if (likeliest) type.style(IosTextStyle.Caption2, FontWeight.SemiBold) else type.caption2).sfLines()
+                                    .copy(color = if (cell.level >= 3) ink else soft),
+                            )
+                        }
+                        CellWords(cell.main, type.style(IosTextStyle.Footnote, if (likeliest) FontWeight.Bold else FontWeight.Medium).sfLines().copy(color = ink))
                     }
-                    CellWords(cell.main, type.style(IosTextStyle.Footnote, if (likeliest) FontWeight.Bold else FontWeight.Medium).sfLines().copy(color = ink))
                 }
             }
         }

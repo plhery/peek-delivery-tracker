@@ -4,6 +4,7 @@ import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
@@ -37,6 +38,7 @@ import com.plhery.peekdeliverytracker.core.peekAiWhy
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.ProvideLocalizer
 import com.plhery.peekdeliverytracker.ui.RootHost
+import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import java.time.Duration
 import java.time.Instant
@@ -191,6 +193,35 @@ class PeekAiPageTest {
             // Past 70 %, it would end in an ellipsis.
             assertFalse(text, hour.isLineEllipsized(0) || hour.didOverflowWidth)
         }
+    }
+
+    /**
+     * At Android's largest text, the hours are written as at xxLarge, where the iPhone stops them growing: five hours
+     * side by side have no room for more.
+     */
+    @Test
+    fun atTheLargestTextTheHoursGrowNoFurtherThanXxLarge() {
+        val reader = Localizer(AppLanguage.En, variant = "android").apply { clockPreference = ClockPreference.TwelveHour }
+        val size = mutableStateOf(DynamicTypeSize.XXLarge)
+        val cells = mutableMapOf<String, TextLayoutResult>()
+        compose.setContent {
+            PeekTheme(dynamicTypeSize = size.value, carrierIdentities = DemoCards.identities) {
+                ProvideLocalizer(reader) {
+                    CompositionLocalProvider(LocalPeekAiCellWords provides { cells[it.layoutInput.text.text] = it }) {
+                        PeekAiSheet(
+                            DemoCards.parcel("Belgian chocolate"), ai("Belgian chocolate"), carrier("Belgian chocolate"), shown = true, now = CAPTURED,
+                            onShow = {}, close = {},
+                        )
+                    }
+                }
+            }
+        }
+        compose.waitForIdle()
+        val atXxLarge = cells.mapValues { it.value.layoutInput.style.fontSize }
+        assertTrue(atXxLarge.keys.any { Regex("""\d:\d\d\p{Z}?[AP]M""").containsMatchIn(it) })
+        compose.runOnUiThread { size.value = DynamicTypeSize.Accessibility2 }
+        compose.waitForIdle()
+        assertEquals(atXxLarge, cells.mapValues { it.value.layoutInput.style.fontSize })
     }
 
     @Test

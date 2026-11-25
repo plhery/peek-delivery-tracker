@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Juxi Express: códigos JXC, entregas e suporte
-description: Rastreie um pacote da Juxi Express (SHJX) da China: formato do código JXC, por que não tem rastreador próprio, quem entrega e contato.
+description: Rastreie um pacote da Juxi Express (SHJX) da China: formato do código JXC, por que não tem rastreador próprio, quem entrega e a quem recorrer quando ele para.
 slug: rastreamento-juxi-express
 published: 2026-11-24
 updated: 2026-11-24
@@ -16,7 +16,7 @@ A Juxi não publica um formato oficial de códigos. Os conhecimentos vistos até
 | --- | --- |
 | `JXCAB4829105736YQ` | `JXC`, duas letras, dez dígitos e `YQ`: um código da Juxi Express. |
 | `JXCAB482910573YQ` | Apenas nove dígitos: não segue o padrão da Juxi. Veja se falta um dígito. |
-| `RR482910576CN` | Duas letras, nove dígitos e `CN`: um [código postal](guide:tracking-number-formats) do China Post, um dos serviços revendidos pela Juxi. |
+| `RR482910576CN` | Duas letras, nove dígitos e `CN`: um [código de rastreamento postal](guide:tracking-number-formats) do China Post, um dos serviços revendidos pela Juxi. |
 
 **Onde encontrar.** Nenhuma página da Juxi explica como o código chega até você. O vendedor registra o envio com a Juxi e informa o número no e-mail de envio ou na página do pedido. Se não encontrar, veja [como encontrar o código de rastreamento](guide:find-tracking-number).
 
@@ -35,7 +35,7 @@ A Juxi não publica lista de textos de movimentação e, sem rastreador próprio
 | Com a transportadora local | Os correios ou a transportadora do seu país receberam o pacote e fazem a entrega. |
 | Entregue ou devolvido | Fim do trajeto. Em algumas linhas, um pacote que não pode ser entregue é destruído em vez de devolvido. |
 
-A terceira etapa importa quando um pacote some: antes dela, a própria Juxi investiga; depois, ela consulta a transportadora seguinte. Em produtos postais como o ePacket, a Juxi não oferece rastreamento investigativo depois que os correios assumem o envio, e sua modalidade econômica de pequeno pacote do China Post, enviada como correspondência comum, não tem rastreamento algum.
+A terceira etapa importa quando um pacote some: antes dela, a própria Juxi investiga; depois, ela consulta a transportadora seguinte. Em produtos postais como o ePacket, a Juxi não abre investigação de extravio depois que os correios assumem o envio, e sua modalidade econômica de pequeno pacote do China Post, enviada como correspondência comum, não tem rastreamento algum.
 
 Para entender os intervalos e repasses comuns em encomendas vindas da China, veja [como rastrear encomendas da China](guide:tracking-from-china).
 
@@ -43,7 +43,7 @@ Para entender os intervalos e repasses comuns em encomendas vindas da China, vej
 
 A Juxi despacha os pacotes da China, e uma transportadora do seu país conclui a entrega. As condições de suas linhas indicam essa parceira em alguns destinos:
 
-- **Reino Unido.** A linha britânica voa de Xangai Pudong para Londres Heathrow, e a [Royal Mail](carrier:royal-mail) entrega parte dos pedidos no Reino Unido. A linha de pequenos pacotes da Juxi para o Reino Unido e a Alemanha não atende ilhas, áreas militares nem a Irlanda do Norte (códigos postais BT) e destrói pacotes no Reino Unido que não puder entregar, sem segunda tentativa.
+- **Reino Unido.** A linha britânica voa de Xangai Pudong para Londres Heathrow, e a [Royal Mail](carrier:royal-mail) entrega parte dos pedidos no Reino Unido. A linha de pequenos pacotes da Juxi para o Reino Unido e a Alemanha não atende ilhas afastadas da costa, áreas militares nem a Irlanda do Norte (códigos postais BT) e destrói pacotes no Reino Unido que não puder entregar, sem segunda tentativa.
 - **Alemanha.** Depois da alfândega, a [DHL Paket](carrier:dhl) entrega nessa linha, mas não em caixas postais. Para a Alemanha, a Juxi aceita apenas pacotes de até 5 kg e valor declarado de até € 22 — limite interno da própria Juxi, não faixa de isenção fiscal. Pacotes não entregues retornam e são destruídos ou reenviados conforme escolha e pagamento do remetente.
 - **Canadá.** A linha canadense chega a Vancouver ou Toronto e segue para a Canada Post. Pacotes recusados ou com endereço errado voltam por conta do remetente.
 - **Japão.** A linha japonesa leva o nome da Sagawa Express. O depósito de entrega costuma guardar o pacote por cerca de uma semana antes de devolvê-lo.
@@ -62,7 +62,7 @@ A Juxi também revende DHL, UPS, FedEx e TNT. Ela não divulga regras para tenta
 
 **Pacotes retidos.** Se a Juxi não conseguir contato telefônico nem com o destinatário nem com o remetente, seus termos preveem publicar um aviso no site e autorizam o descarte do pacote se ninguém responder em 7 dias.
 
-**Alfândega.** Nas linhas DDP para o Reino Unido e a Europa, a Juxi recolhe o IVA do vendedor antecipadamente, mas quando a Royal Mail entrega e ainda há IVA ou tarifa pendente, o destinatário pode precisar pagar. No pequeno pacote global rastreado, apenas o destinatário paga tributos e IVA. Na linha do Canadá, a Juxi cobra do remetente a tarifa mais taxa de 10% acima de 20 CAD declarados, e para os EUA recolhe um depósito aduaneiro do remetente. No Reino Unido, a Royal Mail ou a transportadora envia cobrança de valores pendentes e costuma guardar o pacote por cerca de 3 semanas antes de devolvê-lo. Na UE — destino da linha alemã, da maior parte da rota ferroviária e dos envios postais —, compras online de fora do bloco pagam imposto aduaneiro temporário de € 3 por tipo de produto em pacotes de até € 150 (desde 1º de julho de 2026) e a taxa de manuseio da UE de € 2 por tipo de produto, qualquer que seja o valor (desde 1º de novembro de 2026). A Juxi não diz se o vendedor quitou esses valores no seu pedido; se não tiver quitado, os correios ou a transportadora podem cobrá-los de você antes da entrega. Veja [encomendas paradas na alfândega](guide:customs).
+**Alfândega.** Nas linhas DDP para o Reino Unido e a Europa, a Juxi recolhe o IVA do vendedor antecipadamente, mas quando a Royal Mail entrega e ainda há IVA ou tarifa pendente, o destinatário pode precisar pagar. No pequeno pacote global rastreado, apenas o destinatário paga tributos e IVA. Na linha do Canadá, a Juxi cobra do remetente o imposto de importação, mais uma taxa de 10%, nos pacotes declarados acima de 20 CAD, e para os EUA recolhe um depósito aduaneiro do remetente. No Reino Unido, a Royal Mail ou a transportadora envia a você a cobrança do que ainda for devido e costuma guardar o pacote por cerca de 3 semanas; se não for pago até lá, ele volta ao remetente. Na UE — destino da linha alemã, da maior parte da rota ferroviária e dos envios postais —, compras online de fora do bloco pagam imposto aduaneiro temporário de € 3 por tipo de produto em pacotes de até € 150 (desde 1º de julho de 2026) e a taxa de manuseio da UE de € 2 por tipo de produto, qualquer que seja o valor (desde 1º de novembro de 2026). A Juxi não diz se o vendedor quitou esses valores no seu pedido; se não tiver quitado, os correios ou a transportadora que desembaraça o pacote podem cobrá-los de você antes da entrega. Veja [encomendas paradas na alfândega](guide:customs).
 
 ## Telefone e atendimento da Juxi Express
 
@@ -76,11 +76,11 @@ A Juxi não divulga contato, formulário nem escritório para destinatários for
 
 ## Como rastrear encomendas da Juxi Express no Peek
 
-O [Peek](/) identifica a Juxi Express na hora em códigos no formato `JXC`. Só quando as duas letras após `JXC` forem `YI`, `ZO`, `US` ou `ZI` o formato não basta, pois o rastreador da [DHLink](carrier:dhlink) também reconhece parte desses números. Ao adicionar um código assim, o Peek mostra "Consultando serviços de rastreamento…" e consulta a DHLink; quando a DHLink reconhece o código, exibe "DHLink está com esta encomenda" e acompanha lá. Se ninguém ainda listar o pacote, mostra "Provavelmente DHLink" enquanto segue verificando. Para acompanhar como Juxi Express, toque em "Trocar" e selecione Juxi Express em "Compatível com este código". Não há link próprio da Juxi para colar, e não precisa de conta, CEP nem telefone.
+O [Peek](/) identifica a Juxi Express na hora em códigos no formato `JXC`. Só quando as duas letras após `JXC` forem `YI`, `ZO`, `US` ou `ZI` o formato não basta, pois o rastreador da [DHLink](carrier:dhlink) também reconhece parte desses números. Ao adicionar um código assim, o Peek mostra "Consultando serviços de rastreamento…" e consulta a DHLink; quando a DHLink reconhece o código, exibe "DHLink está com esta encomenda." e acompanha lá. Se ninguém ainda listar o pacote, mostra "Provavelmente DHLink" enquanto segue verificando. Para acompanhar como Juxi Express, toque em "Trocar" e selecione Juxi Express em "Compatível com este código". Não há link próprio da Juxi para colar, e não precisa de conta, CEP nem telefone.
 
-A Juxi não tem mais página própria de rastreamento que o Peek possa ler: o botão de rastreamento na página inicial não abre nenhum sistema. Por isso, o Peek acompanha pacotes da Juxi por serviços de rastreamento, exibindo o status e o histórico que eles guardam, nas palavras deles. Esse histórico pode ficar atrás do rastreamento da transportadora local e, em alguns pacotes, demorar a mostrar eventos.
+A Juxi não tem mais página própria de rastreamento que o Peek possa ler: o botão de rastreamento na página inicial não abre nenhum sistema. Por isso, o Peek acompanha pacotes da Juxi por serviços de rastreamento, exibindo o status e o histórico que eles guardam, nas palavras deles. Esse histórico pode ficar atrás do rastreamento da transportadora local e, para alguns pacotes, ainda não há nada.
 
-Se um serviço de rastreamento informar qual transportadora assumiu o pacote junto com o código próprio dela, o Peek mostra "Entrega por" seguido do nome e do código dela. Enquanto ela só tiver a pré-notificação, sem registro físico próprio, aparece "Anunciada a …, ainda não recebida". Sempre que o Peek puder ler o rastreamento direto dessa transportadora, ele passa a consultá-la e, assim que surgir um evento pelo menos tão recente quanto o último do histórico, segue o pacote nela mantendo as leituras anteriores.
+Se um serviço de rastreamento informar qual transportadora assumiu o pacote junto com o código próprio dela, o Peek mostra "Entrega por" seguido do nome e do código dela. Enquanto ela só tiver a pré-notificação, sem registro físico próprio, aparece "Anunciada a …, ainda não recebida". Sempre que o Peek puder ler o rastreamento direto dessa transportadora, ele também consulta lá e, assim que um evento lá for pelo menos tão recente quanto o mais recente do histórico, segue o pacote nela mantendo as leituras anteriores.
 
 Enquanto o Peek acompanha por serviços de rastreamento, verifica de hora em hora, a cada 3 horas após um dia sem novo registro e até a cada 15 minutos no dia em que o pacote sai para entrega enquanto o pacote estiver aberto ou com alertas ligados. Quando outra transportadora assume a entrega, o Peek acompanha no ritmo dela. O Peek pode avisar em "Cada movimentação", "Etapas importantes" ou "Só a entrega". Ele não pode contatar a Juxi Express nem o vendedor por você.
 
@@ -88,7 +88,7 @@ Enquanto o Peek acompanha por serviços de rastreamento, verifica de hora em hor
 
 ### O que é a Juxi Express?
 
-É uma operadora logística de Xangai, Shanghai Juxi International Freight Forwarding Co., Ltd., que despacha pacotes para o exterior para vendedores chineses. Ela afirma operar desde 2016 e manter linhas próprias para EUA, Reino Unido, Alemanha, França, Austrália e Canadá.
+É uma operadora logística de Xangai, Shanghai Juxi International Freight Forwarding Co., Ltd., que despacha pacotes para o exterior para vendedores na China. Ela afirma operar desde 2016 e manter linhas próprias para EUA, Reino Unido, Alemanha, França, Austrália e Canadá.
 
 ### Onde posso rastrear um pacote da Juxi Express?
 
@@ -112,11 +112,12 @@ Depende da linha escolhida pelo vendedor. A Juxi indica 5 a 8 dias na linha do R
 - [Juxi Express: JX加拿大专线-普货 (linha Canadá)](https://www.juxiex.com/product_show.php?id=76) – 8 a 12 dias úteis, Canada Post, tarifa acima de 20 CAD e taxa de devolução
 - [Juxi Express: 日本佐川专线 (linha Sagawa Japão)](https://www.juxiex.com/product_show.php?id=75) – depósito guarda pacotes por cerca de uma semana
 - [Juxi Express: JX全球可追踪小包 (pequeno pacote global rastreado)](https://www.juxiex.com/product_show.php?id=70) – PostNL, 10 a 30 dias úteis, impostos e IVA pagos pelo destinatário
-- [Juxi Express: 国际E邮宝 (ePacket)](https://www.juxiex.com/product_show.php?id=58) – 7 a 15 dias úteis, sem rastreamento investigativo após entrega aos correios
+- [Juxi Express: 国际E邮宝 (ePacket)](https://www.juxiex.com/product_show.php?id=58) – 7 a 15 dias úteis, sem investigação de extravio após entrega aos correios
 - [Juxi Express: 中欧班列专线陆运小包 (trem China–Europa)](https://www.juxiex.com/product_show.php?id=69) – destinos europeus, cerca de 18 a 28 dias
 - [Juxi Express: 关于美国关税政策调整的重要公告 (aviso de tarifas EUA)](https://www.juxiex.com/news_show.php?id=43) – depósito aduaneiro cobrado do remetente para pacotes aos EUA
 - [DHLink: Tracking](https://www.dhlink.com/trackQuery?lang=en) – plataforma logística do DHgate, "Last Leg No." da transportadora entregadora
 - [GOV.UK: Tax and customs for goods sent from abroad: Tax and duty](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – cobrança da Royal Mail ou transportadora, guarda de cerca de 3 semanas e devolução
 - [Comissão Europeia: Reforma aduaneira da UE](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – imposto aduaneiro temporário de € 3 por tipo de produto até € 150 desde 1º de julho de 2026 e taxa de manuseio da UE de € 2 desde 1º de novembro de 2026
 - [Comissão Europeia: Orientação sobre o imposto de € 3 e a taxa de manuseio da União (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – taxa de € 2 por tipo de produto assim como os € 3, qualquer que seja o valor, cobrada pela alfândega do declarante, que pode repassar ao comprador na venda
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formato dos códigos JXC, SHJX como o 17TRACK identifica a Juxi, apenas a DHLink consultada para códigos JXCYI, JXCZO, JXCUS e JXCZI, rastreador da DHLink respondendo a alguns códigos JXC de uma linha para os EUA, nenhum rastreador da Juxi restante, como o Peek acompanha pacotes da Juxi por serviços de rastreamento
 :::

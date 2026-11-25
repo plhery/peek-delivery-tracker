@@ -15065,7 +15065,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "tnt-it",
       "catalog": "tnt-it",
       "slug": "rastreamento-tnt-italia",
-      "title": "Rastreamento TNT Italy: guia, status e entrega perdida",
+      "title": "Rastreamento TNT Italy: guia, status e entrega não realizada",
       "name": "TNT Italy",
       "color": "#ff6600"
     },
@@ -18207,7 +18207,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "tnt-it",
       "catalog": "tnt-it",
       "slug": "tnt-italy-tracking",
-      "title": "TNT Italy 意大利快递查询：运单号、状态与错投处理",
+      "title": "TNT Italy 意大利快递查询：运单号、状态与派送失败处理",
       "name": "TNT Italy",
       "color": "#ff6600"
     },

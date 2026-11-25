@@ -1,18 +1,18 @@
 ---
 title: 极兔巴西（J&T Express Brazil）查询：单号、状态与清关
-description: 查询巴西极兔（J&T Express Brazil）包裹：8880 开头 15 位单号、葡语状态说明、Remessa Conforme 税费与客服。
+description: 查询巴西极兔（J&T Express Brazil）包裹：8880 开头 15 位单号、葡语状态说明、Remessa Conforme 清关规则与客服。
 slug: jt-express-brazil-tracking
 published: 2026-11-24
 updated: 2026-11-24
 ---
 
-极兔速递巴西（J&T Express Brazil）是成立于 2015 年的国际快递网络 J&T Express 的巴西分支，其发展历程页面列出了其开展业务的 13 个国家。在巴西，它通过 50 多个转运中心、1,600 多条区域干线以及 6,000 多个 Pontos J&T 合作寄件网点，覆盖全巴西全部 5,571 个市镇，承接电商包裹、个人寄件和跨境直邮。你可以在 [J&T Express Brazil 官网查询页](https://www.jtexpress.com.br/trajectoryQuery)查件，或直接把运单号粘贴到上方查询框。
+极兔速递巴西（J&T Express Brazil）是 J&T Express 的巴西分支；J&T Express 是成立于 2015 年的快递物流网络，业务遍及多个国家，其发展历程页面点名了其中 13 个。在巴西，它通过 50 多个转运中心、1,600 多条区域干线以及 6,000 多个 Pontos J&T 合作寄件网点，覆盖全巴西全部 5,571 个市镇，承接电商包裹、个人寄件和跨境直邮。你可以在 [J&T Express Brazil 官网查询页](https://www.jtexpress.com.br/trajectoryQuery)查件，或直接把运单号粘贴到上方查询框。
 
 ## 极兔巴西运单号格式与查找方式
 
-运单号（葡萄牙语 *código de rastreio*）通常在网店的发货邮件或购物平台订单页面上；J&T 查询页称之为运单（*carta de porte*）。J&T Express Brazil 使用以 `8880` 开头的 15 位纯数字运单号。
+运单号（葡萄牙语 *código de rastreio*）可在网店的发货邮件或购物平台订单页面上找到；J&T 查询页称之为运单（*carta de porte*）。J&T Express Brazil 使用以 `8880` 开头的 15 位纯数字运单号。
 
-| 格式（示例） | 说明 |
+| 格式（虚构） | 说明 |
 | --- | --- |
 | `888048291736405` | 极兔巴西运单号：`8880` 后接 11 位数字。 |
 
@@ -30,7 +30,7 @@ J&T Express Brazil 的扫描描述均为葡萄牙语。其中 `Em transferencia`
 | `Em Rota de Entrega`、`... enviando a encomenda` | 当地快递员已装车，准备派送至你的地址。 | “派送中” |
 | `Pedido Entregue` | 极兔已记录该包裹签收。 | “已签收” |
 
-在揽收与 `Em Rota de Entrega` 之间，跨州公路干线往往会行驶数日而不产生中间扫描；下一条动态通常会在货车抵达区域分拨中心或目的地派送站卸货后出现。
+在揽收与 `Em Rota de Entrega` 之间，跨越巴西多个州的包裹可能经公路在转运中心之间运输数日而不产生中间扫描；下一条动态通常会在货车抵达区域分拨中心或目的地派送站卸货后出现。
 
 ## 极兔巴西派送服务、Pontos J&T 与个人寄件
 
@@ -38,7 +38,7 @@ J&T Express Brazil 提供面向网店和电商平台的 [B2C 电商物流](https
 
 **重量与尺寸限制。** 根据[极兔巴西官网首页](https://www.jtexpress.com.br/)的运费计算器，单个包裹最重 30 公斤，单边长度不超过 120 厘米，长宽高之和不超过 240 厘米。
 
-**Pontos J&T 网点。** 极兔在巴西共有 6,000 多家合作门店（[Pontos J&T](https://www.jtexpress.com.br/joinUs/pudo)），供寄件人交寄包裹。极兔官网页面并未将其作为收件人自提点介绍。
+**Pontos J&T 网点。** 极兔在巴西共有 6,000 多家合作门店（[Pontos J&T](https://www.jtexpress.com.br/joinUs/pudo)），供寄件人交寄包裹、再由极兔揽收。极兔官网页面并未将其作为收件人自提点介绍。
 
 **派送尝试与预约。** 极兔巴西公开页面未说明派送尝试次数、承诺时效或保管期限。请在下单商家或电商平台 App 内查看预计送达日期和派送备注。
 
@@ -69,7 +69,7 @@ J&T Express Brazil 还提供接入巴西税务合规计划 *Programa Remessa Con
 - **客服电子邮箱：** `meajuda@jtexpress.com.br`。
 - **订单反馈表单：** [J&T Express Brazil 订单反馈](https://www.jtexpress.com.br/contactus/orderFeedback)。
 - **升级投诉邮箱：** `escalations@jtexpress.com.br`。
-- **监察部门（*Ouvidoria*）：** 极兔[监察页面](https://www.jtexpress.com.br/contactus/supervise)说明该渠道仅受理职业道德与内部合规举报，派送与订单问题请使用上述客服渠道。
+- **监察部门（*Ouvidoria*）：** 极兔[监察页面](https://www.jtexpress.com.br/contactus/supervise)说明职业道德与内部行为举报应提交至该渠道，派送与订单问题请使用上述客服渠道。
 - **消费者调解平台：** 如与已入驻的商家或快递公司发生争议且协商未果，拥有银牌或金牌 gov.br 账号的巴西消费者可在 [Consumidor.gov.br](https://www.consumidor.gov.br/pages/conteudo/publico/1) 免费提交投诉，入驻企业承诺在 10 天内回复。
 
 > **极兔查询页安全警示：** J&T Express Brazil 明确声明**绝不会**通过 WhatsApp、短信或第三方链接要求收件人缴纳关税以放行或派送包裹。凡涉及费用或派送进度，请只信任极兔官方渠道。详见[快递诈骗短信指南](guide:delivery-scam-texts)（英文）。
@@ -80,9 +80,9 @@ J&T Express Brazil 还提供接入巴西税务合规计划 *Programa Remessa Con
 
 Peek 直接查询 J&T Express Brazil 官网访客跟踪接口，显示当前阶段（“已生成面单”、“已揽收”、“运输中”、“派送中”、“已签收”）、极兔的葡萄牙语扫描描述，以及按巴西本地时间（`America/Sao_Paulo`）解析并换算为你设备时区的时间戳。Peek 不显示预计送达日期、自提点或签收照片；当极兔记录里出现快递员姓名时，会按极兔原文以脱敏方式显示。
 
-无论页面是否打开或在派送当天开启提醒，Peek 最多每 30 分钟向 J&T Express Brazil 查询一次，手动刷新也不会提前触发；若查询失败则等待一小时再试。其余情况每小时检查一次。若停留在“已生成面单”或“已揽收”满 12 小时，或连续两天无新动态，不论如何跟踪都改为每小时检查一次；若在“已生成面单”停留满七天，则每 6 小时检查一次。Peek 不会通过第三方跟踪服务查询极兔巴西，所有更新均直接来自极兔官网。
+Peek 最多每 30 分钟向 J&T Express Brazil 查询一次，在你打开包裹页面时，或在派送当天且开启了通知时也是如此，手动刷新也不会提前触发；若查询失败则等待一小时再试。其余情况每小时检查一次。若停留在“已生成面单”或“已揽收”满 12 小时，或连续两天无新动态，不论如何跟踪都改为每小时检查一次；若在“已生成面单”停留满七天，则每 6 小时检查一次。Peek 不会为极兔巴西询问任何物流查询服务，所有更新均来自极兔自己的查询系统。
 
-当包裹停留在“已生成面单”、“已揽收”或“运输中”且最新一条扫描已过去四天时，Peek 会标出该扫描日期（例如“自 10 月 12 日起没有物流更新”）。页面随后提示：“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 J&T Express Brazil 查询。”并附上指向极兔订单反馈表单的“向 J&T Express Brazil 寻求帮助”链接。如果超过三周仍无新扫描，则显示：“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 J&T Express Brazil 查询。”
+当包裹停留在“已生成面单”、“已揽收”或“运输中”且最新一条扫描已过去四天时，Peek 会标出该扫描日期（例如“自10月12日周一起没有物流更新”）。页面随后提示：“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 J&T Express Brazil 查询。”并附上指向极兔订单反馈表单的“向 J&T Express Brazil 寻求帮助”链接。如果超过三周仍无新扫描，则显示：“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 J&T Express Brazil 查询。”
 
 你可以选择“每次扫描”、“重要环节”或“仅派送当天”通知。Peek 仅监控物流更新，无法代你改派包裹或联系极兔巴西。
 
@@ -90,7 +90,7 @@ Peek 直接查询 J&T Express Brazil 官网访客跟踪接口，显示当前阶�
 
 ### 极兔巴西运单号长什么样？
 
-J&T Express Brazil 运单号是以 `8880` 开头的 15 位数字（例如示例单号 `888048291736405`），直接粘贴到 Peek 或极兔查询页即可查询。
+J&T Express Brazil 运单号是以 `8880` 开头的 15 位数字（例如 `888048291736405`，数字为虚构），直接粘贴到 Peek 或极兔查询页即可查询。
 
 ### 为什么我的极兔巴西包裹连续几天都显示 `Em transferencia`？
 
@@ -116,4 +116,5 @@ J&T Express Brazil 运单号是以 `8880` 开头的 15 位数字（例如示例�
 - [J&T Express Brazil: Ouvidoria](https://www.jtexpress.com.br/contactus/supervise) – 监察渠道受理范围与客服区分
 - [Receita Federal: Programa Remessa Conforme](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona) – 认证与非认证商家的进口关税及 ICMS 规则
 - [Consumidor.gov.br](https://www.consumidor.gov.br/pages/conteudo/publico/1) – 公共消费者调解平台（10 天回复期、银牌/金牌 gov.br 账号）
+- [Universal Parcel Scraper: j-and-t-br](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-br) – `8880` 单号识别、查询链接规则、葡语状态映射、30 分钟刷新频率与帮助链接
 :::

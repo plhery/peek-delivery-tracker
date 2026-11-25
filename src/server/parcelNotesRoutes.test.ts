@@ -318,7 +318,7 @@ describe('GET /api/files/{fileId}', () => {
     const past = Math.floor(Date.now() / 1_000) - 1;
     const addresses = [
       signedFileAddress(stored.id, userId, 'full', past)!,
-      valid.replace(`s=${signature}`, `s=${signature.slice(0, -1)}${signature.endsWith('A') ? 'B' : 'A'}`),
+      valid.replace(`s=${signature}`, `s=${signature.startsWith('A') ? 'B' : 'A'}${signature.slice(1)}`),
       valid.replace('v=full', 'v=thumb'),
       valid.replace(`e=${expires}`, `e=${expires + 900}`),
       signedFileAddress(stored.id, strangerId, 'full', expires)!,

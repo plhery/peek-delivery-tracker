@@ -77095,11 +77095,11 @@
           },
           "files": {
             "type": "array",
-            "maxItems": 5,
+            "maxItems": 10,
             "items": {
               "$ref": "#/components/schemas/PackageFile"
             },
-            "description": "The photos and PDFs on the owner's note, oldest first. Absent when there are none."
+            "description": "The photos and PDFs on the owner's note, oldest first. Absent when there are none. Up to five are added to a parcel; when its two legs join, it keeps the files of both."
           },
           "carrier": {
             "$ref": "#/components/schemas/CarrierId"

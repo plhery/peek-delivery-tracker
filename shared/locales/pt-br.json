@@ -836,7 +836,7 @@
   "androidTest.other.copied": "Copiado",
   "androidTest.other.github": "Ou baixe pelo GitHub: na versão mais recente, toque no arquivo .apk e depois permita que o navegador o instale.",
   "androidTest.other.githubAction": "Abrir o GitHub",
-  "androidTest.other.note": "Esta versão funciona sem os serviços do Google Play e é assinada por nós, não pelo Google, para Android 12 ou mais recente. As atualizações chegam pelo nosso repositório do F-Droid. Se você tem o app do Google Play, desinstale-o antes. Só os testadores no Google Play ajudam a liberá-lo para todos.",
+  "androidTest.other.note": "Esta versão funciona sem os serviços do Google Play e é assinada por nós, não pelo Google, para Android 12 ou mais recente. As atualizações chegam pelo nosso repositório do F-Droid. Se você tem o app do Google Play, desinstale-o antes.",
   "androidTest.page.never": "Não perguntar de novo",
   "androidTest.page.neverDone": "Não vamos perguntar de novo neste navegador.",
   "alerts.demo": "Esta é a demonstração: nada é enviado.",

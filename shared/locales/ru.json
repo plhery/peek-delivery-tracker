@@ -836,7 +836,7 @@
   "androidTest.other.copied": "Скопировано",
   "androidTest.other.github": "Или скачайте его с GitHub: в последней версии нажмите на файл .apk, затем разрешите браузеру его установить.",
   "androidTest.other.githubAction": "Открыть GitHub",
-  "androidTest.other.note": "Эта версия для Android 12 или новее работает без сервисов Google Play и подписана нами, а не Google. Обновления приходят через наш репозиторий F-Droid. Если у вас приложение из Google Play, сначала удалите его. Открыть приложение для всех помогают только тестировщики в Google Play.",
+  "androidTest.other.note": "Эта версия для Android 12 или новее работает без сервисов Google Play и подписана нами, а не Google. Обновления приходят через наш репозиторий F-Droid. Если у вас приложение из Google Play, сначала удалите его.",
   "androidTest.page.never": "Больше не спрашивать",
   "androidTest.page.neverDone": "В этом браузере мы больше не спросим.",
   "alerts.demo": "Это демо: ничего не отправляется.",

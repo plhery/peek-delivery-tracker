@@ -112,7 +112,7 @@ Depois de `Has been given to local carrier`, uma transportadora do país de dest
 
 **Nada após `Has been given to local carrier`.** A transportadora local já está com o pacote, e o rastreamento dela pode estar mais atualizado que o da HuaHan. Procure o nome e o código dela no rastreador da HuaHan ou no cartão do pacote no Peek (quando o Peek a reconhecer), ou pergunte ao vendedor quem entrega.
 
-**Dias sem atualização.** Quando um pacote ainda em viagem passa quatro dias sem novo registro, o Peek sinaliza com a data da última movimentação ("Sem atualizações desde seg., 12 de out.") e explica que pacotes costumam ficar quietos em voos longos, na alfândega ou no fim de semana; após três semanas sem novidade, recomenda falar com o vendedor. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating) e [como rastrear encomendas da China](guide:tracking-from-china).
+**Dias sem atualização.** Quando um pacote ainda em viagem passa quatro dias sem novo registro, o Peek sinaliza com a data da última movimentação ("Sem atualizações desde seg 12 out") e explica que pacotes costumam ficar quietos em voos longos, na alfândega ou no fim de semana; após três semanas sem novidade, recomenda falar com o vendedor. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating) e [como rastrear encomendas da China](guide:tracking-from-china).
 
 **Entregue, mas não chegou.** Confira onde foi deixado, pergunte aos vizinhos e depois fale com a transportadora local e com o vendedor. Veja [entregue, mas não recebido](guide:delivered-not-received).
 

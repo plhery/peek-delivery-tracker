@@ -10,7 +10,7 @@ updated: 2026-11-24
 
 ## 立陶宛邮政运单号格式
 
-立陶宛邮政运单号共 13 位，采用[国际邮政标准格式](guide:tracking-number-formats)（英文）：两位字母、九位数字，末尾为 `LT`。立陶宛邮政条款列明了两个 LP Express 常用前缀 `CC` 和 `CH`。
+立陶宛邮政运单号共 13 位，采用[国际邮政标准格式](guide:tracking-number-formats)（英文）：两位字母、九位数字，末尾为 `LT`。立陶宛邮政条款列明了两个 LP Express 前缀：`CC` 和 `CH`。
 
 | 单号示例（虚构） | 说明 |
 | --- | --- |
@@ -20,7 +20,7 @@ updated: 2026-11-24
 
 包裹送达快递柜后，立陶宛邮政会通过短信和/或邮件发送单号、快递柜地址以及取件 PIN 码。
 
-官方短信均以 `LPASTAS` 或 `LP_EXPRESS` 作为发件人名称发送，绝不会来自个人手机号。
+官方短信均以 `LPASTAS` 或 `LP_EXPRESS` 作为发件人名称发送，绝不会来自电话号码。
 
 结尾为其他国家代码则属于对应国家的邮政，例如 `…LV` 为拉脱维亚邮政（Latvijas Pasts），`…EE` 为爱沙尼亚邮政（Omniva）。境外寄入立陶宛的包裹会保留发件国邮政的原始单号。另一家在立陶宛运营的快递 Venipak 则使用不同格式（如 `V48291E7365428`）。如果找不到单号，请参阅[如何查找运单号](guide:find-tracking-number)（英文）。
 
@@ -45,7 +45,7 @@ lpexpress.lt/track 可用英语、立陶宛语、拉脱维亚语或爱沙尼亚�
 
 如果页面提示 `Your parcel could not be found`，请检查单号是否输错；`Without tracking` 表示该邮件未购买跟踪服务。在立陶宛境内，只有挂号类邮件才会显示完整轨迹。另见[物流状态说明](guide:tracking-statuses)（英文）。
 
-## LP Express 快递柜、邮局自提与错过派送
+## LP Express 快递柜、邮局自提与派送未成功
 
 **快递柜：** 立陶宛、拉脱维亚和爱沙尼亚共有约 1,500 组 LP EXPRESS 与 Unisend 快递柜，全天候 24 小时开放。在柜机屏幕选择 “Atsiimti siuntą”（取件）并输入短信或邮件收到的 PIN 码即可开柜。取件时限为包裹入柜起 **72 小时**。超时后快递员会取出包裹，你会收到一条带链接的短信：可在 4 天内免费将包裹重新投递至同一快递柜或更换另一组快递柜一次，否则包裹将退回寄件人。尺寸过大放不进快递柜的包裹会转存至立陶宛邮政服务网点，保管 15 天。
 
@@ -81,13 +81,13 @@ post.lt 官网公布的联系方式（联系页面为立陶宛语）：
 
 ## 用 Peek 查询和跟踪立陶宛邮政包裹
 
-当 `LT` 结尾的国际邮政单号以 `C`、`E` 或 `HC` 开头且校验位正确时，[Peek](/) 会按格式直接识别为立陶宛邮政并显示“识别出的快递公司”。不过不少 `CC`、`CH` 和 `HC` 单号并不满足国际邮政校验位，此时 Peek 会提示“这个单号的校验位对不上。”，点击“按输入的单号跟踪”后仅向立陶宛邮政查询。其余以 `LT` 结尾且校验位正确的单号，Peek 会同时询问立陶宛邮政和 [Chronopost](carrier:chronopost)，查到后显示“Lietuvos paštas 有这个包裹的记录”；若暂时未查到，则会提示尚未查到且添加后 Peek 会持续查询。也支持直接粘贴 lpexpress.lt 和 post.lt 的查件链接。
+当 `LT` 结尾的国际邮政单号以 `C`、`E` 或 `HC` 开头且校验位正确时，[Peek](/) 会按格式直接识别为立陶宛邮政并显示“识别出的快递公司”。不过不少 `CC`、`CH` 和 `HC` 单号并不满足国际邮政校验位，此时 Peek 会提示“这个单号的校验位对不上。”，点击“按输入的单号跟踪”后仅向立陶宛邮政查询。其余以 `LT` 结尾且校验位正确的单号，Peek 会同时询问立陶宛邮政和 [Chronopost](carrier:chronopost)，查到后显示“Lietuvos paštas 有这个包裹的记录。”；若暂时未查到，则会提示尚未查到且添加后 Peek 会持续查询。lpexpress.lt 和 post.lt 的查件链接也可以直接粘贴。
 
 从境外寄入、使用国际邮政格式的包裹会先由发件国邮政跟踪。当发件国邮政显示目的国为立陶宛，或未写明目的国且你在立陶宛本地查件时，Peek 也会询问立陶宛邮政；一旦立陶宛邮政出现更新的记录，Peek 即转由立陶宛邮政接续跟踪并保留前期轨迹。你也可以随时点“更换”手动选定 “Lietuvos paštas”。注意以 `C` 开头、`DE` 结尾的 [DHL Paket](carrier:dhl) 单号不会转交立陶宛邮政查询。
 
-对于从立陶宛寄往境外且校验位正确的单号，Peek 采用同样机制：一旦立陶宛邮政显示已到达目的国或中转国分拣中心，或在此前你正从立陶宛以外的国家查询，Peek 也会向该目的国邮政查询。发往俄罗斯、哈萨克斯坦、中国及部分其他国家的邮件，Peek 不会自动询问目的国邮政。
+对于从立陶宛寄出且校验位正确的单号，Peek 采用同样机制：一旦立陶宛邮政显示包裹已到达收件国或中转国的分拣中心，Peek 也会向目的国邮政查询；在此之前，如果你不在立陶宛查件，Peek 会询问你查件所在国家的邮政。发往俄罗斯、哈萨克斯坦、中国及部分其他国家的邮件，Peek 不会询问目的国邮政。
 
-Peek 直接读取 lpexpress.lt/track 后台英文数据，并可在状态更新时发送通知。当你打开包裹页面或在派送当天开启通知，且立陶宛邮政官方系统响应时，Peek 最高每 10 分钟检查一次，在包裹于立陶宛进入派送当天自立陶宛时间 06:00 起最高每 2 分钟检查一次。若已转由其他承运商接手派送，Peek 会按该承运商的频率检查：Royal Mail 为每小时一次，Poste Italiane、PostNL 和 USPS 最高每 30 分钟一次（派送当天同样如此）。其余情况，以及连续两天无新动态（或在“已生成面单”、“已揽收”状态下满 12 小时），Peek 均每小时检查一次。Peek 会在地图上标出每一步所在的城市、分拣中心或国家，显示清关环节、签收时间以及存放包裹的快递柜或邮局及其所在城镇（不显示具体街道和邮编）。立陶宛境内记录按维尔纽斯时间解析并换算为你设备的本地时区，不提供预计送达日和重量。状态保留立陶宛邮政英文原文；退件时先显示“需要留意”，退回寄件人后显示“已退回寄件人”。
+Peek 直接读取 lpexpress.lt/track 后台英文数据，并可在状态更新时发送通知。当你打开包裹页面，或在派送当天开启了通知时，Peek 最高每 10 分钟检查一次；在立陶宛邮政于立陶宛境内派送包裹的当天，只要立陶宛邮政自己的查询系统正常响应，自立陶宛时间 06:00 起最高每 2 分钟检查一次。若已转由其他承运商接手派送，Peek 会按该承运商的频率检查：Royal Mail 为每小时一次，Poste Italiane、PostNL 和 USPS 最高每 30 分钟一次（派送当天同样如此）。其余情况，以及连续两天无新动态（或在“已生成面单”、“已揽收”状态下满 12 小时），Peek 均每小时检查一次。Peek 会在地图上标出每一步所在的城市、分拣中心或国家，显示清关环节、签收时间以及存放包裹的快递柜或邮局及其所在城镇（不显示具体街道和邮编）。立陶宛境内记录按维尔纽斯时间解析并换算为你设备的本地时区，不提供预计送达日和重量。状态保留立陶宛邮政英文原文；退件时先显示“需要留意”，退回寄件人后显示“已退回寄件人”。
 
 ## 立陶宛邮政查询常见问题
 
@@ -121,4 +121,5 @@ LP Express 是立陶宛邮政在立陶宛境内用于快递柜、快递员上门
 - [Lietuvos paštas: Būkite atsargūs, Lietuvos paštu apsimetantys sukčiai](https://www.post.lt/lt/apie-mus/naujienos/bukite-atsargus-lietuvos-pastu-apsimetantys-sukciai-gviesiasi-pinigu-ir-duomenu) – 诈骗短信提醒、官方发件名与 prevencija@post.lt
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 自 2026 年 11 月 1 日起实施的 2 欧元欧盟处理费
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 每项 3 欧元关税与 2 欧元处理费及“项”的认定
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取和显示的信息
 :::

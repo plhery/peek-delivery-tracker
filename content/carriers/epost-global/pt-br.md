@@ -75,7 +75,7 @@ A ePost Global afirma manter parcerias postais e de última milha em seis contin
 
 **Sem novidades após a transferência.** O parceiro já está com a encomenda e o rastreamento próprio dele pode estar mais adiantado que o da ePost Global. O Peek acompanha a encomenda por lá quando possível (veja abaixo); caso contrário, busque o nome e o código do parceiro na linha de transferência.
 
-**Dias sem atualização.** Após quatro dias sem nova linha, o Peek destaca a data da última leitura ("Sem atualizações desde seg., 12 de out."), avisa que encomendas costumam ficar quietas em voos longos, na alfândega ou no fim de semana (após três semanas sem novidade, orienta falar com o vendedor) e exibe o link "Pedir ajuda a ePost Global" — ou o do parceiro quando o Peek já segue a encomenda com um parceiro cuja página de ajuda ele conhece. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
+**Dias sem atualização.** Após quatro dias sem nova linha, o Peek destaca a data da última leitura ("Sem atualizações desde seg 12 out"), avisa que encomendas costumam ficar quietas em voos longos, na alfândega ou no fim de semana (após três semanas sem novidade, orienta falar com o vendedor) e exibe o link "Pedir ajuda a ePost Global" — ou o do parceiro quando o Peek já segue a encomenda com um parceiro cuja página de ajuda ele conhece. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
 **Entregue, mas não chegou.** Fale com o parceiro final e depois com a loja. Veja [encomenda entregue mas não recebida](guide:delivered-not-received).
 

@@ -73,7 +73,7 @@ A J&T recruta parceiros locais em toda a Austrália para realizar a coleta e a e
 
 Como a loja escolheu a J&T, para qualquer compra online o vendedor é sempre o primeiro contato.
 
-**Sem novas leituras.** Quando uma encomenda em "Recebida pela transportadora" ou "Em trânsito" passa quatro dias sem nova linha, o Peek exibe o alerta com a data da última leitura ("Sem atualizações desde seg., 12 de out.") e o link "Pedir ajuda a J&T Express Australia". Se nada mudar depois disso, fale com a loja ou com o atendimento da J&T (abaixo) informando seu código de rastreamento. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
+**Sem novas leituras.** Quando uma encomenda em "Recebida pela transportadora" ou "Em trânsito" passa quatro dias sem nova linha, o Peek exibe o alerta com a data da última leitura ("Sem atualizações desde seg 12 out") e o link "Pedir ajuda a J&T Express Australia". Se nada mudar depois disso, fale com a loja ou com o atendimento da J&T (abaixo) informando seu código de rastreamento. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
 **Ainda sem histórico.** Um número que o rastreador da J&T ainda não conhece aparece como "Aguardando J&T Express Australia". Lojas costumam criar o código antes de despachar o pacote. Se dois dias depois a J&T continuar sem reconhecer o código e nenhum outro serviço responder por ele, o Peek mostra "Depois de dois dias, a transportadora ainda não reconhece este código. Confira o código, escolha outra transportadora ou exclua a encomenda." e passa a verificar diariamente (e semanalmente depois de uma semana). Confira o número com a loja e pergunte se o envio já ocorreu.
 

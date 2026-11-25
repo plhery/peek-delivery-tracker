@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-A Lietuvos paštas (Correio da Lituânia) é o serviço postal nacional da Lituânia, e LP Express é sua marca para lockers de encomendas, entregas expressas e postagem em autoatendimento. Você pode rastrear um pacote em [lpexpress.lt/track](https://lpexpress.lt/track), que tem opção de idioma em inglês, ou colar o código na caixa acima. O número chega por SMS ou e-mail da Lietuvos paštas, ou no comprovante se você mesmo postou o item.
+A Lietuvos paštas (Correio da Lituânia) é o serviço postal nacional da Lituânia, e LP Express é sua marca para lockers de encomendas, entregas por entregador e postagem em autoatendimento. Você pode rastrear um pacote em [lpexpress.lt/track](https://lpexpress.lt/track), que tem opção de idioma em inglês, ou colar o código na caixa acima. O número chega por SMS ou e-mail da Lietuvos paštas, ou no comprovante se você mesmo postou o item.
 
 ## Código de rastreamento do Correio da Lituânia
 
@@ -20,7 +20,7 @@ Um código da Lietuvos paštas tem 13 caracteres no [padrão postal internaciona
 
 Quando o volume chega a um locker, a Lietuvos paštas envia SMS e/ou e-mail com o código, o endereço do locker e um PIN.
 
-Mensagens legítimas usam o remetente `LPASTAS` ou `LP_EXPRESS`, nunca um número de telefone comum.
+Mensagens legítimas usam o remetente `LPASTAS` ou `LP_EXPRESS`, nunca de um número de telefone.
 
 Outras letras finais indicam outro correio: `…LV` é da Latvijas Pasts (Letônia) e `…EE` é da Omniva (Estônia). Um pacote vindo do exterior mantém o código do país de origem. A Venipak, outra transportadora na Lituânia, usa formato diferente (`V48291E7365428`). Perdeu o número? Veja [como encontrar seu código de rastreamento](guide:find-tracking-number).
 
@@ -61,7 +61,7 @@ Se a página mostrar `Your parcel could not be found`, revise o código; `Withou
 
 A Lietuvos paštas orienta reportar extravio ou atraso de objetos registrados ou segurados pelo telefone 1842. A reclamação cabe ao remetente, em até 6 meses da postagem — em compras online, procure primeiro a loja. Nada é indenizado após a assinatura de recebimento.
 
-Para encomendas postadas no exterior, fale também com o remetente. Se notar avaria na entrega por entregador, peça para registrar na hora no aparelho ou documento dele; do contrário, a Lietuvos paštas não assume responsabilidade.
+Para encomendas postadas no exterior, a Lietuvos paštas orienta falar com o remetente. Se notar dano na entrega por entregador, peça para registrar na hora no aparelho ou documento dele; do contrário, a Lietuvos paštas não assume responsabilidade.
 
 **Enviado da Lituânia para o exterior.** Após `The parcel has been sent abroad`, um operador do país de destino assume a entrega, e a Lietuvos paštas baseia a análise de reclamação no que esse operador confirmar. O Peek também consulta o correio de destino (veja abaixo). O remetente continua tendo 6 meses desde a postagem para reclamar, onde quer que o pacote tenha sumido, e a Lietuvos paštas paga indenização internacional em até 90 dias corridos após a reclamação.
 
@@ -81,19 +81,19 @@ Canais divulgados em post.lt (as páginas de contato estão em lituano):
 
 ## Como rastrear Lietuvos paštas no Peek
 
-O [Peek](/) identifica pelo formato um código terminado em `LT` com dígito verificador válido se começar por `C`, `E` ou `HC`, exibindo Lietuvos paštas com "Transportadora detectada". Muitos códigos `CC`, `CH` e `HC`, porém, falham no verificador: o Peek então mostra "O dígito verificador deste código não confere." e "Rastrear como digitado" consulta apenas a Lietuvos paštas. Em qualquer outro código postal terminado em `LT` com dígito válido, o Peek consulta Lietuvos paštas e [Chronopost](carrier:chronopost) ao mesmo tempo e mostra "Lietuvos paštas está com esta encomenda" quando ela confirma o registro; se ainda não existir, avisa que não foi encontrada e que continuará verificando após adicionar. Links de lpexpress.lt e post.lt também funcionam.
+O [Peek](/) identifica pelo formato um código terminado em `LT` com dígito verificador válido se começar por `C`, `E` ou `HC`, exibindo Lietuvos paštas com "Transportadora detectada". Muitos códigos `CC`, `CH` e `HC`, porém, falham no verificador: o Peek então mostra "O dígito verificador deste código não confere." e "Rastrear como digitado" consulta apenas a Lietuvos paštas. Em qualquer outro número postal terminado em `LT` com dígito válido, o Peek consulta Lietuvos paštas e [Chronopost](carrier:chronopost) ao mesmo tempo e mostra "Lietuvos paštas está com esta encomenda." quando ela conhece o código; se ainda não existir, avisa que não foi encontrada e que continuará verificando após adicionar. Links de lpexpress.lt e post.lt também funcionam.
 
-Um envio vindo do exterior com código postal internacional começa sendo acompanhado pelo correio de origem. Quando esse correio indica destino na Lituânia — ou não indica país e você consulta a partir da Lituânia —, o Peek consulta também a Lietuvos paštas e passa a acompanhar por lá assim que surgem novas movimentações, preservando o histórico anterior. Você também pode escolher "Lietuvos paštas" em "Trocar". Um código da [DHL Paket](carrier:dhl) começando por `C` e terminando em `DE` nunca é repassado à Lietuvos paštas.
+Um envio vindo do exterior com código no padrão postal internacional começa sendo acompanhado pelo correio de origem. Quando esse correio indica destino na Lituânia — ou não indica país e você consulta a partir da Lituânia —, o Peek consulta também a Lietuvos paštas e passa a acompanhar por lá assim que surgem novas movimentações, preservando o histórico anterior. Você também pode escolher "Lietuvos paštas" em "Trocar". Um código da [DHL Paket](carrier:dhl) começando por `C` e terminando em `DE` nunca é repassado à Lietuvos paštas.
 
-O Peek faz o mesmo para envios da Lituânia ao exterior com dígito verificador válido: consulta também o correio de destino assim que a Lietuvos paštas registra chegada ao centro de triagem no país de destino ou trânsito (ou, antes disso, o correio do país de onde você consulta, se não for a Lituânia). Para destinos como Rússia, Cazaquistão, China e alguns outros países, o Peek não consulta o correio local.
+O Peek faz o mesmo para envios da Lituânia ao exterior com dígito verificador válido: consulta também o correio de destino assim que a Lietuvos paštas registra chegada ao centro de triagem no país de destino ou trânsito (ou, antes disso, o correio do país de onde você consulta, se não for a Lituânia). Para destinos como Rússia, Cazaquistão, China e alguns outros países, o Peek não consulta o correio de destino.
 
-O Peek lê o serviço por trás de lpexpress.lt/track em inglês e pode notificar mudanças de status. Enquanto o pacote está aberto no Peek, ou no dia da entrega com alertas ligados, verifica até a cada 10 minutos — e até a cada 2 minutos a partir das 6h da Lituânia no dia em que a Lietuvos paštas marca saída para entrega no país — enquanto o rastreador oficial responde. Quando outra transportadora assume a entrega, o Peek segue o ritmo dela: de hora em hora na Royal Mail e até a cada 30 minutos em Poste Italiane, PostNL e USPS, inclusive no dia da entrega. Fora disso, e após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Cada etapa aparece no mapa com cidade, centro de triagem ou país, além de etapas aduaneiras, horário de entrega e o locker ou agência onde o volume aguarda com a cidade (sem rua nem código postal). Etapas lituanas são lidas no horário de Vilnius e exibidas no seu fuso horário. Não há previsão de chegada nem peso. Os status ficam no texto em inglês da Lietuvos paštas; uma devolução mostra "Precisa de atenção" e depois "Devolvida ao remetente" quando retorna.
+O Peek lê o serviço por trás de lpexpress.lt/track em inglês e pode notificar mudanças de status. Enquanto o pacote está aberto no Peek, ou no dia da entrega com alertas ligados, verifica até a cada 10 minutos — e até a cada 2 minutos a partir das 6h da Lituânia no dia em que a Lietuvos paštas marca saída para entrega no país — enquanto o rastreador da própria Lietuvos paštas responde. Quando outra transportadora assume a entrega, o Peek segue o ritmo dela: de hora em hora na Royal Mail e até a cada 30 minutos em Poste Italiane, PostNL e USPS, inclusive no dia da entrega. Fora disso, e após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Cada etapa aparece no mapa com cidade, centro de triagem ou país, além de etapas aduaneiras, horário de entrega e o locker ou agência onde o volume aguarda com a cidade (sem rua nem código postal). Etapas lituanas são lidas no horário de Vilnius e exibidas no seu fuso horário. Não há previsão de chegada nem peso. Os status ficam no texto em inglês da Lietuvos paštas; uma devolução mostra "Precisa de atenção" e depois "Devolvida ao remetente" quando retorna.
 
 ## Perguntas frequentes sobre rastreamento Lietuvos paštas
 
 ### O que é LP Express?
 
-É a marca usada pela Lietuvos paštas na Lituânia para lockers, entregas expressas e envio em autoatendimento. Na Letônia e na Estônia, o mesmo serviço se chama Unisend.
+É a marca usada pela Lietuvos paštas na Lituânia para lockers, entregas por entregador e envio em autoatendimento. Na Letônia e na Estônia, o mesmo serviço se chama Unisend.
 
 ### Existe rastreamento do Correio da Lituânia em inglês?
 
@@ -114,11 +114,12 @@ Segundo a Lietuvos paštas, pacotes para locker dentro da Lituânia costumam che
 - [Lietuvos paštas: Siuntos](https://www.post.lt/lt/duk/siuntos) – prazos de guarda e regras de retirada
 - [Lietuvos paštas: LP EXPRESS paštomatai](https://www.post.lt/lt/duk/lp-express-pastomatai) – 72h, redirecionamento em 4 dias, 15 dias se grande demais e pagamento prévio de importação
 - [Lietuvos paštas: Siuntų siuntimas paštomatu](https://www.post.lt/lt/lp-express-pastomatai) – LP EXPRESS e Unisend, cerca de 1.500 lockers, PIN e dia útil seguinte
-- [Lietuvos paštas: Pašto paslaugų teikimo nesutartiniams naudotojams taisyklės TAI-16](https://www.post.lt/sites/default/files/Dokumentai/PA%C5%A0TO%20PASLAUG%C5%B2%20TEIKIMO%20TAISYKL%C4%96S.pdf) – CC e CH, regras de entrega, 7 e 30 dias de guarda, documento, avarias e pagamento em 7 dias
+- [Lietuvos paštas: Pašto paslaugų teikimo nesutartiniams naudotojams taisyklės TAI-16](https://www.post.lt/sites/default/files/Dokumentai/PA%C5%A0TO%20PASLAUG%C5%B2%20TEIKIMO%20TAISYKL%C4%96S.pdf) – CC e CH, regras de entrega, 7 e 30 dias de guarda, documento, danos e pagamento em 7 dias
 - [Lietuvos paštas: Siuntų deklaravimas](https://www.post.lt/lt/siuntu-deklaravimas) – taxas de declaração, IVA e prazo de 7 dias
 - [Lietuvos paštas: Kontaktai](https://www.post.lt/lt/kontaktai) – telefones, horários, custo, e-mail e chat
 - [Lietuvos paštas: Rašykite mums](https://www.post.lt/rasykite-mums) – formulário de contato, reclamações e busca internacional
 - [Lietuvos paštas: Būkite atsargūs, Lietuvos paštu apsimetantys sukčiai](https://www.post.lt/lt/apie-mus/naujienos/bukite-atsargus-lietuvos-pastu-apsimetantys-sukciai-gviesiasi-pinigu-ir-duomenu) – alerta de SMS falsos, remetentes oficiais e prevencija@post.lt
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – taxa de manuseio de €2 desde 1º de novembro de 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €3 e €2 por item e definição de item
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra
 :::

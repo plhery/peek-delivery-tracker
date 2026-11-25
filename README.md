@@ -141,11 +141,11 @@ short path; [Deployment](docs/DEPLOYMENT.md) has every step in full.
 
 **The scraper.** Peek reads carriers through
 [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper), which `npm ci`
-installs. From version 0.1294.0 its licence,
+installs. Its licence,
 [PolyForm Noncommercial 1.0.0](https://github.com/plhery/universal-parcel-scraper/blob/main/LICENSE),
 allows noncommercial use only, so a Peek of your own may only run for noncommercial purposes,
-as that licence defines them. From 0.1387.0, its carrier catalog and tracking-number patterns,
-which the apps bundle (`CarrierCatalog.json` and `Reading.json`), are licensed under
+as that licence defines them. Its carrier catalog and tracking-number patterns, which the apps
+bundle (`CarrierCatalog.json` and `Reading.json`), are licensed under
 [AGPL-3.0-only](https://github.com/plhery/universal-parcel-scraper/blob/main/NOTICE), like Peek.
 
 **The database.** Apply every file in [`supabase/migrations`](supabase/migrations) in
@@ -232,11 +232,10 @@ The code is licensed under the [GNU Affero General Public License, version 3 onl
 with one additional term under its section 7(b) ([NOTICE](NOTICE)): copies and modified
 versions keep the credit "Based on Peek by Paul-Louis Hery", with a link to
 <https://github.com/plhery/peek-delivery-tracker>, among the legal notices they show, such as
-the website's footer or an app's About screen. Once, where a user can find it, is enough. The
-parts Andrew Gable, Marc Went and Lewis Carter contributed under Apache 2.0 stay available
-under it, as the NOTICE lists. The name "Peek", its logo
-and app icon, the App Store and Google Play assets, and the guides and carrier pages (the
-texts under `content/`) are not licensed: Paul-Louis Hery keeps all rights to them. A copy
+the website's footer or an app's About screen. Once, where a user can find it, is enough.
+
+The name "Peek", its logo and app icon, the App Store and Google Play assets, and the guides
+and carrier pages (the texts under `content/`) are not licensed: Paul-Louis Hery keeps all rights to them. A copy
 or fork may not publish them or use the name "Peek", and a fork must rename itself before
 it is published or run as a public service. [Trademarks and content](TRADEMARKS.md) has
 the details.

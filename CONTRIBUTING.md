@@ -67,5 +67,3 @@ Peek's iPhone and Android apps can still go out on the App Store and Google
 Play: those stores' terms clash with GPL-family licenses for code that anyone
 but the copyright holder wrote. You keep the copyright of your contribution. If
 you can't agree to this, open an issue rather than a pull request.
-Contributions made before under the Apache License 2.0 stay under it
-([NOTICE](NOTICE)).

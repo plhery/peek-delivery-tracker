@@ -100949,6 +100949,22 @@
     "candidates": []
   },
   {
+    "input": "JJATA8244936002831084",
+    "carrier": "austrian-post",
+    "confidence": "high",
+    "candidates": [
+      "austrian-post"
+    ]
+  },
+  {
+    "input": "JJATA9999999999999990",
+    "carrier": "austrian-post",
+    "confidence": "high",
+    "candidates": [
+      "austrian-post"
+    ]
+  },
+  {
     "input": "JJBEA2356412012365478896541",
     "carrier": "bpost",
     "confidence": "high",
@@ -115986,6 +116002,12 @@
       "aramex-au",
       "aramex-nz"
     ]
+  },
+  {
+    "input": "SLX200058555GB",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "SLX200119352CN",

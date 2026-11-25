@@ -2624,6 +2624,10 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       },
       {
+        "pattern": "^JJATA\\d{16}$",
+        "confidence": "high"
+      },
+      {
         "pattern": "^[A-Z]{2}\\d{9}AT$",
         "confidence": "high",
         "checksum": "s10"

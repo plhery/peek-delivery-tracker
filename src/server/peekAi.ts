@@ -9,7 +9,7 @@ import { toParcel } from '../store/apiRepo';
 import { scanDay } from './eventIdentity';
 import { captureOperationalError } from './observability';
 import {
-  ARRIVAL_STAGES, codePoints, deliveryDaysBetween, orderedScans, PHYSICAL_STAGES, predictArrival, scanMilestones, snapshotFeatures,
+  ARRIVAL_STAGES, codePoints, orderedScans, PHYSICAL_STAGES, predictArrival, scanMilestones, snapshotFeatures,
   statusKey, withTargetEncoding, type AiParcel, type AiScan, type ModelContext, type PeekAiModelDoc,
 } from './peekAiModel';
 import { isRecord, type JsonObject } from './types';
@@ -134,11 +134,51 @@ const ordinal = (time: DateTime) => Math.round(Date.UTC(time.year, time.month - 
 const isoDay = (day: number) => new Date(day * 86_400_000).toISOString().slice(0, 10);
 const dayOf = (text: string) => Math.round(Date.parse(`${text}T00:00:00Z`) / 86_400_000);
 
+/** Whether the carrier delivers on a day (days since 1970-01-01). */
+type Delivers = (day: number) => boolean;
+
 /** The day `b` delivery days after day `snap`. */
-function endDay(days: readonly number[], snap: number, b: number): number {
+function endDay(delivers: Delivers, snap: number, b: number): number {
   let day = snap;
-  for (let n = 0; n < b; day++) if (days.includes(mod(day + 4, 7))) n++;
+  for (let n = 0; n < b; day++) if (delivers(day + 1)) n++;
   return day;
+}
+
+/** Delivery days after day `a` up to and including day `b`. */
+function daysBetween(delivers: Delivers, a: number, b: number): number {
+  let n = 0;
+  for (let day = a + 1; day <= b; day++) if (delivers(day)) n++;
+  return n;
+}
+
+const dateDay = (year: number, month: number, date: number) => Math.round(Date.UTC(year, month - 1, date) / 86_400_000);
+/** The n-th weekday (0 for Monday) of a month, or its last for n = -1, in days since 1970-01-01. */
+function nthWeekday(year: number, month: number, weekday: number, n: number): number {
+  if (n < 0) {
+    const last = dateDay(year, month + 1, 0);
+    return last - mod(mod(last + 3, 7) - weekday, 7);
+  }
+  const first = dateDay(year, month, 1);
+  return first + mod(weekday - mod(first + 3, 7), 7) + (n - 1) * 7;
+}
+
+/**
+ * The days no carrier delivers on in the country: in the US, the six holidays USPS, UPS and FedEx all close on (New
+ * Year's Day, Memorial Day, Independence Day, Labor Day, Thanksgiving and Christmas), with the Friday before one that
+ * falls on a Saturday and the Monday after one on a Sunday, as they observe it. None for other countries yet.
+ */
+export function closedDays(country: string | null, years: readonly number[]): Set<number> {
+  const closed = new Set<number>();
+  if (country !== 'US') return closed;
+  for (const year of years) {
+    for (const day of [dateDay(year, 1, 1), nthWeekday(year, 5, 0, -1), dateDay(year, 7, 4), nthWeekday(year, 9, 0, 1),
+      nthWeekday(year, 11, 3, 4), dateDay(year, 12, 25)]) {
+      closed.add(day);
+      if (mod(day + 3, 7) === 5) closed.add(day - 1);
+      if (mod(day + 3, 7) === 6) closed.add(day + 1);
+    }
+  }
+  return closed;
 }
 
 /** The shortest run of delivery days holding at least `tau` of the chance, the likeliest of them: [a, b]. */
@@ -320,10 +360,10 @@ function arrivalChances(row: JsonObject, placed: Placed, snap: DateTime, blob: P
 }
 
 /** The chance of each day from today, as the model spreads it over the carrier's delivery days. */
-function dayStrip(F: readonly number[], days: readonly number[], snap: number, today: number): PeekAi['days'] {
+function dayStrip(F: readonly number[], delivers: Delivers, snap: number, today: number): PeekAi['days'] {
   const chance = new Map<number, number>();
   F.forEach((p, h) => {
-    const day = endDay(days, snap, h);
+    const day = endDay(delivers, snap, h);
     if (day >= today) chance.set(day, (chance.get(day) ?? 0) + p - (h > 0 ? F[h - 1]! : 0));
   });
   return [...chance].slice(0, 7).map(([day, p]) => ({ day: isoDay(day), p: round2(p) }));
@@ -408,6 +448,11 @@ function call(row: JsonObject, c: string, placed: Placed, local: DateTime, blob:
   const zone = local.zone;
   const today = ordinal(local);
   const days = blob.deliveryDays[c]?.length ? blob.deliveryDays[c]! : DEFAULT_DELIVERY_DAYS;
+  // The holidays of the country the parcel goes to, else of the one its newest placed scan is in.
+  const country = text(isRecord(row.carrier_data) ? row.carrier_data.destination_country : null)
+    ?? [...past].reverse().find((scan) => scan.country)?.country ?? null;
+  const closed = closedDays(country, [local.year, local.year + 1]);
+  const delivers: Delivers = (day) => days.includes(mod(day + 3, 7)) && !closed.has(day);
   const estimate = /^\d{4}-\d{2}-\d{2}/.exec(typeof row.expected_delivery === 'string' ? row.expected_delivery.trim() : '')?.[0];
   const carrierDay = estimate ? dayOf(estimate) : null;
   const checked = Date.parse(String(row.last_synced_at));
@@ -450,7 +495,7 @@ function call(row: JsonObject, c: string, placed: Placed, local: DateTime, blob:
   // The carrier's day was yesterday, and a scan came in the day since.
   if (carrierDay === today - 1) {
     if (!past.some((scan) => scan.ts > nowS - 86_400)) return null;
-    const by = endDay(days, today, 1);
+    const by = endDay(delivers, today, 1);
     return { says: by <= today + 1 ? 'today_or_tomorrow' : 'by_day', why: 'missed_date', day: isoDay(by),
       carrier_day: isoDay(carrierDay), sure: capped(blob.sure.missed_date!) };
   }
@@ -463,16 +508,16 @@ function call(row: JsonObject, c: string, placed: Placed, local: DateTime, blob:
   const snapDay = ordinal(snap);
   const H = F.length - 1;
   const { tau, byDayWidth, weekTau, soonerLead, soonerTau } = blob.claims;
-  const strip = dayStrip(F, days, snapDay, today);
+  const strip = dayStrip(F, delivers, snapDay, today);
   const range = shortestRange(F, tau);
 
   if (carrierDay !== null) {
     // Sooner than a window of days the carrier gives would only repeat its first day.
     const from = /^\d{4}-\d{2}-\d{2}/.exec(text(isRecord(row.carrier_data) ? row.carrier_data.expected_delivery_from : null) ?? '')?.[0];
     if (from && dayOf(from) < carrierDay) return null;
-    const before = deliveryDaysBetween(days, snapDay, carrierDay);
+    const before = daysBetween(delivers, snapDay, carrierDay);
     if (carrierDay - snapDay < soonerLead || before < 1 || F[Math.min(before - 1, H)]! < soonerTau) return null;
-    const first = range && range.a >= 1 ? endDay(days, snapDay, range.a) : null;
+    const first = range && range.a >= 1 ? endDay(delivers, snapDay, range.a) : null;
     return { says: 'sooner', why: 'ahead', carrier_day: isoDay(carrierDay), sure: capped(blob.sure.sooner!), days: strip,
       ...first !== null && first > today && first < carrierDay ? { day: isoDay(first) } : {} };
   }
@@ -481,16 +526,16 @@ function call(row: JsonObject, c: string, placed: Placed, local: DateTime, blob:
   const said = (says: ApiPeekAiSays, day: number) => ({ says, why: 'no_date' as const, day: isoDay(day), sure: capped(blob.sure[says]!),
     last: lastStep(past, dest, zone), days: strip });
   if (range && range.b - range.a <= byDayWidth) {
-    const by = endDay(days, snapDay, range.b);
+    const by = endDay(delivers, snapDay, range.b);
     if (by < today) return null;
     // "Today or tomorrow" only when the carrier delivers tomorrow; a call made last night still holds this morning.
-    return said(by <= today + 1 && days.includes(mod(today + 4, 7)) ? 'today_or_tomorrow' : 'by_day', by);
+    return said(by <= today + 1 && delivers(today + 1) ? 'today_or_tomorrow' : 'by_day', by);
   }
   const sunday = today + 6 - mod(today + 3, 7);
   const snapSunday = snapDay + 6 - mod(snapDay + 3, 7);
-  const thisWeek = F[Math.min(deliveryDaysBetween(days, snapDay, snapSunday), H)]!;
+  const thisWeek = F[Math.min(daysBetween(delivers, snapDay, snapSunday), H)]!;
   if (mod(snapDay + 3, 7) <= 3 && thisWeek >= weekTau) return said('this_week', snapSunday);
-  const nextWeek = F[Math.min(deliveryDaysBetween(days, snapDay, snapSunday + 7), H)]!;
+  const nextWeek = F[Math.min(daysBetween(delivers, snapDay, snapSunday + 7), H)]!;
   if (thisWeek < 0.5 && nextWeek >= weekTau) return said(snapSunday + 7 === sunday ? 'this_week' : 'by_end_of_next_week', snapSunday + 7);
   return null;
 }

@@ -10,7 +10,7 @@ vi.mock('./metrics', async (original) => ({
 import { withEventPlaces } from './eventPlaces';
 import { recordPeekAiServed } from './metrics';
 import { captureOperationalError } from './observability';
-import { keepPeekAiModel, peekAiBlob, peekAiBlobFrom, peekAiFor, setPeekAiBlob, shortestRange, type PeekAiBlob } from './peekAi';
+import { closedDays, keepPeekAiModel, peekAiBlob, peekAiBlobFrom, peekAiFor, setPeekAiBlob, shortestRange, type PeekAiBlob } from './peekAi';
 import type { PeekAiTree } from './peekAiModel';
 import type { JsonObject } from './types';
 
@@ -185,6 +185,26 @@ describe('the model', () => {
     // The carrier gives a window of days: sooner would only repeat its first.
     const window = row({ expected_delivery: '2026-11-24', carrier_data: { timezone: 'Europe/Zurich', expected_delivery_from: '2026-11-21' } });
     expect(ai(window, '2026-11-20T14:30:00Z', blob([0.02, 0.85, 0.95, 0.99]))).toBeNull();
+  });
+
+  it('names no day the carriers of the country the parcel goes to close on, such as Thanksgiving in the US', () => {
+    // A DPD parcel on New York's clock, checked on Wednesday 25 November 2026, the day before Thanksgiving.
+    const us = (fields: JsonObject = {}, country = 'US', model = blob()) => ai(row({ carrier: 'dpd', last_synced_at: '2026-11-25T19:00:00Z',
+      carrier_data: { timezone: 'America/New_York', destination_country: country }, ...fields },
+    [scan('accepted', '2026-11-23T14:00:00Z'), scan('in_transit', '2026-11-24T23:00:00Z')]), '2026-11-25T19:30:00Z', model);
+    expect(us({}, 'CH')).toMatchObject({ says: 'today_or_tomorrow', day: '2026-11-26' });
+    const said = us();
+    expect(said).toMatchObject({ says: 'by_day', day: '2026-11-27' });
+    expect(said?.days?.map(({ day }) => day)).not.toContain('2026-11-26');
+    const sooner = blob([0.02, 0.85, 0.95, 0.99]);
+    expect(us({ expected_delivery: '2026-11-30' }, 'CH', sooner)).toMatchObject({ says: 'sooner', carrier_day: '2026-11-30', day: '2026-11-26' });
+    expect(us({ expected_delivery: '2026-11-30' }, 'US', sooner)).toMatchObject({ says: 'sooner', carrier_day: '2026-11-30', day: '2026-11-27' });
+    // A holiday on a weekend closes the Friday before or the Monday after it.
+    expect([...closedDays('US', [2026, 2027])].map((day) => new Date(day * 86_400_000).toISOString().slice(0, 10)).sort()).toEqual([
+      '2026-01-01', '2026-05-25', '2026-07-03', '2026-07-04', '2026-09-07', '2026-11-26', '2026-12-25',
+      '2027-01-01', '2027-05-31', '2027-07-04', '2027-07-05', '2027-09-06', '2027-11-25', '2027-12-24', '2027-12-25',
+    ]);
+    expect(closedDays('FR', [2026]).size).toBe(0);
   });
 
   it("places the scans to tell how far the parcel has come, on the clock of the destination it reached", () => {

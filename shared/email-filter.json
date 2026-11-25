@@ -10,7 +10,8 @@
       "delivery",
       "tracking",
       "on its way",
-      "on the way"
+      "on the way",
+      "order"
     ],
     "de": [
       "versandt",
@@ -23,7 +24,8 @@
       "Paket",
       "Lieferung",
       "Zustellung",
-      "unterwegs"
+      "unterwegs",
+      "Bestellung"
     ],
     "fr": [
       "expédié",
@@ -36,7 +38,8 @@
       "distribution",
       "en route",
       "en chemin",
-      "en transit"
+      "en transit",
+      "commande"
     ],
     "it": [
       "spedito",
@@ -44,7 +47,8 @@
       "spedizione",
       "pacco",
       "consegna",
-      "tracciamento"
+      "tracciamento",
+      "ordine"
     ],
     "es": [
       "enviado",
@@ -53,7 +57,8 @@
       "entrega",
       "seguimiento",
       "en camino",
-      "en reparto"
+      "en reparto",
+      "pedido"
     ],
     "pt": [
       "enviado",
@@ -65,7 +70,8 @@
       "entrega",
       "rastreio",
       "rastreamento",
-      "a caminho"
+      "a caminho",
+      "pedido"
     ],
     "nl": [
       "verzonden",
@@ -75,7 +81,8 @@
       "pakketje",
       "bezorging",
       "levering",
-      "onderweg"
+      "onderweg",
+      "bestelling"
     ],
     "pl": [
       "wysłane",
@@ -90,7 +97,9 @@
       "paczkę",
       "dostawa",
       "dostawy",
-      "w drodze"
+      "w drodze",
+      "zamówienie",
+      "zamówienia"
     ],
     "ru": [
       "отправлен",
@@ -102,14 +111,17 @@
       "посылку",
       "доставка",
       "доставки",
-      "в пути"
+      "в пути",
+      "заказ",
+      "заказа"
     ],
     "zh": [
       "发货",
       "包裹",
       "快递",
       "派送",
-      "物流"
+      "物流",
+      "订单"
     ]
   },
   "mainWords": {

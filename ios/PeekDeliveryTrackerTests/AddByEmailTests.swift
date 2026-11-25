@@ -19,7 +19,7 @@ final class AddByEmailFilterTests: XCTestCase {
     // The web's expectations, from src/lib/emailFilter.test.ts.
 
     func testSearchesTheSubjectForOneLanguagesWordsQuotingThoseOfSeveralWords() {
-        XCTAssertEqual(filter.gmailFilter(["fr"]), #"subject:(expédié OR expédiée OR expédition OR colis OR livraison OR suivi OR acheminement OR distribution OR "en route" OR "en chemin" OR "en transit")"#)
+        XCTAssertEqual(filter.gmailFilter(["fr"]), #"subject:(expédié OR expédiée OR expédition OR colis OR livraison OR suivi OR acheminement OR distribution OR "en route" OR "en chemin" OR "en transit" OR commande)"#)
     }
 
     func testLeavesOutTheWordsOnlyADeliveryConfirmationWrites() {

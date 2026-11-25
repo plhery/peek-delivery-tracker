@@ -6,9 +6,11 @@ import rules from '../../shared/email-filter.json';
  * read the same file.
  *
  * Gmail matches whole words: it ignores case and accents and takes a plural in "s", but no other ending, so each
- * form a subject uses is listed. Words that mostly name something else are left out, such as "order" and the words
- * for "sent" that a bank or a form also writes, and so are those only a delivery confirmation writes ("delivered",
- * "livré", "zugestellt"): once a parcel is delivered, adding it is too late.
+ * form a subject uses is listed. The word for "order" is in, last: many shipping subjects name only the order ("Votre
+ * commande a été remise au transporteur"). The order confirmations and offers it brings too name order numbers, which
+ * Peek doesn't take for tracking numbers unless a carrier's shape proves them one. Left out are the words for "sent" that a bank or a form also writes,
+ * and those only a delivery confirmation writes ("delivered", "livré", "zugestellt"): once a parcel is delivered,
+ * adding it is too late.
  */
 export const SHIPPING_SUBJECT_WORDS = rules.words;
 

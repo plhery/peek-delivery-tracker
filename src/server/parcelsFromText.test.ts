@@ -43,3 +43,35 @@ describe('the numbers a text names, by how far its sender is trusted', () => {
     }
   });
 });
+
+// The Gmail filter's word for "order" forwards order confirmations and offers too: made-up ones, as shops write them.
+const ORDER_EMAILS = {
+  confirmation: `Thank you for shopping with us!
+Order number: 60123456789
+Order date: 21 Nov 2026
+Customer number: 4012345678
+Art. no. 1234567001 Wool-blend jumper, size M, 1 × 39.99 EUR
+Delivery: Standard, 3-5 working days
+We'll let you know when your order is on its way.`,
+  commande: `Confirmation de commande
+Bonjour, merci pour votre commande !
+Numéro de commande : 1234567890
+Commande n° 405123456789 du 21/11/2026
+Référence client : 98765432
+Total TTC : 59,90 €
+Vous recevrez un e-mail avec le numéro de suivi dès l'expédition.`,
+  offer: `Order now: 20% off everything until Sunday!
+Use code WINTER2026 at checkout. Orders over 50 € ship free.
+Call us on +44 20 7946 0123. Offer ref 202611210001.
+Unsubscribe: https://example.test/u/1234567899123456`,
+};
+
+describe('an order confirmation or an offer', () => {
+  it('adds no number: an order number, a customer number, a code or a phone number is no tracking number', () => {
+    for (const [name, text] of Object.entries(ORDER_EMAILS)) expect(read(text), name).toEqual([]);
+  });
+
+  it('still adds the tracking number an order email names', () => {
+    expect(read(`${ORDER_EMAILS.commande}\nNuméro de suivi : ${UPS}`)).toEqual([`${UPS} ups`]);
+  });
+});

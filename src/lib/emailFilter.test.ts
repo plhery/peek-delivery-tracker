@@ -3,7 +3,7 @@ import { FILTER_LANGUAGES, MAIN_SUBJECT_WORDS, SHIPPING_SUBJECT_WORDS, filterLan
 
 describe('the mail filter for shipping emails', () => {
   it('searches the subject for one language\'s words, quoting those of several words', () => {
-    expect(gmailFilter(['fr'])).toBe('subject:(expédié OR expédiée OR expédition OR colis OR livraison OR suivi OR acheminement OR distribution OR "en route" OR "en chemin" OR "en transit")');
+    expect(gmailFilter(['fr'])).toBe('subject:(expédié OR expédiée OR expédition OR colis OR livraison OR suivi OR acheminement OR distribution OR "en route" OR "en chemin" OR "en transit" OR commande)');
   });
 
   it('leaves out the words only a delivery confirmation writes: a delivered parcel comes too late to add', () => {

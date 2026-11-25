@@ -13,7 +13,7 @@ class EmailFilterTests {
     @Test
     fun searchesTheSubjectForOneLanguagesWordsQuotingThoseOfSeveralWords() {
         assertEquals(
-            "subject:(expédié OR expédiée OR expédition OR colis OR livraison OR suivi OR acheminement OR distribution OR \"en route\" OR \"en chemin\" OR \"en transit\")",
+            "subject:(expédié OR expédiée OR expédition OR colis OR livraison OR suivi OR acheminement OR distribution OR \"en route\" OR \"en chemin\" OR \"en transit\" OR commande)",
             EmailFilter.gmailFilter(listOf("fr")),
         )
     }

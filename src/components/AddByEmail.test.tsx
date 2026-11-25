@@ -112,7 +112,7 @@ describe('adding parcels by email in Settings', () => {
     const languages = screen.getByRole('group', { name: 'Languages your shops and carriers write in' });
     const chosen = () => within(languages).getAllByRole('button', { pressed: true }).map((button) => button.textContent);
     expect(chosen()).toEqual(['English', 'French']);
-    expect(screen.getByText(/^subject:\(shipped OR .* OR "en transit"\)$/)).toBeInTheDocument();
+    expect(screen.getByText(/^subject:\(shipped OR .* OR "en transit" OR commande\)$/)).toBeInTheDocument();
 
     await user.click(within(languages).getByRole('button', { name: 'German' }));
     await user.click(within(languages).getByRole('button', { name: 'English' }));

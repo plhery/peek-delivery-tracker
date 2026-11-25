@@ -231,7 +231,7 @@ describe('emails in the shapes readers forward', () => {
     expect(db.record).toHaveBeenCalledWith(userId, 'none', 0, null, 'Example Market');
   });
 
-  it('ignores a shop\'s note on a price that fell, unread, though its encoded help links hold page ids after "%3D"', async () => {
+  it('reads a shop\'s note on a pre-order\'s price that fell for no number, though its encoded help links hold page ids after "%3D"', async () => {
     const db = account();
     const help = 'https://www.example-market.com/r?C=2AB3C&U=https%3A%2F%2Fwww.example-market.com%2Fhelp%3Fie%3DUTF8%26nodeId%3D201234567%26qid%3D1763600000';
     await posted(mail('Example Market <store-news@example-market.com>', 'Good news: you saved on your pre-order', [
@@ -239,9 +239,9 @@ describe('emails in the shapes readers forward', () => {
       'You can follow this order and all your orders in your account. More on the price guarantee in our help pages.',
       help,
     ].join('\n')));
+    // "Pre-order" holds the filter's word for "order": the note is read, and adds nothing.
     expect(db.create).not.toHaveBeenCalled();
-    expect(db.keep).not.toHaveBeenCalled();
-    expect(db.record).toHaveBeenCalledWith(userId, 'ignored', 0, null, 'Example Market');
+    expect(db.record).toHaveBeenCalledWith(userId, 'none', 0, null, 'Example Market');
   });
 
   it('ignores an email whose subject is about no parcel, unread and unkept, though it holds a tracking number', async () => {

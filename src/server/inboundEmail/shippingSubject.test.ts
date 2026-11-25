@@ -21,11 +21,18 @@ const SHIPPING = [
   'Twoja przesyłka jest w drodze',
   'Ваша посылка в пути',
   '您的包裹已发货',
+  // An order's name alone: the order confirmations it also lets in name no tracking number Peek takes.
+  'Votre commande a été remise au transporteur',
+  'Update on your order #1001',
+  'Ihre Bestellung bei Beispiel',
+  'Status zamówienia 1001',
+  'Статус заказа',
+  '您的订单已确认',
 ];
 
 // Newsletters, bills, sign-ups and notices a reader who forwards all their mail sends on.
 const ELSEWHERE = [
-  'Good news: you saved on your pre-order',
+  'Good news: you saved on your subscription',
   'Our autumn collection is here',
   'Votre facture de novembre est disponible',
   'Bienvenue dans la communauté !',
@@ -33,7 +40,7 @@ const ELSEWHERE = [
   'Vote for the game of the year and win',
   'Nouvelles règles de confidentialité',
   'Your monthly statement',
-  'Commande confirmée',
+  'Inscription confirmée',
 ];
 
 describe('shippingSubject', () => {

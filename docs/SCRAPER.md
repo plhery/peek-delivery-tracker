@@ -257,7 +257,9 @@ rows. A deduced zone's wall clocks are dated again, except on the carrier's home
 adapter can state itself, and a scan's stage is read again from its source's status map and the
 wording rules, a notice stored as the sync stores it, marked one even where its stage stays. A wording Postal Ninja relays for the carrier it
 names (`reporting_carrier`) is read with that carrier's map first, when the map reads relayed wordings
-whole (PostNL's), as the adapter reads it. A scan its adapter gave the stage of the scan
+whole (PostNL's), as the adapter reads it. A wording rule scoped to the carrier behind a universal
+provider's copy, the one the row names or else the parcel's own, outranks the wording rules but no
+map, as the provider's reading does. A scan its adapter gave the stage of the scan
 before it, with no source of its own (Chronopost's RB), keeps it. The scan before is the one its source listed
 before it (`tie_order`) among scans of one instant; where the stored rows cannot tell, such a scan or notice keeps
 its stage. A registration dated over a minute after the

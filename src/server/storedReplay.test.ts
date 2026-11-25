@@ -112,6 +112,22 @@ describe('stored scan replay', () => {
     expect(other).toEqual([]);
   });
 
+  it("reads a universal provider's copy with the wording rules scoped to the carrier behind it, the parcel's own when it names none", () => {
+    // The scraper reads BUFFALO's "IN TRIP" as ParcelsApp relays it as out for delivery, a rule no map holds.
+    const copy = (id: string, stage: string, raw: JsonObject) => scan(id, 'unknown', '2026-11-02T10:00:00Z', stage, 'IN TRIP',
+      { universal_provider: 'ParcelsApp', stage, stage_source: 'none', ...raw });
+    const buffalo = (...events: StoredScan[]): StoredParcel => ({ ...parcel(...events), carriers: ['buffalo-ex'] });
+
+    expect(replayParcel(buffalo(copy('trip', 'pending', {})))).toEqual([expect.objectContaining({
+      row: 'trip', source: 'unknown', from: 'pending', to: 'out_for_delivery', reason: 'scoped', stageSource: 'wording:provider',
+    })]);
+    // Another provider, another carrier's parcel, a handed-over parcel's, or a row that has the stage already.
+    expect(replayParcel(buffalo(copy('trip', 'pending', { universal_provider: '17TRACK' })))).toEqual([]);
+    expect(replayParcel({ ...parcel(copy('trip', 'pending', {})), carriers: ['usps'] })).toEqual([]);
+    expect(replayParcel({ ...parcel(copy('trip', 'pending', {})), carriers: ['buffalo-ex', 'usps'] })).toEqual([]);
+    expect(replayParcel(buffalo(copy('trip', 'out_for_delivery', { stage_source: 'wording:provider' })))).toEqual([]);
+  });
+
   it('stores a notice after the delivery round as the sync does, pending', () => {
     const changes = replayParcel(parcel(
       scan('delivered', 'dpd-de', '2026-10-18T10:00:00Z', 'delivered', 'Delivered', { provider_code: 'DELIVERED', stage: 'delivered' }),

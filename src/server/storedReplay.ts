@@ -18,7 +18,9 @@
  * movement the carrier no longer lists does not change, and the next check would undo the change. A notice stored as one
  * keeps its stage, as do differences that come only from the order of the scans around a row:
  * the next check of the parcel settles those. A wording Postal Ninja relays for a carrier whose map reads it
- * whole is read with that map first (`relayedAnswer`), as its adapter reads it. A universal provider's copy of a scan to
+ * whole is read with that map first (`relayedAnswer`), as its adapter reads it. A wording rule scoped to the carrier
+ * behind a universal provider's copy, the one the row names or else the parcel's own, outranks the wording rules but no
+ * map, as the provider's reading does (`scopedStage`). A universal provider's copy of a scan to
  * the minute, stored beside its copy to the second when its answer listed the scan twice, goes where the release leaves
  * it out (`withoutMinuteCopies`), and the copy to the second takes its place. Peek's own rows and the stage changes it saw without
  * a scan time are left out. It is a dry run: it lists the rows that would change, the parcels
@@ -82,10 +84,11 @@ export interface StageChange extends Change {
   kind: 'stage';
   code: string | null;
   /**
-   * Where the new stage comes from: the map, a notice keeping the stage before it, the wording, or a registration
-   * dated after the answer's first movement, which the scraper reads in transit.
+   * Where the new stage comes from: the map, a notice keeping the stage before it, the wording, a wording rule scoped to
+   * the carrier behind a universal provider's copy, or a registration dated after the answer's first movement, which
+   * the scraper reads in transit.
    */
-  reason: 'mapped' | 'notice' | 'wording' | 'late';
+  reason: 'mapped' | 'notice' | 'wording' | 'scoped' | 'late';
   /** The stage its adapter would give the scan, which the sync keeps in the row's raw data; null for none. */
   declared: string | null;
   stageSource: string;
@@ -161,6 +164,8 @@ const RELAYING_PROVIDERS = new Set(['Postal Ninja']);
 const relayedWordingStage = (scraperApp as Partial<typeof scraperApp>).relayedWordingStage;
 /** A release before 0.1022.0 keeps a provider's copies to the minute: looked up the same way. */
 const withoutMinuteCopies = (scraperApp as Partial<typeof scraperApp>).withoutMinuteCopies;
+/** A release before 0.1388.0 exports no wording rules scoped to a carrier: looked up the same way. */
+const scopedWordingStage = (scraperApp as Partial<typeof scraperApp>).scopedWordingStage;
 const UNIVERSAL = 'unknown';
 /**
  * By when Peek ran a release that reads late registrations (0.740.0, the first it adopted that does). The sync writes
@@ -203,6 +208,21 @@ function relayedAnswer(scan: StoredScan): StatusMapAnswer | null {
   const carrier = carrierIdFromName(service);
   const stage = carrier && relayedWordingStage ? relayedWordingStage(carrier, scan.description) : undefined;
   return stage ? { kind: 'mapped', stage } : null;
+}
+
+/**
+ * The stage a wording rule scoped to the carrier behind a universal provider's copy gives its wording, as the
+ * provider's reading does (`withScopedWording`): the carrier the row names (`reporting_carrier`), else the parcel's own
+ * when it has one carrier and the provider's rows name no other, since with several the scans can be another leg's.
+ * Undefined for a carrier's own rows and where no rule reads the wording. `named` holds the carriers the provider's
+ * rows name.
+ */
+function scopedStage(parcel: StoredParcel, scan: StoredScan, named: ReadonlySet<string>): string | undefined {
+  const provider = text(scan.raw[UNIVERSAL_PROVIDER]);
+  if (!provider || !scopedWordingStage) return undefined;
+  const service = text(scan.raw.reporting_carrier);
+  const own = parcel.carriers?.length === 1 && named.size <= 1 ? parcel.carriers[0] : null;
+  return scopedWordingStage(scan.description, { carrier: service ? carrierIdFromName(service) ?? null : own, provider });
 }
 
 /** Every stored row of the parcel the installed release would write otherwise. */
@@ -323,6 +343,8 @@ function replayedStages(parcel: StoredParcel, source: string, ordered: StoredSca
   // A scan dated like another of its source, where either has no `tie_order`: which came before is not known.
   const unordered = (scan: StoredScan) => ordered.some((other) => other !== scan
     && Date.parse(other.occurredAt) === Date.parse(scan.occurredAt) && Math.min(tieOrder(scan.raw.tie_order), tieOrder(other.raw.tie_order)) < 0);
+  const named = new Set(ordered.map((scan) => text(scan.raw.reporting_carrier)).filter((name) => name !== null)
+    .map((name) => carrierIdFromName(name) ?? name));
   for (const scan of ordered) {
     const answer = relayedAnswer(scan)
       ?? statusMapAnswer({ carrier: source, providerCode: text(scan.raw.provider_code), description: scan.description });
@@ -345,6 +367,11 @@ function replayedStages(parcel: StoredParcel, source: string, ordered: StoredSca
     } else if (answer.kind === 'unknown' && !declared && wording.source !== 'none') {
       reason = 'wording';
     }
+    // A rule scoped to the carrier behind a universal provider's copy reads what no map reads, over the wording rules
+    // and a notice; a row that already has its stage keeps how it came by it.
+    const scoped = answer.kind === 'mapped' ? undefined : scopedStage(parcel, scan, named);
+    if (scoped && scoped !== declared) [given, reason] = [{ stage: scoped, stage_source: 'wording:provider' }, 'scoped'];
+    else if (scoped) [given, reason] = [{ stage: scoped, stage_source: scan.raw.stage_source ?? null }, null];
     previous = text(given.stage) ?? (reason === 'wording' ? wording.stage : scan.stage);
     scans.push({ ...given, description: scan.description });
     reasons.push(reason);
@@ -364,7 +391,7 @@ function replayedStages(parcel: StoredParcel, source: string, ordered: StoredSca
     return [{
       kind: 'stage', parcel: parcel.id, row: scan.id, source, open: parcel.open, from: scan.stage, to,
       code: text(scan.raw.provider_code), reason, declared: text(scans[index].stage),
-      stageSource: reason === 'mapped' || reason === 'late' ? 'carrier_map'
+      stageSource: reason === 'mapped' || reason === 'late' ? 'carrier_map' : reason === 'scoped' ? 'wording:provider'
         : reason === 'wording' ? classifyStage(scan.description).source : 'none',
       read: { description: scan.description, raw: scan.raw },
     }];

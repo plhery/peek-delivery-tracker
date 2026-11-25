@@ -73241,6 +73241,226 @@
         }
       }
     },
+    "/api/packages/{packageId}/files": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/PackageId"
+        }
+      ],
+      "post": {
+        "operationId": "addPackageFile",
+        "description": "Adds a photo or PDF to the parcel's private note. The body is the file itself, its type the request's Content-Type. The server re-encodes a photo, without its metadata, within 2,560 px. Up to 5 files a parcel, 10 MB each, 200 MB an account.",
+        "parameters": [
+          {
+            "name": "X-File-Name",
+            "in": "header",
+            "required": true,
+            "description": "The file's name, percent-encoded UTF-8.",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 400
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "image/jpeg": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "image/png": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "image/webp": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "application/pdf": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "File added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddPackageFileResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "404": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "409": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "413": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "415": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "429": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "502": {
+            "$ref": "#/components/responses/ApiError"
+          }
+        }
+      }
+    },
+    "/api/packages/{packageId}/files/{fileId}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/PackageId"
+        },
+        {
+          "name": "fileId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "delete": {
+        "operationId": "deletePackageFile",
+        "responses": {
+          "200": {
+            "description": "File deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OkResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "404": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "502": {
+            "$ref": "#/components/responses/ApiError"
+          }
+        }
+      }
+    },
+    "/api/files/{fileId}": {
+      "parameters": [
+        {
+          "name": "fileId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "get": {
+        "operationId": "readPackageFile",
+        "security": [],
+        "description": "A file of a parcel's private note, through the signed address its PackageFile gives. Wrong or expired addresses answer 404.",
+        "parameters": [
+          {
+            "name": "v",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "full",
+                "thumb"
+              ]
+            }
+          },
+          {
+            "name": "e",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "When the address expires, in Unix seconds."
+          },
+          {
+            "name": "s",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "download",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The file",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "image/webp": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/ApiError"
+          }
+        }
+      }
+    },
     "/api/public/verification": {
       "get": {
         "operationId": "lookupVerificationConfiguration",
@@ -76867,6 +77087,20 @@
             "type": "string",
             "maxLength": 80
           },
+          "note": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000,
+            "description": "The owner's private note on the parcel, up to 1,000 characters (Unicode code points). Absent when there is none. Served only on the account's own routes: never on a link, a passport, an e-mail, a notification, a widget or a preview."
+          },
+          "files": {
+            "type": "array",
+            "maxItems": 5,
+            "items": {
+              "$ref": "#/components/schemas/PackageFile"
+            },
+            "description": "The photos and PDFs on the owner's note, oldest first. Absent when there are none."
+          },
           "carrier": {
             "$ref": "#/components/schemas/CarrierId"
           },
@@ -77331,6 +77565,97 @@
           }
         }
       },
+      "PackageFile": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "A photo or PDF on a parcel's private note. Its addresses are signed for its owner and expire; read the parcel again for new ones once `expires_at` has passed.",
+        "required": [
+          "id",
+          "name",
+          "content_type",
+          "size",
+          "created_at",
+          "url",
+          "thumbnail_url",
+          "expires_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120,
+            "description": "The file's name as the owner added it."
+          },
+          "content_type": {
+            "$ref": "#/components/schemas/PackageFileType"
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10485760,
+            "description": "Bytes stored."
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "A photo's width in pixels, as stored."
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "A photo's height in pixels, as stored."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "type": "string",
+            "description": "Where the file is read without sign-in until `expires_at`: a path on the API's own origin (`/api/files/…`). Add `&download=1` to save it rather than show it."
+          },
+          "thumbnail_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "A photo's small copy (384 px), on the same terms as `url`; null for a PDF."
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "PackageFileType": {
+        "type": "string",
+        "enum": [
+          "image/jpeg",
+          "image/png",
+          "image/webp",
+          "application/pdf"
+        ],
+        "description": "What a parcel's note takes: photos (a HEIC photo becomes a JPEG on the device) and PDFs."
+      },
+      "AddPackageFileResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "file",
+          "package"
+        ],
+        "properties": {
+          "file": {
+            "$ref": "#/components/schemas/PackageFile"
+          },
+          "package": {
+            "$ref": "#/components/schemas/PackageRow"
+          }
+        }
+      },
       "PackageListResponse": {
         "type": "object",
         "additionalProperties": false,
@@ -77416,15 +77741,22 @@
       "RenamePackageRequest": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "label"
-        ],
+        "minProperties": 1,
         "properties": {
           "label": {
             "type": "string",
             "maxLength": 80
+          },
+          "note": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 1000,
+            "description": "Up to 1,000 characters (Unicode code points)."
           }
-        }
+        },
+        "description": "A new name, a new note, or both. A null or blank note deletes the note's text."
       },
       "ChangePackageCarrierRequest": {
         "type": "object",
@@ -77584,9 +77916,13 @@
           "code": {
             "type": "string",
             "enum": [
-              "recent_sign_in"
+              "recent_sign_in",
+              "file_too_big",
+              "file_type",
+              "parcel_files_full",
+              "account_files_full"
             ],
-            "description": "Present on a 401 when the action needs a sign-in from the last ten minutes. The session still stands: signing in again lets the action through."
+            "description": "Present on a 401 when the action needs a sign-in from the last ten minutes. The session still stands: signing in again lets the action through. On a file added to a parcel's note: `file_too_big` (413, over 10 MB), `file_type` (415, not a photo or PDF), `parcel_files_full` (409, the parcel has 5), `account_files_full` (409, the account's 200 MB are used)."
           }
         }
       },
@@ -79172,6 +79508,11 @@
             "type": "string",
             "maxLength": 80,
             "description": "The name the parcel had on the device."
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 1000,
+            "description": "The note the parcel had on the device. Its files follow through POST /api/packages/{packageId}/files once the parcel is kept."
           }
         }
       },
@@ -79607,7 +79948,7 @@
       "GiftWords": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Gift contents and message stored with the link. Released only to its owner or after delivery.",
+        "description": "Gift contents and message stored with the link. Released to its owner, after delivery, or, when `early` is set, the note and who it is from from the start (never the name before delivery).",
         "required": [
           "name",
           "note",
@@ -79634,6 +79975,10 @@
               "null"
             ],
             "maxLength": 60
+          },
+          "early": {
+            "type": "boolean",
+            "description": "The sender shows the note and who it is from before delivery. What is inside still waits for delivery."
           }
         }
       },
@@ -80171,6 +80516,11 @@
           "addedAt": {
             "type": "string",
             "format": "date-time"
+          },
+          "hasNote": {
+            "type": "boolean",
+            "const": true,
+            "description": "Only when the user keeps a private note on the parcel. get_parcel gives the note itself."
           }
         }
       },

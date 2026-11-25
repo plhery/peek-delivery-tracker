@@ -4446,6 +4446,8 @@ struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
     var id: UUID
     var trackingNumber: String
     var label: String
+    var note: String? = nil
+    var files: [PackageFile]? = nil
     var carrier: CarrierID
     var createdAt: String
     var expectedDelivery: String? = nil
@@ -4477,6 +4479,8 @@ struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
         case id
         case trackingNumber
         case label
+        case note
+        case files
         case carrier
         case createdAt
         case expectedDelivery
@@ -4504,6 +4508,46 @@ struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
         case newsAt
         case seenAt
     }
+}
+
+struct PackageFile: Codable, Equatable, Hashable, Sendable, Identifiable {
+    var id: UUID
+    var name: String
+    var contentType: PackageFileType
+    var size: Int
+    var width: Int? = nil
+    var height: Int? = nil
+    var createdAt: String
+    var url: String
+    var thumbnailURL: String? = nil
+    var expiresAt: String
+
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case contentType
+        case size
+        case width
+        case height
+        case createdAt
+        case url
+        case thumbnailURL = "thumbnailUrl"
+        case expiresAt
+    }
+}
+
+enum PackageFileType: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
+    case imageJpeg = "image/jpeg"
+    case imagePng = "image/png"
+    case imageWebp = "image/webp"
+    case applicationPdf = "application/pdf"
+
+    var id: String { rawValue }
+}
+
+struct AddPackageFileResponse: Codable, Equatable, Hashable, Sendable {
+    var file: PackageFile
+    var package: Parcel
 }
 
 struct PackageListResponse: Codable, Equatable, Hashable, Sendable {
@@ -4543,7 +4587,8 @@ struct CreatePackageRequest: Codable, Equatable, Hashable, Sendable {
 }
 
 struct RenamePackageRequest: Codable, Equatable, Hashable, Sendable {
-    var label: String
+    var label: String? = nil
+    var note: String? = nil
 }
 
 struct ChangePackageCarrierRequest: Codable, Equatable, Hashable, Sendable {
@@ -5167,6 +5212,7 @@ struct ClaimParcelLink: Codable, Equatable, Hashable, Sendable, Identifiable {
     var id: String
     var key: String? = nil
     var label: String? = nil
+    var note: String? = nil
 }
 
 struct ClaimParcelsRequest: Codable, Equatable, Hashable, Sendable {
@@ -5311,6 +5357,7 @@ struct GiftWords: Codable, Equatable, Hashable, Sendable {
     var name: String? = nil
     var note: String? = nil
     var from: String? = nil
+    var early: Bool? = nil
 }
 
 enum TrackingProviderCheckOutcome: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
@@ -5467,6 +5514,7 @@ struct TokenParcel: Codable, Equatable, Hashable, Sendable, Identifiable {
     var sender: String? = nil
     var archived: Bool
     var addedAt: String
+    var hasNote: Bool? = nil
 }
 
 struct TokenParcelsResponse: Codable, Equatable, Hashable, Sendable {
@@ -5609,6 +5657,10 @@ enum ErrorResponseScope: String, Codable, CaseIterable, Hashable, Sendable, Iden
 
 enum ErrorResponseCode: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
     case recentSignIn = "recent_sign_in"
+    case fileTooBig = "file_too_big"
+    case fileType = "file_type"
+    case parcelFilesFull = "parcel_files_full"
+    case accountFilesFull = "account_files_full"
 
     var id: String { rawValue }
 }
@@ -5824,6 +5876,8 @@ extension Parcel {
         id = try values.decode(UUID.self, forKey: .id)
         trackingNumber = try values.decode(String.self, forKey: .trackingNumber)
         label = try values.decode(String.self, forKey: .label)
+        note = try values.decodeIfPresent(String.self, forKey: .note)
+        files = try values.decodeIfPresent([PackageFile].self, forKey: .files)
         carrier = try values.decode(CarrierID.self, forKey: .carrier)
         createdAt = try values.decode(String.self, forKey: .createdAt)
         expectedDelivery = try values.decodeIfPresent(String.self, forKey: .expectedDelivery)

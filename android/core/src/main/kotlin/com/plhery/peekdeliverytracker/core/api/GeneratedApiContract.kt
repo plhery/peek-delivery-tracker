@@ -4444,6 +4444,8 @@ data class Parcel(
     val id: UUID,
     @SerialName("tracking_number") val trackingNumber: String,
     val label: String,
+    val note: String? = null,
+    val files: List<PackageFile>? = null,
     val carrier: CarrierId,
     @SerialName("created_at") val createdAt: String,
     @SerialName("expected_delivery") val expectedDelivery: String? = null,
@@ -4473,6 +4475,39 @@ data class Parcel(
 )
 
 @Serializable
+data class PackageFile(
+    val id: UUID,
+    val name: String,
+    @SerialName("content_type") val contentType: PackageFileType,
+    val size: Int,
+    val width: Int? = null,
+    val height: Int? = null,
+    @SerialName("created_at") val createdAt: String,
+    val url: String,
+    @SerialName("thumbnail_url") val thumbnailUrl: String? = null,
+    @SerialName("expires_at") val expiresAt: String,
+)
+
+@Serializable
+enum class PackageFileType(val rawValue: String) {
+    @SerialName("image/jpeg") ImageJpeg("image/jpeg"),
+    @SerialName("image/png") ImagePng("image/png"),
+    @SerialName("image/webp") ImageWebp("image/webp"),
+    @SerialName("application/pdf") ApplicationPdf("application/pdf"),
+    ;
+
+    companion object {
+        fun fromRawValue(rawValue: String): PackageFileType? = entries.firstOrNull { it.rawValue == rawValue }
+    }
+}
+
+@Serializable
+data class AddPackageFileResponse(
+    val file: PackageFile,
+    @SerialName("package") val parcel: Parcel,
+)
+
+@Serializable
 data class PackageListResponse(
     val packages: List<Parcel>,
 )
@@ -4497,7 +4532,8 @@ data class CreatePackageRequest(
 
 @Serializable
 data class RenamePackageRequest(
-    val label: String,
+    val label: String? = null,
+    val note: String? = null,
 )
 
 @Serializable
@@ -5025,6 +5061,7 @@ data class ClaimParcelLink(
     val id: String,
     val key: String? = null,
     val label: String? = null,
+    val note: String? = null,
 )
 
 @Serializable
@@ -5195,6 +5232,7 @@ data class GiftWords(
     val name: String? = null,
     val note: String? = null,
     val from: String? = null,
+    val early: Boolean? = null,
 )
 
 @Serializable
@@ -5378,6 +5416,7 @@ data class TokenParcel(
     val sender: String? = null,
     val archived: Boolean,
     val addedAt: String,
+    val hasNote: Boolean? = null,
 )
 
 @Serializable
@@ -5502,6 +5541,10 @@ enum class ErrorResponseScope(val rawValue: String) {
 @Serializable
 enum class ErrorResponseCode(val rawValue: String) {
     @SerialName("recent_sign_in") RecentSignIn("recent_sign_in"),
+    @SerialName("file_too_big") FileTooBig("file_too_big"),
+    @SerialName("file_type") FileType("file_type"),
+    @SerialName("parcel_files_full") ParcelFilesFull("parcel_files_full"),
+    @SerialName("account_files_full") AccountFilesFull("account_files_full"),
     ;
 
     companion object {

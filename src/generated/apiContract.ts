@@ -72646,6 +72646,8 @@ export interface ApiPackageRow {
   "id": string;
   "tracking_number": string;
   "label": string;
+  "note"?: string;
+  "files"?: Array<ApiPackageFile>;
   "carrier": ApiCarrierId;
   "created_at": string;
   "expected_delivery": string | null;
@@ -72726,6 +72728,26 @@ export interface ApiPackageRow {
   "seen_at"?: string;
 }
 
+export interface ApiPackageFile {
+  "id": string;
+  "name": string;
+  "content_type": ApiPackageFileType;
+  "size": number;
+  "width"?: number;
+  "height"?: number;
+  "created_at": string;
+  "url": string;
+  "thumbnail_url": string | null;
+  "expires_at": string;
+}
+
+export type ApiPackageFileType = "image/jpeg" | "image/png" | "image/webp" | "application/pdf";
+
+export interface ApiAddPackageFileResponse {
+  "file": ApiPackageFile;
+  "package": ApiPackageRow;
+}
+
 export interface ApiPackageListResponse {
   "packages": Array<ApiPackageRow>;
 }
@@ -72747,7 +72769,8 @@ export interface ApiCreatePackageRequest {
 }
 
 export interface ApiRenamePackageRequest {
-  "label": string;
+  "label"?: string;
+  "note"?: string | null;
 }
 
 export interface ApiChangePackageCarrierRequest {
@@ -72791,7 +72814,7 @@ export interface ApiErrorResponse {
   "error": string;
   "packageId"?: string;
   "scope"?: "daily";
-  "code"?: "recent_sign_in";
+  "code"?: "recent_sign_in" | "file_too_big" | "file_type" | "parcel_files_full" | "account_files_full";
 }
 
 export interface ApiPushConfigResponse {
@@ -73153,6 +73176,7 @@ export interface ApiClaimParcelLink {
   "id": string;
   "key"?: string;
   "label"?: string;
+  "note"?: string;
 }
 
 export interface ApiClaimParcelsRequest {
@@ -73263,6 +73287,7 @@ export interface ApiGiftWords {
   "name": string | null;
   "note": string | null;
   "from": string | null;
+  "early"?: boolean;
 }
 
 export type ApiTrackingProviderCheckOutcome = "history" | "no_history" | "input_required" | "unavailable" | "deferred";
@@ -73370,6 +73395,7 @@ export interface ApiTokenParcel {
   "sender": string | null;
   "archived": boolean;
   "addedAt": string;
+  "hasNote"?: boolean;
 }
 
 export interface ApiTokenParcelsResponse {

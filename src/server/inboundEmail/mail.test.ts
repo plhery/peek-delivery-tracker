@@ -90,7 +90,7 @@ describe('reading a forwarded shipping email', () => {
   });
 
   it.each([
-    ['further down the message',`Your parcel ${UPS} is on its way.\nThanks for your order.\nSee you soon.\n01.11.2026 09:15 Example Shop <notice@example-shop.com>:`],
+    ['further down the message', `Your parcel ${UPS} is on its way.\nThanks for your order.\nSee you soon.\n01.11.2026 09:15 Example Shop <notice@example-shop.com>:`],
     ['with the forwarder\'s own address', `2026-11-01 09:15 Alex Example <ALEX@example.com>:\nYour parcel ${UPS} is on its way.`],
     ['with the forwarder\'s own address alone', `2026-11-01 09:15 ALEX@example.com:\nYour parcel ${UPS} is on its way.`],
     ['without a time', `01.11.2026 Example Shop <notice@example-shop.com>:\nYour parcel ${UPS} is on its way.`],

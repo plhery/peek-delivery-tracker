@@ -1,6 +1,6 @@
 ---
-title: Rastreamento UniUni: status, entregas perdidas e contato
-description: Rastreie um pacote da UniUni no Canadá ou nos EUA: formato do código, significado dos status, entregas perdidas, fotos da entrega e suporte.
+title: Rastreamento UniUni: status, entrega não realizada e contato
+description: Rastreie um pacote da UniUni no Canadá ou nos EUA: formato do código, significado dos status, entregas não realizadas, fotos da entrega e suporte.
 slug: rastreamento-uniuni
 published: 2026-11-24
 updated: 2026-11-24
@@ -51,11 +51,11 @@ Os textos podem variar: `Shipping information received. Your parcel is on its wa
 
 Uma tentativa sem sucesso na página da UniUni mostra o motivo entre parênteses. Após a segunda tentativa falha, o status passa para `storage`. Quando o pacote vai para uma transportadora terceirizada, entram os eventos dela com o texto próprio, como `Item out for delivery` ou `Parcel is ready for pickup`.
 
-## Entrega da UniUni, retirada e entregas perdidas
+## Entrega da UniUni, retirada e entregas não realizadas
 
 A UniUni informa aos remetentes que entrega do dia seguinte até 7 dias, cobrindo 80% do Canadá e 65% dos Estados Unidos. Uma data prevista só aparece quando a UniUni recebe o pacote fisicamente, e a página de rastreamento pode mostrar uma janela de horário para a entrega.
 
-**Entrega perdida.** Após a primeira tentativa sem sucesso, a UniUni diz que tenta de novo em até 48 horas na maioria dos casos, sem que você precise fazer nada, a menos que precise corrigir seus dados. Após a segunda tentativa falha, o pacote volta ao depósito da UniUni. Quando o rastreamento mostrar `storage`, peça nova entrega pelo chatbot da UniUni informando endereço, dados de contato e instruções de entrega. O pacote fica guardado por 30 dias. Uma tentativa também pode ser rejeitada por ser caixa postal (USPS PO box) ou endereço incorreto: atualize os dados de entrega.
+**Entrega não realizada.** Após a primeira tentativa sem sucesso, a UniUni diz que tenta de novo em até 48 horas na maioria dos casos, sem que você precise fazer nada, a menos que precise corrigir seus dados. Após a segunda tentativa falha, o pacote volta ao depósito da UniUni. Quando o rastreamento mostrar `storage`, peça nova entrega pelo chatbot da UniUni informando endereço, dados de contato e instruções de entrega. O pacote fica guardado por 30 dias. Uma tentativa também pode ser rejeitada por ser caixa postal (USPS PO box) ou endereço incorreto: atualize os dados de entrega.
 
 **Endereço e instruções.** Para incluir número de apartamento, código de portão ou interfone ou telefone, use o chatbot da UniUni; quando o pacote já saiu para entrega, o motorista pode não receber a alteração a tempo. A UniUni não entrega em agências postais nem caixas postais e, segundo seu FAQ em francês, tampouco em bases militares.
 

@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Straightship: códigos STRTD, status e entrega
-description: Rastreie um pacote da Straightship no Canadá: códigos STRTD, STRCA e STSH, significado dos status, entregas perdidas, alfândega e contato.
+description: Rastreie um pacote da Straightship no Canadá: códigos STRTD, STRCA e STSH, significado dos status, entregas não realizadas, alfândega e contato.
 slug: rastreamento-straightship
 published: 2026-11-24
 updated: 2026-11-24

@@ -14993,7 +14993,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "uniuni",
       "catalog": "uniuni",
       "slug": "rastreamento-uniuni",
-      "title": "Rastreamento UniUni: status, entregas perdidas e contato",
+      "title": "Rastreamento UniUni: status, entrega não realizada e contato",
       "name": "UniUni",
       "color": "#f68841"
     },

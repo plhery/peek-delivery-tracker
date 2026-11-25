@@ -72,7 +72,7 @@ Canais de contato listados nas páginas da DPD Alemanha:
 
 O número 06021 8430 pertence à sede administrativa.
 
-> Os SMS da DPD vêm exclusivamente de +49 177 1787807 e os e-mails apenas de @dpd.de ou domínios oficiais da DPD. A empresa alerta sobre cobranças falsas de pequenas taxas por entregas perdidas: não clique nesses links.
+> Os SMS da DPD vêm exclusivamente de +49 177 1787807 e os e-mails apenas de @dpd.de ou domínios oficiais da DPD. A empresa alerta sobre cobranças falsas de pequenas taxas por entregas não realizadas: não clique nesses links.
 
 ## Como rastrear uma encomenda DPD Alemanha com o Peek
 

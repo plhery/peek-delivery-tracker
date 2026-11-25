@@ -10,7 +10,7 @@ A DPD Poland (DPD Polska) é uma transportadora sediada em Varsóvia pertencente
 
 ## Onde encontrar seu código DPD na Polônia
 
-A DPD informa que seus códigos de encomenda têm 14 caracteres: na prática, 13 dígitos e uma letra, ou 14 dígitos. O aplicativo DPD Mobile lista automaticamente os pacotes vinculados ao telefone ou e-mail usado no cadastro, sem precisar digitar o código. Ainda sem código? Veja [como encontrar o código de rastreamento](guide:find-tracking-number).
+A DPD informa que seus códigos de encomenda têm 14 caracteres: na prática, 13 dígitos e uma letra, ou 14 dígitos. O aplicativo DPD Mobile lista os pacotes vinculados ao telefone ou e-mail usado no cadastro, sem precisar digitar o código. Ainda sem código? Veja [como encontrar o código de rastreamento](guide:find-tracking-number).
 
 | Código (inventado) | O que é |
 | --- | --- |
@@ -39,15 +39,15 @@ O site de rastreamento da DPD abre em polonês; mude para "English" para ver est
 | `Parcel return` | Retornando ao remetente sob um novo código; o Peek mostra "Devolvida ao remetente". |
 | `Parcel delivered` | Entregue. |
 
-"Collected" significa que o entregador ou o ponto de retirada recebeu o pacote — não você —, portanto `Parcel collected by pickup point` é uma boa notícia. `Parcel not delivered - recipient resigned` indica recusa da encomenda, que retorna ao remetente por conta dele. `Mail notification` e `SMS notification` são avisos enviados pela DPD, não movimentações físicas.
+"Collected" significa que o entregador ou o ponto de retirada recebeu o pacote — não você —, portanto `Parcel collected by pickup point` é uma boa notícia. `Parcel not delivered - recipient resigned` indica recusa da encomenda, que retorna ao remetente à custa do remetente. `Mail notification` e `SMS notification` são avisos enviados pela DPD, não movimentações físicas.
 
 ## Entregas da DPD na Polônia: Predict, pontos Pickup e armários
 
 **Avisos.** A DPD informa o horário de entrega por e-mail ou SMS (DPD Predict) e anuncia a primeira tentativa da mesma forma. No dia da entrega você pode acompanhar o entregador no mapa; o telefone dele aparece no DPD Mobile assim que o pacote sai para entrega.
 
-**Alterações.** Depois que o entregador coleta o pacote, o DPD Mobile ou o Moja Paczka (mojapaczka.dpd.com.pl, com o código do pacote e um PIN) permitem adiar a data em até três dias úteis, mudar o endereço, escolher um vizinho ou local seguro, enviar para um ponto ou armário DPD Pickup ou recusar o pacote. Encomendas de alguns remetentes — entre eles Temu, AliExpress e Shein — não podem ser redirecionadas, exceto para um ponto Pickup na rota do entregador.
+**Alterações.** Depois que o entregador coleta o pacote, o DPD Mobile ou o Moja Paczka (mojapaczka.dpd.com.pl, com o código do pacote e um PIN) permitem mudar a data em até três dias úteis, mudar o endereço, escolher um vizinho ou local seguro, enviar para um ponto ou armário DPD Pickup ou recusar o pacote. Encomendas de alguns remetentes — entre eles Temu, AliExpress e Shein — não podem ser redirecionadas, exceto para um ponto Pickup na rota do entregador.
 
-**Pontos Pickup e armários.** A DPD soma mais de 35.000 pontos Pickup e armários, incluindo lojas Żabka, Lidl e Auchan. O pacote fica guardado por dois dias úteis completos; o prazo exato aparece na notificação da DPD e no DPD Mobile e não pode ser prorrogado, voltando depois ao remetente. Retire com o DPD Mobile ou digitando no teclado do armário o código enviado por e-mail pela DPD. Outra pessoa pode usar seu código se não houver documentos a assinar. Se o ponto escolhido estiver lotado, a DPD envia o pacote para um ponto próximo e avisa você.
+**Pontos Pickup e armários.** A DPD soma mais de 35.000 pontos Pickup e armários, incluindo lojas Żabka, Lidl e Auchan. O pacote fica guardado por dois dias úteis completos; o prazo exato aparece na notificação da DPD e no DPD Mobile e não pode ser prorrogado; depois disso, o pacote volta ao remetente. Retire com o DPD Mobile ou digitando no teclado do armário o código enviado por e-mail pela DPD. Outra pessoa pode usar seu código se não houver documentos a assinar. Se o ponto escolhido estiver lotado, a DPD envia o pacote para um ponto próximo e avisa você.
 
 Entrega aos sábados só ocorre quando o remetente contrata o serviço.
 
@@ -77,9 +77,9 @@ A página de contato em inglês não lista telefones, e nenhuma página informa 
 
 ## Como rastrear um pacote da DPD Poland no Peek
 
-O [Peek](/) identifica a DPD Poland de imediato em códigos com 13 dígitos e uma letra. Em 14 dígitos iniciados em `13`, consulta as transportadoras prováveis, começando pela DPD Poland, e exibe "DPD Poland está com esta encomenda" quando a DPD reconhece o código. Para outros números de 14 dígitos, escolha DPD Poland em "Trocar". Links de tracktrace.dpd.com.pl ou tt.dpd.com.pl com `p1=` também funcionam; códigos de envio, referências e números de pedido não são aceitos.
+O [Peek](/) identifica a DPD Poland de imediato em códigos com 13 dígitos e uma letra. Em 14 dígitos iniciados em `13`, consulta as transportadoras prováveis, começando pela DPD Poland, e exibe "DPD Poland está com esta encomenda." quando a DPD reconhece o código. Para outros números de 14 dígitos, escolha DPD Poland em "Trocar". Links de tracktrace.dpd.com.pl ou tt.dpd.com.pl com `p1=` também funcionam; códigos de envio, referências e números de pedido não são aceitos.
 
-O Peek lê o rastreamento em inglês da DPD e exibe status, histórico e horário da entrega no texto original da DPD. A DPD não informa cidade dos eventos, previsão de entrega, remetente nem peso, e o Peek omite seu nome e o endereço do ponto de retirada. O Peek lê todos os horários no fuso de Varsóvia, incluindo o pré-registro e eventos no exterior. Enquanto o pacote estiver aberto, ou no dia da entrega com alertas ligados, verifica até a cada 10 minutos (até a cada 2 minutos a partir das 6h no horário local no dia em que a DPD registra saída para entrega, enquanto o rastreador da DPD responder; por serviços de rastreamento, até a cada 15 minutos naquele dia enquanto o pacote estiver aberto ou com alertas ligados); fora disso, de hora em hora. Pode avisar em "Cada movimentação", "Etapas importantes" ou "Só a entrega". Após dois dias sem novidade (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Depois de `Sent outside Poland`, o Peek continua lendo o rastreamento da DPD Poland, que mostra os eventos da rede DPD do país de destino até a entrega sem consultar o site de lá; ele não acompanha um novo código de devolução.
+O Peek lê o rastreamento em inglês da DPD e exibe status, histórico e horário da entrega no texto original da DPD. A DPD não informa o local dos eventos, previsão de entrega, remetente nem peso, e o Peek omite seu nome e o endereço do ponto de retirada. O Peek lê todos os horários no fuso de Varsóvia, incluindo o pré-registro e eventos no exterior. Enquanto o pacote estiver aberto, ou no dia da entrega com alertas ligados, verifica até a cada 10 minutos (até a cada 2 minutos a partir das 6h no horário local no dia em que a DPD registra saída para entrega, enquanto o rastreador da DPD responder; por serviços de rastreamento, até a cada 15 minutos naquele dia enquanto o pacote estiver aberto ou com alertas ligados); fora disso, de hora em hora. Pode avisar em "Cada movimentação", "Etapas importantes" ou "Só a entrega". Após dois dias sem novidade (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Depois de `Sent outside Poland`, o Peek continua lendo o rastreamento da DPD Poland, que mostra os eventos da rede DPD do país de destino até a entrega; o Peek não consulta o rastreador da DPD desse país nem acompanha um novo código de devolução.
 
 ## Perguntas sobre o rastreamento DPD na Polônia
 
@@ -108,4 +108,5 @@ Sim, no aplicativo DPD Mobile, que lista encomendas associadas ao telefone ou e-
 - [DPD Poland: O DPD Polska](https://www.dpd.com/pl/pl/o-dpd/o-dpd-polska/) – Geopost e La Poste
 - [DPD Poland: Szczegółowe Warunki Świadczenia Usług](https://www.dpd.com/wp-content/uploads/sites/260/2026/08/SWSU_01032026_PL.pdf) – ponto de retirada lotado
 - [DPD Poland: Regulamin w obrocie krajowym](https://www.dpd.com/wp-content/uploads/sites/260/2025/01/RUK_01.01.2024PL.pdf) – quem pode reclamar, recusa, dano oculto e UKE
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê
 :::

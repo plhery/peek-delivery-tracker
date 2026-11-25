@@ -59,7 +59,7 @@ Os carteiros costumam entregar das 7h às 17h, de segunda a sexta-feira; um paco
 
 `Contact sender` indica que a encomenda voltou por dados incorretos ou incompletos, ou porque um aviso de retirada ficou sem resposta por 10 dias úteis. `Returned` significa que já voltou ao remetente, que deve providenciar o reenvio.
 
-## Entrega perdida, retirada em Post Office e Parcel Lockers
+## Entrega não realizada, retirada em Post Office e Parcel Lockers
 
 Se não houver ninguém em casa nem local seguro, a encomenda segue para uma Post Office próxima ou pode ir para um Parcel Locker caso seu celular conste no envio (você recebe um código de acesso). Usuários do MyPost recebem aviso por e-mail, aplicativo ou SMS; outros destinatários ainda podem receber um cartão "Sorry We Missed You".
 
@@ -121,7 +121,7 @@ Não. Os serviços International Post Registered e International Economy (Air e 
 - [Australia Post: Taking longer than expected](https://auspost.com.au/help/parcel-tracking/taking-longer-than-expected) – Pending e Ready for processing, 5 dias úteis, centros de triagem
 - [Australia Post: Delays and disruptions](https://auspost.com.au/help/parcel-tracking/delays-and-disruptions) – Possible delay
 - [Australia Post: Return to sender](https://auspost.com.au/help/delivered-parcel/return-to-sender) – Returned, Returning to sender, Contact sender
-- [Australia Post: Missed parcel deliveries](https://auspost.com.au/personal/receiving/parcel-deliveries/missed-parcel-deliveries) – Post Office ou locker após tentativa perdida, documento, autorização para retirada, transferência por $7,55
+- [Australia Post: Missed parcel deliveries](https://auspost.com.au/personal/receiving/parcel-deliveries/missed-parcel-deliveries) – Post Office ou locker após entrega não realizada, documento, autorização para retirada, transferência por $7,55
 - [Australia Post: Requested delivery but parcel at Post Office](https://auspost.com.au/help/delivered-parcel/parcel-at-post-office) – guarda por 10 dias úteis, sem reentrega, transferência por $7,55, isenção da taxa via relato de problema
 - [Australia Post: Transfer to another post office](https://helpandsupport.auspost.com.au/s/products-and-services?transfertoPO) – formulário de transferência ainda mostrando $7,20
 - [Australia Post: 24/7 Parcel Lockers](https://auspost.com.au/help/collection-delivery/parcel-lockers) – 24/7 na maioria dos locais, 48 horas sem fins de semana e feriados, código de acesso, lembrete

@@ -90,7 +90,7 @@ O Peek verifica até a cada 10 minutos, ou a cada 2 minutos no dia em que a enco
 
 ### A Swiss Post entrega aos sábados?
 
-Sim, desde que você agende em "My consignments": custa CHF 3,80 quando escolhido antecipadamente, ou CHF 7 como segunda tentativa após uma entrega perdida.
+Sim, desde que você agende em "My consignments": custa CHF 3,80 quando escolhido antecipadamente, ou CHF 7 como segunda tentativa após uma entrega não realizada.
 
 ### O que significa "delivery date unknown" na Swiss Post?
 

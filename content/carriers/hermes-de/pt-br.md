@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Hermes Alemanha: status em alemão e entregas
-description: Rastreie um pacote da Hermes na Alemanha: onde achar o código, significado dos status em alemão, ParcelShops, entregas perdidas e contato.
+description: Rastreie um pacote da Hermes na Alemanha: onde achar o código, significado dos status em alemão, ParcelShops, entregas não realizadas e contato.
 slug: rastreamento-hermes-alemanha
 published: 2026-11-24
 updated: 2026-11-24
@@ -39,7 +39,7 @@ As frases e etiquetas em alemão que você vai encontrar, em ordem:
 
 Se a primeira linha não mudar em 2 a 3 dias, a Hermes orienta falar com o remetente. `Für die Sendung wurde ein WunschPaketShop gebucht.` indica apenas uma preferência agendada, não uma movimentação. Deixado com um vizinho? O cartão ou o e-mail da Hermes informa qual vizinho recebeu, assim como o rastreamento quando você digita seu código postal.
 
-## Entregas da Hermes, ParcelShops e entregas perdidas
+## Entregas da Hermes, ParcelShops e entregas não realizadas
 
 **Quando chega.** De segunda a sábado, das 8h às 20h. Na Alemanha, o rastreamento, o aplicativo ou um e-mail geralmente mostram no dia anterior uma janela não vinculativa de até 4 horas.
 

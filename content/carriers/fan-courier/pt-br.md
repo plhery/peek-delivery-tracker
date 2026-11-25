@@ -1,6 +1,6 @@
 ---
 title: Rastreamento FAN Courier: códigos AWB, status e FANbox
-description: Rastreie um pacote da FAN Courier na Romênia: onde achar o código AWB, significado dos status, armários FANbox, entregas perdidas e contato.
+description: Rastreie um pacote da FAN Courier na Romênia: onde achar o código AWB, significado dos status, armários FANbox, entregas não realizadas e contato.
 slug: rastreamento-fan-courier
 published: 2026-11-24
 updated: 2026-11-24
@@ -46,7 +46,7 @@ Dois status confundem as pessoas. `Picked up` significa que a FAN recolheu o pac
 
 Cada movimentação tem texto próprio, como `Shipment sorted`, ou `Shipment taken over for delivery` e `Delivery in process` (ambos indicando saída para entrega), resumidos pela página nos marcos acima. Depois da entrega, a página oculta eventos posteriores.
 
-## Entregas da FAN Courier, FANbox e entregas perdidas
+## Entregas da FAN Courier, FANbox e entregas não realizadas
 
 Encomendas padrão chegam em 1 a 3 dias úteis após a coleta, segundo a FAN. Os entregadores trabalham de segunda a sexta-feira, das 9h às 17h, e aos sábados das 9h às 14h somente quando o remetente contrata a entrega de sábado.
 

@@ -55,13 +55,13 @@ A ORLEN Paczka entrega em lockers (*automat paczkowy*), muitos instalados em pos
 
 **Encomendas Allegro Delivery** são geridas pelo próprio Allegro, que cuida da entrega e do atendimento: o aviso de retirada chega por e-mail, SMS ou no app do Allegro, e você rastreia e retira pelo app do Allegro em "Moje przesyłki".
 
-## Prazos, atrasos, avarias e reclamações na ORLEN Paczka
+## Prazos, atrasos, danos e reclamações na ORLEN Paczka
 
 A ORLEN destaca a entrega no dia seguinte como diferencial, e seu FAQ detalha: 1 dia útil para 98% dos envios de lojas online, e de 1 a 3 dias úteis para remetentes pessoa física ou Vinted. Se o rastreamento estacionar, contate a loja (titular do contrato) e veja [rastreamento que não atualiza](guide:tracking-not-updating). Se o status indicar extravio, a ORLEN Paczka orienta abrir chamado pelo formulário de contato; veja também [encomenda extraviada](guide:lost-parcel).
 
 **Atraso.** Se a encomenda chegar depois do prazo-limite (mais de quatro dias úteis após o dia da postagem), a ORLEN Paczka informa que o destinatário pode pedir reembolso pelo serviço não cumprido.
 
-**Avaria.** A ORLEN Paczka integra o registro de operadoras postais da reguladora polonesa UKE, cujas regras gerais determinam: dano visível no recebimento deve constar em relatório lavrado com o atendente, e dano oculto deve ser reportado em até 7 dias após o recebimento.
+**Danos.** A ORLEN Paczka integra o registro de operadoras postais da reguladora polonesa UKE, cujas regras gerais determinam: dano visível no recebimento deve constar em relatório lavrado com o atendente, e dano oculto deve ser reportado em até 7 dias após o recebimento.
 
 **Quem pode reclamar.** Pelas mesmas regras, o remetente ou você depois que a encomenda for entregue (ou se o remetente transferir o direito). A reclamação pode ser feita por escrito, eletronicamente — por exemplo no [formulário de reclamação da ORLEN Paczka](https://www.orlenpaczka.pl/reklamacje/) — ou verbalmente, em até 12 meses da postagem. A operadora tem 30 dias para responder; silêncio no prazo implica aceitação. A indenização segue a lei postal e os termos do serviço: a ORLEN Paczka afirma responsabilidade de até 500 zł para envios de pessoa física e até 5.000 zł para empresas.
 
@@ -71,19 +71,19 @@ Para envios Allegro Delivery, fale com o Allegro, responsável pelo suporte dess
 
 - **Central telefônica:** 22 33 33 999 (tarifa da operadora), segunda a sexta 7h–22h, sábado 9h–19h (o FAQ cita até as 16h) e domingo 10h–16h, horário da Polônia.
 - **[Formulário de contato](https://www.orlenpaczka.pl/formularz-kontaktowy/)** para falta de código de retirada ou extravio.
-- **[Formulário de reclamação](https://www.orlenpaczka.pl/reklamacje/)** para extravio, avaria ou atraso, aberto a remetentes, destinatários e pagadores.
+- **[Formulário de reclamação](https://www.orlenpaczka.pl/reklamacje/)** para extravio, dano ou atraso, aberto a remetentes, destinatários e pagadores.
 
 A ORLEN Paczka não envia links por SMS nem cobra taxas extras por link: mensagens desse tipo são golpe. Veja [golpes de SMS de entrega](guide:delivery-scam-texts).
 
 ## Como rastrear encomendas da ORLEN Paczka no Peek
 
-O [Peek](/) reconhece códigos de 13 dígitos iniciados em `210` com dígito verificador válido. Como outras transportadoras compartilham esse formato, ele consulta ORLEN Paczka, Ukrposhta e [FAN Courier](carrier:fan-courier) ao mesmo tempo — e Delhivery, Econt, Ozon Logistics e Paquetexpress, fora de seus países, apenas se nenhuma das três conhecer o código. Quando só a ORLEN Paczka encontra, mostra "ORLEN Paczka está com esta encomenda". Para outros códigos de 13 dígitos começando em 2 ou 3, selecione ORLEN Paczka em "Trocar" ("Trocar transportadora" num pacote já adicionado) ou cole o link de orlenpaczka.pl que contenha os 13 dígitos. Os códigos de postagem de 7 e 10 dígitos não são rastreáveis no Peek, e códigos `AD` não pertencem à ORLEN Paczka.
+O [Peek](/) reconhece códigos de 13 dígitos iniciados em `210` com dígito verificador válido. Como outras transportadoras compartilham esse formato, ele consulta ORLEN Paczka, Ukrposhta e [FAN Courier](carrier:fan-courier) ao mesmo tempo — e Delhivery, Econt e Paquetexpress, fora de seus países, apenas se nenhuma das três conhecer o código. Quando só a ORLEN Paczka conhece o código, mostra "ORLEN Paczka está com esta encomenda." Para outros códigos de 13 dígitos começando em 2 ou 3, selecione ORLEN Paczka em "Trocar" ("Trocar transportadora" num pacote já adicionado) ou cole o link de orlenpaczka.pl que contenha os 13 dígitos. Os códigos de postagem de 7 e 10 dígitos não são rastreáveis no Peek, e códigos `AD` não pertencem à ORLEN Paczka.
 
 O Peek exibe os textos originais em polonês, a cidade do centro de triagem no mapa quando citada e o horário da retirada, lendo os horários em Varsóvia e convertendo para o fuso do seu dispositivo; em peektracker.com e nos apps de iPhone e Android, o histórico termina com "Horários no seu fuso horário:" e o nome do fuso. Não há ponto de retirada, previsão de entrega, peso nem remetente, e o código do envio de devolução é descartado. Um pacote da Vinted entregue à transportadora de outro país não é seguido adiante e permanece em trânsito. Volumes já retirados saem do rastreamento da ORLEN Paczka após alguns meses.
 
 Enquanto o pacote está aberto no Peek, a verificação acontece até a cada 10 minutos. Como a ORLEN Paczka não fornece dia previsto nem registra saída para entrega, o Peek nunca ativa o ritmo de dia de entrega nem checagens a cada 2 minutos; fora isso, verifica de hora em hora. Após 12 horas apenas em "Etiqueta criada" ou "Recebida pela transportadora", ou dois dias sem novidades, verifica de hora em hora de qualquer modo, e a cada 6 horas depois de sete dias em "Etiqueta criada".
 
-Quando a leitura mais recente completa quatro dias e a encomenda continua em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek destaca o dia da leitura, como "Sem atualizações desde seg., 12 de out.", com o aviso "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando ORLEN Paczka." e o link "Pedir ajuda a ORLEN Paczka" para a página de contato. Após três semanas sem nova leitura, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando ORLEN Paczka."
+Quando a leitura mais recente completa quatro dias e a encomenda continua em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek destaca o dia da leitura, como "Sem atualizações desde seg 12 out", com o aviso "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando ORLEN Paczka." e o link "Pedir ajuda a ORLEN Paczka" para a página de contato. Após três semanas sem nova leitura, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando ORLEN Paczka."
 
 Você pode configurar alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega".
 
@@ -104,7 +104,7 @@ Não: a ORLEN opera lockers e pontos de retirada apenas na Polônia, e o FAQ em 
 :::sources
 - [ORLEN Paczka: Najczęściej zadawane pytania](https://www.orlenpaczka.pl/faq/) – código de retirada (5 ou 6 dígitos, SMS, e-mail, QR, app), retirada por terceiros, 3 dias úteis e devolução, domingo, sem pagamento na entrega, prazos, reembolso após 4 dias úteis, extravio, limites de 500/5.000 zł, entregas só na Polônia e alerta contra golpes
 - [ORLEN Paczka: Kontakt](https://www.orlenpaczka.pl/kontakt/) – telefone 22 33 33 999, horários e link do formulário
-- [ORLEN Paczka: Reklamacje](https://www.orlenpaczka.pl/reklamacje/) – formulário de reclamação para extravio, avaria e atraso
+- [ORLEN Paczka: Reklamacje](https://www.orlenpaczka.pl/reklamacje/) – formulário de reclamação para extravio, dano e atraso
 - [ORLEN: Automaty ORLEN Paczki zasilane energią słoneczną (17 April 2026)](https://www.orlen.pl/pl/o-firmie/media/komunikaty-prasowe/biezace/2026/kwieciec-2026/automaty-orlen-paczki-zasilane-energia-sloneczna-) – lockers e pontos na Polônia, entrega no dia seguinte e guarda de 3 dias úteis
 - [ORLEN: ORLEN Paczka](https://www.orlen.pl/pl/dla-ciebie/orlen-paczka) – lockers em postos de combustível, bancas Ruch e parceiros
 - [ORLEN: Automaty ORLEN Paczka dostępne już w wielu polskich miastach (2021)](https://www.orlen.pl/pl/o-firmie/media/komunikaty-prasowe/archiwum/2021/wrzesien/Automaty-ORLEN-Paczka-dostepne-juz-w-wielu-polskich-miastach) – lançamento em 2021, parceria RUCH e abertura pelo app
@@ -114,5 +114,6 @@ Não: a ORLEN opera lockers e pontos de retirada apenas na Polônia, e o FAQ em 
 - [Allegro: Regulamin Allegro Delivery](https://policies.allegro.com/doc/e5cf7a904b3b08d908db62830a8bdac17b22cf354baf748e7853adff00fea84c) – aviso de retirada, coleta pelo app e devolução
 - [UKE: Rejestr operatorów pocztowych, B-00267](https://bip.uke.gov.pl/rop/rejestr-operatorow-pocztowych/?p=2&page=3&rejestr=B-00267) – registro postal oficial na Polônia
 - [UKE: Reklamacje (postal services)](https://cik.uke.gov.pl/uslugi-pocztowe/dochodzenie-roszczen/reklamacje/) – quem pode reclamar, prazo de 12 meses e resposta em 30 dias
-- [UKE: Reklamacje i odszkodowania, FAQ](https://cik.uke.gov.pl/uslugi-pocztowe/pytania-i-odpowiedzi/reklamacje-i-odszkodowania-faq/2.html) – relatório de avaria na entrega e dano oculto em 7 dias
+- [UKE: Reklamacje i odszkodowania, FAQ](https://cik.uke.gov.pl/uslugi-pocztowe/pytania-i-odpowiedzi/reklamacje-i-odszkodowania-faq/2.html) – relatório de dano na entrega e dano oculto em 7 dias
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formato do código, códigos de postagem, códigos `AD` do Allegro, textos de status (inclusive `Paczka w innym kraju`) e o que o Peek lê
 :::

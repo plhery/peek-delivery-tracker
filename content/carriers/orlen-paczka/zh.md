@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-ORLEN Paczka 是波兰本土的包裹配送网络（前身为 Paczka w RUCHu），主要配送至自助快递柜和合作自提点。你可以在 ORLEN Paczka 官网 orlenpaczka.pl 的查件页查询，或直接把单号粘贴到上方输入框。运单号即商家或卖家通知里的 13 位包裹编号。
+ORLEN Paczka 是波兰本土的包裹配送网络（前身为 Paczka w RUCHu），主要配送至自助快递柜和自提点。你可以在 ORLEN Paczka 官网 orlenpaczka.pl 的查件页查询，或直接把单号粘贴到上方输入框。运单号即商家或卖家通知里的 13 位包裹编号。
 
 ## ORLEN Paczka 运单号格式与查找位置
 
@@ -77,15 +77,15 @@ ORLEN Paczka 绝不在短信中附带链接，也不会通过链接要求补缴�
 
 ## 用 Peek 查询和跟踪 ORLEN Paczka 包裹
 
-[Peek](/) 会识别 `210` 开头且校验位正确的 13 位单号。由于多家快递共用这一格式，Peek 会同时询问 ORLEN Paczka、Ukrposhta 和 [FAN Courier](carrier:fan-courier)，并在其本国以外仅当前三家都查不到时再依次询问 Delhivery、Econt、Ozon Logistics 和 Paquetexpress；当只有 ORLEN Paczka 查到时，界面显示“ORLEN Paczka 有这个包裹的记录”。对于其他以 2 或 3 开头的 13 位单号，请点击“更换”（已添加包裹点击“更换快递公司”）手动选定 ORLEN Paczka，或直接粘贴带 13 位单号的 orlenpaczka.pl 查询链接。7 位和 10 位寄件码无法在 Peek 跟踪，`AD` 开头的单号也不属于 ORLEN Paczka。
+[Peek](/) 会识别 `210` 开头且校验位正确的 13 位单号。由于多家快递共用这一格式，Peek 会同时询问 ORLEN Paczka、Ukrposhta 和 [FAN Courier](carrier:fan-courier)，并在其本国以外仅当前三家都查不到时再依次询问 Delhivery、Econt 和 Paquetexpress；当只有 ORLEN Paczka 查到时，界面显示“ORLEN Paczka 有这个包裹的记录。”对于其他以 2 或 3 开头的 13 位单号，请点击“更换”（已添加包裹点击“更换快递公司”）手动选定 ORLEN Paczka，或直接粘贴带 13 位单号的 orlenpaczka.pl 查询链接。7 位和 10 位寄件码无法在 Peek 跟踪，`AD` 开头的单号也不属于 ORLEN Paczka。
 
 Peek 会保留波兰语原文状态，在地图上标出提及的分拣中心城市并显示取件时间；时间按华沙时间解析并换算为你设备的本地时区（在 peektracker.com 及 iPhone、Android 应用中，物流历史底部注明“时间按你所在的时区显示：”及你的时区名称）。Peek 不显示具体自提点地址、预计送达日、重量或寄件人，也会隐去退件新单号。已转交他国承运商的 Vinted 包裹不会跨接追踪，会停留在运输中状态。已取件的包裹数月后会从 ORLEN Paczka 官网下线。
 
 当你在 Peek 中打开包裹页面时，Peek 最高每 10 分钟检查一次。由于 ORLEN Paczka 不提供预计送达日期也不推送派送中扫描，Peek 不会切换到派送日高频或 2 分钟检查模式；未打开页面时每小时检查一次。若在“已生成面单”或“已揽收”状态下满 12 小时，或连续两天无新动态，无论是否打开页面均每小时检查一次；“已生成面单”满七天无动态则每 6 小时一次。
 
-当包裹仍处于“已生成面单”、“已揽收”或“运输中”且最新扫描已过四天，Peek 会按该次扫描日期提示，例如“自 10 月 12 日起没有物流更新”，并在详情页显示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 ORLEN Paczka 查询。”，附带指向 ORLEN Paczka 联系页的“向 ORLEN Paczka 寻求帮助”链接。超过三周无新扫描时，显示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 ORLEN Paczka 查询。”
+当包裹仍处于“已生成面单”、“已揽收”或“运输中”且最新扫描已过四天，Peek 会按该次扫描日期提示，例如“自10月12日周一起没有物流更新”，并在详情页显示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 ORLEN Paczka 查询。”，附带指向 ORLEN Paczka 联系页的“向 ORLEN Paczka 寻求帮助”链接。超过三周无新扫描时，显示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 ORLEN Paczka 查询。”
 
-Peek 支持按“每次扫描”、“重要环节”或“仅派送当天”发送提醒。
+Peek 可以按“每次扫描”、“重要环节”或“仅派送当天”发送提醒。
 
 ## ORLEN Paczka 查询常见问题
 
@@ -115,4 +115,5 @@ ORLEN Paczka 官网每条状态均以波兰语显示，你可以对照上方的�
 - [UKE: Rejestr operatorów pocztowych, B-00267](https://bip.uke.gov.pl/rop/rejestr-operatorow-pocztowych/?p=2&page=3&rejestr=B-00267) – 波兰邮政运营商登记信息
 - [UKE: Reklamacje (postal services)](https://cik.uke.gov.pl/uslugi-pocztowe/dochodzenie-roszczen/reklamacje/) – 投诉主体、方式、12 个月时限与 30 天答复期
 - [UKE: Reklamacje i odszkodowania, FAQ](https://cik.uke.gov.pl/uslugi-pocztowe/pytania-i-odpowiedzi/reklamacje-i-odszkodowania-faq/2.html) – 当场破损记录与 7 天隐蔽破损申报
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – 单号格式、寄件码、Allegro 的 `AD` 编号、状态原文（包括 `Paczka w innym kraju`）与 Peek 读取的信息
 :::

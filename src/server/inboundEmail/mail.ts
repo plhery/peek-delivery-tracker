@@ -53,9 +53,10 @@ const FORWARDED_SUBJECT = /^\s*(?:fwd?|fw|tr|wg|rv|enc|i|vs|doorst|pd|пер|п�
 const FORWARDED_FROM = /^[\s>*]*(?:from|von|de|da|van|od|от|från|fra|lähettäjä|发件人|寄件者)\s*:([^]*)$/i;
 /**
  * The line some mail apps open a message forwarded whole with, under its own subject: its date and time, on a 24- or
- * 12-hour clock, then its sender ("22.11.2026 17:43:04 Example Shop <notice@example-shop.com>:").
+ * 12-hour clock, then its sender ("22.11.2026 17:43:04 Example Shop <notice@example-shop.com>:"), or its address alone
+ * when the message named none ("22.11.2026 17:43:04 notice@example-shop.com:").
  */
-const DATED_SENDER = /^[\s>*]*(?:\d{1,2}[./-]\d{1,2}[./-]\d{2,4}|\d{4}-\d{1,2}-\d{1,2})[,\s]+\d{1,2}:\d{2}(?::\d{2})?(?:\s*[AaPp]\.?[Mm]\.?)?\s+([^<>]+<[^\s<>]+@[^\s<>]+>)\s*:\s*$/;
+const DATED_SENDER = /^[\s>*]*(?:\d{1,2}[./-]\d{1,2}[./-]\d{2,4}|\d{4}-\d{1,2}-\d{1,2})[,\s]+\d{1,2}:\d{2}(?::\d{2})?(?:\s*[AaPp]\.?[Mm]\.?)?\s+([^<>]+<[^\s<>]+@[^\s<>]+>|[^\s<>@:]+@[^\s<>@:]+)\s*:\s*$/;
 /** That line opens the forwarded message: it is among the body's first lines with words. */
 const DATED_SENDER_LINES = 3;
 /** Parts of a sender's domain that name the mail system rather than the shop. */

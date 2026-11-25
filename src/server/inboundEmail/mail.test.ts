@@ -79,9 +79,20 @@ describe('reading a forwarded shipping email', () => {
     expect(mail.from).toBe('alex@example.com');
   });
 
+  it('reads a dated line that gives its sender\'s address alone, under the forwarder\'s sign-off', async () => {
+    const mail = await readInboundMail(mime(
+      { From: 'Alex Example <someone@example.net>', Subject: 'Fwd: Alex Example: Example Express shipment notice' },
+      `Regards\n\nAlex Example\n\n01.11.2026 09:15:42 notice@example-express.com:\n\nYour shipment ${UPS} arrives tomorrow.`,
+    ));
+    expect(mail.origin).toBe('notice@example-express.com');
+    expect(mail.sender).toBe('example-express.com');
+    expect(mail.from).toBe('someone@example.net');
+  });
+
   it.each([
-    ['further down the message', `Your parcel ${UPS} is on its way.\nThanks for your order.\nSee you soon.\n01.11.2026 09:15 Example Shop <notice@example-shop.com>:`],
+    ['further down the message',`Your parcel ${UPS} is on its way.\nThanks for your order.\nSee you soon.\n01.11.2026 09:15 Example Shop <notice@example-shop.com>:`],
     ['with the forwarder\'s own address', `2026-11-01 09:15 Alex Example <ALEX@example.com>:\nYour parcel ${UPS} is on its way.`],
+    ['with the forwarder\'s own address alone', `2026-11-01 09:15 ALEX@example.com:\nYour parcel ${UPS} is on its way.`],
     ['without a time', `01.11.2026 Example Shop <notice@example-shop.com>:\nYour parcel ${UPS} is on its way.`],
   ])('keeps the From\'s name for a dated sender line %s', async (_, body) => {
     const mail = await readInboundMail(mime({ From: 'Alex Example <alex@example.com>', Subject: 'Your parcel' }, body));

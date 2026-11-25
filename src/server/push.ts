@@ -1022,7 +1022,7 @@ export class WebPushNotificationService {
       const subscriptionId = stringField(events[0]!, 'subscription_id');
       if (!newest || putAway(newest, times) || isOldNews(newest, times, this.now())) {
         await this.client.recordPushDeliveries(subscriptionId, events.map((event) => stringField(event, 'event_id')).filter(Boolean));
-        recordAccountPushSent('skipped', 'web');
+        recordAccountPushSent('skipped', 'webpush');
         continue;
       }
       summary.attempted += 1;
@@ -1037,7 +1037,7 @@ export class WebPushNotificationService {
           last_success_at: new Date().toISOString(),
           last_error: null,
         });
-        recordAccountPushSent('sent', 'web');
+        recordAccountPushSent('sent', 'webpush');
         summary.sent += 1;
       } catch (error) {
         signal?.throwIfAborted();
@@ -1049,14 +1049,14 @@ export class WebPushNotificationService {
             disabled_at: new Date().toISOString(),
             last_error: 'Push endpoint expired',
           });
-          recordAccountPushSent('expired', 'web');
+          recordAccountPushSent('expired', 'webpush');
           summary.expired += 1;
         } else {
           logDeliveryFailure('web', error);
           await this.client.updatePushSubscription(subscriptionId, {
             last_error: 'Push delivery failed',
           });
-          recordAccountPushSent('failed', 'web');
+          recordAccountPushSent('failed', 'webpush');
           summary.failed += 1;
         }
       }
@@ -1540,7 +1540,7 @@ abstract class AppPushNotificationService {
           deviceId,
           events.map((event) => stringField(event, 'event_id')).filter(Boolean),
         );
-        recordAccountPushSent('skipped', this.app);
+        recordAccountPushSent('skipped', this.transport);
         continue;
       }
       if ((this.#retries.get(deviceId)?.at ?? 0) > this.now() * 1_000) continue;
@@ -1557,7 +1557,7 @@ abstract class AppPushNotificationService {
           last_success_at: new Date().toISOString(),
           last_error: null,
         });
-        recordAccountPushSent('sent', this.app);
+        recordAccountPushSent('sent', this.transport);
         summary.sent += 1;
       } catch (error) {
         signal?.throwIfAborted();
@@ -1567,7 +1567,7 @@ abstract class AppPushNotificationService {
             disabled_at: new Date().toISOString(),
             last_error: `${this.serviceName} device token expired`,
           });
-          recordAccountPushSent('expired', this.app);
+          recordAccountPushSent('expired', this.transport);
           summary.expired += 1;
         } else {
           if (this.transport === 'unifiedpush') {
@@ -1582,7 +1582,7 @@ abstract class AppPushNotificationService {
           await this.client.updateNativePushDevice(deviceId, {
             last_error: `${this.serviceName} delivery failed`,
           });
-          recordAccountPushSent('failed', this.app);
+          recordAccountPushSent('failed', this.transport);
           summary.failed += 1;
         }
       }

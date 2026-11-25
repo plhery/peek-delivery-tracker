@@ -230,6 +230,18 @@ describe('prometheus carrier metrics', () => {
     expect(text).toContain('tracking_provider_budget_spent_total{provider="ParcelsApp"} 1');
   });
 
+  it('counts an account\'s push batches by app and the transport they went by', async () => {
+    metrics.recordAccountPushSent('failed', 'unifiedpush');
+    metrics.recordAccountPushSent('sent', 'fcm');
+    metrics.recordAccountPushSent('sent', 'apns');
+    metrics.recordAccountPushSent('skipped', 'webpush');
+    const text = await scraped();
+    expect(text).toContain('account_push_sent_total{outcome="failed",app="android",transport="unifiedpush"} 1');
+    expect(text).toContain('account_push_sent_total{outcome="sent",app="android",transport="fcm"} 1');
+    expect(text).toContain('account_push_sent_total{outcome="sent",app="ios",transport="apns"} 1');
+    expect(text).toContain('account_push_sent_total{outcome="skipped",app="web",transport="webpush"} 1');
+  });
+
   it('counts scheduled runs that gave way by whose check went ahead, both from 0', async () => {
     expect(await metrics.metricsText()).toContain('scheduled_sync_gave_way_total{to="lookup"} 0');
     metrics.recordScheduledRunGaveWay('lookup');

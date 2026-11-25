@@ -238,7 +238,7 @@ describe('an Android phone\'s notifications', () => {
 
     expect(client.recordNativePushDeliveries).toHaveBeenCalledExactlyOnceWith('device-1', ['event-1', 'event-0']);
     expect(client.updateNativePushDevice).toHaveBeenCalledExactlyOnceWith('device-1', { last_success_at: expect.any(String), last_error: null });
-    expect(counted).toHaveBeenCalledExactlyOnceWith('sent', 'android');
+    expect(counted).toHaveBeenCalledExactlyOnceWith('sent', 'fcm');
   });
 
   it('retire a device whose token FCM no longer takes', async () => {
@@ -250,7 +250,7 @@ describe('an Android phone\'s notifications', () => {
       disabled_at: expect.any(String), last_error: 'FCM device token expired',
     });
     expect(client.recordNativePushDeliveries).not.toHaveBeenCalled();
-    expect(counted).toHaveBeenCalledExactlyOnceWith('expired', 'android');
+    expect(counted).toHaveBeenCalledExactlyOnceWith('expired', 'fcm');
   });
 
   it.each([
@@ -264,7 +264,7 @@ describe('an Android phone\'s notifications', () => {
     expect(client.updateNativePushDevice).toHaveBeenCalledExactlyOnceWith('device-1', { last_error: 'FCM delivery failed' });
     expect(client.recordNativePushDeliveries).not.toHaveBeenCalled();
     expect(log).toHaveBeenCalledExactlyOnceWith('push_delivery_failed', { channel: 'native', transport: 'fcm', ...logged }, 'warning');
-    expect(counted).toHaveBeenCalledExactlyOnceWith('failed', 'android');
+    expect(counted).toHaveBeenCalledExactlyOnceWith('failed', 'fcm');
   });
 
   it('get the test notification in the device\'s language, collapsed with nothing', async () => {

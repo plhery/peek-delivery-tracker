@@ -71,7 +71,7 @@ interface PrometheusRuntime {
   parcelAlertSetTotal: Counter<'outcome' | 'app'>;
   parcelAlertRemovedTotal: Counter<'reason'>;
   parcelAlertSentTotal: Counter<'outcome' | 'app'>;
-  accountPushSentTotal: Counter<'outcome' | 'app'>;
+  accountPushSentTotal: Counter<'outcome' | 'app' | 'transport'>;
   parcelFeedbackTotal: Counter<'answer' | 'via' | 'app' | 'outcome'>;
   deliveryEmailTotal: Counter<'outcome' | 'reason'>;
   providerInputTotal: Counter<'provider' | 'step'>;
@@ -256,8 +256,8 @@ function createRuntime(): PrometheusRuntime {
     }),
     accountPushSentTotal: new Counter({
       name: 'account_push_sent_total',
-      help: 'Batches of new scans of an account\'s parcel handled for one of its browsers or phones by outcome (sent, skipped, failed, expired) and app (web, ios, android).',
-      labelNames: ['outcome', 'app'] as const,
+      help: 'Batches of new scans of an account\'s parcel handled for one of its browsers or phones by outcome (sent, skipped, failed, expired), app (web, ios, android) and transport (webpush, apns, fcm, unifiedpush, inbox).',
+      labelNames: ['outcome', 'app', 'transport'] as const,
       registers: [registry],
     }),
     parcelFeedbackTotal: new Counter({
@@ -661,9 +661,13 @@ export function recordParcelAlertSent(outcome: 'sent' | 'skipped' | 'failed' | '
   count(runtime.parcelAlertSentTotal, 'parcel_alert_sent_total', { outcome, app });
 }
 
-/** One batch of an account's new scans for one of its browsers or phones, as for a link's alert. */
-export function recordAccountPushSent(outcome: 'sent' | 'skipped' | 'failed' | 'expired', app: ParcelAlertApp): void {
-  count(runtime.accountPushSentTotal, 'account_push_sent_total', { outcome, app });
+/** How a batch reaches a browser or phone: Web Push, or a native transport (Android's inbox is read by the app itself). */
+export type AccountPushTransport = 'webpush' | 'apns' | 'fcm' | 'unifiedpush' | 'inbox';
+
+/** One batch of an account's new scans for one of its browsers or phones, as for a link's alert, by the transport it went by. */
+export function recordAccountPushSent(outcome: 'sent' | 'skipped' | 'failed' | 'expired', transport: AccountPushTransport): void {
+  const app: ParcelAlertApp = transport === 'webpush' ? 'web' : transport === 'apns' ? 'ios' : 'android';
+  count(runtime.accountPushSentTotal, 'account_push_sent_total', { outcome, app, transport });
 }
 
 /**

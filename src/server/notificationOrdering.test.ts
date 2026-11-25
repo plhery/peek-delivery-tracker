@@ -774,6 +774,6 @@ it.each(['web', 'native'] as const)('counts each batch by what became of it, for
   vi.spyOn(observability, 'logOperationalEvent').mockReturnValue(undefined);
   const counted = vi.spyOn(metrics, 'recordAccountPushSent');
   expect(await service.dispatch()).toEqual({ attempted: 3, sent: 1, failed: 1, expired: 1 });
-  const app = channel === 'web' ? 'web' : 'ios';
-  expect([...counted.mock.calls].sort()).toEqual([['expired', app], ['failed', app], ['sent', app], ['skipped', app]]);
+  const transport = channel === 'web' ? 'webpush' : 'apns';
+  expect([...counted.mock.calls].sort()).toEqual([['expired', transport], ['failed', transport], ['sent', transport], ['skipped', transport]]);
 });

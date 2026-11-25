@@ -20,6 +20,27 @@ function event(id: string, occurredAt: string, description: string, location?: s
 // Planned steps show while their time is ahead: these are read in the year before their journeys.
 const beforeTheJourneys = () => { vi.useFakeTimers({ toFake: ['Date'] }); vi.setSystemTime(new Date('2023-12-01T00:00:00Z')); };
 
+describe('dates in full on a desktop', () => {
+  afterEach(() => { vi.unstubAllGlobals(); });
+  const pointer = (hovers: boolean) => vi.stubGlobal('matchMedia', (query: string) =>
+    ({ matches: hovers && query === '(hover: hover) and (pointer: fine)', addEventListener() {}, removeEventListener() {} }));
+  const journal = () => render(<TrackingJournal events={[event('scan', '2024-11-28T14:32:00', 'With courier')]} />);
+
+  it('names each day, and each scan\'s day and time, in full on hovering them', () => {
+    pointer(true);
+    journal();
+    expect(screen.getByRole('heading', { name: 'Thu 28 Nov 2024' })).toHaveAttribute('title', 'Thursday, 28 November 2024');
+    expect(screen.getByText('14:32')).toHaveAttribute('title', 'Thursday, 28 November 2024, 14:32');
+  });
+
+  it('names none on touch, where nothing hovers', () => {
+    pointer(false);
+    journal();
+    expect(screen.getByRole('heading', { name: 'Thu 28 Nov 2024' })).not.toHaveAttribute('title');
+    expect(screen.getByText('14:32')).not.toHaveAttribute('title');
+  });
+});
+
 describe('TrackingJournal', () => {
   afterEach(() => { vi.useRealTimers(); });
 

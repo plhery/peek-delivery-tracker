@@ -87,7 +87,7 @@ export interface PeekAiWording {
 /** A wall clock Peek AI names ("15:30"), or the hour on a time it gives with its offset, as the reader writes times. */
 const clock = (value: string, { languageTag, use24HourTime }: PeekAiWording) =>
   deliveryWallClock(value.length > 5 ? value.slice(11, 16) : value, languageTag, use24HourTime);
-const calendar = (day: string, { languageTag }: PeekAiWording) => localizedCalendarDate(dateOf(day), languageTag);
+const calendar = (day: string, { languageTag, now }: PeekAiWording) => localizedCalendarDate(dateOf(day), languageTag, now);
 
 /**
  * The few words after the name on a card: "unlikely" beside the carrier's date when it says today (`estimate`, the

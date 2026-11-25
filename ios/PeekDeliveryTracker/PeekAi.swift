@@ -164,8 +164,8 @@ extension Localizer {
         deliveryWallClock(value.count > 5 ? value.dropFirst(11).prefix(5) : Substring(value))
     }
 
-    private func peekAiCalendar(_ day: String) -> String {
-        PeekAi.date(of: day).map(shortDate) ?? day
+    private func peekAiCalendar(_ day: String, now: Date = Date()) -> String {
+        PeekAi.date(of: day).map { shortDate($0, now: now) } ?? day
     }
 
     /// The few words after the name on a card: "unlikely" beside the carrier's date when it says today (`estimate`, the
@@ -177,7 +177,7 @@ extension Localizer {
             let today = estimate.flatMap(DateParser.deliveryDate).map { PeekAi.calendar.isDate($0, inSameDayAs: now) } ?? false
             return text(today ? "peekAi.card.unlikely" : "peekAi.card.notToday")
         case .byTime: return text("peekAi.card.byTime", ["time": peekAiClock(ai.time ?? "")])
-        case .byDay: return ai.day.map { text("peekAi.card.byDay", ["date": peekAiCalendar($0)]) } ?? text("peekAi.card.todayOrTomorrow")
+        case .byDay: return ai.day.map { text("peekAi.card.byDay", ["date": peekAiCalendar($0, now: now)]) } ?? text("peekAi.card.todayOrTomorrow")
         case .todayOrTomorrow: return text("peekAi.card.todayOrTomorrow")
         case .thisWeek: return text("peekAi.card.thisWeek")
         case .byEndOfNextWeek: return text("peekAi.card.byEndOfNextWeek")
@@ -197,7 +197,7 @@ extension Localizer {
         switch ai.says {
         case .notToday: return text("peekAi.claim.notToday")
         case .byTime: return text("peekAi.claim.byTime", ["time": peekAiClock(ai.time ?? "")])
-        case .byDay: return ai.day.map { text("peekAi.claim.byDay", ["date": peekAiCalendar($0)]) } ?? text("peekAi.claim.todayOrTomorrow")
+        case .byDay: return ai.day.map { text("peekAi.claim.byDay", ["date": peekAiCalendar($0, now: now)]) } ?? text("peekAi.claim.todayOrTomorrow")
         case .todayOrTomorrow: return text("peekAi.claim.todayOrTomorrow")
         case .thisWeek: return text("peekAi.claim.thisWeek")
         case .byEndOfNextWeek: return text("peekAi.claim.byEndOfNextWeek")
@@ -205,7 +205,7 @@ extension Localizer {
             // A copy kept since its first day has gone by names no day.
             guard let day = ai.day, day >= PeekAi.day(of: now) else { return text("peekAi.claim.sooner") }
             let tomorrow = PeekAi.calendar.date(byAdding: .day, value: 1, to: now).map(PeekAi.day(of:))
-            return day == tomorrow ? text("peekAi.claim.soonerTomorrow") : text("peekAi.claim.soonerFrom", ["date": peekAiCalendar(day)])
+            return day == tomorrow ? text("peekAi.claim.soonerTomorrow") : text("peekAi.claim.soonerFrom", ["date": peekAiCalendar(day, now: now)])
         }
     }
 
@@ -272,7 +272,7 @@ extension Localizer {
         case .outForDelivery: return text("peekAi.why.outForDelivery", ["carrier": carrier, "time": peekAiClock(ai.outSince ?? "")])
         case .lateOut: return text("peekAi.why.lateOut", ["carrier": carrier])
         case .missedDate: return text("peekAi.why.missedDate", ["carrier": carrier])
-        case .ahead: return text("peekAi.why.ahead", ["carrier": carrier, "date": ai.carrierDay.map(peekAiCalendar) ?? ""])
+        case .ahead: return text("peekAi.why.ahead", ["carrier": carrier, "date": ai.carrierDay.map { peekAiCalendar($0, now: now) } ?? ""])
         case .noDate: return peekAiWithLastStep(text("peekAi.why.noDate", ["carrier": carrier]), ai, now: now)
         }
     }

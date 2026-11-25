@@ -64,7 +64,7 @@ export function localizedRelativeTime(
   if (hours < 24) return t('time.hoursAgo', { count: hours });
   const days = Math.floor(hours / 24);
   if (days < 7) return t('time.daysAgo', { count: days });
-  return localizedCalendarDate(new Date(iso), languageTag);
+  return localizedCalendarDate(new Date(iso), languageTag, now);
 }
 
 /** How long ago a scan was ("3 h ago"); a scan dated by its day alone, or seen at a check, gives that day ("yesterday"). */
@@ -92,7 +92,7 @@ export function localizedDeliveryDate(
     if (date.getFullYear() === day.getFullYear() &&
         date.getMonth() === day.getMonth() && date.getDate() === day.getDate()) return t(key);
   }
-  return localizedCalendarDate(date, languageTag);
+  return localizedCalendarDate(date, languageTag, now);
 }
 
 export function deliveryWallClock(value: string, languageTag: string, use24HourTime: boolean): string {
@@ -190,6 +190,12 @@ function windowDays(from: string | undefined, to: string): { first: Date; last: 
   return first && last && first < last ? { first, last } : null;
 }
 
+/** The days an estimate names, from first to last: the same day twice when it names one. */
+export function estimateDays(from: string | undefined, to: string): { first: Date; last: Date } | null {
+  const day = estimateDay(to);
+  return windowDays(from, to) ?? (day && { first: day, last: day });
+}
+
 /** Whether the window of several days an estimate gives has begun: the parcel may come any day until its last. */
 export function deliveryWindowOpen(from: string | undefined, to: string, now = Date.now()): boolean {
   const days = windowDays(from, to);
@@ -212,7 +218,7 @@ export function localizedDeliveryWindow(from: string | undefined, to: string, t:
   const days = windowDays(from, to);
   if (days && days.first < startOfToday(now)) {
     const dated = (value: string, date: Date, day: Date) => timed(value)
-      ? localizedCalendarDateTime(date, languageTag, use24HourTime) : localizedCalendarDate(day, languageTag);
+      ? localizedCalendarDateTime(date, languageTag, use24HourTime, now) : localizedCalendarDate(day, languageTag, now);
     return `${dated(from, first, days.first)} – ${dated(to, last, days.last)}`;
   }
   return `${localizedExpectedDelivery(from, t, languageTag, now, use24HourTime)} – ${end}`;
@@ -229,5 +235,5 @@ export function localizedDeliveryEstimate(from: string | undefined, to: string, 
   if (days.last.getTime() === today.getTime()) return t('time.today');
   const tomorrow = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
   return days.last.getTime() === tomorrow.getTime() ? t('parcel.byTomorrow')
-    : t('parcel.byDate', { date: localizedCalendarDate(days.last, languageTag) });
+    : t('parcel.byDate', { date: localizedCalendarDate(days.last, languageTag, now) });
 }

@@ -134,12 +134,30 @@ export function formatExpectedDelivery(
   return `${pad(expected.getDate())}.${pad(expected.getMonth() + 1)}.${expected.getFullYear()}`;
 }
 
+/** How many days from today a short date may stand in another year and still go without it. */
+const NEAR_DAYS = 31;
+
 /**
- * Compact calendar dates with explicit weekdays and months: "Sat 12 Sep", "Sa 12. Sept", "sam 12 sept".
- * Names keep the language's own case, since the date often sits mid-sentence ("Livré le sam 12 sept"),
- * and the day keeps the period German writes after it. Chinese writes its own: "9月12日周六".
+ * Whether a short date needs its year: only one in another calendar year and more than a month from today, past or
+ * future. "Sun 28 Dec" read on 3 January stays short, and so does an estimate for 2 January read on 28 December. The
+ * iPhone and Android apps follow the same rule.
  */
-export function localizedCalendarDate(date: Date, languageTag: string, withYear = false): string {
+export function dateShowsYear(date: Date, now: number = Date.now()): boolean {
+  const today = new Date(now);
+  if (date.getFullYear() === today.getFullYear()) return false;
+  // Whole calendar days between the two, counted on the reader's calendar, whatever its clock changes.
+  const day = (value: Date) => Date.UTC(value.getFullYear(), value.getMonth(), value.getDate());
+  return Math.abs(day(date) - day(today)) / 86_400_000 > NEAR_DAYS;
+}
+
+/**
+ * Compact calendar dates with explicit weekdays and months: "Sat 12 Sep", "Sa 12. Sept", "sam 12 sept", and the year
+ * after them when it is needed (`dateShowsYear`): "Sat 12 Sep 2025". Names keep the language's own case, since the date
+ * often sits mid-sentence ("Livré le sam 12 sept"), and the day keeps the period German writes after it. Chinese writes
+ * its own, the year first: "9月12日周六", "2025年9月12日周六".
+ */
+export function localizedCalendarDate(date: Date, languageTag: string, now: number = Date.now()): string {
+  const withYear = dateShowsYear(date, now);
   const language = new Intl.Locale(languageTag).language;
   const options: Intl.DateTimeFormatOptions = { weekday: 'short', day: 'numeric', month: 'short' };
   if (language === 'zh') return new Intl.DateTimeFormat(language, { ...options, ...(withYear && { year: 'numeric' }) }).format(date);
@@ -169,6 +187,22 @@ export function localizedClockTime(date: Date, languageTag: string, use24HourTim
   return use24HourTime || new Intl.Locale(languageTag).language !== 'en' ? time : time.toUpperCase();
 }
 
-export function localizedCalendarDateTime(date: Date, languageTag: string, use24HourTime = true): string {
-  return dayAndTime(localizedCalendarDate(date, languageTag), localizedClockTime(date, languageTag, use24HourTime), languageTag);
+export function localizedCalendarDateTime(date: Date, languageTag: string, use24HourTime = true, now: number = Date.now()): string {
+  return dayAndTime(localizedCalendarDate(date, languageTag, now), localizedClockTime(date, languageTag, use24HourTime), languageTag);
+}
+
+/**
+ * A date in full, as a desktop's tooltip gives it: weekday, day, month and year in the language's own long form, then
+ * the time on the reader's clock when there is one: "Thursday, 28 November 2024, 14:32", "Donnerstag, 28. November
+ * 2024, 14:32", "2024年11月28日星期四 14:32".
+ */
+export function localizedFullDate(date: Date, languageTag: string, time?: { use24HourTime: boolean }): string {
+  const day = new Intl.DateTimeFormat(languageTag, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(date);
+  return time ? dayAndTime(day, localizedClockTime(date, languageTag, time.use24HourTime), languageTag) : day;
+}
+
+/** Days from one to another in full, each whole ("Thursday, 26 November 2026 – Friday, 27 November 2026"), or one day once. */
+export function localizedFullDays(first: Date, last: Date, languageTag: string): string {
+  const [from, to] = [localizedFullDate(first, languageTag), localizedFullDate(last, languageTag)];
+  return from === to ? from : `${from} – ${to}`;
 }

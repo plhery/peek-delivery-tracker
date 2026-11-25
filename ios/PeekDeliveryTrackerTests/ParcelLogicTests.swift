@@ -2237,9 +2237,12 @@ final class ParcelLogicTests: XCTestCase {
         let parcel = makeParcel(id: id, events: [event(id, .accepted, "2026-10-09T12:00:00Z"), event(id, .inTransit, "2026-10-12T12:00:00Z")])
         XCTAssertEqual(parcel.notice(now: now), .stalled)
         XCTAssertEqual(ParcelAttention.stalled.text(for: parcel, localizer, now: now), "No tracking update since Mon 12 Oct")
-        // Its year when it isn't this one.
+        // Its year when it is another year's and more than 31 days back.
         let lastYear = makeParcel(id: id, events: [event(id, .inTransit, "2025-12-29T12:00:00Z")])
         XCTAssertEqual(ParcelAttention.stalled.text(for: lastYear, localizer, now: now), "No tracking update since Mon 29 Dec 2025")
+        // Not when the scan was a few days before New Year.
+        let newYear = DateParser.date("2026-01-04T12:00:00Z")!
+        XCTAssertEqual(ParcelAttention.stalled.text(for: lastYear, localizer, now: newYear), "No tracking update since Mon 29 Dec")
         localizer.language = .fr
         XCTAssertEqual(ParcelAttention.stalled.text(for: parcel, localizer, now: now), "Aucune mise à jour depuis lun 12 oct")
         // Other flags keep their words; so does a quiet one with no scan to date it.
@@ -5755,8 +5758,8 @@ extension ParcelLogicTests {
         XCTAssertNil(DateParser.date("2026-09-12"))
         XCTAssertEqual(DateParser.deliveryDate("2026-09-12"), day)
         for _ in 0..<3 {
-            XCTAssertEqual(localizer.shortDate(day), "Sat 12 Sep")
-            XCTAssertEqual(localizer.dateTime(DateParser.isoString(day)), "Sat 12 Sep, 00:00")
+            XCTAssertEqual(localizer.shortDate(day, now: day), "Sat 12 Sep")
+            XCTAssertEqual(localizer.dateTime(DateParser.isoString(day), now: day), "Sat 12 Sep, 00:00")
         }
     }
 }
@@ -6483,6 +6486,9 @@ extension ParcelLogicTests {
         XCTAssertEqual(localizer.plannedDate(step(try at(month: 11, day: 3)), now: now), "yesterday, 07:54")
         XCTAssertEqual(localizer.plannedDate(step(try at(month: 11, day: 6)), now: now), "Fri 6 Nov, 07:54")
         XCTAssertEqual(localizer.plannedDate(step(try at(month: 1, day: 8, year: 2027)), now: now), "Fri 8 Jan 2027, 07:54")
+        // Its year only more than 31 days off: a step early in January read late in December has none.
+        let lateDecember = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 12, day: 28, hour: 12)))
+        XCTAssertEqual(localizer.plannedDate(step(try at(month: 1, day: 8, year: 2027)), now: lateDecember), "Fri 8 Jan, 07:54")
         // A step the carrier dated by its day alone has no time.
         XCTAssertEqual(localizer.plannedDate(step(try at(month: 11, day: 6), day: "2026-11-06"), now: now), "Fri 6 Nov")
         XCTAssertEqual(localizer.plannedDate(step(try at(month: 11, day: 5), day: "2026-11-05"), now: now), "tomorrow")

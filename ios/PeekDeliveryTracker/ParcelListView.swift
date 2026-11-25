@@ -1877,6 +1877,7 @@ private struct ExperimentalNextDeliveryPass: View {
                         status
                     }
                 }
+                .fullDateHelp(arrived ? localizer.parcelCompletionFullDate(parcel) : nil)
             }
                 .font(.caption)
                 .foregroundStyle(identity.ink)
@@ -2098,6 +2099,7 @@ private struct ExperimentalParcelPassCard: View {
     private func dateLabel(_ date: String) -> some View {
         Text(date).font(.caption).foregroundStyle(identity.ink)
             .fixedSize(horizontal: false, vertical: true)
+            .fullDateHelp(localizer.parcelCompletionFullDate(parcel))
     }
 
     /// Peek AI's words on one line beside the date, or, where they `wrap`, on as many as they need under it.
@@ -3149,6 +3151,7 @@ private struct ExperimentalArchivedParcelRow: View {
                 .font(.caption.weight(.semibold).monospacedDigit())
                 .foregroundStyle(Brand.secondaryText)
                 .lineLimit(1)
+                .fullDateHelp(localizer.parcelCompletionFullDate(parcel) ?? localizer.fullDate(date, time: true))
         }
     }
 }

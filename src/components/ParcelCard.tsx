@@ -2,9 +2,10 @@ import { AutoCarrierNotice } from './AutoCarrierNotice';
 import { useEffect, useRef, useState } from 'react';
 import { deliveringCarrierId, deliveryLineKey, displayedCarrierId, carrierInfo } from '../lib/carriers';
 import { localizedDatePhrase, localizedDeliveryEstimate, useI18n } from '../i18n';
-import { numberToCheck } from '../lib/messages';
+import { estimateDays, numberToCheck } from '../lib/messages';
+import { useDateTitle } from '../lib/dateTitle';
 import { hasNewUpdate, useMarkNewUpdates } from '../lib/newUpdate';
-import { awaitedCarrier, localizedParcelCompletionDate, parcelDeliveryEstimate, parcelHasCarrierUpdate, parcelStatusLabel, shownCarrier } from '../lib/parcelStatus';
+import { awaitedCarrier, localizedParcelCompletionDate, parcelCompletionScan, parcelDeliveryEstimate, parcelHasCarrierUpdate, parcelStatusLabel, shownCarrier } from '../lib/parcelStatus';
 import { pickupPoint } from '../lib/pickupPoint';
 import { currentEvent } from '../lib/stages';
 import { userErrorMessage } from '../lib/userMessages';
@@ -41,6 +42,11 @@ export function ParcelCard({ parcel, onOpen, onArchive, notice, variant = 'regul
   const expectedDelivery = estimate ? localizedDeliveryEstimate(parcel.expectedDeliveryFrom, estimate, t, languageTag, undefined, use24HourTime) : null;
   const statusLabel = parcelStatusLabel(parcel, t, locale);
   const completionDate = localizedParcelCompletionDate(parcel, languageTag, t);
+  // The date in full on hovering it, on a desktop.
+  const dateTitle = useDateTitle();
+  const estimatedDays = estimate ? estimateDays(parcel.expectedDeliveryFrom, estimate) : null;
+  const estimateTitle = dateTitle(estimatedDays && { date: estimatedDays.first, until: estimatedDays.last });
+  const shownDateTitle = expectedDelivery ? estimateTitle : dateTitle(parcelCompletionScan(parcel));
   // Peek AI's own estimate, named as Peek's: under the carrier's date, or in its place; beside the status on Next up.
   const peekAi = useParcelPeekAi(parcel);
   const peekAiWords = peekAi && !completionDate ? peekAiCardWords(peekAi, expectedDelivery ? estimate : null, { t, languageTag, use24HourTime }) : null;
@@ -140,13 +146,13 @@ export function ParcelCard({ parcel, onOpen, onArchive, notice, variant = 'regul
           {noteMatch}
           {deliveryLabel && <span className="parcel-card__sender">{deliveryLabel}</span>}
           <AutoCarrierNotice parcel={parcel} className="parcel-card__sender" />
-          <span className="parcel-card__summary"><span className="parcel-card__state">{mark}{arrived && check}{statusLabel}</span>{pickupPlace && <><span aria-hidden="true">·</span><span className="parcel-card__place">{pickupPlace}</span></>}{(expectedDelivery || (arrived && completionDate)) && <><span aria-hidden="true">·</span><span className="parcel-card__eta">{expectedDelivery || completionDate}</span></>}{peekAiWords && <><span aria-hidden="true">·</span><PeekAiPhrase words={peekAiWords} className="parcel-card__eta" /></>}</span>
+          <span className="parcel-card__summary"><span className="parcel-card__state">{mark}{arrived && check}{statusLabel}</span>{pickupPlace && <><span aria-hidden="true">·</span><span className="parcel-card__place">{pickupPlace}</span></>}{(expectedDelivery || (arrived && completionDate)) && <><span aria-hidden="true">·</span><span className="parcel-card__eta" title={shownDateTitle}>{expectedDelivery || completionDate}</span></>}{peekAiWords && <><span aria-hidden="true">·</span><PeekAiPhrase words={peekAiWords} className="parcel-card__eta" /></>}</span>
           {flagChip}
         </> : <>
           {placed && <CardRoute route={route} />}
           <span className="parcel-card__top"><CarrierMark carrier={carrier} />{peekAiWords
-            ? <span className="parcel-card__dates">{expectedDelivery && <span className="parcel-card__eta">{expectedDelivery}</span>}<PeekAiPhrase words={peekAiWords} /></span>
-            : (expectedDelivery || completionDate) && <span className={completionDate ? 'parcel-card__completion' : 'parcel-card__eta'}>{expectedDelivery || completionDate}</span>}</span>
+            ? <span className="parcel-card__dates">{expectedDelivery && <span className="parcel-card__eta" title={estimateTitle}>{expectedDelivery}</span>}<PeekAiPhrase words={peekAiWords} /></span>
+            : (expectedDelivery || completionDate) && <span className={completionDate ? 'parcel-card__completion' : 'parcel-card__eta'} title={shownDateTitle}>{expectedDelivery || completionDate}</span>}</span>
           <strong className="parcel-card__label">{shownName}</strong>
           {noteMatch}
           {deliveryLabel && <span className="parcel-card__sender">{deliveryLabel}</span>}

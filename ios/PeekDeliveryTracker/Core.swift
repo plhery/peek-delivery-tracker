@@ -605,8 +605,8 @@ final class Localizer: ObservableObject {
             return dayAndTime(expectedDelivery(day, now: now), "\(clockTime(start))–\(clockTime(finish))")
         }
         if let days = windowDays(from: from, to: to), days.first < Calendar.current.startOfDay(for: now) {
-            let starting = from.contains("T") && DateParser.date(from) != nil ? dateTime(from) : shortDate(days.first)
-            let ending = to.contains("T") && DateParser.date(to) != nil ? dateTime(to) : shortDate(days.last)
+            let starting = from.contains("T") && DateParser.date(from) != nil ? dateTime(from, now: now) : shortDate(days.first, now: now)
+            let ending = to.contains("T") && DateParser.date(to) != nil ? dateTime(to, now: now) : shortDate(days.last, now: now)
             return "\(starting) – \(ending)"
         }
         return "\(expectedDelivery(from, now: now)) – \(end)"
@@ -632,7 +632,7 @@ final class Localizer: ObservableObject {
         if let tomorrow = calendar.date(byAdding: .day, value: 1, to: today), calendar.isDate(days.last, inSameDayAs: tomorrow) {
             return text("parcel.byTomorrow")
         }
-        return text("parcel.byDate", ["date": shortDate(days.last)])
+        return text("parcel.byDate", ["date": shortDate(days.last, now: now)])
     }
 
     func relativeTime(from value: String, now: Date = Date()) -> String {
@@ -648,7 +648,7 @@ final class Localizer: ObservableObject {
         if seconds < 604_800 {
             return text("time.daysAgo", ["count": max(1, Int(seconds / 86_400))])
         }
-        return shortDate(date)
+        return shortDate(date, now: now)
     }
 
     /// How long ago a scan happened, or its day when the carrier gave no clock time.
@@ -737,18 +737,60 @@ final class Localizer: ObservableObject {
            calendar.isDate(date, inSameDayAs: tomorrow) {
             return text("time.tomorrow")
         }
-        return shortDate(date)
+        return shortDate(date, now: now)
     }
 
-    /// Compact dates with explicit weekdays and months: "Sat 12 Sep", "Sa 12. Sept", "sam 12 sept". Names keep the
-    /// language's own case, since the date often sits mid-sentence, and the day keeps the period German writes after it.
-    func shortDate(_ date: Date) -> String {
+    /// Compact dates with explicit weekdays and months: "Sat 12 Sep", "Sa 12. Sept", "sam 12 sept", and the year after
+    /// them when it is needed (`showsYear`): "Sat 12 Sep 2025". Names keep the language's own case, since the date often
+    /// sits mid-sentence, and the day keeps the period German writes after it.
+    func shortDate(_ date: Date, now: Date = Date()) -> String {
         let weekday = shortWeekday(date)
         let day = formatter("d", gregorian: true).string(from: date)
         let month = formatter("MMM", gregorian: true).string(from: date).replacingOccurrences(of: ".", with: "")
-        // Chinese puts the month first and the weekday last, as the web and Android write it: "9月12日周六".
-        if language == .zh { return "\(month)\(day)日\(weekday)" }
-        return "\(weekday) \(day)\(dayPeriod) \(month)"
+        let year = Self.showsYear(date, now: now) ? formatter("y", gregorian: true).string(from: date) : nil
+        // Chinese puts the year and the month first and the weekday last, as the web and Android write it: "9月12日周六",
+        // "2025年9月12日周六".
+        if language == .zh { return "\(year.map { "\($0)年" } ?? "")\(month)\(day)日\(weekday)" }
+        return "\(weekday) \(day)\(dayPeriod) \(month)" + (year.map { " \($0)" } ?? "")
+    }
+
+    /// How many days from today a short date may stand in another year and still go without it.
+    nonisolated static let yearlessDays = 31
+
+    /// The calendar short dates are written on: Gregorian, on this device's clock, as their day, month and year are.
+    nonisolated static var dateCalendar: Calendar {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = Calendar.current.timeZone
+        return calendar
+    }
+
+    /// Whether a short date needs its year: only a day in another calendar year than `now`'s and more than
+    /// `yearlessDays` whole calendar days from it, past or future. "Sun 28 Dec" read on 3 January stays short, and so
+    /// does an estimate for 2 January read on 28 December. The web and Android follow the same rule.
+    nonisolated static func showsYear(_ date: Date, now: Date, calendar: Calendar = Localizer.dateCalendar) -> Bool {
+        guard calendar.component(.year, from: date) != calendar.component(.year, from: now) else { return false }
+        let days = calendar.dateComponents([.day], from: calendar.startOfDay(for: now), to: calendar.startOfDay(for: date)).day ?? 0
+        return abs(days) > yearlessDays
+    }
+
+    /// A date in full, as a pointer's tooltip gives it on a Mac: weekday, day, month and year in the app language's own
+    /// long form, then the time on the reader's clock when `time` says the date has one: "Thursday, November 28, 2024,
+    /// 14:32", "Donnerstag, 28. November 2024, 14:32", "2024年11月28日 星期四 14:32".
+    func fullDate(_ date: Date, time: Bool = false) -> String {
+        let key = "\(language.rawValue)|\(TimeZone.current.identifier)|template|EEEEdMMMMy"
+        let formatter: DateFormatter
+        if let cached = formatters[key] {
+            formatter = cached
+        } else {
+            formatter = DateFormatter()
+            formatter.locale = language.locale
+            formatter.calendar = Calendar(identifier: .gregorian)
+            formatter.timeZone = .current
+            formatter.setLocalizedDateFormatFromTemplate("EEEEdMMMMy")
+            formatters[key] = formatter
+        }
+        let day = formatter.string(from: date)
+        return time ? dayAndTime(day, clockTime(date)) : day
     }
 
     /// A weekday's short name without its period, as `shortDate` writes it: "Thu", "jeu", "Do".
@@ -771,20 +813,13 @@ final class Localizer: ObservableObject {
         return template.dateFormat.contains("d.") ? "." : ""
     }
 
-    func dateTime(_ value: String) -> String {
+    func dateTime(_ value: String, now: Date = Date()) -> String {
         guard let date = DateParser.date(value) else { return value }
-        return dayAndTime(shortDate(date), clockTime(date))
-    }
-
-    /// The journal's short date, with its year when it isn't `now`'s: "Mon 12 Oct", "Fri 8 Jan 2027".
-    func calendarDate(_ date: Date, now: Date = Date()) -> String {
-        let calendar = Calendar.current
-        let year = calendar.component(.year, from: date)
-        return shortDate(date) + (year == calendar.component(.year, from: now) ? "" : " \(year)")
+        return dayAndTime(shortDate(date, now: now), clockTime(date))
     }
 
     /// When the carrier planned a step: "today", "tomorrow", "yesterday" or the journal's short date, with its year
-    /// when it isn't this one, then its clock time unless the carrier dated it by its day alone: "Fri 6 Nov, 07:54".
+    /// when it needs one, then its clock time unless the carrier dated it by its day alone: "Fri 6 Nov, 07:54".
     func plannedDate(_ step: PlannedTrackingEvent, now: Date = Date()) -> String {
         guard let date = step.displayDate else { return "" }
         let calendar = Calendar.current
@@ -792,7 +827,7 @@ final class Localizer: ObservableObject {
         case 0: text("time.today")
         case 1: text("time.tomorrow")
         case -1: text("time.yesterday")
-        default: calendarDate(date, now: now)
+        default: shortDate(date, now: now)
         }
         return step.calendarDay == nil ? dayAndTime(day, clockTime(date)) : day
     }
@@ -871,7 +906,7 @@ final class Localizer: ObservableObject {
         let today = calendar.startOfDay(for: now)
         guard day < today, let oldest = calendar.date(byAdding: .day, value: -Self.passedEstimateDays, to: today),
               day >= oldest else { return nil }
-        return text("parcel.wasExpected", ["date": shortDate(day)])
+        return text("parcel.wasExpected", ["date": shortDate(day, now: now)])
     }
 
     /// The carrier's estimate while the parcel is on its way and the estimate's last day has not passed.
@@ -916,6 +951,12 @@ final class Localizer: ObservableObject {
             return deliveryDate(date, now: now)
         }
         return nil
+    }
+
+    /// The day `parcelCompletionDate` names, in full, with its time when the carrier gave one, for a Mac's tooltip.
+    func parcelCompletionFullDate(_ parcel: Parcel) -> String? {
+        guard let event = parcel.currentEvent, event.stage.isFinal, let date = event.displayDate else { return nil }
+        return fullDate(date, time: event.showsTime)
     }
 
     /// What importing the parcel costs: customs with the carrier's fee on delivery, and its lower online

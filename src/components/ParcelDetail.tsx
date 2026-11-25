@@ -34,11 +34,13 @@ import {
   useI18n,
 } from '../i18n';
 import { dayAndTime, localizedCalendarDate, localizedClockTime } from '../lib/format';
-import { NUMBER_UNKNOWN, numberToCheck, REFUSED_NUMBER } from '../lib/messages';
+import { estimateDays, NUMBER_UNKNOWN, numberToCheck, REFUSED_NUMBER } from '../lib/messages';
+import { useDateTitle } from '../lib/dateTitle';
 import { formatDimensions, formatWeight } from '../lib/units';
 import {
   awaitedCarrier,
   localizedParcelCompletionDate,
+  parcelCompletionScan,
   parcelDeliveryEstimate,
   parcelPassedEstimate,
   parcelDisplayStatus,
@@ -227,6 +229,11 @@ export function ParcelDetail({
   const estimate = parcelDeliveryEstimate(parcel);
   // An estimate whose day passed in the last week still says when the parcel was due, muted, on this page alone.
   const passedDay = completionDate ? null : parcelPassedEstimate(parcel);
+  // Each date in full on hovering it, on a desktop.
+  const dateTitle = useDateTitle();
+  const estimatedDays = estimate ? estimateDays(parcel.expectedDeliveryFrom, estimate) : null;
+  const arrivalTitle = completionDate ? dateTitle(parcelCompletionScan(parcel))
+    : dateTitle(estimatedDays && { date: estimatedDays.first, until: estimatedDays.last });
   const { numbers: trackingNumbers, loose: looseLinks } = trackingLinksByNumber(parcelTrackingNumbers(parcel), parcelTrackingLinks(parcel, locale));
   // Each carrier names its own number once there are several; the one the carrier tracks the parcel by says so.
   const severalNumbers = trackingNumbers.filter((entry) => !entry.tracksAs).length > 1;
@@ -731,13 +738,13 @@ export function ParcelDetail({
         {carrierWaits && <p className="parcel-card__notice detail__flag"><Glyph name="warning" />{t(carrierWaits.recipientAction ? `attention.customs_${carrierWaits.recipientAction}`
           : carrierWaits.stage === 'failed_attempt' ? 'attention.failed_attempt' : 'attention.exception')}</p>}
         {(completionDate || estimate) && (
-          <p className="detail__arrival">
+          <p className="detail__arrival" title={arrivalTitle}>
             {completionDate
               ? localizedDatePhrase(completionDate, t)
               : localizedDeliveryWindow(parcel.expectedDeliveryFrom, estimate!, t, languageTag, undefined, use24HourTime)}
           </p>
         )}
-        {passedDay && <p className="detail__arrival detail__arrival--passed">{t('parcel.wasExpected', { date: localizedCalendarDate(passedDay, languageTag) })}</p>}
+        {passedDay && <p className="detail__arrival detail__arrival--passed" title={dateTitle({ date: passedDay })}>{t('parcel.wasExpected', { date: localizedCalendarDate(passedDay, languageTag) })}</p>}
         <div className="detail__progress"><ProgressTrack stage={current?.stage ?? null} /></div>
       </section>
       <PeekAiCard parcel={parcel} auth={apiAuth} className="detail__quiet" />

@@ -1,4 +1,5 @@
 import { useState, useSyncExternalStore } from 'react';
+import { useDateTitle } from '../lib/dateTitle';
 import { dayAndTime, localizedCalendarDate, localizedClockTime, scanDate, timeZoneName } from '../lib/format';
 import { countryFlag, countryName } from 'universal-parcel-scraper/app';
 import { localizedEventDescription, stageLabel, useI18n } from '../i18n';
@@ -28,6 +29,7 @@ export function TrackingJournal({ events: allEvents, planned = [], written = [],
   returnHeld?: boolean;
 }) {
   const { languageTag, t, use24HourTime } = useI18n();
+  const dateTitle = useDateTitle();
   const [oldestShown, setOldestShown] = useState(false);
   const { listed: events, relays } = withRelays(allEvents);
   const current = currentEvent(events, returnHeld);
@@ -46,7 +48,7 @@ export function TrackingJournal({ events: allEvents, planned = [], written = [],
   const sameDay = (a: Date, b: Date) => a.toDateString() === b.toDateString();
   const dayLabel = (date: Date | null, fallback: string) => !date ? fallback
     : sameDay(date, now) ? t('time.today') : sameDay(date, yesterday) ? t('time.yesterday')
-      : localizedCalendarDate(date, languageTag, date.getFullYear() !== now.getFullYear());
+      : localizedCalendarDate(date, languageTag, now.getTime());
   const updates = (count: number) => t(count === 1 ? 'detail.updateCount.one' : 'detail.updateCount.many', { count });
   const zone = useReaderTimeZone(languageTag);
   // The times are the reader's, wherever the carrier scanned: one quiet line says so under the history.
@@ -73,7 +75,7 @@ export function TrackingJournal({ events: allEvents, planned = [], written = [],
       return <li key={event.id} className={isCurrent ? 'tracking-journal__current' : undefined} aria-current={isCurrent ? 'step' : undefined}>
         {/* A scan dated by its day alone has no time to show. */}
         {when && !when.timed ? <time dateTime={event.day} />
-          : <time dateTime={when ? event.occurredAt : undefined}>{when ? localizedClockTime(when.date, languageTag, use24HourTime) : '—'}</time>}
+          : <time dateTime={when ? event.occurredAt : undefined} title={dateTitle(when)}>{when ? localizedClockTime(when.date, languageTag, use24HourTime) : '—'}</time>}
         <div><p>{syncing && isCurrent && event.stage === 'pending' ? t('timeline.syncing') : wording(event)}</p>
           {event.location?.trim() && <EventPlace location={event.location} placed={event.place} />}
           {relayed.map(line => <p key={line} className="tracking-journal__relay">{line}</p>)}
@@ -90,10 +92,10 @@ export function TrackingJournal({ events: allEvents, planned = [], written = [],
       : <ol className="tracking-journal__days" aria-label={t('timeline.label')}>
         {listed.map(([key, group], index) => <li key={key}>
           {folded && index >= OPEN_DAYS && index < OPEN_DAYS + LISTED_DAYS ? <details className="tracking-journal__day">
-            <summary><h3>{dayLabel(group.date, key)}</h3><span className="tracking-journal__count">{updates(group.events.length)}<svg aria-hidden="true" viewBox="0 0 20 20"><path d="m8 5 5 5-5 5" /></svg></span></summary>
+            <summary><h3 title={dateTitle(group.date && { date: group.date })}>{dayLabel(group.date, key)}</h3><span className="tracking-journal__count">{updates(group.events.length)}<svg aria-hidden="true" viewBox="0 0 20 20"><path d="m8 5 5 5-5 5" /></svg></span></summary>
             {scans(group)}
           </details> : <>
-            <h3>{dayLabel(group.date, key)}</h3>
+            <h3 title={dateTitle(group.date && { date: group.date })}>{dayLabel(group.date, key)}</h3>
             {scans(group)}
           </>}
         </li>)}
@@ -135,6 +137,7 @@ export function plannedAhead(step: Pick<PlannedEvent, 'occurredAt' | 'day' | 'ex
  */
 function PredictedSteps({ steps, note }: { steps: PlannedEvent[]; note: string }) {
   const { languageTag, t, use24HourTime } = useI18n();
+  const dateTitle = useDateTitle();
   const now = new Date();
   const offset = (days: number) => new Date(now.getFullYear(), now.getMonth(), now.getDate() + days).toDateString();
   const when = (step: PlannedEvent) => {
@@ -142,7 +145,7 @@ function PredictedSteps({ steps, note }: { steps: PlannedEvent[]; note: string }
     if (!scan) return '';
     const { date, timed } = scan;
     const day = date.toDateString() === offset(0) ? t('time.today') : date.toDateString() === offset(1) ? t('time.tomorrow')
-      : date.toDateString() === offset(-1) ? t('time.yesterday') : localizedCalendarDate(date, languageTag, date.getFullYear() !== now.getFullYear());
+      : date.toDateString() === offset(-1) ? t('time.yesterday') : localizedCalendarDate(date, languageTag, now.getTime());
     return t(plannedAhead(step, now.getTime()) ? 'timeline.predicted.when' : 'timeline.writtenAhead.when',
       { when: timed ? dayAndTime(day, localizedClockTime(date, languageTag, use24HourTime), languageTag) : day });
   };
@@ -156,7 +159,7 @@ function PredictedSteps({ steps, note }: { steps: PlannedEvent[]; note: string }
         <svg className="tracking-journal__predicted-mark" aria-hidden="true" viewBox="0 0 12 12"><circle cx="6" cy="6" r="4.6" /></svg>
         <div>
           <p>{localizedEventDescription(step.description, t) || stageLabel(t, step.stage)}</p>
-          <time className="tracking-journal__predicted-when" dateTime={step.day ?? step.occurredAt}>{when(step)}</time>
+          <time className="tracking-journal__predicted-when" dateTime={step.day ?? step.occurredAt} title={dateTitle(scanDate(step))}>{when(step)}</time>
           {step.location?.trim() && <EventPlace location={step.location} placed={step.place} />}
         </div>
       </li>)}

@@ -506,7 +506,7 @@ struct ParcelDetailView: View {
                             Text(date.text).font(.caption).foregroundStyle(Brand.secondaryText)
                                 .accessibilityIdentifier("parcel.wasExpected")
                         } else {
-                            Text(date.text).font(.caption)
+                            Text(date.text).font(.caption).fullDateHelp(localizer.parcelCompletionFullDate(parcel))
                         }
                     }
                 }
@@ -1805,14 +1805,14 @@ struct ParcelJournal: View {
 
     var body: some View {
         let entries = parcel.journalEntries
-        let groups = journalDays(entries)
+        let now = max(Date(), plannedClock)
+        let groups = journalDays(entries, now: now)
         let eventCount = entries.count
         // A copy the journal shows under its scan is current through that scan.
         let currentEventID = parcel.currentEvent.flatMap { current in
             entries.first { $0.id == current.id || $0.relays.contains(current) }?.id
         }
         let syncing = parcel.displayStatus.syncing
-        let now = max(Date(), plannedClock)
         let nextPlannedEnd = parcel.plannedEvents?.filter { $0.isAhead(of: now) }.compactMap(\.aheadUntil).min()
         // The steps the carrier's site shows that no scan confirms: those it planned and those it wrote in advance.
         let predicted = parcel.predictedLine(now: now)
@@ -1859,7 +1859,9 @@ struct ParcelJournal: View {
                 ForEach(groups) { group in
                     Text(group.label)
                         .font(.caption2).textCase(.uppercase).tracking(1)
-                        .foregroundStyle(Brand.secondaryText).padding(.top, 22).padding(.bottom, 13)
+                        .foregroundStyle(Brand.secondaryText)
+                        .fullDateHelp(group.start.map { localizer.fullDate($0) })
+                        .padding(.top, 22).padding(.bottom, 13)
                         .accessibilityAddTraits(.isHeader)
                     VStack(alignment: .leading, spacing: 18) {
                         ForEach(group.entries) { entry in
@@ -1888,7 +1890,7 @@ struct ParcelJournal: View {
         }
     }
 
-    private func journalDays(_ entries: [JournalEntry]) -> [JournalDay] {
+    private func journalDays(_ entries: [JournalEntry], now: Date) -> [JournalDay] {
         var groups: [JournalDay] = []
         let calendar = Calendar.current
         for entry in entries {
@@ -1901,9 +1903,10 @@ struct ParcelJournal: View {
             } else {
                 let label: String
                 if let date {
-                    if calendar.isDateInToday(date) { label = localizer.text("time.today") }
-                    else if calendar.isDateInYesterday(date) { label = localizer.text("time.yesterday") }
-                    else { label = localizer.calendarDate(date) }
+                    if calendar.isDate(date, inSameDayAs: now) { label = localizer.text("time.today") }
+                    else if let yesterday = calendar.date(byAdding: .day, value: -1, to: now),
+                            calendar.isDate(date, inSameDayAs: yesterday) { label = localizer.text("time.yesterday") }
+                    else { label = localizer.shortDate(date, now: now) }
                 } else { label = event.occurredAt }
                 groups.append(JournalDay(id: key, label: label, start: date.map { calendar.startOfDay(for: $0) }, entries: [entry]))
             }
@@ -1977,6 +1980,7 @@ private struct JournalEventRow: View {
             Text(time)
                 .font(.caption2).monospacedDigit()
                 .foregroundStyle(isCurrent ? tint : Brand.secondaryText)
+                .fullDateHelp(event.showsTime ? DateParser.date(event.occurredAt).map { localizer.fullDate($0, time: true) } : nil)
                 .frame(width: typeSize.isAccessibilitySize ? nil : column, alignment: .leading)
                 .padding(.top, 2)
             VStack(alignment: .leading, spacing: 4) {

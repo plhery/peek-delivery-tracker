@@ -87,7 +87,7 @@ final class LocalizationTests: XCTestCase {
         localizer.language = .zh
         XCTAssertEqual(localizer.expectedDelivery("2026-09-10 14:00-16:00", now: now), "明天 14:00–16:00")
         XCTAssertEqual(localizer.deliveryWindow(from: try at(11, 10), to: try at(11, 14), now: now), "9月11日周五 10:00–14:00")
-        XCTAssertEqual(localizer.dateTime(try at(11, 10)), "9月11日周五 10:00")
+        XCTAssertEqual(localizer.dateTime(try at(11, 10), now: now), "9月11日周五 10:00")
     }
 
     func testAnIPadReadsItsOwnNameWhereTheCopyNamesTheIPhone() throws {
@@ -353,9 +353,73 @@ final class LocalizationTests: XCTestCase {
         ]
         for (language, expected) in cases {
             localizer.language = language
-            XCTAssertEqual(localizer.shortDate(date), expected)
+            XCTAssertEqual(localizer.shortDate(date, now: date), expected)
             XCTAssertEqual(localizer.expectedDelivery("2026-09-12", now: date.addingTimeInterval(-3 * 86400)), expected)
         }
+    }
+
+    // As src/lib/format.test.ts: a short date gets its year only in another year and more than 31 days from today.
+    func testAShortDateNamesItsYearOnlyInAnotherYearAndMoreThanAMonthAway() throws {
+        let localizer = Localizer(systemUses24HourTime: { true })
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        localizer.language = .en
+        func at(_ year: Int, _ month: Int, _ day: Int, hour: Int = 12) throws -> Date {
+            try XCTUnwrap(Localizer.dateCalendar.date(from: DateComponents(year: year, month: month, day: day, hour: hour)))
+        }
+        // Across New Year, both ways, a date a few days off stays short.
+        XCTAssertEqual(localizer.shortDate(try at(2025, 12, 28), now: try at(2026, 1, 3)), "Sun 28 Dec")
+        XCTAssertEqual(localizer.shortDate(try at(2027, 1, 2), now: try at(2026, 12, 28)), "Sat 2 Jan")
+        XCTAssertEqual(localizer.expectedDelivery("2027-01-02", now: try at(2026, 12, 28)), "Sat 2 Jan")
+        // 31 calendar days away stays short, 32 names the year, past or future, whatever the hours.
+        XCTAssertEqual(localizer.shortDate(try at(2025, 12, 1, hour: 1), now: try at(2026, 1, 1, hour: 23)), "Mon 1 Dec")
+        XCTAssertEqual(localizer.shortDate(try at(2025, 11, 30, hour: 23), now: try at(2026, 1, 1, hour: 1)), "Sun 30 Nov 2025")
+        XCTAssertEqual(localizer.shortDate(try at(2027, 1, 31), now: try at(2026, 12, 31)), "Sun 31 Jan")
+        XCTAssertEqual(localizer.shortDate(try at(2027, 2, 1), now: try at(2026, 12, 31)), "Mon 1 Feb 2027")
+        XCTAssertFalse(Localizer.showsYear(try at(2025, 12, 1), now: try at(2026, 1, 1)))
+        XCTAssertTrue(Localizer.showsYear(try at(2025, 11, 30), now: try at(2026, 1, 1)))
+        // Far off in another year it has its year, before or after; far off in the same year it has none.
+        XCTAssertEqual(localizer.shortDate(try at(2025, 11, 15), now: try at(2026, 11, 25)), "Sat 15 Nov 2025")
+        XCTAssertEqual(localizer.shortDate(try at(2027, 3, 1), now: try at(2026, 11, 25)), "Mon 1 Mar 2027")
+        XCTAssertEqual(localizer.shortDate(try at(2026, 1, 2), now: try at(2026, 12, 30)), "Fri 2 Jan")
+        XCTAssertEqual(localizer.expectedDelivery("2027-03-01", now: try at(2026, 11, 25)), "Mon 1 Mar 2027")
+        XCTAssertEqual(localizer.dateTime(DateParser.isoString(try at(2025, 11, 15, hour: 9)), now: try at(2026, 11, 25)),
+                       "Sat 15 Nov 2025, 09:00")
+        // German keeps its period after the day, then the year; Chinese writes the year first.
+        localizer.language = .de
+        XCTAssertEqual(localizer.shortDate(try at(2024, 11, 28), now: try at(2026, 11, 25)), "Do 28. Nov 2024")
+        XCTAssertEqual(localizer.shortDate(try at(2026, 11, 28), now: try at(2026, 11, 25)), "Sa 28. Nov")
+        localizer.language = .zh
+        XCTAssertEqual(localizer.shortDate(try at(2024, 11, 28), now: try at(2026, 11, 25)), "2024年11月28日周四")
+        XCTAssertEqual(localizer.shortDate(try at(2026, 11, 28), now: try at(2026, 11, 25)), "11月28日周六")
+        XCTAssertEqual(localizer.shortDate(try at(2025, 12, 28), now: try at(2026, 1, 3)), "12月28日周日")
+    }
+
+    // As src/lib/format.test.ts: a Mac's tooltip gives a short date in full, with its time when it has one.
+    func testAFullDateNamesItsWeekdayMonthAndYearInTheAppLanguage() throws {
+        let localizer = Localizer(systemUses24HourTime: { true })
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        let date = try XCTUnwrap(Localizer.dateCalendar.date(from: DateComponents(year: 2024, month: 11, day: 28, hour: 14, minute: 32)))
+        let cases: [(AppLanguage, String, String)] = [
+            (.en, "Thursday, November 28, 2024", "Thursday, November 28, 2024, 14:32"),
+            (.de, "Donnerstag, 28. November 2024", "Donnerstag, 28. November 2024, 14:32"),
+            (.fr, "jeudi 28 novembre 2024", "jeudi 28 novembre 2024, 14:32"),
+            (.zh, "2024年11月28日 星期四", "2024年11月28日 星期四 14:32"),
+        ]
+        for (language, day, moment) in cases {
+            localizer.language = language
+            XCTAssertEqual(localizer.fullDate(date), day)
+            XCTAssertEqual(localizer.fullDate(date, time: true), moment)
+        }
+        // On a 12-hour clock.
+        let suite = "full-date-tests-\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let twelveHour = Localizer(defaults: defaults, systemUses24HourTime: { false })
+        twelveHour.language = .en
+        let moment = twelveHour.fullDate(date, time: true)
+        XCTAssertNotNil(moment.range(of: #"^Thursday, November 28, 2024, 2:32\sPM$"#, options: .regularExpression), moment)
     }
 
     func testTheHistoryNamesTheZoneItsTimesAreInByItsNameForTheWholeYear() throws {

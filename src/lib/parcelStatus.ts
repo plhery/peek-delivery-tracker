@@ -128,8 +128,7 @@ export function attentionLabel(flag: ParcelAttention, parcel: ParcelWithEvents, 
   const current = flag === 'stalled' ? currentEvent(parcel.events, parcel.returnHeld) : null;
   const latest = current ? scanDate(current) : null;
   if (!latest) return t(ATTENTION_LABELS[flag]);
-  const withYear = latest.date.getFullYear() !== new Date(now).getFullYear();
-  return t('attention.stalledSince', { date: localizedCalendarDate(latest.date, languageTag, withYear) });
+  return t('attention.stalledSince', { date: localizedCalendarDate(latest.date, languageTag, now) });
 }
 
 /**
@@ -247,10 +246,12 @@ export function localizedParcelCompletionDate(
   t: Translate,
   now: number = Date.now(),
 ): string | null {
+  const when = parcelCompletionScan(parcel);
+  return when ? localizedDeliveryDate(when.date, t, languageTag, now) : null;
+}
+
+/** When a delivered or returned parcel's latest scan ended its journey, and whether the carrier gave the time. */
+export function parcelCompletionScan(parcel: ParcelWithEvents): { date: Date; timed: boolean } | null {
   const current = currentEvent(parcel.events, parcel.returnHeld);
-  if (current?.stage === 'delivered' || current?.stage === 'returned') {
-    const when = scanDate(current);
-    if (when) return localizedDeliveryDate(when.date, t, languageTag, now);
-  }
-  return null;
+  return current?.stage === 'delivered' || current?.stage === 'returned' ? scanDate(current) : null;
 }

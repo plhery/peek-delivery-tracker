@@ -725,7 +725,7 @@ enum ParcelAttention: String, Sendable {
     /// since Mon 12 Oct"), so a parcel silent for a month doesn't read as four days.
     @MainActor func text(for parcel: Parcel, _ localizer: Localizer, now: Date = Date()) -> String {
         guard self == .stalled, let latest = parcel.currentEvent?.displayDate else { return localizer.text(localizationKey) }
-        return localizer.text("attention.stalledSince", ["date": localizer.calendarDate(latest, now: now)])
+        return localizer.text("attention.stalledSince", ["date": localizer.shortDate(latest, now: now)])
     }
 }
 

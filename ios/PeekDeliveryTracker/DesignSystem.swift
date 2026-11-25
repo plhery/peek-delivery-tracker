@@ -321,6 +321,18 @@ extension View {
 }
 
 extension View {
+    /// A short date's full form (`Localizer.fullDate`) on a Mac, where the pointer hovering it shows it. iOS shows no
+    /// tooltip and would read it out as a hint, so the date stays as it is there.
+    @ViewBuilder func fullDateHelp(_ full: String?) -> some View {
+        #if os(macOS)
+        if let full { help(full) } else { self }
+        #else
+        self
+        #endif
+    }
+}
+
+extension View {
     /// A button the screen draws itself, as iOS leaves it. A Mac would put a push button's bezel behind it, and take
     /// clicks only on its glyph.
     @ViewBuilder func drawnButton() -> some View {

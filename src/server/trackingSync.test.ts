@@ -8935,7 +8935,7 @@ describe('TrackingSyncService', () => {
       .find((step) => step.step === 'fetch')!.details;
     const parcel = { id: 'fell-back', carrier: 'la-poste', tracking_number: 'CW123456785FR', current_stage: 'accepted' };
     await service.syncPackage(parcel);
-    expect(fetchStep()).toMatchObject({ source_carrier: 'unknown', direct_outcome: 'schema' });
+    expect(fetchStep()).toMatchObject({ source_carrier: 'unknown', tracking_provider: 'ParcelsApp', direct_outcome: 'schema' });
     expect(fetchStep()).not.toHaveProperty('direct_reason');
     // A carrier waiting out its failure was not asked.
     now = new Date('2026-09-10T12:20:00Z');
@@ -8948,6 +8948,7 @@ describe('TrackingSyncService', () => {
     await service.syncPackage({ ...parcel, id: 'direct' });
     expect(fetchStep()).toMatchObject({ source_carrier: 'la-poste' });
     expect(fetchStep()).not.toHaveProperty('direct_outcome');
+    expect(fetchStep()).not.toHaveProperty('tracking_provider');
   });
 
   it('records why the parcel\'s own carrier was inconclusive when another source served the check', async () => {

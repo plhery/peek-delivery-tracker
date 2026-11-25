@@ -2963,6 +2963,8 @@ export class TrackingSyncService {
       const { swissPostReady, handoffFallbackErrorType } = fetched;
       audit.record('fetch', 'succeeded', performance.now() - fetchStartedAt, {
         source_carrier: sourceCarrierId,
+        // The universal provider that served it, which `source_carrier` names `unknown`: several may have answered.
+        ...(typeof result.tracking_provider === 'string' ? { tracking_provider: result.tracking_provider } : {}),
         // The carrier answered too, when a provider serves its answer on local clocks or in part.
         carrier_answered: result.carrier_answered === true,
         // Why another source served the parcel: how its own carrier's lookup went.

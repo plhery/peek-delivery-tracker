@@ -150,7 +150,8 @@ All tables and views here are service-role only.
   whatever the parcel shows, its `fetch` step `skipped` too, so it logs no error: no refresh
   count, health sample or check total reads it, and the 24-hour health counts it apart
   (`skipped`). A successful
-  `fetch` names the source that served the parcel (`source_carrier`, `unknown` for a universal provider) and has `carrier_answered`
+  `fetch` names the source that served the parcel (`source_carrier`, `unknown` for a universal provider, which
+  `tracking_provider` then names) and has `carrier_answered`
   when the carrier answered too, on local clocks, in part or with the label alone. When another source served a
   parcel filed under a carrier, `direct_outcome` says how that carrier's own lookup went in the
   check: `ok`, the category of its failure (such as `transport`, `schema` or `not_found`), or

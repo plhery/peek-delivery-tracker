@@ -9,6 +9,10 @@ IssueTracker: https://github.com/plhery/peek-delivery-tracker/issues
 Changelog: https://github.com/plhery/peek-delivery-tracker/releases
 
 AntiFeatures:
+  # The beta here bundles them from a scraper release licensed for noncommercial use only. Universal Parcel Scraper
+  # licenses them under AGPL-3.0-only from 0.1387.0: drop NonFreeAssets with the first beta built on that release or later.
+  NonFreeAssets:
+    en-US: Bundles Universal Parcel Scraper's carrier catalog and tracking-number patterns, which the scraper release this version was built with licenses for noncommercial use only.
   NonFreeNet:
     en-US: A package's scans come from carriers' sites and from tracking services such as 17TRACK, through Peek's own server, whose code is free software but reads carriers with Universal Parcel Scraper, licensed for noncommercial use only. A new lookup can need Cloudflare's Turnstile check, sign-in can use Google, and directions to a pickup point open Google Maps.
   TetheredNet:

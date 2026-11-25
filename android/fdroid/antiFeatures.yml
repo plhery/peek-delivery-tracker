@@ -1,6 +1,9 @@
 # The names of the anti-features the app's entry lists, in F-Droid's own words (fdroiddata's config/antiFeatures.yml).
 # scripts/publish-fdroid.sh puts them in the repository's index: F-Droid shows an app's anti-features only when its
 # repository names them.
+NonFreeAssets:
+  description: This app contains non-free assets
+  name: Non-Free Assets
 NonFreeNet:
   description: This app promotes or depends entirely on a non-free network service
   name: Non-Free Network Services

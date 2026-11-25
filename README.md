@@ -144,7 +144,9 @@ short path; [Deployment](docs/DEPLOYMENT.md) has every step in full.
 installs. From version 0.1294.0 its licence,
 [PolyForm Noncommercial 1.0.0](https://github.com/plhery/universal-parcel-scraper/blob/main/LICENSE),
 allows noncommercial use only, so a Peek of your own may only run for noncommercial purposes,
-as that licence defines them.
+as that licence defines them. From 0.1387.0, its carrier catalog and tracking-number patterns,
+which the apps bundle (`CarrierCatalog.json` and `Reading.json`), are licensed under
+[AGPL-3.0-only](https://github.com/plhery/universal-parcel-scraper/blob/main/NOTICE), like Peek.
 
 **The database.** Apply every file in [`supabase/migrations`](supabase/migrations) in
 filename order, each in its own transaction, stopping at the first error. To try them

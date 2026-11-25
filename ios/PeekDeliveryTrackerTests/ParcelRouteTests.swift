@@ -1005,13 +1005,15 @@ extension ParcelRouteTests {
         let drawings = FileManager.default.temporaryDirectory.appending(path: "widget-sample-\(UUID().uuidString)")
         defer { try? FileManager.default.removeItem(at: drawings) }
         var snapshots: [String: DeliveryWidgetSnapshot] = [:]
+        // The demo read at midday: the round its parcel went out on two hours before has not ended, whatever the hour the test runs.
+        let now = try XCTUnwrap(Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: Date()))
         for language in AppLanguage.allCases {
             localizer.language = language
             let suite = "widget-sample-\(UUID().uuidString)"
             let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
             defer { defaults.removePersistentDomain(forName: suite) }
-            let parcels = DemoRepository(defaults: defaults, language: { language }).list()
-            let shown = Array(DeliveryWidgetSelection.listed(ParcelStore.widgetDeliveries(of: parcels, localizer: localizer)).prefix(2))
+            let parcels = DemoRepository(defaults: defaults, language: { language }).list(now: now)
+            let shown = Array(DeliveryWidgetSelection.listed(ParcelStore.widgetDeliveries(of: parcels, localizer: localizer, now: now)).prefix(2))
             XCTAssertEqual(shown.count, 2, "\(language)")
             var sample: [DeliveryWidgetParcel] = []
             for (index, item) in shown.enumerated() {

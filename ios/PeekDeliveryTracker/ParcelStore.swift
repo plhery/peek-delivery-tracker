@@ -2622,7 +2622,7 @@ final class DemoRepository {
     }
 
     func list(now: Date = Date()) -> [Parcel] {
-        let parcels = Self.withPeekAi(load().sorted { $0.createdAt > $1.createdAt }, now: now)
+        let parcels = Self.withPeekAi(load(now: now).sorted { $0.createdAt > $1.createdAt }, now: now)
         #if DEBUG
         return ImportChargesPreview.charging(parcels)
         #else
@@ -2755,8 +2755,9 @@ final class DemoRepository {
 
     /// The saved parcels with the demo's own text in the app's language. Names
     /// someone edited and text the demo did not write match nothing and stay.
-    private func load() -> [Parcel] {
-        let parcels = saved()
+    /// The saved parcels in the app's language; a first read seeds the samples at `now`.
+    private func load(now: Date = Date()) -> [Parcel] {
+        let parcels = saved(now: now)
         let target = language().rawValue
         let written = defaults.string(forKey: languageKey) ?? "en"
         guard written != target else { return parcels }
@@ -2794,7 +2795,7 @@ final class DemoRepository {
         Self.catalog.translations[language().rawValue]?[text] ?? text
     }
 
-    private func saved() -> [Parcel] {
+    private func saved(now: Date = Date()) -> [Parcel] {
         if let data = defaults.data(forKey: key),
            let parcels = try? JSONDecoder.deliveryTracker.decode([Parcel].self, from: data) {
             if !defaults.bool(forKey: catalogKey) {
@@ -2815,7 +2816,7 @@ final class DemoRepository {
             }
             return parcels
         }
-        let seeded = Self.seed()
+        let seeded = Self.seed(now: now)
         save(seeded)
         defaults.removeObject(forKey: languageKey)
         return seeded

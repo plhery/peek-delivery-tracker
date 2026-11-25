@@ -76,6 +76,8 @@ class ZoomStackTest {
     private var top: String? by mutableStateOf(null)
     private var sourceId by mutableStateOf(SOURCE)
     private var sourceTop: Dp by mutableStateOf(120.dp)
+    /** Whether the page is kept from the stack, as a scene brings it a frame after it comes on top. */
+    private var pageHeld by mutableStateOf(false)
     private val list = LazyListState()
     private val row = ScrollState(0)
     private val rootFocus = FocusRequester()
@@ -124,7 +126,7 @@ class ZoomStackTest {
                             )
                         }
                     },
-                    page = drawn?.let {
+                    page = drawn?.takeUnless { pageHeld }?.let {
                         {
                             Column(Modifier.fillMaxSize()) {
                                 Box(Modifier.onFocusChanged { pageFocused = it.isFocused }.focusable().clickable { taps++ }.size(40.dp).testTag(PAGE_BUTTON))
@@ -605,6 +607,28 @@ class ZoomStackTest {
         assertEquals(370.5f, (held.right - held.left).value, 0.5f)
         assertEquals(15.5f, held.left.value, 0.5f)
         assertEquals(21.1f + 40f * 0.95f, held.top.value, 0.5f)
+    }
+
+    @Test
+    fun aPageShownStillLeavesTheRootDrawnUntilThePageComes() {
+        show(open = false)
+        compose.mainClock.autoAdvance = false
+        fun red(): Boolean {
+            val pixel = compose.onRoot().captureToImage().asAndroidBitmap().getPixel(390, 360)
+            return ((pixel shr 16) and 0xFF) - ((pixel shr 8) and 0xFF) > 40
+        }
+        // On top before the page: the root stays whole, its card too, rather than leaving the window's ground alone.
+        change {
+            pageHeld = true
+            transition.showStill(SOURCE)
+            top = SOURCE
+        }
+        compose.mainClock.advanceTimeByFrame()
+        assertTrue(red())
+        // The page comes, and covers it.
+        change { pageHeld = false }
+        compose.mainClock.advanceTimeByFrame()
+        assertFalse(red())
     }
 
     @Test

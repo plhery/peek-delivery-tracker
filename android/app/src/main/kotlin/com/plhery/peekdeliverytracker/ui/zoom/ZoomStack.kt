@@ -25,6 +25,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -169,6 +170,7 @@ fun ZoomStack(
     val back by rememberUpdatedState(onBack)
     flight.reduceMotion = reduceMotion
     flight.backEnabled = backEnabled
+    SideEffect { flight.pageIn = page != null }
     flight.follow(top) {
         // Read as a flight sets off, and only then.
         val bounds = flight.bounds
@@ -420,7 +422,13 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
     val dragging: Boolean get() = dragAnchor != null
     val atRest: Boolean get() = phase == Phase.Rest && !dragging && !backing
     val flying: Boolean get() = phase != Phase.Rest
-    val hidesRoot: Boolean get() = id != null && atRest && progress >= 1f
+    /**
+     * Whether the stack has the page to draw. A page shown still, as a parcel's page comes back with the app started
+     * again, can be on top a frame before its scene brings it: the root stays whole until the page is there to cover
+     * it, as on the iPhone, rather than leaving the window's ground alone.
+     */
+    var pageIn: Boolean by mutableStateOf(false)
+    val hidesRoot: Boolean get() = pageIn && id != null && atRest && progress >= 1f
 
     /** Whether a drag carries the page off sideways. */
     private val swiping: Boolean get() = dragAnchor != null && dragSide != 0
@@ -431,8 +439,11 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
     /** Whether the predictive back gesture moves the page: not under Reduce Motion, and only from rest. */
     fun canFollowBack(): Boolean = id != null && !crossfade && !reduceMotion && (backing || atRest)
 
-    /** The source unseen under the page: none in Reduce Motion's crossfade, where the page fades in over it. */
-    val hidden: Any? get() = if (crossfade) null else id
+    /**
+     * The source unseen under the page: none in Reduce Motion's crossfade, where the page fades in over it, nor before
+     * the page is there.
+     */
+    val hidden: Any? get() = if (crossfade || !pageIn) null else id
 
     fun attach() {
         transition.attach(this)

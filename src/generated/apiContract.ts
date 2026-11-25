@@ -283,6 +283,10 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       },
       {
+        "pattern": "^35\\d{3}0000\\d{9}$",
+        "confidence": "low"
+      },
+      {
         "pattern": "^CN\\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])\\d{6}$",
         "confidence": "low"
       },
@@ -3236,7 +3240,7 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^(?!3232|44)(?:0[1-9]|[1-4]\\d|5[0-2])\\d{3}0000\\d{9}$",
+        "pattern": "^(?!3232|44|35)(?:0[1-9]|[1-4]\\d|5[0-2])\\d{3}0000\\d{9}$",
         "confidence": "high"
       },
       {
@@ -4713,7 +4717,7 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       },
       {
-        "pattern": "^[BDHPTUV]\\d{10}$",
+        "pattern": "^[BCDHPRTUV]\\d{10}$",
         "confidence": "low"
       },
       {
@@ -15699,6 +15703,11 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       },
       {
+        "pattern": "^YB\\d{10}CN$",
+        "confidence": "low",
+        "preferred": true
+      },
+      {
         "pattern": "^JXC(?:YI|ZO|US|ZI)\\d{10}YQ$",
         "confidence": "low",
         "preferred": true
@@ -16709,7 +16718,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "mtscn"
+      "adapter": "mtscn",
+      "recognitionRank": 42
     },
     "linkRules": [
       {
@@ -16726,6 +16736,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^AMTS\\d{9}FS$",
         "confidence": "high"
+      },
+      {
+        "pattern": "^N20\\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])(?:[01]\\d|2[0-3])[0-5]\\d[0-5]\\d\\d{7}$",
+        "confidence": "low"
       }
     ]
   },
@@ -21911,6 +21925,10 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^888[01]\\d{11}$",
+        "confidence": "high"
+      },
+      {
+        "pattern": "^99988\\d{10}$",
         "confidence": "high"
       }
     ],
@@ -33509,6 +33527,7 @@ export const CARRIER_CAPABILITIES = {
   "fedex-international-connect": {
     "displayName": "FedEx International Connect",
     "aliases": [
+      "FedEx Cross Border",
       "FedEx International Connect (FIC)",
       "P2P Mailing",
       "P2P TrakPak",
@@ -34951,7 +34970,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Athens",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "tas-courier"
     },
     "trackingUrlTemplate": "https://www.tascourier.gr/track?v={trackingNumber}",
     "linkRules": [
@@ -40416,7 +40435,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kolkata",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "mark-express"
     },
     "trackingUrlTemplate": "https://crm.markerp.in/Frm_DocTrackWeb.aspx?docno={trackingNumber}",
     "linkRules": [
@@ -42972,7 +42991,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Argentina/Buenos_Aires",
     "tracking": {
       "mode": "automatic",
-      "adapter": "bfe-express"
+      "adapter": "bfe-express",
+      "recognitionRank": 41
     },
     "trackingUrlTemplate": "https://www.bfeexpress.com/track?track_number={trackingNumber}",
     "linkRules": [
@@ -46645,7 +46665,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Riyadh",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "barq"
     },
     "trackingUrlTemplate": "https://web.barqfleet.com/en/tracking-details?trackingId={trackingNumber}",
     "linkRules": [
@@ -46950,7 +46970,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Dubai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "flipxpress"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -47659,7 +47679,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Karachi",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "xpress-courier-link"
     },
     "trackingUrlTemplate": "https://xpresscourierlink.com/tracking/?txtstatus=International&search={trackingNumber}",
     "linkRules": [
@@ -48900,7 +48920,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/New_York",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "dnipro-llc"
     },
     "trackingUrlTemplate": "https://dniprollc.com/en/packages-tracking/?tracking={trackingNumber}",
     "linkRules": [
@@ -49283,7 +49303,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Los_Angeles",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "aqx-logistics"
     },
     "trackingUrlTemplate": "https://aqxlogistics.com/track?id={trackingNumber}",
     "linkRules": [
@@ -50268,12 +50288,23 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Los_Angeles",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "edi-express"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "ediexpressinc.com"
+        ],
+        "pathPattern": "^/prodetail\\.asp$",
+        "params": [
+          "proNum"
+        ]
+      }
+    ],
     "detectionRules": [],
     "trackingSearchUrl": "https://my.ediexpressinc.com/pro_pu_trace.asp",
-    "helpUrl": "https://www.ediexpressinc.com/contact-us"
+    "helpUrl": "https://www.ediexpressinc.com/contact-us",
+    "trackingUrlTemplate": "https://my.ediexpressinc.com/prodetail.asp?proNum={trackingNumber}"
   },
   "fmd-distribution": {
     "displayName": "FMD Distribution",
@@ -52606,7 +52637,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kolkata",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "lexship"
     },
     "trackingUrlTemplate": "https://track.lexship.biz/?tracking={trackingNumber}",
     "linkRules": [
@@ -56069,7 +56100,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Istanbul",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "cargomini"
     },
     "trackingUrlTemplate": "https://tracking.cargomini.com/{trackingNumber}",
     "linkRules": [
@@ -56312,7 +56343,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Nicosia",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "4a-express"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -56395,7 +56426,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Monterrey",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "afimex"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -57358,7 +57389,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Stockholm",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "premo"
     },
     "trackingUrlTemplate": "https://www.premo.se/paketsparning?id={trackingNumber}",
     "linkRules": [
@@ -59615,7 +59646,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Santo_Domingo",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "domex-do"
     },
     "trackingUrlTemplate": "https://domex.do/rastreo?guia={trackingNumber}",
     "linkRules": [
@@ -59626,6 +59657,15 @@ export const CARRIER_CAPABILITIES = {
         "pathPattern": "^/rastreo/?$",
         "params": [
           "guia"
+        ]
+      },
+      {
+        "domains": [
+          "domex-online.iplus.com.do"
+        ],
+        "pathPattern": "^/lg-es/ut/Estatus\\.aspx$",
+        "params": [
+          "id"
         ]
       }
     ],
@@ -60167,7 +60207,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Santiago",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "recibelo"
     },
     "trackingUrlTemplate": "https://www.recibelo.cl/seguimiento/?codigo={trackingNumber}",
     "linkRules": [
@@ -60426,7 +60466,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Argentina/Buenos_Aires",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "urbano-ar"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -60627,7 +60667,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Africa/Casablanca",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "ctm-messagerie"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -60783,7 +60823,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Africa/Casablanca",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "ozon-express-ma"
     },
     "trackingUrlTemplate": "https://ozonexpress.ma/tracking-colis/{trackingNumber}",
     "linkRules": [
@@ -63612,12 +63652,24 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Dubai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "fynex"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "fynexcourierdubai.com",
+          "www.fynexcourierdubai.com"
+        ],
+        "pathPattern": "^/tracking/?$",
+        "params": [
+          "trackno"
+        ]
+      }
+    ],
     "detectionRules": [],
     "trackingSearchUrl": "https://fynexcourierdubai.com/tracking/",
-    "helpUrl": "https://fynexcourierdubai.com/contacts/"
+    "helpUrl": "https://fynexcourierdubai.com/contacts/",
+    "trackingUrlTemplate": "https://fynexcourierdubai.com/tracking/?trackno={trackingNumber}"
   },
   "gk-global-kr": {
     "displayName": "GK Global",
@@ -69328,6 +69380,589 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ]
+  },
+  "chengchain": {
+    "displayName": "Chengchuang Supply Chain",
+    "aliases": [
+      "ChengChain",
+      "诚创供应链",
+      "浙江诚创供应链有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#213780",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "chengchain"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "zjcc.rtb56.com"
+        ],
+        "pathPattern": "^/track_query\\.aspx$",
+        "params": [
+          "track_number"
+        ]
+      }
+    ],
+    "detectionRules": []
+  },
+  "ed-post": {
+    "displayName": "ED POST",
+    "aliases": [
+      "易德国际",
+      "Yide International",
+      "易德供应链有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#c94c40",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "ed-post"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "www.666post.com",
+          "666post.com"
+        ],
+        "pathPattern": "^/(?:sz56t/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": []
+  },
+  "hcrd": {
+    "displayName": "HCRD",
+    "aliases": [
+      "惠程荣达",
+      "许昌市惠程荣达货运代理有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#0167ae",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "hcrd"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "www.xchcrd.com",
+          "xchcrd.com"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": []
+  },
+  "hdgj": {
+    "displayName": "Bright East International",
+    "aliases": [
+      "HDGJ",
+      "皓东国际",
+      "深圳市皓东国际供应链有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#2880a8",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "hdgj"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "134.175.244.145"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": []
+  },
+  "hhh": {
+    "displayName": "Haihehui International",
+    "aliases": [
+      "HHH",
+      "海河汇国际",
+      "海河汇国际供应链",
+      "深圳市海河汇国际供应链有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#213780",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "hhh"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "szhhh.rtb56.com"
+        ],
+        "pathPattern": "^/track_query\\.aspx$",
+        "params": [
+          "track_number"
+        ]
+      }
+    ],
+    "detectionRules": []
+  },
+  "hjyt": {
+    "displayName": "Hengjie Yutong",
+    "aliases": [
+      "HJYT",
+      "恒捷宇通",
+      "深圳市恒捷宇通物流有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#0084de",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "hjyt"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "120.78.64.88"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": []
+  },
+  "hytd": {
+    "displayName": "HYTD Express",
+    "aliases": [
+      "浩源拓达",
+      "浩源物流",
+      "深圳市浩源拓达物流有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#0b3b98",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "hytd"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "159.75.218.197"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": []
+  },
+  "jgex": {
+    "displayName": "JGEX",
+    "aliases": [
+      "锦鸽",
+      "锦鸽国际物流",
+      "上海锦鸽国际货运代理有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#00a0e9",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "jgex"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "www.jgex.net",
+          "jgex.net"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": []
+  },
+  "jthq": {
+    "displayName": "JTHQ",
+    "aliases": [
+      "极通环球",
+      "深圳市极通环球供应链有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#e23e35",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "jthq"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "jthq.rtb56.com"
+        ],
+        "pathPattern": "^/track_query\\.aspx$",
+        "params": [
+          "track_number"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^JTHQ\\d{12}$",
+        "confidence": "high"
+      }
+    ]
+  },
+  "lulu-express": {
+    "displayName": "luluExpress",
+    "aliases": [
+      "Lulu Express",
+      "噜噜快跑",
+      "深圳市噜噜快跑国际供应链有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#fe9601",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "lulu-express"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "szcxsd.rtb56.com"
+        ],
+        "pathPattern": "^/track_query\\.aspx$",
+        "params": [
+          "track_number"
+        ]
+      }
+    ],
+    "detectionRules": []
+  },
+  "qqwy": {
+    "displayName": "Global Security",
+    "aliases": [
+      "QQWY",
+      "全球无忧",
+      "深圳市全球无忧国际物流有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#1e1e84",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "qqwy"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "www.qqwy56.com",
+          "qqwy56.com"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": []
+  },
+  "qyun": {
+    "displayName": "Qyun Express",
+    "aliases": [
+      "Qyun",
+      "青云物流",
+      "深圳市青云物流供应链管理有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#00397c",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "qyun"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "106.52.192.65"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": []
+  },
+  "shilianxin": {
+    "displayName": "Shilianxin",
+    "aliases": [
+      "世联鑫",
+      "深圳市世联鑫国际物流有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#014e91",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "shilianxin"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "47.108.154.213"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": []
+  },
+  "suocang": {
+    "displayName": "Suoexpress",
+    "aliases": [
+      "SUOCANG",
+      "所仓物流",
+      "所仓国际物流",
+      "深圳市所仓国际物流有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#a264cd",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "suocang"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "42.193.237.14"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": []
+  },
+  "szctc": {
+    "displayName": "CTC Supply Chain",
+    "aliases": [
+      "赤兔猫供应链",
+      "深圳市赤兔猫供应链有限公司",
+      "SZCTC"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#d32f2f",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "szctc"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "szctc.rtb56.com"
+        ],
+        "pathPattern": "^/track_query\\.aspx$",
+        "params": [
+          "nums",
+          "track_number"
+        ]
+      }
+    ],
+    "detectionRules": []
+  },
+  "vyang": {
+    "displayName": "VYANG International",
+    "aliases": [
+      "VYANG",
+      "维央国际",
+      "深圳市维央国际供应链有限公司",
+      "深圳市维央国际贸易有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#295dc5",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "vyang"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "43.136.110.132"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": []
+  },
+  "wokexp": {
+    "displayName": "Wokexp",
+    "aliases": [
+      "威龙永凯",
+      "威龙永凯供应链管理（上海）有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#88c800",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "wokexp"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "www.wokexp.cn",
+          "wokexp.cn"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": []
+  },
+  "xs-express": {
+    "displayName": "Xinshu Logistics",
+    "aliases": [
+      "XS Express",
+      "Xin Shu Logistics",
+      "新树物流",
+      "新树国际物流",
+      "深圳市新树国际物流科技有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#1e418c",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "xs-express"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "tms.xs-exp.com"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": []
+  },
+  "zxsy": {
+    "displayName": "ZXSY",
+    "aliases": [
+      "甄兴盛越",
+      "ZhenXingshengyue",
+      "甄兴盛越国际物流(莆田)有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#0048a0",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "zxsy"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "www.zxsywl.cn",
+          "zxsywl.cn"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": []
   }
 } as const;
 
@@ -71442,7 +72077,26 @@ export const CARRIER_IDS = [
   "booths-logistics",
   "dragonfly-au",
   "ctl-group-pl",
-  "shengao"
+  "shengao",
+  "chengchain",
+  "ed-post",
+  "hcrd",
+  "hdgj",
+  "hhh",
+  "hjyt",
+  "hytd",
+  "jgex",
+  "jthq",
+  "lulu-express",
+  "qqwy",
+  "qyun",
+  "shilianxin",
+  "suocang",
+  "szctc",
+  "vyang",
+  "wokexp",
+  "xs-express",
+  "zxsy"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

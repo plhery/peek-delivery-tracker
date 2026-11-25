@@ -5500,6 +5500,34 @@
     ]
   },
   {
+    "input": "010790148121",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-fr",
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "japan-post",
+      "sf-express",
+      "sto",
+      "zto",
+      "yamato",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sagawa",
+      "sending"
+    ],
+    "asked": [
+      "japan-post",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
     "input": "0108212286",
     "carrier": "unknown",
     "confidence": "low",
@@ -16530,6 +16558,14 @@
     ]
   },
   {
+    "input": "1092972",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "seur"
+    ]
+  },
+  {
     "input": "109338901674",
     "carrier": "unknown",
     "confidence": "low",
@@ -18420,6 +18456,14 @@
     ]
   },
   {
+    "input": "117490233",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
+  },
+  {
     "input": "1176101017977",
     "carrier": "unknown",
     "confidence": "low",
@@ -18445,6 +18489,14 @@
       "econt",
       "ozon-logistics",
       "paquetexpress"
+    ]
+  },
+  {
+    "input": "117696687",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
     ]
   },
   {
@@ -25841,6 +25893,12 @@
     ]
   },
   {
+    "input": "180230741306TR",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "18047A000264492",
     "carrier": "apc-postal-logistics",
     "confidence": "high",
@@ -26602,6 +26660,12 @@
       "ozon-logistics",
       "paquetexpress"
     ]
+  },
+  {
+    "input": "190230529212TR",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "190669647990",
@@ -29169,6 +29233,14 @@
     ]
   },
   {
+    "input": "200633738",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
+  },
+  {
     "input": "200643613",
     "carrier": "unknown",
     "confidence": "low",
@@ -30599,6 +30671,14 @@
     "confidence": "low",
     "candidates": [
       "dpd-ie"
+    ]
+  },
+  {
+    "input": "2054302",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "seur"
     ]
   },
   {
@@ -33680,6 +33760,42 @@
       "packeta",
       "dhl-ecommerce-es",
       "box-now"
+    ]
+  },
+  {
+    "input": "22730000000021371521",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "usps",
+      "nz-post"
+    ],
+    "asked": [
+      "nz-post"
+    ]
+  },
+  {
+    "input": "22730000000037355617",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "usps",
+      "nz-post"
+    ],
+    "asked": [
+      "nz-post"
+    ]
+  },
+  {
+    "input": "22730000000043041054",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "usps",
+      "nz-post"
+    ],
+    "asked": [
+      "nz-post"
     ]
   },
   {
@@ -44302,6 +44418,24 @@
     ]
   },
   {
+    "input": "350010000999999980",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "ecoscooting",
+      "aliexpress",
+      "bpost",
+      "gls-es"
+    ],
+    "preferred": [
+      "ecoscooting"
+    ],
+    "asked": [
+      "ecoscooting",
+      "aliexpress"
+    ]
+  },
+  {
     "input": "35007947741",
     "carrier": "unknown",
     "confidence": "low",
@@ -51128,6 +51262,19 @@
     "asked": [
       "brt",
       "colis-prive"
+    ]
+  },
+  {
+    "input": "464154997975431",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "brt",
+      "yunda",
+      "ozon-logistics"
+    ],
+    "asked": [
+      "brt"
     ]
   },
   {
@@ -60087,6 +60234,29 @@
     ]
   },
   {
+    "input": "6013025456576",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "imile",
+      "correos-chile",
+      "delhivery",
+      "yunda",
+      "korea-post",
+      "aras-kargo",
+      "econt",
+      "ozon-logistics",
+      "paquetexpress"
+    ],
+    "preferred": [
+      "imile"
+    ],
+    "asked": [
+      "imile",
+      "aras-kargo"
+    ]
+  },
+  {
     "input": "60133375615",
     "carrier": "unknown",
     "confidence": "low",
@@ -60195,6 +60365,29 @@
     ]
   },
   {
+    "input": "6022725441176",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "imile",
+      "correos-chile",
+      "delhivery",
+      "yunda",
+      "korea-post",
+      "aras-kargo",
+      "econt",
+      "ozon-logistics",
+      "paquetexpress"
+    ],
+    "preferred": [
+      "imile"
+    ],
+    "asked": [
+      "imile",
+      "aras-kargo"
+    ]
+  },
+  {
     "input": "6026547346434",
     "carrier": "unknown",
     "confidence": "low",
@@ -60245,6 +60438,29 @@
     "candidates": [
       "imile",
       "correos-chile",
+      "yunda",
+      "korea-post",
+      "aras-kargo",
+      "econt",
+      "ozon-logistics",
+      "paquetexpress"
+    ],
+    "preferred": [
+      "imile"
+    ],
+    "asked": [
+      "imile",
+      "aras-kargo"
+    ]
+  },
+  {
+    "input": "6032726450345",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "imile",
+      "correos-chile",
+      "delhivery",
       "yunda",
       "korea-post",
       "aras-kargo",
@@ -60362,6 +60578,14 @@
     ],
     "asked": [
       "tnt"
+    ]
+  },
+  {
+    "input": "605323877",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
     ]
   },
   {
@@ -60665,6 +60889,29 @@
   },
   {
     "input": "6070826318493",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "imile",
+      "correos-chile",
+      "delhivery",
+      "yunda",
+      "korea-post",
+      "aras-kargo",
+      "econt",
+      "ozon-logistics",
+      "paquetexpress"
+    ],
+    "preferred": [
+      "imile"
+    ],
+    "asked": [
+      "imile",
+      "aras-kargo"
+    ]
+  },
+  {
+    "input": "6071226294834",
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
@@ -63894,6 +64141,14 @@
     "confidence": "high",
     "candidates": [
       "ozon-logistics"
+    ]
+  },
+  {
+    "input": "6528596",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "seur"
     ]
   },
   {
@@ -81875,6 +82130,16 @@
     ]
   },
   {
+    "input": "98805739",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colisweb",
+      "heppner"
+    ]
+  },
+  {
     "input": "9882658",
     "carrier": "unknown",
     "confidence": "low",
@@ -82926,6 +83191,14 @@
       "dpd-nl",
       "dpd-de",
       "chronopost"
+    ]
+  },
+  {
+    "input": "999889999999999",
+    "carrier": "j-and-t-br",
+    "confidence": "high",
+    "candidates": [
+      "j-and-t-br"
     ]
   },
   {
@@ -87441,6 +87714,7 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "dtdc",
       "gls-it"
     ],
     "asked": [
@@ -87452,6 +87726,7 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "dtdc",
       "gls-it"
     ],
     "asked": [
@@ -87656,6 +87931,18 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "C5000892520",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dtdc",
+      "gls-it"
+    ],
+    "asked": [
+      "gls-it"
+    ]
   },
   {
     "input": "C619269",
@@ -88032,6 +88319,12 @@
     "candidates": [
       "canada-post"
     ]
+  },
+  {
+    "input": "CC2640007786GY",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "CC299999999980",
@@ -89302,7 +89595,8 @@
       "bfe-express"
     ],
     "asked": [
-      "colis-prive"
+      "colis-prive",
+      "bfe-express"
     ]
   },
   {
@@ -89314,7 +89608,8 @@
       "bfe-express"
     ],
     "asked": [
-      "colis-prive"
+      "colis-prive",
+      "bfe-express"
     ]
   },
   {
@@ -89322,6 +89617,9 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "bfe-express"
+    ],
+    "asked": [
       "bfe-express"
     ]
   },
@@ -89334,7 +89632,8 @@
       "bfe-express"
     ],
     "asked": [
-      "colis-prive"
+      "colis-prive",
+      "bfe-express"
     ]
   },
   {
@@ -91223,6 +91522,12 @@
     ]
   },
   {
+    "input": "CTC202617802729",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "CTTY9999999980CN",
     "carrier": "cttyex",
     "confidence": "high",
@@ -91352,6 +91657,28 @@
     ],
     "asked": [
       "poczta-polska",
+      "chronopost"
+    ]
+  },
+  {
+    "input": "CV044917241US",
+    "carrier": "intl-post",
+    "confidence": "high",
+    "candidates": [
+      "intl-post"
+    ],
+    "asked": [
+      "chronopost"
+    ]
+  },
+  {
+    "input": "CV044917309US",
+    "carrier": "intl-post",
+    "confidence": "high",
+    "candidates": [
+      "intl-post"
+    ],
+    "asked": [
       "chronopost"
     ]
   },
@@ -92677,6 +93004,18 @@
   },
   {
     "input": "DY0100067710244",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "DYY013552509XB",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "DYY666910851XB",
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
@@ -98869,6 +99208,30 @@
     ]
   },
   {
+    "input": "HC0003010989RD",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "HC0003011885RD",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "HC0003013565RD",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "HC0003031059RD",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "HC019942965LT",
     "carrier": "unknown",
     "confidence": "low",
@@ -98901,6 +99264,12 @@
       "correo-argentino",
       "chronopost"
     ]
+  },
+  {
+    "input": "HD000000103510YQ",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "HDMUNBOM63007200",
@@ -98955,6 +99324,18 @@
     ]
   },
   {
+    "input": "HF-BC5DCC0A",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "HF-BD4A920D",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "HGDGY1910830544YQ",
     "carrier": "unknown",
     "confidence": "none",
@@ -98962,6 +99343,18 @@
   },
   {
     "input": "HGDGY1910856105YQ",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "HHH1001984021YQ",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "HHH1001987474YQ",
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
@@ -99278,6 +99671,12 @@
     "asked": [
       "c-chez-vous"
     ]
+  },
+  {
+    "input": "HY000000301953TD",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "HY9999999999980YQ",
@@ -100390,6 +100789,12 @@
     ]
   },
   {
+    "input": "JG912050440363",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "JH9999999980CN",
     "carrier": "unknown",
     "confidence": "low",
@@ -101451,6 +101856,46 @@
     "confidence": "high",
     "candidates": [
       "j-and-t-middle-east"
+    ]
+  },
+  {
+    "input": "JTHQ022557630284",
+    "carrier": "jthq",
+    "confidence": "high",
+    "candidates": [
+      "jthq"
+    ]
+  },
+  {
+    "input": "JTHQ023937990657",
+    "carrier": "jthq",
+    "confidence": "high",
+    "candidates": [
+      "jthq"
+    ]
+  },
+  {
+    "input": "JTHQ024154980703",
+    "carrier": "jthq",
+    "confidence": "high",
+    "candidates": [
+      "jthq"
+    ]
+  },
+  {
+    "input": "JTHQ024866600547",
+    "carrier": "jthq",
+    "confidence": "high",
+    "candidates": [
+      "jthq"
+    ]
+  },
+  {
+    "input": "JTHQ024866620735",
+    "carrier": "jthq",
+    "confidence": "high",
+    "candidates": [
+      "jthq"
     ]
   },
   {
@@ -104264,6 +104709,12 @@
     ]
   },
   {
+    "input": "LULU1000674156",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "LV000550144CY",
     "carrier": "intl-post",
     "confidence": "high",
@@ -105860,6 +106311,12 @@
     ]
   },
   {
+    "input": "MRK062629425421RX",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "MRK0824B2LP5041691",
     "carrier": "unknown",
     "confidence": "none",
@@ -106323,6 +106780,17 @@
     "confidence": "high",
     "candidates": [
       "dtdc"
+    ]
+  },
+  {
+    "input": "N209912312359599999999",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mtscn"
+    ],
+    "asked": [
+      "mtscn"
     ]
   },
   {
@@ -110849,6 +111317,21 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "dtdc",
+      "gls-it",
+      "post-one"
+    ],
+    "asked": [
+      "gls-it",
+      "post-one"
+    ]
+  },
+  {
+    "input": "R5002220418",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dtdc",
       "gls-it",
       "post-one"
     ],
@@ -110862,6 +111345,7 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "dtdc",
       "gls-it",
       "post-one"
     ],
@@ -110875,6 +111359,7 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "dtdc",
       "gls-it",
       "post-one"
     ],
@@ -110888,6 +111373,7 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "dtdc",
       "gls-it",
       "post-one"
     ],
@@ -110901,6 +111387,7 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "dtdc",
       "gls-it",
       "post-one"
     ],
@@ -113120,6 +113607,14 @@
     ]
   },
   {
+    "input": "RR057830637AE",
+    "carrier": "emirates-post",
+    "confidence": "high",
+    "candidates": [
+      "emirates-post"
+    ]
+  },
+  {
     "input": "RR078278874SE",
     "carrier": "postnord",
     "confidence": "high",
@@ -114426,6 +114921,12 @@
     "candidates": []
   },
   {
+    "input": "SC2026000211102",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "SCD0000015902735263",
     "carrier": "unknown",
     "confidence": "none",
@@ -115300,6 +115801,12 @@
       "aramex-au",
       "aramex-nz"
     ]
+  },
+  {
+    "input": "SLX200119352CN",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "SM0102725852",
@@ -117662,6 +118169,12 @@
     "candidates": []
   },
   {
+    "input": "TL202601-023818",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "TLKPHKGVCR69003X",
     "carrier": "unknown",
     "confidence": "none",
@@ -119375,6 +119888,40 @@
     ]
   },
   {
+    "input": "V-3975570",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "V-4027982",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
     "input": "V00001E2636585",
     "carrier": "venipak",
     "confidence": "high",
@@ -119990,6 +120537,12 @@
     ]
   },
   {
+    "input": "VY000010380781YQ",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "W01019874",
     "carrier": "unknown",
     "confidence": "none",
@@ -120044,6 +120597,12 @@
   },
   {
     "input": "W1000006915082",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "W15757019",
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
@@ -120493,6 +121052,12 @@
     "candidates": []
   },
   {
+    "input": "WLYK0000082627",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "WM00AK560100067361529",
     "carrier": "unknown",
     "confidence": "none",
@@ -120802,6 +121367,12 @@
     ]
   },
   {
+    "input": "WX010008308867",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "WX6Z9T",
     "carrier": "unknown",
     "confidence": "none",
@@ -120818,7 +121389,8 @@
     ],
     "asked": [
       "tnt-au",
-      "purolator"
+      "purolator",
+      "bfe-express"
     ]
   },
   {
@@ -121108,6 +121680,17 @@
     ]
   },
   {
+    "input": "XP697997460",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-it"
+    ],
+    "asked": [
+      "gls-it"
+    ]
+  },
+  {
     "input": "XPDAR625014414642Q1",
     "carrier": "obibox",
     "confidence": "high",
@@ -121187,6 +121770,12 @@
     "candidates": [
       "la-poste"
     ]
+  },
+  {
+    "input": "XSECN2201403703YQ",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "XSO000001356184",
@@ -121417,13 +122006,34 @@
     "candidates": []
   },
   {
+    "input": "YB9999999970CN",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhlink",
+      "youbang-express"
+    ],
+    "preferred": [
+      "dhlink"
+    ],
+    "asked": [
+      "dhlink",
+      "youbang-express"
+    ]
+  },
+  {
     "input": "YB9999999980CN",
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "dhlink",
       "youbang-express"
     ],
+    "preferred": [
+      "dhlink"
+    ],
     "asked": [
+      "dhlink",
       "youbang-express"
     ]
   },
@@ -121464,6 +122074,18 @@
     "candidates": [
       "ydh"
     ]
+  },
+  {
+    "input": "YDPOZ0000265145YQ",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "YDPOZ0000265735YQ",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "YF9999999980CN",
@@ -123007,6 +123629,12 @@
       "gls-de",
       "gls-ch"
     ]
+  },
+  {
+    "input": "ZXSY00055475CN",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "ZXV2BUWM",

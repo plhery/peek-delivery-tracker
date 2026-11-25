@@ -2126,6 +2126,25 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let dragonflyAu = CarrierID(rawValue: "dragonfly-au")
     static let ctlGroupPl = CarrierID(rawValue: "ctl-group-pl")
     static let shengao = CarrierID(rawValue: "shengao")
+    static let chengchain = CarrierID(rawValue: "chengchain")
+    static let edPost = CarrierID(rawValue: "ed-post")
+    static let hcrd = CarrierID(rawValue: "hcrd")
+    static let hdgj = CarrierID(rawValue: "hdgj")
+    static let hhh = CarrierID(rawValue: "hhh")
+    static let hjyt = CarrierID(rawValue: "hjyt")
+    static let hytd = CarrierID(rawValue: "hytd")
+    static let jgex = CarrierID(rawValue: "jgex")
+    static let jthq = CarrierID(rawValue: "jthq")
+    static let luluExpress = CarrierID(rawValue: "lulu-express")
+    static let qqwy = CarrierID(rawValue: "qqwy")
+    static let qyun = CarrierID(rawValue: "qyun")
+    static let shilianxin = CarrierID(rawValue: "shilianxin")
+    static let suocang = CarrierID(rawValue: "suocang")
+    static let szctc = CarrierID(rawValue: "szctc")
+    static let vyang = CarrierID(rawValue: "vyang")
+    static let wokexp = CarrierID(rawValue: "wokexp")
+    static let xsExpress = CarrierID(rawValue: "xs-express")
+    static let zxsy = CarrierID(rawValue: "zxsy")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -4186,6 +4205,25 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .dragonflyAu,
         .ctlGroupPl,
         .shengao,
+        .chengchain,
+        .edPost,
+        .hcrd,
+        .hdgj,
+        .hhh,
+        .hjyt,
+        .hytd,
+        .jgex,
+        .jthq,
+        .luluExpress,
+        .qqwy,
+        .qyun,
+        .shilianxin,
+        .suocang,
+        .szctc,
+        .vyang,
+        .wokexp,
+        .xsExpress,
+        .zxsy,
     ]
 
     init(from decoder: Decoder) throws {

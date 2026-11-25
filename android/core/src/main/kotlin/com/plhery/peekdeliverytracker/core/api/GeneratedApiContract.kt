@@ -2123,6 +2123,25 @@ value class CarrierId(val rawValue: String) {
         val DragonflyAu = CarrierId("dragonfly-au")
         val CtlGroupPl = CarrierId("ctl-group-pl")
         val Shengao = CarrierId("shengao")
+        val Chengchain = CarrierId("chengchain")
+        val EdPost = CarrierId("ed-post")
+        val Hcrd = CarrierId("hcrd")
+        val Hdgj = CarrierId("hdgj")
+        val Hhh = CarrierId("hhh")
+        val Hjyt = CarrierId("hjyt")
+        val Hytd = CarrierId("hytd")
+        val Jgex = CarrierId("jgex")
+        val Jthq = CarrierId("jthq")
+        val LuluExpress = CarrierId("lulu-express")
+        val Qqwy = CarrierId("qqwy")
+        val Qyun = CarrierId("qyun")
+        val Shilianxin = CarrierId("shilianxin")
+        val Suocang = CarrierId("suocang")
+        val Szctc = CarrierId("szctc")
+        val Vyang = CarrierId("vyang")
+        val Wokexp = CarrierId("wokexp")
+        val XsExpress = CarrierId("xs-express")
+        val Zxsy = CarrierId("zxsy")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -4183,6 +4202,25 @@ value class CarrierId(val rawValue: String) {
             DragonflyAu,
             CtlGroupPl,
             Shengao,
+            Chengchain,
+            EdPost,
+            Hcrd,
+            Hdgj,
+            Hhh,
+            Hjyt,
+            Hytd,
+            Jgex,
+            Jthq,
+            LuluExpress,
+            Qqwy,
+            Qyun,
+            Shilianxin,
+            Suocang,
+            Szctc,
+            Vyang,
+            Wokexp,
+            XsExpress,
+            Zxsy,
         )
     }
 }

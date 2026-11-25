@@ -15671,7 +15671,7 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^YLUS\\d{10}$",
-        "confidence": "low"
+        "confidence": "high"
       },
       {
         "pattern": "^EYT\\d{10}HZ$",

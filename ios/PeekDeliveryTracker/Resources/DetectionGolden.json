@@ -122540,12 +122540,9 @@
   },
   {
     "input": "YLUS9999999980",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "dhlink",
+    "confidence": "high",
     "candidates": [
-      "dhlink"
-    ],
-    "asked": [
       "dhlink"
     ]
   },

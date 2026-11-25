@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-Correios（全称 Empresa Brasileira de Correios e Telégrafos）是巴西国家邮政。从巴西寄往海外的包裹全程沿用同一个 Correios 单号，由目的国邮政完成末端派送；从海外网购寄往巴西的包裹则保留发件国邮政单号，入境后由 Correios 派送。你可以在 [Correios 官方查询页面](https://rastreamento.correios.com.br/app/index.php)输入最多 20 个单号或 CPF/CNPJ 号码（需输入图片验证码）查询，或直接把单号粘贴到上方输入框中。
+Correios（全称 Empresa Brasileira de Correios e Telégrafos）是巴西国家邮政。从巴西寄往海外的包裹全程沿用同一个 Correios 单号，由目的国邮政完成末端派送；在海外购买、寄往巴西的包裹则保留发件国邮政单号，入境后由 Correios 派送。你可以在 [Correios 官方查询页面](https://rastreamento.correios.com.br/app/index.php)输入最多 20 个单号或 CPF/CNPJ 号码（需输入图片验证码）查询，或直接把单号粘贴到上方输入框中。
 
 ## Correios 运单号格式
 
@@ -16,8 +16,8 @@ Correios 的运单号为 13 位字符：前 2 位字母代表业务类型，中�
 | --- | --- |
 | `EA482917367BR` | `E`：EMS 特快专递服务。 |
 | `CA482917367BR` | `C`：普通邮政包裹（parcel post）。 |
-| `LA482917367BR` | `L`：可追踪信件/小包。 |
-| `RA482917367BR` | `R`：挂号邮件。 |
+| `LA482917367BR` | `L`：可追踪函件。 |
+| `RA482917367BR` | `R`：挂号函件。 |
 | `NN482917367BR` | `N`、`B`、`D`、`P` 或 `Z`（以及 `AV` 至 `AZ`、`GA`、`GD`）：UPU 保留用于境内或双边业务的字母前缀。 |
 | `RA482917367CN` | [中国邮政（China Post）](carrier:china-post)单号，非 Correios 签发；寄往巴西时由 Correios 沿用该单号派送。 |
 
@@ -25,32 +25,32 @@ Correios 的运单号为 13 位字符：前 2 位字母代表业务类型，中�
 
 ## Correios 物流状态中文说明
 
-Correios 的扫描状态使用葡萄牙语，并标注每条记录所在的城市与州（UF）。以下为常见状态对照：
+Correios 的扫描状态使用葡萄牙语，并标注每条记录所在的城市与州（UF）。以下各状态的含义为译文：
 
 | Correios 原文 | 对你的含义 |
 | --- | --- |
 | `Etiqueta emitida` | 已生成面单，Correios 尚未收到包裹。 |
 | `Objeto postado` | 已交寄：Correios 已揽收。 |
-| `Objeto encaminhado para fiscalização aduaneira de exportação` | 寄往海外的包裹已送交巴西出口海关查验（见下文），查验期间包裹不在 Correios 手中。 |
+| `Objeto encaminhado para fiscalização aduaneira de exportação` | 寄往海外的包裹在离开巴西前已送交巴西出口海关查验（见下文），查验期间包裹不在 Correios 手中。 |
 | `Objeto em transferência - por favor aguarde` | 正在 Correios 各站点之间转运（“转运中，请稍候”）。 |
 | `Objeto recebido pelos Correios do Brasil` | 境外包裹已抵达巴西并由 Correios 接收。 |
 | `Informações enviadas para análise da autoridade aduaneira/órgãos anuentes` | 申报信息已发送至巴西海关及相关监管部门审核。 |
-| `Aguardando pagamento` | 派送前需缴纳税费或手续费：请登录 Minhas Importações 处理（Peek 显示为“清关中”）。 |
+| `Aguardando pagamento` | 派送前需缴纳税费或手续费：见下文 Minhas Importações（Peek 显示为“清关中”）。 |
 | `Análise concluída - importação autorizada` | 审核完成，允许进口放行。 |
 | `Saída do Centro Internacional` | 已离开 Correios 国际处理中心，进入巴西境内派送。 |
 | `Objeto saiu para entrega ao destinatário` | 正在派送前往收件人地址。 |
 | `Objeto não entregue - carteiro não atendido` | 邮递员上门无人应答。 |
-| `Objeto aguardando retirada no endereço indicado` | 包裹正在 Correios 指定的网点地址等待你自提（Peek 显示为“待取件”）。 |
+| `Objeto aguardando retirada no endereço indicado` | 包裹正在 Correios 指定的地址（例如其某个网点）等待你自提（Peek 显示为“待取件”）。 |
 | `Inconsistências no endereçamento do objeto` | 收件地址信息存在异常。 |
 | `Objeto entregue ao destinatário` | 已送达收件人。 |
 
 部分状态代表异常：`Importação não autorizada` 表示海关未批准进口；`Prazo de regularização encerrado` 表示补办手续或缴税期限已过；`Devolução determinada pela autoridade competente` 表示主管部门下令退回寄件人。`Objeto saiu para entrega ao remetente` 表示正在退回派送给寄件人，而非派送给你。
 
-Correios 进口说明页面还提到 `Em fiscalização aduaneira`（海关查验中）；Correios 强调出现该状态时包裹由海关监管，并不在 Correios 手中。
+Correios 进口说明页面还提到 `Em fiscalização aduaneira`（海关查验中）；Correios 表示，出现该状态时包裹并不在其手中。
 
 ## 从巴西寄往欧洲及其他地区的包裹
 
-Correios 负责办理巴西出口清关并将包裹交予目的国邮政，由对方沿用同一个单号完成派送（UPU 规定每件邮件仅编一个国际单号）。目的国邮政的官网能第一时间显示末端物流，例如 [Royal Mail](carrier:royal-mail)、[USPS](carrier:usps)、Canada Post、An Post、[Australia Post](carrier:australia-post)、[La Poste](carrier:la-poste)、CTT、Correos、[Poste Italiane](carrier:poste-italiane) 或 [Deutsche Post](carrier:dhl)。
+Correios 负责办理巴西出口清关并将包裹交予目的国邮政，由对方沿用同一个单号完成派送（UPU 规定每件邮件仅编一个国际单号）。目的国邮政掌握末端物流的一手信息，例如 [Royal Mail](carrier:royal-mail)、[USPS](carrier:usps)、Canada Post、An Post、[Australia Post](carrier:australia-post)、[La Poste](carrier:la-poste)、CTT、Correos、[Poste Italiane](carrier:poste-italiane) 或 [Deutsche Post](carrier:dhl)。
 
 如果目的国海关扣留了包裹，Correios 表示须由你直接与当地海关对接：无论是 Correios 还是目的国邮政都无法介入。在欧盟，自 2026 年 7 月 1 日起，从欧盟外网购且货值不超过 150 欧元的包裹按商品税则分类每项征收 3 欧元关税；自 2026 年 11 月 1 日起，无论货值多少，跨境网购商品还适用每项 2 欧元的欧盟处理费。具体税费与收取方式见[清关中的包裹指南](guide:customs)（英文）。
 
@@ -62,14 +62,14 @@ Correios 负责办理巴西出口清关并将包裹交予目的国邮政，由�
 
 **税费标准**（据巴西联邦税务局 Receita Federal 公布）：
 
-- **进口关税（Import duty）：** 海关完税价格（货值、运费与保费合计）的 60%。适用于所有不符合下方优惠规则的包裹，例如未加入 Remessa Conforme 的商家订单或企业收件。
+- **进口关税（Import duty）：** 海关完税价格（货值、运费与保费合计）的 60%。适用于所有不符合下方优惠规则的包裹，即未加入 Remessa Conforme 的商家的订单，或寄给企业的包裹。
 - **在[经 Remessa Conforme（PRC）认证](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/empresas-certificadas-no-programa-remessa-conforme-prc)的网站购买并寄给个人：** 50 美元及以下免关税（0%）；超过 50 美元按 60% 征收并减免 30 美元。该税率适用于自 2026 年 5 月 12 日起登记的申报（此前为 20% 税率并减免 20 美元）。
 - **州流转税（ICMS）：** 视所在州而定为 17% 至 20%，无论是否走 PRC 均需缴纳。
 - **Correios 邮政清关服务费（Despacho Postal）：** 可能会额外收取，不属于政府税款。
 
 若货值超过 3,000 美元，或因其他原因海关不予放行，Correios 说明必须聘请清关代理（despachante aduaneiro）。
 
-**如何缴税。** 在 PRC 认证平台下单时，税费会在结账时一并收取；如果结账未扣税，入境时将按普通税率征税并失去优惠减免。其他情况下，须在税单生成后 20 个自然日内通过 Minhas Importações 或应用以 boleto 或 Pix 支付，逾期包裹将退回境外。若认为税额有误，请在生成 boleto 或 Pix 前在线申请税费复核（“Revisão de Tributos”）。补充材料仅能提交一次，且 Correios 无法预估 Receita Federal 的审核耗时。
+**何时缴税。** 在 PRC 认证平台下单时，税费会在结账时一并收取；如果结账未扣税，入境时将征税，且不再享受优惠减免。其他情况下，须在税单生成后 20 个自然日内通过 Minhas Importações 或应用以 boleto 或 Pix 支付，逾期包裹将退回境外。若认为税额有误，请在生成 boleto 或 Pix 前在线申请税费复核（“Revisão de Tributos”）。补充材料仅能提交一次，且 Correios 无法预估 Receita Federal 的审核耗时。
 
 **派送与自提。** 若 Correios 无法妥投，包裹会转存至最近邮局并向你发通知。普通海外包裹在上门尝试后保管 20 个自然日，EMS 和 Correios Packet 保管 7 天。他人代领需携带你签字的授权书、代领人身份证件原件以及你的身份证件（复印件亦可）。
 
@@ -100,11 +100,11 @@ Correios 公布的葡萄牙语服务渠道如下（均为巴西利亚时间）�
 
 ## 使用 Peek 查询 Correios 包裹
 
-对于 2 位字母、9 位数字加 `BR` 且校验位正确的单号，[Peek](/) 会直接识别为 Correios。校验位有误时 Peek 不会自动识别；如果点击“更换”手动选择 Correios，Peek 会提示其“不使用这种格式的单号”，请重新核对单号。带有 `objetos=` 参数的 Correios 查询链接同样可直接粘贴。
+对于 2 位字母、9 位数字加 `BR` 且校验位正确的单号，[Peek](/) 会直接识别为 Correios。校验位有误时 Peek 不会认出任何快递公司；如果点击“更换”手动选择 Correios，Peek 会提示其“不使用这种格式的单号”，请重新核对单号。带有 `objetos=` 参数的 Correios 查询链接同样可直接粘贴。
 
 Peek 会抓取 Correios 的物流历史，显示最新状态、每条扫描的城镇与州名，以及包裹在途且未逾期时的预计送达日期。巴西境内的扫描按 Correios 标注的时区解析，发件国邮政的扫描按发件国时区解析，统一换算为你设备的本地时区显示；状态原文保留葡萄牙语。
 
-由于 Correios 不会向 Peek 透露包裹的目的国，在巴西以外地区查询时，Peek 还会用同一单号向你所在国家的邮政（如 USPS、Royal Mail、Canada Post、An Post 或 Australia Post）查询，一旦对方出现不晚于 Correios 最新记录的扫描即切换追踪，同时保留 Correios 的历史记录。以其他国家邮政单号寄往巴西的包裹会先在发件国邮政下追踪；待对方标出目的地为巴西（或未标目的地而你位于巴西）时，Peek 会同步向 Correios 查询。
+由于 Correios 不会向 Peek 透露包裹的目的国，在巴西以外地区查询时，Peek 还会用同一单号向你所在国家的邮政（如 USPS、Royal Mail、Canada Post、An Post 或 Australia Post）查询，一旦对方出现不早于 Correios 最新记录的扫描即切换追踪，同时保留 Correios 的历史记录。以其他国家邮政单号寄往巴西的包裹会先在发件国邮政下追踪；待对方标出目的地为巴西（或未标目的地而你位于巴西）时，Peek 会同步向 Correios 查询。
 
 当你打开包裹页面查看，或在派送当天开启通知时，只要 Correios 官方查询正常响应，Peek 最高每 10 分钟检查一次，而在 Correios 扫描包裹进入派送中的当天早上 6 点起（按最新扫描所在时区）最高每 2 分钟检查一次（需用浏览器打开 Correios 官网时为每 5 分钟）。其余时间，以及连续两天无新动态时（包裹仍处于“已生成面单”或“已揽收”状态时为 12 小时），Peek 每小时检查一次；停留在“已生成面单”连续七天无更新后改为每 6 小时检查一次。你可以按需选择“每次扫描”、“重要环节”或“仅派送当天”提醒。Peek 无法代你联系 Correios、缴纳税费或提交理赔。
 
@@ -112,7 +112,7 @@ Peek 会抓取 Correios 的物流历史，显示最新状态、每条扫描的�
 
 ### “Objeto em transferência - por favor aguarde”是什么意思？
 
-意为“包裹正在转运中，请稍候”：包裹正从巴西的一个 Correios 网点运往另一个网点，此时无需你做任何操作。
+意为“包裹正在转运中，请稍候”：包裹正从巴西的一个 Correios 网点运往另一个网点，目前还无需你做任何操作。
 
 ### 为什么我的 Correios 包裹显示“Aguardando pagamento”？
 
@@ -141,6 +141,7 @@ Peek 会抓取 Correios 的物流历史，显示最新状态、每条扫描的�
 - [Receita Federal: Como realizar pagamento pelo Minhas Importações dos Correios](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/preciso-pagar-impostos-nas-compras-internacionais/como-realizar-o-pagamento-pelo-minhas-importacoes-dos-correios) – 勿通过搜索引擎进入提示
 - [Receita Federal: Empresas certificadas no Programa Remessa Conforme](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/empresas-certificadas-no-programa-remessa-conforme-prc) – PRC 认证商家与 Correios 官方全称
 - [UPU: S10 standard, Identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – 业务字母代码与校验位标准
-- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 欧元临时关税与 2 欧元欧盟处理费
+- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 欧元关税与 2 欧元欧盟处理费
 - [European Commission: Guidance on the €3 customs duty and Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 跨境远程销售按项计费说明
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – 状态文案（出口海关查验、在指定地址等待领取、海关待缴费）、Peek 显示的内容
 :::

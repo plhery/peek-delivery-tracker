@@ -14969,7 +14969,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "mtscn",
       "catalog": "mtscn",
       "slug": "rastreamento-meiteshun",
-      "title": "Rastreamento Meiteshun: códigos AMTS, status e entregas",
+      "title": "Rastreamento Meiteshun: AMTS, etapas e a quem perguntar",
       "name": "Meiteshun Logistics",
       "color": "#f89f3b"
     },

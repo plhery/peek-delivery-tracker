@@ -66,11 +66,15 @@ the app, and one that goes away sends the phone back to the inbox. Delivery upda
 notifications come.
 
 As on the iPhone, signing out, an expired session or a deleted account takes the phone's token off the server but
-keeps the person's own on or off: the same account signing in again gets its notifications back by itself, and another
-account sees the prompt first. A parcel followed without an account takes its notifications with it when it is
-forgotten, or followed through another link, even while the launch's round signs it up; someone else's that the
-service can't be told about yet is told again on each refresh, and, once signed in, on each load of the account's
-list, as are this phone's own links still to be forgotten.
+keeps the person's own on or off: the same account signing in again gets its notifications back by itself, and
+another account sees the prompt first. A token that can't come off at once, offline or with the session already over,
+waits on the phone: the next account to sign in takes it over and off before the phone registers again, the same
+account takes it off as its own. F-Droid's build makes a new installation token once an account leaves, and a
+UnifiedPush endpoint nobody listens to still takes the server's messages, so the one left behind would otherwise
+stay. A parcel followed without an account takes its notifications with it when it is forgotten, or followed through
+another link, even while the launch's round signs it up; someone else's that the service can't be told about yet is
+told again on each refresh, and, once signed in, on each load of the account's list, as are this phone's own links
+still to be forgotten.
 
 ## Shortcuts on the app's icon
 

@@ -249,6 +249,8 @@ class AndroidPushNotifications(
 
     override val currentDeviceToken: String? get() = token
 
+    override val savedDeviceToken: String? get() = token ?: tokens?.saved
+
     override fun clearDeviceToken() {
         token = null
     }

@@ -12,4 +12,7 @@ interface PushTokens {
 
     /** `FirebaseMessaging.deleteToken()`: the address takes no more pushes, and the next one asked for is new. */
     fun delete()
+
+    /** The address kept on the phone between launches, without asking for it; null where only an ask gives one. */
+    val saved: String? get() = null
 }

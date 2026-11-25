@@ -91,6 +91,14 @@ interface PushNotifications {
     val currentDeviceToken: String?
 
     /**
+     * The address the service may hold for this phone, given this launch or not. F-Droid's build keeps its installation
+     * token between launches until [unregisterForRemoteNotifications] forgets it, which the service never hears of, so
+     * an account that leaves takes it off by this. Firebase's token is [currentDeviceToken]: deleting it ends it on the
+     * service too.
+     */
+    val savedDeviceToken: String? get() = currentDeviceToken
+
+    /**
      * AppDelegate's `deviceTokenFailures`: how many times this launch Firebase said it could give no token (no Google
      * Play services, no network). A wait for a token ends at the next one.
      */
@@ -602,6 +610,7 @@ class ParcelStore(
             ParcelFeedbackMemory(defaults, now).forgetAll()
             // The next sign-in hears again about the parcels its account had no room for.
             LeftOnDeviceMemory.forget(owner, defaults)
+            keepNativePushTokenToRevoke()
             releaseDeviceNotifications(from = owner)
         }
         cacheOwnerId = session.user?.id
@@ -1451,7 +1460,7 @@ class ParcelStore(
         jobMonitoringTask?.cancel()
         jobMonitoringTask = null
         pendingJobIds.clear()
-        val token = notifications.currentDeviceToken
+        val token = notifications.savedDeviceToken
         if (token != null && !isDemo) revokeNativePushToken(token)
         session.checkGeneration(generation)
         if (!isDemo) liveActivityRevocations.drain()
@@ -1500,22 +1509,29 @@ class ParcelStore(
     }
 
     /**
-     * Settles a token the account that signed out could not take off the service, and says whether none is left. That
-     * account signing in again has its notifications back as its own. Another account takes the token over, which moves
-     * it to that account on the service, then takes it off: the service lets an account remove only its own tokens.
-     * Without an account signed in, the token waits; the parcels this phone follows itself still sign up for their own
-     * alerts meanwhile.
+     * An account whose session ends without Sign out, expired or ended elsewhere, can no longer take its token off the
+     * service, so the token waits as one Sign out couldn't take off does ([settleNativePushRevocation]). F-Droid's
+     * address, forgotten on the phone with the account, would otherwise still be the account's on the service, and its
+     * notifications would go on to an endpoint nobody listens to.
+     */
+    private fun keepNativePushTokenToRevoke() {
+        if (!defaults.bool(forKey = nativePushRegisteredKey) || defaults.string(forKey = nativePushRevocationKey) != null) return
+        notifications.savedDeviceToken?.let { defaults.set(it, forKey = nativePushRevocationKey) }
+    }
+
+    /**
+     * Settles a token the account that left could not take off the service, and says whether none is left. That
+     * account signing in again takes it off as its own before the phone registers again, as the phone's address may be
+     * a new one. Another account takes the token over, which moves it to that account on the service, then takes it
+     * off: the service lets an account remove only its own tokens. Without an account signed in, the token waits; the
+     * parcels this phone follows itself still sign up for their own alerts meanwhile.
      */
     private suspend fun settleNativePushRevocation(): Boolean {
         val token = defaults.string(forKey = nativePushRevocationKey) ?: return true
         if (isDemo || !session.isAuthenticated) return false
         val user = session.user?.id ?: return false
-        if (notificationOwner == user) {
-            defaults.removeObject(forKey = nativePushRevocationKey)
-            return true
-        }
         try {
-            api.registerNativePushToken(token, installationId, localizer.language, sendTest = false)
+            if (notificationOwner != user) api.registerNativePushToken(token, installationId, localizer.language, sendTest = false)
             api.unregisterNativePushToken(token)
         } catch (error: Exception) {
             if (error is CancellationException) currentCoroutineContext().ensureActive()
@@ -1627,7 +1643,7 @@ class ParcelStore(
             return
         }
         nativePushGeneration += 1
-        val token = notifications.currentDeviceToken
+        val token = notifications.savedDeviceToken
         if (token != null && !isDemo) api.unregisterNativePushToken(token)
         notifications.unregisterForRemoteNotifications()
         notifications.clearDeviceToken()

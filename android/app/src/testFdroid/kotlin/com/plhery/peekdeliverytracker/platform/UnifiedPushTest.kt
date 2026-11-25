@@ -92,13 +92,16 @@ class UnifiedPushTest {
     fun withoutADistributorThePhoneIsReachedThroughItsInboxWhichItChecks() {
         // The tests' build has no service (Shared.xcconfig), where Store offers no pushes: its tokens are made here.
         val tokens = UnifiedPushTokens(context)
+        assertNull("Nothing kept before the first ask", tokens.saved)
         val first = address(tokens)
         assertTrue(first, Regex("inbox [A-Za-z0-9_-]{43}").matches(first))
         assertEquals("The same phone, the same address", first, address(tokens))
+        assertEquals("The address an account leaving takes off the service, without asking", first, UnifiedPushTokens(context).saved)
         assertEquals(WorkInfo.State.ENQUEUED, inboxCheck())
         assertNull("Settings names no distributor", PushRoute.distributor.value)
 
         tokens.delete()
+        assertNull(tokens.saved)
         assertEquals(WorkInfo.State.CANCELLED, inboxCheck())
         assertNotEquals("A deleted address is followed by a new one", first, address(tokens))
     }

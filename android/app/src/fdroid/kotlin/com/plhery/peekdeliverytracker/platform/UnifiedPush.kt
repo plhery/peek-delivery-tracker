@@ -213,6 +213,8 @@ internal class UnifiedPushTokens(private val context: Context) : PushTokens {
     override fun delete() {
         PushRoute.delete(context)
     }
+
+    override val saved: String? get() = PushRoute.existingAddress(context)?.text
 }
 
 /**

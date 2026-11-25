@@ -4,7 +4,7 @@ description: La app gratuita de Peek para iPhone, iPad y Mac sigue paquetes sin 
 slug: app-seguimiento-paquetes-iphone
 picture: Un iPhone con el widget Paquetes en la pantalla de inicio, un iPad y un Mac detrás, y Pip, el paquete con cara, saludando desde el widget.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Peek para iPhone, iPad y Mac es una app gratuita que sigue paquetes de más de 4500 transportistas, sin necesidad de cuenta. Añade su widget «Paquetes» a la pantalla de inicio, envíale enlaces de seguimiento con «Añadir a Peek» desde el menú de compartir o escanea el código de barras de la etiqueta con tu iPhone o iPad.
@@ -29,7 +29,7 @@ Descárgala del [App Store](https://apps.apple.com/app/id6823615370); en un orde
 
 | Para encontrar | Ve a |
 | --- | --- |
-| Notificaciones | «Ajustes» › «Entregas» › «Notificaciones», con una cuenta; mira [las notificaciones de entrega de paquetes](guide:parcel-notifications) |
+| Notificaciones | «Ajustes» › «Entregas» › «Notificaciones», con o sin cuenta; mira [las notificaciones de entrega de paquetes](guide:parcel-notifications) |
 | Añadir paquetes por correo | «Ajustes» › «Entregas» › «Añadir paquetes por correo», con la etiqueta «Beta», con una cuenta; mira [cómo añadir paquetes por correo](guide:add-parcels-by-email) |
 | Modo oscuro | «Ajustes» › «Preferencias» › «Apariencia» y luego «Oscuro» |
 | Peek IA | «Ajustes» › «Preferencias» › «Peek IA»; mira [la estimación de Peek IA](guide:peek-ai) |
@@ -39,9 +39,9 @@ Descárgala del [App Store](https://apps.apple.com/app/id6823615370); en un orde
 
 Sí. Los paquetes que añades aparecen solo en ese dispositivo, y el widget, «Añadir a Peek», el lector de códigos de barras y Siri funcionan igual. Entregas muestra «Todos tus paquetes en un solo lugar», con «Solo en este iPhone, por ahora.» y un botón «Iniciar sesión»; en un iPad o un Mac, el mensaje nombra ese dispositivo.
 
-Un paquete seguido sin cuenta se olvida 30 días después de entregarse; «Ajustes» › «En este dispositivo» › «Olvidar todos» los olvida todos de una vez.
+Peek olvida un paquete buscado sin cuenta 30 días después de entregarse; la app guarda entonces su última respuesta, marcada «Ya no se actualiza», hasta que lo borres. «Ajustes» › «En este dispositivo» › «Olvidar todos» los olvida todos de una vez.
 
-Una cuenta añade la misma lista en todos tus dispositivos y en peektracker.com, Amigos, los ajustes de notificaciones y «Añadir paquetes por correo». Inicias sesión con Apple, con Google o con un código de un solo uso que te llega por correo. Para echar un vistazo antes, toca «Iniciar sesión» en la primera pantalla y luego «Explorar la demo», abajo del todo. [Usar Peek sin cuenta](guide:account-or-guest) te ayuda a decidir.
+Una cuenta añade la misma lista en todos tus dispositivos y en peektracker.com, Amigos, los correos de entrega y «Añadir paquetes por correo». Inicias sesión con Apple, con Google o con un código de un solo uso que te llega por correo. Para echar un vistazo antes, toca «Iniciar sesión» en la primera pantalla y luego «Explorar la demo», abajo del todo. [Usar Peek sin cuenta](guide:account-or-guest) te ayuda a decidir.
 
 ## ¿Cómo añado el widget de Peek a la pantalla de inicio?
 

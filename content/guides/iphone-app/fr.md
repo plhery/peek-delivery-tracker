@@ -4,7 +4,7 @@ description: L'app gratuite de Peek pour iPhone, iPad et Mac suit tes colis sans
 slug: application-suivi-colis-iphone
 picture: Un iPhone avec le widget « Colis » sur son écran d'accueil, un iPad et un Mac derrière lui, et Pip, le colis avec un visage, qui fait coucou depuis le widget.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Peek pour iPhone, iPad et Mac est une app gratuite qui suit les colis de plus de 4 500 transporteurs, sans avoir besoin de compte. Ajoute son widget « Colis » à ton écran d'accueil, envoie-lui des liens de suivi avec « Ajouter à Peek » dans le menu de partage, ou scanne le code-barres de l'étiquette avec ton iPhone ou ton iPad.
@@ -29,7 +29,7 @@ Télécharge-la sur l'[App Store](https://apps.apple.com/app/id6823615370) ; sur
 
 | À trouver | Où aller |
 | --- | --- |
-| Notifications | « Réglages » › « Livraisons » › « Notifications », avec un compte ; voir [les notifications de livraison](guide:parcel-notifications) |
+| Notifications | « Réglages » › « Livraisons » › « Notifications », avec ou sans compte ; voir [les notifications de livraison](guide:parcel-notifications) |
 | Ajouter des colis par e-mail | « Réglages » › « Livraisons » › « Ajouter des colis par e-mail », marqué « Bêta », avec un compte ; voir [suivre ses colis depuis ses e-mails](guide:add-parcels-by-email) |
 | Mode sombre | « Réglages » › « Préférences » › « Apparence », puis « Sombre » |
 | Peek IA | « Réglages » › « Préférences » › « Peek IA » ; voir [l'estimation de Peek IA](guide:peek-ai) |
@@ -39,9 +39,9 @@ Télécharge-la sur l'[App Store](https://apps.apple.com/app/id6823615370) ; sur
 
 Oui. Les colis que tu ajoutes ne sont listés que sur cet appareil, et le widget, « Ajouter à Peek », le scanner de codes-barres et Siri fonctionnent tous. « Livraisons » affiche « Tous tes colis au même endroit », avec « Sur cet iPhone seulement, pour l’instant. » et un bouton « Se connecter » ; sur iPad ou Mac, la phrase nomme cet appareil à la place.
 
-Un colis suivi sans compte est oublié 30 jours après sa livraison ; « Réglages » › « Sur cet appareil » › « Tout oublier » les oublie tous d'un coup.
+Peek oublie un colis recherché sans compte 30 jours après sa livraison ; l'app garde alors sa dernière réponse, marquée « Plus mis à jour », jusqu'à ce que tu le supprimes. « Réglages » › « Sur cet appareil » › « Tout oublier » les oublie tous d'un coup.
 
-Un compte ajoute la même liste sur tous tes appareils et sur peektracker.com, les Amis, les réglages de notifications et « Ajouter des colis par e-mail ». Tu te connectes avec Apple, avec Google ou avec un code à usage unique envoyé par e-mail. Pour faire un tour d'abord, touche « Se connecter » sur le premier écran, puis « Explorer la démo » tout en bas. [Utiliser Peek sans compte](guide:account-or-guest) pèse le pour et le contre.
+Un compte ajoute la même liste sur tous tes appareils et sur peektracker.com, les Amis, les e-mails de livraison et « Ajouter des colis par e-mail ». Tu te connectes avec Apple, avec Google ou avec un code à usage unique envoyé par e-mail. Pour faire un tour d'abord, touche « Se connecter » sur le premier écran, puis « Explorer la démo » tout en bas. [Utiliser Peek sans compte](guide:account-or-guest) pèse le pour et le contre.
 
 ## Comment ajouter le widget Peek à mon écran d'accueil ?
 

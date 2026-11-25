@@ -4,7 +4,7 @@ description: Peek per Android è in beta: entra nel test di Google Play o instal
 slug: app-tracking-pacchi-android
 picture: Un telefono Android con il widget «Pacchi» nella schermata Home, e Pip, il pacco con la faccia, che sbircia da sopra il telefono.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Peek per Android è una beta, non pubblica su Google Play: lo ottieni da [peektracker.com/android](https://peektracker.com/android), entrando nel test di Google Play oppure installandolo dal repository F-Droid di Peek o da GitHub. Richiede Android 12 o successivo ma nessun account, e aggiunge un widget «Pacchi» alla schermata Home e «Aggiungi a Peek» al menu di condivisione.
@@ -58,9 +58,9 @@ Parla dieci lingue: inglese, tedesco, francese, italiano, spagnolo, portoghese, 
 
 Sì. Incolla un codice tracking nella prima schermata e Peek lo segue, elencato solo su quel telefono; funzionano anche il widget e la scorciatoia del prossimo pacco. «Consegne» mostra «Tutti i tuoi pacchi in un unico posto», con «Per ora, solo su questo dispositivo.» e un pulsante «Accedi».
 
-Un pacco viene dimenticato 30 giorni dopo la consegna; «Impostazioni» › «Su questo dispositivo» › «Dimentica tutti» li dimentica tutti in una volta. I backup del telefono stesso includono i pacchi che segue e le preferenze di Peek.
+Peek dimentica un pacco cercato 30 giorni dopo la consegna; l'app ne tiene allora l'ultima risposta, segnata «Non più aggiornato», finché non lo elimini. «Impostazioni» › «Su questo dispositivo» › «Dimentica tutti» li dimentica tutti in una volta. I backup del telefono stesso includono i pacchi che segue e le preferenze di Peek.
 
-Un account aggiunge la stessa lista su ogni dispositivo e su peektracker.com, il passaporto e gli amici, le impostazioni delle notifiche e «Aggiungi pacchi via e-mail» ([tracciare i pacchi dalle tue e-mail](guide:add-parcels-by-email)). Accedi con «Continua con Google» o «Accedi con l’e-mail»; su Android non c'è l'accesso con Apple. Neanche «Esplora la demo», nella schermata di accesso, richiede un account. [Usare Peek senza account](guide:account-or-guest) mette a confronto le due scelte.
+Un account aggiunge la stessa lista su ogni dispositivo e su peektracker.com, il passaporto e gli amici, le e-mail di consegna e «Aggiungi pacchi via e-mail» ([tracciare i pacchi dalle tue e-mail](guide:add-parcels-by-email)). Accedi con «Continua con Google» o «Accedi con l’e-mail»; su Android non c'è l'accesso con Apple. Neanche «Esplora la demo», nella schermata di accesso, richiede un account. [Usare Peek senza account](guide:account-or-guest) mette a confronto le due scelte.
 
 ## Come aggiungo il widget di Peek alla schermata Home?
 

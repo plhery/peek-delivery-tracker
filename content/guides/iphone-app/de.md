@@ -4,7 +4,7 @@ description: Peeks kostenlose App für iPhone, iPad und Mac verfolgt Pakete ohne
 slug: sendungsverfolgung-app-iphone
 picture: Ein iPhone mit dem Widget „Pakete“ auf dem Home-Bildschirm, dahinter ein iPad und ein Mac, und Pip, das Paket mit Gesicht, winkt aus dem Widget.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Peek für iPhone, iPad und Mac ist eine kostenlose App, die Pakete von mehr als 4500 Paketdiensten verfolgt, ganz ohne Konto. Leg ihr Widget „Pakete“ auf deinen Home-Bildschirm, schick ihr Tracking-Links mit „Zu Peek hinzufügen“ im Teilen-Menü, oder scanne mit iPhone oder iPad den Barcode auf dem Etikett.
@@ -29,7 +29,7 @@ Du bekommst sie im [App Store](https://apps.apple.com/app/id6823615370); am Comp
 
 | Was du suchst | Wo es ist |
 | --- | --- |
-| Mitteilungen | „Einstellungen“ › „Sendungen“ › „Mitteilungen“, mit Konto; siehe [Paketbenachrichtigungen](guide:parcel-notifications) |
+| Mitteilungen | „Einstellungen“ › „Sendungen“ › „Mitteilungen“, mit oder ohne Konto; siehe [Paketbenachrichtigungen](guide:parcel-notifications) |
 | Pakete per E-Mail hinzufügen | „Einstellungen“ › „Sendungen“ › „Pakete per E-Mail hinzufügen“, mit „Beta“ gekennzeichnet, mit Konto; siehe [Pakete aus deinen E-Mails verfolgen](guide:add-parcels-by-email) |
 | Dunkelmodus | „Einstellungen“ › „Präferenzen“ › „Darstellung“, dann „Dunkel“ |
 | Peek AI | „Einstellungen“ › „Präferenzen“ › „Peek AI“; siehe [die Lieferschätzung von Peek AI](guide:peek-ai) |
@@ -39,9 +39,9 @@ Du bekommst sie im [App Store](https://apps.apple.com/app/id6823615370); am Comp
 
 Ja. Die Pakete, die du hinzufügst, stehen dann nur auf diesem Gerät in der Liste, und das Widget, „Zu Peek hinzufügen“, der Barcode-Scanner und Siri funktionieren alle. In „Sendungen“ steht „Alle deine Pakete an einem Ort“, mit „Vorerst nur auf diesem iPhone.“ und einem Knopf „Anmelden“; auf einem iPad oder Mac nennt der Satz stattdessen dieses Gerät.
 
-Ein Paket, das du ohne Konto verfolgst, wird 30 Tage nach der Zustellung vergessen; „Einstellungen“ › „Auf diesem Gerät“ › „Alle vergessen“ vergisst alle auf einmal.
+Ein Paket, das du ohne Konto nachgeschlagen hast, vergisst Peek 30 Tage nach der Zustellung; die App behält dann seine letzte Antwort, markiert mit „Nicht mehr aktualisiert“, bis du es löschst. „Einstellungen“ › „Auf diesem Gerät“ › „Alle vergessen“ vergisst alle auf einmal.
 
-Ein Konto bringt dieselbe Liste auf jedem Gerät und auf peektracker.com, dazu Freunde, die Mitteilungseinstellungen und „Pakete per E-Mail hinzufügen“. Du meldest dich mit Apple, mit Google oder mit einem Einmalcode per E-Mail an. Willst du dich erst umsehen, tippe auf dem ersten Bildschirm auf „Anmelden“, dann unten auf „Demo erkunden“. [Peek ohne Konto nutzen](guide:account-or-guest) wägt beides ab.
+Ein Konto bringt dieselbe Liste auf jedem Gerät und auf peektracker.com, dazu Freunde, Liefer-E-Mails und „Pakete per E-Mail hinzufügen“. Du meldest dich mit Apple, mit Google oder mit einem Einmalcode per E-Mail an. Willst du dich erst umsehen, tippe auf dem ersten Bildschirm auf „Anmelden“, dann unten auf „Demo erkunden“. [Peek ohne Konto nutzen](guide:account-or-guest) wägt beides ab.
 
 ## Wie lege ich das Peek-Widget auf meinen Home-Bildschirm?
 

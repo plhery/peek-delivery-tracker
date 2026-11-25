@@ -4,7 +4,7 @@ description: Peek für Android ist eine Beta: Mach beim Google-Play-Test mit ode
 slug: sendungsverfolgung-app-android
 picture: Ein Android-Handy mit dem Widget „Pakete“ auf dem Startbildschirm, und Pip, das Paket mit Gesicht, schaut oben über den Rand des Handys.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Peek für Android ist eine Beta und nicht öffentlich bei Google Play: Du bekommst es über [peektracker.com/android](https://peektracker.com/android), indem du beim Google-Play-Test mitmachst oder es aus Peeks eigener F-Droid-Paketquelle oder von GitHub installierst. Es braucht Android 12 oder neuer und kein Konto, und es bringt ein Widget „Pakete“ auf deinen Startbildschirm und „Zu Peek hinzufügen“ in dein Teilen-Menü.
@@ -58,9 +58,9 @@ Es spricht zehn Sprachen: Englisch, Deutsch, Französisch, Italienisch, Spanisch
 
 Ja. Füge auf dem ersten Bildschirm eine Sendungsnummer ein, und Peek verfolgt sie, gelistet nur auf diesem Handy; das Widget und die Verknüpfung zum nächsten Paket funktionieren auch. In „Sendungen“ steht „Alle deine Pakete an einem Ort“, mit „Vorerst nur auf diesem Gerät.“ und einem Knopf „Anmelden“.
 
-Ein Paket wird 30 Tage nach der Zustellung vergessen; „Einstellungen“ › „Auf diesem Gerät“ › „Alle vergessen“ vergisst alle auf einmal. Die eigenen Backups des Handys enthalten die Pakete, die es verfolgt, und Peeks Präferenzen.
+Ein Paket, das du nachgeschlagen hast, vergisst Peek 30 Tage nach der Zustellung; die App behält dann seine letzte Antwort, markiert mit „Nicht mehr aktualisiert“, bis du es löschst. „Einstellungen“ › „Auf diesem Gerät“ › „Alle vergessen“ vergisst alle auf einmal. Die eigenen Backups des Handys enthalten die Pakete, die es verfolgt, und Peeks Präferenzen.
 
-Ein Konto bringt dieselbe Liste auf jedem Gerät und auf peektracker.com, dazu den Reisepass und Freunde, die Benachrichtigungseinstellungen und „Pakete per E-Mail hinzufügen“ ([Pakete aus deinen E-Mails verfolgen](guide:add-parcels-by-email)). Melde dich mit „Mit Google fortfahren“ oder „Mit E-Mail anmelden“ an; ein Anmelden mit Apple gibt es auf Android nicht. Auch „Demo erkunden“ auf dem Anmeldebildschirm braucht kein Konto. [Peek ohne Konto nutzen](guide:account-or-guest) vergleicht beides.
+Ein Konto bringt dieselbe Liste auf jedem Gerät und auf peektracker.com, dazu den Reisepass und Freunde, Liefer-E-Mails und „Pakete per E-Mail hinzufügen“ ([Pakete aus deinen E-Mails verfolgen](guide:add-parcels-by-email)). Melde dich mit „Mit Google fortfahren“ oder „Mit E-Mail anmelden“ an; ein Anmelden mit Apple gibt es auf Android nicht. Auch „Demo erkunden“ auf dem Anmeldebildschirm braucht kein Konto. [Peek ohne Konto nutzen](guide:account-or-guest) vergleicht beides.
 
 ## Wie lege ich das Peek-Widget auf meinen Startbildschirm?
 

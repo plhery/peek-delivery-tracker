@@ -4,7 +4,7 @@ description: Peek for Android is in beta: join the Google Play test or install i
 slug: parcel-tracker-app-android
 picture: An Android phone with the Parcels widget on its home screen, and Pip, the parcel with a face, peeking over the top of the phone.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Peek for Android is a beta, not public on Google Play: you get it from [peektracker.com/android](https://peektracker.com/android), by joining the Google Play test or by installing it from Peek's own F-Droid repository or from GitHub. It needs Android 12 or later and no account, and it adds a "Parcels" widget to your home screen and "Add to Peek" to your share sheet.
@@ -58,9 +58,9 @@ It speaks ten languages: English, German, French, Italian, Spanish, Portuguese, 
 
 Yes. Paste a tracking number on the first screen and Peek tracks it, listed on that phone only; the widget and the next-parcel shortcut work too. Deliveries shows "All your parcels in one place", with "On this device only, for now." and a "Sign in" button.
 
-A parcel is forgotten 30 days after delivery; "Settings" › "On this device" › "Forget all" forgets them all at once. The phone's own backups carry the parcels it follows and Peek's preferences.
+Peek forgets a parcel you looked up 30 days after delivery; the app then keeps its last answer, marked "No longer updated", until you delete it. "Settings" › "On this device" › "Forget all" forgets them all at once. The phone's own backups carry the parcels it follows and Peek's preferences.
 
-An account adds the same list on every device and on peektracker.com, the passport and friends, the notification settings and "Add parcels by email" ([adding parcels by email](guide:add-parcels-by-email)). Sign in with "Continue with Google" or "Sign in with email"; there's no Sign in with Apple on Android. "Explore the demo", on the Sign in screen, needs no account either. [Using Peek without an account](guide:account-or-guest) compares the two.
+An account adds the same list on every device and on peektracker.com, the passport and friends, delivery emails and "Add parcels by email" ([adding parcels by email](guide:add-parcels-by-email)). Sign in with "Continue with Google" or "Sign in with email"; there's no Sign in with Apple on Android. "Explore the demo", on the Sign in screen, needs no account either. [Using Peek without an account](guide:account-or-guest) compares the two.
 
 ## How do I add the Peek widget to my home screen?
 

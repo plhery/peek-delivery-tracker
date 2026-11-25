@@ -4,7 +4,7 @@ description: Peek para Android está en beta: únete a la prueba de Google Play 
 slug: app-seguimiento-paquetes-android
 picture: Un móvil Android con el widget Paquetes en la pantalla de inicio, y Pip, el paquete con cara, asomándose por encima del móvil.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Peek para Android es una beta que no es pública en Google Play: lo consigues en [peektracker.com/android](https://peektracker.com/android), uniéndote a la prueba de Google Play o instalándolo desde el repositorio de F-Droid del propio Peek o desde GitHub. Necesita Android 12 o posterior, no pide cuenta y añade un widget «Paquetes» a tu pantalla de inicio y «Añadir a Peek» a tu menú de compartir.
@@ -58,9 +58,9 @@ Está en diez idiomas: inglés, alemán, francés, italiano, español, portugué
 
 Sí. Pega un número de seguimiento en la primera pantalla y Peek lo sigue, y el paquete aparece solo en ese móvil; el widget y el acceso directo al próximo paquete también funcionan. Entregas muestra «Todos tus paquetes en un solo lugar», con «Solo en este dispositivo, por ahora.» y un botón «Iniciar sesión».
 
-Un paquete se olvida 30 días después de la entrega; «Ajustes» › «En este dispositivo» › «Olvidar todos» los olvida todos de una vez. Las copias de seguridad del propio móvil guardan los paquetes que sigue y las preferencias de Peek.
+Peek olvida un paquete buscado 30 días después de la entrega; la app guarda entonces su última respuesta, marcada «Ya no se actualiza», hasta que lo borres. «Ajustes» › «En este dispositivo» › «Olvidar todos» los olvida todos de una vez. Las copias de seguridad del propio móvil guardan los paquetes que sigue y las preferencias de Peek.
 
-Una cuenta añade la misma lista en todos tus dispositivos y en peektracker.com, el pasaporte y los amigos, los ajustes de notificaciones y «Añadir paquetes por correo» ([cómo añadir paquetes por correo](guide:add-parcels-by-email)). Inicia sesión con «Continuar con Google» o «Acceder con correo»; en Android no hay inicio de sesión con Apple. «Explorar la demo», en la pantalla para iniciar sesión, tampoco necesita cuenta. [Usar Peek sin cuenta](guide:account-or-guest) compara las dos opciones.
+Una cuenta añade la misma lista en todos tus dispositivos y en peektracker.com, el pasaporte y los amigos, los correos de entrega y «Añadir paquetes por correo» ([cómo añadir paquetes por correo](guide:add-parcels-by-email)). Inicia sesión con «Continuar con Google» o «Acceder con correo»; en Android no hay inicio de sesión con Apple. «Explorar la demo», en la pantalla para iniciar sesión, tampoco necesita cuenta. [Usar Peek sin cuenta](guide:account-or-guest) compara las dos opciones.
 
 ## ¿Cómo añado el widget de Peek a la pantalla de inicio?
 

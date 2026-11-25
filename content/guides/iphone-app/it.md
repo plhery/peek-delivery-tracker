@@ -4,7 +4,7 @@ description: L'app gratuita di Peek per iPhone, iPad e Mac traccia i pacchi senz
 slug: app-tracking-pacchi-iphone
 picture: Un iPhone con il widget «Pacchi» nella schermata Home, un iPad e un Mac dietro, e Pip, il pacco con la faccia, che saluta dal widget.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Peek per iPhone, iPad e Mac è un'app gratuita che traccia i pacchi di oltre 4.500 corrieri, senza bisogno di un account. Aggiungi il suo widget «Pacchi» alla schermata Home, mandale i link di tracking con «Aggiungi a Peek» dal menu di condivisione, oppure scansiona il codice a barre sull'etichetta con l'iPhone o l'iPad.
@@ -29,7 +29,7 @@ Scaricala dall'[App Store](https://apps.apple.com/app/id6823615370); su un compu
 
 | Cosa cerchi | Dove trovarlo |
 | --- | --- |
-| Notifiche | «Impostazioni» › «Consegne» › «Notifiche», con un account; vedi [le notifiche di consegna](guide:parcel-notifications) |
+| Notifiche | «Impostazioni» › «Consegne» › «Notifiche», con o senza account; vedi [le notifiche di consegna](guide:parcel-notifications) |
 | Aggiungere pacchi via e-mail | «Impostazioni» › «Consegne» › «Aggiungi pacchi via e-mail», con l'etichetta «Beta», con un account; vedi [tracciare i pacchi dalle tue e-mail](guide:add-parcels-by-email) |
 | Modalità scura | «Impostazioni» › «Preferenze» › «Aspetto», poi «Scuro» |
 | Peek IA | «Impostazioni» › «Preferenze» › «Peek IA»; vedi [la stima di consegna di Peek IA](guide:peek-ai) |
@@ -39,9 +39,9 @@ Scaricala dall'[App Store](https://apps.apple.com/app/id6823615370); su un compu
 
 Sì. I pacchi che aggiungi compaiono solo su quel dispositivo, e il widget, «Aggiungi a Peek», lo scanner di codici a barre e Siri funzionano tutti. «Consegne» mostra «Tutti i tuoi pacchi in un unico posto», con «Per ora, solo su questo iPhone.» e un pulsante «Accedi»; su iPad o Mac la frase nomina invece quel dispositivo.
 
-Un pacco seguito senza account viene dimenticato 30 giorni dopo la consegna; «Impostazioni» › «Su questo dispositivo» › «Dimentica tutti» li dimentica tutti in una volta.
+Peek dimentica un pacco cercato senza account 30 giorni dopo la consegna; l'app ne tiene allora l'ultima risposta, segnata «Non più aggiornato», finché non lo elimini. «Impostazioni» › «Su questo dispositivo» › «Dimentica tutti» li dimentica tutti in una volta.
 
-Un account aggiunge la stessa lista su ogni dispositivo e su peektracker.com, gli Amici, le impostazioni delle notifiche e «Aggiungi pacchi via e-mail». Accedi con Apple, con Google o con un codice monouso inviato via e-mail. Per dare prima un'occhiata, tocca «Accedi» nella prima schermata, poi «Esplora la demo» in fondo. [Usare Peek senza account](guide:account-or-guest) mette a confronto le due scelte.
+Un account aggiunge la stessa lista su ogni dispositivo e su peektracker.com, gli Amici, le e-mail di consegna e «Aggiungi pacchi via e-mail». Accedi con Apple, con Google o con un codice monouso inviato via e-mail. Per dare prima un'occhiata, tocca «Accedi» nella prima schermata, poi «Esplora la demo» in fondo. [Usare Peek senza account](guide:account-or-guest) mette a confronto le due scelte.
 
 ## Come aggiungo il widget di Peek alla schermata Home?
 

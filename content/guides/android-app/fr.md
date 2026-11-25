@@ -4,7 +4,7 @@ description: Peek pour Android est en bêta : rejoins le test Google Play ou ins
 slug: application-suivi-colis-android
 picture: Un téléphone Android avec le widget « Colis » sur son écran d'accueil, et Pip, le colis avec un visage, qui jette un œil par-dessus le téléphone.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Peek pour Android est une bêta, non publique sur Google Play : tu l'obtiens depuis [peektracker.com/android](https://peektracker.com/android), en rejoignant le test Google Play ou en l'installant depuis le dépôt F-Droid de Peek ou depuis GitHub. Il demande Android 12 ou plus récent, pas de compte, et il ajoute un widget « Colis » à ton écran d'accueil et « Ajouter à Peek » à ton menu de partage.
@@ -58,9 +58,9 @@ Il parle dix langues : anglais, allemand, français, italien, espagnol, portugai
 
 Oui. Colle un numéro de suivi sur le premier écran et Peek le suit, listé sur ce téléphone seulement ; le widget et le raccourci du prochain colis fonctionnent aussi. « Livraisons » affiche « Tous tes colis au même endroit », avec « Sur cet appareil seulement, pour l’instant. » et un bouton « Se connecter ».
 
-Un colis est oublié 30 jours après sa livraison ; « Réglages » › « Sur cet appareil » › « Tout oublier » les oublie tous d'un coup. Les sauvegardes du téléphone lui-même incluent les colis qu'il suit et les préférences de Peek.
+Peek oublie un colis recherché 30 jours après sa livraison ; l'app garde alors sa dernière réponse, marquée « Plus mis à jour », jusqu'à ce que tu le supprimes. « Réglages » › « Sur cet appareil » › « Tout oublier » les oublie tous d'un coup. Les sauvegardes du téléphone lui-même incluent les colis qu'il suit et les préférences de Peek.
 
-Un compte ajoute la même liste sur tous tes appareils et sur peektracker.com, le passeport et les amis, les réglages de notifications et « Ajouter des colis par e-mail » ([suivre ses colis depuis ses e-mails](guide:add-parcels-by-email)). Connecte-toi avec « Continuer avec Google » ou « Se connecter par e-mail » ; il n'y a pas de connexion avec Apple sur Android. « Explorer la démo », sur l'écran de connexion, ne demande pas de compte non plus. [Utiliser Peek sans compte](guide:account-or-guest) compare les deux.
+Un compte ajoute la même liste sur tous tes appareils et sur peektracker.com, le passeport et les amis, les e-mails de livraison et « Ajouter des colis par e-mail » ([suivre ses colis depuis ses e-mails](guide:add-parcels-by-email)). Connecte-toi avec « Continuer avec Google » ou « Se connecter par e-mail » ; il n'y a pas de connexion avec Apple sur Android. « Explorer la démo », sur l'écran de connexion, ne demande pas de compte non plus. [Utiliser Peek sans compte](guide:account-or-guest) compare les deux.
 
 ## Comment ajouter le widget Peek à mon écran d'accueil ?
 

@@ -4,7 +4,7 @@ description: Peek's free app for iPhone, iPad and Mac tracks parcels without an 
 slug: parcel-tracker-app-iphone
 picture: An iPhone with the Parcels widget on its Home Screen, an iPad and a Mac behind it, and Pip, the parcel with a face, waving from the widget.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Peek for iPhone, iPad and Mac is a free app that tracks parcels from more than 4,500 carriers, with no account needed. Add its "Parcels" widget to your Home Screen, send tracking links to it with "Add to Peek" in the share sheet, or scan the barcode on the label with your iPhone or iPad.
@@ -29,7 +29,7 @@ Get it from the [App Store](https://apps.apple.com/app/id6823615370); on a compu
 
 | To find | Go to |
 | --- | --- |
-| Notifications | "Settings" › "Deliveries" › "Notifications", with an account; see [parcel delivery notifications](guide:parcel-notifications) |
+| Notifications | "Settings" › "Deliveries" › "Notifications", with or without an account; see [parcel delivery notifications](guide:parcel-notifications) |
 | Add parcels by email | "Settings" › "Deliveries" › "Add parcels by email", marked "Beta", with an account; see [adding parcels by email](guide:add-parcels-by-email) |
 | Dark mode | "Settings" › "Preferences" › "Appearance", then "Dark" |
 | Peek AI | "Settings" › "Preferences" › "Peek AI"; see [Peek AI's delivery estimate](guide:peek-ai) |
@@ -39,9 +39,9 @@ Get it from the [App Store](https://apps.apple.com/app/id6823615370); on a compu
 
 Yes. The parcels you add are listed on that device only, and the widget, "Add to Peek", the barcode scanner and Siri all work. Deliveries shows "All your parcels in one place", with "On this iPhone only, for now." and a "Sign in" button; an iPad or Mac names itself instead.
 
-A parcel followed without an account is forgotten 30 days after it's delivered; "Settings" › "On this device" › "Forget all" forgets them all at once.
+Peek forgets a parcel you looked up without an account 30 days after it's delivered; the app then keeps its last answer, marked "No longer updated", until you delete it. "Settings" › "On this device" › "Forget all" forgets them all at once.
 
-An account adds the same list on every device and on peektracker.com, Friends, the notification settings and "Add parcels by email". You sign in with Apple, with Google or with a one-time code sent by email. To look around first, tap "Sign in" on the first screen, then "Explore the demo" at the bottom. [Using Peek without an account](guide:account-or-guest) weighs the choice.
+An account adds the same list on every device and on peektracker.com, Friends, delivery emails and "Add parcels by email". You sign in with Apple, with Google or with a one-time code sent by email. To look around first, tap "Sign in" on the first screen, then "Explore the demo" at the bottom. [Using Peek without an account](guide:account-or-guest) weighs the choice.
 
 ## How do I add the Peek widget to my Home Screen?
 

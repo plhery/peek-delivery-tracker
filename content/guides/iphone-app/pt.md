@@ -4,7 +4,7 @@ description: A app grátis do Peek para iPhone, iPad e Mac segue encomendas sem 
 slug: app-seguimento-encomendas-iphone
 picture: Um iPhone com o widget Encomendas no ecrã principal, um iPad e um Mac atrás, e o Pip, a encomenda com cara, a acenar a partir do widget.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 O Peek para iPhone, iPad e Mac é uma app grátis que segue encomendas de mais de 4500 transportadoras, sem precisares de conta. Adiciona o widget «Encomendas» ao ecrã principal, envia-lhe ligações de seguimento com «Adicionar ao Peek» no menu de partilha ou lê o código de barras da etiqueta com o teu iPhone ou iPad.
@@ -29,7 +29,7 @@ As «Definições» abrem-se a partir do botão Conta, no canto superior direito
 
 | Para encontrar | Vai a |
 | --- | --- |
-| Notificações | «Definições» › «Entregas» › «Notificações», com uma conta; vê [as notificações de entrega de encomendas](guide:parcel-notifications) |
+| Notificações | «Definições» › «Entregas» › «Notificações», com ou sem conta; vê [as notificações de entrega de encomendas](guide:parcel-notifications) |
 | Adicionar encomendas por e-mail | «Definições» › «Entregas» › «Adicionar encomendas por e-mail», com a etiqueta «Beta», com uma conta; vê [como adicionar encomendas por e-mail](guide:add-parcels-by-email) |
 | Modo escuro | «Definições» › «Preferências» › «Aspeto» e depois «Escuro» |
 | Peek IA | «Definições» › «Preferências» › «Peek IA»; vê [a estimativa do Peek IA](guide:peek-ai) |
@@ -39,9 +39,9 @@ As «Definições» abrem-se a partir do botão Conta, no canto superior direito
 
 Podes. As encomendas que adicionas ficam listadas só nesse dispositivo, e o widget, «Adicionar ao Peek», o leitor de códigos de barras e a Siri funcionam todos. Entregas mostra «Todas as tuas encomendas num só lugar», com «Por agora, só neste iPhone.» e um botão «Iniciar sessão»; num iPad ou num Mac, a mensagem nomeia esse dispositivo.
 
-Uma encomenda seguida sem conta é esquecida 30 dias depois de ser entregue; «Definições» › «Neste dispositivo» › «Esquecer todas» esquece-as todas de uma vez.
+O Peek esquece uma encomenda procurada sem conta 30 dias depois de ser entregue; a app guarda então a última resposta, marcada «Já não é atualizada», até a apagares. «Definições» › «Neste dispositivo» › «Esquecer todas» esquece-as todas de uma vez.
 
-Uma conta acrescenta a mesma lista em todos os teus dispositivos e em peektracker.com, os Amigos, as definições de notificações e «Adicionar encomendas por e-mail». Inicias sessão com a Apple, com a Google ou com um código de utilização única enviado por e-mail. Para espreitar primeiro, toca em «Iniciar sessão» no primeiro ecrã e depois em «Explorar a demonstração», lá em baixo. [Usar o Peek sem conta](guide:account-or-guest) ajuda-te a escolher.
+Uma conta acrescenta a mesma lista em todos os teus dispositivos e em peektracker.com, os Amigos, os e-mails de entrega e «Adicionar encomendas por e-mail». Inicias sessão com a Apple, com a Google ou com um código de utilização única enviado por e-mail. Para espreitar primeiro, toca em «Iniciar sessão» no primeiro ecrã e depois em «Explorar a demonstração», lá em baixo. [Usar o Peek sem conta](guide:account-or-guest) ajuda-te a escolher.
 
 ## Como adiciono o widget do Peek ao ecrã principal?
 

@@ -4,7 +4,7 @@ description: Darmowa aplikacja Peek na iPhone’a, iPada i Maca śledzi przesył
 slug: aplikacja-sledzenie-przesylek-iphone
 picture: iPhone z widżetem Przesyłki na ekranie głównym, za nim iPad i Mac, a z widżetu macha Pip, paczka z buzią.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Peek na iPhone’a, iPada i Maca to darmowa aplikacja, która śledzi przesyłki ponad 4500 przewoźników, bez zakładania konta. Dodaj jej widżet „Przesyłki” do ekranu głównego, wysyłaj do niej linki do śledzenia przez „Dodaj do Peeka” w menu udostępniania albo zeskanuj kod kreskowy z etykiety iPhone’em lub iPadem.
@@ -29,7 +29,7 @@ Pobierz ją z [App Store](https://apps.apple.com/app/id6823615370); na komputerz
 
 | Czego szukasz | Gdzie to jest |
 | --- | --- |
-| Powiadomienia | „Ustawienia” › „Dostawy” › „Powiadomienia”, z kontem; zobacz [powiadomienia o dostawie przesyłek](guide:parcel-notifications) |
+| Powiadomienia | „Ustawienia” › „Dostawy” › „Powiadomienia”, z kontem lub bez; zobacz [powiadomienia o dostawie przesyłek](guide:parcel-notifications) |
 | Dodawanie przesyłek e-mailem | „Ustawienia” › „Dostawy” › „Dodawaj przesyłki e-mailem”, z oznaczeniem „Beta”, z kontem; zobacz [dodawanie przesyłek e-mailem](guide:add-parcels-by-email) |
 | Tryb ciemny | „Ustawienia” › „Preferencje” › „Wygląd”, a potem „Ciemny” |
 | Peek AI | „Ustawienia” › „Preferencje” › „Peek AI”; zobacz [prognozę dostawy Peek AI](guide:peek-ai) |
@@ -39,9 +39,9 @@ Pobierz ją z [App Store](https://apps.apple.com/app/id6823615370); na komputerz
 
 Tak. Dodane przesyłki widać tylko na tym jednym urządzeniu, a widżet, „Dodaj do Peeka”, skaner kodów kreskowych i Siri działają normalnie. Ekran Dostawy pokazuje „Wszystkie przesyłki w jednym miejscu” z napisem „Na razie tylko na tym iPhonie.” i przyciskiem „Zaloguj się”; na iPadzie lub Macu komunikat podaje nazwę tego urządzenia.
 
-Przesyłka śledzona bez konta znika 30 dni po doręczeniu, a „Ustawienia” › „Na tym urządzeniu” › „Zapomnij o wszystkich” usuwa wszystkie naraz.
+Peek zapomina przesyłkę sprawdzoną bez konta 30 dni po doręczeniu; aplikacja zachowuje wtedy jej ostatnią odpowiedź z oznaczeniem „Nie jest już aktualizowana”, dopóki jej nie usuniesz. A „Ustawienia” › „Na tym urządzeniu” › „Zapomnij o wszystkich” usuwa wszystkie naraz.
 
-Konto daje tę samą listę na każdym urządzeniu i na peektracker.com, Znajomych, ustawienia powiadomień i „Dodawaj przesyłki e-mailem”. Logujesz się przez Apple, przez Google albo jednorazowym kodem wysłanym e-mailem. Żeby najpierw się rozejrzeć, stuknij „Zaloguj się” na pierwszym ekranie, a potem „Wypróbuj demo” na samym dole. Poradnik [korzystanie z Peeka bez konta](guide:account-or-guest) pomaga wybrać.
+Konto daje tę samą listę na każdym urządzeniu i na peektracker.com, Znajomych, e-maile o dostawie i „Dodawaj przesyłki e-mailem”. Logujesz się przez Apple, przez Google albo jednorazowym kodem wysłanym e-mailem. Żeby najpierw się rozejrzeć, stuknij „Zaloguj się” na pierwszym ekranie, a potem „Wypróbuj demo” na samym dole. Poradnik [korzystanie z Peeka bez konta](guide:account-or-guest) pomaga wybrać.
 
 ## Jak dodać widżet Peeka do ekranu głównego?
 

@@ -4,7 +4,7 @@ description: Peek na Androida jest w wersji beta: dołącz do testów w Google P
 slug: aplikacja-sledzenie-przesylek-android
 picture: Telefon z Androidem z widżetem Przesyłki na ekranie głównym i Pip, paczka z buzią, zerkający znad telefonu.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Peek na Androida to wersja beta, niedostępna publicznie w Google Play: pobierzesz go ze strony [peektracker.com/android](https://peektracker.com/android), dołączając do testów w Google Play albo instalując go z własnego repozytorium F-Droid Peeka lub z GitHuba. Wymaga Androida 12 lub nowszego i nie wymaga konta, a do ekranu głównego dodaje widżet „Przesyłki”, do menu udostępniania zaś „Dodaj do Peeka”.
@@ -58,9 +58,9 @@ Peek jest dostępny w dziesięciu językach: angielskim, niemieckim, francuskim,
 
 Tak. Wklej numer przesyłki na pierwszym ekranie, a Peek zacznie ją śledzić i pokaże tylko na tym telefonie; widżet i skrót do najbliższej przesyłki też działają. Ekran Dostawy pokazuje „Wszystkie przesyłki w jednym miejscu” z napisem „Na razie tylko na tym urządzeniu.” i przyciskiem „Zaloguj się”.
 
-Przesyłka znika 30 dni po doręczeniu, a „Ustawienia” › „Na tym urządzeniu” › „Zapomnij o wszystkich” usuwa wszystkie naraz. Kopie zapasowe samego telefonu obejmują śledzone na nim przesyłki i preferencje Peeka.
+Peek zapomina sprawdzoną przesyłkę 30 dni po doręczeniu; aplikacja zachowuje wtedy jej ostatnią odpowiedź z oznaczeniem „Nie jest już aktualizowana”, dopóki jej nie usuniesz. A „Ustawienia” › „Na tym urządzeniu” › „Zapomnij o wszystkich” usuwa wszystkie naraz. Kopie zapasowe samego telefonu obejmują śledzone na nim przesyłki i preferencje Peeka.
 
-Konto daje tę samą listę na każdym urządzeniu i na peektracker.com, paszport i znajomych, ustawienia powiadomień oraz „Dodawaj przesyłki e-mailem” ([dodawanie przesyłek e-mailem](guide:add-parcels-by-email)). Zaloguj się przez „Kontynuuj z Google” albo „Zaloguj się przez e-mail”; na Androidzie nie ma logowania przez Apple. „Wypróbuj demo” na ekranie logowania też nie wymaga konta. Poradnik [korzystanie z Peeka bez konta](guide:account-or-guest) porównuje obie możliwości.
+Konto daje tę samą listę na każdym urządzeniu i na peektracker.com, paszport i znajomych, e-maile o dostawie oraz „Dodawaj przesyłki e-mailem” ([dodawanie przesyłek e-mailem](guide:add-parcels-by-email)). Zaloguj się przez „Kontynuuj z Google” albo „Zaloguj się przez e-mail”; na Androidzie nie ma logowania przez Apple. „Wypróbuj demo” na ekranie logowania też nie wymaga konta. Poradnik [korzystanie z Peeka bez konta](guide:account-or-guest) porównuje obie możliwości.
 
 ## Jak dodać widżet Peeka do ekranu głównego?
 

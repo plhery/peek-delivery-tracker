@@ -4,7 +4,7 @@ description: O Peek para Android está em beta: adere ao teste no Google Play ou
 slug: app-seguimento-encomendas-android
 picture: Um telemóvel Android com o widget Encomendas no ecrã principal, e o Pip, a encomenda com cara, a espreitar por cima do telemóvel.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 O Peek para Android é uma beta e não está público no Google Play: obténs a app em [peektracker.com/android](https://peektracker.com/android), ao aderires ao teste no Google Play ou ao instalá-la a partir do repositório F-Droid do próprio Peek ou do GitHub. Precisa do Android 12 ou posterior, não pede conta e acrescenta um widget «Encomendas» ao ecrã principal e «Adicionar ao Peek» ao menu de partilha.
@@ -58,9 +58,9 @@ Está disponível em dez idiomas: inglês, alemão, francês, italiano, espanhol
 
 Podes. Cola um número de seguimento no primeiro ecrã e o Peek segue-o, listado só nesse telemóvel; o widget e o atalho para a próxima encomenda também funcionam. Entregas mostra «Todas as tuas encomendas num só lugar», com «Por agora, só neste dispositivo.» e um botão «Iniciar sessão».
 
-Uma encomenda é esquecida 30 dias depois da entrega; «Definições» › «Neste dispositivo» › «Esquecer todas» esquece-as todas de uma vez. As cópias de segurança do próprio telemóvel guardam as encomendas que ele segue e as preferências do Peek.
+O Peek esquece uma encomenda procurada 30 dias depois da entrega; a app guarda então a última resposta, marcada «Já não é atualizada», até a apagares. «Definições» › «Neste dispositivo» › «Esquecer todas» esquece-as todas de uma vez. As cópias de segurança do próprio telemóvel guardam as encomendas que ele segue e as preferências do Peek.
 
-Uma conta acrescenta a mesma lista em todos os teus dispositivos e em peektracker.com, o passaporte e os amigos, as definições de notificações e «Adicionar encomendas por e-mail» ([como adicionar encomendas por e-mail](guide:add-parcels-by-email)). Inicia sessão com «Continuar com o Google» ou «Iniciar sessão com e-mail»; no Android não há início de sessão com a Apple. «Explorar a demonstração», no ecrã de início de sessão, também não precisa de conta. [Usar o Peek sem conta](guide:account-or-guest) compara as duas opções.
+Uma conta acrescenta a mesma lista em todos os teus dispositivos e em peektracker.com, o passaporte e os amigos, os e-mails de entrega e «Adicionar encomendas por e-mail» ([como adicionar encomendas por e-mail](guide:add-parcels-by-email)). Inicia sessão com «Continuar com o Google» ou «Iniciar sessão com e-mail»; no Android não há início de sessão com a Apple. «Explorar a demonstração», no ecrã de início de sessão, também não precisa de conta. [Usar o Peek sem conta](guide:account-or-guest) compara as duas opções.
 
 ## Como adiciono o widget do Peek ao ecrã principal?
 

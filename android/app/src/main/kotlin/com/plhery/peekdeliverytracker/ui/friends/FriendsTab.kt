@@ -39,7 +39,6 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -199,6 +198,7 @@ internal class FriendsState(
     arrivingValue: MutableState<UUID?>,
     landedValue: MutableState<Boolean>,
     presentedValue: MutableState<UUID?>,
+    openingsValue: MutableState<Int>,
 ) : AccountHost {
     override val showingAccount: Boolean get() = showing.value
     override val sheetsAsForms: Boolean get() = forms.value
@@ -210,8 +210,11 @@ internal class FriendsState(
 
     val openFriend: UUID? get() = friend.value
 
-    /** Each panel opened afresh, as `.sheet(item:)` makes its view anew. */
-    var openings by mutableIntStateOf(0)
+    /**
+     * Each panel opened afresh, as `.sheet(item:)` makes its view anew; kept with the window, whose panel made again
+     * finds what its form held under the same opening.
+     */
+    var openings by openingsValue
         private set
 
     /** The invitation the panel open made, kept as its `@State` is while it shows, and with the window. */
@@ -311,7 +314,10 @@ internal fun rememberFriendsState(source: DeliveriesSource, share: InvitationSha
     val arriving = rememberForWindow<UUID?>(launch, null)
     val landed = rememberForLaunch(launch, false)
     val presented = rememberForLaunch<UUID?>(launch, null)
-    return remember(source, share) { FriendsState(source, share, showing, forms, panel, panelForm, friend, invitation, arriving, landed, presented) }
+    val openings = rememberForLaunch(launch, 0)
+    return remember(source, share) {
+        FriendsState(source, share, showing, forms, panel, panelForm, friend, invitation, arriving, landed, presented, openings)
+    }
 }
 
 /**

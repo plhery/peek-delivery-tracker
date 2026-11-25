@@ -752,6 +752,23 @@ class FriendsTest {
     // The profile's form (C-S23, C-S24).
 
     @Test
+    fun theProfilesPanelKeepsWhatItHoldsThroughTheWindowMadeAgain() {
+        val recreation = Recreation(compose, owner.registry)
+        show(recreation = recreation)
+        tap(FRIENDS_SHARING)
+        type("Alexandra")
+        flip(FRIENDS_SHARE_ARRIVAL)
+        assertEquals(ToggleableState.On, toggle(FRIENDS_SHARE_ARRIVAL))
+        // The first window made again after the panel opened, as it turns: the panel's opening comes back with it.
+        recreation.recreate()
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertEquals(text("friends.settings"), panel())
+        assertEquals("Alexandra", name())
+        assertEquals(ToggleableState.On, toggle(FRIENDS_SHARE_ARRIVAL))
+    }
+
+    @Test
     fun theProfilesPanelKeepsTheNameTo24ScalarsAnEmojiWhole() {
         show()
         tap(FRIENDS_SHARING)

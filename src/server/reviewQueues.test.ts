@@ -88,6 +88,13 @@ describe('cases on the start of a number just saved', () => {
     expect(log).toHaveBeenCalledOnce();
     expect(String(log.mock.calls[0][0])).not.toContain('ZZ00123456');
   });
+
+  it('matches a number saved with its hyphens, a Tiui folio, as detection read it while it was typed', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const ignore = vi.spyOn(client, 'ignoreTypedTrackingSupportCases').mockResolvedValue(1);
+    await settleTypedSupportCases(client, '24-61-7035', new Date('2026-10-22T12:00:00Z'));
+    expect(ignore).toHaveBeenCalledExactlyOnceWith('24617035', expect.any(Date), deployedVersion(), expect.any(String));
+  });
 });
 
 describe('review queue replay', () => {

@@ -162,11 +162,12 @@ const TYPING_WINDOW_MS = 60 * 60_000;
 /**
  * Closes the cases detection opened on the start of a number just saved: most likely that
  * number being typed. A case has no owner, so only one detection saw within the hour counts.
- * A failure leaves them to expire with the other cases nobody follows.
+ * Detection files a case under the number as it reads it, so a Tiui folio saved with its
+ * hyphens is matched without them. A failure leaves them to expire with the other cases nobody follows.
  */
 export async function settleTypedSupportCases(client: SupabaseServiceClient, trackingNumber: string, now = new Date()): Promise<void> {
   try {
-    await client.ignoreTypedTrackingSupportCases(trackingNumber, new Date(now.getTime() - TYPING_WINDOW_MS), deployedVersion(),
+    await client.ignoreTypedTrackingSupportCases(normalizeTrackingNumber(trackingNumber), new Date(now.getTime() - TYPING_WINDOW_MS), deployedVersion(),
       'Only detection saw the number, within the hour before a longer number starting with it was saved: '
       + 'that number being typed.');
   } catch (error) {

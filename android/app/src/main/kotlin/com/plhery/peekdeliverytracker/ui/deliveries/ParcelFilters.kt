@@ -47,7 +47,7 @@ internal fun FiltersHost(state: DeliveriesState) {
     Sheet(
         visible = state.showingFilters && !popover,
         onDismiss = close,
-        paneTitle = title,
+        paneTitle = title, id = "filters",
         detents = listOf(SheetDetent.Medium, SheetDetent.Large),
         onClosed = closed,
     ) {
@@ -57,7 +57,7 @@ internal fun FiltersHost(state: DeliveriesState) {
         visible = state.showingFilters && popover,
         anchor = state.filtersAnchor,
         onDismiss = close,
-        paneTitle = title,
+        paneTitle = title, id = "filters",
         size = POPOVER_SIZE,
         onClosed = closed,
     ) {

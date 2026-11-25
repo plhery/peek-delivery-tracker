@@ -131,7 +131,7 @@ fun ShareSheet(
         if (card.phase == SharePhase.Reading) card.read(read())
     }
     Sheet(
-        visible = visible, onDismiss = { visible = false }, paneTitle = copy.text("shareExtension.title"),
+        visible = visible, onDismiss = { visible = false }, paneTitle = copy.text("shareExtension.title"), id = "shareExtension",
         detents = listOf(SheetDetent.Large), onClosed = { onClosed(card.phase == SharePhase.Saved) }, grabber = false,
     ) {
         ShareCardView(card, copy, onSave = { if (visible) card.save(save) }, onClose = { visible = false })

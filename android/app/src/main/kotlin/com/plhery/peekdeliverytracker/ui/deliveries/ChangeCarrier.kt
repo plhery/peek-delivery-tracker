@@ -145,7 +145,7 @@ internal fun CarrierEditorHost(state: DeliveriesState) {
     Sheet(
         visible = visible,
         onDismiss = { state.closeCarrierEditor() },
-        paneTitle = localized("detail.changeCarrier"),
+        paneTitle = localized("detail.changeCarrier"), id = "changeCarrier",
         detents = listOf(SheetDetent.Medium, SheetDetent.Large),
         onClosed = {
             up = false

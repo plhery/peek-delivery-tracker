@@ -210,7 +210,7 @@ internal fun TurnstileSheetHost(sheet: TurnstileSheet) {
     Sheet(
         visible = check != null,
         onDismiss = { sheet.check?.cancel() },
-        paneTitle = title,
+        paneTitle = title, id = "verification",
         detents = listOf(SheetDetent.Large),
         onClosed = { if (sheet.check == null) shown = null },
         grabber = false,

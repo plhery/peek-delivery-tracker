@@ -373,7 +373,7 @@ internal fun ParcelShareHost(state: DeliveriesState) {
     Sheet(
         visible = current,
         onDismiss = { state.closeShare() },
-        paneTitle = localized("share.title"),
+        paneTitle = localized("share.title"), id = "share",
         detents = listOf(SheetDetent.Fitted, SheetDetent.Large),
         onClosed = {
             up = false

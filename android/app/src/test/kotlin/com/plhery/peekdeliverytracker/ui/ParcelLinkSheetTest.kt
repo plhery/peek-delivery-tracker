@@ -1020,7 +1020,7 @@ class ParcelLinkSheetTest {
     @Test
     fun theSheetComesOverAnotherSheetAndTakesTheTouchesAndTalkBack() {
         show(FakeParcelLinks()) {
-            Sheet(visible = true, onDismiss = {}, paneTitle = "Under") { Box(Modifier.fillMaxSize().testTag(UNDER)) }
+            Sheet(visible = true, onDismiss = {}, paneTitle = "Under", id = "Under") { Box(Modifier.fillMaxSize().testTag(UNDER)) }
         }
         assertTrue(reachable(UNDER))
         open()
@@ -1034,7 +1034,7 @@ class ParcelLinkSheetTest {
     @Test
     fun theSheetComesOverACover() {
         show(FakeParcelLinks()) {
-            FullScreenCover(visible = true, onDismiss = {}, paneTitle = "Under") { Box(Modifier.fillMaxSize().testTag(UNDER)) }
+            FullScreenCover(visible = true, onDismiss = {}, paneTitle = "Under", id = "Under") { Box(Modifier.fillMaxSize().testTag(UNDER)) }
         }
         assertTrue(reachable(UNDER))
         open()

@@ -1091,7 +1091,7 @@ internal fun ParcelFeedbackOverlays(
     Sheet(
         visible = work.words != null,
         onDismiss = work::dismissWords,
-        paneTitle = localizer.text(if (work.words?.pageSaid != null) "feedback.addNote" else "feedback.whatsOff"),
+        paneTitle = localizer.text(if (work.words?.pageSaid != null) "feedback.addNote" else "feedback.whatsOff"), id = "feedbackWords",
         detents = listOf(SheetDetent.Fitted, SheetDetent.Large),
         onClosed = gone,
         detent = if (work.large) SheetDetent.Large else SheetDetent.Fitted,
@@ -1104,7 +1104,7 @@ internal fun ParcelFeedbackOverlays(
     Sheet(
         visible = work.namingCarrier,
         onDismiss = work::dismissCarrier,
-        paneTitle = localizer.text("feedback.unknown.title"),
+        paneTitle = localizer.text("feedback.unknown.title"), id = "feedbackCarrier",
         detents = listOf(SheetDetent.Fitted, SheetDetent.Large),
         onClosed = gone,
         detent = if (work.large) SheetDetent.Large else SheetDetent.Fitted,

@@ -163,7 +163,7 @@ internal fun AccountSheetHost(state: AccountHost) {
     Sheet(
         visible = state.showingAccount,
         onDismiss = state::closeAccount,
-        paneTitle = localized("settings.title"),
+        paneTitle = localized("settings.title"), id = "settings",
         detents = listOf(SheetDetent.Large),
         onClosed = {
             nav.pushed.value = null

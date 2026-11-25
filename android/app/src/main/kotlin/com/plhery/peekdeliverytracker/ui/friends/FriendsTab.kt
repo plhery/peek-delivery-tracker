@@ -892,7 +892,7 @@ private fun FriendsPanelHost(state: FriendsState) {
     Sheet(
         visible = state.panel != null,
         onDismiss = state::closePanel,
-        paneTitle = title,
+        paneTitle = title, id = "friendsPanel",
         detents = if (large || panel == null) listOf(SheetDetent.Large) else panel.detents,
         onClosed = { drawn = null },
         dismissible = !working,

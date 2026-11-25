@@ -84,7 +84,7 @@ internal fun TrackingScannerCover(visible: Boolean, onScan: (String) -> Unit, on
     // The camera's callback reads the reader of the moment: none on the way down, a new one as the cover comes up again.
     val reader by rememberUpdatedState(first.takeIf { visible })
     val scanned by rememberUpdatedState(onScan)
-    FullScreenCover(visible = visible, onDismiss = onCancel, paneTitle = title) {
+    FullScreenCover(visible = visible, onDismiss = onCancel, paneTitle = title, id = "scanner") {
         TrackingScannerView(title, onRead = { read -> reader?.read(read)?.let { scanned(it) } }, onCancel)
     }
 }

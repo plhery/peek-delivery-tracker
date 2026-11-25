@@ -143,7 +143,7 @@ internal fun ParcelAlertsHost(state: DeliveriesState) {
     Sheet(
         visible = current,
         onDismiss = { state.closeAlerts() },
-        paneTitle = localized("email.parcel.open"),
+        paneTitle = localized("email.parcel.open"), id = "parcelEmail",
         detents = listOf(SheetDetent.Fitted, SheetDetent.Large),
         onClosed = {
             up = false

@@ -240,14 +240,14 @@ internal fun AddParcelHost(state: DeliveriesState) {
     }
     if (cover) {
         FullScreenCover(
-            visible = request != null, onDismiss = state::closeAdd, paneTitle = title,
+            visible = request != null, onDismiss = state::closeAdd, paneTitle = title, id = "add",
             onClosed = { state.addClosed(adding) }, dismissible = !saving, content = content,
         )
     } else {
         // The iPad's form shows no drag indicator: `presentationSizing(.form)` alone. Over the whole screen on a phone,
         // Add has no top edge to light.
         Sheet(
-            visible = request != null, onDismiss = state::closeAdd, paneTitle = title, detents = listOf(SheetDetent.Large),
+            visible = request != null, onDismiss = state::closeAdd, paneTitle = title, id = "add", detents = listOf(SheetDetent.Large),
             onClosed = { state.addClosed(adding) }, dismissible = !saving, grabber = false, lit = true, content = content,
         )
     }
@@ -1971,7 +1971,7 @@ private fun AddPicker(state: DeliveriesState, addition: ParcelAddition, form: Ad
     Sheet(
         visible = form.showingPicker,
         onDismiss = close,
-        paneTitle = localized("add.carrier"),
+        paneTitle = localized("add.carrier"), id = "addCarrier",
         detents = listOf(SheetDetent.Large),
         // A plain `.sheet` with `.formOnPad()`: one detent, so no drag indicator, on the iPhone as on the iPad.
         grabber = false,

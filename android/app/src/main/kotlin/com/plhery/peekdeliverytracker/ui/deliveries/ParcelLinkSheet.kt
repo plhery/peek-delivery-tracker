@@ -370,7 +370,7 @@ internal fun ParcelLinkSheetHost(source: ParcelLinkSource) {
     Sheet(
         visible = route != null,
         onDismiss = { links.close() },
-        paneTitle = localized("link.shared"),
+        paneTitle = localized("link.shared"), id = "link",
         detents = listOf(SheetDetent.Large),
         onClosed = {
             up = false
@@ -1136,7 +1136,7 @@ private fun SharedParcelCard(
         }
     }
     if (atlas != null && route != null) {
-        FullScreenCover(visible = showingMap, onDismiss = { showingMap = false }, paneTitle = localizer.text("map.open")) {
+        FullScreenCover(visible = showingMap, onDismiss = { showingMap = false }, paneTitle = localizer.text("map.open"), id = "linkMap") {
             ParcelMapScreen(
                 atlas = atlas, route = route, stage = parcel.currentStage, accent = identity.ink, hinge = null, levelHinge = null,
                 onClose = { showingMap = false },

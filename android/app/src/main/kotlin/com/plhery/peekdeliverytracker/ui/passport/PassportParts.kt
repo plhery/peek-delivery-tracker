@@ -185,7 +185,7 @@ internal fun ExplanationPopover(visible: Boolean, anchor: Rect, onDismiss: () ->
         visible = visible,
         anchor = anchor,
         onDismiss = onDismiss,
-        paneTitle = title,
+        paneTitle = title, id = tag,
         size = BUBBLE_SIZE,
         above = true,
         radius = BUBBLE_RADIUS,

@@ -90,7 +90,7 @@ class SheetBackdropTest {
                 Box(Modifier.fillMaxSize().testTag(SHOT)) {
                     Box(Modifier.fillMaxSize().materialBackdrop(backdrop).materialBackdrop(tabAlone).background(YELLOW)) {
                         CompositionLocalProvider(LocalTabOverlay provides overlay) {
-                            Sheet(visible = true, onDismiss = {}, paneTitle = "Sheet", detents = listOf(SheetDetent.Height(300.dp))) {
+                            Sheet(visible = true, onDismiss = {}, paneTitle = "Sheet", id = "Sheet", detents = listOf(SheetDetent.Height(300.dp))) {
                                 Column(Modifier.fillMaxSize()) {
                                     Spacer(Modifier.height(100.dp))
                                     Box(Modifier.fillMaxWidth().weight(1f).background(BLUE))

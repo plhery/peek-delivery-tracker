@@ -367,7 +367,7 @@ internal fun PeekAiPageCard(state: DeliveriesState, parcel: Parcel, modifier: Mo
     Sheet(
         visible = open && current != null,
         onDismiss = { open = false },
-        paneTitle = localizer.text("peekAi.name"),
+        paneTitle = localizer.text("peekAi.name"), id = "peekAi",
         detents = listOf(SheetDetent.Fitted, SheetDetent.Large),
         onClosed = { kept = null },
         lit = true,

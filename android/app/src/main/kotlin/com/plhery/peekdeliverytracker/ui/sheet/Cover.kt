@@ -38,7 +38,8 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
  * system's back, as long as it is [dismissible]; otherwise the back is kept from what is under it.
  * TalkBack reaches only the cover, named [paneTitle], and only a menu opened in it while one is open ([LocalSheetMenus]);
  * on its way down it takes no touch and TalkBack no longer reaches it, as UIKit's cover going down. Once it has gone,
- * [onClosed] runs. The window made again (a rotation) finds it up, without coming up again. What it holds lays out the
+ * [onClosed] runs. The window made again (a rotation) finds it up, without coming up again, and [id] names it there
+ * as a sheet's does ([Sheet]). What it holds lays out the
  * system's bars and the keyboard itself. Presented from a sheet or another cover, it covers the whole window all the
  * same ([LocalWindowOverlay]).
  */
@@ -47,6 +48,7 @@ fun FullScreenCover(
     visible: Boolean,
     onDismiss: () -> Unit,
     paneTitle: String,
+    id: Any,
     modifier: Modifier = Modifier,
     onClosed: () -> Unit = {},
     dismissible: Boolean = true,
@@ -74,10 +76,11 @@ fun FullScreenCover(
             )
         }
     }
-    if (host == null) layer?.invoke() else OverlayLayer(host, CoverKey(paneTitle), layer)
+    if (host == null) layer?.invoke() else OverlayLayer(host, CoverKey(id), layer)
 }
 
-private data class CoverKey(val title: String)
+/** A cover's layer, by its [FullScreenCover]'s `id`, as a sheet's is. */
+private data class CoverKey(val id: Any)
 
 @Composable
 private fun CoverLayer(

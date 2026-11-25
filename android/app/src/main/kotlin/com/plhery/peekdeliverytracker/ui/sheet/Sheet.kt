@@ -190,7 +190,9 @@ internal class SheetMenus {
  * [onDetentChange] hears which. TalkBack reaches only the sheet, named [paneTitle], and only its menu while one is open
  * ([FormMenuRow]). Once it has come up, [onShown] runs (`present(_:animated:completion:)`'s completion); once it has
  * gone, [onClosed] runs, where TalkBack's focus goes back to what opened it. The window made again (a rotation) finds it
- * at the detent it had, without coming up again, and [onShown] runs again there. Without its [grabber] it shows none,
+ * at the detent it had, without coming up again, and [onShown] runs again there; [id] names it among the window's
+ * layers, the same in every language, so that what it holds stays through a title in another language, or one that
+ * changes as it shows. Without its [grabber] it shows none,
  * as UIKit's page sheet; in a compact window the page sheet is the sheet at its large detent. Nor does it in a window
  * lower than 480, or under another sheet, as UIKit hides the grabber of a sheet in compact height and of one under
  * another.
@@ -204,6 +206,7 @@ fun Sheet(
     visible: Boolean,
     onDismiss: () -> Unit,
     paneTitle: String,
+    id: Any,
     modifier: Modifier = Modifier,
     detents: List<SheetDetent> = listOf(SheetDetent.Medium, SheetDetent.Large),
     onClosed: () -> Unit = {},
@@ -241,10 +244,11 @@ fun Sheet(
             )
         }
     }
-    if (host == null) layer?.invoke() else OverlayLayer(host, SheetKey(paneTitle), layer)
+    if (host == null) layer?.invoke() else OverlayLayer(host, SheetKey(id), layer)
 }
 
-private data class SheetKey(val title: String)
+/** A sheet's layer, by its [Sheet]'s `id`: the title would name another in another language, or as it changes. */
+private data class SheetKey(val id: Any)
 
 /**
  * Which opening of what shows while [shown] this is, kept with the window. The window made anew while it showed finds

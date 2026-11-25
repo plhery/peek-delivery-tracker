@@ -96,7 +96,7 @@ class SheetTest {
                 BackHandler { hostBacks++ }
                 Box(Modifier.fillMaxSize()) {
                     Sheet(
-                        visible, onDismiss = { visible = false }, paneTitle = "Sheet", detent = detent,
+                        visible, onDismiss = { visible = false }, paneTitle = "Sheet", id = "Sheet", detent = detent,
                         onDetentChange = { rested += it }, dismissible = dismissible, page = page,
                     ) {
                         SideEffect { compositions++ }
@@ -275,8 +275,8 @@ class SheetTest {
                 val overlay = remember { TabOverlay(window = front, name = "sheets") }
                 Box(Modifier.fillMaxSize()) {
                     CompositionLocalProvider(LocalTabOverlay provides overlay) {
-                        Sheet(visible, onDismiss = { visible = false }, paneTitle = "Under") { Box(Modifier.fillMaxSize()) }
-                        Sheet(over, onDismiss = { over = false }, paneTitle = "Over", detent = SheetDetent.Large) { Box(Modifier.fillMaxSize()) }
+                        Sheet(visible, onDismiss = { visible = false }, paneTitle = "Under", id = "Under") { Box(Modifier.fillMaxSize()) }
+                        Sheet(over, onDismiss = { over = false }, paneTitle = "Over", id = "Over", detent = SheetDetent.Large) { Box(Modifier.fillMaxSize()) }
                     }
                     overlay.Content()
                     front?.Content()
@@ -313,7 +313,7 @@ class SheetTest {
         recreation.setContent {
             PeekTheme(dark = false, highContrast = false, reduceMotion = false, reduceTransparency = false, carrierIdentities = null) {
                 Box(Modifier.requiredSize(size)) {
-                    Sheet(visible = true, onDismiss = {}, paneTitle = "Sheet") {
+                    Sheet(visible = true, onDismiss = {}, paneTitle = "Sheet", id = "Sheet") {
                         var typed by rememberSaveable { mutableStateOf("") }
                         BasicTextField(typed, { typed = it }, Modifier.testTag(FIELD))
                     }
@@ -345,17 +345,17 @@ class SheetTest {
      */
     @Test
     fun aSheetOpensAfreshAfterAWindowMadeAgainWithoutIt() = opensAfresh { shown, content ->
-        Sheet(visible = shown, onDismiss = {}, paneTitle = "Sheet", content = content)
+        Sheet(visible = shown, onDismiss = {}, paneTitle = "Sheet", id = "Sheet", content = content)
     }
 
     @Test
     fun aPopoverOpensAfreshAfterAWindowMadeAgainWithoutIt() = opensAfresh { shown, content ->
-        Popover(shown, ComposeRect(100f, 100f, 140f, 140f), onDismiss = {}, paneTitle = "Popover", size = PopoverSize(300.dp, 300.dp, 200.dp, 200.dp), content = content)
+        Popover(shown, ComposeRect(100f, 100f, 140f, 140f), onDismiss = {}, paneTitle = "Popover", id = "Popover", size = PopoverSize(300.dp, 300.dp, 200.dp, 200.dp), content = content)
     }
 
     @Test
     fun aCoverOpensAfreshAfterAWindowMadeAgainWithoutIt() = opensAfresh { shown, content ->
-        FullScreenCover(visible = shown, onDismiss = {}, paneTitle = "Cover", content = content)
+        FullScreenCover(visible = shown, onDismiss = {}, paneTitle = "Cover", id = "Cover", content = content)
     }
 
     private fun opensAfresh(present: @Composable (Boolean, @Composable () -> Unit) -> Unit) {
@@ -391,6 +391,58 @@ class SheetTest {
         shown = true
         compose.waitForIdle()
         compose.onNodeWithTag(FIELD).assertTextEquals("")
+    }
+
+    /**
+     * What a sheet, a popover or a cover holds stays as the app's language changes under it: its title, in the new
+     * language, names the same layer, whether the window is made again in that language (the system's language for
+     * the app changed) or the title changes as it shows (the app's own setting, or a title that follows what it says).
+     */
+    @Test
+    fun aSheetKeepsWhatItHoldsInAnotherLanguage() = keepsInAnotherLanguage { title, content ->
+        Sheet(visible = true, onDismiss = {}, paneTitle = title, id = "carrier", content = content)
+    }
+
+    @Test
+    fun aPopoverKeepsWhatItHoldsInAnotherLanguage() = keepsInAnotherLanguage { title, content ->
+        Popover(true, ComposeRect(100f, 100f, 140f, 140f), onDismiss = {}, paneTitle = title, id = "carrier", size = PopoverSize(300.dp, 300.dp, 200.dp, 200.dp), content = content)
+    }
+
+    @Test
+    fun aCoverKeepsWhatItHoldsInAnotherLanguage() = keepsInAnotherLanguage { title, content ->
+        FullScreenCover(visible = true, onDismiss = {}, paneTitle = title, id = "carrier", content = content)
+    }
+
+    private fun keepsInAnotherLanguage(present: @Composable (String, @Composable () -> Unit) -> Unit) {
+        val recreation = Recreation(compose)
+        var title by mutableStateOf("Carrier")
+        recreation.setContent {
+            PeekTheme(dark = false, highContrast = false, reduceMotion = false, reduceTransparency = false, carrierIdentities = null) {
+                val front = rememberSaveable(saver = WindowLayers.Saver) { WindowLayers() }
+                val overlay = remember(front) { TabOverlay(window = front, name = "window") }
+                Box(Modifier.fillMaxSize()) {
+                    CompositionLocalProvider(LocalTabOverlay provides overlay) {
+                        present(title) {
+                            var typed by rememberSaveable { mutableStateOf("") }
+                            BasicTextField(typed, { typed = it }, Modifier.testTag(FIELD))
+                        }
+                    }
+                    overlay.Content()
+                    front.Content()
+                }
+            }
+        }
+        compose.waitForIdle()
+        compose.onNodeWithTag(FIELD).performTextReplacement("dpd")
+
+        recreation.recreate { title = "Transporteur" }
+        compose.mainClock.autoAdvance = true
+        compose.waitForIdle()
+        compose.onNodeWithTag(FIELD).assertTextEquals("dpd")
+
+        title = "Corriere"
+        compose.waitForIdle()
+        compose.onNodeWithTag(FIELD).assertTextEquals("dpd")
     }
 
     @Test

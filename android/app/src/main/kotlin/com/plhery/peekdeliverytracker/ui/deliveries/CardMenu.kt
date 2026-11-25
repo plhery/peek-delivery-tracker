@@ -876,7 +876,7 @@ private fun CardDeleteQuestion(state: DeliveriesState, request: DeleteRequest?, 
         visible = asking,
         anchor = last.bounds,
         onDismiss = { state.deleting = null },
-        paneTitle = localizer.text("detail.deleteQuestion"),
+        paneTitle = localizer.text("detail.deleteQuestion"), id = "deleteQuestion",
         size = PopoverSize(width, width, tall, tall),
         onClosed = {
             state.deleteGoing = false

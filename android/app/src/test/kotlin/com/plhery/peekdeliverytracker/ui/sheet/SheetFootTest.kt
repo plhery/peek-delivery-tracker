@@ -52,7 +52,7 @@ class SheetFootTest {
             view = LocalView.current
             PeekTheme(dark = false, highContrast = false, reduceMotion = false, reduceTransparency = false, carrierIdentities = null) {
                 Box(Modifier.fillMaxSize()) {
-                    Sheet(visible = true, onDismiss = {}, paneTitle = "Sheet", detents = detents) { content() }
+                    Sheet(visible = true, onDismiss = {}, paneTitle = "Sheet", id = "Sheet", detents = detents) { content() }
                 }
             }
         }

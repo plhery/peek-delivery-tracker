@@ -81,7 +81,8 @@ data class PopoverSize(val minWidth: Dp, val idealWidth: Dp, val minHeight: Dp, 
  * [radius] round. It takes its ideal size, down to its least where the window is short of room, and stays
  * in the window's safe area, what it holds scrolling where even its least would not fit. Nothing dims; a tap outside
  * it, or the system's back, dismisses it. It grows from its arrow on a spring and shrinks back as it goes; the window
- * made again (a rotation) finds it there without growing again. TalkBack reaches only the popover, named [paneTitle],
+ * made again (a rotation) finds it there without growing again, and [id] names it there as a sheet's does ([Sheet]).
+ * TalkBack reaches only the popover, named [paneTitle],
  * and only its menu while one is open ([FormMenuRow]); [onClosed] runs once it has gone. A [ground] colour stands in
  * for the glass, as `.presentationBackground(_:)` does.
  */
@@ -91,6 +92,7 @@ fun Popover(
     anchor: Rect,
     onDismiss: () -> Unit,
     paneTitle: String,
+    id: Any,
     size: PopoverSize,
     onClosed: () -> Unit = {},
     above: Boolean = false,
@@ -116,10 +118,11 @@ fun Popover(
             }, { held.Holding(content) })
         }
     }
-    if (host == null) layer?.invoke() else OverlayLayer(host, PopoverKey(paneTitle), layer)
+    if (host == null) layer?.invoke() else OverlayLayer(host, PopoverKey(id), layer)
 }
 
-private data class PopoverKey(val title: String)
+/** A popover's layer, by its [Popover]'s `id`, as a sheet's is. */
+private data class PopoverKey(val id: Any)
 
 @Composable
 private fun PopoverLayer(

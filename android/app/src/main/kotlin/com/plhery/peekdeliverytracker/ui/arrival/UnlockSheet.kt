@@ -139,7 +139,7 @@ internal fun UnlockSheetHost(requests: UnlockRequests, state: AuthenticationStat
     Sheet(
         visible = reason != null && state.unlockable,
         onDismiss = requests::close,
-        paneTitle = localized((shown ?: UnlockReason.Several).title),
+        paneTitle = localized((shown ?: UnlockReason.Several).title), id = "unlock",
         detents = listOf(SheetDetent.Fitted, SheetDetent.Large),
         onClosed = { shown = null },
         detent = if (requests.large) SheetDetent.Large else SheetDetent.Fitted,

@@ -688,7 +688,7 @@ private fun ProfileSheet(
     Sheet(
         visible = visible,
         onDismiss = close,
-        paneTitle = title,
+        paneTitle = title, id = "friendsSettings",
         detents = listOf(SheetDetent.Large),
         dismissible = !joining,
         page = !asForm,

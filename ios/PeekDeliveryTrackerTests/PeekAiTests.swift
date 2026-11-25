@@ -500,10 +500,8 @@ final class PeekAiTests: XCTestCase {
     /// The demo works it out as the web's does: the chocolate out for delivery today, by 16:00 until then; the gift in
     /// customs with no date, by the third delivery day from today, Sundays skipped.
     func testTheDemoSaysWhatPeekAiWouldOfItsTwoSamples() throws {
-        let suite = "peek-ai-demo-\(UUID().uuidString)"
-        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
-        defer { defaults.removePersistentDomain(forName: suite) }
-        let parcels = DemoRepository(defaults: defaults, language: { .en }).list()
+        // Seeded on the morning the test reads, so no earlier scan comes after the one it moves, whatever the day it runs.
+        let parcels = DemoRepository.seed(now: at(2026, 11, 24, 11))
 
         var chocolate = try XCTUnwrap(parcels.first { $0.trackingNumber == "DEMOCHOC20260001" })
         XCTAssertEqual(chocolate.currentStage, .outForDelivery)

@@ -69,7 +69,8 @@ active key and records the link ID in a protected file so it can retry after a r
 A long press on a parcel's card, or a secondary click, opens its menu; a pointer lights the
 card up. The menu opens and shares the parcel and does what its page's ••• menu does: rename
 it, copy its tracking number, change its carrier, archive it with Undo as a swipe does or
-bring it back, and delete it once confirmed. The toast that offers Undo leaves after seven
+bring it back, and delete it once confirmed. The page's ••• menu also leads to the support of
+a carrier with a help page. The toast that offers Undo leaves after seven
 seconds; while VoiceOver or Switch Control is on, it stays until another message takes its place.
 
 Text or a link dropped on the deliveries or on + opens Add with it, as a paste or the Share

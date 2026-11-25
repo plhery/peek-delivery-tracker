@@ -540,6 +540,10 @@ extension Parcel {
         return latest.map { now.timeIntervalSince($0) >= Self.longQuiet } == true ? "link.quietLong" : "link.quiet"
     }
 
+    /// A parcel still out for delivery once its round is over is on the van, not on a long flight: its quiet note gives
+    /// no reasons, only the way to its carrier's support, and none without a help page.
+    var quietOnRound: Bool { currentStage == .outForDelivery }
+
     /// Whether the parcel, shown as returned, is a held return (`return_held`): the carrier is still scanning it on its way
     /// back, and the server keeps checking it. Its views say so under the return.
     var heldReturn: Bool {
@@ -1236,18 +1240,22 @@ enum DeliveriesKey: Hashable {
 /// What a parcel's menu offers: its page's •••, and its card's under a long press or a secondary click.
 enum ParcelMenuItem: Hashable {
     case open, rename, share, copyTrackingNumber, changeCarrier, archive, restore, delete
+    /// The help page of the carrier named, as the quiet note links it.
+    case contactCarrier(String)
 
     /// The items in groups that a line sets apart. A card's menu also opens the parcel, and shares it as the
     /// page's own button does. Every parcel in the list can be changed, in the demo and without an account as
     /// well: an archived one is brought back rather than archived. A `reader` follows someone else's parcel
     /// through its link: its page shares the link as it is, its carrier is not the reader's to change, and a
     /// number the link hides cannot be copied. A copy no longer updated (`frozen`) has no link left to share and no
-    /// carrier to change.
-    static func menu(for parcel: Parcel, onCard: Bool, reader: Bool = false, frozen: Bool = false) -> [[Self]] {
+    /// carrier to change. The page's menu also leads to the support of a carrier with a help page (`help`, its name).
+    static func menu(for parcel: Parcel, onCard: Bool, reader: Bool = false, frozen: Bool = false,
+                     help: String? = nil) -> [[Self]] {
         let changes: [Self] = reader || frozen
             ? [.rename] + (parcel.trackingNumber.isEmpty ? [] : [.copyTrackingNumber])
             : [.rename] + (onCard ? [.share] : []) + [.copyTrackingNumber, .changeCarrier]
-        return (onCard ? [[.open]] : []) + [changes, [parcel.isArchived ? .restore : .archive], [.delete]]
+        return (onCard ? [[.open]] : []) + [changes + (help.map { [.contactCarrier($0)] } ?? []),
+                                            [parcel.isArchived ? .restore : .archive], [.delete]]
     }
 
     var titleKey: String {
@@ -1260,7 +1268,13 @@ enum ParcelMenuItem: Hashable {
         case .archive: "detail.archive"
         case .restore: "detail.restore"
         case .delete: "detail.delete"
+        case .contactCarrier: "detail.contactCarrier"
         }
+    }
+
+    /// The values its title fills in.
+    var titleValues: [String: String] {
+        if case .contactCarrier(let carrier) = self { ["carrier": carrier] } else { [:] }
     }
 
     /// What a keyboard presses for it, as in Mail. It acts on the parcel shown, beside the list or over it.
@@ -1269,7 +1283,7 @@ enum ParcelMenuItem: Hashable {
         case .copyTrackingNumber: KeyboardShortcut("c", modifiers: [.command, .shift])
         case .archive, .restore: KeyboardShortcut("a", modifiers: [.command, .control])
         case .delete: KeyboardShortcut(.delete, modifiers: .command)
-        case .open, .rename, .share, .changeCarrier: nil
+        case .open, .rename, .share, .changeCarrier, .contactCarrier: nil
         }
     }
 
@@ -1283,6 +1297,7 @@ enum ParcelMenuItem: Hashable {
         case .archive: "archivebox"
         case .restore: "arrow.uturn.backward"
         case .delete: "trash"
+        case .contactCarrier: "envelope"
         }
     }
 }

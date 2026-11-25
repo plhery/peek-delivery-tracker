@@ -108,7 +108,7 @@ struct PeekCommands: Commands {
             ForEach(Array((parcel?.items ?? ParcelMenu.placeholder).enumerated()), id: \.offset) { index, group in
                 if index > 0 { Divider() }
                 ForEach(group, id: \.self) { item in
-                    Button(localizer.text(item.titleKey)) { parcel?.choose(item) }
+                    Button(localizer.text(item.titleKey, item.titleValues)) { parcel?.choose(item) }
                         .keyboardShortcut(item.shortcut)
                         .disabled(parcel == nil || (parcel?.busy == true && item == .delete))
                 }

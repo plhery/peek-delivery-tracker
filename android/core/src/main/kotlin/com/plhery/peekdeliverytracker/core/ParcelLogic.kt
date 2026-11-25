@@ -619,6 +619,13 @@ fun Parcel.quietNoteKey(now: Instant = AppClock.now()): String {
 }
 
 /**
+ * A parcel still out for delivery once its round is over is on the van, not on a long flight: its quiet note gives no
+ * reasons, only the way to its carrier's support, and none without a help page.
+ */
+val Parcel.quietOnRound: Boolean
+    get() = currentStage == TrackingStage.OutForDelivery
+
+/**
  * Whether the parcel, shown as returned, is a held return (`return_held`): the carrier is still scanning it on its way
  * back, and the server keeps checking it. Its views say so under the return.
  */
@@ -1380,7 +1387,10 @@ enum class DeliveriesKey {
 
 /** What a parcel's menu offers: its page's •••, and its card's under a long press or a secondary click. */
 enum class ParcelMenuItem {
-    Open, Rename, Share, CopyTrackingNumber, ChangeCarrier, Archive, Restore, Delete;
+    Open, Rename, Share, CopyTrackingNumber, ChangeCarrier, Archive, Restore, Delete,
+
+    /** The help page of the parcel's carrier, as its quiet note links it; its title names the carrier. */
+    ContactCarrier;
 
     val titleKey: String
         get() = when (this) {
@@ -1392,7 +1402,12 @@ enum class ParcelMenuItem {
             Archive -> "detail.archive"
             Restore -> "detail.restore"
             Delete -> "detail.delete"
+            ContactCarrier -> "detail.contactCarrier"
         }
+
+    /** The values its title fills in: the name of the `carrier` whose support it leads to. */
+    fun titleValues(carrier: String?): Map<String, String> =
+        if (this == ContactCarrier && carrier != null) mapOf("carrier" to carrier) else emptyMap()
 
     val symbol: String
         get() = when (this) {
@@ -1404,6 +1419,7 @@ enum class ParcelMenuItem {
             Archive -> "archivebox"
             Restore -> "arrow.uturn.backward"
             Delete -> "trash"
+            ContactCarrier -> "envelope"
         }
 
     companion object {
@@ -1413,16 +1429,23 @@ enum class ParcelMenuItem {
          * well: an archived one is brought back rather than archived. A `reader` follows someone else's parcel
          * through its link: its page shares the link as it is, its carrier is not the reader's to change, and a
          * number the link hides cannot be copied. A `frozen` copy, which the service forgot, has no link left to
-         * share and no carrier to change: only what this phone keeps of it changes.
+         * share and no carrier to change: only what this phone keeps of it changes. The page's menu also leads to
+         * the support of a carrier with a help page (`help`).
          */
-        fun menu(parcel: Parcel, onCard: Boolean, reader: Boolean = false, frozen: Boolean = false): List<List<ParcelMenuItem>> {
+        fun menu(
+            parcel: Parcel,
+            onCard: Boolean,
+            reader: Boolean = false,
+            frozen: Boolean = false,
+            help: Boolean = false,
+        ): List<List<ParcelMenuItem>> {
             val changes = if (reader || frozen) {
                 listOf(Rename) + (if (parcel.trackingNumber.isEmpty()) emptyList() else listOf(CopyTrackingNumber))
             } else {
                 listOf(Rename) + (if (onCard) listOf(Share) else emptyList()) + listOf(CopyTrackingNumber, ChangeCarrier)
             }
             return (if (onCard) listOf(listOf(Open)) else emptyList()) +
-                listOf(changes, listOf(if (parcel.isArchived) Restore else Archive), listOf(Delete))
+                listOf(changes + (if (help) listOf(ContactCarrier) else emptyList()), listOf(if (parcel.isArchived) Restore else Archive), listOf(Delete))
         }
     }
 }

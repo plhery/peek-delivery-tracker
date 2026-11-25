@@ -21,7 +21,7 @@ describe('shipment details', () => {
   it('shows the PostLogistics dash after the stored number has been normalized', () => {
     show({ carrier: 'postlogistics', trackingNumber: '19999980001' });
     expect(screen.getByText('19999980-001')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /PostLogistics/ })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: /^Open the PostLogistics/ })).toHaveAttribute(
       'href', parcelTrackingLinks({ carrier: 'postlogistics', trackingNumber: '19999980001' })[0].url,
     );
   });
@@ -237,6 +237,32 @@ describe('shipment details', () => {
     show({ carrier: 'yunexpress', trackingNumber: 'YT0000000000000001', events: [...quiet] });
     expect(document.querySelector('.detail__quiet')).toHaveTextContent('Peek keeps asking YunExpress');
     expect(within(document.querySelector<HTMLElement>('.detail__quiet')!).queryByRole('link')).toBeNull();
+  });
+
+  it('points a parcel out for delivery past its round to its carrier\'s support, and shows no note without that page', () => {
+    const out = [{ id: 'van', parcelId: 'parcel', stage: 'out_for_delivery', description: 'On the van', occurredAt: new Date(Date.now() - 30 * 3_600_000).toISOString() }] as const;
+    const ended = new Date(Date.now() - 3_600_000).toISOString();
+    const view = show({ carrier: 'dhl', deliveryRoundEndsAt: ended, events: [...out] });
+    const note = document.querySelector<HTMLElement>('.detail__quiet')!;
+    expect(note.querySelector('p')).toBeNull();
+    expect(within(note).getByRole('link', { name: 'Questions? Contact DHL support.' })).toHaveAttribute('href', carrierInfo('dhl').helpUrl);
+    view.unmount();
+
+    show({ carrier: 'yunexpress', trackingNumber: 'YT0000000000000001', deliveryRoundEndsAt: ended, events: [...out] });
+    expect(document.querySelector('.detail__quiet')).toBeNull();
+  });
+
+  it('offers the carrier\'s support in the parcel\'s menu only when the carrier has a help page', async () => {
+    const view = show({ carrier: 'dhl' });
+    await userEvent.click(screen.getByLabelText('Parcel actions'));
+    const contact = screen.getByRole('link', { name: 'Contact DHL support' });
+    expect(contact).toHaveAttribute('href', carrierInfo('dhl').helpUrl);
+    expect(contact).toHaveAttribute('target', '_blank');
+    view.unmount();
+
+    show({ carrier: 'yunexpress', trackingNumber: 'YT0000000000000001' });
+    await userEvent.click(screen.getByLabelText('Parcel actions'));
+    expect(screen.queryByRole('link', { name: /^Contact .+ support$/ })).toBeNull();
   });
 
   it('leaves the quiet note off a label the sender has kept for days', () => {

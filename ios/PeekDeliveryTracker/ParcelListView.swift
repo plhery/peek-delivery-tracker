@@ -1625,6 +1625,8 @@ private struct DeliveryListView: View {
         case .archive: Task { await archive(parcel) }
         case .restore: restore(parcel)
         case .delete: prompts.deleting = parcel.id
+        // Only the parcel's page offers its carrier's support.
+        case .contactCarrier: break
         }
     }
 

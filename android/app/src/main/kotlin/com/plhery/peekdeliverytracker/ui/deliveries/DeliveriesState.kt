@@ -2041,6 +2041,8 @@ internal class DeliveriesState(
                 announce("app.restoredAnnouncement", parcel)
             }
             ParcelMenuItem.Delete -> deleting = DeleteRequest(parcel.id, pageId)
+            // The menu opens the carrier's help page itself, with the browser at hand.
+            ParcelMenuItem.ContactCarrier -> Unit
         }
     }
 
@@ -2077,6 +2079,8 @@ internal class DeliveriesState(
             ParcelMenuItem.Archive -> archive(parcel)
             ParcelMenuItem.Restore -> restore(parcel)
             ParcelMenuItem.Delete -> deleting = DeleteRequest(parcel.id, pageId = null)
+            // Only the parcel's page offers its carrier's support.
+            ParcelMenuItem.ContactCarrier -> Unit
         }
     }
 

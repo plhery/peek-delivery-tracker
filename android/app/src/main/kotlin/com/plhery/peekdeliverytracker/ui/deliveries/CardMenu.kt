@@ -595,6 +595,7 @@ internal fun Modifier.growingMenu(menu: MenuPresence, origin: TransformOrigin): 
 /**
  * `ParcelMenuButtons`: a parcel's items in their groups, a line between them, the keys that press them shown where
  * `shortcuts`, and Delete waiting while `busy` saves another change. TalkBack starts at the first, which `first` marks.
+ * The way to the carrier's support names `carrier`.
  */
 @Composable
 internal fun MenuItems(
@@ -603,12 +604,13 @@ internal fun MenuItems(
     busy: Boolean,
     choose: (ParcelMenuItem) -> Unit,
     first: AccessibilityFocus,
+    carrier: String? = null,
 ) {
     items.forEachIndexed { index, group ->
         if (index > 0) MenuSeparator()
         for (item in group) {
             MenuItemRow(
-                item, shortcuts, choose,
+                item, shortcuts, choose, carrier,
                 enabled = !(busy && item == ParcelMenuItem.Delete),
                 modifier = if (item == items.first().first()) Modifier.accessibilityFocus(first) else Modifier,
             )
@@ -621,13 +623,14 @@ private fun MenuItemRow(
     item: ParcelMenuItem,
     shortcuts: Boolean,
     choose: (ParcelMenuItem) -> Unit,
+    carrier: String?,
     enabled: Boolean,
     modifier: Modifier = Modifier,
 ) {
     val localizer = LocalLocalizer.current
     val type = PeekTheme.type
     val colors = PeekTheme.colors
-    val title = localizer.text(item.titleKey)
+    val title = localizer.text(item.titleKey, item.titleValues(carrier))
     val key = if (shortcuts) item.shortcutLabel else null
     // The menu's words and symbols are vibrant on its glass: the label a shade lighter, a disabled item's fainter.
     val ink = if (enabled) colors.label.copy(alpha = 0.8f) else colors.tertiaryLabel
@@ -671,14 +674,14 @@ private fun menuFont(): TextStyle = PeekTheme.type.let { it.fixed(IosTextStyle.B
  * its longest title or keys need on one line, up to `room`; past that, its titles wrap between words.
  */
 @Composable
-internal fun parcelMenuWidth(items: List<List<ParcelMenuItem>>, shortcuts: Boolean, room: Float): Float {
+internal fun parcelMenuWidth(items: List<List<ParcelMenuItem>>, shortcuts: Boolean, room: Float, carrier: String? = null): Float {
     val density = LocalDensity.current
     val narrow = with(density) { MENU_WIDTH.toPx() }
     if (!PeekTheme.dynamicTypeSize.isAccessibilitySize) return narrow
     val localizer = LocalLocalizer.current
     val font = menuFont()
     val measurer = rememberTextMeasurer()
-    val words = items.flatten().flatMap { listOfNotNull(localizer.text(it.titleKey), it.shortcutLabel.takeIf { shortcuts }) }
+    val words = items.flatten().flatMap { listOfNotNull(localizer.text(it.titleKey, it.titleValues(carrier)), it.shortcutLabel.takeIf { shortcuts }) }
     val widest = words.maxOfOrNull { measurer.measure(it, font, maxLines = 1, softWrap = false).size.width } ?: 0
     val chrome = with(density) { (ROW_START + PeekTheme.type.menuSymbolColumn() + SYMBOL_GAP + ROW_END).toPx() }
     return (widest + chrome).coerceIn(narrow, max(narrow, room))

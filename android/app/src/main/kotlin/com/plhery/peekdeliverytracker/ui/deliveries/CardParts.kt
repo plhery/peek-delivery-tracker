@@ -80,6 +80,7 @@ import com.plhery.peekdeliverytracker.core.displayedCarrier
 import com.plhery.peekdeliverytracker.core.localizationKey
 import com.plhery.peekdeliverytracker.core.metadata
 import com.plhery.peekdeliverytracker.core.quietNoteKey
+import com.plhery.peekdeliverytracker.core.quietOnRound
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
@@ -349,7 +350,8 @@ private class RailStep(var current: Int)
  * corners: why parcels go quiet, or, three weeks after its current scan, to ask the seller if it still hasn't arrived
  * ([quietNoteKey]); that its carrier leaves out its journey in the destination country where it does
  * (`hidesDestinationLeg`), and where to ask the carrier (`helpLink`) in `tint`, which opens in the browser after
- * `onHelp`. No link where neither the carrier that has it nor the one it is filed under has a help page.
+ * `onHelp`. No link where neither the carrier that has it nor the one it is filed under has a help page. A parcel still
+ * out for delivery past its round ([quietOnRound]) is told only where to ask, and nothing without a help page.
  */
 @Composable
 fun ParcelQuietNote(parcel: Parcel, tint: Color, onHelp: () -> Unit, modifier: Modifier = Modifier) {
@@ -358,8 +360,25 @@ fun ParcelQuietNote(parcel: Parcel, tint: Color, onHelp: () -> Unit, modifier: M
     val identities = LocalCarrierIdentities.current ?: return
     val colors = PeekTheme.colors
     val type = PeekTheme.type
-    val uriHandler = LocalUriHandler.current
     val now = LocalNow.current
+    val help = identities.catalog.helpLink(parcel, language)
+    val secondary = colors.secondaryText
+    val background = colors.secondaryLabel.copy(alpha = colors.secondaryLabel.alpha * 0.08f)
+    if (parcel.quietOnRound) {
+        if (help == null) return
+        Row(
+            modifier
+                .fillMaxWidth()
+                .background(background, ContinuousRoundedShape(16.dp))
+                .padding(horizontal = 16.dp, vertical = 2.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            PeekSymbol("info.circle", font = type.fixed(17f), tint = secondary)
+            QuietHelpLink(localizer.text("link.quietRound", mapOf("carrier" to help.name)), help.url, tint, onHelp, Modifier.weight(1f))
+        }
+        return
+    }
     val carrier = identities.displayName(parcel.displayedCarrier, language)
     val active = identities.displayName(parcel.activeTrackingCarrier, language)
     val abroad = if (identities.catalog.hidesDestinationLeg(parcel)) {
@@ -367,12 +386,10 @@ fun ParcelQuietNote(parcel: Parcel, tint: Color, onHelp: () -> Unit, modifier: M
     } else {
         ""
     }
-    val help = identities.catalog.helpLink(parcel, language)
-    val secondary = colors.secondaryText
     Row(
         modifier
             .fillMaxWidth()
-            .background(colors.secondaryLabel.copy(alpha = colors.secondaryLabel.alpha * 0.08f), ContinuousRoundedShape(16.dp))
+            .background(background, ContinuousRoundedShape(16.dp))
             // The link's own height leaves room below it.
             .padding(start = 16.dp, top = 14.dp, end = 16.dp, bottom = if (help == null) 14.dp else 4.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -381,32 +398,34 @@ fun ParcelQuietNote(parcel: Parcel, tint: Color, onHelp: () -> Unit, modifier: M
         PeekSymbol("hourglass", font = type.fixed(17f), tint = secondary)
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(localizer.text(parcel.quietNoteKey(now()), mapOf("carrier" to carrier)) + abroad, color = secondary, style = type.footnote.sfLines())
-            if (help != null) {
-                Row(
-                    Modifier
-                        .heightIn(min = 44.dp)
-                        // A button to TalkBack: Compose has no link role but a link inside a text, which would take
-                        // only its words and not the arrow and the row's height.
-                        .button(interactionSource = null, indication = PlainPress, role = Role.Button) {
-                            onHelp()
-                            try {
-                                uriHandler.openUri(help.url)
-                            } catch (_: IllegalArgumentException) {
-                                // Where no app opens web pages, as Compose's handler says: nothing, as with the iPhone's link.
-                            }
-                        },
-                    horizontalArrangement = Arrangement.spacedBy(6.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        localizer.text("link.help", mapOf("carrier" to help.name)),
-                        color = tint,
-                        style = type.style(IosTextStyle.Footnote, FontWeight.SemiBold).sfLines(),
-                    )
-                    PeekSymbol("arrow.up.right", font = type.fixed(10f), tint = tint)
-                }
-            }
+            if (help != null) QuietHelpLink(localizer.text("link.help", mapOf("carrier" to help.name)), help.url, tint, onHelp)
         }
+    }
+}
+
+/** The quiet note's way to the carrier's help page, in `tint` with its arrow, opened in the browser after `onHelp`. */
+@Composable
+private fun QuietHelpLink(label: String, url: String, tint: Color, onHelp: () -> Unit, modifier: Modifier = Modifier) {
+    val type = PeekTheme.type
+    val uriHandler = LocalUriHandler.current
+    Row(
+        modifier
+            .heightIn(min = 44.dp)
+            // A button to TalkBack: Compose has no link role but a link inside a text, which would take
+            // only its words and not the arrow and the row's height.
+            .button(interactionSource = null, indication = PlainPress, role = Role.Button) {
+                onHelp()
+                try {
+                    uriHandler.openUri(url)
+                } catch (_: IllegalArgumentException) {
+                    // Where no app opens web pages, as Compose's handler says: nothing, as with the iPhone's link.
+                }
+            },
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Text(label, color = tint, style = type.style(IosTextStyle.Footnote, FontWeight.SemiBold).sfLines(), modifier = Modifier.weight(1f, fill = false))
+        PeekSymbol("arrow.up.right", font = type.fixed(10f), tint = tint)
     }
 }
 

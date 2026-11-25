@@ -140,7 +140,8 @@ struct ParcelDetailView: View {
                     Menu {
                         ParcelMenuButtons(
                             items: ParcelMenuItem.menu(for: parcel, onCard: false, reader: store.viewerLink(for: parcel) != nil,
-                                                       frozen: store.isFrozen(parcel)),
+                                                       frozen: store.isFrozen(parcel),
+                                                       help: catalog.helpLink(for: parcel, language: localizer.language)?.name),
                             busy: working, shortcuts: keyboard
                         ) { chose($0, on: parcel) }
                     } label: {
@@ -1086,6 +1087,10 @@ struct ParcelDetailView: View {
         case .archive: archive(parcel)
         case .restore: restore(parcel)
         case .delete: showingDeleteConfirmation = true
+        case .contactCarrier:
+            guard let help = catalog.helpLink(for: parcel, language: localizer.language) else { return }
+            DeliveryAnalytics.shared.action("parcel-carrier-help")
+            openURL(help.url)
         }
     }
 
@@ -1274,7 +1279,7 @@ struct ParcelMenuButtons: View {
         ForEach(Array(items.enumerated()), id: \.offset) { index, group in
             if index > 0 { Divider() }
             ForEach(group, id: \.self) { item in
-                Button(localizer.text(item.titleKey), systemImage: item.symbol) { choose(item) }
+                Button(localizer.text(item.titleKey, item.titleValues), systemImage: item.symbol) { choose(item) }
                     .keyboardShortcut(shortcuts && keyboard.isConnected ? item.shortcut : nil)
                     .disabled(busy && item == .delete)
             }
@@ -2194,7 +2199,8 @@ struct AutomaticCarrierNotice: View {
 
 /// What a parcel that stopped moving is told: why parcels go quiet, or, three weeks on, to ask the seller; that its
 /// carrier doesn't show its journey in the destination country when it doesn't; and where to ask the carrier. No help
-/// page of the carrier's own, no link.
+/// page of the carrier's own, no link. A parcel still out for delivery past its round is told only where to ask, and
+/// nothing without a help page.
 struct ParcelQuietNote: View {
     let parcel: Parcel
     let tint: Color
@@ -2203,42 +2209,64 @@ struct ParcelQuietNote: View {
     @ObservedObject private var catalog = CarrierCatalog.shared
 
     var body: some View {
-        let carrier = catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName
-        let active = catalog.info(for: parcel.activeTrackingCarrier, language: localizer.language).displayName
-        let abroad = catalog.hidesDestinationLeg(parcel) ? " " + localizer.text("link.quietAbroad", ["carrier": active]) : ""
         let help = catalog.helpLink(for: parcel, language: localizer.language)
-        HStack(alignment: .top, spacing: 12) {
-            Image(systemName: "hourglass")
-                .font(.system(size: 17))
-                .foregroundStyle(Brand.secondaryText)
-                .accessibilityHidden(true)
-            VStack(alignment: .leading, spacing: 4) {
-                Text(localizer.text(parcel.quietNoteKey(), ["carrier": carrier]) + abroad)
-                    .font(.footnote).foregroundStyle(Brand.secondaryText)
-                if let help {
-                    Link(destination: help.url) {
-                        HStack(spacing: 6) {
-                            Text(localizer.text("link.help", ["carrier": help.name]))
-                            Image(systemName: "arrow.up.right").font(.system(size: 10, weight: .regular))
-                                .accessibilityHidden(true)
-                        }
-                        .font(.footnote.weight(.semibold))
-                        .frame(minHeight: 44, alignment: .leading)
-                    }
-                    .buttonStyle(.plain)
-                    .foregroundStyle(tint)
-                    .simultaneousGesture(TapGesture().onEnded {
-                        DeliveryAnalytics.shared.action("parcel-carrier-help")
-                    })
+        // On the van past its round: only the way to the carrier's support, and nothing without it.
+        if parcel.quietOnRound {
+            if let help {
+                HStack(alignment: .center, spacing: 12) {
+                    Image(systemName: "info.circle")
+                        .font(.system(size: 17))
+                        .foregroundStyle(Brand.secondaryText)
+                        .accessibilityHidden(true)
+                    helpLink(help, label: localizer.text("link.quietRound", ["carrier": help.name]))
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
+                .padding(.vertical, 2)
+                .padding(.horizontal, 16)
+                .background(Color.secondary.opacity(0.08), in: RoundedRectangle(cornerRadius: 16))
             }
-            .fixedSize(horizontal: false, vertical: true)
-            .frame(maxWidth: .infinity, alignment: .leading)
+        } else {
+            let carrier = catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName
+            let active = catalog.info(for: parcel.activeTrackingCarrier, language: localizer.language).displayName
+            let abroad = catalog.hidesDestinationLeg(parcel) ? " " + localizer.text("link.quietAbroad", ["carrier": active]) : ""
+            HStack(alignment: .top, spacing: 12) {
+                Image(systemName: "hourglass")
+                    .font(.system(size: 17))
+                    .foregroundStyle(Brand.secondaryText)
+                    .accessibilityHidden(true)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(localizer.text(parcel.quietNoteKey(), ["carrier": carrier]) + abroad)
+                        .font(.footnote).foregroundStyle(Brand.secondaryText)
+                    if let help {
+                        helpLink(help, label: localizer.text("link.help", ["carrier": help.name]))
+                    }
+                }
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding(.top, 14)
+            // The link's own height leaves room below it.
+            .padding(.bottom, help == nil ? 14 : 4)
+            .padding(.horizontal, 16)
+            .background(Color.secondary.opacity(0.08), in: RoundedRectangle(cornerRadius: 16))
         }
-        .padding(.top, 14)
-        // The link's own height leaves room below it.
-        .padding(.bottom, help == nil ? 14 : 4)
-        .padding(.horizontal, 16)
-        .background(Color.secondary.opacity(0.08), in: RoundedRectangle(cornerRadius: 16))
+    }
+
+    private func helpLink(_ help: ParcelTrackingLink, label: String) -> some View {
+        Link(destination: help.url) {
+            HStack(spacing: 6) {
+                Text(label)
+                Image(systemName: "arrow.up.right").font(.system(size: 10, weight: .regular))
+                    .accessibilityHidden(true)
+            }
+            .font(.footnote.weight(.semibold))
+            .fixedSize(horizontal: false, vertical: true)
+            .frame(minHeight: 44, alignment: .leading)
+        }
+        .buttonStyle(.plain)
+        .foregroundStyle(tint)
+        .simultaneousGesture(TapGesture().onEnded {
+            DeliveryAnalytics.shared.action("parcel-carrier-help")
+        })
     }
 }

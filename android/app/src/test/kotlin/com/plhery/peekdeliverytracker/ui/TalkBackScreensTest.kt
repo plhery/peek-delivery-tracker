@@ -220,6 +220,7 @@ class TalkBackScreensTest {
                 "Edit parcel name [button]",
                 "Copy tracking number [button]",
                 "Change carrier [button]",
+                "Contact Chronopost support [button]",
                 "Archive parcel [button]",
                 "Delete permanently [button]",
             ),

@@ -172,6 +172,10 @@
 .peekp-notes { display: grid; gap: 12px; }
 .peekp-note, .peekp-already { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border-radius: 16px; background: var(--control); }
 .peekp-note--paper { border: 1px solid var(--line); background: var(--paper); }
+/* A note that is only a link: its icon on the link's line, the link's own height its padding. */
+.peekp-note--link { align-items: center; padding-block: 6px; }
+.peekp-note--link .peekp-note__icon { padding-top: 0; display: flex; }
+.peekp-note--link .peekp-note__link { margin-top: 0; min-height: 36px; }
 .peekp-note__icon, .peekp-already > span { padding-top: 1px; color: var(--ink-soft); }
 .peekp-note__icon svg, .peekp-already > span svg { width: 18px; height: 18px; }
 .peekp-note > div, .peekp-already > div { display: grid; gap: 3px; flex: 1; min-width: 0; }

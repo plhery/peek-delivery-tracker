@@ -589,6 +589,24 @@ class ParcelLogicListTests {
         assertEquals(listOf(ParcelMenuItem.Restore), ParcelMenuItem.menu(archived, onCard = false)[1])
     }
 
+    // As src/components/ParcelDetail.shipment.test.tsx: the page's menu leads to the support of a carrier with a help page.
+    @Test
+    fun aParcelsPageMenuLeadsToItsCarriersSupportWhenItHasAHelpPage() {
+        val parcel = makeParcel()
+        assertEquals(
+            listOf(
+                listOf(ParcelMenuItem.Rename, ParcelMenuItem.CopyTrackingNumber, ParcelMenuItem.ChangeCarrier, ParcelMenuItem.ContactCarrier),
+                listOf(ParcelMenuItem.Archive),
+                listOf(ParcelMenuItem.Delete),
+            ),
+            ParcelMenuItem.menu(parcel, onCard = false, help = true),
+        )
+        assertEquals(ParcelMenuItem.ContactCarrier, ParcelMenuItem.menu(parcel, onCard = false, reader = true, help = true)[0].last())
+        val english = Localizer(AppLanguage.En)
+        assertEquals("Contact DHL support", english.text(ParcelMenuItem.ContactCarrier.titleKey, ParcelMenuItem.ContactCarrier.titleValues("DHL")))
+        assertEquals(emptyMap<String, String>(), ParcelMenuItem.Rename.titleValues("DHL"))
+    }
+
     /**
      * Adapted: the menu bar's Parcel menu (MenuBar.swift's `ParcelMenu`) belongs to an iPad and a Mac. What it
      * shows is the card's menu without Open, for a parcel of one's own and for a reader's, which this checks;

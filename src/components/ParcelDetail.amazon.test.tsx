@@ -1,4 +1,7 @@
 import { render, screen } from '@testing-library/react';
+
+/** The page's links, leaving out the carrier's support in the ••• menu. */
+const pageLinks = () => screen.getAllByRole('link').filter((link) => !link.closest('.detail__actions-menu'));
 import { describe, expect, it, vi } from 'vitest';
 import { ParcelDetail } from './ParcelDetail';
 import { servingGuides } from '../test/guidePages';
@@ -12,7 +15,7 @@ describe('existing Amazon Logistics parcels', () => {
       onRefresh={vi.fn()} onRestore={vi.fn()} onArchive={vi.fn()} onDelete={vi.fn()}
     />, { wrapper: servingGuides });
     expect(screen.getByRole('note')).toHaveTextContent('Amazon no longer provides this parcel’s tracking history');
-    expect(screen.getByRole('link')).toHaveAttribute('href', 'https://track.amazon.co.uk/tracking/UK3999999980');
+    expect(pageLinks().map((link) => link.getAttribute('href'))).toEqual(['https://track.amazon.co.uk/tracking/UK3999999980']);
     expect(screen.queryByText('amazon_shipping_history_expired')).not.toBeInTheDocument();
   });
 
@@ -25,7 +28,7 @@ describe('existing Amazon Logistics parcels', () => {
       onRefresh={vi.fn()} onRestore={vi.fn()} onArchive={vi.fn()} onDelete={vi.fn()}
     />, { wrapper: servingGuides });
     expect(screen.getByRole('note')).toHaveTextContent('Amazon Logistics deliveries are usually tracked in Your Orders on Amazon');
-    expect(screen.getAllByRole('link').map((link) => link.getAttribute('href')))
+    expect(pageLinks().map((link) => link.getAttribute('href')))
       .toEqual(['https://www.amazon.fr/gp/your-account/order-history', '/guides/amazon-order-tracking']);
     expect(screen.queryByText('ParcelsApp')).not.toBeInTheDocument();
   });
@@ -38,6 +41,6 @@ describe('existing Amazon Logistics parcels', () => {
       onRefresh={vi.fn()} onRestore={vi.fn()} onArchive={vi.fn()} onDelete={vi.fn()}
     />);
     expect(screen.getByRole('note')).toHaveTextContent('Amazon Logistics deliveries are usually tracked in Your Orders on Amazon');
-    expect(screen.getAllByRole('link').map((link) => link.getAttribute('href'))).toEqual(['https://www.amazon.fr/gp/your-account/order-history']);
+    expect(pageLinks().map((link) => link.getAttribute('href'))).toEqual(['https://www.amazon.fr/gp/your-account/order-history']);
   });
 });

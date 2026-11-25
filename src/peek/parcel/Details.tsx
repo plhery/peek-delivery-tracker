@@ -128,30 +128,45 @@ export interface Note {
 const LONG_QUIET_MS = 21 * 24 * 60 * 60 * 1000;
 
 /**
+ * Where to ask the carrier about the parcel: the help page of the carrier that has it, else of the
+ * one it is filed under (`carrier`), in the reader's language. No page, nothing.
+ */
+export function carrierHelp(parcel: ParcelWithEvents, carrier: CarrierInfo, locale: Locale): { name: string; href: string } | null {
+  const active = carrierInfo(activeTrackingCarrierId(parcel), locale);
+  const help = [active, carrier].find((candidate) => candidate.helpUrl);
+  return help?.helpUrl ? { name: help.name, href: localizedCarrierUrl(help.id, help.helpUrl, locale) } : null;
+}
+
+/**
  * Why a parcel that stopped moving may still be on its way, or, three weeks on, to ask the seller;
  * that its carrier doesn't show its journey in the destination country when it doesn't; and where
- * to ask the carrier: the help page of the carrier that has it, else of the one it is filed under.
- * No page, no link.
+ * to ask the carrier (`carrierHelp`). No page, no link. A parcel out for delivery on a round that
+ * has ended is told only where to ask, and nothing without a page to ask on.
  */
-export function quietNote(parcel: ParcelWithEvents, carrier: CarrierInfo, t: Translate, locale: Locale, now = Date.now()): Note {
+export function quietNote(parcel: ParcelWithEvents, carrier: CarrierInfo, t: Translate, locale: Locale, now = Date.now()): Note | null {
   const active = carrierInfo(activeTrackingCarrierId(parcel), locale);
+  const help = carrierHelp(parcel, carrier, locale);
+  const scan = currentEvent(parcel.events, parcel.returnHeld);
+  if (scan?.stage === 'out_for_delivery') {
+    return help && { id: 'quiet', icon: <Glyph name="info" />, body: '',
+      link: { label: t('link.quietRound', { carrier: help.name }), href: help.href } };
+  }
   const number = parcel.activeTrackingNumber ?? parcel.trackingNumber;
   const abroad = number && active.hidesDestinationLeg?.(number) ? ` ${t('link.quietAbroad', { carrier: active.name })}` : '';
-  const help = [active, carrier].find((candidate) => candidate.helpUrl);
-  const latest = Date.parse(currentEvent(parcel.events, parcel.returnHeld)?.occurredAt ?? '');
-  const long = now - latest >= LONG_QUIET_MS;
+  const long = now - Date.parse(scan?.occurredAt ?? '') >= LONG_QUIET_MS;
   return {
     id: 'quiet', icon: <Icon name="hourglass" />, body: `${t(long ? 'link.quietLong' : 'link.quiet', { carrier: carrier.name })}${abroad}`,
-    link: help?.helpUrl ? { label: t('link.help', { carrier: help.name }), href: localizedCarrierUrl(help.id, help.helpUrl, locale) } : undefined,
+    link: help ? { label: t('link.help', { carrier: help.name }), href: help.href } : undefined,
   };
 }
 
 export function NoteCard({ note }: { note: Note }) {
-  return <div className={`peekp-note${note.paper ? ' peekp-note--paper' : ''}`} role="note">
+  const linkOnly = note.link && !note.title && !note.body;
+  return <div className={`peekp-note${note.paper ? ' peekp-note--paper' : ''}${linkOnly ? ' peekp-note--link' : ''}`} role="note">
     <span className="peekp-note__icon" aria-hidden="true">{note.icon}</span>
     <div>
       {note.title && <strong>{note.title}</strong>}
-      {note.quoted ? <blockquote>{note.body}</blockquote> : <p>{note.body}</p>}
+      {note.body && (note.quoted ? <blockquote>{note.body}</blockquote> : <p>{note.body}</p>)}
       {note.link && <a className="peekp-note__link" href={note.link.href} target="_blank" rel="noopener noreferrer"
         onClick={() => trackAction(note.link?.action ?? 'parcel-carrier-help')}><span>{note.link.label}</span><Icon name="arrow" /></a>}
     </div>
@@ -202,7 +217,8 @@ export function Notes({ view, stage, flag, trouble, carrier, outage }: {
       body: awaited ? t('detail.waitingForCarrier', { carrier: carrierInfo(awaited, locale).name }) : trackingFailureMessage(parcel.syncError, t) });
   }
   // A label waiting for its handover has not gone quiet on the way: the card says the sender still has it.
-  if (flag === 'stalled' && !awaitingHandover(parcel.events)) notes.push(quietNote(parcel, carrier, t, locale));
+  const quiet = flag === 'stalled' && !awaitingHandover(parcel.events) ? quietNote(parcel, carrier, t, locale) : null;
+  if (quiet) notes.push(quiet);
   if (flag === 'generated') notes.push({ id: 'generated', icon: <Glyph name="warning" />, body: t('link.generated', { carrier: carrier.name }), paper: true });
   if ((stage === 'exception' || stage === 'failed_attempt' || scan?.recipientAction) && scan?.description.trim()) {
     notes.push({ id: 'says', icon: <Glyph name="info" />, title: t('link.carrierSays', { carrier: carrier.name }), body: scan.description.trim(), quoted: true, paper: true });

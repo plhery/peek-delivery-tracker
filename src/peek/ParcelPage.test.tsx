@@ -554,7 +554,7 @@ describe('ParcelPage stages and troubles', () => {
     expect(freshness()).toHaveTextContent('Last checked: 2 min ago');
   });
 
-  it('explains a parcel out for delivery on a day that has ended on its clock as one that went quiet', async () => {
+  it('points a parcel out for delivery on a day that has ended on its clock to its carrier\'s support, and shows no note without it', async () => {
     const out = [scan('in_transit', 40), scan('out_for_delivery', 30)];
     // The round is not over yet on the parcel's clock: still out for delivery, no note.
     await shown(view(out, { deliveryRoundEndsAt: new Date(Date.now() + HOUR).toISOString() }));
@@ -566,9 +566,16 @@ describe('ParcelPage stages and troubles', () => {
     const day = new Intl.DateTimeFormat('en', { weekday: 'short', day: 'numeric', month: 'short' }).formatToParts(new Date(ago(30)));
     const part = (type: string) => day.find((entry) => entry.type === type)!.value;
     expect(within(card()).getByText(`No tracking update since ${part('weekday')} ${part('day')} ${part('month')}`)).toBeVisible();
+    // No in-transit reasons for a parcel already on the van: only the way to its carrier's support.
     const note = screen.getByRole('note');
-    expect(note.querySelector('p')).toHaveTextContent(/^Parcels often go quiet on long flights.+Peek keeps asking DHL\.$/);
-    expect(within(note).getByRole('link', { name: 'Get help from DHL' })).toHaveAttribute('href', carrierInfo('dhl').helpUrl);
+    expect(note.querySelector('p')).toBeNull();
+    expect(within(note).getByRole('link', { name: 'Questions? Contact DHL support.' })).toHaveAttribute('href', carrierInfo('dhl').helpUrl);
+    cleanup();
+
+    // YunExpress has no help page: the line under the status stays, with no note.
+    await shown(view(out, { carrier: 'yunexpress', trackingNumber: 'YT0000000000000001', deliveryRoundEndsAt: ago(1) }));
+    expect(within(card()).getByText(/^No tracking update since /)).toBeVisible();
+    expect(screen.queryByRole('note')).toBeNull();
   });
 
   it('says to ask the seller once a parcel has had no news for three weeks', async () => {

@@ -461,7 +461,11 @@ class ParcelPageTest {
         openMenu()
         compose.onNodeWithTag(PAGE_MENU).assertExists()
         assertEquals(
-            listOf(ParcelMenuItem.Rename, ParcelMenuItem.CopyTrackingNumber, ParcelMenuItem.ChangeCarrier, ParcelMenuItem.Archive, ParcelMenuItem.Delete),
+            // In the order of the items' kinds; the menu shows the carrier's support after Change carrier.
+            listOf(
+                ParcelMenuItem.Rename, ParcelMenuItem.CopyTrackingNumber, ParcelMenuItem.ChangeCarrier, ParcelMenuItem.Archive, ParcelMenuItem.Delete,
+                ParcelMenuItem.ContactCarrier,
+            ),
             shownItems(),
         )
         // Its top right corner at the button's.
@@ -803,7 +807,11 @@ class ParcelPageTest {
         compose.onNodeWithTag(TAB_BAR).assertExists()
         openMenu()
         assertEquals(
-            listOf(ParcelMenuItem.Rename, ParcelMenuItem.CopyTrackingNumber, ParcelMenuItem.ChangeCarrier, ParcelMenuItem.Archive, ParcelMenuItem.Delete),
+            // In the order of the items' kinds; the menu shows the carrier's support after Change carrier.
+            listOf(
+                ParcelMenuItem.Rename, ParcelMenuItem.CopyTrackingNumber, ParcelMenuItem.ChangeCarrier, ParcelMenuItem.Archive, ParcelMenuItem.Delete,
+                ParcelMenuItem.ContactCarrier,
+            ),
             shownItems(),
         )
         choose(ParcelMenuItem.Archive)

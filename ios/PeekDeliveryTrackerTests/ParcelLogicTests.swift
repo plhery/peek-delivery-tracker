@@ -2265,6 +2265,19 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(makeParcel().quietNoteKey(now: scanned), "link.quiet")
     }
 
+    // As src/peek/ParcelPage.test.tsx: a parcel still on the van past its round gets only its carrier's support.
+    @MainActor func testAParcelOutForDeliveryPastItsRoundIsPointedToItsCarriersSupport() {
+        let localizer = Localizer(systemUses24HourTime: { true })
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        localizer.language = .en
+        let id = UUID()
+        XCTAssertTrue(makeParcel(id: id, events: [event(id, .inTransit, "2026-10-31T08:00:00Z"),
+                                                  event(id, .outForDelivery, "2026-10-31T12:00:00Z")]).quietOnRound)
+        XCTAssertFalse(makeParcel(id: id, events: [event(id, .inTransit, "2026-10-31T12:00:00Z")]).quietOnRound)
+        XCTAssertEqual(localizer.text("link.quietRound", ["carrier": "DHL"]), "Questions? Contact DHL support.")
+    }
+
     // As src/lib/stages.test.ts: a problem row an earlier check dated after the return scan.
     func testAReturnTheServerHoldsStaysOverAProblemRowAndTheTripAfterIt() {
         let id = UUID()
@@ -6086,6 +6099,22 @@ extension ParcelLogicTests {
         archived.archivedAt = "2026-08-02T10:00:00Z"
         XCTAssertEqual(ParcelMenuItem.menu(for: archived, onCard: true)[2], [.restore])
         XCTAssertEqual(ParcelMenuItem.menu(for: archived, onCard: false)[1], [.restore])
+    }
+
+    // As src/components/ParcelDetail.shipment.test.tsx: the page's menu leads to the support of a carrier with a help page.
+    @MainActor func testAParcelsPageMenuLeadsToItsCarriersSupportWhenItHasAHelpPage() {
+        let parcel = makeParcel()
+        XCTAssertEqual(ParcelMenuItem.menu(for: parcel, onCard: false, help: "DHL"), [
+            [.rename, .copyTrackingNumber, .changeCarrier, .contactCarrier("DHL")], [.archive], [.delete],
+        ])
+        XCTAssertEqual(ParcelMenuItem.menu(for: parcel, onCard: false, reader: true, help: "DHL")[0].last, .contactCarrier("DHL"))
+        let localizer = Localizer(systemUses24HourTime: { true })
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        localizer.language = .en
+        let item = ParcelMenuItem.contactCarrier("DHL")
+        XCTAssertEqual(localizer.text(item.titleKey, item.titleValues), "Contact DHL support")
+        XCTAssertNil(item.shortcut)
     }
 
     func testAParcelsMenuShowsMailsKeysForCopyArchiveAndDeleteEachOnce() {

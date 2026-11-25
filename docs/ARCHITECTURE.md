@@ -204,9 +204,12 @@ Key server modules:
     the help page of the carrier that has it, else of the one it is filed under (the catalog's
     `helpUrl`; no link when neither has one), and says so when that carrier's tracking leaves
     out the destination country (`hidesDestinationLeg`). After three weeks the note says to ask
-    the seller if it hasn't arrived. A label alone gets no such note: the card says the sender
-    still has the parcel, or nothing when its carrier wrote the rest of its timeline ahead. An
-    account's parcel and the iPhone and Android apps show the same.
+    the seller if it hasn't arrived. A parcel still out for delivery gets no reasons, only that
+    help page as a line of its own ("Questions? Contact … support."), and no note without one. A
+    label alone gets no such note: the card says the sender still has the parcel, or nothing when
+    its carrier wrote the rest of its timeline ahead. An account's parcel and the iPhone and
+    Android apps show the same, and their parcel page's ••• menu leads to the same help page
+    ("Contact … support") whenever there is one.
   - Opening a lookup's link queues a check once its cadence has come round, and the answer
     says so (`checkQueued`): the page reads again after 2 s, then more slowly up to 10 s, for a
     minute at most, so the check's result shows as it lands rather than 30 s later. The iPhone

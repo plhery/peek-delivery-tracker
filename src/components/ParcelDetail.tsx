@@ -74,7 +74,7 @@ import type { GivenPostcode } from '../lib/postcodeMemory';
 import { createAccountFeedback, createAccountShare, demoAccountShare } from '../peek/links';
 import { nonTrackingNote, nonTrackingShape } from '../peek/lookup/reading';
 import { FeedbackOverlays, FeedbackQuestion, useParcelFeedback } from '../peek/parcel/Feedback';
-import { NoteCard, quietNote } from '../peek/parcel/Details';
+import { carrierHelp, NoteCard, quietNote } from '../peek/parcel/Details';
 import { missingStep, scanIdentity } from '../peek/parcel/feedbackModel';
 import { parcelFeedbackNotes } from '../peek/parcel/feedbackNotes';
 import { Glyph } from '../peek/parcel/glyphs';
@@ -161,6 +161,9 @@ export function ParcelDetail({
   // handover has not gone quiet on the way: its stage note says the sender still has it.
   const stalled = !parcel.archivedAt && displayedCarrier.id !== 'unknown' && parcelAttention(parcel) === 'stalled'
     && !awaitingHandover(parcel.events);
+  const quiet = stalled ? quietNote(parcel, displayedCarrier, t, locale) : null;
+  // The ••• menu's way to the carrier's support: its help page, as the quiet note links it, and none without one.
+  const help = displayedCarrier.id === 'unknown' ? null : carrierHelp(parcel, displayedCarrier, locale);
   const pickupFact = waitingAt ? undefined : parcel.pickupPoint?.trim();
   // A label a day old or more: the sender still has the parcel, and the carrier can tell nothing until they hand it over;
   // unless the carrier wrote the rest of its timeline ahead, whose line in the history says the rest are predictions.
@@ -530,6 +533,10 @@ export function ParcelDetail({
             >
               {t('detail.changeCarrier')}
             </button>
+            {help && <a href={help.href} target="_blank" rel="noopener noreferrer" onClick={() => {
+              if (actionsMenu.current) actionsMenu.current.open = false;
+              trackAction('parcel-carrier-help');
+            }}>{t('detail.contactCarrier', { carrier: help.name })}</a>}
             {!parcel.archivedAt && (
               <button
                 type="button"
@@ -713,7 +720,7 @@ export function ParcelDetail({
         <span className="peekp-note__icon" aria-hidden="true"><Glyph name="info" /></span>
         <div><strong>{t('link.carrierSays', { carrier: carrier.name })}</strong><blockquote>{carrierWaits.description.trim()}</blockquote></div>
       </div>}
-      {stalled && <div className="detail__quiet"><NoteCard note={quietNote(parcel, displayedCarrier, t, locale)} /></div>}
+      {quiet && <div className="detail__quiet"><NoteCard note={quiet} /></div>}
       {delivered && apiAuth && accountEmail && <EmailOffer apiAuth={apiAuth} email={accountEmail} />}
       <section className="detail__information">
         {(importCharges || pickupFact || parcel.receiverName || parcel.dimensionsText || (Number.isFinite(parcel.weightKg) && parcel.weightKg! > 0)) && (

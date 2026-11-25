@@ -375,7 +375,7 @@ button .carrier-mark__truck { width: 27px; height: 18px; flex-shrink: 0; stroke:
 .detail__actions-menu summary { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--control); list-style: none; cursor: pointer; letter-spacing: 2px; }
 .detail__actions-menu summary::-webkit-details-marker { display: none; }
 .detail__actions-menu > div { position: absolute; top: 52px; right: 0; width: 230px; max-width: calc(100vw - 48px); padding: 6px; background: var(--paper); border: 1px solid var(--line); box-shadow: 0 10px 30px rgb(0 0 0 / 12%); border-radius: 16px; animation: page-arrive .15s; }
-.detail__actions-menu button { display: block; width: 100%; text-align: left; padding: 12px; min-height: 44px; background: transparent; border-radius: 10px; font-size: 13px; }
+.detail__actions-menu button, .detail__actions-menu a { display: block; width: 100%; text-align: left; padding: 12px; min-height: 44px; background: transparent; border-radius: 10px; font-size: 13px; color: inherit; text-decoration: none; box-sizing: border-box; }
 .detail__actions-menu-danger { color: var(--ink-soft); }
 .detail__hero { margin: 24px; background: var(--tone-surface); border-radius: 26px; padding: 24px; }
 .detail__hero-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
@@ -602,7 +602,7 @@ button .carrier-mark__truck { width: 27px; height: 18px; flex-shrink: 0; stroke:
   .time-card:hover, .stamp-card:hover { scale: 1.012; }
   .settings-row:hover { filter: brightness(.97); }
   .arrival__open:hover { color: var(--ink); }
-  .detail__actions-menu button:hover { background: color-mix(in srgb, var(--ink) 6%, transparent); }
+  .detail__actions-menu button:hover, .detail__actions-menu a:hover { background: color-mix(in srgb, var(--ink) 6%, transparent); }
   .arrival__demo:hover { color: var(--ink); }
 }
 

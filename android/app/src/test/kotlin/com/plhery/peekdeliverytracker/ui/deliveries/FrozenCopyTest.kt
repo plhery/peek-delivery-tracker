@@ -97,11 +97,11 @@ class FrozenCopyTest {
         assertFalse(exists(PAGE_SYNC_LINE))
         assertFalse(exists(PAGE_REFRESH))
 
-        // Its menu keeps what the phone holds of it: no carrier to change.
+        // Its menu keeps what the phone holds of it, and the way to its carrier's support: no carrier to change.
         compose.onNodeWithTag(PAGE_MENU_BUTTON).performClick()
         settle()
         assertEquals(
-            setOf(ParcelMenuItem.Rename, ParcelMenuItem.CopyTrackingNumber, ParcelMenuItem.Archive, ParcelMenuItem.Delete),
+            setOf(ParcelMenuItem.Rename, ParcelMenuItem.CopyTrackingNumber, ParcelMenuItem.Archive, ParcelMenuItem.Delete, ParcelMenuItem.ContactCarrier),
             shownItems(),
         )
     }

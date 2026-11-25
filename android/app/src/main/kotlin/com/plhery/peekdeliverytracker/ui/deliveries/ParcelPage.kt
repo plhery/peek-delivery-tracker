@@ -54,6 +54,7 @@ import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.platform.testTag
@@ -815,13 +816,35 @@ private fun PageMenuOverlay(state: DeliveriesState, request: PageMenuRequest) {
     val gone = parcel == null || state.navigator.navigation.shown != request.pageId
     LaunchedEffect(gone) { if (gone) state.pageMenu = null }
     if (parcel == null || gone) return
-    val items = remember(parcel) {
-        ParcelMenuItem.menu(parcel, onCard = false, reader = state.source.viewerLink(parcel) != null, frozen = state.source.isFrozen(parcel))
+    // The carrier's help page, as the quiet note links it: the menu leads to its support only where there is one.
+    val help = LocalCarrierIdentities.current?.catalog?.helpLink(parcel, LocalLanguage.current)
+    val items = remember(parcel, help != null) {
+        ParcelMenuItem.menu(
+            parcel, onCard = false, reader = state.source.viewerLink(parcel) != null, frozen = state.source.isFrozen(parcel),
+            help = help != null,
+        )
     }
     val shortcuts = keyboardConnected()
     val title = parcel.label.ifEmpty { localized("common.parcel") }
     val menu = rememberMenuPresence(request) { state.pageMenu = null }
-    val choose = { item: ParcelMenuItem -> menu.close { state.menuParcel(request.pageId)?.let { state.choseOnPage(request.pageId, item, it) } } }
+    val uriHandler = LocalUriHandler.current
+    val choose = { item: ParcelMenuItem ->
+        menu.close {
+            if (item == ParcelMenuItem.ContactCarrier) {
+                // Opened as the quiet note's link opens it, in the browser.
+                help?.let {
+                    state.source.action("parcel-carrier-help")
+                    try {
+                        uriHandler.openUri(it.url)
+                    } catch (_: IllegalArgumentException) {
+                        // Where no app opens web pages: nothing, as with the iPhone's link.
+                    }
+                }
+            } else {
+                state.menuParcel(request.pageId)?.let { state.choseOnPage(request.pageId, item, it) }
+            }
+        }
+    }
     MenuKeys(shortcuts, items, choose)
 
     BoxWithConstraints(
@@ -839,7 +862,7 @@ private fun PageMenuOverlay(state: DeliveriesState, request: PageMenuRequest) {
         val margin = with(density) { MENU_SIDE.toPx() }
         val leftmost = insets.getLeft(density, direction) + margin
         val rightmost = max(leftmost, windowWidth - insets.getRight(density, direction) - margin)
-        val menuWidth = parcelMenuWidth(items, shortcuts, room = rightmost - leftmost)
+        val menuWidth = parcelMenuWidth(items, shortcuts, room = rightmost - leftmost, carrier = help?.name)
         val frame = with(density) {
             val left = (anchor.right - menuWidth).coerceIn(leftmost, max(leftmost, rightmost - menuWidth))
             val top = max(anchor.top, insets.getTop(this).toFloat())
@@ -861,7 +884,7 @@ private fun PageMenuOverlay(state: DeliveriesState, request: PageMenuRequest) {
                 .dropShadow(ContinuousRoundedShape(MENU_RADIUS), MENU_SHADOW),
         ) {
             Column(Modifier.verticalScroll(rememberScrollState()).padding(vertical = MENU_PADDING)) {
-                MenuItems(items, shortcuts, busy = state.pageWorking(request.pageId), choose, menu.first)
+                MenuItems(items, shortcuts, busy = state.pageWorking(request.pageId), choose, menu.first, carrier = help?.name)
             }
         }
     }

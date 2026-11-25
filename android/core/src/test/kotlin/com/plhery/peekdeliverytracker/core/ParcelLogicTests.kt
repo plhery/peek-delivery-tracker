@@ -1434,6 +1434,16 @@ class ParcelLogicTests {
         assertEquals("link.quiet", makeParcel(id).quietNoteKey(now))
     }
 
+    // As src/peek/ParcelPage.test.tsx: a parcel still on the van past its round gets only its carrier's support.
+    @Test
+    fun aParcelOutForDeliveryPastItsRoundIsPointedToItsCarriersSupport() {
+        val id = UUID.randomUUID()
+        val out = listOf(event(id, TrackingStage.InTransit, "2026-10-31T08:00:00Z"), event(id, TrackingStage.OutForDelivery, "2026-10-31T12:00:00Z"))
+        assertTrue(makeParcel(id, events = out).quietOnRound)
+        assertFalse(makeParcel(id, events = out.take(1)).quietOnRound)
+        assertEquals("Questions? Contact DHL support.", Localizer(AppLanguage.En).text("link.quietRound", mapOf("carrier" to "DHL")))
+    }
+
     // As src/lib/parcelPriority.test.ts: a parcel out for delivery is flagged once its round is over on the parcel's
     // clock, which the server serves as delivery_round_ends_at, whatever the device's.
     @Test

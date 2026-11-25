@@ -17727,7 +17727,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "gls-de",
       "catalog": "gls-de",
       "slug": "gls-tracking-germany",
-      "title": "GLS 德国物流查询：单号、ParcelShop 与客服",
+      "title": "GLS 德国物流查询：状态、ParcelShop 与客服",
       "name": "GLS Germany",
       "color": "#ffdd00"
     },

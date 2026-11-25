@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-A DPD na Alemanha é a DPD Deutschland GmbH, transportadora de encomendas da rede Geopost, com 10.000 pontos Pickup parcelshop. Rastreie uma encomenda na página oficial da DPD usando o número de 14 dígitos (adicionando seu código postal para ver todos os detalhes) ou cole o número na caixa acima. Ele aparece na confirmação de envio da loja e no e-mail ou SMS da DPD.
+A DPD na Alemanha é a DPD Deutschland GmbH, transportadora de encomendas da rede Geopost, com 10.000 pontos Pickup parcelshop. Rastreie uma encomenda na página oficial da DPD usando o número de 14 dígitos (adicionando seu código postal para ver os detalhes) ou cole o número na caixa acima. Ele aparece na confirmação de envio da loja e no e-mail ou SMS da DPD.
 
 ## Código de rastreamento da DPD: onde encontrar
 
@@ -26,7 +26,7 @@ Estes são os textos em inglês da DPD, em ordem. As páginas em alemão usam fr
 | A DPD diz | O que significa para você |
 | --- | --- |
 | `Order information has been transmitted to DPD.` | Etiqueta criada: a DPD ainda não recebeu o pacote. |
-| `Parcelinfo handed to DPD` | Etiqueta criada: os dados enviados pelo remetente chegaram à DPD, ainda não o pacote. Aparece apenas por serviços de rastreamento, não no site da DPD. |
+| `Parcelinfo handed to DPD` | Etiqueta criada: os dados enviados pelo remetente chegaram à DPD, mas não o pacote. Aparece apenas por serviços de rastreamento, não no rastreamento da própria DPD. |
 | `Parcel handed to DPD` | A DPD recebeu o pacote. |
 | `In transit.`, `Your parcel is on its way` | Circulando pela rede da DPD. |
 | `At parcel delivery centre.` | No centro de distribuição responsável pela sua entrega. |
@@ -76,11 +76,11 @@ O número 06021 8430 pertence à sede administrativa.
 
 ## Como rastrear uma encomenda DPD Alemanha com o Peek
 
-O [Peek](/) aceita o número DPD de 14 dígitos, com ou sem caractere verificador, e consulta as transportadoras compatíveis. Você só vê "DPD Germany está com esta encomenda" quando a DPD localiza o pacote na Alemanha. Caso contrário, clique em "Trocar" e escolha DPD Germany — o mesmo vale para códigos de 14 dígitos iniciados por `10` ou `1550`, que o Peek associa por padrão à DPD França ou à DPD Reino Unido. Links de tracking.dpd.de e my.dpd.de também funcionam.
+O [Peek](/) aceita o número DPD de 14 dígitos, com ou sem caractere verificador, e consulta as transportadoras prováveis. Você só vê "DPD Germany está com esta encomenda" quando a DPD localiza o pacote na Alemanha. Caso contrário, clique em "Trocar" e escolha DPD Germany — o mesmo vale para códigos de 14 dígitos iniciados por `10` ou `1550`, que o Peek associa por padrão à DPD França ou à DPD Reino Unido. Links de tracking.dpd.de e my.dpd.de também funcionam.
 
 Um "Código postal de entrega" opcional (5 dígitos) é enviado à DPD e, quando necessário, a serviços de rastreamento. Sem ele, o Peek lê o aplicativo alemão da DPD: eventos com cidade, peso, dimensões, dia ou janela prevista e, enquanto aguarda retirada, nome e endereço do Pickup parcelshop ou estação. Com o código postal, o Peek lê o rastreamento verificado da DPD, mostrando o nome do remetente, mas sem dimensões nem endereço do ponto Pickup. Se a DPD recusar o código postal, resta apenas um resumo curto e o Peek avisa: "DPD Germany não aceitou o código postal …, então mostra menos detalhes."
 
-O Peek verifica até a cada 10 minutos — até a cada 2 minutos no dia em que a DPD registra a saída para entrega, a partir das 6h (horário local) ou meia hora antes da janela informada pela DPD, enquanto o rastreador da própria DPD responde; por meio de serviços de rastreamento, até a cada 15 minutos enquanto o pacote estiver aberto ou com alertas ligados — mostra cada evento no mapa e envia notificações. Após dois dias sem novidades (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Os textos ficam no inglês da DPD; leituras que citam quem recebeu aparecem como "Delivery update". Seu nome, endereço e comprovante de entrega são descartados. Os horários da DPD não trazem fuso: o Peek os interpreta no horário da Alemanha (e leituras no exterior no fuso do respectivo país). Se a DPD passar a localizar o pacote em outro país, o Peek continua acompanhando sob DPD Germany pelo rastreamento do grupo e, quando possível, pela DPD daquele país.
+O Peek verifica até a cada 10 minutos — até a cada 2 minutos no dia em que a DPD registra a saída para entrega, a partir das 6h (horário local) ou meia hora antes da janela informada pela DPD, enquanto o rastreador da própria DPD responde; por meio de serviços de rastreamento, até a cada 15 minutos nesse dia, enquanto o pacote estiver aberto ou com alertas ligados — mostra cada evento no mapa e pode notificar você. Após dois dias sem novidades (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Os textos ficam no inglês da DPD; leituras que citam quem recebeu aparecem como "Delivery update". Seu nome, endereço e comprovante de entrega são descartados. Os horários da DPD não trazem fuso: o Peek os interpreta no horário da Alemanha (e leituras no exterior no fuso do respectivo país). Se a DPD passar a localizar o pacote em outro país, o Peek continua acompanhando sob DPD Germany pelo rastreamento do grupo e, quando possível, pela DPD daquele país.
 
 ## Perguntas sobre o rastreamento da DPD
 
@@ -96,7 +96,7 @@ Normalmente de 1 a 2 dias úteis após a postagem, segundo a DPD. Os termos desc
 
 A entrega aos sábados é um serviço contratado pelo remetente: nos termos da DPD, está vinculada ao DPD 12:00, serviço expresso dentro da Alemanha.
 
-### Onde fica o ponto DPD Pickup mais próximo?
+### Onde fica meu ponto DPD Pickup?
 
 A DPD informa o nome e o endereço da loja quando deixa sua encomenda lá. O [buscador de Pickup parcelshops](https://www.dpd.com/de/de/pickup-paketshops/paketshop-finden/) lista as lojas e horários de funcionamento.
 
@@ -133,4 +133,5 @@ A DPD informa o nome e o endereço da loja quando deixa sua encomenda lá. O [bu
 - [DPD: Sicherheit](https://www.dpd.com/de/de/sicherheit/) – remetentes oficiais de SMS e e-mail
 - [DPD: Phishing warning](https://www.dpd.com/de/de/news/warnung-vor-phishing-mails-und-sms-im-namen-von-dpd/) – alerta contra taxas falsas
 - [DPD: Home](https://www.dpd.com/de/de/) – rede Geopost e 10.000 pontos Pickup
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê
 :::

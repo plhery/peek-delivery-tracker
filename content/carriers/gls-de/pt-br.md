@@ -10,7 +10,7 @@ A GLS Alemanha (GLS Germany) entrega em dias úteis e, segundo dados do grupo, c
 
 ## Número de rastreamento da GLS e Track-ID: onde encontrar
 
-Confira primeiro o e-mail de envio da loja. O rastreamento funciona assim que o remetente envia os dados do pacote à GLS, e encomendas enviadas por lojas do exterior via GLS são acompanhadas na mesma página do grupo GLS. O cartão de aviso da GLS, em papel ou por e-mail, traz um Track-ID de seis letras que funciona exatamente como o número do pacote no rastreamento da GLS.
+Confira primeiro o e-mail de envio da loja. O rastreamento funciona assim que o remetente envia os dados do pacote à GLS, e encomendas enviadas por lojas do exterior via GLS são acompanhadas na mesma página do grupo GLS. O cartão de aviso da GLS, em papel ou por e-mail, traz um Track-ID de seis letras que funciona como o número do pacote no rastreamento da GLS.
 
 O Peek reconhece estes formatos:
 
@@ -37,7 +37,7 @@ Estes são os textos em inglês da GLS, na ordem em que uma encomenda passa por 
 | `The parcel is ready for collection at the ParcelShop.` | Disponível para retirada em um ParcelShop ou Parcelstation. |
 | `The parcel has been delivered.` | Entregue a você ou a quem recebeu por você, como um vizinho. |
 
-Entre essas etapas, aparecem leituras de chegada e saída em centros de triagem ou depósitos da GLS, indicando trânsito normal. Se o motorista não encontrou ninguém ou não pôde entregar por outro motivo, o Peek mostra "Tentativa de entrega". A GLS então tenta mais uma vez ou leva o pacote a um ParcelShop, depósito ou Parcelstation próximo, informando onde ficou por cartão ou e-mail. Se não for retirado ou não puder ser entregue, retorna ao remetente e o Peek mostra "Devolvida ao remetente". A GLS contabiliza a chegada ao ParcelShop como entregue, embora o pacote ainda aguarde retirada lá. `The parcel has not been handed over to GLS.` segue como última etapa até o remetente postar o envio — cobre o remetente.
+Entre essas etapas, aparecem leituras de chegada e saída em centros de triagem ou depósitos da GLS, indicando que o pacote está a caminho. Se o motorista não encontrou ninguém ou não pôde entregar por outro motivo, o Peek mostra "Tentativa de entrega". A GLS então tenta mais uma vez ou leva o pacote a um ParcelShop, depósito ou Parcelstation próximo, informando onde ficou por cartão ou e-mail. Se não for retirado ou não puder ser entregue, retorna ao remetente e o Peek mostra "Devolvida ao remetente". A GLS contabiliza a chegada ao ParcelShop como entregue, embora o pacote ainda aguarde retirada lá. `The parcel has not been handed over to GLS.` segue como última etapa até o remetente postar o envio — cobre o remetente.
 
 ## Horários de entrega, ParcelShops e armários da GLS
 
@@ -63,25 +63,25 @@ O contrato da GLS é com o remetente, portanto reembolsos passam pela loja.
 
 **Na alfândega.** Encomendas vindas de fora da União Europeia passam pela alfândega. A GLS informa que imposto de importação, IVA de importação e normalmente uma tarifa de desembaraço precisam ser pagos antes da entrega; quem paga a tarifa depende das condições escolhidas pelo remetente. Na UE, vigora desde 1º de julho de 2026 uma tarifa alfandegária fixa de € 3 por tipo de item em pedidos online até € 150. Desde 1º de novembro de 2026, aplica-se também a taxa de manuseio da UE de € 2 por tipo de item, qualquer que seja o valor, devida por quem declara a mercadoria à alfândega. Mais detalhes em [encomendas paradas na alfândega](guide:customs).
 
-**Danificado.** A lei alemã (Código Comercial, § 438 HGB) exige que avarias visíveis sejam sinalizadas na entrega (avisar o motorista basta), danos ocultos reportados em até 7 dias e atrasos em até 21 dias, em forma escrita; enviar o aviso dentro do prazo é suficiente. Tanto o destinatário quanto o remetente podem comunicar perda ou avaria. A loja vendedora assume o risco do transporte, salvo se você mesmo contratou uma transportadora não indicada pela loja (Código Civil, § 475 BGB); portanto, fale primeiro com a loja.
+**Danificado.** A lei alemã (Código Comercial, § 438 HGB) exige que avarias visíveis sejam sinalizadas na entrega (avisar o motorista basta), danos ocultos reportados em até 7 dias e atrasos em até 21 dias, em forma de texto; enviar o aviso dentro do prazo é suficiente. Tanto o destinatário quanto o remetente podem comunicar perda ou avaria. A loja vendedora assume o risco do transporte, salvo se você mesmo contratou uma transportadora não indicada pela loja (Código Civil, § 475 BGB); portanto, fale primeiro com a loja.
 
 **Disputas.** Perdas ou avarias não resolvidas com a GLS podem ser levadas à Schlichtungsstelle Post da Bundesnetzagentur, tanto por remetentes quanto por destinatários. O serviço é gratuito para disputas entre € 10 e € 2.500, e a GLS é obrigada a participar quando um consumidor abre o pedido.
 
-**Direito de arrependimento (Widerruf).** Deixar de retirar um pacote não cancela a compra. Se você comprou como consumidor à distância (como online) ou fora do estabelecimento comercial, pode em geral desistir avisando a loja claramente e sem precisar justificar em até 14 dias (Código Civil, § 355 BGB). Para bens físicos, o prazo começa após o recebimento (§ 356), bastando enviar o aviso a tempo.
+**Direito de arrependimento (Widerruf).** Deixar de retirar um pacote não cancela a compra. Se você comprou à distância, como consumidor, de uma empresa (como online) ou fora do estabelecimento comercial, pode em geral desistir avisando a loja claramente e sem precisar justificar em até 14 dias (Código Civil, § 355 BGB). Para bens físicos, o prazo começa após o recebimento (§ 356), bastando enviar o aviso a tempo.
 
 ## Atendimento ao cliente e contato da GLS Alemanha
 
 Para pedidos de lojas, a loja é seu primeiro ponto de contato. As opções de atendimento da GLS Alemanha ficam no site alemão gls-pakete.de. O grupo GLS pede que dúvidas sobre status sejam enviadas ao atendimento do seu país e informa que o telefone está no site nacional da GLS; o [formulário de contato do grupo](https://gls-group.com/GROUP/en/contact-form/) também recebe solicitações de destinatários. Para envios feitos por você via GLS-Pakete.de ou app, os termos (agosto de 2023) informam versand-service@gls-germany.com e +49 6677 646907040.
 
-> O grupo GLS alerta sobre e-mails, SMS e sites falsos em seu nome. O portal principal é gls-group.com, e somente ele e os domínios vinculados a partir dele, como gls-pakete.de, são legítimos. A GLS nunca pede por e-mail que destinatários paguem por mercadorias com cartão, transferência ou pagamento online. Porém, em encomendas de fora da UE, a GLS ou um agente autorizado pode cobrar impostos e taxas por e-mail, SMS ou carta. Encomendas contra reembolso (GLS Cash Service) só são entregues mediante pagamento em dinheiro ao motorista, e a GLS recomenda nunca pagar entregas contra reembolso inesperadas para você ou vizinhos. Encaminhe e-mails suspeitos como anexo para security@gls-group.com.
+> O grupo GLS alerta sobre e-mails, SMS e sites falsos em seu nome. O portal principal é gls-group.com, e somente ele e os domínios vinculados a partir dele, como gls-pakete.de, são legítimos. A GLS nunca pede por e-mail que destinatários paguem por mercadorias com cartão, transferência ou pagamento online. Porém, em encomendas de fora da UE, a GLS ou um agente autorizado pode cobrar impostos e taxas por e-mail, SMS ou carta. Encomendas contra reembolso (GLS Cash Service) só são entregues mediante pagamento em dinheiro ao motorista, e a GLS desaconselha pagar entregas contra reembolso inesperadas para você ou vizinhos. Encaminhe e-mails suspeitos como anexo para security@gls-group.com.
 
 ## Como rastrear uma encomenda GLS Alemanha com o Peek
 
-O [Peek](/) consulta as transportadoras prováveis para os formatos acima. A GLS responde tanto por envios alemães quanto suíços, e o Peek exibe GLS Germany ("GLS Germany está com esta encomenda"), ou GLS France quando esta reconhece o envio. Na Suíça ou em Liechtenstein (pela região do aparelho ou conexão web), ele sugere GLS Switzerland com campo de código postal de 4 dígitos: para envios destinados à Alemanha, clique em "Trocar" e escolha GLS Germany. Colar um link de gls-pakete.de ou um link gls-group com `/DE/`, `/EU/` ou `/GROUP/` também seleciona GLS Germany.
+O [Peek](/) consulta as transportadoras prováveis para os formatos acima. A GLS responde tanto por envios alemães quanto suíços, e o Peek exibe GLS Germany ("GLS Germany está com esta encomenda"), ou GLS France quando esta reconhece o envio. Na Suíça ou em Liechtenstein (pela região do aparelho ou conexão web), ele exibe GLS Switzerland com campo de código postal de 4 dígitos: para envios destinados à Alemanha, clique em "Trocar" e escolha GLS Germany. Colar um link de gls-pakete.de ou um link gls-group com `/DE/`, `/EU/` ou `/GROUP/` também seleciona GLS Germany.
 
-A GLS exige o código postal de entrega para exibir o histórico completo, então o campo "Código postal de entrega" é obrigatório; se a GLS não encontrar o pacote com o código informado, o Peek avisa e permite corrigir. Qualquer formato nacional funciona. O código postal é enviado à GLS e, quando necessário, a serviços de rastreamento.
+A GLS exige o código postal de entrega para exibir o histórico detalhado, então o campo "Código postal de entrega" é obrigatório; se a GLS não encontrar o pacote com o código informado, o Peek avisa e permite corrigir. Qualquer formato nacional funciona. O código postal é enviado à GLS e, quando necessário, a serviços de rastreamento.
 
-Em seguida você vê o status, a cidade e o país de cada leitura no mapa, a data prevista, o peso, o horário de entrega e, em ParcelShops, o nome e endereço do ponto. Seu nome, endereço, contatos, assinatura e referência do remetente são removidos. O Peek mostra a chegada ao ParcelShop como "Pronta para retirada". Os horários seguem o horário da Alemanha. O Peek consulta a GLS cerca de uma vez por hora, inclusive no dia da entrega (a cada 4 horas após falha), e atualizar manualmente não antecipa a consulta. Somente pacotes repassados pela GLS à Swiss Post são acompanhados em outra transportadora, passando ao ritmo dela. O Peek pode avisar você a cada mudança.
+Em seguida você vê o status, a cidade e o país de cada leitura no mapa, a data prevista, o peso, o horário de entrega e, em ParcelShops, o nome e endereço do ponto. Seu nome, endereço, contatos, assinatura e referência do remetente são removidos. O Peek mostra a chegada ao ParcelShop como "Pronta para retirada". Os horários seguem o horário da Alemanha. O Peek consulta a GLS cerca de uma vez por hora, inclusive no dia da entrega (4 horas depois de uma consulta que falhou), e atualizar manualmente não antecipa a consulta. Somente pacotes repassados pela GLS à Swiss Post são acompanhados em outra transportadora. Quando outra transportadora assume a entrega, o Peek segue o ritmo da transportadora que entrega o pacote. O Peek pode avisar você a cada mudança.
 
 ## Perguntas sobre o rastreamento da GLS na Alemanha
 
@@ -95,7 +95,7 @@ O rastreamento da GLS mostra assim que você digita o número e o código postal
 
 ### Quanto tempo a GLS leva para entregar?
 
-A GLS publica prazos estimados em gls-pakete.de sem garanti-los. O grupo afirma que envios nacionais costumam chegar em menos de 24 horas e envios pela Europa em 24 a 96 horas. Apenas envios contratados pelo remetente com o Guaranteed24Service têm entrega garantida no dia útil seguinte (segunda a sexta) na Alemanha, exceto ilhas.
+A GLS publica prazos estimados em gls-pakete.de sem garanti-los. O grupo afirma que envios nacionais costumam chegar em menos de 24 horas e envios pela Europa em 24 a 96 horas. Apenas envios contratados pelo remetente com o Guaranteed24Service têm entrega prevista para o dia útil seguinte (segunda a sexta) na Alemanha, exceto ilhas.
 
 ### Por quanto tempo a GLS guarda uma encomenda?
 
@@ -103,7 +103,7 @@ Após uma entrega sem sucesso, o ParcelShop, depósito ou Parcelstation guarda o
 
 ### A GLS é confiável?
 
-Sim: a GLS Alemanha é a General Logistics Systems Germany GmbH & Co. OHG, com sede em Neuenstein. Porém, golpes usam seu nome com frequência — confira o alerta acima.
+Sim: a GLS Alemanha é a General Logistics Systems Germany GmbH & Co. OHG, com sede em Neuenstein. Porém, mensagens falsas usam seu nome — confira o alerta acima.
 
 :::sources
 - [GLS: Parcel Tracking](https://gls-group.com/EU/en/parcel-tracking) – página de rastreamento do grupo e Track-ID no cartão de aviso
@@ -122,4 +122,5 @@ Sim: a GLS Alemanha é a General Logistics Systems Germany GmbH & Co. OHG, com s
 - [Gesetze im Internet: § 356 BGB](https://www.gesetze-im-internet.de/bgb/__356.html) – início do prazo de arrependimento em contratos à distância
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tarifa alfandegária de € 3 por tipo de produto até € 150 desde 1º de julho de 2026 e taxa de manuseio da UE de € 2 desde 1º de novembro de 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – € 2 por tipo de produto qualquer que seja o valor e responsabilidade do declarante
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê, os textos em inglês da GLS (inclusive alfândega e devoluções), Track-ID, consultas de hora em hora
 :::

@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-Allegro One 是波兰电商平台 Allegro 自营的配送网络，包含 Allegro One Box 智能自提柜、Allegro One Punkt 合作取件点和 Allegro One Kurier 送货上门，全部归属 Allegro Delivery 体系。你可以在 Allegro 中的“Moje przesyłki”（我的包裹）或 Allegro 官方物流页面查件，也可以直接把单号粘贴到上方输入框中。单号位于你的购买详情、Allegro 应用以及单号添加后 Allegro 发出的邮件中。
+Allegro One 是波兰电商平台 Allegro 自营的配送网络，包含 Allegro One Box 自提柜、Allegro One Punkt 取件点和 Allegro One Kurier 送货上门，全部归属 Allegro Delivery 体系。你可以在 Allegro 中的“Moje przesyłki”（我的包裹）或 Allegro 官方物流页面查件，也可以直接把单号粘贴到上方输入框中。单号位于你的购买详情、Allegro 应用以及单号添加后 Allegro 发出的邮件中。
 
 ## 在哪里查找 Allegro 运单号
 
@@ -25,13 +25,13 @@ Peek 支持通过 Allegro One 追踪以下单号格式（字符均为虚构）�
 | `ADK4829105` | 早期 Allegro Delivery 格式，部分退货仍在使用：`AD` 加 8 位字母或数字。 |
 | `ALE482910573649` | 旧版 Allegro One 格式：`ALE` 加 12 位数字。 |
 
-还没有单号？通常由卖家手动录入订单，除非与 Allegro 系统对接的承运商自动回传。另请参阅[如何查找运单号](guide:find-tracking-number)（英文）。
+还没有单号？由卖家录入订单，除非与 Allegro 系统对接的承运商自动回传。另请参阅[如何查找运单号](guide:find-tracking-number)（英文）。
 
 Allegro Delivery 同时也由 ORLEN Paczka、DHL 和 DPD 合作承运。这些通过 Allegro Delivery 发出的包裹使用 Allegro 自有单号，在 Allegro 系统内统一追踪，合作伙伴的扫描也会以相同文案显示。如果卖家未走 Allegro Delivery，而是使用自有协议通过某快递发货，则会使用该快递公司自己的单号，需在对应快递（例如 ORLEN Paczka 或 DPD Poland）下查询。
 
 ## Allegro One 物流状态中文说明
 
-Allegro 的物流系统以波兰语或英语提供每条扫描文案。以下按包裹常见流转顺序列出英文原文（除非你将 Peek 设为波兰语，否则 Peek 会显示这些英文文案）：
+Allegro 的物流系统以波兰语或英语提供每条扫描文案。以下按包裹依次经历的顺序列出英文原文（除非你将 Peek 设为波兰语，否则 Peek 会显示这些英文文案）：
 
 | Allegro One 状态原文 | 对你的含义 |
 | --- | --- |
@@ -54,9 +54,9 @@ Allegro 的物流系统以波兰语或英语提供每条扫描文案。以下按
 
 **取件通知。** 包裹送达自提柜或取件点后，Allegro 或其合作伙伴会通过邮件、短信或 Allegro 应用通知你具体取件地点和截止时间。
 
-**在 One Box 自提柜：** 输入取件码（单独输入或搭配手机号）、扫描邮件/短信里的二维码，或直接用 Allegro 应用开柜。**在 One Punkt 合作点：** 向店员提供包裹单号和取件码。
+**在 One Box 自提柜：** 输入取件码（单独输入或搭配手机号）、扫描邮件/短信里的二维码，或直接用 Allegro 应用开柜。**在 One Punkt 取件点：** 向店员提供包裹单号和取件码。
 
-**保管期限。** One Box 自提柜保管 2 个自然日（48 小时），One Punkt 合作点保管 2 个工作日。在部分自提柜和网点，Allegro 可能允许按单独条款延长保管时间，此时状态会变为 `Time for pick-up has been extended`。逾期未取将退回卖家。
+**保管期限。** One Box 自提柜保管 2 个自然日（48 小时），One Punkt 取件点保管 2 个工作日。在部分自提柜和网点，Allegro 可能允许按单独条款延长保管时间，此时状态会变为 `Time for pick-up has been extended`。逾期未取将退回卖家。
 
 **自提柜已满或停用？** Allegro 可能会将包裹改投至 3 公里内（农村地区为 6 公里内）的另一处自提柜，并通知你新地址及取件期限。
 
@@ -64,7 +64,7 @@ Allegro 的物流系统以波兰语或英语提供每条扫描文案。以下按
 
 ## Allegro One 包裹延误、丢失或破损
 
-**等待过久。** 先查看“Moje przesyłki”。如果完全查不到订单记录，请向卖家索取运单号。另见[物流不更新怎么办](guide:tracking-not-updating)（英文）。
+**等待过久。** 先查看“Moje przesyłki”。如果那里完全没有这个包裹，请向卖家索取运单号。另见[物流不更新怎么办](guide:tracking-not-updating)（英文）。
 
 **卖家不配合。** 可发起“problem z zakupem”（购买问题申报），付款一小时后即可提交。卖家有 24 小时回复你的首条消息（不含周六、周日和法定节假日）；如需 Allegro 介入，请点击“Pomoc Allegro”（Allegro 帮助）。对于延误、丢件或漏发商品，卖家有 7 天解决期限。如果届时 Allegro 未确认问题已解决，会向你核实；若你表示仍未解决，Allegro 会引导你通过 Allegro Ochrona Kupujących（买家保护）申请赔付。在 Allegro Lokalnie 以及使用 Magazyn Allegro（Allegro 仓库）的卖家处，仍通过开启“Dyskusja”（争议讨论）处理。
 
@@ -84,19 +84,19 @@ Allegro 的物流系统以波兰语或英语提供每条扫描文案。以下按
 
 对于 `A0` 或 `AD` 加 8 位字母/数字以及 17 位 `AD0` 格式的单号，[Peek](/) 会直接识别为 Allegro One。若是 `ALE` 加 12 位数字，请点击“更换”手动选择 Allegro One。
 
-Peek 会以英文读取 Allegro 物流（如果你将 Peek 界面设为波兰语，则显示波兰语），并按原文展示完整历史及签收时间。由于 Allegro 不返回具体地点信息，页面不会在地图上标点，也不显示取件点名称、预计送达日、重量或寄件人。
+Peek 会以英文读取 Allegro 物流（如果你将 Peek 界面设为波兰语，则显示波兰语），并按原文展示物流历史及签收时间。由于 Allegro 不返回具体地点信息，页面不会在地图上标点，也不显示取件点名称、预计送达日、重量或寄件人。
 
-当你打开包裹页面查看，或在派送当天开启通知时，只要 Allegro One 官方查询正常响应，Peek 最高每 10 分钟检查一次，在 Allegro One 扫描包裹进入派送中的当天早上 6 点（当地时间）起最高每 2 分钟检查一次（通过物流查询服务时，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次）；其余时间每小时检查一次。你可以按每次扫描、重要环节或仅派送当天接收通知。若连续两天无新动态（包裹仍处于“已生成面单”或“已揽收”状态时为 12 小时），Peek 会转为每小时检查一次。
+当你打开包裹页面查看，或在派送当天开启通知时，只要 Allegro One 官方查询正常响应，Peek 最高每 10 分钟检查一次，在 Allegro One 扫描包裹进入派送中的当天早上 6 点（当地时间）起最高每 2 分钟检查一次（通过物流查询服务时，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次）；其余时间每小时检查一次。你可以按每次扫描、仅重要环节或仅派送当天接收通知。若连续两天无新动态（包裹仍处于“已生成面单”或“已揽收”状态时为 12 小时），Peek 会转为每小时检查一次。
 
 ## Allegro One 物流查询常见问题
 
 ### Allegro One Box 是什么？
 
-它是 Allegro 自营的智能自提柜，与 One Punkt 合作取件点和 One Kurier 上门快递共同组成 Allegro One。包裹通过 Allegro Delivery 发往柜机，由 Allegro One 自身或 DPD、DHL 和 ORLEN Paczka 承运。
+它是 Allegro 自营的自提柜，与 One Punkt 取件点和 One Kurier 上门快递共同组成 Allegro One。包裹通过 Allegro Delivery 发往柜机，由 Allegro One 自身或 DPD、DHL 和 ORLEN Paczka 承运。
 
 ### 包裹在 Allegro One Box 保管多久？
 
-保管 2 个自然日（48 小时）；在部分柜机 Allegro 允许延长保管时间。One Punkt 合作取件点则保管 2 个工作日。
+保管 2 个自然日（48 小时）；在部分柜机 Allegro 可能允许你延长保管时间。One Punkt 取件点则保管 2 个工作日。
 
 ### Allegro One 运费多少钱？
 
@@ -110,4 +110,5 @@ Peek 会以英文读取 Allegro 物流（如果你将 Peek 界面设为波兰语
 - [Allegro: How to solve problems with purchases in the Messages tab in the Sales Center or in the Message Center](https://help.allegro.com/en/sell/a/how-to-solve-problems-with-purchases-in-the-messages-tab-in-the-sales-center-or-in-the-message-center-Bv0zrVqDVIX) – 自 2026 年 10 月 28 日起以购买问题替代争议讨论、付款一小时后可发起、24 小时回复与 7 天解决期限、买家保护及 Allegro Lokalnie/Magazyn Allegro 规则
 - [Allegro: Jak rozwiązywać problemy z zakupem w zakładce Wiadomości w Sales Center lub w Centrum Wiadomości](https://help.allegro.com/pl/sell/a/jak-rozwiazywac-problemy-z-zakupem-w-zakladce-wiadomosci-w-sales-center-lub-w-centrum-wiadomosci-x5ZVrvzXPuP) – 付款一小时后开启及“Pomoc Allegro”按钮机制
 - [Allegro: We changed the Allegro Smart! terms and conditions for buyers](https://help.allegro.com/en/sell/a/we-changed-the-allegro-smart-terms-conditions-for-buyers-wwkzRYxRdio) – 单一卖家满 49.90 兹罗提免运费规则
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – 单号格式、状态文案及其语言、合作快递以 Allegro 单号承运的包裹、Peek 读取的内容
 :::

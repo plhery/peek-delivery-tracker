@@ -14841,7 +14841,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "allegro-one",
       "catalog": "allegro-one",
       "slug": "rastreamento-allegro-one",
-      "title": "Rastreamento Allegro One: One Box, One Punkt e Kurier",
+      "title": "Rastreamento Allegro One: One Box, One Punkt e One Kurier",
       "name": "Allegro One",
       "color": "#006d57"
     },

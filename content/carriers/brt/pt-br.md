@@ -1,6 +1,6 @@
 ---
 title: Rastreamento BRT: códigos, status e entregas na Itália
-description: Rastreie encomendas BRT na Itália ou vindas de lá: onde achar o BRTcode, significado dos status em inglês, entregas sem sucesso, armários e contato.
+description: Rastreie encomendas BRT na Itália ou vindas de lá: onde achar o BRTcode ou o número de envio, status em inglês, entregas sem sucesso, armários e contato.
 slug: rastreamento-brt
 published: 2026-11-24
 updated: 2026-11-24
@@ -29,7 +29,7 @@ Catorze dígitos também combinam com DPD na Alemanha, Suíça e Reino Unido, e 
 
 ## O que significam os status de rastreamento da BRT
 
-O rastreamento da BRT em vas.brt.it abre em italiano, com opção de alternar para inglês; estes são os textos em inglês. Os cabeçalhos permanecem em italiano: `Data` (data), `Ora` (hora), `Filiale` (filial a consultar) e `Evento` (evento). O myBRT, para onde o campo de brt.it direciona, pode usar textos ligeiramente diferentes.
+O rastreamento da BRT em vas.brt.it abre em italiano, com opção de alternar para inglês; estes são os textos em inglês. Os cabeçalhos permanecem em italiano: `Data` (data), `Ora` (hora), `Filiale` (filial a consultar) e `Evento` (evento). O myBRT, para onde o campo de brt.it direciona, pode usar outros textos.
 
 | Status da BRT | O que significa para você |
 | --- | --- |
@@ -39,9 +39,9 @@ O rastreamento da BRT em vas.brt.it abre em italiano, com opção de alternar pa
 | `ARRIVED AT DEPOT` | Chegou à filial indicada na coluna `Filiale`. |
 | `FOR DELIVERY` | Saiu para entrega com o entregador. |
 | `NOTICE OF ATTEMPTED DELIVERY` | Não entregue: ninguém atendeu, e o entregador deixou um aviso. |
-| `UNKNOWN/INCOMPLETE CONSIGNEE` | Não entregue: destinatário ou endereço não encontrado ou incompleto. |
+| `UNKNOWN/INCOMPLETE CONSIGNEE` | Não entregue: destinatário ou endereço não encontrado. |
 | `TURMOIL` | Uma manifestação pública está retendo temporariamente a entrega. |
-| `PATRONAL HOLIDAY` | O feriado municipal do padroeiro no destino segura o envio por um dia antes de chegar à filial entregadora. Não há tentativa de entrega. |
+| `PATRONAL HOLIDAY` | O feriado do padroeiro no destino segura o envio nesse dia antes de chegar à filial entregadora. Não há tentativa de entrega. |
 | `DELIVERED` | Entregue. |
 | `ARRIVED AT BRT-fermopoint` | Aguardando retirada em um ponto parceiro BRT-fermopoint. |
 | `COLLECTED AT BRT-fermopoint` | Retirado no fermopoint. |
@@ -56,7 +56,7 @@ O rastreamento da BRT em vas.brt.it abre em italiano, com opção de alternar pa
 
 Se você não estiver, a BRT deixa aviso por e-mail, SMS ou papel, e a nova tentativa costuma ocorrer no próximo dia útil. A carta de serviços da BRT acrescenta uma segunda tentativa e, se falhar, uma ligação da filial.
 
-Pelo link na mensagem da BRT, pelo app myBRT ou em mybrt.it usando seu BRTcode e código postal ou PIN, você pode escolher outro dia ou faixa de horário, selecionar um BRT-fermopoint ou retirada na filial, liberar um pacote retido ou alterar o endereço se o remetente autorizar.
+Pelo link na mensagem da BRT, pelo app myBRT ou em mybrt.it usando seu BRTcode e código postal ou PIN, talvez você possa escolher outro dia ou faixa de horário, selecionar um BRT-fermopoint ou retirada na filial, liberar um pacote retido ou alterar o endereço se o remetente autorizar.
 
 **Retido ("in giacenza").** Os motivos incluem destinatário ausente ou desconhecido, endereço errado ou incompleto e recusa; o detalhe do rastreamento mostra qual ocorreu. Libere pela mensagem da BRT ou pelo rastreamento. A BRT pede instruções ao remetente; sem instrução por escrito, a carta de serviços prevê retorno 10 dias após o aviso ao remetente, salvo prazo diferente no contrato da loja. Depois que o remetente envia instruções, o rastreamento indica se há taxa de armazenagem para o remetente ou para você; a BRT não publica valores.
 
@@ -72,14 +72,14 @@ A BRT trata seus prazos de entrega como indicativos. Se o rastreamento parar, fa
 
 Em caso de extravio ou avaria, se você pagou o frete, use o formulário de danos da BRT com fotos; caso contrário, avise o remetente. Na porta, registre avarias visíveis de forma específica no comprovante (a BRT diz que ressalvas genéricas não têm valor) e informe danos ocultos por escrito em até 8 dias corridos após o recebimento em envios dentro da Itália.
 
-Destinatários também podem registrar reclamação formal: anexe o formulário PDF disponível na página [Carta dei servizi](https://www.brt.it/it/carta-dei-servizi/) ao formulário em services.brt.it/it/form-agcom. A BRT responde em até 45 dias. Sem resposta satisfatória, segue-se a conciliação por conciliazioni@brt.it com a Casa del Consumatore (exige associação: € 50 por ano ou € 25 para disputas de até € 50) e depois o órgão regulador AGCOM. Para um pacote [marcado como entregue mas não recebido](guide:delivered-not-received), consulte vizinhos e familiares primeiro e use o formulário específico na página de Suporte da BRT antes de partir para a reclamação formal.
+Destinatários também podem registrar reclamação formal: anexe o formulário de reclamação em PDF disponível na página [Carta dei servizi](https://www.brt.it/it/carta-dei-servizi/) ao formulário em services.brt.it/it/form-agcom. A BRT responde em até 45 dias. Sem resposta satisfatória, segue-se a conciliação por conciliazioni@brt.it com a Casa del Consumatore (exige associação: € 50 por ano ou € 25 para disputas de até € 50) e depois o órgão regulador AGCOM. Para um pacote [marcado como entregue mas não recebido](guide:delivered-not-received), consulte vizinhos e familiares primeiro e use o formulário específico na página de Suporte da BRT antes de partir para a reclamação formal.
 
 ## Telefone e atendimento ao cliente da BRT
 
 Estes são os canais da BRT para destinatários:
 
 - **Formulários:** pela página de [Suporte da BRT](https://services.brt.it/en/support), que substituiu o "Contact us": escolha seu caso (atraso, avaria, entregue mas não recebido etc.) para abrir o formulário. A página não exibe telefone.
-- **Ligação gratuita na Itália:** 800 278 708, de segunda a sexta das 8h30 às 18h30, segundo a carta de serviços italiana da BRT (a empresa não informa se aceita chamadas do exterior).
+- **Ligação gratuita:** 800 278 708, de segunda a sexta das 8h30 às 18h30, segundo a carta de serviços italiana da BRT (a empresa não informa se aceita chamadas do exterior).
 - **E-mail:** assistenzaclienti@brt.it, também previsto na carta de serviços, informando nome, sobrenome, códigos postais de coleta e entrega e o BRTcode, sob pena de não ser respondido.
 - **Chat** em brt.it, ou contato com sua **filial** pelo [localizador de filiais](https://services.brt.it/en/customer-service/search-for-a-branch).
 
@@ -89,11 +89,11 @@ O telefone de Bolonha presente nos documentos da BRT pertence à sede administra
 
 ## Como rastrear encomendas da BRT com o Peek
 
-O [Peek](/) reconhece códigos BRT de 12, 14 e 15 dígitos e IDs de volume iniciados por `EOB`. Para IDs `EOB` e a maioria dos códigos de 15 dígitos, a BRT é a única transportadora consultada em qualquer país; para 12 dígitos, o Peek consulta a BRT junto com outras transportadoras compatíveis. Para 14 dígitos, consulta a BRT na hora — ao lado das redes DPD — se seu país for a Itália (região do celular nos apps iPhone e Android, ou país de acesso no navegador); fora da Itália, consulta primeiro as redes DPD e outras empresas, recorrendo à BRT só se nenhuma reconhecer o código. Links do vas.brt.it com `brtCode=` também funcionam; BRTcodes de 19 dígitos e links de mybrt.it não são lidos.
+O [Peek](/) reconhece códigos BRT de 12, 14 e 15 dígitos e IDs de volume iniciados por `EOB`. Para IDs `EOB` e a maioria dos códigos de 15 dígitos, a BRT é a única transportadora consultada em qualquer país; para 12 dígitos, o Peek consulta a BRT junto com outras transportadoras compatíveis. Para 14 dígitos, consulta a BRT na hora — ao lado das redes DPD — se seu país for a Itália (região do celular nos apps iPhone e Android, ou país de acesso no navegador); fora da Itália, costuma consultar primeiro as redes DPD e outras empresas, recorrendo à BRT só se nenhuma reconhecer o código. Links do vas.brt.it com `brtCode=` também funcionam; BRTcodes de 19 dígitos e links de mybrt.it não são lidos.
 
-O Peek mostra os status da BRT em inglês, exceto retiradas em armário ou fermopoint, exibidas como "Entregue". Com o Peek em italiano, mostra os textos italianos da BRT e "Consegnata" na entrega; eventos que o Peek só conhece em inglês, como alguns de armário, permanecem em inglês. Ele coloca cada local no mapa, exibe o peso e pode notificar mudanças de status, omitindo remetente, destinatário, referência da loja, quantidade de volumes, cubagem e dados do ponto de retirada. A BRT não informa data prevista, mas em códigos de 14 dígitos o Peek pode mostrar a estimativa do rastreamento da DPD (que também lê códigos BRT) ou da Chronopost, se ela levou o pacote à Itália. A previsão some após a data ou antes se a BRT entregar, devolver, deixar em ponto de retirada, registrar tentativa falha ou reportar problema. Os horários da BRT não trazem fuso: o Peek os lê no horário da Itália (ou horário local de filiais no exterior) e mantém a ordem oficial da BRT.
+O Peek mostra os status da BRT em inglês, exceto retiradas em armário ou fermopoint, exibidas como "Entregue". Com o Peek em italiano, mostra os textos italianos da BRT e "Consegnata" na entrega; um pacote com um evento que o Peek só conhece em inglês, como um de armário, permanece em inglês. Ele coloca cada local no mapa, exibe o peso e pode notificar mudanças de status, omitindo remetente, destinatário, referência da loja, quantidade de volumes, cubagem e dados do ponto de retirada. A BRT não informa data prevista, mas em códigos de 14 dígitos o Peek pode mostrar a estimativa do rastreamento da DPD (que também lê códigos BRT) ou da Chronopost, se ela levou o pacote à Itália. A previsão some após a data ou antes se a BRT entregar, devolver, deixar em ponto de retirada, registrar tentativa falha ou reportar problema. Os horários da BRT não trazem fuso: o Peek os lê no horário da Itália (ou horário local de filiais no exterior) e mantém a ordem oficial da BRT.
 
-O Peek verifica até a cada 10 minutos e até a cada 2 minutos no dia em que o pacote sai para entrega — a partir das 6h no horário local ou meia hora antes da janela informada pela DPD ou Chronopost — enquanto o rastreador próprio da BRT ou DPD responde (a cada 5 minutos quando a DPD exige navegador); por meio de serviços de rastreamento, até a cada 15 minutos enquanto o pacote estiver aberto ou com alertas ligados. Após dois dias sem novidades (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), o Peek verifica de hora em hora.
+O Peek verifica até a cada 10 minutos e até a cada 2 minutos no dia em que o pacote sai para entrega — a partir das 6h no horário local ou meia hora antes da janela informada pela DPD ou Chronopost — enquanto o rastreador próprio da BRT ou DPD responde (a cada 5 minutos quando a DPD exige navegador); por meio de serviços de rastreamento, até a cada 15 minutos nesse dia, enquanto o pacote estiver aberto ou com alertas ligados. Após dois dias sem novidades (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), o Peek verifica de hora em hora.
 
 ## Perguntas sobre o rastreamento da BRT
 
@@ -132,4 +132,6 @@ O [buscador de fermopoint](https://www.brt.it/en/brt-fermopoint/) da BRT encontr
 - [BRT: Condizioni generali](https://www.brt.it/wp-content/uploads/sites/275/2026/01/CONDIZIONI-GENERALI-CONTRATTO-TARIFFARIO_IT_CON-LOGO_REV-31.pdf) – dias de guarda contratados
 - [BRT: Alert phishing](https://www.brt.it/en/news/2026/04/16/alert-phishing-sms-email/) – alerta contra mensagens falsas
 - [DPD: Home](https://www.dpd.com/en/) – marcas do grupo Geopost
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê, as janelas de entrega da DPD e da Chronopost
+- [Peek: Routing](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – com que frequência o Peek verifica: até a cada 10 minutos, a cada 2 ou 5 com o pacote saindo para entrega, meia hora antes de uma janela de entrega, de hora em hora por serviços de rastreamento (até a cada 15 minutos com o pacote saindo para entrega), de hora em hora quando nada muda
 :::

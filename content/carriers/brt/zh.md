@@ -14,7 +14,7 @@ BRTcode 位于 BRT 发送的短信和邮件、面单以及派送未成功后留�
 
 BRT 官方各页面对长度说法不一，请按格式辨认：
 
-| 格式（示例） | 说明 |
+| 格式（虚构） | 说明 |
 | --- | --- |
 | `482917360584` | 12 位数字：面单上的发货编号（shipment number）。 |
 | `48291736058419` | 14 位数字：BRTcode 或发货编号。 |
@@ -29,7 +29,7 @@ BRT 官方各页面对长度说法不一，请按格式辨认：
 
 ## BRT 物流状态中文说明
 
-vas.brt.it 上的 BRT 查询页面默认以意大利语打开，可切换英文；以下为常见英文文案。表头仍保留意大利语：`Data`（日期）、`Ora`（时间）、`Filiale`（负责网点，咨询时联系此网点）、`Evento`（事件）。brt.it 首页跳转的 myBRT 页面文案可能略有不同。
+vas.brt.it 上的 BRT 查询页面默认以意大利语打开，可切换英文；以下为其英文文案。表头仍保留意大利语：`Data`（日期）、`Ora`（时间）、`Filiale`（负责网点，咨询时联系此网点）、`Evento`（事件）。brt.it 首页跳转的 myBRT 页面文案可能有所不同。
 
 | BRT 状态原文 | 对你的含义 |
 | --- | --- |
@@ -39,8 +39,8 @@ vas.brt.it 上的 BRT 查询页面默认以意大利语打开，可切换英文�
 | `ARRIVED AT DEPOT` | 已到达 `Filiale` 一栏所标明的网点。 |
 | `FOR DELIVERY` | 正在快递员车上外出派送。 |
 | `NOTICE OF ATTEMPTED DELIVERY` | 派送未成功：无人签收，快递员已留下通知。 |
-| `UNKNOWN/INCOMPLETE CONSIGNEE` | 派送未成功：未能找到收件人或地址不完整。 |
-| `TURMOIL` | 因当地公共游行或示威活动暂时延误。 |
+| `UNKNOWN/INCOMPLETE CONSIGNEE` | 派送未成功：未能找到收件人或地址。 |
+| `TURMOIL` | 因公共游行或示威活动暂时延误。 |
 | `PATRONAL HOLIDAY` | 目的地城镇正值守护神节假期，包裹在到达派送网点前顺延一天，当天不派送。 |
 | `DELIVERED` | 已签收。 |
 | `ARRIVED AT BRT-fermopoint` | 包裹已到 BRT-fermopoint 合作门店等你领取。 |
@@ -56,7 +56,7 @@ vas.brt.it 上的 BRT 查询页面默认以意大利语打开，可切换英文�
 
 如果你不在家，BRT 会通过邮件、短信或纸质单留下通知，通常在下一个工作日再次派送。BRT 服务宪章注明会进行第二次尝试，若仍未成功，当地网点会致电联系。
 
-通过 BRT 通知里的链接，或在 myBRT 应用及 mybrt.it 输入 BRTcode 加邮编或 PIN 码，你可以另选日期或时段、改投 BRT-fermopoint 或网点自提、解除寄存滞留，或在寄件人允许时修改地址。
+通过 BRT 通知里的链接，或在 myBRT 应用及 mybrt.it 输入 BRTcode 加邮编或 PIN 码，你或许可以另选日期或时段、改投 BRT-fermopoint 或网点自提、解除寄存滞留，或在寄件人允许时修改地址。
 
 **寄存滞留（“in giacenza”）。** 原因包括收件人不在或查无此人、地址有误或不完整以及拒收；物流详情会标明具体原因。可通过 BRT 通知或查询页面解除寄存。BRT 会向寄件人征询处理指示；其服务宪章说明，如寄件人未给出书面指示，将在通知寄件人 10 天后退回包裹（商家合同另有约定的除外）。寄件人给出指示后，详情页会注明是否产生仓储费以及由寄件人还是收件人承担；BRT 未公开具体金额。
 
@@ -89,9 +89,9 @@ BRT 文件中标注的博洛尼亚电话号码是总部办公电话，并非客�
 
 ## 使用 Peek 查询 BRT 包裹
 
-[Peek](/) 会识别 BRT 的 12 位、14 位、15 位数字单号以及以 `EOB` 开头的包裹 ID。对于 `EOB` 编号及大多数 15 位数字，无论你身处哪个国家，Peek 都只向 BRT 查询；对于 12 位数字，Peek 会同时向 BRT 及其他共用该格式的承运商查询。对于 14 位数字，如果你所在国家为意大利（在 iPhone 和 Android 应用中按手机地区设置判定，网页端按添加包裹时所在国家判定），Peek 会立即同时查询 BRT 和 DPD 各网络；在其他国家通常会先查 DPD 各网络及其他承运商，均无结果时再查 BRT。带有 `brtCode=` 的 vas.brt.it 链接同样适用；19 位 BRTcode 和 mybrt.it 链接暂不支持。
+[Peek](/) 会识别 BRT 的 12 位、14 位、15 位数字单号以及以 `EOB` 开头的包裹 ID。对于 `EOB` 编号及大多数 15 位数字，无论你身处哪个国家，Peek 都只向 BRT 查询；对于 12 位数字，Peek 会同时向 BRT 及其他共用该格式的承运商查询。对于 14 位数字，如果你所在国家为意大利（在 iPhone 和 Android 应用中按手机地区设置判定，网页端按添加包裹时所在国家判定），Peek 会立即同时查询 BRT 和 DPD 各网络；在其他国家通常会先查 DPD 各网络及其他承运商，均无结果时再查 BRT。带有 `brtCode=` 的 vas.brt.it 链接同样适用；19 位 BRTcode 和 mybrt.it 链接不支持。
 
-Peek 会显示 BRT 的英文状态（自提柜或 fermopoint 取件统一显示为“已签收”）。若将 Peek 语言设为意大利语，则会显示 BRT 的意大利语原文，签收显示为“Consegnata”；仅具备英文文案的扫描（例如部分自提柜记录）保留英文。页面会在地图上标出每条扫描地点、显示包裹重量并在状态变化时发送通知，同时略去寄件人、收件人、商家参考号、总件数、体积及取件点详情。BRT 本身不提供预计送达日，但对于 14 位单号，Peek 可以引用同样支持读取 BRT 单号的 DPD 预计日期（若由 Chronopost 承运至意大利，也可引用 Chronopost 的预计日期）。该预计日期会在过期后消失，若 BRT 提前签收、退回、转存自提点、派送失败或报告异常也会随之撤下。BRT 扫描不含时区：Peek 按意大利时间（境外站点按当地站点时间）解析，并严格按 BRT 原始顺序列出历史记录。
+Peek 会显示 BRT 的英文状态（自提柜或 fermopoint 取件统一显示为“已签收”）。若将 Peek 语言设为意大利语，则会显示 BRT 的意大利语原文，签收显示为“Consegnata”；若包裹有 Peek 只知道英文文案的扫描（例如自提柜扫描），整个包裹仍以英文显示。页面会在地图上标出每条扫描地点、显示包裹重量并可在状态变化时通知你，同时略去寄件人、收件人、商家参考号、总件数、体积及取件点详情。BRT 本身不提供预计送达日，但对于 14 位单号，Peek 可以引用同样支持读取 BRT 单号的 DPD 预计日期（若由 Chronopost 承运至意大利，也可引用 Chronopost 的预计日期）。该预计日期会在过期后消失，若 BRT 提前签收、退回、转存自提点、派送失败或报告异常也会随之撤下。BRT 扫描不含时区：Peek 按意大利时间（境外站点按当地站点时间）解析，并严格按 BRT 原始顺序列出历史记录。
 
 Peek 最高每 10 分钟检查一次；包裹进入派送当天，只要 BRT 或 DPD 官方查询正常响应，自当地时间早上 6 点起（若 DPD 或 Chronopost 提供了派送时段，则自时段开始前半小时起）最高每 2 分钟检查一次（DPD 需用浏览器查询时为每 5 分钟）；通过物流查询服务时，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次。若连续两天无新动态（包裹仍处于“已生成面单”或“已揽收”状态时为 12 小时），Peek 会转为每小时检查一次。
 
@@ -132,4 +132,6 @@ Peek 最高每 10 分钟检查一次；包裹进入派送当天，只要 BRT 或
 - [BRT: Condizioni generali](https://www.brt.it/wp-content/uploads/sites/275/2026/01/CONDIZIONI-GENERALI-CONTRATTO-TARIFFARIO_IT_CON-LOGO_REV-31.pdf) – 合同约定寄存天数
 - [BRT: Alert phishing](https://www.brt.it/en/news/2026/04/16/alert-phishing-sms-email/) – 2026 年 4 月 16 日防钓鱼提醒
 - [DPD: Home](https://www.dpd.com/en/) – Geopost 集团旗下品牌说明
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取的内容、DPD 与 Chronopost 的派送时段
+- [Peek: Routing](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – Peek 的检查频率：最高每 10 分钟一次，派送中每 2 或 5 分钟一次，派送时段开始前半小时，通过物流查询服务时每小时一次（派送中最高每 15 分钟一次），无动态时每小时一次
 :::

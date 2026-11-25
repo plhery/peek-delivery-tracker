@@ -2315,6 +2315,17 @@ export const CARRIER_CAPABILITIES = {
           "parcelnumber"
         ],
         "detectFromNumber": true
+      },
+      {
+        "domains": [
+          "delivery-status.com",
+          "prtl.parcellab.com"
+        ],
+        "params": [
+          "trackingNo",
+          "tno"
+        ],
+        "detectFromNumber": true
       }
     ],
     "detectionRules": [],
@@ -21121,7 +21132,6 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "trackingUrlTemplate": "https://www.saee.sa/en/track-your-shipment?waybill={trackingNumber}",
     "linkRules": [
       {
         "domains": [
@@ -21149,8 +21159,7 @@ export const CARRIER_CAPABILITIES = {
         "pattern": "^OS\\d{8}KS$",
         "confidence": "high"
       }
-    ],
-    "trackingSearchUrl": "https://www.saee.sa/en/track-your-shipment"
+    ]
   },
   "scg-express": {
     "displayName": "SCG Express",
@@ -24734,7 +24743,6 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://track.afghanpost.gov.af/",
     "helpUrl": "https://afghanpost.gov.af/dr/%D8%AA%D9%85%D8%A7%D8%B3-%D8%A8%D8%A7-%D9%85%D8%A7"
   },
   "corre": {
@@ -30961,9 +30969,7 @@ export const CARRIER_CAPABILITIES = {
         "pattern": "^(?:DXB|DOH|FAH|TAI)\\d{7,8}$",
         "confidence": "low"
       }
-    ],
-    "trackingSearchUrl": "https://makati-express.com/tracking/",
-    "trackingUrlTemplate": "https://makati-express.com/tracking/?awbnumber={trackingNumber}"
+    ]
   },
   "netpost-vn": {
     "displayName": "Netpost",
@@ -42523,7 +42529,6 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "trackingUrlTemplate": "https://ecom.yolka.io/parcels/{trackingNumber}",
     "linkRules": [
       {
         "domains": [
@@ -42539,8 +42544,7 @@ export const CARRIER_CAPABILITIES = {
         "path": "^/(?:(?:ru|en|tr|cn)/)?parcels/([^/?#]+)/?$"
       }
     ],
-    "detectionRules": [],
-    "trackingSearchUrl": "https://ecom.yolka.io/tracknumber"
+    "detectionRules": []
   },
   "hongsuda": {
     "displayName": "HSD Express",
@@ -46104,7 +46108,6 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "trackingUrlTemplate": "https://track.withrider.com/#/track/{trackingNumber}",
     "linkRules": [
       {
         "domains": [
@@ -46114,8 +46117,7 @@ export const CARRIER_CAPABILITIES = {
         "fragment": "^/track/([A-Za-z0-9]+)/?$"
       }
     ],
-    "detectionRules": [],
-    "trackingSearchUrl": "https://track.withrider.com/"
+    "detectionRules": []
   },
   "union-express": {
     "displayName": "Union Express",
@@ -46588,7 +46590,6 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "trackingUrlTemplate": "https://tms.acrocargo.com/echobase-web/track-order.xhtml?trackNumber={trackingNumber}",
     "linkRules": [
       {
         "domains": [
@@ -46600,8 +46601,7 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
-    "trackingSearchUrl": "https://tms.acrocargo.com/echobase-web/track-order.xhtml"
+    "detectionRules": []
   },
   "aics": {
     "displayName": "AICS",
@@ -49540,8 +49540,7 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
-    "trackingSearchUrl": "https://www.okayparcel.com/en"
+    "detectionRules": []
   },
   "tnt-au": {
     "displayName": "TNT Australia",
@@ -70362,6 +70361,36 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": []
+  },
+  "centex": {
+    "displayName": "CENTEX",
+    "aliases": [
+      "忠进"
+    ],
+    "countries": [
+      "CN",
+      "BR"
+    ],
+    "color": "#3E63BC",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "centex"
+    },
+    "trackingUrlTemplate": "https://www.baxida.cn/default/index/track?trackNos={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.baxida.cn",
+          "baxida.cn"
+        ],
+        "pathPattern": "^/default/index/track/?$",
+        "query": "^(?:.*&)?trackNos=([^&]+)(?=&|$)"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.baxida.cn/default/index/get-track-detail"
   }
 } as const;
 
@@ -72507,7 +72536,8 @@ export const CARRIER_IDS = [
   "wcxex",
   "we-logistics",
   "xys-logistics",
-  "ycex"
+  "ycex",
+  "centex"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

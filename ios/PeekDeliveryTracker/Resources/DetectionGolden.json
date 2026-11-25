@@ -107951,6 +107951,14 @@
     ]
   },
   {
+    "input": "NX031367846BR",
+    "carrier": "correios-br",
+    "confidence": "high",
+    "candidates": [
+      "correios-br"
+    ]
+  },
+  {
     "input": "NZC008714112",
     "carrier": "dai-post",
     "confidence": "high",
@@ -123646,6 +123654,12 @@
     "asked": [
       "hitch"
     ]
+  },
+  {
+    "input": "ZJ00471201019000851",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "ZJKJ1999999980",

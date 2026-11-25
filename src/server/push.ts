@@ -461,6 +461,11 @@ export interface PushSummary {
   expired: number;
   /** What each channel that dispatched sent: the composite's count, by the channel names its logs use. */
   sentByChannel?: Partial<Record<PushChannel, number>>;
+  /**
+   * The failed sends a UnifiedPush distributor answered with its own failure (5xx: its outage, or ntfy's 507 while the
+   * phone's app is not connected), counted in `failed` too. The phone chose that host: they say nothing of this server.
+   */
+  distributorFailed?: number;
 }
 
 /** An account's browsers, its iPhones, its Live Activities, and the alerts of parcel links over either push. */
@@ -1569,6 +1574,9 @@ abstract class AppPushNotificationService {
             const failures = (this.#retries.get(deviceId)?.failures ?? 0) + 1;
             const wait = Math.min(UNIFIEDPUSH_RETRY_MAX_MS, UNIFIEDPUSH_RETRY_MS * 2 ** Math.min(failures - 1, 10));
             this.#retries.set(deviceId, { failures, at: this.now() * 1_000 + wait });
+            if (error instanceof UnifiedPushError && error.statusCode >= 500) {
+              summary.distributorFailed = (summary.distributorFailed ?? 0) + 1;
+            }
           }
           logDeliveryFailure('native', error, this.transport);
           await this.client.updateNativePushDevice(deviceId, {
@@ -2137,6 +2145,7 @@ export class CompositePushNotificationService {
       combined.attempted += summary.attempted;
       combined.sent += summary.sent;
       combined.failed += summary.failed;
+      if (summary.distributorFailed) combined.distributorFailed = (combined.distributorFailed ?? 0) + summary.distributorFailed;
       combined.expired += summary.expired;
       combined.sentByChannel[channel] = (combined.sentByChannel[channel] ?? 0) + summary.sent;
     };

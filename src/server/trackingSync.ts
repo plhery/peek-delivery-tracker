@@ -2489,8 +2489,9 @@ export class TrackingSyncService {
       const push = await this.notifier.dispatch(signal);
       addPushSummary(summary, push);
       // A failed send stays pending and the next dispatch tries it again, which heals a push
-      // service's blip: only deliveries that fail again are reported.
-      this.#pushFailureStreak = push.failed > 0 ? this.#pushFailureStreak + 1 : 0;
+      // service's blip: only deliveries that fail again are reported. A UnifiedPush distributor's own failure
+      // (one phone's ntfy refusing it while the app is not connected) is that phone's, not this server's.
+      this.#pushFailureStreak = push.failed - (push.distributorFailed ?? 0) > 0 ? this.#pushFailureStreak + 1 : 0;
       if (this.#pushFailureStreak > 1 && shouldReportRepeatedFailure(this.#pushFailureStreak - 1)) {
         captureOperationalError(new Error('Push dispatch returned failed deliveries'), {
           component: 'push',

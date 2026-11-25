@@ -3809,6 +3809,22 @@ describe('TrackingSyncService', () => {
     expect(report).toHaveBeenCalledWith(expect.any(Error), { component: 'push', operation: 'dispatch', failureCount: 2 });
   });
 
+  it('reports no streak of a UnifiedPush distributor refusing its phone, and still counts the failed sends', async () => {
+    const report = vi.spyOn(observability, 'captureOperationalError').mockReturnValue(null);
+    const notifier = { dispatch: vi.fn().mockResolvedValue({ attempted: 1, sent: 0, failed: 1, expired: 0, distributorFailed: 1 }) };
+    const service = new TrackingSyncService(fakeClient() as unknown as SupabaseServiceClient,
+      { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, notifier as never);
+    const parcel = { id: 'parcel', user_id: 'owner', carrier: 'swiss-post', tracking_number: 'TEST1234' };
+    // ntfy answers 507 while the phone's app is not connected, dispatch after dispatch.
+    for (let index = 0; index < 5; index++) await expect(service.syncPackage(parcel)).resolves.toMatchObject({ notification_errors: 1 });
+    expect(report).not.toHaveBeenCalled();
+    // Another failure beside it is this server's or its push services', and counts.
+    notifier.dispatch.mockResolvedValue({ attempted: 2, sent: 0, failed: 2, expired: 0, distributorFailed: 1 });
+    await service.syncPackage(parcel);
+    await service.syncPackage(parcel);
+    expect(report).toHaveBeenCalledExactlyOnceWith(expect.any(Error), { component: 'push', operation: 'dispatch', failureCount: 2 });
+  });
+
   it('finishes the job when the delivery emails cannot be dispatched, and reports it', async () => {
     const report = vi.spyOn(observability, 'captureOperationalError').mockReturnValue(null);
     const client = fakeClient();

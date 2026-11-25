@@ -156,7 +156,8 @@ describe('an account\'s notices to a UnifiedPush device', () => {
 
   it('wait a minute after a refused send, then twice as long after each refusal in a row, up to a quarter of an hour', async () => {
     // ntfy answers 507 while the phone's app is not connected: each dispatch would meet the same refusal.
-    expect(await service.dispatch()).toEqual({ attempted: 1, sent: 0, failed: 1, expired: 0 });
+    // The distributor's own failure: the phone's, which the job's streak of failed deliveries leaves out.
+    expect(await service.dispatch()).toEqual({ attempted: 1, sent: 0, failed: 1, expired: 0, distributorFailed: 1 });
     clock += 59_000;
     expect(await service.dispatch()).toEqual({ attempted: 0, sent: 0, failed: 0, expired: 0 });
     clock += 1_000;
@@ -171,6 +172,11 @@ describe('an account\'s notices to a UnifiedPush device', () => {
     await service.dispatch();
     expect(post).toHaveBeenCalledTimes(7);
     expect(delivered).not.toHaveBeenCalled();
+  });
+
+  it('count a refusal of the server, as of its VAPID signature, as a failure of its own', async () => {
+    post.mockResolvedValue(403);
+    expect(await service.dispatch()).toEqual({ attempted: 1, sent: 0, failed: 1, expired: 0 });
   });
 
   it('go out once the distributor takes them, and the next refusal waits a minute again', async () => {

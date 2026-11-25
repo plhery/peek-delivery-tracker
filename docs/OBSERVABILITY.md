@@ -1009,7 +1009,8 @@ provider failure in an `AggregateError` so every cause is visible.
   gone, is retried by the next dispatch (a UnifiedPush device after its wait,
   [ARCHITECTURE.md](ARCHITECTURE.md)), so a dispatch with failed deliveries is only logged.
   While every dispatch keeps failing some, it is reported 1, 2, 3, 4, 8, 16… dispatches after
-  the first. A channel that cannot dispatch at all is reported at once, and so is a dispatch
+  the first. A UnifiedPush distributor's own failure (5xx, as ntfy's 507 while the phone's app
+  is not connected) is that phone's: it is logged and counted, and never reported. A channel that cannot dispatch at all is reported at once, and so is a dispatch
   that could not take or keep its lease (`WorkerLeaseLost`).
 - **Input requirements**: requests for a postcode or other tracking input stay in logs
   and breadcrumbs without opening Sentry issues. Each lookup made with a postcode the

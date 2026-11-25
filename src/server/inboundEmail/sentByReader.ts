@@ -58,8 +58,21 @@ const PHRASES: readonly string[] = [
   String.raw`(?:je|uw)\s+koper`,
   String.raw`je\s+hebt\s+(?:\S+\s+){0,4}?(?:verzonden|verstuurd|verkocht|afgegeven)`,
 ];
-/** Not "once your return is received", which a shop's rules say before any return. */
-const NOT_YET = String.raw`(?<!(?:once|when|after|until|if|as)\s+)`;
+/**
+ * Not "once your return is received", which a shop's rules say before any return: the words that open such a clause in
+ * each language, then the article some put before "your".
+ */
+const notYet = (words: string, article = '') => String.raw`(?<!(?:${words})\s+${article})`;
+const NOT_YET = notYet('once|when|after|until|if|as');
+const NOT_YET_FR = notYet(String.raw`des\s+que|lorsque|quand|une\s+fois(?:\s+que)?|apres\s+que|si|tant\s+que`);
+const NOT_YET_ES = notYet(String.raw`una\s+vez(?:\s+que)?|cuando|en\s+cuanto|tan\s+pronto\s+como|despues\s+de\s+que|si`);
+const NOT_YET_IT = notYet(String.raw`una\s+volta\s+che|quando|non\s+appena|appena|dopo\s+che|se`, String.raw`(?:il\s+)?`);
+const NOT_YET_PT = notYet(String.raw`assim\s+que|quando|logo\s+que|depois\s+que|uma\s+vez\s+que|se`, String.raw`(?:a\s+)?`);
+const NOT_YET_PL = notYet(String.raw`gdy(?:\s+tylko)?|kiedy|jak\s+tylko|po\s+tym\s+jak|jesli|jezeli`, String.raw`(?:twoj\s+)?`);
+const NOT_YET_RU = notYet(String.raw`как\s+только|когда|после\s+того\s+как|если`, String.raw`(?:ваш\s+)?`);
+const NOT_YET_NL = notYet('zodra|als|wanneer|nadat|indien|tot');
+/** German puts the verb second: "Nach Eingang Ihrer Rücksendung erhalten Sie den Kaufpreis zurück" is no return received. */
+const NO_VERB_AFTER = String.raw`(?!\s+(?:sie|du|ihr|wir|ist|sind|wurde|worden|wird|werden|hat|haben)(?![\p{L}\p{N}]))`;
 /** A return the reader sends back, once the email says what became of it: registered, dropped off, on its way, received. */
 const RETURNS: readonly string[] = [
   // en
@@ -69,9 +82,9 @@ const RETURNS: readonly string[] = [
   String.raw`here(?:'s|\s+is)\s+your\s+return\s+label|your\s+return\s+label\s+is\s+ready`,
   String.raw`return\s+(?:received|registered|confirmed|dropped\s+off|approved)`,
   // fr
-  String.raw`(?:ton|votre)\s+(?:colis\s+(?:de\s+)?)?retour\s+(?:a\s+(?:bien\s+)?ete\s+|est\s+(?:bien\s+)?)(?:enregistre|recu|depose|valide|accepte|confirme|arrive|pris\s+en\s+charge|rembourse|en\s+(?:route|chemin|cours\s+d'acheminement))`,
-  String.raw`nous\s+avons\s+(?:bien\s+)?recu\s+(?:ton|votre)\s+(?:colis\s+(?:de\s+)?)?retour`,
-  String.raw`(?:ta|votre)\s+demande\s+de\s+retour\s+(?:a\s+(?:bien\s+)?ete|est)\s+(?:enregistree|acceptee|validee|confirmee|approuvee)`,
+  String.raw`${NOT_YET_FR}(?:ton|votre)\s+(?:colis\s+(?:de\s+)?)?retour\s+(?:a\s+(?:bien\s+)?ete\s+|est\s+(?:bien\s+)?)(?:enregistre|recu|depose|valide|accepte|confirme|arrive|pris\s+en\s+charge|rembourse|en\s+(?:route|chemin|cours\s+d'acheminement))`,
+  String.raw`${NOT_YET_FR}nous\s+avons\s+(?:bien\s+)?recu\s+(?:ton|votre)\s+(?:colis\s+(?:de\s+)?)?retour`,
+  String.raw`${NOT_YET_FR}(?:ta|votre)\s+demande\s+de\s+retour\s+(?:a\s+(?:bien\s+)?ete|est)\s+(?:enregistree|acceptee|validee|confirmee|approuvee)`,
   String.raw`voici\s+(?:ton|votre)\s+etiquette\s+(?:de\s+)?retour`,
   String.raw`retour\s+(?:enregistre|confirme|valide|accepte)`,
   // de
@@ -79,34 +92,34 @@ const RETURNS: readonly string[] = [
   String.raw`wir\s+haben\s+(?:deine|ihre)\s+(?:retoure|rucksendung)\s+(?:\S+\s+){0,2}?erhalten`,
   String.raw`danke\s+fur\s+(?:deine|ihre)\s+(?:retoure|rucksendung)`,
   String.raw`hier\s+ist\s+(?:dein|ihr)\s+(?:retouren|rucksende)(?:etikett|label|schein)`,
-  String.raw`(?:retoure|rucksendung)\s+(?:erhalten|eingegangen|angemeldet|registriert|bestatigt)`,
+  String.raw`(?:retoure|rucksendung)\s+(?:erhalten|eingegangen|angemeldet|registriert|bestatigt)${NO_VERB_AFTER}`,
   // es
-  String.raw`(?:tu|su)\s+devolucion\s+(?:ha\s+sido|se\s+ha|fue|esta\s+(?:en\s+camino|registrada|confirmada|aceptada|aprobada))`,
-  String.raw`(?:hemos\s+recibido|gracias\s+por)\s+(?:tu|su)\s+devolucion`,
+  String.raw`${NOT_YET_ES}(?:tu|su)\s+devolucion\s+(?:ha\s+sido|se\s+ha|fue|esta\s+(?:en\s+camino|registrada|confirmada|aceptada|aprobada))`,
+  String.raw`${NOT_YET_ES}(?:hemos\s+recibido|gracias\s+por)\s+(?:tu|su)\s+devolucion`,
   String.raw`aqui\s+tienes\s+(?:tu|la)\s+etiqueta\s+de\s+devolucion`,
   String.raw`devolucion\s+(?:registrada|recibida|confirmada|aceptada|aprobada)`,
   // it
-  String.raw`(?:il\s+)?tuo\s+reso\s+(?:e\s+stato|e\s+in\s+viaggio|e\s+arrivato)`,
-  String.raw`(?:abbiamo\s+ricevuto|grazie\s+per)\s+il\s+tuo\s+reso`,
+  String.raw`${NOT_YET_IT}(?:il\s+)?tuo\s+reso\s+(?:e\s+stato|e\s+in\s+viaggio|e\s+arrivato)`,
+  String.raw`${NOT_YET_IT}(?:abbiamo\s+ricevuto|grazie\s+per)\s+il\s+tuo\s+reso`,
   String.raw`ecco\s+la\s+tua\s+etichetta\s+di\s+reso`,
   String.raw`reso\s+(?:registrato|ricevuto|confermato|accettato|approvato)`,
   // pt
-  String.raw`(?:tua|sua)\s+devolucao\s+(?:foi|esta\s+(?:a\s+caminho|em\s+transito|registada|registrada|confirmada|aprovada|aceite|aceita))`,
-  String.raw`(?:recebemos|obrigad[oa]\s+pela)\s+(?:a\s+)?(?:tua|sua)\s+devolucao`,
+  String.raw`${NOT_YET_PT}(?:tua|sua)\s+devolucao\s+(?:foi|esta\s+(?:a\s+caminho|em\s+transito|registada|registrada|confirmada|aprovada|aceite|aceita))`,
+  String.raw`${NOT_YET_PT}(?:recebemos|obrigad[oa]\s+pela)\s+(?:a\s+)?(?:tua|sua)\s+devolucao`,
   String.raw`devolucao\s+(?:registada|registrada|recebida|confirmada|aprovada|aceite|aceita)`,
   // pl
-  String.raw`twoj\s+zwrot\s+(?:zosta[łl]|jest\s+w\s+drodze|dotar[łl])`,
-  String.raw`(?:otrzymalismy|dziekujemy\s+za)\s+(?:twoj\s+)?zwrot(?!\s+(?:pieniedzy|srodkow|kosztow|platnosci))`,
+  String.raw`${NOT_YET_PL}twoj\s+zwrot\s+(?:zosta[łl]|jest\s+w\s+drodze|dotar[łl])`,
+  String.raw`${NOT_YET_PL}(?:otrzymalismy|dziekujemy\s+za)\s+(?:twoj\s+)?zwrot(?!\s+(?:pieniedzy|srodkow|kosztow|platnosci))`,
   String.raw`paczka\s+zwrotna\s+(?:zosta[łl]a|jest|dotar[łl]a)`,
   String.raw`oto\s+(?:twoja\s+)?etykieta\s+zwrotna`,
-  String.raw`zwrot\s+(?:zosta[łl]\s+)?(?:przyjety|zarejestrowany|potwierdzony|nadany|odebrany)`,
+  String.raw`${NOT_YET_PL}zwrot\s+(?:zosta[łl]\s+)?(?:przyjety|zarejestrowany|potwierdzony|nadany|odebrany)`,
   // ru
-  String.raw`ваш\s+возврат\s+(?:оформлен|принят|зарегистрирован|получен|в\s+пути|доставлен)`,
-  String.raw`(?:мы\s+получили|спасибо\s+за)\s+(?:ваш\s+)?возврат(?!\s+(?:денег|средств))`,
-  String.raw`возврат\s+(?:оформлен|принят|зарегистрирован|получен)`,
+  String.raw`${NOT_YET_RU}ваш\s+возврат\s+(?:оформлен|принят|зарегистрирован|получен|в\s+пути|доставлен)`,
+  String.raw`${NOT_YET_RU}(?:мы\s+получили|спасибо\s+за)\s+(?:ваш\s+)?возврат(?!\s+(?:денег|средств))`,
+  String.raw`${NOT_YET_RU}возврат\s+(?:оформлен|принят|зарегистрирован|получен)`,
   // nl
-  String.raw`(?:je|uw)\s+(?:retour|retourzending|retourpakket)\s+(?:is|werd|wordt)\s+(?:\S+\s+){0,3}?(?:ontvangen|aangemeld|geregistreerd|bevestigd|onderweg|afgegeven|verwerkt|goedgekeurd)`,
-  String.raw`wij?\s+hebben\s+(?:je|uw)\s+(?:retour|retourzending|retourpakket)\s+(?:\S+\s+){0,2}?ontvangen`,
+  String.raw`${NOT_YET_NL}(?:je|uw)\s+(?:retour|retourzending|retourpakket)\s+(?:is|werd|wordt)\s+(?:\S+\s+){0,3}?(?:ontvangen|aangemeld|geregistreerd|bevestigd|onderweg|afgegeven|verwerkt|goedgekeurd)`,
+  String.raw`${NOT_YET_NL}wij?\s+hebben\s+(?:je|uw)\s+(?:retour|retourzending|retourpakket)\s+(?:\S+\s+){0,2}?ontvangen`,
   String.raw`bedankt\s+voor\s+(?:je|uw)\s+(?:retour|retourzending)`,
   String.raw`(?:retour|retourzending)\s+(?:aangemeld|ontvangen|geregistreerd|bevestigd)`,
 ];

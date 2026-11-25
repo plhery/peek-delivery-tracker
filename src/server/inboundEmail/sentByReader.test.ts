@@ -120,6 +120,18 @@ const RETURN_RULES: [string, string][] = [
   ['Заказ отправлен', 'Бесплатный возврат. Мы получили возврат денег. Возврат отправителю.'],
   ['订单已发货', '7天无理由退货。退货政策。'],
   ['Je pakket komt eraan', 'Gratis retourneren. Je pakket gaat retour afzender.'],
+  // What the shop does once a return arrives, said before any return.
+  ['Versandbestätigung', 'Ihre Bestellung ist unterwegs. Nach Eingang Ihrer Rücksendung erhalten Sie den Kaufpreis zurück.'],
+  ['Versandbestätigung', 'Wenn deine Retoure eingegangen ist, erstatten wir den Betrag.'],
+  ['Votre commande a été expédiée', 'Votre colis est en route. Dès que votre retour est reçu, nous procédons au remboursement.'],
+  ['Votre commande a été expédiée', 'Dès que nous avons reçu votre retour, nous vous remboursons.'],
+  ['Il tuo ordine è stato spedito', 'Il tuo pacco è in viaggio. Una volta che il tuo reso è stato ricevuto, ti rimborseremo.'],
+  ['Il tuo ordine è stato spedito', 'Non appena abbiamo ricevuto il tuo reso, ti rimborseremo.'],
+  ['Tu pedido ha sido enviado', 'Tu paquete está en camino. Una vez que tu devolución ha sido recibida, te reembolsaremos.'],
+  ['A sua encomenda foi enviada', 'Assim que recebemos a sua devolução, reembolsamos o valor.'],
+  ['Twoja paczka jest w drodze', 'Gdy twój zwrot został przyjęty, zwrócimy pieniądze.'],
+  ['Je bestelling is verzonden', 'Je pakket is onderweg. Zodra je retour is ontvangen, betalen we je terug.'],
+  ['Ваш заказ отправлен', 'Ваша посылка в пути. Как только ваш возврат получен, мы вернём деньги.'],
 ];
 
 describe('sentByReader', () => {

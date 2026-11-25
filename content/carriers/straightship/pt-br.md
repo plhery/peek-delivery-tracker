@@ -27,7 +27,7 @@ O rastreador da Straightship é em inglês. Ele mostra um resumo com "Package St
 
 | A Straightship mostra | O que significa para você |
 | --- | --- |
-| `Package information is created in the system` | A loja gerou a etiqueta. A Straightship ainda não está com o pacote: ele segue com o vendedor ou a caminho da Ásia. |
+| `Package information is created in the system` | A loja gerou a etiqueta. A Straightship ainda não está com o pacote: ele segue com o vendedor ou a caminho, vindo da Ásia. |
 | `Package Received with Origin Scan warehouse` | Primeiro registro da Straightship no Canadá, com cidade e província. |
 | `Package is received at a Straightship station` | Chegou a uma das unidades da Straightship. Páginas mais antigas exibem `Arrived at Facility`. |
 | `Package arrived at transit station` | Em uma unidade de trânsito, a caminho do centro local. |
@@ -41,9 +41,9 @@ O rastreador da Straightship é em inglês. Ele mostra um resumo com "Package St
 
 Duas mensagens de tentativa dizem o que fazer. `An attempt was made to deliver your package-consignee closed (please e-mail SS@straightship.com to make arrangement)` indica que o endereço estava fechado; a mesma frase com `unable to leave package at safe location` no lugar de `consignee closed` significa que o motorista não encontrou um local seguro para deixar o pacote. Ambas pedem que você envie um e-mail à Straightship para combinar a próxima entrega.
 
-Três detalhes costumam confundir:
+Três detalhes confundem as pessoas:
 
-- **O resumo fica para trás.** O campo "Package Status" pode continuar em `ReadyForShipping` (ou `Ready For Shipping`) enquanto o pacote já circula entre unidades. Leia o histórico: a linha mais recente é a que vale. Valores posteriores incluem `Shipped`, `Delivered` e `ReturnedToSender`.
+- **O resumo fica para trás.** O campo "Package Status" pode continuar em `ReadyForShipping` (ou `Ready For Shipping`) enquanto o pacote já circula entre unidades. Leia o histórico: a linha mais recente é a que vale. Os valores posteriores são `Shipped`, `Delivered` e `ReturnedToSender`.
 - **"In progress" não significa saiu para entrega.** `Delivery is in progress` e `Your order is in Progress` aparecem depois de uma entrega que não aconteceu, às vezes dias mais tarde e antes de uma devolução. Envie um e-mail à Straightship se vir essas mensagens.
 - **Os horários estão em UTC.** Abaixo do histórico, o rastreador informa que todos os horários estão em Tempo Universal Coordenado (UTC). Uma movimentação à noite no Canadá aparece com a data do dia seguinte.
 
@@ -79,7 +79,7 @@ Em encomendas enviadas por courier, a Canada Border Services Agency (CBSA) permi
 
 **Marcado como entregue, mas não chegou.** Procure a foto de entrega no rastreador da Straightship (nem sempre disponível), depois verifique com vizinhos, a portaria ou sala de correspondências do prédio e locais seguros perto da porta. A SHEIN observa que, em casos raros, o pacote aparece como entregue até 48 horas antes de chegar. Em seguida, use a opção "Delivered Order Not Received" do formulário e avise o vendedor; em pedidos da SHEIN, procure o botão "Parcel Delivered, Not Received" em Meus pedidos para abrir pedido de reembolso. Veja [entregue, mas não recebido](guide:delivered-not-received).
 
-**Devolvido.** `Package is being returned to shipper` significa que o pacote voltou para o vendedor. Peça reembolso ou novo envio à loja; veja [encomenda devolvida ao remetente](guide:returned-to-sender).
+**Devolvido.** `Package is being returned to shipper` significa que o pacote está voltando para o vendedor. Peça reembolso ou novo envio à loja; veja [encomenda devolvida ao remetente](guide:returned-to-sender).
 
 ## Telefone e atendimento da Straightship
 
@@ -97,7 +97,7 @@ O [Peek](/) identifica a Straightship de imediato a partir de códigos `STRTD` o
 
 O Peek lê o rastreador da Straightship e mostra o status, o histórico com cidade e província de cada registro e o horário da entrega. Ele interpreta os horários do rastreador como UTC, conforme indicado pela Straightship, e os converte para o fuso do seu aparelho; em peektracker.com e nos aplicativos para iPhone e Android, o histórico termina com "Horários no seu fuso horário:" seguido do nome do fuso. `Package will be delivered before 9:00pm` conta como saiu para entrega, as mensagens de tentativa contam como tentativa de entrega e `Delivery is in progress` aparece como em trânsito. O Peek não exibe previsão de entrega e omite a referência do cliente e a foto da entrega: veja esses dados no rastreador da Straightship. Como a Straightship não informa outra transportadora, o Peek acompanha o código Straightship até o fim.
 
-Enquanto o pacote estiver aberto, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos, ou a cada 2 minutos a partir das 6h (horário do Pacífico) no dia em que a Straightship registra saída para entrega — incluindo entregas noturnas — enquanto o rastreador da Straightship responder (por serviços de rastreamento, até a cada 15 minutos enquanto o pacote estiver aberto ou com alertas ligados); nos demais casos, de hora em hora. Após dois dias sem novidade (12 horas enquanto o pacote ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), o Peek passa a verificar de hora em hora. Você pode ativar alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode contatar a Straightship nem o vendedor por você.
+Enquanto o pacote estiver aberto, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos, ou a cada 2 minutos a partir das 6h (horário do Pacífico) no dia em que a Straightship registra saída para entrega — incluindo entregas noturnas — enquanto o rastreador da Straightship responder (por meio de serviços de rastreamento, até a cada 15 minutos nesse dia, enquanto o pacote estiver aberto ou com alertas ligados); nos demais casos, de hora em hora. Após dois dias sem novidade (12 horas enquanto o pacote ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), o Peek passa a verificar de hora em hora. Você pode ativar alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode contatar a Straightship nem o vendedor por você.
 
 ## Perguntas sobre o rastreamento Straightship
 
@@ -134,4 +134,5 @@ Os próprios motoristas da Straightship, saindo de seus centros no Canadá, até
 - [CBSA: Low-value shipment thresholds](https://www.cbsa-asfc.gc.ca/services/cusma-aceum/lvs-efv-eng.html) – por courier: CAD 20 de outros países, CAD 40 e CAD 150 dos EUA e México
 - [SHEIN Canada: Are there any additional fees for customs?](https://ca.shein.com/faq/detail?id=2307) – pedidos ao Canadá entregues com tributos pagos
 - [SHEIN Canada: My order is marked as delivered, but I haven't received it](https://ca.shein.com/faq/detail?id=2362) – marcado como entregue até 48 horas antes, botão Parcel Delivered, Not Received
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek mostra, formatos de código, textos dos eventos, aviso de UTC, valores do resumo, `Customs Released` em outros rastreadores, retenções aduaneiras liberadas dois dias depois, o repasse a partir da JS Express
 :::

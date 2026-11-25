@@ -15038,6 +15038,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee7532"
     },
     {
+      "id": "dhl-ecommerce",
+      "catalog": "dhl-ecommerce",
+      "slug": "rastreamento-dhl-ecommerce",
+      "title": "Rastreamento DHL eCommerce: códigos GM, status e contato",
+      "name": "DHL eCommerce",
+      "color": "#ffcc00"
+    },
+    {
       "id": "allegro-one",
       "catalog": "allegro-one",
       "slug": "rastreamento-allegro-one",
@@ -15116,6 +15124,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Lietuvos paštas: correio da Lituânia e lockers",
       "name": "Lietuvos paštas",
       "color": "#fedd00"
+    },
+    {
+      "id": "latvijas-pasts",
+      "catalog": "latvijas-pasts",
+      "slug": "rastreamento-latvijas-pasts",
+      "title": "Rastreamento Latvijas Pasts: códigos, status e armários",
+      "name": "Latvijas Pasts",
+      "color": "#0c72ba"
     },
     {
       "id": "ups",
@@ -18484,6 +18500,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee7532"
     },
     {
+      "id": "dhl-ecommerce",
+      "catalog": "dhl-ecommerce",
+      "slug": "dhl-ecommerce-kuaidi-chaxun",
+      "title": "DHL eCommerce 快递查询：GM 单号、状态与客服",
+      "name": "DHL eCommerce",
+      "color": "#ffcc00"
+    },
+    {
       "id": "allegro-one",
       "catalog": "allegro-one",
       "slug": "allegro-one-tracking",
@@ -18562,6 +18586,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "立陶宛邮政 Lietuvos paštas 查询：单号、状态与快递柜",
       "name": "Lietuvos paštas",
       "color": "#fedd00"
+    },
+    {
+      "id": "latvijas-pasts",
+      "catalog": "latvijas-pasts",
+      "slug": "latvijas-pasts-kuaidi-chaxun",
+      "title": "拉脱维亚邮政（Latvijas Pasts）查询：单号、状态与自提柜",
+      "name": "Latvijas Pasts",
+      "color": "#0c72ba"
     },
     {
       "id": "ups",

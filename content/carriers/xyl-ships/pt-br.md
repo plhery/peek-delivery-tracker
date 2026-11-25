@@ -1,6 +1,6 @@
 ---
 title: Rastreamento XYL-Ships: códigos NUDE e XLWL e status
-description: Rastreie um pacote da XYL-Ships (FXYL) da China: formatos NUDE e XLWL, significado de cada status no trânsito e na entrega e quem contatar.
+description: Rastreie um pacote da XYL-Ships (FXYL) da China: formatos NUDE e XLWL, significado de cada status no trânsito e na entrega, pausas sem atualização e quem contatar.
 slug: rastreamento-xyl-ships
 published: 2026-11-24
 updated: 2026-11-24
@@ -18,7 +18,7 @@ Procure o código de rastreamento no e-mail de envio da loja online ou na págin
 | `XLWL4829173640EX` | `XLWL`, 10 dígitos e `EX`. |
 | `XLWL4829173640EXP` | `XLWL`, 10 dígitos e `EXP`. |
 
-Como esses códigos são exclusivos da XYL-Ships, eles não se confundem com códigos postais nacionais. Se a loja lhe enviou um código postal internacional S10 (duas letras, nove dígitos e duas letras de país, como `CN`) ou um código específico de outra transportadora, confira [formatos de código de rastreamento](guide:tracking-number-formats) para ver qual empresa o emitiu.
+Como esses códigos são exclusivos da XYL-Ships, eles não se confundem com códigos de barras postais nacionais. Se a loja lhe enviou um código de rastreamento postal internacional S10 (duas letras, nove dígitos e duas letras de país, como `CN`) ou um código específico de outra transportadora, confira [formatos de código de rastreamento](guide:tracking-number-formats) para ver qual empresa o emitiu.
 
 ## O que significam os status da XYL-Ships
 
@@ -28,7 +28,7 @@ A XYL-Ships publica seus eventos de rastreamento em inglês, acompanhando o paco
 | --- | --- | --- |
 | `Shipment inbound in sorting center` | A XYL-Ships recebeu e bipou o pacote em seu centro de triagem de origem. | "Em trânsito" |
 | `Departed from sorting center`, `Arrived at sorting warehouse`, `Leaving warehouse` | Circulando pelos armazéns de triagem na origem antes do repasse para o transporte internacional. | "Em trânsito" |
-| `Hand over to transportation company`, `Departed from origin transportation center`, `Arrived at destination transportation center` | Entregue à transportadora de longa distância, saiu da China e chegou ao centro de entrada no país de destino. | "Em trânsito" |
+| `Hand over to transportation company`, `Departed from origin transportation center`, `Arrived at destination transportation center` | Entregue à transportadora internacional de longa distância, saiu da China e chegou ao centro de entrada no país de destino. | "Em trânsito" |
 | `Released and the package is being transferred`, `Package is being transferred locally` | Liberado no país de destino e seguindo na transferência doméstica local. | "Em trânsito" |
 | `Transfer again, send to the transportation partner department`, `Arrival at transportation partner department, waiting for processing`, `Leaving transportation partner department, sent to the transit hub` | Transferido ao setor de processamento da parceira local de entrega e despachado para seu hub de trânsito. | "Em trânsito" |
 | `Arriving at the transit hub, waiting for distribution`, `Leave the transit hub, transport to the destination city`, `Arriving at the destination city, about to distribute to the post office` | Triado no hub regional e transportado até sua cidade de destino para repasse local. | "Em trânsito" |
@@ -58,7 +58,7 @@ Quando você compra em uma loja online que envia via XYL-Ships, o vendedor é a 
 
 **Marcado como `Delivered`, mas não encontrado.** Verifique primeiro caixa de correio, entrada, portaria do prédio e vizinhos. Se ainda não aparecer, avise o vendedor imediatamente e peça comprovante de entrega. Veja [entregue, mas não recebido](guide:delivered-not-received).
 
-**Avariado, extraviado ou devolvido.** Guarde fotos da embalagem danificada e fale com a loja de imediato, ou abra disputa de proteção ao comprador no marketplace ou meio de pagamento antes que o prazo termine. Veja [encomenda avariada](guide:damaged-parcel), [encomenda extraviada](guide:lost-parcel) e [devolvida ao remetente](guide:returned-to-sender).
+**Avariado, extraviado ou devolvido.** Guarde fotos da embalagem danificada e fale com a loja de imediato, ou abra disputa de proteção ao comprador no marketplace ou meio de pagamento antes que o prazo do pedido termine. Veja [encomenda avariada](guide:damaged-parcel), [encomenda extraviada](guide:lost-parcel) e [devolvida ao remetente](guide:returned-to-sender).
 
 ## Contato da XYL-Ships (e por que falar primeiro com o vendedor)
 
@@ -69,7 +69,7 @@ Quando você compra em uma loja online que envia via XYL-Ships, o vendedor é a 
 
 Como a XYL-Ships atende empresas remetentes e não destinatários individuais, contate primeiro a loja online ou o marketplace em caso de extravio, erro de endereço ou reembolso — o comerciante tem acesso direto à conta de frete e aos canais de proteção ao comprador.
 
-> Desconfie de SMS ou e-mails inesperados pedindo que você clique em um link de pagamento para "liberar" ou "reagendar" um pacote da XYL-Ships. Confirme qualquer cobrança alfandegária real diretamente nos correios ou na autoridade aduaneira do seu país, nunca por um link recebido em mensagem. Veja [golpes de SMS de entrega](guide:delivery-scam-texts).
+> Desconfie de SMS ou e-mails inesperados pedindo que você clique em um link de pagamento para "liberar" ou "reagendar" um pacote da XYL-Ships. Confirme qualquer cobrança alfandegária real diretamente nos correios ou na autoridade aduaneira do seu país, nunca por uma mensagem de texto não verificada. Veja [golpes de SMS de entrega](guide:delivery-scam-texts).
 
 ## Como rastrear um pacote da XYL-Ships no Peek
 
@@ -77,9 +77,9 @@ O [Peek](/) reconhece códigos `NUDE` (`NUDE` + 10 dígitos + `EX`) e `XLWL` (`X
 
 O Peek lê diretamente o feed JSON de rastreamento da XYL-Ships e mostra a etapa ("Em trânsito", "Saiu para entrega" ou "Entregue"), os textos em inglês da XYL-Ships, a localidade da leitura quando informada e horários com deslocamento explícito de fuso horário (exibidos no fuso do seu aparelho). O Peek omite endereços de remetente e destinatário e referências internas do cliente, e não mostra data prevista, peso, número da transportadora local nem foto de entrega.
 
-Enquanto o pacote estiver aberto no Peek, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos; no dia em que a XYL-Ships mostra `Parcel currently being delivered`, a cada 2 minutos a partir das 6h no horário da leitura mais recente, enquanto o rastreador da XYL-Ships responder. Nos demais casos, verifica de hora em hora. Após 12 horas apenas em "Etiqueta criada" ou "Recebida pela transportadora", ou dois dias sem novidade, verifica de hora em hora em qualquer modo. Quando o rastreador da XYL-Ships não responde e o Peek recorre apenas a serviços de rastreamento, verifica de hora em hora, a cada 3 horas após um dia sem movimento e até a cada 15 minutos no dia em que sai para entrega enquanto o pacote estiver aberto ou com alertas ligados.
+Enquanto o pacote estiver aberto no Peek, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos; no dia em que a XYL-Ships mostra `Parcel currently being delivered`, a cada 2 minutos a partir das 6h no relógio da leitura mais recente da XYL-Ships, enquanto o rastreador da XYL-Ships responder. Nos demais casos, verifica de hora em hora. Após 12 horas apenas em "Etiqueta criada" ou "Recebida pela transportadora", ou dois dias sem novidade, verifica de hora em hora qualquer que seja a forma de acompanhar. Quando o rastreador da XYL-Ships não responde e o Peek recorre apenas a serviços de rastreamento, verifica de hora em hora, a cada 3 horas após um dia sem movimento e até a cada 15 minutos no dia em que sai para entrega enquanto o pacote estiver aberto ou com alertas ligados.
 
-Quando o registro mais recente completa quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza com a data desse registro, como "Sem atualizações desde seg., 12 de out.", e informa "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando XYL-Ships." Após três semanas sem novidade, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando XYL-Ships."
+Quando o registro mais recente completa quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza com a data desse registro, como "Sem atualizações desde seg 12 out". A página do pacote então mostra "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando XYL-Ships." Após três semanas sem novidade, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando XYL-Ships."
 
 Você pode escolher alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek apenas monitora o rastreamento e não pode informar a transportadora local nem falar com a XYL-Ships por você.
 
@@ -103,4 +103,5 @@ A XYL-Ships transfere os pacotes para uma parceira local de transporte ou para o
 
 :::sources
 - [XYL-Ships International Logistics](https://xylships.com/) – qualificações de agência aérea CAAC e IATA, frete aéreo/marítimo/ferroviário/rodoviário e pequenos pacotes internacionais de e-commerce, acesso Track Order e e-mail `fzxyl9527@163.com`
+- [Universal Parcel Scraper: xyl-ships](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/xyl-ships) – detecção dos formatos `NUDE` e `XLWL`, alias FXYL, integração com o rastreador JSON, mapeamento dos status em inglês, campos omitidos e frequência de atualização
 :::

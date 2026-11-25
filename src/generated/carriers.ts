@@ -18079,7 +18079,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "amazon-shipping",
       "catalog": "amazon-shipping",
       "slug": "amazon-shipping-tracking",
-      "title": "Amazon Shipping 亚马逊物流查询：单号与第三方卖家包裹",
+      "title": "Amazon Shipping 快递查询：单号、问题与求助",
       "name": "Amazon Shipping",
       "color": "#ff9900"
     },

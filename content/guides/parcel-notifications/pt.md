@@ -4,7 +4,7 @@ description: Recebe uma notificação quando a encomenda se mexe, sai para entre
 slug: notificacoes-entrega-encomendas
 picture: Um telemóvel acende-se com uma notificação de entrega, e o Pip, a encomenda com cara, toca um pequeno sino ao lado.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 O Peek envia uma notificação quando a tua encomenda tem novidades, no teu navegador em peektracker.com ou na app Peek para iPhone, iPad, Mac e Android. Tu escolhes quanto te conta, «Todos os registos», «Passos importantes» ou «Só a entrega», e com uma conta o Peek também te pode enviar um e-mail quando uma encomenda estiver pronta para levantamento ou for entregue.
@@ -47,7 +47,7 @@ O que significa cada passo: [os estados do seguimento explicados](guide:tracking
 
 Sim, encomenda a encomenda. No site, a página de uma encomenda tem um botão «Notificar-me»: antes de a encomenda se mexer diz «Notificar-me quando se mexer» e, enquanto a transportadora ainda não é conhecida, «Notificar-me quando for encontrada». Em «Notificar-me de», escolhe «Todos os registos», «Passos importantes» ou «Só a entrega» e depois «Ativar». Como resume o Peek: «Funciona com esta página fechada. Termina quando a encomenda for entregue». Depois de ativado, «Para cada encomenda neste navegador» dá as mesmas notificações às encomendas que segues nesse navegador.
 
-As apps sem conta não têm a definição «Notificações» nem escolha de passos. As apps para iPhone e Android pedem autorização na primeira vez que uma encomenda chega ao telemóvel e depois inscrevem sozinhas cada encomenda que ainda está a caminho: todas as leituras até se mexer, os passos importantes a partir daí. Num Mac, sem conta, a janela de definições não tem o separador Notificações.
+Sem conta, as apps também têm Definições › «Notificações», com as mesmas três opções em «Que atualizações queres receber?», guardadas no dispositivo para todas as encomendas que segue. Até escolheres, cada encomenda ainda a caminho recebe todas as leituras até se mexer e os passos importantes a partir daí. O interruptor da página desliga-as todas, e o sino de uma encomenda desliga as dela. A app para iPhone pede autorização na primeira vez que uma encomenda chega ao telemóvel; a app para Android convida-te com «Receber atualizações de entrega» na tua lista enquanto uma encomenda está a caminho. Num Mac, é o separador «Notificações» da janela de definições.
 
 Sem conta, as notificações nunca trazem o nome nem o número da encomenda, o Peek não te pode enviar e-mails e «Notificar-me» não aparece quando o percurso termina.
 
@@ -80,7 +80,7 @@ Está desativado até o ativares e nunca cobre leituras anteriores nem uma encom
 | As de uma encomenda | Toca no sino dela («Desativar notificações da encomenda»). Fica silenciada em todos os teus dispositivos |
 | O e-mail de entrega | O interruptor dele na página Notificações, ou «Desativa-o aqui» no fundo de cada e-mail |
 | Uma encomenda no site, sem conta | «Notificações ativas» → «Desativar» |
-| Uma encomenda na app, sem conta | Esquece a encomenda: as notificações dela param nesse dispositivo |
+| Uma encomenda na app, sem conta | Toca no sino dela, ou esquece a encomenda: as notificações dela param nesse dispositivo |
 
 Com o e-mail de entrega ativado, o sino de uma encomenda ainda a caminho abre em vez disso dois interruptores, «Notificações» e «E-mail à chegada», só para essa encomenda. A ligação do próprio e-mail não pede início de sessão e pergunta primeiro: «Desativar os e-mails de entrega?»
 

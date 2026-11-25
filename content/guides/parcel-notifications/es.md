@@ -4,7 +4,7 @@ description: Recibe una notificación cuando tu paquete se mueva, salga a repart
 slug: notificaciones-entrega-paquetes
 picture: Un móvil se ilumina con una notificación de entrega, y Pip, el paquete con cara, toca una campanita a su lado.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Peek te envía una notificación cuando tu paquete tiene novedades, en tu navegador en peektracker.com o en la app Peek para iPhone, iPad, Mac y Android. Tú eliges cuánto te cuenta, «Cada escaneo», «Pasos importantes» o «Solo la entrega», y con una cuenta Peek también puede escribirte un correo cuando un paquete está listo para recoger o se ha entregado.
@@ -47,7 +47,7 @@ Qué significa cada paso: [los estados del seguimiento, explicados](guide:tracki
 
 Sí, paquete a paquete. En la web, la página de un paquete tiene un botón «Notificarme»: antes de que el paquete se mueva dice «Notificarme cuando se mueva» y, mientras aún no se sabe el transportista, «Notificarme cuando aparezca». En «Notificarme de», elige «Cada escaneo», «Pasos importantes» o «Solo la entrega» y luego «Activar». Peek lo resume así: «Funciona aunque esta página esté cerrada. Se detiene cuando se entrega el paquete». Una vez activado, «Para todos los paquetes de este navegador» da las mismas notificaciones a los paquetes que sigues en ese navegador.
 
-Las apps sin cuenta no tienen el ajuste «Notificaciones» ni elección de pasos. Las apps de iPhone y Android piden permiso la primera vez que llega un paquete al móvil y después suscriben solas cada paquete que sigue en camino: cada escaneo hasta que se mueve, y los pasos importantes a partir de ahí. En un Mac, sin cuenta, la ventana de ajustes no tiene la pestaña Notificaciones.
+Sin cuenta, las apps también tienen Ajustes › «Notificaciones», con las mismas tres opciones bajo «¿Qué novedades quieres recibir?», guardadas en el dispositivo para cada paquete que sigue. Hasta que elijas, cada paquete que sigue en camino recibe cada escaneo hasta que se mueve, y los pasos importantes a partir de ahí. El interruptor de la página las apaga todas, y la campana de un paquete apaga las suyas. La app de iPhone pide permiso la primera vez que llega un paquete al móvil; la de Android te invita con «Recibir novedades de entrega» en tu lista mientras un paquete está en camino. En un Mac, es la pestaña «Notificaciones» de la ventana de ajustes.
 
 Sin cuenta, las notificaciones nunca llevan el nombre ni el número del paquete, Peek no puede escribirte correos y «Notificarme» no aparece cuando el trayecto ha terminado.
 
@@ -80,7 +80,7 @@ Está desactivado hasta que lo actives, y nunca cubre escaneos anteriores ni un 
 | Las de un paquete | Toca su campana («Desactivar notificaciones del paquete»). Queda silenciado en todos tus dispositivos |
 | El correo de entrega | Su interruptor en la página Notificaciones, o «Desactívalo aquí» al pie de cada correo |
 | Un paquete en la web, sin cuenta | «Notificaciones activadas» → «Desactivar» |
-| Un paquete en la app, sin cuenta | Olvida el paquete: sus notificaciones se detienen en ese dispositivo |
+| Un paquete en la app, sin cuenta | Toca su campana, u olvida el paquete: sus notificaciones se detienen en ese dispositivo |
 
 Con el correo de entrega activado, la campana de un paquete que sigue en camino abre en su lugar dos interruptores, «Notificaciones» y «Correo al llegar», solo para ese paquete. El enlace del propio correo no pide iniciar sesión y pregunta antes: «¿Desactivar los correos de entrega?»
 

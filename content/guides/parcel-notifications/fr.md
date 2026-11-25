@@ -4,7 +4,7 @@ description: Une notification quand ton colis bouge, part en livraison ou arrive
 slug: notifications-livraison-colis
 picture: Un téléphone s'allume sur une notification de livraison, et Pip, le colis avec un visage, fait tinter une petite cloche à côté.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Peek t'envoie une notification quand ton colis a du nouveau, dans ton navigateur sur peektracker.com ou dans l'app Peek sur iPhone, iPad, Mac et Android. Tu choisis ce qu'il te dit, « Chaque scan », « Étapes importantes » ou « Livraison seulement », et avec un compte, Peek peut aussi t'envoyer un e-mail quand un colis est prêt à être retiré ou livré.
@@ -47,7 +47,7 @@ Ce que veut dire chaque étape : [les statuts de suivi expliqués](guide:trackin
 
 Oui, colis par colis. Sur le site, la page d'un colis a un bouton « Préviens-moi » : avant que le colis ait bougé, il affiche « Préviens-moi quand il bouge », et tant que le transporteur est encore inconnu, « Préviens-moi quand il est trouvé ». Sous « Préviens-moi pour », choisis « Chaque scan », « Étapes importantes » ou « Livraison seulement », puis « Activer ». Cela « Fonctionne même quand cette page est fermée. S’arrête à la livraison du colis. » Une fois activé, « Pour chaque colis dans ce navigateur » donne les mêmes notifications aux colis que tu y suis.
 
-Sans compte, les apps n'ont pas de réglage « Notifications » ni de choix des étapes. Les apps iPhone et Android demandent l'autorisation la première fois qu'un colis arrive sur le téléphone, puis inscrivent d'elles-mêmes chaque colis encore en route : chaque scan tant qu'il n'a pas bougé, les étapes importantes ensuite. Sur Mac, sans compte, la fenêtre « Réglages » n'a pas d'onglet « Notifications ».
+Sans compte, les apps ont aussi Réglages › « Notifications », avec les trois mêmes choix sous « Quelles mises à jour ? », gardés sur l'appareil pour chaque colis qu'il suit. Tant que tu n'as pas choisi, chaque colis encore en route reçoit chaque scan tant qu'il n'a pas bougé, puis les étapes importantes. L'interrupteur de la page les coupe toutes, et la cloche d'un colis coupe les siennes. L'app iPhone demande l'autorisation la première fois qu'un colis arrive sur le téléphone ; l'app Android t'invite avec « Recevoir les mises à jour » dans ta liste tant qu'un colis est en route. Sur Mac, c'est l'onglet « Notifications » de la fenêtre « Réglages ».
 
 Sans compte, les notifications ne donnent jamais le nom ni le numéro du colis, Peek ne peut pas t'envoyer d'e-mail, et « Préviens-moi » n'est plus proposé une fois le trajet terminé.
 
@@ -80,7 +80,7 @@ Il reste désactivé tant que tu ne l'actives pas, et ne couvre jamais les scans
 | Un colis | Touche sa cloche (« Désactiver les notifications de ce colis »). Il est mis en sourdine sur tous tes appareils |
 | L'e-mail de livraison | Son interrupteur sur la page « Notifications », ou « Désactive-le ici » en bas de chaque e-mail |
 | Un colis sur le site, sans compte | « Notifications activées » → « Désactiver » |
-| Un colis dans l'app, sans compte | Oublie le colis : ses notifications s'arrêtent sur cet appareil |
+| Un colis dans l'app, sans compte | Touche sa cloche, ou oublie le colis : ses notifications s'arrêtent sur cet appareil |
 
 Avec l'e-mail de livraison activé, la cloche d'un colis encore en route ouvre plutôt deux interrupteurs, « Notifications » et « E-mail à l’arrivée », pour ce colis seulement. Le lien de l'e-mail lui-même ne demande pas de connexion et pose d'abord la question : « Désactiver les e-mails de livraison ? »
 

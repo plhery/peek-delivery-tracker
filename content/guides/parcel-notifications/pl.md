@@ -4,7 +4,7 @@ description: Dostań powiadomienie, gdy przesyłka rusza, trafia do doręczenia 
 slug: powiadomienia-o-dostawie-przesylek
 picture: Telefon rozświetla się powiadomieniem o dostawie, a Pip, paczka z buzią, dzwoni obok małym dzwoneczkiem.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Peek wysyła powiadomienie, gdy twoja przesyłka ma nowości: w przeglądarce na peektracker.com albo w aplikacji Peek na iPhone’a, iPada, Maca i Androida. Ty wybierasz, ile ci mówi: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”, a z kontem Peek może też wysłać ci e-mail, gdy przesyłka będzie gotowa do odbioru lub zostanie doręczona.
@@ -47,7 +47,7 @@ Co oznacza każdy etap: [statusy śledzenia wyjaśnione](guide:tracking-statuses
 
 Tak, dla każdej przesyłki osobno. W przeglądarce strona przesyłki ma przycisk „Powiadom mnie”: zanim przesyłka ruszy, brzmi on „Powiadom mnie, gdy ruszy”, a dopóki przewoźnik jest nieznany – „Powiadom mnie, gdy się znajdzie”. W sekcji „Kiedy wysyłać powiadomienia?” wybierz „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”, a potem „Włącz”. Jak podsumowuje Peek: „Działa, gdy ta strona jest zamknięta. Kończy się po doręczeniu przesyłki”. Po włączeniu opcja „Dla każdej przesyłki w tej przeglądarce” daje te same powiadomienia przesyłkom, które śledzisz w tej przeglądarce.
 
-Aplikacje bez konta nie mają ustawienia „Powiadomienia” ani wyboru etapów. Aplikacje na iPhone’a i Androida proszą o zgodę, gdy pierwsza przesyłka trafi na telefon, a potem same zapisują na powiadomienia każdą przesyłkę, która jest jeszcze w drodze: każdy skan, dopóki nie ruszy, a potem ważne etapy. Na Macu bez konta okno ustawień nie ma karty Powiadomienia.
+Bez konta aplikacje też mają Ustawienia › „Powiadomienia”, z tymi samymi trzema opcjami w sekcji „Które aktualizacje?”, zapisanymi na urządzeniu dla każdej śledzonej na nim przesyłki. Dopóki nie wybierzesz, każda przesyłka, która jest jeszcze w drodze, dostaje każdy skan, dopóki nie ruszy, a potem ważne etapy. Przełącznik na tej stronie wyłącza wszystkie, a dzwonek przesyłki wyłącza jej własne. Aplikacja na iPhone’a prosi o zgodę, gdy pierwsza przesyłka trafi na telefon; aplikacja na Androida zaprasza cię na liście kartą „Otrzymuj aktualizacje dostaw”, dopóki jakaś przesyłka jest w drodze. Na Macu to karta „Powiadomienia” w oknie ustawień.
 
 Bez konta powiadomienia nigdy nie zawierają nazwy ani numeru przesyłki, Peek nie może wysyłać ci e-maili, a „Powiadom mnie” nie pojawia się, gdy podróż przesyłki się skończy.
 
@@ -80,7 +80,7 @@ E-mail jest wyłączony, dopóki go nie włączysz, i nigdy nie obejmuje wcześn
 | Jedną przesyłkę | Stuknij jej dzwonek („Wyłącz powiadomienia o przesyłce”). Zostaje wyciszona na wszystkich twoich urządzeniach |
 | E-mail o doręczeniu | Jego przełącznik na stronie Powiadomienia albo „Wyłącz ją tutaj” na dole każdego e-maila |
 | Przesyłkę na stronie, bez konta | „Powiadomienia włączone” → „Wyłącz” |
-| Przesyłkę w aplikacji, bez konta | Zapomnij o przesyłce: jej powiadomienia przestają przychodzić na tym urządzeniu |
+| Przesyłkę w aplikacji, bez konta | Stuknij jej dzwonek albo zapomnij o przesyłce: jej powiadomienia przestają przychodzić na tym urządzeniu |
 
 Gdy e-mail o doręczeniu jest włączony, dzwonek przesyłki, która jest jeszcze w drodze, otwiera zamiast tego dwa przełączniki, „Powiadomienia” i „E-mail, gdy dotrze”, tylko dla tej przesyłki. Link w samym e-mailu nie wymaga logowania i najpierw pyta: „Wyłączyć e-maile o dostarczeniu?”
 

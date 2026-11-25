@@ -4,7 +4,7 @@ description: Get a notification when your parcel moves, goes out for delivery or
 slug: parcel-delivery-notifications
 picture: A phone lighting up with a delivery notification, and Pip, the parcel with a face, ringing a small bell beside it.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Peek sends a notification when your parcel has news, in your browser on peektracker.com or in the Peek app on iPhone, iPad, Mac and Android. You choose how much it tells you, "Every scan", "Important steps" or "Delivery only", and with an account Peek can also email you when a parcel is ready for pickup or delivered.
@@ -47,7 +47,7 @@ What each step means: [tracking statuses explained](guide:tracking-statuses). Af
 
 Yes, parcel by parcel. On the website, a parcel's page has a "Notify me" button: before the parcel has moved it reads "Notify me when it moves", and while the carrier is still unknown, "Notify me when it’s found". Under "Tell me about", pick "Every scan", "Important steps" or "Delivery only", then "Turn on". It "Works while this page is closed. Stops when the parcel is delivered." Once it's on, "For every parcel in this browser" gives the parcels you track there the same notifications.
 
-The apps without an account have no "Notifications" setting and no choice of steps. The iPhone and Android apps ask for permission the first time a parcel comes to the phone, then sign up each parcel still on its way by themselves: every scan until it moves, the important steps after that. On a Mac, the Settings window has no Notifications tab without an account.
+In the apps without an account, Settings › "Notifications" offers the same three choices under "Which updates?", kept on that device for every parcel it follows. Until you choose, each parcel still on its way gets every scan until it moves and the important steps after that. The page's switch turns them all off, and a parcel's bell turns that parcel's off. The iPhone app asks for permission the first time a parcel comes to the phone; the Android app invites you with "Get delivery updates" in your list while a parcel is on its way. On a Mac, it's the Settings window's "Notifications" tab.
 
 Without an account, notifications never carry the parcel's name or number, Peek can't email you, and "Notify me" isn't offered once the journey is over.
 
@@ -80,7 +80,7 @@ It's off until you turn it on, and never covers earlier scans or a parcel alread
 | One parcel | Tap its bell ("Turn off parcel notifications"). It's muted on all your devices |
 | The delivery email | Its switch on the Notifications page, or "Turn it off here" at the foot of each email |
 | A parcel on the website, without an account | "Notifications on" → "Turn off" |
-| A parcel in the app, without an account | Forget the parcel: its notifications stop on that device |
+| A parcel in the app, without an account | Tap its bell, or forget the parcel: its notifications stop on that device |
 
 With the delivery email on, the bell of a parcel still on its way opens two switches instead, "Notifications" and "Email when it arrives", for that parcel only. The email's own link needs no sign-in and asks first: "Turn off delivery emails?"
 

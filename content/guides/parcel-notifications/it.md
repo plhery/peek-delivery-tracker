@@ -4,7 +4,7 @@ description: Ricevi una notifica quando il tuo pacco si muove, è in consegna o 
 slug: notifiche-consegna-pacchi
 picture: Un telefono si illumina con una notifica di consegna, e Pip, il pacco con la faccia, suona un campanellino lì accanto.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Peek ti manda una notifica quando il tuo pacco ha novità, nel browser su peektracker.com o nell'app Peek su iPhone, iPad, Mac e Android. Scegli tu quanto ti dice, «Ogni scansione», «Passaggi importanti» o «Solo la consegna», e con un account Peek può anche mandarti un'e-mail quando un pacco è pronto per il ritiro o consegnato.
@@ -47,7 +47,7 @@ Cosa significa ogni passaggio: [gli stati del tracking spiegati](guide:tracking-
 
 Sì, pacco per pacco. Sul sito, la pagina di un pacco ha un pulsante «Avvisami»: prima che il pacco si sia mosso dice «Avvisami quando si muove», e finché il corriere è ancora sconosciuto, «Avvisami quando viene trovato». In «Avvisami per», scegli «Ogni scansione», «Passaggi importanti» o «Solo la consegna», poi «Attiva». «Funziona anche con questa pagina chiusa. Si ferma quando il pacco è consegnato.» Una volta attivo, «Per ogni pacco in questo browser» dà le stesse notifiche ai pacchi che segui lì.
 
-Senza account, le app non hanno l'impostazione «Notifiche» né la scelta dei passaggi. Le app per iPhone e Android chiedono il permesso la prima volta che un pacco arriva sul telefono, poi iscrivono da sole ogni pacco ancora in viaggio: ogni scansione finché non si muove, poi i passaggi importanti. Su Mac, senza account, la finestra «Impostazioni» non ha la scheda «Notifiche».
+Senza account, anche le app hanno Impostazioni › «Notifiche», con le stesse tre scelte sotto «Quali aggiornamenti?», salvate sul dispositivo per ogni pacco che segue. Finché non scegli, ogni pacco ancora in viaggio riceve ogni scansione finché non si muove, poi i passaggi importanti. L'interruttore della pagina le spegne tutte, e la campanella di un pacco spegne le sue. L'app per iPhone chiede il permesso la prima volta che un pacco arriva sul telefono; l'app per Android ti invita con «Ricevi aggiornamenti» nell'elenco finché un pacco è in viaggio. Su Mac, è la scheda «Notifiche» della finestra «Impostazioni».
 
 Senza account, le notifiche non mostrano mai il nome o il numero del pacco, Peek non può mandarti e-mail, e «Avvisami» non viene più offerto quando il viaggio è finito.
 
@@ -80,7 +80,7 @@ Sì, con un account. Nella pagina «Notifiche», in «Via e-mail», attiva «Un�
 | Un pacco | Tocca la sua campanella («Disattiva le notifiche del pacco»). Resta silenziato su tutti i tuoi dispositivi |
 | L'e-mail di consegna | Il suo interruttore nella pagina «Notifiche», oppure «Disattivala qui» in fondo a ogni e-mail |
 | Un pacco sul sito, senza account | «Notifiche attive» → «Disattiva» |
-| Un pacco nell'app, senza account | Dimentica il pacco: le sue notifiche si fermano su quel dispositivo |
+| Un pacco nell'app, senza account | Tocca la sua campanella, o dimentica il pacco: le sue notifiche si fermano su quel dispositivo |
 
 Con l'e-mail di consegna attiva, la campanella di un pacco ancora in viaggio apre invece due interruttori, «Notifiche» e «E-mail all’arrivo», solo per quel pacco. Il link nell'e-mail non richiede l'accesso e prima chiede: «Disattivare le e-mail di consegna?»
 

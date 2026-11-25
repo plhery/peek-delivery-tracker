@@ -4,7 +4,7 @@ description: Benachrichtigungen, wenn dein Paket sich bewegt, in Zustellung geht
 slug: paket-benachrichtigungen
 picture: Ein Handy leuchtet mit einer Zustellbenachrichtigung auf, und daneben läutet Pip, das Paket mit Gesicht, eine kleine Glocke.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Peek schickt dir eine Benachrichtigung, wenn es Neues von deinem Paket gibt, im Browser auf peektracker.com oder in der Peek-App auf iPhone, iPad, Mac und Android. Du wählst, wie viel Peek dir meldet, „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“, und mit einem Konto kann Peek dir auch eine E-Mail schicken, wenn ein Paket abholbereit oder zugestellt ist.
@@ -47,7 +47,7 @@ Was jeder Schritt bedeutet: [Sendungsstatus erklärt](guide:tracking-statuses). 
 
 Ja, Paket für Paket. Auf der Website hat die Seite eines Pakets einen Knopf „Sag mir Bescheid“: Bevor sich das Paket bewegt hat, steht dort „Sag mir Bescheid, wenn es sich bewegt“, und solange der Paketdienst noch unbekannt ist, „Sag mir Bescheid, wenn es gefunden ist“. Wähle unter „Mitteilungen für“ zwischen „Jeden Scan“, „Wichtige Schritte“ und „Nur die Zustellung“, dann „Einschalten“. Es „Funktioniert auch, wenn diese Seite geschlossen ist. Endet mit der Zustellung.“ Ist es an, gibt „Für jedes Paket in diesem Browser“ den Paketen, die du dort verfolgst, dieselben Benachrichtigungen.
 
-Ohne Konto haben die Apps keine Einstellung „Mitteilungen“ und keine Auswahl der Schritte. Die Apps für iPhone und Android fragen nach der Erlaubnis, sobald zum ersten Mal ein Paket aufs Handy kommt, und melden dann jedes Paket, das noch unterwegs ist, von selbst an: jeden Scan, bis es sich bewegt, danach die wichtigen Schritte. Auf dem Mac hat das Fenster „Einstellungen“ ohne Konto keinen Tab „Mitteilungen“.
+In den Apps ohne Konto bietet Einstellungen › „Mitteilungen“ unter „Welche Aktualisierungen?“ dieselben drei Möglichkeiten, gespeichert auf dem Gerät für jedes Paket, das es verfolgt. Bis du wählst, bekommt jedes Paket, das noch unterwegs ist, jeden Scan, bis es sich bewegt, danach die wichtigen Schritte. Der Schalter der Seite schaltet alle ab, die Glocke eines Pakets nur seine. Die iPhone-App fragt nach der Erlaubnis, sobald zum ersten Mal ein Paket aufs Handy kommt; die Android-App lädt dich mit „Lieferupdates erhalten“ in deiner Liste ein, solange ein Paket unterwegs ist. Auf dem Mac ist es der Tab „Mitteilungen“ im Fenster „Einstellungen“.
 
 Ohne Konto zeigen Benachrichtigungen nie den Namen oder die Nummer des Pakets, Peek kann dir keine E-Mail schicken, und „Sag mir Bescheid“ gibt es nicht mehr, sobald die Reise vorbei ist.
 
@@ -80,7 +80,7 @@ Sie ist aus, bis du sie einschaltest, und gilt nie für frühere Scans oder für
 | Ein Paket | Auf seine Glocke tippen („Mitteilungen für dieses Paket ausschalten“). Es ist dann auf allen deinen Geräten stumm |
 | Die Zustell-E-Mail | Ihr Schalter auf der Seite „Mitteilungen“ oder „Hier ausschalten“ unten in jeder E-Mail |
 | Ein Paket auf der Website, ohne Konto | „Mitteilungen an“ → „Ausschalten“ |
-| Ein Paket in der App, ohne Konto | Das Paket entfernen: Seine Benachrichtigungen enden auf diesem Gerät |
+| Ein Paket in der App, ohne Konto | Auf seine Glocke tippen oder das Paket entfernen: Seine Benachrichtigungen enden auf diesem Gerät |
 
 Ist die Zustell-E-Mail an, öffnet die Glocke eines Pakets, das noch unterwegs ist, stattdessen zwei Schalter, „Mitteilungen“ und „E-Mail bei Ankunft“, nur für dieses Paket. Der Link in der E-Mail braucht keine Anmeldung und fragt zuerst: „Zustell-E-Mails ausschalten?“
 

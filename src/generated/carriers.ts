@@ -15078,6 +15078,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "posti",
+      "catalog": "posti",
+      "slug": "rastreamento-posti",
+      "title": "Rastreamento Posti: código JJFI, status e armários",
+      "name": "Posti",
+      "color": "#ff8000"
+    },
+    {
       "id": "dhl-ecommerce-nl",
       "catalog": "dhl-ecommerce-nl",
       "slug": "rastreamento-dhl-ecommerce-holanda",
@@ -15204,6 +15212,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento USPS: códigos, status, entrega e contato",
       "name": "USPS",
       "color": "#004b87"
+    },
+    {
+      "id": "canada-post",
+      "catalog": "canada-post",
+      "slug": "rastreamento-canada-post",
+      "title": "Rastreamento Canada Post: códigos, status e avisos",
+      "name": "Canada Post",
+      "color": "#e4002b"
     },
     {
       "id": "uniuni",
@@ -18572,6 +18588,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "posti",
+      "catalog": "posti",
+      "slug": "posti-fenlan-kuaidi-chaxun",
+      "title": "芬兰邮政（Posti）查询：JJFI 单号、状态与自提柜",
+      "name": "Posti",
+      "color": "#ff8000"
+    },
+    {
       "id": "dhl-ecommerce-nl",
       "catalog": "dhl-ecommerce-nl",
       "slug": "dhl-ecommerce-helan-kuaidi-chaxun",
@@ -18698,6 +18722,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "USPS 美国邮政单号查询：运单格式、英文状态与客服电话",
       "name": "USPS",
       "color": "#004b87"
+    },
+    {
+      "id": "canada-post",
+      "catalog": "canada-post",
+      "slug": "canada-post-kuaidi-chaxun",
+      "title": "加拿大邮政（Canada Post）查询：单号、状态与通知单",
+      "name": "Canada Post",
+      "color": "#e4002b"
     },
     {
       "id": "uniuni",

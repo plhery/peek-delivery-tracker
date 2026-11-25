@@ -14990,6 +14990,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef2637"
     },
     {
+      "id": "dhl-ecommerce-pl",
+      "catalog": "dhl-ecommerce-pl",
+      "slug": "rastreamento-dhl-ecommerce-polonia",
+      "title": "Rastreamento DHL eCommerce Polônia: código e DHL BOX",
+      "name": "DHL eCommerce Poland",
+      "color": "#ffcc00"
+    },
+    {
       "id": "gofo-fr",
       "catalog": "gofo-fr",
       "slug": "rastreamento-gofo-franca",
@@ -15436,6 +15444,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento 17FEIA (一起飞): códigos FEI…YQ e entrega",
       "name": "17FEIA",
       "color": "#00a9e4"
+    },
+    {
+      "id": "j-and-t-uk",
+      "catalog": "j-and-t-uk",
+      "slug": "rastreamento-jt-express-uk",
+      "title": "Rastreamento J&T Express UK: códigos JTUK e status",
+      "name": "J&T Express UK",
+      "color": "#e60000"
     },
     {
       "id": "j-and-t-br",
@@ -18356,6 +18372,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef2637"
     },
     {
+      "id": "dhl-ecommerce-pl",
+      "catalog": "dhl-ecommerce-pl",
+      "slug": "dhl-ecommerce-bolan-kuaidi-chaxun",
+      "title": "波兰 DHL eCommerce 快递查询：11 位单号、状态与自提",
+      "name": "DHL eCommerce Poland",
+      "color": "#ffcc00"
+    },
+    {
       "id": "gofo-fr",
       "catalog": "gofo-fr",
       "slug": "gofo-france-tracking",
@@ -18978,6 +19002,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Stone3PL 国际物流单号查询：S 运单格式、状态与客服",
       "name": "Stone3PL",
       "color": "#003d98"
+    },
+    {
+      "id": "j-and-t-uk",
+      "catalog": "j-and-t-uk",
+      "slug": "jt-express-uk-kuaidi-chaxun",
+      "title": "英国极兔速递 J&T Express UK 查询：JTUK 单号与状态",
+      "name": "J&T Express UK",
+      "color": "#e60000"
     },
     {
       "id": "xinghe-freight",

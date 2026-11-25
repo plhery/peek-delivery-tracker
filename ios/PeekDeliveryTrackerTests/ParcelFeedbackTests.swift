@@ -474,6 +474,104 @@ final class ParcelFeedbackTests: XCTestCase {
         XCTAssertEqual(sent.counted, ["parcel-feedback-wrong success"], "The note is the same answer")
     }
 
+    func testIHaventReceivedItSaysWhoToAskAndTakesANoteAlone() async throws {
+        let (store, suite) = defaults()
+        defer { store.removePersistentDomain(forName: suite) }
+        let clock = Clock()
+        let sent = Sent()
+        let subject = ParcelFeedbackSubject.parcel(UUID())
+        var asked = page(subject)
+        asked.missing = ParcelFeedbackMissingStep(pageSaid: .delivered, carrier: "DHL",
+                                                  help: .init(name: "DHL", url: try XCTUnwrap(URL(string: "https://example.com/help"))))
+        let model = visit(asked, sent, store, clock)
+
+        // Only among the reasons.
+        await model.notReceived()
+        XCTAssertTrue(sent.requests.isEmpty)
+        model.notQuite()
+        await model.notReceived()
+
+        XCTAssertEqual(sent.moments, [.missing], "The next step does not wait for the service")
+        XCTAssertEqual(model.moment, .missing)
+        XCTAssertEqual(sent.requests.map(\.answer), [.notReceived])
+        XCTAssertEqual(sent.requests.first?.pageSaid, .delivered)
+        XCTAssertNil(sent.requests.first?.reasons)
+        XCTAssertNil(sent.requests.first?.note)
+        XCTAssertEqual(sent.requests.first?.asked, .page)
+        XCTAssertEqual(sent.counted, ["parcel-feedback-not-received success"])
+
+        // The note alone, under the same answer, and it needs one.
+        model.addNote()
+        XCTAssertEqual(model.words?.id, sent.requests.first?.id)
+        XCTAssertEqual(model.words?.pageSaid, .delivered)
+        XCTAssertEqual(model.words?.reasons, [])
+        let blank = await model.sendWords([], note: "  ")
+        XCTAssertFalse(blank)
+        XCTAssertEqual(sent.requests.count, 1)
+
+        let closed = await model.sendWords([], note: " Not in the mailbox. ")
+
+        XCTAssertTrue(closed)
+        XCTAssertNil(model.words)
+        XCTAssertEqual(model.moment, .missingNoted)
+        XCTAssertEqual(sent.requests.count, 2)
+        XCTAssertEqual(sent.requests[1].id, sent.requests[0].id)
+        XCTAssertEqual(sent.requests[1].answer, .notReceived)
+        XCTAssertEqual(sent.requests[1].pageSaid, .delivered)
+        XCTAssertEqual(sent.requests[1].note, "Not in the mailbox.")
+        XCTAssertEqual(sent.counted, ["parcel-feedback-not-received success"], "The note is the same answer")
+    }
+
+    func testIHaventReceivedItThatCouldNotBeSentGoesBackToTheReasons() async {
+        let (store, suite) = defaults()
+        defer { store.removePersistentDomain(forName: suite) }
+        let clock = Clock()
+        let sent = Sent()
+        sent.fails = true
+        var asked = page(.parcel(UUID()))
+        asked.missing = ParcelFeedbackMissingStep(pageSaid: .inTransit, carrier: "DHL", help: nil)
+        let model = visit(asked, sent, store, clock)
+
+        model.notQuite()
+        await model.notReceived()
+
+        XCTAssertEqual(sent.moments, [.missing])
+        XCTAssertEqual(model.moment, .reasons)
+        XCTAssertEqual(model.word, .failed)
+        XCTAssertEqual(sent.counted, ["parcel-feedback-not-received error"])
+        model.addNote()
+        XCTAssertNil(model.words, "Nothing was given to add a note to")
+    }
+
+    func testIHaventReceivedItSaysWhatThePageSaid() throws {
+        let catalog = CarrierCatalog.shared
+        let name = { (carrier: CarrierID) in catalog.info(for: carrier, language: .en).displayName }
+        let delivered = parcel(stage: .delivered)
+        let help = catalog.helpLink(for: delivered, language: .en)
+        let step = ParcelFeedbackMissingStep.of(delivered, carrier: "DHL", language: .en)
+        XCTAssertEqual(step.pageSaid, .delivered)
+        XCTAssertEqual(step.help?.url, help?.url)
+        XCTAssertEqual(step.carrier, help?.name ?? "DHL", "The carrier that helps, else the one the page names")
+        XCTAssertEqual(ParcelFeedbackMissingStep.of(parcel(stage: .inTransit), carrier: "DHL", language: .en).pageSaid, .inTransit)
+
+        // A route its carrier writes ahead names that carrier, delivered or not.
+        var written = parcel(stage: .inTransit)
+        written.writtenAheadBy = .glsDe
+        let ahead = ParcelFeedbackMissingStep.of(written, carrier: "DHL", language: .en)
+        XCTAssertEqual(ahead.pageSaid, .writtenAhead)
+        XCTAssertEqual(ahead.carrier, name(.glsDe))
+
+        // Offered under Pip's question only.
+        let found = try XCTUnwrap(ParcelFeedbackModel.Page(parcel: delivered, subject: .parcel(delivered.id), showsHistory: true,
+                                                           madeUp: false, carrier: "DHL", language: .en))
+        XCTAssertEqual(found.missing, step)
+        let unknown = parcel(carrier: .unknown, stage: nil)
+        let row = try XCTUnwrap(ParcelFeedbackModel.Page(parcel: unknown, subject: .parcel(unknown.id), showsHistory: false,
+                                                         madeUp: false, carrier: "", language: .en))
+        XCTAssertEqual(row.question, .unknown)
+        XCTAssertNil(row.missing)
+    }
+
     func testANoteThatCouldNotBeSentKeepsItsSheetOpen() async {
         let (store, suite) = defaults()
         defer { store.removePersistentDomain(forName: suite) }
@@ -870,7 +968,8 @@ final class ParcelFeedbackTests: XCTestCase {
         }
 
         XCTAssertEqual(page(parcel, madeUp: false),
-                       ParcelFeedbackModel.Page(subject: .parcel(parcel.id), question: .found, scan: "1:2026-10-02T08:00:00Z", carrier: "DHL", language: .de))
+                       ParcelFeedbackModel.Page(subject: .parcel(parcel.id), question: .found, scan: "1:2026-10-02T08:00:00Z", carrier: "DHL", language: .de,
+                                                missing: .of(parcel, carrier: "DHL", language: .de)))
         XCTAssertEqual(page(self.parcel(carrier: .unknown, stage: nil), madeUp: false, showsHistory: false)?.question, .unknown)
         XCTAssertEqual(page(self.parcel(carrier: .unknown, stage: nil), madeUp: false, showsHistory: false)?.scan, "")
         XCTAssertNil(page(self.parcel(archived: true), madeUp: false))

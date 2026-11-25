@@ -21,7 +21,7 @@ struct ParcelFeedbackQuestionView: View {
     @State private var hops = 0
 
     /// The moments Pip smiles at.
-    private static let happy: Set<ParcelFeedbackModel.Moment> = [.right, .sent, .noted]
+    private static let happy: Set<ParcelFeedbackModel.Moment> = [.right, .sent, .noted, .missing, .missingNoted]
     private static let settle = Animation.spring(response: 0.42, dampingFraction: 0.86)
 
     var body: some View {
@@ -91,28 +91,25 @@ struct ParcelFeedbackQuestionView: View {
                 beside {
                     said("feedback.pip.sent")
                 } then: {
-                    Button { model.addNote() } label: {
-                        Text(localizer.text("feedback.addNote"))
-                            .font(.caption)
-                            .underline(color: Brand.inkSoft.opacity(0.45))
-                            .frame(minHeight: 36)
-                            .padding(.trailing, 6)
-                            .padding(.vertical, 4)
-                            .contentShape(Rectangle())
-                            .padding(.vertical, -4)
-                    }
-                    .buttonStyle(.plain)
-                    .foregroundStyle(Brand.inkSoft)
+                    addNote
                 }
             case .noted:
                 said("feedback.pip.sent")
+            case .missing, .missingNoted:
+                nextStep
             case .reasons:
+                // The parcel hasn't come: its own answer, first.
+                let missing = model.page?.missing == nil ? 0 : 1
                 VStack(alignment: .leading, spacing: 10) {
                     question("feedback.whatsOff")
                     PillFlow(spacing: 6) {
+                        if missing == 1 {
+                            FeedbackPill(title: localizer.text("feedback.reason.notReceived")) { Task { await model.notReceived() } }
+                                .modifier(ComesIn(order: 0))
+                        }
                         ForEach(Array((model.page?.reasons ?? ParcelFeedbackReason.allCases).enumerated()), id: \.element) { order, reason in
                             FeedbackPill(title: localizer.text(reason.labelKey)) { Task { await model.pick(reason) } }
-                                .modifier(ComesIn(order: order))
+                                .modifier(ComesIn(order: order + missing))
                         }
                     }
                 }
@@ -135,6 +132,66 @@ struct ParcelFeedbackQuestionView: View {
         .clipShape(shape)
         .overlay(shape.strokeBorder(inSheet ? Brand.sheetLine(0.6) : Brand.separator.opacity(0.6)))
         .shadow(color: .black.opacity(0.04), radius: 1, y: 1)
+    }
+
+    /// "Add a note", in caption in the soft ink, underlined in it at 45 %: 36 tall in a touch 44 tall.
+    private var addNote: some View {
+        Button { model.addNote() } label: {
+            Text(localizer.text("feedback.addNote"))
+                .font(.caption)
+                .underline(color: Brand.inkSoft.opacity(0.45))
+                .frame(minHeight: 36)
+                .padding(.trailing, 6)
+                .padding(.vertical, 4)
+                .contentShape(Rectangle())
+                .padding(.vertical, -4)
+        }
+        .buttonStyle(.plain)
+        .foregroundStyle(Brand.inkSoft)
+    }
+
+    /// What to do about a parcel that hasn't come, in the words that fit what the page says (`feedback.missing.*`);
+    /// under it, 16 apart where they fit, the carrier's help page when it has one and the way to add a note, or the
+    /// thanks once the note went.
+    @ViewBuilder private var nextStep: some View {
+        if let step = model.page?.missing {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(localizer.text(step))
+                    .font(.footnote)
+                    .foregroundStyle(Brand.ink)
+                    .fixedSize(horizontal: false, vertical: true)
+                PillFlow(spacing: 16, lineSpacing: 0) {
+                    if let help = step.help { helpLink(help) }
+                    if model.moment == .missing { addNote } else { said("feedback.missing.noted") }
+                }
+            }
+            .padding(.top, 6)
+            .padding(.trailing, 6)
+        } else {
+            said("feedback.pip.sent")
+        }
+    }
+
+    /// The carrier's help page: its name in caption semibold, in the ink and underlined in it at 45 %, and an arrow out.
+    private func helpLink(_ help: ParcelFeedbackMissingStep.Help) -> some View {
+        Link(destination: help.url) {
+            HStack(spacing: 4) {
+                Text(localizer.text("link.help", ["carrier": help.name]))
+                    .underline(color: Brand.ink.opacity(0.45))
+                Image(systemName: "arrow.up.right").font(.system(size: 10, weight: .regular))
+                    .accessibilityHidden(true)
+            }
+            .font(.caption.weight(.semibold))
+            .frame(minHeight: 36)
+            .padding(.vertical, 4)
+            .contentShape(Rectangle())
+            .padding(.vertical, -4)
+        }
+        .buttonStyle(.plain)
+        .foregroundStyle(Brand.ink)
+        .simultaneousGesture(TapGesture().onEnded {
+            DeliveryAnalytics.shared.action("parcel-carrier-help")
+        })
     }
 
     /// Its reader said what the page ends on is right: no Pip, only a low-key way to say otherwise,
@@ -163,7 +220,7 @@ struct ParcelFeedbackQuestionView: View {
                 said("feedback.unknown.early")
             case .named:
                 said("feedback.unknown.sent")
-            case .ask, .quiet, .reasons, .right, .sent, .noted:
+            case .ask, .quiet, .reasons, .right, .sent, .noted, .missing, .missingNoted:
                 beside {
                     question("feedback.unknown.question")
                 } then: {
@@ -343,10 +400,12 @@ private struct FeedbackPill: View {
 /// Lays its pills out like words: one that does not fit on the line starts the next.
 struct PillFlow: Layout {
     var spacing: CGFloat = 6
+    /// Between lines, `spacing` unless told otherwise.
+    var lineSpacing: CGFloat?
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         let lines = lines(of: subviews, in: proposal.width ?? .infinity)
-        let height = lines.reduce(0) { $0 + $1.height } + spacing * CGFloat(max(0, lines.count - 1))
+        let height = lines.reduce(0) { $0 + $1.height } + (lineSpacing ?? spacing) * CGFloat(max(0, lines.count - 1))
         return CGSize(width: lines.map(\.width).max() ?? 0, height: height)
     }
 
@@ -359,7 +418,7 @@ struct PillFlow: Layout {
                                       proposal: ProposedViewSize(size))
                 x += size.width + spacing
             }
-            y += line.height + spacing
+            y += line.height + (lineSpacing ?? spacing)
         }
     }
 
@@ -427,8 +486,10 @@ private struct ParcelFeedbackOverlays: ViewModifier {
             }
             .onChange(of: model.moment) { _, moment in
                 // An answer given on the way back is said by its own word.
-                guard model.word == nil, let thanks = thanks(moment) else { return }
-                AccessibilityNotification.Announcement(localizer.text(thanks)).post()
+                guard model.word == nil else { return }
+                if let thanks = thanks(moment) { AccessibilityNotification.Announcement(localizer.text(thanks)).post() }
+                // The next step is said by its own words.
+                if moment == .missing, let step = model.page?.missing { AccessibilityNotification.Announcement(localizer.text(step)).post() }
             }
             #if DEBUG
             .onChange(of: model.page?.subject, initial: true) { _, subject in
@@ -476,16 +537,18 @@ private struct ParcelFeedbackOverlays: ViewModifier {
         switch moment {
         case .right: "feedback.pip.right"
         case .sent, .noted: "feedback.pip.sent"
+        case .missingNoted: "feedback.missing.noted"
         case .early: "feedback.unknown.early"
         case .named: "feedback.unknown.sent"
-        case .ask, .quiet, .reasons: nil
+        case .ask, .quiet, .reasons, .missing: nil
         }
     }
 }
 
 // MARK: - Sheets
 
-/// What is off: the reasons, several at once, and a note for what they do not say.
+/// What is off: the reasons, several at once, and a note for what they do not say. For a parcel that hasn't come, the
+/// note alone, which it needs.
 private struct ParcelFeedbackWordsSheet: View {
     @ObservedObject var model: ParcelFeedbackModel
 
@@ -494,22 +557,26 @@ private struct ParcelFeedbackWordsSheet: View {
     @State private var note = ""
     @State private var failed = false
     @FocusState private var writing: Bool
+    private let missing: Bool
 
     init(model: ParcelFeedbackModel, words: ParcelFeedbackModel.Words) {
         self.model = model
         _reasons = State(initialValue: words.reasons)
+        missing = words.pageSaid != nil
     }
 
     private var empty: Bool {
-        reasons.isEmpty && ParcelFeedbackRequest.words(note, limit: ParcelFeedbackRequest.noteLimit) == nil
+        (missing || reasons.isEmpty) && ParcelFeedbackRequest.words(note, limit: ParcelFeedbackRequest.noteLimit) == nil
     }
 
     private var noteLeft: Int { ParcelFeedbackRequest.noteLimit - note.unicodeScalars.count }
 
     var body: some View {
-        FeedbackSheet(title: localizer.text("feedback.whatsOff"), busy: model.sending, writing: writing) {
-            PillFlow(spacing: 6) {
-                ForEach(model.page?.reasons ?? ParcelFeedbackReason.allCases) { reason in chip(reason) }
+        FeedbackSheet(title: localizer.text(missing ? "feedback.addNote" : "feedback.whatsOff"), busy: model.sending, writing: writing) {
+            if !missing {
+                PillFlow(spacing: 6) {
+                    ForEach(model.page?.reasons ?? ParcelFeedbackReason.allCases) { reason in chip(reason) }
+                }
             }
             FeedbackField(label: localizer.text("feedback.note"), focused: writing) { writing = true } input: {
                 TextField(text: $note, prompt: Text(verbatim: ""), axis: .vertical) { Text(localizer.text("feedback.note")) }
@@ -779,9 +846,9 @@ private struct FeedbackPromise: View {
 
 #if DEBUG
 /// Opens a demo parcel's page at launch with its question in a given state, to look at it in
-/// the simulator: `-sdt.debug.parcelFeedback ask`, `quiet`, `reasons`, `right`, `sent`, `noted`, `early`,
-/// `named`, `back` (asked on the way back), `backSent`, `failed`, `words` or `carrier` (the
-/// sheets). `-sdt.debug.parcelFeedback.parcel <id>` names the parcel. Start the demo with
+/// the simulator: `-sdt.debug.parcelFeedback ask`, `quiet`, `reasons`, `right`, `sent`, `noted`, `missing`,
+/// `missingNoted`, `early`, `named`, `back` (asked on the way back), `backSent`, `failed`, `words`,
+/// `missingWords` or `carrier` (the sheets). `-sdt.debug.parcelFeedback.parcel <id>` names the parcel. Start the demo with
 /// `-sdt.native.experience.v1 demo`: it asks nothing of its parcels but under this argument.
 enum ParcelFeedbackPreview {
     static var variant: String? { UserDefaults.standard.string(forKey: "sdt.debug.parcelFeedback") }
@@ -797,3 +864,15 @@ enum ParcelFeedbackPreview {
     }
 }
 #endif
+
+extension Localizer {
+    /// The next step for a parcel that hasn't come, in the words that fit what the page says: who to ask.
+    func text(_ step: ParcelFeedbackMissingStep) -> String {
+        let key = switch step.pageSaid {
+        case .delivered: "feedback.missing.delivered"
+        case .writtenAhead: "feedback.missing.writtenAhead"
+        case .inTransit: "feedback.missing.inTransit"
+        }
+        return text(key, ["carrier": step.carrier])
+    }
+}

@@ -30,6 +30,33 @@ extension Parcel {
     }
 }
 
+/// The next step for a reader who hasn't received the parcel (`missingStep` on the web): what the page says of it, sent
+/// with the answer, the carrier the step names, and the help page of the carrier that has the parcel, else of the one
+/// it is filed under (`CarrierCatalog.helpLink`).
+struct ParcelFeedbackMissingStep: Equatable {
+    /// A carrier's help page, as its link names it.
+    struct Help: Equatable {
+        var name: String
+        var url: URL
+    }
+
+    var pageSaid: ParcelFeedbackPageSaid
+    var carrier: String
+    var help: Help?
+
+    /// What the page says of the parcel: delivered by its carrier's scan; delivered or on its way by steps its carrier
+    /// writes in advance (a delivery on a schedule, or a route written ahead); or not delivered yet. The step names the
+    /// carrier that writes the steps, else the one whose help page it links, else the one the page names.
+    static func of(_ parcel: Parcel, carrier: String, language: AppLanguage, catalog: CarrierCatalog = .shared) -> ParcelFeedbackMissingStep {
+        let help = catalog.helpLink(for: parcel, language: language).map { Help(name: $0.name, url: $0.url) }
+        let stage = parcel.currentStage
+        let written = parcel.scheduledDelivery || parcel.writtenDelivery || (stage != .delivered && parcel.writtenAheadBy != nil)
+        let writer = written ? parcel.writtenAheadBy.map { catalog.info(for: $0, language: language).displayName } : nil
+        let said: ParcelFeedbackPageSaid = written ? .writtenAhead : stage == .delivered ? .delivered : .inTransit
+        return ParcelFeedbackMissingStep(pageSaid: said, carrier: writer ?? help?.name ?? carrier, help: help)
+    }
+}
+
 /// The parcel a question is about, as this iPhone remembers it.
 enum ParcelFeedbackSubject: Equatable, Sendable {
     /// One of the account's parcels, or one this iPhone follows itself.
@@ -146,6 +173,12 @@ extension ParcelFeedbackRequest {
                                      note: words(note, limit: noteLimit), asked: asked, app: .ios, locale: locale(language))
     }
 
+    /// The parcel hasn't come: what the page said of it, and maybe a note.
+    static func notReceived(id: UUID = UUID(), pageSaid: ParcelFeedbackPageSaid, note: String = "", language: AppLanguage) -> ParcelFeedbackRequest {
+        ParcelFeedbackRequest(id: id, answer: .notReceived, note: words(note, limit: noteLimit), pageSaid: pageSaid,
+                              asked: .page, app: .ios, locale: locale(language))
+    }
+
     /// Who carries a parcel no carrier was found for: a name, its tracking page as typed, or both.
     static func foundElsewhere(id: UUID = UUID(), carrierName: String, trackingPage: String, language: AppLanguage) -> ParcelFeedbackRequest {
         ParcelFeedbackRequest(id: id, answer: .foundElsewhere, carrierName: words(carrierName, limit: carrierNameLimit),
@@ -181,7 +214,8 @@ extension ParcelFeedbackModel.Page {
     init?(parcel: Parcel, subject: ParcelFeedbackSubject, showsHistory: Bool, madeUp: Bool, carrier: String, language: AppLanguage) {
         guard !madeUp, let question = ParcelFeedbackQuestion(parcel: parcel, showsHistory: showsHistory) else { return nil }
         self.init(subject: subject, question: question, scan: parcel.feedbackScan, carrier: carrier, language: language,
-                  untroubled: parcel.untroubled(), scanned: parcel.hasCarrierUpdate)
+                  untroubled: parcel.untroubled(), scanned: parcel.hasCarrierUpdate,
+                  missing: question == .found ? .of(parcel, carrier: carrier, language: language) : nil)
     }
 }
 
@@ -209,6 +243,10 @@ final class ParcelFeedbackModel: ObservableObject {
         case sent
         /// The words were sent: there is nothing to add.
         case noted
+        /// "I haven't received it": the next step is shown (`Page.missing`); a note may follow it.
+        case missing
+        /// The note about a parcel that hasn't come was sent.
+        case missingNoted
         /// "Not yet": the carrier's own site does not show the parcel either.
         case early
         /// The reader named the carrier.
@@ -230,6 +268,8 @@ final class ParcelFeedbackModel: ObservableObject {
         /// The carrier has scanned the parcel (`Parcel.hasCarrierUpdate`). Before that the page's only row is the
         /// app's own, with no time or place of the carrier's to be wrong.
         var scanned = true
+        /// For a reader who hasn't received the parcel: what the page says and who to ask. Without it, that isn't offered.
+        var missing: ParcelFeedbackMissingStep?
 
         /// What a reader may say is off.
         var reasons: [ParcelFeedbackReason] {
@@ -237,12 +277,14 @@ final class ParcelFeedbackModel: ObservableObject {
         }
     }
 
-    /// The sheet that takes what is off.
+    /// The sheet that takes what is off, or the note about a parcel that hasn't come (`pageSaid`).
     struct Words: Identifiable, Equatable {
         /// The answer's id: a note added to an answer already sent goes under the same one.
         let id: UUID
         var reasons: Set<ParcelFeedbackReason>
         let asked: ParcelFeedbackRequestAsked
+        /// What the page said of a parcel its reader hasn't received: the sheet takes a note alone, and needs one.
+        var pageSaid: ParcelFeedbackPageSaid? = nil
     }
 
     /// A word at the bottom of the page.
@@ -277,7 +319,7 @@ final class ParcelFeedbackModel: ObservableObject {
     private let report: @MainActor (String, DeliveryAnalytics.Outcome) -> Void
     private let review: ReviewPrompt
     private var client: ParcelFeedbackClient?
-    /// The answer whose reason was given in place, for the note that may follow it.
+    /// The answer given in place, a reason or "I haven't received it", for the note that may follow it.
     private var given: Words?
     /// The reader's leave for a carrier's own page, and when the app left the screen for it.
     private var visit: (site: String, left: Date?)?
@@ -392,9 +434,22 @@ final class ParcelFeedbackModel: ObservableObject {
         word = .failed
     }
 
-    /// More to say about the reason just given.
+    /// "I haven't received it", given in place: the next step shows at once (`Page.missing`).
+    func notReceived() async {
+        guard let page, let missing = page.missing, moment == .reasons else { return }
+        let answer = Words(id: UUID(), reasons: [], asked: .page, pageSaid: missing.pageSaid)
+        given = answer
+        moment = .missing
+        if await deliver(.notReceived(id: answer.id, pageSaid: missing.pageSaid, language: page.language), for: page) { return }
+        guard self.page?.subject == page.subject else { return }
+        given = nil
+        moment = .reasons
+        word = .failed
+    }
+
+    /// More to say about the answer just given in place.
     func addNote() {
-        guard moment == .sent, let given else { return }
+        guard moment == .sent || moment == .missing, let given else { return }
         words = given
     }
 
@@ -420,14 +475,20 @@ final class ParcelFeedbackModel: ObservableObject {
     /// Sends what the open sheet holds. False keeps the sheet open with what was typed.
     func sendWords(_ reasons: Set<ParcelFeedbackReason>, note: String) async -> Bool {
         guard let page, let words, !sending else { return false }
+        // The note about a parcel that hasn't come is all it says: it needs one.
+        if words.pageSaid != nil, ParcelFeedbackRequest.words(note, limit: ParcelFeedbackRequest.noteLimit) == nil { return false }
         sending = true
         defer { sending = false }
-        // A note added to the reason given in place is the same answer: it is not counted twice.
-        let feedback = ParcelFeedbackRequest.wrong(id: words.id, reasons: reasons, note: note, asked: words.asked, language: page.language)
+        // A note added to the answer given in place is the same answer: it is not counted twice.
+        let feedback = if let missing = words.pageSaid {
+            ParcelFeedbackRequest.notReceived(id: words.id, pageSaid: missing, note: note, language: page.language)
+        } else {
+            ParcelFeedbackRequest.wrong(id: words.id, reasons: reasons, note: note, asked: words.asked, language: page.language)
+        }
         guard await deliver(feedback, for: page, counted: words.asked == .back) else { return false }
         guard self.page?.subject == page.subject else { return true }
         self.words = nil
-        if self.page?.question == .found { moment = .noted }
+        if self.page?.question == .found { moment = words.pageSaid != nil ? .missingNoted : .noted }
         if words.asked == .back { word = .backSent }
         return true
     }
@@ -489,6 +550,12 @@ extension ParcelFeedbackModel {
         case "right": moment = .right
         case "sent": moment = .sent
         case "noted": moment = .noted
+        case "missing", "missingNoted", "missingWords":
+            guard let missing = page.missing else { return }
+            let answer = Words(id: UUID(), reasons: [], asked: .page, pageSaid: missing.pageSaid)
+            given = answer
+            moment = variant == "missingNoted" ? .missingNoted : .missing
+            if variant == "missingWords" { words = answer }
         case "early": moment = .early
         case "named": moment = .named
         case "back": word = .back(site: page.carrier)

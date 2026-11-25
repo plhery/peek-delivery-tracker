@@ -77,7 +77,9 @@ Clients show the earliest next-check eligibility; polling windows can delay the 
 ## Source order
 
 The server can route each tracking hostname through its country's egress using
-`TRACKING_PROXY_ROUTES`, a private JSON object mapping exact hostnames to proxy URLs.
+`TRACKING_PROXY_ROUTES`, a private JSON object mapping exact hostnames to proxy URLs. A
+provider that refuses the server's own address whatever it is sent (ParcelsApp's bare
+`NO_DATA`) goes through one of these egresses too.
 `TRACKING_US_PROXY_URL` with `TRACKING_US_PROXY_HOSTS` remains supported; the two settings must
 name separate hosts. Configured destinations require HTTPS. Credentials stay in runtime
 settings; requests to other carriers and the browser service stay direct. A proxy that

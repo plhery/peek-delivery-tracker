@@ -17,7 +17,7 @@ Um código da India Post tem 13 caracteres no [formato postal internacional](gui
 | `EE482910576IN` | Item numerado pela India Post, doméstico ou enviado ao exterior. As duas letras iniciais variam; o `IN` final é o que identifica a India Post. |
 | `EE482910576US` | Termina em outras letras (aqui `US`): emitido pelos correios de outro país. Pacotes chegando à Índia do exterior geralmente seguem esse formato. |
 
-O rastreador da India Post cobre Speed Post, cartas registradas e seguradas, Business e Express Parcels, ordens postais eletrônicas e EMS internacional. Não encontrou o código? Veja [como encontrar um código de rastreamento](guide:find-tracking-number).
+O rastreador da India Post cobre Speed Post, objetos registrados e segurados, Business e Express Parcels, ordens postais eletrônicas e EMS internacional. Não encontrou o código? Veja [como encontrar um código de rastreamento](guide:find-tracking-number).
 
 ## Status de rastreamento da India Post explicados
 
@@ -25,7 +25,7 @@ O FAQ da India Post resume as etapas como postado, recebido, ensacado, despachad
 
 | A India Post diz | O que significa para você |
 | --- | --- |
-| `Item Booked` | O remetente postou na agência ou cadastrou online e a India Post aceitou o objeto. |
+| `Item Booked` | O remetente postou ou cadastrou online e a India Post aceitou o objeto. |
 | `Bag Received for Forwarding` | A mala postal com o item chegou a uma unidade para encaminhamento. |
 | `Assigned to load plan` | Programado para o próximo transporte. |
 | `Transport Leg Completed` | Um trecho do trajeto foi concluído. |
@@ -35,17 +35,17 @@ O FAQ da India Post resume as etapas como postado, recebido, ensacado, despachad
 | `Send item to domestic location (Inb)` | O centro internacional do destino encaminhou o objeto à rede interna local. |
 | `Item Delivered` | Entregue. |
 
-`(Otb)` marca leituras dos correios de origem; `(Inb)`, dos correios de destino repassadas pela India Post. Nos dados lidos pelo Peek, a India Post hoje costuma enviar códigos como `BAG_DISPATCH`; o Peek converte os conhecidos em frases claras (como "Bag Dispatched" ou "Item Presented To Customs") e exibe os demais em palavras legíveis. Veja mais em [o que significam os status de rastreamento](guide:tracking-statuses).
+`(Otb)` marca leituras dos correios de origem; `(Inb)`, dos correios de destino repassadas pela India Post. Nos dados lidos pelo Peek, a India Post hoje muitas vezes envia códigos como `BAG_DISPATCH`; o Peek converte os conhecidos em frases claras (como "Bag Dispatched" ou "Item Presented To Customs") e exibe os demais em palavras legíveis. Veja mais em [o que significam os status de rastreamento](guide:tracking-statuses).
 
 ## Recebendo um envio da India Post na Índia
 
-**Prazos de entrega.** Os padrões do Speed Post desde a postagem são: 1 a 2 dias localmente, 1 a 3 entre metrópoles, 1 a 4 entre capitais estaduais ou dentro do mesmo estado e 4 a 5 para o restante do país, mais um dia onde uma agência rural entrega. O 24 Speed Post entrega no dia seguinte em seis metrópoles (Nova Délhi, Mumbai, Bengaluru, Chennai, Calcutá e Hyderabad), sete dias por semana; em caso de atraso, o remetente pode pedir reembolso da postagem online em até 7 dias.
+**Prazos de entrega.** Os padrões do Speed Post desde a postagem são: 1 a 2 dias localmente, 1 a 3 entre metrópoles, 1 a 4 entre capitais estaduais ou dentro do mesmo estado e 4 a 5 para o restante do país, mais um dia onde a entrega cabe a uma agência filial (branch office). O 24 Speed Post entrega no dia seguinte em seis metrópoles (Nova Délhi, Mumbai, Bengaluru, Chennai, Calcutá e Hyderabad), sete dias por semana; em caso de atraso, o remetente pode pedir reembolso da postagem online em até 7 dias.
 
-**SMS e OTP.** Em encomendas Speed Post, o celular cadastrado recebe SMS na chegada à agência entregadora e na entrega. Alguns envios exigem código único (OTP) na entrega — incluso no 24 Speed Post e opcional pago nos demais.
+**SMS e OTP.** Em encomendas Speed Post, o celular cadastrado recebe SMS na chegada à agência entregadora e na entrega. Alguns envios Speed Post só são entregues mediante código de uso único (OTP) — incluso no 24 Speed Post e opcional pago nos demais envios Speed Post.
 
-**Entrega sem sucesso.** O rastreador registra quando um Delivery Intimation Notice é emitido avisando que o objeto está disponível. Veja [entregas sem sucesso](guide:missed-delivery) e [encomendas não retiradas](guide:uncollected-parcel).
+**Entrega sem sucesso.** O rastreador registra quando um Delivery Intimation Notice é emitido avisando que o objeto está disponível para entrega. Veja [entregas sem sucesso](guide:missed-delivery) e [encomendas não retiradas](guide:uncollected-parcel).
 
-**Alteração de endereço.** O remetente que cadastrou online em uma conta India Post pode solicitar devolução ou redirecionamento antes da entrega ou da saída com o carteiro.
+**Alteração de endereço.** O remetente que cadastrou online em uma conta India Post pode solicitar devolução ou redirecionamento enquanto o objeto não for entregue nem atribuído a um carteiro para entrega.
 
 ## Encomendas da India Post no exterior: entrega e alfândega
 
@@ -59,7 +59,7 @@ A India Post oferece EMS (até 35 kg), International Tracked Packet para lojas o
 
 ## Rastreamento da India Post parado, extravio ou devolução
 
-**Sem leituras há algum tempo.** A India Post afirma que a ausência temporária de leitura não significa que o item não foi enviado: eventos podem demorar a aparecer, sobretudo em áreas rurais ou vindos do exterior. Assim que um envio internacional mostrar `Aircraft Departure`, consulte os correios do país de destino com o mesmo número. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
+**Sem leituras há algum tempo.** A India Post afirma que a ausência de leitura não significa que o item não foi enviado: eventos podem demorar a aparecer, sobretudo em áreas rurais ou vindos do exterior. Assim que um envio internacional mostrar `Aircraft Departure`, consulte os correios do país de destino com o mesmo número. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
 **Extraviado, atrasado ou danificado.** Reclame após o prazo padrão do serviço e em até 60 dias da transação informando o código do objeto; o prazo padrão de análise da India Post é de 90 dias. O Speed Post doméstico reembolsa a postagem por atraso e paga o dobro do frete ou ₹ 1.000 (o menor valor) por extravio, violação ou avaria. Mercadorias em EMS têm cobertura até o valor do bem ou 130 SDR (o menor) mais a postagem, e atrasos superiores a 5 dias além da norma geram reembolso de 5% do frete. International Tracked Packet cobre até o valor ou ₹ 1.000 (o menor). Comprou online? Avise também a loja: veja [encomendas extraviadas](guide:lost-parcel) e [encomendas danificadas](guide:damaged-parcel).
 
@@ -83,11 +83,11 @@ O [Peek](/) reconhece duas letras, nove dígitos e `IN` como India Post quando o
 
 O Peek não consulta diretamente o site da India Post: lê as leituras pelo MySpeedPost, site de rastreamento fora do domínio da India Post que busca os dados dela (ou pelo track91, rastreador da mesma operadora, quando o MySpeedPost encaminha a consulta para lá). Quando a cópia tem mais de 30 minutos, o Peek solicita atualização ao MySpeedPost e mantém a cópia anterior se não conseguir atualizar, então uma leitura pode chegar com certo atraso ao Peek.
 
-O Peek exibe cada evento no texto da India Post, com a agência e, na Índia, seu código PIN (o track91 não inclui PIN), marcando a agência no mapa quando o local é verificado. Decolagens aparecem como "Aircraft Departure", ou com número do voo e aeroportos quando informados. O Peek classifica eventos em etapas próprias: falha de entrega aparece como "Tentativa de entrega", e recusa, avaria, extravio ou endereço insuficiente como "Precisa de atenção". Via track91, as linhas são mais curtas: `Dispatched` (enviado ao exterior) e `Aircraft arrival in Transit country` (pousou em trânsito) aparecem como "Em trânsito", e `Delivered` como "Entregue". O Peek remove nome do destinatário, endereço e assinatura, e não mostra data prevista. Leituras na Índia seguem o horário indiano; leituras no exterior seguem o fuso do destino a partir do pouso ou da primeira leitura `(Inb)` (tanto via MySpeedPost quanto track91), convertidas para o fuso horário do seu dispositivo, informado em uma linha ao final do histórico em peektracker.com e nos apps iPhone e Android.
+O Peek exibe cada evento no texto da India Post, com a agência e, na Índia, seu código PIN (o track91 não inclui PIN), marcando a agência no mapa quando o local é verificado. Decolagens aparecem como "Aircraft Departure", ou com número do voo e aeroportos quando informados. O Peek classifica eventos em etapas próprias: falha de entrega aparece como "Tentativa de entrega", e recusa, avaria, extravio ou endereço insuficiente como "Precisa de atenção". Via track91, as linhas são mais curtas: `Dispatched` (enviado ao exterior pelo centro internacional) e `Aircraft arrival in Transit country` (pousou em trânsito) aparecem como "Em trânsito", e `Delivered` como "Entregue". O Peek remove nome do destinatário, endereço e assinatura, e não mostra data prevista. Leituras na Índia seguem o horário indiano; leituras no exterior seguem o fuso do destino a partir do pouso ou da primeira leitura `(Inb)` (tanto via MySpeedPost quanto track91), convertidas para o fuso horário do seu dispositivo, informado em uma linha ao final do histórico em peektracker.com e nos apps iPhone e Android.
 
-Quando a India Post informa o país de destino — ou não informa e você rastreia fora da Índia — o Peek também consulta uma transportadora conhecida nesse país com o mesmo código `IN`, como USPS, Royal Mail, Canada Post, Australia Post, [DHL](carrier:dhl) na Alemanha ou [La Poste](carrier:la-poste) na França, passando para ela assim que surgem leituras mais novas e mantendo o histórico da India Post. O Peek cobre a maior parte da Europa e outros países (incluindo NZ Post na Nova Zelândia e Qatar Post no Catar), mas não Emirados Árabes, Kuwait, Omã, Singapura, Malásia ou Sri Lanka. Ele não consulta a India Post para códigos emitidos por outros correios: escolher India Post para um desses exibe "não emite códigos como este".
+Quando a India Post informa o país de destino — ou não informa e você rastreia fora da Índia — o Peek também consulta uma transportadora conhecida nesse país com o mesmo código `IN`, como USPS, Royal Mail, Canada Post, Australia Post, [DHL](carrier:dhl) na Alemanha ou [La Poste](carrier:la-poste) na França, passando para ela assim que surgem leituras mais novas e mantendo o histórico da India Post. O Peek conhece uma para a maior parte da Europa e alguns outros países (incluindo NZ Post na Nova Zelândia e Qatar Post no Catar), mas nenhuma para Emirados Árabes, Kuwait, Omã, Singapura, Malásia ou Sri Lanka. Ele não consulta a India Post para códigos emitidos por outros correios: escolher India Post para um desses exibe "não emite códigos como este".
 
-Enquanto o pacote estiver aberto, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos e até a cada 2 minutos quando sai para entrega; nos demais períodos, e após dois dias sem novidades (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. As consultas a cada 2 minutos rodam a partir das 6h (horário local) do dia da saída para entrega enquanto o MySpeedPost ou os correios locais respondem; após repasse, segue o ritmo dos correios do destino. Por meio de outros serviços de rastreamento, até a cada 15 minutos enquanto o pacote estiver aberto ou com alertas ligados. Alertas disponíveis: "Cada movimentação", "Etapas importantes" ou "Só a entrega". Se o pacote travar com a India Post, "Pedir ajuda a India Post" abre a página Contact Us oficial. O Peek não pode contatar a India Post, seus correios locais nem a loja por você.
+Enquanto o pacote estiver aberto, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos e até a cada 2 minutos quando sai para entrega; nos demais períodos, e após dois dias sem novidades (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. As consultas a cada 2 minutos rodam a partir das 6h (horário local) do dia da saída para entrega enquanto o MySpeedPost ou os correios locais respondem; após repasse, segue o ritmo dos correios do destino. Por meio de outros serviços de rastreamento, até a cada 15 minutos nesse dia, enquanto o pacote estiver aberto ou com alertas ligados. Alertas disponíveis: "Cada movimentação", "Etapas importantes" ou "Só a entrega". Se o pacote travar com a India Post, "Pedir ajuda a India Post" abre a página Contact Us oficial. O Peek não pode contatar a India Post, seus correios locais nem a loja por você.
 
 ## Perguntas sobre o rastreamento da India Post
 
@@ -101,11 +101,11 @@ Leituras podem demorar a aparecer, principalmente em agências rurais ou vindas 
 
 ### Quanto tempo o Speed Post leva para entregar?
 
-O padrão da India Post é de 1 a 3 dias entre metrópoles e 4 a 5 dias para o restante da Índia (mais um dia em agências rurais). O 24 Speed Post entrega no dia seguinte em seis metrópoles.
+O padrão da India Post é de 1 a 3 dias entre metrópoles e 4 a 5 dias para o restante da Índia (mais um dia onde a entrega cabe a uma agência filial). O 24 Speed Post entrega no dia seguinte em seis metrópoles.
 
 ### Qual é o telefone de atendimento da India Post?
 
-1800 266 6868 (ligação gratuita na Índia): atendentes das 8h às 20h no horário da Índia e linha automática 24 horas por dia, exceto feriados oficiais.
+1800 266 6868 (ligação gratuita): atendentes das 8h às 20h no horário da Índia e linha automática 24 horas por dia, exceto feriados oficiais.
 
 :::sources
 - [India Post: Home](https://www.indiapost.gov.in/) – rastreador, linha de ajuda e alerta contra fraudes
@@ -122,4 +122,5 @@ O padrão da India Post é de 1 a 3 dias entre metrópoles e 4 a 5 dias para o r
 - [India Post: Guidelines on Complaint Registration](https://www.indiapost.gov.in/grievance-redressal/guidelines) – prazos e canais de reclamação
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tarifa de € 3 e taxa de manuseio da UE de € 2
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – cobrança por item e definição de item
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – textos dos eventos (inclusive os do track91), o que o Peek lê e em que fuso horário, a que correio ele pergunta em seguida
 :::

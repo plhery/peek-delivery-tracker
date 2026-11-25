@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Speedaf Express: códigos, status e contatos
-description: Rastreie um pacote da Speedaf Express da China para África, Oriente Médio ou Paquistão: formatos de código, status, alfândega e contatos.
+description: Rastreie um pacote da Speedaf Express da China para Nigéria, Quênia, Gana, Paquistão ou EAU: formatos de código, status, tentativas de entrega e contatos.
 slug: rastreamento-speedaf
 published: 2026-11-24
 updated: 2026-11-24
@@ -28,7 +28,7 @@ A Speedaf registra seus eventos em inglês — ou em chinês e, às vezes, no id
 | A Speedaf mostra | O Peek mostra | O que significa para você |
 | --- | --- | --- |
 | `processing, order has been inbounded` | Recebida pela transportadora | O armazém da Speedaf na China, citado antes, recebeu o pacote. |
-| `processing assembling operation`, `processing, order has been outbounded` | Em trânsito | Agrupado em lote e despachado do armazém. |
+| `processing assembling operation`, `processing, order has been outbounded` | Em trânsito | Ensacado e depois despachado do armazém. |
 | `clearance in progress` | Na alfândega | Declaração de exportação na China. |
 | `Delivery to the airport`, `Cargo flight departured`, `Cargo flight arrived` | Em trânsito | A caminho do aeroporto, voo partiu e voo pousou no seu país. |
 | `Clearance handover`, `Customs clearance in progress` | Na alfândega | Levado do aeroporto à alfândega do seu país. |
@@ -47,7 +47,7 @@ A Speedaf registra seus eventos em inglês — ou em chinês e, às vezes, no id
 | `Transported to the warehouse，【Return Overdue】` | Precisa de atenção | Voltando ao armazém da Speedaf. |
 | `Warehouse received` | Devolvida ao remetente | O pacote devolvido chegou de volta ao armazém da Speedaf. |
 
-Um simples `In Transit` pode esconder uma retenção: o código interno da Speedaf pode indicar pacote retido para conferência de estoque. `Products not for personal use` e `Clearance Exception` significam que a alfândega levantou uma dúvida ou problema; `Long Time Tax No Paid,Email To Sender` indica que o imposto ficou muito tempo sem pagamento e a Speedaf avisou o remetente por e-mail. Em chinês, observe `进行处理，订单已操作入库` ("Recebida pela transportadora"), `清关中` ("Na alfândega"), `已做派件扫描` ("Saiu para entrega") e `包裹【已签收】` ("Entregue").
+Um simples `In Transit` pode esconder uma retenção: o código interno da Speedaf por trás dele indica pacote retido para conferência de estoque. `Products not for personal use` e `Clearance Exception` significam que a alfândega levantou uma dúvida ou problema; `Long Time Tax No Paid,Email To Sender` indica que o imposto ficou muito tempo sem pagamento e a Speedaf avisou o remetente por e-mail. Em chinês, observe `进行处理，订单已操作入库` ("Recebida pela transportadora"), `清关中` ("Na alfândega"), `已做派件扫描` ("Saiu para entrega") e `包裹【已签收】` ("Entregue").
 
 ## Entrega da Speedaf: porta a porta, retirada e tentativas
 
@@ -59,7 +59,7 @@ As regras de entrega constam dos termos de cada país (escritos para o remetente
 - **Quênia, Uganda e Paquistão:** o pacote retorna ao remetente se não puder ser entregue até a terceira tentativa, ou se você recusar o pacote ou o pagamento de taxas. Os três acrescentam que a Speedaf entrega no endereço, mas não necessariamente em mãos à pessoa citada.
 - **Nigéria e EAU:** um pacote é considerado não entregável se você o recusar ou não pagar o valor COD, se o endereço estiver errado ou fora da área atendida, ou se o dia pedido por você ultrapassar o prazo de guarda da Speedaf (não informado por nenhum dos dois).
 
-A Speedaf não publica um prazo fixo de retirada em suas unidades. Perdeu o entregador? Veja [entregas perdidas](guide:missed-delivery).
+A Speedaf não publica prazo de retirada para suas unidades. Perdeu o entregador? Veja [entrega não realizada](guide:missed-delivery).
 
 ## Alfândega na Speedaf: pending Tax
 
@@ -90,7 +90,7 @@ Cada site nacional da Speedaf lista seus próprios contatos no rodapé (os da Ir
 | Nigéria | +234 800 070 7070, +234 708 063 6400, +234 9073064940 (também WhatsApp) | ng.info@speedaf.com, nigeria.info@speedaf.com | Seg–Sex 8h–17h, Sáb 8h–14h |
 | Gana | +233 30 824 9100 | gh.info@speedaf.com | Seg–Sáb 8h30–17h30 |
 | Quênia | +254 741 000 666, +254 741 000 888; WhatsApp +254 741000666 | kenya.info@speedaf.com | Seg–Sex 8h–18h, Sáb 8h–14h |
-| Uganda | +256 709 198 795 | ug.info@speedaf.com | Seg–Sex 9h–17h, Sáb 8h–14h |
+| Uganda | +256 709 198 795 | ug.info@speedaf.com | Seg–Sex 9h–17h, Sáb 9h–14h |
 | Zâmbia | +260 971269390 | zm.info@speedaf.com | Seg–Sex 7h45–17h15, Sáb 8h–13h |
 | África do Sul | +27 108247184, +27 726393849; WhatsApp +27 664562613 | cs.southafrica@speedaf.com | não informado |
 | Paquistão | +92 311 118 7654; WhatsApp +92 3450010817 | pk.info@speedaf.com | Seg–Dom 9h–18h |
@@ -105,13 +105,13 @@ A Central de Ajuda da Speedaf acrescenta telefones para os demais países da lis
 
 ## Como rastrear um pacote da Speedaf no Peek
 
-O [Peek](/) identifica a Speedaf pelo formato quando o código começa com NG, GH, KE, UG, RW, ZM, ZA, EG, MA, SA, AE, PK, KZ, MU, RE, MV ou TR seguido de 9 dígitos e R ou E. Quando traz 12 dígitos após um desses códigos ou IE, o formato sozinho não basta: o Peek consulta a Speedaf mostrando "Consultando serviços de rastreamento…" e depois "Speedaf está com esta encomenda" se ela reconhecer o código. O Peek não tem formato próprio para Suíça, Albânia, Montenegro ou Sérvia: nesses casos, ou em códigos fora desses padrões, escolha "Speedaf" em "Trocar". Um link de speedaf.com com `tradeNo=` identifica a Speedaf qualquer que seja o número. O Peek envia o número em maiúsculas, então minúsculas funcionam normalmente.
+O [Peek](/) identifica a Speedaf pelo formato quando o código começa com NG, GH, KE, UG, RW, ZM, ZA, EG, MA, SA, AE, PK, KZ, MU, RE, MV ou TR seguido de 9 dígitos e R ou E. Quando traz 12 dígitos após um desses códigos ou IE, o formato sozinho não basta: o Peek consulta a Speedaf mostrando "Consultando serviços de rastreamento…" e depois "Speedaf está com esta encomenda." se ela reconhecer o código. O Peek não tem formato próprio para Suíça, Albânia, Montenegro ou Sérvia: nesses casos, ou em códigos fora desses padrões, escolha "Speedaf" em "Trocar". Um link de speedaf.com com `tradeNo=` identifica a Speedaf qualquer que seja o número. O Peek envia o número em maiúsculas, então pode digitar em minúsculas.
 
-O Peek lê o rastreamento próprio da Speedaf: status, histórico, país de destino e horário de entrega. Cada evento traz o relógio da unidade (horário da China nos armazéns e depois do seu país), e o Peek converte para o fuso do seu aparelho; em peektracker.com e nos aplicativos para iPhone e Android, o histórico termina com "Horários no seu fuso horário:" e o nome dele. A Speedaf só cita unidades dentro dos textos, então não há mapa nem previsão de entrega. Se a Speedaf reconhece o número mas ainda sem leituras (comum em pacotes mais antigos), o Peek exibe "Aguardando Speedaf" — ou "Aguardando a primeira movimentação de Speedaf" em códigos de 12 dígitos ainda não fixados na Speedaf — e segue verificando. Se um pacote na Speedaf continuar sem leitura após dois dias e nenhum outro serviço responder, o Peek mostra "Depois de dois dias, a transportadora ainda não reconhece este código. Confira o código, escolha outra transportadora ou exclua a encomenda." e passa a verificar diariamente (semanalmente após uma semana da adição).
+O Peek lê o rastreamento próprio da Speedaf: status, histórico, país de destino e horário de entrega. Cada evento traz o relógio da unidade (horário da China nos armazéns e depois do seu país), e o Peek converte para o fuso do seu aparelho; em peektracker.com e nos aplicativos para iPhone e Android, o histórico termina com "Horários no seu fuso horário:" e o nome dele. A Speedaf só cita unidades dentro dos textos, então não há mapa, e ela não dá previsão de entrega. Se a Speedaf reconhece o número mas não mostra leituras (como em alguns pacotes mais antigos), o Peek exibe "Aguardando Speedaf" — ou "Aguardando a primeira movimentação de Speedaf" em códigos de 12 dígitos não atribuídos à Speedaf — e segue verificando. Se um pacote atribuído à Speedaf continuar sem leitura após dois dias e nenhum outro serviço responder, o Peek mostra "Depois de dois dias, a transportadora ainda não reconhece este código. Confira o código, escolha outra transportadora ou exclua a encomenda." e passa a verificar diariamente (semanalmente após uma semana da adição).
 
 Os eventos aparecem como a Speedaf escreve, em inglês ou chinês, removendo nomes de entregadores/funcionários e telefone do entregador. Quem assinou continua visível para você na linha de entrega; links compartilhados ocultam esse dado e mostram apenas `Delivered`. O Peek também omite comprovante de entrega, link de imposto e quantidade de volumes, acompanhando apenas o número adicionado (não outros volumes do mesmo conhecimento). Como a Speedaf entrega por conta própria, não há segunda transportadora.
 
-Enquanto o pacote estiver aberto, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos, e até a cada 2 minutos a partir das 6h no horário local no dia em que a Speedaf registra saída para entrega, enquanto o rastreador da Speedaf responder (por serviços de rastreamento, até a cada 15 minutos enquanto o pacote estiver aberto ou com alertas ligados); fora disso, de hora em hora. Após dois dias sem novidade (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Ele pode avisar em "Cada movimentação", "Etapas importantes" ou "Só a entrega", mas não pode pagar impostos, reagendar entrega nem falar com a Speedaf ou a loja por você.
+Enquanto o pacote estiver aberto, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos, e até a cada 2 minutos a partir das 6h no horário local no dia em que a Speedaf registra saída para entrega, enquanto o próprio rastreador da Speedaf responder (por meio de serviços de rastreamento, até a cada 15 minutos); fora disso, de hora em hora. Após dois dias sem novidade (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Ele pode avisar em "Cada movimentação", "Etapas importantes" ou "Só a entrega", mas não pode pagar impostos, reagendar entrega nem falar com a Speedaf ou a loja por você.
 
 ## Perguntas sobre o rastreamento Speedaf
 
@@ -139,7 +139,6 @@ Que há imposto ou taxa a pagar antes de a alfândega do seu país liberar o pac
 - [Speedaf: Last-mile delivery](https://www.speedaf.com/ke-en/product/warehouse-delivery) – pagamento na entrega e porta a porta
 - [Speedaf: Help Center](https://www.speedaf.com/ng-en/help) – prazo, rastreamento no site/app e telefones por país
 - [Speedaf: Track](https://www.speedaf.com/ng-en/send-parcel) – até 20 números e link de impostos na África do Sul
-- [Speedaf: Track (China English)](https://www.speedaf.com/cn-en/send-parcel) – página de rastreamento
 - [Speedaf: Look for Service Site](https://www.speedaf.com/ke-en/location-map) – mapa de unidades
 - [Speedaf: Customer Support](https://www.speedaf.com/ng-en/service/support) – formulário de contato
 - [Speedaf Nigeria: Home](https://www.speedaf.com/ng-en) – telefones, e-mails, horários e WhatsApp
@@ -155,7 +154,8 @@ Que há imposto ou taxa a pagar antes de a alfândega do seu país liberar o pac
 - [Speedaf Kenya: Terms and Conditions](https://www.speedaf.com/ke-en/service-rule) – tentativas, recusa, destinatário, reclamações e prazos
 - [Speedaf Uganda: Terms and Conditions](https://www.speedaf.com/ug-en/service-rule) – o mesmo para Uganda
 - [Speedaf Pakistan: Terms and Conditions](https://www.speedaf.com/pk-en/service-rule) – tentativas, destinatário, reclamações e entrega contestada
-- [Speedaf UAE: Terms & Conditions](https://www.speedaf.com/ae-en/service-rule) – entregas domésticas: tentativas, pacotes não entregáveis e prazos de reclamação
-- [Speedaf Nigeria: Service Agreement](https://www.speedaf.com/ng-en/service-rule) – entregas domésticas: pacotes não entregáveis e prazos de reclamação
+- [Speedaf UAE: Terms & Conditions](https://www.speedaf.com/ae-en/service-rule) – entregas domésticas: tentativas, pacotes não entregáveis, prazos de reclamação e indenizações com o remetente
+- [Speedaf Nigeria: Service Agreement](https://www.speedaf.com/ng-en/service-rule) – entregas domésticas: pacotes não entregáveis, prazos de reclamação e indenizações com o remetente
 - [Speedaf Saudi Arabia: Express Shipping Terms](https://www.speedaf.com/sa-en/service-rule) – avaria em até 48 horas
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – rede, formatos de código (RE, RW e TR conferidos em 8 de novembro de 2026), textos e significados dos eventos, o que a página da Speedaf e o Peek mostram
 :::

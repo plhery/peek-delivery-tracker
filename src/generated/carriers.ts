@@ -15302,6 +15302,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff6600"
     },
     {
+      "id": "tnt",
+      "catalog": "tnt",
+      "slug": "rastreamento-tnt",
+      "title": "Rastreamento TNT: número da remessa, status e contato",
+      "name": "TNT",
+      "color": "#ff6600"
+    },
+    {
       "id": "sf-express",
       "catalog": "sf-express",
       "slug": "rastreamento-sf-express",
@@ -15508,6 +15516,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento J&T Express na Arábia Saudita, EAU e Kuwait",
       "name": "J&T Express Middle East",
       "color": "#e60000"
+    },
+    {
+      "id": "far-international",
+      "catalog": "far-international",
+      "slug": "rastreamento-far-international",
+      "title": "Rastreamento FAR International: códigos FAR…YQ e status",
+      "name": "FAR International",
+      "color": "#003b75"
     },
     {
       "id": "jifan",
@@ -18793,6 +18809,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "slug": "tnt-italy-tracking",
       "title": "TNT Italy 意大利快递查询：运单号、状态与派送失败处理",
       "name": "TNT Italy",
+      "color": "#ff6600"
+    },
+    {
+      "id": "tnt",
+      "catalog": "tnt",
+      "slug": "tnt-kuaidi-chaxun",
+      "title": "TNT 快递查询：9 位运单号、物流状态与客服电话",
+      "name": "TNT",
       "color": "#ff6600"
     },
     {

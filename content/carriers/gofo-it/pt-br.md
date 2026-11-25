@@ -1,6 +1,6 @@
 ---
 title: Rastreamento GOFO Italy: códigos GFIT, status e reclamações
-description: Rastreie um pacote da GOFO na Itália: formato dos códigos GFIT e CIIT, significado dos status em italiano e como reclamar em caso de atraso.
+description: Rastreie um pacote da GOFO na Itália: formato dos códigos GFIT e CIIT, significado dos status em italiano e como reclamar em caso de atraso ou extravio.
 slug: rastreamento-gofo-italia
 published: 2026-11-24
 updated: 2026-11-24
@@ -44,11 +44,11 @@ O rastreamento da GOFO também classifica os pacotes em categorias amplas. `Avvi
 
 Se a [YunExpress](carrier:yunexpress) entregou seu pacote à GOFO Italy, o rastreamento da própria YunExpress pode repassar os eventos da GOFO em inglês: `Preparing for delivery` no depósito antes de o entregador sair, e `Package departed from sorting center` ao lado do italiano `Il pacco ha lasciato il centro di smistamento`.
 
-## Pacote GOFO atrasado, entrega perdida, extravio ou avaria
+## Pacote GOFO atrasado, entrega não realizada, extravio ou avaria
 
 **Sem movimento.** O Peek continua consultando a GOFO. Se passarem quatro dias sem nova leitura antes da saída para entrega, a página do pacote no Peek avisa e traz o link "Pedir ajuda a GOFO Italy" para a página de suporte italiana. Veja também [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
-**Entrega perdida.** Após `Consegna fallita, tipo:Destinatario assente` ou `Consegna fallita, tipo:L'indirizzo è errato`, o Peek exibe "Tentativa de entrega" — o mesmo vale para qualquer outro motivo após `tipo:`. O passo seguinte depende da GOFO: veja [entregas perdidas](guide:missed-delivery) para saber o que conferir.
+**Entrega não realizada.** Após `Consegna fallita, tipo:Destinatario assente` ou `Consegna fallita, tipo:L'indirizzo è errato`, o Peek exibe "Tentativa de entrega" — o mesmo vale para qualquer outro motivo após `tipo:`. O passo seguinte depende da GOFO: veja [entregas não realizadas](guide:missed-delivery) para saber o que conferir.
 
 **Atrasado.** Pelas regras de consumo da União Europeia, a loja precisa entregar em até 30 dias, salvo prazo combinado diferente. Se não cumprir, dê um prazo adicional razoável; se passar de novo, você pode cancelar o pedido e receber o dinheiro de volta.
 
@@ -72,9 +72,9 @@ A página de ajuda da GOFO Italy fica no site italiano em gofo.com, e o Peek exi
 
 ## Como rastrear um pacote da GOFO Italy no Peek
 
-O [Peek](/) identifica códigos `GFIT` e `CIIT` sozinho. Você também pode colar links da página italiana da GOFO (em gofo.com ou gofoexpress.it, com `id=` e o número).
+O [Peek](/) reconhece diretamente os códigos `GFIT` e `CIIT`. Você também pode colar links da página italiana da GOFO (em gofo.com ou gofoexpress.it, com `id=` e o número).
 
-Enquanto o pacote estiver aberto, ou no dia da entrega com alertas ligados, o Peek lê o rastreamento italiano da GOFO até a cada 10 minutos, e até a cada 2 minutos a partir das 6h no horário local no dia em que a GOFO registra saída para entrega, enquanto o rastreador da GOFO responder (por serviços de rastreamento, até a cada 15 minutos naquele dia enquanto o pacote estiver aberto ou com alertas ligados); fora disso, de hora em hora. Após dois dias sem novidade (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Ele mostra o status, o histórico com a localidade informada pela GOFO em cada leitura, o horário da entrega e esses locais no mapa, e pode avisar em "Cada movimentação", "Etapas importantes" ou "Só a entrega". Quando a GOFO informa apenas código de depósito ou o país, o evento aparece sem cidade. Antes da primeira leitura na GOFO, o Peek exibe "Aguardando GOFO Italy" e continua tentando, sem tratar o código como desconhecido de imediato. Se dois dias depois a GOFO ainda não reconhecer e nenhum outro serviço responder, o Peek mostra "Depois de dois dias, a transportadora ainda não reconhece este código. Confira o código, escolha outra transportadora ou exclua a encomenda." e passa a verificar uma vez por dia — e semanalmente após uma semana da adição. Se a GOFO listar o envio mas ainda sem leituras, ela já conhece o número: o Peek mantém "Aguardando GOFO Italy" sem pedir que você confira o código. O Peek exibe a data prevista da GOFO até a saída para entrega, entrega, devolução ou ponto de retirada; não mostra peso e omite fotos de entrega e avisos da GOFO. Ele não pode falar com a GOFO nem com a loja por você.
+Enquanto o pacote estiver aberto, ou no dia da entrega com alertas ligados, o Peek lê o rastreamento italiano da GOFO até a cada 10 minutos, e até a cada 2 minutos a partir das 6h no horário local no dia em que a GOFO registra saída para entrega, enquanto o rastreador da GOFO responder (por serviços de rastreamento, até a cada 15 minutos naquele dia enquanto o pacote estiver aberto ou com alertas ligados); fora disso, de hora em hora. Após dois dias sem novidade (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Ele mostra o status, o histórico com a localidade informada pela GOFO em cada leitura, o horário da entrega e esses locais no mapa, e pode avisar em "Cada movimentação", "Etapas importantes" ou "Só a entrega". Quando a GOFO informa apenas código de depósito ou o país, o evento aparece sem local. Antes da primeira leitura na GOFO, o Peek exibe "Aguardando GOFO Italy" e continua tentando, sem tratar o código como desconhecido de imediato. Se dois dias depois a GOFO ainda não reconhecer e nenhum outro serviço responder, o Peek mostra "Depois de dois dias, a transportadora ainda não reconhece este código. Confira o código, escolha outra transportadora ou exclua a encomenda." e passa a verificar uma vez por dia — e semanalmente após uma semana da adição. Se a GOFO listar o envio mas ainda sem leituras, ela já conhece o número: o Peek continua verificando e mostra "Aguardando GOFO Italy", sem pedir que você confira o código. O Peek exibe a data prevista da GOFO até a saída para entrega, entrega, devolução ou ponto de retirada; não mostra peso e omite fotos de entrega e avisos da GOFO. Ele não pode falar com a GOFO nem com a loja por você.
 
 ## Perguntas sobre o rastreamento GOFO
 
@@ -84,7 +84,7 @@ A linha mais recente do rastreamento indica. `Arrivato alla struttura di destina
 
 ### A GOFO é confiável?
 
-A empresa italiana da GOFO é a GOFO Italia s.r.l., sediada em Lainate, na província de Milão. A AGCOM, reguladora postal italiana, registrou em sua Determina n. 12/26/DSP de 2 de setembro de 2026 que em 17 de junho de 2026 notificou a empresa por três supostas infrações: prestar atividade postal no âmbito do serviço universal sem a licença individual exigida, sem carta de serviços (Carta dei servizi) e sem procedimentos de resolução de disputas para usuários. Segundo a decisão, a empresa admitiu as acusações relativas à carta de serviços e aos procedimentos de disputa e pagou a multa correspondente em valor reduzido, levando a AGCOM a encerrar essa parte do processo. A empresa contestou a acusação sobre autorização inadequada, cuja apuração seguiu o trâmite ordinário.
+A empresa italiana da GOFO é a GOFO Italia s.r.l., sediada em Lainate, na província de Milão. A AGCOM, reguladora postal italiana, registrou em sua Determina n. 12/26/DSP de 2 de setembro de 2026 que em 17 de junho de 2026 notificou a empresa por três supostas infrações: prestar atividade postal no âmbito do serviço universal sem a licença individual exigida, sem carta de serviços (Carta dei servizi) e sem procedimentos de resolução de disputas para usuários. Segundo a decisão, a empresa admitiu as acusações relativas à carta de serviços e aos procedimentos de disputa e pagou a multa correspondente em valor reduzido, levando a AGCOM a encerrar essa parte do processo. A empresa contestou a acusação sobre autorização inadequada, e, nessa parte, o processo deveria seguir o trâmite ordinário.
 
 ### A GOFO é a mesma empresa que a CIRRO Parcel?
 
@@ -99,4 +99,5 @@ Fale com a loja. Pelas regras da UE, ela responde pela entrega até o pacote che
 - [AGCOM: FAQ contenzioso tra utenti e operatori postali](https://www.agcom.it/faq-contenzioso-tra-utenti-e-operatori-postali) – reclamação em 45 dias, conciliação em 60, Formulario CP em 90, encomendas até 31,5 kg, encomendas avariadas e central de atendimento
 - [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – entrega em até 30 dias, prazo extra e responsabilidade por avarias até o recebimento
 - [Your Europe: FAQs, shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_en.htm) – loja comprova entrega e conferência na entrega
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formatos de código, links, frases e categorias em italiano, repasses em inglês da YunExpress, CIRRO Parcel Italy, o que o Peek mostra e omite
 :::

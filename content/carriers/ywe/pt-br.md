@@ -26,7 +26,7 @@ Espaços e letras minúsculas não importam ao colar o código no Peek.
 
 ## Status do rastreamento YWE explicados
 
-O rastreador da YWE lista cada movimentação com data, hora, deslocamento em relação ao GMT, cidade e estado, do mais recente ao mais antigo. Os registros estão em inglês. Na ordem em que costumam aparecer:
+O rastreador da YWE lista cada movimentação com data, hora, deslocamento em relação ao GMT, cidade e estado, do mais recente ao mais antigo. Os registros estão em inglês. Na ordem em que o pacote os recebe:
 
 | A YWE mostra | O que significa para você | O Peek mostra |
 | --- | --- | --- |
@@ -58,7 +58,7 @@ O rastreador da YWE lista cada movimentação com data, hora, deslocamento em re
 
 A YWE afirma ter começado em Los Angeles em 2024 e planeja cobrir a maior parte dos Estados Unidos até o fim de 2026.
 
-**Tentativas de entrega e retirada.** A YWE não publica regras sobre quantas tentativas faz, se deixa aviso ou se oferece pontos de retirada. Depois de uma tentativa sem sucesso, o registro indica que o pacote volta ao depósito da YWE. Para combinar nova entrega, envie um e-mail à YWE (veja abaixo) com o código de rastreamento, seu endereço completo e instruções de entrega. Veja [entrega perdida](guide:missed-delivery).
+**Tentativas de entrega e retirada.** A YWE não publica regras sobre quantas tentativas faz, se deixa aviso ou se oferece pontos de retirada. Depois de uma tentativa sem sucesso, o registro indica que o pacote volta ao depósito da YWE. Para combinar nova entrega, envie um e-mail à YWE (veja abaixo) com o código de rastreamento, seu endereço completo e instruções de entrega. Veja [entrega não realizada](guide:missed-delivery).
 
 **Reino Unido, Irlanda, Canadá e Austrália.** A YWE não cita atendimento fora dos Estados Unidos. Se você recebeu um código YWE para um envio destinado a outro país, pergunte ao vendedor qual transportadora faz a entrega local.
 
@@ -100,7 +100,7 @@ O rastreador da YWE também pode mostrar uma janela de entrega de duas horas dur
 
 Como o rastreador da YWE não cita outra transportadora, ao adicionar um código YWE o Peek não exibe a linha "Entrega por" e acompanha na YWE até a entrega. Se o rastreador da YWE ficar indisponível, o Peek consulta serviços de rastreamento nesse intervalo.
 
-Enquanto o pacote estiver aberto, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos, e até a cada 2 minutos a partir das 6h no horário local no dia em que o pacote sai para entrega, enquanto o rastreador da YWE responder (por serviços de rastreamento, até a cada 15 minutos enquanto o pacote estiver aberto ou com alertas ligados); fora disso, de hora em hora. Após dois dias sem novidade (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Ele pode enviar alertas para "Cada movimentação", "Etapas importantes" (entrega, retirada, alfândega, tentativas perdidas e devoluções) ou "Só a entrega". Não pode falar com a YWE nem com o vendedor por você.
+Enquanto o pacote estiver aberto, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos, e até a cada 2 minutos a partir das 6h no horário local no dia em que o pacote sai para entrega, enquanto o rastreador da YWE responder (por meio de serviços de rastreamento, até a cada 15 minutos nesse dia, enquanto o pacote estiver aberto ou com alertas ligados); fora disso, de hora em hora. Após dois dias sem novidade (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Ele pode enviar alertas para "Cada movimentação", "Etapas importantes" (entrega, retirada, alfândega, tentativas sem sucesso e devoluções) ou "Só a entrega". Não pode falar com a YWE nem com o vendedor por você.
 
 ## Perguntas sobre o rastreamento YWE
 
@@ -131,4 +131,5 @@ Primeiro o vendedor, pois foi ele quem contratou a entrega com a YWE. A YWE rece
 - [YanwenExpress: Customer support](https://www.yanwenexpress.com/contactus.html) – sem telefone nem horário exibidos, FAQs para parceiros de entrega
 - [YanwenExpress: Join us](https://www.yanwenexpress.com/joinus.html) – equipes locais nos Estados Unidos integrando a rede
 - [YanwenExpress: Privacy Policy](https://customer-portal.yanwenexpress.com/agreement/Yanwen_privacy_policy) – Yanwen Express LLC, contas exclusivas para empresas
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nomes, formato do código YWE, o rastreador e seu link, textos dos registros e suas etapas, códigos de centros, motivos e locais, a classificação em Alert, deslocamentos em relação ao GMT, locais e nomes que o Peek mantém ou omite, o que o Peek deixa de fora, nenhuma outra transportadora no histórico da YWE, a passagem da Yanwen para a YWE quando ela cita a YanwenExpress
 :::

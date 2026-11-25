@@ -44,7 +44,7 @@ YWE 官网按最新时间倒序列出每条扫描记录，包含日期、时间�
 | `Return to sender` | 包裹正在退回寄件人，尚未送达寄件人处。 | “需要留意” |
 | `Returned to sender, shipment has been received in sender warehouse.` | 已退回并被寄件人仓库签收。 | “已退回寄件人” |
 
-**站点代码、原因与位置。** `LAX01` 和 `NJC01` 是分拨中心代码，经过其他枢纽时会显示相应代码。同样，`[Restricted Address]` 只是派送失败原因之一，`(Front door)` 只是常见放置位置之一，其他扫描会显示不同的原因与位置。
+**站点代码、原因与位置。** `LAX01` 和 `NJC01` 是分拨中心代码，经过其他枢纽时会显示相应代码。同样，`[Restricted Address]` 只是派送失败原因之一，`(Front door)` 只是放置位置之一，其他扫描会显示不同的原因与位置。
 
 **Alert 并不一定代表异常。** YWE 官网按最新扫描将包裹归入 Awaiting、Transit、Delivered、Alert 和 Returned 五类。它会把代表到达本地派送站的 `Parcel received by local  Facility.` 归入 Alert，但其实这是正常流程，Peek 会将其显示为“运输中”。
 
@@ -54,7 +54,7 @@ YWE 官网按最新时间倒序列出每条扫描记录，包含日期、时间�
 
 ## 谁负责派送 YWE 包裹
 
-**美国。** YWE 通过其官网所称的“全国派送服务合作商网络（Delivery Service Partner networks nationwide）”自行完成尾程派送，即遍布全美的本地派送团队加入网络代其揽收或投递。在 Peek 的记录里，YWE 轨迹从 YWE 枢纽一路延续到收件人门口，不会出现其他快递公司名称。
+**美国。** YWE 通过其官网所称的“全国派送服务合作商网络（Delivery Service Partner networks nationwide）”自行完成尾程派送，即遍布全美的本地派送团队加入网络代其揽收或投递。在 Peek 的代码里，YWE 轨迹从 YWE 枢纽一路延续到收件人门口，不会出现其他快递公司名称。
 
 YWE 表示其于 2024 年在洛杉矶起步，计划到 2026 年底覆盖美国大部分地区。
 
@@ -62,7 +62,7 @@ YWE 表示其于 2024 年在洛杉矶起步，计划到 2026 年底覆盖美国�
 
 **英国、爱尔兰、加拿大和澳大利亚。** YWE 官网未列出美国以外的服务。如果寄往其他国家的订单给了你 YWE 单号，请向卖家确认当地派送承运商。
 
-**YWE 与燕文物流。** 在 Peek 中，[燕文物流](carrier:yanwen)是另一家独立承运商，拥有自己的单号和查询页，YWE 官网也没有说明两家是否存在关联。不过当燕文轨迹将 YanwenExpress 列为派送商并给出 YWE 单号时，Peek 会显示“由 YWE 派送”并同步向 YWE 查询。在 YWE 仅有预报、尚未出现实际扫描前，页面会显示“YWE 已收到预报，尚未收到包裹”；一旦 YWE 出现不晚于燕文最新时间的扫描，Peek 便改在 YWE 上跟进，同时保留燕文此前的轨迹。
+**YWE 与燕文物流。** 在 Peek 中，[燕文物流](carrier:yanwen)是另一家独立承运商，拥有自己的单号和查询页，YWE 官网也没有说明两家是否存在关联。不过当燕文轨迹将 YanwenExpress 列为派送商并给出 YWE 单号时，Peek 会显示“由 YWE 派送”并同步向 YWE 查询。在 YWE 仅有预报、尚未出现实际扫描前，页面会显示“YWE 已收到预报，尚未收到包裹”；一旦 YWE 出现不早于燕文最新时间的扫描，Peek 便改在 YWE 上跟进，同时保留燕文此前的轨迹。
 
 ## YWE 包裹未到或物流停滞怎么办
 
@@ -98,9 +98,9 @@ Peek 会显示包裹状态、每条扫描的城镇、州和国家，以及签收
 
 YWE 官网在运输途中还可能展示两小时派送时段、司机位置地图和签收照片；Peek 不包含这些内容，也会省略扫描地点的街道地址，且不显示预计送达日期。
 
-由于 YWE 轨迹不会指向其他快递，直接添加 YWE 单号时 Peek 不会显示“由 … 派送”，并会一直跟进到签收。如果 YWE 官网暂时无法访问，Peek 会先向物流跟踪服务查询。
+由于 YWE 轨迹不会指向其他快递，直接添加 YWE 单号时 Peek 不会显示“由 … 派送”，并会一直跟进到签收。如果 YWE 官网无法访问，Peek 会在此期间向物流跟踪服务查询。
 
-在你打开页面或开启派送当天提醒的情况下，只要 YWE 官网正常响应，Peek 最高每 10 分钟检查一次，并在包裹扫描派送当天自当地时间早上 6 点起最高每 2 分钟检查一次（通过物流跟踪服务查询时，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次）；其余时候每小时检查一次。连续两天无新动态后（若仍停留在“已生成面单”或“已揽收”，则为 12 小时后），改为每小时检查一次。你可以选择“每次扫描”、“重要环节”（派送、自提、清关、派送未成功与退件）或“仅派送当天”提醒。Peek 无法代你联系 YWE 或卖家。
+在你打开包裹页面时，或在派送当天开启了提醒时，只要 YWE 官网正常响应，Peek 最高每 10 分钟检查一次，并在包裹扫描派送当天自当地时间早上 6 点起最高每 2 分钟检查一次（通过物流查询服务时，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次）；其余时候每小时检查一次。连续两天无新动态后（若仍停留在“已生成面单”或“已揽收”，则为 12 小时后），改为每小时检查一次。你可以选择“每次扫描”、“重要环节”（派送、自提、清关、派送未成功与退件）或“仅派送当天”提醒。Peek 无法代你联系 YWE 或卖家。
 
 ## YWE 快递查询常见问题
 
@@ -118,7 +118,7 @@ Peek 将两者作为两家独立快递处理：燕文物流有自己的单号和
 
 ### “Container picked up by YWE” 是什么意思？
 
-说明 YWE 已经提取了装载你包裹的空运集装箱。逗号后的代码（如 LAX01）是分拨中心编号。包裹本体的扫描（如 `Parcel received by in LAX01.`）会在拆箱后出现。Peek 对这两条都显示为“运输中”。
+说明 YWE 已经提取了装载你包裹的空运集装箱。逗号后的代码（如 LAX01）是分拨中心编号。包裹本体的扫描（如 `Parcel received by in LAX01.`）会在之后出现。Peek 对这两条都显示为“运输中”。
 
 ### YWE 包裹丢失应该联系谁？
 
@@ -131,4 +131,5 @@ Peek 将两者作为两家独立快递处理：燕文物流有自己的单号和
 - [YanwenExpress: Customer support](https://www.yanwenexpress.com/contactus.html) – 未显示电话号码或服务时间、面向派送合作商的 FAQ
 - [YanwenExpress: Join us](https://www.yanwenexpress.com/joinus.html) – 全美各地本地派送团队加入网络
 - [YanwenExpress: Privacy Policy](https://customer-portal.yanwenexpress.com/agreement/Yanwen_privacy_policy) – Yanwen Express LLC，账号仅限企业用户
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – 名称、YWE 单号格式、查询页及其链接、扫描原文及对应阶段、枢纽代码、原因与位置、Alert 归类、GMT 时差、Peek 保留或省略的地点与姓名、Peek 不显示的内容、YWE 轨迹中没有其他快递、燕文注明 YanwenExpress 时的交接
 :::

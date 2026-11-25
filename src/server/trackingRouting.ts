@@ -891,6 +891,9 @@ export class TrackingRouter {
     askedElsewhere?: (carrier: string, number: string) => number;
     /** Told of each ask the router paces (`paced_asks`), so a handoff probe in the same check waits for it too. */
     onAsk?: (carrier: string) => void;
+    /** Until when the check leaves a carrier resting from a spell of refusals, as epoch milliseconds, zero when it
+     * doesn't (carrierRests.ts): given to scheduled checks only. */
+    restsUntil?: (carrier: string) => number;
     /** Whether a carrier enters some scans at their planned time, which its own lookup holds back until due (its adapter's `plannedScans`). */
     plannedScans?: (carrier: string) => boolean;
     /**
@@ -1373,6 +1376,14 @@ export class TrackingRouter {
         report('carrier_input_required', carrier); return null;
       }
       if (millis(state.failures[carrier]?.retry_at) > now().getTime()) return null;
+      // A carrier resting from a spell of refusals (carrierRests.ts) is left to the providers, as while its failure's wait
+      // runs. The parcel's own carrier is asked again once the rest ends, not after the 6 h a provider's answer sets.
+      const restEnd = this.options.restsUntil?.(carrier) ?? 0;
+      if (restEnd > now().getTime()) {
+        if (!candidate || ownInputs) state.direct_retry_at = iso(restEnd);
+        report('carrier_rested', carrier);
+        return null;
+      }
       // A carrier the parcel is not filed under waits out its minimum interval since this number last asked it
       // (Poste Italiane's searches an hour): no failure, and it is asked once the interval has passed.
       if (pacedOut(carrier)) return null;

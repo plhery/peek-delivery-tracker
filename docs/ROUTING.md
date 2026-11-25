@@ -450,6 +450,17 @@ Spring GDS's lookups go through PostNL's API, whose 20 calls a minute every call
 429 is waited out like any other, but its health sample is counted apart (`shared_quota`), since
 it says how busy the API is rather than whether Spring GDS works.
 
+USPS turns every route away in spells, TRAWL's sessions and the browser alike. Each server counts
+the USPS lookups in a row that end without its answer: a challenge, a page it could not read, or a
+rate limit, our own `self_paced` included. An answer ends the count, `not_found` and no history
+included; a transport error or a timeout neither counts nor ends it. After 5 in a row, scheduled
+checks rest USPS for 3 minutes (`carrier_rested`). As while a carrier's failure waits for its retry,
+they ask the providers and count no failure. The parcel's own carrier is asked again at the first
+scheduled check after the rest, not 6 h after a provider's answer. A check someone asked for
+(opened, added, refreshed), a release's re-check and a handoff to USPS read it all the same, and
+count. The first lookup after the rest reads it again: a refusal rests it again, and an answer ends
+the spell. A server starts with no count (`src/server/carrierRests.ts`).
+
 ## Refresh cadence
 
 The cadence is the same around the clock, but for a round sorted overnight (below): carriers
@@ -1428,6 +1439,7 @@ hourly review in [OBSERVABILITY.md](OBSERVABILITY.md).
 | `provider_reading` | Ordertracker was left while it read the carriers for the number: the check asked the next providers and came back, or the next check does |
 | `paced_deferred` | Our own pacing refused the parcel's carrier (`self_paced`) and the check waits for its next search |
 | `paced_fallback` | Our own pacing refused the carrier of an account's parcel nothing has answered for an hour, and the check asks the providers meanwhile |
+| `carrier_rested` | A scheduled check left USPS resting after a spell of refusals and asked the providers (Rate limits, under When a source fails) |
 | `carrier_retry_awaited` | The carrier that answers for the parcel failed in passing and the scheduled check waits for its retry, asking no provider |
 | `all_providers_unavailable` | Uncovered parcel or broad outage |
 | `health_store_unavailable` | Migration or database coordination problem (Sentry issue) |

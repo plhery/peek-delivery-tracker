@@ -802,6 +802,8 @@ Key JSON events:
   answered, or its lookups answer and no check went unanswered for 2 hours (info), with its
   `kind`, `subject`, `title`, `failures` and `attempts` (for a direct step's, the unanswered
   checks among all its checks of the day);
+- `carrier_rest_started`: USPS refused 5 lookups in a row and scheduled checks rest it (`streak`,
+  `rest_ms`); `carrier_rest_ended` when an answer ended a rest ([ROUTING.md](ROUTING.md));
 - `provider_setting_unknown` (error): at start, the names `TRACKING_UNIVERSAL_PROVIDERS` holds that spell
   no provider (`unknown`), which turn the providers they meant off, and how many providers the setting
   still allows (`providers_allowed`; 0 when it names no other). Nothing else of the setting is logged.

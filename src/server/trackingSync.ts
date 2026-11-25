@@ -34,6 +34,7 @@ import { providerRefusals } from './providerRefusals';
 import { refusesNumber } from './numberRefusal';
 import { recognizeBrowser, takeBrowserHistory } from './browserRecognition';
 import { requireRoyalBrowser, royalBrowserAllowed, usesRoyalBrowser, withRoyalBrowserAdmission } from './royalBrowserAdmission';
+import { carrierRests } from './carrierRests';
 import { hostStepRecorder, watchingSteps, withHeldLookups } from './stepRecorder';
 import { recordScheduledBacklog, recordScheduledRunGaveWay, recordStatusMapping, withLookupPurpose } from './metrics';
 import { takePreflightRecognition } from './preflightRecognition';
@@ -2829,6 +2830,8 @@ export class TrackingSyncService {
               checks.reuse<CarrierResult>(universalLookupKey(source, number, postcode, timezone, carrier)) } : {}),
             health: this.client, now: this.now, refusals: providerRefusals, misses: providerMisses, observed: observedCoverage,
             askedElsewhere: probeAsked, onAsk: (carrier: string) => { routerAsks.set(carrier, this.now().getTime()); },
+            // Only a scheduled check leaves a carrier resting from a spell of refusals: a release's re-check reads it.
+            ...(context.trigger === 'scheduled' ? { restsUntil: (carrier: string) => carrierRests.until(carrier, this.now().getTime()) } : {}),
             ...(unseen !== null ? { hourlyUntil: now.getTime() - unseen + UNSEEN_HOURLY_MS } : {}),
             takePrefetchedUniversal: takePreflightHistory, preflightInputNeeded, refuses: refusesNumber,
             ...(this.adapter.plannedScans ? { plannedScans: (carrier: string) => this.adapter.plannedScans!(carrier) } : {}),
@@ -3743,9 +3746,12 @@ export class TrackingSyncService {
   private fetchCarrier(checks: ParcelLookups | undefined, carrierId: string, trackingNumber: string,
     trackingUrl: string | null, dpdPostcode: string | null, language: string | null, data?: unknown, phoneDigits: string | null = null): Promise<CarrierResult> {
     const postcodeCountry = storedPostcodeCountry(data, dpdPostcode) ?? null;
-    const lookup = () => phoneDigits
+    // Each lookup's end counts toward a spell of the carrier's refusals or ends it (carrierRests.ts).
+    const lookup = () => (phoneDigits
       ? this.adapter.fetch(carrierId, trackingNumber, trackingUrl, dpdPostcode, language, postcodeCountry, phoneDigits)
-      : this.adapter.fetch(carrierId, trackingNumber, trackingUrl, dpdPostcode, language, ...(postcodeCountry ? [postcodeCountry] : []));
+      : this.adapter.fetch(carrierId, trackingNumber, trackingUrl, dpdPostcode, language, ...(postcodeCountry ? [postcodeCountry] : []))).then(
+      (result) => { carrierRests.noteLookup(carrierId, undefined, this.now().getTime()); return result; },
+      (error: unknown) => { carrierRests.noteLookup(carrierId, error, this.now().getTime()); throw error; });
     if (!checks) return lookup();
     const key = carrierLookupKey(carrierId, trackingNumber, trackingUrl, dpdPostcode, language, postcodeCountry, phoneDigits);
     if (!this.adapter.browserOnly?.(carrierId)) return checks.once(key, lookup);

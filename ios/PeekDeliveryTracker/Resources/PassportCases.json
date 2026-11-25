@@ -353,7 +353,47 @@
       "count": 2,
       "continent": "europe"
      }
-    ]
+    ],
+    "year2026": {
+     "deliveredCount": 6,
+     "countryCount": 5,
+     "countries": [
+      [
+       "CN",
+       1
+      ],
+      [
+       "HK",
+       1
+      ],
+      [
+       "DE",
+       2
+      ],
+      [
+       "CH",
+       5
+      ],
+      [
+       "FR",
+       2
+      ]
+     ],
+     "stamps": [
+      "first",
+      "rightNextDoor",
+      "express",
+      "familiarFace",
+      "acrossBorders",
+      "connected",
+      "secondTry",
+      "aroundWorld",
+      "newHorizons",
+      "fourSeasons",
+      "homeForHolidays"
+     ],
+     "fastest": 28800000
+    }
    }
   },
   {
@@ -569,7 +609,23 @@
       "count": 3,
       "continent": "europe"
      }
-    ]
+    ],
+    "year2026": {
+     "deliveredCount": 3,
+     "countryCount": 1,
+     "countries": [
+      [
+       "CH",
+       3
+      ]
+     ],
+     "stamps": [
+      "first",
+      "rightNextDoor",
+      "express"
+     ],
+     "fastest": 86400000
+    }
    }
   },
   {
@@ -886,7 +942,32 @@
       "count": 1,
       "continent": "northAmerica"
      }
-    ]
+    ],
+    "year2026": {
+     "deliveredCount": 10,
+     "countryCount": 2,
+     "countries": [
+      [
+       "US",
+       10
+      ],
+      [
+       "CA",
+       1
+      ]
+     ],
+     "stamps": [
+      "first",
+      "rightNextDoor",
+      "express",
+      "familiarFace",
+      "acrossBorders",
+      "connected",
+      "ten",
+      "busyDoorstep"
+     ],
+     "fastest": 100800000
+    }
    }
   },
   {
@@ -1069,7 +1150,25 @@
       "count": 1,
       "continent": "europe"
      }
-    ]
+    ],
+    "year2026": {
+     "deliveredCount": 1,
+     "countryCount": 2,
+     "countries": [
+      [
+       "CH",
+       1
+      ],
+      [
+       "DE",
+       1
+      ]
+     ],
+     "stamps": [
+      "first"
+     ],
+     "fastest": null
+    }
    }
   }
  ]

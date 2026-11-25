@@ -423,10 +423,7 @@ private struct PassportCopy {
     let localizer: Localizer
 
     var passport: String { localizer.text("passport.title") }
-    var allTime: String { localizer.text("passport.allTime") }
     func delivered(_ count: Int) -> String { localizer.text("passport.delivered", ["count": count]) }
-    var onTheWay: String { localizer.text("passport.onTheWay") }
-    var carriers: String { localizer.text("passport.carriers") }
     var deliveryTimes: String { localizer.text("passport.deliveryTimes") }
     var average: String { localizer.text("passport.average") }
     var personalBest: String { localizer.text("passport.personalBest") }
@@ -465,7 +462,4 @@ private struct PassportCopy {
         localizer.text(count == 1 ? "passport.parcels.one" : "passport.parcels.many", ["count": count])
     }
 
-    func stampsEarned(_ count: Int, total: Int) -> String {
-        localizer.text("passport.stampsEarned", ["count": count, "total": total])
-    }
 }

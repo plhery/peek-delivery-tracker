@@ -6,11 +6,11 @@ published: 2026-11-26
 updated: 2026-11-26
 ---
 
-A Tianhui Hengyuan (天汇恒源, também grafada THHY ou TH) é uma transitária chinesa. Se uma loja na China enviou seu pedido por ela, o código tem AT, dez dígitos e TH: cole-o no campo acima. O Peek não conhece site institucional da empresa, e o rastreador dela roda em um endereço numérico de servidor. Leia esse rastreador com cautela: depois das primeiras linhas da própria Tianhui Hengyuan, as seguintes são geradas por um roteiro automático e não mostram onde a encomenda realmente está.
+A Tianhui Hengyuan (天汇恒源, também grafada THHY ou TH) é um agente de cargas chinês. Se uma loja na China enviou seu pedido por ela, o código tem AT, dez dígitos e TH: cole-o no campo acima. O Peek não conhece site institucional da empresa, e o rastreador dela roda em um endereço numérico de servidor. Leia esse rastreador com cautela: depois das primeiras linhas da própria Tianhui Hengyuan, as seguintes são geradas por um roteiro automático e não mostram onde a encomenda realmente está.
 
 ## Código de rastreamento Tianhui Hengyuan: como ele é
 
-Os conhecimentos da Tianhui Hengyuan têm AT, dez dígitos e TH, totalizando 14 caracteres. Eles seguem uma regra de numeração da Hualei (华磊), a plataforma de transitárias usada pelo rastreador dela. Com dígitos inventados:
+Os conhecimentos da Tianhui Hengyuan têm AT, dez dígitos e TH, totalizando 14 caracteres. Eles seguem uma regra de numeração da Hualei (华磊), a plataforma de agentes de cargas usada pelo rastreador dela. Com dígitos inventados:
 
 | Código | O que é |
 | --- | --- |
@@ -28,7 +28,7 @@ Espaços e letras minúsculas não importam ao colar o código no Peek.
 
 ## Status de rastreamento da Tianhui Hengyuan explicados
 
-As linhas reais da própria transitária são poucas, e duas delas aparecem apenas em chinês. Na ordem em que costumam surgir:
+As linhas reais do próprio agente de cargas são poucas, e duas delas aparecem apenas em chinês. Na ordem em que a encomenda passa por elas:
 
 | O rastreador da Tianhui Hengyuan diz | O que significa para você | O Peek mostra |
 | --- | --- | --- |
@@ -47,7 +47,7 @@ As linhas reais da própria transitária são poucas, e duas delas aparecem apen
 | `到达寄达地` | Chegou ao país de destino |
 | `送交境外进口海关` | Apresentada à alfândega de importação no exterior |
 
-As linhas em inglês incluem `Transporting to the next facility`, `Packages ready for delivery on the next working day` e `Packages in transit for delivery`. Dá para reconhecer as linhas em chinês pelos horários: todas caem no mesmo segundo do minuto, separadas por múltiplos de seis minutos. Portanto, não tome `送交境外进口海关` como prova de que a encomenda chegou à alfândega do seu país nem `Packages in transit for delivery` como prova de que saiu para entrega. Serviços de rastreamento que copiam o registro da Tianhui Hengyuan podem reproduzir essas mesmas linhas.
+As linhas em inglês incluem `Transporting to the next facility`, `Packages ready for delivery on the next working day` e `Packages in transit for delivery`. Dá para reconhecer as linhas em chinês pelos horários: todas caem no mesmo segundo do minuto, separadas por múltiplos de seis minutos. Portanto, não tome `送交境外进口海关` como prova de que a encomenda chegou à alfândega do seu país nem `Packages in transit for delivery` como prova de que está a caminho de você. Serviços de rastreamento que copiam o registro da Tianhui Hengyuan podem reproduzir essas mesmas linhas.
 
 **Horários.** Todos os horários no rastreador da Tianhui Hengyuan estão no fuso de Pequim, inclusive nas linhas supostamente no exterior, sem indicar fuso. Um registro às 16h ali corresponde à manhã em Londres e à madrugada em Nova York.
 
@@ -79,19 +79,19 @@ O Peek não encontrou dados de contato da Tianhui Hengyuan: não conhece site da
 
 O [Peek](/) não pode ter certeza de que um código é da Tianhui Hengyuan só pelo formato: AT, dez dígitos e TH é apenas uma correspondência fraca. Cole-o mesmo assim: o Peek acompanha mais de 4.500 transportadoras. Ao adicionar, o Peek consulta o rastreador da Tianhui Hengyuan ("Consultando serviços de rastreamento…") e exibe "Tianhui Hengyuan está com esta encomenda." quando o rastreador reconhece o código. Caso contrário, toque em "Trocar" e escolha Tianhui Hengyuan (buscar por 天汇恒源 ou THHY também encontra), ou use "Trocar transportadora" em uma encomenda já adicionada. Faça o mesmo para uma referência do vendedor: o Peek mostra então o código do próprio pedido em "Tianhui Hengyuan rastreia com o código". O Peek remove hífens, porém, então uma referência com hífens não é localizada pelo Peek: peça ao vendedor o código AT…TH.
 
-O Peek lê o rastreador da Tianhui Hengyuan e exibe o status, cada linha com seu local e o país de destino quando constar no registro. As duas linhas em chinês aparecem no inglês usado pelas outras transitárias da plataforma: `Goods leave the operation center` e `The electronic cargo information has been received`. Os horários são lidos no horário de Pequim e exibidos no fuso do seu dispositivo. O Peek omite nomes, endereço, códigos postais, peso, taxas, assinatura e comprovante de entrega que possam constar no registro da Tianhui Hengyuan, e não mostra data prevista de entrega, pois a Tianhui Hengyuan não fornece nenhuma.
+O Peek lê o rastreador da Tianhui Hengyuan e exibe o status, cada linha com seu local e o país de destino quando constar no registro. As duas linhas em chinês aparecem no inglês usado pelos outros agentes de cargas da plataforma: `Goods leave the operation center` e `The electronic cargo information has been received`. Os horários são lidos no horário de Pequim e exibidos no fuso do seu dispositivo. O Peek omite nomes, endereço, códigos postais, peso, taxas, assinatura e comprovante de entrega que possam constar no registro da Tianhui Hengyuan, e não mostra data prevista de entrega, pois a Tianhui Hengyuan não fornece nenhuma.
 
 Do rastreador da Tianhui Hengyuan, o Peek retém as linhas de roteiro, qualquer linha gravada mais de doze horas antes do horário que carrega — ou, no mesmo segundo de uma linha assim, mais de seis horas antes do seu próprio horário — e qualquer linha datada após o instante da consulta, no horário de Pequim. O Peek se baseia apenas nas linhas mantidas, não no status resumido do registro. Um pedido cujas linhas foram todas retidas ainda não tem histórico no Peek: ele mostra "Aguardando Tianhui Hengyuan", sem pedir para conferir o código, pois trata linhas gravadas com antecedência como sinal de que a Tianhui Hengyuan tem o pedido (assim como um envio listado ainda sem leitura), e continua consultando no ritmo de um pacote com apenas a etiqueta. Até que a encomenda seja entregue ou devolvida, o Peek abre o histórico com "O site de Tianhui Hengyuan mostra todo o trajeto com antecedência, entrega incluída. Essas etapas não são movimentações reais." e agrupa em cinza as linhas de roteiro e antecipadas sob "Ver", cada uma marcada com "Previsto para" ou "Registrado com antecedência para" e a respectiva data. Nenhuma dessas linhas conta como leitura real: não muda o status nem envia alertas. Sempre que retém parte ou todas as linhas, o Peek também descarta cópias dessas linhas vindas de serviços de rastreamento. Porém, quando o rastreador da empresa está fora do ar, o Peek recorre a serviços de rastreamento, cujas cópias podem incluir as linhas de roteiro.
 
 **Swiss Post.** O Peek transfere a encomenda somente quando o registro da Tianhui Hengyuan indica a Swiss Post como canal, contém um código da Swiss Post e não aponta destino fora da Suíça e de Liechtenstein. A encomenda passa então a exibir "Entrega por Swiss Post" com esse número (ou "Anunciada a Swiss Post, ainda não recebida" enquanto a Swiss Post tiver apenas a previsão, sem leitura própria), e assim que a Swiss Post registrar uma movimentação pelo menos tão recente quanto a última da Tianhui Hengyuan, o Peek acompanha por lá mantendo o histórico anterior. Fora isso, o Peek continua no rastreador da Tianhui Hengyuan: se o vendedor informar o código da transportadora entregadora, adicione-o como uma encomenda à parte.
 
-Enquanto a encomenda estiver aberta no Peek, ele consulta até a cada 10 minutos, passando para a cada hora quando a Tianhui Hengyuan fica quieta: 12 horas sem avançar além da primeira linha ou primeira leitura, ou dois dias sem novidades depois disso; fora isso, a cada hora. Uma encomenda aguardando ou em "Etiqueta criada" sem novidades há sete dias passa a ser verificada apenas a cada 6 horas, salvo se você estiver com ela aberta ou ela for esperada nesse dia. Como as linhas próprias da Tianhui Hengyuan são todas etapas iniciais, apenas "Cada movimentação" gera alertas para elas; "Etapas importantes" (entrega, retirada, alfândega, tentativas perdidas e devoluções) e "Só a entrega" aguardam etapas posteriores. O Peek não pode falar com a Tianhui Hengyuan nem com o vendedor por você.
+Enquanto a encomenda estiver aberta no Peek, ele consulta até a cada 10 minutos, passando para a cada hora quando a Tianhui Hengyuan fica quieta: 12 horas sem avançar além da primeira linha ou primeira leitura, ou dois dias sem novidades depois disso; fora isso, a cada hora. Uma encomenda aguardando ou em "Etiqueta criada" sem novidades há sete dias passa a ser verificada apenas a cada 6 horas, salvo se você estiver com ela aberta ou ela for esperada nesse dia. Como as linhas próprias da Tianhui Hengyuan são todas etapas iniciais, apenas "Cada movimentação" gera alertas para elas; "Etapas importantes" (entrega, retirada, alfândega, entregas não realizadas e devoluções) e "Só a entrega" aguardam etapas posteriores. O Peek não pode falar com a Tianhui Hengyuan nem com o vendedor por você.
 
 ## Perguntas sobre o rastreamento Tianhui Hengyuan
 
 ### O que é a Tianhui Hengyuan (THHY)?
 
-É uma transitária chinesa, 天汇恒源, também grafada THHY ou TH, cujo rastreador roda na plataforma de transitárias Hualei. O catálogo do Peek lista duas razões sociais para ela — 深圳市天汇恒源供应链有限公司 e 广州市天慧恒源供应链有限公司, empresas de cadeia de suprimentos (供应链) de Shenzhen e Guangzhou. Seus códigos têm AT, dez dígitos e TH.
+É um agente de cargas chinês, 天汇恒源, também grafado THHY ou TH, cujo rastreador roda na plataforma de agentes de cargas Hualei. O catálogo do Peek lista duas razões sociais para ela — 深圳市天汇恒源供应链有限公司 e 广州市天慧恒源供应链有限公司, empresas de cadeia de suprimentos (供应链) de Shenzhen e Guangzhou. Seus códigos têm AT, dez dígitos e TH.
 
 ### Um código AT…TH é da Thailand Post?
 
@@ -103,12 +103,12 @@ Porque depois das primeiras linhas próprias, o rastreador da Tianhui Hengyuan e
 
 ### Quem entrega encomendas da Tianhui Hengyuan?
 
-O Peek não sabe, e os registros da Tianhui Hengyuan não trazem código postal: pergunte ao vendedor qual transportadora faz a entrega e peça o código dela. A única entregadora para a qual o Peek pode transferir uma encomenda Tianhui Hengyuan é a Swiss Post, quando o registro a indica junto com um código da Swiss Post.
+O Peek não sabe, e os registros da Tianhui Hengyuan não trazem número postal: pergunte ao vendedor qual transportadora faz a entrega e peça o código dela. A única entregadora para a qual o Peek pode transferir uma encomenda Tianhui Hengyuan é a Swiss Post, quando o registro a indica junto com um código da Swiss Post.
 
 ### Quem procurar sobre uma encomenda extraviada da Tianhui Hengyuan?
 
 O vendedor onde você fez a compra: foi ele quem contratou a Tianhui Hengyuan. O Peek não conhece site nem dados de contato da Tianhui Hengyuan.
 
 :::sources
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nomes e razões sociais, plataforma Hualei, rastreador em endereço numérico por HTTP simples sem link publicado, formato AT…TH e correspondência fraca, busca por número ou referência com hífens, linhas da transitária e da plataforma e seus textos em inglês, linhas de roteiro do rastreamento personalizado e como identificá-las, fuso de Pequim, resposta para código desconhecido, ausência de código postal no registro, regra de transferência para a Swiss Post e formatos da Swiss Post, o que o Peek exibe, retém, omite e transfere
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nomes e razões sociais, plataforma Hualei, rastreador em endereço numérico por HTTP simples sem link publicado, formato AT…TH e correspondência fraca, busca por número ou referência com hífens, linhas do agente de cargas e da plataforma e seus textos em inglês, linhas de roteiro do rastreamento personalizado e como identificá-las, fuso de Pequim, resposta para código desconhecido, ausência de número postal no registro, regra de transferência para a Swiss Post e formatos da Swiss Post, o que o Peek exibe, retém, omite e transfere
 :::

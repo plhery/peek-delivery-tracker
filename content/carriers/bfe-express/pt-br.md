@@ -1,6 +1,6 @@
 ---
 title: Rastreamento BFE Express: códigos CK, WYB e status
-description: Rastreie encomendas BFE Express para Argentina, Peru, Uruguai e EUA: códigos CK e WYB, desembaraço aduaneiro, status e e-mails regionais de suporte.
+description: Rastreie encomendas BFE Express para Argentina, Peru, Uruguai e EUA: códigos CK e WYB, desembaraço aduaneiro, status e e-mails regionais de atendimento.
 slug: rastreamento-bfe-express
 published: 2026-11-26
 updated: 2026-11-26
@@ -20,7 +20,7 @@ O Peek aceita códigos da BFE Express de 6 a 50 letras e dígitos. O formulário
 | `CK548291736045182` | `CK54` + 13 dígitos (17 caracteres) — formato alternativo da Argentina (coincide em tamanho com [Colis Privé](carrier:colis-prive)). |
 | `CK512829173604518` | `CK512` + 12 dígitos (17 caracteres) — formato do Peru (coincide em tamanho com [Colis Privé](carrier:colis-prive)). |
 | `CK598829173604518` | `CK598` + 12 dígitos (17 caracteres) — formato do Uruguai (coincide em tamanho com [Colis Privé](carrier:colis-prive)). |
-| `WYB482917360` | `WYB` + 9 dígitos (12 caracteres) — conhecimento de transporte do Peru (coincide com [Colis Privé](carrier:colis-prive), Purolator e TNT Australia). |
+| `WYB482917360` | `WYB` + 9 dígitos (12 caracteres) — conhecimento de transporte do Peru (coincide com Purolator e TNT Australia). |
 
 Os dígitos após `CK` indicam o destino: `54` para Argentina, `512` para Peru e `598` para Uruguai. Se você colar um link direto no formato `bfeexpress.com/track?track_number=...`, o Peek extrai o código e seleciona a BFE Express imediatamente. Para outros padrões internacionais, veja o [guia de formatos de código de rastreamento](guide:tracking-number-formats).
 
@@ -55,9 +55,9 @@ Para encomendas domésticas na Argentina entregues diretamente por transportador
 
 ## Acompanhe a BFE Express com o Peek
 
-Cole seu código `CK...` ou `WYB...` no Peek, que acompanha mais de 4.500 transportadoras. O Peek nunca consulta a BFE Express automaticamente a partir de um número solto: para códigos `CK54` de 16 caracteres ele não consulta nenhuma transportadora; para códigos `CK` de 17 caracteres ele consulta a [Colis Privé](carrier:colis-prive); e para códigos `WYB` ele consulta Colis Privé, TNT Australia e Purolator (TNT Australia primeiro na Austrália, Purolator primeiro no Canadá). Depois ele consulta serviços de rastreamento ("Consultando serviços de rastreamento…") e classifica o pacote em BFE Express somente se um serviço de rastreamento a apontar como única transportadora com etapas datadas. Por isso, toque em "Trocar" e selecione BFE Express em "Compatível com este código", ou use "Trocar transportadora" em uma encomenda já adicionada. Um link `bfeexpress.com/track?track_number=...` vai direto para a BFE Express.
+Cole seu código `CK...` ou `WYB...` no Peek, que acompanha mais de 4.500 transportadoras. Só pelo formato, o Peek não sabe que o código é da BFE Express; por isso, ao adicionar, ele consulta a BFE Express ("Consultando serviços de rastreamento…") e mostra "BFE Express está com esta encomenda." quando a BFE Express reconhece o código. Para códigos `CK54` de 16 caracteres, consulta só a BFE Express. Para códigos `CK` de 17 caracteres, consulta também a [Colis Privé](carrier:colis-prive): primeiro na França e, nos outros países, só quando nem a BFE Express nem os serviços de rastreamento reconhecem o código. Para códigos `WYB`, consulta BFE Express, TNT Australia e Purolator: primeiro a BFE Express na Argentina, no Peru, no Uruguai e nos EUA, primeiro a Purolator no Canadá e primeiro a TNT Australia nos outros países. Para acompanhar a encomenda na BFE Express desde o início, toque em "Trocar" e selecione BFE Express em "Compatível com este código", ou use "Trocar transportadora" em uma encomenda já adicionada. Um link `bfeexpress.com/track?track_number=...` vai direto para a BFE Express.
 
-O Peek consulta diretamente a API de rastreamento da BFE Express por meio do [adaptador BFE Express do universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/bfe-express), de código aberto. Ele lê os dois blocos de registros em ordem cronológica, usa a cidade, unidade ou país como local e mantém o dia previsto de entrega e o país de destino. Horários com fuso GMT preservam esse instante exato; horários sem fuso usam o fuso do local (Buenos Aires para Ezeiza, Lima para Lima, Montevidéu para Montevidéu), leituras sem local usam o fuso da leitura vizinha e, na falta dele, o horário de Buenos Aires, sempre convertidos para o relógio do seu dispositivo. Endereços completos de rua e fotos de comprovante de entrega do portal da BFE ficam de fora.
+O Peek consulta o rastreamento da própria BFE Express por meio do [adaptador BFE Express do universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/bfe-express), de código aberto. Ele lê os dois blocos de registros em ordem cronológica, usa a cidade, unidade ou país como local e mantém o dia previsto de entrega e o país de destino. Horários com fuso GMT preservam esse instante exato; horários sem fuso usam o fuso do local (Buenos Aires para Ezeiza, Lima para Lima, Montevidéu para Montevidéu), leituras sem local usam o fuso da leitura vizinha e, na falta dele, o horário de Buenos Aires, sempre convertidos para o relógio do seu dispositivo. Endereços completos de rua e fotos de comprovante de entrega do portal da BFE ficam de fora.
 
 O Peek exibe as linhas da BFE Express como **Em trânsito**, exceto `Reparto en curso`, exibida como **Saiu para entrega**, e `Entregado`, exibida como **Entregue**. Ele também marca a encomenda como **Entregue** quando o próprio status da BFE indica `Delivered`.
 
@@ -69,7 +69,7 @@ Use as opções de alerta do Peek — **Cada movimentação**, **Etapas importan
 
 ## Como entrar em contato com a BFE Express
 
-A BFE Express lista e-mails regionais de suporte na [página Contact Us](https://www.bfeexpress.com/contactUS), todos com atendimento de **segunda a sexta, das 9h às 18h** (exceto feriados):
+A BFE Express lista e-mails regionais de atendimento na [página Contact Us](https://www.bfeexpress.com/contactUS), todos com atendimento de **segunda a sexta, das 9h às 18h** (exceto feriados):
 
 - **Argentina:** `info@ar.bfeexpress.com`
 - **Peru:** `info@pe.bfeexpress.com`

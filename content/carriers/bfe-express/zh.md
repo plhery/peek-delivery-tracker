@@ -55,7 +55,7 @@ BFE Express 官网提供小包运输、国际货运、清关、本地仓储及�
 
 ## 使用 Peek 追踪 BFE Express 包裹
 
-你可以将 `CK…` 或 `WYB…` 单号直接粘贴到支持超过 4,500 家承运商的 [Peek](/) 中。Peek 不会仅凭裸单号直接询问 BFE Express：对于 16 位 `CK54` 单号不会预设询问承运商；对于 17 位 `CK` 单号会询问 Colis Privé；对于 `WYB` 单号会询问 TNT Australia 和 Purolator（在加拿大优先问 Purolator，其他地区优先问 TNT Australia）。随后 Peek 会通过聚合追踪服务核实，且仅在追踪服务唯一指出 BFE Express 并附有带日期的扫描记录时才会归入 BFE Express。因此最直接的做法是在添加时点击“更换”，在“符合这个单号”下选择 BFE Express，或在已添加的包裹页面点击“更换快递公司”。如果粘贴 `bfeexpress.com/track?track_number=…` 链接，Peek 则会立即选定 BFE Express。
+你可以将 `CK…` 或 `WYB…` 单号粘贴到 [Peek](/) 中，Peek 跟踪 4,500 多家快递公司。仅凭单号形态，Peek 无法确定它属于 BFE Express，因此添加时 Peek 会询问 BFE Express（“正在查询物流服务…”），BFE Express 查到这个单号时显示“BFE Express 有这个包裹的记录。”对于 16 位 `CK54` 单号，Peek 只询问 BFE Express。对于 17 位 `CK` 单号，Peek 还会询问 [Colis Privé](carrier:colis-prive)：在法国先问 Colis Privé，在其他地区要等 BFE Express 和物流查询服务都查不到这个单号后才问。对于 `WYB` 单号，Peek 会询问 BFE Express、TNT Australia 和 Purolator：在阿根廷、秘鲁、乌拉圭和美国先问 BFE Express，在加拿大先问 Purolator，其他地区先问 TNT Australia。若想从一开始就在 BFE Express 跟踪，添加时点击“更换”，在“符合这个单号”下选择 BFE Express，或在已添加的包裹页面点击“更换快递公司”。如果粘贴 `bfeexpress.com/track?track_number=…` 链接，Peek 会立即选定 BFE Express。
 
 Peek 通过开源的 [universal-parcel-scraper BFE Express 适配器](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/bfe-express)直接请求 BFE Express 追踪接口，按时间顺序合并国际与末端两组记录，提取城市、网点或国家作为地点，并保留预计派送日与目的地国家。自带 GMT 偏移的时间按原始时刻保留；不带偏移的时间按扫描地点时区解析（埃塞萨按布宜诺斯艾利斯时间、利马按利马时间、蒙得维的亚按蒙得维的亚时间），无地点的扫描沿用相邻记录时区，其余默认布宜诺斯艾利斯时间，最后统一换算为你设备的本地时间。BFE 门户上显示的街道详细地址与签收照片不会被 Peek 保留。
 

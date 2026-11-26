@@ -428,13 +428,17 @@ object TrackingLocation {
         Pattern.compile("(?![\\p{script=Latin}$own])\\p{L}")
     }
 
+    /** CTT's site code and office ahead of its place ("1234567 - (CDP) 3045 - Coimbra 3045"). */
+    private val cttSite: Pattern = Pattern.compile("^\\d{6,7} - \\(")
+
     /**
      * Whether a location is shown by its town's name, as the server's place lookup gives it, rather than as written,
      * as on the web (`romanisesPlace`): it has a letter in a script other than Latin and the reader's own ("深圳市" for
-     * all but a Chinese reader, "東京都 ちよだ" for every one, "Москва" for all but a Russian reader). The stored scan
-     * keeps its words.
+     * all but a Chinese reader, "東京都 ちよだ" for every one, "Москва" for all but a Russian reader), or it starts with
+     * CTT's site code. The stored scan keeps its words.
      */
-    fun romanises(location: String, language: AppLanguage): Boolean = foreignLetters.getValue(language).matcher(location).find()
+    fun romanises(location: String, language: AppLanguage): Boolean =
+        foreignLetters.getValue(language).matcher(location).find() || cttSite.matcher(location).find()
 
     /**
      * For display: a location written in a script the reader may not read ([romanises]) is named by the town the

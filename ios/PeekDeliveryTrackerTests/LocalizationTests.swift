@@ -582,6 +582,10 @@ final class LocalizationTests: XCTestCase {
                                               language: .fr), .init(country: "TH", name: "Bangkok"))
         XCTAssertFalse(TrackingLocation.romanises("Hà Nội, VN", language: .en))
         XCTAssertTrue(TrackingLocation.romanises("とうきょう", language: .zh))
+        // CTT's site code ahead of the place: the town it was placed in.
+        XCTAssertEqual(TrackingLocation.place("1234567 - (CDP) 3045 - Coimbra 3045", placed: EventPlace(latitude: 40.21, longitude: -8.43, precision: .city, country: "PT", name: "Coimbra"),
+                                              language: .en), .init(country: "PT", name: "Coimbra"))
+        XCTAssertFalse(TrackingLocation.romanises("3045 Coimbra, PT", language: .en))
         XCTAssertEqual(TrackingLocation.place("Haiger, DE", placed: EventPlace(latitude: 50.74, longitude: 8.2, precision: .city, country: "DE", name: "Haiger"),
                                               language: .en), .init(country: "DE", name: "Haiger"))
         XCTAssertEqual(TrackingLocation.flag("CH"), "🇨🇭")

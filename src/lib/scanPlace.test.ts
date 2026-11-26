@@ -18,6 +18,14 @@ describe('scan places', () => {
     expect(scanPlace(location, placed ? { country: placed, name: 'Town', precision: 'city' } : undefined)).toEqual({ country, place });
   });
 
+  it('names a place behind CTT\'s site code by the town it was placed in', () => {
+    const coimbra = { country: 'PT', name: 'Coimbra', precision: 'city' as const };
+    expect(scanPlace('1234567 - (CDP) 3045 - Coimbra 3045', coimbra, 'en')).toEqual({ country: 'PT', place: 'Coimbra' });
+    expect(scanPlace('123456 - (CTT) Loja Coimbra', coimbra, 'pt')).toEqual({ country: 'PT', place: 'Coimbra' });
+    expect(scanPlace('1234567 - (CDP) 3045 - Coimbra 3045', null, 'en').place).toBe('1234567 - (CDP) 3045 - Coimbra 3045');
+    expect(romanisesPlace('3045 Coimbra, PT')).toBe(false);
+  });
+
   it('names a place written in a script other than Latin and the reader\'s own by the town it was placed in', () => {
     const shenzhen = { country: 'CN', name: 'Shenzhen', precision: 'city' as const };
     expect(scanPlace('深圳市', shenzhen, 'de')).toEqual({ country: 'CN', place: 'Shenzhen' });

@@ -709,6 +709,12 @@ class LocalizationTests {
         assertEquals(TrackingLocation.Place(country = "CN", name = "Shenzhen"), TrackingLocation.place("深圳市", shenzhen, AppLanguage.Ru))
         assertEquals(TrackingLocation.Place(country = "TH", name = "Bangkok"), TrackingLocation.place("กรุงเทพมหานคร", placed("TH", "Bangkok"), AppLanguage.Fr))
         assertEquals(false, TrackingLocation.romanises("Hà Nội, VN", AppLanguage.En))
+        // CTT's site code ahead of the place: the town it was placed in.
+        assertEquals(
+            TrackingLocation.Place(country = "PT", name = "Coimbra"),
+            TrackingLocation.place("1234567 - (CDP) 3045 - Coimbra 3045", placed("PT", "Coimbra"), AppLanguage.En),
+        )
+        assertEquals(false, TrackingLocation.romanises("3045 Coimbra, PT", AppLanguage.En))
         assertEquals("🇨🇭", TrackingLocation.flag("CH"))
         // Passport evidence stays a final field that names a region.
         assertEquals("CH", TrackingLocation.countryCode("Zürich, CH"))

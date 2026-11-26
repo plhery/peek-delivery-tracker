@@ -16558,6 +16558,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0c4c49"
     },
     {
+      "id": "sengi-express",
+      "catalog": "sengi-express",
+      "slug": "sengi-express-tracking",
+      "title": "Rastreio Sengi Express: China–Itália e repasse Poste",
+      "name": "Sengi Express",
+      "color": "#1a44a4"
+    },
+    {
+      "id": "serpost",
+      "catalog": "serpost",
+      "slug": "serpost-tracking",
+      "title": "Rastreio Serpost: códigos S10 do Peru, alfândega e ajuda",
+      "name": "Serpost",
+      "color": "#00308a"
+    },
+    {
       "id": "skypostal",
       "catalog": "skypostal",
       "slug": "rastreamento-skypostal",
@@ -21114,6 +21130,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "森吉物流（Sengi Express）查询：中意单号、清关与客服",
       "name": "Sengi Express",
       "color": "#1a44a4"
+    },
+    {
+      "id": "serpost",
+      "catalog": "serpost",
+      "slug": "serpost-tracking",
+      "title": "秘鲁邮政（Serpost）物流查询：S10 单号、海关状态与客服",
+      "name": "Serpost",
+      "color": "#00308a"
     },
     {
       "id": "yunda",

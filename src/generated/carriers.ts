@@ -15214,6 +15214,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "cargus",
+      "catalog": "cargus",
+      "slug": "cargus-tracking",
+      "title": "Rastreamento Cargus: código AWB, status e SHIP & GO",
+      "name": "Cargus",
+      "color": "#f68121"
+    },
+    {
       "id": "fan-courier",
       "catalog": "fan-courier",
       "slug": "rastreamento-fan-courier",
@@ -16172,6 +16180,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Onlog Express: códigos AA, status e contato",
       "name": "Onlog Express",
       "color": "#1a345d"
+    },
+    {
+      "id": "buffalo-ex",
+      "catalog": "buffalo-ex",
+      "slug": "buffalo-ex-tracking",
+      "title": "Rastreamento BUFFALO: códigos BUFZA, alfândega e suporte",
+      "name": "BUFFALO",
+      "color": "#bc8c4d"
     },
     {
       "id": "memphis-courier",
@@ -19258,6 +19274,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "保加利亚 Speedy 物流查询：11 位运单号、状态与快递柜",
       "name": "Speedy",
       "color": "#dc0032"
+    },
+    {
+      "id": "cargus",
+      "catalog": "cargus",
+      "slug": "cargus-tracking",
+      "title": "罗马尼亚 Cargus 物流查询：AWB 运单号、状态与 SHIP & GO",
+      "name": "Cargus",
+      "color": "#f68121"
     },
     {
       "id": "fan-courier",

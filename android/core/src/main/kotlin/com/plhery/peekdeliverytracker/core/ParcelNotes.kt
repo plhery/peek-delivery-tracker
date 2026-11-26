@@ -154,7 +154,7 @@ fun chosenNoteFileType(type: String?, name: String): String? {
 }
 
 private val controls = Regex("[\\u0000-\\u001f\\u007f/\\\\]")
-private val spaces = Pattern.compile("\\s+", Pattern.UNICODE_CHARACTER_CLASS).toRegex()
+private val spaces = Pattern.compile("\\s+", unicodeCharacterClass).toRegex()
 
 /** The name kept for a file: within 120 characters with its extension, which follows a change of type. */
 fun noteFileName(name: String, type: PackageFileType): String {

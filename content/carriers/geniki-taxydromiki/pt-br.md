@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Geniki Taxydromiki: voucher, status e contato
-description: Rastreie uma encomenda Geniki Taxydromiki na Grécia ou em Chipre: voucher de 10 dígitos, significado de cada status, entregas perdidas, reclamações e contato.
+description: Rastreie uma encomenda Geniki Taxydromiki na Grécia ou em Chipre: voucher de 10 dígitos, significado de cada status, entregas não realizadas, reclamações e contato.
 slug: rastreamento-geniki-taxydromiki
 published: 2026-11-26
 updated: 2026-11-26
@@ -10,7 +10,7 @@ A Geniki Taxydromiki (Γενική Ταχυδρομική, às vezes chamada de 
 
 ## Código de rastreamento Geniki Taxydromiki: como ele é
 
-A Geniki chama esse número de código da guia de remessa expressa (ΣΥ.ΔΕ.ΤΑ., grafado SYDETA no formulário de reclamações). O rastreador o chama de voucher. A Geniki não publica um formato oficial, mas os vouchers que o Peek lê têm 10 dígitos.
+A Geniki chama esse número de código da guia de remessa expressa (ΣΥ.ΔΕ.ΤΑ., grafado SYDETA no formulário de reclamações). O rastreador o chama de voucher. A Geniki não publica um formato, mas os vouchers que o Peek lê têm 10 dígitos.
 
 | Formato (inventado) | O que é |
 | --- | --- |
@@ -23,7 +23,7 @@ Dez dígitos não são exclusivos da Geniki. Os vouchers da ACS Courier têm exa
 
 ## Status de rastreamento da Geniki Taxydromiki explicados
 
-A página de rastreamento da Geniki aparece em grego no site grego e em inglês nos sites em inglês, búlgaro e romeno. Estes são os textos em inglês, na ordem em que costumam aparecer.
+A página de rastreamento da Geniki aparece em grego no site grego e em inglês nos sites em inglês, búlgaro e romeno. Estes são os textos em inglês, na ordem em que a encomenda costuma passar por eles.
 
 | Status da Geniki | O que significa para você |
 | --- | --- |
@@ -36,7 +36,7 @@ A página de rastreamento da Geniki aparece em grego no site grego e em inglês 
 | `Routing to other service point` | Encaminhada para outro ponto de atendimento. |
 | `Out for Delivery` | Com o entregador que faz a entrega. |
 | `Attempted Delivery - Absent recipient` | O entregador tentou entregar enquanto você não estava. |
-| `Attempted Delivery - Delivery Rescheduled` | Voltou ao ponto de atendimento após tentativa sem sucesso, com a entrega remarcada para outro dia. |
+| `Attempted Delivery - Delivery Rescheduled` | Voltou ao ponto de atendimento porque a entrega não foi realizada, e foi remarcada para outro dia. |
 | `Shipment Delivered` | Entregue. |
 | `Registration of delivery details` | O ponto de atendimento registrou a entrega: também significa entregue. |
 
@@ -44,7 +44,7 @@ Na página em grego, `Out for Delivery` aparece como "Χρέωση σε κούρ
 
 Um voucher que a Geniki não encontra exibe aviso somente em grego, mesmo na página em inglês. Para o significado geral de cada fase, veja [significado dos status de rastreamento](guide:tracking-statuses).
 
-## Entrega, lojas Geniki e entregas perdidas
+## Entrega, lojas Geniki e entregas não realizadas
 
 **Quem pode receber.** A Carta de Obrigações ao Consumidor da Geniki afirma que o entregador leva o pacote ao seu endereço e entrega a você ou, caso não esteja, a alguém que more com você (um adulto, segundo a versão em inglês; a versão grega não especifica isso), ou ao ponto de atendimento escolhido pelo remetente.
 
@@ -54,7 +54,7 @@ Um voucher que a Geniki não encontra exibe aviso somente em grego, mesmo na pá
 
 **Lojas e armários.** Com o serviço Door 2 Service Point (D2SP), a encomenda vai para uma loja Geniki em vez da sua porta; em Chipre, para um escritório da Geniki. Essa opção é escolhida na contratação do envio. Na Grécia, a Geniki também entrega em armários BOX NOW; o localizador de armários cobre Grécia e Chipre. O pacote enviado a um armário fica lá por 48 horas após a notificação. O site da Geniki também tem um localizador de lojas, mas a empresa não publica por quanto tempo uma loja guarda a encomenda.
 
-**Não retirada.** Uma encomenda recusada ou que não pôde ser entregue retorna ao remetente. A Geniki guarda itens não entregáveis por seis meses após a última tentativa sem sucesso.
+**Não retirada.** Uma encomenda recusada ou que não pôde ser entregue retorna ao remetente. A Geniki guarda itens não entregáveis por seis meses após a última entrega não realizada.
 
 ## Encomenda Geniki não chegou, extraviada ou danificada
 
@@ -62,7 +62,7 @@ Um voucher que a Geniki não encontra exibe aviso somente em grego, mesmo na pá
 
 **Danificada.** Aceite a encomenda registrando ressalva na guia de remessa, ou envie ressalva por e-mail ou telefone: a carta prevê um dia útil após a entrega, e os Termos Gerais, dois dias úteis. Comunique imediatamente.
 
-**Extraviada ou muito atrasada.** Em caso de perda, dano ou não entrega, a Geniki encaminha você à agência responsável. A carta considera extraviada uma encomenda com mais de 15 dias úteis de atraso. A indenização vai para quem firmou o contrato e pagou — normalmente o remetente —, então em compras online peça à loja que abra a reclamação. A carta e os termos permitem pedidos por escrito em até seis meses da aceitação, mas o FAQ da Geniki fala em 20 dias a partir da coleta, portanto não demore.
+**Extraviada ou muito atrasada.** Em caso de perda, dano ou não entrega, a Geniki encaminha você à agência responsável. A carta considera extraviada uma encomenda com mais de 15 dias úteis de atraso. A indenização vai para quem firmou o contrato e pagou — normalmente o remetente —, então em compras online peça à loja que solicite a indenização. A carta e os termos permitem pedidos por escrito em até seis meses da aceitação, mas o FAQ da Geniki fala em 20 dias a partir da coleta, portanto não demore.
 
 **Reclamações.** O formulário Complaint Submission da Geniki pede nome, e-mail, telefone, assunto (perda, dano, atraso, problemas de entrega e outros), número SYDETA e mensagem. Cada reclamação online recebe número de protocolo por e-mail e resposta em até 15 dias úteis.
 
@@ -84,7 +84,7 @@ O [Peek](/) não consegue identificar um voucher da Geniki apenas pelos 10 dígi
 
 O rastreador da Geniki exibe horários sem fuso: o Peek lê os horários no fuso da Grécia e mostra o histórico próprio da Geniki. As movimentações aparecem no texto em inglês da Geniki, como na tabela. Uma movimentação que não esteja na tabela mantém o texto da Geniki, sem etapa própria. Uma leitura cancelada pela Geniki fica oculta junto com o cancelamento.
 
-A Geniki não informa dia previsto de entrega, ponto de retirada nem peso, então o Peek não pode exibi-los. O Peek só reconhece automaticamente um voucher como sendo da Geniki se houve alguma movimentação nos últimos 60 dias; para códigos mais antigos, escolha Geniki em "Trocar". O Peek pode avisar sobre cada movimentação, apenas etapas importantes ou só no dia da entrega. Enquanto a encomenda estiver aberta, ou no dia da entrega com as notificações ativadas, ele consulta até a cada 10 minutos, ou a cada 2 minutos a partir das 6h no horário da Grécia no dia em que entra em `Out for Delivery`, enquanto o próprio rastreador da Geniki responder; fora isso, a cada hora. Também verifica a cada hora após dois dias sem novidades (12 horas enquanto a encomenda ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora").
+A Geniki não informa dia previsto de entrega, ponto de retirada nem peso, então o Peek não pode exibi-los. O Peek só reconhece um voucher como sendo da Geniki se houve alguma movimentação nos últimos 60 dias; para códigos mais antigos, escolha Geniki em "Trocar". O Peek pode avisar sobre cada movimentação, apenas etapas importantes ou só no dia da entrega. Enquanto a encomenda estiver aberta, ou no dia da entrega com as notificações ativadas, ele consulta até a cada 10 minutos, ou a cada 2 minutos a partir das 6h no horário da Grécia no dia em que entra em `Out for Delivery`, enquanto o próprio rastreador da Geniki responder; fora isso, a cada hora. Também verifica a cada hora após dois dias sem novidades (12 horas enquanto a encomenda ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora").
 
 ## Perguntas sobre o rastreamento Geniki Taxydromiki
 

@@ -12,7 +12,7 @@ A DSV é um grupo dinamarquês de transporte e logística que movimenta cargas p
 
 A empresa que contratou a DSV tem o número: procure no e-mail de envio da loja ou na página do seu pedido, ou peça ao remetente. Veja mais em [como encontrar seu código de rastreamento](guide:find-tracking-number).
 
-Enquanto a DSV integra a Schenker aos seus sistemas, mantém os dois rastreadores: uma remessa reservada pela Schenker pode constar apenas no rastreador da Schenker. Se um não retornar nada, tente o outro.
+Enquanto a DSV integra a Schenker aos seus sistemas, mantém os dois rastreadores: uma remessa reservada com a Schenker pode constar apenas no rastreador da Schenker. Se um não retornar nada, tente o outro.
 
 | Código (inventado) | O que é |
 | --- | --- |
@@ -53,13 +53,13 @@ O antigo rastreador da DB Schenker cobre remessas rodoviárias com texto própri
 | `Customs clearance initiated` | O desembaraço aduaneiro começou. | "Na alfândega" |
 | `Customs clearance finalised` | Liberada na alfândega e novamente em movimento. | "Em trânsito" |
 | `Out for Delivery` | No caminhão de entrega. | "Saiu para entrega" |
-| `Not delivered` | A entrega não foi concluída; pode haver um motivo em seguida. | "Tentativa de entrega" |
+| `Not delivered` | A entrega não foi realizada; pode haver um motivo em seguida. | "Tentativa de entrega" |
 | `To consignee's disposal`, `Ready for pick up` | Aguarda você retirá-la. | "Pronta para retirada" |
 | `Delivered` | Entregue. | "Entregue" |
 | `Picked up by consignee`, `Picked up at agent` | Retirada pelo destinatário ou em um agente. | "Entregue" |
 | `ePOD available` | O comprovante eletrônico de entrega está pronto. | "Entregue" |
 
-Pelo caminho, também aparecem `Linehaul departed`, `Linehaul arrived`, `Terminal inventory`, `Vessel Loaded`, `Vessel Unloaded`, `Train Loaded`, `Train Unloaded`, `Vessel/Train Loaded` e `Vessel/Train Unloaded`: todos como "Em trânsito" no Peek. `Not Collected` (falha na coleta) e `Not loaded` (perdeu o carregamento previsto, com motivo) aparecem como "Precisa de atenção". Quando o rastreador inclui um motivo ao lado de uma etapa, como a razão de uma entrega não realizada, o Peek o acrescenta após o texto. Veja mais sobre cada fase em [status de rastreamento](guide:tracking-statuses).
+Pelo caminho, também aparecem `Linehaul departed`, `Linehaul arrived`, `Terminal inventory`, `Vessel Loaded`, `Vessel Unloaded`, `Train Loaded`, `Train Unloaded`, `Vessel/Train Loaded` e `Vessel/Train Unloaded`: todos como "Em trânsito" no Peek. `Not Collected` (coleta não realizada) e `Not loaded` (perdeu o carregamento previsto, com motivo) aparecem como "Precisa de atenção". Quando o rastreador inclui um motivo ao lado de uma etapa, como a razão de uma entrega não realizada, o Peek o acrescenta após o texto. Veja mais sobre cada fase em [status de rastreamento](guide:tracking-statuses).
 
 ## Como a DSV entrega
 
@@ -73,9 +73,9 @@ Pelo caminho, também aparecem `Linehaul departed`, `Linehaul arrived`, `Termina
 
 ## Remessa DSV atrasada, parada ou danificada
 
-**Sem movimentação.** Se um rastreador parar, tente o outro em dsv.com: uma remessa reservada pela Schenker pode ainda não estar no myDSV. Depois, pergunte ao remetente, que contratou a DSV e tem o contato direto. Veja [rastreamento que não atualiza](guide:tracking-not-updating).
+**Sem movimentação.** Se um rastreador parar, tente o outro em dsv.com: uma remessa reservada com a Schenker pode ainda não estar no myDSV. Depois, pergunte ao remetente, que contratou a DSV e tem o contato direto. Veja [rastreamento que não atualiza](guide:tracking-not-updating).
 
-**Carga danificada ou faltando.** Em compras online, comece pela loja que contratou a DSV. O eClaims da DSV recebe reclamações e documentos, mostra o andamento e coloca você em contato com os reguladores locais de sinistros; a página não indica prazo, então não espere. Veja [encomenda danificada](guide:damaged-parcel) e [encomenda extraviada](guide:lost-parcel).
+**Carga danificada ou faltando.** Em compras online, comece pela loja que contratou a DSV. O eClaims da DSV recebe pedidos de indenização e documentos, mostra o andamento e coloca você em contato com os reguladores locais de sinistros; a página não indica prazo, então não espere. Veja [encomenda danificada](guide:damaged-parcel) e [encomenda extraviada](guide:lost-parcel).
 
 **Uso indevido do nome DSV.** A DSV alerta que empresas e pessoas sem vínculo com ela às vezes usam seu nome para vender serviços de frete. Se não tiver certeza de que um site ou contato é realmente da DSV, confirme com o escritório local da DSV; sobre mensagens falsas de entrega, veja [golpes por SMS de entrega](guide:delivery-scam-texts).
 
@@ -102,7 +102,7 @@ O Peek exibe o status, cada etapa no texto da DSV com cidade e país, e o dia pr
 
 Se a Early Bird, empresa sueca de entregas, repassar sua encomenda à DSV ou à DB Schenker, o Peek indica a DSV como a transportadora entregadora e passa a acompanhar a DSV assim que surgem novas leituras lá.
 
-Enquanto a remessa estiver aberta no Peek, ou no dia da entrega com as notificações ativadas, o Peek verifica até a cada 10 minutos, e a cada 2 minutos a partir das 6h no horário local no dia em que a DSV registra a saída para entrega. Você pode receber avisos para "Cada movimentação", "Etapas importantes" ou "Só a entrega". Após dois dias sem novidades (12 horas enquanto a remessa ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), o Peek verifica a cada hora, e a cada 6 horas após sete dias sem novidades em "Etiqueta criada". Se a remessa passar quatro dias sem nova linha em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek mostra "Sem atualizações desde …" com o dia dessa linha e o link "Pedir ajuda a DSV". O Peek não pode contatar a DSV nem o remetente por você, agendar entregas nem abrir reclamações.
+Enquanto a remessa estiver aberta no Peek, ou no dia da entrega com as notificações ativadas, o Peek verifica até a cada 10 minutos, e a cada 2 minutos a partir das 6h no horário local no dia em que a DSV registra a saída para entrega. Você pode receber avisos para "Cada movimentação", "Etapas importantes" ou "Só a entrega". Após dois dias sem novidades (12 horas enquanto a remessa ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), o Peek verifica a cada hora, e a cada 6 horas após sete dias sem novidades em "Etiqueta criada". Se a remessa passar quatro dias sem nova linha em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek mostra "Sem atualizações desde …" com o dia dessa linha e o link "Pedir ajuda a DSV". O Peek não pode contatar a DSV nem o remetente por você, agendar entregas nem abrir pedidos de indenização.
 
 ## Perguntas sobre o rastreamento DSV
 

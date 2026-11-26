@@ -17,7 +17,7 @@ DSV 是一家丹麦运输与物流集团，提供陆运、空运和海运服务�
 | 单号（虚构） | 含义 |
 | --- | --- |
 | `DEKLM482917365` | 14 位字符：欧洲国家代码（如 DE、SE、DK 或 PL）加 3 位字母和 9 位数字。这是原 DB Schenker 陆运单号，也是 Peek 目录为 DSV 收录的格式。 |
-| `KLM4829173` | 3 位字母加 7 或 8 位数字：另一种原 DB Schenker 陆运单号。Peek 不会仅凭该格式自动识别为 DSV。 |
+| `KLM4829173` | 3 位字母加 7 或 8 位数字：另一种原 DB Schenker 陆运单号。Peek 不会仅凭该格式识别为 DSV。 |
 | `094827361549283711` | 18 位数字（前面带 `00` 时为 20 位）：原 DB Schenker 陆运单件货物的条码号。 |
 | 字母与数字组合 | myDSV 货运号、订舱号或分运单号。只要是 5 到 40 位、且至少包含一位数字的字母数字组合，Peek 都会向 myDSV 查询。 |
 | `mydsv.com/track-shipment?query=DEKLM482917365` | myDSV 查询链接，也就是 dsv.com 上“Track DSV shipment”打开的地址。 |
@@ -34,8 +34,8 @@ myDSV 会记录货物从订舱到签收凭证的每一次扫描。公开页面�
 | `Creation` | 货物已在 DSV 陆运系统中创建。 | “已生成面单” |
 | `Actual pickup` | DSV 已从寄件人处提货。 | “已揽收” |
 | `Cargo received` | 货物已到达 DSV，可能是到达场站或完成提货。 | “已揽收” |
-| `Actual Departure`、`Actual departure - Origin Port` | 已从干线港口或机场发出。 | “运输中” |
-| `Actual arrival`、`Actual arrival- Destination Port` | 已抵达干线目的港或机场。 | “运输中” |
+| `Actual Departure`、`Actual departure - Origin Port` | 已从干线上的港口或机场发出。 | “运输中” |
+| `Actual arrival`、`Actual arrival- Destination Port` | 已抵达干线上的港口或机场。 | “运输中” |
 | `Handover responsibilty of cargo`、`Handover of Cargo` | DSV 已在服务终点移交货物，运输流程结束（前者保留了 DSV 原文拼写）。 | “已签收” |
 | `Actual delivery` | 已送达。 | “已签收” |
 
@@ -59,7 +59,7 @@ myDSV 会记录货物从订舱到签收凭证的每一次扫描。公开页面�
 | `Picked up by consignee`、`Picked up at agent` | 收件人已自提，或已从代理处取走。 | “已签收” |
 | `ePOD available` | 电子签收凭证已生成。 | “已签收” |
 
-途中还可能出现 `Linehaul departed`、`Linehaul arrived`、`Terminal inventory`、`Vessel Loaded`、`Vessel Unloaded`、`Train Loaded`、`Train Unloaded`、`Vessel/Train Loaded` 和 `Vessel/Train Unloaded`：在 Peek 中均显示为“运输中”。`Not Collected`（提货未成功）和 `Not loaded`（未赶上原定装车/装船，并附带原因）会显示为“需要留意”。当查询系统在某个环节旁写出原因（例如派送失败的原因）时，Peek 会把它附在原文之后。各阶段通用说明见[物流状态含义](guide:tracking-statuses)（英文）。
+途中还可能出现 `Linehaul departed`、`Linehaul arrived`、`Terminal inventory`、`Vessel Loaded`、`Vessel Unloaded`、`Train Loaded`、`Train Unloaded`、`Vessel/Train Loaded` 和 `Vessel/Train Unloaded`：在 Peek 中均显示为“运输中”。`Not Collected`（提货未成功）和 `Not loaded`（未赶上原定装车/装船，并附带原因）会显示为“需要留意”。当查询系统在某个环节旁写出原因（例如派送未成功的原因）时，Peek 会把它附在原文之后。各阶段通用说明见[物流状态含义](guide:tracking-statuses)（英文）。
 
 ## DSV 如何派送
 
@@ -67,15 +67,15 @@ myDSV 会记录货物从订舱到签收凭证的每一次扫描。公开页面�
 
 **网购订单。** DSV 的 Parcel E-commerce 服务负责揽收商家包裹、跨境集运，再交由当地末端网络派送，所以最终上门的可能是另一家快递公司。如果商家的邮件里写明了另一家快递或给了第二个单号，也请一并查询：Peek 查询 DSV 时不会返回下一家承运商。
 
-**动态通知与签收凭证。** 在 myDSV 中，用户可以设置提货或清关等环节的通知，查看陆运货物的预计到达时间，并在运输完成后下载签收凭证。如果你不是向 DSV 订舱的一方，请联系寄件人。DSV 网页未说明会尝试派送几次，也未写明场站免费保管多久：请直接向负责派送的 DSV 办事处确认。
+**动态通知与签收凭证。** 在 myDSV 中，用户可以设置提货或清关等环节的通知，查看陆运货物的预计到达时间，并在运输完成后下载签收凭证。如果你不是向 DSV 订舱的一方，请联系寄件人。DSV 网页未说明会尝试派送几次，也未写明场站保管货物多久：请直接向负责派送的 DSV 办事处确认。
 
-**清关。** 在设有办事处的大多数国家，DSV 具备报关行资质；在其他地区则与代理合作。如需清关协助，DSV 建议联系该国的 DSV 办事处。在欧盟，自 2026 年 7 月 1 日起，从欧盟境外网购、订单金额不超过 150 欧元的商品，按商品种类每类征收 3 欧元欧盟关税；自 2026 年 11 月 1 日起，无论订单金额多少，按商品种类每类另收 2 欧元欧盟处理费。其他国家适用当地规定，详见[包裹卡在海关怎么办](guide:customs)（英文）。
+**清关。** 在设有办事处的大多数国家，DSV 具备报关行资质；在其他地区则通过代理办理。如需清关协助，DSV 建议联系该国的 DSV 办事处。在欧盟，自 2026 年 7 月 1 日起，从欧盟境外网购、订单金额不超过 150 欧元的商品，按商品种类每类征收 3 欧元欧盟关税；自 2026 年 11 月 1 日起，无论订单金额多少，按商品种类每类另收 2 欧元欧盟处理费。其他国家适用当地规定，详见[包裹卡在海关怎么办](guide:customs)（英文）。
 
 ## DSV 货物延迟、停更或破损
 
 **没有动静。** 如果一套查询系统停更，试试 dsv.com 上的另一套：通过 Schenker 预订的货物可能尚未同步到 myDSV。随后联系寄件人，他们向 DSV 订了舱并有对应对接人。详见[物流为什么不更新](guide:tracking-not-updating)（英文）。
 
-**货损或少件。** 网购订单请先联系下单给 DSV 的商家。DSV 的 eClaims 平台支持提交理赔申请与材料、查看处理进度，并为你对接当地理赔专员；该页面未标明时限，建议尽快提交。另见[包裹破损](guide:damaged-parcel)（英文）与[包裹丢失](guide:lost-parcel)（英文）。
+**货损或少件。** 网购订单请先联系下单给 DSV 的商家。DSV 的 eClaims 平台可以提交理赔申请与材料、查看处理进度，并为你对接当地理赔专员；该页面未标明时限，建议尽快提交。另见[包裹破损](guide:damaged-parcel)（英文）与[包裹丢失](guide:lost-parcel)（英文）。
 
 **冒用 DSV 名义。** DSV 提醒称，有些与 DSV 无关的公司或个人会冒用其名义招揽货运业务。如果你不确定某个网站或联系人是否真的属于 DSV，请向当地 DSV 办事处核实；涉及包裹诈骗短信，参见[快递诈骗短信识别](guide:delivery-scam-texts)（英文）。
 
@@ -92,9 +92,9 @@ DSV 的帮助页面未提供用于查件的客服电话。
 
 ## 用 Peek 跟踪 DSV 货运
 
-粘贴类似 `DEKLM482917365` 的 14 位单号，Peek 会在添加时向 DSV 查询（显示“正在查询物流服务…”），DSV 查到记录后会显示“DSV 有这个包裹的记录。”。如果 DSV 尚未录入，页面会显示“等待 DSV 的首次扫描”，并标为“可能是 DSV”，同时 Peek 会持续查询；一周后仍无记录时，Peek 会提示你核对单号或换选其他快递公司。
+粘贴类似 `DEKLM482917365` 的 14 位单号，Peek 会在添加时向 DSV 查询（显示“正在查询物流服务…”），DSV 查到记录后会显示“DSV 有这个包裹的记录。”如果 DSV 尚未录入，页面会显示“等待 DSV 的首次扫描”，并标为“可能是 DSV”，同时 Peek 会持续查询；一周后仍无记录时，Peek 会提示你核对单号或换选其他快递公司。
 
-其他格式的单号，Peek 无法仅凭形态识别为 DSV。仍然可以直接粘贴：Peek 支持超过 4,500 家快递和物流公司。如需手动指定 DSV，点击“更换”并搜索 DSV；搜“Schenker”也能找到（显示“又名 DB Schenker”）。已添加的包裹则使用“更换快递公司”。粘贴 mydsv.com 查询链接，或 dsv.com 上带 `refNumber=` 的 Schenker 查询链接，都会直接归入 DSV。
+其他格式的单号，Peek 无法仅凭形态识别为 DSV。仍然可以粘贴：Peek 跟踪 4,500 多家快递公司。如需手动指定 DSV，点击“更换”并搜索 DSV；搜“Schenker”也能找到（显示“又名 DB Schenker”）。已添加的包裹则使用“更换快递公司”。粘贴 mydsv.com 查询链接，或 dsv.com 上带 `refNumber=` 的 Schenker 查询链接，都会直接归入 DSV。
 
 Peek 会先查询 myDSV。如果 myDSV 里查不到某个原 DB Schenker 陆运单号或包装条码，Peek 再转查 Schenker 查询系统；该入口在 Peek 中仅读取陆运货物——只出现在那里的空运或海运货物，请直接在 dsv.com 上使用“Track Schenker shipment”。
 

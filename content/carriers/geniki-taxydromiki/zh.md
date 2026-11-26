@@ -1,6 +1,6 @@
 ---
 title: Geniki Taxydromiki 物流查询：运单号、状态与联系
-description: 查询希腊和塞浦路斯的 Geniki Taxydromiki 包裹：10 位运单号、各状态含义、无人签收、理赔与联系方式。
+description: 查询希腊和塞浦路斯的 Geniki Taxydromiki 包裹：10 位运单号、各状态含义、派送未成功、理赔与联系方式。
 slug: geniki-taxydromiki-wuliu-chaxun
 published: 2026-11-26
 updated: 2026-11-26
@@ -10,7 +10,7 @@ Geniki Taxydromiki（Γενική Ταχυδρομική，有时称为 General 
 
 ## Geniki Taxydromiki 运单号长什么样
 
-Geniki 将其称为快递运单编号（ΣΥ.ΔΕ.ΤΑ.，投诉表单上写作 SYDETA），官网查询页则称之为 voucher。Geniki 未公布统一格式，但 Peek 读取的运单号均为 10 位数字。
+Geniki 将其称为快递运单编号（ΣΥ.ΔΕ.ΤΑ.，投诉表单上写作 SYDETA），其查询页则称之为 voucher。Geniki 未公布统一格式，但 Peek 读取的运单号均为 10 位数字。
 
 | 格式（虚构） | 含义 |
 | --- | --- |
@@ -19,11 +19,11 @@ Geniki 将其称为快递运单编号（ΣΥ.ΔΕ.ΤΑ.，投诉表单上写作 
 
 Geniki 没有说明收件人从哪里获取单号：请查看商家的发货邮件或订单页，或直接询问商家。详见[如何查找运单号](guide:find-tracking-number)（英文）。
 
-10 位数字并非 Geniki 独有。ACS Courier 的运单号外观完全一样，[DHL Express](carrier:dhl-express)、[Mondial Relay](carrier:mondial-relay)、Relais Colis 等快递也使用 [10 位数字单号](guide:tracking-number-formats)（英文）。如果商家邮件写的是其他快递公司，请去那家查询。Geniki 官网一次最多支持用逗号分隔同时查 10 个单号。
+10 位数字并非 Geniki 独有。ACS Courier 的运单号外观完全一样，[DHL Express](carrier:dhl-express)、[Mondial Relay](carrier:mondial-relay)、Relais Colis 等快递也使用 [10 位数字单号](guide:tracking-number-formats)（英文）。如果商家邮件写的是其他快递公司，请去那家查询。Geniki 查询页一次最多可查 10 个单号，用逗号分隔。
 
 ## Geniki Taxydromiki 物流状态含义
 
-Geniki 查询页在希腊语站显示希腊语，在英语、保加利亚语和罗马尼亚语站显示英语。以下是英文状态原文，大致按包裹流转顺序排列。
+Geniki 查询页在希腊语站显示希腊语，在英语、保加利亚语和罗马尼亚语站显示英语。以下是英文状态原文，大致按包裹通常遇到的顺序排列。
 
 | Geniki 状态 | 对你的含义 |
 | --- | --- |
@@ -36,7 +36,7 @@ Geniki 查询页在希腊语站显示希腊语，在英语、保加利亚语和�
 | `Routing to other service point` | 正在转往其他网点。 |
 | `Out for Delivery` | 已交给派送员，正在派送。 |
 | `Attempted Delivery - Absent recipient` | 派送员上门时你不在，未能送达。 |
-| `Attempted Delivery - Delivery Rescheduled` | 派送失败后退回网点，改期另日再派。 |
+| `Attempted Delivery - Delivery Rescheduled` | 派送未成功后退回网点，改期另日再派。 |
 | `Shipment Delivered` | 已签收。 |
 | `Registration of delivery details` | 网点已录入签收信息，同样表示已签收。 |
 
@@ -44,17 +44,17 @@ Geniki 查询页在希腊语站显示希腊语，在英语、保加利亚语和�
 
 如果 Geniki 查不到某个单号，即使在英文页面也只会弹出希腊语提示。各阶段通用说明见[物流状态含义](guide:tracking-statuses)（英文）。
 
-## 派送方式、Geniki 门店与无人签收
+## 派送方式、Geniki 门店与派送未成功
 
 **谁可以代收。** Geniki 的《消费者义务章程》写明，快递员会将包裹送至你的地址，交给你本人；如你不在，可交给同住人（英文版注明须为成年人，希腊语版未作此限定），或送至寄件人选定的服务网点。
 
 **人不在家时。** Geniki 会留下书面通知或发送电子通知，并将包裹带回负责派送的门店，随后与你或寄件人约定至少再派送一次。
 
-**修改收件地址。** 你可以致电或书面（例如发邮件）要求改派到其他地址；若超出原派送服务区，可能产生额外费用。无签字派送由寄件人在下单时选择：届时你通过 Geniki 提供的 PIN 码或电子消息确认收货。
+**修改收件地址。** 你可以致电或书面（例如发邮件）要求改派到其他地址；若超出原派送服务区，可能产生额外费用。无签字派送由寄件人选择：届时你通过 Geniki 提供的 PIN 码或电子消息确认收货。
 
 **门店与快递柜。** 选择 Door 2 Service Point（D2SP）时，包裹会送到 Geniki 门店而非上门；在塞浦路斯则送到 Geniki 办事处，由寄件人在下单时选定。在希腊，Geniki 也可投递至 BOX NOW 快递柜；其快递柜查询工具覆盖希腊和塞浦路斯。投入快递柜的包裹在通知后保管 48 小时。Geniki 官网还提供门店查询工具，但未公布门店保管期限。
 
-**一直未取件。** 拒收或无法派送的包裹会退回寄件人。Geniki 会把无法派送的物品自最后一次派送失败起保管六个月。
+**一直未取件。** 拒收或无法派送的包裹会退回寄件人。Geniki 会把无法派送的物品自最后一次派送未成功起保管六个月。
 
 ## Geniki 包裹未到、丢失或破损
 
@@ -82,9 +82,9 @@ taxydromiki.com 公布的联系方式：
 
 [Peek](/) 无法仅凭 10 位数字确定是 Geniki 运单。当末位数字通过 Geniki 与 ACS、DHL Express 共用的校验规则时，Peek 会同时向 Geniki、DHL Express、ACS 以及其他符合该格式的公司——如 DHL eCommerce Iberia，以及首位不为 0 时的 [Packeta](carrier:packeta)——查询是否有此包裹。若只有 Geniki 查到，页面会显示“Geniki Taxydromiki 有这个包裹的记录。”；若多家快递同时查到（包括 DHL Express），则需要你手动选择。否则点击“更换”选择“Geniki Taxydromiki”：搜索 Bulgaria、Cyprus 或 Romania 也能找到，输入保加利亚语名称 Геники Тахидромики 同样可以。你也可以直接粘贴完整查询链接，如 `https://taxydromiki.com/track/4829173650`（或 `/en/track/`、`/bg/track/`、`/ro/track/`），Peek 会立刻识别为 Geniki。在“符合这个单号”列表中，位于希腊、保加利亚、塞浦路斯或罗马尼亚的用户会看到 Geniki 排在 Peek 目录中未覆盖该国的快递前面。包含多个用 `-` 连接单号的链接无法跟踪，请逐个粘贴单号。
 
-Geniki 查询页的时间不带时区：Peek 按希腊时间读取，并列出 Geniki 自身的完整历史记录。扫描记录保留 Geniki 的英文原文，如上表所示。表中未列出的扫描也会保留 Geniki 原文，但不单独归入某一阶段。被 Geniki 撤销的扫描会连同撤销记录一起隐藏。
+Geniki 查询页的时间不带时区：Peek 按希腊时间读取，并列出 Geniki 自己的历史记录。扫描记录保留 Geniki 的英文原文，如上表所示。表中未列出的扫描也会保留 Geniki 原文，但不单独归入某一阶段。被 Geniki 撤销的扫描会连同撤销记录一起隐藏。
 
-Geniki 不提供预计送达日期、取件点或重量信息，因此 Peek 无法显示。只有过去 60 天内有过扫描的运单，Peek 才会自动识别为 Geniki；更早的单号请点“更换”手动选择 Geniki。你可以让 Peek 通知你每次扫描、仅重要环节，或仅派送当天。在 Geniki 官网查询正常响应期间，当你打开包裹页或派送当天开启通知时，Peek 最多每 10 分钟查询一次，在包裹进入 `Out for Delivery` 当天的希腊时间早上 6 点起最多每 2 分钟查询一次；其余时间每小时查询一次。连续两天无新动态（在“已生成面单”或“已揽收”状态下为 12 小时）后，同样改为每小时查询一次。
+Geniki 不提供预计送达日期、取件点或重量信息，因此 Peek 无法显示。只有过去 60 天内有过扫描的运单，Peek 才会识别为 Geniki；更早的单号请点“更换”手动选择 Geniki。你可以让 Peek 通知你每次扫描、仅重要环节，或仅派送当天。在 Geniki 自己的查件系统正常响应期间，当你打开包裹页或派送当天开启通知时，Peek 最多每 10 分钟查询一次，在包裹进入 `Out for Delivery` 当天的希腊时间早上 6 点起最多每 2 分钟查询一次；其余时间每小时查询一次。连续两天无新动态（在“已生成面单”或“已揽收”状态下为 12 小时）后，同样改为每小时查询一次。
 
 ## 关于 Geniki Taxydromiki 物流查询的常见问题
 

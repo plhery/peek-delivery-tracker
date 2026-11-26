@@ -15110,6 +15110,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8000"
     },
     {
+      "id": "box-now",
+      "catalog": "box-now",
+      "slug": "rastreamento-box-now",
+      "title": "Rastreamento BOX NOW: armários, códigos PIN e status",
+      "name": "BOX NOW",
+      "color": "#44d62c"
+    },
+    {
       "id": "dhl-ecommerce-nl",
       "catalog": "dhl-ecommerce-nl",
       "slug": "rastreamento-dhl-ecommerce-holanda",
@@ -15676,6 +15684,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Emirates Post: códigos AE e status explicados",
       "name": "Emirates Post",
       "color": "#004a98"
+    },
+    {
+      "id": "blue-dart",
+      "catalog": "blue-dart",
+      "slug": "rastreamento-blue-dart",
+      "title": "Rastreamento Blue Dart: código de 11 dígitos e status",
+      "name": "Blue Dart",
+      "color": "#0059a9"
     },
     {
       "id": "ekart",
@@ -18852,6 +18868,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8000"
     },
     {
+      "id": "box-now",
+      "catalog": "box-now",
+      "slug": "box-now-wuliu-chaxun",
+      "title": "BOX NOW 物流查询：快递柜、取件 PIN 码与状态",
+      "name": "BOX NOW",
+      "color": "#44d62c"
+    },
+    {
       "id": "dhl-ecommerce-nl",
       "catalog": "dhl-ecommerce-nl",
       "slug": "dhl-ecommerce-helan-kuaidi-chaxun",
@@ -19450,6 +19474,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "阿联酋邮政（Emirates Post）物流查询：AE 单号与状态",
       "name": "Emirates Post",
       "color": "#004a98"
+    },
+    {
+      "id": "blue-dart",
+      "catalog": "blue-dart",
+      "slug": "blue-dart-wuliu-chaxun",
+      "title": "Blue Dart 物流查询：11 位运单号与状态说明",
+      "name": "Blue Dart",
+      "color": "#0059a9"
     },
     {
       "id": "ekart",

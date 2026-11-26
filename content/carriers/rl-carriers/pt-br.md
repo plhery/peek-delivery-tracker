@@ -1,5 +1,5 @@
 ---
-title: Rastreamento R+L Carriers: código PRO, status e sinistros
+title: Rastreamento R+L Carriers: código PRO, status e indenizações
 description: Rastreie uma carga R+L Carriers nos EUA: formato do código PRO, significado de cada etapa e o que fazer em caso de atraso ou dano no frete.
 slug: rastreamento-rl-carriers
 published: 2026-11-26
@@ -27,7 +27,7 @@ O rastreador da R+L valida o último dígito, então um erro de digitação pode
 
 ## O que significam os status de rastreamento da R+L Carriers
 
-O rastreador da R+L mostra um resumo da carga acima do histórico e depois lista cada linha com data e hora, identificando os terminais por cidade e estado. As linhas não têm código próprio: o Peek interpreta o texto. Na ordem em que costumam surgir, com as reticências representando cidade e estado ou terminal:
+O rastreador da R+L mostra um resumo da carga acima do histórico e depois lista cada linha com data e hora, identificando os terminais por cidade e estado. As linhas não têm código próprio: o Peek interpreta o texto. Na ordem em que a carga passa por elas, com as reticências representando cidade e estado ou terminal:
 
 | A R+L diz | O que significa para você | O Peek mostra |
 | --- | --- | --- |
@@ -41,7 +41,7 @@ O rastreador da R+L mostra um resumo da carga acima do histórico e depois lista
 
 **O resumo.** Acima das linhas, o rastreador da R+L classifica a remessa como em trânsito, atrasada ou entregue. Quando esse resumo está mais avançado que as linhas, o Peek segue o resumo: uma carga resumida como entregue aparece como "Entregue" mesmo que a última linha não diga isso. Quando o rastreador traz resumo mas ainda sem linhas, o Peek mostra apenas o status.
 
-O código do Peek não conhece textos específicos da R+L para saída para entrega, tentativa sem sucesso, problema ou devolução. Outras linhas seguem as regras gerais do Peek para todas as transportadoras. Uma linha que nenhuma regra classifica continua aparecendo como escrita e conta como carga em movimento ("Em trânsito"); após a entrega, não altera o status. Saiba mais em [status de rastreamento](guide:tracking-statuses).
+O código do Peek não conhece textos específicos da R+L para saída para entrega, entrega não realizada, problema ou devolução. Outras linhas seguem as regras gerais do Peek para todas as transportadoras. Uma linha que nenhuma regra classifica continua aparecendo como escrita e conta como carga em movimento ("Em trânsito"); após a entrega, não altera o status. Saiba mais em [status de rastreamento](guide:tracking-statuses).
 
 ## Como a R+L Carriers entrega
 
@@ -59,11 +59,11 @@ Esta página não informa prazos de entrega, agendamentos, número de tentativas
 
 **Danificada, faltando volumes ou extraviada.** Avise primeiro a loja ou o remetente: eles contrataram o frete. Para fretes rodoviários entre estados nos EUA, a lei federal define estas regras:
 
-- A transportadora responde pela perda real ou dano à carga perante quem o recibo ou conhecimento de transporte (bill of lading) autoriza a reclamar. A responsabilidade pode ser limitada a um valor declarado pelo expedidor ou acordado por escrito com a transportadora.
-- A transportadora não pode dar prazo inferior a 9 meses para registrar reclamação nem inferior a 2 anos para acionar a justiça, contados do dia em que recusa por escrito qualquer parte da reclamação. O conhecimento de transporte ou contrato define o prazo exato.
-- A reclamação é um pedido por escrito, protocolado na transportadora dentro desses prazos, que identifica a remessa, responsabiliza a transportadora e pede um valor definido ou apurável. Uma ressalva de dano ou falta no recibo de entrega não vale sozinha como reclamação.
-- Quando exigido pela transportadora, a reclamação deve vir acompanhada do conhecimento de transporte, comprovante do frete e nota fiscal. Para um volume inteiro ou remessa que nunca chegou, se a transportadora não puder confirmar o extravio de outro modo, o destinatário fornece declaração escrita certificada de que a carga não chegou por outra via.
-- A transportadora confirma o recebimento da reclamação por escrito em até 30 dias. Ela paga, recusa ou apresenta proposta firme por escrito em até 120 dias; se não conseguir, escreve informando a situação nesse prazo e a cada 60 dias depois.
+- A transportadora responde pela perda real ou dano à carga perante quem o recibo ou conhecimento de transporte (bill of lading) autoriza a pedir a indenização. A responsabilidade pode ser limitada a um valor declarado pelo expedidor ou acordado por escrito com a transportadora.
+- A transportadora não pode dar prazo inferior a 9 meses para registrar o pedido de indenização nem inferior a 2 anos para acionar a justiça, contados do dia em que recusa por escrito qualquer parte do pedido. O conhecimento de transporte ou contrato define o prazo exato.
+- O pedido de indenização é uma solicitação por escrito, protocolada na transportadora dentro desses prazos, que identifica a remessa, responsabiliza a transportadora e pede um valor definido ou apurável. Uma ressalva de dano ou falta no recibo de entrega não vale sozinha como pedido de indenização.
+- Quando exigido pela transportadora, o pedido deve vir acompanhado do conhecimento de transporte, comprovante do frete e nota fiscal. Para um volume inteiro ou remessa que nunca chegou, se a transportadora não puder confirmar o extravio de outro modo, o destinatário fornece declaração escrita certificada de que a carga não chegou por outra via.
+- A transportadora confirma o recebimento do pedido por escrito em até 30 dias. Ela paga, recusa ou apresenta proposta firme por escrito em até 120 dias; se não conseguir, escreve informando a situação nesse prazo e a cada 60 dias depois.
 
 Se o rastreamento indicar `Delivered` e nada tiver chegado, veja [encomenda marcada como entregue mas não recebida](guide:delivered-not-received). Veja também [encomendas danificadas](guide:damaged-parcel) e [encomendas extraviadas](guide:lost-parcel).
 
@@ -73,7 +73,7 @@ Canais listados no site da R+L Carriers:
 
 - **Telefone:** 800-543-5589, exibido pela R+L no topo de suas páginas.
 - **R+L Cares:** formulário no site da R+L para pendências, dúvidas ou comentários; a R+L afirma que ele segue direto à liderança executiva.
-- **Reclamações (Claims):** o site da R+L traz link para Cargo Claims, com instruções sobre como abrir uma reclamação de carga.
+- **Indenizações (Claims):** o site da R+L traz link para Cargo Claims, com instruções sobre como fazer um pedido de indenização de carga.
 
 A R+L transporta a carga para quem a contratou, então procure essa parte primeiro: a loja em compras online, ou a empresa remetente em fretes comerciais. Elas detêm a reserva e podem tratar diretamente com a R+L.
 
@@ -89,7 +89,7 @@ Quando o rastreador da R+L não está acessível ou não consegue ler a remessa,
 
 As linhas da R+L trazem data e hora sem fuso horário. O Peek lê cada uma no fuso da cidade do terminal, senão do estado do terminal (o principal nos estados com mais de um fuso), senão da linha anterior ou seguinte e, por último, no horário do Leste dos EUA (Eastern time), convertendo tudo para o fuso do seu dispositivo.
 
-O Peek consulta até a cada 10 minutos enquanto você mantiver a carga aberta, ou no dia da entrega com as notificações ativadas; fora isso, e quando a carga fica dois dias sem nova linha (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica a cada hora. Ele pode avisar você sobre "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode falar com a R+L, com a loja ou com o expedidor por você, nem agendar entrega ou abrir reclamação.
+O Peek consulta até a cada 10 minutos enquanto você mantiver a carga aberta, ou no dia da entrega com as notificações ativadas; fora isso, e quando a carga fica dois dias sem nova linha (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica a cada hora. Ele pode avisar você sobre "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode falar com a R+L, com a loja ou com o expedidor por você, nem agendar entrega ou fazer um pedido de indenização.
 
 ## Perguntas sobre o rastreamento da R+L Carriers
 
@@ -105,15 +105,15 @@ O rastreador da R+L não reconhece esse PRO. Confira cada dígito no e-mail da l
 
 Algo atrasou a carga no trajeto. A linha não informa o motivo; o resumo da R+L classifica a remessa como atrasada mantendo a data prevista, e o Peek mantém em "Em trânsito". Pergunte à loja ou ao expedidor o motivo.
 
-### Qual é o prazo para abrir uma reclamação de carga na R+L Carriers?
+### Qual é o prazo para fazer um pedido de indenização de carga na R+L Carriers?
 
-Para cargas transportadas entre estados dos EUA, a lei federal garante ao menos 9 meses para registrar reclamação junto à transportadora e ao menos 2 anos para recorrer à justiça após recusa escrita de qualquer parte do pedido. O conhecimento de transporte ou contrato fixa o prazo real; esta página não traz regras próprias da R+L. Comece por quem contratou o frete; as instruções da R+L estão em Cargo Claims no site dela.
+Para cargas transportadas entre estados dos EUA, a lei federal garante ao menos 9 meses para registrar o pedido de indenização junto à transportadora e ao menos 2 anos para recorrer à justiça após recusa escrita de qualquer parte do pedido. O conhecimento de transporte ou contrato fixa o prazo real; esta página não traz regras próprias da R+L. Comece por quem contratou o frete; as instruções da R+L estão em Cargo Claims no site dela.
 
 :::sources
 - [Universal Parcel Scraper: R+L Carriers](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/rl-carriers) – nomes, formatos PRO e o `I` na frente, links de rastreamento, textos e fases do rastreador, resumo, respostas de não encontrado e erro de dígito verificador, dia previsto, peso, fusos horários, o que o Peek omite
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – transportadoras que compartilham formatos, ausência de transferência, serviços de rastreamento como alternativa
 - [R+L Carriers: Shipment Tracing](https://www.rlcarriers.com/freight/shipping/shipment-tracing) – número PRO ou ID de solicitação de coleta, até 25 números, outras referências com MyRLC
-- [R+L Carriers: R+L Cares](https://www.rlcarriers.com/contact/rl-cares) – formulário para problemas, dúvidas e feedback enviado à liderança executiva; 800-543-5589 no topo da página; link Cargo Claims com instruções de reclamação
-- [GovInfo: 49 U.S.C. 14706, Liability of carriers under receipts and bills of lading](https://www.govinfo.gov/content/pkg/USCODE-2024-title49/html/USCODE-2024-title49-subtitleIV-partB-chap147-sec14706.htm) – responsabilidade perante o titular do bill of lading, valor limitado, 9 meses para reclamar e 2 anos para ação judicial
-- [GovInfo: 49 CFR Part 370, Investigation and voluntary disposition of loss and damage claims and processing salvage](https://www.govinfo.gov/content/pkg/CFR-2025-title49-vol5/xml/CFR-2025-title49-vol5-part370.xml) – conteúdo da reclamação, ressalvas no recibo de entrega, documentos de suporte, prazos de 30, 120 e 60 dias
+- [R+L Carriers: R+L Cares](https://www.rlcarriers.com/contact/rl-cares) – formulário para problemas, dúvidas e feedback enviado à liderança executiva; 800-543-5589 no topo da página; link Cargo Claims com instruções para pedidos de indenização
+- [GovInfo: 49 U.S.C. 14706, Liability of carriers under receipts and bills of lading](https://www.govinfo.gov/content/pkg/USCODE-2024-title49/html/USCODE-2024-title49-subtitleIV-partB-chap147-sec14706.htm) – responsabilidade perante o titular do bill of lading, valor limitado, 9 meses para pedir indenização e 2 anos para ação judicial
+- [GovInfo: 49 CFR Part 370, Investigation and voluntary disposition of loss and damage claims and processing salvage](https://www.govinfo.gov/content/pkg/CFR-2025-title49-vol5/xml/CFR-2025-title49-vol5-part370.xml) – conteúdo do pedido de indenização, ressalvas no recibo de entrega, documentos de suporte, prazos de 30, 120 e 60 dias
 :::

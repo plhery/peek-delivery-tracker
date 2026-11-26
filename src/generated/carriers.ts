@@ -15705,7 +15705,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "rastreamento-rl-carriers",
-      "title": "Rastreamento R+L Carriers: código PRO, status e sinistros",
+      "title": "Rastreamento R+L Carriers: código PRO, status e indenizações",
       "name": "R+L Carriers",
       "color": "#006647"
     },

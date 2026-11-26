@@ -10,7 +10,7 @@ A SunYou, também chamada de SYPost, é uma empresa de logística de Shenzhen qu
 
 ## Código de rastreamento SunYou: como ele é
 
-A SunYou não publica um padrão oficial, mas os códigos vistos no rastreamento seguem dois formatos. Com dígitos inventados:
+A SunYou não publica um formato de código, mas os códigos vistos no rastreamento seguem dois formatos. Com dígitos inventados:
 
 | Código | O que é |
 | --- | --- |
@@ -29,7 +29,7 @@ As duas letras após SY nem sempre correspondem ao país de destino. No rastream
 
 ## Status de rastreamento da SunYou: o que significam
 
-O site sypost.net exibe os registros no idioma escolhido lá (15 idiomas, incluindo inglês, espanhol, francês, alemão e português). Em inglês, na ordem habitual:
+O site sypost.net exibe os registros no idioma escolhido lá (15 idiomas, incluindo inglês, espanhol, francês, alemão e português). Em inglês, na ordem em que a encomenda costuma passar por eles:
 
 | A SunYou mostra | O que significa para você |
 | --- | --- |
@@ -48,7 +48,7 @@ O site sypost.net exibe os registros no idioma escolhido lá (15 idiomas, inclui
 
 Algumas linhas mudam de redação conforme o pacote: `GMTC, Arrived` equivale a `Arrived At GMTC`, e `Customs Clearance Was Completed` equivale a `Customs Clearance Successed`. `Delivered, At Mailbox` e `Delivered, Left At The Door` indicam onde o pacote foi deixado.
 
-Dois pontos geram dúvida. Primeiro, `Delivered` pode aparecer logo após `Hand Over To Last Mile`, ou até logo após a linha do aeroporto, sem etapas intermediárias: o rastreamento da transportadora local traz os passos que a SunYou omite. Segundo, o resumo no topo da página usa rótulos próprios. `Alert` indica possível problema e `Expired` significa que o envio ficou tempo demais em trânsito; nenhum dos dois equivale a entrega frustrada. Já `Undelivered` indica falha na entrega; o histórico pode informar o motivo, como `Delivery Failed, Reason: Incorrect Address`.
+Dois pontos geram dúvida. Primeiro, `Delivered` pode aparecer logo após `Hand Over To Last Mile`, ou até logo após a linha do aeroporto, sem etapas intermediárias: o rastreamento da transportadora local traz os passos que a SunYou omite. Segundo, o resumo no topo da página usa rótulos próprios. `Alert` indica possível problema e `Expired` significa que o envio ficou tempo demais em trânsito; nenhum dos dois indica uma entrega não realizada. Já `Undelivered` indica que uma entrega não foi realizada; o histórico pode informar o motivo, como `Delivery Failed, Reason: Incorrect Address`.
 
 Em retenções aduaneiras, observe `Customs Clearance Hold` e `Delivery failed, Reason: Refusal to pay VAT / customs duties`; veja [encomendas retidas na alfândega](guide:customs).
 
@@ -62,7 +62,7 @@ Algumas encomendas SunYou seguem como correio simples, que segundo a própria Su
 
 ## Encomenda SunYou atrasada ou rastreamento parado
 
-**Quem acionar.** O cliente da SunYou é o vendedor: ele abre a conta, contrata o envio e detém o contrato. As páginas da SunYou não oferecem canal de reclamação para destinatários, então em caso de atraso, extravio, avaria ou devolução procure o vendedor ou o marketplace onde comprou. As regras de indenização da SunYou aplicam-se aos vendedores.
+**Quem acionar.** O cliente da SunYou é o vendedor: ele abre a conta, contrata o envio e detém o contrato. As páginas da SunYou não oferecem canal de reclamação para destinatários, então em caso de atraso, extravio, dano ou devolução procure o vendedor ou o marketplace onde comprou. As regras de indenização da SunYou aplicam-se aos vendedores.
 
 **Prazo estimado.** Os números comerciais da SunYou para vendedores falam em "4-5 dias da postagem para alguns destinos principais" na linha geral, "entrega mais rápida em até 5 dias" para os principais países da Europa e das Américas na linha comercial e 20 a 30 dias corridos na linha econômica para os EUA. São números comerciais, não uma garantia de data para o seu pedido.
 
@@ -88,7 +88,7 @@ As linhas da SunYou aparecem em inglês em qualquer idioma, exceto correspondên
 
 Quando a SunYou informa o código da transportadora local, o Peek pode consultar essa empresa (Royal Mail, DHL na Alemanha, Canada Post, USPS ou os correios nacionais, por exemplo) e passar a acompanhá-la assim que ela registrar avanço mais recente. O pacote mantém o código SunYou, a página mostra "Entrega por" seguido da transportadora e lista o código dela com link. Enquanto essa empresa tiver apenas o anúncio do envio, sem registro próprio, a página mostra "Anunciada a …, ainda não recebida". Isso não ocorre em todos os envios: a Meest na Grécia, por exemplo, não é acompanhada.
 
-Enquanto o pacote está aberto no Peek, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos — ou a cada 2 minutos a partir das 6h no horário local no dia em que sai para entrega — enquanto o rastreador da SunYou responde (quando apenas serviços de rastreamento respondem: a cada hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados). Nos demais momentos, verifica a cada hora. Quando outra transportadora assume a entrega, o Peek acompanha o ritmo da empresa que realiza a entrega. Ele pode enviar alertas de cada movimentação, apenas das etapas importantes ou "Só a entrega". Após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica a cada hora. Ele não pode contatar a SunYou nem o vendedor por você.
+Enquanto o pacote está aberto no Peek, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos — ou a cada 2 minutos a partir das 6h no horário local no dia em que sai para entrega — enquanto o rastreador da própria SunYou responde (quando apenas serviços de rastreamento respondem: a cada hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados). Nos demais momentos, verifica a cada hora. Quando outra transportadora assume a entrega, o Peek acompanha o ritmo da empresa que realiza a entrega. Ele pode enviar alertas de cada movimentação, apenas das etapas importantes ou "Só a entrega". Após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica a cada hora. Ele não pode contatar a SunYou nem o vendedor por você.
 
 ## Perguntas frequentes sobre o rastreamento SunYou
 

@@ -1,6 +1,6 @@
 ---
 title: Rastreamento GLS France: status, Relais GLS e contato
-description: Rastreie encomendas GLS na França: formatos de código, significado dos status em inglês, entrega frustrada, Relais GLS, armários e atendimento ao cliente.
+description: Rastreie encomendas GLS na França: formatos de código, significado dos status em inglês, entrega não realizada, Relais GLS, armários e atendimento ao cliente.
 slug: rastreamento-gls-france
 published: 2026-11-25
 updated: 2026-11-25
@@ -19,13 +19,13 @@ Confira primeiro o e-mail de confirmação da compra enviado pela loja. Se o rem
 | `004829105730` | 12 dígitos: o código de 11 dígitos mais um dígito verificador impresso na etiqueta. |
 | 5 ou 6 caracteres | A referência no aviso de passagem da GLS. |
 
-Após uma entrega frustrada, a GLS deixa um aviso (*avis de passage*) ou envia por SMS ou e-mail uma referência que a GLS France chama de Track-ID. Ela funciona no rastreamento da GLS para acompanhar ou reagendar o envio. A GLS Alemanha usa "Track ID" para o código de 8 caracteres.
+Após uma entrega não realizada, a GLS deixa um aviso (*avis de passage*) ou envia por SMS ou e-mail uma referência que a GLS France chama de Track-ID. Ela funciona no rastreamento da GLS para acompanhar ou reagendar o envio. A GLS Alemanha usa "Track ID" para o código de 8 caracteres.
 
 Oito caracteres também servem para [GLS Alemanha](carrier:gls-de) e GLS Suíça; 11 dígitos servem para elas, além de PostLogistics e [DHL eCommerce Polônia](carrier:dhl-ecommerce-pl); 12 dígitos servem para [Colis Privé](carrier:colis-prive), [Mondial Relay](carrier:mondial-relay), BRT, DPD France e outras. Se o e-mail da loja citar outra transportadora, siga essa indicação. Veja mais em [formatos de código de rastreamento](guide:tracking-number-formats).
 
 ## O que significam os status da GLS France
 
-O site de rastreamento da GLS abre em francês, com botão EN no cabeçalho. Estes são os títulos em inglês, na ordem habitual:
+O site de rastreamento da GLS abre em francês, com botão EN no cabeçalho. Estes são os títulos em inglês, na ordem em que a encomenda passa por eles:
 
 | A GLS mostra | O que significa para você |
 | --- | --- |
@@ -34,8 +34,8 @@ O site de rastreamento da GLS abre em francês, com botão EN no cabeçalho. Est
 | `Your parcel is in GLS Depot` | No depósito que fará a entrega. Não é um ponto de retirada. |
 | `Your parcel is out for delivery` | Na van, previsto para hoje. |
 | `Your parcel is delivered` | Entregue: a linha do histórico informa como. |
-| `Your parcel will be available shortly at the Relais GLS` | A caminho de um comércio parceiro para retirada. |
-| `Your parcel is now available at the Relais GLS` | Disponível para retirada no comércio parceiro. |
+| `Your parcel will be available shortly at the Relais GLS` | A caminho de um comércio de retirada. |
+| `Your parcel is now available at the Relais GLS` | Disponível para retirada no comércio. |
 | `Your parcel is now available at the Locker GLS` | Disponível para retirada em um armário GLS. |
 | `Your parcel is waiting for you at the GLS Depot` | Você pode retirar no depósito. |
 | `Delivery of your parcel has been delayed` | Nova data ou dados de endereço incompletos. |
@@ -44,17 +44,17 @@ O site de rastreamento da GLS abre em francês, com botão EN no cabeçalho. Est
 
 `Your parcel is being processed` parece indicar movimento, mas significa apenas que a GLS recebeu os dados do remetente. `Delivery of your parcel has been delayed` abrange tanto reagendamento quanto endereço incompleto. Da mesma forma, `Your parcel could not be delivered` cobre ausência na entrega e incidentes. Um pacote na alfândega ainda pode mostrar `Your parcel is on its way`. Em `Your parcel is delivered`, a linha `Parcel has been delivered to a third party.` significa que um vizinho ou porteiro recebeu.
 
-## Entrega GLS, Relais GLS e entregas frustradas
+## Entrega GLS, Relais GLS e entregas não realizadas
 
 **Quando entrega.** Segunda a sexta, das 8h às 18h, sem agendamento. A GLS estima 24 horas para a maior parte da França, 24 a 96 horas para países vizinhos e 72 a 120 horas para destinos mais distantes.
 
-**Ninguém em casa.** O motorista tenta primeiro entregar ao porteiro ou a um vizinho mediante assinatura; o aviso indica quem ficou com o pacote. Se não conseguir, pode levá-lo a um Relais GLS próximo ou devolvê-lo ao depósito para nova tentativa. Após duas tentativas sem sucesso, o pacote aguarda no depósito antes de voltar ao remetente; a página de ajuda da GLS menciona tanto 5 quanto 10 dias úteis, então retire logo ou confirme com a GLS.
+**Ninguém em casa.** O motorista tenta primeiro entregar ao porteiro ou a um vizinho mediante assinatura; o aviso indica quem ficou com o pacote. Se não conseguir, pode levá-lo a um Relais GLS próximo ou devolvê-lo ao depósito para nova tentativa. Após duas entregas não realizadas, o pacote aguarda no depósito antes de voltar ao remetente; a página de ajuda da GLS menciona tanto 5 quanto 10 dias úteis, então retire logo ou confirme com a GLS.
 
 **Alterar a entrega.** Insira a referência do aviso no rastreamento da GLS para escolher nova data ou endereço, autorizar local seguro ou retirar no depósito. Com o FlexDeliveryService, os e-mails da GLS também oferecem um Relais GLS, e um link enviado no dia da entrega permite alterar a escolha (considere até 24 horas). As opções disponíveis dependem do serviço contratado pelo remetente.
 
-**Pontos de retirada.** A GLS France soma mais de 10.000 pontos na França: comércios Relais GLS, armários GLS, "Voisins Relais" (vizinhos parceiros da rede Pickme que entram em contato com você) e pontos Mondial Relay e Relais Colis. O pacote aguarda 8 dias — ou 5 em pontos Mondial Relay — com lembrete após 3 dias, voltando depois ao remetente. Leve documento válido e o aviso; terceiros precisam da sua autorização por escrito e de documento próprio. Sem código do armário? Ligue para 09 74 910 910, tecle 2 e depois 2.
+**Pontos de retirada.** A GLS France soma mais de 10.000 pontos na França: comércios Relais GLS, armários GLS, "Voisins Relais" (particulares da rede Pickme que guardam pacotes e entram em contato com você) e pontos Mondial Relay e Relais Colis. O pacote aguarda 8 dias — ou 5 em pontos Mondial Relay — com lembrete após 3 dias, voltando depois ao remetente. Leve documento válido e o aviso; terceiros precisam da sua autorização por escrito e de documento próprio. Sem código do armário? Ligue para 09 74 910 910, tecle 2 e depois 2.
 
-## Encomenda GLS atrasada, extraviada ou avariada na França
+## Encomenda GLS atrasada, extraviada ou danificada na França
 
 O contrato da GLS France é com o remetente, então indenizações, reembolsos e reclamações passam pela loja.
 
@@ -62,13 +62,13 @@ O contrato da GLS France é com o remetente, então indenizações, reembolsos e
 
 **Entregue, mas não recebida.** Procure um aviso indicando um vizinho e envie à loja uma reclamação com declaração assinada de não recebimento (o formulário está na página de ajuda da GLS), com número do pacote, seu nome, telefone, e-mail e assinatura. Veja mais em [encomenda entregue mas não recebida](guide:delivered-not-received).
 
-**Avariada.** Recuse uma caixa visivelmente danificada: ela retorna ao depósito e o remetente é avisado. Para conteúdo danificado, escreva ao remetente em até 72 horas por carta registrada, com fotos se possível. Se assinar por um pacote avariado, descreva o dano com precisão: a GLS informa que "sujeito à conferência" não vale. Guarde tudo até o encerramento do caso.
+**Danificada.** Recuse uma caixa visivelmente danificada: ela retorna ao depósito e o remetente é avisado. Para conteúdo danificado, escreva ao remetente em até 72 horas por carta registrada, com fotos se possível. Se assinar por um pacote danificado, descreva o dano com precisão: a GLS informa que "sujeito à conferência" não vale. Guarde tudo até o encerramento do caso.
 
 ## Telefone e atendimento da GLS France
 
 Canais listados nas páginas da GLS France:
 
-- **Telefone:** 09 74 910 910, linha para destinatários, com tarifa local. A GLS não informa horários de atendimento e publica apenas esse formato francês.
+- **Telefone:** 09 74 910 910, linha para destinatários, com tarifa normal. A GLS não informa horários de atendimento e publica apenas esse formato francês.
 - **Formulário de contato** para destinatários na página [Nous contacter](https://gls-group.com/FR/fr/a-propos-de-gls/nous-contacter/).
 - **Assistente virtual** nas páginas de rastreamento. Não há e-mail de atendimento para destinatários.
 
@@ -78,7 +78,7 @@ Canais listados nas páginas da GLS France:
 
 O [Peek](/) consulta primeiro a GLS France, junto com GLS Alemanha e GLS Suíça, para códigos de 8 caracteres iniciados por `00` misturando letras e números. Para outros códigos de 8 caracteres, 11 dígitos e 12 dígitos com dígito verificador da GLS, consulta as transportadoras prováveis — começando pela GLS France quando você está na França — e seleciona a GLS France se ela reconhecer o pacote ("GLS France está com esta encomenda."). Não exige código postal. Links de moncolis.gls-france.com, gls-france.com e páginas gls-group com `/FR/` também funcionam; a referência do aviso de passagem não.
 
-O Peek mostra o status, o histórico, o dia previsto (até sair para entrega, aguardar retirada ou sofrer um problema), o nome do remetente, a hora da entrega e, enquanto aguarda retirada, o nome e endereço do comércio, armário ou depósito. Os registros da GLS trazem códigos de unidade como `FR0012` em vez de cidades, então nada aparece no mapa. Como a GLS France envia apenas códigos de status, os textos exibidos são do próprio Peek. Seu nome, endereço, dados de contato, assinatura e instruções são omitidos, e não há informação de peso. O Peek consulta a GLS cerca de uma vez por hora — ou após 4 horas depois de uma falha — e pode avisar a cada mudança. Encomendas antigas somem do rastreamento da GLS, e o Peek não transfere o acompanhamento para outra transportadora.
+O Peek mostra o status, o histórico, o dia previsto (até sair para entrega, aguardar retirada ou sofrer um problema), o nome do remetente, a hora da entrega e, enquanto aguarda retirada, o nome e endereço do comércio, armário ou depósito. Os registros da GLS trazem códigos de unidade como `FR0012` em vez de cidades, então nada aparece no mapa. Como a GLS France envia apenas códigos de status, os textos exibidos são do próprio Peek. Seu nome, endereço, dados de contato, assinatura e instruções são omitidos, e não há informação de peso. O Peek consulta a GLS cerca de uma vez por hora, ou 4 horas depois de uma consulta que falhou, e pode avisar a cada mudança. Encomendas antigas somem do rastreamento da GLS, e o Peek não transfere o acompanhamento para outra transportadora.
 
 ## Perguntas frequentes sobre o rastreamento GLS na França
 

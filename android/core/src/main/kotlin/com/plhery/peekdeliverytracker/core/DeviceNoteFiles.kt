@@ -15,7 +15,8 @@ import kotlinx.serialization.json.Json
 
 /**
  * A file of a guest's note, kept on this phone beside its link (`linkId`). Once an account keeps the parcel, it is
- * marked for the account's parcel (`packageId`) until it has been sent there.
+ * marked for the account's parcel (`packageId`) until it has been sent there. `refusedAt` (ms) is when the account last
+ * had no room for it: it is offered again a day later.
  */
 @Serializable
 data class DeviceNoteFile(
@@ -28,6 +29,7 @@ data class DeviceNoteFile(
     val height: Int? = null,
     val createdAt: String,
     @Serializable(with = UuidSerializer::class) val packageId: UUID? = null,
+    val refusedAt: Long? = null,
 ) {
     val fileType: PackageFileType get() = PackageFileType.fromRawValue(type) ?: PackageFileType.ImageJpeg
 
@@ -45,7 +47,8 @@ data class DeviceNoteFile(
 /**
  * The files of a guest's notes, in a folder of the app's own (`filesDir/ParcelNotes`): each file under its id, and
  * `files.json` listing them. A parcel holds five at most, 10 MB each, and the phone 200 MB in all, or what room it
- * has left. Forgetting a parcel deletes its files; a file on its way to an account stays until it has arrived.
+ * has left. Forgetting a parcel deletes its files; a file on its way to an account stays until it has arrived, or until
+ * the service says it never will.
  */
 class DeviceNoteFiles(
     private val directory: File,
@@ -65,6 +68,21 @@ class DeviceNoteFiles(
 
     /** The files an account's parcel is still to receive. */
     val sending: List<DeviceNoteFile> get() = files.filter { it.packageId != null }
+
+    /** Those to send now: one the account had no room for isn't sent again, 10 MB at a time, before a day has passed. */
+    val due: List<DeviceNoteFile>
+        get() {
+            val at = now().toEpochMilli()
+            return sending.filter { file -> file.refusedAt.let { it == null || at - it >= REFUSED_WAIT_MS } }
+        }
+
+    /** Notes that the account had no room for file `id`, now. */
+    @Synchronized
+    fun refused(id: UUID) {
+        if (files.none { it.id == id }) return
+        val at = now().toEpochMilli()
+        save(files.map { if (it.id == id) it.copy(refusedAt = at) else it })
+    }
 
     /** Where the bytes of file `id` are, while it is kept here. */
     fun file(id: UUID): File? = files.firstOrNull { it.id == id }?.let { File(directory, it.id.toString()) }?.takeIf { it.isFile }
@@ -167,13 +185,16 @@ class DeviceNoteFiles(
         Files.move(temporary.toPath(), file.toPath(), StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING)
     }
 
-    private companion object {
-        const val INDEX = "files.json"
+    companion object {
+        /** How long a file the account had no room for waits before it is offered again. */
+        const val REFUSED_WAIT_MS = 24L * 60 * 60 * 1000
+
+        private const val INDEX = "files.json"
 
         /** Room the phone keeps besides a new file, so the app's other files can still be written. */
-        const val ROOM_LEFT = 20L * 1_048_576
+        private const val ROOM_LEFT = 20L * 1_048_576
 
-        val json = Json { ignoreUnknownKeys = true }
-        val serializer = ListSerializer(DeviceNoteFile.serializer())
+        private val json = Json { ignoreUnknownKeys = true }
+        private val serializer = ListSerializer(DeviceNoteFile.serializer())
     }
 }

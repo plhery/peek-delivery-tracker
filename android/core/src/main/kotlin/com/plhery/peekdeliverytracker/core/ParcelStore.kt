@@ -1248,8 +1248,9 @@ class ParcelStore(
 
     /**
      * Sends the files of guest notes that the account now keeps, one at a time, each leaving the phone once it
-     * arrived. One that fails stays for the next start; one whose parcel has left the account has nowhere to go.
-     * Returns how many arrived.
+     * arrived. One that fails stays for the next start, and one the account had no room for (409) for a start a day
+     * later. One whose parcel has left the account (404), or whose size or type the service refuses (413, 415), has
+     * nowhere to go. Returns how many arrived.
      */
     private suspend fun sendKeptNoteFiles(): Int {
         val files = device.noteFiles ?: return 0
@@ -1268,7 +1269,7 @@ class ParcelStore(
     private suspend fun sendNoteFiles(files: DeviceNoteFiles): Int {
         val generation = session.generation
         var sent = 0
-        for (file in files.sending) {
+        for (file in files.due) {
             val packageId = file.packageId ?: continue
             val bytes = withContext(noteFileContext) { files.bytes(file.id) }
             if (bytes == null) {
@@ -1281,7 +1282,11 @@ class ParcelStore(
             } catch (error: Exception) {
                 if (error is CancellationException) currentCoroutineContext().ensureActive()
                 if (generation != session.generation) return sent
-                if (error !is DeliveryApiError.ParcelMissing) continue
+                if (error is NoteFileError && error.status == 409) {
+                    withContext(noteFileContext) { files.refused(file.id) }
+                    continue
+                }
+                if (error !is DeliveryApiError.ParcelMissing && !(error is NoteFileError && error.status in setOf(404, 413, 415))) continue
             }
             withContext(noteFileContext) { files.remove(file.id) }
         }

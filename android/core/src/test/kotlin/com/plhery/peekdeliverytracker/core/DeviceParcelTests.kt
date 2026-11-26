@@ -2189,6 +2189,61 @@ class DeviceParcelTests {
         }
     }
 
+    /**
+     * As src/peek/guestNotes.test.ts and noteFiles.test.ts: a file the service will never take (413, 415) leaves the
+     * phone; one the account has no room for (409) stays, through a restart, and is offered again a day later.
+     */
+    @Test
+    fun aGuestsFileTheServiceNeverTakesLeavesThePhoneAndOneWithNoRoomWaitsADay() = runTest {
+        val folder = java.nio.file.Files.createTempDirectory("note-files").toFile()
+        try {
+            var clock = Instant.parse("2026-11-26T10:00:00Z")
+            val noteFiles = DeviceNoteFiles(folder, now = { clock })
+            for (name in listOf("Big.jpg", "Odd.jpg", "Box.jpg")) {
+                noteFiles.add("22222222222A", NoteFileUpload(byteArrayOf(1, 2, 3), name, PackageFileType.ImageJpeg, 400, 300))
+            }
+            var full = true
+            val phone = signingIn(listOf("22222222222A"), AccountRoom(1), backgroundScope, noteFiles = noteFiles) { request ->
+                when (request.headers["X-File-Name"]) {
+                    "Big.jpg" -> jsonResponse(413)
+                    "Odd.jpg" -> jsonResponse(415)
+                    else -> if (full) jsonResponse(409, """{"error":"No room","code":"account_files_full"}""") else uploaded(request)
+                }
+            }
+            val session = phone.session(backgroundScope)
+            session.showWelcome()
+            val store = phone.store(session, backgroundScope)
+            session.verifyCode(email = "test@example.com", code = "123456")
+            store.start()
+            runCurrent()
+            val uploads = { phone.transport.requests.filter { it.path?.endsWith("/files") == true }.map { it.headers["X-File-Name"] } }
+            assertEquals(listOf("Big.jpg", "Odd.jpg", "Box.jpg"), uploads())
+            val kept = noteFiles.sending.single()
+            assertEquals("Box.jpg", kept.name)
+            assertEquals(clock.toEpochMilli(), kept.refusedAt)
+
+            // Read again from its folder, as after a restart: the refusal was kept, and the file waits.
+            val restarted = DeviceNoteFiles(folder, now = { clock })
+            assertEquals(clock.toEpochMilli(), restarted.sending.single().refusedAt)
+            clock = clock.plusSeconds(60 * 60)
+            assertEquals(emptyList<DeviceNoteFile>(), restarted.due)
+            phone.store(session, backgroundScope).start()
+            runCurrent()
+            assertEquals(3, uploads().size)
+
+            // A day later it goes, and leaves the phone.
+            clock = clock.plusSeconds(24 * 60 * 60)
+            full = false
+            phone.store(session, backgroundScope).start()
+            runCurrent()
+            assertEquals(listOf("Big.jpg", "Odd.jpg", "Box.jpg", "Box.jpg"), uploads())
+            assertEquals(emptyList<DeviceNoteFile>(), noteFiles.all)
+            session.forceSignOut()
+        } finally {
+            folder.deleteRecursively()
+        }
+    }
+
     /** As src/peek/guestNotes.test.ts: a guest's note and its files are kept on the phone, through a restart. */
     @Test
     fun aGuestsNoteAndItsFilesStayThroughARestartAndGoWithTheParcel() = runTest {

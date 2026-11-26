@@ -16,31 +16,23 @@ struct ParcelListView: View {
     @State private var showsFirstOpen = false
     /// A sheet or an alert over a Mac's window: the tabs wait for it, and their menu items dim.
     @State private var sheetOver = false
+    /// The stamps earned since the passport was last opened.
+    @StateObject private var news = PassportNews()
+
+    /// The Passport tab's dot takes the orange ink.
+    private static let dotColour: Void = {
+        #if os(iOS)
+        UITabBarItem.appearance().badgeColor = UIColor(Brand.warning)
+        #endif
+    }()
 
     var body: some View {
-        TabView(selection: $selection) {
-            DeliveryListView(isSelected: selection == 0, firstParcel: $firstParcel, adding: $adding) { selection = 0 }
-                .environment(\.keyboardInFront, inFront(0))
-                .environment(\.marksNewUpdates, store.markNewUpdates)
-                .environment(\.showsPeekAi, store.showPeekAi)
-                .tag(0)
-                .tabItem {
-                    Label(localizer.text("native.deliveries"), systemImage: "shippingbox.fill")
-                }
-
-            PassportView()
-                .environment(\.keyboardInFront, inFront(1))
-                .tag(1)
-                .tabItem {
-                    Label(ExperimentalCopy(localizer: localizer).passport, systemImage: "book.closed.fill")
-                }
-
-            Group {
-                if session.isGuest { FriendsSignedOutView() } else { FriendsView() }
-            }
-                .environment(\.keyboardInFront, inFront(2))
-                .tag(2)
-                .tabItem { Label(localizer.text("friends.title"), systemImage: "person.2.fill") }
+        let _ = Self.dotColour
+        tabs
+        .environmentObject(news)
+        .environment(\.openPassport) { selection = 1 }
+        .onChange(of: newsInput, initial: true) { _, input in
+            news.update(parcels: input.parcels, scope: input.scope, loaded: input.loaded)
         }
         .tint(Brand.ink)
         .background { if !showsFirstOpen { tabKeys } }
@@ -77,6 +69,40 @@ struct ParcelListView: View {
 
     /// Whether the keyboard acts on a tab: it is the one chosen, and the first screen doesn't stand over it.
     private func inFront(_ tab: Int) -> Bool { selection == tab && !showsFirstOpen }
+
+    private var tabs: some View {
+        // New stamps put a dot on the Passport tab until the passport is opened.
+        let passportDot = !news.unseen.isEmpty && selection != 1
+        return TabView(selection: $selection) {
+            Tab(localizer.text("native.deliveries"), systemImage: "shippingbox.fill", value: 0) {
+                DeliveryListView(isSelected: selection == 0, firstParcel: $firstParcel, adding: $adding) { selection = 0 }
+                    .environment(\.keyboardInFront, inFront(0))
+                    .environment(\.marksNewUpdates, store.markNewUpdates)
+                    .environment(\.showsPeekAi, store.showPeekAi)
+            }
+
+            Tab(ExperimentalCopy(localizer: localizer).passport, systemImage: "book.closed.fill", value: 1) {
+                PassportView()
+                    .environment(\.keyboardInFront, inFront(1))
+            }
+            // An empty badge is the system's dot.
+            .badge(passportDot ? Text("") : nil)
+            .accessibilityValue(Text(localizer.text("passport.new")), isEnabled: passportDot)
+
+            Tab(localizer.text("friends.title"), systemImage: "person.2.fill", value: 2) {
+                Group {
+                    if session.isGuest { FriendsSignedOutView() } else { FriendsView() }
+                }
+                    .environment(\.keyboardInFront, inFront(2))
+            }
+        }
+    }
+
+    /// What the passport's news is read from: the parcels, whose they are, and whether their list has loaded.
+    private var newsInput: PassportNewsInput {
+        PassportNewsInput(parcels: store.parcels, scope: PassportNews.scope(session.state),
+                          loaded: !store.loading && store.errorMessage == nil)
+    }
 
     /// ⌘1, ⌘2 and ⌘3 choose the tabs, as the tab bar does, once nothing stands over them.
     private var tabKeys: some View {
@@ -231,6 +257,7 @@ private struct DeliveryListView: View {
     @EnvironmentObject private var localizer: Localizer
     @EnvironmentObject private var links: ParcelLinkStore
     @EnvironmentObject private var invitation: FriendInvitationStore
+    @EnvironmentObject private var news: PassportNews
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.accessibilityVoiceOverEnabled) private var voiceOverEnabled
     @Environment(\.accessibilitySwitchControlEnabled) private var switchControlEnabled
@@ -1377,6 +1404,8 @@ private struct DeliveryListView: View {
                     )
                     .modifier(arrivalCelebration(for: parcel.id))
                     .modifier(place(of: parcel.id, leaving: []))
+                    // The stamps this parcel earned, until the passport is opened.
+                    .passportNews(news.byParcel[parcel.id], parcelID: parcel.id)
                     .id(parcel.id)
                 }
             }
@@ -3084,6 +3113,7 @@ private struct ExperimentalArchiveShelf: View {
                             menu: menu?(parcel),
                             onOpen: { onOpen(parcel.id) }
                         )
+                        ArchivedPassportNews(parcelID: parcel.id)
                         if index < parcels.count - 1 {
                             Divider().padding(.leading, 48)
                         }
@@ -3094,6 +3124,20 @@ private struct ExperimentalArchiveShelf: View {
             }
         }
         .sensoryFeedback(.selection, trigger: isExpanded)
+    }
+}
+
+/// An archived parcel's "New stamp" line, under its row, while it has one.
+private struct ArchivedPassportNews: View {
+    let parcelID: UUID
+    @EnvironmentObject private var news: PassportNews
+
+    var body: some View {
+        if let items = news.byParcel[parcelID], !items.isEmpty {
+            NewStampLine(parcelID: parcelID, items: items, tucked: false)
+                .padding([.horizontal, .bottom], 10)
+                .transition(.opacity)
+        }
     }
 }
 
@@ -3115,6 +3159,7 @@ private struct ExperimentalArchivedParcelGroup: View {
                     menu: menu?(parcel),
                     onOpen: { onOpen(parcel.id) }
                 )
+                ArchivedPassportNews(parcelID: parcel.id)
                 if index < parcels.count - 1 {
                     Divider().padding(.leading, 48)
                 }
@@ -3209,4 +3254,11 @@ private extension Parcel {
     var experimentalArchivedDisplayDate: Date? {
         experimentalCompletionDate ?? archivedAt.flatMap(DateParser.date)
     }
+}
+
+/// What the passport's news is read from: the parcels, whose they are, and whether their list has loaded.
+private struct PassportNewsInput: Equatable {
+    let parcels: [Parcel]
+    let scope: String?
+    let loaded: Bool
 }

@@ -178,20 +178,11 @@ final class FriendsStore: ObservableObject {
     }
 
     static func ownCard(parcels: [Parcel], profile: FriendProfile, now: Date = Date()) -> FriendCard {
-        let stats = PassportStatistics(parcels: parcels, timeZone: TimeZone(secondsFromGMT: 0)!)
-        var stamps: [FriendStamp] = []
-        if stats.deliveredCount >= 1 { stamps.append(.first) }
-        if stats.deliveredCount >= 10 { stamps.append(.ten) }
-        if Set(parcels.map(\.carrier)).count >= 3 { stamps.append(.connected) }
-        if let fastest = stats.fastestDelivery, fastest.duration <= 172_800 { stamps.append(.express) }
-        if stats.crossBorderCount >= 1 { stamps.append(.acrossBorders) }
-        if stats.originCountries.count >= 5 { stamps.append(.aroundWorld) }
-        if stats.deliveredCount >= 25 { stamps.append(.theRegular) }
-        if stats.domesticDeliveryCount >= 1 { stamps.append(.rightNextDoor) }
-        if stats.longWaitDeliveryCount >= 1 { stamps.append(.worthTheWait) }
-        if stats.maxDeliveriesInOneDay >= 3 { stamps.append(.busyDoorstep) }
-        if stats.pickupDeliveryCount >= 1 { stamps.append(.pickedUp) }
-        if stats.decemberDeliveryCount >= 1 { stamps.append(.homeForHolidays) }
+        // The passport's own stamps, the calendar ones in UTC, as the server shares them: only the twelve keys the
+        // apps before the new stamps decode.
+        let book = PassportBook(parcels: parcels, timeZone: TimeZone(secondsFromGMT: 0)!)
+        let stats = book.stats
+        let stamps = book.sharedStamps
         var calendar = Calendar(identifier: .iso8601)
         calendar.timeZone = TimeZone(secondsFromGMT: 0)!
         let week = calendar.dateInterval(of: .weekOfYear, for: now)?.start ?? now

@@ -18,9 +18,45 @@ struct PassportStatistics {
         var flag: String { TrackingLocation.flag(code) }
     }
 
+    /// What one delivered parcel brings to the passport, in the order its scans happened.
+    struct Delivery: Equatable {
+        let parcelID: UUID
+        let label: String
+        let carrier: CarrierID
+        let deliveredAt: Date
+        /// Its delivery's day on the reader's calendar, YYYY-MM-DD.
+        let day: String
+        let december: Bool
+        let pickup: Bool
+        let crossBorder: Bool
+        let crossContinent: Bool
+        /// A delivery came after a missed attempt.
+        let secondTry: Bool
+        /// Its quarter of the year by month: 0 for December to February, 1 for March to May, and so on.
+        let season: Int
+        var domestic = false
+        var longWait = false
+        /// From its first physical scan to its delivery, when both are known.
+        var duration: TimeInterval?
+        /// Each country it was scanned in, in the order it got there, with the first instant it was there.
+        let countries: [(code: String, at: Date)]
+
+        static func == (left: Delivery, right: Delivery) -> Bool {
+            left.parcelID == right.parcelID && left.deliveredAt == right.deliveredAt && left.day == right.day
+                && left.duration == right.duration && left.countries.map(\.code) == right.countries.map(\.code)
+        }
+    }
+
+    /// Carrier ids that stand for "not known yet" rather than a carrier: they never count toward a carrier stamp.
+    static let placeholderCarriers: Set<CarrierID> = [.unknown, .internationalPost]
+
     let trackedCount: Int
     let deliveredCount: Int
     let activeCount: Int
+    /// Distinct real carriers of delivered parcels.
+    let carrierCount: Int
+    /// Every delivered parcel whose scans are all dated, in the order they arrived.
+    let deliveries: [Delivery]
     let crossBorderCount: Int
     let domesticDeliveryCount: Int
     let longWaitDeliveryCount: Int
@@ -54,6 +90,13 @@ struct PassportStatistics {
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = timeZone
         var crossBorder = 0, domestic = 0, longWait = 0, pickup = 0, december = 0
+        var carriers: Set<CarrierID> = []
+        var deliveries: [Delivery] = []
+        let day = DateFormatter()
+        day.locale = Locale(identifier: "en_US_POSIX")
+        day.calendar = calendar
+        day.timeZone = timeZone
+        day.dateFormat = "yyyy-MM-dd"
 
         for parcel in parcels {
             let meaningful = parcel.trackingEvents.filter { $0.stage != .pending }
@@ -65,29 +108,49 @@ struct PassportStatistics {
             // A malformed date must not turn a return into an earned delivery.
             // Keep the app's status fallback when chronology cannot be established.
             let currentStage = datesAreComplete ? dated.last?.event.stage : parcel.currentStage
-            if currentStage == .delivered { delivered += 1 }
+            if currentStage == .delivered {
+                delivered += 1
+                if !Self.placeholderCarriers.contains(parcel.carrier) { carriers.insert(parcel.carrier) }
+            }
             if parcel.archivedAt == nil && currentStage != .delivered && currentStage != .returned {
                 active += 1
             }
 
             let physical = dated.filter { $0.event.stage != .registered }
             let completion = physical.first(where: { $0.event.stage == .delivered })
+            var delivery: Delivery?
             if datesAreComplete, currentStage == .delivered, let completion {
                 // Count each parcel once, using the device's Gregorian calendar day.
                 deliveredDays[calendar.startOfDay(for: completion.date), default: 0] += 1
-                if calendar.component(.month, from: completion.date) == 12 { december += 1 }
+                let month = calendar.component(.month, from: completion.date)
+                if month == 12 { december += 1 }
                 // Collected where it waited: its last movement before the delivery made it ready for pickup, not a trip to the door after.
-                if physical.last(where: { $0.date < completion.date && Self.movements.contains($0.event.stage) })?.event.stage == .readyForPickup {
-                    pickup += 1
-                }
+                let pickedUp = physical.last(where: { $0.date < completion.date && Self.movements.contains($0.event.stage) })?.event.stage == .readyForPickup
+                if pickedUp { pickup += 1 }
                 let located = physical.filter { $0.date <= completion.date }.compactMap { scan -> (country: String, date: Date)? in
-                    guard let country = TrackingLocation.countryCode(in: scan.event.location, placedIn: scan.event.place?.country) else { return nil }
+                    guard let country = Self.passportCountry(scan.event) else { return nil }
                     return (country, scan.date)
                 }
-                if located.enumerated().contains(where: { index, scan in
-                    located.prefix(index).contains { $0.date < scan.date && $0.country != scan.country }
-                }) { crossBorder += 1 }
+                // Different countries must be observed at different instants; tied scans do not prove travel.
+                func travelled(_ apart: (String, String) -> Bool) -> Bool {
+                    located.enumerated().contains { index, scan in
+                        located.prefix(index).contains { $0.date < scan.date && apart($0.country, scan.country) }
+                    }
+                }
+                let crossed = travelled { $0 != $1 }
+                if crossed { crossBorder += 1 }
+                var visited: [(code: String, at: Date)] = []
+                for scan in located where !visited.contains(where: { $0.code == scan.country }) { visited.append((scan.country, scan.date)) }
+                let data = PassportData.shared
+                delivery = Delivery(
+                    parcelID: parcel.id, label: parcel.label, carrier: parcel.carrier, deliveredAt: completion.date,
+                    day: day.string(from: completion.date), december: month == 12, pickup: pickedUp, crossBorder: crossed,
+                    crossContinent: travelled { data.ink($0).continent != data.ink($1).continent },
+                    secondTry: physical.contains { $0.event.stage == .failedAttempt && $0.date < completion.date },
+                    season: (month % 12) / 3, countries: visited
+                )
             }
+            defer { if let delivery { deliveries.append(delivery) } }
             guard datesAreComplete, let first = physical.first,
                   first.event.stage == .accepted || first.event.stage == .inTransit else { continue }
 
@@ -101,9 +164,15 @@ struct PassportStatistics {
                   let completion else { continue }
             let duration = completion.date.timeIntervalSince(first.date)
             guard duration.isFinite, duration > 0 else { continue }
-            if let country = TrackingLocation.countryCode(in: first.event.location, placedIn: first.event.place?.country),
-               country == TrackingLocation.countryCode(in: completion.event.location, placedIn: completion.event.place?.country) { domestic += 1 }
-            if duration > 30 * 86_400 { longWait += 1 }
+            if let country = Self.passportCountry(first.event), country == Self.passportCountry(completion.event) {
+                domestic += 1
+                delivery?.domestic = true
+            }
+            if duration > 30 * 86_400 {
+                longWait += 1
+                delivery?.longWait = true
+            }
+            delivery?.duration = duration
             records.append(DeliveryRecord(
                 parcelID: parcel.id, label: parcel.label,
                 duration: duration, deliveredAt: completion.date
@@ -119,6 +188,11 @@ struct PassportStatistics {
         trackedCount = parcels.count
         deliveredCount = delivered
         activeCount = active
+        carrierCount = carriers.count
+        self.deliveries = deliveries.sorted {
+            if $0.deliveredAt != $1.deliveredAt { return $0.deliveredAt < $1.deliveredAt }
+            return $0.parcelID.uuidString < $1.parcelID.uuidString
+        }
         durationSampleCount = records.count
         averageDeliveryDuration = records.isEmpty
             ? nil : records.reduce(0) { $0 + $1.duration } / Double(records.count)
@@ -132,6 +206,12 @@ struct PassportStatistics {
                 return $0.code < $1.code
             }
         knownOriginCount = countries.values.reduce(0, +)
+    }
+
+    /// Where a scan was, as the passport's countries count it: the country its words name, else the one the server
+    /// placed it in.
+    static func passportCountry(_ event: TrackingEvent) -> String? {
+        TrackingLocation.countryCode(in: event.location, placedIn: event.place?.country) ?? event.place?.country
     }
 
     /// Stages that move a parcel: notices, problem reports and a delivery itself do not.
@@ -156,6 +236,170 @@ struct PassportStatistics {
         return left.event.id.uuidString < right.event.id.uuidString
     }
 
+}
+
+/// The whole passport: today's numbers, every stamp with its progress and the day it was earned, and the countries. A
+/// stamp's day is the delivery that crossed its rule, replaying the deliveries in the order they arrived, so deleting a
+/// parcel can move or remove it. The web's `passportBook`, which the three platforms check against PassportCases.json.
+struct PassportBook {
+    /// A stamp as the passport shows it: how far the reader is, and once earned, the day and the parcel that earned it.
+    struct StampProgress: Identifiable, Equatable {
+        let stamp: PassportData.Stamp
+        let count: Int
+        /// When the delivery that crossed its rule arrived; nil for an earned stamp whose deliveries are not all dated.
+        let earnedAt: Date?
+        let parcelID: UUID?
+        let label: String?
+        var key: String { stamp.key }
+        var id: String { stamp.key }
+        var total: Int { stamp.total }
+        var earned: Bool { count >= stamp.total }
+        /// The key the reader's seen list keeps it by.
+        var seenKey: String { "stamp:\(stamp.key)" }
+    }
+
+    /// A country's ink stamp: the first instant a delivered parcel of the reader's was scanned there, and how many went
+    /// through it.
+    struct CountryStamp: Identifiable, Equatable {
+        let code: String
+        /// Its running number in the order the countries were reached, from 1.
+        let number: Int
+        let firstAt: Date
+        let parcelID: UUID
+        let label: String
+        let count: Int
+        var continent: PassportData.Continent { PassportData.shared.ink(code).continent }
+        var id: String { code }
+    }
+
+    let stats: PassportStatistics
+    let stamps: [StampProgress]
+    let countries: [CountryStamp]
+
+    private static let day: TimeInterval = 86_400
+
+    init(parcels: [Parcel], timeZone: TimeZone = .current) {
+        let stats = PassportStatistics(parcels: parcels, timeZone: timeZone)
+        self.stats = stats
+        var earned: [String: PassportStatistics.Delivery] = [:]
+        func earn(_ key: String, _ delivery: PassportStatistics.Delivery, _ when: Bool = true) {
+            if when, earned[key] == nil { earned[key] = delivery }
+        }
+        var carriers: Set<CarrierID> = []
+        var byCarrier: [CarrierID: Int] = [:]
+        var reached: [String: (firstAt: Date, delivery: PassportStatistics.Delivery, count: Int)] = [:]
+        var days: [String: Int] = [:]
+        var seasons: Set<Int> = []
+        let firstDelivery = stats.deliveries.first?.deliveredAt
+        for (index, delivery) in stats.deliveries.enumerated() {
+            let n = index + 1
+            earn("first", delivery); earn("ten", delivery, n >= 10); earn("theRegular", delivery, n >= 25); earn("fifty", delivery, n >= 50)
+            if !PassportStatistics.placeholderCarriers.contains(delivery.carrier) {
+                carriers.insert(delivery.carrier)
+                byCarrier[delivery.carrier, default: 0] += 1
+            }
+            earn("connected", delivery, carriers.count >= 3)
+            earn("familiarFace", delivery, (byCarrier[delivery.carrier] ?? 0) >= 3)
+            earn("secondTry", delivery, delivery.secondTry)
+            seasons.insert(delivery.season)
+            earn("fourSeasons", delivery, seasons.count >= 4)
+            earn("firstAnniversary", delivery, delivery.deliveredAt.timeIntervalSince(firstDelivery ?? delivery.deliveredAt) >= 365 * Self.day)
+            earn("express", delivery, delivery.duration.map { $0 <= 2 * Self.day } ?? false)
+            earn("acrossBorders", delivery, delivery.crossBorder)
+            earn("newHorizons", delivery, delivery.crossContinent)
+            for (code, at) in delivery.countries {
+                if var known = reached[code] {
+                    known.count += 1
+                    if at < known.firstAt { known.firstAt = at; known.delivery = delivery }
+                    reached[code] = known
+                } else {
+                    reached[code] = (at, delivery, 1)
+                }
+            }
+            earn("aroundWorld", delivery, reached.count >= 5)
+            earn("tenCountries", delivery, reached.count >= 10)
+            earn("rightNextDoor", delivery, delivery.domestic)
+            earn("worthTheWait", delivery, delivery.longWait)
+            days[delivery.day, default: 0] += 1
+            earn("busyDoorstep", delivery, (days[delivery.day] ?? 0) >= 3)
+            earn("pickedUp", delivery, delivery.pickup)
+            earn("homeForHolidays", delivery, delivery.december)
+        }
+        let span = (stats.deliveries.last?.deliveredAt).flatMap { last in firstDelivery.map { last.timeIntervalSince($0) } } ?? 0
+        let counts: [String: Int] = [
+            "first": stats.deliveredCount, "ten": stats.deliveredCount, "theRegular": stats.deliveredCount, "fifty": stats.deliveredCount,
+            "connected": stats.carrierCount,
+            "express": stats.fastestDelivery.map { $0.duration <= 2 * Self.day ? 1 : 0 } ?? 0,
+            "acrossBorders": stats.crossBorderCount,
+            "newHorizons": stats.deliveries.filter(\.crossContinent).count,
+            "aroundWorld": reached.count, "tenCountries": reached.count,
+            "rightNextDoor": stats.domesticDeliveryCount, "worthTheWait": stats.longWaitDeliveryCount,
+            "busyDoorstep": stats.maxDeliveriesInOneDay, "pickedUp": stats.pickupDeliveryCount,
+            "homeForHolidays": stats.decemberDeliveryCount,
+            "familiarFace": byCarrier.values.max() ?? 0,
+            "secondTry": stats.deliveries.filter(\.secondTry).count,
+            "fourSeasons": seasons.count,
+            "firstAnniversary": earned["firstAnniversary"] != nil ? 12 : min(11, Int((span / (30.4375 * Self.day)).rounded(.down))),
+        ]
+        stamps = PassportData.shared.stamps.map { stamp in
+            let count = counts[stamp.key] ?? 0
+            let delivery = count >= stamp.total ? earned[stamp.key] : nil
+            return StampProgress(stamp: stamp, count: count, earnedAt: delivery?.deliveredAt, parcelID: delivery?.parcelID, label: delivery?.label)
+        }
+        countries = reached.sorted {
+            if $0.value.firstAt != $1.value.firstAt { return $0.value.firstAt < $1.value.firstAt }
+            return $0.key < $1.key
+        }.enumerated().map { index, entry in
+            CountryStamp(code: entry.key, number: index + 1, firstAt: entry.value.firstAt, parcelID: entry.value.delivery.parcelID,
+                         label: entry.value.delivery.label, count: entry.value.count)
+        }
+    }
+
+    /// The stamps Friends shares, in the order the apps before the new stamps know them: old apps decode a strict list.
+    var sharedStamps: [FriendStamp] {
+        let earned = Set(stamps.filter(\.earned).map(\.key))
+        return FriendStamp.allCases.filter { earned.contains($0.rawValue) }
+    }
+
+    /// "Your <year> in parcels": the year's deliveries on the reader's calendar, the countries they went through (the six
+    /// with the most of them, in the passport's order, when there are more), the stamps they earned and the fastest one.
+    /// Aggregates only: no parcel, shop, carrier or place below the country.
+    func year(_ year: Int) -> YearInParcels {
+        let deliveries = stats.deliveries.filter { $0.day.hasPrefix("\(year)-") }
+        let parcels = Set(deliveries.map(\.parcelID))
+        var counts: [String: Int] = [:]
+        // A country's day on the card is the year's first delivery through it, never an earlier year's.
+        var firsts: [String: Date] = [:]
+        for delivery in deliveries {
+            for country in delivery.countries {
+                counts[country.code, default: 0] += 1
+                firsts[country.code] = min(firsts[country.code] ?? delivery.deliveredAt, delivery.deliveredAt)
+            }
+        }
+        let countries = self.countries.compactMap { country in
+            counts[country.code].map {
+                CountryStamp(code: country.code, number: country.number, firstAt: firsts[country.code] ?? country.firstAt, parcelID: country.parcelID, label: country.label, count: $0)
+            }
+        }
+        let shown = countries.count <= 6 ? countries : Array(countries.sorted {
+            if $0.count != $1.count { return $0.count > $1.count }
+            return $0.number < $1.number
+        }.prefix(6)).sorted { $0.number < $1.number }
+        return YearInParcels(
+            year: year, deliveredCount: deliveries.count, countryCount: countries.count, countries: shown,
+            stamps: stamps.filter { $0.earned && $0.parcelID.map(parcels.contains) == true },
+            fastest: deliveries.compactMap(\.duration).min()
+        )
+    }
+}
+
+struct YearInParcels: Equatable {
+    let year: Int
+    let deliveredCount: Int
+    let countryCount: Int
+    let countries: [PassportBook.CountryStamp]
+    let stamps: [PassportBook.StampProgress]
+    let fastest: TimeInterval?
 }
 
 /// Country fields shared by parcel display and first-scan statistics.

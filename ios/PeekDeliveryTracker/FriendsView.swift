@@ -548,7 +548,8 @@ private struct FriendDetailView: View {
                         let earned = stats.stamps.contains(value)
                         Button { stamp = value } label: {
                             VStack(spacing: 10) {
-                                PassportSeal(symbol: value == .ten ? "10" : value == .theRegular ? "25" : value == .busyDoorstep ? "parcels" : value.symbol, tint: stampTint(value), surface: stampSurface(value), earned: earned).frame(width: 50, height: 64)
+                                // The passport's own seal for the stamp, in its tone.
+                                if let seal = PassportData.shared.stamp(value.rawValue) { PassportSeal(stamp: seal, earned: earned) }
                                 Text(localizer.text(value.titleKey)).font(.caption2).foregroundStyle(earned ? Brand.ink : Brand.secondaryText).multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
                             }.frame(maxWidth: .infinity, minHeight: 96, alignment: .top)
                         }.buttonStyle(PassportPressStyle()).accessibilityLabel(stampLabel(value, earned: earned, count: stats.deliveredCount))
@@ -582,8 +583,6 @@ private struct FriendDetailView: View {
         return showAllStamps ? FriendStamp.allCases : FriendStamp.allCases.filter { earned.contains($0) || upcoming.contains($0) }
     }
     private func metric(_ value: String, _ title: String) -> some View { VStack(alignment: .leading, spacing: 4) { Text(value).font(.title2.weight(.semibold)); Text(title).font(.caption2).foregroundStyle(Brand.secondaryText) }.frame(maxWidth: .infinity, alignment: .leading) }
-    private func stampTint(_ stamp: FriendStamp) -> Color { switch stamp { case .first, .aroundWorld, .rightNextDoor, .homeForHolidays: ExperimentalPalette.delivered; case .ten, .theRegular: ExperimentalPalette.lilac; case .connected, .acrossBorders, .pickedUp: ExperimentalPalette.transit; case .express, .busyDoorstep: ExperimentalPalette.pickup; case .worthTheWait: ExperimentalPalette.ochre } }
-    private func stampSurface(_ stamp: FriendStamp) -> Color { switch stamp { case .first, .aroundWorld, .rightNextDoor, .homeForHolidays: ExperimentalPalette.deliveredSurface; case .ten, .theRegular: ExperimentalPalette.lilacSurface; case .connected, .acrossBorders, .pickedUp: ExperimentalPalette.transitSurface; case .express, .busyDoorstep: ExperimentalPalette.pickupSurface; case .worthTheWait: ExperimentalPalette.ochreSurface } }
     /// A stamp is read as Passport reads one: its title, and while it isn't earned, how far along it is, or that it isn't.
     private func stampLabel(_ stamp: FriendStamp, earned: Bool, count: Int) -> String {
         let title = localizer.text(stamp.titleKey)

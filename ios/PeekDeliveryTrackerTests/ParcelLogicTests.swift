@@ -2989,7 +2989,8 @@ final class ParcelLogicTests: XCTestCase {
         ])
         XCTAssertEqual(Set(stats.originCountries.map(\.code)), ["CA", "DE"])
         XCTAssertEqual(stats.originCountries.map(\.count), [1, 1])
-        XCTAssertEqual(stats.domesticDeliveryCount, 1)
+        // Delaware stays in the United States it was placed in, so that parcel never left it.
+        XCTAssertEqual(stats.domesticDeliveryCount, 2)
         XCTAssertEqual(stats.crossBorderCount, 0)
     }
 
@@ -6301,6 +6302,8 @@ extension ParcelLogicTests {
                                 device: DeviceParcels(client: nil, storage: RenderTestStorage()))
         session.enterDemo()
         let links = ParcelLinkStore(defaults: defaults, configuration: demo)
+        // The passport reads the demo's parcels as they come in.
+        let news = PassportNews(defaults: defaults)
         let scene = try XCTUnwrap(UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.first)
         for size in sizes {
             for largeType in [false, true] {
@@ -6311,6 +6314,8 @@ extension ParcelLogicTests {
                     .environmentObject(FriendInvitationStore(defaults: defaults))
                     .environmentObject(FriendsActivityStore())
                     .environmentObject(links)
+                    .environmentObject(news)
+                    .onReceive(store.$parcels) { news.update(parcels: $0, scope: "demo", loaded: true) }
                     .environment(\.locale, language.locale)
                     .environment(\.dynamicTypeSize, largeType ? largeSize : .large))
                 host.overrideUserInterfaceStyle = largeType ? .dark : .light
@@ -6658,5 +6663,97 @@ final class MaintenanceTests: XCTestCase {
         XCTAssertEqual(localizer.maintenanceText(.unannounced, readAt: now.addingTimeInterval(-86_400), now: now),
                        "Peek is down for a few minutes of maintenance. Your parcels below are from yesterday, \(localizer.clockTime(now)).")
         XCTAssertEqual(localizer.errorMessage(ServerDown()), "Peek is down for a few minutes of maintenance.")
+    }
+}
+
+extension ParcelLogicTests {
+    /// The passport's new parts over the demo's parcels, as pictures kept with the results: the passport in light, in
+    /// dark and at large text, with two stamps new and the year's card offered; the deliveries with every earned stamp
+    /// still new, their lines under the delivered cards and the dot on the Passport tab; and the year's card. A run that
+    /// sets `PASSPORT_PICTURES` (`TEST_RUNNER_PASSPORT_PICTURES` for xcodebuild) to a folder gets them there as PNGs.
+    @MainActor func testThePassportsNewPartsDrawOverTheDemo() async throws {
+        let localizer = Localizer()
+        let previousLanguage = localizer.language
+        defer { localizer.language = previousLanguage }
+        localizer.language = .en
+        let suite = "passport-pictures-\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let now = try XCTUnwrap(DateParser.date("2026-12-10T12:00:00Z"))
+        let news = PassportNews(defaults: defaults)
+        news.update(parcels: DemoRepository.seed(now: now), scope: "picture", loaded: true)
+        let earned = news.book.stamps.filter(\.earned)
+        XCTAssertGreaterThan(earned.count, 2)
+        let fresh = Set(earned.suffix(2).map(\.seenKey))
+        for (name, dark, size) in [("passport-light", false, DynamicTypeSize.large), ("passport-dark", true, .large),
+                                   ("passport-large-text", false, .accessibility2)] {
+            let image = try await windowPicture(PassportView(pictureAt: now, fresh: fresh)
+                .environmentObject(localizer)
+                .environmentObject(news)
+                .environment(\.locale, localizer.language.locale)
+                .environment(\.dynamicTypeSize, size), width: 402, dark: dark)
+            keepPassportPicture(try XCTUnwrap(image.pngData()), named: name)
+        }
+
+        let year = news.book.year(2026)
+        XCTAssertGreaterThan(year.deliveredCount, 0)
+        let card = try XCTUnwrap(YearCard.render(year, words: YearCardWords(year: year, localizer: localizer)))
+        XCTAssertEqual([card.width, card.height], [1080, 1350])
+        keepPassportPicture(try XCTUnwrap(YearCard.png(card)), named: "year-card")
+
+        // The demo's own list, with nothing of its passport seen yet.
+        let seenKey = PassportNews.prefix + "demo"
+        let previousSeen = UserDefaults.standard.string(forKey: seenKey)
+        UserDefaults.standard.set("[]", forKey: seenKey)
+        defer { UserDefaults.standard.set(previousSeen, forKey: seenKey) }
+        let demo = AppConfiguration(mode: .demo, apiBaseURL: URL(string: "https://render.test")!, supabaseURL: nil, supabasePublishableKey: "",
+                                    googleAuthEnabled: false, appleAuthEnabled: false, emailOTPEnabled: false, appGroupIdentifier: "render.test")
+        let session = SessionStore(configuration: demo, defaults: defaults, persistence: MemorySessionPersistence())
+        let store = ParcelStore(configuration: demo, session: session, localizer: localizer,
+                                device: DeviceParcels(client: nil, storage: RenderTestStorage()))
+        session.enterDemo()
+        let list = try await windowPicture(ParcelListView(selection: .constant(0))
+            .environmentObject(session)
+            .environmentObject(store)
+            .environmentObject(localizer)
+            .environmentObject(FriendInvitationStore(defaults: defaults))
+            .environmentObject(FriendsActivityStore())
+            .environmentObject(ParcelLinkStore(defaults: defaults, configuration: demo))
+            .environment(\.locale, localizer.language.locale), width: 402, height: 2600, dark: false, settle: .milliseconds(1500))
+        keepPassportPicture(try XCTUnwrap(list.pngData()), named: "news-line-and-tab-dot")
+    }
+
+    /// A view drawn in a window `width` wide, as tall as it asks or `height`.
+    @MainActor private func windowPicture(_ view: some View, width: CGFloat, height: CGFloat? = nil, dark: Bool,
+                                          settle: Duration = .milliseconds(600)) async throws -> UIImage {
+        let host = UIHostingController(rootView: view)
+        host.overrideUserInterfaceStyle = dark ? .dark : .light
+        let scene = try XCTUnwrap(UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.first)
+        let window = UIWindow(windowScene: scene)
+        let container = UIViewController()
+        window.rootViewController = container
+        container.addChild(host)
+        let size = CGSize(width: width, height: height ?? ceil(host.sizeThatFits(in: CGSize(width: width, height: 20_000)).height))
+        host.view.frame = CGRect(origin: .zero, size: size)
+        container.view.addSubview(host.view)
+        host.didMove(toParent: container)
+        window.isHidden = false
+        defer { window.isHidden = true }
+        try await Task.sleep(for: settle)
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = 2
+        return UIGraphicsImageRenderer(size: size, format: format).image { _ in
+            host.view.drawHierarchy(in: host.view.bounds, afterScreenUpdates: true)
+        }
+    }
+
+    private func keepPassportPicture(_ png: Data, named name: String) {
+        let attachment = XCTAttachment(data: png, uniformTypeIdentifier: "public.png")
+        attachment.name = name
+        attachment.lifetime = .keepAlways
+        add(attachment)
+        if let folder = ProcessInfo.processInfo.environment["PASSPORT_PICTURES"], !folder.isEmpty {
+            XCTAssertNoThrow(try png.write(to: URL(fileURLWithPath: folder).appendingPathComponent("\(name).png")))
+        }
     }
 }

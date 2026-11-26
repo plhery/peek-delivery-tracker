@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct PassportView: View {
-    @EnvironmentObject private var store: ParcelStore
+    @EnvironmentObject private var news: PassportNews
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -12,14 +12,49 @@ struct PassportView: View {
     @State private var expandedCard: PassportSelection?
     @State private var touchCount = 0
     @State private var showAllStamps = false
+    /// What was new when the passport opened stays new, and is pressed in, until the reader leaves it.
+    @State private var fresh: Set<String> = []
+    /// When each fresh seal's press began, and its place among the seals pressed together.
+    @State private var presses: [String: (start: Date, index: Int)] = [:]
+    @State private var pressing = false
+    @State private var impacts = 0
+    @State private var visible = false
+    /// For the tests' pictures: the page alone, as it stands, on the day `now` says.
+    private var picture = false
+    private var now: Date?
+
+    init() {}
+
+    /// The page alone, for a picture: `fresh` are the stamps it shows as new.
+    init(pictureAt now: Date, fresh: Set<String>) {
+        picture = true
+        self.now = now
+        _fresh = State(initialValue: fresh)
+    }
 
     private var copy: PassportCopy { PassportCopy(localizer: localizer) }
-    private var statistics: PassportStatistics { PassportStatistics(parcels: store.parcels) }
-    private var carrierCount: Int { Set(store.parcels.map(\.carrier)).count }
+    private var stampCopy: PassportStampCopy { PassportStampCopy(localizer: localizer) }
 
     var body: some View {
-        let stats = statistics
-        NavigationStack {
+        if picture {
+            page {
+                passport(news.book.stats)
+                stamps(news.book)
+                deliveryTimes(news.book.stats)
+                YearCardRow(book: news.book, now: now)
+                if !news.book.stats.originCountries.isEmpty { countries(news.book.stats) }
+            }
+            .frame(width: 402)
+            .background(Brand.background)
+        } else {
+            passportPages
+        }
+    }
+
+    private var passportPages: some View {
+        let stats = news.book.stats
+        let book = news.book
+        return NavigationStack {
             GeometryReader { proxy in
                 ScrollView {
                     // An iPhone Duo standing half open shows two pages, one each side of the fold: the passport and its
@@ -28,12 +63,13 @@ struct PassportView: View {
                         HStack(alignment: .top, spacing: 0) {
                             page {
                                 passport(stats)
-                                stamps(stats)
+                                stamps(book)
                             }
                             .frame(width: fold.minX)
                             Color.clear.frame(width: fold.width, height: 0)
                             page {
                                 deliveryTimes(stats)
+                                YearCardRow(book: book, now: now)
                                 if !stats.originCountries.isEmpty { countries(stats) }
                             }
                             .frame(width: proxy.size.width - fold.maxX)
@@ -45,12 +81,13 @@ struct PassportView: View {
                         HStack(alignment: .top, spacing: 0) {
                             page {
                                 passport(stats)
-                                stamps(stats)
+                                stamps(book)
                             }
                             .frame(maxWidth: PassportSpread.widest)
                             Divider().padding(.vertical, 18)
                             page {
                                 deliveryTimes(stats)
+                                YearCardRow(book: book, now: now)
                                 if !stats.originCountries.isEmpty { countries(stats) }
                             }
                             .frame(maxWidth: PassportSpread.widest)
@@ -59,8 +96,9 @@ struct PassportView: View {
                     } else {
                         page {
                             passport(stats)
-                            stamps(stats)
+                            stamps(book)
                             deliveryTimes(stats)
+                            YearCardRow(book: book, now: now)
                             if !stats.originCountries.isEmpty { countries(stats) }
                         }
                         .frame(maxWidth: PassportSpread.widest)
@@ -77,6 +115,36 @@ struct PassportView: View {
         }
         .sheet(isPresented: $showingAccount) { AccountView().formOnPad() }
         .sensoryFeedback(.impact(weight: .light, intensity: 0.65), trigger: touchCount)
+        // One light impact as the first new seal lands.
+        .sensoryFeedback(.impact(weight: .light), trigger: impacts)
+        .onAppear { visible = true; takeFresh() }
+        // A stamp earned while the passport is open is pressed in there and then.
+        .onChange(of: news.unseen.map(\.seen)) { if visible { takeFresh() } }
+        // What was new stays pressed in until the reader leaves the passport.
+        .onDisappear { visible = false; fresh = []; presses = [:]; pressing = false }
+    }
+
+    /// Opening the passport: what is new is pressed in, then everything earned counts as seen, so the dot and the
+    /// lines on the cards go.
+    private func takeFresh() {
+        let new = news.unseen.map(\.seen).filter { !fresh.contains($0) }
+        guard !new.isEmpty else { return }
+        fresh.formUnion(new)
+        news.markSeen()
+        guard !reduceMotion else { return }
+        // The seals press in the passport's order, once the page has settled.
+        let order = news.book.stamps.map(\.seenKey).filter(new.contains)
+        let start = Date()
+        for (index, key) in order.enumerated() { presses[key] = (start, index) }
+        pressing = true
+        let first = PassportMotion.pressDelay(0) + PassportMotion.impact
+        let last = PassportMotion.pressDelay(order.count - 1) + PassportMotion.pressEnd
+        Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(Int(first)))
+            impacts += 1
+            try? await Task.sleep(for: .milliseconds(Int(last - first) + 40))
+            if presses.values.allSatisfy({ Date().timeIntervalSince($0.start) * 1000 > last }) { pressing = false }
+        }
     }
 
     private func page(@ViewBuilder _ content: () -> some View) -> some View {
@@ -101,8 +169,7 @@ struct PassportView: View {
                     }
                     Spacer(minLength: 0)
                     if !dynamicTypeSize.isAccessibilitySize {
-                        PassportSeal(symbol: "shippingbox", tint: Color(hex: "#745300"), surface: .white, earned: true, cancelled: true)
-                            .frame(width: 66, height: 80)
+                        PassportSeal.cover
                             .rotationEffect(.degrees(-7))
                     }
                 }
@@ -124,41 +191,20 @@ struct PassportView: View {
         .background(Brand.accent, in: RoundedRectangle(cornerRadius: 20))
     }
 
-    private func stamps(_ stats: PassportStatistics) -> some View {
-        let collection = milestones(stats)
-        let upcoming = Set(collection.filter { !$0.earned }.prefix(3).map(\.id))
-        let visible = showAllStamps ? collection : collection.filter { $0.earned || upcoming.contains($0.id) }
-        let hasMore = collection.contains { !$0.earned && !upcoming.contains($0.id) }
+    private func stamps(_ book: PassportBook) -> some View {
+        // Earned stamps first, in the passport's order, then the next three to reach; the rest behind "All stamps".
+        let earned = book.stamps.filter(\.earned)
+        let ahead = book.stamps.filter { !$0.earned }
+        let visible = showAllStamps ? earned + ahead : earned + ahead.prefix(3)
         return VStack(alignment: .leading, spacing: 16) {
             Text(copy.stamps).font(.subheadline.weight(.semibold))
             // Fewer stamps to a row as the text grows, so their names have room.
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 8, alignment: .top), count: dynamicTypeSize.isAccessibilitySize ? 2 : dynamicTypeSize >= .xxLarge ? 3 : 4), alignment: .leading, spacing: 16) {
-                ForEach(visible) { milestone in
-                    let id = PassportSelection.milestone(milestone.id)
-                    Button { toggle(id) } label: {
-                        VStack(spacing: 10) {
-                            PassportSeal(symbol: milestone.symbol, tint: milestone.tint, surface: milestone.surface, earned: milestone.earned)
-                                .frame(width: 50, height: 64)
-                            Text(milestone.title)
-                                .font(.caption2)
-                                .foregroundStyle(milestone.earned ? Brand.ink : Brand.secondaryText)
-                                .fixedSize(horizontal: false, vertical: true)
-                                .multilineTextAlignment(.center)
-                        }
-                        .frame(maxWidth: .infinity, minHeight: 96, alignment: .top)
-                        .contentShape(Rectangle())
-                    }
-                    .buttonStyle(PassportPressStyle())
-                    .readsAsItsLabel()
-                    .accessibilityLabel(milestone.earned ? milestone.title : "\(milestone.title), \(milestone.progressLabel)")
-                    .accessibilityValue(expansionValue(id, explanation: milestone.explanation))
-                    .accessibilityHint(copy.expansionHint(expanded: expandedCard == id))
-                    .popover(isPresented: presentation(id)) {
-                        explanationBubble(title: milestone.title, explanation: milestone.explanation + (milestone.earned ? "" : "\n\(milestone.progressLabel)"))
-                    }
+                ForEach(visible) { stamp in
+                    stampCell(stamp)
                 }
             }
-            if hasMore {
+            if ahead.count > 3 {
                 Button { showAllStamps.toggle() } label: {
                     Text(localizer.text(showAllStamps ? "passport.showLess" : "passport.showAll"))
                         .font(.caption)
@@ -170,6 +216,72 @@ struct PassportView: View {
                 .padding(.vertical, -8)
             }
         }
+    }
+
+    private func stampCell(_ stamp: PassportBook.StampProgress) -> some View {
+        let id = PassportSelection.milestone(stamp.key)
+        let title = stampCopy.title(stamp.key)
+        let isFresh = stamp.earned && fresh.contains(stamp.seenKey)
+        return Button { toggle(id) } label: {
+            VStack(spacing: 8) {
+                pressedSeal(stamp, fresh: isFresh)
+                VStack(spacing: 2) {
+                    Text(title)
+                        .font(.caption2)
+                        .foregroundStyle(stamp.earned ? Brand.ink : Brand.secondaryText)
+                    if let under = stampCopy.under(stamp, now: now ?? Date()) {
+                        Text(under)
+                            .font(.caption2.monospacedDigit())
+                            .foregroundStyle(Brand.secondaryText)
+                    }
+                }
+                .fixedSize(horizontal: false, vertical: true)
+                .multilineTextAlignment(.center)
+            }
+            .padding(.top, 2)
+            .frame(maxWidth: .infinity, minHeight: 96, alignment: .top)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(PassportPressStyle())
+        .readsAsItsLabel()
+        .accessibilityLabel(stampCopy.accessibilityLabel(stamp, fresh: isFresh))
+        .accessibilityValue(expansionValue(id, explanation: stampCopy.explanation(stamp.key)))
+        .accessibilityHint(copy.expansionHint(expanded: expandedCard == id))
+        .popover(isPresented: presentation(id)) {
+            explanationBubble(title: title, explanation: stampCopy.details(stamp))
+        }
+    }
+
+    /// A seal, pressed in while it is new, with its New pill.
+    @ViewBuilder private func pressedSeal(_ stamp: PassportBook.StampProgress, fresh: Bool) -> some View {
+        if fresh, pressing, let press = presses[stamp.seenKey] {
+            TimelineView(.animation) { context in
+                let elapsed = context.date.timeIntervalSince(press.start) * 1000 - PassportMotion.pressDelay(press.index)
+                seal(stamp, fresh: true, press: elapsed < PassportMotion.pressEnd ? elapsed : nil)
+            }
+        } else {
+            seal(stamp, fresh: fresh, press: nil)
+        }
+    }
+
+    private func seal(_ stamp: PassportBook.StampProgress, fresh: Bool, press: Double?) -> some View {
+        let pill = PassportMotion.Press(elapsed: press).pill
+        return PassportSeal(stamp: stamp.stamp, earned: stamp.earned, press: press)
+            .overlay(alignment: .topTrailing) {
+                if fresh {
+                    Text(localizer.text("passport.new"))
+                        .font(.system(size: 9, weight: .semibold))
+                        .foregroundStyle(Brand.onAccent)
+                        .padding(.horizontal, 6)
+                        .frame(minHeight: 15)
+                        .background(Brand.accent, in: Capsule())
+                        .fixedSize()
+                        .scaleEffect(0.6 + 0.4 * pill)
+                        .opacity(pill)
+                        .offset(x: 11, y: -8)
+                        .accessibilityHidden(true)
+                }
+            }
     }
 
     private func deliveryTimes(_ stats: PassportStatistics) -> some View {
@@ -256,36 +368,6 @@ struct PassportView: View {
         }
     }
 
-    private func milestones(_ stats: PassportStatistics) -> [PassportMilestone] {
-        [
-            PassportMilestone(id: "first", title: copy.firstArrival, symbol: "shippingbox", tint: ExperimentalPalette.delivered, surface: ExperimentalPalette.deliveredSurface,
-                              current: stats.deliveredCount, target: 1, explanation: copy.firstExplanation),
-            PassportMilestone(id: "ten", title: copy.doubleDigits, symbol: "10", tint: ExperimentalPalette.lilac, surface: ExperimentalPalette.lilacSurface,
-                              current: stats.deliveredCount, target: 10, explanation: copy.tenExplanation),
-            PassportMilestone(id: "carriers", title: copy.wellConnected, symbol: "globe", tint: ExperimentalPalette.transit, surface: ExperimentalPalette.transitSurface,
-                              current: carrierCount, target: 3, explanation: copy.carrierExplanation),
-            PassportMilestone(id: "speed", title: copy.expressArrival, symbol: "bolt", tint: ExperimentalPalette.pickup, surface: ExperimentalPalette.pickupSurface,
-                              current: stats.fastestDelivery.map { $0.duration <= 48 * 60 * 60 ? 1 : 0 } ?? 0,
-                              target: 1, explanation: copy.expressExplanation, pendingLabel: copy.underTwoDays),
-            PassportMilestone(id: "acrossBorders", title: localizer.text("passport.acrossBorders"), symbol: "globe.europe.africa", tint: ExperimentalPalette.transit, surface: ExperimentalPalette.transitSurface,
-                              current: stats.crossBorderCount, target: 1, explanation: localizer.text("passport.acrossExplanation")),
-            PassportMilestone(id: "aroundWorld", title: localizer.text("passport.aroundWorld"), symbol: "map", tint: ExperimentalPalette.delivered, surface: ExperimentalPalette.deliveredSurface,
-                              current: stats.originCountries.count, target: 5, explanation: localizer.text("passport.aroundExplanation")),
-            PassportMilestone(id: "theRegular", title: localizer.text("passport.theRegular"), symbol: "25", tint: ExperimentalPalette.lilac, surface: ExperimentalPalette.lilacSurface,
-                              current: stats.deliveredCount, target: 25, explanation: localizer.text("passport.regularExplanation")),
-            PassportMilestone(id: "rightNextDoor", title: localizer.text("passport.rightNextDoor"), symbol: "house", tint: ExperimentalPalette.delivered, surface: ExperimentalPalette.deliveredSurface,
-                              current: stats.domesticDeliveryCount, target: 1, explanation: localizer.text("passport.domesticExplanation")),
-            PassportMilestone(id: "worthTheWait", title: localizer.text("passport.worthTheWait"), symbol: "hourglass", tint: ExperimentalPalette.ochre, surface: ExperimentalPalette.ochreSurface,
-                              current: stats.longWaitDeliveryCount, target: 1, explanation: localizer.text("passport.waitExplanation")),
-            PassportMilestone(id: "busyDoorstep", title: localizer.text("passport.busyDoorstep"), symbol: "parcels", tint: ExperimentalPalette.pickup, surface: ExperimentalPalette.pickupSurface,
-                              current: stats.maxDeliveriesInOneDay, target: 3, explanation: localizer.text("passport.busyExplanation")),
-            PassportMilestone(id: "pickedUp", title: localizer.text("passport.pickedUp"), symbol: "storefront", tint: ExperimentalPalette.transit, surface: ExperimentalPalette.transitSurface,
-                              current: stats.pickupDeliveryCount, target: 1, explanation: localizer.text("passport.pickupExplanation")),
-            PassportMilestone(id: "homeForHolidays", title: localizer.text("passport.homeForHolidays"), symbol: "gift", tint: ExperimentalPalette.delivered, surface: ExperimentalPalette.deliveredSurface,
-                              current: stats.decemberDeliveryCount, target: 1, explanation: localizer.text("passport.holidayExplanation")),
-        ]
-    }
-
     private func fastestExplanation(_ stats: PassportStatistics) -> String {
         guard let record = stats.fastestDelivery else { return copy.noTimingExplanation }
         let title = record.label.nonEmpty ?? localizer.text("common.parcel")
@@ -304,7 +386,6 @@ struct PassportView: View {
         formatter.zeroFormattingBehavior = .dropAll
         return formatter.string(from: duration) ?? "—"
     }
-
 
     private func presentation(_ id: PassportSelection) -> Binding<Bool> {
         Binding(get: { expandedCard == id }, set: { presented in
@@ -335,6 +416,8 @@ struct PassportView: View {
 
     private func toggle(_ id: PassportSelection) {
         touchCount += 1
+        // Only a stamp's details count as opening a stamp: never the cover, the times or the countries.
+        if case .milestone = id, expandedCard != id { DeliveryAnalytics.shared.action("stamp-open") }
         withAnimation(reduceMotion ? nil : .spring(response: 0.42, dampingFraction: 0.86)) {
             expandedCard = expandedCard == id ? nil : id
         }
@@ -347,64 +430,6 @@ private enum PassportSelection: Hashable {
     case personalBest
     case milestone(String)
     case countries
-}
-
-private struct PassportMilestone: Identifiable {
-    let id: String
-    let title: String
-    let symbol: String
-    let tint: Color
-    let surface: Color
-    let current: Int
-    let target: Int
-    let explanation: String
-    var pendingLabel: String? = nil
-
-    var earned: Bool { current >= target }
-    var progressLabel: String { pendingLabel ?? "\(min(current, target)) / \(target)" }
-}
-
-struct PassportSeal: View {
-    let symbol: String
-    let tint: Color
-    let surface: Color
-    let earned: Bool
-    var cancelled = false
-
-    var body: some View {
-        ZStack {
-            DieCutStampShape().fill(surface)
-            Rectangle().strokeBorder(tint.opacity(0.4), lineWidth: 0.7).padding(6)
-            if symbol == "10" || symbol == "25" {
-                Text(symbol).font(.system(size: 20, weight: .light)).foregroundStyle(tint)
-            } else if symbol == "parcels" {
-                ZStack {
-                    Image(systemName: "shippingbox").offset(y: -7)
-                    Image(systemName: "shippingbox").offset(x: -7, y: 6)
-                    Image(systemName: "shippingbox").offset(x: 7, y: 6)
-                }
-                .font(.system(size: 13, weight: .ultraLight))
-                .foregroundStyle(tint)
-            } else {
-                Image(systemName: symbol)
-                    .font(.system(size: 22, weight: .ultraLight))
-                    .foregroundStyle(tint)
-            }
-        }
-        .overlay(alignment: .bottomTrailing) {
-            if cancelled {
-                ZStack {
-                    Circle().stroke(tint.opacity(0.2), lineWidth: 0.7)
-                    Circle().inset(by: 4).stroke(tint.opacity(0.2), lineWidth: 0.7)
-                }
-                .frame(width: 31, height: 31)
-                .offset(x: 3, y: -5)
-            }
-        }
-        .opacity(earned ? 1 : 0.3)
-        .saturation(earned ? 1 : 0)
-        .accessibilityHidden(true)
-    }
 }
 
 struct PassportPressStyle: ButtonStyle {
@@ -429,11 +454,6 @@ private struct PassportCopy {
     var personalBest: String { localizer.text("passport.personalBest") }
     var firstSeenIn: String { localizer.text("passport.firstSeenIn") }
     var stamps: String { localizer.text("passport.stamps") }
-    var firstArrival: String { localizer.text("passport.firstArrival") }
-    var doubleDigits: String { localizer.text("passport.doubleDigits") }
-    var wellConnected: String { localizer.text("passport.wellConnected") }
-    var expressArrival: String { localizer.text("passport.expressArrival") }
-    var underTwoDays: String { localizer.text("passport.underTwoDays") }
     var underOneMinute: String { localizer.text("passport.underOneMinute") }
     var lessThanOneMinute: String { localizer.text("passport.lessThanOneMinute") }
     var waitingForTimes: String { localizer.text("passport.waitingForTimes") }
@@ -441,10 +461,6 @@ private struct PassportCopy {
     var timingExplanation: String { localizer.text("passport.timingExplanation") }
     var noTimingExplanation: String { localizer.text("passport.noTimingExplanation") }
     var countryExplanation: String { localizer.text("passport.countryExplanation") }
-    var firstExplanation: String { localizer.text("passport.firstExplanation") }
-    var tenExplanation: String { localizer.text("passport.tenExplanation") }
-    var carrierExplanation: String { localizer.text("passport.carrierExplanation") }
-    var expressExplanation: String { localizer.text("passport.expressExplanation") }
 
     func expansionState(expanded: Bool) -> String {
         localizer.text(expanded ? "passport.expansionState.expanded" : "passport.expansionState.collapsed")

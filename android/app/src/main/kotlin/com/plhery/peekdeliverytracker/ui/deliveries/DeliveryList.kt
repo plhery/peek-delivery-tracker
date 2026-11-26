@@ -217,7 +217,8 @@ internal fun DeliveryList(state: DeliveriesState) {
             ListItem.Maintenance(localizer.maintenanceText(down, readAt = listReadAt))
         }
     }
-    val entries = listEntries(state, sideBySide, guest, loading, notice, maintenance, firstLoad, invitation = state.invitationShown && largeText)
+    val shopWaits = rememberShopWaits(source, session)
+    val entries = listEntries(state, sideBySide, guest, loading, notice, maintenance, firstLoad, invitation = state.invitationShown && largeText, shopWaits)
     state.itemKeys = entries.map { it.key }
     state.itemTops = entries.map { with(density) { it.top.toPx() } }
     val keptCard = state.navigator.keptCard
@@ -564,6 +565,10 @@ private sealed interface ListItem {
     /** The invitation to turn notifications on, at the accessibility sizes ([NotificationPrompt]). */
     @Immutable
     data object Invitation : ListItem
+
+    /** A wait for a shop that hasn't shipped yet, after the cards on their way ([ShopWaitCard]). */
+    @Immutable
+    data class ShopWait(val wait: com.plhery.peekdeliverytracker.core.api.ShopWait) : ListItem
 }
 
 /**
@@ -580,6 +585,7 @@ private fun listEntries(
     maintenance: ListItem?,
     firstLoad: Boolean,
     invitation: Boolean,
+    shopWaits: List<com.plhery.peekdeliverytracker.core.api.ShopWait>,
 ): List<ListEntry> {
     val layout = state.layout
     val parcels = state.parcels
@@ -603,10 +609,10 @@ private fun listEntries(
         if (parcels.isEmpty() && maintenance is ListItem.MaintenanceEmpty) {
             first("maintenanceEmpty", "maintenanceEmpty", maintenance)
         } else if (parcels.isEmpty()) {
-            first("empty", "empty", ListItem.Empty)
+            if (shopWaits.isEmpty()) first("empty", "empty", ListItem.Empty)
         } else if (layout.visible.isEmpty()) {
             first("noResults", "noResults", ListItem.NoResults)
-        } else if ((!guest || !state.source.accountInvitation.stands) && !custom && notice == null && parcels.all { it.isDelivered }) {
+        } else if ((!guest || !state.source.accountInvitation.stands) && !custom && notice == null && parcels.all { it.isDelivered } && shopWaits.isEmpty()) {
             // Someone without an account is not told to track another parcel while the row under the cards speaks to
             // them; once they closed it, they are.
             first("allArrived", "allArrived", ListItem.AllArrived)
@@ -617,6 +623,7 @@ private fun listEntries(
     layout.next?.let { first(cardKey("next", it.id), "next", ListItem.Next(it)) }
     for (parcel in layout.attention) first(cardKey("attention", parcel.id), "card", ListItem.OnTheWay(parcel, attention = true))
     for (parcel in layout.remaining) first(cardKey("remaining", parcel.id), "card", ListItem.OnTheWay(parcel, attention = false))
+    if (!firstLoad) for (wait in shopWaits) first("shopWait-${wait.id}", "shopWait", ListItem.ShopWait(wait))
     // Someone following parcels without an account is offered one under them, once and quietly, outside a custom view,
     // unless they closed it a while ago ([AccountInvitationVisit]): outside the first group too, 24 under it.
     if (guest && parcels.isNotEmpty() && !custom && state.source.accountInvitation.stands) {
@@ -671,6 +678,7 @@ private fun ListItemContent(state: DeliveriesState, item: ListItem) {
         is ListItem.Header -> SectionHeader(item.kind, item.count, item.change)
         is ListItem.SectionCard -> SectionCard(state, item)
         is ListItem.Foot -> DeliveriesFoot(item.homePageUrl, item.privacyUrl)
+        is ListItem.ShopWait -> ShopWaitCard(item.wait) { state.source.stopWaiting(item.wait.id) }
         ListItem.DeviceAccount -> DeviceAccountRow(
             state.source.accountInvitation, onSignIn = { state.source.askToSignIn(UnlockReason.Account) }, onClose = state::closeAccountInvitation,
         )

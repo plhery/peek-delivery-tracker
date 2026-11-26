@@ -16,6 +16,7 @@ import com.plhery.peekdeliverytracker.core.api.PackageFile
 import com.plhery.peekdeliverytracker.core.NoteFileUpload
 import com.plhery.peekdeliverytracker.core.AddByEmailStore
 import com.plhery.peekdeliverytracker.core.AssistantsStore
+import com.plhery.peekdeliverytracker.core.ShopWaitsStore
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiClient
@@ -465,6 +466,9 @@ interface DeliveriesSource {
      * for them and the ones connected, with Disconnect, kept for the process.
      */
     val assistants: AssistantsStore
+
+    /** The list's waits for shops that haven't shipped yet (the web's `useShopWaits`), kept for the process. */
+    val shopWaits: ShopWaitsStore
 }
 
 /**
@@ -724,6 +728,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override val addByEmail: AddByEmailStore get() = container.addByEmail
 
     override val assistants: AssistantsStore get() = container.assistants
+
+    override val shopWaits: ShopWaitsStore get() = container.shopWaits
 
     override val notificationError get() = container.parcels.notificationErrorFlow
 

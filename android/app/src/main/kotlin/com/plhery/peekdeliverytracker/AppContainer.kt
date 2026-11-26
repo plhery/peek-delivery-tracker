@@ -21,6 +21,8 @@ import com.plhery.peekdeliverytracker.core.AppConfiguration
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AssistantsStore
 import com.plhery.peekdeliverytracker.core.assistantsClient
+import com.plhery.peekdeliverytracker.core.ShopWaitsStore
+import com.plhery.peekdeliverytracker.core.shopWaitsClient
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierBrandAssets
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
@@ -378,6 +380,9 @@ class AppContainer(
 
     /** Settings' Assistants: Peek's address for assistants and the ones connected, where assistants may connect to the account. */
     val assistants = AssistantsStore(api.assistantsClient())
+
+    /** The list's waits for shops that haven't shipped yet: the demo's one, or the account's. */
+    val shopWaits = ShopWaitsStore(api.shopWaitsClient())
 
     /** `ParcelLinkStore()`, or in a debug build the preview `sdt.debug.parcelLink` asks for; a test's reads before both. */
     val links: ParcelLinkStore = linkReader?.let { ParcelLinkStore(defaults, read = it) }

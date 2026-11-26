@@ -49,6 +49,7 @@ import com.plhery.peekdeliverytracker.core.api.QueueResponse
 import com.plhery.peekdeliverytracker.core.api.RenamePackageRequest
 import com.plhery.peekdeliverytracker.core.api.RevokeLiveActivityDeviceRequest
 import com.plhery.peekdeliverytracker.core.api.ShareParcelRequest
+import com.plhery.peekdeliverytracker.core.api.ShopWait
 import com.plhery.peekdeliverytracker.core.api.SyncJobListResponse
 import com.plhery.peekdeliverytracker.core.api.SyncJobStatus
 import com.plhery.peekdeliverytracker.core.api.UuidSerializer
@@ -757,6 +758,14 @@ class DeliveryApiClient(
     /** Disconnects an assistant: its tokens stop working at once. One already gone (404) counts as done. The answer has no body. */
     suspend fun revokeAssistant(id: UUID) {
         rawRequest("$ASSISTANTS/${id.toString().lowercase()}", "DELETE", missing = 404)
+    }
+
+    /** The account's waits for shops that haven't shipped yet ([ShopWaitsResponseReader]). */
+    suspend fun shopWaits(): List<ShopWait> = request(SHOP_WAITS, ShopWaitsResponseReader).shopWaits
+
+    /** Stops waiting for a shop: Peek asks it no more. One already gone (404) counts as done. */
+    suspend fun removeShopWait(id: UUID) {
+        rawRequest("$SHOP_WAITS/${id.toString().lowercase()}", "DELETE", missing = 404)
     }
 
     private fun <T> encode(serializer: SerializationStrategy<T>, value: T): ByteArray = JsonEncoder.deliveryTracker.encode(serializer, value)

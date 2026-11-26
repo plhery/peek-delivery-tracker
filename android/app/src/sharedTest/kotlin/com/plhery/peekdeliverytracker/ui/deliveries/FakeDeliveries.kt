@@ -21,6 +21,7 @@ import com.plhery.peekdeliverytracker.core.DeliveryEmail
 import com.plhery.peekdeliverytracker.core.FriendInvitationStore
 import com.plhery.peekdeliverytracker.core.AddByEmailStore
 import com.plhery.peekdeliverytracker.core.AssistantsStore
+import com.plhery.peekdeliverytracker.core.ShopWaitsStore
 import com.plhery.peekdeliverytracker.core.FriendsActivityStore
 import com.plhery.peekdeliverytracker.core.FriendsStore
 import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
@@ -52,6 +53,7 @@ import com.plhery.peekdeliverytracker.core.api.ParcelAlertPreset
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequest
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
 import com.plhery.peekdeliverytracker.core.api.ParcelShare
+import com.plhery.peekdeliverytracker.core.api.ShopWait
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import com.plhery.peekdeliverytracker.ui.arrival.UnlockRequests
@@ -696,6 +698,11 @@ class FakeDeliveries(
     /** Assistants, which may connect to no account until a test sets [FakeAssistantsClient.offer]. */
     val assistantsClient = FakeAssistantsClient()
     override val assistants by lazy { AssistantsStore(assistantsClient) }
+
+    /** The shop waits, which an account has none of until a test sets [FakeShopWaitsClient.waits]; the demo's wait shows only when a test sets [demoShopWait]. */
+    val shopWaitsClient = FakeShopWaitsClient()
+    var demoShopWait: (() -> ShopWait)? = null
+    override val shopWaits by lazy { ShopWaitsStore(shopWaitsClient, demo = { demoShopWait?.invoke() }) }
 
     override val notificationStatus = MutableStateFlow(NotificationAuthorizationStatus.NotDetermined)
     override val notificationsEnabledOnDevice = MutableStateFlow(false)

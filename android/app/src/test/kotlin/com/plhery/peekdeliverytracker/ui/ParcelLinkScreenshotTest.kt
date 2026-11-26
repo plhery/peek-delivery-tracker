@@ -17,6 +17,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.ParcelLinkRoute
 import com.plhery.peekdeliverytracker.core.ParcelLinkStopped
+import com.plhery.peekdeliverytracker.core.api.GiftWords
 import com.plhery.peekdeliverytracker.core.api.PublicParcelResponse
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeParcelLinks
 import com.plhery.peekdeliverytracker.ui.deliveries.LinkFixtures
@@ -34,7 +35,8 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * A parcel's link in its sheet over the demo's list, with the iPhone's bars: a parcel with a route (on a phone, light
  * and dark, in the iPad's window and at the largest text size), one that arrived and one with neither, as someone
- * signed out sees them; the keeping block for someone signed in; a gift wrapped and opened; a link gone, stopped, and
+ * signed out sees them; the keeping block for someone signed in; a gift wrapped, wrapped with its words shown before
+ * its delivery, and opened; a link gone, stopped, and
  * one whose read failed, offline and otherwise. On synthetic links.
  */
 @RunWith(AndroidJUnit4::class)
@@ -136,6 +138,23 @@ class ParcelLinkScreenshotTest {
     fun aGiftOnItsWay() {
         show({ LinkFixtures.wrappedGift() })
         compose.screenshot("link_gift_wrapped_phone_light")
+    }
+
+    /** Its sender's words shown before the delivery: what is inside still a surprise. */
+    @Test
+    fun aGiftOnItsWayWithItsWordsShownEarly() {
+        show({
+            LinkFixtures.wrappedGift().let { it.copy(link = it.link.copy(giftWords = GiftWords(name = "trail running shoes", note = "Happy birthday!", from = "Sam", early = true))) }
+        })
+        compose.screenshot("link_gift_wrapped_early_phone_light")
+    }
+
+    @Test
+    fun aGiftOnItsWayWithItsWordsShownEarlyInDark() {
+        show({
+            LinkFixtures.wrappedGift().let { it.copy(link = it.link.copy(giftWords = GiftWords(name = "trail running shoes", note = "Happy birthday!", from = "Sam", early = true))) }
+        }, dark = true)
+        compose.screenshot("link_gift_wrapped_early_phone_dark")
     }
 
     @Test

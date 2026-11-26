@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.unit.Density
 import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
@@ -34,7 +35,8 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * A parcel's share sheet over its page, with the iPhone's bars: reading the link, with its link, light and dark and at
- * the largest Android text size, wrapped as a gift with its words, once sharing was stopped, in the demo, and for a
+ * the largest Android text size, wrapped as a gift with its words, and with them shown before its delivery, once
+ * sharing was stopped, in the demo, and for a
  * parcel that has arrived, as it is and as a gift, under Reduce Motion so the delivered box on its page is at rest.
  */
 @RunWith(AndroidJUnit4::class)
@@ -142,6 +144,27 @@ class ParcelShareScreenshotTest {
         show(dark = true)
         wrapped(ParcelShareWords(note = "Happy birthday! Open it after dinner.", from = "Sam"))
         compose.screenshot("parcel_share_gift_dark")
+    }
+
+    /** The gift's words shown before its delivery: the switch on, under the words, scrolled into view. */
+    private fun wrappedEarly() {
+        wrapped(ParcelShareWords(note = "Happy birthday! Open it after dinner.", from = "Sam", early = true))
+        compose.onNodeWithTag(PARCEL_SHARE_EARLY).performScrollTo()
+        settle()
+    }
+
+    @Test
+    fun wrappedAsAGiftWithItsWordsShownEarly() {
+        show()
+        wrappedEarly()
+        compose.screenshot("parcel_share_gift_early_light")
+    }
+
+    @Test
+    fun wrappedAsAGiftWithItsWordsShownEarlyInDark() {
+        show(dark = true)
+        wrappedEarly()
+        compose.screenshot("parcel_share_gift_early_dark")
     }
 
     @Test

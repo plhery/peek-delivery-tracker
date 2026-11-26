@@ -15574,6 +15574,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "kun-express",
+      "catalog": "kun-express",
+      "slug": "kun-express-tracking",
+      "title": "Rastreamento Kun Express: códigos KUN, status e USPS",
+      "name": "Kun Express",
+      "color": "#0761ff"
+    },
+    {
       "id": "juxi-express",
       "catalog": "juxi-express",
       "slug": "rastreamento-juxi-express",
@@ -16468,6 +16476,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Kuayuan Express: códigos, status e ajuda",
       "name": "Kuayuan Express",
       "color": "#084b86"
+    },
+    {
+      "id": "liccardi",
+      "catalog": "liccardi",
+      "slug": "liccardi-tracking",
+      "title": "Rastreamento Liccardi Express Courier: códigos LDV e ajuda",
+      "name": "Liccardi Express Courier",
+      "color": "#014895"
     },
     {
       "id": "skypostal",
@@ -19996,6 +20012,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "kun-express",
+      "catalog": "kun-express",
+      "slug": "kun-express-tracking",
+      "title": "Kun Express（鲲辰）快递追踪：KUN 单号、物流状态与 USPS 派送",
+      "name": "Kun Express",
+      "color": "#0761ff"
+    },
+    {
       "id": "juxi-express",
       "catalog": "juxi-express",
       "slug": "juxi-wuliu-juxi-express-chaxun",
@@ -20914,6 +20938,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "跨源速递（Kuayuan Express）单号查询：14 位运单与客服",
       "name": "Kuayuan Express",
       "color": "#084b86"
+    },
+    {
+      "id": "liccardi",
+      "catalog": "liccardi",
+      "slug": "liccardi-tracking",
+      "title": "Liccardi Express Courier 追踪：660 标签、LDV 单号与客服",
+      "name": "Liccardi Express Courier",
+      "color": "#014895"
     },
     {
       "id": "pdu",

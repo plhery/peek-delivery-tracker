@@ -15942,6 +15942,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "gls-pl",
+      "catalog": "gls-pl",
+      "slug": "gls-poland-tracking",
+      "title": "Rastreamento GLS Polônia: status, GLS Points e lockers",
+      "name": "GLS Poland",
+      "color": "#ffdd00"
+    },
+    {
       "id": "j-and-t-mx",
       "catalog": "j-and-t-mx",
       "slug": "rastreamento-jt-express-mexico",
@@ -15956,6 +15964,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Bulgarian Posts: códigos PS/BG, taxas e ajuda",
       "name": "Bulgarian Posts",
       "color": "#ffd100"
+    },
+    {
+      "id": "haypost",
+      "catalog": "haypost",
+      "slug": "haypost-tracking",
+      "title": "Rastreamento HayPost: códigos AM, status e contatos",
+      "name": "HayPost",
+      "color": "#fa4616"
     },
     {
       "id": "360lion",
@@ -19852,6 +19868,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "gls-pl",
+      "catalog": "gls-pl",
+      "slug": "gls-poland-tracking",
+      "title": "GLS 波兰（GLS Poland）物流查询：状态、自提点、快递柜与客服",
+      "name": "GLS Poland",
+      "color": "#ffdd00"
+    },
+    {
       "id": "j-and-t-mx",
       "catalog": "j-and-t-mx",
       "slug": "jt-express-mexico-kuaidi-chaxun",
@@ -19866,6 +19890,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "保加利亚邮政（Bulgarian Posts）物流查询：PS 与 BG 单号、清关和理赔",
       "name": "Bulgarian Posts",
       "color": "#ffd100"
+    },
+    {
+      "id": "haypost",
+      "catalog": "haypost",
+      "slug": "haypost-tracking",
+      "title": "亚美尼亚邮政（HayPost）物流查询：AM 单号、状态与联系方式",
+      "name": "HayPost",
+      "color": "#fa4616"
     },
     {
       "id": "360lion",

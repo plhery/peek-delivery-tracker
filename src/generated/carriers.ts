@@ -15046,6 +15046,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "dhl-ecommerce-uk",
+      "catalog": "dhl-ecommerce-uk",
+      "slug": "dhl-ecommerce-uk-tracking",
+      "title": "Rastreamento DHL eCommerce UK: status e ServicePoints",
+      "name": "DHL eCommerce UK",
+      "color": "#ffcc00"
+    },
+    {
       "id": "gofo-fr",
       "catalog": "gofo-fr",
       "slug": "rastreamento-gofo-franca",
@@ -15476,6 +15484,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento China Post: códigos CN, status e entrega",
       "name": "China Post",
       "color": "#006d46"
+    },
+    {
+      "id": "fedex-pl",
+      "catalog": "fedex-pl",
+      "slug": "fedex-poland-tracking",
+      "title": "Rastreamento FedEx Polônia: códigos de 13 dígitos e status",
+      "name": "FedEx Poland",
+      "color": "#4d148c"
     },
     {
       "id": "techlink",
@@ -18996,6 +19012,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "dhl-ecommerce-uk",
+      "catalog": "dhl-ecommerce-uk",
+      "slug": "dhl-ecommerce-uk-tracking",
+      "title": "DHL eCommerce UK 物流查询：14 位单号、状态、ServicePoint 与客服",
+      "name": "DHL eCommerce UK",
+      "color": "#ffcc00"
+    },
+    {
       "id": "gofo-fr",
       "catalog": "gofo-fr",
       "slug": "gofo-france-tracking",
@@ -19434,6 +19458,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "中国邮政（China Post）国际物流查询：单号、状态与尾程",
       "name": "China Post",
       "color": "#006d46"
+    },
+    {
+      "id": "fedex-pl",
+      "catalog": "fedex-pl",
+      "slug": "fedex-poland-tracking",
+      "title": "FedEx 波兰（FedEx Poland）物流查询：13 位单号与波兰语状态",
+      "name": "FedEx Poland",
+      "color": "#4d148c"
     },
     {
       "id": "techlink",

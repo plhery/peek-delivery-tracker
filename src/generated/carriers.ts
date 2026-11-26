@@ -16254,6 +16254,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#002a52"
     },
     {
+      "id": "ydh",
+      "catalog": "ydh",
+      "slug": "ydh-tracking",
+      "title": "Rastreamento YDH Express: códigos YQ e AZ, repasses e ajuda",
+      "name": "YDH",
+      "color": "#015db9"
+    },
+    {
       "id": "a-tu-hora-express",
       "catalog": "a-tu-hora-express",
       "slug": "a-tu-hora-express-tracking",
@@ -16292,6 +16300,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Nova Global: códigos NPG e NGUS, alfândega",
       "name": "Nova Global",
       "color": "#da291c"
+    },
+    {
+      "id": "xlcourier",
+      "catalog": "xlcourier",
+      "slug": "xlcourier-tracking",
+      "title": "Rastreamento XLCourier: códigos XLC, cargas pesadas e ajuda",
+      "name": "XLCourier",
+      "color": "#044ad6"
     },
     {
       "id": "estafeta",
@@ -20578,6 +20594,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Nova Global 快递追踪：NPG 与 NGUS 单号、清关状态与客服",
       "name": "Nova Global",
       "color": "#da291c"
+    },
+    {
+      "id": "xlcourier",
+      "catalog": "xlcourier",
+      "slug": "xlcourier-tracking",
+      "title": "XLCourier 英国大件快递追踪：XLC 单号、状态与客服",
+      "name": "XLCourier",
+      "color": "#044ad6"
     },
     {
       "id": "estafeta",

@@ -16182,6 +16182,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#1d2a84"
     },
     {
+      "id": "dtdc",
+      "catalog": "dtdc",
+      "slug": "dtdc-tracking",
+      "title": "Rastreamento DTDC: códigos AWB, status RTO e suporte",
+      "name": "DTDC",
+      "color": "#0d237d"
+    },
+    {
+      "id": "estafeta",
+      "catalog": "estafeta",
+      "slug": "estafeta-tracking",
+      "title": "Rastreamento Estafeta: códigos de 10 e 22 dígitos e ajuda",
+      "name": "Estafeta",
+      "color": "#e30613"
+    },
+    {
       "id": "gls-hu",
       "catalog": "gls-hu",
       "slug": "gls-hungary-tracking",
@@ -20330,6 +20346,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "A Tu Hora Express 物流查询：单号、邮编要求与客服",
       "name": "A Tu Hora Express",
       "color": "#1d2a84"
+    },
+    {
+      "id": "dtdc",
+      "catalog": "dtdc",
+      "slug": "dtdc-tracking",
+      "title": "印度 DTDC 物流查询：AWB 单号格式、RTO 退件与客服联系",
+      "name": "DTDC",
+      "color": "#0d237d"
+    },
+    {
+      "id": "estafeta",
+      "catalog": "estafeta",
+      "slug": "estafeta-tracking",
+      "title": "Estafeta 快递追踪：10 位与 22 位单号、两次派送与客服",
+      "name": "Estafeta",
+      "color": "#e30613"
     },
     {
       "id": "gls-hu",

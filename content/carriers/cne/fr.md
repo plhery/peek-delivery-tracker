@@ -15,7 +15,7 @@ CNE ne publie pas de règle de numérotation. Voici le format que Peek reconnaî
 | Numéro (inventé) | Ce que c'est |
 | --- | --- |
 | `3A5V482910573` | `3A5V` suivi de 9 chiffres : un numéro CNE Express. |
-| `3A5V48291057` | Seulement 8 chiffres : pas le format `3A5V` de CNE. Peek ne désigne pas CNE et l'essaie auprès de [Colis Privé](carrier:colis-prive) (dont il partage la longueur de 12 caractères) et des services de suivi. Vérifie s'il manque un chiffre. |
+| `3A5V48291057` | Seulement 8 chiffres : pas le format `3A5V` de CNE. Peek ne désigne pas CNE et, comme il ne correspond au format d'aucun transporteur, le cherche auprès des services de suivi une fois ajouté. Vérifie s'il manque un chiffre. |
 | `LX482910576CN` | Deux lettres, 9 chiffres et `CN` : un envoi postal [China Post](carrier:china-post) commercialisé aussi par CNE (*International E-packet*, *China Post Packet*). |
 
 Minuscules, espaces et tirets sont ignorés dans Peek. Le traceur de CNE accepte plusieurs numéros à la fois, séparés par des espaces ou des virgules.
@@ -138,5 +138,5 @@ Appelle le `400-021-5600` (ligne de Chine continentale) ou le `021-5109 6677` à
 - [Douane française : Vous achetez sur internet](https://www.douane.gouv.fr/demarche/vous-achetez-sur-internet) – TVA en France métropolitaine et dans les DOM
 - [OFDF : Réception de lettres et de paquets](https://www.bazg.admin.ch/fr/reception-de-lettres-et-paquets) – TVA suisse 8,1 % / 2,6 % et non-perception des montants inférieurs à 5 francs
 - [Universal Parcel Scraper : CNE Express](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/cne) – format 3A5V, liens ?no=, statuts et codes, sous-traitants, horloges Pékin / CTT Express / locales et relais
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – détection Colis Privé / China Post et passage au transporteur final
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – détection China Post et passage au transporteur final
 :::

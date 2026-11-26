@@ -15,7 +15,7 @@ A CNE não publica um formato oficial de numeração. Este é o padrão que o Pe
 | Número (inventado) | O que é |
 | --- | --- |
 | `3A5V482910573` | `3A5V` e 9 algarismos: um número da CNE Express. |
-| `3A5V48291057` | Apenas 8 algarismos: não tem o formato `3A5V` da CNE. O Peek não atribui a CNE e verifica-o junto da Colis Privé (cujo formato de 12 caracteres coincide) e dos serviços de seguimento. Confirma se falta um dígito. |
+| `3A5V48291057` | Apenas 8 algarismos: não tem o formato `3A5V` da CNE. O Peek não atribui a CNE e, como não corresponde ao formato de nenhuma transportadora, procura-o nos serviços de seguimento depois de o adicionares. Confirma se falta um dígito. |
 | `LX482910576CN` | Duas letras, 9 algarismos e `CN`: um envio postal da [China Post](carrier:china-post), cujos serviços (*International E-packet*, *China Post Packet*) a CNE também comercializa. |
 
 Minúsculas, espaços e traços não contam no Peek. O localizador da CNE aceita vários números de uma vez, separados por espaços ou vírgulas.
@@ -137,5 +137,5 @@ Pelo número `400-021-5600` (linha da China continental), pelo `021-5109 6677` e
 - [Comissão Europeia: Orientações sobre o direito de 3 € e a taxa da União (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € independentemente do valor, definição de artigo e isenção IOSS
 - [Comissão Europeia: Âmbito territorial do IVA e das alfândegas](https://taxation-customs.ec.europa.eu/taxation/vat/vat-directive/how-does-vat-work/territorial-scope_en) – Açores e Madeira
 - [Universal Parcel Scraper: CNE Express](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/cne) – formato 3A5V, ligações ?no=, estados e códigos, fornecedores finais, relógios Pequim / CTT Express / CTT Portugal / locais e transição
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – deteção Colis Privé e China Post e transição para a empresa final
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – deteção China Post e transição para a empresa final
 :::

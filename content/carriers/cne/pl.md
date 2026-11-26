@@ -15,7 +15,7 @@ CNE nie publikuje specyfikacji swoich numerów. Oto układ, który Peek od razu 
 | Numer (przykładowy) | Co oznacza |
 | --- | --- |
 | `3A5V482910573` | `3A5V` i 9 cyfr: numer przesyłki CNE Express. |
-| `3A5V48291057` | Tylko 8 cyfr: to nie format `3A5V` z CNE. Peek nie wskazuje CNE, lecz sprawdza numer w Colis Privé (którego 12-znakowy wzorzec pasuje) oraz w serwisach śledzenia. Sprawdź, czy nie brakuje cyfry. |
+| `3A5V48291057` | Tylko 8 cyfr: to nie format `3A5V` z CNE. Peek nie wskazuje CNE, a ponieważ numer nie pasuje do wzorca żadnego przewoźnika, po dodaniu szuka go w serwisach śledzenia. Sprawdź, czy nie brakuje cyfry. |
 | `LX482910576CN` | Dwie litery, 9 cyfr i `CN`: przesyłka pocztowa [China Post](carrier:china-post), której usługi (*International E-packet*, *China Post Packet*) również sprzedaje CNE. |
 
 Małe litery, spacje i myślniki nie mają w Peek znaczenia. Wyszukiwarka CNE przyjmuje kilka numerów naraz, rozdzielonych spacjami lub przecinkami.
@@ -136,5 +136,5 @@ Zadzwoń pod `400-021-5600` (infolinia w Chinach kontynentalnych) lub `021-5109 
 - [Komisja Europejska: Reforma celna UE](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – cło 3 € od 1 lipca 2026 r. i opłata manipulacyjna 2 € od 1 listopada 2026 r.
 - [Komisja Europejska: Wytyczne dotyczące cła 3 € i opłaty manipulacyjnej Unii (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – opłata 2 € niezależnie od wartości, definicja pozycji i zwolnienie IOSS
 - [Universal Parcel Scraper: CNE Express](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/cne) – format 3A5V, linki ?no=, statusy i kody, podwykonawcy, zegary pekiński / CTT Express / lokalne i przekazanie
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – rozpoznawanie Colis Privé i China Post oraz przełączenie na przewoźnika końcowego
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – rozpoznawanie China Post oraz przełączenie na przewoźnika końcowego
 :::

@@ -14,8 +14,8 @@ CNE publishes no number format. The shape Peek knows as CNE's, with invented dig
 
 | Number | What it is |
 | --- | --- |
-| `3A5V000000000` | 3A5V and 9 digits: a CNE Express number. |
-| `3A5V00000000` | Only 8 digits: not CNE's shape. Peek doesn't name CNE, and checks it with Colis Privé, whose 12-character numbers it fits, and with tracking services. Check for a missing digit. |
+| `3A5V482910573` | 3A5V and 9 digits: a CNE Express number. |
+| `3A5V48291057` | Only 8 digits: not CNE's shape. Peek doesn't name CNE, and no carrier's shape fits it, so Peek looks it up with tracking services once you add it. Check for a missing digit. |
 
 Lower case, spaces and dashes don't matter in Peek. CNE's tracker takes several numbers at once, separated by spaces or commas.
 
@@ -146,5 +146,5 @@ By its hotline, 400-021-5600, or its online consulting form, choosing `Complaint
 - [CNE: 关于欧盟国家2026年11月税改通知 (EU tax change notice)](https://www.cne.com/news/article/rDe4ANa6KYOW) – €2 collected from sellers in advance from 26 October, on top of the €3, per parcel and tariff code; customs cleared on the seller's declaration
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value, what an item is
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape and links, wordings and codes (last-mile sorting, station and missed-delivery lines since 9 November 2026), last-mile suppliers, clocks, hand-over, what Peek reads
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape and links, wordings and codes (last-mile sorting, station and missed-delivery lines), last-mile suppliers, clocks, hand-over, what Peek reads
 :::

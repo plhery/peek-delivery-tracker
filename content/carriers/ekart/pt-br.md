@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Ekart Índia: códigos, status e RTO explicados
-description: Rastreie encomendas da Ekart na Índia: formato do código de rastreamento, significados de InscannedAtDH e RTO, tentativas falhas e o que fazer.
+description: Rastreie encomendas da Ekart na Índia: formato do código de rastreamento, significados de InscannedAtDH e RTO, entregas não realizadas e o que fazer.
 slug: rastreamento-ekart
 published: 2026-11-24
 updated: 2026-11-24
@@ -38,7 +38,7 @@ O rastreador da Ekart lista cada movimentação com data, hora e cidade. Algumas
 | `InscannedAtDH`, `PrimaryDHInscan` | Chegou ao centro de entrega (DH, *Delivery Hub*) da sua região: a entrega vem a seguir. | "Em trânsito" |
 | `Out For Delivery` | Em rota de entrega hoje. | "Saiu para entrega" |
 | `Delivered` | Entregue a você. Após uma linha RTO, indica devolução entregue ao vendedor (veja abaixo). | "Entregue" |
-| `undelivered_attempted`, `ShipmentUndeliveredAttempted` | Tentativa de entrega sem sucesso (`undelivered_update` pode surgir no mesmo instante). | "Tentativa de entrega" |
+| `undelivered_attempted`, `ShipmentUndeliveredAttempted` | Entrega não realizada (`undelivered_update` pode surgir no mesmo instante). | "Tentativa de entrega" |
 | `undelivered_unattempted` | A rota do dia terminou sem tentativa de entrega. | "Tentativa de entrega" |
 | `Unsuccessful` + motivo (como `Unsuccessful Unable to attempt delivery due to operational issues` ou `Unsuccessful Undelivered. (Rescheduled to: …)`) | A rota terminou sem entrega, por extenso; a data após `Rescheduled to:` é o dia previsto da próxima tentativa. Linhas `Unsuccessful` ligadas à coleta não entram aqui. | "Tentativa de entrega" |
 | `PickupCancel` | A coleta foi cancelada antes de o volume entrar na rede Ekart. | "Precisa de atenção" |
@@ -52,13 +52,13 @@ O rastreador da Ekart lista cada movimentação com data, hora e cidade. Algumas
 
 O código do Peek cobre a Ekart apenas na Índia. O percurso segue as etapas acima: coleta no vendedor, hubs intermediários, centro de entrega próximo a você e rota final, sem repasse a outra transportadora.
 
-Esta página não informa prazos de entrega, regras de tentativas ou reagendamento, e o código do Peek não especifica quantas tentativas a Ekart faz após `undelivered_attempted` nem quando inicia a devolução: pergunte à loja que contratou a Ekart. Veja [tentativa de entrega sem sucesso](guide:missed-delivery).
+Esta página não informa prazos de entrega, regras de tentativas ou reagendamento, e o código do Peek não especifica quantas tentativas a Ekart faz após `undelivered_attempted` nem quando inicia a devolução: pergunte à loja que contratou a Ekart. Veja [entrega não realizada](guide:missed-delivery).
 
 ## Rastreamento Ekart parado, RTO ou encomenda não entregue
 
 **Parado em `Shipment Created` ou `Pickup Requested`.** O vendedor registrou o envio, mas ainda não entregou o pacote à Ekart. `NotPickedEvent` indica falha na coleta. Pergunte ao vendedor quando será despachado.
 
-**Dias sem nova leitura.** Quando um pacote registrado, coletado ou em trânsito passa quatro dias sem atualização, o Peek destaca a data da última leitura ("Sem atualizações desde seg., 12 de out."). Pergunte à loja o que está retendo o envio. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
+**Dias sem nova leitura.** Quando um pacote registrado, coletado ou em trânsito passa quatro dias sem atualização, o Peek destaca a data da última leitura ("Sem atualizações desde seg 12 out"). Pergunte à loja o que está retendo o envio. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
 **`undelivered_attempted`, `undelivered_unattempted` ou `Unsuccessful`.** A entrega não ocorreu; `Rescheduled to:` mostra o dia da nova tentativa. As linhas seguintes indicarão nova saída ou devolução. Confirme se a loja tem seu endereço e telefone corretos.
 
@@ -68,7 +68,7 @@ Esta página não informa prazos de entrega, regras de tentativas ou reagendamen
 
 **Entregue, mas nada chegou.** Verifique com familiares, vizinhos e portaria/recepção do prédio, depois avise a loja. Veja [encomenda entregue mas não recebida](guide:delivered-not-received).
 
-**Extravio ou avaria.** Contate o vendedor ou marketplace onde comprou, pois ele contratou a Ekart. Veja [encomendas extraviadas](guide:lost-parcel) e [encomendas avariadas](guide:damaged-parcel).
+**Extravio ou dano.** Contate o vendedor ou marketplace onde comprou, pois ele contratou a Ekart. Veja [encomendas extraviadas](guide:lost-parcel) e [encomendas danificadas](guide:damaged-parcel).
 
 ## Atendimento e contato da Ekart
 
@@ -78,13 +78,13 @@ Antes de pagar qualquer cobrança recebida por SMS sobre entregas, leia [golpes 
 
 ## Como rastrear uma encomenda da Ekart no Peek
 
-Cole o código de rastreamento no [Peek](/). Com um dos grupos de letras acima seguido de `C`, `P` ou `R`, o Peek identifica a Ekart na hora ("Transportadora detectada"); "Trocar" escolhe outra transportadora. Com outras letras iniciais, exibe "Consultando serviços de rastreamento…" e verifica na Ekart se ela reconhece o código: havendo movimentação, mostra "Ekart está com esta encomenda" e acompanha direto. Se a Ekart ainda não tiver registro, consulta serviços de rastreamento; para forçar a Ekart desde já, toque em "Trocar" e escolha Ekart em "Compatível com este código".
+Cole o código de rastreamento no [Peek](/). Com um dos grupos de letras acima seguido de `C`, `P` ou `R`, o Peek identifica a Ekart na hora ("Transportadora detectada"); "Trocar" escolhe outra transportadora. Com outras letras iniciais, exibe "Consultando serviços de rastreamento…" e verifica na Ekart se ela reconhece o código: havendo movimentação, mostra "Ekart está com esta encomenda." e acompanha pela Ekart. Se a Ekart ainda não tiver registro, consulta serviços de rastreamento; para ver as linhas da própria Ekart mesmo assim, toque em "Trocar" e escolha Ekart em "Compatível com este código".
 
 Links de rastreamento da Ekart (ekartlogistics.com com `shipmenttrack` e o código) também funcionam e identificam Ekart quaisquer que sejam as letras iniciais. Se o vendedor mandou um link de shiprocket.co, você pode colar também, mas o Peek acompanhará pela página da Shiprocket, não pela Ekart. Selecionar Ekart manualmente para qualquer formato diferente de quatro letras e dez dígitos exibe "não emite códigos como este".
 
-Enquanto aguarda a primeira leitura da Ekart, o pacote mostra "Aguardando Ekart". Dois dias após a Ekart responder pela primeira vez que não conhece o número, o Peek sugere conferir o código, trocar a transportadora ou excluir a encomenda. Um pacote adicionado sem transportadora exibe "Ainda sem histórico de rastreamento". O Peek lê o rastreador oficial da Ekart sem conta nem telefone: cada linha nas palavras da Ekart (incluindo códigos), com horário exato e cidade, da mais recente à mais antiga e sem duplicatas. Os horários aparecem no fuso do seu dispositivo; em peektracker.com e nos apps de iPhone e Android, o histórico termina com "Horários no seu fuso horário:" e o nome do fuso. A data prevista de entrega da Ekart aparece enquanto o pacote vai até você e some após entrega ou retorno.
+Enquanto aguarda a primeira leitura da Ekart, o pacote mostra "Aguardando Ekart". Dois dias após a Ekart responder pela primeira vez que não conhece o número, o Peek sugere conferir o código, trocar a transportadora ou excluir a encomenda. Um pacote adicionado sem transportadora exibe "Ainda sem histórico de rastreamento". O Peek lê o rastreador da própria Ekart sem conta nem telefone: cada linha nas palavras da Ekart (incluindo códigos), com horário exato e cidade, da mais recente à mais antiga e sem duplicatas. Os horários aparecem no fuso do seu dispositivo; em peektracker.com e nos apps de iPhone e Android, o histórico termina com "Horários no seu fuso horário:" e o nome do fuso. A data prevista de entrega da Ekart aparece enquanto o pacote vai até você e some após entrega ou retorno.
 
-Enquanto o pacote está aberto no Peek, ou no dia da entrega com alertas ligados, verifica até a cada 10 minutos — ou a cada 2 minutos a partir das 6h da Índia no dia em que a Ekart registra saída para entrega — enquanto o rastreador oficial responde (pelos serviços de rastreamento, até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados); fora disso, de hora em hora. Após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Alertas: "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode falar com a Ekart nem com a loja por você.
+Enquanto o pacote está aberto no Peek, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos; no dia em que a Ekart registra saída para entrega, enquanto o rastreador da própria Ekart responde, a cada 2 minutos a partir das 6h da Índia (pelos serviços de rastreamento, até a cada 15 minutos nesse dia, enquanto o pacote estiver aberto ou com alertas ligados); fora disso, de hora em hora. Após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Alertas: "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode falar com a Ekart nem com a loja por você.
 
 ## Perguntas frequentes sobre rastreamento Ekart
 
@@ -110,4 +110,7 @@ A loja ou marketplace onde você comprou, que contratou a Ekart. O site da Ekart
 
 :::sources
 - [Ekart Logistics: FAQ](https://www.ekartlogistics.in/faq) – suporte a vendedores por chamado no portal com resposta em até 24 horas
+- [Universal Parcel Scraper: Ekart](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ekart) – nomes, formatos do código e como o Peek os reconhece, links de rastreamento, o rastreador da Ekart, textos e códigos das leituras com suas etapas, RTO, data prevista de entrega
+- [Universal Parcel Scraper: Shiprocket](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/shiprocket) – links de rastreamento da Shiprocket
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formatos PB da Parcelforce e HRBC do AliExpress, transportadoras consultadas no reconhecimento, transferências, o que o Peek lê e mostra
 :::

@@ -15,7 +15,7 @@ CNE non pubblica uno schema ufficiale dei suoi codici. Ecco il formato che Peek 
 | Numero (inventato) | Che cos'è |
 | --- | --- |
 | `3A5V482910573` | `3A5V` e 9 cifre: un numero CNE Express. |
-| `3A5V48291057` | Solo 8 cifre: non ha il formato `3A5V` di CNE. Peek non assegna CNE e lo verifica presso Colis Privé (di cui rispetta i 12 caratteri) e i servizi di tracciamento. Controlla se manca una cifra. |
+| `3A5V48291057` | Solo 8 cifre: non ha il formato `3A5V` di CNE. Peek non assegna CNE e, poiché non corrisponde al formato di nessun corriere, lo cerca nei servizi di tracciamento una volta aggiunto. Controlla se manca una cifra. |
 | `LX482910576CN` | Due lettere, 9 cifre e `CN`: una spedizione postale [China Post](carrier:china-post), i cui servizi (*International E-packet*, *China Post Packet*) sono venduti anche da CNE. |
 
 Minuscole, spazi e trattini vengono ignorati da Peek. Il tracker di CNE accetta più numeri contemporaneamente, separati da spazi o virgole.
@@ -138,5 +138,5 @@ Chiama il `400-021-5600` (linea della Cina continentale) o lo `021-5109 6677` di
 - [Commissione europea: Ambito territoriale IVA e dogane](https://taxation-customs.ec.europa.eu/taxation/vat/vat-directive/how-does-vat-work/territorial-scope_en) – Livigno, Campione d'Italia e Lago di Lugano
 - [UDSC: Ricevere lettere e pacchi](https://www.bazg.admin.ch/it/ricevere-lettere-e-pacchi) – IVA svizzera 8,1 % / 2,6 % e non riscossione fino a 5 franchi
 - [Universal Parcel Scraper: CNE Express](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/cne) – formato 3A5V, link ?no=, stati e codici, fornitori finali, orologi Pechino / CTT Express / locali e passaggio
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – rilevamento Colis Privé e China Post e passaggio al vettore finale
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – rilevamento China Post e passaggio al vettore finale
 :::

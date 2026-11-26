@@ -15,7 +15,7 @@ CNE veröffentlicht kein festes Nummernmuster. Dieses Format erkennt Peek sofort
 | Nummer (erfunden) | Bedeutung |
 | --- | --- |
 | `3A5V482910573` | `3A5V` und 9 Ziffern: eine Sendungsnummer von CNE Express. |
-| `3A5V48291057` | Nur 8 Ziffern: nicht CNEs `3A5V`-Muster. Peek ordnet nicht CNE zu, sondern prüft Colis Privé (dessen 12-stelliger Aufbau passt) sowie Tracking-Dienste. Prüfe, ob eine Ziffer fehlt. |
+| `3A5V48291057` | Nur 8 Ziffern: nicht CNEs `3A5V`-Muster. Peek ordnet nicht CNE zu; da das Muster keines Paketdienstes passt, sucht Peek die Nummer nach dem Hinzufügen über Tracking-Dienste. Prüfe, ob eine Ziffer fehlt. |
 | `LX482910576CN` | Zwei Buchstaben, 9 Ziffern und `CN`: eine Postsendung von [China Post](carrier:china-post), deren Tarife (*International E-packet*, *China Post Packet*) CNE ebenfalls vertreibt. |
 
 Kleinschreibung, Leerzeichen und Bindestriche ignoriert Peek. CNEs eigener Tracker nimmt mehrere durch Leerzeichen oder Kommas getrennte Nummern gleichzeitig an.
@@ -138,5 +138,5 @@ Telefonisch über `400-021-5600` (Servicenummer in Festlandchina) oder `021-5109
 - [Europäische Kommission: Territorialer Geltungsbereich von MwSt. und Zoll](https://taxation-customs.ec.europa.eu/taxation/vat/vat-directive/how-does-vat-work/territorial-scope_en) – Helgoland und Büsingen außerhalb des EU-Zoll- und Mehrwertsteuergebiets
 - [BAZG: Empfangen von Briefen und Paketen](https://www.bazg.admin.ch/de/empfangen-von-briefen-und-paketen) – Schweizer Einfuhrsteuer 8,1 % / 2,6 % und Nichterhebung bis 5 Franken
 - [Universal Parcel Scraper: CNE Express](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/cne) – 3A5V-Muster, ?no=-Links, Statuszeilen und Codes, Subunternehmer, Pekinger / CTT-Express- / Ortszeiten und Übergabe
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Colis-Privé- und China-Post-Erkennung sowie Wechsel zum Endzusteller
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – China-Post-Erkennung sowie Wechsel zum Endzusteller
 :::

@@ -15,7 +15,7 @@ CNE no publica un formato oficial de numeración. Este es el esquema que Peek id
 | Número (inventado) | Qué es |
 | --- | --- |
 | `3A5V482910573` | `3A5V` y 9 dígitos: un código de CNE Express. |
-| `3A5V48291057` | Solo 8 dígitos: no tiene el formato `3A5V` de CNE. Peek no asigna CNE y lo comprueba en Colis Privé (cuyo patrón de 12 caracteres coincide) y en servicios de seguimiento. Revisa si falta una cifra. |
+| `3A5V48291057` | Solo 8 dígitos: no tiene el formato `3A5V` de CNE. Peek no asigna CNE y, como no encaja con el formato de ningún transportista, lo busca en servicios de seguimiento cuando lo añades. Revisa si falta una cifra. |
 | `LX482910576CN` | Dos letras, 9 dígitos y `CN`: un envío postal de [China Post](carrier:china-post), cuyos servicios (*International E-packet*, *China Post Packet*) también comercializa CNE. |
 
 Minúsculas, espacios y guiones no importan en Peek. El buscador de CNE admite varios números a la vez separados por espacios o comas.
@@ -137,5 +137,5 @@ Por el teléfono `400-021-5600` (línea de China continental), el `021-5109 6677
 - [Comisión Europea: Orientaciones sobre el arancel de 3 € y la tasa de la Unión (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € cualquiera que sea el valor, definición de artículo y exención IOSS
 - [Comisión Europea: Ámbito territorial del IVA y aduanas](https://taxation-customs.ec.europa.eu/taxation/vat/vat-directive/how-does-vat-work/territorial-scope_en) – Islas Canarias, Ceuta y Melilla
 - [Universal Parcel Scraper: CNE Express](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/cne) – patrón 3A5V, enlaces ?no=, estados y códigos, proveedores finales, relojes de Pekín / CTT Express / locales y traspaso
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – detección de Colis Privé y China Post y traspaso al transportista final
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – detección de China Post y traspaso al transportista final
 :::

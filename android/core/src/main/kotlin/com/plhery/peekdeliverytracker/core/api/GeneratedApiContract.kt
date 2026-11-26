@@ -4404,6 +4404,8 @@ data class PeekAi(
     val sure: Double,
     val day: String? = null,
     val time: String? = null,
+    @SerialName("start_before") val startBefore: String? = null,
+    val parcels: Int? = null,
     @SerialName("carrier_day") val carrierDay: String? = null,
     @SerialName("out_since") val outSince: String? = null,
     @SerialName("ends_at") val endsAt: String? = null,

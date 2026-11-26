@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import fr from '../../shared/locales/fr.json';
+import ru from '../../shared/locales/ru.json';
 import zh from '../../shared/locales/zh.json';
 import { translate } from '../i18n';
 import type { Locale } from './locale';
@@ -114,6 +115,30 @@ describe('Peek AI’s words', () => {
     expect(peekAiReason(SOONER, 'DPD', words())).toBe('Most parcels Peek has followed with scans like this one’s came before the date their carrier gave.');
     expect(peekAiReason(NO_DATE, 'UPS', words())).toBe(
       'Peek AI goes by how long parcels Peek has followed with scans like this one’s took. It reached the delivery depot 2 days ago.');
+  });
+
+  it('names how many parcels it stands on when the server says, in the reader’s numbers and count forms', () => {
+    expect(peekAiReason({ ...NOT_TODAY, parcels: 89 }, 'DPD', words())).toBe(
+      'It hasn’t gone out for delivery yet. Of 89 parcels Peek has followed that weren’t out for delivery by this hour on the day their carrier gave, most didn’t arrive that day.');
+    expect(peekAiReason({ ...BY_TIME, parcels: 85, start_before: '10:00' }, 'FedEx', words({ use24HourTime: false }))).toBe(
+      'Of 85 FedEx parcels Peek has followed that went out for delivery before 10:00 AM, most arrived by 4:00 PM that day. This one went out at 8:12 AM.');
+    // Without the round's start, the hour is said as before.
+    expect(peekAiReason({ ...BY_TIME, parcels: 85 }, 'FedEx', words())).toBe(
+      'Most FedEx parcels Peek has followed arrived by 16:00 on the day they went out for delivery. This one went out at 08:12.');
+    expect(peekAiReason({ says: 'not_today', why: 'late_out', sure: 0.87, parcels: 508 }, 'DPD', words())).toBe(
+      'It’s still out for delivery this late. Of 508 parcels Peek has followed that were still out at this hour, most didn’t arrive that day.');
+    expect(peekAiReason({ ...SOONER, parcels: 4988 }, 'DPD', words({ languageTag: 'en-US' }))).toBe(
+      'Peek AI learned from 4,988 parcels Peek has followed. Most with scans like this one’s came before the date their carrier gave.');
+    expect(peekAiReason({ ...NO_DATE, parcels: 4988 }, 'UPS', words({ languageTag: 'en-US' }))).toBe(
+      'Peek AI learned from 4,988 parcels Peek has followed, and goes by how long those with scans like this one’s took. It reached the delivery depot 2 days ago.');
+    // A missed date names no count.
+    expect(peekAiReason({ ...NO_DATE, why: 'missed_date', says: 'today_or_tomorrow', parcels: 14 }, 'DPD', words())).toMatch(/^It was scanned in the last 24 hours\./);
+    // Russian reads 21 and 4,981 with its one form, 22 with few, 25 with many.
+    const russian = inLanguage('ru', ru, 'ru-RU');
+    expect(peekAiReason({ ...SOONER, parcels: 21 }, 'DPD', russian)).toMatch(/^Peek AI учится на 21 посылке,/);
+    expect(peekAiReason({ ...SOONER, parcels: 4981 }, 'DPD', russian)).toMatch(/^Peek AI учится на 4\s981 посылке,/);
+    expect(peekAiReason({ ...NOT_TODAY, parcels: 22 }, 'DPD', russian)).toContain('Из 22 посылок,');
+    expect(peekAiReason({ ...NOT_TODAY, parcels: 25 }, 'DPD', russian)).toContain('Из 25 посылок,');
   });
 
   it('counts how often it was right, rounded down', () => {

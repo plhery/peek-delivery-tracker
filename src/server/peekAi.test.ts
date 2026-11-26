@@ -33,9 +33,11 @@ function blob(F: readonly number[] = [0.1, 0.85, 0.95, 0.99]): PeekAiBlob {
     version: `test-${++versions}`, trainedThrough: '2026-11-19', parcels: 1000,
     deliveryDays: { 'swiss-post': [0, 1, 2, 3, 4, 5], dpd: [0, 1, 2, 3, 4] }, homeCountries: { 'swiss-post': ['CH'], dpd: ['DE'] },
     offsets: { CH: 1, US: -6 }, defaultOffset: 1,
-    notToday: { default: { from: 14, sure: { 14: 0.84, 15: 0.875, 16: 0.915, 19: 1 } }, gofo: { from: null } },
-    byTime: { 'swiss-post': { by: '15:30', sure: 0.946, days: 300, shares: [0.02, 0.1, 0.2, 0.35, 0.5, 0.65, 0.8, 0.9, 0.95, 0.97, 0.98, 0.99, 1, 1] } },
-    lateOut: { default: { from: 20, sure: 0.885 } },
+    notToday: { default: { from: 14, sure: { 14: 0.84, 15: 0.875, 16: 0.915, 19: 1 }, parcels: { 14: 90, 15: 89, 16: 86, 19: 84 } }, gofo: { from: null } },
+    byTime: {
+      'swiss-post': { by: '15:30', startBefore: '10:00', sure: 0.946, days: 300, parcels: 290, shares: [0.02, 0.1, 0.2, 0.35, 0.5, 0.65, 0.8, 0.9, 0.95, 0.97, 0.98, 0.99, 1, 1] },
+    },
+    lateOut: { default: { from: 20, sure: 0.885, parcels: 508 } },
     ofdUnreliable: ['china-post'],
     claims: { tau: 0.8, byDayWidth: 2, weekTau: 0.8, soonerLead: 2, soonerTau: 0.8, recentCheckHours: 3 },
     sure: { today_or_tomorrow: 0.89, by_day: 0.85, this_week: 0.91, by_end_of_next_week: 0.91, sooner: 0.88, missed_date: 0.89 },
@@ -69,7 +71,7 @@ describe('the carrier says today', () => {
   it('says not today once nothing has gone out for delivery in the afternoon, a check having just looked', () => {
     const today = row({ expected_delivery: '2026-11-20' });
     expect(ai(today, '2026-11-20T14:30:00Z')).toEqual({
-      says: 'not_today', why: 'no_out_for_delivery', carrier_day: '2026-11-20', sure: 0.875, ends_at: '2026-11-21T00:00:00+01:00',
+      says: 'not_today', why: 'no_out_for_delivery', carrier_day: '2026-11-20', sure: 0.875, parcels: 89, ends_at: '2026-11-21T00:00:00+01:00',
     });
     // Late in the evening: right every time it said so, shown as at most 95 in 100.
     expect(ai(row({ expected_delivery: '2026-11-20', last_synced_at: '2026-11-20T19:00:00Z' }), '2026-11-20T19:30:00Z')?.sure).toBe(0.95);
@@ -102,7 +104,8 @@ describe('out for delivery', () => {
   it("says by the hour the carrier's deliveries mostly come by, with the share of each hour", () => {
     const said = ai(out(), '2026-11-20T09:00:00Z')!;
     expect(said).toMatchObject({
-      says: 'by_time', why: 'out_for_delivery', time: '15:30', sure: 0.946, out_since: '2026-11-20T08:10:00+01:00', ends_at: '2026-11-20T15:30:00+01:00',
+      says: 'by_time', why: 'out_for_delivery', time: '15:30', start_before: '10:00', sure: 0.946, parcels: 290,
+      out_since: '2026-11-20T08:10:00+01:00', ends_at: '2026-11-20T15:30:00+01:00',
     });
     expect(said.hours).toHaveLength(13);
     expect(said.hours![0]).toEqual({ time: '08:00', share: 0.1 });
@@ -117,6 +120,20 @@ describe('out for delivery', () => {
     expect(ai(row({}, [ACCEPTED, scan('out_for_delivery', '2026-11-20T14:40:00Z')]), '2026-11-20T14:50:00Z')).toBeNull();
   });
 
+  it('names no hour for a round that left at or after the time the hour holds for: later rounds end later', () => {
+    const leftAt = (occurred: string, model = blob()) => ai(row({}, [ACCEPTED, IN_TRANSIT, scan('out_for_delivery', occurred)]), '2026-11-20T10:00:00Z', model);
+    expect(leftAt('2026-11-20T08:55:00Z')).toMatchObject({ says: 'by_time', time: '15:30', start_before: '10:00' });
+    expect(leftAt('2026-11-20T09:00:00Z')).toBeNull();
+    expect(leftAt('2026-11-20T09:40:00Z')).toBeNull();
+    // A model trained before the rounds' start was looked at: every round that left before the hour.
+    const unbounded = blob();
+    unbounded.byTime['swiss-post'] = { by: '15:30', sure: 0.946, days: 300, shares: unbounded.byTime['swiss-post']!.shares };
+    const said = leftAt('2026-11-20T09:40:00Z', unbounded);
+    expect(said).toMatchObject({ says: 'by_time', time: '15:30' });
+    expect(said).not.toHaveProperty('start_before');
+    expect(said).not.toHaveProperty('parcels');
+  });
+
   it('names no hour for a parcel the carrier sent out on a day with no time, which may have left after it', () => {
     // Stored at the start of its day, or a second after the scan before it that day.
     const dayOnly = (occurred: string) => scan('out_for_delivery', occurred, { time: '2026-11-20' });
@@ -129,7 +146,7 @@ describe('out for delivery', () => {
 
   it('says not today when still out late in the evening', () => {
     expect(ai(out(), '2026-11-20T19:15:00Z')).toEqual({
-      says: 'not_today', why: 'late_out', sure: 0.885, out_since: '2026-11-20T08:10:00+01:00', ends_at: '2026-11-21T00:00:00+01:00',
+      says: 'not_today', why: 'late_out', sure: 0.885, parcels: 508, out_since: '2026-11-20T08:10:00+01:00', ends_at: '2026-11-21T00:00:00+01:00',
     });
     // Not inside the carrier's own slot, and again once it has passed.
     expect(ai(out({ expected_delivery: '2026-11-20 19:00-21:00' }), '2026-11-20T19:15:00Z')).toBeNull();
@@ -158,7 +175,7 @@ describe('the model', () => {
   it('names a day when the carrier gives none, from the latest morning or afternoon it was trained at', () => {
     const said = ai(row(), '2026-11-20T14:30:00Z');
     expect(said).toEqual({
-      says: 'today_or_tomorrow', why: 'no_date', day: '2026-11-21', sure: 0.89, last: { kind: 'scan', at: '2026-11-19T19:00:00+01:00' },
+      says: 'today_or_tomorrow', why: 'no_date', day: '2026-11-21', sure: 0.89, parcels: 1000, last: { kind: 'scan', at: '2026-11-19T19:00:00+01:00' },
       days: [{ day: '2026-11-20', p: 0.1 }, { day: '2026-11-21', p: 0.75 }, { day: '2026-11-23', p: 0.1 }, { day: '2026-11-24', p: 0.04 }],
       ends_at: '2026-11-22T00:00:00+01:00',
     });
@@ -177,7 +194,7 @@ describe('the model', () => {
   it("says maybe sooner when parcels like it usually come well before the carrier's day", () => {
     const later = (expected_delivery: string, F: number[]) => ai(row({ expected_delivery }), '2026-11-20T14:30:00Z', blob(F));
     expect(later('2026-11-24', [0.02, 0.85, 0.95, 0.99])).toMatchObject({
-      says: 'sooner', why: 'ahead', carrier_day: '2026-11-24', day: '2026-11-21', sure: 0.88, ends_at: '2026-11-24T00:00:00+01:00',
+      says: 'sooner', why: 'ahead', carrier_day: '2026-11-24', day: '2026-11-21', sure: 0.88, parcels: 1000, ends_at: '2026-11-24T00:00:00+01:00',
     });
     // Not two days ahead, or not likely enough before it.
     expect(later('2026-11-21', [0.02, 0.85, 0.95, 0.99])).toBeNull();

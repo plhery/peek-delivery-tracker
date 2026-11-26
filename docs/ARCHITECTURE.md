@@ -894,7 +894,8 @@ number, which no carrier tracks.
   with why and how often such a call came true. Each kind of call was right at least 8 times
   in 10 on the parcels Peek has followed; below that, once the carrier has planned the
   delivery among its steps, while an hour or slot it names for today is still to come, or
-  against a window of days it gives, it says nothing. The model and its tables are trained in
+  against a window of days it gives, it says nothing. "By a time" is said only of a round that
+  left before the carrier's usual start (`start_before`): later rounds end later. The model and its tables are trained in
   private on production data and kept in `peek_ai_models`, which only the service role reads;
   the server loads the newest at start and every hour, and with none loaded says nothing. A
   wrapped gift's link shows none, nor do emails, friends' passports or a link's preview, which
@@ -902,8 +903,8 @@ number, which no carrier tracks.
   as `peekAi` unless the account switched it off. Cards show one line under the carrier's
   date or in its place (beside the status on Next up), guests' lists too, and the parcel's
   page a short card that opens what Peek AI expects, the days or hours shaded by their
-  chance, those gone by faded (hours on the parcel's clock), why (what parcels like it did)
-  and how sure. Each estimate ends at
+  chance, those gone by faded (hours on the parcel's clock), why (what parcels like it did,
+  and how many: `parcels`) and how sure. Each estimate ends at
   `ends_at`, a moment on the parcel's clock, and the apps drop it then, even on a screen left
   open and whatever the device's zone. Settings can switch it off: the device keeps the
   choice, and an account's follows it to its other devices (`show_peek_ai`).

@@ -72641,6 +72641,8 @@ export interface ApiPeekAi {
   "sure": number;
   "day"?: string;
   "time"?: string;
+  "start_before"?: string;
+  "parcels"?: number;
   "carrier_day"?: string;
   "out_since"?: string;
   "ends_at"?: string;

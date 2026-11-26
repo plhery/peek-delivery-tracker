@@ -4411,6 +4411,8 @@ struct PeekAi: Codable, Equatable, Hashable, Sendable {
     var sure: Double
     var day: String? = nil
     var time: String? = nil
+    var startBefore: String? = nil
+    var parcels: Int? = nil
     var carrierDay: String? = nil
     var outSince: String? = nil
     var endsAt: String? = nil

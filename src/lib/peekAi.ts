@@ -188,10 +188,26 @@ export function peekAiWhy(ai: PeekAi, carrier: string, wording: PeekAiWording): 
 
 /**
  * The sheet's Why: what Peek AI goes by, the parcels Peek has followed that were like this one, under the carrier's word
- * the sheet shows above it. Out for delivery, the carrier's usual hour is the reason; the hour this one went out comes after.
+ * the sheet shows above it, with how many it stands on when the server says (`parcels`). Out for delivery, the carrier's
+ * usual hour for rounds that left before `start_before` is the reason; the hour this one went out comes after.
  */
 export function peekAiReason(ai: PeekAi, carrier: string, wording: PeekAiWording): string {
-  const { t } = wording;
+  const { t, languageTag } = wording;
+  if (ai.parcels !== undefined) {
+    const counted = { count: ai.parcels, number: ai.parcels.toLocaleString(languageTag) };
+    switch (ai.why) {
+      case 'no_out_for_delivery': return t('peekAi.counted.noOutForDelivery.many', counted);
+      case 'out_for_delivery':
+        if (!ai.start_before) break;
+        return t('peekAi.counted.outForDelivery.many', {
+          ...counted, carrier, start: clock(ai.start_before, wording), time: clock(ai.time ?? '', wording), since: clock(ai.out_since ?? '', wording),
+        });
+      case 'late_out': return t('peekAi.counted.lateOut.many', counted);
+      case 'ahead': return t('peekAi.counted.ahead.many', counted);
+      case 'no_date': return withLastStep(t('peekAi.counted.noDate.many', counted), ai, wording);
+      case 'missed_date': break;
+    }
+  }
   switch (ai.why) {
     case 'no_out_for_delivery': return t('peekAi.reason.noOutForDelivery');
     case 'out_for_delivery': return t('peekAi.reason.outForDelivery', { carrier, time: clock(ai.time ?? '', wording), since: clock(ai.out_since ?? '', wording) });

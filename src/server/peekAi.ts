@@ -19,21 +19,25 @@ import { isRecord, type JsonObject } from './types';
  * beside the carrier's. Five hints held up on the parcels Peek has followed, each right at least 8 times in 10:
  *
  * - the carrier says today, nothing has gone out for delivery by the afternoon and a check has just looked: not today;
- * - out for delivery: by the hour most of that carrier's deliveries come by, or, late in the day, not today;
+ * - out for delivery on a round that left in the morning: by the hour most of that carrier's deliveries come by, or,
+ *   late in the day, not today;
  * - the carrier's day passed yesterday and a scan came since: today or tomorrow;
  * - a carrier's day two days ahead or more that parcels like it usually beat: maybe sooner;
  * - no carrier date: a day, today or tomorrow, this week or the end of next week, where the model is sure enough.
  *
  * The model and its tables are trained in private on production data and stored in the database (`peek_ai_models`);
  * the server loads the newest at start and every hour (`keepPeekAiModel`). With none loaded, Peek AI says nothing.
+ * Each call carries the parcels it was measured on (`parcels`), which its "Why" names.
  */
 
 /** What Peek AI says of a parcel, as the API serves it (`peek_ai`, contracts/openapi.json). */
 export type PeekAi = ApiPeekAi;
 
-interface HourSure { from: number | null; sure?: Record<string, number> }
-interface ByTime { by: string; sure: number; days: number; shares: number[] }
-interface LateOut { from: number; sure: number }
+/** Each table holds how often its call was right and, in `parcels`, how many parcels that was measured on. */
+interface HourSure { from: number | null; sure?: Record<string, number>; parcels?: Record<string, number> }
+/** By `by`, for rounds that left before `startBefore`: later rounds end later. */
+interface ByTime { by: string; startBefore?: string; sure: number; days: number; parcels?: number; shares: number[] }
+interface LateOut { from: number; sure: number; parcels?: number }
 
 /** The document the database stores (`peek_ai_models.model`), written by the private training. */
 export interface PeekAiBlob extends ModelContext {
@@ -129,6 +133,13 @@ export function peekAiBlobFrom(value: unknown): PeekAiBlob | null {
 const mod = (a: number, b: number) => ((a % b) + b) % b;
 const round2 = (x: number) => Math.round(x * 100) / 100;
 const capped = (sure: number) => Math.min(MAX_SURE, sure);
+/** The parcels behind a call, for its "Why": left out when the table does not say. */
+const counted = (parcels: number | undefined) => typeof parcels === 'number' && Number.isInteger(parcels) && parcels >= 1 ? { parcels } : {};
+/** A wall time "HH:MM" as hours, or null. */
+const wallHours = (time: unknown) => {
+  const hm = typeof time === 'string' ? /^([01]\d|2[0-3]):([0-5]\d)$/.exec(time) : null;
+  return hm ? Number(hm[1]) + Number(hm[2]) / 60 : null;
+};
 /** Days since 1970-01-01 of a moment's date on its clock. */
 const ordinal = (time: DateTime) => Math.round(Date.UTC(time.year, time.month - 1, time.day) / 86_400_000);
 const isoDay = (day: number) => new Date(day * 86_400_000).toISOString().slice(0, 10);
@@ -469,26 +480,29 @@ function call(row: JsonObject, c: string, placed: Placed, local: DateTime, blob:
     if (blob.ofdUnreliable.includes(c) || slotOpen) return null;
     const late = blob.lateOut[c] ?? blob.lateOut.default!;
     if (hourNow >= late.from && (newest.stage === 'out_for_delivery' || newest.stage === 'exception')) {
-      return { says: 'not_today', why: 'late_out', sure: capped(late.sure), out_since: localIso(out) };
+      return { says: 'not_today', why: 'late_out', sure: capped(late.sure), out_since: localIso(out), ...counted(late.parcels) };
     }
     const rule = blob.byTime[c];
     // Sent out on a day with no hour, it may have gone out after the carrier's usual hour, and has no time to show.
     if (!rule || out.dayAlone || newest.stage !== 'out_for_delivery' || namesHour(row.expected_delivery)) return null;
-    const [h, m] = rule.by.split(':').map(Number) as [number, number];
-    const bound = h + m / 60;
+    const bound = wallHours(rule.by);
+    const before = wallHours(rule.startBefore);
     const left = DateTime.fromSeconds(out.ts, { zone });
-    if (left.hour + left.minute / 60 >= bound || hourNow >= bound) return null;
+    const leftAt = left.hour + left.minute / 60;
+    // A round that left late ends late: the hour holds only for those that left before `startBefore`.
+    if (bound === null || leftAt >= bound || (before !== null && leftAt >= before) || hourNow >= bound) return null;
     return { says: 'by_time', why: 'out_for_delivery', time: rule.by, sure: capped(rule.sure), out_since: localIso(out),
-      hours: hourStrip(rule.shares) };
+      ...before !== null ? { start_before: rule.startBefore } : {}, ...counted(rule.parcels), hours: hourStrip(rule.shares) };
   }
 
   // The carrier says today and nothing has gone out for delivery by the afternoon.
   if (carrierDay === today) {
     const rule = blob.notToday[c] ?? blob.notToday.default!;
     if (rule.from === null || local.hour < rule.from || checkedHours > blob.claims.recentCheckHours || slotOpen) return null;
-    const hours = Object.keys(rule.sure ?? {}).map(Number).filter((hour) => hour <= local.hour);
-    const sure = hours.length ? rule.sure![String(Math.max(...hours))]! : null;
-    return sure === null ? null : { says: 'not_today', why: 'no_out_for_delivery', carrier_day: isoDay(today), sure: capped(sure) };
+    const reached = Object.keys(rule.sure ?? {}).map(Number).filter((hour) => hour <= local.hour);
+    const hour = reached.length ? String(Math.max(...reached)) : null;
+    return hour === null ? null : { says: 'not_today', why: 'no_out_for_delivery', carrier_day: isoDay(today), sure: capped(rule.sure![hour]!),
+      ...counted(rule.parcels?.[hour]) };
   }
 
   if (checkedHours > FRESH_HOURS) return null;
@@ -518,13 +532,13 @@ function call(row: JsonObject, c: string, placed: Placed, local: DateTime, blob:
     const before = daysBetween(delivers, snapDay, carrierDay);
     if (carrierDay - snapDay < soonerLead || before < 1 || F[Math.min(before - 1, H)]! < soonerTau) return null;
     const first = range && range.a >= 1 ? endDay(delivers, snapDay, range.a) : null;
-    return { says: 'sooner', why: 'ahead', carrier_day: isoDay(carrierDay), sure: capped(blob.sure.sooner!), days: strip,
+    return { says: 'sooner', why: 'ahead', carrier_day: isoDay(carrierDay), sure: capped(blob.sure.sooner!), ...counted(blob.parcels), days: strip,
       ...first !== null && first > today && first < carrierDay ? { day: isoDay(first) } : {} };
   }
 
   const dest = text(isRecord(row.carrier_data) ? row.carrier_data.destination_country : null);
   const said = (says: ApiPeekAiSays, day: number) => ({ says, why: 'no_date' as const, day: isoDay(day), sure: capped(blob.sure[says]!),
-    last: lastStep(past, dest, zone), days: strip });
+    ...counted(blob.parcels), last: lastStep(past, dest, zone), days: strip });
   if (range && range.b - range.a <= byDayWidth) {
     const by = endDay(delivers, snapDay, range.b);
     if (by < today) return null;

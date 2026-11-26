@@ -77126,6 +77126,16 @@
             "pattern": "^[0-2][0-9]:[0-5][0-9]$",
             "description": "by_time: the hour on the parcel's clock (HH:MM)."
           },
+          "start_before": {
+            "type": "string",
+            "pattern": "^[0-2][0-9]:[0-5][0-9]$",
+            "description": "by_time: the hour is said only for a round that left before this time on the parcel's clock (HH:MM); later rounds end later."
+          },
+          "parcels": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "How many parcels Peek has followed the call stands on, which the sheet's \"Why\" names: for no_out_for_delivery, those its carrier dated that day and not out for delivery by this hour; for out_for_delivery, the carrier's that went out before `start_before`; for late_out, those still out for delivery this late; for ahead and no_date, those the model learned from. Absent when the model does not say, and for missed_date."
+          },
           "carrier_day": {
             "type": "string",
             "format": "date",

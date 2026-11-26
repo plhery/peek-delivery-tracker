@@ -15150,6 +15150,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8000"
     },
     {
+      "id": "omniva",
+      "catalog": "omniva",
+      "slug": "omniva-tracking",
+      "title": "Rastreamento Omniva: códigos, status e parcel machines",
+      "name": "Omniva",
+      "color": "#f86300"
+    },
+    {
       "id": "ppl",
       "catalog": "ppl",
       "slug": "rastreamento-ppl",
@@ -15660,6 +15668,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento TopYou: códigos TYZR, status e entrega",
       "name": "TopYou",
       "color": "#045cd7"
+    },
+    {
+      "id": "mayiyinfu",
+      "catalog": "mayiyinfu",
+      "slug": "mayi-yinfu-tracking",
+      "title": "Rastreamento Mayi Yinfu: códigos MY, voos e entrega DHL",
+      "name": "Mayi Yinfu",
+      "color": "#000000"
     },
     {
       "id": "jrt",
@@ -19146,6 +19162,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "芬兰邮政（Posti）查询：JJFI 单号、状态与自提柜",
       "name": "Posti",
       "color": "#ff8000"
+    },
+    {
+      "id": "omniva",
+      "catalog": "omniva",
+      "slug": "omniva-tracking",
+      "title": "Omniva 物流查询：爱沙尼亚、拉脱维亚与立陶宛单号、状态与快递柜",
+      "name": "Omniva",
+      "color": "#f86300"
     },
     {
       "id": "ppl",

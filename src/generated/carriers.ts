@@ -14838,6 +14838,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#5b2dee"
     },
     {
+      "id": "evri",
+      "catalog": "evri-uk",
+      "slug": "rastreamento-evri",
+      "title": "Rastreamento Evri: status, ParcelShops e ausências",
+      "name": "Evri",
+      "color": "#00014d"
+    },
+    {
       "id": "chronopost",
       "catalog": "chronopost",
       "slug": "rastreamento-chronopost",
@@ -15292,6 +15300,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento China Post: códigos CN, status e entrega",
       "name": "China Post",
       "color": "#006d46"
+    },
+    {
+      "id": "techlink",
+      "catalog": "techlink",
+      "slug": "rastreamento-techlink",
+      "title": "Rastreamento Techlink: códigos ZHPHD, status e ajuda",
+      "name": "Techlink",
+      "color": "#e73547"
     },
     {
       "id": "imile",
@@ -18394,6 +18410,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Paack 快递查询：订单号、邮编与 PaackGo 自提点",
       "name": "Paack",
       "color": "#5b2dee"
+    },
+    {
+      "id": "evri",
+      "catalog": "evri-uk",
+      "slug": "evri-yingguo-kuaidi-chaxun",
+      "title": "Evri（原 Hermes UK）查询：单号、状态与 ParcelShop",
+      "name": "Evri",
+      "color": "#00014d"
     },
     {
       "id": "chronopost",

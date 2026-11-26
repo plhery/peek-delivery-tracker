@@ -15102,6 +15102,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "bring",
+      "catalog": "bring-posten",
+      "slug": "rastreamento-bring",
+      "title": "Rastreamento Bring: códigos, status e prazos de retirada",
+      "name": "Bring",
+      "color": "#56b529"
+    },
+    {
       "id": "posti",
       "catalog": "posti",
       "slug": "rastreamento-posti",
@@ -15804,6 +15812,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento J&T Express UK: códigos JTUK e status",
       "name": "J&T Express UK",
       "color": "#e60000"
+    },
+    {
+      "id": "early-bird",
+      "catalog": "early-bird",
+      "slug": "rastreamento-early-bird",
+      "title": "Rastreamento Early Bird: status, entrega noturna e armários",
+      "name": "Early Bird",
+      "color": "#dd7f4a"
     },
     {
       "id": "xinghe-freight",
@@ -18860,6 +18876,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "bring",
+      "catalog": "bring-posten",
+      "slug": "bring-wuliu-chaxun",
+      "title": "Bring（Posten）物流查询：单号、状态与取件期限",
+      "name": "Bring",
+      "color": "#56b529"
+    },
+    {
       "id": "posti",
       "catalog": "posti",
       "slug": "posti-fenlan-kuaidi-chaxun",
@@ -19618,6 +19642,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "英国极兔速递 J&T Express UK 查询：JTUK 单号与状态",
       "name": "J&T Express UK",
       "color": "#e60000"
+    },
+    {
+      "id": "early-bird",
+      "catalog": "early-bird",
+      "slug": "early-bird-wuliu-chaxun",
+      "title": "Early Bird 物流查询：瑞典夜间派送、状态与快递柜",
+      "name": "Early Bird",
+      "color": "#dd7f4a"
     },
     {
       "id": "xinghe-freight",

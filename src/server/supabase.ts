@@ -3191,9 +3191,10 @@ export class SupabaseServiceClient extends SupabaseClient {
     });
   }
 
-  /** How a Peek AI call turned out on the server's own cases noted in the last `days` days. */
-  async peekAiCallRecord(why: PeekAiCase['why'], days: number): Promise<PeekAiCallRecord> {
-    const result = await this.request('/rest/v1/rpc/peek_ai_call_record', { method: 'POST', body: { p_why: why, p_days: days } });
+  /** How a Peek AI call turned out on the server's `latest` known cases whose time ended in the last `days` days. */
+  async peekAiCallRecord(why: PeekAiCase['why'], latest: number, days: number): Promise<PeekAiCallRecord> {
+    const result = await this.request('/rest/v1/rpc/peek_ai_call_record', { method: 'POST',
+      body: { p_why: why, p_cases: latest, p_days: days } });
     const cases = isRecord(result) ? result.cases : null;
     const right = isRecord(result) ? result.right : null;
     if (!Number.isInteger(cases) || !Number.isInteger(right)) throw new Error('Peek AI call record is malformed');

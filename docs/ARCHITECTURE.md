@@ -903,9 +903,9 @@ number, which no carrier tracks.
   left before the carrier's usual start (`start_before`): later rounds end later. "Today or
   tomorrow" after a carrier's day that has passed waits for the server's own parcels, as the
   training measured it on a wider set: the server notes each parcel it would say it of
-  (`peek_ai_call_cases`, with the end of the day it names), and says it once 30 of the last
-  90 days' can be scored and it was right on at least 8 in 10 (`peek_ai_call_record`, read
-  hourly); a parcel counts once it arrived or was checked after that day. The model and its tables are trained in
+  (`peek_ai_call_cases`, with the end of the day it names), and says it once it was right on
+  at least 8 in 10 of the latest 30 it can score, of the last year (`peek_ai_call_record`,
+  read hourly); a parcel counts once it arrived or was checked after that day. The model and its tables are trained in
   private on production data and kept in `peek_ai_models`, which only the service role reads;
   the server loads the newest at start and every hour, and with none loaded says nothing. A
   wrapped gift's link shows none, nor do emails, friends' passports or a link's preview, which

@@ -404,7 +404,7 @@ describe('the stored model', () => {
     vi.useFakeTimers();
     const stop = keepPeekAiModel(source, 1000);
     await vi.advanceTimersByTimeAsync(0);
-    expect(source.peekAiCallRecord).toHaveBeenCalledWith('missed_date', 90);
+    expect(source.peekAiCallRecord).toHaveBeenCalledWith('missed_date', 30, 365);
     expect(ai(parcel, '2026-11-20T14:30:00Z')).toMatchObject({ why: 'missed_date', sure: 0.83 });
     source.peekAiCallRecord.mockRejectedValue(new Error('down'));
     await vi.advanceTimersByTimeAsync(1000);

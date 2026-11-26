@@ -63,11 +63,12 @@ const MAX_SURE = 0.95;
 const MIN_SURE = 0.8;
 /**
  * A call the training measured on a wider set of parcels than the server makes it for waits for the server's own cases
- * (`peek_ai_call_cases`): it is made once this many are known and it was right at least `MIN_SURE` of the time.
+ * (`peek_ai_call_cases`): it is made once this many are known and it was right on at least `MIN_SURE` of the latest
+ * this many, so a call that stops holding goes quiet again.
  */
 const PROVEN = 30;
-/** How far back the server's own cases count, so a call that stops holding goes quiet again. */
-const PROVEN_DAYS = 90;
+/** How far back those latest cases may go: a call that comes up on few parcels takes months to gather them. */
+const PROVEN_DAYS = 365;
 /** Hours since a check after which the model's calls wait for the next one: the scans may be behind the carrier's. */
 const FRESH_HOURS = 36;
 const DEFAULT_DELIVERY_DAYS: readonly number[] = [0, 1, 2, 3, 4, 5];
@@ -131,8 +132,8 @@ export function setPeekAiBlob(blob: PeekAiBlob | null): void {
 export interface PeekAiModelSource {
   latestPeekAiModelVersion(): Promise<string | null>;
   peekAiModel(version: string): Promise<unknown>;
-  /** How a call turned out on the server's own cases of the last `days` days (`peek_ai_call_record`). */
-  peekAiCallRecord?(why: PeekAiCase['why'], days: number): Promise<PeekAiCallRecord>;
+  /** How a call turned out on the server's latest `cases` known cases of the last `days` days (`peek_ai_call_record`). */
+  peekAiCallRecord?(why: PeekAiCase['why'], cases: number, days: number): Promise<PeekAiCallRecord>;
   /** Stores a case of a call the server proves, keeping the first noted for the parcel and day (`peek_ai_call_cases`). */
   notePeekAiCase?(found: PeekAiCase): Promise<void>;
 }
@@ -147,7 +148,7 @@ export function keepPeekAiModel(source: PeekAiModelSource, every = 3_600_000): (
   const load = async () => {
     if (source.peekAiCallRecord) {
       try {
-        const record = await source.peekAiCallRecord('missed_date', PROVEN_DAYS);
+        const record = await source.peekAiCallRecord('missed_date', PROVEN, PROVEN_DAYS);
         setPeekAiCallRecord('missed_date', record);
         logOperationalEvent('peek_ai_call_record', { why: 'missed_date', cases: record.cases, right: record.right,
           made: proven('missed_date') !== null });

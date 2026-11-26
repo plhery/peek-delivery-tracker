@@ -10,7 +10,7 @@ A CTTYEX é a Shenzhen Chengtai Tongyun International Logistics (深圳诚泰通
 
 ## Código de rastreamento CTTYEX: como ele é
 
-O site da CTTYEX não descreve o formato dos códigos, mas os códigos aceitos pelo seu rastreador seguem uma estrutura fixa. Todos os exemplos abaixo são inventados:
+O site da CTTYEX não descreve o formato dos códigos, mas os códigos que seu rastreador dá às encomendas seguem uma estrutura fixa. Todos os exemplos abaixo são inventados:
 
 | Código | O que é |
 | --- | --- |
@@ -57,7 +57,7 @@ Após o voo, as linhas passam a vir do agente da CTTYEX no seu país e da rede r
 | `Arrive at the last mile sorting and distribution center` | No centro de triagem de última milha da rede entregadora, próximo a você. |
 | `Leaving the sorting center` | Saiu desse centro de triagem. |
 | `Arrive at the sorting and distribution center` | Em um centro de triagem cuja cidade o rastreador escreve depois de `Arrive`. |
-| `package is on the way` | Escrito após a cidade; segue a passagem pelo centro de triagem daquela cidade. Não indica necessariamente que a rota de entrega começou. |
+| `package is on the way` | Escrito após a cidade; segue a passagem pelo centro de triagem daquela cidade. Não indica que a rota de entrega começou. |
 | `Delivered` | A rede entregadora concluiu a entrega. A linha começa com a cidade e o código postal. |
 
 Nos EUA, as três linhas de `Accepted at logistics carrier Regional Destination Facility` até `Leaving the sorting center` começam com cidade, estado e CEP (ZIP code). Essas são as formulações que o Peek registrou no rastreador da CTTYEX; qualquer outra linha aparece exatamente como a CTTYEX a escreve.
@@ -68,11 +68,11 @@ Nos EUA, as três linhas de `Accepted at logistics carrier Regional Destination 
 
 A CTTYEX recolhe o pacote na China e o embarca de avião. Depois do pouso, seu agente no seu país faz o desembaraço aduaneiro de importação e uma rede local realiza a entrega. Nem o site nem o rastreador da CTTYEX informam o nome dessa rede: o rastreador a chama apenas de "logistics carrier" e não exibe segundo código de rastreamento. O código CTTY continua sendo o que você acompanha pela alfândega e pelos centros de triagem locais.
 
-A CTTYEX não publica regras para destinatários sobre tentativas de entrega, avisos, pontos de retirada ou prazo de guarda, e seu rastreador não dá previsão de entrega: siga a estimativa informada pela loja. Um aviso ou mensagem de uma transportadora local indica que valem as regras dela; [entregas frustradas](guide:missed-delivery) explica o que fazer.
+A CTTYEX não publica regras para destinatários sobre tentativas de entrega, avisos, pontos de retirada ou prazo de guarda, e seu rastreador não dá previsão de entrega: siga a estimativa informada pela loja. Um aviso ou mensagem de uma transportadora local indica que valem as regras dela; [entregas não realizadas](guide:missed-delivery) explica o que fazer.
 
 ## Encomenda CTTYEX que não chega ou rastreamento parado
 
-**Apenas `Order information received`.** A CTTYEX recebeu os dados do pedido, mas ainda não está com o pacote, mesmo quando o resumo mostra `运输途中`. Se passarem dias sem nova linha, peça ao vendedor que confirme a entrega do pacote.
+**Apenas `Order information received`.** A CTTYEX recebeu os dados do pedido, mas ainda não está com o pacote, mesmo quando o resumo mostra `运输途中`. Se passarem dias sem nova linha, peça ao vendedor que confirme que o pacote foi repassado à CTTYEX.
 
 **Sem atualizações após `Departure from the airport of origin domestic`.** Nada novo aparece até o pouso ou o desembaraço de importação no seu país. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating) e [rastrear encomendas vindas da China](guide:tracking-from-china).
 
@@ -84,13 +84,13 @@ A CTTYEX não publica regras para destinatários sobre tentativas de entrega, av
 
 ## Contato da CTTYEX
 
-A página [联系我们 (fale conosco)](https://www.cttyvip888.com/assets/html/contact.html) da CTTYEX informa um endereço em Fuyong, distrito de Bao'an, Shenzhen, e um endereço de e-mail. Não lista telefone, chat nem formulário, está escrita em chinês e não oferece suporte a destinatários. Sobre seu pedido, escreva para o vendedor.
+A página [联系我们 (fale conosco)](https://www.cttyvip888.com/assets/html/contact.html) da CTTYEX informa um endereço em Fuyong, distrito de Bao'an, Shenzhen, e um endereço de e-mail. Não lista telefone, chat nem formulário, está escrita em chinês e não tem nada para destinatários. Sobre seu pedido, escreva para o vendedor.
 
 ## Rastrear uma encomenda CTTYEX com o Peek
 
 O [Peek](/) reconhece a CTTYEX apenas pelo formato do código: CTTY, dez dígitos e CN não é usado por nenhuma outra transportadora acompanhada pelo Peek. Você também pode colar um link do rastreador cttyvip888.com que contenha o código após `nos=`.
 
-O Peek lê a encomenda diretamente do rastreador da CTTYEX: o status, as movimentações e o país de destino. Quando uma linha começa com cidade, ou cidade e estado, o Peek coloca isso como local da movimentação e remove o CEP; a cidade de um centro de processamento permanece no texto. O Peek também omite números de telefone. Linhas duplicadas aparecem uma única vez, e cada movimentação mantém o inglês original da CTTYEX. Cada horário é interpretado no horário de Pequim e mostrado no fuso horário do seu aparelho, para que as datas batam com o seu dia; em peektracker.com e nos aplicativos iPhone e Android, o histórico termina com "Horários no seu fuso horário:" seguido do nome do fuso.
+O Peek lê a encomenda no rastreador da CTTYEX: o status, as movimentações e o país de destino. Quando uma linha começa com cidade, ou cidade e estado, o Peek coloca isso como local da movimentação e remove o CEP; a cidade de um centro de processamento permanece no texto. O Peek também omite números de telefone. Linhas duplicadas aparecem uma única vez, e cada movimentação mantém o inglês original da CTTYEX. Cada horário é interpretado no horário de Pequim e mostrado no fuso horário do seu aparelho, para que as datas batam com o seu dia; em peektracker.com e nos aplicativos iPhone e Android, o histórico termina com "Horários no seu fuso horário:" seguido do nome do fuso.
 
 O status do Peek acompanha a movimentação mais recente que ele compreende, usando o resumo apenas quando não reconhece nenhuma. `Order information received` conta como "Etiqueta criada", as duas linhas do ponto de recebimento como "Recebida pela transportadora", `Import customs clearance` como "Na alfândega", `Accepted at logistics carrier Regional Destination Facility` e `Internationaliy Package received at processing center` como "Em trânsito", e `Delivered` como "Entregue". Uma linha desconhecida é interpretada pelas palavras, portanto uma linha informando que o pacote foi entregue aparece como entregue.
 

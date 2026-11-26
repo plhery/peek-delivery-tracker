@@ -26,7 +26,7 @@ No peektracker.com, um código JFGJ…CN com um dígito a menos exibe o aviso: "
 
 ## Status de rastreamento da Jifan explicados
 
-O rastreador da Jifan está em chinês, mas as linhas de movimentação (轨迹) aparecem em inglês, da mais recente para a mais antiga, cada uma com seu horário (时间). Acima delas, uma linha de resumo informa o destino (目的地), o status (状态) e o último evento. Dois status comuns ali:
+O rastreador da Jifan está em chinês, mas as linhas de movimentação (轨迹) aparecem em inglês, da mais recente para a mais antiga, cada uma com seu horário (时间). Acima delas, uma linha de resumo informa o destino (目的地), o status (状态) e o último evento. Dois status que podem aparecer ali:
 
 | O rastreador mostra | O que significa para você |
 | --- | --- |
@@ -59,19 +59,19 @@ O site da Jifan lista quatro linhas, todas voltadas aos Estados Unidos:
 
 Para as encomendas econômicas e pequenas encomendas até 4,5 kg por via aérea ou marítima, a Jifan afirma que um único conhecimento cobre todo o trajeto (一单到底). O rastreador não informa o nome da transportadora final nem fornece segundo código. Se o vendedor também passou um código da UPS, você pode acompanhá-lo na página da [UPS](carrier:ups).
 
-A Jifan não publica regras para destinatários sobre tentativas de entrega, avisos ou pontos de retirada: valem as regras da empresa que entrega. Veja [entregas frustradas](guide:missed-delivery).
+A Jifan não publica regras para destinatários sobre tentativas de entrega, avisos ou pontos de retirada: valem as regras da empresa que entrega. Veja [entregas não realizadas](guide:missed-delivery).
 
 **Alfândega.** O site da Jifan não informa aos destinatários nada sobre impostos ou taxas. O que pode ser cobrado depende do seu país: veja [encomendas retidas na alfândega](guide:customs).
 
 ## Encomenda Jifan sem atualização, extraviada ou devolvida
 
-Os clientes da Jifan são as empresas que despacham os pacotes, não o comprador. Em caso de atraso, extravio, avaria ou devolução, fale primeiro com o vendedor ou com o marketplace.
+Os clientes da Jifan são as empresas que despacham os pacotes, não o comprador. Em caso de atraso, extravio, dano ou devolução, fale primeiro com o vendedor ou com o marketplace.
 
 **`查询不到` (não encontrado).** Confira se houve erro de digitação, digite em maiúsculas e pergunte ao vendedor se continuar sem retorno. A encomenda fica como "Aguardando Jifan" e o Peek continua verificando. Se dois dias depois a Jifan ainda não reconhecer o código e nenhum outro serviço responder, o Peek exibe: "Depois de dois dias, a transportadora ainda não reconhece este código. Confira o código, escolha outra transportadora ou exclua a encomenda."
 
 **Apenas `Order information received`.** A Jifan recebeu os dados do pedido, não o pacote. Se nada mudar em vários dias, pergunte ao vendedor se o pacote já foi entregue à transportadora.
 
-**Sem atualizações após o aeroporto.** Depois de `Arrival at domestic internationality airport`, pode não haver novas linhas até o pouso ou a entrada na alfândega nos EUA. Envios marítimos levam semanas, portanto intervalos longos são normais. Quando uma encomenda em trajeto fica quatro dias sem nova linha, o Peek sinaliza a data do último evento ("Sem atualizações desde seg., 12 de out.") e lembra que é comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana; após três semanas sem novidades, orienta falar com o vendedor. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating) e [rastrear encomendas vindas da China](guide:tracking-from-china).
+**Sem atualizações após o aeroporto.** Depois de `Arrival at domestic internationality airport`, pode não haver novas linhas até o pouso ou a entrada na alfândega nos EUA. Envios marítimos levam semanas, portanto intervalos longos são normais. Quando uma encomenda em trajeto fica quatro dias sem nova linha, o Peek sinaliza a data do último evento ("Sem atualizações desde seg 12 out") e lembra que é comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana; após três semanas sem novidades, orienta falar com o vendedor. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating) e [rastrear encomendas vindas da China](guide:tracking-from-china).
 
 **Na alfândega.** O rastreador da Jifan não exibe impostos nem taxas a pagar. Por isso, ele não confirma mensagens por SMS ou e-mail cobrando pagamento por um envio Jifan. Leia [golpes de SMS de entrega](guide:delivery-scam-texts) antes de pagar qualquer valor.
 
@@ -87,21 +87,21 @@ Na [página inicial da Jifan](https://www.szjf56.cn/), na seção 联系我们 (
 - **E-mail:** 925930140@qq.com, um endereço QQ Mail. A empresa não diz quem responde nem em qual idioma.
 - **Escritório:** Nanwan, distrito de Longgang, Shenzhen.
 
-A página está somente em chinês e não tem formulário de contato, chat nem suporte para destinatários. Sobre o seu pedido, procure primeiro o vendedor.
+A página está somente em chinês e não tem formulário de contato, chat nem ajuda para destinatários. Sobre o seu pedido, procure primeiro o vendedor.
 
 ## Rastrear uma encomenda Jifan com o Peek
 
 O [Peek](/) identifica a Jifan imediatamente a partir de um código JFGJ…CN ("Transportadora detectada"): nenhuma outra transportadora acompanhada pelo Peek usa esse formato. Um link do rastreador da Jifan com o código JFGJ após `nos=` também funciona; se o link contiver vários códigos, o Peek usa o primeiro.
 
-Se o vendedor passou qualquer outro código, cole-o mesmo assim: o Peek acompanha mais de 4.500 transportadoras. Quando o formato não identifica uma empresa de imediato, o Peek consulta serviços de rastreamento ao adicionar ou logo depois. Se eles não indicarem a transportadora, toque em "Trocar" e escolha a empresa informada pelo vendedor, ou use "Trocar transportadora" em uma encomenda já adicionada. O Peek consulta o rastreador da Jifan apenas para códigos JFGJ: ao escolher Jifan para outro formato, a linha da transportadora avisa que a Jifan "não emite códigos como este".
+Se o vendedor passou qualquer outro código, cole-o mesmo assim: o Peek acompanha mais de 4.500 transportadoras. Quando o formato não identifica uma transportadora, o Peek consulta serviços de rastreamento ao adicionar ou logo depois. Se eles não indicarem a transportadora, toque em "Trocar" e escolha a empresa informada pelo vendedor, ou use "Trocar transportadora" em uma encomenda já adicionada. O Peek consulta o rastreador da Jifan apenas para códigos JFGJ: ao escolher Jifan para outro formato, a linha da transportadora avisa que a Jifan "não emite códigos como este".
 
-O Peek lê a encomenda direto do rastreador da Jifan: o status, cada linha no inglês original do rastreador e o país de destino. Quando uma linha nos EUA começa com cidade e estado, o Peek usa ambos como local da movimentação e remove o CEP. Cada horário é interpretado no horário de Pequim e exibido no fuso horário do seu aparelho; em peektracker.com e nos aplicativos iPhone e Android, o histórico termina com "Horários no seu fuso horário:" seguido do nome do fuso.
+O Peek lê a encomenda no rastreador da Jifan: o status, cada linha no inglês original do rastreador e o país de destino. Quando uma linha nos EUA começa com cidade e estado, o Peek usa ambos como local da movimentação e remove o CEP. Cada horário é interpretado no horário de Pequim e exibido no fuso horário do seu aparelho; em peektracker.com e nos aplicativos iPhone e Android, o histórico termina com "Horários no seu fuso horário:" seguido do nome do fuso.
 
 O status do Peek acompanha a linha mais recente que ele compreende, recorrendo ao status resumido (`运输途中`) apenas quando não reconhece nenhuma linha. Uma linha desconhecida é interpretada pelas suas palavras.
 
 O rastreador da Jifan não informa data de entrega, peso, nome do serviço, empresa entregadora nem segundo código, portanto o Peek também não exibe esses dados. Ele continua acompanhando o código JFGJ no rastreador da Jifan até o fim.
 
-Enquanto o rastreador da Jifan responde, o Peek verifica até a cada 10 minutos com a encomenda aberta na tela ou com alertas ligados se a entrega estiver prevista para hoje. Com a tela fechada e alertas desligados, as consultas normalmente ocorrem a cada hora. Quando apenas um serviço de rastreamento responde, o Peek verifica a cada hora, a cada 3 horas quando o último registro já tem um dia e até a cada 15 minutos no dia em que sai para entrega, somente enquanto você mantém aberto ou com notificações ligadas. Nas consultas diretas à transportadora, após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), passa a consultar a cada hora. Ele pode enviar alertas de "Cada movimentação", "Etapas importantes" ou "Só a entrega". Não consegue contatar a Jifan nem o vendedor por você.
+Enquanto o rastreador da Jifan responde, o Peek verifica até a cada 10 minutos com a encomenda aberta na tela ou com alertas ligados se a entrega estiver prevista para hoje. Com a tela fechada e alertas desligados, as consultas normalmente ocorrem a cada hora. Quando apenas um serviço de rastreamento responde, o Peek verifica a cada hora, a cada 3 horas quando o último registro já tem um dia e até a cada 15 minutos no dia em que sai para entrega, somente enquanto a encomenda estiver aberta ou com notificações ligadas. Nas consultas à própria transportadora, após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), passa a consultar a cada hora. Ele pode enviar alertas de "Cada movimentação", "Etapas importantes" ou "Só a entrega". Não consegue contatar a Jifan nem o vendedor por você.
 
 ## Perguntas frequentes sobre o rastreamento Jifan
 

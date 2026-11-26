@@ -24,7 +24,7 @@ A Chunghwa Post informa que pequenos pacotes comuns com código iniciado por U n
 
 ## Status de rastreamento da Chunghwa Post explicados
 
-Estas são as movimentações que o Peek reconhece, no chinês da Chunghwa Post, aproximadamente na ordem em que costumam surgir:
+Estas são as movimentações que o Peek reconhece, no chinês da Chunghwa Post, aproximadamente na ordem em que a encomenda passa por elas:
 
 | A Chunghwa Post diz | O que significa para você |
 | --- | --- |
@@ -40,7 +40,7 @@ Estas são as movimentações que o Peek reconhece, no chinês da Chunghwa Post,
 | `到達寄達國投遞局` | Chegou à unidade de distribuição do país de destino. |
 | `安排投遞中` | Na unidade de entrega, aguardando sair em rota. |
 | `郵件投遞中` | Saiu para entrega. |
-| `投遞不成功` | A entrega não foi concluída. O motivo, e uma eventual devolução ao remetente, constam numa observação que o Peek omite: consulte o rastreador da Chunghwa Post. |
+| `投遞不成功` | A entrega não foi realizada. O motivo, e uma eventual devolução ao remetente, constam numa observação que o Peek omite: consulte o rastreador da Chunghwa Post. |
 | `投遞成功` | Entregue. |
 
 `安排投遞中` e `郵件投遞中` são etapas de entrega da própria Chunghwa Post, usadas em encomendas que chegam a Taiwan. Em uma encomenda vinda de Taiwan, as últimas etapas vêm do correio do seu país.
@@ -60,9 +60,9 @@ A Chunghwa Post leva o objeto para fora de Taiwan e, depois, o correio do país 
 - **Países Baixos**: [PostNL](carrier:postnl) para EMS e encomendas; nenhum para cartas.
 - **Portugal**: nenhum.
 
-Pesquise nesse site com o mesmo código `TW` assim que a Chunghwa Post mostrar `已出口－資料詳如右方`. Tentativas de entrega, avisos de ausência e o prazo em que uma encomenda fica guardada numa agência seguem as regras do seu correio: veja a página dele e [entrega perdida](guide:missed-delivery).
+Pesquise nesse site com o mesmo código `TW` assim que a Chunghwa Post mostrar `已出口－資料詳如右方`. Tentativas de entrega, avisos de ausência e o prazo em que uma encomenda fica guardada numa agência seguem as regras do seu correio: veja a página dele e [entrega não realizada](guide:missed-delivery).
 
-**Cartas registradas.** A Chunghwa Post informa que EUA, Canadá, Austrália, Dinamarca, África do Sul, Países Baixos, Itália, Reino Unido, Bahrein, Iêmen, Romênia, Brasil e França não oferecem mais rastreamento para cartas registradas internacionais. Assim, uma carta registrada enviada de Taiwan para um desses países não pode ser acompanhada online; para localizá-la, o remetente abre uma reclamação por escrito em qualquer agência dos correios em Taiwan.
+**Cartas registradas.** A Chunghwa Post informa que EUA, Canadá, Austrália, Dinamarca, África do Sul, Países Baixos, Itália, Reino Unido, Bahrein, Iêmen, Romênia, Brasil e França não oferecem mais rastreamento para cartas registradas internacionais. Assim, uma carta registrada enviada de Taiwan para um desses países não pode ser acompanhada online; para localizá-la, o remetente faz um pedido de busca por escrito em qualquer agência dos correios em Taiwan.
 
 **Alfândega.** Taiwan fica fora da União Europeia, então encomendas vindas de lá passam pela alfândega no seu país. Desde 1º de julho de 2026, produtos comprados online fora da UE em pedidos de até €150 pagam imposto aduaneiro da UE de €3 por tipo de produto, além do IVA. Desde 1º de novembro de 2026, aplica-se também uma taxa de manuseio da UE de €2 por tipo de produto, independentemente do valor do pedido. Saiba mais em [encomendas retidas na alfândega](guide:customs).
 
@@ -103,9 +103,9 @@ Ligando do exterior, disque +886 e tire o primeiro 0 dos números (03) e (04), c
 
 O [Peek](/) reconhece de imediato duas letras, nove dígitos e `TW` como Chunghwa Post quando a primeira letra é C, E, L ou R (ou as letras são FT ou FZ) e o dígito verificador, o último dos nove, está correto. Com um dígito incorreto, o Peek não identifica como Chunghwa Post: confira o código no recibo. Links do rastreador da Chunghwa Post no formato `CSController?MAILNO=` também funcionam. O Peek não identifica códigos UH como Chunghwa Post apenas pelo formato e não lê números domésticos de 14 ou 20 dígitos da Chunghwa Post: cole-os mesmo assim, pois o Peek acompanha mais de 4.500 transportadoras.
 
-O Peek consulta o rastreador internacional da Chunghwa Post e exibe cada movimentação em chinês, como a Chunghwa Post escreveu, junto da unidade que a registrou (uma unidade escrita em chinês aparece pelo nome da cidade quando o Peek consegue localizá-la). Ele reconhece as etapas das linhas listadas na tabela acima. O Peek lê as leituras da própria Chunghwa Post no horário de Taiwan, e as feitas no exterior no horário local do correio que as registrou. A Chunghwa Post não informa previsão de entrega nem peso, e o Peek omite as observações ao lado de cada movimentação.
+O Peek consulta o rastreador internacional da Chunghwa Post e exibe cada movimentação em chinês, como a Chunghwa Post escreveu, junto da unidade que a registrou (uma unidade escrita em chinês aparece pelo nome da cidade quando o Peek consegue localizá-la). Ele reconhece as etapas das linhas listadas na tabela acima. O Peek lê as movimentações da própria Chunghwa Post no horário de Taiwan, e as feitas no exterior no horário local do correio que as registrou. A Chunghwa Post não informa previsão de entrega nem peso, e o Peek omite as observações ao lado de cada movimentação.
 
-Para um código terminado em `TW`, o Peek também consulta o correio nacional do país de onde você rastreia, usando o mesmo código: Poste Italiane na Itália, DHL na Alemanha, Correos na Espanha, Royal Mail no Reino Unido (Parcelforce para EMS). Ele passa a acompanhar esse correio assim que surgem movimentações mais recentes, mantendo o histórico da Chunghwa Post. No sentido inverso, quando o rastreamento do seu correio indica Taiwan como destino, o Peek consulta a Chunghwa Post com o número do seu correio, exceto se começar por U.
+Para um código terminado em `TW`, o Peek também consulta o correio nacional do país de onde você rastreia, usando o mesmo código: Poste Italiane na Itália, DHL na Alemanha, Correos na Espanha, Royal Mail no Reino Unido (Parcelforce para EMS). Ele passa a acompanhar esse correio assim que ele mostrar movimentações novas, mantendo o histórico da Chunghwa Post. No sentido inverso, quando o rastreamento do seu correio indica Taiwan como destino, o Peek consulta a Chunghwa Post com o número do seu correio, exceto se começar por U.
 
 Enquanto você mantiver a encomenda aberta, ou no dia da entrega com as notificações ativadas, o Peek consulta a cada 10 minutos no máximo, e até a cada 2 minutos quando ela sai para entrega; fora isso, e após dois dias sem novidades (12 horas enquanto a encomenda ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), consulta a cada hora. As consultas a cada 2 minutos rodam a partir das 6h no horário local no dia em que a encomenda sai para entrega, enquanto o próprio rastreador da Chunghwa Post ou do seu correio responder (após a transferência, no ritmo do seu correio); pelos serviços de rastreamento, são feitas até a cada 15 minutos nesse dia e, fora isso, a cada hora, ou a cada 3 horas após um dia sem novidades. Ele pode avisar você sobre "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode falar com a Chunghwa Post, com o seu correio nem com a loja por você.
 

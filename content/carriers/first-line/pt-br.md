@@ -6,7 +6,7 @@ published: 2026-11-26
 updated: 2026-11-26
 ---
 
-A FIRST LINE (壹号专线, Shenzhen First Line Supply Chain Co., Ltd.) é uma transitária de Shenzhen que envia encomendas da China para lojas virtuais, sobretudo para os Estados Unidos, e as repassa a uma transportadora local para a entrega. Ela faz parte do grupo 1ST (一代国际集团), cujas transitárias emitem conhecimentos de transporte iniciados por 1ST. Rastreie sua encomenda na caixa de busca da página inicial de firstline56.com, que abre a página 追踪单号 (rastrear um número) da FIRST LINE, ou no campo acima. A loja informa o código junto aos dados de envio do seu pedido.
+A FIRST LINE (壹号专线, Shenzhen First Line Supply Chain Co., Ltd.) é um agente de cargas de Shenzhen que envia encomendas da China em nome de vendedores online, sobretudo para os Estados Unidos, e as repassa a uma transportadora local para a entrega. Ela faz parte do grupo 1ST (一代国际集团), cujos agentes de cargas emitem conhecimentos de transporte iniciados por 1ST. Rastreie sua encomenda na caixa de busca da página inicial de firstline56.com, que abre a página 追踪单号 (rastrear um número) da FIRST LINE, ou no campo acima. A loja informa o código junto aos dados de envio do seu pedido.
 
 ## Código de rastreamento FIRST LINE: como ele é
 
@@ -17,13 +17,13 @@ A FIRST LINE não publica um formato de código. Seus conhecimentos de transport
 | `1ST48291057364` | 1ST e 11 dígitos: conhecimento de transporte do grupo 1ST, rastreado no site da FIRST LINE. |
 | `9400 1092 0556 8473 9261 56` | 22 dígitos começando por `94`: etiqueta da [USPS](carrier:usps), usada na entrega nos EUA. |
 
-**Mesmo prefixo, outras transitárias.** As quatro empresas do grupo — 1st Agent International (一代国际), FIRST LINE, Ferry-Boat (摆渡一下) e Universal Best Union (万国优联) — emitem o mesmo tipo de código 1ST. Um código 1ST que o rastreador da FIRST LINE não reconhece pode pertencer a uma das outras três.
+**Mesmo prefixo, outros agentes de cargas.** As quatro empresas do grupo — 1st Agent International (一代国际), FIRST LINE, Ferry-Boat (摆渡一下) e Universal Best Union (万国优联) — emitem o mesmo tipo de código 1ST. Um código 1ST que o rastreador da FIRST LINE não reconhece pode pertencer a uma das outras três.
 
 **Onde encontrar.** Nos detalhes de envio da loja, que podem citar USPS, China Post ou FIRST LINE como transportadora: a FIRST LINE permite que os vendedores informem qualquer uma delas no marketplace. O grupo informa aos vendedores que o número da última milha, como o da USPS, sai de 6 a 9 dias depois que a encomenda chega ao armazém, então a loja pode fornecer esse número no lugar. Saiba mais em [como encontrar seu código de rastreamento](guide:find-tracking-number).
 
 ## Status de rastreamento da FIRST LINE explicados
 
-O rastreador da FIRST LINE está em chinês, mas as movimentações aparecem em inglês. As próprias linhas da FIRST LINE, na ordem em que costumam aparecer:
+O rastreador da FIRST LINE está em chinês, mas as movimentações aparecem em inglês. As próprias linhas da FIRST LINE, na ordem em que a encomenda costuma passar por elas:
 
 | A FIRST LINE diz | O que significa para você |
 | --- | --- |
@@ -76,13 +76,13 @@ A FIRST LINE não publica regras para tentativas de entrega, avisos de ausência
 
 A página de contato da FIRST LINE, em chinês, lista um centro de atendimento ao cliente (客维中心) e o endereço do escritório: 3º andar, Edifício 36, Zona 5, Parque Industrial Cuigang, Huaide, Fuyong, Distrito de Bao'an, Shenzhen, China. Não há horários nem idiomas informados. O site do grupo 1ST tem um formulário de reclamações (投诉建议) que pede número de telefone, e-mail e mensagem.
 
-Esses canais atendem os vendedores, que são os clientes da FIRST LINE; ela não publica suporte para destinatários. Fale com o vendedor sobre o pedido e com a transportadora entregadora sobre a entrega.
+Esses canais atendem os vendedores, que são os clientes da FIRST LINE; ela não publica ajuda para destinatários. Fale com o vendedor sobre o pedido e com a transportadora entregadora sobre a entrega.
 
 ## Acompanhe uma encomenda FIRST LINE com o Peek
 
 O [Peek](/) identifica a FIRST LINE imediatamente para um código 1ST seguido de 11 dígitos, em maiúsculas ou minúsculas, com ou sem espaços. O Peek não lê links da FIRST LINE, então cole o número em si.
 
-O Peek consulta o rastreador da FIRST LINE e mostra o status, o histórico (até 100 movimentações), o local de cada leitura sem o código postal e o horário lido no relógio daquele local. As linhas aparecem como a FIRST LINE as escreve, incluindo movimentações repassadas de USPS, GOFO ou UniUni, exceto um `Delivered` exato, exibido nas palavras do Peek. O rastreador não informa país de destino, empresa entregadora, código da última milha nem comprovante de entrega, então o Peek não mostra esses dados. A única estimativa de entrega possível é uma leitura repassada da USPS do tipo "Out for Delivery, Expected Delivery …": enquanto essa leitura for a mais recente, o Peek exibe a janela daquele dia quando ela vier informada; uma leitura apenas com horário-limite não adiciona estimativa, pois "Saiu para entrega" já indica hoje. O Peek não troca automaticamente para USPS, GOFO ou UniUni: se o vendedor passar o código da última milha, adicione-o como uma encomenda à parte.
+O Peek consulta o rastreador da FIRST LINE e mostra o status, o histórico (até 100 movimentações), o local de cada leitura sem o código postal e o horário lido no relógio daquele local. As linhas aparecem como a FIRST LINE as escreve, incluindo movimentações repassadas de USPS, GOFO ou UniUni, exceto um `Delivered` exato, exibido nas palavras do Peek. O rastreador não informa país de destino, empresa entregadora, código da última milha nem comprovante de entrega, então o Peek não mostra esses dados. A única estimativa de entrega possível é uma leitura repassada da USPS do tipo "Out for Delivery, Expected Delivery …": enquanto essa leitura for a mais recente, o Peek exibe a janela daquele dia quando ela vier informada; uma leitura apenas com horário-limite não adiciona estimativa, pois "Saiu para entrega" já indica hoje. O Peek não passa a acompanhar a encomenda pela USPS, GOFO ou UniUni: se o vendedor passar o código da última milha, adicione-o como uma encomenda à parte.
 
 Enquanto a encomenda estiver aberta na tela, ou no dia da entrega com as notificações ativadas, o Peek consulta a cada 10 minutos no máximo, ou a cada 2 minutos a partir das 6h no horário local no dia em que ela sai para entrega, enquanto o próprio rastreador da FIRST LINE responder (apenas por serviços de rastreamento: a cada hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega enquanto a encomenda estiver aberta ou com notificações ativadas); fora isso, a cada hora. Ele pode avisar você sobre "Cada movimentação", "Etapas importantes" ou "Só a entrega". Após dois dias sem novidades (12 horas enquanto a encomenda ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), o Peek passa a consultar a cada hora. O Peek não pode entrar em contato com a FIRST LINE nem com o vendedor por você.
 
@@ -90,7 +90,7 @@ Enquanto a encomenda estiver aberta na tela, ou no dia da entrega com as notific
 
 ### O que é um código de rastreamento 1ST?
 
-É um número de conhecimento de transporte das transitárias do grupo 1ST, entre elas a FIRST LINE: 1ST seguido de 11 dígitos. Rastreie em firstline56.com ou no Peek.
+É um número de conhecimento de transporte dos agentes de cargas do grupo 1ST, entre elas a FIRST LINE: 1ST seguido de 11 dígitos. Rastreie em firstline56.com ou no Peek.
 
 ### Quem entrega encomendas da FIRST LINE nos EUA?
 
@@ -98,7 +98,7 @@ Uma transportadora dos EUA: as páginas da FIRST LINE citam USPS, DHL eCommerce 
 
 ### Por que o rastreador da FIRST LINE não encontra meu código 1ST?
 
-O código pode ter sido digitado errado, ainda não ter sido registrado ou pertencer a outra transitária do grupo 1ST. Confira os caracteres e pergunte ao vendedor qual empresa está transportando a encomenda.
+O código pode ter sido digitado errado, ainda não ter sido registrado ou pertencer a outro agente de cargas do grupo 1ST. Confira os caracteres e pergunte ao vendedor qual empresa está transportando a encomenda.
 
 ### Quanto tempo a FIRST LINE leva para entregar nos EUA?
 
@@ -107,7 +107,7 @@ A FIRST LINE informa aos vendedores de 7 a 16 dias porta a porta por via aérea 
 :::sources
 - [FIRST LINE: 壹号专线 (home)](http://www.firstline56.com/) – caixa de rastreamento, site em chinês, endereço no rodapé
 - [FIRST LINE: 追踪单号 (tracking)](http://www.firstline56.com/track.php) – rastreador aberto pela caixa da página inicial
-- [FIRST LINE: 公司简介 (about)](http://www.firstline56.com/aboutus.php) – nome da empresa, transitária de Shenzhen para vendedores internacionais, rotas EUA e Canadá
+- [FIRST LINE: 公司简介 (about)](http://www.firstline56.com/aboutus.php) – nome da empresa, agente de cargas de Shenzhen para vendedores internacionais, rotas EUA e Canadá
 - [FIRST LINE: 联系我们 (contact)](http://www.firstline56.com/contact.php) – centro de atendimento ao cliente, endereço do escritório
 - [FIRST LINE: 美国小包 (US parcel line)](http://www.firstline56.com/business.php?id=4) – rota, transportadoras entregadoras, nomes para marketplaces, prazos e área de entrega, DDP, devoluções, reclamações, entregue mas não recebida
 - [FIRST LINE: 美国海运小包 (US sea parcel line)](http://www.firstline56.com/business.php?id=5) – Matson, FedEx e USPS, 19 a 31 dias

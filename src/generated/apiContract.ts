@@ -4486,7 +4486,10 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "yunda"
+      "adapter": "yunda",
+      "recognitionRank": 541,
+      "recognitionPattern": "^\\d{15}$",
+      "recognitionServedCountriesOnly": true
     },
     "linkRules": [
       {
@@ -29478,7 +29481,7 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "proships"
     },
-    "trackingUrlTemplate": "https://proships.com/tracking?tracking={trackingNumber}",
+    "trackingUrlTemplate": "https://proships.com/tracking/?origen=nacional&tracking={trackingNumber}",
     "linkRules": [
       {
         "domains": [
@@ -29493,7 +29496,7 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://proships.com/tracking/",
+    "trackingSearchUrl": "https://proships.com/",
     "helpUrl": "https://proships.com/ayuda/"
   },
   "pts-worldwide-express": {

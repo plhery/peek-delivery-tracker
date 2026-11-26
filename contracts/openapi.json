@@ -4491,7 +4491,10 @@
       "timezone": "Asia/Shanghai",
       "tracking": {
         "mode": "automatic",
-        "adapter": "yunda"
+        "adapter": "yunda",
+        "recognitionRank": 541,
+        "recognitionPattern": "^\\d{15}$",
+        "recognitionServedCountriesOnly": true
       },
       "linkRules": [
         {
@@ -29483,7 +29486,7 @@
         "mode": "automatic",
         "adapter": "proships"
       },
-      "trackingUrlTemplate": "https://proships.com/tracking?tracking={trackingNumber}",
+      "trackingUrlTemplate": "https://proships.com/tracking/?origen=nacional&tracking={trackingNumber}",
       "linkRules": [
         {
           "domains": [
@@ -29498,7 +29501,7 @@
         }
       ],
       "detectionRules": [],
-      "trackingSearchUrl": "https://proships.com/tracking/",
+      "trackingSearchUrl": "https://proships.com/",
       "helpUrl": "https://proships.com/ayuda/"
     },
     "pts-worldwide-express": {

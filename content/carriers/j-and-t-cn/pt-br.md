@@ -6,7 +6,7 @@ published: 2026-11-26
 updated: 2026-11-26
 ---
 
-A J&T Express China (极兔速递) é a rede da J&T Express na China, em operação desde março de 2020. Um código da J&T China geralmente pertence a uma encomenda dentro da China — muitas vezes um pedido online indo até você, um amigo ou o armazém de uma redirecionadora. Rastreie no [rastreador da J&T](https://www.jtexpress.com.cn/service.html), em chinês, ou na caixa acima. O serviço internacional próprio da J&T China voa apenas para sete países do Sudeste Asiático; em outros países, como EUA ou Reino Unido, um código da J&T China pode cobrir somente o trajeto interno na China até uma agente de cargas.
+A J&T Express China (极兔速递) é a rede da J&T Express na China, em operação desde março de 2020. Um código da J&T China geralmente pertence a uma encomenda dentro da China — muitas vezes um pedido online indo até você, um amigo ou o armazém de uma redirecionadora. Rastreie no [rastreador da J&T](https://www.jtexpress.com.cn/service.html), em chinês, ou na caixa acima. O serviço internacional próprio da J&T China voa apenas para sete países do Sudeste Asiático; em outros países, como EUA ou Reino Unido, um código da J&T China pode cobrir somente o trajeto dentro da China, por exemplo até uma redirecionadora.
 
 ## Código de rastreamento J&T Express China: como ele é
 
@@ -66,9 +66,9 @@ As Medidas de Administração do Mercado Expresso da China continental, em vigor
 
 **Extravio ou dano.** Procure o vendedor primeiro, pois ele contratou a J&T. Pelos termos da J&T, o remetente reclama em até 30 dias com comprovante do valor. Sem seguro (`保价`), a J&T indeniza o prejuízo efetivo até dez vezes o frete; com seguro, até o valor declarado. Em atrasos, apenas isenta o frete. Essas regras valem para envios coletados e entregues na China continental. Veja [encomendas extraviadas](guide:lost-parcel).
 
-**Devolução.** A J&T pode devolver ou seguir instruções razoáveis do remetente quando o endereço é impreciso, o destinatário recusa (`已拒收`) ou a entrega falha sem culpa da J&T, com custos pagos pelo remetente. Veja [devolvida ao remetente](guide:returned-to-sender).
+**Devolução.** A J&T pode devolver ou seguir instruções razoáveis do remetente quando o endereço é impreciso, o destinatário recusa (`已拒收`) ou a entrega não é realizada sem culpa da J&T, com custos pagos pelo remetente. Veja [devolvida ao remetente](guide:returned-to-sender).
 
-**Entregue, mas não chegou.** Verifique pontos de coleta e armários próximos, a portaria do prédio e, se aplicável, a redirecionadora. Depois ligue para 956025 ou use o chat online da J&T com o código. Se a resposta não satisfizer ou atrasar, as normas da China continental permitem recorrer à autoridade postal. Veja [encomenda entregue mas não recebida](guide:delivered-not-received).
+**Entregue, mas não chegou.** Verifique pontos de coleta e armários próximos, a portaria do prédio e, se aplicável, a redirecionadora. Depois ligue para 956025 ou use o atendimento online da J&T com o código. Se a resposta não satisfizer ou atrasar, as normas da China continental permitem recorrer à autoridade postal. Veja [encomenda entregue mas não recebida](guide:delivered-not-received).
 
 ## Contato e atendimento da J&T Express China
 

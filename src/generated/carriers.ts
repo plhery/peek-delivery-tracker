@@ -15038,6 +15038,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffdd00"
     },
     {
+      "id": "dhl-ecommerce-es",
+      "catalog": "dhl-ecommerce-es",
+      "slug": "dhl-ecommerce-iberia-tracking",
+      "title": "Rastreamento DHL eCommerce Ibéria: status e ServicePoints",
+      "name": "DHL eCommerce Iberia",
+      "color": "#ffcc00"
+    },
+    {
       "id": "dhl-ecommerce-pl",
       "catalog": "dhl-ecommerce-pl",
       "slug": "rastreamento-dhl-ecommerce-polonia",
@@ -16164,6 +16172,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento GLS Hungria: códigos, lockers e contatos",
       "name": "GLS Hungary",
       "color": "#ffdd00"
+    },
+    {
+      "id": "dhl-freight",
+      "catalog": "dhl-freight",
+      "slug": "dhl-freight-tracking",
+      "title": "Rastreamento DHL Freight: códigos ActiveTracing e status",
+      "name": "DHL Freight",
+      "color": "#ffcc00"
     },
     {
       "id": "cj-packet",
@@ -19116,6 +19132,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffdd00"
     },
     {
+      "id": "dhl-ecommerce-es",
+      "catalog": "dhl-ecommerce-es",
+      "slug": "dhl-ecommerce-iberia-tracking",
+      "title": "DHL eCommerce Iberia 物流查询：西班牙与葡萄牙状态和自提点",
+      "name": "DHL eCommerce Iberia",
+      "color": "#ffcc00"
+    },
+    {
       "id": "dhl-ecommerce-pl",
       "catalog": "dhl-ecommerce-pl",
       "slug": "dhl-ecommerce-bolan-kuaidi-chaxun",
@@ -20282,6 +20306,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GLS 匈牙利（GLS Hungary）物流查询：单号、快递柜与客服",
       "name": "GLS Hungary",
       "color": "#ffdd00"
+    },
+    {
+      "id": "dhl-freight",
+      "catalog": "dhl-freight",
+      "slug": "dhl-freight-tracking",
+      "title": "DHL Freight 物流查询：ActiveTracing 单号、状态与预约",
+      "name": "DHL Freight",
+      "color": "#ffcc00"
     },
     {
       "id": "anserx",

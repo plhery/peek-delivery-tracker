@@ -16446,12 +16446,28 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffbe2e"
     },
     {
+      "id": "jiayang",
+      "catalog": "jiayang",
+      "slug": "jiayang-tracking",
+      "title": "Rastreamento Jiayang International: códigos JYGJ e status",
+      "name": "Jiayang International",
+      "color": "#105bcc"
+    },
+    {
       "id": "jumppoint-international",
       "catalog": "jumppoint-international",
       "slug": "jumppoint-international-tracking",
       "title": "Rastreamento Jumppoint International: códigos JP e suporte",
       "name": "Jumppoint International Express",
       "color": "#0f4ae1"
+    },
+    {
+      "id": "kuayuan-express",
+      "catalog": "kuayuan-express",
+      "slug": "kuayuan-express-tracking",
+      "title": "Rastreamento Kuayuan Express: códigos, status e ajuda",
+      "name": "Kuayuan Express",
+      "color": "#084b86"
     },
     {
       "id": "skypostal",

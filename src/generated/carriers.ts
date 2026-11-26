@@ -15230,6 +15230,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0c72ba"
     },
     {
+      "id": "dao",
+      "catalog": "dao",
+      "slug": "dao-tracking",
+      "title": "Rastreamento DAO: status, daoSHOP e entregas na Dinamarca",
+      "name": "DAO",
+      "color": "#e30613"
+    },
+    {
       "id": "helthjem",
       "catalog": "helthjem",
       "slug": "rastreamento-helthjem",
@@ -15724,6 +15732,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento ePost Global: códigos EPG e entrega final",
       "name": "ePost Global",
       "color": "#27967a"
+    },
+    {
+      "id": "gls-at",
+      "catalog": "gls-at",
+      "slug": "gls-austria-tracking",
+      "title": "Rastreamento GLS Áustria: status, Parcel Shops e contato",
+      "name": "GLS Austria",
+      "color": "#ffdd00"
     },
     {
       "id": "india-post",
@@ -19068,6 +19084,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0c72ba"
     },
     {
+      "id": "dao",
+      "catalog": "dao",
+      "slug": "dao-tracking",
+      "title": "丹麦 DAO 物流查询：状态含义、daoSHOP 取件与派送失败处理",
+      "name": "DAO",
+      "color": "#e30613"
+    },
+    {
       "id": "helthjem",
       "catalog": "helthjem",
       "slug": "helthjem-wuliu-chaxun",
@@ -19586,6 +19610,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "ePost Global 快递查询：EPG 单号、物流状态与末端派送",
       "name": "ePost Global",
       "color": "#27967a"
+    },
+    {
+      "id": "gls-at",
+      "catalog": "gls-at",
+      "slug": "gls-austria-tracking",
+      "title": "GLS 奥地利（GLS Austria）物流查询：状态、自提点与联系方式",
+      "name": "GLS Austria",
+      "color": "#ffdd00"
     },
     {
       "id": "india-post",

@@ -15118,6 +15118,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8000"
     },
     {
+      "id": "ppl",
+      "catalog": "ppl",
+      "slug": "rastreamento-ppl",
+      "title": "Rastreamento PPL: código de 11 dígitos, status e Parcelshops",
+      "name": "PPL",
+      "color": "#004b93"
+    },
+    {
       "id": "box-now",
       "catalog": "box-now",
       "slug": "rastreamento-box-now",
@@ -15140,6 +15148,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Ecoscooting: status, retirada e contato",
       "name": "Ecoscooting",
       "color": "#3fa7ff"
+    },
+    {
+      "id": "meest",
+      "catalog": "meest",
+      "slug": "rastreamento-meest",
+      "title": "Rastreamento Meest: códigos, status e contatos",
+      "name": "Meest",
+      "color": "#0061af"
     },
     {
       "id": "nova-poshta",
@@ -18908,6 +18924,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8000"
     },
     {
+      "id": "ppl",
+      "catalog": "ppl",
+      "slug": "ppl-wuliu-chaxun",
+      "title": "PPL（PPL CZ）物流查询：11 位单号、状态与 Parcelshop",
+      "name": "PPL",
+      "color": "#004b93"
+    },
+    {
       "id": "box-now",
       "catalog": "box-now",
       "slug": "box-now-wuliu-chaxun",
@@ -18930,6 +18954,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Ecoscooting 物流查询：单号格式、状态与取件点",
       "name": "Ecoscooting",
       "color": "#3fa7ff"
+    },
+    {
+      "id": "meest",
+      "catalog": "meest",
+      "slug": "meest-wuliu-chaxun",
+      "title": "Meest 物流查询：运单号、状态含义与联系方式",
+      "name": "Meest",
+      "color": "#0061af"
     },
     {
       "id": "nova-poshta",

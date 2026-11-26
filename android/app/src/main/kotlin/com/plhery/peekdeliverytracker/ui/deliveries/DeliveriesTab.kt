@@ -301,6 +301,8 @@ fun DeliveriesTab(
         ParcelAlertsHost(state)
         // A parcel's share sheet, a page's or a card's, over the whole window where the tab shell draws it.
         ParcelShareHost(state)
+        // A parcel's note sheet, a page's or a card's, and the photo viewer, over the whole window.
+        ParcelNoteHost(state)
         // Add, over the whole window where the tab shell draws it, and the card it added once it has gone.
         AddParcelHost(state)
         // Settings, from the account button, over the whole window where the tab shell draws it.
@@ -325,6 +327,8 @@ internal fun rememberDeliveriesState(source: DeliveriesSource, firstOpen: FirstO
     navigator.left = { pageId ->
         source.pageWork.forget(pageId)
         source.feedbacks.forget(pageId)
+        // What the page's note left waiting for its Undo goes now.
+        source.notes.pageLeft(source, pageId)
     }
     navigator.opened = source.feedbacks::open
     val listState = rememberLazyListState()

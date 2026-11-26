@@ -1226,6 +1226,16 @@ class ParcelStore(
     }
 
     /**
+     * A note's file's bytes, or its thumbnail's: kept on this phone for a guest's or the demo's, else read at its signed
+     * address, read again once that has passed. Null once the file has gone, and for the demo's drawn photo.
+     */
+    suspend fun noteFileBytes(parcelId: UUID, file: PackageFile, thumbnail: Boolean = false): ByteArray? {
+        if (NoteFileAddress.isLocal(file.url)) return localNoteFile(file)
+        val fresh = freshFile(parcelId, file.id) ?: return null
+        return api.fileBytes(if (thumbnail) fresh.thumbnailUrl ?: fresh.url else fresh.url)
+    }
+
+    /**
      * The service's addresses of a note's files last a while: once one has passed, the parcels are read again for new
      * ones. Returns the file as it is now, nil once it has gone.
      */

@@ -301,11 +301,17 @@ private fun BottomControls(state: DeliveriesState, backdrop: MaterialBackdrop, i
     val localizer = LocalLocalizer.current
     val colors = PeekTheme.colors
     val parcel = undo
+    // What a card's note removed, with its Undo, or a page's once its page has gone.
+    val noteToast = state.source.notes.toast?.takeIf {
+        (it.pageId == null || it.pageId != state.navigator.navigation.shown) &&
+            !(it.kind == NoteToastKind.File && state.noting?.parcelId == it.parcelId)
+    }
     when {
         parcel != null -> InlineToast(
             text = state.archivedText(parcel), button = localizer.text("app.undo"), symbol = "archivebox.fill",
             tint = colors.resolve(ExperimentalPalette.ochre), action = { state.restore(parcel) }, backdrop = backdrop, modifier = modifier,
         )
+        noteToast != null -> NoteUndoToast(state, noteToast, backdrop, modifier)
         toast != null -> InlineToast(
             text = toast.text, button = null,
             symbol = when {

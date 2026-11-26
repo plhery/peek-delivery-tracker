@@ -165,7 +165,7 @@ fun ParcelPassCard(
                 label = newUpdateLabel(
                     localizer.text("parcel.newUpdate").takeIf { newUpdate && showsStatus },
                     cardLabel(
-                        identity.fullName, date, name, carrierNotice, delivering, status.takeIf { showsStatus },
+                        identity.fullName, date, name, noteMarkLabel(parcel, localizer), carrierNotice, delivering, status.takeIf { showsStatus },
                         peekAiWords?.let { localizer.text("peekAi.says", mapOf("words" to it)) }, flag,
                     ),
                 ),
@@ -218,11 +218,13 @@ fun ParcelPassCard(
                 Modifier.padding(end = if (drawsRoute) CardRouteMetrics.clearance else 0.dp),
                 verticalArrangement = Arrangement.spacedBy(5.dp),
             ) {
+                val (marked, markContent) = noteMarked(name, parcel)
                 Text(
-                    name,
+                    marked,
                     if (onName != null) Modifier.reportsFrameInList { onName(it.center.y) } else Modifier,
                     color = colors.label,
                     style = type.style(IosTextStyle.Headline, FontWeight.SemiBold).sfLines(),
+                    inlineContent = markContent,
                 )
                 if (carrierNotice != null) Text(carrierNotice, color = colors.secondaryText, style = type.caption.sfLines())
                 if (delivering != null) Text(delivering, color = colors.secondaryText, style = type.caption.sfLines())

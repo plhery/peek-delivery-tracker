@@ -116,7 +116,7 @@ class CardMenuTest {
         compose.onNodeWithTag(CARD_MENU).assertExists()
         assertEquals(
             listOf(
-                ParcelMenuItem.Open, ParcelMenuItem.Rename, ParcelMenuItem.Share, ParcelMenuItem.CopyTrackingNumber,
+                ParcelMenuItem.Open, ParcelMenuItem.Rename, ParcelMenuItem.AddNote, ParcelMenuItem.Share, ParcelMenuItem.CopyTrackingNumber,
                 ParcelMenuItem.ChangeCarrier, ParcelMenuItem.Archive, ParcelMenuItem.Delete,
             ),
             shownItems(),
@@ -223,10 +223,11 @@ class CardMenuTest {
      * glass from the point clicked, no card lifted over a dimmed screen; a long press on the same card still lifts it.
      */
     @Test
+    @Config(qualifiers = "w390dp-h1100dp-xhdpi")
     fun aSecondaryClickOpensTheMenuAtThePointerWithoutLiftingTheCard() {
         show()
         val card = drawn(compose.card("Birthday gift"))
-        // Low in the card, which leaves the whole menu room above the pointer.
+        // Low in the card, on a phone tall enough to leave the whole menu room above or below the pointer.
         val y = card.height - 20
         compose.card("Birthday gift").performMouseInput { rightClick(Offset(40.dp.toPx(), y.dp.toPx())) }
         compose.waitForIdle()

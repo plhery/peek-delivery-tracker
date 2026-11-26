@@ -101,7 +101,10 @@ class FrozenCopyTest {
         compose.onNodeWithTag(PAGE_MENU_BUTTON).performClick()
         settle()
         assertEquals(
-            setOf(ParcelMenuItem.Rename, ParcelMenuItem.CopyTrackingNumber, ParcelMenuItem.Archive, ParcelMenuItem.Delete, ParcelMenuItem.ContactCarrier),
+            setOf(
+                ParcelMenuItem.Rename, ParcelMenuItem.AddNote, ParcelMenuItem.CopyTrackingNumber, ParcelMenuItem.Archive, ParcelMenuItem.Delete,
+                ParcelMenuItem.ContactCarrier,
+            ),
             shownItems(),
         )
     }

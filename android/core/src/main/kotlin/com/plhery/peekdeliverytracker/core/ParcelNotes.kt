@@ -96,6 +96,16 @@ enum class NoteFileProblem {
 class NoteFileError(val problem: NoteFileProblem, val size: Long? = null, val status: Int? = null) :
     Exception("The file was not added ($problem)")
 
+/**
+ * Why a file couldn't join the note: what the service or the phone said, no connection (a request that couldn't go out
+ * while the phone is offline), or anything else.
+ */
+fun noteFileProblem(error: Throwable): NoteFileProblem = when (error) {
+    is NoteFileError -> error.problem
+    is java.io.IOException -> NoteFileProblem.Offline
+    else -> NoteFileProblem.Failed
+}
+
 /** A size in megabytes as people read it: one decimal under 20, whole above, never under 0.1. */
 fun Localizer.megabytes(bytes: Long): String {
     val value = max(0.1, bytes / 1_048_576.0)

@@ -480,6 +480,15 @@ class DeliveryApiClient(
         rawRequest("/api/packages/${id.uuidString}/files/${fileId.uuidString}", "DELETE", missing = 404)
     }
 
+    /**
+     * The bytes at a note's file's signed address (`/api/files/{id}?…`, its photo, its thumbnail or its PDF); null once
+     * the file has gone.
+     */
+    suspend fun fileBytes(address: String): ByteArray? {
+        val response = rawRequest(address, missing = 404, headers = mapOf("Accept" to "*/*"), timeout = UPLOAD_TIMEOUT)
+        return if (response.statusCode == 404) null else response.body
+    }
+
     suspend fun changeCarrier(
         id: UUID,
         carrier: CarrierId,

@@ -3,12 +3,15 @@
     FollowedParcels holds backup copies with the push addresses removed. Complete copies live in noBackupFilesDir.
     DeviceParcels and unifiedpush.xml are the older locations that may still hold an installation's credentials.
     Account caches, owner keys, sessions and transport credentials stay on the original phone.
+    ParcelNotes holds a guest's note photos and PDFs, up to 200 MB: past the cloud backup's 25 MB it would stop the whole
+    backup, so it goes only from phone to phone.
 -->
 <data-extraction-rules>
     <cloud-backup>
         <exclude domain="file" path="Keychain/" />
         <exclude domain="file" path="ParcelCache/" />
         <exclude domain="file" path="DeviceParcels/" />
+        <exclude domain="file" path="ParcelNotes/" />
         <exclude domain="sharedpref" path="unifiedpush.xml" />
         <exclude domain="sharedpref" path="push-route.xml" />
     </cloud-backup>

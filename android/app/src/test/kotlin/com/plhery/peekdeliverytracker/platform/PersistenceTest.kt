@@ -220,9 +220,11 @@ class PersistenceTest {
             }
         }
         // In the cloud backup and in a transfer to a new phone. The device's parcels go, as the iPhone's
-        // Application Support does: those followed through someone else's link need no key.
+        // Application Support does: those followed through someone else's link need no key. A guest's note files, up to
+        // 200 MB, stay out of the cloud backup alone, whose 25 MB they would break; a transfer takes them.
         val folders = listOf("file:Keychain/", "file:ParcelCache/", "file:DeviceParcels/", "sharedpref:unifiedpush.xml", "sharedpref:push-route.xml")
-        assertEquals(folders + folders, excluded)
+        val cloud = folders.take(3) + "file:ParcelNotes/" + folders.drop(3)
+        assertEquals(cloud + folders, excluded)
     }
 
     @Test

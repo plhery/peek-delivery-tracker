@@ -163,7 +163,7 @@ fun NextDeliveryPass(
                 label = newUpdateLabel(
                     localizer.text("parcel.newUpdate").takeIf { newUpdate },
                     cardLabel(
-                        identity.fullName, nextUp.takeUnless { arrived }, name, notice, delivering, status,
+                        identity.fullName, nextUp.takeUnless { arrived }, name, noteMarkLabel(parcel, localizer), notice, delivering, status,
                         peekAiWords?.let { localizer.text("peekAi.says", mapOf("words" to it)) }, flag,
                     ),
                 ),
@@ -220,13 +220,15 @@ fun NextDeliveryPass(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
+                val (marked, markContent) = noteMarked(name, parcel)
                 Text(
-                    name,
+                    marked,
                     Modifier
                         .weight(1f)
                         .then(if (onName != null) Modifier.reportsFrameInList { onName(it.center.y) } else Modifier),
                     color = colors.label,
                     style = type.style(IosTextStyle.Title2, FontWeight.SemiBold).sfLines(),
+                    inlineContent = markContent,
                 )
                 DeliveryPostageStamp(parcel, identity, appeared = appeared || decorative)
             }

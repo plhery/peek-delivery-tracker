@@ -168,6 +168,7 @@ class TalkBackScreensTest {
             listOf(
                 "Open parcel [button]",
                 "Edit parcel name [button]",
+                "Add a note [button]",
                 "Share… [button]",
                 "Copy tracking number [button]",
                 "Change carrier [button]",
@@ -218,6 +219,7 @@ class TalkBackScreensTest {
             "a parcel's menu",
             listOf(
                 "Edit parcel name [button]",
+                "Add a note [button]",
                 "Copy tracking number [button]",
                 "Change carrier [button]",
                 "Contact Chronopost support [button]",

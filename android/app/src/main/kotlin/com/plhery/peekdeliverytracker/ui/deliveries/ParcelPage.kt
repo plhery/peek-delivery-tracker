@@ -212,6 +212,19 @@ internal fun ParcelPage(state: DeliveriesState, parcelId: UUID) {
                 state, feedback, backdrop, Modifier.align(Alignment.BottomCenter).padding(start = start, end = end, bottom = bottom),
             )
         }
+        // What the page's note removed, with its Undo; a file removed in the open sheet says so in the sheet.
+        val noteToast = state.source.notes.toast?.takeIf {
+            it.pageId == parcelId && !(it.kind == NoteToastKind.File && state.noting?.parcelId == it.parcelId)
+        }
+        if (noteToast != null) {
+            NoteUndoToast(
+                state, noteToast, backdrop,
+                Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(start = start + NOTE_TOAST_SIDE, end = end + NOTE_TOAST_SIDE, bottom = bottom + NOTE_TOAST_BOTTOM)
+                    .widthIn(max = NOTE_TOAST_WIDTH),
+            )
+        }
     }
     if (feedback != null) PageReviewing(state, feedback, parcel, parcelId)
     // A debug build's `sdt.debug.parcelShare` opens the share sheet as the page comes (`.task { showingShare = true }`).
@@ -396,6 +409,7 @@ private fun LiveParcelPass(state: DeliveriesState, parcel: Parcel, pageId: UUID,
         PeekAiPageCard(state, parcel)
         PickupPoint(state, parcel)
         CarrierNotes(state, parcel)
+        ParcelNoteCard(state, parcel, pageId)
         ShipmentIdentity(state, parcel, pageId)
         ShipmentDetails(state, parcel, pageId)
         if (divided) Box(Modifier.fillMaxWidth().height(1.dp / LocalDensity.current.density).background(PeekTheme.colors.divider))

@@ -463,8 +463,8 @@ class ParcelPageTest {
         assertEquals(
             // In the order of the items' kinds; the menu shows the carrier's support after Change carrier.
             listOf(
-                ParcelMenuItem.Rename, ParcelMenuItem.CopyTrackingNumber, ParcelMenuItem.ChangeCarrier, ParcelMenuItem.Archive, ParcelMenuItem.Delete,
-                ParcelMenuItem.ContactCarrier,
+                ParcelMenuItem.Rename, ParcelMenuItem.AddNote, ParcelMenuItem.CopyTrackingNumber, ParcelMenuItem.ChangeCarrier, ParcelMenuItem.Archive,
+                ParcelMenuItem.Delete, ParcelMenuItem.ContactCarrier,
             ),
             shownItems(),
         )
@@ -809,8 +809,8 @@ class ParcelPageTest {
         assertEquals(
             // In the order of the items' kinds; the menu shows the carrier's support after Change carrier.
             listOf(
-                ParcelMenuItem.Rename, ParcelMenuItem.CopyTrackingNumber, ParcelMenuItem.ChangeCarrier, ParcelMenuItem.Archive, ParcelMenuItem.Delete,
-                ParcelMenuItem.ContactCarrier,
+                ParcelMenuItem.Rename, ParcelMenuItem.AddNote, ParcelMenuItem.CopyTrackingNumber, ParcelMenuItem.ChangeCarrier, ParcelMenuItem.Archive,
+                ParcelMenuItem.Delete, ParcelMenuItem.ContactCarrier,
             ),
             shownItems(),
         )

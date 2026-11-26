@@ -37,6 +37,7 @@ import com.plhery.peekdeliverytracker.core.DeliveryEmail
 import com.plhery.peekdeliverytracker.core.DeliveryLiveActivities
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSharedStore
 import com.plhery.peekdeliverytracker.core.DemoRepository
+import com.plhery.peekdeliverytracker.core.DeviceNoteFiles
 import com.plhery.peekdeliverytracker.core.DeviceParcelClient
 import com.plhery.peekdeliverytracker.core.DeviceParcelFiles
 import com.plhery.peekdeliverytracker.core.DeviceParcels
@@ -324,6 +325,7 @@ class AppContainer(
             scope = scope,
             region = region,
             language = { localizer.language },
+            noteFiles = DeviceNoteFiles(java.io.File(context.filesDir, "ParcelNotes")),
         )
         ParcelStore(
             configuration = configuration,

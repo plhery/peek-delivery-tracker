@@ -289,8 +289,8 @@ internal fun rememberListViewStates(launch: UUID): ListViewStates = ListViewStat
  * What a menu opened over the deliveries that waits for an answer, each held for the launch ([rememberForLaunch]) as
  * the iPhone's `@State` is through a rotation: the delete it asks about, the parcel being named, the carrier editor
  * open, a parcel's alerts open, its share sheet open and Add open ([DeleteRequest.saved], [RenameRequest.saved],
- * [CarrierEditorRequest.saved], [AlertsRequest.saved], [ShareRequest.saved], [AddRequest.saved]), and the name typed so
- * far. Add open is [adding], which the first open over the tabs reads too ([FirstOpen.adding]).
+ * [CarrierEditorRequest.saved], [AlertsRequest.saved], [ShareRequest.saved], [AddRequest.saved]), its note sheet open
+ * ([NoteRequest.saved]), and the name typed so far. Add open is [adding], which the first open over the tabs reads too ([FirstOpen.adding]).
  */
 internal class PromptStates(
     val deleting: MutableState<String?>,
@@ -300,6 +300,7 @@ internal class PromptStates(
     val alerts: MutableState<String?>,
     val sharing: MutableState<String?>,
     val adding: MutableState<String?>,
+    val noting: MutableState<String?>,
 )
 
 @Composable
@@ -311,6 +312,7 @@ internal fun rememberPromptStates(launch: UUID, adding: MutableState<String?>): 
     alerts = rememberForLaunch<String?>(launch, null),
     sharing = rememberForLaunch<String?>(launch, null),
     adding = adding,
+    noting = rememberForLaunch<String?>(launch, null),
 )
 
 /**
@@ -1337,7 +1339,7 @@ internal class DeliveriesState(
     private val coveredBesidesMenu: Boolean
         get() = pageMenu != null || deleting != null || renaming != null || actionError != null || pageError != null ||
             mapCover != null || carrierEditor != null || carrierEditorClosing || deleteGoing || alerts != null || alertsClosing ||
-            sharing != null || sharingClosing || source.feedbacks.covering || feedbackSheetShown || addition != null || additionClosing ||
+            sharing != null || sharingClosing || noting != null || notingClosing || source.feedbacks.covering || feedbackSheetShown || addition != null || additionClosing ||
             showingAccount
 
     /**
@@ -2047,8 +2049,60 @@ internal class DeliveriesState(
         }
     }
 
-    /** Opens the sheet of the parcel's private note. */
-    fun openNote(parcel: Parcel, pageId: UUID?) = Unit
+    /**
+     * The note sheet open over the window (a page's `showingNote`, the list's `prompts.noting`), kept with the window:
+     * on the parcel of the page that asked, or of a card's menu ([ParcelNoteHost]). What it shows and does is the
+     * source's for as long as it is open ([ParcelNoteWork]).
+     */
+    var noting: NoteRequest?
+        get() = prompts.noting.value?.let { NoteRequest.from(it) }
+        private set(value) {
+            prompts.noting.value = value?.saved
+        }
+
+    /** The note sheet has closed and is still on its way down: TalkBack goes back once it has gone. */
+    var notingClosing: Boolean by mutableStateOf(false)
+        private set
+
+    /** Opens the sheet of the parcel's private note, from its menu: the card's, or the page with `pageId`'s. */
+    fun openNote(parcel: Parcel, pageId: UUID?) {
+        noting?.let { source.notes.close(it.id) }
+        notingClosing = false
+        val request = NoteRequest(UUID.randomUUID(), parcel.id, pageId)
+        source.notes.open(request, parcel, keepParcel = pageId == null)
+        noting = request
+    }
+
+    /** The pen of the note on the page with `pageId`: its sheet, TalkBack going back to `focus` once it has closed. */
+    fun noteOnPage(pageId: UUID, focus: AccessibilityFocus? = null) {
+        if (modal || navigator.navigation.shown != pageId) return
+        val parcel = menuParcel(pageId) ?: return
+        if (focus != null) returnFocus = focus
+        openNote(parcel, pageId)
+    }
+
+    /**
+     * The parcel the note sheet `request` shows: the page's as it is now, none once gone; or a card's as the list has
+     * it now, else as its menu found it ([NoteSheetWork.parcel]).
+     */
+    fun notedParcel(request: NoteRequest, work: NoteSheetWork, parcels: List<Parcel>): Parcel? {
+        val pageId = request.pageId ?: return parcels.firstOrNull { it.id == request.parcelId } ?: work.parcel
+        return pageParcel(pageId, parcels)
+    }
+
+    /** ✕, Save done, a tap outside, the back, a drag down, or its page gone: the note sheet closes. */
+    fun closeNote() {
+        val request = noting ?: return
+        source.notes.close(request.id)
+        noting = null
+        notingClosing = true
+    }
+
+    /** The note sheet has gone. */
+    fun noteClosed() {
+        if (noting != null) return
+        notingClosing = false
+    }
 
     /**
      * `TrackingNumberCopy.copy`: counts the copy and puts the number on the clipboard as its carrier's site takes it,

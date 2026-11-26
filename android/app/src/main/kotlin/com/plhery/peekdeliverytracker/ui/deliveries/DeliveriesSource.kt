@@ -11,6 +11,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.BuildConfig
+import com.plhery.peekdeliverytracker.core.NoteFileError
+import com.plhery.peekdeliverytracker.core.api.PackageFile
+import com.plhery.peekdeliverytracker.core.NoteFileUpload
 import com.plhery.peekdeliverytracker.core.AddByEmailStore
 import com.plhery.peekdeliverytracker.core.AssistantsStore
 import com.plhery.peekdeliverytracker.core.AuthenticationState
@@ -162,6 +165,24 @@ interface DeliveriesSource {
 
     /** `store.rename(_:label:)`: names the parcel `label`, trimmed of whitespace and newlines. */
     suspend fun rename(parcel: Parcel, label: String)
+
+    /**
+     * `store.setNote(_:text:)`: the parcel's private note, trimmed and cut to 1,000 characters; nothing left deletes it.
+     * In the account, in the demo, or on this phone alone for a guest.
+     */
+    suspend fun setNote(parcel: Parcel, text: String?)
+
+    /** `store.addFile(_:upload:)`: adds a photo or PDF to the parcel's note; one that can't join says why ([NoteFileError]). */
+    suspend fun addNoteFile(parcel: Parcel, upload: NoteFileUpload)
+
+    /** `store.removeFile(_:fileId:)`: removes a file from the parcel's note, once its Undo has passed. */
+    suspend fun removeNoteFile(parcel: Parcel, fileId: UUID)
+
+    /** A note's file's bytes, or its thumbnail's ([ParcelStore.noteFileBytes]); null once it has gone. */
+    suspend fun noteFileBytes(parcel: Parcel, file: PackageFile, thumbnail: Boolean): ByteArray?
+
+    /** The notes' files on their way, their problems and the Undo that waits, for as long as this process lasts. */
+    val notes: ParcelNoteWork
 
     /** `store.setMuted(_:muted:)`: switches the parcel's notifications off, or back on. Nothing for a guest's parcel. */
     suspend fun setMuted(parcel: Parcel, muted: Boolean)
@@ -548,6 +569,19 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
     override suspend fun rename(parcel: Parcel, label: String) = container.parcels.rename(parcel, label)
 
+    override suspend fun setNote(parcel: Parcel, text: String?) = container.parcels.setNote(parcel, text)
+
+    override suspend fun addNoteFile(parcel: Parcel, upload: NoteFileUpload) {
+        container.parcels.addFile(parcel, upload)
+    }
+
+    override suspend fun removeNoteFile(parcel: Parcel, fileId: UUID) = container.parcels.removeFile(parcel, fileId)
+
+    override suspend fun noteFileBytes(parcel: Parcel, file: PackageFile, thumbnail: Boolean): ByteArray? =
+        container.parcels.noteFileBytes(parcel.id, file, thumbnail)
+
+    override val notes: ParcelNoteWork get() = NOTES
+
     override suspend fun setMuted(parcel: Parcel, muted: Boolean) = container.parcels.setMuted(parcel, muted)
 
     override suspend fun setEmailMuted(parcel: Parcel, muted: Boolean) = container.parcels.setEmailMuted(parcel, muted)
@@ -726,6 +760,9 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
         /** This process's share sheets, for every window it makes, as its pages' work is. */
         val SHARES = ParcelShares()
+
+        /** The notes' work, for the process ([ParcelNoteWork]). */
+        val NOTES = ParcelNoteWork()
 
         /** This process's pages' questions, for every window it makes, as its pages' work is. */
         val FEEDBACKS = ParcelFeedbacks()

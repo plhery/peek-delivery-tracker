@@ -32,6 +32,9 @@ class DeviceWordsTest {
         "detail.emailOffer.turnOn", "detail.emailOffer.notNow",
     )
 
+    // SF Symbols' names that start as a key does: pictures, not copy.
+    private val symbols = setOf("note.text", "note.text.badge.plus")
+
     /** The keys the Kotlin sources of the app and its core name, found as the iOS generator finds them in Swift. */
     private fun referencedKeys(): Set<String> {
         val module = File(System.getProperty("user.dir"))
@@ -41,7 +44,7 @@ class DeviceWordsTest {
         val prefixes = catalogs.getValue("en").keys.map { it.substringBefore('.') }.toSet()
         val key = Regex(""""([a-z][A-Za-z0-9_-]*(?:\.[A-Za-z0-9_-]+)+)"""")
         return sources.flatMap { file -> key.findAll(file.readText()).map { it.groupValues[1] } }
-            .filter { it.substringBefore('.') in prefixes && it !in identifiers }
+            .filter { it.substringBefore('.') in prefixes && it !in identifiers && it !in symbols }
             .toSet()
     }
 

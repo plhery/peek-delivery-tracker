@@ -26,6 +26,13 @@ import com.plhery.peekdeliverytracker.core.FriendsStore
 import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
 import com.plhery.peekdeliverytracker.core.NotificationPreset
 import com.plhery.peekdeliverytracker.core.OnTheWayRecord
+import com.plhery.peekdeliverytracker.core.NoteFileAddress
+import com.plhery.peekdeliverytracker.core.NoteFileError
+import com.plhery.peekdeliverytracker.core.NoteFileProblem
+import com.plhery.peekdeliverytracker.core.NoteFileUpload
+import com.plhery.peekdeliverytracker.core.ParcelNotes
+import com.plhery.peekdeliverytracker.core.withoutFile
+import com.plhery.peekdeliverytracker.core.api.PackageFile
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackClient
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackMemory
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackModel
@@ -301,6 +308,51 @@ class FakeDeliveries(
         renames += parcel.id to label
         parcels.value = parcels.value.map { if (it.id == parcel.id) it.copy(label = label) else it }
     }
+
+    /** Each note saved, with its parcel's id, as the store got it; and each file added and removed. */
+    val notesSaved = mutableListOf<Pair<UUID, String?>>()
+    val filesAdded = mutableListOf<Pair<UUID, String>>()
+    val filesRemoved = mutableListOf<Pair<UUID, UUID>>()
+
+    /** Holds each file on its way until the test lets it go, and what an upload throws when it fails. */
+    var uploading: CompletableDeferred<Unit>? = null
+    var uploadFailure: Exception? = null
+
+    /** The bytes of each file the notes hold, by its id: a test may put its own. */
+    val noteBytes = mutableMapOf<UUID, ByteArray>()
+
+    override suspend fun setNote(parcel: Parcel, text: String?) {
+        failure?.let { throw it }
+        if (parcels.value.none { it.id == parcel.id }) throw DeliveryApiError.ParcelMissing()
+        val note = ParcelNotes.saved(text)
+        notesSaved += parcel.id to note
+        parcels.value = parcels.value.map { if (it.id == parcel.id) it.copy(note = note) else it }
+    }
+
+    override suspend fun addNoteFile(parcel: Parcel, upload: NoteFileUpload) {
+        uploading?.await()
+        uploadFailure?.let { throw it }
+        val current = parcels.value.firstOrNull { it.id == parcel.id } ?: throw DeliveryApiError.ParcelMissing()
+        if ((current.files?.size ?: 0) >= ParcelNotes.FILES_PER_PARCEL) throw NoteFileError(NoteFileProblem.ParcelFull)
+        val id = UUID.randomUUID()
+        noteBytes[id] = upload.bytes
+        filesAdded += parcel.id to upload.name
+        val file = PackageFile(
+            id = id, name = upload.name, contentType = upload.type, size = upload.bytes.size, width = upload.width, height = upload.height,
+            createdAt = "2026-11-20T10:00:00.000Z", url = NoteFileAddress.DEMO + id, expiresAt = NoteFileAddress.NEVER,
+        )
+        parcels.value = parcels.value.map { if (it.id == parcel.id) it.copy(files = (it.files.orEmpty() + file)) else it }
+    }
+
+    override suspend fun removeNoteFile(parcel: Parcel, fileId: UUID) {
+        failure?.let { throw it }
+        filesRemoved += parcel.id to fileId
+        parcels.value = parcels.value.map { if (it.id == parcel.id) it.withoutFile(fileId) else it }
+    }
+
+    override suspend fun noteFileBytes(parcel: Parcel, file: PackageFile, thumbnail: Boolean): ByteArray? = noteBytes[file.id]
+
+    override val notes = ParcelNoteWork()
 
     override suspend fun setMuted(parcel: Parcel, muted: Boolean) {
         muting?.await()

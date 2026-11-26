@@ -99,6 +99,75 @@ final class ParcelNoteTests: XCTestCase {
         XCTAssertEqual(found("lamp"), ["Lamp"])
     }
 
+    // MARK: - Where the list's search matched (the web's `searchMatch.test.ts`)
+
+    private func marked(_ snippet: NoteSearch.Snippet?) -> [String]? {
+        snippet.map { NoteSearch.pieces($0.text, $0.ranges).filter(\.matched).map(\.text) }
+    }
+
+    func testASearchFindsEveryPlaceItStandsInAnyCaseByCharacters() {
+        XCTAssertEqual(NoteSearch.ranges(in: "Vinyl, more VINYL and vinyl", query: " vinyl "), [0..<5, 12..<17, 22..<27])
+        // An emoji before the match counts as one character, as the row cuts it.
+        XCTAssertEqual(NoteSearch.ranges(in: "🎷 Kind of Blue", query: "blue"), [10..<14])
+        XCTAssertEqual(NoteSearch.ranges(in: "Kind of Blue", query: ""), [])
+        XCTAssertEqual(NoteSearch.ranges(in: "Kind of Blue", query: "green"), [])
+        XCTAssertEqual(NoteSearch.pieces("Kind of Blue", NoteSearch.ranges(in: "Kind of Blue", query: "of")), [
+            NoteSearch.Piece(text: "Kind ", matched: false), NoteSearch.Piece(text: "of", matched: true),
+            NoteSearch.Piece(text: " Blue", matched: false),
+        ])
+        // "İ" lowers to two code points; the match still begins and ends on whole characters.
+        XCTAssertEqual(NoteSearch.ranges(in: "İstanbul, Istanbul", query: "stanbul"), [1..<8, 11..<18])
+    }
+
+    func testAShortNoteShowsWholeEveryMatchMarked() {
+        let snippet = NoteSearch.snippet(note: "Door code 4812.\nCode for the bike shed: 99", fileNames: [], query: "code")
+        XCTAssertEqual(snippet?.text, "Door code 4812. Code for the bike shed: 99")
+        XCTAssertEqual(marked(snippet), ["code", "Code"])
+    }
+
+    func testALongNoteShowsFromAFewWordsBeforeTheMatchCutBetweenWords() throws {
+        let note = String(repeating: "Ordered for the living room after a long wait at the shop. ", count: 3)
+            + "Gift receipt is in the drawer, under the blue folder with the warranty papers and the spare keys. Call before noon."
+        let snippet = try XCTUnwrap(NoteSearch.snippet(note: note, fileNames: [], query: "receipt"))
+        XCTAssertTrue(snippet.text.hasPrefix("…"))
+        XCTAssertTrue(snippet.text.hasSuffix("…"))
+        XCTAssertNotEqual(snippet.text.dropFirst().first, " ")
+        XCTAssertLessThanOrEqual(snippet.text.count, 92)
+        // The match stands near the start, where a one-line row still shows it.
+        XCTAssertLessThanOrEqual(try XCTUnwrap(snippet.ranges.first).lowerBound, 25)
+        XCTAssertEqual(marked(snippet), ["receipt"])
+        XCTAssertTrue(note.contains(String(snippet.text.dropFirst().dropLast())))
+    }
+
+    func testASnippetMarksOnlyTheMatchesItShows() throws {
+        let note = "Box 1 of 2 here. " + String(repeating: "Lorem ipsum dolor sit amet. ", count: 6) + "Box 2 of 2 at the neighbour's."
+        let snippet = try XCTUnwrap(NoteSearch.snippet(note: note, fileNames: [], query: "box"))
+        XCTAssertTrue(snippet.text.hasPrefix("Box 1 of 2"))
+        XCTAssertEqual(marked(snippet), ["Box"])
+    }
+
+    func testASnippetFallsBackToAFilesNameAndIsNilWhenNeitherHoldsTheSearch() {
+        XCTAssertEqual(NoteSearch.snippet(note: "Door code 4812", fileNames: ["Receipt.pdf", "Box.jpg"], query: "box"),
+                       NoteSearch.Snippet(text: "Box.jpg", ranges: [0..<3]))
+        XCTAssertNil(NoteSearch.snippet(note: "Door code 4812", fileNames: ["Receipt.pdf"], query: "vinyl"))
+        XCTAssertNil(NoteSearch.snippet(note: nil, fileNames: [], query: "vinyl"))
+        XCTAssertNil(parcel(note: "Door code 4812").noteMatch("  "), "Nothing searched")
+    }
+
+    func testVoiceOverReadsTheNotesWordsASearchFoundWithTheName() {
+        let localizer = Localizer()
+        let previous = localizer.language
+        defer { localizer.language = previous }
+        localizer.language = .en
+        let noted = parcel(label: "Kind of Blue · vinyl", note: DemoNote.text[.en])
+        let snippet = noted.noteMatch("returns")
+        XCTAssertEqual(ParcelNoteMark.spokenName(noted.label, noted: true, snippet: snippet, localizer: localizer),
+                       "Kind of Blue · vinyl, \(localizer.text("note.title")): …paid 39 €. Free returns until 24 Dec at round-midnight.example/returns")
+        XCTAssertEqual(ParcelNoteMark.spokenName(noted.label, noted: true, snippet: nil, localizer: localizer),
+                       "Kind of Blue · vinyl, \(localizer.text("note.hasNote"))")
+        XCTAssertEqual(ParcelNoteMark.spokenName("Lamp", noted: false, snippet: nil, localizer: localizer), "Lamp")
+    }
+
     // MARK: - What is sent
 
     func testTheNotesChangeSendsNullToDeleteAndTrimmedWordsOtherwise() throws {
@@ -257,6 +326,44 @@ final class ParcelNoteTests: XCTestCase {
         XCTAssertEqual(store.all, [])
     }
 
+    /// A kept file the service will never take leaves the device; one the account has no room for waits a day, after a
+    /// relaunch too; any other failure is tried again at the next start (the web's `sendKeptNoteFiles`).
+    func testAKeptFileTheServiceRefusesForGoodLeavesAndOneWithNoRoomWaitsADay() async throws {
+        let root = FileManager.default.temporaryDirectory.appending(path: "NoteFilesTests-\(UUID().uuidString)", directoryHint: .isDirectory)
+        let store = files("kept", root: root)
+        var statuses = ["Gone.pdf": 404, "Big.pdf": 413, "Type.pdf": 415, "Full.pdf": 409, "Down.pdf": 503]
+        for name in statuses.keys.sorted() {
+            try store.add(PreparedNoteFile(data: pdf().data, name: name, type: .applicationPdf), to: "link-\(name)")
+            store.handOver("link-\(name)", to: UUID())
+        }
+        var offered: [String] = []
+        func send(_ packageID: UUID, _ file: PreparedNoteFile) async throws {
+            offered.append(file.name)
+            if let status = statuses[file.name] { throw NoteFileError(problem: .upload(status: status, code: nil), status: status) }
+        }
+        let start = Date(timeIntervalSince1970: 1_800_000_000)
+
+        let first = await store.sendKept(now: start, send)
+        XCTAssertEqual(first, 0)
+        XCTAssertEqual(offered.count, 5)
+        XCTAssertEqual(store.kept.map(\.name).sorted(), ["Down.pdf", "Full.pdf"])
+
+        // Relaunched an hour later: the one with no room waits, the other is offered again.
+        let again = LocalNoteFiles(space: store.space, root: root)
+        offered = []
+        let soon = await again.sendKept(now: start.addingTimeInterval(3_600), send)
+        XCTAssertEqual(soon, 0)
+        XCTAssertEqual(offered, ["Down.pdf"])
+
+        // A day later both go, and leave the device.
+        statuses = [:]
+        offered = []
+        let later = await again.sendKept(now: start.addingTimeInterval(25 * 3_600), send)
+        XCTAssertEqual(later, 2)
+        XCTAssertEqual(offered.sorted(), ["Down.pdf", "Full.pdf"])
+        XCTAssertEqual(LocalNoteFiles(space: store.space, root: root).all, [])
+    }
+
     // MARK: - The demo
 
     func testTheDemosRecordCarriesANoteWithAReceiptAndAPhotoInTheDemosLanguage() throws {
@@ -391,6 +498,13 @@ final class ParcelNoteTests: XCTestCase {
                     XCTAssertEqual(notedCard.width, Int(width) * 2, label)
                     XCTAssertGreaterThanOrEqual(notedCard.height, plainCard.height, label)
                     XCTAssertNotEqual(notedCard.pixels, plainCard.pixels, label)
+
+                    // Searched for a word of the note, the card shows the note's few words on one more line, still as
+                    // wide as the list.
+                    let searchedCard = try render(ParcelListCardPicture(parcel: parcel(label: "Birthday gift", note: long), search: "cupboard"),
+                                                  width: width, scheme: scheme, size: size, localizer: localizer, name: "list-card-searched-\(label)")
+                    XCTAssertEqual(searchedCard.width, Int(width) * 2, label)
+                    XCTAssertGreaterThan(searchedCard.height, notedCard.height, label)
                 }
             }
         }
@@ -411,6 +525,12 @@ final class ParcelNoteTests: XCTestCase {
         XCTAssertGreaterThan(wrapped.height, plain.height + plain.height / 2, "the marked name takes two lines")
         let secondLine = inkSpan(wrapped, rows: wrapped.height / 2 + wrapped.height / 8..<wrapped.height)
         XCTAssertGreaterThan(secondLine, inkSpan(mark, rows: 0..<mark.height) * 2, "the last word goes along with the mark")
+
+        // A note with files is marked with a paperclip instead.
+        let clipped = try render(ParcelNoteMark.name("Birthday gift", noted: true, files: true, tint: .black).font(.headline)
+            .foregroundStyle(.black).fixedSize(), width: nil, scheme: .light, size: .large, localizer: localizer, name: "note-mark-files", ground: .white)
+        let noted = try render(name(true).fixedSize(), width: nil, scheme: .light, size: .large, localizer: localizer, name: nil, ground: .white)
+        XCTAssertNotEqual(clipped.pixels, noted.pixels)
     }
 
     /// The note and its files stay on the parcel's page: the widgets' snapshot, Siri's and Shortcuts' answers, a Live

@@ -1126,30 +1126,17 @@ final class ParcelStore: ObservableObject {
     }
 
     /// The photos and PDFs of guest notes kept in the account go after them, one at a time, each leaving this iPhone once
-    /// it arrived. One that fails stays for the next start; only a parcel the account no longer has lets its file go.
+    /// it arrived or once the service says it never will. One the account has no room for waits a day; one that failed
+    /// otherwise, the next start (`LocalNoteFiles.sendKept`).
     @discardableResult
     func sendKeptNoteFiles() async -> Int {
         guard session.user != nil, !sendingKeptNoteFiles else { return 0 }
         sendingKeptNoteFiles = true
         defer { sendingKeptNoteFiles = false }
         let generation = session.generation
-        let files = device.noteFiles
-        var sent = 0
-        for file in files.kept {
-            guard generation == session.generation, let packageID = file.packageID else { return sent }
-            guard let data = files.data(of: file.id) else { files.remove([file.id]); continue }
-            do {
-                _ = try await api.addFile(id: packageID, PreparedNoteFile(data: data, name: file.name, type: file.type,
-                                                                          width: file.width, height: file.height))
-                files.remove([file.id])
-                sent += 1
-            } catch let error as NoteFileError where error.status == 404 {
-                files.remove([file.id])
-            } catch {
-                continue
-            }
+        return await device.noteFiles.sendKept(going: { generation == session.generation }) { packageID, file in
+            _ = try await api.addFile(id: packageID, file)
         }
-        return sent
     }
 
     func changeCarrier(

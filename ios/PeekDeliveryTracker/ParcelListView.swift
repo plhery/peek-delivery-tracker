@@ -456,6 +456,8 @@ private struct DeliveryListView: View {
 
     private func screen(_ layout: DeliveryListLayout, leaving: Set<UUID>) -> some View {
         columns(layout, leaving: leaving)
+        // The reader's own list marks where its search matched: the names, and the notes' words under them.
+        .environment(\.listSearch, query)
         .task(id: query) {
             guard !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
             do { try await Task.sleep(for: .milliseconds(800)) } catch { return }
@@ -1786,6 +1788,7 @@ private struct ExperimentalNextDeliveryPass: View {
 
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.listSearch) private var listSearch
     @Environment(\.marksNewUpdates) private var marksNewUpdates
     @Environment(\.showsPeekAi) private var showsPeekAi
     @State private var appeared = false
@@ -1845,12 +1848,16 @@ private struct ExperimentalNextDeliveryPass: View {
             }
             HStack(alignment: .center, spacing: 16) {
                 let name = parcel.label.nonEmpty ?? localizer.text("common.parcel")
-                ParcelNoteMark.name(name, noted: parcel.hasNote, tint: identity.ink)
-                    .font(.title2.weight(.semibold))
-                    .noteMarkLabel(name, noted: parcel.hasNote, localizer: localizer)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .onGeometryChange(for: CGFloat.self) { $0.frame(in: .named(DeliveryListSpace.name)).midY } action: { onName?($0) }
+                let snippet = parcel.noteMatch(listSearch)
+                VStack(alignment: .leading, spacing: 2) {
+                    ParcelNoteMark.name(of: parcel, name, search: listSearch, tint: identity.ink)
+                        .font(.title2.weight(.semibold))
+                        .noteMarkLabel(name, noted: parcel.hasNote, snippet: snippet, localizer: localizer)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .onGeometryChange(for: CGFloat.self) { $0.frame(in: .named(DeliveryListSpace.name)).midY } action: { onName?($0) }
+                    if let snippet { NoteMatchLine(snippet: snippet) }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 DeliveryPostageStamp(parcel: parcel, identity: identity, appeared: appeared || decorative)
             }
             // Room for the route engraved behind the top of the card.
@@ -1955,6 +1962,7 @@ private struct ExperimentalParcelPassCard: View {
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.dynamicTypeSize) private var typeSize
+    @Environment(\.listSearch) private var listSearch
     @Environment(\.marksNewUpdates) private var marksNewUpdates
     @Environment(\.showsPeekAi) private var showsPeekAi
     @State private var atlas: WorldAtlas?
@@ -2049,11 +2057,13 @@ private struct ExperimentalParcelPassCard: View {
             .padding(.bottom, 3)
             VStack(alignment: .leading, spacing: 5) {
                 let name = parcel.label.nonEmpty ?? localizer.text("common.parcel")
-                ParcelNoteMark.name(name, noted: parcel.hasNote, tint: identity.ink)
+                let snippet = parcel.noteMatch(listSearch)
+                ParcelNoteMark.name(of: parcel, name, search: listSearch, tint: identity.ink)
                     .font(.headline.weight(.semibold))
-                    .noteMarkLabel(name, noted: parcel.hasNote, localizer: localizer)
+                    .noteMarkLabel(name, noted: parcel.hasNote, snippet: snippet, localizer: localizer)
                     .fixedSize(horizontal: false, vertical: true)
                     .onGeometryChange(for: CGFloat.self) { $0.frame(in: .named(DeliveryListSpace.name)).midY } action: { onName?($0) }
+                if let snippet { NoteMatchLine(snippet: snippet).padding(.top, -3) }
                 AutomaticCarrierNotice(parcel: parcel)
                 if let delivering = parcel.deliveringCarrier {
                     Text(localizer.text(parcel.deliveryLineKey, ["carrier": catalog.info(for: delivering, language: localizer.language).displayName]))
@@ -2126,10 +2136,13 @@ private struct ExperimentalParcelPassCard: View {
 /// One card of the list drawn alone, for the tests' pictures.
 struct ParcelListCardPicture: View {
     let parcel: Parcel
+    /// What the list is searching for.
+    var search = ""
     @Namespace private var transition
 
     var body: some View {
         ExperimentalParcelPassCard(parcel: parcel, notice: nil, transition: transition, onOpen: {}, onArchive: nil)
+            .environment(\.listSearch, search)
     }
 }
 #endif
@@ -3119,6 +3132,7 @@ private struct ExperimentalArchivedParcelRow: View {
     let onOpen: () -> Void
 
     @EnvironmentObject private var localizer: Localizer
+    @Environment(\.listSearch) private var listSearch
     @Environment(\.dynamicTypeSize) private var typeSize
     @ObservedObject private var catalog = CarrierCatalog.shared
 
@@ -3139,11 +3153,13 @@ private struct ExperimentalArchivedParcelRow: View {
 
                 VStack(alignment: .leading, spacing: 3) {
                     let name = parcel.label.nonEmpty ?? localizer.text("common.parcel")
-                    ParcelNoteMark.name(name, noted: parcel.hasNote, tint: Brand.secondaryText)
+                    let snippet = parcel.noteMatch(listSearch)
+                    ParcelNoteMark.name(of: parcel, name, search: listSearch, tint: Brand.secondaryText)
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(.primary)
-                        .noteMarkLabel(name, noted: parcel.hasNote, localizer: localizer)
+                        .noteMarkLabel(name, noted: parcel.hasNote, snippet: snippet, localizer: localizer)
                         .lineLimit(large ? nil : 1)
+                    if let snippet { NoteMatchLine(snippet: snippet) }
                     Text("\(catalog.info(for: parcel.activeTrackingCarrier, language: localizer.language).displayName) · \(localizer.parcelStatus(parcel))")
                         .font(.caption)
                         .foregroundStyle(Brand.secondaryText)

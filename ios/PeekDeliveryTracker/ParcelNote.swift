@@ -120,6 +120,109 @@ extension Parcel {
 
     /// The words a note's search matches: its text and its files' names.
     var noteSearchText: String { ([note ?? ""] + (files ?? []).map(\.name)).joined(separator: " ") }
+
+    /// The few words of the note a list search found the parcel by; nil when nothing is searched, or when neither the
+    /// note nor a file's name holds the search.
+    func noteMatch(_ query: String) -> NoteSearch.Snippet? {
+        NoteSearch.snippet(note: note, fileNames: (files ?? []).map(\.name), query: query)
+    }
+}
+
+/// Where a list search matched, so a row of the reader's own list can mark it (the web's `searchMatch.ts`). Places are
+/// counted in characters, which is how a row cuts its text.
+enum NoteSearch {
+    struct Piece: Equatable {
+        let text: String
+        let matched: Bool
+    }
+
+    struct Snippet: Equatable {
+        /// The words around the match, with "…" where the note goes on.
+        let text: String
+        /// Every match within them.
+        let ranges: [Range<Int>]
+    }
+
+    /// How much of a note a row shows around the first match: a few words before it, and one line in all.
+    static let before = 24
+    static let length = 90
+
+    /// The search as the list reads it: trimmed, its spaces one, in lower case. Empty when nothing is searched.
+    static func searched(_ query: String) -> String {
+        query.split(whereSeparator: \.isWhitespace).joined(separator: " ").lowercased()
+    }
+
+    /// Every place `query` stands in `text`, ignoring case, one after the other and none overlapping.
+    static func ranges(in text: String, query: String) -> [Range<Int>] {
+        let wanted = Array(searched(query).unicodeScalars)
+        guard !wanted.isEmpty else { return [] }
+        // Each character in lower case on its own, so a place in the lowered text leads back to a character.
+        var lowered: [Unicode.Scalar] = []
+        var startOf: [Int] = []
+        for character in text {
+            startOf.append(lowered.count)
+            lowered.append(contentsOf: String(character).lowercased().unicodeScalars)
+        }
+        func character(at offset: Int) -> Int { startOf.lastIndex { $0 <= offset } ?? 0 }
+        var ranges: [Range<Int>] = []
+        var at = 0
+        while at + wanted.count <= lowered.count {
+            if lowered[at..<at + wanted.count].elementsEqual(wanted) {
+                ranges.append(character(at: at)..<character(at: at + wanted.count - 1) + 1)
+                at += wanted.count
+            } else {
+                at += 1
+            }
+        }
+        return ranges
+    }
+
+    /// Text cut into its matched and unmatched pieces, in order.
+    static func pieces(_ text: String, _ ranges: [Range<Int>]) -> [Piece] {
+        let characters = Array(text)
+        var pieces: [Piece] = []
+        var at = 0
+        for range in ranges where range.lowerBound >= at && range.upperBound <= characters.count {
+            if range.lowerBound > at { pieces.append(Piece(text: String(characters[at..<range.lowerBound]), matched: false)) }
+            pieces.append(Piece(text: String(characters[range]), matched: true))
+            at = range.upperBound
+        }
+        if at < characters.count { pieces.append(Piece(text: String(characters[at...]), matched: false)) }
+        return pieces
+    }
+
+    /// The few words of a note (its spaces folded), or failing that the name of one of its files, that a search
+    /// matched. Nil when neither holds the search: the row matched by its name, number or carrier.
+    static func snippet(note: String?, fileNames: [String], query: String) -> Snippet? {
+        let flat = (note ?? "").split(whereSeparator: \.isWhitespace).joined(separator: " ")
+        let found = ranges(in: flat, query: query)
+        if !found.isEmpty { return around(flat, found) }
+        for name in fileNames {
+            let named = ranges(in: name, query: query)
+            if !named.isEmpty { return around(name, named) }
+        }
+        return nil
+    }
+
+    /// The window of `text` that starts a few words before the first match and fits a line, cut between words.
+    private static func around(_ text: String, _ ranges: [Range<Int>]) -> Snippet {
+        let characters = Array(text)
+        let first = ranges[0]
+        var start = max(0, first.lowerBound - before)
+        // Start on a whole word: after the first space in the few characters before the match, if there is one.
+        if start > 0, characters[start - 1] != " ", let space = characters[start..<first.lowerBound].firstIndex(of: " ") {
+            start = space + 1
+        }
+        var end = min(characters.count, max(start + length, first.upperBound))
+        // End on a word, never before the first match does.
+        if end < characters.count, let space = characters[first.upperBound..<end].lastIndex(of: " ") { end = space }
+        let shift = start > 0 ? start - 1 : 0
+        let shown = ranges.filter { $0.lowerBound >= start && $0.upperBound <= end }
+            .map { ($0.lowerBound - shift)..<($0.upperBound - shift) }
+        var words = String(characters[start..<end])
+        while words.last?.isWhitespace == true { words.removeLast() }
+        return Snippet(text: (start > 0 ? "…" : "") + words + (end < characters.count ? "…" : ""), ranges: shown)
+    }
 }
 
 extension PackageFile {
@@ -316,6 +419,8 @@ struct LocalNoteFile: Codable, Equatable, Sendable {
     /// The account's parcel it goes to, once the parcel was kept there: it is sent there, and leaves the device once it
     /// arrived.
     var packageID: UUID? = nil
+    /// When the account last had no room for it: it is offered again a day later.
+    var refusedAt: String? = nil
 }
 
 /// The photos and PDFs of the notes kept on this device, in Application Support (never the App Group container,
@@ -424,6 +529,40 @@ final class LocalNoteFiles {
     @discardableResult
     func handOver(_ key: String, to packageID: UUID) -> Int {
         relabel(key) { $0.packageID = packageID }
+    }
+
+    /// How long a file the account had no room for waits before it is offered again.
+    static let refusedWait: TimeInterval = 24 * 60 * 60
+
+    /// Sends the files waiting for an account's parcels, one at a time, while `going` holds. Each leaves the device once
+    /// it arrived, or once the service says it never will: 404, the parcel has gone; 413 or 415, its size or type. One
+    /// the account had no room for (409) waits a day, after a relaunch too; any other failure, the next start. `send`
+    /// throws a `NoteFileError` with the service's status. Returns how many arrived.
+    @MainActor
+    func sendKept(now: Date = Date(), going: () -> Bool = { true },
+                  _ send: (UUID, PreparedNoteFile) async throws -> Void) async -> Int {
+        var sent = 0
+        for file in kept {
+            guard going(), let packageID = file.packageID else { return sent }
+            // Not ten megabytes again at every start for an account that has no room.
+            if let refused = file.refusedAt.flatMap(DateParser.date), now.timeIntervalSince(refused) < Self.refusedWait { continue }
+            guard let data = data(of: file.id) else { remove([file.id]); continue }
+            do {
+                try await send(packageID, PreparedNoteFile(data: data, name: file.name, type: file.type, width: file.width, height: file.height))
+                remove([file.id])
+                sent += 1
+            } catch let error as NoteFileError where [404, 413, 415].contains(error.status) {
+                remove([file.id])
+            } catch let error as NoteFileError where error.status == 409 {
+                if let index = all.firstIndex(where: { $0.id == file.id }) {
+                    all[index].refusedAt = DateParser.isoString(now)
+                    save()
+                }
+            } catch {
+                continue
+            }
+        }
+        return sent
     }
 
     private func relabel(_ key: String, _ change: (inout LocalNoteFile) -> Void) -> Int {

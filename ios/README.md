@@ -76,10 +76,14 @@ seconds; while VoiceOver or Switch Control is on, it stays until another message
 
 A parcel's note is its owner's alone: words, and up to five photos or PDFs, on the parcel's
 page and in its sheet. An account's go to the service; a guest's stay in the app's Application
-Support and go to the account at sign-in; the demo's stay on the device. Files go as soon as
-they are chosen, and a removed file or a deleted note waits for its Undo before it goes. The
-list marks a parcel with a note, and its search reads the note and its files' names. No share,
-gift, widget, Live Activity, notification, Siri answer or menu bar item carries the note.
+Support and go to the account at sign-in. One the service will never take (404, 413, 415)
+leaves the device; one the account has no room for (409) waits a day; any other failure waits
+for the next start. The demo's stay on the device. Files go as soon as they are chosen, and a
+removed file or a deleted note waits for its Undo before it goes. The list marks a parcel with
+a note, with a paperclip once it has files, and its search reads the note and its files' names:
+it underlines the matches in a name in yellow, and a match in the note or a file's name shows
+its few words on one line under the name. No share, gift, widget, Live Activity, notification,
+Siri answer or menu bar item carries the note.
 
 Text or a link dropped on the deliveries or on + opens Add with it, as a paste or the Share
 extension does. A drop with neither a tracking number nor a shop's order number in it is refused.

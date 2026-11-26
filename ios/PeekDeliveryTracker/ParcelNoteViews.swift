@@ -366,22 +366,71 @@ extension Localizer {
 
 // MARK: - The list's mark
 
-/// A parcel's name with a quiet note glyph after its last word when it has a note: held to that word by a no-break
-/// space so it never wraps onto a line alone, and drawn in the name's font so it grows with the text.
+extension EnvironmentValues {
+    /// What the reader's own list is searching for, empty when it isn't. Only the deliveries list sets it: a card
+    /// anywhere else marks nothing and shows no note.
+    @Entry var listSearch = ""
+}
+
+/// A parcel's name with a quiet glyph after its last word when it has a note, a note's for words alone and a paperclip
+/// once it has files: held to that word by a no-break space so it never wraps onto a line alone, and drawn in the name's
+/// font so it grows with the text. While the list searches, the matches in the name are underlined in Peek's yellow.
 enum ParcelNoteMark {
     static let symbol = "doc.plaintext"
+    static let filesSymbol = "paperclip"
 
-    static func name(_ name: String, noted: Bool, tint: Color) -> Text {
-        guard noted else { return Text(verbatim: name) }
-        let mark = Text(Image(systemName: symbol)).fontWeight(.regular).foregroundStyle(tint.opacity(0.55))
-        return Text("\(name)\u{00A0}\(mark)")
+    static func name(_ name: String, noted: Bool, files: Bool = false, tint: Color, ranges: [Range<Int>] = []) -> Text {
+        let shown = marked(name, ranges)
+        guard noted else { return shown }
+        let mark = Text(Image(systemName: files ? filesSymbol : symbol)).fontWeight(.regular).foregroundStyle(tint.opacity(0.55))
+        return Text("\(shown)\u{00A0}\(mark)")
+    }
+
+    /// A row's name in the reader's own list: its mark, and the search's matches in the parcel's own name.
+    static func name(of parcel: Parcel, _ name: String, search: String, tint: Color) -> Text {
+        self.name(name, noted: parcel.hasNote, files: !(parcel.files ?? []).isEmpty, tint: tint,
+                  ranges: NoteSearch.ranges(in: parcel.label, query: search))
+    }
+
+    /// Text with a search's matches underlined in Peek's yellow, in the text's own colour.
+    static func marked(_ text: String, _ ranges: [Range<Int>]) -> Text {
+        guard !ranges.isEmpty else { return Text(verbatim: text) }
+        var result = AttributedString()
+        for piece in NoteSearch.pieces(text, ranges) {
+            var run = AttributedString(piece.text)
+            if piece.matched { run.swiftUI.underlineStyle = Text.LineStyle(pattern: .solid, color: Brand.accent) }
+            result += run
+        }
+        return Text(result)
+    }
+
+    /// What VoiceOver says for a parcel's name: with the note's words a search found, or else ", has a note".
+    @MainActor
+    static func spokenName(_ name: String, noted: Bool, snippet: NoteSearch.Snippet?, localizer: Localizer) -> String {
+        if let snippet { return "\(name), \(localizer.text("note.title")): \(snippet.text)" }
+        return noted ? "\(name), \(localizer.text("note.hasNote"))" : name
+    }
+}
+
+/// The note's words a list search found the parcel by: one quiet line under the name, the matches marked. VoiceOver
+/// hears them with the name (`noteMarkLabel`).
+struct NoteMatchLine: View {
+    let snippet: NoteSearch.Snippet
+
+    var body: some View {
+        ParcelNoteMark.marked(snippet.text, snippet.ranges)
+            .font(.footnote)
+            .foregroundStyle(Brand.secondaryText)
+            .lineLimit(1)
+            .truncationMode(.tail)
+            .accessibilityHidden(true)
     }
 }
 
 extension View {
-    /// What VoiceOver says for a parcel's name: with ", has a note" when it has one.
-    func noteMarkLabel(_ name: String, noted: Bool, localizer: Localizer) -> some View {
-        accessibilityLabel(noted ? "\(name), \(localizer.text("note.hasNote"))" : name)
+    /// What VoiceOver says for a parcel's name: with ", has a note" when it has one, or the note's words a search found.
+    func noteMarkLabel(_ name: String, noted: Bool, snippet: NoteSearch.Snippet? = nil, localizer: Localizer) -> some View {
+        accessibilityLabel(ParcelNoteMark.spokenName(name, noted: noted, snippet: snippet, localizer: localizer))
     }
 }
 

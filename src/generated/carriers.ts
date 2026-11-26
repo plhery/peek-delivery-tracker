@@ -16412,6 +16412,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento PasarEX: códigos AMZPSR, alfândega e suporte",
       "name": "PasarEX",
       "color": "#124381"
+    },
+    {
+      "id": "5post",
+      "catalog": "5post",
+      "slug": "5post-tracking",
+      "title": "Rastreamento 5Post Rússia: códigos, retirada e status",
+      "name": "5Post",
+      "color": "#64b441"
     }
   ],
   "pl": [
@@ -20716,6 +20724,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffce00"
     },
     {
+      "id": "onlog-express",
+      "catalog": "onlog-express",
+      "slug": "onlog-express-tracking",
+      "title": "Onlog Express 巴西快递追踪：AA 单号、状态与圣保罗客服",
+      "name": "Onlog Express",
+      "color": "#1a345d"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "buffalo-ex-nanfei-chaxun",
@@ -20754,6 +20770,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "PasarEX 跨境快递追踪：AMZPSR 亚马逊单号、清关与客服",
       "name": "PasarEX",
       "color": "#124381"
+    },
+    {
+      "id": "5post",
+      "catalog": "5post",
+      "slug": "5post-tracking",
+      "title": "5Post 俄罗斯包裹追踪：单号、Pyaterochka 自提与状态",
+      "name": "5Post",
+      "color": "#64b441"
     }
   ],
   "nl": [

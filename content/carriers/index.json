@@ -288,7 +288,7 @@
   { "id": "skypostal", "catalog": "skypostal", "name": "SkyPostal", "languages": ["en", "fr", "de", "es", "it", "pt", "pl", "pt-br"] },
   { "id": "thailand-post", "catalog": "thailand-post", "name": "Thailand Post", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "yunda", "catalog": "yunda", "name": "Yunda Express", "languages": ["en", "fr", "de", "es", "it", "pt", "pl", "zh"] },
-  { "id": "onlog-express", "catalog": "onlog-express", "name": "Onlog Express", "languages": ["en", "pt-br", "fr", "de", "es", "it", "pt", "pl"] },
+  { "id": "onlog-express", "catalog": "onlog-express", "name": "Onlog Express", "languages": ["en", "pt-br", "fr", "de", "es", "it", "pt", "pl", "zh"] },
   { "id": "a-duie-pyle", "catalog": "a-duie-pyle", "name": "A. Duie Pyle", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "buffalo-ex", "catalog": "buffalo-ex", "name": "BUFFALO", "languages": ["en", "fr", "de", "es", "it", "pt", "pl", "zh", "pt-br"] },
   { "id": "chit-chats", "catalog": "chit-chats", "name": "Chit Chats", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
@@ -305,6 +305,6 @@
   { "id": "spee-dee", "catalog": "spee-dee", "name": "Spee-Dee", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "tnt-au", "catalog": "tnt-au", "name": "TNT Australia", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "wedo", "catalog": "wedo", "name": "One by Allegro CZ", "languages": ["en", "cs", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "5post", "catalog": "5post", "name": "5Post", "languages": ["en", "ru", "fr", "de", "es", "it", "pt", "pl"] },
+  { "id": "5post", "catalog": "5post", "name": "5Post", "languages": ["en", "ru", "fr", "de", "es", "it", "pt", "pl", "zh", "pt-br"] },
   { "id": "shipter", "catalog": "shipter", "name": "Shipter", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] }
 ]

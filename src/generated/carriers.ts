@@ -15062,6 +15062,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee7532"
     },
     {
+      "id": "landmark-global",
+      "catalog": "landmark-global",
+      "slug": "rastreamento-landmark-global",
+      "title": "Rastreamento Landmark Global: status, parceiros e contato",
+      "name": "Landmark Global",
+      "color": "#e62337"
+    },
+    {
       "id": "dhl-ecommerce",
       "catalog": "dhl-ecommerce",
       "slug": "rastreamento-dhl-ecommerce",
@@ -18716,6 +18724,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee7532"
     },
     {
+      "id": "landmark-global",
+      "catalog": "landmark-global",
+      "slug": "landmark-global-wuliu-chaxun",
+      "title": "Landmark Global 物流查询：LTN 单号、状态与派送商",
+      "name": "Landmark Global",
+      "color": "#e62337"
+    },
+    {
       "id": "dhl-ecommerce",
       "catalog": "dhl-ecommerce",
       "slug": "dhl-ecommerce-kuaidi-chaxun",
@@ -19474,6 +19490,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "XYL-Ships（FXYL）物流查询：NUDE与XLWL单号及状态",
       "name": "XYL-Ships",
       "color": "#b13c3c"
+    },
+    {
+      "id": "jadlog",
+      "catalog": "jadlog",
+      "slug": "jadlog-wuliu-chaxun",
+      "title": "Jadlog 物流查询：14 位单号、Pickup、Predict 与状态",
+      "name": "Jadlog",
+      "color": "#dc0032"
     },
     {
       "id": "j-and-t-mx",

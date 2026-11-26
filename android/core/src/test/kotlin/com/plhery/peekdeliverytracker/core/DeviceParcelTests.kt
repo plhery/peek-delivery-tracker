@@ -2126,7 +2126,7 @@ class DeviceParcelTests {
     /** The service's answer to a note's file: the file as it lists it, and its parcel. */
     private fun uploaded(request: HttpRequest): HttpResponse {
         val packageId = UUID.fromString(request.path!!.removePrefix("/api/packages/").removeSuffix("/files"))
-        val name = java.net.URLDecoder.decode(request.headers["X-File-Name"]!!, Charsets.UTF_8)
+        val name = java.net.URLDecoder.decode(request.headers["X-File-Name"]!!, "UTF-8")
         val file = PackageFile(
             id = UUID.randomUUID(), name = name, contentType = PackageFileType.fromRawValue(request.headers["Content-Type"]!!)!!,
             size = request.body!!.size, createdAt = "2026-11-20T10:00:00Z", url = "/api/files/x", expiresAt = "2026-11-20T10:30:00Z",

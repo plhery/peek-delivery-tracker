@@ -464,7 +464,7 @@ class DeliveryApiClient(
         val path = "/api/packages/${id.uuidString}/files"
         val headers = mapOf(
             "Content-Type" to upload.type.rawValue,
-            "X-File-Name" to java.net.URLEncoder.encode(upload.name, Charsets.UTF_8).replace("+", "%20"),
+            "X-File-Name" to java.net.URLEncoder.encode(upload.name, "UTF-8").replace("+", "%20"),
         )
         val response = try {
             rawRequest(path, "POST", upload.bytes, missing = 404, headers = headers, timeout = UPLOAD_TIMEOUT)

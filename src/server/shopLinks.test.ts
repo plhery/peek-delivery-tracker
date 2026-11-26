@@ -19,7 +19,8 @@ describe('shop tracking-page links in a text', () => {
     });
     expect(asked).toHaveLength(2);
     expect(reading.numbers.map(({ normalized, match }) => `${normalized} ${match.carrier} ${match.confidence}`)).toEqual([`${DHL} dhl high`]);
-    expect(reading.unresolved).toEqual([{ platform: 'parcellab', shop: 'shop', reason: 'no_tracking_yet' }]);
+    // The link stays in memory, for a wait to keep.
+    expect(reading.unresolved).toEqual([{ platform: 'parcellab', shop: 'shop', reason: 'no_tracking_yet', link: { platform: 'parcellab', shop: 'shop', url: 'https://shop.delivery-status.com/?orderNo=2&s=x' } }]);
     await expect(shopLinkNumbers('no link here', async () => { throw new Error('not asked'); })).resolves.toEqual({ numbers: [], unresolved: [] });
     // A platform that fails is no answer, and the text's own numbers stay.
     await expect(shopLinkNumbers(ORDER, async () => { throw new TypeError('fetch failed'); }))

@@ -69,6 +69,8 @@ import { MaintenanceStrip } from './components/MaintenanceStrip';
 import { onKeepOutcome, type KeepOutcome } from './peek/pending';
 import type { CarrierId, ParcelWithEvents } from './types';
 import { usePassportNews } from './components/passport/news';
+import { ShopWaitCards } from './components/shopLink/ShopWaitCards';
+import { useShopWaits } from './components/shopLink/useShopWaits';
 import { NewStampLine } from './components/passport/NewStampLine';
 
 const DETAIL_HISTORY_KEY = 'parcelPostDetail';
@@ -144,6 +146,7 @@ export default function App({
     resetDemoData,
   } = useParcels();
   // What the passport earned that this device has not shown: a line on the delivered card and a dot on the tab.
+  const shopWaits = useShopWaits(mode, apiAuth, () => void refresh());
   const passportNews = usePassportNews(parcels, mode === 'api' && apiAuth ? apiAuth.userId : 'guest', loading);
   // What was shared to the installed app, handed to the add sheet it opens.
   const [shared, setShared] = useState<SharedParcel | null>(null);
@@ -658,7 +661,7 @@ export default function App({
           </div>
         )}
 
-        {!loading && !error && !down && parcels.length === 0 && (
+        {!loading && !error && !down && parcels.length === 0 && !shopWaits.waits.length && (
           <div className="empty-state">
             <ParcelIllustration className="empty-state__parcel" />
             <p className="empty-state__eyebrow">{t('app.emptyEyebrow')}</p>
@@ -697,6 +700,7 @@ export default function App({
           </section>
         )}
         {!loading && onTheWayCards}
+        {!loading && <ShopWaitCards waits={shopWaits.waits} onRemove={(id) => void shopWaits.remove(id)} />}
         {!loading && !error && allArrived && (
           <div className="delivery-arrived">
             <Icon name="check" />

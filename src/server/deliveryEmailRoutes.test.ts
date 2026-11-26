@@ -8,6 +8,7 @@ import contract from '../../contracts/openapi.json';
 import { SupabaseAuthenticator, type SupabaseUser } from './auth';
 import { unsubscribeToken } from './email/unsubscribe';
 import * as observability from './observability';
+import * as shopWaits from './shopWaits';
 import { SupabaseError, SupabaseServiceClient, SupabaseUserClient } from './supabase';
 
 // Synthetic identifiers only.
@@ -482,6 +483,7 @@ describe('the account export', () => {
     vi.spyOn(SupabaseServiceClient.prototype, 'inboundMailbox').mockResolvedValue(null);
     vi.spyOn(SupabaseServiceClient.prototype, 'assistantGrants').mockResolvedValue([]);
     vi.spyOn(SupabaseServiceClient.prototype, 'twinNumbers').mockResolvedValue([]);
+    vi.spyOn(shopWaits, 'accountShopWaits').mockResolvedValue([]);
     const response = await exportAccount(authenticated('https://delivery.example/api/account/export'), none);
     expect(response.status).toBe(200);
     const exported = await response.json();
@@ -507,6 +509,7 @@ describe('the account export', () => {
     vi.spyOn(SupabaseServiceClient.prototype, 'inboundMailbox').mockResolvedValue(null);
     vi.spyOn(SupabaseServiceClient.prototype, 'assistantGrants').mockResolvedValue([]);
     vi.spyOn(SupabaseServiceClient.prototype, 'twinNumbers').mockResolvedValue([]);
+    vi.spyOn(shopWaits, 'accountShopWaits').mockResolvedValue([]);
     const exported = await (await exportAccount(authenticated('https://delivery.example/api/account/export'), none)).json();
     expect(exported.deliveryEmails).toEqual({ enabled: null, sent: [] });
     expect(exported.account.lastOpenedAt).toBeNull();

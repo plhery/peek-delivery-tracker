@@ -53,6 +53,7 @@ data class AccountExportResponse(
     val addByEmail: AddByEmail? = null,
     val assistants: List<AssistantConnection>? = null,
     val twinNumbers: List<TwinNumbers>? = null,
+    val shopWaits: List<ShopWait>? = null,
 )
 
 @Serializable
@@ -5449,6 +5450,82 @@ data class InstallSighting(
 )
 
 @Serializable
+data class ShopWait(
+    val id: UUID,
+    val platform: ShopPlatform,
+    @SerialName("platform_name") val platformName: String,
+    @SerialName("shop_name") val shopName: String? = null,
+    val label: String,
+    @SerialName("created_at") val createdAt: String,
+    @SerialName("expires_at") val expiresAt: String,
+    @SerialName("expired_at") val expiredAt: String? = null,
+)
+
+@Serializable
+enum class ShopPlatform(val rawValue: String) {
+    @SerialName("parcellab") Parcellab("parcellab"),
+    ;
+
+    companion object {
+        fun fromRawValue(rawValue: String): ShopPlatform? = entries.firstOrNull { it.rawValue == rawValue }
+    }
+}
+
+@Serializable
+enum class ShopLinkFailure(val rawValue: String) {
+    @SerialName("not_found") NotFound("not_found"),
+    @SerialName("no_tracking_yet") NoTrackingYet("no_tracking_yet"),
+    @SerialName("refused") Refused("refused"),
+    @SerialName("rate_limited") RateLimited("rate_limited"),
+    @SerialName("unavailable") Unavailable("unavailable"),
+    @SerialName("unsupported") Unsupported("unsupported"),
+    ;
+
+    companion object {
+        fun fromRawValue(rawValue: String): ShopLinkFailure? = entries.firstOrNull { it.rawValue == rawValue }
+    }
+}
+
+@Serializable
+data class ShopLinkParcel(
+    @SerialName("tracking_number") val trackingNumber: String,
+    val carrier: String,
+    val confidence: ShopLinkParcelConfidence,
+)
+
+@Serializable
+data class UnresolvedShopLink(
+    val platform: ShopPlatform,
+    @SerialName("platform_name") val platformName: String,
+    @SerialName("shop_name") val shopName: String? = null,
+    val reason: ShopLinkFailure,
+    val waitable: Boolean,
+)
+
+@Serializable
+data class ShopLinkRequest(
+    val text: String,
+)
+
+@Serializable
+data class ShopLinkResponse(
+    val links: Int,
+    val parcels: List<ShopLinkParcel>,
+    val unresolved: List<UnresolvedShopLink>,
+)
+
+@Serializable
+data class ShopWaitRequest(
+    val text: String,
+    val label: String? = null,
+)
+
+@Serializable
+data class ShopWaitsResponse(
+    @SerialName("shop_waits") val shopWaits: List<ShopWait>,
+)
+
+@Serializable
 enum class CarrierDetectionResponseAmazonShippingStatus(val rawValue: String) {
     @SerialName("available") Available("available"),
     @SerialName("expired") Expired("expired"),
@@ -5718,6 +5795,19 @@ enum class InstallSightingPlatform(val rawValue: String) {
 
     companion object {
         fun fromRawValue(rawValue: String): InstallSightingPlatform? = entries.firstOrNull { it.rawValue == rawValue }
+    }
+}
+
+@Serializable
+enum class ShopLinkParcelConfidence(val rawValue: String) {
+    @SerialName("high") High("high"),
+    @SerialName("medium") Medium("medium"),
+    @SerialName("low") Low("low"),
+    @SerialName("none") None("none"),
+    ;
+
+    companion object {
+        fun fromRawValue(rawValue: String): ShopLinkParcelConfidence? = entries.firstOrNull { it.rawValue == rawValue }
     }
 }
 

@@ -70442,6 +70442,7 @@ export interface ApiAccountExportResponse {
   "addByEmail"?: ApiAddByEmail | null;
   "assistants"?: Array<ApiAssistantConnection>;
   "twinNumbers"?: Array<ApiTwinNumbers>;
+  "shopWaits"?: Array<ApiShopWait>;
 }
 
 export interface ApiDeleteAccountRequest {
@@ -73452,4 +73453,52 @@ export interface ApiInstallSighting {
   "platform": "web" | "pwa" | "iphone" | "ipad" | "mac" | "android";
   "signedIn": boolean;
   "parcels": number;
+}
+
+export interface ApiShopWait {
+  "id": string;
+  "platform": ApiShopPlatform;
+  "platform_name": string;
+  "shop_name": string | null;
+  "label": string;
+  "created_at": string;
+  "expires_at": string;
+  "expired_at": string | null;
+}
+
+export type ApiShopPlatform = "parcellab";
+
+export type ApiShopLinkFailure = "not_found" | "no_tracking_yet" | "refused" | "rate_limited" | "unavailable" | "unsupported";
+
+export interface ApiShopLinkParcel {
+  "tracking_number": string;
+  "carrier": string;
+  "confidence": "high" | "medium" | "low" | "none";
+}
+
+export interface ApiUnresolvedShopLink {
+  "platform": ApiShopPlatform;
+  "platform_name": string;
+  "shop_name": string | null;
+  "reason": ApiShopLinkFailure;
+  "waitable": boolean;
+}
+
+export interface ApiShopLinkRequest {
+  "text": string;
+}
+
+export interface ApiShopLinkResponse {
+  "links": number;
+  "parcels": Array<ApiShopLinkParcel>;
+  "unresolved": Array<ApiUnresolvedShopLink>;
+}
+
+export interface ApiShopWaitRequest {
+  "text": string;
+  "label"?: string;
+}
+
+export interface ApiShopWaitsResponse {
+  "shop_waits": Array<ApiShopWait>;
 }

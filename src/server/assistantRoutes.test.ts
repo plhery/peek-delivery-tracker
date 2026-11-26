@@ -663,7 +663,7 @@ describe('the MCP endpoint', () => {
     const writer = connect(['parcels:write']);
     const answer = await call(writer, 'add_parcels', { text: `Shipped with UPS: ${UPS}`, name: '  Example Shop ' });
     // A text an assistant sends may be a number alone, or name one whose carrier Peek can't tell, as the Add sheet takes a typed one.
-    expect(addParcelsFromText).toHaveBeenCalledExactlyOnceWith(expect.any(SupabaseServiceClient), userId, `Shipped with UPS: ${UPS}`, 'Example Shop', [], { trust: 'sent' });
+    expect(addParcelsFromText).toHaveBeenCalledExactlyOnceWith(expect.any(SupabaseServiceClient), userId, `Shipped with UPS: ${UPS}`, 'Example Shop', [], { trust: 'sent', onWaiting: expect.any(Function) });
     expect(answer.result!.content![0]!.text).not.toContain('looking for the carrier');
     expect(answer.result!.structuredContent).toEqual({
       parcels: [
@@ -760,7 +760,7 @@ describe('the MCP endpoint', () => {
     ]);
     const writer = connect(['parcels:write']);
     const answer = await call(writer, 'add_parcels', { text: 'SYNTHETIC7', name: 'Sofa', carrier: 'jp-home' });
-    expect(addParcelsFromText).toHaveBeenCalledExactlyOnceWith(expect.any(SupabaseServiceClient), userId, 'SYNTHETIC7', 'Sofa', ['jp-home'], { trust: 'named' });
+    expect(addParcelsFromText).toHaveBeenCalledExactlyOnceWith(expect.any(SupabaseServiceClient), userId, 'SYNTHETIC7', 'Sofa', ['jp-home'], { trust: 'named', onWaiting: expect.any(Function) });
     expect(answer.result!.structuredContent).toEqual({
       parcels: [{ trackingNumber: 'SYNTHETIC7', carrier: 'JP HOME', outcome: 'added', id: '7d000000-0000-4000-a000-0000000000ab' }],
     });
@@ -772,7 +772,23 @@ describe('the MCP endpoint', () => {
     expect(found).toMatchObject({ total: 1, carriers: [{ id: 'jp-home', name: 'JP HOME', alsoCalled: 'VIR Transport' }] });
     // An empty carrier is none given.
     await call(writer, 'add_parcels', { text: 'SYNTHETIC7', carrier: ' ' });
-    expect(addParcelsFromText).toHaveBeenLastCalledWith(expect.any(SupabaseServiceClient), userId, 'SYNTHETIC7', '', [], { trust: 'sent' });
+    expect(addParcelsFromText).toHaveBeenLastCalledWith(expect.any(SupabaseServiceClient), userId, 'SYNTHETIC7', '', [], { trust: 'sent', onWaiting: expect.any(Function) });
+  });
+
+  it('says Peek waits for a shop whose tracking page names no parcel yet', async () => {
+    vi.mocked(addParcelsFromText).mockImplementation(async (_service, _user, _text, _label, _carriers, options) => {
+      options?.onWaiting?.([{
+        id: '7d000000-0000-4000-a000-0000000000ae', platform: 'parcellab', platform_name: 'parcelLab', shop_name: 'H&M',
+        label: 'Coat', created_at: '2026-11-26T00:00:00.000Z', expires_at: '2026-12-10T00:00:00.000Z', expired_at: null,
+      }]);
+      return [];
+    });
+    const answer = (await call(connect(['parcels:write']), 'add_parcels', { text: 'https://hm.delivery-status.com/?orderNo=x', name: 'Coat' })).result!;
+    const waiting = [{ shop: 'H&M', via: 'parcelLab', until: '2026-12-10T00:00:00.000Z' }];
+    expect(answer.structuredContent).toEqual({ parcels: [], waiting });
+    expect(answer.isError).toBeFalsy();
+    expect(answer.content![0]!.text).toMatch(/^H&M: the shop's tracking page names no parcel yet/);
+    expect(JSON.stringify(answer)).not.toContain('orderNo');
   });
 
   it('adds a number whose carrier Peek can\'t tell, and says it is looking for the carrier', async () => {

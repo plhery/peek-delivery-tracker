@@ -32,3 +32,4 @@ import './components/note/NoteMark.css';
 import './components/SearchMark.css';
 import './components/note/ParcelNote.css';
 import './components/passport/passport.css';
+import './components/shopLink/shopWaits.css';

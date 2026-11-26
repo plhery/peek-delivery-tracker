@@ -14,6 +14,7 @@ import * as background from './background';
 import * as inboundMail from './inboundEmail/mail';
 import { mailResult } from './inboundEmail/receive';
 import * as monitoring from './observability';
+import * as shopWaits from './shopWaits';
 import { addParcelsFromText, trackingNumbersInText, type ParcelAddition } from './parcelsFromText';
 import { SupabaseError, SupabaseServiceClient, SupabaseUserClient, type InboundMailbox } from './supabase';
 
@@ -105,6 +106,7 @@ describe('the account\'s forwarding address', () => {
   it('goes into the account export as the address, without the token alone', async () => {
     vi.spyOn(SupabaseServiceClient.prototype, 'assistantGrants').mockResolvedValue([]);
     vi.spyOn(SupabaseServiceClient.prototype, 'twinNumbers').mockResolvedValue([]);
+    vi.spyOn(shopWaits, 'accountShopWaits').mockResolvedValue([]);
     vi.spyOn(SupabaseServiceClient.prototype, 'inboundMailbox').mockResolvedValue(mailbox);
     vi.spyOn(SupabaseServiceClient.prototype, 'accountLastOpened').mockResolvedValue(null);
     vi.spyOn(SupabaseUserClient.prototype, 'request').mockResolvedValue({ profile: null, ownCard: null, friends: [] });
@@ -119,6 +121,7 @@ describe('the account\'s forwarding address', () => {
     const twins = [{ packageId: '5b000000-0000-4000-a000-000000000002', earlier: 'LP00000000000001', later: 'JJD000390000000001', createdAt: '2026-11-24T13:10:00+00:00' }];
     vi.spyOn(SupabaseServiceClient.prototype, 'assistantGrants').mockResolvedValue([]);
     const read = vi.spyOn(SupabaseServiceClient.prototype, 'twinNumbers').mockResolvedValue(twins);
+    vi.spyOn(shopWaits, 'accountShopWaits').mockResolvedValue([]);
     vi.spyOn(SupabaseServiceClient.prototype, 'inboundMailbox').mockResolvedValue(mailbox);
     vi.spyOn(SupabaseServiceClient.prototype, 'accountLastOpened').mockResolvedValue(null);
     vi.spyOn(SupabaseUserClient.prototype, 'request').mockResolvedValue({ profile: null, ownCard: null, friends: [] });

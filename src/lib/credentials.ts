@@ -27,6 +27,18 @@ const CAPABILITY_ID = /^(\/(?:p|i)|\/api\/public\/parcels)\/[^/?#]+/;
 /** Peek's paths whose query is a capability: an unsubscribe token, an invite's preview. */
 const CAPABILITY_QUERY = /^\/(?:api\/email\/unsubscribe|api\/friends\/invite-image|invite)(?:\/|$)/;
 
+/**
+ * A shop's tracking page, which opens on the reader's name and address: parcelLab's `<shop>.delivery-status.com` and
+ * its portal. Its whole path and query are a capability.
+ */
+const SHOP_PAGE = /^[a-z][a-z\d+.-]*:\/\/(?:[^@/?#]*@)?(?:[a-z\d-]+\.)*(?:delivery-status\.com|parcellab\.com)(?::\d+)?$/i;
+
+/** Whether an address is a shop's tracking page (`SHOP_PAGE`), whose path and query are filtered whole. */
+export function shopPageAddress(address: string): boolean {
+  const origin = /^[a-z][a-z\d+.-]*:\/\/[^/?#]*/i.exec(address.trim())?.[0];
+  return !!origin && SHOP_PAGE.test(origin);
+}
+
 /** Whether every query value on the path is a capability. */
 export function capabilityQuery(path: string): boolean {
   return CAPABILITY_QUERY.test(path);
@@ -54,6 +66,9 @@ export function scrubAddress(address: string): string {
   const located = hash < 0 ? address : address.slice(0, hash);
   const origin = /^[a-z][a-z\d+.-]*:\/\/[^/?#]*/i.exec(located)?.[0] ?? '';
   const rest = located.slice(origin.length);
+  if (origin && SHOP_PAGE.test(origin)) {
+    return origin.replace(/\/\/[^@/]*@/, '//') + (rest.replace(/^\/$/, '') || hash >= 0 ? `/${FILTERED}` : '');
+  }
   const question = rest.indexOf('?');
   const path = question < 0 ? rest : rest.slice(0, question);
   return origin.replace(/\/\/[^@/]*@/, '//') + path.replace(CAPABILITY_ID, '$1/:id')

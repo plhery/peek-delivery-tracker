@@ -74169,6 +74169,187 @@
           }
         }
       }
+    },
+    "/api/shop-links": {
+      "post": {
+        "operationId": "readShopLink",
+        "description": "Reads the parcels a shop's tracking-page link names (parcelLab's `<shop>.delivery-status.com`, as H&M's \"Follow package\"), asking the shop's platform anonymously. Nothing of the page but the numbers and carriers is kept or answered. Without sign-in, use `/api/public/shop-links`.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShopLinkRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "What the links name",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShopLinkResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "401": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "429": {
+            "$ref": "#/components/responses/ApiError"
+          }
+        }
+      }
+    },
+    "/api/public/shop-links": {
+      "post": {
+        "operationId": "readPublicShopLink",
+        "security": [],
+        "description": "`/api/shop-links` for a visitor who is not signed in, with a smaller allowance per network.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShopLinkRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "What the links name",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShopLinkResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "415": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "429": {
+            "$ref": "#/components/responses/ApiError"
+          }
+        }
+      }
+    },
+    "/api/shop-waits": {
+      "get": {
+        "operationId": "listShopWaits",
+        "description": "The account's waits for shops to ship: open ones, and for 30 days those that ran out.",
+        "responses": {
+          "200": {
+            "description": "The waits",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShopWaitsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "502": {
+            "$ref": "#/components/responses/ApiError"
+          }
+        }
+      },
+      "post": {
+        "operationId": "keepShopWaits",
+        "description": "Waits for the parcels of the text's shop links (at most 3), for up to 14 days, named `label`. A link the account waits for already keeps its wait. An account holds 20 open waits at most. Answers the waits for the text's links: none when the text holds no shop link, or the account's waits are full.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShopWaitRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The text's waits",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShopWaitsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "401": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "429": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "502": {
+            "$ref": "#/components/responses/ApiError"
+          }
+        }
+      }
+    },
+    "/api/shop-waits/{shopWaitId}": {
+      "parameters": [
+        {
+          "name": "shopWaitId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "delete": {
+        "operationId": "deleteShopWait",
+        "description": "Stops waiting, and forgets the wait with its link.",
+        "responses": {
+          "200": {
+            "description": "Wait removed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OkResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "401": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "404": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "502": {
+            "$ref": "#/components/responses/ApiError"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -74452,6 +74633,13 @@
               "$ref": "#/components/schemas/TwinNumbers"
             },
             "description": "Pairs of numbers an email named for one package, kept with the account's parcel, oldest first."
+          },
+          "shopWaits": {
+            "type": "array",
+            "description": "The shops the account waits for to ship, without their links, which stay on the server.",
+            "items": {
+              "$ref": "#/components/schemas/ShopWait"
+            }
           }
         }
       },
@@ -80662,6 +80850,219 @@
             "minimum": 0,
             "maximum": 100000,
             "description": "The parcels it follows without an account."
+          }
+        }
+      },
+      "ShopWait": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "A shop's tracking-page link that names no parcel yet, as before the shop ships, which Peek waits for: it asks the shop's platform again every few hours until `expires_at`, then adds the parcels it names under `label` and the wait goes. The link itself never leaves the server.",
+        "required": [
+          "id",
+          "platform",
+          "platform_name",
+          "shop_name",
+          "label",
+          "created_at",
+          "expires_at",
+          "expired_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "platform": {
+            "$ref": "#/components/schemas/ShopPlatform"
+          },
+          "platform_name": {
+            "type": "string",
+            "description": "The platform's name as it writes it, such as \"parcelLab\"."
+          },
+          "shop_name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The shop, as its tracking page's address names it, such as \"H&M\"; null when the address names none."
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 80,
+            "description": "The name the parcels take, empty for none."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When Peek stops asking: 14 days after the wait began."
+          },
+          "expired_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "description": "When Peek stopped asking without a parcel; null while it waits."
+          }
+        }
+      },
+      "ShopPlatform": {
+        "type": "string",
+        "enum": [
+          "parcellab"
+        ],
+        "description": "The platform that runs a shop's tracking page."
+      },
+      "ShopLinkFailure": {
+        "type": "string",
+        "enum": [
+          "not_found",
+          "no_tracking_yet",
+          "refused",
+          "rate_limited",
+          "unavailable",
+          "unsupported"
+        ],
+        "description": "Why a shop link named no parcel: the platform holds no such order yet or no longer shows it (`not_found`), the order has no tracking number yet (`no_tracking_yet`), the platform refused or limited the request (`refused`, `rate_limited`), did not answer readably (`unavailable`), or the link is of a form Peek cannot read (`unsupported`)."
+      },
+      "ShopLinkParcel": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "tracking_number",
+          "carrier",
+          "confidence"
+        ],
+        "properties": {
+          "tracking_number": {
+            "type": "string"
+          },
+          "carrier": {
+            "type": "string",
+            "description": "A carrier id of the catalog, `unknown` when the platform named none Peek knows."
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low",
+              "none"
+            ]
+          }
+        }
+      },
+      "UnresolvedShopLink": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "platform",
+          "platform_name",
+          "shop_name",
+          "reason",
+          "waitable"
+        ],
+        "properties": {
+          "platform": {
+            "$ref": "#/components/schemas/ShopPlatform"
+          },
+          "platform_name": {
+            "type": "string"
+          },
+          "shop_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "reason": {
+            "$ref": "#/components/schemas/ShopLinkFailure"
+          },
+          "waitable": {
+            "type": "boolean",
+            "description": "Whether Peek can wait for the link's parcels (`POST /api/shop-waits`): every reason but `unsupported`."
+          }
+        }
+      },
+      "ShopLinkRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "text"
+        ],
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000,
+            "description": "Text holding a shop's tracking-page link, as pasted or shared."
+          }
+        }
+      },
+      "ShopLinkResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "links",
+          "parcels",
+          "unresolved"
+        ],
+        "properties": {
+          "links": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "How many shop links the text holds (at most 3 are read)."
+          },
+          "parcels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopLinkParcel"
+            }
+          },
+          "unresolved": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UnresolvedShopLink"
+            }
+          }
+        }
+      },
+      "ShopWaitRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "text"
+        ],
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000,
+            "description": "Text holding the shop's tracking-page link."
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 80,
+            "description": "The name the parcels take."
+          }
+        }
+      },
+      "ShopWaitsResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "shop_waits"
+        ],
+        "properties": {
+          "shop_waits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopWait"
+            }
           }
         }
       }

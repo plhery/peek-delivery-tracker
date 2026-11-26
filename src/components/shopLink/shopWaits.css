@@ -1,0 +1,12 @@
+/* A parcel a shop hasn't shipped yet: a card drawn with a dashed edge on the list's canvas, as a parcel still to come. */
+.shop-waits { margin-top: 12px; }
+.parcel-card.shop-wait { min-height: 0; box-shadow: none; background: transparent; border: 1.5px dashed var(--line); cursor: default; }
+.shop-wait__mark { display: inline-flex; align-items: center; gap: 6px; min-width: 0; font-size: 12px; font-weight: 600; color: var(--ink-soft); overflow-wrap: anywhere; }
+.shop-wait__mark svg { width: 16px; height: 16px; flex: none; }
+.shop-wait__state { display: inline-flex; align-items: center; gap: 5px; color: var(--ink); }
+.shop-wait__state svg { width: 14px; height: 14px; flex: none; color: var(--ink-soft); }
+.shop-wait__actions { display: flex; justify-content: flex-end; margin-top: 2px; }
+.shop-wait__action { padding: 6px 10px; margin: -6px -10px; border: 0; border-radius: 10px; font: inherit; font-size: 13px; font-weight: 600; color: var(--green); background: none; cursor: pointer; }
+.shop-wait__action:hover { background: var(--control); }
+.shop-wait__action:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+.shop-wait--expired .shop-wait__state { color: var(--ink-soft); }

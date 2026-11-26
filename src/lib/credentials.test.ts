@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { credentialName, scrubQueryString, withoutCredentials } from './credentials';
+import { credentialName, scrubAddress, scrubQueryString, shopPageAddress, withoutCredentials } from './credentials';
 
 describe('access values', () => {
   it('are named after a key, a token, a password, a session, a signature or a cookie', () => {
@@ -22,5 +22,17 @@ describe('access values', () => {
     expect(scrubQueryString('?number=TEST1&token=x', '/api/parcels')).toBe('number=TEST1&token=[Filtered]');
     expect(scrubQueryString([['number', 'TEST1'], ['api_key', 'x']], '/api/parcels')).toEqual([['number', 'TEST1'], ['api_key', '[Filtered]']]);
     expect(scrubQueryString({ t: 'x' }, '/api/email/unsubscribe')).toEqual({ t: '[Filtered]' });
+  });
+
+  it('leave out the whole path and query of a shop\'s tracking page, which opens the reader\'s order', () => {
+    // Made-up order keys.
+    const link = 'https://hm.delivery-status.com/pl/?orderNo=9900000000001&s=0000aaaa1111bbbb2222cccc3333dddd';
+    expect(scrubAddress(link)).toBe('https://hm.delivery-status.com/[Filtered]');
+    expect(withoutCredentials(`{"text":"Follow package ${link}"}`)).toBe('{"text":"Follow package https://hm.delivery-status.com/[Filtered]"}');
+    expect(scrubAddress('https://api.parcellab.com/v2/checkpoints/?orderNo=1&user=2&s=3')).toBe('https://api.parcellab.com/[Filtered]');
+    expect(scrubAddress('https://hm.delivery-status.com/')).toBe('https://hm.delivery-status.com');
+    expect(shopPageAddress(link)).toBe(true);
+    expect(shopPageAddress('https://delivery-status.com.example.test/?orderNo=1')).toBe(false);
+    expect(scrubAddress('https://delivery-status.com.example.test/?orderNo=1')).toBe('https://delivery-status.com.example.test/?orderNo=1');
   });
 });

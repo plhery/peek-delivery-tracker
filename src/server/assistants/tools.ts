@@ -5,7 +5,7 @@ import { DateTime, IANAZone } from 'luxon';
 import { z } from 'zod';
 import en from '../../../shared/locales/en.json';
 import type {
-  ApiPackageRow, ApiPeekAi, ApiTokenParcel, ApiTokenParcelSort, ApiTokenParcelStatus, ApiTokenParcelsResponse, ApiTokenPeekAi,
+  ApiPackageRow, ApiPeekAi, ApiShopWait, ApiTokenParcel, ApiTokenParcelSort, ApiTokenParcelStatus, ApiTokenParcelsResponse, ApiTokenPeekAi,
 } from '../../generated/apiContract';
 import { searchCarriers, shapeCarrier } from '../../lib/carrierPicker';
 import { tagLocale } from '../../lib/locale';
@@ -517,7 +517,8 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
       + 'name, nothing else. A number the user already follows is left as it is. At most 10 numbers a call. A number '
       + 'the text labels as a tracking number, or one sent alone as the text, is added even when Peek can\'t tell its '
       + 'carrier, which it then looks for; when you know the carrier, as when a shop\'s tracking page names it, give '
-      + 'its id from find_carriers. '
+      + 'its id from find_carriers. A shop\'s tracking-page link, such as H&M\'s "Follow package", is read for the '
+      + 'parcels it names; when it names none yet, as before the shop ships, Peek waits for them. '
       + AMAZON_LINE,
     inputSchema: z.object({
       text: z.string().min(1).max(MOST_TEXT_LENGTH).describe('Text holding one or more tracking numbers'),
@@ -533,10 +534,19 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
     const carrier = named?.trim() ?? '';
     if (carrier && !VALID_CARRIER_IDS.has(carrier)) return refusal(NO_CARRIER);
     const label = name?.trim() ?? '';
+    const waits: ApiShopWait[] = [];
+    const onWaiting = (kept: ApiShopWait[]) => { waits.push(...kept); };
     const additions = carrier
-      ? await addParcelsFromText(service, caller.userId, text, label, [carrier as CarrierId], { trust: 'named' })
-      : await addParcelsFromText(service, caller.userId, text, label, [], { trust: 'sent' });
+      ? await addParcelsFromText(service, caller.userId, text, label, [carrier as CarrierId], { trust: 'named', onWaiting })
+      : await addParcelsFromText(service, caller.userId, text, label, [], { trust: 'sent', onWaiting });
     await announce(service, caller, additions);
+    if (!additions.length && waits.length) {
+      const waiting = waits.map((wait) => ({ shop: wait.shop_name, via: wait.platform_name, until: wait.expires_at }));
+      const shops = [...new Set(waits.map((wait) => wait.shop_name ?? 'The shop'))].join(', ');
+      return answer({ parcels: [], waiting }, `${shops}: the shop's tracking page names no parcel yet, as before it ships. `
+        + 'Peek waits for it in the user\'s deliveries, asks again every few hours for up to 14 days, and adds the parcel '
+        + `once a carrier and number appear.\n\n${JSON.stringify({ parcels: [], waiting })}`);
+    }
     if (!additions.length) {
       const link = await amazonGuideLink();
       const amazon = ABOUT_AMAZON.test(text)

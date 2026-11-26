@@ -54,6 +54,7 @@ struct AccountExportResponse: Codable, Equatable, Hashable, Sendable {
     var addByEmail: AddByEmail? = nil
     var assistants: [AssistantConnection]? = nil
     var twinNumbers: [TwinNumbers]? = nil
+    var shopWaits: [ShopWait]? = nil
 }
 
 struct DeleteAccountRequest: Codable, Equatable, Hashable, Sendable {
@@ -5553,6 +5554,67 @@ struct InstallSighting: Codable, Equatable, Hashable, Sendable, Identifiable {
     var parcels: Int
 }
 
+struct ShopWait: Codable, Equatable, Hashable, Sendable, Identifiable {
+    var id: UUID
+    var platform: ShopPlatform
+    var platformName: String
+    var shopName: String? = nil
+    var label: String
+    var createdAt: String
+    var expiresAt: String
+    var expiredAt: String? = nil
+}
+
+enum ShopPlatform: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
+    case parcellab
+
+    var id: String { rawValue }
+}
+
+enum ShopLinkFailure: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
+    case notFound = "not_found"
+    case noTrackingYet = "no_tracking_yet"
+    case refused
+    case rateLimited = "rate_limited"
+    case unavailable
+    case unsupported
+
+    var id: String { rawValue }
+}
+
+struct ShopLinkParcel: Codable, Equatable, Hashable, Sendable {
+    var trackingNumber: String
+    var carrier: String
+    var confidence: ShopLinkParcelConfidence
+}
+
+struct UnresolvedShopLink: Codable, Equatable, Hashable, Sendable {
+    var platform: ShopPlatform
+    var platformName: String
+    var shopName: String? = nil
+    var reason: ShopLinkFailure
+    var waitable: Bool
+}
+
+struct ShopLinkRequest: Codable, Equatable, Hashable, Sendable {
+    var text: String
+}
+
+struct ShopLinkResponse: Codable, Equatable, Hashable, Sendable {
+    var links: Int
+    var parcels: [ShopLinkParcel]
+    var unresolved: [UnresolvedShopLink]
+}
+
+struct ShopWaitRequest: Codable, Equatable, Hashable, Sendable {
+    var text: String
+    var label: String? = nil
+}
+
+struct ShopWaitsResponse: Codable, Equatable, Hashable, Sendable {
+    var shopWaits: [ShopWait]
+}
+
 enum CarrierDetectionResponseAmazonShippingStatus: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
     case available
     case expired
@@ -5783,6 +5845,15 @@ enum InstallSightingPlatform: String, Codable, CaseIterable, Hashable, Sendable,
     case ipad
     case mac
     case android
+
+    var id: String { rawValue }
+}
+
+enum ShopLinkParcelConfidence: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
+    case high
+    case medium
+    case low
+    case none
 
     var id: String { rawValue }
 }

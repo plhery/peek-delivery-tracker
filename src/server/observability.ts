@@ -7,7 +7,7 @@ import { sourceUrl } from './siteSettings';
 import { carrierErrorReason } from './trackingFailure';
 import { healthMessage, healthReviewSignal } from './trackingHealth';
 import { isRecord, type JsonObject } from './types';
-import { scrubAddress, scrubQuery, scrubQueryString, scrubValue, withoutCredentials } from '../lib/credentials';
+import { scrubAddress, scrubQuery, scrubQueryString, scrubValue, shopPageAddress, withoutCredentials } from '../lib/credentials';
 import { UpstreamHttpError, type UpstreamHttpDiagnostics } from 'universal-parcel-scraper/node';
 
 /**
@@ -314,8 +314,10 @@ function readableBody(request: NonNullable<ErrorEvent['request']>, path: string)
  * message holds the line.
  */
 export function scrubSentryBreadcrumb(breadcrumb: Breadcrumb): Breadcrumb {
+  // A shop's tracking page's query opens the reader's order: none of it stays.
+  const shopPage = typeof breadcrumb.data?.url === 'string' && shopPageAddress(breadcrumb.data.url);
   const data = breadcrumb.data && Object.fromEntries(Object.entries(breadcrumb.data)
-    .filter(([key]) => !['arguments', 'http.fragment'].includes(key))
+    .filter(([key]) => !['arguments', 'http.fragment'].includes(key) && !(shopPage && key === 'http.query'))
     .map(([key, value]) => [key, key === 'http.query' && typeof value === 'string'
       ? `?${scrubQuery(value.replace(/^\?/, ''))}` : scrubValue(value)]));
   return { ...breadcrumb, ...(breadcrumb.message ? { message: withoutCredentials(breadcrumb.message) } : {}), ...(data ? { data } : {}) };

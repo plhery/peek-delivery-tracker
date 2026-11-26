@@ -4,6 +4,7 @@ import { isAmazonTrackingNumber } from '../lib/amazon';
 import {
   carrierNumberInText, fromCarrier, labelledNumbersInText, nonTrackingShape, numberAlone, numbersInText, type NumberInText, type TextTrust,
 } from '../peek/lookup/reading';
+import type { ApiShopWait } from '../generated/apiContract';
 import type { CarrierId } from '../types';
 import { claimAccountTracking } from './accountTrackingBudget';
 import { verifyAmazonShippingAddition } from './amazonShippingEligibility';
@@ -14,6 +15,7 @@ import { captureOperationalError } from './observability';
 import { reviewDemoCarrier, reviewDemoNumbersInText } from './reviewDemo';
 import { settleTypedSupportCases } from './reviewQueues';
 import { shopLinkNumbers, withShopLinkNumbers } from './shopLinks';
+import { keepShopWaits, waitableLinks } from './shopWaits';
 import { SupabaseError, type SupabaseServiceClient } from './supabase';
 import { newPackageValues } from './validation';
 
@@ -141,6 +143,11 @@ export interface AddingOptions {
    * number finds it later, and two parcels the account follows under them merge (`package_twin_numbers`).
    */
   twins?: boolean;
+  /**
+   * Called with the waits kept for the text's shop links that name no parcel yet (shopWaits.ts), which the account
+   * then waits for. A text's links wait only when `addNew` holds.
+   */
+  onWaiting?: (waits: ApiShopWait[]) => void;
 }
 
 /**
@@ -263,7 +270,8 @@ export async function addNumbersToAccount(
  * Reads a text's tracking numbers and adds them to the account (addNumbersToAccount), named `label`. `carriers`
  * are those the text's writer is, for a carrier's own email (trackingNumbersInText). In a review demo account the
  * text's demo numbers come first (reviewDemo.ts). A shop's tracking-page link adds the parcels its platform names
- * (shopLinkNumbers), after the text's own numbers.
+ * (shopLinkNumbers), after the text's own numbers; one that names none yet, as before the shop ships, is kept as a wait
+ * for its parcels when the text adds no parcel of its own (keepShopWaits).
  */
 export async function addParcelsFromText(
   service: SupabaseServiceClient,
@@ -276,7 +284,17 @@ export async function addParcelsFromText(
   const demos = reviewDemoNumbersInText(userId, text.slice(0, MOST_TEXT_LENGTH));
   const named = new Set(demos.map(({ normalized }) => normalized));
   const read = trackingNumbersInText(text, carriers, options.trust).filter(({ normalized }) => !named.has(normalized));
-  const linked = (await shopLinkNumbers(text.slice(0, MOST_TEXT_LENGTH))).numbers.filter(({ normalized }) => !named.has(normalized));
+  const links = await shopLinkNumbers(text.slice(0, MOST_TEXT_LENGTH));
+  const linked = links.numbers.filter(({ normalized }) => !named.has(normalized));
   const numbers = [...demos, ...withShopLinkNumbers(read, linked)].slice(0, MOST_NUMBERS_PER_TEXT);
+  // A link that names no parcel yet waits, unless the text names the parcel itself.
+  const waiting = options.addNew !== false && !numbers.length ? waitableLinks(links.unresolved) : [];
+  if (waiting.length) {
+    try {
+      options.onWaiting?.(await keepShopWaits(service, userId, waiting, label));
+    } catch (error) {
+      captureOperationalError(error, { component: 'shop_links', operation: 'keep_wait' });
+    }
+  }
   return numbers.length ? addNumbersToAccount(service, userId, numbers, label, options) : [];
 }

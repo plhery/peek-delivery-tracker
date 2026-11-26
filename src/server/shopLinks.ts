@@ -1,8 +1,8 @@
 import 'server-only';
 
 import {
-  normalizeTrackingNumber, resolveShopTrackingLink, shopTrackingLinks, type ShopLinkFailure, type ShopLinkResolution,
-  type ShopTrackingLink,
+  normalizeTrackingNumber, resolveShopTrackingLink, shopTrackingLinks, type ShopLinkFailure, type ShopLinkParcel,
+  type ShopLinkResolution, type ShopTrackingLink,
 } from 'universal-parcel-scraper';
 import type { NumberInText } from '../peek/lookup/reading';
 import { captureOperationalError } from './observability';
@@ -12,11 +12,15 @@ export const MOST_SHOP_LINKS = 3;
 /** The time all of one text's links take, resolved side by side. */
 const RESOLVE_MS = 8_000;
 
-/** A shop link that named no parcel, and why. Only its platform and shop: the link holds a key to the order. */
+/**
+ * A shop link that named no parcel, and why. `link` opens a page with the reader's name and address: it stays in
+ * memory, for a wait to keep in its owner's row (shopWaits.ts), and is never logged, reported or answered.
+ */
 export interface UnresolvedShopLink {
   platform: string | null;
   shop: string | null;
   reason: ShopLinkFailure;
+  link: ShopTrackingLink;
 }
 
 export interface ShopLinkReading {
@@ -24,7 +28,7 @@ export interface ShopLinkReading {
   unresolved: UnresolvedShopLink[];
 }
 
-type Resolver = (link: ShopTrackingLink, options: { signal?: AbortSignal; timeoutMs: number }) => Promise<ShopLinkResolution>;
+export type Resolver = (link: ShopTrackingLink, options: { signal?: AbortSignal; timeoutMs: number }) => Promise<ShopLinkResolution>;
 
 /**
  * The parcels a text's shop tracking-page links name (parcelLab's `delivery-status.com`, as H&M's "Follow package"),
@@ -34,31 +38,38 @@ type Resolver = (link: ShopTrackingLink, options: { signal?: AbortSignal; timeou
 export async function shopLinkNumbers(text: string, resolve: Resolver = resolveShopTrackingLink): Promise<ShopLinkReading> {
   const links = shopTrackingLinks(text).slice(0, MOST_SHOP_LINKS);
   if (!links.length) return { numbers: [], unresolved: [] };
-  const resolutions = await Promise.all(links.map(async (link): Promise<ShopLinkResolution> => {
-    try {
-      return await resolve(link, { timeoutMs: RESOLVE_MS });
-    } catch (error) {
-      captureOperationalError(error, { component: 'shop_links', operation: `resolve_${link.platform}` });
-      return { platform: link.platform, ...(link.shop ? { shop: link.shop } : {}), status: 'unresolved', reason: 'unavailable' };
-    }
-  }));
-  const numbers = new Map<string, NumberInText>();
+  const resolutions = await Promise.all(links.map((link) => resolveSafely(link, resolve)));
+  const numbers: ShopLinkParcel[] = [];
   const unresolved: UnresolvedShopLink[] = [];
-  for (const resolution of resolutions) {
-    if (resolution.status === 'unresolved') {
-      unresolved.push({ platform: resolution.platform ?? null, shop: resolution.shop ?? null, reason: resolution.reason });
-      continue;
-    }
-    for (const parcel of resolution.parcels) {
-      const normalized = normalizeTrackingNumber(parcel.trackingNumber);
-      if (!normalized || numbers.has(normalized)) continue;
-      numbers.set(normalized, { normalized, match: {
-        trackingNumber: parcel.trackingNumber, carrier: parcel.carrier, confidence: parcel.confidence,
-        candidates: parcel.carrier === 'unknown' ? [] : [parcel.carrier], preferred: [], source: 'link',
-      } });
-    }
+  resolutions.forEach((resolution, index) => {
+    if (resolution.status === 'resolved') numbers.push(...resolution.parcels);
+    else unresolved.push({ platform: resolution.platform ?? null, shop: resolution.shop ?? null, reason: resolution.reason, link: links[index] });
+  });
+  return { numbers: parcelNumbers(numbers), unresolved };
+}
+
+/** What one link names, a failure of the resolver itself read as the platform being unavailable. */
+export async function resolveSafely(link: ShopTrackingLink, resolve: Resolver = resolveShopTrackingLink): Promise<ShopLinkResolution> {
+  try {
+    return await resolve(link, { timeoutMs: RESOLVE_MS });
+  } catch (error) {
+    captureOperationalError(error, { component: 'shop_links', operation: `resolve_${link.platform}` });
+    return { platform: link.platform, ...(link.shop ? { shop: link.shop } : {}), status: 'unresolved', reason: 'unavailable' };
   }
-  return { numbers: [...numbers.values()], unresolved };
+}
+
+/** The numbers a shop's platform named, each once, as a text's numbers are read. */
+export function parcelNumbers(parcels: readonly ShopLinkParcel[]): NumberInText[] {
+  const numbers = new Map<string, NumberInText>();
+  for (const parcel of parcels) {
+    const normalized = normalizeTrackingNumber(parcel.trackingNumber);
+    if (!normalized || numbers.has(normalized)) continue;
+    numbers.set(normalized, { normalized, match: {
+      trackingNumber: parcel.trackingNumber, carrier: parcel.carrier, confidence: parcel.confidence,
+      candidates: parcel.carrier === 'unknown' ? [] : [parcel.carrier], preferred: [], source: 'link',
+    } });
+  }
+  return [...numbers.values()];
 }
 
 /**

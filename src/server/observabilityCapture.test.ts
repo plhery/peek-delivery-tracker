@@ -357,6 +357,20 @@ it('names a parcel by its number and keeps whole addresses in reports and breadc
     'http.query': '?number=TEST9012&api_key=[Filtered]', status_code: 404 });
 });
 
+it('keeps nothing of a shop tracking page\'s address but its host, in a breadcrumb or a body', async () => {
+  vi.stubEnv('SENTRY_DSN', 'https://public@example.test/1');
+  expect(initObservability()).toBe(true);
+  // Made-up order keys.
+  Sentry.addBreadcrumb({ category: 'http', type: 'http', data: { url: 'https://api.parcellab.com/v2/checkpoints/',
+    'http.method': 'GET', 'http.query': 'orderNo=9900000000001&user=1&s=0000aaaa', status_code: 404 } });
+  const id = captureOperationalError(new Error('Shop link failed'), { component: 'shop_links', operation: 'resolve_parcellab' });
+  await flushObservability();
+  const report = captured.events.find((event) => event.event_id === id)!;
+  const call = report.breadcrumbs?.find((crumb) => crumb.category === 'http' && String(crumb.data?.url).includes('parcellab'));
+  expect(call!.data).toEqual({ url: 'https://api.parcellab.com/[Filtered]', 'http.method': 'GET', status_code: 404 });
+  expect(JSON.stringify(report.breadcrumbs)).not.toContain('9900000000001');
+});
+
 it('opens one issue for a database that does not answer, whichever write found it, and one per write for a refusal', async () => {
   vi.stubEnv('SENTRY_DSN', 'https://public@example.test/1');
   expect(initObservability()).toBe(true);

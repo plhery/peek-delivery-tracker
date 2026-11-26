@@ -10,6 +10,7 @@ import { SupabaseAuthenticator } from './auth';
 import * as friends from './friends';
 import * as observability from './observability';
 import { fileAddressExpiry, signedFileAddress } from './parcelNotes';
+import * as shopWaits from './shopWaits';
 import { SupabaseError, SupabaseServiceClient, SupabaseUserClient } from './supabase';
 import type { JsonObject } from './types';
 
@@ -364,6 +365,7 @@ describe('the account export', () => {
     vi.spyOn(SupabaseServiceClient.prototype, 'assistantGrants').mockResolvedValue([]);
     vi.spyOn(SupabaseServiceClient.prototype, 'accountLastOpened').mockResolvedValue(null);
     vi.spyOn(SupabaseServiceClient.prototype, 'twinNumbers').mockResolvedValue([]);
+    vi.spyOn(shopWaits, 'accountShopWaits').mockResolvedValue([]);
     const response = await exportAccount(authorized('/api/account/export', { method: 'GET' }), { params: Promise.resolve({}) });
     expect(response.status).toBe(200);
     const exported = await response.json();

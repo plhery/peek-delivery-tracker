@@ -23,6 +23,7 @@ import { AssistantAddedPushService, AssistantAddedPushWorker } from './assistant
 import { FriendshipPushService, FriendshipPushWorker } from './friendshipPush';
 import { ReviewQueueReplay } from './reviewQueues';
 import { serviceClient } from './runtime';
+import { startShopWaits, stopShopWaits } from './shopWaits';
 import { BACKGROUND_SYNC_PRIORITY, SyncJobLeaseLost, type SupabaseServiceClient } from './supabase';
 import { WorkerShutdown, type SyncReason, type SyncTrigger } from './trackingAudit';
 import { TrackingSyncService, type SyncSummary } from './trackingSync';
@@ -779,6 +780,8 @@ export function startBackgroundServices(): BackgroundRuntime | null {
   emailAddedWorker.start();
   assistantAddedWorker.start();
   reviews.start();
+  // A shop's link that named no parcel yet is asked again every few minutes' run (shopWaits.ts).
+  startShopWaits(client);
   logOperationalEvent('background_services_started', {
     sync_enabled: true,
     reader_lane: readerWorkers.length > 0,
@@ -815,5 +818,6 @@ export async function drainBackgroundServices(): Promise<void> {
   runtime.friendshipWorker.stop();
   runtime.emailAddedWorker.stop();
   runtime.reviews.stop();
+  stopShopWaits();
   await Promise.all([runtime.worker.drain(), ...runtime.readerWorkers.map((reader) => reader.drain())]);
 }

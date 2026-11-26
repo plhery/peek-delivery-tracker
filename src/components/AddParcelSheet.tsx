@@ -46,6 +46,8 @@ import { lookupCarrier } from '../lib/carrierDetection';
 import { useNumberRefusal } from '../lib/numberRefusal';
 import type { ApiAuth } from '../lib/apiClient';
 import type { ApiCarrierDetectionResponse } from '../generated/apiContract';
+import { ShopLinkNotice } from './shopLink/ShopLinkNotice';
+import { useShopLinkReading } from './shopLink/useShopLinkReading';
 
 /** Scroll only the sheet's field list, never the page under the fixed sheet. */
 function revealFocusedField(list: HTMLElement | null) {
@@ -180,8 +182,16 @@ export function AddParcelSheet({
   // Half-typed input is not a mistake: the notice and the carrier picker wait
   // for a pause or a paste, then stay put while editing continues.
   const settledTrackingNumber = parseTrackingInput(settledTrackingInput).trackingNumber;
+  // A shop's tracking-page link names its parcel through the shop's platform, or says it hasn't shipped yet.
+  const shopLink = useShopLinkReading(settledTrackingInput, Boolean(settledTrackingNumber), apiAuth, (number, carrier) => {
+    setTrackingInputValue(number);
+    setSettledTrackingInput(number);
+    setRecognitionNumber(normalizeTrackingNumber(number));
+    if (carrier) setSelectedCarrier(carrier);
+  });
+  const waitForShop = shopLink.canWait && !trackingNumber;
   const trackingNotFound = Boolean(trackingInputValue.trim() && !trackingNumber
-    && settledTrackingInput.trim() && !settledTrackingNumber);
+    && settledTrackingInput.trim() && !settledTrackingNumber) && !shopLink.applies;
   const normalizedNumber = normalizeTrackingNumber(trackingNumber);
   const amazonNumber = isAmazonTrackingNumber(normalizedNumber);
   // Amazon numbers must be verified before they can be added; a placeholder is asked about nowhere.
@@ -387,6 +397,20 @@ export function AddParcelSheet({
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    if (waitForShop) {
+      if (saving) return;
+      setSaving(true);
+      setError(null);
+      try {
+        await shopLink.wait(label.trim());
+        if (mounted.current) onClose();
+      } catch (err) {
+        if (mounted.current) setError(userErrorMessage(err, t));
+      } finally {
+        if (mounted.current) setSaving(false);
+      }
+      return;
+    }
     if (accountRequired || pickupCode || placeholder || !trackingNumber.trim() || lookingUp || requiresCarrierConfirmation || !requirementsSatisfied || saving) return;
     setSaving(true);
     setError(null);
@@ -505,6 +529,7 @@ export function AddParcelSheet({
                   <p role="status">{t('add.notFound')}</p>
                 </div>
               )}
+              {!trackingNumber && <ShopLinkNotice reading={shopLink.reading} signedIn={Boolean(apiAuth)} />}
               {pickupNotice && (
                 <div className="add-parcel-notice">
                   <p role="status"><strong>{t('add.pickupCode.title')}</strong><br />{t('add.pickupCode.body')}</p>
@@ -707,14 +732,16 @@ export function AddParcelSheet({
             <button
               type="submit"
               className="button button--primary"
-              disabled={
+              disabled={waitForShop ? saving : (
                 !trackingNumber
                 || accountRequired || pickupCode || placeholder || lookingUp || requiresCarrierConfirmation
                 || !requirementsSatisfied
                 || saving
-              }
+              )}
             >
-              {saving ? t('add.adding') : t('app.addParcel')}
+              {waitForShop
+                ? (shopLink.shop ? t('shopLink.wait', { shop: shopLink.shop }) : t('shopLink.wait.unnamed'))
+                : saving ? t('add.adding') : t('app.addParcel')}
             </button>
           </div>
         </form>

@@ -16222,6 +16222,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0d237d"
     },
     {
+      "id": "gofo-es",
+      "catalog": "gofo-es",
+      "slug": "gofo-spain-tracking",
+      "title": "Rastreamento GOFO Espanha: códigos GFES e CIES e suporte",
+      "name": "GOFO Spain",
+      "color": "#fc4c02"
+    },
+    {
+      "id": "korea-post",
+      "catalog": "korea-post",
+      "slug": "korea-post-tracking",
+      "title": "Rastreamento Korea Post: códigos EMS KR, 13 dígitos e ajuda",
+      "name": "Korea Post",
+      "color": "#da291c"
+    },
+    {
       "id": "estafeta",
       "catalog": "estafeta",
       "slug": "estafeta-tracking",
@@ -20410,6 +20426,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "印度 DTDC 物流查询：AWB 单号格式、RTO 退件与客服联系",
       "name": "DTDC",
       "color": "#0d237d"
+    },
+    {
+      "id": "gofo-es",
+      "catalog": "gofo-es",
+      "slug": "gofo-spain-tracking",
+      "title": "GOFO Spain 快递追踪：GFES 与 CIES 单号、三次派送与客服",
+      "name": "GOFO Spain",
+      "color": "#fc4c02"
+    },
+    {
+      "id": "korea-post",
+      "catalog": "korea-post",
+      "slug": "korea-post-tracking",
+      "title": "Korea Post 韩国邮政追踪：EMS KR 单号、13 位包裹与客服",
+      "name": "Korea Post",
+      "color": "#da291c"
     },
     {
       "id": "estafeta",

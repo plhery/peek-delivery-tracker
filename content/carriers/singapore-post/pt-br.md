@@ -21,7 +21,7 @@ Um código terminado em outras letras, como `DE`, vem do correio de outro país.
 
 ## Status de rastreamento da Singapore Post explicados
 
-O rastreador da SingPost mostra a leitura mais recente primeiro, com data, hora e às vezes um local. Estes são os textos que o Peek reconhece, aproximadamente na ordem em que costumam surgir:
+O rastreador da SingPost mostra a leitura mais recente primeiro, com data, hora e às vezes um local. Estes são os textos que o Peek reconhece, aproximadamente na ordem em que a encomenda passa por eles:
 
 | A SingPost diz | O que significa para você |
 | --- | --- |
@@ -46,19 +46,19 @@ Qualquer outra linha aparece no Peek exatamente como a SingPost a redige. Quando
 
 ## Encomendas da Singapore Post para a Europa: quem entrega e alfândega
 
-Depois de `Despatched to overseas`, o correio do país de destino assume: a SingPost afirma que esse correio responde pela entrega e que nem todo correio rastreia correspondência internacional em tempo real. Pesquise no site dele com o mesmo código `SG`. Tentativas de entrega e retirada seguem então as regras do seu correio: veja [entrega perdida](guide:missed-delivery).
+Depois de `Despatched to overseas`, o correio do país de destino assume: a SingPost afirma que esse correio responde pela entrega e que nem todo correio rastreia correspondência internacional em tempo real. Pesquise no site dele com o mesmo código `SG`. Tentativas de entrega e retirada seguem então as regras do seu correio: veja [entrega não realizada](guide:missed-delivery).
 
 **Alfândega na UE.** Singapura fica fora da União Europeia, então o pacote passa pela alfândega no seu país. Desde 1º de julho de 2026, compras online vindas de fora da UE em pedidos de até €150 pagam imposto aduaneiro da UE de €3 por item, além do IVA. Desde 1º de novembro de 2026, aplica-se também uma taxa de manuseio da União de €2 por item, qualquer que seja o valor do pedido. Um item corresponde às mercadorias de um pacote que compartilham classificação tarifária, descrição e, quando exigido, origem.
 
-**Pago antes de sair de Singapura.** Desde 1º de novembro de 2026, segundo a SingPost, remessas comerciais enviadas de Singapura para Alemanha, Áustria, Bélgica, Chipre, Dinamarca, Eslováquia, Espanha, Estônia, Finlândia, França, Itália, Luxemburgo, Malta, Países Baixos, Portugal e Suécia seguem na modalidade Delivered Duty Paid: o remetente paga impostos, IVA e taxa de manuseio calculados no registro, sem cobrança tributária na entrega. Para os outros 11 países da UE — incluindo Irlanda e Polônia — o registro e o desembaraço da SingPost seguem por ora como antes.
+**Pago antes de sair de Singapura.** Desde 1º de novembro de 2026, segundo a SingPost, remessas comerciais enviadas de Singapura para Alemanha, Áustria, Bélgica, Chipre, Dinamarca, Eslováquia, Espanha, Estônia, Finlândia, França, Itália, Luxemburgo, Malta, Países Baixos, Portugal e Suécia seguem na modalidade Delivered Duty Paid: o remetente paga os impostos aduaneiros, o IVA e a taxa de manuseio, calculados no registro, então não deve haver cobrança de impostos na sua porta. Para os outros 11 países da UE — incluindo Irlanda e Polônia — o registro e o desembaraço da SingPost seguem por ora como antes.
 
 Fora da UE, valem as regras do seu país. Veja mais em [encomendas retidas na alfândega](guide:customs).
 
 ## Recebendo uma encomenda SingPost em Singapura
 
-**Caixa de correio ou porta.** Itens pequenos que cabem vão para a caixa de correio. Volumes maiores, correspondência registrada (Registered Service) e Speedpost com assinatura vão à sua porta. Se não couber ou ninguém atender, você recebe um cartão Delivery Notification Card.
+**Caixa de correio ou porta.** Itens pequenos que cabem vão para a caixa de correio. Volumes maiores, correspondência registrada (Registered Service) e Speedpost com assinatura vão à sua porta. Se não couber ou não houver ninguém em casa, você recebe um cartão Delivery Notification Card.
 
-**Entrega perdida.** A SingPost costuma tentar de novo, normalmente no dia útil seguinte, ou encaminhar o objeto a uma agência próxima. Não dá para escolher data nem redirecionar, mas você pode ligar para 1605 e autorizar deixar na porta. Após 3 tentativas sem sucesso, o pacote volta ao remetente.
+**Entrega não realizada.** A SingPost costuma tentar de novo, normalmente no dia útil seguinte, ou encaminhar o objeto a uma agência próxima. Não dá para escolher data nem redirecionar, mas você pode ligar para 1605 e autorizar deixar na porta. Após 3 entregas não realizadas, o pacote volta ao remetente.
 
 **Retirada.** Com o cartão de aviso, o objeto aguarda na agência indicada por 10 dias úteis. Leve o cartão preenchido e seu NRIC; para enviar outra pessoa, preencha os dados dela no cartão. Uma encomenda em POPStation gera SMS e e-mail com código de retirada: você tem 3 dias corridos e, depois disso, a SingPost faz até mais duas tentativas antes de devolver. Veja [encomendas não retiradas](guide:uncollected-parcel).
 
@@ -70,11 +70,11 @@ Fora da UE, valem as regras do seu país. Veja mais em [encomendas retidas na al
 
 **Sem novidades depois de sair de Singapura.** Após `Despatched to overseas`, acompanhe no correio de destino com o mesmo código e dê tempo para a alfândega. Saiba mais em [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
-**Extraviada ou danificada.** Abra reclamação no formulário online da SingPost em até 30 dias da data de envio, informando código de rastreamento, dados de remetente e destinatário, descrição e valor do item. A SingPost indeniza até o valor declarado, limitado a S$150 no Speedpost International e S$68 no Speedpost Saver International. Em compras online, avise a loja também: veja [encomendas extraviadas](guide:lost-parcel).
+**Extraviada ou danificada.** Faça o pedido de indenização pelo formulário online da SingPost em até 30 dias da data de envio, informando código de rastreamento, dados de remetente e destinatário, descrição e valor do item. A SingPost indeniza até o valor declarado, limitado a S$150 no Speedpost International e S$68 no Speedpost Saver International. Em compras online, avise a loja também: veja [encomendas extraviadas](guide:lost-parcel).
 
 **Marcada como entregue, mas não chegou.** Em Singapura, confira a caixa de correio e o compartimento técnico (riser) fora da sua unidade, pergunte aos moradores e contate a SingPost, que pode enviar comprovante de entrega em serviços assinados. Na Europa, a entrega foi feita pelo correio do seu país, então comece pelo rastreamento dele: veja [encomenda marcada como entregue mas não recebida](guide:delivered-not-received).
 
-**Devolvida.** O pacote volta após 3 tentativas sem sucesso, 10 dias úteis sem retirada ou 14 dias sem pagamento de GST ou imposto. Veja [encomenda devolvida ao remetente](guide:returned-to-sender).
+**Devolvida.** O pacote volta após 3 entregas não realizadas, 10 dias úteis sem retirada ou 14 dias sem pagamento de GST ou imposto. Veja [encomenda devolvida ao remetente](guide:returned-to-sender).
 
 ## Atendimento ao cliente e telefone da Singapore Post
 
@@ -126,7 +126,7 @@ Não. A SingPost só fornece código para serviços rastreados como smartpac, Re
 :::sources
 - [Singapore Post: Track Your Item](https://www.singpost.com/track-items) – rastreador, ordem das leituras, motivos, mensagem sem resultado
 - [Singapore Post: Tracking & Receiving Your Items](https://www.singpost.com/support/managing-deliveries/tracking-receiving-your-items) – códigos, serviços rastreados, rastreamento no exterior, entrega, retirada
-- [Singapore Post: Problems with Delivery](https://www.singpost.com/support/managing-deliveries/problems-delivery) – reclamações, limites, comprovante de entrega
+- [Singapore Post: Problems with Delivery](https://www.singpost.com/support/managing-deliveries/problems-delivery) – pedidos de indenização, limites, comprovante de entrega
 - [Singapore Post: Collection Points](https://www.singpost.com/support/managing-deliveries/collection-points) – regras do POPStation
 - [Singapore Post: Customs Clearance & GST Payments](https://www.singpost.com/support/managing-deliveries/customs-clearance-gst-payments) – GST e impostos, taxas, isenção, golpes
 - [Singapore Post: Help & Support](https://www.singpost.com/support) – telefones e horários

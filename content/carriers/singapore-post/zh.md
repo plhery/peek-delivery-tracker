@@ -10,7 +10,7 @@ updated: 2026-11-26
 
 ## 新加坡邮政运单号长什么样
 
-SingPost 国际单号为 13 位，采用[国际邮政格式](guide:tracking-number-formats)（英文）：两位字母、九位数字加 `SG`，九位数字的末位为校验位。以下数字为虚构：
+SingPost 单号为 13 位，采用[国际邮政格式](guide:tracking-number-formats)（英文）：两位字母、九位数字加 `SG`，九位数字的末位为校验位。以下数字为虚构：
 
 | 格式（虚构） | 含义 |
 | --- | --- |
@@ -46,9 +46,9 @@ SingPost 查询系统按时间倒序列出扫描记录，附带日期、时间�
 
 ## 寄往欧洲的新加坡邮政包裹：末端派送与清关
 
-出现 `Despatched to overseas` 后，由目的国邮政接手：SingPost 表示最终派送由目的国邮政负责，且并非每个国家邮政都实时更新国际邮件动态。请用同一 `SG` 单号查询本国邮政。派送尝试与自提规则均适用当地邮政规定：参见[错过派送](guide:missed-delivery)（英文）。
+出现 `Despatched to overseas` 后，由目的国邮政接手：SingPost 表示最终派送由目的国邮政负责，且并非每个国家邮政都实时更新国际邮件动态。请用同一 `SG` 单号查询本国邮政。派送尝试与自提规则均适用当地邮政规定：参见[派送未成功](guide:missed-delivery)（英文）。
 
-**欧盟清关。** 新加坡位于欧盟以外，因此包裹须经目的国海关查验。自 2026 年 7 月 1 日起，从欧盟以外网购、订单金额不超过 150 欧元的商品，除增值税外每项（item）征收 3 欧元欧盟关税；自 2026 年 11 月 1 日起，无论金额大小，每项另收 2 欧元欧盟处理费。所谓“一项”是指同一包裹中税则归类、货品描述及必要时原产地相同的商品。
+**欧盟清关。** 新加坡位于欧盟以外，因此包裹须在你所在国家清关。自 2026 年 7 月 1 日起，从欧盟以外网购、订单金额不超过 150 欧元的商品，除增值税外每项（item）征收 3 欧元欧盟关税；自 2026 年 11 月 1 日起，无论金额大小，每项另收 2 欧元欧盟处理费。所谓“一项”是指同一包裹中税则归类、货品描述及必要时原产地相同的商品。
 
 **离开新加坡前已预缴税费。** SingPost 说明，自 2026 年 11 月 1 日起，其从新加坡发往奥地利、比利时、塞浦路斯、丹麦、爱沙尼亚、芬兰、法国、德国、意大利、卢森堡、马耳他、荷兰、葡萄牙、斯洛伐克、西班牙和瑞典的商业货件采用完税后交货（Delivered Duty Paid）：寄件人在下单时已算清并缴付关税、增值税和处理费，因此上门时不应再向收件人催税。对于爱尔兰和波兰等其余 11 个欧盟国家，SingPost 暂维持原有下单与清关流程。
 
@@ -56,9 +56,9 @@ SingPost 查询系统按时间倒序列出扫描记录，附带日期、时间�
 
 ## 在新加坡接收 SingPost 包裹
 
-**信箱或上门。** 能放进信箱的小件直接投递入信箱；较大包裹、挂号邮件（Registered Service）和需要签收的 Speedpost 会送货上门。放不进信箱或无人签收时，会留下派送通知单（Delivery Notification Card）。
+**信箱或上门。** 能放进信箱的小件直接投递入信箱；较大包裹、挂号邮件（Registered Service）和需要签收的 Speedpost 会送货上门。放不进信箱或家中无人时，会留下派送通知单（Delivery Notification Card）。
 
-**无人签收。** SingPost 通常会在次工作日再次尝试派送，或将邮件转存附近邮局。无法指定日期或改址，但可致电 1605 授权放在门前。三次派送失败后退回寄件人。
+**派送未成功。** SingPost 常会再次尝试派送（一般在次工作日），或将邮件转存附近邮局。无法指定日期或改址，但可致电 1605 授权放在门前。三次派送失败后退回寄件人。
 
 **自提。** 凭通知单可在单上所列邮局领取，保管期 10 个工作日，需带填好的通知单和 NRIC 证件；委托他人代领须在通知单上填写代领人信息。POPStation 快递柜包裹会通过短信和邮件发送取件码，保管 3 个自然日，逾期 SingPost 会再尝试最多两次派送，仍未成功则退回。参见[未领取的包裹](guide:uncollected-parcel)（英文）。
 
@@ -89,23 +89,23 @@ SingPost 官方渠道：
 
 对于两位字母、九位数字加 `SG` 且校验位正确的单号，[Peek](/) 会立刻识别为新加坡邮政并显示“识别出的快递公司”；点“更换”可改选其他公司。校验位不对时会提示“这个单号的校验位对不上。”：请对照发货信息，或选择“按输入的单号跟踪”。带 `tracknumber=` 或 `trackingid=` 的 SingPost 查询链接同样可用。
 
-`CNSGS` 单号仅凭形态不足以确定属于新加坡邮政，因此 Peek 会先查询：“正在查询物流服务…”，SingPost 查到后显示“Singapore Post 有这个包裹的记录。”；尚未查到时添加后仍会继续查询，并显示“等待 Singapore Post 的首次扫描”。
+`CNSGS` 单号仅凭形态不足以确定属于新加坡邮政，因此 Peek 会先查询：“正在查询物流服务…”，SingPost 查到时显示“Singapore Post 有这个包裹的记录。”尚未查到时，添加后仍会继续查询，并显示“等待 Singapore Post 的首次扫描”。
 
 Peek 会按 SingPost 英文原文显示每条扫描及地点，并将上表文案归入对应阶段（如“运输中”或“清关中”）。SingPost 附在扫描下方的原因说明会被略去，且不展示预计送达日、重量、POPStation 取件码或签收人姓名。Speedpost 扫描不带时区，Peek 按地点或前后扫描的时区读取（到达目的国后按目的国时区），无法判定时按新加坡时间读取。
 
-当 SingPost 标明目的国，或未标明目的国而你在新加坡境外查询时，Peek 也会用同一 `SG` 单号询问目的国邮政：德国 [DHL](carrier:dhl)、法国 [La Poste](carrier:la-poste)、意大利 [Poste Italiane](carrier:poste-italiane)、西班牙 [Correos](carrier:correos-spain)、[PostNL](carrier:postnl)、[bpost](carrier:bpost)、[Austrian Post](carrier:austrian-post)、[Swiss Post](carrier:swiss-post)、[Poczta Polska](carrier:poczta-polska)、葡萄牙 [CTT](carrier:ctt)、瑞典和丹麦 PostNord、[Royal Mail](carrier:royal-mail)、An Post、[USPS](carrier:usps)、[Canada Post](carrier:canada-post) 及 [Australia Post](carrier:australia-post)。对方出现新扫描后 Peek 自动切换跟进，并保留 SingPost 的历史记录。反过来，仅凭目的地为新加坡不会触发自动询问新加坡邮政：只有当运送包裹的承运商（如 Janio）指名由 SingPost 派送时才会询问。
+当 SingPost 标明目的国，或未标明目的国而你在新加坡境外查询时，Peek 也会用同一 `SG` 单号询问目的国邮政：德国 [DHL](carrier:dhl)、法国 [La Poste](carrier:la-poste)、意大利 [Poste Italiane](carrier:poste-italiane)、西班牙 [Correos](carrier:correos-spain)、[PostNL](carrier:postnl)、[bpost](carrier:bpost)、[Austrian Post](carrier:austrian-post)、[Swiss Post](carrier:swiss-post)、[Poczta Polska](carrier:poczta-polska)、葡萄牙 [CTT](carrier:ctt)、瑞典和丹麦 PostNord、[Royal Mail](carrier:royal-mail)、An Post、[USPS](carrier:usps)、[Canada Post](carrier:canada-post) 及 [Australia Post](carrier:australia-post)。对方出现新扫描后 Peek 就切换跟进，并保留 SingPost 的历史记录。反过来，仅凭目的地为新加坡，Peek 不会询问新加坡邮政：只有当运送包裹的承运商（如 Janio）指名由 SingPost 派送时才会询问。
 
-在 SingPost 或你所在国家邮政自有查询正常响应期间，当你打开包裹页，或在派送当天开启通知时，Peek 最多每 10 分钟查询一次，在包裹进入派送当天的当地时间早上 6 点起最多每 2 分钟查询一次（Royal Mail 为每小时一次，Poste Italiane、PostNL 和 USPS 最多每 30 分钟一次；仅通过物流查询服务时，每小时查询一次，静默一天后每 3 小时一次，派送当天最多每 15 分钟一次）。连续两天无新动态（在“已生成面单”或“已揽收”状态下为 12 小时）后改为每小时查询一次，在“已生成面单”下满七天后改为每 6 小时一次。
+当你打开包裹页，或在派送当天开启通知时，Peek 最多每 10 分钟查询一次；在包裹进入派送的当天，只要 SingPost 或你所在国家邮政自己的查件系统正常响应，自当地时间早上 6 点起最多每 2 分钟查询一次（Royal Mail 为每小时一次，Poste Italiane、PostNL 和 USPS 最多每 30 分钟一次；仅通过物流查询服务时，每小时查询一次，静默一天后每 3 小时一次，派送当天最多每 15 分钟一次）。连续两天无新动态（在“已生成面单”或“已揽收”状态下为 12 小时）后改为每小时查询一次，在“已生成面单”下满七天后改为每 6 小时一次。
 
-当最新扫描满四天且包裹仍处于“已生成面单”、“已揽收”或“运输中”时，Peek 会标出该扫描日期（如“自 10 月 12 日周一起没有物流更新”），页面提示：“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 Singapore Post 查询。”，并附“向 Singapore Post 寻求帮助”链接指向 SingPost 支持页（切换至你所在国家邮政后，链接相应改为该邮政）。三周无新扫描时提示：“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 Singapore Post 查询。”
+当最新扫描满四天且包裹仍处于“已生成面单”、“已揽收”或“运输中”时，Peek 会标出该扫描日期（如“自10月12日周一起没有物流更新”），页面提示：“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 Singapore Post 查询。”并附“向 Singapore Post 寻求帮助”链接指向 SingPost 支持页（切换至你所在国家邮政后，链接相应改为该邮政）。三周无新扫描时提示：“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 Singapore Post 查询。”
 
-Peek 支持“每次扫描”、“重要环节”或“仅派送当天”通知，但无法替你联系 SingPost、本地邮政或商家。
+Peek 可以按“每次扫描”、“重要环节”或“仅派送当天”通知你，但无法替你联系 SingPost、本地邮政或商家。
 
 ## 关于新加坡邮政物流查询的常见问题
 
 ### SingPost 和 Singapore Post 是同一家吗？
 
-是的。SingPost 是 Singapore Post Limited 的简称，其国际单号以 `SG` 结尾。
+是的。SingPost 是 Singapore Post Limited 的简称，其单号以 `SG` 结尾。
 
 ### 为什么新加坡邮政物流不更新了？
 
@@ -113,7 +113,7 @@ Peek 支持“每次扫描”、“重要环节”或“仅派送当天”通知
 
 ### “Held by Custom”是什么意思？
 
-表示邮件正被海关暂扣。寄往新加坡的包裹通常在等待缴纳 GST 或关税：SingPost 会发通知，你需在 14 天内付款。从新加坡寄出则由你所在国家海关暂扣，参见[包裹卡在海关怎么办](guide:customs)（英文）。
+表示邮件正被海关暂扣。SingPost 表示，寄往新加坡的包裹被暂扣是在等待缴纳 GST 或关税：SingPost 会发通知，你需在 14 天内付款。从新加坡寄出则由你所在国家海关暂扣，参见[包裹卡在海关怎么办](guide:customs)（英文）。
 
 ### 新加坡邮政派送需要多久？
 

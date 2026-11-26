@@ -14,7 +14,7 @@ A Quick Rabbit o chama de código de acompanhamento (`código de seguimiento`). 
 
 | Código | O que é |
 | --- | --- |
-| `PKG48220260715482917365` | `PKG`, três dígitos, data de oito dígitos (ano, mês, dia) e mais nove dígitos: o código comum da Quick Rabbit. |
+| `PKG48220260715482917365` | `PKG`, três dígitos, data de oito dígitos (ano, mês, dia) e mais nove dígitos: o código habitual da Quick Rabbit. |
 | `PKG482260715ES4829173640582K` | `PKG`, nove dígitos, `ES`, 13 dígitos e uma letra: formato mais longo. |
 | `WT4829173640582917` | `WT` e 16 dígitos: referência do remetente, exibida como `Referencia` na página da Quick Rabbit. |
 
@@ -22,7 +22,7 @@ Um código que o rastreador não reconhece exibe `Paquete no encontrado` ("Encom
 
 ## O que significam os status de rastreamento da Quick Rabbit
 
-A página de rastreamento da Quick Rabbit abre em espanhol (há também inglês e chinês). Estas são as linhas em espanhol, com a linha em inglês e o status mostrados pelo Peek, aproximadamente em ordem:
+A página de rastreamento da Quick Rabbit abre em espanhol (há também inglês e chinês). Estas são as linhas em espanhol, com a linha em inglês e o status mostrados pelo Peek, aproximadamente na ordem em que a encomenda passa por elas:
 
 | A Quick Rabbit diz | No Peek: linha e status | O que significa para você |
 | --- | --- | --- |
@@ -37,7 +37,7 @@ A página de rastreamento da Quick Rabbit abre em espanhol (há também inglês 
 | `Retirado de Citibox` | `Retrieved from Citibox`: Entregue | Você retirou o pacote do armário. |
 | `Almacenamiento Citibox Expirado` | `Citibox Storage Expired`: Precisa de atenção | O tempo de guarda no armário venceu. |
 | `En Camino a Punto de Recogida`, depois `En Punto de Recogida` ou `Listo para Recoger` | `En Route to Pickup Store` (Em trânsito), depois `At Pickup Store` ou `Ready for Pickup`: Pronta para retirada | A caminho do ponto de retirada e, depois, aguardando lá. |
-| `Destinatario Ausente`, `Primera Ausencia`, `Segunda Ausencia`, `Tiempo Insuficiente`, `Fuera de Horario` | `Recipient Absent`, `First Absence`, `Second Absence`, `Insufficient Time`, `Outside Delivery Hours`: Tentativa de entrega | Ninguém atendeu, ou o entregador ficou sem tempo ou chegou fora do horário de serviço. |
+| `Destinatario Ausente`, `Primera Ausencia`, `Segunda Ausencia`, `Tiempo Insuficiente`, `Fuera de Horario` | `Recipient Absent`, `First Absence`, `Second Absence`, `Insufficient Time`, `Outside Delivery Hours`: Tentativa de entrega | Não havia ninguém em casa, ou o entregador ficou sem tempo ou chegou fora do horário de serviço. |
 | `Dirección Incorrecta`, `Dirección Incompleta`, `Destinatario Desconocido` | `Incorrect Address`, `Incomplete Address`, `Unknown Recipient`: Tentativa de entrega | O entregador não conseguiu entregar no endereço: corrija-o (veja abaixo). |
 | `Entrega Rechazada` | `Delivery Rejected`: Tentativa de entrega | A encomenda foi recusada na entrega. |
 | `Potencialmente perdido` | `Under investigation`: Precisa de atenção | A Quick Rabbit está verificando onde está o pacote. Ele ainda pode estar em trânsito. |
@@ -49,7 +49,7 @@ Algumas linhas são apenas observações: `Cliente Solicitó Cambio de Direcció
 
 ## Entrega Quick Rabbit: entregadores, Citibox e pontos de retirada
 
-A Quick Rabbit afirma atender todas as 50 províncias da Espanha, e sua página de serviços oferece às lojas notificações por SMS e e-mail e nova tentativa após entrega sem sucesso. Perdeu uma entrega? Veja [entregas perdidas](guide:missed-delivery).
+A Quick Rabbit afirma atender todas as 50 províncias da Espanha, e sua página de serviços oferece às lojas notificações por SMS e e-mail e nova tentativa após uma entrega não realizada. A entrega não foi realizada? Veja [entrega não realizada](guide:missed-delivery).
 
 **Armários Citibox e pontos de retirada.** Em vez de entregar na sua porta, o entregador pode deixar a encomenda em um armário Citibox ou enviá-la a um ponto de retirada. As páginas da Quick Rabbit não informam o código de abertura do armário, não listam os pontos de retirada nem dizem por quanto tempo cada um guarda a encomenda. `Retirado de Citibox por Repartidor` ("Retirado do Citibox pelo entregador") significa que o entregador recolheu o pacote de volta do armário. Veja mais em [armários de encomendas](guide:parcel-lockers) e [encomendas não retiradas](guide:uncollected-parcel).
 

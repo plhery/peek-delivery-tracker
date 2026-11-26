@@ -22,7 +22,7 @@ Quick Rabbit 将其称为物流追踪码（`código de seguimiento`）。它有�
 
 ## Quick Rabbit 物流状态含义
 
-Quick Rabbit 查询页默认以西班牙语打开（也支持英语和中文）。以下是其西班牙语原文，附带 Peek 显示的英文行和阶段，大致按流转顺序排列：
+Quick Rabbit 查询页默认以西班牙语打开（也有英语和中文版）。以下是其西班牙语原文，附带 Peek 显示的英文行和阶段，大致按流转顺序排列：
 
 | Quick Rabbit 原文 | Peek 显示（行文、状态） | 对你的含义 |
 | --- | --- | --- |
@@ -37,7 +37,7 @@ Quick Rabbit 查询页默认以西班牙语打开（也支持英语和中文）�
 | `Retirado de Citibox` | `Retrieved from Citibox`：已签收 | 你已从快递柜取走。 |
 | `Almacenamiento Citibox Expirado` | `Citibox Storage Expired`：需要留意 | 快递柜保管时间已到期。 |
 | `En Camino a Punto de Recogida`，之后 `En Punto de Recogida` 或 `Listo para Recoger` | `En Route to Pickup Store`（运输中），之后 `At Pickup Store` 或 `Ready for Pickup`：待取件 | 正在发往自提点，随后到达自提点待取。 |
-| `Destinatario Ausente`、`Primera Ausencia`、`Segunda Ausencia`、`Tiempo Insuficiente`、`Fuera de Horario` | `Recipient Absent`、`First Absence`、`Second Absence`、`Insufficient Time`、`Outside Delivery Hours`：派送未成功 | 无人签收，或快递员时间不够/超出服务时段。 |
+| `Destinatario Ausente`、`Primera Ausencia`、`Segunda Ausencia`、`Tiempo Insuficiente`、`Fuera de Horario` | `Recipient Absent`、`First Absence`、`Second Absence`、`Insufficient Time`、`Outside Delivery Hours`：派送未成功 | 家中无人，或快递员时间不够/超出服务时段。 |
 | `Dirección Incorrecta`、`Dirección Incompleta`、`Destinatario Desconocido` | `Incorrect Address`、`Incomplete Address`、`Unknown Recipient`：派送未成功 | 地址无法投递，请按下方步骤修改地址。 |
 | `Entrega Rechazada` | `Delivery Rejected`：派送未成功 | 上门时包裹被拒收。 |
 | `Potencialmente perdido` | `Under investigation`：需要留意 | Quick Rabbit 正在核查包裹位置，可能仍在途中。 |
@@ -49,7 +49,7 @@ Quick Rabbit 查询页默认以西班牙语打开（也支持英语和中文）�
 
 ## Quick Rabbit 派送：快递员、Citibox 与自提点
 
-Quick Rabbit 表示其服务覆盖西班牙全部 50 个省，官网服务页向商家提供短信与邮件通知及失败重派。错过了派送？参见[错过派送](guide:missed-delivery)（英文）。
+Quick Rabbit 表示其服务覆盖西班牙全部 50 个省，官网服务页向商家提供短信与邮件通知及失败重派。派送没成功？参见[派送未成功](guide:missed-delivery)（英文）。
 
 **Citibox 快递柜与自提点。** 快递员除了送货上门，也可把包裹放进 Citibox 快递柜或送至自提点。Quick Rabbit 网页未提供开箱码、未列出自提点名录，也未写明各自保管期限。`Retirado de Citibox por Repartidor`（“快递员已从 Citibox 取回”）表示快递员已将包裹从柜中取出。更多见[快递柜取件](guide:parcel-lockers)（英文）和[未领取的包裹](guide:uncollected-parcel)（英文）。
 
@@ -77,15 +77,15 @@ Quick Rabbit 表示其服务覆盖西班牙全部 50 个省，官网服务页向
 
 ## 用 Peek 跟踪 Quick Rabbit 包裹
 
-[Peek](/) 会按形态直接识别 Quick Rabbit 单号：`PKG` 加三位数字、八位日期和九位数字，或更长的 `PKG…ES…` 编码（不区分大小写，允许空格）。16 位 `WT` 参考号仅凭形态无法唯一确定：Peek 会询问 Quick Rabbit，查到后显示“Quick Rabbit 有这个包裹的记录。”；未查到时还会询问物流查询服务，并在你添加后继续查询。其他格式的参考号也照样可以粘贴（Peek 支持超过 4,500 家快递公司），点“更换”选择 Quick Rabbit 即可。对于参考号，Peek 会在“Quick Rabbit 记录的单号为”下显示对应的 `PKG` 编码。带 `ref=` 的 Quick Rabbit 查询链接同样可用。
+[Peek](/) 会按形态直接识别 Quick Rabbit 单号：`PKG` 加三位数字、八位日期和九位数字，或更长的 `PKG…ES…` 编码（不区分大小写，允许空格）。16 位 `WT` 参考号仅凭形态无法唯一确定：Peek 会询问 Quick Rabbit，查到时显示“Quick Rabbit 有这个包裹的记录。”查不到时还会询问物流查询服务，并在你添加后继续查询。其他格式的参考号也照样可以粘贴（Peek 跟踪 4,500 多家快递公司），点“更换”选择 Quick Rabbit 即可。对于参考号，Peek 会在“Quick Rabbit 记录的单号为”下显示对应的 `PKG` 编码。带 `ref=` 的 Quick Rabbit 查询链接同样可用。
 
-Peek 读取 Quick Rabbit 自有查询系统：展示状态、上表英文历史记录及签收时间（按马德里时间读取，换算为你设备的时区）。Quick Rabbit 不提供地点名称，因此不显示地图。Peek 会略去预计送达日、目的城市、寄件人参考号以及快递员坐标（可能指向你的住址门牌）。不含签收凭证或快递柜取件码，Peek 也不会将包裹转交 Citibox：快递柜步骤来自 Quick Rabbit 自身记录。
+Peek 读取 Quick Rabbit 自己的查件系统：展示状态、上表英文历史记录及签收时间（按马德里时间读取，换算为你设备的时区）。Quick Rabbit 不提供地点名称，因此不显示地图。Peek 会略去预计送达日、目的城市、寄件人参考号以及快递员坐标（可能指向你的住址门牌）。不含签收凭证或快递柜取件码，Peek 也不会将包裹转交 Citibox：快递柜步骤来自 Quick Rabbit 自身记录。
 
-在 Quick Rabbit 自有查询正常响应期间，当你打开包裹页，或在派送当天开启通知时，Peek 最多每 10 分钟查询一次，在 Quick Rabbit 扫描派送当天从马德里时间早上 6 点起最多每 2 分钟查询一次；其余时间每小时一次。连续两天无新动态（在“已生成面单”或“已揽收”状态下为 12 小时）后改为每小时一次，在“已生成面单”下连续七天无新动态后改为每 6 小时一次。
+当你打开包裹页，或在派送当天开启通知时，Peek 最多每 10 分钟查询一次；在 Quick Rabbit 扫描包裹进入派送的当天，只要 Quick Rabbit 自己的查件系统正常响应，自马德里时间早上 6 点起最多每 2 分钟查询一次；其余时间每小时一次。连续两天无新动态（在“已生成面单”或“已揽收”状态下为 12 小时）后改为每小时一次，在“已生成面单”下连续七天无新动态后改为每 6 小时一次。
 
 如果处于“已生成面单”、“已揽收”或“运输中”的包裹连续四天没有新扫描，Peek 会以最新扫描日期标出提醒（“自……起没有物流更新”），并提示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 Quick Rabbit 查询。”及“向 Quick Rabbit 寻求帮助”链接。三周无新扫描时提示：“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 Quick Rabbit 查询。”
 
-Peek 可发送“每次扫描”、“重要环节”或“仅派送当天”通知，但无法替你修改派送、提交理赔或联系 Quick Rabbit 和商家。
+Peek 可以按“每次扫描”、“重要环节”或“仅派送当天”通知你，但无法替你修改派送、提交理赔或联系 Quick Rabbit 和商家。
 
 ## 关于 Quick Rabbit 物流查询的常见问题
 

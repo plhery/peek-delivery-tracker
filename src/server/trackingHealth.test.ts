@@ -304,6 +304,13 @@ describe('tracking health evidence', () => {
     // A refusal the adapter read from the page, without a status to show for it.
     expect(healthMessage({ subject: 'Ship24', evidence: { category: 'rate_limited', http_status: null } }).nextSteps).toContain('Retry-After');
     expect(healthMessage({ subject: 'dpd', evidence: { category: 'maintenance', http_status: null } }).nextSteps).toContain('maintenance');
+    // The carrier's own answer that its tracking is unavailable, as CTT Express's "Invalid token.": its outage, not ours.
+    expect(healthMessage({ subject: 'ctt-express', kind: 'provider', state: 'open', attempts: 131, failures: 66, window_hours: 24,
+      evidence: { category: 'indeterminate', reason: 'carrier_unavailable', http_status: null } })).toMatchObject({
+      title: "Provider lookups failing on the carrier's outage: ctt-express (66/131 in 24h)",
+      nextSteps: expect.stringContaining('not the adapter'), impact: expect.stringContaining('outage notice') });
+    expect(healthMessage({ subject: 'ctt-express', state: 'recovered', evidence: { reason: 'carrier_unavailable' } }).title)
+      .toBe('Provider lookups recovered: ctt-express');
     expect(healthMessage({ subject: 'ups', state: 'recovered' }).nextSteps).toContain('No action needed');
     expect(healthMessage({ subject: 'ups', kind: 'refresh', state: 'closed' })).toMatchObject({
       title: 'Shipment refreshes closed without a recent check: ups', nextSteps: expect.stringContaining('no recovery was observed') });

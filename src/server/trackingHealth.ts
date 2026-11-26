@@ -24,6 +24,8 @@ const CAPTURE_FAILURES = new Set(['capture_missing', 'capture_unreadable']);
  * these categories out of the outage rate so they cannot mask a real outage.
  */
 const answered = new Set(['ok', 'not_found', 'input_required']);
+/** The reasons a carrier's own answer gives for its tracking being down, as carrier_outages() counts them. */
+const CARRIER_DOWN_REASONS: ReadonlySet<string> = new Set(['carrier_unavailable', 'maintenance_page']);
 
 /**
  * A provider's answer that it has nothing for the number yet, which the scraper raises as inconclusive with a reason:
@@ -202,10 +204,14 @@ export function healthMessage(incident: JsonObject): { title: string; nextSteps:
   const run = !incident.consecutive_failures ? ''
     : refresh ? '; 3 checks in a row failed for two parcels, or for one while no other answered'
     : '; every lookup failed since its last answer, 4 or more over 2 hours or more, for two parcels or more';
+  // The carrier's own tracking said it is unavailable, as CTT Express's "Invalid token." while its credential has lapsed:
+  // the carrier's outage, which its parcels' readers are told of (carrier_outages), not Peek's lookup failing.
+  const carrierDown = !recovered && CARRIER_DOWN_REASONS.has(String(evidence?.reason));
   const title = recovered ? `${scope} recovered: ${subject}`
-    : `${scope} repeatedly failing: ${subject} (${incident.failures}/${incident.attempts} in ${incident.window_hours}h${run})`;
+    : `${carrierDown ? `${scope} failing on the carrier's outage` : `${scope} repeatedly failing`}: ${subject} (${incident.failures}/${incident.attempts} in ${incident.window_hours}h${run})`;
   let nextSteps = 'Inspect the carrier scraper dashboard and the latest error type. Check the provider response and adapter parsing; retain the working fallback and scheduled backoff.';
-  if (evidence?.reason === 'proxy_payment_required') nextSteps = 'The tracking proxy refused the tunnel with 402 Payment Required: its account is out of credit or traffic. Top it up or move the route to another proxy; retries will not help.';
+  if (carrierDown) nextSteps = 'The carrier\'s own tracking answered that it is unavailable, for every number: its outage, not the adapter\'s or Peek\'s. Readers of its parcels are told its site is down. Nothing to fix here; if it lasts past a day, check the carrier\'s page by hand and tell the scraper lane.';
+  else if (evidence?.reason === 'proxy_payment_required') nextSteps = 'The tracking proxy refused the tunnel with 402 Payment Required: its account is out of credit or traffic. Top it up or move the route to another proxy; retries will not help.';
   else if (evidence?.reason === 'proxy_refused') nextSteps = `The tracking proxy refused the tunnel with ${String(evidence.proxy_status)}: a gateway error means its exit could not reach the carrier. Check the proxy provider's status before the carrier's.`;
   else if (evidence?.http_status === 429 || evidence?.category === 'rate_limited') nextSteps = 'Honor Retry-After and inspect provider cooldowns. Reduce request frequency; do not increase retries or browser parallelism.';
   else if (['input_required','not_found'].includes(String(evidence?.category))) nextSteps = 'Check whether the shipment has been announced and whether its required postcode or tracking credentials were supplied. Do not retry invalid inputs immediately.';
@@ -214,6 +220,7 @@ export function healthMessage(incident: JsonObject): { title: string; nextSteps:
   else if (['trawl','browser','page'].includes(String(evidence?.step))) nextSteps = 'Check TRAWL health, container memory/OOM events and browser availability. A closed browser needs replacement before retrying; keep concurrency bounded.';
   else if (Number(evidence?.http_status) >= 500 || evidence?.category === 'maintenance') nextSteps = 'Check the upstream service for maintenance. Inspect the bounded retry and fallback results; allow scheduled backoff rather than adding more retries.';
   return { title, nextSteps: recovered ? 'Three recent checks succeeded and failures are back under the threshold. No action needed; threshold monitoring remains active.' : nextSteps,
-    impact: refresh ? recovered ? 'Scheduled shipment refreshes are succeeding again.' : 'Scheduled shipment refreshes failed after routing and fallback. Previous saved progress is retained.'
+    impact: carrierDown ? 'The carrier\'s own tracking is down: its parcels keep their saved progress, and their readers see the outage notice.'
+      : refresh ? recovered ? 'Scheduled shipment refreshes are succeeding again.' : 'Scheduled shipment refreshes failed after routing and fallback. Previous saved progress is retained.'
       : 'This describes one provider or direct transport, not the final shipment refresh. Check refresh incidents to determine user impact.' };
 }

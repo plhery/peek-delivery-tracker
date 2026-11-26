@@ -16094,6 +16094,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#1d2a84"
     },
     {
+      "id": "gls-hu",
+      "catalog": "gls-hu",
+      "slug": "gls-hungary-tracking",
+      "title": "Rastreamento GLS Hungria: códigos, lockers e contatos",
+      "name": "GLS Hungary",
+      "color": "#ffdd00"
+    },
+    {
+      "id": "jumppoint-international",
+      "catalog": "jumppoint-international",
+      "slug": "jumppoint-international-tracking",
+      "title": "Rastreamento Jumppoint International: códigos JP e suporte",
+      "name": "Jumppoint International Express",
+      "color": "#0f4ae1"
+    },
+    {
       "id": "skypostal",
       "catalog": "skypostal",
       "slug": "rastreamento-skypostal",
@@ -20122,6 +20138,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "A Tu Hora Express 物流查询：单号、邮编要求与客服",
       "name": "A Tu Hora Express",
       "color": "#1d2a84"
+    },
+    {
+      "id": "gls-hu",
+      "catalog": "gls-hu",
+      "slug": "gls-hungary-tracking",
+      "title": "GLS 匈牙利（GLS Hungary）物流查询：单号、快递柜与客服",
+      "name": "GLS Hungary",
+      "color": "#ffdd00"
     },
     {
       "id": "anserx",

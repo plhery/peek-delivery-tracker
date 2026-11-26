@@ -15254,6 +15254,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffb202"
     },
     {
+      "id": "ukrposhta",
+      "catalog": "ukrposhta",
+      "slug": "ukrposhta-tracking",
+      "title": "Rastreamento Ukrposhta: códigos e status na Ucrânia",
+      "name": "Ukrposhta",
+      "color": "#ffbe0c"
+    },
+    {
       "id": "geniki-taxydromiki",
       "catalog": "geniki-taxydromiki",
       "slug": "rastreamento-geniki-taxydromiki",
@@ -15892,6 +15900,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento 17FEIA (一起飞): códigos FEI…YQ e entrega",
       "name": "17FEIA",
       "color": "#00a9e4"
+    },
+    {
+      "id": "tsjy",
+      "catalog": "tsjy",
+      "slug": "tsjy-tracking",
+      "title": "Rastreamento TSJY (通世集运): códigos de pedido e status",
+      "name": "TSJY",
+      "color": "#4042e2"
     },
     {
       "id": "j-and-t-uk",
@@ -19138,6 +19154,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Helthjem 物流查询：挪威夜间派送、状态与取件点",
       "name": "Helthjem",
       "color": "#ffb202"
+    },
+    {
+      "id": "ukrposhta",
+      "catalog": "ukrposhta",
+      "slug": "ukrposhta-tracking",
+      "title": "乌克兰邮政（Ukrposhta）物流查询：单号格式与状态含义",
+      "name": "Ukrposhta",
+      "color": "#ffbe0c"
     },
     {
       "id": "geniki-taxydromiki",

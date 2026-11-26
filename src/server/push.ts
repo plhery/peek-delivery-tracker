@@ -9,12 +9,14 @@ import { DateTime, FixedOffsetZone, IANAZone, type Zone } from 'luxon';
 import webpush from 'web-push';
 import { countryName } from 'universal-parcel-scraper/app';
 import { locatePlace } from 'universal-parcel-scraper/places';
-import { CARRIER_CAPABILITIES, type ApiParcelAlertPreset } from '../generated/apiContract';
+import { CARRIER_CAPABILITIES, type ApiPackageRow, type ApiParcelAlertPreset } from '../generated/apiContract';
+import { displayedCarrierId } from '../lib/carriers';
 import { dayAndTime } from '../lib/format';
 import { catalogLanguage, tagLocale, type Locale } from '../lib/locale';
 import { deliveryWallClock, languageTags } from '../lib/messages';
 import { ALERT_PRESET_STAGES } from '../lib/notificationPresets';
 import { romanisesPlace } from '../lib/scanPlace';
+import { toParcel } from '../store/apiRepo';
 import { capitalized } from '../peek/parcel/summary';
 import { namesRecipient, PRIVATE_CARRIER_DATA, privateValues } from './privateDetails';
 import { FCMAuthError, FcmClient, FCMError, fcmTokenGone } from './fcm';
@@ -486,15 +488,16 @@ function stringField(row: JsonObject, name: string): string {
   return typeof row[name] === 'string' ? row[name] : '';
 }
 
-/** The carrier's name as the app writes it on the activities it starts, in the reader's language. */
+/**
+ * The carrier's name as the app writes it on the activities it starts, in the reader's language: the catalog's, and for
+ * an id the catalog does not hold, the unknown carrier's, as the apps name it, never the bare id.
+ */
 function carrierDisplayName(value: unknown, locale: Locale): string {
   const carrier = typeof value === 'string' ? value : '';
-  if (Object.hasOwn(CARRIER_CAPABILITIES, carrier)) {
-    const capability: { displayName: string; displayNames?: Partial<Record<Locale, string>> } =
-      CARRIER_CAPABILITIES[carrier as keyof typeof CARRIER_CAPABILITIES];
-    return capability.displayNames?.[catalogLanguage(locale)] ?? capability.displayName;
-  }
-  return carrier || appWord(locale, 'add.carrier')!;
+  if (!carrier) return appWord(locale, 'add.carrier')!;
+  const capability: { displayName: string; displayNames?: Partial<Record<Locale, string>> } =
+    CARRIER_CAPABILITIES[(Object.hasOwn(CARRIER_CAPABILITIES, carrier) ? carrier : 'unknown') as keyof typeof CARRIER_CAPABILITIES];
+  return capability.displayNames?.[catalogLanguage(locale)] ?? capability.displayName;
 }
 
 /** The language a notification is written in: its device's, or English. */
@@ -879,6 +882,16 @@ async function scanNews(client: SupabaseServiceClient, batches: readonly JsonObj
       ...repeatedScans(scans.map((scan) => ({ ...scan, at: Date.parse(scan.occurredAt), location: scan.location?.trim() ?? '' })), waiting)]);
   };
   return { known, recent, notices };
+}
+
+/**
+ * The carrier each parcel's cards and widgets show it under (`displayedCarrierId`), which its Live Activity names too: the
+ * one a handoff tracks it with, or the first of linked numbers. None when the parcels cannot be read.
+ */
+async function shownCarriers(client: SupabaseServiceClient, batches: readonly JsonObject[][]): Promise<Map<string, string>> {
+  const parcels = batchParcels(batches);
+  const rows = parcels.length ? await orNone(() => client.shownCarrierRows(parcels), []) : [];
+  return new Map(rows.map((row) => [stringField(row, 'id'), displayedCarrierId(toParcel(row as unknown as ApiPackageRow))]));
 }
 
 async function knownScans(client: SupabaseServiceClient, batches: readonly JsonObject[][]): Promise<KnownScans> {
@@ -1505,7 +1518,7 @@ abstract class AppPushNotificationService {
    * The UnifiedPush devices whose sends failed: how many in a row, and until when the next waits. The endpoint is on a
    * host the phone chose, which may refuse each send alike for hours (ntfy answers 507 while the phone's app is not
    * connected): the device is not asked again on every dispatch, and its notices stay pending until a send goes through
-   * or they are a day old. Kept by the server, which starts with none.
+   * or they are a day old. Kept on the device too (`retry_failures`, `retry_at`), which a server just started reads.
    */
   readonly #retries = new Map<string, { failures: number; at: number }>();
   abstract readonly client: SupabaseServiceClient;
@@ -1537,6 +1550,12 @@ abstract class AppPushNotificationService {
     }
     const summary = emptySummary();
     const times = await parcelTimes(this.client, grouped.values(), this.now() * 1_000);
+    if (this.transport === 'unifiedpush') {
+      // A server just started waits as the last one did, and counts on from its refusals.
+      const devices = [...new Set([...grouped.values()].map((events) => stringField(events[0]!, 'device_id')))].filter((id) => !this.#retries.has(id));
+      const stored = devices.length ? await orNone(() => this.client.nativePushRetries(devices), new Map<string, { failures: number; at: number }>()) : new Map();
+      for (const [deviceId, retry] of stored) this.#retries.set(deviceId, retry);
+    }
     for (const events of grouped.values()) {
       signal?.throwIfAborted();
       const newest = announcedScan(events, times);
@@ -1563,6 +1582,7 @@ abstract class AppPushNotificationService {
         await this.client.updateNativePushDevice(deviceId, {
           last_success_at: new Date().toISOString(),
           last_error: null,
+          ...this.transport === 'unifiedpush' ? { retry_failures: 0, retry_at: null } : {},
         });
         recordAccountPushSent('sent', this.transport);
         summary.sent += 1;
@@ -1598,8 +1618,10 @@ abstract class AppPushNotificationService {
             }
           }
           logDeliveryFailure('native', error, this.transport);
+          const retry = this.transport === 'unifiedpush' ? this.#retries.get(deviceId) : undefined;
           await this.client.updateNativePushDevice(deviceId, {
             last_error: `${this.serviceName} delivery failed`,
+            ...retry ? { retry_failures: retry.failures, retry_at: new Date(retry.at).toISOString() } : {},
           });
           recordAccountPushSent('failed', this.transport);
           summary.failed += 1;
@@ -1927,7 +1949,7 @@ export class DeliveryLiveActivityNotificationService {
       grouped.set(key, [...(grouped.get(key) ?? []), row]);
     }
     const summary = emptySummary();
-    const known = await knownScans(this.client, [...grouped.values()]);
+    const [known, shown] = await Promise.all([knownScans(this.client, [...grouped.values()]), shownCarriers(this.client, [...grouped.values()])]);
     const record = (events: readonly JsonObject[], kind: LiveActivityDeliveryKind) => this.client.recordLiveActivityDeliveries(
       events.map((event) => ({
         deviceId: stringField(event, 'device_id'),
@@ -1958,7 +1980,9 @@ export class DeliveryLiveActivityNotificationService {
       const updateTokenId = stringField(newest, 'update_token_id');
       summary.attempted += 1;
       try {
-        await this.send(toldScan(newest, events, { known }), kind);
+        const told = toldScan(newest, events, { known });
+        const carrier = shown.get(stringField(newest, 'package_id'));
+        await this.send(carrier ? { ...told, shown_carrier: carrier } : told, kind);
         // Sent is recorded, even while the server stops: the scan must not go out twice.
         await record(events, kind);
         if (kind === 'end' && updateTokenId) {
@@ -2060,7 +2084,8 @@ export class DeliveryLiveActivityNotificationService {
       parcel: {
         id: parcelId,
         label: notificationText(row.label || appWord(locale, 'common.parcel'), 80),
-        carrier: notificationText(carrierDisplayName(row.carrier, locale), 80),
+        // The carrier its cards and widgets show it under (`shownCarriers`), else the one it is filed under.
+        carrier: notificationText(carrierDisplayName(row.shown_carrier ?? row.carrier, locale), 80),
         status: notificationText(status, 80),
         // Older app versions already suppress a detail equal to the status.
         detail: notificationText(stage === 'out_for_delivery' && expected ? expected : status, 100),

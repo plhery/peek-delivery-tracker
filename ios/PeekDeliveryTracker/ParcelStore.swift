@@ -2147,7 +2147,8 @@ final class ParcelStore: ObservableObject {
         let activityParcel = DeliveryActivityParcel(
             id: parcel.id,
             label: parcel.label.nonEmpty ?? localizer.text("common.parcel"),
-            carrier: CarrierCatalog.shared.info(for: parcel.carrier, language: localizer.language).displayName,
+            // As the widgets and cards name it, and the server's updates (`shown_carrier`).
+            carrier: CarrierCatalog.shared.info(for: parcel.displayedCarrier, language: localizer.language).displayName,
             status: status,
             detail: detail,
             phase: phase

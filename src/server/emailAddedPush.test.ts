@@ -35,7 +35,8 @@ describe('"Added from your email"', () => {
 
   it('names the carrier alone for a parcel without a name, and shortens a long name', () => {
     expect(emailAddedNotification({ ...row, label: '  ', locale: 'en' }).web.body).toBe('La Poste / Colissimo');
-    expect(emailAddedNotification({ ...row, label: null, carrier: 'unknown-carrier', locale: 'en' }).web.body).toBe('unknown-carrier');
+    // A carrier the catalog does not hold reads as the apps name it, never as its id.
+    expect(emailAddedNotification({ ...row, label: null, carrier: 'unknown-carrier', locale: 'en' }).web.body).toBe('Unknown carrier');
     const long = emailAddedNotification({ ...row, label: 'x'.repeat(200), locale: 'en' }).web.body as string;
     expect([...long.split(' · ')[0]!]).toHaveLength(80);
   });

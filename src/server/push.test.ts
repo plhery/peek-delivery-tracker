@@ -357,6 +357,34 @@ describe('useful, localized tracking updates', () => {
     expect(parcel({ label: '', stage: 'failed_attempt' })).toMatchObject({ label: 'Colis', status: 'Tentative de livraison' });
   });
 
+  it('names the carrier a Live Activity shows as the cards do, and one the catalog does not hold as an unknown carrier', () => {
+    const row = { ...delivered, stage: 'out_for_delivery', locale: 'fr', carrier: 'yanwen' };
+    const carrier = (changes: JsonObject) => (((live.payload({ ...row, ...changes }, 'update').aps as JsonObject)['content-state'] as JsonObject).parcel as JsonObject).carrier;
+    expect(carrier({})).toBe('Yanwen');
+    expect(carrier({ shown_carrier: 'swiss-post' })).toBe('Swiss Post');
+    expect(carrier({ carrier: 'retired-carrier' })).toBe('Transporteur inconnu');
+  });
+
+  it('sends a Live Activity under the carrier its cards show, and under its own when the parcels cannot be read', async () => {
+    const row = { ...delivered, device_id: 'device-1', event_id: 'event-1', update_token_id: 'token-1', update_token: 'ab'.repeat(32),
+      stage: 'in_transit', carrier: 'yanwen' };
+    const client = {
+      listPendingLiveActivityEvents: vi.fn().mockResolvedValue([row]),
+      recordLiveActivityDeliveries: vi.fn().mockResolvedValue(undefined),
+      updateLiveActivityToken: vi.fn().mockResolvedValue(undefined),
+      shownCarrierRows: vi.fn().mockResolvedValue([{ id: 'package-1', carrier: 'yanwen', tracking_number: 'EXAMPLE0001',
+        carrier_data: { active_tracking_carrier: 'swiss-post' } }]),
+    };
+    const service = new DeliveryLiveActivityNotificationService(client as never, native);
+    const send = vi.spyOn(service, 'send').mockResolvedValue(undefined);
+    await service.dispatch();
+    expect(client.shownCarrierRows).toHaveBeenCalledWith(['package-1']);
+    expect(send.mock.calls[0]![0]).toMatchObject({ carrier: 'yanwen', shown_carrier: 'swiss-post' });
+    client.shownCarrierRows.mockRejectedValue(new Error('down'));
+    await service.dispatch();
+    expect(send.mock.calls[1]![0]).not.toHaveProperty('shown_carrier');
+  });
+
   it.each(SUPPORTED_LOCALES)('confirms that notifications are on in %s', async (locale) => {
     const sent: JsonObject[] = [];
     const browser = new WebPushNotificationService({} as never, 'public-key', 'private-key', 'https://delivery.example', () => now);

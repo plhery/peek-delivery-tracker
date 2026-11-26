@@ -730,6 +730,12 @@ function sameTruncated(left: number, right: number): boolean {
   });
 }
 
+/** A whole minute and a time less than a minute before it: a source that rounds a scan up to the minute. */
+function nextMinute(left: number, right: number): boolean {
+  const [early, late] = left < right ? [left, right] : [right, left];
+  return early !== late && late % MINUTE_MS === 0 && late - early < MINUTE_MS;
+}
+
 /**
  * Whether a row falls later in the whole minute or second a scan is dated to: the scan, to that minute or second,
  * may stand for it as well as for a row at its own instant (HayPost's relay of a Russian Post dispatch to the minute,
@@ -1291,7 +1297,11 @@ export function rewordedScans(
  * after "Colis retardé durant l'acheminement"). When none does, as many new
  * scans of one source (and provider) as such rows pair with them from the
  * oldest, if each pair's stages agree (ParcelsApp's English copies of two
- * Austrian Post scans of one minute). Failing that, the same wording matches a
+ * Austrian Post scans of one minute). Failing that, a provider's copy matches
+ * another provider's row in the same wording, in a stage that agrees and from
+ * no conflicting place, one of them a whole minute and the other less than a
+ * minute before it (17TRACK dated a delivery to the minute after the second
+ * Ship24 gave), one to one. Failing that, the same wording matches a
  * whole number of quarter hours up to 14 h away: the same scan read in the
  * wrong zone, a copy compared to the minute of a carrier's scan in whole
  * minutes (17TRACK's seconds on USPS's minute). Wording followed by its place after a comma is the same
@@ -1489,6 +1499,11 @@ export function sharedScans(
       : eligible.filter((row) => !dayAlone(row) && sameTruncated(at, instantOf(row)) && !shown.has(instantOf(row)));
     const minuted = truncated.filter((row) => sameWords(row, event));
     const restaged = candidatesByEvent.get(event) ?? restagedOf(event);
+    // Another provider's row of the scan less than a minute before or after a copy, one of them at the whole minute.
+    const rounded = !universal || providerOf(event) === '' || occupied.has(at) || dayAlone(event) ? []
+      : rows.filter((row) => sourceOf(identity(row)) === UNIVERSAL && ![providerOf(event), ''].includes(providerOf(row))
+        && !dayAlone(row) && nextMinute(at, instantOf(row)) && !shown.has(instantOf(row)) && sameWords(row, event)
+        && stagesAgree(stageOf(row), stageOf(event)) && !placesApart(event, row));
     // A scan of the provider's own row dated past when the row was first stored is its next scan, not the row on a
     // corrected clock: ParcelsApp lists only FedEx's latest "On the way", 13 h after the one it replaced. So is a
     // carrier's scan past when a provider's copy was stored, unless one shows the other's wall clock under another
@@ -1510,6 +1525,7 @@ export function sharedScans(
       : worded.length === 0 && staged ? exact[0]
         : minuted.length > 0 ? (minuted.length === 1 ? minuted[0] : undefined)
           : restaged.length > 0 ? (restaged.length === 1 ? restaged[0] : openingAlike(event, restaged) ?? inOrder(event, restaged))
+            : rounded.length > 0 ? (rounded.length === 1 ? rounded[0] : undefined)
             : shifted.length === 1 ? shifted[0]
               : shifted.length === 0 && reclocked.length === 1 ? reclocked[0]
                 : shifted.length + reclocked.length === 0 && clocked.length === 1 ? clocked[0] : undefined;
@@ -1524,7 +1540,8 @@ export function sharedScans(
     const scan = scans[0]!;
     const id = identity(scan);
     const row = storedById.get(rowId)!;
-    const offset = instantOf(scan) !== instantOf(row) && !sameTruncated(instantOf(scan), instantOf(row));
+    const offset = instantOf(scan) !== instantOf(row) && !sameTruncated(instantOf(scan), instantOf(row))
+      && !nextMinute(instantOf(scan), instantOf(row));
     const restated = offset && sourceOf(id) === UNIVERSAL && restates(scan, row);
     // The provider's own row of a scan it gave in words no release classified then, which a fix now reads as a stage
     // (ParcelsApp's Russian Post delivery): the row takes it rather than staying pending beside the parcel's stage.

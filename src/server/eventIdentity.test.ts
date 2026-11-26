@@ -1237,6 +1237,34 @@ describe('scans a carrier and a universal provider both report', () => {
       [row('ups:label', '2026-01-02T21:25:25+00:00', 'Label Created')]).reused.size).toBe(0);
   });
 
+  it('matches another provider\'s row of the same wording at the next whole minute, whichever arrives first', () => {
+    const named = (event: JsonObject, provider: string) => ({ ...event, raw_data: { universal_provider: provider } });
+    const ship24 = named(row('unknown:ship24', '2026-01-03T13:40:01+00:00', 'Delivered', 'delivered'), 'Ship24');
+    const copy = (at: string, description = 'Delivered', stage = 'delivered', provider = '17TRACK') => (
+      named(scan('unknown:17track', at, description, stage), provider));
+    const late = sharedScans([copy('2026-01-03T13:41:00Z')], [ship24]);
+    expect(pairs(late.skipped)).toEqual([['unknown:17track', 'unknown:ship24']]);
+    expect(late.shifted.size).toBe(0);
+    const early = sharedScans([named(scan('unknown:ship24', '2026-01-03T13:40:01Z', 'Delivered', 'delivered'), 'Ship24')],
+      [named(row('unknown:17track', '2026-01-03T13:41:00+00:00', 'Delivered', 'delivered'), '17TRACK')]);
+    expect(pairs(early.skipped)).toEqual([['unknown:ship24', 'unknown:17track']]);
+    expect(early.shifted.size).toBe(0);
+    // A minute or more away, a time with seconds after the row's minute, other words or stage, or the same provider stay apart.
+    const matched = (event: JsonObject, rows: JsonObject[] = [ship24]) => {
+      const shared = sharedScans([event], rows);
+      return shared.skipped.size + shared.reused.size;
+    };
+    for (const at of ['2026-01-03T13:41:01Z', '2026-01-03T13:42:00Z']) expect(matched(copy(at)), at).toBe(0);
+    expect(matched(copy('2026-01-03T13:41:00Z', 'Delivery attempted'))).toBe(0);
+    expect(matched(copy('2026-01-03T13:41:00Z', 'Delivered', 'in_transit'))).toBe(0);
+    expect(matched(copy('2026-01-03T13:41:00Z', 'Delivered', 'delivered', 'Ship24'))).toBe(0);
+    expect(matched(copy('2026-01-03T13:41:00Z'), [ship24,
+      named(row('unknown:parcelsapp', '2026-01-03T13:40:30+00:00', 'Delivered', 'delivered'), 'ParcelsApp')])).toBe(0);
+    // A carrier's scan is not a provider's row of it.
+    expect(matched(copy('2026-01-03T13:41:00Z'), [row('dhl:delivered', '2026-01-03T13:40:01+00:00', 'Delivered', 'delivered')]))
+      .toBe(0);
+  });
+
   // A carrier's own scans, and a universal provider's own wording of them, unclassified and two hours early.
   const registered = scan('paack:registered', '2026-01-06T10:50:30Z', 'Shipment registered', 'registered');
   const accepted = scan('paack:accepted', '2026-01-06T16:38:19Z', 'Shipment accepted', 'accepted');

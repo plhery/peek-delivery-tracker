@@ -15206,6 +15206,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e30613"
     },
     {
+      "id": "speedy",
+      "catalog": "speedy",
+      "slug": "speedy-tracking",
+      "title": "Rastreamento Speedy: códigos, status e lockers na Bulgária",
+      "name": "Speedy",
+      "color": "#dc0032"
+    },
+    {
       "id": "fan-courier",
       "catalog": "fan-courier",
       "slug": "rastreamento-fan-courier",
@@ -15764,6 +15772,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Chunghwa Post (Taiwan): códigos e status",
       "name": "Chunghwa Post",
       "color": "#e8171f"
+    },
+    {
+      "id": "raben",
+      "catalog": "raben",
+      "slug": "raben-tracking",
+      "title": "Rastreamento Raben: código de envio, status e entregas",
+      "name": "Raben",
+      "color": "#df0020"
     },
     {
       "id": "jd-logistics",
@@ -19220,6 +19236,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e30613"
     },
     {
+      "id": "speedy",
+      "catalog": "speedy",
+      "slug": "speedy-tracking",
+      "title": "保加利亚 Speedy 物流查询：11 位运单号、状态与快递柜",
+      "name": "Speedy",
+      "color": "#dc0032"
+    },
+    {
       "id": "fan-courier",
       "catalog": "fan-courier",
       "slug": "fan-courier-tracking",
@@ -19794,6 +19818,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "中华邮政（Chunghwa Post）物流查询：TW单号、状态与联系",
       "name": "Chunghwa Post",
       "color": "#e8171f"
+    },
+    {
+      "id": "raben",
+      "catalog": "raben",
+      "slug": "raben-tracking",
+      "title": "Raben 物流查询：欧洲托盘与零担单号、状态与卸货说明",
+      "name": "Raben",
+      "color": "#df0020"
     },
     {
       "id": "jd-logistics",

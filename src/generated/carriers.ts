@@ -15990,6 +15990,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#c81011"
     },
     {
+      "id": "dpd-nl",
+      "catalog": "dpd-nl",
+      "slug": "dpd-netherlands-tracking",
+      "title": "Rastreamento DPD Países Baixos: status, entregas e contato",
+      "name": "DPD Netherlands",
+      "color": "#dc0032"
+    },
+    {
+      "id": "dpd-at",
+      "catalog": "dpd-at",
+      "slug": "dpd-austria-tracking",
+      "title": "Rastreamento DPD Áustria: status, pontos Pickup e contato",
+      "name": "DPD Austria",
+      "color": "#dc0032"
+    },
+    {
       "id": "ozon-logistics",
       "catalog": "ozon-logistics",
       "slug": "rastreamento-ozon",
@@ -20098,6 +20114,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "吉凡国际物流（Jifan）查询：JFGJ单号、状态与北京时间",
       "name": "Jifan",
       "color": "#c81011"
+    },
+    {
+      "id": "dpd-nl",
+      "catalog": "dpd-nl",
+      "slug": "dpd-netherlands-tracking",
+      "title": "DPD 荷兰（DPD Netherlands）物流查询：状态、自提点与客服",
+      "name": "DPD Netherlands",
+      "color": "#dc0032"
+    },
+    {
+      "id": "dpd-at",
+      "catalog": "dpd-at",
+      "slug": "dpd-austria-tracking",
+      "title": "DPD 奥地利（DPD Austria）物流查询：状态、自提点与客服",
+      "name": "DPD Austria",
+      "color": "#dc0032"
     },
     {
       "id": "ozon-logistics",

@@ -15518,6 +15518,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#023053"
     },
     {
+      "id": "thhy",
+      "catalog": "thhy",
+      "slug": "rastreamento-tianhui-hengyuan",
+      "title": "Rastreamento Tianhui Hengyuan (THHY): códigos AT e leituras",
+      "name": "Tianhui Hengyuan",
+      "color": "#00a2e9"
+    },
+    {
       "id": "js-express",
       "catalog": "js-express",
       "slug": "rastreamento-js-express",
@@ -15868,6 +15876,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Memphis Courier — códigos, alfândega e ANVISA",
       "name": "Memphis Courier",
       "color": "#1f3c5b"
+    },
+    {
+      "id": "bfe-express",
+      "catalog": "bfe-express",
+      "slug": "rastreamento-bfe-express",
+      "title": "Rastreamento BFE Express: códigos CK, WYB e status",
+      "name": "BFE Express",
+      "color": "#122a88"
     }
   ],
   "pl": [

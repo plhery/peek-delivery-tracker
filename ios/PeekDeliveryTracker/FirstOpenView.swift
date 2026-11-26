@@ -15,13 +15,14 @@ enum FirstParcelRequest: Equatable {
     static let pasteLimit = 2000
 
     /// Text or a link dragged onto the deliveries from another app is taken as a paste: each piece once, one to a
-    /// line, as the share extension joins them. Nil when nothing in it reads as a tracking number, or as a shop's
-    /// order number, which Add explains.
+    /// line, as the share extension joins them. Nil when nothing in it reads as a tracking number, as a shop's
+    /// order number, which Add explains, or as a shop's tracking-page link, which Add reads.
     static func drop(_ items: [String], catalog: CarrierCatalog = .shared) -> Self? {
         let pieces = items.compactMap { $0.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty }
             .reduce(into: [String]()) { pieces, piece in if !pieces.contains(piece) { pieces.append(piece) } }
         let text = String(pieces.joined(separator: "\n").prefix(pasteLimit))
-        return catalog.read(text).trackingNumber.isEmpty && catalog.order(in: text) == nil ? nil : .paste(text)
+        let named = !catalog.read(text).trackingNumber.isEmpty || catalog.order(in: text) != nil || ShopLink.request(in: text) != nil
+        return named ? .paste(text) : nil
     }
 }
 

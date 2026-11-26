@@ -89,6 +89,15 @@ struct ShopWaitList {
         return gone
     }
 
+    /// Shows at once the waits the reader just kept from Add, at the end of the list, or in their place when the list
+    /// shows them already; the read that follows brings the service's list.
+    mutating func kept(_ kept: [ShopWait]) {
+        for wait in kept {
+            removed[wait.id] = nil
+            if let index = waits.firstIndex(where: { $0.id == wait.id }) { waits[index] = wait } else { waits.append(wait) }
+        }
+    }
+
     /// Takes a wait off the list at once, before the service is told. False when the list doesn't show it.
     mutating func remove(_ id: UUID) -> Bool {
         guard let index = waits.firstIndex(where: { $0.id == id }) else { return false }

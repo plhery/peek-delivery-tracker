@@ -6173,7 +6173,7 @@ extension ParcelLogicTests {
         XCTAssertEqual(TrackingNumberCopy.text("19999980001", carrier: .postlogistics), "19999980-001")
     }
 
-    func testTextDroppedOnTheDeliveriesOpensAddOnlyWhenItHoldsATrackingOrOrderNumber() {
+    func testTextDroppedOnTheDeliveriesOpensAddOnlyWhenItHoldsATrackingOrOrderNumberOrAShopLink() {
         let catalog = CarrierCatalog(cacheURL: nil)
         XCTAssertEqual(FirstParcelRequest.drop([" 1Z999AA10123456784\n"], catalog: catalog), .paste("1Z999AA10123456784"))
         let message = "Your order has shipped: 1Z999AA10123456784"
@@ -6188,6 +6188,10 @@ extension ParcelLogicTests {
         // So does a message's one number whose shape proves no carrier: Add asks the carriers.
         let uncertain = "Your order has shipped!\nTrack it with DHL: 1234567899"
         XCTAssertEqual(FirstParcelRequest.drop([uncertain], catalog: catalog), .paste(uncertain))
+        // So does a shop's tracking-page link, which Add reads.
+        let shopLink = "https://hm.delivery-status.com/pl/?orderNo=9900000000001"
+        XCTAssertEqual(FirstParcelRequest.drop([shopLink], catalog: catalog), .paste(shopLink))
+        XCTAssertNil(FirstParcelRequest.drop(["https://hm.delivery-status.com.example.test/pl/"], catalog: catalog))
         // Nothing to track: the drop is refused, and Add stays closed.
         XCTAssertNil(FirstParcelRequest.drop([], catalog: catalog))
         XCTAssertNil(FirstParcelRequest.drop([" ", "\n"], catalog: catalog))

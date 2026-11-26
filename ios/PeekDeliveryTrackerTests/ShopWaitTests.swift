@@ -290,7 +290,7 @@ final class ShopWaitTests: XCTestCase {
     private static let quietNotifications = DeviceNotificationAccess(status: { .denied }, request: {}, register: {}, token: { nil })
 }
 
-private final class ShopWaitTestURLProtocol: URLProtocol {
+final class ShopWaitTestURLProtocol: URLProtocol {
     nonisolated(unsafe) static var handler: ((URLRequest) -> (Int, Data))?
 
     @MainActor static var configuration: AppConfiguration {
@@ -317,14 +317,14 @@ private final class ShopWaitTestURLProtocol: URLProtocol {
     override func stopLoading() {}
 }
 
-private final class ShopWaitTestStorage: DeviceParcelStorage {
+final class ShopWaitTestStorage: DeviceParcelStorage {
     var parcels: [DeviceParcel] = []
     var keys: [String: String] = [:]
     func load() -> (parcels: [DeviceParcel], keys: [String: String]) { (parcels, keys) }
     func save(_ parcels: [DeviceParcel], keys: [String: String]) { self.parcels = parcels; self.keys = keys }
 }
 
-private final class ShopWaitTestSessionPersistence: SessionPersistence {
+final class ShopWaitTestSessionPersistence: SessionPersistence {
     var data: Data?
     func save<T: Encodable>(_ value: T) throws { data = try JSONEncoder.deliveryTracker.encode(value) }
     func load<T: Decodable>() -> T? { data.flatMap { try? JSONDecoder.deliveryTracker.decode(T.self, from: $0) } }

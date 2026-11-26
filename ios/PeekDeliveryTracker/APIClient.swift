@@ -644,6 +644,40 @@ final class DeliveryAPIClient {
         try ShopWaitsOffer.decode(try await rawRequest("/api/shop-waits").0)
     }
 
+    /// What a text's shop links name, read for the account (`ShopLinks.swift`). The text is the links alone.
+    func readShopLink(_ links: String) async throws -> ShopLinkAnswer {
+        let body = try JSONEncoder.deliveryTracker.encode(ShopLinkRequest(text: links))
+        return try ShopLinkAnswer.decode(try await rawRequest("/api/shop-links", method: "POST", body: body).0)
+    }
+
+    /// Waits for the parcels of the text's shop links, named `label`, and answers the waits kept for them: none when
+    /// the account's waits are full.
+    func keepShopWait(_ links: String, label: String) async throws -> [ShopWait] {
+        let body = try JSONEncoder.deliveryTracker.encode(ShopWaitRequest(text: links, label: label))
+        return try ShopWaitsOffer.decode(try await rawRequest("/api/shop-waits", method: "POST", body: body).0)
+    }
+
+    /// What a text's shop links name, read without sign-in or cookies, as the app's other requests without an account
+    /// are sent: a JSON body, and neither `Origin` nor `Sec-Fetch-Site`, which the service refuses from another site.
+    static func publicShopLink(_ links: String, configuration: AppConfiguration = .current, transport: URLSession = .shared) async throws -> ShopLinkAnswer {
+        var request = URLRequest(url: configuration.apiBaseURL.appending(path: "api/public/shop-links"),
+                                 cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 30)
+        request.httpMethod = "POST"
+        request.httpShouldHandleCookies = false
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.namePeekInputs()
+        request.httpBody = try JSONEncoder.deliveryTracker.encode(ShopLinkRequest(text: links))
+        let (data, response): (Data, URLResponse)
+        do { (data, response) = try await transport.data(for: request) } catch { throw Maintenance.failure(error) }
+        guard let response = response as? HTTPURLResponse else { throw DeliveryAPIError.invalidResponse }
+        switch response.statusCode {
+        case 200: return try ShopLinkAnswer.decode(data)
+        case 429: throw DeliveryAPIError.rateLimited(retryAfterSeconds(response.value(forHTTPHeaderField: "Retry-After")))
+        default: throw Maintenance.serverDown(data, response) ?? DeliveryAPIError.serviceFailed(response.statusCode)
+        }
+    }
+
     /// Stops waiting for a shop to ship. One already gone counts as removed.
     func removeShopWait(id: UUID) async throws {
         _ = try await rawRequest("/api/shop-waits/\(id.uuidString.lowercased())", method: "DELETE", accepting: 404)

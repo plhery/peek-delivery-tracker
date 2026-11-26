@@ -68,6 +68,8 @@ struct AddParcelView: View {
     @State private var asTyped: String?
     /// The number chosen among several in one text.
     @State private var pick: String?
+    /// What the shop's tracking-page links in the field name (`ShopLinks.swift`).
+    @State private var shopLink: ShopLinkField
     @FocusState private var focusedField: Field?
 
     @ObservedObject private var catalog = CarrierCatalog.shared
@@ -87,6 +89,8 @@ struct AddParcelView: View {
         self.onAdded = onAdded
         _label = State(initialValue: draft?.label ?? "")
         _trackingInput = State(initialValue: draft?.trackingInput ?? "")
+        // A shared shop link is read as soon as the sheet opens, as a pasted one is.
+        _shopLink = State(initialValue: ShopLinkField(arriving: draft?.trackingInput))
         // A shared text is settled as soon as the sheet opens.
         _recognition = State(initialValue: CarrierRecognition(
             settledNumber: draft.map { Self.trackingNumber(in: $0.trackingInput) }
@@ -144,6 +148,7 @@ struct AddParcelView: View {
             .animation(reduceMotion ? nil : .snappy(duration: 0.3), value: requirements)
             .animation(reduceMotion ? nil : .snappy(duration: 0.3), value: errorMessage)
             .animation(reduceMotion ? nil : .snappy(duration: 0.3), value: recognitionStatus)
+            .animation(reduceMotion ? nil : .snappy(duration: 0.3), value: shopLinkReading)
             .sensoryFeedback(.selection, trigger: resolvedCarrier) { oldValue, newValue in
                 oldValue != newValue && newValue != .unknown
             }
@@ -173,6 +178,7 @@ struct AddParcelView: View {
                         showingScanner = false
                     }
                     focusedField = nil
+                    shopLink.arrived(value)
                     recognition.settledNumber = Self.trackingNumber(in: value)
                 }
                 .environmentObject(localizer)
@@ -244,6 +250,17 @@ struct AddParcelView: View {
                     recognition.failedNumber = number
                 }
             }
+            // A shop's tracking-page link with no number beside it: its shop's platform is asked what it names, once
+            // typing pauses, or at once for a link pasted or shared.
+            .task(id: shopLinkQuestion) {
+                guard let question = shopLinkQuestion, shopLink.reading(for: question) == .reading else { return }
+                if shopLink.waitsForTyping(trackingInput) {
+                    do { try await Task.sleep(for: ShopLinkField.typingPause) } catch { return }
+                }
+                let outcome = await store.readShopLink(question)
+                guard !Task.isCancelled else { return }
+                if let found = shopLink.answer(outcome, for: question) { fillNamed(found) }
+            }
             .task(id: refusalQuestion) {
                 guard let question = refusalQuestion else { return }
                 let refuses = await NumberRefusals.refuses(question)
@@ -300,7 +317,7 @@ struct AddParcelView: View {
                 .submitLabel(.done)
                 .focused($focusedField, equals: .label)
                 .onSubmit {
-                    if canSave { save() } else { focusedField = .tracking }
+                    if canSave { save() } else if waitForShop { waitForShopToShip() } else { focusedField = .tracking }
                 }
                 .onChange(of: label) { _, value in
                     if value.count > 80 { label = String(value.prefix(80)) }
@@ -358,10 +375,11 @@ struct AddParcelView: View {
             .submitLabel(.next)
             .focused($focusedField, equals: .tracking)
             .onSubmit(submitTracking)
-            .onChange(of: trackingInput) { _, _ in
+            .onChange(of: trackingInput) { _, value in
                 duplicateParcelID = nil
                 errorMessage = nil
-                carrierOverride = nil
+                // A carrier picked by hand goes with the number it was picked for; one a shop's link named stays with its number.
+                carrierOverride = shopLink.carrier(for: value)
                 // A number chosen among several stays chosen while the text still names it.
                 if !several.contains(where: { $0.normalized == pick }) { pick = nil }
             }
@@ -372,12 +390,14 @@ struct AddParcelView: View {
                     .strokeBorder(focusedField == .tracking ? ExperimentalPalette.ochre : Brand.sheetLine(0.3), lineWidth: 1)
             }
 
-            if parsed.trackingNumber.isEmpty && !cleanedInput.isEmpty && order == nil {
+            // While a shop's link is read or answered, its notice says what there is instead.
+            if parsed.trackingNumber.isEmpty && !cleanedInput.isEmpty && order == nil && shopLinkReading == .none {
                 Text(localizer.text("add.notFound"))
                     .font(.caption)
                     .foregroundStyle(Brand.warning)
                     .fixedSize(horizontal: false, vertical: true)
             }
+            if let notice = shopLinkNotice { shopLinkNote(notice) }
             // The start of a longer number is still being typed: the notice waits for the number to settle.
             if pickupCode && recognition.settledNumber == normalizedNumber {
                 heldBackNote(title: localizer.text("add.pickupCode.title"), body: localizer.text("add.pickupCode.body"))
@@ -425,10 +445,11 @@ struct AddParcelView: View {
     /// The note under the field once the number has settled, as VoiceOver reads it out: none found, held back, or
     /// questioned.
     private var spokenNotice: String? {
+        if let shopLinkNotice { return shopLinkNotice.spoken }
         guard recognition.settledNumber == normalizedNumber else { return nil }
         // A note's title and its words are read one after the other, as two lines.
         let note = { (title: String, body: String) in "\(localizer.text(title))\n\(localizer.text(body))" }
-        if parsed.trackingNumber.isEmpty && !cleanedInput.isEmpty && order == nil { return localizer.text("add.notFound") }
+        if parsed.trackingNumber.isEmpty && !cleanedInput.isEmpty && order == nil && shopLinkReading == .none { return localizer.text("add.notFound") }
         if pickupCode { return note("add.pickupCode.title", "add.pickupCode.body") }
         if placeholderNumber { return localizer.text("tracking.failure.placeholderNumber") }
         if let order { return note("door.order.\(order.rawValue).title", "door.order.\(order.rawValue).body") }
@@ -445,6 +466,22 @@ struct AddParcelView: View {
         .foregroundStyle(Brand.warning)
         .fixedSize(horizontal: false, vertical: true)
         .accessibilityElement(children: .combine)
+    }
+
+    /// What a shop's link in the field says: being read, not shipped yet, or unreadable. Calm words, never a warning:
+    /// a parcel not shipped yet is no mistake.
+    private func shopLinkNote(_ notice: ShopLinkNoticeText) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
+            if let title = notice.title {
+                Text(title).font(.caption.weight(.semibold)).foregroundStyle(Brand.ink)
+            }
+            Text(notice.body).font(.caption).foregroundStyle(Brand.secondaryText)
+        }
+        .fixedSize(horizontal: false, vertical: true)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("addParcel.shopLink")
+        .transition(.opacity)
     }
 
     private var trackingLabel: some View {
@@ -927,10 +964,14 @@ struct AddParcelView: View {
     }
 
     private var addButton: some View {
-        Button(action: save) {
+        // Signed in, a shop's link that named no parcel yet is waited for: the button says for which shop.
+        let waits = waitForShop
+        return Button(action: waits ? waitForShopToShip : save) {
             HStack(spacing: 10) {
-                if saving {
-                    ProgressView().tint(Brand.onAccent)
+                if saving { ProgressView().tint(Brand.onAccent) }
+                if waits {
+                    Text(ShopLinkNoticeText.waitAction(shopLinkReading, localizer: localizer))
+                } else if saving {
                     Text(localizer.text("add.adding"))
                 } else {
                     Text(localizer.text(several.isEmpty ? "app.addParcel" : "door.several.track"))
@@ -946,14 +987,15 @@ struct AddParcelView: View {
             .frame(maxWidth: .infinity, minHeight: 50)
             .padding(.horizontal, 16)
             .background(Brand.accent, in: RoundedRectangle(cornerRadius: 14))
-            .opacity(canSave || saving ? 1 : 0.45)
+            .opacity(canSave || saving || waits ? 1 : 0.45)
             .contentTransition(.opacity)
         }
         .buttonStyle(TactileButtonStyle())
         .accessibilityShowsLargeContentViewer()
         .accessibilityIdentifier("addParcel.save")
         .animation(reduceMotion ? nil : .easeOut(duration: 0.2), value: canSave)
-        .disabled(!canSave || saving)
+        .animation(reduceMotion ? nil : .easeOut(duration: 0.2), value: waits)
+        .disabled(waits ? saving : !canSave || saving)
     }
 
     private var cleanedInput: String {
@@ -981,13 +1023,28 @@ struct AddParcelView: View {
 
     private var normalizedNumber: String { CarrierCatalog.normalize(parsed.trackingNumber) }
 
-    private static func trackingNumber(in input: String) -> String {
+    /// The number Add reads in a text, normalized: the first of several, none for an order number.
+    static func trackingNumber(in input: String) -> String {
         let catalog = CarrierCatalog.shared
         if let first = catalog.numbers(in: input).first { return first.normalized }
         return catalog.order(in: input) == nil ? CarrierCatalog.normalize(catalog.read(input).trackingNumber) : ""
     }
 
     private var amazonNumber: Bool { catalog.isAmazonTrackingNumber(parsed.trackingNumber) }
+
+    /// The shop links to read: the field's, when it holds one and no number.
+    private var shopLinkQuestion: String? {
+        store.readsShopLinks ? ShopLinkField.question(in: trackingInput, number: parsed.trackingNumber) : nil
+    }
+
+    private var shopLinkReading: ShopLinkReading { shopLink.reading(for: shopLinkQuestion) }
+
+    private var shopLinkNotice: ShopLinkNoticeText? {
+        ShopLinkNoticeText(shopLinkReading, signedIn: store.waitsForShops, localizer: localizer)
+    }
+
+    /// Signed in, a shop's link that named no parcel yet is waited for rather than added.
+    private var waitForShop: Bool { parsed.trackingNumber.isEmpty && shopLinkReading.canWait(signedIn: store.waitsForShops) }
 
     /// A postal number whose check digit doesn't add up, until it is added as typed. A number chosen among several
     /// is certain of its carrier.
@@ -1325,6 +1382,7 @@ struct AddParcelView: View {
             trackingInput = value
         }
         focusedField = .tracking
+        shopLink.arrived(value)
         recognition.settledNumber = Self.trackingNumber(in: value)
     }
 
@@ -1343,9 +1401,20 @@ struct AddParcelView: View {
             pickedCountry = nil
             postcodes = CarrierPostcodes()
             phoneInput = ParcelPhoneInput()
+            shopLink = ShopLinkField(arriving: draft.trackingInput)
         }
         recognition.settledNumber = Self.trackingNumber(in: draft.trackingInput)
         prepareRequiredDetails(for: inputCarrier)
+    }
+
+    /// Puts the number a shop's link named in the field, with its carrier when the platform named one Peek knows, as
+    /// though it were picked: the carriers are asked about it at once.
+    private func fillNamed(_ found: ShopLinkOutcome.Found) {
+        withAnimation(reduceMotion ? nil : .snappy(duration: 0.34)) {
+            trackingInput = found.trackingNumber
+            carrierOverride = found.carrier
+        }
+        recognition.settledNumber = Self.trackingNumber(in: found.trackingNumber)
     }
 
     /// Asks the carriers about the number in the field again as from another country, for this number only.
@@ -1394,6 +1463,28 @@ struct AddParcelView: View {
             focusedField = .phoneDigits
         } else {
             focusedField = .label
+        }
+    }
+
+    /// Asks Peek to wait for the shop to ship the parcels its link names, under the name typed, and closes: the wait
+    /// shows on the list.
+    private func waitForShopToShip() {
+        guard waitForShop, !saving, let question = shopLinkQuestion else { return }
+        focusedField = nil
+        saving = true
+        errorMessage = nil
+        duplicateParcelID = nil
+        lookupsSpent = false
+        Task {
+            do {
+                try await store.keepShopWait(question, label: label)
+                dismiss()
+            } catch where error.isCancellation {
+                saving = false
+            } catch {
+                errorMessage = localizer.errorMessage(error)
+                saving = false
+            }
         }
     }
 

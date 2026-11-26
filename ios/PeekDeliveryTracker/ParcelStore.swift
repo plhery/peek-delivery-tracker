@@ -641,6 +641,56 @@ final class ParcelStore: ObservableObject {
         }
     }
 
+    /// Whether Add reads the shop links pasted or shared into it: for an account, and without one wherever tracking
+    /// without an account works, the demo's too, as on the web.
+    var readsShopLinks: Bool {
+        #if DEBUG
+        if isDemo, ShopLinkPreview.variant != nil { return true }
+        #endif
+        return session.user != nil || tracksWithoutAccount
+    }
+
+    /// Whether Peek can wait for a shop to ship: only for an account, which keeps the wait.
+    var waitsForShops: Bool {
+        #if DEBUG
+        if isDemo, ShopLinkPreview.variant != nil { return true }
+        #endif
+        return session.user != nil && !isDemo
+    }
+
+    /// What the shop links Add holds name (`ShopLinks.swift`), asked for the account or, without one, as a visitor.
+    /// Whatever goes wrong is a page that doesn't answer.
+    func readShopLink(_ links: String) async -> ShopLinkOutcome {
+        #if DEBUG
+        if isDemo, let variant = ShopLinkPreview.variant { return ShopLinkOutcome(ShopLinkPreview.answer(variant)) }
+        #endif
+        guard readsShopLinks else { return .failed }
+        let generation = session.generation
+        do {
+            let answer = session.user != nil
+                ? try await api.readShopLink(links)
+                : try await DeliveryAPIClient.publicShopLink(links, configuration: configuration, transport: transport)
+            return generation == session.generation ? ShopLinkOutcome(answer) : .failed
+        } catch {
+            return .failed
+        }
+    }
+
+    /// Waits for the parcels of Add's shop links, named as the reader named them: the wait shows on the list at once,
+    /// and the waits are read again.
+    func keepShopWait(_ links: String, label: String) async throws {
+        let label = label.trimmingCharacters(in: .whitespacesAndNewlines)
+        #if DEBUG
+        if isDemo, let variant = ShopLinkPreview.variant { shopWaits.kept([ShopLinkPreview.wait(variant, label: label)]); return }
+        #endif
+        guard session.user != nil, !isDemo else { throw DeliveryAPIError.authenticationExpired }
+        let generation = session.generation
+        let kept = try await api.keepShopWait(links, label: label)
+        try session.checkGeneration(generation)
+        shopWaits.kept(kept)
+        Task { await loadShopWaits() }
+    }
+
     /// Reads the account's list and says how the read ended, so a refresh compares parcels only with a list it read.
     @discardableResult
     private func loadAccountParcels(showSpinner: Bool, hidden: Bool = false) async -> LoadOutcome {

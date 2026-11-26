@@ -15382,6 +15382,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee4d2d"
     },
     {
+      "id": "pengyou",
+      "catalog": "pengyou",
+      "slug": "rastreamento-pengyou",
+      "title": "Rastreamento Pengyou: códigos PY, etapas e suporte",
+      "name": "Pengyou",
+      "color": "#043a82"
+    },
+    {
       "id": "mtscn",
       "catalog": "mtscn",
       "slug": "rastreamento-meiteshun",
@@ -15612,6 +15620,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Xinghe Freight: códigos GZXH…YQ e etapas",
       "name": "Xinghe Freight",
       "color": "#0e3a6b"
+    },
+    {
+      "id": "sxw-express",
+      "catalog": "sxw-express",
+      "slug": "rastreamento-sxw-express",
+      "title": "Rastreamento SXW Express: códigos SXW, etapas e entrega",
+      "name": "SXW Express",
+      "color": "#003876"
     },
     {
       "id": "j-and-t-br",

@@ -127,7 +127,7 @@
   { "id": "nz-post", "catalog": "nz-post", "name": "NZ Post", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "aramex-nz", "catalog": "aramex-nz", "name": "Aramex New Zealand", "languages": ["en", "fr", "de", "es", "it", "pt", "pl", "zh", "pt-br"] },
   { "id": "magyar-posta", "catalog": "magyar-posta", "name": "Magyar Posta", "languages": ["en", "hu", "fr", "de", "es", "it", "pt", "pl", "zh", "pt-br"] },
-  { "id": "shiprocket", "catalog": "shiprocket", "name": "Shiprocket", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
+  { "id": "shiprocket", "catalog": "shiprocket", "name": "Shiprocket", "languages": ["en", "fr", "de", "es", "it", "pt", "pl", "zh", "pt-br"] },
   { "id": "first-line", "catalog": "first-line", "name": "FIRST LINE", "languages": ["en", "es", "fr", "de", "it", "pt", "pl", "zh", "pt-br"] },
   { "id": "j-and-t-de", "catalog": "j-and-t-de", "name": "J&T Express Germany", "languages": ["en", "de", "ru", "ro", "hr", "it", "pl", "fr", "es", "pt", "zh", "pt-br"] },
   { "id": "kun-express", "catalog": "kun-express", "name": "Kun Express", "languages": ["en", "fr", "de", "es", "it", "pt", "pl", "zh", "pt-br"] },
@@ -306,5 +306,5 @@
   { "id": "tnt-au", "catalog": "tnt-au", "name": "TNT Australia", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "wedo", "catalog": "wedo", "name": "One by Allegro CZ", "languages": ["en", "cs", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "5post", "catalog": "5post", "name": "5Post", "languages": ["en", "ru", "fr", "de", "es", "it", "pt", "pl", "zh", "pt-br"] },
-  { "id": "shipter", "catalog": "shipter", "name": "Shipter", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] }
+  { "id": "shipter", "catalog": "shipter", "name": "Shipter", "languages": ["en", "fr", "de", "es", "it", "pt", "pl", "zh", "pt-br"] }
 ]

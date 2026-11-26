@@ -15574,6 +15574,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#346631"
     },
     {
+      "id": "shiprocket",
+      "catalog": "shiprocket",
+      "slug": "shiprocket-tracking",
+      "title": "Rastreio Shiprocket: códigos AWB, status e RTO",
+      "name": "Shiprocket",
+      "color": "#735ae5"
+    },
+    {
       "id": "first-line",
       "catalog": "first-line",
       "slug": "rastreamento-first-line",
@@ -16684,6 +16692,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento 5Post Rússia: códigos, retirada e status",
       "name": "5Post",
       "color": "#64b441"
+    },
+    {
+      "id": "shipter",
+      "catalog": "shipter",
+      "slug": "shipter-tracking",
+      "title": "Rastreio Shipter: códigos coreanos H3 e status",
+      "name": "Shipter",
+      "color": "#005eff"
     }
   ],
   "pl": [
@@ -20116,6 +20132,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#346631"
     },
     {
+      "id": "shiprocket",
+      "catalog": "shiprocket",
+      "slug": "shiprocket-tracking",
+      "title": "Shiprocket 物流查询：AWB 单号、状态与退回（RTO）说明",
+      "name": "Shiprocket",
+      "color": "#735ae5"
+    },
+    {
       "id": "first-line",
       "catalog": "first-line",
       "slug": "yihao-zhuanxian-first-line-chaxun",
@@ -21250,6 +21274,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "5Post 俄罗斯包裹追踪：单号、Pyaterochka 自提与状态",
       "name": "5Post",
       "color": "#64b441"
+    },
+    {
+      "id": "shipter",
+      "catalog": "shipter",
+      "slug": "shipter-tracking",
+      "title": "Shipter 物流查询：韩国 H3 出口单号与追踪状态说明",
+      "name": "Shipter",
+      "color": "#005eff"
     }
   ],
   "nl": [

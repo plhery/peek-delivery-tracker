@@ -28,7 +28,7 @@ function ShopWaitCard({ wait, onRemove }: { wait: ApiShopWait; onRemove: (id: st
       <span className="shop-wait__mark"><Icon name="storefront" />{shop ? t('shopWait.via', { shop, platform }) : t('shopWait.via.unnamed', { platform })}</span>
     </span>
     <strong className="parcel-card__label">{name}</strong>
-    <span className="parcel-card__state shop-wait__state">
+    <span className="shop-wait__state">
       <Icon name={expired ? 'clock' : 'hourglass'} />
       {expired
         ? (shop ? t('shopWait.expired', { shop }) : t('shopWait.expired.unnamed'))

@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Lingdong International: códigos SZLD e status
-description: Rastreie encomendas Lingdong International de Shenzhen: formato SZLD, significado das etapas em inglês e por que o rastreamento para antes da entrega.
+description: Rastreie encomendas Lingdong International de Shenzhen: formato SZLD, significado das etapas em inglês e por que o rastreamento costuma parar antes da entrega.
 slug: rastreamento-lingdong
 published: 2026-11-26
 updated: 2026-11-26
@@ -20,13 +20,13 @@ A Lingdong não publica um formato de código. Os conhecimentos respondidos pelo
 
 Letras minúsculas e espaços não fazem diferença ao colar o código no Peek.
 
-**Onde encontrar.** Os clientes da Lingdong são vendedores na China. Seu site oferece acesso a contas comerciais, calculadora de frete e instruções de envio; fora o campo de rastreamento, nada ali se volta a destinatários. O vendedor contrata o envio e repassa o código junto aos detalhes de envio do pedido. Se não encontrar, veja [como encontrar seu código de rastreamento](guide:find-tracking-number).
+**Onde encontrar.** Os clientes da Lingdong são vendedores na China. Seu site oferece acesso a contas comerciais, calculadora de frete e instruções de envio; fora o campo de rastreamento, nada ali se volta a destinatários. O vendedor contrata o envio e repassa o código, geralmente junto aos detalhes de envio do pedido. Se não encontrar, veja [como encontrar seu código de rastreamento](guide:find-tracking-number).
 
 **Outros códigos.** O rastreador da Lingdong também localiza uma encomenda pela referência dada pelo vendedor, exibida como 参考号 (número de referência). A Lingdong também comercializa serviços de China Post, PostNL, UPS, DHL e FedEx, então códigos no formato de outra empresa pertencem a ela: veja [formatos de código de rastreamento](guide:tracking-number-formats).
 
 ## Status de rastreamento da Lingdong explicados
 
-A Lingdong não publica lista oficial de status. Suas movimentações aparecem em inglês ou em chinês seguido de inglês. Textos observados no rastreador, na ordem habitual:
+A Lingdong não publica lista dos seus status. Suas movimentações aparecem em inglês ou em chinês seguido de inglês. Textos vistos no rastreador, na ordem em que a encomenda passa por eles:
 
 | A Lingdong mostra | O que significa para você |
 | --- | --- |
@@ -43,7 +43,7 @@ A Lingdong não publica lista oficial de status. Suas movimentações aparecem e
 | `已完成国内报关手续【Domestic customs clearance procedures have been completed.】`, `货物已清关完成/Import customs clearance complete`, `货物已完成清关【The goods have completed customs clearance】` | A alfândega do país de destino liberou o pacote, após o pouso e antes da entrega. "Domestic" aqui refere-se ao país de destino, não à China. |
 | `货物已交服务商【The shipment has been transferred to the logistics partner.】`, `包裹交接给本地物流商处理/Received by local delivery company` | Após o desembaraço, a Lingdong entregou o pacote à empresa que fará a entrega. |
 
-A linha em chinês inicial não é uma leitura física: o sistema da Lingdong a insere automaticamente em pedidos ainda sem leitura, com a data de criação do pedido.
+A linha em chinês não é uma leitura do pacote: o sistema de rastreamento da Lingdong a escreve sozinho em pedidos ainda sem leitura, com a data de criação do pedido.
 
 No Peek, a linha em chinês e `Shipping Label Created` aparecem como "Etiqueta criada", `Shipment arrived at facility` como "Recebida pela transportadora", `货物在清关【Customs clearance in progress】` como "Na alfândega", e todas as demais linhas da tabela como "Em trânsito".
 

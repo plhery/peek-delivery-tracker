@@ -26,7 +26,7 @@ O Peek aceita o código com ou sem espaços, em maiúsculas ou minúsculas.
 
 ## Status de rastreamento da Huaya Express explicados
 
-O rastreador da Huaya possui versão em chinês e em inglês. As linhas conhecidas pelo Peek aparecem em inglês, exceto a entrada no armazém e algumas linhas posteriores sobre aeroporto, voo, alfândega e repasse (que podem aparecer em chinês) e uma linha na Suécia em sueco. Na ordem habitual:
+O rastreador da Huaya possui versão em chinês e em inglês. As linhas conhecidas pelo Peek aparecem em inglês, exceto a entrada no armazém e algumas linhas posteriores sobre aeroporto, voo, alfândega e repasse (que podem aparecer em chinês) e uma linha na Suécia em sueco. Na ordem em que a encomenda passa por elas:
 
 | A Huaya mostra | O que significa para você |
 | --- | --- |
@@ -78,7 +78,7 @@ O Peek busca atualizações no próprio rastreador da Huaya: cada linha no texto
 
 Como o registro da Huaya não entrega ao Peek a transportadora final nem o código dela, o Peek permanece no rastreador da Huaya, cujo histórico termina no repasse ou nas leituras de uma transportadora americana até a entrega; apenas em rotas pela DHL na Alemanha ou para o México ele avança com as leituras copiadas da DHL ou da J&T Express. Para acompanhar o restante, adicione o código da transportadora local informado pelo vendedor como segunda encomenda.
 
-O Peek classifica as duas linhas de alfândega em inglês como em trânsito — pois relatam desembaraço concluído, não retenção —, mas a linha em chinês `航班落地，清关中` (pousou, em desembaraço) como "Na alfândega". Assim, entre as linhas próprias da Huaya, "Etapas importantes" (entrega, retirada, alfândega, tentativas frustradas e devoluções) avisa apenas nessa etapa, enquanto "Só a entrega" permanece em silêncio. Já as leituras copiadas da DHL, da J&T Express e da transportadora nos EUA disparam alertas normalmente, incluindo saída para entrega e entrega em "Só a entrega".
+O Peek classifica as duas linhas de alfândega em inglês como em trânsito — pois relatam desembaraço concluído, não retenção —, mas a linha em chinês `航班落地，清关中` (pousou, em desembaraço) como "Na alfândega". Assim, entre as linhas próprias da Huaya, "Etapas importantes" (entrega, retirada, alfândega, entregas não realizadas e devoluções) avisa apenas nessa etapa, enquanto "Só a entrega" permanece em silêncio. Já as leituras copiadas da DHL, da J&T Express e da transportadora nos EUA disparam alertas normalmente, incluindo saída para entrega e entrega em "Só a entrega".
 
 ## Perguntas frequentes sobre o rastreamento Huaya Express
 

@@ -299,6 +299,28 @@ final class DeliveryAPIClient {
         )
     }
 
+    /// Saves the parcel's private note; nil or blank text deletes it. A change of the note alone is no rename for the
+    /// counts (`AnalyticsCatalog.event`).
+    func setNote(id: UUID, note: String?) async throws -> Parcel {
+        try await request("/api/packages/\(id.uuidString)", method: "PATCH", body: NoteChange(note: note))
+    }
+
+    /// Adds a photo or PDF to the parcel's note: its bytes as they are, its type and name in the headers. A refusal is a
+    /// `NoteFileError` that says why, with the server's status.
+    func addFile(id: UUID, _ file: PreparedNoteFile) async throws -> AddPackageFileResponse {
+        let (data, _) = try await rawRequest(
+            "/api/packages/\(id.uuidString)/files", method: "POST", body: file.data,
+            contentType: file.type.rawValue, headers: ["X-File-Name": NoteChange.headerName(file.name)], timeout: 120,
+            refusal: { status, error in NoteFileError(problem: .upload(status: status, code: error?.code), size: file.data.count, status: status) }
+        )
+        do { return try await Self.decode(AddPackageFileResponse.self, from: data) } catch { throw DeliveryAPIError.invalidResponse }
+    }
+
+    /// Removes one of the note's files; one already gone is done.
+    func removeFile(id: UUID, fileID: UUID) async throws {
+        _ = try await rawRequest("/api/packages/\(id.uuidString)/files/\(fileID.uuidString)", method: "DELETE", accepting: 404)
+    }
+
     func changeCarrier(
         id: UUID,
         carrier: CarrierID,
@@ -653,11 +675,17 @@ final class DeliveryAPIClient {
     }
 
     /// `accepted`: a status besides 2xx that the caller reads itself, such as a 404 that means "not offered".
+    /// `contentType` and `headers`: a body that isn't JSON, such as a file's bytes. `refusal`: the error for a refusal the
+    /// caller words itself, by status and the service's error.
     private func performRawRequest(
         _ path: String,
         method: String = "GET",
         body: Data? = nil,
-        accepting accepted: Int? = nil
+        accepting accepted: Int? = nil,
+        contentType: String = "application/json",
+        headers: [String: String] = [:],
+        timeout: TimeInterval = 30,
+        refusal: (@Sendable (Int, ErrorResponse?) -> Error)? = nil
     ) async throws -> (Data, HTTPURLResponse) {
         let generation = session.generation
         try session.checkGeneration(generation)
@@ -680,11 +708,12 @@ final class DeliveryAPIClient {
             request.httpMethod = method
             request.httpBody = body
             request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
-            request.timeoutInterval = 30
+            request.timeoutInterval = timeout
             request.setValue("XMLHttpRequest", forHTTPHeaderField: "X-Requested-With")
             request.setValue("application/json", forHTTPHeaderField: "Accept")
             request.namePeekInputs()
-            if body != nil { request.setValue("application/json", forHTTPHeaderField: "Content-Type") }
+            if body != nil { request.setValue(contentType, forHTTPHeaderField: "Content-Type") }
+            for (name, value) in headers { request.setValue(value, forHTTPHeaderField: name) }
             if let token { request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization") }
             let result = signs
                 ? try await verification.sendSignedIn(request, baseURL: configuration.apiBaseURL, using: send)
@@ -719,6 +748,7 @@ final class DeliveryAPIClient {
                     result.1.value(forHTTPHeaderField: "Retry-After")
                 ))
             }
+            if let refusal { throw refusal(result.1.statusCode, error) }
             if result.1.statusCode == 409, let packageID = error?.packageID {
                 throw DeliveryAPIError.duplicateTracking(packageID)
             }
@@ -741,10 +771,16 @@ final class DeliveryAPIClient {
             || (parts.count == 4 && parts[0] == "api" && parts[1] == "packages" && UUID(uuidString: String(parts[2])) != nil && parts[3] == "sync")
     }
 
-    private func rawRequest(_ path: String, method: String = "GET", body: Data? = nil, accepting accepted: Int? = nil) async throws -> (Data, HTTPURLResponse) {
-        let event = AnalyticsCatalog.bundled?.event(path: path, method: method, body: body)
+    private func rawRequest(
+        _ path: String, method: String = "GET", body: Data? = nil, accepting accepted: Int? = nil,
+        contentType: String = "application/json", headers: [String: String] = [:], timeout: TimeInterval = 30,
+        refusal: (@Sendable (Int, ErrorResponse?) -> Error)? = nil
+    ) async throws -> (Data, HTTPURLResponse) {
+        // A file's bytes are never read for the counts.
+        let event = contentType == "application/json" ? AnalyticsCatalog.bundled?.event(path: path, method: method, body: body) : nil
         do {
-            let result = try await performRawRequest(path, method: method, body: body, accepting: accepted)
+            let result = try await performRawRequest(path, method: method, body: body, accepting: accepted, contentType: contentType,
+                                                     headers: headers, timeout: timeout, refusal: refusal)
             if let event { DeliveryAnalytics.shared.action(event, result.1.statusCode == 202 ? .accepted : .success) }
             return result
         } catch {

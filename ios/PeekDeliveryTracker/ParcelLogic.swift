@@ -567,8 +567,9 @@ extension Parcel {
         return String(expectedDelivery[swiftRange])
     }
 
+    /// What the list's search reads: the name, number, status and scans, and the note's words and its files' names.
     var searchText: String {
-        ([label, trackingNumber, lastStatusText ?? ""]
+        ([label, trackingNumber, lastStatusText ?? "", noteSearchText]
             + trackingEvents.flatMap { [$0.description, $0.location ?? ""] })
             .joined(separator: " ")
             .lowercased()

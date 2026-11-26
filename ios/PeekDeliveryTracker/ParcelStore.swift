@@ -150,6 +150,7 @@ final class ParcelStore: ObservableObject {
     private var refreshTask: Task<Void, Never>?
     /// Optimistic changes in flight; a list loaded meanwhile could undo them on screen.
     private var pendingMutations = Set<UUID>()
+    private var sendingKeptNoteFiles = false
     /// A reopened account shows its saved list at once. Until the service confirms
     /// it, the widget and Live Activities keep what they last showed.
     private var holdingDeliverySurfaces = false
@@ -985,6 +986,91 @@ final class ParcelStore: ObservableObject {
             : try await api.rename(id: parcel.id, label: cleaned)
         try session.checkGeneration(generation)
         upsert(updated)
+    }
+
+    // MARK: - Notes
+
+    /// Whether the parcel can have a private note here: an account's or the demo's, or a lookup of this iPhone's own
+    /// without an account. Someone else's parcel followed through their link has none.
+    func takesNote(_ parcel: Parcel) -> Bool {
+        if isDemo { return true }
+        if isGuest { return device.takesNote(id: parcel.id) }
+        return session.user != nil
+    }
+
+    /// Saves the note's words; nil or blank text deletes them. An account's go to the service, a guest's and the demo's
+    /// stay on this device.
+    func saveNote(_ parcel: Parcel, text: String?) async throws {
+        let generation = session.generation
+        let cleaned = text?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty.map(ParcelNoteText.clip)
+        let updated = isDemo ? try demo.setNote(id: parcel.id, note: cleaned)
+            : isGuest ? try device.setNote(id: parcel.id, note: cleaned)
+            : try await api.setNote(id: parcel.id, note: cleaned)
+        try session.checkGeneration(generation)
+        upsert(updated)
+    }
+
+    /// Adds a photo or PDF, ready to send, to the parcel's note. A refusal is a `NoteFileError`.
+    func addNoteFile(_ parcel: Parcel, _ file: PreparedNoteFile) async throws {
+        let generation = session.generation
+        let updated = isDemo ? try demo.addFile(id: parcel.id, file)
+            : isGuest ? try device.addFile(id: parcel.id, file)
+            : try await api.addFile(id: parcel.id, file).package
+        try session.checkGeneration(generation)
+        upsert(updated)
+    }
+
+    /// Removes one of the note's files.
+    func removeNoteFile(_ parcel: Parcel, fileID: UUID) async throws {
+        let generation = session.generation
+        if isDemo { upsert(try demo.removeFile(id: parcel.id, fileID: fileID)); return }
+        if isGuest { upsert(try device.removeFile(id: parcel.id, fileID: fileID)); return }
+        try await api.removeFile(id: parcel.id, fileID: fileID)
+        try session.checkGeneration(generation)
+        guard var current = parcels.first(where: { $0.id == parcel.id }) else { return }
+        let left = (current.files ?? []).filter { $0.id != fileID }
+        current.files = left.isEmpty ? nil : left
+        upsert(current)
+    }
+
+    /// The address of one of a note's files: on this device, or the service's, which is relative to the API.
+    func noteFileURL(_ address: String) -> URL? {
+        LocalNoteFiles.resolve(address, apiBase: configuration.apiBaseURL)
+    }
+
+    /// An account's file addresses are signed and expire: the list is read again for new ones once one has passed.
+    func freshenNoteFiles(_ parcel: Parcel, now: Date = Date()) async {
+        guard !isDemo, !isGuest, (parcel.files ?? []).contains(where: { file in
+            DateParser.date(file.expiresAt).map { $0 <= now.addingTimeInterval(5) } ?? false
+        }) else { return }
+        await load()
+    }
+
+    /// The photos and PDFs of guest notes kept in the account go after them, one at a time, each leaving this iPhone once
+    /// it arrived. One that fails stays for the next start; only a parcel the account no longer has lets its file go.
+    @discardableResult
+    func sendKeptNoteFiles() async -> Int {
+        guard session.user != nil, !sendingKeptNoteFiles else { return 0 }
+        sendingKeptNoteFiles = true
+        defer { sendingKeptNoteFiles = false }
+        let generation = session.generation
+        let files = device.noteFiles
+        var sent = 0
+        for file in files.kept {
+            guard generation == session.generation, let packageID = file.packageID else { return sent }
+            guard let data = files.data(of: file.id) else { files.remove([file.id]); continue }
+            do {
+                _ = try await api.addFile(id: packageID, PreparedNoteFile(data: data, name: file.name, type: file.type,
+                                                                          width: file.width, height: file.height))
+                files.remove([file.id])
+                sent += 1
+            } catch let error as NoteFileError where error.status == 404 {
+                files.remove([file.id])
+            } catch {
+                continue
+            }
+        }
+        return sent
     }
 
     func changeCarrier(
@@ -2410,6 +2496,10 @@ final class ParcelStore: ObservableObject {
             let batch = Array(claims[start..<min(start + 20, claims.count)])
             guard let response = try? await api.claimParcels(ClaimParcelsRequest(links: batch)),
                   generation == session.generation else { return }
+            for result in response.results where result.outcome == .kept || result.outcome == .already {
+                // The note went with the claim; its files follow, to the account's parcel.
+                if let id = result.packageID { device.handOverNoteFiles(linkID: result.id, to: id) }
+            }
             for result in response.results where result.outcome == .kept {
                 guard let id = result.packageID else { continue }
                 // What was archived here stays archived there, and a parcel whose notifications were turned off here
@@ -2428,6 +2518,8 @@ final class ParcelStore: ObservableObject {
             full += response.results.count { $0.outcome == .quota }
         }
         if LeftOnDeviceMemory.isNews(full, for: user.id) { leftOnDevice = LeftOnDevice(count: full) }
+        // The files of notes kept in the account go after them, those that waited since an earlier start too.
+        if await sendKeptNoteFiles() > 0, generation == session.generation { await load() }
     }
 
     private func monitorJobs(_ jobIDs: [UUID]) {
@@ -2603,10 +2695,14 @@ final class DemoRepository {
     private let languageKey = "sdt.native.demo.language.v1"
     private let defaults: UserDefaults
     private let language: () -> AppLanguage
+    /// The photos and PDFs of the demo's notes, by parcel, on this device alone.
+    let noteFiles: LocalNoteFiles
 
-    init(defaults: UserDefaults = .standard, language: @escaping () -> AppLanguage = { AppLanguage.current }) {
+    init(defaults: UserDefaults = .standard, language: @escaping () -> AppLanguage = { AppLanguage.current },
+         noteFiles: LocalNoteFiles = .demo) {
         self.defaults = defaults
         self.language = language
+        self.noteFiles = noteFiles
     }
 
     var notificationPreferences: NotificationPreferences {
@@ -2622,7 +2718,7 @@ final class DemoRepository {
     }
 
     func list(now: Date = Date()) -> [Parcel] {
-        let parcels = Self.withPeekAi(load(now: now).sorted { $0.createdAt > $1.createdAt }, now: now)
+        let parcels = Self.withPeekAi(withFiles(load(now: now)).sorted { $0.createdAt > $1.createdAt }, now: now)
         #if DEBUG
         return ImportChargesPreview.charging(parcels)
         #else
@@ -2670,6 +2766,31 @@ final class DemoRepository {
     func rename(id: UUID, label: String) throws -> Parcel {
         guard label.count <= 80 else { throw DeliveryAPIError.labelTooLong }
         return try update(id: id) { $0.label = label }
+    }
+
+    /// The demo keeps a note as an account does, with its files on this device.
+    func setNote(id: UUID, note: String?) throws -> Parcel {
+        try update(id: id) { $0.note = note?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty.map(ParcelNoteText.clip) }
+    }
+
+    func addFile(id: UUID, _ file: PreparedNoteFile) throws -> Parcel {
+        guard load().contains(where: { $0.id == id }) else { throw DeliveryAPIError.parcelMissing }
+        try noteFiles.add(file, to: id.uuidString)
+        return try update(id: id) { _ in }
+    }
+
+    func removeFile(id: UUID, fileID: UUID) throws -> Parcel {
+        noteFiles.remove(Set(noteFiles.of(id.uuidString).filter { $0.id == fileID }.map(\.id)))
+        return try update(id: id) { _ in }
+    }
+
+    /// The parcels with their notes' files, which are kept apart.
+    private func withFiles(_ parcels: [Parcel]) -> [Parcel] {
+        parcels.map { parcel in
+            var filed = parcel
+            filed.files = noteFiles.packageFiles(of: parcel.id.uuidString)
+            return filed
+        }
     }
 
     func changeCarrier(
@@ -2751,6 +2872,7 @@ final class DemoRepository {
         defaults.removeObject(forKey: key)
         defaults.removeObject(forKey: preferencesKey)
         defaults.removeObject(forKey: languageKey)
+        noteFiles.forgetAll()
     }
 
     /// The saved parcels with the demo's own text in the app's language. Names
@@ -2770,6 +2892,7 @@ final class DemoRepository {
         let translated = parcels.map { parcel in
             var copy = parcel
             copy.label = say(parcel.label)
+            copy.note = DemoNote.text(parcel.note, in: language())
             copy.lastStatusText = parcel.lastStatusText.map(say)
             copy.trackingEvents = parcel.trackingEvents.map { event in
                 var scan = event
@@ -2819,6 +2942,11 @@ final class DemoRepository {
         let seeded = Self.seed(now: now)
         save(seeded)
         defaults.removeObject(forKey: languageKey)
+        // The sample with a note gets its receipt and photo, drawn afresh.
+        noteFiles.forgetAll()
+        if let noted = seeded.first(where: { $0.trackingNumber == DemoNote.parcel }) {
+            for file in DemoNote.files() { _ = try? noteFiles.add(file, to: noted.id.uuidString, now: now) }
+        }
         return seeded
     }
 
@@ -2827,6 +2955,8 @@ final class DemoRepository {
         let kept = parcels.map { parcel in
             var copy = parcel
             copy.peekAi = nil
+            // The notes' files are kept apart (`noteFiles`).
+            copy.files = nil
             return copy
         }
         defaults.set(try? JSONEncoder.deliveryTracker.encode(kept), forKey: key)
@@ -2861,7 +2991,7 @@ final class DemoRepository {
         }
         change(&all[index])
         save(all)
-        return Self.withPeekAi([all[index]], now: Date())[0]
+        return Self.withPeekAi(withFiles([all[index]]), now: Date())[0]
     }
 
     /// The samples that show Peek AI, by number, and what they show: `by_time` out for delivery, `by_day` with no date.
@@ -3058,6 +3188,12 @@ final class DemoRepository {
                 archivedAt: sample.archivedHoursAgo.map(iso), notificationsMuted: false,
                 trackingEvents: history, plannedEvents: planned
             )
+        }.map { parcel in
+            // One sample carries a private note; its files are drawn when the samples are first saved.
+            guard parcel.trackingNumber == DemoNote.parcel else { return parcel }
+            var noted = parcel
+            noted.note = DemoNote.text[.en]
+            return noted
         }
     }
 }

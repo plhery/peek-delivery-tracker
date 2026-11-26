@@ -995,6 +995,8 @@ final class DeviceParcelTests: XCTestCase {
         named.label = "Shoes"
         var archived = halfTyped(made: minuteAgo)
         archived.archivedAt = DateParser.isoString(minuteAgo)
+        var noted = halfTyped(made: minuteAgo)
+        noted.note = "Size 42"
         var frozen = halfTyped(made: minuteAgo)
         frozen.frozen = DateParser.isoString(minuteAgo)
         var theirs = halfTyped(made: minuteAgo)
@@ -1005,6 +1007,7 @@ final class DeviceParcelTests: XCTestCase {
             ("With a scan", halfTyped(stage: .inTransit, made: minuteAgo), "1234567899"),
             ("Named here", named, "1234567899"),
             ("Archived here", archived, "1234567899"),
+            ("Noted here", noted, "1234567899"),
             ("No longer updated", frozen, "1234567899"),
             ("Someone else's", theirs, "1234567899"),
             ("The same number", halfTyped("1234567899", carrier: .ups, made: minuteAgo), "1234567899"),
@@ -2293,7 +2296,8 @@ final class DeviceParcelTests: XCTestCase {
     /// This iPhone following `links` as its own, a store on it and a session that signs into `account`, whose list is
     /// empty. The session's saved sign-in is `persistence`'s, for a relaunch to reopen.
     private func signingIn(_ links: [String], into account: AccountRoom, storage: Memory = Memory(), calls: Calls = Calls(),
-                           archived: Set<String> = [], muted: Set<String> = [])
+                           archived: Set<String> = [], muted: Set<String> = [], notes: [String: String] = [:],
+                           noteFiles: LocalNoteFiles? = nil)
         throws -> (store: ParcelStore, session: SessionStore, device: DeviceParcels, persistence: PostcodeTestSessionPersistence) {
         let user = AuthUser(id: UUID(), email: "test@example.com", isAnonymous: false)
         let signedIn = try JSONEncoder.deliveryTracker.encode(AuthSession(
@@ -2317,9 +2321,10 @@ final class DeviceParcelTests: XCTestCase {
             var entry = DeviceParcel(linkID: link, label: "", archivedAt: archived.contains(link) ? "2026-11-01T08:00:00Z" : nil,
                                      parcel: Parcel(shared: package(UUID(), number: "TESTPARCEL12300\(index)")), checkedAt: Date())
             if muted.contains(link) { entry.muted = true }
+            entry.note = notes[link]
             return entry
         }
-        let device = DeviceParcels(client: client(calls), storage: storage)
+        let device = DeviceParcels(client: client(calls), storage: storage, noteFiles: noteFiles ?? self.noteFiles())
         let persistence = PostcodeTestSessionPersistence()
         let session = SessionStore(configuration: PostcodeTestURLProtocol.configuration, persistence: persistence,
                                    transport: PostcodeTestURLProtocol.shared)
@@ -3498,6 +3503,264 @@ final class DeviceParcelTests: XCTestCase {
             if let location = event.location { XCTAssertNotNil(TrackingLocation.place(location).country, location) }
         }
         XCTAssertEqual(Set(delivered.trackingEvents.compactMap(\.location).compactMap { TrackingLocation.place($0).country }), ["CN", "DE", "CH"])
+    }
+
+    // MARK: - Notes without an account
+
+    /// A file store of the test's own, in a folder it deletes.
+    private func noteFiles(root: URL? = nil) -> LocalNoteFiles {
+        let root = root ?? FileManager.default.temporaryDirectory.appending(path: "DeviceNoteFiles-\(UUID().uuidString)", directoryHint: .isDirectory)
+        addTeardownBlock { try? FileManager.default.removeItem(at: root) }
+        return LocalNoteFiles(space: "device-\(root.lastPathComponent)", root: root)
+    }
+
+    private func receipt(_ name: String = "Receipt.pdf") -> PreparedNoteFile {
+        PreparedNoteFile(data: Data("%PDF-1.4\n\(name)\n".utf8), name: name, type: .applicationPdf)
+    }
+
+    func testAGuestsNoteAndItsFilesStayOnThisIPhoneAcrossARelaunch() throws {
+        let id = UUID()
+        let storage = Memory()
+        storage.keys = ["22222222222A": key]
+        storage.parcels = [ownLookup("22222222222A", id, checkedAt: Date())]
+        let root = FileManager.default.temporaryDirectory.appending(path: "DeviceNoteFiles-\(UUID().uuidString)", directoryHint: .isDirectory)
+        let files = noteFiles(root: root)
+        let device = DeviceParcels(client: client(Calls()), storage: storage, noteFiles: files)
+
+        XCTAssertTrue(device.takesNote(id: id))
+        XCTAssertEqual(try device.setNote(id: id, note: "  Size 42, gift for Sam \n").note, "Size 42, gift for Sam")
+        let filed = try device.addFile(id: id, receipt())
+        XCTAssertEqual(filed.files?.map(\.name), ["Receipt.pdf"])
+        XCTAssertEqual(storage.parcels.first?.note, "Size 42, gift for Sam")
+
+        // A relaunch reads both back: the words from the device's parcels, the files from Application Support.
+        let again = DeviceParcels(client: client(Calls()), storage: storage, noteFiles: LocalNoteFiles(space: files.space, root: root))
+        let shown = try XCTUnwrap(again.list().first)
+        XCTAssertEqual(shown.note, "Size 42, gift for Sam")
+        XCTAssertEqual(shown.files?.map(\.name), ["Receipt.pdf"])
+        XCTAssertTrue(shown.hasNote)
+
+        // Blank words remove them; the file stays until it is removed.
+        XCTAssertNil(try again.setNote(id: id, note: "   ").note)
+        let fileID = try XCTUnwrap(shown.files?.first?.id)
+        XCTAssertNil(try again.removeFile(id: id, fileID: fileID).files)
+        XCTAssertFalse(try XCTUnwrap(again.list().first).hasNote)
+    }
+
+    func testSomeoneElsesParcelFollowedThroughTheirLinkTakesNoNote() throws {
+        let id = UUID()
+        let storage = Memory()
+        let device = DeviceParcels(client: client(Calls()), storage: storage, noteFiles: noteFiles())
+        _ = try device.follow(PublicParcelResponse(link: reader("33333333333A"), package: package(id)), key: nil, label: nil)
+        XCTAssertFalse(device.takesNote(id: id))
+        XCTAssertThrowsError(try device.setNote(id: id, note: "Mine"))
+        XCTAssertThrowsError(try device.addFile(id: id, receipt()))
+    }
+
+    func testForgettingAParcelDeletesItsNoteAndFilesAndForgetAllDeletesEveryOne() async throws {
+        let first = UUID(), second = UUID()
+        let storage = Memory()
+        storage.keys = ["22222222222A": key, "22222222222B": key]
+        storage.parcels = [ownLookup("22222222222A", first, checkedAt: Date()),
+                           ownLookup("22222222222B", second, number: "TESTPARCEL999", checkedAt: Date())]
+        let files = noteFiles()
+        let device = DeviceParcels(client: client(Calls()), storage: storage, noteFiles: files)
+        _ = try device.setNote(id: first, note: "Door code 4521")
+        _ = try device.addFile(id: first, receipt())
+        _ = try device.addFile(id: second, receipt("Label.pdf"))
+
+        await device.forget(id: first)
+        XCTAssertEqual(files.all.map(\.key), ["22222222222B"])
+        XCTAssertFalse(storage.parcels.contains { $0.note != nil })
+
+        await device.forgetAll()
+        XCTAssertEqual(files.all, [])
+    }
+
+    func testAFrozenCopyKeepsItsNoteAndANewLookupOfItsNumberTakesItAlong() async throws {
+        let old = UUID(), new = UUID()
+        let now = Date(timeIntervalSince1970: 1_800_000_000)
+        let storage = Memory()
+        var copy = ownLookup("22222222222A", old, label: "Trainers", checkedAt: now)
+        copy.frozen = DateParser.isoString(now)
+        copy.note = "Return by 24 Dec"
+        storage.parcels = [copy]
+        let files = noteFiles()
+        try files.add(receipt(), to: "22222222222A")
+        let found = PublicLookupResponse(link: link("22222222222B"), key: key, package: package(new))
+        let device = DeviceParcels(client: client(Calls(), lookup: found), storage: storage, noteFiles: files, now: { now })
+
+        // The copy no longer updated still shows its note, and still takes one.
+        XCTAssertEqual(device.list().first?.note, "Return by 24 Dec")
+        XCTAssertTrue(device.takesNote(id: old))
+
+        _ = try await device.add(CreatePackageRequest(trackingNumber: "TESTPARCEL123789", carrier: .dhl))
+        let shown = try XCTUnwrap(device.list().first)
+        XCTAssertEqual(device.list().count, 1)
+        XCTAssertEqual(shown.id, new)
+        XCTAssertEqual(shown.label, "Trainers")
+        XCTAssertEqual(shown.note, "Return by 24 Dec")
+        XCTAssertEqual(shown.files?.map(\.name), ["Receipt.pdf"])
+        XCTAssertEqual(files.all.map(\.key), ["22222222222B"])
+    }
+
+    func testAHalfTypedLookupWithAFileStays() async throws {
+        let now = Date(timeIntervalSince1970: 1_800_000_000)
+        let entry = halfTyped(made: now - 60)
+        let storage = Memory()
+        storage.parcels = [entry]
+        storage.keys = [entry.linkID: key]
+        let files = noteFiles()
+        try files.add(receipt(), to: entry.linkID)
+        let found = PublicLookupResponse(link: link("22222222222B", createdAt: DateParser.isoString(now)), key: key,
+                                         package: package(UUID(), number: "1234567899", stage: .pending, sync: .pending))
+        let device = DeviceParcels(client: client(Calls(), lookup: found), storage: storage, noteFiles: files, now: { now })
+        _ = try await device.add(CreatePackageRequest(trackingNumber: "1234567899", carrier: .dhl))
+        XCTAssertTrue(device.list().contains { $0.id == entry.parcel.id })
+        XCTAssertEqual(files.all.map(\.key), [entry.linkID])
+    }
+
+    /// Signing in keeps a guest's parcel in the account with its note in the claim; its files follow one by one to the
+    /// account's parcel, and one that fails stays on this iPhone until the next start sends it.
+    func testSigningInSendsTheNoteWithTheClaimThenTheFilesAndKeepsOneThatFailed() async throws {
+        let files = noteFiles()
+        let (store, session, device, _) = try signingIn(["22222222222A"], into: AccountRoom(1), notes: ["22222222222A": "Size 42"],
+                                                        noteFiles: files)
+        defer { session.forceSignOut() }
+        let parcelID = try XCTUnwrap(device.list().first?.id)
+        _ = try device.addFile(id: parcelID, receipt())
+        _ = try device.addFile(id: parcelID, receipt("Label.pdf"))
+
+        let answer = PostcodeTestURLProtocol.handler
+        let sent = Calls()
+        let failing = Calls()
+        failing.add("Label.pdf")
+        PostcodeTestURLProtocol.handler = { request in
+            let path = request.url?.path ?? ""
+            if path == "/api/packages/claim" {
+                let claim = try? JSONDecoder.deliveryTracker.decode(ClaimParcelsRequest.self, from: PostcodeTestURLProtocol.body(of: request))
+                sent.add("claim \(claim?.links.map { "\($0.id) \($0.note ?? "-")" }.joined(separator: ",") ?? "")")
+            }
+            if request.httpMethod == "POST", path.hasPrefix("/api/packages/"), path.hasSuffix("/files") {
+                let name = request.value(forHTTPHeaderField: "X-File-Name") ?? ""
+                let type = request.value(forHTTPHeaderField: "Content-Type") ?? ""
+                let body = PostcodeTestURLProtocol.body(of: request)
+                sent.add("file \(name) \(type) \(body.starts(with: Array("%PDF".utf8)))")
+                if failing.all.contains(name) { return (500, Data()) }
+                let packageID = UUID(uuidString: path.split(separator: "/")[2].description) ?? UUID()
+                let file = PackageFile(id: UUID(), name: name, contentType: .applicationPdf, size: body.count, createdAt: "2026-11-26T08:00:00Z",
+                                       url: "/api/files/x", expiresAt: "2026-11-26T09:00:00Z")
+                let parcel = Parcel(id: packageID, trackingNumber: "TESTPARCEL1230", label: "", carrier: .dhl, createdAt: "2026-11-26T08:00:00Z",
+                                    syncStatus: .ok, notificationsMuted: false)
+                return (201, (try? JSONEncoder.deliveryTracker.encode(AddPackageFileResponse(file: file, package: parcel))) ?? Data())
+            }
+            return answer?(request) ?? (404, Data())
+        }
+
+        try await session.verifyCode(email: "test@example.com", code: "123456")
+        await store.claimDeviceParcels()
+        XCTAssertEqual(sent.all, ["claim 22222222222A Size 42", "file Receipt.pdf application/pdf true", "file Label.pdf application/pdf true"])
+        XCTAssertEqual(device.claims, [])
+        // The one that arrived left the device; the other waits, kept for the account's parcel even with its link let go.
+        XCTAssertEqual(files.all.map(\.name), ["Label.pdf"])
+        XCTAssertNotNil(files.all.first?.packageID)
+
+        // The next start sends it.
+        failing.add("none")
+        let passed = Calls()
+        PostcodeTestURLProtocol.handler = { request in
+            if request.httpMethod == "POST", request.url?.path.hasSuffix("/files") == true { passed.add(request.value(forHTTPHeaderField: "X-File-Name") ?? "") }
+            let path = request.url?.path ?? ""
+            if request.httpMethod == "POST", path.hasSuffix("/files") {
+                let file = PackageFile(id: UUID(), name: "Label.pdf", contentType: .applicationPdf, size: 1, createdAt: "2026-11-26T08:00:00Z",
+                                       url: "/api/files/x", expiresAt: "2026-11-26T09:00:00Z")
+                let parcel = Parcel(id: UUID(), trackingNumber: "TESTPARCEL1230", label: "", carrier: .dhl, createdAt: "2026-11-26T08:00:00Z",
+                                    syncStatus: .ok, notificationsMuted: false)
+                return (201, (try? JSONEncoder.deliveryTracker.encode(AddPackageFileResponse(file: file, package: parcel))) ?? Data())
+            }
+            return answer?(request) ?? (404, Data())
+        }
+        await store.claimDeviceParcels()
+        XCTAssertEqual(passed.all, ["Label.pdf"])
+        XCTAssertEqual(files.all, [])
+    }
+
+    func testAKeptFileWhoseParcelLeftTheAccountIsLetGo() async throws {
+        let files = noteFiles()
+        let (store, session, _, _) = try signingIn([], into: AccountRoom(0), noteFiles: files)
+        defer { session.forceSignOut() }
+        try files.add(receipt(), to: "22222222222A")
+        files.handOver("22222222222A", to: UUID())
+        let answer = PostcodeTestURLProtocol.handler
+        PostcodeTestURLProtocol.handler = { request in
+            if request.url?.path.hasSuffix("/files") == true { return (404, Data(#"{"error":"Parcel unavailable"}"#.utf8)) }
+            return answer?(request) ?? (404, Data())
+        }
+        try await session.verifyCode(email: "test@example.com", code: "123456")
+        await store.claimDeviceParcels()
+        XCTAssertEqual(files.all, [])
+    }
+
+    /// An account's note goes through the parcel's `PATCH`, its files through their own routes, and a refusal says why.
+    func testAnAccountsNoteAndFilesGoToTheService() async throws {
+        let (store, session, _, _) = try signingIn([], into: AccountRoom(0))
+        defer { session.forceSignOut() }
+        let id = UUID(), fileID = UUID()
+        let file = PackageFile(id: fileID, name: "Receipt.pdf", contentType: .applicationPdf, size: 20, createdAt: "2026-11-26T08:00:00Z",
+                               url: "/api/files/\(fileID.uuidString)?v=full&e=1&s=x", expiresAt: "2099-01-01T00:00:00Z")
+        var row = Parcel(id: id, trackingNumber: "TESTPARCEL1230", label: "Records", carrier: .dhl, createdAt: "2026-11-26T08:00:00Z",
+                         syncStatus: .ok, notificationsMuted: false)
+        let answer = PostcodeTestURLProtocol.handler
+        let sent = Calls()
+        let rows = Calls()
+        PostcodeTestURLProtocol.handler = { request in
+            let path = request.url?.path ?? ""
+            let body = String(decoding: PostcodeTestURLProtocol.body(of: request), as: UTF8.self)
+            switch (request.httpMethod ?? "", path) {
+            case ("GET", "/api/packages"):
+                return (200, (try? JSONEncoder.deliveryTracker.encode(PackageListResponse(packages: [row]))) ?? Data())
+            case ("PATCH", "/api/packages/\(id.uuidString)"):
+                sent.add("PATCH \(body)")
+                var noted = row
+                noted.note = rows.all.contains("deleted") ? nil : "Door code 4521"
+                return (200, (try? JSONEncoder.deliveryTracker.encode(noted)) ?? Data())
+            case ("POST", "/api/packages/\(id.uuidString)/files"):
+                let name = request.value(forHTTPHeaderField: "X-File-Name") ?? ""
+                sent.add("POST \(name)")
+                if name == "Big.pdf" { return (413, Data(#"{"error":"Too big","code":"file_too_big"}"#.utf8)) }
+                var filed = row
+                filed.files = [file]
+                return (201, (try? JSONEncoder.deliveryTracker.encode(AddPackageFileResponse(file: file, package: filed))) ?? Data())
+            case ("DELETE", "/api/packages/\(id.uuidString)/files/\(fileID.uuidString)"):
+                sent.add("DELETE")
+                return (200, Data(#"{"ok":true}"#.utf8))
+            default:
+                return answer?(request) ?? (404, Data())
+            }
+        }
+        try await session.verifyCode(email: "test@example.com", code: "123456")
+        await store.load(showSpinner: false)
+        XCTAssertTrue(store.takesNote(row))
+
+        try await store.saveNote(row, text: " Door code 4521 ")
+        XCTAssertEqual(store.parcels.first?.note, "Door code 4521")
+        try await store.addNoteFile(row, receipt())
+        XCTAssertEqual(store.parcels.first?.files?.map(\.name), ["Receipt.pdf"])
+        do {
+            try await store.addNoteFile(row, receipt("Big.pdf"))
+            XCTFail("A file the service refuses says why")
+        } catch let error as NoteFileError {
+            XCTAssertEqual(error.problem, .tooBig)
+            XCTAssertEqual(error.status, 413)
+        }
+        try await store.removeNoteFile(row, fileID: fileID)
+        XCTAssertNil(store.parcels.first?.files)
+        rows.add("deleted")
+        row.note = "Door code 4521"
+        try await store.saveNote(row, text: "  ")
+        XCTAssertNil(store.parcels.first?.note)
+        XCTAssertEqual(sent.all, [#"PATCH {"note":"Door code 4521"}"#, "POST Receipt.pdf", "POST Big.pdf", "DELETE", #"PATCH {"note":null}"#])
+        XCTAssertEqual(store.noteFileURL(file.url)?.absoluteString, "https://postcodes.test/api/files/\(fileID.uuidString)?v=full&e=1&s=x")
     }
 }
 

@@ -43,6 +43,9 @@ struct DeviceParcel: Codable, Equatable, Sendable {
     /// When the service made its link, as the answer that brought the parcel here said. Nil on a parcel kept before
     /// this was noted.
     var linkCreatedAt: String? = nil
+    /// The private note this iPhone keeps about its own lookup, which goes into an account with it. Its photos and PDFs
+    /// are kept apart, by link (`LocalNoteFiles`).
+    var note: String? = nil
 
     var isViewer: Bool { viewer == true }
     var isMuted: Bool { muted == true }
@@ -429,6 +432,8 @@ final class DeviceParcels {
 
     private let client: DeviceParcelClient?
     private let storage: any DeviceParcelStorage
+    /// The photos and PDFs of the notes kept here, by link.
+    let noteFiles: LocalNoteFiles
     /// The postcodes its lookups were given, kept apart from the parcels.
     let postcodes: PostcodeMemory
     private let now: () -> Date
@@ -473,9 +478,10 @@ final class DeviceParcels {
 
     /// A build without a server follows nothing.
     init(client: DeviceParcelClient?, storage: any DeviceParcelStorage = DeviceParcelFiles(),
-         postcodes: PostcodeMemory = PostcodeMemory(), now: @escaping () -> Date = Date.init) {
+         postcodes: PostcodeMemory = PostcodeMemory(), noteFiles: LocalNoteFiles = .device, now: @escaping () -> Date = Date.init) {
         self.client = client
         self.storage = storage
+        self.noteFiles = noteFiles
         self.postcodes = postcodes
         self.now = now
         let (parcels, keys) = storage.load()
@@ -498,7 +504,7 @@ final class DeviceParcels {
     var unlisted: Int { keys.keys.filter { linkID in !entries.contains { $0.linkID == linkID } }.count }
 
     /// The parcels as the list shows them, under the names this device gave them.
-    func list() -> [Parcel] { entries.map(Self.shown) }
+    func list() -> [Parcel] { entries.map(shown) }
 
     /// When the service last answered about one of the parcels: how old what the list shows is at most.
     var lastCheckedAt: Date? { entries.map(\.checkedAt).max() }
@@ -557,9 +563,11 @@ final class DeviceParcels {
         if !superseded.isEmpty {
             entries.removeAll { Self.supersedes(entry.parcel, $0, number: request.trackingNumber) }
             if entry.label.isEmpty, let name = superseded.lazy.compactMap(\.label.nonEmpty).first { entry.label = name }
+            for old in superseded { inherit(old, into: &entry) }
         }
         // The service gives one parcel one link for each lookup; a second lookup of a parcel takes the first one's place.
         if let old = removeTwin(of: response.package.id, besides: entry.linkID, client) {
+            inherit(old, into: &entry)
             // The parcel being replaced came back unchanged: only its link is new.
             if old.parcel.id == id {
                 entry.label = old.label
@@ -579,7 +587,7 @@ final class DeviceParcels {
         save()
         if let postcode = request.dpdPostcode { postcodes.remember(postcode, for: request.carrier ?? response.package.carrier, country: request.dpdPostcodeCountry) }
         // Phone digits go to the service alone: no parcel's next field starts from them, and the link never shows them.
-        return Self.shown(entry)
+        return shown(entry)
     }
 
     /// Takes out the entry of the same parcel under another link: one parcel is followed here once. Its link of this
@@ -591,11 +599,12 @@ final class DeviceParcels {
 
     /// Whether `entry` is this iPhone's own lookup of the start of `number`, made here within the last minutes and with
     /// no scan yet: the number half typed, which the lookup of the whole number takes the place of. An older lookup, one
-    /// with a scan, one named or archived here, a copy no longer updated and someone else's link all stay.
+    /// with a scan, one named, noted or archived here, a copy no longer updated and someone else's link all stay.
     private func halfTyped(_ entry: DeviceParcel, of number: String) -> Bool {
         let typed = CarrierCatalog.normalize(number)
         let start = CarrierCatalog.normalize(entry.parcel.trackingNumber)
         guard keys[entry.linkID] != nil, !entry.isViewer, !entry.isFrozen, entry.archivedAt == nil, entry.label.isEmpty,
+              entry.note == nil, noteFiles.of(entry.linkID).isEmpty,
               !start.isEmpty, typed.count > start.count, typed.hasPrefix(start),
               entry.parcel.trackingEvents.allSatisfy({ $0.stage == .pending }),
               let made = entry.linkCreatedAt.flatMap(DateParser.date) else { return false }
@@ -761,6 +770,44 @@ final class DeviceParcels {
         try update(id) { $0.label = label }
     }
 
+    // MARK: - Notes
+
+    /// Whether the parcel can have a note here: a lookup of this iPhone's own, or its copy no longer updated. Someone
+    /// else's parcel, followed through their link, has none.
+    func takesNote(id: UUID) -> Bool { entries.first { $0.parcel.id == id }.map { !$0.isViewer } ?? false }
+
+    /// Keeps the note's words here; nil or blank text removes them.
+    func setNote(id: UUID, note: String?) throws -> Parcel {
+        guard takesNote(id: id) else { throw DeliveryAPIError.parcelMissing }
+        let text = note?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty.map(ParcelNoteText.clip)
+        return try update(id) { $0.note = text }
+    }
+
+    /// Keeps a photo or PDF with the parcel's note, in Application Support.
+    func addFile(id: UUID, _ file: PreparedNoteFile) throws -> Parcel {
+        guard takesNote(id: id), let entry = entries.first(where: { $0.parcel.id == id }) else { throw DeliveryAPIError.parcelMissing }
+        try noteFiles.add(file, to: entry.linkID, now: now())
+        return shown(entry)
+    }
+
+    func removeFile(id: UUID, fileID: UUID) throws -> Parcel {
+        guard let entry = entries.first(where: { $0.parcel.id == id }) else { throw DeliveryAPIError.parcelMissing }
+        noteFiles.remove(Set(noteFiles.of(entry.linkID).filter { $0.id == fileID }.map(\.id)))
+        return shown(entry)
+    }
+
+    /// Once the account has the parcel behind the link, its files are marked for the account's parcel: they are sent
+    /// there, and leave this iPhone once they arrived.
+    @discardableResult
+    func handOverNoteFiles(linkID: String, to packageID: UUID) -> Int { noteFiles.handOver(linkID, to: packageID) }
+
+    /// The note of an entry that gives way to `entry` goes along: its words where `entry` has none, and its files.
+    private func inherit(_ old: DeviceParcel, into entry: inout DeviceParcel) {
+        guard old.linkID != entry.linkID else { return }
+        if entry.note == nil, let note = old.note { entry.note = note }
+        noteFiles.move(from: old.linkID, to: entry.linkID)
+    }
+
     /// The parcel was opened on this iPhone: what it tells now is seen. Nothing leaves the device.
     func markSeen(id: UUID, newsAt: String) throws -> Parcel {
         try update(id) { entry in
@@ -784,6 +831,8 @@ final class DeviceParcels {
         var entry = entries.remove(at: index)
         let key = keys.removeValue(forKey: entry.linkID)
         if let key { forgetting[entry.linkID] = key }
+        // Its note's files go with it; those on their way to an account stay until they arrive.
+        noteFiles.forget(entry.linkID)
         // Followed again, it is signed up again.
         alertsAsked[entry.linkID] = nil
         // A forgotten link of this iPhone's own takes its notifications with it; someone else's goes
@@ -839,6 +888,7 @@ final class DeviceParcels {
         }
         var answered = false
         for entry in entries where await forget(id: entry.parcel.id) { answered = true }
+        noteFiles.forgetAll()
         if !unread.isEmpty, let client, await tellForgotten(client) { answered = true }
         return answered
     }
@@ -918,11 +968,12 @@ final class DeviceParcels {
         entries.removeAll { Self.supersedes(parcel, $0, number: number) }
         let twin = removeTwin(of: parcel.id, besides: entry.linkID, client)
         guard let changed = entries.firstIndex(where: { $0.linkID == entry.linkID }) else { throw DeliveryAPIError.parcelMissing }
+        for old in superseded + (twin.map { [$0] } ?? []) { inherit(old, into: &entries[changed]) }
         if entries[changed].label.isEmpty, let name = (superseded + (twin.map { [$0] } ?? [])).lazy.compactMap(\.label.nonEmpty).first {
             entries[changed].label = name
         }
         save()
-        return Self.shown(entries[changed])
+        return shown(entries[changed])
     }
 
     /// A new lookup in place of a link the service no longer has, which takes its place and name.
@@ -935,12 +986,13 @@ final class DeviceParcels {
             phoneDigits: phoneDigits, lookupCountryHint: ParcelLookupCountry.hint()
         ), replacing: id)
         if added.id != id {
+            if let index = entries.firstIndex(where: { $0.parcel.id == added.id }) { inherit(entry, into: &entries[index]) }
             await forget(id: id)
             if let index = entries.firstIndex(where: { $0.parcel.id == added.id }) {
                 entries[index].replaced = entry.replaced ?? id
                 entries[index].muted = entry.muted
                 save()
-                return Self.shown(entries[index])
+                return shown(entries[index])
             }
         }
         return added
@@ -990,7 +1042,8 @@ final class DeviceParcels {
     var claims: [ClaimParcelLink] {
         let listed = entries.compactMap { entry -> ClaimParcelLink? in
             if entry.isViewer { return entry.canKeep == true ? ClaimParcelLink(id: entry.linkID, label: entry.label.nonEmpty) : nil }
-            return keys[entry.linkID].map { ClaimParcelLink(id: entry.linkID, key: $0, label: entry.label.nonEmpty) }
+            // Its note goes with it; its files follow once it is kept (`handOverNoteFiles`).
+            return keys[entry.linkID].map { ClaimParcelLink(id: entry.linkID, key: $0, label: entry.label.nonEmpty, note: entry.note) }
         }
         let unlisted = keys.filter { pair in !entries.contains { $0.linkID == pair.key } }
             .sorted { $0.key < $1.key }
@@ -1020,7 +1073,11 @@ final class DeviceParcels {
             linkIDs.contains(entry.linkID) ? entry.alertToken.map { (entry.linkID, $0) } : nil
         }
         entries.removeAll { linkIDs.contains($0.linkID) }
-        for id in linkIDs { keys[id] = nil }
+        for id in linkIDs {
+            keys[id] = nil
+            // Files handed over to the account stay until they arrive; any other goes with its parcel.
+            noteFiles.forget(id)
+        }
         save()
         if let client, !alerts.isEmpty {
             Task {
@@ -1045,6 +1102,7 @@ final class DeviceParcels {
         entries.removeAll { $0.linkID == linkID && $0.isFrozen || Self.supersedes(shared, $0) }
         let label = label?.nonEmpty ?? superseded.lazy.compactMap(\.label.nonEmpty).first
         if let index = entries.firstIndex(where: { $0.linkID == linkID || $0.parcel.id == response.package.id }) {
+            for old in superseded { inherit(old, into: &entries[index]) }
             guard let key, entries[index].isViewer else {
                 if !superseded.isEmpty { save() }
                 return (entries[index].parcel.id, false)
@@ -1057,6 +1115,7 @@ final class DeviceParcels {
                                  parcel: shared, checkedAt: now())
         entry.linkCreatedAt = response.link.createdAt
         entry.startSeen()
+        for old in superseded { inherit(old, into: &entry) }
         // Followed again before its notifications were turned off: they go on, and are its own again.
         if let left = forgotten.first(where: { $0.linkID == linkID }) {
             entry.alertToken = left.alertToken
@@ -1079,6 +1138,7 @@ final class DeviceParcels {
         let linkID = response.link.id
         let old = entries[index]
         entries[index].linkID = linkID
+        if old.linkID != linkID { noteFiles.move(from: old.linkID, to: linkID) }
         entries[index].linkCreatedAt = response.link.createdAt
         entries[index].viewer = nil
         entries[index].canKeep = nil
@@ -1308,7 +1368,7 @@ final class DeviceParcels {
         guard let index = entries.firstIndex(where: { $0.parcel.id == id }) else { throw DeliveryAPIError.parcelMissing }
         change(&entries[index])
         save()
-        return Self.shown(entries[index])
+        return shown(entries[index])
     }
 
     private func save() {
@@ -1335,9 +1395,12 @@ final class DeviceParcels {
 
     private static func waiting(_ parcel: Parcel) -> Bool { parcel.syncStatus == .pending || parcel.syncStatus == .syncing }
 
-    private static func shown(_ entry: DeviceParcel) -> Parcel {
+    private func shown(_ entry: DeviceParcel) -> Parcel {
         var parcel = entry.parcel
         parcel.label = entry.label
+        // The note this iPhone keeps, and its files, stay on the device: no link's answer carries one.
+        parcel.note = entry.note
+        parcel.files = noteFiles.packageFiles(of: entry.linkID)
         parcel.archivedAt = entry.archivedAt
         // Without an account, the device keeps what was seen: the news it had when the parcel was last opened here.
         parcel.seenAt = entry.openedNews ?? parcel.newsAt

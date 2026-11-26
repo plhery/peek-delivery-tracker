@@ -25,6 +25,11 @@ struct AnalyticsCatalog: Decodable {
                   let action = value["action"] as? String else { return nil }
             return friendActions[action]
         }
+        // A note saved or deleted counts as such where it happens, never as a rename.
+        if method == "PATCH", path.range(of: "^/api/packages/[^/]+$", options: .regularExpression) != nil, let body,
+           let value = try? JSONSerialization.jsonObject(with: body) as? [String: Any], value.keys.contains("note"), value["label"] == nil {
+            return nil
+        }
         return operations.first { $0.method == method && path.range(of: $0.path, options: .regularExpression) != nil }?.event
     }
 }
@@ -145,6 +150,8 @@ final class DeliveryAnalytics {
         let name: String?
         let outcome: Outcome?
         let mode: Mode
+        /// Why it failed, in one fixed word, such as a file that did not join a note (`NoteFileProblem`).
+        var reason: String? = nil
     }
     private let transport = URLSession(configuration: .ephemeral)
     private var configuration: Configuration?
@@ -201,9 +208,9 @@ final class DeliveryAnalytics {
         enqueue(Event(screen: screen, name: nil, outcome: nil, mode: mode))
     }
 
-    func action(_ name: String, _ outcome: Outcome? = nil) {
+    func action(_ name: String, _ outcome: Outcome? = nil, reason: String? = nil) {
         guard AnalyticsCatalog.bundled?.actions.contains(name) == true else { return }
-        enqueue(Event(screen: screen, name: name, outcome: outcome, mode: mode))
+        enqueue(Event(screen: screen, name: name, outcome: outcome, mode: mode, reason: reason))
     }
 
     private func enqueue(_ event: Event) {
@@ -217,6 +224,7 @@ final class DeliveryAnalytics {
         let platform = platform ?? .current
         var properties = ["platform": platform.rawValue, "mode": event.mode.rawValue]
         if let outcome = event.outcome { properties["outcome"] = outcome.rawValue }
+        if let reason = event.reason { properties["reason"] = reason }
         var result: [String: Any] = [
             "website": configuration.iosWebsite, "hostname": configuration.hostname,
             "url": "/\(event.screen)", "title": event.screen,

@@ -15286,6 +15286,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e2393c"
     },
     {
+      "id": "lingdong",
+      "catalog": "lingdong",
+      "slug": "rastreamento-lingdong",
+      "title": "Rastreamento Lingdong International: códigos SZLD e status",
+      "name": "Lingdong International",
+      "color": "#0171bb"
+    },
+    {
       "id": "j-and-t-au",
       "catalog": "j-and-t-au",
       "slug": "rastreamento-jt-express-australia",
@@ -15428,6 +15436,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Speedaf Express: códigos, status e contatos",
       "name": "Speedaf",
       "color": "#ff8300"
+    },
+    {
+      "id": "huaya-express",
+      "catalog": "huaya-express",
+      "slug": "rastreamento-huaya-express",
+      "title": "Rastreamento Huaya Express: códigos HYYT e onde param",
+      "name": "Huaya Express",
+      "color": "#e60013"
     },
     {
       "id": "gofo-ca",

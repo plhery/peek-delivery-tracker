@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Bring: códigos, status e prazos de retirada
-description: Rastreie uma encomenda Bring ou Posten na Noruega, Suécia ou Dinamarca: formatos de código, status, prazos em pontos e armários, reclamações e contatos.
+description: Rastreie uma encomenda Bring ou Posten na Noruega, Suécia ou Dinamarca: formatos de código, status, prazos em pontos e armários, indenizações e contatos.
 slug: rastreamento-bring
 published: 2026-11-26
 updated: 2026-11-26
@@ -27,7 +27,7 @@ A Bring informa que o código de objeto ou encomenda geralmente tem 13 caractere
 
 ## O que significam os status de rastreamento da Bring
 
-O rastreador abre em norueguês em sporing.posten.no e sporing.bring.no, com opção para inglês; tracking.bring.se e tracking.bring.dk exibem sueco e dinamarquês. Não há versão em finlandês. Os textos em inglês, na ordem em que costumam surgir:
+O rastreador abre em norueguês em sporing.posten.no e sporing.bring.no, com opção para inglês; tracking.bring.se e tracking.bring.dk exibem sueco e dinamarquês. Não há versão em finlandês. Os textos em inglês, na ordem em que a encomenda passa por eles:
 
 | A Bring diz | O que significa para você |
 | --- | --- |
@@ -67,13 +67,13 @@ Alguns remetentes não permitem prorrogação, e a página de rastreamento indic
 
 **Volumes grandes.** O Home Delivery da Bring transporta itens acima de 35 kg, como móveis e eletrodomésticos, no nível escolhido na loja: Curbside (até a calçada ou limite do terreno), Indoor (carregado até o ponto indicado por você) ou PickUp Point (retirada em um terminal Home Delivery). Sem horário reservado, a Bring envia SMS para combinar dia e faixa horária; o motorista entra em contato antes de chegar e normalmente solicita assinatura.
 
-**Suécia e Dinamarca.** Na Suécia, a encomenda normalmente aguarda 7 dias em um ombud (agente), e o primeiro lembrete oferece mais 7; num paketbox (armário) aguarda 4 dias, prorrogáveis até 7, abrindo com o app da Bring ou com o PIN enviado por SMS. Na Dinamarca, uma entrega domiciliar sem sucesso normalmente segue para o pakkeshop mais próximo, com aviso por SMS ou e-mail; caso contrário, agende nova entrega pelo formulário online ou por telefone da Bring.
+**Suécia e Dinamarca.** Na Suécia, a encomenda normalmente aguarda 7 dias em um ombud (agente), e o primeiro lembrete oferece mais 7; num paketbox (armário) aguarda 4 dias, prorrogáveis até 7, abrindo com o app da Bring ou com o PIN enviado por SMS. Na Dinamarca, uma entrega domiciliar não realizada normalmente segue para o pakkeshop mais próximo, com aviso por SMS ou e-mail; caso contrário, agende nova entrega pelo formulário online ou por telefone da Bring.
 
 ## Encomenda Bring atrasada, extraviada ou danificada
 
 **Sem atualização.** Se nada mudar dentro do prazo esperado, a Bring orienta falar com o remetente, que pode confirmar se o pacote foi postado.
 
-**Danificada ou faltando itens.** A Bring determina que a reclamação deve partir do remetente ou de quem pagou o frete; como destinatário, avise a loja o quanto antes. Prazos da Bring: dano visível ou falta de itens imediatamente no recebimento; dano oculto em até 7 dias corridos; outros problemas, como atraso, em até 14 dias da entrega. Toda reclamação prescreve após um ano. Tire fotos e guarde os produtos. Marcada como entregue mas não chegou? Veja [encomenda marcada como entregue mas não recebida](guide:delivered-not-received).
+**Danificada ou faltando itens.** A Bring determina que o pedido de indenização deve partir do remetente ou de quem pagou o frete; como destinatário, avise a loja o quanto antes. Prazos da Bring: dano visível ou falta de itens imediatamente no recebimento; dano oculto em até 7 dias corridos; outros problemas, como atraso, em até 14 dias da entrega. Todo pedido de indenização prescreve após um ano. Tire fotos e guarde os produtos. Marcada como entregue mas não chegou? Veja [encomenda marcada como entregue mas não recebida](guide:delivered-not-received).
 
 **Alfândega na Noruega.** Em lojas cadastradas no programa VOEC da Noruega (itens abaixo de NOK 3.000), nada é cobrado na chegada. Nos demais casos, a Posten cobra NOK 46 para desembaraçar pacotes de até NOK 500, NOK 78 até 3.000 e NOK 278 acima disso. O pagamento é feito no app da Posten, no Digipost ou por carta. Saiba mais em [encomendas retidas na alfândega](guide:customs).
 
@@ -91,7 +91,7 @@ Conforme listado nas páginas da Bring e da Posten (horário local na Noruega, S
 
 ## Acompanhe encomendas Bring com o Peek
 
-O [Peek](/) identifica imediatamente um número postal terminado em `NO` como sendo da Bring quando o dígito verificador é válido. Os códigos de 18 dígitos iniciados por `370`/`373`, os códigos de barras de 20 dígitos iniciados por `00370` ou `00373` e os de 17 dígitos iniciados por `70` são compartilhados com outras transportadoras; assim, quando o dígito verificador GS1 é válido, o Peek consulta a Bring primeiro, junto com Matkahuolto para `373`, Swiss Post Cargo, PostNord e NZ Post para `00370` e `00373`, e Colis Privé e DHL eCommerce para `70`. Se só a Bring reconhecer o pacote, o Peek o classifica lá; se várias reconhecerem, você escolhe. O Peek não consulta a Bring para códigos de barras iniciados por `00373402216`, porém: esses pertencem à [Early Bird](carrier:early-bird), transportadora sueca. Se a Bring não aparecer, toque em "Trocar" e escolha Bring em "Compatível com este código". A exceção é um número de 18 dígitos iniciado por `370` ou `373` cujo 6º ao 9º dígitos são zeros: o Peek o classifica na [Ecoscooting](carrier:ecoscooting) sem consultar a Bring, então toque em "Trocar" e busque por Bring. Links de sporing.bring.no, sporing.posten.no e tracking.bring.com, .se ou .dk identificam Bring qualquer que seja o número, mas na Bring o Peek só rastreia códigos de 17 ou 18 dígitos, de 20 dígitos começando por `00` e números postais (duas letras, nove dígitos e duas letras) com dígito verificador válido, de qualquer país. Um sendingsnummer de vários volumes não é rastreado: use cada kollinummer individualmente.
+O [Peek](/) identifica imediatamente um número postal terminado em `NO` como sendo da Bring quando o dígito verificador é válido. Os códigos de 18 dígitos iniciados por `370`/`373`, os códigos de barras de 20 dígitos iniciados por `00370` ou `00373` e os de 17 dígitos iniciados por `70` são compartilhados com outras transportadoras; assim, quando o dígito verificador GS1 é válido, o Peek consulta a Bring primeiro, junto com Matkahuolto para `373`, Swiss Post Cargo, PostNord e NZ Post para `00370` e `00373`, e DHL eCommerce para `70` (da França, também a Colis Privé; de outros países, a Colis Privé por último). Se só a Bring reconhecer o pacote, o Peek o classifica lá; se várias reconhecerem, você escolhe. O Peek não consulta a Bring para códigos de barras iniciados por `00373402216`, porém: esses pertencem à [Early Bird](carrier:early-bird), transportadora sueca. Se a Bring não aparecer, toque em "Trocar" e escolha Bring em "Compatível com este código". A exceção é um número de 18 dígitos iniciado por `370` ou `373` cujo 6º ao 9º dígitos são zeros: o Peek o classifica na [Ecoscooting](carrier:ecoscooting) sem consultar a Bring, então toque em "Trocar" e busque por Bring. Links de sporing.bring.no, sporing.posten.no e tracking.bring.com, .se ou .dk identificam Bring qualquer que seja o número, mas na Bring o Peek só rastreia códigos de 17 ou 18 dígitos, de 20 dígitos começando por `00` e números postais (duas letras, nove dígitos e duas letras) com dígito verificador válido, de qualquer país. Um sendingsnummer de vários volumes não é rastreado: use cada kollinummer individualmente.
 
 O Peek mostra o status, a cidade de cada leitura no mapa, o remetente, o peso, as dimensões, o dia previsto quando a Bring informa e, enquanto o pacote aguarda, o nome do ponto de retirada. Em vez das frases completas da Bring, cada etapa recebe um rótulo curto como "Handed in", "At terminal" ou "Ready for pickup". Ele omite endereços, fotos e código de retirada, e pode avisar você quando há mudanças. Enquanto a encomenda estiver aberta no Peek, ou no dia da entrega com as notificações ativadas, o Peek verifica até a cada 10 minutos, e até a cada 2 minutos a partir das 6h no relógio da leitura mais recente (horário da Noruega na Noruega) no dia em que a Bring registra saída para entrega, enquanto o próprio rastreador da Bring responder. Fora isso, e após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica a cada hora, e a cada 6 horas após sete dias em "Etiqueta criada" sem novidades.
 
@@ -115,7 +115,7 @@ Na Noruega, 4 dias num Pakkeboks, prorrogáveis gratuitamente até 7. Depois dis
 
 ### O que acontece se uma encomenda da Bring se perder?
 
-Procure a loja: o remetente abre a reclamação junto à Bring, e todas as reclamações prescrevem após um ano.
+Procure a loja: o remetente faz o pedido de indenização à Bring, e todos os pedidos de indenização prescrevem após um ano.
 
 :::sources
 - [Bring: Tracking](https://www.bring.no/en/services/tracking) – formatos de código, onde encontrar, referência do remetente, saída para entrega no mesmo dia
@@ -136,7 +136,7 @@ Procure a loja: o remetente abre a reclamação junto à Bring, e todas as recla
 - [Bring: Generelle leveringsvilkår for Home Delivery](https://www.bring.no/vilkar/vilkar-for-home-delivery) – sending e kolli
 - [Posten: Download the Posten app](https://www.posten.no/en/tracking-help-page/tracking-app) – app rastreia Posten e Bring, código de retirada, compartimento do armário
 - [Posten: Customs clearance of shipments from abroad](https://www.posten.no/en/customs/receiving-from-abroad) – VOEC, taxas, pagamento, sem SMS para pagamento
-- [Bring: Claims and complaints](https://www.bring.no/en/customer-service/claims-and-complaints) – quem reclama, prazos
+- [Bring: Claims and complaints](https://www.bring.no/en/customer-service/claims-and-complaints) – quem pede a indenização, prazos
 - [Posten: How to complain or make claims](https://www.posten.no/en/customer-service/complaint-and-claims) – canais de reclamação, endereço, prazos de análise
 - [Bring: Contact us](https://www.bring.no/en/customer-service/contact-us) – telefones, horários, chat
 - [Posten: Contact us](https://www.posten.no/en/customer-service/contact-us) – telefone, horários, chat

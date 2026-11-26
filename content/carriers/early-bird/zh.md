@@ -15,7 +15,7 @@ Peek 代码为 Early Bird 收录的单号格式（以下数字为虚构）：
 | 单号（虚构） | 含义 |
 | --- | --- |
 | `00373402216482917364` | 20 位数字：`00`、任意一位数字、`73402216` 加九位数字，末位为校验位，即包裹条码号。 |
-| 其他参考号 | 8 至 30 位字母和数字。Peek 可以在 Early Bird 处查询，但无法凭形态自动识别为 Early Bird。 |
+| 其他参考号 | 8 至 30 位字母和数字。Peek 可以在 Early Bird 处查询，但无法凭形态认出 Early Bird。 |
 
 PostNord 和 [Bring](carrier:bring) 也使用以 `00` 开头的 20 位数字，因此仅凭形态不能证明包裹由 Early Bird 承运。下单时填错了手机号？你仍然可以用商家订单确认邮件里的包裹单号查询。更多见[如何查找运单号](guide:find-tracking-number)（英文）。
 
@@ -47,7 +47,7 @@ Early Bird 查询页按你访问的语言显示每一步：英文页为英文，
 | Early Bird 显示 | 对你的含义 |
 | --- | --- |
 | `Paketet har ankommit till sorteringsterminal Göteborg` | 已到达分拣场站（此处为哥德堡）。 |
-| `Ditt paket har nu levererats av Early Bird. Om paketet inte fick plats i postlådan så har det hängts i en påse på din postlåda alternativt dörr` | 已由 Early Bird 送达。如信箱放不下，会装袋挂在信箱或门把手上。 |
+| `Ditt paket har nu levererats av Early Bird. Om paketet inte fick plats i postlådan så har det hängts i en påse på din postlåda alternativt dörr` | 已由 Early Bird 送达。如信箱放不下，会装袋挂在信箱或门上。 |
 
 ## Early Bird 在瑞典的派送：夜间、信箱与快递柜
 
@@ -59,13 +59,13 @@ Early Bird 查询页按你访问的语言显示每一步：英文页为英文，
 
 **放置位置。** 放在家门口或投进信箱。由于投递员常在当地送报，能够进入许多公寓楼。放妥后会有消息告知放置位置。
 
-**派送失败时。** 物流与通知会告知下一步安排。视商家预订的服务，Early Bird 会再次尝试、改投快递柜，或转交另一家承运商送至服务点并由对方通知你取件。参见[错过派送](guide:missed-delivery)（英文）。
+**派送失败时。** 物流与通知会告知下一步安排。视商家预订的服务，Early Bird 会再次尝试、改投快递柜，或转交另一家承运商送至服务点并由对方通知你取件。参见[派送未成功](guide:missed-delivery)（英文）。
 
 **快递柜（Early Bird Box）。** 如果结账时选了 Early Bird Box，包裹会送至全天候开放的室外 iBoxen 快递柜。需使用 iBoxen 应用和 Mobile BankID 开箱，并用下单时的同一手机号注册应用。
 
 - 包裹保管五天，通常不可延期，逾期退回商家：参见[未领取的包裹](guide:uncollected-parcel)（英文）。
 - 若目标快递柜已满，Early Bird 会改投附近柜机，通知和应用里会写明地点。
-- 若 iBoxen 应用支持，你可将取件权限分享给他人；代领人须在应用注册并通常使用 BankID 验证身份。
+- 若 iBoxen 应用提供此功能，你可将取件权限分享给他人；代领人须在应用注册并通常使用 BankID 验证身份。
 
 **更改配送。** 包裹发出后，Early Bird 无法更改派送日期或地址，通常也无法更改配送方式或取消订单，请在发货前联系商家。参见[修改收件地址](guide:change-delivery-address)（英文）。
 
@@ -84,14 +84,14 @@ Early Bird 的[联系我们页面](https://earlybird.se/en/contact-us)未公布�
 
 ## 用 Peek 跟踪 Early Bird 包裹
 
-- **20 位 Early Bird 单号。** 粘贴到 [Peek](/)。由于与 PostNord 单号外形相似，Peek 会显示“正在查询物流服务…”，优先询问 Early Bird 并同时询问 PostNord 等符合格式的承运商。Early Bird 查到后会显示“Early Bird 有这个包裹的记录。”。如果暂时都查不到，Peek 会把 Early Bird 标为最可能的承运商：包裹显示“可能是 Early Bird”和“等待 Early Bird 的首次扫描”，并持续查询。如需直接归入 Early Bird，添加前点“更换”在“符合这个单号”下选择 Early Bird，或稍后点“更换快递公司”。
+- **20 位 Early Bird 单号。** 粘贴到 [Peek](/)。由于与 PostNord 单号外形相似，Peek 会显示“正在查询物流服务…”，优先询问 Early Bird 并同时询问 PostNord 等符合格式的承运商。Early Bird 查到这个单号时，Peek 会显示“Early Bird 有这个包裹的记录。”如果暂时都查不到，Peek 会把 Early Bird 标为最可能的承运商：包裹显示“可能是 Early Bird”和“等待 Early Bird 的首次扫描”，并持续查询。如需直接归入 Early Bird，添加前点“更换”在“符合这个单号”下选择 Early Bird，或稍后点“更换快递公司”。
 - **Early Bird 查询链接。** 带 `id=` 的 earlybird.se 链接（`spara-och-hjalp`、`en/track-and-help` 或 `tracking`）或带 `a=` 的 track.earlybird.se 链接，无论单号形态都会立刻识别为 Early Bird。
-- **其他参考号。** 照样可以粘贴：Peek 支持超过 4,500 家快递公司。要在 Early Bird 查件，点“更换”搜索 Early Bird，或稍后使用“更换快递公司”。Peek 的 Early Bird 查询接受 8 至 30 位字母和数字，且以 `00` 开头的 20 位数字须具备有效校验位，否则提示 Early Bird “不使用这种格式的单号”。
+- **其他参考号。** 照样可以粘贴：Peek 跟踪 4,500 多家快递公司。要在 Early Bird 查件，点“更换”搜索 Early Bird，或稍后使用“更换快递公司”。Peek 的 Early Bird 查询接受 8 至 30 位字母和数字，且以 `00` 开头的 20 位数字须具备有效校验位，否则提示 Early Bird “不使用这种格式的单号”。
 - **尚未收录。** 归入 Early Bird 后在收录前显示“等待 Early Bird 更新”，Peek 会继续查询。如果 Early Bird 返回单号错误，Peek 会显示“请检查运单号”。
 
 **Peek 显示哪些内容。** 每一步按 Early Bird 英文原文（旧系统保留瑞典语）显示，附带时间、场站扫描地点及签收时间。下单显示为“已生成面单”，收寄为“已揽收”，场站及前往快递柜途中为“运输中”，派送失败为“派送未成功”，到达快递柜为“待取件”，送达或取件为“已签收”；安排新派送会保留先前阶段。Peek 不显示预计派送日，也不标明快递柜名称——预计日期在 Early Bird 短信或邮件的链接中，快递柜位置在通知和 iBoxen 应用中。
 
-**转交其他承运商时。** Early Bird 查询页会链接到对方查询页。Peek 代码支持三家：PostNord、DSV 和 DB Schenker（后两者在 Peek 中归入 [DSV](carrier:dsv)）。卡片会显示“由 PostNord 派送”或“由 DSV 派送”，并在对方出现新扫描后用同一单号继续跟进。在对方仅收到预报、尚无自身扫描期间，卡片显示“PostNord 已收到预报，尚未收到包裹”或“DSV 已收到预报，尚未收到包裹”。
+**转交其他承运商时。** Early Bird 查询页会链接到对方查询页。Peek 代码认识三家：PostNord、DSV 和 DB Schenker（后两者在 Peek 中归入 [DSV](carrier:dsv)）。卡片会显示“由 PostNord 派送”或“由 DSV 派送”，并在对方出现新扫描后用同一单号继续跟进。在对方仅收到预报、尚无自身扫描期间，卡片显示“PostNord 已收到预报，尚未收到包裹”或“DSV 已收到预报，尚未收到包裹”。
 
 当你打开包裹页时，Peek 最多每 10 分钟查询一次，并可按你选择发送“每次扫描”、“重要环节”或“仅派送当天”通知。连续两天无新动态（在“已生成面单”或“已揽收”状态下为 12 小时）后改为每小时查询一次，在“已生成面单”下连续七天无动态后改为每 6 小时一次。如果包裹在“已生成面单”、“已揽收”或“运输中”状态下连续四天无新记录，Peek 会显示“自……起没有物流更新”（附该记录日期）以及“向 Early Bird 寻求帮助”链接。
 

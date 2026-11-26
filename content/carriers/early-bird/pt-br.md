@@ -53,13 +53,13 @@ Um traço indica que o código do Peek não tem versão em sueco para aquela eta
 
 **Quem entrega.** Entregadores de jornais, durante suas rotas. A Early Bird pertence às principais empresas de mídia da Suécia e atende quase todo o país, em cidades e zonas rurais. As opções dependem de onde você mora e do que a loja ofereceu.
 
-**Horário.** À noite ou bem cedo pela manhã. A Early Bird diz que as entregas costumam acontecer entre 1h e 7h no horário da Suécia, ficando lá até as 7h. Você não precisa estar em casa nem acordado. As entregas acontecem até seis dias por semana, incluindo fins de semana, conforme a região.
+**Horário.** À noite ou bem cedo pela manhã. A Early Bird diz que as entregas costumam acontecer entre 1h e 7h no horário da Suécia, e que sua encomenda chega até as 7h. Você não precisa estar em casa nem acordado. As entregas acontecem até seis dias por semana, incluindo fins de semana, conforme a região.
 
 **Prazo.** O Home Delivery leva de 1 a 3 dias a partir de quando a Early Bird recebe a encomenda, não do dia da compra. O Early Bird Express, quando oferecido pela loja, chega na mesma noite — até as 7h da manhã seguinte ao pedido. O dia previsto aparece no link do SMS ou e-mail da Early Bird.
 
 **Onde é deixada.** Do lado de fora da porta ou na caixa de correio. Como os entregadores costumam entregar jornais na região, têm acesso a muitos prédios residenciais. Uma mensagem informa onde o pacote foi deixado.
 
-**Se a entrega falhar.** O rastreamento e uma mensagem avisam o próximo passo. Conforme o serviço contratado pela loja, a Early Bird tenta novamente, envia o pacote a um armário ou o repassa a outra transportadora para retirada em ponto de coleta, que avisará quando estiver pronto. Veja [entrega perdida](guide:missed-delivery).
+**Se a entrega não for realizada.** O rastreamento e uma mensagem avisam o próximo passo. Conforme o serviço contratado pela loja, a Early Bird tenta novamente, envia o pacote a um armário ou o repassa a outra transportadora para retirada em ponto de coleta, que avisará quando estiver pronto. Veja [entrega não realizada](guide:missed-delivery).
 
 **Armários de encomendas (Early Bird Box).** Se você escolheu Early Bird Box no checkout, o pacote vai para um armário externo da iBoxen, aberto 24 horas. Você abre com o aplicativo iBoxen e Mobile BankID; cadastre o app com o mesmo celular do pedido.
 
@@ -72,7 +72,7 @@ Um traço indica que o código do Peek não tem versão em sueco para aquela eta
 ## Encomenda Early Bird atrasada, extraviada ou danificada
 
 - **Apenas "booked".** O pacote ainda não chegou à Early Bird. Até lá, a Early Bird diz que a loja tem mais condições de responder. Veja [rastreamento que não atualiza](guide:tracking-not-updating).
-- **Sem novidades após tentativa sem sucesso.** Se nada aparecer dentro do prazo informado pela Early Bird, contate o atendimento dela.
+- **Sem novidades após uma entrega não realizada.** Se nada aparecer dentro do prazo informado pela Early Bird, contate o atendimento dela.
 - **Marcada como entregue, mas não está lá.** Confira o endereço na confirmação do pedido, procure dentro e ao lado da caixa de correio e fora da porta, pergunte aos moradores e vizinhos e, então, use o formulário "Missing package despite confirmation". Veja [encomenda marcada como entregue mas não recebida](guide:delivered-not-received).
 - **Danificada.** Use o formulário "Damaged package" anexando foto nítida e avise também a loja: a Early Bird diz que a loja responde pelo item e por qualquer indenização. Veja [encomendas danificadas](guide:damaged-parcel).
 
@@ -89,7 +89,7 @@ A [página Contact us](https://earlybird.se/en/contact-us) da Early Bird não in
 - **Outra referência.** Cole mesmo assim: o Peek acompanha mais de 4.500 transportadoras. Para consultar na Early Bird, toque em "Trocar" e busque por Early Bird, ou use "Trocar transportadora" depois. Para a Early Bird, o Peek aceita de 8 a 30 letras e dígitos, e códigos de 20 dígitos iniciados por `00` precisam de dígito verificador válido; senão, avisa que a Early Bird "não emite códigos como este".
 - **Ainda não registrada.** Uma encomenda classificada em Early Bird mostra "Aguardando Early Bird" até aparecer lá, e o Peek continua consultando. Se a Early Bird responder que o código está errado, o Peek exibe "Confira o código de rastreamento".
 
-**O que o Peek mostra.** Cada etapa no texto em inglês da Early Bird (linhas antigas continuam em sueco), com horário, local citado nas leituras de terminal e horário de entrega. A reserva aparece como "Etiqueta criada", o recebimento como "Recebida pela transportadora", terminais e ida ao armário como "Em trânsito", tentativas sem sucesso como "Tentativa de entrega", armário como "Pronta para retirada" e entrega ou retirada como "Entregue". Um novo agendamento mantém a etapa anterior. O Peek não exibe dia previsto nem o nome do armário: o dia previsto fica no link do SMS ou e-mail da Early Bird, e o armário na mensagem e no app iBoxen.
+**O que o Peek mostra.** Cada etapa no texto em inglês da Early Bird (linhas antigas continuam em sueco), com horário, local citado nas leituras de terminal e horário de entrega. A reserva aparece como "Etiqueta criada", o recebimento como "Recebida pela transportadora", terminais e ida ao armário como "Em trânsito", entregas não realizadas como "Tentativa de entrega", armário como "Pronta para retirada" e entrega ou retirada como "Entregue". Um novo agendamento mantém a etapa anterior. O Peek não exibe dia previsto nem o nome do armário: o dia previsto fica no link do SMS ou e-mail da Early Bird, e o armário na mensagem e no app iBoxen.
 
 **Quando outra transportadora assume.** O rastreamento da Early Bird traz link para a outra empresa. O código do Peek conhece três: PostNord, DSV e DB Schenker, sendo as duas últimas classificadas em [DSV](carrier:dsv). O cartão exibe "Entrega por PostNord" ou "Entrega por DSV", e o Peek acompanha essa transportadora sob o mesmo código assim que surgem novas leituras. Enquanto a nova transportadora tiver apenas o aviso da encomenda, sem leitura própria, o cartão mostra "Anunciada a PostNord, ainda não recebida" ou "Anunciada a DSV, ainda não recebida".
 
@@ -119,8 +119,8 @@ Pelos formulários da página Contact us, informando seu código de rastreamento
 
 :::sources
 - [Early Bird: Track packages & get help](https://earlybird.se/en/track-and-help) – página de rastreamento, onde encontrar o código
-- [Early Bird: Frequently asked questions](https://earlybird.se/en/frequently-asked-questions) – "Delivery booked", data prevista, celular errado, entrega noturna, portarias, entregas perdidas, alterações, iBoxen, golpes de taxa extra
-- [Early Bird: Contact us](https://earlybird.se/en/contact-us) – formulários por assunto, o que conferir primeiro, papel da loja em sinistros de dano
+- [Early Bird: Frequently asked questions](https://earlybird.se/en/frequently-asked-questions) – "Delivery booked", data prevista, celular errado, entrega noturna, portarias, entregas não realizadas, alterações, iBoxen, golpes de taxa extra
+- [Early Bird: Contact us](https://earlybird.se/en/contact-us) – formulários por assunto, o que conferir primeiro, papel da loja nas indenizações por dano
 - [Early Bird: About Early Bird](https://earlybird.se/en/about-us) – controladores, entregadores de jornais, cobertura, seis dias por semana
 - [Early Bird: Home Delivery](https://earlybird.se/en/home-delivery) – até as 7h, 1h às 7h, 1 a 3 dias, repasse a outra transportadora
 - [Early Bird: Parcel locker delivery](https://earlybird.se/en/parcel-locker-delivery) – Early Bird Box, Mobile BankID, cinco dias, armários cheios

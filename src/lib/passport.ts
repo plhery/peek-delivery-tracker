@@ -246,8 +246,16 @@ export function yearInParcels(book: PassportBook, year: number) {
   const deliveries = book.stats.deliveries.filter((delivery) => delivery.day.startsWith(`${year}-`));
   const parcels = new Set(deliveries.map((delivery) => delivery.parcelId));
   const counts = new Map<string, number>();
-  for (const delivery of deliveries) for (const code of delivery.countries.keys()) counts.set(code, (counts.get(code) ?? 0) + 1);
-  const countries = book.countries.filter((country) => counts.has(country.code)).map((country) => ({ ...country, count: counts.get(country.code)! }));
+  // A country's day on the card is the year's first delivery through it, never an earlier year's.
+  const firsts = new Map<string, number>();
+  for (const delivery of deliveries) {
+    for (const code of delivery.countries.keys()) {
+      counts.set(code, (counts.get(code) ?? 0) + 1);
+      firsts.set(code, Math.min(firsts.get(code) ?? Infinity, delivery.deliveredAt));
+    }
+  }
+  const countries = book.countries.filter((country) => counts.has(country.code))
+    .map((country) => ({ ...country, firstAt: firsts.get(country.code)!, count: counts.get(country.code)! }));
   const shown = countries.length <= 6 ? countries
     : [...countries].sort((a, b) => b.count - a.count || a.number - b.number).slice(0, 6).sort((a, b) => a.number - b.number);
   const durations = deliveries.flatMap((delivery) => delivery.duration === null ? [] : [delivery.duration]);

@@ -25,5 +25,6 @@ cases ([`passport-cases.json`](../shared/passport-cases.json)).
 - **The year's card.** In December, once a parcel was delivered that year, the passport
   offers "Your <year> in parcels": a 1080×1350 picture made on the device and handed to the
   share sheet or saved. It carries counts, the countries that year's parcels went through
-  (six at most), the stamps they earned and the fastest time; never a parcel's name, a
+  (six at most, each dated by the year's first delivery through it), the stamps they earned
+  and the fastest time; never a parcel's name, a
   shop, a carrier, a tracking number or a place below the country.

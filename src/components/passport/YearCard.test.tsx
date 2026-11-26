@@ -38,6 +38,11 @@ describe('the year in parcels card', () => {
     expect(inkDay(Date.UTC(2026, 7, 12, 12), 'en-GB')).toBe('12 AUG 2026');
   });
 
+  it('dates a country by the year\'s first delivery through it', () => {
+    const year = yearInParcels(passportBook([parcel('a', '2025-12-01T12:00:00Z', 'Wien, AT'), parcel('b', '2026-03-02T12:00:00Z', 'Graz, AT')]), 2026);
+    expect(year.countries.map((country) => [country.code, country.count, new Date(country.firstAt).toISOString()])).toEqual([['AT', 1, '2026-03-02T12:00:00.000Z']]);
+  });
+
   it('lays out up to six country stamps in the zone, rows centred', () => {
     const five = countryLayout(5, 430, 900);
     expect(five.map((box) => [Math.round(box.x), Math.round(box.y)])).toEqual([[120, 461], [416, 461], [712, 461], [268, 685], [564, 685]]);

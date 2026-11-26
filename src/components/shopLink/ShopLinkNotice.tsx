@@ -9,7 +9,7 @@ export function ShopLinkNotice({ reading, signedIn }: { reading: ShopLinkReading
   const { t } = useI18n();
   if (reading.state === 'none') return null;
   if (reading.state === 'reading') {
-    return <div className="add-parcel-notice shop-link-notice"><p role="status">{t('shopLink.checking')}</p></div>;
+    return <div className="add-parcel-notice shop-link-notice shop-link-notice--calm"><p role="status">{t('shopLink.checking')}</p></div>;
   }
   if (reading.state === 'failed') {
     return <div className="add-parcel-notice shop-link-notice"><p role="status">{t('shopLink.unavailable')}</p></div>;
@@ -19,7 +19,8 @@ export function ShopLinkNotice({ reading, signedIn }: { reading: ShopLinkReading
     return <div className="add-parcel-notice shop-link-notice"><p role="status">{t('shopLink.unreadable')}</p></div>;
   }
   const shop = link.shop_name;
-  return <div className="add-parcel-notice shop-link-notice">
+  // Not shipped yet is no fault: it reads in the sheet's quiet ink, not the warning colour.
+  return <div className="add-parcel-notice shop-link-notice shop-link-notice--calm">
     <p role="status">
       <strong>{shop ? t('shopLink.noParcelYet', { shop }) : t('shopLink.noParcelYet.unnamed')}</strong><br />
       {signedIn ? t('shopLink.waitHint') : t('shopLink.signIn')}

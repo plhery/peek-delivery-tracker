@@ -10,3 +10,5 @@
 .shop-wait__action:hover { background: var(--control); }
 .shop-wait__action:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
 .shop-wait--expired .shop-wait__state { color: var(--ink-soft); }
+.add-parcel-notice.shop-link-notice--calm > p { color: var(--ink-soft); }
+.add-parcel-notice.shop-link-notice--calm strong { color: var(--ink); font-weight: 600; }

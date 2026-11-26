@@ -16246,6 +16246,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#da291c"
     },
     {
+      "id": "nova-global",
+      "catalog": "nova-global",
+      "slug": "nova-global-tracking",
+      "title": "Rastreamento Nova Global: códigos NPG e NGUS, alfândega",
+      "name": "Nova Global",
+      "color": "#da291c"
+    },
+    {
       "id": "estafeta",
       "catalog": "estafeta",
       "slug": "estafeta-tracking",
@@ -16324,6 +16332,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Memphis Courier — códigos, alfândega e ANVISA",
       "name": "Memphis Courier",
       "color": "#1f3c5b"
+    },
+    {
+      "id": "oca",
+      "catalog": "oca",
+      "slug": "oca-tracking",
+      "title": "Rastreamento OCA Argentina: códigos, status e retirada",
+      "name": "OCA",
+      "color": "#592c82"
     },
     {
       "id": "bfe-express",
@@ -20468,6 +20484,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#da291c"
     },
     {
+      "id": "nova-global",
+      "catalog": "nova-global",
+      "slug": "nova-global-tracking",
+      "title": "Nova Global 快递追踪：NPG 与 NGUS 单号、清关状态与客服",
+      "name": "Nova Global",
+      "color": "#da291c"
+    },
+    {
       "id": "estafeta",
       "catalog": "estafeta",
       "slug": "estafeta-tracking",
@@ -20594,6 +20618,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Kuehne+Nagel 物流追踪：单号格式、节点状态与清关说明",
       "name": "Kuehne+Nagel",
       "color": "#003369"
+    },
+    {
+      "id": "oca",
+      "catalog": "oca",
+      "slug": "oca-tracking",
+      "title": "OCA 阿根廷快递追踪：19 位单号、状态说明、网点自提与客服",
+      "name": "OCA",
+      "color": "#592c82"
     },
     {
       "id": "bfe-express",

@@ -15886,6 +15886,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#055aa1"
     },
     {
+      "id": "roadie",
+      "catalog": "roadie",
+      "slug": "roadie-tracking",
+      "title": "Rastreio Roadie: códigos 1R, status e foto de entrega",
+      "name": "Roadie",
+      "color": "#76cccd"
+    },
+    {
       "id": "ecms-express",
       "catalog": "ecms-express",
       "slug": "rastreamento-ecms-express",
@@ -16628,6 +16636,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento PigeonShip: códigos, status e entregas",
       "name": "PigeonShip",
       "color": "#f2b02c"
+    },
+    {
+      "id": "seko",
+      "catalog": "seko",
+      "slug": "seko-logistics-tracking",
+      "title": "Rastreio SEKO Logistics: códigos, OmniParcel e entrega",
+      "name": "SEKO Logistics",
+      "color": "#ef3e42"
     },
     {
       "id": "bfe-express",
@@ -20412,6 +20428,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#055aa1"
     },
     {
+      "id": "roadie",
+      "catalog": "roadie",
+      "slug": "roadie-tracking",
+      "title": "Roadie 物流查询：1R 单号格式、状态与送达照片",
+      "name": "Roadie",
+      "color": "#76cccd"
+    },
+    {
       "id": "ecms-express",
       "catalog": "ecms-express",
       "slug": "yikeman-ecms-express-wuliu-chaxun",
@@ -21170,6 +21194,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "PigeonShip 追踪：18 位单号、实时状态与美加末端派送",
       "name": "PigeonShip",
       "color": "#f2b02c"
+    },
+    {
+      "id": "seko",
+      "catalog": "seko",
+      "slug": "seko-logistics-tracking",
+      "title": "SEKO Logistics 物流查询：单号格式、OmniParcel 与派送",
+      "name": "SEKO Logistics",
+      "color": "#ef3e42"
     },
     {
       "id": "bfe-express",

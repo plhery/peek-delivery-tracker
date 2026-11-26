@@ -15166,6 +15166,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffc600"
     },
     {
+      "id": "hrvatska-posta",
+      "catalog": "hrvatska-posta",
+      "slug": "rastreamento-hrvatska-posta",
+      "title": "Rastreamento Hrvatska pošta: status, armários e contato",
+      "name": "Hrvatska pošta",
+      "color": "#ffd100"
+    },
+    {
       "id": "lietuvos-pastas",
       "catalog": "lietuvos-pastas",
       "slug": "rastreamento-lietuvos-pastas",
@@ -15652,6 +15660,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Delhivery: códigos AWB, status e atendimento",
       "name": "Delhivery",
       "color": "#ed4136"
+    },
+    {
+      "id": "emirates-post",
+      "catalog": "emirates-post",
+      "slug": "rastreamento-emirates-post",
+      "title": "Rastreamento Emirates Post: códigos AE e status explicados",
+      "name": "Emirates Post",
+      "color": "#004a98"
     },
     {
       "id": "ekart",
@@ -18860,6 +18876,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffc600"
     },
     {
+      "id": "hrvatska-posta",
+      "catalog": "hrvatska-posta",
+      "slug": "hrvatska-posta-wuliu-chaxun",
+      "title": "克罗地亚邮政（Hrvatska pošta）物流查询：状态与快递柜",
+      "name": "Hrvatska pošta",
+      "color": "#ffd100"
+    },
+    {
       "id": "lietuvos-pastas",
       "catalog": "lietuvos-pastas",
       "slug": "lietuvos-pastas-litaowan-youzheng-chaxun",
@@ -19386,6 +19410,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Delhivery 印度快递查询：AWB 单号、状态与客服",
       "name": "Delhivery",
       "color": "#ed4136"
+    },
+    {
+      "id": "emirates-post",
+      "catalog": "emirates-post",
+      "slug": "emirates-post-wuliu-chaxun",
+      "title": "阿联酋邮政（Emirates Post）物流查询：AE 单号与状态",
+      "name": "Emirates Post",
+      "color": "#004a98"
     },
     {
       "id": "ekart",

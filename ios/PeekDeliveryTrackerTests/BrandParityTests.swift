@@ -176,6 +176,15 @@ final class BrandParityTests: XCTestCase {
         XCTAssertEqual(try ["dhl", "gls-de", "ups", "usps", "tnt"].map { try identity($0).name }, ["DHL", "GLS", "UPS", "USPS", "TNT"])
     }
 
+    func testEveryCarrierIsNamedByItsCatalogNameOrAHandSetOneNeverItsBareID() {
+        for (id, definition) in catalog.definitions {
+            let name = CarrierVisualIdentity(id: id.rawValue, carrier: definition).name
+            XCTAssertTrue(["DHL", "GLS", "UPS", definition.displayName].contains(name), "\(id.rawValue) reads as \(name)")
+            // Some brands write their catalog name in lowercase, as their id: only those may read as the id.
+            if name == id.rawValue { XCTAssertEqual(definition.displayName, id.rawValue) }
+        }
+    }
+
     func testCarriersWithoutAPaletteUseTheSharedMixAmounts() throws {
         let brand = try brand()
         let sampled = ["swiss-post", "fedex", "dpd", "la-poste"].filter { brand.palettes[$0] == nil }

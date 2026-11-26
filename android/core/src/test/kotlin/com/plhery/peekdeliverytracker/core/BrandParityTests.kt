@@ -131,6 +131,16 @@ class BrandParityTests {
     }
 
     @Test
+    fun everyCarrierIsNamedByItsCatalogNameOrAHandSetOneNeverItsBareId() {
+        for ((id, definition) in catalog.definitions) {
+            val name = CarrierVisualIdentity(id.rawValue, definition).name
+            assertTrue("${id.rawValue} reads as $name", name in listOf("DHL", "GLS", "UPS", definition.displayName))
+            // Some brands write their catalog name in lowercase, as their id: only those may read as the id.
+            if (name == id.rawValue) assertEquals(id.rawValue, definition.displayName)
+        }
+    }
+
+    @Test
     fun declaredPalettesFamiliesAndLiveriesMatchTheCarrierFolders() {
         val brand = brand()
         assertEquals(9, brand.properties.size)

@@ -1,3 +1,4 @@
+import { claimReload } from './pageReload';
 import { WORKER_WITHOUT_DOCUMENTS } from './site';
 
 type ServiceWorkerReloadSource = Pick<
@@ -11,6 +12,9 @@ type PageVisibility = Pick<Document, 'visibilityState' | 'addEventListener' | 'r
 
 const RESUME_KEY = 'sdt.update-resume.v1';
 const RESUME_WINDOW_MS = 30_000;
+const UPGRADE_RELOAD_KEY = 'sdt.upgrade-reload.v1';
+// A browser that keeps no worker installs it again on every load, each time an upgrade to the page it controls.
+const UPGRADE_RELOAD_EVERY_MS = 10 * 60_000;
 const INPUT_EVENTS = ['pointerdown', 'keydown', 'wheel', 'touchstart', 'scroll'] as const;
 
 /**
@@ -96,7 +100,8 @@ export function takeResumedScreen(): ResumedScreen | null {
  * all of its code at start, so the switch waits for a moment when a reload
  * brings back the same screen: at once while the app is put away, otherwise
  * after a few seconds without input. The reload keeps the address and the
- * scroll positions.
+ * scroll positions. A tab reloads for an upgrade at most once in ten minutes
+ * (`mayReload`); a later upgrade waits for that.
  */
 export function enablePwaLiveReload({
   reload = () => window.location.reload(),
@@ -104,6 +109,7 @@ export function enablePwaLiveReload({
   page = document,
   canReplace = canReplacePage,
   remember = rememberScreen,
+  mayReload = () => claimReload(UPGRADE_RELOAD_KEY, UPGRADE_RELOAD_EVERY_MS),
   idleMs = 3_000,
   checkMs = 1_000,
 }: {
@@ -112,6 +118,7 @@ export function enablePwaLiveReload({
   page?: PageVisibility;
   canReplace?: (visible: boolean) => boolean;
   remember?: () => void;
+  mayReload?: () => boolean;
   idleMs?: number;
   checkMs?: number;
 } = {}): () => void {
@@ -132,7 +139,7 @@ export function enablePwaLiveReload({
     if (!upgraded || isReloading) return;
     const visible = page.visibilityState === 'visible';
     if (visible && Date.now() - lastInput < idleMs) return;
-    if (!canReplace(visible)) return;
+    if (!canReplace(visible) || !mayReload()) return;
     isReloading = true;
     stopChecking();
     remember();

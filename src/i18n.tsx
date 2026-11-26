@@ -1,4 +1,5 @@
 import { trackAction } from './lib/analytics';
+import { reloadForNewCode } from './lib/laterCode';
 import {
   createContext,
   useCallback,
@@ -257,8 +258,8 @@ export function I18nProvider({ children, initialLocale, initialMessages, address
       if (requested.current === next) setLanguage({ locale: next, messages });
     }, () => {
       // A newer build replaced this language file. The cookie already names the
-      // language, so the current build renders it after a reload.
-      if (requested.current === next) window.location.reload();
+      // language, so the current build renders it after a reload, at most once a minute.
+      if (requested.current === next) reloadForNewCode();
     });
   }, []);
 

@@ -107,6 +107,7 @@ describe('enablePwaLiveReload', () => {
     hidden.changeController();
     expect(reloadHidden).toHaveBeenCalledOnce();
 
+    sessionStorage.clear();
     const open = serviceWorker({});
     const visibility = page('visible');
     const reloadOpen = vi.fn();
@@ -128,6 +129,32 @@ describe('enablePwaLiveReload', () => {
     expect(reload).not.toHaveBeenCalled();
     worker.changeController();
     expect(reload).toHaveBeenCalledOnce();
+  });
+
+  it('reloads a tab for an upgrade at most once in ten minutes, when it can remember it', () => {
+    const upgradeOnLoad = () => {
+      const worker = serviceWorker({});
+      const reload = vi.fn();
+      enablePwaLiveReload({ reload, remember: vi.fn(), canReplace: () => true, serviceWorker: worker.source, page: page('hidden').source });
+      worker.changeController();
+      return reload;
+    };
+
+    expect(upgradeOnLoad()).toHaveBeenCalledOnce();
+    // A browser that keeps no worker installs it again on the reloaded page.
+    const reloaded = upgradeOnLoad();
+    vi.advanceTimersByTime(9 * 60_000);
+    expect(reloaded).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(60_000);
+    expect(reloaded).toHaveBeenCalledOnce();
+
+    const unremembered = vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => { throw new Error('blocked'); });
+    try {
+      vi.advanceTimersByTime(10 * 60_000);
+      expect(upgradeOnLoad()).not.toHaveBeenCalled();
+    } finally {
+      unremembered.mockRestore();
+    }
   });
 
   it('is inert when service workers are unsupported', () => {

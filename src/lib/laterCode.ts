@@ -1,4 +1,5 @@
 import { use, useEffect, useSyncExternalStore } from 'react';
+import { claimReload } from './pageReload';
 
 /** How long to wait before asking again for code that could not be fetched. */
 const RETRY_MS = [1_000, 3_000];
@@ -6,12 +7,8 @@ const RELOAD_KEY = 'sdt.code-reload.v1';
 const RELOAD_EVERY_MS = 60_000;
 
 /** After a deployment the page's own files may be gone: a reload brings the new page, at most once a minute. */
-function reloadForNewCode(): void {
-  try {
-    if (Date.now() - Number(sessionStorage.getItem(RELOAD_KEY)) < RELOAD_EVERY_MS) return;
-    sessionStorage.setItem(RELOAD_KEY, String(Date.now()));
-  } catch { return; }
-  window.location.reload();
+export function reloadForNewCode(): void {
+  if (claimReload(RELOAD_KEY, RELOAD_EVERY_MS)) window.location.reload();
 }
 
 const never = () => () => undefined;

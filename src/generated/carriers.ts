@@ -16518,6 +16518,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#42b0d5"
     },
     {
+      "id": "pdu",
+      "catalog": "pdu",
+      "slug": "pdu-tracking",
+      "title": "Rastreamento PDU (Parcel Delivery Union): códigos e status",
+      "name": "PDU",
+      "color": "#005cfe"
+    },
+    {
       "id": "skypostal",
       "catalog": "skypostal",
       "slug": "rastreamento-skypostal",
@@ -21082,6 +21090,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Kuehne+Nagel 物流追踪：单号格式、节点状态与清关说明",
       "name": "Kuehne+Nagel",
       "color": "#003369"
+    },
+    {
+      "id": "memphis-courier",
+      "catalog": "memphis-courier",
+      "slug": "memphis-courier-tracking",
+      "title": "Memphis Courier 巴西专线追踪：M-MIA 单号、清关与客服",
+      "name": "Memphis Courier",
+      "color": "#1f3c5b"
     },
     {
       "id": "oca",

@@ -15014,6 +15014,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "parcelforce",
+      "catalog": "parcelforce",
+      "slug": "parcelforce-worldwide-tracking",
+      "title": "Rastreamento Parcelforce Worldwide: status e alfândega",
+      "name": "Parcelforce Worldwide",
+      "color": "#9d0f11"
+    },
+    {
       "id": "bpost",
       "catalog": "bpost",
       "slug": "rastreamento-bpost",
@@ -15268,6 +15276,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Geniki Taxydromiki: voucher, status e contato",
       "name": "Geniki Taxydromiki",
       "color": "#004fa0"
+    },
+    {
+      "id": "xdp",
+      "catalog": "xdp",
+      "slug": "xdp-tracking",
+      "title": "Rastreamento XDP: códigos, status e entregas no Reino Unido",
+      "name": "XDP",
+      "color": "#53b6ed"
     },
     {
       "id": "ups",
@@ -18916,6 +18932,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "parcelforce",
+      "catalog": "parcelforce",
+      "slug": "parcelforce-worldwide-tracking",
+      "title": "Parcelforce Worldwide 物流查询：单号、状态、清关与客服",
+      "name": "Parcelforce Worldwide",
+      "color": "#9d0f11"
+    },
+    {
       "id": "bpost",
       "catalog": "bpost",
       "slug": "bpost-bilishi-youzheng-chaxun",
@@ -19170,6 +19194,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Geniki Taxydromiki 物流查询：运单号、状态与联系",
       "name": "Geniki Taxydromiki",
       "color": "#004fa0"
+    },
+    {
+      "id": "xdp",
+      "catalog": "xdp",
+      "slug": "xdp-tracking",
+      "title": "XDP 物流查询：英国大件快递托运单号、状态与派送说明",
+      "name": "XDP",
+      "color": "#53b6ed"
     },
     {
       "id": "ups",

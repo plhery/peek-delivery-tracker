@@ -16070,6 +16070,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#d9232d"
     },
     {
+      "id": "posta-shqiptare",
+      "catalog": "posta-shqiptare",
+      "slug": "posta-shqiptare-tracking",
+      "title": "Rastreamento Posta Shqiptare: códigos AL, status e ajuda",
+      "name": "Posta Shqiptare",
+      "color": "#1a3292"
+    },
+    {
       "id": "dsv",
       "catalog": "dsv",
       "slug": "rastreamento-dsv",
@@ -16532,6 +16540,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Post Haste: códigos na Nova Zelândia e ajuda",
       "name": "Post Haste",
       "color": "#24b2d8"
+    },
+    {
+      "id": "redur",
+      "catalog": "redur",
+      "slug": "redur-tracking",
+      "title": "Rastreamento Redur: códigos de 14 dígitos, status e ajuda",
+      "name": "Redur",
+      "color": "#0c4c49"
     },
     {
       "id": "skypostal",
@@ -20580,6 +20596,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#d9232d"
     },
     {
+      "id": "posta-shqiptare",
+      "catalog": "posta-shqiptare",
+      "slug": "posta-shqiptare-tracking",
+      "title": "Posta Shqiptare 阿尔巴尼亚邮政追踪：AL 单号、状态与清关",
+      "name": "Posta Shqiptare",
+      "color": "#1a3292"
+    },
+    {
       "id": "dsv",
       "catalog": "dsv",
       "slug": "dsv-wuliu-chaxun",
@@ -21050,6 +21074,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Post Haste 新西兰快递追踪：单号、乡村派送与重派指南",
       "name": "Post Haste",
       "color": "#24b2d8"
+    },
+    {
+      "id": "redur",
+      "catalog": "redur",
+      "slug": "redur-tracking",
+      "title": "Redur 快递追踪：14 位单号、西班牙与葡萄牙物流状态",
+      "name": "Redur",
+      "color": "#0c4c49"
     },
     {
       "id": "sengi-express",

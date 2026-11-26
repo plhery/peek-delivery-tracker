@@ -489,7 +489,8 @@ private fun ListColumn(state: DeliveriesState, entries: List<ListEntry>, padding
                         .padding(start = 16.dp, top = entry.top, end = 16.dp)
                         .deliveryListItem(),
                 ) {
-                    ListItemContent(state, entry.item)
+                    // Only the reader's own list marks its search in its cards.
+                    CompositionLocalProvider(LocalListSearch provides state.query) { ListItemContent(state, entry.item) }
                 }
             }
         }

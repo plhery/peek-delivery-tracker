@@ -17,6 +17,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performSemanticsAction
+import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.unit.Density
 import androidx.core.graphics.Insets
@@ -43,8 +44,8 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * The demo's private note, on the record from Round Midnight Records, with the iPhone's bars: its card in the list with
  * the mark after its name, light and dark and at the largest Android text on a 360-wide phone; the card's menu; its
- * page with the note and its two files; its sheet, an account's and a guest's; and the sheet once a file was too big
- * and another waits for a connection.
+ * page with the note and its two files; its sheet, an account's and a guest's; the sheet once a file was too big
+ * and another waits for a connection; and the list searching a word of the note, its few words under the name.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -145,6 +146,24 @@ class ParcelNoteScreenshotTest {
         scrollToTheRecord(top = 190f)
         compose.screenshot("note_list_small_text2")
     }
+
+    /** The list searching "returns": the note's words under the record's name, both matches marked, and TalkBack hears them. */
+    private fun searched(dark: Boolean) {
+        show(dark = dark)
+        compose.onNodeWithTag(SEARCH_BUTTON).performClick()
+        compose.waitForIdle()
+        compose.onNodeWithTag(SEARCH_FIELD).performTextInput("returns")
+        settle()
+        compose.screenshot("search_snippet_${theme(dark)}")
+        // From a few words before the first match.
+        compose.card("${record.label}, Your note: …paid 39 €. Free returns until 24 Dec at round-midnight.example/returns").assertExists()
+    }
+
+    @Test
+    fun theListSearchingAWordOfTheNote() = searched(dark = false)
+
+    @Test
+    fun theListSearchingAWordOfTheNoteInDark() = searched(dark = true)
 
     private fun menu(dark: Boolean) {
         show(dark = dark)

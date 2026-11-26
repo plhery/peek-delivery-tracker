@@ -139,6 +139,9 @@ fun ParcelPassCard(
     val showsStatus = flag == null || parcel.hasCarrierUpdate
 
     val name = parcel.label.ifEmpty { localizer.text("common.parcel") }
+    // While the reader's own list is searching, the name marks the match, and a match in the note shows its few words.
+    val nameMarks = listSearchMarks(parcel.label)
+    val noteHit = listNoteMatch(parcel)
     val carrierNotice = automaticCarrierNotice(parcel)
     val delivering = parcel.deliveringCarrier?.let {
         localizer.text(parcel.deliveryLineKey, mapOf("carrier" to identities.displayName(it, language)))
@@ -165,7 +168,7 @@ fun ParcelPassCard(
                 label = newUpdateLabel(
                     localizer.text("parcel.newUpdate").takeIf { newUpdate && showsStatus },
                     cardLabel(
-                        identity.fullName, date, name, noteMarkLabel(parcel, localizer), carrierNotice, delivering, status.takeIf { showsStatus },
+                        identity.fullName, date, name, noteHeard(parcel, noteHit, localizer), carrierNotice, delivering, status.takeIf { showsStatus },
                         peekAiWords?.let { localizer.text("peekAi.says", mapOf("words" to it)) }, flag,
                     ),
                 ),
@@ -219,13 +222,17 @@ fun ParcelPassCard(
                 verticalArrangement = Arrangement.spacedBy(5.dp),
             ) {
                 val (marked, markContent) = noteMarked(name, parcel)
-                Text(
-                    marked,
-                    if (onName != null) Modifier.reportsFrameInList { onName(it.center.y) } else Modifier,
-                    color = colors.label,
-                    style = type.style(IosTextStyle.Headline, FontWeight.SemiBold).sfLines(),
-                    inlineContent = markContent,
-                )
+                Column(verticalArrangement = Arrangement.spacedBy(1.dp)) {
+                    SearchMarkedText(
+                        marked,
+                        nameMarks,
+                        if (onName != null) Modifier.reportsFrameInList { onName(it.center.y) } else Modifier,
+                        color = colors.label,
+                        style = type.style(IosTextStyle.Headline, FontWeight.SemiBold).sfLines(),
+                        inlineContent = markContent,
+                    )
+                    if (noteHit != null) NoteMatchLine(noteHit)
+                }
                 if (carrierNotice != null) Text(carrierNotice, color = colors.secondaryText, style = type.caption.sfLines())
                 if (delivering != null) Text(delivering, color = colors.secondaryText, style = type.caption.sfLines())
                 if (showsStatus) {

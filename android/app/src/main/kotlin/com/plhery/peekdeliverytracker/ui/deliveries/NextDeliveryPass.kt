@@ -136,6 +136,9 @@ fun NextDeliveryPass(
     val press by keyframeAnimator(1.0, arrived) { PeekKeyframes.deliveredNextUp }
 
     val name = parcel.label.ifEmpty { localizer.text("common.parcel") }
+    // While the reader's own list is searching, the name marks the match, and a match in the note shows its few words.
+    val nameMarks = listSearchMarks(parcel.label)
+    val noteHit = listNoteMatch(parcel)
     val nextUp = localizer.text("app.nextUp")
     val notice = automaticCarrierNotice(parcel)
     val delivering = parcel.deliveringCarrier?.let {
@@ -163,7 +166,7 @@ fun NextDeliveryPass(
                 label = newUpdateLabel(
                     localizer.text("parcel.newUpdate").takeIf { newUpdate },
                     cardLabel(
-                        identity.fullName, nextUp.takeUnless { arrived }, name, noteMarkLabel(parcel, localizer), notice, delivering, status,
+                        identity.fullName, nextUp.takeUnless { arrived }, name, noteHeard(parcel, noteHit, localizer), notice, delivering, status,
                         peekAiWords?.let { localizer.text("peekAi.says", mapOf("words" to it)) }, flag,
                     ),
                 ),
@@ -221,15 +224,17 @@ fun NextDeliveryPass(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 val (marked, markContent) = noteMarked(name, parcel)
-                Text(
-                    marked,
-                    Modifier
-                        .weight(1f)
-                        .then(if (onName != null) Modifier.reportsFrameInList { onName(it.center.y) } else Modifier),
-                    color = colors.label,
-                    style = type.style(IosTextStyle.Title2, FontWeight.SemiBold).sfLines(),
-                    inlineContent = markContent,
-                )
+                Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(1.dp)) {
+                    SearchMarkedText(
+                        marked,
+                        nameMarks,
+                        if (onName != null) Modifier.reportsFrameInList { onName(it.center.y) } else Modifier,
+                        color = colors.label,
+                        style = type.style(IosTextStyle.Title2, FontWeight.SemiBold).sfLines(),
+                        inlineContent = markContent,
+                    )
+                    if (noteHit != null) NoteMatchLine(noteHit)
+                }
                 DeliveryPostageStamp(parcel, identity, appeared = appeared || decorative)
             }
             if (notice != null) Text(notice, color = colors.secondaryText, style = type.caption.sfLines())

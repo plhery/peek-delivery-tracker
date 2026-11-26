@@ -16526,6 +16526,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005cfe"
     },
     {
+      "id": "post-haste",
+      "catalog": "post-haste",
+      "slug": "post-haste-tracking",
+      "title": "Rastreamento Post Haste: códigos na Nova Zelândia e ajuda",
+      "name": "Post Haste",
+      "color": "#24b2d8"
+    },
+    {
       "id": "skypostal",
       "catalog": "skypostal",
       "slug": "rastreamento-skypostal",
@@ -16596,6 +16604,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento OCA Argentina: códigos, status e retirada",
       "name": "OCA",
       "color": "#592c82"
+    },
+    {
+      "id": "pigeonship",
+      "catalog": "pigeonship",
+      "slug": "pigeonship-tracking",
+      "title": "Rastreamento PigeonShip: códigos, status e entregas",
+      "name": "PigeonShip",
+      "color": "#f2b02c"
     },
     {
       "id": "bfe-express",
@@ -21028,6 +21044,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005cfe"
     },
     {
+      "id": "post-haste",
+      "catalog": "post-haste",
+      "slug": "post-haste-tracking",
+      "title": "Post Haste 新西兰快递追踪：单号、乡村派送与重派指南",
+      "name": "Post Haste",
+      "color": "#24b2d8"
+    },
+    {
       "id": "sengi-express",
       "catalog": "sengi-express",
       "slug": "sengi-express-senji-chaxun",
@@ -21106,6 +21130,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "OCA 阿根廷快递追踪：19 位单号、状态说明、网点自提与客服",
       "name": "OCA",
       "color": "#592c82"
+    },
+    {
+      "id": "pigeonship",
+      "catalog": "pigeonship",
+      "slug": "pigeonship-tracking",
+      "title": "PigeonShip 追踪：18 位单号、实时状态与美加末端派送",
+      "name": "PigeonShip",
+      "color": "#f2b02c"
     },
     {
       "id": "bfe-express",

@@ -15214,6 +15214,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#234182"
     },
     {
+      "id": "foxpost",
+      "catalog": "foxpost",
+      "slug": "foxpost-tracking",
+      "title": "Rastreamento Foxpost: status, lockers e contatos na Hungria",
+      "name": "Foxpost",
+      "color": "#b70100"
+    },
+    {
       "id": "slovenska-posta",
       "catalog": "slovenska-posta",
       "slug": "rastreamento-slovenska-posta",
@@ -15868,6 +15876,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento J&T Express na Arábia Saudita, EAU e Kuwait",
       "name": "J&T Express Middle East",
       "color": "#e60000"
+    },
+    {
+      "id": "globalpost",
+      "catalog": "globalpost",
+      "slug": "globalpost-tracking",
+      "title": "Rastreamento GlobalPost: códigos GP e quem faz a entrega",
+      "name": "GlobalPost",
+      "color": "#11003a"
     },
     {
       "id": "cdek",
@@ -19180,6 +19196,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#234182"
     },
     {
+      "id": "foxpost",
+      "catalog": "foxpost",
+      "slug": "foxpost-tracking",
+      "title": "匈牙利 Foxpost 物流查询：单号、状态、快递柜与客服",
+      "name": "Foxpost",
+      "color": "#b70100"
+    },
+    {
       "id": "slovenska-posta",
       "catalog": "slovenska-posta",
       "slug": "slovenska-posta-kuaidi-chaxun",
@@ -19858,6 +19882,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "极兔中东（J&T Express 沙特/阿联酋/科威特）查询与客服",
       "name": "J&T Express Middle East",
       "color": "#e60000"
+    },
+    {
+      "id": "globalpost",
+      "catalog": "globalpost",
+      "slug": "globalpost-tracking",
+      "title": "GlobalPost 物流查询：GP 运单号、状态与末端派送公司",
+      "name": "GlobalPost",
+      "color": "#11003a"
     },
     {
       "id": "cdek",

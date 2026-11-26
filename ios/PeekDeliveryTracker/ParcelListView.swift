@@ -1597,7 +1597,7 @@ private struct DeliveryListView: View {
     private func menu(for parcel: Parcel) -> CardMenu {
         CardMenu(
             items: ParcelMenuItem.menu(for: parcel, onCard: true, reader: store.viewerLink(for: parcel) != nil,
-                                       frozen: store.isFrozen(parcel)),
+                                       frozen: store.isFrozen(parcel), notes: store.takesNote(parcel)),
             // The keys act on the parcel shown beside the list: its card's menu shows them.
             shortcuts: parcel.id == selectedCard && keyboardFree && !searchFocused,
             choose: { chose($0, on: parcel) },
@@ -1614,6 +1614,10 @@ private struct DeliveryListView: View {
             prompts.renaming = parcel
             prompts.name = parcel.label
             prompts.naming = true
+        case .note:
+            // The note's sheet opens over the parcel's page, where its card and its Undo are.
+            ParcelNoteRequests.shared.parcelID = parcel.id
+            open(parcel.id)
         case .share: prompts.sharing = parcel
         case .copyTrackingNumber:
             let entry = parcel.trackingNumbers[0]
@@ -1834,8 +1838,10 @@ private struct ExperimentalNextDeliveryPass: View {
                     .accessibilityHidden(arrived)
             }
             HStack(alignment: .center, spacing: 16) {
-                Text(parcel.label.nonEmpty ?? localizer.text("common.parcel"))
+                let name = parcel.label.nonEmpty ?? localizer.text("common.parcel")
+                ParcelNoteMark.name(name, noted: parcel.hasNote, tint: identity.ink)
                     .font(.title2.weight(.semibold))
+                    .noteMarkLabel(name, noted: parcel.hasNote, localizer: localizer)
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .onGeometryChange(for: CGFloat.self) { $0.frame(in: .named(DeliveryListSpace.name)).midY } action: { onName?($0) }
@@ -2036,8 +2042,10 @@ private struct ExperimentalParcelPassCard: View {
             }
             .padding(.bottom, 3)
             VStack(alignment: .leading, spacing: 5) {
-                Text(parcel.label.nonEmpty ?? localizer.text("common.parcel"))
+                let name = parcel.label.nonEmpty ?? localizer.text("common.parcel")
+                ParcelNoteMark.name(name, noted: parcel.hasNote, tint: identity.ink)
                     .font(.headline.weight(.semibold))
+                    .noteMarkLabel(name, noted: parcel.hasNote, localizer: localizer)
                     .fixedSize(horizontal: false, vertical: true)
                     .onGeometryChange(for: CGFloat.self) { $0.frame(in: .named(DeliveryListSpace.name)).midY } action: { onName?($0) }
                 AutomaticCarrierNotice(parcel: parcel)
@@ -2107,6 +2115,18 @@ private struct ExperimentalParcelPassCard: View {
         localizer.peekAiCopy.phrase(words, wraps: wraps).font(.caption).foregroundStyle(identity.ink)
     }
 }
+
+#if DEBUG
+/// One card of the list drawn alone, for the tests' pictures.
+struct ParcelListCardPicture: View {
+    let parcel: Parcel
+    @Namespace private var transition
+
+    var body: some View {
+        ExperimentalParcelPassCard(parcel: parcel, notice: nil, transition: transition, onOpen: {}, onArchive: nil)
+    }
+}
+#endif
 
 private struct MarksNewUpdatesKey: EnvironmentKey {
     static let defaultValue = true
@@ -3112,9 +3132,11 @@ private struct ExperimentalArchivedParcelRow: View {
                 }
 
                 VStack(alignment: .leading, spacing: 3) {
-                    Text(parcel.label.nonEmpty ?? localizer.text("common.parcel"))
+                    let name = parcel.label.nonEmpty ?? localizer.text("common.parcel")
+                    ParcelNoteMark.name(name, noted: parcel.hasNote, tint: Brand.secondaryText)
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(.primary)
+                        .noteMarkLabel(name, noted: parcel.hasNote, localizer: localizer)
                         .lineLimit(large ? nil : 1)
                     Text("\(catalog.info(for: parcel.activeTrackingCarrier, language: localizer.language).displayName) · \(localizer.parcelStatus(parcel))")
                         .font(.caption)

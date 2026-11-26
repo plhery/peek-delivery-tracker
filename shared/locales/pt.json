@@ -532,7 +532,7 @@
   "native.apnsTokenError.ipad": "Não foi possível configurar as notificações neste iPad. Tenta novamente em Definições › Notificações.",
   "native.apnsTokenError.mac": "Não foi possível configurar as notificações neste Mac. Tenta novamente em Definições › Notificações.",
   "native.apnsTokenError.android": "Não foi possível configurar as notificações neste dispositivo. Tenta novamente em Definições › Notificações.",
-  "native.cameraUsage": "O Peek usa a câmara para ler códigos de barras de seguimento: assim, adicionas encomendas sem escrever.",
+  "native.cameraUsage": "O Peek usa a câmara para ler códigos de barras de seguimento, para adicionares encomendas sem escrever, e para tirar fotos para a nota de uma encomenda.",
   "native.appearance.dark": "Escuro",
   "native.appearance.light": "Claro",
   "native.appearance.system": "Sistema",

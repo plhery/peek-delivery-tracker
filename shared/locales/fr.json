@@ -532,7 +532,7 @@
   "native.apnsTokenError.ipad": "Impossible d’activer les notifications sur cet iPad. Réessaie dans Réglages › Notifications.",
   "native.apnsTokenError.mac": "Impossible d’activer les notifications sur ce Mac. Réessaie dans Réglages › Notifications.",
   "native.apnsTokenError.android": "Impossible d’activer les notifications sur cet appareil. Réessaie dans Réglages › Notifications.",
-  "native.cameraUsage": "Peek utilise l’appareil photo pour scanner les codes-barres de suivi, afin que tu puisses ajouter des colis sans rien saisir.",
+  "native.cameraUsage": "Peek utilise l’appareil photo pour scanner les codes-barres de suivi, afin que tu puisses ajouter des colis sans rien saisir, et pour prendre des photos à joindre à la note d’un colis.",
   "native.appearance.dark": "Sombre",
   "native.appearance.light": "Clair",
   "native.appearance.system": "Système",

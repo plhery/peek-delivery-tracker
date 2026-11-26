@@ -532,7 +532,7 @@
   "native.apnsTokenError.ipad": "No se ha podido conectar este iPad para recibir notificaciones. Vuelve a intentarlo en Ajustes › Notificaciones.",
   "native.apnsTokenError.mac": "No se ha podido conectar este Mac para recibir notificaciones. Vuelve a intentarlo en Ajustes › Notificaciones.",
   "native.apnsTokenError.android": "No se ha podido conectar este dispositivo para recibir notificaciones. Vuelve a intentarlo en Ajustes › Notificaciones.",
-  "native.cameraUsage": "Peek usa la cámara para escanear códigos de barras de seguimiento y así añadir paquetes sin escribir.",
+  "native.cameraUsage": "Peek usa la cámara para escanear códigos de barras de seguimiento, para que añadas paquetes sin escribir, y para hacer fotos para la nota de un paquete.",
   "native.appearance.dark": "Oscuro",
   "native.appearance.light": "Claro",
   "native.appearance.system": "Sistema",

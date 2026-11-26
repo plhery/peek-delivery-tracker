@@ -532,7 +532,7 @@
   "native.apnsTokenError.ipad": "Couldn’t connect this iPad for notifications. Try again in Settings › Notifications.",
   "native.apnsTokenError.mac": "Couldn’t connect this Mac for notifications. Try again in Settings › Notifications.",
   "native.apnsTokenError.android": "Couldn’t connect this device for notifications. Try again in Settings › Notifications.",
-  "native.cameraUsage": "Peek uses the camera to scan tracking barcodes, so you can add parcels without typing.",
+  "native.cameraUsage": "Peek uses the camera to scan tracking barcodes, so you can add parcels without typing, and to take photos for a parcel’s note.",
   "native.appearance.dark": "Dark",
   "native.appearance.light": "Light",
   "native.appearance.system": "System",

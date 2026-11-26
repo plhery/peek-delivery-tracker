@@ -532,7 +532,7 @@
   "native.apnsTokenError.ipad": "Mitteilungen konnten auf diesem iPad nicht eingerichtet werden. Versuche es unter Einstellungen › Mitteilungen erneut.",
   "native.apnsTokenError.mac": "Mitteilungen konnten auf diesem Mac nicht eingerichtet werden. Versuche es unter Einstellungen › Mitteilungen erneut.",
   "native.apnsTokenError.android": "Mitteilungen konnten auf diesem Gerät nicht eingerichtet werden. Versuche es unter Einstellungen › Mitteilungen erneut.",
-  "native.cameraUsage": "Peek nutzt die Kamera, um Sendungsbarcodes zu scannen. So fügst du Pakete hinzu, ohne zu tippen.",
+  "native.cameraUsage": "Peek nutzt die Kamera, um Sendungsbarcodes zu scannen, damit du Pakete ohne Tippen hinzufügst, und um Fotos für die Notiz zu einem Paket aufzunehmen.",
   "native.appearance.dark": "Dunkel",
   "native.appearance.light": "Hell",
   "native.appearance.system": "System",

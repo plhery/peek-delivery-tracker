@@ -61,6 +61,14 @@ struct ParcelDetailView: View {
 
     @ObservedObject private var catalog = CarrierCatalog.shared
     @StateObject private var feedback = ParcelFeedbackModel()
+    @StateObject private var note = ParcelNoteModel()
+    @ObservedObject private var noteRequests = ParcelNoteRequests.shared
+    @Environment(\.accessibilityVoiceOverEnabled) private var voiceOver
+    @State private var editingNote = false
+    /// The sheet was opened on a note that was there, and offers Delete note.
+    @State private var noteExisted = false
+    /// A note's file shown by Quick Look.
+    @State private var noteFile: URL?
 
     var body: some View {
         ZStack {
@@ -121,7 +129,7 @@ struct ParcelDetailView: View {
         .onChange(of: covered, initial: true) { _, covered in covering?.wrappedValue = covered }
         .onDisappear { covering?.wrappedValue = false }
         .parcelFeedback(feedback, busy: showingShare || showingAlerts || showingMap || carrierEditor != nil
-            || showingTitleEditor || showingDeleteConfirmation || errorMessage != nil)
+            || showingTitleEditor || showingDeleteConfirmation || errorMessage != nil || editingNote || noteFile != nil)
         .onChange(of: parcel.flatMap(feedbackPage), initial: true) { _, page in
             feedback.show(page, through: parcel.map { store.feedbackClient(for: $0) })
         }
@@ -141,7 +149,8 @@ struct ParcelDetailView: View {
                         ParcelMenuButtons(
                             items: ParcelMenuItem.menu(for: parcel, onCard: false, reader: store.viewerLink(for: parcel) != nil,
                                                        frozen: store.isFrozen(parcel),
-                                                       help: catalog.helpLink(for: parcel, language: localizer.language)?.name),
+                                                       help: catalog.helpLink(for: parcel, language: localizer.language)?.name,
+                                                       notes: takesNote(parcel)),
                             busy: working, shortcuts: keyboard
                         ) { chose($0, on: parcel) }
                     } label: {
@@ -209,6 +218,35 @@ struct ParcelDetailView: View {
             PeekAiSheet(parcel: parcel)
                 .environmentObject(store)
                 .environmentObject(localizer)
+        }
+        .sheet(isPresented: $editingNote) {
+            if let parcel {
+                ParcelNoteSheet(parcel: parcel, model: note, guest: store.isGuest, existing: noteExisted,
+                                open: { openNoteFile($0, of: parcel) }, saved: { editingNote = false }, deleted: { editingNote = false })
+                    .environmentObject(store)
+                    .environmentObject(localizer)
+                    .quickLookPreview($noteFile)
+            }
+        }
+        .quickLookPreview(editingNote ? .constant(nil) : $noteFile)
+        .overlay(alignment: .bottom) { noteToast }
+        .onChange(of: voiceOver, initial: true) { _, on in note.assisted = on }
+        .onChange(of: [noteRequests.parcelID, parcel?.id], initial: true) { _, _ in
+            guard let parcel, let asked = noteRequests.parcelID, asked == parcel.id || asked == parcelID else { return }
+            noteRequests.parcelID = nil
+            Task {
+                // Once the page has come in.
+                try? await Task.sleep(for: .milliseconds(450))
+                openNote(parcel)
+            }
+        }
+        // A removal waiting for its Undo is sent as the page goes, or the app.
+        .onDisappear { note.commitNow() }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .background { note.commitNow() }
+        }
+        .task(id: parcel?.files?.map(\.expiresAt)) {
+            if let parcel { await store.freshenNoteFiles(parcel) }
         }
         #if DEBUG
         .task {
@@ -600,6 +638,12 @@ struct ParcelDetailView: View {
             // its handover has not gone quiet on the way: the card says the sender still has it.
             if !parcel.isArchived, !frozen, parcel.displayedCarrier != .unknown, parcel.attention() == .stalled, !parcel.awaitingHandover() {
                 ParcelQuietNote(parcel: parcel, tint: branding.ink)
+            }
+            // The reader's own note, after what Peek AI, the pickup point and the carrier say.
+            if takesNote(parcel), note.shown(parcel) {
+                ParcelNoteCard(text: note.text(of: parcel), files: note.files(of: parcel), fileURL: store.noteFileURL,
+                               edit: { openNote(parcel) }, open: { openNoteFile($0, of: parcel) },
+                               remove: { note.removeFile($0, of: parcel, in: store) })
             }
             shipmentIdentity(parcel, links: trackingLinks, tint: branding.ink)
             if let details = parcel.carrierData {
@@ -1030,6 +1074,7 @@ struct ParcelDetailView: View {
     private var covered: Bool {
         showingTitleEditor || showingDeleteConfirmation || showingShare || showingAlerts || showingMap
             || carrierEditor != nil || errorMessage != nil || feedback.words != nil || feedback.namingCarrier
+            || editingNote || noteFile != nil
     }
 
     /// Whether the keyboard reaches the page: its screen is in front, and nothing stands over the page.
@@ -1067,7 +1112,7 @@ struct ParcelDetailView: View {
     private var parcelMenu: ParcelMenu? {
         guard let parcel, sample == nil else { return nil }
         return ParcelMenu(items: ParcelMenu.items(for: parcel, reader: store.viewerLink(for: parcel) != nil,
-                                                  frozen: store.isFrozen(parcel)), busy: working) {
+                                                  frozen: store.isFrozen(parcel), notes: takesNote(parcel)), busy: working) {
             chose($0, on: parcel)
         }
     }
@@ -1079,6 +1124,7 @@ struct ParcelDetailView: View {
         case .rename:
             editedTitle = parcel.label
             showingTitleEditor = true
+        case .note: openNote(parcel)
         case .share: showingShare = true
         case .copyTrackingNumber:
             let entry = parcel.trackingNumbers[0]
@@ -1143,6 +1189,47 @@ struct ParcelDetailView: View {
     }
 
     private func spokenName(_ parcel: Parcel) -> String { parcel.label.nonEmpty ?? localizer.text("common.parcel") }
+
+    /// The parcel takes a private note here: a real one, of the account, the demo or this device's own lookups.
+    private func takesNote(_ parcel: Parcel) -> Bool { sample == nil && store.takesNote(parcel) }
+
+    /// Opens the note's sheet. A deleted note still waiting for its Undo is deleted now: the sheet starts afresh.
+    private func openNote(_ parcel: Parcel) {
+        guard takesNote(parcel) else { return }
+        note.commitNow()
+        noteExisted = note.shown(parcel)
+        editingNote = true
+    }
+
+    /// Shows a note's file with Quick Look, read again first when its signed address has passed.
+    private func openNoteFile(_ file: PackageFile, of parcel: Parcel) {
+        Task {
+            await store.freshenNoteFiles(parcel)
+            let current = store.parcels.first { $0.id == parcel.id }?.files?.first { $0.id == file.id } ?? file
+            guard let url = store.noteFileURL(current.url) else { return }
+            do {
+                noteFile = try await NoteFileOpening.copy(current, from: url)
+            } catch {
+                errorMessage = localizer.errorMessage(error)
+            }
+        }
+    }
+
+    /// The Undo of a deleted note, or of a file removed from the card, while the sheet is closed.
+    @ViewBuilder private var noteToast: some View {
+        if !editingNote, let toast = note.toast {
+            InlineToast(text: localizer.noteToast(toast.kind), button: toast.kind == .failed ? nil : localizer.text("app.undo"),
+                        symbol: toast.kind == .failed ? "exclamationmark.triangle.fill" : "trash.fill",
+                        tint: toast.kind == .failed ? Brand.warning : ExperimentalPalette.ochre,
+                        action: toast.kind == .failed ? nil : { note.undo() })
+                .padding(.horizontal, 16)
+                .padding(.bottom, 12)
+                .frame(maxWidth: 560)
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+                .onAppear { AccessibilityNotification.Announcement(localizer.noteToast(toast.kind)).post() }
+                .id(toast.id)
+        }
+    }
 
     private func run(_ operation: @escaping @MainActor () async throws -> Void) {
         guard !working else { return }

@@ -1241,6 +1241,8 @@ enum DeliveriesKey: Hashable {
 /// What a parcel's menu offers: its page's •••, and its card's under a long press or a secondary click.
 enum ParcelMenuItem: Hashable {
     case open, rename, share, copyTrackingNumber, changeCarrier, archive, restore, delete
+    /// The parcel's private note: "Add a note", or "Edit note" once it has one (`edit`).
+    case note(edit: Bool)
     /// The help page of the carrier named, as the quiet note links it.
     case contactCarrier(String)
 
@@ -1250,11 +1252,13 @@ enum ParcelMenuItem: Hashable {
     /// through its link: its page shares the link as it is, its carrier is not the reader's to change, and a
     /// number the link hides cannot be copied. A copy no longer updated (`frozen`) has no link left to share and no
     /// carrier to change. The page's menu also leads to the support of a carrier with a help page (`help`, its name).
+    /// A parcel that takes a private note (`notes`) offers it right under its name.
     static func menu(for parcel: Parcel, onCard: Bool, reader: Bool = false, frozen: Bool = false,
-                     help: String? = nil) -> [[Self]] {
+                     help: String? = nil, notes: Bool = false) -> [[Self]] {
+        let naming: [Self] = [.rename] + (notes ? [.note(edit: parcel.hasNote)] : [])
         let changes: [Self] = reader || frozen
-            ? [.rename] + (parcel.trackingNumber.isEmpty ? [] : [.copyTrackingNumber])
-            : [.rename] + (onCard ? [.share] : []) + [.copyTrackingNumber, .changeCarrier]
+            ? naming + (parcel.trackingNumber.isEmpty ? [] : [.copyTrackingNumber])
+            : naming + (onCard ? [.share] : []) + [.copyTrackingNumber, .changeCarrier]
         return (onCard ? [[.open]] : []) + [changes + (help.map { [.contactCarrier($0)] } ?? []),
                                             [parcel.isArchived ? .restore : .archive], [.delete]]
     }
@@ -1263,6 +1267,7 @@ enum ParcelMenuItem: Hashable {
         switch self {
         case .open: "detail.open"
         case .rename: "detail.editTitle"
+        case .note(let edit): edit ? "note.edit" : "note.add"
         case .share: "share.action"
         case .copyTrackingNumber: "detail.copyTracking"
         case .changeCarrier: "detail.changeCarrier"
@@ -1284,7 +1289,7 @@ enum ParcelMenuItem: Hashable {
         case .copyTrackingNumber: KeyboardShortcut("c", modifiers: [.command, .shift])
         case .archive, .restore: KeyboardShortcut("a", modifiers: [.command, .control])
         case .delete: KeyboardShortcut(.delete, modifiers: .command)
-        case .open, .rename, .share, .changeCarrier, .contactCarrier: nil
+        case .open, .rename, .note, .share, .changeCarrier, .contactCarrier: nil
         }
     }
 
@@ -1292,6 +1297,7 @@ enum ParcelMenuItem: Hashable {
         switch self {
         case .open: "shippingbox"
         case .rename: "pencil"
+        case .note: "doc.plaintext"
         case .share: "square.and.arrow.up"
         case .copyTrackingNumber: "doc.on.doc"
         case .changeCarrier: "truck.box"

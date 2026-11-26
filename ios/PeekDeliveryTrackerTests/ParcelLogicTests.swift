@@ -6140,7 +6140,11 @@ extension ParcelLogicTests {
         XCTAssertEqual(ParcelMenu.items(for: parcel, reader: false), [
             [.rename, .share, .copyTrackingNumber, .changeCarrier], [.archive], [.delete],
         ])
-        XCTAssertEqual(ParcelMenu.placeholder, ParcelMenu.items(for: parcel, reader: false))
+        // Where the parcel takes a note, "Add a note" follows its name; the menu without a parcel shows it dimmed.
+        XCTAssertEqual(ParcelMenu.items(for: parcel, reader: false, notes: true), [
+            [.rename, .note(edit: false), .share, .copyTrackingNumber, .changeCarrier], [.archive], [.delete],
+        ])
+        XCTAssertEqual(ParcelMenu.placeholder, ParcelMenu.items(for: parcel, reader: false, notes: true))
         // Someone else's parcel, followed through its link: no carrier to change, nothing to copy the link hides.
         var hidden = parcel
         hidden.trackingNumber = ""

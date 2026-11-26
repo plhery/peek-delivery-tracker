@@ -1,2 +1,2 @@
 /* Generated from shared/locales by npm run ios:resources. */
-"NSCameraUsageDescription" = "Peek nutzt die Kamera, um Sendungsbarcodes zu scannen. So fügst du Pakete hinzu, ohne zu tippen.";
+"NSCameraUsageDescription" = "Peek nutzt die Kamera, um Sendungsbarcodes zu scannen, damit du Pakete ohne Tippen hinzufügst, und um Fotos für die Notiz zu einem Paket aufzunehmen.";

@@ -532,7 +532,7 @@
   "native.apnsTokenError.ipad": "无法为这台 iPad 连接通知服务。请在“设置 › 通知”中重试。",
   "native.apnsTokenError.mac": "无法为这台 Mac 连接通知服务。请在“设置 › 通知”中重试。",
   "native.apnsTokenError.android": "无法为这台设备连接通知服务。请在“设置 › 通知”中重试。",
-  "native.cameraUsage": "Peek 使用相机扫描运单条形码，让你无需手动输入就能添加包裹。",
+  "native.cameraUsage": "Peek 使用相机扫描运单条形码，让你无需手动输入就能添加包裹，也用相机为包裹的备注拍照。",
   "native.appearance.dark": "深色",
   "native.appearance.light": "浅色",
   "native.appearance.system": "跟随系统",

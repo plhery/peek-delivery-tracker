@@ -1,2 +1,2 @@
 /* Generated from shared/locales by npm run ios:resources. */
-"NSCameraUsageDescription" = "Peek utilise l’appareil photo pour scanner les codes-barres de suivi, afin que tu puisses ajouter des colis sans rien saisir.";
+"NSCameraUsageDescription" = "Peek utilise l’appareil photo pour scanner les codes-barres de suivi, afin que tu puisses ajouter des colis sans rien saisir, et pour prendre des photos à joindre à la note d’un colis.";

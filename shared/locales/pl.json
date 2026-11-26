@@ -532,7 +532,7 @@
   "native.apnsTokenError.ipad": "Nie udało się skonfigurować powiadomień na tym iPadzie. Spróbuj ponownie tutaj: Ustawienia › Powiadomienia.",
   "native.apnsTokenError.mac": "Nie udało się skonfigurować powiadomień na tym Macu. Spróbuj ponownie tutaj: Ustawienia › Powiadomienia.",
   "native.apnsTokenError.android": "Nie udało się skonfigurować powiadomień na tym urządzeniu. Spróbuj ponownie tutaj: Ustawienia › Powiadomienia.",
-  "native.cameraUsage": "Peek używa aparatu do skanowania kodów kreskowych, dzięki czemu dodasz przesyłki bez wpisywania numerów.",
+  "native.cameraUsage": "Peek używa aparatu do skanowania kodów kreskowych, dzięki czemu dodasz przesyłki bez wpisywania numerów, oraz do robienia zdjęć do notatki przesyłki.",
   "native.appearance.dark": "Ciemny",
   "native.appearance.light": "Jasny",
   "native.appearance.system": "Systemowy",

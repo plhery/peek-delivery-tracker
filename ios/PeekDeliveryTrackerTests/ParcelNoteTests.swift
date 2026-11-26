@@ -1,4 +1,5 @@
 import ImageIO
+import SwiftUI
 import UniformTypeIdentifiers
 import XCTest
 @testable import PeekDeliveryTracker
@@ -296,5 +297,172 @@ final class ParcelNoteTests: XCTestCase {
         XCTAssertNoThrow(try NotePreparation.prepare(files[0].data, name: files[0].name))
         let photo = try NotePreparation.prepare(files[1].data, name: files[1].name)
         XCTAssertEqual([photo.width, photo.height], [400, 400])
+    }
+
+    // MARK: - Drawn
+
+    func testTheNoteMenuItemSitsRightUnderTheNameAndReadsEditOnceThereIsANote() {
+        let plain = parcel(label: "Lamp")
+        let noted = parcel(label: "Records", note: "Door code 4521")
+        XCTAssertEqual(ParcelMenuItem.menu(for: plain, onCard: false, notes: true)[0].prefix(2), [.rename, .note(edit: false)])
+        XCTAssertEqual(ParcelMenuItem.menu(for: noted, onCard: true, notes: true)[1].prefix(2), [.rename, .note(edit: true)])
+        XCTAssertEqual(ParcelMenuItem.menu(for: noted, onCard: false, frozen: true, notes: true)[0].prefix(2), [.rename, .note(edit: true)])
+        XCTAssertFalse(ParcelMenuItem.menu(for: noted, onCard: false).joined().contains(.note(edit: true)))
+        XCTAssertEqual(ParcelMenuItem.note(edit: false).titleKey, "note.add")
+        XCTAssertEqual(ParcelMenuItem.note(edit: true).titleKey, "note.edit")
+        XCTAssertNil(ParcelMenuItem.note(edit: true).shortcut)
+        XCTAssertTrue(ParcelMenu.items(for: noted, reader: false, notes: true).joined().contains(.note(edit: true)))
+    }
+
+    func testAFilesProblemsAndSizesReadAsTheWebSaysThem() {
+        let localizer = Localizer()
+        let previous = localizer.language
+        defer { localizer.language = previous }
+        localizer.language = .en
+        XCTAssertEqual(localizer.noteFileLine(.tooBig, name: "Return label.pdf", size: 24 * 1_048_576),
+                       "Return label.pdf is 24 MB. Files can be up to 10 MB.")
+        XCTAssertEqual(localizer.megabytes(1_572_864), "1.5 MB")
+        XCTAssertEqual(localizer.noteFileLine(.failed, name: "Receipt.jpg", size: nil), "Couldn’t add Receipt.jpg.")
+        XCTAssertEqual(localizer.noteFileLine(.parcelFull, name: "", size: nil), "A parcel holds up to 5 photos or files.")
+        XCTAssertEqual(NoteFileName.title("Receipt.pdf"), "Receipt")
+        XCTAssertEqual(NoteFileName.title(".pdf"), ".pdf")
+        let receipt = PackageFile(id: UUID(), name: "Receipt.pdf", contentType: .applicationPdf, size: 10, createdAt: "2026-11-01T08:00:00Z",
+                                  url: "/api/files/x", expiresAt: "2026-11-01T09:00:00Z")
+        XCTAssertEqual(localizer.noteFileLabel(receipt), "Receipt, PDF")
+        XCTAssertEqual(localizer.text("note.left.many", ["count": 1]), "1 character left")
+        XCTAssertEqual(localizer.text("note.left.many", ["count": 40]), "40 characters left")
+        localizer.language = .fr
+        XCTAssertTrue(localizer.megabytes(1_572_864).hasPrefix("1,5"))
+    }
+
+    /// The card, a list name with its mark and a whole list card, at a narrow and a wide phone, in light and dark, at the
+    /// default and an accessibility text size: they fit their width, the note shows four lines and then More, and the mark is drawn.
+    func testTheNoteCardAndAMarkedNameFitInLightAndDarkAtEveryTextSize() throws {
+        let localizer = Localizer()
+        let previous = localizer.language
+        defer { localizer.language = previous }
+        localizer.language = .en
+        let short = "From Mamie, for Léa’s birthday on Saturday. Hide it in the top cupboard until then."
+        let long = Array(repeating: short + " The receipt is at www.example.com/orders.", count: 8).joined(separator: " ")
+        let files = [
+            PackageFile(id: UUID(), name: "Receipt.pdf", contentType: .applicationPdf, size: 10, createdAt: "2026-11-01T08:00:00Z",
+                        url: "/api/files/a", expiresAt: "2026-11-01T09:00:00Z"),
+            PackageFile(id: UUID(), name: "Photo.jpg", contentType: .imageJpeg, size: 10, createdAt: "2026-11-01T08:00:00Z",
+                        url: "/api/files/b", thumbnailURL: "/api/files/b", expiresAt: "2026-11-01T09:00:00Z"),
+        ]
+        for scheme in [ColorScheme.light, .dark] {
+            for size in [DynamicTypeSize.large, .accessibility3] {
+                for width in [CGFloat(288), 358] {
+                    let label = "\(Int(width))-\(scheme == .dark ? "dark" : "light")-\(size == .large ? "default" : "ax3")"
+                    func card(_ text: String) -> some View {
+                        ParcelNoteCard(text: text, files: files, fileURL: { _ in nil }, edit: {}, open: { _ in })
+                    }
+                    let shortCard = try render(card(short), width: width, scheme: scheme, size: size, localizer: localizer, name: "note-card-\(label)")
+                    let longCard = try render(card(long), width: width, scheme: scheme, size: size, localizer: localizer, name: "note-card-long-\(label)")
+                    XCTAssertEqual(shortCard.width, Int(width) * 2, label)
+                    XCTAssertEqual(longCard.width, Int(width) * 2, label)
+                    // Four lines at the reader's size, then More: a long note's card is never much taller than four lines'.
+                    let line = Double(try render(Text(verbatim: "Line").font(.body).fixedSize(), width: nil, scheme: scheme, size: size,
+                                                 localizer: localizer, name: nil).height) / 2
+                    let words = try render(NoteWords(text: long), width: width - 36, scheme: scheme, size: size, localizer: localizer, name: nil)
+                    XCTAssertLessThanOrEqual(Double(words.height) / 2, line * 4 + 56, label)
+                    XCTAssertGreaterThanOrEqual(Double(words.height) / 2, line * 3.5, label)
+                    XCTAssertGreaterThanOrEqual(longCard.height, shortCard.height, label)
+
+                    // The name of a card in the list: the mark is drawn after it, in the name's font, and the name is never cut.
+                    func name(_ noted: Bool) -> some View {
+                        ParcelNoteMark.name("Birthday gift for Léa and Sam", noted: noted, tint: .black)
+                            .font(.headline.weight(.semibold))
+                            .foregroundStyle(.black)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    let marked = try render(name(true), width: width - 30, scheme: scheme, size: size, localizer: localizer,
+                                            name: "note-mark-\(label)", ground: .white)
+                    let plain = try render(name(false), width: width - 30, scheme: scheme, size: size, localizer: localizer, name: nil, ground: .white)
+                    XCTAssertGreaterThanOrEqual(marked.height, plain.height, label)
+                    XCTAssertNotEqual(ink(marked), ink(plain), label)
+
+                    // A whole card of the list, with and without its note: as wide as the list, and the noted one carries the mark.
+                    let notedCard = try render(ParcelListCardPicture(parcel: parcel(label: "Birthday gift", note: short)), width: width,
+                                               scheme: scheme, size: size, localizer: localizer, name: "list-card-\(label)")
+                    let plainCard = try render(ParcelListCardPicture(parcel: parcel(label: "Birthday gift")), width: width,
+                                               scheme: scheme, size: size, localizer: localizer, name: nil)
+                    XCTAssertEqual(notedCard.width, Int(width) * 2, label)
+                    XCTAssertGreaterThanOrEqual(notedCard.height, plainCard.height, label)
+                    XCTAssertNotEqual(notedCard.pixels, plainCard.pixels, label)
+                }
+            }
+        }
+    }
+
+    /// The mark keeps to the name's last word: where the name just fits one line, the word goes onto the next with it.
+    func testTheMarkNeverWrapsOntoALineAlone() throws {
+        let localizer = Localizer()
+        func name(_ noted: Bool) -> some View {
+            ParcelNoteMark.name("Birthday gift", noted: noted, tint: .black).font(.headline).foregroundStyle(.black)
+        }
+        let plain = try render(name(false).fixedSize(), width: nil, scheme: .light, size: .large, localizer: localizer, name: nil, ground: .white)
+        let mark = try render(Text(Image(systemName: ParcelNoteMark.symbol)).font(.headline).foregroundStyle(.black).fixedSize(), width: nil,
+                              scheme: .light, size: .large, localizer: localizer, name: nil, ground: .white)
+        let width = CGFloat(plain.width) / 2 + 1
+        let wrapped = try render(name(true).fixedSize(horizontal: false, vertical: true).frame(width: width, alignment: .leading), width: nil,
+                                 scheme: .light, size: .large, localizer: localizer, name: "note-mark-wrapped", ground: .white)
+        XCTAssertGreaterThan(wrapped.height, plain.height + plain.height / 2, "the marked name takes two lines")
+        let secondLine = inkSpan(wrapped, rows: wrapped.height / 2 + wrapped.height / 8..<wrapped.height)
+        XCTAssertGreaterThan(secondLine, inkSpan(mark, rows: 0..<mark.height) * 2, "the last word goes along with the mark")
+    }
+
+    private struct Drawn: Equatable {
+        let width: Int
+        let height: Int
+        let pixels: [UInt8]
+    }
+
+    /// Draws a view at twice the scale, keeps the picture with the test's results, and returns its pixels.
+    private func render(_ view: some View, width: CGFloat?, scheme: ColorScheme, size: DynamicTypeSize, localizer: Localizer,
+                        name: String?, ground: Color = Brand.paper) throws -> Drawn {
+        let content = view
+            .frame(width: width)
+            .background(ground)
+            .environmentObject(localizer)
+            .environment(\.dynamicTypeSize, size)
+            .environment(\.colorScheme, scheme)
+        let renderer = ImageRenderer(content: content)
+        renderer.scale = 2
+        // Drawn once, the note learns whether it runs past four lines; drawn again, it shows More.
+        _ = renderer.cgImage
+        RunLoop.main.run(until: Date().addingTimeInterval(0.05))
+        renderer.proposedSize = ProposedViewSize(width: width, height: nil)
+        let image = try XCTUnwrap(renderer.cgImage)
+        if let name {
+            let attachment = XCTAttachment(image: UIImage(cgImage: image))
+            attachment.name = name
+            attachment.lifetime = .keepAlways
+            add(attachment)
+        }
+        var pixels = [UInt8](repeating: 0, count: image.width * image.height * 4)
+        let context = try XCTUnwrap(CGContext(data: &pixels, width: image.width, height: image.height, bitsPerComponent: 8,
+                                              bytesPerRow: image.width * 4, space: CGColorSpaceCreateDeviceRGB(),
+                                              bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue))
+        context.draw(image, in: CGRect(x: 0, y: 0, width: image.width, height: image.height))
+        return Drawn(width: image.width, height: image.height, pixels: pixels)
+    }
+
+    /// The dark pixels of a picture drawn in black on white.
+    private func ink(_ drawn: Drawn) -> Int {
+        stride(from: 0, to: drawn.pixels.count, by: 4).reduce(0) { $0 + (drawn.pixels[$1] < 128 ? 1 : 0) }
+    }
+
+    /// How wide the ink runs across the given rows, counted from the top.
+    private func inkSpan(_ drawn: Drawn, rows: Range<Int>) -> Int {
+        var first = Int.max, last = -1
+        for row in rows where row >= 0 && row < drawn.height {
+            for column in 0..<drawn.width where drawn.pixels[(row * drawn.width + column) * 4] < 128 {
+                first = min(first, column)
+                last = max(last, column)
+            }
+        }
+        return last < first ? 0 : last - first
     }
 }

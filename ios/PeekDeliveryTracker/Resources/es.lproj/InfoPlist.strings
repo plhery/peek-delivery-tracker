@@ -1,2 +1,2 @@
 /* Generated from shared/locales by npm run ios:resources. */
-"NSCameraUsageDescription" = "Peek usa la cámara para escanear códigos de barras de seguimiento y así añadir paquetes sin escribir.";
+"NSCameraUsageDescription" = "Peek usa la cámara para escanear códigos de barras de seguimiento, para que añadas paquetes sin escribir, y para hacer fotos para la nota de un paquete.";

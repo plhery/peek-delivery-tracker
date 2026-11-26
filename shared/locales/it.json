@@ -532,7 +532,7 @@
   "native.apnsTokenError.ipad": "Impossibile attivare le notifiche su questo iPad. Riprova in Impostazioni › Notifiche.",
   "native.apnsTokenError.mac": "Impossibile attivare le notifiche su questo Mac. Riprova in Impostazioni › Notifiche.",
   "native.apnsTokenError.android": "Impossibile attivare le notifiche su questo dispositivo. Riprova in Impostazioni › Notifiche.",
-  "native.cameraUsage": "Peek usa la fotocamera per scansionare i codici a barre di tracciamento, così puoi aggiungere i pacchi senza digitare.",
+  "native.cameraUsage": "Peek usa la fotocamera per scansionare i codici a barre di tracciamento, così puoi aggiungere i pacchi senza digitare, e per scattare foto da allegare alla nota di un pacco.",
   "native.appearance.dark": "Scuro",
   "native.appearance.light": "Chiaro",
   "native.appearance.system": "Sistema",

@@ -532,7 +532,7 @@
   "native.apnsTokenError.ipad": "Não foi possível conectar este iPad às notificações. Tente novamente em Configurações › Notificações.",
   "native.apnsTokenError.mac": "Não foi possível conectar este Mac às notificações. Tente novamente em Configurações › Notificações.",
   "native.apnsTokenError.android": "Não foi possível conectar este dispositivo às notificações. Tente novamente em Configurações › Notificações.",
-  "native.cameraUsage": "O Peek usa a câmera para escanear códigos de barras de rastreamento, assim você adiciona encomendas sem digitar.",
+  "native.cameraUsage": "O Peek usa a câmera para escanear códigos de barras de rastreamento, para você adicionar encomendas sem digitar, e para tirar fotos para a anotação de uma encomenda.",
   "native.appearance.dark": "Escuro",
   "native.appearance.light": "Claro",
   "native.appearance.system": "Sistema",

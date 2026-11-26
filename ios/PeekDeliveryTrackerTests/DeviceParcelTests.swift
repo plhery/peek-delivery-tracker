@@ -3762,6 +3762,128 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(sent.all, [#"PATCH {"note":"Door code 4521"}"#, "POST Receipt.pdf", "POST Big.pdf", "DELETE", #"PATCH {"note":null}"#])
         XCTAssertEqual(store.noteFileURL(file.url)?.absoluteString, "https://postcodes.test/api/files/\(fileID.uuidString)?v=full&e=1&s=x")
     }
+
+    // MARK: - The note's sheet
+
+    /// A guest's store with one of this iPhone's own lookups, its files in a folder of the test's.
+    private func guestNoteStore(note: String? = nil) async throws -> (store: ParcelStore, parcel: Parcel) {
+        let id = UUID()
+        let storage = Memory()
+        storage.keys = ["44444444444A": key]
+        var entry = ownLookup("44444444444A", id, label: "Birthday gift", checkedAt: Date())
+        entry.note = note
+        storage.parcels = [entry]
+        let device = DeviceParcels(client: client(Calls()), storage: storage, noteFiles: noteFiles())
+        let configuration = PostcodeTestURLProtocol.configuration
+        let session = SessionStore(configuration: configuration, persistence: PostcodeTestSessionPersistence(),
+                                   transport: PostcodeTestURLProtocol.shared)
+        let store = ParcelStore(configuration: configuration, session: session, localizer: Localizer(), transport: PostcodeTestURLProtocol.shared,
+                                device: device, deviceNotifications: quietNotifications())
+        store.setDeliveryLiveActivitiesEnabled(false)
+        session.showWelcome()
+        await store.load()
+        return (store, try XCTUnwrap(store.parcels.first { $0.id == id }))
+    }
+
+    private func settled(_ done: @escaping () -> Bool) async throws {
+        for _ in 0..<200 where !done() { try await Task.sleep(for: .milliseconds(20)) }
+        XCTAssertTrue(done())
+    }
+
+    private func pick(_ name: String, _ data: Data) -> ParcelNoteModel.Pick {
+        ParcelNoteModel.Pick(name: name, pdf: name.hasSuffix(".pdf")) { data }
+    }
+
+    func testTheSheetSavesTheWordsAndAnEmptyNoteIsDeletedOnlyOnceItsUndoHasGone() async throws {
+        let (store, parcel) = try await guestNoteStore()
+        let model = ParcelNoteModel()
+        XCTAssertTrue(store.takesNote(parcel))
+        let saved1 = try await model.save("  Door code 4521 ", of: parcel, in: store)
+        XCTAssertEqual(saved1, .saved)
+        var noted = try XCTUnwrap(store.parcels.first)
+        XCTAssertEqual(noted.note, "Door code 4521")
+        let saved2 = try await model.save("Door code 4521", of: noted, in: store)
+        XCTAssertEqual(saved2, .unchanged)
+
+        // Emptied with no files, the note is deleted, but only once the toast has gone: Undo brings it back untouched.
+        let saved3 = try await model.save("   ", of: noted, in: store)
+        XCTAssertEqual(saved3, .deleted)
+        XCTAssertEqual(model.toast?.kind, .note)
+        XCTAssertFalse(model.shown(noted))
+        XCTAssertEqual(store.parcels.first?.note, "Door code 4521")
+        model.undo()
+        XCTAssertNil(model.toast)
+        XCTAssertTrue(model.shown(noted))
+
+        // Deleted again, it goes when the page does.
+        model.deleteNote(noted, in: store)
+        model.commitNow()
+        XCTAssertNil(model.toast)
+        try await settled { store.parcels.first?.note == nil }
+        noted = try XCTUnwrap(store.parcels.first)
+        XCTAssertFalse(model.shown(noted))
+        XCTAssertFalse(model.hidesText)
+    }
+
+    func testAChosenFileIsAddedAtOnceAndItsRemovalWaitsForItsUndo() async throws {
+        let (store, parcel) = try await guestNoteStore(note: "Gift")
+        let model = ParcelNoteModel()
+        model.add([pick("Receipt.pdf", Data("%PDF-1.4\nreceipt\n".utf8))], to: parcel, in: store)
+        XCTAssertEqual(model.uploads.map(\.name), ["Receipt.pdf"])
+        XCTAssertEqual(model.room(in: parcel), 4)
+        try await settled { model.uploads.isEmpty && store.parcels.first?.files?.count == 1 }
+        let filed = try XCTUnwrap(store.parcels.first)
+        let file = try XCTUnwrap(filed.files?.first)
+
+        model.removeFile(file, of: filed, in: store)
+        XCTAssertEqual(model.toast?.kind, .file("Receipt"))
+        XCTAssertTrue(model.files(of: filed).isEmpty)
+        XCTAssertEqual(store.parcels.first?.files?.count, 1)
+        model.undo()
+        XCTAssertEqual(model.files(of: filed).map(\.id), [file.id])
+
+        model.removeFile(file, of: filed, in: store)
+        model.commitNow()
+        try await settled { store.parcels.first?.files == nil }
+        XCTAssertTrue(model.hiddenFiles.isEmpty)
+        XCTAssertEqual(store.parcels.first?.note, "Gift")
+    }
+
+    func testANoteTakesFiveFilesAndSaysWhatStoppedTheOthers() async throws {
+        let (store, parcel) = try await guestNoteStore()
+        let model = ParcelNoteModel()
+        // Another kind of file, and one that cannot be read, each leave a line and no file.
+        model.add([pick("notes.txt", Data("hello".utf8)),
+                   ParcelNoteModel.Pick(name: "Photo", pdf: false) { throw CocoaError(.fileReadUnknown) }], to: parcel, in: store)
+        try await settled { model.uploads.isEmpty }
+        XCTAssertEqual(Set(model.lines.map(\.problem)), [.type, .unreadable])
+        XCTAssertNil(store.parcels.first?.files)
+
+        // Six chosen: five go, and the line says a parcel holds five.
+        model.add((1...6).map { pick("Page \($0).pdf", Data("%PDF-1.4\n\($0)\n".utf8)) }, to: parcel, in: store)
+        XCTAssertEqual(model.uploads.count, 5)
+        XCTAssertEqual(model.lines.map(\.problem), [.parcelFull])
+        try await settled { model.uploads.isEmpty && store.parcels.first?.files?.count == 5 }
+        let full = try XCTUnwrap(store.parcels.first)
+        XCTAssertEqual(model.room(in: full), 0)
+        model.dismiss(try XCTUnwrap(model.lines.first).id)
+        XCTAssertTrue(model.lines.isEmpty)
+        model.refuseFull()
+        XCTAssertEqual(model.lines.map(\.problem), [.parcelFull])
+
+        // A note with files and no words is no empty note: saving blank words keeps it.
+        let saved4 = try await model.save("", of: full, in: store)
+        XCTAssertEqual(saved4, .unchanged)
+        XCTAssertNil(model.toast)
+    }
+
+    func testAnUploadThatFailedOnTheWayStaysWithItsRetryAndOfflineIsSaidSo() {
+        XCTAssertEqual(ParcelNoteModel.problem(of: URLError(.notConnectedToInternet)), .offline)
+        XCTAssertEqual(ParcelNoteModel.problem(of: URLError(.timedOut)), .failed)
+        XCTAssertEqual(ParcelNoteModel.problem(of: NoteFileError(problem: .accountFull, status: 409)), .accountFull)
+        XCTAssertTrue(NoteFileProblem.offline.retriable)
+        XCTAssertFalse(NoteFileProblem.accountFull.retriable)
+    }
 }
 
 private final class PostcodeTestSessionPersistence: SessionPersistence {

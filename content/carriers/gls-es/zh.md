@@ -1,6 +1,6 @@
 ---
 title: GLS 西班牙（GLS Spain）查询：单号、邮编与自提点
-description: 查询西班牙 GLS（GLS Spain）包裹：为何必须填写邮编、英文物流状态含义、Parcel Shop 自提点与自提柜、未妥投及客服。
+description: 查询西班牙 GLS（GLS Spain）包裹：为何必须填写邮编、英文物流状态含义、Parcel Shop 自提点与自提柜、派送未成功及客服。
 slug: gls-xibanya-kuaidi-chaxun
 published: 2026-11-25
 updated: 2026-11-25
@@ -12,7 +12,7 @@ GLS 西班牙（GLS Spain）是 GLS 集团在西班牙的分支，该网络于 2
 
 运单号由商家提供：请先查看发货邮件或订单页面，其次检查 GLS 发来的邮件、短信、WhatsApp 消息和 My GLS 应用。若快递员上门未果，留在门上的纸质通知单（nota de paso）也会印有单号。仍找不到？按 GLS 建议联系商家，或参考[如何查找快递单号](guide:find-tracking-number)（英文）。
 
-GLS 未公布西班牙单号的固定位数或格式。西班牙语查件框将该字段称为 “N° de envio / Albarán”。运单号通常为 9 位或 10 位数字；Peek 常见到的形态是以 1 开头的 10 位数字，例如 `1482910375`（虚构示例）。GLS 官网也可凭面单上更长的条码号或商家参考号查件。
+GLS 未公布西班牙单号的固定位数或格式。西班牙语查件框将该字段称为 “N° de envio / Albarán”。运单号为 9 位或 10 位数字；Peek 见过的单号都是以 1 开头的 10 位数字，例如 `1482910375`（虚构示例）。GLS 官网也可凭面单上更长的条码号或商家参考号查件。
 
 GLS 查件页会先让你选择国内件或国际件；无论哪种，不填收件邮编都不会返回任何内容。
 
@@ -20,7 +20,7 @@ GLS 查件页会先让你选择国内件或国际件；无论哪种，不填收�
 
 ## GLS 西班牙物流状态含义
 
-GLS 西班牙查件页面支持切换西班牙语或英语。以下为常见英文文案及大致顺序：
+GLS 西班牙查件页面可以切换西班牙语或英语。以下为其英文文案，按包裹通常经历的顺序排列：
 
 | GLS 英文状态 | 对你的含义 |
 | --- | --- |
@@ -40,15 +40,15 @@ GLS 帮助页面提醒，寄往 Parcel Shop 自提点的包裹，在送达自提
 
 ## GLS 西班牙派送、自提点与自提柜
 
-GLS 一般在周一至周五约 9:00 至 20:00 派送，购买 Express Saturday 服务的可在周六上午派送。
+GLS 在周一至周五约 9:00 至 20:00 派送，购买 Express Saturday 服务的可在周六上午派送。
 
-**家中无人。** 快递员会留下纸质通知单（nota de paso）写明包裹去向。EconomyParcel 快件尝试派送一次后便送往最近的 Parcel Shop；其他服务可能会安排第二次派送，仍未妥投则暂存网点，并在首次派送后满 7 个日历日退回寄件人。
+**家中无人。** 快递员会留下纸质通知单（nota de paso）写明包裹去向。EconomyParcel 快件尝试派送一次后便送往最近的 Parcel Shop；其他服务可能会安排第二次派送，仍未派送成功则暂存网点，并在首次派送后满 7 个日历日退回寄件人。
 
-**Parcel Shop 自提点。** GLS 在西班牙拥有 10,500 多个 GLS Points 网点。官网说明包裹在自提点保管 7 个日历日，若是上门未妥投转存的则保管 9 天。取件请带官方身份证件；他人代领需凭你签署的 GLS 授权表以及你的 DNI 或 NIE 复印件。
+**Parcel Shop 自提点。** GLS 在西班牙拥有 10,500 多个 GLS Points 网点。官网说明包裹在自提点保管 7 个日历日，若是上门派送未成功后转存的则保管 9 天。取件请带官方身份证件；他人代领需凭你签署的 GLS 授权表以及你的 DNI 或 NIE 复印件。
 
 **Parcel Lockers 自提柜。** GLS 会通过短信、邮件或 My GLS 发送取件 PIN 码。包裹自入柜起保管 7 个日历日，GLS 建议在 48 小时内取走。
 
-**修改投递方式。** 在查件页选择 “Pick up at convenience point” → “Pick up at this Parcel Shop” 即可免费转自提点。你本人仅可更改同一邮编区内的地址；跨邮编改址必须由寄件人向 GLS 申请。在 My GLS 一次性授权后，GLS 还会通过 WhatsApp 发送派送日期，并支持在对话内直接改投至 Parcel Shop。
+**修改投递方式。** 在查件页选择 “Pick up at convenience point” → “Pick up at this Parcel Shop” 即可免费转自提点。你本人仅可更改同一邮编区内的地址；跨邮编改址必须由寄件人向 GLS 申请。在 My GLS 一次性授权后，GLS 还会通过 WhatsApp 发送派送日期，并可在对话内直接改投至 Parcel Shop。
 
 ## GLS 包裹未送达、延误或破损
 
@@ -74,11 +74,11 @@ GLS 说明 911 118 768 为真实官方号码，但仅用于服务质量回访电
 
 ## 使用 Peek 追踪 GLS 西班牙包裹
 
-[Peek](/) 无需账号即可直接读取 GLS 西班牙官方轨迹。与官网一致，它同样需要收件邮编：当快递确定为 GLS Spain 后，页面会出现“收件邮编”输入框（若此前填过会自动填入），供 GLS 及必要时向追踪服务查询使用；邮编填错会表现为查无此单。
+[Peek](/) 无需账号即可读取 GLS 西班牙自己的查件信息。与 GLS 一样，它同样需要收件邮编：当快递确定为 GLS Spain 后，页面会出现“收件邮编”输入框（若此前填过会预先填好），供 GLS 及必要时向物流查询服务查询使用；邮编填错会表现为查无此单。
 
-验证通过后，你能看到每条扫描时间与 GLS 英文原文（如 `At delivery agency`），上方配以 Peek 汇总状态（如“运输中”，或 GLS 显示 `Received in` 自提点/自提柜后的“待取件”），同时显示预计送达日、重量以及等待取件的自提点或自提柜。GLS 不返回扫描地点，取件码也仅保留在其官网；Peek 跳转 GLS 的链接会打开空白表单而不会自动填入单号。在你打开包裹页面期间，或在派送当天开启提醒时，只要 GLS 官网有响应，Peek 最高每 10 分钟检查一次，在 GLS 扫描进入派送当天马德里时间早上 6 点起每 2 分钟一次；提醒支持“每次扫描”、“重要环节”或“仅派送当天”。仅由追踪服务提供更新时，每小时检查一次，超过一天无新动态后每 3 小时一次，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次。连续两天没有新动态后（仍停留在“已生成面单”或“已揽收”时为 12 小时后），改为每小时检查一次；停在“已生成面单”满七天无新动态则每 6 小时一次。当包裹在“已生成面单”、“已揽收”或“运输中”连续四天无新扫描时，Peek 会提示“自……起没有物流更新”，附上说明“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 GLS Spain 查询。”以及“向 GLS Spain 寻求帮助”链接。
+之后你能看到每条扫描时间与 GLS 英文原文（如 `At delivery agency`），上方配以 Peek 汇总状态（如“运输中”，或 GLS 显示 `Received in` 自提点/自提柜后的“待取件”），同时显示预计送达日、重量以及等待取件的自提点或自提柜。GLS 不返回扫描地点，取件码也仅保留在其官网；Peek 跳转 GLS 的链接会打开空白表单，不会填入单号。在你打开包裹页面期间，或在派送当天开启提醒时，只要 GLS 自己的查件系统正常响应，Peek 最高每 10 分钟检查一次，在 GLS 扫描进入派送当天马德里时间早上 6 点起每 2 分钟一次；提醒可以选择“每次扫描”、“重要环节”或“仅派送当天”。仅由物流查询服务提供更新时，每小时检查一次，超过一天无新动态后每 3 小时一次，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次。连续两天没有新动态后（仍停留在“已生成面单”或“已揽收”时为 12 小时后），改为每小时检查一次；停在“已生成面单”满七天无新动态则每 6 小时一次。当包裹在“已生成面单”、“已揽收”或“运输中”连续四天无新扫描时，Peek 会提示“自……起没有物流更新”，附上说明“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 GLS Spain 查询。”以及“向 GLS Spain 寻求帮助”链接。
 
-仅凭 10 位单号无法直接确定 GLS 西班牙，且没有邮编时 GLS 不返回任何结果，因此 Peek 会先向 DHL eCommerce Iberia、Packeta 与 BOX NOW 查询（在西班牙及部分国家还会加上 DHL Freight，不含葡萄牙和安道尔），若符合 DHL Express 校验位则同时查 [DHL Express](carrier:dhl-express)、ACS Courier 与 Geniki Taxydromiki；若都查无记录，再查追踪服务，随后查 DPD Ireland、Cargus、Estafeta 以及尚未查过的 DHL Freight。若均无结果且你身处西班牙、葡萄牙或安道尔，Peek 会提示：“GLS Spain 可能有这个包裹的记录。添加收件邮编即可跟踪。”否则点“更换”选择 “GLS Spain” 并补充邮编即可。粘贴含单号的 mygls.gls-spain.es 或 mygls.gls-portugal.pt 链接，或带有 `/ES/`、`/PT/` 且在 `match`、`parcelNumber`、`matchParcelNumber` 中包含单号的 gls-group.com / gls-group.eu 链接，可直接识别为 GLS Spain（但仍需填写邮编）。由其他快递移交给 GLS 西班牙的包裹不会自动转交追踪。
+仅凭 10 位单号无法直接确定 GLS 西班牙，且没有邮编时 GLS 不返回任何结果，因此 Peek 会先向 DHL eCommerce Iberia、Packeta 与 BOX NOW 查询（在西班牙及部分国家还会加上 DHL Freight，不含葡萄牙和安道尔），若符合 DHL Express 校验位则同时查 [DHL Express](carrier:dhl-express)、ACS Courier 与 Geniki Taxydromiki；若都查无记录，再查物流查询服务，随后查 DPD Ireland、Cargus、Estafeta 以及尚未查过的 DHL Freight。若均无结果且你身处西班牙、葡萄牙或安道尔，Peek 会提示：“GLS Spain 可能有这个包裹的记录。添加收件邮编即可跟踪。”否则点“更换”选择 “GLS Spain” 并补充邮编即可。粘贴含单号的 mygls.gls-spain.es 或 mygls.gls-portugal.pt 链接，或带有 `/ES/`、`/PT/` 且在 `match`、`parcelNumber`、`matchParcelNumber` 中包含单号的 gls-group.com / gls-group.eu 链接，可直接识别为 GLS Spain（但仍需填写邮编）。由其他快递移交给 GLS 西班牙的包裹，Peek 不会转到 GLS 西班牙继续跟踪。
 
 ## GLS 西班牙查询常见问题
 
@@ -92,7 +92,7 @@ GLS 说明 911 118 768 为真实官方号码，但仅用于服务质量回访电
 
 ### GLS 会保管包裹多久？
 
-大约一周：根据 GLS 页面说明，在 Parcel Shop 自提点和自提柜保管 7 个日历日，上门未妥投转存的保管 9 天；留在网点仓库的包裹 7 天后退回。
+大约一周：根据 GLS 页面说明，在 Parcel Shop 自提点和自提柜保管 7 个日历日，上门派送未成功后转存的保管 9 天；留在网点仓库的包裹 7 天后退回。
 
 ### GLS 西班牙就是以前的 ASM 吗？
 
@@ -117,5 +117,5 @@ GLS 说明 911 118 768 为真实官方号码，但仅用于服务质量回访电
 - [GLS Spain: Términos y condiciones generales](https://gls-group.com/ES/downloads/T%C3%A9rminos-y-condiciones-generales.pdf) – 破损申报时限
 - [GLS Spain: GLS Spain incorpora WhatsApp](https://gls-group.com/ES/es/medios/sala-de-prensa/gls-spain-incorpora-whatsapp-para-el-seguimiento-de-envios.html) – WhatsApp 通知与改投
 - [GLS Spain: Nuestra historia](https://gls-group.com/ES/es/sobre-nosotros/nuestra-historia/) – 收购 ASM 历程
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取内容与 GLS 英文状态文案
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取和显示的信息、GLS 英文状态文案
 :::

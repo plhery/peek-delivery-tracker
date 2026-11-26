@@ -1,6 +1,6 @@
 ---
-title: Rastreamento Delhivery: códigos AWB, status e suporte
-description: Rastreie encomendas Delhivery na Índia e no exterior: formato do código AWB, significado de RTO e outros status, entregas frustradas, reclamações e suporte.
+title: Rastreamento Delhivery: códigos AWB, status e atendimento
+description: Rastreie encomendas Delhivery na Índia e no exterior: formato do código AWB, significado de RTO e outros status, entregas não realizadas, reclamações e atendimento.
 slug: rastreamento-delhivery
 published: 2026-11-25
 updated: 2026-11-25
@@ -21,7 +21,7 @@ O formato por si só não identifica a Delhivery, então confirme o nome da tran
 
 ## Status de rastreamento da Delhivery explicados
 
-O rastreamento da Delhivery tem uma barra de etapas e a lista de eventos ocorridos com a cidade. Estes são os textos conhecidos pelo Peek, aproximadamente na ordem habitual:
+O rastreamento da Delhivery tem uma barra de etapas e a lista de eventos ocorridos com a cidade. Estes são os textos conhecidos pelo Peek, aproximadamente na ordem em que a encomenda passa por eles:
 
 | A Delhivery mostra | O que significa para você |
 | --- | --- |
@@ -48,7 +48,7 @@ O rastreamento da Delhivery tem uma barra de etapas e a lista de eventos ocorrid
 
 **Ligações e mensagens.** Os termos da Delhivery dizem que ela ou parceiros podem ligar, enviar SMS ou mandar mensagem e ligar pelo WhatsApp para combinar a entrega, checar disponibilidade e resolver problemas, e que essas chamadas podem ser gravadas. Lojas também podem autorizar a Delhivery a confirmar pedidos por ligação automatizada com IA ou WhatsApp.
 
-**Entrega frustrada.** Em envios contratados pelo Delhivery Direct (serviço pessoal de encomendas), os termos cancelam a entrega após 3 tentativas falhas por ausência do destinatário; o remetente pode solicitar devolução pagando o frete. Para pedidos de lojas, vale o acordo comercial da loja com a Delhivery: pergunte à loja. Para aumentar entregas bem-sucedidas, a Delhivery oferece às lojas gestão de NDR via WhatsApp e "Smart NDR" (ligações de IA, confirmações no WhatsApp e novas tentativas inteligentes). Portanto, ligações ou mensagens no WhatsApp sobre nova tentativa podem ser legítimas, mas a Delhivery nunca pede OTP nem senhas para confirmar endereço. Veja [tentativa de entrega sem sucesso](guide:missed-delivery).
+**Entrega não realizada.** Em envios contratados pelo Delhivery Direct (serviço pessoal de encomendas), os termos cancelam a entrega após 3 tentativas não realizadas por ausência do destinatário; o remetente pode solicitar devolução pagando o frete. Para pedidos de lojas, vale o acordo comercial da loja com a Delhivery: pergunte à loja. Para aumentar entregas bem-sucedidas, a Delhivery oferece às lojas gestão de NDR via WhatsApp e "Smart NDR" (ligações de IA, confirmações no WhatsApp e novas tentativas inteligentes). Portanto, ligações ou mensagens no WhatsApp sobre nova tentativa podem ser legítimas, mas a Delhivery nunca pede OTP nem senhas para confirmar endereço. Veja [entrega não realizada](guide:missed-delivery).
 
 **Onde entrega.** Nos termos do serviço Direct, a Delhivery entrega no endereço informado — não necessariamente em mãos ao destinatário — e nunca em caixas postais; assinatura ou documento oficial pode ser exigido. É possível pedir outro local ou retirada em ponto aprovado se a Delhivery concordar, podendo recusar alteração de código postal. Fins de semana e feriados não contam no prazo do serviço Direct.
 
@@ -66,9 +66,9 @@ Para reembolso ou reenvio, fale com a loja, pois ela contratou a Delhivery.
 
 **Sem atualização.** Se o Peek ainda mostrar "Etiqueta criada", a loja agendou a Delhivery mas ainda não entregou o pacote: pergunte à loja. Se o pacote já está em trânsito mas travou, entre no site ou aplicativo da Delhivery com seu celular para ver todos os envios destinados a você e abrir uma solicitação. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
-**Extravio ou avaria.** `LOST` indica que a Delhivery marcou como extraviado: avise a loja. Em envios Delhivery Direct, reclamações de extravio ou avaria devem ser abertas em até 3 dias via chamado no aplicativo; para avaria, a Delhivery exige 3 fotos do pacote e da embalagem com descrição e sugere filmar a abertura. Pelos termos, o prazo de análise é de 30 a 45 dias úteis e, sem o seguro pago Delhivery Protect, o teto é de ₹2.000, com limites menores por categoria (como ₹500 para livros e documentos ou ₹1.000 para eletrônicos). Não há indenização por atraso. Veja [encomendas extraviadas](guide:lost-parcel) e [encomendas avariadas](guide:damaged-parcel).
+**Extravio ou dano.** `LOST` indica que a Delhivery marcou como extraviado: avise a loja. Em envios Delhivery Direct, reclamações de extravio ou dano devem ser abertas em até 3 dias via chamado no aplicativo; para dano, a Delhivery exige 3 fotos do pacote e da embalagem com descrição e sugere filmar a abertura. Pelos termos, o prazo de análise é de 30 a 45 dias úteis e, sem o seguro pago Delhivery Protect, o teto é de ₹2.000, com limites menores por categoria (como ₹500 para livros e documentos ou ₹1.000 para eletrônicos). Não há indenização por atraso. Veja [encomendas extraviadas](guide:lost-parcel) e [encomendas danificadas](guide:damaged-parcel).
 
-**Entregue, mas não chegou.** Verifique com moradores da casa ou a portaria do prédio. Pelos termos do serviço Direct, entrega errada deve ser reportada em até 3 dias da entrega; se você autorizou entrega em caixa de correio ou armário, a Delhivery fornece comprovante mediante solicitação, mas não responde por perda ou avaria. Veja [encomenda entregue mas não recebida](guide:delivered-not-received).
+**Entregue, mas não chegou.** Verifique com moradores da casa ou a portaria do prédio. Pelos termos do serviço Direct, entrega errada deve ser reportada em até 3 dias da entrega; se você autorizou entrega em caixa de correio ou armário, a Delhivery fornece comprovante mediante solicitação, mas não responde por perda ou dano. Veja [encomenda entregue mas não recebida](guide:delivered-not-received).
 
 **Devolvida.** `RTO` significa que o pacote voltou ao vendedor: peça reembolso ou reenvio à loja. Veja [devolvida ao remetente](guide:returned-to-sender).
 
@@ -76,22 +76,22 @@ Para reembolso ou reenvio, fale com a loja, pois ela contratou a Delhivery.
 
 O Peek não pode contatar a Delhivery nem a loja por você. O que a Delhivery informa:
 
-- **Suporte:** a Delhivery afirma que seu atendimento só funciona pelo site ou aplicativo. Entre na [página de suporte](https://www.delhivery.com/support) com seu celular e código único (OTP) para abrir um chamado, ou use o aplicativo Delhivery.
+- **Atendimento:** a Delhivery afirma que seu atendimento só funciona pelo site ou aplicativo. Entre na [página de ajuda](https://www.delhivery.com/support) com seu celular e código único (OTP) para abrir um chamado, ou use o aplicativo Delhivery.
 - **Reclamações:** os assuntos de envio incluem "Report Issues", "Grievance Officer" e "Report on-field staff issues", além de "Destination and Contact details" e "Returns".
 - **Telefone:** a Delhivery alerta que outros canais ou números de telefone encontrados na internet podem ser fraudulentos.
 - **Redes sociais:** a Delhivery usa apenas suas contas oficiais no Facebook, X e Instagram para atendimento; desconfie de qualquer outro perfil.
 
-> A Delhivery alerta para SMS falsos alegando tentativa de entrega frustrada com links para sites fraudulentos. Ela não pede OTP nem credenciais para confirmar endereço, nem PIN ou OTP para pagamento; não pague por links fora das contas oficiais. Seus e-mails vêm apenas de delhivery.com. Perdeu dinheiro? Ligue para a linha nacional 1930 e registre queixa em cybercrime.gov.in; denuncie chamadas e SMS de golpe em sancharsaathi.gov.in em até 3 dias. Veja [golpes de SMS de entrega](guide:delivery-scam-texts).
+> A Delhivery alerta para SMS falsos alegando entrega não realizada com links para sites fraudulentos. Ela não pede OTP nem credenciais para confirmar endereço, nem PIN ou OTP para pagamento; não pague por links fora das contas oficiais. Seus e-mails vêm apenas de delhivery.com. Perdeu dinheiro? Ligue para a linha nacional 1930 e registre queixa em cybercrime.gov.in; denuncie chamadas e SMS de golpe em sancharsaathi.gov.in em até 3 dias. Veja [golpes de SMS de entrega](guide:delivery-scam-texts).
 
 ## Rastrear uma encomenda Delhivery com o Peek
 
-Cole o AWB no [Peek](/). Como várias transportadoras usam 13 e 14 dígitos, o Peek não mostra "Transportadora detectada": exibe "Consultando serviços de rastreamento…" enquanto consulta as transportadoras com esse formato, começando pela Delhivery quando você está na Índia (região do celular ou país de acesso na web). Quando a Delhivery reconhece o código, aparece "Delhivery está com esta encomenda." Se nenhuma empresa reconhecer ainda, adicione mesmo assim ou toque em "Trocar" e escolha Delhivery: o Peek acompanha mais de 4.500 transportadoras. O Peek não consulta automaticamente a Delhivery para códigos iniciados por 0 ou terminados em 7, 8 ou 9: selecione Delhivery manualmente. Para um número que não tenha 13 ou 14 dígitos, escolher Delhivery manualmente retorna na primeira verificação: "Esta transportadora não emite códigos de rastreamento como este. Confira o código ou escolha outra transportadora."
+Cole o AWB no [Peek](/). Como várias transportadoras usam 13 e 14 dígitos, o Peek não mostra "Transportadora detectada": exibe "Consultando serviços de rastreamento…" enquanto consulta as transportadoras com esse formato, começando pela Delhivery quando você está na Índia (região do celular ou país de acesso na web). De qualquer outro lugar, o Peek consulta a Delhivery por último, depois que as outras transportadoras e os serviços de rastreamento não encontraram o código. Quando a Delhivery reconhece o código, aparece "Delhivery está com esta encomenda." Se nenhuma empresa reconhecer ainda, adicione mesmo assim ou toque em "Trocar" e escolha Delhivery: o Peek acompanha mais de 4.500 transportadoras. O Peek não consulta a Delhivery para códigos iniciados por 0 ou terminados em 7, 8 ou 9: escolha a Delhivery você mesmo. Para um número que não tenha 13 ou 14 dígitos, escolher Delhivery manualmente retorna na primeira verificação: "Esta transportadora não emite códigos de rastreamento como este. Confira o código ou escolha outra transportadora."
 
 Associada à Delhivery, a encomenda mostra "Aguardando Delhivery" até o primeiro registro. O Peek lê o rastreamento público da Delhivery sem precisar de conta: cada movimentação no texto da Delhivery com sua cidade, sem dados do destinatário nem previsão de entrega. Os horários são lidos no horário da Índia e exibidos no fuso horário do seu aparelho; em peektracker.com e nos aplicativos iPhone e Android, o histórico termina com "Horários no seu fuso horário:" e o nome dele. Etapas futuras da barra de progresso são ignoradas, e datas de carga sem ano são inferidas pelo dia da semana.
 
 O Peek agrupa as linhas em suas próprias etapas: `Picked Up` aparece como "Recebida pela transportadora", `In Transit` como "Em trânsito", `Dispatched` como "Saiu para entrega", `RTO` como "Devolvida ao remetente" e `Undelivered`, `LOST` ou cancelamento como "Precisa de atenção". Um pacote entregue de volta ao vendedor mostra "Devolvida ao remetente", não "Entregue".
 
-Enquanto o pacote está aberto, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos — ou a cada 2 minutos a partir das 6h locais no dia em que a Delhivery registra saída para entrega — enquanto o rastreador oficial responde (por serviços de rastreamento, a cada hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados); nos demais horários, e após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica a cada hora. Alertas: "Cada movimentação", "Etapas importantes" ou "Só a entrega".
+Enquanto o pacote está aberto, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos — ou a cada 2 minutos a partir das 6h locais no dia em que a Delhivery registra saída para entrega — enquanto o rastreador da própria Delhivery responde (por serviços de rastreamento, a cada hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados); nos demais horários, e após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica a cada hora. Alertas: "Cada movimentação", "Etapas importantes" ou "Só a entrega".
 
 ## Perguntas frequentes sobre o rastreamento Delhivery
 
@@ -109,20 +109,20 @@ Digite o AWB em delhivery.com/tracking, ou pesquise lá por Order ID, LRN ou nú
 
 ### Qual é o telefone de atendimento da Delhivery?
 
-A Delhivery informa que o suporte está disponível somente pelo site ou aplicativo: faça login com seu celular e abra uma solicitação. Ela alerta que outros números encontrados online podem ser golpes.
+A Delhivery informa que o atendimento está disponível somente pelo site ou aplicativo: faça login com seu celular e abra uma solicitação. Ela alerta que outros números encontrados online podem ser golpes.
 
 :::sources
 - [Delhivery: Track your order](https://www.delhivery.com/tracking) – rastreamento por celular, AWB, ID do pedido ou LRN, alertas de fraude e atendimento apenas por site ou app
 - [Delhivery: Support](https://www.delhivery.com/support) – rastreamento por AWB ou LRN, login com celular, abertura de solicitação e assuntos incluindo Grievance Officer
 - [Delhivery: About us](https://www.delhivery.com/about-us) – maior provedora logística integrada, códigos postais, centros de entrega e operação 24/7
 - [Delhivery: Home](https://www.delhivery.com/) – mais de 220 países e parceiros estratégicos FedEx e Aramex
-- [Delhivery: Express Parcel](https://www.delhivery.com/services/express-parcel) – cobertura de 99,5% dos CEPs, marketplaces, confirmações por WhatsApp e IA, gestão NDR e novas tentativas inteligentes
+- [Delhivery: Express Parcel](https://www.delhivery.com/services/express-parcel) – cobertura de 99,5% dos códigos postais, marketplaces, confirmações por WhatsApp e IA, gestão NDR e novas tentativas inteligentes
 - [Delhivery: International](https://www.delhivery.com/services/international) – prazos e rotas DLV Saver e DLV Premium e tributos
 - [Delhivery: Personal Courier](https://www.delhivery.com/solutions/personal-courier) – reservas Delhivery Direct
 - [Delhivery: Terms and Conditions](https://www.delhivery.com/terms-and-conditions) – ligações, SMS e WhatsApp sobre entregas
-- [Delhivery: TnC (Direct National Courier)](https://www.delhivery.com/tnc-direct) – código AWB, tentativas falhas, endereço de entrega, reclamações e indenização
+- [Delhivery: TnC (Direct National Courier)](https://www.delhivery.com/tnc-direct) – código AWB, tentativas de entrega não realizadas, endereço de entrega, reclamações e indenização
 - [Delhivery: Fraud Disclaimer](https://www.delhivery.com/fraud-disclaimer) – canais oficiais, SMS falsos, OTP e pagamentos, 1930 e cybercrime.gov.in
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – direito aduaneiro de €3 por tipo de produto até €150 e taxa de manuseio da União de €2
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 por tipo de produto qualquer que seja o valor
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – textos da Delhivery, o que o Peek lê e formatos de código
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – textos da Delhivery, o que o Peek lê e mostra, formatos de código
 :::

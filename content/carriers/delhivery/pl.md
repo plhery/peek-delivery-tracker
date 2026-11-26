@@ -70,7 +70,7 @@ W sprawie zwrotu pieniędzy lub ponownej wysyłki zamówienia ze sklepu internet
 
 ## Śledzenie przesyłek Delhivery w Peek
 
-Wklej 13- lub 14-cyfrowy numer AWB w [Peek](/): ponieważ układ ten dzieli wielu przewoźników, Peek wyświetla „Sprawdzanie usług śledzenia…” i automatycznie odpytuje Delhivery, gdy łączysz się z Indii, a numer zaczyna się od `1`–`9` i kończy na `0`–`6` („Delhivery ma tę przesyłkę.”). Spoza Indii — albo przy numerze zaczynającym się od `0` bądź kończącym na `7`, `8` lub `9` — stuknij „Zmień” i wskaż Delhivery. Przy innej liczbie cyfr ręczny wybór pokaże, że przewoźnik „nie wydaje takich numerów”.
+Wklej 13- lub 14-cyfrowy numer AWB w [Peek](/): ponieważ układ ten dzieli wielu przewoźników, Peek wyświetla „Sprawdzanie usług śledzenia…” i automatycznie odpytuje Delhivery, gdy łączysz się z Indii, a numer zaczyna się od `1`–`9` i kończy na `0`–`6` („Delhivery ma tę przesyłkę.”). Z każdego innego kraju Peek pyta Delhivery na końcu, gdy pozostali przewoźnicy i serwisy śledzenia nie znaleźli numeru. Przy numerze zaczynającym się od `0` bądź kończącym na `7`, `8` lub `9` stuknij „Zmień” i wskaż Delhivery. Przy innej liczbie cyfr ręczny wybór pokaże, że przewoźnik „nie wydaje takich numerów”.
 
 Przed pierwszym skanem widnieje „Oczekiwanie na przewoźnika Delhivery”. Peek odczytuje publiczny kanał śledzenia bez logowania: pokazuje wykonane skany z miastem (pomijając przyszłe kroki na pasku postępu i dane odbiorcy), ustala rok etapów frachtowych na podstawie dnia tygodnia, odczytuje czas indyjski (`Asia/Kolkata`, `UTC+5:30`) i przelicza go na strefę twojego urządzenia („Godziny w twojej strefie czasowej: …”), bez szacowanej daty dostawy. Paczka wydana z powrotem sprzedawcy ma status „Zwrócona nadawcy”, a nie „Dostarczona”.
 
@@ -80,7 +80,7 @@ Przy otwartej paczce lub w dniu dostawy z włączonymi powiadomieniami Peek spra
 
 ### Jak śledzić paczkę Delhivery?
 
-Wklej 13- lub 14-cyfrowy numer AWB u góry strony w Peek (spoza Indii wybierz Delhivery przyciskiem „Zmień”) albo wyszukaj przesyłkę na `delhivery.com/tracking` po AWB, `Order Id`, `LRN` lub numerze telefonu z kodem `OTP`.
+Wklej 13- lub 14-cyfrowy numer AWB u góry strony w Peek albo wyszukaj przesyłkę na `delhivery.com/tracking` po AWB, `Order Id`, `LRN` lub numerze telefonu z kodem `OTP`.
 
 ### Czym jest numer AWB w Delhivery?
 

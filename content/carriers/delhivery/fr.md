@@ -70,7 +70,7 @@ Pour une commande en ligne, ton interlocuteur principal reste le vendeur qui a m
 
 ## Suivre un colis Delhivery avec Peek
 
-Colle l'AWB à 13 ou 14 chiffres dans [Peek](/) : comme ce format est partagé, Peek affiche « Vérification des services de suivi… » et interroge automatiquement Delhivery lorsque tu ajoutes le colis depuis l'Inde pour les numéros commençant par `1`–`9` et finissant par `0`–`6` (« Delhivery a ce colis. » dès qu'une trace existe). Hors d'Inde, ou pour un AWB commençant par `0` ou se terminant par `7`, `8` ou `9`, appuie sur « Changer » et choisis Delhivery. Pour toute autre longueur, une sélection manuelle indique qu'il « n’émet pas de numéros comme celui-ci ».
+Colle l'AWB à 13 ou 14 chiffres dans [Peek](/) : comme ce format est partagé, Peek affiche « Vérification des services de suivi… » et interroge automatiquement Delhivery lorsque tu ajoutes le colis depuis l'Inde pour les numéros commençant par `1`–`9` et finissant par `0`–`6` (« Delhivery a ce colis. » dès qu'une trace existe). Depuis ailleurs, Peek interroge Delhivery en dernier, une fois que les autres transporteurs et les services de suivi n'ont pas trouvé le numéro. Pour un AWB commençant par `0` ou se terminant par `7`, `8` ou `9`, appuie sur « Changer » et choisis Delhivery. Pour toute autre longueur, une sélection manuelle indique qu'il « n’émet pas de numéros comme celui-ci ».
 
 Enregistré sous Delhivery, un envoi sans scan affiche « En attente de Delhivery ». Peek lit le flux public de Delhivery sans compte : il affiche les scans réalisés avec leur ville (en ignorant les étapes futures de la barre de progression et les coordonnées du destinataire), reconstitue l'année des jalons fret à partir du jour de la semaine, lit les heures sur le fuseau indien (`Asia/Kolkata`, `UTC+5:30`) et les convertit dans celui de ton appareil (« Heures dans ton fuseau horaire : … »), sans date de livraison estimée. Un colis livré en retour chez le marchand s'affiche « Retourné à l’expéditeur » et non « Livré ».
 
@@ -80,7 +80,7 @@ Tant que tu gardes le colis ouvert ou le jour de livraison avec notifications ac
 
 ### Comment suivre un colis Delhivery ?
 
-Colle le numéro AWB à 13 ou 14 chiffres dans Peek en haut de cette page (et sélectionne Delhivery via « Changer » si tu es hors d'Inde), ou cherche par AWB, `Order Id`, `LRN` ou numéro de mobile sur `delhivery.com/tracking`.
+Colle le numéro AWB à 13 ou 14 chiffres dans Peek en haut de cette page, ou cherche par AWB, `Order Id`, `LRN` ou numéro de mobile sur `delhivery.com/tracking`.
 
 ### Qu'est-ce qu'un numéro AWB chez Delhivery ?
 

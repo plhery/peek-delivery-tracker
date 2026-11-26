@@ -15513,7 +15513,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "delhivery",
       "catalog": "delhivery",
       "slug": "rastreamento-delhivery",
-      "title": "Rastreamento Delhivery: códigos AWB, status e suporte",
+      "title": "Rastreamento Delhivery: códigos AWB, status e atendimento",
       "name": "Delhivery",
       "color": "#ed4136"
     },

@@ -10,7 +10,7 @@ updated: 2026-11-25
 
 ## Posti 快递单号：JJFI 邮件编号
 
-Posti 将运单号称为 “item ID”（有时写作 “shipment ID”），自有包裹通常以 `JJFI` 开头。Posti 官网顶部提供英文切换（“EN”）。
+Posti 将运单号称为 “item ID”（有时写作 “shipment ID”），自有包裹以 `JJFI` 开头。Posti 官网顶部提供英文切换（“EN”）。
 
 | 单号（虚构示例） | 说明 |
 | --- | --- |
@@ -19,13 +19,13 @@ Posti 将运单号称为 “item ID”（有时写作 “shipment ID”），自
 | `RR482917367CN` | 从境外寄来的包裹沿用原寄国单号（此例以 `CN` 结尾即中国邮政），Posti 用同一单号继续追踪。 |
 | `00064382917465283912` | 20 位 SSCC 条码，前三位之后的 `64` 是芬兰国家前缀。 |
 
-如果寄件人向 Posti 提供了你的手机号，包裹会自动出现在 OmaPosti 应用中；否则需要手动添加。Posti 查件系统只认精确单号，不能按姓名或地址查询。
+如果寄件人向 Posti 提供了你的手机号，包裹会自己出现在 OmaPosti 应用中；否则需要手动添加。Posti 查件系统只认精确单号，不能按姓名或地址查询。
 
 取件码和自提柜开柜码（6 位或 9 位字符）都不是快递单号。以 `JJEE` 开头的单号属于爱沙尼亚邮政 Omniva，以 `SE` 结尾则属于瑞典 PostNord。不确定属于哪家快递？参见[快递单号格式说明](guide:tracking-number-formats)（英文）。
 
 ## Posti 英文物流状态含义
 
-Posti 查件页会根据所选语言以英语、芬兰语或瑞典语显示状态，并常附一行步骤说明。以下为常见英文文案及大致顺序：
+Posti 查件页会根据所选语言以英语、芬兰语或瑞典语显示状态，并常附一行步骤说明。以下为包裹通常会遇到的英文文案，大致按出现顺序排列：
 
 | Posti 英文状态 | 对你的含义 |
 | --- | --- |
@@ -42,9 +42,9 @@ Posti 查件页会根据所选语言以英语、芬兰语或瑞典语显示状�
 | `The item has been delivered` | 已签收送达（包含自提取走）。 |
 | `Item delivered to the recipient.` | 已送达收件人。 |
 
-`Item accepted from transport` 常让人误解：Posti 说明它只是干线交接标记，派送仍在进行，并未交到收件人手中。境外节点在所有语言版本下地点均显示芬兰语 `ULKOMAILLA`（意为“在境外”）。
+`Item accepted from transport` 常让人误解：Posti 说明它只是运输标记，派送仍在进行，并未交到收件人手中。境外节点在所有语言版本下地点均显示芬兰语 `ULKOMAILLA`（意为“在境外”）。
 
-## Posti 自提柜、取件与未妥投处理
+## Posti 自提柜、取件与派送未成功
 
 **到件通知。** 包裹送达 Parcel Locker 自提柜或服务点后，Posti 会通过 OmaPosti、短信和邮件发送地点与开柜码。请在 5 天内领取。部分包裹保管期更长，例如境外入境件通常为 14 天、纸质信函通知的包裹为 9 天，请以通知上的最晚取件日期为准。
 
@@ -86,11 +86,11 @@ Posti 不对外提供客服邮箱。
 
 [Peek](/) 会立刻把 `JJFI` 单号识别为 Posti。包含 `/tracking/`、`/seuranta/` 或 `/uppfoljning/` 后接单号的 posti.fi 查件链接（即使前面带有 `/en/` 等语言路径）也会对任意单号直接指定 Posti，全程无需邮编。
 
-对于以 `FI` 结尾的邮政单号，Peek 会先询问 Posti 及 Chronopost，只要 Posti 有记录即归属之；暂未查到时显示“…… 暂未找到。添加后 Peek 会继续查询。”。登录 Peek 账号添加后，前 6 小时每小时查询一次，随后逐步拉长间隔；未登录账号则在 6 小时后停止查询，除非你开启“找到后通知我”，之后会每天查询一次直至添加满 30 天。对于上述 20 位 SSCC 条码，Peek 会同时查询 Posti、Matkahuolto、Swiss Post Cargo、PostNord 和 NZ Post。校验位有误时可点“更换”手动选择 Posti。境外单号可在“更换”或粘贴 posti.fi 链接后交由 Posti 追踪；否则 Peek 会先在原寄国邮政追踪，待原寄国邮政标明发往芬兰（或未标明目的地而你在芬兰追踪）时，Peek 用同一单号同步询问 Posti，只要 Posti 出现不早于原寄国最新节点的扫描便自动切换过去，并保留先前轨迹。
+对于以 `FI` 结尾的邮政单号，Peek 会先询问 Posti 及 Chronopost，Posti 有记录即认定为 Posti；暂未查到时显示“…… 暂未找到。添加后 Peek 会继续查询。”登录 Peek 账号添加后，前 6 小时每小时查询一次，随后逐步拉长间隔；未登录账号则在 6 小时后停止查询，除非你开启“找到后通知我”，之后会每天查询一次直至添加满 30 天。对于上述 20 位 SSCC 条码，Peek 会同时查询 Posti、Matkahuolto、Swiss Post Cargo、PostNord 和 NZ Post。校验位有误时可点“更换”手动选择 Posti。境外单号可在“更换”或粘贴 posti.fi 链接后交由 Posti 追踪；否则 Peek 会先在原寄国邮政追踪，待原寄国邮政标明发往芬兰（或未标明目的地而你在芬兰追踪）时，Peek 用同一单号同步询问 Posti，只要 Posti 出现不早于原寄国最新节点的扫描便转到 Posti 跟踪，并保留先前轨迹。
 
 在爱沙尼亚、拉脱维亚和立陶宛，Posti 以 SmartPosti 品牌运营：在 Peek 快递列表中搜索该名称也能找到 Posti（标注“又名 SmartPosti”），粘贴 smartposti.ee 或 itella.ee（及其 .lv、.lt 域名）查件链接同样直接识别为 Posti。Peek 仅在 Posti 精确返回一票与你输入单号完全匹配的快件时才采纳结果，因此某些 SmartPosti 单号可能查不到，此时请直接前往 smartposti.ee 查询。
 
-Peek 以英文读取 Posti 接口，展示每条状态及官方解释行、扫描所在城镇、重量、尺寸，以及自提点名称与地址。在你打开包裹页面期间，或在派送当天开启提醒时，只要 Posti 官网有响应，Peek 最高每 10 分钟检查一次（在其扫描进入派送当天当地时间早上 6 点起每 2 分钟一次）；其余时间每小时检查一次。Peek 会将每个节点标注在地图上，并在状态变化时发送通知。若有其他承运商接手派送，Peek 会按实际派送方的节奏查询。时间按你设备的时区显示；在 peektracker.com 及 iPhone、Android 应用中，轨迹底部会写明“时间按你所在的时区显示：”及对应时区名称。连续两天没有新动态后（仍停留在“已生成面单”或“已揽收”时为 12 小时后），Peek 改为每小时检查一次。Peek 会略去取件码与你的收件地址，且不显示预计送达时间或寄件人。对应多个包裹的总单号不支持追踪，过旧的包裹也会显示查不到。
+Peek 以英文读取 Posti 的查件信息，展示每条状态及 Posti 的解释行、扫描所在城镇、重量、尺寸，以及自提点名称与地址。在你打开包裹页面期间，或在派送当天开启提醒时，Peek 最高每 10 分钟检查一次（在 Posti 扫描包裹进入派送的当天，只要 Posti 自己的查件系统正常响应，自当地时间早上 6 点起每 2 分钟一次）；其余时间每小时检查一次。Peek 会将每个节点标注在地图上，并可以在状态变化时通知你。若有其他承运商接手派送，Peek 会按实际派送方的节奏查询。时间按你设备的时区显示；在 peektracker.com 及 iPhone、Android 应用中，轨迹底部会写明“时间按你所在的时区显示：”及对应时区名称。连续两天没有新动态后（仍停留在“已生成面单”或“已揽收”时为 12 小时后），Peek 改为每小时检查一次。Peek 会略去取件码与你的收件地址，且不显示预计送达时间或寄件人。Peek 不追踪对应多个包裹的总单号，过旧的包裹也会显示查不到。
 
 ## Posti 快递查询常见问题
 
@@ -106,15 +106,15 @@ Posti 要求在 5 天内取走，具体截止日期以到件通知为准。在 O
 
 小包裹（Small parcel）在 Posti 收件后 2 至 5 个工作日送达；其他包裹请查看 Posti 查件页给出的预计送达时间。
 
-### Posti 客服支持在线聊天吗？
+### Posti 客服有在线聊天吗？
 
-支持，可在 OmaPosti 应用内使用在线聊天。
+有，可在 OmaPosti 应用内使用在线聊天。
 
 :::sources
 - [Posti: Picking up an item](https://www.posti.fi/en/receiving/picking-up-an-item) – JJFI 单号、到件通知、保管期（境外 14 天、信函通知 9 天）、延期、自提柜、取件码、授权书、退件、电话与在线聊天
 - [Posti: Lähetyksen noutaminen](https://www.posti.fi/vastaanottaminen/lahetyksen-noutaminen) – 芬兰语说明：延期每天 1.90 欧元
 - [Posti: Track item](https://www.posti.fi/en/tracking) – 状态文案、步骤解释行、ULKOMAILLA 与多语言切换
-- [Posti: Home delivery](https://www.posti.fi/en/receiving/home-delivery) – 未妥投、小包裹、派送时效与已签收未收到
+- [Posti: Home delivery](https://www.posti.fi/en/receiving/home-delivery) – 派送未成功、小包裹、派送时效与已签收未收到
 - [Posti: Customs clearance](https://www.posti.fi/en/receiving/customs-clearance) – 清关手续费、芬兰海关、自 2026 年 11 月 1 日起 2 欧元费用、IOSS 寄件人代清关及缺少付款信息退回
 - [Posti: Ordering from abroad and customs clearance](https://www.posti.fi/en/receiving/customs-clearance/ordering-from-abroard-and-custom-clearance) – 仓库保管 20 天与 OmaPosti
 - [Posti: What does Posti compensate for and to whom](https://www.posti.fi/en/customer-service/damage-situations/what-does-posti-compensate-for-and-to-whom) – 查单请求、赔付对象与破损处理
@@ -128,5 +128,5 @@ Posti 要求在 5 天内取走，具体截止日期以到件通知为准。在 O
 - [SmartPosti: Meist (About us)](https://www.smartposti.ee/ariklient/meist) – 隶属 Posti 集团及波罗的海三国 SmartPosti 品牌
 - [SmartPosti: Saadetise jälgimine](https://www.smartposti.ee/saadetise-jalgimine) – SmartPosti 查件页
 - [KKV: Postal and parcel services](https://www.kkv.fi/en/consumer-affairs/telephone-and-internet-subscriptions-postal-and-parcel-services/postal-and-parcel-services/) – 芬兰消费者保护局丢失认定天数
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取字段与识别规则
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取和显示的信息、识别规则
 :::

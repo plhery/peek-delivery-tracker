@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Canada Post: códigos, status e avisos
-description: Rastreie encomendas dos Correios do Canadá (Canada Post): onde achar o código, status em inglês, cartões de aviso, prazos de retirada, alfândega e suporte.
+description: Rastreie encomendas dos Correios do Canadá (Canada Post): onde achar o código, status em inglês, cartões de aviso, prazos de retirada, alfândega e atendimento.
 slug: rastreamento-canada-post
 published: 2026-11-25
 updated: 2026-11-25
@@ -15,11 +15,11 @@ O Peek associa estes dois formatos à Canada Post, aqui com dígitos inventados:
 | Código (inventado) | O que é |
 | --- | --- |
 | `4018 2930 5746 1826` | 16 dígitos; o último é dígito verificador. [DHL eCommerce](carrier:dhl-ecommerce), [Correos Express](carrier:correos-express), [TNT](carrier:tnt) e Evri também usam 16 dígitos. |
-| `RR482910576CA` | Código postal internacional: 2 letras, 9 dígitos e `CA`. O último dígito antes de `CA` é verificador. |
+| `RR482910576CA` | Número postal internacional: 2 letras, 9 dígitos e `CA`. O último dígito antes de `CA` é verificador. |
 
 A Canada Post também localiza encomendas pelo número de 15 dígitos de um cartão de aviso de entrega ou por uma referência composta apenas de dígitos (pelo menos 11). Nesses casos, selecione Canada Post manualmente, conforme explicado abaixo.
 
-A Purolator, outra transportadora canadense, usa códigos próprios: 12 dígitos, ou 3 letras e 9 dígitos. O Peek não consulta a Canada Post automaticamente para esses formatos. Se a Canada Post não reconhecer seu código, confirme no e-mail da loja qual transportadora foi usada. Veja mais em [como encontrar um código de rastreamento](guide:find-tracking-number) e [formatos de código de rastreamento](guide:tracking-number-formats).
+A Purolator, outra transportadora canadense, usa códigos próprios: 12 dígitos, ou 3 letras e 9 dígitos. O Peek não consulta a Canada Post por conta própria para esses formatos. Se a Canada Post não reconhecer seu código, confirme no e-mail da loja qual transportadora foi usada. Veja mais em [como encontrar um código de rastreamento](guide:find-tracking-number) e [formatos de código de rastreamento](guide:tracking-number-formats).
 
 ## O que significam os status da Canada Post
 
@@ -59,9 +59,9 @@ No histórico, registros de entrega exibem "Entregue"; os demais preservam o ing
 
 ## Ausências, retirada e alfândega no Canadá
 
-**Entrega frustrada.** Encomendas que exigem assinatura ou não cabem na caixa de correio ou compartimento são levadas até a porta. Se ninguém atender, a Canada Post deixa um Delivery Notice Card ou, sem assinatura exigida, pode deixar em local seguro. Após `Delivery Attempt Made / Rescheduled for delivery next business day`, costuma tentar novamente no próximo dia útil. Em prédios com interfone, tocar o interfone conta como tentativa de entrega.
+**Entrega não realizada.** Encomendas que exigem assinatura ou não cabem na caixa de correio ou compartimento são levadas até a porta. Se ninguém atender, a Canada Post deixa um Delivery Notice Card ou, sem assinatura exigida, pode deixar em local seguro. Após `Delivery Attempt Made / Rescheduled for delivery next business day`, costuma tentar novamente no próximo dia útil. Em prédios com interfone, tocar o interfone conta como tentativa de entrega.
 
-**Cartão de aviso.** Quando o cartão é deixado, o Track exibe "Notice left" e depois informa a agência próxima e a data limite ("Pick up by"). Um Final Notice Card segue após 5 dias corridos; ao fim de 15 dias corridos no total, o pacote retorna ao remetente. Veja mais em [entrega frustrada](guide:missed-delivery) e [encomenda não retirada](guide:uncollected-parcel).
+**Cartão de aviso.** Quando o cartão é deixado, o Track exibe "Notice left" e depois informa a agência próxima e a data limite ("Pick up by"). Um Final Notice Card segue após 5 dias corridos; ao fim de 15 dias corridos no total, o pacote retorna ao remetente. Veja mais em [entrega não realizada](guide:missed-delivery) e [encomenda não retirada](guide:uncollected-parcel).
 
 **Retirada.** Leve documento oficial com foto (o Track pede um que mostre o endereço do pacote) e o cartão, o e-mail de aviso ou o código de barras do aplicativo. Terceiros podem retirar levando documento com foto próprio e o seu cartão assinado com o nome deles escrito por extenso, ou uma carta de autorização.
 
@@ -69,19 +69,19 @@ No histórico, registros de entrega exibem "Entregue"; os demais preservam o ing
 
 **Alfândega em pacotes do exterior.** A Canada Post entrega toda correspondência internacional à Canada Border Services Agency (CBSA) na chegada. Enquanto a alfândega analisa, a Canada Post informa não poder intervir nem consultar detalhes.
 
-**Impostos e taxas.** Bens enviados pelo correio de até CAN$ 20 ficam isentos de impostos e taxas, e presentes de familiares ou amigos do exterior ficam isentos de GST até CAN$ 60. Acima disso, aplicam-se 5% de GST (ou HST na província), além de imposto estadual em Colúmbia Britânica, Manitoba, Quebec e Saskatchewan e alíquotas aduaneiras conforme o produto. O valor aparece no Form E14 (CBSA Postal Import Form) anexado ao pacote. A Canada Post faz a cobrança, incluindo taxa de manuseio de $9,95. Pague pelo botão "Pay" no Track ou no aplicativo (cartão de crédito, ou Apple Pay e Google Pay no app) antes de sair para entrega; a janela online pode ser curta, por isso a Canada Post sugere ativar alertas de tributos. Caso contrário, pague com cartão na porta ou na agência em dinheiro, cartão, cheque ou ordem de pagamento da Canada Post.
+**Impostos e taxas.** Bens enviados pelo correio de até CAN$ 20 ficam isentos de impostos e taxas, e presentes de familiares ou amigos do exterior ficam isentos de GST até CAN$ 60. Acima disso, aplicam-se 5% de GST (ou HST na província), além de imposto provincial sobre vendas em Colúmbia Britânica, Manitoba, Quebec e Saskatchewan e alíquotas aduaneiras conforme o produto. O valor aparece no Form E14 (CBSA Postal Import Form) anexado ao pacote. A Canada Post faz a cobrança, incluindo taxa de manuseio de $9,95. Pague pelo botão "Pay" no Track ou no aplicativo (cartão de crédito, ou Apple Pay e Google Pay no app) antes de sair para entrega; a janela online pode ser curta, por isso a Canada Post sugere ativar alertas de tributos. Caso contrário, pague com cartão na porta ou na agência em dinheiro, cartão, cheque ou ordem de pagamento da Canada Post.
 
 **Discorda do valor?** Recuse o pacote e peça revisão, ou pague e solicite ajuste pelo Form B2G, no verso do E14. Veja mais em [encomendas retidas na alfândega](guide:customs).
 
 ## Encomenda Canada Post enviada ao exterior: quem entrega
 
-**Quem entrega.** Com código postal internacional terminado em `CA` e dígito verificador válido, o Peek também pode consultar os correios do país de onde você acompanha usando o mesmo número: por exemplo, [USPS](carrier:usps) nos Estados Unidos, [Royal Mail](carrier:royal-mail) no Reino Unido (Parcelforce para códigos iniciados em `E`), An Post na Irlanda, [Australia Post](carrier:australia-post), NZ Post, [La Poste](carrier:la-poste) na França e [DHL](carrier:dhl) na Alemanha.
+**Quem entrega.** Com número postal internacional terminado em `CA` e dígito verificador válido, o Peek também pode consultar os correios do país de onde você acompanha usando o mesmo número: por exemplo, [USPS](carrier:usps) nos Estados Unidos, [Royal Mail](carrier:royal-mail) no Reino Unido (Parcelforce para códigos iniciados em `E`), An Post na Irlanda, [Australia Post](carrier:australia-post), NZ Post, [La Poste](carrier:la-poste) na França e [DHL](carrier:dhl) na Alemanha.
 
 A Canada Post não envia ao Peek o país de destino, portanto o seu país decide: nos apps iPhone e Android, a região configurada no aparelho; no navegador, o país de onde você adicionou o envio. Assim que os correios locais mostrarem um evento ao menos tão recente quanto o último da Canada Post, o Peek acompanha por lá mantendo o histórico canadense. Por mais um dia, ainda consulta a Canada Post no máximo a cada 55 minutos. Acompanhado do Canadá, ou com código de 16 dígitos, permanece na Canada Post. Para alfândega no destino, veja [encomendas retidas na alfândega](guide:customs).
 
 ## Encomenda Canada Post atrasada, perdida, devolvida ou sumida
 
-**Sem novos registros.** Após quatro dias sem movimentação em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek mostra a data do último evento na lista ("Sem atualizações desde seg., 12 de out.") e, na página do envio, exibe: "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Canada Post." Depois de três semanas sem novidades, muda para: "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando Canada Post." Também mostra link de suporte, como "Pedir ajuda a Canada Post". Segundo a CBSA, itens em revisão aduaneira no Canadá não têm rastreamento preciso. Veja mais em [rastreamento sem atualização](guide:tracking-not-updating).
+**Sem novos registros.** Após quatro dias sem movimentação em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek mostra a data do último evento na lista ("Sem atualizações desde seg 12 out") e, na página do envio, exibe: "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Canada Post." Depois de três semanas sem novidades, muda para: "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando Canada Post." Também mostra um link de ajuda, como "Pedir ajuda a Canada Post". Segundo a CBSA, itens em revisão aduaneira no Canadá não têm rastreamento preciso. Veja mais em [rastreamento sem atualização](guide:tracking-not-updating).
 
 **Atraso ou extravio.** A Canada Post diz que a maioria dos pacotes atrasados chega em até 5 dias úteis após a previsão. Passado esse prazo, confira o endereço e arredores e abra um chamado de investigação na [página de pacotes perdidos](https://www.canadapost-postescanada.ca/cpc/en/support/kb/claims/missing-packages.page) (faça login para acompanhar) em até 90 dias do envio, ou 6 meses em envios aos EUA ou exterior. O remetente também pode solicitar, e apenas o remetente recebe indenização: se não aparecer em alguns dias, a Canada Post encerra seu chamado e você pede ao remetente para reclamar. Em compras online, comece pela loja. Veja [encomendas extraviadas](guide:lost-parcel).
 
@@ -92,7 +92,7 @@ A Canada Post não envia ao Peek o país de destino, portanto o seu país decide
 ## Atendimento ao cliente e contato da Canada Post
 
 - **Telefone:** 1-866-607-6301 no Canadá, 1-416-979-3033 do exterior, TTY 1-800-267-2797. Segunda a sexta das 7h às 23h ET, fins de semana das 9h às 21h ET.
-- **Online:** chat ou chamado de suporte na [página de suporte](https://www.canadapost-postescanada.ca/cpc/en/support.page) da Canada Post.
+- **Online:** chat ou chamado na [página de ajuda](https://www.canadapost-postescanada.ca/cpc/en/support.page) da Canada Post.
 
 Quando um pacote vindo do Canadá já está nos correios do seu país, fale com eles sobre entrega e retirada; veja as páginas de [USPS](carrier:usps), [Royal Mail](carrier:royal-mail) e [Australia Post](carrier:australia-post). O Peek não pode contatar a Canada Post nem a loja por você.
 
@@ -100,13 +100,13 @@ Quando um pacote vindo do Canadá já está nos correios do seu país, fale com 
 
 ## Rastrear encomendas Canada Post com o Peek
 
-O [Peek](/) identifica Canada Post na hora para códigos postais internacionais terminados em `CA` com dígito verificador válido. Um código de 16 dígitos com verificador válido serve para várias empresas: o Peek exibe "Consultando serviços de rastreamento…", consulta Canada Post, DHL eCommerce, TNT, Correos Express e Evri ao mesmo tempo e seleciona a que reconhecer o código. Para número de cartão de aviso ou referência, toque em "Trocar" e escolha Canada Post em "Todas as transportadoras" ou pela busca. Um link da Canada Post com `searchFor=` também funciona; links com `#/search` funcionam apenas com códigos postais `CA`, portanto cole códigos de 16 dígitos diretamente.
+O [Peek](/) identifica Canada Post na hora para números postais internacionais terminados em `CA` com dígito verificador válido. Um código de 16 dígitos com verificador válido serve para várias empresas: o Peek exibe "Consultando serviços de rastreamento…", consulta Canada Post, DHL eCommerce, TNT, Correos Express e Evri ao mesmo tempo e seleciona a que reconhecer o código. Para número de cartão de aviso ou referência, toque em "Trocar" e escolha Canada Post em "Todas as transportadoras" ou pela busca. Um link da Canada Post com `searchFor=` também funciona; links com `#/search` funcionam apenas com números postais terminados em `CA`, portanto cole códigos de 16 dígitos diretamente.
 
-O Peek consulta a Canada Post diretamente, sem navegador. Você vê status, histórico com localidade (cidade e província no Canadá), dia previsto de entrega, janela horária quando sai para entrega no Canadá e a Canada Post a fornece, hora da entrega e nome completo do remetente quando informado. Opções de entrega, endereços, assinaturas e fotos ficam de fora. Os horários aparecem no seu fuso horário; em peektracker.com e nos apps iPhone e Android, o histórico termina com "Horários no seu fuso horário:" e o nome dele.
+O Peek consulta a própria Canada Post, sem navegador. Você vê status, histórico com localidade (cidade e província no Canadá), dia previsto de entrega, janela horária quando sai para entrega no Canadá e a Canada Post a fornece, hora da entrega e nome completo do remetente quando informado. Opções de entrega, endereços, assinaturas e fotos ficam de fora. Os horários aparecem no seu fuso horário; em peektracker.com e nos apps iPhone e Android, o histórico termina com "Horários no seu fuso horário:" e o nome dele.
 
 Enquanto o pacote está aberto, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos — e até a cada 2 minutos quando a própria Canada Post informa saída para entrega naquele dia, a partir das 6h locais ou, havendo janela horária, meia hora antes de abrir; por serviços de rastreamento, a cada hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados; nos demais momentos, a cada hora. Quando outra transportadora assume a entrega, o Peek segue o ritmo dela. Após 12 horas sem evento em "Etiqueta criada" ou "Recebida pela transportadora", ou 48 horas em qualquer outra etapa, verifica a cada hora. Alertas: "Cada movimentação", "Etapas importantes" ou "Só a entrega".
 
-**Para o Canadá.** Em pacotes postados no exterior com código postal internacional, o Peek consulta também a Canada Post com o mesmo código quando os correios de origem indicam Canadá como destino ou, sem destino informado, quando você acompanha do Canadá. Assim que a Canada Post exibir evento ao menos tão recente quanto o da origem, o Peek passa a acompanhá-la mantendo o histórico anterior. Um código iniciado em `L` e terminado em `CH` acompanhado pela Swiss Post nunca é transferido para a Canada Post.
+**Para o Canadá.** Em pacotes postados no exterior com número postal internacional, o Peek consulta também a Canada Post com o mesmo código quando os correios de origem indicam Canadá como destino ou, sem destino informado, quando você acompanha do Canadá. Assim que a Canada Post exibir evento ao menos tão recente quanto o da origem, o Peek passa a acompanhá-la mantendo o histórico anterior. Um código iniciado em `L` e terminado em `CH` acompanhado pela Swiss Post nunca é transferido para a Canada Post.
 
 ## Perguntas frequentes sobre o rastreamento Canada Post
 
@@ -141,5 +141,5 @@ Os correios do seu país, se o código terminar em `CA`: USPS nos EUA, Royal Mai
 - [CBSA: Importing by mail or courier - Paying duty and/or taxes on imported goods](https://www.cbsa-asfc.gc.ca/import/postal-postale/dtytx-drttx-eng.html) – GST, HST, PST, limites de CAN$ 20 e CAN$ 60 e direitos aduaneiros
 - [CBSA: Importing by mail or courier - Disputing duty and taxes](https://www.cbsa-asfc.gc.ca/import/postal-postale/dispute-contestation-eng.html) – revisão e Form B2G
 - [Justice Laws Website: Canada Post Corporation Act](https://laws-lois.justice.gc.ca/eng/acts/C-10/page-1.html) – a corporação e critérios de entrega concluída
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formatos, textos e etapas, o que o Peek mostra e transições
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formatos, textos e etapas, o que o Peek lê e mostra, transições
 :::

@@ -16206,6 +16206,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "m-one",
+      "catalog": "m-one",
+      "slug": "m-one-tracking",
+      "title": "Rastreamento M-ONE (Milšped ONE): status, entrega e ajuda",
+      "name": "M-ONE",
+      "color": "#024da0"
+    },
+    {
       "id": "early-bird",
       "catalog": "early-bird",
       "slug": "rastreamento-early-bird",
@@ -16484,6 +16492,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Liccardi Express Courier: códigos LDV e ajuda",
       "name": "Liccardi Express Courier",
       "color": "#014895"
+    },
+    {
+      "id": "maersk-ecommerce",
+      "catalog": "maersk-ecommerce",
+      "slug": "maersk-ecommerce-tracking",
+      "title": "Rastreamento Maersk eCommerce: códigos 1M e status",
+      "name": "Maersk eCommerce",
+      "color": "#42b0d5"
     },
     {
       "id": "skypostal",
@@ -20668,6 +20684,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "m-one",
+      "catalog": "m-one",
+      "slug": "m-one-tracking",
+      "title": "M-ONE（Milšped ONE）追踪：塞尔维亚快递状态、自提柜与客服",
+      "name": "M-ONE",
+      "color": "#024da0"
+    },
+    {
       "id": "early-bird",
       "catalog": "early-bird",
       "slug": "early-bird-wuliu-chaxun",
@@ -20946,6 +20970,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Liccardi Express Courier 追踪：660 标签、LDV 单号与客服",
       "name": "Liccardi Express Courier",
       "color": "#014895"
+    },
+    {
+      "id": "maersk-ecommerce",
+      "catalog": "maersk-ecommerce",
+      "slug": "maersk-ecommerce-tracking",
+      "title": "Maersk eCommerce 追踪：1M 包裹单号、扫描状态与末端交接",
+      "name": "Maersk eCommerce",
+      "color": "#42b0d5"
     },
     {
       "id": "pdu",

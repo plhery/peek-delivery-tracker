@@ -24,7 +24,7 @@ Espaços e letras minúsculas não importam ao colar o código no Peek. Não enc
 
 ## Status de rastreamento da Emirates Post explicados
 
-O rastreador da Emirates Post dá data, hora e, na maioria das vezes, local para cada etapa. As etapas que o Peek conhece, aproximadamente em ordem:
+O rastreador da Emirates Post dá data, hora e, na maioria das vezes, local para cada etapa. As etapas que o Peek conhece, aproximadamente na ordem em que o objeto passa por elas:
 
 | A Emirates Post diz | O que significa para você | O Peek mostra |
 | --- | --- | --- |
@@ -47,7 +47,7 @@ O Peek interpreta qualquer outra etapa pelo texto e a exibe nas palavras da Emir
 
 ## Objetos da Emirates Post enviados ao exterior: quem entrega e alfândega
 
-Depois que um objeto sai dos Emirados Árabes Unidos, `Shipped to` indica para onde está indo. O rastreador da Emirates Post pode continuar exibindo etapas no país de destino: chegada, alfândega de importação e depósito de entrega. Em muitos países, o Peek também consulta seu correio nacional com o mesmo código `AE`, como [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), An Post, [Canada Post](carrier:canada-post) ou [Australia Post](carrier:australia-post) (veja a última seção). Tentativas de entrega e local de guarda de encomendas perdidas seguem então as regras de quem faz a entrega no seu país: veja [entrega perdida](guide:missed-delivery) e [encomendas não retiradas](guide:uncollected-parcel).
+Depois que um objeto sai dos Emirados Árabes Unidos, `Shipped to` indica para onde está indo. O rastreador da Emirates Post pode continuar exibindo etapas no país de destino: chegada, alfândega de importação e depósito de entrega. Em muitos países, o Peek também consulta seu correio nacional com o mesmo código `AE`, como [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), An Post, [Canada Post](carrier:canada-post) ou [Australia Post](carrier:australia-post) (veja a última seção). Tentativas de entrega e o local onde espera uma encomenda de entrega não realizada seguem então as regras de quem faz a entrega no seu país: veja [entrega não realizada](guide:missed-delivery) e [encomendas não retiradas](guide:uncollected-parcel).
 
 **Alfândega na UE.** Os Emirados Árabes Unidos ficam fora da União Europeia, então o pacote passa pela alfândega no seu país. Desde 1º de julho de 2026, bens comprados online fora da UE em pedidos de até €150 pagam imposto aduaneiro da UE de €3 por item. Desde 1º de novembro de 2026, aplica-se também uma taxa de manuseio da União de €2 por item, independentemente do valor. Um item corresponde às mercadorias de uma encomenda que compartilham classificação tarifária, descrição e, quando exigido, origem. O Peek não pôde verificar como essas cobranças são feitas numa encomenda da Emirates Post: pergunte à loja se o preço já as incluiu. Fora da UE, valem as regras do seu país: veja [encomendas retidas na alfândega](guide:customs).
 
@@ -59,7 +59,7 @@ As etapas da Emirates Post indicam a unidade onde o objeto está, como um centro
 
 ## Rastreamento Emirates Post parado, extraviado ou devolvido
 
-**Sem novidades depois de sair dos EAU.** O voo e a alfândega levam tempo. Após quatro dias sem movimentação em um objeto em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek destaca o dia da última etapa ("Sem atualizações desde seg 12 out") e o link "Pedir ajuda a Emirates Post". Consulte o correio do seu país com o mesmo código; o Peek faz isso por você onde é suportado. Veja mais em [por que o rastreamento para de atualizar](guide:tracking-not-updating).
+**Sem novidades depois de sair dos EAU.** O voo e a alfândega levam tempo. Após quatro dias sem movimentação em um objeto em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek destaca o dia da última etapa ("Sem atualizações desde seg 12 out") e o link "Pedir ajuda a Emirates Post". Consulte o correio do seu país com o mesmo código; o Peek faz isso por você onde consegue. Veja mais em [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
 **Marcada como entregue, mas não chegou.** Pergunte a quem fez a entrega no seu país e avise o remetente. Veja [encomenda marcada como entregue mas não recebida](guide:delivered-not-received).
 

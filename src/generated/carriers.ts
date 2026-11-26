@@ -15438,6 +15438,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#da381b"
     },
     {
+      "id": "gzyl",
+      "catalog": "gzyl",
+      "slug": "rastreamento-gzyl",
+      "title": "Rastreamento GZYL: códigos YL…YQ, etapas e entregas",
+      "name": "GZYL",
+      "color": "#4e79e1"
+    },
+    {
       "id": "geodis-pl",
       "catalog": "geodis-pl",
       "slug": "rastreamento-geodis-polonia",
@@ -15580,6 +15588,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento J&T Express UK: códigos JTUK e status",
       "name": "J&T Express UK",
       "color": "#e60000"
+    },
+    {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "rastreamento-xinghe-freight",
+      "title": "Rastreamento Xinghe Freight: códigos GZXH…YQ e etapas",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
     },
     {
       "id": "j-and-t-br",

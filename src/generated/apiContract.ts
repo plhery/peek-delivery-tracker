@@ -9084,7 +9084,8 @@ export const CARRIER_CAPABILITIES = {
     "tracking": {
       "mode": "automatic",
       "adapter": "dao",
-      "recognitionRank": 515
+      "recognitionRank": 515,
+      "browserRecognitionRank": 515
     },
     "trackingUrlTemplate": "https://dao.as/find-din-pakke/#q={trackingNumber}",
     "linkRules": [
@@ -32329,9 +32330,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Bucharest",
     "tracking": {
       "mode": "automatic",
-      "adapter": "dpd-ro",
-      "recognitionRank": 934,
-      "recognitionServedCountriesOnly": true
+      "adapter": "dpd-ro"
     },
     "trackingUrlTemplate": "https://tracking.dpd.ro/?shipmentNumber={trackingNumber}",
     "linkRules": [
@@ -53259,10 +53258,19 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "app.couriermanager.eu"
+        ],
+        "pathPattern": "^/cscourier/Main$",
+        "query": "^(?=(?:.*&)?appcont=13(?:&|$))(?:.*&)?awbno=([^&]+)(?=&|$)"
+      }
+    ],
     "detectionRules": [],
     "trackingSearchUrl": "https://app.couriermanager.eu/cscourier/Main?tracking=true&appcont=13",
-    "helpUrl": "https://24curier.ro/contact/"
+    "helpUrl": "https://24curier.ro/contact/",
+    "trackingUrlTemplate": "https://app.couriermanager.eu/cscourier/Main?tracking=true&appcont=13&onlyCodes=false&awbno={trackingNumber}"
   },
   "albatomi": {
     "displayName": "Albatomi",
@@ -53302,10 +53310,19 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "app.couriermanager.eu"
+        ],
+        "pathPattern": "^/cscourier/Main$",
+        "query": "^(?=(?:.*&)?appcont=12(?:&|$))(?:.*&)?awbno=([^&]+)(?=&|$)"
+      }
+    ],
     "detectionRules": [],
     "trackingSearchUrl": "https://app.couriermanager.eu/cscourier/Main?tracking=true&appcont=12",
-    "helpUrl": "https://www.bestcourier.ro/contact.php"
+    "helpUrl": "https://www.bestcourier.ro/contact.php",
+    "trackingUrlTemplate": "https://app.couriermanager.eu/cscourier/Main?tracking=true&appcont=12&onlyCodes=false&awbno={trackingNumber}"
   },
   "cautcurier": {
     "displayName": "CautCurier",
@@ -53391,10 +53408,26 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "app.curiera.ro"
+        ],
+        "pathPattern": "^/cscourier/Main$",
+        "query": "^(?!(?:.*&)?appcont=(?!4416(?:&|$)))(?:.*&)?awbno=([^&]+)(?=&|$)"
+      },
+      {
+        "domains": [
+          "app.couriermanager.eu"
+        ],
+        "pathPattern": "^/cscourier/Main$",
+        "query": "^(?=(?:.*&)?appcont=4416(?:&|$))(?:.*&)?awbno=([^&]+)(?=&|$)"
+      }
+    ],
     "detectionRules": [],
     "trackingSearchUrl": "https://app.curiera.ro/cscourier/Main?tracking=true&appcont=4416",
-    "helpUrl": "https://curiera.ro/contact/"
+    "helpUrl": "https://curiera.ro/contact/",
+    "trackingUrlTemplate": "https://app.curiera.ro/cscourier/Main?tracking=true&appcont=4416&onlyCodes=false&awbno={trackingNumber}"
   },
   "intelligent-logistik": {
     "displayName": "Intelligent Logistik",
@@ -53411,10 +53444,19 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "app.couriermanager.eu"
+        ],
+        "pathPattern": "^/cscourier/Main$",
+        "query": "^(?=(?:.*&)?appcont=1311(?:&|$))(?:.*&)?awbno=([^&]+)(?=&|$)"
+      }
+    ],
     "detectionRules": [],
     "trackingSearchUrl": "https://app.couriermanager.eu/cscourier/Main?tracking=true&appcont=1311",
-    "helpUrl": "https://intelligentlogistik.ro/contact/"
+    "helpUrl": "https://intelligentlogistik.ro/contact/",
+    "trackingUrlTemplate": "https://app.couriermanager.eu/cscourier/Main?tracking=true&appcont=1311&onlyCodes=false&awbno={trackingNumber}"
   },
   "irs-romexpress": {
     "displayName": "International Romexpress Service",
@@ -53552,10 +53594,19 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "app.couriermanager.eu"
+        ],
+        "pathPattern": "^/cscourier/Main$",
+        "query": "^(?=(?:.*&)?appcont=17(?:&|$))(?:.*&)?awbno=([^&]+)(?=&|$)"
+      }
+    ],
     "detectionRules": [],
     "trackingSearchUrl": "https://app.couriermanager.eu/cscourier/Main?tracking=true&appcont=17",
-    "helpUrl": "https://sinapseria.ro/contact/"
+    "helpUrl": "https://sinapseria.ro/contact/",
+    "trackingUrlTemplate": "https://app.couriermanager.eu/cscourier/Main?tracking=true&appcont=17&onlyCodes=false&awbno={trackingNumber}"
   },
   "time-critical-line": {
     "displayName": "Time Critical Line",
@@ -55348,10 +55399,19 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "app.fancourier.md"
+        ],
+        "pathPattern": "^/fan/Main$",
+        "query": "^(?!(?:.*&)?appcont=(?!3895(?:&|$)))(?:.*&)?awbno=([^&]+)(?=&|$)"
+      }
+    ],
     "detectionRules": [],
     "trackingSearchUrl": "https://app.fancourier.md/fan/Main?tracking=true&appcont=3895",
-    "helpUrl": "https://www.fancourier.md/contact/"
+    "helpUrl": "https://www.fancourier.md/contact/",
+    "trackingUrlTemplate": "https://app.fancourier.md/fan/Main?tracking=true&appcont=3895&onlyCodes=false&awbno={trackingNumber}"
   },
   "globex-post": {
     "displayName": "Globex Post",
@@ -70484,6 +70544,260 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.gsmnton.com/"
+  },
+  "arriival": {
+    "displayName": "Arriival",
+    "countries": [
+      "MY"
+    ],
+    "color": "#0088d0",
+    "selectable": true,
+    "timezone": "Asia/Kuala_Lumpur",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "arriival"
+    },
+    "trackingUrlTemplate": "https://arriival.com/tracking/?no={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "arriival.com",
+          "www.arriival.com"
+        ],
+        "pathPattern": "^/tracking/?$",
+        "params": [
+          "no"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://arriival.com/tracking/"
+  },
+  "babyxpress": {
+    "displayName": "BabyXpress",
+    "aliases": [
+      "Baby Xpress",
+      "Baby Xpress Sdn. Bhd."
+    ],
+    "countries": [
+      "MY"
+    ],
+    "color": "#072F60",
+    "selectable": true,
+    "timezone": "Asia/Kuala_Lumpur",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "babyxpress"
+    },
+    "trackingUrlTemplate": "https://babyxpress-my.delyva.app/customer/track?trackingNo={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "babyxpress-my.delyva.app"
+        ],
+        "pathPattern": "^/customer/track/?$",
+        "params": [
+          "trackingNo",
+          "tracking"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://babyxpress-my.delyva.app/customer/track"
+  },
+  "sendy-express": {
+    "displayName": "Sendy Express",
+    "aliases": [
+      "Sendy",
+      "Sendy Express Malaysia"
+    ],
+    "countries": [
+      "MY"
+    ],
+    "color": "#0a5cff",
+    "selectable": true,
+    "timezone": "Asia/Kuala_Lumpur",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "sendy-express"
+    },
+    "trackingUrlTemplate": "https://www.sendy.com.my/en/track/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.sendy.com.my",
+          "sendy.com.my"
+        ],
+        "path": "^/(?:en|ms|cn)/track/([A-Za-z0-9-]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.sendy.com.my/en/track",
+    "helpUrl": "https://www.sendy.com.my/en#contact_us"
+  },
+  "spc-worldwide-express": {
+    "displayName": "SPC Worldwide Express",
+    "aliases": [
+      "SPC",
+      "SPC Worldwide Express Sdn Bhd"
+    ],
+    "countries": [
+      "MY"
+    ],
+    "color": "#6D468B",
+    "selectable": true,
+    "timezone": "Asia/Kuala_Lumpur",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "spc-worldwide-express"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "www.spcworldwidexp.com",
+          "spcworldwidexp.com"
+        ],
+        "pathPattern": "^/tracking2\\.aspx$",
+        "params": [
+          "ref"
+        ]
+      }
+    ],
+    "detectionRules": []
+  },
+  "srj": {
+    "displayName": "SRJ",
+    "aliases": [
+      "Siruijie",
+      "思睿捷",
+      "Suzhou Siruijie Supply Chain Management",
+      "苏州思睿捷供应链管理有限责任公司",
+      "上海思睿捷国际物流有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#FC7F01",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "srj"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "unicon-express-us": {
+    "displayName": "UNICON Express USA",
+    "aliases": [
+      "联合速递",
+      "UnionExpressUSA"
+    ],
+    "countries": [
+      "US",
+      "CN"
+    ],
+    "color": "#00576A",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "unicon-express-us"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "www.lianhesudi.com",
+          "lianhesudi.com",
+          "www.lhexpressus.com",
+          "lhexpressus.com"
+        ],
+        "pathPattern": "^/index\\.php$",
+        "query": "^(?=(?:.*&)?s=/Index/chaxun(?:&|$))(?:.*&)?sn=([^&]+)(?=&|$)"
+      }
+    ],
+    "detectionRules": []
+  },
+  "xendnow": {
+    "displayName": "XendNow",
+    "aliases": [
+      "XendNow Courier Service",
+      "Xend Sdn Bhd"
+    ],
+    "countries": [
+      "MY"
+    ],
+    "color": "#652C8F",
+    "selectable": true,
+    "timezone": "Asia/Kuala_Lumpur",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "xendnow"
+    },
+    "trackingUrlTemplate": "https://www.xendnow.my/trace.aspx?key={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.xendnow.my",
+          "xendnow.my"
+        ],
+        "pathPattern": "^/trace\\.aspx$",
+        "params": [
+          "key"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.xendnow.my/trace.aspx"
+  },
+  "ylexp": {
+    "displayName": "Yi Long Express",
+    "aliases": [
+      "YLEXP",
+      "颐龙快递",
+      "颐龙速递"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#F24701",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "ylexp"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "z1-express": {
+    "displayName": "Z1 Express",
+    "aliases": [
+      "宙一物流",
+      "Z1Express"
+    ],
+    "countries": [
+      "CN",
+      "US"
+    ],
+    "color": "#173D7E",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "z1-express"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "www.z1express.com",
+          "z1express.com"
+        ],
+        "pathPattern": "^/index\\.php$",
+        "query": "^(?=(?:.*&)?c=Search(?:&|$))(?=(?:.*&)?a=track(?:&|$))(?:.*&)?trackNumber=([^&]+)(?=&|$)"
+      }
+    ],
+    "detectionRules": []
   }
 } as const;
 
@@ -72632,7 +72946,16 @@ export const CARRIER_IDS = [
   "xys-logistics",
   "ycex",
   "centex",
-  "gsm-nton"
+  "gsm-nton",
+  "arriival",
+  "babyxpress",
+  "sendy-express",
+  "spc-worldwide-express",
+  "srj",
+  "unicon-express-us",
+  "xendnow",
+  "ylexp",
+  "z1-express"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

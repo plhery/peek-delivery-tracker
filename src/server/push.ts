@@ -1492,6 +1492,13 @@ export function fcmData(payload: JsonObject): Record<string, string> {
 /** How long a UnifiedPush device whose send failed waits before the next: doubling with each failure in a row, up to the cap. */
 const UNIFIEDPUSH_RETRY_MS = 60_000;
 const UNIFIEDPUSH_RETRY_MAX_MS = 15 * 60_000;
+/**
+ * A UnifiedPush device whose distributor refused this many sends in a row, a quarter of an hour, while its oldest
+ * notice has waited half a day, is put away: ntfy's 507 goes on until the phone's distributor app subscribes again. The
+ * app registers again at its next launch, which enables it.
+ */
+const UNIFIEDPUSH_DEAD_FAILURES = 5;
+const UNIFIEDPUSH_DEAD_AFTER_MS = 12 * 60 * 60_000;
 
 abstract class AppPushNotificationService {
   /**
@@ -1576,6 +1583,18 @@ abstract class AppPushNotificationService {
             this.#retries.set(deviceId, { failures, at: this.now() * 1_000 + wait });
             if (error instanceof UnifiedPushError && error.statusCode >= 500) {
               summary.distributorFailed = (summary.distributorFailed ?? 0) + 1;
+            }
+            const waiting = this.now() * 1_000 - Date.parse(stringField(events[0]!, 'event_created_at'));
+            if (error instanceof UnifiedPushError && failures >= UNIFIEDPUSH_DEAD_FAILURES && waiting >= UNIFIEDPUSH_DEAD_AFTER_MS) {
+              this.#retries.delete(deviceId);
+              logDeliveryFailure('native', error, this.transport);
+              await this.client.updateNativePushDevice(deviceId, {
+                disabled_at: new Date().toISOString(),
+                last_error: 'UnifiedPush distributor refused every send for half a day',
+              });
+              recordAccountPushSent('expired', this.transport);
+              summary.expired += 1;
+              continue;
             }
           }
           logDeliveryFailure('native', error, this.transport);

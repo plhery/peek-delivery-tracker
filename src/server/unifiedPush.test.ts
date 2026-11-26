@@ -174,6 +174,30 @@ describe('an account\'s notices to a UnifiedPush device', () => {
     expect(delivered).not.toHaveBeenCalled();
   });
 
+  it('put the device away once its distributor refused them for a quarter of an hour while the oldest waited half a day', async () => {
+    const update = vi.mocked(client.updateNativePushDevice);
+    clock = Date.parse('2026-10-03T00:29:00Z');
+    for (const wait of [0, 60_000, 120_000, 240_000]) {
+      clock += wait;
+      expect(await service.dispatch()).toMatchObject({ attempted: 1, failed: 1, expired: 0 });
+    }
+    expect(update).not.toHaveBeenCalledWith('device-1', expect.objectContaining({ disabled_at: expect.any(String) }));
+    clock += 480_000;
+    expect(await service.dispatch()).toMatchObject({ attempted: 1, failed: 0, expired: 1 });
+    expect(update).toHaveBeenLastCalledWith('device-1', {
+      disabled_at: expect.any(String),
+      last_error: 'UnifiedPush distributor refused every send for half a day',
+    });
+    expect(delivered).not.toHaveBeenCalled();
+  });
+
+  it('keep a device whose distributor refused them for a quarter of an hour, while none has waited half a day', async () => {
+    for (const wait of [0, 60_000, 120_000, 240_000, 480_000, 900_000]) {
+      clock += wait;
+      expect(await service.dispatch()).toMatchObject({ attempted: 1, failed: 1, expired: 0 });
+    }
+  });
+
   it('count a refusal of the server, as of its VAPID signature, as a failure of its own', async () => {
     post.mockResolvedValue(403);
     expect(await service.dispatch()).toEqual({ attempted: 1, sent: 0, failed: 1, expired: 0 });

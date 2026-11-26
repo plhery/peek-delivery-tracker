@@ -140,7 +140,9 @@ Key server modules:
   the collapse key. A distributor may refuse each send for hours, as ntfy does with 507
   while the phone's app is not connected, so a device whose send failed waits before the
   next: a minute, twice as long after each failure in a row, up to a quarter of an hour.
-  Its notices stay pending until one goes through or they are a day old. Without one, the notices wait in its inbox, which the app empties
+  Its notices stay pending until one goes through or they are a day old. A device refused
+  five times in a row while its oldest notice has waited half a day is put away, until the
+  app registers again at its next launch. Without one, the notices wait in its inbox, which the app empties
   about every quarter of an hour (`/api/public/push/inbox`): a later notice about the same
   thing replaces the waiting one, and none is kept more than a day. A phone that switches
   between the two keeps its registration and its link alerts.

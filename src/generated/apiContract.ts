@@ -42846,7 +42846,8 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "LM Parcel",
     "aliases": [
       "六脉速运",
-      "六脉小包"
+      "六脉小包",
+      "Liumai Express"
     ],
     "countries": [
       "CN"

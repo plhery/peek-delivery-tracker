@@ -413,6 +413,72 @@ final class ParcelNoteTests: XCTestCase {
         XCTAssertGreaterThan(secondLine, inkSpan(mark, rows: 0..<mark.height) * 2, "the last word goes along with the mark")
     }
 
+    /// The note and its files stay on the parcel's page: the widgets' snapshot, Siri's and Shortcuts' answers, a Live
+    /// Activity and a shared link carry none of them.
+    @MainActor func testTheNoteNeverReachesTheWidgetsSiriALiveActivityOrASharedLink() async throws {
+        let localizer = Localizer()
+        let previous = localizer.language
+        defer { localizer.language = previous }
+        localizer.language = .en
+        let now = try XCTUnwrap(DateParser.date("2026-11-02T09:00:00Z"))
+        let file = PackageFile(id: UUID(), name: "Doorcode-receipt.pdf", contentType: .applicationPdf, size: 10,
+                               createdAt: "2026-11-01T08:00:00Z", url: "/api/files/a", expiresAt: "2026-11-02T10:00:00Z")
+        var noted = parcel(label: "Records", note: "Door code 4521", files: [file])
+        noted.trackingEvents = [TrackingEvent(id: UUID(), packageID: noted.id, stage: .inTransit, description: "In transit",
+                                              location: nil, occurredAt: "2026-11-01T18:00:00Z")]
+        func carriesNone(_ text: String, _ what: String) {
+            XCTAssertFalse(text.contains("4521"), what)
+            XCTAssertFalse(text.contains("Doorcode"), what)
+            XCTAssertFalse(text.contains("/api/files"), what)
+        }
+
+        let published = ParcelStore.widgetDeliveries(of: [noted], localizer: localizer, now: now)
+        XCTAssertEqual(published.map(\.label), ["Records"])
+        let snapshot = DeliveryWidgetSnapshot(generatedAt: now, languageCode: "en", parcels: published)
+        carriesNone(String(decoding: try JSONEncoder().encode(snapshot), as: UTF8.self), "widget snapshot")
+        let answer = NextDeliveryAnswer.text(snapshot: snapshot, copy: ExtensionLocalizer(languageCode: "en"), now: now)
+        XCTAssertTrue(answer.contains("Records"), answer)
+        carriesNone(answer, "Siri")
+
+        // Neither a widget's parcel nor a Live Activity's has a place for a note or a file.
+        let activity = DeliveryActivityParcel(id: noted.id, label: "Records", carrier: "DHL", status: "Out for delivery",
+                                              detail: "Today", phase: .outForDelivery)
+        for value in [published[0] as Any, activity] {
+            let fields = Mirror(reflecting: value).children.compactMap(\.label)
+            XCTAssertFalse(fields.contains { $0.localizedCaseInsensitiveContains("note") || $0.localizedCaseInsensitiveContains("file") },
+                           "\(fields)")
+        }
+
+        // A shared link and a gift: the address and what goes to the service hold the name and the gift's own words alone.
+        var sent: [ParcelShareModel.Settings] = []
+        let share = ParcelShareModel(parcelID: noted.id, name: noted.label, client: ParcelShareModel.Client(
+            current: { nil },
+            share: { settings in
+                sent.append(settings)
+                return ParcelShare(id: "g8Rn3yJe2SuX", showNumber: settings.showNumber, gift: settings.gift,
+                                   createdAt: "2026-11-02T09:00:00.000Z", giftWords: settings.giftWords)
+            },
+            stop: {}), notes: ParcelShareNotes(defaults: UserDefaults(suiteName: "ParcelNoteTests.\(UUID().uuidString)")!),
+            baseURL: URL(string: "https://peektracker.com")!)
+        await share.load()
+        share.words.name = true
+        let handed = await share.addressToHandOut()
+        let address = try XCTUnwrap(handed)
+        XCTAssertEqual(address.absoluteString, "https://peektracker.com/p/g8Rn3yJe2SuX#n=Records")
+        await share.set(.gift, to: true)
+        share.words.note = "Happy birthday"
+        share.words.early = true
+        let handedGift = await share.addressToHandOut()
+        let gift = try XCTUnwrap(handedGift)
+        carriesNone(gift.absoluteString, "gift address")
+        for settings in sent {
+            carriesNone(String(decoding: try JSONEncoder().encode(ShareParcelRequest(showNumber: settings.showNumber, gift: settings.gift,
+                                                                                     giftWords: settings.giftWords)), as: UTF8.self),
+                        "share request")
+        }
+        XCTAssertEqual(sent.last?.giftWords?.note, "Happy birthday")
+    }
+
     private struct Drawn: Equatable {
         let width: Int
         let height: Int

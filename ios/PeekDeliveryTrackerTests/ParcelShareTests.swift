@@ -397,6 +397,77 @@ final class ParcelShareTests: XCTestCase {
         XCTAssertEqual(model.failureKey, "share.failed")
     }
 
+    // MARK: - A gift's note shown early
+
+    /// As src/peek/parcel/ShareSheet.tsx: the switch is off at first, and once on, the gift's words go with `early: true`.
+    @MainActor func testAGiftsNoteShownEarlyGoesWithItsWordsAndComesBackWithTheLink() async throws {
+        let (defaults, suite) = defaults()
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let service = Service()
+        let model = model(service, defaults: defaults)
+        await model.load()
+        XCTAssertFalse(model.words.early, "A gift waits for its delivery unless its sender says otherwise")
+        await model.set(.gift, to: true)
+        model.words.note = "Open it on Saturday"
+        model.words.from = "Sam"
+        model.words.early = true
+        _ = await model.addressToHandOut()
+        XCTAssertEqual(service.link?.giftWords, GiftWords(name: nil, note: "Open it on Saturday", from: "Sam", early: true))
+        XCTAssertEqual(ParcelShareNotes(defaults: defaults).words(for: model.parcelID)?.early, true)
+
+        // Off again, the words go without it, and the service takes the gift back to its surprise.
+        model.words.early = false
+        _ = await model.addressToHandOut()
+        XCTAssertEqual(service.link?.giftWords, GiftWords(name: nil, note: "Open it on Saturday", from: "Sam", early: nil))
+
+        // A link found again shows the switch as its sender left it.
+        service.link?.giftWords = GiftWords(name: nil, note: "Open it on Saturday", from: "Sam", early: true)
+        let (other, otherSuite) = self.defaults()
+        defer { other.removePersistentDomain(forName: otherSuite) }
+        let again = self.model(service, parcelID: model.parcelID, defaults: other)
+        await again.load()
+        XCTAssertTrue(again.words.early)
+        XCTAssertEqual(again.words.note, "Open it on Saturday")
+    }
+
+    func testEarlyIsSentOnlyWhenSetAndWordsKeptBeforeItReadAsNotEarly() throws {
+        let early = try JSONSerialization.jsonObject(with: JSONEncoder().encode(GiftWords(note: "Enjoy", early: true))) as! [String: Any]
+        XCTAssertEqual(early["early"] as? Bool, true)
+        for words in [GiftWords(note: "Enjoy"), GiftWords(note: "Enjoy", early: false)] {
+            let body = try JSONSerialization.jsonObject(with: JSONEncoder().encode(words)) as! [String: Any]
+            XCTAssertNil(body["early"])
+        }
+        let kept = try JSONDecoder().decode(ParcelShareWords.self, from: Data(#"{"name":true,"note":"Enjoy","from":"Sam"}"#.utf8))
+        XCTAssertEqual(kept, ParcelShareWords(name: true, note: "Enjoy", from: "Sam", early: false))
+        let round = try JSONDecoder().decode(ParcelShareWords.self, from: JSONEncoder().encode(ParcelShareWords(note: "Enjoy", early: true)))
+        XCTAssertTrue(round.early)
+    }
+
+    /// As src/peek/useParcelLink.ts: a gift on its way shows its note and who it is from only when its sender set `early`,
+    /// and never what is inside; delivered, it shows them all as before.
+    func testTheRecipientSeesAGiftsNoteBeforeDeliveryOnlyWhenItsSenderSaidSo() throws {
+        var answer = try fixture().publicGiftParcel
+        XCTAssertEqual(answer.gift, .wrapped)
+        answer.link.giftWords = GiftWords(name: "Headphones", note: "Happy birthday", from: "Sam")
+        XCTAssertNil(answer.earlyGiftWords)
+        answer.link.giftWords?.early = false
+        XCTAssertNil(answer.earlyGiftWords)
+        answer.link.giftWords?.early = true
+        XCTAssertEqual(answer.earlyGiftWords, GiftWords(name: nil, note: "Happy birthday", from: "Sam", early: true))
+        answer.link.giftWords = GiftWords(name: nil, note: "", from: "Sam", early: true)
+        XCTAssertEqual(answer.earlyGiftWords, GiftWords(name: nil, note: nil, from: "Sam", early: true))
+
+        // Its sender's own view and a delivered gift are no early words: they show as before.
+        answer.link.role = .owner
+        XCTAssertNil(answer.earlyGiftWords)
+        answer.link.role = .viewer
+        answer.package.trackingEvents.insert(TrackingEvent(
+            id: UUID(), packageID: answer.package.id, stage: .delivered, description: "Delivered",
+            location: "Zürich, CH", occurredAt: "2026-10-02T12:12:00+00:00"), at: 0)
+        XCTAssertEqual(answer.gift, .opened)
+        XCTAssertNil(answer.earlyGiftWords)
+    }
+
     func testEmptyGiftFieldsAreEncodedAsNull() throws {
         let body = try JSONSerialization.jsonObject(with: JSONEncoder().encode(GiftWords(note: "Enjoy"))) as! [String: Any]
         XCTAssertTrue(body["name"] is NSNull)

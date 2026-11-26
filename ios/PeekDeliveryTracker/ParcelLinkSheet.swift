@@ -141,7 +141,10 @@ struct ParcelLinkSheet: View {
                     note(localizer.text(failure.messageKey))
                 }
                 if wrapped {
-                    GiftSurprise()
+                    // Its sender may show the note and who it is from early; what is inside waits for the delivery.
+                    let early = response.earlyGiftWords
+                    if let early { GiftNote(note: early.note, from: early.from, inside: nil) }
+                    GiftSurprise(early: early != nil)
                 } else if gift == .opened {
                     // What the link carried all along comes out with the delivery.
                     GiftNote(note: links.route?.note, from: links.route?.from, inside: links.route?.name)
@@ -837,14 +840,16 @@ private struct GiftParcelCard: View {
     private var detail: String? { localizer.giftDetail(parcel, opened: opened) }
 }
 
-/// Under a gift on its way: why the sheet says so little.
+/// Under a gift on its way: why the sheet says so little. With its note shown early, only what is inside waits.
 private struct GiftSurprise: View {
+    var early = false
+
     @EnvironmentObject private var localizer: Localizer
 
     var body: some View {
         HStack(alignment: .firstTextBaseline, spacing: 8) {
             Image(systemName: "gift").accessibilityHidden(true)
-            Text(localizer.text("share.gift.surprise")).fixedSize(horizontal: false, vertical: true)
+            Text(localizer.text(early ? "share.gift.surpriseInside" : "share.gift.surprise")).fixedSize(horizontal: false, vertical: true)
             Spacer(minLength: 0)
         }
         .font(.footnote)
@@ -854,7 +859,7 @@ private struct GiftSurprise: View {
 }
 
 /// What a gift's link carried all along and shows once the parcel is delivered: the sender's
-/// note, who it is from, and what is inside. None of it ever reached the service.
+/// note, who it is from, and what is inside. The note and who it is from may show before, when its sender said so.
 private struct GiftNote: View {
     let note: String?
     let from: String?

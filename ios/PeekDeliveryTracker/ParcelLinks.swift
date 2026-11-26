@@ -113,6 +113,12 @@ enum ParcelLinkGift: Equatable, Sendable {
 extension PublicParcelResponse {
     var gift: ParcelLinkGift? { ParcelLinkGift(link: link, stage: Parcel(shared: package).currentStage) }
 
+    /// A gift on its way whose sender shows its note and who it is from early: those words, never what is inside.
+    var earlyGiftWords: GiftWords? {
+        guard gift == .wrapped, let words = link.giftWords, words.early == true else { return nil }
+        return GiftWords(name: nil, note: words.note?.nonEmpty, from: words.from?.nonEmpty, early: true)
+    }
+
     /// The parcel as the link shows it. A gift on its way tells its hidden beginning once, and nothing of the steps its
     /// carrier planned or wrote ahead, nor the line in its history that says other sites show them.
     var shownParcel: Parcel {

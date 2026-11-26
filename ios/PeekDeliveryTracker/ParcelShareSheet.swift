@@ -136,7 +136,8 @@ struct ParcelShareSheet: View {
 
     @ViewBuilder private var sharing: some View {
         VStack(spacing: 12) {
-            SharePreviewCard(parcel: parcel, name: model.carried.name, showNumber: model.shown.showNumber, gift: model.shown.gift)
+            SharePreviewCard(parcel: parcel, name: model.carried.name, showNumber: model.shown.showNumber, gift: model.shown.gift,
+                             early: model.shown.gift && model.words.early ? model.words.cleaned : nil)
             options
             if model.shown.gift { giftWords }
             linkRow
@@ -292,14 +293,26 @@ struct ParcelShareSheet: View {
         .frame(minHeight: 50)
     }
 
-    /// A gift's note and who it is from. They travel in the link and show once it is delivered.
+    /// A gift's note and who it is from. Peek keeps them and shows them once it is delivered, or from the start when its
+    /// sender says so; what is inside always waits for the delivery.
     private var giftWords: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            wordsField(localizer.text("share.gift.note"), .note) {
-                TextField(text: $model.words.note, prompt: Text(verbatim: ""), axis: .vertical) { Text(localizer.text("share.gift.note")) }
+        let noteLabel = localizer.text(model.words.early ? "share.gift.noteNow" : "share.gift.note")
+        return VStack(alignment: .leading, spacing: 10) {
+            wordsField(noteLabel, .note) {
+                TextField(text: $model.words.note, prompt: Text(verbatim: ""), axis: .vertical) { Text(noteLabel) }
                     .drawnField()
                     .lineLimit(2...5)
             }
+            Toggle(isOn: $model.words.early) {
+                Text(localizer.text("share.gift.early"))
+                    .font(.subheadline)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .rowToggle()
+            .tint(ExperimentalPalette.delivered)
+            .disabled(model.loading)
+            .frame(minHeight: 44)
+            .accessibilityIdentifier("share.gift.early")
             wordsField(localizer.text("share.gift.from"), .from) {
                 TextField(text: $model.words.from, prompt: Text(verbatim: "")) { Text(localizer.text("share.gift.from")) }
                     .drawnField()
@@ -307,7 +320,7 @@ struct ParcelShareSheet: View {
                     .submitLabel(.done)
                     .onSubmit { writing = nil }
             }
-            Text(localizer.text("share.gift.private"))
+            Text(localizer.text(model.words.early ? "share.gift.privateEarly" : "share.gift.private"))
                 .font(.caption)
                 .foregroundStyle(Brand.secondaryText)
                 .fixedSize(horizontal: false, vertical: true)
@@ -406,6 +419,8 @@ private struct SharePreviewCard: View {
     let name: String?
     let showNumber: Bool
     let gift: Bool
+    /// A gift's note and who it is from, shown before it is delivered.
+    var early: ParcelShareWords?
 
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.dynamicTypeSize) private var typeSize
@@ -445,6 +460,14 @@ private struct SharePreviewCard: View {
                         Text(number)
                             .font(.system(.caption, design: .monospaced))
                             .padding(.top, 3)
+                    }
+                    if wrapped, let early, !early.note.isEmpty || !early.from.isEmpty {
+                        VStack(alignment: .leading, spacing: 2) {
+                            if !early.note.isEmpty { Text(early.note) }
+                            if !early.from.isEmpty { Text("— " + early.from).foregroundStyle(Brand.secondaryText) }
+                        }
+                        .font(.footnote)
+                        .padding(.top, 6)
                     }
                 }
                 .fixedSize(horizontal: false, vertical: true)

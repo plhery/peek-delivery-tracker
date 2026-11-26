@@ -46,9 +46,10 @@ Elsewhere, `peekdeliverytracker://p/<id>` and `peekdeliverytracker://invite#<key
 the same screens.
 
 A parcel's detail shares the parcel through such a link, built on the host of
-`SDT_API_BASE_URL`. The name, a gift's note and who it is from travel after the link's `#`:
-they stay on the device and never reach the API. In the demo the link is made up and leads
-nowhere.
+`SDT_API_BASE_URL`. The name travels after the link's `#` and never reaches the API. A gift's
+note and who it is from are kept by the service and shown once it is delivered, or from the
+start when its sender turns on "Show it before it’s delivered"; what is inside always waits for
+the delivery. In the demo the link is made up and leads nowhere.
 
 Without an account, a parcel link offers **Follow on this iPhone**. The parcel joins the
 iPhone's own parcels, read through its link without a key like any viewer's; the iPhone can
@@ -68,10 +69,17 @@ active key and records the link ID in a protected file so it can retry after a r
 
 A long press on a parcel's card, or a secondary click, opens its menu; a pointer lights the
 card up. The menu opens and shares the parcel and does what its page's ••• menu does: rename
-it, copy its tracking number, change its carrier, archive it with Undo as a swipe does or
-bring it back, and delete it once confirmed. The page's ••• menu also leads to the support of
+it, add or edit its note, copy its tracking number, change its carrier, archive it with Undo as
+a swipe does or bring it back, and delete it once confirmed. The page's ••• menu also leads to the support of
 a carrier with a help page. The toast that offers Undo leaves after seven
 seconds; while VoiceOver or Switch Control is on, it stays until another message takes its place.
+
+A parcel's note is its owner's alone: words, and up to five photos or PDFs, on the parcel's
+page and in its sheet. An account's go to the service; a guest's stay in the app's Application
+Support and go to the account at sign-in; the demo's stay on the device. Files go as soon as
+they are chosen, and a removed file or a deleted note waits for its Undo before it goes. The
+list marks a parcel with a note, and its search reads the note and its files' names. No share,
+gift, widget, Live Activity, notification, Siri answer or menu bar item carries the note.
 
 Text or a link dropped on the deliveries or on + opens Add with it, as a paste or the Share
 extension does. A drop with neither a tracking number nor a shop's order number in it is refused.

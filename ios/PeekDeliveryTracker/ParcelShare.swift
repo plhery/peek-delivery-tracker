@@ -7,17 +7,22 @@ struct ParcelShareWords: Codable, Equatable, Sendable {
     /// A gift's note, and who it is from, as typed.
     var note = ""
     var from = ""
+    /// A gift's note and who it is from show before it is delivered; what is inside still waits.
+    var early = false
 
     /// The words as a link may carry them: one line each, within their limits.
     var cleaned: ParcelShareWords {
         ParcelShareWords(name: name, note: ParcelLinkWords.clean(note, limit: ParcelLinkWords.noteLimit) ?? "",
-                         from: ParcelLinkWords.clean(from, limit: ParcelLinkWords.fromLimit) ?? "")
+                         from: ParcelLinkWords.clean(from, limit: ParcelLinkWords.fromLimit) ?? "", early: early)
     }
 
     /// What is being typed, kept within what a link may carry. Spaces stay until the words are cleaned.
     var limited: ParcelShareWords {
-        ParcelShareWords(name: name, note: Self.limit(note, to: ParcelLinkWords.noteLimit), from: Self.limit(from, to: ParcelLinkWords.fromLimit))
+        ParcelShareWords(name: name, note: Self.limit(note, to: ParcelLinkWords.noteLimit), from: Self.limit(from, to: ParcelLinkWords.fromLimit),
+                         early: early)
     }
+
+    private enum CodingKeys: String, CodingKey { case name, note, from, early }
 
     private static func limit(_ text: String, to limit: Int) -> String {
         guard text.unicodeScalars.count > limit else { return text }
@@ -29,6 +34,15 @@ struct ParcelShareWords: Codable, Equatable, Sendable {
             kept.append(character)
         }
         return kept
+    }
+}
+
+extension ParcelShareWords {
+    /// Words kept before a gift could show early read as not early.
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(name: try container.decode(Bool.self, forKey: .name), note: try container.decode(String.self, forKey: .note),
+                  from: try container.decode(String.self, forKey: .from), early: try container.decodeIfPresent(Bool.self, forKey: .early) ?? false)
     }
 }
 
@@ -292,7 +306,8 @@ final class ParcelShareModel: ObservableObject {
                 let clean = carried
                 request.giftWords = GiftWords(name: clean.name,
                     note: ParcelLinkWords.clean(clean.note ?? "", limit: ParcelLinkWords.noteLimit),
-                    from: ParcelLinkWords.clean(clean.from ?? "", limit: ParcelLinkWords.fromLimit))
+                    from: ParcelLinkWords.clean(clean.from ?? "", limit: ParcelLinkWords.fromLimit),
+                    early: words.early ? true : nil)
             }
             adopt(try await client.share(request))
             return true
@@ -310,7 +325,7 @@ final class ParcelShareModel: ObservableObject {
         guard !known else { return }
         // A link found again carries what this device kept for it; a new one, what was typed for it.
         if words == ParcelShareWords(), let saved = answer.giftWords {
-            words = ParcelShareWords(name: saved.name != nil, note: saved.note ?? "", from: saved.from ?? "")
+            words = ParcelShareWords(name: saved.name != nil, note: saved.note ?? "", from: saved.from ?? "", early: saved.early == true)
         } else if words == ParcelShareWords(), let kept = notes.words(for: parcelID) {
             remembered = kept
             words = kept
@@ -340,12 +355,14 @@ final class ParcelShareModel: ObservableObject {
 }
 
 extension GiftWords {
-    private enum WordKeys: String, CodingKey { case name, note, from }
+    private enum WordKeys: String, CodingKey { case name, note, from, early }
 
+    /// Each word goes, null when there is none, so a word taken back clears it; `early` goes only when set, as the web sends it.
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: WordKeys.self)
         try container.encode(name, forKey: .name)
         try container.encode(note, forKey: .note)
         try container.encode(from, forKey: .from)
+        if early == true { try container.encode(true, forKey: .early) }
     }
 }

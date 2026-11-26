@@ -14242,10 +14242,11 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kolkata",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "professional-couriers"
     },
     "linkRules": [],
-    "detectionRules": []
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.tpcindia.com/"
   },
   "raben": {
     "displayName": "Raben",

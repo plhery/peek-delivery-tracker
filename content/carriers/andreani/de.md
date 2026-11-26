@@ -14,9 +14,9 @@ Die Andreani-Nummern, die Peek kennt, haben 15 Ziffern und beginnen mit `36000`,
 
 | Nummer (erfunden) | Was sie ist |
 | --- | --- |
-| `360004829103756` | `36000` und 10 weitere Ziffern: Bereich von Andreani, aber nur ein schwacher Treffer. [BRT](carrier:brt) und Yunda nutzen ebenfalls 15 Ziffern, daher fragt Peek sowohl Andreani als auch BRT. |
-| `310004829103756` | `31000` und 10 weitere Ziffern: ebenfalls der Bereich von Andreani. |
-| `300004829103756` | `30000` und 10 weitere Ziffern: ebenfalls der Bereich von Andreani. |
+| `360004829173654` | `36000` und 10 weitere Ziffern: Bereich von Andreani, aber nur ein schwacher Treffer. [BRT](carrier:brt) und Yunda nutzen ebenfalls 15 Ziffern, daher fragt Peek sowohl Andreani als auch BRT. |
+| `310004829173654` | `31000` und 10 weitere Ziffern: ebenfalls der Bereich von Andreani. |
+| `300004829173654` | `30000` und 10 weitere Ziffern: ebenfalls der Bereich von Andreani. |
 | `007394028156348` | 15 Ziffern mit anderem Anfang. Peek ordnet sie nicht Andreani zu: [FedEx](carrier:fedex), DPD Frankreich, [Hermes](carrier:hermes-de), BRT und Yunda verwenden ebenfalls 15 Ziffern. |
 
 Leerzeichen spielen beim Einfügen in Peek keine Rolle.
@@ -83,7 +83,7 @@ Bei einer Online-Bestellung wende dich zuerst an den Shop: Er hat die Lieferung 
 
 An einer 15-stelligen Nummer allein erkennt [Peek](/) Andreani nicht. Füge sie trotzdem ein: Peek unterstützt mehr als 4.500 Paketdienste.
 
-**Eine Nummer beginnend mit `36000`, `31000` oder `30000`.** Peek fragt gleichzeitig bei Andreani und BRT nach (Tracking-Dienste und Ozon nur, wenn keiner der beiden die Nummer kennt) und zeigt dabei „Tracking-Dienste werden geprüft…“. Hat Andreani das Paket, nennt die Zeile unter der Nummer Andreani mit „hat dieses Paket“, und Peek ordnet es dort ein. Falls noch nicht, steht dort „noch nicht gefunden · Peek prüft weiter“. Füge das Paket trotzdem hinzu: Es zeigt „Wahrscheinlich Andreani“ und „Warten auf den ersten Scan von Andreani“, und Peek fragt nach den ersten Stunden alle 6 Stunden weiter bei Andreani nach, wenn das Paket in der iPhone- oder Android-App oder in deinem Konto liegt. Bei einer Abfrage ohne Konto prüft Peek während der ersten 6 Stunden, danach beim Öffnen des Links (höchstens alle 6 Stunden, nach den ersten zwei Tagen höchstens täglich) und bei aktivierten Benachrichtigungen täglich bis 30 Tage nach der Abfrage. Nach einer Woche ohne Ergebnis bittet es dich, die Nummer beim Absender zu prüfen oder einen anderen Paketdienst zu wählen.
+**Eine Nummer beginnend mit `36000`, `31000` oder `30000`.** Peek fragt gleichzeitig bei Andreani und BRT nach (Tracking-Dienste nur, wenn keiner der beiden die Nummer kennt) und zeigt dabei „Tracking-Dienste werden geprüft…“. Hat Andreani das Paket, nennt die Zeile unter der Nummer Andreani mit „hat dieses Paket“, und Peek ordnet es dort ein. Falls noch nicht, steht dort „noch nicht gefunden · Peek prüft weiter“. Füge das Paket trotzdem hinzu: Es zeigt „Wahrscheinlich Andreani“ und „Warten auf den ersten Scan von Andreani“, und Peek fragt nach den ersten Stunden alle 6 Stunden weiter bei Andreani nach, wenn das Paket in der iPhone- oder Android-App oder in deinem Konto liegt. Bei einer Abfrage ohne Konto prüft Peek während der ersten 6 Stunden, danach beim Öffnen des Links (höchstens alle 6 Stunden, nach den ersten zwei Tagen höchstens täglich) und bei aktivierten Benachrichtigungen täglich bis 30 Tage nach der Abfrage. Nach einer Woche ohne Ergebnis bittet es dich, die Nummer beim Absender zu prüfen oder einen anderen Paketdienst zu wählen.
 
 **Ein andreani.com-Link.** Füge den Tracking-Link mit `/envio/` ein. Peek nennt Andreani sofort („Erkannter Paketdienst“) und verfolgt die Nummer aus dem Link – auch Referenzen mit Buchstaben.
 
@@ -99,7 +99,7 @@ An einer 15-stelligen Nummer allein erkennt [Peek](/) Andreani nicht. Füge sie 
 
 ### Wie sieht eine Andreani Sendungsnummer aus?
 
-15 Ziffern, die mit `36000`, `31000` oder `30000` beginnen, zum Beispiel `360004829103756`. Andreanis Tracking akzeptiert auch andere Referenzen. Füge die Nummer oder den andreani.com-Link in Peek ein.
+15 Ziffern, die mit `36000`, `31000` oder `30000` beginnen, zum Beispiel `360004829173654`. Andreanis Tracking akzeptiert auch andere Referenzen. Füge die Nummer oder den andreani.com-Link in Peek ein.
 
 ### Was bedeutet „Pendiente de ingreso“ bei Andreani?
 

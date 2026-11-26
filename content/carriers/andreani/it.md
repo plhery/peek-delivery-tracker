@@ -14,9 +14,9 @@ I numeri Andreani riconosciuti da Peek hanno 15 cifre e iniziano con `36000`, `3
 
 | Numero (inventato) | Cos’è |
 | --- | --- |
-| `360004829103756` | `36000` e altre 10 cifre: intervallo Andreani, ma corrispondenza debole. Anche [BRT](carrier:brt) e Yunda usano 15 cifre, quindi Peek interroga sia Andreani sia BRT. |
-| `310004829103756` | `31000` e altre 10 cifre: sempre intervallo Andreani. |
-| `300004829103756` | `30000` e altre 10 cifre: sempre intervallo Andreani. |
+| `360004829173654` | `36000` e altre 10 cifre: intervallo Andreani, ma corrispondenza debole. Anche [BRT](carrier:brt) e Yunda usano 15 cifre, quindi Peek interroga sia Andreani sia BRT. |
+| `310004829173654` | `31000` e altre 10 cifre: sempre intervallo Andreani. |
+| `300004829173654` | `30000` e altre 10 cifre: sempre intervallo Andreani. |
 | `007394028156348` | 15 cifre con un altro prefisso. Peek non lo collega ad Andreani: anche [FedEx](carrier:fedex), DPD Francia, [Hermes](carrier:hermes-de), BRT e Yunda usano 15 cifre. |
 
 Gli spazi non creano problemi quando incolli il numero in Peek.
@@ -83,7 +83,7 @@ Per un acquisto online, rivolgiti prima al negozio: ha prenotato la spedizione e
 
 Un numero di 15 cifre da solo non dice a [Peek](/) che si tratta di Andreani. Incollalo comunque: Peek segue più di 4.500 corrieri.
 
-**Un numero che inizia con `36000`, `31000` o `30000`.** Peek interroga Andreani e BRT insieme (servizi di tracciamento e Ozon solo se nessuno dei due conosce il numero) e mostra intanto «Verifica dei servizi di tracciamento…». Se Andreani ha il pacco, la riga sotto il numero indica Andreani con «ha questo pacco» e Peek lo archivia lì. In caso contrario mostra «non ancora trovato · Peek continua a controllare». Aggiungilo comunque: il pacco mostrerà «Probabilmente Andreani» e «In attesa della prima scansione di Andreani», e Peek continuerà a chiedere ad Andreani ogni 6 ore dopo le prime ore se è nell’app iPhone o Android o nel tuo account. Per una ricerca senza account, Peek controlla nelle prime 6 ore, poi quando apri il link (al massimo ogni 6 ore, e al massimo una volta al giorno dopo i primi due giorni) e, con le notifiche attive, una volta al giorno fino a 30 giorni dalla ricerca. Dopo una settimana senza esito, invita a verificare il numero con il mittente o a scegliere un altro corriere.
+**Un numero che inizia con `36000`, `31000` o `30000`.** Peek interroga Andreani e BRT insieme (servizi di tracciamento solo se nessuno dei due conosce il numero) e mostra intanto «Verifica dei servizi di tracciamento…». Se Andreani ha il pacco, la riga sotto il numero indica Andreani con «ha questo pacco» e Peek lo archivia lì. In caso contrario mostra «non ancora trovato · Peek continua a controllare». Aggiungilo comunque: il pacco mostrerà «Probabilmente Andreani» e «In attesa della prima scansione di Andreani», e Peek continuerà a chiedere ad Andreani ogni 6 ore dopo le prime ore se è nell’app iPhone o Android o nel tuo account. Per una ricerca senza account, Peek controlla nelle prime 6 ore, poi quando apri il link (al massimo ogni 6 ore, e al massimo una volta al giorno dopo i primi due giorni) e, con le notifiche attive, una volta al giorno fino a 30 giorni dalla ricerca. Dopo una settimana senza esito, invita a verificare il numero con il mittente o a scegliere un altro corriere.
 
 **Un link andreani.com.** Incolla il link di tracciamento con `/envio/`. Peek indica subito Andreani («Corriere rilevato») e segue il numero nel link, anche se contiene lettere.
 
@@ -99,7 +99,7 @@ Un numero di 15 cifre da solo non dice a [Peek](/) che si tratta di Andreani. In
 
 ### Come è fatto un numero di tracciamento Andreani?
 
-15 cifre che iniziano con `36000`, `31000` o `30000`, come `360004829103756`. Il tracciamento di Andreani accetta anche altri riferimenti. Incolla il numero o il link andreani.com in Peek.
+15 cifre che iniziano con `36000`, `31000` o `30000`, come `360004829173654`. Il tracciamento di Andreani accetta anche altri riferimenti. Incolla il numero o il link andreani.com in Peek.
 
 ### Cosa significa «Pendiente de ingreso» nel tracciamento Andreani?
 

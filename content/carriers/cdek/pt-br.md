@@ -51,11 +51,11 @@ A CDEK também pode encerrar um pedido como cancelado ou como parcialmente entre
 
 As etapas mostram de qual maneira a encomenda chegará até você.
 
-**Na sua porta.** Uma encomenda na unidade de entrega (`Прибыл в пункт доставки`) sai com o entregador (`Выдан курьеру`). Após uma tentativa sem sucesso, `Выдан курьеру` aparece de novo na próxima tentativa.
+**Na sua porta.** Uma encomenda na unidade de entrega (`Прибыл в пункт доставки`) sai com o entregador (`Выдан курьеру`). Após uma entrega não realizada, `Выдан курьеру` aparece de novo na próxima tentativa.
 
 **Em ponto de retirada ou armário.** Depois de `Отправлен в пункт выдачи`, aguarde `Поступил. Заберите заказ` e então vá buscar.
 
-A página do pedido em my.cdek.ru mostra o ponto de retirada, endereço, contatos, horário de funcionamento e último dia para retirada. O Peek omite esses dados, então consulte lá. O Peek não conseguiu ler o site principal cdek.ru, por isso esta página não informa prazos de entrega, tempos de guarda nem regras de tentativas. Veja [encomendas não retiradas](guide:uncollected-parcel), [entregas perdidas](guide:missed-delivery) e [armários de encomendas](guide:parcel-lockers).
+A página do pedido em my.cdek.ru mostra o ponto de retirada, endereço, contatos, horário de funcionamento e último dia para retirada. O Peek omite esses dados, então consulte lá. O Peek não conseguiu ler o site principal cdek.ru, por isso esta página não informa prazos de entrega, tempos de guarda nem regras de tentativas. Veja [encomendas não retiradas](guide:uncollected-parcel), [entregas não realizadas](guide:missed-delivery) e [armários de encomendas](guide:parcel-lockers).
 
 **Do exterior.** `Принят СДЭК на территории РФ` significa que a CDEK assumiu na Rússia uma encomenda vinda do exterior. Esta página não traz regras nem taxas alfandegárias porque o Peek não pôde verificá-las numa página oficial. Veja [encomendas retidas na alfândega](guide:customs).
 
@@ -65,7 +65,7 @@ A página do pedido em my.cdek.ru mostra o ponto de retirada, endereço, contato
 
 **Dias sem nova etapa.** Se a etapa mais recente tiver quatro dias ou mais e a encomenda ainda não tiver saído para entrega nem chegado ao ponto de retirada, o Peek destaca o dia dessa etapa: "Sem atualizações desde seg 12 out". Saiba mais em [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
-**`Курьер не смог доставить заказ`.** O entregador não conseguiu concluir a entrega. Uma nova tentativa aparece outra vez como `Выдан курьеру`. Se não surgir outra tentativa, fale com a loja que contratou a CDEK.
+**`Курьер не смог доставить заказ`.** O entregador não conseguiu fazer a entrega. Uma nova tentativa aparece outra vez como `Выдан курьеру`. Se não surgir outra tentativa, fale com a loja que contratou a CDEK.
 
 **`Не вручён`.** O pedido encerrou sem chegar a você. Pergunte à loja o que acontece agora: reembolso ou reenvio. Veja [encomenda devolvida ao remetente](guide:returned-to-sender).
 
@@ -75,7 +75,7 @@ A página do pedido em my.cdek.ru mostra o ponto de retirada, endereço, contato
 
 ## Atendimento ao cliente e contato da CDEK
 
-O Peek não consegue ler o site principal cdek.ru, então esta página não lista telefone nem e-mail: o Peek só informa contatos verificados nas páginas oficiais da transportadora. O rastreador e as páginas de pedido da CDEK ficam em my.cdek.ru.
+O Peek não consegue ler o site principal cdek.ru, então esta página não lista telefone nem e-mail: o Peek só informa contatos lidos nas páginas da própria transportadora. O rastreador e as páginas de pedido da CDEK ficam em my.cdek.ru.
 
 Em compras de loja virtual, fale primeiro com a loja: foi ela quem contratou o envio.
 
@@ -93,11 +93,11 @@ Em uma encomenda já adicionada, use "Trocar transportadora". Uma encomenda adic
 
 **Outro número para o mesmo pedido.** Se você rastrear um código que a CDEK vinculou a um pedido, como um número postal do exterior, a CDEK responde com o próprio número de pedido dela. O Peek o exibe por último, como "CDEK rastreia com o código".
 
-**Quando a CDEK não responde.** Os sites da CDEK podem bloquear consultas automáticas. Nesses casos, o Peek consulta serviços de rastreamento: ParcelsApp, Ship24 e 17TRACK. A cópia do ParcelsApp para leituras da CDEK descreve os trechos da viagem em vez das etapas da CDEK e pode trazer apenas a data de cada leitura. Quando a CDEK volta a responder, o Peek retorna a ela.
+**Quando a CDEK não responde.** Os sites da CDEK podem bloquear consultas automatizadas. Nesses casos, o Peek consulta serviços de rastreamento: ParcelsApp, Ship24 e 17TRACK. A cópia do ParcelsApp para leituras da CDEK descreve os trechos da viagem em vez das etapas da CDEK e pode trazer apenas a data de cada leitura. Quando a CDEK volta a responder, o Peek retorna a ela.
 
 **Número pertencente a outra transportadora.** Se você classificou um código de 11 dígitos como CDEK e a CDEK não o conhece, o Peek consulta outras transportadoras compatíveis nos primeiros 30 dias da encomenda. Se uma delas mostrar movimentação, o Peek transfere para lá e exibe "Transportadora trocada automaticamente (antes: CDEK)".
 
-**Encomendas repassadas à CDEK.** A transitária Qwintry repassa algumas encomendas à CDEK. Quando o rastreador da Qwintry cita a CDEK com o número da CDEK, a encomenda mostra "Entrega por CDEK" (ou "Anunciada a CDEK, ainda não recebida" enquanto a CDEK tiver apenas a previsão, sem leitura própria) e esse número. O Peek passa a consultar a CDEK também e acompanha a encomenda lá assim que a CDEK mostrar uma etapa pelo menos tão recente quanto a última da Qwintry. A DobroPost, que traz pedidos da China, mostra as etapas da CDEK no próprio rastreador quando a CDEK faz a última milha: o Peek acompanha essa encomenda lá pelo número DBRPST. Para um número postal do exterior classificado como CDEK, o Peek também pode consultar o correio do país de onde você pesquisa da mesma forma: Belpost em Belarus, Royal Mail no Reino Unido ou USPS nos EUA, por exemplo, mas nenhum na Rússia ou no Cazaquistão.
+**Encomendas repassadas à CDEK.** A Qwintry, um agente de cargas, repassa algumas encomendas à CDEK. Quando o rastreador da Qwintry cita a CDEK com o número da CDEK, a encomenda mostra "Entrega por CDEK" (ou "Anunciada a CDEK, ainda não recebida" enquanto a CDEK tiver apenas a previsão, sem leitura própria) e esse número. O Peek passa a consultar a CDEK também e acompanha a encomenda lá assim que a CDEK mostrar uma etapa pelo menos tão recente quanto a última da Qwintry. A DobroPost, que traz pedidos da China, mostra as etapas da CDEK no próprio rastreador quando a CDEK faz a última milha: o Peek acompanha essa encomenda lá pelo número DBRPST. Para um número postal do exterior classificado como CDEK, o Peek também pode consultar o correio do país de onde você pesquisa da mesma forma: Belpost em Belarus, Royal Mail no Reino Unido ou USPS nos EUA, por exemplo, mas nenhum na Rússia ou no Cazaquistão.
 
 **Verificações e alertas.** Enquanto você mantiver a encomenda aberta, ou no dia da entrega com as notificações ativadas, o Peek consulta a CDEK até a cada 10 minutos, ou até a cada 2 minutos a partir das 6h no horário de Moscou no dia em que a CDEK registra a saída para entrega, enquanto o próprio rastreador da CDEK responder. Fora isso, e após dois dias sem nova etapa (12 horas enquanto mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica a cada hora. Você pode receber avisos para "Cada movimentação", "Etapas importantes" ou "Só a entrega". Para ponto de retirada, escolha "Etapas importantes": "Só a entrega" não avisa quando o pacote fica pronto para retirada. O Peek não pode contatar a CDEK nem a loja por você.
 

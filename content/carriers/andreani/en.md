@@ -14,9 +14,9 @@ The Andreani numbers Peek knows have 15 digits and start with 36000, 31000 or 30
 
 | Number (invented) | What it is |
 | --- | --- |
-| `360000000000000` | 36000 and 10 more digits: Andreani's range, but only a weak match. [BRT](carrier:brt) and Yunda also use 15 digits, so Peek asks both Andreani and BRT. |
-| `310000000000000` | 31000 and 10 more digits: Andreani's range too. |
-| `300000000000000` | 30000 and 10 more digits: Andreani's range too. |
+| `360004829173654` | 36000 and 10 more digits: Andreani's range, but only a weak match. [BRT](carrier:brt) and Yunda also use 15 digits, so Peek asks both Andreani and BRT. |
+| `310004829173654` | 31000 and 10 more digits: Andreani's range too. |
+| `300004829173654` | 30000 and 10 more digits: Andreani's range too. |
 | `007394028156348` | 15 digits with another start. Peek doesn't link it to Andreani. [FedEx](carrier:fedex), [DPD France](carrier:dpd-fr), [Hermes](carrier:hermes-de), BRT and Yunda use 15 digits too. |
 
 Spaces don't matter when you paste a number into Peek.
@@ -83,7 +83,7 @@ For an online order, ask the shop first: it booked the delivery and has the ship
 
 A 15-digit number doesn't tell [Peek](/) by its shape alone that it's Andreani's. Paste it all the same: Peek follows more than 4,500 carriers.
 
-**A number starting with 36000, 31000 or 30000.** Peek asks Andreani and BRT at once (tracking services and Ozon only if neither knows the number), and shows "Checking tracking services…" meanwhile. If Andreani has the parcel, the line under the number names Andreani and says "has this parcel", and Peek files the parcel there. If not, it says "not found yet · Peek keeps checking". Add it all the same: the parcel shows "Probably Andreani" and "Waiting for Andreani’s first scan", and Peek keeps asking Andreani, every 6 hours after the first few hours for a parcel in the iPhone or Android app, or in your account. For a lookup without an account, Peek asks during its first 6 hours, then when you open its link (at most every 6 hours, at most daily after the first two days) and, while notifications are on for it, daily until 30 days after the lookup. After a week with nothing, it asks you to check the number with the sender or choose another carrier.
+**A number starting with 36000, 31000 or 30000.** Peek asks Andreani and BRT at once (tracking services only if neither knows the number), and shows "Checking tracking services…" meanwhile. If Andreani has the parcel, the line under the number names Andreani and says "has this parcel", and Peek files the parcel there. If not, it says "not found yet · Peek keeps checking". Add it all the same: the parcel shows "Probably Andreani" and "Waiting for Andreani’s first scan", and Peek keeps asking Andreani, every 6 hours after the first few hours for a parcel in the iPhone or Android app, or in your account. For a lookup without an account, Peek asks during its first 6 hours, then when you open its link (at most every 6 hours, at most daily after the first two days) and, while notifications are on for it, daily until 30 days after the lookup. After a week with nothing, it asks you to check the number with the sender or choose another carrier.
 
 **An andreani.com link.** Paste the tracking link with `/envio/` in it. Peek names Andreani at once ("Detected carrier") and tracks the number from the link, a reference with letters too.
 
@@ -99,7 +99,7 @@ A 15-digit number doesn't tell [Peek](/) by its shape alone that it's Andreani's
 
 ### What does an Andreani tracking number look like?
 
-15 digits starting with 36000, 31000 or 30000, such as `360000000000000`. Andreani's tracker also takes other references. Paste the number or the andreani.com tracking link into Peek.
+15 digits starting with 36000, 31000 or 30000, such as `360004829173654`. Andreani's tracker also takes other references. Paste the number or the andreani.com tracking link into Peek.
 
 ### What does "Pendiente de ingreso" mean on Andreani tracking?
 

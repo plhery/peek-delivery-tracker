@@ -14,9 +14,9 @@ Numery Andreani, które rozpoznaje Peek, mają 15 cyfr i zaczynają się od `360
 
 | Numer (wymyślony) | Co to jest |
 | --- | --- |
-| `360004829103756` | `36000` i 10 kolejnych cyfr: zakres Andreani, ale tylko słabe dopasowanie. [BRT](carrier:brt) i Yunda również używają 15 cyfr, więc Peek pyta zarówno Andreani, jak i BRT. |
-| `310004829103756` | `31000` i 10 kolejnych cyfr: również zakres Andreani. |
-| `300004829103756` | `30000` i 10 kolejnych cyfr: również zakres Andreani. |
+| `360004829173654` | `36000` i 10 kolejnych cyfr: zakres Andreani, ale tylko słabe dopasowanie. [BRT](carrier:brt) i Yunda również używają 15 cyfr, więc Peek pyta zarówno Andreani, jak i BRT. |
+| `310004829173654` | `31000` i 10 kolejnych cyfr: również zakres Andreani. |
+| `300004829173654` | `30000` i 10 kolejnych cyfr: również zakres Andreani. |
 | `007394028156348` | 15 cyfr z innym początkiem. Peek nie wiąże go z Andreani: [FedEx](carrier:fedex), DPD Francja, [Hermes](carrier:hermes-de), BRT i Yunda też stosują 15 cyfr. |
 
 Spacje nie przeszkadzają przy wklejaniu numeru do Peek.
@@ -83,7 +83,7 @@ Przy zakupach online zapytaj najpierw sklep: to on zamówił dostawę i ma szcze
 
 Po samych 15 cyfrach [Peek](/) nie rozpoznaje jednoznacznie Andreani. Wklej numer mimo to: Peek obsługuje ponad 4 500 przewoźników.
 
-**Numer zaczynający się od `36000`, `31000` lub `30000`.** Peek pyta równocześnie Andreani i BRT (usługi śledzenia i Ozon dopiero wtedy, gdy żaden z nich nie zna numeru), wyświetlając „Sprawdzanie usług śledzenia…”. Jeśli Andreani ma paczkę, wiersz pod numerem wskazuje Andreani z dopiskiem „ma tę przesyłkę” i Peek przypisuje ją do Andreani. Jeśli nie, pojawia się „jeszcze nie znaleziono · Peek sprawdza dalej”. Dodaj przesyłkę mimo to: wyświetli „Prawdopodobnie Andreani” i „Oczekiwanie na pierwszy skan przewoźnika Andreani”, a Peek pyta Andreani co 6 godzin po pierwszych kilku godzinach w aplikacji na iPhone’a lub Androida albo na koncie. Przy wyszukiwaniu bez konta Peek sprawdza przez pierwsze 6 godzin, potem przy otwarciu linku (najwyżej co 6 godzin, a po dwóch dniach najwyżej raz dziennie) oraz przy włączonych powiadomieniach raz dziennie do 30 dni od wyszukiwania. Po tygodniu bez wyniku sugeruje sprawdzenie numeru u nadawcy lub wybór innego przewoźnika.
+**Numer zaczynający się od `36000`, `31000` lub `30000`.** Peek pyta równocześnie Andreani i BRT (usługi śledzenia dopiero wtedy, gdy żaden z nich nie zna numeru), wyświetlając „Sprawdzanie usług śledzenia…”. Jeśli Andreani ma paczkę, wiersz pod numerem wskazuje Andreani z dopiskiem „ma tę przesyłkę” i Peek przypisuje ją do Andreani. Jeśli nie, pojawia się „jeszcze nie znaleziono · Peek sprawdza dalej”. Dodaj przesyłkę mimo to: wyświetli „Prawdopodobnie Andreani” i „Oczekiwanie na pierwszy skan przewoźnika Andreani”, a Peek pyta Andreani co 6 godzin po pierwszych kilku godzinach w aplikacji na iPhone’a lub Androida albo na koncie. Przy wyszukiwaniu bez konta Peek sprawdza przez pierwsze 6 godzin, potem przy otwarciu linku (najwyżej co 6 godzin, a po dwóch dniach najwyżej raz dziennie) oraz przy włączonych powiadomieniach raz dziennie do 30 dni od wyszukiwania. Po tygodniu bez wyniku sugeruje sprawdzenie numeru u nadawcy lub wybór innego przewoźnika.
 
 **Link andreani.com.** Wklej link śledzenia zawierający `/envio/`. Peek od razu wskazuje Andreani („Wykryty przewoźnik”) i śledzi numer z linku, także referencje z literami.
 
@@ -99,7 +99,7 @@ Po samych 15 cyfrach [Peek](/) nie rozpoznaje jednoznacznie Andreani. Wklej nume
 
 ### Jak wygląda numer śledzenia Andreani?
 
-15 cyfr zaczynających się od `36000`, `31000` lub `30000`, na przykład `360004829103756`. Śledzenie Andreani przyjmuje także inne referencje. Wklej numer lub link z andreani.com w Peek.
+15 cyfr zaczynających się od `36000`, `31000` lub `30000`, na przykład `360004829173654`. Śledzenie Andreani przyjmuje także inne referencje. Wklej numer lub link z andreani.com w Peek.
 
 ### Co oznacza „Pendiente de ingreso” w śledzeniu Andreani?
 

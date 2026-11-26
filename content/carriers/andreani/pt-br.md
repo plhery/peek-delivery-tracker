@@ -29,7 +29,7 @@ Não encontra o código? Veja [como encontrar seu código de rastreamento](guide
 
 ## Status de rastreamento da Andreani explicados
 
-O rastreador da Andreani agrupa as linhas sob títulos em espanhol. Os quatro que o Peek conhece são `Pendiente de ingreso` (aguardando entrada), `Ingresado` (recebido), `En camino` (a caminho) e `Entregado` (entregue). Cada linha é uma frase curta dirigida a você, com a agência (`sucursal`) e a cidade quando houver. As linhas de um trajeto comum que o Peek reconhece, na ordem em que costumam surgir:
+O rastreador da Andreani agrupa as linhas sob títulos em espanhol. Os quatro que o Peek conhece são `Pendiente de ingreso` (aguardando entrada), `Ingresado` (recebido), `En camino` (a caminho) e `Entregado` (entregue). Cada linha é uma frase curta dirigida a você, com a agência (`sucursal`) e a cidade quando houver. As linhas de um trajeto comum que o Peek reconhece, na ordem em que a encomenda passa por elas:
 
 | A Andreani diz | O que significa para você | Status no Peek |
 | --- | --- | --- |
@@ -55,7 +55,7 @@ As linhas acima descrevem o trajeto habitual:
 4. **Dia da entrega.** `Hoy te visitaremos para entregarte tu envío.` indica que alguém levará o pacote ao endereço hoje.
 5. **Entrega concluída.** `Ya entregamos tu envío.` encerra o trajeto.
 
-O Peek não conseguiu ler o site da Andreani, então esta página não informa prazos de entrega, regras para tentativas sem sucesso nem detalhes sobre retirada em agência ou prazo de guarda. Pergunte à loja ou à Andreani sobre isso. Veja também [entregas perdidas](guide:missed-delivery) e [encomendas não retiradas](guide:uncollected-parcel).
+O Peek não conseguiu ler o site da Andreani, então esta página não informa prazos de entrega, regras para entregas não realizadas nem detalhes sobre retirada em agência ou prazo de guarda. Pergunte à loja ou à Andreani sobre isso. Veja também [entregas não realizadas](guide:missed-delivery) e [encomendas não retiradas](guide:uncollected-parcel).
 
 ## Rastreamento Andreani parado, extraviado ou devolvido
 
@@ -83,7 +83,7 @@ Para pedidos de loja virtual, fale primeiro com a loja: ela contratou o envio e 
 
 Um código de 15 dígitos sozinho não basta para o [Peek](/) ter certeza de que é da Andreani. Cole-o mesmo assim: o Peek acompanha mais de 4.500 transportadoras.
 
-**Código iniciado por 36000, 31000 ou 30000.** O Peek consulta Andreani e BRT ao mesmo tempo (serviços de rastreamento e Ozon somente se nenhuma das duas conhecer o código), mostrando "Consultando serviços de rastreamento…" enquanto verifica. Se a Andreani tiver a encomenda, a linha abaixo do código indica Andreani dizendo "está com esta encomenda" e o Peek a classifica lá. Se não, aparece "ainda não encontrada · o Peek continua verificando". Adicione mesmo assim: a encomenda exibe "Provavelmente Andreani" e "Aguardando a primeira movimentação de Andreani", e o Peek continua consultando a Andreani a cada 6 horas depois das primeiras horas em encomendas no app de iPhone ou Android ou na sua conta. Em uma consulta sem conta, o Peek consulta nas primeiras 6 horas, depois quando você abre o link (no máximo a cada 6 horas, e no máximo uma vez por dia após os dois primeiros dias) e, se as notificações estiverem ativadas, diariamente até 30 dias após a consulta. Depois de uma semana sem retorno, pede que você confira o código com o remetente ou escolha outra transportadora.
+**Código iniciado por 36000, 31000 ou 30000.** O Peek consulta Andreani e BRT ao mesmo tempo (serviços de rastreamento somente se nenhuma das duas conhecer o código), mostrando "Consultando serviços de rastreamento…" enquanto verifica. Se a Andreani tiver a encomenda, a linha abaixo do código indica Andreani dizendo "está com esta encomenda" e o Peek a classifica lá. Se não, aparece "ainda não encontrada · o Peek continua verificando". Adicione mesmo assim: a encomenda exibe "Provavelmente Andreani" e "Aguardando a primeira movimentação de Andreani", e o Peek continua consultando a Andreani a cada 6 horas depois das primeiras horas em encomendas no app de iPhone ou Android ou na sua conta. Em uma consulta sem conta, o Peek consulta nas primeiras 6 horas, depois quando você abre o link (no máximo a cada 6 horas, e no máximo uma vez por dia após os dois primeiros dias) e, se as notificações estiverem ativadas, diariamente até 30 dias após a consulta. Depois de uma semana sem retorno, pede que você confira o código com o remetente ou escolha outra transportadora.
 
 **Link de andreani.com.** Cole o link de rastreamento com `/envio/`. O Peek identifica a Andreani imediatamente ("Transportadora detectada") e rastreia o código do link, inclusive referências com letras.
 

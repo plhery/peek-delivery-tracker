@@ -1,0 +1,4 @@
+Your note: add a private note to a parcel, with up to 5 photos or PDFs. Only you can see it, even when you share the parcel.
+A parcel’s ••• menu now leads to its carrier’s support, and a parcel still out for delivery after its round points there.
+“I haven’t received it” comes first among the reasons on a parcel’s page.
+Peek AI’s Why says how many parcels each estimate goes by.

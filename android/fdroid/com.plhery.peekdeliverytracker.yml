@@ -1,4 +1,4 @@
-# The app's entry in the F-Droid repository of the Android beta, which scripts/publish-fdroid.sh copies there.
+# The app's entry in Peek's F-Droid repository, which scripts/publish-fdroid.sh copies there.
 Categories:
   - Internet
 License: AGPL-3.0-only
@@ -9,10 +9,6 @@ IssueTracker: https://github.com/plhery/peek-delivery-tracker/issues
 Changelog: https://github.com/plhery/peek-delivery-tracker/releases
 
 AntiFeatures:
-  # The beta here bundles them from a scraper release licensed for noncommercial use only. Universal Parcel Scraper
-  # licenses them under AGPL-3.0-only from 0.1387.0: drop NonFreeAssets with the first beta built on that release or later.
-  NonFreeAssets:
-    en-US: Bundles Universal Parcel Scraper's carrier catalog and tracking-number patterns, which the scraper release this version was built with licenses for noncommercial use only.
   NonFreeNet:
     en-US: A package's scans come from carriers' sites and from tracking services such as 17TRACK, through Peek's own server, whose code is free software but reads carriers with Universal Parcel Scraper, licensed for noncommercial use only. A new lookup can need Cloudflare's Turnstile check, sign-in can use Google, and directions to a pickup point open Google Maps.
   TetheredNet:
@@ -23,7 +19,7 @@ AntiFeatures:
 Name: Peek
 Summary: Track a package from any carrier on a map, no account needed
 Description: |-
-  This is the beta of Peek for Android, built without Google's libraries and signed with Peek's own key. If you installed Peek 1.1.18 or earlier from GitHub or the Peek beta F-Droid repository, or Peek from Google Play, uninstall it first: this copy is signed with a different key.
+  This copy of Peek is built without Google's libraries and signed with Peek's own key. If you installed Peek 1.1.18 or earlier from GitHub or Peek's F-Droid repository, or Peek from Google Play, uninstall it first: this copy is signed with a different key.
 
   Where’s my package?
 

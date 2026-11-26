@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Puts a beta's APK, the Google-free fdroid build signed with Peek's upload key, in the F-Droid repository of the Android
-# beta and on GitHub Releases, and tags the commit it was built from for F-Droid's own catalog. Play's own copy doesn't go
-# there: Play protects the copies it signs, and they refuse to open on a phone without the Play Store.
+# Puts a version's APK, the Google-free fdroid build signed with Peek's upload key, in Peek's F-Droid repository and on
+# GitHub Releases, and tags the commit it was built from for F-Droid's own catalog. Play's own copy doesn't go there: Play
+# protects the copies it signs, and they refuse to open on a phone without the Play Store.
 #
 #   scripts/publish-fdroid.sh <fdroid.apk> <commit> [notes.md]
 #
@@ -9,7 +9,7 @@
 # -Ppeek.uploadProperties=<upload.properties>` from a clean checkout of <commit>, the commit the release was built from,
 # which its GitHub release, android-<versionName>-<versionCode>, names. PEEK_FDROID_DIR names the repository's folder on
 # this Mac, made by `fdroid init`, whose config.yml and key stay outside every git tree. The repository keeps the newest
-# beta alone; the older ones stay on GitHub Releases, and an older beta is refused once a newer one is there.
+# version alone; the older ones stay on GitHub Releases, and an older version is refused once a newer one is there.
 set -euo pipefail
 
 apk=$1
@@ -25,7 +25,7 @@ github=plhery/peek-delivery-tracker
 upload=f433cbf03c68766d1e6b321d1020e8fee51f75780b56c0393ff7420f93103f73
 # The APK installed from Google Play or from this repository before 1.1.19 (13) is signed by Google Play, so it has to go
 # before this one goes on.
-uninstall="If you installed Peek 1.1.18 or earlier from GitHub or the Peek beta F-Droid repository, or Peek from Google Play, uninstall it first: this copy is signed with a different key."
+uninstall="If you installed Peek 1.1.18 or earlier from GitHub or Peek's F-Droid repository, or Peek from Google Play, uninstall it first: this copy is signed with a different key."
 
 certs=$("$tools/apksigner" verify --print-certs "$apk" 2>/dev/null) || certs=
 digests=$(sed -n 's/.*certificate SHA-256 digest: //p' <<<"$certs" | sort -u)
@@ -47,7 +47,7 @@ if [ -z "$code" ] || [ -z "$name" ]; then
   echo "$apk is not $app" >&2
   exit 1
 fi
-# Re-running an interrupted older beta would put it in place of the newer one.
+# Re-running an interrupted older version would put it in place of the newer one.
 for held in "$dir"/repo/"${app}"_*.apk; do
   [ -e "$held" ] || continue
   heldCode=${held##*_}
@@ -61,14 +61,14 @@ target=$(git -C "$android" rev-parse --verify "$commit^{commit}")
 tag="android-$name-$code"
 
 release=$(mktemp -d)
-printf 'Peek for Android %s (%s), the beta, is built from https://github.com/%s/tree/%s\n' "$name" "$code" "$github" "$target" > "$release/README.md"
+printf 'Peek for Android %s (%s) is built from https://github.com/%s/tree/%s\n' "$name" "$code" "$github" "$target" > "$release/README.md"
 git -C "$release" init -q -b release
 remote="https://github.com/$github.git"
 ref="refs/tags/$tag"
 existing=$(git ls-remote "$remote" "$ref")
 if [ -n "$existing" ]; then
   git -C "$release" fetch -q --no-tags "$remote" "$ref"
-  if ! git -C "$release" show FETCH_HEAD:README.md | cmp -s - "$release/README.md"; then
+  if ! git -C "$release" show FETCH_HEAD:README.md | grep -Fq "/tree/$target"; then
     echo "$tag does not name the expected source commit $target" >&2
     exit 1
   fi
@@ -90,7 +90,7 @@ address="https://raw.githubusercontent.com/$github/fdroid/repo?fingerprint=$fing
 # this Mac's paths, stay out.
 site=$(mktemp -d)
 cp -R "$dir/repo" "$site/repo"
-printf '# Peek beta for F-Droid\n\nAdd this repository in F-Droid: %s\n' "$address" > "$site/README.md"
+printf '# Peek for F-Droid\n\nAdd this repository in F-Droid: %s\n' "$address" > "$site/README.md"
 git -C "$site" init -q -b fdroid
 git -C "$site" add README.md repo ':!repo/status'
 git -C "$site" commit -q -m "Peek $name ($code)"
@@ -114,14 +114,14 @@ if assets=$(gh release view "$tag" --repo "$github" --json assets --jq '.assets[
   fi
 else
   {
-    printf 'Peek for Android %s (%s), the beta, built from %s without Google'"'"'s libraries and signed with Peek'"'"'s own key.\n\n' \
+    printf 'Peek for Android %s (%s), built from %s without Google'"'"'s libraries and signed with Peek'"'"'s own key.\n\n' \
       "$name" "$code" "$target"
     printf '%s\n\n' "$uninstall"
     printf 'In F-Droid, add the repository %s\n' "$address"
     if [ -n "$notes" ]; then printf '\n'; cat "$notes"; fi
   } > "$site/notes.md"
-  gh release create "$tag" "$site/peek-$name-$code.apk" --repo "$github" --verify-tag --prerelease \
-    --title "Peek for Android $name ($code), beta" --notes-file "$site/notes.md"
+  gh release create "$tag" "$site/peek-$name-$code.apk" --repo "$github" --verify-tag --latest \
+    --title "Peek for Android $name ($code)" --notes-file "$site/notes.md"
 fi
 
 # F-Droid's own catalog (https://gitlab.com/fdroid/fdroiddata) builds the release's commit from source and finds it by

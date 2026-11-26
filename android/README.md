@@ -186,7 +186,7 @@ It waits for the device to finish starting, installs the release in place of any
 finds its window and fails unless it is still up 15 seconds later: what R8 removes shows only when the shrunk app
 runs. CI's "Release build opens" job does the same on each change, with a key and settings made up for the run.
 
-Once Google Play has a beta, the same commit's `fdroid` build, signed with the upload key, goes to the F-Droid
+Once Google Play has a version, the same commit's `fdroid` build, signed with the upload key, goes to the F-Droid
 repository and GitHub Releases. Play's own copies don't: Play protects the copies it signs, and they refuse to open on a
 phone without the Play Store.
 
@@ -196,9 +196,9 @@ PEEK_FDROID_DIR=<path> scripts/publish-fdroid.sh app/build/outputs/apk/fdroid/re
 ```
 
 The script refuses an APK that the upload key alone did not sign, that carries Google's libraries (Firebase, Play
-services, ML Kit, Play Core), or that is older than the beta the repository holds. It signs the repository's index
+services, ML Kit, Play Core), or that is older than the version the repository holds. It signs the repository's index
 with the repository's key, which stays outside the repository in `PEEK_FDROID_DIR` with fdroid's `config.yml`, puts the
-repository alone on the `fdroid` branch, which raw.githubusercontent.com serves, and attaches the APK to a pre-release.
+repository alone on the `fdroid` branch, which raw.githubusercontent.com serves, and attaches the APK to a release, marked Latest.
 Copies from Google Play, and the ones this
 repository and GitHub had up to 1.1.18 (12), are signed by Google Play, so they have to be uninstalled before this one
 goes on; the release notes and the repository's entry say so. The app's entry in the repository is

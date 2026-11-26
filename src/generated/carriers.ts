@@ -15214,6 +15214,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffd100"
     },
     {
+      "id": "posta-srbije",
+      "catalog": "posta-srbije",
+      "slug": "posta-srbije-serbian-post-tracking",
+      "title": "Rastreamento Pošta Srbije: Correios da Sérvia e status",
+      "name": "Pošta Srbije",
+      "color": "#fbba00"
+    },
+    {
       "id": "lietuvos-pastas",
       "catalog": "lietuvos-pastas",
       "slug": "rastreamento-lietuvos-pastas",
@@ -15748,6 +15756,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento India Post: códigos Speed Post e status",
       "name": "India Post",
       "color": "#b82025"
+    },
+    {
+      "id": "morning-global",
+      "catalog": "morning-global",
+      "slug": "morning-global-tracking",
+      "title": "Rastreamento Morning Global: código BR…MG, status e ajuda",
+      "name": "Morning Global",
+      "color": "#050059"
     },
     {
       "id": "delhivery",
@@ -19082,6 +19098,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "克罗地亚邮政（Hrvatska pošta）物流查询：状态与快递柜",
       "name": "Hrvatska pošta",
       "color": "#ffd100"
+    },
+    {
+      "id": "posta-srbije",
+      "catalog": "posta-srbije",
+      "slug": "posta-srbije-serbian-post-tracking",
+      "title": "塞尔维亚邮政（Pošta Srbije）物流查询：单号、状态与客服",
+      "name": "Pošta Srbije",
+      "color": "#fbba00"
     },
     {
       "id": "lietuvos-pastas",

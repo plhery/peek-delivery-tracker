@@ -15302,6 +15302,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0032a0"
     },
     {
+      "id": "postnl",
+      "catalog": "spring-gds",
+      "slug": "rastreamento-postnl",
+      "title": "Rastreamento PostNL: códigos NL e 3S, status e entrega",
+      "name": "PostNL",
+      "color": "#ef7d00"
+    },
+    {
       "id": "dhlink",
       "catalog": "dhlink",
       "slug": "rastreamento-dhlink",
@@ -15444,6 +15452,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento GZYL: códigos YL…YQ, etapas e entregas",
       "name": "GZYL",
       "color": "#4e79e1"
+    },
+    {
+      "id": "shouwu",
+      "catalog": "shouwu",
+      "slug": "rastreamento-shouwu",
+      "title": "Rastreamento Shouwu: códigos SWECN…YQ, status e entrega",
+      "name": "Shouwu International",
+      "color": "#be2c33"
     },
     {
       "id": "geodis-pl",
@@ -18858,6 +18874,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "iMile 国际快递查询：单号格式、英文轨迹与客服联系",
       "name": "iMile",
       "color": "#0032a0"
+    },
+    {
+      "id": "postnl",
+      "catalog": "spring-gds",
+      "slug": "postnl-helan-kuaidi-chaxun",
+      "title": "荷兰邮政（PostNL）查询：NL 与 3S 单号、状态与派送",
+      "name": "PostNL",
+      "color": "#ef7d00"
     },
     {
       "id": "dhlink",

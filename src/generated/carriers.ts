@@ -15958,6 +15958,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed4136"
     },
     {
+      "id": "aras-kargo",
+      "catalog": "aras-kargo",
+      "slug": "aras-kargo-tracking",
+      "title": "Rastreamento Aras Kargo: códigos e status em turco",
+      "name": "Aras Kargo",
+      "color": "#dc0812"
+    },
+    {
       "id": "emirates-post",
       "catalog": "emirates-post",
       "slug": "rastreamento-emirates-post",
@@ -16332,6 +16340,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento DHL Freight: códigos ActiveTracing e status",
       "name": "DHL Freight",
       "color": "#ffcc00"
+    },
+    {
+      "id": "anserx",
+      "catalog": "anserx",
+      "slug": "anserx-tracking",
+      "title": "Rastreamento AnserX: códigos BTYCN...YQ, repasses e ajuda",
+      "name": "AnserX",
+      "color": "#2478be"
     },
     {
       "id": "cj-packet",
@@ -20250,6 +20266,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Delhivery 印度快递查询：AWB 单号、状态与客服",
       "name": "Delhivery",
       "color": "#ed4136"
+    },
+    {
+      "id": "aras-kargo",
+      "catalog": "aras-kargo",
+      "slug": "aras-kargo-tracking",
+      "title": "Aras Kargo 土耳其快递追踪：13 位单号与土耳其语状态含义",
+      "name": "Aras Kargo",
+      "color": "#dc0812"
     },
     {
       "id": "emirates-post",

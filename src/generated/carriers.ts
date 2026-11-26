@@ -15038,6 +15038,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef2637"
     },
     {
+      "id": "dpd-ie",
+      "catalog": "dpd-ie",
+      "slug": "dpd-ireland-tracking",
+      "title": "Rastreamento DPD Irlanda: status, pontos Pickup e contato",
+      "name": "DPD Ireland",
+      "color": "#dc0032"
+    },
+    {
       "id": "gls-es",
       "catalog": "gls-es",
       "slug": "rastreamento-gls-espanha",
@@ -16068,6 +16076,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Andreani: códigos e status na Argentina",
       "name": "Andreani",
       "color": "#d71920"
+    },
+    {
+      "id": "spx-sg",
+      "catalog": "spx-sg",
+      "slug": "spx-express-singapore-tracking",
+      "title": "Rastreamento SPX Express Singapura: Shopee e status",
+      "name": "SPX Express Singapore",
+      "color": "#ee4d2d"
     },
     {
       "id": "17feia",
@@ -19178,6 +19194,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "比利时邮政 bpost 快递查询：单号、状态、自提与关税",
       "name": "bpost",
       "color": "#ef2637"
+    },
+    {
+      "id": "dpd-ie",
+      "catalog": "dpd-ie",
+      "slug": "dpd-ireland-tracking",
+      "title": "DPD Ireland 快递追踪：状态含义、Pickup 自提点与客服",
+      "name": "DPD Ireland",
+      "color": "#dc0032"
     },
     {
       "id": "gls-es",

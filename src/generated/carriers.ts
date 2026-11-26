@@ -15286,6 +15286,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#b70100"
     },
     {
+      "id": "slovak-parcel-service",
+      "catalog": "slovak-parcel-service",
+      "slug": "slovak-parcel-service-tracking",
+      "title": "Rastreamento Slovak Parcel Service (SPS): status e Balíkovo",
+      "name": "Slovak Parcel Service",
+      "color": "#f58220"
+    },
+    {
       "id": "slovenska-posta",
       "catalog": "slovenska-posta",
       "slug": "rastreamento-slovenska-posta",
@@ -15372,6 +15380,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Geniki Taxydromiki: voucher, status e contato",
       "name": "Geniki Taxydromiki",
       "color": "#004fa0"
+    },
+    {
+      "id": "whistl",
+      "catalog": "whistl",
+      "slug": "whistl-tracking",
+      "title": "Rastreamento Whistl: quem entrega no Reino Unido e suporte",
+      "name": "Whistl",
+      "color": "#fd4f00"
     },
     {
       "id": "xdp",
@@ -19524,6 +19540,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#b70100"
     },
     {
+      "id": "slovak-parcel-service",
+      "catalog": "slovak-parcel-service",
+      "slug": "slovak-parcel-service-tracking",
+      "title": "Slovak Parcel Service（SPS）追踪：状态、Balíkovo 自提柜与客服",
+      "name": "Slovak Parcel Service",
+      "color": "#f58220"
+    },
+    {
       "id": "slovenska-posta",
       "catalog": "slovenska-posta",
       "slug": "slovenska-posta-kuaidi-chaxun",
@@ -19610,6 +19634,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Geniki Taxydromiki 物流查询：运单号、状态与联系",
       "name": "Geniki Taxydromiki",
       "color": "#004fa0"
+    },
+    {
+      "id": "whistl",
+      "catalog": "whistl",
+      "slug": "whistl-tracking",
+      "title": "Whistl 英国包裹追踪：末端派送承运商、状态与客服",
+      "name": "Whistl",
+      "color": "#fd4f00"
     },
     {
       "id": "xdp",

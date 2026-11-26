@@ -15566,6 +15566,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#cc0000"
     },
     {
+      "id": "russian-post",
+      "catalog": "russian-post",
+      "slug": "rastreamento-russian-post",
+      "title": "Rastreamento Russian Post (Почта России): códigos e etapas",
+      "name": "Russian Post",
+      "color": "#1928dc"
+    },
+    {
       "id": "huahan",
       "catalog": "huahan",
       "slug": "rastreamento-huahan-logistics",
@@ -15628,6 +15636,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Jifan: códigos JFGJ, eventos e horário",
       "name": "Jifan",
       "color": "#c81011"
+    },
+    {
+      "id": "ozon-logistics",
+      "catalog": "ozon-logistics",
+      "slug": "rastreamento-ozon",
+      "title": "Rastreamento Ozon: códigos de pedido e status em russo",
+      "name": "Ozon",
+      "color": "#005bff"
     },
     {
       "id": "17feia",
@@ -19204,6 +19220,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#cc0000"
     },
     {
+      "id": "russian-post",
+      "catalog": "russian-post",
+      "slug": "russian-post-wuliu-chaxun",
+      "title": "俄罗斯邮政（Russian Post / Почта России）物流查询",
+      "name": "Russian Post",
+      "color": "#1928dc"
+    },
+    {
       "id": "huahan",
       "catalog": "huahan",
       "slug": "huahan-wuliu-chaxun",
@@ -19274,6 +19298,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "吉凡国际物流（Jifan）查询：JFGJ单号、状态与北京时间",
       "name": "Jifan",
       "color": "#c81011"
+    },
+    {
+      "id": "ozon-logistics",
+      "catalog": "ozon-logistics",
+      "slug": "ozon-eluosi-kuaidi-chaxun",
+      "title": "Ozon 物流（Ozon Rocket）查询：单号格式与俄语状态",
+      "name": "Ozon",
+      "color": "#005bff"
     },
     {
       "id": "sto",

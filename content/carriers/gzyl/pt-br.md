@@ -6,7 +6,7 @@ published: 2026-11-26
 updated: 2026-11-26
 ---
 
-A GZYL (广州云链, Guangzhou Yunlian) é a 广州云链货运代理有限公司, uma agente de cargas em Guangzhou, na China. Se uma loja chinesa enviou seu pedido pela GZYL, seu código tem o formato YL, dez dígitos e YQ: cole-o na caixa acima. O site da GZYL, yunlianhouyun.com, está em chinês, e sua busca de encomendas (小包查询) abre um rastreador em endereço direto de servidor. Leia esse rastreador com atenção: a GZYL costuma gravar boa parte do trajeto com antecedência, de modo que uma etapa ali — inclusive `Delivered` — nem sempre é uma leitura real.
+A GZYL (广州云链, Guangzhou Yunlian) é a 广州云链货运代理有限公司, uma agente de cargas em Guangzhou, na China. Se uma loja chinesa enviou seu pedido pela GZYL, seu código tem o formato YL, dez dígitos e YQ: cole-o na caixa acima. O site da GZYL, yunlianhouyun.com, está em chinês, e sua busca de encomendas (小包查询) abre um rastreador em endereço direto de servidor. Leia esse rastreador com atenção: a GZYL grava boa parte do trajeto com antecedência, de modo que uma etapa ali — inclusive `Delivered` — nem sempre é uma leitura real.
 
 ## Código de rastreamento GZYL: como ele é
 
@@ -17,7 +17,7 @@ Os conhecimentos da GZYL têm YL, dez dígitos e YQ, somando 14 caracteres. Com 
 | `YL4829105736YQ` | YL, dez dígitos e YQ: formato dos conhecimentos da GZYL. O Peek verifica no rastreador da GZYL. |
 | `YL7384829105YQ` | YL738, sete dígitos e YQ: por esse formato, o Peek identifica a GZYL na hora. |
 | `YL482910573YQ` | Apenas nove dígitos: não segue o formato da GZYL. Confira se falta um dígito. |
-| `GZXH4829105736YQ` | GZXH, dez dígitos e YQ: [Xinghe Freight](carrier:xinghe-freight) (星和货运), outra agente de cargas cujo rastreamento roda no rastreador da GZYL, no texto da GZYL. |
+| `GZXH4829105736YQ` | GZXH, dez dígitos e YQ: [Xinghe Freight](carrier:xinghe-freight) (星和货运), outra agente de cargas. O rastreamento dela roda no rastreador da GZYL, com as palavras da GZYL. |
 | `JXCAA4829105736YQ` | Também termina em YQ, como muitos códigos chineses, mas começa com JXC: código da [Juxi Express](carrier:juxi-express). |
 
 Espaços e letras minúsculas não fazem diferença ao colar o código no Peek.
@@ -26,7 +26,7 @@ Espaços e letras minúsculas não fazem diferença ao colar o código no Peek.
 
 ## Status de rastreamento da GZYL explicados
 
-A GZYL escreve suas próprias etapas em inglês, inclusive com erros de grafia. Na ordem em que costumam aparecer:
+A GZYL escreve suas próprias etapas em inglês, inclusive com erros de grafia. Na ordem em que a encomenda passa por elas:
 
 | A GZYL mostra | O que significa para você | O Peek exibe |
 | --- | --- | --- |
@@ -54,13 +54,13 @@ A GZYL escreve suas próprias etapas em inglês, inclusive com erros de grafia. 
 
 **Horários.** Todo horário no rastreador da GZYL segue o relógio de Pequim, inclusive etapas no seu país, sem fuso exibido. No inverno do hemisfério norte, 20:00 lá equivale ao meio-dia em Londres e às 7:00 em Nova York.
 
-**Etapas escritas antecipadamente.** A GZYL pode gravar toda a linha do tempo de uma encomenda bem antes das datas exibidas, da coleta à última etapa no seu país, e o rastreador revela cada etapa quando o horário chega. Uma etapa gravada assim é um plano previsto, não uma leitura real. A [Meiteshun](carrier:mtscn), na mesma plataforma, também faz isso. O cronograma da GZYL termina então em um `Delivered` inserido pela plataforma em lote noturno no dia exibido: datado no dia seguinte à última etapa prevista, em horário comercial de Pequim, qualquer que seja o país. Serviços de rastreamento que copiam o registro da GZYL podem mostrar essas etapas também, então um `Delivered` no rastreador da GZYL ou noutro serviço não prova que o pacote chegou.
+**Etapas escritas antecipadamente.** A GZYL pode gravar toda a linha do tempo de uma encomenda bem antes das datas exibidas, da coleta à última etapa no seu país, e o rastreador revela cada etapa quando o horário chega. Uma etapa gravada assim é um plano previsto, não uma leitura real. A [Meiteshun](carrier:mtscn), na mesma plataforma, também faz isso. O cronograma da GZYL termina então em um `Delivered` inserido pela plataforma em lote noturno no dia exibido: datado no dia seguinte à última etapa prevista, em horário comercial de Pequim, qualquer que seja o país. Serviços de rastreamento que copiam o registro da GZYL podem mostrar essas etapas também, então um `Delivered` no rastreador da GZYL ou em um serviço de rastreamento não prova que o pacote chegou.
 
 ## Quem entrega encomendas da GZYL
 
 O Peek não sabe quem entrega encomendas da GZYL nos EUA, Reino Unido, Irlanda, Canadá ou Austrália: as etapas no país de destino não citam nenhuma transportadora. A única empresa para a qual o Peek pode transferir um envio GZYL é a [Swiss Post](carrier:swiss-post), na Suíça e em Liechtenstein.
 
-Não há prazos de entrega divulgados pela GZYL nem regras sobre tentativas, pontos de retirada ou guarda: valem as regras da empresa que entrega. Na página de rastreamento da GZYL, observe a coluna 渠道转单号 (código de transferência) e 跟踪号码 (número de rastreamento) caso contenha algo diferente do seu código YL…YQ: qualquer um deles pode ser o código da transportadora local, que você pode adicionar ao Peek como encomenda separada. Se não houver nenhum, pergunte ao vendedor qual empresa entrega e peça o código dela.
+O Peek não encontrou prazos de entrega da GZYL nem regras sobre tentativas, pontos de retirada ou guarda: são da empresa que entrega. Na página de rastreamento da GZYL, observe a coluna 渠道转单号 (código de transferência) e 跟踪号码 (número de rastreamento) caso contenha algo diferente do seu código YL…YQ: qualquer um deles pode ser o código da transportadora local, que você pode adicionar ao Peek como encomenda separada. Se não houver nenhum, pergunte ao vendedor qual empresa entrega e peça o código dela.
 
 ## Encomenda GZYL que não chega ou rastreamento parado
 
@@ -86,7 +86,7 @@ O [Peek](/) identifica a GZYL na hora para códigos iniciados por YL738 com mais
 
 O Peek lê o próprio rastreador da GZYL e mostra o status, cada etapa com sua localidade e o país de destino quando consta no registro. Os horários são lidos no horário de Pequim e exibidos no fuso horário do seu aparelho; em peektracker.com e nos aplicativos iPhone e Android, o histórico termina com "Horários no seu fuso horário:" seguido do nome do fuso. O Peek omite nomes, endereços, códigos postais, peso, taxas, assinatura e comprovante de entrega que o registro possa conter, e não mostra previsão de entrega porque a GZYL não fornece nenhuma.
 
-O Peek retém qualquer etapa gravada mais de doze horas antes do horário exibido, qualquer etapa gravada no mesmo segundo que outra gravada mais de meia hora antes do seu horário (exceto o registro do pedido) e qualquer etapa datada após a consulta no horário de Pequim. Em pedidos com etapas previstas, retém também `Delivered`, mesmo quando gravado no próprio dia. Quando a interface de dados do rastreador não tem etapas para o código, o Peek lê a página de rastreamento da GZYL; como essa página não informa quando cada etapa foi gravada, o Peek retém ali todos os `Delivered`. Ele segue apenas as etapas mantidas, nunca o status resumido. Um pedido cujas etapas sejam todas retidas fica ainda sem histórico no Peek, que exibe "Aguardando GZYL" sem pedir para conferir o código — pois considera etapas previstas como sinal de que a GZYL tem o pedido, assim como um envio listado ainda sem leitura — e continua consultando o rastreador da GZYL. O Peek também descarta cópias de serviços de rastreamento das etapas retidas como plano da GZYL, inclusive `Delivered`, mesmo mantendo outras etapas. Quando o rastreador da GZYL não responde, porém, o Peek consulta serviços de rastreamento, cujas cópias podem incluir etapas previstas.
+O Peek retém qualquer etapa gravada mais de doze horas antes do horário exibido, qualquer etapa gravada no mesmo segundo que outra gravada mais de meia hora antes do seu horário (exceto o registro do pedido) e qualquer etapa datada após a consulta no horário de Pequim. Em pedidos com etapas previstas, retém também `Delivered`, mesmo quando gravado no próprio dia. Quando a interface de dados do rastreador não tem etapas para o código, o Peek lê a página de rastreamento da GZYL; como essa página não informa quando cada etapa foi gravada, o Peek retém ali todos os `Delivered`. Ele segue apenas as etapas mantidas, nunca o status resumido. Um pedido cujas etapas sejam todas retidas fica ainda sem histórico no Peek, que exibe "Aguardando GZYL" sem pedir para conferir o código — pois considera etapas previstas como sinal de que a GZYL tem o pedido, assim como um envio listado ainda sem leitura — e continua consultando o rastreador da GZYL. O Peek também põe de lado cópias de serviços de rastreamento das etapas retidas como plano da GZYL, inclusive `Delivered`, mesmo mantendo outras etapas. Quando o rastreador da GZYL não responde, porém, o Peek consulta serviços de rastreamento, cujas cópias podem incluir etapas previstas.
 
 Exceto pela transferência para a Swiss Post, o Peek permanece na GZYL: se o vendedor informar o código da transportadora local, adicione-o separadamente. Enquanto você mantém a encomenda aberta, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos — e até a cada 2 minutos no dia em que mostrar "Saiu para entrega" (a partir das 6h locais ou, se a transportadora der janela horária, meia hora antes de abrir), enquanto o próprio rastreador da GZYL ou da Swiss Post responde, embora nenhuma etapa conhecida da GZYL gere esse status. Nos demais horários, consulta a cada hora. Por serviços de rastreamento, a cada hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega sob a mesma condição. Quando a Swiss Post assume, o Peek segue o ritmo dela. Após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica a cada hora. Pode notificar cada movimentação, etapas importantes ou só a entrega: "Etapas importantes" cobre as duas etapas aduaneiras da GZYL e `Delivered`, não voos nem triagem. Não pode contatar a GZYL nem o vendedor por você.
 
@@ -102,7 +102,7 @@ Não necessariamente. YL, dez dígitos e YQ é o formato da GZYL, e nenhuma outr
 
 ### Por que a GZYL diz que meu pacote foi entregue se não chegou?
 
-Pode fazer parte do cronograma previsto pela GZYL. Ela costuma escrever grande parte da linha do tempo antecipadamente encerrando em `Delivered`, e essas etapas são previsões, não leituras reais. O Peek nunca conta essas etapas do rastreador da GZYL como leituras — inclusive `Delivered` — e, quando exibe "Entregue", acrescenta que o rastreamento da GZYL segue cronograma fixo. Avise o vendedor e pergunte qual empresa faz a entrega.
+Pode fazer parte do cronograma previsto pela GZYL. Ela escreve grande parte da linha do tempo antecipadamente e a encerra em `Delivered`, e essas etapas são previsões, não leituras reais. O Peek nunca conta essas etapas do rastreador da GZYL como leituras — inclusive `Delivered` — e, quando exibe "Entregue", acrescenta que o rastreamento da GZYL segue cronograma fixo. Avise o vendedor e pergunte qual empresa faz a entrega.
 
 ### Quem entrega encomendas da GZYL no meu país?
 

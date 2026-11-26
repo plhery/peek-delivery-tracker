@@ -25,7 +25,7 @@ Espaços, hifens e letras minúsculas não fazem diferença ao colar o código n
 
 ## Status de rastreamento da Xinghe Freight explicados
 
-Como o rastreamento da Xinghe usa o rastreador da GZYL, as etapas aparecem no texto da GZYL: em inglês, inclusive com erros de grafia. O Peek interpreta os registros pela lista de etapas da GZYL. Na ordem em que costumam surgir:
+Como o rastreamento da Xinghe usa o rastreador da GZYL, as etapas aparecem no texto da GZYL: em inglês, inclusive com erros de grafia. O Peek interpreta os registros pela lista de etapas da GZYL. Na ordem em que a encomenda passa por elas:
 
 | O rastreador mostra | O que significa para você | O Peek exibe |
 | --- | --- | --- |

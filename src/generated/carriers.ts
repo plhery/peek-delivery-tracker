@@ -15534,6 +15534,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8300"
     },
     {
+      "id": "quick-rabbit",
+      "catalog": "quick-rabbit",
+      "slug": "rastreamento-quick-rabbit",
+      "title": "Rastreamento Quick Rabbit: códigos PKG, status e Citibox",
+      "name": "Quick Rabbit",
+      "color": "#f6851f"
+    },
+    {
       "id": "huaya-express",
       "catalog": "huaya-express",
       "slug": "rastreamento-huaya-express",
@@ -15652,6 +15660,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento JD Logistics: códigos JD, status e contato",
       "name": "JD Logistics",
       "color": "#e1251b"
+    },
+    {
+      "id": "singapore-post",
+      "catalog": "singapore-post",
+      "slug": "rastreamento-singapore-post",
+      "title": "Rastreamento Singapore Post (SingPost): códigos e status",
+      "name": "Singapore Post",
+      "color": "#2e5da8"
     },
     {
       "id": "zto",
@@ -19348,6 +19364,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8300"
     },
     {
+      "id": "quick-rabbit",
+      "catalog": "quick-rabbit",
+      "slug": "quick-rabbit-wuliu-chaxun",
+      "title": "Quick Rabbit 物流查询：PKG 单号、状态与 Citibox",
+      "name": "Quick Rabbit",
+      "color": "#f6851f"
+    },
+    {
       "id": "huaya-express",
       "catalog": "huaya-express",
       "slug": "huaya-yuntong-wuliu-chaxun",
@@ -19482,6 +19506,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "京东物流（JD Logistics）国际查询：单号、状态与客服",
       "name": "JD Logistics",
       "color": "#e1251b"
+    },
+    {
+      "id": "singapore-post",
+      "catalog": "singapore-post",
+      "slug": "singapore-post-wuliu-chaxun",
+      "title": "新加坡邮政（Singapore Post / SingPost）物流查询",
+      "name": "Singapore Post",
+      "color": "#2e5da8"
     },
     {
       "id": "zto",

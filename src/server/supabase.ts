@@ -749,6 +749,8 @@ export class SupabaseClient {
         subscribed_at: now,
         disabled_at: null,
         last_error: null,
+        retry_failures: 0,
+        retry_at: null,
         updated_at: now,
       },
       prefer: 'resolution=merge-duplicates,return=representation',
@@ -1074,6 +1076,25 @@ export class SupabaseClient {
     return rows(await this.request(`/rest/v1/pending_native_push_notifications?${params}`));
   }
 
+  /** What the apps read to show the parcels under a carrier (`displayedCarrierId`), as parcel rows (`toParcel`). */
+  async shownCarrierRows(packageIds: string[]): Promise<JsonObject[]> {
+    const ids = [...new Set(packageIds)];
+    // A hundred ids a request keeps the address short.
+    const chunks = Array.from({ length: Math.ceil(ids.length / 100) }, (_, index) => ids.slice(index * 100, index * 100 + 100));
+    const found = (await Promise.all(chunks.map(async (chunk) => rows(await this.request(`/rest/v1/packages?${query([
+      ['id', `in.(${chunk.join(',')})`],
+      ['select', 'id,carrier,tracking_number,active_tracking_carrier:carrier_data->>active_tracking_carrier,original_carrier:carrier_data->>original_carrier,served_elsewhere:carrier_data->routing->served_elsewhere'],
+    ])}`))))).flat();
+    return found.map(({ active_tracking_carrier, original_carrier, served_elsewhere, ...row }) => ({
+      ...row,
+      carrier_data: {
+        ...typeof active_tracking_carrier === 'string' ? { active_tracking_carrier } : {},
+        ...typeof original_carrier === 'string' ? { original_carrier } : {},
+        ...isRecord(served_elsewhere) ? { routing: { served_elsewhere } } : {},
+      },
+    }));
+  }
+
   async listPendingLiveActivityEvents(): Promise<JsonObject[]> {
     const params = query({ select: '*', order: 'event_created_at.asc', limit: '1000' });
     return rows(await this.request(`/rest/v1/pending_live_activity_events?${params}`));
@@ -1153,6 +1174,19 @@ export class SupabaseClient {
       body: { ...values, updated_at: new Date().toISOString() },
       prefer: 'return=minimal',
     });
+  }
+
+  /** The devices among these whose sends were refused in a row: how many, and when the next may go (`retry_at`). */
+  async nativePushRetries(deviceIds: string[]): Promise<Map<string, { failures: number; at: number }>> {
+    const ids = [...new Set(deviceIds)];
+    const pages = Array.from({ length: Math.ceil(ids.length / 100) }, (_, page) => ids.slice(page * 100, page * 100 + 100));
+    const found = (await Promise.all(pages.map(async (page) => rows(await this.request(`/rest/v1/native_push_devices?${query([
+      ['id', `in.(${page.join(',')})`],
+      ['retry_failures', 'gt.0'],
+      ['select', 'id,retry_failures,retry_at'],
+    ])}`))))).flat();
+    return new Map(found.flatMap(({ id, retry_failures, retry_at }) => typeof id === 'string' && Number.isInteger(retry_failures)
+      ? [[id, { failures: retry_failures as number, at: typeof retry_at === 'string' ? Date.parse(retry_at) || 0 : 0 }] as const] : []));
   }
 
   async updateNativePushDevice(deviceId: string, values: JsonObject): Promise<void> {

@@ -140,6 +140,8 @@ Key server modules:
   the collapse key. A distributor may refuse each send for hours, as ntfy does with 507
   while the phone's app is not connected, so a device whose send failed waits before the
   next: a minute, twice as long after each failure in a row, up to a quarter of an hour.
+  The device keeps the failures and the wait (`retry_failures`, `retry_at`), so a server just
+  deployed waits and counts on as the last one did.
   Its notices stay pending until one goes through or they are a day old. A device refused
   five times in a row while its oldest notice has waited half a day is put away, until the
   app registers again at its next launch. Without one, the notices wait in its inbox, which the app empties
@@ -1045,7 +1047,10 @@ Android app's [`APIClient.kt`](../android/core/src/main/kotlin/com/plhery/peekde
 
 ## Notifications and Live Activities
 
-- Web Push, APNs and Live Activities use the same status sentences. Delivered alerts show
+- Web Push, APNs and Live Activities use the same status sentences. A Live Activity names
+  the carrier its parcel's cards and widgets show it under (`displayedCarrierId`), whether the
+  app or the server writes it, and a carrier the catalog does not hold as an unknown one,
+  never by its id. Delivered alerts show
   the carrier's event time when the carrier gave a clock time. The push carries the scan's
   instant and the sentence with the time left out (`deviceClockFields` in
   [`push.ts`](../src/server/push.ts)), so the device that shows it writes the time on its own

@@ -151,6 +151,7 @@ describe('an account\'s notices to a UnifiedPush device', () => {
     vi.spyOn(client, 'latestScanTimes').mockResolvedValue(new Map());
     vi.spyOn(client, 'packageJoinTimes').mockResolvedValue(new Map());
     vi.spyOn(client, 'archivedPackageIds').mockResolvedValue(new Set());
+    vi.spyOn(client, 'nativePushRetries').mockResolvedValue(new Map());
     post = vi.spyOn(publicAddress, 'postToPublicEndpoint').mockResolvedValue(507);
   });
 
@@ -196,6 +197,27 @@ describe('an account\'s notices to a UnifiedPush device', () => {
       clock += wait;
       expect(await service.dispatch()).toMatchObject({ attempted: 1, failed: 1, expired: 0 });
     }
+  });
+
+  it('keep the wait and the refusals on the device, so that a server just started waits and counts on as the last did', async () => {
+    const update = vi.mocked(client.updateNativePushDevice);
+    await service.dispatch();
+    expect(update).toHaveBeenLastCalledWith('device-1', expect.objectContaining({
+      retry_failures: 1, retry_at: new Date(clock + 60_000).toISOString(),
+    }));
+    // A deploy: the new server reads them.
+    vi.mocked(client.nativePushRetries).mockResolvedValue(new Map([['device-1', { failures: 4, at: clock + 60_000 }]]));
+    const started = () => new UnifiedPushNotificationService(client, vapid.publicKey, vapid.privateKey, 'https://delivery.example', () => clock / 1_000);
+    expect(await started().dispatch()).toMatchObject({ attempted: 0 });
+    expect(client.nativePushRetries).toHaveBeenCalledWith(['device-1']);
+    clock = Date.parse('2026-10-03T00:40:00Z');
+    vi.mocked(client.nativePushRetries).mockResolvedValue(new Map([['device-1', { failures: 4, at: clock - 1 }]]));
+    // Its fifth refusal in a row, the oldest notice waiting half a day: put away.
+    expect(await started().dispatch()).toMatchObject({ attempted: 1, expired: 1 });
+    post.mockResolvedValue(201);
+    vi.mocked(client.nativePushRetries).mockResolvedValue(new Map([['device-1', { failures: 2, at: clock - 1 }]]));
+    expect(await started().dispatch()).toMatchObject({ sent: 1 });
+    expect(update).toHaveBeenLastCalledWith('device-1', expect.objectContaining({ last_error: null, retry_failures: 0, retry_at: null }));
   });
 
   it('count a refusal of the server, as of its VAPID signature, as a failure of its own', async () => {

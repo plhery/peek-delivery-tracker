@@ -16366,6 +16366,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#feba30"
     },
     {
+      "id": "chukou1",
+      "catalog": "chukou1",
+      "slug": "chukou1-tracking",
+      "title": "Rastreamento Chukou1 (CK1): EC-FirstClass, repasses e ajuda",
+      "name": "Chukou1",
+      "color": "#0b4da2"
+    },
+    {
       "id": "cj-packet",
       "catalog": "cj-packet",
       "slug": "cj-packet-tracking",
@@ -16404,6 +16412,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento BUFFALO: códigos BUFZA, alfândega e suporte",
       "name": "BUFFALO",
       "color": "#bc8c4d"
+    },
+    {
+      "id": "chit-chats",
+      "catalog": "chit-chats",
+      "slug": "chit-chats-tracking",
+      "title": "Rastreamento Chit Chats: códigos de 10 dígitos e USPS",
+      "name": "Chit Chats",
+      "color": "#db2b35"
     },
     {
       "id": "kuehne-nagel",
@@ -20794,6 +20810,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "BUFFALO 国际物流单号查询：BUFZA 轨迹、南非清关与客服",
       "name": "BUFFALO",
       "color": "#bc8c4d"
+    },
+    {
+      "id": "chit-chats",
+      "catalog": "chit-chats",
+      "slug": "chit-chats-tracking",
+      "title": "Chit Chats 加拿大跨境追踪：10 位单号、USPS 交接与客服",
+      "name": "Chit Chats",
+      "color": "#db2b35"
     },
     {
       "id": "kuehne-nagel",

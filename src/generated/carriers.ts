@@ -15238,6 +15238,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#234182"
     },
     {
+      "id": "ceska-posta",
+      "catalog": "ceska-posta",
+      "slug": "ceska-posta-czech-post-tracking",
+      "title": "Rastreamento Česká pošta (Correios da Tchéquia) e status",
+      "name": "Česká pošta",
+      "color": "#002776"
+    },
+    {
       "id": "foxpost",
       "catalog": "foxpost",
       "slug": "foxpost-tracking",
@@ -16156,6 +16164,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento GLS Hungria: códigos, lockers e contatos",
       "name": "GLS Hungary",
       "color": "#ffdd00"
+    },
+    {
+      "id": "cj-packet",
+      "catalog": "cj-packet",
+      "slug": "cj-packet-tracking",
+      "title": "Rastreamento CJ Packet: códigos CJP…YQ, entregas e suporte",
+      "name": "CJ Packet",
+      "color": "#ff7700"
     },
     {
       "id": "jumppoint-international",
@@ -19298,6 +19314,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Econt 物流查询：运单号、状态与保加利亚网点",
       "name": "Econt",
       "color": "#234182"
+    },
+    {
+      "id": "ceska-posta",
+      "catalog": "ceska-posta",
+      "slug": "ceska-posta-czech-post-tracking",
+      "title": "捷克邮政（Česká pošta）物流查询：单号、状态与 Balíkovna",
+      "name": "Česká pošta",
+      "color": "#002776"
     },
     {
       "id": "foxpost",

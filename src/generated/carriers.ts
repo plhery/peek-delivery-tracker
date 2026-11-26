@@ -16214,6 +16214,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#cf5d15"
     },
     {
+      "id": "paquetexpress",
+      "catalog": "paquetexpress",
+      "slug": "paquetexpress-tracking",
+      "title": "Rastreamento Paquetexpress: guías, Ocurre e reclamações",
+      "name": "Paquetexpress",
+      "color": "#002a52"
+    },
+    {
       "id": "a-tu-hora-express",
       "catalog": "a-tu-hora-express",
       "slug": "a-tu-hora-express-tracking",
@@ -16348,6 +16356,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento BFE Express: códigos CK, WYB e status",
       "name": "BFE Express",
       "color": "#122a88"
+    },
+    {
+      "id": "pasarex",
+      "catalog": "pasarex",
+      "slug": "pasarex-tracking",
+      "title": "Rastreamento PasarEX: códigos AMZPSR, alfândega e suporte",
+      "name": "PasarEX",
+      "color": "#124381"
     }
   ],
   "pl": [
@@ -20444,6 +20460,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#cf5d15"
     },
     {
+      "id": "paquetexpress",
+      "catalog": "paquetexpress",
+      "slug": "paquetexpress-tracking",
+      "title": "Paquetexpress 墨西哥快递追踪：运单号、Ocurre 自提与理赔",
+      "name": "Paquetexpress",
+      "color": "#002a52"
+    },
+    {
       "id": "ydh",
       "catalog": "ydh",
       "slug": "ydh-yida-kuajing-chaxun",
@@ -20634,6 +20658,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "BFE Express 国际快递查询：CK 与 WYB 单号、状态与客服",
       "name": "BFE Express",
       "color": "#122a88"
+    },
+    {
+      "id": "pasarex",
+      "catalog": "pasarex",
+      "slug": "pasarex-tracking",
+      "title": "PasarEX 跨境快递追踪：AMZPSR 亚马逊单号、清关与客服",
+      "name": "PasarEX",
+      "color": "#124381"
     }
   ],
   "nl": [

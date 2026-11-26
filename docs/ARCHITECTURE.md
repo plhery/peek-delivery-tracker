@@ -247,7 +247,9 @@ Key server modules:
     `localStorage`, and its photos and PDFs in the browser's IndexedDB (`peek-parcel-files`,
     `src/peek/noteFiles.ts`), at most 200 MB for the device. Keeping the parcel in an account
     sends the note with the claim, then uploads each file to the account's parcel; a file goes
-    from the device once uploaded, and one that fails waits for the next signed-in visit.
+    from the device once uploaded, or once the server says it never will (the parcel has gone,
+    or its size or type is refused). One the account has no room for waits a day before it is
+    offered again; any other failure, the next signed-in visit. The apps do the same.
     Forgetting the parcel deletes both; a frozen copy keeps them. Neither ever reaches a link.
   - A lookup whose number starts with the number of one the browser, or the iPhone or Android
     app, looked up at most 10 minutes earlier replaces that one when it has no scan yet and

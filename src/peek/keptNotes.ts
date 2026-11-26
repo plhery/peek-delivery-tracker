@@ -8,16 +8,17 @@ import {
 
 /**
  * A guest's note goes with the parcel into the account: its words with the claim (`ParcelClaim.note`), its files
- * afterwards, one upload each to the account's parcel. A file leaves the device once it arrived; one that could not go
- * waits for the next visit.
+ * afterwards, one upload each to the account's parcel. A file leaves the device once it arrived, or once the service
+ * says it never will; one that could not go waits for the next visit, a day when the account had no room for it.
  */
 export function sendKeptFiles(auth: ApiAuth): Promise<SentFiles> {
   return sendKeptNoteFiles(async (packageId, blob, name) => {
     try {
       await uploadPackageFile(packageId, blob, name, auth);
     } catch (error) {
-      // The parcel has left the account since, and its note with it: the file has nowhere to go.
-      if (error instanceof NoteFileError && error.status === 404) return;
+      // The parcel has left the account since, and its note with it, or the service will never take this file (its
+      // size or type): it has nowhere to go.
+      if (error instanceof NoteFileError && (error.status === 404 || error.status === 413 || error.status === 415)) return;
       throw error;
     }
   });

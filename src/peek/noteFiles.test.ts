@@ -8,7 +8,7 @@ import { MemoryIndexedDB } from '../test/memoryIndexedDB';
 import {
   addDeviceNoteFile, deviceNoteFileBlob, deviceNoteFiles, deviceNoteFilesOf, forgetAllDeviceNoteFiles, forgetDeviceNoteFiles,
   handOverDeviceNoteFiles, loadDeviceNoteFiles, removeDeviceNoteFile, resetDeviceNoteFilesForTests, sendKeptNoteFiles,
-  useAllDeviceNoteFiles, type DeviceNoteFile,
+  useAllDeviceNoteFiles, type DeviceNoteFile, type SendNoteFile,
 } from './noteFiles';
 
 let idb: MemoryIndexedDB;
@@ -129,6 +129,24 @@ describe("a guest's note files", () => {
     expect(await sendKeptNoteFiles(send)).toEqual({ sent: 1, left: 0 });
     expect(send.mock.calls.map(([, , name]) => name)).toEqual(['Receipt.pdf']);
     expect(deviceNoteFiles().map((file) => file.name)).toEqual(['Door.jpg']);
+  });
+
+  it('offers a file the account had no room for again a day later, not on every visit', async () => {
+    await addDeviceNoteFile('link-1', picked('Box.jpg', 10));
+    await handOverDeviceNoteFiles('link-1', 'package-1');
+    const start = Date.parse('2026-11-26T10:00:00Z');
+    const send = vi.fn<SendNoteFile>(async () => { throw new NoteFileError('account-full', 10, 409); });
+
+    expect(await sendKeptNoteFiles(send, () => start)).toEqual({ sent: 0, left: 1 });
+    // Read again from the database, as on the next visit: the refusal was kept with the file.
+    resetDeviceNoteFilesForTests();
+    expect(await sendKeptNoteFiles(send, () => start + 60 * 60 * 1000)).toEqual({ sent: 0, left: 1 });
+    expect(send).toHaveBeenCalledTimes(1);
+
+    send.mockResolvedValue(undefined);
+    expect(await sendKeptNoteFiles(send, () => start + 25 * 60 * 60 * 1000)).toEqual({ sent: 1, left: 0 });
+    expect(send).toHaveBeenCalledTimes(2);
+    expect(deviceNoteFiles()).toEqual([]);
   });
 
   it('joins a send already on its way, and sends what was handed over meanwhile', async () => {

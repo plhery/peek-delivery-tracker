@@ -6,7 +6,7 @@ import type { ParcelFileType } from '../types';
  * The photos and PDFs of a guest's notes, kept in this browser's IndexedDB beside the note's words in `recents.ts`: a
  * Blob per file with its name, type, size, link and when it was added. Kept with a parcel in an account, each one is
  * marked with the account's parcel, sent there, and deleted here once it arrived; one that failed waits for the next
- * visit.
+ * visit, and one the account had no room for waits a day.
  */
 const DATABASE = 'peek-parcel-files';
 const STORE = 'files';
@@ -20,6 +20,8 @@ export interface DeviceNoteFile {
   created: string;
   /** The account's parcel it goes to, once the parcel was kept there. */
   packageId?: string;
+  /** When the account last had no room for it (ms): it is offered again a day later. */
+  refusedAt?: number;
 }
 
 interface StoredFile extends DeviceNoteFile { blob: Blob }
@@ -65,8 +67,8 @@ function database(): Promise<IDBDatabase | null> {
 }
 
 /** What a stored file is, without its bytes. */
-function described({ id, linkId, name, type, size, created, packageId }: StoredFile): DeviceNoteFile {
-  return { id, linkId, name, type, size, created, ...(packageId ? { packageId } : {}) };
+function described({ id, linkId, name, type, size, created, packageId, refusedAt }: StoredFile): DeviceNoteFile {
+  return { id, linkId, name, type, size, created, ...(packageId ? { packageId } : {}), ...(refusedAt ? { refusedAt } : {}) };
 }
 
 /** Reads the device's files once per page; later calls wait for that read. */
@@ -210,22 +212,46 @@ export function moveDeviceNoteFiles(fromLinkId: string, toLinkId: string): Promi
   return relabel(fromLinkId, { linkId: toLinkId });
 }
 
-/** Sends one file to the account's parcel; resolves too when that parcel has gone, and the file with it. */
+/**
+ * Sends one file to the account's parcel; resolves too when the file can never go there (the parcel has gone, or the
+ * service refuses its size or type), and the file leaves the device. A 409 `NoteFileError` says the account had no room.
+ */
 export type SendNoteFile = (packageId: string, blob: Blob, name: string) => Promise<void>;
+
+/** How long a file the account had no room for waits before it is offered again. */
+export const REFUSED_WAIT_MS = 24 * 60 * 60 * 1000;
+
+/** Notes when the account last had no room for a file, here and in the database. */
+async function markRefused(id: string, at: number): Promise<void> {
+  publish(files.map((file) => file.id === id ? { ...file, refusedAt: at } : file));
+  const db = await database();
+  if (!db) return;
+  const transaction = db.transaction(STORE, 'readwrite');
+  const store = transaction.objectStore(STORE);
+  const request = store.get(id) as IDBRequest<StoredFile | undefined>;
+  request.onsuccess = () => { if (request.result) store.put({ ...request.result, refusedAt: at }); };
+  await finished(transaction).catch(() => undefined);
+}
 
 /** How many files reached the account, and how many wait for the next visit. */
 export interface SentFiles { sent: number; left: number }
 
-async function sendOnce(send: SendNoteFile): Promise<SentFiles> {
+async function sendOnce(send: SendNoteFile, now: () => number): Promise<SentFiles> {
   await loadDeviceNoteFiles();
   const sent: SentFiles = { sent: 0, left: 0 };
   for (const file of files.filter((candidate) => candidate.packageId)) {
+    // A file the account had no room for isn't sent again, ten megabytes at a time, on every visit.
+    if (file.refusedAt && now() - file.refusedAt < REFUSED_WAIT_MS) {
+      sent.left += 1;
+      continue;
+    }
     try {
       const blob = await deviceNoteFileBlob(file.id);
       if (blob) await send(file.packageId!, blob, file.name);
       await deleteStored([file.id]);
       if (blob) sent.sent += 1;
-    } catch {
+    } catch (error) {
+      if (error instanceof NoteFileError && error.status === 409) await markRefused(file.id, now());
       sent.left += 1;
     }
   }
@@ -237,10 +263,10 @@ let again = false;
 
 /**
  * Sends the files of parcels kept in the account, one at a time, deleting each from the device once it arrived. One
- * that fails stays for the next visit. A call while files are on their way joins them, and what was handed over
- * meanwhile goes next.
+ * that fails stays for the next visit; one the account had no room for, for a visit a day later. A call while files
+ * are on their way joins them, and what was handed over meanwhile goes next.
  */
-export function sendKeptNoteFiles(send: SendNoteFile): Promise<SentFiles> {
+export function sendKeptNoteFiles(send: SendNoteFile, now: () => number = Date.now): Promise<SentFiles> {
   if (sending) {
     again = true;
     return sending;
@@ -249,7 +275,7 @@ export function sendKeptNoteFiles(send: SendNoteFile): Promise<SentFiles> {
     const total: SentFiles = { sent: 0, left: 0 };
     do {
       again = false;
-      const pass = await sendOnce(send);
+      const pass = await sendOnce(send, now);
       total.sent += pass.sent;
       total.left = pass.left;
     } while (again);

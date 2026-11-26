@@ -173,6 +173,21 @@ describe("a guest's note kept in an account", () => {
     await vi.waitFor(() => expect(deviceNoteFiles()).toEqual([]));
   });
 
+  it.each([413, 415])('drops a file the service will never take (%i)', async (status) => {
+    await addDeviceNoteFile(LINK_ID, picked('Box.jpg'));
+    FakeUpload.status = status;
+    await handOverNoteFiles(LINK_ID, 'package-1', auth);
+    await vi.waitFor(() => expect(deviceNoteFiles()).toEqual([]));
+  });
+
+  it('keeps a file the account has no room for', async () => {
+    await addDeviceNoteFile(LINK_ID, picked('Box.jpg'));
+    FakeUpload.status = 409;
+    await handOverNoteFiles(LINK_ID, 'package-1', auth);
+    await vi.waitFor(() => expect(deviceNoteFiles()[0]?.refusedAt).toBeGreaterThan(0));
+    expect(deviceNoteFiles()).toHaveLength(1);
+  });
+
   it('moves into the demo’s parcel, words and files', async () => {
     await addDeviceNoteFile(LINK_ID, picked('Box.jpg'));
     const added: string[] = [];

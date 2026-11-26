@@ -10,7 +10,7 @@ A Techlink (智禾国际物流, Zhihe International Logistics) é uma empresa de
 
 ## Código de rastreamento Techlink: como ele é
 
-A Techlink não publica um formato oficial. Seus conhecimentos têm 19 caracteres: ZHPHD, seis dígitos que formam uma data (ano, mês, dia), mais seis dígitos e ML. Com dígitos inventados:
+A Techlink não publica formato de código. Seus conhecimentos têm 19 caracteres: ZHPHD, seis dígitos que formam uma data (ano, mês, dia), mais seis dígitos e ML. Com dígitos inventados:
 
 | Código | O que é |
 | --- | --- |
@@ -26,9 +26,9 @@ Letras minúsculas e espaços não fazem diferença ao colar o código no Peek. 
 
 A página de rastreamento da Techlink aceita até 40 códigos por vez, um por linha ou separados por vírgula. Ela permanece em chinês mesmo quando o menu é trocado para inglês. Para cada código, exibe o último evento, a quantidade de eventos (`条轨迹`, "leituras") e os países de origem e destino em chinês. Clique na linha ou em `展开全部` ("expandir tudo") para ver todas as movimentações com horário e local.
 
-Um ícone colorido na frente de cada código resume o último evento: ▤ no armazém da Techlink, ➤ em trânsito ou em rota de entrega, ✓ verde entregue, ! vermelho problema como entrega frustrada e ? nada encontrado.
+Um ícone colorido na frente de cada código resume o último evento: ▤ no armazém da Techlink, ➤ em trânsito ou em rota de entrega, ✓ verde entregue, ! vermelho problema como entrega não realizada e ? nada encontrado.
 
-A Techlink não publica lista oficial de eventos. Ela registra cada movimentação em inglês e chinês, com horário e, na maioria dos casos, o país. Linhas observadas no rastreador:
+A Techlink não publica lista de eventos. Ela registra cada movimentação em inglês e chinês, com horário e, na maioria dos casos, o país. Linhas vistas no rastreador até agora:
 
 | A Techlink mostra | O que significa para você |
 | --- | --- |
@@ -55,7 +55,7 @@ Para códigos desconhecidos, a página mostra `查询不到轨迹` ("sem rastrea
 
 ## Quem entrega encomendas da Techlink
 
-A Techlink não informa. Sua página inicial descreve linhas porta a porta: frete aéreo saindo da China, desembaraço aduaneiro por empresa própria criada no exterior em 2023 e entrega por contas próprias junto a transportadoras do país de destino. O site não cita nenhuma dessas empresas, e o rastreador também não informa o nome delas. Na Itália, porém, históricos lidos pelo Peek mostram pacotes indo para a [iMile](carrier:imile): o rastreador repassa linhas da iMile que começam com o centro entre colchetes, como `【Milan center】Parcel shipped to【VEN 07】.` Na Austrália, a [J&T Express Australia](carrier:j-and-t-au) assume após o voo, aparecendo desde `The parcel has been successfully picked up and is being prepared for transportation.` (tabela acima). Nos Estados Unidos, a Techlink repassa eventos da [YWE](carrier:ywe), que entrega parte dos envios lá, como `Parcel departed from Facility.` e `Parcel received by local Facility.` (estação de entrega), até `Parcel is out for delivery.` ou tentativa frustrada.
+A Techlink não informa. Sua página inicial descreve linhas porta a porta: frete aéreo saindo da China, desembaraço aduaneiro por empresa própria criada no exterior em 2023 e entrega por contas próprias junto a transportadoras do país de destino. O site não cita nenhuma dessas empresas, e o rastreador também não informa o nome delas. Na Itália, porém, históricos lidos pelo Peek mostram pacotes indo para a [iMile](carrier:imile): o rastreador repassa linhas da iMile que começam com o centro entre colchetes, como `【Milan center】Parcel shipped to【VEN 07】.` Na Austrália, a [J&T Express Australia](carrier:j-and-t-au) assume após o voo, aparecendo desde `The parcel has been successfully picked up and is being prepared for transportation.` (tabela acima). Nos Estados Unidos, a Techlink repassa eventos da [YWE](carrier:ywe), que entrega parte dos envios lá, como `Parcel departed from Facility.` e `Parcel received by local Facility.` (estação de entrega), até `Parcel is out for delivery.` ou uma entrega não realizada.
 
 Os registros do rastreador podem guardar o código da transportadora entregadora sem o nome dela, e a página da Techlink não tem campo para exibi-lo. Assim que souber qual transportadora entrega, o rastreamento dela mostra o resto e valem as regras dela para tentativas, avisos, pontos de retirada e guarda. A Techlink não publica nada disso.
 
@@ -65,7 +65,7 @@ O serviço porta a porta da Techlink opera com impostos pagos (DDP) ou não pago
 
 **Apenas `Parcel electronic information received`.** O vendedor registrou o envio, mas o pacote ainda não chegou ao armazém da Techlink. Se nada mudar após vários dias, pergunte ao vendedor se foi despachado.
 
-**Parada após `Arrive at the destination airport`.** O voo pousou no seu país. A alfândega de importação e o repasse à transportadora local vêm depois e podem gerar dias sem leitura. Depois dessa linha, o rastreador da Techlink mostrou até hoje apenas etapas dentro do país de destino — um hub, um centro de triagem e a saída dele, as cinco linhas a partir de `Shipment Received at Facility` acima — e, em alguns pacotes, leituras da entregadora local até `Parcel is out for delivery.` ou falha na entrega. Se continuar parado, pergunte ao vendedor qual transportadora faz a entrega e peça o código dela. Veja mais em [por que o rastreamento para de atualizar](guide:tracking-not-updating) e [rastrear encomendas da China](guide:tracking-from-china).
+**Parada após `Arrive at the destination airport`.** O voo pousou no seu país. A alfândega de importação e o repasse à transportadora local vêm depois e podem gerar dias sem leitura. Depois dessa linha, o rastreador da Techlink mostrou até hoje apenas etapas dentro do país de destino — um hub, um centro de triagem e a saída dele, as cinco linhas a partir de `Shipment Received at Facility` acima — e, em alguns pacotes, leituras da entregadora local até `Parcel is out for delivery.` ou uma entrega não realizada. Se continuar parado, pergunte ao vendedor qual transportadora faz a entrega e peça o código dela. Veja mais em [por que o rastreamento para de atualizar](guide:tracking-not-updating) e [rastrear encomendas da China](guide:tracking-from-china).
 
 **Nada encontrado.** Confira o código com o vendedor: códigos ZHPHD têm exatamente 19 caracteres. Um pacote recém-registrado também pode ainda não mostrar nada.
 
@@ -81,7 +81,7 @@ Sobre o seu pedido, fale com o vendedor. Para problemas de entrega no seu país,
 
 O [Peek](/) identifica Techlink na hora para códigos ZHPHD: nenhuma outra transportadora no catálogo usa esse formato. Não há link da Techlink para colar, pois a página de rastreamento não inclui o código no endereço.
 
-O Peek lê o próprio rastreador da Techlink — o mesmo usado pela página oficial — e mostra o status, cada movimentação com o país e o país de destino. As linhas em inglês aparecem como a Techlink as escreve. Leituras na China e qualquer linha no exterior iniciada pelo nome do centro entre colchetes (`【…】`) são lidas no relógio da China; leituras da J&T Express Australia em envios à Austrália, no horário de Sydney (independentemente do estado do depósito); as demais, no relógio do país correspondente. O Peek exibe tudo no fuso horário do seu aparelho. A Techlink não informa data prevista, peso nem nome do serviço, portanto o Peek não mostra nenhum deles.
+O Peek lê o próprio rastreador da Techlink — o mesmo usado pela página de rastreamento dela — e mostra o status, cada movimentação com o país e o país de destino. As linhas em inglês aparecem como a Techlink as escreve. Leituras na China e qualquer linha no exterior iniciada pelo nome do centro entre colchetes (`【…】`) são lidas no relógio da China; leituras da J&T Express Australia em envios à Austrália, no horário de Sydney (independentemente do estado do depósito); as demais, no relógio do país correspondente. O Peek exibe tudo no fuso horário do seu aparelho. A Techlink não informa data prevista, peso nem nome do serviço, portanto o Peek não mostra nenhum deles.
 
 Quando o registro da Techlink traz o código da transportadora entregadora, o Peek analisa o formato: um número postal internacional (duas letras, nove dígitos e duas letras) aponta para os correios do país de destino; um formato exclusivo de uma transportadora no catálogo aponta para ela. Quando o Peek lê o próprio rastreador dessa empresa, ele a consulta e migra para ela assim que surgir progresso tão recente quanto o da Techlink; a encomenda mantém o código ZHPHD e mostra o outro ao lado. Sem essa correspondência, o Peek permanece no rastreador da Techlink, cujas linhas conhecidas terminam em `Arrive at the destination airport` ou poucos passos depois no país de destino.
 
@@ -103,7 +103,7 @@ Uma transportadora no seu país que a Techlink não divulga; na Itália o rastre
 
 ### Por que meu rastreamento da Techlink parou?
 
-As leituras vistas no rastreador da Techlink costumam terminar na chegada do voo ao país de destino (`Arrive at the destination airport`) ou poucos passos depois, em um hub ou centro de triagem (`In transit, it is currently in transit to the next facility`); em alguns envios repassa também leituras da entregadora até `Parcel is out for delivery.` ou tentativa frustrada. O restante aparece no rastreamento da transportadora local, portanto peça o nome e o código dela ao vendedor e acione o vendedor se houver atraso.
+As leituras vistas no rastreador da Techlink até agora terminam na chegada do voo ao país de destino (`Arrive at the destination airport`) ou poucos passos depois, em um hub ou centro de triagem desse país ou entre duas unidades (`In transit, it is currently in transit to the next facility`); em alguns envios repassa também leituras da entregadora até `Parcel is out for delivery.` ou uma entrega não realizada. O restante aparece no rastreamento da transportadora local, portanto peça o nome e o código dela ao vendedor e acione o vendedor se houver atraso.
 
 :::sources
 - [Techlink: 智禾官网 (home)](http://www.techlinksz.cn/) – razão social, linhas de pequenas encomendas para Europa e América, Amazon, Walmart, TK e lojas independentes, porta a porta DDU/DDP, desembaraço próprio criado em 2023, contas de entrega no destino e link de contato sem destino

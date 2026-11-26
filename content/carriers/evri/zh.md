@@ -1,22 +1,22 @@
 ---
 title: Evri（原 Hermes UK）查询：单号、状态与 ParcelShop
-description: 查询英国 Evri（原 Hermes UK）包裹：16 位单号与通知卡号、常见英文物流状态、ParcelShop 自提点、自提柜与客服联系。
+description: 查询英国 Evri（原 Hermes UK）包裹：16 位单号与通知卡号、英文物流状态含义、ParcelShop 自提点、自提柜与客服联系。
 slug: evri-yingguo-kuaidi-chaxun
 published: 2026-11-26
 updated: 2026-11-26
 ---
 
-Evri 是英国快递公司，在 2022 年 3 月之前名为 Hermes UK。你可以在 [evri.com](https://www.evri.com/track-a-parcel) 输入 16 位运单号或未妥投通知卡上的 8 位号码查询包裹，也可以直接把条码或 Evri 查件链接粘贴到上方查询框。寄件人通常会通过邮件发送单号，Evri 发出的短信和邮件中也会附上该号码。
+Evri 是英国快递公司，在 2022 年 3 月之前名为 Hermes UK。你可以在 [evri.com](https://www.evri.com/track-a-parcel) 输入 16 位运单号或通知卡（calling card）上的 8 位号码查询包裹，也可以直接把条码或 Evri 查件链接粘贴到上方查询框。寄件人通常会通过邮件发送单号，Evri 发出的短信和邮件中也会附上该号码。
 
 ## Evri 快递单号及查找位置
 
-Evri 常称其为 16 位字符代码或 16 位数字，不过官方示例里带有字母。请先在商家的发货邮件，或发件名为 “Evri” 的短信和邮件中查找。
+Evri 称其为 16 位字符代码或 16 位数字，不过它自己的示例里带有字母。请先在商家的发货邮件，或发件名为 “Evri” 的短信和邮件中查找。
 
 | 单号形态（虚构示例） | 说明 |
 | --- | --- |
 | `H00ABC4829105734` | Evri 条码：`H`（有时为 `T`）、5 位字母或数字，再加 10 位数字。 |
 | `4829105736482917` | 16 位纯数字：可能属于 Evri，TNT 和 [DHL eCommerce](carrier:dhl-ecommerce) 也使用 16 位数字。 |
-| `48291057` | 未妥投通知卡号（calling card number），可在 evri.com 查询。 |
+| `48291057` | 通知卡号（calling card number），可在 evri.com 查询。 |
 
 以 `H` 开头后接纯数字的单号（如 `H482910573648293`）也符合[德国 Hermes](carrier:hermes-de) 的格式，请以商家邮件中写明的承运商为准。国际包裹需在 Evri 的[国际查件页面](https://globaleco.app/track/)查询。找不到单号？参考[如何查找快递单号](guide:find-tracking-number)（英文）。
 
@@ -24,7 +24,7 @@ Evri 常称其为 16 位字符代码或 16 位数字，不过官方示例里带�
 
 ## Evri 英文物流状态含义
 
-Evri 查件页面展示包裹从揽收到签收的每个阶段。以下为 Evri 官网解释的常见状态：
+Evri 查件页面展示包裹从揽收到签收的每个阶段。以下为 Evri 自己的页面对其状态的说明：
 
 | Evri 显示状态 | 对你的含义 |
 | --- | --- |
@@ -34,15 +34,15 @@ Evri 查件页面展示包裹从揽收到签收的每个阶段。以下为 Evri 
 
 如果轨迹提到 `Evri gateway`，说明包裹来自境外：Evri 会在该口岸暂存直至清关完成，随后转往分拣枢纽（见[包裹卡在海关怎么办](guide:customs)（英文））。若 Evri 提示要求你联系它，说明需要补充信息才能完成派送，请在 evri.com 发起在线聊天。
 
-## Evri 未妥投：通知卡、ParcelShop 自提点与自提柜
+## Evri 派送未成功：通知卡、ParcelShop 自提点与自提柜
 
 **派送当天。** 快递员会在当天早晨确定预计时间；包裹装车派送后，Evri 会推送派送时间窗（首页称 1 小时，帮助中心称 2 小时）。
 
-**家中无人。** 条件允许时，快递员会把包裹放在安全放置点（即使不是你指定的地点）或投入信箱；否则会留下带 8 位号码的通知卡，通常次日再次尝试派送，最多尝试三次。最后一次仍未妥投时，Evri 安全放置点指南称退回网点，服务条款称退回寄件人，而寄件页面则称通过 evri.com 寄出的包裹会送往最近的 ParcelShop。
+**家中无人。** 条件允许时，快递员会把包裹放在安全放置点（即使不是你指定的地点）或投入信箱；否则会留下带 8 位号码的通知卡，通常次日再次尝试派送，最多尝试三次。最后一次仍派送未成功时，Evri 安全放置点指南称退回网点，服务条款称退回寄件人，而寄件页面则称通过 evri.com 寄出的包裹会送往最近的 ParcelShop。
 
-**更改派送安排。** 在 Evri 查件页输入运单号或通知卡号及邮编，在快递员抵达家门口前均可选择安全放置点、邻居代收，或在商家允许且有空位时改投 ParcelShop 或 Locker 自提柜（以最后一次修改为准）。商家要求签收的包裹不能改投。Evri 无法更改派送日期，更改收件地址也仅能由寄件人操作。
+**更改派送安排。** 在 Evri 查件页输入运单号或通知卡号及邮编，在快递员抵达家门口前均可选择安全放置点、邻居代收，或在可用且商家允许时改投 ParcelShop 或 Locker 自提柜（以最后一次修改为准）。商家要求签收的包裹不能改投。Evri 无法更改派送日期，更改收件地址也仅能由寄件人操作。
 
-**ParcelShop 自提点**（本地合作商铺或邮局网点）在包裹到店可取时会发短信或邮件通知。取件请带上寄件人确认邮件/短信（如有），并出示身份证件或寄件人发来的取件 PIN 码。Evri 面向寄件人的 ParcelShop 页面列出可用证件包括借记卡/信用卡、护照、英国驾照或水电账单，包裹保管 10 天后退回寄件人。
+**ParcelShop 自提点**（本地商铺或邮局网点）在包裹到店可取时会发短信或邮件通知。取件请带上寄件人确认邮件/短信（如有），并出示身份证件或寄件人发来的取件 PIN 码。Evri 面向寄件人的 ParcelShop 页面列出可用证件包括借记卡/信用卡、护照、英国驾照或水电账单，包裹保管 10 天后退回寄件人。
 
 **自提柜（Lockers）**设在商铺和超市外，全天 24 小时开放。包裹入柜后 Evri 会发邮件附上扫码或手动输入的取件码，须在 3 天内取走；遇到操作问题可在柜机屏幕点击 “help”。
 
@@ -50,9 +50,9 @@ Evri 查件页面展示包裹从揽收到签收的每个阶段。以下为 Evri 
 
 ## Evri 包裹延误、丢失或破损
 
-**暂无追踪记录**通常只说明 Evri 尚未收到包裹。如果 `We're expecting it` 迟迟不动，请询问寄件人；其他状态超过 24 小时无变化，请在官网发起在线聊天。详见[物流长时间不更新怎么办](guide:tracking-not-updating)（英文）。
+**暂无追踪记录**只说明 Evri 尚未收到包裹。如果 `We're expecting it` 迟迟不动，请询问寄件人；其他状态超过 24 小时无变化，请在官网发起在线聊天。详见[物流长时间不更新怎么办](guide:tracking-not-updating)（英文）。
 
-**等待超过 7 天**仍未送达？请通知寄件人，由持有承运合同的寄件人联系 Evri。Citizens Advice 指出，如果是向商家网购，交货是卖家的法定义务，应由卖家而非买家追查快递。
+**等待超过 7 天**仍未送达？请通知寄件人，由持有承运合同的寄件人联系 Evri。Citizens Advice 指出，如果是向商家网购，交货是卖家的责任，应由卖家而非买家追查快递。
 
 **显示已签收但未收到。** 先询问家人与邻居，随后发起在线聊天让当地网点调查。若包裹被放在你从未同意的位置，Citizens Advice 指出依法应由卖家负责解决。更多见[显示已签收但未收到包裹](guide:delivered-not-received)（英文）。
 
@@ -62,17 +62,17 @@ Evri 查件页面展示包裹从揽收到签收的每个阶段。以下为 Evri 
 
 以下为 Evri 公布的英国客服渠道（未列出爱尔兰或其他地区渠道）：
 
-- **在线聊天：** 全天候 24/7 开放于 [evri.com/contact-us](https://www.evri.com/contact-us)，通常 24 小时内回复。
-- **电话：** 0330 808 5456，全天 24 小时接通，人工客服时间为周一至周五 8:00 至 16:00、周六 8:00 至 14:00（Evri 不同页面略有出入）。请用绑定包裹的号码拨打，或按键输入运单号后 8 位、ParcelShop 回执上 P 字母后的 7 位数字或 8 位通知卡号。GOV.UK 说明 03 开头号码资费与 01/02 普通固话大致相同。
+- **在线聊天：** 全天候 24/7 开放于 [evri.com/contact-us](https://www.evri.com/contact-us)，24 小时内回复。
+- **电话：** 0330 808 5456，全天 24 小时接通，人工客服时间为周一至周五 8:00 至 16:00、周六 8:00 至 14:00（Evri 其他页面说法不同）。请用绑定包裹的号码拨打，或按键输入运单号后 8 位、ParcelShop 回执上 P 字母后的 7 位数字或 8 位通知卡号。GOV.UK 说明 03 开头号码资费与 01/02 普通固话大致相同。
 - **高级团队反馈（Tell us straight）：** 若普通客服未能解决，可发邮件至 noreply.priority@evri.com，邮件主题写明 “Tell us straight” 以直达 Evri 高级处理团队。
 
 > Evri 官方邮件通常来自 @evri.com、@hermes-europe.co.uk 或 @myhermes.co.uk；完整清单还包括 @custhelp.com、@globalco.uk、@globaleco.app 及这六个域名的子域名。官方短信发件人仅为 “Evri”，绝不来自手机号，绝不要求改期、付改派费或安装应用，且链接仅指向 `evri.link`（但 Evri 也提醒该链接可能被仿冒）。可疑短信可免费转发至 7726 举报。详见[防范快递诈骗短信](guide:delivery-scam-texts)（英文）。
 
 ## 使用 Peek 追踪 Evri 包裹
 
-输入校验位通过的 Evri 条码时，由于 Evri UK 与 Evri International 共用形态，[Peek](/) 会同时向两者查询并归入实际持有包裹的一方；对于 `H` 加 15 位数字，还会一并询问德国 Hermes。如果两家都暂未查到，可点“更换”在“符合这个单号”下选择 “Evri UK”（仅写 “Evri” 的是 Evri International），或直接粘贴 Evri 网页或邮件中的 `evri.com/track/parcel/…/details` 链接，Peek 会立刻识别为 Evri UK。对于 16 位纯数字，末位校验通过时 Peek 会将 Evri UK 与其他承运商一并查询，未通过时只查其他承运商。以 `C00HHA` 开头加 10 位数字的单号则直接归属 Evri UK。全程无需邮编，但 Peek 无法追踪 8 位通知卡号。
+输入校验位通过的 Evri 条码时，由于 Evri UK 与 Evri International 共用形态，[Peek](/) 会同时向两者查询并归入实际持有包裹的一方；对于 `H` 加 15 位数字，还会一并询问德国 Hermes。如果两家都暂未查到，可点“更换”在“符合这个单号”下选择 “Evri UK”（仅写 “Evri” 的是 Evri International），或直接粘贴 Evri 网页或邮件中的 `evri.com/track/parcel/…/details` 链接，Peek 会立刻识别为 Evri UK。对于 16 位纯数字，末位校验通过时 Peek 会将 Evri UK 与其他承运商一并查询，未通过时只查其他承运商。以 `C00HHA` 开头加 10 位数字的单号则只查询 Evri UK。全程无需邮编，但 Peek 无法追踪 8 位通知卡号。
 
-你可以查看当前状态、完整轨迹、商业寄件人名称，以及进入派送中后的英国时间派送时间窗（此前不提供预计日期）。Evri 不返回扫描地点，因此地图为空。快递员妥投显示为“已签收”，不显示具体放置位置；其他包含收件人姓名的扫描会改显示为 `Delivery update`，其余节点保留 Evri 原文句式（而非上表总标题）。在 ParcelShop 或自提柜等待的包裹显示为“待取件”，从 ParcelShop 取走后显示为“已签收”。你的姓名、地址、妥投照片和取件码都会被省略。时间换算为你设备的时区；在 peektracker.com 及 iPhone、Android 应用中，轨迹底部会写明“时间按你所在的时区显示：”及对应时区名称。
+你可以查看当前状态、完整轨迹、商业寄件人名称，以及进入派送中后的英国时间派送时间窗（此前不提供预计日期）。Evri 不返回扫描地点，因此地图为空。快递员送达的包裹显示为“已签收”，不显示具体放置位置；其他包含收件人姓名的扫描会改显示为 `Delivery update`，其余节点保留 Evri 原文句式（而非上表总标题）。在 ParcelShop 或自提柜等待的包裹显示为“待取件”，从 ParcelShop 取走后显示为“已签收”。你的姓名、地址、签收照片和取件码都会被省略。时间换算为你设备的时区；在 peektracker.com 及 iPhone、Android 应用中，轨迹底部会写明“时间按你所在的时区显示：”及对应时区名称。
 
 Peek 最高每 10 分钟检查一次，进入派送中后最高每 2 分钟检查一次（需通过浏览器打开 Evri 查件页时为每 5 分钟一次），可选择“每次扫描”、“重要环节”或“仅派送当天”提醒。高频检查仅在 Evri 扫描进入派送当天英国时间早上 6 点起（Evri 给出时间窗后则从时间窗开始前半小时起），且仅在 Evri 自家查件系统有响应时生效；经由物流查询服务时，每小时检查一次，超过一天无新动态后每 3 小时一次，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次。连续两天没有新动态后（仍停留在“已生成面单”或“已揽收”时为 12 小时后），Peek 改为每小时检查一次，且不会将包裹转交给其他承运商追踪。
 
@@ -137,5 +137,5 @@ Evri 表示收到包裹后通常 1 至 3 天送达，取决于寄件人所选服
 - [GOV.UK: EVRi / DHL merger inquiry](https://www.gov.uk/cma-cases/evri-slash-dhl-merger-inquiry) – Apollo、DHL 集团少数股权与批准决定
 - [GOV.UK: Call charges](https://www.gov.uk/call-charges) – 03 号段资费说明
 - [Citizens Advice: Something you ordered hasn't arrived](https://www.citizensadvice.org.uk/consumer/somethings-gone-wrong-with-a-purchase/if-something-you-ordered-hasnt-been-delivered/) – 卖家责任、由卖家追查快递及未经同意放置位置责任
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取与展示内容
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取的信息
 :::

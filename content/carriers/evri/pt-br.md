@@ -34,7 +34,7 @@ O rastreamento da Evri exibe cada etapa do trajeto, da coleta à entrega. O que 
 
 Se o rastreamento mencionar `Evri gateway`, o pacote veio do exterior: a Evri o mantém ali durante o desembaraço aduaneiro e depois o envia a um hub (veja [encomendas retidas na alfândega](guide:customs)). Se a Evri pedir para você entrar em contato, precisa de mais dados para concluir a entrega: abra o chat em evri.com.
 
-## Entrega frustrada na Evri: cartões de aviso, ParcelShops e armários
+## Entrega não realizada na Evri: cartões de aviso, ParcelShops e armários
 
 **No dia da entrega.** O entregador define o horário previsto naquela manhã. Quando sai para entrega, a Evri envia uma janela: a página inicial cita 1 hora, e a central de ajuda cita 2 horas.
 
@@ -70,7 +70,7 @@ Canais divulgados pela Evri para o Reino Unido (sem canais listados para a Irlan
 
 ## Rastrear uma encomenda Evri com o Peek
 
-O [Peek](/) consulta tanto Evri UK quanto Evri International quando o código de barras digitado tem dígito verificador válido, pois ambos usam o mesmo formato, e identifica qual deles tem o pacote; para `H` e 15 dígitos, consulta também a Hermes Alemanha. Se nenhum reconhecer ainda, toque em "Trocar" e escolha "Evri UK" em "Compatível com este código" (apenas "Evri" refere-se à Evri International), ou cole o link `evri.com/track/parcel/…/details` da página ou e-mail da Evri, que o Peek identifica como Evri UK na hora. Para 16 dígitos, consulta Evri UK junto com outras transportadoras quando o último dígito valida, e apenas as outras quando não valida. Códigos iniciados por `C00HHA` seguidos de dez dígitos vão direto para Evri UK. Não exige código postal, mas o Peek não rastreia números de cartão de aviso.
+O [Peek](/) consulta tanto Evri UK quanto Evri International quando o código de barras digitado tem dígito verificador válido, pois ambos usam o mesmo formato, e identifica qual deles tem o pacote; para `H` e 15 dígitos, consulta também a Hermes Alemanha. Se nenhum reconhecer ainda, toque em "Trocar" e escolha "Evri UK" em "Compatível com este código" (apenas "Evri" refere-se à Evri International), ou cole o link `evri.com/track/parcel/…/details` da página ou e-mail da Evri, que o Peek identifica como Evri UK na hora. Para 16 dígitos, consulta Evri UK junto com outras transportadoras quando o último dígito valida, e apenas as outras quando não valida. Códigos iniciados por `C00HHA` seguidos de dez dígitos vão só para a Evri UK. Não exige código postal, mas o Peek não rastreia números de cartão de aviso.
 
 Você vê o status, o histórico, o nome do remetente quando for empresa e, durante a saída para entrega, a janela da Evri no horário do Reino Unido (sem data prevista antes disso). A Evri não fornece localidades das movimentações, então o mapa fica vazio. Entregas feitas pelo motorista aparecem como "Entregue", sem indicar onde foi deixado. Qualquer outra leitura citando o destinatário aparece como `Delivery update`, e o restante mantém as frases originais da Evri, não os títulos acima. Pacotes aguardando em ParcelShop ou Locker aparecem como "Pronta para retirada", e retirados em ParcelShop como "Entregue". Seu nome, endereço, foto da entrega e códigos de retirada são omitidos. Os horários aparecem no fuso do seu aparelho; em peektracker.com e nos aplicativos iPhone e Android, o histórico termina com "Horários no seu fuso horário:" e o nome dele.
 
@@ -84,7 +84,7 @@ Sim: a Evri é a antiga Hermes UK, renomeada em março de 2022. A Hermes na Alem
 
 ### A Evri faz parte da DHL ou da Royal Mail?
 
-De nenhuma das duas. Na operação aprovada pela autoridade de concorrência britânica em setembro de 2025, a Evri — então controlada por fundos geridos pela Apollo — comprou a DHL eCommerce UK do Grupo DHL, e o Grupo DHL assumiu participação minoritária na Evri. A fusão foi concluída em 1º de outubro de 2025 formando o Evri Group, anunciando que a DHL eCommerce UK passaria a se chamar Evri Premium (rede da DHL) em 2026 mantendo operação separada; o site da Evri já oferece Evri Premium para encomendas maiores e de alto valor. O rastreador da Evri pede código de 16 caracteres ou cartão de aviso de 8 dígitos e não cobre pacotes da DHL eCommerce UK.
+De nenhuma das duas. Na operação aprovada pela autoridade de concorrência britânica em setembro de 2025, a Evri — então controlada por fundos geridos pela Apollo — comprou a DHL eCommerce UK do Grupo DHL, e o Grupo DHL assumiu participação minoritária na Evri. A fusão foi concluída em 1º de outubro de 2025 formando o Evri Group, anunciando que a DHL eCommerce UK passaria a se chamar Evri Premium (rede da DHL) em 2026 mantendo operação separada; o site da Evri já oferece Evri Premium para encomendas maiores e de alto valor. O rastreador da Evri pede código de 16 caracteres ou cartão de aviso de 8 dígitos e não diz nada sobre pacotes da DHL.
 
 ### Um e-mail de noreply.priority@evri.com é legítimo?
 

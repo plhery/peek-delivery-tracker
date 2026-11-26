@@ -15478,6 +15478,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e4002b"
     },
     {
+      "id": "canpar",
+      "catalog": "canpar",
+      "slug": "canpar-tracking",
+      "title": "Rastreamento Canpar Canadá: códigos, status e SMARTSpot",
+      "name": "Canpar",
+      "color": "#003b70"
+    },
+    {
       "id": "uniuni",
       "catalog": "uniuni",
       "slug": "rastreamento-uniuni",
@@ -16348,6 +16356,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento AnserX: códigos BTYCN...YQ, repasses e ajuda",
       "name": "AnserX",
       "color": "#2478be"
+    },
+    {
+      "id": "bjs-home-delivery",
+      "catalog": "bjs-home-delivery",
+      "slug": "bjs-home-delivery-tracking",
+      "title": "Rastreamento BJS Home Delivery: códigos B e janela de 3h",
+      "name": "BJS Home Delivery",
+      "color": "#feba30"
     },
     {
       "id": "cj-packet",
@@ -19772,6 +19788,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e4002b"
     },
     {
+      "id": "canpar",
+      "catalog": "canpar",
+      "slug": "canpar-tracking",
+      "title": "Canpar 加拿大快递追踪：22 位单号、SMARTSpot 自提与客服",
+      "name": "Canpar",
+      "color": "#003b70"
+    },
+    {
       "id": "uniuni",
       "catalog": "uniuni",
       "slug": "uniuni-tracking",
@@ -20666,6 +20690,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "斑头雁国际物流（AnserX）查询：BTYCN 单号、状态与客服",
       "name": "AnserX",
       "color": "#2478be"
+    },
+    {
+      "id": "bjs-home-delivery",
+      "catalog": "bjs-home-delivery",
+      "slug": "bjs-home-delivery-tracking",
+      "title": "BJS Home Delivery 英国大件派送追踪：B 单号与 3 小时时段",
+      "name": "BJS Home Delivery",
+      "color": "#feba30"
     },
     {
       "id": "chukou1",

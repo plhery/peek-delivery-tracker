@@ -15278,6 +15278,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc1928"
     },
     {
+      "id": "first-line",
+      "catalog": "first-line",
+      "slug": "rastreamento-first-line",
+      "title": "Rastreamento FIRST LINE: códigos 1ST, status e entrega",
+      "name": "FIRST LINE",
+      "color": "#55207a"
+    },
+    {
       "id": "j-and-t-de",
       "catalog": "j-and-t-de",
       "slug": "rastreamento-jt-express-alemanha",
@@ -15540,6 +15548,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento ECMS Express: códigos, status e quem entrega",
       "name": "ECMS Express",
       "color": "#12823d"
+    },
+    {
+      "id": "chunghwa-post",
+      "catalog": "chunghwa-post",
+      "slug": "rastreamento-chunghwa-post",
+      "title": "Rastreamento Chunghwa Post (Taiwan): códigos e status",
+      "name": "Chunghwa Post",
+      "color": "#e8171f"
     },
     {
       "id": "jd-logistics",

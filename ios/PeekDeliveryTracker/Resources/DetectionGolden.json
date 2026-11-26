@@ -80123,6 +80123,14 @@
     ]
   },
   {
+    "input": "94501369990999009999990",
+    "carrier": "paack",
+    "confidence": "high",
+    "candidates": [
+      "paack"
+    ]
+  },
+  {
     "input": "9451162004086887",
     "carrier": "unknown",
     "confidence": "low",
@@ -83758,6 +83766,14 @@
     ]
   },
   {
+    "input": "999999999998FR99999990",
+    "carrier": "estafeta",
+    "confidence": "high",
+    "candidates": [
+      "estafeta"
+    ]
+  },
+  {
     "input": "999999999999",
     "carrier": "unknown",
     "confidence": "low",
@@ -83780,6 +83796,14 @@
       "dhl",
       "brt",
       "colis-prive"
+    ]
+  },
+  {
+    "input": "99999999999901004999998",
+    "carrier": "australia-post",
+    "confidence": "high",
+    "candidates": [
+      "australia-post"
     ]
   },
   {

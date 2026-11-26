@@ -1913,6 +1913,10 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       },
       {
+        "pattern": "^94501369\\d{15}$",
+        "confidence": "high"
+      },
+      {
         "pattern": "^9451162004\\d{6}$",
         "confidence": "low"
       },
@@ -4014,7 +4018,7 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       },
       {
-        "pattern": "^\\d{12}(?:[A-Z]\\d|\\d[A-Z])\\d{8}$",
+        "pattern": "^\\d{12}(?!\\d{2})[A-Z0-9]{2}\\d{8}$",
         "confidence": "high"
       }
     ],
@@ -4838,6 +4842,11 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^(?!MA\\d{19}$|JJD\\d{18}$)(?:\\d{2})?[A-Z0-9]{3}\\d{9}000\\d{6}$",
+        "confidence": "high",
+        "checksum": "australia-post"
+      },
+      {
+        "pattern": "^99[A-Z0-9]{3}\\d{9}00\\d{7}$",
         "confidence": "high",
         "checksum": "australia-post"
       },

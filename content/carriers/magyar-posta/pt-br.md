@@ -6,7 +6,7 @@ published: 2026-11-26
 updated: 2026-11-26
 ---
 
-A Magyar Posta (Correio da Hungria) é o serviço postal nacional da Hungria, e MPL é a marca usada em suas encomendas, pontos de retirada PostaPont e armários. Rastreie gratuitamente na página "Nyomkövetés" em posta.hu, no aplicativo Magyar Posta ou colando o código no campo acima. O número vem no e-mail de envio da loja ou no e-mail e SMS enviados pela própria Magyar Posta quando a encomenda chega.
+A Magyar Posta (Correio da Hungria) é o serviço postal nacional da Hungria, e MPL é a marca usada em suas encomendas, pontos de retirada PostaPont e armários. Rastreie gratuitamente na página "Nyomkövetés" em posta.hu, no aplicativo Magyar Posta ou colando o código no campo acima. O número vem no e-mail de envio da loja ou no e-mail ou SMS enviado pela própria Magyar Posta quando a encomenda chega.
 
 ## Código de rastreamento Magyar Posta
 
@@ -27,7 +27,7 @@ Um código com `P` + letra + 11 dígitos também coincide com um formato que o P
 
 ## Status de rastreamento da Magyar Posta explicados
 
-O rastreador em posta.hu abre em húngaro; as bandeiras no canto superior direito trocam para inglês ou alemão. O Peek mostra o texto original em húngaro, listado abaixo na ordem em que costuma aparecer:
+O rastreador em posta.hu abre em húngaro; as bandeiras no canto superior direito trocam para inglês ou alemão. O Peek mostra os textos originais em húngaro, listados abaixo na ordem em que a encomenda passa por eles:
 
 | Status da Magyar Posta | O que significa para você |
 | --- | --- |
@@ -39,7 +39,7 @@ O rastreador em posta.hu abre em húngaro; as bandeiras no canto superior direit
 | `Vámkezelés vége` | Desembaraço aduaneiro concluído. |
 | `A küldemény továbbítása kézbesítésre` | Encaminhada para sua agência de entrega. |
 | `A küldemény a kézbesítőnél van` | Saiu para entrega: está com o entregador. |
-| `Sikertelen kézbesítés` | Tentativa de entrega sem sucesso. |
+| `Sikertelen kézbesítés` | Entrega não realizada. |
 | `A küldemény postán átvehető (értesítőn szereplő dátumtól)` | Pronta para retirada na agência postal a partir da data indicada no aviso. |
 | `Sikeresen kézbesítve` | Entregue. |
 | `A küldemény nem kézbesíthető (nem kereste)` | Não retirada no prazo: a caminho de volta ao remetente. |
@@ -54,7 +54,7 @@ Outros finais de `A küldemény nem kézbesíthető (…)` informam o motivo, co
 
 **Alterar a entrega.** O botão MÓDOSÍTÁS (alterar) no e-mail, ou "Kiszállítás módosítása" no aplicativo, muda data ou endereço; algumas alterações são cobradas. Depois do envio da mensagem anterior à segunda tentativa, nada mais pode ser alterado.
 
-**Entrega perdida.** O MPL Business Parcel tem duas tentativas domiciliares. Após a primeira, o entregador telefona para combinar a segunda, ou você pode optar por retirar. Se ninguém atender, a Magyar Posta deixa um aviso (értesítő) ou envia SMS/e-mail e guarda a encomenda. Leve documento com foto para retirar.
+**Entrega não realizada.** O MPL Business Parcel tem duas tentativas domiciliares. Após a primeira, o entregador telefona para combinar a segunda, ou você pode optar por retirar. Se não houver ninguém em casa, a Magyar Posta deixa um aviso (értesítő) ou envia SMS/e-mail e guarda a encomenda. Leve documento com foto para retirar.
 
 **Prazo de guarda.** Em agência postal ou PostaPont, encomendas domésticas aguardam 5 ou 10 dias úteis (conforme escolha do remetente) e objetos do exterior aguardam 15.
 
@@ -70,7 +70,7 @@ Outros finais de `A küldemény nem kézbesíthető (…)` informam o motivo, co
 
 **Danificada.** Registre dano visível no recibo de entrega imediatamente (em armário, ligue para o número indicado nele). Dano oculto: comunique em até 3 dias úteis numa agência postal, levando toda a embalagem.
 
-**Extraviada.** Quem reclama é o remetente — geralmente a loja —, salvo se a encomenda foi entregue a você ou se o direito foi cedido a você. Reclamações domésticas abrem no 15º dia após a postagem e prescrevem após seis meses. A Magyar Posta responde em até 30 dias. Se a resposta não for satisfatória, você pode recorrer à NMHH (autoridade de comunicações da Hungria) em até 30 dias.
+**Extraviada.** Quem pede a indenização é o remetente — geralmente a loja —, salvo se a encomenda foi entregue a você ou se o direito foi cedido a você. Um pedido de indenização doméstico pode ser feito a partir do 15º dia após a postagem; os pedidos de indenização prescrevem após seis meses. A Magyar Posta responde em até 30 dias. Se a resposta não for satisfatória, você pode recorrer à NMHH (autoridade de comunicações da Hungria) em até 30 dias.
 
 ## Telefone e atendimento ao cliente da Magyar Posta
 
@@ -85,7 +85,7 @@ posta.hu lista:
 
 ## Acompanhe encomendas da Magyar Posta com o Peek
 
-O [Peek](/) consulta a Magyar Posta sobre códigos domésticos `P…`, postais `…HU`, cartas registradas `RL…` ou MPL Europe Standard `JJH…` usando um navegador no servidor do Peek, então a resposta pode levar cerca de 20 segundos; para 11 dígitos após `P` e uma letra, a La Poste também é consultada, e para códigos postais `…HU`, a Chronopost também. Você pode escolher Magyar Posta em "Trocar" ou colar um link de rastreamento de posta.hu com `searchvalue=`, que a identifica imediatamente.
+O [Peek](/) consulta a Magyar Posta sobre códigos domésticos `P…`, números postais `…HU`, cartas registradas `RL…` ou MPL Europe Standard `JJH…` usando um navegador no servidor do Peek, então a resposta pode levar até cerca de 20 segundos; para 11 dígitos após `P` e uma letra, a La Poste também é consultada, e para números postais `…HU`, a Chronopost também. Você pode escolher Magyar Posta em "Trocar" ou colar um link de rastreamento de posta.hu com `searchvalue=`, que a identifica imediatamente.
 
 A primeira consulta abre posta.hu em um navegador no servidor do Peek para passar pelo captcha, então não é instantânea; consultas seguintes leem o número pela lista do aplicativo da Magyar Posta. Se o captcha for recusado, o Peek tenta de novo após 15 minutos e depois dobra o intervalo enquanto continuar recusado, até 6 horas; serviços de rastreamento suprem no meio-tempo, embora possam atrasar. O Peek exibe o status, o histórico com cada local e o ponto de retirada (agência, PostaPont ou armário) no húngaro original da Magyar Posta, sem previsão de entrega, prazo-limite de retirada nem assinante. Enquanto a encomenda estiver aberta no Peek, ou no dia da entrega com as notificações ativadas, o Peek consulta até a cada 10 minutos, e a partir das 6h no horário da Hungria no dia em que a Magyar Posta registra saída para entrega, a cada 2 minutos (5 quando a consulta precisa abrir posta.hu no navegador), enquanto o próprio rastreador da Magyar Posta responder; fora isso, a cada hora. Após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica a cada hora, e a cada 6 horas após sete dias sem novidades em "Etiqueta criada". Após quatro dias sem nova linha em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek destaca o dia dessa linha com "Sem atualizações desde …", a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Magyar Posta." e o link "Pedir ajuda a Magyar Posta"; após três semanas, a nota muda para "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando Magyar Posta." O Peek pode avisar você sobre "Cada movimentação", "Etapas importantes" ou "Só a entrega". Um objeto postado no exterior mantém o código do correio estrangeiro; quando esse correio indica destino Hungria (ou não informa destino e você rastreia da Hungria), o Peek consulta também a Magyar Posta e transfere para lá assim que surgir uma movimentação não mais antiga que a última do correio estrangeiro.
 

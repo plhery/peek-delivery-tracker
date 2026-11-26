@@ -17,7 +17,7 @@ Helthjem 是一家面向网店的挪威包裹配送服务商：它把包裹放�
 | 单号 | 属于哪家 |
 | --- | --- |
 | `370724764829173648` | Helthjem：以 `37072476` 开头的 18 位数字。 |
-| `00370724764829173648` | 前面加上 `00` 的同一单号（常见于条码下方）：共 20 位。 |
+| `00370724764829173648` | 前面加上 `00` 的同一单号（即条码下方印的形式）：共 20 位。 |
 | `370748291736482919` | [Bring](carrier:bring)：其自有 18 位单号也以 `370` 或 `373` 开头。 |
 | `RR482917367NO` | Bring：以 `NO` 结尾的邮政单号。 |
 
@@ -55,7 +55,7 @@ Helthjem 查询页会显示包裹状态、带地点的扫描记录、预计送�
 
 **放置位置。** 放在门垫上（`Pakken er levert på dørmatten din!`）或信箱里（`Pakken er levert i postkassen din!`）。Helthjem 官网查询页可能提供投递照片；Peek 不展示照片，请前往官网查看。
 
-**取件点（hentested）。** 2023 年 Helthjem 通过合作门店发放包裹，适用于大件、选择自提的收件人以及发行商不覆盖的区域。改送取件点的包裹会显示 `På vei til hentested`，Helthjem 会贴上带新单号的新面单，但用原单号仍能查到。到店可取时状态变为 `Klar til henting`，Helthjem 官网会写明取件点及地址。逾期未取则出现 `Pakke ikke hentet` 并退回网店。
+**取件点（hentested）。** 2023 年 Helthjem 通过门店发放包裹，适用于大件、选择自提的收件人以及发行商不覆盖的区域。改送取件点的包裹会显示 `På vei til hentested`，Helthjem 会贴上带新单号的新面单，但用原单号仍能查到。到店可取时状态变为 `Klar til henting`，Helthjem 官网会写明取件点及地址。逾期未取则出现 `Pakke ikke hentet` 并退回网店。
 
 **PostNord 包裹。** 当 Helthjem 把包裹标为 PostNord 产品时，其查询页会凭货件号引导你前往 PostNord 查询。
 
@@ -83,7 +83,7 @@ Helthjem 官网 helthjem.no 设有帮助与联系页面。在派送前连续四�
 
 Peek 会显示当前状态、每次扫描的地点（包括 Helthjem 官网隐藏的分拣机扫描）、签收时间、寄件网店，以及待取或已取时的取件点名称。当 Helthjem 为取件点重新贴标时，Peek 也会显示新面单号。状态保留 Helthjem 的挪威语原文，扫描时间与 Helthjem 一致。当 Helthjem 排入夜间班次时，Peek 会把 `Planlagt levering natt til …` 中的日期显示为预计送达日。Helthjem 官网上的其他预计日期、取件点地址、照片和邮编会被略去。
 
-当 Helthjem 将包裹标为由 PostNord 派送时，卡片会显示“由 PostNord 派送”，Peek 也会凭货件号继续在 PostNord 跟进；在 PostNord 仅收到预报、尚无自身扫描期间，卡片显示“PostNord 已收到预报，尚未收到包裹”。在对应承运商自有查询正常响应期间，当你打开包裹页，或在派送当天开启通知时，Peek 最多每 10 分钟查询一次，在 Helthjem（或交接后的 PostNord）扫描派送当天从奥斯陆时间早上 6 点起每 2 分钟查询一次。其余时间，以及连续两天无新动态（在“已生成面单”或“已揽收”状态下为 12 小时）后改为每小时查询一次，在“已生成面单”下连续七天无新动态后改为每 6 小时一次。Peek 可以在状态变化时通知你，但无法替你联系 Helthjem。
+当 Helthjem 将包裹标为由 PostNord 派送时，卡片会显示“由 PostNord 派送”，Peek 也会凭货件号继续在 PostNord 跟进；在 PostNord 仅收到预报、尚无自身扫描期间，卡片显示“PostNord 已收到预报，尚未收到包裹”。当你打开包裹页，或在派送当天开启通知时，Peek 最多每 10 分钟查询一次；在 Helthjem（或交接后的 PostNord）扫描包裹进入派送的当天，只要该承运商自己的查件系统正常响应，自奥斯陆时间早上 6 点起每 2 分钟查询一次。其余时间，以及连续两天无新动态（在“已生成面单”或“已揽收”状态下为 12 小时）后改为每小时查询一次，在“已生成面单”下连续七天无新动态后改为每 6 小时一次。Peek 可以在状态变化时通知你，但无法替你联系 Helthjem。
 
 ## 关于 Helthjem 物流查询的常见问题
 
@@ -101,7 +101,7 @@ Peek 会显示当前状态、每次扫描的地点（包括 Helthjem 官网隐�
 
 ### 为什么 Helthjem 查不到我的运单号？
 
-可能是 Helthjem 尚未录入、不再保留该记录，或单号属于其他快递：Bring 的单号也以 `370` 或 `373` 开头。请核对数字、试试 Bring，或问商家发的是哪家快递。
+可能是 Helthjem 没有这个单号、不再保留该记录，或单号属于其他快递：Bring 的单号也以 `370` 或 `373` 开头。请核对数字、试试 Bring，或问商家发的是哪家快递。
 
 ### 怎么联系 Helthjem？
 
@@ -110,7 +110,7 @@ Peek 会显示当前状态、每次扫描的地点（包括 Helthjem 官网隐�
 :::sources
 - [Brønnøysund Register Centre: Helthjem Netthandel AS](https://virksomhet.brreg.no/nb/oppslag/enheter/914919010) – 奥斯陆注册、邮政与快递业务
 - [Brønnøysund Register Centre: Helthjem Netthandel AS avd Vestby](https://virksomhet.brreg.no/nb/oppslag/underenheter/925669946) – Vestby 站点
-- [Konkurransetilsynet: Schibsted Delivery's notice of its acquisition of Amedia Distribusjon (23 October 2023)](https://konkurransetilsynet.no/wp-content/uploads/2023/10/2023_0474-1-OFF-Schibsted-Delivery-AS-Amedia-Distribusjon-AS-1.pdf) – 2015 年起 Helthjem 网络、每周六天派送、网店配送、PostNord 承运大件、合作门店自提、Vestby 场站
+- [Konkurransetilsynet: Schibsted Delivery's notice of its acquisition of Amedia Distribusjon (23 October 2023)](https://konkurransetilsynet.no/wp-content/uploads/2023/10/2023_0474-1-OFF-Schibsted-Delivery-AS-Amedia-Distribusjon-AS-1.pdf) – 2015 年起 Helthjem 网络、每周六天派送、网店配送、PostNord 承运大件、门店自提、Vestby 场站
 - [Polaris Media: Annual general meeting 2025](https://www.polarismedia.no/wp-content/uploads/2025/05/Presentasjon-ordin%C3%A6r-generalforsamling-2025-1.pdf) – 持有 Helthjem Netthandel 34% 股份
 - [Forbrukerrådet: Netthandel](https://www.forbrukerradet.no/forside/okonomi-og-betaling/netthandel-misfornoyd/) – 先联系卖家、调解、信用卡拒付退款
 - [Nkom: Slik kan du avsløre SMS-svindel](https://nkom.no/aktuelt/slik-kan-du-avslore-sms-svindel) – 包裹短信链接、假银行卡页面、.no 域名

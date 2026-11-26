@@ -27,7 +27,7 @@ Os códigos da Helthjem [lembram muito a faixa `370` da Bring](guide:tracking-nu
 
 ## Status de rastreamento da Helthjem em português
 
-A página de rastreamento da Helthjem mostra o status da encomenda e as movimentações com local, o dia previsto, a loja remetente e, quando aplicável, o ponto de retirada com endereço e uma foto da entrega. A Helthjem classifica a encomenda e cada leitura em um de doze estados, escritos em norueguês Bokmål. Na ordem em que costumam aparecer:
+A página de rastreamento da Helthjem mostra o status da encomenda e as movimentações com local, o dia previsto, a loja remetente e, quando aplicável, o ponto de retirada com endereço e uma foto da entrega. A Helthjem classifica a encomenda e cada leitura em um de doze estados, escritos em norueguês Bokmål. Na ordem em que a encomenda passa por eles:
 
 | Status | O que significa para você |
 | --- | --- |
@@ -55,7 +55,7 @@ A página de rastreamento da Helthjem mostra o status da encomenda e as moviment
 
 **Onde é deixada.** No capacho (`Pakken er levert på dørmatten din!`) ou na caixa de correio (`Pakken er levert i postkassen din!`). A página da Helthjem pode mostrar foto da entrega; o Peek não exibe fotos, então confira lá.
 
-**Pontos de retirada (hentested).** Em 2023, a Helthjem entregava pacotes em lojas parceiras para volumes grandes, para quem preferia retirar e onde suas distribuidoras não entregavam. Uma encomenda enviada para lá em vez de sua casa exibe `På vei til hentested`, e a Helthjem cola uma nova etiqueta com novo número; o código original continua funcionando. Quando fica disponível, o status muda para `Klar til henting` e a página da Helthjem informa o ponto e o endereço. Se ninguém retirar no prazo, surge `Pakke ikke hentet` e ela retorna à loja.
+**Pontos de retirada (hentested).** Em 2023, a Helthjem entregava pacotes em lojas para volumes grandes, para quem preferia retirar e onde suas distribuidoras não entregavam. Uma encomenda enviada para lá em vez de sua casa exibe `På vei til hentested`, e a Helthjem cola uma nova etiqueta com novo número; o código original continua funcionando. Quando fica disponível, o status muda para `Klar til henting` e a página da Helthjem informa o ponto e o endereço. Se ninguém retirar no prazo, surge `Pakke ikke hentet` e ela retorna à loja.
 
 **Encomendas PostNord.** Quando a Helthjem marca um pacote como produto PostNord, sua página redireciona para o rastreamento da PostNord com o número da remessa.
 
@@ -73,7 +73,7 @@ A página de rastreamento da Helthjem mostra o status da encomenda e as moviment
 
 ## Atendimento ao cliente e contato da Helthjem
 
-O site da Helthjem, helthjem.no, tem uma página de ajuda e contato. Quando se passam quatro dias sem nova leitura antes da saída para entrega, o aviso do Peek traz link para ela como "Pedir ajuda a Helthjem". Sobre o pedido, reembolso ou reclamação, fale com a loja que contratou a Helthjem.
+O site da Helthjem, helthjem.no, tem uma página de ajuda e contato. Quando se passam quatro dias sem nova leitura antes da saída para entrega, o aviso do Peek traz link para ela como "Pedir ajuda a Helthjem". Sobre o pedido, um reembolso ou um pedido de indenização, fale com a loja que contratou a Helthjem.
 
 > A Nkom, autoridade de comunicações da Noruega, recomenda desconfiar de todo link em SMS, mesmo esperando uma encomenda: esses links levam a páginas falsas que pedem dados de cartão, e um link que afirma ser de empresa norueguesa cujo domínio não termina em `.no` exige cuidado redobrado. A polícia aconselha buscar o site por conta própria em vez de clicar no link. Mais detalhes em [golpes por SMS de entrega](guide:delivery-scam-texts).
 
@@ -89,7 +89,7 @@ Quando a Helthjem indica entrega pela PostNord, o cartão mostra "Entrega por Po
 
 ### A Helthjem é confiável?
 
-Sim. A Helthjem Netthandel AS é registrada em Oslo como empresa postal e de entregas; em sua assembleia geral de 2025, o grupo de mídia norueguês Polaris Media informou participação de 34% nela. Em 2023, seus pacotes circulavam pelas distribuidoras de jornais que adotaram o nome Helthjem em 2015. Apenas desconfie de SMS em nome dela com links pedindo dados de cartão.
+Sim. A Helthjem Netthandel AS é registrada em Oslo como empresa postal e de entregas; em sua assembleia geral de 2025, o grupo de mídia norueguês Polaris Media informou participação de 34% nela. Em 2023, seus pacotes circulavam pelas distribuidoras de jornais que adotaram o nome Helthjem em 2015. Mas desconfie de SMS em nome dela com links pedindo dados de cartão.
 
 ### A que horas a Helthjem entrega?
 
@@ -105,7 +105,7 @@ A Helthjem pode não reconhecer o código, não mantê-lo mais em arquivo ou ele
 
 ### Como entrar em contato com a Helthjem?
 
-Pela página de ajuda e contato no site oficial, helthjem.no. Para reembolsos e reclamações, procure a loja que enviou a encomenda.
+Pela página de ajuda e contato no site oficial, helthjem.no. Para reembolsos e pedidos de indenização, procure a loja que enviou a encomenda.
 
 :::sources
 - [Brønnøysund Register Centre: Helthjem Netthandel AS](https://virksomhet.brreg.no/nb/oppslag/enheter/914919010) – empresa em Oslo, serviços postais e de entregas

@@ -15206,6 +15206,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0c72ba"
     },
     {
+      "id": "helthjem",
+      "catalog": "helthjem",
+      "slug": "rastreamento-helthjem",
+      "title": "Rastreamento Helthjem: status, pontos de retirada e contato",
+      "name": "Helthjem",
+      "color": "#ffb202"
+    },
+    {
       "id": "geniki-taxydromiki",
       "catalog": "geniki-taxydromiki",
       "slug": "rastreamento-geniki-taxydromiki",
@@ -15324,6 +15332,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Australia Post: códigos, status e lockers",
       "name": "Australia Post",
       "color": "#dc1928"
+    },
+    {
+      "id": "magyar-posta",
+      "catalog": "magyar-posta",
+      "slug": "rastreamento-magyar-posta",
+      "title": "Rastreamento Magyar Posta: status em húngaro explicados",
+      "name": "Magyar Posta",
+      "color": "#346631"
     },
     {
       "id": "first-line",
@@ -18980,6 +18996,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0c72ba"
     },
     {
+      "id": "helthjem",
+      "catalog": "helthjem",
+      "slug": "helthjem-wuliu-chaxun",
+      "title": "Helthjem 物流查询：挪威夜间派送、状态与取件点",
+      "name": "Helthjem",
+      "color": "#ffb202"
+    },
+    {
       "id": "geniki-taxydromiki",
       "catalog": "geniki-taxydromiki",
       "slug": "geniki-taxydromiki-wuliu-chaxun",
@@ -19098,6 +19122,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "澳洲邮政（Australia Post）物流查询：单号、状态与快递柜",
       "name": "Australia Post",
       "color": "#dc1928"
+    },
+    {
+      "id": "magyar-posta",
+      "catalog": "magyar-posta",
+      "slug": "magyar-posta-wuliu-chaxun",
+      "title": "匈牙利邮政（Magyar Posta）物流查询：状态与快递柜",
+      "name": "Magyar Posta",
+      "color": "#346631"
     },
     {
       "id": "first-line",

@@ -57,6 +57,30 @@ class ShareInboxTests {
         }
     }
 
+    /** A waiting draft stays for Add; an expired, future, malformed or blank one goes. */
+    @Test
+    fun theProcessDropsOnlyDraftsAddWouldRefuse() {
+        val defaults = MemoryDefaults()
+        val draft = SharedParcelDraft(label = "Desk lamp", trackingInput = "TESTLAMP0001", createdAt = now)
+        ShareInbox.discardStale(defaults, now)
+        for ((seconds, kept) in listOf(0L to true, 600L to true, 601L to false, -1L to false)) {
+            assertTrue(ShareInbox.save(draft, defaults))
+            ShareInbox.discardStale(defaults, now.plusSeconds(seconds))
+            assertEquals("$seconds s", kept, defaults.hasObject(forKey = key))
+        }
+        ShareInbox.save(draft, defaults)
+        ShareInbox.discardStale(defaults, now.plusSeconds(10))
+        assertEquals(draft, ShareInbox.consume(defaults, now.plusSeconds(10)))
+        for (data in listOf("broken", "{\"id\":\"00000000-0000-4000-8000-000000000001\",\"label\":\"\",\"trackingInput\":\"12345678\"}")) {
+            defaults.set(data.toByteArray(), forKey = key)
+            ShareInbox.discardStale(defaults, now)
+            assertFalse(defaults.hasObject(forKey = key))
+        }
+        ShareInbox.save(SharedParcelDraft(trackingInput = " \n", createdAt = now), defaults)
+        ShareInbox.discardStale(defaults, now)
+        assertFalse(defaults.hasObject(forKey = key))
+    }
+
     @Test
     fun aDraftWithNothingButSpacesIsDropped() {
         val defaults = MemoryDefaults()

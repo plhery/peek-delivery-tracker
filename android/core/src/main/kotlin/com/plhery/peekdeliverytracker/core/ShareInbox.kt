@@ -54,6 +54,20 @@ object ShareInbox {
     fun consume(defaults: UserDefaults, now: Instant = AppClock.now()): SharedParcelDraft? {
         val data = defaults.data(forKey = key) ?: return null
         defaults.removeObject(forKey = key)
+        return usable(data, now)
+    }
+
+    /**
+     * Takes away a draft [consume] would refuse, leaving one that is still waiting. The process calls it as it starts,
+     * for a widget, a push or background work as much as for the window, so shared text that Add never took doesn't
+     * stay on the phone until the app next opens.
+     */
+    fun discardStale(defaults: UserDefaults, now: Instant = AppClock.now()) {
+        val data = defaults.data(forKey = key) ?: return
+        if (usable(data, now) == null) defaults.removeObject(forKey = key)
+    }
+
+    private fun usable(data: ByteArray, now: Instant): SharedParcelDraft? {
         val stored = try {
             decodeJson(Stored.serializer(), data)
         } catch (_: Exception) {

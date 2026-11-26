@@ -16,6 +16,7 @@ import com.plhery.peekdeliverytracker.core.LinkDeliveries
 import com.plhery.peekdeliverytracker.core.Maintenance
 import com.plhery.peekdeliverytracker.core.NativeRoute
 import com.plhery.peekdeliverytracker.core.ParcelLinkRoute
+import com.plhery.peekdeliverytracker.core.ShareInbox
 import com.plhery.peekdeliverytracker.core.SharedResources
 import com.plhery.peekdeliverytracker.core.UserDefaults
 import com.plhery.peekdeliverytracker.platform.AppNotifications
@@ -119,6 +120,8 @@ open class PeekApplication : Application() {
         }
         // Google Play's build starts Firebase, which the manifest no longer does: before a push or a new token reaches it.
         Store.start(this)
+        // What another app shared and Add never took goes once it is past its ten minutes, whatever starts the process.
+        ShareInbox.discardStale(shareDefaults())
         val assets = assets
         SharedResources.install { name ->
             try {

@@ -1,6 +1,6 @@
 ---
 title: TNT 快递查询：9 位运单号、物流状态与客服电话
-description: 在 tnt.com 查询 TNT Express 国际快件：9 位运单号查找位置、英文状态对照、未妥投改派、清关理赔与各国客服电话。
+description: 在 tnt.com 查询 TNT Express 国际快件：9 位运单号查找位置、英文状态对照、派送未成功与改派、清关理赔与各国客服电话。
 slug: tnt-kuaidi-chaxun
 published: 2026-11-25
 updated: 2026-11-25
@@ -17,13 +17,13 @@ TNT 为全球个人和企业承运包裹、文件和货运，并在欧洲拥有�
 | 3 位字母加 9 位数字 | 澳大利亚境内快件，在 TNT Australia 独立查件页查询，不在 tnt.com | `XYZ482917365` |
 | 寄件人自定的字母和数字 | 客户参考号（customer reference），下单时可选填写 | – |
 
-运单号印在发货确认邮件中，或揽收清单条码下方；寄件人也可在 TNT 发票左侧、客户编号下方约 3 厘米处找到。作为收件人，可直接向商家或寄件人索要。tnt.com 支持同时查询多个单号，用英文逗号隔开。另见[如何查找快递单号](guide:find-tracking-number)（英文）。
+运单号印在发货确认邮件中，或揽收清单条码下方；寄件人也可在 TNT 发票左侧、客户编号下方约 3 厘米处找到。作为收件人，可直接向商家或寄件人索要。tnt.com 可以同时查询多个单号，用英文逗号隔开。另见[如何查找快递单号](guide:find-tracking-number)（英文）。
 
 TNT 每月承运超过两百万票快件，因此 8 位和 9 位单号每隔三到四周便会循环复用。若 tnt.com 在同一单号下列出多票快件，请根据日期、始发地和目的地挑选属于你的那一票。
 
 ## TNT 物流状态含义
 
-以下为 tnt.com 常见的英文文案，按快件通常经历的顺序排列：
+以下是 tnt.com 的英文文案，按快件通常经历的顺序排列：
 
 | TNT 英文状态 | 对你的含义 |
 | --- | --- |
@@ -45,15 +45,15 @@ TNT 每月承运超过两百万票快件，因此 8 位和 9 位单号每隔三�
 
 Track & Trace 还会显示 TNT 的预计送达日期，以及签收后的签收人姓名。
 
-## TNT 派送、未妥投、改派与网点自提
+## TNT 派送、派送未成功、改派与网点自提
 
 TNT 会将包裹送至收件地址，交给你本人或看似有权代收的人员。其常见问题说明无法投递至邮政信箱（PO box），必须提供完整街道地址；不过条款在寄件人提供收件人电话的前提下，允许部分国际目的地使用邮政信箱。上述条款适用于从欧洲寄出的 TNT 快件；欧洲以外寄出的快件适用当地收件 TNT 公司的条款。
 
-**未妥投。** 司机会留下 “We Missed You” 通知卡。TNT 常见问题说明，可凭卡片通过 Re-delivery Service 预约重派或改至网点自提。没收到卡片或尚未尝试派送？请携带运单号、收件地址与期望日期联系 TNT。重派仅在周一至周五进行。
+**派送未成功。** 司机会留下 “We Missed You” 通知卡。TNT 常见问题说明，可凭卡片通过 Re-delivery Service 预约重派或改至网点自提。没收到卡片或尚未尝试派送？请携带运单号、收件地址与期望日期联系 TNT。重派仅在周一至周五进行。
 
 **TNT 条款规定的处理方式。** 住宅地址如需签收而首次派送失败，TNT 可再次尝试、暂存等待你或寄件人指示，或投递至其选定的地点。商业地址在三次尝试失败（或首次尝试后满五个工作日）后即视为无法投递；TNT 会联系寄件人安排退回，若五个工作日内联系不上，可能会退件、仓储或处置。
 
-**更改派送方式。** 在部分地区，针对企业发往个人的包裹，TNT 支持按收件人指示改期、交邻居代收、改投同国另一地址、无签收放件或转自提点。其他类型的改址将按新快件计费，可能产生额外费用。
+**更改派送方式。** 在部分地区，针对企业发往个人的包裹，TNT 会按收件人指示改期、交邻居代收、改投同国另一地址、无签收放件或转自提点。其他类型的改址将按新快件计费，可能产生额外费用。
 
 ## TNT 清关、关税与进口税
 
@@ -73,21 +73,21 @@ TNT 会将包裹送至收件地址，交给你本人或看似有权代收的人�
 
 ## TNT 各国客服电话
 
-以下为 tnt.com 各国支持页面列出的客服电话：
+以下为 tnt.com 各国帮助页面列出的客服电话：
 
 - **英国：** 0800 100 600，周一至周五 08:00 至 18:00，周六 08:00 至 13:00。
 - **爱尔兰：** +353 818 400 600。
 - **澳大利亚：** 13 11 50，周一至周五 08:00 至 18:00，周六 08:00 至 12:00。
 - **美国与加拿大：** 1-800-558-5555（tnt.com 说明 TNT 在当地以 FedEx 名义运营）。
-- **其他国家/地区：** 请查看所在国家 tnt.com 支持页面公布的本地电话。
+- **其他国家/地区：** 请查看所在国家 tnt.com 帮助页面公布的本地电话。
 
 在英国，tnt.com 帮助中心链接的投诉章程说明可通过 tnt.com 的 Contact us 表单提交投诉，目标在 5 天内（复杂案件 14 天内）处理完毕。
 
 ## 使用 Peek 追踪 TNT 包裹
 
-直接粘贴 9 位运单号即可。若校验位正确，[Peek](/) 会向 TNT 查询（当单号也符合 TForce Freight 和 XPO 的校验规则时会一并查询），只要 TNT 有记录便显示“TNT 有这个包裹的记录。”。就算校验位不匹配也可以照常粘贴：Peek 支持超过 4,500 家承运商；如果未自动识别，点“更换”或在包裹页使用“更换快递公司”选择 TNT 即可。以 GE 开头、中间 9 位数字、以 WW 结尾且校验位正确的单号会立刻识别为 TNT。包含 `tracking.html?cons=` 及单号的 tnt.com 查件链接也可直接粘贴，Peek 会自动读取其中的单号。
+直接粘贴 9 位运单号即可。若校验位正确，[Peek](/) 会向 TNT 查询（当单号也符合 TForce Freight 和 XPO 的校验规则时会一并查询），只要 TNT 有记录便显示“TNT 有这个包裹的记录。”。就算校验位不匹配也可以照常粘贴：Peek 跟踪 4,500 多家快递公司；如果没有出现 TNT，点“更换”或在包裹页使用“更换快递公司”选择 TNT 即可。以 GE 开头、中间 9 位数字、以 WW 结尾且校验位正确的单号会立刻识别为 TNT。包含 `tracking.html?cons=` 及单号的 tnt.com 查件链接也可直接粘贴，Peek 会读取其中的单号。
 
-Peek 读取 tnt.com 的英文追踪接口，因此上表状态在任何语言下都保持英文原文，并显示当前状态、带城市与国家的扫描历史、目的国以及 TNT 提供的预计送达日期；寄件人参考号和签名仅保留在 tnt.com 上。由于 TNT 会复用单号，Peek 会跟随扫描最新的那一票，请核对路线是否属于你。Peek 也支持通过 TNT 法国官网以法语追踪 TNT 法国的 16 位国内单号；因多家快递共用 16 位长度，有时需手动选择 TNT。对于 3 位字母加 9 位数字的澳大利亚境内快件，Peek 会将其作为独立承运商 TNT Australia 通过 TNT 澳大利亚查件页追踪，展示状态、各网点扫描及预计送达日期；由于其他承运商也使用该形态，Peek 会一并查询并在对方有记录时显示“TNT Australia 有这个包裹的记录。”，否则通过“更换”或“更换快递公司”手动选 TNT Australia（带 `con=` 与单号的 TNT Australia 链接则可直接识别）。在你打开包裹页面期间，或在派送当天开启提醒时，只要 TNT 官网有响应，Peek 最高每 10 分钟检查一次，在 TNT 扫描进入派送当天当地时间早上 6 点起每 2 分钟一次（经由追踪服务时每小时检查一次，超过一天无新动态后每 3 小时一次，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次）；支持按“每次扫描”、“重要环节”或“仅派送当天”通知。连续两天没有新动态后（仍停留在“已生成面单”或“已揽收”时为 12 小时后），Peek 改为每小时检查一次。它无法代你联系 TNT 或寄件人。
+Peek 读取 tnt.com 的英文查件信息，因此上表状态在任何语言下都保持英文原文，并显示当前状态、带城市与国家的扫描历史、目的国以及 TNT 提供的预计送达日期；寄件人参考号和签名仅保留在 tnt.com 上。由于 TNT 会复用单号，Peek 会跟随扫描最新的那一票，请核对路线是否属于你。Peek 也会在 TNT 法国自己的查件系统上以法语跟踪 TNT 法国的 16 位国内单号；因多家快递共用 16 位长度，有时需手动选择 TNT。对于 3 位字母加 9 位数字的澳大利亚境内快件，Peek 会将其作为独立承运商 TNT Australia 通过 TNT 澳大利亚查件页追踪，展示状态、各网点扫描及预计送达日期；由于其他快递公司的单号也是这种形态，Peek 不会仅凭形态认定为 TNT Australia，而是同时询问 TNT Australia 和这些快递公司，TNT Australia 有记录时显示“TNT Australia 有这个包裹的记录。”，否则通过“更换”或“更换快递公司”手动选 TNT Australia（带 `con=` 与单号的 TNT Australia 查件链接会立刻识别为 TNT Australia）。在你打开包裹页面期间，或在派送当天开启提醒时，只要 TNT 自己的查件系统正常响应，Peek 最高每 10 分钟检查一次，在 TNT 扫描进入派送当天当地时间早上 6 点起每 2 分钟一次（通过物流查询服务时每小时检查一次，超过一天无新动态后每 3 小时一次，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次）；可以按“每次扫描”、“重要环节”或“仅派送当天”通知。连续两天没有新动态后（仍停留在“已生成面单”或“已揽收”时为 12 小时后），Peek 改为每小时检查一次。它无法代你联系 TNT 或寄件人。
 
 ## TNT 快递查询常见问题
 
@@ -101,15 +101,15 @@ TNT 每隔三到四周便会循环复用 8 位和 9 位单号。请按发运日�
 
 ### 我可以去 TNT 网点自提包裹吗？
 
-可以，在错过派送后即可：TNT 常见问题说明，可使用 “We Missed You” 卡片通过 Re-delivery Service 预约重派或前往网点自提。
+可以，在派送未成功后即可：TNT 常见问题说明，可使用 “We Missed You” 卡片通过 Re-delivery Service 预约重派或前往网点自提。
 
 ### TNT 周六派送吗？
 
-重派仅限周一至周五。在周六不算工作日的国家/地区，如需周六派送（在提供该服务的地区）通常需支付特别处理费。
+重派仅限周一至周五。在周六不算工作日的国家/地区，如需周六派送（在提供该服务的地区）需支付特别处理费。
 
 :::sources
 - [TNT: Our Company](https://www.tnt.com/express/en_gb/site/company.html) – 包裹、文件与货运业务及欧洲自有公路网络
-- [TNT: Track & Trace](https://www.tnt.com/express/en_gb/site/shipping-tools/tracking.html) – 最多一小时入库、保留 90 天、每月两百万票、循环复用单号、未妥投、周一至周五重派与妥投证明
+- [TNT: Track & Trace](https://www.tnt.com/express/en_gb/site/shipping-tools/tracking.html) – 最多一小时入库、保留 90 天、每月两百万票、循环复用单号、派送未成功、周一至周五重派与妥投证明
 - [TNT: Help Centre](https://www.tnt.com/express/en_gb/site/support.html) – 发票单号位置、重派与英国电话及工作时间
 - [TNT: Frequently Asked Questions](https://www.tnt.com/express/en_gb/site/support/faq.html) – 邮政信箱限制、网点自提、索赔主体与三周结案目标
 - [TNT: Terms and Conditions of Carriage for Europe](https://www.tnt.com/express/en_gb/site/terms-conditions.html) – 欧洲发运条款、派送、邮政信箱、周六派送、派送次数、无法投递处置、清关关税与 21 天索赔期
@@ -123,5 +123,5 @@ TNT 每隔三到四周便会循环复用 8 位和 9 位单号。请按发运日�
 - [TNT Canada: TNT is now FedEx](https://www.tnt.com/express/en_ca/site/home.html) – 加拿大以 FedEx 名义运营及电话
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 自 2026 年 7 月 1 日起 3 欧元关税与自 2026 年 11 月 1 日起 2 欧元处理费
 - [European Commission: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 按每类商品计征细则
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 展示字段与 TNT Australia 国内件独立追踪规则
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 显示的信息、TNT Australia 的国内快件及其查件页
 :::

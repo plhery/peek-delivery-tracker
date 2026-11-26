@@ -948,9 +948,14 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   do not trigger recognition.
 - **Retries.** Answers are kept in `routing.candidate_probes`, not with the carrier
   failures, so they decide neither the parcel's status, nor the filed carrier's retry, nor
-  the health evidence of the check. The next check waits 1, 2, 4, then 6 hours, since a
-  parcel appears once it is handed over, and a day after six misses, but the carrier the
-  number points to (above) is asked every 6 hours. For a number nobody
+  the health evidence of the check. A carrier that answers it does not know the number is
+  asked again for that parcel a day later, or sooner once the number, the parcel's carrier,
+  the carrier a provider named or the lookup country changes (`asked_as`). This holds unless
+  the number points to that carrier (above), or it is the only carrier recognition asks.
+  For those carriers, and for one that knew the number or gave no answer, the next check
+  waits 1, 2, 4, then 6 hours, since a parcel appears once it is handed over. After six
+  misses the wait is a day, but the carrier the number points to is still asked every 6
+  hours. For a number nobody
   has seen, a wait that would outlast its hourly checks ends an hour before they do, half
   an hour after the ask at the soonest: the last of them asks the carriers again, those
   ranked first among them, before the checks slow down or a lookup leaves the schedule.

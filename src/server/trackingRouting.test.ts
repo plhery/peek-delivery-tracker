@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { UpstreamHttpError } from 'universal-parcel-scraper/node';
-import { directCarrier, earlierParcelRows, foreignHistory, minimumInterval, opensBrowser, lastResort, recheckSources, recognizers, RoutingDeferred, routingState, suggestedInput, TrackingRouter, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
+import { directCarrier, earlierParcelRows, foreignHistory, minimumInterval, opensBrowser, lastResort, recheckSources, recognitionAsk, recognizers, RoutingDeferred, routingState, suggestedInput, TrackingRouter, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
 import { AUTOMATIC_CARRIER_IDS, carrierAdapter } from './carriers';
 import { refusesNumber } from './numberRefusal';
 import { STORED_EVENT_IDENTITIES } from './supabase';
@@ -139,8 +139,9 @@ describe('persistent tracking routing', () => {
     const browserAsked = first.recognizeBrowser.mock.calls.map(([carrier]) => carrier as string);
     expect(browserAsked.length, 'a carrier asked through a browser').toBeGreaterThan(0);
     const routing = result.result.routing;
+    // A carrier that answered it does not know the number waits a day.
     expect(routing).toMatchObject({ candidate_probes: Object.fromEntries(browserAsked.map((carrier) =>
-      [carrier, { count: 1, retry_at: '2026-09-10T13:00:00.000Z' }])) });
+      [carrier, { count: 1, retry_at: '2026-09-11T12:00:00.000Z', asked_as: expect.any(String) }])) });
     const next = setup(new Date('2026-09-10T12:10:00Z'));
     await next.router.fetch({ ...input, carrier_data: { routing } }, false);
     expect(next.recognizeBrowser).not.toHaveBeenCalled();
@@ -1162,6 +1163,9 @@ describe('persistent tracking routing', () => {
     // The scraper decides which carriers share a shape, and in what order.
     const fourteen = recognitionAskedCarriers(swissDpd);
     const probes = (count: number, retryAt: string, carriers = fourteen) => Object.fromEntries(carriers.map(carrier => [carrier, { count, retry_at: retryAt }]));
+    // The carriers asked about swissDpd that it does not point to, after they said they do not know it.
+    const missedProbes = (count: number, retryAt: string) => Object.fromEntries(fourteen.filter((carrier) => carrier !== 'dpd')
+      .map((carrier) => [carrier, { count, retry_at: retryAt, asked_as: expect.any(String) }]));
     const notFound = (carrier: string) => new NotFoundError(carrier);
     const knows = (...carriers: string[]) => async (carrier: string) => ({ known: carriers.includes(carrier) });
     const asked = (recognize: ReturnType<typeof vi.fn>) => recognize.mock.calls.map(([carrier]) => carrier);
@@ -1382,24 +1386,44 @@ describe('persistent tracking routing', () => {
       expect(result.correction?.carrier).toBe(carrier);
       expect(universal).not.toHaveBeenCalled();
     });
-    it('asks again within hours, outside the carrier failures', async () => {
+    it('asks the carrier a number points to again within hours, and the others that do not know it a day on, outside the carrier failures', async () => {
       const { router, universal, recognize } = setup();
       const result = await router.fetch(parcel({ tracking_number: swissDpd }), false);
       expect(asked(recognize)).toEqual(fourteen);
       expect(universal).toHaveBeenCalled();
       const routing = result.result.routing as JsonObject & { failures: JsonObject; candidate_probes: JsonObject };
-      expect(routing.candidate_probes).toEqual(probes(1, '2026-09-10T13:00:00.000Z'));
+      expect(routing.candidate_probes).toEqual({ ...missedProbes(1, '2026-09-11T12:00:00.000Z'),
+        dpd: { count: 1, retry_at: '2026-09-10T13:00:00.000Z' } });
       // The answers decide neither the parcel's status nor a carrier cooldown.
       expect(routing.failures).toEqual({});
       // Inside the cooldown the next check goes straight to the universals.
       const next = setup(new Date('2026-09-10T12:30:00Z'));
       const again = await next.router.fetch(parcel({ tracking_number: swissDpd, carrier_data: result.result }), false);
       expect(asked(next.recognize).filter(carrier => fourteen.includes(carrier))).toEqual([]);
-      // After it, a second miss doubles the wait.
+      // After it, only DPD is asked, and a second miss doubles its wait.
       const later = setup(new Date('2026-09-10T13:05:00Z'));
       const third = await later.router.fetch(parcel({ tracking_number: swissDpd, carrier_data: again.result }), false);
+      expect(asked(later.recognize).filter(carrier => fourteen.includes(carrier))).toEqual(['dpd']);
       expect((third.result.routing as JsonObject & { candidate_probes: JsonObject }).candidate_probes)
         .toMatchObject({ dpd: { count: 2, retry_at: '2026-09-10T15:05:00.000Z' } });
+    });
+    it('asks a carrier that did not know the number again once the number or what points to a carrier changes', async () => {
+      const first = setup();
+      const result = await first.router.fetch(parcel({ tracking_number: swissDpd }), false);
+      const others = fourteen.filter((carrier) => carrier !== 'dpd');
+      expect((result.result.routing as JsonObject & { candidate_probes: JsonObject }).candidate_probes[others[0]!])
+        .toEqual({ count: 1, retry_at: '2026-09-11T12:00:00.000Z', asked_as: recognitionAsk(swissDpd, 'unknown', undefined, null) });
+      const check = async (carrierData: JsonObject) => {
+        const run = setup(new Date('2026-09-10T13:05:00Z'));
+        await run.router.fetch(parcel({ tracking_number: swissDpd, carrier_data: carrierData }), false);
+        return asked(run.recognize).filter((carrier) => others.includes(carrier));
+      };
+      expect(await check(result.result)).toEqual([]);
+      // A lookup country given since; a carrier a provider names, the parcel's carrier or its number changes it too.
+      expect(await check({ ...result.result, lookup_country_hint: 'IE' })).not.toEqual([]);
+      const same = recognitionAsk(swissDpd, 'unknown', undefined, null);
+      expect([recognitionAsk(swissDpd, 'unknown', 'seur', null), recognitionAsk(swissDpd, 'intl-post', undefined, null),
+        recognitionAsk('06080000000010', 'unknown', undefined, null)]).not.toContain(same);
     });
     it('marks a carrier that gave no answer until it answers, and keeps its turn when a check leaves it out', async () => {
       vi.spyOn(scraper, 'recognitionCandidates').mockImplementation((_number, options) =>
@@ -1414,18 +1438,19 @@ describe('persistent tracking routing', () => {
       added.recognize.mockImplementation(down);
       const first = await added.router.fetch(parcel({ tracking_number: number }), false, undefined, true);
       expect(candidateProbes(first)['hermes-de']).toEqual({ count: 1, retry_at: '2026-09-10T13:00:00.000Z', unanswered: true });
-      expect(candidateProbes(first).dpd).toEqual({ count: 1, retry_at: '2026-09-10T13:00:00.000Z' });
-      // Its turn comes with the others', and a check that asks five carriers at most leaves it out: it keeps a turn an hour on.
-      const refresh = setup(new Date('2026-09-10T13:05:00Z'));
+      // The others said they do not know the number: they wait a day.
+      expect(candidateProbes(first).dpd).toEqual({ count: 1, retry_at: '2026-09-11T12:00:00.000Z', asked_as: expect.any(String) });
+      // Its turn comes with the others' a day on, and a check that asks five carriers at most leaves it out: it keeps a turn an hour on.
+      const refresh = setup(new Date('2026-09-11T12:05:00Z'));
       refresh.recognize.mockImplementation(down);
       const second = await refresh.router.fetch(parcel({ tracking_number: number, carrier_data: first.result }), false);
       expect(asked(refresh.recognize)).toEqual(twoBatches.slice(0, 5).map(({ carrier }) => carrier));
-      expect(candidateProbes(second)['hermes-de']).toEqual({ count: 1, retry_at: '2026-09-10T14:05:00.000Z', unanswered: true });
-      // Asked once it is back, it answers, and the mark goes.
-      const back = setup(new Date('2026-09-10T14:10:00Z'));
+      expect(candidateProbes(second)['hermes-de']).toEqual({ count: 1, retry_at: '2026-09-11T13:05:00.000Z', unanswered: true });
+      // Asked once it is back, it answers that it does not know the number: the mark goes, and it waits a day as the others do.
+      const back = setup(new Date('2026-09-11T13:10:00Z'));
       const third = await back.router.fetch(parcel({ tracking_number: number, carrier_data: second.result }), false);
       expect(asked(back.recognize)).toEqual(['hermes-de']);
-      expect(candidateProbes(third)['hermes-de']).toEqual({ count: 2, retry_at: '2026-09-10T16:10:00.000Z' });
+      expect(candidateProbes(third)['hermes-de']).toEqual({ count: 2, retry_at: '2026-09-12T13:10:00.000Z', asked_as: expect.any(String) });
     });
     it('names the carrier a number\'s own format belongs to once asked, until it knows the number or a scan comes', async () => {
       // BRT's EOB numbers are no other carrier's; nothing answers for this one.
@@ -1520,7 +1545,7 @@ describe('persistent tracking routing', () => {
         .catch((error: RoutingDeferred) => error);
       const next = ((deferred as RoutingDeferred).routing as JsonObject & { candidate_probes: JsonObject }).candidate_probes;
       expect(next.dpd).toEqual({ count: 7, retry_at: '2026-09-10T18:00:00.000Z' });
-      expect(next[fourteen.find((carrier) => carrier !== 'dpd')!]).toEqual({ count: 7, retry_at: '2026-09-11T12:00:00.000Z' });
+      expect(next[fourteen.find((carrier) => carrier !== 'dpd')!]).toEqual({ count: 7, retry_at: '2026-09-11T12:00:00.000Z', asked_as: expect.any(String) });
     });
     it('asks again by the last hourly check of a number nobody has seen', async () => {
       // Added at 08:20 and checked hourly until 14:20; the carrier ranked first is among those asked.
@@ -1534,22 +1559,26 @@ describe('persistent tracking routing', () => {
         saved = result.result.routing as JsonObject;
         return { asked: asked(run.recognize), probes: saved.candidate_probes };
       };
-      expect(await check('2026-09-10T08:20:00Z')).toEqual({ asked: fourteen, probes: probes(1, '2026-09-10T09:20:00.000Z') });
-      expect((await check('2026-09-10T09:30:00Z')).probes).toEqual(probes(2, '2026-09-10T11:30:00.000Z'));
+      // DPD, which the number points to, keeps the hourly turns; the others that do not know it wait a day.
+      const dpd = (probes: unknown) => (probes as JsonObject).dpd;
+      expect(await check('2026-09-10T08:20:00Z')).toEqual({ asked: fourteen,
+        probes: { ...missedProbes(1, '2026-09-11T08:20:00.000Z'), dpd: { count: 1, retry_at: '2026-09-10T09:20:00.000Z' } } });
+      expect(dpd((await check('2026-09-10T09:30:00Z')).probes)).toEqual({ count: 2, retry_at: '2026-09-10T11:30:00.000Z' });
       const before = saved;
       // The third miss would wait 4 hours, past the hourly checks: it waits until their last hour.
-      expect((await check('2026-09-10T11:40:00Z')).probes).toEqual(probes(3, '2026-09-10T13:20:00.000Z'));
+      expect(dpd((await check('2026-09-10T11:40:00Z')).probes)).toEqual({ count: 3, retry_at: '2026-09-10T13:20:00.000Z' });
       // In between, only carriers ranked lower are asked.
       expect((await check('2026-09-10T12:40:00Z')).asked.filter((carrier) => fourteen.includes(carrier))).toEqual([]);
       const last = await check('2026-09-10T13:40:00Z');
-      expect(last.asked).toEqual(fourteen);
+      expect(last.asked.filter((carrier) => fourteen.includes(carrier))).toEqual(['dpd']);
       // Asked in that last hour, the next wait is the usual one.
-      expect(last.probes).toMatchObject(probes(4, '2026-09-10T19:40:00.000Z'));
+      expect(dpd(last.probes)).toEqual({ count: 4, retry_at: '2026-09-10T19:40:00.000Z' });
+      expect(last.probes).toMatchObject(missedProbes(1, '2026-09-11T08:20:00.000Z'));
       // A number someone has seen, or one past its hourly checks, keeps the usual waits.
       saved = before;
-      expect((await check('2026-09-10T11:40:00Z', null)).probes).toEqual(probes(3, '2026-09-10T15:40:00.000Z'));
+      expect(dpd((await check('2026-09-10T11:40:00Z', null)).probes)).toEqual({ count: 3, retry_at: '2026-09-10T15:40:00.000Z' });
       saved = before;
-      expect((await check('2026-09-10T14:40:00Z')).probes).toEqual(probes(3, '2026-09-10T18:40:00.000Z'));
+      expect(dpd((await check('2026-09-10T14:40:00Z')).probes)).toEqual({ count: 3, retry_at: '2026-09-10T18:40:00.000Z' });
     });
     it('asks a carrier with a minimum interval of its own no sooner than it allows, and once it has passed', async () => {
       // Only Poste Italiane fits this number, and it allows an hour between two lookups of a number.

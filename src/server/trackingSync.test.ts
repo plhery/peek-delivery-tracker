@@ -1736,7 +1736,7 @@ describe('TrackingSyncService', () => {
     ['within its hourly checks', '2026-09-10T08:20:00Z', '2026-09-10T13:20:00.000Z'],
     // Past them, the checks come every 6 hours and catch the usual wait.
     ['past its hourly checks', '2026-09-10T05:20:00Z', '2026-09-10T15:40:00.000Z'],
-  ])('asks the carriers again by the last hourly check of a number nobody has seen, %s', async (_label, created, retry) => {
+  ])('asks the carriers that gave no answer again by the last hourly check of a number nobody has seen, %s', async (_label, created, retry) => {
     const carriers = ['dpd', 'seur', 'brt'];
     vi.spyOn(scraper, 'recognitionCandidates').mockReturnValue(carriers.map((carrier) => ({ carrier, needsInput: null, preferred: false })));
     vi.spyOn(scraper, 'universalPlan').mockReturnValue({ sources: ['ParcelsApp'], carrier: null, tier: () => 'unknown', rank: () => 0 });
@@ -1745,15 +1745,16 @@ describe('TrackingSyncService', () => {
       finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
     };
     const adapter = { fetch: vi.fn(), fetchUniversal: vi.fn().mockRejectedValue(new NoHistoryError('ParcelsApp')),
-      recognize: vi.fn().mockResolvedValue({ known: false }) };
-    const probes = (count: number, at: string) => Object.fromEntries(carriers.map((carrier) => [carrier, { count, retry_at: at }]));
+      recognize: vi.fn().mockRejectedValue(new Error('down')) };
+    const probes = (count: number, at: string, unanswered = false) => Object.fromEntries(carriers.map((carrier) =>
+      [carrier, { count, retry_at: at, ...unanswered ? { unanswered: true } : {} }]));
     const parcel: JsonObject = { id: 'unseen', carrier: 'unknown', tracking_number: '00000000000001', current_stage: 'pending',
       created_at: created, carrier_data: { routing: { version: 1, configured_carrier: 'unknown', failures: {}, probe_cursor: 0,
         discovery_cursor: 0, candidate_probes: probes(2, '2026-09-10T11:30:00Z') } } };
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-09-10T11:40:00Z'));
     await service.syncPackage(parcel);
     expect(adapter.recognize).toHaveBeenCalledTimes(3);
-    expect(client.updatePackage.mock.calls.at(-1)![1].carrier_data.routing.candidate_probes).toEqual(probes(3, retry));
+    expect(client.updatePackage.mock.calls.at(-1)![1].carrier_data.routing.candidate_probes).toEqual(probes(3, retry, true));
   });
 
   it.each(['ParcelsApp', 'Ship24'] as const)('keeps the country hint through a %s lookup that does not send it and later direct recovery', async (provider) => {

@@ -137,8 +137,10 @@ export interface RoutingState extends JsonObject {
    * Per-candidate schedule of the recognitions that ask carriers the number points to. `known`: the carrier last said
    * it knows the number, though its lookup was not adopted. `unanswered`: it gave no answer when last asked (an
    * outage, a block or a timeout), so a lookup nobody has answered for stays on the schedule for its next turn.
+   * `asked_as`: what the carrier was asked with when it said it does not know the number (`recognitionAsk`); its wait
+   * holds only while the parcel still asks with the same.
    */
-  candidate_probes?: Record<string, { count: number; retry_at: string; known?: true; unanswered?: true }>;
+  candidate_probes?: Record<string, { count: number; retry_at: string; known?: true; unanswered?: true; asked_as?: string }>;
   /**
    * When the number last asked each carrier with a minimum interval of its own (`minimumInterval`) that the parcel
    * is not filed under, by recognition or a lookup: until the interval has passed, it is not asked again.
@@ -276,6 +278,14 @@ export function opensBrowser(carrier: string): boolean {
 export function lastResort(candidate: RecognitionCandidate): boolean {
   return ('lastResort' in candidate && candidate.lastResort === true)
     || ('outsideCountry' in candidate && candidate.outsideCountry === true);
+}
+
+/**
+ * What recognition asks a carrier with, as a short digest kept in the routing state: the number, the parcel's carrier,
+ * the carrier a provider named and the lookup country.
+ */
+export function recognitionAsk(number: string, filed: string, named: string | undefined, country: string | null | undefined): string {
+  return createHash('sha256').update([number, filed, named ?? '', country ?? ''].join('\n')).digest('base64url').slice(0, 12);
 }
 
 /** The carriers recognition can ask about a number, over HTTP or in a browser. */
@@ -1803,10 +1813,17 @@ export class TrackingRouter {
     const heldInside = (candidates: readonly RecognitionCandidate[]) => Boolean(state.input_needed)
       || Object.entries(state.candidate_probes ?? {}).some(([carrier, probe]) => probe.known
         && !candidates.some((candidate) => candidate.carrier === carrier && lastResort(candidate)));
+    // What recognition asks a carrier with: the number and what points to a carrier (the filed one, the one a provider
+    // named, the lookup country). A carrier that said it does not know the number waits only while these stay the same.
+    const askedAs = recognitionAsk(number, declared, state.discovered_carrier, countryHint);
+    const probeTurn = (carrier: string) => {
+      const probe = state.candidate_probes?.[carrier];
+      return probe && (!probe.asked_as || probe.asked_as === askedAs) ? millis(probe.retry_at) : 0;
+    };
     if (!prefetchedUniversal.size && recognizes(primary)) {
       const excluded = ownBrand(primary);
       const skip = (candidate: string) => excluded(candidate) || attemptedDirect.has(candidate)
-          || millis(state.candidate_probes?.[candidate]?.retry_at) > now().getTime()
+          || probeTurn(candidate) > now().getTime()
           || millis(state.failures[candidate]?.retry_at) > now().getTime() || pacedOut(candidate);
       const ordering = recognitionOrder(skip);
       const eligible = recognize ? recognitionCandidates(number, ordering) : [];
@@ -1918,13 +1935,18 @@ export class TrackingRouter {
         // tracks it without the input. A lookup that failed on the way leaves the request.
         delete state.input_needed;
       }
-      // Nothing adopted: ask again after 1, 2, 4, then 6 hours, since a parcel
-      // shows up once it is handed over, and daily after six misses, but by the
-      // last hourly check of a number nobody has seen. The carrier the number
-      // points to stays at 6 hours, as a parcel's own carrier is asked before
-      // its first scan. These answers decide neither the parcel's status nor
-      // the filed carrier's retry.
+      // Nothing adopted: the carrier the number points to (its format's or a preferred rule's, or the only one
+      // recognition asks) is asked again after 1, 2, 4, then 6 hours, as a parcel's own carrier is asked before its
+      // first scan, since a parcel shows up once it is handed over; so is a carrier that knew the number or gave no
+      // answer, daily after six misses, and by the last hourly check of a number nobody has seen. Any other carrier
+      // that said it does not know the number is asked again a day on, or once the number or what points to a carrier
+      // changes: asked at every check, such carriers almost never knew the number later. These answers decide neither
+      // the parcel's status nor the filed carrier's retry.
       const guessed = guessedCarrier(number);
+      const stillAsked = new Set([...(recognize ? recognitionCandidates(number, recognitionOrder(excluded)) : []),
+        ...(this.options.recognizeBrowser ? recognitionCandidates(number, { ...recognitionOrder(excluded), phase: 'browser' }) : [])]
+        .map(({ carrier }) => carrier));
+      const pointsTo = (carrier: string) => carrier === guessed || (stillAsked.size === 1 && stillAsked.has(carrier));
       const counted = new Set<string>();
       for (const carrier of new Set(outcomes.map((outcome) => outcome.carrier))) {
         // Our own pacing refused the read before any request: the carrier was not asked, so no miss counts.
@@ -1935,18 +1957,17 @@ export class TrackingRouter {
         // Known only on a recent answer: an older parcel sharing the number (FAN Courier reuses its AWBs) is not this one.
         const known = outcomes.some((outcome) => outcome.carrier === carrier && settleRecognition([outcome], now()).carrier === carrier);
         const answered = outcomes.some((outcome) => outcome.carrier === carrier && outcome.status !== 'failed');
+        const missed = answered && !known && !pointsTo(carrier);
         state.candidate_probes = { ...state.candidate_probes, [carrier]: {
-          count, retry_at: iso(beforeHourlyEnd(now().getTime() + Math.min(longest, HOUR * 2 ** (count - 1)))),
+          count, retry_at: iso(missed ? now().getTime() + DAY : beforeHourlyEnd(now().getTime() + Math.min(longest, HOUR * 2 ** (count - 1)))),
           ...(known ? { known: true as const } : {}),
           ...(answered ? {} : { unanswered: true as const }),
+          ...(missed ? { asked_as: askedAs } : {}),
         } };
       }
       // A carrier that gave no answer when last asked, whose turn came without this check asking it (its own
       // interval, its last failure or the check's limit held it back), keeps a turn an hour on, or once it is free:
       // a lookup nobody has answered for stays on the schedule for it (unseenLookup.ts).
-      const stillAsked = new Set([...(recognize ? recognitionCandidates(number, recognitionOrder(excluded)) : []),
-        ...(this.options.recognizeBrowser ? recognitionCandidates(number, { ...recognitionOrder(excluded), phase: 'browser' }) : [])]
-        .map(({ carrier }) => carrier));
       for (const [carrier, probe] of Object.entries(state.candidate_probes ?? {})) {
         if (!probe.unanswered || counted.has(carrier) || !stillAsked.has(carrier) || millis(probe.retry_at) > now().getTime()) continue;
         state.candidate_probes![carrier] = { ...probe, retry_at: iso(Math.max(now().getTime() + HOUR, askableAt(carrier),
@@ -2007,7 +2028,7 @@ export class TrackingRouter {
         for (const candidate of [...asked, ...(this.options.recognizeBrowser ? recognitionCandidates(number, { ...ordering, phase: 'browser' }) : [])]) {
           if (held && lastResort(candidate)) continue;
           const { carrier } = candidate;
-          turns.push(Math.max(millis(state.candidate_probes?.[carrier]?.retry_at), millis(state.failures[carrier]?.retry_at), askableAt(carrier)));
+          turns.push(Math.max(probeTurn(carrier), millis(state.failures[carrier]?.retry_at), askableAt(carrier)));
         }
       }
       const earliest = turns.length ? Math.min(...turns) : 0;

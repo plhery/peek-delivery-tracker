@@ -14,9 +14,9 @@ Peek riconosce due formati per Ozon, entrambi scritti con i trattini. I trattini
 
 | Codice (inventato) | Cos'è |
 | --- | --- |
-| `48291057-3628-1` | 8 cifre, 4 cifre e 1 cifra unite da trattini. Peek riconosce subito Ozon. |
+| `48291057-0362-1` | 8 cifre, 4 cifre e 1 cifra unite da trattini. Peek riconosce subito Ozon. |
 | `4829105736-2841-2` | Lo stesso schema con 10 cifre all'inizio. Anche qui Peek riconosce Ozon. |
-| `4829105736281` | Il primo numero senza trattini, o con spazi al loro posto. DPD France, Ukrposhta e altri corrieri usano codici a 13 cifre, quindi le cifre da sole non bastano a indicare Ozon. Se aggiunto da Russia, Bielorussia o Kazakistan, Peek interroga Ozon per primo; da altrove lo interroga per ultimo, quando gli altri corrieri e i servizi di tracciamento non hanno trovato il codice. Reinserisci i trattini oppure scegli Ozon a mano (sotto). Vale lo stesso per 15 cifre, formato usato da FedEx e altri. |
+| `4829105703621` | Il primo numero senza trattini, o con spazi al loro posto. DPD France, Ukrposhta e altri corrieri usano codici a 13 cifre, quindi le cifre da sole non bastano a indicare Ozon. Se aggiunto da Russia, Bielorussia o Kazakistan, Peek interroga Ozon per primo; da altrove lo interroga per ultimo, quando gli altri corrieri e i servizi di tracciamento non hanno trovato il codice. Reinserisci i trattini oppure scegli Ozon a mano (sotto). Vale lo stesso per 15 cifre, formato usato da FedEx e altri. |
 | `PL-482910-57362` | `PL`, 6 cifre e poi altre lettere o cifre, con trattini. Peek riconosce Ozon. |
 | `PL-482910-5736` | `PL` seguito da esattamente 10 cifre coincide anche con i numeri di [Amazon](carrier:amazon-logistics). Peek lo assegna ad Amazon e non permette di selezionare Ozon per questo formato. |
 
@@ -115,11 +115,11 @@ Per un ordine acquistato su Ozon, contatta Ozon. Per un ordine fatto in un altro
 
 ### Com'è fatto un codice di tracking Ozon?
 
-Peek associa a Ozon due formati, entrambi con trattini: tre gruppi di cifre (8 o 10 cifre, poi 4, poi 1, come `48291057-3628-1`) e codici che iniziano con `PL-`, come `PL-482910-57362`. Digita i trattini: senza, Peek non può riconoscerlo da solo come Ozon.
+Peek associa a Ozon due formati, entrambi con trattini: tre gruppi di cifre (8 o 10 cifre, poi 4, poi 1, come `48291057-0362-1`) e codici che iniziano con `PL-`, come `PL-482910-57362`. Digita i trattini: senza, Peek non può riconoscerlo da solo come Ozon.
 
 ### Perché Peek non riconosce il mio codice Ozon?
 
-Probabilmente lo hai inserito senza trattini o con spazi. Riscrivilo come `48291057-3628-1` con le tue cifre, oppure premi «Cambia» e seleziona Ozon.
+Probabilmente lo hai inserito senza trattini o con spazi. Riscrivilo come `48291057-0362-1` con le tue cifre, oppure premi «Cambia» e seleziona Ozon.
 
 ### Cosa significa «Заказ в пункте выдачи»?
 

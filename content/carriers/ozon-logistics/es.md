@@ -14,9 +14,9 @@ Peek conoce dos formatos para Ozon, ambos con guiones. Los guiones importan: sin
 
 | Número (inventado) | Qué es |
 | --- | --- |
-| `48291057-3628-1` | 8 cifras, 4 cifras y 1 cifra unidas por guiones. Peek identifica Ozon al instante. |
+| `48291057-0362-1` | 8 cifras, 4 cifras y 1 cifra unidas por guiones. Peek identifica Ozon al instante. |
 | `4829105736-2841-2` | Igual con 10 cifras al principio. Peek también identifica Ozon. |
-| `4829105736281` | El primer número sin guiones, o con espacios en su lugar. DPD France, Ukrposhta y otros transportistas usan números de 13 cifras, por lo que las cifras sueltas no bastan para saber que es Ozon. Si lo añades desde Rusia, Bielorrusia o Kazajistán, Peek pregunta primero a Ozon; desde otros países le pregunta el último, cuando los demás transportistas y los servicios de seguimiento no han encontrado el número. Vuelve a escribir los guiones o elige Ozon a mano (abajo). Lo mismo ocurre con 15 cifras, longitud que usan FedEx y otros. |
+| `4829105703621` | El primer número sin guiones, o con espacios en su lugar. DPD France, Ukrposhta y otros transportistas usan números de 13 cifras, por lo que las cifras sueltas no bastan para saber que es Ozon. Si lo añades desde Rusia, Bielorrusia o Kazajistán, Peek pregunta primero a Ozon; desde otros países le pregunta el último, cuando los demás transportistas y los servicios de seguimiento no han encontrado el número. Vuelve a escribir los guiones o elige Ozon a mano (abajo). Lo mismo ocurre con 15 cifras, longitud que usan FedEx y otros. |
 | `PL-482910-57362` | `PL`, 6 cifras y más letras o cifras, con guiones. Peek identifica Ozon. |
 | `PL-482910-5736` | `PL` con exactamente 10 cifras coincide con la forma de los números de [Amazon](carrier:amazon-logistics). Peek lo toma como número de Amazon y no permite elegir Ozon para él. |
 
@@ -115,11 +115,11 @@ Si compraste en Ozon, contacta con Ozon. Si compraste en otra tienda, habla prim
 
 ### ¿Cómo es un número de seguimiento de Ozon?
 
-Peek vincula dos formatos a Ozon, ambos con guiones: tres grupos de dígitos (8 o 10 cifras, luego 4 y luego 1, como `48291057-3628-1`) y números que empiezan por `PL-`, como `PL-482910-57362`. Escribe siempre los guiones: sin ellos Peek no sabe por sí solo que es de Ozon.
+Peek vincula dos formatos a Ozon, ambos con guiones: tres grupos de dígitos (8 o 10 cifras, luego 4 y luego 1, como `48291057-0362-1`) y números que empiezan por `PL-`, como `PL-482910-57362`. Escribe siempre los guiones: sin ellos Peek no sabe por sí solo que es de Ozon.
 
 ### ¿Por qué Peek no reconoce mi número de Ozon?
 
-Seguramente lo escribiste sin guiones o con espacios. Vuelve a escribirlo como `48291057-3628-1` con tus cifras, o pulsa «Cambiar» y elige Ozon.
+Seguramente lo escribiste sin guiones o con espacios. Vuelve a escribirlo como `48291057-0362-1` con tus cifras, o pulsa «Cambiar» y elige Ozon.
 
 ### ¿Qué significa «Заказ в пункте выдачи»?
 

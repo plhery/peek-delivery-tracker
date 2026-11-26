@@ -14,9 +14,9 @@ O Peek conhece dois formatos para a Ozon, ambos escritos com hífenes. Os hífen
 
 | Número (inventado) | O que é |
 | --- | --- |
-| `48291057-3628-1` | 8 algarismos, 4 algarismos e 1 algarismo ligados por hífenes. O Peek identifica logo a Ozon. |
+| `48291057-0362-1` | 8 algarismos, 4 algarismos e 1 algarismo ligados por hífenes. O Peek identifica logo a Ozon. |
 | `4829105736-2841-2` | O mesmo formato com 10 algarismos no início. O Peek também identifica a Ozon. |
-| `4829105736281` | O primeiro número sem hífenes, ou com espaços no lugar deles. A DPD France, a Ukrposhta e outras transportadoras têm números de 13 algarismos, pelo que só os algarismos não dizem ao Peek que é Ozon. Adicionado a partir da Rússia, Bielorrússia ou Cazaquistão, o Peek pergunta primeiro à Ozon; a partir de outros países pergunta-lhe em último lugar, quando as outras transportadoras e os serviços de seguimento não encontraram o número. Volta a pôr os hífenes ou escolhe a Ozon à mão (abaixo). O mesmo vale para 15 algarismos, usados pela FedEx e outras. |
+| `4829105703621` | O primeiro número sem hífenes, ou com espaços no lugar deles. A DPD France, a Ukrposhta e outras transportadoras têm números de 13 algarismos, pelo que só os algarismos não dizem ao Peek que é Ozon. Adicionado a partir da Rússia, Bielorrússia ou Cazaquistão, o Peek pergunta primeiro à Ozon; a partir de outros países pergunta-lhe em último lugar, quando as outras transportadoras e os serviços de seguimento não encontraram o número. Volta a pôr os hífenes ou escolhe a Ozon à mão (abaixo). O mesmo vale para 15 algarismos, usados pela FedEx e outras. |
 | `PL-482910-57362` | `PL`, 6 algarismos e mais letras ou algarismos, com hífenes. O Peek identifica a Ozon. |
 | `PL-482910-5736` | `PL` seguido exatamente de 10 algarismos tem também a forma dos números da [Amazon](carrier:amazon-logistics). O Peek toma-o por um número da Amazon e não permite escolher a Ozon para ele. |
 
@@ -115,11 +115,11 @@ O [Peek](/) segue um número Ozon apenas com o número: sem conta, telefone nem 
 
 ### Como é um número de seguimento Ozon?
 
-O Peek associa dois formatos à Ozon, ambos com hífenes: três grupos de algarismos (8 ou 10 algarismos, depois 4 e depois 1, como `48291057-3628-1`) e números começados por `PL-`, como `PL-482910-57362`. Escreve os hífenes: sem eles o Peek não sabe sozinho que o número é da Ozon.
+O Peek associa dois formatos à Ozon, ambos com hífenes: três grupos de algarismos (8 ou 10 algarismos, depois 4 e depois 1, como `48291057-0362-1`) e números começados por `PL-`, como `PL-482910-57362`. Escreve os hífenes: sem eles o Peek não sabe sozinho que o número é da Ozon.
 
 ### Porque é que o Peek não reconhece o meu número Ozon?
 
-Provavelmente escreveste-o sem hífenes ou com espaços. Volta a escrevê-lo como `48291057-3628-1` com os teus algarismos, ou carrega em «Alterar» e escolhe Ozon.
+Provavelmente escreveste-o sem hífenes ou com espaços. Volta a escrevê-lo como `48291057-0362-1` com os teus algarismos, ou carrega em «Alterar» e escolhe Ozon.
 
 ### O que significa «Заказ в пункте выдачи»?
 

@@ -14,9 +14,9 @@ Peek connaît deux formats pour Ozon, tous deux écrits avec des tirets. Les tir
 
 | Numéro (inventé) | Ce que c'est |
 | --- | --- |
-| `48291057-3628-1` | 8 chiffres, 4 chiffres et 1 chiffre reliés par des tirets. Peek reconnaît aussitôt Ozon. |
+| `48291057-0362-1` | 8 chiffres, 4 chiffres et 1 chiffre reliés par des tirets. Peek reconnaît aussitôt Ozon. |
 | `4829105736-2841-2` | Le même format avec 10 chiffres au début. Peek reconnaît Ozon aussi. |
-| `4829105736281` | Le premier numéro sans tirets, ou avec des espaces à la place. DPD France, Ukrposhta et d'autres transporteurs emploient des numéros à 13 chiffres : les chiffres seuls ne suffisent donc pas à identifier Ozon. Ajouté depuis la Russie, la Biélorussie ou le Kazakhstan, Peek interroge Ozon en premier ; ailleurs, il l'interroge en dernier, quand les autres transporteurs et les services de suivi n'ont pas trouvé le numéro. Remets les tirets ou choisis Ozon manuellement (ci-dessous). Même règle pour 15 chiffres, longueur utilisée par FedEx et d'autres. |
+| `4829105703621` | Le premier numéro sans tirets, ou avec des espaces à la place. DPD France, Ukrposhta et d'autres transporteurs emploient des numéros à 13 chiffres : les chiffres seuls ne suffisent donc pas à identifier Ozon. Ajouté depuis la Russie, la Biélorussie ou le Kazakhstan, Peek interroge Ozon en premier ; ailleurs, il l'interroge en dernier, quand les autres transporteurs et les services de suivi n'ont pas trouvé le numéro. Remets les tirets ou choisis Ozon manuellement (ci-dessous). Même règle pour 15 chiffres, longueur utilisée par FedEx et d'autres. |
 | `PL-482910-57362` | `PL`, 6 chiffres, puis d'autres lettres ou chiffres, séparés par des tirets. Peek reconnaît Ozon. |
 | `PL-482910-5736` | `PL` suivi de exactement 10 chiffres correspond aussi au format des numéros [Amazon](carrier:amazon-logistics). Peek le classe comme un numéro Amazon et ne permet pas de choisir Ozon pour celui-ci. |
 
@@ -115,11 +115,11 @@ Pour une commande achetée sur Ozon, contacte Ozon. Pour une commande passée da
 
 ### À quoi ressemble un numéro de suivi Ozon ?
 
-Peek associe deux formats à Ozon, tous deux avec tirets : trois groupes de chiffres (8 ou 10 chiffres, puis 4, puis 1, comme `48291057-3628-1`) et les numéros commençant par `PL-`, comme `PL-482910-57362`. Saisis bien les tirets : sans eux, Peek ne peut pas identifier Ozon seul.
+Peek associe deux formats à Ozon, tous deux avec tirets : trois groupes de chiffres (8 ou 10 chiffres, puis 4, puis 1, comme `48291057-0362-1`) et les numéros commençant par `PL-`, comme `PL-482910-57362`. Saisis bien les tirets : sans eux, Peek ne peut pas identifier Ozon seul.
 
 ### Pourquoi Peek ne reconnaît-il pas mon numéro Ozon ?
 
-Tu l'as probablement saisi sans ses tirets ou avec des espaces. Saisis-le de nouveau sous la forme `48291057-3628-1` avec tes propres chiffres, ou appuie sur « Changer » pour sélectionner Ozon.
+Tu l'as probablement saisi sans ses tirets ou avec des espaces. Saisis-le de nouveau sous la forme `48291057-0362-1` avec tes propres chiffres, ou appuie sur « Changer » pour sélectionner Ozon.
 
 ### Que signifie « Заказ в пункте выдачи » ?
 

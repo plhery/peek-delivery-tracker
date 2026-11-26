@@ -14,9 +14,9 @@ Peek zna dwa kształty numerów Ozon i oba zapisuje się z myślnikami. Myślnik
 
 | Numer (zmyślony) | Co to jest |
 | --- | --- |
-| `48291057-3628-1` | 8 cyfr, 4 cyfry i 1 cyfra połączone myślnikami. Peek od razu rozpoznaje Ozon. |
+| `48291057-0362-1` | 8 cyfr, 4 cyfry i 1 cyfra połączone myślnikami. Peek od razu rozpoznaje Ozon. |
 | `4829105736-2841-2` | Ten sam schemat z 10 cyframi na początku. Peek również od razu rozpoznaje Ozon. |
-| `4829105736281` | Pierwszy numer bez myślników albo ze spacjami zamiast nich. DPD France, Ukrposhta i inni przewoźnicy używają numerów 13-cyfrowych, więc same cyfry nie wskazują Ozon. Gdy dodasz go z Rosji, Białorusi lub Kazachstanu, Peek pyta Ozon jako pierwszego; z innych krajów pyta go na końcu, gdy inni przewoźnicy i usługi śledzenia nie znaleźli numeru. Wpisz z powrotem myślniki lub wybierz Ozon ręcznie (niżej). To samo dotyczy 15 cyfr, z których korzysta m.in. FedEx. |
+| `4829105703621` | Pierwszy numer bez myślników albo ze spacjami zamiast nich. DPD France, Ukrposhta i inni przewoźnicy używają numerów 13-cyfrowych, więc same cyfry nie wskazują Ozon. Gdy dodasz go z Rosji, Białorusi lub Kazachstanu, Peek pyta Ozon jako pierwszego; z innych krajów pyta go na końcu, gdy inni przewoźnicy i usługi śledzenia nie znaleźli numeru. Wpisz z powrotem myślniki lub wybierz Ozon ręcznie (niżej). To samo dotyczy 15 cyfr, z których korzysta m.in. FedEx. |
 | `PL-482910-57362` | `PL`, 6 cyfr, a potem kolejne litery lub cyfry z myślnikami. Peek rozpoznaje Ozon. |
 | `PL-482910-5736` | `PL` z dokładnie 10 cyframi pasuje też do formatu numerów [Amazon](carrier:amazon-logistics). Peek traktuje go jako numer Amazon i nie pozwala wybrać dla niego Ozon. |
 
@@ -115,11 +115,11 @@ W sprawie zamówienia kupionego w Ozon skontaktuj się z Ozon. Jeśli kupowałe�
 
 ### Jak wygląda numer śledzenia Ozon?
 
-Peek przypisuje do Ozon dwa kształty, oba z myślnikami: trzy grupy cyfr (8 lub 10 cyfr, potem 4 i 1, np. `48291057-3628-1`) oraz numery zaczynające się od `PL-`, np. `PL-482910-57362`. Wpisuj myślniki: bez nich Peek sam nie rozpozna, że to numer Ozon.
+Peek przypisuje do Ozon dwa kształty, oba z myślnikami: trzy grupy cyfr (8 lub 10 cyfr, potem 4 i 1, np. `48291057-0362-1`) oraz numery zaczynające się od `PL-`, np. `PL-482910-57362`. Wpisuj myślniki: bez nich Peek sam nie rozpozna, że to numer Ozon.
 
 ### Dlaczego Peek nie rozpoznaje mojego numeru Ozon?
 
-Prawdopodobnie wpisano go bez myślników lub ze spacjami. Wpisz go ponownie jako `48291057-3628-1` ze swoimi cyframi albo kliknij „Zmień” i wybierz Ozon.
+Prawdopodobnie wpisano go bez myślników lub ze spacjami. Wpisz go ponownie jako `48291057-0362-1` ze swoimi cyframi albo kliknij „Zmień” i wybierz Ozon.
 
 ### Co oznacza „Заказ в пункте выдачи”?
 

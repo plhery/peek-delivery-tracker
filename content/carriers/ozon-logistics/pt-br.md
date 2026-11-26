@@ -14,9 +14,9 @@ O Peek reconhece dois formatos da Ozon, ambos escritos com hifens. Os hifens faz
 
 | Código (inventado) | O que é |
 | --- | --- |
-| `48291057-3628-1` | 8 dígitos, 4 dígitos e 1 dígito ligados por hifens. O Peek identifica a Ozon na hora. |
+| `48291057-0362-1` | 8 dígitos, 4 dígitos e 1 dígito ligados por hifens. O Peek identifica a Ozon na hora. |
 | `4829105736-2841-2` | O mesmo padrão começando com 10 dígitos. O Peek também identifica a Ozon. |
-| `4829105736281` | O primeiro código sem hifens, ou com espaços no lugar. DPD France, Ukrposhta e outras usam 13 dígitos, então só os números não indicam Ozon. Adicionando da Rússia, Belarus ou Cazaquistão, o Peek consulta primeiro a Ozon; de outros países, consulta a Ozon por último, se outras transportadoras e serviços não acharem. Digite os hifens novamente ou escolha Ozon manualmente (abaixo). O mesmo vale para 15 dígitos, usados por FedEx e outras. |
+| `4829105703621` | O primeiro código sem hifens, ou com espaços no lugar. DPD France, Ukrposhta e outras usam 13 dígitos, então só os números não indicam Ozon. Adicionando da Rússia, Belarus ou Cazaquistão, o Peek consulta primeiro a Ozon; de outros países, consulta a Ozon por último, se outras transportadoras e serviços não acharem. Digite os hifens novamente ou escolha Ozon manualmente (abaixo). O mesmo vale para 15 dígitos, usados por FedEx e outras. |
 | `PL-482910-57362` | PL, 6 dígitos e mais letras ou dígitos com hifens. O Peek identifica a Ozon. |
 | `PL-482910-5736` | PL com exatamente 10 dígitos coincide com o formato da Amazon. O Peek trata como código da Amazon e não permite escolher Ozon, portanto não consegue acompanhá-lo na Ozon. |
 
@@ -67,7 +67,7 @@ As etapas informam qual modalidade se aplica ao seu pedido.
 
 **Em um ponto de retirada.** Aguarde `Заказ в пункте выдачи` e vá retirar. Depois de retirado, aparece `Заказ получен в пункте выдачи.` (o mesmo texto vale para retirada em agência postal).
 
-Como o Peek não conseguiu ler o site institucional da Ozon, esta página não informa prazos de entrega, horários de funcionamento, períodos de guarda nem regras de novas tentativas: pergunte à própria Ozon. Veja também [encomenda não retirada](guide:uncollected-parcel) e [entregas frustradas](guide:missed-delivery).
+Como o Peek não conseguiu ler o site institucional da Ozon, esta página não informa prazos de entrega, horários de funcionamento, períodos de guarda nem regras de novas tentativas: pergunte à própria Ozon. Veja também [encomenda não retirada](guide:uncollected-parcel) e [entregas não realizadas](guide:missed-delivery).
 
 **Do exterior.** As etapas aduaneiras acima mostram onde está um pedido internacional. Esta página não traz regras nem taxas aduaneiras porque o Peek não pôde verificá-las em fonte oficial. Veja [encomendas retidas na alfândega](guide:customs).
 
@@ -89,7 +89,7 @@ Como o Peek não conseguiu ler o site institucional da Ozon, esta página não i
 
 ## Atendimento e contato da Ozon
 
-Como o Peek não pôde ler o site da Ozon, esta página não publica telefone nem e-mail: o Peek lista apenas contatos lidos diretamente nas páginas da transportadora. O rastreador da Ozon fica em tracking.ozon.ru.
+Como o Peek não pôde ler o site da Ozon, esta página não publica telefone nem e-mail: o Peek lista apenas contatos lidos nas páginas da própria transportadora. O rastreador da Ozon fica em tracking.ozon.ru.
 
 Para compras feitas na Ozon, fale com a Ozon. Para pedidos de outra loja, procure primeiro essa loja, que contratou a entrega.
 
@@ -99,9 +99,9 @@ O [Peek](/) acompanha códigos Ozon apenas com o número: sem conta, telefone ne
 
 - **Com hifens.** O Peek identifica a Ozon na hora ("Transportadora detectada") e salva a encomenda nela.
 - **Sem hifens.** Só os dígitos não bastam para identificar a empresa. Cole mesmo assim: o Peek acompanha mais de 4.500 transportadoras. Enquanto consulta as empresas com esse formato e os serviços de rastreamento, exibe "Consultando serviços de rastreamento…". Adicionando da Rússia, Belarus ou Cazaquistão, a Ozon é consultada primeiro; de outros países, por último, se nenhuma outra nem os serviços encontrarem. Se os serviços apontarem Ozon com etapas datadas, o Peek a seleciona sozinho; senão, toque em "Trocar" e busque Ozon (ou "Trocar transportadora" em pedidos já adicionados).
-- **Por link.** Cole um link de tracking.ozon.ru com o código (`track=`) ou de rocket.ozon.ru (`SearchId=`), e o Peek acompanha diretamente pela Ozon.
+- **Por link.** Cole um link de tracking.ozon.ru com o código (`track=`) ou de rocket.ozon.ru (`SearchId=`), e o Peek acompanha esse código pela Ozon.
 
-**De onde vêm as etapas.** O Peek lê o próprio rastreador da Ozon e exibe cada etapa no russo original (conforme as tabelas acima), com horário e datas previstas informadas pela Ozon. Ele preserva o fuso horário fornecido pela Ozon, lê horários sem fuso no horário de Moscou e exibe tudo no fuso do seu aparelho; em peektracker.com e nos aplicativos iPhone e Android, o histórico termina com "Horários no seu fuso horário:" seguido do nome dele. A Ozon não fornece localidade das etapas, então não há mapa. Até o rastreador da Ozon reconhecer o código, aparece "Aguardando Ozon" (ou "Ainda sem histórico de rastreamento" para códigos sem transportadora). Quando o rastreador da Ozon não responde, o Peek consulta ParcelsApp, Ship24 e 17TRACK nessa ordem e mostra o histórico do primeiro que encontrar, no texto dele (que pode atrasar frente a tracking.ozon.ru). A consulta direta do Peek na Ozon não aceita códigos `PL-`: aparece "Confira o código de rastreamento" até que um serviço de rastreamento localize o pedido.
+**De onde vêm as etapas.** O Peek lê o próprio rastreador da Ozon e exibe cada etapa no russo original (conforme as tabelas acima), com horário e datas previstas informadas pela Ozon. Ele preserva o fuso horário fornecido pela Ozon, lê horários sem fuso no horário de Moscou e exibe tudo no fuso do seu aparelho; em peektracker.com e nos aplicativos iPhone e Android, o histórico termina com "Horários no seu fuso horário:" seguido do nome dele. A Ozon não fornece localidade das etapas, então não há mapa. Até o rastreador da Ozon reconhecer o código, aparece "Aguardando Ozon" (ou "Ainda sem histórico de rastreamento" para códigos sem transportadora). Quando o rastreador da Ozon não responde, o Peek consulta ParcelsApp, Ship24 e 17TRACK nessa ordem e mostra o histórico do primeiro que encontrar, no texto dele (que pode atrasar frente a tracking.ozon.ru). A consulta do Peek à Ozon não aceita códigos `PL-`: aparece "Confira o código de rastreamento" até que um serviço de rastreamento localize o pedido.
 
 **Link na página da encomenda.** "Abrir o site de Ozon" abre o código no rastreador da Ozon. Se um serviço de rastreamento respondeu, o link abre esse serviço, como "Abrir o site de ParcelsApp".
 
@@ -115,11 +115,11 @@ O [Peek](/) acompanha códigos Ozon apenas com o número: sem conta, telefone ne
 
 ### Como é um código de rastreamento da Ozon?
 
-O Peek associa dois formatos com hifens à Ozon: dígitos em três blocos (8 ou 10 dígitos, depois 4 e depois 1, como `48291057-3628-1`) e códigos iniciados por `PL-` (como `PL-482910-57362`). Digite os hifens: sem eles, o Peek não identifica a Ozon pelo formato.
+O Peek associa dois formatos com hifens à Ozon: dígitos em três blocos (8 ou 10 dígitos, depois 4 e depois 1, como `48291057-0362-1`) e códigos iniciados por `PL-` (como `PL-482910-57362`). Digite os hifens: sem eles, o Peek não identifica a Ozon pelo formato.
 
 ### Por que o Peek não reconheceu meu código da Ozon?
 
-Provavelmente você digitou sem os hifens ou com espaços. Digite novamente como `48291057-3628-1` com os seus dígitos, ou toque em "Trocar" e escolha Ozon.
+Provavelmente você digitou sem os hifens ou com espaços. Digite novamente como `48291057-0362-1` com os seus dígitos, ou toque em "Trocar" e escolha Ozon.
 
 ### O que significa "Заказ в пункте выдачи"?
 

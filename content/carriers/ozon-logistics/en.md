@@ -14,9 +14,9 @@ Peek knows two shapes for Ozon, and both are written with dashes. The dashes mat
 
 | Number (invented) | What it is |
 | --- | --- |
-| `48291057-3628-1` | 8 digits, 4 digits and 1 digit, joined by dashes. Peek names Ozon from this shape at once. |
+| `48291057-0362-1` | 8 digits, 4 digits and 1 digit, joined by dashes. Peek names Ozon from this shape at once. |
 | `4829105736-2841-2` | The same with 10 digits at the start. Peek names Ozon too. |
-| `4829105736281` | The first number without its dashes, or with spaces instead of dashes. DPD France, Ukrposhta and other carriers have 13-digit numbers, so the digits alone don't tell Peek it's Ozon. Added from Russia, Belarus or Kazakhstan, Peek asks Ozon first whether it knows the number; from elsewhere it asks Ozon last, once the other carriers and the tracking services haven't found it. Type the dashes back in, or pick Ozon yourself (below). The same goes for 15 digits, a length FedEx and others use. |
+| `4829105703621` | The first number without its dashes, or with spaces instead of dashes. DPD France, Ukrposhta and other carriers have 13-digit numbers, so the digits alone don't tell Peek it's Ozon. Added from Russia, Belarus or Kazakhstan, Peek asks Ozon first whether it knows the number; from elsewhere it asks Ozon last, once the other carriers and the tracking services haven't found it. Type the dashes back in, or pick Ozon yourself (below). The same goes for 15 digits, a length FedEx and others use. |
 | `PL-482910-57362` | PL, 6 digits, then more letters or digits, with dashes. Peek names Ozon. |
 | `PL-482910-5736` | PL with exactly 10 digits is also the shape of Amazon's numbers. Peek takes it for an [Amazon](carrier:amazon-logistics) number and doesn't let you pick Ozon for it, so it can't follow it with Ozon. |
 
@@ -115,11 +115,11 @@ For an order you bought on Ozon, contact Ozon about it. For an order from anothe
 
 ### What does an Ozon tracking number look like?
 
-Peek links two shapes to Ozon, both with dashes: digits in three groups, 8 or 10 digits, then 4, then 1, such as `48291057-3628-1`, and numbers starting with `PL-`, such as `PL-482910-57362`. Type the dashes: without them, Peek can't tell the number is Ozon's.
+Peek links two shapes to Ozon, both with dashes: digits in three groups, 8 or 10 digits, then 4, then 1, such as `48291057-0362-1`, and numbers starting with `PL-`, such as `PL-482910-57362`. Type the dashes: without them, Peek can't tell the number is Ozon's.
 
 ### Why doesn't Peek recognise my Ozon number?
 
-You probably typed it without its dashes, or with spaces. Type it again as `48291057-3628-1`, with your own digits, or press "Change" and pick Ozon.
+You probably typed it without its dashes, or with spaces. Type it again as `48291057-0362-1`, with your own digits, or press "Change" and pick Ozon.
 
 ### What does "Заказ в пункте выдачи" mean?
 

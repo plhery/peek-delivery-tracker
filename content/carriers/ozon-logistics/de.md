@@ -14,9 +14,9 @@ Peek kennt zwei Formate für Ozon, beide mit Bindestrichen. Die Bindestriche sin
 
 | Nummer (erfunden) | Was es ist |
 | --- | --- |
-| `48291057-3628-1` | 8 Ziffern, 4 Ziffern und 1 Ziffer mit Bindestrichen. Peek erkennt Ozon sofort. |
+| `48291057-0362-1` | 8 Ziffern, 4 Ziffern und 1 Ziffer mit Bindestrichen. Peek erkennt Ozon sofort. |
 | `4829105736-2841-2` | Dasselbe Format mit 10 Ziffern am Anfang. Auch hier erkennt Peek Ozon sofort. |
-| `4829105736281` | Die erste Nummer ohne Bindestriche oder mit Leerzeichen. DPD France, Ukrposhta und weitere Dienste nutzen 13-stellige Nummern, sodass die Ziffern allein nicht auf Ozon schließen lassen. Aus Russland, Belarus oder Kasachstan fragt Peek zuerst Ozon; von anderswo fragt es Ozon zuletzt, wenn die anderen Dienste und die Tracking-Dienste die Nummer nicht gefunden haben. Tippe die Bindestriche wieder ein oder wähle Ozon selbst (unten). Dasselbe gilt für 15 Ziffern, die auch FedEx und andere verwenden. |
+| `4829105703621` | Die erste Nummer ohne Bindestriche oder mit Leerzeichen. DPD France, Ukrposhta und weitere Dienste nutzen 13-stellige Nummern, sodass die Ziffern allein nicht auf Ozon schließen lassen. Aus Russland, Belarus oder Kasachstan fragt Peek zuerst Ozon; von anderswo fragt es Ozon zuletzt, wenn die anderen Dienste und die Tracking-Dienste die Nummer nicht gefunden haben. Tippe die Bindestriche wieder ein oder wähle Ozon selbst (unten). Dasselbe gilt für 15 Ziffern, die auch FedEx und andere verwenden. |
 | `PL-482910-57362` | `PL`, 6 Ziffern, dann weitere Buchstaben oder Ziffern mit Bindestrichen. Peek erkennt Ozon. |
 | `PL-482910-5736` | `PL` mit genau 10 Ziffern entspricht zugleich dem Format von [Amazon](carrier:amazon-logistics). Peek behandelt sie als Amazon-Nummer und lässt Ozon dafür nicht auswählen. |
 
@@ -115,11 +115,11 @@ Bei einer direkt auf Ozon gekauften Bestellung kontaktiere Ozon. Stammt die Best
 
 ### Wie sieht eine Ozon-Sendungsnummer aus?
 
-Peek ordnet Ozon zwei Formate mit Bindestrichen zu: drei Zifferngruppen (8 oder 10 Ziffern, dann 4, dann 1, wie `48291057-3628-1`) sowie Nummern ab `PL-`, etwa `PL-482910-57362`. Gib die Bindestriche unbedingt mit ein, sonst kann Peek Ozon nicht eindeutig erkennen.
+Peek ordnet Ozon zwei Formate mit Bindestrichen zu: drei Zifferngruppen (8 oder 10 Ziffern, dann 4, dann 1, wie `48291057-0362-1`) sowie Nummern ab `PL-`, etwa `PL-482910-57362`. Gib die Bindestriche unbedingt mit ein, sonst kann Peek Ozon nicht eindeutig erkennen.
 
 ### Warum erkennt Peek meine Ozon-Nummer nicht?
 
-Wahrscheinlich hast du sie ohne Bindestriche oder mit Leerzeichen eingegeben. Gib sie mit deinen eigenen Ziffern als `48291057-3628-1` ein oder tippe auf „Ändern“ und wähle Ozon.
+Wahrscheinlich hast du sie ohne Bindestriche oder mit Leerzeichen eingegeben. Gib sie mit deinen eigenen Ziffern als `48291057-0362-1` ein oder tippe auf „Ändern“ und wähle Ozon.
 
 ### Was bedeutet „Заказ в пункте выдачи“?
 

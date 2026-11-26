@@ -16022,6 +16022,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00b33c"
     },
     {
+      "id": "correos-chile",
+      "catalog": "correos-chile",
+      "slug": "correos-chile-tracking",
+      "title": "Rastreamento Correos de Chile: códigos CL, status e IVA",
+      "name": "Correos de Chile",
+      "color": "#d9232d"
+    },
+    {
       "id": "dsv",
       "catalog": "dsv",
       "slug": "rastreamento-dsv",
@@ -16380,6 +16388,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento CJ Packet: códigos CJP…YQ, entregas e suporte",
       "name": "CJ Packet",
       "color": "#ff7700"
+    },
+    {
+      "id": "cmt-express",
+      "catalog": "cmt-express",
+      "slug": "cmt-express-tracking",
+      "title": "Rastreamento CMT Express: códigos CMT, Shenzhen e suporte",
+      "name": "CMT Express",
+      "color": "#ed010b"
     },
     {
       "id": "jumppoint-international",
@@ -20362,6 +20378,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "CDEK（СДЭК）物流查询：订单号与状态含义",
       "name": "CDEK",
       "color": "#00b33c"
+    },
+    {
+      "id": "correos-chile",
+      "catalog": "correos-chile",
+      "slug": "correos-chile-tracking",
+      "title": "Correos de Chile 智利邮政追踪：单号、状态与关税说明",
+      "name": "Correos de Chile",
+      "color": "#d9232d"
     },
     {
       "id": "dsv",

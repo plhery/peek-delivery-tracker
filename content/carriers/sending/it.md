@@ -67,7 +67,7 @@ Secondo le pagine ufficiali di Sending:
 
 ## Tracciare un pacco Sending con Peek
 
-[Peek](/) non può riconoscere un codice Sending dalla sola forma: 12 cifre combaciano con molti corrieri. Incollalo comunque: Peek segue oltre 4.500 corrieri. Se lo aggiungi da Spagna, Portogallo o Andorra, Peek chiede a vari corrieri a 12 cifre se conoscono il codice, Sending per primo: vedrai «Verifica dei servizi di tracciamento…», poi «Sending ha questo pacco.» se solo Sending lo conosce. Da altri paesi, quel controllo esclude Sending. Se Sending non compare, premi «Cambia» e selezionalo sotto «Compatibili con questo numero» o cercandolo per nome. Su un pacco già aggiunto usa «Cambia corriere».
+[Peek](/) non può riconoscere un codice Sending dalla sola forma: 12 cifre combaciano con molti corrieri. Incollalo comunque: Peek segue oltre 4.500 corrieri. Se lo aggiungi da Spagna, Portogallo o Andorra, Peek chiede a vari corrieri a 12 cifre se conoscono il codice, Sending per primo: vedrai «Verifica dei servizi di tracciamento…», poi «Sending ha questo pacco.» se solo Sending lo conosce. Da altri paesi, Peek chiede a Sending per ultimo, quando né gli altri corrieri né i servizi di tracciamento conoscono il codice. Se Sending non compare, premi «Cambia» e selezionalo sotto «Compatibili con questo numero» o cercandolo per nome. Su un pacco già aggiunto usa «Cambia corriere».
 
 Peek accetta solo il numero di spedizione Sending di 12 cifre: se scegli Sending per un altro formato, Peek segnala accanto al nome che «non emette numeri come questo». Per un riferimento usa il sito sending.es. Anche un link al tracciamento Sending su info.sending.es con `localizador=` e il numero può essere incollato direttamente.
 

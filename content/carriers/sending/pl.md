@@ -67,7 +67,7 @@ Według oficjalnych stron Sending:
 
 ## Śledzenie przesyłki Sending w Peek
 
-[Peek](/) nie rozpoznaje numeru Sending po samej postaci: 12 cyfr pasuje do wielu przewoźników. Wklej go mimo to: Peek śledzi ponad 4500 przewoźników. Gdy dodajesz numer z Hiszpanii, Portugalii lub Andory, Peek pyta kilku przewoźników używających 12 cyfr, zaczynając od Sending: zobaczysz „Sprawdzanie usług śledzenia…”, a następnie „Sending ma tę przesyłkę.”, jeśli zna go tylko Sending. Z innych krajów to automatyczne sprawdzanie pomija Sending. Jeśli Sending nie pojawi się sam, kliknij „Zmień” i wybierz go w sekcji „Pasują do numeru” albo wyszukaj po nazwie. Przy już dodanej paczce użyj „Zmień przewoźnika”.
+[Peek](/) nie rozpoznaje numeru Sending po samej postaci: 12 cyfr pasuje do wielu przewoźników. Wklej go mimo to: Peek śledzi ponad 4500 przewoźników. Gdy dodajesz numer z Hiszpanii, Portugalii lub Andory, Peek pyta kilku przewoźników używających 12 cyfr, zaczynając od Sending: zobaczysz „Sprawdzanie usług śledzenia…”, a następnie „Sending ma tę przesyłkę.”, jeśli zna go tylko Sending. Z innych krajów Peek pyta Sending na końcu, gdy ani pozostali przewoźnicy, ani usługi śledzenia nie znają numeru. Jeśli Sending nie pojawi się sam, kliknij „Zmień” i wybierz go w sekcji „Pasują do numeru” albo wyszukaj po nazwie. Przy już dodanej paczce użyj „Zmień przewoźnika”.
 
 Peek przyjmuje wyłącznie 12-cyfrowy numer przesyłki Sending: jeśli wybierzesz Sending dla innego formatu, obok jego nazwy pojawi się informacja, że „nie wydaje takich numerów”. Dla numeru referencyjnego użyj strony sending.es. Możesz też wkleić link do śledzenia Sending w domenie info.sending.es zawierający `localizador=` i numer.
 

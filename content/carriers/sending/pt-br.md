@@ -21,7 +21,7 @@ Como 12 dígitos servem para várias transportadoras, confirme se o e-mail da lo
 
 ## O que significam os status da Sending
 
-No topo, uma barra de progresso avança por `En preparación` (em preparação), `Tránsito` (em trânsito) e `Reparto` (em rota de entrega), terminando em `Entregada` (entregue) ou `FALTA DEFINITIVA`. Abaixo dela, os registros aparecem do mais recente para o mais antigo em cada dia, com horário e cidade da filial da Sending. Estes são os textos conhecidos como a Sending os escreve (sem acentos), aproximadamente na ordem habitual:
+No topo, uma barra de progresso avança por `En preparación` (em preparação), `Tránsito` (em trânsito) e `Reparto` (em rota de entrega), terminando em `Entregada` (entregue) ou `FALTA DEFINITIVA`. Abaixo dela, os registros aparecem do mais recente para o mais antigo em cada dia, com horário e cidade da filial da Sending. Estes são os textos conhecidos como a Sending os escreve (sem acentos), aproximadamente na ordem em que a encomenda passa por eles:
 
 | Status | O que significa para você |
 | --- | --- |
@@ -35,15 +35,15 @@ No topo, uma barra de progresso avança por `En preparación` (em preparação),
 | `Direccion corregida por el destinatario` | "Endereço corrigido pelo destinatário": anotação cadastral, não movimentação física do pacote. |
 | `El envio ha sido entregado` | Entregue. |
 | `Entregada PDA` | Entregue, registrado no coletor portátil (PDA) do motorista. |
-| `FALTA DEFINITIVA` | Na barra de progresso: o pacote foi dado como extraviado após tentativas frustradas de entrega. |
+| `FALTA DEFINITIVA` | Na barra de progresso: o pacote foi dado como extraviado após entregas não realizadas. |
 
 `El envio ha llegado a tu delegacion mas cercana` costuma mostrar apenas a data sem horário real (00:00). Ao lado da entrega, a página da Sending também pode exibir uma linha `Recibido` ("recebido") com o nome de quem assinou: verifique-a primeiro se constar entregue e você não tiver recebido nada.
 
-## Entregas Sending na Espanha: faixas horárias, ausências e mudança de endereço
+## Entregas Sending na Espanha: faixas horárias, entregas não realizadas e mudança de endereço
 
 Para pedidos online, a Sending afirma que os destinatários podem escolher a faixa horária de entrega e recebem um alerta por SMS uma hora antes. Suas páginas não explicam como selecionar a faixa. O site também tem um localizador de pontos de retirada, "Localiza tu punto de recogida", mas não especifica quando um pacote vai para um ponto.
 
-**Entrega frustrada.** Após tentativa sem sucesso, o rastreamento mostra `Has sido ausente`. As páginas da Sending não dizem quantas novas tentativas são feitas, se há aviso impresso nem por quanto tempo o pacote fica guardado; pergunte à Sending por telefone ou pelo formulário abaixo. Veja mais em [entregas frustradas](guide:missed-delivery).
+**Entrega não realizada.** Depois de uma entrega não realizada, o rastreamento mostra `Has sido ausente`. As páginas da Sending não dizem quantas novas tentativas são feitas, se há aviso impresso nem por quanto tempo o pacote fica guardado; pergunte à Sending por telefone ou pelo formulário abaixo. Veja mais em [entregas não realizadas](guide:missed-delivery).
 
 **Endereço errado ou incompleto.** Se aparecer `Direccion incorrecta - faltan datos`, ou se o endereço estiver errado, use o [formulário de alteração de endereço](https://www.sending.es/formulario-contacto/cambio-direccion-datos/) da Sending. Ele solicita o número do envio, nome completo do destinatário, e-mail, telefone (opcional) e o novo endereço: rua, número, andar e porta, código postal, cidade e observações extras. A Sending não informa se há cobrança nem o prazo limite para pedir a alteração. Veja também [como alterar um endereço de entrega](guide:change-delivery-address).
 
@@ -54,7 +54,7 @@ A Sending transporta o pacote para a loja, portanto pedidos de reembolso ou reen
 - **Sem movimentação:** veja [rastreamento sem atualização](guide:tracking-not-updating) e consulte a Sending por telefone ou pelo formulário de status do envio.
 - **`FALTA DEFINITIVA`:** o pacote foi dado como perdido. Avise a loja: o prejuízo é do vendedor, não seu. Veja [encomendas extraviadas](guide:lost-parcel).
 - **Entregue, mas não recebida:** confira a linha `Recibido`, pergunte aos vizinhos ou à portaria do prédio e fale com a loja. Veja mais em [encomenda entregue mas não recebida](guide:delivered-not-received).
-- **Avariada:** as páginas da Sending não publicam processo nem prazo de reclamação. Tire fotos antes de abrir e avise a loja; veja [encomendas avariadas](guide:damaged-parcel).
+- **Danificada:** as páginas da Sending não publicam processo nem prazo de reclamação. Tire fotos antes de abrir e avise a loja; veja [encomendas danificadas](guide:damaged-parcel).
 - **Desistência da compra:** em geral você tem 14 dias corridos a partir do recebimento para exercer o direito de arrependimento comunicando o vendedor. A Sending também disponibiliza um [formulário de desistência](https://www.sending.es/formulario-contacto/desistimiento-compra/) (*desistimiento de compra*).
 
 ## Telefone e atendimento ao cliente da Sending
@@ -67,13 +67,13 @@ Canais publicados no site da Sending:
 
 ## Rastrear uma encomenda Sending com o Peek
 
-O [Peek](/) não identifica um código da Sending apenas pelo formato, já que 12 dígitos pertencem a várias transportadoras. Cole o código mesmo assim: o Peek acompanha mais de 4.500 transportadoras. Quando você adiciona a partir da Espanha, de Portugal ou de Andorra, o Peek consulta várias empresas que usam 12 dígitos, começando pela Sending: você verá "Consultando serviços de rastreamento…" e depois "Sending está com esta encomenda." se apenas a Sending reconhecer o código. De qualquer outro país, essa verificação automática não inclui a Sending. Se ela não aparecer, toque em "Trocar" e escolha Sending em "Compatível com este código" ou digite o nome. Em um pacote já adicionado, use "Trocar transportadora".
+O [Peek](/) não identifica um código da Sending apenas pelo formato, já que 12 dígitos pertencem a várias transportadoras. Cole o código mesmo assim: o Peek acompanha mais de 4.500 transportadoras. Quando você adiciona a partir da Espanha, de Portugal ou de Andorra, o Peek consulta várias empresas que usam 12 dígitos, começando pela Sending: você verá "Consultando serviços de rastreamento…" e depois "Sending está com esta encomenda." se apenas a Sending reconhecer o código. De qualquer outro país, o Peek consulta a Sending por último, depois que as outras transportadoras e os serviços de rastreamento não reconhecerem o código. Se ela não aparecer, toque em "Trocar" e escolha Sending em "Compatível com este código" ou digite o nome. Em um pacote já adicionado, use "Trocar transportadora".
 
 O Peek aceita somente o número de envio de 12 dígitos da Sending: se escolher Sending para outro formato, o Peek avisa ao lado do nome que ela "não emite códigos como este". Para rastrear por referência, use o site sending.es. Um link do rastreador em info.sending.es contendo `localizador=` e o número também funciona.
 
 O Peek mostra o status e o histórico no texto em espanhol da Sending, cada movimentação com a cidade da respectiva filial; eventos datados apenas pelo dia mostram somente a data. Cada horário é lido no relógio local da cidade da filial (horário das Ilhas Canárias para filiais lá) e exibido no fuso horário do seu aparelho; em peektracker.com e nos aplicativos iPhone e Android, o histórico termina com "Horários no seu fuso horário:" e o nome dele. Quando a barra de progresso termina em `Entregada`, o Peek marca como entregue mesmo que os registros parem antes, e `FALTA DEFINITIVA` aparece como "Precisa de atenção". O Peek omite a referência do remetente, a janela horária de entrega, os códigos postais e cidades de remetente e destinatário, a filial entregadora, as opções de entrega e o nome de quem assinou, e não exibe peso nem previsão de entrega: para ver a janela de horário, consulte sending.es.
 
-Enquanto você mantém a encomenda aberta, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos — ou a cada 2 minutos a partir das 6h locais no dia em que a Sending registra a saída para entrega — enquanto o rastreador da Sending responde; nos demais horários, e após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica a cada hora. Quando apenas serviços de rastreamento respondem, consulta a cada hora, a cada 3 horas quando o último evento completa um dia e até a cada 15 minutos no dia em que sai para entrega enquanto o pacote estiver aberto ou com alertas ligados. Ele pode notificar cada movimentação, apenas etapas importantes ou só o dia da entrega. Não consegue contatar a Sending ou a loja por você, nem alterar o endereço.
+Enquanto você mantém a encomenda aberta, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos — ou a cada 2 minutos a partir das 6h locais no dia em que a Sending registra a saída para entrega — enquanto o rastreador da própria Sending responde; nos demais horários, e após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica a cada hora. Quando apenas serviços de rastreamento respondem, consulta a cada hora, a cada 3 horas quando o último evento completa um dia e até a cada 15 minutos no dia em que sai para entrega enquanto o pacote estiver aberto ou com alertas ligados. Ele pode notificar cada movimentação, apenas etapas importantes ou só o dia da entrega. Não consegue contatar a Sending ou a loja por você, nem alterar o endereço.
 
 ## Perguntas frequentes sobre o rastreamento Sending
 
@@ -91,11 +91,11 @@ A Sending afirma realizar entregas em até 24 horas na Espanha e em Portugal par
 
 ### O que significa "Has sido ausente" na Sending?
 
-"Você estava ausente": o motorista tentou entregar e não havia ninguém. As páginas da Sending não informam se haverá nova tentativa automática, então ligue para +34 919 012 048 ou use o formulário de contato.
+"Você estava ausente": o motorista tentou entregar e não havia ninguém. As páginas da Sending não informam se haverá nova tentativa, então ligue para +34 919 012 048 ou use o formulário de contato.
 
 ### O que significa FALTA DEFINITIVA?
 
-É o ponto final da barra de progresso da Sending quando um pacote é dado como extraviado após tentativas frustradas de entrega. Peça reembolso ou reenvio à loja: se a loja escolheu a transportadora, o prejuízo é do vendedor.
+É o ponto final da barra de progresso da Sending quando um pacote é dado como extraviado após entregas não realizadas. Peça reembolso ou reenvio à loja: se a loja escolheu a transportadora, o prejuízo é do vendedor.
 
 :::sources
 - [Sending: Localiza tu envío](https://www.sending.es/localiza-tu-envio/) – rastreador, código ou referência, envio do código por e-mail/SMS/app, telefones na Espanha e em Portugal, e-mail e buscador de pontos de retirada

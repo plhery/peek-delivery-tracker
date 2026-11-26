@@ -6,7 +6,7 @@ published: 2026-11-25
 updated: 2026-11-25
 ---
 
-A Austrian Post (Österreichische Post AG, com sede em Viena) é a empresa postal da Áustria. Rastreie uma encomenda em post.at, que tem versão em inglês, no Post App, ou colando o código na caixa acima. O código vem da loja que enviou o pacote, da notificação eletrônica da Austrian Post ou do aviso amarelo deixado após uma tentativa de entrega sem sucesso.
+A Austrian Post (Österreichische Post AG, com sede em Viena) é a empresa postal da Áustria. Rastreie uma encomenda em post.at, que tem versão em inglês, no Post App, ou colando o código na caixa acima. O código vem da loja que enviou o pacote, da notificação eletrônica da Austrian Post ou do aviso amarelo deixado após uma entrega não realizada.
 
 ## Formato do código da Austrian Post e onde encontrar
 
@@ -15,13 +15,13 @@ As páginas de ajuda da Austrian Post trazem dois formatos de número de envio (
 | Formato | O que é |
 | --- | --- |
 | `1048291736548291736482` | Código próprio da Austrian Post: 22 dígitos começando por 10. |
-| `RR482917367AT` | Código postal internacional: duas letras, nove dígitos e duas letras. Terminando em AT, é da Austrian Post. |
+| `RR482917367AT` | Número postal internacional: duas letras, nove dígitos e duas letras. Terminando em AT, é da Austrian Post. |
 
-**Onde aparece.** No e-mail de envio da loja; na notificação eletrônica da Austrian Post (e-mail ou Post App), se você tiver uma Post Account gratuita e o remetente tiver enviado os dados de envio; e no aviso amarelo deixado após entrega frustrada.
+**Onde aparece.** No e-mail de envio da loja; na notificação eletrônica da Austrian Post (e-mail ou Post App), se você tiver uma Post Account gratuita e o remetente tiver enviado os dados de envio; e no aviso amarelo deixado após uma entrega não realizada.
 
 O código CRN de 6 dígitos na etiqueta alfandegária não é o código de rastreamento.
 
-**Formatos parecidos.** Muitas transportadoras usam 22 dígitos. `0281450281454829105736` segue o formato da TIPSA e `0048290048291057364918` pertence à [CTT Express](carrier:ctt-express); `RR482917367DE` é um código postal dos correios de outro país. Se post.at não reconhecer seu código, confira qual transportadora a loja informou.
+**Formatos parecidos.** Muitas transportadoras usam 22 dígitos. `0281450281454829105736` segue o formato da TIPSA e `0048290048291057364918` pertence à [CTT Express](carrier:ctt-express); `RR482917367DE` é um número postal dos correios de outro país. Se post.at não reconhecer seu código, confira qual transportadora a loja informou.
 
 ## Status de rastreamento da Austrian Post explicados
 
@@ -47,13 +47,13 @@ As páginas de ajuda usam status resumidos como `Item in distribution`, enquanto
 
 **Eventos de alfândega.** Um pacote do exterior pode receber registros aduaneiros ao chegar à Áustria. O Peek os mostra em alemão, conforme o rastreamento da Austrian Post, com status "Na alfândega": `Sendung im Zollanmeldungsprozess. Weitere Info folgt.` (declaração aduaneira em andamento), `Lagereingang - Zollanmeldungshindernis` (armazenado porque algo impede a declaração; a página da Austrian Post pede os documentos faltantes), `Sendung ist im Zollprozess verzögert. Grund: unplausibler Warenwert.` (atraso na alfândega, neste caso por valor declarado implausível; o motivo após "Grund:" varia) e `Zollanmeldungshindernis - Rückmeldung vom Empfänger eingelangt` (sua resposta chegou; o pacote segue na alfândega até ser liberado).
 
-## Retirada, armários e entregas frustradas da Austrian Post
+## Retirada, armários e entregas não realizadas da Austrian Post
 
 **Prazos de entrega.** A Austrian Post informa que encomendas dentro da Áustria costumam ser entregues em até dois dias úteis, e o Post Express geralmente até as 13h do dia útil seguinte.
 
-**Entrega frustrada.** O carteiro deixa um aviso amarelo (Gelber Zettel) na caixa de correio informando onde retirar e a data-limite. O prazo de guarda começa no dia seguinte e vai até a terceira segunda-feira posterior, totalizando pelo menos 14 dias. Lojas online podem definir um prazo menor, de 5 dias úteis.
+**Entrega não realizada.** O carteiro deixa um aviso amarelo (Gelber Zettel) na caixa de correio informando onde retirar e a data-limite. O prazo de guarda começa no dia seguinte e vai até a terceira segunda-feira posterior, totalizando pelo menos 14 dias. Lojas online podem definir um prazo menor, de 5 dias úteis.
 
-**Onde fica aguardando.** Em uma agência postal no horário de atendimento ou em uma Poststation, armário 24 horas que exige o código do aviso. A Austrian Post mantém mais de 1.500 unidades em agências, áreas residenciais e supermercados.
+**Onde fica aguardando.** Em uma agência postal no horário de atendimento ou em uma Poststation, armário aberto 24 horas, todos os dias, que exige o código do aviso. A Austrian Post mantém mais de 1.500 unidades em agências, áreas residenciais e supermercados.
 
 **Como retirar.** Leve documento com foto e o código de rastreamento; na agência é possível retirar mesmo sem o aviso físico. Outra pessoa pode retirar levando o seu aviso amarelo. A notificação eletrônica gratuita também vale para retirada e pode ser encaminhada a terceiros.
 
@@ -63,7 +63,7 @@ As páginas de ajuda usam status resumidos como `Item in distribution`, enquanto
 
 **Alfândega.** A Austrian Post declara encomendas vindas de fora da UE e cobra IVA de importação, direito aduaneiro e sua taxa própria na entrega ou na agência. Desde 1º de julho de 2026, encomendas de até €150 pagam taxa alfandegária fixa de €3 por tipo de produto, e desde 1º de novembro de 2026 incide também a taxa de manuseio da União de €2 por tipo de produto em compras online, qualquer que seja o valor. Veja mais em [encomendas retidas na alfândega](guide:customs).
 
-## Encomenda Austrian Post atrasada, extraviada ou avariada
+## Encomenda Austrian Post atrasada, extraviada ou danificada
 
 O remetente é o cliente da Austrian Post, portanto deve ser seu primeiro contato em caso de problemas.
 
@@ -73,7 +73,7 @@ O remetente é o cliente da Austrian Post, portanto deve ser seu primeiro contat
 
 **Extravio.** Apenas o remetente pode iniciar uma investigação (Nachforschung) — ou, em envios do exterior, o remetente ou a transportadora do país de origem. Em compras online, acione a loja. O remetente tem 3 meses em envios nacionais e 6 meses em internacionais; a investigação costuma levar ao menos duas semanas.
 
-**Avaria.** Comunique no máximo em 7 dias após a entrega (excluindo domingos e feriados), online na Post Account ou em uma agência, com fotos do item e da embalagem. Guarde tudo até a resposta da Austrian Post e avise o remetente: a indenização costuma ser paga a ele.
+**Dano.** Comunique no máximo em 7 dias após a entrega (excluindo domingos e feriados), online na Post Account ou em uma agência, com fotos do item e da embalagem. Guarde tudo até a resposta da Austrian Post e avise o remetente: a indenização costuma ser paga a ele.
 
 ## Telefone e contato da Austrian Post
 
@@ -83,15 +83,15 @@ Canais informados nas páginas da Austrian Post:
 - **Formulário online:** disponível 24 horas na [página de contato em post.at](https://www.post.at/kontaktformular).
 - **E-mail:** não há endereço de e-mail para destinatários.
 
-> A Austrian Post alerta sobre SMS falsos de entregas frustradas pedindo confirmação de dados por link e sobre avisos amarelos falsos com código QR. E-mails verdadeiros terminam em @post.at, e a empresa nunca pede seu IBAN para entregar uma encomenda comum.
+> A Austrian Post alerta sobre SMS falsos de entregas não realizadas pedindo confirmação de dados por link e sobre avisos amarelos falsos com código QR. E-mails verdadeiros terminam em @post.at, e a empresa nunca pede seu IBAN para entregar uma encomenda comum.
 
 ## Rastrear encomendas Austrian Post com o Peek
 
-O [Peek](/) reconhece na hora como Austrian Post um código internacional terminado em AT com dígito verificador válido. Para 22 dígitos, consulta primeiro a Austrian Post e a seleciona se ela reconhecer o código; caso contrário, verifica serviços de rastreamento e depois a [USPS](carrier:usps). Quando o número também corresponde ao formato da TIPSA ou da CTT Express, o Peek consulta essas empresas em paralelo. Para 24 dígitos, consulta Austrian Post, InPost e Ciblex, identificando Austrian Post se só ela reconhecer o código. Se o Peek não indicar transportadora, selecione em "Trocar". Um link de post.at só é lido quando contém código postal internacional (duas letras, nove dígitos e duas letras); para 22 ou 24 dígitos, cole apenas o número.
+O [Peek](/) reconhece na hora como Austrian Post um código internacional terminado em AT com dígito verificador válido. Para 22 dígitos, consulta primeiro a Austrian Post e a seleciona se ela reconhecer o código; caso contrário, verifica serviços de rastreamento e depois a [USPS](carrier:usps). Quando o número também corresponde ao formato da TIPSA ou da CTT Express, o Peek consulta essas empresas em paralelo. Para 24 dígitos, consulta Austrian Post, InPost e Ciblex, identificando Austrian Post se só ela reconhecer o código. Se o Peek não indicar transportadora, selecione em "Trocar". Um link de post.at só é lido quando contém um número postal internacional (duas letras, nove dígitos e duas letras); para 22 ou 24 dígitos, cole apenas o número.
 
 O Peek mostra o status, o histórico com cada unidade no mapa, peso, dimensões, horário de entrega e previsão de entrega (dia, intervalo de dias ou janela de horário) enquanto o envio está aceito ou em distribuição; ao sair para entrega, exibe apenas a janela horária do dia. Os horários aparecem no fuso horário do seu aparelho; em peektracker.com e nos aplicativos iPhone e Android, o histórico termina com "Horários no seu fuso horário:" e o nome dele. Ele indica quando está pronto para retirada, mas sem mostrar o local nem o remetente. Os textos aparecem em alemão, como enviados pela Austrian Post, então um pacote entregue mostra `Sendung wurde zugestellt`.
 
-Enquanto você mantém a encomenda aberta, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos — ou a cada 2 minutos no dia em que a Austrian Post registra a saída para entrega, a partir das 6h locais ou, se houver janela horária, meia hora antes de ela abrir — enquanto o rastreador próprio da Austrian Post responde; nos demais momentos, e após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica a cada hora. Quando apenas serviços de rastreamento respondem, consulta a cada hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados. Pode notificar cada movimentação, apenas etapas importantes (incluindo alfândega) ou só no dia da entrega. Após `Übergabe an Zustellpartner` em um código de 22 dígitos, o Peek não acompanha a parceira. Códigos postais de outros correios passam à Austrian Post assim que ela exibir um evento ao menos tão recente quanto o último da origem, quando a origem indica Áustria como destino ou, sem destino informado, enquanto você acompanha da Áustria; um código AT acompanhado de outro país segue a mesma regra para os correios locais (DHL na Alemanha, La Poste na França), e o Peek passa a seguir o ritmo da empresa que entrega.
+Enquanto você mantém a encomenda aberta, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos — ou a cada 2 minutos no dia em que a Austrian Post registra a saída para entrega, a partir das 6h locais ou, se houver janela horária, meia hora antes de ela abrir — enquanto o rastreador da própria Austrian Post responde; nos demais momentos, e após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica a cada hora. Quando apenas serviços de rastreamento respondem, consulta a cada hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados. Pode notificar cada movimentação, apenas etapas importantes (incluindo alfândega) ou só no dia da entrega. Após `Übergabe an Zustellpartner` em um código de 22 dígitos, o Peek não acompanha a parceira. Números postais de outros correios passam à Austrian Post assim que ela exibir um evento ao menos tão recente quanto o último da origem, quando a origem indica Áustria como destino ou, sem destino informado, enquanto você acompanha da Áustria; um número postal AT acompanhado de outro país segue a mesma regra para os correios locais (DHL na Alemanha, La Poste na França), e o Peek passa a seguir o ritmo da empresa que entrega.
 
 ## Perguntas frequentes sobre o rastreamento Austrian Post
 
@@ -119,7 +119,7 @@ Algo impede a declaração aduaneira do pacote. A Austrian Post armazena o envio
 - [Austrian Post: Item inquiry](https://www.post.at/en/p/a/item-inquiry) – quem abre investigação e prazos
 - [Austrian Post: Damage report](https://www.post.at/en/p/a/damage-report) – prazo de 7 dias
 - [Austrian Post: Online risks](https://www.post.at/en/i/c/online-risks) – mensagens falsas
-- [Österreichische Post: Hilfe zu Ihrem Sendungsstatus](https://www.post.at/p/c/hilfe-sendungsstatus) – status em alemão, prazo de guarda e avarias
+- [Österreichische Post: Hilfe zu Ihrem Sendungsstatus](https://www.post.at/p/c/hilfe-sendungsstatus) – status em alemão, prazo de guarda e danos
 - [Österreichische Post: Sendungssuche](https://www.post.at/s/sendungssuche) – rastreamento, Post Account, idioma EN e status
 - [Österreichische Post: Nachforschung](https://www.post.at/p/a/nachforschung) – quando investigar e passos do destinatário
 - [Österreichische Post: Poststation](https://www.post.at/p/c/abholstation) – armários e redirecionamento

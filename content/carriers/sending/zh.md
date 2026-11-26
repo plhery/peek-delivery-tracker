@@ -6,16 +6,16 @@ published: 2026-11-25
 updated: 2026-11-25
 ---
 
-如需查询 Sending 包裹，请在 Sending 官网的 [Localiza tu envío](https://www.sending.es/localiza-tu-envio/) 页面输入 12 位运单号或参考号，或直接把单号粘贴到上方查询框。物流节点以西班牙语显示，下表逐条给出中文含义。如有查询问题，Sending 公布的联系电话为西班牙 +34 919 012 048 与葡萄牙 +351 211 252 884。Sending（Sending Transporte Urgente）是一家覆盖西班牙和葡萄牙的西班牙快递与物流公司。InPost 表示于 2025 年收购并纳入了 Sending，目前 Sending 网站已带有 “Sending by InPost” 标志。Sending 说明收件人会通过邮件、短信或应用收到单号。
+如需查询 Sending 包裹，请在 Sending 官网的 [Localiza tu envío](https://www.sending.es/localiza-tu-envio/) 页面输入 12 位运单号或参考号，或直接把单号粘贴到上方查询框。物流节点以西班牙语显示，下表逐条给出中文含义。如有查询问题，Sending 公布的联系电话为西班牙 +34 919 012 048 与葡萄牙 +351 211 252 884。Sending（Sending Transporte Urgente）是一家覆盖西班牙和葡萄牙的西班牙快递与物流公司。InPost 表示于 2025 年纳入了 Sending，目前 Sending 网站已带有 “Sending by InPost” 标志。Sending 说明收件人会通过邮件、短信或应用收到单号。
 
 ## Sending 快递单号格式
 
-Sending 查件页要求填写 *código de envío*（运单号），也支持输入参考号；联系表单则要求填写 *número de expedición*（货运编号）。作为收件人，你会通过邮件、短信或应用收到单号，可先在收件箱搜索 “Sending”。网购订单也可以在商家发货邮件或订单页面查看。以下为虚构示例：
+Sending 查件页要求填写 *código de envío*（运单号），也接受参考号；联系表单则要求填写 *número de expedición*（货运编号）。作为收件人，你会通过邮件、短信或应用收到单号，可先在收件箱搜索 “Sending”。网购订单也可以在商家发货邮件或订单页面查看。以下为虚构示例：
 
 | 单号 | 说明 |
 | --- | --- |
 | `048291057362` | 12 位数字（含前导零）：Sending 运单号。[MRW](carrier:mrw)、[FedEx](carrier:fedex)、[Mondial Relay](carrier:mondial-relay) 等公司也使用 12 位数字。 |
-| 商家或寄件人参考号 | Sending 官网查件页可通过参考号查到包裹，但 Peek 不支持，必须输入 12 位运单号。 |
+| 商家或寄件人参考号 | Sending 官网查件页可通过参考号查到包裹，但 Peek 不行，它需要 12 位运单号。 |
 
 由于许多快递公司都用 12 位数字，请先确认商家邮件写明的承运商确为 Sending。如果 Sending 官网返回 `LO SENTIMOS, NO HEMOS ENCONTRADO TU ENVIO.`（“抱歉，未找到您的快件”），请核对数字并向商家确认单号和快递公司。完全找不到单号？参考[如何查找快递单号](guide:find-tracking-number)（英文）。
 
@@ -39,11 +39,11 @@ Sending 查件页要求填写 *código de envío*（运单号），也支持输�
 
 `El envio ha llegado a tu delegacion mas cercana` 往往只显示日期而没有实际时刻（00:00）。在签收记录旁，Sending 页面还可能附带一行 `Recibido`（“签收人”）写明代收者姓名：如果显示已签收却没拿到包裹，请先核对这一栏。
 
-## Sending 西班牙派送时段、未妥投及改址
+## Sending 西班牙派送时段、派送未成功及改址
 
 针对网购订单，Sending 表示收件人可以选择期望的派送时间段，且在送达前一小时提供短信提醒，但官网未说明具体选时段的操作入口。Sending 网站还提供自提点查询工具 “Localiza tu punto de recogida”，同样未说明何种情况下包裹会送往自提点。
 
-**未妥投。** 派送失败后轨迹会显示 `Has sido ausente`。Sending 官网未公布重派次数、是否留纸质通知单或保管天数，请致电或通过下文联系表单询问后续安排。更多内容见[错过派送怎么办](guide:missed-delivery)（英文）。
+**派送未成功。** 派送未成功后，轨迹会显示 `Has sido ausente`。Sending 官网未公布重派次数、是否留纸质通知单或保管天数，请致电或通过下文联系表单询问后续安排。更多内容见[派送未成功怎么办](guide:missed-delivery)（英文）。
 
 **地址错误或不全。** 若看到 `Direccion incorrecta - faltan datos` 或地址确实填错，请使用 Sending 的[地址变更表单](https://www.sending.es/formulario-contacto/cambio-direccion-datos/)。需填写运单号、收件人全名、邮箱、电话（选填）以及新地址（街道、门牌号、楼层户号、邮编、城镇及补充说明）。Sending 未说明改址是否收费以及最晚提交时限。另见[更改收件地址](guide:change-delivery-address)（英文）。
 
@@ -67,13 +67,13 @@ Sending 受商家委托承运，申请退款或补发应直接联系商家。西
 
 ## 使用 Peek 追踪 Sending 包裹
 
-[Peek](/) 无法单凭形态识别 Sending 单号，因为 12 位数字适用于众多快递公司。但你仍可直接粘贴：Peek 支持超过 4,500 家承运商。当你从西班牙、葡萄牙或安道尔添加时，Peek 会依次向多家采用 12 位单号的快递公司查询（首选 Sending）：你会看到“正在查询物流服务…”，若只有 Sending 有记录，则显示“Sending 有这个包裹的记录。”。在其他国家/地区添加时，自动排查不会包含 Sending。如果未能自动识别，点击“更换”并在“符合这个单号”下选择或搜索名称即可；已添加的包裹可使用“更换快递公司”。
+[Peek](/) 无法单凭形态识别 Sending 单号，因为 12 位数字适用于众多快递公司。但你仍可直接粘贴：Peek 跟踪 4,500 多家快递公司。当你从西班牙、葡萄牙或安道尔添加时，Peek 会向多家使用 12 位单号的快递公司查询，首先是 Sending：你会看到“正在查询物流服务…”，若只有 Sending 有记录，则显示“Sending 有这个包裹的记录。”在其他国家/地区添加时，Peek 要等其他快递公司和物流查询服务都查不到这个单号，最后才问 Sending。如果没有出现 Sending，点击“更换”并在“符合这个单号”下选择或搜索名称即可；已添加的包裹可使用“更换快递公司”。
 
-Peek 仅接受 Sending 的 12 位运单号：为其他格式单号强选 Sending 时，名称旁会提示其“不使用这种格式的单号”。如只有参考号，请直接到 sending.es 查件。也可以直接粘贴 info.sending.es 上带有 `localizador=` 及单号的查件链接。
+Peek 仅接受 Sending 的 12 位运单号：为其他单号选择 Sending 时，名称旁会提示它“不使用这种格式的单号”。如只有参考号，请直接到 sending.es 查件。也可以直接粘贴 info.sending.es 上带有 `localizador=` 及单号的查件链接。
 
 Peek 会保留 Sending 的西班牙语轨迹原文，并标注每次扫描对应的 Sending 网点所在城镇；仅含日期无时刻的节点只显示日期。每条时间按扫描网点所在地的当地时钟读取（加那利群岛网点按加那利时间）并转换为你设备的时区；在 peektracker.com 及 iPhone、Android 应用中，轨迹底部会写明“时间按你所在的时区显示：”及对应时区名称。当进度条停在 `Entregada` 时，即使扫描记录较早停止，Peek 也会标记为已签收；`FALTA DEFINITIVA` 则显示为“需要留意”。Peek 不显示寄件人参考号、派送时间窗、收寄件人邮编和城市、末端派送网点、派送选项及签收人姓名，也没有重量和预计送达日：查看派送时间窗请访问 sending.es。
 
-在你打开包裹页面期间，或在派送当天开启提醒时，只要 Sending 官网有响应，Peek 最高每 10 分钟检查一次，在 Sending 扫描进入派送当天当地时间早上 6 点起每 2 分钟检查一次；其余时间，以及连续两天没有新动态后（仍停留在“已生成面单”或“已揽收”时为 12 小时后），每小时检查一次。仅由追踪服务提供更新时，每小时检查一次，最新扫描超过一天后每 3 小时一次，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次。它支持按每次扫描、重要环节或仅派送当天推送通知，但无法代你联系 Sending、联系商家或修改地址。
+在你打开包裹页面期间，或在派送当天开启提醒时，只要 Sending 自己的查件系统正常响应，Peek 最高每 10 分钟检查一次，在 Sending 扫描进入派送当天当地时间早上 6 点起每 2 分钟检查一次；其余时间，以及连续两天没有新动态后（仍停留在“已生成面单”或“已揽收”时为 12 小时后），每小时检查一次。仅通过物流查询服务获取更新时，每小时检查一次，最新扫描超过一天后每 3 小时一次，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次。它可以按每次扫描、重要环节或仅派送当天推送通知，但无法代你联系 Sending、联系商家或修改地址。
 
 ## Sending 快递查询常见问题
 
@@ -83,7 +83,7 @@ Peek 会保留 Sending 的西班牙语轨迹原文，并标注每次扫描对应
 
 ### Sending 可以用英文查件吗？
 
-只能部分支持。sending.es 虽有英文版 “Find your shipment” 页面，但打开的仍是同一套查件系统，扫描节点全为西班牙语。上方对照表提供了中文说明，Peek 则原样展示 Sending 的西班牙语原文。
+只能部分做到。sending.es 虽有英文版 “Find your shipment” 页面，但打开的仍是同一套查件系统，扫描节点全为西班牙语。上方对照表提供了中文说明，Peek 则原样展示 Sending 的西班牙语原文。
 
 ### Sending 派送通常需要多久？
 
@@ -91,7 +91,7 @@ Sending 表示面向欧洲及伊比利亚半岛发往西班牙和葡萄牙全境
 
 ### Sending 出现 “Has sido ausente” 是什么意思？
 
-意思是“您不在场”：司机尝试派送时无人签收。Sending 网站未说明是否自动重派，请拨打 +34 919 012 048 或填写在线联系表单确认。
+意思是“您不在场”：司机尝试派送时无人签收。Sending 网站未说明是否会再次派送，请拨打 +34 919 012 048 或填写在线联系表单确认。
 
 ### FALTA DEFINITIVA 是什么意思？
 
@@ -109,5 +109,5 @@ Sending 表示面向欧洲及伊比利亚半岛发往西班牙和葡萄牙全境
 - [Sending: Política de privacidad](https://www.sending.es/politica-privacidad/) – 运营实体 Sending Transporte y Comunicación, S.A.（Coslada）
 - [InPost: Quiénes somos（西班牙语）](https://www.inpost.es/quienes-somos) – 2021 年并入 Mondial Relay、2025 年并入 Sending
 - [BOE: Ley General para la Defensa de los Consumidores y Usuarios（西班牙语）](https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555) – 第 66 bis 条（30 天交货期）、第 66 ter 条（交货前风险归卖家）及第 102、104、106 条（14 天撤回权）
-- [Universal Parcel Scraper: Sending](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/sending) – 12 位单号、未找到提示、进度条、扫描原文与含义、签收人栏位、查件链接及 Peek 读取字段
+- [Universal Parcel Scraper: Sending](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/sending) – 12 位单号、未找到提示、进度条、扫描原文与含义、签收人栏位、查件链接、Peek 读取和略去的信息
 :::

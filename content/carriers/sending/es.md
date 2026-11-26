@@ -67,7 +67,7 @@ Así lo indica la web de Sending:
 
 ## Seguir un envío de Sending con Peek
 
-[Peek](/) no puede saber por la forma del número que es de Sending: 12 cifras encajan con muchos transportistas. Pégalo igualmente: Peek sigue más de 4500 transportistas. Si lo añades desde España, Portugal o Andorra, Peek pregunta por él a varios transportistas que usan 12 cifras, con Sending en primer lugar: verás «Comprobando servicios de seguimiento…» y, si solo Sending lo conoce, «Sending tiene este paquete.». Desde otros países, esa comprobación no incluye a Sending. Si no sale Sending, pulsa «Cambiar» y elígelo: aparece en «Encaja con este número» o escribiendo su nombre en el buscador. En un paquete ya añadido, usa «Cambiar transportista».
+[Peek](/) no puede saber por la forma del número que es de Sending: 12 cifras encajan con muchos transportistas. Pégalo igualmente: Peek sigue más de 4500 transportistas. Si lo añades desde España, Portugal o Andorra, Peek pregunta por él a varios transportistas que usan 12 cifras, con Sending en primer lugar: verás «Comprobando servicios de seguimiento…» y, si solo Sending lo conoce, «Sending tiene este paquete.». Desde otros países, Peek pregunta a Sending al final, cuando ni los demás transportistas ni los servicios de seguimiento conocen el número. Si no sale Sending, pulsa «Cambiar» y elígelo: aparece en «Encaja con este número» o escribiendo su nombre en el buscador. En un paquete ya añadido, usa «Cambiar transportista».
 
 Peek solo acepta las 12 cifras del número de envío: si eliges Sending con otro número, junto a su nombre verás «no emite números como este». Con una referencia, usa el buscador de sending.es. También puedes pegar un enlace del buscador de Sending en info.sending.es que lleve `localizador=` y el número.
 

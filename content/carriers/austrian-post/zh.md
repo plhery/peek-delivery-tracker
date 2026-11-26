@@ -6,7 +6,7 @@ published: 2026-11-25
 updated: 2026-11-25
 ---
 
-奥地利邮政（Österreichische Post AG，总部位于维也纳）是奥地利的国家邮政公司。你可以在提供英文界面的 post.at、Post App 中查件，或直接将单号粘贴到上方查询框。单号由发货商家、奥地利邮政电子通知（e-notification）或未妥投后留下的黄色通知单提供。
+奥地利邮政（Österreichische Post AG，总部位于维也纳）是奥地利的国家邮政公司。你可以在提供英文界面的 post.at、Post App 中查件，或直接将单号粘贴到上方查询框。单号由发货商家、奥地利邮政电子通知（e-notification）或派送未成功后留下的黄色通知单提供。
 
 ## 奥地利邮政单号格式与查找位置
 
@@ -17,7 +17,7 @@ updated: 2026-11-25
 | `1048291736548291736482` | 奥地利邮政自有单号：以 10 开头的 22 位数字。 |
 | `RR482917367AT` | 国际邮政单号：2 位字母、9 位数字、2 位字母；以 AT 结尾即属奥地利邮政。 |
 
-**常见位置。** 商家发货邮件中；如果你注册了免费的 Post Account 且寄件人上传了发货数据，还会出现在奥地利邮政的电子通知（邮件或 Post App）里；未妥投时也会印在黄色取件通知单上。
+**单号在哪里。** 商家发货邮件中；如果你注册了免费的 Post Account 且寄件人上传了发货数据，还会出现在奥地利邮政的电子通知（邮件或 Post App）里；派送未成功时，也会印在黄色取件通知单上。
 
 海关标签上的 6 位 CRN 编码并不是快递单号。
 
@@ -25,7 +25,7 @@ updated: 2026-11-25
 
 ## 奥地利邮政物流状态含义
 
-post.at 同时支持德语与英语（切换 EN 即可查看英文）。下表每行先列出英文文案，再给出对应的德文原文：
+post.at 的查件结果有德语和英语两种（切换 EN 即可查看英文）。下表每行先列出英文文案，再给出对应的德文原文：
 
 | 奥地利邮政状态 | 对你的含义 |
 | --- | --- |
@@ -36,28 +36,28 @@ post.at 同时支持德语与英语（切换 EN 即可查看英文）。下表�
 | `Delay due to incorrect distribution`、`Verzögerung wegen Fehlverteilung` | 分拣错区导致轻微延误，你无需采取任何操作。 |
 | `Shipment out for delivery`、`Sendung in Zustellung` | 正在派送，预计今天送达。 |
 | `Item could not be delivered - consignee notified`、`Empfänger nicht angetroffen - brieflich benachrichtigt` | 派送时无人收件，通知单已放入你的信箱。 |
-| `Item ready for pick-up`、`Sendung abholbereit` | 已到达网点或自提柜，可在通知单注明的截止日前领取。 |
+| `Item ready for pick-up`、`Sendung abholbereit` | 等你领取，截止日期见通知单。 |
 | `Item arrived in Austrian Post pick-up box`、`Sendung in Post Empfangsbox eingelangt` | 已投递至你所在楼宇的邮政收件箱。 |
-| `Item handed over to delivery partner`、`Übergabe an Zustellpartner` | 已移交合作快递公司负责末端派送。 |
+| `Item handed over to delivery partner`、`Übergabe an Zustellpartner` | 由另一家公司负责派送。 |
 | `Shipment delivered`、`Sendung wurde zugestellt` | 已签收送达。 |
 | `Sendung an Empfänger∗in übergeben` | 已当面交予收件人：已签收。 |
 | `Return/addressing error`、`Rücksendung/Adressierungsfehler` | 地址错误或不全，包裹正在退回寄件人。 |
 
-帮助页面常给出 `Item in distribution` 这类汇总状态，而轨迹详情多为 `Shipment being processed at the logistics center`，因此并非每条都会出现。`Electronic order information was provided by the sender` 表示仅生成了面单，商家发出的“已发货”邮件并不代表包裹已交寄；如果几个工作日仍无变化，请联系寄件人。跨境包裹出现 `Item received` 则表示寄出国承运商已收件。
+帮助页面使用 `Item in distribution` 这类汇总状态，而轨迹记录的写法类似 `Shipment being processed at the logistics center`，因此表中各行不会都出现。`Electronic order information was provided by the sender` 表示仅生成了面单，商家发出的“已发货”邮件并不代表包裹已交寄；如果几个工作日仍无变化，请联系寄件人。跨境包裹出现 `Item received` 则表示寄出国承运商已收件。
 
-**海关扫描。** 境外寄入包裹抵达奥地利后可能出现海关节点。Peek 会原样保留奥地利邮政接口返回的德文文案并标记为“清关中”：`Sendung im Zollanmeldungsprozess. Weitere Info folgt.`（正在办理清关申报）、`Lagereingang - Zollanmeldungshindernis`（因清关申报受阻已暂存，奥地利邮政查件页会提示你补交资料）、`Sendung ist im Zollprozess verzögert. Grund: unplausibler Warenwert.`（清关延误，此处原因为申报货值存疑，“Grund:”后的具体原因会随情况变化），以及 `Zollanmeldungshindernis - Rückmeldung vom Empfänger eingelangt`（已收到你的回复，包裹继续留在海关等待放行）。
+**海关扫描。** 境外寄入包裹抵达奥地利后可能出现海关节点。Peek 按奥地利邮政查件系统给出的德文原样显示，并标记为“清关中”：`Sendung im Zollanmeldungsprozess. Weitere Info folgt.`（正在办理清关申报）、`Lagereingang - Zollanmeldungshindernis`（因清关申报受阻已暂存，奥地利邮政查件页会提示你补交资料）、`Sendung ist im Zollprozess verzögert. Grund: unplausibler Warenwert.`（清关延误，此处原因为申报货值存疑，“Grund:”后的具体原因会随情况变化），以及 `Zollanmeldungshindernis - Rückmeldung vom Empfänger eingelangt`（已收到你的回复，包裹继续留在海关等待放行）。
 
-## 奥地利邮政取件、自提柜与未妥投处理
+## 奥地利邮政取件、自提柜与派送未成功
 
 **派送时效。** 奥地利邮政说明，奥地利境内包裹通常在两个工作日内送达，Post Express 一般于次日工作日 13:00 前送达。
 
-**未妥投。** 投递员会在信箱留下黄色通知单（Gelber Zettel），写明取件地点和最后取件日期。保管期自次日起算，一直持续到随后的第三个星期一，因此至少有 14 天；但网店寄件人可将保管期缩短至 5 个工作日。
+**派送未成功。** 投递员会在信箱留下黄色通知单（Gelber Zettel），写明取件地点和最后取件日期。保管期自次日起算，一直持续到随后的第三个星期一，因此至少有 14 天；但网店寄件人可将保管期缩短至 5 个工作日。
 
 **暂存地点。** 邮局网点（在营业时间内取件）或全天 24 小时开放的 Poststation 自提柜（需输入通知单上的取件码）。奥地利邮政在网点、居民区和超市设有 1,500 多组 Poststation。
 
 **取件要求。** 携带带照片的身份证件和单号；即使没带纸质通知单，也能在邮局网点取件。他人持你的黄色通知单可代领；免费的电子通知同样可用于取件，并可转发给他人代取。
 
-**修改投递方式。** 在 Post Account（“Empfangsoptionen”）或 Post App 中可免费单次或永久改投：转寄至邮局网点、Post Partner 合作点、Hermes PaketShop、Poststation 自提柜、家中指定放置点或指定邻居。永久设置最早在 3 个工作日后生效。
+**修改投递方式。** 在 Post Account（“Empfangsoptionen”）或 Post App 中可免费单次或永久改投：转寄至邮局网点、Post Partner 代办点、Hermes PaketShop、Poststation 自提柜、家中指定放置点或指定邻居。永久设置最早在 3 个工作日后生效。
 
 **Post Empfangsbox 楼宇收件箱。** 投递员留下的通知单条码仅能打开你所在楼宇的收件箱一次，请务必当场取出包裹。
 
@@ -83,15 +83,15 @@ post.at 同时支持德语与英语（切换 EN 即可查看英文）。下表�
 - **在线联系表单：** 全天候开放的 [post.at 联系表单](https://www.post.at/kontaktformular)。
 - **电子邮箱：** 不对收件人提供客服邮箱。
 
-> 奥地利邮政提醒防范仿冒未妥投短信（诱导点击链接确认信息）及带二维码的假黄色通知单。官方邮件均以 @post.at 结尾，且派送普通包裹绝不会索要你的 IBAN 银行账号。
+> 奥地利邮政提醒防范假冒的派送未成功短信（诱导点击链接确认信息）及带二维码的假黄色通知单。官方邮件均以 @post.at 结尾，且派送普通包裹绝不会索要你的 IBAN 银行账号。
 
 ## 使用 Peek 追踪奥地利邮政包裹
 
-对于以 AT 结尾且校验位有效的国际单号，[Peek](/) 会立刻识别为奥地利邮政。对于 22 位数字单号，Peek 会先询问奥地利邮政，有记录即归属之；否则查询追踪服务，再查 [USPS](carrier:usps)。若该单号同时符合 TIPSA 或 CTT Express 的形态，Peek 会同时向它们查询。对于 24 位数字，Peek 会向奥地利邮政、InPost 与 Ciblex 查询，仅当奥地利邮政有记录时才识别为它。若 Peek 未自动识别，可点击“更换”手动选择。粘贴 post.at 链接仅支持内含国际邮政单号（2 位字母、9 位数字、2 位字母）的链接；22 位或 24 位数字请直接粘贴纯单号。
+对于以 AT 结尾且校验位有效的国际单号，[Peek](/) 会立刻认出是奥地利邮政。对于 22 位数字单号，Peek 先问奥地利邮政，它有记录时即认定为奥地利邮政；否则先问物流查询服务，再问 [USPS](carrier:usps)。若该单号同时符合 TIPSA 或 CTT Express 的形态，Peek 会同时向它们查询。对于 24 位数字，Peek 会向奥地利邮政、InPost 与 Ciblex 查询，仅当奥地利邮政有记录时才识别为它。若 Peek 没有认出快递公司，可点“更换”选择。Peek 只读取内含国际邮政单号（2 位字母、9 位数字、2 位字母）的 post.at 链接；22 位或 24 位数字请直接粘贴纯单号。
 
-Peek 会展示当前状态、每个物流中心在地图上的位置、重量、尺寸、签收时间，以及揽收或派送流转期间的预计送达时间（具体日期、日期区间或时段）；进入派送当天后仅显示当天的时间窗。时间均换算为你设备的时区；在 peektracker.com 及 iPhone、Android 应用中，轨迹底部会写明“时间按你所在的时区显示：”及对应时区名称。Peek 会标示包裹已待取件，但不显示具体取件地点与寄件人信息。状态文案保留奥地利邮政接口返回的德文，因此签收包裹会显示 `Sendung wurde zugestellt`。
+Peek 会展示当前状态、每个物流中心在地图上的位置、重量、尺寸、签收时间，以及揽收或派送流转期间的预计送达时间（具体日期、日期区间或时段）；进入派送当天后仅显示当天的时间窗。时间均换算为你设备的时区；在 peektracker.com 及 iPhone、Android 应用中，轨迹底部会写明“时间按你所在的时区显示：”及对应时区名称。Peek 会标示包裹已待取件，但不显示具体取件地点与寄件人信息。状态文案保留奥地利邮政查件系统给出的德文，因此签收包裹会显示 `Sendung wurde zugestellt`。
 
-在你打开包裹页面期间，或在派送当天开启提醒时，只要奥地利邮政官网有响应，Peek 最高每 10 分钟检查一次，在奥地利邮政扫描进入派送当天当地时间早上 6 点起（若提供了派送时间窗，则从时间窗开始前半小时起）每 2 分钟检查一次；其余时间，以及连续两天没有新动态后（若包裹仍停留在“已生成面单”或“已揽收”则为 12 小时后），改为每小时检查一次。当仅由追踪服务提供更新时，Peek 每小时检查一次，超过一天无新动态后每 3 小时一次，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次。它可按每次扫描、重要环节（含海关扫描）或仅派送当天推送提醒。22 位单号出现 `Übergabe an Zustellpartner` 后，Peek 不会继续跟进合作派送商。其他国家邮政单号若原寄国标明发往奥地利（或未标目的地而你在奥地利追踪），一旦奥地利邮政出现不早于原寄国最新节点的扫描，便会自动转由奥地利邮政继续追踪；从他国追踪 AT 结尾单号时也会按同样规则转交当地邮政（如德国 DHL、法国 La Poste），随后 Peek 将按实际派送方的节奏刷新。
+在你打开包裹页面期间，或在派送当天开启提醒时，只要奥地利邮政自己的查件系统正常响应，Peek 最高每 10 分钟检查一次，在奥地利邮政扫描进入派送当天当地时间早上 6 点起（若提供了派送时间窗，则从时间窗开始前半小时起）每 2 分钟检查一次；其余时间，以及连续两天没有新动态后（若包裹仍停留在“已生成面单”或“已揽收”则为 12 小时后），改为每小时检查一次。仅通过物流查询服务获取更新时，Peek 每小时检查一次，超过一天无新动态后每 3 小时一次，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次。它可按每次扫描、重要环节（含海关扫描）或仅派送当天推送提醒。22 位单号出现 `Übergabe an Zustellpartner` 后，Peek 不会继续跟踪接手派送的公司。其他国家邮政单号若原寄国标明发往奥地利（或未标目的地而你在奥地利追踪），一旦奥地利邮政出现不早于原寄国最新节点的扫描，便转由奥地利邮政继续跟踪；从他国追踪 AT 结尾单号时也会按同样规则转交当地邮政（如德国 DHL、法国 La Poste），随后 Peek 将按实际派送方的节奏刷新。
 
 ## 奥地利邮政查询常见问题
 
@@ -129,5 +129,5 @@ Peek 会展示当前状态、每个物流中心在地图上的位置、重量、
 - [Österreichische Post: Postempfangsbox](https://www.post.at/p/c/empfangsbox) – 楼宇收件箱说明
 - [Österreichische Post: FAQ Privatkund\*innen](https://www.post.at/p/c/faq-privat) – CRN 编码与清关说明
 - [Österreichische Post: Jahresfinanzbericht 2023](https://assets.post.at/-/media/Dokumente/De/Investor-Relations/Geschaefts--und-Nachhaltigkeitsberichte/Jahresfinanzbericht-Oesterreichische-Post-AG-2023.pdf) – 法定名称与公司所在地
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取的数据字段、海关扫描及含义
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取和显示的信息、海关扫描及其含义
 :::

@@ -123,6 +123,7 @@ import com.plhery.peekdeliverytracker.core.currentStage
 import com.plhery.peekdeliverytracker.core.deliveringCarrier
 import com.plhery.peekdeliverytracker.core.deliveryLineKey
 import com.plhery.peekdeliverytracker.core.displayedCarrier
+import com.plhery.peekdeliverytracker.core.earlyGiftWords
 import com.plhery.peekdeliverytracker.core.gift
 import com.plhery.peekdeliverytracker.core.giftDetail
 import com.plhery.peekdeliverytracker.core.hasCarrierUpdate
@@ -636,10 +637,14 @@ private fun LinkShared(
                 }
                 refreshFailure?.let { LinkNote(localizer.text(it.messageKey)) }
                 if (wrapped) {
-                    GiftSurprise()
+                    // Shown early, the note and who it is from come before the delivery; only what is inside waits.
+                    val early = response.earlyGiftWords
+                    if (early != null) GiftNote(early.note, early.from, null)
+                    GiftSurprise(early = early != null)
                 } else if (opened) {
-                    // What the link carried all along comes out with the delivery.
-                    GiftNote(route?.note, route?.from, route?.name)
+                    // What the link carried all along comes out with the delivery, or what its sender showed early.
+                    val words = response.link.giftWords
+                    GiftNote(route?.note ?: words?.note, route?.from ?: words?.from, route?.name ?: words?.name)
                 }
                 // A gift cannot be kept before it is delivered: that would show its number.
                 Keeping(source, state, response, keeping, keepable = response.link.canKeep && !wrapped, followable = !wrapped)
@@ -1383,9 +1388,12 @@ internal fun rememberLinkOpening(opens: Boolean): State<Float> {
     return open.asState()
 }
 
-/** GiftSurprise (B-S45): under a gift on its way, why the sheet says so little, in footnote secondary, 6 in. */
+/**
+ * GiftSurprise (B-S45): under a gift on its way, why the sheet says so little, in footnote secondary, 6 in. With its
+ * note shown early, only what is inside waits ("share.gift.surpriseInside").
+ */
 @Composable
-private fun GiftSurprise() {
+private fun GiftSurprise(early: Boolean) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     Row(
@@ -1393,7 +1401,7 @@ private fun GiftSurprise() {
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         PeekSymbol("gift", font = type.footnote, tint = colors.secondaryText)
-        Text(localized("share.gift.surprise"), Modifier.weight(1f), color = colors.secondaryText, style = type.footnote.sfLines())
+        Text(localized(if (early) "share.gift.surpriseInside" else "share.gift.surprise"), Modifier.weight(1f), color = colors.secondaryText, style = type.footnote.sfLines())
     }
 }
 

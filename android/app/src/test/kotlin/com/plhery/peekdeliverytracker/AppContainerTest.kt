@@ -26,14 +26,17 @@ import com.plhery.peekdeliverytracker.core.DeliveryWidgetSharedStore
 import com.plhery.peekdeliverytracker.core.DistancePreference
 import com.plhery.peekdeliverytracker.core.DistanceUnit
 import com.plhery.peekdeliverytracker.core.JsonEncoder
+import com.plhery.peekdeliverytracker.core.NoteFileUpload
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackModel
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackQuestion
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackSubject
 import com.plhery.peekdeliverytracker.core.ParcelSharePreview
 import com.plhery.peekdeliverytracker.core.WeightPreference
 import com.plhery.peekdeliverytracker.core.api.CarrierId
+import com.plhery.peekdeliverytracker.core.api.PackageFileType
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
+import com.plhery.peekdeliverytracker.platform.AppNotifications
 import com.plhery.peekdeliverytracker.platform.FakeAndroidKeyStore
 import com.plhery.peekdeliverytracker.platform.KeystoreSecretStore
 import com.plhery.peekdeliverytracker.platform.LauncherShortcuts
@@ -285,6 +288,52 @@ class AppContainerTest {
         assertEquals(LauncherShortcuts.NEXT_DELIVERY, shortcut.id)
         assertEquals(next.label, shortcut.shortLabel.toString())
         assertEquals(next.deepLink, shortcut.intent.dataString)
+    }
+
+    /**
+     * SPEC "Where it never shows": a parcel's note and its files stay in the app. The widget's keys and the next
+     * delivery's shortcut, which read what the store publishes, carry none of it; a push about the parcel shows what the
+     * service sent, never the note kept on the phone.
+     */
+    @Test
+    fun aNoteNeverReachesTheShortcutsTheWidgetOrANotification() {
+        PreferencesDefaults.standard(context).set("demo", forKey = "sdt.native.experience.v1")
+        shadowOf(context as android.app.Application).grantPermissions(android.Manifest.permission.POST_NOTIFICATIONS)
+        val app = container()
+        app.start(process.lifecycle)
+        idleUntil("the demo's parcels") { app.parcels.parcels.isNotEmpty() }
+        val secret = "Door code 4512 behind the blue gate"
+        var noted = false
+        app.scope.launch {
+            for (parcel in app.parcels.parcels) {
+                app.parcels.setNote(parcel, secret)
+                app.parcels.addFile(parcel, NoteFileUpload(byteArrayOf(1, 2, 3), "Hidden receipt.pdf", PackageFileType.ApplicationPdf))
+            }
+            app.parcels.refreshDeliverySurfaces()
+            noted = true
+        }
+        idleUntil("the notes") { noted }
+        idleUntil("the next delivery") { ShortcutManagerCompat.getDynamicShortcuts(context).isNotEmpty() }
+        assertTrue(app.parcels.parcels.all { it.note == secret })
+        for (shortcut in ShortcutManagerCompat.getDynamicShortcuts(context)) {
+            for (text in listOf(shortcut.shortLabel, shortcut.longLabel, shortcut.intent.dataString)) {
+                assertFalse("$text", "$text".contains("4512") || "$text".contains("Hidden receipt"))
+            }
+        }
+        val widget = context.getSharedPreferences("group.test.peek", Context.MODE_PRIVATE).all.filterKeys { it.startsWith("sdt.deliveryWidget") }
+        assertTrue(widget.isNotEmpty())
+        for ((key, value) in widget) {
+            // Data is kept as one Base64 string in a set.
+            val text = (value as? Set<*>)?.joinToString { android.util.Base64.decode(it.toString(), android.util.Base64.NO_WRAP).decodeToString() }
+                ?: value.toString()
+            assertFalse(key, text.contains("4512") || text.contains("Hidden receipt"))
+        }
+        val parcel = app.parcels.parcels.first()
+        AppNotifications(context).post(mapOf("title" to parcel.label, "body" to "Out for delivery", "parcel_id" to "${parcel.id}"))
+        val shade = shadowOf(context.getSystemService(android.app.NotificationManager::class.java))
+        val posted = requireNotNull(shade.getNotification("${parcel.id}", AppNotifications.ID))
+        val extras = posted.extras.keySet().joinToString { "${posted.extras.get(it)}" }
+        assertFalse(extras, extras.contains("4512") || extras.contains("Hidden receipt"))
     }
 
     /** Firebase giving no token tells the store, as AppDelegate's failure does the iPhone's: the invitation offers it again. */

@@ -57,6 +57,7 @@ import com.plhery.peekdeliverytracker.core.ParcelLinkStopped
 import com.plhery.peekdeliverytracker.core.TrackingNumberCopy
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.CarrierOutage
+import com.plhery.peekdeliverytracker.core.api.GiftWords
 import com.plhery.peekdeliverytracker.core.api.ImportCharges
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackAnswer
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackReason
@@ -939,6 +940,21 @@ class ParcelLinkSheetTest {
         assertFalse(exists(LINK_SIGN_IN))
         assertFalse(exists(LINK_GIFT_NOTE))
         assertFalse("The words wait for the delivery", shows("Happy birthday"))
+    }
+
+    /** Its note shown early: the note and who it is from before the delivery, and only what is inside a surprise. */
+    @Test
+    fun aGiftOnItsWayWhoseNoteShowsEarlyShowsItAndKeepsOnlyWhatIsInsideASurprise() {
+        val wrapped = LinkFixtures.wrappedGift()
+        val early = wrapped.copy(link = wrapped.link.copy(giftWords = GiftWords(name = "A scarf", note = "Happy birthday, Alex!", from = "Sam", early = true)))
+        show(FakeParcelLinks(answer = early))
+        open(giftId)
+        assertTrue(exists(LINK_GIFT_NOTE))
+        assertTrue(shows("Happy birthday, Alex!"))
+        assertTrue(shows("— Sam"))
+        assertFalse("What is inside waits for the delivery", shows("A scarf"))
+        assertTrue(shows(text("share.gift.surpriseInside")))
+        assertFalse(shows(text("share.gift.surprise")))
     }
 
     @Test

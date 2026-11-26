@@ -33,6 +33,7 @@ import com.plhery.peekdeliverytracker.core.MaintenanceNotice
 import com.plhery.peekdeliverytracker.core.NativeRoute
 import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
 import com.plhery.peekdeliverytracker.core.OnTheWayRecord
+import com.plhery.peekdeliverytracker.core.PassportSeenRecord
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackClient
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackMemory
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackModel
@@ -373,6 +374,12 @@ interface DeliveriesSource {
     val onTheWay: OnTheWayRecord
 
     /**
+     * The passport's stamps this device has shown, one list per account and one for a guest ([PassportSeenRecord]),
+     * kept in the app's preferences and never sent: what is earned and not in it is new, on its card and the tab.
+     */
+    val passportSeen: PassportSeenRecord
+
+    /**
      * The guest's invitation to an account under their parcels, as this visit shows it ([AccountInvitationVisit]): one
      * for the process, over a record kept in the app's preferences and never sent.
      */
@@ -709,6 +716,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override val reviewSettled get() = container.reviewSettled
 
     override val onTheWay = OnTheWayRecord(container.defaults)
+
+    override val passportSeen = PassportSeenRecord(container.defaults)
 
     override val accountInvitation: AccountInvitationVisit get() = container.accountInvitation
 

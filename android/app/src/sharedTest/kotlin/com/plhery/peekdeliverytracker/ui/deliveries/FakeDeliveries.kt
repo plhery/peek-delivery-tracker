@@ -27,6 +27,7 @@ import com.plhery.peekdeliverytracker.core.FriendsStore
 import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
 import com.plhery.peekdeliverytracker.core.NotificationPreset
 import com.plhery.peekdeliverytracker.core.OnTheWayRecord
+import com.plhery.peekdeliverytracker.core.PassportSeenRecord
 import com.plhery.peekdeliverytracker.core.NoteFileAddress
 import com.plhery.peekdeliverytracker.core.NoteFileError
 import com.plhery.peekdeliverytracker.core.NoteFileProblem
@@ -107,6 +108,8 @@ class FakeDeliveries(
     val onTheWayDefaults: UserDefaults = MemoryDefaults(),
     /** Where the guest's invitation to an account keeps its visits, in memory: it outlasts a process too. */
     val accountInvitationDefaults: UserDefaults = MemoryDefaults(),
+    /** Where the passport keeps the stamps this device has shown, in memory: it outlasts a process too. */
+    val passportDefaults: UserDefaults = MemoryDefaults(),
 ) : DeliveriesSource {
     override val parcels = MutableStateFlow(parcels)
     override val unlistedDeviceParcels = MutableStateFlow(0)
@@ -231,6 +234,9 @@ class FakeDeliveries(
 
     /** The parcels the list last showed on their way ([onTheWayDefaults]); its clock is the list's, which the tests set. */
     override val onTheWay = OnTheWayRecord(onTheWayDefaults)
+
+    /** The stamps the passport has shown on this device ([passportDefaults]). */
+    override val passportSeen = PassportSeenRecord(passportDefaults)
 
     /** Nothing stands in the way of an ask, unless a test says otherwise. */
     override val reviewSettled = MutableStateFlow(true)
@@ -835,7 +841,7 @@ class FakeDeliveries(
     fun newProcess(): FakeDeliveries =
         FakeDeliveries(
             parcels.value, session.value, shareLinks = shareLinks, shareDefaults = shareDefaults, invitationDefaults = invitationDefaults,
-            onTheWayDefaults = onTheWayDefaults, accountInvitationDefaults = accountInvitationDefaults,
+            onTheWayDefaults = onTheWayDefaults, accountInvitationDefaults = accountInvitationDefaults, passportDefaults = passportDefaults,
         )
 
     /**

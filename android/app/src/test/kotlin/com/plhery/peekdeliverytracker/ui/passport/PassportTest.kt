@@ -70,6 +70,8 @@ import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_SHEET
 import com.plhery.peekdeliverytracker.ui.tabs.TAB_BAR
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.hapticFeedbackConstant
+import java.time.Instant
+import java.time.ZoneId
 import java.util.UUID
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -218,16 +220,17 @@ class PassportTest {
 
     private fun rows(): List<String> = compose.onAllNodes(SemanticsMatcher("a country") { node ->
         node.config.getOrNull(SemanticsProperties.ContentDescription)?.singleOrNull()?.let { it.endsWith(" parcels") || it.endsWith(" parcel") } == true
-    }).fetchSemanticsNodes().sortedBy { it.boundsInRoot.top }.map { it.config[SemanticsProperties.ContentDescription].single() }
+    // Where each stands on the page, scrolled out of view or not: a row clipped away has no bounds.
+    }).fetchSemanticsNodes().sortedBy { it.positionInRoot.y }.map { it.config[SemanticsProperties.ContentDescription].single() }
 
     @Test
-    fun withNoParcelsNoneIsDeliveredTheFirstStampIsNextAndNoCountryShows() {
+    fun withNoParcelsNoneIsDeliveredTheFirstThreeStampsAreNextAndNoCountryShows() {
         show(emptyList())
         assertEquals("0 ${text("passport.delivered", mapOf("count" to 0))}", label(PASSPORT_COVER))
-        assertEquals(listOf("first", "ten", "carriers"), stamps())
-        assertEquals("First arrival, 0 / 1", label(stamp("first")))
-        assertEquals("Double digits, 0 / 10", label(stamp("ten")))
-        assertEquals("Well connected, 0 / 3", label(stamp("carriers")))
+        assertEquals(listOf("first", "rightNextDoor", "express"), stamps())
+        assertEquals("First arrival, Not yet", label(stamp("first")))
+        assertEquals("Right next door, Not yet", label(stamp("rightNextDoor")))
+        assertEquals("Express arrival, Not yet", label(stamp("express")))
         assertTrue(exists(PASSPORT_SHOW_ALL))
         assertTrue(shows(text("passport.waitingForTimes")))
         assertFalse(exists(PASSPORT_AVERAGE))
@@ -240,14 +243,18 @@ class PassportTest {
     fun theDemosParcels() {
         show(session = AuthenticationState.Demo)
         assertEquals("10 Delivered", label(PASSPORT_COVER))
-        // Nine stamps earned and the three to come: all twelve, with nothing more to show.
+        // Ten stamps earned, in the passport's order, and the three to come; the rest under "All stamps".
         assertEquals(
-            listOf("first", "ten", "carriers", "speed", "acrossBorders", "aroundWorld", "theRegular", "rightNextDoor", "worthTheWait", "busyDoorstep", "pickedUp", "homeForHolidays"),
+            listOf(
+                "first", "rightNextDoor", "express", "pickedUp", "acrossBorders", "connected", "worthTheWait", "aroundWorld", "newHorizons", "ten",
+                "familiarFace", "secondTry", "fourSeasons",
+            ),
             stamps(),
         )
-        assertFalse(exists(PASSPORT_SHOW_ALL))
-        assertEquals("Well connected", label(stamp("carriers")))
-        assertEquals("The regular, 10 / 25", label(stamp("theRegular")))
+        assertTrue(exists(PASSPORT_SHOW_ALL))
+        assertEquals("Well connected, Earned on 12 October 2026", label(stamp("connected")))
+        tap(PASSPORT_SHOW_ALL)
+        assertEquals("The regular, 10 of 25", label(stamp("theRegular")))
         assertEquals("Average delivery time, 5 days, 5 hours", label(PASSPORT_AVERAGE))
         assertEquals("Fastest delivery, 18 hours", label(PASSPORT_PERSONAL_BEST))
         // Abbreviated on the cards.
@@ -290,52 +297,81 @@ class PassportTest {
         assertTrue("The count is drawn as it rests", next.sameAs(coverDrawing()))
     }
 
+    /**
+     * A set that earns every stamp the apps before the new ones knew, and Familiar face: the earned ones first, in the
+     * passport's order, each read with the day it was earned, then the next three.
+     */
     @Test
-    fun aSetThatEarnsEveryStamp() {
+    fun aSetThatEarnsTheTwelveFirstStamps() {
         show(PassportFixtures.everyStamp())
         assertEquals("25 Delivered", label(PASSPORT_COVER))
-        val all = listOf("first", "ten", "carriers", "speed", "acrossBorders", "aroundWorld", "theRegular", "rightNextDoor", "worthTheWait", "busyDoorstep", "pickedUp", "homeForHolidays")
-        assertEquals(all, stamps())
-        // Each earned stamp reads as its title alone.
-        val titles = listOf(
-            "First arrival", "Double digits", "Well connected", "Express arrival", "Across borders", "Around the world", "The regular",
-            "Right next door", "Worth the wait", "A busy doorstep", "Picked up", "Home for the holidays",
+        val earned = listOf(
+            "first", "rightNextDoor", "express", "familiarFace", "pickedUp", "acrossBorders", "connected", "worthTheWait", "aroundWorld", "ten",
+            "theRegular", "busyDoorstep", "homeForHolidays",
         )
-        assertEquals(titles, all.map { label(stamp(it)) })
-        assertFalse(exists(PASSPORT_SHOW_ALL))
+        assertEquals(earned + listOf("secondTry", "newHorizons", "fourSeasons"), stamps())
+        val titles = listOf(
+            "First arrival", "Right next door", "Express arrival", "Familiar face", "Picked up", "Across borders", "Well connected", "Worth the wait",
+            "Around the world", "Double digits", "The regular", "A busy doorstep", "Home for the holidays",
+        )
+        assertEquals(titles.map { "$it, Earned on" }, earned.map { label(stamp(it)).substringBeforeLast(" ").substringBeforeLast(" ").substringBeforeLast(" ") })
+        // The deliveries replayed in the order they arrived: December's came first, the 10th and 25th in March.
+        assertEquals("First arrival, Earned on 3 December 2025", label(stamp("first")))
+        assertEquals("Home for the holidays, Earned on 3 December 2025", label(stamp("homeForHolidays")))
+        assertEquals("Double digits, Earned on 5 March 2026", label(stamp("ten")))
+        assertEquals("The regular, Earned on 10 March 2026", label(stamp("theRegular")))
+        assertEquals("Second try, Not yet", label(stamp("secondTry")))
+        assertEquals("Four seasons, 2 of 4", label(stamp("fourSeasons")))
+        assertTrue(exists(PASSPORT_SHOW_ALL))
         assertEquals("Fastest delivery, 1 day, 12 hours", label(PASSPORT_PERSONAL_BEST))
     }
 
     @Test
     fun aSetJustShortOfEachStampShowsHowFarAlongItIs() {
         show(PassportFixtures.justShort())
-        assertEquals(listOf("first", "ten", "carriers", "speed", "acrossBorders"), stamps())
-        assertEquals("Well connected, 2 / 3", label(stamp("carriers")))
-        assertEquals("Express arrival, ${text("passport.underTwoDays")}", label(stamp("speed")))
-        assertEquals("Across borders, 0 / 1", label(stamp("acrossBorders")))
+        // Twelve parcels by each of two carriers earn Familiar face.
+        assertEquals(listOf("first", "familiarFace", "ten", "rightNextDoor", "express", "pickedUp"), stamps())
+        assertEquals("Express arrival, Not yet", label(stamp("express")))
+        assertEquals("Right next door, Not yet", label(stamp("rightNextDoor")))
         assertEquals("Fastest delivery, 2 days", label(PASSPORT_PERSONAL_BEST))
 
         tap(PASSPORT_SHOW_ALL)
-        assertEquals(12, stamps().size)
-        assertEquals("Around the world, 4 / 5", label(stamp("aroundWorld")))
-        assertEquals("The regular, 24 / 25", label(stamp("theRegular")))
-        assertEquals("Right next door, 0 / 1", label(stamp("rightNextDoor")))
-        assertEquals("Worth the wait, 0 / 1", label(stamp("worthTheWait")))
-        assertEquals("A busy doorstep, 2 / 3", label(stamp("busyDoorstep")))
-        assertEquals("Picked up, 0 / 1", label(stamp("pickedUp")))
-        assertEquals("Home for the holidays, 0 / 1", label(stamp("homeForHolidays")))
+        assertEquals(19, stamps().size)
+        assertEquals("Well connected, 2 of 3", label(stamp("connected")))
+        assertEquals("Across borders, Not yet", label(stamp("acrossBorders")))
+        assertEquals("Around the world, 4 of 5", label(stamp("aroundWorld")))
+        assertEquals("Ten countries, 4 of 10", label(stamp("tenCountries")))
+        assertEquals("The regular, 24 of 25", label(stamp("theRegular")))
+        assertEquals("Fifty, 24 of 50", label(stamp("fifty")))
+        assertEquals("Worth the wait, Not yet", label(stamp("worthTheWait")))
+        assertEquals("A busy doorstep, 2 of 3", label(stamp("busyDoorstep")))
+        assertEquals("Picked up, Not yet", label(stamp("pickedUp")))
+        assertEquals("Home for the holidays, Not yet", label(stamp("homeForHolidays")))
+        assertEquals("Four seasons, 1 of 4", label(stamp("fourSeasons")))
+        assertEquals("First anniversary, 0 of 12", label(stamp("firstAnniversary")))
 
-        // The express stamp's popover adds what it is short of.
-        tap(stamp("speed"))
-        assertEquals("Express arrival\n${text("passport.expressExplanation")}\n${text("passport.underTwoDays")}", popover())
+        // An unearned stamp's popover adds how far along it is.
+        tap(stamp("express"))
+        assertEquals("Express arrival\n${text("passport.expressExplanation")}\n${text("passport.notYet")}", popover())
+    }
+
+    /** Under an earned stamp, its day, with the year only when it isn't this one; in its details, the day in full. */
+    @Test
+    fun aStampsDayHasItsYearOnlyWhenItIsntThisOnes() {
+        val now = Instant.parse("2026-10-29T10:11:00Z")
+        val zurich = ZoneId.of("Europe/Zurich")
+        assertEquals("10 Mar", stampDay(Instant.parse("2026-03-10T09:24:00Z"), AppLanguage.En, now, zurich))
+        assertEquals("3 Dec 2025", stampDay(Instant.parse("2025-12-03T10:00:00Z"), AppLanguage.En, now, zurich))
+        assertEquals("8 November 2026", stampFullDay(Instant.parse("2026-11-08T12:00:00Z"), AppLanguage.En, zurich))
     }
 
     @Test
     fun nineDeliveredAreOneShortOfDoubleDigits() {
         show(PassportFixtures.delivered(9))
-        assertEquals("Double digits, 9 / 10", label(stamp("ten")))
-        assertEquals("Well connected, 1 / 3", label(stamp("carriers")))
-        assertEquals(listOf("first", "ten", "carriers", "speed", "acrossBorders", "rightNextDoor"), stamps())
+        assertEquals(listOf("first", "rightNextDoor", "express", "familiarFace", "pickedUp", "acrossBorders", "connected"), stamps())
+        assertEquals("Well connected, 1 of 3", label(stamp("connected")))
+        tap(PASSPORT_SHOW_ALL)
+        assertEquals("Double digits, 9 of 10", label(stamp("ten")))
     }
 
     @Test
@@ -357,17 +393,18 @@ class PassportTest {
     @Test
     fun allStampsAndShowLess() {
         show(PassportFixtures.delivered(3))
-        assertEquals(listOf("first", "ten", "carriers", "speed", "acrossBorders", "rightNextDoor"), stamps())
+        val few = listOf("first", "rightNextDoor", "express", "familiarFace", "pickedUp", "acrossBorders", "connected")
+        assertEquals(few, stamps())
         assertTrue(shows(text("passport.showAll")))
         val roleOf = semantics(PASSPORT_SHOW_ALL)[SemanticsProperties.Role]
         assertEquals(Role.Button, roleOf)
 
         tap(PASSPORT_SHOW_ALL)
-        assertEquals(12, stamps().size)
+        assertEquals(19, stamps().size)
         assertTrue(shows(text("passport.showLess")))
 
         tap(PASSPORT_SHOW_ALL)
-        assertEquals(listOf("first", "ten", "carriers", "speed", "acrossBorders", "rightNextDoor"), stamps())
+        assertEquals(few, stamps())
         assertTrue(shows(text("passport.showAll")))
     }
 
@@ -375,19 +412,20 @@ class PassportTest {
     fun eachItemsPopoverSaysWhatItMeans() {
         show(session = AuthenticationState.Demo)
         val timed = PassportStatistics(DemoCards.parcels()).durationSampleCount
-        val items = listOf(
-            PASSPORT_COVER to "Delivered\n${text("passport.deliveredExplanation")}",
-            stamp("carriers") to "Well connected\n${text("passport.carrierExplanation")}",
-            stamp("theRegular") to "The regular\n${text("passport.regularExplanation")}\n10 / 25",
-            PASSPORT_AVERAGE to "Average delivery time\n${text("passport.timedJourneys.many", mapOf("count" to timed))}. ${text("passport.timingExplanation")}",
-            PASSPORT_COUNTRIES to "First scanned in\n${text("passport.countryExplanation")}",
-        )
-        for ((tag, says) in items) {
+        fun opens(tag: String, says: String) {
             assertEquals(null, popover())
             tap(tag)
             assertEquals(tag, says, popover())
             back()
         }
+        opens(PASSPORT_COVER, "Delivered\n${text("passport.deliveredExplanation")}")
+        // An earned stamp: how, then the day in full and the parcel that earned it.
+        opens(stamp("connected"), "Well connected\n${text("passport.carrierExplanation")}\nEarned on 12 October 2026 · Alpine trail map 🗺️")
+        // One to come, among all the stamps: how far along.
+        tap(PASSPORT_SHOW_ALL)
+        opens(stamp("theRegular"), "The regular\n${text("passport.regularExplanation")}\n10 of 25")
+        opens(PASSPORT_AVERAGE, "Average delivery time\n${text("passport.timedJourneys.many", mapOf("count" to timed))}. ${text("passport.timingExplanation")}")
+        opens(PASSPORT_COUNTRIES, "First scanned in\n${text("passport.countryExplanation")}")
         assertEquals(null, popover())
         // The fastest: its parcel and day, then how it is counted.
         tap(PASSPORT_PERSONAL_BEST)
@@ -401,7 +439,7 @@ class PassportTest {
     @Test
     fun aTapOnAnotherItemWhileOneIsOpenOnlyClosesIt() {
         show(session = AuthenticationState.Demo)
-        tap(stamp("carriers"))
+        tap(stamp("connected"))
         assertTrue(popover()!!.startsWith("Well connected"))
         tapWhereItShows(stamp("pickedUp"))
         assertEquals(null, popover())
@@ -427,7 +465,7 @@ class PassportTest {
         tap(PASSPORT_COVER)
         tapWhereItShows(PASSPORT_SHOW_ALL)
         assertEquals(null, popover())
-        assertEquals(6, stamps().size)
+        assertEquals(7, stamps().size)
     }
 
     /**
@@ -452,7 +490,7 @@ class PassportTest {
         assertEquals(null, popover())
         assertEquals(1, impacts())
 
-        tap(stamp("carriers"))
+        tap(stamp("connected"))
         assertTrue(popover()!!.startsWith("Well connected"))
         assertEquals(2, impacts())
         back()
@@ -581,7 +619,7 @@ class PassportTest {
         assertTrue("${bounds(PASSPORT_COVER)}", bounds(PASSPORT_COVER).right <= middle)
         assertTrue("${bounds(PASSPORT_AVERAGE)}", bounds(PASSPORT_AVERAGE).left >= middle)
         assertTrue(popover()!!.startsWith("First arrival"))
-        assertEquals(12, stamps().size)
+        assertEquals(19, stamps().size)
         // With the popover closed, the tab bar over the first page, clear of the fold, the account still at the window's
         // trailing edge.
         back()
@@ -791,7 +829,7 @@ class PassportTest {
         recreation.recreate()
         compose.mainClock.autoAdvance = true
         settle()
-        assertEquals(12, stamps().size)
+        assertEquals(19, stamps().size)
         assertTrue(popover()!!.startsWith("Double digits"))
     }
 }

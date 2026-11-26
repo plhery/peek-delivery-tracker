@@ -1920,7 +1920,8 @@ class ParcelLogicTests {
         )
         assertEquals(setOf("CA", "DE"), stats.originCountries.map { it.code }.toSet())
         assertEquals(listOf(1, 1), stats.originCountries.map { it.count })
-        assertEquals(1, stats.domesticDeliveryCount)
+        // Delaware stays in the United States it was placed in, so that parcel never left it.
+        assertEquals(2, stats.domesticDeliveryCount)
         assertEquals(0, stats.crossBorderCount)
     }
 

@@ -1,6 +1,5 @@
 package com.plhery.peekdeliverytracker.ui.passport
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -8,14 +7,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,11 +23,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.layout.onGloballyPositioned
@@ -50,19 +47,18 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.plhery.peekdeliverytracker.core.AdaptiveColor
-import com.plhery.peekdeliverytracker.core.ExperimentalPalette
 import com.plhery.peekdeliverytracker.core.FoundationDurations
 import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.core.PassportBook
 import com.plhery.peekdeliverytracker.core.PassportStatistics
+import com.plhery.peekdeliverytracker.core.StampProgress
 import com.plhery.peekdeliverytracker.core.TrackingLocation
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
+import com.plhery.peekdeliverytracker.ui.LocalNow
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
-import com.plhery.peekdeliverytracker.ui.draw.DieCutStampShape
 import com.plhery.peekdeliverytracker.ui.sheet.Popover
 import com.plhery.peekdeliverytracker.ui.sheet.PopoverSize
-import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.MinimumScale
@@ -73,47 +69,6 @@ import com.plhery.peekdeliverytracker.ui.theme.monospacedDigit
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import java.text.NumberFormat
 import kotlin.math.max
-import kotlin.math.min
-
-/** `PassportMilestone`: a stamp, earned once its count reaches its target. */
-internal class PassportMilestone(
-    val id: String,
-    val title: String,
-    val symbol: String,
-    val tint: AdaptiveColor,
-    val surface: AdaptiveColor,
-    val current: Int,
-    val target: Int,
-    val explanation: String,
-    private val pendingLabel: String? = null,
-) {
-    val earned: Boolean get() = current >= target
-    val progressLabel: String get() = pendingLabel ?: "${min(current, target)} / $target"
-}
-
-/** `milestones(_:)`: the twelve stamps in their order. */
-internal fun passportMilestones(stats: PassportStatistics, carrierCount: Int, localizer: Localizer): List<PassportMilestone> {
-    fun text(key: String) = localizer.text("passport.$key")
-    val palette = ExperimentalPalette
-    val fastest = stats.fastestDelivery
-    return listOf(
-        PassportMilestone("first", text("firstArrival"), "shippingbox", palette.delivered, palette.deliveredSurface, stats.deliveredCount, 1, text("firstExplanation")),
-        PassportMilestone("ten", text("doubleDigits"), "10", palette.lilac, palette.lilacSurface, stats.deliveredCount, 10, text("tenExplanation")),
-        PassportMilestone("carriers", text("wellConnected"), "globe", palette.transit, palette.transitSurface, carrierCount, 3, text("carrierExplanation")),
-        PassportMilestone(
-            "speed", text("expressArrival"), "bolt", palette.pickup, palette.pickupSurface,
-            if (fastest != null && fastest.duration <= 48 * 60 * 60) 1 else 0, 1, text("expressExplanation"), text("underTwoDays"),
-        ),
-        PassportMilestone("acrossBorders", text("acrossBorders"), "globe.europe.africa", palette.transit, palette.transitSurface, stats.crossBorderCount, 1, text("acrossExplanation")),
-        PassportMilestone("aroundWorld", text("aroundWorld"), "map", palette.delivered, palette.deliveredSurface, stats.originCountries.size, 5, text("aroundExplanation")),
-        PassportMilestone("theRegular", text("theRegular"), "25", palette.lilac, palette.lilacSurface, stats.deliveredCount, 25, text("regularExplanation")),
-        PassportMilestone("rightNextDoor", text("rightNextDoor"), "house", palette.delivered, palette.deliveredSurface, stats.domesticDeliveryCount, 1, text("domesticExplanation")),
-        PassportMilestone("worthTheWait", text("worthTheWait"), "hourglass", palette.ochre, palette.ochreSurface, stats.longWaitDeliveryCount, 1, text("waitExplanation")),
-        PassportMilestone("busyDoorstep", text("busyDoorstep"), "parcels", palette.pickup, palette.pickupSurface, stats.maxDeliveriesInOneDay, 3, text("busyExplanation")),
-        PassportMilestone("pickedUp", text("pickedUp"), "storefront", palette.transit, palette.transitSurface, stats.pickupDeliveryCount, 1, text("pickupExplanation")),
-        PassportMilestone("homeForHolidays", text("homeForHolidays"), "gift", palette.delivered, palette.deliveredSurface, stats.decemberDeliveryCount, 1, text("holidayExplanation")),
-    )
-}
 
 /**
  * `formattedDuration(_:full:)`: under a minute the passport's own words, else Foundation's days and hours or hours and
@@ -252,10 +207,7 @@ internal fun PassportCover(state: PassportState, stats: PassportStatistics) {
             }
             if (!PeekTheme.dynamicTypeSize.isAccessibilitySize) {
                 Spacer(Modifier.width(20.dp))
-                PassportSeal(
-                    "shippingbox", tint = COVER_SEAL_TINT, surface = Color.White, earned = true, cancelled = true,
-                    modifier = Modifier.size(66.dp, 80.dp).rotate(-7f),
-                )
+                StampSeal("parcel", null, COVER_SEAL_TINT, Color.White, earned = true, Modifier.rotate(-7f), SealSize.Cover)
             }
         }
     }
@@ -263,21 +215,22 @@ internal fun PassportCover(state: PassportState, stats: PassportStatistics) {
 }
 
 /**
- * `stamps(_:)`: "Stamps" over the grid of the stamps earned and the next three, or all twelve once shown; four to a
- * row, three from the xxLarge text size, two at the accessibility sizes. Each is a button whose popover says how it is
- * earned and, until it is, how far along it is. "All stamps" / "Show less" under the grid while some are left out.
+ * `stamps(_:)`: "Stamps" over the grid of the stamps earned, in the passport's order, and the next three to reach, or all
+ * of them once shown; four to a row, three from the xxLarge text size, two at the accessibility sizes. Each is a button
+ * whose popover says how it is earned and when, or how far along it is. The ones new since the passport last opened
+ * ([fresh]) are pressed in, in page order, and carry a New pill. "All stamps" / "Show less" under the grid while more
+ * than three are ahead.
  */
 @Composable
-internal fun PassportStamps(state: PassportState, stats: PassportStatistics, carrierCount: Int) {
+internal fun PassportStamps(state: PassportState, book: PassportBook, fresh: Set<String>) {
     val localizer = LocalLocalizer.current
-    val language = LocalLanguage.current
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val size = PeekTheme.dynamicTypeSize
-    val collection = remember(stats, carrierCount, localizer, language) { passportMilestones(stats, carrierCount, localizer) }
-    val upcoming = collection.filter { !it.earned }.take(3).map { it.id }.toSet()
-    val visible = if (state.showAllStamps) collection else collection.filter { it.earned || it.id in upcoming }
-    val hasMore = collection.any { !it.earned && it.id !in upcoming }
+    val earned = book.stamps.filter { it.earned }
+    val ahead = book.stamps.filter { !it.earned }
+    val visible = if (state.showAllStamps) earned + ahead else earned + ahead.take(3)
+    val pressed = earned.filter { it.seenKey in fresh }.map { it.key }
     val columns = when {
         size.isAccessibilitySize -> 2
         size >= DynamicTypeSize.XXLarge -> 3
@@ -286,11 +239,11 @@ internal fun PassportStamps(state: PassportState, stats: PassportStatistics, car
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         Text(localizer.text("passport.stamps"), color = colors.label, style = type.style(IosTextStyle.Subheadline, FontWeight.SemiBold).sfLines())
         StampGrid(columns) {
-            for (milestone in visible) {
-                androidx.compose.runtime.key(milestone.id) { Stamp(state, milestone) }
+            for (stamp in visible) {
+                androidx.compose.runtime.key(stamp.key) { Stamp(state, stamp, pressed.indexOf(stamp.key).takeIf { it >= 0 }) }
             }
         }
-        if (hasMore) {
+        if (ahead.size > 3) {
             Text(
                 localizer.text(if (state.showAllStamps) "passport.showLess" else "passport.showAll"),
                 Modifier
@@ -308,37 +261,88 @@ internal fun PassportStamps(state: PassportState, stats: PassportStatistics, car
     }
 }
 
-/** One stamp: its seal over its title, the title faded until it is earned. */
+/**
+ * One stamp: its seal over its name, then the day it was earned ("12 Aug") or how far along it is ("2 of 3", "Not
+ * yet"). Read as its name and when it was earned (or its progress), and "New" while it is new; [press] is its place
+ * among the seals pressed in. Its details open with `stamp-open` counted, never as they close.
+ */
 @Composable
-private fun Stamp(state: PassportState, milestone: PassportMilestone) {
+private fun Stamp(state: PassportState, stamp: StampProgress, press: Int?) {
     val localizer = LocalLocalizer.current
+    val language = LocalLanguage.current
+    val now = LocalNow.current
     val colors = PeekTheme.colors
-    val id = PassportSelection.milestone(milestone.id)
+    val type = PeekTheme.type
+    val id = PassportSelection.milestone(stamp.key)
     val expanded = state.expanded == id
     var anchor by remember { mutableStateOf(Rect.Zero) }
-    val label = if (milestone.earned) milestone.title else "${milestone.title}, ${milestone.progressLabel}"
-    Column(
+    val title = stampTitle(stamp.key, localizer)
+    val earnedLine = stampEarnedLine(stamp, localizer, language)
+    val progress = stampProgress(stamp, localizer)
+    val under = if (stamp.earned) stamp.earnedAt?.let { stampDay(it, language, now()) } else progress
+    val label = listOfNotNull(title, if (stamp.earned) earnedLine else progress, if (press != null) localizer.text("passport.new") else null).joinToString(", ")
+    val explanation = stampExplanation(stamp.key, localizer)
+    val details = listOfNotNull(
+        explanation,
+        if (stamp.earned) earnedLine?.let { "$it · ${stamp.label?.ifEmpty { null } ?: localizer.text("common.parcel")}" } else progress,
+    ).joinToString("\n")
+    val seal = rememberSealPress(press)
+    Box(
         Modifier
             .fillMaxWidth()
             .heightIn(min = 96.dp)
             .popoverAnchor { anchor = it }
-            .testTag("$PASSPORT_STAMP.${milestone.id}")
-            .passportButton(label, expansionValue(expanded, milestone.explanation, localizer), expansionHint(expanded, localizer)) { state.toggle(id) },
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(10.dp),
+            .testTag("$PASSPORT_STAMP.${stamp.key}")
+            .passportButton(label, expansionValue(expanded, details, localizer), expansionHint(expanded, localizer)) {
+                if (!expanded) state.source.action("stamp-open")
+                state.toggle(id)
+            },
+        contentAlignment = Alignment.TopCenter,
     ) {
-        PassportSeal(
-            milestone.symbol, colors.resolve(milestone.tint), colors.resolve(milestone.surface), milestone.earned, modifier = Modifier.size(50.dp, 64.dp),
-        )
-        Text(
-            milestone.title,
-            color = if (milestone.earned) colors.ink else colors.secondaryText,
-            style = PeekTheme.type.caption2.sfLines(),
-            textAlign = TextAlign.Center,
-        )
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            StampSeal(stamp.definition, stamp.earned, press = seal)
+            Spacer(Modifier.height(10.dp))
+            Text(title, color = if (stamp.earned) colors.ink else colors.secondaryText, style = type.caption2.sfLines(), textAlign = TextAlign.Center)
+            if (under != null) {
+                Spacer(Modifier.height(2.dp))
+                Text(under, color = colors.secondaryText, style = type.caption2.monospacedDigit().sfLines(), textAlign = TextAlign.Center)
+            }
+        }
+        if (press != null) {
+            NewPill(
+                seal,
+                Modifier.align(Alignment.TopStart).layout { measurable, constraints ->
+                    // Its trailing edge 38 past the stamp's middle, 6 over the seal's top.
+                    val pill = measurable.measure(constraints.copy(minWidth = 0, minHeight = 0))
+                    layout(constraints.maxWidth, pill.height) {
+                        pill.place(constraints.maxWidth / 2 + NEW_PILL_REACH.roundToPx() - pill.width, (-6).dp.roundToPx())
+                    }
+                },
+            )
+        }
     }
-    ExplanationPopover(
-        state, id, anchor, milestone.title, milestone.explanation + if (milestone.earned) "" else "\n${milestone.progressLabel}",
+    ExplanationPopover(state, id, anchor, title, details)
+}
+
+/** The New pill over a fresh seal's corner, on the accent, popping in as the seal is postmarked (416 ms into its press). */
+@Composable
+private fun NewPill(seal: SealPress, modifier: Modifier) {
+    val localizer = LocalLocalizer.current
+    val colors = PeekTheme.colors
+    Text(
+        localizer.text("passport.new"),
+        modifier
+            .graphicsLayer {
+                val pop = phase(seal.time, 416f, 200f, PassportSettle)
+                scaleX = 0.6f + 0.4f * pop
+                scaleY = scaleX
+                alpha = pop
+            }
+            .clearAndSetSemantics {}
+            .background(colors.accent, RoundedCornerShape(8.dp))
+            .padding(horizontal = 6.dp, vertical = 1.dp),
+        color = colors.onAccent,
+        style = PeekTheme.type.fixed(9f, FontWeight.SemiBold).sfLines(),
     )
 }
 
@@ -546,54 +550,12 @@ private fun Modifier.wrapContentHeightCentred(): Modifier = layout { measurable,
     layout(placeable.width, height) { placeable.place(0, (height - placeable.height) / 2) }
 }
 
-/**
- * `PassportSeal`: a die-cut stamp on its surface with a frame inset 6 in its tint, its symbol ("10", "25", three boxes
- * for "parcels", else an SF Symbol) in its tint at ultralight, and the cancellation's two rings over its lower trailing
- * corner where [cancelled]. Unearned, it is a third as opaque and grey. Hidden from TalkBack: the button says it.
- */
-@Composable
-internal fun PassportSeal(symbol: String, tint: Color, surface: Color, earned: Boolean, modifier: Modifier = Modifier, cancelled: Boolean = false) {
-    val type = PeekTheme.type
-    val shade = { color: Color -> if (earned) color else color.grey().let { it.copy(alpha = it.alpha * UNEARNED_OPACITY) } }
-    val ink = shade(tint)
-    Box(modifier.clearAndSetSemantics {}, contentAlignment = Alignment.Center) {
-        Box(Modifier.fillMaxSize().background(shade(surface), DieCutStampShape()))
-        Canvas(Modifier.fillMaxSize().padding(6.dp)) {
-            val line = 0.7.dp.toPx()
-            drawRect(shade(tint.copy(alpha = 0.4f * tint.alpha)), Offset(line / 2, line / 2), Size(size.width - line, size.height - line), style = Stroke(line))
-        }
-        when (symbol) {
-            "10", "25" -> Text(symbol, color = ink, style = type.fixed(20f, FontWeight.Light).sfLines())
-            "parcels" -> Box(contentAlignment = Alignment.Center) {
-                val font = type.fixed(13f, FontWeight.Thin)
-                PeekSymbol("shippingbox", Modifier.offset(y = (-7).dp), font = font, tint = ink)
-                PeekSymbol("shippingbox", Modifier.offset(x = (-7).dp, y = 6.dp), font = font, tint = ink)
-                PeekSymbol("shippingbox", Modifier.offset(x = 7.dp, y = 6.dp), font = font, tint = ink)
-            }
-            else -> PeekSymbol(symbol, font = type.fixed(22f, FontWeight.Thin), tint = ink)
-        }
-        if (cancelled) {
-            Canvas(Modifier.align(Alignment.BottomEnd).offset(x = 3.dp, y = (-5).dp).size(31.dp)) {
-                val line = 0.7.dp.toPx()
-                val ring = shade(tint.copy(alpha = 0.2f * tint.alpha))
-                drawCircle(ring, radius = size.minDimension / 2, style = Stroke(line))
-                drawCircle(ring, radius = size.minDimension / 2 - 4.dp.toPx(), style = Stroke(line))
-            }
-        }
-    }
-}
-
-/** `.saturation(0)`: the colour's luminance as grey, by the weights of Android's ColorMatrix.setSaturation. */
-private fun Color.grey(): Color {
-    val luminance = 0.213f * red + 0.715f * green + 0.072f * blue
-    return Color(luminance, luminance, luminance, alpha)
-}
-
-/** The cover seal's ochre, the same in dark, and its paper. */
+/** The cover seal's ochre, the same in dark, on white paper. */
 private val COVER_SEAL_TINT = Color(0xFF745300)
+/** How far the New pill's trailing edge stands past the stamp's middle. */
+private val NEW_PILL_REACH = 38.dp
 private val COVER_RADIUS = 20.dp
 private const val COUNT_SIZE = 54f
-private const val UNEARNED_OPACITY = 0.3f
 /** `minimumScaleFactor(0.75)` of a time on one line. */
 private const val MINIMUM_SCALE = 0.75f
 private val BUBBLE_WIDTH = 260.dp

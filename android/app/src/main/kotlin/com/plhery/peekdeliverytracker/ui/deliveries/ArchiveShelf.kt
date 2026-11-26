@@ -57,6 +57,7 @@ import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.Motion
+import com.plhery.peekdeliverytracker.ui.passport.NewStampLine
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
@@ -187,6 +188,8 @@ fun ArchivedParcelGroup(
                     parcel, onOpen = { onOpen(parcel.id) }, modifier = rowModifier(parcel), selected = parcel.id == selected,
                     onLongClick = onLongClick?.let { { it(parcel) } },
                 )
+                // The stamps the parcel earned that the passport hasn't shown yet, on a line under its row.
+                NewStampLine(parcel.id, PeekTheme.colors.paper, tucked = false)
                 if (index < parcels.lastIndex) {
                     Box(
                         Modifier

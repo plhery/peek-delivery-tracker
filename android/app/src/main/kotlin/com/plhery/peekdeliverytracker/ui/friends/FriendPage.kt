@@ -44,15 +44,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.plhery.peekdeliverytracker.core.AdaptiveColor
 import com.plhery.peekdeliverytracker.core.AuthenticationState
-import com.plhery.peekdeliverytracker.core.ExperimentalPalette
+import com.plhery.peekdeliverytracker.core.PassportData
 import com.plhery.peekdeliverytracker.core.api.FriendCard
 import com.plhery.peekdeliverytracker.core.api.FriendStamp
 import com.plhery.peekdeliverytracker.core.api.FriendsAction
 import com.plhery.peekdeliverytracker.core.api.FriendsActionRequest
 import com.plhery.peekdeliverytracker.core.explanationKey
-import com.plhery.peekdeliverytracker.core.symbol
 import com.plhery.peekdeliverytracker.core.titleKey
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
@@ -64,8 +62,8 @@ import com.plhery.peekdeliverytracker.ui.deliveries.localized
 import com.plhery.peekdeliverytracker.ui.deliveries.plainDisabled
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.passport.ExplanationPopover
-import com.plhery.peekdeliverytracker.ui.passport.PassportSeal
 import com.plhery.peekdeliverytracker.ui.passport.StampGrid
+import com.plhery.peekdeliverytracker.ui.passport.StampSeal
 import com.plhery.peekdeliverytracker.ui.passport.popoverAnchor
 import com.plhery.peekdeliverytracker.ui.sheet.BAR_ROW
 import com.plhery.peekdeliverytracker.ui.tabs.tabContentPadding
@@ -314,7 +312,7 @@ private fun PlainButton(
 }
 
 /**
- * One of the friend's stamps (`PassportPressStyle`): its seal 50 × 64 over its title in caption2, the title faded to
+ * One of the friend's stamps (`PassportPressStyle`): the passport's seal over its title in caption2, the title faded to
  * 60 % until it is earned, 10 apart and 96 tall at least, read as its title alone. A tap opens its popover over it
  * ([open]): the title and how it is earned and, until it is, how far along the friend is; a tap outside it or the back
  * closes it ([onDismiss]).
@@ -329,7 +327,7 @@ private fun FriendStampButton(value: FriendStamp, earned: Boolean, count: Int, o
     val notEarned = localized("passport.notEarned")
     val label = if (earned) title else "$title, ${along.trim('\n').ifEmpty { notEarned }}"
     var anchor by remember { mutableStateOf(Rect.Zero) }
-    val (tint, surface) = stampColors(value)
+    val seal = remember(value) { PassportData.stamps.firstOrNull { it.key == value.rawValue } }
     Column(
         Modifier
             .fillMaxWidth()
@@ -348,7 +346,8 @@ private fun FriendStampButton(value: FriendStamp, earned: Boolean, count: Int, o
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
-        PassportSeal(sealSymbol(value), colors.resolve(tint), colors.resolve(surface), earned, Modifier.size(50.dp, 64.dp))
+        // The passport's own seal for the stamp, in its tone.
+        if (seal != null) StampSeal(seal, earned)
         Text(
             title,
             color = if (earned) colors.ink else colors.secondaryText,
@@ -357,24 +356,6 @@ private fun FriendStampButton(value: FriendStamp, earned: Boolean, count: Int, o
         )
     }
     ExplanationPopover(open, anchor, onDismiss, title, explanation, FRIENDS_POPOVER)
-}
-
-/** The seal's symbol: "10" and "25" written out, three boxes for the busy doorstep, else the stamp's own. */
-private fun sealSymbol(stamp: FriendStamp): String = when (stamp) {
-    FriendStamp.Ten -> "10"
-    FriendStamp.TheRegular -> "25"
-    FriendStamp.BusyDoorstep -> "parcels"
-    else -> stamp.symbol
-}
-
-/** `stampTint(_:)` and `stampSurface(_:)`. */
-private fun stampColors(stamp: FriendStamp): Pair<AdaptiveColor, AdaptiveColor> = when (stamp) {
-    FriendStamp.First, FriendStamp.AroundWorld, FriendStamp.RightNextDoor, FriendStamp.HomeForHolidays ->
-        ExperimentalPalette.delivered to ExperimentalPalette.deliveredSurface
-    FriendStamp.Ten, FriendStamp.TheRegular -> ExperimentalPalette.lilac to ExperimentalPalette.lilacSurface
-    FriendStamp.Connected, FriendStamp.AcrossBorders, FriendStamp.PickedUp -> ExperimentalPalette.transit to ExperimentalPalette.transitSurface
-    FriendStamp.Express, FriendStamp.BusyDoorstep -> ExperimentalPalette.pickup to ExperimentalPalette.pickupSurface
-    FriendStamp.WorthTheWait -> ExperimentalPalette.ochre to ExperimentalPalette.ochreSurface
 }
 
 /**

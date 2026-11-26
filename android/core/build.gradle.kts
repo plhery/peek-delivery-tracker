@@ -26,6 +26,7 @@ val syncSharedResources by tasks.registering(Sync::class) {
             "EmailFilter.json",
             "FriendsDemo.json",
             "Localization.json",
+            "Passport.json",
             "PostcodeExamples.json",
             "Reading.json",
             "TrackingMessages.json",
@@ -48,7 +49,7 @@ artifacts {
 
 val syncSharedTestResources by tasks.registering(Sync::class) {
     from(iosResources) {
-        include("ChecksumVectors.json", "DetectionGolden.json")
+        include("ChecksumVectors.json", "DetectionGolden.json", "PassportCases.json")
     }
     // The widget gallery's sample, which the iPhone's tests draw: the words in it are the demo's as this app writes them.
     from(rootDir.resolve("../ios/DeliveryWidgetExtension/WidgetSample")) {

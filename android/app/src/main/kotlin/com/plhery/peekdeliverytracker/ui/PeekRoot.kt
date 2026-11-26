@@ -68,7 +68,9 @@ import com.plhery.peekdeliverytracker.ui.friends.FriendsActivityEffects
 import com.plhery.peekdeliverytracker.ui.friends.FriendsDemoEffects
 import com.plhery.peekdeliverytracker.ui.friends.FriendsTab
 import com.plhery.peekdeliverytracker.ui.friends.InvitationShare
+import com.plhery.peekdeliverytracker.ui.passport.LocalPassportNews
 import com.plhery.peekdeliverytracker.ui.passport.PassportTab
+import com.plhery.peekdeliverytracker.ui.passport.rememberPassportNews
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
 import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowLayers
 import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowOverlay
@@ -233,15 +235,19 @@ internal fun PeekRoot(
                                     val arrangement = source?.let { rememberSaveable(it.launch, saver = WindowArrangement.saver(it.launch)) { WindowArrangement() } }
                                     firstOpen?.chooseDeliveries = { tab = PeekTab.Deliveries.ordinal }
                                     val covered = if (source != null && firstOpen != null) firstOpen.covers(source, shownState) else false
+                                    // The passport's news, on the delivered cards and the tab, until the passport opens.
+                                    val passportNews = source?.let { rememberPassportNews(it) { tab = PeekTab.Passport.ordinal } }
+                                    val dotted = PeekTab.Passport.takeIf { passportNews?.news?.unseen?.isNotEmpty() == true && tab != it.ordinal }
                                     CompositionLocalProvider(
                                         LocalLabelScanner provides scanner, LocalParcelLinkOpen provides linkOpen, LocalFirstOpen provides firstOpen,
-                                        LocalWindowArrangement provides arrangement,
+                                        LocalWindowArrangement provides arrangement, LocalPassportNews provides passportNews,
                                     ) {
                                         TabShell(
                                             selection = tab, onSelect = { tab = it }, labels = labels, onView = onView,
                                             covered = covered,
                                             cover = { if (source != null && firstOpen != null) FirstOpenHost(firstOpen, source, covered) },
                                             overlays = { browserCheck?.let { TurnstileSheetHost(it) } },
+                                            dotted = dotted,
                                         ) { shown ->
                                             when (shown) {
                                                 PeekTab.Deliveries -> deliveries()

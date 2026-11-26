@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     What the FileProvider may hand out: the account's exports (cacheDir/exports, CacheExportFiles), and a note's files
-    handed to a viewer, the share sheet or the camera (cacheDir/notes, NoteFileHandOut).
+    handed to a viewer, the share sheet or the camera (cacheDir/notes, NoteFileHandOut), and the passport's year card
+    handed to the share sheet (cacheDir/cards, YearCard.kt).
 -->
 <paths>
     <cache-path name="exports" path="exports/" />
     <cache-path name="notes" path="notes/" />
+    <cache-path name="cards" path="cards/" />
 </paths>

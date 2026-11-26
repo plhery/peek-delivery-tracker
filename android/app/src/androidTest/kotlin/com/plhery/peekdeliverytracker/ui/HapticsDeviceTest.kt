@@ -417,7 +417,7 @@ class HapticsDeviceTest {
 
         val items = listOf(
             "cover" to PASSPORT_COVER, "average" to PASSPORT_AVERAGE, "personal-best" to PASSPORT_PERSONAL_BEST,
-            "countries" to PASSPORT_COUNTRIES, "stamp-carriers" to "$PASSPORT_STAMP.carriers", "stamp-first" to "$PASSPORT_STAMP.first",
+            "countries" to PASSPORT_COUNTRIES, "stamp-connected" to "$PASSPORT_STAMP.connected", "stamp-first" to "$PASSPORT_STAMP.first",
         ).filter { (_, tag) -> walk.exists(tag) }
         assertTrue(items.toString(), items.size >= 3)
         items.forEachIndexed { index, (name, tag) ->

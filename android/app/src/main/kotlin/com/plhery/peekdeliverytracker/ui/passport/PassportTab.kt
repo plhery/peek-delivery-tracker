@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.collectAsState
@@ -34,7 +35,7 @@ import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.PassportSpread
-import com.plhery.peekdeliverytracker.core.PassportStatistics
+import com.plhery.peekdeliverytracker.core.PassportBook
 import com.plhery.peekdeliverytracker.ui.readFirst
 import com.plhery.peekdeliverytracker.ui.deliveries.AccountBar
 import com.plhery.peekdeliverytracker.ui.deliveries.Announcement
@@ -186,15 +187,26 @@ internal fun passportLayout(
  * from the account button ([AccountSheetHost]), a form where the deliveries would stand side by side. Where the tab bar
  * stands at the top, as the iPad's, there is no title and the account button stands in the tab bar's row
  * ([TabRowAccount]). The pages are laid out by window ([passportLayout]); a change of window
- * keeps the popover open and all the stamps shown, as its `@State` does. Each toggle plays a light impact.
+ * keeps the popover open and all the stamps shown, as its `@State` does. Each toggle plays a light impact. In December,
+ * with a parcel delivered this year, the year's card is offered under the times ([PassportYearCard]).
  */
 @Composable
 internal fun PassportTab(source: DeliveriesSource) {
     val state = rememberPassportState(source)
     val session by source.session.collectAsState()
     val parcels by source.parcels.collectAsState()
-    val stats = remember(parcels) { PassportStatistics(parcels) }
-    val carrierCount = remember(parcels) { parcels.map { it.carrier }.toSet().size }
+    // The tabs' passport, and what in it is new; on its own where no tabs share it.
+    val news = LocalPassportNews.current
+    val book = news?.book ?: remember(parcels) { PassportBook(parcels) }
+    val stats = book.stats
+    // What was new as the passport opened stays new, and is pressed in, until the reader leaves it; all it holds is
+    // then marked seen, and the tab's dot and the cards' lines go.
+    var fresh by remember { mutableStateOf(news?.takeUnless { it.loading }?.news?.unseen.orEmpty().map { it.seenKey }.toSet()) }
+    LaunchedEffect(news) {
+        if (news == null || news.loading || news.news.unseen.isEmpty()) return@LaunchedEffect
+        fresh = fresh + news.news.unseen.map { it.seenKey }
+        news.markSeen()
+    }
     val colors = PeekTheme.colors
     val density = LocalDensity.current
     // The demo's bar, and the cream behind the bar that goes with it, unless left out for the store's screenshots.
@@ -254,8 +266,9 @@ internal fun PassportTab(source: DeliveriesSource) {
                         Modifier.fillMaxWidth(),
                     ) {
                         PassportCover(state, stats)
-                        PassportStamps(state, stats, carrierCount)
+                        PassportStamps(state, book, fresh)
                         PassportTimes(state, stats)
+                        PassportYearCard(book)
                         if (stats.originCountries.isNotEmpty()) PassportCountries(state, stats)
                     }
                 }

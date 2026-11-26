@@ -210,25 +210,15 @@ class FriendsStore(private val client: FriendsClient) {
 
         /**
          * `ownCard(parcels:profile:now:)`: the card [profile] would show friends, from [parcels] counted in UTC: the
-         * stamps in their order, the average rounded up to whole days (one at least), and whether a parcel was delivered
-         * since this ISO week began, each only where the profile shares it.
+         * passport's stamps among the twelve friends share ([PassportBook.sharedStamps]), in their order, the average
+         * rounded up to whole days (one at least), and whether a parcel was delivered since this ISO week began, each
+         * only where the profile shares it.
          */
         fun ownCard(parcels: List<Parcel>, profile: FriendProfile, now: Instant = AppClock.now()): FriendCard {
-            val stats = PassportStatistics(parcels, ZoneOffset.UTC)
-            val stamps = buildList {
-                if (stats.deliveredCount >= 1) add(FriendStamp.First)
-                if (stats.deliveredCount >= 10) add(FriendStamp.Ten)
-                if (parcels.map { it.carrier }.toSet().size >= 3) add(FriendStamp.Connected)
-                stats.fastestDelivery?.let { if (it.duration <= 172_800) add(FriendStamp.Express) }
-                if (stats.crossBorderCount >= 1) add(FriendStamp.AcrossBorders)
-                if (stats.originCountries.size >= 5) add(FriendStamp.AroundWorld)
-                if (stats.deliveredCount >= 25) add(FriendStamp.TheRegular)
-                if (stats.domesticDeliveryCount >= 1) add(FriendStamp.RightNextDoor)
-                if (stats.longWaitDeliveryCount >= 1) add(FriendStamp.WorthTheWait)
-                if (stats.maxDeliveriesInOneDay >= 3) add(FriendStamp.BusyDoorstep)
-                if (stats.pickupDeliveryCount >= 1) add(FriendStamp.PickedUp)
-                if (stats.decemberDeliveryCount >= 1) add(FriendStamp.HomeForHolidays)
-            }
+            // The passport's own rules in UTC, filtered to the twelve stamps older apps decode.
+            val book = PassportBook(parcels, ZoneOffset.UTC)
+            val stats = book.stats
+            val stamps = book.sharedStamps
             // `Calendar(identifier: .iso8601)` in UTC: the week starts on Monday at midnight.
             val week = now.atZone(ZoneOffset.UTC).toLocalDate().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
                 .atStartOfDay(ZoneOffset.UTC).toInstant()

@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.ApiJson
+import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.EventPlace
 import com.plhery.peekdeliverytracker.core.api.EventPlacePrecision
 import com.plhery.peekdeliverytracker.core.api.Parcel
@@ -42,9 +43,45 @@ class PassportStatistics(parcels: List<Parcel>, timeZone: ZoneId = ZoneId.system
         override fun toString(): String = "OriginCountry(code=$code, count=$count)"
     }
 
+    /**
+     * What one delivered parcel brings to the passport (the web's `PassportDelivery`): its delivery's instant and day on
+     * the reader's calendar ("2026-03-06"), and what its scans up to the delivery show. [duration] is in seconds, from
+     * its first physical scan, when both are known; [countries] each country it was scanned in, with the first instant
+     * it was there, in the order its scans reached them.
+     */
+    class Delivery(
+        val parcelId: UUID,
+        val label: String,
+        val carrier: CarrierId,
+        val deliveredAt: Instant,
+        val day: String,
+        val december: Boolean,
+        val pickup: Boolean,
+        val crossBorder: Boolean,
+        val crossContinent: Boolean,
+        /** A delivery came after a missed attempt. */
+        val secondTry: Boolean,
+        /** Its quarter of the year by month: 0 for December to February, 1 for March to May, and so on. */
+        val season: Int,
+        val countries: Map<String, Instant>,
+    ) {
+        var domestic: Boolean = false
+            internal set
+        var longWait: Boolean = false
+            internal set
+        var duration: Double? = null
+            internal set
+    }
+
     val trackedCount: Int
     val deliveredCount: Int
     val activeCount: Int
+
+    /** The real carriers of delivered parcels: never `unknown` or `intl-post`, which stand for one not known yet. */
+    val carrierCount: Int
+
+    /** The delivered parcels whose every scan is dated, in the order they arrived (then by parcel). */
+    val deliveries: List<Delivery>
     val crossBorderCount: Int
     val domesticDeliveryCount: Int
     val longWaitDeliveryCount: Int
@@ -80,6 +117,8 @@ class PassportStatistics(parcels: List<Parcel>, timeZone: ZoneId = ZoneId.system
         // Keyed as Swift's Dictionary compares Strings, canonically.
         val countries = LinkedHashMap<String, Tally>()
         val deliveredDays = HashMap<Long, Int>()
+        val deliveredCarriers = HashSet<String>()
+        val deliveries = mutableListOf<Delivery>()
         var crossBorder = 0
         var domestic = 0
         var longWait = 0
@@ -94,13 +133,17 @@ class PassportStatistics(parcels: List<Parcel>, timeZone: ZoneId = ZoneId.system
             // A malformed date must not turn a return into an earned delivery.
             // Keep the app's status fallback when chronology cannot be established.
             val currentStage = if (datesAreComplete) dated.lastOrNull()?.event?.stage else parcel.currentStage
-            if (currentStage == TrackingStage.Delivered) delivered += 1
+            if (currentStage == TrackingStage.Delivered) {
+                delivered += 1
+                if (parcel.carrier !in placeholderCarriers) deliveredCarriers += parcel.carrier.rawValue
+            }
             if (parcel.archivedAt == null && currentStage != TrackingStage.Delivered && currentStage != TrackingStage.Returned) {
                 active += 1
             }
 
             val physical = dated.filter { it.event.stage != TrackingStage.Registered }
             val completion = physical.firstOrNull { it.event.stage == TrackingStage.Delivered }
+            var delivery: Delivery? = null
             if (datesAreComplete && currentStage == TrackingStage.Delivered && completion != null) {
                 // Count each parcel once, using the device's Gregorian calendar day.
                 val day = FoundationDates.calendarDate(completion.date, timeZone)
@@ -108,12 +151,25 @@ class PassportStatistics(parcels: List<Parcel>, timeZone: ZoneId = ZoneId.system
                     deliveredDays[day.day] = (deliveredDays[day.day] ?: 0) + 1
                     if (day.month == 12) december += 1
                 }
+                val fields = FoundationDates.dateFields(completion.date, timeZone)
                 // Collected where it waited: its last movement before the delivery made it ready for pickup, not a trip to the door after.
-                if (physical.lastOrNull { it.date < completion.date && it.event.stage in movements }?.event?.stage == TrackingStage.ReadyForPickup) pickup += 1
-                val located = physical.filter { it.date <= completion.date }.mapNotNull { scan ->
-                    TrackingLocation.countryCode(scan.event.location, scan.event.place?.country)?.let { it to scan.date }
-                }
-                if (crossesABorder(located)) crossBorder += 1
+                val pickedUp = physical.lastOrNull { it.date < completion.date && it.event.stage in movements }?.event?.stage == TrackingStage.ReadyForPickup
+                if (pickedUp) pickup += 1
+                val located = physical.filter { it.date <= completion.date }.mapNotNull { scan -> passportCountry(scan.event)?.let { it to scan.date } }
+                // Different countries must be observed at different instants; tied scans do not prove travel.
+                val crossed = travelled(located)
+                if (crossed) crossBorder += 1
+                val visited = LinkedHashMap<String, Instant>()
+                for ((country, date) in located) visited.putIfAbsent(country, date)
+                delivery = Delivery(
+                    parcelId = parcel.id, label = parcel.label, carrier = parcel.carrier, deliveredAt = completion.date,
+                    day = "${fields.yearOfEra.toString().padStart(4, '0')}-${twoDigits(fields.month)}-${twoDigits(fields.dayOfMonth)}",
+                    december = fields.month == 12, pickup = pickedUp, crossBorder = crossed,
+                    crossContinent = travelled(located.map { (country, date) -> PassportData.continentOf(country).rawValue to date }),
+                    secondTry = physical.any { it.event.stage == TrackingStage.FailedAttempt && it.date < completion.date },
+                    season = (fields.month % 12) / 3, countries = visited,
+                )
+                deliveries += delivery
             }
             val first = physical.firstOrNull()
             if (!datesAreComplete || first == null ||
@@ -129,10 +185,17 @@ class PassportStatistics(parcels: List<Parcel>, timeZone: ZoneId = ZoneId.system
             // `timeIntervalSince`, as Swift subtracts the seconds each Date holds.
             val duration = completion.date.timeIntervalSinceReferenceDate - first.date.timeIntervalSinceReferenceDate
             if (!duration.isFinite() || duration <= 0) continue
-            if (origin != null &&
-                origin.equalsCanonically(TrackingLocation.countryCode(completion.event.location, completion.event.place?.country))
-            ) domestic += 1
-            if (duration > 30 * 86_400) longWait += 1
+            // Where the parcel was, as the passport's countries count it: a scan's own country, else the server's.
+            val from = passportCountry(first.event)
+            if (from != null && from.equalsCanonically(passportCountry(completion.event))) {
+                domestic += 1
+                delivery?.domestic = true
+            }
+            if (duration > 30 * 86_400) {
+                longWait += 1
+                delivery?.longWait = true
+            }
+            delivery?.duration = duration
             records += DeliveryRecord(parcelId = parcel.id, label = parcel.label, duration = duration, deliveredAt = completion.date)
         }
 
@@ -144,6 +207,11 @@ class PassportStatistics(parcels: List<Parcel>, timeZone: ZoneId = ZoneId.system
         maxDeliveriesInOneDay = deliveredDays.values.maxOrNull() ?: 0
         trackedCount = parcels.size
         deliveredCount = delivered
+        carrierCount = deliveredCarriers.size
+        this.deliveries = deliveries.sortedWith { left, right ->
+            if (left.deliveredAt != right.deliveredAt) left.deliveredAt.compareTo(right.deliveredAt)
+            else left.parcelId.uuidString.compareTo(right.parcelId.uuidString)
+        }
         activeCount = active
         durationSampleCount = records.size
         averageDeliveryDuration = if (records.isEmpty()) null else records.fold(0.0) { sum, record -> sum + record.duration } / records.size
@@ -159,6 +227,15 @@ class PassportStatistics(parcels: List<Parcel>, timeZone: ZoneId = ZoneId.system
     }
 
     private companion object {
+        /** Carrier ids that stand for "not known yet" rather than a carrier: they never count toward Well connected. */
+        private val placeholderCarriers = setOf(CarrierId.Unknown, CarrierId("intl-post"))
+
+        /** Where a scan was, as the passport's countries count it: the country its words name, else the one the server placed it in. */
+        private fun passportCountry(event: TrackingEvent): String? =
+            TrackingLocation.countryCode(event.location, event.place?.country) ?: event.place?.country
+
+        private fun twoDigits(value: Int): String = value.toString().padStart(2, '0')
+
         /** Stages that move a parcel: notices, problem reports and a delivery itself do not. */
         private val movements = setOf(
             TrackingStage.InTransit, TrackingStage.Customs, TrackingStage.OutForDelivery, TrackingStage.FailedAttempt,
@@ -174,11 +251,12 @@ class PassportStatistics(parcels: List<Parcel>, timeZone: ZoneId = ZoneId.system
         )
 
         /**
-         * Whether a scan's country differs from one scanned at an earlier moment (the iPhone's pairwise
+         * Whether a scan's place differs from one scanned at an earlier moment (the iPhone's pairwise
          * `located.prefix(index).contains { $0.date < scan.date && $0.country != scan.country }`), in one pass over
-         * the scans in order: the countries seen before each moment, compared canonically, as Swift compares Strings.
+         * the scans in order: the places seen before each moment, compared canonically, as Swift compares Strings. A
+         * country crosses a border, its continent ([PassportData.continentOf]) crosses to another continent.
          */
-        private fun crossesABorder(located: List<Pair<String, Instant>>): Boolean {
+        private fun travelled(located: List<Pair<String, Instant>>): Boolean {
             val before = HashSet<String>()
             val atThisMoment = HashSet<String>()
             var moment: Instant? = null

@@ -60,6 +60,9 @@ import androidx.compose.runtime.structuralEqualityPolicy
 import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.compositeOver
+import androidx.compose.ui.zIndex
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.TransformOrigin
@@ -112,6 +115,7 @@ import com.plhery.peekdeliverytracker.ui.tabs.tabContentPadding
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.Motion
+import com.plhery.peekdeliverytracker.ui.passport.NewStampLine
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.Radii
@@ -868,13 +872,17 @@ private fun SectionCard(state: DeliveriesState, item: ListItem.SectionCard) {
         item.kind == ParcelSectionKind.Delivered -> {
             val place = state.cardPlace(parcel.id)
             val onName = state.names(parcel.id)
-            ArrivalCelebration(state, parcel.id, place) {
-                SwipeableCard(state, parcel, Radii.card, shadow = false, pictured = true) { moved, open, tap, menu, archive ->
-                    DeliveredParcelCard(
-                        parcel, onOpen = open, modifier = moved, onName = onName, selected = selected, onLongClick = menu, swipeAction = archive,
-                        onTap = tap, newUpdate = newUpdate, peekAi = peekAi,
-                    )
+            // The stamps the parcel earned that the passport hasn't shown yet, on a line tucked under its card.
+            Column {
+                ArrivalCelebration(state, parcel.id, place) {
+                    SwipeableCard(state, parcel, Radii.card, shadow = false, pictured = true) { moved, open, tap, menu, archive ->
+                        DeliveredParcelCard(
+                            parcel, onOpen = open, modifier = moved, onName = onName, selected = selected, onLongClick = menu, swipeAction = archive,
+                            onTap = tap, newUpdate = newUpdate, peekAi = peekAi,
+                        )
+                    }
                 }
+                NewStampLine(parcel.id, pastGround(parcel), Modifier.zIndex(-1f))
             }
         }
         item.next -> ArrivalCelebration(state, parcel.id, stubInset = ParcelArrival.SECTION_NEXT_STUB_INSET) {
@@ -900,6 +908,14 @@ private fun SectionCard(state: DeliveriesState, item: ListItem.SectionCard) {
             }
         }
     }
+}
+
+/** A past delivery's paler ground, as its card has it, for the line under it. */
+@Composable
+private fun pastGround(parcel: Parcel): Color {
+    val colors = PeekTheme.colors
+    val surface = colors.resolve(ExperimentalPalette.surface(parcel))
+    return surface.copy(alpha = surface.alpha * 0.35f).compositeOver(colors.paper)
 }
 
 /**

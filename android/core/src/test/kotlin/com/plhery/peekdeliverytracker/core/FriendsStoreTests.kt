@@ -94,6 +94,14 @@ class FriendsStoreTests {
         }
         assertEquals(listOf(FriendStamp.First, FriendStamp.Connected), FriendsStore.ownCard(carriers, profile, now).stats?.stamps)
         assertEquals(3, FriendsStore.ownCard(carriers, profile, now).stats?.deliveredCount)
+        // Well connected counts the carriers that delivered, never a placeholder one, nor a parcel still on its way.
+        val placeholders = listOf(CarrierId.Ups, CarrierId.Unknown, CarrierId("intl-post")).mapIndexed { index, carrier ->
+            delivered("2026-0${index + 3}-01T10:00:00Z", "2026-0${index + 3}-05T10:00:00Z", carrier)
+        }
+        assertEquals(listOf(FriendStamp.First), FriendsStore.ownCard(placeholders, profile, now).stats?.stamps)
+        val id = UUID.randomUUID()
+        val onItsWay = makeParcel(id, events = listOf(event(id, TrackingStage.InTransit, "2026-10-27T10:00:00Z"))).copy(carrier = CarrierId.Dhl)
+        assertEquals(listOf(FriendStamp.First), FriendsStore.ownCard(carriers.take(2) + onItsWay, profile, now).stats?.stamps)
     }
 
     @Test

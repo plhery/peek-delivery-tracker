@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.graphics.BlendMode
@@ -34,6 +35,8 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.collectionInfo
 import androidx.compose.ui.semantics.collectionItemInfo
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.unit.DpOffset
+import com.plhery.peekdeliverytracker.ui.passport.TabDot
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -73,6 +76,7 @@ internal fun BottomTabBar(
     onTap: (Int) -> Unit,
     backdrop: MaterialBackdrop?,
     modifier: Modifier = Modifier,
+    dotted: PeekTab? = null,
 ) {
     val type = PeekTheme.type
     val widths = labelWidths(labels, type.fixed(BOTTOM_LABEL, FontWeight.Medium))
@@ -81,7 +85,7 @@ internal fun BottomTabBar(
         TabBarGeometry(List(widths.size) { item }, padding = 8f, height = BOTTOM_BAR_HEIGHT.value, pillOutset = 4f)
     }
     val ink = PeekTheme.colors.ink
-    TabBar(geometry, labels, selection, onTap, backdrop, BOTTOM_PILL_SHADE, modifier) { tab, selected ->
+    TabBar(geometry, labels, selection, onTap, backdrop, BOTTOM_PILL_SHADE, modifier, dotted, BOTTOM_DOT) { tab, selected ->
         val icon = type.fixed(BOTTOM_ICON, FontWeight.Medium)
         val label = type.fixed(BOTTOM_LABEL, if (selected) FontWeight.SemiBold else FontWeight.Medium).copy(color = ink)
         Layout(
@@ -114,6 +118,7 @@ internal fun TopTabBar(
     onTap: (Int) -> Unit,
     backdrop: MaterialBackdrop?,
     modifier: Modifier = Modifier,
+    dotted: PeekTab? = null,
 ) {
     val type = PeekTheme.type
     val widths = labelWidths(labels, type.fixed(TOP_LABEL, FontWeight.Medium))
@@ -121,7 +126,7 @@ internal fun TopTabBar(
         TabBarGeometry(widths.map { it + TOP_LABEL_ROOM }, padding = 4f, height = TOP_BAR_HEIGHT.value, pillOutset = 0f)
     }
     val ink = PeekTheme.colors.ink
-    TabBar(geometry, labels, selection, onTap, backdrop, TOP_PILL_SHADE, modifier) { tab, selected ->
+    TabBar(geometry, labels, selection, onTap, backdrop, TOP_PILL_SHADE, modifier, dotted, TOP_DOT) { tab, selected ->
         val label = type.fixed(TOP_LABEL, if (selected) FontWeight.SemiBold else FontWeight.Medium).copy(color = ink)
         Layout(
             content = { BasicText(labels[tab.ordinal], Modifier.clearAndSetSemantics {}, style = label, maxLines = 1, softWrap = false) },
@@ -139,7 +144,8 @@ internal fun TopTabBar(
 /**
  * The capsule, the pill and the items, each item a tab to accessibility (its label, whether it is chosen, its place
  * among the three), the whole of its frame taking the tap. An item neither dims nor shrinks under the finger, as iOS
- * 26's don't.
+ * 26's don't. The [dotted] tab, unless chosen, carries the passport's dot for something new ([TabDot]) at [dot] from
+ * its top and its middle, heard with its label.
  */
 @Composable
 private fun TabBar(
@@ -150,6 +156,8 @@ private fun TabBar(
     backdrop: MaterialBackdrop?,
     pillShade: Float,
     modifier: Modifier,
+    dotted: PeekTab?,
+    dot: DpOffset,
     item: @Composable (tab: PeekTab, selected: Boolean) -> Unit,
 ) {
     GlassSurface(CapsuleShape, modifier.testTag(TAB_BAR).size(geometry.width.dp, geometry.height.dp), backdrop) {
@@ -174,6 +182,12 @@ private fun TabBar(
                         },
                 ) {
                     item(tab, selected)
+                    if (tab == PeekTab.Passport) {
+                        TabDot(
+                            dotted == tab && !selected, PeekTheme.colors.paper,
+                            Modifier.align(Alignment.TopCenter).offset(x = dot.x, y = dot.y),
+                        )
+                    }
                 }
             }
         }
@@ -272,6 +286,10 @@ private const val BOTTOM_ICON = 23.3f
 
 /** The symbols' baseline under the capsule's top, which puts each symbol's middle 24 under it. */
 private const val BOTTOM_ICON_BASELINE = 32.3f
+
+/** Where the dot's 10 stand from an item's top and middle: by the symbol's top corner, else by the label's. */
+private val BOTTOM_DOT = DpOffset(14.dp, 7.dp)
+private val TOP_DOT = DpOffset(0.dp, 4.dp)
 private const val BOTTOM_LABEL_BASELINE = 48.7f
 private const val TOP_LABEL_BASELINE = 28f
 

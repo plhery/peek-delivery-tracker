@@ -426,6 +426,7 @@ fun TabReselectionEffect(onReselect: suspend () -> Unit) {
  * [covered] them, from the frame it does, TalkBack reaches neither the tab nor the bar
  * (`.accessibilityHidden(showsFirstOpen)`), neither takes the focus, so that Tab, the arrows and a D-pad go round the
  * cover alone, and the keys that choose a tab are off (`tabKeys`). On its way out TalkBack doesn't reach the cover.
+ * The [dotted] tab's item carries the dot of something new there.
  */
 @Composable
 fun TabShell(
@@ -437,6 +438,7 @@ fun TabShell(
     covered: Boolean = false,
     cover: @Composable () -> Unit = {},
     overlays: @Composable () -> Unit = {},
+    dotted: PeekTab? = null,
     content: @Composable (PeekTab) -> Unit,
 ) {
     val tabs = PeekTab.entries
@@ -540,6 +542,7 @@ fun TabShell(
                 labels, selection, tap, backdrop,
                 Modifier.align(Alignment.TopStart).then(shown).clearOfTheHinge(hinge).padding(top = topGap)
                     .readBeforeTheBars().then(barHidden).then(barShut),
+                dotted,
             )
         } else {
             // Clear of a cutout or of navigation buttons at the side, unless a hinge already puts it in the start half.
@@ -549,6 +552,7 @@ fun TabShell(
                 labels, selection, tap, backdrop,
                 Modifier.align(Alignment.BottomStart).then(shown).then(clear).clearOfTheHinge(hinge).padding(bottom = bottomGap).then(barHidden)
                     .then(barShut),
+                dotted,
             )
         }
         // The cover, over the tab and its bar, under what the tab presents, with what the tab is given but the bar's

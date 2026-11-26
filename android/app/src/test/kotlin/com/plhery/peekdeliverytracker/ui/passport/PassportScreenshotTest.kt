@@ -140,7 +140,7 @@ class PassportScreenshotTest {
         compose.screenshot("passport_empty_dark")
     }
 
-    /** All twelve stamps, after "All stamps": three parcels delivered from Switzerland, three stamps earned. */
+    /** All nineteen stamps, after "All stamps": three parcels delivered in Switzerland, four stamps earned. */
     @Test
     fun allStamps() {
         show(PassportFixtures.delivered(3), reader)
@@ -156,11 +156,11 @@ class PassportScreenshotTest {
         compose.screenshot("passport_popover_cover")
     }
 
-    /** An unearned stamp's popover, with how far along it is (ipad-04). */
+    /** An earned stamp's popover (ipad-04): how it is earned, then the day in full and the parcel that earned it. */
     @Test
     fun aStampsPopover() {
         show()
-        tap("$PASSPORT_STAMP.carriers")
+        tap("$PASSPORT_STAMP.connected")
         compose.screenshot("passport_popover_stamp")
     }
 
@@ -169,6 +169,14 @@ class PassportScreenshotTest {
     fun extraExtraLargeText() {
         show(fontScale = 1.3f)
         compose.screenshot("passport_text_xxlarge")
+    }
+
+    /** A narrow phone's window, 320 wide: the stamps four to a row still, their names and days wrapping. */
+    @Test
+    @Config(qualifiers = "w320dp-h640dp-xhdpi")
+    fun aNarrowPhone() {
+        show(bars = Bars(top = 24, bottom = 24))
+        compose.screenshot("passport_phone_narrow")
     }
 
     /** At the largest text (ipad-09): two stamps to a row, no seal on the cover, the times one over the other. */

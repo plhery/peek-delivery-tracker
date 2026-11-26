@@ -39,6 +39,10 @@ import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveryListLayout
 import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.core.ParcelOrganizer
+import com.plhery.peekdeliverytracker.core.ParcelSectionKind
+import com.plhery.peekdeliverytracker.core.PassportBook
+import com.plhery.peekdeliverytracker.core.PassportSeenRecord
 import com.plhery.peekdeliverytracker.core.ParcelSort
 import com.plhery.peekdeliverytracker.core.ParcelStatusFilter
 import com.plhery.peekdeliverytracker.core.api.Parcel
@@ -193,6 +197,23 @@ class DeliveryListScreenshotTest {
         show()
         scrollToThePast(PAST_HEADER_TOP)
         compose.screenshot("list_past_light")
+    }
+
+    /**
+     * A past delivery whose parcel earned stamps the passport hasn't shown yet: the line under its card that names them,
+     * and the Passport tab's dot.
+     */
+    @Test
+    fun aPastDeliveryWithANewStamp() {
+        val parcels = DemoCards.parcels()
+        val book = PassportBook(parcels)
+        val past = ParcelOrganizer.sections(parcels, CAPTURED).first { it.kind == ParcelSectionKind.Delivered }.parcels
+        val parcel = past.first { candidate -> book.stamps.any { it.earned && it.parcelId == candidate.id } }
+        val earned = book.stamps.filter { it.earned }
+        val news = earned.filter { it.parcelId == parcel.id }.map { it.seenKey }.toSet()
+        show(prepare = { passportSeen.store(PassportSeenRecord.scope(AuthenticationState.Demo), earned.map { it.seenKey } - news) })
+        scrollToThePast(PAST_HEADER_TOP)
+        compose.screenshot("list_past_new_stamp")
     }
 
     @Test

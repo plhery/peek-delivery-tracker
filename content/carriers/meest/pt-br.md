@@ -12,11 +12,11 @@ A Meest é um grupo de transportadoras de encomendas com raízes ucranianas, com
 
 Os sites da Meest nos EUA e no Canadá informam que o código aparece na confirmação do envio (enviada por e-mail, segundo o site dos EUA) e na etiqueta de envio. Se comprou online e não recebeu nada, veja [como encontrar seu código de rastreamento](guide:find-tracking-number).
 
-A Meest não publica um formato exato. A página dos EUA diz apenas que o código "costuma começar com um código específico de letras seguido por uma sequência de dígitos". Os formatos mais comuns (dígitos inventados):
+A Meest não publica um formato exato. A página dos EUA diz apenas que o código "costuma começar com um código específico de letras seguido por uma sequência de dígitos". Os formatos que você pode encontrar (dígitos inventados):
 
 | Código | O que é |
 | --- | --- |
-| `CV4829173CA64058G` | Duas letras, 7 dígitos, duas letras, 5 dígitos e G: código de consolidação da Meest, comum em encomendas da China para a Europa. |
+| `CV4829173CA64058G` | Duas letras, 7 dígitos, duas letras, 5 dígitos e G: código de consolidação da Meest, visto em encomendas da China para a Europa. |
 | `ANS4829173640582UA` | ANS, 13 dígitos e UA: outro formato que o Peek reconhece como Meest. |
 | `RR482917367UA` | Número postal internacional. O rastreador da Meest responde por alguns, mas o correio emissor também os rastreia. |
 | `CV482917367UA` | Também em formato postal: o FAQ da Meest Canadá atribui códigos iniciados por CV a pacotes vindos da Ucrânia registrados no formulário dela. |
@@ -27,7 +27,7 @@ Atenção: a caixa de busca em us.meest.com, ca.meest.com e uk.meest.com aceita 
 
 ## Status de rastreamento da Meest e o que significam
 
-t.meest-group.com exibe as etapas apenas em ucraniano; a caixa de rastreamento dos sites da Meest nos EUA, Canadá e Reino Unido abre em inglês. Estes são os textos em inglês também enviados pelo rastreador da Meest e exibidos pelo Peek, na ordem em que costumam aparecer:
+t.meest-group.com exibe as etapas apenas em ucraniano; a caixa de rastreamento dos sites da Meest nos EUA, Canadá e Reino Unido abre em inglês. Estes são os textos em inglês também enviados pelo rastreador da Meest e exibidos pelo Peek, na ordem em que a encomenda passa por eles:
 
 | A Meest diz | O que significa para você |
 | --- | --- |
@@ -58,10 +58,10 @@ A caixa de rastreamento redige algumas etapas de modo diferente desta tabela: on
 
 **Rastreamento parado.** A Meest EUA considera normal ficar um ou dois dias sem atualização; após mais de uma semana, confira o código e contate o serviço de entrega. Se continuar parado, veja [rastreamento que não atualiza](guide:tracking-not-updating).
 
-**Quem reclama.** Se uma loja enviou seu pedido, comece pela loja. Os prazos variam por empresa Meest:
+**Quem pede indenização.** Se uma loja enviou seu pedido, comece pela loja. Os prazos variam por empresa Meest:
 
-- **Meest EUA:** as páginas divergem. O FAQ de reclamações aceita pedidos por dano, extravio, entrega errada ou grande atraso "em até 30 dias da data prevista de entrega" e decide em até 10 dias úteis. Já a página File a Claim diz que "somente o remetente pode abrir reclamação", em até 5 dias da entrega ou 60 dias da postagem se não entregue, levando de 14 a 60 dias úteis.
-- **Meest Post (Polônia):** reclamações em até 6 meses da postagem; dano em até 7 dias da entrega. O direito é do remetente, ou do destinatário após a entrega ou cessão desse direito pelo remetente.
+- **Meest EUA:** as páginas divergem. O FAQ de reclamações aceita pedidos de indenização por dano, extravio, entrega errada ou grande atraso "em até 30 dias da data prevista de entrega" e decide em até 10 dias úteis. Já a página File a Claim diz que "somente o remetente pode pedir indenização", em até 5 dias da entrega ou 60 dias da postagem se não entregue, levando de 14 a 60 dias úteis.
+- **Meest Post (Polônia):** pedidos de indenização em até 6 meses da postagem; dano em até 7 dias da entrega. O direito é do remetente, ou do destinatário após a entrega ou cessão desse direito pelo remetente.
 
 ## Atendimento ao cliente e telefones da Meest
 
@@ -73,9 +73,9 @@ A caixa de rastreamento redige algumas etapas de modo diferente desta tabela: on
 
 ## Acompanhe uma encomenda Meest com o Peek
 
-O [Peek](/) reconhece o código de consolidação da Meest (`CV4829173CA64058G`) e o formato `ANS…UA` (`ANS4829173640582UA`), consultando apenas a Meest, o que resolve na hora. Para IHB e 10 dígitos, consulta Meest e HR Parcel e escolhe a que reconhecer o código. Números postais, incluindo códigos CV, e referências do remetente só vão para a Meest se você escolher "Meest" em "Trocar" ou colar um link da Meest. Digitado sozinho, um número postal vai para o correio emissor, muitas vezes junto com a Chronopost (CV…PL para Poczta Polska, CV…CA para Canada Post), ou para o correio de destino (Ukrposhta na Ucrânia); um código CV…US vai apenas para Chronopost e serviços de rastreamento. O Peek lê links de t.meest-group.com, dos sites nacionais meest.com (`parcel_number=`) e de tracking-iframe.meest.com, mas não do rastreador da Meest Post em meestpost.com, para onde a busca de pl.meest.com direciona.
+O [Peek](/) reconhece o código de consolidação da Meest (`CV4829173CA64058G`) e o formato `ANS…UA` (`ANS4829173640582UA`) e consulta apenas a Meest, o que resolve a questão. Para IHB e 10 dígitos, consulta Meest e HR Parcel e escolhe a que reconhecer o código. Números postais, incluindo códigos CV, e referências do remetente só vão para a Meest se você escolher "Meest" em "Trocar" ou colar um link da Meest. Digitado sozinho, um número postal vai para o correio emissor, muitas vezes junto com a Chronopost (CV…PL para Poczta Polska, CV…CA para Canada Post), ou para o correio de destino (Ukrposhta na Ucrânia); um código CV…US vai apenas para Chronopost e serviços de rastreamento. O Peek lê links de t.meest-group.com, dos sites nacionais meest.com (`parcel_number=`) e de tracking-iframe.meest.com, mas não do rastreador da Meest Post em meestpost.com, para onde a busca de pl.meest.com direciona.
 
-A Meest não informa fuso horário nas leituras: o Peek as lê no fuso do local de cada leitura e mostra o histórico próprio da Meest. O Peek preserva o status, o país de destino e, quando um parceiro entrega no exterior, essa transportadora e o código dela: a página exibe "Entrega por BOX NOW", por exemplo (ou "Anunciada a BOX NOW, ainda não recebida" enquanto essa transportadora tiver apenas a previsão, sem leitura própria), passando a acompanhar essa transportadora quando o Peek a rastreia diretamente.
+A Meest não informa fuso horário nas leituras: o Peek as lê no fuso do local de cada leitura e mostra o histórico próprio da Meest. O Peek preserva o status, o país de destino e, quando um parceiro entrega no exterior, essa transportadora e o código dela: a página exibe "Entrega por BOX NOW", por exemplo (ou "Anunciada a BOX NOW, ainda não recebida" enquanto essa transportadora tiver apenas o aviso da encomenda, sem leitura própria), passando a acompanhar essa transportadora quando o Peek a rastreia diretamente.
 
 Não há previsão de entrega, peso nem ponto de retirada, e a agência, seus horários e o prazo-limite de retirada ficam de fora: confira isso com a Meest. Um código que a Meest conhece apenas como referência de parceiro não é rastreado, e históricos antigos saem do ar e aparecem como não encontrados.
 
@@ -117,7 +117,7 @@ A Meest America diz que ele geralmente começa com um código de letras seguido 
 - [Meest International: Contact Us](https://international.meest.com/contact-us) – formulário de contato, Varsóvia
 - [Meest: Правила пересилання по Україні](https://ua.meest.com/pravila-peresilanna-po-ukraini) – 5 dias úteis de guarda gratuita, taxa diária, devolução em agências parceiras
 - [Meest Post: About us](https://www.meestpost.com/en/about-us) – Meest Polska, Meest Group, 1989
-- [Meest Post: Reklamacje](https://www.meestpost.com/pl/complaints) – quem pode reclamar, prazos
+- [Meest Post: Reklamacje](https://www.meestpost.com/pl/complaints) – quem pode pedir indenização, prazos
 - [Meest Post: Kontakt](https://www.meestpost.com/pl/contact-us) – telefone, e-mail, horários
 - [Meest Post: FAQ](https://www.meestpost.com/pl/faq) – prazos de entrega
 - [Meest: Śledzenie przesyłki](https://pl.meest.com/parcel-track) – leva ao rastreador da Meest Post

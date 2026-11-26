@@ -1,6 +1,6 @@
 ---
 title: Rastreamento PPL: código de 11 dígitos, status e Parcelshops
-description: Rastreie uma encomenda PPL na Tchéquia: código de 11 dígitos, significado dos status em inglês, Parcelshops, Parcelboxes, entregas perdidas e contatos.
+description: Rastreie uma encomenda PPL na Tchéquia: código de 11 dígitos, significado dos status em inglês, Parcelshops, Parcelboxes, entregas não realizadas e contatos.
 slug: rastreamento-ppl
 published: 2026-11-26
 updated: 2026-11-26
@@ -34,13 +34,13 @@ O rastreamento da PPL exibe textos apenas em tcheco ou inglês; estes são os te
 | `The shipment is in transit` | Em trânsito entre depósitos ou sendo preparada para entrega. |
 | `The shipment will be delivered today` | Carregada para a rota de hoje: saiu para entrega. |
 | `The shipment was not delivered due to lack of time` | Atraso do lado da PPL; ninguém tentou entrega na sua porta. |
-| `The shipment was not delivered due to failure to reach the recipient` | Tentativa perdida: o motorista não conseguiu localizar você. |
+| `The shipment was not delivered due to failure to reach the recipient` | Entrega não realizada: o motorista não conseguiu localizar você. |
 | `We have delivered the shipment to the pick-up point` | Aguardando você num Parcelshop ou Parcelbox: pronta para retirada. |
 | `We have delivered the shipment to the recipient` | Entregue a você. |
 | `The shipment has not been collected by the recipient and will be returned to the sender` | Não retirada no prazo; está voltando para o remetente. |
 | `The shipment has been handed over to a foreign partner for delivery` | Um parceiro no exterior fará a entrega. |
 
-"Delivered to the pick-up point" não significa entrega a você: o pacote está aguardando e o prazo de retirada já está correndo. "Will be delivered today" é a leitura de carregamento. "Not delivered due to lack of time" (ou por pane no veículo, chegada tardia ao depósito ou problema na rota) quer dizer que ninguém compareceu. Acima de um histórico concluído, a PPL também exibe a linha de resumo `The shipment has been delivered to the recipient.`.
+"Delivered to the pick-up point" não significa entrega a você: o pacote está aguardando e o prazo de retirada já está correndo. "Will be delivered today" é a leitura de carregamento. "Not delivered due to lack of time" (ou por pane no veículo, chegada tardia ao depósito ou problema na rota) quer dizer que ninguém compareceu. Acima de um histórico concluído, a PPL também exibe a linha de resumo `The shipment has been delivered to the recipient.`
 
 ## Entrega PPL, Parcelshops e Parcelboxes
 
@@ -58,7 +58,7 @@ Você escolhe entrega em casa ou ponto de retirada no checkout da loja: um Parce
 
 As páginas da PPL não dizem nada sobre rastreamento parado ou encomendas extraviadas e não fixam prazo para isso. O remetente detém o contrato com a PPL, e a PPL trata reclamações "principalmente" com o remetente, então comece pela loja. Veja [rastreamento que não atualiza](guide:tracking-not-updating) para saber quanto esperar.
 
-**Caixa danificada:** você pode aceitar, mas peça para registrar o dano no coletor do motorista. **Conteúdo danificado em caixa intacta:** informe no [formulário de reclamações da PPL](https://www.ppl.cz/en/claims) em até 7 dias corridos da entrega, com fotos da encomenda, conteúdo, preenchimento e embalagem (incluindo todas as etiquetas) e nota fiscal quando aplicável. A PPL conclui reclamações completas em até 30 dias.
+**Caixa danificada:** você pode aceitar, mas peça para registrar o dano no coletor do motorista. **Conteúdo danificado em caixa intacta:** informe no [formulário de pedidos de indenização da PPL](https://www.ppl.cz/en/claims) em até 7 dias corridos da entrega, com fotos da encomenda, conteúdo, preenchimento e embalagem (incluindo todas as etiquetas) e nota fiscal quando aplicável. A PPL conclui reclamações completas em até 30 dias.
 
 **Golpe de pagamento na entrega.** A PPL alerta contra lojas falsas, em sua maioria estrangeiras, cujas encomendas com pagamento na entrega contêm algo sem valor ou só enchimento, e contra encomendas não pedidas. Se você pagou por uma, guarde confirmação do pedido, comprovante de pagamento, fotos do conteúdo e mensagens com o vendedor e procure a Polícia Tcheca imediatamente: a PPL é obrigada a repassar o valor, e só a polícia pode bloquear o repasse.
 
@@ -76,7 +76,7 @@ A PPL não divulga linha telefônica para destinatários. A página About us tra
 
 ## Acompanhe encomendas PPL com o Peek
 
-O [Peek](/) não identifica um número PPL apenas pelos 11 dígitos; por isso, para códigos começando de 2 a 9, consulta as transportadoras com formato igual: PPL, GLS, GLS Switzerland e PostLogistics (com PPL primeiro na Tchéquia), e depois Coordinadora, Mainfreight e Paquetexpress, selecionando a que reconhecer o código. Você também pode escolher PPL em "Trocar" ("Trocar transportadora" em encomenda já adicionada) ou colar um link de rastreamento de ppl.cz com `shipmentId=`, reconhecido como PPL na hora. Um link de dhl.com com código PPL não funciona.
+O [Peek](/) não identifica um número PPL apenas pelos 11 dígitos; por isso, para códigos começando de 2 a 9, consulta as transportadoras com formato igual: PPL, GLS, GLS Switzerland e PostLogistics (com PPL primeiro na Tchéquia), e depois Coordinadora, Mainfreight e Paquetexpress, selecionando a que reconhecer o código. Você também pode escolher PPL em "Trocar" ("Trocar transportadora" em encomenda já adicionada) ou colar um link de rastreamento de ppl.cz com `shipmentId=`, que o Peek reconhece como PPL. Um link de dhl.com com código PPL não funciona.
 
 O Peek lê os status em inglês da PPL conforme escritos, com horários no fuso de Praga convertidos para o seu dispositivo. Exibe o dia previsto de entrega quando a PPL informa, o peso, o horário da entrega e o nome do Parcelshop ou Parcelbox enquanto o pacote aguarda lá. A PPL não informa locais nas leituras. O Peek omite janela de entrega, remetente, referência do cliente, endereço do ponto de retirada, detalhes de pagamento na entrega e comprovante de entrega. Quando a resposta da PPL traz link do rastreador de um parceiro no exterior com o número dele, o Peek indica esse parceiro como entregador. Não aceita códigos SmartPIN.
 
@@ -98,14 +98,14 @@ Sim, o mojePPL para Android e iOS. Ele rastreia encomendas, altera o local de en
 
 ### Qual é a diferença entre PPL Parcelshop e Parcelbox?
 
-Parcelshop é uma loja parceira que entrega pacotes durante o horário comercial. Parcelbox é um armário de autoatendimento aberto 24 horas que aceita pagamento apenas com cartão.
+Parcelshop é uma loja que entrega pacotes durante o horário comercial. Parcelbox é um armário de autoatendimento aberto 24 horas que aceita pagamento apenas com cartão.
 
 ### A PPL é o mesmo que a DHL?
 
 Não exatamente: a PPL é uma transportadora tcheca que faz parte do DHL Group desde 2006 e entrega pela Europa com a DHL. Ela tem rastreamento próprio e códigos de 11 dígitos.
 
 :::sources
-- [PPL CZ: Customer service](https://www.ppl.cz/en/customer-service) – código de 11 dígitos, e-mails, mudança para ponto de retirada, entrega perdida, prazos de guarda, pagamento na entrega, dano, reclamações, golpes, chatbot
+- [PPL CZ: Customer service](https://www.ppl.cz/en/customer-service) – código de 11 dígitos, e-mails, mudança para ponto de retirada, entrega não realizada, prazos de guarda, pagamento na entrega, dano, reclamações, golpes, chatbot
 - [PPL CZ: Zákaznický servis](https://www.ppl.cz/zakaznicky-servis) – mesmas respostas em tcheco
 - [PPL CZ: Shipment tracking](https://www.ppl.cz/en/track-a-shipment) – página de rastreamento, Parcelboxes 24/7, troca de idioma, textos dos status
 - [PPL CZ: Pick-up points](https://www.ppl.cz/en/what-are-pickup-points) – Parcelshops, armários, prazos de guarda, prorrogação em Parcelbox, PIN transferível

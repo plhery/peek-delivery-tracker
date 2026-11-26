@@ -601,10 +601,10 @@ private fun ShareSwitch(tag: String, symbol: String?, title: String, value: Stri
 }
 
 /**
- * `giftWords`: a gift's note, two to five lines, and who it is from, with the name autofill and Done, which puts the
- * keyboard away; each under its label in caption secondary, 10 apart; then the switch that shows them before delivery
- * ("share.gift.early", off by default), and "share.gift.private" in caption secondary, or "share.gift.privateEarly"
- * with the switch on, when the note's label reads "share.gift.noteNow". 14 in, raised, with 14-point continuous
+ * `giftWords`: a gift's note, two to five lines, right under it the switch that shows the words before delivery
+ * ("share.gift.early", off by default), then who it is from, with the name autofill and Done, which puts the keyboard
+ * away; each field under its label in caption secondary; then "share.gift.private" in caption secondary, 10 under it,
+ * or "share.gift.privateEarly" with the switch on, when the note's label reads "share.gift.noteNow". 14 in, raised, with 14-point continuous
  * corners. Each field keeps within what a link carries as it is typed (280 and 60). Either taking the focus opens the
  * sheet fully (`onChange(of: writing)`).
  */
@@ -614,24 +614,25 @@ private fun GiftWords(work: ParcelShareSheetWork, words: ParcelShareWords) {
     val colors = PeekTheme.colors
     val writing = { work.large = true }
     Column(Modifier.fillMaxWidth().background(colors.raised, ContinuousRoundedShape(14.dp)).padding(vertical = 14.dp)) {
-        Column(Modifier.padding(horizontal = 14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        Column(Modifier.padding(horizontal = 14.dp)) {
             WordsField(PARCEL_SHARE_NOTE, localizer.text(if (words.early) "share.gift.noteNow" else "share.gift.note"), words.note, name = false, writing) {
                 work.type(work.words.copy(note = it))
             }
-            WordsField(PARCEL_SHARE_FROM, localizer.text("share.gift.from"), words.from, name = true, writing) {
-                work.type(work.words.copy(from = it))
-            }
         }
-        // Its own 14 in, as the switches above.
+        // Right under the note it shows early; its own 14 in, as the switches above.
         ShareSwitch(PARCEL_SHARE_EARLY, null, localizer.text("share.gift.early"), null, words.early, enabled = true) {
             work.type(work.words.copy(early = it))
         }
-        Text(
-            localizer.text(if (words.early) "share.gift.privateEarly" else "share.gift.private"),
-            Modifier.padding(horizontal = 14.dp),
-            color = colors.secondaryText,
-            style = PeekTheme.type.caption.sfLines(),
-        )
+        Column(Modifier.padding(horizontal = 14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            WordsField(PARCEL_SHARE_FROM, localizer.text("share.gift.from"), words.from, name = true, writing) {
+                work.type(work.words.copy(from = it))
+            }
+            Text(
+                localizer.text(if (words.early) "share.gift.privateEarly" else "share.gift.private"),
+                color = colors.secondaryText,
+                style = PeekTheme.type.caption.sfLines(),
+            )
+        }
     }
 }
 

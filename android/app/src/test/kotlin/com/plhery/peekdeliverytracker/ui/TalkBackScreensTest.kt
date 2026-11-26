@@ -11,6 +11,7 @@ import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTouchInput
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.plhery.peekdeliverytracker.BuildConfig
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.api.Parcel
@@ -317,13 +318,18 @@ class TalkBackScreensTest {
         settle()
         compose.onNodeWithTag(SETTINGS_DELIVERY_UPDATES).performScrollTo().performClick()
         settle()
+        // F-Droid's build also says how its notifications come, here through the inbox, which takes the last line off
+        // the screen.
+        val fdroid = BuildConfig.FLAVOR == "fdroid"
         assertSpoken(
             "a guest's Delivery updates page",
-            listOf(
+            listOfNotNull(
                 "Drag handle",
                 "Settings [button]",
                 "Notifications [heading]",
                 "Choose your updates, then turn on notifications for this device.",
+                "Peek checks for news about every 15 minutes, so a notification can come a little late. With a UnifiedPush app such as ntfy, they come straight away."
+                    .takeIf { fdroid },
                 "Notifications [switch, off]",
                 "WHICH UPDATES? [heading]",
                 "Every scan, Every new tracking event, including routine carrier scans. [button]",
@@ -333,7 +339,8 @@ class TalkBackScreensTest {
                 "Save preferences [button]",
                 "BY EMAIL [heading]",
                 "An email when it arrives, Sign in, and Peek writes to the address you sign in with. [button]",
-                "Parcels are checked hourly, day and night, and up to every 10 minutes on their delivery day or while you look at them.",
+                "Parcels are checked hourly, day and night, and up to every 10 minutes on their delivery day or while you look at them."
+                    .takeUnless { fdroid },
             ),
         )
     }

@@ -617,6 +617,17 @@ class ZoomStackTest {
             val pixel = compose.onRoot().captureToImage().asAndroidBitmap().getPixel(390, 360)
             return ((pixel shr 16) and 0xFF) - ((pixel shr 8) and 0xFF) > 40
         }
+        // Robolectric's capture can come before the window has drawn the frame ([assertDrawn]); with the clock held, the
+        // frames it then draws show the same.
+        fun red(expected: Boolean): Boolean {
+            var shown = red()
+            repeat(3) {
+                if (shown == expected) return shown
+                compose.awaitFrame()
+                shown = red()
+            }
+            return shown
+        }
         // On top before the page: the root stays whole, its card too, rather than leaving the window's ground alone.
         change {
             pageHeld = true
@@ -624,11 +635,11 @@ class ZoomStackTest {
             top = SOURCE
         }
         compose.mainClock.advanceTimeByFrame()
-        assertTrue(red())
+        assertTrue(red(expected = true))
         // The page comes, and covers it.
         change { pageHeld = false }
         compose.mainClock.advanceTimeByFrame()
-        assertFalse(red())
+        assertFalse(red(expected = false))
     }
 
     @Test

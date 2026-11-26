@@ -10,7 +10,7 @@ Landmark Global 为网店提供跨境订单运输服务。它隶属总部位于�
 
 ## Landmark Global 运单号长什么样
 
-Landmark 将其称为 LTN，即“为每个包裹生成的唯一编号，用于全程监控运输”。Landmark 表示你通常可以从商家处获得它，一般写在订单确认邮件里。
+Landmark 将其称为 LTN，即“为每个包裹生成的唯一编号，用于全程监控运输”。Landmark 表示你通常可以从商家处获得它，往往写在订单确认邮件里。
 
 | 格式（虚构） | 含义 |
 | --- | --- |
@@ -20,13 +20,13 @@ Landmark 将其称为 LTN，即“为每个包裹生成的唯一编号，用于�
 | `AB48291736` | 商家的订单参考号或包裹参考号，Landmark 查询页同样接受。 |
 | 其他承运商单号 | 末端派送合作方为同一包裹分配的自有单号（Evri、UPS、bpost 等）。 |
 
-Landmark 查询页一次最多支持用逗号分隔同时查 25 个单号。确定末端派送方后，页面会在“Delivery Partner”下显示合作方名称、对方自有单号以及对方网站链接，因此同一个包裹可能有两个单号。
+Landmark 查询页一次最多可查 25 个单号，用逗号分隔。确定末端派送方后，页面会在“Delivery Partner”下显示合作方名称、对方自有单号以及对方网站链接，因此同一个包裹可能有两个单号。
 
 LTN 后跟 7 位或 10 位数字，或后缀不是 N1，都不属于 Landmark 的标准格式：请对照邮件检查是否输错。更多单号规则见[运单号格式](guide:tracking-number-formats)（英文）。
 
 ## Landmark Global 物流状态含义
 
-Landmark 查询页提供语言切换菜单，但 Peek 读取的是其英文页面，因此 Peek 显示的是以下英文原文。Landmark 其他语言页面的措辞可能略有不同，末端派送合作方的扫描则保留合作方自己的原文。按包裹通常经过的顺序排列：
+Landmark 查询页提供语言切换菜单，但 Peek 读取的是其英文页面，因此 Peek 显示的是以下英文原文。Landmark 其他语言页面的措辞可能略有不同，末端派送合作方的扫描则保留合作方自己的原文。按包裹经过的顺序排列：
 
 | Landmark 显示 | 对你的含义 |
 | --- | --- |
@@ -34,19 +34,19 @@ Landmark 查询页提供语言切换菜单，但 Peek 读取的是其英文页�
 | `Processed` | Landmark 已完成包裹处理。 |
 | `Scanned at Landmark crossdock facility` | 包裹正在通过 Landmark 中转仓。 |
 | `Grouped when pallet scanned to crossing (… #…)` | Landmark 已将包裹打托盘准备发往目的国；括号里标明过境通道（如 DDU 或 SLC INTERPOST）及托盘编号。 |
-| `Transmitted customs information` | 清关数据已提前申报发送。 |
+| `Transmitted customs information` | 清关数据已提前发送。 |
 | `Customs cleared` | 海关已放行。 |
 | `Departure to country of destination` | 正在国际干线运输途中。 |
 | `Crossing border and in transit to carrier hub` | 已跨境，正发往末端派送合作方的分拣中心。 |
 | `Departure from office of exchange` | 已从寄出国的国际互换局出口发出。 |
 | `Received in destination country` | 已抵达目的国。 |
 | `Out for Delivery` | 今天已交由派送员派送。 |
-| `Item arrival at collection point for pick-up` | 已到达当地邮局或取件点柜台，等你去取。 |
+| `Item arrival at collection point for pick-up` | 已到达当地邮局柜台，等你去取。 |
 | `Delivered` | 已签收。 |
 
 包裹交给末端派送合作方后，扫描会以合作方自己的文案显示。Evri 的 `Out For Delivery To Courier` 表示网点已交给派送员，派送员确认揽收后才会开始派送。`Item deposited to local postal operator` 表示 Landmark 已把包裹交给你所在国家的邮政负责最后一程，并非已经送达。
 
-## Landmark Global 派送：谁负责送达与无人签收
+## Landmark Global 派送：谁负责送达与派送未成功
 
 在大多数国家，Landmark 不亲自派送。其官网列出了部分合作方：比利时为 bpost，加拿大为同集团的姐妹公司 Apple Express，美国为 DHL eCommerce 和 UPS。其英国页面只提到“多家物流合作伙伴”，未具体点名。在 Peek 查询过的包裹中，英国由 Evri 接手并显示其分拣中心与网点扫描，德国由 Hermes 派送，意大利、摩洛哥和哥伦比亚则由当地国家邮政派送。这些仅是实际案例而非固定规则，请以你包裹页面显示的合作方为准。
 
@@ -72,10 +72,10 @@ Landmark 查询页提供语言切换菜单，但 Peek 读取的是其英文页�
 
 Landmark 网页建议先联系商家或查阅其常见问题。
 
-- **英国、爱尔兰与欧洲：** [客户支持页面](https://landmarkglobal.com/eu/en/customer-support/) 提供常见问题和“Send Email”按钮，邮箱为 ClientservicesEU@landmarkglobal-group.com，请附上运单号与货运详情。页面未列出电话、在线客服或服务时间。英国地址：Unit 3, Heathrow Logistics Park, Bedfont Rd, Feltham TW14 8EE。
-- **美国与加拿大：** [支持表单页面](https://landmarkglobal.com/us/en/customer-support-form/) 列出电话 1-888-205-2251（美国东部时间周一至周五 8:00 至 20:00）以及邮箱 clientservices@landmarkglobal.com。
+- **英国、爱尔兰与欧洲：** [客服页面](https://landmarkglobal.com/eu/en/customer-support/) 提供常见问题和“Send Email”按钮，邮箱为 ClientservicesEU@landmarkglobal-group.com，请附上运单号与货运详情。页面未列出电话、在线客服或服务时间。英国地址：Unit 3, Heathrow Logistics Park, Bedfont Rd, Feltham TW14 8EE。
+- **美国与加拿大：** [客服表单页面](https://landmarkglobal.com/us/en/customer-support-form/) 列出电话 1-888-205-2251（美国东部时间周一至周五 8:00 至 20:00）以及邮箱 clientservices@landmarkglobal.com。
 
-Landmark 的通用联系页面仅受理商务咨询，发往该处的查件请求不会被处理。一旦显示末端派送合作方，错过派送和自提问题请直接联系该合作方。
+Landmark 的通用联系页面仅受理商务咨询，发往该处的查件请求不会被处理。一旦显示末端派送合作方，派送未成功和自提问题请直接联系该合作方。
 
 ## 用 Peek 跟踪 Landmark Global 包裹
 
@@ -102,7 +102,7 @@ Landmark 所有扫描时间均按美国中部时间记录。Peek 会按此读取
 Landmark 表示时效取决于商家所选的服务和目的地。其面向寄往美国商家的页面给出的标准参考时效为 3 至 6 天。具体请查看商家的发货说明或物流记录。
 
 :::sources
-- [Landmark Global: Customer Support](https://landmarkglobal.com/eu/en/customer-support/) – LTN、先联系商家、无人签收、改址、丢失或破损、保险、时效、邮箱与地址
+- [Landmark Global: Customer Support](https://landmarkglobal.com/eu/en/customer-support/) – LTN、先联系商家、派送未成功、改址、丢失或破损、保险、时效、邮箱与地址
 - [Landmark Global: Customer Support Form (US and Canada)](https://landmarkglobal.com/us/en/customer-support-form/) – 电话、服务时间、邮箱、改址
 - [Landmark Global: Contact](https://landmarkglobal.com/eu/en/contact/) – 仅限商务咨询
 - [Landmark Global: Landmark Tracking](https://track.landmarkglobal.com/) – 查件、单次最多 25 个单号、语言菜单

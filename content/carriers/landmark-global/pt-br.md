@@ -26,7 +26,7 @@ Um LTN com 7 ou 10 dígitos, ou com terminação diferente de N1, não segue os 
 
 ## Status de rastreamento da Landmark Global explicados
 
-O site de rastreamento da Landmark tem um menu de idiomas, mas o Peek lê a página em inglês, portanto estes são os textos exibidos pelo Peek. Em outro idioma, a página da Landmark pode redigir uma etapa de modo diferente, e as movimentações do parceiro mantêm o texto do próprio parceiro. Na ordem em que costumam aparecer:
+O site de rastreamento da Landmark tem um menu de idiomas, mas o Peek lê a página em inglês, portanto estes são os textos exibidos pelo Peek. Em outro idioma, a página da Landmark pode redigir uma etapa de modo diferente, e as movimentações do parceiro mantêm o texto do próprio parceiro. Na ordem em que a encomenda passa por eles:
 
 | A Landmark diz | O que significa para você |
 | --- | --- |
@@ -46,9 +46,9 @@ O site de rastreamento da Landmark tem um menu de idiomas, mas o Peek lê a pág
 
 Depois que o parceiro de entrega recebe a encomenda, as movimentações dele aparecem nas palavras dele. `Out For Delivery To Courier`, da Evri, significa que o depósito passou o pacote ao entregador, que confirma o recebimento antes da rota. `Item deposited to local postal operator` significa que a Landmark entregou o pacote ao correio do seu país para o trecho final, e não que ele já foi entregue a você.
 
-## Entrega Landmark Global: quem entrega e encomendas perdidas
+## Entrega Landmark Global: quem entrega e entregas não realizadas
 
-Na maioria dos países a Landmark não faz a entrega própria. Suas páginas citam alguns parceiros: bpost na Bélgica, sua empresa irmã Apple Express no Canadá, e DHL eCommerce e UPS nos EUA. A página do Reino Unido fala em "múltiplos parceiros logísticos" sem citá-los. Em encomendas consultadas pelo Peek, a Evri assumiu no Reino Unido com suas próprias leituras de hub e depósito, a Hermes entregou na Alemanha, e o correio nacional entregou na Itália, no Marrocos e na Colômbia. São exemplos, não regras fixas: vale o parceiro exibido na sua encomenda.
+Na maioria dos países a Landmark não faz ela mesma a entrega. Suas páginas citam alguns parceiros: bpost na Bélgica, sua empresa irmã Apple Express no Canadá, e DHL eCommerce e UPS nos EUA. A página do Reino Unido fala em "múltiplos parceiros logísticos" sem citá-los. Em encomendas consultadas pelo Peek, a Evri assumiu no Reino Unido com suas próprias leituras de hub e depósito, a Hermes entregou na Alemanha, e o correio nacional entregou na Itália, no Marrocos e na Colômbia. São exemplos, não regras fixas: vale o parceiro exibido na sua encomenda.
 
 Avisos de ausência, pontos de retirada, prazos de guarda e novas tentativas seguem as regras desse parceiro, não as da Landmark. Se você não estiver, a Landmark orienta seguir as instruções do entregador ou falar com o atendimento para reagendar ou combinar retirada, lembrando que nem todo serviço oferece reentrega ou retirada.
 
@@ -72,10 +72,10 @@ Para as regras do parceiro, consulte a página da [Evri](carrier:evri), da [Herm
 
 As páginas da Landmark recomendam falar primeiro com a loja ou consultar as perguntas frequentes.
 
-- **Reino Unido, Irlanda e Europa:** a [página de suporte ao cliente](https://landmarkglobal.com/eu/en/customer-support/) reúne o FAQ e o botão "Send Email" para ClientservicesEU@landmarkglobal-group.com. Inclua o código de rastreamento e os dados do envio. Não há telefone, chat nem horários informados. Endereço no Reino Unido: Unit 3, Heathrow Logistics Park, Bedfont Rd, Feltham TW14 8EE.
-- **EUA e Canadá:** a [página do formulário de suporte](https://landmarkglobal.com/us/en/customer-support-form/) lista o telefone 1-888-205-2251, de segunda a sexta das 8h às 20h EST, e o e-mail clientservices@landmarkglobal.com.
+- **Reino Unido, Irlanda e Europa:** a [página de atendimento ao cliente](https://landmarkglobal.com/eu/en/customer-support/) reúne o FAQ e o botão "Send Email" para ClientservicesEU@landmarkglobal-group.com. Inclua o código de rastreamento e os dados do envio. Não há telefone, chat nem horários informados. Endereço no Reino Unido: Unit 3, Heathrow Logistics Park, Bedfont Rd, Feltham TW14 8EE.
+- **EUA e Canadá:** a [página do formulário de atendimento](https://landmarkglobal.com/us/en/customer-support-form/) lista o telefone 1-888-205-2251, de segunda a sexta das 8h às 20h EST, e o e-mail clientservices@landmarkglobal.com.
 
-A página geral de contato da Landmark é apenas para consultas comerciais: dúvidas de rastreamento enviadas por lá não são processadas. Assim que houver um parceiro de entrega definido, dúvidas sobre entregas perdidas e retirada devem ser tratadas com esse parceiro.
+A página geral de contato da Landmark é apenas para consultas comerciais: dúvidas de rastreamento enviadas por lá não são processadas. Assim que houver um parceiro de entrega definido, dúvidas sobre entregas não realizadas e retirada devem ser tratadas com esse parceiro.
 
 ## Acompanhe uma encomenda Landmark Global com o Peek
 
@@ -85,7 +85,7 @@ Ele lê a página em inglês da Landmark, então os textos aparecem em inglês, 
 
 A Landmark registra todos os horários no fuso Central dos EUA. O Peek lê os horários assim, lista o histórico da própria Landmark e converte cada horário para o seu fuso.
 
-Quando o parceiro é uma transportadora acompanhada diretamente pelo Peek, como Evri, UPS, bpost ou Apple Express, a encomenda pode passar a ser acompanhada por lá; a página então mostra "Entrega por" essa transportadora e traz o código do parceiro com link. Isso não ocorre em todas as encomendas. Cada movimentação vai para o mapa, e o Peek pode avisar você sobre "Cada movimentação", "Etapas importantes" ou "Só a entrega".
+Quando o parceiro é uma transportadora que o Peek também acompanha, como Evri, UPS, bpost ou Apple Express, a encomenda pode passar a ser acompanhada por lá; a página então mostra "Entrega por" essa transportadora e traz o código do parceiro com link. Isso não ocorre em todas as encomendas. Cada movimentação vai para o mapa, e o Peek pode avisar você sobre "Cada movimentação", "Etapas importantes" ou "Só a entrega".
 
 ## Perguntas sobre o rastreamento Landmark Global
 
@@ -102,7 +102,7 @@ Não. A Landmark faz parte da Bnode, o grupo da bpost, desde 2016. No Canadá el
 A Landmark diz que o prazo depende do serviço escolhido pela loja e do destino. Sua página para lojas que enviam aos EUA indica um prazo padrão de 3 a 6 dias. Confira os detalhes de envio da loja ou o rastreamento.
 
 :::sources
-- [Landmark Global: Customer Support](https://landmarkglobal.com/eu/en/customer-support/) – LTN, falar primeiro com a loja, entrega perdida, mudança de endereço, perda ou dano, seguro, prazos, e-mail e endereços
+- [Landmark Global: Customer Support](https://landmarkglobal.com/eu/en/customer-support/) – LTN, falar primeiro com a loja, entrega não realizada, mudança de endereço, perda ou dano, seguro, prazos, e-mail e endereços
 - [Landmark Global: Customer Support Form (US and Canada)](https://landmarkglobal.com/us/en/customer-support-form/) – telefone, horários, e-mail, alterações de endereço
 - [Landmark Global: Contact](https://landmarkglobal.com/eu/en/contact/) – apenas consultas comerciais
 - [Landmark Global: Landmark Tracking](https://track.landmarkglobal.com/) – rastreamento, 25 códigos, menu de idiomas

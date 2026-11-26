@@ -20,7 +20,7 @@ Peek 仅凭 14 位包裹单号即可查询，从不索要你的 CPF。如果单�
 
 ## Jadlog 物流状态含义
 
-由于 Jadlog 隶属 Geopost，物流记录在 Jadlog 官网显示为葡萄牙语，经由 Geopost 查询接口读取时则显示为英语。
+由于 Jadlog 隶属 Geopost，物流记录在 Jadlog 官网显示为葡萄牙语，经由 Geopost 的查件系统读取时则显示为英语。
 
 | Jadlog / Geopost 显示 | 对你的含义 | Peek 显示 |
 | --- | --- | --- |
@@ -39,7 +39,7 @@ Jadlog 在 [jadlog.com.br/jadlog/servicos](https://www.jadlog.com.br/jadlog/serv
 - **Jadlog.com 与 Jadlog Package：** 电商包裹派送（Jadlog.com 承运最高 30 公斤的包裹；Jadlog Package 覆盖 B2C 和 B2B 陆运货物）。
 - **Jadlog Rodo、RodoEconômico、Cargo 与 DOC：** 最高 50 公斤的较重陆运货物（Rodo）、经济型陆运、B2B 空运货物及文件寄递。
 - **[Jadlog Predict](https://www.jadlog.com.br/jadlog/jadlogPredict)：** 面向大都市和高单量地区，通过自动短信发送 1 小时派送时段提醒，方便你预估司机上门时间。
-- **[Jadlog Pickup](https://www.jadlog.com.br/jadlog/pickup)：** 全巴西超过 4,000 家合作门店（覆盖 90% 以上人口），支持包裹自提、寄件与电商逆向退货（*Reversa*），并通过短信和邮件通知进度。
+- **[Jadlog Pickup](https://www.jadlog.com.br/jadlog/pickup)：** 全巴西超过 4,000 家合作门店（覆盖 90% 以上人口），可用于包裹自提、寄件与电商逆向退货（*Reversa*），并通过短信和邮件通知进度。
 - **[Jadlog Internacional](https://www.jadlog.com.br/jadlog/internacional)：** 依托 Geopost 国际网络，从巴西出口寄送至 154 个国家和地区（300 个目的地）。
 
 **Jadlog 未公开说明的规则。** Jadlog 官网没有为所有网店公布统一的派送尝试次数上限、保证送达时效或 Pickup 网点固定保管天数。请查看 Pickup 包裹发来的短信或邮件通知，或查看网店订单页上的具体取件截止日期与重派规则。
@@ -71,11 +71,11 @@ Jadlog 的 [Atendimento 页面](https://www.jadlog.com.br/jadlog/atendimento) �
 
 由于全球 Geopost/DPD 承运商共用 14 位数字单号，[Peek](/) 会根据你的所在地区决定先问哪一家。在巴西，Peek 会在所有 14 位候选承运商中优先查询 Jadlog（排在欧洲各 DPD 分公司、Chronopost、SEUR 和 BRT 之前），Jadlog 确认后即显示“Jadlog 有这个包裹的记录。”。在巴西以外地区，Peek 会把 Jadlog 作为备选——先问欧洲 Geopost 承运商，都查不到再问 Jadlog。无论身在何处，粘贴 `jadlog.com.br/jadlog/captcha?cte=` 链接都会直接识别为 Jadlog；否则可在添加时点击“更换”，或在包裹页点“更换快递公司”后选择 Jadlog（搜索“DPD Brazil”也能找到）。
 
-Peek 直接查询 Geopost 访客跟踪接口，无需邮编或 CPF。页面显示当前阶段（“已生成面单”、“已揽收”、“运输中”、“派送中”、“已签收”）、摘要扫描记录（来自 Geopost 接口时为英语，转自 Jadlog 本地查询时为葡萄牙语）以及签收时间戳。Peek 不展示预计送达日期、包裹重量、Jadlog Pickup 门店地址及收件人姓名或签名。
+Peek 以访客身份查询 Geopost 的查件系统，无需邮编或 CPF。页面显示当前阶段（“已生成面单”、“已揽收”、“运输中”、“派送中”、“已签收”）、摘要扫描记录（来自 Geopost 时为英语，转自 Jadlog 本地查件系统时为葡萄牙语）以及签收时间戳。Peek 不展示预计送达日期、包裹重量、Jadlog Pickup 门店地址及收件人姓名或签名。
 
-在 Jadlog 物流接口正常响应期间，当你打开包裹页，或在派送当天开启通知时，Peek 最多每 10 分钟查询一次；在包裹进入派送当天，从当地时间早上 6 点起每 2 分钟查询一次。其余时间每小时查询一次。在“已生成面单”或“已揽收”状态下满 12 小时，或连续两天无新动态后，无论是否打开页面均改为每小时查询一次；在“已生成面单”下满七天后改为每 6 小时一次。当 Jadlog 查询无响应、Peek 仅通过物流查询服务跟进时，会每小时查询一次，静默一天后每 3 小时一次，派送当天最多每 15 分钟一次。
+在 Jadlog 自己的查件系统正常响应期间，当你打开包裹页，或在派送当天开启通知时，Peek 最多每 10 分钟查询一次；在包裹进入派送当天，从当地时间早上 6 点起每 2 分钟查询一次。其余时间每小时查询一次。在“已生成面单”或“已揽收”状态下满 12 小时，或连续两天无新动态后，无论是否打开页面均改为每小时查询一次；在“已生成面单”下满七天后改为每 6 小时一次。当 Jadlog 查询无响应、Peek 仅通过物流查询服务跟进时，会每小时查询一次，静默一天后每 3 小时一次，派送当天最多每 15 分钟一次。
 
-如果最新扫描距今已满四天，且包裹仍停留在“已生成面单”、“已揽收”或“运输中”，Peek 会标出最后一次扫描的日期，例如“自 10 月 12 日周一起没有物流更新”。包裹页随后会提示：“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 Jadlog 查询。”超过三周无新扫描时，则会显示：“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 Jadlog 查询。”
+如果最新扫描距今已满四天，且包裹仍停留在“已生成面单”、“已揽收”或“运输中”，Peek 会标出最后一次扫描的日期，例如“自10月12日周一起没有物流更新”。包裹页随后会提示：“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 Jadlog 查询。”超过三周无新扫描时，则会显示：“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 Jadlog 查询。”
 
 你可以选择“每次扫描”、“重要环节”或“仅派送当天”通知模式。Peek 仅监控物流动态，无法替你预约重派或联系 Jadlog 网点。
 

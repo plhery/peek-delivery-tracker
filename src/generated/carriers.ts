@@ -15270,6 +15270,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffbe0c"
     },
     {
+      "id": "acs-courier",
+      "catalog": "acs-courier",
+      "slug": "acs-courier-tracking",
+      "title": "Rastreamento ACS Courier: códigos, status e contatos",
+      "name": "ACS Courier",
+      "color": "#e42229"
+    },
+    {
       "id": "geniki-taxydromiki",
       "catalog": "geniki-taxydromiki",
       "slug": "rastreamento-geniki-taxydromiki",
@@ -16028,6 +16036,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento 360Lion: códigos WSH e AR, status e contato",
       "name": "360Lion",
       "color": "#cf5d15"
+    },
+    {
+      "id": "a-tu-hora-express",
+      "catalog": "a-tu-hora-express",
+      "slug": "a-tu-hora-express-tracking",
+      "title": "Rastreamento A Tu Hora Express: códigos, status e ajuda",
+      "name": "A Tu Hora Express",
+      "color": "#1d2a84"
     },
     {
       "id": "skypostal",
@@ -19188,6 +19204,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffbe0c"
     },
     {
+      "id": "acs-courier",
+      "catalog": "acs-courier",
+      "slug": "acs-courier-tracking",
+      "title": "ACS Courier 物流查询：希腊与塞浦路斯单号、状态与客服",
+      "name": "ACS Courier",
+      "color": "#e42229"
+    },
+    {
       "id": "geniki-taxydromiki",
       "catalog": "geniki-taxydromiki",
       "slug": "geniki-taxydromiki-wuliu-chaxun",
@@ -19994,6 +20018,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "义达跨境（YDH）快递查询：YQ 与 AZ 单号、状态与客服",
       "name": "YDH",
       "color": "#015db9"
+    },
+    {
+      "id": "a-tu-hora-express",
+      "catalog": "a-tu-hora-express",
+      "slug": "a-tu-hora-express-tracking",
+      "title": "A Tu Hora Express 物流查询：单号、邮编要求与客服",
+      "name": "A Tu Hora Express",
+      "color": "#1d2a84"
     },
     {
       "id": "anserx",

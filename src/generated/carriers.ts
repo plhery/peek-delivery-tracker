@@ -15062,6 +15062,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee7532"
     },
     {
+      "id": "asendia",
+      "catalog": "asendia",
+      "slug": "asendia-tracking",
+      "title": "Rastreamento Asendia: status, entrega local e contato",
+      "name": "Asendia",
+      "color": "#005d69"
+    },
+    {
       "id": "landmark-global",
       "catalog": "landmark-global",
       "slug": "rastreamento-landmark-global",
@@ -15924,6 +15932,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento J&T Express México: códigos JMX e atendimento",
       "name": "J&T Express Mexico",
       "color": "#e60012"
+    },
+    {
+      "id": "bulgarian-posts",
+      "catalog": "bulgarian-posts",
+      "slug": "bulgarian-posts-tracking",
+      "title": "Rastreamento Bulgarian Posts: códigos PS/BG, taxas e ajuda",
+      "name": "Bulgarian Posts",
+      "color": "#ffd100"
     },
     {
       "id": "360lion",
@@ -18884,6 +18900,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee7532"
     },
     {
+      "id": "asendia",
+      "catalog": "asendia",
+      "slug": "asendia-tracking",
+      "title": "Asendia 物流查询：单号格式、状态含义、本地派送与客服",
+      "name": "Asendia",
+      "color": "#005d69"
+    },
+    {
       "id": "landmark-global",
       "catalog": "landmark-global",
       "slug": "landmark-global-wuliu-chaxun",
@@ -19802,6 +19826,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "墨西哥极兔速递 J&T Express Mexico 查询：JMX 单号与客服",
       "name": "J&T Express Mexico",
       "color": "#e60012"
+    },
+    {
+      "id": "bulgarian-posts",
+      "catalog": "bulgarian-posts",
+      "slug": "bulgarian-posts-tracking",
+      "title": "保加利亚邮政（Bulgarian Posts）物流查询：PS 与 BG 单号、清关和理赔",
+      "name": "Bulgarian Posts",
+      "color": "#ffd100"
     },
     {
       "id": "360lion",

@@ -15214,6 +15214,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "geodis",
+      "catalog": "geodis",
+      "slug": "geodis-tracking",
+      "title": "Rastreamento GEODIS: código 1G, status e opções de entrega",
+      "name": "GEODIS",
+      "color": "#3100e6"
+    },
+    {
       "id": "ecoscooting",
       "catalog": "ecoscooting",
       "slug": "rastreamento-ecoscooting",
@@ -16212,6 +16220,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento SXW Express: códigos SXW, etapas e entrega",
       "name": "SXW Express",
       "color": "#003876"
+    },
+    {
+      "id": "fan-courier-international",
+      "catalog": "fan-courier-international",
+      "slug": "fan-courier-international-tracking",
+      "title": "Rastreamento FAN Courier International: AWB e status",
+      "name": "FAN Courier International",
+      "color": "#2daae1"
     },
     {
       "id": "j-and-t-br",
@@ -19604,6 +19620,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "geodis",
+      "catalog": "geodis",
+      "slug": "geodis-tracking",
+      "title": "GEODIS 快递追踪：1G 单号、物流状态与法国派送选项",
+      "name": "GEODIS",
+      "color": "#3100e6"
+    },
+    {
       "id": "ecoscooting",
       "catalog": "ecoscooting",
       "slug": "ecoscooting-tracking",
@@ -20626,6 +20650,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "胜兴旺（SXW Express）物流查询：SXW单号与状态",
       "name": "SXW Express",
       "color": "#003876"
+    },
+    {
+      "id": "fan-courier-international",
+      "catalog": "fan-courier-international",
+      "slug": "fan-courier-international-tracking",
+      "title": "FAN Courier International 追踪：AWB 单号、状态与欧洲派送",
+      "name": "FAN Courier International",
+      "color": "#2daae1"
     },
     {
       "id": "j-and-t-br",

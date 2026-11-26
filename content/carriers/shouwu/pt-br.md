@@ -35,7 +35,7 @@ O rastreador da Shouwu está em inglês sob um cabeçalho em chinês. Ele mostra
 | `Not Found` | A Shouwu ainda não tem dados para esse código: "We seem can't identify the number." | "Aguardando Shouwu International" |
 | `Preparing` | A Shouwu descreve como pacote entregue ao seu armazém na China ou em pesagem e lacre. Pode surgir antes da primeira leitura. | "Etiqueta criada", depois "Recebida pela transportadora" após coleta pelo parceiro ou leitura no armazém |
 | `In Transit` | Qualquer etapa desde o repasse a um transportador até a alfândega e o trajeto no seu país. | "Em trânsito", ou a etapa do registro mais recente, como "Na alfândega"; "Etiqueta criada" enquanto há apenas dados do pedido e `Carrier received the shipment` |
-| `Undelivered` | Tentativa de entrega sem sucesso. | "Tentativa de entrega", ou "Pronta para retirada" ou "Devolvida ao remetente" conforme o último evento |
+| `Undelivered` | Entrega não realizada. | "Tentativa de entrega", ou "Pronta para retirada" ou "Devolvida ao remetente" conforme o último evento |
 | `Delivered` | Entregue ao destinatário. | "Entregue" |
 
 A Shouwu chama esses status de "auto-judged by the system" e "only for information reference use". As linhas de movimentação dizem mais:
@@ -51,7 +51,7 @@ A Shouwu chama esses status de "auto-judged by the system" e "only for informati
 | `The package is shipped from the transfer warehouse to the airport Export customs clearance in progress` | Enviado do armazém de transferência ao aeroporto, onde ocorre a exportação chinesa: não é a alfândega do seu país. | "Em trânsito" |
 | `Export customs declaration completed`, `Export customs clearance completed`, `Export Released` | Exportação liberada pela China; nada retido. | "Em trânsito" |
 | `The parcel has arrived at the airport and is currently being loaded onto a flight` | No aeroporto de saída após a exportação, sendo carregado no voo. | "Em trânsito" |
-| `Arrived at Shanghai Pudong Airport`, `Departed from export airport` | No aeroporto de Xangai Pudong e embarcado fora da China. | "Em trânsito" |
+| `Arrived at Shanghai Pudong Airport`, `Departed from export airport` | No aeroporto de Xangai, depois em voo para fora da China. | "Em trânsito" |
 | `The ship has already set sail` | Em rota marítima: o navio zarpou da China após a exportação e antes de chegar ao porto de destino. | "Em trânsito" |
 | `Arrived at airport of Destination`, `Shipment arrived in the destination country` | Pousou no seu país. | "Em trânsito" |
 | `NOA received` | O agente no seu país recebeu o aviso de chegada da companhia aérea; a alfândega vem a seguir. | "Em trânsito" |
@@ -63,9 +63,9 @@ A Shouwu chama esses status de "auto-judged by the system" e "only for informati
 | `Picked up` | Nos EUA, a FedEx recolheu o pacote no depósito da Shouwu após a importação (a linha traz cidade e código postal). Não é a coleta no vendedor nem retirada por você. | "Em trânsito" |
 | `Arrived at FedEx location`, `Departed FedEx location` | Leituras próprias da FedEx em unidades nos EUA após recolher no depósito da Shouwu. | "Em trânsito" |
 | `The shipment has been processed in the destination parcel center` | A DHL triou o pacote no centro de encomendas que atende seu endereço, antes da rota. | "Em trânsito" |
-| `Mis routed` | A transportadora na Alemanha enviou o pacote à unidade errada e está redirecionando: atraso leve, sem bloqueio; a entrega ainda pode ocorrer no mesmo dia. | "Em trânsito" |
+| `Mis routed` | A transportadora na Alemanha enviou o pacote à unidade errada e está redirecionando: um atraso, não uma parada. A rota de entrega ainda pode ocorrer no mesmo dia. | "Em trânsito" |
 | `Out for delivery` | Em rota de entrega da transportadora local. | "Saiu para entrega" |
-| `Abnormal delivery` | A tentativa falhou. O motivo da transportadora aparece em seguida em uma linha própria entre sinais de menor/maior, como `<Incorrect address.>`. | "Tentativa de entrega" |
+| `Abnormal delivery` | A rota não entregou o pacote. O motivo da transportadora aparece em seguida em uma linha própria entre sinais de menor/maior, como `<Incorrect address.>`. | "Tentativa de entrega" |
 | `The recipient is unknown` | A rota da DHL na Alemanha não encontrou esse destinatário no endereço; o pacote retorna. | "Tentativa de entrega" |
 | `Shipment will be returned to origin-Bad address` | A DHL está devolvendo o pacote por não localizar o endereço: a caminho de volta, ainda não no remetente. Fale com o vendedor. | "Precisa de atenção" |
 | `Delivered by post man`, `This parcel has been delivered` | Os correios ou a transportadora local entregaram o pacote. | "Entregue", quando o status da Shouwu mostra `Delivered` |
@@ -79,15 +79,15 @@ Quando a iMile entrega na Itália, o histórico da Shouwu repassa as linhas da i
 | `【Milan center】Parcel shipped to【ROM 10】.`, `【ROM 10】Arrived.` | Enviado à estação de entrega da iMile e recebido lá. | "Em trânsito" |
 | `【ROM 10】Shipment out for delivery.` | Em rota de entrega da iMile. | "Saiu para entrega" |
 | `<User not at home>`, `【ROM 10】 Back To DS.` | O entregador não encontrou ninguém e o pacote voltou à estação. | "Tentativa de entrega" |
-| `【ROM 10】Parcel shipped to【Milan Transit Center】.` | Após duas tentativas frustradas, a estação envia o pacote de volta ao centro da iMile. | "Em trânsito" |
-| `Back to Sender for reason: wrong recipient address or address related problem` | Após tentativas falhas, a iMile inicia a devolução por problema de endereço (outro motivo pode aparecer após os dois-pontos): voltando, ainda não no remetente. Fale com o vendedor. | "Precisa de atenção" |
+| `【ROM 10】Parcel shipped to【Milan Transit Center】.` | Após duas rotas sem entrega, a estação envia o pacote de volta ao centro da iMile. | "Em trânsito" |
+| `Back to Sender for reason: wrong recipient address or address related problem` | Após as rotas sem entrega, a iMile inicia a devolução por problema de endereço (outro motivo pode aparecer após os dois-pontos): voltando, ainda não no remetente. Fale com o vendedor. | "Precisa de atenção" |
 | `【Milan Transit Center】Order Closed.` | A iMile encerra a ordem sem entregar; fale com o vendedor. | "Precisa de atenção" |
 
-**Quando a DPD entrega.** Em rotas entregues pela [DPD](carrier:dpd-de), o histórico continua nas palavras da DPD, terminando com ponto final: `In transit.`, depois `At parcel delivery centre.` (depósito entregador da DPD, antes da rota e novamente após tentativa frustrada — "Em trânsito") e `Out for delivery.` ("Saiu para entrega"). `Unfortunately we have not been able to deliver your parcel. Consignee address not correct.` indica tentativa falha por endereço errado: o pacote volta ao depósito da DPD, não ao remetente ("Tentativa de entrega").
+**Quando a DPD entrega.** Em rotas entregues pela [DPD](carrier:dpd-de), o histórico continua nas palavras da DPD, terminando com ponto final: `In transit.`, depois `At parcel delivery centre.` (depósito entregador da DPD, antes da rota e novamente após uma entrega não realizada — "Em trânsito") e `Out for delivery.` ("Saiu para entrega"). `Unfortunately we have not been able to deliver your parcel. Consignee address not correct.` indica uma rota sem entrega por endereço errado: o pacote volta ao depósito da DPD, não ao remetente ("Tentativa de entrega").
 
 **Linhas em chinês.** Alguns pacotes trazem linhas escritas pela Shouwu em chinês, que o Peek mantém como escritas. `货物电子信息已经收到` (dados eletrônicos recebidos) acompanha os dados do pedido: "Etiqueta criada". Em seguida, todas em "Em trânsito": `申报过港中` após um código de lote (lote declarado para travessia terrestre a Hong Kong), `已到港，安排航班中` (no porto de saída, aguardando voo), `预计23号的航班` (voo reservado, aqui para o dia 23; com `二程` na frente para o segundo trecho), `航班已飞` e `二程航班已飞` (voo ou segundo trecho decolou) e `已落地` (pousou). `已落地，清关提货中` (pousou, em desembaraço e coleta na companhia aérea) aparece como "Na alfândega"; `清关完成` (desembaraço concluído) e `已交仓扫描` (escaneado no depósito da entregadora) voltam a "Em trânsito".
 
-**Horários deslocados em horas.** O sistema da Shouwu grava a hora local de cada leitura como se fosse horário de Pequim — inclusive no exterior — e seu rastreador converte isso para o seu fuso. Assim, uma leitura no Reino Unido ou nos EUA aparece horas adiantada, fazendo o voo parecer bem mais curto. Guie-se pela ordem das linhas. O Peek calcula o fuso de cada leitura pela localidade ou trecho e mostra tudo no fuso horário do seu aparelho; em peektracker.com e nos aplicativos iPhone e Android, o histórico termina com "Horários no seu fuso horário:" e o nome dele.
+**Horários deslocados em horas.** O sistema da Shouwu grava a hora local de cada leitura como se fosse horário de Pequim — inclusive no exterior — e seu rastreador converte isso para o seu fuso. Assim, uma leitura no Reino Unido ou nos EUA aparece horas adiantada, fazendo o voo parecer horas mais curto. Guie-se pela ordem das linhas. O Peek calcula o fuso de cada leitura pela localidade ou trecho e mostra tudo no fuso horário do seu aparelho; em peektracker.com e nos aplicativos iPhone e Android, o histórico termina com "Horários no seu fuso horário:" e o nome dele.
 
 ## Quem entrega encomendas da Shouwu
 
@@ -100,7 +100,7 @@ A Shouwu afirma trabalhar diretamente com USPS, Royal Mail, La Poste, DHL, DPD e
 
 O rastreador da Shouwu não exibe o nome nem o código da transportadora final além do que eventualmente apareça no texto de uma movimentação.
 
-**Entregas frustradas.** Tentativas, avisos e pontos de retirada seguem as regras da transportadora local. Sob `Undelivered`, o rastreador orienta contatar a transportadora para reagendar ou retirar logo antes do prazo limite, ou o pacote "might be returned to the sender". Os termos em chinês das linhas para Reino Unido e EUA dizem que encomendas não entregáveis não retornam à China e são destruídas por padrão. Em todo caso, responda a um aviso rapidamente. Veja [entrega frustrada](guide:missed-delivery) e [encomenda não retirada](guide:uncollected-parcel).
+**Entregas não realizadas.** Tentativas, avisos e pontos de retirada seguem as regras da transportadora local. Sob `Undelivered`, o rastreador orienta contatar a transportadora para reagendar ou retirar o pacote logo, antes do prazo dela, ou o pacote "might be returned to the sender". Os termos em chinês das linhas para Reino Unido e EUA dizem que encomendas não entregáveis não retornam à China e são destruídas por padrão. Em todo caso, responda a um aviso rapidamente. Veja [entrega não realizada](guide:missed-delivery) e [encomenda não retirada](guide:uncollected-parcel).
 
 ## Encomenda Shouwu que não chega ou rastreamento parado
 
@@ -130,7 +130,7 @@ O Peek define a etapa a partir do status da Shouwu, conforme as tabelas acima, e
 
 Sem uma transportadora final nomeada, o Peek não mostra linha "Entrega por" nem transfere a encomenda para a entregadora local, mesmo quando o histórico repassa linhas da iMile. Se você tiver o código da transportadora local, adicione-o ao Peek como encomenda separada.
 
-Enquanto você mantém a encomenda aberta, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos — e até a cada 2 minutos a partir das 6h locais no dia em que sai para entrega — enquanto o próprio rastreador da Shouwu responde; nos demais horários, a cada hora. Por serviços de rastreamento, consulta a cada hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega sob a mesma condição. Após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica a cada hora. Ele pode notificar cada movimentação, apenas etapas importantes (entrega, retirada, alfândega, tentativas frustradas e devoluções) ou "Só a entrega". Não pode contatar a Shouwu nem o vendedor por você.
+Enquanto você mantém a encomenda aberta, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos — e até a cada 2 minutos a partir das 6h locais no dia em que sai para entrega — enquanto o próprio rastreador da Shouwu responde; nos demais horários, a cada hora. Por serviços de rastreamento, consulta a cada hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega sob a mesma condição. Após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica a cada hora. Ele pode notificar cada movimentação, apenas etapas importantes (entrega, retirada, alfândega, entregas não realizadas e devoluções) ou "Só a entrega". Não pode contatar a Shouwu nem o vendedor por você.
 
 ## Perguntas frequentes sobre o rastreamento Shouwu
 

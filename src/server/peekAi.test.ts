@@ -10,7 +10,9 @@ vi.mock('./metrics', async (original) => ({
 import { withEventPlaces } from './eventPlaces';
 import { recordPeekAiServed } from './metrics';
 import { captureOperationalError } from './observability';
-import { closedDays, keepPeekAiModel, peekAiBlob, peekAiBlobFrom, peekAiFor, setPeekAiBlob, shortestRange, type PeekAiBlob } from './peekAi';
+import {
+  closedDays, keepPeekAiModel, peekAiBlob, peekAiBlobFrom, peekAiFor, setPeekAiBlob, setPeekAiCallRecord, shortestRange, type PeekAiBlob,
+} from './peekAi';
 import type { PeekAiTree } from './peekAiModel';
 import type { JsonObject } from './types';
 
@@ -63,6 +65,7 @@ const ai = (parcel: JsonObject, now: string, model: PeekAiBlob | null = blob()) 
 
 afterEach(() => {
   setPeekAiBlob(null);
+  setPeekAiCallRecord('missed_date', null);
   vi.useRealTimers();
   vi.mocked(captureOperationalError).mockClear();
 });
@@ -158,16 +161,50 @@ describe("the carrier's day has passed", () => {
   const missed = (fields: JsonObject = {}) => row({ expected_delivery: '2026-11-19', ...fields }, [ACCEPTED, scan('in_transit', '2026-11-20T06:00:00Z')]);
 
   it('says today or tomorrow when a scan came since, by the next day the carrier delivers on, until that day ends', () => {
+    setPeekAiCallRecord('missed_date', { cases: 40, right: 35 });
     expect(ai(missed(), '2026-11-20T14:30:00Z')).toEqual({
-      says: 'today_or_tomorrow', why: 'missed_date', day: '2026-11-21', carrier_day: '2026-11-19', sure: 0.89, ends_at: '2026-11-21T00:00:00+01:00',
+      says: 'today_or_tomorrow', why: 'missed_date', day: '2026-11-21', carrier_day: '2026-11-19', sure: 0.87, ends_at: '2026-11-21T00:00:00+01:00',
     });
     // DPD does not deliver on Saturdays.
     expect(ai(missed({ carrier: 'dpd' }), '2026-11-20T14:30:00Z')).toMatchObject({ says: 'by_day', day: '2026-11-23', ends_at: '2026-11-21T00:00:00+01:00' });
   });
 
   it('says nothing without a scan in the day since, or once the day is further back', () => {
+    setPeekAiCallRecord('missed_date', { cases: 40, right: 35 });
     expect(ai(row({ expected_delivery: '2026-11-19' }), '2026-11-20T20:30:00Z')).toBeNull();
     expect(ai(missed({ expected_delivery: '2026-11-17' }), '2026-11-20T14:30:00Z')).toBeNull();
+  });
+
+  it("waits until 30 of the server's own cases are known and it was right on 8 in 10 of them", () => {
+    const now = '2026-11-20T14:30:00Z';
+    // The model's own figure is not enough: the training measured it on a wider set of parcels.
+    expect(ai(missed(), now)).toBeNull();
+    setPeekAiCallRecord('missed_date', { cases: 29, right: 29 });
+    expect(ai(missed(), now)).toBeNull();
+    setPeekAiCallRecord('missed_date', { cases: 30, right: 23 });
+    expect(ai(missed(), now)).toBeNull();
+    setPeekAiCallRecord('missed_date', { cases: 30, right: 24 });
+    expect(ai(missed(), now)).toMatchObject({ why: 'missed_date', sure: 0.8 });
+    setPeekAiCallRecord('missed_date', { cases: 30, right: 30 });
+    expect(ai(missed(), now)).toMatchObject({ sure: 0.95 });
+  });
+
+  it('notes each case once, with the end of the day it names, whether or not it is said, and again when storing it failed', async () => {
+    const notePeekAiCase = vi.fn().mockRejectedValueOnce(new Error('down')).mockResolvedValue(undefined);
+    const stop = keepPeekAiModel({ latestPeekAiModelVersion: vi.fn().mockResolvedValue(null), peekAiModel: vi.fn(), notePeekAiCase });
+    const first = { package_id: 'noted-1', why: 'missed_date', carrier_day: '2026-11-19', holds_until: '2026-11-22T00:00:00+01:00' };
+    ai(missed({ id: 'noted-1' }), '2026-11-20T14:30:00Z');
+    await vi.waitFor(() => expect(notePeekAiCase).toHaveBeenCalledTimes(1));
+    ai(missed({ id: 'noted-1' }), '2026-11-20T15:30:00Z');
+    ai(missed({ id: 'noted-1' }), '2026-11-20T16:30:00Z');
+    ai(missed({ id: 'noted-2', carrier: 'dpd' }), '2026-11-20T14:30:00Z');
+    expect(notePeekAiCase.mock.calls).toEqual([[first], [first], [{ ...first, package_id: 'noted-2', holds_until: '2026-11-24T00:00:00+01:00' }]]);
+    // Not for a call it would not make.
+    ai(missed({ id: 'noted-3', expected_delivery: '2026-11-17' }), '2026-11-20T14:30:00Z');
+    expect(notePeekAiCase).toHaveBeenCalledTimes(3);
+    stop();
+    ai(missed({ id: 'noted-4' }), '2026-11-20T14:30:00Z');
+    expect(notePeekAiCase).toHaveBeenCalledTimes(3);
   });
 });
 
@@ -355,6 +392,27 @@ describe('the stored model', () => {
     source.latestPeekAiModelVersion.mockResolvedValue(null);
     await vi.advanceTimersByTimeAsync(1000);
     expect(peekAiBlob()).toBeNull();
+    stop();
+  });
+
+  it("loads how the calls it proves on its own cases turned out, keeping the last when that fails", async () => {
+    const source = {
+      latestPeekAiModelVersion: vi.fn().mockResolvedValue(null), peekAiModel: vi.fn(),
+      peekAiCallRecord: vi.fn().mockResolvedValue({ cases: 31, right: 26 }),
+    };
+    const parcel = row({ expected_delivery: '2026-11-19' }, [ACCEPTED, scan('in_transit', '2026-11-20T06:00:00Z')]);
+    vi.useFakeTimers();
+    const stop = keepPeekAiModel(source, 1000);
+    await vi.advanceTimersByTimeAsync(0);
+    expect(source.peekAiCallRecord).toHaveBeenCalledWith('missed_date', 90);
+    expect(ai(parcel, '2026-11-20T14:30:00Z')).toMatchObject({ why: 'missed_date', sure: 0.83 });
+    source.peekAiCallRecord.mockRejectedValue(new Error('down'));
+    await vi.advanceTimersByTimeAsync(1000);
+    expect(captureOperationalError).toHaveBeenCalledWith(expect.any(Error), { component: 'api', operation: 'load_peek_ai_call_record' });
+    expect(ai(parcel, '2026-11-20T14:30:00Z')).toMatchObject({ why: 'missed_date' });
+    source.peekAiCallRecord.mockResolvedValue({ cases: 40, right: 31 });
+    await vi.advanceTimersByTimeAsync(1000);
+    expect(ai(parcel, '2026-11-20T14:30:00Z')).toBeNull();
     stop();
   });
 

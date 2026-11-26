@@ -905,6 +905,10 @@ Key JSON events:
   pass forgot, how many stopped links from accounts it purged and how many alerts of
   finished journeys it ended. `parcel_link_maintenance_failed` when it could not run.
 - `parcel_link_alerts_failed`: how many alerts of parcel links a dispatch could not send.
+- `peek_ai_call_record`: hourly, how a Peek AI call the server proves on its own parcels
+  turned out (`why`, `missed_date`): the `cases` of the last 90 days it can score, those it
+  was `right` on, and whether it is `made` (30 cases, right at least 8 times in 10)
+  ([ARCHITECTURE.md](ARCHITECTURE.md));
 - `app_store_lookup_failed` (warning): the App Store did not say which version of the
   iPhone app is out; the server asks again ten minutes later and offers the app until then
   as it last knew.

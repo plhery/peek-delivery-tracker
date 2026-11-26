@@ -7,7 +7,7 @@ import type { ApiPackageRow, ApiPeekAi, ApiPeekAiSays } from '../generated/apiCo
 import { currentEvent } from '../lib/stages';
 import { toParcel } from '../store/apiRepo';
 import { scanDay } from './eventIdentity';
-import { captureOperationalError } from './observability';
+import { captureOperationalError, logOperationalEvent } from './observability';
 import {
   ARRIVAL_STAGES, codePoints, orderedScans, PHYSICAL_STAGES, predictArrival, scanMilestones, snapshotFeatures,
   statusKey, withTargetEncoding, type AiParcel, type AiScan, type ModelContext, type PeekAiModelDoc,
@@ -21,7 +21,8 @@ import { isRecord, type JsonObject } from './types';
  * - the carrier says today, nothing has gone out for delivery by the afternoon and a check has just looked: not today;
  * - out for delivery on a round that left in the morning: by the hour most of that carrier's deliveries come by, or,
  *   late in the day, not today;
- * - the carrier's day passed yesterday and a scan came since: today or tomorrow;
+ * - the carrier's day passed yesterday and a scan came since: today or tomorrow, once the server has seen it right on
+ *   its own cases (`PROVEN`);
  * - a carrier's day two days ahead or more that parcels like it usually beat: maybe sooner;
  * - no carrier date: a day, today or tomorrow, this week or the end of next week, where the model is sure enough.
  *
@@ -60,6 +61,13 @@ export interface PeekAiBlob extends ModelContext {
 const MAX_SURE = 0.95;
 /** A call right less often than this is not said: a model whose measure slipped below 8 in 10 stays quiet. */
 const MIN_SURE = 0.8;
+/**
+ * A call the training measured on a wider set of parcels than the server makes it for waits for the server's own cases
+ * (`peek_ai_call_cases`): it is made once this many are known and it was right at least `MIN_SURE` of the time.
+ */
+const PROVEN = 30;
+/** How far back the server's own cases count, so a call that stops holding goes quiet again. */
+const PROVEN_DAYS = 90;
 /** Hours since a check after which the model's calls wait for the next one: the scans may be behind the carrier's. */
 const FRESH_HOURS = 36;
 const DEFAULT_DELIVERY_DAYS: readonly number[] = [0, 1, 2, 3, 4, 5];
@@ -70,12 +78,48 @@ const CACHE_SIZE = 5000;
 // One model and cache per process: Next compiles the routes and the instrumentation that loads the model into different
 // module instances, so a module variable set at start would stay empty where the routes read it.
 const stateKey = Symbol.for('peek.peekAiModel');
-const processState = globalThis as typeof globalThis & { [stateKey]?: { blob: PeekAiBlob | null; placed: Map<string, Placed> } };
-const state = processState[stateKey] ??= { blob: null, placed: new Map() };
+const processState = globalThis as typeof globalThis & { [stateKey]?: PeekAiState };
+const state: PeekAiState = processState[stateKey] ??= { blob: null, placed: new Map(), records: {}, noted: new Set() };
+
+/** How a call the server proves on its own cases turned out: the cases known, and those it was right on. */
+export interface PeekAiCallRecord { cases: number; right: number }
+/** A case of such a call: the parcel, the carrier's day it was made after, and when it stops holding. */
+export interface PeekAiCase { package_id: string; why: 'missed_date'; carrier_day: string; holds_until: string }
+
+interface PeekAiState {
+  blob: PeekAiBlob | null;
+  placed: Map<string, Placed>;
+  records: Partial<Record<PeekAiCase['why'], PeekAiCallRecord>>;
+  /** The cases this process noted, each once; `note` stores one. */
+  noted: Set<string>;
+  note?: (found: PeekAiCase) => Promise<void>;
+}
 
 /** The model Peek AI reads, or null while none is loaded. */
 export function peekAiBlob(): PeekAiBlob | null {
   return state.blob;
+}
+
+/** Puts how a call turned out on the server's own cases in place. Tests use it; the server keeps it with `keepPeekAiModel`. */
+export function setPeekAiCallRecord(why: PeekAiCase['why'], record: PeekAiCallRecord | null): void {
+  if (record) state.records[why] = record;
+  else delete state.records[why];
+}
+
+/** Whether a call proven on the server's own cases may be made: `PROVEN` cases known, right at least `MIN_SURE` of them. */
+function proven(why: PeekAiCase['why']): number | null {
+  const record = state.records[why];
+  // Rounded down to hundredths, as the model's figures are, so it never says more than its cases show.
+  return record && record.cases >= PROVEN && record.right / record.cases >= MIN_SURE ? Math.floor(record.right / record.cases * 100) / 100 : null;
+}
+
+/** Notes a case of a call the server proves, once per process; one that fails to be stored is noted again next time. */
+function noteCase(found: PeekAiCase): void {
+  const key = `${found.why}|${found.package_id}|${found.carrier_day}`;
+  if (!state.note || state.noted.has(key)) return;
+  if (state.noted.size >= CACHE_SIZE) state.noted.clear();
+  state.noted.add(key);
+  state.note(found).catch(() => { state.noted.delete(key); });
 }
 
 /** Puts a model in place, or takes it away. Tests use it; the server keeps it with `keepPeekAiModel`. */
@@ -87,11 +131,30 @@ export function setPeekAiBlob(blob: PeekAiBlob | null): void {
 export interface PeekAiModelSource {
   latestPeekAiModelVersion(): Promise<string | null>;
   peekAiModel(version: string): Promise<unknown>;
+  /** How a call turned out on the server's own cases of the last `days` days (`peek_ai_call_record`). */
+  peekAiCallRecord?(why: PeekAiCase['why'], days: number): Promise<PeekAiCallRecord>;
+  /** Stores a case of a call the server proves, keeping the first noted for the parcel and day (`peek_ai_call_cases`). */
+  notePeekAiCase?(found: PeekAiCase): Promise<void>;
 }
 
-/** Loads the newest stored model now and every hour after; a model that fails to load leaves the one in place. */
+/**
+ * Loads the newest stored model now and every hour after, with how the calls the server proves on its own cases turned
+ * out; a model or record that fails to load leaves the one in place.
+ */
 export function keepPeekAiModel(source: PeekAiModelSource, every = 3_600_000): () => void {
+  const note = source.notePeekAiCase ? (found: PeekAiCase) => source.notePeekAiCase!(found) : undefined;
+  if (note) state.note = note;
   const load = async () => {
+    if (source.peekAiCallRecord) {
+      try {
+        const record = await source.peekAiCallRecord('missed_date', PROVEN_DAYS);
+        setPeekAiCallRecord('missed_date', record);
+        logOperationalEvent('peek_ai_call_record', { why: 'missed_date', cases: record.cases, right: record.right,
+          made: proven('missed_date') !== null });
+      } catch (error) {
+        captureOperationalError(error, { component: 'api', operation: 'load_peek_ai_call_record' });
+      }
+    }
     try {
       const version = await source.latestPeekAiModelVersion();
       if (version === null) return setPeekAiBlob(null);
@@ -106,7 +169,10 @@ export function keepPeekAiModel(source: PeekAiModelSource, every = 3_600_000): (
   void load();
   const timer = setInterval(() => void load(), every);
   timer.unref?.();
-  return () => clearInterval(timer);
+  return () => {
+    clearInterval(timer);
+    if (note && state.note === note) delete state.note;
+  };
 }
 
 const numbers = (value: unknown) => isRecord(value) && Object.values(value).every((item) => typeof item === 'number');
@@ -510,8 +576,13 @@ function call(row: JsonObject, c: string, placed: Placed, local: DateTime, blob:
   if (carrierDay === today - 1) {
     if (!past.some((scan) => scan.ts > nowS - 86_400)) return null;
     const by = endDay(delivers, today, 1);
-    return { says: by <= today + 1 ? 'today_or_tomorrow' : 'by_day', why: 'missed_date', day: isoDay(by),
-      carrier_day: isoDay(carrierDay), sure: capped(blob.sure.missed_date!) };
+    // The training measured it on more parcels than this condition takes: it waits until it holds on the server's own.
+    const id = typeof row.id === 'string' ? row.id : '';
+    if (id) noteCase({ package_id: id, why: 'missed_date', carrier_day: isoDay(carrierDay),
+      holds_until: DateTime.fromISO(isoDay(by), { zone }).plus({ days: 1 }).toISO({ suppressMilliseconds: true })! });
+    const sure = proven('missed_date');
+    return sure === null ? null : { says: by <= today + 1 ? 'today_or_tomorrow' : 'by_day', why: 'missed_date', day: isoDay(by),
+      carrier_day: isoDay(carrierDay), sure: capped(sure) };
   }
   if (carrierDay !== null && carrierDay < today) return null;
 

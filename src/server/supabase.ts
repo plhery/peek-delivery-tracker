@@ -10,6 +10,7 @@ import type { AssistantClient } from './assistants/clients';
 import type { SyncQueue } from './metrics';
 import { SCOPES, type Scope } from './assistants/settings';
 import { scanSource } from './scanRepeats';
+import type { PeekAiCallRecord, PeekAiCase } from './peekAi';
 import { DIRECT_HISTORY, heldRows } from './providerCopies';
 import { providerLimit } from './providerPolicy';
 import { withReviewDemo } from './reviewDemo';
@@ -3145,6 +3146,24 @@ export class SupabaseServiceClient extends SupabaseClient {
       ['select', 'model'], ['version', `eq.${version}`], ['limit', '1'],
     ])}`));
     return row?.model ?? null;
+  }
+
+  /** Stores a case of a Peek AI call the server proves on its own, keeping the first noted for the parcel and day. */
+  async notePeekAiCase(found: PeekAiCase): Promise<void> {
+    await this.request(`/rest/v1/peek_ai_call_cases?${query({ on_conflict: 'package_id,why,carrier_day' })}`, {
+      method: 'POST',
+      body: found,
+      prefer: 'resolution=ignore-duplicates,return=minimal',
+    });
+  }
+
+  /** How a Peek AI call turned out on the server's own cases noted in the last `days` days. */
+  async peekAiCallRecord(why: PeekAiCase['why'], days: number): Promise<PeekAiCallRecord> {
+    const result = await this.request('/rest/v1/rpc/peek_ai_call_record', { method: 'POST', body: { p_why: why, p_days: days } });
+    const cases = isRecord(result) ? result.cases : null;
+    const right = isRecord(result) ? result.right : null;
+    if (!Number.isInteger(cases) || !Number.isInteger(right)) throw new Error('Peek AI call record is malformed');
+    return { cases: cases as number, right: right as number };
   }
 
   /**

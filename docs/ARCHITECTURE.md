@@ -898,7 +898,12 @@ number, which no carrier tracks.
   in 10 on the parcels Peek has followed; below that, once the carrier has planned the
   delivery among its steps, while an hour or slot it names for today is still to come, or
   against a window of days it gives, it says nothing. "By a time" is said only of a round that
-  left before the carrier's usual start (`start_before`): later rounds end later. The model and its tables are trained in
+  left before the carrier's usual start (`start_before`): later rounds end later. "Today or
+  tomorrow" after a carrier's day that has passed waits for the server's own parcels, as the
+  training measured it on a wider set: the server notes each parcel it would say it of
+  (`peek_ai_call_cases`, with the end of the day it names), and says it once 30 of the last
+  90 days' can be scored and it was right on at least 8 in 10 (`peek_ai_call_record`, read
+  hourly); a parcel counts once it arrived or was checked after that day. The model and its tables are trained in
   private on production data and kept in `peek_ai_models`, which only the service role reads;
   the server loads the newest at start and every hour, and with none loaded says nothing. A
   wrapped gift's link shows none, nor do emails, friends' passports or a link's preview, which

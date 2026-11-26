@@ -45,15 +45,17 @@ class KeyboardScrollTest {
 
     private lateinit var view: View
     private var text by mutableStateOf("")
+    private var topText by mutableStateOf("")
 
-    /** The page: as tall as the window, its field at the foot. */
-    private fun show(reduceMotion: Boolean) {
+    /** The page: as tall as the window, its field at the foot, and with [above] another at its top. */
+    private fun show(reduceMotion: Boolean, above: Boolean = false) {
         compose.setContent {
             view = LocalView.current
             PeekTheme(dark = false, highContrast = false, reduceMotion = reduceMotion, reduceTransparency = false, carrierIdentities = null) {
                 Box(Modifier.fillMaxSize()) {
                     KeyboardScrollColumn(Modifier.fillMaxSize()) {
-                        Spacer(Modifier.height(804.dp))
+                        if (above) BasicTextField(topText, { topText = it }, Modifier.fillMaxWidth().height(40.dp).testTag(TOP))
+                        Spacer(Modifier.height(if (above) 764.dp else 804.dp))
                         BasicTextField(text, { text = it }, Modifier.fillMaxWidth().height(40.dp).testTag(FIELD))
                     }
                 }
@@ -108,6 +110,19 @@ class KeyboardScrollTest {
     }
 
     @Test
+    fun andWhenTheFocusMovesToItFromAFieldAboveWithTheKeyboardUp() {
+        show(reduceMotion = false, above = true)
+        compose.onNodeWithTag(TOP).performClick()
+        keyboard(300)
+        compose.waitForIdle()
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.onNodeWithTag(FIELD).performClick()
+        compose.waitForIdle()
+        compose.mainClock.advanceTimeBy(1_000)
+        assertTheFieldAboveTheKeyboard(300)
+    }
+
+    @Test
     fun underReduceMotionToo() {
         show(reduceMotion = true)
         compose.onNodeWithTag(FIELD).performClick()
@@ -119,3 +134,4 @@ class KeyboardScrollTest {
 }
 
 private const val FIELD = "keyboardScroll.test.field"
+private const val TOP = "keyboardScroll.test.top"

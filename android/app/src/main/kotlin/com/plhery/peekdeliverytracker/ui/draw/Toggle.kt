@@ -39,6 +39,7 @@ import androidx.compose.ui.graphics.drawscope.clipRect
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.lerp
+import androidx.compose.ui.graphics.nativePaint
 import androidx.compose.ui.input.pointer.PointerInputScope
 import androidx.compose.ui.input.pointer.changedToUpIgnoreConsumed
 import androidx.compose.ui.input.pointer.pointerInput
@@ -215,7 +216,7 @@ private fun DrawScope.drawShadow(lens: Rect, outline: Path, glass: Float) {
 /** Black at `alpha`, blurred as a Gaussian of `deviation`. */
 private fun DrawScope.blurred(deviation: Dp, alpha: Float): Paint = Paint().apply {
     color = Color.Black.copy(alpha = alpha)
-    asFrameworkPaint().maskFilter = BlurMaskFilter(gaussianBlurRadius(deviation).toPx(), BlurMaskFilter.Blur.NORMAL)
+    nativePaint.maskFilter = BlurMaskFilter(gaussianBlurRadius(deviation).toPx(), BlurMaskFilter.Blur.NORMAL)
 }
 
 /**

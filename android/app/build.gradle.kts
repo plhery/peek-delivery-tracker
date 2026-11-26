@@ -97,6 +97,7 @@ val firebaseSettings = mapOf(
 android {
     namespace = "com.plhery.peekdeliverytracker"
     compileSdk = 37
+    compileSdkMinor = 1
 
     defaultConfig {
         applicationId = "com.plhery.peekdeliverytracker"

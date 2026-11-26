@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.navigationBars
-import androidx.compose.foundation.onFocusedBoundsChanged
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -24,7 +23,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusTargetModifierNode
+import androidx.compose.ui.focus.Focusability
+import androidx.compose.ui.focus.getFocusedRect
+import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.layout.IntrinsicMeasurable
 import androidx.compose.ui.layout.IntrinsicMeasureScope
 import androidx.compose.ui.layout.LayoutCoordinates
@@ -33,8 +37,10 @@ import androidx.compose.ui.layout.MeasureResult
 import androidx.compose.ui.layout.MeasureScope
 import androidx.compose.ui.layout.findRootCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.node.DelegatingNode
 import androidx.compose.ui.node.LayoutModifierNode
 import androidx.compose.ui.node.ModifierNodeElement
+import androidx.compose.ui.node.requireLayoutCoordinates
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Density
@@ -76,7 +82,7 @@ internal fun KeyboardScrollColumn(
     val drag = if (dismissesKeyboard) rememberKeyboardDrag() else null
     LaunchedEffect(keyboard, top, reduceMotion, scroll) {
         val clearance = with(density) { top.toPx() }
-        snapshotFlow { Triple(keyboard.focused, keyboard.covered(ime.getBottom(density)), keyboard.height) }.collectLatest { (_, covered, _) ->
+        snapshotFlow { Triple(keyboard.focusMoves, keyboard.covered(ime.getBottom(density)), keyboard.height) }.collectLatest { (_, covered, _) ->
             reachTheFocusedField(
                 offset = { keyboard.focusedOffset(clearance, covered) },
                 scrollBy = { if (reduceMotion) scroll.scrollBy(it) else scroll.animateScrollBy(it) },
@@ -89,7 +95,8 @@ internal fun KeyboardScrollColumn(
             .onGloballyPositioned { keyboard.place(it) }
             .then(if (drag != null) Modifier.keyboardDrag(drag) else Modifier)
             .verticalScroll(scroll)
-            .onFocusedBoundsChanged { keyboard.focused = it }
+            .then(FocusedField(keyboard))
+            .onFocusEvent { keyboard.focusMoved() }
             .then(KeyboardRoom(keyboard, ime, bottom))
             .then(contentModifier),
         verticalArrangement = verticalArrangement,
@@ -192,8 +199,16 @@ private class SheetKeyboard {
     var height by mutableIntStateOf(0)
         private set
 
-    /** The field with the focus, or null. */
-    var focused: LayoutCoordinates? by mutableStateOf(null)
+    /** How many times the focus has moved among the fields, to look for the field with it again. */
+    var focusMoves by mutableIntStateOf(0)
+        private set
+
+    /** What finds the field with the focus ([FocusedField]). */
+    var fields: FocusedFieldNode? = null
+
+    fun focusMoved() {
+        focusMoves++
+    }
 
     /** Where the content scrolls. */
     private var viewport: LayoutCoordinates? = null
@@ -218,15 +233,51 @@ private class SheetKeyboard {
      * is taller than the room.
      */
     fun focusedOffset(top: Float, covered: Int): Float {
-        val field = focused?.takeIf { it.isAttached } ?: return 0f
         val viewport = viewport?.takeIf { it.isAttached } ?: return 0f
-        val bounds = viewport.localBoundingBoxOf(field, clipBounds = false)
+        val bounds = fields?.focusedBounds(viewport) ?: return 0f
         val bottom = viewport.size.height - covered
         return when {
             bounds.top < top -> bounds.top - top
             bounds.bottom > bottom -> min(bounds.bottom - bottom, bounds.top - top)
             else -> 0f
         }
+    }
+}
+
+/**
+ * Where the fields are, for [SheetKeyboard] to find the one with the focus as it needs it: a focus target that takes no
+ * focus itself, as the scroll's own.
+ */
+private data class FocusedField(val keyboard: SheetKeyboard) : ModifierNodeElement<FocusedFieldNode>() {
+    override fun create() = FocusedFieldNode(keyboard)
+
+    override fun update(node: FocusedFieldNode) {
+        node.detachFrom()
+        node.keyboard = keyboard
+        node.attachTo()
+    }
+}
+
+private class FocusedFieldNode(var keyboard: SheetKeyboard) : DelegatingNode() {
+    private val target = delegate(FocusTargetModifierNode(Focusability.Never))
+
+    fun attachTo() {
+        if (isAttached) keyboard.fields = this
+    }
+
+    fun detachFrom() {
+        if (keyboard.fields === this) keyboard.fields = null
+    }
+
+    override fun onAttach() = attachTo()
+
+    override fun onDetach() = detachFrom()
+
+    /** The bounds of the field with the focus in [viewport]'s coordinates, or null where none has it. */
+    fun focusedBounds(viewport: LayoutCoordinates): Rect? {
+        if (!isAttached) return null
+        val rect = target.getFocusedRect() ?: return null
+        return Rect(viewport.localPositionOf(requireLayoutCoordinates(), rect.topLeft), rect.size)
     }
 }
 

@@ -11,6 +11,7 @@ plugins {
 android {
     namespace = "com.plhery.peekdeliverytracker.coredevice"
     compileSdk = 37
+    compileSdkMinor = 1
 
     defaultConfig {
         minSdk = 31

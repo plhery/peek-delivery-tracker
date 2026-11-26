@@ -2,7 +2,8 @@
 # Columns: SF Symbol, Material Symbols name ("-" where Android draws none; `name#n` the icon's nth outline alone; `name~`
 # its shapes hollowed to a band inside their edges as wide as the icons' lines at that weight; `a + b` and `a - b` b
 # drawn over a or cut out of it, placed and sized as SF's inner glyph), fill (1 for SF's .fill variants),
-# where iOS draws it, and how close the match is. A use is `File:line size weight`: the
+# where iOS draws it (`android:File` where only Android does), and how close the match is. A use is
+# `File:line size weight`: the
 # symbol's point size (text styles at the default size: caption2 11, caption 12, footnote 13, subheadline 15, callout
 # 16, body and headline 17, title3 20, title2 22, title 28) and SF weight; `inherited` takes the surrounding font (body,
 # regular unless noted), `menu`, `tab` and `toolbar` the system's (24 dp on Android), `phase` the widget's three phase
@@ -35,7 +36,7 @@ book.closed.fill	book	1	ParcelListView:33 tab	close
 box.truck	-	0	ShortcutIntents:15 none	not drawn: the App Shortcut's icon, which Siri and Shortcuts draw
 box.truck.fill	local_shipping	1	MacMenuBar:205 mac	close
 building.columns	account_balance	0	ParcelLogic:59 15 regular	close
-camera	photo_camera	0	ParcelNoteSheet:1 17 regular	close
+camera	photo_camera	0	android:ParcelNote 17 regular; ParcelNoteViews:935 menu	close
 chart.bar	bar_chart	0	PeekAiViews:213 16 regular	close
 checkmark	check	0	ParcelListView:1022 36 ultraLight; ParcelListView:1706 11 light; ParcelListView:1841 11 light; ParcelShareSheet:230 13 semibold; ParcelLinkSheet:910 14 regular; CarrierPicker:373 17 semibold; FriendsView:433 13 regular; FriendsView:434 12 regular; ParcelDetailView:651 15 regular; ParcelDetailView:704 14 regular	close
 checkmark.circle	check_circle	0	FriendsView:40 15 regular	close
@@ -50,9 +51,10 @@ chevron.up	keyboard_arrow_up	0	ParcelDetailView:1485 10 regular	close
 chevron.up.chevron.down	unfold_more	0	AddParcelView:1441 11 semibold; SettingsViews:1033 11 regular	close
 circle	radio_button_unchecked	0	AddParcelView:497 20 regular; SettingsViews:166 16 regular	close
 clock	schedule	0	ParcelListView:1790 11 semibold	close
-doc	draft	0	ParcelNoteSheet:1 17 regular	close
+doc	draft	0	android:ParcelNote 17 regular	close
 doc.on.clipboard	content_paste	0	FirstOpenView:517 20 medium; FirstOpenView:713 17 medium; AddParcelView:376 12 regular	close
 doc.on.doc	content_copy	0	ParcelShareSheet:230 13 semibold; ParcelLinkSheet:910 14 regular; FriendsView:433 13 regular; ParcelDetailView:648 15 regular; ParcelDetailView:704 14 regular; ParcelLogic:920 menu	close
+doc.plaintext	description	0	ParcelNoteViews:375 inherited; ParcelLogic:1300 menu	close
 doc.text	description	0	ParcelLogic:56 15 regular	close
 ellipsis	more_horiz	0	ParcelDetailView:139 toolbar	close
 envelope	mail	0	ParcelAlerts:255 17 regular; SignInView:628 15 medium; SettingsViews:330 15 light; ParcelAlerts:81 16 regular	close
@@ -61,6 +63,7 @@ exclamationmark.circle.fill	error	1	DeliveryWidget:468 phase	close
 exclamationmark.triangle	warning	0	ParcelListView:1789 11 semibold; ParcelLogic:62 15 regular; ParcelDetailView:442 11 semibold; ParcelDetailView:445 11 semibold	close
 exclamationmark.triangle.fill	warning	1	ParcelFeedbackViews:434 inherited; ParcelListView:1118 inherited; AddParcelView:707 inherited; SignInView:724 12 regular; ParcelDetailView:1211 inherited; DeliveryWidget:467 phase	close
 eye	visibility	0	PeekAiViews:218 16 regular	close
+folder	folder	0	ParcelNoteViews:939 menu	close
 gear	settings	0	SettingsViews:132 inherited	close
 gearshape	settings	0	SettingsViews:941 mac	close
 gift	featured_seasonal_and_gifts	0	ParcelShareSheet:184 16 regular; PassportView:284 22 ultraLight; FriendsStore:219 22 ultraLight; ParcelLinkSheet:502 12 semibold; ParcelLinkSheet:778 inherited; ParcelLinkSheet:827 inherited; SignInView:1141 12 medium	close
@@ -70,6 +73,7 @@ hand.raised	front_hand	0	SettingsViews:653 15 light	close
 hourglass	hourglass_full	0	PassportView:278 22 ultraLight; FriendsStore:219 22 ultraLight; ParcelDetailView:1777 17 regular	close: solid, as SF's hourglass is
 house	cottage	0	PassportView:276 22 ultraLight; FriendsStore:219 22 ultraLight	close: the cottage's filled door, as SF's house has; its smoke where SF draws a chimney
 info.circle	info	0	ParcelShareSheet:144 13 regular; ParcelShareSheet:195 13 regular; ParcelShareSheet:196 13 regular; ParcelDetailView:577 17 regular	close
+iphone	smartphone	0	ParcelNoteViews:803 13 regular	close
 keyboard	keyboard	0	FirstOpenView:749 15 regular	close
 largecircle.fill.circle	radio_button_checked	0	SettingsViews:166 16 regular	close
 lightbulb	lightbulb	0	PeekAiViews:212 16 regular	close
@@ -81,15 +85,16 @@ lock.fill	lock	1	SignInView:507 12 semibold	close
 magnifyingglass	search	0	ParcelListView:937 17 regular; ParcelListView:972 inherited; ParcelListView:1015 inherited; ParcelDetailView:635 15 semibold; ParcelLogic:55 15 regular	close
 map	map	0	PassportView:272 22 ultraLight; FriendsStore:219 22 ultraLight	close
 menubar.rectangle	toolbar	0	SettingsViews:975 mac	close
-note.text	sticky_note_2	0	ParcelNote:1 inherited; ParcelLogic:1 menu	close
-note.text.badge.plus	note_add	0	ParcelLogic:1 menu	close
-paperclip	attach_file	0	ParcelNote:1 inherited; ParcelNoteSheet:1 17 regular	close
+note.text	sticky_note_2	0	android:ParcelNote inherited; android:ParcelLogic menu	close
+note.text.badge.plus	note_add	0	android:ParcelLogic menu	close
+paperclip	attach_file	0	android:ParcelNote inherited; android:ParcelNote 17 regular; ParcelNoteViews:941 inherited; ParcelNoteViews:1028 28 regular	close
 pencil	edit	0	ParcelShareSheet:180 16 regular; ParcelLogic:918 menu	close
 person.2.fill	group	1	ParcelListView:41 tab; SignInView:192 30 medium; FriendsView:572 20 regular	close
 person.badge.key.fill	passkey	1	SignInView:589 inherited	close
 person.crop.circle	account_circle	0	SettingsViews:950 mac	close
 person.fill	person	1	DesignSystem:268 15 semibold	close
-photo.on.rectangle	photo_library	0	ParcelNoteSheet:1 17 regular	close
+photo	image	0	ParcelNoteViews:543 20 regular	close
+photo.on.rectangle	photo_library	0	android:ParcelNote 17 regular; ParcelNoteViews:938 menu	close
 plus	add	0	ParcelListView:901 17 semibold; ParcelLinkSheet:170 17 semibold; FriendsView:146 inherited; FriendsView:157 12 medium	close
 plus.circle	-	0	ShortcutIntents:21 none	not drawn: the App Shortcut's icon, which Siri and Shortcuts draw
 power	power_settings_new	0	SettingsViews:982 mac	close
@@ -99,16 +104,18 @@ shippingbox.fill	package_2	1	ParcelListView:26 tab; ParcelListView:2854 15 regul
 slider.horizontal.3	tune	0	FriendsView:136 13 regular	close
 sparkle	auto_awesome#3	1	SignInView:1324 13 medium; SignInView:1324 16 medium; SignInView:1324 18 medium; SignInView:1324 23 medium; SignInView:1324 24 medium; SignInView:1324 25 medium	close: the large star of auto_awesome alone, as SF draws one
 square	check_box_outline_blank	0	FriendsView:397 17 regular	close
-square.and.arrow.down	download	0	ParcelNoteViewer:1 17 regular	close
+square.and.arrow.down	download	0	android:ParcelNote 17 regular	close
 square.and.arrow.up	ios_share	0	FriendsView:430 inherited; ParcelDetailView:319 16 regular; ParcelDetailView:329 16 regular; ParcelShareSheet:147 17 semibold; ParcelLogic:919 menu; SettingsViews:650 15 light	close
 storefront	storefront	0	PassportView:282 22 ultraLight; FriendsStore:219 22 ultraLight; ParcelLogic:63 15 regular; ParcelDetailView:598 17 regular	close: the awning's scallops, though Material's has no door or window
 storefront.fill	storefront	1	DeliveryWidget:469 phase	close
+trash.fill	delete	1	ParcelDetailView:1222 inherited; ParcelNoteViews:1016 inherited	close
 tray.and.arrow.down	move_to_inbox	0	ShareViewController:102 inherited; ShareViewController:248 17 semibold	close
 trash	delete	0	ParcelLogic:924 menu	close
 truck.box	local_shipping	0	ParcelLogic:58 15 regular; ParcelLogic:921 menu	close
 wand.and.sparkles	auto_fix_high	0	CarrierPicker:301 inherited; AddParcelView:536 12 regular; ParcelDetailView:1153 inherited	close
 wave.3.right	sensors	0	SettingsViews:486 15 light	none close: waves to both sides
 wifi.exclamationmark	android_wifi_3_bar_alert	0	ParcelListView:748 17 semibold; ParcelLinkSheet:340 34 light	close: a Wi-Fi fan with an exclamation mark at its foot, where SF's mark splits the fan
+wifi.slash	wifi_off	0	ParcelNoteViews:853 16 semibold; ParcelNoteViews:903 inherited	close
 wrench.and.screwdriver.fill	construction	1	SignInView:530 17 semibold	close
 xmark	close	0	ParcelFeedbackViews:631 13 semibold; ParcelListView:1201 11 bold; ParcelMapView:145 15 semibold; ParcelShareSheet:124 13 semibold; AddParcelView:217 17 medium; ParcelAlerts:117 13 semibold; SignInView:230 inherited; FriendsView:579 inherited	close
 xmark.circle.fill	cancel	1	ParcelListView:150 20 regular hierarchical; ParcelListView:983 inherited	close

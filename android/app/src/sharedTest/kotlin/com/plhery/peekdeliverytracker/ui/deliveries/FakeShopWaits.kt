@@ -8,8 +8,9 @@ import kotlinx.coroutines.CompletableDeferred
 
 /**
  * Shop waits as a test sets them: each read answers [waits], or fails with [failure]; a removal waits for [removing]
- * when a test holds it, then fails with [removeFailure] if a test sets one, or takes the wait out of [waits].
- * [requests] notes what was asked, in order. Nothing leaves the test.
+ * when a test holds it, then fails with [removeFailure] if a test sets one, or takes the wait out of [waits]; a keep
+ * waits for [keepHolding] when a test holds it, then fails with [keepFailure], or adds [keeping] to [waits] and answers
+ * it. [requests] notes what was asked, in order, and [kept] each keep's links and name. Nothing leaves the test.
  */
 class FakeShopWaitsClient : ShopWaitsClient {
     var waits: List<ShopWait> = emptyList()
@@ -29,6 +30,21 @@ class FakeShopWaitsClient : ShopWaitsClient {
         removing?.await()
         removeFailure?.let { throw it }
         waits = waits.filterNot { it.id == id }
+    }
+
+    var keeping: ShopWait? = null
+    var keepFailure: Exception? = null
+    var keepHolding: CompletableDeferred<Unit>? = null
+    val kept = mutableListOf<Pair<String, String>>()
+
+    override suspend fun keep(text: String, label: String): List<ShopWait> {
+        requests += "keep"
+        kept += text to label
+        keepHolding?.await()
+        keepFailure?.let { throw it }
+        val wait = keeping ?: return emptyList()
+        if (waits.none { it.id == wait.id }) waits = waits + wait
+        return listOf(wait)
     }
 }
 

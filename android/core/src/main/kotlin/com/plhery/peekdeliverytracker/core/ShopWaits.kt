@@ -29,6 +29,9 @@ interface ShopWaitsClient {
 
     /** Stops waiting: one already gone counts as done. */
     suspend fun remove(id: UUID)
+
+    /** Waits for the parcels of the shop links in [text], named [label]: the account's waits for those links. */
+    suspend fun keep(text: String, label: String): List<ShopWait>
 }
 
 /** The waits' requests through the app's API client. */
@@ -36,6 +39,8 @@ fun DeliveryApiClient.shopWaitsClient(): ShopWaitsClient = object : ShopWaitsCli
     override suspend fun list() = shopWaits()
 
     override suspend fun remove(id: UUID) = removeShopWait(id)
+
+    override suspend fun keep(text: String, label: String) = keepShopWait(text, label)
 }
 
 /**
@@ -181,6 +186,22 @@ class ShopWaitsStore(private val client: ShopWaitsClient, private val demo: () -
         known = ids
         shownState.value = Shown(owner, next.filter { it.id !in removed })
         return gone
+    }
+
+    /**
+     * Waits for the shop links in [text], named [label], for [owner] (Add's "Wait for H&M"): the waits the server kept
+     * join the list at once, then the account's are read again. True when that read found one gone without the reader.
+     * A failure to keep throws, and leaves the list as it was.
+     */
+    suspend fun keep(owner: ShopWaitsOwner.Account, text: String, label: String): Boolean {
+        show(owner)
+        val started = generation
+        val kept = client.keep(text, label)
+        val shown = shownState.value
+        if (started != generation || shown == null) return false
+        val added = kept.filter { wait -> wait.id !in removed && shown.waits.none { it.id == wait.id } }
+        shownState.value = shown.copy(waits = shown.waits + added)
+        return read(owner)
     }
 
     /**

@@ -1014,6 +1014,19 @@ internal class DeliveriesState(
         }
     }
 
+    /**
+     * Add's "Wait for H&M" (the web's `waitForShop` submit): the account waits for the shop links in `text`, named by
+     * the trimmed `label`, while Add waits as it does for a save; once kept, its card is on the list and Add closes.
+     * Once failed, why, as a save's failure.
+     */
+    fun waitForShop(request: AddRequest, text: String, label: String) {
+        if (addition?.id != request.id) return
+        source.pageWork.run(request.id, source.scope, source::errorMessage) {
+            source.waitForShop(text, label.trim())
+            if (addition?.id == request.id) closeAdd()
+        }
+    }
+
     /** `onAdded`: the parcel Add with `request` added, kept to show on the list only while the window is in front. */
     fun added(request: AddRequest, parcelId: UUID) {
         if (addition?.id == request.id && inFront) addedParcel = parcelId

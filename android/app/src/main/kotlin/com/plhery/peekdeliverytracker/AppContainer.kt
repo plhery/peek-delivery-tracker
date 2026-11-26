@@ -63,6 +63,7 @@ import com.plhery.peekdeliverytracker.core.TrackingLocation
 import com.plhery.peekdeliverytracker.core.UserDefaults
 import com.plhery.peekdeliverytracker.core.WebAuthenticating
 import com.plhery.peekdeliverytracker.core.WeightPreference
+import com.plhery.peekdeliverytracker.core.api.ShopLinkResponse
 import com.plhery.peekdeliverytracker.core.identifying
 import com.plhery.peekdeliverytracker.platform.AndroidPushNotifications
 import com.plhery.peekdeliverytracker.platform.AppNotifications
@@ -383,6 +384,14 @@ class AppContainer(
 
     /** The list's waits for shops that haven't shipped yet: the demo's one, or the account's. */
     val shopWaits = ShopWaitsStore(api.shopWaitsClient())
+
+    /**
+     * What the shop links in a text name, as Add reads a shop's tracking-page link: the account's request signed in,
+     * the public one for anyone else. The links go in the request's body alone.
+     */
+    suspend fun readShopLink(text: String): ShopLinkResponse =
+        if (session.stateFlow.value is AuthenticationState.SignedIn) api.readShopLink(text)
+        else DeliveryApiClient.publicShopLink(text, configuration, transport)
 
     /** `ParcelLinkStore()`, or in a debug build the preview `sdt.debug.parcelLink` asks for; a test's reads before both. */
     val links: ParcelLinkStore = linkReader?.let { ParcelLinkStore(defaults, read = it) }

@@ -49,7 +49,10 @@ import com.plhery.peekdeliverytracker.core.api.QueueResponse
 import com.plhery.peekdeliverytracker.core.api.RenamePackageRequest
 import com.plhery.peekdeliverytracker.core.api.RevokeLiveActivityDeviceRequest
 import com.plhery.peekdeliverytracker.core.api.ShareParcelRequest
+import com.plhery.peekdeliverytracker.core.api.ShopLinkRequest
+import com.plhery.peekdeliverytracker.core.api.ShopLinkResponse
 import com.plhery.peekdeliverytracker.core.api.ShopWait
+import com.plhery.peekdeliverytracker.core.api.ShopWaitRequest
 import com.plhery.peekdeliverytracker.core.api.SyncJobListResponse
 import com.plhery.peekdeliverytracker.core.api.SyncJobStatus
 import com.plhery.peekdeliverytracker.core.api.UuidSerializer
@@ -768,6 +771,18 @@ class DeliveryApiClient(
         rawRequest("$SHOP_WAITS/${id.toString().lowercase()}", "DELETE", missing = 404)
     }
 
+    /**
+     * What the shop links in [text] name, read for the account ([ShopLinkResponseReader]): the parcels, or why a link
+     * names none. The body holds the links, which open the reader's order: they go to Peek alone.
+     */
+    suspend fun readShopLink(text: String): ShopLinkResponse =
+        request(SHOP_LINKS, ShopLinkResponseReader, "POST", encode(ShopLinkRequest.serializer(), ShopLinkRequest(text = text)))
+
+    /** Waits for the parcels of the shop links in [text], named [label]: the account's waits for those links. */
+    suspend fun keepShopWait(text: String, label: String): List<ShopWait> = request(
+        SHOP_WAITS, ShopWaitsResponseReader, "POST", encode(ShopWaitRequest.serializer(), ShopWaitRequest(text = text, label = label)),
+    ).shopWaits
+
     private fun <T> encode(serializer: SerializationStrategy<T>, value: T): ByteArray = JsonEncoder.deliveryTracker.encode(serializer, value)
 
     private suspend fun <T> request(path: String, response: DeserializationStrategy<T>, method: String = "GET", body: ByteArray? = null): T =
@@ -944,6 +959,38 @@ class DeliveryApiClient(
                 }
                 404 -> if (response.isServiceNotFound) null else throw Maintenance.serverDown(response) ?: DeliveryApiError.ServiceFailed(404)
                 410 -> throw ParcelLinkStopped()
+                429 -> throw DeliveryApiError.RateLimited(retryAfterSeconds(response.header("Retry-After")))
+                else -> throw Maintenance.serverDown(response) ?: DeliveryApiError.ServiceFailed(response.statusCode)
+            }
+        }
+
+        /**
+         * What the shop links in [text] name, for a visitor not signed in ([readShopLink]'s public twin): no sign-in or
+         * cookies, counted per network, as JSON the cross-site rule takes from an app. The body holds the links alone.
+         */
+        suspend fun publicShopLink(text: String, configuration: AppConfiguration, transport: HttpTransport): ShopLinkResponse {
+            val request = HttpRequest(
+                url = configuration.apiBaseUrl.appendingPath("api/public/shop-links"),
+                method = "POST",
+                headers = linkedMapOf(
+                    "Accept" to "application/json", "Content-Type" to "application/json", "X-Requested-With" to "XMLHttpRequest",
+                    "X-Peek-Inputs" to CLIENT_INPUTS,
+                ),
+                body = JsonEncoder.deliveryTracker.encode(ShopLinkRequest.serializer(), ShopLinkRequest(text = text)),
+                timeout = 15.0,
+                handlesCookies = false,
+            )
+            val response = try {
+                transport.data(request)
+            } catch (error: Exception) {
+                throw Maintenance.failure(error)
+            }
+            return when (response.statusCode) {
+                200 -> try {
+                    decodeSwiftKeys(ShopLinkResponseReader, response.body)
+                } catch (_: Exception) {
+                    throw DeliveryApiError.InvalidResponse()
+                }
                 429 -> throw DeliveryApiError.RateLimited(retryAfterSeconds(response.header("Retry-After")))
                 else -> throw Maintenance.serverDown(response) ?: DeliveryApiError.ServiceFailed(response.statusCode)
             }

@@ -158,6 +158,12 @@ import com.plhery.peekdeliverytracker.core.OrderShop
 import com.plhery.peekdeliverytracker.core.ParcelAddition
 import com.plhery.peekdeliverytracker.core.ParcelLookupCountry
 import com.plhery.peekdeliverytracker.core.PostcodeFill
+import com.plhery.peekdeliverytracker.core.ShopLinkNotice
+import com.plhery.peekdeliverytracker.core.ShopLinkReading
+import com.plhery.peekdeliverytracker.core.ShopTrackingLinks
+import com.plhery.peekdeliverytracker.core.notice
+import com.plhery.peekdeliverytracker.core.shopLinkQuery
+import com.plhery.peekdeliverytracker.core.waitWords
 import com.plhery.peekdeliverytracker.core.TrackingInputMatch
 import com.plhery.peekdeliverytracker.core.TrackingLocation
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponse
@@ -258,8 +264,9 @@ internal fun AddParcelHost(state: DeliveriesState) {
  * carrier chosen, the number to add as typed, recognition and the answers of the checks, the link and the phone digits
  * typed, each carrier's postcode and the country chosen beside it, the postcode filled in from those given before,
  * Amazon's check asked again, the country picked to look the number up for,
- * the picker or the scanner open, the keyboard or the scanner opened once, and a paste that found nothing. All of it
- * stays through a window made again, as the iPhone's `@State` does, so no check is asked again for what it answered.
+ * the picker or the scanner open, the keyboard or the scanner opened once, a paste that found nothing, and what a
+ * shop's link in the field named. All of it stays through a window made again, as the iPhone's `@State` does, so no
+ * check is asked again for what it answered.
  */
 @Stable
 internal class AddForm(
@@ -284,6 +291,7 @@ internal class AddForm(
     phoneDigits: String,
     digitsNumber: String?,
     pickedCountry: ParcelAddition.PickedCountry? = null,
+    shopLink: ShopLinkRead? = null,
 ) {
     var label by mutableStateOf(label)
     var trackingInput by mutableStateOf(trackingInput)
@@ -318,6 +326,15 @@ internal class AddForm(
     var didFocus = didFocus
     var pasteFailed by mutableStateOf(pasteFailed)
 
+    /** What the shop links the field holds named, once read: kept for those links alone. */
+    var shopLink by mutableStateOf(shopLink)
+
+    /**
+     * The field's text as a paste, a scan, a share or a fill put it there, whose shop links are read at once; typed,
+     * they are read once typing pauses.
+     */
+    var shopLinkAtOnce: String? = null
+
     /**
      * The carrier whose details were last prepared (`onChange(of: resolvedCarrier, initial: true)`), or the one the
      * check suggests ([ParcelAddition.inputCarrier]).
@@ -348,7 +365,7 @@ internal class AddForm(
             postcodeFills = emptyMap(), lookupAttempt = 0, showingPicker = false,
             didFocus = false, pasteFailed = false, preparedFor = null, showingScanner = false, phoneDigits = "",
             digitsNumber = null,
-        )
+        ).apply { shopLinkAtOnce = draft }
 
         val Saver = listSaver<AddForm, Any>(
             save = {
@@ -363,6 +380,7 @@ internal class AddForm(
                     it.phoneDigits, it.digitsNumber ?: NONE, PostcodeFill.keptCountries(it.postcodeFills),
                     recognition.askedSpelling ?: NONE, recognition.askedCountry ?: NONE, it.pickedCountry?.number ?: NONE,
                     it.pickedCountry?.country ?: NONE,
+                    it.shopLink?.takeIf { read -> read.query == ShopTrackingLinks.query(it.trackingInput) }?.let { read -> ShopLinkReading.kept(read.reading) } ?: NONE,
                 )
             },
             restore = {
@@ -381,6 +399,11 @@ internal class AddForm(
                     it[11] as Boolean, it[12] as Boolean, it[13] as Boolean, kept(14)?.let(::CarrierId), it[20] as Boolean,
                     it[21] as String, kept(22),
                     if (it.size > 27) kept(26)?.let { number -> kept(27)?.let { country -> ParcelAddition.PickedCountry(number, country) } } else null,
+                    if (it.size > 28) {
+                        kept(28)?.let(ShopLinkReading::restored)?.let { reading -> ShopTrackingLinks.query(it[1] as String)?.let { query -> ShopLinkRead(query, reading) } }
+                    } else {
+                        null
+                    },
                 )
             },
         )
@@ -389,6 +412,9 @@ internal class AddForm(
         private const val NONE = "\u0000"
     }
 }
+
+/** What the shop links [query] (the field's, as Add sends them) named: a link unresolved, or no answer. */
+internal data class ShopLinkRead(val query: String, val reading: ShopLinkReading)
 
 /** The fields Add moves the focus between (`focusedField`), and the one that has it. */
 @Stable
@@ -562,7 +588,34 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
     LaunchedEffect(spent, guest) {
         if (spent && !guest) work.dismiss(request.id)
     }
-    AddAnnouncements(error, spokenNotice(addition, localizer))
+    // A shop's tracking-page link and no number (`useShopLinkReading`): Peek asks what its links name, once typing
+    // pauses, at once where a paste, a scan, a share or a fill put it there; once per links, through a window made
+    // again. A parcel fills the number in, with its carrier; else Add says why, and offers to wait signed in.
+    val signedIn = session is AuthenticationState.SignedIn
+    val shopLinkQuery = addition.shopLinkQuery
+    LaunchedEffect(shopLinkQuery) {
+        val query = shopLinkQuery
+        if (query == null) {
+            form.shopLink = null
+            return@LaunchedEffect
+        }
+        if (form.shopLink?.query == query) return@LaunchedEffect
+        if (form.trackingInput != form.shopLinkAtOnce) delay(TYPING_PAUSE)
+        val reading = try {
+            ShopLinkReading.answer(source.readShopLink(query), catalog)
+        } catch (error: CancellationException) {
+            throw error
+        } catch (_: Exception) {
+            ShopLinkReading.Failed
+        }
+        ensureActive()
+        if (reading is ShopLinkReading.Found) actions.found(reading.trackingNumber, reading.carrier) else form.shopLink = ShopLinkRead(query, reading)
+    }
+    val shopLink = shopLinkQuery?.let { query -> form.shopLink?.takeIf { it.query == query }?.reading ?: ShopLinkReading.Reading }
+    val shopNotice = shopLink?.notice(localizer, signedIn)
+    val waitWords = shopLink.waitWords(localizer, signedIn)
+    actions.shopWait = shopLinkQuery?.takeIf { waitWords != null }
+    AddAnnouncements(error, spokenNotice(addition, localizer, shopNotice))
 
     // What the title and Add leave the form, which the number's field needs.
     var viewHeight by remember { mutableIntStateOf(0) }
@@ -603,7 +656,7 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
                     verticalArrangement = Arrangement.spacedBy(20.dp),
                 ) {
                     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                        TrackingSection(addition, form, focus, actions, scannerAvailable, source.linkBaseUrl)
+                        TrackingSection(addition, form, focus, actions, scannerAvailable, source.linkBaseUrl, shopNotice)
                         val found = addition.parsed.trackingNumber.isNotEmpty()
                         val shownFeedback = remember { Kept(addition) }
                         if (found) shownFeedback.value = addition
@@ -632,7 +685,10 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
                 }
             }
         }
-        AddButton(addition, saving, error, cover, actions::save, Modifier.onSizeChanged { buttonHeight = it.height })
+        AddButton(
+            addition, saving, error, cover, if (waitWords != null) actions::waitForShop else actions::save,
+            Modifier.onSizeChanged { buttonHeight = it.height }, wait = waitWords,
+        )
     }
     AddPicker(state, addition, form, actions, escape)
     // The scanner goes down with Add, closed under it (a notification, a link), as the iPhone's goes with its presenter.
@@ -671,6 +727,9 @@ private class AddActions(
     var reduceMotion = false
     var saving = false
 
+    /** The shop links Add waits for where it offers to ([waitForShop]); null where it adds a parcel. */
+    var shopWait: String? = null
+
     /**
      * The field's text changed (`onChange(of: trackingInput)`): no duplicate, no error, no carrier picked by hand. As
      * much of it as the field holds ([ParcelAddition.tracking]), which the window can keep.
@@ -704,6 +763,7 @@ private class AddActions(
         }
         motion.duration = if (reduceMotion) null else FILL_MOTION
         setInput(value)
+        form.shopLinkAtOnce = form.trackingInput
         focus.request(ParcelAddition.Field.Tracking)
         form.take(current().settling(value))
     }
@@ -717,6 +777,7 @@ private class AddActions(
         clearErrors()
         // As `onChange(of: trackingInput)`, which a text that doesn't change doesn't run.
         if (text != form.trackingInput) form.take(current().typing(text))
+        form.shopLinkAtOnce = form.trackingInput
         if (label.isNotEmpty()) form.label = label
         form.take(current().settling(text))
     }
@@ -737,6 +798,7 @@ private class AddActions(
         motion.duration = if (reduceMotion) null else FILL_MOTION
         val text = ParcelAddition.tracking(value)
         setInput(text)
+        form.shopLinkAtOnce = form.trackingInput
         form.showingScanner = false
         focusManager.clearFocus()
         form.take(current().settling(text))
@@ -782,9 +844,13 @@ private class AddActions(
         focusManager.clearFocus()
     }
 
-    /** The name's Done: Add, where it can, else back to the number. */
+    /** The name's Done: Add, or the wait for the shop it offers, where it can, else back to the number. */
     fun submitName() {
-        if (current().canSave) save() else focus.request(ParcelAddition.Field.Tracking)
+        when {
+            shopWait != null -> waitForShop()
+            current().canSave -> save()
+            else -> focus.request(ParcelAddition.Field.Tracking)
+        }
     }
 
     /** The field the focus left (`onChange(of: focusedField)`): leaving the tracking field settles its number. */
@@ -809,6 +875,31 @@ private class AddActions(
         focusManager.clearFocus()
         clearErrors()
         state.saveAddition(request, addition, form.label)
+    }
+
+    /**
+     * The parcel a shop's link named (`onFound`): its number in the field on the snappy spring, at once under Reduce
+     * Motion, settled, and its carrier chosen where the catalog knows it.
+     */
+    fun found(number: String, carrier: CarrierId?) {
+        motion.duration = if (reduceMotion) null else FILL_MOTION
+        val text = ParcelAddition.tracking(number)
+        setInput(text)
+        form.take(current().settling(text))
+        if (carrier != null) form.carrierOverride = carrier
+    }
+
+    /**
+     * "Wait for H&M" (`waitForShop`): the account waits for the shop links, named as the name field says, while Add
+     * waits as for a save; once kept, Add closes, and the list shows its card.
+     */
+    fun waitForShop() {
+        val links = shopWait ?: return
+        if (saving) return
+        saving = true
+        focusManager.clearFocus()
+        clearErrors()
+        state.waitForShop(request, links, form.label)
     }
 
     fun openPicker() {
@@ -917,10 +1008,18 @@ private fun AddHeading(saving: Boolean, close: () -> Unit, titleFocus: Accessibi
  * where they don't fit on one line; the field, two to four lines; and, once the number has settled, why it can't be
  * added as it stands: no number found, a pickup code, a placeholder, a shop's order number (Amazon's with its orders
  * and Peek's guide on the site at [linkBaseUrl]), or a check digit that doesn't add up, with the number it may be and
- * the way to add it as typed.
+ * the way to add it as typed; a shop's link, what Add reads of it ([shopNotice]).
  */
 @Composable
-private fun TrackingSection(addition: ParcelAddition, form: AddForm, focus: AddFocus, actions: AddActions, scanner: Boolean, linkBaseUrl: String) {
+private fun TrackingSection(
+    addition: ParcelAddition,
+    form: AddForm,
+    focus: AddFocus,
+    actions: AddActions,
+    scanner: Boolean,
+    linkBaseUrl: String,
+    shopNotice: ShopLinkNotice?,
+) {
     val localizer = LocalLocalizer.current
     val colors = PeekTheme.colors
     val type = PeekTheme.type
@@ -954,7 +1053,9 @@ private fun TrackingSection(addition: ParcelAddition, form: AddForm, focus: AddF
             inked = true,
         )
         val settled = addition.settled
-        if (addition.notFound) Note(localized("add.notFound"), ADD_NOT_FOUND)
+        // While a shop's link is read or answered, its notice says what Add can do instead.
+        if (addition.notFound && shopNotice == null) Note(localized("add.notFound"), ADD_NOT_FOUND)
+        if (shopNotice != null) ShopLinkNote(shopNotice)
         if (addition.pickupCode && settled) HeldBackNote(localized("add.pickupCode.title"), localized("add.pickupCode.body"), ADD_PICKUP_CODE)
         if (addition.placeholderNumber && settled) Note(localized("tracking.failure.placeholderNumber"), ADD_PLACEHOLDER)
         val order = addition.order
@@ -1054,9 +1155,11 @@ private fun AddAnnouncements(error: String?, notice: String?) {
 
 /**
  * The note under the field once the number has settled, as TalkBack reads it out (`spokenNotice`): none found, held
- * back, or questioned, a note's title and its words one after the other, as two lines.
+ * back, or questioned, a note's title and its words one after the other, as two lines. A shop's link's notice
+ * ([shopLink]) is read as it changes, settled or not.
  */
-internal fun spokenNotice(addition: ParcelAddition, localizer: Localizer): String? {
+internal fun spokenNotice(addition: ParcelAddition, localizer: Localizer, shopLink: ShopLinkNotice? = null): String? {
+    if (shopLink != null) return shopLink.spoken
     if (!addition.settled) return null
     fun note(title: String, body: String) = "${localizer.text(title)}\n${localizer.text(body)}"
     val order = addition.order
@@ -1075,6 +1178,24 @@ internal fun spokenNotice(addition: ParcelAddition, localizer: Localizer): Strin
 @Composable
 private fun Note(text: String, tag: String) {
     Text(text, Modifier.testTag(tag), color = PeekTheme.colors.warning, style = PeekTheme.type.caption.sfLines())
+}
+
+/**
+ * What Add reads of a shop's link (`ShopLinkNotice`), in caption, read as one: a shop that hasn't shipped, or the
+ * reading, in the sheet's quiet ink, its title in semibold ink over the secondary grey, as a shop that hasn't shipped is
+ * no fault; a page Peek can't read or that doesn't answer in the warning colour.
+ */
+@Composable
+private fun ShopLinkNote(notice: ShopLinkNotice) {
+    val colors = PeekTheme.colors
+    val type = PeekTheme.type
+    Column(
+        Modifier.testTag(ADD_SHOP_LINK).semantics(mergeDescendants = true) {},
+        verticalArrangement = Arrangement.spacedBy(2.dp),
+    ) {
+        notice.title?.let { Text(it, color = colors.ink, style = type.style(IosTextStyle.Caption, FontWeight.SemiBold).sfLines()) }
+        Text(notice.body, color = if (notice.calm) colors.secondaryText else colors.warning, style = type.caption.sfLines())
+    }
 }
 
 /** `heldBackNote`: why the field holds no number to add, its title in semibold over what to paste instead, read as one. */
@@ -1860,7 +1981,8 @@ private fun ErrorBanner(message: String, existing: java.util.UUID?, open: (java.
  * `canSave` alone); they cross over the form's snappy 0.3 s only where [error] appears or clears in the same update (a
  * try again after a failure, a failure coming back), as the form animates on `errorMessage` (`.contentTransition
  * (.opacity)`); at once under Reduce Motion. Its words are centred; at the accessibility sizes they keep to two lines,
- * and only a longer title than those hold is made smaller, down to 70 %.
+ * and only a longer title than those hold is made smaller, down to 70 %. Where Add offers to wait for a shop ([wait]),
+ * it says so ("Wait for H&M"), still while that saves beside the spinner, and is off only then.
  */
 @Composable
 private fun AddButton(
@@ -1870,14 +1992,16 @@ private fun AddButton(
     cover: Boolean,
     save: () -> Unit,
     modifier: Modifier = Modifier,
+    wait: String? = null,
 ) {
     val colors = PeekTheme.colors
     val reduceMotion = PeekTheme.reduceMotion
     val large = PeekTheme.dynamicTypeSize.isAccessibilitySize
-    val canSave = addition.canSave
+    // Offering to wait for a shop, it is off only while that saves.
+    val canSave = wait != null || addition.canSave
     val opacity by animateFloatAsState(if (canSave || saving) 1f else DISABLED_OPACITY, if (reduceMotion) snap() else Motion.easeOut(BUTTON_MOTION), label = "add button")
-    val words = localized(if (addition.several.isEmpty()) "app.addParcel" else "door.several.track")
-    val adding = localized("add.adding")
+    val words = wait ?: localized(if (addition.several.isEmpty()) "app.addParcel" else "door.several.track")
+    val adding = wait ?: localized("add.adding")
     val density = LocalDensity.current
     // What the last frame showed, and the words crossing from it where the error changed with them.
     val shown = remember { Kept(saving to error) }
@@ -2090,6 +2214,7 @@ internal const val ADD_FEEDBACK = "addParcel.feedback"
 internal const val ADD_DETAILS = "addParcel.details"
 internal const val ADD_HINT = "addParcel.hint"
 internal const val ADD_NOT_FOUND = "addParcel.notFound"
+internal const val ADD_SHOP_LINK = "addParcel.shopLink"
 internal const val ADD_ANNOUNCEMENT = "addParcel.announcement"
 internal const val ADD_PICKUP_CODE = "addParcel.pickupCode"
 internal const val ADD_PLACEHOLDER = "addParcel.placeholder"
@@ -2118,6 +2243,9 @@ internal const val ADD_PICKER_CANCEL = "addParcel.picker.cancel"
 
 /** How long after Add has come up the keyboard opens (`Task.sleep(for: .milliseconds(300))`). */
 private const val FOCUS_DELAY = 300L
+
+/** How long typing pauses before a shop's link typed in is read (the web's `TYPING_PAUSE_MS`). */
+private const val TYPING_PAUSE = 800L
 
 /** How long an Amazon number stands before Amazon is asked (`Task.sleep(for: .milliseconds(350))`). */
 private const val LOOKUP_DELAY = 350L

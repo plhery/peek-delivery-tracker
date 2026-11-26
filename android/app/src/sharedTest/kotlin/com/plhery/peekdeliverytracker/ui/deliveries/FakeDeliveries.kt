@@ -53,6 +53,7 @@ import com.plhery.peekdeliverytracker.core.api.ParcelAlertPreset
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequest
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
 import com.plhery.peekdeliverytracker.core.api.ParcelShare
+import com.plhery.peekdeliverytracker.core.api.ShopLinkResponse
 import com.plhery.peekdeliverytracker.core.api.ShopWait
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
@@ -527,6 +528,23 @@ class FakeDeliveries(
         refusing?.await()
         refusingRegardless[question]?.let { held -> withContext(NonCancellable) { held.await() } }
         return question in refusals
+    }
+
+    /**
+     * What a shop's links name: [shopLinkAnswer], or a failure ([shopLinkFailure]), once [shopLinkHolding] lets it go
+     * when a test holds it. [shopLinkReads] notes each read's links and whether the account asked (signed in) or a
+     * guest's public request did.
+     */
+    var shopLinkAnswer: ShopLinkResponse? = null
+    var shopLinkFailure: Exception? = null
+    var shopLinkHolding: CompletableDeferred<Unit>? = null
+    val shopLinkReads = mutableListOf<Pair<String, Boolean>>()
+
+    override suspend fun readShopLink(text: String): ShopLinkResponse {
+        shopLinkReads += text to (session.value is AuthenticationState.SignedIn)
+        shopLinkHolding?.await()
+        shopLinkFailure?.let { throw it }
+        return shopLinkAnswer ?: throw DeliveryApiError.ServiceFailed(500)
     }
 
     override fun viewerLink(parcel: Parcel): String? = viewerLinks[parcel.id]

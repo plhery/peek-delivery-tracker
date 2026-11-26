@@ -49,6 +49,7 @@ import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.ShopLinkResponse
 import com.plhery.peekdeliverytracker.core.api.ParcelAlertPreset
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
 import com.plhery.peekdeliverytracker.platform.AppNotifications
@@ -252,6 +253,12 @@ interface DeliveriesSource {
      * which [com.plhery.peekdeliverytracker.core.NumberRefusals] asks once per pair.
      */
     suspend fun numberRefusal(question: NumberRefusalRequest): Boolean
+
+    /**
+     * What the shop links in `text` name (`readShopLink`): the account's request signed in, the public one otherwise,
+     * the demo's too. The links open the reader's order: they go in the request's body alone.
+     */
+    suspend fun readShopLink(text: String): ShopLinkResponse
 
     /** `store.deliveryEmail`, as the account's preferences and the session change: null without one. */
     val deliveryEmail: StateFlow<DeliveryEmail?>
@@ -626,6 +633,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
     override suspend fun numberRefusal(question: NumberRefusalRequest): Boolean =
         DeliveryApiClient.numberRefusal(question, container.configuration, container.transport)
+
+    override suspend fun readShopLink(text: String): ShopLinkResponse = container.readShopLink(text)
 
     override val deliveryEmail get() = container.deliveryEmail
 

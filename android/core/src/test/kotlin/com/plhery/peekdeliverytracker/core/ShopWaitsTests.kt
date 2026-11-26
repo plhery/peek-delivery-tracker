@@ -199,6 +199,20 @@ class ShopWaitsTests {
             removeFailure?.let { throw it }
             waits = waits.filterNot { it.id == id }
         }
+
+        /** What a keep answers: the wait it adds to [waits], kept for its links. */
+        var keeping: ShopWait? = null
+        var keepFailure: Exception? = null
+        var keepHolding: CompletableDeferred<Unit>? = null
+
+        override suspend fun keep(text: String, label: String): List<ShopWait> {
+            calls += "keep $label"
+            keepHolding?.await()
+            keepFailure?.let { throw it }
+            val kept = keeping ?: return emptyList()
+            if (waits.none { it.id == kept.id }) waits = waits + kept
+            return listOf(kept)
+        }
     }
 
     private val reader = ShopWaitsOwner.Account(UUID(0, 11))
@@ -375,5 +389,60 @@ class ShopWaitsTests {
         held.complete(Unit)
         assertFalse(first.await())
         assertEquals(listOf(boots), store.waits(other))
+    }
+
+    // Add's "Wait for H&M"
+
+    private val link = "https://hm.delivery-status.com/de/de/?s=synthetic-key"
+
+    @Test
+    fun aWaitKeptFromAddShowsAtOnceThenTheWaitsAreRead() = runTest {
+        val client = FakeClient().apply { waits = listOf(boots); keeping = coat }
+        val store = ShopWaitsStore(client)
+        // The list showed the demo: waiting signed in shows the account's waits.
+        store.show(ShopWaitsOwner.Demo)
+
+        client.listing = CompletableDeferred()
+        val keeping = async { store.keep(reader, link, "Wool coat") }
+        runCurrent()
+        assertEquals(listOf(coat), store.waits(reader))
+        client.listing!!.complete(Unit)
+        assertFalse(keeping.await())
+        assertEquals(listOf("keep Wool coat", "list"), client.calls)
+        assertEquals(listOf(boots, coat), store.waits(reader))
+
+        // Kept again, the same wait shows once.
+        assertFalse(store.keep(reader, link, "Wool coat"))
+        assertEquals(listOf(boots, coat), store.waits(reader))
+    }
+
+    @Test
+    fun aWaitThatFailsToBeKeptThrowsAndLeavesTheList() = runTest {
+        val client = FakeClient().apply { waits = listOf(boots); keeping = coat; keepFailure = DeliveryApiError.ServiceFailed(502) }
+        val store = ShopWaitsStore(client)
+        store.show(reader)
+        store.read(reader)
+
+        val failed = runCatching { store.keep(reader, link, "Wool coat") }.exceptionOrNull()
+        assertTrue(failed is DeliveryApiError.ServiceFailed)
+        assertEquals(listOf(boots), store.waits(reader))
+        assertEquals(listOf("list", "keep Wool coat"), client.calls)
+    }
+
+    @Test
+    fun aWaitKeptForAnAccountSignedOutMeanwhileShowsForNoOne() = runTest {
+        val client = FakeClient().apply { keeping = coat; keepHolding = CompletableDeferred() }
+        val store = ShopWaitsStore(client)
+        store.show(reader)
+
+        val keeping = async { store.keep(reader, link, "Wool coat") }
+        runCurrent()
+        val other = ShopWaitsOwner.Account(UUID(0, 12))
+        store.show(other)
+        client.keepHolding!!.complete(Unit)
+        assertFalse(keeping.await())
+        assertEquals(emptyList<ShopWait>(), store.waits(other))
+        assertEquals(emptyList<ShopWait>(), store.waits(reader))
+        assertEquals(listOf("keep Wool coat"), client.calls)
     }
 }

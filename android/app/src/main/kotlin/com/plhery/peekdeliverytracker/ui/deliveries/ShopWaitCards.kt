@@ -35,6 +35,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.ExperimentalPalette
 import com.plhery.peekdeliverytracker.core.ShopWaitsOwner
 import com.plhery.peekdeliverytracker.core.api.ShopWait
@@ -99,6 +100,15 @@ internal fun rememberShopWaits(source: DeliveriesSource, session: Authentication
         }
     }
     return shown.waits(owner)
+}
+
+/**
+ * Add's "Wait for H&M": waits for the shop links in [text], named [label], for the account signed in. Its card joins the
+ * list at once; the list reads its parcels again if a wait went meanwhile. Throws where it can't, as signed out.
+ */
+internal suspend fun DeliveriesSource.waitForShop(text: String, label: String) {
+    val owner = ShopWaitsOwner.of(session.value) as? ShopWaitsOwner.Account ?: throw DeliveryApiError.AuthenticationExpired()
+    if (shopWaits.keep(owner, text, label)) scope.launch { reload() }
 }
 
 /** Stops waiting for [id]: its card goes at once; the list reads its parcels again if a wait went meanwhile. */

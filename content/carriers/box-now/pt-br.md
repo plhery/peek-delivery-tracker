@@ -72,7 +72,7 @@ Confie no "Last pick up time" exibido na página de rastreamento. Uma encomenda 
 
 **Encomenda danificada ou errada (Grécia).** Escreva para dema@boxnow.gr com seu nome, telefone, voucher ID e fotos da encomenda. Na Croácia, os termos da BOX NOW exigem relato de dano em até 4 horas após abrir o armário.
 
-**Extraviada ou muito atrasada.** Na Grécia e em Chipre, os termos da BOX NOW pagam indenização ao remetente, titular do contrato (a loja, em compras online), então peça reembolso à loja e reporte o problema à BOX NOW. Os termos da Bulgária permitem que o destinatário também reclame por escrito para support@boxnow.bg. Na Grécia e na Bulgária o prazo de reclamação é de 6 meses, e no contrato de usuário da BOX NOW Chipre é de 2 meses; na Grécia, atraso acima de 15 dias úteis conta como extravio. Os termos da Croácia dão 3 meses para encomendas domésticas e 6 para internacionais, via podrska@boxnow.hr; na Eslovênia valem os mesmos prazos, por escrito para info@boxnow.si.
+**Extraviada ou muito atrasada.** Na Grécia e em Chipre, os termos da BOX NOW pagam indenização ao remetente, titular do contrato (a loja, em compras online), então peça reembolso à loja e reporte o problema à BOX NOW. Os termos da Bulgária permitem que o destinatário também peça indenização, por escrito, para support@boxnow.bg. Na Grécia e na Bulgária o prazo para pedir indenização é de 6 meses, e no contrato de usuário da BOX NOW Chipre é de 2 meses; na Grécia, atraso acima de 15 dias úteis conta como extravio. Os termos da Croácia dão 3 meses para encomendas domésticas e 6 para internacionais, via podrska@boxnow.hr; na Eslovênia valem os mesmos prazos, por escrito para info@boxnow.si.
 
 ## Telefone e atendimento ao cliente da BOX NOW
 
@@ -118,11 +118,11 @@ Não: o PIN chega por SMS e a página de rastreamento funciona sem aplicativo. O
 - [BOX NOW Greece: Όροι Χρήσης Υπηρεσιών Ταχυμεταφοράς](https://www.boxnow.gr/terms-of-use-for-shipping-services) – devolução após o prazo, indenização ao remetente, 6 meses, 15 dias úteis
 - [BOX NOW Cyprus: FAQ](https://boxnow.cy/en/faq) – prazo de guarda, prazos de entrega, "Change Locker", armário cheio, armário que não abre
 - [BOX NOW Cyprus: Let's get in touch](https://boxnow.cy/en/get-in-touch) – central e horários, dema@boxnow.cy
-- [BOX NOW Cyprus: Individual Agreement](https://boxnow.cy/en/individual-agreement) – reclamações em 2 meses
+- [BOX NOW Cyprus: Individual Agreement](https://boxnow.cy/en/individual-agreement) – pedidos de indenização em 2 meses
 - [BOX NOW Cyprus: Track your parcel](https://boxnow.cy/en/track) – rótulos de Chipre
 - [BOX NOW Bulgaria: FAQ](https://boxnow.bg/en/faq) – apenas armários, 48 mais 48 horas, prazo de entrega, troca de armário no app, formulário de devolução
 - [BOX NOW Bulgaria: Contact us](https://boxnow.bg/en/get-in-touch) – central e horários, support@
-- [BOX NOW Bulgaria: Terms of Use for Shipping Services](https://boxnow.bg/en/terms-of-use-for-shipping-services) – 72 mais 48 horas, uma troca de armário, reclamações pelo remetente ou destinatário em 6 meses
+- [BOX NOW Bulgaria: Terms of Use for Shipping Services](https://boxnow.bg/en/terms-of-use-for-shipping-services) – 72 mais 48 horas, uma troca de armário, pedidos de indenização pelo remetente ou destinatário em 6 meses
 - [BOX NOW Bulgaria: Често задавани въпроси](https://boxnow.bg/faq) – entrega no dia seguinte (em búlgaro)
 - [BOX NOW Bulgaria: Track your parcel](https://boxnow.bg/en/track) – rótulos do site búlgaro
 - [BOX NOW Croatia: FAQ](https://boxnow.hr/en/faq) – 96 horas, 5 dias úteis, notificações no app, devoluções

@@ -45,7 +45,7 @@ Uma linha que o Peek ainda não conhece aparece como a Blue Dart escreve e conta
 
 O Peek não conseguiu verificar as regras de entrega da Blue Dart, como quantas tentativas são feitas ou por quanto tempo uma remessa não entregue fica guardada, então esta página não informa esses dados.
 
-**Documento ou OTP.** `Cnee Refused Id/Otp Not Shared-Incorrect` indica que uma entrega da Blue Dart pode exigir documento de identidade ou código único (OTP). Se você recebeu um código para a remessa, deixe-o à mão no dia da entrega. Se essa linha surgir sem que você tenha recusado nada, peça à loja para combinar nova entrega. Veja [entrega perdida](guide:missed-delivery) e [encomendas não retiradas](guide:uncollected-parcel).
+**Documento ou OTP.** `Cnee Refused Id/Otp Not Shared-Incorrect` indica que uma entrega da Blue Dart pode exigir documento de identidade ou código único (OTP). Se você recebeu um código para a remessa, deixe-o à mão no dia da entrega. Se essa linha surgir sem que você tenha recusado nada, peça à loja para combinar nova entrega. Veja [entrega não realizada](guide:missed-delivery) e [encomendas não retiradas](guide:uncollected-parcel).
 
 Recebeu uma mensagem sobre falha na entrega pedindo pagamento ou código por um link? Veja [golpes por SMS de entrega](guide:delivery-scam-texts).
 
@@ -81,10 +81,10 @@ Em compras online, fale primeiro com a loja: ela contratou a Blue Dart. O Peek n
 
 ## Acompanhe uma remessa Blue Dart com o Peek
 
-Cole o código no [Peek](/). Várias transportadoras usam 11 dígitos, então o Peek não mostra "Transportadora detectada" automaticamente para um código Blue Dart:
+Cole o código no [Peek](/). Várias transportadoras usam 11 dígitos, então, só pelo código, o Peek não mostra "Transportadora detectada" para a Blue Dart:
 
-- **Na Índia** (pela região do celular ou local de conexão na web), o Peek exibe "Consultando serviços de rastreamento…" enquanto consulta as transportadoras compatíveis, começando pela Blue Dart. Quando a Blue Dart reconhece o código, aparece "Blue Dart está com esta encomenda.".
-- **Fora da Índia**, o Peek não consulta a Blue Dart automaticamente. Toque em "Trocar" e selecione Blue Dart em "Compatível com este código".
+- **Na Índia** (pela região do celular ou local de conexão na web), o Peek exibe "Consultando serviços de rastreamento…" enquanto consulta as transportadoras compatíveis, começando pela Blue Dart. Quando a Blue Dart reconhece o código, aparece "Blue Dart está com esta encomenda."
+- **Fora da Índia**, o Peek consulta a Blue Dart por último, depois que as outras transportadoras e os serviços de rastreamento não encontraram o código. Para classificar a remessa em Blue Dart desde já, toque em "Trocar" e selecione Blue Dart em "Compatível com este código".
 
 Se nenhuma transportadora reconhecer o código ainda, adicione mesmo assim ou escolha Blue Dart manualmente: o Peek acompanha mais de 4.500 transportadoras. O Peek lista Blue Dart nas sugestões somente quando o dígito verificador confere. Se o seu não conferir mas você tiver certeza do número, busque Blue Dart na lista completa: o Peek consulta mesmo assim. Um link de rastreamento de bluedart.com com `trackNo=` também funciona: o Peek extrai o código e identifica Blue Dart imediatamente ("Transportadora detectada").
 
@@ -96,7 +96,7 @@ Enquanto você mantiver a remessa aberta, ou no dia da entrega com as notificaç
 
 ### Como rastrear uma remessa da Blue Dart?
 
-Digite o código de 11 dígitos no rastreador da Blue Dart em bluedart.com ou cole-o no Peek. Na Índia, o Peek consulta a Blue Dart primeiro; fora da Índia, toque em "Trocar" e escolha Blue Dart.
+Digite o código de 11 dígitos no rastreador da Blue Dart em bluedart.com ou cole-o no Peek. Na Índia, o Peek consulta a Blue Dart primeiro; fora da Índia, consulta a Blue Dart por último, ou você pode tocar em "Trocar" e escolher Blue Dart.
 
 ### Como é um código de rastreamento da Blue Dart?
 
@@ -108,7 +108,7 @@ A Blue Dart encaminhou a remessa de uma de suas unidades para a próxima. O Peek
 
 ### O que significa "Cnee Refused Id/Otp Not Shared-Incorrect"?
 
-Uma tentativa de entrega sem sucesso devido à recusa do destinatário (consignee) ou a um documento de identidade ou código único (OTP) não fornecido ou incorreto. O Peek exibe "Tentativa de entrega". Se você não recusou nada, peça à loja que combine outra entrega.
+Uma entrega não realizada devido à recusa do destinatário (consignee) ou a um documento de identidade ou código único (OTP) não fornecido ou incorreto. O Peek exibe "Tentativa de entrega". Se você não recusou nada, peça à loja que combine outra entrega.
 
 ### Quem procurar se minha remessa Blue Dart sumiu?
 

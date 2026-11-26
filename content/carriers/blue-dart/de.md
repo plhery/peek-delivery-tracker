@@ -84,7 +84,7 @@ Bei einer Online-Bestellung wende dich zuerst an den Shop, der Blue Dart beauftr
 Füge die Waybill-Nummer in [Peek](/) ein. Da mehrere Paketdienste 11 Ziffern nutzen, zeigt Peek bei einer Blue-Dart-Nummer allein nicht sofort „Erkannter Paketdienst“ an:
 
 - **In Indien** (Region deines Telefons oder im Web dein Standort) zeigt Peek „Tracking-Dienste werden geprüft…“, während es passende Paketdienste fragt – Blue Dart zuerst. Kennt Blue Dart die Nummer, erscheint „Blue Dart hat dieses Paket.“.
-- **Außerhalb Indiens** fragt Peek Blue Dart nicht automatisch an. Tippe auf „Ändern“ und wähle Blue Dart unter „Passt zu dieser Nummer“.
+- **Außerhalb Indiens** fragt Peek Blue Dart zuletzt, wenn die anderen Paketdienste und die Tracking-Dienste die Nummer nicht kennen. Um die Sendung gleich Blue Dart zuzuordnen, tippe auf „Ändern“ und wähle Blue Dart unter „Passt zu dieser Nummer“.
 
 Kennt noch kein Paketdienst die Nummer, füge sie trotzdem hinzu oder wähle Blue Dart direkt aus: Peek verfolgt mehr als 4500 Paketdienste. Peek listet Blue Dart automatisch nur bei gültiger Prüfziffer. Stimmt sie nicht, du bist aber sicher, suche Blue Dart in der Paketdienstliste: Peek fragt trotzdem nach. Ein Tracking-Link von bluedart.com mit der Waybill (`trackNo=`) funktioniert ebenfalls: Peek liest die Nummer aus und erkennt Blue Dart sofort („Erkannter Paketdienst“).
 
@@ -96,7 +96,7 @@ Solange du das Paket auf dem Bildschirm geöffnet hast, oder am Liefertag mit ak
 
 ### Wie verfolge ich eine Blue-Dart-Sendung?
 
-Gib die 11-stellige Waybill-Nummer im Tracker auf bluedart.com ein oder füge sie in Peek ein. In Indien fragt Peek Blue Dart zuerst; anderswo tippe auf „Ändern“ und wähle Blue Dart.
+Gib die 11-stellige Waybill-Nummer im Tracker auf bluedart.com ein oder füge sie in Peek ein. In Indien fragt Peek Blue Dart zuerst, anderswo zuletzt; du kannst auch auf „Ändern“ tippen und Blue Dart wählen.
 
 ### Wie sieht eine Blue-Dart-Waybill-Nummer aus?
 

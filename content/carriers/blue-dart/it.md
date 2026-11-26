@@ -84,7 +84,7 @@ Per un ordine online chiedi prima al negozio che ha scelto Blue Dart. Peek non p
 Incolla la waybill in [Peek](/). Poiché diversi corrieri usano 11 cifre, Peek non mostra subito «Corriere rilevato» da un codice Blue Dart da solo:
 
 - **In India** (la regione del telefono o, sul web, il paese da cui ti colleghi), Peek mostra «Verifica dei servizi di tracciamento…» mentre interroga i corrieri compatibili, Blue Dart per primo. Quando Blue Dart conosce il codice, vedi «Blue Dart ha questo pacco.».
-- **Fuori dall'India**, Peek non interroga Blue Dart automaticamente. Premi «Cambia» e scegli Blue Dart sotto «Compatibili con questo numero».
+- **Fuori dall'India**, Peek interroga Blue Dart per ultimo, quando gli altri corrieri e i servizi di tracciamento non hanno trovato il numero. Per assegnare subito la spedizione a Blue Dart, premi «Cambia» e scegli Blue Dart sotto «Compatibili con questo numero».
 
 Se nessun corriere conosce ancora il codice, aggiungilo comunque o seleziona Blue Dart tu stesso: Peek segue oltre 4.500 corrieri. Peek propone Blue Dart solo se la cifra di controllo torna. Se non torna ma sei sicuro del codice, cerca Blue Dart nell'elenco dei corrieri: Peek lo interroga comunque. Anche un link di bluedart.com con la waybill (`trackNo=`) funziona: Peek estrae il numero e rileva subito Blue Dart («Corriere rilevato»).
 
@@ -96,7 +96,7 @@ Finché tieni il pacco aperto sullo schermo, oppure nel giorno della consegna co
 
 ### Come traccio una spedizione Blue Dart?
 
-Inserisci la waybill di 11 cifre sul tracciamento su bluedart.com oppure incollala in Peek. In India Peek interroga Blue Dart per primo; altrove premi «Cambia» e scegli Blue Dart.
+Inserisci la waybill di 11 cifre sul tracciamento su bluedart.com oppure incollala in Peek. In India Peek interroga Blue Dart per primo; altrove per ultimo, oppure puoi premere «Cambia» e scegliere Blue Dart.
 
 ### Com'è fatto un numero waybill Blue Dart?
 

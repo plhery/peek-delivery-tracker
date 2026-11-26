@@ -84,7 +84,7 @@ Numa compra online, fala primeiro com a loja que contratou a Blue Dart. O Peek n
 Cola a guia no [Peek](/). Como várias transportadoras usam 11 algarismos, o Peek não mostra logo «Transportadora detetada» a partir de um número Blue Dart sozinho:
 
 - **Na Índia** (a região do teu telemóvel ou, na web, o país de onde acedes), o Peek mostra «A verificar serviços de seguimento…» enquanto consulta as transportadoras compatíveis, Blue Dart primeiro. Quando a Blue Dart conhece o número, vês «Blue Dart tem esta encomenda.».
-- **Fora da Índia**, o Peek não pergunta automaticamente à Blue Dart. Toca em «Alterar» e escolhe Blue Dart em «Corresponde a este número».
+- **Fora da Índia**, o Peek consulta a Blue Dart em último lugar, depois de as outras transportadoras e os serviços de seguimento não encontrarem o número. Para associar já o envio à Blue Dart, toca em «Alterar» e escolhe Blue Dart em «Corresponde a este número».
 
 Se nenhuma transportadora conhecer ainda o número, adiciona-o mesmo assim ou escolhe Blue Dart tu mesmo: o Peek segue mais de 4500 transportadoras. O Peek só sugere a Blue Dart quando o dígito de controlo bate certo. Se o teu não bater mas tiveres a certeza do número, procura Blue Dart na lista de transportadoras: o Peek consulta-a na mesma. Uma ligação de seguimento de bluedart.com com a guia (`trackNo=`) também funciona: o Peek extrai o número e identifica logo a Blue Dart («Transportadora detetada»).
 
@@ -96,7 +96,7 @@ Enquanto tens a encomenda aberta no ecrã, ou no dia da entrega com as notifica�
 
 ### Como sigo um envio da Blue Dart?
 
-Introduz a guia de 11 algarismos no seguimento em bluedart.com ou cola-a no Peek. Na Índia o Peek consulta a Blue Dart primeiro; noutros países, toca em «Alterar» e escolhe Blue Dart.
+Introduz a guia de 11 algarismos no seguimento em bluedart.com ou cola-a no Peek. Na Índia o Peek consulta a Blue Dart primeiro; noutros países, consulta-a em último lugar, ou podes tocar em «Alterar» e escolher Blue Dart.
 
 ### Que aspeto tem um número waybill da Blue Dart?
 

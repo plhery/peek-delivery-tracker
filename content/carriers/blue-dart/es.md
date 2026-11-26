@@ -84,7 +84,7 @@ En un pedido online, pregunta primero a la tienda que contrató a Blue Dart. Pee
 Pega la guía en [Peek](/). Como varios transportistas usan 11 cifras, Peek no muestra «Transportista detectado» por sí solo para un número de Blue Dart:
 
 - **En India** (la región de tu móvil o el país desde el que accedes en la web), Peek muestra «Comprobando servicios de seguimiento…» mientras pregunta a los transportistas compatibles, con Blue Dart primero. Cuando Blue Dart reconoce el número, aparece «Blue Dart tiene este paquete.».
-- **Fuera de India**, Peek no pregunta automáticamente a Blue Dart. Pulsa «Cambiar» y elige Blue Dart bajo «Encaja con este número».
+- **Fuera de India**, Peek pregunta a Blue Dart en último lugar, cuando los demás transportistas y los servicios de seguimiento no han encontrado el número. Para asignar el envío a Blue Dart desde el principio, pulsa «Cambiar» y elige Blue Dart bajo «Encaja con este número».
 
 Si ningún transportista conoce aún el número, añádelo igualmente o elige Blue Dart tú mismo: Peek sigue más de 4500 transportistas. Peek solo sugiere Blue Dart cuando el dígito de control cuadra. Si el tuyo no cuadra pero estás seguro del número, busca Blue Dart en la lista de transportistas: Peek lo consultará igual. Un enlace de seguimiento de bluedart.com con la guía (`trackNo=`) también funciona: Peek extrae el número y marca Blue Dart de inmediato («Transportista detectado»).
 
@@ -96,7 +96,7 @@ Mientras tienes el paquete abierto en pantalla, o el día de la entrega con las 
 
 ### ¿Cómo sigo un envío de Blue Dart?
 
-Introduce la guía de 11 cifras en el seguimiento de bluedart.com o pégala en Peek. En India, Peek pregunta primero a Blue Dart; fuera de India, pulsa «Cambiar» y elige Blue Dart.
+Introduce la guía de 11 cifras en el seguimiento de bluedart.com o pégala en Peek. En India, Peek pregunta primero a Blue Dart; fuera de India, le pregunta en último lugar, o puedes pulsar «Cambiar» y elegir Blue Dart.
 
 ### ¿Cómo es un número de guía de Blue Dart?
 

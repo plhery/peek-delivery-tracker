@@ -84,7 +84,7 @@ W przypadku zamówienia online najpierw napisz do sklepu, który zamówił Blue 
 Wklej numer waybill w [Peek](/). Ponieważ wielu przewoźników używa 11 cyfr, Peek nie wyświetla od razu „Wykryty przewoźnik” na podstawie samego numeru Blue Dart:
 
 - **W Indiach** (region telefonu lub w przeglądarce kraj połączenia) Peek pokazuje „Sprawdzanie usług śledzenia…” i pyta pasujących przewoźników, zaczynając od Blue Dart. Gdy Blue Dart zna numer, zobaczysz „Blue Dart ma tę przesyłkę.”.
-- **Poza Indiami** Peek nie pyta Blue Dart automatycznie. Kliknij „Zmień” i wybierz Blue Dart w sekcji „Pasują do numeru”.
+- **Poza Indiami** Peek pyta Blue Dart na końcu, gdy pozostali przewoźnicy i serwisy śledzenia nie znaleźli numeru. Aby od razu przypisać przesyłkę do Blue Dart, kliknij „Zmień” i wybierz Blue Dart w sekcji „Pasują do numeru”.
 
 Jeśli żaden przewoźnik nie zna jeszcze numeru, dodaj go mimo to lub wybierz Blue Dart ręcznie: Peek śledzi ponad 4500 przewoźników. Peek podpowiada Blue Dart tylko przy poprawnej cyfrze kontrolnej. Jeśli cyfra się nie zgadza, ale jesteś pewien numeru, wyszukaj Blue Dart na liście przewoźników — Peek i tak zapyta. Link śledzenia z bluedart.com zawierający numer (`trackNo=`) także działa: Peek wyciąga z niego numer i od razu wskazuje Blue Dart („Wykryty przewoźnik”).
 
@@ -96,7 +96,7 @@ Gdy masz paczkę otwartą na ekranie albo w dniu doręczenia z włączonymi powi
 
 ### Jak śledzić przesyłkę Blue Dart?
 
-Wpisz 11-cyfrowy numer waybill w śledzeniu na bluedart.com albo wklej go do Peek. W Indiach Peek pyta Blue Dart jako pierwszego; poza Indiami kliknij „Zmień” i wybierz Blue Dart.
+Wpisz 11-cyfrowy numer waybill w śledzeniu na bluedart.com albo wklej go do Peek. W Indiach Peek pyta Blue Dart jako pierwszego; poza Indiami pyta go na końcu; możesz też kliknąć „Zmień” i wybrać Blue Dart.
 
 ### Jak wygląda numer waybill Blue Dart?
 

@@ -84,7 +84,7 @@ Pour une commande en ligne, adresse-toi d'abord à la boutique : c'est elle qui 
 Colle le numéro de lettre de transport dans [Peek](/). Comme plusieurs transporteurs utilisent 11 chiffres, Peek n'affiche pas « Transporteur détecté » pour un numéro Blue Dart seul :
 
 - **En Inde** (selon la région de ton téléphone ou le pays d'où tu te connectes sur le web), Peek affiche « Vérification des services de suivi… » pendant qu'il interroge les transporteurs compatibles, Blue Dart en premier. Si Blue Dart connaît le numéro, tu vois « Blue Dart a ce colis. ».
-- **Hors d'Inde**, Peek n'interroge pas Blue Dart automatiquement. Appuie sur « Changer » et sélectionne Blue Dart sous « Correspond à ce numéro ».
+- **Hors d'Inde**, Peek interroge Blue Dart en dernier, une fois que les autres transporteurs et les services de suivi n'ont pas trouvé le numéro. Pour le classer tout de suite chez Blue Dart, appuie sur « Changer » et sélectionne Blue Dart sous « Correspond à ce numéro ».
 
 Si aucun transporteur ne connaît encore le numéro, ajoute-le tout de même ou choisis Blue Dart toi-même : Peek suit plus de 4 500 transporteurs. Peek ne place Blue Dart dans la liste automatique que lorsque la clé de contrôle est valide. Si la tienne ne l'est pas mais que tu es sûr du numéro, recherche Blue Dart dans la liste des transporteurs : Peek l'interroge quand même. Un lien de suivi bluedart.com contenant le numéro (`trackNo=`) fonctionne aussi : Peek en extrait le numéro et affiche immédiatement Blue Dart (« Transporteur détecté »).
 
@@ -96,7 +96,7 @@ Quand tu gardes le colis ouvert à l'écran, ou le jour de la livraison avec les
 
 ### Comment suivre un envoi Blue Dart ?
 
-Saisis le numéro de lettre de transport à 11 chiffres sur le suivi de Blue Dart sur bluedart.com, ou colle-le dans Peek. En Inde, Peek interroge Blue Dart en premier ; ailleurs, appuie sur « Changer » et choisis Blue Dart.
+Saisis le numéro de lettre de transport à 11 chiffres sur le suivi de Blue Dart sur bluedart.com, ou colle-le dans Peek. En Inde, Peek interroge Blue Dart en premier ; ailleurs, il l'interroge en dernier, ou tu peux appuyer sur « Changer » et choisir Blue Dart.
 
 ### À quoi ressemble un numéro de suivi Blue Dart ?
 

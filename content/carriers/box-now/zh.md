@@ -6,7 +6,7 @@ published: 2026-11-26
 updated: 2026-11-26
 ---
 
-BOX NOW 是一家在希腊、塞浦路斯、保加利亚和克罗地亚专营全天候 24/7 自有快递柜投递的包裹服务商。在斯洛文尼亚，它同样运营快递柜，但也支持商家选择签收送货上门。你可以在所在国家 BOX NOW 网站的“Track your parcel”页面、BOX NOW 应用或上方输入框中输入 10 位包裹 ID（parcel ID）查询包裹。单号来自商家下单时发给你的邮件、短信或 Viber 消息。
+BOX NOW 是一家在希腊、塞浦路斯、保加利亚和克罗地亚专营全天候 24/7 自有快递柜投递的包裹服务商。在斯洛文尼亚，它同样运营快递柜，但商家也可以选择送货上门、凭签名交付。你可以在所在国家 BOX NOW 网站的“Track your parcel”页面、BOX NOW 应用或上方输入框中输入 10 位包裹 ID（parcel ID）查询包裹。单号来自商家下单时发给你的邮件、短信或 Viber 消息。
 
 ## BOX NOW 运单号在哪里找
 
@@ -88,7 +88,7 @@ BOX NOW 各国官网公布的信息（希腊、塞浦路斯和保加利亚为东
 
 ## 用 Peek 跟踪 BOX NOW 包裹
 
-[Peek](/) 无法仅凭 10 位数字识别出 BOX NOW 包裹，因此会依次向符合该形态的承运商查询：BOX NOW、DHL eCommerce Iberia，以及视具体数字和输入方式再问 [DHL Express](carrier:dhl-express)、ACS Courier、Geniki Taxydromiki 或 Packeta，在部分国家还会问 DHL Freight。若都未查到，Peek 会转向物流查询服务，接着再问 DPD Ireland 和 Estafeta，以 33 或 34 开头时问 GLS Hungary，以及尚未问过的 DHL Freight。如果只有 BOX NOW 查到，Peek 自动归入 BOX NOW；若多家同时查到，则由你选择（但若 DHL Express 查到且 ACS 与 Geniki Taxydromiki 均未查到，则直接归入 DHL Express）。否则点“更换”手动选择“BOX NOW”。粘贴 boxnow.gr、boxnow.cy、boxnow.bg、boxnow.hr 或 boxnow.si 上带 `/track?track=…`（路径中可含语言如 `/en/track`）的查询链接，Peek 会立刻识别为 BOX NOW。
+[Peek](/) 无法仅凭 10 位数字识别出 BOX NOW 包裹，因此会询问符合该形态的承运商是否有这个单号：BOX NOW、DHL eCommerce Iberia，以及视具体数字和输入方式再问 [DHL Express](carrier:dhl-express)、ACS Courier、Geniki Taxydromiki 或 Packeta，在部分国家还会问 DHL Freight。若都未查到，Peek 会转向物流查询服务，接着再问 DPD Ireland 和 Estafeta，以 33 或 34 开头时问 GLS Hungary，以及尚未问过的 DHL Freight。如果只有 BOX NOW 查到，Peek 就认定为 BOX NOW；若多家同时查到，则由你选择（但若 DHL Express 查到且 ACS 与 Geniki Taxydromiki 均未查到，则直接归入 DHL Express）。否则点“更换”手动选择“BOX NOW”。粘贴 boxnow.gr、boxnow.cy、boxnow.bg、boxnow.hr 或 boxnow.si 上带 `/track?track=…`（路径中可含语言如 `/en/track`）的查询链接，Peek 会立刻识别为 BOX NOW。
 
 随后 Peek 会展示当前状态、带地点的扫描历史、在途预计送达日、目的国、签收时间，以及包裹待取或已取时的快递柜名称。快递柜地址与定位、取件截止时间、格口尺寸、付款信息、寄件人和邮编均不显示，因此最晚取件时间请查看 BOX NOW 官网。
 

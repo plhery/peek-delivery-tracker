@@ -6,7 +6,7 @@ published: 2026-11-26
 updated: 2026-11-26
 ---
 
-Blue Dart 是一家印度快递公司：Peek 目录将其归属印度，并按印度时间读取扫描记录。Blue Dart 货件使用 11 位数字运单号（waybill number），由寄件人提供；网购订单通常写在商家的发货邮件或订单页里。把它粘贴到上方输入框，或前往 Blue Dart 官网 bluedart.com 查询。由于 Peek 无法抓取 Blue Dart 官网页面，以下内容来自 Peek 代码对 Blue Dart 查询系统的记录。
+Blue Dart 是一家印度快递公司：Peek 目录将其归属印度，并按印度时间读取扫描记录。Blue Dart 货件使用 11 位数字运单号（waybill number），由寄件人提供；网购订单的运单号可能在商家的发货邮件或订单页里。把它粘贴到上方输入框，或前往 Blue Dart 官网 bluedart.com 查询。由于 Peek 无法查看 Blue Dart 官网，以下内容来自 Peek 代码对 Blue Dart 查询系统的记录。
 
 ## Blue Dart 运单号长什么样
 
@@ -18,7 +18,7 @@ Peek 为 Blue Dart 收录了一种形态：11 位数字，末位是由前十位�
 | `48291736545` | 同形态但校验位错误。Peek 不会推荐 Blue Dart：请检查是否输错。 |
 | `4829173654` | 10 位数字：不是 Blue Dart 运单号。如果为其手动选择 Blue Dart，Peek 会提示 Blue Dart “不使用这种格式的单号”。12 位数字或含字母的编号也同样如此。 |
 
-Aramex 的 11 位运单号和[日本邮政](carrier:japan-post)挂号件采用相同的校验规则，因此即便通过校验也可能属于它们：请核对商家消息中的快递公司名称。粘贴到 Peek 时空格和连字符不影响识别。Blue Dart 查询页还支持其他参考号，但 Peek 需要运单号。找不到单号？查看[如何查找运单号](guide:find-tracking-number)（英文）。
+Aramex 的 11 位运单号和[日本邮政](carrier:japan-post)挂号件采用相同的校验规则，因此即便通过校验也可能属于它们：请核对商家消息中的快递公司名称。粘贴到 Peek 时空格和连字符不影响识别。Blue Dart 查询页也可以按其他参考号查询，但 Peek 需要运单号。找不到单号？查看[如何查找运单号](guide:find-tracking-number)（英文）。
 
 ## Blue Dart 物流状态含义
 
@@ -43,9 +43,9 @@ Peek 暂未收录的文案会按 Blue Dart 原文显示并归为“运输中”�
 
 ## Blue Dart 在印度的派送：证件与 OTP 验证码
 
-由于 Peek 无法核实 Blue Dart 官网的派送规则（如派送尝试次数或未妥投保管天数），本页不列这些规则。
+由于 Peek 无法核实 Blue Dart 的派送规则（如派送尝试次数，或派送未成功的货件保管多久），本页不列这些规则。
 
-**身份证件或 OTP 验证码。** `Cnee Refused Id/Otp Not Shared-Incorrect` 表明 Blue Dart 派送可能需要核验身份证件或一次性验证码（OTP）。如果收到了派送验证码，请在派送当天提前准备好。若出现此记录但你并未拒收，请联系商家重新安排派送。参见[错过派送](guide:missed-delivery)（英文）和[未领取的包裹](guide:uncollected-parcel)（英文）。
+**身份证件或 OTP 验证码。** `Cnee Refused Id/Otp Not Shared-Incorrect` 表明 Blue Dart 派送可能需要核验身份证件或一次性验证码（OTP）。如果收到了派送验证码，请在派送当天提前准备好。若出现此记录但你并未拒收，请联系商家重新安排派送。参见[派送未成功](guide:missed-delivery)（英文）和[未领取的包裹](guide:uncollected-parcel)（英文）。
 
 收到称派送失败并要求通过链接付款或提供验证码的短信？参见[快递诈骗短信识别](guide:delivery-scam-texts)（英文）。
 
@@ -53,9 +53,9 @@ Peek 暂未收录的文案会按 Blue Dart 原文显示并归为“运输中”�
 
 **Blue Dart 运单。** Peek 未收录 Blue Dart 在印度境内或海外转交给其他承运商的规则。如果商家另外给了其他快递的单号，请一并添加。
 
-**通过 ICC Worldwide 寄送。** ICC Worldwide 的查询系统可能在 Blue Dart 单号旁注明 Blue Dart。只有当该单号为 11 位数字时，Peek 才会继续向 Blue Dart 查询，并在 Blue Dart 出现不晚于 ICC Worldwide 最新记录的扫描后转为在 Blue Dart 处跟进（同时保留 ICC Worldwide 历史记录）。其他位数单号则停留在 ICC Worldwide。添加时输入 ICC Worldwide 单号，然后点“更换”搜索 ICC Worldwide（Peek 不会凭单号自动推荐它）。
+**通过 ICC Worldwide 寄送。** ICC Worldwide 的查询系统可能在 Blue Dart 单号旁注明 Blue Dart。只有当该单号为 11 位数字时，Peek 才会继续向 Blue Dart 查询，并在 Blue Dart 出现不早于 ICC Worldwide 最新记录的扫描后转为在 Blue Dart 处跟进（同时保留 ICC Worldwide 历史记录）。其他位数单号则停留在 ICC Worldwide。添加时输入 ICC Worldwide 单号，然后点“更换”搜索 ICC Worldwide（Peek 不会根据单号推荐它）。
 
-**清关。** Peek 代码仅覆盖印度境内的 Blue Dart，且无法抓取其官网的国际运输说明。包裹卡在海关请看[包裹卡在海关怎么办](guide:customs)（英文）。
+**清关。** Peek 代码仅覆盖印度境内的 Blue Dart，且无法查看其官网上关于国际货件的说明。包裹卡在海关请看[包裹卡在海关怎么办](guide:customs)（英文）。
 
 ## Blue Dart 物流停更、延误或退回
 
@@ -67,7 +67,7 @@ Peek 暂未收录的文案会按 Blue Dart 原文显示并归为“运输中”�
 
 **`Delivery Delayed` 或 `Delay Caused Beyond Control`。** Peek 会显示“需要留意”。如果之后没有进展，请联系商家。
 
-**多天没有更新。** 在途货件连续四天无新扫描时，Peek 会以最后一次扫描的日期标记：“自 10 月 12 日周一起没有物流更新”。参见[物流为什么停止更新](guide:tracking-not-updating)（英文）。
+**多天没有更新。** 在途货件连续四天无新扫描时，Peek 会以最后一次扫描的日期标记：“自10月12日周一起没有物流更新”。参见[物流为什么停止更新](guide:tracking-not-updating)（英文）。
 
 **显示已签收但没收到。** 先询问家人或大楼前台，再联系商家。参见[显示已签收但未收到](guide:delivered-not-received)（英文）。
 
@@ -75,7 +75,7 @@ Peek 暂未收录的文案会按 Blue Dart 原文显示并归为“运输中”�
 
 ## Blue Dart 客服与联系方式
 
-由于 Peek 无法抓取 Blue Dart 官网，本页不列 Blue Dart 电话或邮箱：Peek 只提供从承运商自有页面核实过的联系方式。
+由于 Peek 无法查看 Blue Dart 官网，本页不列 Blue Dart 电话或邮箱：Peek 只提供从承运商自有页面核实过的联系方式。
 
 网购订单请先联系向 Blue Dart 下单的商家。Peek 无法替你联系 Blue Dart 或商家。
 
@@ -83,20 +83,20 @@ Peek 暂未收录的文案会按 Blue Dart 原文显示并归为“运输中”�
 
 把运单号粘贴到 [Peek](/)。多家承运商共用 11 位数字，因此 Peek 不会直接把 Blue Dart 单号标为“识别出的快递公司”：
 
-- **在印度**（按手机地区或网页访问位置判断），Peek 会显示“正在查询物流服务…”并依次询问符合该形态的快递，优先询问 Blue Dart。Blue Dart 查到后会显示“Blue Dart 有这个包裹的记录。”。
-- **在印度以外**，Peek 不会自动询问 Blue Dart。请点“更换”，在“符合这个单号”下选择 Blue Dart。
+- **在印度**（按手机地区或网页访问位置判断），Peek 会显示“正在查询物流服务…”并询问使用这种形态的快递公司，最先询问 Blue Dart。Blue Dart 查到这个单号时，会显示“Blue Dart 有这个包裹的记录。”
+- **在印度以外**，Peek 会在其他快递公司和物流查询服务都没查到这个单号后，最后询问 Blue Dart。想直接归入 Blue Dart，请点“更换”，在“符合这个单号”下选择 Blue Dart。
 
-如果暂时没有承运商查到，也照样可以添加或手动指定 Blue Dart：Peek 支持超过 4,500 家快递公司。Peek 仅在校验位正确时把 Blue Dart 列入匹配建议；若你的单号校验位未通过但确认无误，在承运商列表搜索 Blue Dart 即可，Peek 仍会向其查询。带 `trackNo=` 的 bluedart.com 查询链接同样可用：Peek 会提取单号并立刻识别为 Blue Dart（“识别出的快递公司”）。
+如果暂时没有承运商查到，也照样可以添加或手动指定 Blue Dart：Peek 跟踪 4,500 多家快递公司。Peek 仅在校验位正确时把 Blue Dart 列入匹配建议；若你的单号校验位未通过但确认无误，在承运商列表搜索 Blue Dart 即可，Peek 仍会向其查询。带 `trackNo=` 的 bluedart.com 查询链接同样可用：Peek 会提取单号并立刻识别为 Blue Dart（“识别出的快递公司”）。
 
 归入 Blue Dart 的货件在首次扫描前显示“等待 Blue Dart 更新”，两天后 Blue Dart 仍查不到则提示“请检查运单号”；未指定快递公司添加时显示“暂无物流记录”。Peek 仅凭运单号读取 Blue Dart 公开查询页，无需账号：展示 Blue Dart 给出的状态，以及按印度时间读取的每条 Blue Dart 原文扫描和地点，略去收件人详情且不显示预计送达日期。包裹页上的“打开 Blue Dart 官网”会在 Blue Dart 查询页打开该运单号。
 
-在 Blue Dart 自有查询正常响应期间，当你打开货件页，或在派送当天开启通知时，Peek 最多每 10 分钟查询一次，在 Blue Dart 扫描派送当天的当地时间早上 6 点起最多每 2 分钟查询一次；其余时间每小时查询一次。连续两天无新动态（在“已生成面单”或“已揽收”状态下为 12 小时）后，改为每小时查询一次。当只有物流查询服务响应时，Peek 每小时查询一次，最新扫描满一天后每 3 小时查询一次，在派送当天你打开货件页或开启通知时最多每 15 分钟查询一次。通知选项包括“每次扫描”、“重要环节”和“仅派送当天”。
+在 Blue Dart 自己的查件系统正常响应期间，当你打开货件页，或在派送当天开启通知时，Peek 最多每 10 分钟查询一次，在 Blue Dart 扫描派送当天的当地时间早上 6 点起最多每 2 分钟查询一次；其余时间每小时查询一次。连续两天无新动态（在“已生成面单”或“已揽收”状态下为 12 小时）后，改为每小时查询一次。当只有物流查询服务响应时，Peek 每小时查询一次，最新扫描满一天后每 3 小时查询一次，在派送当天你打开货件页或开启通知时最多每 15 分钟查询一次。通知选项包括“每次扫描”、“重要环节”和“仅派送当天”。
 
 ## 关于 Blue Dart 物流查询的常见问题
 
 ### 怎么查 Blue Dart 快递？
 
-在 bluedart.com 的查询页输入 11 位运单号，或直接粘贴到 Peek。在印度，Peek 会优先查询 Blue Dart；在其他国家，点“更换”选择 Blue Dart 即可。
+在 bluedart.com 的查询页输入 11 位运单号，或直接粘贴到 Peek。在印度，Peek 会优先查询 Blue Dart；在其他国家，Peek 最后才询问 Blue Dart，你也可以点“更换”选择 Blue Dart。
 
 ### Blue Dart 运单号长什么样？
 

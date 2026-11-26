@@ -16102,6 +16102,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005bff"
     },
     {
+      "id": "dayone",
+      "catalog": "dayone",
+      "slug": "dayone-tracking",
+      "title": "Rastreamento DayOne: códigos DOT, status e quem entrega",
+      "name": "DayOne",
+      "color": "#e86d1c"
+    },
+    {
       "id": "dpd-be",
       "catalog": "dpd-be",
       "slug": "rastreamento-dpd-belgium",
@@ -16396,6 +16404,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento CMT Express: códigos CMT, Shenzhen e suporte",
       "name": "CMT Express",
       "color": "#ed010b"
+    },
+    {
+      "id": "correos-de-mexico",
+      "catalog": "correos-de-mexico",
+      "slug": "correos-de-mexico-tracking",
+      "title": "Rastreamento Correos de México: códigos MX, SEPOMEX e ajuda",
+      "name": "Correos de México",
+      "color": "#ed007d"
     },
     {
       "id": "jumppoint-international",
@@ -20460,6 +20476,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005bff"
     },
     {
+      "id": "dayone",
+      "catalog": "dayone",
+      "slug": "dayone-tracking",
+      "title": "DayOne（DOT）中国发运追踪：单号、状态与末端派送商",
+      "name": "DayOne",
+      "color": "#e86d1c"
+    },
+    {
       "id": "dpd-be",
       "catalog": "dpd-be",
       "slug": "dpd-belgium-wuliu-chaxun",
@@ -20762,6 +20786,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "诚贸通（CMT Express）单号查询：CMT 轨迹、深圳仓与客服",
       "name": "CMT Express",
       "color": "#ed010b"
+    },
+    {
+      "id": "correos-de-mexico",
+      "catalog": "correos-de-mexico",
+      "slug": "correos-de-mexico-tracking",
+      "title": "Correos de México 墨西哥邮政追踪：MX 单号、理赔与客服",
+      "name": "Correos de México",
+      "color": "#ed007d"
     },
     {
       "id": "dobropost",

@@ -19,7 +19,7 @@ import { recordChecksumRejection, recordProviderBudgetSpent, recordProviderInput
 import { CarrierError, carrierErrorKind, CARRIER_DEFINITIONS, deliveryHandoff, IndeterminateError, NoHistoryError, RateLimitedError, retryAfterMsOf, withoutWrittenAhead, writtenAheadClocks } from 'universal-parcel-scraper';
 import { BLOCK_PAUSE_MS, type ProviderRefusals } from './providerRefusals';
 import type { ProviderMisses } from './providerMisses';
-import { providerAllowed } from './providerPolicy';
+import { providerAllowed, providerRefusedGuest } from './providerPolicy';
 import { captureDirectLocalHistory, directHistoryNumber, directLocalHistory, hasUnresolvedDirectCurrent, hasUnresolvedDirectHistory } from './directLocalHistory';
 import { withoutDisputedDelivery } from './disputedDelivery';
 import { plannedClocks } from './futureScans';
@@ -2189,6 +2189,8 @@ export class TrackingRouter {
         delete state.failures[source];
         return { result: { ...result, tracking_provider: source }, sourceCarrierId: 'unknown', swissPostReady: null, handoffFallbackErrorType: null };
       } catch (caught) {
+        // A provider that refuses this server's guest lookups is asked less for a while (providerPolicy.ts).
+        if (token !== null && carrierErrorReason(caught) === 'guest_refused') providerRefusedGuest(source);
         // The provider reads the carriers on after the call (Ordertracker) and has its answer for the next ask: it
         // keeps no failure and no rest. The check comes back after the other providers, or the next check does.
         const readsFor = stillReadingMs(caught);

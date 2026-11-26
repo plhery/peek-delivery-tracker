@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { BROWSER_SOURCES, UNIVERSAL_SOURCES } from 'universal-parcel-scraper';
-import { PROVIDER_HOURLY_LIMITS, providerAllowed, providerLimit, reportProviderSetting, unknownProviders } from './providerPolicy';
+import { PROVIDER_HOURLY_LIMITS, providerAllowed, providerLimit, providerRefusedGuest, reportProviderSetting, unknownProviders } from './providerPolicy';
 
 const observability = vi.hoisted(() => ({ log: vi.fn(), capture: vi.fn() }));
 vi.mock('./observability', () => ({ logOperationalEvent: observability.log, captureProviderSetting: observability.capture }));
@@ -40,6 +40,22 @@ describe('hourly limits', () => {
       const { limit, reserve } = providerLimit(provider, true)!;
       expect(reserve + 1).toBeLessThanOrEqual(limit / 2);
     }
+  });
+  it('halve ParcelsApp\'s from its refusal of a guest lookup until it has refused none for six hours', () => {
+    const refused = Date.parse('2026-01-01T02:29:00Z');
+    expect(providerLimit('ParcelsApp', true, refused - 1)).toEqual({ limit: 90, reserve: 15 });
+    providerRefusedGuest('ParcelsApp', refused);
+    providerRefusedGuest('Ship24', refused);
+    expect(providerLimit('ParcelsApp', false, refused)).toEqual({ limit: 45, reserve: 0 });
+    expect(providerLimit('ParcelsApp', true, refused + 60_000)).toEqual({ limit: 45, reserve: 7 });
+    expect(providerLimit('Ship24', true, refused)).toEqual({ limit: 180, reserve: 30 });
+    // A later refusal keeps it slow six hours from then; an earlier one, recorded late, does not shorten that.
+    providerRefusedGuest('ParcelsApp', refused + 60 * 60_000);
+    providerRefusedGuest('ParcelsApp', refused);
+    expect(providerLimit('ParcelsApp', true, refused + 6 * 60 * 60_000)).toEqual({ limit: 45, reserve: 7 });
+    expect(providerLimit('ParcelsApp', true, refused + 7 * 60 * 60_000)).toEqual({ limit: 90, reserve: 15 });
+    const { limit, reserve } = providerLimit('ParcelsApp', true, refused + 60 * 60_000)!;
+    expect(reserve + 1).toBeLessThanOrEqual(limit / 2);
   });
   it('are none for a provider without one', () => {
     expect(providerLimit('UPU', true)).toBeUndefined();

@@ -17,6 +17,7 @@ import { healthStepRecorder, observeTrackingHealth, type HealthSample } from './
 import { RoyalBrowserPaused } from './royalBrowserAdmission';
 import { ProviderRefusals } from './providerRefusals';
 import { ProviderMisses } from './providerMisses';
+import { providerLimit } from './providerPolicy';
 
 // Keep the published plan configurable without changing the scraper's other exports. Poste Italiane stands for a
 // carrier that allows an hour between two lookups of a number, whatever interval the release gives it.
@@ -5098,5 +5099,18 @@ describe('a carrier picked by hand whose adapter refuses the number', () => {
     const result = await back.router.fetch({ ...picked(routing), carrier: 'aliexpress' }, false);
     expect(asked(back)).toEqual(['aliexpress']);
     expect(result.result.routing).not.toHaveProperty('served_elsewhere');
+  });
+});
+
+describe('a provider that refuses a guest lookup', () => {
+  it('is asked at a lower limit for a while, from its own refusal of this server', async () => {
+    fixedPlan('ParcelsApp', 'Ship24');
+    const { router, universal } = setup();
+    universal.mockRejectedValueOnce(new IndeterminateError('ParcelsApp', 'ParcelsApp refused the lookup', { reason: 'guest_refused' }))
+      .mockResolvedValueOnce(history());
+    expect(providerLimit('ParcelsApp', false)).toEqual({ limit: 90, reserve: 0 });
+    const result = await router.fetch(parcel(), false);
+    expect(result.result).toMatchObject({ tracking_provider: 'Ship24' });
+    expect(providerLimit('ParcelsApp', false)).toEqual({ limit: 45, reserve: 0 });
   });
 });

@@ -52,10 +52,11 @@ export function reportProviderSetting(setting = process.env.TRACKING_UNIVERSAL_P
 }
 
 /**
- * The most lookups each universal provider is sent in an hour, by every server together: the allowance of its shared
- * lease (`acquire_tracking_provider`). The lease alone admits a lookup every five seconds, and a carrier's outage
+ * The lookups each universal provider is sent in an hour, by every server together: the rate of its shared lease's
+ * allowance (`acquire_tracking_provider`). The lease alone admits a lookup every five seconds, and a carrier's outage
  * sends its parcels to the providers together. The allowance holds half an hour of the limit, so a quiet provider takes
- * a burst and a busy one settles at its limit; a lookup it refuses asks the next provider.
+ * a burst, up to one and a half times its limit in a clock hour, and a busy one settles at its limit; a lookup it
+ * refuses asks the next provider.
  *
  * ParcelsApp refuses an address that asks it too much, for every carrier, and several carriers have no other source:
  * its limit keeps well under what it has refused. Ordertracker is asked through its app's own endpoint, whose
@@ -68,11 +69,36 @@ export const PROVIDER_HOURLY_LIMITS: Readonly<Record<string, number>> = {
 };
 
 /**
- * What a lookup states to `provider`'s hourly allowance: the limit, and the lookups it leaves in the allowance when nobody
- * waits for its answer (`background`), a third of what the allowance holds, for the Adds and refreshes someone does
- * wait for. Undefined for a provider without a limit.
+ * Providers asked at a fraction of their limit for a while after they refuse a guest lookup (`guest_refused`).
+ * ParcelsApp refuses a few lookups among its answers for hours before it blocks the server for every carrier, a day
+ * and more: from its first refusal it takes half as many, and its allowance holds half as many, until it has refused
+ * none for six hours.
  */
-export function providerLimit(provider: string, background: boolean): { limit: number; reserve: number } | undefined {
-  const limit = Object.hasOwn(PROVIDER_HOURLY_LIMITS, provider) ? PROVIDER_HOURLY_LIMITS[provider]! : undefined;
-  return limit === undefined ? undefined : { limit, reserve: background ? Math.floor(limit / 6) : 0 };
+const GUEST_REFUSAL_SLOWDOWN: Readonly<Record<string, { factor: number; ms: number }>> = {
+  ParcelsApp: { factor: 0.5, ms: 6 * 60 * 60_000 },
+};
+
+// When each provider last refused a guest lookup. Shared by every check in the process, however many bundles load this module.
+const refusedKey = Symbol.for('peek.providerGuestRefusals');
+const refusedScope = globalThis as typeof globalThis & { [refusedKey]?: Map<string, number> };
+const guestRefusals: Map<string, number> = refusedScope[refusedKey] ??= new Map();
+
+/** `provider` refused one of this process's guest lookups at `at`: one that slows down after a refusal does (`providerLimit`). */
+export function providerRefusedGuest(provider: string, at = Date.now()): void {
+  if (Object.hasOwn(GUEST_REFUSAL_SLOWDOWN, provider)) guestRefusals.set(provider, Math.max(at, guestRefusals.get(provider) ?? at));
+}
+
+/**
+ * What a lookup states to `provider`'s hourly allowance: the limit, lowered while the provider recently refused a guest
+ * lookup (`GUEST_REFUSAL_SLOWDOWN`), and the lookups it leaves in the allowance when nobody waits for its answer
+ * (`background`), a third of what the allowance holds, for the Adds and refreshes someone does wait for. Undefined for
+ * a provider without a limit.
+ */
+export function providerLimit(provider: string, background: boolean, now = Date.now()): { limit: number; reserve: number } | undefined {
+  const hourly = Object.hasOwn(PROVIDER_HOURLY_LIMITS, provider) ? PROVIDER_HOURLY_LIMITS[provider]! : undefined;
+  if (hourly === undefined) return undefined;
+  const slowdown = Object.hasOwn(GUEST_REFUSAL_SLOWDOWN, provider) ? GUEST_REFUSAL_SLOWDOWN[provider]! : undefined;
+  const refused = guestRefusals.get(provider);
+  const limit = slowdown && refused !== undefined && now - refused < slowdown.ms ? Math.max(4, Math.floor(hourly * slowdown.factor)) : hourly;
+  return { limit, reserve: background ? Math.floor(limit / 6) : 0 };
 }

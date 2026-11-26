@@ -1392,7 +1392,10 @@ which parcel the carrier answered for. A link shows it only where it shows the p
   has refused an address for, Ordertracker's below it, Ship24's the highest, the
   browser-service providers' by what their reads cost, none for UPU. The allowance fills at that rate and holds half an hour of
   it, so a quiet provider takes a burst, such as a carrier's outage sending its parcels
-  over, and a busy one settles at its limit. A check nobody waits for leaves a third of the
+  over, up to one and a half times its limit in a clock hour, and a busy one settles at its
+  limit. ParcelsApp refuses a few guest lookups (`guest_refused`) for hours before it blocks
+  the server: from the server's first such refusal its limit, and so its allowance, is halved
+  until it has refused none for six hours. A check nobody waits for leaves a third of the
   allowance to the Adds and refreshes someone does wait for. A lookup the allowance refuses
   goes to the next provider and records no cooldown; with no other answer the parcel is
   checked again once the first of them has a lookup, 15 minutes later at the earliest;

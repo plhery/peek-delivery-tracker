@@ -11,7 +11,8 @@ import { refusesNumber } from './numberRefusal';
 import { reportRoutingEvent } from './observability';
 import { recordProviderBudgetSpent } from './metrics';
 import { providerMisses } from './providerMisses';
-import { providerAllowed } from './providerPolicy';
+import { providerAllowed, providerRefusedGuest } from './providerPolicy';
+import { carrierErrorReason } from './trackingFailure';
 
 export type PreflightOutcome = { provider: UniversalSource; outcome: 'history' | 'no_history' | 'input_required' | 'unavailable' | 'deferred' };
 const BUDGET_MS = 8_000;
@@ -124,6 +125,7 @@ async function lookup(number: string, health: ProviderHealth, signal: AbortSigna
       // Cancelled because nobody waits any more, or because the other provider answered: not this provider's failure.
       if (stop.aborted) { kind = 'not_found'; return signal.aborted ? { provider, outcome: 'unavailable' } : null; }
       const failure = carrierErrorKind(error);
+      if (carrierErrorReason(error) === 'guest_refused') providerRefusedGuest(provider);
       retryAfterMs = Math.max(0, Math.min(7 * 86_400_000, retryAfterMsOf(error) ?? 0));
       // Missing recipient data is an answer about one parcel, never an upstream outage.
       if (failure === 'input_required') { kind = 'not_found'; return { provider, outcome: plausibleInputRequest(number) ? 'input_required' : 'no_history' }; }

@@ -18575,7 +18575,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "ontrac",
       "catalog": "ontrac",
       "slug": "ontrac-kuaidi-chaxun",
-      "title": "OnTrac 快递查询：单号、物流状态与未妥投处理",
+      "title": "OnTrac 快递查询：单号、物流状态与派送未成功",
       "name": "OnTrac",
       "color": "#cc2027"
     },

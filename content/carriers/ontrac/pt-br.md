@@ -1,6 +1,6 @@
 ---
 title: Rastreamento OnTrac: códigos, status e entregas nos EUA
-description: Rastreie encomendas OnTrac ou LaserShip nos EUA: formato do código, significado dos status em inglês, entrega frustrada, atrasos e como falar com o suporte.
+description: Rastreie encomendas OnTrac ou LaserShip nos EUA: formato do código, significado dos status em inglês, entregas não realizadas, atrasos e como falar com o suporte.
 slug: rastreamento-ontrac
 published: 2026-11-25
 updated: 2026-11-25
@@ -47,11 +47,11 @@ O site da OnTrac existe apenas em inglês. A página de rastreamento mostra um t
 
 Duas mensagens costumam confundir: `LABEL CREATED, TRACKING DETAILS WILL BE AVAILABLE ONCE THE PACKAGE ARRIVES AT THE ONTRAC FACILITY` e `Waiting for package from shipper.` significam ambas que a OnTrac ainda não recebeu o pacote — a loja apenas gerou a etiqueta. Além disso, quando aparece `Order has been transferred to another carrier`, o título principal da OnTrac marca Delivered, mesmo que o pacote tenha apenas sido transferido para outra transportadora. Após `Delivery Pending`, o título passa a mostrar `Delayed` com uma data.
 
-## Horários de entrega da OnTrac e tentativas frustradas
+## Horários de entrega da OnTrac e entregas não realizadas
 
 A OnTrac costuma entregar em residências entre 8h e 21h no horário local na data prevista, e algumas regiões também recebem entregas aos sábados e domingos no mesmo horário.
 
-**Entrega frustrada.** A OnTrac faz até três tentativas e depois segue suas regras de devolução de pacotes. A próxima tentativa costuma ocorrer em 1 a 2 dias úteis, nunca no mesmo dia.
+**Entrega não realizada.** A OnTrac faz até três tentativas e depois segue suas regras de devolução de pacotes. A próxima tentativa costuma ocorrer em 1 a 2 dias úteis, nunca no mesmo dia.
 
 **Consta tentativa, mas você estava em casa.** Confira o endereço no site da loja e envie correções, instruções de entrega ou código de portão para o Wink, o chat virtual da OnTrac, informando seu código de rastreamento. Instruções enviadas depois que o pacote já saiu para entrega podem valer apenas para a tentativa seguinte.
 
@@ -67,7 +67,7 @@ A OnTrac costuma entregar em residências entre 8h e 21h no horário local na da
 
 **Consta entregue, mas não chegou.** Abaixo do resultado em ontrac.com, escolha "Tracking shows delivered; no package" no formulário "Have a question?" ou abra um chamado com o Wink. A OnTrac envia um número de protocolo por e-mail e pede até 48 horas para investigar. Se passarem mais de 2 dias úteis sem retorno, fale com a loja. Veja mais passos em [consta como entregue, mas não chegou](guide:delivered-not-received).
 
-**Avaria, extravio ou atraso.** O mesmo formulário oferece "Package was delivered damaged" e "My delivery is delayed" quando aplicáveis. Porém, pedidos de indenização passam pelo remetente: os termos da OnTrac estabelecem que a empresa que enviou o pacote abre o processo, e você deve pedir reembolso ou reenvio à loja.
+**Dano, extravio ou atraso.** O mesmo formulário oferece "Package was delivered damaged" e "My delivery is delayed" quando aplicáveis. Porém, pedidos de indenização passam pelo remetente: os termos da OnTrac estabelecem que a empresa que enviou o pacote abre o processo, e você deve pedir reembolso ou reenvio à loja.
 
 ## Atendimento ao cliente OnTrac: chat, SMS e horários
 

@@ -16,10 +16,10 @@ OnTrac publishes no lengths. The shapes Peek knows, with invented digits:
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `C11234567890124` | C and 14 digits, ending in a check digit |
-| `D10000000000003` | D and 14 digits, ending in a check digit |
+| `C14829105736497` | C and 14 digits, ending in a check digit |
+| `D10482910573645` | D and 14 digits, ending in a check digit |
 | `LX48291057` | LaserShip: L, then A, E, H, I, N or X, and 8 digits |
-| `1LS123456789012` | LaserShip: 1LS and 12 to 14 letters or digits |
+| `1LS482910573649` | LaserShip: 1LS and 12 to 14 letters or digits |
 | `AD482910573` | A shipper's reference, not OnTrac's own number |
 
 LaserShip's website now redirects to ontrac.com, so a LaserShip number is tracked there too. A number starting `D` with only 10 digits, or a plain 12-digit number, belongs to other carriers: check which carrier the shop's email names.

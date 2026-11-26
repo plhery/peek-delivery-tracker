@@ -15998,6 +15998,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#002664"
     },
     {
+      "id": "pin-ag",
+      "catalog": "pin-ag",
+      "slug": "pin-ag-tracking",
+      "title": "Rastreamento PIN AG: cartas registradas, pacotes e retirada",
+      "name": "PIN AG",
+      "color": "#003366"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "rastreamento-rl-carriers",
@@ -16020,6 +16028,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Jifan: códigos JFGJ, eventos e horário",
       "name": "Jifan",
       "color": "#c81011"
+    },
+    {
+      "id": "posta-romana",
+      "catalog": "posta-romana",
+      "slug": "posta-romana-tracking",
+      "title": "Rastreamento Poșta Română: códigos RO, status e alfândega",
+      "name": "Poșta Română",
+      "color": "#ea0029"
     },
     {
       "id": "dpd-nl",
@@ -20236,6 +20252,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#002664"
     },
     {
+      "id": "pin-ag",
+      "catalog": "pin-ag",
+      "slug": "pin-ag-tracking",
+      "title": "PIN AG 德国邮政追踪：挂号信、包裹与网点自提指南",
+      "name": "PIN AG",
+      "color": "#003366"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "rl-carriers-wuliu-chaxun",
@@ -20258,6 +20282,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "吉凡国际物流（Jifan）查询：JFGJ单号、状态与北京时间",
       "name": "Jifan",
       "color": "#c81011"
+    },
+    {
+      "id": "posta-romana",
+      "catalog": "posta-romana",
+      "slug": "posta-romana-tracking",
+      "title": "Poșta Română 罗马尼亚邮政追踪：单号格式、状态与关税",
+      "name": "Poșta Română",
+      "color": "#ea0029"
     },
     {
       "id": "dpd-nl",

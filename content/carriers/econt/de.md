@@ -67,7 +67,7 @@ Verlangt eine verdächtige SMS Zahlungen außerhalb der offiziellen Econt-App od
 
 ## Econt-Pakete mit Peek verfolgen
 
-Weil 13 Ziffern zu mehreren Diensten passen, fragt [Peek](/) Econt bei einer reinen Nummer nur dann automatisch ab, wenn du sie auf der Website aus Bulgarien oder in der App mit Geräteregion Bulgarien eingibst. Außerhalb Bulgariens wählst du Econt einfach über „Ändern“ aus – oder fügst einen `econt.com`-Link mit `/services/track-shipment/`, `/en/services/track-shipment/`, `/tracking/` oder `/tracking/?num=` ein, der Econt sofort benennt (solange Econt die Sendung noch nicht kennt oder alte Verläufe gelöscht sind, zeigt Peek „Warten auf Econt“ und bittet dich nach zwei Tagen, die Nummer zu prüfen oder einen anderen Paketdienst zu wählen).
+Weil 13 Ziffern zu mehreren Diensten passen, fragt [Peek](/) Econt bei einer reinen Nummer nur dann zuerst, wenn du sie auf der Website aus Bulgarien oder in der App mit Geräteregion Bulgarien eingibst. Außerhalb Bulgariens fragt Peek Econt zuletzt, wenn weder die anderen Dienste noch die Tracking-Dienste die Nummer kennen. Du kannst Econt auch über „Ändern“ auswählen – oder einen `econt.com`-Link mit `/services/track-shipment/`, `/en/services/track-shipment/`, `/tracking/` oder `/tracking/?num=` einfügen, der Econt sofort benennt (solange Econt die Sendung noch nicht kennt oder alte Verläufe gelöscht sind, zeigt Peek „Warten auf Econt“ und bittet dich nach zwei Tagen, die Nummer zu prüfen oder einen anderen Paketdienst zu wählen).
 
 Peek liest Econts Tracking-Dienst ohne Konto oder Postleitzahl, zeigt den Status, verortet Econt-Büros auf der Karte, nennt bei „Abholbereit“ das lagernde Büro und behält bis zu die 100 neuesten Scans. Für die Person, die das Paket hinzugefügt hat, bleiben Empfängername und Unterzeichner nach `Delivered:` sichtbar (auf geteilten Links ausgeblendet), während Paketanzahl, Kuriername, Absender und Auftragsnummern entfallen; Lieferprognose, Gewicht oder Zustellfoto liefert Econt nicht.
 
@@ -85,7 +85,7 @@ Laut Econt am nächsten Werktag in Orten mit Econt-Büro (an Adressen innerorts 
 
 ### Wie verfolge ich ein Econt-Paket außerhalb Bulgariens anhand der 13-stelligen Nummer?
 
-Füge die 13 Ziffern oben ein und wähle Econt über „Ändern“ aus (oder füge den vollständigen Link `econt.com/en/services/track-shipment/…` ein), da eine bloße 13-stellige Zahl nur aus Bulgarien automatisch bei Econt geprüft wird.
+Füge die 13 Ziffern oben ein und wähle Econt über „Ändern“ aus (oder füge den vollständigen Link `econt.com/en/services/track-shipment/…` ein), da Peek eine bloße 13-stellige Zahl außerhalb Bulgariens erst zuletzt bei Econt prüft.
 
 :::sources
 - [Econt: Track a shipment](https://www.econt.com/en/services/track-shipment) – englische Sendungsverfolgung auf econt.com

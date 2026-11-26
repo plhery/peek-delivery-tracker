@@ -67,7 +67,7 @@ Se receberes um SMS suspeito a pedir pagamentos fora da app oficial ou de `econt
 
 ## Seguir uma encomenda Econt com o Peek
 
-Como 13 algarismos pertencem a várias transportadoras, o [Peek](/) só consulta automaticamente a Econt pelo número isolado quando o adicionas no site a partir da Bulgária ou na app num telemóvel com região Bulgária. Fora da Bulgária, escolhe a Econt em «Alterar» — ou cola uma ligação `econt.com` com `/services/track-shipment/`, `/en/services/track-shipment/`, `/tracking/` ou `/tracking/?num=`, que seleciona logo a Econt (enquanto a Econt ainda não tiver registo ou se o histórico antigo já tiver sido limpo, o Peek mostra «À espera de Econt» e, ao fim de dois dias, pede-te que verifiques o número ou escolhas outra transportadora).
+Como 13 algarismos pertencem a várias transportadoras, o [Peek](/) só consulta a Econt em primeiro lugar, pelo número isolado, quando o adicionas no site a partir da Bulgária ou na app num telemóvel com região Bulgária. Fora da Bulgária, o Peek consulta a Econt em último lugar, quando nem as outras transportadoras nem os serviços de seguimento conhecem o número. Também podes escolher a Econt em «Alterar» — ou colar uma ligação `econt.com` com `/services/track-shipment/`, `/en/services/track-shipment/`, `/tracking/` ou `/tracking/?num=`, que seleciona logo a Econt (enquanto a Econt ainda não tiver registo ou se o histórico antigo já tiver sido limpo, o Peek mostra «À espera de Econt» e, ao fim de dois dias, pede-te que verifiques o número ou escolhas outra transportadora).
 
 O Peek consulta o serviço da Econt sem conta nem código postal, apresenta o estado atual, posiciona os balcões no mapa, mostra em que balcão a encomenda aguarda quando está «Pronta para levantamento» e guarda até às 100 leituras mais recentes. Para quem adicionou a encomenda, mantém o nome do destinatário e de quem assinou após `Delivered:` (ocultos numa ligação partilhada), deixando de fora número de volumes, nome do estafeta, remetente e referências de instrução; a Econt não indica data prevista, peso nem foto de entrega.
 
@@ -85,7 +85,7 @@ No dia útil seguinte nas localidades com balcão Econt (até às `18:00` ao dom
 
 ### Como seguir uma encomenda Econt fora da Bulgária pelo número de 13 algarismos?
 
-Cola os 13 algarismos na caixa acima e escolhe a Econt em «Alterar» (ou cola a ligação completa `econt.com/en/services/track-shipment/…`), porque um número de 13 algarismos isolado só é testado automaticamente na Econt a partir da Bulgária.
+Cola os 13 algarismos na caixa acima e escolhe a Econt em «Alterar» (ou cola a ligação completa `econt.com/en/services/track-shipment/…`), porque fora da Bulgária o Peek só consulta a Econt em último lugar para um número de 13 algarismos isolado.
 
 :::sources
 - [Econt: Track a shipment](https://www.econt.com/en/services/track-shipment) – localizador em inglês em econt.com

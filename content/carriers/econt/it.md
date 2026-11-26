@@ -67,7 +67,7 @@ Se ricevi un SMS sospetto che chiede pagamenti fuori dall'app ufficiale o da `ec
 
 ## Tracciare un pacco Econt con Peek
 
-Poiché 13 cifre sono condivise da più corrieri, [Peek](/) interroga automaticamente Econt per il solo numero soltanto quando lo inserisci sul sito dalla Bulgaria o nell'app su un telefono con regione Bulgaria. Dall'estero scegli Econt con «Cambia» — oppure incolla un link `econt.com` con `/services/track-shipment/`, `/en/services/track-shipment/`, `/tracking/` o `/tracking/?num=`, che seleziona subito Econt (finché Econt non ha ancora il pacco o se lo storico vecchio è stato rimosso, Peek mostra «In attesa di Econt» e, dopo due giorni, ti chiede di controllare il numero o di scegliere un altro corriere).
+Poiché 13 cifre sono condivise da più corrieri, [Peek](/) interroga Econt per primo, per il solo numero, soltanto quando lo inserisci sul sito dalla Bulgaria o nell'app su un telefono con regione Bulgaria. Dall'estero Peek interroga Econt per ultimo, quando né gli altri corrieri né i servizi di tracciamento conoscono il numero. Puoi anche scegliere Econt con «Cambia» — oppure incollare un link `econt.com` con `/services/track-shipment/`, `/en/services/track-shipment/`, `/tracking/` o `/tracking/?num=`, che seleziona subito Econt (finché Econt non ha ancora il pacco o se lo storico vecchio è stato rimosso, Peek mostra «In attesa di Econt» e, dopo due giorni, ti chiede di controllare il numero o di scegliere un altro corriere).
 
 Peek interroga il servizio di tracciamento Econt senza account né CAP, mostra lo stato, colloca gli uffici sulla mappa, indica l'ufficio in cui il pacco ti aspetta quando è «Pronto per il ritiro» e conserva fino alle 100 scansioni più recenti. Per chi ha aggiunto la spedizione conserva il nome del destinatario e del firmatario dopo `Delivered:` (nascosti nei link condivisi), scartando numero di colli, nome del corriere, mittente e numeri d'ordine; Econt non fornisce data stimata, peso né foto di consegna.
 
@@ -85,7 +85,7 @@ Il giorno lavorativo successivo nei centri con ufficio Econt (entro le `18:00` a
 
 ### Come traccio un pacco Econt dall'estero con il numero a 13 cifre?
 
-Incolla le 13 cifre nel campo qui sopra e seleziona Econt tramite «Cambia» (oppure incolla il link completo `econt.com/en/services/track-shipment/…`), perché un numero a 13 cifre da solo viene provato su Econt in automatico solo dalla Bulgaria.
+Incolla le 13 cifre nel campo qui sopra e seleziona Econt tramite «Cambia» (oppure incolla il link completo `econt.com/en/services/track-shipment/…`), perché fuori dalla Bulgaria Peek interroga Econt solo per ultimo per un numero a 13 cifre da solo.
 
 :::sources
 - [Econt: Track a shipment](https://www.econt.com/en/services/track-shipment) – ricerca spedizioni in inglese su econt.com

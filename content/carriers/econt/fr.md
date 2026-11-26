@@ -67,7 +67,7 @@ Si tu reçois un SMS suspect réclamant un paiement hors de l'application offici
 
 ## Suivre un colis Econt avec Peek
 
-Comme 13 chiffres correspondent à plusieurs transporteurs, [Peek](/) n'interroge automatiquement Econt que lorsque tu ajoutes le numéro depuis la Bulgarie sur le site ou sur un téléphone configuré sur la région Bulgarie. Ailleurs, si aucun autre transporteur ne reconnaît le code, choisis Econt avec « Changer » — ou colle directement un lien `econt.com` contenant `/services/track-shipment/`, `/en/services/track-shipment/`, `/tracking/` ou `/tracking/?num=`, qui désigne Econt aussitôt (tant qu'Econt n'a pas encore de dossier ou si l'historique ancien a été purgé, Peek affiche « En attente de Econt », puis, au bout de deux jours, te demande de vérifier le numéro ou de choisir un autre transporteur).
+Comme 13 chiffres correspondent à plusieurs transporteurs, [Peek](/) n'interroge Econt en premier que lorsque tu ajoutes le numéro depuis la Bulgarie sur le site ou sur un téléphone configuré sur la région Bulgarie. Ailleurs, Peek interroge Econt en dernier, quand ni les autres transporteurs ni les services de suivi ne connaissent le numéro. Tu peux aussi choisir Econt avec « Changer » — ou coller directement un lien `econt.com` contenant `/services/track-shipment/`, `/en/services/track-shipment/`, `/tracking/` ou `/tracking/?num=`, qui désigne Econt aussitôt (tant qu'Econt n'a pas encore de dossier ou si l'historique ancien a été purgé, Peek affiche « En attente de Econt », puis, au bout de deux jours, te demande de vérifier le numéro ou de choisir un autre transporteur).
 
 Peek interroge le service de suivi d'Econt sans compte ni code postal, affiche l'étape en cours, place les agences sur la carte, indique l'agence où le colis attend lorsqu'il est « Prêt à être retiré » et garde jusqu'aux 100 scans les plus récents. Pour la personne qui a ajouté le colis, Peek conserve le nom du destinataire et du signataire figurant après `Delivered:` (masqués sur un lien de partage), tandis que le nombre de colis, le nom du coursier, l'expéditeur et les numéros d'ordre sont écartés ; Econt ne communique ni date de livraison estimée, ni poids, ni photo de livraison.
 
@@ -85,7 +85,7 @@ Econt annonce le jour ouvré suivant vers les localités disposant d'une agence 
 
 ### Comment suivre un colis Econt hors de Bulgarie avec son numéro à 13 chiffres ?
 
-Colle les 13 chiffres dans le champ ci-dessus puis sélectionne Econt via « Changer » (ou colle le lien complet `econt.com/en/services/track-shipment/…`), car un code à 13 chiffres seul n'est testé automatiquement chez Econt que depuis la Bulgarie.
+Colle les 13 chiffres dans le champ ci-dessus puis sélectionne Econt via « Changer » (ou colle le lien complet `econt.com/en/services/track-shipment/…`), car hors de Bulgarie, Peek n'interroge Econt qu'en dernier pour un code à 13 chiffres seul.
 
 :::sources
 - [Econt : Track a shipment](https://www.econt.com/en/services/track-shipment) – suivi en anglais sur econt.com

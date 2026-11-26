@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Econt: número da remessa, status e agências
-description: Rastreie uma encomenda Econt na Bulgária: onde encontrar o número da remessa, significado dos status em inglês, agências, Econtomats, reclamações e contatos.
+description: Rastreie uma encomenda Econt na Bulgária: onde encontrar o número da remessa, significado dos status em inglês, agências, Econtomats, indenizações e contatos.
 slug: rastreamento-econt
 published: 2026-11-26
 updated: 2026-11-26
@@ -12,13 +12,13 @@ A Econt Express é uma transportadora búlgara fundada em 1993 que entrega na su
 
 A Econt chama esse código de número da remessa (shipment number) ou número da guia (waybill number). Os e-mails e SMS da Econt trazem um link que abre o rastreamento; o SMS é opcional e pago pelo remetente, então nem toda encomenda recebe um. Não recebeu mensagem? Pergunte à loja ou veja [onde mais encontrar seu código de rastreamento](guide:find-tracking-number).
 
-A Econt não publica um formato oficial, mas os números de exemplo no manual de integração XML dela têm 13 dígitos, e o Peek também lê os códigos da Econt como 13 dígitos, como o código inventado `1048291057364`.
+A Econt não publica um formato, mas os números de exemplo no manual de integração XML dela têm 13 dígitos, e o Peek também lê os códigos da Econt como 13 dígitos, como o código inventado `1048291057364`.
 
 Treze dígitos também servem para outras transportadoras, entre elas [DPD France](carrier:dpd-fr), a Ukrposhta da Ucrânia e a [FAN Courier](carrier:fan-courier) da Romênia; portanto confira qual transportadora aparece no e-mail da loja ou no SMS.
 
 ## O que significam os status de rastreamento da Econt
 
-econt.com abre em búlgaro, com opção para trocar para inglês. Estes são os rótulos de movimentação da Econt em inglês como o Peek os lê, na ordem em que costumam surgir.
+econt.com abre em búlgaro, com opção para trocar para inglês. Estes são os rótulos de movimentação da Econt em inglês como o Peek os lê, na ordem em que a encomenda passa por eles.
 
 | Status da Econt | O que significa para você |
 | --- | --- |
@@ -40,7 +40,7 @@ No site em búlgaro, o resumo exibe `В офис` quando a encomenda aguarda em 
 
 ## Entrega Econt, agências e Econtomats
 
-**Na sua porta:** dentro de uma cidade, a Econt entrega no endereço até as 18h do dia útil seguinte; fora disso, conforme a programação local. Um e-mail ou SMS avisa onde está a encomenda e qual agência ou entregador está com ela. O remetente pode contratar faixa horária de entrega ou entrega aos sábados mediante taxa.
+**Na sua porta:** dentro de uma cidade, a Econt entrega no endereço até as 18h do dia útil seguinte; fora disso, conforme a programação dela. Um e-mail ou SMS avisa onde está a encomenda e qual agência ou entregador está com ela. O remetente pode contratar faixa horária de entrega ou entrega aos sábados mediante taxa.
 
 **Em uma agência:** uma encomenda enviada para o dia útil seguinte fica disponível logo cedo, quando a agência abre. A Econt cobra taxa diária de armazenagem depois que o pacote fica mais de sete dias aguardando retirada.
 
@@ -54,7 +54,7 @@ No site em búlgaro, o resumo exibe `В офис` quando a encomenda aguarda em 
 
 A Econt informa entrega no dia útil seguinte em locais com agência Econt, em até três dias úteis onde não há agência e de um a dois dias úteis a partir de um Econtomat, dependendo do horário de envio. Dias sem movimentação? Veja [rastreamento que não atualiza](guide:tracking-not-updating) e depois fale com a Econt ou com a loja.
 
-**Danificada, faltando itens ou extraviada.** Registre uma reclamação em "I want to file a claim" na página de atendimento ao cliente da Econt e avise a loja.
+**Danificada, faltando itens ou extraviada.** Faça um pedido de indenização em "I want to file a claim" na página de atendimento ao cliente da Econt e avise a loja.
 
 ## Telefone e atendimento ao cliente da Econt
 
@@ -67,7 +67,7 @@ Canais da Econt na [página de atendimento ao cliente](https://www.econt.com/en/
 
 ## Acompanhe uma encomenda Econt com o Peek
 
-O [Peek](/) não consegue identificar uma encomenda da Econt apenas pelos 13 dígitos: ele consulta outras transportadoras, como a Delhivery, e só pergunta à própria Econt quando você adiciona o número pelo site estando na Bulgária ou no app em um celular configurado para a região da Bulgária. Se nenhuma reconhecer o código, aparece "ainda não encontrada · o Peek continua verificando": escolha "Econt" em "Trocar". Ou cole um link de econt.com com `/services/track-shipment/`, `/tracking/` ou `/tracking/?num=` e o código, o que identifica a Econt na hora.
+O [Peek](/) não consegue identificar uma encomenda da Econt apenas pelos 13 dígitos: ele consulta outras transportadoras, como a Delhivery, e só pergunta primeiro à própria Econt quando você adiciona o número pelo site estando na Bulgária ou no app em um celular configurado para a região da Bulgária. De qualquer outro lugar, o Peek pergunta à Econt por último, quando as outras transportadoras e os serviços de rastreamento não conhecem o código. Se nenhuma reconhecer o código, aparece "ainda não encontrada · o Peek continua verificando": escolha "Econt" em "Trocar". Ou cole um link de econt.com com `/services/track-shipment/`, `/tracking/` ou `/tracking/?num=` e o código, o que identifica a Econt na hora.
 
 Em seguida, o Peek exibe seu próprio status, definido pelo resumo da Econt quando ele determina a etapa, o histórico com a agência de cada movimentação no mapa (uma agência escrita em búlgaro aparece pelo nome da cidade quando o Peek consegue localizá-la) e o horário da entrega. Enquanto a encomenda aguarda retirada, aparece o nome da agência da Econt onde está guardada. A Econt não informa dia previsto de entrega nem peso. A quantidade de volumes, o nome do entregador e as referências de remetente e pedido ficam de fora; o nome do destinatário aparece para quem adicionou a encomenda, em "Destinatário", mas fica oculto em links compartilhados.
 

@@ -67,7 +67,7 @@ Gdy podejrzany SMS żąda dopłaty poza oficjalną aplikacją lub domeną `econt
 
 ## Śledzenie przesyłek Econt w Peek
 
-Ponieważ 13 cyfr pasuje do wielu firm, po samym numerze [Peek](/) odpytuje Econt automatycznie tylko wtedy, gdy dodajesz go na stronie z Bułgarii lub w aplikacji na telefonie z regionem Bułgaria. Poza Bułgarią wybierz Econt przyciskiem „Zmień” — albo wklej link `econt.com` zawierający `/services/track-shipment/`, `/en/services/track-shipment/`, `/tracking/` lub `/tracking/?num=`, który od razu wskazuje Econt (dopóki Econt nie ma jeszcze wpisu lub gdy stara historia wygasła, Peek wyświetla „Oczekiwanie na przewoźnika Econt”, a po dwóch dniach prosi o sprawdzenie numeru lub wybór innego przewoźnika).
+Ponieważ 13 cyfr pasuje do wielu firm, po samym numerze [Peek](/) odpytuje Econt w pierwszej kolejności tylko wtedy, gdy dodajesz go na stronie z Bułgarii lub w aplikacji na telefonie z regionem Bułgaria. Poza Bułgarią Peek pyta Econt na końcu, gdy ani inne firmy, ani usługi śledzenia nie znają numeru. Możesz też wybrać Econt przyciskiem „Zmień” — albo wkleić link `econt.com` zawierający `/services/track-shipment/`, `/en/services/track-shipment/`, `/tracking/` lub `/tracking/?num=`, który od razu wskazuje Econt (dopóki Econt nie ma jeszcze wpisu lub gdy stara historia wygasła, Peek wyświetla „Oczekiwanie na przewoźnika Econt”, a po dwóch dniach prosi o sprawdzenie numeru lub wybór innego przewoźnika).
 
 Peek pobiera dane z usługi śledzenia Econt bez konta i kodu pocztowego, pokazuje bieżący status, zaznacza oddziały na mapie, przy statusie „Do odbioru” podaje oddział przechowujący paczkę i zachowuje do 100 najnowszych skanów. Dla osoby, która dodała przesyłkę, widoczne pozostają nazwa odbiorcy i osoba kwitująca po `Delivered:` (ukryte pod udostępnionym linkiem), natomiast liczba paczek, nazwisko kuriera, nadawca i numery zleceń są pomijane; Econt nie udostępnia prognozy dnia doręczenia, wagi ani zdjęcia doręczenia.
 
@@ -85,7 +85,7 @@ W miejscowościach z oddziałem Econt — następnego dnia roboczego (pod adres 
 
 ### Jak śledzić paczkę Econt spoza Bułgarii po 13-cyfrowym numerze?
 
-Wklej 13 cyfr w polu powyżej i wybierz Econt przyciskiem „Zmień” (albo wklej pełny link `econt.com/en/services/track-shipment/…`), ponieważ sam 13-cyfrowy ciąg jest automatycznie sprawdzany w Econt wyłącznie z Bułgarii.
+Wklej 13 cyfr w polu powyżej i wybierz Econt przyciskiem „Zmień” (albo wklej pełny link `econt.com/en/services/track-shipment/…`), ponieważ poza Bułgarią Peek sprawdza sam 13-cyfrowy ciąg w Econt dopiero na końcu.
 
 :::sources
 - [Econt: Track a shipment](https://www.econt.com/en/services/track-shipment) – angielska wyszukiwarka na econt.com

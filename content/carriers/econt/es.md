@@ -67,7 +67,7 @@ Ante cualquier SMS sospechoso que pida pagos fuera de la app oficial o de `econt
 
 ## Seguir un paquete de Econt con Peek
 
-Como 13 dígitos coinciden con varios transportistas, [Peek](/) solo consulta automáticamente a Econt al pegar el número desde Bulgaria en la web o en un móvil con región Bulgaria. Desde fuera, elige Econt con «Cambiar» —o pega un enlace de `econt.com` con `/services/track-shipment/`, `/en/services/track-shipment/`, `/tracking/` o `/tracking/?num=`, que identifica a Econt al instante (mientras Econt aún no tenga registro o si ya purgó un envío antiguo, Peek muestra «Esperando a Econt» y, a los dos días, te pide revisar el número o elegir otro transportista)—.
+Como 13 dígitos coinciden con varios transportistas, [Peek](/) solo consulta primero a Econt al pegar el número desde Bulgaria en la web o en un móvil con región Bulgaria. Desde fuera, Peek consulta a Econt al final, cuando ni los otros transportistas ni los servicios de seguimiento conocen el número. También puedes elegir Econt con «Cambiar» —o pegar un enlace de `econt.com` con `/services/track-shipment/`, `/en/services/track-shipment/`, `/tracking/` o `/tracking/?num=`, que identifica a Econt al instante (mientras Econt aún no tenga registro o si ya purgó un envío antiguo, Peek muestra «Esperando a Econt» y, a los dos días, te pide revisar el número o elegir otro transportista)—.
 
 Peek consulta el servicio de rastreo de Econt sin cuenta ni código postal, muestra el estado actual, sitúa cada oficina en el mapa, indica en qué oficina espera el envío cuando está «Listo para recoger» y conserva hasta los 100 escaneos más recientes. Para quien añadió el paquete, mantiene el nombre del destinatario y de quien firmó tras `Delivered:` (ocultos en enlaces compartidos), descartando número de bultos, nombre del mensajero, remitente y referencias de orden; Econt no ofrece fecha estimada, peso ni foto de entrega.
 
@@ -85,7 +85,7 @@ El siguiente día laborable en poblaciones con oficina Econt (antes de las `18:0
 
 ### ¿Cómo rastreo un envío de Econt desde fuera de Bulgaria por su número de 13 dígitos?
 
-Pega los 13 dígitos arriba y selecciona Econt con «Cambiar» (o pega el enlace completo `econt.com/en/services/track-shipment/…`), ya que los 13 dígitos sueltos solo se prueban automáticamente en Econt desde Bulgaria.
+Pega los 13 dígitos arriba y selecciona Econt con «Cambiar» (o pega el enlace completo `econt.com/en/services/track-shipment/…`), ya que, fuera de Bulgaria, Peek consulta 13 dígitos sueltos a Econt solo al final.
 
 :::sources
 - [Econt: Track a shipment](https://www.econt.com/en/services/track-shipment) – rastreador en inglés en econt.com

@@ -67,7 +67,7 @@ Econt's channels, on its [customer service page](https://www.econt.com/en/client
 
 ## Tracking an Econt parcel with Peek
 
-[Peek](/) can't tell an Econt parcel from its 13 digits: it offers them to other carriers, such as Delhivery, and asks Econt itself only when you add the number on the website from Bulgaria, or in the app on a phone whose region is Bulgaria. If none knows it, you'll see "not found yet · Peek keeps checking": pick "Econt" with "Change". Or paste an econt.com link with `/services/track-shipment/`, `/tracking/` or `/tracking/?num=` and the number, which names Econt straight away.
+[Peek](/) can't tell an Econt parcel from its 13 digits: it offers them to other carriers, such as Delhivery, and asks Econt first only when you add the number on the website from Bulgaria, or in the app on a phone whose region is Bulgaria. From anywhere else, Peek asks Econt last, once the other carriers and tracking services have missed the number. If none knows it, you'll see "not found yet · Peek keeps checking": pick "Econt" with "Change". Or paste an econt.com link with `/services/track-shipment/`, `/tracking/` or `/tracking/?num=` and the number, which names Econt straight away.
 
 It then shows its own status, set from Econt's summary when that settles one, the history with the office of each office scan on a map (an office Econt names in Bulgarian shows as its town where Peek can place it), and the delivery time. While the parcel waits, it shows the name of the Econt office storing it. Econt gives no expected delivery day or weight. The parcel count, the courier's name, sender and order references are left out; the recipient's name shows to whoever added the parcel, as "Recipient", and a shared parcel link hides it.
 

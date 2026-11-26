@@ -16,7 +16,7 @@ DPD 将其称为包裹编号（parcel number）。单号由寄件人提供，也
 | --- | --- |
 | `05194827361542` | 14 位数字：DPD 包裹单号。 |
 
-DPD 官网的 Track & Trace 也接受参考号（reference number），但 Peek 不支持，必须输入 14 位包裹单号。
+DPD 的 Track & Trace 也接受参考号（reference number），Peek 则不接受：它需要 14 位包裹单号。
 
 14 位数字并非只有 DPD Belgium 使用。其他国家的 DPD 分公司也采用同样格式，例如 [DPD Germany](carrier:dpd-de)、DPD Netherlands 和 [DPD France](carrier:dpd-fr)，此外还有 SEUR、BRT 和 Chronopost。如果商家邮件里写的是 [bpost](carrier:bpost) 或 [PostNL](carrier:postnl)，单号则属于那家公司。完全找不到单号？查看[如何查找运单号](guide:find-tracking-number)（英文）。
 
@@ -54,7 +54,7 @@ DPD 每个阶段只向 Peek 提供一次及其最新日期，不带地点：阶�
 
 **安全存放点（Safe place）。** 即你书面授权无需签字即可放置包裹的位置，可以是后门、车棚、花园小屋或同意代收的邻居。放妥后你会收到附照片的投递回执。
 
-**人不在家时。** 住宅地址派送时，司机可能会请邻居代收；如果邻居也不在家，包裹会送到最近的 Pickup 自提网点，信箱通知单会写明在哪位邻居或哪家自提点。商业地址则会在下一个工作日再次派送；第二次仍未送达时，DPD 会保管 7 个自然日等待最后一次派送指示，逾期退回寄件人。更多见[错过派送](guide:missed-delivery)（英文）。
+**人不在家时。** 住宅地址派送时，司机可能会请邻居代收；如果邻居也不在家，包裹会送到最近的 Pickup 自提网点，信箱通知单会写明在哪位邻居或哪家自提点。商业地址则会在下一个工作日再次派送；第二次仍未送达时，DPD 会保管 7 个自然日等待最后一次派送指示，逾期退回寄件人。更多见[派送未成功](guide:missed-delivery)（英文）。
 
 **Pickup 自提网点。** 包裹送达网点时，DPD 会发邮件和/或短信通知你。如果通知卡上没写具体日期，你可以立刻去取。Pickup 网点至少每周二至周六营业。包裹自送达起保管 5 个自然日（含周日），超期退回寄件人。参见[未领取的包裹](guide:uncollected-parcel)（英文）。
 
@@ -90,15 +90,15 @@ Peek 无法替你联系 DPD 或商家。DPD Belgium 英文页面列出的渠道�
 - **聊天机器人：** DPD 也引导收件人使用其在线聊天机器人。
 - **工单表单：** 如果你联系寄件人后问题仍未解决，可通过 DPD 联系页面的表单向客服立案。
 
-DPD 网站提供英语、法语和荷兰语版本，但未说明电话客服支持哪些语言。
+DPD 网站提供英语、法语和荷兰语版本，但没有说明电话客服使用哪些语言。
 
 ## 用 Peek 跟踪 DPD Belgium 包裹
 
 把 14 位单号粘贴到 [Peek](/)。由于多家承运商共用此格式，Peek 会按你所在国家（手机地区或网页访问位置）依次询问可能性最高的几家，期间显示“正在查询物流服务…”。在比利时，Peek 会优先查询 DPD Belgium。
 
-当 DPD 把包裹归档在 DPD Belgium 名下（例如由比利时 DPD 客户寄出的包裹）时，页面会显示“DPD Belgium 有这个包裹的记录。”。由其他国家 DPD 寄出的包裹，即使已经进入比利时，也不会自动归为 DPD Belgium：比如德国商家寄出的包裹在德国境内可能显示为 DPD Germany，随后 Peek 会从那里一路跟进到比利时。
+当 DPD 把包裹归档在 DPD Belgium 名下（例如由比利时 DPD 客户寄出的包裹）时，页面会显示“DPD Belgium 有这个包裹的记录。”由其他国家 DPD 寄出的包裹，即使已经进入比利时，也不会被当作 DPD Belgium 的包裹：比如德国商家寄出的包裹在德国境内可能显示为 DPD Germany，随后 Peek 会从那里一路跟进到比利时。
 
-如果看到“暂未找到 · Peek 会继续查询”，点击“更换”选择 DPD Belgium，或在已添加的包裹上点“更换快递公司”。手动选择后，无论包裹由哪国 DPD 寄出，DPD Belgium 都能跟进。仍然可以直接粘贴：Peek 支持超过 4,500 家快递公司。
+如果看到“暂未找到 · Peek 会继续查询”，点击“更换”选择 DPD Belgium，或在已添加的包裹上点“更换快递公司”。手动选择后，无论包裹由哪国 DPD 寄出，DPD Belgium 都能跟进。仍然可以粘贴：Peek 跟踪 4,500 多家快递公司。
 
 请只粘贴纯 14 位数字：若后面多了字符，Peek 的单号识别会跳过 DPD Belgium。来自 www.dpdgroup.com/be/ 且带 `parcelNumber=` 的 myDPD 链接同样可用，并会立刻识别为 DPD Belgium。
 
@@ -127,7 +127,7 @@ DPD 周一至周六 8:30 至 18:00 派送。周六是否送货上门取决于寄
 070/222 222（每分钟 0.30 欧元），周一至周五 8:00 至 18:00。DPD 建议先联系寄件人。
 
 :::sources
-- [DPD Belgium: Receiving a parcel](https://www.dpd.com/be/en/receiving/) – 实时跟踪、安全存放点、改派、派送日期、无人签收、站点
+- [DPD Belgium: Receiving a parcel](https://www.dpd.com/be/en/receiving/) – 实时跟踪、安全存放点、改派、派送日期、不在家时、站点
 - [DPD Belgium: Track & Trace](https://www.dpd.com/be/en/receiving/track-trace/) – 包裹单号或参考号
 - [DPD Belgium: FAQ on receiving parcels](https://www.dpd.com/be/en/contact/faq/receiving-parcels/) – 包裹单号、照片、投诉、无更新、破损
 - [DPD Belgium: DPD Pickup](https://www.dpd.com/be/en/pickup/) – 最晚送达前 30 分钟改派

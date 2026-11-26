@@ -22,7 +22,7 @@ Quatorze dígitos não pertencem apenas à DPD Belgium. Empresas DPD de outros p
 
 ## O que significam os status de rastreamento da DPD Belgium
 
-O Peek lê as etapas da DPD em inglês. Na ordem em que costumam aparecer:
+O Peek lê as etapas da DPD em inglês. Na ordem em que a encomenda costuma passar por elas:
 
 | Status (como o Peek exibe) | O que significa para você |
 | --- | --- |
@@ -43,7 +43,7 @@ A DPD envia cada etapa ao Peek apenas uma vez, com a data mais recente e sem loc
 
 **Dias e horários.** A DPD entrega de segunda a sábado, das 8h30 às 18h no horário da Bélgica. Aos sábados, a entrega em domicílio depende da opção contratada pelo remetente; já a entrega em ponto Pickup é padrão. Se o remetente usar o serviço Predict da DPD, a DPD avisa o dia e a faixa horária.
 
-**Rastreamento ao vivo.** No myDPD, na web ou no aplicativo, o rastreamento em tempo real mostra onde o motorista está e quantas paradas ainda faltam.
+**Rastreamento ao vivo.** No myDPD, na web ou no aplicativo, o rastreamento ao vivo mostra onde o motorista está e quantas paradas ainda faltam.
 
 **Alterar a entrega.** No myDPD você pode alterar a entrega até 30 minutos antes da chegada, escolhendo:
 
@@ -54,7 +54,7 @@ A DPD envia cada etapa ao Peek apenas uma vez, com a data mais recente e sem loc
 
 **Local seguro (safe place).** É a sua autorização por escrito para deixar o pacote sem assinatura, por exemplo no portão dos fundos, na garagem coberta, no depósito do jardim ou com um vizinho que aceite receber. Você recebe um comprovante de entrega com foto.
 
-**Ausente na entrega.** Em endereços residenciais, o motorista pode deixar a encomenda com um vizinho. Se os vizinhos também não estiverem, o pacote vai para o ponto Pickup mais próximo, e um aviso na caixa de correio informa qual vizinho ou ponto ficou com ele. Em endereços comerciais, a DPD tenta de novo no dia útil seguinte. Após a segunda tentativa, guarda a encomenda por 7 dias corridos aguardando instruções para uma última tentativa e depois devolve ao remetente. Saiba mais em [entregas perdidas](guide:missed-delivery).
+**Ausente na entrega.** Em endereços residenciais, o motorista pode deixar a encomenda com um vizinho. Se os vizinhos também não estiverem, o pacote vai para o ponto Pickup mais próximo, e um aviso na caixa de correio informa qual vizinho ou ponto ficou com ele. Em endereços comerciais, a DPD tenta de novo no dia útil seguinte. Após a segunda tentativa, guarda a encomenda por 7 dias corridos aguardando instruções para uma última tentativa e depois devolve ao remetente. Saiba mais em [entregas não realizadas](guide:missed-delivery).
 
 **Pontos Pickup.** A DPD avisa por e-mail e/ou SMS quando a encomenda chega ao ponto. Se o cartão de aviso não indicar uma data, você pode retirar imediatamente. Os pontos Pickup abrem pelo menos de terça a sábado. O pacote fica guardado por 5 dias corridos, incluindo domingo; depois volta ao remetente. Veja [encomendas não retiradas](guide:uncollected-parcel).
 

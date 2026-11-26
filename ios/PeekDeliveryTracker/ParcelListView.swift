@@ -849,6 +849,7 @@ private struct DeliveryListView: View {
                         if let nextParcel = layout.next { nextCard(nextParcel, leaving: leaving) }
                         ForEach(layout.attention) { parcel in card(parcel, flagged: true, leaving: leaving) }
                         ForEach(layout.remaining) { parcel in card(parcel, flagged: false, leaving: leaving) }
+                        ShopWaitCards()
                     }
                     // Someone following parcels without an account is offered one, quietly, and may hide it after a while.
                     if session.isGuest, !store.parcels.isEmpty, !hasCustomView, accountInvitation.stands {
@@ -1121,9 +1122,12 @@ private struct DeliveryListView: View {
                 .frame(maxWidth: .infinity).padding(.vertical, 32)
                 .accessibilityIdentifier("deliveries.maintenance")
             } else if store.parcels.isEmpty {
-                DeliveriesEmptyState(transition: parcelTransition, onAdd: add) {
-                    sample = FirstOpenJourney.delivered(localizer: localizer)
-                    open(FirstOpenJourney.parcelID)
+                // A parcel a shop is still to ship is on its way: its card stands where the empty list's words would.
+                if store.shopWaits.waits.isEmpty {
+                    DeliveriesEmptyState(transition: parcelTransition, onAdd: add) {
+                        sample = FirstOpenJourney.delivered(localizer: localizer)
+                        open(FirstOpenJourney.parcelID)
+                    }
                 }
             } else if layout.visible.isEmpty {
                 ContentUnavailableView {
@@ -1134,7 +1138,7 @@ private struct DeliveryListView: View {
             // Someone without an account is not told to track another parcel while the row under the cards speaks to
             // them; once they hid it, they are, as with an account.
             } else if !(session.isGuest && accountInvitation.stands), !hasCustomView, store.errorMessage == nil,
-                      store.parcels.allSatisfy(\.isDelivered) {
+                      store.parcels.allSatisfy(\.isDelivered), store.shopWaits.waits.isEmpty {
                 VStack(spacing: 12) {
                     Image(systemName: "checkmark").font(.system(size: 36, weight: .ultraLight))
                         .foregroundStyle(Brand.secondaryText).padding(.bottom, 6).accessibilityHidden(true)
@@ -1207,6 +1211,8 @@ private struct DeliveryListView: View {
     /// Nil when the check was interrupted, such as by signing out.
     private func checkAllParcels() async -> ParcelStore.RefreshResult? {
         let previousOutcome = store.refreshOutcome?.id
+        // The waits for shops to ship are read beside the check, whose own read of the list brings any they became.
+        Task { await store.loadShopWaits(readingParcels: false) }
         do {
             if case .completed(let result) = try await store.refreshAll() { return result }
             // The store finishes a queued check in the background; wait for its outcome.

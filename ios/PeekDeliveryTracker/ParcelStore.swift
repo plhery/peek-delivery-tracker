@@ -52,6 +52,8 @@ final class ParcelStore: ObservableObject {
     @Published private(set) var parcels: [Parcel] = [] {
         didSet { if !holdingDeliverySurfaces { publishDeliverySurfaces() } }
     }
+    /// The account's waits for shops to ship, under the parcels on their way (`ShopWaits.swift`).
+    @Published private(set) var shopWaits = ShopWaitList()
     @Published private(set) var loading = false
     @Published private(set) var refreshing = false
     @Published private(set) var refreshOutcome: RefreshOutcome?
@@ -297,6 +299,7 @@ final class ParcelStore: ObservableObject {
         showingSavedParcels = saved != nil
         // Open on content: the saved list, or the demo box, instead of an empty frame.
         parcels = saved ?? (session.isDemo ? demo.list() : session.isGuest ? device.list() : [])
+        shopWaits = .opening(demo: session.isDemo)
         listReadAt = saved != nil ? session.user.flatMap { cache.readAt(userID: $0.id) } : session.isGuest ? device.lastCheckedAt : nil
         undoParcel = nil
         leftOnDevice = nil
@@ -567,6 +570,7 @@ final class ParcelStore: ObservableObject {
         }
         if !isDemo { await claimDeviceParcels() }
         guard (try? session.checkGeneration(generation)) != nil else { return }
+        if !isDemo { Task { await loadShopWaits() } }
         await load(showSpinner: true)
         guard (try? session.checkGeneration(generation)) != nil else { return }
         await refreshNotificationState()
@@ -592,7 +596,8 @@ final class ParcelStore: ObservableObject {
             }
             // The launch loads the preferences itself. A return reads them again: the email
             // can be switched off outside the app, from a link in an email.
-            if returning && !isDemo { Task { await refreshNotificationPreferences() } }
+            // It reads the waits for shops to ship again too.
+            if returning && !isDemo { Task { await refreshNotificationPreferences() }; Task { await loadShopWaits() } }
         } else if active && isGuest {
             Task {
                 // Notifications allowed in iOS Settings meanwhile sign the parcels up as the token comes back.
@@ -610,6 +615,30 @@ final class ParcelStore: ObservableObject {
         // The links forgotten on this iPhone before the service could be told reach it as a guest's refresh sends them,
         // rather than wait for a sign-out with their parcels and pushes.
         if session.isAuthenticated && !isDemo { await device.tellForgotten() }
+    }
+
+    /// Reads the account's waits for shops to ship; a failed read keeps those shown. One gone without the reader
+    /// removing it became parcels: the list is read again, unless `readingParcels` is off as the caller reads it next.
+    func loadShopWaits(readingParcels: Bool = true) async {
+        guard session.user != nil, !isDemo else { return }
+        let generation = session.generation
+        shopWaits.asking()
+        guard let read = try? await api.shopWaits(), generation == session.generation else { return }
+        if shopWaits.read(read), readingParcels { await load() }
+    }
+
+    /// Takes the wait off the list at once, then tells the service. When it can't be told, the wait comes back and the
+    /// waits are read again. The demo's goes until the demo starts again.
+    func removeShopWait(_ id: UUID) async {
+        guard shopWaits.remove(id), session.user != nil, !isDemo else { return }
+        let generation = session.generation
+        do {
+            try await api.removeShopWait(id: id)
+        } catch {
+            guard generation == session.generation else { return }
+            shopWaits.restore(id)
+            await loadShopWaits()
+        }
     }
 
     /// Reads the account's list and says how the read ended, so a refresh compares parcels only with a list it read.
@@ -1376,6 +1405,7 @@ final class ParcelStore: ObservableObject {
         undoParcel = nil
         await endAllDeliveryLiveActivities()
         parcels = demo.list()
+        shopWaits = .opening(demo: true)
     }
 
     /// The parcels this device follows without an account: the list for a guest; signed in, those the account could
@@ -2408,6 +2438,7 @@ final class ParcelStore: ObservableObject {
                 try? await Task.sleep(for: .seconds(30))
                 guard !Task.isCancelled, let self else { return }
                 if self.isActive { await self.load(showSpinner: false) }
+                if self.isActive, self.shopWaits.due() { await self.loadShopWaits() }
             }
         }
     }

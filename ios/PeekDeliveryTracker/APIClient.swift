@@ -639,6 +639,16 @@ final class DeliveryAPIClient {
         _ = try await rawRequest("/api/account/assistants/\(id.uuidString.lowercased())", method: "DELETE", accepting: 404)
     }
 
+    /// The account's waits for shops to ship (`ShopWaits.swift`).
+    func shopWaits() async throws -> [ShopWait] {
+        try ShopWaitsOffer.decode(try await rawRequest("/api/shop-waits").0)
+    }
+
+    /// Stops waiting for a shop to ship. One already gone counts as removed.
+    func removeShopWait(id: UUID) async throws {
+        _ = try await rawRequest("/api/shop-waits/\(id.uuidString.lowercased())", method: "DELETE", accepting: 404)
+    }
+
     func deleteAccount(confirmation: String, appleAuthorizationCode: String? = nil) async throws {
         let _: OKResponse = try await request(
             "/api/account",

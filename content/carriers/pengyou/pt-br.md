@@ -1,6 +1,6 @@
 ---
-title: Rastreamento Pengyou: códigos PY, etapas e suporte
-description: Rastreie encomendas Pengyou (捧友) de Shenzhen: formato dos códigos PY, onde consultar, por que algumas etapas são previstas com antecedência e contato.
+title: Rastreamento Pengyou: códigos PY, etapas e a quem perguntar
+description: Rastreie encomendas Pengyou (捧友) de Shenzhen: formato dos códigos PY, onde consultar, por que algumas etapas são escritas com antecedência e a quem perguntar.
 slug: rastreamento-pengyou
 published: 2026-11-26
 updated: 2026-11-26
@@ -10,7 +10,7 @@ A Pengyou (捧友, 深圳市捧友供应链有限公司), que escreve seu nome e
 
 ## Código de rastreamento Pengyou: como ele é
 
-A Pengyou não publica um formato oficial de código, e nenhuma página pública exibe um código completo. O padrão que o Peek associa à Pengyou consiste em três letras, nove dígitos e PY. Com dígitos inventados:
+A Pengyou não publica formato de código, e nenhuma página pública exibe um código completo. O padrão que o Peek associa à Pengyou consiste em três letras, nove dígitos e PY. Com dígitos inventados:
 
 | Código | O que é |
 | --- | --- |
@@ -71,7 +71,7 @@ O [Peek](/) identifica a Pengyou na hora para códigos iniciados por ZXA, série
 
 O Peek lê o próprio rastreador da Pengyou e exibe o status, cada leitura com sua localidade e o país de destino quando consta no registro. As linhas aparecem como a Pengyou as escreve, incluindo a cidade entre colchetes, exceto uma linha `Delivered` seguida de cidade, que aparece como `Delivered` com a cidade como local e sem código postal. `Shenzhen Processing Center has received it` conta como recebida pela transportadora. Os horários são lidos no horário de Pequim e exibidos no fuso horário do seu aparelho. O Peek omite nomes, endereços, códigos postais, peso, taxas e assinatura que o registro possa conter, e não mostra previsão de entrega porque a Pengyou não informa nenhuma.
 
-O Peek retém etapas gravadas mais de doze horas antes do horário exibido, ou mais de seis horas antes no mesmo segundo que uma etapa assim, e qualquer etapa datada após a consulta no horário de Pequim. Em pedidos com etapas previstas, retém também `Delivered`, mesmo quando gravado no próprio dia, pois a plataforma da Pengyou insere essa etapa em lote noturno. Quando a interface de dados não tem etapas para o código, o Peek lê a página de rastreamento da Pengyou; como essa página não indica quando cada etapa foi gravada, retém ali todos os `Delivered`. Também descarta cópias dessas etapas feitas por serviços de rastreamento e baseia-se nas leituras mantidas, nunca no status resumido. Um pedido cujas etapas sejam todas previstas fica ainda sem histórico no Peek, exibindo "Aguardando Pengyou" sem pedir conferência do código — pois considera etapas previstas como sinal de que a Pengyou tem o pedido, assim como um envio listado ainda sem leitura — e continua consultando o rastreador. Até a entrega ou devolução, o histórico abre com "Outros sites podem mostrar mais etapas, mas são apenas previsões." e lista em cinza as etapas retidas sob "Ver", cada uma com "Previsto para" e a data. Essas etapas nunca contam como leituras: não alteram o status nem enviam alertas.
+O Peek retém etapas gravadas mais de doze horas antes do horário exibido, ou mais de seis horas antes no mesmo segundo que uma etapa assim, e qualquer etapa datada após a consulta no horário de Pequim. Em pedidos com etapas previstas, retém também `Delivered`, mesmo quando gravado no próprio dia, pois a plataforma da Pengyou insere essa etapa em lote noturno. Quando a interface de dados não tem etapas para o código, o Peek lê a página de rastreamento da Pengyou; como essa página não indica quando cada etapa foi gravada, retém ali todos os `Delivered`. Também põe de lado as cópias dessas etapas feitas por serviços de rastreamento e baseia-se nas leituras mantidas, nunca no status resumido. Um pedido cujas etapas sejam todas previstas fica ainda sem histórico no Peek, exibindo "Aguardando Pengyou" sem pedir conferência do código — pois considera etapas previstas como sinal de que a Pengyou tem o pedido, assim como um envio listado ainda sem leitura — e continua consultando o rastreador. Até a entrega ou devolução, o histórico abre com "Outros sites podem mostrar mais etapas, mas são apenas previsões." e lista em cinza as etapas retidas sob "Ver", cada uma com "Previsto para" e a data. Essas etapas nunca contam como leituras: não alteram o status nem enviam alertas.
 
 O Peek consulta até a cada 10 minutos e pode notificar cada movimentação, etapas importantes ou "Só a entrega" (quando apenas serviços de rastreamento respondem, consulta a cada hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega enquanto aberta ou com alertas ligados). Após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica a cada hora. Não pode contatar a Pengyou nem o vendedor por você.
 
@@ -87,7 +87,7 @@ Porque a plataforma da Pengyou pode gravar toda a linha do tempo do pacote antec
 
 ### Onde posso rastrear uma encomenda Pengyou?
 
-Na caixa 运单查询 (consulta de conhecimento) da página inicial de szpy56.com, que aceita até 10 códigos, um por linha, abrindo o rastreador da Pengyou. Ou cole o código no Peek e escolha Pengyou se ele não identificar automaticamente.
+Na caixa 运单查询 (consulta de conhecimento) da página inicial de szpy56.com, que aceita até 10 códigos, um por linha, abrindo o rastreador da Pengyou. Ou cole o código no Peek e escolha Pengyou se o Peek não a identificar.
 
 ### Quanto tempo a Pengyou leva para entregar?
 

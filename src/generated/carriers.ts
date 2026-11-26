@@ -15385,7 +15385,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "pengyou",
       "catalog": "pengyou",
       "slug": "rastreamento-pengyou",
-      "title": "Rastreamento Pengyou: códigos PY, etapas e suporte",
+      "title": "Rastreamento Pengyou: códigos PY, etapas e a quem perguntar",
       "name": "Pengyou",
       "color": "#043a82"
     },

@@ -14822,6 +14822,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0091cd"
     },
     {
+      "id": "dpd-ch",
+      "catalog": "dpd",
+      "slug": "rastreamento-dpd-suica",
+      "title": "Rastreamento DPD Suíça: status, entrega e contato",
+      "name": "DPD Switzerland",
+      "color": "#dc0032"
+    },
+    {
       "id": "inpost",
       "catalog": "inpost",
       "slug": "rastreamento-inpost",
@@ -15644,6 +15652,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Ozon: códigos de pedido e status em russo",
       "name": "Ozon",
       "color": "#005bff"
+    },
+    {
+      "id": "j-and-t-cn",
+      "catalog": "j-and-t-cn",
+      "slug": "rastreamento-jt-express-china",
+      "title": "Rastreamento J&T Express China (极兔速递): códigos e status",
+      "name": "J&T Express China",
+      "color": "#e62019"
     },
     {
       "id": "17feia",
@@ -18426,6 +18442,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Hermes 德国快递查询：单号、德语状态说明与网点自提",
       "name": "Hermes",
       "color": "#0091cd"
+    },
+    {
+      "id": "dpd-ch",
+      "catalog": "dpd",
+      "slug": "dpd-ruishi-kuaidi-chaxun",
+      "title": "DPD 瑞士（DPD Switzerland）查询：14 位单号与状态",
+      "name": "DPD Switzerland",
+      "color": "#dc0032"
     },
     {
       "id": "inpost",

@@ -15142,6 +15142,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0f2345"
     },
     {
+      "id": "econt",
+      "catalog": "econt",
+      "slug": "rastreamento-econt",
+      "title": "Rastreamento Econt: número da remessa, status e agências",
+      "name": "Econt",
+      "color": "#234182"
+    },
+    {
       "id": "slovenska-posta",
       "catalog": "slovenska-posta",
       "slug": "rastreamento-slovenska-posta",
@@ -15700,6 +15708,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Ozon: códigos de pedido e status em russo",
       "name": "Ozon",
       "color": "#005bff"
+    },
+    {
+      "id": "dpd-be",
+      "catalog": "dpd-be",
+      "slug": "rastreamento-dpd-belgium",
+      "title": "Rastreamento DPD Belgium: status, entrega e contato",
+      "name": "DPD Belgium",
+      "color": "#dc0032"
     },
     {
       "id": "j-and-t-cn",
@@ -18820,6 +18836,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0f2345"
     },
     {
+      "id": "econt",
+      "catalog": "econt",
+      "slug": "econt-wuliu-chaxun",
+      "title": "Econt 物流查询：运单号、状态与保加利亚网点",
+      "name": "Econt",
+      "color": "#234182"
+    },
+    {
       "id": "slovenska-posta",
       "catalog": "slovenska-posta",
       "slug": "slovenska-posta-kuaidi-chaxun",
@@ -19418,6 +19442,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Ozon 物流（Ozon Rocket）查询：单号格式与俄语状态",
       "name": "Ozon",
       "color": "#005bff"
+    },
+    {
+      "id": "dpd-be",
+      "catalog": "dpd-be",
+      "slug": "dpd-belgium-wuliu-chaxun",
+      "title": "DPD Belgium 比利时物流查询：状态、派送与联系",
+      "name": "DPD Belgium",
+      "color": "#dc0032"
     },
     {
       "id": "sto",

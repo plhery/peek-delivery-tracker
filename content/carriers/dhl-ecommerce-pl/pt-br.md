@@ -15,13 +15,13 @@ A DHL chama o código de *numer listu przewozowego* (número do conhecimento). E
 | Código (fictício) | O que é |
 | --- | --- |
 | `14829173640` | 11 dígitos terminando no verificador: conhecimento doméstico. |
-| `34829173642` | Também é conhecimento válido: 1, 2 e 3 são iniciais comuns. |
+| `34829173642` | Também é um número de conhecimento. Nem todos começam pelo mesmo dígito: há números com 1, 2 e 3. |
 
 Procure-o no e-mail de envio da loja. O Mój DHL acompanha vários pacotes ao mesmo tempo e traz no menu "Return your parcel", permitindo devoluções pelo app quando a loja habilita o recurso.
 
 Sem código? Peça à loja ou consulte [como encontrar seu código de rastreamento](guide:find-tracking-number).
 
-Onze dígitos também coincidem com códigos de GLS France, [GLS Germany](carrier:gls-de), GLS Switzerland e [Swiss Post](carrier:swiss-post). Se a DHL indicar código inválido, confira no e-mail da loja se a transportadora é mesmo a DHL.
+Onze dígitos também coincidem com códigos de GLS France, [GLS Germany](carrier:gls-de), GLS Switzerland e [Swiss Post](carrier:swiss-post) e, quando começam com um dígito de 2 a 9, com os da transportadora tcheca PPL. Se a DHL indicar código inválido, confira no e-mail da loja se a transportadora é mesmo a DHL.
 
 ## O que significam os status da DHL eCommerce Polônia
 
@@ -47,15 +47,15 @@ Um envio retirado, descartado ou extraviado não segue adiante e o Peek o marca 
 
 ## Pontos DHL POP, lockers DHL BOX e alteração de entrega
 
-**Pontos e lockers.** A DHL soma 24.000 locais na Polônia para envio e retirada: pontos DHL POP e lockers DHL BOX 24/7 (9.000 deles lockers). Os pontos POP ficam em postos de combustível, bancas e mercados como Żabka, ABC e Lewiatan. A DHL também abastece pontos e lockers aos sábados no serviço padrão, sem custo extra.
+**Pontos e lockers.** A DHL soma 24.000 locais na Polônia para envio e retirada: pontos DHL POP e lockers DHL BOX 24/7 (9.000 deles lockers). Os pontos POP ficam em postos de combustível, bancas e mercados como Żabka, ABC e Lewiatan. A DHL também entrega em pontos e lockers aos sábados, no serviço padrão e sem custo extra.
 
 **Alterar a entrega.** A DHL afirma que o destinatário pode alterar data ou endereço por conta própria, gratuitamente e sem acionar o remetente. No Mój DHL, cada encomenda permite redirecionar para um ponto, mudar endereço, recusar o pacote, ligar para o entregador ou ver sua localização e recuperar o PIN; o menu principal traz ainda "Redirect parcel".
 
-## Encomenda atrasada, extraviada ou avariada na DHL Polônia
+## Encomenda atrasada, extraviada ou danificada na DHL Polônia
 
 **Sem atualização.** `Shipment preparation` indica apenas etiqueta gerada sem entrega física à DHL: pergunte à loja quando fará a postagem. Para pausas longas, veja [rastreamento que não atualiza](guide:tracking-not-updating).
 
-**Atraso, extravio ou avaria.** Em compras online, comece pela loja. Segundo o portal europeu Your Europe, o vendedor responde por qualquer dano da expedição até o recebimento e deve entregar em até 30 dias, salvo acordo distinto. Sem entrega no prazo, cobre o vendedor dando um prazo extra razoável; se falhar de novo, você pode cancelar o contrato e receber reembolso.
+**Atraso, extravio ou dano.** Em compras online, comece pela loja. Segundo o portal europeu Your Europe, o vendedor responde por qualquer dano da expedição até o recebimento e deve entregar em até 30 dias, salvo acordo distinto. Sem entrega no prazo, cobre o vendedor dando um prazo extra razoável; se falhar de novo, você pode cancelar o contrato e receber reembolso.
 
 **Reclamações à DHL.** O portal online DHL24 dispõe do formulário de reclamação ("Zgłoszenie reklamacji / dyspozycji"), pedindo o número da etiqueta ou da ordem de transporte. Consta entregue mas não chegou? Veja [encomenda entregue mas não recebida](guide:delivered-not-received).
 
@@ -69,11 +69,11 @@ Um envio retirado, descartado ou extraviado não segue adiante e o Peek o marca 
 
 ## Como rastrear uma encomenda da DHL eCommerce Polônia no Peek
 
-Para 11 dígitos, o [Peek](/) consulta simultaneamente as transportadoras prováveis (GLS France, GLS Germany, GLS Switzerland, PostLogistics dos Correios Suíços e DHL eCommerce Poland; na Polônia, DHL primeiro e GLS Poland no lugar de PostLogistics) e mostra "DHL eCommerce Poland está com esta encomenda" quando só ela confirma. Se alguma rede GLS também reconhecer o código, selecione DHL eCommerce Poland em "Trocar" — desse modo também aceita outros códigos de 11 a 34 letras e dígitos. Códigos `AD` do Allegro Delivery são recusados (o Allegro os rastreia), e códigos `JJD` vão para a DHL Alemanha (`JJD000090` com 14 a 16 dígitos para a DHL eCommerce Holanda), salvo seleção manual. Links de mojdhl.pl (`paczki=`) e sprawdz.dhl.com.pl (`sn=`) funcionam; links de dhl.com com `tracking-id=` abrem como DHL Alemanha, então digite só o número.
+Para 11 dígitos, o [Peek](/) consulta simultaneamente as transportadoras prováveis (GLS France, GLS Germany, GLS Switzerland, PostLogistics dos Correios Suíços e DHL eCommerce Poland, também a PPL se o código começar com um dígito de 2 a 9 e, na Polônia, ainda a GLS Poland) e mostra "DHL eCommerce Poland está com esta encomenda." quando só a DHL conhece o código. Se alguma rede GLS também reconhecer o código, selecione DHL eCommerce Poland em "Trocar" — desse modo também aceita outros códigos de 11 a 34 letras e dígitos. Códigos `AD` do Allegro Delivery são recusados (o Allegro os rastreia), e códigos `JJD` vão para a DHL Alemanha (`JJD000090` com 14 a 16 dígitos para a DHL eCommerce Holanda), salvo seleção manual. Links de mojdhl.pl (`paczki=`) e sprawdz.dhl.com.pl (`sn=`) funcionam; links de dhl.com com `tracking-id=` abrem como DHL Alemanha, então digite só o número.
 
-O Peek lê o status atual no Mój DHL em polonês ou inglês e o histórico de leituras em sprawdz.dhl.com.pl em inglês, qualquer que seja seu idioma no app. Cada leitura exibe o texto em inglês da DHL (`The shipment is in transit to the delivery depot.`, por exemplo), local e hora local. Se o histórico estiver indisponível, aparece apenas o status atual (`Parcel has been delivered`, por exemplo), datado do momento da leitura pelo Peek — exceto entregue e devolvido, que trazem o horário da DHL. Em ambos os casos, acrescenta o dia previsto (com a faixa horária da DHL quando disponível), remetente (em geral a loja) e hora da entrega. Códigos que agrupam múltiplos volumes não são rastreados assim. O Peek verifica no máximo uma vez por hora, inclusive no dia da entrega, aguardando 2 horas após falha ou atualização manual; depois de sete dias sem novidade em "Etiqueta criada", verifica a cada 6 horas.
+O Peek lê o status atual no Mój DHL em polonês ou inglês e o histórico de leituras em sprawdz.dhl.com.pl em inglês, qualquer que seja seu idioma no app. Cada leitura exibe o texto em inglês da DHL (`The shipment is in transit to the delivery depot.`, por exemplo), local e hora local. Se o histórico estiver indisponível, aparece apenas o status atual (`Parcel has been delivered`, por exemplo), datado do momento da leitura pelo Peek — exceto entregue e devolvido, que trazem o horário da DHL. Em ambos os casos, acrescenta o dia previsto (com a faixa horária da DHL quando disponível), remetente (em geral a loja) e hora da entrega. Códigos que agrupam múltiplos volumes não são rastreados assim. O Peek verifica no máximo uma vez por hora, inclusive no dia da entrega, e espera 2 horas após uma verificação que falhou, e uma atualização manual respeita os mesmos intervalos; depois de sete dias sem novidade em "Etiqueta criada", verifica a cada 6 horas.
 
-Quando a leitura mais recente completa quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek marca o dia da leitura ("Sem atualizações desde seg., 12 de out."), mostra "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando DHL eCommerce Poland." e exibe o link "Pedir ajuda a DHL eCommerce Poland". Passadas três semanas sem nova leitura, exibe "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando DHL eCommerce Poland."
+Quando a leitura mais recente completa quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek marca o dia da leitura ("Sem atualizações desde seg 12 out"), mostra "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando DHL eCommerce Poland." e exibe o link "Pedir ajuda a DHL eCommerce Poland". Passadas três semanas sem nova leitura, exibe "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando DHL eCommerce Poland."
 
 Você pode receber alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega".
 
@@ -103,4 +103,5 @@ Não por aqui. O próprio Allegro rastreia encomendas Allegro Delivery, por isso
 - [DHL24: Wyślij paczkę](https://dhl24.com.pl/pl/paczka.html) – pontos DHL POP em Żabka, ABC e Lewiatan, e DHL BOX 24/7
 - [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – responsabilidade do vendedor até a entrega, 30 dias, prazo extra e reembolso
 - [CSIRT NASK: oszustwo na „przesyłkę”](https://www.gov.pl/web/baza-wiedzy/uwaga-csirt-nask-ostrzega-w-okresie-przedswiatecznej-goraczki-zakupowej-wraca-popularne-oszustwo-na-przesylke) – SMS falsos de transportadoras, página falsa, 8080 e banco
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra: 11 dígitos e o dígito verificador, textos de status e de leituras e o idioma em que o Peek pergunta, transportadoras consultadas para 11 dígitos, Allegro Delivery
 :::

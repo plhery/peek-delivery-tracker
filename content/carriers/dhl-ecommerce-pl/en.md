@@ -21,7 +21,7 @@ Look for it in the shop's shipping email. Mój DHL can follow several parcels at
 
 No number? Ask the shop, or see [how to find your tracking number](guide:find-tracking-number).
 
-Eleven digits also fit [GLS France](carrier:gls-fr), [GLS Germany](carrier:gls-de), [GLS Switzerland](carrier:gls-ch) and [Swiss Post](carrier:swiss-post) parcel numbers. If DHL says the number is wrong, check that the shop's email names DHL.
+Eleven digits also fit [GLS France](carrier:gls-fr), [GLS Germany](carrier:gls-de), [GLS Switzerland](carrier:gls-ch) and [Swiss Post](carrier:swiss-post) parcel numbers, and, when the first digit is 2 to 9, those of the Czech carrier [PPL](carrier:ppl). If DHL says the number is wrong, check that the shop's email names DHL.
 
 ## What DHL eCommerce Poland's tracking statuses mean
 
@@ -69,7 +69,7 @@ A withdrawn, disposed of or lost parcel leaves nothing to wait for: Peek flags i
 
 ## Tracking a DHL eCommerce Poland parcel with Peek
 
-For 11 digits, [Peek](/) asks the likely carriers at once (GLS France, GLS Germany, GLS Switzerland, Swiss Post's PostLogistics and DHL eCommerce Poland; for readers in Poland, DHL first, then GLS Poland in place of PostLogistics) and shows "DHL eCommerce Poland has this parcel." when only DHL knows the number. If a GLS network knows it too, pick DHL eCommerce Poland with "Change"; picked this way, other numbers of 11 to 34 letters and digits work too. Allegro Delivery `AD` numbers are refused, as Allegro tracks them, and `JJD` plates go to DHL Germany (`JJD000090` with 14 to 16 more digits to DHL eCommerce Netherlands) unless you pick DHL eCommerce Poland. Links from mojdhl.pl (`paczki=`) and sprawdz.dhl.com.pl (`sn=`) work; a dhl.com link with `tracking-id=` is read as DHL Germany, so type the number instead.
+For 11 digits, [Peek](/) asks the likely carriers at once (GLS France, GLS Germany, GLS Switzerland, Swiss Post's PostLogistics and DHL eCommerce Poland, PPL too when the number starts with 2 to 9, and GLS Poland as well for readers in Poland) and shows "DHL eCommerce Poland has this parcel." when only DHL knows the number. If a GLS network knows it too, pick DHL eCommerce Poland with "Change"; picked this way, other numbers of 11 to 34 letters and digits work too. Allegro Delivery `AD` numbers are refused, as Allegro tracks them, and `JJD` plates go to DHL Germany (`JJD000090` with 14 to 16 more digits to DHL eCommerce Netherlands) unless you pick DHL eCommerce Poland. Links from mojdhl.pl (`paczki=`) and sprawdz.dhl.com.pl (`sn=`) work; a dhl.com link with `tracking-id=` is read as DHL Germany, so type the number instead.
 
 Peek reads the current status from Mój DHL in Polish or English, as above, and the scan history from sprawdz.dhl.com.pl in English, whatever language you use Peek in. Each scan comes with DHL's English wording (`The shipment is in transit to the delivery depot.`, for example), the place DHL gives and the local time there. When the history can't be read, Peek shows only the current status (`Parcel has been delivered` in English, for example), dated when Peek saw it, except delivered and returned, which carry DHL's time. Either way it adds the expected delivery day (with DHL's planned hours when it gives them), the sender (usually the shop) and the delivery time. A number covering several parcels can't be tracked this way. Peek checks at most once an hour, out for delivery too, and waits 2 hours after a failed check; a manual refresh waits the same. After seven days without news at "Label created", it checks every 6 hours.
 

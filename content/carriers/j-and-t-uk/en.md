@@ -16,7 +16,7 @@ J&T Express UK's waybill is `JTUK` followed by 12 digits, 16 characters in all. 
 | --- | --- |
 | `JTUK482910573628` | `JTUK` and 12 digits: a J&T Express UK parcel. Peek names J&T Express UK at once. |
 | `JTUK48291057362` | One digit short. Not J&T Express UK's shape, and Peek recognises no carrier: check for a missing digit. |
-| `JTDE000000000005` | `JTDE` and 12 digits: [J&T Express Germany](carrier:j-and-t-de), not the UK network. |
+| `JTDE482910573628` | `JTDE` and 12 digits: [J&T Express Germany](carrier:j-and-t-de), not the UK network. |
 | `JTAU482910573628` | `JTAU` and 12 digits: [J&T Express Australia](carrier:j-and-t-au). |
 | `JTE482910573628` | `JTE` and 12 digits: [J&T Express Middle East](carrier:j-and-t-middle-east). |
 | `JT4829105736284` | `JT` and 13 digits: J&T's networks in South-East Asia and in China ([J&T Express China](carrier:j-and-t-cn)). |

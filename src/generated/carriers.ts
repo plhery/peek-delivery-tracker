@@ -15702,6 +15702,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#002664"
     },
     {
+      "id": "rl-carriers",
+      "catalog": "rl-carriers",
+      "slug": "rastreamento-rl-carriers",
+      "title": "Rastreamento R+L Carriers: código PRO, status e sinistros",
+      "name": "R+L Carriers",
+      "color": "#006647"
+    },
+    {
       "id": "far-international",
       "catalog": "far-international",
       "slug": "rastreamento-far-international",
@@ -15732,6 +15740,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento DPD Belgium: status, entrega e contato",
       "name": "DPD Belgium",
       "color": "#dc0032"
+    },
+    {
+      "id": "sto",
+      "catalog": "sto",
+      "slug": "rastreamento-sto-express",
+      "title": "Rastreamento STO Express (申通快递): códigos e status",
+      "name": "STO Express",
+      "color": "#ff6700"
     },
     {
       "id": "j-and-t-cn",
@@ -19450,6 +19466,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DSV 物流查询：运单号、状态与 DB Schenker",
       "name": "DSV",
       "color": "#002664"
+    },
+    {
+      "id": "rl-carriers",
+      "catalog": "rl-carriers",
+      "slug": "rl-carriers-wuliu-chaxun",
+      "title": "R+L Carriers 货运查询：PRO 单号、状态与理赔",
+      "name": "R+L Carriers",
+      "color": "#006647"
     },
     {
       "id": "far-international",

@@ -37,4 +37,16 @@ describe('delivery_round_ends_at', () => {
     expect(served({ tracking_events: [...out('2026-11-20T06:10:00Z'), scan('failed_attempt', '2026-11-20T11:00:00Z')] })).toBeUndefined();
     expect(served({ archived_at: '2026-11-21T08:00:00Z', tracking_events: out('2026-11-20T06:10:00Z') })).toBeUndefined();
   });
+  it('ends a China Post round three days after its own: the relay leaves out the destination post\'s attempts', () => {
+    const china = (events: JsonObject[], fields: JsonObject = {}) => served({ carrier: 'china-post', tracking_events: events, ...fields });
+    const round = (source: string) => ({ ...scan('out_for_delivery', '2026-11-20T08:00:00Z'), provider_event_id: `${source}:ofd` });
+    const [relayed, own, destination] = [round('unknown'), round('china-post'), round('la-poste')];
+    const before = scan('in_transit', '2026-11-19T15:00:00Z');
+    expect(china([before, relayed], { carrier_data: { timezone: 'Europe/Paris' } })).toBe('2026-11-24T00:00:00+01:00');
+    expect(china([before, own], { carrier_data: { timezone: 'Europe/Paris' } })).toBe('2026-11-24T00:00:00+01:00');
+    // The destination post's own scan, or a parcel handed to it, keeps the day's round.
+    expect(china([before, destination], { carrier_data: { timezone: 'Europe/Paris' } })).toBe('2026-11-21T00:00:00+01:00');
+    expect(china([before, relayed], { carrier_data: { timezone: 'Europe/Paris', original_carrier: 'china-post', active_tracking_carrier: 'la-poste' } }))
+      .toBe('2026-11-21T00:00:00+01:00');
+  });
 });

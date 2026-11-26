@@ -16414,6 +16414,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed007d"
     },
     {
+      "id": "dobropost",
+      "catalog": "dobropost",
+      "slug": "dobropost-tracking",
+      "title": "Rastreamento DobroPost: códigos DBRPST, status e PVZ",
+      "name": "DobroPost",
+      "color": "#ffbe2e"
+    },
+    {
       "id": "jumppoint-international",
       "catalog": "jumppoint-international",
       "slug": "jumppoint-international-tracking",
@@ -16452,6 +16460,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Chit Chats: códigos de 10 dígitos e USPS",
       "name": "Chit Chats",
       "color": "#db2b35"
+    },
+    {
+      "id": "dpd-hu",
+      "catalog": "dpd-hu",
+      "slug": "dpd-hu-tracking",
+      "title": "Rastreamento DPD Hungria: 14 dígitos, FOXPOST e suporte",
+      "name": "DPD Hungary",
+      "color": "#dc0032"
     },
     {
       "id": "kuehne-nagel",
@@ -20874,6 +20890,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Chit Chats 加拿大跨境追踪：10 位单号、USPS 交接与客服",
       "name": "Chit Chats",
       "color": "#db2b35"
+    },
+    {
+      "id": "dpd-hu",
+      "catalog": "dpd-hu",
+      "slug": "dpd-hu-tracking",
+      "title": "DPD 匈牙利追踪：14 位单号、FOXPOST 自提柜与客服",
+      "name": "DPD Hungary",
+      "color": "#dc0032"
     },
     {
       "id": "kuehne-nagel",

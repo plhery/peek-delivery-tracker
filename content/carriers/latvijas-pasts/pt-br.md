@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Latvijas Pasts: códigos, status e armários
-description: Rastreie encomendas dos Correios da Letônia (Latvijas Pasts): formato LV, status em inglês, armários de encomendas, entregas frustradas e contatos.
+description: Rastreie encomendas dos Correios da Letônia (Latvijas Pasts): formato LV, status em inglês, armários de encomendas, entregas não realizadas e contatos.
 slug: rastreamento-latvijas-pasts
 published: 2026-11-25
 updated: 2026-11-25
@@ -10,7 +10,7 @@ A Latvijas Pasts (Correios da Letônia) é o serviço postal estatal da Letônia
 
 ## Código de rastreamento da Latvijas Pasts
 
-Um objeto postado pela Latvijas Pasts tem um [código postal internacional](guide:tracking-number-formats) de 13 caracteres: duas letras, nove dígitos e `LV`. As letras iniciais indicam o serviço:
+Um objeto postado pela Latvijas Pasts tem um [número postal internacional](guide:tracking-number-formats) de 13 caracteres: duas letras, nove dígitos e `LV`. As letras iniciais indicam o serviço:
 
 | Letras iniciais (exemplos inventados) | O que é |
 | --- | --- |
@@ -19,7 +19,7 @@ Um objeto postado pela Latvijas Pasts tem um [código postal internacional](guid
 | `CA482917367LV` | Encomenda: você recebe um aviso para retirar na agência. |
 | `EE482917367LV` | Express Mail Service (EMS). |
 
-Envios Simple ou Economy não são registrados em nenhuma etapa, portanto não têm rastreamento nem indenização em caso de avaria. Se você não tem código, o envio pode ter sido feito nessa modalidade; veja [como encontrar um código de rastreamento](guide:find-tracking-number).
+Envios Simple ou Economy não são registrados em nenhuma etapa, portanto não têm rastreamento nem indenização em caso de dano. Se você não tem código, o envio pode ter sido feito nessa modalidade; veja [como encontrar um código de rastreamento](guide:find-tracking-number).
 
 Onde procurar: o SMS do entregador traz o número do envio, o horário previsto de chegada e um link para redirecionar o pacote. O SMS do armário informa o endereço, o prazo final de retirada e o código de abertura.
 
@@ -27,7 +27,7 @@ Outras letras finais indicam outros correios: `…LT` é [Lietuvos paštas](carr
 
 ## O que significam os status da Latvijas Pasts
 
-O rastreador mostra cada etapa com data, hora e a agência na Letônia. Acima da lista, uma barra de cinco etapas vai de `Shipment created` até `Delivered to recipient`. Estes são os textos em inglês, na ordem habitual:
+O rastreador mostra cada etapa com data, hora e a agência na Letônia. Acima da lista, uma barra de cinco etapas vai de `Shipment created` até `Delivered to recipient`. Estes são os textos em inglês, na ordem em que a encomenda passa por eles:
 
 | Status da Latvijas Pasts | O que significa para você |
 | --- | --- |
@@ -51,7 +51,7 @@ O rastreador mostra cada etapa com data, hora e a agência na Letônia. Acima da
 | `Item redirected` | Encaminhado para outro local, como outro ponto de retirada (veja Redirecionamento abaixo). |
 | `Item address re-labelled` | Reetiquetado com o novo endereço, para onde segue agora. |
 | `Item handed over for delivery` | Saiu para entrega. |
-| `Unsuccessful delivery attempt` | Tentativa de entrega falhou (veja abaixo). Porém, quando ocorre no mesmo segundo que `Item address re-labelled`, registra um redirecionamento: o envio continua a caminho, e o Peek exibe "Em trânsito", não "Tentativa de entrega". |
+| `Unsuccessful delivery attempt` | Entrega não realizada (veja abaixo). Porém, quando ocorre no mesmo segundo que `Item address re-labelled`, registra um redirecionamento: o envio continua a caminho, e o Peek exibe "Em trânsito", não "Tentativa de entrega". |
 | `Notification - pick-up invitation printed`, `Electronic notification (SMS) - pick-up invitation sent to recipient` | Pronto para retirada: a agência imprimiu o aviso ou enviou o convite por SMS. |
 | `Item arrived at pick-up point` | Registro de correios estrangeiros: aguarda em ponto de retirada no exterior, informando o país e não o ponto. |
 | `Item delivered` | Entregue, inclusive quando os correios de destino entregam um objeto enviado ao exterior. |
@@ -70,13 +70,13 @@ Se o rastreador disser `No information received on the tracking of the postal it
 
 **Agência ou Centro de Atendimento.** Você recebe SMS ou aviso impresso indicando a agência. Leve documento de identidade; carteira de motorista vale para itens de até €150. É possível retirar sem o aviso se você souber o número do envio, ou ligar para o número do aviso para pedir entrega em casa pagando a taxa na entrega. Outra pessoa pode retirar com sua autorização e passaporte ou identidade própria. Em objetos registrados ou segurados, há segundo aviso após 5 dias, e devolução ao remetente se não retirados em até 30 dias do primeiro. Se a etiqueta de uma compra internacional tiver apenas parte do seu nome, leve comprovante do pedido junto com seu documento.
 
-**Redirecionamento.** Se o remetente forneceu seu telefone ou você ativou alertas por SMS, a mensagem traz link para enviar o pacote a um armário, Centro de Atendimento, outro endereço ou ao serviço gratuito "Postman at home" onde disponível. A página de redirecionamento indica armário gratuito, Centro de Atendimento por €1,89 e entrega por courier em domicílio por €4,99, com IVA incluso. Não é possível redirecionar item já em armário ou sob controle aduaneiro, nem mandar para armário objeto registrado/segurado com aviso de recebimento ou pagamento na entrega maior que 38 × 38 × 58 cm. Ao ativar SMS, você também pode definir um armário favorito.
+**Redirecionamento.** Se o remetente forneceu seu telefone ou você ativou alertas por SMS, a mensagem traz link para enviar o pacote a um armário, Centro de Atendimento, outro endereço ou ao serviço gratuito "Postman at home" onde disponível. A página de redirecionamento indica armário gratuito, Centro de Atendimento por €1,89 e entrega por courier em domicílio por €4,99, com IVA incluso. Não é possível redirecionar item já em armário ou sob controle aduaneiro, nem mandar para armário um objeto registrado ou segurado com aviso de recebimento, ou um objeto com pagamento na entrega maior que 38 × 38 × 58 cm. Ao ativar SMS, você também pode definir um armário favorito.
 
-## Encomenda Latvijas Pasts perdida, avariada ou atrasada
+## Encomenda Latvijas Pasts perdida, danificada ou atrasada
 
 Reclamações por perda ou dano em encomendas de armário devem partir do remetente, então em compras online escreva para a loja. O pedido lista o conteúdo e o valor, com recibo, fatura ou comprovante de pagamento e fotos de eventuais danos. A Latvijas Pasts analisa em até um mês.
 
-Quando um entregador trouxer um objeto registrado ou segurado, confira o conteúdo na frente dele para lavrar termo. Se abrir sozinho e achar avaria, tire fotos e procure o remetente para troca ou reembolso; a Latvijas Pasts afirma não responder por indenização nesse caso.
+Quando um entregador trouxer um objeto registrado ou segurado, confira o conteúdo na frente dele para lavrar termo. Se abrir sozinho e encontrar danos, tire fotos e procure o remetente para troca ou reembolso; a Latvijas Pasts afirma não responder por indenização nesse caso.
 
 Para envios ao exterior que não chegaram, o remetente pode pedir busca internacional: é cobrada no primeiro mês após a postagem e gratuita depois de 30 dias.
 
@@ -89,19 +89,19 @@ Canais publicados em pasts.lv:
 - **Telefone:** +371 27008001 (os termos dos armários informam também +371 67008001).
 - **E-mail:** info@pasts.lv.
 - **Horário:** segunda a sexta das 8h às 19h, sábado das 9h às 17h; fechado aos domingos.
-- **Relatar problema:** formulário em [mans.pasts.lv/complaint](https://mans.pasts.lv/complaint), atendido no horário comercial.
+- **Relatar problema:** formulário em [mans.pasts.lv/complaint](https://mans.pasts.lv/complaint), atendido no horário do atendimento ao cliente.
 
 > A Latvijas Pasts alerta para SMS e e-mails falsos pedindo confirmação de dados ou endereço, ou pagamento alfandegário em sites falsificados. E-mails verdadeiros terminam sempre em @pasts.lv, o site é www.pasts.lv e ela nunca pede dados bancários ou de cartão por SMS ou e-mail, nem confirmação pelo Smart-ID.
 
 ## Rastrear Latvijas Pasts com o Peek
 
-O [Peek](/) identifica na hora como Latvijas Pasts qualquer código postal iniciado por C, E, L ou R e terminado em `LV` com dígito verificador válido. Para outros códigos válidos terminados em `LV`, como `VV482917367LV`, consulta Latvijas Pasts e [Chronopost](carrier:chronopost) simultaneamente e exibe "Latvijas Pasts está com esta encomenda." quando ela conhece o código, ou "Ainda não encontrada em …. O Peek continua verificando depois que você adicionar." Com dígito verificador incorreto, a Latvijas Pasts não é consultada e selecioná-la manualmente não ajuda (o Peek avisa que ela "não emite códigos como este"): confira o código com o remetente. Um link de mans.pasts.lv/track com o código sempre seleciona Latvijas Pasts; buscar "Latvian Post" no seletor também a encontra. Se ainda não houver registro, aparece "Aguardando Latvijas Pasts" e o Peek continua verificando. Se dois dias depois continuar desconhecido e nada mais responder, o Peek exibe "Depois de dois dias, a transportadora ainda não reconhece este código. Confira o código, escolha outra transportadora ou exclua a encomenda." e passa a consultar diariamente e, após uma semana, semanalmente.
+O [Peek](/) identifica na hora como Latvijas Pasts qualquer número postal iniciado por C, E, L ou R e terminado em `LV` com dígito verificador válido. Para outros códigos válidos terminados em `LV`, como `VV482917367LV`, consulta Latvijas Pasts e [Chronopost](carrier:chronopost) simultaneamente e exibe "Latvijas Pasts está com esta encomenda." quando ela conhece o código, ou "Ainda não encontrada em …. O Peek continua verificando depois que você adicionar." Com dígito verificador incorreto, a Latvijas Pasts não é consultada e selecioná-la manualmente não ajuda (o Peek avisa que ela "não emite códigos como este"): confira o código com o remetente. Um link de mans.pasts.lv/track com o código sempre seleciona Latvijas Pasts; buscar "Latvian Post" no seletor também a encontra. Se a Latvijas Pasts ainda não conhecer o código, a encomenda registrada com ela mostra "Aguardando Latvijas Pasts" e o Peek continua verificando. Se dois dias depois continuar desconhecido e nada mais responder, o Peek exibe "Depois de dois dias, a transportadora ainda não reconhece este código. Confira o código, escolha outra transportadora ou exclua a encomenda." e passa a consultar diariamente e, após uma semana, semanalmente.
 
-Objetos vindos do exterior são acompanhados primeiro nos correios de origem. Quando eles indicam a Letônia como destino (ou não informam destino enquanto você está na Letônia), o Peek consulta também a Latvijas Pasts com o mesmo código e muda para ela assim que houver um evento mais recente, mantendo o histórico anterior. Para acompanhar diretamente pela Latvijas Pasts desde o início, escolha "Latvijas Pasts" em "Trocar" ao adicionar ou use "Trocar transportadora" em um envio já salvo.
+Objetos vindos do exterior são acompanhados primeiro nos correios de origem. Quando eles indicam a Letônia como destino (ou não informam destino enquanto você está na Letônia), o Peek consulta também a Latvijas Pasts com o mesmo código e muda para ela assim que houver um evento mais recente, mantendo o histórico anterior. Para acompanhar pela Latvijas Pasts desde o início, escolha "Latvijas Pasts" em "Trocar" ao adicionar ou use "Trocar transportadora" em um envio já salvo.
 
-Os horários da Latvijas Pasts não trazem fuso: o Peek os lê no relógio do local do evento (horário letão para agências na Letônia) e lista o histórico próprio da Latvijas Pasts. Os status preservam o inglês oficial, incluindo `Item delivered`. O Peek pode indicar a agência onde o envio aguarda e notificar mudanças de status, mas não informa previsão de entrega nem peso. Enquanto o pacote está aberto no Peek, ou no dia da entrega com alertas ligados, ele verifica até a cada 10 minutos; no dia em que a Latvijas Pasts libera para entrega, a cada 2 minutos a partir das 6h no relógio do local do evento (horário letão na Letônia) enquanto o rastreador oficial responde. Nos demais horários, verifica a cada hora. Após 12 horas apenas em "Etiqueta criada" ou "Recebida pela transportadora", ou dois dias sem novidades, consulta a cada hora em qualquer modo, e a cada 6 horas após sete dias em "Etiqueta criada". Quando o rastreador oficial não responde e o Peek acompanha apenas por serviços de rastreamento, consulta a cada hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia em que sai para entrega enquanto o pacote estiver aberto ou com alertas ligados. Quando outra transportadora assume a entrega, o Peek segue o ritmo dela.
+Os horários da Latvijas Pasts não trazem fuso: o Peek os lê no relógio do local do evento (horário letão para agências na Letônia) e lista o histórico próprio da Latvijas Pasts. Os status mantêm o inglês da Latvijas Pasts, incluindo `Item delivered`. O Peek pode indicar a agência onde o envio aguarda e notificar mudanças de status, mas não informa previsão de entrega nem peso. Enquanto o pacote está aberto no Peek, ou no dia da entrega com alertas ligados, ele verifica até a cada 10 minutos; no dia em que a Latvijas Pasts registra saída para entrega, a cada 2 minutos a partir das 6h no relógio do local desse evento (horário letão na Letônia), enquanto o rastreador da própria Latvijas Pasts responde. Nos demais horários, verifica a cada hora. Após 12 horas apenas em "Etiqueta criada" ou "Recebida pela transportadora", ou dois dias sem novidades, consulta a cada hora em qualquer modo, e a cada 6 horas após sete dias em "Etiqueta criada". Quando o rastreador da Latvijas Pasts não responde e o Peek acompanha apenas por serviços de rastreamento, consulta a cada hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia em que sai para entrega enquanto o pacote estiver aberto ou com alertas ligados. Quando outra transportadora assume a entrega, o Peek segue o ritmo dela.
 
-Quando o evento mais recente completa quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek destaca essa data ("Sem atualizações desde seg., 12 de out."). A página passa a exibir "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Latvijas Pasts.", com o link "Pedir ajuda a Latvijas Pasts" para a página de atendimento oficial. Após três semanas sem novos eventos, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando Latvijas Pasts."
+Quando o evento mais recente completa quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek destaca essa data (como "Sem atualizações desde seg 12 out"). A página passa a exibir "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Latvijas Pasts.", com o link "Pedir ajuda a Latvijas Pasts" para a página de atendimento da Latvijas Pasts. Após três semanas sem novos eventos, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando Latvijas Pasts."
 
 O Peek pode notificar "Cada movimentação", "Etapas importantes" ou "Só a entrega".
 
@@ -139,5 +139,5 @@ Nem sempre. Envios Simple e Economy não são registrados e não podem ser rastr
 - [Latvijas Pasts: Mans pasts, track shipment](https://mans.pasts.lv/track?locale=en-GB) – rastreador em inglês, barra de progresso, textos de status, resposta sem dados e botão International Tracking
 - [Latvijas Pasts: About us](https://pasts.lv/en/about-us/par-pastu) – correios nacionais estatais e serviços
 - [Latvijas Pasts: Latvijas Pasts and UNISEND launch their joint parcel locker network](https://pasts.lv/en/news/latvijas-pasts-and-unisend-launch-their-joint-parcel-locker-network) – Unisend como marca da Lietuvos paštas e armários conjuntos
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e exibe, status e significados, resposta de código incorreto, reconhecimento direto, recusa e transição do exterior para a Latvijas Pasts
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra, status e significados, resposta de código incorreto, reconhecimento direto, recusa e transição do exterior para a Latvijas Pasts
 :::

@@ -26,7 +26,7 @@ Formatos parecidos: 16 dígitos também podem pertencer à TNT, Evri, Canada Pos
 
 ## Status de rastreamento da DHL eCommerce explicados
 
-O Webtrack exibe um status resumido em uma linha (`En Route`, `Delivered`, `Exception`…) acima do histórico ("Tracking History") em letras maiúsculas. Estes são os registros mais comuns, na ordem habitual:
+O Webtrack exibe um status resumido em uma linha (`En Route`, `Delivered`, `Exception`…) acima do histórico ("Tracking History") em letras maiúsculas. Estes são os registros mais vistos, na ordem em que a encomenda passa por eles:
 
 | A DHL eCommerce mostra | O que significa para você |
 | --- | --- |
@@ -61,7 +61,7 @@ Alteração de endereço: o FAQ do Webtrack informa que, depois que o pacote sai
 
 **Dias sem atualização.** O FAQ cita clima, feriados, alfândega, greves e outros fatores fora do controle da DHL. Nos EUA, o próprio evento de repasse pede 1 a 3 dias para novas atualizações. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
-**Não chegou.** Se o pacote não chegar até o fim da janela prevista de entrega, o FAQ orienta falar com a loja. Na UE, o portal Your Europe acrescenta que o vendedor responde por avarias até a entrega e deve entregar em até 30 dias salvo acordo diverso; se não cumprir, você pode cobrar um prazo extra e depois cancelar o contrato com reembolso.
+**Não chegou.** Se o pacote não chegar até o fim da janela prevista de entrega, o FAQ orienta falar com a loja. Na UE, o portal Your Europe acrescenta que o vendedor responde por danos até a entrega e deve entregar em até 30 dias salvo acordo diverso; se não cumprir, você pode cobrar um prazo extra e depois cancelar o contrato com reembolso.
 
 **Alfândega.** `CUSTOMS CLEARANCE` indica passagem pela alfândega. [Encomendas retidas na alfândega](guide:customs) explica o que pode ser cobrado.
 
@@ -82,7 +82,7 @@ O formulário "Contact Support" do Webtrack informa retorno "em 24 a 72 horas". 
 
 ## Rastrear uma encomenda DHL eCommerce com o Peek
 
-O [Peek](/) identifica a DHL eCommerce na hora para GM seguido de 16 a 18 dígitos. Para códigos GM mais curtos, de 8 a 15 dígitos, consulta DHL eCommerce e Aramex simultaneamente e atribui à DHL eCommerce se ela reconhecer o código. Em formatos compartilhados, consulta as transportadoras prováveis em paralelo (TNT para 16 dígitos, além de Evri UK, Canada Post e Correos Express quando o último dígito valida; Austrian Post para códigos iniciados por 9261 ou 9361 e, se nenhuma reconhecer, serviços de rastreamento, página da USPS e página global da DHL). Se apenas a DHL eCommerce reconhecer o código, você é avisado; se várias reconhecerem, o Peek lista cada uma com o selo "Reconhece este código" para você escolher. Em "Trocar", qualquer código com pelo menos 10 letras e dígitos pode ser associado à DHL eCommerce. Links de webtrack.dhlglobalmail.com e ecommerceportal.dhl.com também funcionam, assim como links de dhl.com com um formato DHL eCommerce diferente de um código GM curto.
+O [Peek](/) identifica a DHL eCommerce na hora para GM seguido de 16 a 18 dígitos. Para códigos GM mais curtos, de 8 a 15 dígitos, consulta DHL eCommerce e Aramex simultaneamente (e também a Colis Privé, se você adicionar o código da França) e atribui à DHL eCommerce se ela reconhecer o código. Em formatos compartilhados, consulta as transportadoras prováveis em paralelo (TNT para 16 dígitos, além de Evri UK, Canada Post e Correos Express quando o último dígito valida; Colis Privé para 17 dígitos adicionados da França; Austrian Post para códigos iniciados por 9261 ou 9361 e, se nenhuma reconhecer, serviços de rastreamento, página da USPS e página global da DHL). De qualquer outro país, o Peek consulta a Colis Privé por último, depois que as outras transportadoras e os serviços de rastreamento não reconhecerem o código. Se apenas a DHL eCommerce reconhecer o código, você é avisado; se várias reconhecerem, o Peek lista cada uma com o selo "Reconhece este código" para você escolher. Em "Trocar", qualquer código com pelo menos 10 letras e dígitos pode ser associado à DHL eCommerce. Links de webtrack.dhlglobalmail.com e ecommerceportal.dhl.com também funcionam, assim como links de dhl.com com um formato DHL eCommerce diferente de um código GM curto.
 
 O Webtrack é consultado primeiro. Se o pacote não aparecer lá, o Peek abre a página global em dhl.com, que leva mais tempo e pode falhar quando a DHL bloqueia acessos automatizados.
 
@@ -112,5 +112,5 @@ Sim. É a divisão de encomendas da DHL voltada ao comércio eletrônico, anteri
 - [DHL eCommerce: Webtrack tracking](https://webtrack.dhlecs.com/) – site de rastreamento, rótulos de status, caixa de detalhes, 10 códigos, orientação sem resultado, formulário de contato e atualizações por e-mail
 - [DHL eCommerce: Webtrack Contact Customer Service](https://webtrack.dhlecs.com/support/customer-service) – cartões por país, telefones, horários, FAQ de 24 a 48 horas, entrega pela USPS, atrasos, extravios, alteração de endereço e instruções
 - [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – responsabilidade do vendedor até a entrega, prazo de 30 dias, prazo adicional e reembolso
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – antiga DHL Global Mail, formatos de código e código USPS, textos e etapas, rastreamento próprio da DHL Express e o que o Peek lê e exibe
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – antiga DHL Global Mail, formatos de código e código USPS, textos e etapas, rastreamento próprio da DHL Express e o que o Peek lê e mostra
 :::

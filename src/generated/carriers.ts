@@ -15278,6 +15278,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#002776"
     },
     {
+      "id": "express-one",
+      "catalog": "express-one",
+      "slug": "express-one-tracking",
+      "title": "Rastreamento Express One: status, pontos de coleta e ajuda",
+      "name": "Express One",
+      "color": "#ec6500"
+    },
+    {
       "id": "foxpost",
       "catalog": "foxpost",
       "slug": "foxpost-tracking",
@@ -16468,6 +16476,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento DPD Hungria: 14 dígitos, FOXPOST e suporte",
       "name": "DPD Hungary",
       "color": "#dc0032"
+    },
+    {
+      "id": "e24metro-ca",
+      "catalog": "e24metro-ca",
+      "slug": "e24metro-ca-tracking",
+      "title": "Rastreamento E24 (Metro Supply Chain): entrega no Canadá",
+      "name": "E24",
+      "color": "#545859"
     },
     {
       "id": "kuehne-nagel",
@@ -19652,6 +19668,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#002776"
     },
     {
+      "id": "express-one",
+      "catalog": "express-one",
+      "slug": "express-one-tracking",
+      "title": "Express One 匈牙利快递追踪：单号、状态、自提点与客服",
+      "name": "Express One",
+      "color": "#ec6500"
+    },
+    {
       "id": "foxpost",
       "catalog": "foxpost",
       "slug": "foxpost-tracking",
@@ -20898,6 +20922,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DPD 匈牙利追踪：14 位单号、FOXPOST 自提柜与客服",
       "name": "DPD Hungary",
       "color": "#dc0032"
+    },
+    {
+      "id": "e24metro-ca",
+      "catalog": "e24metro-ca",
+      "slug": "e24metro-ca-tracking",
+      "title": "E24（Metro Supply Chain）快递追踪：加拿大末端派送与客服",
+      "name": "E24",
+      "color": "#545859"
     },
     {
       "id": "kuehne-nagel",

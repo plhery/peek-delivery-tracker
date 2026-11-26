@@ -14822,6 +14822,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0091cd"
     },
     {
+      "id": "gls-ch",
+      "catalog": "gls-ch",
+      "slug": "gls-switzerland-tracking",
+      "title": "Rastreamento GLS Suíça: status, Swiss Post e contato",
+      "name": "GLS Switzerland",
+      "color": "#ffdd00"
+    },
+    {
       "id": "dpd-ch",
       "catalog": "dpd",
       "slug": "rastreamento-dpd-suica",
@@ -15100,6 +15108,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Ciblex: códigos, status em francês e contato",
       "name": "Ciblex",
       "color": "#0160ab"
+    },
+    {
+      "id": "hermes-einrichtungs-service",
+      "catalog": "hermes",
+      "slug": "hermes-einrichtungs-service-tracking",
+      "title": "Rastreamento Hermes Einrichtungs-Service: entrega de móveis",
+      "name": "Hermes Einrichtungs-Service",
+      "color": "#0091cd"
     },
     {
       "id": "landmark-global",
@@ -18948,6 +18964,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0091cd"
     },
     {
+      "id": "gls-ch",
+      "catalog": "gls-ch",
+      "slug": "gls-switzerland-tracking",
+      "title": "GLS Switzerland 快递追踪：状态说明、瑞士邮政派送与联系",
+      "name": "GLS Switzerland",
+      "color": "#ffdd00"
+    },
+    {
       "id": "dpd-ch",
       "catalog": "dpd",
       "slug": "dpd-ruishi-kuaidi-chaxun",
@@ -19226,6 +19250,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Ciblex Express 物流查询：运单号、法语状态与联系方式",
       "name": "Ciblex",
       "color": "#0160ab"
+    },
+    {
+      "id": "hermes-einrichtungs-service",
+      "catalog": "hermes",
+      "slug": "hermes-einrichtungs-service-tracking",
+      "title": "Hermes Einrichtungs-Service 追踪：家具大件派送与改期",
+      "name": "Hermes Einrichtungs-Service",
+      "color": "#0091cd"
     },
     {
       "id": "landmark-global",

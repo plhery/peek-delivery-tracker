@@ -152,3 +152,22 @@ it('fetches the auth client for a sign-in started before it arrived', async () =
   expect(client.options).toHaveLength(1);
   expect(client.auth.signInWithOtp).toHaveBeenCalledWith(expect.objectContaining({ email: 'owner@example.test' }));
 });
+
+it("keeps a returning account's token and sign-out the same while the client arrives and the token refreshes", async () => {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(SAVED));
+  const fresh = { ...SAVED, access_token: 'fresh-access-token', expires_at: 4_102_444_800 } as unknown as Session;
+  client.auth.getSession.mockResolvedValue({ data: { session: fresh }, error: null });
+  const { result } = renderHook(() => useAuth(), { wrapper: ({ children }) => <AuthProvider config={CONFIG}>{children}</AuthProvider> });
+  const first = result.current;
+  expect(first.status).toBe('authenticated');
+
+  await waitFor(() => expect(result.current.accessToken).toBe('fresh-access-token'));
+  await act(async () => { emit('TOKEN_REFRESHED', { ...fresh, access_token: 'next-access-token' } as Session); });
+
+  // The account's screens hold on to these: were they new, each would start again and ask the server twice.
+  expect(result.current.accessToken).toBe('next-access-token');
+  expect(result.current.getAccessToken).toBe(first.getAccessToken);
+  expect(result.current.signOut).toBe(first.signOut);
+  expect(result.current.signal).toBe(first.signal);
+  await expect(result.current.getAccessToken()).resolves.toBe('fresh-access-token');
+});

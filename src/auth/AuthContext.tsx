@@ -144,11 +144,14 @@ export function AuthProvider({
   const configured = Boolean(suppliedClient || (config?.url && config.publishableKey));
   // The client, once its SDK is here. Whatever needs it sooner asks for it, and waits.
   const [client, setClient] = useState<SupabaseAuth | null>(suppliedClient ?? null);
+  // The same, for what must not change when it arrives (`getAccessToken`, `signOut`).
+  const arrived = useRef<SupabaseAuth | null>(suppliedClient ?? null);
   const clientRequest = useRef<Promise<SupabaseAuth> | null>(null);
   const requestClient = useCallback((): Promise<SupabaseAuth> => {
     if (suppliedClient) return Promise.resolve(suppliedClient);
     if (!config?.url || !config.publishableKey) return Promise.reject(new Error('Authentication is not configured'));
     return clientRequest.current ??= configuredClient(config, storage).then((created) => {
+      arrived.current = created;
       setClient(created);
       return created;
     }, (error: unknown) => {
@@ -314,30 +317,34 @@ export function AuthProvider({
     acceptSession(data.session);
   }, [client, requestClient, acceptSession, storage]);
 
+  // The account's screens hold on to `signOut` and `getAccessToken`: they stay the same while the client arrives and the
+  // token refreshes, or every screen would start again and ask the server twice.
+  const accessToken = useRef(state.accessToken);
+  useLayoutEffect(() => { accessToken.current = state.accessToken; }, [state.accessToken]);
   const signOut = useCallback(async () => {
     if (!configured) return;
     if (logout.current) return logout.current;
-    const token = state.accessToken;
+    const token = accessToken.current;
     trackAction('sign-out');
     storage?.signOut();
     acceptSession(null);
     const operation = (async () => {
       // Purging first prevents the SDK from refreshing expired credentials during logout.
       // Revoke the captured session separately; local logout also works without a network.
-      const { auth } = client ?? await requestClient();
+      const { auth } = arrived.current ?? await requestClient();
       await auth.signOut({ scope: 'local' });
       if (storage && token) await auth.admin.signOut(token, 'local');
     })().catch(() => undefined);
     logout.current = operation;
     try { await operation; } finally { logout.current = null; }
-  }, [configured, client, requestClient, acceptSession, storage, state.accessToken]);
+  }, [configured, requestClient, acceptSession, storage]);
 
   // Token refreshes replace the user object; consumers stay bound to the account.
   const userId = state.user?.id ?? null;
   const getAccessToken = useCallback(async (refresh = false) => {
     state.signal.throwIfAborted();
     if (!configured || !userId) return null;
-    const { auth } = client ?? await requestClient();
+    const { auth } = arrived.current ?? await requestClient();
     const { data, error } = refresh
       ? await auth.refreshSession()
       : await auth.getSession();
@@ -347,7 +354,7 @@ export function AuthProvider({
       throw new DOMException('The signed-in account changed', 'AbortError');
     }
     return data.session?.access_token ?? null;
-  }, [configured, client, requestClient, userId, state.signal]);
+  }, [configured, requestClient, userId, state.signal]);
 
   const value = useMemo(
     () => ({

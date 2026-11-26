@@ -15166,6 +15166,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0c72ba"
     },
     {
+      "id": "geniki-taxydromiki",
+      "catalog": "geniki-taxydromiki",
+      "slug": "rastreamento-geniki-taxydromiki",
+      "title": "Rastreamento Geniki Taxydromiki: voucher, status e contato",
+      "name": "Geniki Taxydromiki",
+      "color": "#004fa0"
+    },
+    {
       "id": "ups",
       "catalog": "ups",
       "slug": "rastreamento-ups",
@@ -15644,6 +15652,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento J&T Express na Arábia Saudita, EAU e Kuwait",
       "name": "J&T Express Middle East",
       "color": "#e60000"
+    },
+    {
+      "id": "dsv",
+      "catalog": "dsv",
+      "slug": "rastreamento-dsv",
+      "title": "Rastreamento DSV: códigos, status e DB Schenker",
+      "name": "DSV",
+      "color": "#002664"
     },
     {
       "id": "far-international",
@@ -18804,6 +18820,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0c72ba"
     },
     {
+      "id": "geniki-taxydromiki",
+      "catalog": "geniki-taxydromiki",
+      "slug": "geniki-taxydromiki-wuliu-chaxun",
+      "title": "Geniki Taxydromiki 物流查询：运单号、状态与联系",
+      "name": "Geniki Taxydromiki",
+      "color": "#004fa0"
+    },
+    {
       "id": "ups",
       "catalog": "ups",
       "slug": "ups-guoji-kuaidi-chaxun",
@@ -19322,6 +19346,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "极兔中东（J&T Express 沙特/阿联酋/科威特）查询与客服",
       "name": "J&T Express Middle East",
       "color": "#e60000"
+    },
+    {
+      "id": "dsv",
+      "catalog": "dsv",
+      "slug": "dsv-wuliu-chaxun",
+      "title": "DSV 物流查询：运单号、状态与 DB Schenker",
+      "name": "DSV",
+      "color": "#002664"
     },
     {
       "id": "far-international",

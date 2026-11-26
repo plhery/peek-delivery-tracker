@@ -242,6 +242,38 @@ final class PeekAiTests: XCTestCase {
         XCTAssertFalse(reason.contains("。 "), reason)
     }
 
+    /// When the server says how many parcels it stands on, the sheet names them, in the reader's numbers and count forms.
+    func testItNamesHowManyParcelsItStandsOnWhenTheServerSays() {
+        XCTAssertEqual(english.peekAiReason(with(notToday) { $0.parcels = 89 }, carrier: "DPD", now: now),
+                       "It hasn’t gone out for delivery yet. Of 89 parcels Peek has followed that weren’t out for delivery by this hour on the day their carrier gave, most didn’t arrive that day.")
+        let twelve = Localizer(defaults: defaults, systemUses24HourTime: { false })
+        XCTAssertEqual(twelve.peekAiReason(with(byTime) { $0.parcels = 85; $0.startBefore = "10:00" }, carrier: "FedEx", now: now),
+                       "Of 85 FedEx parcels Peek has followed that went out for delivery before 10:00 AM, most arrived by 4:00 PM that day. This one went out at 8:12 AM.")
+        // Without the round's start, the hour is said as before.
+        XCTAssertEqual(english.peekAiReason(with(byTime) { $0.parcels = 85 }, carrier: "FedEx", now: now),
+                       "Most FedEx parcels Peek has followed arrived by 16:00 on the day they went out for delivery. This one went out at 08:12.")
+        XCTAssertEqual(english.peekAiReason(PeekAi(says: .notToday, why: .lateOut, sure: 0.87, parcels: 508), carrier: "DPD", now: now),
+                       "It’s still out for delivery this late. Of 508 parcels Peek has followed that were still out at this hour, most didn’t arrive that day.")
+        XCTAssertEqual(english.peekAiReason(with(sooner) { $0.parcels = 4988 }, carrier: "DPD", now: now),
+                       "Peek AI learned from 4,988 parcels Peek has followed. Most with scans like this one’s came before the date their carrier gave.")
+        XCTAssertEqual(english.peekAiReason(with(noDate) { $0.parcels = 4988 }, carrier: "UPS", now: now),
+                       "Peek AI learned from 4,988 parcels Peek has followed, and goes by how long those with scans like this one’s took. It reached the delivery depot 2 days ago.")
+        // A missed date names no count.
+        XCTAssertEqual(english.peekAiReason(with(noDate) { $0.why = .missedDate; $0.says = .todayOrTomorrow; $0.parcels = 14 }, carrier: "DPD", now: now),
+                       english.text("peekAi.reason.missedDate"))
+
+        // Russian reads 21 and 4,981 with its one form, 22 with few, 25 with many.
+        english.language = .ru
+        let one = english.peekAiReason(with(sooner) { $0.parcels = 21 }, carrier: "DPD", now: now)
+        XCTAssertTrue(one.hasPrefix("Peek AI учится на 21 посылке,"), one)
+        let grouped = english.peekAiReason(with(sooner) { $0.parcels = 4981 }, carrier: "DPD", now: now)
+        XCTAssertNotNil(grouped.range(of: #"^Peek AI учится на 4\s981 посылке,"#, options: .regularExpression), grouped)
+        let few = english.peekAiReason(with(notToday) { $0.parcels = 22 }, carrier: "DPD", now: now)
+        XCTAssertTrue(few.contains("Из 22 посылок,"), few)
+        let many = english.peekAiReason(with(notToday) { $0.parcels = 25 }, carrier: "DPD", now: now)
+        XCTAssertTrue(many.contains("Из 25 посылок,"), many)
+    }
+
     func testItCountsHowOftenItWasRightRoundedDown() {
         XCTAssertEqual(english.peekAiRecord(notToday), "Right 8 times in 10 at this hour.")
         XCTAssertEqual(english.peekAiRecord(noDate), "Right 8 times in 10 on parcels like this one.")

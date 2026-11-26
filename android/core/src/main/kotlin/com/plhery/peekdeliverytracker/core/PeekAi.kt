@@ -260,19 +260,48 @@ fun Localizer.peekAiWhy(ai: PeekAi, carrier: String, now: Instant = AppClock.now
 
 /**
  * The sheet's Why: what Peek AI goes by, the parcels Peek has followed that were like this one, under the carrier's word
- * the sheet shows above it. Out for delivery, the carrier's usual hour is the reason; the hour this one went out comes
- * after.
+ * the sheet shows above it, with how many it stands on when the server says (`parcels`). Out for delivery, the
+ * carrier's usual hour for rounds that left before `start_before` is the reason; the hour this one went out comes after.
  */
-fun Localizer.peekAiReason(ai: PeekAi, carrier: String, now: Instant = AppClock.now()): String = when (ai.why) {
-    PeekAiWhy.NoOutForDelivery -> text("peekAi.reason.noOutForDelivery")
-    PeekAiWhy.OutForDelivery -> text(
-        "peekAi.reason.outForDelivery",
-        mapOf("carrier" to carrier, "time" to peekAiClock(ai.time ?: ""), "since" to peekAiClock(ai.outSince ?: "")),
-    )
-    PeekAiWhy.LateOut -> text("peekAi.reason.lateOut")
-    PeekAiWhy.MissedDate -> text("peekAi.reason.missedDate")
-    PeekAiWhy.Ahead -> text("peekAi.reason.ahead")
-    PeekAiWhy.NoDate -> withLastStep(text("peekAi.reason.noDate"), ai, now)
+fun Localizer.peekAiReason(ai: PeekAi, carrier: String, now: Instant = AppClock.now()): String {
+    peekAiCounted(ai, carrier, now)?.let { return it }
+    return when (ai.why) {
+        PeekAiWhy.NoOutForDelivery -> text("peekAi.reason.noOutForDelivery")
+        PeekAiWhy.OutForDelivery -> text(
+            "peekAi.reason.outForDelivery",
+            mapOf("carrier" to carrier, "time" to peekAiClock(ai.time ?: ""), "since" to peekAiClock(ai.outSince ?: "")),
+        )
+        PeekAiWhy.LateOut -> text("peekAi.reason.lateOut")
+        PeekAiWhy.MissedDate -> text("peekAi.reason.missedDate")
+        PeekAiWhy.Ahead -> text("peekAi.reason.ahead")
+        PeekAiWhy.NoDate -> withLastStep(text("peekAi.reason.noDate"), ai, now)
+    }
+}
+
+/**
+ * The Why naming how many parcels it stands on (`parcels`), the number in the language's digits as the iPhone writes
+ * it ("4,988", "4 981") and its count picking the form. None for a missed date, nor out for delivery without the
+ * round's start (`start_before`): the sentence without a count says it then.
+ */
+private fun Localizer.peekAiCounted(ai: PeekAi, carrier: String, now: Instant): String? {
+    val parcels = ai.parcels ?: return null
+    val counted = mapOf("count" to parcels, "number" to foundationDecimal(parcels.toDouble(), 0, language))
+    return when (ai.why) {
+        PeekAiWhy.NoOutForDelivery -> text("peekAi.counted.noOutForDelivery.many", counted)
+        PeekAiWhy.OutForDelivery -> ai.startBefore?.takeIf { it.isNotEmpty() }?.let { start ->
+            text(
+                "peekAi.counted.outForDelivery.many",
+                counted + mapOf(
+                    "carrier" to carrier, "start" to peekAiClock(start), "time" to peekAiClock(ai.time ?: ""),
+                    "since" to peekAiClock(ai.outSince ?: ""),
+                ),
+            )
+        }
+        PeekAiWhy.LateOut -> text("peekAi.counted.lateOut.many", counted)
+        PeekAiWhy.Ahead -> text("peekAi.counted.ahead.many", counted)
+        PeekAiWhy.NoDate -> withLastStep(text("peekAi.counted.noDate.many", counted), ai, now)
+        PeekAiWhy.MissedDate -> null
+    }
 }
 
 /** How often Peek AI was right on parcels like this one: "Right 8 times in 10 at this hour." */

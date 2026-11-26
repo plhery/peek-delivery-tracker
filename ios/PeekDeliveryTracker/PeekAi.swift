@@ -278,9 +278,30 @@ extension Localizer {
     }
 
     /// The sheet's Why: what Peek AI goes by, the parcels Peek has followed that were like this one, under the carrier's
-    /// word the sheet shows above it. Out for delivery, the carrier's usual hour is the reason; the hour this one went
-    /// out comes after.
+    /// word the sheet shows above it, with how many it stands on when the server says (`parcels`). Out for delivery, the
+    /// carrier's usual hour for rounds that left before `startBefore` is the reason; the hour this one went out comes after.
     func peekAiReason(_ ai: PeekAi, carrier: String, now: Date = Date()) -> String {
+        if let parcels = ai.parcels {
+            // The count picks the sentence's form; the number is written as the language writes it: "4,988", "4 981".
+            let counted: [String: CustomStringConvertible] = [
+                "count": parcels, "number": parcels.formatted(.number.locale(language.locale)),
+            ]
+            switch ai.why {
+            case .noOutForDelivery: return text("peekAi.counted.noOutForDelivery.many", counted)
+            case .outForDelivery:
+                // Without the round's start, the hour is said as before.
+                guard let start = ai.startBefore, !start.isEmpty else { break }
+                return text("peekAi.counted.outForDelivery.many", counted.merging([
+                    "carrier": carrier, "start": peekAiClock(start), "time": peekAiClock(ai.time ?? ""),
+                    "since": peekAiClock(ai.outSince ?? ""),
+                ]) { $1 })
+            case .lateOut: return text("peekAi.counted.lateOut.many", counted)
+            case .ahead: return text("peekAi.counted.ahead.many", counted)
+            case .noDate: return peekAiWithLastStep(text("peekAi.counted.noDate.many", counted), ai, now: now)
+            // A missed date names no count.
+            case .missedDate: break
+            }
+        }
         switch ai.why {
         case .noOutForDelivery: return text("peekAi.reason.noOutForDelivery")
         case .outForDelivery:

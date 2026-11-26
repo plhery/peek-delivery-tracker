@@ -222,6 +222,47 @@ class PeekAiTests {
     }
 
     @Test
+    fun namesHowManyParcelsItStandsOnWhenTheServerSaysInTheReadersNumbersAndCountForms() {
+        assertEquals(
+            "It hasn’t gone out for delivery yet. Of 89 parcels Peek has followed that weren’t out for delivery by this hour on the day their carrier gave, most didn’t arrive that day.",
+            english.peekAiReason(notToday.copy(parcels = 89), "DPD", now),
+        )
+        val twelveHours = Localizer(AppLanguage.En, clockPreference = ClockPreference.TwelveHour)
+        assertEquals(
+            "Of 85 FedEx parcels Peek has followed that went out for delivery before 10:00 AM, most arrived by 4:00 PM that day. This one went out at 8:12 AM.",
+            twelveHours.peekAiReason(byTime.copy(parcels = 85, startBefore = "10:00"), "FedEx", now).replace(Regex("\\p{Zs}"), " "),
+        )
+        // Without the round's start, the hour is said as before.
+        assertEquals(
+            "Most FedEx parcels Peek has followed arrived by 16:00 on the day they went out for delivery. This one went out at 08:12.",
+            english.peekAiReason(byTime.copy(parcels = 85), "FedEx", now),
+        )
+        assertEquals(
+            "It’s still out for delivery this late. Of 508 parcels Peek has followed that were still out at this hour, most didn’t arrive that day.",
+            english.peekAiReason(PeekAi(says = PeekAiSays.NotToday, why = PeekAiWhy.LateOut, sure = 0.87, parcels = 508), "DPD", now),
+        )
+        assertEquals(
+            "Peek AI learned from 4,988 parcels Peek has followed. Most with scans like this one’s came before the date their carrier gave.",
+            english.peekAiReason(sooner.copy(parcels = 4988), "DPD", now),
+        )
+        assertEquals(
+            "Peek AI learned from 4,988 parcels Peek has followed, and goes by how long those with scans like this one’s took. It reached the delivery depot 2 days ago.",
+            english.peekAiReason(noDate.copy(parcels = 4988), "UPS", now),
+        )
+        // A missed date names no count.
+        val missed = noDate.copy(why = PeekAiWhy.MissedDate, says = PeekAiSays.TodayOrTomorrow)
+        assertEquals(english.peekAiReason(missed, "DPD", now), english.peekAiReason(missed.copy(parcels = 14), "DPD", now))
+        assertTrue(english.peekAiReason(missed.copy(parcels = 14), "DPD", now).startsWith("It was scanned in the last 24 hours."))
+        // Russian reads 21 and 4,981 with its one form, 22 with few, 25 with many.
+        val russian = Localizer(AppLanguage.Ru)
+        fun assertMatches(pattern: String, text: String) = assertTrue(text, Regex(pattern).containsMatchIn(text))
+        assertMatches("""^Peek AI учится на 21 посылке,""", russian.peekAiReason(sooner.copy(parcels = 21), "DPD", now))
+        assertMatches("""^Peek AI учится на 4\p{Zs}981 посылке,""", russian.peekAiReason(sooner.copy(parcels = 4981), "DPD", now))
+        assertTrue(russian.peekAiReason(notToday.copy(parcels = 22), "DPD", now).contains("Из 22 посылок,"))
+        assertTrue(russian.peekAiReason(notToday.copy(parcels = 25), "DPD", now).contains("Из 25 посылок,"))
+    }
+
+    @Test
     fun countsHowOftenItWasRightRoundedDown() {
         assertEquals("Right 8 times in 10 at this hour.", english.peekAiRecord(notToday))
         assertEquals("Right 8 times in 10 on parcels like this one.", english.peekAiRecord(noDate))

@@ -15078,6 +15078,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005d69"
     },
     {
+      "id": "ciblex",
+      "catalog": "ciblex",
+      "slug": "ciblex-tracking",
+      "title": "Rastreamento Ciblex: códigos, status em francês e contato",
+      "name": "Ciblex",
+      "color": "#0160ab"
+    },
+    {
       "id": "landmark-global",
       "catalog": "landmark-global",
       "slug": "rastreamento-landmark-global",
@@ -15404,6 +15412,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Australia Post: códigos, status e lockers",
       "name": "Australia Post",
       "color": "#dc1928"
+    },
+    {
+      "id": "aramex-nz",
+      "catalog": "aramex-nz",
+      "slug": "aramex-new-zealand-tracking-number",
+      "title": "Rastreamento Aramex Nova Zelândia: status e contatos",
+      "name": "Aramex New Zealand",
+      "color": "#dc291e"
     },
     {
       "id": "magyar-posta",
@@ -19012,6 +19028,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005d69"
     },
     {
+      "id": "ciblex",
+      "catalog": "ciblex",
+      "slug": "ciblex-tracking",
+      "title": "Ciblex Express 物流查询：运单号、法语状态与联系方式",
+      "name": "Ciblex",
+      "color": "#0160ab"
+    },
+    {
       "id": "landmark-global",
       "catalog": "landmark-global",
       "slug": "landmark-global-wuliu-chaxun",
@@ -19338,6 +19362,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "澳洲邮政（Australia Post）物流查询：单号、状态与快递柜",
       "name": "Australia Post",
       "color": "#dc1928"
+    },
+    {
+      "id": "aramex-nz",
+      "catalog": "aramex-nz",
+      "slug": "aramex-new-zealand-tracking-number",
+      "title": "Aramex 新西兰（Aramex NZ）物流查询：单号、状态与网点电话",
+      "name": "Aramex New Zealand",
+      "color": "#dc291e"
     },
     {
       "id": "magyar-posta",

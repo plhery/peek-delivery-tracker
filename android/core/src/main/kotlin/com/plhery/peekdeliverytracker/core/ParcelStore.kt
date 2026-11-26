@@ -9,6 +9,7 @@ import com.plhery.peekdeliverytracker.core.api.CreatePackageRequest
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferencesClock
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferencesDistance
+import com.plhery.peekdeliverytracker.core.api.PackageFile
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelAlertPreset
 import com.plhery.peekdeliverytracker.core.api.PublicParcelResponse
@@ -20,11 +21,13 @@ import java.time.Instant
 import java.time.ZoneId
 import java.util.Locale
 import java.util.UUID
+import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.math.pow
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.delay
@@ -36,6 +39,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.Serializable
 
 // From ParcelStore.swift: the parcels on screen, and everything done to them, for an account, the demo or this phone
@@ -216,6 +220,8 @@ class ParcelStore(
     private val analytics: (event: String, outcome: DeliveryAnalytics.Outcome?) -> Unit = { _, _ -> },
     private val now: () -> Instant = AppClock::now,
     importCharges: () -> String? = { null },
+    /** Where the files of notes kept on this phone are read and written, off the main thread. */
+    private val noteFileContext: CoroutineContext = Dispatchers.IO,
 ) {
     sealed class RefreshStart {
         data object Queued : RefreshStart()
@@ -761,6 +767,13 @@ class ParcelStore(
         if (!isDemo) claimDeviceParcels()
         if (!stillCurrent(generation)) return
         load(showSpinner = true)
+        // The files of the notes brought along, and those that could not go last time, follow the list, which reads
+        // them again once some have arrived.
+        if (!isDemo && device.noteFiles?.sending?.isNotEmpty() == true) {
+            scope.launch {
+                if (sendKeptNoteFiles() > 0 && stillCurrent(generation)) load(showSpinner = false)
+            }
+        }
         if (!stillCurrent(generation)) return
         refreshNotificationState()
         if (!stillCurrent(generation)) return
@@ -1148,6 +1161,121 @@ class ParcelStore(
         }
         session.checkGeneration(generation)
         upsert(updated)
+    }
+
+    /**
+     * Saves the parcel's private note: in the account, in the demo, or on this phone alone. Its text is trimmed and cut
+     * to 1,000 characters; nothing left deletes it.
+     */
+    suspend fun setNote(parcel: Parcel, text: String?) {
+        val generation = session.generation
+        val note = ParcelNotes.saved(text)
+        val updated = if (isDemo) {
+            demo.setNote(parcel.id, note)
+        } else if (isGuest) {
+            device.setNote(parcel.id, note)
+        } else {
+            api.setNote(parcel.id, note)
+        }
+        session.checkGeneration(generation)
+        upsert(updated)
+    }
+
+    /**
+     * Adds a photo or PDF to the parcel's note and returns the file as the note lists it. Without an account it stays
+     * on this phone. One that can't join says why ([NoteFileError]).
+     */
+    suspend fun addFile(parcel: Parcel, upload: NoteFileUpload): Parcel {
+        val generation = session.generation
+        val updated = if (isDemo) {
+            demo.addFile(parcel.id, upload)
+        } else if (isGuest) {
+            withContext(noteFileContext) { device.addFile(parcel.id, upload) }
+        } else {
+            api.addFile(parcel.id, upload).parcel
+        }
+        session.checkGeneration(generation)
+        upsert(updated)
+        return updated
+    }
+
+    /** Removes a file from the parcel's note: once its Undo has passed. */
+    suspend fun removeFile(parcel: Parcel, fileId: UUID) {
+        val generation = session.generation
+        val updated = if (isDemo) {
+            demo.removeFile(parcel.id, fileId)
+        } else if (isGuest) {
+            withContext(noteFileContext) { device.removeFile(parcel.id, fileId) }
+        } else {
+            api.removeFile(parcel.id, fileId)
+            null
+        }
+        session.checkGeneration(generation)
+        val current = parcels.firstOrNull { it.id == parcel.id } ?: return
+        upsert(updated ?: current.withoutFile(fileId))
+    }
+
+    /**
+     * The bytes of a note's file kept on this phone: a guest's, or one of the demo's. Nil for one on the service, which
+     * is read at its address.
+     */
+    suspend fun localNoteFile(file: PackageFile): ByteArray? = when {
+        file.url.startsWith(NoteFileAddress.DEMO) -> demo.fileBytes(file.id)
+        file.url.startsWith(NoteFileAddress.DEVICE) -> withContext(noteFileContext) { device.noteFiles?.bytes(file.id) }
+        else -> null
+    }
+
+    /**
+     * The service's addresses of a note's files last a while: once one has passed, the parcels are read again for new
+     * ones. Returns the file as it is now, nil once it has gone.
+     */
+    suspend fun freshFile(parcelId: UUID, fileId: UUID): PackageFile? {
+        val current = parcels.firstOrNull { it.id == parcelId }?.files?.firstOrNull { it.id == fileId } ?: return null
+        if (!current.expired(now())) return current
+        load(showSpinner = false)
+        return parcels.firstOrNull { it.id == parcelId }?.files?.firstOrNull { it.id == fileId }
+    }
+
+    /**
+     * Sends the files of guest notes that the account now keeps, one at a time, each leaving the phone once it
+     * arrived. One that fails stays for the next start; one whose parcel has left the account has nowhere to go.
+     * Returns how many arrived.
+     */
+    private suspend fun sendKeptNoteFiles(): Int {
+        val files = device.noteFiles ?: return 0
+        // One round at a time: a start while one is under way leaves the files to it.
+        if (sendingNoteFiles) return 0
+        sendingNoteFiles = true
+        try {
+            return sendNoteFiles(files)
+        } finally {
+            sendingNoteFiles = false
+        }
+    }
+
+    private var sendingNoteFiles = false
+
+    private suspend fun sendNoteFiles(files: DeviceNoteFiles): Int {
+        val generation = session.generation
+        var sent = 0
+        for (file in files.sending) {
+            val packageId = file.packageId ?: continue
+            val bytes = withContext(noteFileContext) { files.bytes(file.id) }
+            if (bytes == null) {
+                withContext(noteFileContext) { files.remove(file.id) }
+                continue
+            }
+            try {
+                api.addFile(packageId, NoteFileUpload(bytes, file.name, file.fileType, file.width, file.height))
+                sent += 1
+            } catch (error: Exception) {
+                if (error is CancellationException) currentCoroutineContext().ensureActive()
+                if (generation != session.generation) return sent
+                if (error !is DeliveryApiError.ParcelMissing) continue
+            }
+            withContext(noteFileContext) { files.remove(file.id) }
+        }
+        return sent
     }
 
     suspend fun changeCarrier(
@@ -2252,6 +2380,9 @@ class ParcelStore(
             }
             if (generation != session.generation) return
             for (result in response.results) {
+                // The note's words went with the claim; its files follow, to the parcel the account has now.
+                val kept = result.outcome == ClaimParcelResultOutcome.Kept || result.outcome == ClaimParcelResultOutcome.Already
+                result.packageId?.let { if (kept) device.handOverNote(result.id, it) }
                 if (result.outcome != ClaimParcelResultOutcome.Kept) continue
                 val id = result.packageId ?: continue
                 // What was archived here stays archived there, and a parcel whose notifications were turned off here

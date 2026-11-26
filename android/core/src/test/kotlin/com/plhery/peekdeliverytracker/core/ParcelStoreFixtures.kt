@@ -149,5 +149,6 @@ internal fun testParcelStore(
     deviceNotifications = deviceNotifications,
     analytics = analytics,
     now = now,
+    noteFileContext = scope.coroutineContext[ContinuationInterceptor] ?: Dispatchers.Default,
 )
 

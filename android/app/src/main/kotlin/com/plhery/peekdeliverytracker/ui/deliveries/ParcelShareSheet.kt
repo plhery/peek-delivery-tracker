@@ -69,6 +69,7 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.ExperimentalPalette
+import com.plhery.peekdeliverytracker.core.ParcelLinkWords
 import com.plhery.peekdeliverytracker.core.ParcelNumberHint
 import com.plhery.peekdeliverytracker.core.ParcelShareModel
 import com.plhery.peekdeliverytracker.core.ParcelShareWords
@@ -450,7 +451,10 @@ private fun Sharing(work: ParcelShareSheetWork, parcel: Parcel, working: Boolean
     val words = work.words
     val idle = !working && saving.isEmpty()
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        SharePreviewCard(parcel, name = model.carried.name, showNumber = shown.showNumber, gift = shown.gift)
+        SharePreviewCard(
+            parcel, name = model.carried.name, showNumber = shown.showNumber, gift = shown.gift,
+            early = if (shown.gift) words.shownEarly else null,
+        )
         ShareOptions(work, shown, words, loading)
         if (shown.gift) GiftWords(work, words)
         LinkRow(loading, model.address, work.copied, enabled = !loading && idle, copy = work::copy)
@@ -536,9 +540,10 @@ private fun Hairline() {
  * keeps its room first; at the accessibility sizes the title alone on its line, the value under it on two at most. The
  * switch at the trailing end, in the delivered green while on; 14 and 9 in, 50 tall at least. A tap on the switch
  * flips it (`flip`); TalkBack reads the row as one switch, its words and its state, as iOS's `Toggle` with its label.
+ * A row without a symbol starts with its title.
  */
 @Composable
-private fun ShareSwitch(tag: String, symbol: String, title: String, value: String?, on: Boolean, enabled: Boolean, flip: (Boolean) -> Unit) {
+private fun ShareSwitch(tag: String, symbol: String?, title: String, value: String?, on: Boolean, enabled: Boolean, flip: (Boolean) -> Unit) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val titleStyle = type.style(IosTextStyle.Subheadline, FontWeight.SemiBold).sfLines()
@@ -567,10 +572,12 @@ private fun ShareSwitch(tag: String, symbol: String, title: String, value: Strin
                 }
             }
         } else {
-            Box(Modifier.width(22.dp), contentAlignment = Alignment.Center) {
-                PeekSymbol(symbol, font = type.fixed(16f), tint = colors.secondaryText)
+            if (symbol != null) {
+                Box(Modifier.width(22.dp), contentAlignment = Alignment.Center) {
+                    PeekSymbol(symbol, font = type.fixed(16f), tint = colors.secondaryText)
+                }
+                Spacer(Modifier.width(12.dp))
             }
-            Spacer(Modifier.width(12.dp))
             Row(Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
                 Text(title, color = colors.label, style = titleStyle)
                 if (value != null) {
@@ -595,26 +602,36 @@ private fun ShareSwitch(tag: String, symbol: String, title: String, value: Strin
 
 /**
  * `giftWords`: a gift's note, two to five lines, and who it is from, with the name autofill and Done, which puts the
- * keyboard away; each under its label in caption secondary, 10 apart, then "share.gift.private" in caption secondary;
- * 14 in, raised, with 14-point continuous corners. Each keeps within what a link carries as it is typed (280 and 60).
- * Either field taking the focus opens the sheet fully (`onChange(of: writing)`).
+ * keyboard away; each under its label in caption secondary, 10 apart; then the switch that shows them before delivery
+ * ("share.gift.early", off by default), and "share.gift.private" in caption secondary, or "share.gift.privateEarly"
+ * with the switch on, when the note's label reads "share.gift.noteNow". 14 in, raised, with 14-point continuous
+ * corners. Each field keeps within what a link carries as it is typed (280 and 60). Either taking the focus opens the
+ * sheet fully (`onChange(of: writing)`).
  */
 @Composable
 private fun GiftWords(work: ParcelShareSheetWork, words: ParcelShareWords) {
     val localizer = LocalLocalizer.current
     val colors = PeekTheme.colors
     val writing = { work.large = true }
-    Column(
-        Modifier.fillMaxWidth().background(colors.raised, ContinuousRoundedShape(14.dp)).padding(14.dp),
-        verticalArrangement = Arrangement.spacedBy(10.dp),
-    ) {
-        WordsField(PARCEL_SHARE_NOTE, localizer.text("share.gift.note"), words.note, name = false, writing) {
-            work.type(work.words.copy(note = it))
+    Column(Modifier.fillMaxWidth().background(colors.raised, ContinuousRoundedShape(14.dp)).padding(vertical = 14.dp)) {
+        Column(Modifier.padding(horizontal = 14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            WordsField(PARCEL_SHARE_NOTE, localizer.text(if (words.early) "share.gift.noteNow" else "share.gift.note"), words.note, name = false, writing) {
+                work.type(work.words.copy(note = it))
+            }
+            WordsField(PARCEL_SHARE_FROM, localizer.text("share.gift.from"), words.from, name = true, writing) {
+                work.type(work.words.copy(from = it))
+            }
         }
-        WordsField(PARCEL_SHARE_FROM, localizer.text("share.gift.from"), words.from, name = true, writing) {
-            work.type(work.words.copy(from = it))
+        // Its own 14 in, as the switches above.
+        ShareSwitch(PARCEL_SHARE_EARLY, null, localizer.text("share.gift.early"), null, words.early, enabled = true) {
+            work.type(work.words.copy(early = it))
         }
-        Text(localizer.text("share.gift.private"), color = colors.secondaryText, style = PeekTheme.type.caption.sfLines())
+        Text(
+            localizer.text(if (words.early) "share.gift.privateEarly" else "share.gift.private"),
+            Modifier.padding(horizontal = 14.dp),
+            color = colors.secondaryText,
+            style = PeekTheme.type.caption.sfLines(),
+        )
     }
 }
 
@@ -846,11 +863,12 @@ private fun ShareWarning(text: String) {
  * one delivered, else the status); what the link says of it in footnote medium, in lilac for a gift or the carrier's
  * ink; and the number as the link shows it, whole or masked, in monospaced caption 3 under. Pip 12 beside them, except
  * at the accessibility sizes ([ShareFigure]). 16 and 14 in, on lilac's surface for a gift or the carrier's, with
- * 18-point continuous corners. A gift on its way is the wrapped parcel, with no number and no name. TalkBack reads it
+ * 18-point continuous corners. A gift on its way is the wrapped parcel, with no number and no name; its note and who
+ * it is from show under the rest, in caption, where the sender shows them before delivery (`early`). TalkBack reads it
  * as one.
  */
 @Composable
-private fun SharePreviewCard(parcel: Parcel, name: String?, showNumber: Boolean, gift: Boolean) {
+private fun SharePreviewCard(parcel: Parcel, name: String?, showNumber: Boolean, gift: Boolean, early: ParcelLinkWords? = null) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
     LocalUse24HourTime.current
@@ -915,6 +933,15 @@ private fun SharePreviewCard(parcel: Parcel, name: String?, showNumber: Boolean,
                         color = colors.label,
                         style = type.style(IosTextStyle.Caption, design = FontDesign.Monospaced).sfLines(),
                     )
+                }
+                // A gift whose note shows before delivery: the note, and who it is from, under the headline.
+                val note = early?.note
+                val from = early?.from
+                if (wrapped && (note != null || from != null)) {
+                    Column(Modifier.padding(top = 3.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                        if (note != null) Text(note, color = colors.label, style = type.caption.sfLines())
+                        if (from != null) Text("— $from", color = colors.secondaryText, style = type.caption.sfLines())
+                    }
                 }
             }
             if (!PeekTheme.dynamicTypeSize.isAccessibilitySize) {
@@ -1006,6 +1033,7 @@ internal const val PARCEL_SHARE_NAME = "parcelShare.name"
 internal const val PARCEL_SHARE_GIFT = "parcelShare.gift"
 internal const val PARCEL_SHARE_NOTE = "parcelShare.note"
 internal const val PARCEL_SHARE_FROM = "parcelShare.from"
+internal const val PARCEL_SHARE_EARLY = "parcelShare.early"
 internal const val PARCEL_SHARE_LINK = "parcelShare.link"
 internal const val PARCEL_SHARE_ADDRESS = "parcelShare.address"
 internal const val PARCEL_SHARE_PENDING = "parcelShare.pending"

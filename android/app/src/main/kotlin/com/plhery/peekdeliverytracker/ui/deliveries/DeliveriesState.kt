@@ -2034,6 +2034,7 @@ internal class DeliveriesState(
             ParcelMenuItem.Open, ParcelMenuItem.Share -> Unit
             ParcelMenuItem.ChangeCarrier -> editCarrier(pageId)
             ParcelMenuItem.Rename -> rename(parcel, pageId)
+            ParcelMenuItem.AddNote, ParcelMenuItem.EditNote -> openNote(parcel, pageId)
             ParcelMenuItem.CopyTrackingNumber -> parcel.trackingNumbers.firstOrNull()?.let { copyOnPage(pageId, it) }
             ParcelMenuItem.Archive -> leaveOnPage(pageId) { saveArchive(parcel) }
             ParcelMenuItem.Restore -> leaveOnPage(pageId) {
@@ -2045,6 +2046,9 @@ internal class DeliveriesState(
             ParcelMenuItem.ContactCarrier -> Unit
         }
     }
+
+    /** Opens the sheet of the parcel's private note. */
+    fun openNote(parcel: Parcel, pageId: UUID?) = Unit
 
     /**
      * `TrackingNumberCopy.copy`: counts the copy and puts the number on the clipboard as its carrier's site takes it,
@@ -2067,6 +2071,7 @@ internal class DeliveriesState(
                 navigator.open(parcel.id)
             }
             ParcelMenuItem.Rename -> rename(parcel, pageId = null)
+            ParcelMenuItem.AddNote, ParcelMenuItem.EditNote -> openNote(parcel, pageId = null)
             ParcelMenuItem.Share -> openShare(ShareRequest(UUID.randomUUID(), parcel.id, pageId = null), parcel)
             ParcelMenuItem.ChangeCarrier ->
                 openCarrierEditor(CarrierEditorRequest(UUID.randomUUID(), parcel.id, pageId = null, initialCarrier = null), parcel)

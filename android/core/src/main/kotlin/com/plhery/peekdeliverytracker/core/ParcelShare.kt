@@ -34,22 +34,34 @@ data class ParcelShareWords(
     /** A gift's note, and who it is from, as typed. */
     val note: String = "",
     val from: String = "",
+    /** A gift's note and who it is from show before it is delivered; what is inside still waits. */
+    val early: Boolean = false,
 ) {
     /** Swift's `==`, which compares the note and who it is from canonically. */
     internal fun equalsCanonically(other: ParcelShareWords): Boolean =
-        name == other.name && note.equalsCanonically(other.note) && from.equalsCanonically(other.from)
+        name == other.name && note.equalsCanonically(other.note) && from.equalsCanonically(other.from) && early == other.early
 
     /** The words as a link may carry them: one line each, within their limits. */
     val cleaned: ParcelShareWords
-        get() = ParcelShareWords(
-            name = name,
+        get() = copy(
             note = ParcelLinkWords.clean(note, limit = ParcelLinkWords.noteLimit) ?: "",
             from = ParcelLinkWords.clean(from, limit = ParcelLinkWords.fromLimit) ?: "",
         )
 
     /** What is being typed, kept within what a link may carry. Spaces stay until the words are cleaned. */
     val limited: ParcelShareWords
-        get() = ParcelShareWords(name = name, note = limit(note, ParcelLinkWords.noteLimit), from = limit(from, ParcelLinkWords.fromLimit))
+        get() = copy(note = limit(note, ParcelLinkWords.noteLimit), from = limit(from, ParcelLinkWords.fromLimit))
+
+    /** The note and who it is from as a gift's recipient reads them before delivery: nil unless shown early. */
+    val shownEarly: ParcelLinkWords?
+        get() = if (!early) {
+            null
+        } else {
+            ParcelLinkWords(
+                note = ParcelLinkWords.clean(note, limit = ParcelLinkWords.noteLimit),
+                from = ParcelLinkWords.clean(from, limit = ParcelLinkWords.fromLimit),
+            )
+        }
 
     private companion object {
         /** Whole Characters while their Unicode scalars fit. A lone surrogate is U+FFFD, as in a Swift String. */
@@ -408,6 +420,8 @@ class ParcelShareModel(
                         name = clean.name,
                         note = ParcelLinkWords.clean(clean.note ?: "", limit = ParcelLinkWords.noteLimit),
                         from = ParcelLinkWords.clean(clean.from ?: "", limit = ParcelLinkWords.fromLimit),
+                        // Off goes out as null, as the other words do.
+                        early = if (words.early) true else null,
                     ),
                 )
             }
@@ -431,7 +445,7 @@ class ParcelShareModel(
         val saved = answer.giftWords
         val kept = if (words == ParcelShareWords() && saved == null) notes.words(parcelId) else null
         if (words == ParcelShareWords() && saved != null) {
-            words = ParcelShareWords(name = saved.name != null, note = saved.note ?: "", from = saved.from ?: "")
+            words = ParcelShareWords(name = saved.name != null, note = saved.note ?: "", from = saved.from ?: "", early = saved.early == true)
         } else if (kept != null) {
             remembered = kept
             words = kept
@@ -476,8 +490,8 @@ internal val typesEncodingNil: Set<String> = setOf(GiftWords.serializer().descri
 /**
  * The share sheet of a demo parcel opened at launch, to look at it in a debug build: the iPhone's `ParcelSharePreview`,
  * under `-sdt.debug.parcelShare` (`#if DEBUG`): `new` (no link yet), `link` (shared, number shown), `gift` (a gift with
- * its note), `stopped` (the sheet stops the link once it has read it) or `delivered` (a parcel that has arrived, its
- * name shown). Debug builds only.
+ * its note), `early` (the same, its note shown before delivery), `stopped` (the sheet stops the link once it has read
+ * it) or `delivered` (a parcel that has arrived, its name shown). Debug builds only.
  */
 object ParcelSharePreview {
     /** The demo parcel the sheet opens for. */
@@ -495,9 +509,15 @@ object ParcelSharePreview {
         notes.forget(parcelId)
         when (variant) {
             "link", "stopped" -> shares.share(parcelId, showNumber = true, gift = false)
-            "gift" -> {
+            "gift", "early" -> {
                 shares.share(parcelId, showNumber = false, gift = true)
-                notes.remember(ParcelShareWords(name = true, note = "Happy birthday, Alex! I hope these keep up with you on the trails.", from = "Sam"), parcelId)
+                notes.remember(
+                    ParcelShareWords(
+                        name = true, note = "Happy birthday, Alex! I hope these keep up with you on the trails.", from = "Sam",
+                        early = variant == "early",
+                    ),
+                    parcelId,
+                )
             }
             "delivered" -> {
                 shares.share(parcelId, showNumber = false, gift = false)

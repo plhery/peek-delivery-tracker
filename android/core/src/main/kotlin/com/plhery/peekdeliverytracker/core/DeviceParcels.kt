@@ -104,6 +104,8 @@ data class DeviceParcel(
      * was noted.
      */
     val linkCreatedAt: String? = null,
+    /** The private note written on this phone; its files are kept beside it ([DeviceNoteFiles]). */
+    val note: String? = null,
 ) {
     val isViewer: Boolean get() = viewer == true
 
@@ -632,6 +634,8 @@ class DeviceParcels(
      */
     private val language: () -> AppLanguage,
     private val now: () -> Instant = AppClock::now,
+    /** The files of the parcels' notes; none without it. */
+    val noteFiles: DeviceNoteFiles? = null,
 ) {
     private var entries: List<DeviceParcel>
     private var keys: Map<String, String>
@@ -703,6 +707,12 @@ class DeviceParcels(
     /** The parcels as the list shows them, under the names this device gave them. */
     fun list(): List<Parcel> = entries.map(::shown)
 
+    /** The parcel as the list shows it, with its note and the files kept here for it. */
+    private fun shown(entry: DeviceParcel): Parcel = listed(entry).copy(
+        note = entry.note?.nonEmpty,
+        files = noteFiles?.of(entry.linkId)?.map { it.packageFile }?.ifEmpty { null },
+    )
+
     /** When the service last answered about one of the parcels: how old what the list shows is at most. */
     val lastCheckedAt: Instant? get() = entries.filter { !it.isFrozen }.maxOfOrNull { it.checkedAt }?.let(::referenceDate)
 
@@ -772,12 +782,15 @@ class DeviceParcels(
         ).startingSeen()
         // A copy the service forgot of the same parcel or number makes way for the new lookup, as on the website, and
         // leaves it its name.
-        supersede(response.parcel, request.trackingNumber).name?.let { name -> if (entry.label.isEmpty()) entry = entry.copy(label = name) }
+        val superseded = supersede(response.parcel, request.trackingNumber)
+        superseded.name?.let { name -> if (entry.label.isEmpty()) entry = entry.copy(label = name) }
+        entry = carryNote(superseded, entry)
         // The service gives one parcel one link for each lookup; a second lookup of a parcel takes the first one's place.
         removeTwin(response.parcel.id, besides = null, client)?.let { old ->
             // The parcel being replaced came back unchanged: only its link is new.
             if (old.parcel.id == replacing) {
-                entry = entry.copy(label = old.label, archivedAt = old.archivedAt, replaced = old.replaced, muted = old.muted)
+                entry = entry.copy(label = old.label, archivedAt = old.archivedAt, replaced = old.replaced, muted = old.muted, note = old.note)
+                noteFiles?.move(old.linkId, entry.linkId)
             }
         }
         // The start of this number, looked up here minutes before and with no scan yet, was the number half typed: this
@@ -879,6 +892,30 @@ class DeviceParcels(
 
     fun rename(id: UUID, label: String): Parcel = update(id) { it.copy(label = label) }
 
+    /** The parcel's note, kept on this phone alone; null deletes it. */
+    fun setNote(id: UUID, note: String?): Parcel = update(id) { it.copy(note = note) }
+
+    /** Keeps a file with the parcel's note on this phone, or says why it can't ([NoteFileError]). */
+    fun addFile(id: UUID, upload: NoteFileUpload): Parcel {
+        val entry = entries.firstOrNull { it.parcel.id == id } ?: throw DeliveryApiError.ParcelMissing()
+        val files = noteFiles ?: throw NoteFileError(NoteFileProblem.DeviceFull)
+        files.add(entry.linkId, upload)
+        return shown(entry)
+    }
+
+    fun removeFile(id: UUID, fileId: UUID): Parcel {
+        val entry = entries.firstOrNull { it.parcel.id == id } ?: throw DeliveryApiError.ParcelMissing()
+        val files = noteFiles
+        if (files != null && files.of(entry.linkId).any { it.id == fileId }) files.remove(fileId)
+        return shown(entry)
+    }
+
+    /**
+     * The account now has the parcel of link `linkId` as `packageId`: its note's files are marked to be sent there,
+     * and stay here until they have arrived.
+     */
+    fun handOverNote(linkId: String, packageId: UUID): Int = noteFiles?.handOver(linkId, packageId) ?: 0
+
     fun setArchived(id: UUID, archived: Boolean): Parcel = update(id) { it.copy(archivedAt = if (archived) DateParser.isoString(now()) else null) }
 
     /**
@@ -895,6 +932,8 @@ class DeviceParcels(
         val key = keys.keyOf(entry.linkId)
         entries = entries.filter { !it.linkId.equalsCanonically(entry.linkId) }
         keys = keys.setting(entry.linkId, null)
+        // Its note's files go with it.
+        noteFiles?.forget(entry.linkId)
         // Followed again, it is signed up again.
         alertsAsked = alertsAsked.setting(entry.linkId, null)
         // On file as still to be forgotten before the service is asked, so that nothing stopping the app loses it.
@@ -1109,6 +1148,15 @@ class DeviceParcels(
             replacing = id,
         )
         if (added.id != id) {
+            // The note goes with the parcel to its new lookup.
+            entries.firstOrNull { it.parcel.id == id }?.let { old ->
+                val index = entries.indexOfFirst { it.parcel.id == added.id }
+                if (index >= 0 && (old.note != null || noteFiles?.of(old.linkId)?.isNotEmpty() == true)) {
+                    noteFiles?.move(old.linkId, entries[index].linkId)
+                    change(index) { it.copy(note = it.note ?: old.note) }
+                    save()
+                }
+            }
             attempt { forget(id) }
             val index = entries.indexOfFirst { it.parcel.id == added.id }
             if (index >= 0) {
@@ -1137,10 +1185,12 @@ class DeviceParcels(
             // The link reaches another parcel of the number: the page open on the old one follows it.
             if (response.parcel.id != id) stamped(it.copy(parcel = answer).startingSeen()).copy(replaced = it.replaced ?: id) else stamped(it.taking(answer))
         }
-        val name = supersede(response.parcel, number).name
+        val superseded = supersede(response.parcel, number)
+        val name = superseded.name
         client?.let { removeTwin(response.parcel.id, besides = linkId, it) }
         val moved = entries.indexOfFirst { it.linkId.equalsCanonically(linkId) }
         if (name != null && entries[moved].label.isEmpty()) change(moved) { it.copy(label = name) }
+        change(moved) { carryNote(superseded, it) }
         save()
         return shown(entries[moved])
     }
@@ -1195,9 +1245,9 @@ class DeviceParcels(
     val claims: List<ClaimParcelLink>
         get() = entries.mapNotNull { entry ->
             if (entry.isViewer) {
-                if (entry.canKeep == true) ClaimParcelLink(id = entry.linkId, label = entry.label.nonEmpty) else null
+                if (entry.canKeep == true) ClaimParcelLink(id = entry.linkId, label = entry.label.nonEmpty, note = entry.note?.nonEmpty) else null
             } else {
-                keys.keyOf(entry.linkId)?.let { ClaimParcelLink(id = entry.linkId, key = it, label = entry.label.nonEmpty) }
+                keys.keyOf(entry.linkId)?.let { ClaimParcelLink(id = entry.linkId, key = it, label = entry.label.nonEmpty, note = entry.note?.nonEmpty) }
             }
         } + keys.mapNotNull { (linkId, key) ->
             if (entries.any { it.linkId.equalsCanonically(linkId) }) null else ClaimParcelLink(id = linkId, key = key)
@@ -1227,6 +1277,8 @@ class DeviceParcels(
         val alerts = entries.mapNotNull { entry -> if (released(entry.linkId)) entry.alertToken?.let { entry.linkId to it } else null }
         entries = entries.filter { !released(it.linkId) }
         for (id in linkIds) keys = keys.setting(id, null)
+        // Files handed over to the account wait to be sent; any other of a released link has nowhere to go.
+        for (id in linkIds) noteFiles?.forget(id)
         save()
         val client = client
         if (client != null && alerts.isNotEmpty()) {
@@ -1256,6 +1308,7 @@ class DeviceParcels(
         val superseded = supersede(response.parcel, linkId = linkId)
         val index = entries.indexOfFirst { it.linkId.equalsCanonically(linkId) || it.parcel.id == response.parcel.id }
         if (index >= 0) {
+            change(index) { carryNote(superseded, it) }
             if (key == null || !entries[index].isViewer) {
                 if (superseded.any) save()
                 return Followed(entries[index].parcel.id, false)
@@ -1269,6 +1322,7 @@ class DeviceParcels(
             parcel = Parcel(shared = response.parcel, link = response.link), checkedAt = now().timeIntervalSinceReferenceDate,
             linkCreatedAt = response.link.createdAt,
         ).startingSeen()
+        entry = carryNote(superseded, entry)
         // Followed again before its notifications were turned off: they go on, and are its own again.
         forgotten.firstOrNull { it.linkId.equalsCanonically(linkId) }?.let { left ->
             entry = entry.copy(alertToken = left.alertToken, alertPreset = left.alertPreset)
@@ -1537,10 +1591,20 @@ class DeviceParcels(
     private fun supersede(answer: PublicPackage, number: String? = null, linkId: String? = null): Superseded {
         val gone = entries.filter { superseded(it, answer, number) || (it.isFrozen && linkId != null && it.linkId.equalsCanonically(linkId)) }
         if (gone.isNotEmpty()) entries = entries.filter { entry -> gone.none { it === entry } }
-        return Superseded(gone.isNotEmpty(), gone.firstNotNullOfOrNull { it.label.nonEmpty })
+        val noted = gone.firstOrNull { it.note != null || noteFiles?.of(it.linkId)?.isNotEmpty() == true }
+        return Superseded(gone.isNotEmpty(), gone.firstNotNullOfOrNull { it.label.nonEmpty }, noted)
     }
 
-    private data class Superseded(val any: Boolean, val name: String?)
+    /** Whether copies gave way, the first name among them, and the first with a note. */
+    private data class Superseded(val any: Boolean, val name: String?, val noted: DeviceParcel? = null)
+
+    /** A frozen copy's note, and its files, go to the lookup that takes its place, unless that has a note of its own. */
+    private fun carryNote(superseded: Superseded, entry: DeviceParcel): DeviceParcel {
+        val noted = superseded.noted ?: return entry
+        if (entry.note != null || noteFiles?.of(entry.linkId)?.isNotEmpty() == true) return entry
+        noteFiles?.move(noted.linkId, entry.linkId)
+        return entry.copy(note = noted.note)
+    }
 
     /**
      * Takes out the entry of parcel `parcelId` under another link than `linkId`: one parcel is followed here once. Its
@@ -1659,7 +1723,7 @@ class DeviceParcels(
          * As the list shows it: under this phone's name, and seen as far as this phone has seen it (#72), the news it
          * had when it was last opened here; all of it on a parcel kept before this was noted.
          */
-        private fun shown(entry: DeviceParcel): Parcel {
+        private fun listed(entry: DeviceParcel): Parcel {
             val seen = entry.seenNewsAt ?: entry.parcel.newsAt
             val parcel = entry.parcel.copy(label = entry.label, archivedAt = entry.archivedAt, seenAt = seen, notificationsMuted = entry.isMuted)
             val replaced = entry.replaced ?: return parcel

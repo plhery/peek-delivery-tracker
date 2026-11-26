@@ -568,7 +568,7 @@ class ParcelLogicListTests {
         assertEquals(
             listOf(
                 listOf(ParcelMenuItem.Open),
-                listOf(ParcelMenuItem.Rename, ParcelMenuItem.Share, ParcelMenuItem.CopyTrackingNumber, ParcelMenuItem.ChangeCarrier),
+                listOf(ParcelMenuItem.Rename, ParcelMenuItem.AddNote, ParcelMenuItem.Share, ParcelMenuItem.CopyTrackingNumber, ParcelMenuItem.ChangeCarrier),
                 listOf(ParcelMenuItem.Archive),
                 listOf(ParcelMenuItem.Delete),
             ),
@@ -577,11 +577,21 @@ class ParcelLogicListTests {
         // The page has its own share button, and is open already.
         assertEquals(
             listOf(
-                listOf(ParcelMenuItem.Rename, ParcelMenuItem.CopyTrackingNumber, ParcelMenuItem.ChangeCarrier),
+                listOf(ParcelMenuItem.Rename, ParcelMenuItem.AddNote, ParcelMenuItem.CopyTrackingNumber, ParcelMenuItem.ChangeCarrier),
                 listOf(ParcelMenuItem.Archive),
                 listOf(ParcelMenuItem.Delete),
             ),
             ParcelMenuItem.menu(parcel, onCard = false),
+        )
+        // A parcel with a note edits it, right under its name; one read through someone else's link has none to add.
+        assertEquals(ParcelMenuItem.EditNote, ParcelMenuItem.menu(parcel.copy(note = "Door code 4512"), onCard = false)[0][1])
+        assertEquals(ParcelMenuItem.EditNote, ParcelMenuItem.menu(parcel.copy(files = listOf(noteFile())), onCard = true)[1][1])
+        assertEquals(ParcelMenuItem.AddNote, ParcelMenuItem.menu(parcel.copy(note = "  \n "), onCard = false)[0][1])
+        assertEquals(listOf(ParcelMenuItem.Rename, ParcelMenuItem.CopyTrackingNumber), ParcelMenuItem.menu(parcel, onCard = false, reader = true)[0])
+        // A copy the service forgot keeps what this phone wrote of it, as the website does.
+        assertEquals(
+            listOf(ParcelMenuItem.Rename, ParcelMenuItem.AddNote, ParcelMenuItem.CopyTrackingNumber),
+            ParcelMenuItem.menu(parcel, onCard = false, reader = true, frozen = true)[0],
         )
         // An archived parcel is brought back rather than archived again.
         val archived = parcel.copy(archivedAt = "2026-08-02T10:00:00Z")
@@ -595,7 +605,7 @@ class ParcelLogicListTests {
         val parcel = makeParcel()
         assertEquals(
             listOf(
-                listOf(ParcelMenuItem.Rename, ParcelMenuItem.CopyTrackingNumber, ParcelMenuItem.ChangeCarrier, ParcelMenuItem.ContactCarrier),
+                listOf(ParcelMenuItem.Rename, ParcelMenuItem.AddNote, ParcelMenuItem.CopyTrackingNumber, ParcelMenuItem.ChangeCarrier, ParcelMenuItem.ContactCarrier),
                 listOf(ParcelMenuItem.Archive),
                 listOf(ParcelMenuItem.Delete),
             ),
@@ -619,7 +629,7 @@ class ParcelLogicListTests {
         val parcel = makeParcel()
         assertEquals(
             listOf(
-                listOf(ParcelMenuItem.Rename, ParcelMenuItem.Share, ParcelMenuItem.CopyTrackingNumber, ParcelMenuItem.ChangeCarrier),
+                listOf(ParcelMenuItem.Rename, ParcelMenuItem.AddNote, ParcelMenuItem.Share, ParcelMenuItem.CopyTrackingNumber, ParcelMenuItem.ChangeCarrier),
                 listOf(ParcelMenuItem.Archive),
                 listOf(ParcelMenuItem.Delete),
             ),

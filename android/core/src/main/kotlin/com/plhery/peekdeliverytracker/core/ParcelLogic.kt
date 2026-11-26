@@ -656,8 +656,12 @@ val Parcel.expectedDayKey: String?
         return if (match.find()) match.group(1) else null
     }
 
+/** The words the list's search matches: the name, number and status, the history, and the note with its files' names. */
 val Parcel.searchText: String
-    get() = (listOf(label, trackingNumber, lastStatusText ?: "") + trackingEvents.flatMap { listOf(it.description, it.location ?: "") })
+    get() = (
+        listOf(label, trackingNumber, lastStatusText ?: "") + trackingEvents.flatMap { listOf(it.description, it.location ?: "") } +
+            ParcelNotes.searchText(note, files.orEmpty().map { it.name })
+        )
         .joinToString(" ")
         .lowercase()
 
@@ -1385,7 +1389,12 @@ enum class DeliveriesKey {
 
 /** What a parcel's menu offers: its page's •••, and its card's under a long press or a secondary click. */
 enum class ParcelMenuItem {
-    Open, Rename, Share, CopyTrackingNumber, ChangeCarrier, Archive, Restore, Delete,
+    Open, Rename,
+
+    /** The parcel's private note, right under its name: "Add a note", and "Edit note" once it has one. */
+    AddNote, EditNote,
+
+    Share, CopyTrackingNumber, ChangeCarrier, Archive, Restore, Delete,
 
     /** The help page of the parcel's carrier, as its quiet note links it; its title names the carrier. */
     ContactCarrier;
@@ -1394,6 +1403,8 @@ enum class ParcelMenuItem {
         get() = when (this) {
             Open -> "detail.open"
             Rename -> "detail.editTitle"
+            AddNote -> "note.add"
+            EditNote -> "note.edit"
             Share -> "share.action"
             CopyTrackingNumber -> "detail.copyTracking"
             ChangeCarrier -> "detail.changeCarrier"
@@ -1411,6 +1422,8 @@ enum class ParcelMenuItem {
         get() = when (this) {
             Open -> "shippingbox"
             Rename -> "pencil"
+            AddNote -> "note.text.badge.plus"
+            EditNote -> "note.text"
             Share -> "square.and.arrow.up"
             CopyTrackingNumber -> "doc.on.doc"
             ChangeCarrier -> "truck.box"
@@ -1428,7 +1441,8 @@ enum class ParcelMenuItem {
          * through its link: its page shares the link as it is, its carrier is not the reader's to change, and a
          * number the link hides cannot be copied. A `frozen` copy, which the service forgot, has no link left to
          * share and no carrier to change: only what this phone keeps of it changes. The page's menu also leads to
-         * the support of a carrier with a help page (`help`).
+         * the support of a carrier with a help page (`help`). The parcel's own note follows its name, on every parcel
+         * but one read through someone else's link that the service still keeps.
          */
         fun menu(
             parcel: Parcel,
@@ -1437,10 +1451,11 @@ enum class ParcelMenuItem {
             frozen: Boolean = false,
             help: Boolean = false,
         ): List<List<ParcelMenuItem>> {
+            val named = listOf(Rename) + (if (reader && !frozen) emptyList() else listOf(if (parcel.hasNote) EditNote else AddNote))
             val changes = if (reader || frozen) {
-                listOf(Rename) + (if (parcel.trackingNumber.isEmpty()) emptyList() else listOf(CopyTrackingNumber))
+                named + (if (parcel.trackingNumber.isEmpty()) emptyList() else listOf(CopyTrackingNumber))
             } else {
-                listOf(Rename) + (if (onCard) listOf(Share) else emptyList()) + listOf(CopyTrackingNumber, ChangeCarrier)
+                named + (if (onCard) listOf(Share) else emptyList()) + listOf(CopyTrackingNumber, ChangeCarrier)
             }
             return (if (onCard) listOf(listOf(Open)) else emptyList()) +
                 listOf(changes + (if (help) listOf(ContactCarrier) else emptyList()), listOf(if (parcel.isArchived) Restore else Archive), listOf(Delete))

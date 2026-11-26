@@ -7,6 +7,7 @@ import com.plhery.peekdeliverytracker.core.api.EventPlace
 import com.plhery.peekdeliverytracker.core.api.EventPlacePrecision
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
 import com.plhery.peekdeliverytracker.core.api.NotificationStage
+import com.plhery.peekdeliverytracker.core.api.PackageFile
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.PeekAi
 import com.plhery.peekdeliverytracker.core.api.PeekAiDay
@@ -114,6 +115,45 @@ class DemoRepository(
         return update(id) { it.copy(label = label) }
     }
 
+    /**
+     * The files added to the demo's notes, kept in memory alone: the demo has no server to send them to, and they go
+     * when the app does.
+     */
+    private val addedFiles = java.util.concurrent.ConcurrentHashMap<UUID, ByteArray>()
+
+    fun setNote(id: UUID, note: String?): Parcel = update(id) { it.copy(note = note) }
+
+    /** Keeps a file with the demo parcel's note, within an account's limits. */
+    fun addFile(id: UUID, upload: NoteFileUpload): Parcel {
+        val all = load()
+        val parcel = all.firstOrNull { it.id == id } ?: throw DeliveryApiError.ParcelMissing()
+        val size = upload.bytes.size.toLong()
+        if (size > ParcelNotes.FILE_MAX_BYTES) throw NoteFileError(NoteFileProblem.TooBig, size)
+        if (kept(parcel.files).size >= ParcelNotes.FILES_PER_PARCEL) throw NoteFileError(NoteFileProblem.ParcelFull)
+        val used = all.flatMap { kept(it.files) }.sumOf { it.size.toLong() }
+        if (used + size > ParcelNotes.FILES_TOTAL_BYTES) throw NoteFileError(NoteFileProblem.AccountFull)
+        val fileId = UUID.randomUUID()
+        val url = NoteFileAddress.DEMO + "added/" + fileId
+        val file = PackageFile(
+            id = fileId, name = noteFileName(upload.name, upload.type), contentType = upload.type, size = upload.bytes.size,
+            width = upload.width, height = upload.height, createdAt = DateParser.isoString(now()), url = url,
+            thumbnailUrl = if (upload.type.isPdf) null else url, expiresAt = NoteFileAddress.NEVER,
+        )
+        addedFiles[fileId] = upload.bytes
+        return update(id) { it.copy(files = kept(it.files) + file) }
+    }
+
+    fun removeFile(id: UUID, fileId: UUID): Parcel {
+        addedFiles.remove(fileId)
+        return update(id) { it.withoutFile(fileId) }
+    }
+
+    /** The bytes of one of the demo notes' files: its receipt, or one added since the app opened. */
+    fun fileBytes(fileId: UUID): ByteArray? = if (fileId == DemoNote.receiptId) DemoNote.receipt else addedFiles[fileId]
+
+    /** The files the demo can still show: its own, and those added since the app opened. */
+    private fun kept(files: List<PackageFile>?): List<PackageFile> = files.orEmpty().filter { DemoNote.isOwn(it.id) || addedFiles.containsKey(it.id) }
+
     /** The history stays, as the service keeps it and the sheet says, while the new carrier is checked. */
     fun changeCarrier(
         id: UUID,
@@ -189,6 +229,7 @@ class DemoRepository(
         val translated = parcels.map { parcel ->
             parcel.copy(
                 label = say(parcel.label),
+                note = DemoNote.textIn(parcel.note, language()),
                 lastStatusText = parcel.lastStatusText?.let(::say),
                 trackingEvents = parcel.trackingEvents.map { event ->
                     event.copy(description = say(event.description), location = event.location?.let(::say))
@@ -260,7 +301,8 @@ class DemoRepository(
     }
 
     /** The parcel as it is shown: a sample that shows Peek AI says what it expects now. Peek AI is never kept. */
-    private fun withPeekAi(parcel: Parcel): Parcel = parcel.copy(peekAi = peekAi(parcel, now()))
+    private fun withPeekAi(parcel: Parcel): Parcel =
+        parcel.copy(peekAi = peekAi(parcel, now()), files = if (parcel.files == null) null else kept(parcel.files).ifEmpty { null })
 
     private fun advance(parcel: Parcel): Parcel {
         val stage = parcel.currentStage
@@ -517,6 +559,8 @@ class DemoRepository(
                     },
                     archivedAt = sample.archivedHoursAgo?.let(::iso), notificationsMuted = false,
                     trackingEvents = history, plannedEvents = planned,
+                    note = if (sample.trackingNumber == DemoNote.PARCEL) DemoNote.text(AppLanguage.En) else null,
+                    files = if (sample.trackingNumber == DemoNote.PARCEL) DemoNote.files(iso(sample.events.minOfOrNull { it.hoursAgo } ?: 0.0)) else null,
                 )
             }
         }

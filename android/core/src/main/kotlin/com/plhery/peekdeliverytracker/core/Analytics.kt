@@ -33,11 +33,23 @@ data class AnalyticsCatalog(
             val action = body?.let(JsonSerialization::stringsOfObject)?.get("action") ?: return null
             return friendActions[action]
         }
+        // A note saved or deleted counts as such where it happens, never as a rename.
+        if (method == "PATCH" && packagePath.matches(path) && noteAlone(body)) return null
         // The operations hold only ASCII literals and `[^/]`, searched as a Swift string is, over its Characters.
         return operations.firstOrNull { it.method == method && CatalogExpressions.nativeMatches(path, it.path) }?.event
     }
 
     companion object {
+        private val packagePath = Regex("^/api/packages/[^/]+$")
+
+        /** A parcel's change that holds its note and not its name. */
+        private fun noteAlone(body: ByteArray?): Boolean = try {
+            val value = body?.let { Json.parseToJsonElement(it.decodeToString()) } as? kotlinx.serialization.json.JsonObject
+            value != null && "note" in value && "label" !in value
+        } catch (_: Exception) {
+            false
+        }
+
         val bundled: AnalyticsCatalog? by lazy {
             runCatching {
                 Json { ignoreUnknownKeys = true }.decodeFromString(serializer(), SharedResources.text("Analytics.json"))

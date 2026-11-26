@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.core
 
+import com.plhery.peekdeliverytracker.core.api.AddPackageFileResponse
 import com.plhery.peekdeliverytracker.core.api.ApiJson
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionRequest
 import com.plhery.peekdeliverytracker.core.api.CarrierId
@@ -18,6 +19,8 @@ import com.plhery.peekdeliverytracker.core.api.CreatePackageResponse
 import com.plhery.peekdeliverytracker.core.api.DeleteParcelAppAlertRequest
 import com.plhery.peekdeliverytracker.core.api.NativePushLocale
 import com.plhery.peekdeliverytracker.core.api.NativePushTransport
+import com.plhery.peekdeliverytracker.core.api.PackageFile
+import com.plhery.peekdeliverytracker.core.api.PackageFileType
 import com.plhery.peekdeliverytracker.core.api.PackageListResponse
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelAlertPreset
@@ -245,7 +248,8 @@ class DeviceParcelTests {
         now: () -> Instant = Instant::now,
         region: Locale = Locale.forLanguageTag("fr-CH"),
         language: AppLanguage = AppLanguage.En,
-    ) = DeviceParcels(client, storage, postcodes, scope, region = { region }, language = { language }, now = now)
+        noteFiles: DeviceNoteFiles? = null,
+    ) = DeviceParcels(client, storage, postcodes, scope, region = { region }, language = { language }, now = now, noteFiles = noteFiles)
 
     private fun parcel(linkId: String, label: String, id: UUID, at: Double = date(), pkg: PublicPackage = pkg(id)) =
         DeviceParcel(linkId = linkId, label = label, archivedAt = null, parcel = Parcel(shared = pkg), checkedAt = at)
@@ -2045,6 +2049,9 @@ class DeviceParcelTests {
         pendingForgets: Map<String, String> = emptyMap(),
         archived: Set<String> = emptySet(),
         muted: Set<String> = emptySet(),
+        notes: Map<String, String> = emptyMap(),
+        noteFiles: DeviceNoteFiles? = null,
+        uploads: (HttpRequest) -> HttpResponse = { jsonResponse(404) },
     ): SigningIn {
         val user = AuthUser(id = UUID.randomUUID(), email = "test@example.com", isAnonymous = false)
         val signedIn = JsonEncoder.deliveryTracker.encode(
@@ -2056,6 +2063,7 @@ class DeviceParcelTests {
         ).decodeToString()
         val list = JsonEncoder.deliveryTracker.encode(PackageListResponse.serializer(), PackageListResponse(emptyList())).decodeToString()
         val transport = RecordingTransport { request ->
+            if (request.method == "POST" && request.path?.endsWith("/files") == true) return@RecordingTransport uploads(request)
             when (request.method to request.path) {
                 "POST" to "/auth/v1/verify" -> jsonResponse(200, signedIn)
                 "POST" to "/api/packages/claim" -> {
@@ -2072,11 +2080,12 @@ class DeviceParcelTests {
             UUID.randomUUID().let { parcel(link, "", it, pkg = pkg(it, number = "TESTPARCEL12300$index")) }.copy(
                 archivedAt = if (link in archived) "2026-11-01T08:00:00Z" else null,
                 muted = if (link in muted) true else null,
+                note = notes[link],
             )
         }
         storage.pendingForgets = pendingForgets
         val calls = Calls()
-        return SigningIn(transport, device(client(calls), storage, scope), MemoryDefaults(), MemorySessionPersistence(), storage, calls)
+        return SigningIn(transport, device(client(calls), storage, scope, noteFiles = noteFiles), MemoryDefaults(), MemorySessionPersistence(), storage, calls)
     }
 
     private fun SigningIn.session(scope: CoroutineScope) =
@@ -2112,6 +2121,115 @@ class DeviceParcelTests {
         )
         assertEquals(emptyMap<String, String>(), phone.storage.pendingForgets)
         session.forceSignOut()
+    }
+
+    /** The service's answer to a note's file: the file as it lists it, and its parcel. */
+    private fun uploaded(request: HttpRequest): HttpResponse {
+        val packageId = UUID.fromString(request.path!!.removePrefix("/api/packages/").removeSuffix("/files"))
+        val name = java.net.URLDecoder.decode(request.headers["X-File-Name"]!!, Charsets.UTF_8)
+        val file = PackageFile(
+            id = UUID.randomUUID(), name = name, contentType = PackageFileType.fromRawValue(request.headers["Content-Type"]!!)!!,
+            size = request.body!!.size, createdAt = "2026-11-20T10:00:00Z", url = "/api/files/x", expiresAt = "2026-11-20T10:30:00Z",
+        )
+        val parcel = ParcelLogicTestFixtures.makeParcel(id = packageId).copy(files = listOf(file))
+        return jsonResponse(201, ApiJson.encodeToString(AddPackageFileResponse.serializer(), AddPackageFileResponse(file = file, parcel = parcel)))
+    }
+
+    /**
+     * As src/peek/guestNotes.test.ts: keeping a guest's parcel in the account sends its note with the claim, then its
+     * files one by one to the account's parcel. One that fails stays on the phone and goes at the next start.
+     */
+    @Test
+    fun signingInSendsAGuestsNoteWithTheClaimThenItsFilesAndKeepsAFailedOneForLater() = runTest {
+        val folder = java.nio.file.Files.createTempDirectory("note-files").toFile()
+        try {
+            val noteFiles = DeviceNoteFiles(folder)
+            noteFiles.add("22222222222A", NoteFileUpload("%PDF-1.4 receipt".encodeToByteArray(), "Receipt.pdf", PackageFileType.ApplicationPdf))
+            noteFiles.add("22222222222A", NoteFileUpload(byteArrayOf(1, 2, 3), "Box.jpg", PackageFileType.ImageJpeg, 400, 300))
+            var failing = true
+            val phone = signingIn(
+                listOf("22222222222A"), AccountRoom(1), backgroundScope, notes = mapOf("22222222222A" to "Door code 4512"), noteFiles = noteFiles,
+            ) { request ->
+                if (failing && request.headers["X-File-Name"] == "Box.jpg") jsonResponse(500) else uploaded(request)
+            }
+            assertEquals(listOf("Door code 4512"), phone.device.claims.map { it.note })
+            val session = phone.session(backgroundScope)
+            session.showWelcome()
+            val store = phone.store(session, backgroundScope)
+
+            session.verifyCode(email = "test@example.com", code = "123456")
+            store.start()
+            runCurrent()
+
+            val requests = phone.transport.requests.map { "${it.method} ${it.path}" }
+            val claim = phone.transport.requests.first { it.path == "/api/packages/claim" }
+            val sent = ApiJson.decodeFromString(ClaimParcelsRequest.serializer(), claim.body!!.decodeToString())
+            assertEquals(listOf("Door code 4512"), sent.links.map { it.note })
+            // The files follow the claim, to the parcel the account keeps, in the order they were added.
+            val uploads = phone.transport.requests.filter { it.path?.endsWith("/files") == true }
+            assertEquals(listOf("Receipt.pdf", "Box.jpg"), uploads.map { it.headers["X-File-Name"] })
+            assertTrue(requests.indexOf("POST /api/packages/claim") < requests.indexOfFirst { it.endsWith("/files") })
+            assertEquals("application/pdf", uploads[0].headers["Content-Type"])
+            assertEquals("%PDF-1.4 receipt", uploads[0].body!!.decodeToString())
+            // The one that arrived left the phone; the one that failed waits, marked for the account's parcel.
+            assertEquals(listOf("Box.jpg"), noteFiles.sending.map { it.name })
+            assertEquals(setOf(noteFiles.sending.single().id.toString(), "files.json"), folder.list()!!.toSet())
+            assertEquals(emptyList<ClaimParcelLink>(), phone.device.claims)
+
+            // The next start sends it, and the phone keeps nothing more.
+            failing = false
+            phone.store(session, backgroundScope).start()
+            runCurrent()
+            assertEquals(listOf("Receipt.pdf", "Box.jpg", "Box.jpg"), phone.transport.requests.filter { it.path?.endsWith("/files") == true }.map { it.headers["X-File-Name"] })
+            assertEquals(emptyList<DeviceNoteFile>(), noteFiles.all)
+            assertEquals(emptyList<String>(), folder.list()!!.toList())
+            session.forceSignOut()
+        } finally {
+            folder.deleteRecursively()
+        }
+    }
+
+    /** As src/peek/guestNotes.test.ts: a guest's note and its files are kept on the phone, through a restart. */
+    @Test
+    fun aGuestsNoteAndItsFilesStayThroughARestartAndGoWithTheParcel() = runTest {
+        val folder = java.nio.file.Files.createTempDirectory("note-files").toFile()
+        try {
+            val file = MemoryFile(null)
+            val keychain = MemorySessionPersistence()
+            val forgets = MemorySessionPersistence()
+            val id = UUID.randomUUID()
+            DeviceParcelFiles(keychain, file, forgets).save(listOf(parcel("22222222222A", "Boots", id)), mapOf("22222222222A" to key))
+            val first = device(null, DeviceParcelFiles(keychain, file, forgets), backgroundScope, noteFiles = DeviceNoteFiles(folder))
+            first.setNote(id, "Door code 4512")
+            val receipt = "%PDF-1.4 receipt".encodeToByteArray()
+            val shown = first.addFile(id, NoteFileUpload(receipt, "Receipt.pdf", PackageFileType.ApplicationPdf))
+            assertEquals(listOf("Receipt.pdf"), shown.files?.map { it.name })
+            assertTrue(shown.hasNote)
+            // The service never hears of it: the note stays beside the parcel on the phone, and goes only with a claim.
+            assertEquals(listOf("Door code 4512"), first.claims.map { it.note })
+
+            // Restarted: the note and the file are still there, at an address only this phone reads.
+            val files = DeviceNoteFiles(folder)
+            val again = device(null, DeviceParcelFiles(keychain, file, forgets), backgroundScope, noteFiles = files)
+            val parcel = again.list().single()
+            assertEquals("Door code 4512", parcel.note)
+            val kept = parcel.files!!.single()
+            assertEquals("Receipt.pdf", kept.name)
+            assertEquals(PackageFileType.ApplicationPdf, kept.contentType)
+            assertTrue(kept.url.startsWith(NoteFileAddress.DEVICE))
+            assertEquals(receipt.toList(), files.bytes(kept.id)?.toList())
+            assertFalse(file.data!!.decodeToString().contains("Receipt.pdf"))
+
+            // Removing the file, then forgetting the parcel, leaves nothing behind.
+            assertNull(again.removeFile(id, kept.id).files)
+            again.addFile(id, NoteFileUpload(receipt, "Again.pdf", PackageFileType.ApplicationPdf))
+            assertNull(again.setNote(id, null).note)
+            again.forget(id)
+            assertEquals(emptyList<DeviceNoteFile>(), files.all)
+            assertEquals(emptyList<String>(), folder.list()!!.toList())
+        } finally {
+            folder.deleteRecursively()
+        }
     }
 
     @Test

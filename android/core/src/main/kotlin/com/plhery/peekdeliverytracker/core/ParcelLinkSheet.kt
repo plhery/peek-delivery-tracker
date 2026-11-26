@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.PublicParcelResponse
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import java.time.Instant
 
@@ -30,3 +31,14 @@ fun Localizer.giftDetail(parcel: Parcel, opened: Boolean, now: Instant = AppCloc
     // A gift's card names no stage, so it says what out for delivery means.
     return if (parcelArrivesToday(parcel, now)) text("share.gift.arrives", mapOf("date" to text("time.today"))) else null
 }
+
+/**
+ * A gift on its way whose sender shows its note before delivery (`early`): the note and who it is from, as the service
+ * sends them. What is inside waits for the delivery. Nil for any other link.
+ */
+val PublicParcelResponse.earlyGiftWords: ParcelLinkWords?
+    get() {
+        if (gift != ParcelLinkGift.Wrapped) return null
+        val words = link.giftWords?.takeIf { it.early == true } ?: return null
+        return ParcelLinkWords(note = words.note, from = words.from)
+    }

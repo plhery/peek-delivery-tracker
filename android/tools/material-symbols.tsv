@@ -35,6 +35,8 @@ book.closed.fill	book	1	ParcelListView:33 tab	close
 box.truck	-	0	ShortcutIntents:15 none	not drawn: the App Shortcut's icon, which Siri and Shortcuts draw
 box.truck.fill	local_shipping	1	MacMenuBar:205 mac	close
 building.columns	account_balance	0	ParcelLogic:59 15 regular	close
+camera	photo_camera	0	ParcelNoteSheet:1 17 regular	close
+chart.bar	bar_chart	0	PeekAiViews:213 16 regular	close
 checkmark	check	0	ParcelListView:1022 36 ultraLight; ParcelListView:1706 11 light; ParcelListView:1841 11 light; ParcelShareSheet:230 13 semibold; ParcelLinkSheet:910 14 regular; CarrierPicker:373 17 semibold; FriendsView:433 13 regular; FriendsView:434 12 regular; ParcelDetailView:651 15 regular; ParcelDetailView:704 14 regular	close
 checkmark.circle	check_circle	0	FriendsView:40 15 regular	close
 checkmark.circle.fill	check_circle	1	ParcelLinkSheet:257 17 regular; AddParcelView:497 20 regular; ParcelAlerts:235 inherited; ParcelListView:1118 inherited; DesignSystem:580 inherited; ParcelLogic:64 15 regular; DeliveryWidget:309 11 heavy small; DeliveryWidget:466 phase	close
@@ -48,6 +50,7 @@ chevron.up	keyboard_arrow_up	0	ParcelDetailView:1485 10 regular	close
 chevron.up.chevron.down	unfold_more	0	AddParcelView:1441 11 semibold; SettingsViews:1033 11 regular	close
 circle	radio_button_unchecked	0	AddParcelView:497 20 regular; SettingsViews:166 16 regular	close
 clock	schedule	0	ParcelListView:1790 11 semibold	close
+doc	draft	0	ParcelNoteSheet:1 17 regular	close
 doc.on.clipboard	content_paste	0	FirstOpenView:517 20 medium; FirstOpenView:713 17 medium; AddParcelView:376 12 regular	close
 doc.on.doc	content_copy	0	ParcelShareSheet:230 13 semibold; ParcelLinkSheet:910 14 regular; FriendsView:433 13 regular; ParcelDetailView:648 15 regular; ParcelDetailView:704 14 regular; ParcelLogic:920 menu	close
 doc.text	description	0	ParcelLogic:56 15 regular	close
@@ -57,6 +60,7 @@ exclamationmark.circle	error	0	ParcelFeedbackViews:733 inherited; ParcelShareShe
 exclamationmark.circle.fill	error	1	DeliveryWidget:468 phase	close
 exclamationmark.triangle	warning	0	ParcelListView:1789 11 semibold; ParcelLogic:62 15 regular; ParcelDetailView:442 11 semibold; ParcelDetailView:445 11 semibold	close
 exclamationmark.triangle.fill	warning	1	ParcelFeedbackViews:434 inherited; ParcelListView:1118 inherited; AddParcelView:707 inherited; SignInView:724 12 regular; ParcelDetailView:1211 inherited; DeliveryWidget:467 phase	close
+eye	visibility	0	PeekAiViews:218 16 regular	close
 gear	settings	0	SettingsViews:132 inherited	close
 gearshape	settings	0	SettingsViews:941 mac	close
 gift	featured_seasonal_and_gifts	0	ParcelShareSheet:184 16 regular; PassportView:284 22 ultraLight; FriendsStore:219 22 ultraLight; ParcelLinkSheet:502 12 semibold; ParcelLinkSheet:778 inherited; ParcelLinkSheet:827 inherited; SignInView:1141 12 medium	close
@@ -68,6 +72,7 @@ house	cottage	0	PassportView:276 22 ultraLight; FriendsStore:219 22 ultraLight	c
 info.circle	info	0	ParcelShareSheet:144 13 regular; ParcelShareSheet:195 13 regular; ParcelShareSheet:196 13 regular; ParcelDetailView:577 17 regular	close
 keyboard	keyboard	0	FirstOpenView:749 15 regular	close
 largecircle.fill.circle	radio_button_checked	0	SettingsViews:166 16 regular	close
+lightbulb	lightbulb	0	PeekAiViews:212 16 regular	close
 line.3.horizontal.decrease	filter_list	0	ParcelListView:993 inherited	close
 location	near_me	0	ParcelMapView:199 12 medium	close
 location.fill	near_me	1	ParcelDetailView:635 15 semibold	close
@@ -76,11 +81,15 @@ lock.fill	lock	1	SignInView:507 12 semibold	close
 magnifyingglass	search	0	ParcelListView:937 17 regular; ParcelListView:972 inherited; ParcelListView:1015 inherited; ParcelDetailView:635 15 semibold; ParcelLogic:55 15 regular	close
 map	map	0	PassportView:272 22 ultraLight; FriendsStore:219 22 ultraLight	close
 menubar.rectangle	toolbar	0	SettingsViews:975 mac	close
+note.text	sticky_note_2	0	ParcelNote:1 inherited; ParcelLogic:1 menu	close
+note.text.badge.plus	note_add	0	ParcelLogic:1 menu	close
+paperclip	attach_file	0	ParcelNote:1 inherited; ParcelNoteSheet:1 17 regular	close
 pencil	edit	0	ParcelShareSheet:180 16 regular; ParcelLogic:918 menu	close
 person.2.fill	group	1	ParcelListView:41 tab; SignInView:192 30 medium; FriendsView:572 20 regular	close
 person.badge.key.fill	passkey	1	SignInView:589 inherited	close
 person.crop.circle	account_circle	0	SettingsViews:950 mac	close
 person.fill	person	1	DesignSystem:268 15 semibold	close
+photo.on.rectangle	photo_library	0	ParcelNoteSheet:1 17 regular	close
 plus	add	0	ParcelListView:901 17 semibold; ParcelLinkSheet:170 17 semibold; FriendsView:146 inherited; FriendsView:157 12 medium	close
 plus.circle	-	0	ShortcutIntents:21 none	not drawn: the App Shortcut's icon, which Siri and Shortcuts draw
 power	power_settings_new	0	SettingsViews:982 mac	close
@@ -90,6 +99,7 @@ shippingbox.fill	package_2	1	ParcelListView:26 tab; ParcelListView:2854 15 regul
 slider.horizontal.3	tune	0	FriendsView:136 13 regular	close
 sparkle	auto_awesome#3	1	SignInView:1324 13 medium; SignInView:1324 16 medium; SignInView:1324 18 medium; SignInView:1324 23 medium; SignInView:1324 24 medium; SignInView:1324 25 medium	close: the large star of auto_awesome alone, as SF draws one
 square	check_box_outline_blank	0	FriendsView:397 17 regular	close
+square.and.arrow.down	download	0	ParcelNoteViewer:1 17 regular	close
 square.and.arrow.up	ios_share	0	FriendsView:430 inherited; ParcelDetailView:319 16 regular; ParcelDetailView:329 16 regular; ParcelShareSheet:147 17 semibold; ParcelLogic:919 menu; SettingsViews:650 15 light	close
 storefront	storefront	0	PassportView:282 22 ultraLight; FriendsStore:219 22 ultraLight; ParcelLogic:63 15 regular; ParcelDetailView:598 17 regular	close: the awning's scallops, though Material's has no door or window
 storefront.fill	storefront	1	DeliveryWidget:469 phase	close

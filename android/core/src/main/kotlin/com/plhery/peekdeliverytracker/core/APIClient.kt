@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.AddByEmailResponse
+import com.plhery.peekdeliverytracker.core.api.AddPackageFileResponse
 import com.plhery.peekdeliverytracker.core.api.AssistantsResponse
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionRequest
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponse
@@ -16,6 +17,7 @@ import com.plhery.peekdeliverytracker.core.api.DeleteLiveActivityDeviceRequest
 import com.plhery.peekdeliverytracker.core.api.DeleteLiveActivityUpdateTokenRequest
 import com.plhery.peekdeliverytracker.core.api.DeleteNativePushDeviceRequest
 import com.plhery.peekdeliverytracker.core.api.ErrorResponse
+import com.plhery.peekdeliverytracker.core.api.ErrorResponseCode
 import com.plhery.peekdeliverytracker.core.api.ErrorResponseScope
 import com.plhery.peekdeliverytracker.core.api.FriendsActionRequest
 import com.plhery.peekdeliverytracker.core.api.FriendsActionResponse
@@ -177,6 +179,12 @@ fun HttpTransport.identifying(userAgent: String): HttpTransport = HttpTransport 
  * (`inputSuggested`) only to the apps that name it (src/server/suggestedInputs.ts).
  */
 const val CLIENT_INPUTS = "phoneDigits"
+
+/** How long a note's file may take to go up, in seconds. */
+private const val UPLOAD_TIMEOUT = 120.0
+
+/** The server refused a note's file, with its status and the code that says why. */
+private class FileRefused(val status: Int, val code: ErrorResponseCode?) : Exception("The file was refused ($status)")
 
 /**
  * The `User-Agent` URLSession sends for the iPhone app: its bundle's name and build, then CFNetwork's and Darwin's
@@ -441,6 +449,36 @@ class DeliveryApiClient(
         "/api/packages/${id.uuidString}", Parcel.serializer(), "PATCH",
         encode(RenamePackageRequest.serializer(), RenamePackageRequest(label = label)),
     )
+
+    /** The parcel's private note; null deletes it (an empty note, which the server takes as none). */
+    suspend fun setNote(id: UUID, note: String?): Parcel = request(
+        "/api/packages/${id.uuidString}", Parcel.serializer(), "PATCH",
+        encode(RenamePackageRequest.serializer(), RenamePackageRequest(note = note ?: "")),
+    )
+
+    /**
+     * Adds a photo or PDF to the parcel's note: its bytes as they are, its kind as their type and its name in
+     * `X-File-Name`, percent-encoded. A refusal says why ([NoteFileError]).
+     */
+    suspend fun addFile(id: UUID, upload: NoteFileUpload): AddPackageFileResponse {
+        val path = "/api/packages/${id.uuidString}/files"
+        val headers = mapOf(
+            "Content-Type" to upload.type.rawValue,
+            "X-File-Name" to java.net.URLEncoder.encode(upload.name, Charsets.UTF_8).replace("+", "%20"),
+        )
+        val response = try {
+            rawRequest(path, "POST", upload.bytes, missing = 404, headers = headers, timeout = UPLOAD_TIMEOUT)
+        } catch (error: FileRefused) {
+            throw NoteFileError(NoteFileProblem.upload(error.status, error.code), size = upload.bytes.size.toLong(), status = error.status)
+        }
+        if (response.statusCode == 404) throw DeliveryApiError.ParcelMissing()
+        return decodeAnswer(AddPackageFileResponse.serializer(), response.body)
+    }
+
+    /** Removes a file from the parcel's note; one already gone is gone. */
+    suspend fun removeFile(id: UUID, fileId: UUID) {
+        rawRequest("/api/packages/${id.uuidString}/files/${fileId.uuidString}", "DELETE", missing = 404)
+    }
 
     suspend fun changeCarrier(
         id: UUID,
@@ -728,7 +766,14 @@ class DeliveryApiClient(
         }
 
     /** `missing`: a status that means the thing asked for isn't there, answered rather than thrown. */
-    private suspend fun performRawRequest(path: String, method: String = "GET", body: ByteArray? = null, missing: Int? = null): HttpResponse {
+    private suspend fun performRawRequest(
+        path: String,
+        method: String = "GET",
+        body: ByteArray? = null,
+        missing: Int? = null,
+        headers: Map<String, String> = emptyMap(),
+        timeout: Double = 30.0,
+    ): HttpResponse {
         val generation = session.generation
         session.checkGeneration(generation)
         if (!session.signedIn) throw DeliveryApiError.AuthenticationExpired()
@@ -737,10 +782,11 @@ class DeliveryApiClient(
 
         suspend fun perform(token: String?): HttpResponse {
             session.checkGeneration(generation)
-            val headers = linkedMapOf("X-Requested-With" to "XMLHttpRequest", "Accept" to "application/json", "X-Peek-Inputs" to CLIENT_INPUTS)
-            if (body != null) headers["Content-Type"] = "application/json"
-            if (token != null) headers["Authorization"] = "Bearer $token"
-            val request = HttpRequest(url, method, headers, body, timeout = 30.0)
+            val sent = linkedMapOf("X-Requested-With" to "XMLHttpRequest", "Accept" to "application/json", "X-Peek-Inputs" to CLIENT_INPUTS)
+            if (body != null) sent["Content-Type"] = "application/json"
+            sent.putAll(headers)
+            if (token != null) sent["Authorization"] = "Bearer $token"
+            val request = HttpRequest(url, method, sent, body, timeout = timeout)
             val result = try {
                 if (signs) verification.sendSignedIn(request, configuration.apiBaseUrl, using = transport) else transport.data(request)
             } catch (error: Exception) {
@@ -781,16 +827,28 @@ class DeliveryApiClient(
             }
             val packageId = error?.packageId
             if (result.statusCode == 409 && packageId != null) throw DeliveryApiError.DuplicateTracking(packageId)
+            // A note's file the server refused: too big, of another kind, or no room left.
+            val code = error?.code
+            if (code != null && code != ErrorResponseCode.RecentSignIn || (path.endsWith("/files") && result.statusCode in setOf(413, 415))) {
+                throw FileRefused(result.statusCode, code)
+            }
             error?.error?.let { throw DeliveryApiError.Service(it) }
             throw DeliveryApiError.ServiceFailed(result.statusCode)
         }
         return result
     }
 
-    private suspend fun rawRequest(path: String, method: String = "GET", body: ByteArray? = null, missing: Int? = null): HttpResponse {
-        val event = AnalyticsCatalog.bundled?.event(path, method, body)
+    private suspend fun rawRequest(
+        path: String,
+        method: String = "GET",
+        body: ByteArray? = null,
+        missing: Int? = null,
+        headers: Map<String, String> = emptyMap(),
+        timeout: Double = 30.0,
+    ): HttpResponse {
+        val event = AnalyticsCatalog.bundled?.event(path, method, body.takeIf { headers["Content-Type"] == null })
         try {
-            val result = performRawRequest(path, method, body, missing)
+            val result = performRawRequest(path, method, body, missing, headers, timeout)
             if (event != null) analytics(event, if (result.statusCode == 202) DeliveryAnalytics.Outcome.Accepted else DeliveryAnalytics.Outcome.Success)
             return result
         } catch (error: Exception) {

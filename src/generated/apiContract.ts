@@ -2330,6 +2330,47 @@ export const CARRIER_CAPABILITIES = {
           "tno"
         ],
         "detectFromNumber": true
+      },
+      {
+        "domains": [
+          "narvar.com"
+        ],
+        "params": [
+          "tracking_numbers"
+        ],
+        "pathPattern": "/tracking(?:/|$)",
+        "detectFromNumber": true
+      },
+      {
+        "domains": [
+          "aftership.com"
+        ],
+        "params": [
+          "tracking-numbers",
+          "t"
+        ],
+        "path": "^/(?:track/)?(?:[A-Za-z0-9-]+/)?([A-Za-z0-9]*[0-9][A-Za-z0-9]*)/?$",
+        "detectFromNumber": true
+      },
+      {
+        "domains": [
+          "sendcloud.sc"
+        ],
+        "params": [
+          "code"
+        ],
+        "pathPattern": "^/forward/?$",
+        "detectFromNumber": true
+      },
+      {
+        "domains": [
+          "shipping-portal.com"
+        ],
+        "params": [
+          "tracking_number"
+        ],
+        "pathPattern": "^/tracking/?$",
+        "detectFromNumber": true
       }
     ],
     "detectionRules": [],
@@ -17848,7 +17889,8 @@ export const CARRIER_CAPABILITIES = {
           "inputMode": "numeric",
           "autoComplete": "off"
         }
-      ]
+      ],
+      "recognitionRank": 521
     },
     "trackingUrlTemplate": "https://www.jtexpress.com.cn/service.html?indexIpt={trackingNumber}",
     "linkRules": [
@@ -17866,7 +17908,8 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^JT\\d{13}$",
-        "confidence": "low"
+        "confidence": "low",
+        "servedCountriesOnly": true
       }
     ],
     "trackingSearchUrl": "https://www.jtexpress.com.cn/",
@@ -24513,10 +24556,14 @@ export const CARRIER_CAPABILITIES = {
           "www.m-one.rs"
         ],
         "pathPattern": "^/(?:en)?/?$",
-        "query": "^([A-Z]{2}\\d{9}RS|RS\\d{12})$"
+        "query": "^([A-Z]{2}\\d{9}RS|RS\\d{12,13})$"
       }
     ],
     "detectionRules": [
+      {
+        "pattern": "^RS\\d{13}$",
+        "confidence": "high"
+      },
       {
         "pattern": "^[A-Z]{2}\\d{9}RS$",
         "confidence": "low",
@@ -68594,7 +68641,7 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "prd"
     },
-    "trackingUrlTemplate": "https://www.primexpslogistics.com/",
+    "trackingUrlTemplate": "https://szprd.rtb56.com/track_query.aspx",
     "linkRules": [
       {
         "domains": [
@@ -70393,6 +70440,36 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.baxida.cn/default/index/get-track-detail"
+  },
+  "gsm-nton": {
+    "displayName": "GSM NtoN",
+    "aliases": [
+      "GSMNtoN",
+      "Global Shipping Master",
+      "글로벌쉬핑마스터앤투앤"
+    ],
+    "countries": [
+      "KR"
+    ],
+    "color": "#354C5E",
+    "selectable": true,
+    "timezone": "Asia/Seoul",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "gsm-nton"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "expressweb.co.kr",
+          "www.expressweb.co.kr"
+        ],
+        "pathPattern": "^/member/loginTracing\\.do$",
+        "query": "^(?=(?:.*&)?fwdCode=gexp(?:&|$))(?:.*&)?HBLNO=([^&]+)(?=&|$)"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.gsmnton.com/"
   }
 } as const;
 
@@ -72540,7 +72617,8 @@ export const CARRIER_IDS = [
   "we-logistics",
   "xys-logistics",
   "ycex",
-  "centex"
+  "centex",
+  "gsm-nton"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

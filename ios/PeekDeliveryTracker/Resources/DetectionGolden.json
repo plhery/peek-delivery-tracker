@@ -61059,6 +61059,24 @@
     ]
   },
   {
+    "input": "6078502763873",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "correos-chile",
+      "delhivery",
+      "yunda",
+      "korea-post",
+      "aras-kargo",
+      "econt",
+      "ozon-logistics",
+      "paquetexpress"
+    ],
+    "asked": [
+      "aras-kargo"
+    ]
+  },
+  {
     "input": "607S3E-0004SN3W",
     "carrier": "unknown",
     "confidence": "none",
@@ -101870,6 +101888,9 @@
     "candidates": [
       "j-and-t",
       "j-and-t-cn"
+    ],
+    "asked": [
+      "j-and-t-cn"
     ]
   },
   {
@@ -101903,6 +101924,9 @@
     "candidates": [
       "j-and-t",
       "j-and-t-cn"
+    ],
+    "asked": [
+      "j-and-t-cn"
     ]
   },
   {
@@ -101935,6 +101959,9 @@
     "confidence": "low",
     "candidates": [
       "j-and-t",
+      "j-and-t-cn"
+    ],
+    "asked": [
       "j-and-t-cn"
     ]
   },
@@ -114536,6 +114563,14 @@
     ]
   },
   {
+    "input": "RS2200000000001",
+    "carrier": "m-one",
+    "confidence": "high",
+    "candidates": [
+      "m-one"
+    ]
+  },
+  {
     "input": "RS220022016792",
     "carrier": "unknown",
     "confidence": "none",
@@ -124615,6 +124650,9 @@
     "confidence": "low",
     "candidates": [
       "j-and-t",
+      "j-and-t-cn"
+    ],
+    "asked": [
       "j-and-t-cn"
     ]
   },

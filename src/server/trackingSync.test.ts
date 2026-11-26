@@ -812,7 +812,7 @@ describe('fair scheduling', () => {
     expect(isTrackingSyncDue(both, at(54))).toBe(false);
     expect(isTrackingSyncDue(both, at(55))).toBe(true);
     // After a handoff, only the carrier it moved the parcel to.
-    const handed = { ...checked, carrier: 'aliexpress', carrier_data: { original_carrier: 'aliexpress', active_tracking_carrier: 'correios-br' } };
+    const handed = { ...checked, carrier: 'aliexpress', carrier_data: { original_carrier: 'aliexpress', active_tracking_carrier: 'dpd' } };
     expect(isTrackingSyncDue(handed, at(1))).toBe(true);
     // A partner's hour holds its probe, not the checks of the carrier the parcel is filed under.
     const probing = { ...checked, carrier: 'la-poste', carrier_data: { delivery_probe: { carrier: 'poste-italiane', at: checked.last_synced_at } } };

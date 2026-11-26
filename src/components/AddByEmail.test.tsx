@@ -240,6 +240,18 @@ describe('adding parcels by email in Settings', () => {
     expect(onChange).toHaveBeenLastCalledWith(offer(null));
   });
 
+  it('says Peek waits for a shop whose email linked a page that names no parcel yet', () => {
+    const now = Date.now();
+    const shown: ApiAddByEmail = {
+      ...inbox, lastMailAt: new Date(now).toISOString(), lastResult: 'none', lastAdded: 0,
+      recent: [{ at: new Date(now).toISOString(), sender: 'H&M', result: 'none', added: 0, waiting: true }],
+    };
+    render(<AddByEmailPage apiAuth={apiAuth} email="owner@example.com" offer={offer(shown)} onChange={vi.fn()} />, { wrapper: servingGuides });
+    expect(within(screen.getByRole('region', { name: 'Recent emails' })).getByRole('listitem').querySelector('.add-by-email__what')?.textContent)
+      .toBe('H&MWaiting for the shop to ship');
+    expect(screen.queryByText('Some shops, like Amazon, put no tracking number in their emails.')).not.toBeInTheDocument();
+  });
+
   it('says where a shop that keeps tracking numbers behind its sign-in shows them', () => {
     const onChange = vi.fn();
     const now = Date.now();

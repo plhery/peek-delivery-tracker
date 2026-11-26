@@ -24,7 +24,7 @@ export type InboundOutcome = InboundMailResult | 'dropped';
  * name, a change the owner sees in the list; then parcels already followed, left as they were; then a delivery it
  * told of, whose parcel nobody follows and it does not add; then nothing.
  */
-export function mailResult(additions: readonly ParcelAddition[], { named = 0, delivered = false } = {}): InboundMailResult | 'unavailable' {
+export function mailResult(additions: readonly ParcelAddition[], { named = 0, delivered = false, waiting = false } = {}): InboundMailResult | 'unavailable' {
   const outcomes = new Set(additions.map(({ outcome }) => outcome));
   if (!delivered && outcomes.has('unavailable')) return 'unavailable';
   if (outcomes.has('added')) return 'added';
@@ -32,6 +32,8 @@ export function mailResult(additions: readonly ParcelAddition[], { named = 0, de
   if (outcomes.has('limited')) return 'limited';
   if (named > 0) return 'named';
   if (outcomes.has('known')) return 'known';
+  // Its shop link named no parcel yet: the account waits for the shop.
+  if (waiting) return 'waiting';
   if (delivered) return 'delivered';
   return 'none';
 }
@@ -167,10 +169,13 @@ export async function receiveInboundMail(
   const label = carriers.length ? shopNamedIn(mail.subject, mail.text, carrierNames(carriers)) : shopNameOf(mail.sender);
   // A seller's notice tells of a parcel the reader sent: still followed, its name says so.
   const name = sentByReader(mail.subject, mail.text) ? await nameSentParcel(service, userId, label) : label;
-  const additions = await addParcelsFromText(service, userId, mail.text, name, carriers, { addNew: !delivered, retryEligibility: true, twins: true });
+  let waiting = false;
+  const additions = await addParcelsFromText(service, userId, mail.text, name, carriers, {
+    addNew: !delivered, retryEligibility: true, twins: true, onWaiting: (waits) => { waiting = waits.length > 0; },
+  });
   const named = await nameFollowedParcels(service, userId, additions, name);
   await announce(service, userId, additions);
-  const result = mailResult(additions, { named, delivered });
+  const result = mailResult(additions, { named, delivered, waiting });
   if (result === 'unavailable') throw new HttpError(503, 'Parcel eligibility is temporarily unavailable');
   const added = additions.filter(({ outcome }) => outcome === 'added').length;
   await service.recordInboundMail(userId, result, added, null, label || mail.sender);

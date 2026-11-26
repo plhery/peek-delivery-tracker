@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type FormEvent, type KeyboardEvent } from 'react';
 import { AndroidTestBanner } from '../components/AndroidTest';
 import { CarrierPickerSheet } from '../components/CarrierPickerSheet';
+import { useShopLinkReading } from '../components/shopLink/useShopLinkReading';
 import { Icon } from '../components/Icon';
 import { GuestSettings } from '../components/GuestSettings';
 import { PeekLockup } from '../components/PeekMark';
@@ -26,6 +27,7 @@ import { useLive, useReducedMotion } from './landing/useLive';
 import { useSampleLoop } from './landing/useSampleLoop';
 import { isParcelLinkId, startSample, type ParcelLinkView, type ParcelLookup } from './links';
 import { DoorIcon } from './lookup/DoorNote';
+import { DoorShopLink } from './lookup/DoorShopLink';
 import { LookupFeedback } from './lookup/LookupFeedback';
 import { countdown } from './lookup/machine';
 import { looksLikeNumber } from './lookup/reading';
@@ -83,7 +85,7 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
   const relinking = useRef<Relinking | null>(null);
   const lookup = useLookup(useCallback(({ id, key, view }: ParcelLookup) =>
     onTracked({ id, key, carrier: view.parcel.carrier, response: view }), [onTracked]), relinking);
-  const { state, found, retryIn, send } = lookup;
+  const { state, found: surveyed, retryIn, send } = lookup;
   // What signing in unlocks is asked here, over the door, and what was typed waits for the deliveries' add sheet.
   const [unlock, setUnlock] = useState<UnlockReason | null>(null);
   const unlockFor = useCallback((reason: UnlockReason) => {
@@ -106,6 +108,22 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
   // The sample is read while the box opens, so its page opens with it.
   const sample = useRef<Promise<ParcelLinkView> | null>(null);
   const touch = useCallback(() => setTouched(true), []);
+  // A shop's tracking-page link names its parcel through the shop's platform, as in Add: the number it names goes in
+  // the field as if pasted, with its carrier. One that names none yet says so, in place of "no tracking number".
+  const shopLink = useShopLinkReading(state.settled, Boolean(surveyed.match || surveyed.order) || surveyed.several.length > 0, undefined,
+    (number, carrier) => {
+      if (carrier) send({ type: 'hint', carrier });
+      if (field.current) field.current.value = number;
+      touch();
+      send({ type: 'edit', text: number, via: 'paste' });
+    });
+  const found = shopLink.applies && surveyed.nothing ? { ...surveyed, nothing: false } : surveyed;
+  // Waiting for the shop is the account's: the link goes to the deliveries' Add, after signing in for a visitor.
+  const waitForShop = () => {
+    rememberPendingAdd(state.text);
+    if (mine) mine();
+    else onSignIn();
+  };
   const written = Boolean(state.text.trim());
   const beat = useSampleLoop(SAMPLE_COUNT, ready && firstVisit && !touched && !written && !unboxing && !still && live && !covered);
 
@@ -266,7 +284,7 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
   const choosingCarrier = Boolean(found.match) && !found.typo && !found.several.length && found.check.status === 'several';
   const note = Boolean(state.paste) || (state.trouble !== null && state.trouble.kind !== 'validation');
   // Pip keeps the plain moments company; a question or a note takes its place.
-  const panel = note || found.nothing || found.order || found.pickup || Boolean(found.typo) || found.several.length > 0 || choosingCarrier
+  const panel = note || found.nothing || shopLink.applies || found.order || found.pickup || Boolean(found.typo) || found.several.length > 0 || choosingCarrier
     || found.fields.length > 0 || found.account === 'required' || found.account === 'unavailable';
   const pip = !panel && (written || firstVisit);
   const waiting = state.trouble?.kind === 'burst';
@@ -355,7 +373,8 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
             {/* The carrier's line has its place from the start, so neither a sample nor an answer moves what is below. */}
             <div className="door-says">
               {firstVisit && !written && <SampleLine beat={beat} />}
-              <LookupFeedback lookup={lookup} pointer={pointer} onUnlock={unlockFor} onPickCarrier={() => setPicking(true)} onSuggestion={put} />
+              <LookupFeedback lookup={found === surveyed ? lookup : { ...lookup, found }} pointer={pointer} onUnlock={unlockFor} onPickCarrier={() => setPicking(true)} onSuggestion={put} />
+              {shopLink.applies && <DoorShopLink reading={shopLink.reading} signedIn={Boolean(mine)} onWait={waitForShop} />}
               <LookupVerification active={touched} />
             </div>
           </form>

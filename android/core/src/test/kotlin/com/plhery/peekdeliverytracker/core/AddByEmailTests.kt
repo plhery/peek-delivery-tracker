@@ -221,6 +221,10 @@ class AddByEmailTests {
         assertFalse(amazon.heldNoNumberUnexplained)
         assertTrue(other.heldNoNumberUnexplained)
         assertFalse(amazon.copy(result = AddByEmailResult.Added, added = 1, account = null).heldNoNumberUnexplained)
+        // An email whose shop link named no parcel yet says Peek waits for the shop, and needs no note.
+        val waiting = other.copy(waiting = true)
+        assertEquals("Waiting for the shop to ship", waiting.resultText(Localizer(AppLanguage.En)))
+        assertFalse(waiting.heldNoNumberUnexplained)
         // The server's field reads, and an older server's entry without it reads as before.
         val read = ApiJson.decodeFromString(
             AddByEmailEntry.serializer(),

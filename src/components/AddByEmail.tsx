@@ -47,9 +47,10 @@ export function useAddByEmail(apiAuth: ApiAuth | undefined, open: boolean) {
 
 /**
  * What an email did, in a few words. One that held no number from a shop that shows it only in the reader's account
- * with it (`account`) says where it is.
+ * with it (`account`) says where it is; one whose shop link named no parcel yet says Peek waits for the shop (`waiting`).
  */
 function resultText(t: Translate, entry: ApiAddByEmailEntry): string {
+  if (entry.result === 'none' && entry.waiting) return t('shopWait.status.unnamed');
   if (entry.result === 'none' && entry.account) return t('inbox.result.account', { shop: entry.account });
   return entry.result === 'added' ? t('inbox.result.added.many', { count: entry.added }) : t(`inbox.result.${entry.result}`);
 }
@@ -262,7 +263,7 @@ export function AddByEmailPage({ apiAuth, email, offer, onChange, onBusy }: {
             <span className="settings-value">{localizedRelativeTime(entry.at, t, languageTag)}</span>
           </li>)}
         </ul> : <div className="settings-box"><PipEmpty>{t('inbox.empty')}</PipEmpty></div>}
-        {recent.some(({ result, account }) => result === 'none' && !account) && <p className="add-by-email__note">{t('inbox.noNumber')}</p>}
+        {recent.some(({ result, account, waiting }) => result === 'none' && !account && !waiting) && <p className="add-by-email__note">{t('inbox.noNumber')}</p>}
         {recent.some(({ result, account }) => result === 'none' && account === 'Amazon') && <GuideLink locale={locale} id="amazon-orders">{t('add.amazonGuide')}</GuideLink>}
         {inbox.usedToday * 2 >= offer.dailyLimit && <p className="add-by-email__note">{t('inbox.usage', { used: inbox.usedToday, limit: offer.dailyLimit })}</p>}
       </section>

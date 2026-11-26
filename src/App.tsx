@@ -518,7 +518,8 @@ export default function App({
     return now && !(now === 'sync_error' && numberToCheck(parcel.syncError)) ? attentionLabel(now, parcel, t, languageTag, viewNow) : undefined;
   };
   const remainingDeliveries = [...prioritized.arrivingToday, ...prioritized.onTheWay];
-  const allArrived = !hasCustomView && listed.length > 0
+  // A shop that hasn't shipped yet is still to come, as in the apps.
+  const allArrived = !hasCustomView && listed.length > 0 && shopWaits.waits.length === 0
     && listed.every((parcel) => isDelivered(parcel.events));
   const onTheWayCards = remainingDeliveries.length > 0 ? (
     <div className="parcel-grid">

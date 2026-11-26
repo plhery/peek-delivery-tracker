@@ -451,6 +451,7 @@ describe('App', () => {
 
   it('celebrates completed deliveries while preserving the past list and add action', async () => {
     const user = userEvent.setup();
+    window.localStorage.setItem('sdt.demo.shopWait.stopped.v1', '1');
     const repo = createDemoRepo(window.localStorage);
     const delivered = (await repo.list()).filter(parcel => parcel.events.some(event => event.stage === 'delivered'));
     vi.spyOn(repo, 'list').mockResolvedValue(delivered);
@@ -459,6 +460,19 @@ describe('App', () => {
     expect(within(screen.getByRole('region', { name: 'Past deliveries' })).getByText('Coffee beans ☕')).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Track another parcel' }));
     expect(screen.getByRole('dialog', { name: 'Add a parcel' })).toBeInTheDocument();
+  });
+
+  it('keeps the completed state back while a shop hasn’t shipped, and shows it once the wait stops', async () => {
+    const user = userEvent.setup();
+    const repo = createDemoRepo(window.localStorage);
+    const delivered = (await repo.list()).filter(parcel => parcel.events.some(event => event.stage === 'delivered'));
+    vi.spyOn(repo, 'list').mockResolvedValue(delivered);
+    renderApp(repo);
+    expect(await screen.findByText('Waiting for H&M to ship')).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Everything has arrived.' })).not.toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Stop waiting' }));
+    expect(await screen.findByRole('heading', { name: 'Everything has arrived.' })).toBeInTheDocument();
+    expect(window.localStorage.getItem('sdt.demo.shopWait.stopped.v1')).toBe('1');
   });
 
   it('opens the next parcel from the summary', async () => {

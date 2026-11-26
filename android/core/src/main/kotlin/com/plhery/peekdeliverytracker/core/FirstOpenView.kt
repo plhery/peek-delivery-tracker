@@ -33,8 +33,8 @@ sealed class FirstParcelRequest {
 
         /**
          * Text or a link dragged onto the deliveries from another app is taken as a paste: each piece once, one to a
-         * line, as the share extension joins them. Null when nothing in it reads as a tracking number, or as a shop's
-         * order number, which Add explains.
+         * line, as the share extension joins them. Null when nothing in it reads as a tracking number, as a shop's order
+         * number, which Add explains, or as a shop's tracking-page link, which Add reads.
          */
         fun drop(items: List<String>, catalog: CarrierCatalog = CarrierCatalog.shared): FirstParcelRequest? {
             val pieces = mutableListOf<String>()
@@ -43,7 +43,8 @@ sealed class FirstParcelRequest {
                 if (piece !in pieces) pieces.add(piece)
             }
             val text = pieces.joinToString("\n").characterPrefix(pasteLimit)
-            return if (catalog.read(text).trackingNumber.isEmpty() && catalog.order(text) == null) null else Paste(text)
+            val named = catalog.read(text).trackingNumber.isNotEmpty() || catalog.order(text) != null || ShopTrackingLinks.links(text).isNotEmpty()
+            return if (named) Paste(text) else null
         }
     }
 }

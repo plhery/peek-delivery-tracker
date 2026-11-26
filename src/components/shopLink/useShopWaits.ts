@@ -15,13 +15,25 @@ export function demoShopWait(now = Date.now()): ApiShopWait {
   };
 }
 
+/** Set once the demo's wait is stopped: the demo keeps that, as it keeps what is done to its parcels. */
+export const DEMO_WAIT_STOPPED_KEY = 'sdt.demo.shopWait.stopped.v1';
+
+function demoWaits(): ApiShopWait[] {
+  try {
+    if (window.localStorage.getItem(DEMO_WAIT_STOPPED_KEY)) return [];
+  } catch {
+    // Without storage the demo shows its wait.
+  }
+  return [demoShopWait()];
+}
+
 /**
  * The account's waits for shops to ship, read when the list opens, comes back into view, every few minutes and when
  * Add keeps one. A wait that goes without the reader removing it became parcels: `onResolved` reads the list again.
  * The demo shows one; a guest's device has none.
  */
 export function useShopWaits(mode: string, auth: ApiAuth | undefined, onResolved?: () => void) {
-  const [demo, setDemo] = useState<ApiShopWait[]>(() => [demoShopWait()]);
+  const [demo, setDemo] = useState<ApiShopWait[]>(demoWaits);
   const [account, setAccount] = useState<ApiShopWait[]>([]);
   const waits = mode === 'demo' ? demo : mode === 'api' && auth ? account : [];
   const known = useRef(new Set<string>());
@@ -63,6 +75,13 @@ export function useShopWaits(mode: string, auth: ApiAuth | undefined, onResolved
     removed.current.add(id);
     const without = (current: ApiShopWait[]) => current.filter((wait) => wait.id !== id);
     if (mode !== 'api') setDemo(without);
+    if (mode === 'demo' && id === 'demo-shop-wait') {
+      try {
+        window.localStorage.setItem(DEMO_WAIT_STOPPED_KEY, '1');
+      } catch {
+        // The wait comes back with the next visit.
+      }
+    }
     else setAccount(without);
     if (mode === 'api' && auth) {
       try {

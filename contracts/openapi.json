@@ -80438,6 +80438,11 @@
             "type": "string",
             "maxLength": 80,
             "description": "When the email held no tracking number and its shop shows the number only in the reader's account with it (Amazon): the shop's name. Missing otherwise."
+          },
+          "waiting": {
+            "type": "boolean",
+            "const": true,
+            "description": "When the email held no tracking number and its shop's tracking-page link named no parcel yet: Peek waits for the shop to ship (a shop wait), and the result reads none. Missing otherwise."
           }
         }
       },

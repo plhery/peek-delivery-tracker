@@ -200,6 +200,21 @@ begin
 end;
 $$;
 
+-- An email whose shop link started a wait for the shop takes its own line, as the shop it came from.
+do $$
+declare
+  one constant uuid := 'e9000000-0000-4000-8000-000000000001';
+  recent jsonb;
+begin
+  perform public.record_inbound_mail(one, 'waiting', 0, null, null, 'Example Shop');
+  recent := public.inbound_mailbox(one)->'recent';
+  if recent->0->>'result' <> 'waiting' or recent->0->>'sender' <> 'Example Shop'
+      or public.inbound_mailbox(one)->>'last_result' <> 'waiting' then
+    raise exception 'An email that started a wait was not logged as one: %', recent;
+  end if;
+end;
+$$;
+
 -- A new day gives a new allowance, and the first email of an hour forgets counts of over a week ago.
 update private.inbound_mail_days set day = day - 1;
 insert into private.inbound_mail_days (user_id, day, used)

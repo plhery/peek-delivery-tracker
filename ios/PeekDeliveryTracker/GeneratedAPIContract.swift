@@ -5400,6 +5400,7 @@ struct AddByEmailEntry: Codable, Equatable, Hashable, Sendable {
     var result: AddByEmailResult
     var added: Int
     var account: String? = nil
+    var waiting: Bool? = nil
 }
 
 struct ForwardingConfirmation: Codable, Equatable, Hashable, Sendable {

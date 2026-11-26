@@ -668,6 +668,9 @@ class ParcelLogicListTests {
         // So does a message's one number whose shape proves no carrier: Add asks the carriers.
         val uncertain = "Your order has shipped!\nTrack it with DHL: 1234567899"
         assertEquals(FirstParcelRequest.Paste(uncertain), FirstParcelRequest.drop(listOf(uncertain), catalog = catalog))
+        // A shop's tracking-page link alone opens Add too, which reads it.
+        val shop = "https://hm.delivery-status.com/pl/?orderNo=9900000000001&s=0000aaaa1111bbbb2222cccc3333dddd"
+        assertEquals(FirstParcelRequest.Paste(shop), FirstParcelRequest.drop(listOf(shop), catalog = catalog))
         // Nothing to track: the drop is refused, and Add stays closed.
         assertNull(FirstParcelRequest.drop(emptyList(), catalog = catalog))
         assertNull(FirstParcelRequest.drop(listOf(" ", "\n"), catalog = catalog))

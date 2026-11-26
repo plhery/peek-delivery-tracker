@@ -68,8 +68,10 @@ extension AddByEmail {
 
 extension AddByEmailEntry {
     /// What the email did, in a few words. One that held no number from a shop that shows it only in the reader's
-    /// account with it (`account`) says where it is.
+    /// account with it (`account`) says where it is; one whose shop link named no parcel yet says Peek waits for the
+    /// shop (`waiting`).
     @MainActor func resultText(_ localizer: Localizer) -> String {
+        if result == AddByEmailResult.none, waiting == true { return localizer.text("shopWait.status.unnamed") }
         if result == AddByEmailResult.none, let account { return localizer.text("inbox.result.account", ["shop": account]) }
         return result == .added
             ? localizer.text("inbox.result.added.many", ["count": added])
@@ -77,7 +79,7 @@ extension AddByEmailEntry {
     }
 
     /// Whether the email held no number and its row doesn't say where it is, which Settings' note then explains.
-    var heldNoNumberUnexplained: Bool { result == AddByEmailResult.none && account == nil }
+    var heldNoNumberUnexplained: Bool { result == AddByEmailResult.none && account == nil && waiting != true }
 
     /// Whether the email held no number because Amazon shows it only in the reader's account, which Settings' link to
     /// the Amazon guide then explains where the site serves it.

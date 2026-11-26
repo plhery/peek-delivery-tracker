@@ -84,8 +84,18 @@ describe('the account\'s forwarding address', () => {
     vi.spyOn(SupabaseServiceClient.prototype, 'inboundMailbox').mockResolvedValue({ ...mailbox, recent });
     const answer = await (await readInbox(signedIn('GET'), none)).json();
     expect(answer.inbox.recent.map((entry: { account?: string }) => entry.account ?? null)).toEqual(['Amazon', 'Amazon', 'Amazon', 'Amazon', null, null, null]);
-    expect(Object.keys(answer.inbox.recent[0]).sort()).toEqual(Object.keys(contract.components.schemas.AddByEmailEntry.properties).sort());
+    // Every field the contract lists, but the wait an email whose shop hasn't shipped has instead.
+    expect([...Object.keys(answer.inbox.recent[0]), 'waiting'].sort()).toEqual(Object.keys(contract.components.schemas.AddByEmailEntry.properties).sort());
     expect(answer.inbox.recent[4]).toEqual(recent[4]);
+  });
+
+  it('reads an email that started a wait as one that held no number, with the wait on its line', async () => {
+    const at = '2026-11-03T11:00:00.000Z';
+    const recent = [{ at, sender: 'Example Shop', result: 'waiting' as const, added: 0 }, { at, sender: 'Other Shop', result: 'none' as const, added: 0 }];
+    vi.spyOn(SupabaseServiceClient.prototype, 'inboundMailbox').mockResolvedValue({ ...mailbox, lastMailAt: at, lastResult: 'waiting', lastAdded: 0, recent });
+    const answer = await (await readInbox(signedIn('GET'), none)).json();
+    expect(answer.inbox.recent).toEqual([{ at, sender: 'Example Shop', result: 'none', added: 0, waiting: true }, recent[1]]);
+    expect(answer.inbox.lastResult).toBe('none');
   });
 
   it('is made once, and renewed only when asked', async () => {
@@ -699,6 +709,19 @@ describe('an email to a forwarding address', () => {
     expect(mailResult([], { delivered: true })).toBe('delivered');
     expect(mailResult([parcel('unavailable')])).toBe('unavailable');
     expect(mailResult([])).toBe('none');
+    expect(mailResult([], { waiting: true })).toBe('waiting');
+  });
+
+  it('notes an email whose shop link named no parcel yet as a wait for the shop', async () => {
+    const db = account();
+    vi.spyOn(parcels, 'addParcelsFromText').mockImplementationOnce(async (_service, _user, _text, _label, _carriers, options) => {
+      options?.onWaiting?.([{ id: 'wait', platform: 'parcellab', platform_name: 'parcelLab', shop_name: 'Example Shop', label: 'Example Shop',
+        created_at: '2026-11-26T10:00:00.000Z', expires_at: '2026-12-10T10:00:00.000Z', expired_at: null }]);
+      return [];
+    });
+    const response = await posted(mail('Example Shop <shop@example.test>', 'Your order is on its way', 'Follow your package: https://example.delivery-status.com/?orderNo=1&s=x'));
+    expect(response.status).toBe(202);
+    expect(db.record).toHaveBeenCalledWith(userId, 'waiting', 0, null, 'Example Shop');
   });
 
   it('drops the server\'s own email about a parcel, which a filter sent back', async () => {

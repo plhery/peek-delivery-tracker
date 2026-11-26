@@ -98,14 +98,19 @@ fun AddByEmail.recentEmails(): List<AddByEmailEntry> {
 
 /**
  * What an email did, in a few words. One that held no number from a shop that shows it only in the reader's account
- * with it ([AddByEmailEntry.account]) says where it is.
+ * with it ([AddByEmailEntry.account]) says where it is; one whose shop link named no parcel yet says Peek waits for the
+ * shop ([AddByEmailEntry.waiting]).
  */
 fun AddByEmailEntry.resultText(localizer: Localizer): String = when (result) {
     AddByEmailResult.Added -> localizer.text("inbox.result.added.many", mapOf("count" to added))
     AddByEmailResult.Known -> localizer.text("inbox.result.known")
     AddByEmailResult.Named -> localizer.text("inbox.result.named")
     AddByEmailResult.Delivered -> localizer.text("inbox.result.delivered")
-    AddByEmailResult.None -> account?.let { localizer.text("inbox.result.account", mapOf("shop" to it)) } ?: localizer.text("inbox.result.none")
+    AddByEmailResult.None -> when {
+        waiting == true -> localizer.text("shopWait.status.unnamed")
+        account != null -> localizer.text("inbox.result.account", mapOf("shop" to account))
+        else -> localizer.text("inbox.result.none")
+    }
     AddByEmailResult.Limited -> localizer.text("inbox.result.limited")
     AddByEmailResult.Full -> localizer.text("inbox.result.full")
     AddByEmailResult.Confirmation -> localizer.text("inbox.result.confirmation")
@@ -114,7 +119,7 @@ fun AddByEmailEntry.resultText(localizer: Localizer): String = when (result) {
 
 /** Whether the email held no number and its row doesn't say where it is, which Settings' note then explains. */
 val AddByEmailEntry.heldNoNumberUnexplained: Boolean
-    get() = result == AddByEmailResult.None && account == null
+    get() = result == AddByEmailResult.None && account == null && waiting != true
 
 /**
  * Whether the email held no number because Amazon shows it only in the reader's account, which Settings' link to the

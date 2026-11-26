@@ -14,8 +14,12 @@ function parcel(id: string, stage: Stage, occurredAt: string, label = id): Parce
   return { id, label, carrier: 'dhl', trackingNumber: `TRACK${id}`, createdAt: occurredAt,
     syncStatus: 'ok', events: [{ id: `${id}-event`, parcelId: id, stage, description: stage, occurredAt }] };
 }
+// The seeded demo holds these parcels alone: its wait for a shop is stopped.
 async function seed(page: Page, parcels: ParcelWithEvents[]) {
-  await page.addInitScript(items => localStorage.setItem('sdt.demo.parcels.v1', JSON.stringify(items)), parcels);
+  await page.addInitScript(items => {
+    localStorage.setItem('sdt.demo.parcels.v1', JSON.stringify(items));
+    localStorage.setItem('sdt.demo.shopWait.stopped.v1', '1');
+  }, parcels);
   await page.goto('/', { waitUntil: 'domcontentloaded' });
 }
 

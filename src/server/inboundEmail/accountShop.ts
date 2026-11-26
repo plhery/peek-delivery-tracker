@@ -1,6 +1,6 @@
 import 'server-only';
 
-import type { InboundMailEntry } from '../supabase';
+import type { InboundMailEntry, InboundMailResult } from '../supabase';
 
 /**
  * Shops whose shipping emails hold no tracking number: they show it only in the reader's account with them. The
@@ -19,10 +19,23 @@ export function accountShopOf(entry: Pick<InboundMailEntry, 'sender' | 'result'>
   return ACCOUNT_SHOPS.find((shop) => shop.sender.test(sender))?.name ?? null;
 }
 
-/** The email log as the account reads it: an email that held none names the shop whose account shows its number. */
-export function withAccountShops<Entry extends Pick<InboundMailEntry, 'sender' | 'result'>>(recent: readonly Entry[]): (Entry & { account?: string })[] {
+/**
+ * An email's result as the account reads it: one that started a wait for its shop reads `none`, with `waiting` on its
+ * line (withAccountShops), so that apps from before it read the log as they did.
+ */
+export function servedMailResult(result: InboundMailResult): Exclude<InboundMailResult, 'waiting'> {
+  return result === 'waiting' ? 'none' : result;
+}
+
+/**
+ * The email log as the account reads it: an email that held none names the shop whose account shows its number, and
+ * one whose shop link named no parcel yet says that Peek waits for the shop (`waiting`).
+ */
+export function withAccountShops<Entry extends Pick<InboundMailEntry, 'sender' | 'result'>>(recent: readonly Entry[]):
+  (Omit<Entry, 'result'> & { result: Exclude<InboundMailResult, 'waiting'>; account?: string; waiting?: true })[] {
   return recent.map((entry) => {
+    if (entry.result === 'waiting') return { ...entry, result: 'none', waiting: true };
     const account = accountShopOf(entry);
-    return account ? { ...entry, account } : entry;
+    return account ? { ...entry, result: servedMailResult(entry.result), account } : { ...entry, result: servedMailResult(entry.result) };
   });
 }

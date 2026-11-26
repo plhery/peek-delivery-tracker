@@ -73442,6 +73442,7 @@ export interface ApiAddByEmailEntry {
   "result": ApiAddByEmailResult;
   "added": number;
   "account"?: string;
+  "waiting"?: boolean;
 }
 
 export interface ApiForwardingConfirmation {

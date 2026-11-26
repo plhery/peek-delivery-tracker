@@ -235,6 +235,10 @@ final class AddByEmailDecodingTests: XCTestCase {
         XCTAssertFalse(amazon.heldNoNumberUnexplained)
         XCTAssertTrue(entry(.none).heldNoNumberUnexplained)
         XCTAssertFalse(entry(.added, 1).heldNoNumberUnexplained)
+        // An email whose shop link named no parcel yet says Peek waits for the shop, and needs no note.
+        let waiting = AddByEmailEntry(at: "2026-11-17T08:00:00Z", sender: "H&M", result: .none, added: 0, waiting: true)
+        XCTAssertEqual(waiting.resultText(localizer), "Waiting for the shop to ship")
+        XCTAssertFalse(waiting.heldNoNumberUnexplained)
         for language in AppLanguage.allCases {
             localizer.language = language
             let text = amazon.resultText(localizer)

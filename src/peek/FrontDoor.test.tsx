@@ -34,6 +34,8 @@ vi.mock('./links', async (original) => ({
   forgetParcelLink: mocks.forget,
   startSample: mocks.sample,
 }));
+const shopLinks = vi.hoisted(() => ({ read: vi.fn() }));
+vi.mock('../lib/shopWaitsApi', () => ({ readShopLink: shopLinks.read, SHOP_WAITS_CHANGED: 'peek:shop-waits' }));
 
 // Every number here is fictional.
 const UPS = '1ZDEMO202600000001';
@@ -314,6 +316,35 @@ describe('FrontDoor', () => {
     await user.type(field, ` ${UPS}`);
     expect(screen.queryByText(notFound)).not.toBeInTheDocument();
     expect(field).not.toHaveAttribute('aria-invalid');
+  });
+
+  it('reads a pasted shop link and looks up the parcel its page names, with its carrier', async () => {
+    const link = 'https://hm.delivery-status.com/pl/?orderNo=9900000000001&s=0000aaaa1111bbbb2222cccc3333dddd';
+    shopLinks.read.mockResolvedValue({ links: 1, parcels: [{ tracking_number: UPS, carrier: 'ups', confidence: 'high' }], unresolved: [] });
+    const { user, field } = door();
+    await user.click(field);
+    await user.paste(link);
+    // A visitor's link is read without an account.
+    expect(shopLinks.read).toHaveBeenCalledWith(link, undefined, expect.any(AbortSignal));
+    await waitFor(() => expect(mocks.lookup).toHaveBeenCalledWith({ trackingNumber: UPS, carrier: 'ups' }, expect.any(AbortSignal)));
+    expect(screen.queryByText(notFound)).not.toBeInTheDocument();
+  });
+
+  it('says a shop that hasn’t shipped yet has named no parcel, in place of “no number”, and takes the link to sign in', async () => {
+    const link = 'https://hm.delivery-status.com/pl/?orderNo=9900000000001&s=0000aaaa1111bbbb2222cccc3333dddd';
+    shopLinks.read.mockResolvedValue({ links: 1, parcels: [], unresolved: [{ platform: 'parcellab', platform_name: 'parcelLab', shop_name: 'H&M', reason: 'not_found', waitable: true }] });
+    const { user, field } = door();
+    await user.click(field);
+    await user.paste(link);
+    expect(await screen.findByText('H&M hasn’t named a parcel on this page yet: it hasn’t shipped.')).toBeVisible();
+    expect(screen.getByText('Sign in, and Peek waits for it: it checks every few hours for 14 days.')).toBeVisible();
+    expect(screen.queryByText(notFound)).not.toBeInTheDocument();
+    expect(screen.queryByRole('region', { name: 'What tracking numbers look like' })).not.toBeInTheDocument();
+    expect(field).not.toHaveAttribute('aria-invalid');
+    expect(mocks.lookup).not.toHaveBeenCalled();
+    await user.click(within(screen.getByRole('note')).getByRole('button', { name: 'Sign in' }));
+    expect(onSignIn).toHaveBeenCalledOnce();
+    expect(takePendingAdd()).toBe(link);
   });
 
   it('waits for a pause before telling typed text it has no number, and answers a paste at once', async () => {

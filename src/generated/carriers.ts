@@ -15374,6 +15374,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffb202"
     },
     {
+      "id": "matkahuolto",
+      "catalog": "matkahuolto",
+      "slug": "matkahuolto-tracking",
+      "title": "Rastreamento Matkahuolto: status, pontos de coleta e ajuda",
+      "name": "Matkahuolto",
+      "color": "#001e60"
+    },
+    {
       "id": "ukrposhta",
       "catalog": "ukrposhta",
       "slug": "ukrposhta-tracking",
@@ -15396,6 +15404,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Geniki Taxydromiki: voucher, status e contato",
       "name": "Geniki Taxydromiki",
       "color": "#004fa0"
+    },
+    {
+      "id": "maltapost",
+      "catalog": "maltapost",
+      "slug": "maltapost-tracking",
+      "title": "Rastreamento MaltaPost: códigos, status e retirada",
+      "name": "MaltaPost",
+      "color": "#d43b2c"
     },
     {
       "id": "whistl",
@@ -19828,6 +19844,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffb202"
     },
     {
+      "id": "matkahuolto",
+      "catalog": "matkahuolto",
+      "slug": "matkahuolto-tracking",
+      "title": "Matkahuolto 芬兰快递追踪：状态、自提点、自提柜与客服",
+      "name": "Matkahuolto",
+      "color": "#001e60"
+    },
+    {
       "id": "ukrposhta",
       "catalog": "ukrposhta",
       "slug": "ukrposhta-tracking",
@@ -19850,6 +19874,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Geniki Taxydromiki 物流查询：运单号、状态与联系",
       "name": "Geniki Taxydromiki",
       "color": "#004fa0"
+    },
+    {
+      "id": "maltapost",
+      "catalog": "maltapost",
+      "slug": "maltapost-tracking",
+      "title": "MaltaPost 马耳他邮政追踪：单号、状态、自提柜与客服",
+      "name": "MaltaPost",
+      "color": "#d43b2c"
     },
     {
       "id": "whistl",

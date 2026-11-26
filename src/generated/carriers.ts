@@ -15670,6 +15670,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee4d2d"
     },
     {
+      "id": "mhi",
+      "catalog": "mhi",
+      "slug": "mhi-tracking",
+      "title": "Rastreamento MHI: status Trackmail e quem entrega",
+      "name": "MHI",
+      "color": "#00075c"
+    },
+    {
       "id": "pengyou",
       "catalog": "pengyou",
       "slug": "rastreamento-pengyou",
@@ -16300,6 +16308,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento BUFFALO: códigos BUFZA, alfândega e suporte",
       "name": "BUFFALO",
       "color": "#bc8c4d"
+    },
+    {
+      "id": "kuehne-nagel",
+      "catalog": "kuehne-nagel",
+      "slug": "kuehne-nagel-tracking",
+      "title": "Rastreamento Kuehne+Nagel: códigos, status e entrega",
+      "name": "Kuehne+Nagel",
+      "color": "#003369"
     },
     {
       "id": "memphis-courier",
@@ -19852,6 +19868,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee4d2d"
     },
     {
+      "id": "mhi",
+      "catalog": "mhi",
+      "slug": "mhi-tracking",
+      "title": "MHI（Trackmail）包裹追踪：状态含义、本地派送商与客服",
+      "name": "MHI",
+      "color": "#00075c"
+    },
+    {
       "id": "pengyou",
       "catalog": "pengyou",
       "slug": "pengyou-wuliu-chaxun",
@@ -20562,6 +20586,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "BUFFALO 国际物流单号查询：BUFZA 轨迹、南非清关与客服",
       "name": "BUFFALO",
       "color": "#bc8c4d"
+    },
+    {
+      "id": "kuehne-nagel",
+      "catalog": "kuehne-nagel",
+      "slug": "kuehne-nagel-tracking",
+      "title": "Kuehne+Nagel 物流追踪：单号格式、节点状态与清关说明",
+      "name": "Kuehne+Nagel",
+      "color": "#003369"
     },
     {
       "id": "bfe-express",

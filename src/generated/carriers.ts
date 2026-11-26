@@ -15334,6 +15334,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#53b6ed"
     },
     {
+      "id": "apc-overnight",
+      "catalog": "apc-overnight",
+      "slug": "apc-overnight-tracking",
+      "title": "Rastreamento APC Overnight: códigos, status e entregas",
+      "name": "APC Overnight",
+      "color": "#243269"
+    },
+    {
       "id": "ups",
       "catalog": "ups",
       "slug": "rastreamento-ups",
@@ -15988,6 +15996,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento J&T Express China (极兔速递): códigos e status",
       "name": "J&T Express China",
       "color": "#e62019"
+    },
+    {
+      "id": "tforce-freight",
+      "catalog": "tforce-freight",
+      "slug": "tforce-freight-tracking",
+      "title": "Rastreamento TForce Freight: códigos PRO e status",
+      "name": "TForce Freight",
+      "color": "#0053a1"
     },
     {
       "id": "andreani",
@@ -19364,6 +19380,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#53b6ed"
     },
     {
+      "id": "apc-overnight",
+      "catalog": "apc-overnight",
+      "slug": "apc-overnight-tracking",
+      "title": "APC Overnight 物流查询：单号格式、状态与错过派送处理",
+      "name": "APC Overnight",
+      "color": "#243269"
+    },
+    {
       "id": "ups",
       "catalog": "ups",
       "slug": "ups-guoji-kuaidi-chaxun",
@@ -20034,6 +20058,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "极兔速递（J&T Express China）单号查询、状态与 956025 客服",
       "name": "J&T Express China",
       "color": "#e62019"
+    },
+    {
+      "id": "tforce-freight",
+      "catalog": "tforce-freight",
+      "slug": "tforce-freight-tracking",
+      "title": "TForce Freight 物流查询：PRO 单号、状态与货运理赔",
+      "name": "TForce Freight",
+      "color": "#0053a1"
     },
     {
       "id": "andreani",

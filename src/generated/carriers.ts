@@ -15662,6 +15662,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "cdek",
+      "catalog": "cdek",
+      "slug": "rastreamento-cdek",
+      "title": "Rastreamento CDEK (СДЭК): números de pedido e status",
+      "name": "CDEK",
+      "color": "#00b33c"
+    },
+    {
       "id": "dsv",
       "catalog": "dsv",
       "slug": "rastreamento-dsv",
@@ -15700,6 +15708,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento J&T Express China (极兔速递): códigos e status",
       "name": "J&T Express China",
       "color": "#e62019"
+    },
+    {
+      "id": "andreani",
+      "catalog": "andreani",
+      "slug": "rastreamento-andreani",
+      "title": "Rastreamento Andreani: códigos e status na Argentina",
+      "name": "Andreani",
+      "color": "#d71920"
     },
     {
       "id": "17feia",
@@ -19364,6 +19380,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "cdek",
+      "catalog": "cdek",
+      "slug": "cdek-wuliu-chaxun",
+      "title": "CDEK（СДЭК）物流查询：订单号与状态含义",
+      "name": "CDEK",
+      "color": "#00b33c"
+    },
+    {
       "id": "dsv",
       "catalog": "dsv",
       "slug": "dsv-wuliu-chaxun",
@@ -19410,6 +19434,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "极兔速递（J&T Express China）单号查询、状态与 956025 客服",
       "name": "J&T Express China",
       "color": "#e62019"
+    },
+    {
+      "id": "andreani",
+      "catalog": "andreani",
+      "slug": "andreani-wuliu-chaxun",
+      "title": "Andreani 物流查询：阿根廷运单号与状态说明",
+      "name": "Andreani",
+      "color": "#d71920"
     },
     {
       "id": "spx-sg",

@@ -105,9 +105,10 @@ async function keep(service: SupabaseServiceClient, userId: string, raw: Uint8Ar
  * sender, or with the shop a carrier's email names, once it is counted against the allowances of emails read. A
  * followed parcel without a name takes that name. An email that says its parcel was delivered adds none. Gmail's
  * request to confirm forwarding is kept for the owner instead, and the server's own emails are dropped. An email
- * whose subject and sender are about no parcel is ignored, unread, and counts only as received. What an email did is
- * noted with its sender's name, and the email itself is kept 30 days, but for one ignored, one an allowance or the
- * parcel limit stopped and Gmail's request, which holds a code.
+ * whose subject and sender are about no parcel is read for its links to a carrier's site or a shop's tracking platform
+ * alone, and is ignored, unread, counting only as received, when it has none or they name no parcel. What an email did
+ * is noted with its sender's name, and the email itself is kept 30 days, but for one ignored, one an allowance or the
+ * parcel limit stopped, one read for its links that added no parcel, and Gmail's request, which holds a code.
  */
 export async function receiveInboundMail(
   service: SupabaseServiceClient,
@@ -154,11 +155,15 @@ export async function receiveInboundMail(
   // A delivery confirmation comes too late for following its parcel to help: it names one already followed, if any.
   const delivered = deliveredSubject(mail.subject);
   // An email about no parcel, by its subject and sender, is neither read nor kept: a reader may forward all their
-  // mail, and a newsletter's links and codes look like tracking numbers.
-  if (!carriers.length && !delivered && !shippingSubject(mail.subject)) {
+  // mail, and a newsletter's links and codes look like tracking numbers. Its links to a carrier's site or a shop's
+  // tracking platform are read, and nothing else (H&M's notice that a parcel is on its way may name only the order and
+  // its "Follow package" link): it is kept only when they add a parcel, and is ignored when they name none.
+  const linksOnly = !carriers.length && !delivered && !shippingSubject(mail.subject);
+  const ignored = async (reason: string) => {
     await service.recordInboundMail(userId, 'ignored', 0, null, shopNameOf(mail.sender));
-    return finish('ignored', 'subject');
-  }
+    return finish('ignored', reason);
+  };
+  if (linksOnly && !mail.trackingLinks.length) return ignored('subject');
   // Only an email read spends the allowances of emails read: a reader who forwards all their mail keeps them for the
   // shipping ones.
   const claim = await service.claimInboundMail(userId, { perAccount: settings.perAccountPerDay, overall: settings.perHour });
@@ -170,7 +175,7 @@ export async function receiveInboundMail(
   // A seller's notice tells of a parcel the reader sent: still followed, its name says so.
   const name = sentByReader(mail.subject, mail.text) ? await nameSentParcel(service, userId, label) : label;
   let waiting = false;
-  const additions = await addParcelsFromText(service, userId, mail.text, name, carriers, {
+  const additions = await addParcelsFromText(service, userId, linksOnly ? mail.trackingLinks.join('\n') : mail.text, name, carriers, {
     addNew: !delivered, retryEligibility: true, twins: true, onWaiting: (waits) => { waiting = waits.length > 0; },
   });
   const named = await nameFollowedParcels(service, userId, additions, name);
@@ -178,9 +183,10 @@ export async function receiveInboundMail(
   const result = mailResult(additions, { named, delivered, waiting });
   if (result === 'unavailable') throw new HttpError(503, 'Parcel eligibility is temporarily unavailable');
   const added = additions.filter(({ outcome }) => outcome === 'added').length;
+  if (linksOnly && result === 'none') return ignored('links');
   await service.recordInboundMail(userId, result, added, null, label || mail.sender);
-  if (result !== 'limited' && result !== 'full') await keep(service, userId, raw);
-  return finish(result, carriers.length ? 'carrier' : undefined, additions.length, added, named);
+  if (linksOnly ? added > 0 : result !== 'limited' && result !== 'full') await keep(service, userId, raw);
+  return finish(result, carriers.length ? 'carrier' : linksOnly ? 'links' : undefined, additions.length, added, named);
 }
 
 function finish(outcome: InboundOutcome, reason?: string, numbers = 0, added = 0, named = 0): InboundOutcome {

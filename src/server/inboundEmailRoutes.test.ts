@@ -270,6 +270,38 @@ describe('emails in the shapes readers forward', () => {
     expect(db.claimMail).not.toHaveBeenCalled();
   });
 
+  it('reads only the links to a carrier\'s site of an email whose subject names no shipping word, kept once they add a parcel', async () => {
+    const db = account();
+    const read = vi.spyOn(parcels, 'addParcelsFromText');
+    const link = `https://www.dhl.de/de/privatkunden/pakete-empfangen/verfolgen.html?piececode=${DHL}`;
+    await posted(mail('"Example Shop" <news@example-shop.com>', 'Thanks for shopping with us', [
+      `Your reference: ${UPS}`, 'Our new collection: https://www.example-shop.com/new?item=1234567890', `Follow your parcel: ${link}`,
+    ].join('\n')));
+    expect(read.mock.calls[0]![2]).toBe(link);
+    expect(db.create.mock.calls.map(([, number]) => number)).toEqual([DHL]);
+    expect(db.record).toHaveBeenLastCalledWith(userId, 'added', 1, null, 'Example Shop');
+    expect(db.keep).toHaveBeenCalledTimes(1);
+    // Links that name no parcel leave it ignored and unkept, though it was read.
+    await posted(mail('"Example Shop" <news@example-shop.com>', 'Thanks for shopping with us', 'We ship with https://www.dhl.de/de/privatkunden.html'));
+    expect(db.record).toHaveBeenLastCalledWith(userId, 'ignored', 0, null, 'Example Shop');
+    expect(db.keep).toHaveBeenCalledTimes(1);
+    expect(db.claimMail).toHaveBeenCalledTimes(2);
+  });
+
+  it('waits for the shop a tracking-platform link names in an email whose subject names no shipping word, unkept', async () => {
+    const db = account();
+    const link = 'https://example.delivery-status.com/fr/?orderNo=1&s=x';
+    const read = vi.spyOn(parcels, 'addParcelsFromText').mockImplementationOnce(async (_service, _user, _text, _label, _carriers, options) => {
+      options?.onWaiting?.([{ id: 'wait', platform: 'parcellab', platform_name: 'parcelLab', shop_name: 'Example Shop', label: 'Example Shop',
+        created_at: '2026-11-26T10:00:00.000Z', expires_at: '2026-12-10T10:00:00.000Z', expired_at: null }]);
+      return [];
+    });
+    await posted(mail('Example Shop <shop@example.test>', 'Merci pour ton achat', `Ton numéro client : ${UPS}\nSuivre mon colis : ${link}`));
+    expect(read.mock.calls[0]![2]).toBe(link);
+    expect(db.record).toHaveBeenCalledWith(userId, 'waiting', 0, null, 'Example Shop');
+    expect(db.keep).not.toHaveBeenCalled();
+  });
+
   it('reads a shipping subject in any language, a carrier\'s email whatever its subject, and a delivered one', async () => {
     const db = account();
     await posted(mail('Example Shop <orders@example-shop.com>', 'Fwd: Twoja przesyłka jest w drodze', `Numer: ${UPS}`));

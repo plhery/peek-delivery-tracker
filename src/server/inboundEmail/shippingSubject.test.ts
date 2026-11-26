@@ -23,6 +23,9 @@ const SHIPPING = [
   '您的包裹已发货',
   // An order's name alone: the order confirmations it also lets in name no tracking number Peek takes.
   'Votre commande a été remise au transporteur',
+  // A shop's notice that names its order alone, in capitals and forwarded by hand (H&M's French one).
+  'TR : Ta COMMANDE est en préparation',
+  'Fwd: Merci pour ta commande !',
   'Update on your order #1001',
   'Ihre Bestellung bei Beispiel',
   'Status zamówienia 1001',

@@ -21,6 +21,11 @@ export interface InboundMail {
   subject: string;
   /** The subject, the body as text, and the links of its HTML, one per line. */
   text: string;
+  /**
+   * Its links to a carrier's site or a shop's tracking platform (`shopTrackingLink`: parcelLab's delivery-status.com),
+   * as `text` holds them: all that is read of an email whose subject names no shipping word.
+   */
+  trackingLinks: string[];
   /** Gmail asking to confirm that it may forward to the address, with its code and link when they are there. */
   confirmation: { code: string | null; link: string | null } | null;
 }
@@ -273,6 +278,7 @@ export async function readInboundMail(raw: Uint8Array): Promise<InboundMail> {
     origin: sender.address,
     subject,
     text,
+    trackingLinks: read.filter((link) => carriers.has(link)),
     confirmation: gmailConfirmation(email, body, links),
   };
 }

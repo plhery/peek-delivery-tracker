@@ -464,13 +464,15 @@ Key server modules:
     counted. When Amazon Shipping's check can't answer twice in a row for a number in the
     email, the server answers 503 and records nothing: the Worker fails, so the sender tries
     again later.
-  - An email about no parcel is ignored, unread and unkept (`ignored`): its subject holds
-    no word of the filter's lists in any language (`inboundEmail/shippingSubject.ts`, case
-    and accents aside, a word that goes on counts), it says no delivery, and its sender is
-    no carrier. A reader may forward all their mail, and a newsletter's codes and encoded
-    links read as tracking numbers. A run of ignored emails is one entry of the log, the
-    newest. They still count against the allowances, which are claimed before an email is
-    parsed.
+  - An email whose subject holds no word of the filter's lists in any language
+    (`inboundEmail/shippingSubject.ts`, case and accents aside, a word that goes on counts),
+    says no delivery and comes from no carrier is read for its links to a carrier's site or
+    a shop's tracking platform alone (parcelLab's delivery-status.com, as H&M's "Follow
+    package"), never its text: a reader may forward all their mail, and a newsletter's codes
+    and encoded links read as tracking numbers. With no such link, or links that name no
+    parcel, it is ignored and unkept (`ignored`). A run of ignored emails is one entry of the
+    log, the newest. They still count against the allowance of emails received, which is
+    claimed before an email is parsed.
   - The server reads the subject, the text part (else the HTML's text) and the links of
     both, a carrier's site first, never an attachment. The text part's addresses are read as
     links, not as text: a hand-forwarded email inlines every one, and they would fill the
@@ -547,7 +549,7 @@ Key server modules:
     limit add nothing, so nothing is sent.
   - Each email read is kept as it came for 30 days (`private.inbound_mail_kept`), the
     account's newest 100 at most, to learn to read emails better; not one ignored, nor one an allowance or the parcel
-    limit stopped, nor Gmail's request, which holds a code. The scheduled upkeep deletes older ones, and turning
+    limit stopped, nor one read for its links alone that added no parcel, nor Gmail's request, which holds a code. The scheduled upkeep deletes older ones, and turning
     the address off or deleting the account deletes the account's. A failure to keep one is
     reported and changes nothing else.
   - Gmail's request to confirm forwarding is kept for three days for the owner to finish in
@@ -556,8 +558,8 @@ Key server modules:
     they count against the allowances: a delivery email that a filter sends back names a
     parcel the account follows already.
   - Each address reads `INBOUND_EMAILS_PER_ACCOUNT_PER_DAY` emails a UTC day, and all of
-    them together `INBOUND_EMAILS_PER_HOUR` an hour; an email ignored for its subject is not
-    counted. Each address takes `INBOUND_EMAILS_RECEIVED_PER_ACCOUNT_PER_DAY` emails a UTC
+    them together `INBOUND_EMAILS_PER_HOUR` an hour; an email ignored for its subject with no
+    tracking link is not counted. Each address takes `INBOUND_EMAILS_RECEIVED_PER_ACCOUNT_PER_DAY` emails a UTC
     day, read or not, counted before the email is parsed. `inbound_mailboxes` and the kept
     emails are service-role only.
 - **Assistants**: an account the server opens it to (`ASSISTANT_ACCOUNTS`) can connect an

@@ -1,6 +1,6 @@
 ---
 title: Memphis Courier 巴西专线追踪：M-MIA 单号、清关与客服
-description: 追踪从美国发往巴西的 Memphis Courier 进口包裹：M-MIA 单号格式、GRU 机场与 ANVISA 查验状态、CPF 核验规则及官方联系渠道。
+description: 追踪从美国发往巴西的 Memphis Courier 进口包裹：M-MIA 单号格式、GRU 机场与 ANVISA 查验状态、CPF 核验规则及联系渠道。
 slug: memphis-courier-tracking
 published: 2026-11-26
 updated: 2026-11-26
@@ -14,9 +14,9 @@ Memphis Courier 是一家拥有超过 25 年历史的纯巴西本土物流公司
 
 Memphis Courier 运单号采用极具辨识度的 11 位字母数字组合：
 
-- **`M` + 7 位数字 + `MIA`**（共 11 位，例如虚构单号 `M4829173MIA`）——这是 Peek 自动识别为 Memphis Courier 的标准格式。
+- **`M` + 7 位数字 + `MIA`**（共 11 位，例如 `M4829173MIA`）——这是 Peek 识别为 Memphis Courier 单号的格式。
 
-Peek 支持 6 至 30 位字母与数字组成的 Memphis Courier 单号，并会自动去除空格、转为大写。Memphis Courier 的追踪门户（`clients.memphiscourier.com.br`）无需登录客户账号即可直接查询。只要输入 `M` + 7 位数字 + `MIA` 格式，Peek 会单独向 Memphis Courier 发起查询，并在对方返回数据后显示“Memphis Courier 已承运此包裹。”关于发往巴西的常见跨境单号格式，请参阅[运单号格式指南](guide:tracking-number-formats)（英文）。
+Peek 接受 6 至 30 位字母与数字组成的 Memphis Courier 单号，会去除空格并将字母转为大写。Memphis Courier 的追踪门户（`clients.memphiscourier.com.br`）无需登录客户账号即可直接查询。只要输入 `M` + 7 位数字 + `MIA` 格式，Peek 会单独向 Memphis Courier 发起查询，并在对方返回数据后显示“Memphis Courier 有这个包裹的记录。”关于发往巴西的常见跨境单号格式，请参阅[运单号格式指南](guide:tracking-number-formats)（英文）。
 
 ## Memphis Courier 追踪状态说明
 
@@ -41,37 +41,37 @@ Memphis Courier 追踪接口会返回 3 位字母状态码、葡萄牙语说明�
 
 每一票以个人名义发往巴西的快件进口均须提供收件人 CPF（巴西个人税号），方可办理 Receita Federal 清关。正如 Memphis Courier 在其[附加服务页面](https://memphiscourier.com.br/servicos-adicionais/)所指出的，许多海外网店在结账时并未设置 CPF 填写栏；遇到此类情况时，Memphis Courier 客服团队会主动联系收件人核验 CPF，以免清关受阻。
 
-对于 Memphis Courier 从美国、欧洲、哥伦比亚或乌拉圭承运入境的医用大麻及其他药品，包裹在瓜鲁柳斯机场可能同时经历 Receita Federal（`HOC`）和 ANVISA（`ANV`）查验，随后才会出现 `CLA`（已放行）。如果你的包裹连续多个工作日停留在 `BRP`、`HOC` 或 `ANV`，请检查邮箱与 WhatsApp：Memphis Courier 会通过邮件、WhatsApp、在线聊天或电话与客户沟通，可能需要你确认 CPF 或补充文件。更多国际进口清关说明见[海关清关指南](guide:customs)（英文）和[物流停止更新怎么办](guide:tracking-not-updating)（英文）。
+对于 Memphis Courier 从美国、欧洲、哥伦比亚或乌拉圭承运入境的医用大麻及其他药品，包裹在瓜鲁柳斯机场可能要经过 Receita Federal（`HOC`）和 ANVISA（`ANV`）两项查验，随后才会出现 `CLA`（已放行）。如果你的包裹连续多个工作日停留在 `BRP`、`HOC` 或 `ANV`，请检查邮箱与 WhatsApp：Memphis Courier 会通过邮件、WhatsApp、在线聊天或电话与客户沟通，可能需要你确认 CPF 或补充文件。更多国际进口清关说明见[海关清关指南](guide:customs)（英文）和[物流停止更新怎么办](guide:tracking-not-updating)（英文）。
 
 一旦海关放行（`CLA`），国内派送覆盖巴西所有州。如果你还有其他经由别家快递发往巴西的订单，可参考 [Anjun Express](carrier:anjun)、[Jadlog](carrier:jadlog) 或 [J&T Express Brazil](carrier:j-and-t-br) 的追踪说明。
 
 ## 使用 Peek 追踪 Memphis Courier 包裹
 
-将 `M...MIA` 单号粘贴到 Peek 中，对方接口返回数据后 Peek 会自动匹配至 Memphis Courier。如需手动指定或切换承运商，可在添加包裹时点击“更改”，或在追踪页点击“更改快递公司”。
+将 `M...MIA` 单号粘贴到 Peek 中，对方接口返回数据后 Peek 会自动匹配至 Memphis Courier。如需手动指定或切换承运商，可在添加包裹时点击“更换”，或在追踪页点击“更换快递公司”。
 
-Peek 通过开源的 [universal-parcel-scraper Memphis Courier 适配器](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/memphis-courier)直连 Memphis Courier 公共追踪服务，读取每条扫描的状态码、葡萄牙语说明、地点标签以及总重量（千克，如有）。Memphis Courier 的时间以本地墙钟形式给出，仅在末尾附带偏移量时才标明时区。Peek 会保留已有偏移量；若无偏移量，则按扫描地时区解析（`Estados Unidos` 按纽约时间，`SP` 或 `Brasil` 按圣保罗时间），无地点条目沿用相邻条目时区，否则统一按圣保罗时间解析，并以你的设备本地时区展示。客户门户中的内部备注、件数、邮编、目的地及清关附件等字段仅保留在 Memphis Courier 官网。
+Peek 通过开源的 [universal-parcel-scraper Memphis Courier 适配器](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/memphis-courier)直接查询 Memphis Courier 的公开追踪服务，读取每条扫描的状态码、葡萄牙语说明、地点标签以及总重量（千克，如有）。Memphis Courier 的时间以本地墙钟形式给出，仅在末尾附带偏移量时才标明时区。Peek 会保留已有偏移量；若无偏移量，则按扫描地时区解析（`Estados Unidos` 按纽约时间，`SP` 或 `Brasil` 按圣保罗时间），无地点条目沿用相邻条目时区，否则统一按圣保罗时间解析，并以你的设备本地时区展示。客户门户中的内部备注、件数、邮编、目的地及清关附件等字段仅保留在 Memphis Courier 自己的网站上。
 
-Peek 将 Memphis Courier 的 12 个扫描代码清晰归类：`FLT` 对应 **已建单**；`CHK` 至 `AAZ` 以及清关放行后的 `CLA` 对应 **运输中**（Memphis Courier 代码体系直接从建单进入分拨中心转运，未单独区分 **快递公司已揽收** 代码）；`BRP`、`HOC` 与 `ANV` 对应 **清关中**；出现 `DLV` 后归为 **已送达**。
+Peek 将 Memphis Courier 的 12 个扫描代码清晰归类：`FLT` 对应 **已生成面单**；`CHK` 至 `AAZ` 以及清关放行后的 `CLA` 对应 **运输中**（Memphis Courier 代码体系直接从建单进入分拨中心转运，未单独设置 **已揽收** 代码）；`BRP`、`HOC` 与 `ANV` 对应 **清关中**；出现 `DLV` 后归为 **已签收**。
 
-在 Memphis Courier 追踪服务正常响应期间，当你打开包裹页面或在派送当天开启通知时，Peek 最高每 10 分钟检查一次；其余时间每小时检查一次。由于 Memphis Courier 追踪接口不含派送中节点，Peek 不会切入派送日每 2 分钟检查模式。若停留在“已建单”或“快递公司已揽收”满 12 小时，或连续两天无新动态，则无论你如何关注均改为每小时检查一次；停留在“已建单”满七天后改为每 6 小时一次。当 Memphis Courier 官网无响应而 Peek 仅通过追踪服务跟进时，每小时检查一次，静默一天后每 3 小时一次，派送中当天最高每 15 分钟一次。
+在 Memphis Courier 的追踪器有响应时，只要你在 Peek 中打开包裹页面，或在派送当日开启通知，Peek 最多每 10 分钟检查一次；其余情况下每小时检查一次。Memphis Courier 的追踪器没有派送中步骤，因此 Peek 不会切换到派送当天每 2 分钟一次的检查。若包裹停留在“已生成面单”或“已揽收”超过 12 小时，或连续两天没有新动态，无论你以何种方式关注，均改为每小时检查一次；若停留在“已生成面单”超过七天，则每 6 小时检查一次。当 Memphis Courier 的追踪器无响应、Peek 仅通过追踪服务跟进时，每小时检查一次，静默一天后每 3 小时一次，派送当天最多每 15 分钟一次。
 
-若最新扫描已满四天且包裹仍停留在“已建单”、“快递公司已揽收”或“运输中”，Peek 会标出该扫描的日期（例如“自 10月12日 周一 起无物流更新”）。包裹页面随后会显示：“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 Memphis Courier 查询。”并附带指向 Memphis Courier 联系页面的“向 Memphis Courier 求助”链接。若超过三周仍无新扫描，则会显示：“已经三周多没有新动态。如果包裹仍未送达，请联系卖家。Peek 会持续向 Memphis Courier 查询。”
+当最新扫描距今已满四天，且包裹仍处于“已生成面单”、“已揽收”或“运输中”时，Peek 会用该次扫描的日期加以标记，例如“自10月12日周一起没有物流更新”。包裹页面随后会显示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 Memphis Courier 查询。”，并附上指向 Memphis Courier Fale Conosco 页面的“向 Memphis Courier 寻求帮助”链接。如果三周没有新扫描，页面会显示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 Memphis Courier 查询。”
 
-你可以在 Peek 通知偏好中选择 **每次扫描**、**重要节点** 或 **仅送达**，按需接收提醒。
+你可以在 Peek 通知偏好中选择 **每次扫描**、**重要环节** 或 **仅派送当天**，按需接收提醒。
 
 ## 联系 Memphis Courier 客服
 
 Memphis Courier 在官网公布了官方支持渠道，并在官方免责声明中明确指出，不将 Reclame Aqui 等第三方投诉网站视作官方客服或工单渠道。
 
 - **官方联系页面：** [Fale Conosco](https://memphiscourier.com.br/fale-conosco/)（在线联系表单）
-- **电话/客户服务：** `+55 11 94264-7550`（同时适用于 GRU 快件货站与圣保罗办事处）
+- **电话/客户服务：** +55 11 94264-7550（同时适用于 GRU 快件货站与圣保罗办事处）
 - **邮箱：** `atendimento@memphiscourier.com.br`、`atendimento1@memphiscourier.com.br` 与 `info@memphiscourier.com.br`
 - **瓜鲁柳斯快件货站：** Aeroporto Internacional de Guarulhos — Terminal Courier, CEP 07190-100, São Paulo, Brazil
 - **圣保罗办事处：** Av. Marques de São Vicente, 230, cj 1216 — Barra Funda, CEP 01139-000, São Paulo, Brazil（[Quem Somos](https://memphiscourier.com.br/quem-somos/)）
 
 联系客服时请提前准备好 `M...MIA` 运单号与收件人 CPF，以便团队第一时间调取你的清关档案。
 
-## 常见问题
+## 关于 Memphis Courier 物流查询的问题
 
 ### Memphis Courier 追踪里的 `ANV`（“Em inspeção pela ANVISA”）是什么意思？
 
@@ -87,12 +87,12 @@ Memphis Courier 在官网公布了官方支持渠道，并在官方免责声明�
 
 ### Memphis Courier 会回复发布在 Reclame Aqui 上的求助吗？
 
-不会。Memphis Courier 官网声明指出，为确保可追溯性与数据保密，公司仅通过 [memphiscourier.com.br](https://memphiscourier.com.br/) 公布的官方渠道（电话、邮箱及官方联系表单）受理投诉、咨询与说明。
+不会。Memphis Courier 官网声明指出，为确保可追溯性与数据保密，公司仅通过 [memphiscourier.com.br](https://memphiscourier.com.br/) 公布的官方渠道（电话、邮箱及联系表单）受理投诉、咨询与说明。
 
 :::sources
 - [Memphis Courier](https://memphiscourier.com.br/)
 - [Memphis Courier — Quem Somos](https://memphiscourier.com.br/quem-somos/)
 - [Memphis Courier — Serviços Adicionais](https://memphiscourier.com.br/servicos-adicionais/)
 - [Memphis Courier — Fale Conosco](https://memphiscourier.com.br/fale-conosco/)
-- [universal-parcel-scraper Memphis Courier adapter](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/memphis-courier)
+- [universal-parcel-scraper Memphis Courier 适配器](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/memphis-courier)
 :::

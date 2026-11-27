@@ -33,7 +33,7 @@ As linhas de postagem e triagem interna da Posta Shqiptare aparecem em albanês 
 | `Regjistrimi i informacionit doganor te objektit` | Dados aduaneiros registrados: está com a alfândega local ou retido por ela. |
 | `Objekti u dergua ne zyren destinacion` | Encaminhado do escritório de permuta para a unidade de entrega. |
 | `Objekti u pranua ne zyren e shperndarjes` | Chegou à agência de distribuição. |
-| `Tentative e pasuksesshme ne shperndarjen e objektit` | Tentativa de entrega sem sucesso; pode haver nova tentativa. |
+| `Tentative e pasuksesshme ne shperndarjen e objektit` | Entrega não realizada; pode haver nova tentativa. |
 | `Objekti u dorezua` | Entregue. |
 
 Alguns objetos EMS enviados ao exterior seguem por transportadora parceira, e a Posta Shqiptare repassa essas leituras em albanês:
@@ -50,7 +50,7 @@ O Peek organiza essas leituras em suas próprias etapas: "Recebida pela transpor
 
 ## Recebendo uma encomenda do exterior na Albânia
 
-**Alfândega.** A Posta Shqiptare realiza desembaraço prévio para objetos do exterior com mercadorias acima de €22, ou presentes acima de €44, até €1.000 por item. O volume segue para a agência postal central da cidade de destino e você recebe um aviso por escrito; lá você paga o imposto aduaneiro e a taxa de elaboração da declaração e retira o objeto na hora. Duas páginas da Posta Shqiptare divergem sobre a alíquota: a página aduaneira informa 22,4% do valor declarado para compras on-line acima de €22, enquanto o FAQ cita de 22,4% a 38% sobre o valor declarado acima de €22 (preço mais frete como valor aduaneiro). Só é preciso ir ao posto aduaneiro na filial Transit Centre caso a alfândega retenha o objeto para inspeção ou identifique itens proibidos. Mais detalhes em [encomendas retidas na alfândega](guide:customs).
+**Alfândega.** A Posta Shqiptare realiza desembaraço prévio para objetos do exterior com mercadorias acima de €22, ou presentes acima de €44, até €1.000 por item. O volume segue para a agência postal central da cidade de destino e você recebe um aviso por escrito; lá você paga o imposto aduaneiro e a taxa de elaboração da declaração e retira o objeto na hora. Duas páginas da Posta Shqiptare divergem sobre a alíquota: a página aduaneira informa 22,4% do valor declarado para compras on-line acima de €22, enquanto o FAQ cita de 22,4% a 38% para objetos declarados acima de €22 (preço mais frete como valor aduaneiro). Só é preciso ir ao posto aduaneiro na filial Transit Centre caso a alfândega retenha o objeto para inspeção ou identifique itens proibidos. Mais detalhes em [encomendas retidas na alfândega](guide:customs).
 
 **Prazos de entrega na Albânia.** Padrões da Posta Shqiptare para itens postados antes do último horário de coleta da agência: até as 14h do dia seguinte na mesma cidade, no dia seguinte (em até 24 horas) nas demais cidades e, em média, até 3 dias úteis para vilarejos.
 
@@ -62,7 +62,7 @@ O Peek organiza essas leituras em suas próprias etapas: "Recebida pela transpor
 
 **Prazos internacionais.** Os padrões da Posta Shqiptare para pacotes e encomendas são de 7 a 10 dias úteis em média para a Europa e de 10 a 14 dias úteis para Américas, Ásia e África.
 
-**Quem entrega.** Depois de sair da Albânia, o correio do país de destino assume o objeto, e o rastreador da Posta Shqiptare repassa as leituras desse correio em albanês. Consulte também o rastreamento do seu próprio correio com o mesmo código `AL`: [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), An Post, [Canada Post](carrier:canada-post), [Australia Post](carrier:australia-post) ou NZ Post. Tentativas de entrega e retirada seguem as regras do seu correio: veja [entrega perdida](guide:missed-delivery).
+**Quem entrega.** Depois de sair da Albânia, o correio do país de destino assume o objeto, e o rastreador da Posta Shqiptare repassa as leituras desse correio em albanês. Consulte também o rastreamento do seu próprio correio com o mesmo código `AL`: [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), An Post, [Canada Post](carrier:canada-post), [Australia Post](carrier:australia-post) ou NZ Post. Tentativas de entrega e retirada seguem as regras do seu correio: veja [entrega não realizada](guide:missed-delivery).
 
 **Alfândega na UE.** Como a Albânia fica fora da União Europeia, encomendas enviadas para Irlanda, Itália, Grécia ou qualquer outro país da UE passam pela alfândega. Desde 1º de julho de 2026, compras on-line vindas de fora da UE em pedidos de até €150 pagam imposto aduaneiro da UE de €3 por item. Desde 1º de novembro de 2026, aplica-se também a taxa de manuseio da União de €2 por item, qualquer que seja o valor. Um item corresponde às mercadorias no pacote que compartilham classificação tarifária, descrição e, quando exigido, origem. Em outros países, valem as regras locais.
 
@@ -80,26 +80,26 @@ O Peek organiza essas leituras em suas próprias etapas: "Recebida pela transpor
 
 Canais publicados pela Posta Shqiptare:
 
-- **Telefone:** `+355 682044727`.
-- **E-mail:** `asistence@postashqiptare.al`.
+- **Telefone:** +355 682044727.
+- **E-mail:** asistence@postashqiptare.al.
 - **Sede:** Drejtoria e përgjithshme Posta Shqiptare, Rruga "Reshit Çollaku" nr. 4, Tirana. Horário indicado logo abaixo na página de contato: segunda a quinta-feira das 08:00 às 16:30 e sexta-feira das 08:00 às 14:00 (horário da Albânia).
 - **Reclamações sobre envios internacionais:** mediante formulário na agência onde o objeto foi postado.
 
-A Posta Shqiptare alerta contra mensagens sobre seus serviços que não partem dela: não clique nos links nem informe seus dados. A empresa divulga avisos oficiais apenas em `postashqiptare.al` e em suas redes sociais. Veja [golpes de SMS de entrega](guide:delivery-scam-texts).
+A Posta Shqiptare alerta contra mensagens sobre seus serviços que não partem dela: não clique nos links nem informe seus dados. A empresa divulga avisos oficiais apenas em postashqiptare.al e em suas redes sociais. Veja [golpes de SMS de entrega](guide:delivery-scam-texts).
 
 ## Acompanhe uma encomenda da Posta Shqiptare com o Peek
 
-O [Peek](/) reconhece códigos iniciados por `C`, `E`, `L` ou `R`, seguidos de outra letra, nove dígitos e `AL` com dígito verificador válido como Posta Shqiptare e exibe "Transportadora detectada"; "Alterar" escolhe outra. Com dígito verificador incorreto, avisa "O dígito verificador deste código não confere.": confira o código recebido ou escolha "Rastrear como digitado". Links do rastreador e-Posta também funcionam. Cadastrada na Posta Shqiptare, a encomenda mostra "Aguardando Posta Shqiptare" até a primeira leitura.
+O [Peek](/) reconhece códigos iniciados por `C`, `E`, `L` ou `R`, seguidos de outra letra, nove dígitos e `AL` com dígito verificador válido como Posta Shqiptare e exibe "Transportadora detectada"; "Trocar" escolhe outra. Com dígito verificador incorreto, avisa "O dígito verificador deste código não confere.": confira o código recebido ou escolha "Rastrear como digitado". Links do rastreador e-Posta também funcionam. Cadastrada na Posta Shqiptare, a encomenda mostra "Aguardando Posta Shqiptare" até a primeira leitura.
 
 Códigos terminados em `AL` que começam por outra letra, como `U` ou `V`, não são atribuídos à Posta Shqiptare apenas pelo formato. Cole-os mesmo assim: o Peek acompanha mais de 4.500 transportadoras. Durante a verificação, exibe "Consultando serviços de rastreamento…", consulta primeiro a Posta Shqiptare e mostra "Posta Shqiptare está com esta encomenda." quando ela reconhece o número.
 
-Encomendas destinadas à Albânia com código de outro correio ficam registradas sob aquele correio, e o Peek não consulta a Posta Shqiptare automaticamente. Para acompanhá-las no rastreador da Posta Shqiptare, abra a encomenda, toque em "Alterar transportadora" e escolha Posta Shqiptare: o Peek mantém o histórico enquanto consulta.
+Encomendas destinadas à Albânia com código de outro correio ficam registradas sob aquele correio, e o Peek não consulta a Posta Shqiptare automaticamente. Para acompanhá-las no rastreador da Posta Shqiptare, abra a encomenda, toque em "Trocar transportadora" e escolha Posta Shqiptare: o Peek mantém o histórico enquanto consulta.
 
 O Peek exibe cada linha com a redação original da Posta Shqiptare e identifica leituras no exterior pelo nome do país em inglês. Ele remove nomes de agências que incluam código postal e qualquer trecho após o texto de entrega que possa revelar quem recebeu. Não exibe data estimada de entrega, pois a Posta Shqiptare não fornece essa informação. O Peek interpreta as leituras próprias da Posta Shqiptare no horário da Albânia e determina o fuso das leituras no exterior pelo local informado ou pelas leituras vizinhas.
 
 Quando você rastreia de outro país, o Peek também consulta o correio local com o mesmo código `AL`: USPS, Royal Mail ([Parcelforce](carrier:parcelforce) para códigos iniciados por `E`), An Post, Canada Post, Australia Post, NZ Post, [DHL](carrier:dhl) na Alemanha, [Poste Italiane](carrier:poste-italiane), ELTA na Grécia e outros. Assim que esse correio apresenta uma leitura não anterior à mais recente da Posta Shqiptare, o Peek passa para ele preservando o histórico albanês. A partir de Kosovo, Montenegro ou Turquia, não consulta nenhum outro correio.
 
-Enquanto você mantém a encomenda aberta no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta a Posta Shqiptare diretamente até a cada 10 minutos enquanto o rastreador responder; fora isso, a cada hora. Após dois dias sem novidades (12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora, e a cada 6 horas depois de sete dias em "Etiqueta criada". Após quatro dias sem nova movimentação em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", destaca o dia daquela leitura com "Sem atualização desde …", a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Posta Shqiptare." e o link "Pedir ajuda a Posta Shqiptare"; após três semanas, exibe "Nenhuma novidade há mais de três semanas. Se ainda não chegou, fale com o vendedor. O Peek continua consultando Posta Shqiptare." Alertas: "Todas as movimentações", "Etapas importantes" ou "Somente entrega". O Peek não pode contatar a Posta Shqiptare, o seu correio nem a loja por você.
+Enquanto você mantém a encomenda aberta no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta a Posta Shqiptare diretamente até a cada 10 minutos enquanto o rastreador responder; fora isso, a cada hora. Após dois dias sem novidades (12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora, e a cada 6 horas depois de sete dias em "Etiqueta criada". Após quatro dias sem nova movimentação em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", destaca o dia daquela leitura com "Sem atualizações desde …", a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Posta Shqiptare." e o link "Pedir ajuda a Posta Shqiptare"; após três semanas, exibe "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando Posta Shqiptare." Alertas: "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode contatar a Posta Shqiptare, o seu correio nem a loja por você.
 
 ## Perguntas sobre o rastreamento da Posta Shqiptare
 
@@ -117,7 +117,7 @@ Pelos próprios padrões, dentro da Albânia entrega no dia seguinte entre cidad
 
 ### Qual é o telefone da Posta Shqiptare?
 
-`+355 682044727`, ou e-mail `asistence@postashqiptare.al`. A página de contato indica atendimento de segunda a quinta-feira das 08:00 às 16:30 e sexta-feira das 08:00 às 14:00 logo abaixo do endereço da sede.
++355 682044727, ou e-mail asistence@postashqiptare.al. A página de contato indica atendimento de segunda a quinta-feira das 08:00 às 16:30 e sexta-feira das 08:00 às 14:00 logo abaixo do endereço da sede.
 
 :::sources
 - [Posta Shqiptare: Home](https://www.postashqiptare.al/) – campo de rastreamento, formato do código e agências postais

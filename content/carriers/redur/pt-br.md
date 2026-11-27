@@ -17,7 +17,7 @@ Os números de rastreamento da Redur (*N° Tracking*) têm 14 dígitos numérico
 | `58492716380419` | Código padrão de rastreamento de 14 dígitos da Redur (*NTRACKING*). |
 | `61738492051628` | Exemplo alternativo de código de 14 dígitos da Redur para Espanha, Portugal ou rotas Eurodis. |
 
-Em [redur.es/track-trace/](https://redur.es/track-trace/), o formulário também permite buscar por número de expedição e referências do remetente ou de parceiros, enquanto o rastreamento automático no Peek usa o número de 14 dígitos (`NTRACKING`) ou um link direto `redur.es/track-trace/?...&valor=`. O Peek não identifica a Redur apenas pelo código: um número isolado de 14 dígitos é enviado para DPD, [SEUR](carrier:seur) e outras transportadoras (SEUR primeiro na Espanha); portanto, cole o link da Redur ou escolha Redur manualmente. Veja [formatos de código de rastreamento](guide:tracking-number-formats).
+Em [redur.es/track-trace/](https://redur.es/track-trace/), o formulário também permite buscar por número de expedição e referências do remetente ou de parceiros, enquanto o rastreamento automático no Peek usa o número de 14 dígitos (`NTRACKING`) ou um link direto `redur.es/track-trace/?...&valor=`. O Peek não identifica a Redur apenas pelo código: um número isolado de 14 dígitos é enviado para DPD, [SEUR](carrier:seur) e outras transportadoras (SEUR primeiro na Espanha); portanto, cole o link da Redur ou escolha Redur. Veja [formatos de código de rastreamento](guide:tracking-number-formats).
 
 ## O que significam os status de rastreamento da Redur
 
@@ -32,7 +32,7 @@ A página de rastreamento da Redur exibe uma barra de progresso em 7 etapas acom
 | `PENDIENTE DE FECHA CONCERTADA`, `FECHA DE ENTREGA CONCERTADA` / `BOOKING AGREED DATE` | Aguardando agendamento da data de entrega com o destinatário, ou data de entrega combinada confirmada. | "Em trânsito" |
 | `SALIDA A REPARTO` / `OUT FOR DELIVERY` | No veículo de entrega local da Redur hoje. | "Saiu para entrega" |
 | `RECOGERÁN EN AGENCIA` | Aguardando retirada pelo destinatário na filial de destino da Redur. | "Pronta para retirada" |
-| `DESTINATARIO AUSENTE`, `INCORRECT ADDRESS`, `CERRADO PERMANENTE/TEMPORAL` | Tentativa de entrega sem sucesso por ausência, erro no endereço ou estabelecimento fechado. | "Tentativa de entrega" |
+| `DESTINATARIO AUSENTE`, `INCORRECT ADDRESS`, `CERRADO PERMANENTE/TEMPORAL` | Entrega não realizada por ausência, erro no endereço ou estabelecimento fechado. | "Tentativa de entrega" |
 | `DEVOLUCIÓN A ORIGEN` | Em retorno ao remetente após falha na entrega ou recusa. | "Devolvida ao remetente" |
 | `ENTREGA` / `DELIVERY` | Entregue ao destinatário (ou confirmada pela etapa final ativa na barra de progresso da Redur). | "Entregue" |
 
@@ -44,11 +44,11 @@ De acordo com [Redur](https://redur.es/) e [Serviços da Redur](https://redur.es
 - **Serviço Internacional Europa (*Servicio Internacional*):** saídas diárias pela Europa para remessas B2B e B2C pela rede parceira **Eurodis**. Após aparecer `CARGA CAMION T. INTERNACIONAL`, uma transportadora parceira local da Eurodis realiza a entrega final no país de destino.
 - **Farma com temperatura controlada (*Farma 15-25*):** distribuição entre 15 e 25 °C em conformidade com GDP para remessas farmacêuticas e de saúde.
 
-## Entrega perdida, agendamento pendente e extravios
+## Entrega não realizada, agendamento pendente e extravios
 
 - **`PENDIENTE DE FECHA CONCERTADA` (aguardando data combinada):** a Redur aguarda combinar um dia de entrega com você antes de o pacote sair; `FECHA DE ENTREGA CONCERTADA` ou `BOOKING AGREED DATE` indica que a data já foi agendada. Confira seu telefone e e-mail ou ligue para a Redur com seu código de 14 dígitos.
 - **`DESTINATARIO AUSENTE`, `INCORRECT ADDRESS` ou `RECOGERÁN EN AGENCIA`:** contate rapidamente o vendedor ou o atendimento da Redur informando seu código de 14 dígitos para confirmar o endereço, agendar nova tentativa ou conferir o horário de retirada na filial.
-- **Remessas atrasadas, danificadas ou desaparecidas:** avise primeiro a loja virtual ou o remetente (que detém o contrato com a Redur e pode abrir reclamação formal) e confirme com a Redur em qual filial o pacote está. Veja [entregue, mas não recebida](guide:delivered-not-received), [encomenda danificada](guide:damaged-parcel), [encomenda perdida](guide:lost-parcel), [devolvida ao remetente](guide:returned-to-sender) e [por que o rastreamento para de atualizar](guide:tracking-not-updating).
+- **Remessas atrasadas, danificadas ou desaparecidas:** avise primeiro a loja virtual ou o remetente (que detém o contrato com a Redur e pode abrir um pedido de indenização formal) e confirme com a Redur em qual filial o pacote está. Veja [entregue, mas não recebida](guide:delivered-not-received), [encomenda danificada](guide:damaged-parcel), [encomenda perdida](guide:lost-parcel), [devolvida ao remetente](guide:returned-to-sender) e [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
 ## Atendimento ao cliente da Redur e sede em Madri
 
@@ -63,15 +63,15 @@ Contatos oficiais divulgados em [Redur Contacto](https://redur.es/contacto/) e [
 
 ## Acompanhe uma encomenda da Redur com o Peek
 
-Cole um link direto `redur.es/track-trace/?...&valor=` no [Peek](/) para que o aplicativo reconheça a Redur automaticamente. Como números isolados de 14 dígitos (`58492716380419` ou `61738492051628`, inventados) são compartilhados por muitas transportadoras europeias e a Redur não possui prefixo exclusivo, informe seu código de 14 dígitos e toque em "Alterar" ao adicionar (ou "Alterar transportadora" na tela da encomenda) para escolher **Redur** (pesquisar "Redur Spain", "Redur Portugal" ou "Redur S.A." também encontra); o Peek consulta então diretamente o rastreador da Redur e exibe "Redur está com esta encomenda." ao confirmar.
+Cole um link direto `redur.es/track-trace/?...&valor=` no [Peek](/) para que o aplicativo reconheça a Redur automaticamente. Como números isolados de 14 dígitos (`58492716380419` ou `61738492051628`, inventados) são compartilhados por muitas transportadoras europeias e a Redur não possui prefixo exclusivo, informe seu código de 14 dígitos e toque em "Trocar" ao adicionar (ou "Trocar transportadora" na tela da encomenda) para escolher **Redur** (pesquisar "Redur Spain", "Redur Portugal" ou "Redur S.A." também encontra); o Peek consulta então diretamente o rastreador da Redur e exibe "Redur está com esta encomenda." ao confirmar.
 
 O Peek lê o rastreador da Redur e mostra a etapa ("Etiqueta criada", "Recebida pela transportadora", "Em trânsito", "Saiu para entrega", "Pronta para retirada", "Tentativa de entrega", "Devolvida ao remetente", "Entregue"), a redação original da Redur e a filial. Quando a última etapa da barra de progresso da Redur aparece ativa, o Peek marca o volume como entregue. A Redur envia horários sem fuso: o Peek interpreta cada leitura no fuso horário da filial (Madri para `ALGETE`, Lisboa para `LISBOA`, Ilhas Canárias para `LAS PALMAS`) e usa o fuso da leitura vizinha se não conseguir localizar o depósito, convertendo tudo para o relógio do seu aparelho; `DOCUMENTACION` mantém apenas o dia. O Peek não armazena a quantidade de volumes. O rastreador da Redur não informa data estimada de entrega, peso, nome do serviço, horário próprio de entrega nem código de parceiro.
 
 Enquanto você mantém a encomenda aberta no Peek, ou no dia da entrega com notificações ligadas, o Peek verifica até a cada 10 minutos; no dia em que a Redur registra `SALIDA A REPARTO` ou `OUT FOR DELIVERY`, consulta a cada 2 minutos a partir das 6h no horário do depósito da leitura mais recente, enquanto o rastreador da Redur responder. Fora isso, verifica de hora em hora. Após 12 horas apenas em "Etiqueta criada" ou "Recebida pela transportadora", ou dois dias sem novidade, consulta de hora em hora de qualquer forma, e a cada 6 horas depois de sete dias em "Etiqueta criada". Quando o rastreador da Redur não responde e o Peek acompanha somente por serviços de rastreamento, consulta de hora em hora, a cada 3 horas após um dia quieto e até a cada 15 minutos no dia da saída para entrega.
 
-Quando a leitura mais recente tem quatro dias e o pacote permanece em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek destaca o dia daquela movimentação, como "Sem atualização desde seg 12 out". A página passa a dizer: "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Redur.", com um link "Pedir ajuda a Redur" para a página de contato da Redur. Após três semanas sem novas leituras, mostra: "Nenhuma novidade há mais de três semanas. Se ainda não chegou, fale com o vendedor. O Peek continua consultando Redur."
+Quando a leitura mais recente tem quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza a data dessa leitura, como "Sem atualizações desde seg 12 out". A página do pacote então exibe "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Redur.", com o link "Pedir ajuda a Redur" para a página de contato da Redur. Após três semanas sem novas leituras, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando Redur."
 
-Você pode escolher alertas para "Todas as movimentações", "Etapas importantes" ou "Somente entrega". O Peek apenas monitora atualizações de rastreamento e não pode agendar entregas, alterar o endereço nem contatar a Redur em seu nome.
+Você pode escolher alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek apenas monitora atualizações de rastreamento e não pode agendar entregas, alterar o endereço nem contatar a Redur em seu nome.
 
 ## Perguntas sobre o rastreamento da Redur
 

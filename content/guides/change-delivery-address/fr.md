@@ -42,7 +42,7 @@ Pas de numéro, ou une option qui demande un compte gratuit chez le transporteur
 
 ## Changer l'adresse de livraison chez Colissimo, DPD, bpost et La Poste suisse
 
-Pour un colis [Colissimo](carrier:la-poste), La Poste (juin 2025) indique qu'il est possible de modifier la livraison jusqu'à minuit la veille. Pour une nouvelle adresse dans une autre ville, seuls La Poste suisse (Suisse et Liechtenstein) et DPD Belgique l'acceptent ; ailleurs, les options restent proches de l'adresse initiale :
+Pour une nouvelle adresse dans une autre ville, seuls La Poste suisse (Suisse et Liechtenstein) et DPD Belgique l'acceptent ; ailleurs, les options restent proches de l'adresse initiale :
 
 | Transporteur | Où le colis peut aller à la place | Coût |
 | --- | --- | --- |

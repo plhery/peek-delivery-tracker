@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-Em Portugal, a MediaMarkt passou a chamar-se Darty (do grupo Fnac Darty), e o histórico de encomendas e garantias da MediaMarkt transitou para darty.pt. Na entrega ao domicílio (em Portugal continental, de segunda a sexta das 8h às 19h em artigos standard e segunda a sábado das 8h às 20h em volumosos), acompanhas o envio pelo link no e-mail da transportadora ou em «Minha conta» em darty.pt; se precisares de apoio, a Darty atende no 210 042 210.
+Em Portugal, a MediaMarkt passou a chamar-se Darty (do grupo Fnac Darty): o histórico de encomendas passou para darty.pt, e as garantias da MediaMarkt continuam válidas. Na entrega ao domicílio (em Portugal continental, de segunda a sexta das 8h às 19h em artigos standard e segunda a sábado das 8h às 20h em volumosos), acompanhas o envio pelo link no e-mail da transportadora ou em «Minha conta» em darty.pt; se precisares de apoio, a Darty atende no 210 042 210.
 
 ## Que transportadora entrega a minha encomenda MediaMarkt ou Darty?
 

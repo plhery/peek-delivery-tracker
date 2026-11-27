@@ -94,7 +94,7 @@ YunExpress ne nomme aucun transporteur partenaire unique sur ses pages français
 
 ### YunExpress, c'est quoi ?
 
-Une société chinoise de logistique pour le commerce en ligne (Shenzhen Qianhai YunExpress Logistics Co., Ltd.), fondée à Shenzhen en 2014, qui dessert plus de 220 pays et régions et s'appuie sur sa plateforme de suivi officielle yuntrack.com (en anglais, jusqu'à 100 numéros YT sans compte).
+Une société chinoise de logistique pour le commerce en ligne (Shenzhen Qianhai YunExpress Logistics Co., Ltd.), fondée à Shenzhen en 2014, qui dit desservir plus de 220 pays et régions et s'appuie sur sa plateforme de suivi officielle yuntrack.com (en anglais, jusqu'à 100 numéros YT sans compte).
 
 ### Combien de temps met un colis YunExpress pour arriver en France ?
 

@@ -96,9 +96,9 @@ Peek puts each scan on a map. For notifications, choose "Every scan", "Important
 
 ## Questions about SpeedPAK tracking
 
-### What does "Destination DC arrival" or "Departed from Destination DC" mean?
+### What does "Destination DC arrival" mean?
 
-It means your SpeedPAK parcel has reached or left a destination distribution centre (depot) in your country or region, after clearing import customs and ahead of handover to the last-mile carrier (`LM Carrier`).
+It means your SpeedPAK parcel has reached a delivery depot (distribution centre) in your country, after import customs and before `Out for delivery`.
 
 ### What is eBay SpeedPAK?
 

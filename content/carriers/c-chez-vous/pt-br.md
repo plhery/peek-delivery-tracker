@@ -63,13 +63,13 @@ Quando ainda não há data definida, o campo exibe "À définir" (a definir) e a
 
 Se o motorista avaliar que são necessárias duas pessoas (escada em caracol, falta de elevador), a C Chez Vous marca um novo agendamento com dupla de motoristas.
 
-**Entrega perdida.** O motorista deixa um aviso ("avis de passage") e não retorna no mesmo dia. A C Chez Vous informa que o atendimento entrará em contato em até 24 horas para combinar um novo horário.
+**Entrega não realizada.** O motorista deixa um aviso ("avis de passage") e não retorna no mesmo dia. A C Chez Vous informa que o atendimento entrará em contato em até 24 horas para combinar um novo horário.
 
 **Pontos de retirada.** A C Chez Vous conta com 400 pontos de retirada na França. Você recebe SMS e e-mail quando o pedido chega e tem 15 dias para retirar.
 
 ## Entrega C Chez Vous atrasada, danificada ou incompleta
 
-Seu contrato é com a loja. A C Chez Vous não publica formulário nem prazo de reclamação, portanto, para problemas ligados ao produto, comece sempre pela loja.
+Seu contrato é com a loja. A C Chez Vous não publica formulário nem prazo para pedido de indenização, portanto, para problemas ligados ao produto, comece sempre pela loja.
 
 **Não entregue no dia marcado.** Aguarde o fim da janela agendada e ligue para o atendimento. A equipe aguarda o relatório de fim de rota do motorista. Se a página ficar dias sem mudar, veja [rastreio sem atualização](guide:tracking-not-updating).
 
@@ -93,13 +93,13 @@ A C Chez Vous não faz parte da GEODIS. A Geopost, do grupo La Poste, detém 80%
 
 ## Como acompanhar um pedido C Chez Vous no Peek
 
-Cole um número de pedido no formato `TRXN54BD83` e o [Peek](/) consulta a página da C Chez Vous, confirmando que a transportadora tem a encomenda assim que ela reconhece o pedido. Um link de cchezvous.fr (`/suivi-colis/` seguido da referência) funciona para qualquer formato. Outras referências, inclusive a longa com o código postal, não identificam a transportadora ao digitar: toque em "Alterar" e selecione C Chez Vous, ou cole o link.
+Cole um número de pedido no formato `TRXN54BD83` e o [Peek](/) consulta a página de pedidos da C Chez Vous e mostra "C Chez Vous está com esta encomenda." assim que ela reconhece o pedido. Um link de cchezvous.fr (`/suivi-colis/` seguido da referência) funciona para qualquer referência. Outras referências, inclusive a longa com o código postal, não ficam com nenhuma transportadora ao digitar: toque em "Trocar" e selecione C Chez Vous, ou cole o link.
 
 No Peek, o status aparece como "Etiqueta criada" enquanto o pedido está registrado e em agendamento, "Em trânsito" enquanto é preparado e segue ao depósito regional e, por fim, "Entregue". O histórico adiciona uma linha a cada mudança de status, conforme a etapa exibida naquele momento (pedido registrado ou agendamento, em preparação ou a caminho do depósito regional, e entregue). Em entregas em ponto de retirada, o histórico mostra o trajeto até o ponto, depois "Pronta para retirada" quando fica disponível e "Entregue" após a coleta. Quando o pedido tem vários volumes, o Peek reflete o menos avançado. O dia agendado aparece como previsão de entrega até a conclusão, com a janela de horário quando a página informa. Como a C Chez Vous não fornece histórico, locais nem horários, cada linha recebe a data em que o Peek a detectou pela primeira vez.
 
 Alguns limites: `En livraison` continua como "Em trânsito" no Peek, pois o próprio texto da C Chez Vous indica que o pedido ainda vai ao depósito regional e a página não tem etapa de saída para entrega. O Peek também não lê `Annulée`: um pedido cancelado apenas deixa de avançar.
 
-O Peek lê seu nome (em "Destinatário") e o endereço de entrega, omitindo a loja, seu telefone, seu e-mail e os itens comprados. Enquanto o pedido estiver aberto, ou no dia da entrega com notificações ligadas, o Peek verifica até a cada 10 minutos; nos demais momentos, de hora em hora, podendo notificar em "Cada atualização", "Etapas importantes" ou "Somente entrega". Sem etapa de saída para entrega, ele não ativa o intervalo de 2 minutos no dia da entrega, e "Somente entrega" avisa apenas na conclusão; "Etapas importantes" também avisa quando um pedido em ponto de retirada fica pronto. Após dois dias sem novidades (12 horas enquanto ainda estiver em "Etiqueta criada" ou "Recebida pela transportadora"), o Peek verifica a cada hora e, após sete dias em "Etiqueta criada" sem novidades, a cada 6 horas, exceto no dia da entrega. O Peek não pode reagendar sua entrega.
+O Peek lê seu nome (em "Destinatário") e o endereço de entrega, omitindo a loja, seu telefone, seu e-mail e os itens comprados. Enquanto o pedido estiver aberto, ou no dia da entrega com notificações ligadas, o Peek verifica até a cada 10 minutos; nos demais momentos, de hora em hora, podendo notificar em "Cada movimentação", "Etapas importantes" ou "Só a entrega". Sem etapa de saída para entrega, ele não ativa o intervalo de 2 minutos no dia da entrega, e "Só a entrega" traz apenas o alerta de "Entregue"; "Etapas importantes" também avisa quando um pedido em ponto de retirada fica pronto. Após dois dias sem novidades (12 horas enquanto ainda estiver em "Etiqueta criada" ou "Recebida pela transportadora"), o Peek verifica a cada hora e, após sete dias em "Etiqueta criada" sem novidades, a cada 6 horas, exceto no dia da entrega. O Peek não pode reagendar sua entrega.
 
 ## Perguntas sobre o rastreio C Chez Vous
 
@@ -116,7 +116,7 @@ A C Chez Vous não divulga telefone de motoristas. O motorista pode ligar cerca 
 Sim, pode entregar. A C Chez Vous realiza entregas de segunda a domingo, conforme a sua região e o serviço vendido pela loja.
 
 :::sources
-- [C Chez Vous: Foire aux questions](https://www.cchezvous.fr/foire-aux-questions) – serviços, janelas, dias de entrega, alterações, cancelamento, documento, entrega perdida, 15 dias em ponto de retirada, danos, devoluções, telefone, horários, Acceo
+- [C Chez Vous: Foire aux questions](https://www.cchezvous.fr/foire-aux-questions) – serviços, janelas, dias de entrega, alterações, cancelamento, documento, entrega não realizada, 15 dias em ponto de retirada, danos, devoluções, telefone, horários, Acceo
 - [C Chez Vous: Suivi colis](https://www.cchezvous.fr/suivi-colis) – número do pedido por e-mail ou SMS, formatos de referência, apenas em francês, pedido não encontrado
 - [C Chez Vous: tracking page script](https://www.cchezvous.fr/js/app.js?id=af447e35a9b9ba1be71cd68f55bfa96f) – títulos e textos das etapas, entrega em domicílio e ponto de retirada, botões da página
 - [C Chez Vous: Nos solutions](https://www.cchezvous.fr/solutions) – C Devant, C Dedans, C Installé, janela de 5 horas, 400 pontos de retirada

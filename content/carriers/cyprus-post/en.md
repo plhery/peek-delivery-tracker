@@ -1,12 +1,12 @@
 ---
 title: Cyprus Post tracking: numbers, statuses and customs
-description: Track a Cyprus Post item: what its 13-character number tells you, what the English UPU statuses mean, EU charges on goods from outside the EU and where to complain.
+description: Track and trace Cyprus Post (Department of Postal Services) items: 13-character CY and foreign S10 numbers, UPU tracking statuses, EU customs fees and OCECPR.
 slug: cyprus-post-tracking
 published: 2026-10-13
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Cyprus Post (Κυπριακά Ταχυδρομεία), the Department of Postal Services, is the national post of the Republic of Cyprus. Track an item on Cyprus Post's website, cypruspost.post, or paste the number in the box above. No number at all? See [where to find a tracking number](guide:find-tracking-number).
+Track and trace a Cyprus Post parcel or registered item on cypruspost.post or in the box above using your 13-character S10 postal number (ending in `CY` or the foreign post's country code). Cyprus Post (Κυπριακά Ταχυδρομεία), the Department of Postal Services, is the designated national postal operator of the Republic of Cyprus; if you have no number, see [where to find a tracking number](guide:find-tracking-number).
 
 ## Cyprus Post tracking number
 
@@ -67,21 +67,25 @@ Peek shows Cyprus Post's statuses as written, the office or facility and country
 
 ## Questions about Cyprus Post tracking
 
+### How do I track and trace an international parcel with Cyprus Post?
+
+Enter the 13-character S10 postal number (two letters, nine digits and `CY`, or the sending country's two-letter code) on cypruspost.post or in Peek. In the English scan history, `(Otb)` marks events in the origin country and `(Inb)` marks events in the destination country.
+
 ### Is Cyprus Post the Department of Postal Services?
 
-Yes. The Universal Postal Union lists Cyprus's designated operator as the Department of Postal Services (Cyprus Post), the state service responsible for providing postal services, and the postal regulator, OCECPR, names Cyprus Post as the universal postal service provider.
+Yes. Cyprus Post is the Republic of Cyprus's Department of Postal Services, listed by the Universal Postal Union as the designated operator and named by OCECPR as the universal postal service provider.
 
 ### What does CY at the end of the number mean?
 
-That the number was issued under Cyprus's authority. Under the UPU's S10 standard, the last two letters are the code of the country under whose authority the number was issued, so they don't reliably show where the item was posted. Peek asks Cyprus Post about these numbers.
+It indicates the 13-character S10 number was issued under Cyprus's authority under the UPU S10 standard (the last two letters identify the issuing country, not necessarily where the parcel was posted). Peek asks Cyprus Post about `CY` numbers.
 
 ### Can I track an item with a U number?
 
-Not as a tracked item. The S10 standard gives U numbers to letter-post items with goods that travel without tracking for the customer: the number gives visibility in the supply chain, for example in the electronic data sent ahead of the item. Peek still asks Cyprus Post about a U number ending `CY`.
+Not as a customer-tracked item. Under the UPU S10 standard, `U` prefixes identify letter-post items containing goods that travel without customer tracking, though Peek still queries Cyprus Post for `U…CY` numbers.
 
 ### How do I complain about Cyprus Post?
 
-Write to Cyprus Post first. If it doesn't answer within 15 days, or its answer doesn't satisfy you, complain to the postal regulator, the Office of the Commissioner for Electronic Communications and Postal Regulation (OCECPR). You can do it online; its website is in Greek, but it offers a complaint form in English.
+Write to Cyprus Post first. If it does not reply within 15 days, or you are unhappy with its reply, you can submit an online complaint (with an English form available) to the postal regulator, OCECPR.
 
 :::sources
 - [Universal Postal Union: S10, identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – 13 characters, first letters R, C, E, L and U, check digit, issuing country's code

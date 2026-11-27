@@ -1,13 +1,13 @@
 ---
 title: Prazos de envio no Natal: datas limite dos CTT, DPD e GLS
-description: Até quando enviar uma encomenda para chegar a tempo do Natal com os CTT, a DPD ou a GLS, no continente, nos Açores, na Madeira e para o estrangeiro.
+description: Prazos de envio de encomendas no Natal em Portugal: CTT (Correio Azul, Normal, Encomenda Postal e CTT Now), DPD e GLS no continente, Madeira, Açores e Europa.
 slug: prazos-envio-encomendas-natal
 picture: Uma página de calendário com um dia de dezembro assinalado com um círculo, uma carrinha de entregas a levar uma encomenda atada com uma fita vermelha debaixo de neve, e o Pip a correr ao lado.
 published: 2026-10-09
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Os [CTT](carrier:ctt), a DPD e a GLS ainda não publicaram datas limite para o Natal de 2026, e em 2025 também não publicaram nenhuma. Os CTT dão prazos indicativos: cerca de 1 dia útil com Correio Azul no continente, 3 com Correio Normal ou Encomenda Postal, e 7 a 15 com Encomenda Postal para os Açores, por isso conta para trás a partir de quinta-feira, 24 de dezembro, e envia com folga. As tabelas não têm, portanto, datas limite, nem de 2026 nem de 2025: dão os prazos indicativos de cada transportadora.
+Os [CTT](carrier:ctt), a DPD e a GLS ainda não publicaram datas limite para o Natal de 2026 (nem publicaram nenhuma em 2025), pelo que deves contar para trás a partir de quinta-feira, 24 de dezembro, usando os prazos indicativos de cada serviço. No continente, os CTT indicam cerca de 1 dia útil no Correio Azul e 3 no Correio Normal ou na Encomenda Postal, a DPD o dia útil seguinte e a GLS 24 horas úteis; para a Madeira, os Açores e o estrangeiro os prazos são mais longos (7 a 15 dias úteis na Encomenda Postal para os Açores), por isso envia com folga. As tabelas abaixo reúnem esses prazos indicativos, sem datas limite oficiais de 2026 nem de 2025.
 
 ## Portugal continental: CTT, DPD e GLS
 
@@ -41,7 +41,7 @@ As cartas para o Pai Natal não precisam de selo: os CTT respondem a todas, desd
 
 ## Açores e Madeira: conta mais dias
 
-Para as ilhas também não há datas limite. Nas páginas do correio e da Encomenda Postal, os CTT avisam que, para os Açores e a Madeira, os prazos «podem ser alargados em função das limitações de transporte».
+Para os Açores e a Madeira também não há datas limite de Natal, e os CTT avisam que os prazos de correio e Encomenda Postal «podem ser alargados em função das limitações de transporte». Envia mais cedo do que para o continente:
 
 | Transportadora | Serviço | Enviar até |
 | --- | --- | --- |
@@ -70,7 +70,7 @@ Antes de embrulhar, vê isto:
 
 ## Enviar uma encomenda para o estrangeiro no Natal
 
-Para o estrangeiro também não há datas de Natal, nem por país: nenhuma das três as publicou em 2025 nem até agora. Os CTT pedem que planeies os presentes com antecedência e que consultes os prazos recomendados, «principalmente se for enviar encomendas internacionais». Os prazos do Correio Azul Internacional e do Expresso Internacional não incluem o desalfandegamento, quando é preciso.
+Nenhuma das três transportadoras publicou datas limite de Natal para envios internacionais (nem em 2025 nem em 2026), e os prazos do Correio Azul Internacional e do Expresso Internacional não incluem desalfandegamento. Os CTT recomendam planear os presentes com antecedência, «principalmente se for enviar encomendas internacionais»:
 
 | Transportadora e serviço | Destino | Prazo indicativo |
 | --- | --- | --- |

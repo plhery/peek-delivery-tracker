@@ -1,13 +1,13 @@
 ---
 title: Fecha límite de envío en Navidad: Correos, GLS, SEUR y MRW
-description: Hasta qué día enviar un paquete para que llegue en Navidad o Reyes con Correos, GLS, MRW, NACEX o Correos Express, según sus propias páginas.
+description: Plazos de entrega en Navidad y Reyes en España: tiempos de Correos (Paq Estándar y Premium), GLS, Correos Express, MRW y NACEX en Península, islas y Europa.
 slug: fecha-limite-envio-paquetes-navidad
 picture: Una hoja de calendario con un día de diciembre rodeado con un círculo, una furgoneta de reparto que lleva un paquete atado con un lazo rojo bajo la nieve y Pip corriendo a su lado.
 published: 2026-10-09
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-GLS, Correos, Correos Express, MRW y NACEX aún no han publicado sus fechas límite para la Navidad de 2026, y de [SEUR](carrier:seur) no hemos encontrado ninguna: consúltala en su web antes de enviar. En la web de Correos no hay tabla de Navidad, ni de este año ni del pasado: con Correos, haz la cuenta con sus plazos de entrega. De 2025, la única fecha oficial que hemos encontrado es la de [GLS](carrier:gls-es): enviar como tarde el lunes 22 de diciembre para entregar en la Península el miércoles 24. Por tanto, ninguna fecha límite de esta guía es de 2026: las tablas dan las de 2025 donde las hay y, si no, el plazo de entrega de cada empresa.
+Para calcular los plazos de entrega en Navidad de 2026 en España, ten en cuenta que Correos, GLS, Correos Express, MRW y NACEX aún no han publicado sus fechas límite de este año (y de [SEUR](carrier:seur) no hemos encontrado ninguna en su web). Usa como referencia el plazo normal de cada servicio en la Península —Paq Estándar en 48 a 72 horas, Paq Premium en 24 a 48 horas, Paq 24 hasta 24 horas, MRW Urgente 19 y NACEX 19:00 H al siguiente día laborable, o GLS en 24/48 horas laborables— y añade margen para Baleares, Canarias, Ceuta, Melilla, Reyes y el extranjero. Ninguna fecha límite de esta guía es de 2026: las tablas recogen las de 2025 donde existían y los plazos indicativos de cada empresa.
 
 ## España: Correos, GLS, SEUR, MRW, NACEX y Correos Express
 
@@ -24,7 +24,7 @@ La página de Navidad de GLS sigue titulada «Navidad 2025: Plazos de entrega».
 
 ### Cuánto tarda cada una en la Península
 
-Sin fecha límite, cuenta hacia atrás con el plazo normal que publica cada una:
+Mientras no haya fechas límite de Navidad de 2026, calcula hacia atrás con el plazo habitual de entrega que publica cada transportista:
 
 | Empresa | Servicio | Plazo que indica |
 | --- | --- | --- |
@@ -60,7 +60,7 @@ Además está la aduana: los envíos a Canarias, Ceuta y Melilla tienen trámite
 
 ## ¿Y para Reyes?
 
-Si el regalo es para Reyes, el miércoles 6 de enero de 2027, tampoco hay fechas nuevas. Las del año pasado:
+Para regalos de Reyes (miércoles 6 de enero de 2027) tampoco se han anunciado fechas límite de 2026; los plazos de referencia y fechas publicadas el año pasado son estos:
 
 | Empresa | Servicio | Envía como tarde |
 | --- | --- | --- |

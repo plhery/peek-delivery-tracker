@@ -1,15 +1,17 @@
 ---
 title: Amazon order tracking: find your tracking number
-description: Where Amazon shows your parcel's carrier and tracking number, and how to follow it in Peek, by hand or with ChatGPT or Claude doing it for you.
+description: How to track your Amazon shipment: where to find Delivery By and your Tracking ID in Your Orders, Shipped with Amazon (TBA/UK numbers), and tracking in Peek.
 slug: amazon-order-tracking
 picture: A phone showing an order's progress, two vans passing a parcel between them, and Pip watching.
 published: 2026-10-16
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Amazon shows each parcel's carrier and tracking number under Your Orders, then Track package. Copy the number into [Peek](/) and you follow the parcel next to all your others. It works the same way on every Amazon site.
+To track your Amazon shipment, open **Returns & Orders** (in the app, **Your Orders**) and select **Track package**: Amazon shows the carrier after "Delivery By" and the Tracking ID beneath it, distinct from your 17-digit order number. Copy that Tracking ID into [Peek](/) to follow your Amazon parcel alongside all your other deliveries across every Amazon site; "Shipped with Amazon" orders (`TBA` or country-code + 10 digits) sometimes track only inside your Amazon account.
 
 ## Where's the tracking number on Amazon?
+
+Amazon's dispatch emails don't include the Tracking ID — you'll find it only under **Returns & Orders** (or **Your Orders** in the app) → **Track package**, once the carrier has the parcel.
 
 :::steps
 - Open Your Orders | On the website, select Returns & Orders at the top right. In the Amazon app, tap the person icon, then Your Orders.

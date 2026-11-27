@@ -1,13 +1,13 @@
 ---
 title: Colis livré mais non reçu : que faire, étape par étape
-description: Le suivi dit « livré » mais rien n'est arrivé ? Où chercher, combien de temps attendre, qui est responsable et les délais d'eBay, Etsy et Vinted.
+description: Colis marqué livré mais non reçu (La Poste, Colis Privé, bpost, DPD) : où vérifier, qui est responsable en France, Belgique et Suisse, et délais de litige.
 slug: colis-livre-mais-non-recu
 picture: Une porte fermée, une notification avec une coche verte, la silhouette d'un colis en pointillés sur le paillasson et Pip, inquiet.
 published: 2026-10-09
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Si le suivi indique « livré » mais que tu n'as rien reçu, ne considère pas encore le colis comme perdu : « livré » est un scan sur le terminal du livreur, pas la preuve que le colis est entre tes mains. Cherche une photo ou un nom dans le suivi, fais le tour des endroits habituels et laisse passer un jour. S'il manque toujours, adresse-toi au vendeur, pas au transporteur : en France et en Belgique, un colis acheté à un professionnel reste à ses risques tant que tu ne l'as pas en main.
+Si ton colis est marqué « livré » mais que tu n'as rien reçu (La Poste, Colis Privé, bpost ou La Poste suisse), commence par vérifier la preuve dans le suivi, la boîte aux lettres, tes voisins, le gardien ou le point relais : « livré » n'est qu'un scan du livreur, pas une preuve de remise en main propre. S'il reste introuvable le lendemain, contacte d'abord le vendeur (et réclame chez La Poste au 3631 ou sur laposte.fr si besoin) : en France (art. L221-15) et en Belgique (art. VI.44), le vendeur professionnel reste responsable jusqu'à ce que tu aies le colis en main.
 
 ## Pourquoi mon colis est indiqué livré alors que je n'ai rien reçu ?
 
@@ -97,7 +97,7 @@ Commande passée sur AliExpress, Temu ou Shein ? Leurs délais sont dans [suivre
 
 ## Peut-on réclamer directement au transporteur ?
 
-Parfois, mais [l'indemnisation va en général à l'expéditeur](guide:lost-parcel) : passer par le vendeur est plus rapide.
+Oui chez La Poste (3631 ou laposte.fr), Colis Privé ou La Poste suisse (mais pas chez bpost, où seul l'expéditeur peut ouvrir une enquête) ; comme [l'indemnisation va en général à l'expéditeur](guide:lost-parcel), passer par le vendeur reste plus rapide.
 
 | Transporteur | Ce que tu peux faire | Délai |
 | --- | --- | --- |

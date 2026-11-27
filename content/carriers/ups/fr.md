@@ -1,12 +1,12 @@
 ---
 title: UPS tracking : suivi de colis, statuts et livraison
-description: Suivre un colis UPS : à quoi ressemble le numéro 1Z, ce que veulent dire Exception et les autres scans, Access Point, frais de douane et tes droits en cas de perte.
+description: Suivre un colis UPS (UPS tracking) : numéro 1Z à 18 caractères, statuts Exception et Access Point en français, frais de douane et recours en France ou Belgique.
 slug: ups-tracking-suivi-colis
 published: 2026-10-13
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Les numéros de suivi UPS (United Parcel Service) commencent en général par `1Z`. Pour suivre ton colis, colle le numéro ou un lien de suivi UPS dans le champ ci-dessus ; la page de suivi de UPS elle-même se trouve sur ups.com.
+Pour suivre un colis UPS (UPS tracking), colle ton numéro de suivi commençant par `1Z` (18 caractères) ou un lien ups.com dans le champ ci-dessus — ou sur ups.com. Tu y lis les scans UPS (`Exception`, `Out For Delivery Today`, `Delivered to UPS Access Point™`) traduits en étapes françaises, avec le lieu de chaque scan, le point Access Point et les règles de douane ou de recours en France, en Belgique et en Suisse.
 
 ## Numéro de suivi UPS : où le trouver et à quoi il ressemble
 
@@ -76,21 +76,25 @@ Peek ne reprend ni le nom de la personne qui a signé, ni ton adresse, ni la pre
 
 ## Questions sur le suivi UPS
 
+### Comment suivre un colis UPS (UPS tracking) ?
+
+Copie le numéro à 18 caractères commençant par `1Z` depuis l'e-mail d'expédition ou la page de commande de la boutique (ou un lien ups.com contenant `tracknum=`), puis colle-le sur ups.com ou dans Peek pour voir l'étape en français, la carte des scans et l'adresse du point UPS Access Point.
+
 ### Pourquoi mon numéro de suivi UPS est-il refusé ?
 
-Le plus souvent, il est mal saisi : le dernier caractère d'un numéro `1Z` est une clé de contrôle, une seule erreur la rend en général fausse, et UPS refuse le numéro. Il peut aussi appartenir à un autre transporteur : regarde lequel l'e-mail de la boutique nomme.
+Le plus souvent à cause d'une faute de frappe : le dernier caractère d'un numéro `1Z` est une clé de contrôle, une seule erreur l'invalide et UPS refuse le numéro. Vérifie aussi quel transporteur est nommé dans l'e-mail de la boutique.
 
 ### Au bout de combien de temps le suivi UPS s'affiche-t-il ?
 
-Le premier scan, `Shipper created a label, UPS has not received the package yet.`, apparaît dès que l'expéditeur a créé l'étiquette. Le suivi n'avance qu'une fois que l'expéditeur a déposé le colis ou que UPS est venu le chercher (`Drop-Off`, `Pickup Scan`).
+Le premier scan (`Shipper created a label, UPS has not received the package yet.`) apparaît dès la création de l'étiquette, mais le trajet ne démarre qu'après le dépôt ou l'enlèvement (`Drop-Off`, `Pickup Scan`).
 
 ### Puis-je modifier une livraison UPS dans Peek ?
 
-Non : Peek ne fait que lire le suivi de UPS. Les changements que tu fais auprès de UPS apparaissent dans les scans, par exemple `The package will be delivered to the UPS Access Point™ location requested by the receiver.`
+Non : Peek lit uniquement le suivi UPS. Toute modification demandée auprès de UPS s'affiche ensuite dans l'historique, comme `The package will be delivered to the UPS Access Point™ location requested by the receiver.`
 
 ### Un SMS de UPS, c'est une arnaque ?
 
-Ça peut l'être. Cybermalveillance.gouv.fr signale de faux SMS et e-mails au nom de transporteurs, UPS compris, qui annoncent un problème de livraison ou des frais à payer (frais de port, TVA, frais de douane) et renvoient vers un faux site qui demande ta carte bancaire. Ne clique pas sur le lien : vérifie le vrai suivi toi-même, sur ups.com ou dans Peek, ou contacte directement le transporteur. De vrais frais d'importation apparaissent dans le suivi, sous forme de scans de douane. En France, signale le SMS au 33700 (gratuit). Plus d'infos dans [arnaque colis par SMS](guide:delivery-scam-texts).
+Ça peut l'être : Cybermalveillance.gouv.fr signale de faux SMS et e-mails au nom de UPS réclamant des frais de port, de TVA ou de douane via un faux site bancaire. Vérifie toujours toi-même sur ups.com ou dans Peek (les vrais frais apparaissent en scans de douane), et signale le SMS au 33700 en France. Plus d'infos dans [arnaque colis par SMS](guide:delivery-scam-texts).
 
 :::sources
 - [Douane : Droit de douane forfaitaire de 3 euros sur les ventes à distance de biens importés](https://www.douane.gouv.fr/fiche/droit-de-douane-forfaitaire-de-3-euros-sur-les-ventes-distance-de-biens-importes) – 3 € par article jusqu'à 150 €, règlement de l'UE en vigueur depuis le 1er juillet 2026

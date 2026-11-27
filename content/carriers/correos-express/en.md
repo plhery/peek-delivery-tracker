@@ -1,12 +1,12 @@
 ---
 title: Correos Express tracking: statuses in English and contact
-description: Track a Correos Express parcel in Spain or Portugal: the 16- or 23-digit number, its Spanish statuses in plain English, missed deliveries and who to call.
+description: Track a Correos Express parcel in Spain, Portugal or Europe: 16- or 23-digit numbers vs Correos, Spanish statuses in English, Punto Correos pickup and phones.
 slug: correos-express-tracking
 published: 2026-10-10
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Correos Express is the express parcel company of Spain's Correos group, delivering across Spain and Portugal; it isn't [Correos](carrier:correos-spain), the post office. Type your number into its Spanish-language [tracking page](https://s.correosexpress.com/) or paste it in the box above. The sender, usually the shop, registers the parcel with Correos Express, so ask the shop if you have no number.
+Track a Correos Express parcel across Spain, Portugal and Europe by pasting your 16- or 23-digit all-numeric shipment number in the box above or on [s.correosexpress.com](https://s.correosexpress.com/). Correos Express is the urgent-parcel carrier of Spain's Correos group and uses different numbers and tracking from [Correos](carrier:correos-spain), the national post office (whose codes include letters); for phone help in Spain call 900 122 333 (or 913 277 020), and in Portugal 229 762 810.
 
 ## Correos or Correos Express: which number do you have?
 
@@ -89,21 +89,25 @@ Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local 
 
 ## Questions about Correos Express tracking
 
+### Is Correos Express tracking the same as Correos tracking?
+
+No. Although Correos is Correos Express's parent company, they use separate numbers and trackers: Correos Express numbers are 16 or 23 digits with no letters (`s.correosexpress.com`), while [Correos](carrier:correos-spain) postal numbers combine letters and digits (such as `…ES` or `PR…C`) and have an English tracker on correos.es.
+
 ### What is Correos Express?
 
-It's the Correos group's urgent-parcel company; Correos, its parent, runs the universal postal service. Correos Express says it reaches anywhere on the Iberian Peninsula in 24 hours, and mainland Portugal from Spain usually in 24 to 48.
+It is the Correos group's urgent-parcel company, delivering across the Iberian Peninsula in 24 hours and from Spain to mainland Portugal usually in 24 to 48 hours.
 
-### Does Correos Express deliver to the UK?
+### Does Correos Express deliver to the UK and across Europe?
 
-Yes, from Spain, with its Internacional Express service: more than 180 countries, up to two delivery attempts, and tracking on its website until delivery. Correos Express warns that since the UK left the EU's single market and customs union at the end of 2020, parcels to England, Wales, Scotland and Northern Ireland face extra requirements and costs. For countries outside the EU, Internacional Express handles customs clearance.
+Yes, from Spain through Internacional Express, which covers more than 180 countries with up to two delivery attempts and tracking until delivery. For countries outside the EU (including the UK), Internacional Express handles customs clearance and extra requirements and costs can apply.
 
 ### What time does Correos Express deliver?
 
-It depends on the service the sender chose: Paq 10 arrives before 10:00 and Paq 14 by 14:00. The tracker's estimated time comes from past deliveries in your postcode and can shift with the route.
+Delivery times depend on the service booked by the sender: Paq 10 arrives before 10:00 and Paq 14 by 14:00. The estimated window on the tracker is based on past deliveries in your postcode and can shift with the driver's route.
 
 ### Can I contact Correos Express in English?
 
-No: it lists no English channel, and its tracking and help are only in Spanish and Portuguese.
+No. Correos Express publishes no English customer-service channel, and its tracking and help pages are in Spanish and Portuguese only (Spain: 900 122 333 or 913 277 020; Portugal: 229 762 810).
 
 :::sources
 - [Correos Express: Seguimiento de envíos y gestión de entrega](https://www.correosexpress.es/es/atencion-al-cliente/seguimiento-envio) – statuses, updates, number not found, missed attempts

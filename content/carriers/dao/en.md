@@ -1,12 +1,12 @@
 ---
 title: DAO tracking: statuses, daoSHOP and missed deliveries
-description: Track a DAO parcel in Denmark: where the 20-digit number is, what each status means, night drop-offs, daoSHOP pickup and how to reach DAO.
+description: Track a DAO parcel in Denmark with your 20-, 13- or 9-digit number: daoSHOP pickup with your 5-digit code, night delivery, tracking statuses and DAO contact.
 slug: dao-tracking
 published: 2026-10-13
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-DAO (Dansk Avis Omdeling) is a Danish carrier that has delivered newspapers since 1921 and brings online shops' parcels to your door at night or to a daoSHOP pickup point. Enter the parcel number on DAO's "Track your parcel" page, in the dao app or paste it in the box above. The number comes from the shop's shipping email or from DAO's own text and email.
+Track a DAO parcel in Denmark by entering your 20-, 13- or 9-digit parcel number on DAO's "Track your parcel" page, in the dao app or in the box above. DAO (Dansk Avis Omdeling, delivering since 1921) brings online orders to your door at night 365 days a year or to a **daoSHOP** pickup point, where you collect with the parcel number and 5-digit collection code sent by text and email.
 
 ## Where to find your DAO tracking number
 
@@ -92,21 +92,25 @@ Peek can notify you of "Every scan", "Important steps" or "Delivery only". For a
 
 ## Questions about DAO tracking
 
+### How do I collect a parcel from a daoSHOP?
+
+Bring the parcel number and the 5-digit collection code DAO sends by text and email (or forward that message to someone collecting for you). You can check opening hours and locations across Denmark on dao.as's daoSHOP map.
+
 ### What does "Parcel has arrived at terminal" mean?
 
-The parcel has reached one of DAO's sorting terminals and is still on its way.
+Your parcel has reached one of DAO's sorting terminals and is still in transit toward your local depot or daoSHOP.
 
 ### How long does DAO take to deliver?
 
-DAO tells private senders that daoSHOP parcels arrive within 2 to 4 days; to online shops it promises home delivery in under 16 hours and next-day delivery to a daoSHOP. Home parcels come at night or in the early morning, 365 days a year.
+DAO tells private senders that daoSHOP parcels arrive within 2 to 4 days; to online shops it promises home delivery in under 16 hours and next-day delivery to a daoSHOP. Home deliveries run overnight and early morning, 365 days a year.
 
 ### Is there a DAO tracking app?
 
-Yes, the dao app, for iPhone and Android. It adds parcels sent to you automatically and shows the parcel number and pickup code.
+Yes: the dao app for iPhone and Android automatically adds parcels sent to you and shows your parcel number and 5-digit daoSHOP pickup code.
 
 ### Is a text from DAO asking for payment real?
 
-No. DAO says it doesn't send links asking you to pay or transfer money; check the parcel in the dao app or on dao.as instead.
+No. DAO says it does not send payment links by text or email; always verify your parcel in the dao app or on dao.as instead.
 
 :::sources
 - [DAO: Track your parcel](https://dao.as/en/track-your-parcel/) – number formats, not-found message, status page

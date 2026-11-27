@@ -1,12 +1,12 @@
 ---
 title: CACESA seguimiento: aduanas, estados y quién entrega
-description: Sigue tu paquete de CACESA en España: qué número usar, qué significa cada estado, cómo pagar la aduana, quién lo reparte y cómo contactar con CACESA.
+description: Seguimiento de CACESA (Cacesa Postal) en España y Portugal: número de envío, estados de aduanas (canal verde/naranja/rojo), cómo pagar tasas y atc@cacesa.com.
 slug: cacesa-seguimiento
 published: 2026-10-12
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-CACESA (Compañía Auxiliar al Cargo Express) es un agente de aduanas de Madrid para los paquetes de compras online que llegan de China a España y Portugal: los recibe en varios aeropuertos, hace el despacho de aduanas y los pasa a la empresa que los reparte. CACESA no entrega nada. Para seguir tu paquete, escribe en su web el número de envío que te dio la tienda, o pégalo en la casilla de arriba.
+CACESA (Compañía Auxiliar al Cargo Express, conocida también como Cacesa Postal) es el agente de aduanas de Madrid que despacha los pedidos online llegados de China a España y Portugal antes de pasarlos a la empresa de reparto local — CACESA no entrega paquetes a domicilio. Para seguir tu envío, pega en la casilla de arriba el número que te dio la tienda o introdúcelo en el localizador de cacesa.com.
 
 ## Número de seguimiento de CACESA: cuál usar
 
@@ -93,25 +93,25 @@ CACESA no nombra a la empresa de reparto, y el paquete sigue con el mismo númer
 
 ## Preguntas sobre el seguimiento de CACESA
 
-### ¿Qué es Cacesa Postal?
+### ¿Qué es Cacesa Postal o CACESA Logistics?
 
-Es CACESA, también llamada Cacesa Postal o CACESA Logistics: el agente de aduanas de Madrid que despacha los pedidos online de China hacia España y Portugal. La fundó Iberia en 1987 y desde 2025 es de CTT.
+Es CACESA (Compañía Auxiliar al Cargo Express), el agente de aduanas de Madrid que tramita el despacho aduanero de compras online enviadas desde China a España y Portugal. Fue fundada por Iberia en 1987 y desde 2025 pertenece al grupo CTT.
 
-### ¿Quién entrega un paquete de Cacesa Postal?
+### ¿Quién entrega un paquete que pasa por CACESA?
 
-La empresa de transporte que eligió tu vendedor, no CACESA. Su nombre está en el correo de la tienda o en la página del pedido; CACESA no lo indica.
+La empresa de transporte elegida por tu vendedor (no CACESA, que solo gestiona el despacho de aduanas). Mira el nombre del repartidor en el correo de la tienda o en la página del pedido; en cuanto aparece `Sale de Instalaciones de Cacesa`, la entrega depende ya de esa empresa.
 
-### ¿Cuánto tarda en llegar un paquete de CACESA?
+### ¿Cuánto tarda un paquete de CACESA tras pasar aduanas?
 
-Si estuvo retenido, CACESA lo entrega al distribuidor de 3 a 4 días después de liberarlo, más los días de reparto según tu código postal. Para los paquetes que no se retienen, CACESA no da plazo.
+Si tu envío estuvo retenido en aduanas, CACESA indica que tarda de 3 a 4 días desde la liberación en entregarlo al distribuidor local, más los días de reparto según tu código postal. Para paquetes liberados directamente por canal verde sin retención, CACESA no publica un plazo concreto.
 
-### ¿CACESA entrega los sábados o tiene puntos de entrega?
+### ¿Cómo pago los impuestos o envío documentos a CACESA?
 
-No, porque CACESA no reparte. Los sábados, los puntos de recogida y las taquillas dependen de la empresa de reparto, así que pregúntale a ella.
+Si CACESA te avisa por correo o SMS de un trámite aduanero, envía la factura/captura del pedido y el justificante de pago a `atc@cacesa.com`. Para pagar impuestos, entra en «Pagar impuestos» en cacesa.com con el número de envío y el importe en euros (admite tarjeta, PayPal o Bizum).
 
-### ¿Tiene CACESA teléfono gratuito o en Canarias?
+### ¿Cuál es el teléfono o contacto de CACESA?
 
-En su web no aparece ningún teléfono gratuito ni ninguno de Canarias; solo los dos números de Madrid. Para un paquete retenido en aduanas, escribe a atc@cacesa.com.
+CACESA no publica un teléfono gratuito ni una línea en Canarias: su web muestra los teléfonos de Madrid `+34 91 746 1860` (sede) y `+34 91 333 54 50` (oficina de Madrid-Barajas), sin horario indicado. Para paquetes retenidos, documentos o abandonos, escribe a `atc@cacesa.com`.
 
 :::sources
 - [CACESA: Seguimiento de envíos](https://www.cacesa.com/es/seguimiento) – localizador, número de envío, empresa de reparto, Pagar impuestos

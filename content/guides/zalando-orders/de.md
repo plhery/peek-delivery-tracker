@@ -1,13 +1,13 @@
 ---
 title: Zalando-Paket verfolgen: Paketdienst, Nummer, Probleme
-description: Wer Zalando-Bestellungen in Deutschland, Österreich und der Schweiz liefert, wo die Sendungsnummer steht, warum mehrere Pakete kommen und was tun, wenn eins fehlt.
+description: Zalando-Bestellung verfolgen in Deutschland, Österreich & der Schweiz: Paketdienste (DHL, Hermes, Post), Sendungsnummer, Lieferzeit, geteilte Pakete und Hilfe.
 slug: zalando-paket-verfolgen
 picture: Ein Paket mit einem Anhänger in Form eines Kleiderbügels, ein Lieferwagen und Pip, bereit zur Anprobe.
 published: 2026-10-17
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Sobald ein Paket das Lager verlässt, schickt dir Zalando eine Versandbestätigung mit der Sendungsverfolgungsnummer und dem Link zum Paketdienst. Dasselbe siehst du in deinem Konto unter „Meine Bestellungen“. Eine Bestellung kann in mehreren Paketen kommen, jedes mit eigener Nummer, vor allem wenn ein Zalando Partner einen Teil selbst verschickt.
+Sobald dein Paket das Lager verlässt, sendet dir Zalando eine Versandbestätigung mit der Sendungsverfolgungsnummer und dem direkten Link zum Paketdienst (DHL, Hermes, Österreichische Post oder Schweizerische Post). Denselben Live-Status findest du im Konto unter „Meine Bestellungen“; wird eine Bestellung auf mehrere Pakete oder Zalando Partner aufgeteilt, hat jedes Paket eine eigene Nummer.
 
 ## Welcher Paketdienst liefert meine Zalando-Bestellung?
 
@@ -97,7 +97,7 @@ Steht die Sendungsverfolgung still, hat das meist einen einfachen Grund:
 
 Warum Sendungsverfolgungen allgemein schweigen: [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
-## Zugestellt, aber nicht erhalten, oder verloren: Was tun?
+## Zalando-Paket zugestellt aber nicht erhalten oder verloren: Was tun?
 
 Zalandos Rat ist kurz: Prüfe, ob Nachbarn das Paket angenommen haben, und ist es eine Woche nach dem Versand noch nicht bei dir, kontaktiere den Kundenservice. Der Reihe nach:
 
@@ -111,7 +111,7 @@ Zalandos Rat ist kurz: Prüfe, ob Nachbarn das Paket angenommen haben, und ist e
 
 Wer für ein Paket haftet, das nie ankam, und was du als Beleg aufhebst: [Zugestellt, aber nicht erhalten](guide:delivered-not-received) und [Paket verloren](guide:lost-parcel). Ein Paket, das zurück ans Lager geht: [Zurück an den Absender](guide:returned-to-sender).
 
-## Zalando-Bestellung zurücksenden
+## Wie schicke ich eine Zalando-Bestellung zurück und verfolge die Retoure?
 
 Eine Retoure hat ihre eigene Sendungsnummer, getrennt von der deiner Bestellung. Artikel, die dir ein Partner direkt geschickt hat, gehen an diesen Partner zurück, mit dem mitgeschickten Rücksendelabel. Kamen Zalando- und Partnerartikel in einem Paket, darfst du sie zusammen zurückschicken. Wo du die Nummer der Retoure findest und wann das Geld kommt: [Retouren verfolgen](guide:returns-tracking).
 

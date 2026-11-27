@@ -1,12 +1,12 @@
 ---
 title: Chronopost Sendungsverfolgung: Paket aus Frankreich, Status
-description: Chronopost-Paket aus Frankreich verfolgen: wie die Sendungsnummer aussieht, was die französischen Status bedeuten, wer zustellt, Pickup-Relais und Kontakt.
+description: Chronopost-Sendungsverfolgung für Pakete aus Frankreich: Nummernformate, französische Status übersetzt, DPD-Übergabe in Deutschland, Pickup-Fristen und Kontakt.
 slug: chronopost-sendungsverfolgung
 published: 2026-11-04
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Chronopost ist der Expressdienst für Pakete der französischen Gruppe La Poste und gehört zu Geopost, der Paketsparte der Gruppe, zu der auch DPD gehört. Ein Paket verfolgst du in Chronoposts Sendungsverfolgung auf chronopost.fr oder hier: Füg die Nummer oben ins Feld ein.
+Chronopost ist der Express-Paketdienst der französischen La Poste Groupe innerhalb von Geopost (zu der auch DPD gehört) und liefert Pakete aus Frankreich in 230 Länder — nach Deutschland oft mit Übergabe an DPD. Füge deine 13-, 14- oder 15-stellige Sendungsnummer oben ins Feld ein oder prüfe sie auf chronopost.fr, um die französischen Statusmeldungen und den zuständigen Zusteller zu sehen.
 
 ## Chronopost Sendungsnummer: so sieht sie aus
 
@@ -99,21 +99,25 @@ Peek schaut bis zu alle 10 Minuten nach, in Zustellung ab 6:00 Uhr französische
 
 ## Fragen zur Chronopost Sendungsverfolgung
 
-### Gehört Chronopost zu La Poste?
-
-Ja. Chronopost gehört zu Geopost, und Geopost gehört zur La Poste Groupe.
-
-### Ist Chronopost dasselbe wie DPD?
-
-Nein. Chronopost tritt nicht als DPD auf, aber beide gehören zu Geopost, der Paketsparte von La Poste. Manche Chronopost-Nummern haben die Form von DPD-Paketnummern.
-
 ### Wer stellt ein Chronopost-Paket in Deutschland zu?
 
-DPD, wenn Chronopost eine Paketnummer von DPD nennt. Peek zeigt dann „Zustellung durch DPD Germany“ (solange es bei DPD nur angekündigt ist: „Bei DPD Germany angekündigt, noch nicht eingetroffen“) und verfolgt das Paket bei DPD weiter, sobald DPD einen aktuellen Scan zeigt.
+DPD, sobald Chronopost für die Sendung eine DPD-Paketnummer ausweist. Peek zeigt dann „Zustellung durch DPD Germany“ (oder „Bei DPD Germany angekündigt, noch nicht eingetroffen“) und verfolgt das Paket automatisch bei [DPD Germany](carrier:dpd-de) weiter, sobald dort ein aktueller Scan vorliegt.
 
-### Wie lange bleibt ein Chronopost-Paket im Pickup-Relais?
+### Gehört Chronopost zu La Poste oder DPD?
 
-In Frankreich bis zu 8 Tage, in einem Pickup-Automaten bis zu 5, laut Pickup, das die Relais betreibt. Die genaue Frist steht in der E-Mail oder SMS.
+Chronopost gehört zu Geopost, der Paketsparte der La Poste Groupe, zu der auch DPD zählt. Es handelt sich um eigene Marken innerhalb derselben Gruppe, weshalb manche Chronopost-Sendungen das 15-stellige Nummernformat von DPD tragen.
+
+### Was bedeutet „Livraison reportée de 24h“ bei Chronopost?
+
+Das Depot hält das Paket einen Tag zurück (etwa nach einer Fehlleitung, zur Adressprüfung oder wegen eines geschlossenen Betriebs) und stellt es anschließend weiter zu — das Paket gilt dabei nicht als verloren.
+
+### Wie lange bleibt ein Chronopost-Paket in Frankreich im Pickup-Relais?
+
+Laut Pickup maximal 8 Tage in einem Pickup-Relais und maximal 5 Tage in einem Pickup-Automaten; die genaue Abholfrist steht in der E-Mail oder SMS. Danach geht das Paket automatisch an den Absender zurück.
+
+### Wie erreiche ich den Chronopost Kundenservice?
+
+Über die Kontaktseite auf chronopost.fr, den Chatbot Léonard (der komplexe Fälle an einen Mitarbeiter weitergibt) oder die französische Telefonnummer `09 69 39 13 91`. Bei verspäteten, verlorenen oder beschädigten Online-Bestellungen wende dich zuerst an den Shop.
 
 :::sources
 - [La Poste Groupe: Chronopost (Englisch)](https://www.lapostegroupe.com/en/focus/la-poste-groupes-subsidiaries/chronopost) – Expressdienst von La Poste, 230 Länder, 19.555 Abholstellen in Frankreich

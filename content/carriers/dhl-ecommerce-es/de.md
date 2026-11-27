@@ -1,12 +1,12 @@
 ---
 title: DHL eCommerce Iberia Sendungsverfolgung: Status & Paketshops
-description: DHL-eCommerce-Paket in Spanien oder Portugal verfolgen: Bedeutung der Status, verpasste Zustellung, ServicePoints, CTT Express und Hilfe.
+description: DHL eCommerce Iberia (Spanien & Portugal) verfolgen: Nummernformate, Statusbedeutungen, ServicePoints, Übergabe an CTT Express und Hilfe bei Lieferproblemen.
 slug: dhl-ecommerce-iberia-sendungsverfolgung
 published: 2026-11-22
-updated: 2026-11-22
+updated: 2026-11-27
 ---
 
-DHL eCommerce Iberia ist das Paketnetz von DHL in Spanien und Portugal, früher DHL Parcel Iberia — der Name DHL Parcel taucht stellenweise noch auf. Füge die Nummer oben ein, um dein Paket zu verfolgen; auf der Paketseite führt „Website von DHL eCommerce Iberia öffnen“ direkt zur selben Sendung bei DHL. Die Nummer erhältst du vom Shop, der das Paket verschickt hat.
+DHL eCommerce Iberia (früher DHL Parcel Iberia) ist das Paketnetz von DHL für Spanien und Portugal — im Rahmen des Joint Ventures mit CTT übernimmt [CTT Express](carrier:ctt-express) dabei einen Teil der Verbraucherzustellungen. Füge deine Sendungsnummer (10 Ziffern, zwei Buchstaben + 7 Ziffern + `0` oder `JJD...`) oder deinen DHL-Tracking-Link oben ein, um alle Status, ServicePoint-Abholungen und Übergaben direkt zu verfolgen.
 
 ## DHL-eCommerce-Sendungsnummer: Fundort und Format
 
@@ -79,17 +79,25 @@ Solange das Paket in Peek geöffnet ist — oder am Liefertag bei aktiven Benach
 
 ## Häufige Fragen zu DHL eCommerce Iberia
 
-### Ist DHL eCommerce dasselbe wie DHL Express?
+### Ist DHL eCommerce Iberia dasselbe wie DHL Express?
 
-Nein. DHL-Express-Frachtbriefe haben ein eigenes Tracking (MyDHL+), und Peek führt beide als getrennte Paketdienste. Eine 10-stellige Nummer kann zu beiden gehören: Bei gültiger Prüfziffer fragt Peek zuerst DHL Express, und wenn DHL Express das Paket kennt, gewinnt DHL Express.
+Nein. DHL Express nutzt ein eigenes Tracking (MyDHL+) und wird in Peek als eigener Paketdienst geführt. Teilen sich beide eine 10-stellige Nummer mit gültiger Prüfziffer, fragt Peek zuerst DHL Express an und übernimmt DHL Express, sobald es die Sendung kennt.
 
-### Warum hat mein DHL-eCommerce-Paket kein Tracking?
+### Warum findet das DHL-eCommerce-Tracking meine Nummer nicht?
 
-Prüfe Nummer und Paketdienst beim Shop: 10-stellige Nummern werden von mehreren Diensten genutzt (siehe Tabelle oben). Auch ältere Sendungen verschwinden irgendwann aus dem DHL-Tracking; die genaue Aufbewahrungsdauer ist nicht bekannt.
+10-stellige Nummern werden auch von [DHL Express](carrier:dhl-express), [Mondial Relay](carrier:mondial-relay), Relais Colis und GLS Spanien genutzt — prüfe deshalb in der Versandmail des Shops den genauen Paketdienst. Außerdem verschwinden ältere Sendungen irgendwann aus dem DHL-Tracking.
 
-### Liefert CTT Express Pakete von DHL eCommerce aus?
+### Liefert CTT Express Pakete von DHL eCommerce in Spanien und Portugal aus?
 
-Einen Teil davon. Im Rahmen des im Mai 2026 geschlossenen Gemeinschaftsunternehmens zwischen DHL eCommerce und CTT übernimmt CTT Express Verbraucherzustellungen in Spanien, während DHL eCommerce in Portugal zu CTT Expresso übergeht. Zeigt das Tracking eine CTT-Express-Nummer, verfolge sie über [CTT Express](carrier:ctt-express).
+Teilweise ja. Durch das am 12. Mai 2026 vereinbarte Gemeinschaftsunternehmen zwischen DHL eCommerce und CTT geht DHL eCommerce in Portugal zu CTT Expresso über, und in Spanien übernimmt [CTT Express](carrier:ctt-express) Verbraucherzustellungen. Nennt DHL eine CTT-Express-Nummer, folgt Peek dem Paket automatisch bei CTT Express weiter.
+
+### Was bedeutet „Delivered, POD pending“ oder „Shipment with incidence“?
+
+`Delivered, POD pending` heißt als zugestellt markiert, während der Zustellnachweis noch aussteht — manchmal folgt danach noch eine Zustellrunde oder ein erfolgloser Versuch. `Shipment with incidence` meldet eine Störung und weist Empfänger direkt an, den Absender (Shop) zu kontaktieren.
+
+### Wie erfahre ich, in welchem DHL ServicePoint mein Paket liegt?
+
+Sobald DHL `Delivered to DHL ServicePoint, ready for collection by the recipient` meldet, zeigt Peek Name, Adresse und Wegbeschreibung der Abholstelle an. Öffnungszeiten und genaue Lagerfrist prüfst du über den DHL-Link direkt bei DHL.
 
 :::sources
 - [CTT: CTT e DHL Ecommerce selam parceria estratégica](https://www.ctt.pt/grupo-ctt/media/noticias/ctt-e-dhl-ecommerce-selam-parceria-estrategica-para-criar-rede-de-distribuicao-de-encomendas-mais-completa-da-peninsula-iberica) – Gemeinschaftsunternehmen am 12. Mai 2026 unterzeichnet, DHL eCommerce Portugal zu CTT Expresso, CTT Express für Verbraucher in Spanien, DHL für Geschäftskunden

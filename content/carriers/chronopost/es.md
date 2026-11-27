@@ -1,12 +1,12 @@
 ---
 title: Chronopost seguimiento: paquete desde Francia y estados
-description: Sigue un paquete de Chronopost desde Francia a España: cómo es el número, qué significan los estados en francés, puntos Pickup, incidencias y contacto.
+description: Seguimiento de Chronopost desde Francia a España: formato del código, estados en francés traducidos, relación con SEUR y DPD, puntos Pickup y atención al cliente.
 slug: chronopost-seguimiento
 published: 2026-11-14
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Chronopost es el servicio francés de paquetería urgente del grupo La Poste y forma parte de Geopost, la división de paquetería a la que también pertenecen DPD y [SEUR](carrier:seur). Esta guía está pensada sobre todo si esperas en España un paquete enviado desde Francia con Chronopost, por ejemplo desde una tienda online, con un apartado para entregas en Francia. Sigue el envío en chronopost.fr o pega el código arriba. El buscador de [La Poste](carrier:la-poste) en laposte.fr también acepta números de Chronopost, pero puede omitir eventos y referencias presentes en Chronopost.
+Chronopost es el servicio de paquetería urgente del grupo francés La Poste dentro de Geopost (el mismo grupo de DPD y [SEUR](carrier:seur)) y reparte envíos desde Francia a 230 países. Pega tu código de 13, 14 o 15 caracteres en la casilla de arriba o consúltalo en chronopost.fr para ver qué significa cada estado en francés, qué ocurre al llegar a España y cómo actuar si hay retraso o incidencia.
 
 ## Número de seguimiento de Chronopost: cómo es
 
@@ -96,17 +96,25 @@ Consulta hasta una vez cada 10 minutos, y en reparto hasta una vez cada 2 minuto
 
 ## Preguntas sobre el seguimiento de Chronopost
 
-### ¿Chronopost pertenece a La Poste?
+### ¿Chronopost pertenece a La Poste, DPD o SEUR?
 
-Sí. Chronopost forma parte de Geopost, la filial de paquetería de La Poste Groupe.
+Chronopost es la filial urgente de La Poste Groupe dentro de Geopost, la misma división europea a la que pertenecen DPD y [SEUR](carrier:seur). Son marcas distintas del mismo grupo, por lo que algunos códigos de Chronopost usan el formato de 15 caracteres de DPD.
 
-### ¿Chronopost, DPD y SEUR son lo mismo?
+### ¿Qué significa «Livraison reportée de 24h» en Chronopost?
 
-Son marcas distintas del mismo grupo Geopost. Por eso algunos códigos de Chronopost usan las 15 posiciones de DPD.
+Indica que la delegación guarda el paquete un día sin intentar repartirlo (por ejemplo para comprobar la dirección, por un error de clasificación o por un local cerrado) y después reanuda el envío por sí solo; no significa que esté perdido.
 
-### ¿Cuánto tiempo guarda un punto Pickup mi paquete?
+### ¿Se pagan aduanas en un paquete de Chronopost desde Francia a España?
 
-En Francia, hasta 8 días en tienda Pickup y hasta 5 días en taquilla Pickup; el mensaje de aviso indica la fecha exacta antes de devolverlo.
+No si la mercancía sale de Francia u otro país de la UE: según la Agencia Tributaria, cuenta el origen desde donde se envía el pedido. Solo las compras online de bienes situados fuera de la UE pagan IVA, arancel fijo de 3 € (hasta 150 €) y tasa de tramitación de 2 € por categoría de artículo.
+
+### ¿Cuánto tiempo guarda un punto Pickup o taquilla un paquete de Chronopost?
+
+En Francia, Pickup establece un máximo de 8 días en tienda Pickup y de 5 días en taquilla automática Pickup antes de devolver el paquete al remitente; el correo o SMS de aviso muestra la fecha límite exacta.
+
+### ¿Cómo contactar con Chronopost por un paquete desde Francia?
+
+A través de la página de contacto en chronopost.fr, el chatbot Léonard o el teléfono francés `09 69 39 13 91`. Para pedidos de tiendas online retrasados, dañados o no entregados, contacta primero con el vendedor, que responde de la entrega en la UE.
 
 :::sources
 - [La Poste Groupe: Chronopost (en inglés)](https://www.lapostegroupe.com/en/focus/la-poste-groupes-subsidiaries/chronopost) – hasta 30 kg en 230 países y 19.555 puntos en Francia

@@ -1,15 +1,15 @@
 ---
 title: Pacco danneggiato: cosa fare, reclamo e rimborso
-description: Pacco arrivato danneggiato o rotto? Le foto da fare, quando rifiutarlo, chi ti rimborsa e i termini di Poste, BRT, la Posta svizzera, Vinted ed eBay.
+description: Pacco arrivato danneggiato o rotto? Cosa fotografare, quando rifiutare o firmare con riserva, chi rimborsa e le scadenze di Poste, BRT, Vinted, Subito ed eBay.
 slug: pacco-danneggiato-cosa-fare
 picture: Una scatola ammaccata con un angolo strappato e il nastro che si stacca, un telefono che la fotografa con il flash e Pip preoccupato, con un cerotto attaccato addosso.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-27
 ---
 
-Se il pacco arriva danneggiato o con il contenuto rotto, fotografalo prima di aprirlo del tutto, tieni la scatola e tutto quello che c'è dentro e scrivi al venditore il giorno stesso. In Italia, se hai comprato da un negozio, il venditore ti deve un articolo integro, e farsi pagare dal corriere è compito suo, non tuo. Se la scatola è già schiacciata, bucata o bagnata alla consegna, puoi rifiutarla, oppure accettarla con riserva e far annotare il danno. In Ticino muoviti ancora più in fretta: il Codice delle obbligazioni ti chiede di segnalare i difetti subito.
+Se un pacco arriva danneggiato o con l'articolo rotto, fotografalo prima di aprirlo del tutto, conserva scatola e imballaggio e avvisa il venditore il giorno stesso. In Italia, per gli acquisti da un negozio il rischio di trasporto resta al venditore fino alla consegna (Codice del consumo, art. 63), mentre il reclamo al corriere spetta a lui. Se l'imballaggio è schiacciato, bucato o bagnato puoi rifiutarlo o accettarlo con riserva scritta; in Ticino segnala subito i difetti al venditore.
 
-## Pacco danneggiato: cosa fare
+## Cosa fare subito se il pacco arriva danneggiato
 
 :::steps
 - Guarda prima di firmare | Controlla l'esterno davanti al corriere: angoli schiacciati, buchi, strappi, macchie di bagnato, nastro aperto o rifatto, qualcosa che sbatte dentro.
@@ -22,7 +22,7 @@ Se il pacco arriva danneggiato o con il contenuto rotto, fotografalo prima di ap
 
 Conta anche il danno che scopri solo dopo aver aperto il pacco: segnalalo appena lo vedi. Per il Codice civile (art. 1698), un danno che alla consegna non si poteva vedere va fatto valere verso il corriere appena lo scopri e non oltre otto giorni dal ricevimento: avvisa subito il venditore, così fa in tempo. La Posta svizzera dà lo stesso margine: otto giorni dal recapito.
 
-## Pacco danneggiato: chi paga?
+## Pacco danneggiato dal corriere: chi paga e chi ti rimborsa?
 
 Se hai comprato da un negozio, paga il venditore. In Italia il pacco viaggia a rischio del venditore finché non arriva materialmente in mano a te (Codice del consumo, art. 63), come spiega la guida al [pacco consegnato ma non ricevuto](guide:delivered-not-received). Un articolo arrivato rotto non è conforme: puoi chiedere la riparazione o la sostituzione, e se non bastano uno sconto o il rimborso (art. 135-bis). Il corriere risponde al venditore, che è il suo cliente.
 
@@ -87,7 +87,7 @@ Verso un negozio i tuoi diritti restano. Per il Codice civile (art. 1698), ricev
 
 In Svizzera la riserva conta di più. Per le condizioni generali della Posta, l'accettazione senza riserve estingue ogni pretesa nei confronti della Posta, tranne per i danni non visibili dall'esterno notificati entro otto giorni dal recapito. La Stiftung für Konsumentenschutz consiglia di far mettere a verbale dal corriere una riserva: il pacco presenta danni esterni e ti riservi di segnalare danni da trasporto. Il corriere la registra e tu la firmi.
 
-## Foto del pacco danneggiato: quali fare?
+## Quali foto fare a un pacco danneggiato per il rimborso?
 
 Scattale prima di spostare qualsiasi cosa, nitide e ben illuminate. Sono quelle che chiede Vinted, e vanno bene per qualsiasi corriere o negozio:
 
@@ -99,7 +99,7 @@ BRT vuole le prove fotografiche allegate al reclamo. Aggiungi la fattura o la co
 
 Poi tieni tutto. Vinted consiglia di conservare l'imballaggio finché la richiesta non è risolta, DPD Svizzera di tenere imballaggio e contenuto per tre mesi dalla consegna, e in filiale la Posta vuole vedere il pacco con l'imbottitura.
 
-## Pacco danneggiato su Vinted, Subito, eBay o Amazon: entro quando e come segnalarlo
+## Entro quando segnalare un pacco danneggiato su Vinted, Subito, eBay o Amazon?
 
 Il giorno stesso, se puoi. In Italia la legge non ti dà un termine breve verso un negozio (in Svizzera sì: «subito»), ma il venditore ha pochi giorni per fare reclamo al corriere: 7 con DPD Svizzera, 20 dal ritiro con Poste Delivery Business. Le piattaforme sono ancora più strette:
 

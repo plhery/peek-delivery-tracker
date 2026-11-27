@@ -1,13 +1,13 @@
 ---
 title: Seguimiento de pedidos Zalando: transportistas y retrasos
-description: Qué transportista entrega tu pedido de Zalando en España, dónde ver el número de seguimiento, por qué llega en varios paquetes y qué hacer si no llega.
+description: Cómo seguir un pedido de Zalando en España: transportistas (SEUR, CTT, DHL), dónde ver el número de seguimiento, varios paquetes, plazos y qué hacer si falta.
 slug: seguimiento-pedido-zalando
 picture: Un paquete con una etiqueta en forma de percha, una furgoneta de reparto y Pip listo para probárselo.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-27
 ---
 
-El enlace para seguir un pedido de Zalando llega en el correo de confirmación de envío, cuando el paquete sale del almacén, y también lo tienes en «Mis pedidos» de tu cuenta. En España, Zalando reparte con SEUR y CTT, y el envío exprés con DHL. Lo que vende y envía un Partner viaja aparte, con otro correo y otro número.
+Para seguir un pedido de Zalando en España, abre el correo de confirmación de envío —que llega cuando el paquete sale del almacén con el número y el enlace del transportista— o entra en «Mis pedidos» dentro de tu cuenta. Zalando.es reparte con SEUR y CTT (y DHL en envío exprés), mientras que los artículos enviados por un Partner viajan aparte con su propio correo y número.
 
 ## ¿Qué transportista entrega mi pedido de Zalando?
 
@@ -42,7 +42,7 @@ Privé by Zalando, en zalando-prive.es, es otra tienda. Entrega con SEUR o CTT, 
 
 La dirección, en cambio, no se puede cambiar después de pedir. Si hace falta, cancela el pedido en «Pedidos» mientras veas el botón «Cancelar pedido» y hazlo de nuevo.
 
-## ¿Dónde está el número de seguimiento de Zalando?
+## ¿Dónde encontrar el número de seguimiento de Zalando?
 
 En dos sitios:
 
@@ -93,7 +93,7 @@ Si el enlace no se ha actualizado en 5-6 días laborables, Zalando.es te manda a
 
 En Privé by Zalando cambia un poco. Si el pedido tiene artículos de campañas distintas, sale entero cuando todo está listo. El enlace puede tardar de 24 a 48 horas en activarse, y Privé te pide contactar si el estado no cambia en 5 días.
 
-## Pedido de Zalando entregado pero no recibido, o perdido: ¿qué hago?
+## ¿Qué hacer si un pedido de Zalando figura entregado pero no llega o se pierde?
 
 ¿El seguimiento dice entregado y no tienes el paquete, o ya no se mueve? Sigue estos pasos:
 

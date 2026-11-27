@@ -52,9 +52,9 @@ Três pontos que costumam confundir:
 - **`Handed over to …`** costuma ser o último evento mostrado pela Whistl. Para envios com rastreamento parcial (*part-tracked*), a Whistl afirma não ser possível rastrear após o repasse: acompanhe pelo código da transportadora final.
 - **Problemas** como `Delayed`, `Bad Address`, `Refused`, `Lost` ou `Item damaged` indicam que algo deu errado; `Shipment Deleted` significa cancelamento pelo remetente. Linhas como `Item Weight Changed` ou `Label reprinted` são apenas anotações e não movimentam o pacote.
 
-## Entrega Whistl e entregas perdidas
+## Entrega Whistl e entregas não realizadas
 
-Quem leva o pacote até você é a transportadora final, não a Whistl, e valem as regras dela. Após uma ausência, a transportadora deixa um cartão ou aviso eletrônico informando quem compareceu e quando tentará novamente.
+Quem leva o pacote até você é a transportadora final, não a Whistl, e valem as regras dela. Após uma entrega não realizada, a transportadora deixa um cartão ou aviso eletrônico informando quem compareceu e quando tentará novamente.
 
 O guia de transportadoras do Parcelhub da Whistl (agosto de 2025) detalha cada parceira:
 
@@ -81,7 +81,7 @@ O que dizem os guias da Whistl:
 
 - Encomendas no Reino Unido que não podem ser entregues retornam ao remetente em até **5 dias úteis** após ingressarem na rede da Whistl.
 - Em envios com rastreamento parcial, não há indenização por atraso e a Whistl não consegue intervir após o repasse se o item não for entregue.
-- Os prazos de reclamação para remetentes variam conforme a transportadora — por exemplo, até 28 dias da postagem na Evri, ou na Royal Mail espera mínima de 10 dias corridos e prazo máximo de 80 dias. Avise a loja quanto antes.
+- Os prazos de pedido de indenização para remetentes variam conforme a transportadora — por exemplo, até 28 dias da postagem na Evri, ou na Royal Mail espera mínima de 10 dias corridos e prazo máximo de 80 dias. Avise a loja quanto antes.
 
 Se o rastreamento estacionar, comece por [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
@@ -99,11 +99,11 @@ Procure a loja e, após o repasse, a transportadora ou correio local indicado no
 
 ## Rastreando encomendas Whistl com o Peek
 
-Para uma referência formada por `L` e 17 dígitos, como `L48291736482917364`, o Peek consulta a Whistl diretamente e exibe "Whistl tem esta encomenda." assim que ela confirma. Outras referências Whistl não têm formato próprio, portanto cole um link da Whistl (`web.parcelhub.net` ou `despatch.whistl.co.uk` com `/Tracking/reference/…`, ou `trackmyitem.whistl.co.uk` com `/tracking/…`), ou adicione a referência e escolha "Whistl" em "Alterar". Não é necessário informar código postal. Se a referência tiver o formato de outra transportadora (como um código `…GB` da Royal Mail), o rastreamento segue aquela transportadora, não a Whistl.
+Para uma referência formada por `L` e 17 dígitos, como `L48291736482917364`, o Peek consulta a Whistl diretamente e exibe "Whistl está com esta encomenda." assim que ela confirma. Outras referências Whistl não têm formato próprio, portanto cole um link da Whistl (`web.parcelhub.net` ou `despatch.whistl.co.uk` com `/Tracking/reference/…`, ou `trackmyitem.whistl.co.uk` com `/tracking/…`), ou adicione a referência e escolha "Whistl" em "Trocar". Não é necessário informar código postal. Se a referência tiver o formato de outra transportadora (como um código `…GB` da Royal Mail), o rastreamento segue aquela transportadora, não a Whistl.
 
 O [Peek](/) consulta o rastreador Parcelhub da Whistl. Como os horários não incluem fuso horário, o Peek aplica o horário do local citado pela Whistl ou o horário do Reino Unido por padrão, exibindo o histórico da própria Whistl. O Peek pode mostrar a transportadora responsável pela entrega com o código dela e notificar mudanças de status. Não há dia previsto de entrega, peso nem ponto de retirada. Os status mantêm o texto em inglês da Whistl, exceto `Delivered`, `In transit` e `Returned to sender` simples, que aparecem nas palavras do Peek.
 
-Quando a Whistl indica Royal Mail, Parcelforce Worldwide, DPD UK, DHL Parcel UK, Amazon Shipping, [InPost](carrier:inpost) (incluindo Yodel, rastreada pelo Peek como InPost), [UPS](carrier:ups), [FedEx](carrier:fedex) ou Evri, o Peek consegue continuar acompanhando por lá. Um pacote indicado apenas como "DPD" não é seguido automaticamente: adicione o código próprio dela. Referências que agrupam múltiplos volumes não são rastreadas: adicione o número individual de cada pacote.
+Quando a Whistl indica Royal Mail, Parcelforce Worldwide, DPD UK, DHL Parcel UK, Amazon Shipping, [InPost](carrier:inpost) (incluindo Yodel, rastreada pelo Peek como InPost), [UPS](carrier:ups), [FedEx](carrier:fedex) ou Evri, o Peek consegue continuar acompanhando por lá. Um pacote indicado apenas como "DPD" não é seguido: adicione o código da própria transportadora. Referências que agrupam múltiplos volumes não são rastreadas: adicione o número individual de cada pacote.
 
 ## Perguntas sobre o rastreamento da Whistl
 
@@ -117,7 +117,7 @@ Em geral, outra transportadora: DPD, Evri, Yodel, Royal Mail, Amazon Shipping, D
 
 ### O rastreamento da Whistl é confiável?
 
-Sim. O rastreamento oficial da Whistl funciona em web.parcelhub.net, despatch.whistl.co.uk e trackmyitem.whistl.co.uk, e a Parcelhub integra o Whistl Group.
+Sim. O rastreamento próprio da Whistl funciona em web.parcelhub.net, despatch.whistl.co.uk e trackmyitem.whistl.co.uk, e a Parcelhub integra o Whistl Group.
 
 ### Por que meu código de rastreamento Whistl não funciona?
 

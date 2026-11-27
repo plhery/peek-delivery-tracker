@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Slovak Parcel Service (SPS): status e Balíkovo
-description: Rastreie encomendas SPS na Eslováquia: códigos 703, status em eslovaco explicados, armários Balíkovo, ausências, reclamações e telefone da SPS.
+description: Rastreie encomendas SPS na Eslováquia: códigos 703, status em eslovaco, armários Balíkovo, entregas não realizadas, pedidos de indenização e telefone da SPS.
 slug: slovak-parcel-service-tracking
 published: 2026-11-26
 updated: 2026-11-26
@@ -43,13 +43,13 @@ Duas entradas de pagamento na entrega — `Editor hotovosti` e `Dobierka odoslan
 
 A partir daí, o site redireciona para o mySPS (mysps.sk), que exibe uma barra de progresso em inglês ou eslovaco: `Received Info`, `Taken by carrier`, `In transit`, `Delivering`, `In the collection point` (apenas para ponto de retirada), seguido de `Delivery` ou `Undelivered`. Atenção: `Delivering` significa a caminho hoje, enquanto `Delivery` significa já entregue.
 
-## Entrega, armários Balíkovo e entregas perdidas
+## Entrega, armários Balíkovo e entregas não realizadas
 
 **Entrega no endereço.** Para remetentes, o prazo doméstico padrão da SPS é o próximo dia útil após a coleta. O entregador leva o pacote até a primeira porta trancável do prédio (subida de andares apenas mediante acordo). Se o remetente contratou avisos, a SPS informa por SMS, e-mail ou telefone no máximo no dia da entrega, indicando a data, eventual valor de cobrança na entrega e link para redirecionar. Avisos por e-mail saem no dia anterior.
 
 > SMS e ligações funcionam apenas para números de celular da Eslováquia. Com número estrangeiro você não recebe SMS, portanto informe seu e-mail à loja também.
 
-**Uma tentativa.** Os termos da SPS preveem uma tentativa de entrega pelo entregador. Após tentativa sem sucesso, a SPS pode redirecionar o pacote para o armário Balíkovo livre ou loja parceira mais próxima e avisa por SMS ou e-mail onde ficou.
+**Uma tentativa.** Os termos da SPS preveem uma tentativa de entrega pelo entregador. Se a entrega não for realizada, a SPS pode redirecionar o pacote para o armário Balíkovo livre ou loja parceira mais próxima e avisa por SMS ou e-mail onde ficou.
 
 **Balíkovo.** Rede de retirada da SPS (antiga SPS Parcel Shops), com lojas parceiras e armários de autoatendimento. A página "What is balíkovo?" cita mais de 2.500 pontos e 1.000 armários, a página inicial cita 1.200 armários, e a página para novos parceiros ainda fala em mais de 2.400 pontos. Quando o pacote chega, você recebe SMS ou e-mail com um PIN exigido de quem fizer a retirada. O armário guarda por **48 horas** (com lembrete 24 horas antes do fim), e uma loja parceira guarda por até **7 dias úteis** de funcionamento. A SPS pode alterar esses prazos em períodos de pico, e o mySPS oferece "Extend storage period" (pode haver taxa). Pacotes não retirados no armário retornam ao remetente.
 
@@ -59,11 +59,11 @@ A partir daí, o site redireciona para o mySPS (mysps.sk), que exibe uma barra d
 
 ## Encomenda SPS atrasada, perdida ou danificada
 
-**Sem atualização há dias.** A SPS não publica prazo específico para isso. A loja tem o contrato com a SPS, então fale com ela primeiro; veja [por que o rastreamento para de atualizar](guide:tracking-not-updating). A seção "Where is my parcel" da SPS abre um formulário de contato ao informar os dados do pacote.
+**Sem atualização há dias.** A SPS não publica regra para isso. A loja tem o contrato com a SPS, então fale com ela primeiro; veja [por que o rastreamento para de atualizar](guide:tracking-not-updating). A seção "Where is my parcel" da SPS abre um formulário de contato ao informar os dados do pacote.
 
-**Danificada.** Confira a embalagem no ato da entrega e relate danos visíveis. Guarde a caixa original e o enchimento e não utilize os itens: as Regras de Reclamação da SPS anulam o pedido sem a embalagem original. Você ou o remetente podem reclamar pelo formulário "Report parcel damage" em sps-sro.sk informando o número da encomenda, código postal ou número do cliente, fotos, descrição, valor e comprovantes de conteúdo e preço.
+**Danificada.** Confira a embalagem no ato da entrega e relate danos visíveis. Guarde a caixa original e o enchimento e não utilize os itens: as Regras para pedidos de indenização da SPS anulam o pedido sem a embalagem original. Você ou o remetente podem pedir indenização pelo formulário "Report parcel damage" em sps-sro.sk informando o número da encomenda, código postal ou número do cliente, fotos, descrição, valor e comprovantes de conteúdo e preço.
 
-**Prazos** (Regras de Reclamação válidas a partir de 1º de maio de 2026): dano ou perda parcial em até **2 dias úteis** após a entrega; perda total, entrega contestada ou atraso em serviço garantido em até **30 dias corridos** a partir da coleta pela SPS. Embora o FAQ da SPS cite 7 dias da entrega, as Regras de Reclamação são vinculantes — aja em até 2 dias úteis. A SPS decide em até 30 dias corridos. A indenização vai para o remetente, ou para você mediante autorização escrita do remetente.
+**Prazos** (Regras para pedidos de indenização válidas a partir de 1º de maio de 2026): dano ou perda parcial em até **2 dias úteis** após a entrega; perda total, entrega contestada ou atraso em serviço garantido em até **30 dias corridos** a partir da coleta pela SPS. Embora o FAQ da SPS cite 7 dias da entrega, as Regras para pedidos de indenização são vinculantes — aja em até 2 dias úteis. A SPS decide em até 30 dias corridos. A indenização vai para o remetente, ou para você mediante autorização escrita do remetente.
 
 **Entregue, mas não recebida.** Entrega contestada segue o prazo de 30 dias acima; avise a loja também e consulte [entregue mas não recebido](guide:delivered-not-received).
 
@@ -82,15 +82,15 @@ Segundo sps-sro.sk:
 
 ## Rastreando uma encomenda SPS com o Peek
 
-O [Peek](/) conhece o formato da SPS — 14 dígitos começando por `703` — mas ele é compartilhado com DPD, SEUR, BRT, [Hermes Germany](carrier:hermes-de) e outras. Na Eslováquia, o Peek pergunta primeiro à SPS. Em outros países a SPS fica perto do fim da lista de compatíveis, então o Peek não a consulta ao adicionar nem na primeira verificação, podendo alcançá-la em checagens posteriores no primeiro mês. Se outra transportadora reivindicar o número ou nenhuma aparecer, toque em "Alterar" e selecione "Slovak Parcel Service" (buscar "SPS" encontra). Digite os 14 dígitos: o código de 16 dígitos da etiqueta não identifica a SPS. Um link sps-sro.sk com `shipment_id=` identifica a SPS independentemente do número; links mysps.sk não.
+O [Peek](/) conhece o formato da SPS — 14 dígitos começando por `703` — mas ele é compartilhado com DPD, SEUR, BRT, [Hermes Germany](carrier:hermes-de) e outras. Na Eslováquia, o Peek pergunta primeiro à SPS. Em outros países a SPS fica perto do fim da lista de compatíveis, então o Peek não a consulta ao adicionar nem na primeira verificação, podendo alcançá-la em checagens posteriores no primeiro mês. Se outra transportadora reivindicar o número ou nenhuma aparecer, toque em "Trocar" e selecione "Slovak Parcel Service" (buscar "SPS" encontra). Digite os 14 dígitos: o código de 16 dígitos da etiqueta não identifica a SPS. Um link sps-sro.sk com `shipment_id=` identifica a SPS independentemente do número; links mysps.sk não.
 
-Os horários da SPS não incluem fuso horário: o Peek interpreta no horário da Eslováquia e lista o histórico oficial da SPS. Exibe status, depósito de cada leitura e peso, mantendo os textos em eslovaco originais; `Doručenie` conta como entregue. Não há data prevista de entrega; depósito em armário Balíkovo aparece como `Uložený v balíkomate` com o local informado pela SPS.
+Os horários da SPS não incluem fuso horário: o Peek interpreta no horário da Eslováquia e lista o histórico da própria SPS. Exibe status, depósito de cada leitura e peso, mantendo os textos em eslovaco originais; `Doručenie` conta como entregue. Não há data prevista de entrega; depósito em armário Balíkovo aparece como `Uložený v balíkomate` com o local informado pela SPS.
 
 Enquanto você mantém a encomenda aberta no Peek, ou no dia da entrega com notificações ativadas, o Peek consulta até a cada 10 minutos, e até a cada 2 minutos a partir das 6h (horário eslovaco) no dia em que o pacote entra em `Doručovací hárok` enquanto o rastreador próprio responder. Após dois dias sem novidades (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora, e a cada 6 horas depois de sete dias em "Etiqueta criada".
 
-Quando a leitura mais recente tem quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza a data dessa leitura, como "Sem atualização de rastreamento desde seg 12 out". A página então mostra "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Slovak Parcel Service.", com o link "Obter ajuda da Slovak Parcel Service" para a página de atendimento da SPS. Após três semanas sem novas leituras, exibe "Nenhuma novidade há mais de três semanas. Se ainda não chegou, fale com o vendedor. O Peek continua consultando Slovak Parcel Service."
+Quando a leitura mais recente tem quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza a data dessa leitura, como "Sem atualizações desde seg 12 out". A página do pacote então exibe "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Slovak Parcel Service.", com o link "Pedir ajuda a Slovak Parcel Service" para a página de atendimento da SPS. Após três semanas sem novas leituras, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando Slovak Parcel Service."
 
-O Peek pode notificar sobre "Cada leitura", "Etapas importantes" ou "Apenas entrega". Ele não pode prorrogar a guarda nem reenviar seu PIN.
+O Peek pode notificar sobre "Cada movimentação", "Etapas importantes" ou "Só a entrega". Ele não pode prorrogar a guarda nem reenviar seu PIN.
 
 ## Perguntas sobre o rastreamento da Slovak Parcel Service
 
@@ -115,7 +115,7 @@ As páginas da SPS direcionam para o portal web mySPS em mysps.sk, onde você po
 - [SPS: Ako vygenerovať príjmový doklad](https://www.sps-sro.sk/documents/ako-vygenerovat-prijmovy-doklad_v2.pdf) – número impresso na etiqueta
 - [SPS: Where is my parcel](https://www.sps-sro.sk/en/moja-zasielka/kde-je-moj-balik) – o que a seção cobre
 - [SPS: Report parcel damage](https://www.sps-sro.sk/en/moja-zasielka/nahlasit-poskodenie-balika) – formulário de danos
-- [SPS: FAQ](https://www.sps-sro.sk/en/zasielky/faq) – texto de 7 dias para reclamação
+- [SPS: FAQ](https://www.sps-sro.sk/en/zasielky/faq) – texto de 7 dias para pedidos de indenização
 - [SPS: Pozor na podvodné SMS a emaily](https://www.sps-sro.sk/novinky/pozor-na-podvodne-sms-a-emaily-2) – mensagens falsas
 - [SPS: Become a Balíkovo Pickup Point](https://www.sps-sro.sk/en/balikovo/ako-sa-stat-balikovom) – mais de 2.400 pontos
 - [SPS: What is balíkovo?](https://www.sps-sro.sk/en/balikovo/co-je-balikovo) – mais de 2.500 pontos e 1.000 armários

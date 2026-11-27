@@ -41,8 +41,11 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.clearText
+import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
@@ -197,12 +200,12 @@ internal fun CarrierPicker(
     val insets = LocalSheetInsets.current
     val reduceMotion = PeekTheme.reduceMotion
     val focusManager = LocalFocusManager.current
-    var query by rememberSaveable { mutableStateOf("") }
+    val query = rememberTextFieldState()
     // The search is on from the field's first focus until its ✕. The bar's room goes on the system's ease meanwhile
     // (`searchPresentationToolbarBehavior`'s automatic hides it on the iPhone), at once under Reduce Motion.
     var searchOn by rememberSaveable { mutableStateOf(false) }
     val endSearch = {
-        query = ""
+        query.clearText()
         searchOn = false
         focusManager.clearFocus()
     }
@@ -211,7 +214,7 @@ internal fun CarrierPicker(
     val barGone by remember { derivedStateOf { bar.value == 0f } }
     val opening = rememberSaveable(saver = OPENING_SAVER) { sections.filter { it.carriers.isNotEmpty() } }
     val list = rememberLazyListState()
-    val trimmed = CarrierPickerSearch.trimmedQuery(query)
+    val trimmed = CarrierPickerSearch.trimmedQuery(query.text.toString())
     val searching = trimmed.isNotEmpty()
     // The carriers sorted and their names folded once, not on each letter typed; again for a refreshed catalog.
     val index = remember(catalog, catalog.definitions, language) { CarrierPickerSearch.Index(catalog, language) }
@@ -331,7 +334,7 @@ internal fun CarrierPicker(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 SearchField(
-                    query, { query = it }, localizer.text("picker.search", mapOf("count" to index.size)),
+                    query, localizer.text("picker.search", mapOf("count" to index.size)),
                     localizer.text("picker.clear"), onFocus = { searchOn = true }, Modifier.weight(1f),
                 )
                 SearchClose(searchOn, localizer.text("common.close"), endSearch)
@@ -434,7 +437,7 @@ private val OPENING_SAVER = listSaver<List<CarrierPickerSection>, List<String>>(
  * window made again.
  */
 @Composable
-private fun SearchField(query: String, onQuery: (String) -> Unit, prompt: String, clear: String, onFocus: () -> Unit, modifier: Modifier) {
+private fun SearchField(query: TextFieldState, prompt: String, clear: String, onFocus: () -> Unit, modifier: Modifier) {
     val colors = PeekTheme.colors
     val font = PeekTheme.type.body
     val focusManager = LocalFocusManager.current
@@ -457,7 +460,7 @@ private fun SearchField(query: String, onQuery: (String) -> Unit, prompt: String
         Row(
             Modifier
                 .heightIn(min = SEARCH_HEIGHT)
-                .padding(start = SEARCH_LEADING, end = if (query.isEmpty()) SEARCH_LEADING else CLEAR_TRAILING),
+                .padding(start = SEARCH_LEADING, end = if (query.text.isEmpty()) SEARCH_LEADING else CLEAR_TRAILING),
             horizontalArrangement = Arrangement.spacedBy(SEARCH_SPACING),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -465,7 +468,6 @@ private fun SearchField(query: String, onQuery: (String) -> Unit, prompt: String
             NoSuggestions {
                 BasicTextField(
                     query,
-                    onValueChange = onQuery,
                     modifier = Modifier
                         .weight(1f)
                         .testTag(CARRIER_PICKER_SEARCH)
@@ -474,17 +476,17 @@ private fun SearchField(query: String, onQuery: (String) -> Unit, prompt: String
                         .onFocusChanged { if (it.isFocused) onFocus() }
                         .semantics { contentDescription = prompt },
                     textStyle = font.copy(color = colors.label),
-                    singleLine = true,
+                    lineLimits = TextFieldLineLimits.SingleLine,
                     cursorBrush = SolidColor(colors.accent),
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.None,
                         autoCorrectEnabled = false,
                         imeAction = ImeAction.Search,
                     ),
-                    keyboardActions = KeyboardActions(onSearch = { focusManager.clearFocus() }),
-                    decorationBox = { field ->
+                    onKeyboardAction = { focusManager.clearFocus() },
+                    decorator = { field ->
                         Box(contentAlignment = Alignment.CenterStart) {
-                            if (query.isEmpty()) {
+                            if (query.text.isEmpty()) {
                                 Text(
                                     prompt, Modifier.clearAndSetSemantics {}, color = colors.secondaryText, style = font,
                                     maxLines = 1, overflow = TextOverflow.Ellipsis,
@@ -495,12 +497,12 @@ private fun SearchField(query: String, onQuery: (String) -> Unit, prompt: String
                     },
                 )
             }
-            if (query.isNotEmpty()) {
+            if (query.text.isNotEmpty()) {
                 Box(
                     Modifier
                         .size(SEARCH_HEIGHT)
                         .testTag(CARRIER_PICKER_CLEAR)
-                        .button(interactionSource = null, indication = PlainPress) { onQuery("") }
+                        .button(interactionSource = null, indication = PlainPress) { query.clearText() }
                         .semantics {
                             contentDescription = clear
                             role = Role.Button

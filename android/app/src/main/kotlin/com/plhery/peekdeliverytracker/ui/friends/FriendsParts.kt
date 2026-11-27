@@ -46,8 +46,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.InputTransformation
+import androidx.compose.foundation.text.input.TextFieldBuffer
+import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -465,6 +469,15 @@ private const val NICKNAME_SCALARS = 24
 internal fun String.cutToScalars(limit: Int = NICKNAME_SCALARS): String =
     if (codePointCount(0, length) <= limit) this else substring(0, offsetByCodePoints(0, limit))
 
+/** The nickname's field keeps its first 24 scalars of whatever is typed or pasted ([cutToScalars]). */
+private object NicknameScalars : InputTransformation {
+    override fun TextFieldBuffer.transformInput() {
+        val text = asCharSequence().toString()
+        val cut = text.cutToScalars()
+        if (cut.length < text.length) replace(cut.length, length, "")
+    }
+}
+
 /**
  * `FriendsProfileForm`: "friends.nickname" over its field (raised with 14-point corners, in by 14, the nickname's
  * keyboard, Done taking the keyboard down, at most 24 scalars), the preview of the reader's card as friends will see
@@ -492,13 +505,13 @@ internal fun FriendsProfileForm(
     val type = PeekTheme.type
     val localizer = LocalLocalizer.current
     val focus = LocalFocusManager.current
-    var name by rememberSaveable { mutableStateOf(profile?.nickname ?: "") }
+    val name = rememberTextFieldState(profile?.nickname ?: "")
     var stats by rememberSaveable { mutableStateOf(profile?.shareStats ?: true) }
     var arrival by rememberSaveable { mutableStateOf(profile?.shareArrival ?: false) }
     var countries by rememberSaveable { mutableStateOf(if (profile != null) profile.shareCountries == true else true) }
     var touches by remember { mutableIntStateOf(0) }
     SensoryFeedbackEffect(SensoryFeedback.Impact(SensoryFeedback.Impact.Weight.Light, 0.5), touches)
-    val trimmed = FriendsStore.nickname(name)
+    val trimmed = FriendsStore.nickname(name.text.toString())
     val parcels by source.parcels.collectAsState()
     val preview = remember(parcels, trimmed, stats, arrival, countries, localizer) {
         FriendsStore.ownCard(parcels, FriendProfile(trimmed.ifEmpty { localizer.text("friends.you") }, stats, arrival, countries))
@@ -508,7 +521,7 @@ internal fun FriendsProfileForm(
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             val label = localized("friends.nickname")
             Text(label, color = colors.label, style = type.style(IosTextStyle.Subheadline, FontWeight.SemiBold).sfLines())
-            NicknameField(name, { name = it.cutToScalars() }, localized("friends.nicknamePlaceholder"), label, enabled, focus)
+            NicknameField(name, localized("friends.nicknamePlaceholder"), label, enabled, focus)
         }
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(localized("friends.preview"), color = colors.secondaryText, style = type.subheadline.sfLines())
@@ -547,12 +560,11 @@ internal fun FriendsProfileForm(
  * the accent's cursor; the first letter capitalised, and Done takes the keyboard down (`submitLabel(.done)`).
  */
 @Composable
-private fun NicknameField(value: String, onValueChange: (String) -> Unit, placeholder: String, label: String, enabled: Boolean, focus: FocusManager) {
+private fun NicknameField(state: TextFieldState, placeholder: String, label: String, enabled: Boolean, focus: FocusManager) {
     val colors = PeekTheme.colors
     val font = PeekTheme.type.body.sfLines()
     BasicTextField(
-        value,
-        onValueChange,
+        state,
         Modifier
             .fillMaxWidth()
             .testTag(FRIENDS_NICKNAME)
@@ -563,14 +575,15 @@ private fun NicknameField(value: String, onValueChange: (String) -> Unit, placeh
                 contentType = ContentType.PersonFirstName
             },
         enabled = enabled,
+        inputTransformation = NicknameScalars,
         textStyle = font.copy(color = if (enabled) colors.label else colors.tertiaryLabel),
-        singleLine = true,
+        lineLimits = TextFieldLineLimits.SingleLine,
         cursorBrush = SolidColor(colors.accent),
         keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences, imeAction = ImeAction.Done),
-        keyboardActions = KeyboardActions(onDone = { focus.clearFocus() }),
-        decorationBox = { text ->
+        onKeyboardAction = { focus.clearFocus() },
+        decorator = { text ->
             Box(contentAlignment = Alignment.CenterStart) {
-                if (value.isEmpty()) Text(placeholder, Modifier.clearAndSetSemantics {}, color = colors.secondaryText, style = font, maxLines = 1)
+                if (state.text.isEmpty()) Text(placeholder, Modifier.clearAndSetSemantics {}, color = colors.secondaryText, style = font, maxLines = 1)
                 text()
             }
         },

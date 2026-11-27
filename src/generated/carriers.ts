@@ -15262,6 +15262,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#3fa7ff"
     },
     {
+      "id": "dachser",
+      "catalog": "dachser",
+      "slug": "dachser-tracking",
+      "title": "Rastreio Dachser na Espanha e Portugal: link e status",
+      "name": "Dachser",
+      "color": "#005ca9"
+    },
+    {
       "id": "meest",
       "catalog": "meest",
       "slug": "rastreamento-meest",
@@ -16292,6 +16300,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento SPX Express Singapura: Shopee e status",
       "name": "SPX Express Singapore",
       "color": "#ee4d2d"
+    },
+    {
+      "id": "dai-post",
+      "catalog": "dai-post",
+      "slug": "dai-post-tracking",
+      "title": "Rastreio DAI Post: códigos, status e entrega na Oceania",
+      "name": "DAI Post",
+      "color": "#008faf"
     },
     {
       "id": "chronodiali",
@@ -19972,6 +19988,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#3fa7ff"
     },
     {
+      "id": "dachser",
+      "catalog": "dachser",
+      "slug": "dachser-tracking",
+      "title": "Dachser 西班牙与葡萄牙物流查询：完整链接、状态与预约",
+      "name": "Dachser",
+      "color": "#005ca9"
+    },
+    {
       "id": "meest",
       "catalog": "meest",
       "slug": "meest-wuliu-chaxun",
@@ -21018,6 +21042,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "新加坡 SPX Express（Shopee Xpress）单号查询与状态说明",
       "name": "SPX Express Singapore",
       "color": "#ee4d2d"
+    },
+    {
+      "id": "dai-post",
+      "catalog": "dai-post",
+      "slug": "dai-post-tracking",
+      "title": "DAI Post（Parcel Right）物流查询：单号、状态与清关说明",
+      "name": "DAI Post",
+      "color": "#008faf"
     },
     {
       "id": "chronodiali",

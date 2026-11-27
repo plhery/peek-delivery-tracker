@@ -15422,6 +15422,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fbba00"
     },
     {
+      "id": "venipak",
+      "catalog": "venipak",
+      "slug": "venipak-tracking",
+      "title": "Rastreamento Venipak: status, armários e entregas",
+      "name": "Venipak",
+      "color": "#9339f2"
+    },
+    {
       "id": "lietuvos-pastas",
       "catalog": "lietuvos-pastas",
       "slug": "rastreamento-lietuvos-pastas",
@@ -16508,6 +16516,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio CVC (Си Ви Си): acompanhe encomendas na Bulgária",
       "name": "CVC",
       "color": "#652b9e"
+    },
+    {
+      "id": "transpress",
+      "catalog": "transpress",
+      "slug": "transpress-tracking",
+      "title": "Rastreamento Transpress (Транспрес): encomendas na Bulgária",
+      "name": "Transpress",
+      "color": "#1e6ee2"
     },
     {
       "id": "gls-us",
@@ -20308,6 +20324,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fbba00"
     },
     {
+      "id": "venipak",
+      "catalog": "venipak",
+      "slug": "venipak-tracking",
+      "title": "Venipak 快递查询：状态、自提柜与波罗的海三国客服",
+      "name": "Venipak",
+      "color": "#9339f2"
+    },
+    {
       "id": "lietuvos-pastas",
       "catalog": "lietuvos-pastas",
       "slug": "lietuvos-pastas-litaowan-youzheng-chaxun",
@@ -21410,6 +21434,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "CVC（Си Ви Си）保加利亚物流查询：单号、状态与追踪指南",
       "name": "CVC",
       "color": "#652b9e"
+    },
+    {
+      "id": "transpress",
+      "catalog": "transpress",
+      "slug": "transpress-tracking",
+      "title": "Transpress（Транспрес）快递查询：保加利亚包裹指南",
+      "name": "Transpress",
+      "color": "#1e6ee2"
     },
     {
       "id": "gls-us",

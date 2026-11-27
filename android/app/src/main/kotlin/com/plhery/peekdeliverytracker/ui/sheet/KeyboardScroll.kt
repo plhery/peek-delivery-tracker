@@ -23,8 +23,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusProperties
 import androidx.compose.ui.focus.FocusTargetModifierNode
 import androidx.compose.ui.focus.Focusability
+import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.focus.getFocusedRect
 import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.geometry.Offset
@@ -96,6 +98,8 @@ internal fun KeyboardScrollColumn(
             .then(if (drag != null) Modifier.keyboardDrag(drag) else Modifier)
             .verticalScroll(scroll)
             .then(FocusedField(keyboard))
+            // The whole field, not the cursor a text field gives as its focus's place: what comes above the keyboard.
+            .focusProperties { focusRect = FocusProperties.UnsetFocusRect }
             .onFocusEvent { keyboard.focusMoved() }
             .then(KeyboardRoom(keyboard, ime, bottom))
             .then(contentModifier),

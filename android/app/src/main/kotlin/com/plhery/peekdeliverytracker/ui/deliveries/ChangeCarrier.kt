@@ -13,6 +13,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.InputTransformation
+import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -63,6 +66,7 @@ import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
+import com.plhery.peekdeliverytracker.ui.KeptTyping
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.NoSuggestions
@@ -70,6 +74,7 @@ import com.plhery.peekdeliverytracker.ui.accessibilityFocus
 import com.plhery.peekdeliverytracker.ui.keptFocus
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.CarrierTruck
+import com.plhery.peekdeliverytracker.ui.setTextIfChanged
 import com.plhery.peekdeliverytracker.ui.sheet.FormRowFrame
 import com.plhery.peekdeliverytracker.ui.sheet.FormSection
 import com.plhery.peekdeliverytracker.ui.sheet.LocalSheetGround
@@ -182,11 +187,23 @@ internal class CarrierEditorForm(
     phoneDigits: String = "",
 ) {
     var chosenCarrier by mutableStateOf(chosenCarrier)
-    var trackingUrl by mutableStateOf(trackingUrl)
-    var deliveryPostcode by mutableStateOf(deliveryPostcode)
+    val trackingUrlField = TextFieldState(trackingUrl)
+    var trackingUrl: String
+        get() = trackingUrlField.text.toString()
+        set(value) = trackingUrlField.setTextIfChanged(value)
+    val deliveryPostcodeField = TextFieldState(deliveryPostcode)
+    var deliveryPostcode: String
+        get() = deliveryPostcodeField.text.toString()
+        set(value) = deliveryPostcodeField.setTextIfChanged(value)
     var chosenPostcodeCountry by mutableStateOf(chosenPostcodeCountry)
-    var providerPostcode by mutableStateOf(providerPostcode)
-    var phoneDigits by mutableStateOf(phoneDigits)
+    val providerPostcodeField = TextFieldState(providerPostcode)
+    var providerPostcode: String
+        get() = providerPostcodeField.text.toString()
+        set(value) = providerPostcodeField.setTextIfChanged(value)
+    val phoneDigitsField = TextFieldState(phoneDigits)
+    var phoneDigits: String
+        get() = phoneDigitsField.text.toString()
+        set(value) = phoneDigitsField.setTextIfChanged(value)
     var pushed by mutableStateOf(pushed)
     var large by mutableStateOf(large)
     var roomy = roomy
@@ -391,7 +408,7 @@ private fun ChangeCarrierForm(
                     when (requirement.field) {
                         CarrierRequirement.Field.TrackingUrl -> FormRowFrame(Modifier) {
                             CarrierField(
-                                form.trackingUrl, { form.trackingUrl = it }, localized("add.requirement.trackingUrl"), CHANGE_CARRIER_URL,
+                                form.trackingUrlField, localized("add.requirement.trackingUrl"), CHANGE_CARRIER_URL,
                                 KeyboardOptions(KeyboardCapitalization.None, autoCorrectEnabled = false, keyboardType = KeyboardType.Uri),
                                 singleLine = false,
                             )
@@ -405,13 +422,13 @@ private fun ChangeCarrierForm(
                                     Spacer(Modifier.width(6.dp))
                                 }
                                 CarrierField(
-                                    form.deliveryPostcode, { form.deliveryPostcode = requirement.typedValue(it) },
-                                    localized("add.requirement.dpdPostcode"), CHANGE_CARRIER_POSTCODE,
+                                    form.deliveryPostcodeField, localized("add.requirement.dpdPostcode"), CHANGE_CARRIER_POSTCODE,
                                     KeyboardOptions(
                                         KeyboardCapitalization.Characters, autoCorrectEnabled = false,
                                         keyboardType = postcodeKeyboard(change.postcodeKeys(requirement)),
                                     ),
                                     postalCode = true,
+                                    filter = remember(requirement) { KeptTyping(requirement::typedValue) },
                                 )
                                 if (requirement.isOptional) {
                                     Text(
@@ -435,13 +452,13 @@ private fun ChangeCarrierForm(
                         // Number keys, and no autofill hint: nothing on the phone fills in these digits.
                         CarrierRequirement.Field.PhoneDigits -> FormRowFrame(Modifier) {
                             CarrierField(
-                                form.phoneDigits, { form.phoneDigits = requirement.normalizedValue(it) },
-                                localized("add.requirement.phoneDigits"), CHANGE_CARRIER_PHONE_DIGITS,
+                                form.phoneDigitsField, localized("add.requirement.phoneDigits"), CHANGE_CARRIER_PHONE_DIGITS,
                                 KeyboardOptions(
                                     KeyboardCapitalization.None, autoCorrectEnabled = false,
                                     keyboardType = if (requirement.inputMode == "numeric") KeyboardType.Number else KeyboardType.Ascii,
                                 ),
                                 monospacedDigits = true,
+                                filter = remember(requirement) { KeptTyping(requirement::normalizedValue) },
                             )
                             if (requirement.isOptional) {
                                 Text(
@@ -458,7 +475,7 @@ private fun ChangeCarrierForm(
             FormSection(null, footer = localizer.text("detail.providerInputNeeded", mapOf("provider" to change.inputProvider.orEmpty()))) {
                 FormRowFrame(Modifier) {
                     CarrierField(
-                        form.providerPostcode, { form.providerPostcode = it }, localized("add.requirement.dpdPostcode"), CHANGE_CARRIER_PROVIDER_POSTCODE,
+                        form.providerPostcodeField, localized("add.requirement.dpdPostcode"), CHANGE_CARRIER_PROVIDER_POSTCODE,
                         KeyboardOptions(KeyboardCapitalization.Characters, autoCorrectEnabled = false),
                         postalCode = true,
                     )
@@ -535,22 +552,21 @@ private fun CarrierRow(change: CarrierChange, refused: Boolean, focus: Accessibi
  */
 @Composable
 private fun androidx.compose.foundation.layout.RowScope.CarrierField(
-    value: String,
-    onValueChange: (String) -> Unit,
+    state: TextFieldState,
     placeholder: String,
     tag: String,
     keyboard: KeyboardOptions,
     singleLine: Boolean = true,
     postalCode: Boolean = false,
     monospacedDigits: Boolean = false,
+    filter: InputTransformation? = null,
 ) {
     val colors = PeekTheme.colors
     val base = PeekTheme.type.body.sfLines()
     val font = if (monospacedDigits) base.copy(fontFeatureSettings = "tnum") else base
     NoSuggestions {
         BasicTextField(
-            value,
-            onValueChange,
+            state,
             Modifier
                 .weight(1f)
                 .testTag(tag)
@@ -559,13 +575,14 @@ private fun androidx.compose.foundation.layout.RowScope.CarrierField(
                     contentDescription = placeholder
                     if (postalCode) contentType = ContentType.PostalCode
                 },
+            inputTransformation = filter,
             textStyle = font.copy(color = colors.label),
-            singleLine = singleLine,
+            lineLimits = if (singleLine) TextFieldLineLimits.SingleLine else TextFieldLineLimits.MultiLine(),
             cursorBrush = SolidColor(colors.accent),
             keyboardOptions = keyboard,
-            decorationBox = { text ->
+            decorator = { text ->
                 Box(contentAlignment = Alignment.CenterStart) {
-                    if (value.isEmpty()) Text(placeholder, Modifier.clearAndSetSemantics {}, color = colors.secondaryText, style = font)
+                    if (state.text.isEmpty()) Text(placeholder, Modifier.clearAndSetSemantics {}, color = colors.secondaryText, style = font)
                     text()
                 }
             },

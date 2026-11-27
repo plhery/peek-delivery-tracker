@@ -7,7 +7,6 @@ import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.text.input.TextFieldState
-import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.MutableState
@@ -64,6 +63,7 @@ import com.plhery.peekdeliverytracker.core.isArchived
 import com.plhery.peekdeliverytracker.core.parcelName
 import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
+import com.plhery.peekdeliverytracker.ui.setTextIfChanged
 import com.plhery.peekdeliverytracker.ui.settings.AccountHost
 import com.plhery.peekdeliverytracker.ui.settings.DELIVERY_UPDATES_PAGE
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_PAGE
@@ -386,9 +386,7 @@ internal class DeliveriesState(
     /** What the search field holds ([queryField]); set, its words become these, the cursor after them. */
     var query: String
         get() = views.query.text.toString()
-        set(value) {
-            if (value != query) views.query.setTextAndPlaceCursorAtEnd(value)
-        }
+        set(value) = views.query.setTextIfChanged(value)
 
     /**
      * The search field has the keyboard's focus (`@FocusState searchFocused`), kept with the window so that a rotation
@@ -1334,9 +1332,7 @@ internal class DeliveriesState(
     /** What the rename alert's field holds ([renameField]); set, its words become these, the cursor after them. */
     var renameText: String
         get() = prompts.name.text.toString()
-        set(value) {
-            if (value != renameText) prompts.name.setTextAndPlaceCursorAtEnd(value)
-        }
+        set(value) = prompts.name.setTextIfChanged(value)
 
     /**
      * The parcel a card's menu asked to name, as it was then (`prompts.renaming`): the name goes to it, even once it has

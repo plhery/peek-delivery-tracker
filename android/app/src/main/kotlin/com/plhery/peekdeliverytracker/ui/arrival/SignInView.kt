@@ -36,7 +36,6 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.input.InputTransformation
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.TextFieldState
-import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -119,6 +118,7 @@ import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.NoticeBanner
 import com.plhery.peekdeliverytracker.ui.draw.stroke
+import com.plhery.peekdeliverytracker.ui.setTextIfChanged
 import com.plhery.peekdeliverytracker.ui.sheet.KeyboardScrollColumn
 import com.plhery.peekdeliverytracker.ui.sheet.MenuOption
 import com.plhery.peekdeliverytracker.ui.sheet.SheetMenu
@@ -168,12 +168,12 @@ internal class SignInForm(
     val emailField = TextFieldState(email)
     var email: String
         get() = emailField.text.toString()
-        set(value) { if (value != email) emailField.setTextAndPlaceCursorAtEnd(value) }
+        set(value) = emailField.setTextIfChanged(value)
     var sentTo by mutableStateOf(sentTo)
     val codeField = TextFieldState(code)
     var code: String
         get() = codeField.text.toString()
-        set(value) { if (value != code) codeField.setTextAndPlaceCursorAtEnd(value) }
+        set(value) = codeField.setTextIfChanged(value)
     var emailExpanded by mutableStateOf(expanded)
     var errorMessage by mutableStateOf(error)
     val working: Boolean get() = run.working

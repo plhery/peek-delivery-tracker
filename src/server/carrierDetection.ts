@@ -76,17 +76,31 @@ async function recognize(trackingNumber: string, typed: string, beforeAsking?: (
   const deadline = performance.now() + 25_000;
   await beforeAsking?.();
   const errors = new Map<string, unknown>();
+  // The name of the error each carrier's latest check threw before its batch's time ran out.
+  const thrown = new Map<string, string>();
+  const noteThrown = (carrier: string, error: unknown, context: TrackingContext) => {
+    if (!context.signal?.aborted) thrown.set(carrier, error instanceof Error ? error.name : 'Error');
+  };
   const ask = async (carrier: string, context: TrackingContext) => {
+    thrown.delete(carrier);
     const adapter = (registry ??= createAdapterRegistry()).for(carrier);
-    if (!adapter?.recognize) throw new RangeError(`${carrier} cannot recognize a number`);
+    if (!adapter?.recognize) {
+      const error = new RangeError(`${carrier} cannot recognize a number`);
+      noteThrown(carrier, error, context);
+      throw error;
+    }
     try {
       const answer = await withLookupPurpose('recognition', () => adapter.recognize!(trackingNumber, context));
       // The saved parcel's first check takes it instead of asking again; an answer past the batch's time took no part here.
       if (!context.signal?.aborted) rememberPreflightRecognition(carrier, trackingNumber, answer);
       return answer;
-    } catch (error) { errors.set(carrier, error); throw error; }
+    } catch (error) { errors.set(carrier, error); noteThrown(carrier, error, context); throw error; }
   };
-  const askBrowser = (carrier: string, context: TrackingContext) => recognizeBrowser(carrier, trackingNumber, context, errors.get(carrier));
+  const askBrowser = async (carrier: string, context: TrackingContext) => {
+    thrown.delete(carrier);
+    try { return await recognizeBrowser(carrier, trackingNumber, context, errors.get(carrier)); }
+    catch (error) { noteThrown(carrier, error, context); throw error; }
+  };
   const browserBudget = () => Math.max(1, Math.min(BROWSER_RECOGNITION_BUDGET_MS, Math.floor(deadline - performance.now())));
   // A number that passes FedEx's check goes to FedEx, which answers only in a browser, as soon as the first five miss
   // it, before the next five and the providers. When FedEx also ranks above every carrier asked over HTTP (none of them
@@ -140,6 +154,12 @@ async function recognize(trackingNumber: string, typed: string, beforeAsking?: (
   // Who was asked, and who could not answer, tells "nobody knows it yet" from "could not check".
   const asked = [...new Set(outcomes.map((candidate) => candidate.carrier as ApiCarrierId))];
   const unanswered = asked.filter((carrier) => outcomes.filter((outcome) => outcome.carrier === carrier).every((outcome) => outcome.status === 'failed'));
+  // Why a carrier could not answer, from its latest check: its error's kind and reason, the name of an error that is
+  // not a carrier's, or `timeout` when it had not answered by the end of its batch.
+  const why = (carrier: string) => {
+    const failure = outcomes.filter((outcome) => outcome.carrier === carrier).at(-1)?.failure;
+    return failure ? [failure.kind, failure.reason].filter(Boolean).join(':') : thrown.get(carrier) ?? 'timeout';
+  };
   const answer: ApiCarrierDetectionResponse = {
     trackingNumber,
     ...preflight,
@@ -161,6 +181,7 @@ async function recognize(trackingNumber: string, typed: string, beforeAsking?: (
       known: outcomes.filter((outcome) => outcome.status === 'known').length,
       failed: unanswered.length,
       unanswered_carriers: unanswered.join(','),
+      unanswered_failures: unanswered.map((carrier) => `${carrier}:${why(carrier)}`).join(','),
       settled: carrier ?? preflight?.carrier ?? (choices.length > 1 ? 'choice' : 'none'),
     });
   }

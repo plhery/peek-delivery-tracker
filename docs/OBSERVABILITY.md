@@ -888,7 +888,9 @@ Key JSON events:
   FedEx was asked before the next five (`fedex_early`; a head start without it was stopped by the first
   five's answer) and again with the browser confirmations because that read did not answer (`fedex_retried`),
   whether it asked the last resorts once all the others had missed the number (`last_resort`), how many
-  knew the number or failed (`unanswered_carriers` names those), and what it settled on (a carrier,
+  knew the number or failed (`unanswered_carriers` names those; `unanswered_failures` gives each one's
+  `carrier:why`, from its latest check: its error's kind and reason, such as `challenge:http_403`, the name of an
+  error that is not a carrier's, or `timeout` when its batch's time ran out first), and what it settled on (a carrier,
   `choice` or `none`).
 - `typo_candidate`: the number of a parcel just added or looked up reads as a digit typed
   twice: leaving out one digit of two identical neighbours gives a number that a

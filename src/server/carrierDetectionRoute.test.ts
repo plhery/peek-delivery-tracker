@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import { recognitionCandidates, type RecognitionOptions } from 'universal-parcel-scraper';
+import { ChallengeError, recognitionCandidates, type RecognitionOptions } from 'universal-parcel-scraper';
 import type { TrackingContext } from 'universal-parcel-scraper/node';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 import { POST } from '../../app/api/carriers/detect/route';
@@ -299,6 +299,22 @@ it('answers unknown when no carrier knows the number or one fails, and asks agai
   expect(asked()).toEqual(bothBatches('06080000000035'));
 });
 
+it('logs why each carrier could not answer: its error, or an error that is not a carrier\'s', async () => {
+  const number = '06080000000050';
+  const [challenged, faulty] = recognitionAskedCarriers(number);
+  expect(faulty, 'two carriers are asked about the number').toBeDefined();
+  recognize.mockImplementation(async (carrier: string) => {
+    if (carrier === challenged) throw new ChallengeError('Carrier', 'Turned away', { reason: 'http_403' });
+    if (carrier === faulty) throw new TypeError('Unexpected reply');
+    return { known: false };
+  });
+  const logged = vi.spyOn(observability, 'logOperationalEvent');
+  await request(number);
+  expect(logged).toHaveBeenCalledWith('carrier_recognition', expect.objectContaining({
+    unanswered_carriers: `${challenged},${faulty}`, unanswered_failures: `${challenged}:challenge:http_403,${faulty}:TypeError`,
+  }));
+});
+
 it("keeps each carrier's answer for the saved parcel's first check, and nothing from a carrier that failed", async () => {
   const number = '06080000000126';
   recognize.mockImplementation(async (carrier: string) => {
@@ -379,9 +395,14 @@ it('gives the next five only what is left of the route\'s time, and asks them ag
     if (first.includes(carrier)) return { known: false };
     return await new Promise((_resolve, reject) => context.signal?.addEventListener('abort', () => reject(new Error('cancelled'))));
   });
+  const logged = vi.spyOn(observability, 'logOperationalEvent');
   expect(await (await request(number)).json()).toEqual({ trackingNumber: number, carrier: 'unknown', asked: [...first, ...next], unanswered: next });
   expect(recognize.mock.calls.filter(([carrier]) => next.includes(carrier)).map(([, , context]) => context.budgetMs))
     .toEqual(next.map(() => 10));
+  // Their errors came once their time had run out: the line says they timed out.
+  expect(logged).toHaveBeenCalledWith('carrier_recognition', expect.objectContaining({
+    unanswered_failures: next.map((carrier) => `${carrier}:timeout`).join(','),
+  }));
 
   // Past the deadline they are not asked and go unanswered, so the next focus-out asks again.
   claiming = 30_000;

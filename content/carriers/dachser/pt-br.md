@@ -53,7 +53,7 @@ Pontos que costumam confundir:
 - "Not yet in delivery or could not be successfully delivered" cobre vários cenários. A ajuda em espanhol cita três exemplos: o destinatário pediu aviso prévio, a mercadoria foi recusada ou o endereço estava errado. Verifique se a loja tem seu telefone e endereço corretos.
 - "Booked out" significa cancelado, não reservado.
 
-## Entregas Dachser: agendamento e tentativas perdidas
+## Entregas Dachser: agendamento e entregas não realizadas
 
 **Agendamentos.** As condições da Dachser na Espanha informam que as entregas targo on-site não têm horário fixo e normalmente são combinadas por telefone com o destinatário, portanto fique atento a ligações. A Dachser descreve o targo on-site como entrega agendada na calçada, pela manhã ou à tarde. No targo on-site plus, a mercadoria é levada até o local de uso e, em alguns países, há possibilidade de entrega noturna ou aos sábados. No targo on-site fix, você combina a data diretamente com a loja na compra.
 
@@ -63,7 +63,7 @@ Pontos que costumam confundir:
 
 **Sem pontos de retirada nem armários.** As páginas espanholas e portuguesas da Dachser não mencionam pontos de coleta, avisos deixados na porta, número de tentativas nem prazo de guarda para destinatários.
 
-**Entrega perdida.** Pelos termos da Dachser na Espanha e em Portugal, quando a entrega falha por ausência, endereço incorreto ou incompleto ou recusa, a responsabilidade e os custos recaem sobre o remetente, e uma segunda entrega é cobrada como serviço extra do remetente. Por isso, avise a loja depressa se perder a entrega.
+**Entrega não realizada.** Pelos termos da Dachser na Espanha e em Portugal, quando a entrega falha por ausência, endereço incorreto ou incompleto ou recusa, a responsabilidade e os custos recaem sobre o remetente, e uma segunda entrega é cobrada como serviço extra do remetente. Por isso, avise a loja depressa se perder a entrega.
 
 ## Entrega Dachser atrasada, danificada ou perdida
 
@@ -92,11 +92,11 @@ A Dachser não lista uma linha exclusiva para destinatários. Conforme consta em
 
 ## Como acompanhar uma entrega Dachser no Peek
 
-O [Peek](/) não consegue reconhecer um número da Dachser pelos dígitos nem consultá-lo sem a chave de acesso, então cole o link completo recebido na mensagem: o Peek o reconhece como Dachser e o salva. Se você digitou apenas o número, toque em "Alterar", selecione Dachser e cole o link no campo de link completo de rastreio. Links de outro endereço, sem chave, com parâmetro desconhecido ou número diferente são recusados; sem o link, o Peek solicita o link completo do e-mail de envio.
+O [Peek](/) não consegue reconhecer um número da Dachser pelos dígitos nem consultá-lo sem a chave de acesso, então cole o link completo recebido na mensagem: o Peek o reconhece como Dachser e o salva. Se você digitou apenas o número, toque em "Trocar", selecione Dachser e cole o link no campo "Link de rastreamento completo". Links de outro endereço, sem chave, com parâmetro desconhecido ou número diferente são recusados; sem o link, o Peek mostra "Use o link de rastreamento completo do e-mail de envio."
 
-Ele lê apenas a página Customer Iberia, cobrindo entregas Dachser na Espanha e em Portugal. Mostra o status, o histórico e o dia previsto de entrega até a saída para entrega. Cada etapa aparece nas palavras do próprio Peek (como dados recebidos, coletado, chegada a unidade Dachser, saiu para entrega, agendamento atualizado ou entregue); o texto original da Dachser não é mantido. Os horários são lidos no fuso fornecido pela Dachser — ou no horário de Madri — e exibidos no fuso do seu dispositivo. A Dachser não informa locais, então quase nada aparece no mapa; remetente, seus contatos e assinatura ficam de fora.
+Ele lê apenas a página Customer Iberia, cobrindo entregas Dachser na Espanha e em Portugal. Mostra o status, o histórico e o dia previsto de entrega até a saída para entrega. Cada etapa aparece nas palavras do próprio Peek (como Informações de envio recebidas, Encomenda coletada, Encomenda chegou a uma unidade Dachser, Saiu para entrega, Agendamento da entrega atualizado ou Entregue); o texto original da Dachser não é mantido. Os horários são lidos no fuso fornecido pela Dachser — ou no horário de Madri — e exibidos no fuso do seu dispositivo. A Dachser não informa locais, então quase nada aparece no mapa; remetente, seus contatos e assinatura ficam de fora.
 
-Enquanto o rastreador da Dachser responder, o Peek consulta até a cada 10 minutos com o envio aberto na tela ou com alertas ligados se a entrega for esperada hoje. A partir das 6h no relógio da transportadora no dia em que sai para entrega, pode verificar a cada 2 minutos com o pacote na tela ou alertas ativos. Fora da tela e sem alertas, consulta normalmente a cada hora. Quando apenas um serviço de rastreamento responde, verifica de hora em hora, a cada 3 horas depois de um dia da última leitura, ou até a cada 15 minutos no dia da saída para entrega com o pacote aberto ou alertas ligados. Nas consultas diretas à transportadora, após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Você pode ativar notificações para cada atualização, etapas importantes ou somente no dia da entrega. Um envio desconhecido ou link quebrado pode aparecer como não encontrado ou falha na consulta.
+Enquanto o rastreador da Dachser responder, o Peek consulta até a cada 10 minutos com o envio aberto na tela ou com alertas ligados se a entrega for esperada hoje. A partir das 6h no relógio da transportadora no dia em que sai para entrega, pode verificar a cada 2 minutos com o pacote na tela ou alertas ativos. Fora da tela e sem alertas, consulta normalmente a cada hora. Quando apenas um serviço de rastreamento responde, verifica de hora em hora, a cada 3 horas depois de um dia da última leitura, ou até a cada 15 minutos no dia da saída para entrega com o pacote aberto ou alertas ligados. Nas consultas diretas à transportadora, após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. O Peek pode avisar você em "Cada movimentação", "Etapas importantes" ou "Só a entrega". Um envio desconhecido ou link quebrado pode aparecer como não encontrado ou falha na consulta.
 
 ## Perguntas sobre o rastreio Dachser
 
@@ -113,8 +113,8 @@ Sim, quando a loja contrata o serviço: o targo on-site entrega a clientes parti
 Às vezes. Se a página Customer Iberia exibir o botão "Arrange date.", escolha ali o dia e o intervalo de horário; caso contrário, atenda à ligação da Dachser ou fale com a loja.
 
 :::sources
-- [DACHSER Spain: Condiciones generales European Logistics](https://www.dachser.es/downloads/Spain/Spain_Terms_Conditions.zip) – agendamentos por telefone, domingos, sábados, prazos estimativos, custos de entrega perdida, extras, reclamações
-- [DACHSER Portugal: Condições gerais de transporte](https://www.dachser.pt/downloads/Portugal/Portugal_Terms_Conditions.zip) – prazos estimativos, custos de entrega perdida, extras, reclamações
+- [DACHSER Spain: Condiciones generales European Logistics](https://www.dachser.es/downloads/Spain/Spain_Terms_Conditions.zip) – agendamentos por telefone, domingos, sábados, prazos estimativos, custos de entrega não realizada, extras, reclamações
+- [DACHSER Portugal: Condições gerais de transporte](https://www.dachser.pt/downloads/Portugal/Portugal_Terms_Conditions.zip) – prazos estimativos, custos de entrega não realizada, extras, reclamações
 - [DACHSER Spain: targo on-site fix permite fijar una fecha de entrega al realizar un pedido](https://www.dachser.es/es/mediaroom/DACHSER-amplia-su-cartera-de-servicios-para-entregas-B2C-24216) – targo on-site, entrega na calçada, plus, fix
 - [DACHSER Portugal: DACHSER disponibiliza serviço entargo em Portugal e Espanha](https://www.dachser.pt/pt/mediaroom/DACHSER-disponibiliza-servico-entargo-em-Portugal-e-Espanha-16917) – entrega agendada, manhãs e tardes
 - [DACHSER Spain: eLogistics](https://www.dachser.es/es/elogistics-116) – link de rastreio compartilhado com clientes

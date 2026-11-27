@@ -1,15 +1,15 @@
 ---
 title: Śledzenie przesyłki Amazon: gdzie znaleźć numer śledzenia
-description: Gdzie Amazon.pl pokazuje przewoźnika i numer śledzenia twojej paczki i jak śledzić ją w Peek: samodzielnie albo z Claude lub ChatGPT, które zrobią to za ciebie.
+description: Gdzie znaleźć numer śledzenia paczki na Amazon.pl („Moje zamówienia” → „Śledź przesyłkę”), dlaczego czasem go brak i jak zaimportować paczki do Peek przez AI.
 slug: sledzenie-zamowienia-amazon
 picture: Telefon pokazuje postęp zamówienia, dwie furgonetki przekazują sobie paczkę, a Pip się przygląda.
 published: 2026-10-16
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Amazon pokazuje przewoźnika i numer śledzenia każdej paczki w „Moje zamówienia”, a potem w „Śledź przesyłkę”. Skopiuj numer do [Peek](/), a będziesz śledzić paczkę razem ze wszystkimi innymi. Na każdej stronie Amazona działa to tak samo.
+Aby sprawdzić numer śledzenia i przewoźnika paczki z **Amazon.pl**, otwórz „Moje zamówienia” i kliknij „Śledź przesyłkę” obok konkretnej przesyłki — nazwa firmy kurierskiej i numer pojawiają się pod spodem (e-maile z Amazona zwykle go nie zawierają). Skopiuj numer do [Peek](/), aby śledzić paczkę razem z innymi zamówieniami z dowolnej wersji sklepu Amazon, albo pozwól Claude lub ChatGPT na komputerze zaimportować paczki za ciebie.
 
-## Gdzie na Amazonie znajdę numer śledzenia?
+## Gdzie na Amazon.pl znajdę numer śledzenia paczki?
 
 :::steps
 - Otwórz „Moje zamówienia” | Na stronie znajdziesz je w prawym górnym rogu. W aplikacji Amazon dotknij ikony osoby, a potem „Moje zamówienia”.
@@ -36,13 +36,13 @@ Na innych stronach Amazona te same przyciski nazywają się tak:
 | amazon.it | I miei ordini | Traccia il mio pacco |
 | amazon.es | Mis pedidos | Localiza tu paquete |
 
-### Brak numeru śledzenia?
+### Dlaczego brakuje numeru śledzenia w zamówieniu Amazon?
 
 - **Nowe zamówienie.** Numer zwykle pojawia się, gdy przewoźnik ma już paczkę.
 - **Amazon dostarcza sam.** Zamówienie może nie pokazywać żadnego numeru albo numer Amazona: dwie litery kraju i 10 cyfr, np. `PL1234567890`. Mimo to wklej go do Peek: Peek będzie go śledzić, jeśli Amazon pokazuje go w publicznym śledzeniu, a jeśli widać go tylko na twoim koncie Amazon, Peek ci o tym powie.
 - **Numer zamówienia,** trzy grupy cyfr, np. `123-1234567-1234567`, nigdy nie jest numerem śledzenia.
 
-## Czy Claude albo ChatGPT mogą to zrobić za mnie?
+## Czy Claude albo ChatGPT mogą zaimportować moje paczki z Amazona?
 
 Tak, na komputerze: asystent musi sterować przeglądarką, w której logujesz się na Amazonie. Claude robi to przez Claude in Chrome, w płatnym planie Claude; ChatGPT z czatu Work w swojej aplikacji na komputer, z rozszerzeniem przeglądarki. W telefonie albo w czacie, który może tylko czytać twoje otwarte karty lub przegląda strony z własnych serwerów, asystent nie dostanie się do twoich zamówień, a e-maile od Amazona nie podają numeru śledzenia.
 

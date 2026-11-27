@@ -1,12 +1,12 @@
 ---
 title: Rastreio WanbExpress: números WNB…YQ, estados e entrega
-description: Segue uma encomenda WanbExpress (Wanb Express) da China: formato do número WNB…YQ, significado dos estados em inglês, transportadora final e a quem reclamar.
+description: Como rastrear encomenda WanbExpress (código WNB…YQ) da China: estados alfandegários, transportadora local, taxas UE de 3 € e 2 € e a quem reclamar atrasos.
 slug: rastreio-wanbexpress
 published: 2026-11-21
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-A WanbExpress (também conhecida como Wanb Express, WanBang Express ou WANB) é uma transportadora chinesa que envia encomendas para o estrangeiro, onde uma transportadora local faz a entrega. Se uma loja enviou a tua compra pela WanbExpress, o número começa por `WNB` e acaba em `YQ`: cola-o na caixa acima. O rastreio próprio da WanbExpress, tracking.wanbexpress.com, também pode indicar qual é a transportadora que entrega no teu país e o respetivo número.
+Para rastrear uma encomenda da **WanbExpress** (também chamada *Wanb Express*, *WanBang Express* ou *WANB*), cola na caixa acima o código de 17 carateres que começa por `WNB` e termina em `YQ`, ou consulta-o em `tracking.wanbexpress.com`. A transportadora chinesa acompanha o envio desde a triagem em Shenzhen e a alfândega até à entrega por uma transportadora local, cujo nome e segundo código podem surgir no rastreio da WanbExpress.
 
 ## Número de seguimento WanbExpress: como é
 
@@ -106,25 +106,25 @@ Enquanto tens a encomenda aberta no ecrã ou no dia da entrega com as notificaç
 
 ## Perguntas sobre o rastreio WanbExpress
 
-### O que é a WanbExpress?
+### Como rastrear uma encomenda WanbExpress com código WNB…YQ?
 
-Uma transportadora chinesa, também chamada Wanb Express, WanBang Express ou WANB. No código do Peek, os seus registos começam num centro de triagem em Shenzhen, seguem o voo e a alfândega e terminam com os registos da transportadora que entrega no país de destino.
+Cola o código completo de 17 carateres (`WNB`, duas letras, dez algarismos e `YQ`) na caixa acima ou em `tracking.wanbexpress.com`, que faz uma verificação antibot e pode mostrar a transportadora final e uma foto de entrega. O [Peek](/) identifica o formato `WNB…YQ` automaticamente sem pedir conta nem código postal.
 
-### Onde posso rastrear uma encomenda WanbExpress?
+### O que é a WanbExpress e quem entrega no país de destino?
 
-Na caixa acima ou no rastreio da própria WanbExpress em tracking.wanbexpress.com. Esse site faz uma verificação antibot e também pode indicar a transportadora final. Usa o número `WNB…YQ` completo.
+É uma transportadora chinesa (*Wanb Express*, *WanBang Express* ou *WANB*) cujos registos começam em Shenzhen e passam depois para uma transportadora local. O código do Peek mostra a iMile na Alemanha, registos da InPost no Reino Unido, a rede da Poste Italiane, reetiquetagem para `DOFR…HD`/`CNFR…HD` em França e a J&T Express Australia; noutros países, consulta `tracking.wanbexpress.com` ou pergunta ao vendedor.
 
-### O que significa «Customs declaration completed» na WanbExpress?
+### O que significa «Customs declaration completed» vs «Custom clearance completed»?
 
-Que foi concluída uma declaração aduaneira para a encomenda. O texto não diz de que país é nem significa que a alfândega de importação libertou a encomenda: essa etapa aparece como `Custom clearance completed`. O Peek mostra ambos como «Em trânsito».
+`Customs declaration completed` indica apenas que foi concluída uma declaração aduaneira, sem especificar o país nem confirmar o desalfandegamento de importação. A libertação pela alfândega no destino surge como `Custom clearance completed`, e o Peek mostra ambos como «Em trânsito».
 
-### Quem entrega as encomendas WanbExpress no meu país?
+### Pago alfândega na UE por uma encomenda WanbExpress vinda da China?
 
-Uma transportadora local, que o rastreio da WanbExpress pode indicar com o respetivo número. O código do Peek mostra a iMile numa encomenda para a Alemanha, linhas da InPost para o Reino Unido e um registo que refere a rede da Poste Italiane, bem como passagens para a J&T Express Australia ou números `DOFR…HD`/`CNFR…HD` em França; para outros países, verifica tracking.wanbexpress.com ou pergunta ao vendedor.
+Nas compras online fora da UE aplica-se desde 1 de julho de 2026 um direito aduaneiro temporário de 3 € por adição (tipo de produto) em encomendas até 150 €, e desde 1 de novembro de 2026 soma-se a taxa de tratamento da União de 2 € por adição, qualquer que seja o valor.
 
-### Quem devo contactar se a minha encomenda WanbExpress se perdeu?
+### A quem reclamar se a encomenda WanbExpress estiver parada ou perdida?
 
-O vendedor onde compraste: foi ele quem contratou a WanbExpress. O Peek não conseguiu consultar o site da WanbExpress para obter contactos.
+Contacta o vendedor ou o marketplace onde compraste, porque foi ele quem contratou a WanbExpress (o Peek não conseguiu consultar contactos no site da empresa). Para reagendar a entrega após um registo como `<Route not completed>`, fala diretamente com a transportadora local.
 
 :::sources
 - [Universal Parcel Scraper: WanbExpress](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/wanbexpress) – nomes, formato `WNB…YQ`, consulta por navegador, textos dos registos e etapas (incluindo `Customs inspection has not yet released`, `A-Scan: shipment in international transit`, linhas da iMile, InPost, Poste Italiane e parceiros dos EUA), horas com desfasamento UTC, identificação da transportadora final (`TrackLastMileCarrier`), fotos e morada excluídas

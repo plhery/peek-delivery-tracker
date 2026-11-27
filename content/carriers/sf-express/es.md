@@ -1,12 +1,12 @@
 ---
 title: Seguimiento SF Express: número de guía, estados y entrega
-description: Sigue un paquete de SF Express desde China: número de 12 cifras o con SF, qué significan sus estados, cómo entrega SF International, aduanas y contacto.
+description: Cómo seguir un paquete de SF Express (SF International) desde China: guía de 12 cifras o SF, estado «Accepted», aduanas UE (3 € y 2 €) y teléfono de contacto.
 slug: seguimiento-sf-express
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-SF Express (顺丰, abreviado SF) es un grupo logístico chino fundado en 1993 con sede en Shenzhen. Su división transfronteriza, SF International, envía paquetes al extranjero para empresas, tiendas en línea y particulares. Cada web regional de SF tiene su propio buscador: www.sf-express.com para China continental, htm.sf-express.com para Taiwán y www.sf-international.com para su red internacional. También puedes pegar el número en el cuadro de arriba.
+Para rastrear un paquete de **SF Express** (顺丰) o su división internacional **SF International**, pega arriba tu número de guía —de 12 cifras o de 15 caracteres empezando por `SF`— o consúltalo en el buscador regional correspondiente (`sf-express.com` para China continental, `htm.sf-express.com` para Taiwán y `sf-international.com` para envíos internacionales). Fundada en 1993 con sede en Shenzhen, SF entrega los paquetes desde China al extranjero a través de colaboradores locales, y [Peek](/) convierte sus marcas horarias en hora china (UTC+8) a tu zona horaria.
 
 ## Número de seguimiento de SF Express: cómo es
 
@@ -98,21 +98,25 @@ Peek consulta novedades hasta cada 10 minutos mientras tienes el paquete abierto
 
 ## Preguntas frecuentes sobre el seguimiento de SF Express
 
-### ¿Es fiable SF Express?
+### ¿Cómo rastrear un paquete de SF Express o SF International?
 
-Sí. Fundada en 1993, SF cotiza en las Bolsas de Shenzhen y Hong Kong. Se define como el mayor proveedor integral de logística de China y Asia y el cuarto del mundo por ingresos de 2025, citando un informe de Frost & Sullivan.
+Introduce tu número de guía de 12 cifras o de 15 caracteres que empieza por `SF` en el cuadro de arriba, o en el localizador regional de SF (`sf-express.com`, `htm.sf-express.com` o `sf-international.com`). Como muchos transportistas usan 12 cifras, si Peek propone otra empresa toca «Cambiar» y elige SF Express.
 
 ### ¿Qué significa «Accepted» en el seguimiento de SF Express?
 
 Entregado. El seguimiento en inglés de SF usa `Accepted` para traducir 已签收, «firmado al recibir»: el envío llegó a la dirección de entrega. No significa que SF acabe de admitirlo.
 
-### ¿Cuánto tarda SF International en llegar a España o México?
+### ¿Cuánto tarda SF International en llegar a España o México y quién lo reparte?
 
-SF solo publica plazos orientativos y advierte que «does not make any transit time commitment», sin compromiso de plazo. En E-Parcel indica de 14 a 18 días hábiles a España y de 6 a 22 días hábiles al grupo de otros países donde entra México. En EX-CD saliendo del sur de China indica de 6 a 10 días hábiles a España y de 10 a 15 días hábiles a México.
+SF solo publica plazos orientativos sin compromiso de plazo: en E-Parcel indica 14–18 días hábiles a España y 6–22 días hábiles a otros destinos como México; en EX-CD desde el sur de China, 6–10 días hábiles a España y 10–15 días hábiles a México. Al llegar al país de destino, SF entrega el paquete a un operador local (*service partner*) cuyo nombre no detalla en sus páginas, y no entrega en direcciones que solo contengan un apartado de correos o código postal.
 
-### ¿SF Express entrega en apartados de correos?
+### ¿Pago aduanas en España por un paquete de SF Express desde China?
 
-No. Las condiciones de SF para envíos desde China continental excluyen las direcciones compuestas únicamente por un apartado postal o un código postal. Facilita una calle con número o un punto de recogida cuando la tienda lo ofrezca.
+En Península, Baleares y Canarias, los envíos de comercio electrónico desde fuera de la UE con valor intrínseco de hasta 150 € pagan desde el 1 de julio de 2026 un arancel fijo de 3 € por categoría de producto, y desde el 1 de noviembre de 2026 se suma la tasa de gestión de la UE de 2 € por categoría, sea cual sea el valor. Según Correos, estas medidas no se aplican en Ceuta ni Melilla.
+
+### ¿Cuál es el teléfono de SF Express y a quién reclamo si se pierde?
+
+La web europea de SF International no publica teléfono local para España ni Latinoamérica, sino un WhatsApp europeo (`+31 6 43249528`, lunes a viernes de 9:00 a 17:00), además de las líneas internacionales en China (`+86 755 95338`), Hong Kong (`+852 2730 0273`) y Taiwán (`+886 412 8830`). En compras en línea reclama primero al vendedor: en la UE responde del envío hasta que lo recibes y dispone por defecto de 30 días para entregarlo.
 
 :::sources
 - [Comisión Europea: EU customs reform (en inglés)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – arancel de 3 € hasta 150 € desde el 1 de julio de 2026 y tasa de gestión de 2 € desde el 1 de noviembre de 2026

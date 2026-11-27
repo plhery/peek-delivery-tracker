@@ -1,12 +1,12 @@
 ---
 title: Śledzenie WanbExpress: numery WNB…YQ, statusy i doręczenie
-description: Śledź przesyłkę WanbExpress (Wanb Express) z Chin: jak wygląda numer WNB…YQ, co oznaczają angielskie statusy, kto doręcza paczkę i co zrobić, gdy utknie.
+description: Jak śledzić paczkę WanbExpress (numer WNB…YQ) z Chin: znaczenie statusów celnych, lokalny przewoźnik (InPost, iMile), cło UE 3 € i 2 € oraz gdzie reklamować.
 slug: sledzenie-wanbexpress
 published: 2026-11-21
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-WanbExpress (także Wanb Express, WanBang Express lub WANB) to chiński przewoźnik wysyłający paczki za granicę, gdzie doręcza je lokalny przewoźnik. Jeśli sklep nadał zamówienie przez WanbExpress, numer zaczyna się od `WNB` i kończy na `YQ`: wklej go w pole powyżej. Własna strona śledzenia WanbExpress, tracking.wanbexpress.com, może również podać przewoźnika doręczającego w twoim kraju oraz jego własny numer przesyłki.
+Aby śledzić paczkę **WanbExpress** (znaną też jako *Wanb Express*, *WanBang Express* lub *WANB*), wklej w pole powyżej 17-znakowy numer zaczynający się od `WNB` i kończący na `YQ`, albo wpisz go na `tracking.wanbexpress.com`. WanbExpress obsługuje wysyłki z Chin (z sortowni w Shenzhen) przez odprawę celną, a w kraju docelowym przekazuje paczkę lokalnemu przewoźnikowi, którego nazwę i drugi numer może pokazać strona WanbExpress.
 
 ## Numer śledzenia WanbExpress: jak wygląda
 
@@ -106,25 +106,25 @@ Dopóki masz przesyłkę otwartą na ekranie albo w dniu doręczenia przy włąc
 
 ## Pytania o śledzenie WanbExpress
 
-### Czym jest WanbExpress?
+### Jak śledzić przesyłkę WanbExpress o numerze WNB…YQ?
 
-Chińskim przewoźnikiem, występującym też jako Wanb Express, WanBang Express lub WANB. W kodzie Peek jego skany zaczynają się w sortowni w Shenzhen, obejmują lot i odprawę celną, a kończą wpisami przewoźnika doręczającego w kraju docelowym.
+Wklej pełny 17-znakowy numer (`WNB`, dwie litery, dziesięć cyfr i `YQ`) w pole powyżej albo otwórz `tracking.wanbexpress.com`, która wymaga weryfikacji przeciw botom i może podać także przewoźnika lokalnego oraz zdjęcie z doręczenia. [Peek](/) rozpoznaje format `WNB…YQ` automatycznie bez kodu pocztowego i konta.
 
-### Gdzie mogę śledzić przesyłkę WanbExpress?
+### Co to za firma WanbExpress i kto doręcza jej paczki w Europie?
 
-W polu powyżej albo na własnej stronie śledzenia WanbExpress pod adresem tracking.wanbexpress.com. Strona wymaga weryfikacji przeciw botom i może podać również lokalnego przewoźnika. Wpisz cały numer `WNB…YQ`.
+To chiński przewoźnik (także Wanb Express, WanBang Express lub WANB), którego skany zaczynają się w sortowni w Shenzhen i po przylocie przechodzą na lokalną firmę kurierską. W kodzie Peek widać m.in. doręczenia iMile w Niemczech, wpisy InPost w Wielkiej Brytanii, sieć Poste Italiane we Włoszech, przeetykietowanie na numery `DOFR…HD`/`CNFR…HD` we Francji oraz J&T Express Australia; w pozostałych krajach sprawdź `tracking.wanbexpress.com` lub zapytaj sprzedawcę.
 
-### Co oznacza „Customs declaration completed” w śledzeniu WanbExpress?
+### Co oznacza „Customs declaration completed” a co „Custom clearance completed”?
 
-Że dla paczki zakończono zgłoszenie celne. Wpis nie wskazuje kraju ani nie oznacza zwolnienia przez urząd celny w kraju docelowym – ten etap pojawia się jako `Custom clearance completed`. Peek pokazuje oba jako „W transporcie”.
+`Customs declaration completed` oznacza złożenie zgłoszenia celnego, bez podania kraju i bez zwolnienia przez urząd celny w kraju docelowym. Dopiero `Custom clearance completed` potwierdza zakończenie odprawy przywozowej. Peek pokazuje oba wpisy jako „W transporcie”.
 
-### Kto doręcza paczki WanbExpress w moim kraju?
+### Czy za paczkę WanbExpress z Chin do UE zapłacę cło i opłaty?
 
-Lokalny przewoźnik, którego nazwę i numer może podać strona tracking.wanbexpress.com. Kod Peek pokazuje iMile przy paczce do Niemiec, wpisy InPost do Wielkiej Brytanii i skan wspominający sieć Poste Italiane, a także przekazywanie do J&T Express Australia lub na numery `DOFR…HD`/`CNFR…HD` we Francji; w pozostałych krajach sprawdź tracking.wanbexpress.com albo zapytaj sprzedawcę.
+Dla przesyłek spoza UE od 1 lipca 2026 r. obowiązuje tymczasowe cło 3 € za pozycję (rodzaj towaru) dla paczek o wartości do 150 €, a od 1 listopada 2026 r. dochodzi unijna opłata manipulacyjna 2 € za pozycję, niezależnie od wartości przesyłki.
 
-### Z kim się skontaktować, jeśli paczka WanbExpress zaginęła?
+### Co zrobić, gdy paczka WanbExpress utknie lub zaginie?
 
-Ze sprzedawcą, u którego złożono zamówienie: to on wykupił przesyłkę w WanbExpress. Peek nie mógł sprawdzić strony WanbExpress pod kątem danych kontaktowych.
+Skontaktuj się ze sprzedawcą lub platformą sprzedażową, bo to sklep ma umowę z WanbExpress (Peek nie mógł sprawdzić strony WanbExpress pod kątem danych kontaktowych). W sprawie samego doręczenia lub kolejnej próby po wpisie `<Route not completed>` pisz bezpośrednio do lokalnego przewoźnika.
 
 :::sources
 - [Universal Parcel Scraper: WanbExpress](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/wanbexpress) – nazwy, format `WNB…YQ`, sprawdzanie przez przeglądarkę, treści skanów i ich etapy (w tym `Customs inspection has not yet released`, `A-Scan: shipment in international transit`, wpisy iMile, InPost, Poste Italiane i partnerów w USA), godziny z przesunięciem UTC, rozpoznawanie przewoźnika doręczającego (`TrackLastMileCarrier`), pominięte zdjęcia i adres

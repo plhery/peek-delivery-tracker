@@ -1,15 +1,15 @@
 ---
 title: Suivi de commande Apple : livraison, retours et problèmes
-description: Où suivre une commande de l'Apple Store en ligne en France, en Belgique et en Suisse, qui la livre, quand signer, et que faire si un colis manque ou arrive abîmé.
+description: Suivre une commande Apple Store en France, Belgique ou Suisse : numéro de suivi, livraison postale (< 100 €), retours UPS 14 jours et numéros du service client.
 slug: suivi-commande-apple
 picture: Un carton d'ordinateur portable plat avec une petite boîte de téléphone posée dessus, à côté d'une camionnette de livraison, et Pip debout tout en haut.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-27
 ---
 
-Une commande passée sur l'Apple Store en ligne se suit sur la page État de votre commande d'apple.com, avec ton compte Apple ou ton numéro de commande, et grâce à l'avis d'expédition qu'Apple envoie par e-mail quand l'article quitte l'entrepôt. C'est Apple qui choisit le transporteur. En France, une commande de moins de 100 € part par service postal, sans suivi ; au-delà de 100 €, un service de course la livre. Si un colis est en retard, perdu ou abîmé, contacte Apple : c'est Apple qui voit avec le transporteur.
+Pour suivre une commande passée sur l'**Apple Store en ligne** (France, Belgique ou Suisse), ouvre la page **État de votre commande** sur `apple.com` avec ton compte Apple ou ton numéro de commande, ou utilise le lien de suivi de l'avis d'expédition envoyé par e-mail (disponible dans les 24 heures après l'envoi). Apple choisit le transporteur — en France, les commandes de moins de 100 € partent par service postal sans suivi en ligne, et celles de plus de 100 € par service de course — et gère directement les retards, colis perdus, dommages et retours gratuits sous 14 jours.
 
-## Qui livre ma commande Apple ?
+## Qui livre ma commande Apple Store en France, Belgique et Suisse ?
 
 Chaque pays a son propre Apple Store en ligne, et tu ne choisis pas le transporteur. Voici ce que disent les pages de chaque boutique :
 
@@ -28,7 +28,7 @@ Pour savoir qui apporte ton colis, regarde l'avis d'expédition : dans les trois
 - home | Toi | `Commande livrée` dans État de votre commande
 :::
 
-## Où trouver le suivi de ma commande Apple ?
+## Où trouver le numéro de suivi de ma commande Apple ?
 
 Regarde à ces endroits :
 
@@ -69,7 +69,7 @@ Si la date de livraison de ton avis d'expédition est passée, contacte le servi
 
 **Modifier la commande.** Tant que tu n'as pas reçu l'avis d'expédition, tu peux changer tes coordonnées dans État de votre commande, sinon le service Clientèle t'aide. Tant que l'article n'est ni en préparation pour expédition ni expédié, tu peux aussi l'annuler (« Annuler l'article »). Une fois le colis chez le transporteur, c'est lui qu'il faut contacter pour changer l'adresse, si c'est possible. Déjà parti ? Attends la livraison, puis demande un retour. Plus d'infos : [changer l'adresse de livraison](guide:change-delivery-address).
 
-## Combien coûte la livraison Apple ?
+## Combien coûte la livraison Apple et comment fonctionne le retrait ?
 
 Selon les pages d'aide d'Apple, la livraison standard est gratuite pour toute commande en ligne. Les options, dates et prix pour ton adresse s'affichent avant que tu paies :
 
@@ -100,7 +100,7 @@ D'abord chercher, ensuite signaler. Dans l'ordre :
 
 Plus d'infos : [colis marqué livré mais pas reçu](guide:delivered-not-received), [colis perdu](guide:lost-parcel) et [colis abîmé](guide:damaged-parcel).
 
-## Comment retourner une commande Apple ?
+## Comment retourner une commande Apple gratuitement (délai de 14 jours) ?
 
 Tu as 14 jours à compter de la livraison. Selon les conditions de vente françaises, tu disposes de quatorze jours après la réception pour te rétracter, puis de quatorze jours pour renvoyer les biens ; Apple prend en charge les frais de retour, sauf ceux liés à une livraison express. Lance le retour depuis l'article dans État de votre commande (« Demander un retour ») ou par le service Clientèle, avec ton numéro de commande en ligne, puis imprime une étiquette par colis (« Imprimer une autre étiquette »).
 

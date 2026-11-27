@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-Deine Etsy-Bestellungen verfolgst du unter **Einkäufe und Bewertungen** (in der App: **Du** → **Einkäufe**): Da Etsy selbst nichts verschickt, packt jeder Shop seine Bestellung eigenständig und trägt die Sendungsnummer des Versanddienstes ein — sichtbar über **Paket verfolgen** oder **Beleg anzeigen**. Bleibt der Status auf `Nicht verschickt`, ist die Bestellung zu spät oder fehlt sie, schreib zuerst dem Shop über **Hilfe bei einer Bestellung** und eröffne bei Bedarf nach 48 Stunden (bis 30 Tage nach dem Liefertermin) einen Fall im Etsy-Einkaufsschutz.
+Deine Etsy-Bestellungen verfolgst du unter **Einkäufe und Bewertungen** (in der App: **Du** → **Einkäufe**): Da Etsy selbst nichts verschickt, packt jeder Shop seine Bestellung eigenständig und trägt die Sendungsnummer des Versanddienstes ein — sichtbar über **Paket verfolgen** oder **Beleg anzeigen**. Bleibt der Status auf `Nicht verschickt`, ist die Bestellung zu spät oder fehlt sie, schreib zuerst dem Shop über **Hilfe bei einer Bestellung**. Ist der Liefertermin vorbei, kannst du 48 Stunden nach deiner Anfrage einen Fall im Etsy-Einkaufsschutz eröffnen (bei einer Bestellung, die nie kam, 7 Tage nach dem spätesten Liefertermin), bis 30 Tage nach dem Liefertermin.
 
 ## Warum zeigt meine Etsy-Bestellung noch „Nicht verschickt“?
 
@@ -117,7 +117,7 @@ Kommt ein Paket zu spät oder gar nicht, weil du Gebühren bei der Lieferung ver
 
 ## Was tun, wenn deine Etsy-Bestellung zu spät kommt oder fehlt?
 
-Kontaktiere zuerst den Shop über **Einkäufe und Bewertungen** → **Hilfe bei einer Bestellung**; ab 48 Stunden danach kannst du bis 30 Tage nach dem Liefertermin einen Fall für Etsys Einkaufsschutz öffnen (Erstattungen über Etsy bis 180 Tage nach dem Kauf):
+Kontaktiere zuerst den Shop über **Einkäufe und Bewertungen** → **Hilfe bei einer Bestellung**; ab 48 Stunden danach, sobald der Liefertermin vorbei ist, kannst du bis 30 Tage nach dem Liefertermin einen Fall für Etsys Einkaufsschutz öffnen (Erstattungen über Etsy bis 180 Tage nach dem Kauf):
 
 :::steps
 - Termine prüfen | Der Liefertermin steht an der Bestellung. Etsy rechnet ihn neu, wenn der Shop früher verschickt.

@@ -96,7 +96,7 @@ It checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on t
 
 ### What is NACEX?
 
-NACEX is an express courier founded in 1995 as part of the Logista group, delivering across mainland Spain, the Balearic and Canary Islands, Andorra, Portugal and the Netherlands with over 4,000 NACEX.shop points and lockers.
+NACEX is an express courier founded in 1995 and part of the Logista group, delivering across mainland Spain, the Balearic and Canary Islands, Andorra, Portugal and the Netherlands with over 4,000 NACEX.shop points and lockers.
 
 ### Is NACEX legit?
 

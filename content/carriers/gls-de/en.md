@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Track a GLS parcel in Germany or sent internationally across Europe by entering its 11- or 12-digit parcel number and the recipient's postcode on [gls-group.com/EU/en/parcel-tracking](https://gls-group.com/EU/en/parcel-tracking) or in the box above. GLS Germany delivers Monday to Friday across a network of 9,000 ParcelShops and 200 Parcelstations, with typical delivery under 24 hours domestically and 24 to 96 hours across Europe; your parcel number is in the shop's shipping email.
+Track a GLS parcel in Germany or sent internationally across Europe by entering its 11- or 12-digit parcel number and the recipient's postcode on [gls-group.com/EU/en/parcel-tracking](https://gls-group.com/EU/en/parcel-tracking) or in the box above. GLS Germany delivers Monday to Friday across a network of 9,000 ParcelShops and 200 Parcelstations, and its group says a parcel usually arrives in under 24 hours within one country and in 24 to 96 hours across Europe; your parcel number is in the shop's shipping email.
 
 ## GLS tracking number and Track-ID: where to find them
 
@@ -87,7 +87,7 @@ You then see the status, each scan's town and country on a map, the expected day
 
 ### How do I track an international GLS parcel to or from Germany?
 
-Enter your 11- or 12-digit GLS parcel number and the delivery postcode on GLS's group tracking page (`gls-group.com/EU/en/parcel-tracking`) or in Peek: the same number tracks across European borders, typically arriving in 24 to 96 hours, and parcels sent with FlexDeliveryService let you choose delivery options in advance.
+Enter your 11- or 12-digit GLS parcel number and the delivery postcode on GLS's group tracking page (`gls-group.com/EU/en/parcel-tracking`) or in Peek: the same number tracks across European borders, and GLS's group says a parcel across Europe usually arrives in 24 to 96 hours. Parcels sent with FlexDeliveryService let you choose delivery options in advance.
 
 ### Where is my GLS package?
 
@@ -103,7 +103,7 @@ GLS's group states parcels within one country usually arrive in under 24 hours, 
 
 ### How long does GLS keep a parcel at a ParcelShop?
 
-After a missed delivery, GLS holds the parcel at the ParcelShop, depot or Parcelstation before returning it to the sender; disputes over loss or damage (€10 to €2,500) can be taken free of charge to the Bundesnetzagentur's Schlichtungsstelle Post.
+After a missed delivery, the ParcelShop, depot or Parcelstation keeps it at least seven working days, say GLS's terms for business senders. Then it goes back to the sender.
 
 :::sources
 - [GLS: Parcel Tracking](https://gls-group.com/EU/en/parcel-tracking) – GLS's group tracking page, Track-ID on the notification card

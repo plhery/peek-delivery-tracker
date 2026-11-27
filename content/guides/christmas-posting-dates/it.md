@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-11-27
 ---
 
-Per spedire un pacco entro Natale 2026, solo [la Posta](carrier:swiss-post) in Svizzera (Ticino e Grigioni italiano) ha già pubblicato le scadenze: lunedì 21 dicembre per Posta B, martedì 22 dicembre per PostPac Economy e mercoledì 23 dicembre per Posta A e PostPac Priority (consigliato il 22 dicembre). In Italia [Poste Italiane](carrier:poste-italiane), SDA, GLS Italy e BRT non hanno ancora annunciato il calendario 2026 — nel 2025 Poste fissava il 18 dicembre (servizi a 2 giorni lavorativi) e il 19 dicembre (1 giorno), e GLS le ultime partenze il 22 dicembre — quindi le tabelle italiane qui sotto riportano le date 2025 e i tempi indicativi.
+Per spedire un pacco entro Natale 2026, solo [la Posta](carrier:swiss-post) in Svizzera (Ticino e Grigioni italiano) ha già pubblicato le scadenze: martedì 22 dicembre per PostPac Economy e mercoledì 23 dicembre per PostPac Priority (la Posta consiglia il 22), e per le lettere lunedì 21 in Posta B e mercoledì 23 in Posta A. In Italia [Poste Italiane](carrier:poste-italiane), SDA e GLS Italy non hanno ancora annunciato il calendario 2026, e BRT non pubblica date — nel 2025 Poste fissava il 18 dicembre (servizi a 2 giorni lavorativi) e il 19 dicembre (1 giorno), e GLS le ultime partenze il 22 dicembre — quindi le tabelle italiane qui sotto riportano le date 2025 e i tempi indicativi.
 
 ## Italia: Poste Italiane, SDA, GLS e BRT
 

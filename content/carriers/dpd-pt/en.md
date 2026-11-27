@@ -6,7 +6,7 @@ published: 2026-10-22
 updated: 2026-11-27
 ---
 
-Track a DPD Portugal parcel across mainland Portugal, Madeira and the Azores by pasting your 14-digit parcel number (often starting `0955` to `0988`) in the box above or on [tracking.dpd.pt/track-and-trace](https://tracking.dpd.pt/track-and-trace). Part of Geopost, DPD Portugal offers Predict one-hour delivery windows, around 2,300 Pickup shops and 500 24/7 lockers (72-hour hold), and customer support on 21 854 6001 or via its 24/7 chatbot Maria.
+Track a DPD Portugal parcel across mainland Portugal, Madeira and the Azores by pasting your 14-digit parcel number (often starting `0955` to `0988`) in the box above or on [tracking.dpd.pt/track-and-trace](https://tracking.dpd.pt/track-and-trace). Part of Geopost, DPD Portugal offers Predict one-hour delivery windows, about 2,300 Pickup shops and lockers (a locker, open around the clock, holds a parcel 72 hours), and customer support on 21 854 6001 or via its 24/7 chatbot Maria.
 
 ## DPD Portugal tracking number: where to find it
 

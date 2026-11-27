@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-11-27
 ---
 
-When tracking shows "held at customs" or "payment of charges", your parcel is usually in routine import clearance — not seized — and the carrier (not customs directly) handles any bill or document request. In the UK (about 3 weeks to pay before return; no charge at the door on purchases up to £135), Ireland (An Post sends a postcard, text or email, never a payment link in an SMS), Canada (CBSA/Canada Post), Australia (AUD 1,000 threshold) and the US (CBP, with the $800 de minimis suspended), always check the carrier's official website or app yourself and never tap a link in an unexpected text.
+When tracking shows "held at customs" or "payment of charges", your parcel is usually in routine import clearance — not seized — and any bill or document request usually comes from the carrier, not customs. In the UK (about 3 weeks to pay before return; no charge at the door on purchases up to £135), Ireland (An Post sends a postcard, text or email, never a payment link in an SMS), Canada (CBSA/Canada Post), Australia (AUD 1,000 threshold) and the US (CBP, with the $800 de minimis suspended), always check the carrier's official website or app yourself and never tap a link in an unexpected text.
 
 ## What does "held at customs" mean?
 
@@ -114,7 +114,7 @@ For how these orders travel, see [tracking a parcel from China](guide:tracking-f
 
 ## How do I know if a customs charge text is real (and how does customs contact you)?
 
-Customs authorities themselves do not text payment links (Revenue in Ireland never sends click-to-pay texts or emails, CBSA never asks for card details by phone/text, and real seizures arrive in writing). Your carrier contacts you instead, and each carrier's rules give most fakes away:
+Revenue in Ireland never emails or texts you to click and pay, the CBSA never starts a request for your card number by phone, text or email, and a real seizure comes in writing. Real charges usually come from the carrier, by text or email too, and each carrier's rules give most fakes away:
 
 | Carrier | What its real messages look like |
 | --- | --- |

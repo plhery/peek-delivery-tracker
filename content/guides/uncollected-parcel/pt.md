@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-11-27
 ---
 
-O prazo para levantar uma encomenda em Portugal depende do serviço e do local: nos [CTT](carrier:ctt) tens 10 dias úteis numa Loja ou Ponto CTT para Encomenda Postal (15 se vier do estrangeiro), 6 dias úteis em Correio Registado, 5 dias úteis em Encomenda Expresso nacional e 5 dias num cacifo Locky; na [InPost](carrier:inpost) são 5 dias seguidos, na GLS 10 dias úteis num GLS Point e na DPD 7 ou 10 dias úteis num Ponto Pickup (72 horas num locker). Vale sempre a data-limite do aviso, SMS ou e-mail — passada essa data, a encomenda volta ao remetente.
+O prazo para levantar uma encomenda em Portugal depende do serviço e do local: nos [CTT](carrier:ctt) tens 10 dias úteis numa Loja ou Ponto CTT para Encomenda Postal (15 se vier do estrangeiro), 6 dias úteis em Correio Registado, 5 dias úteis em Encomenda Expresso nacional e 5 dias num cacifo Locky; na [InPost](carrier:inpost) são 5 dias seguidos nos envios nacionais, na GLS 10 dias úteis num GLS Point e na DPD 7 ou 10 dias úteis num Ponto Pickup (72 horas num locker). Vale sempre a data-limite do aviso, SMS ou e-mail — passada essa data, a encomenda volta ao remetente.
 
 O código não chegou ou o cacifo estava cheio? Vê [encomenda no cacifo](guide:parcel-lockers).
 
@@ -58,7 +58,7 @@ Atenção ao estado `Em espera` dos CTT: quer dizer que o envio aguarda instruç
 
 ## Posso prolongar o prazo para levantar a encomenda?
 
-Nos CTT, sim (até 30 dias na Armazenagem de Encomendas em Encomenda Postal, por 1,84 €/dia mais IVA, pedida até 2 dias úteis antes do fim do prazo, ou até 5 dias úteis em Encomenda Expresso e Locky conforme o envio); InPost, GLS e DPD não indicam prolongamento para destinatários.
+Nos CTT, sim (até 30 dias na Armazenagem de Encomendas em Encomenda Postal, por 1,84 €/dia mais IVA, pedida até 2 dias úteis antes do fim do prazo, ou até 5 dias úteis numa Encomenda Expresso, se o remetente autorizar alterações, e num Locky, conforme o envio); InPost, GLS e DPD não indicam prolongamento para destinatários.
 
 Se não consegues ir a tempo:
 

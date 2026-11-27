@@ -26,7 +26,7 @@ Se o número seguir o formato de uma grande transportadora — como os códigos 
 
 A ZipasGo não publica lista de status. Seu FAQ diz que remetentes veem "In transit" (enviado) e "Delivered" (entregue) na conta ZipasGo, e o rastreador em zipasgo.com exibe as etapas após digitar o código.
 
-O Peek não consegue ler diretamente o site da ZipasGo e exibe o histórico retornado por serviços de rastreamento, nos termos deles (veja "Como rastrear ZipasGo no Peek" abaixo). Para status gerais, consulte [status de rastreamento explicados](guide:tracking-statuses), em inglês.
+O Peek não consegue ler diretamente o site da ZipasGo e exibe o histórico retornado por serviços de rastreamento, nos termos deles (veja "Como rastrear uma encomenda ZipasGo no Peek" abaixo). Para status gerais, consulte [status de rastreamento explicados](guide:tracking-statuses), em inglês.
 
 ## Quem entrega encomendas da ZipasGo
 
@@ -44,7 +44,7 @@ A ZipasGo mantém centros de consolidação e devoluções em Vilnius, Kaunas, R
 
 ## Encomenda ZipasGo atrasada, danificada ou extraviada
 
-**Sem atualização.** Se o histórico trouxer uma parceira com código próprio, consulte o rastreador dela, que costuma estar mais atualizado; senão, pergunte ao vendedor que contratou o envio. Mais em [por que o rastreamento para de atualizar](guide:tracking-not-updating), em inglês.
+**Sem atualização.** Se o histórico trouxer uma parceira com código próprio, consulte o rastreador dela, que pode estar mais adiantado; senão, pergunte ao vendedor que contratou o envio. Mais em [por que o rastreamento para de atualizar](guide:tracking-not-updating), em inglês.
 
 **Danificada.** Inspecione a encomenda no recebimento. Notando dano, falta ou irregularidade, registre no ato e, se possível, peça um relatório escrito. Os termos da ZipasGo exigem reclamação por escrito em até 3 dias corridos da entrega, com fotos do item e da embalagem, documentos e comprovante de valor; o FAQ informa que o remetente abre a reclamação depois de avisado pelo destinatário. Avise o vendedor imediatamente enviando fotos.
 
@@ -65,19 +65,19 @@ As páginas não divulgam telefone nem endereço presencial para destinatários.
 
 O [Peek](/) não identifica uma encomenda ZipasGo só pelo código, pois não conhece um formato exclusivo dela. Cole mesmo assim: o Peek acompanha mais de 4.500 transportadoras. Se o número tiver formato de uma parceira (como a UPS), o Peek pode identificar essa parceira diretamente.
 
-Para acompanhar sob ZipasGo, toque em "Alterar" e digite "ZipasGo" em "Pesquisar transportadoras" ("Parcel Stars" e "Zipas" também encontram; ela não aparece em "Compatível com este código"). Em encomendas já adicionadas, use "Alterar transportadora".
+Para acompanhar sob ZipasGo, toque em "Trocar" e digite "ZipasGo" em "Buscar transportadoras" ("Parcel Stars" e "Zipas" também encontram; ela não aparece em "Compatível com este código"). Em encomendas já adicionadas, use "Trocar transportadora".
 
 Você também pode colar um link do rastreador lituano da ZipasGo terminado em `/lt/siuntimas?tid=` seguido do número: o Peek extrai o código e seleciona ZipasGo ("Transportadora detectada"). Links da página em inglês (`/en/tracking`) não trazem o número: copie apenas o código.
 
-Como o Peek não lê diretamente o rastreador da ZipasGo, ele consulta ParcelsApp, Ship24 e 17TRACK em sequência e fica com o primeiro que encontrar o pacote, exibindo o histórico nos termos desse serviço (podendo atrasar em relação ao site oficial ou não retornar dados). Se você deixar a seleção com o Peek e um serviço indicar ZipasGo ou Parcel Stars com leituras de movimentação, o Peek define ZipasGo automaticamente. Antes que um serviço tenha o pacote, o link abre o site da ZipasGo com seu número; depois, abre o site do serviço. O Peek não envia seu IP nem seu país a esses serviços.
+Como o Peek não lê diretamente o rastreador da ZipasGo, ele consulta ParcelsApp, Ship24 e 17TRACK em sequência e fica com o primeiro que encontrar o pacote, exibindo o histórico nos termos desse serviço (podendo atrasar em relação ao histórico da própria ZipasGo ou não retornar dados). Se você deixar a seleção com o Peek e um serviço indicar ZipasGo ou Parcel Stars com leituras de movimentação, o Peek define ZipasGo para você. Antes que um serviço tenha o pacote, o link abre o site da ZipasGo com seu número; depois, abre o site do serviço. O Peek não envia seu IP nem seu país a esses serviços.
 
 Enquanto nenhum serviço conhecer o código, aparece "Aguardando ZipasGo". Depois de registrada em ZipasGo, se um serviço apontar a transportadora que assumiu a entrega junto com o código dela — e o Peek conseguir ler essa transportadora — ele passa a consultá-la também; assim que ela exibir uma leitura pelo menos tão recente quanto a última do histórico, o Peek migra para ela mantendo as leituras anteriores e exibe "Entrega por …" (ou "Anunciada a …, ainda não recebida" enquanto houver apenas o aviso).
 
-Com dados do serviço, o Peek verifica de hora em hora, a cada 3 horas após um dia sem novidades e a cada 6 horas após sete dias em "Etiqueta criada"; no dia em que sai para entrega, verifica a cada 15 minutos no máximo enquanto aberto ou com notificações ativas. Serviços sem resposta são consultados novamente no dia seguinte.
+Com dados do serviço, o Peek verifica de hora em hora, a cada 3 horas após um dia sem novidades e a cada 6 horas após sete dias em "Etiqueta criada"; no dia em que sai para entrega, verifica a cada 15 minutos no máximo enquanto aberto ou com notificações ativas. Serviços que não conheciam o código são consultados novamente no dia seguinte.
 
-Quando a última leitura completa quatro dias em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", exibe "Sem atualização de rastreamento desde seg 12 out", a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando ZipasGo." e o link "Obter ajuda da ZipasGo" (que passa a apontar para a página da transportadora final caso o Peek migre para uma com página própria). Após três semanas sem novidade, mostra "Nada de novo há mais de três semanas. Se ainda não chegou, fale com o vendedor. O Peek continua consultando ZipasGo."
+Quando a última leitura completa quatro dias em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", exibe "Sem atualizações desde seg 12 out", a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando ZipasGo." e o link "Pedir ajuda a ZipasGo" (que passa a apontar para a página da transportadora final caso o Peek migre para uma com página própria). Após três semanas sem novidade, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando ZipasGo."
 
-O Peek notifica em "Cada atualização", "Etapas importantes" ou "Somente na entrega", mas não pode contatar a ZipasGo ou o vendedor por você.
+O Peek notifica em "Cada movimentação", "Etapas importantes" ou "Só a entrega", mas não pode contatar a ZipasGo ou o vendedor por você.
 
 ## Perguntas frequentes sobre o rastreamento ZipasGo
 

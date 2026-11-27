@@ -52,7 +52,7 @@ Em envios para a Europa, o rastreador da ZTO reproduz algumas leituras da transp
 | `Physical delivery scheduled.` | Saiu para entrega | Entregador em rota de entrega. |
 | `Delivered` | Entregue | Assinada ou retirada. |
 
-Alguns pacotes na China exibem `Delivered` duas vezes: na primeira, a linha em chinês informa que um ponto de coleta ou terceiro recebeu em seu nome, e o Peek mostra "Recebida em nome do destinatário" como "Pronta para retirada"; o segundo `Delivered` marca a retirada efetiva com o código fornecido pelo ponto.
+Alguns pacotes na China exibem `Delivered` duas vezes: na primeira, a linha em chinês informa que um ponto de coleta ou terceiro recebeu em seu nome, e o Peek mostra "Received on the recipient's behalf" como "Pronta para retirada"; o segundo `Delivered` marca a retirada efetiva com o código fornecido pelo ponto.
 
 ## Entrega da ZTO International no Sudeste Asiático
 
@@ -88,11 +88,11 @@ O rodapé de www.ztoglobal.com oferece ainda o recurso "Online Customer Service"
 
 ## Como rastrear uma encomenda ZTO International no Peek
 
-Cole o código no [Peek](/), que acompanha mais de 4.500 transportadoras. Ele testa a ZTO International primeiro entre transportadoras de formato semelhante e mostra "ZTO International tem esta encomenda." quando ela reconhece o código. Se nenhuma reconhecer, consulta serviços de rastreamento e pode avisar que ainda não foi encontrada mas continuará verificando. Se for um envio doméstico da ZTO Express na China, toque em "Alterar" e escolha ZTO Express em "Compatível com este código". Links de m.ztoglobal.com com `inputNo=` também identificam ZTO International automaticamente.
+Cole o código no [Peek](/), que acompanha mais de 4.500 transportadoras. Ele testa a ZTO International primeiro entre transportadoras de formato semelhante e mostra "ZTO International está com esta encomenda." quando ela reconhece o código. Se nenhuma reconhecer, consulta serviços de rastreamento e pode mostrar "Ainda não encontrada pelos serviços de rastreamento. O Peek continua verificando depois que você adicionar." Se for um envio doméstico da ZTO Express na China, toque em "Trocar" e escolha ZTO Express em "Compatível com este código". Links de m.ztoglobal.com com `inputNo=` também identificam ZTO International.
 
 O Peek lê diretamente o rastreador da ZTO International; o local de cada leitura vem da linha em chinês e aparece com o nome da cidade quando reconhecida (ou em chinês como a ZTO escreveu). A ZTO registra todos os horários no fuso da China, inclusive no exterior (uma hora à frente de Tailândia, Vietnã, Camboja e Laos), e o Peek converte tudo para o fuso do seu dispositivo. Ele omite nomes de entregadores, operadores e recebedores, telefones, números de malote e detalhes da estação, e não mostra previsão de entrega, peso ou comprovante de entrega, acompanhando o código `771` até o fim sem trocar de transportadora.
 
-Com a encomenda aberta ou no dia da entrega com notificações ligadas, o Peek verifica a cada 10 minutos no máximo, ou a cada 2 minutos a partir das 6h (horário de Pequim) no dia em que sai para entrega, enquanto o rastreador da ZTO responder; fora disso, de hora em hora. Após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Notifica em "Cada atualização", "Etapas importantes" ou "Somente na entrega". O Peek não pode enviar documentos de identidade, pagar impostos nem contatar a ZTO ou a loja por você.
+Com a encomenda aberta ou no dia da entrega com notificações ligadas, o Peek verifica a cada 10 minutos no máximo, ou a cada 2 minutos a partir das 6h (horário de Pequim) no dia em que sai para entrega, enquanto o rastreador da ZTO responder; fora disso, de hora em hora. Após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Notifica em "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode enviar documentos de identidade, pagar impostos nem contatar a ZTO ou a loja por você.
 
 ## Perguntas frequentes sobre o rastreamento ZTO International
 

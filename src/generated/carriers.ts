@@ -21511,7 +21511,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "zipasgo",
       "catalog": "zipasgo",
       "slug": "zipasgo-tracking",
-      "title": "ZipasGo 快递查询：Parcel Stars、合作承运商与帮助",
+      "title": "ZipasGo 快递查询：Parcel Stars、合作快递公司与帮助",
       "name": "ZipasGo",
       "color": "#ffdb1c"
     },

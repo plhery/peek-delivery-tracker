@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-A ZTO Express (中通快递, Zhongtong) é uma transportadora chinesa fundada em Xangai em 8 de maio de 2002; em 2025, movimentou 38,52 bilhões de encomendas. Um código ZTO normalmente pertence a um envio dentro da China, muitas vezes um pedido online (a ZTO transporta compras do Taobao desde 2008) rumo ao galpão de um redirecionador ou a um endereço chinês. Consulte o pacote no [rastreador da ZTO](https://www.zto.com/check), em chinês, ou na caixa acima. Encomendas enviadas pelo grupo ao exterior seguem pela ZTO International, que usa códigos próprios iniciados em 771 e outro rastreador.
+A ZTO Express (中通快递, Zhongtong) é uma transportadora chinesa fundada em Xangai em 8 de maio de 2002; em 2025, movimentou 38,52 bilhões de encomendas. Um código ZTO normalmente pertence a um envio dentro da China, muitas vezes um pedido online (a ZTO transporta compras do Taobao desde 2008) rumo ao galpão de um redirecionador ou a um endereço chinês. Consulte o pacote no [rastreador da ZTO](https://www.zto.com/check), em chinês, ou na caixa acima. Encomendas enviadas pelo grupo ao exterior seguem pela [ZTO International](carrier:zto-international), que usa códigos próprios iniciados em 771 e outro rastreador.
 
 ## Como é o código de rastreamento da ZTO Express
 

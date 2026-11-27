@@ -20,7 +20,7 @@ A DAO informa que seus códigos têm 9, 13 ou 20 dígitos (os dígitos abaixo s�
 | `7482917364058` | Um código de 13 dígitos começando com `7`. |
 | `482917364` | Um código e-label de 9 dígitos: quem compra postagem particular na DAO escreve esse código no pacote em vez de imprimir etiqueta. |
 
-Espaços não interferem. Encomendas dinamarquesas de outras transportadoras têm [formatos diferentes](guide:tracking-number-formats): os números postais da PostNord terminam em `DK` e seus códigos de 20 dígitos usam outros prefixos, os da GLS têm 11 ou 12 dígitos e os da DPD têm 14. Se o site da DAO não localizar o código, confira os dígitos e consulte a loja. Veja [como encontrar seu código de rastreamento](guide:find-tracking-number) se nada tiver chegado.
+Espaços não interferem. Encomendas dinamarquesas de outras transportadoras têm [formatos diferentes](guide:tracking-number-formats): os números postais da [PostNord](carrier:postnord) terminam em `DK` e seus códigos de 20 dígitos usam outros prefixos, os da GLS têm 11 ou 12 dígitos e os da DPD têm 14. Se o site da DAO não localizar o código, confira os dígitos e consulte a loja. Veja [como encontrar seu código de rastreamento](guide:find-tracking-number) se nada tiver chegado.
 
 ## Status de rastreamento DAO explicados
 

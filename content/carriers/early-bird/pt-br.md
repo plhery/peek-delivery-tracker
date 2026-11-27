@@ -17,7 +17,7 @@ O formato de código que o código do Peek conhece para a Early Bird (dígitos i
 | `00373402216482917364` | 20 dígitos: `00`, qualquer dígito, `73402216` e mais nove dígitos, sendo o último um dígito verificador. Código de barras de encomenda. |
 | Outra referência | De 8 a 30 letras e dígitos. O Peek consegue rastrear na Early Bird, mas não identifica a Early Bird só pelo formato. |
 
-PostNord e [Bring](carrier:bring) também usam códigos de 20 dígitos iniciados por `00`, portanto o formato sozinho não garante que o pacote esteja com a Early Bird. Informou o celular errado? Ainda é possível rastrear com o código da encomenda enviado na confirmação do pedido da loja. Veja mais em [como encontrar seu código de rastreamento](guide:find-tracking-number).
+[PostNord](carrier:postnord) e [Bring](carrier:bring) também usam códigos de 20 dígitos iniciados por `00`, portanto o formato sozinho não garante que o pacote esteja com a Early Bird. Informou o celular errado? Ainda é possível rastrear com o código da encomenda enviado na confirmação do pedido da loja. Veja mais em [como encontrar seu código de rastreamento](guide:find-tracking-number).
 
 ## Status de rastreamento da Early Bird explicados
 

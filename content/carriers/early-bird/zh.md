@@ -17,7 +17,7 @@ Peek 代码为 Early Bird 收录的单号格式（以下数字为虚构）：
 | `00373402216482917364` | 20 位数字：`00`、任意一位数字、`73402216` 加九位数字，末位为校验位，即包裹条码号。 |
 | 其他参考号 | 8 至 30 位字母和数字。Peek 可以在 Early Bird 处查询，但无法凭形态认出 Early Bird。 |
 
-PostNord 和 [Bring](carrier:bring) 也使用以 `00` 开头的 20 位数字，因此仅凭形态不能证明包裹由 Early Bird 承运。下单时填错了手机号？你仍然可以用商家订单确认邮件里的包裹单号查询。更多见[如何查找运单号](guide:find-tracking-number)（英文）。
+[PostNord](carrier:postnord) 和 [Bring](carrier:bring) 也使用以 `00` 开头的 20 位数字，因此仅凭形态不能证明包裹由 Early Bird 承运。下单时填错了手机号？你仍然可以用商家订单确认邮件里的包裹单号查询。更多见[如何查找运单号](guide:find-tracking-number)（英文）。
 
 ## Early Bird 物流状态含义
 

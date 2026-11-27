@@ -23,7 +23,7 @@ A Bring informa que o código de objeto ou encomenda geralmente tem 13 caractere
 
 **Sendingsnummer ou kollinummer?** Uma remessa (sending) pode conter vários volumes (kolli): o sendingsnummer cobre toda a remessa, cada kollinummer cobre um volume, e o rastreamento da Bring lista todos os volumes. Ambos são sporingsnummer (códigos de rastreamento) aceitos no site da Bring.
 
-**Nenhum resultado?** Confirme se o pacote seguiu por Posten ou Bring e se você não digitou o número do pedido da loja. Códigos parecidos: um número postal terminado em `SE` ou `DK` é da PostNord, e um terminado em `FI` pertence à [Posti](carrier:posti) da Finlândia.
+**Nenhum resultado?** Confirme se o pacote seguiu por Posten ou Bring e se você não digitou o número do pedido da loja. Códigos parecidos: um número postal terminado em `SE` ou `DK` é da [PostNord](carrier:postnord), e um terminado em `FI` pertence à [Posti](carrier:posti) da Finlândia.
 
 ## O que significam os status de rastreamento da Bring
 

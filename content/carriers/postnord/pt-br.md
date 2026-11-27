@@ -26,7 +26,7 @@ Códigos parecidos: números terminados em `NO` pertencem à [Bring](carrier:bri
 
 ## Status de rastreamento da PostNord em inglês
 
-O rastreamento da PostNord funciona em inglês, sueco, dinamarquês, finlandês e norueguês. As frases em dinamarquês são redigidas à parte e podem variar um pouco. Em inglês, na ordem habitual:
+O rastreamento da PostNord funciona em inglês, sueco, dinamarquês, finlandês e norueguês. As frases em dinamarquês são redigidas à parte e podem variar um pouco. Em inglês, na ordem em que a encomenda passa por eles:
 
 | A PostNord mostra | O que significa para você |
 | --- | --- |
@@ -37,7 +37,7 @@ O rastreamento da PostNord funciona em inglês, sueco, dinamarquês, finlandês 
 | `The shipment item is being customs cleared by us.` | Em desembaraço alfandegário; pode haver taxas. |
 | `The shipment item has arrived at the distribution terminal.` | Chegou ao terminal que atende sua região. |
 | `The delivery of the shipment item is in progress.` | Saiu para entrega. |
-| `Delivery was not possible. The recipient will get a notification with information on where the shipment item will be available for collection.` | Tentativa sem sucesso; um aviso indicará onde retirar. |
+| `Delivery was not possible. The recipient will get a notification with information on where the shipment item will be available for collection.` | Entrega não realizada; um aviso indicará onde retirar. |
 | `The shipment item has been delivered to a service point.` | Pronta para retirada no ponto de atendimento citado na leitura. |
 | `The shipment item has been delivered.` | Entregue, ou retirada no ponto de atendimento. |
 | `The address is incomplete.` | A PostNord não conseguiu entregar no endereço informado. Contate a loja. |
@@ -82,15 +82,15 @@ Conforme as páginas da PostNord:
 
 ## Como rastrear PostNord no Peek
 
-O [Peek](/) identifica imediatamente como PostNord códigos postais terminados em `SE` ou `DK`, e 11 dígitos seguidos de `SE`. Para 20 dígitos iniciados por `00` com prefixo sueco ou dinamarquês, o Peek consulta primeiro a PostNord junto com Swiss Post Cargo e [NZ Post](carrier:nz-post) (e também [Matkahuolto](carrier:matkahuolto) no prefixo sueco), exibindo "PostNord tem esta encomenda." quando só ela reconhece o código. Com `73402216` após os três primeiros dígitos, trata-se da sueca [Early Bird](carrier:early-bird), que repassa alguns envios à PostNord: o Peek consulta a Early Bird primeiro e depois a PostNord com as demais. Outros códigos de 10 a 20 dígitos, como um número DPD entregue pela PostNord, funcionam via "Alterar". Links de tracking.postnord.com funcionam para qualquer número.
+O [Peek](/) identifica imediatamente como PostNord códigos postais terminados em `SE` ou `DK`, e 11 dígitos seguidos de `SE`. Para 20 dígitos iniciados por `00` com prefixo sueco ou dinamarquês, o Peek consulta primeiro a PostNord junto com Swiss Post Cargo e [NZ Post](carrier:nz-post) (e também [Matkahuolto](carrier:matkahuolto) no prefixo sueco), exibindo "PostNord está com esta encomenda." quando só ela reconhece o código. Com `73402216` após os três primeiros dígitos, trata-se da sueca [Early Bird](carrier:early-bird), que repassa alguns envios à PostNord: o Peek consulta a Early Bird primeiro e depois a PostNord com as demais. Outros códigos de 10 a 20 dígitos, como um número DPD entregue pela PostNord, funcionam escolhendo a PostNord em "Trocar". Links de tracking.postnord.com funcionam para qualquer número.
 
 O Peek exibe os textos em inglês da PostNord como escritos, com local de cada leitura no mapa, remetente, peso, dimensões, país de destino e, quando pronta para retirada, o endereço do ponto de atendimento. Ele omite avisos de SMS/e-mail, marca `The shipment item has been stored.` como problema, oculta seu nome e não exibe data prevista mesmo quando a PostNord informa uma.
 
 Com a encomenda aberta no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta a cada 10 minutos no máximo, e a cada 2 minutos a partir das 6h (horário local) no dia em que sai para entrega, enquanto o rastreador da PostNord responder (por serviços de rastreamento, a cada 15 minutos). Após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora, e a cada 6 horas após sete dias em "Etiqueta criada".
 
-Quando a leitura mais recente completa quatro dias em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek exibe "Sem atualização de rastreamento desde seg 12 out", a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando PostNord." e o link "Obter ajuda da PostNord" para o FAQ da PostNord Suécia. Após três semanas sem novidade, passa a exibir "Nada de novo há mais de três semanas. Se ainda não chegou, fale com o vendedor. O Peek continua consultando PostNord."
+Quando a leitura mais recente completa quatro dias em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek exibe "Sem atualizações desde seg 12 out", a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando PostNord." e o link "Pedir ajuda a PostNord" para o FAQ da PostNord Suécia. Após três semanas sem novidade, passa a exibir "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando PostNord."
 
-Você escolhe alertas em "Cada atualização", "Etapas importantes" ou "Somente na entrega".
+O Peek pode notificar você em "Cada movimentação", "Etapas importantes" ou "Só a entrega".
 
 ## Perguntas frequentes sobre o rastreamento PostNord
 
@@ -108,7 +108,7 @@ A PostNord Dinamarca entrega em dias úteis das 7h às 21h (horário dinamarquê
 
 ### A PostNord é confiável?
 
-Sim, é o grupo postal oficial da Suécia e da Dinamarca. Porém, mensagens pedindo pequenas taxas em nome dela costumam ser golpes.
+Sim, é o grupo postal da Suécia e da Dinamarca. Porém, mensagens pedindo pequenas taxas em nome dela costumam ser golpes.
 
 :::sources
 - [PostNord: Track and trace](https://tracking.postnord.com/en/) – status wordings, headlines, tracking languages

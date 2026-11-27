@@ -23,7 +23,7 @@ Bring 说明，邮件或包裹单号通常为 13 位（两位字母、九位数�
 
 **Sendingsnummer 还是 kollinummer？** 一票货件（sending）可能包含多个包裹（kolli）：sendingsnummer 对应整票货件，每个 kollinummer 对应单个包裹，Bring 查询页会列出全部包裹。两者都属于 sporingsnummer（运单号），Bring 的查询两种都能查。
 
-**查不到记录？** 确认包裹确实由 Posten 或 Bring 承运，且输入的不是商店订单号。相似单号：以 `SE` 或 `DK` 结尾的邮政单号属于 PostNord，以 `FI` 结尾的属于芬兰 [Posti](carrier:posti)。
+**查不到记录？** 确认包裹确实由 Posten 或 Bring 承运，且输入的不是商店订单号。相似单号：以 `SE` 或 `DK` 结尾的邮政单号属于 [PostNord](carrier:postnord)，以 `FI` 结尾的属于芬兰 [Posti](carrier:posti)。
 
 ## Bring 物流状态含义
 

@@ -49,7 +49,7 @@ A página de rastreamento da Helthjem mostra o status da encomenda e as moviment
 
 ## Entrega da Helthjem: rotas noturnas, capacho e pontos de retirada
 
-**Quem entrega.** Em 2023, a Helthjem vendia entregas para lojas virtuais e repassava os pacotes às distribuidoras de jornais da rede Helthjem, todas entregando seis dias por semana. Encomendas maiores que não podiam ficar na porta seguiam pela PostNord.
+**Quem entrega.** Em 2023, a Helthjem vendia entregas para lojas virtuais e repassava os pacotes às distribuidoras de jornais da rede Helthjem, todas entregando seis dias por semana. Encomendas maiores que não podiam ficar na porta seguiam pela [PostNord](carrier:postnord).
 
 **Rotas noturnas.** Na véspera de uma entrega domiciliar, a Helthjem agenda o pacote em uma rota noturna e avisa: `Planlagt levering natt til 8. oktober!` significa que sairá na noite que entra em 8 de outubro. Nesse momento ainda não há entregador com o pacote.
 

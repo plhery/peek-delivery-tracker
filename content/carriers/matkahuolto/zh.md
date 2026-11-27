@@ -83,7 +83,7 @@ Matkahuolto 英文页面公布的联系渠道：
 
 ## 使用 Peek 追踪 Matkahuolto 包裹
 
-输入 `MH…FI` 单号时，[Peek](/) 会同时询问 Matkahuolto、Posti 和 [Chronopost](carrier:chronopost)，仅当 Matkahuolto 查到时显示“Matkahuolto 有这个包裹的记录。”；若 Posti 同样有记录，则由你自行选择。`MA` 开头单号仅发送给 Matkahuolto。对于首数字后紧跟芬兰 `64` 或瑞典 `73`（20 位格式中在 `00` 和一位数字之后）的 18 或 20 位条码，Peek 也会连同其他匹配的承运商一并向 Matkahuolto 查询，若仅 Matkahuolto 确认则直接选中它；若 [Posti](carrier:posti) 也识别该 `64` 单号或 [Bring](carrier:bring) 也识别该 `73` 单号，Peek 会默认显示那家，如需切换可点“更换”选 Matkahuolto；若与 PostNord 等其他快递同时命中则由你选择。其他条码不会向 Matkahuolto 查询，请用“更换”选择。带 `parcelNumber=` 的 matkahuolto.fi 链接可将任意单号归到 Matkahuolto，但 Peek 只能向 Matkahuolto 查询其自有 `MH…FI`、`MA` 编码以及校验位有效的国际邮政单号与 SSCC 条码，其他单号均会失败。
+输入 `MH…FI` 单号时，[Peek](/) 会同时询问 Matkahuolto、Posti 和 [Chronopost](carrier:chronopost)，仅当 Matkahuolto 查到时显示“Matkahuolto 有这个包裹的记录。”；若 Posti 同样有记录，则由你自行选择。`MA` 开头单号仅发送给 Matkahuolto。对于首数字后紧跟芬兰 `64` 或瑞典 `73`（20 位格式中在 `00` 和一位数字之后）的 18 或 20 位条码，Peek 也会连同其他匹配的承运商一并向 Matkahuolto 查询，若仅 Matkahuolto 确认则直接选中它；若 [Posti](carrier:posti) 也识别该 `64` 单号或 [Bring](carrier:bring) 也识别该 `73` 单号，Peek 会默认显示那家，如需切换可点“更换”选 Matkahuolto；若与 [PostNord](carrier:postnord) 等其他快递同时命中则由你选择。其他条码不会向 Matkahuolto 查询，请用“更换”选择。带 `parcelNumber=` 的 matkahuolto.fi 链接可将任意单号归到 Matkahuolto，但 Peek 只能向 Matkahuolto 查询其自有 `MH…FI`、`MA` 编码以及校验位有效的国际邮政单号与 SSCC 条码，其他单号均会失败。
 
 Matkahuolto 的扫描时间不含时区：Peek 按扫描所在城镇时钟解析（芬兰境内按芬兰时间；无地点的条目沿用相邻条目时区，否则用芬兰时间），并展示 Matkahuolto 的自有轨迹。状态保留 Matkahuolto 英文原文。Peek 可展示自提点或自提柜的城镇与街道信息，并支持选择“每次扫描”、“重要环节”或“仅派送当天”通知。
 

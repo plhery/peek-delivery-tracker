@@ -49,7 +49,7 @@ Helthjem 查询页会显示包裹状态、带地点的扫描记录、预计送�
 
 ## Helthjem 派送：夜间班次、门垫与取件点
 
-**谁来派送。** 2023 年 Helthjem 向网店销售包裹配送服务，并把包裹交由 Helthjem 网络内的报刊发行商每周六天派送；无法放在门口的大件包裹则交给 PostNord。
+**谁来派送。** 2023 年 Helthjem 向网店销售包裹配送服务，并把包裹交由 Helthjem 网络内的报刊发行商每周六天派送；无法放在门口的大件包裹则交给 [PostNord](carrier:postnord)。
 
 **夜间班次。** 上门派送前一天，Helthjem 会把包裹排入夜间班次并提示：`Planlagt levering natt til 8. oktober!` 表示在进入 10 月 8 日的那个夜间送出，此时尚未交给派送员。
 

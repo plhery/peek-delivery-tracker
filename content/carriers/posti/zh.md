@@ -21,7 +21,7 @@ Posti 将运单号称为 “item ID”（有时写作 “shipment ID”），自
 
 如果寄件人向 Posti 提供了你的手机号，包裹会自己出现在 OmaPosti 应用中；否则需要手动添加。Posti 查件系统只认精确单号，不能按姓名或地址查询。
 
-取件码和自提柜开柜码（6 位或 9 位字符）都不是快递单号。以 `JJEE` 开头的单号属于爱沙尼亚邮政 [Omniva](carrier:omniva)，以 `SE` 结尾则属于瑞典 PostNord。不确定属于哪家快递？参见[快递单号格式说明](guide:tracking-number-formats)（英文）。
+取件码和自提柜开柜码（6 位或 9 位字符）都不是快递单号。以 `JJEE` 开头的单号属于爱沙尼亚邮政 [Omniva](carrier:omniva)，以 `SE` 结尾则属于瑞典 [PostNord](carrier:postnord)。不确定属于哪家快递？参见[快递单号格式说明](guide:tracking-number-formats)（英文）。
 
 ## Posti 英文物流状态含义
 

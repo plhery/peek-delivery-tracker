@@ -19,7 +19,7 @@ CityMail 追踪页要求输入追踪单号（spårningsnummer），其示例以 
 | `BCMKP4829103756182CN` | `BCM`、2 位字母、13 位数字加 `CN`：较长的 CityMail 参考号。 |
 | 其他参考号 | Peek 代码也接受寄件人自己的参考号用于 CityMail：8 至 35 位字母和数字（见下文）。 |
 
-没有单号？请询问发货商家或寄件公司。如果邮件里写着 PostNord 或 [Bring](carrier:bring)，那属于它们的单号而非 CityMail。详见 [如何查找追踪单号](guide:find-tracking-number)（英文）。
+没有单号？请询问发货商家或寄件公司。如果邮件里写着 [PostNord](carrier:postnord) 或 [Bring](carrier:bring)，那属于它们的单号而非 CityMail。详见 [如何查找追踪单号](guide:find-tracking-number)（英文）。
 
 ## CityMail 瑞典语物流状态含义解析
 

@@ -19,7 +19,7 @@ A página de rastreio da CityMail pede o número de rastreamento (*spårningsnum
 | `BCMKP4829103756182CN` | `BCM`, duas letras, 13 dígitos e `CN`: referência CityMail mais longa. |
 | Outra referência | O código do Peek também aceita referências próprias do remetente para a CityMail: de 8 a 35 letras e dígitos (veja abaixo). |
 
-Sem código? Pergunte à loja ou empresa remetente. Se o e-mail mencionar PostNord ou [Bring](carrier:bring), o código pertence a elas, não à CityMail. Veja mais em [como encontrar seu código de rastreio](guide:find-tracking-number).
+Sem código? Pergunte à loja ou empresa remetente. Se o e-mail mencionar [PostNord](carrier:postnord) ou [Bring](carrier:bring), o código pertence a elas, não à CityMail. Veja mais em [como encontrar seu código de rastreio](guide:find-tracking-number).
 
 ## Significado dos status CityMail em português
 

@@ -23,13 +23,12 @@ import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -42,10 +41,8 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.rememberTextMeasurer
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
@@ -70,8 +67,8 @@ import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import kotlin.math.max
 
-/** An alert's text field (`TextField(_:text:)` in `.alert`): its [placeholder], what is typed in it and its change. */
-internal class AlertField(val placeholder: String, val text: String, val onChange: (String) -> Unit)
+/** An alert's text field (`TextField(_:text:)` in `.alert`): its [placeholder] and what is typed in it. */
+internal class AlertField(val placeholder: String, val state: TextFieldState)
 
 /**
  * `.alert(title, isPresented:) { … } message: { … }` as iOS 26 draws it ([AlertCard], iphone-03-reset-alert.png): the
@@ -137,24 +134,18 @@ internal fun SettingsAlert(
 private fun AlertTextField(field: AlertField, focus: FocusRequester) {
     val colors = PeekTheme.colors
     val font = PeekTheme.type.body
-    var value by remember { mutableStateOf(TextFieldValue(field.text, TextRange(field.text.length))) }
-    if (value.text != field.text) value = TextFieldValue(field.text, TextRange(field.text.length))
     BasicTextField(
-        value,
-        onValueChange = {
-            value = it
-            field.onChange(it.text)
-        },
+        field.state,
         modifier = Modifier
             .fillMaxWidth()
             .testTag(SETTINGS_ALERT_FIELD)
             .focusRequester(focus)
             .semantics { contentDescription = field.placeholder },
         textStyle = font.copy(color = colors.label),
-        singleLine = true,
+        lineLimits = TextFieldLineLimits.SingleLine,
         cursorBrush = SolidColor(colors.accent),
         keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.None, imeAction = ImeAction.Done),
-        decorationBox = { text ->
+        decorator = { text ->
             Box(
                 Modifier
                     .heightIn(min = ALERT_CAPSULE_HEIGHT)
@@ -162,7 +153,7 @@ private fun AlertTextField(field: AlertField, focus: FocusRequester) {
                     .padding(horizontal = FIELD_INSET, vertical = ALERT_CAPSULE_PADDING),
                 contentAlignment = Alignment.CenterStart,
             ) {
-                if (value.text.isEmpty()) {
+                if (field.state.text.isEmpty()) {
                     Text(field.placeholder, Modifier.clearAndSetSemantics {}, color = colors.secondaryText, style = font, maxLines = 1)
                 }
                 text()

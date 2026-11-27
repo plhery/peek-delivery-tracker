@@ -6,6 +6,7 @@ import androidx.compose.animation.core.animate
 import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.MutableState
@@ -251,6 +252,17 @@ internal fun <T> rememberForLaunch(launch: UUID, initial: T): MutableState<T> =
             },
         ),
     ) { mutableStateOf(initial) }
+
+/** A text field's `@State` held as [rememberForLaunch] holds a value: its words through the window made again, not past the process. */
+@Composable
+internal fun rememberTextFieldStateForLaunch(launch: UUID, initial: String = ""): TextFieldState =
+    rememberSaveable(
+        launch,
+        saver = listSaver(
+            save = { listOf(launch.toString(), it.text.toString()) },
+            restore = { saved -> TextFieldState(if (saved[0] == launch.toString()) saved[1] else initial) },
+        ),
+    ) { TextFieldState(initial) }
 
 /**
  * What ParcelListView keeps in `@State` for its search and its filters (A-SE04): whether the search shows, the query,

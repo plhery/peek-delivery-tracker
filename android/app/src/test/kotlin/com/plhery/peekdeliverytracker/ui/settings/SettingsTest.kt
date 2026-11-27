@@ -981,6 +981,26 @@ class SettingsTest {
         assertEquals("Opened again", first, top(), 1f)
     }
 
+    /** The delete alert's address, as typed, stays through a window made again; the alert opened again starts empty. */
+    @Test
+    fun theAddressTypedInTheDeleteAlertStaysThroughAWindowMadeAgain() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation)
+        open()
+        tap(SETTINGS_ACCOUNT_DATA)
+        tap(SETTINGS_DELETE)
+        node(SETTINGS_ALERT_FIELD).performTextReplacement("Reader@Example.com")
+        settle()
+        recreation.recreate(parceled = true)
+        settle()
+        assertEquals("Reader@Example.com", node(SETTINGS_ALERT_FIELD).fetchSemanticsNode().config[SemanticsProperties.EditableText].text)
+        node(SETTINGS_ALERT_ACTION).assertIsEnabled()
+        press(SETTINGS_ALERT_CANCEL)
+        tap(SETTINGS_DELETE)
+        assertEquals("", node(SETTINGS_ALERT_FIELD).fetchSemanticsNode().config[SemanticsProperties.EditableText].text)
+        node(SETTINGS_ALERT_ACTION).assertIsNotEnabled()
+    }
+
     @Test
     fun aWindowMadeAgainWhileTheEmailSavesStillHearsItsAnswer() {
         val recreation = Recreation(compose)

@@ -21,6 +21,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.clearText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -75,6 +77,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.PlainPress
 import com.plhery.peekdeliverytracker.ui.deliveries.REGULAR_SPINNER
 import com.plhery.peekdeliverytracker.ui.deliveries.localized
 import com.plhery.peekdeliverytracker.ui.deliveries.rememberForLaunch
+import com.plhery.peekdeliverytracker.ui.deliveries.rememberTextFieldStateForLaunch
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.sheet.BAR_ROW
@@ -149,7 +152,7 @@ internal fun AccountSheetHost(state: AccountHost) {
     val nav = SettingsNav(
         pushed = rememberForLaunch<String?>(launch, null),
         alert = rememberForLaunch<String?>(launch, null),
-        confirmation = rememberForLaunch(launch, ""),
+        confirmation = rememberTextFieldStateForLaunch(launch),
     )
     // Each opening scrolls from the top, as a new AccountView does; a change of language and a window made again keep
     // the place.
@@ -168,7 +171,7 @@ internal fun AccountSheetHost(state: AccountHost) {
         onClosed = {
             nav.pushed.value = null
             nav.alert.value = null
-            nav.confirmation.value = ""
+            nav.confirmation.clearText()
             work.forget(SETTINGS_PAGE)
             work.forget(DELIVERY_UPDATES_PAGE)
             work.forget(ADD_BY_EMAIL_PAGE)
@@ -186,7 +189,7 @@ internal fun AccountSheetHost(state: AccountHost) {
 }
 
 /** What AccountView keeps through a window made again: the page pushed, the alert open and the address typed in it. */
-internal class SettingsNav(val pushed: MutableState<String?>, val alert: MutableState<String?>, val confirmation: MutableState<String>)
+internal class SettingsNav(val pushed: MutableState<String?>, val alert: MutableState<String?>, val confirmation: TextFieldState)
 
 private class SettingsScrolls(val root: ScrollState, val data: ScrollState, val updates: ScrollState, val inbox: ScrollState, val assistants: ScrollState)
 
@@ -577,7 +580,7 @@ private fun AccountDataPage(state: AccountHost, nav: SettingsNav, scroll: Scroll
         work.run(SETTINGS_PAGE, source.scope, source::errorMessage, if (leaves) emptyList() else null, job)
     }
     val ask = { alert: String ->
-        if (alert == ALERT_DELETE) nav.confirmation.value = ""
+        if (alert == ALERT_DELETE) nav.confirmation.clearText()
         nav.alert.value = alert
     }
     PushedPage(
@@ -778,7 +781,7 @@ private fun SettingsAlerts(state: AccountHost, nav: SettingsNav) {
                     else -> {
                         val demo = source.isDemo
                         val email = (source.session.value as? AuthenticationState.SignedIn)?.user?.email ?: ""
-                        val typed = nav.confirmation.value
+                        val typed = nav.confirmation.text.toString()
                         SettingsAlert(
                             title = localizer.text("account.deleteQuestion"),
                             message = localizer.text("account.deleteDescription"),
@@ -786,9 +789,7 @@ private fun SettingsAlerts(state: AccountHost, nav: SettingsNav) {
                             actionTag = SETTINGS_ALERT_ACTION,
                             destructive = true,
                             actionEnabled = demo || typed.cleaned() == email.cleaned(),
-                            field = if (demo) null else AlertField(localizer.text("account.typeToConfirm", mapOf("email" to email)), typed) {
-                                nav.confirmation.value = it
-                            },
+                            field = if (demo) null else AlertField(localizer.text("account.typeToConfirm", mapOf("email" to email)), nav.confirmation),
                             onCancel = close,
                         ) { run(true) { source.deleteAccount(typed) } }
                     }

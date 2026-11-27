@@ -1,12 +1,12 @@
 ---
 title: Omniva saadetise jälgimine: olekud, pakiautomaat ja toll
-description: Jälgi Omniva pakki Eestis: milline on jälgimisnumber, mida olekud tähendavad, kui kaua pakk pakiautomaadis ootab, kuidas käib tollivormistus ja kuhu pöörduda.
+description: Omniva saadetise jälgimine Eestis: JJEE- ja EE-koodid, olekute tähendused, 4-päevane hoiuaeg pakiautomaadis, toll (3 € ja 2 €) ning klienditugi 661 6616.
 slug: omniva-saadetise-jalgimine
 published: 2026-10-25
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Omniva (Aktsiaselts Eesti Post) on Eesti postiettevõte, mille pakiautomaadid, kullerid ja postkontorid toimetavad pakke kätte üle Eesti. Paki teekonda näed Omniva e-teeninduses [minu.omniva.ee](https://minu.omniva.ee/track), Omniva äpis või siin: kleebi jälgimisnumber ülalolevasse lahtrisse. Numbri saad Omniva SMSi või e-kirjaga; kui seda pole, küsi saatjalt.
+Omniva (Aktsiaselts Eesti Post) toimetab pakke üle Eesti pakiautomaatidesse (1–2 tööpäeva), postkontoritesse ja kulleriga ukseni. Paki teekonda saad jälgida `JJEE`- või `EE`-koodiga Omniva e-teeninduses [minu.omniva.ee](https://minu.omniva.ee/track), Omniva äpis või ülalolevas lahtris; allpool leiad ingliskeelsete olekute tähendused, 4-päevase hoiuaja ja pikendamise, tollideklareerimise reeglid ning klienditoe kontaktid.
 
 ## Omniva jälgimisnumber
 
@@ -109,21 +109,25 @@ Peek näitab Omniva olekuid inglise keeles, sammude asukohti Omniva võrgus, sih
 
 ## Küsimused Omniva paki jälgimise kohta
 
-### Kui kaua Omniva pakk kohale jõuab?
+### Kui kaua Omniva pakk kohale jõuab (pakiautomaat ja kuller)?
 
-Pärast paki üleandmist Omnivale jõuab see Eestis pakiautomaati või postkontorisse 1–2 tööpäevaga, Baltikumis 2–3 tööpäevaga. Kuller toob paki järgmisel päeval, kuid mitte hiljem kui kolme päeva jooksul üleandmisest, pühapäevad ja riigipühad välja arvatud. Ilm, liiklus või vabade kappide puudus võivad aega pikendada.
+Pärast üleandmist Omnivale jõuab pakk Eestis pakiautomaati või postkontorisse 1–2 tööpäevaga, Baltikumis 2–3 tööpäevaga. Kuller toob paki järgmisel päeval ja hiljemalt kolme päeva jooksul (v.a pühapäevad ja riigipühad).
 
-### Kas Omniva pakki saab jälgida telefoninumbri järgi?
+### Kui kaua ootab pakk Omniva pakiautomaadis ja kas hoiuaega saab pikendada?
 
-Omniva lehed kirjeldavad jälgimist ainult jälgimisnumbri järgi. Kui aga logid Omniva e-teenindusse sisse Smart-ID, Mobiil-ID või ID-kaardiga, näed seal kõiki oma viimase 6 kuu pakke.
+Pakiautomaadis ootab pakk 4 kalendripäeva (riigipühad lisanduvad). Omniva e-teeninduses saad hoiuaega tasu eest pikendada korraga kuni 4 päeva, kokku kuni 12 päevani; postkontoris saab hoiuaega pikendada ühe korra kuni kuu võrra.
+
+### Kas Omniva pakki saab jälgida telefoninumbri või nime järgi?
+
+Omniva avalik jälgimine töötab ainult jälgimisnumbri järgi. Kui logid aga Omniva e-teenindusse sisse Smart-ID, Mobiil-ID või ID-kaardiga, näed seal kõiki oma viimase 6 kuu saadetisi.
 
 ### Mida tähendab Omniva olek „Delivery attempt made“?
 
-Kuller proovis pakki kätte toimetada, aga see ei õnnestunud, kuigi ingliskeelne sõnastus võib kõlada teisiti. Kui kuller sind kätte ei saa, võib pakk minna lähedal asuvasse pakiautomaati või postkontorisse.
+Kuller proovis pakki kätte toimetada, aga see ei õnnestunud. Kui kuller sind kätte ei saa, tehakse vähemalt kaks katset või viiakse pakk lähedal asuvasse pakiautomaati või postkontorisse.
 
-### Kas välismaalt Eestisse tulevat pakki saab Omniva kaudu jälgida?
+### Kuidas jälgida välismaalt Eestisse tulevat Omniva pakki ja deklareerida tollis?
 
-Jah, kui saatjariik on paki andmed rahvusvahelisse andmebaasi sisestanud. Kuni pakk pole veel Eestis, jälgi seda saatjariigi posti lehel.
+Välismaa pakki näed Omnivas, kui saatjariik on selle rahvusvahelisse andmebaasi lisanud; enne Eestisse jõudmist jälgi seda saatjariigi posti lehel. Kõik väljastpoolt ELi saabuvad pakid tuleb deklareerida 30 päeva jooksul e-MTA-s või Omniva kaudu (kuni 150 € e-poe pakkidele lisandub lisaks käibemaksule 3 € tollimaks ja igale ELi-välisele tellimusele 2 € käitlustasu kaubaartikli kohta).
 
 :::sources
 - [Omniva: Pakkide jälgimine ja kättesaamine](https://www.omniva.ee/saadetise-jalgimine-ja-kattesaamine/) – kulleri SMS ja kõne, sama uksekood, hilinenud pakk

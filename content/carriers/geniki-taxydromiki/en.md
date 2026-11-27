@@ -1,12 +1,12 @@
 ---
 title: Geniki Taxydromiki tracking: vouchers, statuses, contacts
-description: Track a Geniki Taxydromiki parcel in Greece or Cyprus: the 10-digit voucher, what each status means, missed deliveries, claims and how to reach Geniki.
+description: Track a Geniki Taxydromiki parcel in Greece or Cyprus: 10-digit voucher, English and Greek statuses, BOX NOW lockers, claims and phone +30 210 4851100.
 slug: geniki-taxydromiki-tracking
 published: 2026-10-13
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Geniki Taxydromiki (Γενική Ταχυδρομική, sometimes called General Post) is a Greek courier with its own network in Greece, Cyprus, Bulgaria and Romania. Track a parcel with its 10-digit voucher number on the Track & Trace page at taxydromiki.com, or paste it in the box above. The number comes from whoever booked the delivery, usually the shop you ordered from.
+Geniki Taxydromiki (Γενική Ταχυδρομική, General Post) is a Greek courier founded in 1994 operating across Greece, Cyprus, Bulgaria and Romania. Track your 10-digit voucher (SYDETA) number on taxydromiki.com or paste it in the box above; below are English and Greek status meanings, delivery times (1–2 business days on the Greek mainland, next business day in Cyprus), BOX NOW locker and store pickup, claims and Call Center contacts.
 
 ## Geniki Taxydromiki tracking number: what it looks like
 
@@ -92,17 +92,21 @@ Geniki gives no expected delivery day, no pickup point and no weight, so Peek ca
 
 A Greek courier company, in business since 1994 and licensed by Greece's postal regulator EETT. It delivers across Greece, Cyprus, Bulgaria and Romania and sends parcels further through partners.
 
-### Can I track a Geniki Taxydromiki parcel in Cyprus?
-
-Yes, with the same voucher on taxydromiki.com: Cyprus is part of Geniki's own network. Geniki's Cyprus office is in Nicosia (see the contacts above).
-
-### How long does Geniki Taxydromiki take to deliver?
+### How long does Geniki Taxydromiki take to deliver in Greece and Cyprus?
 
 Geniki's charter gives 1 to 2 business days on the Greek mainland, 2 to the islands and up to 3 to remote areas; its FAQ says the next business day within Cyprus, and its Cyprus services page 1 to 2 between Greece and Cyprus. These times are indicative, not guaranteed.
 
-### What is Geniki Taxydromiki's email address?
+### Can I track a Geniki Taxydromiki parcel in Cyprus?
 
-info@taxydromiki.gr. Treat any email from an address not ending @taxydromiki.gr as fake.
+Yes, with the same 10-digit voucher on taxydromiki.com: Cyprus is part of Geniki's own network. Geniki's Cyprus office is in Nicosia (tel. +357 22002146 or 77770727).
+
+### Does Geniki Taxydromiki deliver to BOX NOW lockers or Geniki stores?
+
+Yes. With Door 2 Service Point (D2SP) chosen at booking, parcels go to a Geniki store (or Geniki office in Cyprus). In Greece, Geniki also delivers to [BOX NOW](carrier:box-now) lockers; its locker finder covers Greece and Cyprus.
+
+### How do I contact Geniki Taxydromiki by phone or email?
+
+Call +30 210 4851100 in Greece (Mon–Fri 08:00–20:00, Sat 09:00–14:00 Greek time), email info@taxydromiki.gr, or use the contact and Complaint Submission forms on taxydromiki.com. Treat any email not ending @taxydromiki.gr as fake.
 
 :::sources
 - [Geniki Taxydromiki: Home Page](https://taxydromiki.com/en/home/) – network countries, D2SP, BOX NOW lockers, up to 10 tracking numbers

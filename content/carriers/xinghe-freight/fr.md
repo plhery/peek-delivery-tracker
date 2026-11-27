@@ -1,12 +1,12 @@
 ---
 title: Suivi colis Xinghe Freight : numéro GZXH…YQ et statuts
-description: Suivre un colis Xinghe Freight (星和货运) depuis Guangzhou : format du numéro GZXH…YQ, site de suivi partagé avec GZYL, sens des statuts et qui contacter.
+description: Suivi colis Xinghe Freight (星和货运) : numéro GZXH…YQ, suivi partagé avec GZYL, pourquoi « Delivered » peut être une prévision, douane et qui contacter.
 slug: xinghe-freight-suivi-colis
 published: 2026-11-18
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Xinghe Freight (星和货运, 广州星和货运代理有限公司) est un transitaire installé à Guangzhou (Canton), en Chine. Si une boutique chinoise a expédié ta commande avec Xinghe, cherche un numéro formé de GZXH, dix chiffres et YQ — la forme que Peek reconnaît pour Xinghe — et colle-le dans le champ ci-dessus. Le suivi de Xinghe fonctionne sur le site de suivi de [GZYL](carrier:gzyl), un autre transitaire de Guangzhou : le champ de recherche du site web de Xinghe y envoie directement ton numéro. Ce système tourne sur une simple adresse numérique de serveur, en HTTP non chiffré. Peek l'interroge pour toi et sollicite des services de suivi lorsque ce serveur ne connaît pas ton numéro.
+Xinghe Freight (星和货运, 广州星和货运代理有限公司, fondé en 2014 à Guangzhou) est un transitaire chinois dont les numéros de suivi suivent le format `GZXH`, dix chiffres et `YQ`. Colle ton numéro de 16 caractères dans le champ ci-dessus : le suivi de Xinghe passe par le serveur de [GZYL](carrier:gzyl) (avec ses libellés anglais), où certaines étapes — y compris `Delivered` — peuvent être écrites à l'avance comme prévision plutôt que comme scan réel.
 
 ## Numéro de suivi Xinghe Freight : à quoi il ressemble
 
@@ -101,19 +101,23 @@ Hormis La Poste suisse, Peek ne transfère pas un colis Xinghe au transporteur f
 
 ### Qu'est-ce que Xinghe Freight (星和货运) ?
 
-C'est 广州星和货运代理有限公司 (Guangzhou Xinghe Freight Forwarding), un transitaire basé à Guangzhou, en Chine. Son site indique une création en 2014 et mentionne le fret maritime, aérien et terrestre, l'agence maritime ainsi que les formalités douanières. Les numéros rattachés à Xinghe dans Peek suivent le format GZXH, dix chiffres et YQ.
+C'est 广州星和货运代理有限公司 (Guangzhou Xinghe Freight Forwarding), un transitaire basé à Guangzhou en Chine, fondé en 2014 (fret maritime, aérien, terrestre et formalités douanières). Ses numéros suivent le format `GZXH`, dix chiffres et `YQ`.
 
 ### Pourquoi mon colis Xinghe Freight affiche-t-il le suivi de GZYL ?
 
-Parce que le suivi de Xinghe fonctionne sur le système de GZYL : le formulaire de suivi du propre site de Xinghe y renvoie ton numéro, et les étapes utilisent les libellés de GZYL. Peek conserve le colis sous le nom Xinghe Freight et lit ce système pour toi.
+Parce que le suivi de Xinghe fonctionne sur le système de [GZYL](carrier:gzyl) : le formulaire du site de Xinghe y envoie ton numéro et les étapes reprennent les libellés de GZYL. Peek garde le colis sous le nom Xinghe Freight et lit ce système pour toi.
 
-### Qui livre les colis Xinghe Freight dans mon pays ?
+### Pourquoi le suivi Xinghe affiche « Delivered » sans que le colis soit arrivé ?
 
-Peek ne le sait pas : ni les étapes du suivi ni le site de Xinghe ne citent de transporteur local. Seuls les envois vers la Suisse et le Liechtenstein peuvent basculer automatiquement vers La Poste suisse dans Peek. Demande au vendeur quelle société livre ta commande et quel est son numéro de suivi.
+Sur le système partagé avec GZYL, la chronologie d'un colis (y compris `Delivered`) peut être écrite à l'avance comme prévision, pas comme scan réel. Peek met ces étapes programmées de côté derrière « Les voir » : si rien n'est arrivé, contacte la boutique et demande le numéro du transporteur local.
 
-### Pourquoi Peek n'affiche-t-il encore aucun suivi pour mon numéro GZXH ?
+### Qui livre les colis Xinghe Freight en France, en Belgique ou en Suisse ?
 
-Le système n'a peut-être pas encore reçu la commande, ou ne contient que des étapes écrites d'avance (jusqu'à `Delivered` inclus), que Peek met de côté et ne liste que derrière « Les voir ». Peek interroge aussi des services de suivi et continue de vérifier. Pour un numéro que le système ne connaît pas, Peek interprète la réponse comme un numéro introuvable : il affiche « En attente de Xinghe Freight », puis, deux jours plus tard, « Numéro de suivi à vérifier ». Pour un numéro dont il n'a que des étapes écrites d'avance, il ne te demande pas de corriger le numéro. Vérifie le numéro par rapport au message de la boutique ; si rien n'apparaît après quelques jours, demande au vendeur si le colis est bien parti.
+Ni les étapes du suivi ni le site de Xinghe ne citent de transporteur local. Seuls les envois vers la Suisse et le Liechtenstein peuvent basculer automatiquement vers [La Poste suisse](carrier:swiss-post) dans Peek lorsque la fiche la mentionne ; ailleurs, demande au vendeur quelle entreprise livre ton colis.
+
+### Comment contacter Xinghe Freight ou réclamer un colis non reçu ?
+
+Adresse-toi d'abord à la boutique ou à la marketplace, car le vendeur est le client de Xinghe. Le site chinois xinghe-express.cn indique la ligne +86 199 2448 3103 et l'e-mail commercial 3975605292@qq.com, sans service d'assistance pour les destinataires à l'étranger.
 
 :::sources
 - [Xinghe Freight : 广州星和货运代理有限公司 (accueil, en chinois)](http://xinghe-express.cn/) – raison sociale, services de transit international, formulaire de recherche de suivi, ligne téléphonique et e-mail

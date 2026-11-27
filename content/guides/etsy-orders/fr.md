@@ -1,15 +1,15 @@
 ---
 title: Suivi Etsy : où est ta commande et qui la livre
-description: Pourquoi ta commande Etsy affiche encore « Non envoyé », quel transporteur la livre, à quoi ressemble son numéro de suivi et quand ouvrir un litige.
+description: Suivi de commande Etsy en France, Belgique et Suisse : pourquoi « Non envoyé », transporteurs, douane UE (3 € et 2 €) et délais pour ouvrir un litige.
 slug: suivi-commande-etsy
 picture: Un colis ficelé et timbré, une camionnette postale et Pip qui file à toute allure.
 published: 2026-10-17
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Etsy n'expédie rien lui-même : chaque boutique fabrique ou emballe ses commandes, les confie au transporteur de son choix et ajoute un numéro de suivi quand le service en a un. Ta page Achats te dit si la commande a quitté la boutique et quand elle doit arriver ; le numéro de suivi te dit où elle est maintenant. En retard ou introuvable ? Demande d'abord au vendeur, puis à Etsy.
+Etsy n'expédie pas les commandes lui-même : chaque boutique prépare son colis, choisit son transporteur (La Poste, bpost, La Poste suisse, USPS, Royal Mail, FedEx, UPS…) et ajoute le numéro de suivi dans **Achats et avis**. La date de livraison estimée additionne le temps de traitement du vendeur et le transit du transporteur ; en cas de retard ou de colis perdu, contacte d'abord le vendeur via **Aide concernant une commande**, puis ouvre un litige Etsy 48 heures plus tard (jusqu'à 30 jours après la date estimée).
 
-## Pourquoi ma commande Etsy affiche encore « Non envoyé » ?
+## Pourquoi ma commande Etsy affiche-t-elle encore « Non envoyé » ?
 
 Parce que le vendeur ne l'a pas encore fabriquée, emballée ou marquée comme envoyée. Etsy calcule ta date de livraison estimée ainsi : « Temps de traitement + Temps de transit du transporteur = Date de livraison estimée ». Le temps de traitement, c'est le temps dont le vendeur a besoin pour créer l'article et le préparer avant de le remettre au transporteur. L'exemple d'Etsy : 3 à 5 jours de traitement et 2 à 4 jours de transit, soit une livraison dans 5 à 9 jours. Ton reçu indique aussi la date d'expédition à laquelle le vendeur s'est engagé.
 
@@ -98,7 +98,7 @@ En général pour l'une de ces raisons :
 
 Combien de temps un silence peut durer : [pourquoi le suivi ne bouge plus](guide:tracking-not-updating).
 
-### Pourquoi il n'y a aucun numéro de suivi ?
+### Pourquoi ma commande Etsy n'a-t-elle aucun numéro de suivi ?
 
 Tous les services n'en ont pas. Etsy le dit clairement : « Les différents modes d'expédition n'incluent pas tous des informations de suivi. » Pour les lettres et plis envoyés des États-Unis, les étiquettes d'Etsy ajoutent un suivi via Pitney Bowes, mais un pli trop rigide peut aussi ne pas avoir de suivi. Etsy exige un suivi des vendeurs américains, mais tout vendeur peut indiquer qu'une commande n'en a pas, en donnant une raison. Pas de numéro ? Écris au vendeur via **Aide concernant une commande** : il sait quel service il a utilisé et quand il a posté le colis.
 
@@ -116,7 +116,7 @@ Etsy dit que l'acheteur est « en général responsable » des droits de douane,
 
 Un colis en retard ou jamais reçu parce que tu as refusé ou pas payé les frais dus à la livraison n'est pas couvert par la protection sur les achats d'Etsy. Plus sur les frais et les délais : [colis bloqué en douane](guide:customs).
 
-## Que faire si ta commande Etsy est en retard ou perdue ?
+## Que faire si ta commande Etsy est en retard, perdue ou marquée « Livré » ?
 
 Dans cet ordre :
 

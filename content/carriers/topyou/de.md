@@ -1,12 +1,12 @@
 ---
 title: TopYou Sendungsverfolgung: TYZR-Nummer, Status, Zustellung
-description: TopYou-Paket (通邮) aus China verfolgen: wie die TYZR-Nummer aussieht, was die englischen Scans bedeuten und wer in Deutschland, Österreich und der Schweiz zustellt.
+description: TopYou (通邮 / SZTY56) Sendungsverfolgung aus China: TYZR…YQ-Nummer, englische Scans, Zusteller in DE/AT/CH (iMile, DHL, Post) und wen du kontaktierst.
 slug: topyou-sendungsverfolgung
 published: 2026-10-30
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-TopYou (通邮, Tongyou, auch 通邮集团 oder SZTY56) ist 深圳市通邮物流科技（集团）股份有限公司, ein Spediteur aus Shenzhen in China, der Sendungen über eigene internationale Linien ins Ausland bringt. Hat ein chinesischer Shop deine Bestellung mit TopYou verschickt, bekommst du eine Nummer, die mit TYZ beginnt und auf YQ endet: Füg sie oben ins Feld ein. TopYous Verlauf reicht vom Lager in China über Flug und Zoll bis in dein Land, wo ein Paketdienst vor Ort das Paket übernimmt.
+TopYou (通邮, Tongyou, 通邮集团 oder SZTY56 — 深圳市通邮物流科技（集团）股份有限公司, 2016 in Shenzhen gegründet) ist ein chinesischer Spediteur mit internationalen Linien. Füg deine 17-stellige `TYZR…YQ`-Nummer oben ins Feld ein (oder in Großbuchstaben auf [track.szty56.com](https://track.szty56.com/)), um das Paket von China über Flug und Zoll bis zum Zusteller in Deutschland, Österreich oder der Schweiz (etwa iMile, DHL oder die Landespost) zu verfolgen.
 
 ## TopYou Sendungsnummer: so sieht sie aus
 
@@ -112,21 +112,25 @@ Peek schaut bis zu alle 10 Minuten nach. Wird es bei TopYou still, nur noch stü
 
 ## Fragen zur TopYou Sendungsverfolgung
 
-### Was ist TopYou (通邮)?
+### Was ist TopYou (通邮 / SZTY56)?
 
-深圳市通邮物流科技（集团）股份有限公司, kurz 通邮 oder 通邮集团, auch Tongyou oder SZTY56, ist ein Spediteur aus Shenzhen in China mit internationalen Linien. Nach eigenen Angaben wurde er 2016 gegründet, hat Niederlassungen und Sortierzentren in Shenzhen, Guangzhou, Shanghai und weiteren chinesischen Städten und bearbeitet mehr als 800.000 Aufträge am Tag, die er per Post, über eigene Linien oder mit den großen Expressdiensten verschickt. Seine Nummern bestehen aus TYZR, einem Buchstaben, zehn Ziffern und YQ, manche mit einem anderen Buchstaben statt des R.
+深圳市通邮物流科技（集团）股份有限公司, kurz 通邮, 通邮集团, Tongyou oder SZTY56, ist ein 2016 in Shenzhen gegründeter Spediteur mit Sortierzentren in Shenzhen, Guangzhou, Shanghai und weiteren Städten, der laut eigenen Angaben über 800.000 Aufträge täglich abwickelt.
 
-### Welcher Paketdienst stellt TopYou-Pakete in Deutschland zu?
+### Wie sieht eine TopYou-Sendungsnummer aus und warum wird sie nicht gefunden?
 
-Das kann iMile sein: TopYous Tracking-Seite gibt dann iMiles Scans weiter. Fest steht es aber nicht: TopYous Datensatz kann die Nummer des Zustellers enthalten, aber nicht seinen Namen, und laut DHL muss eine Sendung aus dem Ausland nicht die Deutsche Post bringen. Frag den Shop. Ist die zweite Nummer eine gültige internationale Postnummer und Deutschland das Ziel, fragt Peek selbst bei DHL nach.
+TopYou-Nummern sind 17 Zeichen lang: `TYZR` (teils ein anderer Buchstabe statt R), ein Buchstabe, zehn Ziffern und `YQ`. TopYous eigene Seite track.szty56.com achtet auf Großbuchstaben und meldet 查询不到 bei unbekannter Nummer oder 暂无轨迹信息 vor dem ersten Scan.
+
+### Welcher Paketdienst stellt TopYou-Pakete in Deutschland, Österreich und der Schweiz zu?
+
+In Deutschland kann es [iMile](carrier:imile) sein (dessen Scans TopYou weitergibt) oder ein anderer Paketdienst wie DHL Paket; in Österreich übernimmt teils die Österreichische Post, in der Schweiz die Schweizerische Post. Da TopYous Datensatz nur eine zweite Nummer, aber keinen Namen nennt, frag im Zweifel den Shop.
 
 ### Warum zeigt TopYou mein Land, obwohl das Paket noch in China ist?
 
 Weil TopYou bei seinen eigenen Scans das Zielland als Ort angibt, auch am Abflughafen. Halte dich an den Text: `Arrived at airport of the original country` heißt, dass das Paket noch auf seinen Flug wartet.
 
-### Wen frage ich, wenn mein TopYou-Paket nicht ankommt?
+### Wen kontaktiere ich, wenn mein TopYou-Paket nicht ankommt?
 
-Den Shop, bei dem du bestellt hast: Er hat den Versand bei TopYou gebucht. TopYous Website nennt eine Telefonnummer in Shenzhen (oben), aber keinen Service für Empfänger. Hat ein Paketdienst in deinem Land, etwa die Post, das Paket schon, fragst du ihn zur Zustellung.
+Zuerst den Shop oder Marktplatz, da dieser den Versand gebucht hat. TopYou nennt auf szty56.com eine Nummer in Shenzhen (+86 755 8181 9898, Arbeitstage 9:00–18:00 Uhr), aber keinen Empfänger-Support; liegt das Paket schon bei DHL (0228 4333112), Österreichischer Post (+43 800 010 100) oder Schweizerischer Post (+41 848 888 888), frag dort nach.
 
 :::sources
 - [DHL: Hilfe zu meiner Sendung aus dem Ausland (Import)](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/import.html) – Zustellung nicht zwingend durch Deutsche Post oder DHL Paket, Prüfung in der Sendungsverfolgung, Zollanmeldung, mehrere Tage

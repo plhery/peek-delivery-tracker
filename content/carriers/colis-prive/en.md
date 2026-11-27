@@ -1,12 +1,12 @@
 ---
 title: Colis Privé tracking: French statuses and what to do
-description: Track a Colis Privé parcel in France, Belgium or Luxembourg: where the 12-character number is, why it needs your postcode and what its French statuses mean.
+description: Track a Colis Privé parcel in France, Belgium or Luxembourg: 12-character number and postcode, French status meanings, 8-day pickup, claims and contacts.
 slug: colis-prive-tracking
 published: 2026-10-10
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Colis Privé is a French parcel carrier for online shops, delivering in France, Belgium and Luxembourg to homes, pickup points and, in France, lockers. Track a parcel with its 12-character number and the delivery postcode on [colisprive.fr](https://colisprive.fr/en/) for France or [colisprive.be](https://colisprive.be/en/) for Belgium and Luxembourg. The number comes in the shop's shipping email or Colis Privé's notifications. On 16 October 2026 Colis Privé announced that it and [Paack](carrier:paack) are joining under one brand, Paack, to be rolled out gradually from January 2027; until then its services, delivery and tracking included, carry on as before.
+Colis Privé is a French parcel carrier delivering online orders in France, Belgium and Luxembourg to homes, pickup points and (in France) outdoor lockers. Track your 12-character parcel number with the delivery postcode on [colisprive.fr](https://colisprive.fr/en/) (France), [colisprive.be](https://colisprive.be/en/) (Belgium and Luxembourg) or in Peek above; below are English meanings for its French statuses, 8-day pickup rules, claims and contacts. On 16 October 2026 Colis Privé announced that it and [Paack](carrier:paack) are uniting under the Paack brand from January 2027, with tracking and deliveries running as normal until then.
 
 ## Colis Privé tracking number: where to find it
 
@@ -77,21 +77,25 @@ While you have the parcel open in Peek, or on its delivery day with notification
 
 ## Questions about Colis Privé tracking
 
-### What is Colis Privé?
+### What is Colis Privé, and is it becoming Paack?
 
-A French parcel carrier for online shops, founded in 1993 and also delivering in Belgium and Luxembourg since 2021.
+Colis Privé is a French parcel carrier founded in 1993 that has also delivered in Belgium and Luxembourg since 2021. On 16 October 2026 it announced it is joining [Paack](carrier:paack) under the Paack brand from January 2027, with current tracking and delivery continuing as before until then.
 
-### Does Colis Privé deliver on Saturday?
+### How long does Colis Privé take to deliver, and does it deliver on Saturday?
 
-In Belgium and Luxembourg, yes, from noon to 10pm. Its French pages give hours (8am to 7pm) but no days.
+Colis Privé advertises 24 to 48 hours across France, Belgium and Luxembourg. In Belgium and Luxembourg it delivers Monday to Saturday (noon to 10pm); its French pages list 8am to 7pm without naming days.
 
-### How long does Colis Privé take to deliver?
+### How long does Colis Privé hold a parcel at a pickup point?
 
-Colis Privé advertises 24 to 48 hours anywhere in France, Belgium and Luxembourg.
+8 days in France (over 5,500 pickup points) and 8 calendar days in Belgium and Luxembourg (800 pickup points), after which the parcel returns to the sender. In France you have 10 working days to reschedule a missed home delivery.
 
-### Is there a Colis Privé phone number in Belgium?
+### How do I claim for a late, damaged or missing Colis Privé parcel?
 
-No. Colis Privé BeLux has no incoming line and takes questions by email; 0 806 000 250 is for parcels going to France.
+Use the "File a claim" button on your parcel's tracking page on colisprive.fr or colisprive.be (in Belgium and Luxembourg, within one month of delivery). For refunds or replacements, contact the online shop that sent the parcel.
+
+### What is the Colis Privé customer service phone number or email?
+
+In France, call 0 806 000 250 (Mon–Fri 9am–7pm, Sat 9am–1pm French time; no email). Belgium and Luxembourg have no incoming phone line: email suividecolis@colisprive.com (or opvolgenvanpakketten@colisprive.com) with your name, postcode and parcel number.
 
 :::sources
 - [Colis Privé: How do I track my package?](https://colisprive.fr/en/aide/how-do-i-track-my-package/) – number, statuses

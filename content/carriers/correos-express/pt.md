@@ -1,12 +1,12 @@
 ---
 title: Correos Express rastreio: estados, entregas e contacto
-description: Rastreio Correos Express em Portugal: o número de seguimento, os estados em espanhol explicados, o Ponto Correos, as entregas falhadas e o contacto.
+description: Rastreio Correos Express Portugal (Grupo Correos): número de 16 ou 23 dígitos, estados em espanhol, Ponto Correos (7 dias), prazos 24–48h e 229 762 810.
 slug: correos-express-rastreio
 published: 2026-10-10
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-A Correos Express é a empresa de transporte urgente do Grupo Correos, o grupo dos correios espanhóis, e entrega em Espanha e em Portugal, onde opera através da Correos Express Portugal, com morada na Maia. Para rastrear a encomenda, escreve o número no [localizador português](https://s.correosexpress.com/SeguimientoSinCP/search-pt) da Correos Express ou cola-o na caixa acima. O número identifica o envio que o remetente, normalmente a loja, registou na Correos Express.
+A Correos Express é a transportadora urgente do Grupo Correos (distinta dos Correos postais) e entrega em Portugal continental e Espanha em 24 a 48 horas através da Correos Express Portugal, na Maia. Rastreia o número de 16 ou 23 dígitos no [localizador português](https://s.correosexpress.com/SeguimientoSinCP/search-pt) ou na caixa acima; mais abaixo tens os estados em espanhol explicados, os prazos no Ponto Correos (7 dias) e cacifos (3 dias), segunda tentativa automática e contactos (229 762 810).
 
 ## Número de seguimento Correos Express: como é e onde o encontrar
 
@@ -91,21 +91,25 @@ Consulta o seguimento até a cada 10 minutos, até a cada 2 minutos quando a enc
 
 ## Perguntas sobre o rastreio Correos Express
 
-### O que é a Correos Express?
+### O que é a Correos Express e qual a diferença para os Correos?
 
-É a empresa de encomendas urgentes do Grupo Correos. Os Correos, a casa-mãe, tratam sobretudo do serviço postal tradicional; a Correos Express especializa-se em envios rápidos e flexíveis. Em Portugal é a CEP II – Correos Express Portugal, S.A., comprada pelo grupo em 2019.
+É a empresa de encomendas urgentes do Grupo Correos (em Portugal, CEP II – Correos Express Portugal, S.A., comprada em 2019). Os Correos tratam do serviço postal tradicional (números acabados em `ES`); a Correos Express usa números de 16 ou 23 algarismos.
 
-### Quanto tempo demora uma encomenda da Correos Express vinda de Espanha?
+### Quanto tempo demora uma encomenda da Correos Express de Espanha para Portugal?
 
 Costuma demorar 24 a 48 horas até Portugal continental: a Correos Express trata esses envios como os nacionais de Espanha. No sentido contrário, para Espanha peninsular, indica o mesmo prazo, e diz chegar a qualquer ponto da Península Ibérica em 24 horas.
 
-### A Correos Express entrega ao sábado?
+### Quanto tempo fica a encomenda num Ponto Correos ou cacifo?
+
+Tens até 7 dias para levantar a encomenda num Ponto Correos com o PIN enviado por SMS ou e-mail, e até 3 dias nos cacifos CitiBox e CityPaq. Após entrega falhada em casa, se não for reclamada em 3 dias úteis, regressa ao remetente.
+
+### A Correos Express entrega ao sábado em Portugal?
 
 Em Portugal, as páginas da Correos Express lidas a 9 de outubro de 2026 não oferecem entregas ao sábado nem ao domingo. A entrega ao sábado do Paq 24 é uma opção do remetente e, a partir de Portugal, só existe para Espanha peninsular.
 
-### A chamada para a Correos Express é gratuita?
+### Qual é o telefone da Correos Express Portugal e a chamada é gratuita?
 
-Em Portugal, as páginas da Correos Express não indicam nenhum número gratuito: o 229 762 810 é uma «chamada para rede fixa nacional». O 900 122 333 é o apoio ao cliente de Espanha, onde as chamadas para números 900 são gratuitas, segundo a CNMC, o regulador espanhol.
+Liga 229 762 810 (segunda a sexta das 8h30 às 19h00, chamada para a rede fixa nacional — não há número gratuito em Portugal) ou escreve para destinatarioscep@correosexpress.com. O 900 122 333 é o apoio gratuito em Espanha.
 
 :::sources
 - [Correos Express Portugal: Perguntas frequentes](https://www.correosexpress.pt/pt/apoio-ao-cliente/perguntas-frequentes) – entregas, morada, ESTACIONADO, danos

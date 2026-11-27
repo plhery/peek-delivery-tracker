@@ -6,7 +6,7 @@ published: 2026-11-27
 updated: 2026-11-27
 ---
 
-**泰国邮政（Thailand Post**，全称 *Thailand Post Co., Ltd.*，泰文 *บริษัท ไปรษณีย์ไทย จำกัด*）是泰国国家邮政运营商（[thailandpost.co.th](https://www.thailandpost.co.th/index.php?page=index&language=en)）。它在泰国境内提供平邮、挂号包裹、EMS、当日达（Same Day）、大件 LogisPost 及货到付款（COD）服务，国际业务则涵盖 EMS World、挂号邮件（Registered）、ePacket、Courier Post（最高 200 公斤）及 Courier Post Plus。官方公开追踪门户位于 [track.thailandpost.co.th](https://track.thailandpost.co.th/)，国际业务公告见 [international.thailandpost.com](https://sites.google.com/thailandpost.com/interthp/update)。你可在官网查询，或直接把 13 位 `TH` 追踪单号粘贴到上方输入框。
+**泰国邮政（Thailand Post**，全称 *Thailand Post Co., Ltd.*，泰文 *บริษัท ไปรษณีย์ไทย จำกัด*）是泰国国家邮政运营商（[thailandpost.co.th](https://www.thailandpost.co.th/index.php?page=index&language=en)）。它在泰国境内提供平邮、挂号包裹、EMS、当日达（Same Day）、大件 LogisPost 及货到付款（COD）服务，国际业务则涵盖 EMS World、挂号邮件（Registered）、ePacket、Courier Post（最高 200 公斤）及 Courier Post Plus。公开追踪页面位于 [track.thailandpost.co.th](https://track.thailandpost.co.th/)，国际业务公告见 [international.thailandpost.com](https://sites.google.com/thailandpost.com/interthp/update)。你可在那里查询，或直接把 13 位 `TH` 追踪单号粘贴到上方输入框。
 
 ## 泰国邮政追踪单号（13 位 `TH` S10 格式）
 
@@ -25,16 +25,16 @@ updated: 2026-11-27
 
 | 泰国邮政代码与原文 | 对你的含义 | Peek 显示 |
 | --- | --- | --- |
-| `3` `Posting/Collection` | 已在泰国邮政柜台收寄或从寄件人处揽收。 | “承运商已揽收” |
+| `3` `Posting/Collection` | 已在泰国邮政柜台收寄或从寄件人处揽收。 | “已揽收” |
 | `9` `Arrival at outward office of exchange`、`15` `Departure From Outward OE`、`18` `Arrival at inward office of exchange` | 正在国际互换局办理出口或进口交换处理。 | “运输中” |
 | `23`–`27` `In transit`、`Item into sorting center`、`Arrival at post office` | 正在各分拣中心间转运并抵达负责投递的当地邮局。 | “运输中” |
 | `31` `Item out for physical delivery` | 已交由泰国邮政投递员今天外出上门派送。 | “派送中” |
 | `57` `Contact recipient` | 投递员尝试致电收件人（非位移操作，保持当前状态）。 | 保持原状态 |
 | `32` `Item arrival at collection point for pick-up (by recipient)` | 已存入泰国邮政快递柜或自提点等待领取。 | “待取件” |
 | `34` `Scheduled for further delivery attempt today` / `Item held, addressee notified`（第 4 组） | 投递未成功（例如收件人不在，或需支付关税/货到付款费用）。 | “派送未成功” |
-| `28` `Return to the origin post office` | 出现异常，邮件正退回始发邮局。 | “需关注” |
+| `28` `Return to the origin post office` | 出现异常，邮件正退回始发邮局。 | “需要留意” |
 | `35/L` `The sender received the returned item` | 退回的包裹已交还原始寄件人。 | “已退回寄件人” |
-| `35/S` `Final delivery` | 已送达收件人（货到付款订单之后可能出现 `36` `Successfully transfer money to seller`，不影响实际送达时间）。 | “已送达” |
+| `35/S` `Final delivery` | 已送达收件人（货到付款订单之后可能出现 `36` `Successfully transfer money to seller`，不影响实际送达时间）。 | “已签收” |
 
 ## 泰国境内货到付款、国际交接与清关
 
@@ -44,7 +44,7 @@ updated: 2026-11-27
 
 ## 泰国邮政包裹延误、暂扣或丢失
 
-- **离开泰国后的静默期：** 国际航空邮件（尤其是挂号件 `R...TH` 和经济包裹）在 `Departure From Outward OE` 与 `Arrival at inward office of exchange` 之间常暂停更新数天甚至数周。到目的国邮政官网用同一 13 位 `TH` 单号查询，通常能看到更多清关或派送细节。参阅 [物流为何停止更新](guide:tracking-not-updating)（英文）。
+- **离开泰国后的静默期：** 国际航空邮件（尤其是挂号件 `R...TH` 和经济包裹）在 `Departure From Outward OE` 与 `Arrival at inward office of exchange` 之间常暂停更新数天甚至数周。到目的国邮政的网站用同一 13 位 `TH` 单号查询，通常能看到更多清关或派送细节。参阅 [物流为何停止更新](guide:tracking-not-updating)（英文）。
 - **丢失、破损或退回：** 请先联系寄件人或电商平台，并妥善保存 13 位单号及收据。详见 [包裹丢失](guide:lost-parcel)（英文）、[包裹破损](guide:damaged-parcel)（英文）、[显示已送达却未收到](guide:delivered-not-received)（英文） 和 [退回寄件人](guide:returned-to-sender)（英文）。
 
 ## 泰国邮政客服与 1545 联络中心
@@ -55,21 +55,21 @@ updated: 2026-11-27
 - **官方联系与咨询门户：** [thailandpost.co.th/un/contact_thp/un/41](https://www.thailandpost.co.th/un/contact_thp/un/41)。
 - **在线追踪与国际公告：** [track.thailandpost.co.th](https://track.thailandpost.co.th/) 及 [international.thailandpost.com](https://sites.google.com/thailandpost.com/interthp/update)。
 
-> 请警惕要求点击陌生链接支付小额费用的虚假短信或 LINE 消息。任何追踪信息或关税费用请务必直接通过 [track.thailandpost.co.th](https://track.thailandpost.co.th/) 或 THP 联络中心 `1545` 核实。参阅 [防范快递诈骗短信](guide:delivery-scam-texts)（英文）。
+> 请警惕要求点击陌生链接支付小额费用的虚假短信或 LINE 消息。任何追踪信息或关税费用请直接通过 [track.thailandpost.co.th](https://track.thailandpost.co.th/) 或 THP 联络中心 `1545` 核实。参阅 [防范快递诈骗短信](guide:delivery-scam-texts)（英文）。
 
 ## 使用 Peek 追踪泰国邮政包裹
 
-输入任意校验位有效的 13 位 `TH` S10 单号（如虚构示例 `EE482917367TH` 或 `RR739184627TH`）时，[Peek](/) 会将泰国邮政自动识别为唯一候选，同时直接识别粘贴的 `track.thailandpost.co.th/?trackNumber=` 追踪链接。如需手动切换承运商（例如包裹抵达海外后对照目的国邮政自己的扫描），可在添加时点“更改”或在详情页点“更换承运商”。
+输入任意校验位有效的 13 位 `TH` S10 单号（如虚构示例 `EE482917367TH` 或 `RR739184627TH`）时，[Peek](/) 会将泰国邮政自动识别为唯一候选，同时直接识别粘贴的 `track.thailandpost.co.th/?trackNumber=` 追踪链接。如需手动切换承运商（例如包裹抵达海外后对照目的国邮政自己的扫描），可在添加时点“更换”或在详情页点“更换快递公司”。
 
-Peek 直接读取泰国邮政官方追踪接口（主接口异常时自动切换备用主机），显示阶段（“承运商已揽收”、“运输中”、“派送中”、“待取件”、“派送未成功”、“需关注”、“已退回寄件人”、“已送达”）、英文描述、邮局名称与送达时间。数字状态码用于判定阶段，不会显示在 Peek 界面中；收件人姓名仅显示在你自己的详情页“收件人”栏下、绝不出现在分享链接中，且任何应用都不展示实际代签人姓名。泰国邮政自有扫描带曼谷时区；海外邮政 EDI 扫描保留当地墙钟但泰国邮政误存为曼谷时间，因此 Peek 会按邮局所在时区重新解析（如 `TOKYO INTERNATIONAL` 用东京时间；无地点则沿用相邻节点），再统一换算为你设备的本地时间。Peek 不展示投递员姓名、电话号码、签名或脱敏联系备注；泰国邮政不提供预计送达日。
+Peek 读取泰国邮政的追踪器（第一台主机失败时改用另一台），显示阶段（“已揽收”、“运输中”、“派送中”、“待取件”、“派送未成功”、“需要留意”、“已退回寄件人”、“已签收”）、英文描述、邮局名称与送达时间。数字状态码用于判定阶段，不会显示在 Peek 界面中；收件人姓名仅显示在你自己的详情页“收件人”栏下、绝不出现在分享链接中，且任何应用都不展示实际代签人姓名。泰国邮政自有扫描带曼谷时区；海外邮政 EDI 扫描保留当地墙钟但泰国邮政误存为曼谷时间，因此 Peek 会按邮局所在时区重新解析（如 `TOKYO INTERNATIONAL` 用东京时间；无地点则沿用相邻节点），再统一换算为你设备的本地时间。Peek 不展示投递员姓名、电话号码、签名或脱敏联系备注；泰国邮政不提供预计送达日。
 
-当你打开包裹，或在开启通知的情况下进入派送日时，只要泰国邮政追踪器正常响应，Peek 最高每 10 分钟检查一次；在显示 `31`（`Item out for physical delivery`）当天，自最新扫描所在时钟早上 6 点起每 2 分钟检查一次。其余时间每小时一次；在“已创建运单”或“承运商已揽收”下满 12 小时或连续两天无新动态时改为每小时一次，在“已创建运单”下满七天改为每 6 小时一次。若官网无响应而改由综合追踪服务跟进，Peek 每小时检查一次，静默满一天后每 3 小时一次，派送当天最高每 15 分钟一次。
+当你在 Peek 中打开包裹页面，或在派送当日开启通知时，Peek 最多每 10 分钟检查一次；在泰国邮政显示 `31`（`Item out for physical delivery`）当天，只要泰国邮政的追踪器有响应，会从最新扫描所在时钟的早上 6 点起每 2 分钟检查一次。其余情况下每小时检查一次。若包裹停留在“已生成面单”或“已揽收”超过 12 小时，或连续两天没有新动态，无论你以何种方式关注，均改为每小时检查一次；若停留在“已生成面单”超过七天，则每 6 小时检查一次。当泰国邮政的追踪器无响应、Peek 仅通过追踪服务跟进时，每小时检查一次，静默一天后每 3 小时一次，派送当天最多每 15 分钟一次。
 
-若包裹处于“已创建运单”、“承运商已揽收”或“运输中”且最新扫描满四天，Peek 会按该扫描日期标示并提示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 Thailand Post 查询。”，同时附上指向泰国邮政联系页面的帮助链接；超过三周无更新时会建议联系卖家并继续查询。
+当最新扫描距今已满四天，且包裹仍处于“已生成面单”、“已揽收”或“运输中”时，Peek 会用该次扫描的日期加以标记，例如“自10月12日周一起没有物流更新”。包裹页面随后会显示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 Thailand Post 查询。”，并附上指向泰国邮政联系页面的“向 Thailand Post 寻求帮助”链接。如果三周没有新扫描，页面会显示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 Thailand Post 查询。”
 
-你可选择“每次扫描”、“重要节点”或“仅派送和送达”通知。Peek 仅监控轨迹更新，无法代办清关、支付货到付款费用或替你联系泰国邮政。
+你可选择“每次扫描”、“重要环节”或“仅派送当天”通知。Peek 仅监控轨迹更新，无法代办清关、支付货到付款费用或替你联系泰国邮政。
 
-## 泰国邮政追踪常见问题
+## 关于泰国邮政物流查询的问题
 
 ### 泰国邮政（Thailand Post）追踪单号长什么样？
 

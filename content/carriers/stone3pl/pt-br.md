@@ -10,7 +10,7 @@ A Stone3PL é uma empresa logística sediada em Shenzhen, na China, integrante d
 
 ## Formato do código de rastreio Stone3PL
 
-A Stone3PL não publica um padrão oficial de código. O Peek associa um formato à Stone3PL: a letra `S` seguida de 18 dígitos. Os dois exemplos abaixo são inventados:
+A Stone3PL não publica um formato de código. O Peek associa um formato à Stone3PL: a letra `S` seguida de 18 dígitos. Os dois exemplos abaixo são inventados:
 
 | Código | O que é |
 | --- | --- |
@@ -53,7 +53,7 @@ Linhas do país de destino podem usar outras redações. O Peek reconhece palavr
 
 A Stone3PL informa atuar em parceria com provedores logísticos globais e manter armazéns nas Américas (NORAM), Ásia-Pacífico (APAC) e Europa, Oriente Médio e África (EMEA).
 
-Suas páginas não dizem qual empresa entrega em cada país: confira na página de resultado da Stone3PL a transportadora final e o código dela. Tentativas de entrega, avisos e pontos de retirada seguem as regras dessa transportadora local. Veja [entregas perdidas](guide:missed-delivery).
+Suas páginas não dizem qual empresa entrega em cada país: confira na página de resultado da Stone3PL a transportadora final e o código dela. Tentativas de entrega, avisos e pontos de retirada seguem as regras dessa transportadora local. Veja [entregas não realizadas](guide:missed-delivery).
 
 **Impostos e alfândega.** A Stone3PL oferece a vendedores frete DDP (*Delivered Duty Paid*), com desembaraço aduaneiro DDP. Apenas o vendedor pode confirmar se o seu pedido foi enviado nessa modalidade.
 
@@ -63,17 +63,17 @@ Suas páginas não dizem qual empresa entrega em cada país: confira na página 
 
 A Stone3PL atende às empresas que despacham com ela e não mantém páginas de ajuda para destinatários; para atraso, extravio, dano ou devolução, fale primeiro com o vendedor.
 
-**Nada ainda.** O Peek continua verificando. Exibe "Aguardando Stone3PL" se você selecionou Stone3PL, ou "Ainda sem histórico de rastreamento" se adicionou sem transportadora. Após dois dias sem resposta em um pacote sem transportadora, o Peek avisa que ainda aguarda a primeira atualização: confira o código com o vendedor. Se você escolheu Stone3PL e dois dias depois ela ainda não reconhece o número (sem outro retorno), o Peek alerta que a transportadora continua sem reconhecer o código — sugerindo conferir, trocar de transportadora ou excluir — e passa a consultar diariamente, e semanalmente após uma semana.
+**Nada ainda.** O Peek continua verificando. Exibe "Aguardando Stone3PL" se você selecionou Stone3PL, ou "Ainda sem histórico de rastreamento" se adicionou sem transportadora. Após dois dias sem resposta em um pacote sem transportadora, o Peek sinaliza o pacote ("Aguardando a primeira atualização da transportadora"): confira o código com o vendedor. Se você escolheu Stone3PL e dois dias depois ela ainda não reconhece o número (sem outro retorno), o Peek mostra "Depois de dois dias, a transportadora ainda não reconhece este código. Confira o código, escolha outra transportadora ou exclua a encomenda." e passa a consultar diariamente, e semanalmente depois de uma semana desde que você o adicionou.
 
 **Apenas `Order Submited.` ou `Shipment information received`.** A Stone3PL recebeu os dados eletrônicos, mas talvez ainda não tenha o pacote físico. Se não avançar por vários dias, pergunte ao vendedor se já foi despachado.
 
-**Sem atualização há dias.** Quando um pacote em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito" fica quatro dias sem nova linha, o Peek exibe o aviso com a data da última movimentação (por exemplo, "Sem atualização de rastreamento desde seg 12 out") e lembra que pacotes costumam ficar sem atualizações em voos longos, na alfândega ou nos fins de semana. Veja [por que o rastreio para de atualizar](guide:tracking-not-updating) e [rastrear encomendas da China](guide:tracking-from-china).
+**Sem atualização há dias.** Quando um pacote em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito" fica quatro dias sem nova linha, o Peek exibe o aviso com a data da última movimentação (por exemplo, "Sem atualizações desde seg 12 out") e lembra que pacotes costumam ficar sem atualizações em voos longos, na alfândega ou nos fins de semana. Veja [por que o rastreio para de atualizar](guide:tracking-not-updating) e [rastrear encomendas da China](guide:tracking-from-china).
 
 **"Precisa de atenção".** A Stone3PL sinalizou algum problema. Leia a linha mais recente e pergunte ao vendedor quais são os próximos passos.
 
 **Entregue mas não recebida.** Procure ao redor da residência e pergunte aos vizinhos; depois avise o vendedor. Veja [entregue mas não recebida](guide:delivered-not-received).
 
-**Perdida, danificada ou devolvida.** O site da Stone3PL não orienta destinatários sobre reclamações ou devoluções; sua página inicial oferece aos vendedores um serviço de devolução e reenvio. Peça reembolso ou novo envio ao vendedor. Veja [encomendas perdidas](guide:lost-parcel), [encomendas danificadas](guide:damaged-parcel) e [devolvida ao remetente](guide:returned-to-sender).
+**Perdida, danificada ou devolvida.** O site da Stone3PL não orienta destinatários sobre pedidos de indenização ou devoluções; sua página inicial oferece aos vendedores um serviço de devolução e reenvio. Peça reembolso ou novo envio ao vendedor. Veja [encomendas perdidas](guide:lost-parcel), [encomendas danificadas](guide:damaged-parcel) e [devolvida ao remetente](guide:returned-to-sender).
 
 **Mensagem cobrando pagamento.** Antes de pagar qualquer taxa recebida por SMS ou e-mail, leia [golpes por SMS de entrega](guide:delivery-scam-texts).
 
@@ -89,15 +89,15 @@ Sobre o seu pedido, fale primeiro com o vendedor: foi ele quem contratou a Stone
 
 ## Acompanhe sua encomenda Stone3PL no Peek
 
-O [Peek](/) acompanha encomendas Stone3PL, mas não confirma a transportadora apenas pela aparência do número. Ao colar um código com `S` e 18 dígitos, o Peek mostra "Consultando serviços de rastreamento…" enquanto consulta a Stone3PL e confirma assim que ela encontra o pacote. Um link do rastreador da Stone3PL com um número após `nums=` identifica a Stone3PL imediatamente ("Transportadora detectada").
+O [Peek](/) acompanha encomendas Stone3PL, mas não confirma a transportadora apenas pela aparência do número. Ao colar um código com `S` e 18 dígitos, o Peek mostra "Consultando serviços de rastreamento…" enquanto consulta a Stone3PL. Se a Stone3PL estiver com o pacote, a linha da transportadora diz que a Stone3PL "está com esta encomenda", e o Peek o acompanha por lá. Um link do rastreador da Stone3PL com um número após `nums=` identifica a Stone3PL imediatamente ("Transportadora detectada").
 
-Para qualquer outro número, cole normalmente: o Peek acompanha mais de 4.500 transportadoras. Quando o formato coincide de forma fraca, mostra "Consultando serviços de rastreamento…"; números sem formato reconhecido são consultados após você adicionar. Se o Peek não nomear a transportadora, toque em "Alterar" e escolha Stone3PL na lista completa, ou use "Alterar transportadora" no pacote já salvo.
+Para qualquer outro número, cole normalmente: o Peek acompanha mais de 4.500 transportadoras. Quando o formato coincide de forma fraca, mostra "Consultando serviços de rastreamento…"; números sem formato reconhecido são consultados após você adicionar. Se o Peek não nomear a transportadora, toque em "Trocar" e escolha Stone3PL em "Todas as transportadoras", ou use "Trocar transportadora" em um pacote já adicionado.
 
 O Peek lê o status geral, cada linha com horário, países de origem e destino e a transportadora final com o respectivo número quando informados, omitindo telefones. A Stone3PL não fornece previsão de entrega, peso, locais de leitura nem comprovante de entrega.
 
 Quando a Stone3PL informa a transportadora de entrega e seu número, o Peek também consulta essa empresa. Com um código postal (duas letras, nove dígitos, duas letras) sem empresa nomeada, consulta o correio do país de destino — como [USPS](carrier:usps) nos EUA, [Royal Mail](carrier:royal-mail) no Reino Unido, An Post na Irlanda, [Canada Post](carrier:canada-post) ou [Australia Post](carrier:australia-post). Com outro formato, consulta a transportadora exclusiva daquele padrão, se houver. Assim que ela apresentar leitura tão recente quanto a da Stone3PL, o Peek passa a acompanhar lá preservando o histórico da Stone3PL, exibindo antes mesmo disso o aviso de entrega pela transportadora final (como "Entrega por USPS") ou "Anunciada a …, ainda não recebida" quando houver apenas pré-aviso. Sem transportadora final identificável, o Peek permanece na Stone3PL.
 
-Enquanto o pacote estiver aberto no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta até a cada 10 minutos, e até a cada 2 minutos a partir das 6h no horário do país de destino no dia da saída para entrega, enquanto o rastreador da Stone3PL responder. Nos demais casos, e após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), consulta a cada hora, e a cada 6 horas após sete dias sem novidades em "Etiqueta criada". Quando outra transportadora assume, o Peek segue a frequência dela. Você pode ativar alertas de "Cada atualização", "Etapas importantes" ou "Somente entrega". O Peek não pode entrar em contato com a Stone3PL ou o vendedor por você.
+Enquanto o pacote estiver aberto no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta até a cada 10 minutos, e até a cada 2 minutos a partir das 6h no horário do país de destino no dia da saída para entrega, enquanto o rastreador da Stone3PL responder. Nos demais casos, e após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), consulta a cada hora, e a cada 6 horas após sete dias sem novidades em "Etiqueta criada". Quando outra transportadora assume, o Peek segue a frequência dela. Você pode ativar alertas de "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode entrar em contato com a Stone3PL ou o vendedor por você.
 
 ## Perguntas sobre o rastreio Stone3PL
 
@@ -107,7 +107,7 @@ A Stone3PL informa fazer parte do Stone Group, com sede em Shenzhen, mais de 10 
 
 ### Onde posso rastrear uma encomenda Stone3PL?
 
-Na [página de rastreio da Stone3PL](https://stone3pl.com/?route=services/track) ou no Peek. Se o resultado da Stone3PL informar a empresa que entrega no seu país, você também pode consultar o código dela no site oficial dessa transportadora.
+Na [página de rastreio da Stone3PL](https://stone3pl.com/?route=services/track) ou no Peek. Se o resultado da Stone3PL informar a empresa que entrega no seu país, você também pode consultar o código dela no próprio site dela.
 
 ### O que significa "Pick up by local carrier at destination port"?
 
@@ -123,7 +123,7 @@ Por e-mail em support@stone3pl.com ou telefone 86-0755-81466633, em Shenzhen, Ch
 
 :::sources
 - [Stone3PL: Home](https://stone3pl.com/) – logística de e-commerce da China para o mundo para vendedores, desembaraço DDP e Delivered Duty Paid, serviço de devolução e reenvio, armazéns em NORAM, APAC e EMEA
-- [Stone3PL: Logistics tracking](https://stone3pl.com/?route=services/track) – rastreador em inglês, até 40 códigos um por linha, letras, dígitos e hifens em maiúsculas, empresas suportadas
+- [Stone3PL: Logistics tracking](https://stone3pl.com/?route=services/track) – rastreador em inglês, até 40 códigos um por linha, letras, dígitos e hifens em maiúsculas, empresas que o rastreador acompanha
 - [Stone3PL: About us](https://stone3pl.com/index.php?route=services/about_us) – Stone Group, sede em Shenzhen, mais de 10 anos de experiência, mais de 8.000 clientes contratuais, parceiros logísticos globais
 - [Stone3PL: Contact us](https://stone3pl.com/index.php?route=services/contact_us) – sede em Shenzhen, e-mail, telefone, endereço
 - [Stone3PL: Privacy Policy](https://stone3pl.com/index.php?route=services/privacy) – e-mail de suporte

@@ -12,7 +12,7 @@ A Matkahuolto é uma transportadora finlandesa de encomendas com pontos de retir
 
 A Matkahuolto chama o código de shipment ID ou consignment ID (*lähetystunnus* em finlandês). Ele consta no e-mail de envio da loja e em todos os SMS ou e-mails da Matkahuolto. O código de retirada (pick-up code) enviado no aviso de chegada é outro número: serve para abrir o armário ou apresentar no balcão do ponto de coleta.
 
-A Matkahuolto não publica especificações oficiais dos seus formatos. Estes são os padrões reconhecidos pelo catálogo do Peek (dígitos inventados):
+A Matkahuolto não publica seus formatos de código. Estes são os padrões reconhecidos pelo catálogo do Peek (dígitos inventados):
 
 | Código | O que é |
 | --- | --- |
@@ -24,7 +24,7 @@ Códigos iniciados por `JJFI`, bem como [códigos postais](guide:tracking-number
 
 Transferir uma encomenda para outro ponto de retirada gera um novo consignment ID. Uma remessa da GLS repassada à Matkahuolto na Finlândia exibe seu código da Matkahuolto no rastreamento da GLS como "Finland parcel number", começando por `00`.
 
-Não tem o código? Se você possui cadastro na Matkahuolto ou usa o aplicativo Paketit, encomendas enviadas para seu telefone ou e-mail aparecem lá automaticamente; se alguma não aparecer, o remetente pode adicionar seus dados. Veja [como encontrar seu código de rastreamento](guide:find-tracking-number).
+Não tem o código? Se você possui cadastro na Matkahuolto ou usa o aplicativo Paketit, encomendas enviadas para seu telefone ou e-mail aparecem lá; se alguma não aparecer, o remetente pode adicionar seus dados. Veja [como encontrar seu código de rastreamento](guide:find-tracking-number).
 
 ## O que significam os status de rastreamento da Matkahuolto
 
@@ -68,7 +68,7 @@ A maioria das encomendas chega no dia seguinte ao despacho, afirma a Matkahuolto
 
 **Sem aviso de chegada.** Geralmente decorre de erro de digitação nos seus dados de contato: verifique a caixa de spam e peça ao remetente para corrigir.
 
-**Danificada ou perdida.** Avise a loja ou o remetente imediatamente, enviando fotos. A empresa que enviou a encomenda registra a reclamação junto à Matkahuolto; entre pessoas físicas, cabe ao remetente. Registre danos visíveis no momento da retirada; do contrário, reporte por escrito em até 7 dias, ou em até 30 dias como consumidor. A responsabilidade da Matkahuolto é de €20 por kg, ou o valor da mercadoria se menor.
+**Danificada ou perdida.** Avise a loja ou o remetente imediatamente, enviando fotos. A empresa que enviou a encomenda registra o pedido de indenização junto à Matkahuolto; entre pessoas físicas, cabe ao remetente. Registre danos visíveis no momento da retirada; do contrário, reporte por escrito em até 7 dias, ou em até 30 dias como consumidor. A responsabilidade da Matkahuolto é de €20 por kg, ou o valor da mercadoria se menor.
 
 ## Atendimento ao cliente e telefone da Matkahuolto
 
@@ -79,17 +79,17 @@ Conforme listado nas páginas em inglês da Matkahuolto:
 - **Chat** com o chatbot Mauno na [página de atendimento de encomendas](https://www.matkahuolto.fi/customer-service/parcels) ou no app Paketit, com possibilidade de atendimento humano.
 - **Formulário de contato** em finlandês em matkahuolto.fi/palautelomake. Não há e-mail publicado para destinatários.
 
-> A Matkahuolto alerta contra mensagens falsas, nomes de remetente forjados e sites parecidos como matkahuoltoo.fi. A empresa afirma que nunca intermedia pagamentos nem atua como gateway de pagamento; o único link de pagamento enviado destina-se a remetentes, para custos de devolução. Confira qualquer aviso digitando o ID do envio no rastreamento oficial ou no app; se pagou, contate seu banco.
+> A Matkahuolto alerta contra mensagens falsas, nomes de remetente forjados e sites parecidos como matkahuoltoo.fi. A empresa afirma que nunca intermedia pagamentos nem atua como gateway de pagamento; o único link de pagamento enviado destina-se a remetentes, para custos de devolução. Confira qualquer aviso digitando o ID do envio no rastreamento da Matkahuolto ou no app; se pagou, contate seu banco.
 
 ## Acompanhe uma encomenda da Matkahuolto com o Peek
 
-O [Peek](/) consulta Matkahuolto, Posti e [Chronopost](carrier:chronopost) para códigos `MH…FI` e exibe "Matkahuolto está com esta encomenda." quando apenas a Matkahuolto reconhece o número; se o Posti também o conhecer, você escolhe. Códigos `MA` vão exclusivamente para a Matkahuolto. Em códigos de barras de 18 ou 20 dígitos com o prefixo `64` da Finlândia ou `73` da Suécia após o primeiro dígito (após `00` e um dígito na forma de 20 dígitos), o Peek também consulta a Matkahuolto junto com as demais transportadoras compatíveis e a seleciona quando apenas ela reconhece. Se o [Posti](carrier:posti) também reconhecer um código `64`, ou a [Bring](carrier:bring) um código `73`, o Peek seleciona essa outra transportadora: troque para Matkahuolto em "Alterar". Se outra empresa, como a PostNord, também o reconhecer, você escolhe. Demais códigos de barras não são enviados automaticamente à Matkahuolto; selecione-a em "Alterar". Links de matkahuolto.fi com `parcelNumber=` atribuem qualquer número à Matkahuolto, mas o Peek só consegue consultar seus códigos `MH…FI` e `MA`, códigos postais e códigos SSCC com dígito verificador válido; qualquer outro falha.
+O [Peek](/) consulta Matkahuolto, Posti e [Chronopost](carrier:chronopost) para códigos `MH…FI` e exibe "Matkahuolto está com esta encomenda." quando apenas a Matkahuolto reconhece o número; se o Posti também o conhecer, você escolhe. Códigos `MA` vão exclusivamente para a Matkahuolto. Em códigos de barras de 18 ou 20 dígitos com o prefixo `64` da Finlândia ou `73` da Suécia após o primeiro dígito (após `00` e um dígito na forma de 20 dígitos), o Peek também consulta a Matkahuolto junto com as demais transportadoras compatíveis e a seleciona quando apenas ela reconhece. Se o [Posti](carrier:posti) também reconhecer um código `64`, ou a [Bring](carrier:bring) um código `73`, o Peek seleciona essa outra transportadora: troque para Matkahuolto em "Trocar". Se outra empresa, como a PostNord, também o reconhecer, você escolhe. Demais códigos de barras não são enviados à Matkahuolto; selecione-a em "Trocar". Links de matkahuolto.fi com `parcelNumber=` atribuem qualquer número à Matkahuolto, mas o Peek só consegue consultar seus códigos `MH…FI` e `MA`, códigos postais e códigos SSCC com dígito verificador válido; qualquer outro falha.
 
-As leituras da Matkahuolto não trazem fuso horário: o Peek interpreta cada uma no horário da sua cidade (horário da Finlândia dentro da Finlândia; linhas sem local usam o fuso da linha vizinha ou horário finlandês) e lista o histórico próprio da Matkahuolto. Os status mantêm o texto em inglês da Matkahuolto. O Peek exibe o ponto de retirada ou locker com cidade e rua e permite escolher alertas para "Todas as movimentações", "Etapas importantes" ou "Somente entrega".
+As leituras da Matkahuolto não trazem fuso horário: o Peek interpreta cada uma no horário da sua cidade (horário da Finlândia dentro da Finlândia; linhas sem local usam o fuso da linha vizinha ou horário finlandês) e lista o histórico próprio da Matkahuolto. Os status mantêm o texto em inglês da Matkahuolto. O Peek exibe o ponto de retirada ou locker com cidade e rua e permite escolher alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega".
 
 O Peek não recebe da Matkahuolto dia previsto de chegada nem peso, omite serviços adicionais e códigos postais e não separa o último dia de retirada (que consta na linha de status e no aviso de chegada). Em códigos `MH…FI` rastreados fora da Finlândia, o Peek também consulta o correio daquele país quando suportado (exceto Países Baixos e Åland) e passa a acompanhá-lo lá assim que houver uma leitura datada não anterior à mais recente da Matkahuolto, preservando o histórico anterior; para códigos `MA` e códigos de barras, o Peek não transfere para outra transportadora.
 
-Enquanto a encomenda está aberta no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta até a cada 10 minutos, e a cada 2 minutos a partir das 6h no relógio da última leitura (horário da Finlândia na Finlândia) no dia em que sai para entrega, enquanto o rastreador da Matkahuolto responder. Após dois dias sem novidades (12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora, e a cada 6 horas depois de sete dias em "Etiqueta criada". Após quatro dias sem movimentação em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", exibe "Sem atualização desde …", a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Matkahuolto." e o link "Pedir ajuda a Matkahuolto".
+Enquanto a encomenda está aberta no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta até a cada 10 minutos, e a cada 2 minutos a partir das 6h no relógio da última leitura (horário da Finlândia na Finlândia) no dia em que sai para entrega, enquanto o rastreador da Matkahuolto responder. Após dois dias sem novidades (12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora, e a cada 6 horas depois de sete dias em "Etiqueta criada". Após quatro dias sem movimentação em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", exibe "Sem atualizações desde …", a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Matkahuolto." e o link "Pedir ajuda a Matkahuolto".
 
 ## Perguntas sobre o rastreamento da Matkahuolto
 
@@ -103,7 +103,7 @@ Sim. O rastreamento da Matkahuolto oferece versão em inglês em matkahuolto.fi/
 
 ### Posso rastrear uma encomenda da Matkahuolto sem o código?
 
-Sim, se você for cadastrado ou usar o app Paketit e o remetente tiver informado seu telefone ou e-mail: o pacote aparece lá automaticamente. Caso contrário, peça o ID do envio à loja.
+Sim, se você for cadastrado ou usar o app Paketit e o remetente tiver informado seu telefone ou e-mail: o pacote aparece lá. Caso contrário, peça o ID do envio à loja.
 
 ### Quanto tempo leva uma encomenda da Matkahuolto?
 

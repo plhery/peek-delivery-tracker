@@ -61,7 +61,7 @@ updated: 2026-11-24
 
 ## 使用 Peek 追踪森吉物流（Sengi Express）包裹
 
-在 [Peek](/) 输入 13 位 `…C…F` 单号（如虚构示例 `482C73918462F`）时，Peek 会先询问 Poste Italiane，随后询问 AliExpress 与 Sengi Express（在意大利优先问森吉再问 AliExpress；在中国优先问 AliExpress 再问森吉），一旦森吉确认即显示“Sengi Express 有这个包裹的记录。”。对于以 `MT` 结尾的单号（如虚构示例 `SENGI482917360MT`），由于 MaltaPost 单号也以 `MT` 结尾，Peek 会询问 MaltaPost；遇到此类单号或其他合作运单时，请在添加时点击“更换”或在包裹页点击“更换快递公司”并选择 **Sengi Express**（搜索“Sengi”即可找到）。
+在 [Peek](/) 输入 13 位 `…C…F` 单号（如虚构示例 `482C73918462F`）时，Peek 会先询问 Poste Italiane，随后询问 AliExpress 与 Sengi Express（在意大利优先问森吉再问 AliExpress；在中国优先问 AliExpress 再问森吉），一旦森吉确认即显示“Sengi Express 有这个包裹的记录。”。对于以 `MT` 结尾的单号（如虚构示例 `SENGI482917360MT`），由于 [MaltaPost](carrier:maltapost) 单号也以 `MT` 结尾，Peek 会询问 MaltaPost；遇到此类单号或其他合作运单时，请在添加时点击“更换”或在包裹页点击“更换快递公司”并选择 **Sengi Express**（搜索“Sengi”即可找到）。
 
 Peek 读取森吉追踪接口后，会展示对应阶段（“已生成面单”、“运输中”、“清关中”，以及当扫描文案指向其他阶段时的对应状态）、森吉英文文案（无英文时显示中文）及扫描地点。事件代码仅用于判定阶段，不会出现在任何 Peek 应用中。森吉标明时区偏移的扫描按原偏移保留，未标明的按地点时区解析（`MXP` 按意大利时间、广州按北京时间）或沿用相邻扫描时区，最后统一换算为你设备的本地时间。在森吉的意大利邮政专线上，Peek 还会核实 Poste Italiane 是否已收录该包裹：确认后页面会显示“由 Poste Italiane 派送”，并在森吉换标时一并列出新单号。
 

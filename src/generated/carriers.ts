@@ -16142,6 +16142,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "dpd-ro",
+      "catalog": "dpd-ro",
+      "slug": "dpd-romania-tracking",
+      "title": "Rastreamento DPD Romania: status, Smart Control e contato",
+      "name": "DPD Romania",
+      "color": "#dc0032"
+    },
+    {
       "id": "globalpost",
       "catalog": "globalpost",
       "slug": "globalpost-tracking",
@@ -16316,6 +16324,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio DAI Post: códigos, status e entrega na Oceania",
       "name": "DAI Post",
       "color": "#008faf"
+    },
+    {
+      "id": "eurodis",
+      "catalog": "eurodis",
+      "slug": "eurodis-tracking",
+      "title": "Rastreamento EURODIS: códigos e parceiros de entrega",
+      "name": "EURODIS",
+      "color": "#0b418b"
     },
     {
       "id": "chronodiali",
@@ -20900,6 +20916,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "dpd-ro",
+      "catalog": "dpd-ro",
+      "slug": "dpd-romania-tracking",
+      "title": "DPD Romania 快递查询：单号、状态、Smart Control 与联系方式",
+      "name": "DPD Romania",
+      "color": "#dc0032"
+    },
+    {
       "id": "globalpost",
       "catalog": "globalpost",
       "slug": "globalpost-tracking",
@@ -21074,6 +21098,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DAI Post（Parcel Right）物流查询：单号、状态与清关说明",
       "name": "DAI Post",
       "color": "#008faf"
+    },
+    {
+      "id": "eurodis",
+      "catalog": "eurodis",
+      "slug": "eurodis-tracking",
+      "title": "EURODIS 物流查询：运单号格式与各国合作派送商",
+      "name": "EURODIS",
+      "color": "#0b418b"
     },
     {
       "id": "chronodiali",

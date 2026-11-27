@@ -55,6 +55,7 @@ import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.ExperimentalPalette
+import com.plhery.peekdeliverytracker.core.FriendsStore
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.NativeRoute
 import com.plhery.peekdeliverytracker.core.api.FriendUpdate
@@ -285,11 +286,12 @@ class FriendsTest {
     fun aGuestsTabSaysWhatItIsForAndSignInOpensTheUnlockSheet() {
         show(AuthenticationState.Welcome)
         assertTrue(shows(text("friends.title")))
-        assertTrue(shows(text("friends.introSummary")))
+        assertTrue(shows(text("friends.introSideBySide")))
         assertEquals(listOf(text("arrival.signInTitle")), words(FRIENDS_SIGN_IN))
-        // The postage pair is drawn, not read.
-        assertFalse(shows("A"))
-        assertFalse(shows("M"))
+        // The sample pair reads its caption and each passport's words, its seals drawn, not read.
+        val alex = "10 ${text("passport.delivered", mapOf("count" to 10)).lowercase()}\u00A0· ${text("friends.days", mapOf("count" to 6))}"
+        val mila = "12 ${text("passport.delivered", mapOf("count" to 12)).lowercase()}\u00A0· ${text("friends.days", mapOf("count" to 3))}"
+        assertEquals(listOf(text("friends.sampleTitle"), "Alex", alex, "Mila", mila), words(FRIENDS_SAMPLE))
         tap(FRIENDS_SIGN_IN)
         // Over the tab: what friends are, then what comes with the guest.
         assertEquals(UnlockReason.Friends, source.unlock.reason)
@@ -336,9 +338,10 @@ class FriendsTest {
         assertEquals(listOf(text("friends.join")), words(FRIENDS_JOIN))
         tap(FRIENDS_JOIN)
         assertEquals(text("friends.join"), panel())
-        // A new profile shares its stats and not its arrivals, under no name yet.
+        // A new profile shares its stats and its countries and not its arrivals, under no name yet.
         assertEquals("", name())
         assertEquals(ToggleableState.On, toggle(FRIENDS_SHARE_STATS))
+        assertEquals(ToggleableState.On, toggle(FRIENDS_SHARE_COUNTRIES))
         assertEquals(ToggleableState.Off, toggle(FRIENDS_SHARE_ARRIVAL))
         assertEquals(text("friends.you"), words(FRIENDS_PREVIEW).first())
         assertEquals(listOf(text("friends.join")), words(FRIENDS_SAVE))
@@ -354,6 +357,7 @@ class FriendsTest {
         assertEquals("Robin", saved.nickname)
         assertEquals(true, saved.shareStats)
         assertEquals(false, saved.shareArrival)
+        assertEquals(true, saved.shareCountries)
         assertNull(panel())
         assertTrue(shows(text("friends.emptyTitle")))
     }
@@ -705,7 +709,7 @@ class FriendsTest {
         flip(FRIENDS_SHARE_ARRIVAL)
         tap(FRIENDS_SAVE)
         assertNull(panel())
-        assertEquals(FriendProfile("Alexa", shareStats = true, shareArrival = true), source.friends.snapshotFlow.value?.profile)
+        assertEquals(FriendProfile("Alexa", shareStats = true, shareArrival = true, shareCountries = true), source.friends.snapshotFlow.value?.profile)
         assertTrue(client.requests.isEmpty())
     }
 
@@ -716,7 +720,7 @@ class FriendsTest {
         choose("Passport")
         choose("Friends")
         assertEquals(listOf("Mila", "Noé"), cards())
-        assertEquals(FriendProfile("Alex", shareStats = false, shareArrival = false), source.friends.snapshotFlow.value?.profile)
+        assertEquals(FriendProfile("Alex", shareStats = false, shareArrival = false, shareCountries = true), source.friends.snapshotFlow.value?.profile)
     }
 
     @Test
@@ -746,7 +750,7 @@ class FriendsTest {
         tap(FRIENDS_CONFIRM_REMOVE)
         assertFalse(exists(FRIENDS_PAGE))
         assertEquals(listOf("Mila", "Noé"), cards())
-        assertEquals(FriendProfile("Alex", shareStats = false, shareArrival = false), source.friends.snapshotFlow.value?.profile)
+        assertEquals(FriendProfile("Alex", shareStats = false, shareArrival = false, shareCountries = true), source.friends.snapshotFlow.value?.profile)
     }
 
     // The profile's form (C-S23, C-S24).
@@ -803,8 +807,54 @@ class FriendsTest {
         assertEquals(3, words(FRIENDS_PREVIEW).size)
         tap(FRIENDS_SAVE)
         val saved = requests(FriendsAction.SaveProfile).single()
-        assertEquals(FriendsActionRequest(action = FriendsAction.SaveProfile, nickname = "Robin", shareStats = false, shareArrival = true), saved)
+        // Robin's profile was saved before the countries' switch: they read as not shared, and are sent so.
+        assertEquals(
+            FriendsActionRequest(action = FriendsAction.SaveProfile, nickname = "Robin", shareStats = false, shareArrival = true, shareCountries = false),
+            saved,
+        )
         assertNull(panel())
+    }
+
+    @Test
+    fun theCountriesRideOnTheStatsAndKeepTheirChoiceWhileTheyAreOff() {
+        show()
+        tap(FRIENDS_SHARING)
+        // Saved without the choice: off, and free to flip while the stats are shared.
+        assertEquals(ToggleableState.Off, toggle(FRIENDS_SHARE_COUNTRIES))
+        assertFalse(semantics(FRIENDS_SHARE_COUNTRIES).contains(SemanticsProperties.Disabled))
+        flip(FRIENDS_SHARE_COUNTRIES)
+        assertEquals(ToggleableState.On, toggle(FRIENDS_SHARE_COUNTRIES))
+        // The preview counts the countries the reader's parcels went through.
+        val countries = FriendsStore.ownCard(DemoCards.parcels(), FriendFixtures.profile.copy(shareCountries = true)).stats!!.countries!!.size
+        assertTrue(words(FRIENDS_PREVIEW)[1].endsWith("\u00A0· " + text("friends.countryCount", mapOf("count" to countries))))
+        // The stats kept private: the countries show off and can't be flipped.
+        flip(FRIENDS_SHARE_STATS)
+        assertEquals(ToggleableState.Off, toggle(FRIENDS_SHARE_COUNTRIES))
+        assertTrue(semantics(FRIENDS_SHARE_COUNTRIES).contains(SemanticsProperties.Disabled))
+        assertEquals(text("friends.privateStats"), words(FRIENDS_PREVIEW)[1])
+        // Shared again, they come back as they were chosen.
+        flip(FRIENDS_SHARE_STATS)
+        assertEquals(ToggleableState.On, toggle(FRIENDS_SHARE_COUNTRIES))
+        assertFalse(semantics(FRIENDS_SHARE_COUNTRIES).contains(SemanticsProperties.Disabled))
+        // Saved, as chosen even while the stats are off.
+        flip(FRIENDS_SHARE_STATS)
+        tap(FRIENDS_SAVE)
+        assertEquals(
+            FriendsActionRequest(action = FriendsAction.SaveProfile, nickname = "Robin", shareStats = false, shareArrival = false, shareCountries = true),
+            requests(FriendsAction.SaveProfile).single(),
+        )
+    }
+
+    @Test
+    fun theSharingRowNamesTheCountriesOnlyWhileTheStatsAreShared() {
+        fun summary(vararg keys: String) = keys.joinToString("\u00A0· ") { text(it) }
+        show { snapshot = FriendFixtures.circle(profile = FriendFixtures.profile.copy(shareCountries = true, shareArrival = true)) }
+        assertTrue(line(summary("friends.shareStats", "friends.shareCountries", "friends.shareArrival")) != null)
+        // Chosen, but riding on stats kept private: not named.
+        client.snapshot = FriendFixtures.circle(profile = FriendFixtures.profile.copy(shareStats = false, shareCountries = true, shareArrival = true))
+        choose("Passport")
+        choose("Friends")
+        assertTrue(line(summary("friends.privateStats", "friends.shareArrival")) != null)
     }
 
     @Test
@@ -843,6 +893,9 @@ class FriendsTest {
         assertEquals(text("friends.shareStats") + ", " + text("friends.sharedStatsSummary"), label(FRIENDS_SHARE_STATS))
         assertEquals(text("friends.sharedStatsSummary"), hint(FRIENDS_SHARE_STATS))
         assertEquals(Role.Switch, semantics(FRIENDS_SHARE_STATS)[SemanticsProperties.Role])
+        assertEquals(text("friends.shareCountries") + ", " + text("friends.sharedCountriesSummary"), label(FRIENDS_SHARE_COUNTRIES))
+        assertEquals(text("friends.sharedCountriesSummary"), hint(FRIENDS_SHARE_COUNTRIES))
+        assertEquals(Role.Switch, semantics(FRIENDS_SHARE_COUNTRIES)[SemanticsProperties.Role])
         assertEquals(text("friends.shareArrival"), label(FRIENDS_SHARE_ARRIVAL))
         assertEquals(text("friends.shareArrivalDetail"), hint(FRIENDS_SHARE_ARRIVAL))
         assertEquals(text("friends.nickname"), label(FRIENDS_NICKNAME))
@@ -1129,6 +1182,8 @@ class FriendsTest {
         flip(FRIENDS_SHARE_ARRIVAL)
         assertEquals(light(0.5f), felt())
         flip(FRIENDS_SHARE_STATS)
+        assertEquals(light(0.5f), felt())
+        flip(FRIENDS_SHARE_COUNTRIES)
         assertEquals(light(0.5f), felt())
     }
 }

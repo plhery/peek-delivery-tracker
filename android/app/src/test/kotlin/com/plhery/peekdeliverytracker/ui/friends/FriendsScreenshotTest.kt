@@ -26,6 +26,7 @@ import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.api.FriendStamp
 import com.plhery.peekdeliverytracker.core.api.FriendUpdate
 import com.plhery.peekdeliverytracker.core.api.FriendsActivity
+import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.SHOT
 import com.plhery.peekdeliverytracker.ui.deliveries.CARD_PHONE
@@ -46,7 +47,8 @@ import org.robolectric.annotation.GraphicsMode
  * The friends tab on the iPhone the captures were taken on (440 × 956 points at three pixels to the point), with its
  * safe area as a phone's bars, in light and dark: signed out, the demo's circle, its profile and invitation panels, an
  * account's invitation with its link, an empty circle, the intro without a profile and a circle that failed; a
- * friend's page, a stamp's popover and the removal asked, and the accepted notice; the xxLarge and largest text sizes,
+ * friend's page beside the reader's Passport and their countries, a stamp's popover with nothing on either side to
+ * compare, the removal asked, and the accepted notice; the xxLarge and largest text sizes,
  * the circle and a friend's page; on a tablet both ways (ipad-01, ipad-09, ipad-02) with a panel as a form (ipad-07),
  * and an unfolded foldable.
  */
@@ -70,9 +72,10 @@ class FriendsScreenshotTest {
         dark: Boolean = false,
         fontScale: Float = 1f,
         bars: Bars = Bars(),
+        parcels: List<Parcel> = DemoCards.parcels(),
         friends: FakeFriendsClient.() -> Unit = {},
     ) {
-        val source = FakeDeliveries(DemoCards.parcels(), session)
+        val source = FakeDeliveries(parcels, session)
         source.friendsClient.friends()
         compose.waitsForMaps()
         compose.setContent {
@@ -266,7 +269,7 @@ class FriendsScreenshotTest {
     /** The demo friend's page, out of their card. */
     private fun page(friend: UUID) = tap(friendCardTag(friend))
 
-    /** Mila's page (ipad-02): the postcard with this week's arrival, the metrics, five stamps and All stamps. */
+    /** Mila's page (ipad-02): the postcard with this week's arrival, the metrics, her stamps beside Alex's. */
     @Test
     fun aFriendsPage() {
         show()
@@ -282,21 +285,44 @@ class FriendsScreenshotTest {
         compose.screenshot("friends_page_dark")
     }
 
-    /** An unearned stamp's popover over it, how far along (ipad-04, "12 / 25"). */
+    /** Mila's countries under the stamps, most parcels first, and the three Alex's parcels went through too. */
     @Test
-    fun aStampsPopover() {
+    fun aFriendsCountries() {
         show()
         page(mila)
+        compose.onNodeWithTag(FRIENDS_COUNTRIES).performScrollTo()
+        settle()
+        compose.screenshot("friends_page_countries_light")
+    }
+
+    @Test
+    fun aFriendsCountriesInDark() {
+        show(dark = true)
+        page(mila)
+        compose.onNodeWithTag(FRIENDS_COUNTRIES).performScrollTo()
+        settle()
+        compose.screenshot("friends_page_countries_dark")
+    }
+
+    /**
+     * With no stamp on either side, the friend's stamps on their own: an unearned stamp's popover over it, how far along
+     * (ipad-04, "0 / 25").
+     */
+    @Test
+    fun aStampsPopover() {
+        show(reader, parcels = emptyList())
+        page(FriendFixtures.di.id)
+        tap(FRIENDS_SHOW_ALL)
         tap(friendStampTag(FriendStamp.TheRegular))
         compose.screenshot("friends_popover_light")
     }
 
-    /** An earned stamp's popover (ipad-03). */
+    /** A stamp's popover with nothing to count (ipad-03). */
     @Test
     fun aStampsPopoverInDark() {
-        show(dark = true)
-        page(mila)
-        tap(friendStampTag(FriendStamp.First))
+        show(reader, dark = true, parcels = emptyList())
+        page(FriendFixtures.di.id)
+        tap(friendStampTag(FriendStamp.Connected))
         compose.screenshot("friends_popover_dark")
     }
 
@@ -323,7 +349,7 @@ class FriendsScreenshotTest {
         compose.screenshot("friends_remove_dark")
     }
 
-    /** A friend's page at xxLarge: three stamps to a row. */
+    /** A friend's page at xxLarge: three stamps to a row in each group. */
     @Test
     fun aFriendsPageAtExtraExtraLargeText() {
         show(fontScale = 1.3f)
@@ -331,7 +357,7 @@ class FriendsScreenshotTest {
         compose.screenshot("friends_page_text_xxlarge")
     }
 
-    /** At the largest text (ipad-13): two stamps to a row, the postcard's name staying small. */
+    /** At the largest text (ipad-13): two stamps to a row in each group, the postcard's name staying small. */
     @Test
     fun aFriendsPageAtTheLargestText() {
         show(dark = true, fontScale = 2f)

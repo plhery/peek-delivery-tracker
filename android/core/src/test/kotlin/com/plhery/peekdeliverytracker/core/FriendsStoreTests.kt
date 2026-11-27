@@ -4,6 +4,7 @@ import com.plhery.peekdeliverytracker.core.ParcelLogicTestFixtures.event
 import com.plhery.peekdeliverytracker.core.ParcelLogicTestFixtures.makeParcel
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.FriendCard
+import com.plhery.peekdeliverytracker.core.api.FriendCountry
 import com.plhery.peekdeliverytracker.core.api.FriendProfile
 import com.plhery.peekdeliverytracker.core.api.FriendStamp
 import com.plhery.peekdeliverytracker.core.api.FriendUpdate
@@ -31,7 +32,7 @@ import org.junit.Test
 
 /**
  * FriendsStore.swift on made-up parcels and friends: the card the demo shows friends (its stamps, the average rounded
- * up, this ISO week's arrival in UTC, only what is shared), the copy keys of the service's refusals, the demo's actions,
+ * up, the countries by code, this ISO week's arrival in UTC, only what is shared), the copy keys of the service's refusals, the demo's actions,
  * answers overtaken or cleared changing nothing, and the activity's notices, reveals and acknowledgements.
  */
 class FriendsStoreTests {
@@ -81,6 +82,19 @@ class FriendsStoreTests {
     private fun deliveredDaily(count: Int): List<Parcel> = (0 until count).map { index ->
         val at = Instant.parse("2026-01-05T10:00:00Z").plus(Duration.ofDays(7L * index))
         delivered(at.minus(Duration.ofDays(1)).toString(), at.toString())
+    }
+
+    /** A parcel scanned in [country] the day before [delivered], and delivered there then. */
+    private fun deliveredIn(country: String, delivered: String): Parcel {
+        val id = UUID.randomUUID()
+        val accepted = Instant.parse(delivered).minus(Duration.ofDays(1)).toString()
+        return makeParcel(
+            id,
+            events = listOf(
+                event(id, TrackingStage.Accepted, accepted).copy(location = country),
+                event(id, TrackingStage.Delivered, delivered).copy(location = country),
+            ),
+        )
     }
 
     @Test
@@ -143,6 +157,27 @@ class FriendsStoreTests {
     }
 
     @Test
+    fun theOwnCardSharesItsCountriesByCodeOnlyWithTheStatsAndTheCountriesOn() {
+        val parcels = listOf(
+            deliveredIn("JP", "2026-03-02T10:00:00Z"),
+            deliveredIn("CH", "2026-03-09T10:00:00Z"),
+            deliveredIn("JP", "2026-03-16T10:00:00Z"),
+        )
+        val both = FriendProfile("Alex", shareStats = true, shareArrival = false, shareCountries = true)
+        // Each country with its parcels, by code rather than in the order they were reached.
+        assertEquals(listOf(FriendCountry("CH", 1), FriendCountry("JP", 2)), FriendsStore.ownCard(parcels, both, now).stats?.countries)
+        assertEquals(emptyList<FriendCountry>(), FriendsStore.ownCard(deliveredDaily(1), both, now).stats?.countries)
+        // Off, or never chosen as a profile saved before the switch: the stats go without them.
+        for (off in listOf(false, null)) {
+            val stats = FriendsStore.ownCard(parcels, both.copy(shareCountries = off), now).stats
+            assertEquals(3, stats?.deliveredCount)
+            assertNull(stats?.countries)
+        }
+        // The stats kept private keep the countries too.
+        assertNull(FriendsStore.ownCard(parcels, both.copy(shareStats = false), now).stats)
+    }
+
+    @Test
     fun theServicesRefusalsHaveTheirOwnWords() {
         assertEquals("friends.inviteUnavailable", FriendsStore.errorKey(DeliveryApiError.Service("Invitation unavailable")))
         assertEquals("friends.selfInvitation", FriendsStore.errorKey(DeliveryApiError.Service("Cannot accept your own invitation")))
@@ -173,7 +208,8 @@ class FriendsStoreTests {
         store.configure(demo = true)
         store.load(emptyList())
         val saved = store.act(FriendsActionRequest(FriendsAction.SaveProfile, nickname = "  Robin \n", shareStats = false, shareArrival = true), emptyList())
-        assertEquals(FriendProfile("Robin", shareStats = false, shareArrival = true), saved?.snapshot?.profile)
+        // A save without the countries keeps what is stored.
+        assertEquals(FriendProfile("Robin", shareStats = false, shareArrival = true, shareCountries = true), saved?.snapshot?.profile)
         assertEquals("Robin", store.snapshot?.ownCard?.nickname)
         assertNull(store.snapshot?.ownCard?.stats)
         // Without all three values it saves nothing, and says nothing.
@@ -201,6 +237,31 @@ class FriendsStoreTests {
         store.load(emptyList())
         assertTrue(store.snapshot!!.friends.isEmpty())
         assertTrue(client.actions.isEmpty())
+    }
+
+    @Test
+    fun theDemosSaveTakesTheCountriesSentOrKeepsThoseStoredOnAtFirst() = runTest {
+        val store = FriendsStore(FakeClient())
+        store.configure(demo = true)
+        val parcels = listOf(deliveredIn("FR", "2026-03-02T10:00:00Z"))
+        store.load(parcels)
+        suspend fun save(countries: Boolean?) = store.act(
+            FriendsActionRequest(FriendsAction.SaveProfile, nickname = "Alex", shareStats = true, shareArrival = false, shareCountries = countries),
+            parcels,
+        )
+        assertEquals(listOf(FriendCountry("FR", 1)), store.snapshot?.ownCard?.stats?.countries)
+        save(false)
+        assertEquals(false, store.snapshot?.profile?.shareCountries)
+        assertNull(store.snapshot?.ownCard?.stats?.countries)
+        save(null)
+        assertEquals(false, store.snapshot?.profile?.shareCountries)
+        save(true)
+        assertEquals(true, store.snapshot?.profile?.shareCountries)
+        assertEquals(listOf(FriendCountry("FR", 1)), store.snapshot?.ownCard?.stats?.countries)
+        // With no profile stored, as after Disable, a save without them turns them on.
+        store.act(FriendsActionRequest(FriendsAction.Disable), parcels)
+        save(null)
+        assertEquals(true, store.snapshot?.profile?.shareCountries)
     }
 
     @Test

@@ -74,7 +74,7 @@ import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_SHARING
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_UNAVAILABLE_FRIEND
 import com.plhery.peekdeliverytracker.ui.friends.FriendFixtures
 import com.plhery.peekdeliverytracker.ui.friends.friendCardTag
-import com.plhery.peekdeliverytracker.ui.friends.friendStampTag
+import com.plhery.peekdeliverytracker.ui.friends.friendCompareTag
 import com.plhery.peekdeliverytracker.ui.sheet.SHEET_GRABBER
 import com.plhery.peekdeliverytracker.ui.sheet.SHEET_PANEL
 import com.plhery.peekdeliverytracker.ui.tabs.PeekTab
@@ -299,8 +299,8 @@ class FriendsStatesDeviceShots {
     /**
      * C-ST16, C-AX12, C-AX13: at the largest text the intro's title grows with the title style and its summary wraps
      * rather than being cut; the circle's header puts Invite under its title, across the column; the invitation's panel
-     * stands at the large detent in a compact window, its parcel over the sender's name; a friend's stamps go two to a
-     * row.
+     * stands at the large detent in a compact window, its parcel over the sender's name; the stamps beside a friend's go
+     * two to a row.
      */
     @Test
     fun theFriendsTabAtTheLargestText() {
@@ -312,7 +312,7 @@ class FriendsStatesDeviceShots {
         val scaled = type.fixed(type.scaled(26f, IosTextStyle.Title), FontWeight.SemiBold).fontSize.value
         assertEquals("The title grows with the title style", scaled, title.layoutInput.style.fontSize.value, 0.01f)
         assertTrue(scaled > type.fixed(26f).fontSize.value)
-        val summary = layoutOf(hasText(walk.text("friends.introSummary")) and hasAnyAncestor(hasTestTag(FRIENDS_SCROLL)))
+        val summary = layoutOf(hasText(walk.text("friends.introSideBySide")) and hasAnyAncestor(hasTestTag(FRIENDS_SCROLL)))
         assertFalse("The summary wraps, uncut", (0 until summary.lineCount).any(summary::isLineEllipsized) || summary.hasVisualOverflow)
         walk.shot("C-ST16-intro")
 
@@ -344,8 +344,8 @@ class FriendsStatesDeviceShots {
 
         openPage(FriendFixtures.ada.id)
         // Where each stamp stands, not what the window shows of it: on a phone the last rows are below its foot.
-        val columns = FriendStamp.entries.filter { walk.exists(friendStampTag(it)) }
-            .map { touches.node(hasTestTag(friendStampTag(it))).positionInWindow.x.roundToInt() }.toSet()
+        val columns = FriendStamp.entries.filter { walk.exists(friendCompareTag(it)) }
+            .map { touches.node(hasTestTag(friendCompareTag(it))).positionInWindow.x.roundToInt() }.toSet()
         assertEquals("Two stamps to a row", 2, columns.size)
         walk.shot("C-ST16-stamps")
     }

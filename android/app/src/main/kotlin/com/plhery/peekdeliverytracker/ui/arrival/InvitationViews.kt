@@ -428,7 +428,9 @@ internal class InvitationAcceptance(
         joining = true
         try {
             if (profile != null) {
-                val request = FriendsActionRequest(FriendsAction.SaveProfile, profile.nickname, profile.shareStats, profile.shareArrival)
+                val request = FriendsActionRequest(
+                    FriendsAction.SaveProfile, profile.nickname, profile.shareStats, profile.shareArrival, shareCountries = profile.shareCountries,
+                )
                 val saved = model.act(request, source.parcels.value) ?: return
                 if (saved.snapshot?.profile == null) {
                     model.errorKey = "friends.actionFailed"
@@ -454,7 +456,9 @@ internal class InvitationAcceptance(
         if (joining) return
         joining = true
         try {
-            val request = FriendsActionRequest(FriendsAction.SaveProfile, profile.nickname, profile.shareStats, profile.shareArrival)
+            val request = FriendsActionRequest(
+                FriendsAction.SaveProfile, profile.nickname, profile.shareStats, profile.shareArrival, shareCountries = profile.shareCountries,
+            )
             if (model.act(request, source.parcels.value) != null) creatingProfile = false
         } finally {
             joining = false

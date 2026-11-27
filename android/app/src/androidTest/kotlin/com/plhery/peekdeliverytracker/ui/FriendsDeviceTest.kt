@@ -29,7 +29,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
-import com.plhery.peekdeliverytracker.core.api.FriendStamp
 import com.plhery.peekdeliverytracker.core.api.FriendUpdate
 import com.plhery.peekdeliverytracker.core.api.FriendsAction
 import com.plhery.peekdeliverytracker.core.api.FriendsActivity
@@ -39,6 +38,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import com.plhery.peekdeliverytracker.ui.deliveries.waitsForMaps
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_ACCOUNT_BUTTON
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_CANCEL_REMOVE
+import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_COMPARE
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_CONFIRM_REMOVE
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_COPY
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_DEMO_SIGN_IN
@@ -52,7 +52,6 @@ import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_NOTICE_OPEN
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_PAGE
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_PAGE_BACK
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_PANEL
-import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_POPOVER
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_REMOVE
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_REVOKE
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_SHARING
@@ -60,7 +59,6 @@ import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_SIGN_IN
 import com.plhery.peekdeliverytracker.ui.friends.FakeFriendsClient
 import com.plhery.peekdeliverytracker.ui.friends.FriendFixtures
 import com.plhery.peekdeliverytracker.ui.friends.friendCardTag
-import com.plhery.peekdeliverytracker.ui.friends.friendStampTag
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_SHEET
 import com.plhery.peekdeliverytracker.ui.tabs.PeekTab
 import com.plhery.peekdeliverytracker.ui.theme.AppAppearance
@@ -83,13 +81,13 @@ import org.junit.runner.RunWith
 /**
  * The friends tab (A-S20, C-S19 to C-S31) on this device's own window, its bars and density the device's, on fake
  * deliveries and made-up friends, which reach no server: the demo's circle; signed out; a friend's card opening their
- * page and the system's back closing it, and the page's ‹; a stamp's popover; manage friendship and the removal; the
- * accepted notice opening the friend, its ✕ tapped through the screen dismissing it, its place under the status bar,
- * and its coming and going at once with animations on (A-S04, A-G18); the profile's panel; the demo's invitation; an
- * account's invitation with its link copied and its manage links open; the account button opening Settings. Each saved
- * as friends/<test>.png in the test package's external files, which adb pulls. Under Reduce Motion, as the other device
- * tests are, but for the notice's coming and going; each test puts back the appearance it found, and the copy the
- * clipboard held.
+ * page and the system's back closing it, and the page's ‹; a friend's stamps beside the reader's; manage friendship and
+ * the removal; the accepted notice opening the friend, its ✕ tapped through the screen dismissing it, its place under
+ * the status bar, and its coming and going at once with animations on (A-S04, A-G18); the profile's panel; the demo's
+ * invitation; an account's invitation with its link copied and its manage links open; the account button opening
+ * Settings. Each saved as friends/<test>.png in the test package's external files, which adb pulls. Under Reduce
+ * Motion, as the other device tests are, but for the notice's coming and going; each test puts back the appearance it
+ * found, and the copy the clipboard held.
  */
 @RunWith(AndroidJUnit4::class)
 class FriendsDeviceTest {
@@ -228,13 +226,15 @@ class FriendsDeviceTest {
         assertTrue(exists(FRIENDS_SHARING))
     }
 
-    /** Mila's page with The regular's popover over its stamp: how it is earned, and 12 / 25. */
+    /**
+     * Mila's page scrolled to her stamps beside the reader's: those they both have, then those only Mila has with how far
+     * the reader is.
+     */
     @Test
-    fun aStampsPopover() {
+    fun theStampsBesideTheReaders() {
         show()
         page(mila)
-        tap(friendStampTag(FriendStamp.TheRegular))
-        compose.waitUntil(5_000) { exists(FRIENDS_POPOVER) }
+        compose.onNodeWithTag(FRIENDS_COMPARE).performScrollTo()
         compose.waitForIdle()
         shot()
     }

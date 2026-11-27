@@ -2,6 +2,7 @@ package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.ApiJson
 import com.plhery.peekdeliverytracker.core.api.FriendCard
+import com.plhery.peekdeliverytracker.core.api.FriendCountry
 import com.plhery.peekdeliverytracker.core.api.FriendProfile
 import com.plhery.peekdeliverytracker.core.api.FriendStamp
 import com.plhery.peekdeliverytracker.core.api.FriendStats
@@ -153,7 +154,9 @@ class FriendsStore(private val client: FriendsClient) {
                         val name = request.nickname ?: return null
                         val stats = request.shareStats ?: return null
                         val arrival = request.shareArrival ?: return null
-                        local = local.copy(profile = FriendProfile(name.trimmingWhitespacesAndNewlines(), stats, arrival))
+                        // A save that leaves the countries out keeps what is stored, on at first.
+                        val countries = request.shareCountries ?: local.profile?.shareCountries ?: true
+                        local = local.copy(profile = FriendProfile(name.trimmingWhitespacesAndNewlines(), stats, arrival, countries))
                     }
                     FriendsAction.Disable -> local = FriendsSnapshot(friends = emptyList())
                     FriendsAction.RemoveFriend -> local = local.copy(friends = local.friends.filter { it.id != request.friendId })
@@ -211,8 +214,9 @@ class FriendsStore(private val client: FriendsClient) {
         /**
          * `ownCard(parcels:profile:now:)`: the card [profile] would show friends, from [parcels] counted in UTC: the
          * passport's stamps among the twelve friends share ([PassportBook.sharedStamps]), in their order, the average
-         * rounded up to whole days (one at least), and whether a parcel was delivered since this ISO week began, each
-         * only where the profile shares it.
+         * rounded up to whole days (one at least), the countries reached with their parcels by code where the profile
+         * shares them too, and whether a parcel was delivered since this ISO week began, each only where the profile
+         * shares it.
          */
         fun ownCard(parcels: List<Parcel>, profile: FriendProfile, now: Instant = AppClock.now()): FriendCard {
             // The passport's own rules in UTC, filtered to the twelve stamps older apps decode.
@@ -232,7 +236,12 @@ class FriendsStore(private val client: FriendsClient) {
                 id = OWN_CARD_ID,
                 nickname = profile.nickname,
                 stats = if (profile.shareStats) {
-                    FriendStats(stats.deliveredCount, stats.averageDeliveryDuration?.let { max(1, ceil(it / 86_400).toInt()) }, stamps)
+                    FriendStats(
+                        stats.deliveredCount,
+                        stats.averageDeliveryDuration?.let { max(1, ceil(it / 86_400).toInt()) },
+                        stamps,
+                        if (profile.shareCountries == true) book.countries.map { FriendCountry(it.code, it.count) }.sortedBy { it.code } else null,
+                    )
                 } else {
                     null
                 },

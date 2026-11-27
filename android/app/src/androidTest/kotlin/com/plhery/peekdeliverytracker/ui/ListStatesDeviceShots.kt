@@ -409,7 +409,7 @@ class ListStatesDeviceShots {
         compose.waitUntil(LONG_MILLIS) { walk.exists(FRIENDS_SIGN_IN) }
         walk.settle()
         assertTrue(says(walk.text("friends.title")))
-        assertTrue(says(walk.text("friends.introSummary")))
+        assertTrue(says(walk.text("friends.introSideBySide")))
         assertTrue(walk.shows(FRIENDS_SIGN_IN, walk.text("arrival.signInTitle")))
         walk.shot("A-ST16-friends-signed-out")
         walk.tap(FRIENDS_SIGN_IN)

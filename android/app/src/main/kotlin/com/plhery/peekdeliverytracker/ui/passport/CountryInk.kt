@@ -102,13 +102,13 @@ internal fun Canvas.drawWords(
 /**
  * A country's ink stamp in [box], turned by [tilt] degrees about its middle: its continent's outline ([outline] wide in
  * the 124×92 box, 1.7 at rest), the inner line (0.8 at .55, scaled by the layout's `inner` about the middle), "Nº 01",
- * its code and its first [day], all in [color].
+ * its code and its first [day], all in [color]; the code alone where [number] and [day] are left out, as a friend's are.
  */
 internal fun Canvas.inkStamp(
     box: CardBox,
     code: String,
-    number: Int,
-    day: String,
+    number: Int?,
+    day: String?,
     continent: Continent,
     tilt: Float,
     color: Int,
@@ -139,9 +139,9 @@ internal fun Canvas.inkStamp(
     drawPath(path, line)
     restore()
     val small = layout.small.toFloat()
-    drawWords("Nº ${number.toString().padStart(2, '0')}", 62f, layout.number.toFloat(), small, 600, color, 1.3f, Paint.Align.CENTER)
+    if (number != null) drawWords("Nº ${number.toString().padStart(2, '0')}", 62f, layout.number.toFloat(), small, 600, color, 1.3f, Paint.Align.CENTER)
     drawWords(code, 63f, layout.code.toFloat(), layout.codeSize.toFloat(), 700, color, 2f, Paint.Align.CENTER)
-    drawWords(day, 62f, layout.date.toFloat(), small, 600, color, layout.dateSpacing.toFloat(), Paint.Align.CENTER)
+    if (day != null) drawWords(day, 62f, layout.date.toFloat(), small, 600, color, layout.dateSpacing.toFloat(), Paint.Align.CENTER)
     restore()
 }
 
@@ -196,10 +196,11 @@ internal fun rememberInkDrop(drop: Int?, lead: Int = 0): InkDrop {
 
 /**
  * `CountryInk`: [code]'s ink stamp, at most 124 wide and 92 high for 124, in its tone's text colour and its tilt, with
- * its running [number] and first [day]; [drop] drops it in. Hidden from TalkBack: its button says it.
+ * its running [number] and first [day] where they are given; [drop] drops it in. Hidden from TalkBack: its button says
+ * it.
  */
 @Composable
-internal fun CountryInk(code: String, number: Int, day: String, drop: InkDrop?, modifier: Modifier = Modifier) {
+internal fun CountryInk(code: String, number: Int?, day: String?, drop: InkDrop?, modifier: Modifier = Modifier) {
     val colors = PeekTheme.colors
     val ink = PassportData.countryInk(code)
     val color = colors.resolve(ink.tone.ink).toArgb()

@@ -508,14 +508,15 @@ class HapticsDeviceTest {
 
     /**
      * C-H06: `.impact(weight: .light, intensity: 0.6)` whenever a friend's selected stamp changes: one light impact at
-     * 0.6 as a stamp's popover opens, and one as the system's back closes it.
+     * 0.6 as a stamp's popover opens, and one as the system's back closes it. On the page of Di, who has no stamp, beside
+     * a reader without parcels: only where neither has a stamp does the page show the collection, with its popovers.
      */
     @Test
     fun aStampsPopoverOpenedAndClosedAsksForOneLightImpactEach() {
-        walk.show(demo)
+        walk.show(emptyList())
         tapTab(PeekTab.Friends)
-        compose.waitUntil(LONG_MILLIS) { walk.exists(friendCardTag(FriendFixtures.ada.id)) }
-        compose.onNodeWithTag(friendCardTag(FriendFixtures.ada.id)).performScrollTo().performClick()
+        compose.waitUntil(LONG_MILLIS) { walk.exists(friendCardTag(FriendFixtures.di.id)) }
+        compose.onNodeWithTag(friendCardTag(FriendFixtures.di.id)).performScrollTo().performClick()
         compose.waitUntil(LONG_MILLIS) { walk.exists(FRIENDS_PAGE_BACK) }
         walk.settle()
         vibrations.mark()

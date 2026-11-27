@@ -478,7 +478,7 @@ internal fun FriendsChrome(
 }
 
 /**
- * `FriendsSignedOutView` (A-S20): the postage pair (12 over the rest), "friends.title" in semibold 26 (growing with the
+ * `FriendsSignedOutView` (A-S20): the sample pair (12 over the rest), "friends.title" in semibold 26 (growing with the
  * text at the accessibility sizes, as `@ScaledMetric(relativeTo: .title)`), the summary in subheadline in the secondary
  * grey, centred, and Sign in; 22 apart, in by 70 and 20. A guest's Sign in opens the unlock sheet over the tab
  * ([UnlockReason.Friends]), whose sign-in leaves the guest's list as it is until it succeeds.
@@ -501,15 +501,18 @@ private fun FriendsSignedOut(source: DeliveriesSource, top: Dp, bottom: Dp, star
     }
 }
 
-/** The intro the signed-out tab and a circle without a profile share: the pair, the title, the summary and [action]. */
+/**
+ * The intro the signed-out tab and a circle without a profile share: the sample pair ([FriendsSample]), the title, the
+ * summary and [action].
+ */
 @Composable
 private fun Intro(title: String, tag: String, action: () -> Unit) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val size = if (PeekTheme.dynamicTypeSize.isAccessibilitySize) type.scaled(26f, IosTextStyle.Title) else 26f
-    FriendsPostagePair(Modifier.padding(bottom = 12.dp))
+    FriendsSample(Modifier.padding(bottom = 12.dp))
     Text(localized("friends.title"), color = colors.label, style = type.fixed(size, FontWeight.SemiBold).sfLines(), textAlign = TextAlign.Center)
-    Text(localized("friends.introSummary"), color = colors.secondaryText, style = type.subheadline.sfLines(), textAlign = TextAlign.Center)
+    Text(localized("friends.introSideBySide"), color = colors.secondaryText, style = type.subheadline.sfLines(), textAlign = TextAlign.Center)
     ProminentButton(title, tag = tag, action = action)
 }
 
@@ -765,6 +768,7 @@ private fun Circle(state: FriendsState, data: FriendsSnapshot, focus: UUID?, asF
                 Text(localized("friends.yourSharing"), color = colors.ink, style = type.style(IosTextStyle.Subheadline, FontWeight.Medium).sfLines())
                 val summary = listOfNotNull(
                     localizer.text(if (profile.shareStats) "friends.shareStats" else "friends.privateStats"),
+                    localizer.text("friends.shareCountries").takeIf { profile.shareStats && profile.shareCountries == true },
                     localizer.text("friends.shareArrival").takeIf { profile.shareArrival },
                 )
                 DottedLine(summary, colors.secondaryText, type.caption2.sfLines())
@@ -934,6 +938,7 @@ private fun PanelContent(state: FriendsState, panel: FriendsPanel, snapshot: Fri
             source.scope.launch {
                 val request = FriendsActionRequest(
                     action = FriendsAction.SaveProfile, nickname = profile.nickname, shareStats = profile.shareStats, shareArrival = profile.shareArrival,
+                    shareCountries = profile.shareCountries,
                 )
                 if (store.act(request, source.parcels.value) != null) state.closePanel()
             }

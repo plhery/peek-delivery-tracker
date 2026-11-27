@@ -18,6 +18,8 @@ import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
@@ -28,8 +30,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -38,6 +43,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
@@ -64,6 +70,7 @@ import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.TransformOrigin
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalContext
@@ -94,6 +101,7 @@ import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.ExperimentalPalette
 import com.plhery.peekdeliverytracker.core.FriendInvitationLink
 import com.plhery.peekdeliverytracker.core.FriendsStore
+import com.plhery.peekdeliverytracker.core.PassportData
 import com.plhery.peekdeliverytracker.core.PipGeometry
 import com.plhery.peekdeliverytracker.core.api.FriendCard
 import com.plhery.peekdeliverytracker.core.api.FriendProfile
@@ -101,6 +109,7 @@ import com.plhery.peekdeliverytracker.core.api.FriendStamp
 import com.plhery.peekdeliverytracker.core.api.FriendsAction
 import com.plhery.peekdeliverytracker.core.api.FriendsActionRequest
 import com.plhery.peekdeliverytracker.core.api.FriendsActionResponse
+import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesSource
 import com.plhery.peekdeliverytracker.ui.deliveries.PlainPress
@@ -113,6 +122,10 @@ import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.DieCutStampShape
 import com.plhery.peekdeliverytracker.ui.draw.Toggle
+import com.plhery.peekdeliverytracker.ui.passport.PassportSettle
+import com.plhery.peekdeliverytracker.ui.passport.SealSize
+import com.plhery.peekdeliverytracker.ui.passport.StampSeal
+import com.plhery.peekdeliverytracker.ui.passport.phase
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.KeepMotion
 import com.plhery.peekdeliverytracker.ui.theme.Motion
@@ -184,6 +197,113 @@ internal fun FriendsPostagePair(modifier: Modifier = Modifier) {
     Row(modifier.padding(10.dp).clearAndSetSemantics {}, horizontalArrangement = Arrangement.spacedBy((-8).dp)) {
         FriendAvatar("A", Modifier.size(70.dp, 85.dp).rotate(-9f), ExperimentalPalette.transit, ExperimentalPalette.transitSurface)
         FriendAvatar("M", Modifier.offset(y = 12.dp).size(70.dp, 85.dp).rotate(12f))
+    }
+}
+
+/** One of the sample's made-up passports: its name, its tone, what it delivered, its average and its stamps. */
+private class SamplePassport(
+    val name: String,
+    val tone: AdaptiveColor,
+    val surface: AdaptiveColor,
+    val delivered: Int,
+    val days: Int,
+    val stamps: List<String>,
+    /** Its tilt, in degrees. */
+    val tilt: Float,
+    /** Where it comes in from, sideways. */
+    val from: Dp,
+    /** How long after the other it comes in, in ms. */
+    val delay: Float,
+)
+
+private val SAMPLE = listOf(
+    SamplePassport(
+        "Alex", ExperimentalPalette.transit, ExperimentalPalette.transitSurface, 10, 6,
+        listOf("first", "ten", "connected", "express", "rightNextDoor", "pickedUp"), -2f, (-18).dp, 0f,
+    ),
+    SamplePassport(
+        "Mila", ExperimentalPalette.lilac, ExperimentalPalette.lilacSurface, 12, 3,
+        listOf("first", "ten", "connected", "express", "aroundWorld"), 2f, 18.dp, 90f,
+    ),
+)
+
+/** The sample's motion: Mila's 520 ms, 90 ms after Alex's. */
+private const val SAMPLE_END = 610f
+
+/**
+ * The web's `FriendsSample`: two made-up passports side by side, what Friends shows before anyone has a profile.
+ * "friends.sampleTitle" in 12 in the secondary grey, 12 over the pair: two equal columns 10 apart, at most 380 wide in
+ * all. Each passport on its tone's surface with 16-point corners, in by 14 at the top and 12 elsewhere, 3 apart: the
+ * name in semibold 16, what it delivered and its average in its tone in 11, then, 8 lower, its seals at their smallest,
+ * 4 apart, wrapping. Alex leans 2° left, Mila 2° right. Each fades in from 18 to its side and 10 below over 520 ms on
+ * the passport's settle, Mila 90 ms after Alex; under Reduce Motion they are there. TalkBack reads the caption, then
+ * each passport's words as one, without the seals.
+ */
+@Composable
+internal fun FriendsSample(modifier: Modifier = Modifier) {
+    val colors = PeekTheme.colors
+    val type = PeekTheme.type
+    val localizer = LocalLocalizer.current
+    val language = LocalLanguage.current
+    val reduceMotion = PeekTheme.reduceMotion
+    val clock = remember(reduceMotion) { if (reduceMotion) null else Animatable(0f) }
+    if (clock != null) {
+        LaunchedEffect(clock) { clock.animateTo(SAMPLE_END, tween(SAMPLE_END.toInt(), easing = LinearEasing)) }
+    }
+    Column(
+        modifier.widthIn(max = 380.dp).fillMaxWidth().testTag(FRIENDS_SAMPLE),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        Text(
+            localized("friends.sampleTitle"), color = colors.secondaryText,
+            style = type.fixed(type.scaled(12f, IosTextStyle.Caption)).sfLines(), textAlign = TextAlign.Center,
+        )
+        Row(Modifier.fillMaxWidth().height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+            for (passport in SAMPLE) {
+                val days = localizer.text("friends.days", mapOf("count" to passport.days))
+                val delivered = localizer.text("passport.delivered", mapOf("count" to passport.delivered)).lowercase(language.locale)
+                Column(
+                    Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .graphicsLayer {
+                            rotationZ = passport.tilt
+                            if (clock != null) {
+                                val shown = phase(clock.value, passport.delay, 520f, PassportSettle)
+                                translationX = passport.from.toPx() * (1 - shown)
+                                translationY = 10.dp.toPx() * (1 - shown)
+                                alpha = shown
+                            }
+                        }
+                        .background(colors.resolve(passport.surface), ContinuousRoundedShape(16.dp))
+                        .padding(start = 12.dp, top = 14.dp, end = 12.dp, bottom = 12.dp)
+                        .semantics(mergeDescendants = true) {},
+                    verticalArrangement = Arrangement.spacedBy(3.dp),
+                ) {
+                    // `letter-spacing: -.3px`, in the text's own unit.
+                    val tracking = with(LocalDensity.current) { (-0.3).dp.toSp() }
+                    Text(
+                        passport.name, color = colors.ink,
+                        style = type.fixed(type.scaled(16f, IosTextStyle.Callout), FontWeight.SemiBold).copy(letterSpacing = tracking).sfLines(),
+                    )
+                    Text(
+                        dottedLine(listOf("${passport.delivered} $delivered", days)), color = colors.resolve(passport.tone),
+                        style = type.fixed(type.scaled(11f, IosTextStyle.Caption2)).sfLines(),
+                    )
+                    FlowRow(
+                        Modifier.padding(top = 5.dp),
+                        horizontalArrangement = Arrangement.spacedBy(4.dp),
+                        verticalArrangement = Arrangement.spacedBy(4.dp),
+                    ) {
+                        for (key in passport.stamps) {
+                            val seal = PassportData.stamps.firstOrNull { it.key == key } ?: continue
+                            StampSeal(seal, earned = true, size = SealSize.Mini)
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -290,7 +410,8 @@ internal fun dottedLine(parts: List<String>): String = parts.joinToString("\u00A
 
 /**
  * `FriendSharingPreviewView`: what friends see of the reader, in transit on its surface with 17-point corners, in by
- * 16: the name in headline over the stamp 33 × 41, what is shared in caption2 (36 tall at least) and this week's
+ * 16: the name in headline over the stamp 33 × 41, what is shared in caption2 (36 tall at least: what they delivered,
+ * their average, their stamps and, where they share them, their countries) and this week's
  * arrival (18 tall at least), kept in its place but unseen and unread where it isn't shared.
  */
 @Composable
@@ -298,16 +419,18 @@ internal fun FriendSharingPreview(friend: FriendCard) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val localizer = LocalLocalizer.current
+    val language = LocalLanguage.current
     val transit = colors.resolve(ExperimentalPalette.transit)
     val stats = friend.stats
     val summary = if (stats == null) {
         listOf(localizer.text("friends.privateStats"))
     } else {
         val days = stats.averageDays?.let { localizer.text(if (it == 1) "friends.day" else "friends.days", mapOf("count" to it)) } ?: "—"
-        listOf(
-            "${stats.deliveredCount} ${localizer.text("passport.delivered", mapOf("count" to stats.deliveredCount))}",
+        listOfNotNull(
+            "${stats.deliveredCount} ${localizer.text("passport.delivered", mapOf("count" to stats.deliveredCount)).lowercase(language.locale)}",
             days,
             localizer.text("friends.stampCount", mapOf("count" to stats.stamps.size)),
+            stats.countries?.let { localizer.text("friends.countryCount", mapOf("count" to it.size)) },
         )
     }
     Column(
@@ -335,7 +458,7 @@ internal fun FriendSharingPreview(friend: FriendCard) {
     }
 }
 
-/** What a profile form leaves the reader to fill: the name, at most 24 Unicode scalars, and the two shares. */
+/** What a profile form leaves the reader to fill: the name, at most 24 Unicode scalars, and the three shares. */
 private const val NICKNAME_SCALARS = 24
 
 /** `name.unicodeScalars.prefix(24)`: the name cut to its first 24 scalars, an emoji's halves kept together. */
@@ -345,9 +468,14 @@ internal fun String.cutToScalars(limit: Int = NICKNAME_SCALARS): String =
 /**
  * `FriendsProfileForm`: "friends.nickname" over its field (raised with 14-point corners, in by 14, the nickname's
  * keyboard, Done taking the keyboard down, at most 24 scalars), the preview of the reader's card as friends will see
- * it, the two shares as switches in delivered between dividers (each 10 above and below, its detail read as its hint),
+ * it, the shares as switches in delivered between dividers (each 10 above and below, its detail read as its hint),
  * the privacy line and Save, or "friends.join" for a new profile, or [submitKey]'s words where it is given: off while
  * [busy] or without a name. All of it is off while [busy]. Each switch flipped plays a light impact at half strength. The name is saved trimmed.
+ *
+ * The countries ride on the stats: their switch stands under it, in by 14, and while the stats are kept private it
+ * shows off, can't be flipped and its title goes grey; the stats shared again bring back what it was. A new profile
+ * shares them; one saved before the switch, without the choice, reads as not sharing them. Save sends the choice as
+ * it stands, even while the stats are private.
  *
  * The iPhone's form keeps a settled name 900 ms after typing stops, for an attention cue it no longer shows: nothing
  * here needs it.
@@ -367,12 +495,13 @@ internal fun FriendsProfileForm(
     var name by rememberSaveable { mutableStateOf(profile?.nickname ?: "") }
     var stats by rememberSaveable { mutableStateOf(profile?.shareStats ?: true) }
     var arrival by rememberSaveable { mutableStateOf(profile?.shareArrival ?: false) }
+    var countries by rememberSaveable { mutableStateOf(if (profile != null) profile.shareCountries == true else true) }
     var touches by remember { mutableIntStateOf(0) }
     SensoryFeedbackEffect(SensoryFeedback.Impact(SensoryFeedback.Impact.Weight.Light, 0.5), touches)
     val trimmed = FriendsStore.nickname(name)
     val parcels by source.parcels.collectAsState()
-    val preview = remember(parcels, trimmed, stats, arrival, localizer) {
-        FriendsStore.ownCard(parcels, FriendProfile(trimmed.ifEmpty { localizer.text("friends.you") }, stats, arrival))
+    val preview = remember(parcels, trimmed, stats, arrival, countries, localizer) {
+        FriendsStore.ownCard(parcels, FriendProfile(trimmed.ifEmpty { localizer.text("friends.you") }, stats, arrival, countries))
     }
     val enabled = !busy
     Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -392,6 +521,14 @@ internal fun FriendsProfileForm(
                 touches++
             }
             FormHairline()
+            ShareToggle(
+                "friends.shareCountries", "friends.sharedCountriesSummary", stats && countries, enabled && stats, FRIENDS_SHARE_COUNTRIES,
+                showsDetail = true, dimmed = !stats, indent = 14.dp,
+            ) {
+                countries = it
+                touches++
+            }
+            FormHairline()
             ShareToggle("friends.shareArrival", "friends.shareArrivalDetail", arrival, enabled, FRIENDS_SHARE_ARRIVAL, showsDetail = false) {
                 arrival = it
                 touches++
@@ -401,7 +538,7 @@ internal fun FriendsProfileForm(
         SymbolLabel(localized("friends.privacy"), "lock", type.caption, colors.secondaryText)
         ProminentButton(
             localized(submitKey ?: if (profile == null) "friends.join" else "friends.save"), enabled = enabled && trimmed.isNotEmpty(), tag = FRIENDS_SAVE,
-        ) { save(FriendProfile(trimmed, stats, arrival)) }
+        ) { save(FriendProfile(trimmed, stats, arrival, countries)) }
     }
 }
 
@@ -441,12 +578,22 @@ private fun NicknameField(value: String, onValueChange: (String) -> Unit, placeh
 }
 
 /**
- * A share's `Toggle` (`.toggleStyle(.switch)`, tinted delivered): its title in footnote medium, and for the stats its
- * detail in caption2 under it, 3 apart; 10 above and below. TalkBack reads it as one switch, the words it shows and
- * its state, the detail as its hint.
+ * A share's `Toggle` (`.toggleStyle(.switch)`, tinted delivered): its title in footnote medium, grey where [dimmed],
+ * and where it [showsDetail] its detail in caption2 under it, 3 apart; 10 above and below, [indent] in. TalkBack reads
+ * it as one switch, the words it shows and its state, the detail as its hint.
  */
 @Composable
-private fun ShareToggle(title: String, detail: String, on: Boolean, enabled: Boolean, tag: String, showsDetail: Boolean, onChange: (Boolean) -> Unit) {
+private fun ShareToggle(
+    title: String,
+    detail: String,
+    on: Boolean,
+    enabled: Boolean,
+    tag: String,
+    showsDetail: Boolean,
+    dimmed: Boolean = false,
+    indent: Dp = 0.dp,
+    onChange: (Boolean) -> Unit,
+) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val titleText = localized(title)
@@ -469,12 +616,15 @@ private fun ShareToggle(title: String, detail: String, on: Boolean, enabled: Boo
                     disabled()
                 }
             }
-            .padding(vertical = 10.dp),
+            .padding(start = indent, top = 10.dp, bottom = 10.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
-            Text(titleText, color = colors.label, style = type.style(IosTextStyle.Footnote, FontWeight.Medium).sfLines())
+            Text(
+                titleText, color = if (dimmed) colors.secondaryText else colors.label,
+                style = type.style(IosTextStyle.Footnote, FontWeight.Medium).sfLines(),
+            )
             if (showsDetail) Text(detailText, color = colors.secondaryText, style = type.caption2.sfLines())
         }
         Toggle(on, onChange, enabled = enabled, tint = colors.resolve(ExperimentalPalette.delivered))
@@ -932,6 +1082,7 @@ const val FRIENDS_NICKNAME = "$FRIENDS.nickname"
 const val FRIENDS_PREVIEW = "$FRIENDS.preview"
 const val FRIENDS_ARRIVAL_DOT = "$FRIENDS.arrivalDot"
 const val FRIENDS_SHARE_STATS = "$FRIENDS.shareStats"
+const val FRIENDS_SHARE_COUNTRIES = "$FRIENDS.shareCountries"
 const val FRIENDS_SHARE_ARRIVAL = "$FRIENDS.shareArrival"
 const val FRIENDS_SAVE = "$FRIENDS.save"
 const val FRIENDS_LINK_LOADING = "$FRIENDS.linkLoading"
@@ -960,9 +1111,21 @@ const val FRIENDS_CANCEL_REMOVE = "$FRIENDS.cancelRemove"
 const val FRIENDS_NOTICE = "$FRIENDS.notice"
 const val FRIENDS_NOTICE_OPEN = "$FRIENDS.noticeOpen"
 const val FRIENDS_NOTICE_DISMISS = "$FRIENDS.noticeDismiss"
+const val FRIENDS_SAMPLE = "$FRIENDS.sample"
+const val FRIENDS_COMPARE = "$FRIENDS.compare"
+const val FRIENDS_COUNTRIES = "$FRIENDS.countries"
 
 /** A friend's card, by their id. */
 fun friendCardTag(id: UUID) = "$FRIENDS.card.$id"
 
 /** A stamp on a friend's page. */
 fun friendStampTag(stamp: FriendStamp) = "$FRIENDS.stamp.${stamp.rawValue}"
+
+/** One of the groups a friend's page puts their stamps and the reader's in. */
+internal fun friendGroupTag(group: StampGroup) = "$FRIENDS.group.${group.name.lowercase()}"
+
+/** A stamp in a group of a friend's page. */
+fun friendCompareTag(stamp: FriendStamp) = "$FRIENDS.compareStamp.${stamp.rawValue}"
+
+/** One of a friend's countries on their page. */
+fun friendCountryTag(code: String) = "$FRIENDS.country.$code"

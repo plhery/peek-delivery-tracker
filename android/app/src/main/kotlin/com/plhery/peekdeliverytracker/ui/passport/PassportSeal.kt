@@ -162,16 +162,27 @@ internal fun rememberSealPress(press: Int?, lead: Int = 0): SealPress {
 /** The moment the drop ends and the seal meets the page. */
 private const val IMPACT = 216f
 
-/** A stamp of passport.json's in its tone: earned, else a third as opaque and grey. */
+/**
+ * A stamp of passport.json's in its tone: earned, else a third as opaque and grey. Without [postmark], an earned one goes
+ * without its rings, as a friend's page shows it.
+ */
 @Composable
-internal fun StampSeal(definition: StampDefinition, earned: Boolean, modifier: Modifier = Modifier, size: SealSize = SealSize.Regular, press: SealPress? = null) {
+internal fun StampSeal(
+    definition: StampDefinition,
+    earned: Boolean,
+    modifier: Modifier = Modifier,
+    size: SealSize = SealSize.Regular,
+    press: SealPress? = null,
+    postmark: Boolean = true,
+) {
     val colors = PeekTheme.colors
-    StampSeal(definition.glyph, definition.numeral, colors.resolve(definition.tone.ink), colors.resolve(definition.tone.paper), earned, modifier, size, press)
+    StampSeal(definition.glyph, definition.numeral, colors.resolve(definition.tone.ink), colors.resolve(definition.tone.paper), earned, modifier, size, press, postmark)
 }
 
 /**
  * `PassportSeal`: on its die-cut [paper], a frame inset in its [ink] at 40 %, the [glyph] (stroke 1.1 of its 24, round
- * caps and joins) or the [numeral], and, earned, the postmark's two rings at a third over its lower trailing corner. A
+ * caps and joins) or the [numeral], and, earned, the postmark's two rings at a third over its lower trailing corner
+ * unless [postmark] is false. A
  * [press] drops it in (scale 1.5 and −8° to 0.94, then 1, the ink in over 100 ms), then draws the outer ring round
  * from its start and inks the inner one. Hidden from TalkBack: its button says it.
  */
@@ -185,6 +196,7 @@ internal fun StampSeal(
     modifier: Modifier = Modifier,
     size: SealSize = SealSize.Regular,
     press: SealPress? = null,
+    postmark: Boolean = true,
 ) {
     val type = PeekTheme.type
     val tone = if (earned) ink else ink.grey()
@@ -224,7 +236,7 @@ internal fun StampSeal(
                 }
             }
         }
-        if (earned && size != SealSize.Mini) {
+        if (earned && postmark && size != SealSize.Mini) {
             Postmark(
                 tone, press,
                 Modifier.align(Alignment.BottomEnd).offset(x = size.ringPastEnd, y = size.ringPastBottom).size(size.ring),

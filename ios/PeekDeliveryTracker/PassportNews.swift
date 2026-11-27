@@ -1,22 +1,34 @@
 import SwiftUI
 
-/// What the passport has that this device has not shown yet: the stamps earned since the reader last opened it. The
-/// seen ones are kept on this device, one list per account, one for a guest and one for the demo; the first time a
-/// passport is read here, everything it already holds counts as seen, so only what arrives after that is new. The
-/// web's `usePassportNews`; countries join in a later round.
+/// What the passport has that this device has not shown yet: the stamps and countries earned since the reader last
+/// opened it. The seen ones are kept on this device, one list per account, one for a guest and one for the demo; the
+/// first time a passport is read here, everything it already holds counts as seen, so only what arrives after that is
+/// new. The web's `usePassportNews`.
 @MainActor
 final class PassportNews: ObservableObject {
+    /// A country or an earned stamp, by the key the seen list keeps it by.
     struct Item: Identifiable, Equatable {
-        let stamp: PassportBook.StampProgress
-        var seen: String { stamp.seenKey }
-        var parcelID: UUID? { stamp.parcelID }
+        let seen: String
+        let parcelID: UUID?
+        var stamp: PassportBook.StampProgress?
+        var country: PassportBook.CountryStamp?
         var id: String { seen }
+
+        init(stamp: PassportBook.StampProgress) {
+            (seen, parcelID, self.stamp) = (stamp.seenKey, stamp.parcelID, stamp)
+        }
+
+        init(country: PassportBook.CountryStamp) {
+            (seen, parcelID, self.country) = (country.seenKey, country.parcelID, country)
+        }
     }
 
     static let prefix = "peek-passport-seen:"
+    /// In a list once countries count as news. A list kept before then takes every country it can see now as seen.
+    static let countriesOn = "countries:on"
 
     @Published private(set) var book = PassportBook(parcels: [])
-    /// Earned and not shown yet, in the passport's order.
+    /// Earned and not shown yet: the countries, then the stamps, in the passport's order.
     @Published private(set) var unseen: [Item] = []
     private var seen: Set<String>?
     private var scope: String?
@@ -59,6 +71,10 @@ final class PassportNews: ObservableObject {
             seen = scope.flatMap(read)
         }
         self.loaded = loaded && scope != nil
+        if self.loaded, let seen, !seen.contains(Self.countriesOn) {
+            // A list kept before countries counted takes the countries the passport holds now as seen.
+            write(seen.union(book.countries.map(\.seenKey)).union([Self.countriesOn]))
+        }
         // A passport read here for the first time starts with everything it holds already seen.
         if self.loaded, seen == nil { markSeen() }
         refresh()
@@ -66,21 +82,15 @@ final class PassportNews: ObservableObject {
 
     /// Everything earned now counts as seen.
     func markSeen() {
-        guard loaded, let scope else { return }
-        let keys = Set(earned.map(\.seen))
-        let value = keys.sorted()
-        if seen != keys {
-            if let data = try? JSONEncoder().encode(value), let text = String(data: data, encoding: .utf8) {
-                defaults.set(text, forKey: Self.prefix + scope)
-            }
-            seen = keys
-        }
+        guard loaded else { return }
+        write(Set(earned.map(\.seen)).union([Self.countriesOn]))
         refresh()
     }
 
     func noteLineOpened(_ key: String) { openedLines.insert(key) }
 
-    private var earned: [Item] { book.stamps.filter(\.earned).map(Item.init) }
+    /// Every country, then the earned stamps.
+    private var earned: [Item] { book.countries.map(Item.init(country:)) + book.stamps.filter(\.earned).map(Item.init(stamp:)) }
 
     private func read(_ scope: String) -> Set<String>? {
         guard let text = defaults.string(forKey: Self.prefix + scope), let data = text.data(using: .utf8),
@@ -88,8 +98,18 @@ final class PassportNews: ObservableObject {
         return Set(keys)
     }
 
+    private func write(_ keys: Set<String>) {
+        guard let scope, seen != keys else { return }
+        if let data = try? JSONEncoder().encode(keys.sorted()), let text = String(data: data, encoding: .utf8) {
+            defaults.set(text, forKey: Self.prefix + scope)
+        }
+        seen = keys
+    }
+
     private func refresh() {
-        let next = seen.map { seen in earned.filter { !seen.contains($0.seen) } } ?? []
+        // Until a list kept before countries counted takes them, none of them is new.
+        let before = seen.map { !$0.contains(Self.countriesOn) } ?? false
+        let next = seen.map { seen in earned.filter { !seen.contains($0.seen) && !(before && $0.country != nil) } } ?? []
         if next != unseen { unseen = next }
     }
 }
@@ -108,7 +128,8 @@ extension EnvironmentValues {
 
 // MARK: - Words
 
-/// Each stamp's name and what earns it, the day it was earned and how far an unearned one has come, as the web writes them.
+/// Each stamp's name and what earns it, the day it was earned and how far an unearned one has come, each country's words
+/// and the numbers' rows, as the web writes them.
 @MainActor
 struct PassportStampCopy {
     let localizer: Localizer
@@ -177,6 +198,51 @@ struct PassportStampCopy {
     func newsHeading(_ count: Int) -> String {
         count == 1 ? localizer.text("passport.newStamp") : localizer.text("passport.newStamps", ["count": count])
     }
+
+    /// What the line on a card calls a new stamp or country.
+    func name(_ item: PassportNews.Item) -> String {
+        if let country = item.country { return countryName(country.code) }
+        return title(item.stamp?.key ?? "")
+    }
+
+    // MARK: Countries
+
+    func countryName(_ code: String) -> String { TrackingLocation.countryName(code, language: localizer.language) }
+
+    /// "First reached on 5 October 2026".
+    func firstReached(_ country: PassportBook.CountryStamp) -> String {
+        localizer.text("passport.firstReached", ["date": PassportDates.fullDay(country.firstAt, language: localizer.language)])
+    }
+
+    /// "2 parcels", "1 parcel".
+    func parcels(_ count: Int) -> String { localizer.text("passport.parcels.many", ["count": count]) }
+
+    /// A country's details: the day a parcel first reached it and that parcel, then how many went through it.
+    func details(_ country: PassportBook.CountryStamp) -> String {
+        "\(firstReached(country)) · \(country.label.nonEmpty ?? localizer.text("common.parcel"))\n\(parcels(country.count))"
+    }
+
+    /// What a screen reader says of a country: "Japan, First reached on 8 September 2026, 1 parcel, New".
+    func accessibilityLabel(_ country: PassportBook.CountryStamp, fresh: Bool) -> String {
+        [countryName(country.code), firstReached(country), parcels(country.count), fresh ? localizer.text("passport.new") : nil]
+            .compactMap { $0 }.joined(separator: ", ")
+    }
+
+    // MARK: Numbers
+
+    /// "November 2026 · 15 parcels", or nil before any month has two parcels.
+    func busiestMonth(_ numbers: PassportNumbers) -> String? {
+        numbers.busiestMonth.flatMap { busiest in
+            PassportDates.month(busiest.month, language: localizer.language).map { "\($0) · \(parcels(busiest.count))" }
+        }
+    }
+
+    /// "11 · most often DHL", or the one carrier's name; nil before any real carrier.
+    func carriers(_ numbers: PassportNumbers) -> String? {
+        guard let top = numbers.topCarrier else { return nil }
+        let name = CarrierCatalog.shared.info(for: top.carrier, language: localizer.language).displayName
+        return numbers.carrierCount > 1 ? localizer.text("passport.carriersTop", ["count": numbers.carrierCount, "carrier": name]) : name
+    }
 }
 
 /// The passport's dates, in the language's own words as the web writes them with its language tags (`en-CH`, `de-CH`…).
@@ -218,6 +284,15 @@ enum PassportDates {
         formatter("dMMMMy", language: language, timeZone: timeZone).string(from: date)
     }
 
+    /// A calendar month ("2026-11") in full, as the language names it standing alone: "November 2026", "ноябрь 2026 г.".
+    static func month(_ month: String, language: AppLanguage) -> String? {
+        let parts = month.split(separator: "-").compactMap { Int($0) }
+        guard parts.count == 2, let utc = TimeZone(identifier: "UTC"),
+              let date = DateComponents(calendar: Calendar(identifier: .gregorian), timeZone: utc, year: parts[0], month: parts[1], day: 15).date
+        else { return nil }
+        return formatter("MMMMy", language: language, timeZone: utc).string(from: date)
+    }
+
     /// A country stamp's day, as its ink carries it: "12 AUG 2026".
     static func inkDay(_ date: Date, language: AppLanguage, timeZone: TimeZone = .current) -> String {
         formatter("dMMMy", language: language, timeZone: timeZone).string(from: date)
@@ -249,16 +324,27 @@ struct NewStampLine: View {
     var body: some View {
         let copy = PassportStampCopy(localizer: localizer)
         let heading = copy.newsHeading(items.count)
-        let names = items.map { copy.title($0.stamp.key) }
-        let tone = items.first?.stamp.stamp.tone ?? .green
+        let names = items.map(copy.name)
+        let tone = items.first.map { $0.country.map { PassportData.shared.ink($0.code).tone } ?? $0.stamp?.stamp.tone ?? .green } ?? .green
         Button(action: openPassport) {
             HStack(spacing: 10) {
-                if let first = items.first {
-                    PassportSeal(stamp: first.stamp.stamp, size: .mini)
-                        .scaleEffect(popped ? 1 : 0.6)
-                        .opacity(popped ? 1 : 0)
-                        .padding(.leading, 8)
+                Group {
+                    if let country = items.first?.country {
+                        // A country: its code in a ring of its tone.
+                        Text(country.code)
+                            .font(.system(size: 10, weight: .bold))
+                            .tracking(0.3)
+                            .foregroundStyle(tone.ink)
+                            .frame(width: 30, height: 30)
+                            .overlay(Circle().strokeBorder(tone.ink, lineWidth: 1.4))
+                            .accessibilityHidden(true)
+                    } else if let stamp = items.first?.stamp {
+                        PassportSeal(stamp: stamp.stamp, size: .mini)
+                    }
                 }
+                .scaleEffect(popped ? 1 : 0.6)
+                .opacity(popped ? 1 : 0)
+                .padding(.leading, 8)
                 VStack(alignment: .leading, spacing: 1) {
                     Text(heading).font(.footnote.weight(.semibold)).foregroundStyle(Brand.ink)
                     Text(names.joined(separator: " · "))

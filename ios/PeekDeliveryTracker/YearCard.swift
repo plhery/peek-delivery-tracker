@@ -152,42 +152,13 @@ struct YearCardDrawing: View {
 
     /// One line set on its baseline, as a canvas sets it; a line wider than `maxWidth` is condensed to fit.
     private func text(_ context: inout GraphicsContext, _ text: Text, x: CGFloat, baseline: CGFloat, centred: Bool = false, maxWidth: CGFloat? = nil) {
-        let resolved = context.resolve(text)
-        let size = resolved.measure(in: CGSize(width: CGFloat.greatestFiniteMagnitude, height: .greatestFiniteMagnitude))
-        let top = baseline - resolved.firstBaseline(in: size)
-        let fit = maxWidth.map { min(1, $0 / max(size.width, 1)) } ?? 1
-        var line = context
-        line.translateBy(x: centred ? x - size.width * fit / 2 : x, y: top)
-        line.scaleBy(x: fit, y: 1)
-        line.draw(resolved, in: CGRect(origin: .zero, size: size))
+        context.drawLine(text, x: x, baseline: baseline, centred: centred, maxWidth: maxWidth)
     }
 
-    /// A country's ink stamp: its continent's outline, an inner line, its number, its code and its first day.
+    /// A country's ink stamp, as the passport's Countries page draws it, in its tone's light ink.
     private func inkStamp(_ context: inout GraphicsContext, _ country: PassportBook.CountryStamp, in box: CGRect) {
-        let data = PassportData.shared
-        let ink = data.ink(country.code)
-        guard let layout = data.layout[ink.continent], let outlineData = data.outlines[ink.continent] else { return }
-        let color = Color(hex: ink.tone.lightHex.ink)
-        let outline = PassportPath.path(outlineData)
-        var stamp = context
-        stamp.translateBy(x: box.midX, y: box.midY)
-        stamp.rotate(by: .degrees(ink.tilt))
-        stamp.scaleBy(x: box.width / 124, y: box.width / 124)
-        stamp.translateBy(x: -62, y: -46)
-        stamp.stroke(outline, with: .color(color), style: StrokeStyle(lineWidth: 1.7, lineJoin: .round))
-        var inner = stamp
-        inner.opacity = 0.55
-        inner.translateBy(x: 62, y: 46)
-        inner.scaleBy(x: layout.inner, y: layout.inner)
-        inner.translateBy(x: -62, y: -46)
-        inner.stroke(outline, with: .color(color), style: StrokeStyle(lineWidth: 0.8 / layout.inner, lineJoin: .round))
-        let number = String(format: "%02d", country.number)
-        text(&stamp, Text("Nº \(number)").font(.system(size: layout.small, weight: .semibold)).tracking(1.3).foregroundStyle(color),
-             x: 62, baseline: layout.number, centred: true)
-        text(&stamp, Text(country.code).font(.system(size: layout.codeSize, weight: .bold)).tracking(2).foregroundStyle(color),
-             x: 63, baseline: layout.code, centred: true)
-        text(&stamp, Text(words.inkDays[country.code] ?? "").font(.system(size: layout.small, weight: .semibold)).tracking(layout.dateSpacing).foregroundStyle(color),
-             x: 62, baseline: layout.date, centred: true)
+        CountryInkDrawing.draw(context, code: country.code, number: country.number, day: words.inkDays[country.code] ?? "",
+                               color: Color(hex: PassportData.shared.ink(country.code).tone.lightHex.ink), in: box)
     }
 
     /// A paper seal with its perforated edge, frame, glyph or numeral, and postmark.

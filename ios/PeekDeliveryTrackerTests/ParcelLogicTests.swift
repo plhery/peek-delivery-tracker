@@ -6730,6 +6730,29 @@ extension ParcelLogicTests {
                 .environment(\.dynamicTypeSize, size), width: 402, dark: dark)
             keepPassportPicture(try XCTUnwrap(image.pngData()), named: name)
         }
+        // Each page on a phone, and the book lying open on an iPad, with a country new too.
+        let countries = news.book.countries
+        XCTAssertGreaterThan(countries.count, 3)
+        let freshCountry = fresh.union([try XCTUnwrap(countries.last).seenKey])
+        let pages = [("countries", PassportView.countries), ("stamps", PassportView.stamps), ("numbers", PassportView.numbers)]
+        for (name, page) in pages {
+            for dark in [false, true] {
+                let image = try await windowPicture(PassportView(pictureAt: now, fresh: freshCountry, page: page)
+                    .environmentObject(localizer)
+                    .environmentObject(news)
+                    .environment(\.locale, localizer.language.locale), width: 402, dark: dark, safeArea: false)
+                keepPassportPicture(try XCTUnwrap(image.pngData()), named: "b-phone-\(name)-\(dark ? "dark" : "light")")
+            }
+        }
+        for (name, page) in pages where page != PassportView.stamps {
+            for dark in [false, true] {
+                let image = try await windowPicture(PassportView(pictureAt: now, fresh: freshCountry, page: page, open: true)
+                    .environmentObject(localizer)
+                    .environmentObject(news)
+                    .environment(\.locale, localizer.language.locale), width: 1032, dark: dark, safeArea: false)
+                keepPassportPicture(try XCTUnwrap(image.pngData()), named: "b-wide-\(name)-\(dark ? "dark" : "light")")
+            }
+        }
 
         let year = news.book.year(2026)
         XCTAssertGreaterThan(year.deliveredCount, 0)
@@ -6759,23 +6782,34 @@ extension ParcelLogicTests {
         keepPassportPicture(try XCTUnwrap(list.pngData()), named: "news-line-and-tab-dot")
     }
 
-    /// A view drawn in a window `width` wide, as tall as it asks or `height`.
+    /// A view drawn in a window `width` wide, as tall as it asks or `height`; with `safeArea` off, from the window's
+    /// very top, clear of the status bar's inset.
     @MainActor private func windowPicture(_ view: some View, width: CGFloat, height: CGFloat? = nil, dark: Bool,
-                                          settle: Duration = .milliseconds(600)) async throws -> UIImage {
+                                          settle: Duration = .milliseconds(600), safeArea: Bool = true) async throws -> UIImage {
         let host = UIHostingController(rootView: view)
+        if !safeArea { host.safeAreaRegions = [] }
         host.overrideUserInterfaceStyle = dark ? .dark : .light
         let scene = try XCTUnwrap(UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.first)
         let window = UIWindow(windowScene: scene)
         let container = UIViewController()
         window.rootViewController = container
         container.addChild(host)
-        let size = CGSize(width: width, height: height ?? ceil(host.sizeThatFits(in: CGSize(width: width, height: 20_000)).height))
+        var size = CGSize(width: width, height: height ?? ceil(host.sizeThatFits(in: CGSize(width: width, height: 20_000)).height))
         host.view.frame = CGRect(origin: .zero, size: size)
         container.view.addSubview(host.view)
         host.didMove(toParent: container)
         window.isHidden = false
         defer { window.isHidden = true }
         try await Task.sleep(for: settle)
+        // A view that measures itself once drawn, as the passport's pages do, gets the height it then asks for.
+        if height == nil {
+            let settled = ceil(host.sizeThatFits(in: CGSize(width: width, height: 20_000)).height)
+            if settled != size.height {
+                size.height = settled
+                host.view.frame = CGRect(origin: .zero, size: size)
+                try await Task.sleep(for: .milliseconds(300))
+            }
+        }
         let format = UIGraphicsImageRendererFormat()
         format.scale = 2
         return UIGraphicsImageRenderer(size: size, format: format).image { _ in

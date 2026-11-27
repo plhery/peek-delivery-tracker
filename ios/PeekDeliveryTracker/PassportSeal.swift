@@ -114,12 +114,15 @@ struct PassportPostmark: View {
     }
 }
 
-/// The passport's timings and curves (FABLE.md 2.1, 2.2 and 2.6): durations in ms and cubic-béziers only, the same on
-/// the web and Android. `drop` falls faster and faster, `settle` is quick then soft, `move` is in-out.
+/// The passport's timings and curves (FABLE.md 2.1 to 2.6): durations in ms and cubic-béziers only, the same on the web
+/// and Android. `drop` falls faster and faster, `settle` is quick then soft, `move` is in-out, `flip` turns a page.
 enum PassportMotion {
     static let drop = CubicBezier(0.5, 0, 0.9, 0.4)
     static let settle = CubicBezier(0.2, 0.8, 0.3, 1)
     static let move = CubicBezier(0.3, 0, 0.2, 1)
+    static let flip = CubicBezier(0.22, 0.8, 0.2, 1)
+    /// A page turns in this long.
+    static let flipDuration: Double = 420
 
     /// A new seal waits for the page to settle, then the seals press 90 ms apart; the third and any after it together.
     static func pressDelay(_ index: Int) -> Double { 180 + Double(min(index, 2)) * 90 }
@@ -155,6 +158,58 @@ enum PassportMotion {
             ring = PassportMotion.move(min(1, max(0, (t - 276) / 320)))
             innerRing = min(1, max(0, (t - 436) / 160))
             pill = PassportMotion.settle(min(1, max(0, (t - 416) / 200)))
+        }
+    }
+}
+
+extension PassportMotion {
+    /// New countries land 120 ms apart once their page has settled; the first two drop, any after them fade in.
+    static func dropDelay(_ index: Int) -> Double { 180 + Double(index) * 120 }
+    /// The ink's impact, with its light haptic.
+    static let dropImpact: Double = 234
+    /// Everything of a landing, caption and New pill included, rests by then.
+    static let dropEnd: Double = 634
+
+    /// A new country's ink at `elapsed` ms since its landing began (FABLE.md 2.5): `drops` for the first two, which fall
+    /// from above, tilted, and bleed at the impact; the others simply fade in.
+    struct Drop {
+        let scale: Double
+        let turn: Double
+        let lift: Double
+        let opacity: Double
+        /// The outline's stroke, 1.7 at rest.
+        let outline: Double
+        /// The flag, name and count, rising in after the impact.
+        let caption: Double
+        let pill: Double
+
+        init(elapsed: Double?, drops: Bool = true) {
+            guard let t = elapsed else {
+                (scale, turn, lift, opacity, outline, caption, pill) = (1, 0, 0, 1, 1.7, 1, 1)
+                return
+            }
+            guard drops else {
+                let shown = min(1, max(0, t / 200))
+                (scale, turn, lift, opacity, outline, caption, pill) = (1, 0, 0, shown, 1.7, shown, shown)
+                return
+            }
+            let impact = PassportMotion.dropImpact
+            if t < impact {
+                let p = PassportMotion.drop(max(0, t) / impact)
+                scale = 1.6 + (0.95 - 1.6) * p
+                turn = -10 * (1 - p)
+                lift = -14 * (1 - p)
+                outline = 1.7
+            } else {
+                let p = PassportMotion.settle(min(1, (t - impact) / (520 - impact)))
+                scale = 0.95 + 0.05 * p
+                turn = 0
+                lift = 0
+                outline = 2.4 - 0.7 * p
+            }
+            opacity = min(1, max(0, t / 100))
+            caption = PassportMotion.settle(min(1, max(0, (t - impact - 80) / 300)))
+            pill = PassportMotion.settle(min(1, max(0, (t - impact - 200) / 200)))
         }
     }
 }

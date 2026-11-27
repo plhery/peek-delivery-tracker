@@ -136,7 +136,7 @@ final class PassportTests: XCTestCase {
         XCTAssertNil(defaults.string(forKey: "peek-passport-seen:test"))
         news.update(parcels: first, scope: "test", loaded: true)
         XCTAssertTrue(news.unseen.isEmpty)
-        XCTAssertEqual(defaults.string(forKey: "peek-passport-seen:test"), #"["stamp:express","stamp:first"]"#)
+        XCTAssertEqual(defaults.string(forKey: "peek-passport-seen:test"), #"["countries:on","stamp:express","stamp:first"]"#)
 
         // A third carrier's delivery earns Well connected, on that parcel's card.
         let third = delivered(3, .fedex, "2026-09-05T12:00:00Z")
@@ -145,8 +145,8 @@ final class PassportTests: XCTestCase {
         XCTAssertEqual(news.byParcel.keys.sorted(by: { $0.uuidString < $1.uuidString }), [third.id])
         let copy = PassportStampCopy(localizer: localizer)
         let item = try XCTUnwrap(news.unseen.first)
-        XCTAssertEqual("\(copy.newsHeading(1)): \(copy.title(item.stamp.key))", "New stamp: Well connected")
-        XCTAssertEqual(copy.accessibilityLabel(item.stamp, fresh: true), "Well connected, Earned on 5 September 2026, New")
+        XCTAssertEqual("\(copy.newsHeading(1)): \(copy.name(item))", "New stamp: Well connected")
+        XCTAssertEqual(copy.accessibilityLabel(try XCTUnwrap(item.stamp), fresh: true), "Well connected, Earned on 5 September 2026, New")
 
         // Another account keeps its own list.
         news.update(parcels: first + [third], scope: "other", loaded: true)
@@ -158,7 +158,83 @@ final class PassportTests: XCTestCase {
         news.markSeen()
         XCTAssertTrue(news.unseen.isEmpty)
         XCTAssertTrue(news.byParcel.isEmpty)
-        XCTAssertEqual(defaults.string(forKey: "peek-passport-seen:test"), #"["stamp:connected","stamp:express","stamp:first"]"#)
+        XCTAssertEqual(defaults.string(forKey: "peek-passport-seen:test"), #"["countries:on","stamp:connected","stamp:express","stamp:first"]"#)
+    }
+
+    func testACountryADeliveryFirstReachedIsNewsUntilThePassportOpens() throws {
+        let defaults = try defaults()
+        let news = PassportNews(defaults: defaults)
+        let first = [located(1, "2026-09-03T12:00:00Z", "Wien, AT")]
+        news.update(parcels: first, scope: "test", loaded: true)
+        XCTAssertTrue(news.unseen.isEmpty)
+        XCTAssertEqual(defaults.string(forKey: "peek-passport-seen:test"),
+                       #"["countries:on","country:AT","stamp:express","stamp:first","stamp:rightNextDoor"]"#)
+        XCTAssertEqual(PassportView.openingPage(news.unseen), PassportView.countries)
+
+        // Japan, reached for the first time, is news on that parcel's card, the line naming it in the app's language.
+        let tokyo = located(2, "2026-09-08T12:00:00Z", "Tokyo, JP")
+        news.update(parcels: first + [tokyo], scope: "test", loaded: true)
+        XCTAssertEqual(news.unseen.map(\.seen), ["country:JP"])
+        XCTAssertEqual(news.byParcel.keys.map { $0 }, [tokyo.id])
+        let copy = PassportStampCopy(localizer: localizer)
+        let items = try XCTUnwrap(news.byParcel[tokyo.id])
+        XCTAssertEqual("\(copy.newsHeading(items.count)): \(items.map(copy.name).joined(separator: ", "))", "New stamp: Japan")
+        let japan = try XCTUnwrap(items.first?.country)
+        XCTAssertEqual(copy.accessibilityLabel(japan, fresh: true), "Japan, First reached on 8 September 2026, 1 parcel, New")
+        XCTAssertEqual(copy.details(japan), "First reached on 8 September 2026 · Order 2\n1 parcel")
+        // The passport opens on the Countries page, which holds the news.
+        XCTAssertEqual(PassportView.openingPage(news.unseen), PassportView.countries)
+        localizer.language = .fr
+        XCTAssertEqual(copy.name(try XCTUnwrap(items.first)), "Japon")
+        localizer.language = .en
+
+        news.markSeen()
+        XCTAssertTrue(news.unseen.isEmpty)
+        XCTAssertEqual(defaults.string(forKey: "peek-passport-seen:test"),
+                       #"["countries:on","country:AT","country:JP","stamp:express","stamp:first","stamp:rightNextDoor"]"#)
+    }
+
+    func testTheCountriesAListKeptBeforeTheyCountedAreTakenAsSeen() throws {
+        let defaults = try defaults()
+        defaults.set(#"["stamp:first"]"#, forKey: "peek-passport-seen:test")
+        let news = PassportNews(defaults: defaults)
+        let parcels = [located(1, "2026-09-03T12:00:00Z", "Wien, AT"), delivered(2, .ups, "2026-09-04T12:00:00Z")]
+        news.update(parcels: parcels, scope: "test", loaded: true)
+        // The stamps are news; Austria, already in the passport before countries counted, is not.
+        XCTAssertEqual(news.unseen.map(\.seen), ["stamp:rightNextDoor", "stamp:express"])
+        XCTAssertEqual(defaults.string(forKey: "peek-passport-seen:test"), #"["countries:on","country:AT","stamp:first"]"#)
+        XCTAssertEqual(PassportView.openingPage(news.unseen), PassportView.stamps)
+        XCTAssertEqual(PassportView.openingPage([]), PassportView.countries)
+
+        // From then on a new country is news like a stamp.
+        let tokyo = located(3, "2026-09-08T12:00:00Z", "Tokyo, JP")
+        news.update(parcels: parcels + [tokyo], scope: "test", loaded: true)
+        XCTAssertEqual(Set(news.unseen.map(\.seen)), ["stamp:rightNextDoor", "stamp:express", "country:JP"])
+        XCTAssertEqual(PassportView.openingPage(news.unseen), PassportView.countries)
+    }
+
+    func testTheNumbersPageNamesTheBusiestMonthAndTheCarriers() throws {
+        let utc = try XCTUnwrap(TimeZone(identifier: "UTC"))
+        let copy = PassportStampCopy(localizer: localizer)
+        // Months count the parcels added in them, from two.
+        func added(_ id: Int, _ carrier: CarrierID, _ at: String) -> Parcel {
+            Self.parcel(id: UUID(uuidString: String(format: "00000000-0000-0000-0000-%012d", id))!, label: "Parcel \(id)", carrier: carrier,
+                        createdAt: at, events: [])
+        }
+        let one = PassportBook(parcels: [added(1, .dhl, "2026-09-03T12:00:00Z")], timeZone: utc)
+        XCTAssertNil(copy.busiestMonth(one.numbers))
+        XCTAssertEqual(copy.carriers(one.numbers), "DHL")
+        let three = PassportBook(parcels: [added(1, .dhl, "2026-09-03T12:00:00Z"), added(2, .ups, "2026-11-04T12:00:00Z"),
+                                           added(3, .ups, "2026-11-05T12:00:00Z")], timeZone: utc)
+        XCTAssertEqual(copy.busiestMonth(three.numbers), "November 2026 · 2 parcels")
+        XCTAssertEqual(copy.carriers(three.numbers), "2 · most often UPS")
+        localizer.language = .ru
+        // The month alone, in its standalone form.
+        XCTAssertEqual(copy.busiestMonth(three.numbers)?.hasPrefix("ноябрь 2026"), true, copy.busiestMonth(three.numbers) ?? "")
+        localizer.language = .en
+        let none = PassportBook(parcels: [], timeZone: utc)
+        XCTAssertNil(copy.busiestMonth(none.numbers))
+        XCTAssertNil(copy.carriers(none.numbers))
     }
 
     func testOneDeliveryNamesEveryStampItBroughtOnOneLine() throws {
@@ -167,7 +243,7 @@ final class PassportTests: XCTestCase {
         news.update(parcels: [delivered(1, .dhl, "2026-12-03T12:00:00Z")], scope: "test", loaded: true)
         let copy = PassportStampCopy(localizer: localizer)
         let items = try XCTUnwrap(news.byParcel.values.first)
-        XCTAssertEqual("\(copy.newsHeading(items.count)): \(items.map { copy.title($0.stamp.key) }.joined(separator: ", "))",
+        XCTAssertEqual("\(copy.newsHeading(items.count)): \(items.map(copy.name).joined(separator: ", "))",
                        "3 new stamps: First arrival, Express arrival, Home for the holidays")
     }
 

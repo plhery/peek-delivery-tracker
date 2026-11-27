@@ -270,6 +270,8 @@ struct PassportBook {
         let count: Int
         var continent: PassportData.Continent { PassportData.shared.ink(code).continent }
         var id: String { code }
+        /// The key the reader's seen list keeps it by.
+        var seenKey: String { "country:\(code)" }
     }
 
     let stats: PassportStatistics

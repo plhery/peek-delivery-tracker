@@ -1,6 +1,6 @@
 ---
 title: Rastreamento APC Overnight: códigos, status e entregas
-description: Rastreie encomendas da APC no Reino Unido: código de 7 dígitos e de 22 dígitos, o que significa Carded, como reagendar entregas perdidas e contatar depósitos.
+description: Rastreie encomendas da APC no Reino Unido: código de 7 dígitos e de 22 dígitos, o que significa Carded, como reagendar entregas não realizadas e contatar depósitos.
 slug: apc-overnight-tracking
 published: 2026-11-26
 updated: 2026-11-26
@@ -10,7 +10,7 @@ A APC Overnight — que hoje se apresenta como The APC — é a maior rede indep
 
 ## Código de rastreamento APC: como é o formato
 
-A APC costuma falar em um único código: "O número da remessa (consignment number) é a referência de rastreamento de 7 dígitos atribuída à sua encomenda." Seu formulário pede esse número junto com o código postal de entrega.
+A APC fala de um único código: "O número da remessa (consignment number) é a referência de rastreamento de 7 dígitos atribuída à sua encomenda." Seu formulário pede esse número junto com o código postal de entrega.
 
 Muitas lojas enviam um código mais longo: 22 dígitos dentro de um link do APC Choice (`apcchoice.apc-overnight.com/track-parcel?id=…`), começando com a data da reserva e terminando no mesmo código de 7 dígitos.
 
@@ -42,11 +42,11 @@ O APC Choice existe somente em inglês e exibe o resumo do envio (data de despac
 | `Carded` | O motorista tentou entregar, ninguém atendeu e ficou o cartão "Sorry we missed you". |
 | `Delivery Rearranged By Customer` | Você (ou alguém no endereço) alterou a data ou opção no APC Choice. |
 | `Delivered` | Entregue. O comprovante de entrega aparece mediante código postal. |
-| `Returned To Sender` | Retornando à loja, por exemplo após tentativas perdidas sem resposta. |
+| `Returned To Sender` | Retornando à loja, por exemplo após entregas não realizadas sem resposta. |
 
 `Delivery Rearranged By Customer` não é deslocamento: o pacote permanece onde estava até a nova data. Quando o rastreamento pausa entre movimentações, a APC explica que o volume pode estar entre depósitos, aguardando triagem no seu depósito ou enfrentando falha no leitor do motorista. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
-## Prazos da APC, tentativas perdidas e retirada no depósito
+## Prazos da APC, entregas não realizadas e retirada no depósito
 
 Segundo a APC, a maioria das entregas no Reino Unido chega no próximo dia útil após o despacho, variando por região. O remetente define o serviço: próximo dia até 10h30, até 12h (horário do Reino Unido) ou próximo dia útil padrão; entrega aos sábados existe em muitas regiões mediante contratação pelo remetente. Se a loja informou seus contatos à APC, você pode receber a janela de 2 horas por e-mail ou SMS assim que a rota for programada, e o APC Choice mostra a proximidade do motorista.
 
@@ -63,11 +63,11 @@ O APC Choice permite alterações até a entrega, mesmo após cartão deixado. C
 
 **Retirada no depósito:** solicite antes das 19h (horário do Reino Unido) para retirar no dia seguinte e leve documento de identidade e comprovante de endereço. Confira antes o horário de funcionamento do depósito.
 
-**Três dias úteis:** se a APC não receber resposta em **três dias úteis** após tentativa perdida, o volume pode voltar ao remetente.
+**Três dias úteis:** se a APC não receber resposta em **três dias úteis** após uma entrega não realizada, o volume pode voltar ao remetente.
 
 ## Encomendas APC atrasadas, danificadas ou extraviadas
 
-O contrato da APC é com o remetente, portanto a loja trata de reclamações. Em caso de dano, o FAQ da APC é direto: contate diretamente o remetente. Avise a loja depressa, pois o prazo dela perante a APC é curto: para dano ou falta parcial, precisa escrever à APC em até **três dias úteis** após a entrega. Guarde a caixa e a embalagem, pois a APC pode negar indenização sem elas. A indenização ao remetente limita-se a £100 em remessas de encomendas e £50 em pacotes menores.
+O contrato da APC é com o remetente, portanto a loja cuida dos pedidos de indenização. Em caso de dano, o FAQ da APC é direto: contate diretamente o remetente. Avise a loja depressa, pois o prazo dela perante a APC é curto: para dano ou falta parcial, precisa escrever à APC em até **três dias úteis** após a entrega. Guarde a caixa e a embalagem, pois a APC pode negar indenização sem elas. A indenização ao remetente limita-se a £100 em remessas de encomendas e £50 em pacotes menores.
 
 Se constar entregue sem você ter recebido, o comprovante de entrega (foto, ponto GPS, data e hora) fica disponível no APC Choice com seu código postal. Depois fale com a loja e consulte [entregue mas não recebida](guide:delivered-not-received).
 
@@ -84,9 +84,9 @@ A APC não oferece telefone nacional, chat nem e-mail geral para destinatários;
 
 Cole o código de 22 dígitos ou um link de `apcchoice.apc-overnight.com` com `id=` no [Peek](/), sem precisar de código postal. Como o formato é compartilhado, o Peek consulta APC Overnight e Austrian Post ao mesmo tempo e mostra "APC Overnight está com esta encomenda." quando a APC o reconhece. Códigos de 22 dígitos sem data real no início não são enviados à APC e não pertencem a ela: confira com a loja. O código de remessa isolado de 7 dígitos não pode ser rastreado aqui, e links de `apc.co.uk` não são lidos.
 
-Os horários da APC não trazem fuso horário: o Peek interpreta tudo no horário do Reino Unido e lista o histórico próprio da APC, podendo exibir o peso. `Delivered` e `Out for delivery` aparecem traduzidos pelo Peek, e demais status mantêm o texto da APC. Não há data prevista, janela de 2 horas, ponto de retirada nem comprovante de entrega, e reagendamentos continuam sendo feitos no APC Choice.
+Os horários da APC não trazem fuso horário: o Peek interpreta tudo no horário do Reino Unido e lista o histórico próprio da APC, podendo exibir o peso. `Delivered` e `Out for delivery` aparecem com o texto do próprio Peek, e demais status mantêm o texto da APC. Não há data prevista, janela de 2 horas, ponto de retirada nem comprovante de entrega, e reagendamentos continuam sendo feitos no APC Choice.
 
-Com o pacote aberto, ou no dia da entrega com notificações ligadas, o Peek consulta até a cada 10 minutos — ou a cada 2 minutos a partir das 6h (horário do Reino Unido) no dia em que aparecer `Out for delivery`, enquanto o APC Choice responder (a cada 5 minutos quando precisa abrir o navegador; quando acompanhada apenas por serviços de rastreamento, a cada hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega); nos demais momentos, a cada hora. Também verifica a cada hora após dois dias sem novidades (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), e a cada 6 horas depois de sete dias em "Etiqueta criada".
+Com o pacote aberto, ou no dia da entrega com notificações ligadas, o Peek consulta até a cada 10 minutos — ou a cada 2 minutos a partir das 6h (horário do Reino Unido) no dia em que aparecer `Out for delivery`, enquanto o APC Choice responder (a cada 5 minutos quando precisa abrir o navegador; quando só os serviços de rastreamento respondem, a cada 15 minutos); nos demais momentos, a cada hora. Também verifica a cada hora após dois dias sem novidades (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), e a cada 6 horas depois de sete dias em "Etiqueta criada".
 
 Quando a movimentação mais recente completa quatro dias e a encomenda continua em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza com a data desse registro, como "Sem atualizações desde seg 12 out". A página então mostra "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando APC Overnight.", com um link "Pedir ajuda a APC Overnight" para a página de contato. Após três semanas sem novidade, exibe "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando APC Overnight."
 
@@ -100,7 +100,7 @@ Na etapa mais recente exibida no APC Choice: depósito remetente, hub em Cannock
 
 ### Por quanto tempo a APC guarda encomendas?
 
-A APC pode devolver o pacote ao remetente se não houver resposta em até três dias úteis após tentativa perdida. Reagende ou marque retirada no depósito antes disso.
+A APC pode devolver o pacote ao remetente se não houver resposta em até três dias úteis após uma entrega não realizada. Reagende ou marque retirada no depósito antes disso.
 
 ### Em que horário a APC entrega?
 
@@ -111,13 +111,13 @@ Depende do serviço pago pelo remetente: até 10h30, até 12h (horário do Reino
 Não. A APC é a The Alternative Parcels Company Limited, rede independente de depósitos locais, enquanto a Parcelforce é outra transportadora com códigos próprios terminados em `GB` ou iniciados por `PBAB`.
 
 :::sources
-- [APC: Receiving a Parcel](https://apc.co.uk/receiving-a-parcel/) – next working day, services, APC Choice options, safe place, neighbour, missed delivery, depot collection, three days, phishing advice
-- [APC: APC Choice tracking and FAQ](https://apcchoice.apc-overnight.com/track-parcel) – 7-digit consignment number and where to find it, statuses, 2-hour slot, tracking pauses, reschedule once more, business addresses, damage via the sender
-- [APC: Contact Us](https://apc.co.uk/contact-us/) – Customer Service Enquiry form forwarded to the local depot
-- [APC: Depot Finder](https://apc.co.uk/depot-finder/) – depot contact details and opening hours by postcode
-- [APC: Terms and Conditions of Carriage](https://apc.co.uk/terms-conditions-of-carriage/) – claim deadlines, £100 cap, packaging, three business days, proof of delivery
-- [APC: Home](https://apc.co.uk/) – since 1994, more than 90 member depots, company name, National Sortation Centre
-- [APC: Our Products](https://apc.co.uk/our-products/) – Parcelly stores, driver location, photo and GPS proof of delivery
-- [APC: Parcelly partnership expands to 2,500 stores](https://apc.co.uk/the-apc-expands-parcelly-partnership-to-2500-stores-across-the-uk/) – Parcelly network
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what the tracker reads from APC Choice and how it recognises the number
+- [APC: Receiving a Parcel](https://apc.co.uk/receiving-a-parcel/) – próximo dia útil, serviços, opções do APC Choice, local seguro, vizinho, entrega não realizada, retirada no depósito, três dias, alerta de phishing
+- [APC: APC Choice tracking and FAQ](https://apcchoice.apc-overnight.com/track-parcel) – número de remessa de 7 dígitos e onde encontrá-lo, status, janela de 2 horas, pausas no rastreamento, reagendar mais uma vez, endereços comerciais, danos pelo remetente
+- [APC: Contact Us](https://apc.co.uk/contact-us/) – formulário Customer Service Enquiry encaminhado ao depósito local
+- [APC: Depot Finder](https://apc.co.uk/depot-finder/) – contatos e horários do depósito pelo código postal
+- [APC: Terms and Conditions of Carriage](https://apc.co.uk/terms-conditions-of-carriage/) – prazos de indenização, limite de £100, embalagem, três dias úteis, comprovante de entrega
+- [APC: Home](https://apc.co.uk/) – desde 1994, mais de 90 depósitos associados, nome da empresa, National Sortation Centre
+- [APC: Our Products](https://apc.co.uk/our-products/) – lojas Parcelly, localização do motorista, comprovante de entrega com foto e GPS
+- [APC: Parcelly partnership expands to 2,500 stores](https://apc.co.uk/the-apc-expands-parcelly-partnership-to-2500-stores-across-the-uk/) – rede Parcelly
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o rastreador lê do APC Choice e como reconhece o número
 :::

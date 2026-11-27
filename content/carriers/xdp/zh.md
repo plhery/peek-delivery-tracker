@@ -21,7 +21,7 @@ XDP 未公开单号格式；其单号形态如下：
 
 XDP 查询页还会要求输入收件邮编或寄件邮编。邮编错误与单号拼写错误会显示完全相同的提示 `Consignment not found for consignment number`，因此请同时核对两项。
 
-英国没有其他快递公司使用 `ZDB` 开头的单号。[DPD UK](carrier:dpd-uk) 单号为 14 位数字，APC Overnight 运单号为 22 位数字；若商家邮件写明由它们承运，请前往对应承运商查询。更多内容见[运单号格式说明](guide:tracking-number-formats)（英文）。
+英国没有其他快递公司使用 `ZDB` 开头的单号。[DPD UK](carrier:dpd-uk) 单号为 14 位数字，[APC Overnight](carrier:apc-overnight) 运单号为 22 位数字；若商家邮件写明由它们承运，请前往对应承运商查询。更多内容见[运单号格式说明](guide:tracking-number-formats)（英文）。
 
 ## XDP 物流状态含义
 

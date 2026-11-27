@@ -21,7 +21,7 @@ A XDP não publica um formato; seus códigos têm esta aparência:
 
 O rastreador da XDP também solicita o código postal de entrega ou de coleta. Um código postal errado e um número digitado incorretamente devolvem a mesma resposta, `Consignment not found for consignment number`, então confira ambos.
 
-Nenhuma outra transportadora no Reino Unido usa o padrão `ZDB`. Um código da [DPD UK](carrier:dpd-uk) tem 14 dígitos e um da APC Overnight tem 22 dígitos; se o e-mail indicar uma delas, rastreie por lá. Veja mais em [formatos de código de rastreamento](guide:tracking-number-formats).
+Nenhuma outra transportadora no Reino Unido usa o padrão `ZDB`. Um código da [DPD UK](carrier:dpd-uk) tem 14 dígitos e um da [APC Overnight](carrier:apc-overnight) tem 22 dígitos; se o e-mail indicar uma delas, rastreie por lá. Veja mais em [formatos de código de rastreamento](guide:tracking-number-formats).
 
 ## O que significam os status de rastreamento da XDP
 

@@ -10,12 +10,12 @@ TForce Freight 是一家零担货运（LTL，less-than-truckload）承运商，�
 
 ## TForce Freight 运单号：PRO 单号
 
-TForce 官方查询页支持按 PRO 单号查询，也支持按提单号（BOL）或采购订单号（PO）配合发货日期范围查询；Peek 按 PRO 单号追踪。以下数字均为示例：
+TForce 官方查询页支持按 PRO 单号查询，也支持按提单号（BOL）或采购订单号（PO）配合发货日期范围查询；Peek 按 PRO 单号追踪。以下数字均为虚构：
 
-| 单号（示例编号） | 含义 |
+| 单号（虚构） | 含义 |
 | --- | --- |
 | `482917363` | PRO 单号：9 位数字，末位为校验位（前 8 位除以 7 的余数，因此必定是 0 至 6）。 |
-| `48291736` | 省略前导 `0` 的 PRO 单号。TForce 查询页会自动补 `0`，在 Peek 中选择 TForce Freight 后同样会自动补 `0`。 |
+| `48291736` | 省略前导 `0` 的 PRO 单号。TForce 查询页会补上 `0`；在 Peek 中选择 TForce Freight 后，Peek 也会补上。 |
 | `2205482917363` | 发往加拿大时供报关行使用的 PARS 编号：`2205` 后接 PRO 单号。整串粘贴即可，Peek 会提取其中的 PRO 向 TForce 查询。 |
 
 以 `7`、`8` 或 `9` 结尾的 9 位数字 PRO 单号必然存在输入错误。Peek 目录中也将 TForce Freight 识别为 UPS Freight 和 TForce。
@@ -50,7 +50,7 @@ TForce 的《零担运价规则》（LTL Rules Tariff UPGF 102-T，自 2026 年 
 
 - **住宅送货。** 在卡车合法可通行的住宅区域，TForce 须先与你或发货人约好日期与大致时间（居家经营的企业也按住宅计）。货物送至一楼入口、车库入口或车棚，或者你也可去其货运站自提。住宅送货属于额外收费项目，由下单方或运费支付方承担。
 - **车边卸货。** 标准送货仅卸至卡车旁；入户搬运（inside delivery）与尾板卸货（lift gate）均需额外付费，请向订舱方确认是否已包含。
-- **到货通知。** 若运单要求到货通知，TForce 通常会在货物到达末端服务中心的次工作日内通过电话或邮件通知收货人。
+- **到货通知。** 若运单要求到货通知，TForce 会在货物到达末端服务中心后的次一个工作日内通知收货人，通常通过电话或邮件。
 - **未能派送。** 若被拒收或联系不到收货人，TForce 会通知发货人货物已入库暂存，可能产生仓储费。除非你到服务中心自提，否则重新派送会收费（住宅地址仅在错过已预约日期时收费）。
 
 **发往加拿大。** 据 TForce 加拿大页面说明，美国发往加拿大的货物在边境经由报关行清关。若未能在边境放行，货物将暂存于目的地保税仓并产生仓储费；报关行代理费、关税及税费由登记进口商（importer of record）支付。
@@ -63,7 +63,7 @@ TForce 的《零担运价规则》（LTL Rules Tariff UPGF 102-T，自 2026 年 
 
 **不更新。** 处于“已揽收”或“运输中”且连续 4 天无新记录时，Peek 会以最后一条扫描的日期标出提示（如“自10月12日周一起没有物流更新”），附带“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 TForce Freight 查询。”以及“向 TForce Freight 寻求帮助”链接。请联系网店或发货方；详见[物流停止更新的原因](guide:tracking-not-updating)（英文）。
 
-**错过派送。** 出现 `Shipment not delivered.` 后，Peek 会提示“查看快递公司的后续安排”。请致电 TForce 或联系订舱方重新安排送货。另见[错过派送处理](guide:missed-delivery)（英文）。
+**派送未成功。** 出现 `Shipment not delivered.` 后，Peek 会提示“查看快递公司的后续安排”。请致电 TForce 或联系订舱方重新安排送货。另见[派送未成功怎么办](guide:missed-delivery)（英文）。
 
 **收货时少件或破损。** TForce 货运理赔指南强调每次收货都要当场检查并立即告知司机：
 
@@ -97,15 +97,15 @@ TForce 官网公布的联系渠道如下：
 
 ## 使用 Peek 跟踪 TForce Freight 货件
 
-仅凭 9 位数字无法断定属于 TForce Freight（同样符合 TNT 和 XPO）。直接粘贴即可：Peek 支持超过 4,500 家快递公司。在显示“正在查询物流服务…”期间，Peek 会同时询问这三家（若都查不到再询问 DPD Ireland 及物流查询服务）；若仅 TForce 有记录则显示“TForce Freight 有这个包裹的记录。”，多家均有记录时由你选择。对于 PARS 编号，Peek 会同时向 TForce 与 FAN Courier 查询；对于 8 位去零 PRO 单号，仅先询问物流查询服务。你也可以点击“更换”在“符合这个单号”下选择 TForce Freight，或在添加后使用“更换快递公司”。粘贴 TForce 查询链接（含 `proNumbers=`）或 UPS Freight 链接（含 `TrackProNumber=`）则会立刻识别为 TForce Freight（“识别出的快递公司”）。
+仅凭 9 位数字无法断定属于 TForce Freight（同样符合 TNT 和 XPO）。直接粘贴即可：Peek 可以跟踪超过 4,500 家快递公司。在显示“正在查询物流服务…”期间，Peek 会同时询问这三家（若都查不到再询问 DPD Ireland 及物流查询服务）；若仅 TForce 有记录则显示“TForce Freight 有这个包裹的记录。”，多家均有记录时由你选择。对于 PARS 编号，Peek 会同时向 TForce 与 FAN Courier 查询；对于 8 位 PRO 单号，Peek 只询问物流查询服务。你也可以点击“更换”在“符合这个单号”下选择 TForce Freight，或在添加后使用“更换快递公司”。粘贴 TForce 查询链接（含 `proNumbers=`）或 UPS Freight 链接（含 `TrackProNumber=`）则会立刻识别为 TForce Freight（“识别出的快递公司”）。
 
-Peek 仅凭 PRO 单号查询 TForce 官网，展示状态、每条记录的城镇与州/省、预计送达日、地图上的目的地国家、按你常用单位换算的重量，以及仅对你本人可见的收货人城镇和“收件人”姓名；发货人、预约详情、BOL 与 PO 编号及件数会被过滤，也不获取签收证明。点击“打开 TForce Freight 官网”可直接在官方页面打开你的单号（PARS 编号会自动打开其中的 PRO）。如果官方页面无法访问或弹出验证码，Peek 会改向[物流查询服务](guide:universal-tracker)（英文）获取轨迹。
+Peek 仅凭 PRO 单号查询 TForce 的查件系统，展示状态、每条记录的城镇与州/省、预计送达日、地图上的目的地国家、按你常用单位换算的重量，以及仅对你本人可见的收货人城镇和“收件人”姓名；发货人、预约详情、BOL 与 PO 编号及件数会被过滤，也不获取签收证明。点击“打开 TForce Freight 官网”会在 TForce 的查件页面打开你的单号（PARS 编号则打开其中的 PRO）。如果该查件系统无法访问或要求验证码，Peek 会改向[物流查询服务](guide:universal-tracker)（英文）获取轨迹。
 
 TForce 每条记录给的是当地服务中心时间但不带时区：Peek 按城镇所在时区解析（否则按州/省主时区、相邻记录、目的地，最后默认美东时间），并统一换算为你的设备本地时间。
 
-当你正在 Peek 中查看货件，或派送当天已开启通知时，Peek 最快每 10 分钟直接向 TForce 查询一次，并在 TForce 扫描出派送中当天从最新扫描所在时区（默认美东时间）早上 6 点起最快每 2 分钟查询一次。连续两天无新动态（或在“已生成面单”/“已揽收”停留满 12 小时）后改为每小时一次。你可以选择“每次扫描”、“重要环节”或“仅派送当天”提醒。Peek 无法代你联系 TForce、商家或发货人，也不能代为发起理赔。
+当你正在 Peek 中查看货件，或派送当天已开启通知时，Peek 最多每 10 分钟直接查询一次 TForce；在 TForce 扫描货件开始派送的当天，自最新扫描所在时区（默认美东时间）的早上 6 点起最多每 2 分钟查询一次。连续两天无新动态（或在“已生成面单”/“已揽收”停留满 12 小时）后改为每小时一次。Peek 可以按“每次扫描”、“重要环节”或“仅派送当天”通知你。Peek 无法代你联系 TForce、商家或发货人，也不能代为发起理赔。
 
-## TForce Freight 物流查询常见问题
+## 关于 TForce Freight 物流查询的问题
 
 ### 什么是 TForce Freight PRO 单号？
 
@@ -113,7 +113,7 @@ TForce 每条记录给的是当地服务中心时间但不带时区：Peek 按�
 
 ### 没有 PRO 单号能查 TForce Freight 吗？
 
-在 TForce 官网查询页可以，支持用提单号（BOL）或采购订单号（PO）加发货日期范围查询；Peek 仅支持按 PRO 单号追踪。
+在 TForce 官网查询页可以，支持用提单号（BOL）或采购订单号（PO）加发货日期范围查询；Peek 只按 PRO 单号跟踪。
 
 ### TForce Freight 提供住宅送货吗？
 
@@ -128,6 +128,6 @@ TForce 每条记录给的是当地服务中心时间但不带时区：Peek 按�
 美国与加拿大免费热线为 `(800) 333-7400`，其他地区请拨打 `(804) 231-8555`。
 
 :::sources
-- [Universal Parcel Scraper: TForce Freight](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/tforce-freight) – names, PRO shapes, links, wordings and stages, not-found answer, what Peek keeps, clocks
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – carriers sharing the shape, no hand-off, tracking services as a fallback
+- [Universal Parcel Scraper: TForce Freight](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/tforce-freight) – 名称、PRO 单号格式、链接、状态措辞与阶段、查无记录时的回应、Peek 保留的内容、时区
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – 同格式的承运商、不转交其他承运商、以物流查询服务作后备
 :::

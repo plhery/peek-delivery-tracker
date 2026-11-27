@@ -1,6 +1,6 @@
 ---
 title: Rastreamento TForce Freight: códigos PRO e status
-description: Rastreie cargas da TForce Freight nos EUA ou Canadá: formato do código PRO, significado das etapas de rastreamento, entregas residenciais e reclamações.
+description: Rastreie cargas da TForce Freight nos EUA ou Canadá: formato do código PRO, significado das etapas de rastreamento, entregas residenciais e pedidos de indenização.
 slug: tforce-freight-tracking
 published: 2026-11-26
 updated: 2026-11-26
@@ -26,7 +26,7 @@ Um PRO de nove dígitos terminado em `7`, `8` ou `9` tem erro de digitação. O 
 
 ## O que significam os status de rastreamento da TForce Freight
 
-O rastreador da TForce exibe um status ao lado do PRO (como `In Transit` ou `Delivered`) seguido do histórico, da linha mais recente para a mais antiga, com cidade e estado do centro de serviço, data e hora. Como não há códigos numéricos, o Peek interpreta o texto. Na ordem habitual:
+O rastreador da TForce exibe um status ao lado do PRO (como `In Transit` ou `Delivered`) seguido do histórico, da linha mais recente para a mais antiga, com cidade e estado do centro de serviço, data e hora. Como as linhas não trazem código, o Peek lê o texto delas. Na ordem em que a carga passa por elas:
 
 | A TForce Freight diz | O que significa para você | O Peek mostra |
 | --- | --- | --- |
@@ -36,7 +36,7 @@ O rastreador da TForce exibe um status ao lado do PRO (como `In Transit` ou `Del
 | `SHIPMENT HAS ARRIVED AT A SERVICE CENTER.` | Chegou a um centro de serviço no trajeto ou ao centro que fará sua entrega. | "Em trânsito" |
 | `SENT EMAIL. TFORCE FREIGHT IS ATTEMPTING TO OBTAIN APPOINTMENT INFORMATION` | A TForce enviou e-mail ao destinatário para agendar a entrega. Responda ao e-mail. | "Em trânsito" |
 | `A DELIVERY APPOINTMENT HAS BEEN SCHEDULED WITH THE CONSIGNEE.` | Data de entrega combinada (às vezes registrada depois da entrega). | "Em trânsito" |
-| `OUT FOR DELIVERY` | No caminhão para entrega hoje. | "Saiu para entrega" |
+| `OUT FOR DELIVERY` | No caminhão para entrega. | "Saiu para entrega" |
 | `Shipment not delivered. Delivery attempted after normal business hours. Tforce will attempt delivery on next business day we service this area.` | Não entregue nesta rota. Toda linha iniciada por `Shipment not delivered.` segue esse padrão, com o motivo em seguida. | "Tentativa de entrega" |
 | `SHIPMENT HAS BEEN DELIVERED TO THE CONSIGNEE.` | Entregue. A página da TForce informa quem assinou. | "Entregue" |
 
@@ -63,7 +63,7 @@ A tarifa de regras da TForce (*LTL Rules Tariff UPGF 102-T*, vigente desde 17 de
 
 **Sem atualização.** Após quatro dias sem nova movimentação em "Recebida pela transportadora" ou "Em trânsito", o Peek exibe "Sem atualizações desde seg 12 out", o texto "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando TForce Freight." e o link "Pedir ajuda a TForce Freight". Fale com a loja ou embarcador; veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
-**Tentativa perdida.** Após uma linha `Shipment not delivered.`, o Peek sinaliza "Confira os próximos passos da transportadora". Ligue para a TForce ou peça a quem contratou o frete para reagendar. Veja [entregas perdidas](guide:missed-delivery).
+**Entrega não realizada.** Após uma linha `Shipment not delivered.`, o Peek sinaliza "Confira os próximos passos da transportadora". Ligue para a TForce ou peça a quem contratou o frete para reagendar. Veja [entregas não realizadas](guide:missed-delivery).
 
 **Falta ou dano na entrega.** A página Cargo Claims Information da TForce orienta conferir tudo na hora e avisar o motorista imediatamente:
 
@@ -72,9 +72,9 @@ A tarifa de regras da TForce (*LTL Rules Tariff UPGF 102-T*, vigente desde 17 de
 - Não recuse a carga a menos que o dano tenha inutilizado totalmente os bens.
 - Peça ao responsável de Over, Short & Damage (OS&D) do centro de serviço local para rastrear volumes faltantes.
 
-**Dano descoberto depois.** Comunique em até **5 dias úteis** da entrega e solicite vistoria, mantendo a embalagem como chegou (o laudo de vistoria não substitui a reclamação formal).
+**Dano descoberto depois.** Comunique em até **5 dias úteis** da entrega e solicite vistoria, mantendo a embalagem como chegou (o laudo de vistoria não é um pedido de indenização).
 
-**Abrir reclamação.** A reclamação é um pedido formal por escrito feito pelo dono da mercadoria; em compras on-line, comece pela loja contratante. Regras da TForce:
+**Pedido de indenização.** O pedido de indenização é uma cobrança por escrito feita pelo dono da mercadoria; em compras on-line, comece pela loja contratante. Regras da TForce:
 
 - Envie em até **nove meses** da entrega (ou da data de expedição se nada chegou).
 - Use o Standard Claim Form da TForce ou carta indicando a remessa e o valor, acompanhados da fatura do fornecedor, conta do frete, conhecimento (BOL) e eventuais orçamentos de reparo, por correio ou fax (abaixo), nunca ambos.
@@ -88,7 +88,7 @@ Canais publicados nas páginas da TForce:
 
 - **Atendimento ao cliente:** `(800) 333-7400`, ligação gratuita nos EUA, Canadá, Guam, Porto Rico e Ilhas Virgens Americanas para rastreamento, comprovante e problemas; de outros países, `(804) 231-8555`.
 - **E-mail:** formulário Email TForce Freight Customer Support, acessível pela página Contact Us da TForce, com campo para o PRO.
-- **Departamento de sinistros:** `(888) 653-9720` para status de reclamações. Envie pedidos para `Claims Processing, TForce Freight, PO Box 1216, Richmond, VA 23218`, ou por fax para `(866) 580-1944`.
+- **Departamento de sinistros:** `(888) 653-9720` para saber a situação de um pedido de indenização. Envie os pedidos para `Claims Processing, TForce Freight, PO Box 1216, Richmond, VA 23218`, ou por fax para `(866) 580-1944`.
 - **Seu centro de serviço:** no Service Center Directory, em Service Information no site www.tforcefreight.com.
 
 A loja ou empresa remetente costuma resolver mais rápido por ser a contratante direta.
@@ -103,7 +103,7 @@ O Peek consulta o rastreador da TForce somente com o PRO, exibindo status, cada 
 
 A TForce informa cada etapa na hora local do centro de serviço, sem fuso: o Peek interpreta pelo fuso da cidade (ou do estado/província, linha vizinha, destino ou horário do Leste como padrão) e exibe tudo no fuso do seu aparelho.
 
-Com a carga aberta no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta a TForce diretamente até a cada 10 minutos, e até a cada 2 minutos a partir das 6h no relógio da última movimentação (horário do Leste por padrão) no dia em que sair para entrega. Após dois dias sem novidades (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Você pode escolher notificações para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não contata a TForce, a loja ou o embarcador nem abre reclamações por você.
+Com a carga aberta no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta a TForce diretamente até a cada 10 minutos, e até a cada 2 minutos a partir das 6h no relógio da última movimentação (horário do Leste por padrão) no dia em que sair para entrega. Após dois dias sem novidades (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Você pode escolher notificações para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não contata a TForce, a loja ou o embarcador nem faz pedidos de indenização por você.
 
 ## Perguntas sobre o rastreamento da TForce Freight
 
@@ -119,7 +119,7 @@ Na página da TForce, sim: pelo conhecimento (BOL) ou número de pedido (PO) com
 
 Sim, onde seus caminhões puderem circular legalmente, com cobrança adicional. A TForce combina antes data e janela aproximada com você ou o embarcador e entrega na entrada térrea, entrada da garagem ou abrigo de carro; entrega interna e plataforma elevatória também custam extra.
 
-### Qual é o prazo para abrir reclamação na TForce Freight?
+### Qual é o prazo para pedir indenização à TForce Freight?
 
 Nove meses a partir da entrega (ou da data de expedição se nada chegou). Danos percebidos após a entrega devem ser informados em até 5 dias úteis.
 
@@ -128,6 +128,6 @@ Nove meses a partir da entrega (ou da data de expedição se nada chegou). Danos
 `(800) 333-7400`, ligação gratuita nos EUA e Canadá. De outros países, `(804) 231-8555`.
 
 :::sources
-- [Universal Parcel Scraper: TForce Freight](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/tforce-freight) – names, PRO shapes, links, wordings and stages, not-found answer, what Peek keeps, clocks
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – carriers sharing the shape, no hand-off, tracking services as a fallback
+- [Universal Parcel Scraper: TForce Freight](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/tforce-freight) – nomes, formatos do PRO, links, textos e etapas, resposta de não encontrado, o que o Peek mantém, fusos horários
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – transportadoras com o mesmo formato, sem transferência, serviços de rastreamento como alternativa
 :::

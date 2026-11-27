@@ -19383,7 +19383,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "apc-overnight",
       "catalog": "apc-overnight",
       "slug": "apc-overnight-tracking",
-      "title": "APC Overnight 物流查询：单号格式、状态与错过派送处理",
+      "title": "APC Overnight 物流查询：单号格式、状态与派送未成功的处理",
       "name": "APC Overnight",
       "color": "#243269"
     },

@@ -1,15 +1,15 @@
 ---
 title: eBay tracking: sellers' carriers, numbers and delays
-description: Track an eBay order: who delivers it, how eBay International Shipping, GSP and SpeedPAK work, why tracking stalls and eBay's deadlines.
+description: Track an eBay order (US, UK, IE, CA, AU): Purchase history tracking, eBay International Shipping, GSP & SpeedPAK handovers, stalled scans and 30-day claims.
 slug: ebay-tracking
 picture: A parcel with a barcode label, a dotted route over a plane to a van, and Pip waiting beside it.
 published: 2026-10-17
-updated: 2026-11-09
+updated: 2026-11-27
 ---
 
-On eBay, every seller ships the order themselves, so the carrier depends on the seller and the postage service they picked: USPS, Royal Mail, Evri, Canada Post, Australia Post, or one of eBay's own programmes such as eBay International Shipping or SpeedPAK. The tracking number shows as a link in your Purchase history once the seller uploads it, and some cheap services have none. If the item hasn't arrived by the estimated delivery date, you have 30 days to report it under the eBay Money Back Guarantee.
+To track an **eBay** order, open your **Purchase history** (or **Purchases**) and click the carrier tracking link uploaded by the seller, or paste the number into [Peek](/). Because each seller ships independently, the carrier depends on the postage service chosen — USPS, UPS, FedEx, Royal Mail, Evri, An Post, Canada Post, Australia Post, or eBay's international hubs (eBay International Shipping, GSP and SpeedPAK). If an item misses its estimated delivery date, you have 30 days to report it under the eBay Money Back Guarantee.
 
-## Who delivers an eBay order?
+## Which carrier delivers my eBay order?
 
 The seller decides. Every listing's **Shipping** (or **Postage**) section shows the service the seller offers and where the item ships from. Labels bought on eBay come with tracking uploaded to your order automatically:
 
@@ -31,7 +31,7 @@ A number only counts for eBay when it's valid. eBay Australia spells it out: the
 
 Some services have no tracking at all. eBay Australia names two domestic ones: Australia Post Domestic Regular Letter Untracked and Priority Letter Untracked. With an untracked item, eBay shows only an estimated delivery date. No number in your order but the item is marked as shipped? Ask the seller to upload it.
 
-## eBay International Shipping, GSP and SpeedPAK: how do they work?
+## How do eBay International Shipping, GSP and SpeedPAK work?
 
 When you buy from abroad, the listing says whether the seller uses one of eBay's programmes. Each hands your parcel from one company to the next:
 
@@ -102,7 +102,7 @@ Each quiet spell has its reason:
 
 More on gaps in [why tracking stops updating](guide:tracking-not-updating).
 
-## What can I do if my eBay order hasn't arrived?
+## What to do if an eBay order hasn't arrived (30-day Money Back Guarantee)?
 
 Go in this order:
 
@@ -119,7 +119,7 @@ The same timings apply on ebay.com, ebay.co.uk, ebay.ie, ebay.ca and ebay.com.au
 
 The guarantee doesn't cover everything. It leaves out payments made partly outside eBay, a wrong address you gave at checkout, a courier or mail forwarding you arranged yourself, a parcel you refused (unless the seller hadn't paid enough postage), and one that couldn't be delivered because you didn't pay import charges. Those charges are covered when the seller said they were pre-paid, overstated the item's value or gave the wrong item location. Parcels forwarded by eBay's own programmes, such as GSP and eBay International Shipping, stay covered. Spotted a wrong address? Ask the seller to cancel the order before it ships; once it's sent, the address can't change, and eBay suggests collecting the parcel from the original address.
 
-## Tracking says delivered, but you don't have it?
+## eBay tracking says delivered, but no parcel arrived: what next?
 
 Before you report it, eBay suggests you:
 

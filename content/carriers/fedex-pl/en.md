@@ -1,12 +1,12 @@
 ---
 title: FedEx Poland tracking: 13-digit numbers and statuses
-description: Track a FedEx Poland domestic parcel: the 13-digit number, what Polish statuses like Przesyłka awizowana mean, and how to complain about a lost or damaged parcel.
+description: Track a FedEx Poland domestic parcel: 13-digit numbers starting with 6, Polish scans like Przesyłka awizowana, 7-day damage rules and UKE 12-month complaints.
 slug: fedex-poland-tracking
 published: 2026-10-22
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-FedEx Poland is FedEx's domestic courier network inside Poland. Its parcels have 13-digit numbers and a tracker of their own: track the number on FedEx's domestic tracking page (on fedex.com) or in the box above.
+To track a **FedEx Poland** domestic parcel, paste your 13-digit number starting with `6` (or a FedEx Poland domestic tracking link) into the box above, or use FedEx's Polish domestic tracking page on `fedex.com`. FedEx's worldwide tracker does not accept 13-digit FedEx Poland numbers, and Peek reads FedEx's Polish branch scans and delivery-day time windows directly.
 
 ## FedEx Poland tracking number: 13 digits
 
@@ -64,17 +64,25 @@ Peek reads FedEx's domestic tracking service directly. It shows the status, each
 
 ## Questions about FedEx Poland tracking
 
-### Why does my FedEx number have 13 digits?
+### Why does my FedEx Poland number have 13 digits?
 
-Because it's a FedEx Poland domestic parcel. FedEx's worldwide tracking page doesn't take 13 digits; other FedEx numbers, such as 12-digit ones, are tracked there.
+Because it's a FedEx Poland domestic parcel (13 digits starting with `6` and ending in a check digit). FedEx's worldwide tracking page doesn't take 13-digit domestic Polish numbers — only international formats such as 12-digit [FedEx](carrier:fedex) numbers work there.
 
-### Why doesn't FedEx's tracking page recognise my number?
+### Why doesn't FedEx Poland's tracker recognise my number?
 
-The page reports a number it doesn't know as not recognised, so check the 13 digits or ask the sender. A parcel delivered long ago can get the same answer, because the tracker drops old histories. Another version of the message sends you to FedEx's customer service instead: then the number may exist, but the page won't show it.
+FedEx's domestic page reports unknown or very old delivered numbers as not recognised, so check all 13 digits against the shop's email or ask the sender. If the message refers you to customer service instead, the parcel may exist without public web tracking.
+
+### What do Polish scans like `Przesyłka awizowana` or `Wydana do doręczenia` mean?
+
+`Wydana do doręczenia` (`Przesyłka wydana do doręczenia kurierowi FedEx.`) means the parcel is out with the courier today (often with a planned time window under `Planowane doręczenie w przedziale godzinowym`). `Nieudana próba doręczenia. Przesyłka awizowana.` means the courier missed you and left a notice, while `Zwrot przesyłki do nadawcy.` means it is returning to the sender.
+
+### How do I complain about a lost or damaged FedEx Poland parcel?
+
+If you bought online, contact the shop first — under Polish law (UOKiK), the shop stays responsible until delivery when it chose or offered FedEx. Report hidden damage within 7 days of delivery (for visible damage, refuse it or open it with the courier to write a *protokół szkody*). Under UKE postal rules, formal complaints can be filed within 12 months of posting; FedEx has 30 days to reply, with 14 days to appeal and free UKE ADR afterwards.
 
 ### Is a text asking me to pay for a FedEx delivery real?
 
-It may be a scam. CERT Polska (CSIRT NASK) warns of texts that pose as courier companies: they claim a delivery problem and link to a fake site that asks for an extra payment for redelivery, to steal card details. Don't use the link: type the number into the box above yourself and, if in doubt, contact FedEx through a phone number or email address from its official website, not from the text. Forward the whole text to 8080 (free from Poland; from abroad, at your operator's rate). If your card details are already on a fake site, contact your bank at once. See [delivery scam texts](guide:delivery-scam-texts).
+It may be a scam. CERT Polska (CSIRT NASK) warns of fake courier texts linking to phishing sites that demand an extra redelivery fee to steal card details. Type your number into the box above instead of tapping links, contact FedEx only via its official website, forward suspicious texts to `8080`, and alert your bank immediately if you entered card details. See [delivery scam texts](guide:delivery-scam-texts).
 
 :::sources
 - [Universal Parcel Scraper: FedEx Poland](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex-pl) – 13-digit numbers and check digit, the domestic tracker and its answers, statuses, proof of delivery, what Peek shows

@@ -1,12 +1,12 @@
 ---
 title: GLS Spain seguimiento: estados, Parcel Shop y teléfono
-description: Sigue tu paquete GLS en España: por qué te pide el código postal, qué significa cada estado, Parcel Shops y lockers, ausencias y cómo contactar con GLS.
+description: Seguimiento GLS Spain: número y código postal obligatorio, plazo 24 h, Parcel Shops y Lockers (10 500 puntos), WhatsApp y teléfono de contacto 910 80 62 29.
 slug: gls-spain-seguimiento
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-GLS Spain es la filial española del grupo GLS, la red de paquetería que compró ASM Transporte Urgente en 2016. Para seguir tu paquete, entra en «Seguimiento de envío» en la web de GLS o en la app My GLS y escribe el número de seguimiento junto con el código postal de destino: GLS pide los dos. El número te lo da la tienda que te envía el paquete.
+Para hacer el seguimiento de un paquete de **GLS Spain** (antigua ASM Transporte Urgente), introduce el número de envío junto con el **código postal de destino** en el recuadro de arriba, en «Seguimiento de envío» de la web de GLS o en la app My GLS: GLS exige ambos datos para mostrar el estado. Dentro de España peninsular el plazo estándar es de 24 horas laborables, y puedes redirigir gratis el paquete a uno de sus más de 10 500 Parcel Shops o Parcel Lockers.
 
 ## Número de seguimiento GLS: dónde encontrarlo
 
@@ -82,21 +82,25 @@ Peek no reconoce GLS Spain solo por el número, y sin el código postal GLS no d
 
 ## Preguntas sobre el seguimiento de GLS
 
-### ¿Dónde está mi paquete GLS?
+### ¿Cómo seguir un paquete de GLS Spain y por qué pide el código postal?
 
-Te lo dice el último estado del seguimiento de GLS, una vez escribes el número y el código postal de entrega. Si el repartidor no te encontró, la nota de paso indica dónde espera el paquete, normalmente en el Parcel Shop más cercano.
+Introduce el número de envío (9 o 10 cifras, o el código de barras de la etiqueta) junto con el código postal de destino en el cuadro de arriba, en la web de GLS o en My GLS. Sin el código postal correcto GLS no devuelve resultados, y el seguimiento en tiempo real se activa cuando quedan menos de 10 paradas.
 
-### ¿Cuánto tarda GLS en entregar?
+### ¿Cuánto tarda GLS en entregar y reparte los sábados?
 
-GLS da un plazo estándar de 24 horas laborables dentro de España desde que tiene el paquete, sin contar las islas. Para Europa, su plazo estándar es de 24 a 96 horas.
+El plazo estándar dentro de España peninsular es de 24 horas laborables desde que GLS recibe el paquete (24 a 96 horas hacia Europa), con reparto habitual de lunes a viernes de 9:00 a 20:00 aproximadamente. Los sábados solo reparte por la mañana si el remitente contrató el servicio Express Saturday.
 
-### ¿GLS entrega los sábados?
+### ¿Cómo redirigir un paquete de GLS a un Parcel Shop o Parcel Locker?
 
-Solo con el servicio Express Saturday, que contrata quien envía: entrega el sábado antes de mediodía. El resto de envíos se reparten de lunes a viernes.
+En la página de seguimiento pulsa «Recoger en punto de conveniencia» y elige un Parcel Shop (redirigir es gratis; hay más de 10 500 GLS Points), o hazlo por WhatsApp tras activar los avisos en My GLS. En Parcel Locker recibes un PIN por SMS, correo o My GLS y dispones de 7 días naturales (GLS recomienda recogerlo en 48 horas).
 
-### ¿GLS es lo mismo que ASM?
+### ¿Cuál es el teléfono de atención al cliente de GLS Spain?
 
-GLS compró ASM: en abril de 2016 anunció la compra de ASM Transporte Urgente, entonces «la segunda mayor red de transporte urgente del país».
+El teléfono para destinatarios es `+34 910 80 62 29` (lunes a viernes de 9:00 a 14:00 y de 16:00 a 19:00, hora peninsular). También atienden gratis mediante el asistente virtual Gisela en su web y por mensaje privado en Facebook (`@GLSSpain`), Instagram (`@gls_spain`) o X (`@GLS_clientes`) de lunes a viernes de 9:00 a 18:00.
+
+### ¿GLS es lo mismo que ASM y cómo reconocer avisos falsos?
+
+Sí: GLS anunció en abril de 2016 la compra de ASM Transporte Urgente. GLS advierte de que nunca pide datos de pago por SMS o correo para confirmar una entrega ni usa números 807; sus correos salen de `@gls-spain.es`, `@mail.gls-spain.es`, `@comunicaciones.gls-spain.com` o `@gls-spain.com`.
 
 :::sources
 - [GLS Spain: Preguntas frecuentes - Recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – número de la tienda, estados, intentos, identificación, daños, asistente virtual («Consulta»), plazos, sábados

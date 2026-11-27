@@ -1,15 +1,15 @@
 ---
 title: Suivi de colis eBay : transporteurs, numéros et retards
-description: Qui livre ta commande eBay, comment fonctionnent la Livraison internationale eBay et SpeedPAK, pourquoi le suivi bloque et les délais d'eBay.
+description: Suivre un colis eBay (France, Belgique, Suisse) : numéro dans l'Historique des achats, Livraison internationale eBay, SpeedPAK, suivi bloqué et garantie 30 jours.
 slug: suivi-colis-ebay
 picture: Un colis avec une étiquette à code-barres, un trajet en pointillés qui passe par un avion jusqu'à une camionnette, et Pip qui attend à côté.
 published: 2026-10-17
-updated: 2026-11-09
+updated: 2026-11-27
 ---
 
-Sur eBay, chaque vendeur envoie lui-même la commande : le transporteur dépend donc du vendeur et du service qu'il a choisi, comme La Poste, Colissimo, Mondial Relay, Chronopost, ou l'un des programmes d'eBay, comme la Livraison internationale eBay ou SpeedPAK. Le numéro de suivi apparaît en lien dans ton Historique des achats dès que le vendeur l'ajoute, et certains envois bon marché n'en ont pas. Si l'objet n'est pas arrivé à la date de livraison estimée, tu as 30 jours pour le signaler avec la Garantie client eBay.
+Pour suivre un colis **eBay** (France, Belgique ou Suisse), ouvre ton **Historique des achats** et clique sur le numéro de suivi ajouté par le vendeur, ou copie-le dans [Peek](/). Comme chaque vendeur expédie lui-même, le transporteur varie — La Poste, Colissimo, Mondial Relay, Chronopost, UPS, ou les programmes internationaux Livraison internationale eBay, GSP et SpeedPAK — et si le colis n'arrive pas à la date estimée, la Garantie client eBay te laisse 30 jours pour le signaler.
 
-## Qui livre une commande eBay ?
+## Qui livre ma commande eBay (La Poste, Mondial Relay, Packlink) ?
 
 C'est le vendeur qui choisit. Dans chaque annonce, la partie **Livraison** indique le service proposé et d'où part l'objet. Quand le vendeur achète son bordereau sur eBay, le numéro de suivi est chargé tout seul dans ta commande :
 
@@ -30,7 +30,7 @@ Pour eBay, tous les numéros ne se valent pas. Pour prouver une livraison, il fa
 
 Certains envois n'ont aucun suivi. Pour en avoir un, eBay précise que « le vendeur doit utiliser un service de livraison avec suivi » et ajouter le numéro du transporteur. Sinon, tu ne vois qu'une date de livraison estimée. L'objet est marqué comme envoyé, mais sans numéro ? Demande au vendeur de l'ajouter.
 
-## Livraison internationale eBay, Service de livraison internationale et SpeedPAK : comment ça marche ?
+## Comment fonctionnent Livraison internationale eBay, GSP et SpeedPAK ?
 
 Quand tu achètes à l'étranger, l'annonce indique si le vendeur passe par un programme d'eBay. Chacun fait passer ton colis d'une société à l'autre :
 
@@ -100,7 +100,7 @@ Chaque silence a sa raison :
 
 Plus d'explications dans [pourquoi le suivi ne bouge plus](guide:tracking-not-updating).
 
-## Que faire si ma commande eBay n'est pas arrivée ?
+## Colis eBay pas arrivé : comment demander un remboursement (30 jours) ?
 
 Dans cet ordre :
 
@@ -117,7 +117,7 @@ Une fois prévenu, le vendeur a 3 jours ouvrables pour te donner des nouvelles d
 
 La Garantie client eBay ne couvre pas tout. Elle exclut un objet payé en partie en dehors d'eBay (virement, espèces, mandat), un service de réexpédition que tu as choisi toi-même, et un colis bloqué parce que les frais d'importation n'ont pas été payés. Ces frais restent couverts si le vendeur les avait annoncés prépayés. Tu n'es pas couvert non plus si tu n'as pas retiré l'objet au point de retrait dans le délai imparti : voir [colis non retiré](guide:uncollected-parcel). Les colis passés par la Livraison internationale eBay ou le Service de livraison internationale restent couverts. Tu t'es trompé d'adresse ? Demande au vendeur d'annuler la commande tant qu'il n'a pas envoyé l'objet. Ensuite, il ne peut plus changer l'adresse, et eBay conseille de récupérer le colis à l'adresse d'origine.
 
-## Le suivi dit livré, mais tu n'as rien reçu ?
+## Suivi eBay marqué « Livré » mais colis non reçu : que faire ?
 
 eBay conseille d'abord de demander à un voisin : il a peut-être accepté le colis pendant ton absence. Toujours rien ? Préviens le vendeur comme plus haut, dans les mêmes 30 jours.
 

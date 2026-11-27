@@ -1,12 +1,12 @@
 ---
 title: Suivi colis JS Express : numéro JSE, statuts et livraison
-description: Suivre un colis JS Express (急速国际) venu de Chine : le numéro JSE…YQ, ce que veulent dire ses scans et qui livre en France, en Belgique et en Suisse.
+description: Suivre un colis JS Express (numéro JSE…YQ) depuis la Chine : livraison Colissimo/poste locale, statuts douane (3 € et 2 € UE), délais et réclamations 30 jours.
 slug: js-express-suivi
 published: 2026-11-17
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-JS Express (急速国际, aussi JS EXP) est une société logistique chinoise destinée aux boutiques en ligne transfrontalières, exploitée à Suzhou par 急创速供应链管理（苏州）有限公司. Si un vendeur a expédié ta commande avec JS Express, ton numéro commence par JSE et finit par YQ : colle-le dans le champ ci-dessus. JS Express achemine le colis hors de Chine jusqu'à ton pays, puis un transporteur local prend le relais ; en France, son suivi reprend parfois en français les scans de [Colissimo](carrier:la-poste).
+Pour suivre un colis **JS Express** (急速国际, aussi *JS EXP*), colle dans le champ ci-dessus le numéro de 17 caractères commençant par `JSE` et finissant par `YQ`, ou utilise la page anglaise « Express Query » de `js-exp.com`. Exploité à Suzhou pour les boutiques en ligne transfrontalières, JS Express achemine les colis hors de Chine puis passe le relais à un transporteur local (en France, son suivi reprend souvent en français les scans de [Colissimo](carrier:la-poste)).
 
 ## Numéro de suivi JS Express : à quoi il ressemble
 
@@ -128,25 +128,25 @@ Tant que tu gardes le colis ouvert, ou le jour de sa livraison avec les notifica
 
 ## Questions fréquentes sur le suivi JS Express
 
-### C'est quoi, JS Express (急速国际) ?
+### Comment suivre un colis JS Express avec un numéro JSE…YQ ?
 
-Une entreprise logistique chinoise spécialisée dans le e-commerce transfrontalier, exploitée par 急创速供应链管理（苏州）有限公司. Elle indique avoir été enregistrée à Hong Kong en 2010 et avoir ouvert son centre d'opérations à Suzhou en 2011.
+Colle le numéro complet de 17 caractères (`JSE`, deux lettres, dix chiffres et `YQ`) dans le champ en haut de cette page, ou saisis-le sur la page anglaise « Express Query » de `js-exp.com` (la page chinoise exige d'abord un code image).
 
-### Où suivre un colis JS Express ?
+### Qui est JS Express (急速国际) et qui livre en France, Belgique ou Suisse ?
 
-Dans le champ en haut de cette page, ou sur la page anglaise « Express Query » du site js-exp.com. La page chinoise demande d'abord un code image.
+C'est une société logistique chinoise d'e-commerce transfrontalier (enregistrée à Hong Kong en 2010, centre à Suzhou ouvert en 2011). À l'arrivée, un transporteur local assure le dernier kilomètre : en France, l'historique JS Express reprend les scans en français de Colissimo ; en Belgique et en Suisse, lorsque la fiche contient un numéro postal international, Peek interroge bpost ou La Poste suisse (sinon demande le nom du livreur au vendeur).
 
-### Que veut dire 未获取到任何数据 sur le suivi JS Express ?
+### Que veut dire 未获取到任何数据 ou « No track data for now! » sur JS Express ?
 
-« Aucune donnée trouvée » : le suivi de JS Express ne connaît pas ce numéro, soit à cause d'une faute de frappe, soit parce que JS Express n'a pas encore reçu l'envoi. Vérifie le numéro auprès du vendeur.
+`未获取到任何数据` signifie « aucune donnée trouvée » : JS Express ne connaît pas encore ce numéro (faute de frappe ou colis pas encore déposé). `No track data for now!` indique qu'aucun scan n'existe encore ; vérifie le numéro auprès de la boutique.
 
-### Qui livre les colis JS Express en France, en Belgique et en Suisse ?
+### Quels frais de douane s'appliquent sur un colis JS Express (UE et Suisse) ?
 
-Un transporteur local dans ton pays. En France, l'historique de JS Express montre les scans en français de Colissimo. En Belgique et en Suisse, l'historique connu de Peek ne nomme pas le livreur : si la fiche contient un numéro postal international, Peek interroge bpost ou La Poste suisse ; sinon, demande au vendeur qui livre ta commande.
+Dans l'UE (France, Belgique), les achats à distance importés jusqu'à 150 € supportent un droit forfaitaire de 3 € par type de produit depuis le 1er juillet 2026 et des frais de traitement européens de 2 € par type de produit depuis le 1er novembre 2026 quelle que soit la valeur (la ligne Europe de JS Express est vendue en mode DDP avec TVA préperçue auprès du vendeur). En Suisse, l'OFDF précise que le transporteur assure le dédouanement et reste ton interlocuteur.
 
-### Qui contacter si mon colis JS Express n'arrive pas ?
+### Qui contacter si mon colis JS Express est bloqué ou perdu ?
 
-La boutique où tu as passé commande : c'est elle qui a expédié le colis avec JS Express et qui peut déposer une réclamation dans le délai de 30 jours. Le numéro 400-0353-518 de JS Express est une ligne chinoise.
+Contacte la boutique où tu as commandé : seul le vendeur peut déposer une réclamation écrite auprès de JS Express dans les 30 jours suivant la réception du colis par le transitaire. La ligne 400-0353-518 de JS Express est un numéro chinois.
 
 :::sources
 - [JS Express : 急速国际 (accueil)](https://www.js-exp.com/) – société exploitante

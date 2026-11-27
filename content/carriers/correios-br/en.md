@@ -1,12 +1,12 @@
 ---
 title: Correios Brazil tracking: codes, statuses and customs
-description: Track a Correios parcel to or from Brazil: what BR codes look like, what the Portuguese statuses mean, import taxes, Minhas Importações and contacts.
+description: Track a Correios Brazil parcel in English: 13-character BR codes, Portuguese status translations, Minhas Importações taxes (Remessa Conforme), CPF and SAC.
 slug: correios-brazil-tracking
 published: 2026-10-23
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Correios (Empresa Brasileira de Correios e Telégrafos) is Brazil's post. A parcel sent from Brazil keeps its Correios code all the way, and the post of the country it's going to delivers it. A parcel bought abroad keeps the sending post's code, and Correios delivers it in Brazil. Track it on [Correios' tracker](https://rastreamento.correios.com.br/app/index.php), which takes up to 20 codes or a CPF or CNPJ and asks you to type the text from an image, or paste the code in the box above.
+Correios (*Empresa Brasileira de Correios e Telégrafos*) is Brazil's national post. Outbound parcels keep their 13-character `BR` code for delivery by the destination country's post, while inbound parcels from abroad are delivered in Brazil under the sending post's code. Track up to 20 codes (or a CPF/CNPJ) on [Correios' tracker](https://rastreamento.correios.com.br/app/index.php) or paste the code in the box above. Below: English translations of Portuguese statuses, Minhas Importações and Remessa Conforme taxes, and customer service numbers.
 
 ## Correios tracking code: what it looks like
 
@@ -112,19 +112,23 @@ While you have the parcel open in Peek, or on its delivery day with notification
 
 ### What does "Objeto em transferência - por favor aguarde" mean?
 
-"Item in transfer, please wait": the parcel is on its way between two Correios units in Brazil, and there's nothing for you to do yet.
+"Item in transfer, please wait": your parcel is travelling between two Correios sorting or delivery units inside Brazil, and no action is needed yet.
 
 ### Why does my Correios parcel say "Aguardando pagamento"?
 
-Taxes or Correios' fee are due. Pay by boleto or Pix in Minhas Importações or the Correios app within 20 calendar days, or the parcel goes back abroad.
+Import taxes or Correios' Despacho Postal fee are due. Pay by boleto or Pix inside [Minhas Importações](https://portalimportador.correios.com.br) or the Correios app within 20 calendar days, or the parcel is returned abroad.
+
+### How do Remessa Conforme taxes and Minhas Importações work?
+
+On sites certified in Remessa Conforme (PRC), taxes are collected at checkout (0% duty up to US$50, or 60% minus US$30 above US$50 for declarations since 12 May 2026, plus 17–20% state ICMS). On non-PRC purchases, Receita Federal charges 60% import duty plus ICMS and Correios' fee via Minhas Importações, where you link your CPF and can request a "Revisão de Tributos" before generating payment.
 
 ### How long does Correios take to deliver?
 
-It depends on the service and, in Brazil, the postcode (CEP); Correios' tracking shows a delivery forecast. For a parcel from abroad, the time counts from `Saída do Centro Internacional`, once customs has released it.
+Transit time depends on the service and destination postcode (CEP), with a delivery forecast shown in Correios' tracker; for inbound international parcels, domestic timing starts from `Saída do Centro Internacional` after customs clearance.
 
-### Can I track a Correios parcel outside Brazil?
+### Can I track a Correios parcel outside Brazil and how do I contact SAC?
 
-Yes, with the same code: on Correios' tracker, then on your own post's tracker once it arrives.
+Yes — use the same 13-character code on Correios' tracker and then on your destination post's tracker once it arrives. Correios SAC is 4003 8210 (capitals/mobiles), 0800 881 8210 (other landlines), WhatsApp (11) 4003-8210 and [Fale Conosco](https://faleconosco.correios.com.br/inicio); outside Brazil, ask the sender to claim.
 
 :::sources
 - [Correios: Rastreamento](https://rastreamento.correios.com.br/app/index.php) – tracker, 20 codes or a CPF or CNPJ, image check

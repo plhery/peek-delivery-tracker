@@ -1,15 +1,15 @@
 ---
 title: Oszustwo na paczkę: jak rozpoznać fałszywy SMS
-description: Jak rozpoznać fałszywy SMS o paczce, co naprawdę wysyłają DPD i Poczta Polska, gdzie zgłosić phishing i co zrobić po kliknięciu w link.
+description: Fałszywy SMS o paczce i dopłacie (DPD, Poczta Polska, InPost): jak rozpoznać oszustwo, gdzie zgłosić phishing (numer 8080 i CERT) oraz co zrobić po kliknięciu.
 slug: oszustwo-paczka-falszywy-sms
 picture: Telefon z wiadomością z trójkątem ostrzegawczym i haczykiem wędki na linku, przekreślona moneta i zmartwiony Pip z uniesioną dłonią „stop” w dymku.
 published: 2026-10-14
-updated: 2026-10-28
+updated: 2026-11-27
 ---
 
-Jeśli SMS albo e-mail informuje, że twoja paczka czeka na dopłatę, wróci do nadawcy albo wymaga poprawienia adresu, i podsuwa link, żeby to załatwić, to prawie na pewno oszustwo. Nie klikaj: sam otwórz stronę albo aplikację przewoźnika i sprawdź numer przesyłki z e-maila od sklepu. Jeśli dane karty są już wpisane na stronie z linku, od razu zadzwoń do banku. Kartę zastrzeżesz też pod numerem +48 828 828 828, jeśli twój bank uczestniczy w Systemie Zastrzegania Kart.
+SMS albo e-mail z prośbą o dopłatę do paczki (często ok. 1 zł), poprawienie adresu lub uniknięcie zwrotu i z linkiem do płatności to niemal na pewno oszustwo phishingowe. Nie klikaj: otwórz samodzielnie stronę albo aplikację przewoźnika i sprawdź prawdziwy numer przesyłki z e-maila ze sklepu. Jeśli wpisałeś dane karty, natychmiast zadzwoń do banku lub zastrzeż ją pod numerem +48 828 828 828, a fałszywy SMS przekaż bezpłatnie na 8080.
 
-## Jak rozpoznać fałszywy SMS o paczce?
+## Jak rozpoznać fałszywy SMS o paczce i dopłacie?
 
 Fałszywka zwykle ma kilka z tych cech:
 
@@ -36,7 +36,7 @@ Linki oszustów często zaczynają się od nazwy przewoźnika. Do kogo naprawdę
 
 Nawet gdy link wygląda dobrze, nie korzystaj z niego: sam wpisz adres przewoźnika.
 
-## Czy przewoźnicy naprawdę wysyłają SMS-y?
+## Co naprawdę wysyłają SMS-em DPD Polska i Poczta Polska?
 
 Tak, większość wysyła, i właśnie dlatego fałszywki działają. Oto co DPD i Poczta Polska piszą o swoich wiadomościach:
 
@@ -47,7 +47,7 @@ Tak, większość wysyła, i właśnie dlatego fałszywki działają. Oto co DPD
 
 Zasady [InPostu](carrier:inpost) i [DHL](carrier:dhl-ecommerce-pl) sprawdzisz na ich stronach. Prawdziwi przewoźnicy wysyłają linki, więc sam link niczego nie przesądza. Prawdziwe prośby o zapłatę też się zdarzają, prawie zawsze za cło i podatki przy paczkach spoza UE: jak przewoźnicy naprawdę o nie proszą, pokazuje poradnik [o paczce zatrzymanej przez urząd celny](guide:customs).
 
-## Oszustwo na paczkę: co piszą oszuści?
+## Najczęstsze oszustwa na paczkę: dopłata, błędny adres i OLX
 
 Scenariusze się powtarzają. Te pochodzą ze stron ostrzegawczych przewoźników i policji:
 
@@ -58,7 +58,7 @@ Scenariusze się powtarzają. Te pochodzą ze stron ostrzegawczych przewoźnikó
 - **Załącznik.** E-mail z „potwierdzeniem nadania” albo „listem przewozowym” w załączniku (DPD).
 - **„Dostawa DPD” na OLX.** Sprzedajesz coś, a „kupujący” pisze na portalu albo na WhatsAppie, że płatność i wysyłkę obsługuje DPD, i przysyła link do „odebrania pieniędzy” (DPD).
 
-## Jak sprawdzić, czy SMS o paczce jest prawdziwy
+## Jak bezpiecznie sprawdzić, czy SMS o przesyłce jest prawdziwy?
 
 Żaden z tych kroków nie korzysta z wiadomości:
 
@@ -92,7 +92,7 @@ Sam SMS w telefonie nic ci nie zrobi. Kłopot zaczyna się, gdy klikniesz, odpow
 
 Telefon „z banku” może wyglądać wiarygodnie. Związek Banków Polskich, policja i FinCERT ostrzegają, że oszuści potrafią wyświetlić na twoim ekranie numer infolinii banku albo jego nazwę, więc nie oddzwaniaj na ostatnie połączenie.
 
-## Fałszywy SMS o paczce: gdzie zgłosić oszustwo?
+## Gdzie zgłosić fałszywy SMS o paczce (8080, CERT Polska, policja)?
 
 Zgłoś fałszywą wiadomość, nawet bez klikania w link, a potem ją usuń.
 

@@ -1,12 +1,12 @@
 ---
 title: Omniva siuntų sekimas: statusai, paštomatai ir kontaktai
-description: Sekite Omniva siuntą Lietuvoje: kaip atrodo siuntos numeris, ką reiškia statusai, kiek siunta laukia paštomate, kaip pristato kurjeris ir kur kreiptis.
+description: Omniva siuntų sekimas Lietuvoje: JJEE ir EE numeriai, statusų reikšmės, 4 dienų saugojimas paštomate, kurjerio pristatymas, muitinė ir tel. +370 700 55077.
 slug: omniva-siuntu-sekimas
 published: 2026-10-23
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Omniva – logistikos ir technologijų bendrovė, kurios paštomatai ir kurjeriai pristato siuntas Lietuvoje, Latvijoje ir Estijoje. Lietuvoje paslaugas teikia Omniva LT, UAB. Siuntą sekite svetainėje [mano.omniva.lt](https://mano.omniva.lt/track), OMNIVA programėlėje arba tiesiog įklijuokite numerį į laukelį viršuje. Sekimo numerį rasite Omniva SMS žinutėje ar el. laiške apie siuntą, o jei pirkote internetu – ir parduotuvės laiške apie išsiuntimą.
+Omniva (Lietuvoje – Omniva LT, UAB) pristato siuntas paštomatais ir kurjeriais Lietuvoje, Latvijoje ir Estijoje. Sekite savo `JJEE` ar `EE` siuntos kodą svetainėje [mano.omniva.lt](https://mano.omniva.lt/track), OMNIVA programėlėje arba laukelyje viršuje. Žemiau paaiškiname angliškus statusus, 4 dienų saugojimą paštomate ir pratęsimą, peradresavimą, muitinės mokesčius (3 € + 2 €) bei kontaktus.
 
 ## Omniva siuntos numeris
 
@@ -104,21 +104,25 @@ Peek rodo Omniva būsenas angliškai, kaip lentelėje aukščiau, kiekvieno žin
 
 ## Dažni klausimai apie Omniva siuntų sekimą
 
-### Kiek laiko keliauja Omniva siunta?
+### Kiek laiko keliauja Omniva siunta Lietuvoje ir tarp Baltijos šalių?
 
-Omniva nurodo, kad nuo tada, kai siunta perduodama Omniva, į paštomatą toje pačioje šalyje ji keliauja 1–2 darbo dienas, o tarp Baltijos šalių – 2–3 darbo dienas. Kurjeriai pristato kitą darbo dieną, bet ne vėliau nei per 3 darbo dienas, išskyrus sekmadienius ir valstybines šventes. Siuntos kelionė iš užsienio iki Omniva į šiuos terminus neįeina.
+Nuo perdavimo Omniva į paštomatą Lietuvoje siunta keliauja 1–2 darbo dienas, tarp Baltijos šalių – 2–3 darbo dienas, o kurjeriai pristato kitą darbo dieną (ne vėliau nei per 3 darbo dienas, išskyrus sekmadienius ir šventes). Kelionė iš užsienio iki Omniva į šiuos terminus neįskaičiuojama.
 
-### Kiek laiko siunta laukia Omniva paštomate?
+### Kiek laiko siunta laukia Omniva paštomate ir kaip pratęsti saugojimą?
 
-4 kalendorines dienas. Savitarnoje laiką galite pratęsti iki 4 dienų vienu metu, už mokestį, iš viso iki 12 dienų. Neatsiimta siunta grąžinama siuntėjui.
+4 kalendorines dienas. Savitarnoje saugojimą galima pratęsti už mokestį iki 4 dienų vienu kartu (iš viso iki 12 dienų); neatsiimta siunta grąžinama siuntėjui jo sąskaita.
 
 ### Ar galima sekti Omniva siuntą pagal telefono numerį?
 
-Omniva puslapiuose aprašytas sekimas tik pagal siuntos numerį. Omniva siūlo susikurti paskyrą savitarnoje ir sekti visas būsimas siuntas vienoje vietoje, o OMNIVA programėlę reklamuoja šūkiu „Jokių sekimo numerių!“.
+Omniva puslapiuose aprašytas sekimas pagal siuntos numerį, tačiau susikūrus paskyrą savitarnoje arba naudojant OMNIVA programėlę būsimas siuntas galima matyti vienoje vietoje.
 
-### Ką reiškia „Delivery attempt made“?
+### Ką reiškia „Delivery attempt made“ Omniva sekime?
 
-Kurjeris bandė siuntą pristatyti, bet nepavyko. Omniva bando bent du kartus, po kartą per dieną. Jei su jumis nepavyksta susitarti, S–L dydžio siunta keliauja į netoliese esantį paštomatą.
+Kurjeris bandė pristatyti siuntą, bet nepavyko. Omniva bando bent du kartus (po kartą per dieną); jei nepavyksta susitarti, S–L dydžio siunta 4 dienoms keliauja į netoliese esantį paštomatą, o XL grąžinama siuntėjui.
+
+### Koks Omniva klientų aptarnavimo numeris ir kur kreiptis dėl pažeistos siuntos?
+
+Skambinkite +370 700 55077 (I–V 8.00–18.00, VI 9.00–15.00) arba rašykite info@omniva.lt. Dėl pažeistos ar dingusios siuntos pirmiausia kreipkitės į pardavėją (raštu Omniva galima pranešti per 6 mėnesius nuo perdavimo Omniva), o ginčus nemokamai nagrinėja RRT.
 
 :::sources
 - [Omniva: Sveiki!](https://www.omniva.lt/) – sukčių įspėjimas, OMNIVA programėlė, durelių kodas ir sekimo numeris, prioritetinis paštomatas ir skiltis „Prioritetiniai paštomatai“, kodėl siunta nukreipta

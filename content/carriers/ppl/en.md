@@ -1,12 +1,12 @@
 ---
 title: PPL tracking: shipment numbers, statuses and Parcelshops
-description: Track a PPL parcel in Czechia: the 11-digit shipment number, what PPL's English statuses mean, Parcelshops, Parcelboxes, missed deliveries and contacts.
+description: Track a PPL CZ parcel in Czechia in English: 11-digit shipment number, status meanings, Parcelshop (7 days) and Parcelbox (72h) pickup, mojePPL and support.
 slug: ppl-tracking
 published: 2026-10-12
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-PPL (PPL CZ) is a Czech parcel carrier, part of DHL Group, that delivers to homes, Parcelshops and Parcelboxes across Czechia. Track a parcel with its 11-digit shipment number on [PPL's tracking page](https://www.ppl.cz/en/track-a-shipment), in the mojePPL app, or in the box above, then pick PPL. The number comes from the shop's shipping email or order page, or from PPL's own email and SMS.
+PPL (PPL CZ) is a Czech parcel carrier in DHL Group delivering across Czechia to homes, Parcelshops, 24/7 Parcelboxes and partner lockers such as AlzaBox. Track your 11-digit shipment number in English on [PPL's tracking page](https://www.ppl.cz/en/track-a-shipment), in the mojePPL app, or in the box above (pick PPL). Below: what PPL's English statuses mean, storage limits and extensions, missed-delivery rules and claims.
 
 ## PPL tracking number and where to find it
 
@@ -88,21 +88,25 @@ Peek can notify you of "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about PPL tracking
 
-### Can I track PPL in English?
+### Can I track a PPL CZ parcel in English?
 
-Yes. PPL's tracking and help pages have English versions, with English statuses.
+Yes. Both [ppl.cz/en/track-a-shipment](https://www.ppl.cz/en/track-a-shipment) and PPL's help pages have English versions with English statuses, and Peek reads PPL's English history directly.
 
-### Is there a PPL tracking app?
+### How long does PPL hold a parcel at a Parcelshop or Parcelbox?
 
-Yes, mojePPL for Android and iOS. It tracks parcels, changes the delivery place, sets a favourite pickup point, extends Parcelbox storage, pays cash on delivery online and shows the PIN for picking up.
+PPL holds parcels for 7 calendar days at a Parcelshop, up to 72 hours in a PPL Parcelbox (extendable in mojePPL by 2, 4 or 6 days up to 30 extra calendar days) and 48 hours in a third-party box or AlzaBox. Between 1 October and 31 January, PPL's terms allow shorter storage without extension, so check the deadline in your SMS or email.
 
 ### What is the difference between a PPL Parcelshop and a Parcelbox?
 
-A Parcelshop is a shop that hands out parcels during its opening hours. A Parcelbox is a self-service locker open 24/7 that takes card payments only.
+A Parcelshop is a staffed shop open during its store hours (and may lack a card terminal for cash on delivery). A Parcelbox is a 24/7 self-service locker that accepts card payments only and opens with your PIN.
 
-### Is PPL the same as DHL?
+### Is there a PPL tracking app?
 
-Not quite: PPL is a Czech carrier that has been part of DHL Group since 2006 and delivers across Europe with DHL. It has its own tracking and 11-digit numbers.
+Yes: mojePPL (Android and iOS) lists parcels linked to your email, redirects deliveries to a pickup point, sets a favourite pickup point, extends Parcelbox storage, pays cash on delivery online and shows your pickup PIN.
+
+### Is PPL the same as DHL, and how do I contact PPL?
+
+PPL CZ is a Czech carrier in DHL Group since 2006 with its own 11-digit tracker. PPL publishes no recipient phone line: use the 24/7 chatbot on ppl.cz, the [Contact form](https://www.ppl.cz/en/contact-form), or [PPL's claims form](https://www.ppl.cz/en/claims) within 7 calendar days for damaged contents.
 
 :::sources
 - [PPL CZ: Customer service](https://www.ppl.cz/en/customer-service) – 11-digit number, emails, change to a pickup point, missed delivery, holding times, cash on delivery, damage, complaints, fraud, chatbot

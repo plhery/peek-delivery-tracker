@@ -1,12 +1,12 @@
 ---
 title: Shiprocket tracking: AWB numbers, statuses and RTO
-description: Track a Shiprocket or ShiprocketX parcel: what the AWB looks like, what each status means, failed deliveries and RTO, and who to ask when it stalls.
+description: Track a Shiprocket or ShiprocketX parcel: 832 AWB format, what Connection Aligned, NDR and RTO mean, courier handover (Delhivery, USPS) and support numbers.
 slug: shiprocket-tracking
 published: 2026-10-21
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Shiprocket, based in Gurugram, is an Indian shipping platform, not a courier: online sellers book their parcels through it with couriers such as Delhivery, Blue Dart or Xpressbees, and Shiprocket gives the buyer a tracking page. ShiprocketX is its service for parcels sent from India abroad. Track a parcel on [Shiprocket's tracking page](https://www.shiprocket.in/shipment-tracking/) with its AWB, order ID or mobile number, on the shiprocket.co link the seller sent, or in the box above. Shiprocket says it sends you the AWB by email and SMS once the order is confirmed.
+Shiprocket (based in Gurugram) is an Indian shipping platform — not a courier itself — used by online sellers to book domestic couriers like Delhivery, Blue Dart and Xpressbees, plus cross-border shipments via ShiprocketX (`832` AWBs). Track your parcel on [Shiprocket's tracking page](https://www.shiprocket.in/shipment-tracking/) with its AWB, order ID or mobile number, on the seller's `shiprocket.co` link, or in the box above. Below: what statuses such as `Connection Aligned`, `Received At DC`, NDR and RTO mean, and who to contact.
 
 ## Shiprocket tracking number: what it looks like
 
@@ -85,21 +85,25 @@ For an older parcel, Peek shows the archived view's last status and its day, and
 
 ## Questions about Shiprocket tracking
 
-### Is Shiprocket a courier company?
+### What does "Connection Aligned" mean in Shiprocket tracking?
 
-No. Shiprocket is a shipping platform: sellers book couriers such as Delhivery, Blue Dart or Xpressbees through it, and the courier carries the parcel. ShiprocketX parcels travel under Shiprocket's own AWB and are delivered by a carrier in the destination country.
+`Connection Aligned` (alongside `Reached At Warehouse` and `Received At DC`) is an export-hub step in Delhi for ShiprocketX international shipments: the parcel is being lined up at Shiprocket's export hub ahead of `AWB Handed over to Flight`.
 
 ### What does RTO mean in Shiprocket tracking?
 
-RTO means return to origin: the parcel couldn't be delivered and is going back to the seller, after up to three attempts or sooner if the seller asks. `RTO DELIVERED` means the seller has it back.
+RTO means return to origin: the parcel could not be delivered (after up to three courier attempts, or sooner if the seller requests it) and is heading back to the seller's pickup address or warehouse. `RTO DELIVERED` confirms the seller received it back.
 
-### What is the Shiprocket customer care number?
+### Is Shiprocket a courier company?
 
-Shiprocket's tracking site lists 9643887070, 9711451060 and 8510042020 for tracking issues. For a problem with your order, Shiprocket tells buyers to contact the seller.
+No. Shiprocket is an Indian shipping platform working with 42 courier partners such as Delhivery, Blue Dart, Xpressbees, Ekart and India Post. For international ShiprocketX orders, parcels travel under Shiprocket's 13-digit `832` AWB and are delivered abroad by a destination carrier such as USPS.
 
-### Why does Shiprocket tracking say AWB Not Found?
+### Why does Shiprocket tracking say "AWB Not Found"?
 
-Shiprocket doesn't know the number entered: check it for typos or missing digits, and wait a few minutes if the order was just placed, as Shiprocket's page suggests. Shipments older than about a year aren't found either.
+Shiprocket has no record for that number: check for typos or missing digits, wait a few minutes if the order was just placed, or note that Shiprocket stops showing shipments after about a year.
+
+### What is the Shiprocket customer care number and email?
+
+Shiprocket's tracking site lists 9643887070, 9711451060 and 8510042020 (+91 from abroad) and email support@shiprocket.in (escalations: escalation@shiprocket.com, grievance@shiprocket.com). For delivery problems, refunds or lost parcels, Shiprocket advises buyers to contact the seller directly.
 
 :::sources
 - [Shiprocket: Track your orders easily](https://www.shiprocket.in/shipment-tracking/) – tracking by AWB, order ID or mobile number, OTP and myShiprocket, AWB by email and SMS, contact the seller, updates after scans, ShipX

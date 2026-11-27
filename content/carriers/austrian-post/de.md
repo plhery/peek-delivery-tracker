@@ -1,12 +1,12 @@
 ---
 title: Austrian Post Sendungsverfolgung: Status, Abholung, Hilfe
-description: Paket der Österreichischen Post verfolgen: wie die Sendungsnummer aussieht, was jeder Status heißt, wie lange die Filiale wartet und wen du fragst.
+description: Österreichische Post Sendungsverfolgung: 22-stellige und AT-Nummern, Statusbedeutung, Abholfrist in Filiale und Poststation, Zollhindernis und Hotline.
 slug: austrian-post-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Dein Paket der Österreichischen Post verfolgst du auf post.at unter „Sendungsverfolgung“, in der Post App oder mit der Nummer im Feld oben; die Sendungsnummer reicht, ein Konto brauchst du nicht. Die Sendungsnummer bekommst du vom Shop, aus der e-Benachrichtigung der Post oder vom gelben Zettel nach einem verpassten Zustellversuch. Mit diesem Zettel holst du das Paket in der Post-Geschäftsstelle oder Poststation ab, mindestens 14 Kalendertage lang, bei manchen Versandhändlern nur 5 Werktage. Hilfe gibt es bei der Hotline der Post unter +43 800 010 100. Die Österreichische Post (Österreichische Post AG, Sitz in Wien, international Austrian Post) stellt in Österreich Briefe und Pakete zu.
+Ein Paket der Österreichischen Post (Österreichische Post AG, Sitz in Wien, international Austrian Post) verfolgst du ohne Konto direkt oben im Feld, auf post.at unter „Sendungsverfolgung“ oder in der Post App. Die 22-stellige Nummer oder internationale `AT`-Nummer findest du in der Versandmail des Shops, in der e-Benachrichtigung oder auf dem gelben Zettel. Abholbereite Pakete warten in Filiale oder Poststation meist mindestens 14 Kalendertage (bei manchen Versandhändlern 5 Werktage); die Hotline erreichst du unter +43 800 010 100.
 
 ## Post Sendungsnummer: wie sie aussieht und wo sie steht
 
@@ -101,23 +101,23 @@ Solange du das Paket geöffnet hast oder am Zustelltag Mitteilungen eingeschalte
 
 ## Fragen zur Sendungsverfolgung der Post
 
-### Funktioniert die Sendungsverfolgung ohne Registrierung?
+### Kann ich ein Paket der Österreichischen Post ohne Konto verfolgen?
 
 Ja. Auf post.at reicht die Sendungsnummer. Ein kostenloses Post Konto brauchst du nur, um Pakete zu beobachten, umzuleiten oder abstellen zu lassen.
 
-### Warum funktioniert meine Sendungsnummer nicht?
+### Warum funktioniert meine Sendungsnummer bei der Post nicht?
 
 Oft ist das Paket erst angemeldet: Bis der Versender es übergibt, gibt es wenig zu sehen. Sonst prüf die Ziffern und ob die Nummer zu einem anderen Paketdienst gehört, denn viele verwenden 22 Ziffern.
 
-### Wie lange bleibt ein Paket in der Filiale oder Poststation?
+### Wie lange bleibt ein Post-Paket in der Filiale oder Poststation?
 
 In der Regel mindestens 14 Kalendertage: Die Abholfrist beginnt am Tag nach dem Zustellversuch und läuft bis zum dritten darauffolgenden Montag. Hat der Onlinehändler eine kürzere Frist gewählt, sind es 5 Werktage. Der letzte Abholtag steht auf dem gelben Zettel.
 
-### Kann jemand anderer mein Paket abholen?
+### Kann jemand anderes mein Paket mit dem gelben Zettel abholen?
 
-Ja, mit deinem gelben Zettel. Oder du leitest ihm die e-Benachrichtigung weiter.
+Ja, mit deinem gelben Zettel (außer bei der Zusatzleistung EIGENHÄNDIG) oder wenn du die e-Benachrichtigung weiterleitest. Ohne gelben Zettel holst du das Paket in der Filiale selbst mit gültigem amtlichem Lichtbildausweis ab.
 
-### Was heißt Zollanmeldungshindernis?
+### Was bedeutet „Zollanmeldungshindernis“ bei der Österreichischen Post?
 
 Der Zollanmeldung deines Pakets steht etwas im Weg. Die Post lagert das Paket mit `Lagereingang - Zollanmeldungshindernis`, und in ihrer Sendungsverfolgung wirst du um die fehlenden Unterlagen gebeten. Hast du geantwortet, steht dort `Zollanmeldungshindernis - Rückmeldung vom Empfänger eingelangt`, und das Paket bleibt beim Zoll, bis es verzollt ist.
 

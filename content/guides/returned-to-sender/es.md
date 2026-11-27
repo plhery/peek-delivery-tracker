@@ -1,13 +1,13 @@
 ---
 title: Paquete devuelto al remitente: qué significa y qué hacer
-description: Qué significa que un paquete sea devuelto al remitente, si se puede parar la devolución, cuánto tarda y cómo te devuelven el dinero Amazon, Vinted o una tienda.
+description: Paquete devuelto al remitente: motivos habituales, si se puede frenar la devolución, cuánto tarda en volver y cómo recuperar tu dinero en Amazon o Vinted.
 slug: paquete-devuelto-al-remitente
 picture: Una furgoneta con un paquete con un sello redondo de devolución vuelve hacia una tienda siguiendo una flecha curva, y Pip la mira alejarse.
 published: 2026-10-14
-updated: 2026-11-10
+updated: 2026-11-27
 ---
 
-«Devuelto al remitente» significa que el transportista no ha podido entregarte el paquete y se lo lleva de vuelta a quien lo envió: por la dirección, porque lo rehusaste, porque no lo recogiste a tiempo o porque quedaron aduanas sin pagar. Cuando la devolución ya ha empezado, transportistas como DHL dicen que no se puede parar. Escribe hoy mismo al vendedor y dile por escrito si quieres que te lo vuelva a enviar o que te devuelva el dinero.
+Cuando un envío figura como «Devuelto al remitente», el transportista no ha podido entregarlo — por dirección incompleta, rechazo, plazo de recogida agotado o aduanas sin pagar — y lo lleva de vuelta a quien lo envió. Una vez iniciada la devolución, transportistas como DHL avisan de que no se puede detener; escribe hoy mismo al vendedor por escrito para indicar si quieres un reenvío o el reembolso.
 
 ¿Has devuelto tú algo a una tienda? Es otro camino: [seguir una devolución y su reembolso](guide:returns-tracking).
 
@@ -30,7 +30,7 @@ Si el paquete venía de otro país, el motivo suele ir marcado en francés, el i
 
 Algunos estados esconden una devolución, como `Finalizado plazo retirada`: [estados de un envío](guide:tracking-statuses) explica cada uno. Si el motivo fue un pago de aduanas, [paquete retenido en aduanas](guide:customs) cuenta qué se debía y qué puedes recuperar.
 
-## ¿Se puede parar la devolución de un paquete?
+## ¿Se puede detener un paquete que ya vuelve al remitente?
 
 Cuando ya ha dado la vuelta, no. Antes, casi siempre solo puede el remitente. En España lo dice la ley: un envío es del remitente hasta que llega a manos del destinatario, y se puede recuperar o cambiar de dirección pagando el precio. DHL, en Alemania, avisa de que una devolución no se puede parar, ni siquiera la de un paquete que rehusaste.
 
@@ -44,7 +44,7 @@ Lo que existe para pararla es, casi todo, del remitente:
 
 Mientras el paquete siga de camino hacia ti, pídeselo a la tienda. Si lo que quieres es recibirlo en otro sitio, mira [cómo cambiar la dirección de entrega](guide:change-delivery-address).
 
-## Qué hacer si tu paquete se devuelve al remitente
+## ¿Qué debo hacer si mi paquete es devuelto al remitente?
 
 :::steps
 - Lee el motivo | Está en el último escaneo.
@@ -54,7 +54,7 @@ Mientras el paquete siga de camino hacia ti, pídeselo a la tienda. Si lo que qu
 - Espera a que llegue | La tienda te reembolsa o te lo reenvía cuando lo tiene de vuelta.
 :::
 
-## ¿Me devuelven el dinero si el paquete vuelve al remitente?
+## ¿Cuándo y cómo me reembolsan Amazon, Vinted, eBay o la tienda?
 
 Normalmente sí, cuando el paquete llega al vendedor. Las plataformas tienen sus propias reglas:
 
@@ -78,7 +78,7 @@ Si se lo compraste a un particular, la ley de consumo no se aplica: deciden las 
 
 > Rehusar un paquete o dejarlo en la oficina no es desistir. Escribe a la tienda o usa su formulario de desistimiento y guarda una copia: ese mensaje es lo que la obliga a devolverte el dinero.
 
-## ¿Quién paga la devolución al remitente?
+## ¿Quién paga los gastos de un paquete devuelto al remitente?
 
 La devolución la arreglan el transportista y el remitente: lo que cueste depende de su contrato. El Reglamento postal fija dos reglas:
 
@@ -89,7 +89,7 @@ Desde otro país, las normas de la Unión Postal Universal cargan al remitente e
 
 ¿Puede la tienda cobrártelo a ti? Solo los «costes directos de devolución», solo si te avisó antes de comprar y solo cuando has desistido (art. 108). Y puede quedarse lo que pagaste de más por un envío urgente.
 
-## ¿Qué pasa si mi paquete se devuelve al remitente?
+## ¿Cómo funciona el seguimiento de un paquete devuelto al remitente?
 
 Vuelve, más o menos, por el mismo camino, y el seguimiento va hacia atrás:
 

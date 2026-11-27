@@ -1,15 +1,15 @@
 ---
 title: Weihnachtspost: letzter Termin für Pakete und Briefe
-description: Bis wann musst du Pakete und Briefe für Weihnachten abgeben? Die Fristen von DHL, Hermes, DPD, GLS und der Post in Österreich und der Schweiz.
+description: Weihnachtspost 2026: Letzter Abgabetermin für Pakete und Briefe bei DHL, Deutscher Post, Hermes, DPD, GLS, Österreichischer Post und Schweizerischer Post.
 slug: weihnachten-paket-letzter-termin
 picture: Ein Kalenderblatt mit einem eingekreisten Dezembertag, ein Lieferwagen, der ein Paket mit roter Schleife durch fallenden Schnee fährt, und Pip, der nebenher eilt.
 published: 2026-10-09
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-DHL, die Deutsche Post, Hermes, [GLS](carrier:gls-de) und die [Schweizerische Post](carrier:swiss-post) haben ihre Weihnachtstermine für 2026 veröffentlicht: Innerhalb Deutschlands gibst du Pakete, Briefe und Postkarten bei DHL und der Deutschen Post bis Montag, 21. Dezember, ab, Pakete bei GLS bis Montag, 21. Dezember, 12 Uhr, und im Hermes PaketShop bis Samstag, 19. Dezember. In der Schweiz gilt Mittwoch, 23. Dezember, für A-Post und PostPac Priority. DPD und die Österreichische Post haben noch keine Termine für 2026 genannt: Für sie zeigen die Tabellen die Daten vom Vorjahr.
+Bis wann Pakete und Briefe für Weihnachten 2026 abgegeben sein müssen, haben DHL, die Deutsche Post, Hermes, [GLS](carrier:gls-de) und die [Schweizerische Post](carrier:swiss-post) bereits veröffentlicht: Innerhalb Deutschlands gibst du Pakete, Briefe und Postkarten bei DHL und der Deutschen Post bis Montag, 21. Dezember, ab, Pakete bei GLS bis Montag, 21. Dezember, 12 Uhr, und im Hermes PaketShop bis Samstag, 19. Dezember; in der Schweiz gilt Mittwoch, 23. Dezember, für A-Post und PostPac Priority. DPD und die [Österreichische Post](carrier:austrian-post) haben ihre Termine für 2026 noch nicht genannt (die Tabellen zeigen ihre Daten von 2025 als Anhaltspunkt); für Online-Bestellungen liegt der letzte Bestelltag im Shop wegen Pack- und Zollzeit jeweils noch früher.
 
-## Deutschland: DHL, Deutsche Post, Hermes, DPD und GLS
+## Wann ist der letzte Abgabetermin für Weihnachtspakete 2026 in Deutschland?
 
 DHL, die Deutsche Post, [Hermes](carrier:hermes-de) und GLS haben ihre Fristen für 2026 veröffentlicht, [DPD](carrier:dpd-de) noch nicht. Heiligabend ist 2026 ein Donnerstag (2025: Mittwoch), die DPD-Daten vom Vorjahr sind also nur ein Anhaltspunkt. Alle Termine gelten für Sendungen innerhalb Deutschlands.
 
@@ -33,7 +33,7 @@ Was hinter den Daten steckt:
 - **DHL** rät, auf Inseln 1 bis 2 Tage früher einzuliefern. Für Geschäftskunden sind das DHL Kleinpaket und Sperrgut nicht Teil des Versprechens; dafür empfiehlt DHL, 1 bis 3 Tage früher einzuliefern.
 - **Verpackung:** DHL rät, Pakete nicht mit Faden oder Schleife zu verschnüren, damit sie in der automatischen Bearbeitung nicht hängen bleiben, und Hermes warnt, dass Außendeko für die Sortieranlagen zum Hindernis werden kann. Pack das Geschenk also innen hübsch ein.
 
-## Österreich: Österreichische Post
+## Bis wann muss ein Paket zu Weihnachten 2026 in Österreich raus?
 
 Die [Österreichische Post](carrier:austrian-post) hat ihre Weihnachts-Versandfristen für 2026 noch nicht veröffentlicht. 2024 und 2025 kamen sie jeweils Anfang Dezember. Hier die Termine vom Vorjahr für Sendungen innerhalb Österreichs:
 
@@ -46,7 +46,7 @@ Die [Österreichische Post](carrier:austrian-post) hat ihre Weihnachts-Versandfr
 
 2025 stellte die Post am 24. Dezember noch bis 12 Uhr Pakete zu, und alle Postfilialen hatten an Heiligabend mindestens von 8 bis 12 Uhr geöffnet. Wegen der hohen Sendungsmengen rät sie, einen Zeitpuffer einzuplanen und früh zu versenden.
 
-## Schweiz: Schweizerische Post
+## Welche Aufgabetermine gelten zu Weihnachten 2026 in der Schweiz?
 
 Die Post hat ihre Aufgabetermine für Weihnachten 2026 schon veröffentlicht. Sie gelten für Briefe und Pakete innerhalb der Schweiz.
 
@@ -60,7 +60,7 @@ Die Post hat ihre Aufgabetermine für Weihnachten 2026 schon veröffentlicht. Si
 
 Am Samstag, 26. Dezember, stellt sie keine Pakete mit „Samstagzustellung“ zu. Die Öffnungszeiten der Filialen über die Festtage hängen ab Anfang Dezember in jeder Filiale aus und stehen im Onlinedienst „Standorte und Öffnungszeiten“.
 
-## Pakete ins Ausland zu Weihnachten verschicken
+## Wann ist der letzte Termin für Weihnachtspakete ins Ausland?
 
 Ins Ausland gelten je nach Zielland deutlich frühere Fristen. Die Österreichische Post rät, bei Paketen und Post Express in Drittländer auch die Bearbeitungszeit des Zolls einzurechnen.
 
@@ -88,7 +88,7 @@ Ins Ausland gelten je nach Zielland deutlich frühere Fristen. Die Österreichis
 - **Inseln und abgelegene Orte:** Auch ins Ausland rät DHL, auf Inseln 1 bis 2 Tage früher einzuliefern. Hermes nennt für Inseln und Überseegebiete wie die Kanaren, die Azoren oder Madeira keinen Termin, für die Schweiz und Großbritannien ebenfalls nicht. Die URGENT-Laufzeiten der Schweizerischen Post gelten nur für Wirtschafts- und Ballungszentren.
 - **GLS** sagt nicht, welche Länder zu den „EU-Nachbarländern“ zählen und welche zu „allen weiteren EU-Ländern“. Im Zweifel nimm den früheren Tag.
 
-## Online bestellen: Zeit für den Zoll einplanen
+## Wann muss ich online spätestens bestellen, damit das Paket vor Weihnachten ankommt?
 
 Diese Fristen gelten für Sendungen, die schon beim Paketdienst liegen. Der letzte Bestelltag eines Shops liegt also früher.
 
@@ -96,7 +96,7 @@ Ein Paket von außerhalb der EU, in der Schweiz aus dem Ausland, geht außerdem 
 
 Voll wird es schon vor Dezember: DHL zählt 2026 Singles Day (Mittwoch, 11. November), Black Friday (Freitag, 27. November) und Cyber Monday (Montag, 30. November) zu den Spitzentagen. GLS erwartet die größten Mengen rund um die Cyber Week und in der Woche vor Weihnachten.
 
-## Paket zu spät für Weihnachten: was tun?
+## Was tun, wenn das Weihnachtspaket zu spät kommt oder hängen bleibt?
 
 Den letzten Termin verpasst? Ein schnellerer Dienst schließt oft später, etwa Post Express Österreich, Swiss-Express „Mond“ oder DHL Express. Über die Feiertage ruht dafür vieles:
 

@@ -1,13 +1,13 @@
 ---
 title: MediaMarkt order tracking: carriers, pickup and problems
-description: Where MediaMarkt sells online, who delivers your order, where the tracking link is and what to do when a parcel is late or marked delivered but missing.
+description: MediaMarkt order tracking across Europe: where to find your tracking number, carriers by country (Germany, Spain, Austria, Switzerland), delivery and returns.
 slug: mediamarkt-order-tracking
 picture: A flat TV box and a small parcel beside a delivery van, a cheerful Pip and a shop with a pickup sign.
 published: 2026-10-17
-updated: 2026-11-09
+updated: 2026-11-27
 ---
 
-MediaMarkt sells online only in Europe, through a separate shop for each country. Your account shows the order status. In Germany, Austria, Switzerland and Belgium the shipping email brings the tracking link, and in Spain it sends you to the carrier's website. Who delivers depends on the country and the item: in Germany DHL, Hermes or DPD bring parcels and freight companies bring large appliances on an agreed date, while in Spain it's Paack, SEUR, Correos, TIPSA, InPost, Method, Ader or Citylogin.
+MediaMarkt sells online across 11 European countries (as MediaWorld in Italy, alongside Saturn in Germany, and rebranded Darty in Portugal), with a separate shop for each country. Check your order status in your account or on the guest order page, and find the carrier tracking link in your shipping confirmation email. Who delivers depends on country and item size: DHL, Hermes or DPD for parcels in Germany (plus freight carriers for large appliances), Paack, SEUR, Correos, TIPSA, InPost, Method, Ader or Citylogin in Spain, and national posts in Austria, Switzerland and Belgium.
 
 ## Where does MediaMarkt sell online?
 
@@ -40,7 +40,7 @@ Both shops also host other sellers. In Germany the product page says "Verkauf un
 - home | You | At the door, a locker or where the appliance goes
 :::
 
-## Where is my MediaMarkt tracking number?
+## How do I find my MediaMarkt tracking number or link?
 
 **Germany.** Three places:
 
@@ -92,7 +92,7 @@ When nothing moves, it's usually one of these:
 
 In Austria and Switzerland, contact customer service once the promised date has passed without a delay notice, which in Switzerland may sit in your spam folder. When waiting is still normal: [tracking not updating](guide:tracking-not-updating).
 
-## Delivery options and costs
+## How much does MediaMarkt delivery or Click & Collect cost?
 
 **Germany.** The same prices apply on mediamarkt.de and saturn.de:
 
@@ -120,7 +120,7 @@ Free shipping from €69 covers only products MediaMarkt sells itself, not freig
 
 Pickup points take parcels only, free over €49. In stores, an order is ready in 30 minutes if the item is in stock, and an email tells you. Some stores have a Stop&Go point to collect from your car, or Click&Go lockers that open with a code sent by text. Bring your DNI or NIE. The store keeps your order 5 calendar days if you pay there, 7 if you paid online.
 
-## MediaMarkt parcel not arrived or marked delivered: what to do
+## What if my MediaMarkt parcel hasn't arrived or says delivered?
 
 Look first, then report. In order:
 
@@ -136,7 +136,7 @@ For a marketplace item, contact the seller first, in Germany through "Händler k
 
 More help: [delivered but not received](guide:delivered-not-received), [lost parcel](guide:lost-parcel) and [damaged parcel](guide:damaged-parcel).
 
-## Returning a MediaMarkt order
+## How do I return a MediaMarkt order?
 
 In Germany you have 30 days from receipt, a voluntary right on top of the 14-day legal one. What you buy between 27 October and 1 December 2026 can go back until 31 December 2026, except marketplace items. Print a free return label from your account, or as a guest with your email and order number, or bring the item to any MediaMarkt or Saturn in Germany. For freight items, MediaMarkt arranges a pickup.
 

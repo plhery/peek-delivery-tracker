@@ -1,12 +1,12 @@
 ---
 title: GLS Schweiz Sendungsverfolgung: Status, Post und Kontakt
-description: GLS-Paket in der Schweiz verfolgen: welche Nummer, warum GLS deine PLZ verlangt, was die englischen Status heißen, wer zustellt und wen du fragst.
+description: GLS Schweiz Sendungsverfolgung: Paketnummer mit PLZ prüfen, Zustellung durch Swiss Post GLS in Basel, Zollkosten, Abholungseinladung und Telefonnummer.
 slug: gls-schweiz-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-GLS ist ein internationaler Paketdienst mit Sitz in Amsterdam und hat in der Schweiz keine eigene Firma: Sein Partner, die Schweizerische Post, verzollt die GLS-Pakete, die in die Schweiz kommen, und stellt sie zu. Du verfolgst ein GLS-Paket in der [Sendungsverfolgung von GLS](https://gls-group.com/EU/en/parcel-tracking) mit der Paketnummer und deiner Postleitzahl, oder du fügst die Nummer oben ins Feld ein. Die Nummer kommt vom Absender, schau also zuerst in die Versand-E-Mail des Shops.
+GLS hat in der Schweiz keine eigene Gesellschaft: Pakete aus dem GLS-Netzwerk verzollt und stellt in der Schweiz und in Liechtenstein der Partner **Swiss Post GLS** mit Sitz in Basel (Post-Passage 11) zu. Du verfolgst ein GLS-Paket in der [Sendungsverfolgung von GLS](https://gls-group.com/EU/en/parcel-tracking) mit Paketnummer und vierstelliger Schweizer Postleitzahl oder direkt oben im Feld; die Nummer steht in der Versand-E-Mail des Shops.
 
 ## GLS Paketnummer und Track-ID: so sehen sie aus
 
@@ -90,25 +90,25 @@ Nennt GLS die Post als Zustellerin, steht auf der Paketseite „Zustellung durch
 
 ## Fragen zur GLS Sendungsverfolgung in der Schweiz
 
-### Kann ich GLS ohne Postleitzahl verfolgen?
+### Warum braucht die GLS Sendungsverfolgung meine Postleitzahl?
 
-Nur als Übersicht: Ohne Postleitzahl zeigt die Sendungsverfolgung von GLS keinen Sendungsverlauf und bittet um die Postleitzahl der Lieferadresse. Gib die vierstellige Postleitzahl ein, an die das Paket geht.
+Ohne Postleitzahl zeigt die Sendungsverfolgung von GLS nur eine Übersicht ohne Sendungsverlauf und bittet um die Postleitzahl der Lieferadresse. Gib die vierstellige Postleitzahl ein, an die das Paket geht.
 
-### Wie lange dauert die GLS-Zustellung in die Schweiz?
+### Wer stellt GLS-Pakete in der Schweiz zu und wie lange dauert es?
 
-GLS nennt eine Laufzeit nur ab Österreich: 2 Versandtage bis in die Schweiz und nach Liechtenstein, laut GLS Österreich in der Regel 48 Stunden. Kommt das Paket von anderswo, richte dich nach der Angabe des Shops.
+Die Schweizerische Post über ihren Partner Swiss Post GLS in Basel verzollt und stellt GLS-Pakete in der Schweiz und in Liechtenstein zu. Eine feste Laufzeit nennt GLS nur ab Österreich: in der Regel 2 Versandtage (48 Stunden). Kommt das Paket von anderswo, richte dich nach der Angabe des Shops.
 
-### Stellt GLS in der Schweiz am Samstag zu?
+### Stellt GLS in der Schweiz am Samstag zu und gibt es GLS-Paketshops?
 
-Das sagt keine Seite von GLS oder der Post für GLS-Pakete. Nach einer Abholungseinladung kannst du mit „Meine Sendungen“ eine zweite Zustellung am Samstag buchen, für CHF 7.–, so steht es bei der Post für ihre eigenen Sendungen.
+Keine Seite von GLS nennt einen GLS-ParcelShop oder eine Samstagszustellung für die Schweiz. Hast du die Post verpasst, holst du das Paket an der Abholstelle ab, die auf der Abholungseinladung steht, oder buchst über „Meine Sendungen“ eine Zweitzustellung am Samstag für CHF 7.– (Regel der Post für eigene Sendungen).
 
 ### Kann jemand anderes mein GLS-Paket abholen?
 
 Bei der Post ja: Mit einem Login bei „Meine Sendungen“ erteilst du eine kostenlose Einmal-Vollmacht für eine bestimmte Sendung. Dass das auch für GLS-Pakete gilt, schreibt die Post nicht ausdrücklich.
 
-### Gibt es GLS-Paketshops in der Schweiz?
+### Wie erreiche ich GLS Schweiz (Swiss Post GLS Basel) telefonisch oder per E-Mail?
 
-Keine Seite von GLS nennt einen GLS-ParcelShop oder eine GLS-Paketstation in der Schweiz. Hast du die Post verpasst, holst du das Paket an der Abholstelle ab, die auf ihrer Abholungseinladung steht.
+Die Importnummer von Swiss Post GLS ist +41 848 48 48 47 (CHF 0.08/Min. vom Schweizer Festnetz, Montag bis Freitag 8.00–12.00 und 13.30–17.30 Uhr), die E-Mail-Adresse lautet infogls@post.ch, und die Postadresse ist Swiss Post GLS, Post-Passage 11, 4002 Basel.
 
 :::sources
 - [GLS: Parcel Tracking](https://gls-group.com/EU/en/parcel-tracking) – Paketnummer, Track-ID, Postleitzahl, nur Englisch

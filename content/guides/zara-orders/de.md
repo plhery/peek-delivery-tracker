@@ -1,15 +1,15 @@
 ---
 title: Zara Sendungsverfolgung: Lieferung, Rückgabe, Probleme
-description: Wo du deine Zara-Bestellung in Deutschland, Österreich und der Schweiz verfolgst, was die Status bedeuten, was der Versand kostet und was tun, wenn nichts ankommt.
+description: Zara-Bestellung verfolgen (DE, AT, CH): Bestellstatus im Konto oder per Gast-Link, Lieferzeiten, Versandkosten, 30 Tage Rückgabe und Kontakt bei Problemen.
 slug: zara-sendungsverfolgung
 picture: Eine Papiertüte mit Kordelgriffen neben einem Lieferwagen, und Pip schaut aus der Tüte.
 published: 2026-10-25
-updated: 2026-10-25
+updated: 2026-11-27
 ---
 
-Eine Zara-Bestellung verfolgst du in deinem Zara-Konto unter „Bestellungen“ oder, wenn du als Gast bestellt hast, über den Link in den E-Mails zu deiner Bestellung. Für die Zustellung in Deutschland, Österreich und der Schweiz nennt Zara keinen Paketdienst: Die Bestelldetails zeigen den Stand. Steht deine Bestellung als zugestellt da, ist aber nicht angekommen, meldest du dich bei Zara, und Zara klärt es mit dem Transportunternehmen.
+Deine Zara-Bestellung verfolgst du in Deutschland, Österreich und der Schweiz im Zara-Konto unter „Bestellungen“ oder als Gast über den Link in deinen Bestell-E-Mails. Zara nennt vorab keinen festen Paketdienst, zeigt aber Status, voraussichtliches Lieferdatum und Teillieferungen direkt in den Bestelldetails. Steht dort `Dem Kunden zugestellt`, obwohl kein Paket ankam, melde es bei Zara — Zara klärt den Fall mit dem Transportunternehmen.
 
-## Wer liefert meine Zara-Bestellung?
+## Welcher Paketdienst liefert meine Zara-Bestellung?
 
 Zaras Seiten für Deutschland, Österreich und die Schweiz nennen den Paketdienst für die Lieferung nicht. Sie sprechen vom „Versandunternehmen“ oder „Transportunternehmen“. Jedes Land hat seinen eigenen Zara-Shop, und die Lieferadresse muss in dem Land liegen, in dem du bestellst.
 
@@ -30,7 +30,7 @@ Große HOME-Artikel laufen anders: Sie gehen nicht an eine Filiale oder Lieferst
 - home | Du | `Dem Kunden zugestellt`
 :::
 
-## Wo finde ich die Zara-Sendungsverfolgung?
+## Wo finde ich Sendungsverfolgung und Bestellstatus bei Zara?
 
 Hier schaust du nach:
 
@@ -54,7 +54,7 @@ Zaras Seiten für diese Länder sagen nicht, wo die Sendungsnummer des Paketdien
 :::checker
 :::
 
-## Warum dauert meine Zara-Lieferung so lange, oder warum bewegt sich nichts?
+## Warum verzögert sich meine Zara-Bestellung oder bewegt sich nicht?
 
 Vor dem Bezahlen siehst du das voraussichtliche Lieferdatum. Welche Versandarten es gibt, hängt von der Adresse, der Uhrzeit der Bestellung und der Verfügbarkeit ab. Steht alles still, liegt es meist an einem dieser Punkte:
 
@@ -67,7 +67,7 @@ Wie lange Zara sich Zeit gibt: Die deutschen AGB nennen das Datum der Versandbes
 
 **Bestellung ändern.** Stornieren geht, solange der Status es zulässt, in den Bestelldetails oder über den Gast-Link. Mit Konto und Lieferung nach Hause kannst du so auch die Adresse ändern. Versandart und Artikel lassen sich nach dem Bezahlen nicht mehr ändern. Mehr dazu: [Lieferadresse ändern](guide:change-delivery-address).
 
-## Was kostet die Lieferung bei Zara?
+## Wie lange dauert der Zara-Versand und was kostet er?
 
 **Deutschland.** Zustellung an allen Tagen außer sonntags:
 
@@ -106,7 +106,7 @@ Erst suchen, dann melden. Der Reihe nach:
 
 Mehr dazu: [Paket als zugestellt markiert, aber nicht erhalten](guide:delivered-not-received), [Paket verloren](guide:lost-parcel) und [Paket beschädigt](guide:damaged-parcel).
 
-## Zara-Bestellung zurückgeben
+## Wie gebe ich eine Zara-Bestellung zurück und wann kommt die Erstattung?
 
 Du hast 30 Tage ab dem Versanddatum, in allen drei Ländern. Die Artikel müssen im Originalzustand sein, mit allen Etiketten, und die Rückgabe läuft im Land, in dem du gekauft hast. Die Frist steht in den Bestelldetails.
 
@@ -118,7 +118,7 @@ In Deutschland nennt Zaras Hilfeseite 2,95 € pro Rücksendeauftrag, die AGB ab
 
 Zara erstattet auf die Zahlungsart, mit der du bezahlt hast. Eine Rücksendung bearbeitet Zara innerhalb von 72 Stunden nach Eingang, und das Geld kommt je nach Bank innerhalb von höchstens 14 Tagen. Ist es dann noch nicht da, zeig deiner Bank die Bestätigungs-E-Mail von Zara. Wo die Sendungsnummer der Rücksendung steht: [Rücksendung verfolgen](guide:returns-tracking).
 
-## Kann ich ein Zara-Paket mit Peek verfolgen?
+## Wie verfolge ich ein Zara-Paket in Peek?
 
 Ja, mit der Sendungsnummer des Paketdienstes. Für die Lieferung nennt Zara in Deutschland, Österreich und der Schweiz keinen Paketdienst: Füg die Nummer trotzdem in [Peek](/) ein, Peek verfolgt mehr als 4.500 Paketdienste. Bei einer Form, die sich mehrere Dienste teilen, fragt Peek die infrage kommenden Dienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, tippst du auf „Wählen“; zeigt Peek den falschen, tippst du auf „Ändern“ und wählst den richtigen Dienst.
 

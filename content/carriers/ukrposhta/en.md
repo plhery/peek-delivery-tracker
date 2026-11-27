@@ -1,12 +1,12 @@
 ---
 title: Ukrposhta tracking: Ukraine Post numbers and statuses
-description: Track a Ukrposhta parcel in English: the 13-digit and UA numbers, what each status means, branch pickup, and lost or damaged items from abroad.
+description: Track a Ukrposhta (Ukraine Post) parcel in English: 13-digit and UA number formats, status meanings, customs and branch pickup, UK/international hand-offs.
 slug: ukrposhta-tracking
 published: 2026-10-13
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Ukrposhta (Укрпошта) is Ukraine's national post. Track a parcel on its tracker, track.ukrposhta.ua, in the Ukrposhta app or by pasting the number in the box above. The number comes from the sender: 13 digits within Ukraine, or two letters, nine digits and two letters to or from abroad.
+Ukrposhta (Укрпошта) is Ukraine's national post. Track domestic 13-digit parcels or international `UA` shipments in English by pasting the number in the box above, on track.ukrposhta.ua, or in the Ukrposhta app. For parcels moving to or from abroad, Peek can also follow the hand-off with the partner post under the same international number.
 
 ## Ukrposhta tracking number
 
@@ -73,9 +73,9 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ## Questions about Ukrposhta tracking
 
-### How do I track a Ukrposhta parcel in the UK?
+### How do I track a Ukrposhta parcel in the UK or abroad?
 
-When you add a Ukrposhta item in the UK, Peek also asks [Royal Mail](carrier:royal-mail) under the same number, or [Parcelforce](carrier:parcelforce) for a number starting with E (EMS). Once that post has a scan as recent as Ukrposhta's last, Peek follows the parcel there, keeping Ukrposhta's steps.
+When you add a Ukrposhta `UA` item in the UK, Peek also asks [Royal Mail](carrier:royal-mail) under the same number, or [Parcelforce](carrier:parcelforce) for an EMS number starting with `E`. Once that post has a scan as recent as Ukrposhta's last, Peek follows the parcel there, keeping Ukrposhta's earlier steps.
 
 ### Why is my Ukrposhta tracking number not working?
 
@@ -84,6 +84,10 @@ Check it against the one the sender gave you, character by character. A 13-digit
 ### How do I track a parcel sent to Ukraine from abroad?
 
 Paste the number the sender gave you. Peek follows the parcel at the sending post. When that post says the parcel is going to Ukraine, or you add it in Ukraine, Peek also asks Ukrposhta and, once Ukrposhta has a scan as recent as that post's last, carries on there, keeping the earlier steps. To follow it at Ukrposhta from the start, pick "Ukrposhta" with "Change". A DHL parcel from Germany whose number starts with C is followed at [Meest](carrier:meest) instead.
+
+### How do I open an inquiry for a lost or damaged international Ukrposhta parcel?
+
+Under Universal Postal Union rules, a national post must accept an inquiry from either the sender or recipient within six months of the day after posting (Ukraine reserves the right to charge a fee). Point out visible damage before accepting delivery so a report is drawn up; for online orders that never arrived, contact the seller first.
 
 :::sources
 - [Universal Parcel Scraper: Ukrposhta](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ukrposhta) – number shapes and check digits, track.ukrposhta.ua links, the app's service and the tracker Peek reads, the English lines and their statuses, return lines, Kyiv time and steps abroad, what Peek leaves out

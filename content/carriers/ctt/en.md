@@ -1,12 +1,12 @@
 ---
 title: CTT tracking: numbers, statuses and pickup in Portugal
-description: Track a CTT parcel in Portugal: where the tracking number comes from, what CTT's statuses mean, pickup deadlines, customs fees and how to reach CTT.
+description: Track a CTT Portugal parcel (Seguir objeto): PT tracking numbers, status meanings, Locky & Loja CTT pickup deadlines, EU customs fees and CTT contact number.
 slug: ctt-tracking
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-CTT (CTT – Correios de Portugal) is Portugal's national postal service, with an express arm, CTT Expresso. Track a parcel with "Seguir objeto" on [ctt.pt](https://www.ctt.pt/feapl_2/app/open/objectSearch/objectSearch.jspx?request_locale=pt), which has an English version, in the CTT app, or by pasting the number in the box above. The number reaches you by CTT's SMS or email, on a paper notice, or from the sender.
+CTT (CTT – Correios de Portugal) is Portugal's national postal service, alongside its express division CTT Expresso (separate from Spanish-run [CTT Express](carrier:ctt-express)). Track a `PT` postal code or express shipment on [ctt.pt's Seguir objeto](https://www.ctt.pt/feapl_2/app/open/objectSearch/objectSearch.jspx?request_locale=pt) (available in English), in the CTT app, or by pasting the number in the box above. The tracking code arrives by CTT SMS or email, on a paper notice, or from the sender.
 
 ## CTT tracking number: what it looks like
 
@@ -99,21 +99,25 @@ Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on
 
 ## Questions about CTT tracking
 
-### Where is my CTT package?
+### How do I track a CTT Portugal package and what do its statuses mean?
 
-The latest line on Seguir objeto tells you: `Em entrega` means today's round, `No ponto de entrega` a pickup point.
+Paste your number in the box above or on Seguir objeto at ctt.pt (without spaces). `Em entrega` means out for delivery today, `No ponto de entrega` means waiting at a pickup point, and `Em importação` means Portuguese customs.
 
-### What is a CTT delivery point?
+### What is a CTT delivery point and how long does it hold a parcel?
 
-A Loja CTT (post office), Ponto CTT (partner shop), Cacifo Locky locker or Payshop agent. CTT's notice names the one holding your parcel.
+A Loja CTT (post office), Ponto CTT (partner shop), Cacifo Locky locker or Payshop agent named on your notice. Working-day holding periods from the day after the notice are 6 days for letters and registered mail, 10 for national postal parcels, 15 for international postal parcels, 5 for most express parcels, and 5 days in Locky lockers.
 
-### Does CTT customer service speak English?
+### What customs fees does CTT charge on non-EU parcels to Portugal?
 
-CTT lists no English-language line. Call +351 21 047 16 16 on working days, 8:30 to 19:30, or use its contact form.
+When VAT wasn't paid at checkout, you pay VAT plus CTT's €7 (+ VAT) clearance fee up to €150, or VAT, duties and €14 from €150 to €1,000, alongside the €3 EU duty per product type up to €150 (since 1 July 2026) and the €2 (+ VAT) EU handling fee per product type regardless of value (since 1 November 2026). Unpaid parcels return to the sender after 20 days.
 
-### Is CTT Express the same as CTT?
+### Does CTT customer service speak English and what is the phone number?
 
-They track separately: CTT Express, a Spanish-run courier for Spain and Portugal, on cttexpress.com; CTT's postal and Expresso parcels on ctt.pt.
+CTT lists no English-language phone line. Call +351 21 047 16 16 on working days (8:30 to 19:30, landline rates), use the contact form on ctt.pt, or visit a Loja or Ponto CTT.
+
+### Is CTT Express the same as CTT Portugal?
+
+They track separately: CTT Express, a Spanish-run courier for Spain and Portugal, tracks on cttexpress.com; CTT's postal and Expresso parcels track on ctt.pt.
 
 :::sources
 - [CTT: Results in Seguir objeto (English)](https://www.ctt.pt/ajuda/particulares/seguir-ou-alterar-entrega/seguir/resultados-que-podem-aparecer-na-pesquisa-do-seguir-objeto?language_id=1) – English statuses, Item not found

@@ -1,12 +1,12 @@
 ---
 title: InPost śledzenie przesyłki: numer, statusy i Paczkomat
-description: Śledzenie paczki InPost w Polsce: jak wygląda numer, co znaczą kroki w śledzeniu, co zrobić przy pełnym Paczkomacie, jak złożyć reklamację i gdzie dzwonić.
+description: Śledzenie przesyłki InPost w Polsce: 24-cyfrowy numer, co znaczą statusy, pełny Paczkomat, kod odbioru i nadania, infolinia 722 444 000 oraz reklamacja.
 slug: inpost-sledzenie-przesylki
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-InPost to sieć automatów paczkowych Paczkomat, punktów odbioru i kurierów, która zaczynała w Polsce; polski operator to InPost sp. z o.o. z Krakowa. Paczkę śledzisz na inpost.pl albo w aplikacji InPost Mobile; numer z 24 cyfr możesz też wkleić w pole powyżej. Numer dostajesz od nadawcy, na przykład sklepu; nie myl go z kodem odbioru, którym otwierasz skrytkę w Paczkomacie.
+Aby sprawdzić, gdzie jest paczka InPost (InPost sp. z o.o. z Krakowa), wklej 24-cyfrowy numer przesyłki w pole powyżej albo wpisz go na inpost.pl lub w aplikacji InPost Mobile. Numer przesyłki dostajesz od sklepu lub nadawcy — kod odbioru służy wyłącznie do otwarcia skrytki w Paczkomacie, a 9-cyfrowy kod nadania jest dla sprzedającego. W razie problemu z paczką zadzwoń na infolinię `+48 722 444 000` / `+48 746 600 000` albo napisz przez czat w aplikacji InPost Mobile.
 
 ## Numer przesyłki InPost: gdzie jest i jak wygląda
 
@@ -77,21 +77,25 @@ Peek sprawdza śledzenie nawet co 10 minut, a gdy paczka jest w doręczeniu, naw
 
 ## Pytania o śledzenie przesyłek InPost
 
-### Gdzie jest moja paczka InPost?
+### Gdzie jest moja paczka InPost i jaki numer wpisać?
 
-Pokaże to śledzenie na inpost.pl: po wpisaniu numeru przesyłki zobaczysz najnowszy krok. Gdy paczka czeka w Paczkomacie, kodu odbioru szukaj w aplikacji InPost Mobile.
+Wklej 24-cyfrowy numer przesyłki z wiadomości od nadawcy w pole powyżej albo na inpost.pl (w aplikacji InPost Mobile paczka pojawia się przy twoim koncie). Gdy przesyłka czeka w Paczkomacie, kodu odbioru szukaj w aplikacji InPost Mobile.
 
 ### Czy paczkę InPost można śledzić po numerze telefonu?
 
-W Peek nie: śledzisz po numerze przesyłki. Regulamin Konta InPost uznaje jednak za „Twoją paczkę” tę, przy której nadawca podał numer telefonu adresata taki sam jak ten z rejestracji twojego Konta InPost.
+W Peek śledzisz wyłącznie po numerze przesyłki, nie po numerze telefonu. Według regulaminu Konta InPost za „Twoją paczkę” uznawana jest jednak przesyłka, przy której nadawca podał ten sam numer telefonu adresata co w twoim Koncie InPost (widoczna w aplikacji InPost Mobile).
 
-### Gdzie jest kod nadania InPost?
+### Co zrobić, gdy Paczkomat jest pełny albo paczka trafiła do tymczasowego?
 
-Kod nadania ma nadawca, nie odbiorca: regulamin Allegro Lokalnie opisuje go jako 9-cyfrowy numer, który InPost udostępnia sprzedającemu do nadania paczki bez drukowania etykiety. Do śledzenia go nie potrzebujesz, wystarczy numer przesyłki.
+Status tymczasowego Paczkomatu oznacza, że wybrany automat był pełny: paczka czeka w pobliskim Paczkomacie i otworzysz ją tym samym kodem odbioru. Jeśli nie odbierzesz jej na czas, InPost przewiezie ją do pierwotnie wybranego Paczkomatu.
 
-### Ile trwa rozpatrzenie reklamacji w InPost?
+### Czym różni się kod nadania InPost od numeru przesyłki?
 
-Według ogólnych zasad UKE dla operatorów pocztowych operator ma na odpowiedź 30 dni, a jeśli nie odpowie w terminie, reklamację uważa się za uznaną. Od odmowy odwołasz się w ciągu 14 dni od otrzymania odpowiedzi, a na odpowiedź na odwołanie operator ma 30 dni.
+Kod nadania służy sprzedającemu do wysłania paczki bez etykiety (według regulaminu Allegro Lokalnie to 9-cyfrowy numer), nie do śledzenia. Odbiorca śledzi paczkę 24-cyfrowym numerem przesyłki i otwiera skrytkę kodem odbioru.
+
+### Ile trwa rozpatrzenie reklamacji w InPost i jaki jest numer infolinii?
+
+Zgodnie z ogólnymi zasadami UKE operator ma 30 dni na odpowiedź (brak odpowiedzi w terminie oznacza uznanie reklamacji), a na odwołanie od odmowy masz 14 dni. Infolinia InPost działa pod numerami `+48 722 444 000` i `+48 746 600 000`, a w aplikacji InPost Mobile dostępny jest czat z asystentem AI.
 
 :::sources
 - [InPost: Regulamin Konta InPost](https://terms.inpost-group.com/pl/regulamin) – Paczkomat, punkty odbioru, InPost Mobile, przedłużenie czasu odbioru, zmiany i przekierowania, „Twoja paczka” po numerze telefonu, czat AI, formularz, infolinia, adres

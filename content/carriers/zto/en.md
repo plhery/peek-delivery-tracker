@@ -1,12 +1,12 @@
 ---
 title: ZTO Express tracking: 中通快递 numbers, statuses, contact
-description: Track a ZTO Express (中通快递) parcel in China: what its numbers look like, what 已签收 and ZTO's other steps mean, where parcels wait and how to reach ZTO.
+description: Track a ZTO Express (中通快递) parcel in China: 12- and 14-digit waybills, what 已签收 and 已代收 mean, ZTO International 771 numbers, transit times and 95311 contact.
 slug: zto-express-tracking
 published: 2026-11-03
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-ZTO Express (中通快递, Zhongtong) is a Chinese express company founded in Shanghai on 8 May 2002; in 2025 it handled 38.52 billion parcels. A ZTO number usually belongs to a parcel inside China, often an online order (ZTO has carried Taobao's since 2008) on its way to a forwarder's warehouse or to an address in China. Track it on [ZTO's tracker](https://www.zto.com/check), which is in Chinese, or in the box above. Parcels the group sends abroad go with [ZTO International](carrier:zto-international), which has its own 771 numbers and its own tracker.
+Track a ZTO Express (中通快递, Zhongtong) mainland China parcel by pasting its 12-digit or 14-digit (starting with `7`) waybill (`运单号`) in the box above or on [ZTO's Chinese tracker](https://www.zto.com/check). Founded in Shanghai on 8 May 2002 (38.52 billion parcels in 2025), ZTO carries domestic orders — often to a forwarder's warehouse, where `已签收` ("Signed for") means the forwarder received it. International shipments go through [ZTO International](carrier:zto-international) with `771` numbers on ztoglobal.com, and ZTO's mainland hotline is `95311`.
 
 ## ZTO Express tracking number: what it looks like
 
@@ -88,25 +88,25 @@ While you have the parcel open, or on its delivery day with notifications on, it
 
 ## Questions about ZTO Express tracking
 
-### Is ZTO Express legit?
+### Is ZTO Express (中通快递) legit?
 
-Yes. ZTO Express was founded in Shanghai on 8 May 2002, listed in New York on 27 October 2016 and in Hong Kong on 29 September 2020, the first express company listed in both. It says its network had more than 31,000 service outlets in 2025 and reaches over 99% of China's districts and counties.
+Yes. Founded in Shanghai on 8 May 2002, ZTO Express listed in New York (27 October 2016) and Hong Kong (29 September 2020), handled 38.52 billion parcels in 2025, and operates over 31,000 service outlets covering more than 99% of China's districts and counties.
 
-### Is ZTO Express the same as ZTO International?
+### What is the difference between ZTO Express and ZTO International?
 
-One group, two services and two trackers. ZTO Express's service agreement covers parcels sent and delivered within mainland China, not Hong Kong, Macau or Taiwan; its tracker is zto.com/check. ZTO International, the group's international arm since 2014, ships parcels abroad and into China under 771 numbers, tracked on ztoglobal.com.
+One group, two services and two trackers: ZTO Express delivers within mainland China (not Hong Kong, Macau or Taiwan) using 12-digit or 14-digit (`7…`) numbers on zto.com/check, while ZTO International handles cross-border shipments with 14-digit `771` numbers tracked on ztoglobal.com.
 
-### How long does ZTO Express take?
+### How long does ZTO Express take to deliver?
 
-Normally next day within a province and between Jiangsu, Zhejiang, Shanghai and Anhui, 3 to 5 days between other provinces and 5 to 7 days to some remote areas, ZTO's FAQ says. ZTO calls its published times a reference only. A parcel bound for a forwarder then takes the forwarder's time too.
+As a reference, ZTO's FAQ lists next day within a province and across Jiangsu, Zhejiang, Shanghai and Anhui, 3 to 5 days between other provinces, and 5 to 7 days to remote areas. If your order is heading to a forwarder's warehouse first, add the forwarder's international transit time.
 
-### What does 已签收 mean on ZTO tracking?
+### What do 已签收 and 已代收 mean on ZTO Express tracking?
 
-Signed for: Peek shows it as "Signed for", Delivered. You, someone for you or a forwarder's warehouse signed. `已代收` is different: a collection point, such as a parcel station, is holding it for you to collect.
+`已签收` ("Signed for", Delivered) means you, someone for you, or a forwarder's warehouse signed for the parcel — if it went to a forwarder, track the onward leg with the forwarder's number. `已代收` ("Held at a collection point for the recipient", Ready for pickup) means a parcel station (`驿站`) or locker is holding it for collection.
 
-### What is ZTO Express's phone number?
+### What is ZTO Express's customer service phone number?
 
-95311, its national customer service hotline in mainland China, from 08:30 to 17:30 China time. Calls from 95720 come from ZTO's couriers.
+In mainland China, call `95311` (08:30 to 17:30 China time), or use online customer service (`在线客服`) on zto.com and ZTO's WeChat mini program. Calls from `95720` come from ZTO couriers; for refunds or missing orders, contact the seller first.
 
 :::sources
 - [ZTO Express: 运单查询 (waybill search)](https://www.zto.com/check) – Chinese tracker, up to 10 numbers, WeChat updates

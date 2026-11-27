@@ -1,12 +1,12 @@
 ---
 title: 17FEIA tracking: FEI…YQ numbers, statuses and delivery
-description: Track a 17FEIA (一起飞) parcel from China: what a FEI…YQ number looks like, what each line on its tracker means, who delivers it and what Peek shows.
+description: Track a 17FEIA (一起飞) parcel from China: FEI…YQ 17-character number format, "Awaiting carrie scan" and customs statuses, DPD/DHL/FedEx handover and support.
 slug: 17feia-tracking
 published: 2026-11-03
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-17FEIA (一起飞, also Shanghai Hongshan International Logistics, 上海宏杉国际物流) is a Chinese logistics company. It takes parcels in at its warehouse in Shenzhen or Shanghai, flies them out of China and, after import customs, hands them to a carrier for delivery. Its numbers start with FEI and end with YQ. Paste yours in the box above, or use 17FEIA's own tracker on www.17feia.com. The number comes from whoever shipped your order: the seller, or the forwarder that sent your goods on from China.
+Track a 17FEIA (一起飞, Shanghai Hongshan International Logistics / 上海宏杉国际物流) parcel from China by pasting its 17-character `FEI…YQ` number (`FEI`, two letters such as `SZ`, ten digits and `YQ`) in the box above or on www.17feia.com. 17FEIA dispatches parcels from its Shenzhen or Shanghai warehouses, clears import customs and hands delivery to a local partner — when its record names DPD Germany, DHL or FedEx with a partner number, Peek follows the handover automatically.
 
 ## 17FEIA tracking number: what it looks like
 
@@ -97,19 +97,23 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ### What is 17FEIA (一起飞)?
 
-A Chinese logistics company, also known as Shanghai Hongshan International Logistics (上海宏杉国际物流). It flies parcels out of China from its warehouse in Shenzhen or Shanghai and, after import customs, hands them to a carrier for delivery. Its numbers start with FEI and end with YQ.
+17FEIA (Shanghai Hongshan International Logistics / 上海宏杉国际物流) is a Chinese cross-border logistics company that receives parcels at its Shenzhen or Shanghai warehouses, flies them abroad and hands them to a local carrier after import customs. Its waybills are 17 characters: `FEI`, two letters, ten digits and `YQ`.
 
-### Where can I track a FEI…YQ number?
+### Where can I track an FEI…YQ number?
 
-In the box above, or on 17FEIA's own tracker on www.17feia.com. Use the whole number: FEI, two letters, ten digits and YQ.
+Paste the full 17-character `FEI…YQ` number (or a `17feia.com` link containing `orderNumber=`) into the box above in Peek, which detects 17FEIA immediately, or look it up directly on www.17feia.com.
 
-### What does "Awaiting carrie scan" mean on 17FEIA tracking?
+### What does "Arrived at delivery hub，Awaiting carrie scan." mean on 17FEIA tracking?
 
-The full line is `Arrived at delivery hub，Awaiting carrie scan.`: import customs are done, and 17FEIA handed the parcel in at the delivering carrier's depot. That carrier hasn't scanned it yet. Its own tracking may soon be ahead of 17FEIA's.
+Import customs are finished and 17FEIA has dropped the parcel at the local delivery carrier's depot ("carrie" is 17FEIA's spelling), waiting for that carrier's first scan. Once the local carrier scans it, its tracker may update ahead of 17FEIA's.
 
-### Who delivers 17FEIA parcels?
+### Who delivers 17FEIA parcels after customs?
 
-The carrier 17FEIA hands it to after import customs. 17FEIA's record can name it, with its own number: when it's DPD Germany, DHL in Germany or FedEx, Peek's parcel card shows it. Otherwise, ask the seller.
+The local carrier 17FEIA hands the parcel to after import clearance. Peek's code recognises handovers to DPD Germany (`DPD-DE`), DHL in Germany (`DE-DHL`) and FedEx (`FEDEX-GROUND`) when 17FEIA's record includes that carrier and number; for other destinations, ask the seller or forwarder.
+
+### Who do I contact if my 17FEIA parcel is stuck or missing?
+
+Contact the seller or forwarder that booked the shipment: they are 17FEIA's customer (and 17FEIA's website sits behind a bot check, so no direct 17FEIA phone or email is listed here). Once a local carrier has scanned the parcel, contact that carrier about delivery.
 
 :::sources
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026

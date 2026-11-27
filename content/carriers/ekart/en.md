@@ -1,12 +1,12 @@
 ---
 title: Ekart tracking: tracking IDs, statuses and RTO explained
-description: Track an Ekart parcel in India: what an Ekart tracking ID looks like, what codes such as InscannedAtDH and RTO mean, and what to do when it stops moving.
+description: Track an Ekart Logistics parcel in India: 14-character tracking ID format, what InscannedAtDH, undelivered_attempted and RTO mean, and who to contact.
 slug: ekart-tracking
 published: 2026-11-02
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Ekart (also eKart Logistics) is an Indian courier. It collects online orders from the seller, moves them through its hubs and delivers them to you. The seller or shop gives you the tracking ID: look in its shipping message, or ask it, then paste the ID in the box above. Ekart's own tracker is on ekartlogistics.in.
+Track an Ekart (eKart Logistics) parcel in India by pasting its 14-character tracking ID (three letters, `C`, `P` or `R`, and ten digits — such as `FMPP…`) in the box above or on ekartlogistics.in. Get the tracking ID (not the store's order number) from the seller's shipping message. If tracking shows `InscannedAtDH`, your parcel is at the delivery hub before going out; `ShipmentRtoConfirmed` or `Marked RTO` means it is returning to the seller — contact the shop or marketplace first, as Ekart lists no recipient phone number.
 
 ## Ekart tracking ID: what it looks like
 
@@ -88,25 +88,25 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ## Questions about Ekart tracking
 
-### How do I track my Ekart parcel?
+### How do I track my Ekart Logistics parcel?
 
-Paste the tracking ID from the shop's shipping message into Peek, or enter it on Ekart's own tracker on ekartlogistics.in. Use the tracking ID, not the order number.
+Paste the 14-character tracking ID from the shop's shipping email or SMS into the box above in Peek, or enter it on ekartlogistics.in (or paste an `ekartlogistics.com/shipmenttrack/…` link directly into Peek). Use the tracking ID, not the store's order number.
 
 ### What does an Ekart tracking ID look like?
 
-Three letters, then `C`, `P` or `R`, then ten digits, such as `FMPP4829105736` (invented).
-
-### What does RTO mean in Ekart tracking?
-
-The parcel is going back to the seller. `ShipmentRtoConfirmed` or `Marked RTO: ORDER_REJECT` starts the return, and a later `Delivered` means it reached the seller. Ask the shop for a refund or a new delivery.
+An Ekart tracking ID is 14 characters: three letters, then `C`, `P` or `R`, then ten digits — for example `FMPP4829105736` (invented). Peek recognises 17 common prefixes (including `FMP`, `DEL`, `MYN`, `MYS`, `SHO` and `SRT`) automatically and checks Ekart's tracker for other four-letter prefixes.
 
 ### What does InscannedAtDH mean in Ekart tracking?
 
-The parcel has reached an Ekart delivery hub: on its way to you, the hub that delivers it. After an RTO, it's the seller's hub.
+`InscannedAtDH` (and `PrimaryDHInscan`) means the parcel was scanned in at an Ekart delivery hub (DH). On the way to you, it is the local hub before `Out For Delivery`; after an RTO scan, it is the seller's hub.
 
-### Who do I contact about a missing Ekart parcel?
+### What do undelivered_attempted and RTO mean in Ekart tracking?
 
-The shop or marketplace you ordered from: it booked Ekart. Ekart's website gives no customer care number for recipients.
+`undelivered_attempted` or `Unsuccessful` means the delivery round ended without delivering (a `Rescheduled to:` date shows the next try). `ShipmentRtoConfirmed` or `Marked RTO: ORDER_REJECT` starts Return to Origin (RTO): the parcel is returning to the seller, and a later `Delivered` scan means the seller received it back.
+
+### What is Ekart's customer care number for a missing or delayed parcel?
+
+Ekart's website publishes no customer care phone number or email for recipients (its FAQ covers seller portal tickets, answered within 24 hours). Contact the shop or marketplace you ordered from for delays, RTO refunds or replacements.
 
 :::sources
 - [Ekart Logistics: FAQ](https://www.ekartlogistics.in/faq) – support for sellers by a ticket on the portal, answered within 24 hours

@@ -1,12 +1,12 @@
 ---
 title: ePost Global tracking: EPG numbers and who delivers
-description: Track an ePost Global parcel: what an EPG number looks like, what the lines on its tracker mean and how Peek follows the partner that delivers it.
+description: Track an ePost Global (PPX Track / RRD) parcel: EPG 10–15 digit format, "Data Received" and "In transit to" partner handovers, EU customs and who delivers.
 slug: epost-global-tracking
 published: 2026-11-02
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-ePost Global is a US shipping company whose tracking numbers start with EPG. In the histories Peek's code holds, one of its processing centres in the United States scans the parcel in, then ePost Global hands it to a partner, a post or a courier, that takes it on. The shop or the sender gives you the number: paste it in the box above. ePost Global's own tracker is at epgtrack.com. Peek's catalog also knows ePost Global as PPX Track, and as RR Donnelley, RRD Donnelley or RRD International Logistics: searching any of these names when you pick a carrier in Peek finds ePost Global.
+Track an ePost Global (also known as PPX Track, RR Donnelley or RRD International Logistics) parcel by pasting its `EPG` number (`EPG` followed by 10 to 15 digits) in the box above or on epgtrack.com. ePost Global processes US outbound parcels at its US centres and hands them to a local postal or courier partner named on the `In transit to … tracking #: …` line — when Peek knows that partner, it follows the handover automatically.
 
 ## ePost Global tracking number: what it looks like
 
@@ -101,21 +101,21 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ## Questions about ePost Global tracking
 
-### What is PPX Track?
+### What is PPX Track (RRD) and what does an EPG number look like?
 
-Another name Peek's catalog gives ePost Global. Peek reads a PPX Track tracking link as an ePost Global link and takes the number from it.
+PPX Track (and RR Donnelley / RRD International Logistics) are other names Peek's catalog maps to ePost Global. Its tracking numbers are `EPG` followed by 10 to 15 digits, and Peek also accepts tracking links from epgtrack.com or PPX Track.
 
 ### What does "In transit to" mean on ePost Global tracking?
 
-ePost Global has handed the parcel to the partner that carries it on. The line names the partner's service and, after `tracking #:`, gives the partner's own number for the parcel.
+`In transit to … tracking #: …` (or `In transit via …`) appears right after `Parcel Shipped` and marks the handover from ePost Global's US processing centre to the partner carrying your parcel onward, along with that partner's own tracking number.
 
 ### Why is my ePost Global tracking stuck on "Data Received"?
 
-The shop has sent ePost Global the parcel's details, but none of its processing centres has scanned the parcel yet. Ask the shop when it handed the parcel over.
+`Data Received` (and `Shipment in Transit to the ePost Global Processing Center` one minute later) only means the shop transmitted the order data. ePost Global does not physically have the parcel until `Parcel Received and Processing` — ask the shop when it dispatched the shipment.
 
 ### Who delivers ePost Global parcels in my country?
 
-A partner, which ePost Global's handover line names. In the histories Peek's code holds, they include OSM Worldwide, DAI Post for New Zealand, ECMS Express, GLS's European network, Royal Mail in the UK, PostNL through Spring and La Poste in France.
+The local partner named on ePost Global's handover line: in Peek's live histories, partners include OSM Worldwide, DAI Post (New Zealand), ECMS Express, GLS's European network, Royal Mail (UK), PostNL through Spring and La Poste (France), plus destination national posts for international postal numbers.
 
 ### How do I contact ePost Global?
 

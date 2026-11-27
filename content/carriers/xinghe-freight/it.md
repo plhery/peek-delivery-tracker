@@ -1,12 +1,12 @@
 ---
 title: Xinghe Freight tracking: numeri GZXH, stati e consegna
-description: Traccia un pacco Xinghe Freight (星和货运) dalla Cina: com'è fatto il codice GZXH…YQ, cosa significano gli stati, chi consegna in Italia e chi contattare.
+description: Traccia un pacco Xinghe Freight (星和货运) dalla Cina: codice GZXH…YQ, piattaforma GZYL e tappe scritte in anticipo (Delivered), dogana in Italia e chi contattare.
 slug: xinghe-freight-tracking
 published: 2026-11-18
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Xinghe Freight (星和货运, 广州星和货运代理有限公司, Guangzhou Xinghe Freight Forwarding) è uno spedizioniere di Canton (Guangzhou), in Cina, il cui sistema di tracciamento si appoggia alla piattaforma di [GZYL](carrier:gzyl). Se il negozio da cui hai acquistato ti ha fornito un codice che inizia con `GZXH` e termina con `YQ`, incollalo nel riquadro qui sopra oppure cercalo tramite il modulo di ricerca spedizioni sul sito cinese di Xinghe, xinghe-express.cn. Leggi però la cronologia con cautela: su questa piattaforma l'intero percorso, fino a `Delivered`, può essere programmato in anticipo prima ancora che qualcuno tocchi fisicamente il pacco.
+Per tracciare un pacco Xinghe Freight (星和货运, 广州星和货运代理有限公司, spedizioniere di Canton fondato nel 2014), incolla il codice da 16 caratteri `GZXH` + 10 cifre + `YQ` nel riquadro qui sopra oppure cercalo sul sito cinese xinghe-express.cn. Il tracciamento di Xinghe usa la piattaforma di [GZYL](carrier:gzyl), dove l'intera tabella di marcia — fino a `Delivered` — può essere scritta in anticipo prima che qualcuno scansioni davvero il pacco: se un sito mostra `Delivered` ma non hai ricevuto nulla, chiedi subito al venditore il nome e il numero del corriere locale.
 
 ## Numero di tracciamento Xinghe Freight: com'è fatto
 
@@ -95,21 +95,25 @@ Eccetto [La Posta Svizzera](carrier:swiss-post) in Svizzera e nel Liechtenstein,
 
 ## Domande frequenti sul tracking Xinghe Freight
 
-### Che cos'è Xinghe Freight (星和货运)?
+### Che cos'è Xinghe Freight (星和货运) e com'è fatto il codice GZXH?
 
-È 广州星和货运代理有限公司 (Guangzhou Xinghe Freight Forwarding), uno spedizioniere con sede a Canton (Guangzhou), in Cina. Sul proprio sito dichiara di essere stato fondato nel 2014 e di occuparsi di trasporti marittimi, aerei e terrestri, agenzia marittima e pratiche doganali. I codici che Peek associa a Xinghe Freight hanno il formato `GZXH`, dieci cifre e `YQ`.
+È 广州星和货运代理有限公司 (Guangzhou Xinghe Freight Forwarding), uno spedizioniere di Canton (Guangzhou) fondato nel 2014 attivo nel trasporto marittimo, aereo e terrestre e nelle pratiche doganali. I codici riconosciuti da Peek hanno 16 caratteri: `GZXH`, dieci cifre e `YQ`.
 
 ### Perché il mio pacco Xinghe Freight mostra il tracking di GZYL?
 
-Perché il tracciamento di Xinghe si appoggia alla piattaforma di [GZYL](carrier:gzyl): il riquadro di ricerca sul sito stesso di Xinghe invia il tuo numero a quel sistema, e le tappe vengono restituite con le diciture di GZYL. Peek mantiene la spedizione sotto il nome Xinghe Freight e legge direttamente quella piattaforma per te.
+Perché il riquadro di ricerca di xinghe-express.cn invia il numero alla piattaforma di [GZYL](carrier:gzyl), restituendo le tappe con le diciture inglesi di GZYL (come `Internationaliy Package received at processing center`). Peek mantiene la spedizione sotto Xinghe Freight e legge direttamente quel sistema.
 
-### Chi consegna i pacchi Xinghe Freight in Italia?
+### Perché risulta `Delivered` su altri siti ma il pacco Xinghe non è arrivato?
 
-Peek non può saperlo: né le tappe del tracciamento né il sito di Xinghe indicano il corriere incaricato dell'ultimo miglio. Solo per Svizzera e Liechtenstein Peek può passare automaticamente la spedizione a La Posta Svizzera quando il record la nomina. Per una consegna in Italia, chiedi al venditore quale corriere effettua il recapito e il relativo numero di tracciamento.
+Sulla piattaforma GZYL gli spedizionieri possono caricare in anticipo un calendario fisso di tappe fino a `Delivered`, pubblicato a orari prestabiliti senza firma reale. Peek tiene da parte le tappe previste sotto «Mostrali» e avvisa sotto «Consegnato» se il record usa un calendario fisso: segnala subito al venditore il mancato arrivo e chiedi il codice del corriere locale.
 
-### Perché Peek non mostra ancora nessuna tappa per il mio codice GZXH?
+### Chi consegna i pacchi Xinghe Freight in Italia e ci sono costi doganali?
 
-Il sistema potrebbe non avere ancora ricevuto l'ordine, oppure contenere soltanto tappe scritte in anticipo (fino a `Delivered`) che Peek tiene da parte perché non confermate e mostra solo sotto «Mostrali». Peek interroga anche i servizi di tracciamento e continua a verificare la spedizione. Per un numero che il sistema non conosce, Peek legge la risposta come un numero non trovato: mostra «In attesa di Xinghe Freight» e, due giorni dopo, «Controlla il numero di tracciamento». Per uno di cui ha solo tappe scritte in anticipo, non ti chiede di controllare il numero. Confronta il numero con il messaggio del negozio e, se dopo qualche giorno non compare alcun movimento reale, chiedi al venditore se il pacco sia stato effettivamente spedito.
+Né il tracking né xinghe-express.cn nominano il corriere italiano (solo in Svizzera e Liechtenstein Peek passa a La Posta Svizzera quando indicata nel record): chiedilo al venditore. Per ordini extra-UE verso l'Italia si applicano il dazio fisso UE di 3 € per categoria fino a 150 € (dal 1° luglio 2026), la commissione di gestione UE di 2 € per categoria (dal 1° novembre 2026) e l'eventuale IVA.
+
+### Perché Peek non mostra ancora tappe per il mio codice GZXH e chi contatto?
+
+Il sistema potrebbe non avere ancora ricevuto l'ordine («In attesa di Xinghe Freight») oppure contenere solo tappe scritte in anticipo tenute da parte sotto «Mostrali». Contatta prima il venditore o il marketplace: il telefono (`19924483103`) e l'e-mail (`3975605292@qq.com`) su xinghe-express.cn sono solo in cinese per richieste commerciali.
 
 :::sources
 - [Xinghe Freight: 广州星和货运代理有限公司 (home page, in cinese)](http://xinghe-express.cn/) – ragione sociale, servizi di spedizione internazionale, riquadro di ricerca che interroga il sistema di GZYL, telefono ed e-mail

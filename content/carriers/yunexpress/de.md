@@ -1,12 +1,12 @@
 ---
 title: YunExpress Sendungsverfolgung: Status, Zusteller, Kontakt
-description: YunExpress-Paket aus China verfolgen: die YT-Nummer, was die englischen Status bedeuten, wer in Deutschland, Österreich und der Schweiz zustellt, wen du fragst.
+description: YunExpress Sendungsverfolgung auf Deutsch: YT-Nummer mit 16 Ziffern, „Delivered to local carrier“ und englische Status, Laufzeit nach DE/AT/CH, DHL und Kontakt.
 slug: yunexpress-sendungsverfolgung
 published: 2026-10-10
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-YunExpress, oft auch Yun Express geschrieben, ist ein Logistikunternehmen aus Shenzhen, das für Onlinehändler kleine Pakete aus China verschickt, auch für Verkäufer auf Amazon, Temu oder SHEIN. Für die Sendungsverfolgung gibst du die Nummer, die mit YT beginnt, auf [yuntrack.com](https://www.yuntrack.com/) ein, der Tracking-Seite von YunExpress, oder fügst sie oben ins Feld ein. Eine SMS oder E-Mail an Empfänger beschreibt YunExpress nirgends: Die Nummer steht in der Versand-E-Mail des Shops oder in deiner Bestellübersicht.
+Für die YunExpress Sendungsverfolgung (auch Yun Express) fügst du die Nummer mit `YT` und 16 Ziffern aus deiner Versand-E-Mail oder Bestellübersicht oben ins Feld ein – oder gibst sie auf [yuntrack.com](https://www.yuntrack.com/) ein (nur auf Englisch). Der Logistiker aus Shenzhen verschickt Bestellungen aus China für Händler etwa auf Amazon, Temu oder SHEIN und übergibt sie im Zielland an einen lokalen Paketdienst (oft DHL oder DPD in Deutschland): „Delivered to local carrier“ heißt daher Übergabe an den Zusteller, nicht Zustellung an dich.
 
 ## YunExpress Trackingnummer: YT und 16 Ziffern
 
@@ -86,25 +86,25 @@ Nennt YunExpress die Nummer des Paketdiensts vor Ort in einer Form, die Peek ken
 
 ## Fragen zur YunExpress Sendungsverfolgung
 
-### Was ist YunExpress?
+### Was ist YunExpress und wie sieht die Trackingnummer aus?
 
-Ein Logistikunternehmen für den Onlinehandel aus China: die Shenzhen Qianhai YunExpress Logistics Co., Ltd., nach eigenen Angaben 2014 in Shenzhen gegründet. Es verschickt für Onlinehändler Pakete in über 220 Länder und Regionen und wurde laut eigener Aussage 2017 ein von Amazon empfohlener Logistikpartner.
+YunExpress (Shenzhen Qianhai YunExpress Logistics Co., Ltd., gegründet 2014 in Shenzhen) verschickt Online-Bestellungen aus China in über 220 Länder und Regionen. Die Sendungsnummer besteht aus `YT` und 16 Ziffern (`YT` mit nur 13 Ziffern gehört zu YTO Express).
 
-### Wie lange braucht YunExpress nach Deutschland?
+### Wie lange dauert der Versand mit YunExpress nach Deutschland, Österreich und in die Schweiz?
 
-Laut YunExpress' Angaben für Händler 5 bis 8 Arbeitstage mit Standard Express und 6 bis 10 mit der Sparlinie; nach Österreich 6 bis 8 und 6 bis 10, in die Schweiz 6 bis 9 mit der Sparlinie. Welche Linie der Händler gebucht hat, siehst du meist nicht, und Zollkontrollen kosten zusätzlich Zeit.
+Laut YunExpress' Angaben für Händler dauert der Versand nach Deutschland 5 bis 8 Arbeitstage mit Standard Express und 6 bis 10 mit der Sparlinie, nach Österreich 6 bis 8 bzw. 6 bis 10 Arbeitstage, und in die Schweiz 6 bis 9 Arbeitstage mit der Sparlinie; Zollkontrollen verlängern die Laufzeit.
 
-### Stellt DHL YunExpress-Pakete zu?
+### Wer stellt YunExpress-Pakete in Deutschland zu (DHL oder DPD)?
 
-Das sagt YunExpress nicht: Für Deutschland, Österreich und die Schweiz nennt es keinen Zustellpartner. In YunExpress-Verläufen taucht aber `Shipment in transit to DHL` auf, ebenso Zeilen von DHL in Deutschland und von DPD, und Standard Express nimmt Packstation-Adressen an. Wer dein Paket hat, zeigen die Zeilen nach `Delivered to local carrier`.
+YunExpress nennt auf seinen Seiten keinen festen Partner für DACH, doch in den Verläufen tauchen Zeilen von DHL in Deutschland (`Shipment in transit to DHL`) sowie von DPD auf, und Standard Express nimmt Packstation-Adressen bis 60 × 30 × 30 cm an. Welcher Dienst dein Paket übernommen hat, zeigen die Scans nach `Delivered to local carrier` und das Feld „Last Mile Tracking“ auf Yuntrack.
 
-### Kann ich ein YunExpress-Paket abholen?
+### Was bedeutet „Delivered to local carrier“ im YunExpress Tracking?
 
-Ja, wenn der Händler eine der Abhollinien von YunExpress gebucht hat: Dann zeigt das Tracking die Adresse der Abholstelle oder des Paketautomaten. Sonst frag beim Paketdienst vor Ort nach, der im Tracking steht: Wie er mit einem verpassten Zustellversuch umgeht, sagt YunExpress nicht. Eigene Paketshops für Empfänger nennt YunExpress nicht.
+Es heißt nur, dass YunExpress das Paket nach der Einfuhrverzollung an den Paketdienst vor Ort übergeben hat – noch nicht, dass es bei dir zugestellt wurde. Danach folgen die Scans des lokalen Zustellers bis `Delivered` oder `POD available`.
 
-### Wie schicke ich ein YunExpress-Paket zurück?
+### Wie erreiche ich YunExpress und wohin schicke ich eine Retoure?
 
-Über den Shop: YunExpress veröffentlicht für Empfänger weder eine Rücksendeadresse noch Rückgaberegeln. Die Deutsche Post führt zwar die Hongkong Yunexpress Logistics Limited („YUN DE“) als Großempfänger in Dreieich, sagt aber nicht, wofür diese Adresse dient. Schick also nichts dorthin, solange der Shop es dir nicht sagt.
+Für Empfänger in Deutschland, Österreich und der Schweiz nennt YunExpress weder Telefonnummer noch Rücksendeadresse (yunexpress.de gehört nicht zu YunExpress; YUN DE in Dreieich ist nur ein Großempfänger-Eintrag ohne Rückgabefunktion). Wende dich für Probleme, Erstattungen und Retouren immer zuerst an den Shop, und nach der Übergabe an den lokalen Zusteller.
 
 :::sources
 - [YunExpress: Track & Trace Platform, Yuntrack](https://www.yuntrack.com/) – YT-Nummer, nur Englisch, Feedback

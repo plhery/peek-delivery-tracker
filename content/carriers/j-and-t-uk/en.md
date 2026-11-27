@@ -1,12 +1,12 @@
 ---
 title: J&T Express UK tracking: JTUK numbers and statuses
-description: Track a J&T Express UK parcel: what a JTUK number looks like, what each tracking line means, and what to do when your parcel is late, lost or not delivered.
+description: Track a J&T Express UK parcel: JTUK 16-character number format, what "collected and is on its way" and address errors mean, UK customs rules and who to contact.
 slug: jt-express-uk-tracking
 published: 2026-11-03
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-J&T Express UK delivers parcels in the United Kingdom. If a shop sent your order with J&T, the tracking number starts with `JTUK`: paste it in the box above, or look it up on J&T's own tracker at www.jtexpress.uk/tracking. The shop that sent your order has the number, in its shipping email or on your order page. Peek couldn't read J&T Express UK's website, so this page rests on what Peek's code knows about J&T's tracker and on official UK sources.
+Track a J&T Express UK parcel with its 16-character `JTUK` number (`JTUK` followed by 12 digits): paste it in the box above or look it up on www.jtexpress.uk/tracking. Find the number in the shop's shipping email or order page — and note that `The parcel has been collected and is on its way` means out for delivery today, not first pickup. Because Peek couldn't read J&T Express UK's website, this guide draws on Peek's live tracker data, Companies House and UK official rules; contact the shop first for any delivery problem.
 
 ## J&T Express UK tracking number: what it looks like
 
@@ -89,23 +89,23 @@ While you have the parcel open, or on its delivery day with notifications on, an
 
 ### Is J&T Express UK legit?
 
-Yes. Companies House lists J&T EXPRESS UK LTD as an active private limited company, incorporated on 18 December 2025; the nature of business it filed includes road freight, warehousing and postal activities. Its tracking numbers start with `JTUK`, and Peek reads its tracker for them.
+Yes. Companies House lists J&T EXPRESS UK LTD (company 16920174) as an active private limited company incorporated on 18 December 2025 for road freight, warehousing and postal activities. Its UK tracking numbers start with `JTUK` plus 12 digits, and Peek reads its live tracker.
 
-### What does "The parcel has been collected and is on its way" mean on J&T?
+### What does "The parcel has been collected and is on its way" mean on J&T Express UK?
 
-Your parcel is out for delivery. The courier has collected it for the delivery round; J&T files this line as a delivery scan, and Peek shows "Out for delivery". It doesn't mean the parcel has just left the sender.
+Your parcel is out for delivery today: the courier has taken it onto the delivery round. J&T files this line as a delivery scan and Peek shows "Out for delivery" — it does not mean the parcel has just been collected from the sender.
 
-### Why does J&T say my delivery address is incomplete or incorrect?
+### Why does J&T Express UK say my delivery address is incomplete or incorrect?
 
-The courier couldn't deliver because the address was missing something or didn't match. Check the address on your order and tell the shop straight away, with the full address and your tracking number.
+`The delivery address is incomplete or incorrect.` means the delivery round failed because part of the address (such as a flat number or postcode) was missing or mismatched. Check your order address and tell the shop right away with the full address and `JTUK` number.
 
-### Why is my J&T tracking number not found?
+### Why is my J&T Express UK tracking number not found?
 
-Check that it starts with `JTUK` and has 12 digits after it: numbers from J&T's other networks, such as `JTDE` in Germany, aren't the UK's. If the number is right, J&T may not have the parcel yet, and Peek shows "Waiting for J&T Express UK". If J&T still doesn't know the number two days later and nothing else has answered for it, Peek asks you to check it, choose another carrier or delete the parcel. If J&T still has no record after several days, ask the shop.
+Check that it starts with `JTUK` and has exactly 12 digits after it (`JTDE`, `JTAU`, `JTE` and 15-character `JT` codes belong to other J&T networks). If the `JTUK` number is right, J&T may not have scanned the parcel yet — Peek shows "Waiting for J&T Express UK" and asks you to check it after two days with no answer.
 
-### How do I contact J&T Express UK?
+### How do I contact J&T Express UK about a late or missing parcel?
 
-Ask the shop first: it booked the delivery. Peek couldn't read J&T Express UK's website, so this page gives no phone number or email.
+Contact the shop or marketplace first: it booked J&T, and under section 29 of the Consumer Rights Act 2015 online goods stay at the seller's risk until delivered to you or someone you named. Peek couldn't read J&T Express UK's site, so no J&T phone number or email is listed here.
 
 :::sources
 - [Universal Parcel Scraper: J&T Express UK](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-uk) – names, the JTUK shape, tracking links, the tracker's sentences and their stages, the delivery round and address scans, exact scan times, no place, expected day or weight, proof of delivery left out

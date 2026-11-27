@@ -1,12 +1,12 @@
 ---
 title: Meest tracking: numbers, statuses and contacts
-description: Track a Meest parcel to Ukraine, from the US or Canada, or from China to Europe: what the number looks like, what each status means and who to contact.
+description: Track a Meest parcel from the US, Canada, UK, Poland or China to Ukraine and Europe: number formats, statuses, local partners, branch hold and phone numbers.
 slug: meest-tracking
 published: 2026-10-12
-updated: 2026-10-26
+updated: 2026-11-27
 ---
 
-Meest is a group of parcel companies with Ukrainian roots, with offices in the US, Canada, the UK and Poland, and Meest International, which carries online shops' orders across borders. Track a parcel on the group's tracker, t.meest-group.com, on the parcel-track page of your country's meest.com site, or in the box above. The number is in your shipment confirmation, on the shipping label or in the shop's shipping email.
+Meest is an international parcel group with Ukrainian roots, operating Meest America (US), Meest Corporation (Canada), Meest UK, Meest Post (Poland) and Meest International for cross-border online orders. Track your parcel on t.meest-group.com, on your country's meest.com tracking page, or by pasting the tracking number in the box above. You'll find the number in your shipment confirmation email, on the shipping label or in the shop's dispatch notice.
 
 ## Meest tracking number: where to find it and what it looks like
 
@@ -87,17 +87,25 @@ Peek can notify you of "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about Meest tracking
 
-### Is Meest legit?
+### Is Meest a legitimate parcel carrier?
 
-Meest is an established group: Meest Post says its roots go back to 1989, and the group runs companies in the US, Canada, the UK and Poland.
+Yes. Meest is an established parcel group whose roots go back to 1989 (Meest Post), running regional operations in the US, Canada, the UK, Poland and Ukraine plus Meest International for cross-border online orders.
 
-### How long does Meest take to deliver?
+### How long does Meest take to deliver to Ukraine or within the EU?
 
-Meest Post expects 2 to 5 working days within the EU, at least 4 working days from Poland to Ukraine and at least 9 from Ukraine to Poland.
+Meest Post expects 2 to 5 working days within the EU, at least 4 working days from Poland to Ukraine and at least 9 working days from Ukraine to Poland.
 
-### What does a Meest tracking number from the USA look like?
+### What does a Meest tracking number look like, and why won't us.meest.com accept it?
 
-Meest America says it usually starts with a letter code followed by digits, and it is in your confirmation email or on the label.
+Meest America says tracking numbers usually start with a letter code followed by digits (such as CV or ANS…UA formats). The tracking box on us.meest.com, ca.meest.com and uk.meest.com only accepts 6 to 16 characters, so 17-character consolidation numbers ending in G must be tracked on t.meest-group.com or in Peek.
+
+### How long does Meest keep a parcel at a branch in Ukraine?
+
+Meest's Ukrainian rules allow 5 working days of free branch storage before a daily fee applies (partner branches limited to 10 kg return uncollected parcels), while Meest Canada's FAQ cites 3 to 5 days.
+
+### How do I contact Meest customer service?
+
+Call +1 862-682-4224 (US), +1-800-361-7345 (Canada), +44 330 533 0230 (UK) or +48 22 113 40 54 (Meest Post Poland), or use the contact form on international.meest.com for cross-border online orders.
 
 :::sources
 - [Meest Group: Трекінг Meest Group](https://t.meest-group.com/n/) – the group tracker, in Ukrainian, 17-character numbers

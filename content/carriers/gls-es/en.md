@@ -1,12 +1,12 @@
 ---
 title: GLS Spain tracking: statuses, Parcel Shops and contact
-description: Track a GLS parcel in Spain: why you need the postcode, what GLS's statuses mean, Parcel Shops and lockers, missed deliveries and how to reach GLS Spain.
+description: Track a GLS Spain parcel with your tracking number and postcode: status meanings, 24h domestic delivery, 7–9 day Parcel Shops and lockers, and phone support.
 slug: gls-spain-tracking
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-GLS Spain is the Spanish arm of the GLS Group, the parcel network that took over ASM Transporte Urgente in 2016. To track a parcel, open "Track your shipment" on GLS Spain's site or the My GLS app and enter the tracking number together with the delivery postcode: GLS asks for both. The number comes from the shop that sent the parcel.
+GLS Spain is the Spanish parcel network of the GLS Group (which acquired ASM Transporte Urgente in 2016), with more than 10,500 GLS Points across Spain. To track a parcel on GLS Spain's site, in the My GLS app or in Peek, you need both the tracking number (from the shop or your nota de paso) and the delivery postcode.
 
 ## GLS Spain tracking number and where to find it
 
@@ -82,21 +82,25 @@ The number alone doesn't name GLS Spain, and GLS answers nothing without the pos
 
 ## Questions about GLS tracking in Spain
 
-### Where is my GLS package?
+### How do I track my GLS Spain package, and why does it need a postcode?
 
-The latest status in GLS's tracking tells you, once you enter the number and the delivery postcode. If the courier missed you, the nota de paso says where the parcel waits, usually the nearest Parcel Shop.
+GLS Spain's tracker requires both your tracking number (N° de envio / Albarán) and the destination postcode—without the postcode, GLS shows nothing. If the courier missed you, check the nota de paso left at your door for the number and pickup point.
 
-### How long does GLS take to deliver in Spain?
+### How long does GLS Spain take to deliver?
 
-GLS gives a standard 24 working hours within Spain once it has the parcel, islands excluded, and 24 to 96 hours for Europe.
+GLS quotes a standard 24 working hours within mainland Spain once it receives the parcel, and 24 to 96 hours across Europe, delivering Monday to Friday (roughly 9am to 8pm) plus Saturday mornings for Express Saturday.
 
-### How long does GLS keep a parcel?
+### How long does a GLS Parcel Shop or locker in Spain hold a parcel?
 
-About a week: 7 calendar days at Parcel Shops and lockers, 9 after a missed home delivery, by GLS's pages. A parcel left at the depot goes back after 7 days.
+GLS holds parcels for 7 calendar days at Parcel Shops and lockers, or 9 calendar days after a missed home delivery (7 days at the depot before return to sender). For lockers, GLS recommends collecting within 48 hours using your PIN.
+
+### How do I contact GLS Spain customer service?
+
+Call +34 91 080 62 29 (Monday to Friday 9:00 to 14:00 and 16:00 to 19:00 Madrid time), chat with Gisela (GLS's virtual assistant), or message @GLSSpain on Facebook, @gls_spain on Instagram or @GLS_clientes on X.
 
 ### Is GLS Spain the same as ASM?
 
-GLS bought ASM: in April 2016 it announced the purchase of ASM Transporte Urgente, then the country's second-largest express network.
+Yes—in April 2016 GLS announced the purchase of ASM Transporte Urgente, then Spain's second-largest express network, folding it into GLS Spain.
 
 :::sources
 - [GLS Spain: Track your shipment with the tracking number](https://gls-group.com/ES/en/receiving-parcels/shipping-tracking/) – Track ID, statuses, Parcel Shop steps

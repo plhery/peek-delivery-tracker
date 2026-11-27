@@ -1,12 +1,12 @@
 ---
 title: Amazon Shipping tracking: numbers, problems and help
-description: Track an Amazon Shipping parcel sent by another shop: what its tracking number looks like, what to do if it doesn't arrive, and who to contact.
+description: Track an Amazon Shipping parcel from another shop: UK or TBA tracking numbers, how it differs from Amazon Logistics, missing or damaged parcels and scam tips.
 slug: amazon-shipping-tracking
 published: 2026-10-12
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Amazon Shipping is Amazon delivering parcels for other businesses, so a seller other than Amazon can send your order through Amazon's network. You track it with its tracking number on Amazon Shipping's public tracker (track.amazon.co.uk for UK numbers), which says the seller creates the shipment whether you ordered "on Amazon.co.uk or any other website". Other Amazon orders are followed in Your Orders.
+Amazon Shipping is Amazon's parcel delivery network carrying orders for other businesses, whether you bought on Amazon.co.uk or another website. Track your shipment on Amazon Shipping's public tracker (track.amazon.co.uk for UK parcels) or paste the tracking number in the box above. Amazon's own retail orders use Amazon Logistics and are tracked in Your Orders instead.
 
 ## Amazon Shipping tracking number and tracking ID
 
@@ -42,17 +42,21 @@ Peek shows the status, the history with the town, region and country of each sca
 
 ## Questions about Amazon Shipping tracking
 
-### Is Amazon Shipping the same as Amazon?
+### What is the difference between Amazon Shipping and Amazon Logistics?
 
-Not quite: it's Amazon's network delivering for other businesses, whether you bought from them on Amazon.co.uk or on another website. You track it on track.amazon.co.uk and contact the seller about problems. Other Amazon orders live in Your Orders.
+Amazon Shipping delivers parcels for other businesses—whether you bought on Amazon.co.uk or another website—and offers public tracking on track.amazon.co.uk. Amazon Logistics delivers Amazon's own orders, which are tracked inside Your Orders.
 
-### Is Amazon Shipping legit?
+### Is Amazon Shipping legit, and how do I spot a fake text?
 
-Yes. It's Amazon's delivery service for other businesses. A text about an order you don't recognise is another matter: Amazon advises not to reply, click its links or call a number it gives.
+Yes, Amazon Shipping is Amazon's official delivery service for third-party businesses. If you get an unexpected message about a purchase, Amazon advises not to reply, click links or call numbers in texts or emails, and notes it never asks for payment by phone or email or for gift cards.
 
-### How long does Amazon Shipping take?
+### Who do I contact if my Amazon Shipping parcel is missing or damaged?
 
-When Amazon's tracker gives an expected delivery day, Peek shows it, except for `TBA`, `TBC` and `TBM` numbers.
+Contact the shop or seller that sent the order first. Citizens Advice advises starting with the seller for a refund, redelivery or damaged-goods return rather than complaining to the carrier first.
+
+### How long does Amazon Shipping take to deliver?
+
+When Amazon's public tracker publishes an expected delivery day for your parcel, Peek shows it (except for `TBA`, `TBC` and `TBM` numbers).
 
 :::sources
 - [Amazon Shipping: Track a Package](https://track.amazon.co.uk/) – order placed on Amazon.co.uk or any other website, the seller creates the shipment, delivery services for businesses

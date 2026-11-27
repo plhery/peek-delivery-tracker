@@ -1,15 +1,15 @@
 ---
 title: Paquete dañado: qué hacer y cómo reclamar
-description: ¿Tu paquete ha llegado dañado o roto? Las fotos que debes hacer, cuándo rechazarlo, quién te devuelve el dinero y los plazos de Correos, InPost y Wallapop.
+description: ¿Tu paquete ha llegado dañado o roto? Qué fotos hacer, cuándo rechazarlo, cómo reclamar a la tienda o transportista y plazos de Correos, GLS, InPost y Wallapop.
 slug: paquete-danado-que-hacer
 picture: Una caja abollada con una esquina rota y la cinta despegándose, un móvil que le hace una foto con flash y Pip, preocupado, con una tirita pegada.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-27
 ---
 
-Si tu paquete llega dañado, hazle fotos antes de seguir desembalando, guarda la caja y todo lo que trae dentro, y avisa al vendedor ese mismo día. Si compraste a una empresa, la tienda te debe un producto en buen estado, y reclamar al transportista le toca a ella, no a ti. Si la caja ya llega aplastada, rota o mojada a tu puerta, puedes rechazarla, o aceptarla y dejar constancia del daño en el albarán.
+Si tu paquete llega dañado o roto, haz fotos antes de abrirlo del todo, conserva la caja y el embalaje y avisa a la tienda el mismo día. En España, cuando compras a una empresa, el riesgo del transporte es del vendedor hasta que recibes el pedido (art. 66 ter de la Ley de Consumidores): es la tienda quien debe repararlo, sustituirlo o devolverte el dinero, y quien reclama al transportista. Si la caja llega aplastada, rota o empapada, puedes rechazarla en la entrega o aceptarla dejando reservas por escrito en el albarán.
 
-## Qué hacer si un paquete llega dañado
+## ¿Qué hacer paso a paso si un paquete llega dañado o roto?
 
 :::steps
 - Mira antes de firmar | Revisa el exterior delante del repartidor: esquinas aplastadas, agujeros, desgarros, manchas de humedad, precinto abierto o vuelto a cerrar con cinta, algo que suena suelto.
@@ -38,7 +38,7 @@ El problema pasa a ser tuyo, o del transportista, en tres casos:
 - **Compraste a un particular.** La ley de consumo solo se aplica entre consumidores y empresarios (art. 2), así que lo que te ayuda es la protección de la plataforma.
 - **Organizaste tú el envío en eBay.** Su garantía no cubre un artículo dañado en el transporte si te encargaste tú del envío.
 
-## Cómo reclamar un paquete dañado al transportista
+## ¿Cómo reclamar un paquete dañado a Correos, GLS o InPost?
 
 Casi todos los transportistas tratan solo con el remitente, así que tu reclamación suele pasar por el vendedor. Si el paquete no ha llegado nunca, mira [paquete perdido](guide:lost-parcel).
 
@@ -80,7 +80,7 @@ Frente a la tienda no pierdes nada: responde de la falta de conformidad que exis
 
 Si el daño era oculto, todavía estás a tiempo con el transportista: 7 días naturales según esa ley. En InPost, tienes 7 días para avisar a la tienda. Con el Paquete Azul de Correos, en cambio, el daño se comunica al recibirlo.
 
-## Qué fotos hacer de un paquete dañado
+## ¿Qué fotos y pruebas necesitas para reclamar un paquete dañado?
 
 Hazlas antes de mover nada. Estas tres son una buena serie para cualquier transportista o tienda:
 

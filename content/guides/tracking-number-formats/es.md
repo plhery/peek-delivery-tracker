@@ -1,13 +1,13 @@
 ---
 title: ¿De qué empresa es este número de seguimiento?
-description: Pega tu número de seguimiento y mira de qué empresa es tu paquete, o reconócela por el formato: Correos, SEUR, GLS, NACEX, InPost, UPS o Amazon.
+description: ¿De qué empresa es tu número de seguimiento? Pégalo o reconócelo por su formato: Correos, SEUR, GLS, MRW, NACEX, TIPSA, InPost, UPS o Amazon.
 slug: que-empresa-es-numero-de-seguimiento
 picture: Tres etiquetas con números de seguimiento divididos en colores, una lupa sobre el código de país CH y Pip, curioso.
 published: 2026-10-09
-updated: 2026-11-16
+updated: 2026-11-27
 ---
 
-Pega tu número de seguimiento en la casilla de abajo y verás de qué empresa es: Peek reconoce al transportista por la forma del número, y con «Seguir tu paquete» ves dónde está. Si sale «Podría ser», esa forma la usan varias empresas, y la buena es la que nombra el correo de envío de la tienda; si pegas un número de pedido de Amazon, Shein o Temu, te dice dónde está el de seguimiento. A ojo, las letras y la longitud suelen bastar: `1Z` y 16 letras o cifras es UPS, `0000/00000000` es NACEX, y 13 caracteres como `RR000000005ES` (dos letras, nueve cifras, dos letras) son casi siempre un número postal, de Correos si acaba en `ES`. Los números que solo llevan cifras son el caso difícil: 12, 14 o 22 cifras encajan con varias empresas.
+Pega tu número de seguimiento en la casilla de abajo para saber qué empresa lleva tu paquete: Peek reconoce al transportista por su forma y con «Seguir tu paquete» ves su estado. Si aparece «Podría ser», varias empresas comparten ese formato y decide el correo de envío; si pegas un número de pedido de Amazon, Shein o Temu, Peek te indica dónde está el de seguimiento. A simple vista: `1Z` más 16 caracteres es UPS, cuatro cifras, una barra y ocho cifras es NACEX, y 13 caracteres con dos letras, nueve cifras y un código de país como `ES` o `PT` suelen ser un número postal (de Correos si acaba en `ES`). Los números que solo tienen 12, 14 o 22 cifras encajan con varias empresas.
 
 :::checker
 :::
@@ -25,7 +25,7 @@ Cuatro comprobaciones, en este orden:
 
 La casilla de arriba hace por ti las dos primeras comprobaciones, y también lee [un enlace del transportista o el correo de envío entero](guide:track-without-carrier). Cuando sigues el paquete, [Peek](/) hace la cuarta: pregunta a los transportistas más probables, entre más de 4500, hasta cinco a la vez. Mientras tanto, la línea del transportista muestra «Comprobando servicios de seguimiento…». Solo cuenta la respuesta sobre un paquete reciente, porque los transportistas acaban reutilizando sus números. Si solo uno conoce el número, ves su nombre y «tiene este paquete». Si son varios, ves por ejemplo «3 transportistas conocen este número» y «elige el tuyo»: elige el que nombra el correo de envío. Si ninguno lo conoce todavía, lees «aún no encontrado · Peek seguirá comprobando». Es lo que hace un [localizador universal de paquetes](guide:universal-tracker).
 
-## El formato del número de seguimiento en cada empresa
+## ¿Cómo es el número de seguimiento de Correos, SEUR, GLS, MRW, NACEX o InPost?
 
 Cada empresa lo llama a su manera: «código de envío» en Correos, «número de envío» en [MRW](carrier:mrw) y [TIPSA](carrier:tipsa), «número de expedición» en InPost, «número de seguimiento» en [GLS](carrier:gls-es) y Correos Express. Todos hablan de lo mismo: el número con el que se sigue tu paquete.
 
@@ -82,13 +82,13 @@ Correos, Correos Express y GLS no dan ninguna longitud en sus páginas de ayuda 
 
 A veces el número no basta. GLS, TIPSA y Paack piden también el código postal de destino, y GLS lo dice tal cual: «introduce el número de seguimiento de GLS y el código postal de destino».
 
-## Número de seguimiento que empieza por ES o TBA: Amazon
+## ¿De quién es un número de seguimiento que empieza por ES, FR o TBA?
 
 En los datos de transportistas que usa Peek, `ES` seguido de 10 cifras es [Amazon Logistics](carrier:amazon-logistics), el servicio de reparto de Amazon, o [Amazon Shipping](carrier:amazon-shipping) si Amazon lo lleva por encargo de otra tienda. Lo mismo vale con el código de otro país europeo delante, como `FR` o `PT`, y con `TBA`, `TBC` o `TBM` seguidos de 12 cifras. El pedido se sigue en «Mis pedidos» de Amazon.
 
 Cuenta los caracteres para no confundirlo con un número postal: `ES` y 10 cifras suman 12, y un número postal tiene 13, con dos letras al principio y dos al final. Puede acabar en `ES`, si es de Correos, y hasta empezar por `ES`, porque la serie `E` es la de los envíos EMS.
 
-## El formato postal: dos letras, nueve cifras y dos letras
+## ¿Qué significa un número de 13 caracteres terminado en ES, CN o PT?
 
 Los operadores postales nacionales comparten un formato de 13 caracteres, fijado por la Unión Postal Universal (UPU) en su norma S10. Aquí lo tienes por partes:
 
@@ -124,7 +124,7 @@ Si tiene 13 caracteres y acaba en dos letras, como `CN`, es un número postal de
 
 > En un envío que llega del extranjero, un número postal que empieza por `U` (de `UA` a `UZ`) no está pensado para que lo sigas. La UPU reserva esa serie para la mercancía enviada como carta sin seguimiento para el cliente, y bpost, el correo belga, lo dice sin rodeos: con un código así no podrás seguir tu paquete. No esperes a que el seguimiento arranque más tarde.
 
-## Números que no son tu número de seguimiento
+## Número de pedido o de contenedor: ¿qué números no sirven para rastrear?
 
 El número de pedido es la referencia de la tienda, no la del transportista: DHL recuerda que un número de seguimiento no es un número de pedido. Algunas referencias sí llevan al paquete, como la referencia alternativa de NACEX (hasta 10 cifras, en la etiqueta) o la «Referencia» de TIPSA, pero solo en su localizador y junto con los códigos de agencia y de cliente. Dónde está el número bueno, y qué hacer si no lo tienes: [dónde encontrar el número de seguimiento](guide:find-tracking-number).
 
@@ -150,7 +150,7 @@ Un paquete que cruza una frontera suele cambiar de manos, y cada empresa puede i
 - **AliExpress con envío económico:** Cainiao dice que el seguimiento termina al entregar el paquete al transportista local, y que el vendedor puede decirte cómo contactar con ese transportista. Más en [seguir un paquete que viene de China](guide:tracking-from-china).
 - **Aduana:** desde el 1 de noviembre de 2026, los pedidos de fuera de la UE pagan una tasa de tramitación de 2 € por tipo de producto. Lo normal es que la cobre la tienda al comprar; si no, el transportista puede pedírtela antes de entregar. Más en [paquete retenido en aduanas](guide:customs).
 
-## El número de seguimiento no aparece o no funciona
+## ¿Por qué mi número de seguimiento no aparece o da error?
 
 Un número que no devuelve nada no siempre está mal escrito. Correos Express avisa de que un envío recién registrado puede tardar unas horas en mostrar información, y te pide comprobar que el número «corresponde a Correos Express». CTT, en Portugal, da otros dos motivos: el código solo existe para la [aduana](guide:customs), u otra empresa entrega el envío. En peektracker.com, si ningún transportista responde a un número `1Z` de 17 caracteres, uno menos que los de UPS, Peek muestra «Empieza como un número de seguimiento de UPS, pero le falta un carácter: puede que tenga una errata. Compáralo con tu mensaje de envío.» Si un número válido simplemente no se mueve todavía, lee [por qué el seguimiento no se actualiza](guide:tracking-not-updating).
 

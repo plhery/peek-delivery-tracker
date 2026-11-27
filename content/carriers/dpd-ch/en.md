@@ -1,12 +1,12 @@
 ---
 title: DPD Switzerland tracking: statuses, delivery and contact
-description: Track a DPD parcel in Switzerland: the 14-digit number, what DPD's statuses mean, Pickup Locations, missed deliveries and who to contact.
+description: Track a DPD Switzerland parcel: 14-digit 060 numbers, myDPD statuses, Predict 1-hour slots, 7-day Pickup Locations, missed deliveries and contact phone.
 slug: dpd-switzerland-tracking
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-DPD Switzerland is DPD (Schweiz) AG in Buchs ZH, a parcel carrier in the Geopost network with over 1,000 DPD Pickup Locations. Track a parcel on [myDPD](https://www.dpdgroup.com/ch/mydpd/) with its 14-digit parcel number, or paste it in the box above. It usually comes by email, and it's on the card DPD leaves if it misses you.
+DPD Switzerland (DPD (Schweiz) AG in Buchs ZH, part of Geopost) delivers parcels across Switzerland with over 1,000 DPD Pickup Locations. Track your shipment on [myDPD](https://www.dpdgroup.com/ch/mydpd/) with its 14-digit parcel number (Swiss shipments start with 060), or paste it in the box above. The number usually arrives in the shop's shipping email or on DPD's missed-delivery notification card.
 
 ## Where to find your DPD Switzerland tracking number
 
@@ -85,17 +85,21 @@ At a Pickup Location the shop is named when DPD names it, its address usually on
 
 As a rule one day for a domestic parcel, from the start of the order, says DPD. International parcels depend on the country, and DPD's business terms call transit times indicative, not guaranteed.
 
-### What time does DPD deliver in Switzerland?
+### What time does DPD deliver in Switzerland, and does it deliver on Saturdays?
 
-DPD publishes no delivery hours. If the sender booked Predict, you get a one-hour time slot by SMS or email on the delivery day.
+DPD publishes no fixed delivery hours; if the sender booked Predict, you receive a one-hour time slot by SMS or email on delivery day. Pickup Locations can be used on Saturdays, and DPD's holiday table lists Saturday 28 November 2026 as a delivery day.
 
-### Does DPD deliver on Saturdays in Switzerland?
+### How long does a DPD Pickup Location in Switzerland hold my parcel?
 
-DPD doesn't say for home deliveries. Pickup Locations can be used on Saturdays, and DPD's holiday table lists Saturday 28 November 2026 as a delivery day.
+A DPD Pickup Location keeps your parcel for 7 calendar days before returning it to the sender. Bring photo ID to collect it, or give someone else your digital power of attorney or the signed back of the card plus their own photo ID.
 
-### Does DPD Switzerland have a contact email?
+### How do I book a DPD Switzerland redelivery with a P00 notification number?
 
-No. DPD's legal notice says to use only its contact form for parcel questions.
+The P00 number on a missed-delivery card isn't the parcel tracking number: enter it (or your SMS code) on myDPD's redelivery page to book a new delivery day, neighbour, safe place or Pickup Location.
+
+### How do I contact DPD Switzerland customer service?
+
+Call 058 311 13 13 (+41 58 311 13 13 from abroad, Monday to Friday 8 am to 6 pm, up to CHF 0.08/min) or use the "Contact DPD" form on DPD's support page. DPD Switzerland lists no customer service email address.
 
 :::sources
 - [DPD Switzerland: Parcel tracking](https://www.dpd.com/ch/en/mydpd/) – Predict, changes, Pickup Locations

@@ -1,12 +1,12 @@
 ---
 title: Amazon Logistics tracking: where to look and what to do
-description: Track an Amazon Logistics parcel in Your Orders: what a TBA number is, map tracking, Amazon Lockers and Counters, sellers, and how to reach Amazon.
+description: Track an Amazon Logistics order in Your Orders: TBA and UK/DE/FR numbers, Amazon Map Tracking, 3-day Amazon Lockers and Counters, A-to-z Guarantee and contact.
 slug: amazon-logistics-tracking
 published: 2026-10-11
-updated: 2026-11-14
+updated: 2026-11-27
 ---
 
-Amazon Logistics is Amazon's own delivery network: the Delivery Service Partners and Amazon Flex drivers who bring Amazon orders to your door. You track the parcel in Your Orders on the Amazon site you ordered from, under Track Package.
+Amazon Logistics is Amazon's own last-mile delivery network, using Delivery Service Partners and Amazon Flex drivers to bring Amazon orders to your door. Track your Amazon order in Your Orders (via Returns & Orders on the website or the person icon in the Amazon app) and choose Track Package—where Amazon Map Tracking also activates once the driver is 10 stops away.
 
 ## Amazon Logistics tracking number
 
@@ -60,21 +60,25 @@ Otherwise Peek says "Amazon Logistics deliveries are usually tracked in Your Ord
 
 ## Questions about Amazon Logistics
 
-### What is Amazon Logistics?
+### How do I track an Amazon Logistics order with a TBA or UK number?
 
-It's the network that takes Amazon orders on the last stretch, from Amazon's delivery stations to your door. In the UK, Amazon works with Delivery Service Partners, small firms that hire their own drivers and run 20 to 40 vans each, and with independent drivers through Amazon Flex. Some orders go to other couriers instead, such as DPD or Royal Mail.
+Open Your Orders on the Amazon site or app where you ordered and select Track Package. Amazon Logistics doesn't offer public tracking outside your account; if a `TBA` or country-code number answers on Amazon's public tracker, it's an Amazon Shipping parcel from another shop and Peek tracks it directly.
 
-### Is Amazon Logistics legit?
+### What is Amazon Logistics, and is it the same as Amazon?
 
-Yes, it's how Amazon delivers its own orders, and the parcel shows in Your Orders. A text about a delivery or purchase you weren't expecting is another matter: don't click, and check Your Orders in the app or on the site instead.
+Amazon Logistics is Amazon's own last-mile delivery network, run through Delivery Service Partners and Amazon Flex drivers. For orders shipped by Amazon you deal directly with Amazon Customer Service, while third-party sellers who ship items themselves handle their own support.
 
-### How long does Amazon Logistics take to deliver?
+### How long do Amazon Lockers and Counters hold a parcel?
 
-Your Orders shows the delivery day, and once the driver is 10 stops away you can follow the parcel on Amazon Map Tracking. In Ireland, Amazon delivers seven days a week from its fulfilment centre at Baldonnell in Dublin and its delivery stations in Rathcoole and Ballycoolin.
+Amazon Lockers hold a parcel for three calendar days before Amazon returns it and refunds you automatically. Amazon Counters also return and refund uncollected parcels automatically after the pickup window.
 
-### Is Amazon Logistics the same as Amazon?
+### How long does Amazon Logistics take, and can I see live map tracking?
 
-For you, yes: the drivers work for Amazon's Delivery Service Partners or through Amazon Flex, but you deal with Amazon, in Your Orders and through Amazon Customer Service. A third-party seller who ships the order itself handles its own customer service.
+Your Orders shows the delivery day, and once the driver is 10 stops away Amazon sends a push alert (if enabled) so you can follow the parcel live on Amazon Map Tracking.
+
+### How do I contact Amazon Logistics customer service or report a scam text?
+
+Use Amazon's Customer Service page for live chat ("Chat with an associate now") or a phone callback ("Request a phone call", 6am to midnight daily), or message @AmazonHelp 24/7. Never click links in unexpected purchase texts—Amazon never asks for payment by phone or email, or for gift cards.
 
 :::sources
 - [About Amazon UK: Who delivers my Amazon package in the UK?](https://www.aboutamazon.co.uk/news/operations/how-your-package-gets-from-amazons-warehouse-to-your-front-door) – Delivery Service Partners, Amazon Flex, other couriers

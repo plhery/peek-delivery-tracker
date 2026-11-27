@@ -1,12 +1,12 @@
 ---
 title: Canada Post tracking: numbers, statuses and notice cards
-description: Track a Canada Post parcel: where the tracking number is, what Canada Post's statuses mean, notice cards and pickup deadlines, missing parcels and customs.
+description: Track a Canada Post parcel: 16-digit and CA number formats, status meanings, 15-day notice card pickups, 5-day lockers, CBSA customs fees and missing parcels.
 slug: canada-post-tracking
 published: 2026-10-15
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Canada Post is the Canada Post Corporation, the federal Crown corporation that runs Canada's postal service. Track a parcel on Canada Post's [Track page](https://www.canadapost-postescanada.ca/track-reperage/en) or in its free app, or paste the number in the box above. The number comes from the sender, usually in the shop's shipping email: Canada Post can't find a parcel by your name or address. If it ends in `CA` and you follow the parcel from outside Canada, Peek can also ask your country's post with the same number.
+Canada Post is Canada's federal Crown corporation running the national postal service. Track a parcel on Canada Post's [Track page](https://www.canadapost-postescanada.ca/track-reperage/en) or in its free app using your 16-digit tracking number, international `CA` postal code or 15-digit Delivery Notice Card number, or paste it in the box above. Canada Post can't look up a parcel by name or address, so check the sender's shipping email if you don't have the number. If it ends in `CA` and you track it from outside Canada, Peek can also ask your country's post with the same number.
 
 ## Canada Post tracking number: what it looks like
 
@@ -112,19 +112,23 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ### Why is my Canada Post tracking not updating?
 
-Long flights, customs and weekends often leave a gap between scans. Peek keeps asking, hourly once two days pass without news. If the expected delivery date is more than 5 business days past, ask Canada Post for an investigation. See [tracking that isn't updating](guide:tracking-not-updating).
+Long flights, CBSA customs reviews and weekends often leave gaps between scans, and the CBSA says mail at customs can't be tracked precisely. Canada Post says most late parcels arrive within 5 business days of the expected delivery date; after that, open a support ticket on its missing packages page. See [tracking that isn't updating](guide:tracking-not-updating).
 
-### Why can't Peek find my Canada Post tracking number?
+### Why can't Canada Post or Peek find my tracking number?
 
-Canada Post gives the same answer whether a number is unknown, not scanned yet or expired, so on a Canada Post parcel Peek shows "Waiting for Canada Post" while it waits for the first scan. If Canada Post still gives that answer two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Track's usual reasons: the parcel isn't with Canada Post yet or is still abroad, it was shipped more than a year ago, or the service has no tracking. Check every digit: in a 16-digit number the last one is a check digit, and in a postal number the last digit before `CA` is.
+Canada Post gives the same answer whether a number is unknown, not scanned yet, still abroad, over a year old or untracked, so Peek shows "Waiting for Canada Post" while waiting for the first scan. If Canada Post still gives that answer two days later and nothing else has answered, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." Check every digit: both 16-digit numbers and `CA` postal numbers end with a check digit.
 
-### Can I track a Canada Post parcel with the notice card number?
+### How long does Canada Post hold a parcel after a Delivery Notice Card or in a locker?
 
-Yes. Paste the 15-digit number from the card, tap "Change" and pick Canada Post under "All carriers". Peek looks the parcel up on Canada Post with it.
+Canada Post holds a parcel at the post office for 15 calendar days in total—sending a Final Notice Card after 5 calendar days—before returning it to the sender. Parcels left in a parcel locker stay 5 days before moving to the post office.
 
-### Who delivers a Canada Post parcel in the US or the UK?
+### Can I track a Canada Post parcel with the Delivery Notice Card number?
 
-Your country's post, if the number ends in `CA`: USPS in the US, Royal Mail in the UK, or Parcelforce for numbers starting `E`. Peek asks it with the same number. A 16-digit number stays with Canada Post.
+Yes. Paste the 15-digit number from the Delivery Notice Card into Peek, tap "Change" and pick Canada Post under "All carriers", or enter it on Canada Post's Track page.
+
+### How do Canada Post customs duties and the $9.95 handling fee work?
+
+Goods mailed from abroad worth CAN$20 or less (or gifts up to CAN$60) owe no GST or duty. Above that, CBSA assesses duty and GST/HST/PST on Form E14, and Canada Post collects the amount plus a $9.95 handling fee online before delivery, at the door or at the post office.
 
 :::sources
 - [Canada Post: Track a package by tracking number](https://www.canadapost-postescanada.ca/track-reperage/en) – free app, "Notice left", pickup date and ID, why a number isn't found

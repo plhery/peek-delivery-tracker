@@ -16238,6 +16238,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#4042e2"
     },
     {
+      "id": "stone3pl",
+      "catalog": "stone3pl",
+      "slug": "stone3pl-tracking",
+      "title": "Rastreio Stone3PL: códigos, status e entrega internacional",
+      "name": "Stone3PL",
+      "color": "#003d98"
+    },
+    {
       "id": "j-and-t-uk",
       "catalog": "j-and-t-uk",
       "slug": "rastreamento-jt-express-uk",
@@ -16588,6 +16596,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento SkyPostal: códigos SP...BR, status e suporte",
       "name": "SkyPostal",
       "color": "#088aea"
+    },
+    {
+      "id": "thailand-post",
+      "catalog": "thailand-post",
+      "slug": "thailand-post-tracking",
+      "title": "Rastreio Thailand Post: códigos TH S10, EMS e contato",
+      "name": "Thailand Post",
+      "color": "#ef172f"
     },
     {
       "id": "onlog-express",
@@ -21178,6 +21194,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "SkyPostal 物流查询：SKAMZUS 与 SP 单号、状态与客服",
       "name": "SkyPostal",
       "color": "#088aea"
+    },
+    {
+      "id": "thailand-post",
+      "catalog": "thailand-post",
+      "slug": "thailand-post-tracking",
+      "title": "泰国邮政（Thailand Post）物流查询：TH 单号、EMS 状态与客服",
+      "name": "Thailand Post",
+      "color": "#ef172f"
     },
     {
       "id": "yunda",

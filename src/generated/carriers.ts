@@ -15158,6 +15158,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006d57"
     },
     {
+      "id": "cacesa",
+      "catalog": "cacesa",
+      "slug": "cacesa-tracking",
+      "title": "Rastreio CACESA: alfândega, status e quem entrega",
+      "name": "CACESA",
+      "color": "#C9032D"
+    },
+    {
       "id": "sunyou",
       "catalog": "sunyou",
       "slug": "rastreamento-sunyou",
@@ -16260,6 +16268,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento SPX Express Singapura: Shopee e status",
       "name": "SPX Express Singapore",
       "color": "#ee4d2d"
+    },
+    {
+      "id": "chronodiali",
+      "catalog": "chronodiali",
+      "slug": "chronodiali-tracking",
+      "title": "Rastreio Chronodiali: códigos CHPU, status e contato",
+      "name": "Chronodiali",
+      "color": "#009adf"
     },
     {
       "id": "17feia",
@@ -19820,6 +19836,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006d57"
     },
     {
+      "id": "cacesa",
+      "catalog": "cacesa",
+      "slug": "cacesa-tracking",
+      "title": "CACESA 物流与清关查询：状态含义、关税缴纳与派送商",
+      "name": "CACESA",
+      "color": "#C9032D"
+    },
+    {
       "id": "sunyou",
       "catalog": "sunyou",
       "slug": "shunyou-wuliu-sunyou-chaxun",
@@ -20938,6 +20962,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "新加坡 SPX Express（Shopee Xpress）单号查询与状态说明",
       "name": "SPX Express Singapore",
       "color": "#ee4d2d"
+    },
+    {
+      "id": "chronodiali",
+      "catalog": "chronodiali",
+      "slug": "chronodiali-tracking",
+      "title": "Chronodiali 物流查询：CHPU 单号、状态与摩洛哥派送",
+      "name": "Chronodiali",
+      "color": "#009adf"
     },
     {
       "id": "17feia",

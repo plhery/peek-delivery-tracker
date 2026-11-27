@@ -34884,9 +34884,9 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kuala_Lumpur",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "dd-express"
     },
-    "trackingUrlTemplate": "https://tracking.dd.express/?tracking_ids={trackingNumber}",
+    "trackingUrlTemplate": "https://tracking.dd.express/v2/",
     "linkRules": [
       {
         "domains": [
@@ -34898,7 +34898,7 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.dd.express/",
+    "trackingSearchUrl": "https://tracking.dd.express/v2/",
     "helpUrl": "https://dd.express/contact/"
   },
   "famafutar": {
@@ -39080,7 +39080,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/London",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "ttk-europe"
     },
     "trackingUrlTemplate": "https://ttkeu.com/tracking/tracking-detail/?id={trackingNumber}",
     "linkRules": [
@@ -41128,10 +41128,10 @@ export const CARRIER_CAPABILITIES = {
     ],
     "color": "#a81d30",
     "selectable": true,
-    "timezone": "America/Los_Angeles",
+    "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "yuema-express"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -44043,12 +44043,27 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Toronto",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "valueway",
+      "recognitionRank": 133
     },
-    "linkRules": [],
-    "detectionRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "member.valueway.net"
+        ],
+        "pathPattern": "^/cgi-bin/ginfo\\.dll$",
+        "query": "^(?=(?:.*&)?MfcISAPICommand=(?:emmistrack|EmsApiTrack)(?:&|$))(?:.*&)?cno=([^&]+)(?=&|$)"
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^VE\\d{9}CA$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://www.valueway.net/main.html",
-    "helpUrl": "https://www.valueway.net/Contact/index.html#office"
+    "helpUrl": "https://www.valueway.net/Contact/index.html#office",
+    "trackingUrlTemplate": "https://member.valueway.net/cgi-bin/GInfo.dll?MfcISAPICommand=EmmisTrack&w=valueway&ntype=1000&cmodel=new:tracking&cno={trackingNumber}"
   },
   "banling": {
     "displayName": "Banling International Logistics",
@@ -46974,7 +46989,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Australia/Melbourne",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "ecparcel"
     },
     "trackingUrlTemplate": "https://track.ec-parcel.com/track?trackingNumber={trackingNumber}",
     "linkRules": [
@@ -46988,7 +47003,12 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^YOTN20\\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])\\d{9}$",
+        "confidence": "high"
+      }
+    ],
     "trackingSearchUrl": "https://track.ec-parcel.com/",
     "helpUrl": "https://www.ec-parcel.com/parcel-problem/"
   },
@@ -50649,10 +50669,21 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "bigfoot-express"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "bigfootexpress.pperfect.com"
+        ],
+        "pathPattern": "^/?$",
+        "params": [
+          "w"
+        ]
+      }
+    ],
     "detectionRules": [],
     "trackingSearchUrl": "https://bigfootexpress.pperfect.com/",
-    "helpUrl": "https://www.bigfootexpress.co.za/contact/"
+    "helpUrl": "https://www.bigfootexpress.co.za/contact/",
+    "trackingUrlTemplate": "https://bigfootexpress.pperfect.com/?w={trackingNumber}"
   },
   "brink-transport": {
     "displayName": "Brink Transport",
@@ -50945,10 +50976,21 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "intertown-transport"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "intertown.pperfect.com"
+        ],
+        "pathPattern": "^/?$",
+        "params": [
+          "w"
+        ]
+      }
+    ],
     "detectionRules": [],
     "trackingSearchUrl": "https://intertown.pperfect.com/",
-    "helpUrl": "https://www.intertown.co.za/contact/"
+    "helpUrl": "https://www.intertown.co.za/contact/",
+    "trackingUrlTemplate": "https://intertown.pperfect.com/?w={trackingNumber}"
   },
   "king-solutions": {
     "displayName": "King Solutions",
@@ -61867,11 +61909,12 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Baghdad",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "zmc-express"
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://apps.zmc-iraq.com/tracking.php"
+    "trackingSearchUrl": "https://apps.zmc-iraq.com/tracking.php",
+    "helpUrl": "https://zmcexpress.com/get-in-touch/"
   },
   "onlog-express": {
     "displayName": "Onlog Express",
@@ -63298,7 +63341,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Madrid",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "szendex"
     },
     "trackingUrlTemplate": "https://erp.szendex.com/DlWebTrackingVWE/?seg={trackingNumber}",
     "linkRules": [
@@ -63450,12 +63493,28 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Africa/Johannesburg",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "act-logistics"
     },
-    "linkRules": [],
-    "detectionRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "actlogistics.pperfect.com"
+        ],
+        "pathPattern": "^/?$",
+        "params": [
+          "w"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^\\d{7}ACT$",
+        "confidence": "high"
+      }
+    ],
     "trackingSearchUrl": "https://actlogistics.pperfect.com/",
-    "helpUrl": "https://act-logistics.co.za/contact/"
+    "helpUrl": "https://act-logistics.co.za/contact/",
+    "trackingUrlTemplate": "https://actlogistics.pperfect.com/?w={trackingNumber}"
   },
   "ads-intl": {
     "displayName": "ADS International",

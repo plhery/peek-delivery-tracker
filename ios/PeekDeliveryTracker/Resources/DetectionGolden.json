@@ -4450,6 +4450,16 @@
     ]
   },
   {
+    "input": "009000298400000001",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "bpost",
+      "ecoscooting",
+      "gls-es"
+    ]
+  },
+  {
     "input": "00903289909999",
     "carrier": "unknown",
     "confidence": "low",
@@ -26563,6 +26573,14 @@
       "mondial-relay",
       "colisweb",
       "heppner"
+    ]
+  },
+  {
+    "input": "1886880ACT",
+    "carrier": "act-logistics",
+    "confidence": "high",
+    "candidates": [
+      "act-logistics"
     ]
   },
   {
@@ -58234,6 +58252,33 @@
     "candidates": []
   },
   {
+    "input": "55536223691",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "postlogistics",
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "blue-dart",
+      "japan-post",
+      "aramex",
+      "coordinadora",
+      "gls-at",
+      "gls-pl",
+      "mainfreight",
+      "paquetexpress",
+      "ppl"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "postlogistics",
+      "ppl"
+    ]
+  },
+  {
     "input": "555726783791",
     "carrier": "unknown",
     "confidence": "low",
@@ -78746,6 +78791,35 @@
     ]
   },
   {
+    "input": "912001556933",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "poste-italiane",
+      "brt",
+      "japan-post",
+      "sf-express",
+      "sto",
+      "zto",
+      "yamato",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sagawa",
+      "sending"
+    ],
+    "asked": [
+      "poste-italiane",
+      "japan-post",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
     "input": "91231047-9",
     "carrier": "unknown",
     "confidence": "low",
@@ -84565,6 +84639,12 @@
   },
   {
     "input": "A12332444",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "A13477-12-2536003",
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
@@ -118647,6 +118727,14 @@
     ]
   },
   {
+    "input": "TE107809957GB",
+    "carrier": "royal-mail",
+    "confidence": "high",
+    "candidates": [
+      "royal-mail"
+    ]
+  },
+  {
     "input": "TELP1000004829",
     "carrier": "ekart",
     "confidence": "high",
@@ -121170,6 +121258,17 @@
     ]
   },
   {
+    "input": "VE015056238CA",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "valueway"
+    ],
+    "asked": [
+      "valueway"
+    ]
+  },
+  {
     "input": "VE55E14128101281058759J",
     "carrier": "correos-spain",
     "confidence": "high",
@@ -123317,6 +123416,14 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "YOTN20260423100000003",
+    "carrier": "ecparcel",
+    "confidence": "high",
+    "candidates": [
+      "ecparcel"
+    ]
   },
   {
     "input": "YP005928287CO",

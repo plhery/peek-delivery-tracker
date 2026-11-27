@@ -15014,6 +15014,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#004654"
     },
     {
+      "id": "amazon-logistics",
+      "catalog": "amazon-logistics",
+      "slug": "amazon-logistics-tracking",
+      "title": "Rastreio Amazon Logistics: códigos TBA, Lockers e ajuda",
+      "name": "Amazon Logistics",
+      "color": "#ff9900"
+    },
+    {
       "id": "dpd-uk",
       "catalog": "dpd-uk",
       "slug": "rastreamento-dpd-uk",
@@ -15556,6 +15564,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Australia Post: códigos, status e lockers",
       "name": "Australia Post",
       "color": "#dc1928"
+    },
+    {
+      "id": "aramex-au",
+      "catalog": "aramex-au",
+      "slug": "aramex-australia-tracking",
+      "title": "Rastreio Aramex Australia: códigos, status e contatos",
+      "name": "Aramex Australia",
+      "color": "#dc291e"
     },
     {
       "id": "aramex-nz",
@@ -19644,6 +19660,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#004654"
     },
     {
+      "id": "amazon-logistics",
+      "catalog": "amazon-logistics",
+      "slug": "amazon-logistics-tracking",
+      "title": "Amazon Logistics 物流查询：TBA 单号、自提柜与客服",
+      "name": "Amazon Logistics",
+      "color": "#ff9900"
+    },
+    {
       "id": "dpd-uk",
       "catalog": "dpd-uk",
       "slug": "dpd-uk-tracking",
@@ -20186,6 +20210,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "澳洲邮政（Australia Post）物流查询：单号、状态与快递柜",
       "name": "Australia Post",
       "color": "#dc1928"
+    },
+    {
+      "id": "aramex-au",
+      "catalog": "aramex-au",
+      "slug": "aramex-australia-tracking",
+      "title": "Aramex Australia（原 Fastway）物流查询：单号、状态与网点",
+      "name": "Aramex Australia",
+      "color": "#dc291e"
     },
     {
       "id": "aramex-nz",

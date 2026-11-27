@@ -15438,6 +15438,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#004fa0"
     },
     {
+      "id": "cyprus-post",
+      "catalog": "cyprus-post",
+      "slug": "cyprus-post-tracking",
+      "title": "Rastreio Cyprus Post: códigos, status e alfândega",
+      "name": "Cyprus Post",
+      "color": "#e4a50e"
+    },
+    {
       "id": "maltapost",
       "catalog": "maltapost",
       "slug": "maltapost-tracking",
@@ -16348,6 +16356,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Xinghe Freight: códigos GZXH…YQ e etapas",
       "name": "Xinghe Freight",
       "color": "#0e3a6b"
+    },
+    {
+      "id": "cvc",
+      "catalog": "cvc",
+      "slug": "cvc-tracking",
+      "title": "Rastreio CVC (Си Ви Си): acompanhe encomendas na Bulgária",
+      "name": "CVC",
+      "color": "#652b9e"
     },
     {
       "id": "sxw-express",
@@ -20132,6 +20148,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#004fa0"
     },
     {
+      "id": "cyprus-post",
+      "catalog": "cyprus-post",
+      "slug": "cyprus-post-tracking",
+      "title": "塞浦路斯邮政（Cyprus Post）物流查询：单号、状态与关税",
+      "name": "Cyprus Post",
+      "color": "#e4a50e"
+    },
+    {
       "id": "maltapost",
       "catalog": "maltapost",
       "slug": "maltapost-tracking",
@@ -21058,6 +21082,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "星和货运（Xinghe Freight）物流查询：GZXH单号与状态",
       "name": "Xinghe Freight",
       "color": "#0e3a6b"
+    },
+    {
+      "id": "cvc",
+      "catalog": "cvc",
+      "slug": "cvc-tracking",
+      "title": "CVC（Си Ви Си）保加利亚物流查询：单号、状态与追踪指南",
+      "name": "CVC",
+      "color": "#652b9e"
     },
     {
       "id": "sxw-express",

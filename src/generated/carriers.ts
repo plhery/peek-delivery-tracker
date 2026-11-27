@@ -22198,6 +22198,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005baa"
     },
     {
+      "id": "swiss-post-cargo",
+      "catalog": "swiss-post-cargo",
+      "slug": "swiss-post-cargo-pakket-volgen",
+      "title": "Swiss Post Cargo volgen: SSCC, statussen en levering",
+      "name": "Swiss Post Cargo",
+      "color": "#ffcc00"
+    },
+    {
       "id": "nova-poshta",
       "catalog": "nova-poshta",
       "slug": "nova-poshta-pakket-volgen",
@@ -22212,6 +22220,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Česká pošta (Czech Post) pakket volgen: nummers en status",
       "name": "Česká pošta",
       "color": "#002776"
+    },
+    {
+      "id": "slovenska-posta",
+      "catalog": "slovenska-posta",
+      "slug": "slovenska-posta-pakket-volgen",
+      "title": "Slovenská pošta pakket volgen: nummers, status en contact",
+      "name": "Slovenská pošta",
+      "color": "#f9bb00"
     },
     {
       "id": "elta",
@@ -22468,6 +22484,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "landmark-global",
+      "catalog": "landmark-global",
+      "slug": "landmark-global-sporing",
+      "title": "Landmark Global sporing: LTN-numre, statuser og partnere",
+      "name": "Landmark Global",
+      "color": "#e62337"
+    },
+    {
       "id": "postnord",
       "catalog": "postnord",
       "slug": "postnord-sporing",
@@ -22540,6 +22564,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Postin seuranta: lähetystunnus, tilat ja pakettiautomaatit",
       "name": "Posti",
       "color": "#ff8000"
+    },
+    {
+      "id": "slovenska-posta",
+      "catalog": "slovenska-posta",
+      "slug": "slovenska-posta-lahetyksen-seuranta",
+      "title": "Slovenská pošta lähetyksen seuranta: koodit ja tilat",
+      "name": "Slovenská pošta",
+      "color": "#f9bb00"
     },
     {
       "id": "matkahuolto",
@@ -22626,6 +22658,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ba1b02"
     },
     {
+      "id": "amazon-logistics",
+      "catalog": "amazon-logistics",
+      "slug": "amazon-logistics-sledovanie-zasielok",
+      "title": "Amazon Logistics sledovanie zásielok: kde hľadať a pomoc",
+      "name": "Amazon Logistics",
+      "color": "#ff9900"
+    },
+    {
       "id": "slovak-parcel-service",
       "catalog": "slovak-parcel-service",
       "slug": "sps-sledovanie-zasielky",
@@ -22675,6 +22715,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ],
   "hu": [
+    {
+      "id": "poste-italiane",
+      "catalog": "poste-italiane",
+      "slug": "poste-italiane-csomagkovetes",
+      "title": "Poste Italiane csomagkövetés: számok, állapotok, átvétel",
+      "name": "Poste Italiane",
+      "color": "#eedc00"
+    },
     {
       "id": "packeta",
       "catalog": "packeta",
@@ -22812,6 +22860,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Urmărire colet FAN Courier: AWB, statusuri și FANbox",
       "name": "FAN Courier",
       "color": "#0f2345"
+    },
+    {
+      "id": "slovenska-posta",
+      "catalog": "slovenska-posta",
+      "slug": "slovenska-posta-urmarire-colet",
+      "title": "Slovenská pošta urmărire colet: numere, statusuri, contact",
+      "name": "Slovenská pošta",
+      "color": "#f9bb00"
     },
     {
       "id": "dao",
@@ -23059,6 +23115,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ],
   "hr": [
+    {
+      "id": "vinted-go",
+      "catalog": "vinted-go",
+      "slug": "vinted-go-pracenje-posiljke",
+      "title": "Vinted Go praćenje pošiljke: statusi, paketomati i kontakt",
+      "name": "Vinted Go",
+      "color": "#004654"
+    },
     {
       "id": "posti",
       "catalog": "posti",

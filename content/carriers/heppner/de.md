@@ -1,12 +1,12 @@
 ---
 title: Heppner Sendungsverfolgung: Nummer, PLZ und Liefertermin
-description: Heppner-Lieferung in der Schweiz verfolgen: wo die 8-stellige Nummer steht, warum es deine PLZ braucht, was die Status heißen und wen du fragst.
+description: Heppner Sendungsverfolgung (Schweiz / SAFRAM): 8-stellige Nummer und PLZ, Liefertermin wählen, Statusbedeutung, Zoll und SAFRAM-Telefonnummern.
 slug: heppner-sendungsverfolgung
 published: 2026-10-27
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Heppner ist ein Transportunternehmen aus Straßburg und fährt alles vom kleinen Paket bis zur Komplettladung. In der Schweiz liefert es über SAFRAM, eine Firma, die seit 1965 auf dem Schweizer Markt tätig ist und heute zur Heppner-Gruppe gehört. Mit Heppner CONNECT stellt Heppner Onlinebestellungen auch Privatpersonen zu, selbst solche über 30 kg. Deine Lieferung verfolgst du auf [Heppners Empfängerseite](https://www.heppner-group.com/de/empfaenger-verfolgen-sie-ihre-bestellung/) mit der Sendungsnummer aus Heppners Nachricht und deiner Postleitzahl, oder du fügst die Nummer oben ins Feld ein.
+Heppner ist ein Straßburger Transportunternehmen für Pakete, Paletten und Onlinebestellungen über 30 kg (mit Heppner CONNECT) und liefert in der Schweiz über die Gruppengesellschaft **SAFRAM**. Verfolge deine Lieferung oben im Feld (Paketdienst Heppner wählen) oder auf [Heppners Empfängerseite](https://www.heppner-group.com/de/empfaenger-verfolgen-sie-ihre-bestellung/) mit der 8-stelligen Sendungsnummer aus der Benachrichtigung und deiner vierstelligen Postleitzahl.
 
 ## Heppner Sendungsnummer: wo du sie findest
 
@@ -109,17 +109,21 @@ Solange du die Bestellung geöffnet hast oder am Zustelltag Mitteilungen aktivie
 
 ## Fragen zur Heppner Sendungsverfolgung
 
-### Liefert Heppner auch an Privatpersonen?
+### Warum braucht Heppner meine Postleitzahl und was heißt „Warten auf Anweisungen“?
 
-Ja. Mit Heppner CONNECT stellt Heppner Onlinebestellungen Privatpersonen und Kleinstunternehmen zu, auch Sendungen über 30 kg. Geliefert wird bis zum Gebäudeeingang, in die Wohnung nur, wenn der Versender INHOME gebucht hat.
+Ohne passende Postleitzahl der Lieferadresse zeigt Heppner keinen Verlauf und meldet die Bestellung als nicht gefunden. Steht im Status `Warten auf Anweisungen`, geht die Lieferung erst raus, wenn du auf der Tracking-Seite einen Liefertag oder die Abholung in der Niederlassung wählst.
+
+### Liefert Heppner auch an Privatpersonen und in die Wohnung?
+
+Ja. Mit Heppner CONNECT stellt Heppner Onlinebestellungen Privatpersonen und Kleinstunternehmen zu, auch Sendungen über 30 kg. Geliefert wird bis zum Gebäudeeingang, in den Raum deiner Wahl nur, wenn der Versender INHOME gebucht hat.
 
 ### Liefert Heppner am Samstag oder am Abend?
 
 Nur wenn der Versender die Option EXTENT gebucht hat. Sonst wählst du einen Tag von Montag bis Freitag zwischen 8:30 und 18:00 Uhr, und am Liefertag bestätigt dir Heppner ein Zeitfenster von 2 Stunden.
 
-### Was ist SAFRAM?
+### Was ist SAFRAM und wie erreiche ich Heppner in der Schweiz?
 
-Heppners Firma in der Schweiz: 1965 gegründet, heute Teil der Heppner-Gruppe, mit 3 Niederlassungen, die täglich die ganze Schweiz bedienen. Bringt dir Heppner in der Schweiz eine Bestellung, liefert sie SAFRAM.
+SAFRAM ist Heppners Schweizer Gesellschaft (1965 gegründet, 3 Niederlassungen für die ganze Schweiz). Erreichbar Montag bis Freitag 8 bis 17 Uhr: SAFRAM Genève (+41 22 827 03 11), SAFRAM Basel (+41 61 338 93 33) und Zollbüro Bardonnex (+41 22 771 43 13); oder über das Kontaktformular auf heppner-group.com mit dem Betreff „Verfolgung“.
 
 ### Wer ist Heppner?
 

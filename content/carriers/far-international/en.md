@@ -1,12 +1,12 @@
 ---
 title: FAR International tracking: numbers, statuses and contact
-description: Track a FAR International (泛远国际) parcel from China: what a FAR…YQ number looks like, what each status means, who delivers it and who to ask for help.
+description: Track a FAR International (泛远国际 / far800.com) parcel from China: FAR…YQ format, status meanings, last-mile delivery number, transit times and support contact.
 slug: far-international-tracking
 published: 2026-11-02
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-FAR International (泛远国际, FAR International Logistics) is a cross-border logistics company in Hangzhou, China, set up in 2004. Online shops and marketplaces book it to send parcels abroad. FAR collects and checks the parcels in China, and its partners carry them abroad, clear customs and give them to a carrier in your country for delivery. Track the number on [FAR's Track and Trace page](https://www.far800.com/en/logistics), in English, or paste it in the box above. The number comes from the shop, with your order's shipping details.
+FAR International (泛远国际, FAR International Logistics, founded in Hangzhou in 2004) is a Chinese cross-border logistics company that collects and inspects parcels in China before partners carry them abroad, clear customs and hand them to a local carrier for delivery. Paste your `FAR…YQ` tracking number in the box above or look it up on [FAR's Track and Trace page](https://www.far800.com/en/logistics) to follow the parcel and check for a last-mile number.
 
 ## FAR International tracking number: what it looks like
 
@@ -98,7 +98,7 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ## Questions about FAR International tracking
 
-### Is FAR International legit?
+### Is FAR International (泛远国际) a legitimate carrier?
 
 Yes. FAR International Logistics was set up in Hangzhou in 2004. Its parent, FAR International Holdings Group, was founded in November 2022, and FAR's news says it listed on the Hong Kong stock exchange in December 2023. FAR says it became a service contractor for UPS China in 2005, launched a cross-border logistics project with Temu in 2023, and began strategic cooperation with TikTok and SHEIN in 2024.
 
@@ -106,13 +106,17 @@ Yes. FAR International Logistics was set up in Hangzhou in 2004. Its parent, FAR
 
 FAR gives its customers these times: Express 3 to 5 working days, Standard 6 to 9 and Economy 10 to 30. They may vary with the destination's postcode. The shop's estimate for your order is the one to go by.
 
-### What does "Await Release from Sender" mean?
+### Who delivers FAR International parcels in my country?
+
+FAR uses local delivery partners for the last mile and does not list them by country on its site. Look for a last-mile number (尾程单号) on FAR's result page — when FAR provides one, Peek can automatically follow the local post or carrier once it logs a scan at least as recent as FAR's newest.
+
+### What does "Await Release from Sender" mean on FAR tracking?
 
 FAR's warehouse in China has your parcel and holds it until the seller confirms it. If it stays there, ask the shop.
 
-### How do I contact FAR International?
+### How do I contact FAR International customer service?
 
-By its global hotline, 400-128-5656, or by email at csc@far800.com. About your order, ask the seller first.
+Call FAR's global hotline `400-128-5656` or email `csc@far800.com`. For late, damaged or missing online orders, ask the seller first: FAR's FAQ states that a missing-parcel claim investigation must start within 14 days of signing and is opened by the seller.
 
 :::sources
 - [FAR International: Home](https://www.far800.com/en) – company, 泛远国际, 2004 and 2022, Hong Kong listing news of 22 December 2023, tracker form, global hotline, email, address

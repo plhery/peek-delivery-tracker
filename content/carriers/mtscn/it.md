@@ -1,12 +1,12 @@
 ---
 title: Tracking Meiteshun: numero AMTS…FS, stati e chi contattare
-description: Tracciare un pacco Meiteshun Logistics (美特顺) da Shenzhen: com'è fatto il numero AMTS…FS, cosa significano i passaggi e perché la consegna è scritta prima.
+description: Tracking Meiteshun (MTSCN / 美特顺): codice AMTS…FS, significato degli stati, perché risulta Delivered in anticipo, chi consegna in Italia e chi contattare.
 slug: meiteshun-tracking
 published: 2026-11-18
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Meiteshun Logistics (美特顺物流, 深圳市美特顺物流有限公司, indicata anche come MTSCN) è uno spedizioniere con sede a Shenzhen, in Cina. I suoi numeri di tracciamento iniziano con AMTS e finiscono con FS: se il negozio che ha spedito il tuo ordine te ne ha comunicato uno, incollalo nel box qui sopra. Leggi però il tracking di Meiteshun con cautela: il suo sistema registra l'intero percorso del pacco, consegna compresa, già al momento della creazione dell'ordine, quindi un `Delivered` lì non dimostra che il pacco sia davvero arrivato.
+Meiteshun Logistics (美特顺物流, 深圳市美特顺物流有限公司, anche MTSCN) è uno spedizioniere di Shenzhen, in Cina, i cui codici di tracciamento hanno 15 caratteri (`AMTS`, nove cifre e `FS`). Incolla nel box qui sopra il numero fornito dal negozio per seguire il pacco, ma leggi il tracking di Meiteshun con cautela: il suo sistema registra l'intero percorso, `Delivered` compreso, già alla creazione dell'ordine, quindi un avviso di consegna non dimostra che il pacco sia arrivato davvero.
 
 ## Numero di tracking Meiteshun: com'è fatto
 
@@ -87,15 +87,15 @@ Peek controlla fino a ogni 10 minuti mentre tieni aperto il pacco o nel giorno d
 
 ## Domande sul tracking Meiteshun
 
-### Che cos'è Meiteshun Logistics (美特顺)?
+### Che cos'è Meiteshun Logistics (MTSCN / 美特顺)?
 
 È 深圳市美特顺物流有限公司, Shenzhen Meiteshun Logistics, uno spedizioniere di Shenzhen, in Cina. Le sue lettere di vettura hanno il formato AMTS, nove cifre e FS, e nei suoi dati il servizio è indicato come MTS全球小包.
 
-### Un numero AMTS è un numero di China Post?
+### Un numero AMTS…FS è un codice China Post?
 
 No. AMTS, nove cifre e FS è il formato esclusivo di Meiteshun. I codici internazionali di China Post hanno due lettere, nove cifre e CN.
 
-### Perché Meiteshun dice che il pacco è consegnato se non l'ho ricevuto?
+### Perché il tracking Meiteshun segna Delivered se non ho ricevuto nulla?
 
 Con ogni probabilità perché il sistema di Meiteshun scrive tutte le tappe dell'ordine, consegna inclusa, già quando l'ordine viene creato. Un `Delivered` scritto in quel modo è una previsione, non una scansione. Avvisa il venditore che il pacco non è arrivato.
 
@@ -103,9 +103,9 @@ Con ogni probabilità perché il sistema di Meiteshun scrive tutte le tappe dell
 
 I passaggi di Meiteshun non lo dicono: nessuno nomina un corriere di consegna. La sua pagina di tracking può riportare il codice del corriere finale nella colonna 渠道转单号 (numero di trasferimento); se non c'è, chiedi al venditore quale azienda consegna il tuo ordine e con quale numero di tracciamento.
 
-### Chi contatto per un pacco Meiteshun smarrito?
+### Come contattare Meiteshun o reclamare un pacco non arrivato?
 
-Il venditore da cui hai acquistato, che ha prenotato la spedizione con Meiteshun. Se né il venditore né il marketplace aiutano, la pagina di 17TRACK dedicata a Meiteshun indica l'indirizzo e-mail `szmeiteshun@163.com`.
+Rivolgiti prima al venditore da cui hai acquistato, che ha prenotato la spedizione con Meiteshun, e poi al marketplace se non risponde. Se né il venditore né il marketplace aiutano, la pagina di 17TRACK dedicata a Meiteshun indica l'indirizzo e-mail `szmeiteshun@163.com`, senza numero di telefono.
 
 :::sources
 - [17TRACK: MTSCN tracking (in inglese)](https://www.17track.net/en/carriers/mtscn) – indirizzo e-mail, sito web e ufficio di Shenzhen (distretto di Longgang) indicati per Meiteshun, nessun numero di telefono

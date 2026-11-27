@@ -1,12 +1,12 @@
 ---
 title: Nova Poshta Sendungsverfolgung: Nummern, Status & Filialen
-description: Nova Poshta (Nova Post) Paket verfolgen: EW-Nummer, Bedeutung der Statusmeldungen, Filiale und Paketstation, Lagerfristen und Kontakt.
+description: Nova Poshta (Nova Post) Sendungsverfolgung: 14-stellige EW- und internationale SH/TN-Nummern, Status auf Deutsch, 5 Tage Lagerfrist, Zoll und Kontakt.
 slug: nova-poshta-sendungsverfolgung
 published: 2026-11-22
-updated: 2026-11-22
+updated: 2026-11-27
 ---
 
-Nova Poshta – auf der englischen Website „Nova Post“ genannt – ist ein ukrainischer Expressdienst, der Pakete in der gesamten Ukraine an Filialen, Paketstationen und Haustüren liefert und zudem Filialen in Polen sowie weiteren europäischen Ländern betreibt. Verfolge ein Paket mit seiner Express-Frachtbriefnummer (EW) auf [der Sendungsverfolgungsseite von novaposhta.ua](https://novaposhta.ua/en/tracking/), in der App oder indem du die Nummer oben einfügst. Die Nummer steht oben auf dem Frachtbrief, in der App und in der Ankunftsbenachrichtigung.
+Nova Poshta — auf der englischen Website und im Ausland **Nova Post** genannt — ist ein ukrainischer Expressdienst mit Filialen, Paketstationen und Kurierzustellung in der gesamten Ukraine sowie Filialen in Polen und weiteren europäischen Ländern. Verfolge dein Paket mit der 14-stelligen Express-Frachtbriefnummer (EW) oder internationalen `SH`/`TN`-Nummer oben im Feld, in der App oder auf [novaposhta.ua/en/tracking](https://novaposhta.ua/en/tracking/).
 
 ## Nova-Poshta-Sendungsnummer: die EW-Nummer
 
@@ -92,21 +92,25 @@ Peek fragt Nova Poshta direkt bis zu alle 10 Minuten ab – oder ab 6:00 Uhr Kyi
 
 ## Häufige Fragen zur Nova-Poshta-Sendungsverfolgung
 
-### Ist Nova Poshta seriös?
+### Ist Nova Poshta (Nova Post) seriös?
 
 Ja. Nova Poshta wurde 2001 in der Ukraine gegründet, steht an der Spitze der NOVA-Gruppe und liefert nach eigenen Angaben rund 1,5 Millionen Pakete und Frachtsendungen pro Tag aus.
 
-### Kann man Nova Poshta auf Englisch verfolgen?
+### Wie verfolge ich ein Nova-Poshta-Paket auf Englisch oder Deutsch?
 
-Ja: die englische Version von novaposhta.ua zeigt jeden Status auf Englisch an.
+Gib deine 14-stellige EW-Nummer oder internationale `SH`/`TN`-Nummer auf [novaposhta.ua/en/tracking](https://novaposhta.ua/en/tracking/) (auf Englisch) oder oben in Peek ein. Für Frachtbriefe, die älter als 90 Tage sind, zeigt die Website nichts mehr an.
 
-### Kann eine Nova-Post-Liefer-E-Mail Betrug sein?
+### Wie lange lagert Nova Poshta ein Paket in der Filiale oder Paketstation?
 
-Ja, das ist möglich. Laut Nova Poshta stammen echte E-Mails ausschließlich von den offiziellen Domains; öffne keine Links unbekannter Absender.
+In der Ukraine lagert eine Filiale ein Paket seit dem 1. Oktober 2026 5 Tage kostenlos ab dem Tag nach der Ankunft, danach gegen Tagesgebühr (15 bis 35 ₴ je nach Gewicht); nach 30 Tagen gilt es als nicht abgeholt. In einer Paketstation liegt es bis zu 5 Tage (im polnischen InPost-Paczkomat 2 Kalendertage) und geht danach in die nächste Filiale.
 
-### Wie lange lagert Nova Poshta ein Paket in der Filiale?
+### Welche Zollregeln gelten bei Nova Poshta in die Ukraine und wie erreiche ich den Support?
 
-In der Ukraine 5 Tage kostenlos ab dem Tag nach der Ankunft, danach gegen eine Tagesgebühr; nach 30 Tagen gilt das Paket als nicht abgeholt.
+Bei Sendungen in die Ukraine fallen laut Nova Poshta über 150 € Warenwert 10 % Zoll auf den Mehrbetrag plus 20 % Mehrwertsteuer an. Der ukrainische Support ist rund um die Uhr unter +38 098 450 0609 (auch 050/093/044) oder support_ua@novaposhta.ua erreichbar, Nova Post Polen täglich 8–20 Uhr unter +48 182 111 609 oder support@novapost.pl.
+
+### Kann eine Nova-Post-E-Mail mit Zahlungsaufforderung Betrug sein?
+
+Ja, das ist möglich. Laut Nova Poshta stammen echte E-Mails ausschließlich von den offiziellen Domains; öffne keine Links zu Zahlungsformularen aus unbekannten Absendern.
 
 :::sources
 - [Nova Post: Track your parcel](https://novaposhta.ua/en/tracking/) – Statustexte, Nicht-gefunden-Meldung, Reklamationsschaltfläche

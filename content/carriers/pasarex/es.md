@@ -1,14 +1,14 @@
 ---
 title: Rastreo PasarEX — códigos AMZPSR, aduana, PQR y teléfonos
-description: Rastrea envíos de PasarEX (Pasar Express) en Colombia, Chile, Panamá y Barbados. Guías AMZPSR, estados de aduana, plazos de PQR y líneas de atención.
+description: Rastreo PasarEX (Pasar Express) en Colombia, Chile, Panamá y Barbados: guía AMZPSR de Amazon, estados de aduana, reclamos PQR y teléfonos de soporte.
 slug: rastreo-pasarex
 published: 2026-11-23
-updated: 2026-11-23
+updated: 2026-11-27
 ---
 
-PasarEX (marca comercial de *PASAR EXPRESS SAS*, empresa colombiana fundada en 1993) ofrece transporte expreso, carga aérea y última milla para plataformas de comercio electrónico. Sus sitios cubren **Colombia**, **Chile**, **Panamá** y **Barbados**, y sus servicios incluyen un centro logístico en Miami y rutas multimodales desde China.
+PasarEX (marca comercial de *PASAR EXPRESS SAS*, empresa colombiana fundada en 1993) gestiona transporte expreso, carga aérea, despacho aduanero y última milla para comercio electrónico en **Colombia**, **Chile**, **Panamá** y **Barbados**, con centro logístico en Miami y rutas desde China. Para rastrear tu envío — incluida una guía `AMZPSR` de Amazon o un enlace `tracking.pasarex.com/?awb=...` — pégalo en la casilla de arriba y elige PasarEX.
 
-PasarEX despacha los paquetes en aduana como agente, así que su seguimiento va del manifiesto a la llegada de la carga consolidada, la aduana, las bodegas y el reparto local.
+Como agente aduanero, PasarEX refleja todo el trayecto desde el manifiesto electrónico hasta la llegada de la carga consolidada, la aduana, las bodegas y el reparto local.
 
 ## Formatos de guía y códigos de seguimiento de PasarEX
 
@@ -69,11 +69,11 @@ PasarEX publica teléfonos y correos para cada país:
 
 ## Preguntas frecuentes
 
-### ¿Qué es un código que empieza por `AMZPSR`?
+### ¿Qué es un código de seguimiento que empieza por `AMZPSR`?
 
-`AMZPSR` seguido de 9 dígitos (15 caracteres en total, como `AMZPSR482917360`) es un número de Amazon que el rastreador de PasarEX consulta. Ningún otro transportista en Peek tiene esta forma, pero Peek no pregunta a PasarEX por sí solo: elígelo en «Encaja con este número».
+`AMZPSR` seguido de 9 dígitos (15 caracteres en total, como `AMZPSR482917360`, inventado) es un número de Amazon que el rastreador de PasarEX consulta. Ningún otro transportista en Peek tiene esta forma, pero Peek no pregunta a PasarEX por sí solo: elígelo en «Encaja con este número».
 
-### ¿Qué significa `Orden de pedido recibida - paquete no arribado`?
+### ¿Qué significa `Orden de pedido recibida - paquete no arribado` en PasarEX?
 
 Indica que PasarEX ya recibió el manifiesto electrónico del envío, pero el paquete físico todavía no ha arribado a la estación de importación en destino. El historial vuelve a moverse cuando aterriza la carga consolidada.
 
@@ -81,9 +81,13 @@ Indica que PasarEX ya recibió el manifiesto electrónico del envío, pero el pa
 
 PasarEX permite consultar su rastreador como mucho una vez por hora, también tras una consulta fallida, así que Peek lo revisa cada hora. Además, su rastreador pide marcar una casilla reCAPTCHA en cada consulta.
 
-### ¿Cuál es el plazo para reclamar por avería o daño en PasarEX Colombia?
+### ¿Cuál es el plazo para presentar una PQR o reclamo por daño en PasarEX Colombia?
 
 Según la Resolución CRC 5050 de 2016 publicada en [pasarex.com/co/soporte](https://pasarex.com/co/soporte/), el destinatario tiene **5 días hábiles** desde la recepción para reclamar por expoliación o avería, y el remitente dispone de 10 días calendario (nacional) o 6 meses (internacional).
+
+### ¿Cuáles son los teléfonos y correos de soporte de PasarEX en Colombia, Chile y Panamá?
+
+En Colombia puedes llamar al `+57 601 384 7000` o `+57 601 390 6000` (también PQR en Bogotá) o escribir a `sac@pasar.net` y `pqr@pasar.net`; en Chile al `+56 2 2571 7500` (`clgestionpe@pasar.net`); en Panamá al `+507 836 0399` (`pagestionpe@pasar.net`); y en Barbados al `+1 246 4370277` o `+1 305 7042435`.
 
 :::sources
 - [PasarEX Colombia](https://pasarex.com/co/)

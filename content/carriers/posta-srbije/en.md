@@ -1,12 +1,12 @@
 ---
 title: Pošta Srbije: Serbian Post tracking, statuses and help
-description: Track a Pošta Srbije or Post Express item: the 13-character number, what the English statuses mean, notices, pickup deadlines, claims and contacts.
+description: Track a Pošta Srbije (Serbian Post) or Post Express parcel: RS/PE tracking numbers, English statuses, post office and paketomat pickup deadlines and contacts.
 slug: posta-srbije-serbian-post-tracking
 published: 2026-10-13
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Pošta Srbije (the Post of Serbia) is Serbia's national post, and Post Express is its courier service. Track an item for free on posta.rs's [Track and Trace](https://www.posta.rs/eng/alati/pracenje-posiljke.aspx), in the Post of Serbia app, or by pasting the number in the box above. The number comes from the sender.
+Pošta Srbije (the Post of Serbia) is Serbia's national post, alongside its next-day courier service Post Express. Track a domestic `RS` or `PE` item — or an incoming international parcel under the foreign post's number — for free on posta.rs's [Track and Trace](https://www.posta.rs/eng/alati/pracenje-posiljke.aspx), in the Post of Serbia app, or by pasting the number in the box above.
 
 ## Serbian Post tracking number
 
@@ -89,21 +89,25 @@ Peek reads the same service as Pošta Srbije's app. While you have the parcel op
 
 ## Questions about Serbian Post tracking
 
-### How do I track a parcel from abroad to Serbia?
+### How do I track a parcel sent from abroad to Serbia?
 
-Enter the foreign post's number, ending in the sending country's code, in posta.rs's Track and Trace: it covers registered items, parcels and EMS from abroad.
+Enter the foreign post's number, ending in the sending country's code, in posta.rs's Track and Trace or in Peek above: posta.rs covers registered items, parcels and EMS from abroad.
 
-### Can you track Post Express?
+### How do I track a Post Express (`PE…RS`) parcel?
 
-Yes. A Post Express number starts with `PE` and ends in `RS`, and you track it on posta.rs or in the Post of Serbia app, which shows Post Express items at the main transfer points.
+A Post Express number starts with `PE` and ends in `RS`. Track it in the box above, on posta.rs, or in the Post of Serbia app, which shows Post Express items at the main transfer points.
 
-### What is Pošta Srbije's email address?
+### How long does Pošta Srbije hold a parcel at the post office or paketomat?
 
-contact@ptt.rs, for complaints or compliments. Damage claims can't be made by email: report damage at the post office when you receive the item.
+Most items wait 5 working days at the post office and items from abroad wait 20 days, counted from the day after the notice (extendable in writing up to 30 days). A Poštin paketomat locker holds parcels for 48 hours (2 working days per posta.rs FAQ) before moving them to the locker's post office.
 
-### How long does Pošta Srbije keep a parcel at the post office?
+### What is Pošta Srbije's contact number and email address?
 
-5 working days for most items and 20 days for items from abroad, counted from the day after the notice. You can ask in writing for up to 30 days.
+Call 0700 100 300 (Telekom Srbija landlines) or +381 11 3607 788 (mobiles and abroad; weekdays 08:00–20:00, weekends 08:00–15:00), or 0800 100 808 / +381 11 3607 607 for Post Express. Email contact@ptt.rs for complaints or compliments; damage claims must be made in person at the post office.
+
+### Are SMS messages asking for online payment from Pošta Srbije genuine?
+
+No. Pošta Srbije warns of fake SMS about unpaid customs or address updates linking to lookalike sites such as posta-rs.com — it never asks you to pay online or by email, and sends SMS or Viber messages only to announce arrivals from its verified account.
 
 :::sources
 - [Pošta Srbije: Item's Status Tracking](https://www.posta.rs/eng/alati/pracenje-posiljke.aspx) – number types, status list, signature, free tracking, Serbian and English, tracking abroad, 0700 100 300

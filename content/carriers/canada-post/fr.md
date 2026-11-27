@@ -1,12 +1,12 @@
 ---
 title: Postes Canada (Canada Post) suivi : numéro, statuts, avis
-description: Suivre un colis Postes Canada : où trouver le numéro de repérage, ce que veulent dire les statuts, l'avis de livraison, le ramassage et la douane.
+description: Suivi colis Postes Canada (postescanada.ca) : numéro de repérage (16 chiffres ou finissant par CA), avis de livraison, ramassage, douane et contact client.
 slug: canada-post-suivi
 published: 2026-10-15
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Postes Canada, c'est la Société canadienne des postes, la société d'État fédérale qui exploite le service postal du Canada. Pour suivre ton colis, entre son numéro de repérage dans l'outil Repérage sur [canadapost-postescanada.ca](https://www.canadapost-postescanada.ca/track-reperage/fr), dans l'appli gratuite de Postes Canada ou dans le champ ci-dessus. Ce numéro vient de l'expéditeur, en général dans le courriel d'expédition de la boutique ; Postes Canada ne peut pas retrouver un colis à partir de ton nom ou de ton adresse. S'il finit par `CA` et que tu suis le colis depuis l'étranger, Peek peut aussi interroger la poste de ton pays avec le même numéro.
+Postes Canada (Société canadienne des postes) exploite le service postal fédéral du Canada. Pour le suivi d'un colis ou courrier Postes Canada, entre son numéro de repérage (16 chiffres, numéro postal finissant par `CA`, ou 15 chiffres d'un avis de livraison) dans l'outil Repérage sur [canadapost-postescanada.ca](https://www.canadapost-postescanada.ca/track-reperage/fr), dans l'appli gratuite de Postes Canada ou dans le champ ci-dessus. Ce numéro vient de l'expéditeur (pas de recherche par nom ou adresse) ; s'il finit par `CA` et que tu es en Europe, Peek peut aussi interroger La Poste, bpost ou La Poste suisse.
 
 ## Numéro de repérage Postes Canada : à quoi il ressemble
 
@@ -125,6 +125,10 @@ Oui. Colle le numéro à 15 chiffres de l'avis, touche « Changer » et choisis 
 ### Qui livre un colis Postes Canada en France, en Belgique ou en Suisse ?
 
 La poste de ton pays, si le numéro finit par `CA` : La Poste en France, bpost en Belgique, La Poste suisse en Suisse. Peek l'interroge avec le même numéro. Un numéro de 16 chiffres reste suivi chez Postes Canada.
+
+### Comment joindre le service à la clientèle de Postes Canada ?
+
+Appelle le 1 866 607-6301 au Canada ou le 1 416 979-3033 de l'extérieur (du lundi au vendredi de 7 h à 23 h HE, fin de semaine de 9 h à 21 h HE), ou ouvre un clavardage ou un billet de service sur la page Aide de postescanada.ca. Si le colis est déjà chez la poste de ton pays, adresse-toi directement à elle.
 
 :::sources
 - [Postes Canada : Repérer un colis au moyen du numéro de repérage](https://www.canadapost-postescanada.ca/track-reperage/fr) – appli gratuite, « Avis laissé », « Disponible pour ramassage », date et pièce d'identité pour le ramassage, raisons d'un numéro introuvable

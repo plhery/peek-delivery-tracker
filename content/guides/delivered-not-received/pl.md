@@ -1,15 +1,15 @@
 ---
 title: Przesyłka doręczona, a jej nie ma? Co to znaczy i co zrobić?
-description: „Doręczona” to wpis z terminala kuriera, a nie dowód, że paczka trafiła do ciebie. Co sprawdzić, ile czekać i ile czasu dają Allegro i Vinted.
+description: Co znaczy „Przesyłka doręczona”, gdy paczki nie ma? Kto mógł ją odebrać (DPD, InPost, Poczta, GLS), prawa konsumenta oraz terminy Allegro i Vinted.
 slug: paczka-doreczona-a-jej-nie-ma
 picture: Zamknięte drzwi, powiadomienie z zielonym ptaszkiem, pusty, przerywany kontur paczki ze znakiem zapytania na wycieraczce i zmartwiony Pip.
 published: 2026-10-09
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Jeśli śledzenie pokazuje „doręczona”, a paczki nie ma, nie zakładaj od razu, że przepadła: „doręczona” to wpis z terminala kuriera, a nie dowód, że paczka trafiła w twoje ręce. Sprawdź w szczegółach przesyłki, kto ją odebrał, zapytaj domowników i sąsiadów, rozejrzyj się wokół drzwi i odczekaj dzień lub dwa. Jeśli nadal jej nie ma, napisz do sprzedawcy, a nie do kuriera: przy zakupie od firmy to sprzedawca odpowiada za paczkę, dopóki jej nie dostaniesz.
+Status „Przesyłka doręczona” albo „paczka doręczona” to wpis z terminala kuriera, a nie dowód, że paczka trafiła w twoje ręce: mógł ją odebrać dorosły domownik, sąsiad, recepcja albo ktoś z kodem odbioru, bądź kurier zostawił ją w uzgodnionym miejscu (np. safeplace w DPD). Sprawdź w szczegółach przesyłki, kto ją odebrał, zapytaj domowników i sąsiadów i odczekaj dzień lub dwa. Jeśli nadal jej nie ma, napisz do sprzedawcy, nie do kuriera: przy zakupie od firmy ryzyko przechodzi na ciebie dopiero z wydaniem paczki (art. 548 § 3 Kodeksu cywilnego).
 
-## Dlaczego paczka ma status „doręczona”, skoro jej nie ma?
+## Co znaczy „Przesyłka doręczona”, skoro paczki nie ma?
 
 Bo ten status mówi tylko, że kurier gdzieś zostawił paczkę, a nie, że trafiła do ciebie. Każda firma nazywa go trochę inaczej: u [InPost](carrier:inpost) Peek pokazuje status o doręczeniu z etapem „Dostarczona” (w innych językach `Delivered`), u DPD `Przesyłka doręczona` (albo `Parcel delivered`, gdy Peek pobiera historię tej paczki po angielsku), a Vinted pisze „Doręczono”. Są dwa możliwe wyjaśnienia:
 

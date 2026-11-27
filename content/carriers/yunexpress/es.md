@@ -1,12 +1,12 @@
 ---
 title: YunExpress seguimiento: estados, quién entrega y contacto
-description: Sigue tu paquete de YunExpress desde China: cómo es el número YT, qué significa cada estado en inglés, quién lo entrega en España y a quién preguntar.
+description: Seguimiento YunExpress (números YT de 16 cifras) en yuntrack.com: quién reparte en España, estados en español, contacto (400-8575-500) y plazos de entrega.
 slug: yunexpress-seguimiento
 published: 2026-10-10
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-YunExpress, también escrito Yun Express, es una empresa de logística de Shenzhen que envía [paquetes pequeños desde China](guide:tracking-from-china) para vendedores online, también los de Amazon, Temu o SHEIN. Para seguir tu paquete, escribe el número que empieza por YT en [yuntrack.com](https://www.yuntrack.com/), su web de seguimiento, o pégalo en la casilla de arriba. La web de YunExpress no habla de SMS ni correos a los destinatarios: busca el número en el correo de envío de la tienda o en la página de tu pedido.
+YunExpress (también escrito Yun Express) es la empresa de logística de Shenzhen detrás de los números de seguimiento que empiezan por `YT` seguidos de 16 cifras, usados en [paquetes desde China](guide:tracking-from-china) de Amazon, Temu o SHEIN. Sigue tu paquete en [yuntrack.com](https://www.yuntrack.com/) o pega el número arriba: en España, YunExpress no nombra un único repartidor, sino que lo entrega a un transportista local visible en «Last Mile Tracking». Tampoco publica teléfono en España (solo el 400-8575-500 en China continental e info@yunexpress.com).
 
 ## Número de seguimiento de YunExpress: YT y 16 cifras
 
@@ -87,25 +87,25 @@ Si el registro de YunExpress da el número del transportista local y Peek recono
 
 ## Preguntas sobre el seguimiento de YunExpress
 
+### ¿Quién reparte YunExpress (paquetería YT) en España?
+
+YunExpress no publica un único socio de reparto en España: sus páginas solo hablan de «premium global carrier networks». El último tramo lo hace el transportista local que aparece en el seguimiento tras `Delivered to local carrier` y en la columna «Last Mile Tracking» de yuntrack.com (con su propio número local si cambia).
+
+### ¿Qué es el teléfono 400-8575-500 y tiene YunExpress contacto en España?
+
+El 400-8575-500 es el número de atención de China continental que aparece en yunexpress.cn; YunExpress no publica ningún teléfono ni oficina para destinatarios en España (solo el correo info@yunexpress.com en inglés y chino). Para incidencias o retrasos, contacta primero con la tienda y, tras el traspaso local, con la empresa que aparece en el seguimiento.
+
 ### ¿Cuánto tarda YunExpress en llegar a España?
 
 Según las estimaciones de YunExpress para las tiendas, de 5 a 8 días hábiles con Standard Express y de 6 a 10 con su línea económica. Casi nunca sabrás qué línea eligió la tienda, y una inspección de aduanas añade tiempo.
-
-### ¿YunExpress entrega los sábados y domingos?
-
-YunExpress no lo dice: no publica días ni horarios de reparto para España. El último tramo lo hace el transportista local que aparece en el seguimiento, así que consulta sus días y horarios.
 
 ### ¿Qué significa «entregado al transportista local»?
 
 Es `Delivered to local carrier`: YunExpress ha pasado el paquete a la empresa que lo reparte en España, no a ti. A partir de ahí siguen los escaneos de esa empresa, y la columna «Last Mile Tracking» puede mostrar su número.
 
-### ¿Es fiable YunExpress?
+### ¿YunExpress entrega los fines de semana y es fiable?
 
-Nadie mide su fiabilidad de forma oficial; lo que sí consta es quién es: Shenzhen Qianhai YunExpress Logistics Co., Ltd., fundada en Shenzhen en 2014 y marca del grupo Zongteng. Según ella misma, en 2017 pasó a ser socio logístico recomendado por Amazon, y su página de socios cita plataformas como Temu, SHEIN o eBay.
-
-### ¿Tiene YunExpress oficinas en España?
-
-No publica ninguna, ni en Madrid ni en Barcelona ni en otra ciudad. Según su historia, abrió en 2021 una sede europea que cubre 30 países, pero no da su dirección.
+YunExpress no publica días ni horarios de reparto en España porque el último tramo depende del transportista local. Es una empresa real: Shenzhen Qianhai YunExpress Logistics Co., Ltd., fundada en Shenzhen en 2014 (grupo Zongteng), socio logístico recomendado por Amazon desde 2017 y citado junto a Temu, SHEIN o eBay.
 
 :::sources
 - [YunExpress: Track & Trace Platform, Yuntrack](https://www.yuntrack.com/) – número YT, solo en inglés, Feedback

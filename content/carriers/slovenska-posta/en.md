@@ -1,12 +1,12 @@
 ---
 title: Slovenská pošta tracking: Slovak Post numbers and statuses
-description: Track a Slovenská pošta (Slovak Post) item: what the number looks like, what the English statuses mean, BalíkoBOX pickup, claims and contacts.
+description: Track a Slovenská pošta (Slovak Post) item on posta.sk: 13-character SK post number, English statuses, BalíkoBOX 24/7 pickup, claims and phone 0850 122 413.
 slug: slovenska-posta-tracking
 published: 2026-10-13
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Slovenská pošta (Slovak Post) is Slovakia's national post. Track an item on its English [Tracking of Items](https://www.posta.sk/en/tracking-of-items) page, in its app or by pasting the number in the box above. The number comes from the sender: the shop's shipping email or order page.
+Slovenská pošta (Slovak Post, also searched as Pošta Slovakia or SK Pošta) is Slovakia's national post. Track an item on its English [Tracking of Items](https://www.posta.sk/en/tracking-of-items) page (`sledovanie` on posta.sk), in its app or by pasting the 13-character post number ending in `SK` (or foreign postal code) in the box above. The number comes from the sender's shipping email or order page; for customer service, call 0850 122 413 in Slovakia or +421 48 437 87 77 from abroad.
 
 ## Slovenská pošta tracking number
 
@@ -103,6 +103,10 @@ Slovak Post's terms give a domestic parcel D+2: delivery on the second working d
 ### How long does Slovak Post keep a parcel at the post office?
 
 10 calendar days for parcels, unless the sender shortened it. You can extend it once, up to 30 days.
+
+### How do I contact Slovenská pošta (Slovak Post)?
+
+Call 0850 122 413 from Slovakia (working days 8 a.m. to 5 p.m.) or +421 48 437 87 77 from abroad (working days 8 a.m. to 4 p.m.), email zakaznickyservis@slposta.sk, or use the "Napíšte nám" form on posta.sk (contact pages are Slovak only).
 
 :::sources
 - [Slovenská pošta: Tracking of Items](https://www.posta.sk/en/tracking-of-items) – English tracking, statuses in English

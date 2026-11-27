@@ -1,12 +1,12 @@
 ---
 title: Česká pošta sledování zásilek: podací číslo a stavy
-description: Jak sledovat zásilku České pošty a Balíkovny: kde najdeš podací číslo, co znamenají stavy, jak dlouho zásilka čeká na poště, reklamace a kontakty.
+description: Sledování a hledání zásilky České pošty a Balíkovny: podací číslo, stavy, úložní doba, vyzvednutí na kód a kontakt (+420 210 123 456 / Balíkovna 218 218 218).
 slug: ceska-posta-sledovani-zasilek
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-11-27
 ---
 
-Česká pošta je národní poštovní operátor a Balíkovna je její balíková služba s vlastními výdejními místy a boxy. Zásilku sleduješ ve [Sledování zásilek](https://www.postaonline.cz/trackandtrace) na postaonline.cz, v aplikaci Pošta Online, nebo tak, že podací číslo vložíš do pole nahoře. Podací číslo najdeš na podacím lístku, v SMS nebo e-mailu od pošty a na výzvě, kterou ti doručovatel nechá ve schránce.
+Česká pošta je národní poštovní operátor a Balíkovna je její balíková služba s vlastními výdejními místy a boxy. Hledání a sledování zásilky najdeš ve [Sledování zásilek](https://www.postaonline.cz/trackandtrace) na postaonline.cz (až 20 čísel najednou), v aplikaci Pošta Online nebo po vložení podacího čísla do pole nahoře. Podací číslo je na podacím lístku, v SMS či e-mailu od pošty a na výzvě ve schránce; zákaznická linka České pošty je +420 210 123 456 (po–pá 8:00–18:00, info@cpost.cz) a linka Balíkovny 218 218 218.
 
 ## Podací číslo: jak vypadá a kde ho najdeš
 
@@ -110,9 +110,9 @@ Obvykle 15 dní, pokud ji odesílatel nezkrátil na 10, a zdarma si ji můžeš 
 
 Hláška „Zásilka tohoto podacího čísla není v evidenci.“ znamená, že Česká pošta číslo nezná. Zkontroluj ho. U zásilky ze zahraničí ukáže stavy až podle dat od zahraniční pošty nebo poté, co zásilka dorazí do Česka.
 
-### Jak rychle doručí Balíkovna?
+### Jaký je kontakt na Českou poštu a Balíkovnu při sledování zásilky?
 
-Balíkovna uvádí, že balík je běžně už druhý den na výdejním místě, v boxu nebo na adrese.
+Zákaznická linka České pošty je +420 210 123 456 v pracovní dny od 8:00 do 18:00 (e-mail info@cpost.cz). Pro problémy s balíkem nebo boxem v Balíkovně volej linku Balíkovny 218 218 218 (případně technickou podporu uvedenou na boxu).
 
 ### Můžu balík vyzvednout bez občanky?
 

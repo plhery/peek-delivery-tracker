@@ -1,12 +1,12 @@
 ---
 title: Mondial Relay rastreio: estados, InPost e levantamento
-description: Rastreio Mondial Relay em Portugal, agora InPost: onde está o número, o que quer dizer cada estado em francês, quanto tempo espera no Ponto Pack e quem contactar.
+description: Rastreio e contactos da Mondial Relay em Portugal (agora InPost, 211 245 624): número de 8 algarismos, estados em francês, Pontos Pack e prazos de entrega.
 slug: mondial-relay-rastreio
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-A Mondial Relay é uma transportadora francesa do grupo InPost que entrega em pontos de levantamento, em Lockers (cacifos) e em casa; em Portugal, a InPost ficou com ela em 2021 e o mondialrelay.pt leva agora ao inpost.pt. Para rastrear a encomenda, escreve o número na página [Rastrear Encomenda da InPost](https://www.inpost.pt/seguimento-do-envio/), que só pede o número, ou cola-o na caixa acima.
+A Mondial Relay é uma transportadora francesa do grupo InPost que entrega em pontos de levantamento, Lockers e em casa; em Portugal, a InPost comprou-a em 2021 e o mondialrelay.pt redireciona para o inpost.pt. Para rastrear a encomenda, escreve o número de 8 algarismos na página [Rastrear Encomenda da InPost](https://www.inpost.pt/seguimento-do-envio/) ou cola-o acima. Para contactar a Mondial Relay em Portugal (InPost), liga para o 211 245 624 (segunda a sexta, das 9:00 às 18:00) ou usa o formulário e assistente virtual em «Fala connosco».
 
 ## Número de rastreio Mondial Relay: onde o encontrar
 
@@ -84,6 +84,10 @@ Um número de 8 algarismos pede também o «Código postal de entrega»: escreve
 O Peek mostra as frases francesas tal como estão, o centro logístico de cada leitura num mapa e, quando a Mondial Relay os dá, o dia de entrega previsto, a hora a que foi entregue e o país de destino. Enquanto a encomenda espera, mostra o nome e a morada do ponto ou Locker, nunca o horário nem o teu código de levantamento. Lê as horas como hora de Paris, verifica até de 10 em 10 minutos, até de 2 em 2 quando a encomenda sai para entrega (de 5 em 5 se tiver de abrir o seguimento da Mondial Relay num navegador), e pode enviar-te notificações de todas as leituras, só dos passos importantes ou «Só a entrega». Estas consultas mais seguidas só se fazem no dia em que a encomenda sai para entrega, a partir das 6h00, hora de Paris, e enquanto for o próprio seguimento da Mondial Relay a responder; através de serviços de seguimento, o Peek verifica de 15 em 15 minutos. Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. A Mondial Relay reutiliza números, por isso um número antigo pode mostrar uma encomenda mais recente. O Peek não segue a encomenda noutra transportadora.
 
 ## Perguntas sobre o rastreio Mondial Relay
+
+### Quais são os contactos da Mondial Relay (InPost) em Portugal?
+
+Em Portugal, o apoio ao cliente é prestado pela InPost através do 211 245 624 (segunda a sexta-feira, das 9:00 às 18:00), do assistente virtual 24/7 e do formulário na página [Fala connosco](https://www.inpost.pt/fala-connosco). Para encomendas na Bélgica, o contacto é +32 2 340 06 10 ou customerservice@mondialrelay.be.
 
 ### Onde está a minha encomenda Mondial Relay?
 

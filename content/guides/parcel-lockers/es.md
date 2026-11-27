@@ -1,13 +1,13 @@
 ---
 title: Paquete en una taquilla: código de recogida y plazos
-description: Cómo funcionan las taquillas Citypaq, InPost y Amazon: dónde está el código de recogida, cuánto espera el paquete y qué hacer si la taquilla está llena.
+description: Cómo recuperar o pedir el reenvío del PIN de Citypaq (Correos), InPost, GLS y Amazon Locker: dónde llega el código de recogida, plazos (3 a 7 días) y ayuda.
 slug: taquilla-paquetes-codigo-recogida
 picture: Una fila de taquillas con una puerta abierta, un móvil que muestra un código y Pip saliendo de un casillero.
 published: 2026-10-17
-updated: 2026-11-14
+updated: 2026-11-27
 ---
 
-Una taquilla es un punto de recogida sin nadie detrás del mostrador: una pared de casilleros que se abre con un código o con la app del transportista. El seguimiento te dice cuándo está dentro el paquete, el transportista te manda el código para abrirlo y desde ese momento tienes pocos días, normalmente 5 y a veces solo 3. Si no pasas a tiempo, el paquete vuelve a quien lo envió.
+Una taquilla (como Citypaq de Correos, InPost Locker, GLS Parcel Locker o Amazon Locker) se abre con un código o PIN que el transportista te manda por SMS, email o app en cuanto el paquete entra en el casillero. Si no encuentras el PIN de Citypaq de 8 cifras, puedes recuperarlo desde «Reenvío de PIN» en la página de Citypaq con tu número de seguimiento y el móvil o email del envío (o en la app de Correos). Tienes entre 3 y 7 días naturales para recogerlo (5 en Citypaq e InPost) antes de que vuelva al remitente.
 
 ## ¿Cómo funciona la entrega en una taquilla?
 
@@ -37,7 +37,7 @@ Los Citypaq están en centros comerciales, estaciones, supermercados y oficinas 
 
 Los plazos de InPost son los de envíos nacionales. Si te dan otra fecha, manda la del aviso. Para Wallapop, Milanuncios y otras compras entre particulares, mira [pedidos de segunda mano](guide:second-hand-orders).
 
-## ¿Dónde está mi código de recogida y qué hago si no me llega?
+## ¿Cómo recuperar o pedir el reenvío del PIN de Citypaq, InPost o GLS?
 
 El código de recogida no es el número de seguimiento. InPost lo resume así: «El número de seguimiento sirve para consultar el estado del paquete. Para abrir el Locker necesitas el código o PIN de recogida.» El código llega cuando el paquete ya está en el casillero, nunca antes.
 

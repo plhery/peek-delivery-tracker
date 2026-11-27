@@ -15254,6 +15254,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#3100e6"
     },
     {
+      "id": "delivengo",
+      "catalog": "delivengo",
+      "slug": "delivengo-tracking",
+      "title": "Rastreio Delivengo: acompanhe encomendas La Poste da França",
+      "name": "Delivengo",
+      "color": "#ffcf00"
+    },
+    {
       "id": "ecoscooting",
       "catalog": "ecoscooting",
       "slug": "rastreamento-ecoscooting",
@@ -16396,6 +16404,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Xuchuan Logistics: códigos XC, entrega e contato",
       "name": "Xuchuan International Logistics",
       "color": "#0a2463"
+    },
+    {
+      "id": "dk-logistics-ee",
+      "catalog": "dk-logistics-ee",
+      "slug": "dk-logistics-tracking",
+      "title": "Rastreio DK Logistics: guia HAWB, entrega e contato",
+      "name": "DK Logistics",
+      "color": "#f58428"
     },
     {
       "id": "fan-courier-international",
@@ -19980,6 +19996,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#3100e6"
     },
     {
+      "id": "delivengo",
+      "catalog": "delivengo",
+      "slug": "delivengo-tracking",
+      "title": "Delivengo 物流查询：追踪法国邮政出口国际小包",
+      "name": "Delivengo",
+      "color": "#ffcf00"
+    },
+    {
       "id": "ecoscooting",
       "catalog": "ecoscooting",
       "slug": "ecoscooting-tracking",
@@ -21138,6 +21162,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "旭川国际物流（Xuchuan Logistics）查询：XC 单号、派送与客服",
       "name": "Xuchuan International Logistics",
       "color": "#0a2463"
+    },
+    {
+      "id": "dk-logistics-ee",
+      "catalog": "dk-logistics-ee",
+      "slug": "dk-logistics-tracking",
+      "title": "DK Logistics（DKL）爱沙尼亚物流查询：运单号、清关与客服",
+      "name": "DK Logistics",
+      "color": "#f58428"
     },
     {
       "id": "fan-courier-international",

@@ -1,6 +1,6 @@
 ---
 title: Suivi de colis Vinted : transporteurs, numéros et retards
-description: Suivre un colis Vinted (France et Belgique) : transporteurs, QR code Chronopost/Vinted Go, délais de livraison, retrait en relais (2 à 7 jours) et litiges.
+description: Suivre un colis Vinted (France et Belgique) : transporteurs, QR code Chronopost/Vinted Go, délais de livraison, délai de retrait selon le transporteur et litiges.
 slug: suivi-colis-vinted
 picture: Deux téléphones, celui d'une vendeuse et celui d'un acheteur, entre lesquels un colis voyage en camionnette, et un Pip tout joyeux.
 published: 2026-10-16

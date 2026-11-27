@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-Para rastrear un pedido de Temu en España y ver cuándo llega o si está en reparto, necesitas el número de seguimiento del transportista (como CTT Express o Correos), no el número de pedido de Temu que empieza por «PO». Pégalo en [Peek](/), que identifica la empresa entre más de 4500, muestra la fecha de entrega prevista cuando el transportista la da y pasa al transportista local en España cuando cambia de manos. Un número recién creado puede tardar uno o dos días en mostrar el primer escaneo.
+Para rastrear un pedido de Temu en España y ver cuándo llega o si está en reparto, necesitas el número de seguimiento del transportista (como CTT Express o Correos), no el número de pedido de Temu que empieza por «PO». Pégalo en [Peek](/), que identifica la empresa entre más de 4500, muestra la fecha de entrega prevista cuando el transportista la da y, si la primera empresa indica quién toma el relevo en España, pasa a la nueva. Un número recién creado puede tardar uno o dos días en mostrar el primer escaneo.
 
 ## ¿Por qué el número de pedido de Temu (PO) no sirve para rastrear?
 

@@ -1,12 +1,12 @@
 ---
 title: CouriersPlease tracking: numbers, statuses and help
-description: Track a CouriersPlease parcel in Australia: CP consignment numbers, 1–3 business day delivery, HUBBED collection points (7 days), redelivery and 1300 phone.
+description: Track a CouriersPlease parcel in Australia: CP consignment numbers, 1–3 business day metro estimate, HUBBED collection points (7 days), redelivery and 1300 phone.
 slug: couriersplease-tracking
 published: 2026-10-15
 updated: 2026-11-27
 ---
 
-CouriersPlease (part of FMH Group) delivers parcels across metropolitan and regional Australia through local Franchise Partners. Track your parcel by entering its `CP` consignment number on [CouriersPlease's tracking page](https://www.couriersplease.com.au/tools-track) or pasting it in the box above. The consignment number appears in the shop's dispatch email or CouriersPlease's emails from noreply@couriersplease.com.au.
+CouriersPlease (part of FMH Group) delivers parcels across metropolitan and regional Australia through local Franchise Partners. Track your parcel by entering its consignment number (usually starting `CP`) on [CouriersPlease's tracking page](https://www.couriersplease.com.au/tools-track) or pasting it in the box above. The consignment number appears in the shop's dispatch email or CouriersPlease's emails from noreply@couriersplease.com.au.
 
 ## Couriers Please tracking number: what it looks like
 
@@ -96,11 +96,11 @@ CouriersPlease estimates 1 to 3 business days between metro areas, a few extra d
 
 ### Why is my CouriersPlease tracking stuck on Manifested or not updating?
 
-`Manifested` or `Shipment information received` means paperwork exists before CouriersPlease scans the parcel; regional or interstate handovers can also leave multi-day scan gaps. Most delayed parcels arrive within 24 to 48 business hours of the estimate—if yours is past ETA with no update, contact Support.
+`Manifested` or `Shipment information received` means paperwork exists before CouriersPlease scans the parcel; regional or interstate handovers can also leave multi-day scan gaps. CouriersPlease says most delayed parcels arrive within 24 to 48 business hours of the estimate; if yours is past ETA with no update, contact Support.
 
 ### How do CouriersPlease HUBBED collection points and PINs work?
 
-Rather than lockers, CouriersPlease uses over 3,000 HUBBED collection points. Once status reads `Ready for collection` (up to 24 hours after transfer), bring your collection PIN, photo ID and proof of address within 7 days (missing PINs can be requested from HUBBED).
+Rather than lockers, CouriersPlease uses over 3,000 HUBBED collection points. Once status reads `Ready for collection` (up to 24 hours after transfer), bring your collection PIN, photo ID and proof of address; parcels are generally held for 7 days (missing PINs can be requested from HUBBED).
 
 ### How do I book a CouriersPlease redelivery or depot pickup?
 

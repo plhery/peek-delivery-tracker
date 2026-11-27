@@ -6,7 +6,7 @@ published: 2026-10-15
 updated: 2026-11-27
 ---
 
-Canpar Express (owned by TFI International) is a private Canadian parcel courier with over 800 SMARTSpot pickup points across Canada. Track a parcel on [canpar.com](https://www.canpar.com/en/tracking/track.htm) with its 22-character barcode or `W` delivery notice number, or paste it in the box above. You'll find the barcode in the shop's shipping email, on your order page or on the shipping label.
+Canpar Express (owned by TFI International) is a private Canadian parcel courier, which says it has more than 800 SMARTSpot pickup points across Canada. Track a parcel on [canpar.com](https://www.canpar.com/en/tracking/track.htm) with its 22-character barcode or `W` delivery notice number, or paste it in the box above. You'll find the barcode in the shop's shipping email, on your order page or on the shipping label.
 
 ## Canpar tracking number: format and where to find it
 
@@ -104,7 +104,7 @@ Current Canpar barcodes are one letter (C, D, K, L, S, U, X or Z) followed by 21
 
 ### How long does Canpar hold a parcel at a SMARTSpot?
 
-After a missed home delivery, your parcel is ready at the designated SMARTSpot after 12pm the next business day and held for up to 5 business days. Bring ID showing the delivery address, or give someone else a completed Authorization Notice.
+After a missed home delivery, your parcel is ready at the designated SMARTSpot after 12pm the next business day and held for up to 5 business days. Bring ID. Someone else can collect it if their ID shows the delivery address on the label; otherwise they need a completed Authorization Notice.
 
 ### Does Canpar deliver on weekends, and how late do drivers deliver?
 

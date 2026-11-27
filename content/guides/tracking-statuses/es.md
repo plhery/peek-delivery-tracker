@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-11-27
 ---
 
-En Correos, «Alta en la unidad de reparto» significa que tu paquete ha entrado en la unidad local que lo entregará «en cuanto sea posible», pero todavía no va en la furgoneta; solo «En reparto» indica que el repartidor ya está haciendo la ruta. Aquí puedes buscar qué significa cada estado en Correos (incluidas sus cuatro fases: Pre-admisión, En Camino, En entrega y Entregado), GLS, SEUR, MRW, NACEX y CTT Express. Casi ninguno requiere nada de ti: solo debes actuar ante un intento fallido, un aviso de recogida, un pago de aduanas o un «Entregado» que no has recibido.
+En una entrega a domicilio de Correos, «Alta en la unidad de reparto» significa que tu paquete ha entrado en la unidad local que lo entregará «en cuanto sea posible», pero todavía no va en la furgoneta; solo «En reparto» indica que el repartidor ya está haciendo la ruta. Aquí puedes buscar qué significa cada estado en Correos (incluidas sus cuatro fases: Pre-admisión, En Camino, En entrega y Entregado), GLS, SEUR, MRW, NACEX y CTT Express. Casi ninguno requiere nada de ti: solo debes actuar ante un intento fallido, un aviso de recogida, un pago de aduanas o un «Entregado» que no has recibido.
 
 ## ¿Cuáles son las fases del seguimiento de un paquete?
 

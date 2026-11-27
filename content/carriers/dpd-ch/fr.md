@@ -95,7 +95,7 @@ Sept jours calendaires, week-end compris, selon l'aide de myDPD. Les points rela
 
 ### Où trouver son numéro de colis DPD Suisse (060 ou avis P00) ?
 
-Le numéro de colis compte 14 chiffres (les numéros suisses commencent par 060) et arrive en général par e-mail de l'expéditeur, ou sur l'avis de passage. Le numéro commençant par P00 sous le code-barres de l'avis n'est pas le numéro de colis : c'est le numéro d'avis qui sert à commander une nouvelle livraison sur myDPD.
+Le numéro de colis compte 14 chiffres (les numéros suisses commencent par 060) et arrive en général par e-mail, souvent de l'expéditeur ; il figure aussi sur l'avis de passage. Le numéro commençant par P00 sous le code-barres de l'avis n'est pas le numéro de colis : c'est le numéro d'avis qui sert à commander une nouvelle livraison sur myDPD.
 
 ### DPD Suisse livre-t-il le samedi et à quelle heure ?
 

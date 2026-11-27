@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-11-27
 ---
 
-La Poste ne publie aucun horaire de livraison pour Colissimo, mais envoie un e-mail 24 h avant le passage ; chez Chronopost, l'heure limite dépend du service payé par l'expéditeur, y compris le samedi en métropole (par exemple avant 13 h avec Chrono 13 ou avant 10 h avec Chrono 10 selon le code postal). Ailleurs, Colis Privé livre de 8 h à 19 h et GLS de 8 h à 18 h du lundi au vendredi ; en Belgique, bpost livre le samedi en point d'enlèvement ou distributeur (8 h à 17 h) et le dimanche à domicile (9 h à 19 h) quand la boutique a un accord.
+La Poste ne publie aucun horaire de livraison pour Colissimo, mais envoie un e-mail 24 h avant le passage ; Chronopost livre aussi le samedi en métropole, à une heure qui dépend de l'option choisie par l'expéditeur (par exemple avant 13 h avec Chrono 13, ou avant 10 h avec Chrono 10 selon le code postal). Colis Privé livre de 8 h à 19 h et GLS de 8 h à 18 h du lundi au vendredi ; en Belgique, bpost livre le samedi en point d'enlèvement ou distributeur (8 h à 17 h) et le dimanche à domicile (9 h à 19 h) quand la boutique a un accord.
 
 ## Horaires de livraison : à quelle heure livrent Colissimo, Chronopost et les autres ?
 
@@ -23,7 +23,7 @@ La Poste ne publie aucun horaire de livraison pour Colissimo, mais envoie un e-m
 
 Le tableau ne montre pas **Amazon**, qui livre aussi le soir même : dans plus de 15 grandes villes, dont Paris, Lyon, Marseille et Lille, un membre Prime peut recevoir en quelques heures une commande éligible de plus de 35 euros.
 
-## Colissimo, Chronopost et bpost livrent-ils le samedi et le dimanche ?
+## Chronopost, bpost et les autres livrent-ils le samedi et le dimanche ?
 
 **Le samedi**, Chronopost livre aussi en France métropolitaine, à une heure qui dépend de l'option choisie par l'expéditeur : par exemple avant 13 h avec Chrono 13, et même avant 10 h avec Chrono 10 selon le code postal. GLS France, elle, ne livre que du lundi au vendredi. En Belgique, les livreurs de Mondial Relay passent dans les Points Relais du mardi au samedi ; chez bpost et à La Poste suisse, le samedi est aussi une option :
 

@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-11-27
 ---
 
-„Przesyłka utworzona” (na przykład w InPost) albo „przygotowana przez nadawcę” znaczy, że sklep wygenerował etykietę, ale przewoźnik nie ma jeszcze twojej paczki. Dopiero „Odebrana od Nadawcy” potwierdza, że paczka wyruszyła w drogę; „w trasie” albo „w tranzycie” znaczy, że jest między dwoma skanami w sieci przewoźnika, a „W doręczeniu” – że jedzie już z kurierem, zwykle tego samego dnia. Większość statusów niczego od ciebie nie wymaga: działać musisz dopiero przy awizo, oczekiwaniu na odbiór, opłatach celnych albo statusie „doręczona”, gdy paczki nie ma.
+„Przesyłka utworzona” (na przykład w InPost) albo „przygotowana przez nadawcę” znaczy, że sklep wygenerował etykietę, ale przewoźnik nie ma jeszcze twojej paczki. Dopiero status nadania, na przykład „Odebrana od Nadawcy” w InPost, potwierdza, że paczka wyruszyła w drogę; „w trasie” albo „w tranzycie” znaczy, że jest między dwoma skanami w sieci przewoźnika, a „W doręczeniu” – że jedzie już z kurierem, zwykle tego samego dnia. Większość statusów niczego od ciebie nie wymaga: działać musisz dopiero przy awizo, oczekiwaniu na odbiór, opłatach celnych albo statusie „doręczona”, gdy paczki nie ma.
 
 ## Przez jakie etapy przechodzi paczka?
 
@@ -41,7 +41,7 @@ Krajowe przesyłki [FedEx Polska](carrier:fedex-pl) (dawniej Opek) mają 13-cyfr
 
 ## Co to znaczy „Przesyłka utworzona” w InPost i „Odebrana od Nadawcy”?
 
-„Przesyłka utworzona” znaczy tylko tyle, że przewoźnik ma dane twojej paczki, ale nie samą paczkę. U InPost `Przesyłka utworzona.` oznacza, że przesyłka „nie jest gotowa do nadania”, `Przygotowana przez Nadawcę.` – że „wkrótce zostanie przekazana w nasze ręce”, a dopiero `Odebrana od Nadawcy.` potwierdza, że została odebrana i wyruszyła w dalszą drogę. W globalnym śledzeniu FedEx etap etykiety to `Shipment information sent to FedEx`, a gdy paczka trafi już do FedEx, pojawia się `Picked up` albo `Tendered at FedEx location`.
+„Przesyłka utworzona” znaczy tylko tyle, że przewoźnik ma dane twojej paczki, ale nie samą paczkę. U InPost `Przesyłka utworzona.` oznacza, że przesyłka „nie jest gotowa do nadania”, `Przygotowana przez Nadawcę.` – że „wkrótce zostanie przekazana w nasze ręce”, a `Odebrana od Nadawcy.` – że „została odebrana od Nadawcy i wyruszyła w dalszą drogę”. W globalnym śledzeniu FedEx etap etykiety to `Shipment information sent to FedEx`, a gdy paczka trafi już do FedEx, pojawia się `Picked up` albo `Tendered at FedEx location`.
 
 Jeśli pierwszy status długo się nie zmienia, napisz do sprzedawcy, nie do przewoźnika: paczka wciąż jest u sprzedawcy. Tak samo radzi [Cainiao](carrier:cainiao) przy zamówieniach z Chin bez danych śledzenia: zamówienie „jest przetwarzane”, a po szczegóły trzeba się zwrócić do sprzedawcy.
 
@@ -65,7 +65,7 @@ Cisza dłuższa niż czas podany przez przewoźnika? Zobacz, [dlaczego status pr
 - **Odprawa celna.** Każdą przesyłkę pocztową z towarem spoza Unii Europejskiej trzeba zgłosić do urzędu celnego, bez względu na wartość, ale paczkę do 150 euro Poczta Polska zgłasza za ciebie. Gdy brakuje danych albo opis towaru jest niejasny, paczka może na jakiś czas utknąć w magazynie pocztowo-celnym. Po odprawie jedzie do doręczenia, a należności Poczta Polska pobiera przy doręczeniu albo przed odbiorem. Działaj tylko wtedy, gdy poczta albo urząd celny o coś poprosi. Ile zapłacisz, łącznie z cłem 3 euro za każdy rodzaj produktu, wyjaśnia poradnik [paczka zatrzymana przez urząd celny](guide:customs).
 - **Przewoźnik w Polsce.** Ostatni odcinek często przejmuje inna firma, czasem [pod nowym numerem](guide:tracking-number-formats). Przy ekonomicznej wysyłce Cainiao pisze, że jego śledzenie kończy się na przekazaniu „przewoźnikowi w kraju/regionie docelowym”, a o dalsze statusy trzeba pytać tego przewoźnika. U [YunExpress](carrier:yunexpress) ten moment opisuje `Delivered to local carrier`: mimo słowa „Delivered” paczka trafiła do przewoźnika, nie do ciebie. Paczek od Temu, AliExpress i Shein DPD nie przekierowuje; gdy już je ma, możesz je najwyżej skierować do punktu DPD Pickup na trasie kuriera. Zamawiasz w Chinach? Zobacz, jak [śledzić paczkę z Chin](guide:tracking-from-china).
 
-## „W doręczeniu” – co to znaczy i kiedy przyjedzie paczka?
+## „W doręczeniu” albo „wydana do doręczenia”: czy paczka będzie dziś?
 
 Zwykle tak, ale przewoźnicy ujmują to różnie:
 

@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-11-27
 ---
 
-Poste Italiane, BRT e GLS non pubblicano un orario fisso di consegna, ma puoi ricevere pacchi fino a sera tardi: fino alle 21:00 con la «Consegna di Sera» di Poste Delivery Business Express e il «Recapito serale» della Posta svizzera, fino alle 22:00 con la consegna in giornata di Amazon. Il sabato non conta come giorno lavorativo per Poste Delivery Express e Standard né per BRT; di sabato consegnano solo servizi scelti dal mittente (come Poste Delivery Business Express con «Consegna di Sabato» o GLS SaturdayExpressService) e Amazon, che è anche l'unico di questa guida a consegnare la domenica.
+Poste Italiane, BRT e GLS non pubblicano un orario fisso di consegna, ma puoi ricevere pacchi fino a sera tardi: fino alle 21:00 con la «Consegna di Sera» di Poste Delivery Business Express e il «Recapito serale» della Posta svizzera, fino alle 22:00 con la consegna in giornata di Amazon. Il sabato non conta come giorno lavorativo per Poste Delivery Express e Standard né per BRT; di sabato consegnano i servizi scelti dal mittente (come Poste Delivery Business Express con «Consegna di Sabato» o GLS SaturdayExpressService), la Posta svizzera con un supplemento e Amazon, che è anche l'unico di questa guida a consegnare la domenica.
 
 ## Orari di consegna: fino a che ora passano Poste Italiane, BRT, GLS e Amazon?
 

@@ -120,11 +120,11 @@ Pacco Celere 1 e 3 sono oggi Poste Delivery Express e restano tracciabili in «C
 
 ### Verifica ritiro Poste Italiane: come uso il Codice Prenotazione Ritiro?
 
-Chi spedisce con Poste Delivery Web trova il Codice Prenotazione Ritiro (`CP` più cifre) nell'Archivio, accanto al codice spedizione. Verifica il ritiro in «Prenota e verifica ritiro pacco a domicilio» su poste.it, all'803 160 (da fisso) o allo 06 4526 3160. Se non c'eri, porta il pacco in ufficio postale o Punto Poste, o riprenota gratis al telefono.
+Chi spedisce con Poste Delivery Web trova il Codice Prenotazione Ritiro (`CP` più cifre) nell'Archivio, accanto al codice spedizione. Verifica il ritiro in «Prenota e verifica ritiro pacco a domicilio» su poste.it, all'803 160 (da fisso) o allo 06 4526 3160. Se non c'eri, porta il pacco in un ufficio postale o in un Punto Poste abilitato, oppure fissa gratis un nuovo ritiro al telefono con il codice spedizione.
 
 ### Tempi di consegna e numero verde Poste Italiane?
 
-Indicativamente 4 giorni lavorativi per Crono, 1-2 per Crono Express e 1-4 oltre l'accettazione per Poste Delivery Express, sabato escluso (di sabato solo con l'opzione di Poste Delivery Business Express). Numero verde 803 160 da fisso o +39 06 4526 3160 da cellulare, lun-sab 8:00-20:00.
+Indicativamente 4 giorni lavorativi per Crono, 1-2 per Crono Express e 1-4 oltre l'accettazione per Poste Delivery Express, sabato escluso: di norma Poste non consegna di sabato, salvo l'opzione a pagamento di Poste Delivery Business Express. Numero verde 803 160 da fisso o +39 06 4526 3160 da cellulare, lun-sab 8:00-20:00.
 
 :::sources
 - [Poste Italiane: FAQ Spedizioni e consegne](https://www.poste.it/assistenza/faq-spedizioni-e-consegne/) – codice, Cerca Spedizioni, avviso, delega, prenotazione, pacchi dall'estero, raccomandate

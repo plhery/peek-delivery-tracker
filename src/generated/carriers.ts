@@ -19634,6 +19634,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffbe0c"
     },
     {
+      "id": "ups",
+      "catalog": "ups",
+      "slug": "ups-otslezhivanie",
+      "title": "Отслеживание UPS: трек-номер 1Z, статусы и доставка",
+      "name": "UPS",
+      "color": "#351c15"
+    },
+    {
       "id": "dhl",
       "catalog": "dhl",
       "slug": "dhl-paket-otslezhivanie",
@@ -22142,6 +22150,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef3026"
     },
     {
+      "id": "poste-italiane",
+      "catalog": "poste-italiane",
+      "slug": "poste-italiane-pakket-volgen",
+      "title": "Poste Italiane pakket volgen: nummers, statussen en afhaal",
+      "name": "Poste Italiane",
+      "color": "#eedc00"
+    },
+    {
       "id": "vinted-go",
       "catalog": "vinted-go",
       "slug": "vinted-go-pakket-volgen",
@@ -22182,12 +22198,36 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005baa"
     },
     {
+      "id": "nova-poshta",
+      "catalog": "nova-poshta",
+      "slug": "nova-poshta-pakket-volgen",
+      "title": "Nova Poshta (Nova Post) pakket volgen: nummers en status",
+      "name": "Nova Poshta",
+      "color": "#e30613"
+    },
+    {
+      "id": "ceska-posta",
+      "catalog": "ceska-posta",
+      "slug": "ceska-posta-pakket-volgen",
+      "title": "Česká pošta (Czech Post) pakket volgen: nummers en status",
+      "name": "Česká pošta",
+      "color": "#002776"
+    },
+    {
       "id": "elta",
       "catalog": "elta",
       "slug": "elta-hellenic-post-pakket-volgen",
       "title": "ELTA Hellenic Post volgen: GR-nummers, statussen & hulp",
       "name": "ELTA Hellenic Post",
       "color": "#0063a9"
+    },
+    {
+      "id": "ups",
+      "catalog": "ups",
+      "slug": "ups-pakket-volgen",
+      "title": "UPS pakket volgen: 1Z-nummers, statussen en Access Points",
+      "name": "UPS",
+      "color": "#351c15"
     },
     {
       "id": "postnl",
@@ -22420,6 +22460,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "nb": [
     {
+      "id": "amazon-logistics",
+      "catalog": "amazon-logistics",
+      "slug": "amazon-logistics-sporing",
+      "title": "Amazon Logistics sporing: hvor du finner pakken og hjelp",
+      "name": "Amazon Logistics",
+      "color": "#ff9900"
+    },
+    {
       "id": "postnord",
       "catalog": "postnord",
       "slug": "postnord-sporing",
@@ -22534,6 +22582,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Česká pošta sledování zásilek: podací číslo a stavy",
       "name": "Česká pošta",
       "color": "#002776"
+    },
+    {
+      "id": "elta",
+      "catalog": "elta",
+      "slug": "elta-hellenic-post-sledovani-zasilek",
+      "title": "ELTA Hellenic Post sledování zásilek: stavy, výdej, kontakt",
+      "name": "ELTA Hellenic Post",
+      "color": "#0063a9"
     },
     {
       "id": "gzyl",
@@ -23242,6 +23298,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Venipaki saadetise jälgimine: olekud, pakiautomaat ja kuller",
       "name": "Venipak",
       "color": "#9339f2"
+    },
+    {
+      "id": "ups",
+      "catalog": "ups",
+      "slug": "ups-paki-jalgimine",
+      "title": "UPS paki jälgimine: 1Z-numbrid, staatused ja Access Point",
+      "name": "UPS",
+      "color": "#351c15"
     },
     {
       "id": "dk-logistics-ee",

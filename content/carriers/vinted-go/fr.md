@@ -112,7 +112,7 @@ Le colis est en transit vers ta consigne Vinted Go, mais n'est pas encore dépos
 
 ### Vinted Go existe-t-il au Luxembourg et quel est le délai ?
 
-Non : au Luxembourg, Vinted propose Mondial Relay, DPD, Shop2Shop by Chronopost et DHL Express. Ailleurs, les conditions de Vinted Go visent 3 à 6 jours ouvrés entre le dépôt et ton point, et demandent d'attendre 25 jours ouvrés avant de signaler un colis manquant.
+Non : au Luxembourg, Vinted propose Mondial Relay, DPD, Shop2Shop by Chronopost et DHL Express. Ailleurs, les conditions de Vinted Go visent 3 à 6 jours ouvrés entre le dépôt et ton point, et Vinted Go demande d'attendre 25 jours ouvrés avant de considérer un colis comme manquant.
 
 ### Quel est le numéro de téléphone de Vinted Go ?
 

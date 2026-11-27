@@ -99,7 +99,7 @@ Así llaman las preguntas frecuentes de CTT Express a un envío que sigue en `Pe
 
 ### ¿Qué pasó con Tourline Express? ¿Cómo hago el seguimiento hoy?
 
-CTT Express es la filial española de paquetería urgente del grupo portugués CTT: Tourline Express era la marca con la que el Grupo CTT operaba en España hasta cambiarla a CTT Express en 2019, y hoy todos los envíos se siguen en el [localizador de CTT Express](https://www.cttexpress.com/localizador-de-envios/). Reparte en la península, Baleares, Canarias, Ceuta, Melilla y Portugal. En mayo de 2026, CTT Express y DHL eCommerce firmaron una alianza bajo la marca «CTT Express together with DHL», sin fusión: en España, CTT Express lleva los envíos a particulares (B2C) y DHL los envíos entre empresas (B2B) y transfronterizos.
+CTT Express es la filial española de paquetería urgente del grupo portugués CTT: Tourline Express era la marca con la que el Grupo CTT operaba en España hasta cambiarla a CTT Express en 2019, y hoy todos los envíos se siguen en el [localizador de CTT Express](https://www.cttexpress.com/localizador-de-envios/). Reparte en la península, Baleares, Canarias, Ceuta, Melilla y Portugal. En mayo de 2026, CTT Express y DHL eCommerce firmaron una alianza bajo la marca «CTT Express together with DHL», sin fusión: en España, CTT Express se ocupará de los envíos a particulares (B2C) y DHL, de los envíos entre empresas (B2B) y los transfronterizos.
 
 ### ¿Cuánto tarda CTT Express en entregar un paquete?
 

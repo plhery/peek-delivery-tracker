@@ -45,7 +45,7 @@ El plazo empieza a contar cuando la empresa recoge o admite el paquete, no cuand
 
 ## ¿Correos y GLS reparten paquetes los sábados y fines de semana?
 
-**Los sábados**, Correos no reparte paquetes: la Ley 43/2010 le obliga, como operador del servicio postal universal, a entregar «al menos, todos los días laborables, de lunes a viernes», y sus condiciones de paquetería describen un servicio de lunes a viernes. En las demás casi siempre depende de si quien envía lo ha pagado: GLS (antes de mediodía con ExpressSaturday), NACEX y Correos Express reparten en sábado solo como servicio añadido que contrata el remitente, y CTT Express solo en Navidad.
+**Los sábados**, Correos no reparte paquetes: sus condiciones de paquetería describen un servicio de lunes a viernes, y la Ley 43/2010 solo le obliga, como operador del servicio postal universal, a entregar «al menos, todos los días laborables, de lunes a viernes». En las demás casi siempre depende de si quien envía lo ha pagado: GLS (antes de mediodía con ExpressSaturday), NACEX y Correos Express reparten en sábado solo como servicio añadido que contrata el remitente, y CTT Express solo en Navidad.
 
 **Los domingos**, solo Amazon dice que reparte: sus envíos Prime en un día incluyen «entregas en fin de semana en determinados códigos postales». Ninguna otra empresa de la tabla lo ofrece en sus páginas.
 

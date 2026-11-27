@@ -49,6 +49,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.font.createFontFamilyResolver
+import androidx.compose.ui.text.intl.LocaleList
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import com.plhery.peekdeliverytracker.core.DistanceUnit
@@ -632,7 +633,7 @@ internal object MapScenes {
     }
 
     private fun text(context: Context): Pair<TextMeasurer, MapTextWidths> = text ?: synchronized(this) {
-        text ?: TextMeasurer(createFontFamilyResolver(context), Density(1f), LayoutDirection.Ltr).let { it to MapTextWidths(it) }
+        text ?: TextMeasurer(createFontFamilyResolver(context), LocaleList.current, Density(1f), LayoutDirection.Ltr).let { it to MapTextWidths(it) }
             .also { text = it }
     }
 

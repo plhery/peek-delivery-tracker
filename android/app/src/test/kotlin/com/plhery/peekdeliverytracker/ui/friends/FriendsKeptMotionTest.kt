@@ -8,6 +8,7 @@ import androidx.compose.ui.graphics.PixelMap
 import androidx.compose.ui.graphics.toPixelMap
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.ComposeUiTestConfig
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.hasContentDescription
@@ -55,7 +56,7 @@ class FriendsKeptMotionTest {
         override val scaleFactor: Float get() = 0f
     }
 
-    private val compose = createAndroidComposeRule<ComponentActivity>(AnimationsOff)
+    private val compose = createAndroidComposeRule<ComponentActivity>(ComposeUiTestConfig(effectContext = AnimationsOff))
 
     @get:Rule
     val rules: RuleChain = RuleChain.outerRule(ZurichTime()).around(compose)

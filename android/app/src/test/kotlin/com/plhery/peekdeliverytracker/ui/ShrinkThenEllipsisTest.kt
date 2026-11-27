@@ -158,6 +158,7 @@ internal fun assertLaidOutAt(fontSize: TextUnit, layout: TextLayoutResult) {
     val input = layout.layoutInput
     val sized = MultiParagraphIntrinsics(
         input.text, input.style.copy(fontSize = fontSize), input.placeholders, input.density, input.fontFamilyResolver, softWrap = false,
+        defaultLocaleList = input.defaultLocaleList,
     )
     assertEquals("Laid out at $fontSize", sized.maxIntrinsicWidth, layout.multiParagraph.intrinsics.maxIntrinsicWidth, 0.5f)
 }

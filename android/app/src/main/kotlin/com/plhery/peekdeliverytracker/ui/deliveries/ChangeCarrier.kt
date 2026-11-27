@@ -19,6 +19,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.listSaver
@@ -125,11 +126,13 @@ internal fun CarrierEditorHost(state: DeliveriesState) {
     val catalog = LocalCarrierIdentities.current?.catalog ?: CarrierCatalog.shared
     val region = remember { CarrierCatalog.deviceCountry() }
     val parcel = editing?.let { state.carrierEditorParcel(it, state.parcels) }
-    // Saved with its opening, so that one opened afresh, for this parcel or another, doesn't take an earlier one's.
+    // Saved under its opening, so that one opened afresh, for this parcel or another, doesn't take an earlier one's.
     val overlay = LocalTabOverlay.current
     val opening = rememberOpening(visible, { overlay?.windowRestoring })
-    val form = rememberSaveable(editing?.id, opening, saver = CarrierEditorForm.Saver, key = "carrierEditor.$opening") {
-        CarrierEditorForm.start(editing, parcel, catalog, region, state.source.givenPostcodes)
+    val form = key(opening) {
+        rememberSaveable(editing?.id, saver = CarrierEditorForm.Saver) {
+            CarrierEditorForm.start(editing, parcel, catalog, region, state.source.givenPostcodes)
+        }
     }
     val change = parcel?.let { form.change(it, catalog, region) }
     // Inputs and their help sit below the half-height sheet: open fully for them, each time they come

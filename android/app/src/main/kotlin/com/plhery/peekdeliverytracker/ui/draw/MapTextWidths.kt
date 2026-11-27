@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.font.createFontFamilyResolver
+import androidx.compose.ui.text.intl.LocaleList
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import com.plhery.peekdeliverytracker.core.MapFont
@@ -22,6 +23,6 @@ class MapTextWidths(private val measurer: TextMeasurer) : com.plhery.peekdeliver
 
     companion object {
         fun of(context: Context): MapTextWidths =
-            MapTextWidths(TextMeasurer(createFontFamilyResolver(context), Density(1f), LayoutDirection.Ltr))
+            MapTextWidths(TextMeasurer(createFontFamilyResolver(context), LocaleList.current, Density(1f), LayoutDirection.Ltr))
     }
 }

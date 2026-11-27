@@ -11,6 +11,7 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.MotionDurationScale
+import androidx.compose.ui.test.ComposeUiTestConfig
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.withContext
@@ -28,7 +29,7 @@ class KeepMotionTest {
     }
 
     @get:Rule
-    val compose = createComposeRule(AnimationsOff)
+    val compose = createComposeRule(ComposeUiTestConfig(effectContext = AnimationsOff))
 
     @Test
     fun keptAnimationsRunTheirCourseWhileOthersJump() {

@@ -6,6 +6,7 @@ import android.net.NetworkCapabilities
 import androidx.annotation.VisibleForTesting
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.font.createFontFamilyResolver
+import androidx.compose.ui.text.intl.LocaleList
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.lifecycle.Lifecycle
@@ -106,7 +107,7 @@ open class PeekApplication : Application() {
         // Compose keeps whether the emoji font has loaded in a state it makes the first time any text is measured. Made
         // here, before anything else measures text, every snapshot can read it; made by a map's names or the widget's,
         // measured off the main thread while a composition was open, that composition couldn't, and the app stopped.
-        TextMeasurer(createFontFamilyResolver(this), Density(1f), LayoutDirection.Ltr).measure(" ")
+        TextMeasurer(createFontFamilyResolver(this), LocaleList.current, Density(1f), LayoutDirection.Ltr).measure(" ")
         registerActivityLifecycleCallbacks(foreground)
         // A request that gets no answer while the phone is online means the server is down for maintenance; offline,
         // it is the phone's own trouble, said as before.

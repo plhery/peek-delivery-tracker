@@ -1,13 +1,13 @@
 ---
 title: Suivi de commande MediaMarkt : transporteurs et retards
-description: Qui livre ta commande MediaMarkt en Belgique et en Suisse, s'il existe un MediaMarkt en France, où trouver le suivi et que faire si le colis n'arrive pas.
+description: Suivi de commande MediaMarkt (Belgique, Suisse, Luxembourg) : y a-t-il un MediaMarkt en France, livraison bpost/PostNL/DPD/Poste suisse, délais et retours.
 slug: suivi-commande-mediamarkt
 picture: Un carton plat de téléviseur et un petit colis à côté d'une camionnette de livraison, Pip tout joyeux et un magasin avec un panneau de retrait.
 published: 2026-10-17
-updated: 2026-11-09
+updated: 2026-11-27
 ---
 
-Il n'y a pas de MediaMarkt en France : en français, tu commandes sur mediamarkt.be en Belgique, sur mediamarkt.lu au Luxembourg ou sur mediamarkt.ch en Suisse. En Belgique et en Suisse, le statut de ta commande est dans ton compte, et l'e-mail d'expédition contient le lien de suivi. Les petits articles sont livrés par bpost ou PostNL en Belgique, par DPD au Luxembourg et par La Poste en Suisse, et les gros appareils arrivent sur rendez-vous.
+Il n'existe pas de magasin MediaMarkt en France (seul `mediamarkt.lu` livre certains articles « Livrable en France ») : en français, tu commandes sur `mediamarkt.be` (Belgique, petits colis via bpost ou PostNL), `mediamarkt.lu` (Luxembourg, via DPD) ou `mediamarkt.ch` (Suisse, via La Poste suisse), tandis que les gros appareils arrivent sur rendez-vous. Suis ta commande dans ton compte client ou via le lien Track & Trace de l'e-mail d'expédition.
 
 ## Y a-t-il un MediaMarkt en France ?
 
@@ -17,7 +17,7 @@ Chaque boutique en ligne livre chez elle. Les commandes passées sur mediamarkt.
 
 La suite vaut pour la Belgique, le Luxembourg et la Suisse romande, avec les mots des sites mediamarkt.be/fr, mediamarkt.lu et mediamarkt.ch/fr.
 
-## Quel transporteur livre ma commande MediaMarkt ?
+## Quel transporteur livre ma commande MediaMarkt en Belgique, Suisse et Luxembourg ?
 
 Ça dépend du pays, de la taille de l'article et du vendeur :
 
@@ -65,7 +65,7 @@ Où le trouver chez d'autres boutiques : [trouver son numéro de suivi](guide:fi
 :::checker
 :::
 
-## Pourquoi ma commande MediaMarkt est-elle en retard, ou pourquoi le suivi ne bouge pas ?
+## Quels sont les délais MediaMarkt et pourquoi le suivi ne bouge-t-il pas ?
 
 Le délai s'affiche sur la page du produit avant la commande ; en Suisse, il figure ensuite dans ta confirmation de commande et dans ton compte client. Pour un article en stock, MediaMarkt annonce :
 
@@ -88,7 +88,7 @@ Si rien ne bouge, c'est souvent pour l'une de ces raisons :
 
 En Suisse, si le délai est dépassé, regarde dans tes spams : un message de retard avec la nouvelle date a pu y atterrir. Sinon, écris via le formulaire de contact. Quand l'attente est encore normale : [suivi qui ne bouge plus](guide:tracking-not-updating).
 
-## Options et frais de livraison
+## Quels sont les frais de livraison, points relais et retrait 30 min MediaMarkt ?
 
 **En Belgique**, la livraison est gratuite à partir de 50 €, sauf s'il faut un monte-charge : le service de transport te demande alors ton accord. Les options :
 
@@ -116,7 +116,7 @@ Une commande déjà préparée pour l'expédition ou en route ne s'annule plus. 
 
 Si tu n'es pas chez toi, tu retires ton colis au bureau de poste le plus proche, sauf pour une livraison par transporteur. Le « Retrait au magasin » est express en 30 minutes si le produit est en stock, pour une commande passée au plus tard une heure avant la fermeture, et un e-mail te prévient dès que tout est prêt. Payé d'avance, tu as 12 jours pour venir le chercher ; payé en magasin, il reste réservé 4 jours, puis il est remis en vente.
 
-## Colis MediaMarkt non reçu ou marqué livré : que faire ?
+## Colis MediaMarkt non reçu, endommagé ou marqué livré : que faire et qui appeler ?
 
 Cherche d'abord, signale ensuite. Dans l'ordre :
 
@@ -132,7 +132,7 @@ Il manque une partie de la commande en Belgique ? Appelle aussi le 02 808 68 16.
 
 Pour aller plus loin : [colis livré mais pas reçu](guide:delivered-not-received), [colis perdu](guide:lost-parcel) et [colis endommagé](guide:damaged-parcel).
 
-## Retourner une commande MediaMarkt
+## Comment retourner une commande MediaMarkt (30 jours) en Belgique, Suisse et Luxembourg ?
 
 **En Belgique**, le retour est gratuit pendant 30 jours, en ligne ou dans l'un des 29 magasins : c'est plus que les 14 jours de rétractation que la loi prévoit pour un achat à distance. Pour un petit ou moyen colis, ou un téléviseur jusqu'à 45 pouces, enregistre le retour sur le portail de retour : l'étiquette arrive par e-mail. Un appareil volumineux livré chez toi ne retourne pas en magasin, mais MediaMarkt vient le reprendre gratuitement sur rendez-vous, via le formulaire de contact. Une commande Marketplace ne se retourne pas en magasin : demande le retour au vendeur via « Mon Compte ». Les trottinettes et vélos électriques et les hoverboards ne se retournent qu'en magasin. L'état de ton renvoi s'affiche dans la section Track & Trace ; une fois le produit arrivé, MediaMarkt le traite en un jour ouvrable, t'envoie un accusé de réception par e-mail et lance le remboursement. Après une reprise à domicile, l'argent part dans les 5 jours ouvrables, sur le moyen de paiement de l'achat.
 

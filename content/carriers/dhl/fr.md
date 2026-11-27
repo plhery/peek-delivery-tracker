@@ -1,12 +1,12 @@
 ---
 title: Suivi colis DHL Paket : numéro, statuts et livraison
-description: Suivi DHL Paket : à quoi ressemble le numéro, ce que disent les statuts, la Packstation en Allemagne et qui livre un colis d'Allemagne en France, Belgique ou Suisse.
+description: Suivi colis DHL Paket d'Allemagne vers France (La Poste), Belgique (bpost) ou Suisse : numéro JJD/00340434, statuts, Packstation, délais et +49 228 4333112.
 slug: dhl-paket-suivi-colis
 published: 2026-10-22
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-DHL Paket est le service colis allemand de DHL Group, sous les marques Deutsche Post et DHL. Tu suis ton colis avec son numéro sur dhl.de (en allemand ou en anglais), dans l'app Post & DHL ou en le collant dans le champ ci-dessus. Le numéro vient de l'expéditeur, en général dans l'e-mail d'expédition. Cette page sert à qui vit en Allemagne comme à qui attend en France, en Belgique ou en Suisse un colis parti d'Allemagne.
+DHL Paket est le service colis allemand de Deutsche Post et DHL. Cette page couvre les livraisons en Allemagne (Filiale et Packstation) ainsi que les colis partis d'Allemagne vers la France ([La Poste / Colissimo](carrier:la-poste), 2–4 jours ouvrables), la Belgique ([bpost](carrier:bpost), 2–3 jours) et la Suisse (DHL Express CH / Poste suisse, 2–5 jours). Colle ton *Sendungsnummer* (10 à 39 caractères) ci-dessus ou suis-le sur dhl.de ou l'app Post & DHL.
 
 ## Numéro de suivi DHL Paket : où le trouver et à quoi il ressemble
 
@@ -96,17 +96,25 @@ Tu vois le statut, chaque scan sur une carte, avec son lieu et l'heure exacte de
 
 ## Questions sur le suivi DHL Paket
 
-### Qui livre un colis DHL Paket venu d'Allemagne ?
+### Qui livre en France, en Belgique ou en Suisse un colis DHL Paket ?
 
-Selon DHL, La Poste / Colissimo en France, bpost en Belgique, DHL Express Suisse ou la Poste suisse en Suisse. Le suivi, qui reste sur dhl.de avec le même numéro, montre qui a le colis.
+Selon DHL, [La Poste / Colissimo](carrier:la-poste) livre en France, [bpost](carrier:bpost) en Belgique et DHL Express Suisse ou [la Poste suisse](carrier:swiss-post) en Suisse. Le suivi continue sur `dhl.de` avec le même numéro (et souvent sur le site du partenaire local).
 
-### Combien de temps met un colis DHL d'Allemagne ?
+### Combien de temps met un colis DHL Paket depuis l'Allemagne ?
 
-DHL donne, à titre indicatif, 2 à 4 jours ouvrables vers la France, 2 à 3 vers la Belgique et 2 à 5 vers la Suisse. En Allemagne, un colis arrive en général 1 à 2 jours ouvrables après l'envoi, plus avant Noël.
+DHL annonce à titre indicatif 2 à 4 jours ouvrables vers la France, 2 à 3 vers la Belgique, 2 à 5 vers la Suisse et 1 à 2 jours ouvrables en Allemagne. Un nouveau numéro met jusqu'à 24 heures à apparaître, et une pause de quelques jours à Francfort reste normale.
 
-### Peut-on suivre un DHL Päckchen ?
+### Combien de temps un colis DHL reste-t-il en Filiale ou en Packstation en Allemagne ?
 
-Non. DHL Päckchen et Päckchen International n'ont pas de suivi : seuls les colis (Pakete) en ont un.
+En Filiale ou Paketshop : 7 jours ouvrables (samedis compris) avec pièce d'identité. En Packstation : 7 jours calendaires (9 après une livraison manquée), sans prolongation.
+
+### Peut-on suivre un DHL Päckchen ou changer l'adresse d'un colis DHL Paket ?
+
+Non : DHL Päckchen et Päckchen International n'ont aucun suivi, et l'adresse d'un DHL Paket ne se modifie plus une fois expédié (en Allemagne, tu peux toutefois reporter la livraison jusqu'à 6 jours ouvrables ou choisir un lieu sûr/voisin avant passage).
+
+### Comment contacter DHL Paket, La Poste ou bpost en cas de problème ?
+
+Appelle DHL Paket au `+49 228 4333112` (`0228 4333112` en Allemagne, lun–ven 8 h–20 h, sam 8 h–18 h), La Poste au `3631` ou bpost au `02 278 51 27`. Pour un colis perdu, passe d'abord par l'expéditeur (l'enquête internationale DHL peut prendre jusqu'à 8 semaines).
 
 :::sources
 - [DHL : Was bedeutet mein Sendungsstatus?](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – statuts, 24 heures, lignes répétées, délais de garde

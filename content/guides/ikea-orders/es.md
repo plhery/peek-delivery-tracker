@@ -1,15 +1,15 @@
 ---
 title: Seguimiento de pedidos IKEA: paquetes, camión y problemas
-description: Quién entrega tu pedido de IKEA en España, dónde está «Sigue y gestiona tu pedido», qué paquetes llevan número de SEUR o Correos y qué hacer si algo falla.
+description: Seguimiento de pedidos IKEA España: «Sigue y gestiona tu pedido», paquetería con SEUR y Correos, entregas en camión, Click & Collect, incidencias y 900 400 922.
 slug: seguimiento-pedido-ikea
 picture: Una pila de cajas planas alargadas, una llave Allen, un camión de reparto y Pip encima de la caja de arriba.
 published: 2026-10-18
-updated: 2026-10-18
+updated: 2026-11-27
 ---
 
-IKEA sigue todos los pedidos online en su propia página, «Sigue y gestiona tu pedido»: necesitas el número de pedido y el correo o el teléfono con el que compraste. Los pedidos pequeños van por paquetería, con SEUR o Correos, y llevan el número de seguimiento del transportista. Los muebles llegan en camión con el transportista de IKEA, en una franja horaria, y solo el seguimiento de IKEA y sus avisos te dicen dónde están.
+Puedes seguir cualquier pedido online de IKEA España (Península) en «Sigue y gestiona tu pedido» con tu número de pedido y el correo o teléfono de la compra. Los pedidos pequeños (hasta 25 kg) viajan por paquetería con SEUR o Correos (3–6 días laborables) y llevan número de seguimiento del transportista; los muebles medianos o voluminosos llegan en camión con el transportista de IKEA en una franja horaria y se siguen en la web de IKEA.
 
-## ¿Quién entrega mi pedido de IKEA?
+## ¿Quién entrega un pedido de IKEA en España (SEUR, Correos o camión)?
 
 Depende del peso y del tamaño del pedido. IKEA (ikea.com/es) envía a la Península: «excepto islas, Ceuta y Melilla». Para las islas, IKEA enlaza a su web IKEA islas (islas.ikea.es).
 
@@ -31,7 +31,7 @@ También puedes recogerlo tú. Un pedido pequeño puede ir a más de 14 000 pun
 - home | Tú | Cuenta los bultos antes de que se vaya el repartidor
 :::
 
-## ¿Dónde está el seguimiento de mi pedido IKEA?
+## ¿Cómo usar «Sigue y gestiona tu pedido» y encontrar el seguimiento de SEUR o Correos?
 
 **«Sigue y gestiona tu pedido».** Es el seguimiento de IKEA y vale para cualquier pedido, paquete o camión. Lo encuentras en la página «Tu pedido» de Atención al Cliente, con el número de pedido y el correo o el teléfono que usaste. Desde ahí puedes:
 
@@ -62,7 +62,7 @@ Para otras tiendas: [dónde está el número de seguimiento](guide:find-tracking
 :::checker
 :::
 
-## ¿Por qué se retrasa mi pedido de IKEA, o por qué no avanza el seguimiento?
+## ¿Cuánto tarda un pedido de IKEA y por qué se retrasa o se divide?
 
 La fecha depende de tu código postal, del tamaño del pedido y del stock. Antes de pagar ves las opciones y la fecha exacta. Lo que dice IKEA, de forma orientativa:
 
@@ -85,7 +85,7 @@ IKEA dice en sus condiciones que «garantiza el cumplimiento de los plazos acord
 
 **Cambiar la fecha.** Usa «Reprogramar» en «Sigue y gestiona tu pedido» mientras el pedido no esté preparado ni en reparto. En las entregas estándar, los cambios son gratis hasta 48 horas antes. En paquetería, el aviso de SEUR trae un enlace para cambiar la entrega hasta 1 hora antes de la fecha avisada, también a un punto de recogida. Para cancelar, pulsa «Cancelar pedido»; si el pedido ya ha salido, IKEA descuenta el transporte.
 
-## Opciones y precios de entrega de IKEA
+## ¿Cuánto cuesta el envío a domicilio de IKEA y la recogida Click & Collect?
 
 El pedido mínimo para la entrega a domicilio es de 10 €. El Click & Collect no tiene mínimo.
 
@@ -113,7 +113,7 @@ Cuánto tiempo te esperan:
 
 Lleva el NIF o el pasaporte y el correo de confirmación. Si va otra persona: en Correos o InPost, una autorización y una copia de tu DNI, NIE o pasaporte; en IKEA, el número de pedido y su propio documento. Más: [lockers y puntos de recogida](guide:parcel-lockers).
 
-## Pedido de IKEA que no llega, incompleto o dañado: qué hacer
+## Pedido de IKEA dañado, incompleto o no entregado: ¿qué hacer y a qué teléfono llamar?
 
 Primero mira, luego avisa. Por orden:
 
@@ -129,7 +129,7 @@ Si faltan artículos y lo reportas online, en 15 minutos te llega un correo con 
 
 **Franja perdida.** Si no hay nadie en casa para una entrega en camión, el pedido se marca como «fallido» y IKEA te contacta. Según sus condiciones, el segundo transporte lo pagas tú, y tras 7 días gratis también el almacenaje. Si SEUR o Correos no te encuentran, el paquete pasa a un punto de recogida, donde tienes 10 días para retirarlo. Más: [entrega fallida](guide:missed-delivery), [paquete entregado pero no recibido](guide:delivered-not-received), [paquete dañado](guide:damaged-parcel) y [paquete perdido](guide:lost-parcel).
 
-## Devolver un pedido de IKEA
+## ¿Cómo devolver un pedido de IKEA (365 días, Correos 1 € y desistimiento)?
 
 Tienes 365 días, con el artículo en su estado y embalaje originales; los colchones, 30 días. Puedes devolverlo en cualquier tienda IKEA, salvo en las tiendas urbanas, los espacios de planificación y los puntos de recogida. Leganés y Torrejón solo aceptan lo que compraste allí.
 

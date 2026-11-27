@@ -1,12 +1,12 @@
 ---
 title: TNT tracking: lettera di vettura, stati e giacenza
-description: Tracking TNT in Italia: dove trovi la lettera di vettura, cosa vogliono dire gli stati, lasciato avviso, fermo deposito, reclami e numeri da chiamare.
+description: Tracking TNT Italia (FedEx Express Italy): lettera di vettura a 2 lettere + 8 cifre, stati, lasciato avviso, fermo deposito, giacenza e numero 02 36017467.
 slug: tnt-italy-tracking
 published: 2026-10-23
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-In Italia TNT è oggi un marchio di FedEx Express Italy S.r.l., la società unica in cui TNT Italia e FedEx Italia si sono fuse il 1° dicembre 2022. Le spedizioni nazionali viaggiano con una lettera di vettura di due lettere e otto cifre, come `NA48291736`. Il pacco lo segui sulla [pagina di tracking di tnt.it](https://www.tnt.it/tracking/Tracking.do), che porta il nome FedEx. La lettera di vettura la trovi nella conferma di spedizione del mittente e sulla cartolina «Lasciato avviso», se il corriere passa e non ti trova.
+In Italia **TNT** opera come marchio di **FedEx Express Italy S.r.l.** (fusione dal 1° dicembre 2022). Le spedizioni nazionali viaggiano con una lettera di vettura di 2 lettere e 8 cifre (come `NA48291736`, cifre inventate — senza eventuale trattino e cifra finale): inseriscila sulla [pagina di tracking tnt.it](https://www.tnt.it/tracking/Tracking.do) o nel box qui sopra per controllare stati, lasciato avviso, fermo deposito, giacenza e contatti.
 
 ## Lettera di vettura TNT: com'è fatta e dove si trova
 
@@ -85,25 +85,25 @@ Peek legge il tracking di tnt.it, quindi le scansioni restano nelle parole di TN
 
 ## Domande sul tracking TNT
 
-### TNT consegna il sabato?
+### TNT Italia fa parte di FedEx e perché tnt.it rimanda a fedex.com?
 
-Per le riconsegne no: le FAQ di TNT sul tracking dicono che si fanno solo dal lunedì al venerdì, e nessuna pagina di TNT Italia sui servizi nazionali parla di consegna il sabato. Il sabato puoi però ritirare il pacco: nelle filiali principali il fermo deposito è disponibile anche il sabato mattina, e le FedEx Location consegnano nei loro orari di apertura, che secondo tnt.it spesso comprendono sabato e domenica.
+Sì: dal 1° dicembre 2022 TNT Italia e FedEx Italia formano **FedEx Express Italy S.r.l.** (Peschiera Borromeo, MI), motivo per cui gli stati citano FedEx. Se compare `La tua spedizione sarà consegnata da FedEx`, la consegna è affidata alla rete FedEx e va seguita su `fedex.com` (vedi [tracking FedEx](carrier:fedex)).
 
-### TNT fa parte di FedEx?
+### Perché il tracking TNT non trova la mia lettera di vettura?
 
-Sì. tnt.it spiega che dal 1° dicembre 2022 TNT Italia e FedEx Italia sono un'unica società, FedEx Express Italy S.r.l., con sede a Peschiera Borromeo (MI). I servizi con marchio TNT esistono ancora accanto a quelli FedEx: per questo tnt.it porta il nome FedEx e gli stati parlano di FedEx.
+Dopo l'affidamento possono passare alcune ore prima che la spedizione appaia su `tnt.it`. Verifica di inserire le due lettere seguite dalle otto cifre senza trattino né cifra finale (es. `NA48291736`, non `NA48291736-3`).
 
-### Perché tnt.it mi manda sul sito FedEx?
+### TNT consegna il sabato o permette il ritiro nel weekend?
 
-Perché quella spedizione la consegna FedEx. tnt.it scrive `La tua spedizione sarà consegnata da FedEx` e ti collega a fedex.com per seguirla lì. Vedi anche [il tracking FedEx](carrier:fedex).
+Le riconsegne TNT avvengono solo dal lunedì al venerdì e le pagine nazionali non prevedono consegne a domicilio di sabato. Puoi però ritirare in fermo deposito il sabato mattina nelle filiali principali, oppure presso le FedEx Location nei loro orari (spesso anche sabato e domenica).
 
-### Perché tnt.it non trova la mia lettera di vettura?
+### Quanto resta un pacco TNT in giacenza o in una FedEx Location?
 
-tnt.it avverte che, da quando la spedizione viene affidata a FedEx, possono passare alcune ore prima che compaia nel tracking. Controlla di aver scritto le due lettere e le otto cifre, senza trattino e senza l'ultima cifra.
+In caso di mancata consegna, TNT avvisa il mittente e senza sue istruzioni scritte può rispedire il pacco entro **30 giorni** dall'avviso di giacenza. Presso una FedEx Location il pacco rimane al massimo **5 giorni lavorativi**.
 
-### Quanto resta un pacco TNT in giacenza?
+### Qual è il numero di telefono di TNT Italia e come fare reclamo?
 
-Dipende dal mittente. Senza sue istruzioni scritte, TNT può rimandare il pacco indietro entro 30 giorni dall'avviso di giacenza. In una FedEx Location il pacco resta al massimo 5 giorni lavorativi.
+Chiama `02 36017467` (lun–ven 8:30–18:30, `+39 02 36017467` dall'estero) per assistenza generale o il numero verde `800 123 868` dall'Italia per reclami formali, oppure usa [Contattaci online](https://www.tnt.it/CustomerOnline/). I reclami per danni, ritardo o smarrimento vanno inviati entro **21 giorni** (TNT risponde entro 45 giorni).
 
 :::sources
 - [TNT Italia: Tracking spedizione](https://www.tnt.it/tracking/Tracking.do) – dove tracciare, esempio di lettera di vettura, più numeri, lettere di vettura condivise, passaggio a FedEx

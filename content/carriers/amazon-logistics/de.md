@@ -1,12 +1,12 @@
 ---
 title: Amazon Logistics Tracking: Paket verfolgen und Hilfe
-description: Amazon-Logistics-Paket verfolgen: Meine Bestellungen und Live-Karte, TBA- und DE-Nummern, Locker, Kundenservice und wer in Österreich und der Schweiz liefert.
+description: Amazon Logistics Sendungsverfolgung (DE, AT, CH): DE-/TBA-Nummern unter „Meine Bestellungen“, Live-Karte, Amazon Locker (3 Tage) und Kundenservice-Rückruf.
 slug: amazon-logistics-tracking
 published: 2026-10-11
-updated: 2026-11-14
+updated: 2026-11-27
 ---
 
-Amazon Logistics ist Amazons eigener Lieferdienst für die letzte Meile: Lieferpartner bringen Amazon-Bestellungen im Auftrag von Amazon vom Verteilzentrum bis zu deiner Haustür. Nicht jedes Paket kommt so, denn Amazon arbeitet daneben mit Paketdiensten wie [DHL](carrier:dhl), [DPD](carrier:dpd-de) oder [Hermes](carrier:hermes-de). Dein Paket verfolgst du in deinem Amazon-Konto unter „Meine Bestellungen“ mit „Lieferung verfolgen“.
+Amazon Logistics ist Amazons eigener Lieferdienst für die letzte Meile in Deutschland und Österreich (in der Schweiz liefert die [Schweizerische Post](carrier:swiss-post)); neben eigenen Lieferpartnern versendet Amazon auch mit [DHL](carrier:dhl), [DPD](carrier:dpd-de) oder [Hermes](carrier:hermes-de). Sendungen mit `DE`- oder `TBA`-Nummer verfolgst du direkt im Amazon-Konto unter „Meine Bestellungen“ › „Lieferung verfolgen“ (inklusive Live-Karte und Zustellfoto).
 
 ## Amazon Logistics Sendungsverfolgung und Trackingnummer
 
@@ -64,25 +64,25 @@ Sonst schreibt Peek „Lieferungen von Amazon Logistics lassen sich meist unter 
 
 ## Fragen zu Amazon Logistics
 
-### Was ist Amazon Logistics?
+### Was ist Amazon Logistics und wann liefert Amazon selbst?
 
-Amazons eigener Lieferdienst für die letzte Meile, vom Verteilzentrum bis zur Haustür. Seit 2015 stellt Amazon Logistics über Lieferpartner zu, in Deutschland über Hunderte kleine und mittelständische Firmen. Das kommt zu Amazons Partnerschaften mit Paketdiensten wie DHL, DPD oder Hermes hinzu und schafft zusätzliche Kapazität, auch für Lieferungen am selben oder am nächsten Tag.
+Amazon Logistics ist Amazons eigener Lieferdienst für die letzte Meile, der in Deutschland (seit 2015) und Österreich (seit 2018) über regionale Lieferpartner vom Verteilzentrum bis zur Haustür zustellt — ergänzend zu DHL, DPD und Hermes, auch am selben oder nächsten Tag.
+
+### Wo gebe ich meine Amazon Logistics Trackingnummer (DE / TBA) ein?
+
+Im Amazon-Konto unter „Meine Bestellungen“ › „Lieferung verfolgen“ siehst du Status, Live-Karte und teils ein Zustellfoto — für normale Amazon-Logistics-Pakete gibt es keine öffentliche Sendungsverfolgung. Fügst du eine `DE`- oder `TBA`-Nummer in Peek ein, prüft Peek, ob es sich um eine öffentlich verfolgbare [Amazon-Shipping](carrier:amazon-shipping)-Sendung handelt.
 
 ### Liefert Amazon Logistics auch in Österreich und der Schweiz?
 
-In Österreich ja: Amazon betreibt dort seit 2018 eigene Verteilzentren, von denen aus lokale Lieferpartner die Pakete zustellen. In der Schweiz übernimmt die [Schweizerische Post](carrier:swiss-post) die Zustellung von Amazon-Bestellungen über ihr eigenes Netz. Versendet Amazon selbst, dauert der Standardversand dorthin 3 bis 5 Werktage, der Expressversand 1 bis 3.
+In Österreich ja: Amazon betreibt dort eigene Verteilzentren mit lokalen Lieferpartnern. In der Schweiz stellt die [Schweizerische Post](carrier:swiss-post) Amazon-Bestellungen zu (Standardversand 3–5 Werktage, Express 1–3 Werktage bei Versand durch Amazon).
 
-### Wo gebe ich die Amazon Logistics Trackingnummer ein?
+### Wie lange liegt ein Paket im Amazon Locker und was gilt bei verpasster Zustellung?
 
-Bei Amazon wählst du unter „Meine Bestellungen“ einfach die Bestellung und „Lieferung verfolgen“. In Peek kannst du die Nummer einfügen; Peek prüft dann, ob Amazon Shipping sie öffentlich verfolgt.
+Im Amazon Locker hast du **3 Kalendertage** Zeit zur Abholung (Code per E-Mail, Barcode oder Amazon App); danach geht das Paket automatisch zurück und Amazon erstattet den Betrag. Vorab kannst du in den Lieferanweisungen einen Ablageort oder einen Amazon Liefertag festlegen.
 
-### Gibt es eine Telefonnummer von Amazon Logistics für Deutschland?
+### Wie erreiche ich den Amazon Logistics Kundenservice telefonisch?
 
-Für deine Lieferung ist der Amazon-Kundenservice zuständig. Telefonisch erreichst du ihn über den kostenlosen Rückruf („Anruf per Klick“) nach dem Anmelden, täglich von 6 bis 24 Uhr. Eine direkte Kundenservice-Nummer steht außerdem auf jedem Amazon Locker.
-
-### Wie lange dauert die Zustellung bei Amazon Logistics?
-
-Wann dein Paket ankommt, zeigt „Lieferung verfolgen“ unter „Meine Bestellungen“. Mit Lieferbenachrichtigungen meldet sich Amazon außerdem, sobald die Live-Karte bereitsteht.
+Es gibt keine frei wählbare Hotline für Amazon Logistics: Melde dich bei Amazon an, wähle unter „Meine Bestellungen“ den Artikel › „Ich benötige weitere Hilfe“ und fordere den kostenlosen Rückruf („Anruf per Klick“, täglich 6–24 Uhr, auch aus der Schweiz) oder den 24/7-Chat an. Auf jedem Amazon Locker steht zudem eine direkte Kundenservice-Nummer.
 
 :::sources
 - [About Amazon: Wie ist das Arbeiten als Fahrer:in bei einem Amazon Lieferpartner?](https://www.aboutamazon.de/news/logistik-und-zustellung/wie-ist-das-arbeiten-als-fahrer-in-bei-einem-amazon-lieferpartner) – Amazon Logistics, Lieferpartner in Deutschland, DHL, DPD, Hermes, Lieferungen am selben oder nächsten Tag

@@ -1,12 +1,12 @@
 ---
 title: Praćenje pošiljke Pošte Srbije: statusi, rokovi i kontakt
-description: Pratite pošiljku Pošte Srbije ili Post-ekspresa: prijemni broj, značenje statusa, koliko pošiljka čeka u pošti, reklamacije, carina i kontakt.
+description: Praćenje pošiljke Pošte Srbije i Post-ekspresa (posta.rs): prijemni broj PE/CP/RR…RS, statusi, rok čuvanja (5 i 20 dana), paketomat, carina i 0700 100 300.
 slug: posta-srbije-pracenje-posiljke
 published: 2026-10-26
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Pošta Srbije je nacionalni poštanski operator, a Post-ekspres (Post Express) je njen kurirski servis. Pošiljku besplatno pratite na posta.rs, u alatu [Praćenje pošiljke](https://www.posta.rs/lat/alati/pracenje-posiljke.aspx), u aplikaciji Pošte Srbije ili tako što broj nalepite u polje iznad. Broj dobijate od pošiljaoca: internet prodavnica ga obično šalje u imejlu o slanju.
+Pošta Srbije je nacionalni poštanski operator, a **Post-ekspres (Post Express)** njen kurirski servis („Danas za sutra” do 19 h). Pošiljku besplatno pratite pomoću 13-znakova prijemnog broja (npr. `PE…RS`, `CP…RS` ili strani broj iz inostranstva) u alatu [Praćenje pošiljke](https://www.posta.rs/lat/alati/pracenje-posiljke.aspx) na posta.rs, u aplikaciji Pošte Srbije ili u polju iznad — ispod su objašnjeni statusi, rokovi čuvanja, paketomat, carina (PDV 20% / carina preko 50 €) i kontakti.
 
 ## Prijemni broj pošiljke
 
@@ -109,21 +109,25 @@ Dok imate pošiljku otvorenu na ekranu, ili na dan dostave sa uključenim obave�
 
 ## Pitanja o praćenju pošiljke Pošte Srbije
 
-### Kako da pratim paket iz inostranstva?
+### Kako da pratim paket iz inostranstva preko Pošte Srbije?
 
-Upišite broj koji ste dobili od pošiljaoca, sa oznakom strane zemlje na kraju, u Praćenje pošiljke na posta.rs ili u polje iznad. Po imenu ili adresi ne može da se proveri da li je pošiljka stigla u Srbiju.
+Unesite 13-znakovni prijemni broj od pošiljaoca (sa oznakom strane zemlje na kraju, npr. `…CN`) u alat Praćenje pošiljke na `posta.rs` ili u polje iznad. Po imenu i prezimenu ili adresi nije moguće proveriti da li je pošiljka stigla.
 
-### Kako se prati Post-ekspres pošiljka?
+### Kako se prati Post-ekspres pošiljka i kad stiže?
 
-Broj počinje slovima `PE` i završava se sa `RS`. Pratite je na posta.rs, preko Kontakt centra Post-ekspresa ili u aplikaciji Pošte Srbije, koja prikazuje najvažnije tačke prenosa.
+Prijemni broj Post-ekspresa počinje sa `PE` i završava se sa `RS`. Pratite ga na `posta.rs`, u aplikaciji Pošte Srbije ili preko Kontakt centra Post-ekspresa (`0800 100 808` / `011 3607 607`); usluga „Danas za sutra” stiže do 19 časova narednog radnog dana.
 
-### Koliko dugo pošta čuva paket?
+### Koliko dana Pošta Srbije čuva paket u pošti i paketomatu?
 
-5 radnih dana za većinu pošiljaka i 20 dana za pošiljke iz inostranstva, od narednog dana od obaveštenja. Pisanim zahtevom rok produžavate do 30 dana.
+U pošti se većina pošiljaka čuva **5 radnih dana**, a pošiljke iz inostranstva **20 dana** od narednog dana od obaveštenja (do 30 dana uz pisani zahtev ili u mestima sa dostavom jednom nedeljno). U Poštinom paketomatu pošiljka čeka 48 sati (2 radna dana), a zatim ide u nadležnu poštu.
 
-### Koja je imejl adresa Pošte Srbije?
+### Kada se plaćaju carina i PDV za pakete iz inostranstva u Srbiji?
 
-contact@ptt.rs, za žalbe i pohvale. Lažne poruke u ime Pošte prijavljujete na it.bezbednost@posta.rs.
+Na robu koju prodavnica šalje fizičkom licu plaća se PDV od 20%, dok se carina obračunava kada vrednost prelazi 50 evra (uz poštansku uslugu zastupanja i proviziju). Obračun možete proveriti na portalu Uprave carina `app1.carina.rs/info/portal/posta`.
+
+### Koji je broj telefona i imejl Pošte Srbije — i kako prijaviti lažni SMS?
+
+Kontakt centar Pošte Srbije: `0700 100 300` (fiksna Telekoma) ili `011 3607 788` (mobilne i druge mreže, iz inostranstva `+381 11 3607 788`, radnim danima 8–20 h, vikendom 8–15 h); imejl `contact@ptt.rs`. Pošta nikada ne traži plaćanje karticom preko SMS linka — lažne poruke prijavite na `it.bezbednost@posta.rs`.
 
 :::sources
 - [Pošta Srbije: Praćenje pošiljke](https://www.posta.rs/lat/alati/pracenje-posiljke.aspx) – prijemni broj, prva slova, statusi, „Potpis”, izmenična pošta, besplatno praćenje

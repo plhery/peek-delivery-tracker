@@ -1,15 +1,15 @@
 ---
 title: Kleinanzeigen, willhaben, Ricardo, tutti: Sendung verfolgen
-description: Paket von Kleinanzeigen, willhaben, Ricardo oder tutti.ch verfolgen: wer liefert, wo die Sendungsnummer steht und welche Fristen für Versand und Meldung gelten.
+description: Kleinanzeigen-, willhaben-, Ricardo- und tutti.ch-Pakete verfolgen: Sendungsnummer finden, welcher Versanddienst liefert und wann du ein Problem melden musst.
 slug: kleinanzeigen-sendungsverfolgung
 picture: Ein Handy mit einem Abgabecode, ein Paket mit handgeschriebenem Etikett, ein Lieferwagen und Pip, der darauf wartet.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-27
 ---
 
-Auf Kleinanzeigen, willhaben, Ricardo und tutti.ch ist ein verschickter Kauf ein ganz normales Paket: Die Plattform gibt dem Verkäufer einen bezahlten Versandschein oder einen QR-Code von DHL, Hermes, DPD oder der Post, und du verfolgst die Sendungsnummer dieses Versanddienstes. Bezahl und versende über die Plattform: Dann kommt die Nummer von selbst zu dir, und dein Geld bleibt verwahrt, bis das Paket da ist. Für Vinted und eBay gibt es eigene Ratgeber: [Vinted](guide:vinted-orders) und [eBay](guide:ebay-orders).
+Ein verschickter Kauf auf Kleinanzeigen, willhaben, Ricardo oder tutti.ch läuft als reguläres Paket über DHL, Hermes, DPD oder die Post: Wer über „Sicher bezahlen“, PayLivery oder Käuferschutz+ zahlt, bekommt die Sendungsnummer automatisch über die Plattform, während das Geld bis nach der Zustellung verwahrt bleibt. Nur bei tutti.ch zahlst du direkt an den Verkäufer und fragst ihn nach der B-Post-Nummer. Für andere Plattformen gibt es eigene Ratgeber: [Vinted](guide:vinted-orders) und [eBay](guide:ebay-orders).
 
-## Wie funktioniert der Versand auf Kleinanzeigen, willhaben und Ricardo?
+## Wie läuft der Versand über Kleinanzeigen, willhaben, Ricardo und tutti.ch?
 
 Du bezahlst auf der Plattform, und sie verwahrt das Geld: bei Kleinanzeigen mit „Sicher bezahlen“ über den Zahlungsdienstleister Adyen, bei willhaben mit PayLivery, bei Ricardo mit Käuferschutz+. Der Verkäufer bekommt einen Versandschein oder einen QR-Code und gibt das Paket ab: im Paketshop, an der Packstation, am Postschalter oder an einem My Post 24 Automaten. Der erste Scan dort startet deine Sendungsverfolgung. Die Nummer übermittelt die Plattform selbst, der Verkäufer muss nichts eintippen.
 
@@ -86,7 +86,7 @@ Jede Plattform setzt ihre eigene Frist:
 
 Bei Kleinanzeigen reicht es nicht, den Versandschein zu erstellen: Das Paket muss innerhalb der Frist beim Versanddienst sein.
 
-## Warum bewegt sich die Sendungsverfolgung nicht?
+## Warum aktualisiert sich die Sendungsverfolgung nicht?
 
 Meistens aus einem dieser Gründe:
 
@@ -109,7 +109,7 @@ Bei willhaben gilt ein Paket in einer Abholstation noch nicht als zugestellt. Ge
 
 Wie lange jeder Versanddienst ein Paket aufbewahrt: [Paket nicht abgeholt](guide:uncollected-parcel). Was danach passiert: [Paket zurück an den Absender](guide:returned-to-sender).
 
-## Wann bekommt der Verkäufer sein Geld, und wie lange kann ich ein Problem melden?
+## Bis wann kann ich ein Problem melden, und wann wird ausgezahlt?
 
 Die Plattform hält dein Geld bis zur Zustellung, dann bleibt dir ein kurzes Zeitfenster:
 

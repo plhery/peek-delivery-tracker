@@ -1,12 +1,12 @@
 ---
 title: Hrvatska pošta Sendungsverfolgung: Status, Locker & Kontakt
-description: Hrvatska pošta (Kroatische Post) verfolgen: Sendungsnummer, englische Status, Paketomat-Locker, Postabholung, Zollgebühren und Kontakt.
+description: Hrvatska pošta (Kroatische Post) verfolgen: HR-Sendungsnummer, englische Status, Paketomat-Lagerfrist von 3 Tagen, Zollgebühren (3 € / 2 €) und Kontakt.
 slug: hrvatska-posta-sendungsverfolgung
 published: 2026-11-22
-updated: 2026-11-22
+updated: 2026-11-27
 ---
 
-Hrvatska pošta (Kroatische Post) ist die nationale Post Kroatiens mit dem Paketdienst Paket24. Verfolge eine Sendung auf der [englischen Tracking-Seite](https://posiljka.posta.hr/en/tracking) (die reine Adresse posiljka.posta.hr öffnet auf Kroatisch) oder füge die Nummer oben ins Feld ein. Die Nummer kommt vom Absender (Versand-E-Mail oder Bestellseite des Shops) oder aus den SMS und Benachrichtigungen von Hrvatska pošta.
+Hrvatska pošta (Kroatische Post) ist die nationale Post Kroatiens und betreibt auch den Paketdienst Paket24. Um dein Paket zu verfolgen, füg deine Sendungsnummer (meist 13 Zeichen mit Endung `HR` oder eine internationale Postnummer) oben ins Feld ein oder nutze die [englische Tracking-Seite](https://posiljka.posta.hr/en/tracking) — die reine Adresse posiljka.posta.hr öffnet auf Kroatisch. Die Nummer findest du in der Versand-E-Mail des Shops sowie in SMS- und E-Mail-Hinweisen von Hrvatska pošta.
 
 ## Hrvatska pošta Sendungsnummer
 
@@ -100,17 +100,21 @@ Solange du das Paket auf dem Bildschirm geöffnet hast – oder am Liefertag mit
 
 ## Fragen zur Hrvatska-pošta-Sendungsverfolgung
 
-### Kann ich Hrvatska pošta auf Englisch verfolgen?
+### Wie kann ich Hrvatska pošta auf Englisch verfolgen?
 
-Ja. posiljka.posta.hr öffnet auf Kroatisch, aber der EN-Schalter oder die Adresse `/en/tracking` zeigen Formular und jeden Schritt auf Englisch.
+Die Adresse posiljka.posta.hr öffnet auf Kroatisch, aber über den EN-Schalter oben oder direkt unter `/en/tracking` erscheinen Formular und jeder Sendungsschritt auf Englisch.
+
+### Wie lange liegt ein Paket im Paketomat oder in der Postfiliale von Hrvatska pošta?
+
+Im Paketomat 3 Tage ab SMS- oder E-Mail-Benachrichtigung, mit einer Erinnerung 12 Stunden vor Ablauf. In der Postfiliale liegt ein allgemeines Paket sowie Paket 24 laut Hrvatska pošta 5 Werktage, ein gewöhnliches Paket oder ein Auslandspaket im Universaldienst 15 Werktage, bevor es zurückgeht.
 
 ### Kann ich ein internationales Paket nach Kroatien verfolgen?
 
 Ja, mit der Postnummer des Absenders, die auf das Länderkürzel des Absendelands endet. Das Tracking von Hrvatska pošta akzeptiert sie. Peek folgt ihr bei der Auslandspost und wechselt, wenn diese Kroatien als Ziel nennt (oder kein Zielland, während du in Kroatien bist), bei einem neueren Scan zu Hrvatska pošta – oder sofort, wenn du sie über „Ändern“ wählst.
 
-### Wie lange liegt ein Paket im Paketomat von Hrvatska pošta?
+### Wie erreiche ich Hrvatska pošta bei Fragen oder Reklamationen?
 
-3 Tage ab SMS- oder E-Mail-Benachrichtigung, mit einer Erinnerung 12 Stunden vorher. Danach geht es an den Absender zurück.
+Telefonisch erreichst du das Kontaktzentrum unter `072 303 304` aus Kroatien bzw. `+385 1 6626 870` aus dem Ausland (Montag bis Freitag 7:00–19:00 Uhr, Samstag 7:00–15:00 Uhr), per E-Mail an `kontakt.szk@posta.hr` oder über das kroatische Webformular `obrasci.posta.hr/kontakt`. Reklamationen wegen Verlust, Schaden oder Verspätung nimmt Hrvatska pošta binnen 3 Monaten im Inland und 6 Monaten international entgegen.
 
 :::sources
 - [Croatian Post: Track your item](https://posiljka.posta.hr/en/tracking) – englisches Tracking, Sendungsnummer, mindestens 5 Zeichen, Formatfehler, HR/EN-Schalter

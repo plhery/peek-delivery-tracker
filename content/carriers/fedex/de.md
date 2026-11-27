@@ -1,12 +1,12 @@
 ---
 title: FedEx Tracking und Sendungsverfolgung: Status und Hilfe
-description: FedEx-Paket verfolgen: wie die 12-stellige Sendungsnummer aussieht, was „Delivery exception“ und andere Scans bedeuten, Zollgebühren und deine Rechte bei Verlust.
+description: FedEx Sendungsverfolgung in Deutschland & Österreich: 12- und 15-stellige Nummern, „Delivery exception“ und Zollscans erklärt, Einfuhrabgaben und Verlustrechte.
 slug: fedex-sendungsverfolgung
 published: 2026-10-13
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Füg eine FedEx-Sendungsnummer oder einen FedEx-Tracking-Link oben ins Feld ein, um dein Paket zu verfolgen. FedEx' eigene Sendungsverfolgung findest du auf fedex.com.
+Gib deine 12- oder 15-stellige FedEx-Sendungsnummer oder einen fedex.com-Tracking-Link oben ins Feld ein, um dein Paket live zu verfolgen. Die offizielle FedEx-Sendungsverfolgung findest du ebenfalls auf fedex.com; deine Nummer steht in der Versandbestätigung des Shops.
 
 ## FedEx Trackingnummer: wo du sie findest
 
@@ -74,15 +74,19 @@ Bestellst du in den USA und übergibt FedEx ein Ground-Economy-Paket an die US-P
 
 ## Fragen zur FedEx Sendungsverfolgung
 
-### Was bedeutet „Delivery exception“ bei FedEx?
+### Was bedeutet „Delivery exception“ in der FedEx Sendungsverfolgung?
 
 Peek ordnet diesen FedEx-Scan den gescheiterten Zustellversuchen zu und zeigt dafür „Zustellversuch“. Warum die Zustellung nicht geklappt hat, kann ein Scan wie `Customer not available or business closed` (niemand angetroffen oder Geschäft geschlossen) verraten.
 
-### Warum steht bei FedEx nur „Shipment information sent to FedEx“?
+### Warum zeigt FedEx nur „Shipment information sent to FedEx“ an?
 
 Dieser erste Scan heißt nur, dass der Versender FedEx die Sendungsdaten geschickt hat. Weiter geht es, sobald FedEx das Paket hat: `Picked up` oder `Tendered at FedEx location`.
 
-### Ist eine SMS von FedEx echt?
+### Welche Zollgebühren fallen bei einem FedEx-Paket aus dem Ausland an?
+
+Bei Sendungen aus Nicht-EU-Staaten fallen in Deutschland und Österreich seit dem 1. Juli 2026 bis 150 € Warenwert ein pauschaler Zoll von 3 € je Warenkategorie sowie die Einfuhrumsatzsteuer (19 bzw. 7 % in Deutschland) an; seit dem 1. November 2026 kommt EU-weit eine Bearbeitungsgebühr von 2 € je Warenkategorie unabhängig vom Warenwert hinzu. In Deutschland legt meist der Kurierdienst die Abgaben aus und kassiert sie zusammen mit seiner Servicepauschale bei der Zustellung.
+
+### Ist eine FedEx-SMS mit Zahlungslink oder Paketmeldung echt?
 
 Nicht unbedingt. Die Verbraucherzentralen warnen vor SMS angeblicher Paketdienste, in denen du auf einen Link tippen sollst: Die Folge können schädliche Apps, Massen-SMS oder Abofallen sein. Tipp den Link nicht an, antworte nicht und lösch die SMS. Erwartest du ein Paket, gib die Sendungsnummer selbst auf fedex.com oder in Peek ein. Zollgebühren zahlst du in der Regel bei der Zustellung, nicht vorab über eine Internetseite. Mehr in [Fake-Paket-SMS erkennen](guide:delivery-scam-texts).
 

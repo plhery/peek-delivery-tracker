@@ -1,12 +1,12 @@
 ---
 title: Relais Colis suivi : statuts, retrait en relais et contact
-description: Suivi Relais Colis en France : où trouver le numéro de colis, ce que disent les statuts, combien de temps le relais garde ton colis et qui contacter.
+description: Suivi Relais Colis en France : numéro de colis, sens de « livraison dans votre relais », délai de garde de 7 jours ouvrés, retrait par QR code et contact.
 slug: relais-colis-suivi
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Relais Colis livre des colis dans des commerces de proximité qui servent de points relais, partout en France ; le réseau appartient désormais à [GLS France](carrier:gls-fr). Pour suivre ton colis, saisis son numéro sur [la page « Suivre mon colis » de Relais Colis](https://relaiscolis.com/colis/suivre), ou colle-le dans le champ ci-dessus. Ce numéro vient de la personne ou de la boutique qui t'a envoyé le colis.
+Relais Colis livre des colis dans près de 7 000 commerces partenaires partout en France ; le réseau appartient désormais à [GLS France](carrier:gls-fr). Pour suivre ton colis, colle ton numéro de 12 à 16 caractères (par exemple en `CC…`) dans le champ ci-dessus ou saisis-le sur [la page « Suivre mon colis » de Relais Colis](https://relaiscolis.com/colis/suivre) — une recherche sans numéro reste aussi possible avec ton e-mail ou ton téléphone.
 
 ## Numéro de suivi Relais Colis : où le trouver
 
@@ -89,17 +89,21 @@ Peek affiche uniquement le statut et l'historique : pas de lieu sur la carte, pa
 
 ## Questions sur le suivi Relais Colis
 
-### Combien de temps un colis reste-t-il en Relais Colis ?
+### Combien de temps un colis reste-t-il en point Relais Colis ?
 
 7 jours ouvrés, soit environ 9 jours calendaires et jusqu'à 11 avec les jours fériés. Ensuite, il repart chez la boutique ou au relais d'expédition.
 
-### Qu'est-ce que Relais Colis ?
+### Comment suivre un colis Relais Colis sans numéro de suivi ?
 
-Un réseau français de près de 7 000 commerçants partenaires, selon GLS, qui l'a racheté en 2026. Il est né en 1969 sous le nom de SOGEP, une société créée pour La Redoute.
+Sur la page de suivi Relais Colis, clique sur « Je n'ai pas mon numéro de colis » : la recherche avancée retrouve ton envoi à l'aide de ton e-mail ou de ton numéro de téléphone et du nom de la boutique (« Enseigne magasin »).
 
-### Relais Colis livre-t-il en Belgique ou à l'étranger ?
+### Peut-on changer de point Relais Colis ou se faire livrer à domicile ?
 
-Non. Relais Colis dit ne pas livrer pour le moment dans les DOM-TOM ni à l'étranger.
+Non. Selon la FAQ de Relais Colis, le relais d'arrivée ne peut pas être modifié après expédition, et un colis envoyé en point relais ne peut pas être redirigé à domicile.
+
+### Relais Colis livre-t-il en Belgique, dans les DOM-TOM ou à l'étranger ?
+
+Non. Relais Colis indique ne pas effectuer de livraisons dans les DOM-TOM ni à l'étranger pour le moment ; son réseau de près de 7 000 commerçants partenaires (repris par GLS France en 2026) couvre uniquement la France.
 
 :::sources
 - [Relais Colis : Suivre mon colis](https://relaiscolis.com/colis/suivre) – longueur du numéro, exemple, message sans données

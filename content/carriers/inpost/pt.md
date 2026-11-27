@@ -1,12 +1,12 @@
 ---
 title: InPost rastreio: estados, Lockers e prazo para levantar
-description: Rastreio InPost em Portugal: onde está o número, o que quer dizer cada estado, quanto tempo a encomenda espera no Locker ou Ponto Pack e como contactar a InPost.
+description: Rastreio InPost em Portugal: número de expedição, estados de envio, prazo de 5 dias no Locker ou Ponto Pack, entregas em casa e telefone 211 245 624.
 slug: inpost-rastreio
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-A InPost é uma rede de Lockers (cacifos) e pontos de recolha nascida na Polónia, que chegou a Portugal em 2021, com a compra da Mondial Relay, e entrega em Lockers, em Pontos Pack e em casa. Para rastrear a encomenda, escreve o número na página [Rastrear Encomenda](https://www.inpost.pt/seguimento-do-envio) do inpost.pt, que só pede o número, ou cola-o na caixa acima. O número vem do remetente, normalmente a loja; o PIN de 6 dígitos que a InPost te envia serve para levantar a encomenda, não para a seguir.
+A InPost entrega encomendas em Portugal em Lockers (cacifos), Pontos Pack e ao domicílio, tendo chegado ao país em 2021 com a compra da Mondial Relay. Para fazer o rastreio, cola o teu número de expedição na caixa acima ou escreve-o na página [Rastrear Encomenda](https://www.inpost.pt/seguimento-do-envio) do inpost.pt, que só pede o número. O número vem da loja ou do remetente — o PIN de 6 dígitos enviado por SMS ou e-mail serve apenas para levantar a encomenda.
 
 ## Rastrear encomenda InPost: o número e onde o encontrar
 
@@ -82,21 +82,21 @@ O nome e a morada do Locker ou ponto só aparecem em números de 24 algarismos, 
 
 ## Perguntas sobre o rastreio InPost
 
-### Quanto tempo tenho para levantar uma encomenda InPost?
+### Quanto tempo fica uma encomenda InPost no Locker ou Ponto Pack?
 
 Cinco dias corridos nos envios nacionais, tanto no Locker como no Ponto Pack, segundo a FAQ da InPost Portugal. Outras páginas da InPost falam em 8 dias a contar da notificação, por isso não contes com mais de 5. Depois, a encomenda volta ao remetente.
 
-### A InPost entrega em casa?
+### A InPost faz entregas ao domicílio em Portugal?
 
 Sim. A InPost Portugal diz que junta «recolha em Locker, ponto de conveniência e entrega ao domicílio», e a sua FAQ inclui Portugal entre os países com entrega em casa.
 
-### A InPost entrega ao sábado?
+### A InPost entrega ao sábado ou ao fim de semana?
 
 Nos Lockers e Pontos Pack, não: a InPost Portugal distribui de segunda a sexta-feira, sem sábados, domingos nem feriados. Como a maioria dos Lockers está aberta 24 horas por dia, podes levantar lá a encomenda ao fim de semana; os Pontos Pack têm horário comercial.
 
-### A InPost tem WhatsApp ou e-mail?
+### Qual é o telefone da InPost Portugal (tem WhatsApp ou e-mail)?
 
-Em Portugal, não: a página Fala connosco não mostra WhatsApp nem endereço de e-mail. Os canais são o assistente virtual, disponível 24/7, os formulários de contacto e o telefone 211 245 624.
+Em Portugal, o telefone de apoio é o `211 245 624` (segunda a sexta-feira, das 9h00 às 18h00). A página Fala connosco não indica WhatsApp nem e-mail: além do telefone, disponibiliza o assistente virtual 24/7 e os formulários de contacto online.
 
 :::sources
 - [InPost Portugal: Rastrear Encomenda](https://www.inpost.pt/seguimento-do-envio) – campo único, exemplo de 8 caracteres, sem código postal

@@ -1,12 +1,12 @@
 ---
 title: UPS Sendungsverfolgung: Nummer, Status und Zustellung
-description: UPS-Paket verfolgen: wie die 1Z-Trackingnummer aussieht, was Scans wie „Exception“ bedeuten, Access Point, Zollgebühren und deine Rechte bei Verlust.
+description: UPS Sendungsverfolgung für 1Z-Pakete: was „Exception“, „Out For Delivery“ und Zollscans bedeuten, UPS Access Point, 3-€-Zoll/2-€-Gebühr und Verlustrechte.
 slug: ups-sendungsverfolgung
 published: 2026-10-13
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Um ein UPS-Paket zu verfolgen, füg die Sendungsnummer oder einen UPS-Tracking-Link oben ins Feld ein. Die Nummer beginnt meist mit `1Z` und hat 18 Zeichen, etwa `1Z1234567812345674`; du findest sie in der Versandbestätigung des Shops. UPS' eigene Sendungsverfolgung (UPS steht für United Parcel Service) findest du auf ups.com.
+Gib deine 18-stellige UPS-Sendungsnummer mit `1Z` oder einen UPS-Tracking-Link oben ins Feld ein, um dein Paket live zu verfolgen. Die Nummer steht meist in der Versandbestätigung des Shops; die eigene Sendungsverfolgung von UPS (United Parcel Service) findest du außerdem direkt auf ups.com.
 
 ## UPS Trackingnummer: wo sie steht und wie sie aussieht
 
@@ -75,15 +75,19 @@ Die Scans erscheinen in jeder Sprache in UPS' englischer Fassung: Zugestellt hei
 
 ## Fragen zur UPS Sendungsverfolgung
 
-### Warum funktioniert die UPS Sendungsverfolgung nicht?
+### Warum funktioniert meine UPS Sendungsverfolgung nicht?
 
 Prüf zuerst die Nummer: Das letzte Zeichen einer `1Z`-Nummer ist eine Prüfziffer, ein falsches Zeichen macht sie meist ungültig, und UPS lehnt sie ab. Steht nur `Shipper created a label, UPS has not received the package yet.`, hat UPS das Paket noch nicht: Weiter geht es erst, wenn der Versender es abgibt oder UPS es abholt (`Drop-Off`, `Pickup Scan`). Oder die Nummer gehört zu einem anderen Paketdienst: Schau, welchen die Versand-E-Mail nennt.
 
-### Kann ich die UPS-Zustellung in Peek ändern?
+### Was bedeutet „Exception“ bei der UPS Sendungsverfolgung?
+
+`Exception` ist ein allgemeiner Sammelstatus von UPS und kann eine vorübergehende Verspätung (`We're sorry this package may experience a temporary delay.`) ebenso meinen wie fehlende oder falsche Empfängerdaten (`The company or receiver name is incorrect. This will delay delivery.`). Entscheidend ist immer die genaue Scan-Zeile darunter, nach der sich auch Peek richtet.
+
+### Kann ich die UPS-Zustellung oder den Access Point in Peek ändern?
 
 Nein, Peek liest UPS' Sendungsverfolgung nur mit. Änderungen, die du bei UPS vornimmst, erscheinen in den Scans, etwa `The package will be delivered to the UPS Access Point™ location requested by the receiver.`
 
-### Ist eine SMS von UPS echt?
+### Ist eine UPS-SMS über Zollgebühren oder eine Lieferung echt?
 
 Nicht unbedingt. Die Verbraucherzentralen warnen vor SMS angeblicher Paketdienste, in denen du auf einen Link tippen sollst: Die Folge können schädliche Apps, Massen-SMS oder Abofallen sein. Tipp den Link nicht an, installier keine App, antworte nicht und lösch die SMS. Erwartest du ein Paket, gib die Sendungsnummer selbst auf ups.com oder in Peek ein. Zollgebühren zahlst du in der Regel bei der Zustellung, nicht vorab über eine Internetseite. Bietet ein Paketdienst die Zahlung vorab an, musst du dich dafür registriert haben, und seine Nachrichten nennen immer Sendungsnummer und Absender. Mehr in [Fake-Paket-SMS erkennen](guide:delivery-scam-texts).
 

@@ -152,7 +152,7 @@ class ListGesturesScreenshotTest {
             if (said == "Tracking updated") break
             compose.mainClock.advanceTimeByFrame()
         }
-        compose.mainClock.advanceTimeBy(400)
+        compose.advanceWithMaps(400)
         compose.screenshot("gestures_seal_${theme(dark)}")
     }
 

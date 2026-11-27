@@ -97,15 +97,14 @@ class FirstOpenScreenshotTest {
     /**
      * The clock moved on `milliseconds` a frame at a time, each frame drawn and the maps it asks for made before the next,
      * as a phone has them in time. Up to `drawnFrom`, the journey's last change of scan before the shot, a frame waits
-     * only for a map's picture being made, so the picture comes the frame after however fast the machine makes it, and
-     * the window is drawn at the end.
+     * only for a map's picture being made ([advanceWithMaps]), and the window is drawn at the end.
      */
     private fun advance(milliseconds: Long, drawnFrom: Long = 0) {
-        val frames = (milliseconds + FRAME - 1) / FRAME
-        val atOnce = (drawnFrom - LEAD) / FRAME
-        repeat(frames.toInt()) { frame ->
+        val atOnce = ((drawnFrom - LEAD) / FRAME).coerceAtLeast(0)
+        compose.advanceWithMaps(atOnce * FRAME)
+        repeat(((milliseconds + FRAME - 1) / FRAME - atOnce).toInt()) {
             compose.mainClock.advanceTimeByFrame()
-            if (frame >= atOnce || !mapsAreIdle) compose.waitForIdle()
+            compose.waitForIdle()
         }
     }
 

@@ -131,7 +131,7 @@ class ParcelMapScreenshotTest {
         choose("Journey")
         compose.mainClock.autoAdvance = false
         compose.onNode(hasText("Nearby") and hasClickAction()).performClick()
-        repeat(48) { compose.mainClock.advanceTimeByFrame() }
+        compose.advanceWithMaps(48 * 16)
         compose.screenshot("map_flight_world_light")
         compose.mainClock.autoAdvance = true
     }

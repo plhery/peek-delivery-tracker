@@ -163,13 +163,14 @@ class DeliveredCelebrationScreenshotTest {
 
     /**
      * The cards landed and the paper gone: a frame at a time until the flights have set off from the list's layout, then
-     * the rest of the five seconds at once, every frame on the way run and the window drawn at the end.
+     * the rest of the five seconds at once, a frame waiting only for a map's picture ([advanceWithMaps]), and the window
+     * drawn at the end.
      */
     @Test
     fun theListOnceTheCardsHaveLanded() {
         deliver(dark = false)
         advance(1_200)
-        compose.mainClock.advanceTimeBy(3_800)
+        compose.advanceWithMaps(3_800)
         compose.waitForIdle()
         compose.screenshot("celebration_landed_light")
     }

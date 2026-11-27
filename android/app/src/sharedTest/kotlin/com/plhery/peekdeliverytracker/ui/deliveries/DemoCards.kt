@@ -104,3 +104,18 @@ fun ComposeTestRule.waitsForMaps() {
 
 /** Whether no map's picture, atlas or tile is being made or is on its way to a map. */
 val mapsAreIdle: Boolean get() = MapScenes.isIdle && WorldAtlases.isIdle && WorldDetails.isIdle
+
+/**
+ * The paused clock moved on `milliseconds` a frame at a time, a frame waiting only for a map's picture, atlas or tile
+ * being made: it comes the frame after it was asked for, as on a phone, however fast this machine makes it. Rounded up
+ * to whole frames, as `advanceTimeBy` rounds.
+ */
+fun ComposeTestRule.advanceWithMaps(milliseconds: Long) {
+    repeat(((milliseconds + MAP_FRAME - 1) / MAP_FRAME).toInt()) {
+        mainClock.advanceTimeByFrame()
+        if (!mapsAreIdle) waitForIdle()
+    }
+}
+
+/** The test clock's frame, in milliseconds. */
+private const val MAP_FRAME = 16L

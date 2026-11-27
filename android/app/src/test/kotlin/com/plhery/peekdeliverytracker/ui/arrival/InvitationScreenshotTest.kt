@@ -34,6 +34,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.INVITATION_BASE
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
+import com.plhery.peekdeliverytracker.ui.deliveries.advanceWithMaps
 import com.plhery.peekdeliverytracker.ui.deliveries.waitsForMaps
 import com.plhery.peekdeliverytracker.ui.friends.FakeFriendsClient
 import com.plhery.peekdeliverytracker.ui.friends.FriendFixtures
@@ -145,7 +146,7 @@ class InvitationScreenshotTest {
     private fun accept() {
         compose.mainClock.autoAdvance = false
         compose.onNodeWithTag(INVITATION_ACCEPT).performScrollTo().performClick()
-        compose.mainClock.advanceTimeBy(250)
+        compose.advanceWithMaps(250)
         compose.waitForIdle()
     }
 

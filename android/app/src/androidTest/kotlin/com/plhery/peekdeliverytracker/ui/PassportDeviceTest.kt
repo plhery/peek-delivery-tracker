@@ -37,13 +37,16 @@ import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import com.plhery.peekdeliverytracker.ui.deliveries.waitsForMaps
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_ACCOUNT_BUTTON
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_AVERAGE
-import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_COUNTRIES
+import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_COUNTRIES_EMPTY
+import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_COUNTRY
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_COVER
+import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_PAGE_LABEL
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_PERSONAL_BEST
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_POPOVER
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_SHOW_ALL
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_STAMP
 import com.plhery.peekdeliverytracker.ui.passport.PassportFixtures
+import com.plhery.peekdeliverytracker.ui.passport.PassportPage
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_SHEET
 import com.plhery.peekdeliverytracker.ui.tabs.PeekTab
 import com.plhery.peekdeliverytracker.ui.theme.AppAppearance
@@ -62,11 +65,11 @@ import org.junit.runner.RunWith
 
 /**
  * The passport (A-S87 to A-S92, A-ST29, A-G15) on this device's own window, its bars and density the device's, on fake
- * deliveries, which reach no server: the tab opened on the demo's parcels; a stamp's popover, and a tap on another stamp
- * closing it without opening that one; another opened and closed by the system's back; each item's popover opened by a
- * finger through the system's input ([ScreenTouches]) and closed by a tap on the bare page or on the item again;
- * nothing delivered yet; the stamps earned and the next three; all the stamps shown, and fewer again; the account button
- * opening Settings. Each saved as passport/<test>.png in the test package's external files, which adb pulls.
+ * deliveries, which reach no server: the tab opened on the demo's parcels; on the Stamps page, a stamp's popover, and a
+ * tap on another stamp closing it without opening that one; another opened and closed by the system's back; each item's
+ * popover opened by a finger through the system's input ([ScreenTouches]) and closed by a tap on the bare page or on the
+ * item again; nothing delivered yet; the stamps earned and the next three; all the stamps shown, and fewer again; the
+ * account button opening Settings. Each saved as passport/<test>.png in the test package's external files, which adb pulls.
  * Under Reduce Motion, as the other device tests are; each test puts back the appearance it found.
  */
 @RunWith(AndroidJUnit4::class)
@@ -118,6 +121,9 @@ class PassportDeviceTest {
 
     private fun stamp(id: String) = "$PASSPORT_STAMP.$id"
 
+    /** The page [index] ([PassportPage]) chosen from its label. */
+    private fun page(index: Int) = tap("$PASSPORT_PAGE_LABEL.$index")
+
     /** A finger on what has [tag], scrolled into the window and up clear of the tab bar floating over the page first. */
     private fun tap(tag: String) {
         reveal(compose.onNodeWithTag(tag)).performClick()
@@ -162,9 +168,9 @@ class PassportDeviceTest {
     ) { "No popover open" }.boundsInWindow
 
     /**
-     * A point on the screen on the page's bare ground, level with the middle of what has [tag]: halfway into the page's
-     * 20-point margin before the column whose left edge what has [column] stands on, on none of the passport's buttons
-     * and off the popover.
+     * A point on the screen on the page's bare ground, level with the middle of what has [tag]: 10 points before the
+     * column whose left edge what has [column] stands on, in the window's 20-point margin or the sheet's 14, on none of
+     * the passport's buttons and off the popover.
      */
     private fun onThePage(tag: String, column: String): Offset {
         val item = touches.node(hasTestTag(tag)).boundsInWindow
@@ -208,6 +214,7 @@ class PassportDeviceTest {
     @Test
     fun aTapOnAnotherStampOnlyClosesThePopover() {
         show()
+        page(PassportPage.STAMPS)
         tap(stamp("carriers"))
         compose.waitUntil(5_000) { popoverOpen() }
         shots.take("${name.methodName}-open")
@@ -221,6 +228,7 @@ class PassportDeviceTest {
     @Test
     fun theSystemBackClosesThePopover() {
         show()
+        page(PassportPage.STAMPS)
         tap(stamp("speed"))
         compose.waitUntil(5_000) { popoverOpen() }
         shots.take("${name.methodName}-open")
@@ -235,6 +243,7 @@ class PassportDeviceTest {
     @Test
     fun allTheStamps() {
         show(PassportFixtures.delivered(3), reader)
+        page(PassportPage.STAMPS)
         tap(PASSPORT_SHOW_ALL)
         compose.waitUntil(5_000) { exists(stamp("homeForHolidays")) }
         assertEquals(12, compose.onAllNodes(SemanticsMatcher("a stamp") { node ->
@@ -251,16 +260,18 @@ class PassportDeviceTest {
         .map { it.config[SemanticsProperties.TestTag].removePrefix("$PASSPORT_STAMP.") }
 
     /**
-     * A-ST29: with nothing delivered the times wait for a whole journey, no country shows, and the first three stamps are
-     * next, the rest behind All stamps.
+     * A-ST29: with nothing delivered the Countries page shows its ghost of a stamp, the first three stamps are next, the
+     * rest behind All stamps, and the times wait for a whole journey.
      */
     @Test
     fun withNothingDeliveredTheTimesWaitAndTheFirstThreeStampsAreNext() {
         show(emptyList(), reader)
+        assertTrue(exists(PASSPORT_COUNTRIES_EMPTY))
+        page(PassportPage.STAMPS)
         assertEquals(listOf("first", "ten", "carriers"), stamps())
         assertTrue(exists(PASSPORT_SHOW_ALL))
+        page(PassportPage.NUMBERS)
         assertFalse(exists(PASSPORT_AVERAGE))
-        assertFalse(exists(PASSPORT_COUNTRIES))
         reveal(compose.onNodeWithText("Waiting for a complete journey"))
         shot()
     }
@@ -269,6 +280,7 @@ class PassportDeviceTest {
     @Test
     fun theStampsEarnedAndTheNextThreeShowUntilAllStamps() {
         show(PassportFixtures.delivered(3), reader)
+        page(PassportPage.STAMPS)
         assertEquals(listOf("first", "ten", "carriers", "speed", "acrossBorders", "rightNextDoor"), stamps())
         reveal(compose.onNodeWithTag(PASSPORT_SHOW_ALL))
         shot()
@@ -284,21 +296,23 @@ class PassportDeviceTest {
     }
 
     /**
-     * A-G15: a finger on the cover, the average, the personal best or the countries opens that item's popover and no
-     * other; a tap on the bare page beside it closes it (`expandedCard = nil`), with nothing else opened and the passport
-     * still showing. Tapped again while its popover is open, the item closes it as well: the popover takes that tap as
-     * iOS's takes any outside it (ipad-03), so it doesn't open again.
+     * A-G15: a finger on the cover, a country, the average or the personal best opens that item's popover and no other;
+     * a tap on the bare page beside it closes it (`expandedCard = nil`), with nothing else opened and the passport still
+     * showing. Tapped again while its popover is open, the item closes it as well: the popover takes that tap as iOS's
+     * takes any outside it (ipad-03), so it doesn't open again.
      */
     @Test
     fun eachItemOpensItsPopoverAndATapOutsideOrOnTheItemAgainClosesIt() {
         show(PassportFixtures.delivered(3), reader)
-        // Top to bottom, so that each reveal only scrolls down; each with the item whose left edge is its page's column.
+        // Each on its page, with the item whose left edge is its column.
+        val switzerland = "$PASSPORT_COUNTRY.CH"
         listOf(
-            Triple("cover", PASSPORT_COVER, stamp("first")),
-            Triple("average", PASSPORT_AVERAGE, PASSPORT_AVERAGE),
-            Triple("personal-best", PASSPORT_PERSONAL_BEST, PASSPORT_AVERAGE),
-            Triple("countries", PASSPORT_COUNTRIES, PASSPORT_COUNTRIES),
-        ).forEach { (item, tag, column) ->
+            Item("cover", PassportPage.COUNTRIES, PASSPORT_COVER, PASSPORT_COVER),
+            Item("country", PassportPage.COUNTRIES, switzerland, switzerland),
+            Item("average", PassportPage.NUMBERS, PASSPORT_AVERAGE, PASSPORT_AVERAGE),
+            Item("personal-best", PassportPage.NUMBERS, PASSPORT_PERSONAL_BEST, PASSPORT_AVERAGE),
+        ).forEach { (item, onPage, tag, column) ->
+            if (!exists(tag)) page(onPage)
             touch(tag)
             compose.waitUntil(5_000) { popoverOpen() }
             compose.waitForIdle()
@@ -328,6 +342,9 @@ class PassportDeviceTest {
         shot()
     }
 
+    /** A passport item: its name, the page it stands on, its tag, and what has its column's left edge. */
+    private data class Item(val name: String, val page: Int, val tag: String, val column: String)
+
     /**
      * A-G15: All stamps, tapped, shows the twelve in their order and turns to Show less, which puts back the stamps
      * earned and the next three and turns to All stamps again (`showAllStamps.toggle()`); the button at least 44 tall
@@ -336,6 +353,7 @@ class PassportDeviceTest {
     @Test
     fun allStampsThenShowLessPutsBackTheStampsEarnedAndTheNextThree() {
         show(PassportFixtures.delivered(3), reader)
+        page(PassportPage.STAMPS)
         val few = listOf("first", "ten", "carriers", "speed", "acrossBorders", "rightNextDoor")
         val all = listOf(
             "first", "ten", "carriers", "speed", "acrossBorders", "aroundWorld", "theRegular", "rightNextDoor", "worthTheWait",

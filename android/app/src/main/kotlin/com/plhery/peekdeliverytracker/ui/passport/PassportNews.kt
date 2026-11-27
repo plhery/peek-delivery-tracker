@@ -47,9 +47,11 @@ import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.PassportBook
+import com.plhery.peekdeliverytracker.core.PassportData
 import com.plhery.peekdeliverytracker.core.PassportNews
 import com.plhery.peekdeliverytracker.core.PassportSeenRecord
 import com.plhery.peekdeliverytracker.core.StampProgress
+import com.plhery.peekdeliverytracker.core.TrackingLocation
 import com.plhery.peekdeliverytracker.core.showsYear
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
@@ -153,9 +155,9 @@ class PassportNewsState internal constructor(
 val LocalPassportNews = compositionLocalOf<PassportNewsState?> { null }
 
 /**
- * The passport's news for the account (or guest) in: the seen list kept for it, read again at each write. With none
- * kept, once its parcels have loaded, everything the passport holds is recorded as seen: nothing is new on a device's
- * first read.
+ * The passport's news for the account (or guest) in: the seen list kept for it, read again at each write. Once its
+ * parcels have loaded, a device's first read records everything the passport holds as seen, and a list kept from before
+ * countries counted takes every country held now as seen ([PassportNews.catchUp]): neither shows as new.
  */
 @Composable
 internal fun rememberPassportNews(source: DeliveriesSource, openPassport: () -> Unit): PassportNewsState {
@@ -166,10 +168,10 @@ internal fun rememberPassportNews(source: DeliveriesSource, openPassport: () -> 
     val scope = PassportSeenRecord.scope(session)
     val book = remember(parcels) { PassportBook(parcels) }
     val seen = remember(source, scope, writes) { source.passportSeen.seen(scope) }
-    LaunchedEffect(source, scope, seen == null, loading, book) {
-        if (seen == null && !loading) source.passportSeen.store(scope, PassportNews(book, emptySet()).earnedKeys)
-    }
     val news = remember(book, seen) { PassportNews(book, seen) }
+    LaunchedEffect(source, scope, news, loading) {
+        if (!loading) news.catchUp?.let { source.passportSeen.store(scope, it) }
+    }
     val open by rememberUpdatedState(openPassport)
     return remember(news, loading, source, scope) {
         PassportNewsState(news, loading, markSeen = { source.passportSeen.store(scope, news.earnedKeys) }, openPassport = { open() })
@@ -177,10 +179,11 @@ internal fun rememberPassportNews(source: DeliveriesSource, openPassport: () -> 
 }
 
 /**
- * `NewStampLine`: under a delivered or archived card whose parcel earned stamps not seen yet, one button that opens the
- * passport: the first one's mini seal, "New stamp" or "3 new stamps" over their names joined by " · ", and a chevron;
- * read as "<heading>: <names>". It opens under the card ([tucked] of it under the card's foot) 150 ms after it shows,
- * its words rising and its seal popping in after; under Reduce Motion it fades in at its height.
+ * `NewStampLine`: under a delivered or archived card whose parcel earned stamps or reached countries not seen yet, one
+ * button that opens the passport: the first one's mini seal (a country's code in a ring of its tone), "New stamp" or "3
+ * new stamps" over their names joined by " · ", and a chevron; read as "<heading>: <names>". It opens under the card
+ * ([tucked] of it under the card's foot) 150 ms after it shows, its words rising and its seal popping in after; under
+ * Reduce Motion it fades in at its height.
  */
 @Composable
 internal fun NewStampLine(parcelId: UUID, ground: Color, modifier: Modifier = Modifier, tucked: Boolean = true) {
@@ -191,7 +194,9 @@ internal fun NewStampLine(parcelId: UUID, ground: Color, modifier: Modifier = Mo
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val reduceMotion = PeekTheme.reduceMotion
-    val names = remember(items, localizer, language) { items.map { stampTitle(it.stamp.key, localizer) } }
+    val names = remember(items, localizer, language) {
+        items.map { item -> item.country?.let { TrackingLocation.countryName(it.code, language) } ?: stampTitle(item.stamp!!.key, localizer) }
+    }
     val heading = remember(items.size, localizer, language) {
         if (items.size == 1) localizer.text("passport.newStamp") else localizer.text("passport.newStamps", mapOf("count" to items.size))
     }
@@ -231,17 +236,17 @@ internal fun NewStampLine(parcelId: UUID, ground: Color, modifier: Modifier = Mo
             horizontalArrangement = Arrangement.spacedBy(10.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            StampSeal(
-                items.first().stamp.definition, earned = true, size = SealSize.Mini,
-                modifier = Modifier.padding(start = 8.dp).graphicsLayer {
-                    if (!reduceMotion) {
-                        val pop = phase(clock.value, 350f, 220f, PassportSettle)
-                        scaleX = 0.6f + 0.4f * pop
-                        scaleY = scaleX
-                        alpha = pop
-                    }
-                },
-            )
+            val pop = Modifier.padding(start = 8.dp).graphicsLayer {
+                if (!reduceMotion) {
+                    val pop = phase(clock.value, 350f, 220f, PassportSettle)
+                    scaleX = 0.6f + 0.4f * pop
+                    scaleY = scaleX
+                    alpha = pop
+                }
+            }
+            val first = items.first()
+            val country = first.country
+            if (country != null) CountryCode(country.code, pop) else StampSeal(first.stamp!!.definition, earned = true, size = SealSize.Mini, modifier = pop)
             Column(
                 Modifier.weight(1f).padding(vertical = 7.dp).graphicsLayer {
                     if (!reduceMotion) {
@@ -263,26 +268,41 @@ internal fun NewStampLine(parcelId: UUID, ground: Color, modifier: Modifier = Mo
     }
 }
 
+/** `passport-news-line__country`: a country's code in its tone, 10 bold in a 30 ring 1.4 wide. Hidden from TalkBack. */
+@Composable
+private fun CountryCode(code: String, modifier: Modifier) {
+    val type = PeekTheme.type
+    val tone = PeekTheme.colors.resolve(PassportData.countryInk(code).tone.ink)
+    Box(
+        modifier.size(30.dp).border(1.4.dp, tone, CircleShape).clearAndSetSemantics {},
+        contentAlignment = Alignment.Center,
+    ) {
+        Text(code, color = tone, style = type.tracking(type.fixed(10f, FontWeight.Bold), 0.3f).sfLines(), maxLines = 1, softWrap = false)
+    }
+}
+
 /**
- * The dot on the Passport tab while something there is new: the orange ink, 7 across in a 1.5 ring of the bar's
- * [ring], popping in 600 ms after the card's line starts (0 to 1.25 in 190 ms, then 1), and fading out over 150 ms as
- * the passport opens. Under Reduce Motion it fades in and out alike. TalkBack hears "New" with the tab.
+ * The dot of something new: the orange ink, 7 across, in a 1.5 ring of [ring] where it stands on a bar, popping in
+ * [delay] ms after it shows (0 to 1.25 in 190 ms, then 1) and fading out over 150 ms as it goes. On the Passport tab it
+ * pops 600 ms after the card's line starts and goes as the passport opens; on a page's label, 200 ms after it shows,
+ * going as the page shows. Under Reduce Motion it fades in and out alike. TalkBack hears "New" with its tab.
  */
 @Composable
-internal fun TabDot(visible: Boolean, ring: Color, modifier: Modifier = Modifier) {
+internal fun TabDot(visible: Boolean, ring: Color?, modifier: Modifier = Modifier, delay: Float = DOT_DELAY) {
     val reduceMotion = PeekTheme.reduceMotion
     AnimatedVisibility(visible, modifier, enter = fadeIn(tween(if (reduceMotion) 150 else 0, easing = LinearEasing)), exit = fadeOut(tween(150, easing = LinearEasing))) {
         // Read only while it shows: a bar drawn on its own, with nothing new, needs no words.
         val localizer = LocalLocalizer.current
         val language = LocalLanguage.current
         val new = remember(localizer, language) { localizer.text("passport.new") }
-        val clock = remember { Animatable(if (reduceMotion) DOT_END else 0f) }
-        LaunchedEffect(clock) { clock.animateTo(DOT_END, tween(DOT_END.toInt(), easing = LinearEasing)) }
+        val end = delay + DOT_POP
+        val clock = remember { Animatable(if (reduceMotion) end else 0f) }
+        LaunchedEffect(clock) { clock.animateTo(end, tween(end.toInt(), easing = LinearEasing)) }
         Box(
             Modifier
                 .graphicsLayer {
                     if (!reduceMotion) {
-                        val time = clock.value - DOT_DELAY
+                        val time = clock.value - delay
                         val grow = phase(time, 0f, 190f, PassportMove)
                         val settle = phase(time, 190f, 130f, PassportSettle)
                         val scale = if (time < 190f) 1.25f * grow else 1.25f - 0.25f * settle
@@ -291,9 +311,7 @@ internal fun TabDot(visible: Boolean, ring: Color, modifier: Modifier = Modifier
                         alpha = phase(time, 0f, 120f)
                     }
                 }
-                .size(DOT + 3.dp)
-                .border(1.5.dp, ring, CircleShape)
-                .padding(1.5.dp)
+                .then(if (ring != null) Modifier.size(DOT + 3.dp).border(1.5.dp, ring, CircleShape).padding(1.5.dp) else Modifier.size(DOT))
                 .background(PeekTheme.colors.orange, CircleShape)
                 .clearAndSetSemantics { contentDescription = new },
         )
@@ -305,7 +323,7 @@ private const val LINE_END = 570f
 private val TUCK = 18.dp
 private val DOT = 7.dp
 private const val DOT_DELAY = 750f
-private const val DOT_END = DOT_DELAY + 320f
+private const val DOT_POP = 320f
 
 /** The news line's test tag, then its parcel's id. */
 const val PASSPORT_NEWS_LINE = "$PASSPORT.newsLine"

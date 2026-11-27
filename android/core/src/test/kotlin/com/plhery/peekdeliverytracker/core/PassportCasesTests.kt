@@ -43,7 +43,8 @@ class PassportCasesTests {
 
     /** A case's id as a UUID whose text sorts as the id does: its letters' bytes, then zeros. */
     private fun uuid(id: String): UUID {
-        val bytes = ByteBuffer.allocate(16).put(id.toByteArray().copyOf(16)).flip()
+        // Read from a wrapped array: `flip()` returns a plain Buffer on older Android APIs, where these cases also run.
+        val bytes = ByteBuffer.wrap(id.toByteArray().copyOf(16))
         return UUID(bytes.long, bytes.long)
     }
 
@@ -161,26 +162,30 @@ class PassportCasesTests {
         assertEquals(Continent.Asia, PassportData.continentOf("JP"))
     }
 
+    /** A delivery by [carrier] at [at], scanned four hours before in [location] (somewhere unnamed when null) and delivered there. */
+    private fun newsParcel(id: String, carrier: String, at: String, location: String? = null) = Parcel(
+        id = uuid(id), trackingNumber = "T$id", label = "Parcel $id", carrier = CarrierId(carrier), createdAt = "2026-09-01T00:00:00Z",
+        syncStatus = SyncStatus.Ok, notificationsMuted = false,
+        trackingEvents = listOf(
+            TrackingEvent(uuid("$id-1"), uuid(id), TrackingStage.InTransit, "In transit", location = location, occurredAt = at.replace("T12", "T08")),
+            TrackingEvent(uuid("$id-2"), uuid(id), TrackingStage.Delivered, "Delivered", location = location, occurredAt = at),
+        ),
+    )
+
     @Test
     fun theFirstReadCountsEverythingAsSeenThenEachNewStampIsNewUntilMarked() {
         val defaults = MemoryDefaults()
         val record = PassportSeenRecord(defaults)
         val scope = "guest"
-        fun parcel(id: String, carrier: String, at: String) = Parcel(
-            id = uuid(id), trackingNumber = "T$id", label = "Parcel $id", carrier = CarrierId(carrier), createdAt = "2026-09-01T00:00:00Z",
-            syncStatus = SyncStatus.Ok, notificationsMuted = false,
-            trackingEvents = listOf(
-                TrackingEvent(uuid("$id-1"), uuid(id), TrackingStage.InTransit, "In transit", occurredAt = at.replace("T12", "T08")),
-                TrackingEvent(uuid("$id-2"), uuid(id), TrackingStage.Delivered, "Delivered", occurredAt = at),
-            ),
-        )
+        fun parcel(id: String, carrier: String, at: String) = newsParcel(id, carrier, at)
         val first = listOf(parcel("a", "dhl", "2026-09-03T12:00:00Z"), parcel("b", "ups", "2026-09-04T12:00:00Z"))
-        // Nothing kept: nothing is new, and the first read keeps all it holds.
+        // Nothing kept: nothing is new, and the first read keeps all it holds, with the countries' marker.
         assertNull(record.seen(scope))
         val opened = PassportNews(PassportBook(first), record.seen(scope))
         assertTrue(opened.unseen.isEmpty())
-        record.store(scope, opened.earnedKeys)
-        assertEquals("""["stamp:express","stamp:first"]""", defaults.string(forKey = "peek-passport-seen:guest"))
+        record.store(scope, requireNotNull(opened.catchUp))
+        assertEquals("""["countries:on","stamp:express","stamp:first"]""", defaults.string(forKey = "peek-passport-seen:guest"))
+        assertNull(PassportNews(PassportBook(first), record.seen(scope)).catchUp)
         assertEquals(1, record.changes.value)
         // A third carrier's delivery earns Well connected, on its parcel's card.
         val next = first + parcel("c", "fedex", "2026-09-05T12:00:00Z")
@@ -201,17 +206,48 @@ class PassportCasesTests {
     @Test
     fun aDeliveryAfterAnEmptyPassportNamesEveryStampItBrought() {
         val record = PassportSeenRecord(MemoryDefaults())
-        record.store("guest", emptyList())
-        val parcel = Parcel(
-            id = uuid("a"), trackingNumber = "Ta", label = "Parcel a", carrier = CarrierId("dhl"), createdAt = "2026-09-01T00:00:00Z",
-            syncStatus = SyncStatus.Ok, notificationsMuted = false,
-            trackingEvents = listOf(
-                TrackingEvent(uuid("a-1"), uuid("a"), TrackingStage.InTransit, "In transit", occurredAt = "2026-12-03T08:00:00Z"),
-                TrackingEvent(uuid("a-2"), uuid("a"), TrackingStage.Delivered, "Delivered", occurredAt = "2026-12-03T12:00:00Z"),
-            ),
-        )
+        record.store("guest", listOf(PassportNews.COUNTRIES_ON))
+        val parcel = newsParcel("a", "dhl", "2026-12-03T12:00:00Z")
         val news = PassportNews(PassportBook(listOf(parcel), ZoneId.of("Europe/Zurich")), record.seen("guest"))
-        assertEquals(listOf("first", "express", "homeForHolidays"), news.byParcel.getValue(uuid("a")).map { it.stamp.key })
+        assertEquals(listOf("first", "express", "homeForHolidays"), news.byParcel.getValue(uuid("a")).map { it.stamp?.key })
         assertFalse(news.unseen.any { it.parcelId == null })
+    }
+
+    /** A country a delivery first reached is news on its card, before the stamps, as `country:<code>`. */
+    @Test
+    fun aCountryADeliveryFirstReachedIsNewsBeforeItsStamps() {
+        val record = PassportSeenRecord(MemoryDefaults())
+        val first = listOf(newsParcel("a", "dhl", "2026-09-03T12:00:00Z", "AT"))
+        val opened = PassportNews(PassportBook(first), record.seen("guest"))
+        record.store("guest", requireNotNull(opened.catchUp))
+        assertTrue(record.seen("guest")!!.containsAll(listOf("country:AT", "stamp:first", PassportNews.COUNTRIES_ON)))
+        val next = first + newsParcel("b", "dhl", "2026-09-08T12:00:00Z", "JP")
+        val news = PassportNews(PassportBook(next), record.seen("guest"))
+        // Japan, then any stamp the delivery earned, all on the parcel that brought them.
+        assertEquals("country:JP", news.unseen.first().seenKey)
+        assertEquals(listOf("country:JP"), news.unseen.filter { it.country != null }.map { it.seenKey })
+        assertEquals(news.unseen.map { it.seenKey }, news.byParcel.getValue(uuid("b")).map { it.seenKey })
+        assertEquals("JP", news.unseen.first().country?.code)
+        assertNull(news.unseen.first().stamp)
+        assertEquals(true, PassportNews.COUNTRIES_ON in news.earnedKeys)
+    }
+
+    /**
+     * A list kept before countries counted (no marker) takes every country the book holds now as seen, and keeps them
+     * with the marker once the parcels have loaded; a stamp it hasn't seen is still new.
+     */
+    @Test
+    fun aListKeptBeforeCountriesCountedTakesTheirCountriesAsSeen() {
+        val record = PassportSeenRecord(MemoryDefaults())
+        record.store("guest", listOf("stamp:first"))
+        val book = PassportBook(listOf(newsParcel("a", "dhl", "2026-09-03T12:00:00Z", "AT")))
+        val news = PassportNews(book, record.seen("guest"))
+        val stamps = book.stamps.filter { it.earned && it.key != "first" }.map { it.seenKey }
+        assertEquals(stamps, news.unseen.map { it.seenKey })
+        assertEquals(listOf("countries:on", "country:AT", "stamp:first"), news.catchUp!!.sorted())
+        record.store("guest", news.catchUp!!)
+        val after = PassportNews(book, record.seen("guest"))
+        assertNull(after.catchUp)
+        assertEquals(stamps, after.unseen.map { it.seenKey })
     }
 }

@@ -16,6 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.ViewRootForTest
@@ -35,6 +36,10 @@ import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.swipe
+import androidx.compose.ui.test.swipeLeft
+import androidx.compose.ui.test.swipeRight
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.unit.Density
@@ -85,7 +90,8 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * The passport (A-S87 to A-S92, A-S100) on made-up parcels: none, the demo's, a set earning every stamp and one just
- * short of each, the countries' order; all the stamps and fewer; each item's popover, one at a time, a tap elsewhere
+ * short of each, the countries in the order they were reached, the numbers' rows; the pages turned by their labels and
+ * by a swipe, only the one in view reached; all the stamps and fewer; each item's popover, one at a time, a tap elsewhere
  * only closing it and the back too; the layouts by window and fold, kept through a change of window; the account
  * button's Settings with the analytics PassportView sends; the light impact on each toggle; and what TalkBack reads.
  */
@@ -161,6 +167,17 @@ class PassportTest {
 
     private fun stamp(id: String) = "$PASSPORT_STAMP.$id"
 
+    private fun country(code: String) = "$PASSPORT_COUNTRY.$code"
+
+    /** The page [index] ([PassportPage]) chosen from its label. */
+    private fun page(index: Int) {
+        compose.onNodeWithTag("$PASSPORT_PAGE_LABEL.$index").performClick()
+        settle()
+    }
+
+    /** The pages TalkBack reaches, in order. */
+    private fun pagesReached(): List<Int> = (0 until PassportPage.COUNT).filter { exists("$PASSPORT_PAGE.$it") && semantics("$PASSPORT_PAGE.$it").contains(SemanticsProperties.IsTraversalGroup) }
+
     /** The stamps shown, in their order. */
     private fun stamps(): List<String> = compose.onAllNodes(
         SemanticsMatcher("a stamp") { it.config.getOrNull(SemanticsProperties.TestTag)?.startsWith("$PASSPORT_STAMP.") == true }, useUnmergedTree = true,
@@ -218,31 +235,42 @@ class PassportTest {
 
     private fun shows(text: String) = compose.onAllNodes(hasText(text)).fetchSemanticsNodes().isNotEmpty()
 
-    private fun rows(): List<String> = compose.onAllNodes(SemanticsMatcher("a country") { node ->
-        node.config.getOrNull(SemanticsProperties.ContentDescription)?.singleOrNull()?.let { it.endsWith(" parcels") || it.endsWith(" parcel") } == true
-    // Where each stands on the page, scrolled out of view or not: a row clipped away has no bounds.
-    }).fetchSemanticsNodes().sortedBy { it.positionInRoot.y }.map { it.config[SemanticsProperties.ContentDescription].single() }
+    /** The countries on the Countries page, in their order, as TalkBack reads them. */
+    private fun countries(): List<String> = compose.onAllNodes(
+        SemanticsMatcher("a country") { it.config.getOrNull(SemanticsProperties.TestTag)?.startsWith("$PASSPORT_COUNTRY.") == true }, useUnmergedTree = true,
+    ).fetchSemanticsNodes().map { it.config[SemanticsProperties.ContentDescription].single() }
 
     @Test
     fun withNoParcelsNoneIsDeliveredTheFirstThreeStampsAreNextAndNoCountryShows() {
         show(emptyList())
         assertEquals("0 ${text("passport.delivered", mapOf("count" to 0))}", label(PASSPORT_COVER))
+        // The Countries page, with no country: the ghost of a stamp over what will fill it.
+        assertEquals(listOf(PassportPage.COUNTRIES), pagesReached())
+        assertEquals(emptyList<String>(), countries())
+        assertTrue(exists(PASSPORT_COUNTRIES_EMPTY))
+        assertTrue(shows(text("passport.countriesEmpty")))
+        page(PassportPage.STAMPS)
         assertEquals(listOf("first", "rightNextDoor", "express"), stamps())
         assertEquals("First arrival, Not yet", label(stamp("first")))
         assertEquals("Right next door, Not yet", label(stamp("rightNextDoor")))
         assertEquals("Express arrival, Not yet", label(stamp("express")))
         assertTrue(exists(PASSPORT_SHOW_ALL))
+        page(PassportPage.NUMBERS)
+        assertEquals("0 Delivered", label(PASSPORT_DELIVERED_COUNT))
+        assertEquals("0 Countries", label(PASSPORT_COUNTRIES_COUNT))
         assertTrue(shows(text("passport.waitingForTimes")))
         assertFalse(exists(PASSPORT_AVERAGE))
         assertFalse(exists(PASSPORT_PERSONAL_BEST))
-        assertFalse(exists(PASSPORT_COUNTRIES))
-        assertEquals(emptyList<String>(), rows())
+        assertFalse(exists(PASSPORT_BUSIEST_MONTH))
+        assertFalse(exists(PASSPORT_CARRIERS))
     }
 
     @Test
     fun theDemosParcels() {
         show(session = AuthenticationState.Demo)
         assertEquals("10 Delivered", label(PASSPORT_COVER))
+        assertEquals(DEMO_COUNTRIES, countries())
+        page(PassportPage.STAMPS)
         // Ten stamps earned, in the passport's order, and the three to come; the rest under "All stamps".
         assertEquals(
             listOf(
@@ -255,13 +283,17 @@ class PassportTest {
         assertEquals("Well connected, Earned on 12 October 2026", label(stamp("connected")))
         tap(PASSPORT_SHOW_ALL)
         assertEquals("The regular, 10 of 25", label(stamp("theRegular")))
+        page(PassportPage.NUMBERS)
+        assertEquals("10 Delivered", label(PASSPORT_DELIVERED_COUNT))
+        assertEquals("${DEMO_COUNTRIES.size} Countries", label(PASSPORT_COUNTRIES_COUNT))
         assertEquals("Average delivery time, 5 days, 5 hours", label(PASSPORT_AVERAGE))
         assertEquals("Fastest delivery, 18 hours", label(PASSPORT_PERSONAL_BEST))
         // Abbreviated on the cards.
         val stats = PassportStatistics(DemoCards.parcels())
         assertEquals("5d 5h", passportDuration(requireNotNull(stats.averageDeliveryDuration), localizer))
         assertEquals("18h", passportDuration(requireNotNull(stats.fastestDelivery).duration, localizer))
-        assertEquals(listOf("France, 4 parcels", "Switzerland, 3 parcels", "Germany, 3 parcels"), rows())
+        assertEquals(DEMO_BUSIEST_MONTH, label(PASSPORT_BUSIEST_MONTH))
+        assertEquals(DEMO_CARRIERS, label(PASSPORT_CARRIERS))
     }
 
     /** The cover's words, drawn now in software, as Robolectric's hardware capture may return a frame before. */
@@ -305,6 +337,7 @@ class PassportTest {
     fun aSetThatEarnsTheTwelveFirstStamps() {
         show(PassportFixtures.everyStamp())
         assertEquals("25 Delivered", label(PASSPORT_COVER))
+        page(PassportPage.STAMPS)
         val earned = listOf(
             "first", "rightNextDoor", "express", "familiarFace", "pickedUp", "acrossBorders", "connected", "worthTheWait", "aroundWorld", "ten",
             "theRegular", "busyDoorstep", "homeForHolidays",
@@ -323,17 +356,20 @@ class PassportTest {
         assertEquals("Second try, Not yet", label(stamp("secondTry")))
         assertEquals("Four seasons, 2 of 4", label(stamp("fourSeasons")))
         assertTrue(exists(PASSPORT_SHOW_ALL))
+        page(PassportPage.NUMBERS)
         assertEquals("Fastest delivery, 1 day, 12 hours", label(PASSPORT_PERSONAL_BEST))
     }
 
     @Test
     fun aSetJustShortOfEachStampShowsHowFarAlongItIs() {
         show(PassportFixtures.justShort())
+        page(PassportPage.NUMBERS)
+        assertEquals("Fastest delivery, 2 days", label(PASSPORT_PERSONAL_BEST))
+        page(PassportPage.STAMPS)
         // Twelve parcels by each of two carriers earn Familiar face.
         assertEquals(listOf("first", "familiarFace", "ten", "rightNextDoor", "express", "pickedUp"), stamps())
         assertEquals("Express arrival, Not yet", label(stamp("express")))
         assertEquals("Right next door, Not yet", label(stamp("rightNextDoor")))
-        assertEquals("Fastest delivery, 2 days", label(PASSPORT_PERSONAL_BEST))
 
         tap(PASSPORT_SHOW_ALL)
         assertEquals(19, stamps().size)
@@ -368,31 +404,109 @@ class PassportTest {
     @Test
     fun nineDeliveredAreOneShortOfDoubleDigits() {
         show(PassportFixtures.delivered(9))
+        page(PassportPage.STAMPS)
         assertEquals(listOf("first", "rightNextDoor", "express", "familiarFace", "pickedUp", "acrossBorders", "connected"), stamps())
         assertEquals("Well connected, 1 of 3", label(stamp("connected")))
         tap(PASSPORT_SHOW_ALL)
         assertEquals("Double digits, 9 of 10", label(stamp("ten")))
     }
 
+    /** Every country a parcel went through, in the order they were first reached, each with its parcels. */
     @Test
-    fun theCountriesMostParcelsWereFirstScannedInTheTopThree() {
+    fun theCountriesInTheOrderTheyWereReached() {
         show(PassportFixtures.fromCountries("DE" to 2, "FR" to 1, "AT" to 5, "CH" to 2))
-        // The most first; a tie in the codes' order; the fourth not shown.
-        assertEquals(listOf("Austria, 5 parcels", "Switzerland, 2 parcels", "Germany, 2 parcels"), rows())
-        assertFalse(compose.onAllNodes(hasContentDescription("France, 1 parcel")).fetchSemanticsNodes().isNotEmpty())
+        assertEquals(
+            listOf(
+                "Germany, First reached on 1 March 2026, 2 parcels", "France, First reached on 3 March 2026, 1 parcel",
+                "Austria, First reached on 4 March 2026, 5 parcels", "Switzerland, First reached on 9 March 2026, 2 parcels",
+            ),
+            countries(),
+        )
+        // Two to a row on a phone, the second beside the first and the third under them.
+        assertEquals(bounds(country("DE")).top.value, bounds(country("FR")).top.value, 0.5f)
+        assertTrue(bounds(country("AT")).top > bounds(country("DE")).bottom)
         // The flags are not read.
-        assertFalse(shows("🇦🇹"))
+        assertFalse(shows("🇩🇪"))
+        // "First scanned in" has gone.
+        assertFalse(shows("First scanned in"))
     }
 
     @Test
     fun oneCountryWithOneParcel() {
         show(PassportFixtures.fromCountries("IT" to 1))
-        assertEquals(listOf("Italy, 1 parcel"), rows())
+        assertEquals(listOf("Italy, First reached on 1 March 2026, 1 parcel"), countries())
+    }
+
+    /** The Numbers page's rows: the busiest month and its parcels, and the carriers used, "3 · most often Swiss Post". */
+    @Test
+    fun theNumbersPageRows() {
+        show(PassportFixtures.everyStamp())
+        page(PassportPage.NUMBERS)
+        assertEquals("25 Delivered", label(PASSPORT_DELIVERED_COUNT))
+        assertEquals("5 Countries", label(PASSPORT_COUNTRIES_COUNT))
+        assertEquals("Busiest month, March 2026 · 20 parcels", label(PASSPORT_BUSIEST_MONTH))
+        assertEquals("Carriers you’ve used, 3 · most often Swiss Post", label(PASSPORT_CARRIERS))
+        assertEquals("March 2026", busiestMonth("2026-03", AppLanguage.En))
+        assertEquals("mars 2026", busiestMonth("2026-03", AppLanguage.Fr))
+        assertEquals("marzec 2026", busiestMonth("2026-03", AppLanguage.Pl))
+    }
+
+    @Test
+    fun withOneParcelNoMonthIsTheBusiestAndTheCarrierIsNamed() {
+        show(PassportFixtures.fromCountries("IT" to 1))
+        page(PassportPage.NUMBERS)
+        assertEquals("1 Country", label(PASSPORT_COUNTRIES_COUNT))
+        assertFalse(exists(PASSPORT_BUSIEST_MONTH))
+        assertEquals("Carriers you’ve used, Swiss Post", label(PASSPORT_CARRIERS))
+    }
+
+    /**
+     * The pages: one in view, the only one TalkBack reaches, turned by its label or by a swipe across the track that
+     * goes past a quarter of a page; none before the first. The labels are tabs in a group named for the pages.
+     */
+    @Test
+    fun thePagesTurnByTheirLabelsAndBySwipes() {
+        show(PassportFixtures.delivered(3))
+        assertEquals(listOf(PassportPage.COUNTRIES), pagesReached())
+        // Out of view, the stamps are out of TalkBack's tree.
+        assertTrue(compose.onAllNodes(hasTestTag(stamp("first"))).fetchSemanticsNodes().isEmpty())
+        val labels = semantics(PASSPORT_PAGE_LABELS)
+        assertEquals(text("passport.pages.label"), labels[SemanticsProperties.ContentDescription].single())
+        assertEquals(3, labels[SemanticsProperties.CollectionInfo].columnCount)
+        val tab = semantics("$PASSPORT_PAGE_LABEL.${PassportPage.STAMPS}")
+        assertEquals(Role.Tab, tab[SemanticsProperties.Role])
+        assertEquals(false, tab[SemanticsProperties.Selected])
+        assertEquals(true, semantics("$PASSPORT_PAGE_LABEL.${PassportPage.COUNTRIES}")[SemanticsProperties.Selected])
+
+        page(PassportPage.STAMPS)
+        assertEquals(listOf(PassportPage.STAMPS), pagesReached())
+        assertTrue(exists(stamp("first")))
+        assertEquals(true, semantics("$PASSPORT_PAGE_LABEL.${PassportPage.STAMPS}")[SemanticsProperties.Selected])
+
+        // A swipe to the left turns to the next page, to the right back; past the last, nothing.
+        compose.onNodeWithTag(PASSPORT_TRACK).performTouchInput { swipeLeft() }
+        settle()
+        assertEquals(listOf(PassportPage.NUMBERS), pagesReached())
+        compose.onNodeWithTag(PASSPORT_TRACK).performTouchInput { swipeLeft() }
+        settle()
+        assertEquals(listOf(PassportPage.NUMBERS), pagesReached())
+        compose.onNodeWithTag(PASSPORT_TRACK).performTouchInput { swipeRight() }
+        settle()
+        assertEquals(listOf(PassportPage.STAMPS), pagesReached())
+        // A slow drag over less than a quarter of a page settles back.
+        compose.onNodeWithTag(PASSPORT_TRACK).performTouchInput { swipe(center, center - Offset(width * 0.15f, 0f), durationMillis = 1_000) }
+        settle()
+        assertEquals(listOf(PassportPage.STAMPS), pagesReached())
+        // The page beside shows its edge 18 past the gap, out of TalkBack's reach.
+        val shown = bounds("$PASSPORT_PAGE.${PassportPage.STAMPS}")
+        val track = bounds(PASSPORT_TRACK)
+        assertEquals((track.right - 16.dp - 18.dp).value, (shown.right + 10.dp).value, 0.5f)
     }
 
     @Test
     fun allStampsAndShowLess() {
         show(PassportFixtures.delivered(3))
+        page(PassportPage.STAMPS)
         val few = listOf("first", "rightNextDoor", "express", "familiarFace", "pickedUp", "acrossBorders", "connected")
         assertEquals(few, stamps())
         assertTrue(shows(text("passport.showAll")))
@@ -419,13 +533,17 @@ class PassportTest {
             back()
         }
         opens(PASSPORT_COVER, "Delivered\n${text("passport.deliveredExplanation")}")
+        // A country: the day a parcel first reached it and that parcel, then its parcels.
+        val (code, says) = DEMO_COUNTRY_POPOVER
+        opens(country(code), says)
+        page(PassportPage.STAMPS)
         // An earned stamp: how, then the day in full and the parcel that earned it.
         opens(stamp("connected"), "Well connected\n${text("passport.carrierExplanation")}\nEarned on 12 October 2026 · Alpine trail map 🗺️")
         // One to come, among all the stamps: how far along.
         tap(PASSPORT_SHOW_ALL)
         opens(stamp("theRegular"), "The regular\n${text("passport.regularExplanation")}\n10 of 25")
+        page(PassportPage.NUMBERS)
         opens(PASSPORT_AVERAGE, "Average delivery time\n${text("passport.timedJourneys.many", mapOf("count" to timed))}. ${text("passport.timingExplanation")}")
-        opens(PASSPORT_COUNTRIES, "First scanned in\n${text("passport.countryExplanation")}")
         assertEquals(null, popover())
         // The fastest: its parcel and day, then how it is counted.
         tap(PASSPORT_PERSONAL_BEST)
@@ -439,18 +557,21 @@ class PassportTest {
     @Test
     fun aTapOnAnotherItemWhileOneIsOpenOnlyClosesIt() {
         show(session = AuthenticationState.Demo)
+        page(PassportPage.STAMPS)
         tap(stamp("connected"))
         assertTrue(popover()!!.startsWith("Well connected"))
-        tapWhereItShows(stamp("pickedUp"))
+        // A stamp the popover (above Well connected) leaves in view.
+        tapWhereItShows(stamp("newHorizons"))
         assertEquals(null, popover())
 
-        tapWhereItShows(stamp("pickedUp"))
-        assertTrue(popover()!!.startsWith("Picked up"))
+        tapWhereItShows(stamp("newHorizons"))
+        assertTrue(popover()!!.startsWith("New horizons"))
     }
 
     @Test
     fun theBackClosesThePopoverAndNotTheApp() {
         show(session = AuthenticationState.Demo)
+        page(PassportPage.NUMBERS)
         tap(PASSPORT_AVERAGE)
         assertTrue(popover() != null)
         back()
@@ -462,6 +583,7 @@ class PassportTest {
     @Test
     fun aTapWithAPopoverOpenReachesNothingUnderIt() {
         show(PassportFixtures.delivered(3))
+        page(PassportPage.STAMPS)
         tap(PASSPORT_COVER)
         tapWhereItShows(PASSPORT_SHOW_ALL)
         assertEquals(null, popover())
@@ -490,6 +612,9 @@ class PassportTest {
         assertEquals(null, popover())
         assertEquals(1, impacts())
 
+        // Turning a page plays none.
+        page(PassportPage.STAMPS)
+        assertEquals(1, impacts())
         tap(stamp("connected"))
         assertTrue(popover()!!.startsWith("Well connected"))
         assertEquals(2, impacts())
@@ -497,10 +622,11 @@ class PassportTest {
         assertEquals(null, popover())
         assertEquals(2, impacts())
 
+        page(PassportPage.NUMBERS)
         tap(PASSPORT_AVERAGE)
         assertTrue(popover()!!.startsWith("Average delivery time"))
         assertEquals(3, impacts())
-        tapWhereItShows(stamp("first"))
+        tapWhereItShows(PASSPORT_COVER)
         assertEquals(null, popover())
         assertEquals(3, impacts())
     }
@@ -512,21 +638,24 @@ class PassportTest {
         assertEquals(collapsed, value(PASSPORT_COVER))
         assertEquals(text("passport.detailsHint"), hint(PASSPORT_COVER))
         assertEquals(Role.Button, semantics(PASSPORT_COVER)[SemanticsProperties.Role])
-        assertEquals(collapsed, value(stamp("first")))
-        assertEquals(collapsed, value(PASSPORT_AVERAGE))
-        assertEquals("First scanned in", label(PASSPORT_COUNTRIES))
-        assertEquals(collapsed, value(PASSPORT_COUNTRIES))
-        assertEquals(text("passport.detailsHint"), hint(PASSPORT_COUNTRIES))
+        val (code, says) = DEMO_COUNTRY_POPOVER
+        assertEquals(collapsed, value(country(code)))
+        assertEquals(text("passport.detailsHint"), hint(country(code)))
+        assertEquals(Role.Button, semantics(country(code))[SemanticsProperties.Role])
 
         tap(PASSPORT_COVER)
         assertEquals("${text("passport.expansionState.expanded")}. ${text("passport.deliveredExplanation")}", value(PASSPORT_COVER))
         assertEquals(text("passport.expansionHint"), hint(PASSPORT_COVER))
         back()
 
-        // The countries' title reads its state alone, without the explanation.
-        tap(PASSPORT_COUNTRIES)
-        assertEquals(text("passport.expansionState.expanded"), value(PASSPORT_COUNTRIES))
-        assertEquals(text("passport.expansionHint"), hint(PASSPORT_COUNTRIES))
+        // A country's value is its popover's words.
+        tap(country(code))
+        assertEquals("${text("passport.expansionState.expanded")}. ${says.substringAfter("\n")}", value(country(code)))
+        back()
+        page(PassportPage.STAMPS)
+        assertEquals(collapsed, value(stamp("first")))
+        page(PassportPage.NUMBERS)
+        assertEquals(collapsed, value(PASSPORT_AVERAGE))
     }
 
     /** The account button opens Settings over the passport; PassportView sends no view as it opens or closes. */
@@ -579,37 +708,45 @@ class PassportTest {
     }
 
     @Test
-    fun theLayoutsByWindowTextAndFold() {
-        fun layout(width: Int, windowWidth: Int = 1000, windowHeight: Int = 800, largeText: Boolean = false, hinge: Pair<Int, Int>? = null) =
-            passportLayout(width.dp, windowWidth.dp, windowHeight.dp, largeText, hinge, content = 1_000)
-        assertEquals(PassportLayout.Single, layout(759))
-        assertEquals(PassportLayout.Spread, layout(760))
-        assertEquals(PassportLayout.Single, layout(919, largeText = true))
-        assertEquals(PassportLayout.Spread, layout(920, largeText = true))
-        // A compact width or height keeps one page, however wide.
-        assertEquals(PassportLayout.Single, layout(900, windowWidth = 599))
-        assertEquals(PassportLayout.Spread, layout(900, windowWidth = 600))
-        assertEquals(PassportLayout.Single, layout(900, windowHeight = 479))
-        assertEquals(PassportLayout.Spread, layout(900, windowHeight = 480))
+    fun theLayoutsByWindowAndFold() {
+        fun layout(windowWidth: Int, hinge: Pair<Int, Int>? = null) = passportLayout(windowWidth.dp, hinge, content = 1_000)
+        assertEquals(PassportLayout.Single, layout(839))
+        assertEquals(PassportLayout.Open, layout(840))
         // A fold standing half open: either side of it, whatever the width.
-        assertEquals(PassportLayout.Fold(480, 40, 480), layout(400, windowWidth = 400, hinge = 480 to 520))
+        assertEquals(PassportLayout.Fold(480, 40, 480), layout(400, hinge = 480 to 520))
+        assertEquals(PassportLayout.Fold(480, 40, 480), layout(1_000, hinge = 480 to 520))
     }
 
+    /**
+     * A tablet lies the book open under the cover: the Countries and Stamps pages side by side, both reached, three
+     * countries to a row; choosing Numbers shows the Stamps and Numbers pages.
+     */
     @Test
     @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
-    fun aTabletShowsTheSpread() {
-        show()
+    fun aTabletLiesTheBookOpen() {
+        show(PassportFixtures.fromCountries("DE" to 2, "FR" to 1, "AT" to 5, "CH" to 2))
+        assertEquals(listOf(PassportPage.COUNTRIES, PassportPage.STAMPS), pagesReached())
         val cover = bounds(PASSPORT_COVER)
-        val average = bounds(PASSPORT_AVERAGE)
-        assertTrue("$cover $average", average.left > cover.right)
-        assertTrue("$cover", cover.right - cover.left <= 480.dp)
+        val countries = bounds("$PASSPORT_PAGE.${PassportPage.COUNTRIES}")
+        val stamps = bounds("$PASSPORT_PAGE.${PassportPage.STAMPS}")
+        assertTrue("$countries $stamps", stamps.left >= countries.right)
+        assertTrue("$cover $countries", countries.top > cover.bottom)
+        assertEquals(bounds(country("DE")).top.value, bounds(country("AT")).top.value, 0.5f)
+        assertTrue(bounds(country("CH")).top > bounds(country("DE")).bottom)
+        page(PassportPage.NUMBERS)
+        assertEquals(listOf(PassportPage.STAMPS, PassportPage.NUMBERS), pagesReached())
+        assertTrue(exists(stamp("first")))
+        assertTrue(bounds(PASSPORT_DELIVERED_COUNT).left > bounds(stamp("first")).right)
+        page(PassportPage.COUNTRIES)
+        assertEquals(listOf(PassportPage.COUNTRIES, PassportPage.STAMPS), pagesReached())
     }
 
     @Test
     @Config(qualifiers = "w673dp-h841dp-xxhdpi")
     fun anUnfoldedFoldableShowsOnePageThenTwoEitherSideOfTheFoldAsABookKeepingThePopoverAndAllTheStamps() {
         show(PassportFixtures.delivered(3))
-        assertTrue(bounds(PASSPORT_AVERAGE).top > bounds(PASSPORT_COVER).bottom)
+        assertTrue(bounds(PASSPORT_PAGE_LABELS).top > bounds(PASSPORT_COVER).bottom)
+        page(PassportPage.STAMPS)
         tap(PASSPORT_SHOW_ALL)
         tap(stamp("first"))
         val hinge = FoldingFeature(requireNotNull(activity), center = view.width / 2, size = 0, state = State.HALF_OPENED, orientation = Orientation.VERTICAL)
@@ -617,7 +754,9 @@ class PassportTest {
         settle()
         val middle = 673.dp / 2
         assertTrue("${bounds(PASSPORT_COVER)}", bounds(PASSPORT_COVER).right <= middle)
-        assertTrue("${bounds(PASSPORT_AVERAGE)}", bounds(PASSPORT_AVERAGE).left >= middle)
+        assertTrue("${bounds(PASSPORT_PAGE_LABELS)}", bounds(PASSPORT_PAGE_LABELS).left >= middle)
+        assertTrue("${bounds(stamp("first"))}", bounds(stamp("first")).left >= middle)
+        assertEquals(listOf(PassportPage.STAMPS), pagesReached())
         assertTrue(popover()!!.startsWith("First arrival"))
         assertEquals(19, stamps().size)
         // With the popover closed, the tab bar over the first page, clear of the fold, the account still at the window's
@@ -746,11 +885,11 @@ class PassportTest {
         // The hinge reached the window: the tab bar centres in the first half.
         assertEquals((middle - 10.dp).value / 2, ((bounds(TAB_BAR).left + bounds(TAB_BAR).right) / 2).value, 1f)
         val cover = bounds(PASSPORT_COVER)
-        val average = bounds(PASSPORT_AVERAGE)
-        assertTrue("$cover $average", average.top > cover.bottom)
+        val labels = bounds(PASSPORT_PAGE_LABELS)
+        assertTrue("$cover $labels", labels.top > cover.bottom)
         assertTrue("$cover", cover.left < middle && cover.right > middle)
-        // The cover's contents 24 into its card, which starts where the times do.
-        assertEquals((cover.left - 24.dp).value, average.left.value, 0.5f)
+        // The cover's contents 24 into its card, which starts where the pages' labels do.
+        assertEquals((cover.left - 24.dp).value, labels.left.value, 0.5f)
     }
 
     /** Settings from one tab's account button, where it stands, closed again. */
@@ -819,11 +958,12 @@ class PassportTest {
         assertEquals(page, settingsFrom(PASSPORT_ACCOUNT_BUTTON))
     }
 
-    /** The window made again (a rotation): the popover and all the stamps as they were. */
+    /** The window made again (a rotation): the page, the popover and all the stamps as they were. */
     @Test
     fun aRecreatedWindowKeepsThePopoverAndAllTheStamps() {
         val recreation = Recreation(compose)
         show(PassportFixtures.delivered(3), recreation = recreation)
+        page(PassportPage.STAMPS)
         tap(PASSPORT_SHOW_ALL)
         tap(stamp("ten"))
         recreation.recreate()
@@ -831,6 +971,20 @@ class PassportTest {
         settle()
         assertEquals(19, stamps().size)
         assertTrue(popover()!!.startsWith("Double digits"))
+        assertEquals(listOf(PassportPage.STAMPS), pagesReached())
+    }
+
+    private companion object {
+        /** The demo's countries, in the order its parcels reached them. */
+        val DEMO_COUNTRIES = listOf(
+            "Japan, First reached on 6 September 2026, 2 parcels", "Switzerland, First reached on 22 September 2026, 10 parcels",
+            "France, First reached on 1 October 2026, 4 parcels", "Italy, First reached on 14 October 2026, 1 parcel",
+            "Netherlands, First reached on 21 October 2026, 1 parcel", "China, First reached on 23 October 2026, 1 parcel",
+            "Germany, First reached on 23 October 2026, 1 parcel", "United Arab Emirates, First reached on 24 October 2026, 1 parcel",
+        )
+        const val DEMO_BUSIEST_MONTH = "Busiest month, October 2026 · 16 parcels"
+        const val DEMO_CARRIERS = "Carriers you’ve used, 11 · most often DHL"
+        val DEMO_COUNTRY_POPOVER = "CH" to "Switzerland\nFirst reached on 22 September 2026 · Ceramic ramen bowls 🍜\n10 parcels"
     }
 }
 

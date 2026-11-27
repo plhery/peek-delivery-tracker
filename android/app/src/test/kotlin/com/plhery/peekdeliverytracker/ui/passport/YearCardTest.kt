@@ -94,6 +94,8 @@ class YearCardTest {
         choose("Deliveries")
         choose("Passport")
         assertTrue(offered())
+        compose.onNodeWithTag("$PASSPORT_PAGE_LABEL.${PassportPage.NUMBERS}").performClick()
+        settle()
         val row = compose.onNodeWithTag(PASSPORT_YEAR_CARD).performScrollTo().fetchSemanticsNode().config
         assertEquals(listOf("Your 2026 in parcels"), row.getOrNull(SemanticsProperties.Text)?.map { it.text })
         assertEquals(Role.Button, row[SemanticsProperties.Role])

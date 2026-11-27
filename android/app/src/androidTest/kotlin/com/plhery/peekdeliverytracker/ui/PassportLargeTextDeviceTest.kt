@@ -4,15 +4,8 @@ import android.graphics.Color
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
-import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.systemBars
-import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
@@ -23,11 +16,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.asAndroidBitmap
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.hasContentDescription
@@ -52,9 +45,12 @@ import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_AVERAGE
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_COVER
+import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_PAGE
+import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_PAGE_LABEL
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_PERSONAL_BEST
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_SHOW_ALL
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_STAMP
+import com.plhery.peekdeliverytracker.ui.passport.PassportPage
 import com.plhery.peekdeliverytracker.ui.passport.passportDuration
 import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
@@ -73,10 +69,10 @@ import org.junit.runner.RunWith
 
 /**
  * The passport at the larger text sizes (A-AX04, A-AX05) on this device's own window, as PassportView.swift lays it out:
- * the spread from 920 points of page at the accessibility sizes (760 below them) in a window wide and tall in its own
- * right; the stamps four to a row, three from xxLarge and two at the accessibility sizes; the average and the fastest
- * delivery side by side, each time on one line shrinking to three quarters, and one over the other at the accessibility
- * sizes, where the times wrap; the cover's seal dropped at the accessibility sizes. Each test branches on the window it
+ * the book lying open from a window 840 wide at any text size; the stamps four to a row, three from xxLarge and two at
+ * the accessibility sizes; on the Numbers page the average and the fastest delivery side by side, each time on one line
+ * shrinking to three quarters, and one over the other at the accessibility sizes, where the times wrap; the cover's
+ * seal dropped at the accessibility sizes. Each test branches on the window it
  * finds (its size and safe sides), never on the device, and asserts what that window shows. The demo's parcels on fake
  * deliveries ([ParcelWalk]), the text size the composition's own Density; the window narrowed, where a test needs it,
  * by a box of its own width at the window's leading edge, which leaves the window's height and safe sides as they are.
@@ -95,22 +91,15 @@ class PassportLargeTextDeviceTest {
     /** The width the root is given, the window's where null. */
     private var width by mutableStateOf<Dp?>(null)
 
-    /** The window as the root last measured it: its size and its safe sides, which the passport keeps clear of. */
+    /** The window's width as the root last measured it. */
     @Volatile
-    private var room: Room? = null
+    private var room: Dp? = null
 
-    private data class Room(val width: Dp, val height: Dp, val start: Dp, val end: Dp) {
-        val regular: Boolean get() = width >= REGULAR_WIDTH && height >= REGULAR_HEIGHT
-        val sides: Dp get() = start + end
-    }
-
-    /** The root in a box [width] wide at the window's leading edge, as tall as the window; the window kept in [room]. */
+    /** The root in a box [width] wide at the window's leading edge, as tall as the window; the window's width in [room]. */
     @Composable
     private fun Narrowed(content: @Composable () -> Unit) {
         BoxWithConstraints(Modifier.fillMaxSize()) {
-            val direction = LocalLayoutDirection.current
-            val safe = WindowInsets.systemBars.union(WindowInsets.displayCutout).asPaddingValues()
-            val measured = Room(maxWidth, maxHeight, safe.calculateStartPadding(direction), safe.calculateEndPadding(direction))
+            val measured = maxWidth
             SideEffect { room = measured }
             val given = width?.let { minOf(it, maxWidth) } ?: maxWidth
             Box(Modifier.align(Alignment.TopStart).width(given).fillMaxHeight()) { content() }
@@ -140,48 +129,46 @@ class PassportLargeTextDeviceTest {
 
     private fun bounds(tag: String): DpRect = compose.onNodeWithTag(tag, useUnmergedTree = true).getUnclippedBoundsInRoot()
 
-    /**
-     * Whether the passport stands as a spread: the times on the second page, beside the cover's, rather than under the
-     * cover and the stamps on the one page.
-     */
-    private fun spread(): Boolean {
-        val cover = bounds(PASSPORT_COVER)
-        val average = bounds(PASSPORT_AVERAGE)
-        val beside = average.left >= cover.right - TOLERANCE
-        if (!beside) assertTrue("One page: the times under the cover, $average under $cover", average.top >= cover.bottom)
-        return beside
+    /** The page [index] ([PassportPage]) chosen from its label. */
+    private fun page(index: Int) {
+        compose.reveal(compose.onNodeWithTag("$PASSPORT_PAGE_LABEL.$index")).performClick()
+        walk.settle()
     }
 
     /**
-     * A-AX05: at the accessibility sizes the passport spreads over two pages from 920 points of page between the
-     * window's safe sides (`PassportSpread.fits`, two 420-point columns and their 20-point margins), in a window at
-     * least 600 wide and 480 tall; a window that gives it less shows one page, the times under the cover.
+     * Whether the book lies open: on the Countries page, the Stamps page in view beside it, a group TalkBack reaches,
+     * rather than its edge alone.
      */
-    @Test
-    fun atTheLargestTextTheSpreadTakesNineHundredTwentyPointsOfPage() = spreadsFrom(scale = 2f, line = LARGE_SPREAD)
+    private fun open(): Boolean = compose.onAllNodes(
+        hasTestTag("$PASSPORT_PAGE.${PassportPage.STAMPS}") and SemanticsMatcher.keyIsDefined(SemanticsProperties.IsTraversalGroup),
+        useUnmergedTree = true,
+    ).fetchSemanticsNodes().isNotEmpty()
 
-    /** A-AX05: below the accessibility sizes the spread takes 760 points of page, two 340-point columns and margins. */
+    /** A-AX05: at the largest text the book lies open in a window 840 wide or more, as at the default size. */
     @Test
-    fun atTheDefaultTextTheSpreadTakesSevenHundredSixtyPointsOfPage() = spreadsFrom(scale = 1f, line = SPREAD)
+    fun atTheLargestTextTheBookLiesOpenFromEightHundredFortyOfWindow() = opensFrom(scale = 2f)
+
+    /** A-AX05: at the default text the book lies open in a window 840 wide or more; one page shows in a narrower one. */
+    @Test
+    fun atTheDefaultTextTheBookLiesOpenFromEightHundredFortyOfWindow() = opensFrom(scale = 1f)
 
     /**
-     * The spread at [scale], half a point either side of [line] where the window is wide enough to narrow to them, else
-     * at the window's own width: two pages exactly where the page is [line] wide or more in a regular window.
+     * The book at [scale], half a point either side of [OPEN_BOOK] where the window is wide enough to narrow to them,
+     * else at the window's own width: two pages exactly where the window is [OPEN_BOOK] wide or more.
      */
-    private fun spreadsFrom(scale: Float, line: Float) {
+    private fun opensFrom(scale: Float) {
         showPassport(scale)
         val room = checkNotNull(room)
         val name = if (scale >= 2f) "large" else "default"
-        if (room.regular && room.width >= room.sides + (line + 0.5f).dp) {
-            narrowTo(room.sides + (line - 0.5f).dp)
-            assertTrue("Half a point short of $line, ${room.sides} of safe sides: one page", !spread())
+        if (room >= OPEN_BOOK + 0.5.dp) {
+            narrowTo(OPEN_BOOK - 0.5.dp)
+            assertTrue("Half a point short of $OPEN_BOOK: one page", !open())
             walk.shot("A-AX05-passport-$name-one-page", alsoDark = false)
-            narrowTo(room.sides + (line + 0.5f).dp)
-            assertTrue("Half a point past $line, ${room.sides} of safe sides: the spread", spread())
-            walk.shot("A-AX05-passport-$name-spread")
+            narrowTo(OPEN_BOOK + 0.5.dp)
+            assertTrue("Half a point past $OPEN_BOOK: the book open", open())
+            walk.shot("A-AX05-passport-$name-open")
         } else {
-            val spreads = room.regular && room.width - room.sides >= line.dp
-            assertEquals("A window of $room, a spread from $line of page", spreads, spread())
+            assertEquals("A window $room wide, the book open from $OPEN_BOOK", room >= OPEN_BOOK, open())
             walk.shot("A-AX05-passport-$name-window")
         }
     }
@@ -200,6 +187,7 @@ class PassportLargeTextDeviceTest {
     @Test
     fun theStampsStandFourThenThreeFromXxLargeThenTwoAtTheAccessibilitySizes() {
         showPassport()
+        page(PassportPage.STAMPS)
         // The demo has earned nine and shows the three to come: all twelve, unless some were left out.
         if (walk.exists(PASSPORT_SHOW_ALL)) compose.reveal(compose.onNodeWithTag(PASSPORT_SHOW_ALL)).performClick()
         compose.waitUntil(LONG_MILLIS) { stamps().size == ALL_STAMPS }
@@ -224,15 +212,16 @@ class PassportLargeTextDeviceTest {
     private fun stampTag(id: String): String = "$PASSPORT_STAMP.$id"
 
     /**
-     * A-AX04, A-AX05: the average delivery time and the fastest stand side by side, 18 apart and level, each time on one
-     * line that shrinks to three quarters rather than wrap (`.lineLimit(1).minimumScaleFactor(0.75)`); at the
-     * accessibility sizes one over the other, 18 apart, each across the page, its time at its full size on the lines it
-     * needs (`.lineLimit(nil)`). A card is as tall as its time over its title, 6 apart, and 48 at least: its height
-     * tells how many lines its time takes and at what size.
+     * A-AX04, A-AX05: on the Numbers page the average delivery time and the fastest stand side by side, 18 apart and
+     * level, each time on one line that shrinks to three quarters rather than wrap (`.lineLimit(1)
+     * .minimumScaleFactor(0.75)`); at the accessibility sizes one over the other, 18 apart or more, each across the page,
+     * its time at its full size on the lines it needs (`.lineLimit(nil)`). A card is as tall as its time over its title,
+     * 4 apart, and 48 at least: its height tells how many lines its time takes and at what size.
      */
     @Test
     fun theTimesStandSideBySideEachOnOneLineThenOneOverTheOtherAtTheAccessibilitySizes() {
         showPassport()
+        page(PassportPage.NUMBERS)
         val stats = PassportStatistics(parcels)
         val average = passportDuration(checkNotNull(stats.averageDeliveryDuration) { "The demo has no average" }, walk.localizer)
         val fastest = passportDuration(checkNotNull(stats.fastestDelivery) { "The demo has no fastest delivery" }.duration, walk.localizer)
@@ -270,10 +259,11 @@ class PassportLargeTextDeviceTest {
         val size = DynamicTypeSize.of(scale)
         val type = PeekTypography(size, density, walk.language)
         val measurer = TextMeasurer(createFontFamilyResolver(compose.activity), density, LayoutDirection.Ltr)
-        val time = type.style(IosTextStyle.Title2, FontWeight.Medium).monospacedDigit().sfLines()
+        val time = type.tracking(type.fixed(type.scaled(NUMBER_SIZE, IosTextStyle.Title2), FontWeight.Medium), NUMBER_TRACKING)
+            .monospacedDigit().sfLines()
         val line = measurer.measure(duration, style = time, softWrap = false, maxLines = 1).size.height
         val words = measurer.measure(title, style = type.caption.sfLines(), constraints = Constraints(maxWidth = card.width)).size.height
-        val gap = with(density) { 6.dp.roundToPx() }
+        val gap = with(density) { 4.dp.roundToPx() }
         val least = with(density) { 48.dp.roundToPx() }
         val slack = with(density) { 2.dp.roundToPx() }
         if (size.isAccessibilitySize) {
@@ -324,13 +314,12 @@ class PassportLargeTextDeviceTest {
     private companion object {
         const val FOLDER = "passportlarge"
 
-        /** `PassportSpread.fits`: two columns of 340 (420 at the accessibility sizes), each with its 2 × 20 margins. */
-        const val SPREAD = 760f
-        const val LARGE_SPREAD = 920f
+        /** The window's width from which the book lies open, two pages side by side. */
+        val OPEN_BOOK = 840.dp
 
-        /** The regular size classes, as the passport and the deliveries take them. */
-        val REGULAR_WIDTH = 600.dp
-        val REGULAR_HEIGHT = 480.dp
+        /** A number's figure on the Numbers page: 24 from Title 2, medium, half a point tight. */
+        const val NUMBER_SIZE = 24f
+        const val NUMBER_TRACKING = -0.5f
 
         /** `minimumScaleFactor(0.75)` of a time on one line. */
         const val TIME_MINIMUM_SCALE = 0.75f

@@ -11,12 +11,10 @@ import android.view.accessibility.AccessibilityNodeInfo
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsProperties
-import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
-import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToKey
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -62,7 +60,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.SEARCH_FIELD
 import com.plhery.peekdeliverytracker.ui.deliveries.SEARCH_ROW
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import com.plhery.peekdeliverytracker.ui.deliveries.cardId
-import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_COUNTRIES
+import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_COUNTRY
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_COVER
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_POPOVER
 import com.plhery.peekdeliverytracker.ui.tabs.TAB_BAR
@@ -455,8 +453,8 @@ class ListAccessDeviceTest {
     /**
      * A-AX18: the passport's cover is one button read with its count, its state collapsed and its double tap said as
      * showing the details. Shown, the popover is all TalkBack reaches, the passport under it out of the tree, its title
-     * a heading and the pane named after it; once it closes the cover is collapsed again. The countries' title reads its
-     * state and hint the same way, and each country is one element read with its parcels.
+     * a heading and the pane named after it; once it closes the cover is collapsed again. Each country on the Countries
+     * page is one button read with its name, the day it was reached and its parcels, its state and hint the same way.
      */
     @Test
     fun thePassportsCoverAndCountriesReadTheirStateAndWhatATapDoes() {
@@ -482,21 +480,14 @@ class ListAccessDeviceTest {
         walk.back()
         tree.await("The cover collapsed again") { all -> all.firstOrNull { it.viewIdResourceName == PASSPORT_COVER && it.state == collapsed } }
 
-        compose.reveal(PASSPORT_COUNTRIES)
-        val countries = tree.awaitId(PASSPORT_COUNTRIES)
-        assertTrue(countries.isButton)
-        assertEquals(0, countries.childCount)
-        assertEquals(walk.text("passport.firstSeenIn"), countries.spoken)
-        assertEquals(collapsed, countries.state)
-        assertEquals(details, countries.clickLabel)
-        val parcels = Regex(".+, (${walk.pattern("passport.parcels.one", "count").pattern}|${walk.pattern("passport.parcels.many", "count").pattern})")
-        val country = SemanticsMatcher("A country read with its parcels") { node ->
-            node.config.getOrNull(SemanticsProperties.ContentDescription)?.firstOrNull()?.let(parcels::matches) == true
-        }
-        compose.reveal(compose.onAllNodes(country).onFirst())
-        val row = tree.await("A country read with its parcels") { all -> all.firstOrNull { parcels.matches(it.words) } }
-        assertEquals(0, row.childCount)
-        assertTrue(row.isScreenReaderFocusable)
+        val parcels = Regex(".+, .+, (${walk.pattern("passport.parcels.one", "count").pattern}|${walk.pattern("passport.parcels.many", "count").pattern})")
+        compose.reveal("$PASSPORT_COUNTRY.CH")
+        val country = tree.awaitId("$PASSPORT_COUNTRY.CH")
+        assertTrue(country.isButton)
+        assertEquals(0, country.childCount)
+        assertTrue("A country read with its day and parcels: ${country.spoken}", parcels.matches(country.spoken))
+        assertEquals(collapsed, country.state)
+        assertEquals(details, country.clickLabel)
     }
 
     // A-AX19: the map.

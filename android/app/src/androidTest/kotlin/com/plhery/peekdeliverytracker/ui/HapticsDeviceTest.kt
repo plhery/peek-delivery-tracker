@@ -73,11 +73,13 @@ import com.plhery.peekdeliverytracker.ui.friends.FriendFixtures
 import com.plhery.peekdeliverytracker.ui.friends.friendCardTag
 import com.plhery.peekdeliverytracker.ui.friends.friendStampTag
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_AVERAGE
-import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_COUNTRIES
+import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_COUNTRY
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_COVER
+import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_PAGE_LABEL
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_PERSONAL_BEST
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_POPOVER
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_STAMP
+import com.plhery.peekdeliverytracker.ui.passport.PassportPage
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_SHEET
 import com.plhery.peekdeliverytracker.ui.settings.appearanceTag
 import com.plhery.peekdeliverytracker.ui.tabs.PeekTab
@@ -405,7 +407,8 @@ class HapticsDeviceTest {
     /**
      * A-H08: `.impact(weight: .light, intensity: 0.65)` on each toggle of a passport item's explanation: one light impact
      * at 0.65 for each item tapped (PRIMITIVE_TICK at 0.65 where the vibrator has it, CONTEXT_CLICK otherwise); its
-     * popover dismissed by the system's back or a tap outside it (where the item shows, under the popover's layer), none.
+     * popover dismissed by the system's back or a tap outside it (where the item shows, under the popover's layer), none;
+     * a page chosen from its label, none.
      */
     @Test
     fun eachPassportItemAsksForOneLightImpactAndItsDismissalNothing() {
@@ -415,12 +418,22 @@ class HapticsDeviceTest {
         walk.settle()
         vibrations.mark()
 
+        // Each on its page, the page chosen from its label first where the item isn't in view.
         val items = listOf(
-            "cover" to PASSPORT_COVER, "average" to PASSPORT_AVERAGE, "personal-best" to PASSPORT_PERSONAL_BEST,
-            "countries" to PASSPORT_COUNTRIES, "stamp-connected" to "$PASSPORT_STAMP.connected", "stamp-first" to "$PASSPORT_STAMP.first",
-        ).filter { (_, tag) -> walk.exists(tag) }
-        assertTrue(items.toString(), items.size >= 3)
-        items.forEachIndexed { index, (name, tag) ->
+            Triple("cover", PassportPage.COUNTRIES, PASSPORT_COVER), Triple("country", PassportPage.COUNTRIES, "$PASSPORT_COUNTRY.CH"),
+            Triple("stamp-connected", PassportPage.STAMPS, "$PASSPORT_STAMP.connected"),
+            Triple("stamp-first", PassportPage.STAMPS, "$PASSPORT_STAMP.first"),
+            Triple("average", PassportPage.NUMBERS, PASSPORT_AVERAGE), Triple("personal-best", PassportPage.NUMBERS, PASSPORT_PERSONAL_BEST),
+        )
+        var tapped = 0
+        items.forEachIndexed { index, (name, page, tag) ->
+            if (!walk.exists(tag)) {
+                passportTap("$PASSPORT_PAGE_LABEL.$page")
+                walk.settle()
+                assertNone("A-H08-page-$page")
+            }
+            if (!walk.exists(tag)) return@forEachIndexed
+            tapped += 1
             passportTap(tag)
             compose.waitUntil(LONG_MILLIS) { walk.exists(PASSPORT_POPOVER) }
             compose.waitForIdle()
@@ -436,6 +449,7 @@ class HapticsDeviceTest {
             compose.waitForIdle()
             assertNone("A-H08-$name-${if (back) "back" else "tap-outside"}")
         }
+        assertTrue("Items tapped: $tapped", tapped >= 3)
     }
 
     // C-H04 to C-H06: Settings and the friends.

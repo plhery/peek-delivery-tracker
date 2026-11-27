@@ -8,7 +8,6 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
-import android.graphics.Typeface
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -33,9 +32,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.asAndroidPath
 import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.graphics.vector.PathParser
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
@@ -47,7 +44,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
 import com.plhery.peekdeliverytracker.core.AppLanguage
-import com.plhery.peekdeliverytracker.core.Continent
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.PassportBook
 import com.plhery.peekdeliverytracker.core.PassportData
@@ -175,73 +171,6 @@ private const val RULE = 0xFFE6DCC0.toInt()
 private const val COVER_INK = 0xFF745300.toInt()
 private const val WHITE = 0xFFFFFFFF.toInt()
 
-/** A path of passport.json's, as the canvas draws it. */
-private fun androidPath(data: String): android.graphics.Path = PathParser().parsePathString(data).toPath().asAndroidPath()
-
-/**
- * The words in the system face at [weight], their baseline at [y] (or their middle, [middle]), [spacing] apart, squeezed
- * to [maxWidth] as a canvas's `fillText` does.
- */
-private fun Canvas.drawWords(
-    text: String,
-    x: Float,
-    y: Float,
-    size: Float,
-    weight: Int,
-    color: Int,
-    spacing: Float = 0f,
-    align: Paint.Align = Paint.Align.LEFT,
-    maxWidth: Float? = null,
-    middle: Boolean = false,
-) {
-    val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        typeface = Typeface.create(Typeface.DEFAULT, weight, false)
-        textSize = size
-        this.color = color
-        textAlign = align
-        letterSpacing = spacing / size
-    }
-    val baseline = if (middle) y - (paint.fontMetrics.ascent + paint.fontMetrics.descent) / 2 else y
-    val width = paint.measureText(text)
-    save()
-    if (maxWidth != null && width > maxWidth) scale(maxWidth / width, 1f, x, baseline)
-    drawText(text, x, baseline, paint)
-    restore()
-}
-
-/** A country's ink stamp: its continent's outline, an inner line, its number, its code and its first day. */
-private fun Canvas.inkStamp(box: CardBox, code: String, number: Int, day: String, continent: Continent, tilt: Int, color: Int) {
-    val scale = box.w / 124f
-    val layout = PassportData.layout(continent)
-    val outline = androidPath(PassportData.outline(continent))
-    val line = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        style = Paint.Style.STROKE
-        strokeJoin = Paint.Join.ROUND
-        strokeWidth = 1.7f
-        this.color = color
-    }
-    save()
-    translate(box.x + box.w / 2, box.y + box.h / 2)
-    rotate(tilt.toFloat())
-    scale(scale, scale)
-    translate(-62f, -46f)
-    drawPath(outline, line)
-    save()
-    val inner = layout.inner.toFloat()
-    translate(62f, 46f)
-    scale(inner, inner)
-    translate(-62f, -46f)
-    line.strokeWidth = 0.8f / inner
-    line.alpha = (0.55f * 255).toInt()
-    drawPath(outline, line)
-    restore()
-    val small = layout.small.toFloat()
-    drawWords("Nº ${number.toString().padStart(2, '0')}", 62f, layout.number.toFloat(), small, 600, color, 1.3f, Paint.Align.CENTER)
-    drawWords(code, 63f, layout.code.toFloat(), layout.codeSize.toFloat(), 700, color, 2f, Paint.Align.CENTER)
-    drawWords(day, 62f, layout.date.toFloat(), small, 600, color, layout.dateSpacing.toFloat(), Paint.Align.CENTER)
-    restore()
-}
-
 /** A paper seal with its perforated edge, frame, glyph or numeral, and postmark, on [ground]. */
 private fun Canvas.seal(box: CardBox, glyph: String?, numeral: String?, ink: Int, paper: Int, ground: Int, tilt: Float = 0f) {
     val unit = box.w / 54f
@@ -340,7 +269,7 @@ internal fun drawYearCard(canvas: Canvas, year: YearInParcels, words: CardWords)
         val boxes = countryLayout(year.countries.size, 430f, zoneBottom)
         year.countries.forEachIndexed { index, country ->
             val ink = PassportData.countryInk(country.stamp.code)
-            inkStamp(boxes[index], country.stamp.code, country.stamp.number, words.inkDay(country.firstAt), country.stamp.continent, ink.tilt, TONES.getValue(ink.tone).ink)
+            inkStamp(boxes[index], country.stamp.code, country.stamp.number, words.inkDay(country.firstAt), country.stamp.continent, ink.tilt.toFloat(), TONES.getValue(ink.tone).ink)
         }
         val only = words.onlyCountry
         if (year.countries.size == 1 && only != null) {
@@ -394,12 +323,12 @@ private suspend fun shareYearCard(context: Context, picture: Bitmap, year: Int, 
 }
 
 /**
- * `YearCard`: in December, once a parcel was delivered this year, a quiet row under the times (the share symbol and
- * "Your 2026 in parcels") that opens the card in a sheet: the picture, read as its description, then Share and Close.
- * The day the passport opened decides: one left open over midnight keeps its row until it opens again.
+ * `YearCard`: in December, once a parcel was delivered this year, a quiet row at the foot of the Numbers page (the share
+ * symbol and "Your 2026 in parcels") that opens the card in a sheet: the picture, read as its description, then Share
+ * and Close. The day the passport opened decides: one left open over midnight keeps its row until it opens again.
  */
 @Composable
-internal fun PassportYearCard(book: PassportBook) {
+internal fun PassportYearCard(book: PassportBook, modifier: Modifier = Modifier) {
     val now = LocalNow.current
     val opened = remember { now() }
     val shownYear = cardYear(opened) ?: return
@@ -413,7 +342,7 @@ internal fun PassportYearCard(book: PassportBook) {
     val title = remember(shownYear, localizer, language) { localizer.text("passport.card.button", mapOf("year" to shownYear)) }
     var open by remember { mutableStateOf(false) }
     Row(
-        Modifier
+        modifier
             .fillMaxWidth()
             .testTag(PASSPORT_YEAR_CARD)
             .button(interactionSource = null, indication = PressStyle.Passport, role = Role.Button) { open = true }

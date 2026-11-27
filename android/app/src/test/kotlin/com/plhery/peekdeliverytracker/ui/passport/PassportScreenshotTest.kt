@@ -49,9 +49,9 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * The passport on the iPhone the captures were taken on (440 × 956 points at three pixels to the point), with its safe
- * area as a phone's bars: the demo's parcels in light and dark (checks-m4/04-passport), an account with none, all the
- * stamps, the cover's and a stamp's popovers, the xxLarge and largest text sizes; the iPad's spread on a tablet both
- * ways (ipad-01, ipad-07), an unfolded foldable, and the foldable standing half open as a book.
+ * area as a phone's bars: the demo's parcels on each page in light and dark, an account with none, all the stamps, the
+ * cover's and a stamp's popovers, the xxLarge and largest text sizes, a narrow phone; the book lying open on a tablet
+ * both ways, an unfolded foldable, and the foldable standing half open as a book.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -114,7 +114,13 @@ class PassportScreenshotTest {
         settle()
     }
 
-    /** The demo's parcels, as the iPhone's capture shows them (checks-m4/04-passport). */
+    /** The page [index] ([PassportPage]) chosen from its label. */
+    private fun page(index: Int) {
+        compose.onNodeWithTag("$PASSPORT_PAGE_LABEL.$index").performClick()
+        settle()
+    }
+
+    /** The demo's parcels: the cover over the Countries page, the Stamps page's edge beside it. */
     @Test
     fun theDemo() {
         show()
@@ -127,7 +133,37 @@ class PassportScreenshotTest {
         compose.screenshot("passport_phone_dark")
     }
 
-    /** An account with no parcels: none delivered, the first stamp next, waiting for times, no countries. */
+    /** The demo's Stamps page (checks-m4/04-passport's stamps), the Countries page's edge before it. */
+    @Test
+    fun theDemosStamps() {
+        show()
+        page(PassportPage.STAMPS)
+        compose.screenshot("passport_stamps_light")
+    }
+
+    @Test
+    fun theDemosStampsInDark() {
+        show(dark = true)
+        page(PassportPage.STAMPS)
+        compose.screenshot("passport_stamps_dark")
+    }
+
+    /** The demo's Numbers page: the counts and the times, the busiest month and the carriers. */
+    @Test
+    fun theDemosNumbers() {
+        show()
+        page(PassportPage.NUMBERS)
+        compose.screenshot("passport_numbers_light")
+    }
+
+    @Test
+    fun theDemosNumbersInDark() {
+        show(dark = true)
+        page(PassportPage.NUMBERS)
+        compose.screenshot("passport_numbers_dark")
+    }
+
+    /** An account with no parcels: none delivered, the Countries page's ghost of a stamp. */
     @Test
     fun noParcels() {
         show(emptyList(), reader)
@@ -144,6 +180,7 @@ class PassportScreenshotTest {
     @Test
     fun allStamps() {
         show(PassportFixtures.delivered(3), reader)
+        page(PassportPage.STAMPS)
         tap(PASSPORT_SHOW_ALL)
         compose.screenshot("passport_all_stamps")
     }
@@ -160,6 +197,7 @@ class PassportScreenshotTest {
     @Test
     fun aStampsPopover() {
         show()
+        page(PassportPage.STAMPS)
         tap("$PASSPORT_STAMP.connected")
         compose.screenshot("passport_popover_stamp")
     }
@@ -168,10 +206,11 @@ class PassportScreenshotTest {
     @Test
     fun extraExtraLargeText() {
         show(fontScale = 1.3f)
+        page(PassportPage.STAMPS)
         compose.screenshot("passport_text_xxlarge")
     }
 
-    /** A narrow phone's window, 320 wide: the stamps four to a row still, their names and days wrapping. */
+    /** A narrow phone's window, 320 wide: two countries to a row, their names wrapping. */
     @Test
     @Config(qualifiers = "w320dp-h640dp-xhdpi")
     fun aNarrowPhone() {
@@ -179,14 +218,31 @@ class PassportScreenshotTest {
         compose.screenshot("passport_phone_narrow")
     }
 
-    /** At the largest text (ipad-09): two stamps to a row, no seal on the cover, the times one over the other. */
+    /** A narrow phone's Numbers page: the times shrinking rather than wrap. */
+    @Test
+    @Config(qualifiers = "w320dp-h640dp-xhdpi")
+    fun aNarrowPhonesNumbers() {
+        show(bars = Bars(top = 24, bottom = 24))
+        page(PassportPage.NUMBERS)
+        compose.screenshot("passport_numbers_narrow")
+    }
+
+    /** At the largest text (ipad-09): no seal on the cover, the labels and the countries' names wrapping. */
     @Test
     fun theLargestText() {
         show(fontScale = 2f)
         compose.screenshot("passport_text_largest")
     }
 
-    /** The spread on a tablet held upright (ipad-01). */
+    /** The Numbers page at the largest text: one number to a row, each row's value under its name. */
+    @Test
+    fun theLargestTextsNumbers() {
+        show(fontScale = 2f)
+        page(PassportPage.NUMBERS)
+        compose.screenshot("passport_numbers_largest")
+    }
+
+    /** The book lying open on a tablet held upright (ipad-01): the Countries and Stamps pages side by side. */
     @Test
     @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
     fun aTablet() {
@@ -194,15 +250,16 @@ class PassportScreenshotTest {
         compose.screenshot("passport_tablet_portrait")
     }
 
-    /** The spread on a tablet held sideways (ipad-07). */
+    /** The book lying open on a tablet held sideways (ipad-07), turned to Numbers: the Stamps and Numbers pages. */
     @Test
     @Config(qualifiers = "w1376dp-h1032dp-land-xhdpi")
     fun aTabletSideways() {
         show(bars = Bars(top = 24, bottom = 24))
+        page(PassportPage.NUMBERS)
         compose.screenshot("passport_tablet_landscape")
     }
 
-    /** An unfolded foldable, flat: one page, as its window is too narrow for the spread. */
+    /** An unfolded foldable, flat: one page, as its window is too narrow for the book to lie open. */
     @Test
     @Config(qualifiers = "w673dp-h841dp-xxhdpi")
     fun anUnfoldedFoldable() {
@@ -210,7 +267,7 @@ class PassportScreenshotTest {
         compose.screenshot("passport_foldable")
     }
 
-    /** The foldable standing half open as a book: the cover and the stamps before the fold, the rest after it. */
+    /** The foldable standing half open as a book: the cover before the fold, the pages after it. */
     @Test
     @Config(qualifiers = "w673dp-h841dp-xxhdpi")
     fun aFoldableStandingAsABook() {

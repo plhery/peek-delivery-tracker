@@ -27,6 +27,7 @@ import com.plhery.peekdeliverytracker.core.currentStage
 import com.plhery.peekdeliverytracker.core.isActive
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_COVER
+import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_PAGE
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -102,6 +103,9 @@ class DeliveriesWidthsTest {
             // What stands off the window on purpose: a card's swipe action, off its right edge until it is swiped, and
             // the first open's rolling fleet, clipped to its lane.
             if (node.config.getOrNull(SemanticsProperties.TestTag) in OFF_THE_EDGE) return
+            // A passport page beside the ones in view, its edge showing, out of TalkBack's reach.
+            val tag = node.config.getOrNull(SemanticsProperties.TestTag)
+            if (tag?.startsWith("$PASSPORT_PAGE.") == true && node.config.getOrNull(SemanticsProperties.IsTraversalGroup) != true) return
             // As drawn, a page's zoom and the list's shrinking under it included, but unclipped.
             val laid = node.layoutInfo.coordinates
             val drawn = laid.findRootCoordinates().localBoundingBoxOf(laid, clipBounds = false)

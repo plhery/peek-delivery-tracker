@@ -47,6 +47,7 @@ import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedbackEffect
 import com.plhery.peekdeliverytracker.ui.theme.monospacedDigit
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
+import kotlinx.coroutines.delay
 import kotlin.math.min
 
 // The passport's paper seals as the web's `PassportSeal` draws them (shared/passport.json): the stamp's glyph or its
@@ -104,10 +105,11 @@ internal enum class SealSize(
     Mini(24.dp, 30.dp, 3.dp, 14.dp, 1.4f, 10f, FontWeight.Medium, 0.dp, 0.dp, 0.dp),
 }
 
-/** FABLE's curves: the drop of a seal, its settle, and a move. Cubic-béziers only, no springs. */
+/** FABLE's curves: the drop of a seal, its settle, a move and a page's flip. Cubic-béziers only, no springs. */
 internal val PassportDrop: Easing = CubicBezierEasing(0.5f, 0f, 0.9f, 0.4f)
 internal val PassportSettle: Easing = CubicBezierEasing(0.2f, 0.8f, 0.3f, 1f)
 internal val PassportMove: Easing = CubicBezierEasing(0.3f, 0f, 0.2f, 1f)
+internal val PassportFlip: Easing = CubicBezierEasing(0.22f, 0.8f, 0.2f, 1f)
 
 /** How far a part of a motion has come at [time] ms, starting at [start] and lasting [duration], eased. */
 internal fun phase(time: Float, start: Float, duration: Float, easing: Easing = LinearEasing): Float =
@@ -115,7 +117,7 @@ internal fun phase(time: Float, start: Float, duration: Float, easing: Easing = 
 
 /**
  * A seal pressed in among the new ones (`press` its place in page order): 180 ms, then 90 more for each before it, at
- * most three apart. [time] is the ms since the passport opened; past [END] it rests. Under Reduce Motion it is there.
+ * most three apart. [time] is the ms since its page was shown; past [END] it rests. Under Reduce Motion it is there.
  */
 @Stable
 internal class SealPress(val press: Int?, private val clock: Animatable<Float, *>?) {
@@ -131,10 +133,11 @@ internal class SealPress(val press: Int?, private val clock: Animatable<Float, *
 
 /**
  * The clock a new seal is pressed in by, and its New pill popped: none for a seal that isn't new, nor under Reduce
- * Motion. The first seal pressed plays one light impact as it lands (216 ms into its press).
+ * Motion. It waits [lead] ms first, its page's turn into view. The first seal pressed plays one light impact as it lands
+ * (216 ms into its press).
  */
 @Composable
-internal fun rememberSealPress(press: Int?): SealPress {
+internal fun rememberSealPress(press: Int?, lead: Int = 0): SealPress {
     val reduceMotion = PeekTheme.reduceMotion
     val clock = remember(press, reduceMotion) { if (press == null || reduceMotion) null else Animatable(0f) }
     val seal = remember(press, clock) { SealPress(press, clock) }
@@ -142,6 +145,7 @@ internal fun rememberSealPress(press: Int?): SealPress {
     SensoryFeedbackEffect(SensoryFeedback.Impact(SensoryFeedback.Impact.Weight.Light, 0.65), landed)
     if (clock != null) {
         LaunchedEffect(clock) {
+            if (lead > 0) delay(lead.toLong())
             val end = seal.delay + SealPress.END
             if (press == 0) {
                 clock.animateTo(seal.delay + IMPACT, tween((seal.delay + IMPACT).toInt(), easing = LinearEasing))

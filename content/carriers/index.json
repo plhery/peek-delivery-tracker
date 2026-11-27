@@ -303,8 +303,8 @@
   { "id": "bfe-express", "catalog": "bfe-express", "name": "BFE Express", "languages": ["en", "es", "fr", "de", "it", "pt", "pl", "zh", "pt-br"] },
   { "id": "pasarex", "catalog": "pasarex", "name": "PasarEX", "languages": ["en", "es", "fr", "de", "it", "pt", "pl", "zh", "pt-br"] },
   { "id": "spee-dee", "catalog": "spee-dee", "name": "Spee-Dee", "languages": ["en", "fr", "de", "es", "it", "pt", "pl", "zh", "pt-br"] },
-  { "id": "tnt-au", "catalog": "tnt-au", "name": "TNT Australia", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "wedo", "catalog": "wedo", "name": "One by Allegro CZ", "languages": ["en", "cs", "fr", "de", "es", "it", "pt", "pl"] },
+  { "id": "tnt-au", "catalog": "tnt-au", "name": "TNT Australia", "languages": ["en", "fr", "de", "es", "it", "pt", "pl", "zh", "pt-br"] },
+  { "id": "wedo", "catalog": "wedo", "name": "One by Allegro CZ", "languages": ["en", "cs", "fr", "de", "es", "it", "pt", "pl", "zh", "pt-br"] },
   { "id": "5post", "catalog": "5post", "name": "5Post", "languages": ["en", "ru", "fr", "de", "es", "it", "pt", "pl", "zh", "pt-br"] },
   { "id": "shipter", "catalog": "shipter", "name": "Shipter", "languages": ["en", "fr", "de", "es", "it", "pt", "pl", "zh", "pt-br"] }
 ]

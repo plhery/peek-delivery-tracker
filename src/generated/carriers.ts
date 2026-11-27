@@ -16710,6 +16710,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff4734"
     },
     {
+      "id": "tnt-au",
+      "catalog": "tnt-au",
+      "slug": "tnt-australia-tracking",
+      "title": "Rastreio TNT Australia: códigos domésticos, status e ajuda",
+      "name": "TNT Australia",
+      "color": "#ff6600"
+    },
+    {
+      "id": "wedo",
+      "catalog": "wedo",
+      "slug": "one-by-allegro-cz-tracking",
+      "title": "Rastreio One by Allegro CZ (WE|DO): códigos e entregas",
+      "name": "One by Allegro CZ",
+      "color": "#006d57"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "5post-tracking",
@@ -21314,6 +21330,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Spee-Dee Delivery 物流查询：SP 单号、覆盖州与客服",
       "name": "Spee-Dee",
       "color": "#ff4734"
+    },
+    {
+      "id": "tnt-au",
+      "catalog": "tnt-au",
+      "slug": "tnt-australia-tracking",
+      "title": "TNT 澳大利亚（TNT Australia）物流查询：国内单号、状态与客服",
+      "name": "TNT Australia",
+      "color": "#ff6600"
+    },
+    {
+      "id": "wedo",
+      "catalog": "wedo",
+      "slug": "one-by-allegro-cz-tracking",
+      "title": "One by Allegro CZ（WE|DO）捷克物流查询：单号与自提规则",
+      "name": "One by Allegro CZ",
+      "color": "#006d57"
     },
     {
       "id": "5post",

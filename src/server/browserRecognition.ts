@@ -9,10 +9,10 @@ import { requireRoyalBrowser, usesRoyalBrowser } from './royalBrowserAdmission';
 export const BROWSER_RECOGNITION_BUDGET_MS = 20_000;
 /**
  * Carriers whose browser read needs longer: Onlog's guest verification, ZTO's, whose reads through the browser
- * service take 15–18 s, and Speedy's tracker page, which needs 10 s of the service's time to pass its Turnstile
- * check after the 15 s the adapter keeps for the transport.
+ * service take 15–18 s, and Speedy's and DPD Romania's tracker pages, which need 10 s of the service's time to pass
+ * their Turnstile check after the 15 s the adapter keeps for the transport.
  */
-const LONGER_BROWSER_RECOGNITION_MS = new Map([['onlog-express', 40_000], ['zto', 40_000], ['speedy', 40_000]]);
+const LONGER_BROWSER_RECOGNITION_MS = new Map([['onlog-express', 40_000], ['zto', 40_000], ['speedy', 40_000], ['dpd-ro', 40_000]]);
 /** Shared work and saved-parcel callers allow these carriers' verification time to finish. */
 export function browserRecognitionWorkBudget(carrier: string): number {
   return LONGER_BROWSER_RECOGNITION_MS.get(carrier) ?? BROWSER_RECOGNITION_BUDGET_MS;

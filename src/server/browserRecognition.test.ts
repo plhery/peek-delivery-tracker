@@ -142,7 +142,7 @@ it('gives scheduled Onlog, ZTO and Speedy recognition 40 seconds while other car
   expect(browser.browserRecognitionWorkBudget('onlog-express')).toBe(40_000);
   expect(browser.browserRecognitionWorkBudget('zto')).toBe(40_000);
   expect(browser.browserRecognitionWorkBudget('speedy')).toBe(40_000);
-  expect(browser.browserRecognitionWorkBudget('dpd-ro')).toBe(20_000);
+  expect(browser.browserRecognitionWorkBudget('dpd-ro')).toBe(40_000);
   expect(browser.browserRecognitionWorkBudget('zto-international')).toBe(20_000);
   expect(browser.browserRecognitionWorkBudget('constructor')).toBe(20_000);
   expect(browser.browserRecognitionWorkBudget('royal-mail')).toBe(20_000);

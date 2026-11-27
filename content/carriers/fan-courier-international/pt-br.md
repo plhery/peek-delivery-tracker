@@ -1,6 +1,6 @@
 ---
 title: Rastreamento FAN Courier International: AWB e status
-description: Rastreie encomendas da FAN Courier International na Europa: formato do código AWB, status em fancourier.eu, armários, entregas perdidas, reclamações e contato.
+description: Rastreie encomendas da FAN Courier International na Europa: formato do código AWB, status em fancourier.eu, armários, entregas não realizadas, reclamações e contato.
 slug: fan-courier-international-tracking
 published: 2026-11-26
 updated: 2026-11-26
@@ -42,7 +42,7 @@ O rastreador de fancourier.eu apresenta cada etapa em uma frase curta em inglês
 
 As duas linhas de criação e "ready to be picked up" significam a mesma coisa para você: a encomenda continua com a loja. Se o status não mudar por vários dias, pergunte à loja quando ela entregará o pacote à transportadora. Veja mais em [o que significam os status de rastreamento](guide:tracking-statuses).
 
-## Entrega, armários e tentativas sem sucesso
+## Entrega, armários e entregas não realizadas
 
 A FAN Courier International lista em sua tabela de tarifas os países atendidos: Romênia, Bulgária, Grécia, Hungria, Tchéquia, Eslováquia, Eslovênia, Itália, Croácia, Lituânia, Letônia, Estônia, Moldávia, Chipre, Polônia, Áustria, Alemanha, Países Baixos, Bélgica, França, Suécia, Dinamarca, Luxemburgo, Espanha, Irlanda, Finlândia e Portugal. O site também divulga filiais internacionais próprias na Romênia (incluindo um hub internacional em Arad), Moldávia, Bulgária, Hungria, Eslovênia, Grécia, Tchéquia, Eslováquia, Croácia, Polônia, Áustria e Alemanha.
 
@@ -68,7 +68,7 @@ A FAN Courier International promete entrega em até 12 dias úteis na UE e no EE
 
 **Danificada.** Guarde a caixa, a embalagem e o item danificado e tire fotos: a FAN exige esse tipo de comprovação na reclamação, junto com uma cópia do AWB.
 
-**Reclamações** podem ser abertas pelo remetente ou pelo destinatário em até 6 meses a contar da data de postagem. Envie por e-mail para customer@fancourier.eu ou pelos correios (de preferência com aviso de recebimento) para FAN Courier International, Strada Linia de Centura nr. 66, Ștefăneștii de Jos, Ilfov, Romênia. Descreva o ocorrido e anexe o AWB e eventuais fotos. A FAN deve responder em até 3 meses e paga a indenização ao remetente em até 30 dias após aprová-la. Caso não fique satisfeito, você pode reclamar ao regulador postal ou recorrer à Justiça dentro de um ano da postagem. Se a encomenda voltou à loja, veja [devolvida ao remetente](guide:returned-to-sender).
+**Reclamações** podem ser abertas pelo remetente ou pelo destinatário em até 6 meses a contar da data de postagem. Envie por e-mail para customer@fancourier.eu ou pelos correios (de preferência com aviso de recebimento) para FAN Courier International, Strada Linia de Centura nr. 66, Ștefăneștii de Jos, Ilfov, Romênia. Descreva o ocorrido e anexe o AWB e eventuais fotos. A FAN deve resolver a reclamação em até 3 meses e paga a indenização ao remetente em até 30 dias após aprová-la. Caso não fique satisfeito, você pode reclamar ao regulador postal ou recorrer à Justiça dentro de um ano da postagem. Se a encomenda voltou à loja, veja [devolvida ao remetente](guide:returned-to-sender).
 
 ## Contato da FAN Courier International
 
@@ -82,15 +82,15 @@ O site fancourier.eu divulga e-mail e formulário, sem número de telefone. Para
 
 ## Acompanhe uma encomenda da FAN Courier International com o Peek
 
-Cole o AWB na caixa acima. Um número com 16 dígitos, `F` e 4 dígitos corresponde exclusivamente à FAN Courier International, então o [Peek](/) a consulta enquanto você adiciona o pacote: a linha da transportadora exibe "consultando FAN Courier International…" e depois "FAN Courier International está com esta encomenda." assim que a FAN reconhece o número. Um AWB recém-emitido pode exibir "ainda não encontrada · o Peek continua verificando", e o Peek segue consultando após adicioná-lo. Para escolher manualmente, toque em "Alterar": FAN Courier International aparece em "Compatível com este código", e a busca também a encontra como "FAN Courier (EU)".
+Cole o AWB na caixa acima. Um número com 16 dígitos, `F` e 4 dígitos corresponde exclusivamente à FAN Courier International, então o [Peek](/) a consulta enquanto você adiciona o pacote: a linha da transportadora exibe "consultando FAN Courier International…" e depois "FAN Courier International está com esta encomenda." assim que a FAN reconhece o número. Um AWB recém-emitido pode exibir "ainda não encontrada · o Peek continua verificando", e o Peek segue consultando após adicioná-lo. Para escolher a transportadora você mesmo, toque em "Trocar": FAN Courier International aparece em "Compatível com este código", e a busca também a encontra como "FAN Courier (EU)".
 
-Um AWB de 13 dígitos pertence à FAN Courier: o Peek consulta a [FAN Courier](carrier:fan-courier) junto com outras transportadoras de formato semelhante, nunca a FAN Courier International. Se você escolher FAN Courier International manualmente para esse código, a linha avisa que ela "não emite códigos com esse formato" e o Peek não envia consulta. Links copiados de fancourier.eu não trazem número legível pelo Peek; cole o próprio AWB.
+Um AWB de 13 dígitos pertence à FAN Courier: o Peek consulta a [FAN Courier](carrier:fan-courier) junto com outras transportadoras de formato semelhante, nunca a FAN Courier International. Se mesmo assim você escolher a FAN Courier International para esse código, a linha da transportadora diz que ela "não emite códigos como este" e o Peek não envia consulta. Links copiados de fancourier.eu não trazem número legível pelo Peek; cole o próprio AWB.
 
 O Peek mostra cada etapa com a redação em inglês da FAN, o hub informado e o horário no fuso do seu dispositivo; em peektracker.com e nos apps para iPhone e Android, o histórico termina com "Horários no seu fuso horário:" seguido do nome do fuso. Enquanto a encomenda estiver aberta no Peek, ou no dia da entrega com notificações ligadas, o app consulta até a cada 10 minutos; no dia em que sair para entrega, a partir das 6h no horário da Romênia, verifica a cada 2 minutos enquanto o rastreador da FAN responder. Fora isso, consulta de hora em hora. Após 12 horas apenas em "Etiqueta criada" ou "Recebida pela transportadora", ou dois dias sem novidade, verifica a cada hora de qualquer forma, e a cada 6 horas depois de sete dias em "Etiqueta criada". Se o rastreador da FAN não responder e o Peek recorrer a serviços de rastreamento, consulta de hora em hora, a cada 3 horas após um dia sem nova leitura e até a cada 15 minutos no dia da saída para entrega enquanto o pacote estiver aberto ou com notificações ativas.
 
-Quando a leitura mais recente tem quatro dias e o pacote permanece em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek marca o dia daquela movimentação, como "Sem atualização desde seg 12 out". A página passa a dizer: "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando FAN Courier International.", com um link "Pedir ajuda a FAN Courier International" para a página de contato da FAN. Depois de três semanas sem nova leitura, exibe: "Nenhuma novidade há mais de três semanas. Se ainda não chegou, fale com o vendedor. O Peek continua consultando FAN Courier International."
+Quando a leitura mais recente tem quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza a data dessa leitura, como "Sem atualizações desde seg 12 out". A página do pacote então exibe "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando FAN Courier International.", com o link "Pedir ajuda a FAN Courier International" para a página de contato da FAN. Após três semanas sem novas leituras, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando FAN Courier International."
 
-O Peek pode notificar sobre "Todas as movimentações", "Etapas importantes" ou "Somente entrega".
+O Peek pode notificar sobre "Cada movimentação", "Etapas importantes" ou "Só a entrega".
 
 O Peek não exibe dia estimado de entrega nem nome do armário, e omite nomes de remetente e destinatário e o peso do pacote. Ele também não captura um novo código de devolução no rastreador da FAN: se a encomenda retornar sob outro número, adicione esse novo código para acompanhá-la. O Peek não pode contatar a FAN nem a loja por você.
 

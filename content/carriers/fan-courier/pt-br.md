@@ -99,7 +99,7 @@ Como qualquer pacote da FAN: com o AWB no rastreador ou aplicativo da FAN, ou pe
 
 ### A FAN Courier faz envios internacionais?
 
-Sim: a FAN oferece transporte rodoviário para a maioria dos países da UE e aéreo para todo o mundo, além de unidades na Moldávia. Suas condições preveem até 12 dias úteis dentro da UE e do EEE e 14 dias úteis nos demais países. Um AWB com 16 dígitos, a letra `F` e 4 dígitos pertence à FAN Courier International, o serviço internacional da FAN para lojas online, rastreado em fancourier.eu. Se o remetente aparecer como MEEST, o pacote provavelmente vem da China, informa a FAN: a Meest é uma empresa de logística que opera envios principalmente vindos da China.
+Sim: a FAN oferece transporte rodoviário para a maioria dos países da UE e aéreo para todo o mundo, além de unidades na Moldávia. Suas condições preveem até 12 dias úteis dentro da UE e do EEE e 14 dias úteis nos demais países. Um AWB com 16 dígitos, a letra `F` e 4 dígitos pertence à [FAN Courier International](carrier:fan-courier-international), o serviço internacional da FAN para lojas online, rastreado em fancourier.eu. Se o remetente aparecer como MEEST, o pacote provavelmente vem da China, informa a FAN: a Meest é uma empresa de logística que opera envios principalmente vindos da China.
 
 ### A FAN Courier entrega aos sábados?
 

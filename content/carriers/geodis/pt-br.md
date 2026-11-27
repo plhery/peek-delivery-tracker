@@ -54,7 +54,7 @@ Faixa horária mais curta ou entrega no andar só são possíveis se o remetente
 
 Na manhã da entrega, caso o remetente tenha ativado as notificações, a GEODIS envia SMS ou e-mail com o horário estimado de chegada do motorista. Endereço ou telefone errado? Envie os dados corretos pelo formulário de contato ou peça à loja que repasse a correção.
 
-Após uma tentativa de entrega sem sucesso, a GEODIS mantém a encomenda na agência local por 8 dias corridos; se você não entrar em contato, ela retorna ao remetente. A empresa não publica um limite fixo de tentativas.
+Após uma entrega não realizada, a GEODIS mantém a encomenda na agência local por 8 dias corridos; se você não entrar em contato, ela retorna ao remetente. A empresa não publica um limite fixo de tentativas.
 
 ## Encomenda da GEODIS atrasada, danificada ou não entregue
 
@@ -70,7 +70,7 @@ Após uma tentativa de entrega sem sucesso, a GEODIS mantém a encomenda na agê
 
 ## Contato e atendimento ao cliente da GEODIS
 
-Canais da GEODIS para destinatários na França publicados no site oficial:
+Canais da GEODIS para destinatários na França, conforme consultados em 12 de outubro de 2026:
 
 - **Espaço do destinatário:** a própria página de rastreamento, com menu de ajuda.
 - **Formulário de contato** em [geodis.com](https://geodis.com/contact-us): selecione "recipient" e informe o código de rastreamento. A GEODIS afirma que o atendimento mais próximo do endereço de entrega responde em até 12 horas úteis.

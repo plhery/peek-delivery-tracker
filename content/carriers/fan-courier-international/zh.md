@@ -1,6 +1,6 @@
 ---
 title: FAN Courier International 追踪：AWB 单号、状态与欧洲派送
-description: 追踪 FAN Courier International 跨境包裹：21 位 AWB 单号、fancourier.eu 状态含义、自提柜保管、清关与理赔及联系渠道。
+description: 追踪 FAN Courier International 跨境包裹：AWB 单号的样子、fancourier.eu 各状态的含义、自提柜、派送未成功、投诉以及联系方式。
 slug: fan-courier-international-tracking
 published: 2026-11-26
 updated: 2026-11-26
@@ -10,7 +10,7 @@ FAN Courier International 是罗马尼亚快递公司 FAN Courier 推出的跨�
 
 ## FAN Courier International AWB 运单号格式
 
-与罗马尼亚国内的 FAN Courier 一样，FAN Courier International 也将运单号称为 AWB（航空运单号）。其官网追踪系统接受的单号为 21 位字符：16 位数字、大写字母 `F`，再加 4 位数字。
+与罗马尼亚国内的 FAN Courier 一样，FAN Courier International 也将运单号称为 AWB（航空运单号）。其追踪系统接受的单号为 21 位字符：16 位数字、大写字母 `F`，再加 4 位数字。
 
 | 单号（虚构） | 含义 |
 | --- | --- |
@@ -42,7 +42,7 @@ fancourier.eu 追踪器用简短的英文句子描述每一步进度。以下是
 
 两条“已创建”状态和“ready to be picked up”对你而言含义一致：包裹仍在商家手中。如果连续多日停留于此，请问问商家何时交寄包裹。更多说明见[物流追踪状态指南](guide:tracking-statuses)（英文）。
 
-## 派送方式、自提柜与错过派送
+## 派送方式、自提柜与派送未成功
 
 FAN Courier International 在价目表中列出的通达国家包括：罗马尼亚、保加利亚、希腊、匈牙利、捷克、斯洛伐克、斯洛文尼亚、意大利、克罗地亚、立陶宛、拉脱维亚、爱沙尼亚、摩尔多瓦、塞浦路斯、波兰、奥地利、德国、荷兰、比利时、法国、瑞典、丹麦、卢森堡、西班牙、爱尔兰、芬兰和葡萄牙。其网站同时列出了自有国际网点，分布在罗马尼亚（含阿拉德国际枢纽）、摩尔多瓦、保加利亚、匈牙利、斯洛文尼亚、希腊、捷克、斯洛伐克、克罗地亚、波兰、奥地利和德国。
 
@@ -68,11 +68,11 @@ FAN Courier International 承诺欧盟和欧洲经济区内最长 12 个工作�
 
 **破损：** 请保留外箱、内包装及受损物品并拍照：FAN 要求投诉时提交此类证据以及 AWB 副本。
 
-**投诉与索赔：** 寄件人或收件人均可在寄出之日起 6 个月内提出投诉。可发邮件至 customer@fancourier.eu，或邮寄（建议挂号回执）至 FAN Courier International, Strada Linia de Centura nr. 66, Ștefăneștii de Jos, Ilfov, Romania，说明情况并附上 AWB 和相关照片。FAN 须在 3 个月内处理完毕，并在达成赔偿协议后 30 天内向寄件人支付赔款。若对结果不满，可在寄出之日起一年内向邮政监管机构投诉或提起诉讼。如包裹已退回商家，另见[包裹退回寄件人](guide:returned-to-sender)（英文）。
+**投诉：** 寄件人或收件人均可在寄出之日起 6 个月内提出投诉。可发邮件至 customer@fancourier.eu，或邮寄（建议挂号回执）至 FAN Courier International, Strada Linia de Centura nr. 66, Ștefăneștii de Jos, Ilfov, Romania，说明情况并附上 AWB 和相关照片。FAN 须在 3 个月内处理完毕，并在达成赔偿协议后 30 天内向寄件人支付赔款。若对结果不满，可在寄出之日起一年内向邮政监管机构投诉或提起诉讼。如包裹已退回商家，另见[包裹退回寄件人](guide:returned-to-sender)（英文）。
 
 ## FAN Courier International 联系方式
 
-fancourier.eu 公布的官方联系渠道：
+fancourier.eu 公布的 FAN Courier International 联系渠道：
 
 - **电子邮箱：** customer@fancourier.eu，用于货件咨询与投诉。
 - **在线表单：** 位于 [fancourier.eu/contact](https://fancourier.eu/contact)，提交时需填写 AWB 单号。
@@ -82,19 +82,19 @@ fancourier.eu 仅提供邮箱与在线表单，未公布客服电话。如果包
 
 ## 使用 Peek 追踪 FAN Courier International 包裹
 
-将 AWB 粘贴到上方输入框中。16 位数字加 `F` 再加 4 位数字的格式仅匹配 FAN Courier International，因此 [Peek](/) 会在添加时直接向其查询：承运商状态先显示“正在向 FAN Courier International 查询…”，查到后变为“FAN Courier International 已承运此包裹。”刚生成的 AWB 可能会显示“尚未找到 · Peek 将继续查询”，添加后 Peek 仍会持续跟进。如需手动选择，点击“更改”即可在“符合这个单号”下看到 FAN Courier International，搜索“FAN Courier (EU)”也能找到。
+将 AWB 粘贴到上方输入框中。16 位数字加 `F` 再加 4 位数字的格式仅匹配 FAN Courier International，因此 [Peek](/) 会在添加时直接向其查询：承运商一行先显示“正在询问 FAN Courier International…”，FAN 查到这个单号后变为“FAN Courier International 有这个包裹的记录。”刚生成的 AWB 可能会显示“暂未找到 · Peek 会继续查询”，添加后 Peek 仍会继续查询。如需自行选择快递公司，点击“更换”即可在“符合这个单号”下看到 FAN Courier International，搜索“FAN Courier (EU)”也能找到。
 
-13 位 AWB 属于常规 FAN Courier 单号：Peek 会向 [FAN Courier](carrier:fan-courier) 以及其他格式相近的快递查询，绝不会发给 FAN Courier International。如果强行手动指定 FAN Courier International，承运商一行会提示其“不签发这种格式的单号”，且 Peek 不会向它发起请求。从 fancourier.eu 复制的链接不含 Peek 可读取的单号，请直接粘贴 AWB 编号。
+13 位 AWB 属于常规 FAN Courier 单号：Peek 会向 [FAN Courier](carrier:fan-courier) 以及其他格式相近的快递查询，绝不会发给 FAN Courier International。如果你仍为这类单号选择 FAN Courier International，承运商一行会显示其“不使用这种格式的单号”，且 Peek 不会向它发起请求。从 fancourier.eu 复制的链接不含 Peek 可读取的单号，请直接粘贴 AWB 编号。
 
-Peek 会展示每条扫描的 FAN 英文原文、所标枢纽名称及时间（换算为你的设备时区）；在 peektracker.com 以及 iPhone 和 Android 应用中，轨迹末尾会注明“时间已按你的时区显示：”及具体时区名称。在 FAN 官网追踪器正常响应期间，当你打开包裹页面或在派送当天开启通知时，Peek 最高每 10 分钟检查一次；进入派送中当天从罗马尼亚时间 6:00 起每 2 分钟检查一次。其余时间每小时检查一次。若停留在“已建单”或“快递公司已揽收”满 12 小时，或连续两天无新动态，则无论你如何关注都改为每小时检查一次；停留在“已建单”满七天后改为每 6 小时一次。若 FAN 追踪器无响应而 Peek 改由追踪服务跟进，则每小时检查一次，静默一天后每 3 小时一次，派送中当天在打开页面或开启通知时最高每 15 分钟检查一次。
+Peek 会展示每条扫描的 FAN 英文原文、所标枢纽名称及时间（换算为你的设备时区）；在 peektracker.com 以及 iPhone 和 Android 应用中，轨迹末尾会注明“时间按你所在的时区显示：”及具体时区名称。当你在 Peek 中打开包裹页面，或在派送当天开启通知时，Peek 最多每 10 分钟检查一次；包裹派送当天从罗马尼亚时间 6:00 起，只要 FAN 的追踪器有响应，每 2 分钟检查一次。其余时间每小时检查一次。若停留在“已生成面单”或“已揽收”满 12 小时，或连续两天无新动态，则无论你如何关注都改为每小时检查一次；停留在“已生成面单”满七天后改为每 6 小时一次。若 FAN 追踪器无响应而 Peek 改由追踪服务跟进，则每小时检查一次，静默一天后每 3 小时一次，派送中当天在打开页面或开启通知时最高每 15 分钟检查一次。
 
-若最新扫描已满四天且包裹仍停留在“已建单”、“快递公司已揽收”或“运输中”，Peek 会标出该扫描的日期（例如“自 10月12日 周一 起无物流更新”）。包裹页面随后会显示：“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 FAN Courier International 查询。”并附带指向 FAN 联系页的“向 FAN Courier International 求助”链接。若超过三周仍无新扫描，则会显示：“已经三周多没有新动态。如果包裹仍未送达，请联系卖家。Peek 会持续向 FAN Courier International 查询。”
+当最新扫描距今已满四天，且包裹仍处于“已生成面单”、“已揽收”或“运输中”时，Peek 会用该次扫描的日期加以标记，例如“自10月12日周一起没有物流更新”。包裹页面随后会显示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 FAN Courier International 查询。”，并附上指向 FAN 联系页面的“向 FAN Courier International 寻求帮助”链接。如果三周没有新扫描，页面会显示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 FAN Courier International 查询。”
 
-Peek 支持按“每次扫描”、“重要节点”或“仅送达”向你发送通知。
+Peek 可以按“每次扫描”、“重要环节”或“仅派送当天”向你发送通知。
 
-Peek 不展示预计送达日与自提柜名称，也不显示寄件人/收件人姓名及包裹重量。它不会自动抓取 FAN 追踪器上的退件新单号：若包裹换号退回，请将新单号添加到 Peek 继续追踪。Peek 无法代你联系 FAN 或商家。
+Peek 不展示预计送达日与自提柜名称，也不显示寄件人/收件人姓名及包裹重量。它不会读取 FAN 追踪器上的退件新单号：若包裹换号退回，请将新单号添加到 Peek 继续追踪。Peek 无法代你联系 FAN 或商家。
 
-## FAN Courier International 追踪常见问题
+## 关于 FAN Courier International 物流查询的问题
 
 ### 为什么 fancourier.eu 查不到我的 AWB？
 
@@ -106,7 +106,7 @@ FAN 尚未扫描包裹：其常见问题指出，只有在派送员从寄件人�
 
 ### FAN Courier International 和 FAN Courier 是同一家吗？
 
-它是 FAN Courier 的跨境服务，由 FAN Courier International S.R.L. 运营，拥有独立官网、追踪系统和 AWB 格式。其 AWB 为 16 位数字加 `F` 再加 4 位数字，在 fancourier.eu 查询；13 位纯数字 AWB 属于 [FAN Courier](carrier:fan-courier)，在 fancourier.ro 查询。
+它是 FAN Courier 的跨境服务，由 FAN Courier International S.R.L. 运营，拥有独立的网站、追踪系统和 AWB。其 AWB 为 16 位数字加 `F` 再加 4 位数字，在 fancourier.eu 查询；13 位纯数字 AWB 属于 [FAN Courier](carrier:fan-courier)，在 fancourier.ro 查询。
 
 ### FAN Courier International 派送需要多久？
 

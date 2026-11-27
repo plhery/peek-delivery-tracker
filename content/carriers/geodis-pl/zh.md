@@ -19,7 +19,7 @@ GEODIS 仅面向企业客户承接发货，因此运单号掌握在寄件方（�
 | 单号（虚构） | 说明 |
 | --- | --- |
 | `PL4829105736491827` | `PL` 加 16 位数字：GEODIS Poland 运单号，其查询页称为“Shipment No.”。 |
-| `1G4829105736` | `1G` 加 10 位大写字母或数字：属于法国 GEODIS，需在 GEODIS 法国收件人入口而非 Strefa Klienta 查询。 |
+| `1G4829105736` | `1G` 加 10 位大写字母或数字：属于法国 [GEODIS](carrier:geodis)，需在 GEODIS 法国收件人入口而非 Strefa Klienta 查询。 |
 
 在 Strefa Klienta 页面中，将单号输入“Enter Shipment No.”框后点击“Search”。如果系统回复 `Shipment with such number does not exist`，说明查无此号：按 GEODIS 建议请联系商家或寄件人。若出现波兰语提示 `Proszę wprowadzić właściwy numer przesyłki.`，表示需要输入有效的货件编号，请检查是否输错。
 

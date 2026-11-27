@@ -19,7 +19,7 @@ A GEODIS atende apenas empresas, portanto o número fica com quem enviou a merca
 | Código (inventado) | O que é |
 | --- | --- |
 | `PL4829105736491827` | `PL` e 16 dígitos: código de remessa da GEODIS Poland, chamado de "Shipment No." no rastreador. |
-| `1G4829105736` | `1G` e 10 letras maiúsculas ou dígitos: código da GEODIS na França, acompanhado na área francesa de destinatários, não na Strefa Klienta. |
+| `1G4829105736` | `1G` e 10 letras maiúsculas ou dígitos: código da [GEODIS](carrier:geodis) na França, acompanhado na área francesa de destinatários, não na Strefa Klienta. |
 
 Na Strefa Klienta, digite o código em "Enter Shipment No." e clique em "Search". Se responder `Shipment with such number does not exist`, o sistema não reconhece o número: fale com a loja ou remetente, como a GEODIS orienta quando um código não funciona. A mensagem em polonês `Proszę wprowadzić właściwy numer przesyłki.` pede um número válido: verifique se há erro de digitação.
 

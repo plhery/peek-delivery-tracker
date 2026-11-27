@@ -99,7 +99,7 @@ Peek 不显示预计送达日和 FANbox 柜点名称，也不展示收件人姓�
 
 ### FAN Courier 做国际快递吗？
 
-是的：FAN 提供覆盖大多数欧盟国家的陆运以及通达全球的空运，并在摩尔多瓦设有办事处。其条款规定欧盟和欧洲经济区内最长 12 个工作日，其他地区最长 14 个工作日。由 16 位数字、字母 `F` 和 4 位数字组成的 AWB 属于 FAN 面向电商卖家的跨境服务 FAN Courier International，在 fancourier.eu 查询。FAN 还说明，如果寄件人显示为 MEEST，包裹大概率来自中国——Meest 是一家主要承运中国货件的物流公司。
+是的：FAN 提供覆盖大多数欧盟国家的陆运以及通达全球的空运，并在摩尔多瓦设有办事处。其条款规定欧盟和欧洲经济区内最长 12 个工作日，其他地区最长 14 个工作日。由 16 位数字、字母 `F` 和 4 位数字组成的 AWB 属于 FAN 面向电商卖家的跨境服务 [FAN Courier International](carrier:fan-courier-international)，在 fancourier.eu 查询。FAN 还说明，如果寄件人显示为 MEEST，包裹大概率来自中国——Meest 是一家主要承运中国货件的物流公司。
 
 ### FAN Courier 周六派送吗？
 

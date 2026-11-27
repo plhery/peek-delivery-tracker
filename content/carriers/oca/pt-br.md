@@ -45,9 +45,9 @@ O serviço de rastreamento e-Pak da OCA informa os eventos em espanhol e costuma
 A [Central de Ajuda da OCA](https://www.oca.com.ar/CentroDeAyuda) define regras claras para entregas em toda a Argentina:
 
 - **Duas tentativas em domicílio:** a OCA realiza duas visitas sem agendamento de segunda a sábado, das 09:00 às 18:00. Qualquer pessoa com 18 anos ou mais no endereço pode receber apresentando o DNI (documento de identidade nacional). Dias chuvosos podem limitar as rotas.
-- **Retirada em agência (5 dias úteis):** se ambas as visitas falharem, a encomenda aguarda por **5 dias úteis** na agência Punto OCA designada (encontre unidades no [Buscador de Puntos OCA](https://www.oca.com.ar/Busquedas/Sucursales)). O destinatário deve levar o DNI e o código de rastreamento; um terceiro autorizado maior de 18 anos precisa levar cópia do DNI do destinatário, autorização escrita à mão e o número de rastreamento. Encomendas não retiradas retornam ao remetente.
+- **Retirada em agência (5 dias úteis):** se a entrega não for realizada nas duas visitas, a encomenda aguarda por **5 dias úteis** na agência Punto OCA designada (encontre unidades no [Buscador de Puntos OCA](https://www.oca.com.ar/Busquedas/Sucursales)). O destinatário deve levar o DNI e o código de rastreamento; um terceiro autorizado maior de 18 anos precisa levar cópia do DNI do destinatário, autorização escrita à mão e o número de rastreamento. Encomendas não retiradas retornam ao remetente.
 - **SmartLockers (48 horas + prorrogação opcional):** quando a OCA deposita o pacote em um SmartLocker, você recebe e-mail e/ou SMS com código QR e PIN alfanumérico. Você tem **48 horas corridas** para retirar; após lembretes de aviso, a OCA envia um link de pagamento com cartão que permite comprar até **3 dias extras** de guarda antes da devolução ao remetente.
-- **Endereço incorreto ou devolução:** a OCA não permite interromper o envio nem alterar o endereço em trânsito. Aguarde a conclusão das visitas para retirar na agência (ou aguarde o retorno ao remetente para solicitar novo envio). Para mais orientações após ausência, veja o [guia de entregas perdidas](guide:missed-delivery).
+- **Endereço incorreto ou devolução:** a OCA não permite interromper o envio nem alterar o endereço em trânsito. Aguarde a conclusão das visitas para retirar na agência (ou aguarde o retorno ao remetente para solicitar novo envio). Para mais orientações após ausência, veja o [guia de entrega não realizada](guide:missed-delivery).
 - **Itens especiais (DNI, passaportes, cartões OCA Geo, envelopes):** entregas de DNI vão apenas ao endereço residencial (exigindo o comprovante do RENAPER) e não podem ser retiradas em agência; passaportes seguem para agência após duas visitas; cartões OCA Geo exigem entrega direta ao titular; envelopes selados têm duas visitas e retornam ao remetente se não entregues, sem guarda em agência.
 - **48 horas úteis para a primeira leitura:** a OCA informa que envios recém-postados podem levar até **48 horas úteis** após a postagem para aparecer online. Se nada aparecer após 48 horas úteis, apenas o remetente pode abrir verificação. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating) para checagens gerais.
 
@@ -55,7 +55,7 @@ Para outras transportadoras domésticas da Argentina, compare com a [Andreani](c
 
 ## Rastreando a OCA com o Peek
 
-Cole no [Peek](/) o número OCA de 19 dígitos sem o `-1` ou um link `oca.com.ar/Seguimiento/Paquetes/...`. Se o Peek não selecionar a OCA automaticamente, escolha OCA em **Alterar** ao adicionar ou **Alterar transportadora** na página do pacote.
+Cole no [Peek](/) o número OCA de 19 dígitos sem o `-1` ou um link `oca.com.ar/Seguimiento/Paquetes/...`. Se o Peek não selecionar a OCA, escolha OCA em **Trocar** ao adicionar ou **Trocar transportadora** na página do pacote.
 
 O Peek lê diretamente o serviço web e-Pak `Tracking_Pieza` da OCA por meio do [adaptador open-source OCA do universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/oca). Cada data e hora argentina é gravada como instante exato em `America/Argentina/Buenos_Aires` (`-03:00`), o nome da agência é extraído de forma limpa para o campo de local e registros administrativos `Acuse digitalizado` nunca sobrescrevem nem alteram uma entrega concluída. O feed e-Pak da OCA não informa data prevista de entrega nem peso do pacote.
 
@@ -63,16 +63,16 @@ O Peek mapeia os eventos da OCA em etapas claras: **Etiqueta criada** (`En proce
 
 Enquanto você mantém a encomenda aberta no Peek, ou no dia da entrega com notificações ativadas, o Peek verifica até a cada 10 minutos; no dia em que a OCA mostra `Programado para visita a domicilio` ou `Visita a Domicilio en Curso`, a cada 2 minutos a partir das 6h (horário argentino), enquanto o rastreador da OCA responder. Nos demais casos, consulta de hora em hora. Após 12 horas apenas em "Etiqueta criada" ou "Recebida pela transportadora", ou dois dias sem novidades, consulta de hora em hora em qualquer modo, e a cada 6 horas após sete dias em "Etiqueta criada". Quando a OCA não responde e o Peek acompanha apenas por serviços de rastreamento, consulta de hora em hora, a cada 3 horas após um dia sem movimento e até a cada 15 minutos no dia de saída para entrega.
 
-Quando a leitura mais recente tem quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza a data dessa leitura, como "Sem atualização de rastreamento desde seg 12 out". A página do pacote então exibe "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando OCA.", com o link "Obter ajuda da OCA" para a Central de Ajuda oficial. Após três semanas sem novas leituras, mostra "Nenhuma novidade há mais de três semanas. Se ainda não chegou, fale com o vendedor. O Peek continua consultando OCA."
+Quando a leitura mais recente tem quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza a data dessa leitura, como "Sem atualizações desde seg 12 out". A página do pacote então exibe "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando OCA.", com o link "Pedir ajuda a OCA" para a Central de Ajuda da OCA. Após três semanas sem novas leituras, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando OCA."
 
-Escolha **Cada leitura**, **Etapas importantes** ou **Apenas entrega** nas configurações de alertas do Peek.
+Escolha **Cada movimentação**, **Etapas importantes** ou **Só a entrega** nas configurações de alertas do Peek para decidir quais atualizações geram notificações.
 
 ## Como contatar a OCA
 
 - **Central de Ajuda e formulário online:** [OCA Centro de Ayuda](https://www.oca.com.ar/CentroDeAyuda) (inclui categorias de FAQ e o formulário de mensagem direta no rodapé da página)
 - **Consulta oficial de rastreamento:** [OCA Búsqueda de envío](https://www.oca.com.ar/Busquedas/Envios)
 - **Localizador de agências:** [Buscador de Puntos OCA](https://www.oca.com.ar/Busquedas/Sucursales)
-- **Site oficial:** [oca.com.ar](https://www.oca.com.ar/)
+- **Site principal:** [oca.com.ar](https://www.oca.com.ar/)
 - **Remetente primeiro para códigos ausentes ou reenvios:** a OCA afirma que somente o remetente tem autorização para investigar um envio sem registros após 48 horas úteis da postagem ou para solicitar novo envio após devolução.
 
 ## Perguntas frequentes
@@ -83,7 +83,7 @@ A Central de Ajuda da OCA orienta omitir o `-1` separado e consultar usando apen
 
 ### Por quanto tempo a OCA guarda uma encomenda na agência ou no SmartLocker?
 
-A OCA guarda encomendas nas agências Puntos OCA por **5 dias úteis** após tentativas sem sucesso ou chegada na unidade. Nos SmartLockers, você tem **48 horas corridas** gratuitas, com opção de pagar online por até **3 dias adicionais** antes da devolução ao remetente.
+A OCA guarda encomendas nas agências Puntos OCA por **5 dias úteis** após entregas não realizadas ou chegada na unidade. Nos SmartLockers, você tem **48 horas corridas** gratuitas, com opção de pagar online por até **3 dias adicionais** antes da devolução ao remetente.
 
 ### Posso mudar o endereço de entrega depois que a OCA coleta minha encomenda?
 

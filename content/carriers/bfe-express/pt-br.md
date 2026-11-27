@@ -51,7 +51,7 @@ O site da BFE Express oferece envio de encomendas, frete internacional, desembar
 - **Dia previsto de entrega:** a BFE Express pode informar um dia previsto de entrega enquanto o pacote está a caminho, e o Peek exibe essa data. O Peek remove a previsão assim que a encomenda é entregue, devolvida ou fica pronta para retirada, ou quando surge uma leitura posterior àquela data.
 - **Marcada como entregue ou danificada:** a [página de Customer Support](https://www.bfeexpress.com/contactUS) da BFE Express trata ambos os casos no FAQ e recomenda ter o código de rastreamento em mãos ao contatar a equipe local. Veja também o [guia de entregue mas não recebida](guide:delivered-not-received).
 
-Para encomendas domésticas na Argentina entregues diretamente por transportadoras locais, compare com OCA e [Andreani](carrier:andreani).
+Para encomendas domésticas na Argentina entregues diretamente por transportadoras locais, compare com a [OCA](carrier:oca) e a [Andreani](carrier:andreani).
 
 ## Acompanhe a BFE Express com o Peek
 

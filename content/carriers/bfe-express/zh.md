@@ -51,7 +51,7 @@ BFE Express 官网提供小包运输、国际货运、清关、本地仓储及�
 - **预计派送日期：** 包裹在途期间，BFE Express 有时会给出预计派送日，Peek 会同步显示；一旦包裹签收、退回、待取件或出现晚于该日期的新扫描，Peek 会自动撤下该预计日期。
 - **显示已签收未收到或破损：** BFE Express 的[客户支持页面](https://www.bfeexpress.com/contactUS)在常见问题中列出了这两种情况，并提醒联系区域支持团队前先准备好完整运单号。另请参阅[显示已签收但未收到](guide:delivered-not-received)（英文）。
 
-如需对比由阿根廷本土快递直接承运的国内包裹，可参考 OCA 与 Andreani。
+如需对比由阿根廷本土快递直接承运的国内包裹，可参考 [OCA](carrier:oca) 与 [Andreani](carrier:andreani)。
 
 ## 使用 Peek 追踪 BFE Express 包裹
 

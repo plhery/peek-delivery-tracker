@@ -1,12 +1,12 @@
 ---
 title: Ciblex tracking: numbers, French statuses and contact
-description: Track a Ciblex Express parcel in France or Belgium: which barcode to use, what Ciblex's French statuses mean, deliveries, C Dispo relays, claims and contacts.
+description: Track a Ciblex Express parcel in France or Belgium: 14- and 24-digit barcodes, French status meanings, C Dispo relays, Relais Colis link, 60-day claims and phone.
 slug: ciblex-tracking
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Ciblex, or Ciblex Express, is a French express carrier founded in 1977 that delivers between businesses in France, Belgium and abroad, often early in the morning. Track a parcel with the barcode from its label on [Ciblex's tracking page](https://ciblex.eu/en/fast-tracking-of-your-parcels/), which is free, or paste the number in the box above. The number comes from the sender: if you don't have it, ask the shop or supplier that shipped the parcel.
+Ciblex Express (founded in 1977) is a French B2B express parcel carrier operating across France, Belgium and internationally, with early-morning H8/H9/H12 services and 300 C Dispo professional relays. Track a parcel using its 14- or 24-digit label barcode on [Ciblex's tracking page](https://ciblex.eu/en/fast-tracking-of-your-parcels/) or paste the number in the box above; private e-commerce orders are routed through Relais Colis.
 
 ## Ciblex tracking number: what it looks like and where to find it
 
@@ -85,21 +85,25 @@ There's no expected delivery date, no relay name or address and no weight, and y
 
 ## Questions about Ciblex tracking
 
-### What does Colis Contrôle mean on Ciblex tracking?
+### What do "COLIS NON REMIS" and "Colis Contrôle" mean on Ciblex tracking?
 
-It means the parcel was scanned at a Ciblex depot or agency, the town in the `Lieu` column. You'll usually see it several times on one trip.
+`COLIS NON REMIS` often appears first before a Ciblex depot scans the parcel; `Colis Contrôle` is a routine depot scan (not a customs check) showing the depot town in the `Lieu` column.
 
-### Does Ciblex deliver on Saturday?
+### Does Ciblex deliver on Saturdays or to private individuals?
 
-Yes, on request: Ciblex offers Saturday morning delivery to professionals, before 8 am, 9 am or noon.
+Ciblex offers optional Saturday morning delivery (before 8 am, 9 am or noon) for professional shippers. According to Ciblex's e-commerce page, deliveries to private individuals are handled through Relais Colis.
 
-### Is Ciblex the same as Relais Colis?
+### How do C Dispo relays and missed deliveries work?
 
-No, they are two carriers with their own tracking. Ciblex's own e-commerce page says that parcels for private customers go through Relais Colis, so check both if a shop named Ciblex.
+Ciblex operates 300 C Dispo relays for business recipients (SMS on arrival, reminder after 3 days, ID or company badge required). Missed or refused parcels return to the sender within 7 calendar days, and only the sender can issue new delivery instructions.
 
-### Does Ciblex deliver in Belgium?
+### What are Ciblex's claim deadlines for damage, loss or delay?
 
-Yes. Ciblex has an agency in Zaventem and depots in Belgium, including Schaerbeek, Charleroi and Namur, and says it ships to more than 166 countries.
+Under Ciblex's terms (effective 1 January 2026), note visible damage on the delivery document (confirming vague domestic reserves within 3 days, or 7 days for hidden international damage), file loss claims within 60 days of the expected delivery date, and report delay damage within 3 days in France (21 days internationally).
+
+### How do I contact Ciblex customer service?
+
+Start with the sender (Ciblex's online form is for business sales inquiries). Ciblex's legal notice lists 08 26 82 69 99 and ciblex@ciblex.fr.
 
 :::sources
 - [Ciblex: Fast tracking of your parcels](https://ciblex.eu/en/fast-tracking-of-your-parcels/) – barcode, free tracking, customer area, French results

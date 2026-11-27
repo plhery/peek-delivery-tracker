@@ -1,17 +1,17 @@
 ---
 title: Suivi de commande OTTO : transporteurs, livraison, retards
-description: Qui livre ta commande OTTO en Allemagne, si OTTO livre en France, en Belgique ou en Suisse, où trouver le numéro de suivi et que faire si rien n'arrive.
+description: Suivi de commande OTTO (otto.de) en français : livraison uniquement en Allemagne, Hermes ou DHL, statuts Mein Konto, OTTO UP, Promesse OTTO 48 h et retours.
 slug: suivi-commande-otto
 picture: Un grand carton d'armoire sur un diable pour deux porteurs, une camionnette façon Hermes et Pip qui tient la porte.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-27
 ---
 
-OTTO (otto.de) livre uniquement en Allemagne : pas en France, en Belgique, en Suisse ni au Luxembourg. Si tu vis en Allemagne, le suivi est dans « Mein Konto » (mon compte), sous « Bestellungen » (commandes) : chaque article a un lien « Sendungsverfolgung » (suivi d'envoi). Ce qu'OTTO vend lui-même arrive surtout par Hermes, parfois par DHL, et les gros meubles et appareils par « Spedition » (livraison par transporteur de fret). Les articles des autres vendeurs de la place de marché OTTO partent avec le transporteur du vendeur, sous leur propre numéro de suivi.
+OTTO (otto.de) livre uniquement en Allemagne — pas en France, en Belgique, en Suisse ni au Luxembourg. Si tu fais livrer en Allemagne, suis chaque colis dans « Mein Konto » → « Bestellungen » → « Sendungsverfolgung » : OTTO expédie ses propres articles surtout avec Hermes (ou DHL, et en fret à deux pour les meubles), avec livraison gratuite dès 59,95 € sous OTTO UP Basic ou illimitée avec UP Plus (9,90 €/an), et retours gratuits sous 30 jours.
 
 Le site et l'aide d'OTTO sont en allemand. Ce guide donne les libellés d'OTTO en allemand, avec leur traduction.
 
-## Quel transporteur livre ma commande OTTO ?
+## Qui livre une commande OTTO (Hermes, DHL, fret ou vendeur tiers) ?
 
 Ça dépend de qui vend l'article et de sa taille. Chaque article indique le nom du vendeur et le mode d'envoi : colis (« Paket ») ou fret (« Spedition »). Selon OTTO :
 
@@ -93,7 +93,7 @@ Un dimanche ou un jour férié entre la commande et la livraison peut ajouter un
 
 Quand attendre est encore normal : [pourquoi le suivi ne bouge plus](guide:tracking-not-updating).
 
-## Frais et options de livraison OTTO
+## Quels sont les frais de livraison OTTO (OTTO UP et Hermes PaketShop) ?
 
 Chez le vendeur OTTO, tu paies par commande et par adresse de livraison, quel que soit le montant. OTTO UP est le programme d'avantages d'OTTO :
 
@@ -132,7 +132,7 @@ OTTO précise que cette promesse est « keine Garantie » (pas une garantie) : s
 
 Si le colis est arrivé abîmé, garde l'emballage et le contenu, prends des photos et contacte le service client. Pour aller plus loin : [colis livré mais non reçu](guide:delivered-not-received), [colis perdu](guide:lost-parcel) et [colis endommagé](guide:damaged-parcel).
 
-## Commander sur OTTO depuis la France, la Belgique, la Suisse ou le Luxembourg
+## OTTO livre-t-il en France, en Belgique, en Suisse ou au Luxembourg ?
 
 OTTO ne livre pas chez toi. Il livre « ausschließlich innerhalb Deutschlands » (uniquement en Allemagne), à toutes les adresses sauf à Büsingen et sur l'île de Helgoland, et les articles d'autres vendeurs ne peuvent même pas être commandés depuis l'étranger. Il te faut donc une adresse de livraison en Allemagne. Par défaut, OTTO livre à ton adresse de facturation, mais tu peux en donner une autre. Si tu paies sur facture (« Kauf auf Rechnung »), ta première commande ne part qu'à l'adresse de facturation.
 

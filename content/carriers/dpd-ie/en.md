@@ -1,12 +1,12 @@
 ---
 title: DPD Ireland tracking: statuses, Pickup points and contact
-description: Track a DPD Ireland parcel: where the 9-digit number is, what each status means, how to change a delivery, Pickup points and how to reach DPD.
+description: Track a DPD Ireland parcel: 9-digit consignment numbers, Predict 1-hour windows, almost 600 Pickup points, 5-day customs payments (€3/€2) and Depot Finder.
 slug: dpd-ireland-tracking
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-DPD Ireland delivers parcels across the whole island of Ireland, North and South, from 38 depots and a head office in Athlone. To track a parcel, enter its number on [DPD Ireland's tracking page](https://www.dpd.ie/tracking/). The number is in the email DPD sends when it collects your parcel, and usually in the shop's shipping email too.
+DPD Ireland delivers next-day parcels across the island of Ireland from 38 depots and its Athlone head office, alongside almost 600 Pickup points. Track your parcel on [DPD Ireland's tracking page](https://www.dpd.ie/tracking/) or in the box above using the 9- or 10-digit consignment number from DPD's collection email or the shop's dispatch notice.
 
 ## Where is my DPD Ireland tracking number?
 
@@ -86,21 +86,25 @@ A 9- or 10-digit number fits DPD Ireland, and other carriers too. From Ireland, 
 
 ## Questions about DPD Ireland tracking
 
+### Why is my DPD Ireland tracking number not working?
+
+Enter only the 9 or 10 digits with no spaces—14-digit numbers belong to DPD UK or another DPD network. If tracking returns `We couldn't locate the consignment number.`, the parcel may not have reached a sorting hub yet or the number is over six months old.
+
+### How long does DPD Ireland take to deliver, and what is Predict?
+
+DPD Ireland offers next-day delivery across Ireland and next-day or two-day services to the UK. On delivery day, Predict sends a one-hour time slot by email or text with live van tracking and stop count.
+
+### How do DPD Ireland customs charges (€3 duty and €2 fee) work?
+
+For non-EU parcels (including Great Britain, excluding Northern Ireland), Revenue applies €3 customs duty per kind of product up to €150 (since 1 July 2026) and a €2 Union handling fee per kind of product (since 1 November 2026). If unpaid at checkout, DPD emails or texts a request from dpd.ie naming the sender and returns the parcel if unpaid after 5 working days.
+
+### What if my DPD Ireland parcel is late, missing or damaged?
+
+Under Ireland's CCPC rules, the shop is responsible for delivery (within 30 days if no date was agreed) and must claim from DPD—DPD Ireland's terms require the sender to notify loss or damage within 7 days and submit a claim within 21 days.
+
 ### Does DPD Ireland have a customer service phone number?
 
-No customer-service number is published on dpd.ie. Use the web form or the chatbot, or call the depot named in your tracking, whose number is in the Depot Finder.
-
-### Why is my DPD Ireland tracking not working?
-
-The tracker only takes digits, so enter the number without spaces. If it still can't find it, the parcel may not have reached DPD's sorting hub yet, or the number is more than six months old.
-
-### Are DPD Ireland text messages real?
-
-DPD Ireland does text you, on the delivery day and when customs charges are due. Fake payment messages exist too: a genuine customs request comes from a dpd.ie address and names the sender.
-
-### How long does DPD take to deliver in Ireland?
-
-It depends on the service the sender picked. DPD Ireland offers next-day delivery across the country, and next-day or two-day delivery to the UK.
+dpd.ie lists no central phone line: use the "Ask Our Team a Question" form or chatbot (Mon–Fri 8am–6pm, Sat 8am–10:30am Irish time), or look up the local depot's direct phone number in the Depot Finder.
 
 :::sources
 - [DPD Ireland: Track Parcels in Realtime](https://www.dpd.ie/track-my-parcel/) – parcel number, notifications, one-hour window, deliver anyway, address change, reschedule, Pickup points, chatbot

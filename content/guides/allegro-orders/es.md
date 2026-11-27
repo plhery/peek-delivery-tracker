@@ -1,13 +1,13 @@
 ---
 title: Seguimiento de pedidos de Allegro: transportistas y retrasos
-description: Quién entrega los pedidos de Allegro, si allegro.pl envía a España, dónde está el número de seguimiento y qué hacer si el paquete no llega o figura entregado.
+description: Seguimiento de pedidos en Allegro desde España: envío desde allegro.pl con DPD o DHL (3–4 días), dónde ver «Moje zakupy», devoluciones en 14 días y reclamación.
 slug: seguimiento-pedido-allegro
 picture: Un paquete en una taquilla One Box abierta, un móvil que muestra un pedido y Pip corriendo a recogerlo.
 published: 2026-10-17
-updated: 2026-10-28
+updated: 2026-11-27
 ---
 
-Allegro es un marketplace polaco: sus condiciones nombran allegro.pl, allegro.cz, allegro.sk y allegro.hu, y no hay ningún sitio para España. Los vendedores de allegro.pl pueden enviarte el pedido a España con Allegro Kurier DPD o Allegro Kurier DHL, si lo ofrecen en el anuncio. El número de seguimiento está en tu cuenta de Allegro, en «Moje przesyłki» (Mis envíos) y «Moje zakupy» (Mis compras), y en el correo que Allegro te envía cuando se añade el número.
+Allegro es el marketplace polaco (allegro.pl, allegro.cz, allegro.sk y allegro.hu): no tiene web en español, pero permite elegir idioma inglés y envío a España en «Lokalizacja» cuando el vendedor ofrece Allegro Kurier DPD (4 días laborables) o Allegro Kurier DHL (3–4 días laborables). El número de seguimiento está en tu cuenta bajo «Moje przesyłki» y «Moje zakupy», y en el correo que Allegro envía en cuanto se añade el número.
 
 ## ¿Qué transportista entrega mi pedido de Allegro?
 
@@ -79,7 +79,7 @@ La entrega es gratis en los anuncios con el distintivo Smart!, cuando el coste d
 
 También con Smart! el anuncio muestra la entrega prevista, por ejemplo «dostawa jutro» (entrega mañana) o «dostawa pojutrze» (entrega pasado mañana). Si el vendedor tarda más de 3 días en enviar, ves un intervalo de fechas, una fecha o un número de días. Con Allegro Delivery, Allegro One Punkt y Allegro One Box entregan al día siguiente. Smart! no sirve para los envíos al extranjero.
 
-## Paquete no recibido o marcado como entregado: qué hacer
+## ¿Qué hacer si un pedido de Allegro no llega o sale como entregado?
 
 Si hay un problema, avisas al vendedor con un «problem z zakupem» (problema con la compra). Si no se resuelve, Allegro te propone su protección al comprador, «Allegro Ochrona Kupujących». En orden:
 
@@ -97,7 +97,7 @@ Con Allegro Delivery también puedes reclamar la propia entrega, por ejemplo una
 
 Quién responde y qué pruebas guardar: [paquete entregado pero no recibido](guide:delivered-not-received) y [paquete perdido](guide:lost-parcel).
 
-## Comprar en Allegro desde España
+## ¿Envía Allegro a España con DHL o DPD, y cuánto tarda?
 
 Allegro tiene marketplaces para Polonia (allegro.pl), Chequia (allegro.cz), Eslovaquia (allegro.sk) y Hungría (allegro.hu). No hay versión española, pero puedes usar Allegro en inglés. En tu cuenta, en «Lokalizacja» (ubicación), eliges idioma, moneda y país de entrega. Con el país elegido solo ves las ofertas de vendedores que envían allí.
 
@@ -116,7 +116,7 @@ Qué cambia en España:
 
 El número de seguimiento está en «Moje zakupy», igual que en Polonia. Con él sigues el paquete también directamente en el transportista.
 
-## Devolver un pedido de Allegro
+## ¿Cómo devolver un pedido de Allegro (plazo de 14 días)?
 
 Con un vendedor profesional tienes al menos 14 días desde el día siguiente a la entrega para comunicarle que desistes, por ejemplo con el formulario «Zwróć zakup» (devolver la compra) en «Moje zakupy». Luego tienes otros 14 días para enviar el producto. La devolución es gratis con Smart!, en una devolución de consumidor con un código de devolución de Allegro Delivery y con Allegro Kurier24 y miniKurier24 InPost. Si compras a un particular, no tienes derecho de desistimiento. Dónde está el número de la devolución y cuándo llega el reembolso: [devolución](guide:returns-tracking).
 

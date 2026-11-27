@@ -1,15 +1,15 @@
 ---
 title: Encomendas Cdiscount: seguimento, entregas e problemas
-description: Se a Cdiscount entrega em Portugal, que transportadora leva a tua encomenda, onde vês o seguimento, quanto custa a entrega e o que fazer se não chega.
+description: Cdiscount entrega em Portugal? Como acompanhar «Mes commandes», custos de envio, Cdiscount à volonté (29 €/ano), reclamação em 30 dias e devolução em 14 dias.
 slug: seguimento-encomenda-cdiscount
 picture: Uma fila de cacifos de encomendas, uma pilha de caixas de todos os tamanhos e o Pip a espreitar de um cacifo aberto.
 published: 2026-10-17
-updated: 2026-10-28
+updated: 2026-11-27
 ---
 
-A Cdiscount vende online em cdiscount.com, um site em francês, e entrega em França continental e em mais nove países europeus, Portugal incluído. O seguimento está na tua conta de cliente, em «Mes commandes» (as minhas encomendas), e o e-mail de envio indica a transportadora. As encomendas da Cdiscount seguem com a Colissimo, a Chronopost, a DPD, a Mondial Relay ou a Relais Colis, ou com marcação se forem grandes. Os vendedores do Marketplace que enviam eles próprios usam a sua transportadora, com número de seguimento só se o envio for seguido.
+A Cdiscount (cdiscount.com, site em francês) entrega em França continental e em mais nove países europeus, incluindo Portugal, para produtos pequenos enviados pela própria Cdiscount. Acompanha a entrega na tua conta em «Mes commandes» → «Suivre ma livraison» e no e-mail de envio que indica a transportadora; tens 14 dias da UE para devolver e até 30 dias após a data prevista para sinalizar um pedido não recebido.
 
-## Onde vende e entrega a Cdiscount?
+## A Cdiscount entrega em Portugal, e o que muda nos pedidos do Marketplace?
 
 A Cdiscount tem um só site, cdiscount.com, em francês. Entrega em França continental, Córsega incluída, na Bélgica, Alemanha, Espanha, Itália, Luxemburgo, Países Baixos, Portugal, Irlanda e Áustria. Alguns produtos não saem de França: quando encomendas, a Cdiscount mostra-te os modos de entrega, os prazos e os preços para a tua morada.
 
@@ -47,7 +47,7 @@ No Marketplace vendem 10 000 vendedores. A tua encomenda diz quem envia:
 - home | Tu | Caixa do correio, assinatura ou marcação
 :::
 
-## Onde está o número de seguimento da Cdiscount?
+## Onde ver «Mes commandes» e o número de seguimento da Cdiscount?
 
 Em dois sítios:
 
@@ -91,7 +91,7 @@ Quando o seguimento não avança, costuma ser por uma destas razões:
 
 Se o atraso se prolonga, avisa na tua conta ou no apoio ao cliente, e a Cdiscount procura a causa. Passado o prazo, as regras da UE pedem-te que dês ao vendedor um prazo adicional razoável; se mesmo assim não entregar, podes cancelar a compra e ser reembolsado. Quando esperar ainda é normal: [o seguimento não atualiza](guide:tracking-not-updating).
 
-## Opções e custos de entrega da Cdiscount
+## Quanto custa a entrega na Cdiscount e como funciona a Cdiscount à volonté?
 
 Preços em França continental das encomendas que a Cdiscount envia, conforme o valor de cada volume:
 

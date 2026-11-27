@@ -1,15 +1,15 @@
 ---
 title: Suivi de retour : où est mon colis et mon remboursement ?
-description: Où trouver le numéro de suivi de ton retour chez Zalando, Shein et Vinted, pourquoi le suivi s'arrête à l'entrepôt et quand tu es remboursé.
+description: Suivi de retour colis (Zalando, Vinted, La Poste, Mondial Relay, bpost) : où trouver le numéro, pourquoi le suivi s'arrête à l'entrepôt et remboursement 14 j.
 slug: suivi-retour-colis
 picture: Un colis repart vers l'entrepôt d'une boutique, avec un reçu, et Pip lui fait au revoir de la main.
 published: 2026-10-17
-updated: 2026-10-27
+updated: 2026-11-27
 ---
 
-Ton retour a son propre numéro de suivi, différent de celui de ta commande. Il figure sur l'étiquette de retour ou sur la preuve de dépôt, et la boutique l'affiche dans ton compte. Elle te rembourse une fois que son centre de retours a reçu le colis et l'a contrôlé. En France et en Belgique, si tu te rétractes dans les 14 jours, la loi lui laisse 14 jours pour te rembourser. En France, elle peut attendre d'avoir le colis ou ta preuve d'envoi ; en Belgique, seulement si tu n'as pas utilisé sa méthode de retour, comme son étiquette. En Suisse, ce sont les règles de la boutique qui comptent.
+Un colis de retour possède son propre numéro de suivi, différent de celui de la commande initiale : il figure sur l'étiquette prépayée, sur ta preuve de dépôt (à garder jusqu'au remboursement) et dans ton compte client. Le suivi du transporteur (La Poste, Mondial Relay, bpost ou La Poste suisse) s'arrête souvent à l'arrivée au centre de retours ; en France et en Belgique, après une rétractation dans les 14 jours, la boutique dispose de 14 jours pour te rembourser.
 
-## Mon retour a-t-il un numéro de suivi ?
+## Comment fonctionne le numéro de suivi ou le QR code de retour ?
 
 Oui, si tu passes par l'étiquette ou le code QR de la boutique. Le code QR n'est pas le numéro de suivi : c'est ce que le point de dépôt scanne pour imprimer l'étiquette. Chez Zalando, c'est le transporteur qui imprime l'étiquette. Le numéro apparaît ensuite sur l'étiquette, sur ta preuve de dépôt et dans ton compte.
 
@@ -45,7 +45,7 @@ Tu ne sais pas à qui est le numéro ? Tape-le ici :
 
 Le numéro de la commande que tu as reçue se trouve ailleurs : voir [où trouver ton numéro de suivi](guide:find-tracking-number).
 
-## Combien de temps met le retour, et pourquoi le suivi s'arrête ?
+## Pourquoi le suivi de mon retour s'arrête-t-il à l'entrepôt ?
 
 Le dernier scan montre souvent que le transporteur a livré le colis, pas que la boutique l'a ouvert. Le contrôle et le remboursement, eux, ne se voient que dans ton compte chez la boutique. Zalando t'envoie un e-mail quand son centre de retours a traité ton colis.
 
@@ -87,7 +87,7 @@ Sur Vinted, entre particuliers, un article conforme à l'annonce qui ne te va pa
 
 Les délais plus longs, comme les 30 jours de Zalando, sont la politique de la boutique, en plus de la loi. Et un achat à un particulier n'ouvre pas de droit de rétractation.
 
-## La boutique dit que mon retour n'est jamais arrivé
+## Que faire si la boutique dit n'avoir jamais reçu mon retour ?
 
 Ton suivi et ta preuve de dépôt sont tes preuves. Procède dans cet ordre :
 

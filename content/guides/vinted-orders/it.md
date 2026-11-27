@@ -1,13 +1,13 @@
 ---
 title: Tracciare un pacco Vinted: corrieri, codici e ritardi
-description: Tracciare un pacco Vinted, da chi compra o da chi vende: chi lo consegna in Italia, com'è fatto il codice e le scadenze di Vinted per spedire e segnalare.
+description: Tracciare e ritirare un pacco Vinted in Italia: corrieri (Poste, InPost, BRT), tempi di spedizione e ritiro (2–10 giorni), codice QR, rimborsi e assistenza.
 slug: tracciamento-pacco-vinted
 picture: Due smartphone, quello di una venditrice e quello di un acquirente, tra cui un pacco viaggia su un furgone, e un Pip allegro.
 published: 2026-10-16
-updated: 2026-11-23
+updated: 2026-11-27
 ---
 
-Su Vinted è chi compra a scegliere il corriere al momento del pagamento e a pagare l'etichetta; chi vende la riceve come etichetta prepagata o come codice QR e ha 5 giorni lavorativi per consegnare il pacco. Tutti e due lo seguono nella conversazione dell'ordine, con «Traccia il pacco», dove puoi anche copiare il codice di tracciamento del corriere. Il tracciamento può comparire fino a 48 ore dopo la consegna al punto, e chi vende viene pagato solo quando chi compra conferma che è «Tutto a posto», o 2 giorni dopo la consegna.
+Su Vinted chi compra sceglie il corriere in Italia (Poste Italiane, InPost, BRT-fermopoint, DHL Express o GLS con verifica) e paga l'etichetta; chi vende ha 5 giorni lavorativi per spedire con etichetta o codice QR. Segui il pacco nella conversazione con «Traccia il pacco» (il tracciamento compare entro 48 ore), ritiralo al punto con documento e codice entro i tempi del corriere (10 giorni con BRT-fermopoint, fino a 2 giorni su alcuni corrieri) e hai 2 giorni dopo la consegna per segnalare problemi.
 
 ## Come funziona la spedizione su Vinted?
 
@@ -95,7 +95,7 @@ Ogni silenzio ha il suo motivo:
 
 Più dettagli in [perché il tracciamento non si aggiorna](guide:tracking-not-updating).
 
-## Quanto tempo resta il pacco Vinted al punto di ritiro?
+## Come ritirare un pacco Vinted al punto di ritiro e quanto tempo resta?
 
 Dipende dal corriere. Con BRT-fermopoint hai 10 giorni per ritirarlo, con un documento d'identità; serve un documento anche con Poste Italiane, InPost e GLS. Vinted avverte però che «alcuni corrieri conservano i pacchi solo per 2 giorni di calendario» prima di restituirli: non aspettare.
 
@@ -105,7 +105,7 @@ Dipende dal corriere. Con BRT-fermopoint hai 10 giorni per ritirarlo, con un doc
 
 Approfondisci in [pacco non ritirato](guide:uncollected-parcel).
 
-## Pacco Vinted smarrito, o «Consegnato» ma non arrivato?
+## Pacco Vinted smarrito, in ritardo o «Consegnato» ma non ricevuto: cosa fare?
 
 In quest'ordine:
 

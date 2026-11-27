@@ -1,13 +1,13 @@
 ---
 title: Seguimento da encomenda IKEA: DPD, camião e problemas
-description: Quem entrega a tua encomenda IKEA em Portugal, onde está «Acompanhar e gerir a sua encomenda», que artigos têm número da DPD e o que fazer se algo correr mal.
+description: Seguimento de encomenda IKEA em Portugal: «Acompanhar e gerir», entrega DPD até 60 kg (3–7 dias), Click & collect em 1.500 pontos, devoluções 365 dias e contacto.
 slug: seguimento-encomenda-ikea
 picture: Uma pilha de caixas planas compridas, uma chave Allen, um camião de entregas e o Pip em cima da caixa do topo.
 published: 2026-10-18
-updated: 2026-10-18
+updated: 2026-11-27
 ---
 
-A IKEA segue todas as encomendas online na sua própria página, «Acompanhar e gerir a sua encomenda»: precisas do número da encomenda e do e-mail com que compraste. As encomendas pequenas vão pela DPD, com o número de seguimento da DPD. Os móveis chegam com a transportadora da IKEA, numa janela horária, e segues-os no seguimento da IKEA e com o SMS do dia.
+Em Portugal, segues todas as encomendas IKEA online na página «Acompanhar e gerir a sua encomenda» com o número da encomenda e o e-mail da compra. As entregas pequenas (até 60 kg, 3 a 7 dias no continente) seguem pela DPD com número de seguimento próprio ou para mais de 1.500 pontos DPD; os móveis chegam pela transportadora da IKEA numa janela horária confirmada por SMS, e o Apoio ao Cliente atende no 21 989 99 45.
 
 ## Quem entrega a minha encomenda IKEA?
 
@@ -79,7 +79,7 @@ Se a encomenda ainda está dentro do prazo estimado, espera. Contacta a IKEA se 
 
 **Mudar a data.** Muda a data de entrega no seguimento da IKEA, em «Reagendar ou cancelar». Depois de concluída, a encomenda já não se altera sozinha: para mudar artigos ou morada, fala com o Apoio ao Cliente, e depende do estado da encomenda. Na entrega pequena, uma nova entrega marca-se diretamente com a DPD. Se não puderes receber a transportadora da IKEA na data e janela marcadas, contacta a IKEA no prazo de 72 horas a contar da marcação inicial. O Apoio ao Cliente muda a data ou a janela sem custos até 24 horas antes. Se os artigos ficarem guardados mais de 72 horas, pagas 14 € por cada período de até 7 dias. Podes cancelar no histórico de compras uma encomenda que ainda não foi enviada; se já foi, contacta a IKEA.
 
-## Opções e preços de entrega da IKEA
+## Quanto custa a entrega da IKEA (DPD, camião e Click & collect)?
 
 A encomenda mínima para entrega é de 15 €.
 
@@ -110,7 +110,7 @@ Para recolher:
 
 Leva um documento de identificação com fotografia e o comprovativo de compra. Se for outra pessoa, precisa da confirmação da encomenda ou da fatura e de um documento de identificação. Se não levantares a tempo num ponto de recolha ou cacifo, a encomenda volta para a loja e a IKEA devolve-te o valor dos artigos; num ponto ou cacifo IKEA, pagas o custo dessa devolução. Mais: [cacifos e pontos de recolha](guide:parcel-lockers).
 
-## Encomenda IKEA que não chega, incompleta ou danificada: o que fazer
+## O que fazer se a encomenda IKEA não chega, falta um volume ou vem danificada?
 
 Primeiro vê, depois avisa. Por ordem:
 
@@ -126,7 +126,7 @@ Depois de reportares um artigo em falta online, recebes em cerca de 15 minutos u
 
 **Janela perdida.** Se não estiver ninguém em casa e não te conseguirem contactar, a entrega via transportadora é dada como falhada. Contacta a IKEA: a segunda entrega paga-se à parte, e o valor da primeira não é reembolsado. Na entrega pequena, se a segunda tentativa da DPD também falhar, a encomenda volta para a loja e a IKEA devolve-te o valor. Mais: [entrega falhada](guide:missed-delivery), [encomenda entregue mas não recebida](guide:delivered-not-received), [encomenda danificada](guide:damaged-parcel) e [encomenda perdida](guide:lost-parcel).
 
-## Devolver uma encomenda IKEA
+## Como devolver uma encomenda IKEA (prazo de 365 dias)?
 
 Tens 365 dias, com o produto novo e embalado ou aberto e montado, desde que esteja em condições: leva a fatura. Colchões, sofás e tapetes têm de estar nas condições originais de venda.
 

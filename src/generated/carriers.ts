@@ -15190,6 +15190,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "postnord",
+      "catalog": "postnord",
+      "slug": "postnord-tracking",
+      "title": "Rastreamento PostNord: códigos, status e prazos de retirada",
+      "name": "PostNord",
+      "color": "#00a0d6"
+    },
+    {
       "id": "bring",
       "catalog": "bring-posten",
       "slug": "rastreamento-bring",
@@ -16212,6 +16220,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento CDEK (СДЭК): números de pedido e status",
       "name": "CDEK",
       "color": "#00b33c"
+    },
+    {
+      "id": "quantium-solutions",
+      "catalog": "quantium-solutions",
+      "slug": "quantium-solutions-tracking",
+      "title": "Rastreamento Quantium Solutions: códigos, status e ajuda",
+      "name": "Quantium Solutions",
+      "color": "#00474f"
     },
     {
       "id": "correos-chile",
@@ -20028,6 +20044,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "postnord",
+      "catalog": "postnord",
+      "slug": "postnord-tracking",
+      "title": "PostNord 快递查询：单号、状态与自提期限",
+      "name": "PostNord",
+      "color": "#00a0d6"
+    },
+    {
       "id": "bring",
       "catalog": "bring-posten",
       "slug": "bring-wuliu-chaxun",
@@ -21066,6 +21090,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "CDEK（СДЭК）物流查询：订单号与状态含义",
       "name": "CDEK",
       "color": "#00b33c"
+    },
+    {
+      "id": "quantium-solutions",
+      "catalog": "quantium-solutions",
+      "slug": "quantium-solutions-tracking",
+      "title": "Quantium Solutions 快递查询：单号、状态与客服",
+      "name": "Quantium Solutions",
+      "color": "#00474f"
     },
     {
       "id": "correos-chile",

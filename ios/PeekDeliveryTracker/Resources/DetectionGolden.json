@@ -75017,6 +75017,14 @@
     ]
   },
   {
+    "input": "880-12345675",
+    "carrier": "hainan-airlines-cargo",
+    "confidence": "high",
+    "candidates": [
+      "hainan-airlines-cargo"
+    ]
+  },
+  {
     "input": "88000012680741A",
     "carrier": "la-poste",
     "confidence": "high",
@@ -75136,6 +75144,14 @@
     "confidence": "low",
     "candidates": [
       "dpd-ie"
+    ]
+  },
+  {
+    "input": "880PEK12345675",
+    "carrier": "hainan-airlines-cargo",
+    "confidence": "high",
+    "candidates": [
+      "hainan-airlines-cargo"
     ]
   },
   {

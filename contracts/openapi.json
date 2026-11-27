@@ -72515,6 +72515,133 @@
       ],
       "detectionRules": [],
       "trackingSearchUrl": "https://www.zerodistanze.it/"
+    },
+    "class-package": {
+      "displayName": "Class Package",
+      "aliases": [
+        "Class Package Lda",
+        "Class Package, Lda."
+      ],
+      "countries": [
+        "PT"
+      ],
+      "color": "#c03050",
+      "selectable": true,
+      "timezone": "Europe/Lisbon",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://classpackage.pt/pt/tracking?tracking={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "classpackage.pt"
+          ],
+          "pathPattern": "^/(?:pt|en)/tracking/?$",
+          "params": [
+            "tracking"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://classpackage.pt/pt/tracking"
+    },
+    "exigent-express": {
+      "displayName": "ExigentExpress",
+      "aliases": [
+        "Exigentexpress",
+        "Exigent Express",
+        "Exigentexpress - Transportes, Unipessoal, Lda."
+      ],
+      "countries": [
+        "PT"
+      ],
+      "color": "#e01828",
+      "selectable": true,
+      "timezone": "Europe/Lisbon",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://exigentexpress.pt/pt/tracking?tracking={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "exigentexpress.pt"
+          ],
+          "pathPattern": "^/(?:pt|en)/tracking/?$",
+          "params": [
+            "tracking"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://exigentexpress.pt/pt/tracking"
+    },
+    "hainan-airlines-cargo": {
+      "displayName": "Hainan Airlines Cargo",
+      "aliases": [
+        "HNA Cargo",
+        "海航货运",
+        "海南航空货运"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#cf422f",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "hainan-airlines-cargo"
+      },
+      "trackingUrlTemplate": "https://www.hnacargo.com/",
+      "linkRules": [],
+      "detectionRules": [
+        {
+          "pattern": "^880\\d{8}$",
+          "confidence": "high",
+          "rawPattern": "^880-\\d{4} ?\\d{4}$"
+        },
+        {
+          "pattern": "^880[A-Z]{3}\\d{8}$",
+          "confidence": "high"
+        }
+      ],
+      "trackingSearchUrl": "https://www.hnacargo.com/Portal2/AwbSearch.aspx"
+    },
+    "ran-express": {
+      "displayName": "RAN Express",
+      "aliases": [
+        "RANEXPRESS",
+        "Ranexpress",
+        "RANEXPRESS - Transportes Rodoviários de Mercadorias, Lda"
+      ],
+      "countries": [
+        "PT"
+      ],
+      "color": "#2850a0",
+      "selectable": true,
+      "timezone": "Europe/Lisbon",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://ranexpress.pt/pt/tracking?tracking={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "ranexpress.pt"
+          ],
+          "pathPattern": "^/(?:pt|en)/tracking/?$",
+          "params": [
+            "tracking"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://ranexpress.pt/pt/tracking"
     }
   },
   "servers": [
@@ -78936,7 +79063,11 @@
           "sicilposte",
           "smartpost-genova",
           "spike-express",
-          "zerodistanze"
+          "zerodistanze",
+          "class-package",
+          "exigent-express",
+          "hainan-airlines-cargo",
+          "ran-express"
         ]
       },
       "Stage": {

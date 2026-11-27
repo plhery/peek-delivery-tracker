@@ -759,6 +759,18 @@
       "ru": "Доставлена",
       "zh": "已签收"
     },
+    "received_for_recipient": {
+      "en": "Received on the recipient’s behalf",
+      "de": "Für den Empfänger angenommen",
+      "fr": "Réceptionné pour le compte du destinataire",
+      "it": "Ricevuto per conto del destinatario",
+      "es": "Recibido en nombre del destinatario",
+      "pt": "Recebida em nome do destinatário",
+      "pt-br": "Recebida em nome do destinatário",
+      "pl": "Przyjęta w imieniu adresata",
+      "ru": "Принята от имени получателя",
+      "zh": "已代收"
+    },
     "collected_by_recipient": {
       "en": "Collected by the recipient",
       "de": "Vom Empfänger abgeholt",

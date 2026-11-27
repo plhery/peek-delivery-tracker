@@ -6420,6 +6420,19 @@ export const CARRIER_CAPABILITIES = {
           "dhlparcel.be"
         ],
         "path": "^/home/tracktrace/([^/?#]+)/?$"
+      },
+      {
+        "domains": [
+          "dhlecommerce.nl",
+          "dhlparcel.nl",
+          "dhlecommerce.be",
+          "dhlparcel.be"
+        ],
+        "pathPattern": "^/go-track-trace/?$",
+        "params": [
+          "tc",
+          "pid"
+        ]
       }
     ],
     "detectionRules": [
@@ -72073,6 +72086,168 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://xtl.itdida.com/itdida-flash/website/landing"
+  },
+  "abx-express": {
+    "displayName": "ABX Express",
+    "aliases": [
+      "ABX Express (M) Sdn. Bhd."
+    ],
+    "countries": [
+      "MY"
+    ],
+    "color": "#da1f34",
+    "selectable": true,
+    "timezone": "Asia/Kuala_Lumpur",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "abx-express"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.abxexpress.com.my/tracking",
+    "helpUrl": "https://www.abxexpress.com.my/Home/FAQ"
+  },
+  "bjytsywl": {
+    "displayName": "Yuantongshengyuan Logistics",
+    "aliases": [
+      "远通盛源物流",
+      "远通盛源",
+      "北京远通盛源物流有限公司",
+      "YTSY"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#0180C7",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "bjytsywl"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "bluegrace-logistics": {
+    "displayName": "BlueGrace Logistics",
+    "aliases": [
+      "BlueGrace"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#009ade",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "bluegrace-logistics"
+    },
+    "trackingUrlTemplate": "https://mybluegrace.com/track/?id={trackingNumber}&docType=BOL",
+    "linkRules": [
+      {
+        "domains": [
+          "mybluegrace.com",
+          "www.mybluegrace.com"
+        ],
+        "pathPattern": "^/track/?$",
+        "params": [
+          "id"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://mybluegrace.com/track/",
+    "helpUrl": "https://mybluegrace.com/get-in-touch/"
+  },
+  "bvc-logistics": {
+    "displayName": "BVC Logistics",
+    "aliases": [
+      "BVC Logistics Pvt. Ltd."
+    ],
+    "countries": [
+      "IN"
+    ],
+    "color": "#2b3775",
+    "selectable": true,
+    "timezone": "Asia/Kolkata",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "bvc-logistics"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://track2.bvclogistics.com/",
+    "helpUrl": "https://bvclogistics.com/contact"
+  },
+  "hjwl": {
+    "displayName": "HJWL",
+    "aliases": [
+      "汇捷物流"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#05233B",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "hjwl"
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^HJWL\\d{14}$",
+        "confidence": "high"
+      }
+    ],
+    "trackingSearchUrl": "https://www.hjwl.ltd/#/kuaidi100"
+  },
+  "hotwms": {
+    "displayName": "HOTWMS",
+    "aliases": [
+      "皇家云仓"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#00BFD8",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "hotwms"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "yjs-china": {
+    "displayName": "YJS Express",
+    "aliases": [
+      "益加盛快递",
+      "益加盛物流",
+      "益加盛国际快递",
+      "赤峰益加盛物流有限公司",
+      "YJS-EXPRESS"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#F4B251",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "yjs-china"
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^CHNYJS\\d{8}$",
+        "confidence": "high"
+      }
+    ]
   }
 } as const;
 
@@ -74266,7 +74441,14 @@ export const CARRIER_IDS = [
   "jytwl",
   "qinhang-transportation",
   "u-speed-express",
-  "xun-tian-international"
+  "xun-tian-international",
+  "abx-express",
+  "bjytsywl",
+  "bluegrace-logistics",
+  "bvc-logistics",
+  "hjwl",
+  "hotwms",
+  "yjs-china"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

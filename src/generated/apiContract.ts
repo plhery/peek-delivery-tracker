@@ -71269,6 +71269,121 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.huahaiexpress.com/track.html"
+  },
+  "blackhaul": {
+    "displayName": "Blackhaul",
+    "aliases": [
+      "Blackhaul Australia",
+      "Blackhaul Intermodal Logistics"
+    ],
+    "countries": [
+      "AU"
+    ],
+    "color": "#000000",
+    "selectable": true,
+    "timezone": "Australia/Perth",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "blackhaul"
+    },
+    "trackingUrlTemplate": "https://portal.transvirtual.com/Track/654472/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "portal.transvirtual.com",
+          "portal.transvirtual.co",
+          "portal.transvirtual.com.au",
+          "mydel.info"
+        ],
+        "path": "^/[Tt]rack/654472/([^/?#]+)/?$"
+      },
+      {
+        "domains": [
+          "blackhaul.com.au",
+          "www.blackhaul.com.au"
+        ],
+        "pathPattern": "^/track/?$",
+        "params": [
+          "cn"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://blackhaul.com.au/track/",
+    "helpUrl": "https://blackhaul.com.au/contact-us/"
+  },
+  "primetime-express": {
+    "displayName": "Primetime Express",
+    "aliases": [
+      "Prime Time Express",
+      "PTE Logistics"
+    ],
+    "countries": [
+      "ZA"
+    ],
+    "color": "#00567a",
+    "selectable": true,
+    "timezone": "Africa/Johannesburg",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "primetime-express"
+    },
+    "trackingUrlTemplate": "https://primetimeexpress.pperfect.com/?w={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "primetimeexpress.pperfect.com"
+        ],
+        "pathPattern": "^/?$",
+        "params": [
+          "w"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://primetimeexpress.pperfect.com/",
+    "helpUrl": "https://ptexpress.co.za/contact/"
+  },
+  "tmw-express": {
+    "displayName": "TMW Express",
+    "aliases": [
+      "明达速递",
+      "明达国际速递",
+      "Mingda Express"
+    ],
+    "countries": [
+      "AU",
+      "CN"
+    ],
+    "color": "#066ebb",
+    "selectable": true,
+    "timezone": "Australia/Perth",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "tmw-express"
+    },
+    "trackingUrlTemplate": "https://www.tmw-express.com.au/#/my/checkLogistics?doccode={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tmw-express.com.au"
+        ],
+        "pathPattern": "^/(?:index\\.html)?$",
+        "fragment": "^/my/checkLogistics\\?(?:[^#]*&)?doccode=([^&,]+)"
+      },
+      {
+        "domains": [
+          "meian.expressgo.cn",
+          "shop.expressgo.cn"
+        ],
+        "pathPattern": "^/wx-query/queryOrder\\.html$",
+        "params": [
+          "doc"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.tmw-express.com.au/"
   }
 } as const;
 
@@ -73440,7 +73555,10 @@ export const CARRIER_IDS = [
   "latam-you",
   "pass-the-parcel",
   "tfmxpress",
-  "huahai-express"
+  "huahai-express",
+  "blackhaul",
+  "primetime-express",
+  "tmw-express"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

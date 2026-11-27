@@ -3260,6 +3260,32 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertNil(snapshot.friends.last?.stats)
         XCTAssertNil(snapshot.friends.last?.arrivedThisWeek)
         XCTAssertEqual(snapshot.profile?.shareArrival, false)
+        XCTAssertEqual(snapshot.profile?.shareCountries, true)
+        XCTAssertEqual(snapshot.friends.first?.stats?.countries?.map(\.code), ["CH", "DE", "FR", "US"])
+    }
+
+    /// The demo keeps the profile's Countries choice as the server does: a save that leaves it out keeps it.
+    @MainActor
+    func testTheDemoKeepsTheCountriesChoiceASaveLeavesOut() async throws {
+        let suite = "friends-demo-\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let demo = AppConfiguration(mode: .demo, apiBaseURL: URL(string: "https://render.test")!, supabaseURL: nil, supabasePublishableKey: "",
+                                    googleAuthEnabled: false, appleAuthEnabled: false, emailOTPEnabled: false, appGroupIdentifier: "render.test")
+        let session = SessionStore(configuration: demo, defaults: defaults, persistence: MemorySessionPersistence())
+        session.enterDemo()
+        let parcels = DemoRepository.seed()
+        let store = FriendsStore()
+        store.configure(session: session)
+        await store.load(parcels: parcels)
+        XCTAssertEqual(store.snapshot?.profile?.shareCountries, true)
+        XCTAssertNotNil(store.snapshot?.ownCard?.stats?.countries)
+        _ = await store.act(.saveProfile(FriendProfile(nickname: "Robin", shareStats: true, shareArrival: false)), parcels: parcels)
+        XCTAssertEqual(store.snapshot?.profile?.shareCountries, true)
+        _ = await store.act(.saveProfile(FriendProfile(nickname: "Robin", shareStats: true, shareArrival: false, shareCountries: false)), parcels: parcels)
+        XCTAssertEqual(store.snapshot?.profile?.shareCountries, false)
+        XCTAssertNil(store.snapshot?.ownCard?.stats?.countries)
+        XCTAssertNotNil(store.snapshot?.ownCard?.stats)
     }
 
     func testNextDeliveryKeepsIssuesSeparateAndPrioritizesPickup() {
@@ -6797,6 +6823,59 @@ extension ParcelLogicTests {
             .environmentObject(ParcelLinkStore(defaults: defaults, configuration: demo))
             .environment(\.locale, localizer.language.locale), width: 402, height: 2600, dark: false, settle: .milliseconds(1500))
         keepPassportPicture(try XCTUnwrap(list.pngData()), named: "news-line-and-tab-dot")
+    }
+
+    /// Friends' new parts over the demo, as pictures kept with the results: the demo Mila's page, her stamps beside the
+    /// demo's and her countries; the sharing form with its Countries switch; and the sample pair before a profile. A run
+    /// that sets `PASSPORT_PICTURES` (`TEST_RUNNER_PASSPORT_PICTURES` for xcodebuild) gets them there as PNGs.
+    @MainActor func testFriendsNewPartsDrawOverTheDemo() async throws {
+        let localizer = Localizer()
+        let previousLanguage = localizer.language
+        defer { localizer.language = previousLanguage }
+        localizer.language = .en
+        let suite = "friends-pictures-\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let url = try XCTUnwrap(Bundle.main.url(forResource: "FriendsDemo", withExtension: "json"))
+        let snapshot = try JSONDecoder().decode(FriendsSnapshot.self, from: Data(contentsOf: url))
+        let mila = try XCTUnwrap(snapshot.friends.first { $0.nickname == "Mila" })
+        let book = PassportBook(parcels: DemoRepository.seed(now: try XCTUnwrap(DateParser.date("2026-12-10T12:00:00Z"))))
+        let comparison = FriendPassportComparison(stats: try XCTUnwrap(mila.stats), book: book, language: .en)
+        XCTAssertFalse(comparison.groups.isEmpty)
+        XCTAssertEqual(comparison.countries.count, 4)
+
+        let demo = AppConfiguration(mode: .demo, apiBaseURL: URL(string: "https://render.test")!, supabaseURL: nil, supabasePublishableKey: "",
+                                    googleAuthEnabled: false, appleAuthEnabled: false, emailOTPEnabled: false, appGroupIdentifier: "render.test")
+        let session = SessionStore(configuration: demo, defaults: defaults, persistence: MemorySessionPersistence())
+        let store = ParcelStore(configuration: demo, session: session, localizer: localizer,
+                                device: DeviceParcels(client: nil, storage: RenderTestStorage()))
+        session.enterDemo()
+        for dark in [false, true] {
+            let theme = dark ? "dark" : "light"
+            let page = try await windowPicture(
+                FriendDetailView(friend: mila, book: book, busy: false) {}
+                    .padding(24).background(Brand.background)
+                    .environmentObject(localizer)
+                    .environment(\.locale, localizer.language.locale), width: 402, dark: dark, settle: .milliseconds(1600), safeArea: false)
+            keepPassportPicture(try XCTUnwrap(page.pngData()), named: "ios-friend-page-\(theme)")
+            let form = try await windowPicture(
+                FriendsProfileForm(profile: snapshot.profile, busy: false) { _ in }
+                    .padding(24).background(Brand.background)
+                    .environmentObject(localizer)
+                    .environmentObject(store)
+                    .environment(\.locale, localizer.language.locale), width: 402, dark: dark, safeArea: false)
+            keepPassportPicture(try XCTUnwrap(form.pngData()), named: "ios-friends-sharing-\(theme)")
+            let sample = try await windowPicture(
+                VStack(spacing: 22) {
+                    FriendsSample().padding(.bottom, 4)
+                    Text(localizer.text("friends.title")).font(.system(size: 26, weight: .semibold))
+                    Text(localizer.text("friends.introSideBySide")).font(.subheadline).foregroundStyle(Brand.secondaryText).multilineTextAlignment(.center)
+                }
+                .padding(20).frame(maxWidth: .infinity).background(Brand.background)
+                .environmentObject(localizer)
+                .environment(\.locale, localizer.language.locale), width: 402, dark: dark, settle: .milliseconds(900), safeArea: false)
+            keepPassportPicture(try XCTUnwrap(sample.pngData()), named: "ios-friends-sample-\(theme)")
+        }
     }
 
     /// A view drawn in a window `width` wide, as tall as it asks or `height`; with `safeArea` off, from the window's

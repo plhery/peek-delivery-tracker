@@ -1087,7 +1087,7 @@ private struct FriendInvitationAcceptanceView: View {
         guard !joining else { return }
         joining = true
         defer { joining = false }
-        if await model.act(FriendsActionRequest(action: .saveProfile, nickname: profile.nickname, shareStats: profile.shareStats, shareArrival: profile.shareArrival), parcels: parcels.parcels) != nil { creatingProfile = false }
+        if await model.act(FriendsActionRequest.saveProfile(profile), parcels: parcels.parcels) != nil { creatingProfile = false }
     }
 
     private func checkInvitation() async {
@@ -1109,7 +1109,7 @@ private struct FriendInvitationAcceptanceView: View {
             if model.snapshot?.profile != nil { creatingProfile = false }
         }
         if let profile {
-            guard let saved = await model.act(FriendsActionRequest(action: .saveProfile, nickname: profile.nickname, shareStats: profile.shareStats, shareArrival: profile.shareArrival), parcels: parcels.parcels) else { return }
+            guard let saved = await model.act(FriendsActionRequest.saveProfile(profile), parcels: parcels.parcels) else { return }
             guard saved.snapshot?.profile != nil else { model.errorKey = "friends.actionFailed"; return }
         }
         _ = await model.act(FriendsActionRequest(action: .acceptInvite, code: code), parcels: parcels.parcels, onCommitted: { result in

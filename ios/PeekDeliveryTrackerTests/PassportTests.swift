@@ -321,6 +321,93 @@ final class PassportTests: XCTestCase {
         XCTAssertNotNil(YearCard.png(image))
     }
 
+    // MARK: - Friends
+
+    func testAFriendsCardCarriesCountriesOnlyWithStatsAndCountriesOn() throws {
+        let now = try XCTUnwrap(DateParser.date("2026-09-08T12:00:00Z"))
+        let parcels = [located(1, "2026-09-03T12:00:00Z", "Zürich, CH"), located(2, "2026-09-04T12:00:00Z", "Berlin, Germany"),
+                       located(3, "2026-09-05T12:00:00Z", "Basel, CH")]
+        let card = FriendsStore.ownCard(parcels: parcels, profile: FriendProfile(nickname: "Alex", shareStats: true, shareArrival: false, shareCountries: true), now: now)
+        // Each country by code with how many went through it, in code order: no days and no order of arrival.
+        XCTAssertEqual(card.stats?.countries, [FriendCountry(code: "CH", count: 2), FriendCountry(code: "DE", count: 1)])
+        let encoded = try XCTUnwrap(String(data: JSONEncoder().encode(card), encoding: .utf8))
+        for secret in ["2026", "Zürich", "Berlin", "Order"] { XCTAssertFalse(encoded.contains(secret), secret) }
+        // A profile saved before the switch, one that turned it off, and one that keeps its stats private share none.
+        for profile in [FriendProfile(nickname: "Alex", shareStats: true, shareArrival: false),
+                        FriendProfile(nickname: "Alex", shareStats: true, shareArrival: false, shareCountries: false),
+                        FriendProfile(nickname: "Alex", shareStats: false, shareArrival: false, shareCountries: true)] {
+            let card = FriendsStore.ownCard(parcels: parcels, profile: profile, now: now)
+            XCTAssertNil(card.stats?.countries)
+            if profile.shareStats { XCTAssertEqual(card.stats?.deliveredCount, 3) }
+        }
+    }
+
+    func testTheCountriesSwitchStartsOnForANewProfileAndRidesOnStats() throws {
+        let new = FriendsSharing(nil)
+        XCTAssertEqual([new.stats, new.sharesCountries, new.arrival], [true, true, false])
+        // A profile saved before the switch reads as not sharing its countries; one that chose it keeps its choice.
+        XCTAssertFalse(FriendsSharing(FriendProfile(nickname: "Alex", shareStats: true, shareArrival: false)).sharesCountries)
+        XCTAssertTrue(FriendsSharing(FriendProfile(nickname: "Alex", shareStats: true, shareArrival: false, shareCountries: true)).sharesCountries)
+        // While Stats & stamps are off, the switch shows off and rests; it comes back as it was.
+        var sharing = new
+        sharing.stats = false
+        XCTAssertFalse(sharing.sharesCountries)
+        XCTAssertTrue(sharing.countriesRest)
+        sharing.stats = true
+        XCTAssertTrue(sharing.sharesCountries)
+        XCTAssertFalse(sharing.countriesRest)
+        // Every save the form makes says whether it shares its countries.
+        let saved = try JSONSerialization.jsonObject(with: JSONEncoder().encode(FriendsActionRequest.saveProfile(sharing.profile(nickname: "Alex")))) as? [String: Any]
+        XCTAssertEqual(saved?["action"] as? String, "save_profile")
+        XCTAssertEqual(saved?["shareCountries"] as? Bool, true)
+        sharing.countries = false
+        XCTAssertEqual(FriendsActionRequest.saveProfile(sharing.profile(nickname: "Alex")).shareCountries, false)
+        // A profile that has no choice yet passes none, so the server keeps what it has.
+        let kept = try JSONSerialization.jsonObject(with: JSONEncoder().encode(FriendsActionRequest.saveProfile(FriendProfile(nickname: "Alex", shareStats: true, shareArrival: false)))) as? [String: Any]
+        XCTAssertNil(kept?["shareCountries"])
+    }
+
+    func testAFriendsStampsStandBesideTheReaders() throws {
+        let utc = try XCTUnwrap(TimeZone(identifier: "UTC"))
+        let stats = FriendStats(deliveredCount: 12, averageDays: 3, stamps: [.first, .ten, .connected, .express],
+                                countries: [FriendCountry(code: "CH", count: 9), FriendCountry(code: "DE", count: 1),
+                                            FriendCountry(code: "FR", count: 2), FriendCountry(code: "US", count: 1)])
+        func headings(_ comparison: FriendPassportComparison) -> [String] {
+            comparison.groups.map { "\(FriendPassportComparison.heading($0.kind, nickname: "Mila", localizer: localizer)) \($0.stamps.count)" }
+        }
+        let copy = PassportStampCopy(localizer: localizer)
+        // The reader has First arrival and Express arrival; Mila has those, Double digits and Well connected.
+        let reader = FriendPassportComparison(stats: stats, book: PassportBook(parcels: [delivered(1, .dhl, "2026-09-03T12:00:00Z")], timeZone: utc), language: .en)
+        XCTAssertEqual(headings(reader), ["You both have 2", "Only Mila 2"])
+        XCTAssertEqual(reader.groups[0].stamps.map { copy.title($0.key) }, ["First arrival", "Express arrival"])
+        XCTAssertEqual(reader.groups[1].stamps.map { copy.title($0.key) }, ["Double digits", "Well connected"])
+        XCTAssertEqual(reader.groups[1].stamps.compactMap { FriendPassportComparison.progress($0, localizer: localizer) }, ["You’re at 1 of 10", "You’re at 1 of 3"])
+        // One count runs through the stamps, then the countries, as they rise in.
+        XCTAssertEqual(reader.groups.map(\.start), [0, 2])
+        XCTAssertEqual(reader.countriesStart, 4)
+        // Her countries, the most-visited first, then by name; the reader's parcel went through none of them.
+        XCTAssertEqual(reader.countries.map(\.code), ["CH", "FR", "DE", "US"])
+        XCTAssertEqual(reader.countries.map(\.name), ["Switzerland", "France", "Germany", "United States"])
+        XCTAssertEqual(reader.common, 0)
+
+        // With no parcels of the reader's, each of Mila's stamps is hers alone, with how far the reader is when it takes more than one.
+        let nobody = FriendPassportComparison(stats: stats, book: PassportBook(parcels: [], timeZone: utc), language: .en)
+        XCTAssertEqual(headings(nobody), ["Only Mila 4"])
+        XCTAssertEqual(nobody.groups[0].stamps.map { FriendPassportComparison.progress($0, localizer: localizer) },
+                       [nil, "You’re at 0 of 10", "You’re at 0 of 3", nil])
+
+        // A reader in Switzerland has a stamp Mila lacks, and one of her countries.
+        let traveller = PassportBook(parcels: [located(1, "2026-09-03T12:00:00Z", "Zürich, CH")], timeZone: utc)
+        let mine = FriendPassportComparison(stats: stats, book: traveller, language: .en)
+        XCTAssertEqual(mine.groups.map(\.kind), [.both, .theirs, .mine])
+        XCTAssertEqual(mine.groups.last?.stamps.map(\.key), traveller.sharedStamps.map(\.rawValue).filter { !["first", "ten", "connected", "express"].contains($0) })
+        XCTAssertEqual(mine.common, 1)
+        XCTAssertEqual(localizer.text("friends.countriesBoth", ["count": mine.common]), "You both have 1")
+
+        // Neither holding a shared stamp: no groups, and the friend's collection shows instead.
+        XCTAssertTrue(FriendPassportComparison(stats: FriendStats(deliveredCount: 0, stamps: []), book: PassportBook(parcels: []), language: .en).groups.isEmpty)
+    }
+
     // MARK: - Parcels
 
     static func parcel(id: UUID, label: String, carrier: CarrierID, archivedAt: String? = nil, createdAt: String = "2026-01-01T00:00:00Z", events: [TrackingEvent]) -> Parcel {

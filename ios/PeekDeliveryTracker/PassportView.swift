@@ -670,7 +670,7 @@ private struct PassportLanding {
 }
 
 /// Items in rows of `columns` equal cells, the last row's empty cells left blank.
-private struct PassportGrid<Item: Identifiable, Cell: View>: View {
+struct PassportGrid<Item: Identifiable, Cell: View>: View {
     let items: [Item]
     let columns: Int
     let spacing: CGFloat

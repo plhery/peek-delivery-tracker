@@ -1,7 +1,8 @@
 import SwiftUI
 
-/// A paper seal: the stamp's glyph, or its numeral, in a die-cut frame of its tone. An earned one carries a postmark;
-/// a new one is pressed in, then postmarked (`press`: milliseconds since its press began, nil once at rest).
+/// A paper seal: the stamp's glyph, or its numeral, in a die-cut frame of its tone. An earned one carries a postmark,
+/// unless it has no day to stand for (a friend's); a new one is pressed in, then postmarked (`press`: milliseconds since
+/// its press began, nil once at rest).
 struct PassportSeal: View {
     enum Size {
         case regular, cover, mini
@@ -22,8 +23,10 @@ struct PassportSeal: View {
     var earned = true
     var size: Size = .regular
     var press: Double?
+    var postmark = true
 
-    init(glyph: String? = nil, numeral: String? = nil, ink: Color, paper: Color, earned: Bool = true, size: Size = .regular, press: Double? = nil) {
+    init(glyph: String? = nil, numeral: String? = nil, ink: Color, paper: Color, earned: Bool = true, size: Size = .regular, press: Double? = nil,
+         postmark: Bool = true) {
         self.glyph = glyph
         self.numeral = numeral
         self.ink = ink
@@ -31,11 +34,13 @@ struct PassportSeal: View {
         self.earned = earned
         self.size = size
         self.press = press
+        self.postmark = postmark
     }
 
     /// A stamp's own seal, in its tone.
-    init(stamp: PassportData.Stamp, earned: Bool = true, size: Size = .regular, press: Double? = nil) {
-        self.init(glyph: stamp.glyph, numeral: stamp.numeral, ink: stamp.tone.ink, paper: stamp.tone.paper, earned: earned, size: size, press: press)
+    init(stamp: PassportData.Stamp, earned: Bool = true, size: Size = .regular, press: Double? = nil, postmark: Bool = true) {
+        self.init(glyph: stamp.glyph, numeral: stamp.numeral, ink: stamp.tone.ink, paper: stamp.tone.paper, earned: earned, size: size, press: press,
+                  postmark: postmark)
     }
 
     /// The cover's parcel seal: white paper, ochre ink.
@@ -59,7 +64,7 @@ struct PassportSeal: View {
         }
         .frame(width: size.frame.width, height: size.frame.height)
         .overlay(alignment: .bottomTrailing) {
-            if earned, size != .mini {
+            if earned, postmark, size != .mini {
                 let ring: CGFloat = size == .cover ? 33 : 27
                 PassportPostmark(drawn: motion.ring, inner: motion.innerRing)
                     .foregroundStyle(ink)
@@ -163,6 +168,10 @@ enum PassportMotion {
 }
 
 extension PassportMotion {
+    /// A page's cells rise in one after another (the web's `passport-rise`): 160 ms, then 45 ms apart, the thirteenth
+    /// and any after it together.
+    static func riseDelay(_ index: Int) -> Double { 160 + Double(min(index, 12)) * 45 }
+
     /// New countries land 120 ms apart once their page has settled; the first two drop, any after them fade in.
     static func dropDelay(_ index: Int) -> Double { 180 + Double(index) * 120 }
     /// The ink's impact, with its light haptic.
@@ -211,6 +220,25 @@ extension PassportMotion {
             caption = PassportMotion.settle(min(1, max(0, (t - impact - 80) / 300)))
             pill = PassportMotion.settle(min(1, max(0, (t - impact - 200) / 200)))
         }
+    }
+}
+
+/// A cell rising into place as its page opens (the web's `passport-rise`): from 8 points lower and clear, over 320 ms on
+/// the settle curve, after `PassportMotion.riseDelay(index)`. With Reduce Motion it is simply there.
+struct PassportRise: ViewModifier {
+    let index: Int
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var risen = false
+
+    func body(content: Content) -> some View {
+        let shown = risen || reduceMotion
+        content
+            .offset(y: shown ? 0 : 8)
+            .opacity(shown ? 1 : 0)
+            .onAppear {
+                guard !risen, !reduceMotion else { return }
+                withAnimation(PassportMotion.settle.animation(320, delay: PassportMotion.riseDelay(index))) { risen = true }
+            }
     }
 }
 

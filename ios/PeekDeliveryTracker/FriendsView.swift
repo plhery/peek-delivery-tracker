@@ -9,6 +9,8 @@ struct FriendsView: View {
     @EnvironmentObject private var localizer: Localizer
     @EnvironmentObject private var invitation: FriendInvitationStore
     @EnvironmentObject private var activity: FriendsActivityStore
+    /// The reader's own passport, which a friend's page puts theirs beside.
+    @EnvironmentObject private var news: PassportNews
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
@@ -49,9 +51,9 @@ struct FriendsView: View {
                         if data.profile != nil { circle(data) }
                         else {
                             VStack(spacing: 22) {
-                                FriendsPostagePair().padding(.bottom, 12)
+                                FriendsSample().padding(.bottom, 4)
                                 Text(text("friends.title")).font(.system(size: dynamicTypeSize.isAccessibilitySize ? titleSize : 26, weight: .semibold))
-                                Text(text("friends.introSummary")).font(.subheadline).foregroundStyle(Brand.secondaryText).multilineTextAlignment(.center)
+                                Text(text("friends.introSideBySide")).font(.subheadline).foregroundStyle(Brand.secondaryText).multilineTextAlignment(.center)
                                 Button { panel = .create } label: { Text(text("friends.join")).frame(maxWidth: .infinity, minHeight: 46) }
                                     .buttonStyle(.borderedProminent).tint(Brand.accent).foregroundStyle(Brand.onAccent)
                             }.padding(.vertical, 70).frame(maxWidth: .infinity)
@@ -140,7 +142,9 @@ struct FriendsView: View {
                         FriendAvatarView(name: profile.nickname, tint: ExperimentalPalette.transit, surface: ExperimentalPalette.transitSurface).frame(width: 31, height: 38)
                         VStack(alignment: .leading, spacing: 3) {
                             Text(text("friends.yourSharing")).font(.subheadline.weight(.medium)).foregroundStyle(Brand.ink)
-                            DottedLine(parts: [text(profile.shareStats ? "friends.shareStats" : "friends.privateStats")] + (profile.shareArrival ? [text("friends.shareArrival")] : [])).font(.caption2).foregroundStyle(Brand.secondaryText)
+                            DottedLine(parts: [text(profile.shareStats ? "friends.shareStats" : "friends.privateStats")]
+                                       + (profile.shareStats && profile.shareCountries == true ? [text("friends.shareCountries")] : [])
+                                       + (profile.shareArrival ? [text("friends.shareArrival")] : [])).font(.caption2).foregroundStyle(Brand.secondaryText)
                         }
                         Spacer(minLength: 6)
                         Image(systemName: "slider.horizontal.3").font(.footnote).foregroundStyle(Brand.secondaryText)
@@ -187,7 +191,7 @@ struct FriendsView: View {
         switch value {
         case .profile, .create:
             FriendsProfileForm(profile: value.id == "create" ? nil : model.snapshot?.profile, busy: model.working) { profile in
-                Task { if await model.act(FriendsActionRequest(action: .saveProfile, nickname: profile.nickname, shareStats: profile.shareStats, shareArrival: profile.shareArrival), parcels: parcels.parcels) != nil { panel = nil } }
+                Task { if await model.act(.saveProfile(profile), parcels: parcels.parcels) != nil { panel = nil } }
             }
         case .invite:
             if session.isDemo {
@@ -206,7 +210,7 @@ struct FriendsView: View {
             VStack(alignment: .leading, spacing: 20) {
                 if let error = model.errorKey { errorView(error) }
                 if let friend = model.snapshot?.friends.first(where: { $0.id == id }) {
-                    FriendDetailView(friend: friend, busy: model.working) {
+                    FriendDetailView(friend: friend, book: news.book, busy: model.working) {
                         Task { if await model.act(FriendsActionRequest(action: .removeFriend, friendID: friend.id), parcels: parcels.parcels) != nil { openFriend = nil } }
                     }
                 }
@@ -308,8 +312,9 @@ struct FriendSharingPreviewView: View {
     private var summary: [String] {
         guard let stats = friend.stats else { return [localizer.text("friends.privateStats")] }
         let days = stats.averageDays.map { localizer.text($0 == 1 ? "friends.day" : "friends.days", ["count": $0]) } ?? "—"
-        return ["\(stats.deliveredCount) \(localizer.text("passport.delivered", ["count": stats.deliveredCount]))", days,
-                localizer.text("friends.stampCount", ["count": stats.stamps.count])]
+        let delivered = localizer.text("passport.delivered", ["count": stats.deliveredCount]).lowercased(with: localizer.language.locale)
+        return ["\(stats.deliveredCount) \(delivered)", days, localizer.text("friends.stampCount", ["count": stats.stamps.count])]
+            + (stats.countries.map { [localizer.text("friends.countryCount", ["count": $0.count])] } ?? [])
     }
 }
 
@@ -341,18 +346,16 @@ struct FriendsProfileForm: View {
     let submitKey: String?
     let save: (FriendProfile) -> Void
     @State private var name: String
-    @State private var stats: Bool
-    @State private var arrival: Bool
+    @State private var sharing: FriendsSharing
     @State private var magicTrigger = 0
     @State private var settledName: String?
     @FocusState private var nameFocused: Bool
     init(profile: FriendProfile?, busy: Bool, submitKey: String? = nil, save: @escaping (FriendProfile) -> Void) {
         self.profile = profile; self.busy = busy; self.submitKey = submitKey; self.save = save
         _name = State(initialValue: profile?.nickname ?? "")
-        _stats = State(initialValue: profile?.shareStats ?? true)
-        _arrival = State(initialValue: profile?.shareArrival ?? false)
+        _sharing = State(initialValue: FriendsSharing(profile))
     }
-    private var value: FriendProfile { FriendProfile(nickname: name.trimmingCharacters(in: .whitespacesAndNewlines), shareStats: stats, shareArrival: arrival) }
+    private var value: FriendProfile { sharing.profile(nickname: name.trimmingCharacters(in: .whitespacesAndNewlines)) }
     private var invitesAttention: Bool { profile == nil && !busy && !reduceMotion && scenePhase == .active }
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -368,13 +371,18 @@ struct FriendsProfileForm: View {
             }
             VStack(alignment: .leading, spacing: 8) {
                 Text(localizer.text("friends.preview")).font(.subheadline).foregroundStyle(Brand.secondaryText)
-                FriendSharingPreviewView(friend: FriendsStore.ownCard(parcels: parcels.parcels, profile: FriendProfile(nickname: value.nickname.isEmpty ? localizer.text("friends.you") : value.nickname, shareStats: stats, shareArrival: arrival)))
+                FriendSharingPreviewView(friend: FriendsStore.ownCard(parcels: parcels.parcels, profile: sharing.profile(nickname: value.nickname.isEmpty ? localizer.text("friends.you") : value.nickname)))
             }
             VStack(spacing: 0) {
                 Divider()
-                toggle("friends.shareStats", detail: "friends.sharedStatsSummary", value: $stats)
+                toggle("friends.shareStats", detail: "friends.sharedStatsSummary", value: $sharing.stats)
                 Divider()
-                toggle("friends.shareArrival", detail: "friends.shareArrivalDetail", value: $arrival)
+                // Countries ride on Stats & stamps: the switch sits under it, and rests while it is off.
+                toggle("friends.shareCountries", detail: "friends.sharedCountriesSummary",
+                       value: Binding(get: { sharing.sharesCountries }, set: { sharing.countries = $0 }), resting: sharing.countriesRest)
+                    .padding(.leading, 14)
+                Divider()
+                toggle("friends.shareArrival", detail: "friends.shareArrivalDetail", value: $sharing.arrival, showsDetail: false)
                 Divider()
             }
 
@@ -383,8 +391,7 @@ struct FriendsProfileForm: View {
                 .buttonStyle(.borderedProminent).tint(Brand.accent).foregroundStyle(Brand.onAccent).disabled(busy || value.nickname.isEmpty)
         }.disabled(busy)
             .sensoryFeedback(.impact(weight: .light, intensity: 0.5), trigger: magicTrigger)
-            .onChange(of: stats) { _, _ in magicTrigger += 1 }
-            .onChange(of: arrival) { _, _ in magicTrigger += 1 }
+            .onChange(of: sharing) { _, _ in magicTrigger += 1 }
             .task(id: name) {
                 guard profile == nil, !value.nickname.isEmpty else { return }
                 do { try await Task.sleep(for: .milliseconds(900)) } catch { return }
@@ -392,13 +399,41 @@ struct FriendsProfileForm: View {
                 settledName = value.nickname
             }
     }
-    private func toggle(_ title: String, detail: String, value: Binding<Bool>) -> some View {
+    /// A sharing switch with its title, and its detail under it unless `showsDetail` is off; a `resting` one is off, dimmed
+    /// and can't change.
+    private func toggle(_ title: String, detail: String, value: Binding<Bool>, showsDetail: Bool = true, resting: Bool = false) -> some View {
         Toggle(isOn: value) {
             VStack(alignment: .leading, spacing: 3) {
-                Text(localizer.text(title)).font(.footnote.weight(.medium))
-                if title == "friends.shareStats" { Text(localizer.text(detail)).font(.caption2).foregroundStyle(Brand.secondaryText) }
+                Text(localizer.text(title)).font(.footnote.weight(.medium)).foregroundStyle(resting ? Brand.secondaryText : Brand.ink)
+                if showsDetail { Text(localizer.text(detail)).font(.caption2).foregroundStyle(Brand.secondaryText) }
             }
         }.rowToggle().toggleStyle(.switch).tint(ExperimentalPalette.delivered).padding(.vertical, 10).accessibilityHint(localizer.text(detail))
+            .disabled(resting)
+    }
+}
+
+/// The profile form's three choices. Countries ride on Stats & stamps: while those are off, the Countries switch shows
+/// off and rests, and keeps its own choice for when they are back on. A new profile shares its countries; one saved
+/// before the switch, which has no value for it, reads as not sharing them.
+struct FriendsSharing: Equatable {
+    var stats: Bool
+    var countries: Bool
+    var arrival: Bool
+
+    init(_ profile: FriendProfile?) {
+        stats = profile?.shareStats ?? true
+        arrival = profile?.shareArrival ?? false
+        countries = profile.map { $0.shareCountries == true } ?? true
+    }
+
+    /// What the Countries switch shows.
+    var sharesCountries: Bool { stats && countries }
+    /// Whether the Countries switch rests: dimmed, and it can't change.
+    var countriesRest: Bool { !stats }
+
+    /// The profile the form saves: every save says whether it shares its countries.
+    func profile(nickname: String) -> FriendProfile {
+        FriendProfile(nickname: nickname, shareStats: stats, shareArrival: arrival, shareCountries: countries)
     }
 }
 
@@ -524,14 +559,13 @@ struct FriendsInvitationParcel: View {
     }
 }
 
-private struct FriendDetailView: View {
+struct FriendDetailView: View {
     @EnvironmentObject private var localizer: Localizer
-    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     let friend: FriendCard
+    /// The reader's own passport, worked out on this device from their parcels.
+    let book: PassportBook
     let busy: Bool
     let remove: () -> Void
-    @State private var showAllStamps = false
-    @State private var stamp: FriendStamp?
     @State private var confirming = false
     var body: some View {
         VStack(alignment: .leading, spacing: 22) {
@@ -541,29 +575,7 @@ private struct FriendDetailView: View {
                     metric(stats.deliveredCount.formatted(), localizer.text("passport.delivered", ["count": stats.deliveredCount]))
                     metric(stats.averageDays.map { localizer.text($0 == 1 ? "friends.day" : "friends.days", ["count": $0]) } ?? "—", localizer.text("passport.average"))
                 }
-                Text(localizer.text("passport.stamps")).font(.subheadline.weight(.semibold))
-                // Fewer stamps to a row as the text grows, so their names have room.
-                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), alignment: .top), count: dynamicTypeSize.isAccessibilitySize ? 2 : dynamicTypeSize >= .xxLarge ? 3 : 4), spacing: 16) {
-                    ForEach(visibleStamps(stats.stamps)) { value in
-                        let earned = stats.stamps.contains(value)
-                        Button { stamp = value } label: {
-                            VStack(spacing: 10) {
-                                // The passport's own seal for the stamp, in its tone.
-                                if let seal = PassportData.shared.stamp(value.rawValue) { PassportSeal(stamp: seal, earned: earned) }
-                                Text(localizer.text(value.titleKey)).font(.caption2).foregroundStyle(earned ? Brand.ink : Brand.secondaryText).multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
-                            }.frame(maxWidth: .infinity, minHeight: 96, alignment: .top)
-                        }.buttonStyle(PassportPressStyle()).accessibilityLabel(stampLabel(value, earned: earned, count: stats.deliveredCount))
-                            .popover(isPresented: Binding(get: { stamp == value }, set: { if !$0 { stamp = nil } })) {
-                                VStack(alignment: .leading, spacing: 8) {
-                                    Text(localizer.text(value.titleKey)).font(.headline)
-                                    Text(localizer.text(value.explanationKey) + progress(value, earned: earned, count: stats.deliveredCount)).font(.subheadline).foregroundStyle(Brand.secondaryText)
-                                }.fixedSize(horizontal: false, vertical: true).frame(idealWidth: 260, maxWidth: 280, alignment: .leading).padding(20).foregroundStyle(Brand.ink).presentationBackground(Brand.raised).presentationCompactAdaptation(.popover)
-                            }
-                    }
-                }
-                if FriendStamp.allCases.filter({ !stats.stamps.contains($0) }).count > 3 {
-                    Button(localizer.text(showAllStamps ? "passport.showLess" : "passport.showAll")) { showAllStamps.toggle() }.font(.caption).foregroundStyle(Brand.secondaryText).frame(minHeight: 44).buttonStyle(PassportPressStyle())
-                }
+                FriendPassportCompare(friend: friend, stats: stats, book: book).padding(.top, 4)
             } else { Label(localizer.text("friends.privateStats"), systemImage: "lock").font(.footnote).foregroundStyle(Brand.secondaryText) }
             Divider()
             DisclosureGroup {
@@ -576,13 +588,232 @@ private struct FriendDetailView: View {
                     }
                 } else { Button(localizer.text("friends.remove")) { confirming = true }.font(.footnote).foregroundStyle(Brand.secondaryText).frame(minHeight: 36).disabled(busy) }
             } label: { Text(localizer.text("friends.manageFriendship")).font(.caption).foregroundStyle(Brand.secondaryText) }
+        }
+    }
+    private func metric(_ value: String, _ title: String) -> some View { VStack(alignment: .leading, spacing: 4) { Text(value).font(.title2.weight(.semibold)); Text(title).font(.caption2).foregroundStyle(Brand.secondaryText) }.frame(maxWidth: .infinity, alignment: .leading) }
+}
+
+/// A friend's stamps and countries beside the reader's (the web's `FriendPassportCompare`): over the twelve stamps
+/// Friends shares, in their order, those they both have, those only the friend has and those only the reader has, each
+/// group only when it holds one; then the friend's countries, the most-visited first, and how many the reader's parcels
+/// went through too.
+struct FriendPassportComparison {
+    enum Kind { case both, theirs, mine }
+
+    struct Group: Identifiable {
+        let kind: Kind
+        /// The reader's own progress on each of its stamps.
+        let stamps: [PassportBook.StampProgress]
+        /// Its first cell's place among the cells rising in.
+        let start: Int
+        var id: Kind { kind }
+    }
+
+    struct Country: Identifiable, Equatable {
+        let code: String
+        let name: String
+        let count: Int
+        var id: String { code }
+    }
+
+    let groups: [Group]
+    let countries: [Country]
+    /// How many of the friend's countries the reader's parcels went through too.
+    let common: Int
+    /// The first country's place among the cells rising in, after the stamps.
+    let countriesStart: Int
+
+    init(stats: FriendStats, book: PassportBook, language: AppLanguage) {
+        let mine = Dictionary(book.stamps.map { ($0.key, $0) }, uniquingKeysWith: { first, _ in first })
+        let theirs = Set(stats.stamps)
+        func has(_ stamp: FriendStamp) -> Bool { mine[stamp.rawValue]?.earned == true }
+        let kinds: [(Kind, (FriendStamp) -> Bool)] = [
+            (.both, { theirs.contains($0) && has($0) }),
+            (.theirs, { theirs.contains($0) && !has($0) }),
+            (.mine, { !theirs.contains($0) && has($0) }),
+        ]
+        var start = 0
+        var groups: [Group] = []
+        for (kind, holds) in kinds {
+            let stamps = FriendStamp.allCases.filter(holds).compactMap { mine[$0.rawValue] }
+            guard !stamps.isEmpty else { continue }
+            groups.append(Group(kind: kind, stamps: stamps, start: start))
+            start += stamps.count
+        }
+        self.groups = groups
+        countriesStart = start
+        countries = (stats.countries ?? []).map { Country(code: $0.code, name: TrackingLocation.countryName($0.code, language: language), count: $0.count) }
+            .sorted { $0.count != $1.count ? $0.count > $1.count : $0.name.compare($1.name, locale: language.locale) == .orderedAscending }
+        let reached = Set(book.countries.map(\.code))
+        common = countries.filter { reached.contains($0.code) }.count
+    }
+
+    /// A group's heading: "You both have", "Only Mila", "Only you".
+    @MainActor static func heading(_ kind: Kind, nickname: String, localizer: Localizer) -> String {
+        switch kind {
+        case .both: localizer.text("friends.bothHave")
+        case .theirs: localizer.text("friends.onlyFriend", ["name": nickname])
+        case .mine: localizer.text("friends.onlyYou")
+        }
+    }
+
+    /// How far the reader is on a stamp only the friend has, "You’re at 1 of 10", when it takes more than one.
+    @MainActor static func progress(_ stamp: PassportBook.StampProgress, localizer: Localizer) -> String? {
+        stamp.total > 1 ? localizer.text("friends.yourProgress", ["count": min(stamp.count, stamp.total), "total": stamp.total]) : nil
+    }
+}
+
+/// A friend's Passport beside the reader's, as `FriendPassportComparison` sorts it: each stamp is the reader's own seal,
+/// with no postmark since a friend's days are not shared, and each country the friend's ink with only its code. The
+/// cells rise in as the page opens, the stamps first, then the countries. With neither of them holding a shared stamp,
+/// the friend's collection shows instead.
+private struct FriendPassportCompare: View {
+    @EnvironmentObject private var localizer: Localizer
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @ScaledMetric(relativeTo: .headline) private var headingSize: CGFloat = 16
+    @ScaledMetric(relativeTo: .caption) private var countryNameSize: CGFloat = 12.5
+    @ScaledMetric(relativeTo: .caption2) private var progressSize: CGFloat = 10
+    let friend: FriendCard
+    let stats: FriendStats
+    let book: PassportBook
+    /// The cells' width: on a page narrower than 360 points, three stamps to a row; from 560, three countries.
+    @State private var width: CGFloat?
+    /// The page's margins around the cells.
+    private static let margins: CGFloat = 48
+
+    var body: some View {
+        let comparison = FriendPassportComparison(stats: stats, book: book, language: localizer.language)
+        VStack(alignment: .leading, spacing: 26) {
+            if comparison.groups.isEmpty {
+                FriendStampCollection(stats: stats)
+            } else {
+                ForEach(comparison.groups) { group in
+                    VStack(alignment: .leading, spacing: 14) {
+                        heading(FriendPassportComparison.heading(group.kind, nickname: friend.nickname, localizer: localizer), count: group.stamps.count)
+                        PassportGrid(items: group.stamps, columns: stampColumns, spacing: 8, rowSpacing: 14) { stamp in
+                            stampCell(stamp, progress: group.kind == .theirs ? FriendPassportComparison.progress(stamp, localizer: localizer) : nil)
+                                .modifier(PassportRise(index: group.start + (group.stamps.firstIndex { $0.key == stamp.key } ?? 0)))
+                        }
+                    }
+                }
+            }
+            if !comparison.countries.isEmpty {
+                VStack(alignment: .leading, spacing: 0) {
+                    heading(localizer.text("passport.countriesLabel", ["count": comparison.countries.count]), count: comparison.countries.count)
+                    if comparison.common > 0 {
+                        Text(localizer.text("friends.countriesBoth", ["count": comparison.common])).font(.caption).foregroundStyle(Brand.secondaryText)
+                            .padding(.top, 6)
+                    }
+                    PassportGrid(items: comparison.countries, columns: countryColumns, spacing: 12, rowSpacing: 22) { country in
+                        countryCell(country)
+                            .modifier(PassportRise(index: comparison.countriesStart + (comparison.countries.firstIndex { $0.code == country.code } ?? 0)))
+                    }
+                    .padding(.top, 14)
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { width = $0 }
+    }
+
+    /// Four stamps to a row, three on a narrow page; fewer as the text grows, so their names have room.
+    private var stampColumns: Int {
+        if dynamicTypeSize.isAccessibilitySize { return 2 }
+        if dynamicTypeSize >= .xxLarge { return 3 }
+        return (width.map { $0 + Self.margins < 360 } ?? false) ? 3 : 4
+    }
+
+    /// As the reader's Countries page: two to a row, three on a wider page; one at the largest text sizes on a phone.
+    private var countryColumns: Int {
+        let wide = width.map { $0 + Self.margins >= 560 } ?? false
+        return dynamicTypeSize.isAccessibilitySize ? (wide ? 2 : 1) : (wide ? 3 : 2)
+    }
+
+    private func heading(_ title: String, count: Int) -> some View {
+        HStack(alignment: .firstTextBaseline, spacing: 5) {
+            Text(title).font(.system(size: headingSize, weight: .semibold)).foregroundStyle(Brand.ink)
+            Text(count, format: .number).font(.system(size: headingSize)).foregroundStyle(Brand.secondaryText)
+        }
+        .fixedSize(horizontal: false, vertical: true)
+        .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(.isHeader)
+    }
+
+    private func stampCell(_ stamp: PassportBook.StampProgress, progress: String?) -> some View {
+        VStack(spacing: 6) {
+            PassportSeal(stamp: stamp.stamp, earned: stamp.earned, postmark: false)
+            Text(PassportStampCopy(localizer: localizer).title(stamp.key)).font(.caption2).foregroundStyle(Brand.ink)
+            if let progress { Text(progress).font(.system(size: progressSize)).foregroundStyle(Brand.secondaryText) }
+        }
+        .multilineTextAlignment(.center)
+        .fixedSize(horizontal: false, vertical: true)
+        .frame(maxWidth: .infinity, alignment: .top)
+        .accessibilityElement(children: .combine)
+    }
+
+    private func countryCell(_ country: FriendPassportComparison.Country) -> some View {
+        let parcels = PassportStampCopy(localizer: localizer).parcels(country.count)
+        // As the Countries page sets it: the words' alignment stays off the ink, whose canvas sets its own lines.
+        return VStack(spacing: 3) {
+            CountryInk(code: country.code)
+                .padding(.bottom, 6)
+            VStack(spacing: 3) {
+                Text("\(TrackingLocation.flag(country.code)) \(country.name)")
+                    .font(.system(size: countryNameSize))
+                    .foregroundStyle(Brand.ink)
+                Text(parcels)
+                    .font(.caption2)
+                    .foregroundStyle(Brand.secondaryText)
+            }
+            .multilineTextAlignment(.center)
+            .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(.vertical, 4)
+        .frame(maxWidth: .infinity)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(country.name), \(parcels)")
+    }
+}
+
+/// A friend's stamps alone: the ones they have, then the next three to reach, the rest behind "All stamps". Each opens
+/// what it stands for. A friend's page shows it when neither side holds a stamp Friends shares.
+private struct FriendStampCollection: View {
+    @EnvironmentObject private var localizer: Localizer
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    let stats: FriendStats
+    @State private var showAllStamps = false
+    @State private var stamp: FriendStamp?
+    var body: some View {
+        VStack(alignment: .leading, spacing: 22) {
+            Text(localizer.text("passport.stamps")).font(.subheadline.weight(.semibold))
+            // Fewer stamps to a row as the text grows, so their names have room.
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), alignment: .top), count: dynamicTypeSize.isAccessibilitySize ? 2 : dynamicTypeSize >= .xxLarge ? 3 : 4), spacing: 16) {
+                ForEach(visibleStamps(stats.stamps)) { value in
+                    let earned = stats.stamps.contains(value)
+                    Button { stamp = value } label: {
+                        VStack(spacing: 10) {
+                            // The passport's own seal for the stamp, in its tone; no postmark, as a friend's days are not shared.
+                            if let seal = PassportData.shared.stamp(value.rawValue) { PassportSeal(stamp: seal, earned: earned, postmark: false) }
+                            Text(localizer.text(value.titleKey)).font(.caption2).foregroundStyle(earned ? Brand.ink : Brand.secondaryText).multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
+                        }.frame(maxWidth: .infinity, minHeight: 96, alignment: .top)
+                    }.buttonStyle(PassportPressStyle()).accessibilityLabel(stampLabel(value, earned: earned, count: stats.deliveredCount))
+                        .popover(isPresented: Binding(get: { stamp == value }, set: { if !$0 { stamp = nil } })) {
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text(localizer.text(value.titleKey)).font(.headline)
+                                Text(localizer.text(value.explanationKey) + progress(value, earned: earned, count: stats.deliveredCount)).font(.subheadline).foregroundStyle(Brand.secondaryText)
+                            }.fixedSize(horizontal: false, vertical: true).frame(idealWidth: 260, maxWidth: 280, alignment: .leading).padding(20).foregroundStyle(Brand.ink).presentationBackground(Brand.raised).presentationCompactAdaptation(.popover)
+                        }
+                }
+            }
+            if FriendStamp.allCases.filter({ !stats.stamps.contains($0) }).count > 3 {
+                Button(localizer.text(showAllStamps ? "passport.showLess" : "passport.showAll")) { showAllStamps.toggle() }.font(.caption).foregroundStyle(Brand.secondaryText).frame(minHeight: 44).buttonStyle(PassportPressStyle())
+            }
         }.sensoryFeedback(.impact(weight: .light, intensity: 0.6), trigger: stamp)
     }
     private func visibleStamps(_ earned: [FriendStamp]) -> [FriendStamp] {
         let upcoming = Set(FriendStamp.allCases.filter { !earned.contains($0) }.prefix(3))
         return showAllStamps ? FriendStamp.allCases : FriendStamp.allCases.filter { earned.contains($0) || upcoming.contains($0) }
     }
-    private func metric(_ value: String, _ title: String) -> some View { VStack(alignment: .leading, spacing: 4) { Text(value).font(.title2.weight(.semibold)); Text(title).font(.caption2).foregroundStyle(Brand.secondaryText) }.frame(maxWidth: .infinity, alignment: .leading) }
     /// A stamp is read as Passport reads one: its title, and while it isn't earned, how far along it is, or that it isn't.
     private func stampLabel(_ stamp: FriendStamp, earned: Bool, count: Int) -> String {
         let title = localizer.text(stamp.titleKey)
@@ -593,6 +824,67 @@ private struct FriendDetailView: View {
     private func progress(_ stamp: FriendStamp, earned: Bool, count: Int) -> String {
         guard !earned else { return "" }
         switch stamp { case .first: return "\n\(min(count, 1)) / 1"; case .ten: return "\n\(min(count, 10)) / 10"; case .express: return "\n" + localizer.text("passport.underTwoDays"); case .theRegular: return "\n\(min(count, 25)) / 25"; default: return "" }
+    }
+}
+
+/// Two made-up passports side by side: what Friends shows before anyone has made a profile. They come in from either
+/// side and settle, Mila's a moment after Alex's; with Reduce Motion they are simply there.
+struct FriendsSample: View {
+    private struct Passport {
+        let name: String
+        let tone: PassportData.Tone
+        let delivered: Int
+        let days: Int
+        let stamps: [String]
+    }
+
+    private static let passports = [
+        Passport(name: "Alex", tone: .blue, delivered: 10, days: 6, stamps: ["first", "ten", "connected", "express", "rightNextDoor", "pickedUp"]),
+        Passport(name: "Mila", tone: .lilac, delivered: 12, days: 3, stamps: ["first", "ten", "connected", "express", "aroundWorld"]),
+    ]
+
+    @EnvironmentObject private var localizer: Localizer
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @ScaledMetric(relativeTo: .headline) private var nameSize: CGFloat = 16
+    @ScaledMetric(relativeTo: .caption2) private var lineSize: CGFloat = 11
+    @State private var landed = false
+
+    var body: some View {
+        VStack(spacing: 12) {
+            Text(localizer.text("friends.sampleTitle")).font(.caption).foregroundStyle(Brand.secondaryText).multilineTextAlignment(.center)
+            HStack(alignment: .top, spacing: 10) {
+                ForEach(Self.passports.indices, id: \.self) { passport($0) }
+            }
+            .fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(maxWidth: 380)
+        .onAppear { landed = true }
+    }
+
+    private func passport(_ index: Int) -> some View {
+        let passport = Self.passports[index]
+        let shown = landed || reduceMotion
+        let delivered = localizer.text("passport.delivered", ["count": passport.delivered]).lowercased(with: localizer.language.locale)
+        return VStack(alignment: .leading, spacing: 3) {
+            Text(passport.name).font(.system(size: nameSize, weight: .semibold)).tracking(-0.3).foregroundStyle(Brand.ink)
+            Text("\(passport.delivered) \(delivered) · \(localizer.text("friends.days", ["count": passport.days]))")
+                .font(.system(size: lineSize)).foregroundStyle(passport.tone.ink)
+            PillFlow(spacing: 4) {
+                ForEach(passport.stamps, id: \.self) { key in
+                    if let stamp = PassportData.shared.stamp(key) { PassportSeal(stamp: stamp, size: .mini) }
+                }
+            }
+            .padding(.top, 5)
+            .accessibilityHidden(true)
+        }
+        .padding(.top, 14).padding(.horizontal, 12).padding(.bottom, 12)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .background(passport.tone.paper, in: RoundedRectangle(cornerRadius: 16))
+        .accessibilityElement(children: .combine)
+        .rotationEffect(.degrees(index == 0 ? -2 : 2))
+        .offset(x: shown ? 0 : (index == 0 ? -18 : 18), y: shown ? 0 : 10)
+        .opacity(shown ? 1 : 0)
+        .animation(reduceMotion ? nil : PassportMotion.settle.animation(520, delay: Double(index) * 90), value: landed)
     }
 }
 

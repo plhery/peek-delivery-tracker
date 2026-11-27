@@ -1053,7 +1053,7 @@ struct FriendsSignedOutView: View {
                 VStack(spacing: 22) {
                     FriendsPostagePair().padding(.bottom, 12)
                     Text(localizer.text("friends.title")).font(.system(size: dynamicTypeSize.isAccessibilitySize ? titleSize : 26, weight: .semibold))
-                    Text(localizer.text("friends.introSummary"))
+                    Text(localizer.text("friends.introSideBySide"))
                         .font(.subheadline)
                         .foregroundStyle(Brand.secondaryText)
                         .multilineTextAlignment(.center)

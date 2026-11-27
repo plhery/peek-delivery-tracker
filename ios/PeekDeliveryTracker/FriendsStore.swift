@@ -139,7 +139,9 @@ final class FriendsStore: ObservableObject {
                 switch request.action {
                 case .saveProfile:
                     guard let name = request.nickname, let stats = request.shareStats, let arrival = request.shareArrival else { return nil }
-                    local.profile = FriendProfile(nickname: name.trimmingCharacters(in: .whitespacesAndNewlines), shareStats: stats, shareArrival: arrival)
+                    // Left out, the countries keep their stored choice, as the server does; a new profile shares them.
+                    local.profile = FriendProfile(nickname: name.trimmingCharacters(in: .whitespacesAndNewlines), shareStats: stats, shareArrival: arrival,
+                                                  shareCountries: request.shareCountries ?? local.profile?.shareCountries ?? true)
                 case .disable: local = FriendsSnapshot(friends: [])
                 case .removeFriend: local.friends.removeAll { $0.id == request.friendID }
                 default: errorKey = "friends.demoInvites"; return nil
@@ -179,7 +181,8 @@ final class FriendsStore: ObservableObject {
 
     static func ownCard(parcels: [Parcel], profile: FriendProfile, now: Date = Date()) -> FriendCard {
         // The passport's own stamps, the calendar ones in UTC, as the server shares them: only the twelve keys the
-        // apps before the new stamps decode.
+        // apps before the new stamps decode. With Countries on too, each country the parcels went through and how many,
+        // by code, without their days or order.
         let book = PassportBook(parcels: parcels, timeZone: TimeZone(secondsFromGMT: 0)!)
         let stats = book.stats
         let stamps = book.sharedStamps
@@ -193,9 +196,19 @@ final class FriendsStore: ObservableObject {
         }
         return FriendCard(
             id: UUID(uuidString: "44000000-0000-4000-8000-000000000004")!, nickname: profile.nickname,
-            stats: profile.shareStats ? FriendStats(deliveredCount: stats.deliveredCount, averageDays: stats.averageDeliveryDuration.map { max(1, Int(ceil($0 / 86400))) }, stamps: stamps) : nil,
+            stats: profile.shareStats ? FriendStats(deliveredCount: stats.deliveredCount, averageDays: stats.averageDeliveryDuration.map { max(1, Int(ceil($0 / 86400))) }, stamps: stamps,
+                                                    countries: profile.shareCountries == true ? book.countries.map { FriendCountry(code: $0.code, count: $0.count) }.sorted { $0.code < $1.code } : nil) : nil,
             arrivedThisWeek: profile.shareArrival ? arrived : nil
         )
+    }
+}
+
+extension FriendsActionRequest {
+    /// Saves a profile with all three of its choices. A profile kept from before the Countries switch passes its nil
+    /// through, so the server keeps what it has.
+    static func saveProfile(_ profile: FriendProfile) -> FriendsActionRequest {
+        FriendsActionRequest(action: .saveProfile, nickname: profile.nickname, shareStats: profile.shareStats, shareArrival: profile.shareArrival,
+                             shareCountries: profile.shareCountries)
     }
 }
 

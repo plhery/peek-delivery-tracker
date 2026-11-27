@@ -1,14 +1,15 @@
 import SwiftUI
 
 /// A country's ink stamp, as the passport's Countries page and the year's card draw it: its continent's outline with an
-/// inner line, its running number, its code and the day a parcel first reached it, in the country's tone and tilt.
+/// inner line, its running number, its code and the day a parcel first reached it, in the country's tone and tilt; a
+/// friend's carries only its code.
 enum CountryInkDrawing {
     /// The drawing's own box.
     static let size = CGSize(width: 124, height: 92)
 
     /// Draws the stamp over `box`, scaled by the box's width and turned by the country's tilt plus `turn` degrees.
     /// `outline`: the outline's stroke in the drawing's units, 1.7 at rest, more while a new stamp's ink bleeds.
-    static func draw(_ context: GraphicsContext, code: String, number: Int, day: String, color: Color, in box: CGRect,
+    static func draw(_ context: GraphicsContext, code: String, number: Int?, day: String?, color: Color, in box: CGRect,
                      outline: CGFloat = 1.7, turn: Double = 0) {
         let data = PassportData.shared
         let ink = data.ink(code)
@@ -26,12 +27,16 @@ enum CountryInkDrawing {
         inner.scaleBy(x: layout.inner, y: layout.inner)
         inner.translateBy(x: -62, y: -46)
         inner.stroke(path, with: .color(color), style: StrokeStyle(lineWidth: 0.8 / layout.inner, lineJoin: .round))
-        stamp.drawLine(Text("Nº \(String(format: "%02d", number))").font(.system(size: layout.small, weight: .semibold)).tracking(1.3)
-            .foregroundStyle(color), x: 62, baseline: layout.number, centred: true)
+        if let number {
+            stamp.drawLine(Text("Nº \(String(format: "%02d", number))").font(.system(size: layout.small, weight: .semibold)).tracking(1.3)
+                .foregroundStyle(color), x: 62, baseline: layout.number, centred: true)
+        }
         stamp.drawLine(Text(code).font(.system(size: layout.codeSize, weight: .bold)).tracking(2).foregroundStyle(color),
                        x: 63, baseline: layout.code, centred: true)
-        stamp.drawLine(Text(day).font(.system(size: layout.small, weight: .semibold)).tracking(layout.dateSpacing).foregroundStyle(color),
-                       x: 62, baseline: layout.date, centred: true)
+        if let day {
+            stamp.drawLine(Text(day).font(.system(size: layout.small, weight: .semibold)).tracking(layout.dateSpacing).foregroundStyle(color),
+                           x: 62, baseline: layout.date, centred: true)
+        }
     }
 }
 
@@ -39,8 +44,8 @@ enum CountryInkDrawing {
 /// height in the drawing's proportion. A tilted corner reaches past its frame, as ink on paper does.
 struct CountryInk: View {
     let code: String
-    let number: Int
-    let day: String
+    var number: Int?
+    var day: String?
     var outline: CGFloat = 1.7
     var turn: Double = 0
 

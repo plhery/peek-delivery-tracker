@@ -22158,6 +22158,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#aa78ff"
     },
     {
+      "id": "correos-express",
+      "catalog": "correos-express",
+      "slug": "correos-express-pakket-volgen",
+      "title": "Correos Express pakket volgen: statussen, afhaal, contact",
+      "name": "Correos Express",
+      "color": "#ffcd00"
+    },
+    {
       "id": "mondial-relay",
       "catalog": "mondial-relay",
       "slug": "mondial-relay-pakket-volgen",
@@ -22276,6 +22284,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "ELTA Hellenic Post volgen: GR-nummers, statussen & hulp",
       "name": "ELTA Hellenic Post",
       "color": "#0063a9"
+    },
+    {
+      "id": "maltapost",
+      "catalog": "maltapost",
+      "slug": "maltapost-pakket-volgen",
+      "title": "MaltaPost pakket volgen: MT-codes, statussen en afhalen",
+      "name": "MaltaPost",
+      "color": "#d43b2c"
     },
     {
       "id": "ups",
@@ -22524,6 +22540,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "nb": [
     {
+      "id": "correos-express",
+      "catalog": "correos-express",
+      "slug": "correos-express-sporing",
+      "title": "Correos Express sporing: statuser, utlevering og kontakt",
+      "name": "Correos Express",
+      "color": "#ffcd00"
+    },
+    {
       "id": "amazon-logistics",
       "catalog": "amazon-logistics",
       "slug": "amazon-logistics-sporing",
@@ -22630,6 +22654,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#001e60"
     },
     {
+      "id": "jrt",
+      "catalog": "jrt",
+      "slug": "jrt-lahetyksen-seuranta",
+      "title": "JRT-seuranta: JRT…MM-numerot, lentoskannaukset ja DHL",
+      "name": "JRT",
+      "color": "#023053"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-seuranta",
@@ -22639,6 +22671,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ],
   "cs": [
+    {
+      "id": "correos-express",
+      "catalog": "correos-express",
+      "slug": "correos-express-sledovani-zasilek",
+      "title": "Correos Express sledování zásilek: stavy, výdej a kontakt",
+      "name": "Correos Express",
+      "color": "#ffcd00"
+    },
     {
       "id": "packeta",
       "catalog": "packeta",
@@ -23552,6 +23592,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "sr": [
     {
+      "id": "dpd-ch",
+      "catalog": "dpd",
+      "slug": "dpd-switzerland-pracenje-posiljke",
+      "title": "DPD Švajcarska praćenje pošiljke: statusi, dostava, kontakt",
+      "name": "DPD Switzerland",
+      "color": "#dc0032"
+    },
+    {
       "id": "posta-srbije",
       "catalog": "posta-srbije",
       "slug": "posta-srbije-pracenje-posiljke",
@@ -23566,6 +23614,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "ELTA Hellenic Post praćenje: GR brojevi, statusi i kontakt",
       "name": "ELTA Hellenic Post",
       "color": "#0063a9"
+    },
+    {
+      "id": "maltapost",
+      "catalog": "maltapost",
+      "slug": "maltapost-pracenje-posiljke",
+      "title": "MaltaPost praćenje pošiljke: brojevi, statusi i kontakt",
+      "name": "MaltaPost",
+      "color": "#d43b2c"
     },
     {
       "id": "correos-chile",

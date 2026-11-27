@@ -15782,6 +15782,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8300"
     },
     {
+      "id": "yilong-logistics",
+      "catalog": "yilong-logistics",
+      "slug": "yilong-logistics-tracking",
+      "title": "Rastreio Yilong Logistics: códigos YIL e status da China",
+      "name": "Yilong Logistics",
+      "color": "#ec0307"
+    },
+    {
       "id": "quick-rabbit",
       "catalog": "quick-rabbit",
       "slug": "rastreamento-quick-rabbit",
@@ -16284,6 +16292,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento SXW Express: códigos SXW, etapas e entrega",
       "name": "SXW Express",
       "color": "#003876"
+    },
+    {
+      "id": "xuchuan-logistics",
+      "catalog": "xuchuan-logistics",
+      "slug": "xuchuan-logistics-tracking",
+      "title": "Rastreio Xuchuan Logistics: códigos XC, entrega e contato",
+      "name": "Xuchuan International Logistics",
+      "color": "#0a2463"
     },
     {
       "id": "fan-courier-international",
@@ -20388,6 +20404,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8300"
     },
     {
+      "id": "yilong-logistics",
+      "catalog": "yilong-logistics",
+      "slug": "yilong-logistics-tracking",
+      "title": "一龙物流（Yilong Logistics）查询：YIL 单号与全程状态解析",
+      "name": "Yilong Logistics",
+      "color": "#ec0307"
+    },
+    {
       "id": "quick-rabbit",
       "catalog": "quick-rabbit",
       "slug": "quick-rabbit-wuliu-chaxun",
@@ -20898,6 +20922,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "胜兴旺（SXW Express）物流查询：SXW单号与状态",
       "name": "SXW Express",
       "color": "#003876"
+    },
+    {
+      "id": "xuchuan-logistics",
+      "catalog": "xuchuan-logistics",
+      "slug": "xuchuan-logistics-tracking",
+      "title": "旭川国际物流（Xuchuan Logistics）查询：XC 单号、派送与客服",
+      "name": "Xuchuan International Logistics",
+      "color": "#0a2463"
     },
     {
       "id": "fan-courier-international",

@@ -1,6 +1,6 @@
 ---
 title: Rastreamento ACS Courier: códigos, status e contatos
-description: Rastreie encomendas da ACS Courier na Grécia ou no Chipre: código de 10 dígitos, significado dos status em inglês, lockers SmartPoint, reclamações e contatos.
+description: Rastreie encomendas da ACS Courier na Grécia ou no Chipre: código de 10 dígitos, significado dos status em inglês, lockers SmartPoint, indenizações e contatos.
 slug: acs-courier-tracking
 published: 2026-11-26
 updated: 2026-11-26
@@ -15,9 +15,9 @@ A ACS chama o código de shipping number (número de envio); as lojas costumam c
 | Formato (inventado) | O que é |
 | --- | --- |
 | `4829173646` | Código de envio ACS: 10 dígitos, sem letras, sendo o último um dígito verificador. |
-| `RR482917367GR` | Não é ACS: códigos postais terminados em `GR` pertencem à ELTA Hellenic Post. |
+| `RR482917367GR` | Não é ACS: números postais terminados em `GR` pertencem à ELTA Hellenic Post. |
 
-Ele aparece nos avisos da ACS por SMS, Viber ou e-mail, na mensagem do locker e muitas vezes no e-mail de envio da loja. O número no aviso "Absent" deixado após uma tentativa perdida também funciona no rastreador da ACS, e devoluções recebem um código novo.
+Ele aparece nos avisos da ACS por SMS, Viber ou e-mail, na mensagem do locker e muitas vezes no e-mail de envio da loja. O número no aviso "Absent" deixado após uma entrega não realizada também funciona no rastreador da ACS, e devoluções recebem um código novo.
 
 Códigos de 10 dígitos não são exclusivos da ACS. Os vouchers da [Geniki Taxydromiki](carrier:geniki-taxydromiki) têm o mesmo visual, e [DHL Express](carrier:dhl-express), Relais Colis e outras também usam 10 dígitos. Se o e-mail da loja indicar outra transportadora, rastreie por lá. Veja mais em [formatos de código de rastreamento](guide:tracking-number-formats).
 
@@ -25,7 +25,7 @@ Códigos de 10 dígitos não são exclusivos da ACS. Os vouchers da [Geniki Taxy
 
 ## Status de rastreamento da ACS Courier em inglês
 
-Os dois sites da ACS exibem inglês nas páginas `/en/` e grego em `/el/`. O site do Chipre lista cada movimentação, enquanto o site da Grécia mostra apenas cinco marcos. Estas são as movimentações em inglês do site cipriota, na ordem usual:
+Os dois sites da ACS exibem inglês nas páginas `/en/` e grego em `/el/`. O site do Chipre lista cada movimentação, enquanto o site da Grécia mostra apenas cinco marcos. Estas são as movimentações em inglês do site cipriota, na ordem em que a encomenda passa por eles:
 
 | Status da ACS | O que significa para você |
 | --- | --- |
@@ -44,11 +44,11 @@ Os dois sites da ACS exibem inglês nas páginas `/en/` e grego em `/el/`. O sit
 
 A coluna "Shipment Status" resume a situação: `In Transit` geralmente significa em trânsito, mas a ACS também usa o termo em caso de dano e outras ocorrências — leia a movimentação mais recente. `Absent` indica destinatário ausente com aviso deixado. `Attention required` aponta destinatário desconhecido ou endereço alterado, incorreto ou incompleto. `Denial of delivery` significa recusa do pacote ou da cobrança. `Pending` indica pendência em análise; `Return in transit to sender` e `Returned to sender` indicam devolução. `Shipment not found` quer dizer que a ACS ainda não reconhece o código. Veja o significado geral de cada etapa em [significado dos status de rastreamento](guide:tracking-statuses).
 
-## Entregas ACS, lockers SmartPoint e tentativas perdidas
+## Entregas ACS, lockers SmartPoint e entregas não realizadas
 
 **Tentativas.** Na Grécia, o serviço básico da ACS faz até três tentativas; no Chipre, até duas.
 
-**Perdeu a entrega?** Se a loja informou seu telefone ou e-mail à ACS, você recebe mensagem com opções: outro dia, ponto de retirada (ACS Smart Point ou loja ACS) ou correção de endereço. Alterações exigem um PIN enviado pela ACS. Na Grécia, pelo link do SMS no ACS ReDirect, você pode escolher um dos próximos 3 dias úteis, a loja ACS mais próxima ou um Smart Point em um posto Shell parceiro. O ACS Mobile App também permite reagendar.
+**Entrega não realizada?** Se a loja informou seu telefone ou e-mail à ACS, você recebe mensagem com opções: outro dia, ponto de retirada (ACS Smart Point ou loja ACS) ou correção de endereço. Alterações exigem um PIN enviado pela ACS. Na Grécia, pelo link do SMS no ACS ReDirect, você pode escolher um dos próximos 3 dias úteis, a loja ACS mais próxima ou um Smart Point em um posto Shell parceiro. O ACS Mobile App também permite reagendar.
 
 **Sem contato.** Quando faltam dados de contato ou o endereço está pouco claro, a ACS guarda o pacote na loja de destino por **5 dias corridos** e depois o devolve.
 
@@ -62,9 +62,9 @@ Os lockers Smartpoint da ACS existem com tela ou sem tela, e a abertura muda ent
 
 **Não chegou.** O FAQ da ACS orienta procurar a filial de entrega com o número do envio e descrição do conteúdo e da embalagem. Como o contrato com a ACS pertence à loja, fale também com o vendedor. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
-**Danificada.** Os termos da ACS exigem reclamação em até **24 horas** da entrega, por SMS, e-mail ou por escrito; a carta de obrigações permite receber "com ressalva" em até um dia após o recebimento. Aja em até um dia.
+**Danificada.** Os termos da ACS exigem o pedido de indenização em até **24 horas** da entrega, por SMS, e-mail ou por escrito; a carta de obrigações permite receber "com ressalva" em até um dia após o recebimento. Aja em até um dia.
 
-**Extraviada ou atrasada.** A ACS considera o volume extraviado se não puder ser localizado **5 dias úteis** após a coleta ou a última movimentação. Quando o atraso é culpa da ACS, a indenização começa **3 dias úteis** após a data combinada; passados **15 dias úteis**, considera-se extraviado. A indenização vai a quem contratou e pagou (geralmente a loja), então deixe a loja reclamar. A ACS responde em até **21 dias**.
+**Extraviada ou atrasada.** A ACS considera o volume extraviado se não puder ser localizado **5 dias úteis** após a coleta ou a última movimentação. Quando o atraso é culpa da ACS, a indenização começa **3 dias úteis** após a data combinada; passados **15 dias úteis**, considera-se extraviado. A indenização vai a quem contratou e pagou (geralmente a loja), então deixe que a loja faça o pedido. A ACS responde em até **21 dias**.
 
 ## Telefone e atendimento da ACS Courier
 
@@ -110,27 +110,27 @@ Na Grécia, para encomendas saindo da Ática, a ACS informa 1 a 2 dias úteis pa
 Para reclamações na Grécia, `info@acscourier.gr`; no Chipre, `helpdesk@acscyprus.com`. Trate e-mails de outros domínios como falsos.
 
 :::sources
-- [ACS Courier: Track and Trace (Cyprus)](https://cyp.acscourier.net/en/quick-access/non-registered-users/track-and-trace/) – tracking page, English and Greek versions
-- [ACS Courier: Non Registered Users](https://www.acscourier.net/en/quick-access/non-registered-users/) – shipping number or Absent note number
-- [ACS Courier: About ACS](https://www.acscourier.net/en/useful-info/about-acs/) – company, Quest Group, service points
-- [ACS Courier: Additional Domestic Services](https://www.acscourier.net/en/services/domestic-courier-services/additional-domestic-services/) – 10-digit code, return number
-- [ACS Courier: Basic Domestic Courier Services](https://www.acscourier.net/en/services/domestic-courier-services/basic-domestic-courier-services) – three attempts, delivery times in Greece
-- [ACS Courier: Basic Domestic Courier Services (Cyprus)](https://cyp.acscourier.net/en/services/domestic-courier-services/basic-domestic-courier-services/) – two attempts, 1 to 2 working days
-- [ACS Courier: Important Information: Contacting ACS Cyprus](https://cyp.acscourier.net/en/useful-info/useful-information/acs-news/important-information-contacting-acs-cyprus/) – SMS with the number, DPD and Speedy parcels, contact form
-- [ACS Courier: Mandatory customer phone or/and e-mail](https://www.acscourier.net/en/important-updates/mandatory-customer-phone-orand-e-mail-from-142023/) – missed-delivery options, PIN, 5 calendar days
-- [ACS Courier: Mobile υπηρεσία ACS ReDirect](https://www.acscourier.net/el/plirofories/xrisimes-plirofories/ta-nea-tis-acs/mobile-uperesia-acs-redirect/) – ReDirect options
-- [ACS Courier: ACS Mobile App](https://www.acscourier.net/en/myacs/my-tools/acs-mobile-app/) – rescheduling in the app
-- [ACS Courier: Pickup from an ACS Locker with monitor](https://www.acscourier.net/en/services/domestic-courier-services/pickup-from-an-acs-locker-with-monitor/) – PIN, holding time, size, card payment, locker phone
-- [ACS: Παραλαβή από ACS Locker χωρίς οθόνη](https://www.acscourier.net/el/ypiresies/taxymetafores-eswterikoy/paralabe-apo-acs-locker-xoris-othoni/) – lockers without a screen in Greece: link, app, PIN, 2 days, no card payment
-- [ACS Courier: Pickup from ACS Locker via message link or ACS Mobile App](https://cyp.acscourier.net/en/services/domestic-courier-services/pickup-from-acs-locker-via-message-link-or-acs-mobile-app/) – Cyprus lockers, 2 days, payment
-- [ACS Courier: Frequent questions](https://www.acscourier.net/en/customer-support/information-desk/frequent-questions/) – lost or damaged parcels, delivery branch
-- [ACS Courier: Charter of Obligations to Consumers](https://www.acscourier.net/media/esdlz505/acs_xyk_12_01082026_eng.pdf) – reservation, loss, delay, 21 days, hours, email
-- [ACS Courier: General Terms of Carriage](https://www.acscourier.net/media/wpipfcpc/acs_goam_8_01082026_eng.pdf) – 24-hour claim, who is compensated
-- [ACS Courier: Insurance for Domestic Shipments](https://www.acscourier.net/en/services/domestic-courier-services/insurance-for-domestic-shipments/) – basic insurance
-- [ACS Courier: Claim Administration](https://www.acscourier.net/en/customer-support/retail-customers/claim-administration/) – Greek phones, English option, File a Claim
-- [ACS Courier: Claim Administration (Cyprus)](https://cyp.acscourier.net/en/customer-support/credit-customers/claim-administration/) – Cyprus phones, hours
-- [ACS Courier: Διαχείριση Παραπόνων (Cyprus)](https://cyp.acscourier.net/exypiretisi/kentro-pliroforisis/diaxeirisi-paraponwn/) – helpdesk email
-- [ACS Courier: Frauds using the ACS brand](https://www.acscourier.net/en/important-updates/frauds-using-the-acs-brand-1622026/) – fake messages, official senders
-- [ACS Courier: Frauds using the ACS brand (Cyprus)](https://cyp.acscourier.net/en/useful-info/useful-information/acs-news/frauds-using-the-acs-brand/) – Cypriot sender and email domain
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ACS's summary statuses and what Peek reads
+- [ACS Courier: Track and Trace (Cyprus)](https://cyp.acscourier.net/en/quick-access/non-registered-users/track-and-trace/) – página de rastreamento, versões em inglês e grego
+- [ACS Courier: Non Registered Users](https://www.acscourier.net/en/quick-access/non-registered-users/) – número de envio ou número do aviso Absent
+- [ACS Courier: About ACS](https://www.acscourier.net/en/useful-info/about-acs/) – empresa, Quest Group, pontos de atendimento
+- [ACS Courier: Additional Domestic Services](https://www.acscourier.net/en/services/domestic-courier-services/additional-domestic-services/) – código de 10 dígitos, número de devolução
+- [ACS Courier: Basic Domestic Courier Services](https://www.acscourier.net/en/services/domestic-courier-services/basic-domestic-courier-services) – três tentativas, prazos de entrega na Grécia
+- [ACS Courier: Basic Domestic Courier Services (Cyprus)](https://cyp.acscourier.net/en/services/domestic-courier-services/basic-domestic-courier-services/) – duas tentativas, 1 a 2 dias úteis
+- [ACS Courier: Important Information: Contacting ACS Cyprus](https://cyp.acscourier.net/en/useful-info/useful-information/acs-news/important-information-contacting-acs-cyprus/) – SMS com o código, encomendas DPD e Speedy, formulário de contato
+- [ACS Courier: Mandatory customer phone or/and e-mail](https://www.acscourier.net/en/important-updates/mandatory-customer-phone-orand-e-mail-from-142023/) – opções após entrega não realizada, PIN, 5 dias corridos
+- [ACS Courier: Mobile υπηρεσία ACS ReDirect](https://www.acscourier.net/el/plirofories/xrisimes-plirofories/ta-nea-tis-acs/mobile-uperesia-acs-redirect/) – opções do ReDirect
+- [ACS Courier: ACS Mobile App](https://www.acscourier.net/en/myacs/my-tools/acs-mobile-app/) – reagendamento no app
+- [ACS Courier: Pickup from an ACS Locker with monitor](https://www.acscourier.net/en/services/domestic-courier-services/pickup-from-an-acs-locker-with-monitor/) – PIN, prazo de guarda, tamanho, pagamento com cartão, telefone dos lockers
+- [ACS: Παραλαβή από ACS Locker χωρίς οθόνη](https://www.acscourier.net/el/ypiresies/taxymetafores-eswterikoy/paralabe-apo-acs-locker-xoris-othoni/) – lockers sem tela na Grécia: link, app, PIN, 2 dias, sem pagamento com cartão
+- [ACS Courier: Pickup from ACS Locker via message link or ACS Mobile App](https://cyp.acscourier.net/en/services/domestic-courier-services/pickup-from-acs-locker-via-message-link-or-acs-mobile-app/) – lockers no Chipre, 2 dias, pagamento
+- [ACS Courier: Frequent questions](https://www.acscourier.net/en/customer-support/information-desk/frequent-questions/) – encomendas extraviadas ou danificadas, filial de entrega
+- [ACS Courier: Charter of Obligations to Consumers](https://www.acscourier.net/media/esdlz505/acs_xyk_12_01082026_eng.pdf) – ressalva, extravio, atraso, 21 dias, horários, e-mail
+- [ACS Courier: General Terms of Carriage](https://www.acscourier.net/media/wpipfcpc/acs_goam_8_01082026_eng.pdf) – pedido de indenização em 24 horas, quem é indenizado
+- [ACS Courier: Insurance for Domestic Shipments](https://www.acscourier.net/en/services/domestic-courier-services/insurance-for-domestic-shipments/) – seguro básico
+- [ACS Courier: Claim Administration](https://www.acscourier.net/en/customer-support/retail-customers/claim-administration/) – telefones na Grécia, opção em inglês, File a Claim
+- [ACS Courier: Claim Administration (Cyprus)](https://cyp.acscourier.net/en/customer-support/credit-customers/claim-administration/) – telefones no Chipre, horários
+- [ACS Courier: Διαχείριση Παραπόνων (Cyprus)](https://cyp.acscourier.net/exypiretisi/kentro-pliroforisis/diaxeirisi-paraponwn/) – e-mail de atendimento
+- [ACS Courier: Frauds using the ACS brand](https://www.acscourier.net/en/important-updates/frauds-using-the-acs-brand-1622026/) – mensagens falsas, remetentes oficiais
+- [ACS Courier: Frauds using the ACS brand (Cyprus)](https://cyp.acscourier.net/en/useful-info/useful-information/acs-news/frauds-using-the-acs-brand/) – remetente e domínio de e-mail no Chipre
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – status resumidos da ACS e o que o Peek lê
 :::

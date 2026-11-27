@@ -88,18 +88,18 @@ A A Tu Hora Express só exibe códigos de 10 ou 16 dígitos quando acompanhados 
 
 ### O que significa `Incidencia - Pendiente nuevo reparto`?
 
-Significa que uma tentativa de entrega não pôde ser concluída e o volume entrou na fila para nova saída (geralmente junto a `Pendiente de realizar` no mesmo horário). Confirme seu endereço e telefone com a loja se isso se repetir.
+Significa que uma tentativa de entrega não pôde ser concluída e o volume entrou na fila para nova saída (muitas vezes junto a `Pendiente de realizar` no mesmo horário). Confirme seu endereço e telefone com a loja se isso se repetir.
 
 ### Como entrar em contato com a A Tu Hora Express na Espanha?
 
 Ligue para `911 631 356`, envie e-mail para `info@atuhoraexpress.com` ou preencha o formulário [Ayúdanos a mejorar](https://atuhoraexpress.com/ayudanos-a-mejorar/) informando seu código de rastreamento e o código postal de 5 dígitos.
 
 :::sources
-- [A Tu Hora Express: Home (Spanish)](https://atuhoraexpress.com/) – Spanish last-mile courier, branches, Madrid headquarters, `911 631 356` and `info@atuhoraexpress.com`
-- [A Tu Hora Express: Home (English)](https://atuhoraexpress.com/home/) – Express 24h, Economy 48h, Masivo 72h, Reverse Logistics, B2B Premium and branch list
-- [A Tu Hora Express: Tracking Page](https://atuhoraexpress.com/tracking/) – website tracking entry point
-- [A Tu Hora Express: MyDelivery Portal](https://mydelivery.atuhoraexpress.com/#/login-form-cli) – direct shipment lookup portal
-- [A Tu Hora Express: Legal Notice](https://atuhoraexpress.com/aviso-legal/) – *A TU HORA EXPRESS, S.L.*, NIF `B19300748`, registered office in Alovera (Guadalajara) and `protecciondedatos@atuhoraexpress.com`
-- [A Tu Hora Express: Feedback Form](https://atuhoraexpress.com/ayudanos-a-mejorar/) – customer feedback form
-- [Universal Parcel Scraper: a-tu-hora-express](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/a-tu-hora-express) – 10/16/24-digit detection, optional 5-digit postcode requirement, Spanish status codes (`0`, `1`, `11`, `2`, `3`, `4`, `5`), `Europe/Madrid` local clocks, expected delivery date, weight and stripped fields
+- [A Tu Hora Express: Home (Spanish)](https://atuhoraexpress.com/) – transportadora espanhola de última milha, filiais, sede em Madri, `911 631 356` e `info@atuhoraexpress.com`
+- [A Tu Hora Express: Home (English)](https://atuhoraexpress.com/home/) – Express 24h, Economy 48h, Masivo 72h, Reverse Logistics, B2B Premium e lista de filiais
+- [A Tu Hora Express: Tracking Page](https://atuhoraexpress.com/tracking/) – entrada de rastreamento do site
+- [A Tu Hora Express: MyDelivery Portal](https://mydelivery.atuhoraexpress.com/#/login-form-cli) – portal de consulta direta de envios
+- [A Tu Hora Express: Legal Notice](https://atuhoraexpress.com/aviso-legal/) – *A TU HORA EXPRESS, S.L.*, NIF `B19300748`, domicílio legal em Alovera (Guadalajara) e `protecciondedatos@atuhoraexpress.com`
+- [A Tu Hora Express: Feedback Form](https://atuhoraexpress.com/ayudanos-a-mejorar/) – formulário de feedback de clientes
+- [Universal Parcel Scraper: a-tu-hora-express](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/a-tu-hora-express) – reconhecimento de 10/16/24 dígitos, exigência opcional do código postal de 5 dígitos, códigos de status em espanhol (`0`, `1`, `11`, `2`, `3`, `4`, `5`), horário local `Europe/Madrid`, data prevista de entrega, peso e campos omitidos
 :::

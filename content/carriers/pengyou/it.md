@@ -1,12 +1,12 @@
 ---
 title: Tracciamento Pengyou: numeri PY, stati e chi sentire
-description: Traccia un pacco Pengyou (捧友) da Shenzhen: com'è fatto il numero PY, dove cercarlo, perché alcune tappe sono scritte in anticipo e a chi rivolgersi.
+description: Tracciamento Pengyou (捧友 / Pony Supply Chain): codice ZXA…PY, significato degli stati, tappe scritte in anticipo, chi consegna in Italia e chi contattare.
 slug: tracciamento-pengyou
 published: 2026-11-18
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Pengyou (捧友, 深圳市捧友供应链有限公司), che nel logo del proprio sito riporta il nome inglese Shenzhen Pony Supply Chain Co., Ltd, è uno spedizioniere di Shenzhen le cui linee trasportano pacchi per via aerea verso l'Europa e gli Stati Uniti per conto di esportatori, altri spedizionieri e venditori online. Per tracciare una spedizione, inserisci il codice nel riquadro `运单查询` (ricerca lettera di vettura) sulla pagina iniziale di Pengyou, szpy56.com, oppure incollalo nel campo qui sopra. Il negozio da cui hai acquistato comunica il numero insieme ai dettagli di spedizione.
+Pengyou (捧友, 深圳市捧友供应链有限公司, nel logo inglese Shenzhen Pony Supply Chain Co., Ltd) è uno spedizioniere di Shenzhen che trasporta pacchi per via aerea verso Europa e Stati Uniti per venditori online ed esportatori. Per tracciare un codice con suffisso `PY` (come `ZXA…PY`), incollalo nel campo qui sopra o inseriscilo nel riquadro `运单查询` su szpy56.com; tieni presente che la sua piattaforma può scrivere in anticipo tutte le tappe fino alla consegna.
 
 ## Numero di tracciamento Pengyou: com'è fatto
 
@@ -78,25 +78,25 @@ Peek controlla gli aggiornamenti fino a ogni 10 minuti mentre tieni il pacco ape
 
 ## Domande frequenti sul tracciamento Pengyou
 
-### Che cos'è Pengyou (捧友)?
+### Che cos'è Pengyou (捧友 / Shenzhen Pony Supply Chain)?
 
 È 深圳市捧友供应链有限公司, Shenzhen Pony Supply Chain Co., Ltd nel proprio logo inglese, uno spedizioniere di Shenzhen le cui linee trasportano pacchi per via aerea in Europa e negli Stati Uniti per esportatori, spedizionieri e venditori online. Il suo sito è szpy56.com.
 
-### Perché il tracker di Pengyou mostra tappe che Peek non riporta?
+### Perché il tracker di Pengyou mostra tappe o Delivered che Peek non riporta?
 
 Perché la piattaforma usata da Pengyou può scrivere in anticipo l'intera cronologia di un pacco, fino alla consegna inclusa. Quelle righe sono una previsione e non scansioni reali, quindi Peek le tiene fuori dalle scansioni, compreso `Delivered`, e le elenca solo in grigio sotto «Mostrali».
 
-### Dove posso tracciare un pacco Pengyou?
+### Come tracciare un pacco Pengyou con codice ZXA…PY?
 
-Nel riquadro `运单查询` (ricerca lettera di vettura) sulla home page di szpy56.com, che accetta fino a 10 numeri (uno per riga) e apre il tracker di Pengyou, oppure incollando il numero in Peek e selezionando Pengyou se non viene riconosciuto subito.
+Nel riquadro `运单查询` (ricerca lettera di vettura) sulla home page di szpy56.com, che accetta fino a 10 numeri (uno per riga), oppure incollando il numero in Peek e scegliendo Pengyou se non viene riconosciuto subito.
 
-### Quanto tempo impiega Pengyou a consegnare?
+### Quanto impiega Pengyou a consegnare e chi consegna in Italia?
 
-Pengyou non pubblica tempi di consegna. Fai riferimento alla stima fornita dal negozio al momento dell'acquisto, non alle date delle tappe scritte in anticipo.
+Pengyou non pubblica tempi di consegna né indica quale corriere locale consegni il pacco in Italia (le pagine delle singole linee su szpy56.com contengono solo il titolo). Fai riferimento alla stima del negozio e chiedi al venditore il numero del corriere locale.
 
-### Chi devo contattare se il mio pacco Pengyou non arriva?
+### Chi contattare se il pacco Pengyou è fermo o non arriva?
 
-Il venditore da cui hai acquistato l'ordine, che ha prenotato la spedizione con Pengyou. Pengyou elenca soltanto due numeri di cellulare cinesi, una chat QQ e un account WeChat in cinese, senza assistenza dedicata ai destinatari.
+Il venditore da cui hai acquistato l'ordine, che ha prenotato la spedizione con Pengyou. Pengyou elenca solo due cellulari cinesi (`181 2470 1707` e `188 7908 6605`), QQ (`2853292077`) e WeChat in cinese, senza assistenza dedicata ai destinatari.
 
 :::sources
 - [Pengyou: 深圳市捧友供应链有限公司 (home page, in cinese)](http://szpy56.com/) – ragione sociale e nome inglese nel logo, linee per Europa e USA con doppio sdoganamento e dazi inclusi, sede e filiali, clientela, linee principali, riquadro `运单查询` fino a 10 numeri, loghi dei partner, schema del servizio, numeri mobili 24h, QQ e WeChat

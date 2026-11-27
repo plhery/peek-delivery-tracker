@@ -1,15 +1,15 @@
 ---
 title: Temu-Sendungsverfolgung: Bestellnummer oder Sendungsnummer?
-description: Warum du mit der Temu-Bestellnummer kein Paket verfolgst, wie du den Paketdienst herausfindest und wie Peek dem Paket folgt, wenn ein Partner vor Ort übernimmt.
+description: Temu-Paket verfolgen: Wo du statt der PO-Bestellnummer die richtige Sendungsnummer findest, welcher Paketdienst liefert und was bei Zoll oder Verzug hilft.
 slug: temu-sendungsverfolgung
 picture: Ein Stapel kleiner Pakete, der aus dem Frachtraum eines Flugzeugs kommt, ein Lieferwagen und Pip, der sie zählt.
 published: 2026-10-17
-updated: 2026-11-08
+updated: 2026-11-27
 ---
 
-Mit der Temu-Bestellnummer verfolgst du kein Paket: Dafür brauchst du die Sendungsnummer des Paketdienstes. Füg sie in [Peek](/) ein, und Peek findet den passenden unter mehr als 4.500 Paketdiensten und folgt dem Partner vor Ort, wenn der erste Paketdienst einen nennt. Fügst du stattdessen die Bestellnummer ein, sagt dir Peek, dass sie nach einer Temu-Bestellnummer aussieht und nicht nach einer Sendungsnummer.
+Ein Temu-Paket verfolgst du nicht mit der Temu-Bestellnummer (`PO-…`), sondern mit der Sendungsnummer des Paketdienstes unter „Deine Bestellungen“ → „Verfolgen“. Fügst du diese Sendungsnummer in [Peek](/) ein, erkennt Peek den passenden unter mehr als 4.500 Paketdiensten und folgt dem Partner vor Ort, sobald der erste Dienst ihn nennt. Gibst du stattdessen die `PO`-Bestellnummer ein, sagt dir Peek, dass sie nach einer Temu-Bestellnummer aussieht und nicht nach einer Sendungsnummer.
 
-## Ist meine Temu-Bestellnummer eine Sendungsnummer?
+## Kann ich mein Temu-Paket mit der Bestellnummer verfolgen?
 
 Nein. Die Temu-Bestellnummer ist Temus eigene Referenz und keine Sendungsnummer: Kein Paketdienst findet dein Paket damit. Peek erkennt sie an ihrer Form, PO und 20 Ziffern (`PO-000-00000000000000000`), und hält sie zurück, mit dem Hinweis, dass sie nach einer Temu-Bestellnummer aussieht, und wo du stattdessen nachsehen kannst: Tippe in Temu unter „Deine Bestellungen“ neben der Bestellung auf „Verfolgen“, dort zeigt Temu für jedes Paket eine Sendungsnummer. Nicht sicher, was du da hast? Tipp es hier ein:
 
@@ -20,7 +20,7 @@ Fügst du eine ganze Nachricht mit beiden Nummern ein, nimmt Peek die Sendungsnu
 
 Auch eine Nummer aus drei Buchstaben, einem `U` und sieben Ziffern, etwa `TEMU1234565` (erfunden), ist keine Sendungsnummer, sondern die eines Seecontainers, und kein Paketdienst verfolgt damit ein Paket. Das `TEMU` darin steht nicht für den Shop: Im Register der Container-Eigentümercodes, das das Bureau International des Containers (BIC) führt, gehört `TEMU` dem Container-Vermieter Textainer. Fügst du eine solche Nummer hinzu und antwortet kein Paketdienst, schreibt Peek „Das sieht nach einer Containernummer aus. Die Sendungsnummer steht in der Versandmail oder bei der Bestellung.“ und bietet „Paketdienst wählen“ an.
 
-## Welcher Paketdienst liefert mein Temu-Paket?
+## Welcher Paketdienst liefert Temu-Pakete und fällt Zoll an?
 
 Meist verrät es die Sendungsnummer: Das Feld oben nennt den Paketdienst, auf den ihre Form zeigt, oder die wenigen, zu denen sie passen kann. Wen du auf dem letzten Stück wahrscheinlich siehst, von DHL über die Österreichische Post bis zur Schweizerischen Post, steht in der Ländertabelle unter [Paket aus China verfolgen](guide:tracking-from-china). Ob an der Grenze noch etwas fällig wird, hängt von deinem Land ab: [Zoll](guide:customs).
 
@@ -28,13 +28,13 @@ In Deutschland und Österreich sind Online-Bestellungen von außerhalb der EU bi
 
 Eine Postsendung von China Post (zwei Buchstaben, neun Ziffern, `CN`) verzollt in Deutschland die Deutsche Post und stellt sie zu. Die Bearbeitungsgebühr von 2 € pro Ware zahlst du dabei laut Deutscher Post nicht bei der Zustellung, den Zoll von 3 € pro Ware in der Regel auch nicht: Meist zahlst du schon beim Kauf im Shop, und wie, entscheidet der Shop. Fehlen der Sendung wichtige Angaben zur Ware oder zur Zollanmeldung, kann die Deutsche Post sie nicht für die Einfuhr bearbeiten, und für diese Angaben ist die Absenderseite verantwortlich. Hängt ein solches Paket beim Zoll, frag also zuerst bei Temu nach.
 
-## Temu-Paket hängt fest, kommt zu spät oder gar nicht?
+## Warum aktualisiert sich meine Temu-Sendungsverfolgung nicht?
 
 Steht die Sendungsverfolgung tagelang still, oder ändert sich die Nummer, wenn der Paketdienst vor Ort übernimmt, ist das auf dieser Strecke normal: [Paket aus China verfolgen](guide:tracking-from-china) erklärt beides und was sich bei Produkten aus einem Lager in der EU ändert. Wie lange eine Lücke normal ist, ab wann ein Paket als verloren gilt und ob du zuerst den Händler oder den Paketdienst fragst: [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
 Wer für ein Paket haftet, das nie ankam, und welche Belege du aufheben solltest: [zugestellt, aber nicht erhalten](guide:delivered-not-received) und [Paket verloren](guide:lost-parcel). Pass in der Zwischenzeit auf gefälschte Nachrichten auf. Woran du sie erkennst: [Betrugs-SMS zu Paketen](guide:delivery-scam-texts).
 
-## Kann ich ein Temu-Paket in Peek verfolgen?
+## Wie verfolge ich ein Temu-Paket mit Peek?
 
 Ja, mit der Sendungsnummer des Paketdienstes. Füge sie in [Peek](/) ein, und Peek findet den passenden unter mehr als 4.500 Paketdiensten. Bei einer Form, die sich mehrere Dienste teilen, tippe auf „Ändern“ und wähle den richtigen Paketdienst.
 

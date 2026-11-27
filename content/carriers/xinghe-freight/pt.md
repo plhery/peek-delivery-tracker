@@ -1,12 +1,12 @@
 ---
 title: Rastreio Xinghe Freight: números GZXH, estados e entrega
-description: Segue uma encomenda Xinghe Freight (星和货运) da China: formato do código GZXH…YQ, significado de cada estado, etapas escritas antes e quem entrega em Portugal.
+description: Rastreio Xinghe Freight (星和货运): formato do código GZXH…YQ, significado dos estados GZYL, etapas pré-escritas, entrega em Portugal e contactos da empresa.
 slug: xinghe-freight-rastreio
 published: 2026-11-18
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-A Xinghe Freight (星和货运, 广州星和货运代理有限公司, Guangzhou Xinghe Freight Forwarding) é um transitário de Cantão (Guangzhou), na China, cujo seguimento funciona sobre o sistema da [GZYL](carrier:gzyl). Se a loja onde fizeste a encomenda te enviou um número começado por `GZXH` e terminado em `YQ`, cola-o na caixa acima ou pesquisa-o na caixa de consulta de envios do site chinês da Xinghe, xinghe-express.cn. Lê o histórico com cautela: nesta plataforma todo o percurso da encomenda, até `Delivered`, pode ser carregado de antemão antes mesmo de alguém pegar fisicamente no volume.
+A Xinghe Freight (星和货运, 广州星和货运代理有限公司, Guangzhou Xinghe Freight Forwarding) é um transitário de Cantão (Guangzhou), na China, cujo rastreio funciona sobre o sistema da [GZYL](carrier:gzyl). Se a loja te deu um código de 16 caracteres começado por `GZXH` e terminado em `YQ`, cola-o na caixa acima ou pesquisa-o no site chinês da Xinghe, xinghe-express.cn. Lê o histórico com cautela: nesta plataforma toda a cronologia, até `Delivered`, pode ser carregada de antemão antes mesmo de alguém pegar fisicamente no volume.
 
 ## Número de seguimento Xinghe Freight: como é formado
 
@@ -95,21 +95,25 @@ O Peek retém qualquer etapa escrita mais de 12 horas antes da hora que ostenta,
 
 ## Perguntas frequentes sobre o seguimento Xinghe Freight
 
-### O que é a Xinghe Freight (星和货运)?
+### O que é a Xinghe Freight (星和货运) e qual é o formato do código?
 
-É a 广州星和货运代理有限公司 (Guangzhou Xinghe Freight Forwarding), um transitário sediado em Cantão (Guangzhou), na China. No seu site afirma ter sido fundada em 2014 e operar transporte marítimo, aéreo e terrestre, agência de navegação e despacho aduaneiro. Os códigos que o Peek associa à Xinghe Freight têm a forma `GZXH`, dez algarismos e `YQ`.
+É a 广州星和货运代理有限公司 (Guangzhou Xinghe Freight Forwarding), um transitário sediado em Cantão (Guangzhou), na China. No seu site afirma ter sido fundada em 2014 e operar transporte marítimo, aéreo e terrestre, agência de navegação e despacho aduaneiro. Os códigos que o Peek associa à Xinghe Freight têm 16 caracteres: `GZXH`, dez algarismos e `YQ`.
 
-### Porque é que a minha encomenda Xinghe Freight mostra o seguimento da GZYL?
+### Porque é que o rastreio Xinghe Freight aparece no sistema da GZYL?
 
 Porque o seguimento da Xinghe funciona sobre o sistema da [GZYL](carrier:gzyl): a própria caixa de pesquisa no site da Xinghe envia o número para lá, pelo que as etapas surgem com as frases da GZYL. O Peek mantém a encomenda associada à Xinghe Freight e lê diretamente esse sistema por ti.
 
-### Quem entrega as encomendas da Xinghe Freight em Portugal?
+### Quem entrega encomendas da Xinghe Freight em Portugal?
 
 O Peek não tem forma de saber: nem as etapas do sistema nem o site da Xinghe indicam a empresa distribuidora local. Apenas na Suíça e no Liechtenstein pode o Peek passar automaticamente o envio para a Posta Suíça. Em Portugal, pergunta ao vendedor qual é a transportadora responsável pela entrega e pede o respetivo número de seguimento.
 
-### Porque é que o Peek ainda não mostra seguimento para o meu número GZXH?
+### Porque é que o código GZXH…YQ não mostra etapas ou marca Delivered sem entrega?
 
-O sistema pode ainda não ter a encomenda registada, ou ter apenas etapas escritas com antecedência (incluindo um `Delivered` final) que o Peek retém e só lista em «Ver». O Peek consulta também serviços de seguimento externos e continua a verificar. Para um código que o sistema não conhece, o Peek interpreta a resposta como um número não encontrado: mostra «À espera de Xinghe Freight» e, dois dias depois, «Verifica o número de seguimento». Para um de que só tem etapas escritas com antecedência, não pede que revejas o código. Compara o código com a mensagem da loja e, se nada surgir ao fim de alguns dias, pergunta ao vendedor se a encomenda já foi expedida.
+O sistema pode ainda não ter registos físicos, ou ter apenas etapas escritas com antecedência (incluindo um `Delivered` final) que o Peek retém e só lista a cinzento em «Ver». Para um código que o sistema não conhece, o Peek mostra «À espera de Xinghe Freight» e, dois dias depois, «Verifica o número de seguimento». Confirma o código com a loja e, se nada surgir ou nada chegou, contacta o vendedor.
+
+### Como contactar a Xinghe Freight se a encomenda não chegar?
+
+Fala primeiro com a loja ou o marketplace onde compraste, porque o cliente da Xinghe é o vendedor. O site chinês xinghe-express.cn publica apenas a linha `19924483103` (`+86 199 2448 3103`) e o e-mail comercial `3975605292@qq.com`, sem apoio dedicado a destinatários particulares no estrangeiro.
 
 :::sources
 - [Xinghe Freight: 广州星和货运代理有限公司 (página inicial, em chinês)](http://xinghe-express.cn/) – denominação social, serviços de trânsito internacional, caixa de pesquisa ligada ao sistema da GZYL, telefone e e-mail

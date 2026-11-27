@@ -1,12 +1,12 @@
 ---
 title: Morning Global tracking: BR…MG numbers, statuses, contact
-description: Track a Morning Global parcel from Hong Kong or China: what its numbers look like, what each status means, who delivers it near you and who to contact.
+description: Track a Morning Global (MG) parcel: BR…MG number format, status meanings like Handed Over for Delivery, local delivery partners and customer service contact.
 slug: morning-global-tracking
 published: 2026-11-02
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Morning Global (MG), founded in 1987, is the international arm of Morning Express Group, a Hong Kong courier group. It ships parcels abroad for online shops and marketplaces, has offices in Hong Kong and across mainland China, and usually hands your parcel to a partner in your country for the delivery. Track the number the shop gives you on Morning Global's [Trace & Track page](https://www.morninglobal.com/trace-track/), in English, or paste it in the box above.
+Morning Global (MG), founded in 1987, is the international division of Morning Express Group, a Hong Kong courier group shipping parcels for online shops and marketplaces across more than 220 destinations. It usually hands your parcel to a local partner in your country for final delivery. Paste the tracking number the shop gave you (such as a `BR…MG` number) in the box above, or enter it on Morning Global's [Trace & Track page](https://www.morninglobal.com/trace-track/).
 
 ## Morning Global tracking number: what it looks like
 
@@ -106,25 +106,25 @@ Peek checks at most once an hour, out for delivery too, and waits 2 hours after 
 
 ## Questions about Morning Global tracking
 
-### Is Morning Global legit?
+### Is Morning Global a legitimate courier?
 
 Yes. Morning Global, founded in 1987, is the international division of Morning Express Group, a Hong Kong courier group, with its global headquarters in Hong Kong and its own operations in 14 countries, it says. It ships for brands, retailers and marketplaces.
 
-### How do I track a Morning Global parcel?
+### How do I track a Morning Global (BR…MG) parcel?
 
-Paste the number the shop gave you in the box above, or type it on Morning Global's Trace & Track page.
+Paste the tracking number the shop gave you in the box above, or type it on Morning Global's Trace & Track page (which takes up to 20 numbers at once, separated by commas). If Peek doesn't recognise a different format automatically, tap "Change" and choose Morning Global.
 
 ### What does "Handed Over for Delivery" mean on Morning Global?
 
 Morning Global has handed the parcel to the partner that delivers it in your country, after customs. It isn't on a delivery van yet: `Out for Delivery` comes next.
 
-### Who delivers Morning Global parcels?
+### Who delivers Morning Global parcels in the US, UK, Canada or Australia?
 
-A partner in your country, which Morning Global's site doesn't name. Ask the shop or Morning Global's support for that partner's number.
+Morning Global lists the UK and the US among its self-operated locations (with regional headquarters in London and Los Angeles), Canada among its key locations and Australia in its partner network, though its website and tracker do not name the individual delivery partner. Ask the shop or Morning Global's support for that partner's number.
 
-### How do I contact Morning Global?
+### How do I contact Morning Global customer service?
 
-Email cs.mgus@morninglobal.com in the US, cs.mgeu@morninglobal.com in the UK, or cs.mgworldwide@morninglobal.com elsewhere, with your tracking number. About your order, ask the shop first.
+Email cs.mgus@morninglobal.com (+1 888 981 8688) in the US, cs.mgeu@morninglobal.com (+44 20 7019 9035) in the UK, cs.mghk@morninglobal.com (+852 3669 6360) in Hong Kong and Macao, or cs.mgworldwide@morninglobal.com (WhatsApp +1 (479) 777 3307) elsewhere, with your tracking number. About your order, ask the shop first.
 
 :::sources
 - [Morning Global: Trace & Track](https://www.morninglobal.com/trace-track/) – tracker, up to 20 numbers, Shipment Journey, Estimated Delivery, Reference, Signed By, not-found message, support with the tracking number

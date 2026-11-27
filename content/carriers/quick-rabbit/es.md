@@ -1,12 +1,12 @@
 ---
 title: Quick Rabbit seguimiento: código PKG, estados y Citibox
-description: Sigue tu envío de Quick Rabbit: cómo es el código PKG, qué significa cada estado, los casilleros Citibox, cómo cambiar la entrega y cómo reclamar.
+description: Seguimiento Quick Rabbit en España: código PKG, significado de estados, entrega en Citibox, cómo cambiar la dirección y contacto de atención al cliente.
 slug: quick-rabbit-seguimiento
 published: 2026-11-01
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Quick Rabbit es una empresa española de reparto para tiendas online y comercios, con sede en Madrid. Reparte por toda España a domicilio, en puntos de recogida y en casilleros Citibox. Para seguir tu paquete, escribe su código `PKG` en el [seguimiento de Quick Rabbit](https://web.quickrabbit.es/es/tracking) o pégalo en la casilla de arriba. Según Quick Rabbit, el código está «en tu email de confirmación o recibo de envío».
+Quick Rabbit es un operador logístico español con sede en Madrid que reparte pedidos de tiendas online en las 50 provincias de España, a domicilio, en puntos de recogida y en casilleros Citibox. Para rastrear tu envío, pega el código `PKG` (o la referencia del remitente) en la casilla de arriba o en el [seguimiento de Quick Rabbit](https://web.quickrabbit.es/es/tracking); según Quick Rabbit, el código está «en tu email de confirmación o recibo de envío».
 
 ## Número de seguimiento de Quick Rabbit: el código PKG
 
@@ -89,21 +89,21 @@ Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega»
 
 ## Preguntas sobre el seguimiento de Quick Rabbit
 
-### ¿Es fiable Quick Rabbit?
+### ¿Es fiable Quick Rabbit y qué tiendas trabajan con ellos?
 
-Sí: es un operador logístico español que dice llevar más de 5 años repartiendo para tiendas online y comercios en toda España. Entre sus socios nombra a AliExpress, Amazon, [Cainiao](carrier:cainiao), DHL, [Paack](carrier:paack), [CTT Express](carrier:ctt-express), [MRW](carrier:mrw) y Celeritas.
+Sí: es un operador logístico español que dice llevar más de 5 años repartiendo para tiendas online y comercios en las 50 provincias de España. Entre sus socios nombra a AliExpress, Amazon, [Cainiao](carrier:cainiao), DHL, [Paack](carrier:paack), [CTT Express](carrier:ctt-express), [MRW](carrier:mrw) y Celeritas.
 
-### ¿Cómo cambio la dirección de entrega en Quick Rabbit?
+### ¿Cómo cambiar la dirección, el teléfono o la fecha de entrega en Quick Rabbit?
 
 Pulsa `Actualizar datos de entrega` en la página de seguimiento y escribe tu email. Con el enlace que recibes puedes cambiar la dirección dentro de la misma ciudad, el teléfono o la fecha. Cuando han pasado más de 5 días desde que se recibió el paquete, como dice Quick Rabbit, ya no se puede cambiar nada y el paquete vuelve al remitente.
 
-### ¿Qué significa «Potencialmente perdido» en Quick Rabbit?
+### ¿Qué significa «Potencialmente perdido» o «Depositado en Citibox» en Quick Rabbit?
 
-Que Quick Rabbit está investigando dónde está el paquete; según su página, «puede estar en tránsito o en proceso de entrega». En Peek sale como `Under investigation`, con el estado Incidencia. Si después aparece `Paquete perdido`, pide a la tienda el reembolso o un nuevo envío.
+«Potencialmente perdido» (`Under investigation` en Peek, con el estado Incidencia) indica que Quick Rabbit está investigando dónde está el paquete y que «puede estar en tránsito o en proceso de entrega»; si después aparece `Paquete perdido`, pide a la tienda el reembolso o un nuevo envío. `Depositado en Citibox` (Listo para recoger) significa que el paquete ya te espera en el casillero Citibox.
 
-### ¿Cómo contactar con Quick Rabbit?
+### ¿Cuál es el correo y el horario de atención al cliente de Quick Rabbit?
 
-Escribe a customer@quickrabbit.es, con «URGENTE» en el asunto si es una incidencia urgente. Para un problema con un paquete, usa la reclamación de la página de seguimiento, como pide su página de contacto.
+Escribe a customer@quickrabbit.es, con «URGENTE» en el asunto si es una incidencia urgente; el horario indicado en sus preguntas frecuentes (para su equipo comercial) es de lunes a viernes de 8:00 a 20:00 y sábados de 9:00 a 14:00. Para problemas con un paquete, su página de contacto remite a la reclamación desde la página de seguimiento.
 
 :::sources
 - [Quick Rabbit: Seguimiento de Paquetes](https://web.quickrabbit.es/es/tracking) – código de seguimiento y dónde encontrarlo, paquete no encontrado, referencia, estados y sus descripciones, actualizar datos de entrega, reclamaciones, soporte urgente

@@ -1,15 +1,15 @@
 ---
 title: Paket beim Zoll: Dauer, Kosten und Fake-SMS erkennen
-description: Dein Paket hängt im Zoll? Was der Status bedeutet, wie lange die Abfertigung dauert, was du wem zahlst und woran du gefälschte Zoll-SMS erkennst.
+description: Paket hängt im Zoll (DE, AT, CH)? Was der Status bedeutet, wie lange die Zollabfertigung dauert, was du an Abgaben zahlst und wie du Fake-SMS erkennst.
 slug: paket-beim-zoll-dauer-kosten
 picture: Ein Zollhäuschen mit gestreifter Schranke, ein abgestempeltes Dokument mit Häkchen und Pip, der geduldig vor der Schranke wartet.
 published: 2026-10-09
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-„Paket beim Zoll“ heißt meistens: Dein Paket steckt in der ganz normalen Einfuhrkontrolle für Waren aus dem Ausland. Beschlagnahmt ist es deshalb nicht. Bleibt es dort hängen, wartet der Paketdienst oft darauf, dass du Einfuhrabgaben zahlst oder eine Rechnung nachreichst. Schau auf der Website oder in der App des Paketdienstes nach, nie über einen Link aus einer SMS.
+„Paket beim Zoll“ bedeutet bei Sendungen aus dem Ausland meist nur die normale Einfuhrkontrolle — beschlagnahmt ist dein Paket deshalb nicht. Bleibt es dort hängen, wartet der Paketdienst in Deutschland, Österreich oder der Schweiz oft darauf, dass du eine Rechnung nachreichst oder offene Einfuhrabgaben bezahlst. Prüfe den Status immer direkt auf der Website oder in der App des Paketdienstes, nie über einen Link aus einer SMS.
 
-## Was bedeutet „Paket beim Zoll“?
+## Was bedeutet der Status „Paket beim Zoll“?
 
 Jedes Paket, das eine Zollgrenze überquert, wird beim Zoll angemeldet, meist vom Paketdienst selbst. In Deutschland und Österreich betrifft das Sendungen von außerhalb der EU. In der Schweiz melden laut dem Bundesamt für Zoll und Grenzsicherheit (BAZG) die Post oder ein anderer Paketdienst jede Sendung aus dem Ausland an.
 
@@ -29,7 +29,7 @@ Der Zoll prüft die Angaben zu Inhalt und Wert, kann das Paket ansehen, berechne
 
 Nichts davon heißt beschlagnahmt. Das BAZG schreibt, dass `Dem Zoll übergeben` und `Vom Zoll einbehalten` meist die übliche Verzollung durch den Paketdienst meinen. Und was der deutsche Zoll wirklich von dir will, kommt per Brief: Steuerbescheide und Zahlungsaufforderungen verschickt er nur mit der Briefpost.
 
-## Paket hängt im Zoll fest: was tun?
+## Mein Paket hängt im Zoll fest: Was muss ich tun?
 
 Oft gar nichts. So findest du es heraus:
 
@@ -40,13 +40,13 @@ Oft gar nichts. So findest du es heraus:
 - Erst den Paketdienst, dann den Händler fragen | Hängt es weiter? Das BAZG schickt dich bei `Dem Zoll übergeben` zum Paketdienst, nicht zum Zoll. Fehlen Unterlagen vom Absender, kann nur der Händler sie liefern.
 :::
 
-### Wie erreiche ich den Zoll wegen eines Pakets?
+### Wen kontaktiere ich, wenn mein Paket beim Zoll liegt?
 
-Meist gar nicht: Fang beim Paketdienst an (Schritt 4). [DHL](carrier:dhl) bittet dich, während der Zollabfertigung nicht den deutschen Zoll zu kontaktieren, denn dort liegt dein Paket in der Regel nicht. Erst wenn die Deutsche Post dir schreibt, dass es bei einem Zollamt liegt, ist der Zoll dran. Zeigt DHL `Die Sendung wurde dem Zoll übergeben…` und ist der Brief nach zwei Werktagen nicht da, meldest du dich am dritten beim DHL-Kundenservice. Mit dem Brief und der Rechnung oder einem Zahlungsbeleg (etwa von PayPal) holst du das Paket beim Zollamt ab. Du kannst es auch bis 150 € über das Zoll-Portal selbst anmelden (IPK), die „Postabfertigung von zu Hause“ nutzen, bei der du nicht persönlich hinmusst, oder die Annahme verweigern.
+Meist gar nicht den Zoll: Fang beim Paketdienst an (Schritt 4). [DHL](carrier:dhl) bittet dich, während der Zollabfertigung nicht den deutschen Zoll zu kontaktieren, denn dort liegt dein Paket in der Regel nicht. Erst wenn die Deutsche Post dir schreibt, dass es bei einem Zollamt liegt, ist der Zoll dran. Zeigt DHL `Die Sendung wurde dem Zoll übergeben…` und ist der Brief nach zwei Werktagen nicht da, meldest du dich am dritten beim DHL-Kundenservice. Mit dem Brief und der Rechnung oder einem Zahlungsbeleg (etwa von PayPal) holst du das Paket beim Zollamt ab. Du kannst es auch bis 150 € über das Zoll-Portal selbst anmelden (IPK), die „Postabfertigung von zu Hause“ nutzen, bei der du nicht persönlich hinmusst, oder die Annahme verweigern.
 
 In Österreich reichst du fehlende Unterlagen bei der Post ein, in der Sendungsverfolgung unter „Zollhindernis bearbeiten“, per E-Mail oder per Brief. Persönlich abholen kannst du das Paket dort nicht. In der Schweiz brauchst du das BAZG nur, wenn dein Paket „blockiert durch den Zoll“ ist: Dann fragst du den Paketdienst nach der Nummer der Zollanmeldung (sie beginnt mit `18CHEI000`) und nach der Zollstelle.
 
-## Wie lange bleibt ein Paket beim Zoll?
+## Wie lange dauert die Zollabfertigung für ein Paket?
 
 Eine feste Dauer verspricht niemand. Die Schweizerische Post nennt „drei bis vier Arbeitstage“, wenn alle Angaben vollständig und korrekt sind. DHL schreibt, die Abfertigung könne je nach Unterlagen einige Werktage dauern, und die Österreichische Post, die Anmeldung beim Zoll könne „einige Tage“ brauchen.
 
@@ -69,11 +69,11 @@ Lass es nicht zu lange liegen:
 
 Keine Lust, ständig neu zu laden? Füge die Sendungsnummer in [Peek](/) ein: Dort wird sie bis zu alle 10 Minuten geprüft, und du bekommst eine Mitteilung, sobald sich der Status ändert. Die Abgaben zahlen oder den Zoll beschleunigen kann Peek allerdings nicht. Tut sich lange nichts und kommt keine Aufforderung, lies, [warum sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating).
 
-### Wie lange dauert es nach der Verzollung?
+### Wie lange dauert die Lieferung nach der Zollfreigabe?
 
 Zeigt DHL `Der Zollabfertigungsprozess für den Import ins Zielland/Zielgebiet wurde abgeschlossen.`, ist das Paket verzollt und geht in die Importbearbeitung. DHL schreibt dazu: „Ihre Sendung kommt bald an.“ Bei der Schweizerischen Post heißt `Vom Schweizer Zoll freigegeben`, dass die Verzollung fertig ist und das Paket an die Zustellung im Inland geht. Was die Scans danach bedeuten, steht in [Sendungsstatus erklärt](guide:tracking-statuses).
 
-## Warum muss ich Zollgebühren zahlen?
+## Welche Zollgebühren und Steuern muss ich für mein Paket zahlen?
 
 Meist, weil Steuer oder Zoll auf Waren aus dem Ausland nicht schon an der Kasse bezahlt wurden. Dann legt der Paketdienst sie beim Zoll aus und holt sie sich von dir zurück, oft mit einer eigenen Gebühr obendrauf. Der deutsche Zoll schreibt dazu: „Bei der Auslieferung des Pakets stellt der Paketdienstleister Ihnen die verauslagten Einfuhrabgaben in Rechnung.“ Die Rechnung hat bis zu drei Teile:
 
@@ -117,7 +117,7 @@ Das hängt von deinem Land und von der Kasse ab:
 
 Wie solche Bestellungen reisen, steht in [Paket aus China verfolgen](guide:tracking-from-china), und was Cainiao bei AliExpress-Paketen am Zoll von dir erwartet, unter [Cainiao Sendungsverfolgung](carrier:cainiao).
 
-## Ist die Zoll-SMS echt oder Fake?
+## Woran erkenne ich eine echte oder gefälschte Zoll-SMS?
 
 Manche echten Aufforderungen kommen per SMS oder E-Mail, aber die Regeln der Paketdienste entlarven die meisten Fakes:
 
@@ -143,7 +143,7 @@ So meldest du einen Fake:
 - **Österreich:** an den Kundenservice der Post (+43 800 010 100). Die Post und das BMF verweisen außerdem auf die Watchlist Internet.
 - **Schweiz:** ans Bundesamt für Cybersicherheit (BACS) oder per Weiterleitung an reports@antiphishing.ch. Bei finanziellem Schaden erstattest du Anzeige bei der Kantonspolizei.
 
-## Was, wenn ich nicht zahle oder das Paket zurückschicke?
+## Was passiert, wenn ich die Zollgebühren nicht zahle oder das Paket zurückgeht?
 
 Löst du ein Paket nicht aus, geht es in Deutschland nach den Fristen oben an den Absender zurück. Schickt DHL ein Paket zurück, etwa weil Abgaben offen sind oder der Absender Zolldaten nicht mitgeschickt hat, lässt sich das nicht mehr stoppen. Kümmerst du dich in Österreich nicht um ein Zollhindernis, geht das Paket zurück, wird vernichtet oder der Zollbehörde übergeben, ohne Kosten für dich. Erstattung und Einspruch:
 

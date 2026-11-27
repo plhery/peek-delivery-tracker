@@ -1,12 +1,12 @@
 ---
 title: Suivi colis Meiteshun : numéro AMTS…FS, statuts et contact
-description: Suivre un colis Meiteshun Logistics (美特顺) depuis Shenzhen : format du numéro AMTS…FS, sens des étapes et pourquoi la livraison peut être écrite à l'avance.
+description: Suivi colis Meiteshun (MTSCN / 美特顺) : numéro AMTS…FS, sens des statuts, pourquoi Delivered peut être écrit à l'avance et qui contacter si rien n'arrive.
 slug: meiteshun-suivi-colis
 published: 2026-11-18
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Meiteshun Logistics (美特顺物流, 深圳市美特顺物流有限公司, aussi référencé sous MTSCN) est un transitaire basé à Shenzhen, en Chine. Ses numéros de suivi commencent par AMTS et se terminent par FS : si la boutique qui a expédié ta commande t'en a transmis un, colle-le dans le champ ci-dessus. Lis toutefois le suivi de Meiteshun avec prudence : son système inscrit tout le parcours d'un colis, livraison comprise, dès la création de la commande, si bien qu'un `Delivered` n'y prouve pas que ton colis est arrivé.
+Meiteshun Logistics (美特顺物流, 深圳市美特顺物流有限公司, aussi référencé sous MTSCN) est un transitaire basé à Shenzhen, en Chine, dont les numéros de suivi commencent par `AMTS` et se terminent par `FS` (15 caractères). Si la boutique t'a communiqué ce numéro, colle-le dans le champ ci-dessus pour suivre ton colis. Lis toutefois le suivi de Meiteshun avec prudence : son système inscrit tout le parcours d'un colis, jusqu'à `Delivered`, dès la création de la commande, si bien qu'un statut livré n'y prouve pas que ton colis est arrivé.
 
 ## Numéro de suivi Meiteshun : à quoi il ressemble
 
@@ -87,25 +87,25 @@ Peek vérifie jusqu'à toutes les 10 minutes tant que tu gardes le colis ouvert 
 
 ## Questions sur le suivi Meiteshun
 
-### Qu'est-ce que Meiteshun Logistics (美特顺) ?
+### Qu'est-ce que Meiteshun Logistics (MTSCN / 美特顺) ?
 
 C'est 深圳市美特顺物流有限公司, Shenzhen Meiteshun Logistics, un transitaire installé à Shenzhen, en Chine. Ses lettres de transport suivent le format AMTS, neuf chiffres et FS, et ses dossiers portent le nom de service MTS全球小包.
 
-### Un numéro AMTS est-il un numéro China Post ?
+### Un numéro AMTS…FS est-il un numéro China Post ?
 
 Non. AMTS, neuf chiffres et FS est le format propre à Meiteshun. Les numéros internationaux de China Post comportent deux lettres, neuf chiffres et CN.
 
-### Pourquoi Meiteshun indique-t-il que mon colis est livré alors que je n'ai rien reçu ?
+### Pourquoi le suivi Meiteshun affiche-t-il Delivered alors que je n'ai rien reçu ?
 
 Très probablement parce que le système de Meiteshun écrit toutes les étapes d'une commande, livraison comprise, au moment même où la commande est créée. Un `Delivered` généré ainsi est une prévision, pas un scan. Préviens le vendeur que le colis n'est pas arrivé.
 
-### Qui livre les colis Meiteshun dans mon pays ?
+### Qui livre les colis Meiteshun en France, en Belgique ou en Suisse ?
 
-Les étapes de Meiteshun ne le précisent pas : aucune ne nomme de société de livraison. Sa page de suivi peut afficher le numéro du transporteur final dans la colonne 渠道转单号 (numéro de transfert) ; sinon, demande au vendeur quelle entreprise livre ta commande et quel est son numéro de suivi.
+Les étapes de Meiteshun ne nomment jamais l'entreprise chargée de la livraison locale. Vérifie sur la page de suivi de Meiteshun si un numéro apparaît sous 渠道转单号 (numéro de transfert), ou sous 跟踪号码 s'il diffère de ton numéro AMTS ; sinon, demande au vendeur quel transporteur livre dans ton pays et quel est son numéro de suivi.
 
-### Qui contacter si mon colis Meiteshun disparaît ?
+### Comment contacter Meiteshun ou réclamer un colis non reçu ?
 
-Le vendeur auprès duquel tu as commandé : c'est lui qui a réservé l'envoi chez Meiteshun. Si ni le vendeur ni la marketplace ne règlent le problème, la page de 17TRACK consacrée à Meiteshun indique l'adresse e-mail `szmeiteshun@163.com`.
+Adresse-toi d'abord au vendeur auprès duquel tu as commandé, puis à la marketplace s'il ne répond pas : c'est le vendeur qui a réservé l'envoi chez Meiteshun. Si ni l'un ni l'autre n'aboutit, la fiche de 17TRACK consacrée à Meiteshun indique l'adresse e-mail `szmeiteshun@163.com`, sans numéro de téléphone.
 
 :::sources
 - [17TRACK : MTSCN tracking (en anglais)](https://www.17track.net/en/carriers/mtscn) – adresse e-mail, site web et bureau de Shenzhen (district de Longgang) mentionnés pour Meiteshun, absence de numéro de téléphone

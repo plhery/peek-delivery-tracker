@@ -1,12 +1,12 @@
 ---
 title: Delivengo suivi : ton colis La Poste envoyé de France
-description: Suivi Delivengo hors de France : le numéro en FR, ce que dit le suivi de La Poste, qui livre en Belgique, en Suisse ou au Canada et qui contacter.
+description: Suivi colis Delivengo (La Poste) : format du numéro en FR, sens des statuts, poste qui livre en Belgique, Suisse ou Canada et qui contacter en cas de retard.
 slug: delivengo-suivi
 published: 2026-10-12
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Delivengo est le service d'export de [La Poste](carrier:la-poste) pour les petits colis internationaux. Si une boutique française l'a choisi, ton colis quitte la France avec La Poste et c'est la poste de ton pays qui fait le dernier kilomètre : bpost en Belgique, la Poste suisse, [Postes Canada](carrier:canada-post) au Québec. Tu le suis sur le suivi de La Poste, sur laposte.fr, avec le numéro que la boutique te donne, ou en le collant dans la case ci-dessus.
+Delivengo est le service d'export de [La Poste](carrier:la-poste) dédié aux petits colis internationaux expédiés depuis la France. Une fois le colis sorti de France, la poste de ton pays prend le relais pour le dernier kilomètre : bpost en Belgique, la Poste suisse ou [Postes Canada](carrier:canada-post) au Canada. Colle le numéro en `…FR` transmis par la boutique dans la case ci-dessus, ou suis-le sur laposte.fr.
 
 ## Numéro de suivi Delivengo : où le trouver
 
@@ -77,17 +77,21 @@ Quand tu as le colis ouvert, ou le jour de sa livraison avec les notifications a
 
 ## Questions sur le suivi Delivengo
 
-### Delivengo, c'est La Poste ou Colissimo ?
+### Quelle est la différence entre Delivengo, La Poste et Colissimo ?
 
 Delivengo appartient à La Poste, comme Colissimo, et partage son suivi, mais c'est un service à part : le service d'export de La Poste pour les petits colis internationaux.
 
-### Pourquoi le suivi Delivengo s'arrête-t-il après la France ?
+### Pourquoi le suivi Delivengo ne bouge-t-il plus après la sortie de France ?
 
 Une fois le colis sorti de France, c'est la poste de ton pays qui fait le dernier kilomètre, et l'historique de La Poste peut rester muet. Le colis peut très bien être encore en route. Peek interroge aussi la poste de certains pays (voir plus haut) ; si rien ne bouge, écris à la boutique.
 
-### Peut-on suivre un colis Delivengo jusqu'en Suisse ou au Canada ?
+### Qui livre un colis Delivengo en Belgique, en Suisse ou au Canada ?
 
-Oui, avec le même numéro en `…FR` sur le suivi de La Poste. Quand La Poste donne le pays de destination, Peek interroge aussi la [Poste suisse](carrier:swiss-post) ou [Postes Canada](carrier:canada-post), et la suit dès qu'elle montre une étape plus récente. Pour la Belgique, il interroge de même bpost.
+C'est la poste de ton pays qui assure la livraison finale avec le même numéro en `…FR` : bpost en Belgique, la [Poste suisse](carrier:swiss-post) en Suisse ou [Postes Canada](carrier:canada-post) au Canada. Quand La Poste donne le pays de destination, Peek interroge aussi cette poste locale et la suit dès qu'elle montre une étape plus récente.
+
+### Qui contacter si mon colis Delivengo est en retard ou perdu ?
+
+Contacte d'abord la boutique, qui a expédié le colis depuis son compte Delivengo. Pour une réclamation auprès de La Poste, l'Arcep indique le 3631 ou le +33 810 821 821 (ainsi que son site, le courrier ou un point de contact postal), et une fois le colis dans ton pays tu peux aussi interroger ta poste locale avec le même numéro.
 
 :::sources
 - [Universal Parcel Scraper : Delivengo](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/delivengo) – service d'export de La Poste, dernier kilomètre par la poste du pays, historique muet après l'export, espace client de la boutique, pas de règle de numéro propre

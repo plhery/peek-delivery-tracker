@@ -629,7 +629,7 @@ class CarrierPickerTest {
             assertEquals("${swissPost.displayName}, ${CarrierPickerSearch.accessibilityValue(subtitle, "Has this parcel")}", contentDescription)
             assertEquals("android.widget.Button", className)
             assertEquals("Selected", stateDescription)
-            assertTrue(isChecked)
+            assertEquals(AccessibilityNodeInfo.CHECKED_STATE_TRUE, checked)
         }
         // The others, and the automatic row while a carrier is chosen, say nothing of being chosen, not "Not selected".
         val planzer = catalog.info(CarrierId.Planzer, AppLanguage.En)

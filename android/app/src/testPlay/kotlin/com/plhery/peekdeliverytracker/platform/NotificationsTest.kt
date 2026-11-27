@@ -334,6 +334,7 @@ class NotificationsTest {
                 override fun requestPermissions(activity: Activity, permissions: Array<String>, requestCode: Int): Boolean =
                     throw ActivityNotFoundException("No screen to ask on")
 
+                @Deprecated("Deprecated in the interface, which still asks for it.")
                 override fun onActivityResult(activity: Activity, requestCode: Int, resultCode: Int, data: Intent?): Boolean = false
             },
         )

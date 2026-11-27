@@ -8,9 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.testTag
@@ -44,8 +42,8 @@ class KeyboardScrollTest {
     val compose = createAndroidComposeRule<ComponentActivity>()
 
     private lateinit var view: View
-    private var text by mutableStateOf("")
-    private var topText by mutableStateOf("")
+    private val text = TextFieldState()
+    private val topText = TextFieldState()
 
     /** The page: as tall as the window, its field at the foot, and with [above] another at its top. */
     private fun show(reduceMotion: Boolean, above: Boolean = false) {
@@ -54,9 +52,9 @@ class KeyboardScrollTest {
             PeekTheme(dark = false, highContrast = false, reduceMotion = reduceMotion, reduceTransparency = false, carrierIdentities = null) {
                 Box(Modifier.fillMaxSize()) {
                     KeyboardScrollColumn(Modifier.fillMaxSize()) {
-                        if (above) BasicTextField(topText, { topText = it }, Modifier.fillMaxWidth().height(40.dp).testTag(TOP))
+                        if (above) BasicTextField(topText, Modifier.fillMaxWidth().height(40.dp).testTag(TOP))
                         Spacer(Modifier.height(if (above) 764.dp else 804.dp))
-                        BasicTextField(text, { text = it }, Modifier.fillMaxWidth().height(40.dp).testTag(FIELD))
+                        BasicTextField(text, Modifier.fillMaxWidth().height(40.dp).testTag(FIELD))
                     }
                 }
             }

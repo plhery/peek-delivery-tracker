@@ -166,7 +166,7 @@ class DeliveryWidgetTest {
         assertTrue(DeliveryWidgetUpdates.isPlaced(app))
         DeliveryWidgetUpdates.schedule(app, store, now)
         val alarm = alarms.scheduledAlarms.single()
-        assertEquals(AlarmManager.ELAPSED_REALTIME, alarm.type)
+        assertEquals(AlarmManager.ELAPSED_REALTIME, alarm.getType())
         assertEquals(SystemClock.elapsedRealtime() + Duration.ofMinutes(20).toMillis(), alarm.triggerAtMs)
         assertEquals(Duration.ofMinutes(10).toMillis(), alarm.windowLengthMs)
         // Set again, it replaces itself.

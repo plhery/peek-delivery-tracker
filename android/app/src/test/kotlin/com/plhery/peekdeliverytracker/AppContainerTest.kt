@@ -332,6 +332,8 @@ class AppContainerTest {
         AppNotifications(context).post(mapOf("title" to parcel.label, "body" to "Out for delivery", "parcel_id" to "${parcel.id}"))
         val shade = shadowOf(context.getSystemService(android.app.NotificationManager::class.java))
         val posted = requireNotNull(shade.getNotification("${parcel.id}", AppNotifications.ID))
+        // Every extra, whatever its type, which only the deprecated untyped read gives.
+        @Suppress("DEPRECATION")
         val extras = posted.extras.keySet().joinToString { "${posted.extras.get(it)}" }
         assertFalse(extras, extras.contains("4512") || extras.contains("Hidden receipt"))
     }

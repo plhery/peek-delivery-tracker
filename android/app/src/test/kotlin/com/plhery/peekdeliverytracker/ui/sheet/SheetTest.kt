@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
@@ -78,7 +80,7 @@ class SheetTest {
 
     private lateinit var view: View
     private var visible by mutableStateOf(true)
-    private var text by mutableStateOf("")
+    private val text = TextFieldState()
     private var compositions = 0
     private var detent by mutableStateOf<SheetDetent?>(null)
     private var dismissible by mutableStateOf(true)
@@ -102,7 +104,7 @@ class SheetTest {
                         SideEffect { compositions++ }
                         SheetPage("Sheet", "Done", onConfirm = { visible = false }) {
                             FormSection("Name") {
-                                BasicTextField(text, { text = it }, Modifier.testTag(FIELD))
+                                BasicTextField(text, Modifier.testTag(FIELD))
                             }
                             FormSection(null) {
                                 repeat(12) { FormLabelRow("Row $it") }
@@ -314,8 +316,8 @@ class SheetTest {
             PeekTheme(dark = false, highContrast = false, reduceMotion = false, reduceTransparency = false, carrierIdentities = null) {
                 Box(Modifier.requiredSize(size)) {
                     Sheet(visible = true, onDismiss = {}, paneTitle = "Sheet", id = "Sheet") {
-                        var typed by rememberSaveable { mutableStateOf("") }
-                        BasicTextField(typed, { typed = it }, Modifier.testTag(FIELD))
+                        val typed = rememberTextFieldState()
+                        BasicTextField(typed, Modifier.testTag(FIELD))
                     }
                 }
             }
@@ -368,8 +370,8 @@ class SheetTest {
                 Box(Modifier.fillMaxSize()) {
                     CompositionLocalProvider(LocalTabOverlay provides overlay) {
                         present(shown) {
-                            var typed by rememberSaveable { mutableStateOf("") }
-                            BasicTextField(typed, { typed = it }, Modifier.testTag(FIELD))
+                            val typed = rememberTextFieldState()
+                            BasicTextField(typed, Modifier.testTag(FIELD))
                         }
                     }
                     overlay.Content()
@@ -423,8 +425,8 @@ class SheetTest {
                 Box(Modifier.fillMaxSize()) {
                     CompositionLocalProvider(LocalTabOverlay provides overlay) {
                         present(title) {
-                            var typed by rememberSaveable { mutableStateOf("") }
-                            BasicTextField(typed, { typed = it }, Modifier.testTag(FIELD))
+                            val typed = rememberTextFieldState()
+                            BasicTextField(typed, Modifier.testTag(FIELD))
                         }
                     }
                     overlay.Content()

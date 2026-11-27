@@ -23,6 +23,12 @@ class MapTextWidths(private val measurer: TextMeasurer) : com.plhery.peekdeliver
 
     companion object {
         fun of(context: Context): MapTextWidths =
-            MapTextWidths(TextMeasurer(createFontFamilyResolver(context), LocaleList.current, Density(1f), LayoutDirection.Ltr))
+            MapTextWidths(TextMeasurer(createFontFamilyResolver(context), phoneLocales(), Density(1f), LayoutDirection.Ltr))
     }
 }
+
+/**
+ * The phone's languages, for text measured outside a composition (which reads [androidx.compose.ui.platform.LocalLocaleList]):
+ * as they stand when it is measured, which a measurer kept keeps.
+ */
+fun phoneLocales(): LocaleList = LocaleList(android.os.LocaleList.getDefault().toLanguageTags())

@@ -21,7 +21,6 @@ import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.createFontFamilyResolver
-import androidx.compose.ui.text.intl.LocaleList
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import com.plhery.peekdeliverytracker.core.AdaptiveColor
@@ -48,6 +47,7 @@ import com.plhery.peekdeliverytracker.core.currentStage
 import com.plhery.peekdeliverytracker.core.displayedCarrier
 import com.plhery.peekdeliverytracker.core.hasMappedPlace
 import com.plhery.peekdeliverytracker.ui.draw.drawMapDrawings
+import com.plhery.peekdeliverytracker.ui.draw.phoneLocales
 import com.plhery.peekdeliverytracker.ui.map.MapSceneRequest
 import com.plhery.peekdeliverytracker.ui.map.MapScenes
 import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
@@ -195,7 +195,7 @@ class WidgetCardPictures(
         val type = PeekTypography(DynamicTypeSize.Large, density, language)
         val style = type.style(IosTextStyle.Caption, FontWeight.Bold).sfLines().let { if (identity.family == "dhl") it.italic() else it }
             .copy(color = identity.brand.resolve(dark).toColor())
-        val measurer = TextMeasurer(createFontFamilyResolver(context), LocaleList.current, density, LayoutDirection.Ltr)
+        val measurer = TextMeasurer(createFontFamilyResolver(context), phoneLocales(), density, LayoutDirection.Ltr)
         val text = measurer.measure(identity.name + if (identity.family == "gls") "." else "", style, softWrap = false)
         val truck = CarrierTruckGeometry.draw(identity, dark)
         val textWidth = text.size.width / scale

@@ -25,7 +25,7 @@ class MapTextWidthsTest {
 
         val measurer = androidx.compose.ui.text.TextMeasurer(
             androidx.compose.ui.text.font.createFontFamilyResolver(ApplicationProvider.getApplicationContext()),
-            androidx.compose.ui.text.intl.LocaleList.current,
+            phoneLocales(),
             androidx.compose.ui.unit.Density(1f),
             androidx.compose.ui.unit.LayoutDirection.Ltr,
         )

@@ -1,12 +1,12 @@
 ---
 title: GLS Spain tracking: statuses, Parcel Shops and contact
-description: Track a GLS Spain parcel with your tracking number and postcode: status meanings, 24h domestic delivery, 7–9 day Parcel Shops and lockers, and phone support.
+description: Track a GLS Spain parcel with your tracking number and postcode: status meanings, GLS's 24h mainland standard, 7–9 day Parcel Shops and lockers, phone support.
 slug: gls-spain-tracking
 published: 2026-10-11
 updated: 2026-11-27
 ---
 
-GLS Spain is the Spanish parcel network of the GLS Group (which acquired ASM Transporte Urgente in 2016), with more than 10,500 GLS Points across Spain. To track a parcel on GLS Spain's site, in the My GLS app or in Peek, you need both the tracking number (from the shop or your nota de paso) and the delivery postcode.
+GLS Spain is the Spanish parcel network of the GLS Group (which acquired ASM Transporte Urgente in 2016), and says it has more than 10,500 GLS Points across Spain. To track a parcel on GLS Spain's site, in the My GLS app or in Peek, you need both the tracking number (from the shop or your nota de paso) and the delivery postcode.
 
 ## GLS Spain tracking number and where to find it
 
@@ -100,7 +100,7 @@ Call +34 91 080 62 29 (Monday to Friday 9:00 to 14:00 and 16:00 to 19:00 Madrid 
 
 ### Is GLS Spain the same as ASM?
 
-Yes—in April 2016 GLS announced the purchase of ASM Transporte Urgente, then Spain's second-largest express network, folding it into GLS Spain.
+GLS bought it: in April 2016 GLS announced the purchase of ASM Transporte Urgente, then Spain's second-largest express network.
 
 :::sources
 - [GLS Spain: Track your shipment with the tracking number](https://gls-group.com/ES/en/receiving-parcels/shipping-tracking/) – Track ID, statuses, Parcel Shop steps

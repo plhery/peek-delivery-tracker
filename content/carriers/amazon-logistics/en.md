@@ -1,6 +1,6 @@
 ---
 title: Amazon Logistics tracking: where to look and what to do
-description: Track an Amazon Logistics order in Your Orders: TBA and UK/DE/FR numbers, Amazon Map Tracking, 3-day Amazon Lockers and Counters, A-to-z Guarantee and contact.
+description: Track an Amazon Logistics order in Your Orders: TBA and UK/DE/FR numbers, Amazon Map Tracking, Amazon Lockers (3 days) and Counters, A-to-z Guarantee and contact.
 slug: amazon-logistics-tracking
 published: 2026-10-11
 updated: 2026-11-27

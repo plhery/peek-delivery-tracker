@@ -97,7 +97,7 @@ Meest Post expects 2 to 5 working days within the EU, at least 4 working days fr
 
 ### What does a Meest tracking number look like, and why won't us.meest.com accept it?
 
-Meest America says tracking numbers usually start with a letter code followed by digits (such as CV or ANS…UA formats). The tracking box on us.meest.com, ca.meest.com and uk.meest.com only accepts 6 to 16 characters, so 17-character consolidation numbers ending in G must be tracked on t.meest-group.com or in Peek.
+Meest America says tracking numbers usually start with a letter code followed by digits; Peek also knows shapes such as CV…G and ANS…UA. The tracking box on us.meest.com, ca.meest.com and uk.meest.com only accepts 6 to 16 characters, so 17-character consolidation numbers ending in G must be tracked on t.meest-group.com or in Peek.
 
 ### How long does Meest keep a parcel at a branch in Ukraine?
 

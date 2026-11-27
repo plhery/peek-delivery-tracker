@@ -87,7 +87,7 @@ As a rule one day for a domestic parcel, from the start of the order, says DPD. 
 
 ### What time does DPD deliver in Switzerland, and does it deliver on Saturdays?
 
-DPD publishes no fixed delivery hours; if the sender booked Predict, you receive a one-hour time slot by SMS or email on delivery day. Pickup Locations can be used on Saturdays, and DPD's holiday table lists Saturday 28 November 2026 as a delivery day.
+DPD publishes no fixed delivery hours; if the sender booked Predict, you receive a one-hour time slot by SMS or email on delivery day. DPD doesn't say whether it delivers to homes on Saturdays; Pickup Locations can be used on Saturdays, and DPD's holiday table lists Saturday 28 November 2026 as a delivery day.
 
 ### How long does a DPD Pickup Location in Switzerland hold my parcel?
 

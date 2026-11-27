@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-11-27
 ---
 
-Si tu paquete llega dañado o roto, haz fotos antes de abrirlo del todo, conserva la caja y el embalaje y avisa a la tienda el mismo día. En España, cuando compras a una empresa, el riesgo del transporte es del vendedor hasta que recibes el pedido (art. 66 ter de la Ley de Consumidores): es la tienda quien debe repararlo, sustituirlo o devolverte el dinero, y quien reclama al transportista. Si la caja llega aplastada, rota o empapada, puedes rechazarla en la entrega o aceptarla dejando reservas por escrito en el albarán.
+Si tu paquete llega dañado o roto, haz fotos antes de abrirlo del todo, conserva la caja, el embalaje y todo lo que trae dentro, y avisa a la tienda el mismo día. En España, cuando compras a una empresa, el riesgo del transporte es del vendedor hasta que recibes el pedido (art. 66 ter de la Ley de Consumidores): es la tienda quien debe repararlo, sustituirlo o devolverte el dinero, y quien reclama al transportista. Si la caja llega aplastada, rota o empapada, puedes rechazarla en la entrega o aceptarla dejando reservas por escrito en el albarán.
 
 ## ¿Qué hacer paso a paso si un paquete llega dañado o roto?
 

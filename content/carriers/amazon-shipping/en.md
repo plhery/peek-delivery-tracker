@@ -52,7 +52,7 @@ Yes, Amazon Shipping is Amazon's official delivery service for third-party busin
 
 ### Who do I contact if my Amazon Shipping parcel is missing or damaged?
 
-Contact the shop or seller that sent the order first. Citizens Advice advises starting with the seller for a refund, redelivery or damaged-goods return rather than complaining to the carrier first.
+Contact the shop or seller that sent the order first. In England, Citizens Advice advises starting with the seller for a refund, redelivery or damaged-goods return rather than complaining to the carrier first.
 
 ### How long does Amazon Shipping take to deliver?
 

@@ -6,7 +6,7 @@ published: 2026-10-15
 updated: 2026-11-27
 ---
 
-Canada Post is Canada's federal Crown corporation running the national postal service. Track a parcel on Canada Post's [Track page](https://www.canadapost-postescanada.ca/track-reperage/en) or in its free app using your 16-digit tracking number, international `CA` postal code or 15-digit Delivery Notice Card number, or paste it in the box above. Canada Post can't look up a parcel by name or address, so check the sender's shipping email if you don't have the number. If it ends in `CA` and you track it from outside Canada, Peek can also ask your country's post with the same number.
+Canada Post is Canada's federal Crown corporation running the national postal service. Track a parcel on Canada Post's [Track page](https://www.canadapost-postescanada.ca/track-reperage/en) or in its free app using your 16-digit tracking number, international postal number ending `CA` or 15-digit Delivery Notice Card number, or paste it in the box above. Canada Post can't look up a parcel by name or address, so check the sender's shipping email if you don't have the number. If it ends in `CA` and you track it from outside Canada, Peek can also ask your country's post with the same number.
 
 ## Canada Post tracking number: what it looks like
 
@@ -116,7 +116,7 @@ Long flights, CBSA customs reviews and weekends often leave gaps between scans, 
 
 ### Why can't Canada Post or Peek find my tracking number?
 
-Canada Post gives the same answer whether a number is unknown, not scanned yet, still abroad, over a year old or untracked, so Peek shows "Waiting for Canada Post" while waiting for the first scan. If Canada Post still gives that answer two days later and nothing else has answered, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." Check every digit: both 16-digit numbers and `CA` postal numbers end with a check digit.
+Canada Post gives the same answer whether a number is unknown, not scanned yet, still abroad, over a year old or untracked, so Peek shows "Waiting for Canada Post" while waiting for the first scan. If Canada Post still gives that answer two days later and nothing else has answered, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." Check every digit: in a 16-digit number the last one is a check digit, and in a postal number the last digit before `CA` is.
 
 ### How long does Canada Post hold a parcel after a Delivery Notice Card or in a locker?
 
@@ -128,7 +128,7 @@ Yes. Paste the 15-digit number from the Delivery Notice Card into Peek, tap "Cha
 
 ### How do Canada Post customs duties and the $9.95 handling fee work?
 
-Goods mailed from abroad worth CAN$20 or less (or gifts up to CAN$60) owe no GST or duty. Above that, CBSA assesses duty and GST/HST/PST on Form E14, and Canada Post collects the amount plus a $9.95 handling fee online before delivery, at the door or at the post office.
+Goods mailed from abroad worth CAN$20 or less owe no duty or tax, and gifts from family or friends abroad owe no GST up to CAN$60. Above that, CBSA assesses duty and GST/HST/PST on Form E14, and Canada Post collects the amount plus a $9.95 handling fee online before delivery, at the door or at the post office.
 
 :::sources
 - [Canada Post: Track a package by tracking number](https://www.canadapost-postescanada.ca/track-reperage/en) – free app, "Notice left", pickup date and ID, why a number isn't found

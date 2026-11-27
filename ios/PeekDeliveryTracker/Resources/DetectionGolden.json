@@ -100898,23 +100898,17 @@
   },
   {
     "input": "JSD000000000199",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "jetspeed",
+    "confidence": "high",
     "candidates": [
-      "jetspeed"
-    ],
-    "asked": [
       "jetspeed"
     ]
   },
   {
     "input": "JSD663050036173",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "jetspeed",
+    "confidence": "high",
     "candidates": [
-      "jetspeed"
-    ],
-    "asked": [
       "jetspeed"
     ]
   },

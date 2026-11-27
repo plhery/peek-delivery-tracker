@@ -64557,7 +64557,7 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^JSD\\d{12}$",
-        "confidence": "low"
+        "confidence": "high"
       }
     ],
     "trackingSearchUrl": "https://www.jetspeed-express.com/",

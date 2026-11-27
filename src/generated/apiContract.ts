@@ -71384,6 +71384,59 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.tmw-express.com.au/"
+  },
+  "daraii": {
+    "displayName": "Daraii",
+    "aliases": [
+      "香港全速易物流",
+      "全速易",
+      "全速易物流",
+      "香港全速易物流有限公司"
+    ],
+    "countries": [
+      "HK"
+    ],
+    "color": "#0d3157",
+    "selectable": true,
+    "timezone": "Asia/Hong_Kong",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "daraii"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.kynitha.com/track"
+  },
+  "masspack": {
+    "displayName": "Masspack Express",
+    "aliases": [
+      "Masspack",
+      "千百包",
+      "金迈仕",
+      "金迈仕科技"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#881575",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "masspack"
+    },
+    "trackingUrlTemplate": "https://mp.masspack-express.com/#/public-tracking?orderNum={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "mp.masspack-express.com"
+        ],
+        "pathPattern": "^/(?:index\\.html)?$",
+        "fragment": "^/public-tracking\\?(?:[^#]*&)?orderNum=([^&,]+)"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://mp.masspack-express.com/#/public-tracking"
   }
 } as const;
 
@@ -73558,7 +73611,9 @@ export const CARRIER_IDS = [
   "huahai-express",
   "blackhaul",
   "primetime-express",
-  "tmw-express"
+  "tmw-express",
+  "daraii",
+  "masspack"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

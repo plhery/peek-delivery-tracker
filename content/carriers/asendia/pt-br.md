@@ -20,7 +20,7 @@ Os formatos reconhecidos como da Asendia, com dígitos inventados:
 | `AS482917367US` | `AS`, 9 dígitos e `US`: Asendia. |
 | `AHOY48291736` | `AHOY` seguido de 8 letras e dígitos: Asendia. |
 | `ESUS482917364` | `ESUS` e 9 dígitos: Asendia ou [DHL eCommerce](carrier:dhl-ecommerce). |
-| `RR482917367CH` | Código postal internacional: pertence ao correio emissor, aqui o [Swiss Post](carrier:swiss-post). |
+| `RR482917367CH` | Número postal internacional: pertence ao correio emissor, aqui o [Swiss Post](carrier:swiss-post). |
 | `LA482917367FR` | O mesmo padrão para a França: [La Poste / Colissimo](carrier:la-poste). |
 | `EEUS482917364US0` | Referência do eBay International Shipping: Asendia ou DHL eCommerce. |
 
@@ -28,7 +28,7 @@ Muitas encomendas da Asendia viajam com o código internacional do correio entre
 
 ## Status de rastreamento Asendia: o que significam
 
-O rastreador A1 da Asendia USA exibe suas próprias movimentações apenas em inglês e repassa os registros do parceiro de entrega no texto original desse parceiro. Os mais comuns, na ordem em que costumam aparecer:
+O rastreador A1 da Asendia USA exibe suas próprias movimentações apenas em inglês e repassa os registros do parceiro de entrega no texto original desse parceiro. Os mais comuns, na ordem em que a encomenda passa por eles:
 
 | A Asendia diz | O que significa para você |
 | --- | --- |
@@ -47,11 +47,11 @@ O site global track.asendia.com mostra marcos mais amplos: `Information Received
 
 Dois detalhes costumam gerar dúvida. O pacote pode aparecer em uma cidade ou país inesperado, pois a Asendia informa que roteia envios por centros de trânsito em diversos países. Além disso, um status parado por vários dias não significa que a encomenda travou: a Asendia esclarece que podem passar vários dias entre movimentações durante o trânsito.
 
-## Tentativa de entrega Asendia: entregas perdidas e retirada
+## Entrega Asendia não realizada: novas tentativas e pontos de retirada
 
-Quem realiza as tentativas é a transportadora ou correio do seu país, não a Asendia, e o rastreamento indica qual empresa assumiu o envio. A Asendia cita Swiss Post na Suíça e Colissimo ou Chronopost na França; para Reino Unido, Alemanha e EUA ela não nomeia um parceiro fixo em suas páginas.
+Quem realiza as tentativas é a transportadora ou correio do seu país, não a Asendia, e o rastreamento indica qual empresa assumiu o envio. A Asendia cita Swiss Post na Suíça e Colissimo ou Chronopost na França; para Reino Unido, Alemanha e EUA ela não nomeia nenhum parceiro em suas páginas.
 
-A Asendia informa que a maioria dos parceiros faz duas ou três tentativas e deixa um aviso a cada vez, impresso ou eletrônico, explicando como reagendar a entrega ou retirar o pacote em uma agência postal local quando disponível. Alguns serviços permitem reagendar; caso contrário, o parceiro tenta novamente ou deixa a encomenda na agência ou ponto de retirada mais próximo. A Asendia USA indica que a segunda tentativa acontece no próximo dia útil, e alguns parceiros permitem alterar o endereço após a primeira falha.
+A Asendia informa que a maioria dos parceiros faz duas ou três tentativas e deixa um aviso a cada vez, impresso ou eletrônico, explicando como reagendar a entrega ou retirar o pacote em uma agência postal local quando disponível. Alguns serviços permitem reagendar; caso contrário, o parceiro tenta novamente ou deixa a encomenda na agência ou ponto de retirada mais próximo. A Asendia USA indica que a segunda tentativa acontece no próximo dia útil. Alguns parceiros permitem alterar o endereço após uma primeira entrega não realizada.
 
 O prazo de guarda segue a regra do parceiro local: o Swiss Post, por exemplo, costuma guardar remessas internacionais por 15 dias. Encomendas não retiradas são devolvidas, conforme o procedimento de cada país.
 
@@ -61,7 +61,7 @@ O prazo de guarda segue a regra do parceiro local: o Swiss Post, por exemplo, co
 
 **Já com a transportadora local.** Você pode conseguir informações mais detalhadas diretamente com a empresa entregadora. Se ela não puder ajudar, ou se o rastreamento mostrar que o pacote ainda está com a Asendia, a Asendia pede que você fale com a loja.
 
-**Extraviada, danificada ou muito atrasada.** Fale com a loja onde comprou. A Asendia explica que a loja abrirá reclamação junto a ela se necessário. A Asendia não divulga prazo de reclamação para destinatários.
+**Extraviada, danificada ou muito atrasada.** Fale com a loja onde comprou. A Asendia explica que a loja fará o pedido de indenização junto a ela se necessário. A Asendia não divulga prazo para pedidos de indenização de destinatários.
 
 **Marcada como entregue, mas não recebida.** O FAQ da Asendia orienta entrar em contato com o atendimento da loja caso você conteste a entrega.
 
@@ -78,7 +78,7 @@ A Asendia atende as lojas, não os destinatários, então normalmente só a loja
 
 ## Acompanhe uma encomenda Asendia com o Peek
 
-O [Peek](/) identifica a Asendia de imediato em códigos `ASE`, `AS…US` e `AHOY`, e consulta tanto a Asendia quanto a DHL eCommerce em códigos `ESUS`. Você também pode colar um link de track.asendia.com ou do A1 tracking. Um código postal internacional vai para o correio emissor; se a loja disser que o envio é Asendia, ou fornecer uma referência sem padrão de transportadora, escolha Asendia em "Trocar".
+O [Peek](/) identifica a Asendia de imediato em códigos `ASE`, `AS…US` e `AHOY`, e consulta tanto a Asendia quanto a DHL eCommerce em códigos `ESUS`. Você também pode colar um link de track.asendia.com ou do A1 tracking. Um número postal internacional vai para o correio emissor; se a loja disser que o envio é Asendia, ou fornecer uma referência sem padrão de transportadora, escolha Asendia em "Trocar".
 
 O Peek consulta primeiro o rastreador A1 da Asendia USA e, quando o A1 não responde, abre o track.asendia.com (site das empresas europeias da Asendia) em navegador. Esse site só mostra o histórico completo com o código postal de entrega, campo opcional ao adicionar a encomenda; sem ele, o Peek lê o status atual lá e busca o histórico em serviços universais de rastreamento quando disponível.
 
@@ -103,18 +103,18 @@ A Asendia não informa prazo aos compradores e orienta consultar o e-mail de env
 Não para compradores. Use o assistente virtual "Ask Asendia" na página de suporte, a transportadora local indicada no rastreamento ou o atendimento da loja.
 
 :::sources
-- [Asendia: Shopper Support](https://www.asendia.com/shopper-support) – role, missed delivery, problems, claims via the shop, virtual assistant, customs
-- [Asendia: FAQ](https://www.asendia.com/contact/faq) – owners, countries, partners, attempts, rescheduling, address change, delivered dispute, scan gaps, transit times
-- [Asendia UK: FAQ](https://www.asendia.co.uk/contact/faq) – attempts, claims process
-- [Asendia UK: Contact](https://www.asendia.co.uk/contact) – shopper route, Hounslow address
-- [Asendia USA: Shopper Support](https://www.asendiausa.com/shopper-support) – US advice, A1 link
-- [Asendia USA: FAQ](https://www.asendiausa.com/contact/faq) – second attempt, proof of delivery
-- [Asendia USA: A1 Tracking](https://a1.asendiausa.com/tracking/) – English scans, partner scans
-- [Asendia: Track](https://track.asendia.com/track) – global tracking milestones
-- [Asendia: Delivery to France](https://www.asendia.com/send-to-france) – Colissimo, Chronopost, transit
-- [Asendia: Delivery to Switzerland](https://www.asendia.com/send-to-switzerland) – Swiss Post, transit
-- [Asendia: Europe](https://www.asendia.com/destination/europe) – UK partners unnamed
-- [Asendia: Fraud Protection](https://www.asendia.com/fraud-protection) – email addresses
-- [Swiss Post: Collection note](https://www.post.ch/en/receiving-mail/collection-note) – 15 days for international consignments
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows
+- [Asendia: Shopper Support](https://www.asendia.com/shopper-support) – papel, entrega não realizada, problemas, pedidos de indenização pela loja, assistente virtual, alfândega
+- [Asendia: FAQ](https://www.asendia.com/contact/faq) – controladores, países, parceiros, tentativas, reagendamento, mudança de endereço, contestação da entrega, intervalos entre movimentações, prazos
+- [Asendia UK: FAQ](https://www.asendia.co.uk/contact/faq) – tentativas, processo de indenização
+- [Asendia UK: Contact](https://www.asendia.co.uk/contact) – caminho para compradores, endereço em Hounslow
+- [Asendia USA: Shopper Support](https://www.asendiausa.com/shopper-support) – orientações nos EUA, link do A1
+- [Asendia USA: FAQ](https://www.asendiausa.com/contact/faq) – segunda tentativa, comprovante de entrega
+- [Asendia USA: A1 Tracking](https://a1.asendiausa.com/tracking/) – movimentações em inglês, movimentações dos parceiros
+- [Asendia: Track](https://track.asendia.com/track) – marcos do rastreamento global
+- [Asendia: Delivery to France](https://www.asendia.com/send-to-france) – Colissimo, Chronopost, trânsito
+- [Asendia: Delivery to Switzerland](https://www.asendia.com/send-to-switzerland) – Swiss Post, trânsito
+- [Asendia: Europe](https://www.asendia.com/destination/europe) – parceiros no Reino Unido não nomeados
+- [Asendia: Fraud Protection](https://www.asendia.com/fraud-protection) – endereços de e-mail
+- [Swiss Post: Collection note](https://www.post.ch/en/receiving-mail/collection-note) – 15 dias para remessas internacionais
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek mostra
 :::

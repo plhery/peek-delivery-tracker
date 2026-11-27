@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Bulgarian Posts: códigos PS/BG, taxas e ajuda
-description: Rastreie encomendas dos Bulgarian Posts: códigos PS e S10 BG, status em inglês e búlgaro, 20 dias na agência, taxas da UE, reclamações e telefones.
+description: Rastreie encomendas dos Bulgarian Posts: códigos PS e S10 BG, status em inglês e búlgaro, 20 dias na agência, taxas da UE, indenizações e telefones.
 slug: bulgarian-posts-tracking
 published: 2026-11-26
 updated: 2026-11-26
@@ -32,18 +32,18 @@ O rastreamento do Bulgarian Posts exibe descrições em inglês do sistema UPU I
 | `Send item to customs (Inb)`, `Record item customs information (Inb)` | Apresentado à alfândega búlgara ou aguardando documentos/avaliação aduaneira (muitas vezes com detalhe indicando espera de apresentação a um despachante aduaneiro). | "Na alfândega" |
 | `Return item from customs (Inb)` | Liberado pela alfândega de volta à rede do Bulgarian Posts (não é devolução ao remetente). | "Em trânsito" |
 | `Handover item to delivery agent` | Saiu com o carteiro para entrega em domicílio hoje. | "Saiu para entrega" |
-| `Unsuccessful item delivery attempt (Inb)`, `Първо посещение` | A primeira tentativa falhou; um aviso por escrito foi deixado e o objeto segue para a sua agência. | "Tentativa de entrega" |
+| `Unsuccessful item delivery attempt (Inb)`, `Първо посещение` | A entrega não foi realizada na primeira visita; um aviso por escrito foi deixado e o objeto segue para a sua agência. | "Tentativa de entrega" |
 | `Receive item at collection point for pick-up (Inb)`, `За получаване в ПС`, `Второ посещение` | Aguardando retirada na agência local (`Второ посещение` registra o segundo aviso escrito enviado após 10 dias corridos). | "Pronta para retirada" |
 | `Deliver item (Inb)`, `Доставена`, `Доставена пратка` | Entregue mediante assinatura. | "Entregue" |
 
-Repare que `Създаване` (criação do registro doméstico pelo Bulgarian Posts logo após a movimentação no centro de permuta de entrada) é um lançamento administrativo e não um deslocamento físico, por isso o Peek mantém a etapa anterior. Da mesma forma, `Второ посещение` não indica nova tentativa frustrada na porta — registra o segundo aviso de retirada enquanto a encomenda continua aguardando na agência.
+Repare que `Създаване` (criação do registro doméstico pelo Bulgarian Posts logo após a movimentação no centro de permuta de entrada) é um lançamento administrativo e não um deslocamento físico, por isso o Peek mantém a etapa anterior. Da mesma forma, `Второ посещение` não indica uma entrega não realizada na porta — registra o segundo aviso de retirada enquanto a encomenda continua aguardando na agência.
 
 ## Retirada na agência, prazos de guarda e taxa de armazenagem
 
 Segundo as [Condições Gerais do Bulgarian Posts (ОУ 2023)](https://www.bgpost.bg/cms/static/%D0%9E%D0%A3_2023.pdf) (pontos 43, 45 e 46, acessíveis em [Condições Gerais](https://www.bgpost.bg/en/about_us/conditions)):
 
 - **Objetos registrados e encomendas:** entregues pessoalmente ao destinatário ou pessoa autorizada mediante assinatura e documento oficial com foto. Encomendas postais (*пощенски колети*) normalmente são retiradas na agência de destino após o Bulgarian Posts entregar um aviso por escrito (*писмено служебно известие*), salvo se a entrega em domicílio tiver sido contratada à parte.
-- **Prazo padrão de guarda — 20 dias corridos:** tanto objetos registrados após tentativa frustrada quanto encomendas retidas na agência aguardam por **20 dias corridos** a partir da chegada à agência de entrega antes de voltarem ao remetente.
+- **Prazo padrão de guarda — 20 dias corridos:** tanto objetos registrados após uma entrega não realizada quanto encomendas retidas na agência aguardam por **20 dias corridos** a partir da chegada à agência de entrega antes de voltarem ao remetente.
 - **Segundo aviso em 10 dias:** se você não retirar em **10 dias corridos**, o Bulgarian Posts envia um segundo aviso por escrito (`Второ посещение`).
 - **Taxa de armazenagem após 9 dias:** para encomendas postais não retiradas em **9 dias corridos** após a notificação, o Bulgarian Posts cobra taxa de armazenagem (*магазинаж*) conforme a tabela vigente.
 - **Envios desembaraçados na alfândega — 45 dias corridos:** pelas [regras aduaneiras do Bulgarian Posts](https://www.bgpost.bg/en/customs), **todos os itens que passaram por desembaraço aduaneiro são retirados somente na agência designada** (nunca entregues na porta) e ficam guardados por **45 dias corridos** antes da devolução ao remetente.
@@ -67,7 +67,7 @@ Veja [encomendas retidas na alfândega](guide:customs) para orientações gerais
 
 Em compras on-line, o lojista responde pela entrega e por reembolsos. Segundo a Comissão de Proteção ao Consumidor da Bulgária ([regras de compras on-line da KZP](https://kzp.bg/bg/potrebiteli/good-to-know/online-shopping)), pedidos on-line devem ser entregues em até 30 dias salvo acordo distinto, e consumidores têm direito de arrependimento de 14 dias após o recebimento.
 
-**Reclamações junto ao Bulgarian Posts.** Conforme [bgpost.bg/en/complaints](https://www.bgpost.bg/en/complaints) e os pontos 56–59 das Condições Gerais, o **remetente** protocola reclamações antes da entrega — o destinatário só pode reclamar antes do recebimento com consentimento por escrito do remetente. O prazo para abrir reclamação é de **6 meses** após a postagem (em qualquer agência ou on-line pelo portal RQMS), com cópia do recibo de postagem. O Bulgarian Posts deve responder em **1 mês** para envios domésticos e em **3 meses** para internacionais, pagando indenizações aprovadas em até **1 mês** após a notificação.
+**Pedidos de indenização ao Bulgarian Posts.** Conforme [bgpost.bg/en/complaints](https://www.bgpost.bg/en/complaints) e os pontos 56–59 das Condições Gerais, o **remetente** faz os pedidos de indenização antes da entrega — o destinatário só pode fazê-los antes do recebimento com consentimento por escrito do remetente. O prazo para o pedido é de **6 meses** após a postagem (em qualquer agência ou on-line pelo portal RQMS), com cópia do recibo de postagem. O Bulgarian Posts deve responder em **1 mês** para envios domésticos e em **3 meses** para internacionais, pagando indenizações aprovadas em até **1 mês** após a notificação.
 
 **Escalonamento ao regulador.** Conflitos postais não resolvidos podem ser levados à Comissão de Regulação das Comunicações da Bulgária ([reclamações na CRC / КРС](https://crc.bg/bg/rubriki/271/jalbi)), que responde em 30 dias (até 2 meses se precisar de provas adicionais). Para lidar com atrasos ou falta de atualizações, consulte [por que o rastreamento para de atualizar](guide:tracking-not-updating), [entregue mas não recebida](guide:delivered-not-received), [encomenda danificada](guide:damaged-parcel), [encomenda extraviada](guide:lost-parcel) e [devolvida ao remetente](guide:returned-to-sender).
 
@@ -78,7 +78,7 @@ Contatos publicados em [bgpost.bg/en/contacts](https://www.bgpost.bg/en/contacts
 - **Atendimento geral:** `*7678` ou `+359 2 962 50 50` (dias úteis, 08:00–17:30), e-mail `info@bgpost.bg`.
 - **Expresso EMS / Bulpost:** `*6666` ou `0700 19 666` (dias úteis, 07:00–19:00).
 - **Serviço aduaneiro (1900 Sofia BESC):** `customerservice@bgpost.bg` (seg–sex, 08:00–16:00); envios EMS iniciados por `E`: `emscustomerservice@bgpost.bg` (seg–sex, 08:30–16:00); agência aduaneira de Varna `psm.varna@bgpost.bg` / `052 604 143`.
-- **Linhas de reclamações (dias úteis, 09:00–17:30):** doméstico `+359 2 949 3326`, internacional de entrada `+359 2 949 3121`, internacional de saída `+359 2 949 3343`, suporte ao portal RQMS `02 949 31 90`.
+- **Linhas para pedidos de indenização (dias úteis, 09:00–17:30):** doméstico `+359 2 949 3326`, internacional de entrada `+359 2 949 3121`, internacional de saída `+359 2 949 3343`, suporte ao portal RQMS `02 949 31 90`.
 - **Sede:** 1, Akademik Stefan Mladenov Str., Bl. 31, 1700 Sofia, Bulgária.
 
 > Desconfie de SMS ou e-mails não solicitados pedindo pagamento por cartão on-line para "agendar a entrega" de uma encomenda do Bulgarian Posts: itens desembaraçados na alfândega são pagos e retirados na agência designada. Verifique o código diretamente em [bgpost.bg](https://www.bgpost.bg/en/postal-services/track-package). Veja [golpes de entrega por SMS](guide:delivery-scam-texts).
@@ -93,7 +93,7 @@ Com a encomenda aberta no Peek, ou no dia da entrega com notificações ligadas,
 
 Quando a movimentação mais recente completa quatro dias e a encomenda continua em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza com a data desse registro, como "Sem atualizações desde seg 12 out". A página então mostra "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Bulgarian Posts.", com um link "Pedir ajuda a Bulgarian Posts" para a página de contatos. Após três semanas sem novidade, exibe "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando Bulgarian Posts."
 
-Você pode escolher alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek apenas acompanha o rastreamento e não envia declarações aduaneiras nem abre reclamações junto ao Bulgarian Posts por você.
+Você pode escolher alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek apenas acompanha o rastreamento e não envia declarações aduaneiras nem faz pedidos de indenização ao Bulgarian Posts por você.
 
 ## Perguntas sobre o rastreamento do Bulgarian Posts
 
@@ -114,16 +114,16 @@ Significa que a alfândega búlgara liberou o envio e o devolveu à rede do Bulg
 Desde 2 de novembro de 2026, a taxa de representação do Bulgarian Posts (com IVA incluído) é de €2,70 para compras IOSS até €150 (ou presentes C2C até €45), €3,80 para compras sem IOSS até €150 (ou presentes de €45 a €1.000), €12,00 para compras de €150 a €1.000 e €20,00 (+ €5,00 por tipo extra de item) acima de €1.000, além do imposto aduaneiro da UE aplicável (€3 até €150), da taxa de manuseio da UE de €2 e do IVA.
 
 :::sources
-- [Bulgarian Posts: Home](https://www.bgpost.bg/en) – national postal operator overview
-- [Bulgarian Posts: Item Tracking](https://www.bgpost.bg/en/postal-services/track-package) – 13-character S10 and `PS` number rules, inbound/outbound tracking scope
-- [Bulgarian Posts: Customs](https://www.bgpost.bg/en/customs) – €3 duty, €2 Union Handling Fee, 2 Nov 2026 customs representation fee schedule (€2.70 / €3.80 / €12 / €20), post-office-only delivery and 45-calendar-day customs storage
-- [Bulgarian Posts: General Terms (ОУ 2023 PDF)](https://www.bgpost.bg/cms/static/%D0%9E%D0%A3_2023.pdf) – points 43, 45, 46 (ID/signature, 20-calendar-day hold, 10-day second notice, 9-day storage fee) and points 56–59 (claims)
-- [Bulgarian Posts: General Terms Overview](https://www.bgpost.bg/en/about_us/conditions) – universal postal service and EMS/Bulpost terms
-- [Bulgarian Posts: Claims and Inquiries](https://www.bgpost.bg/en/complaints) – sender claim rule, 6-month deadline, 1-month/3-month resolution, RQMS portal and claims phones
-- [Bulgarian Posts: Contacts](https://www.bgpost.bg/en/contacts) – `*7678`, `+359 2 962 50 50`, `info@bgpost.bg`, EMS `*6666` / `0700 19 666`, Sofia headquarters
-- [Bulgarian Posts: FAQ](https://www.bgpost.bg/en/faq) – general recipient questions
-- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty and €2 EU handling fee
-- [KZP: Online Shopping](https://kzp.bg/bg/potrebiteli/good-to-know/online-shopping) – 30-day delivery rule and 14-day withdrawal right
-- [CRC (КРС): Complaints](https://crc.bg/bg/rubriki/271/jalbi) – postal regulator complaints and 30-day response timeframe
-- [Universal Parcel Scraper: bulgarian-posts](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/bulgarian-posts) – `PS` and S10 `BG` detection, `bgpost.bg` URL rules, English/Bulgarian IPS status mapping, Bulpost redirect, Sofia clock and help URL
+- [Bulgarian Posts: Home](https://www.bgpost.bg/en) – visão geral do operador postal nacional
+- [Bulgarian Posts: Item Tracking](https://www.bgpost.bg/en/postal-services/track-package) – regras dos códigos S10 de 13 caracteres e `PS`, alcance do rastreamento de entrada e saída
+- [Bulgarian Posts: Customs](https://www.bgpost.bg/en/customs) – imposto de €3, taxa de manuseio da União de €2, taxas de representação aduaneira de 2 nov 2026 (€2,70 / €3,80 / €12 / €20), retirada só na agência e guarda aduaneira de 45 dias corridos
+- [Bulgarian Posts: General Terms (ОУ 2023 PDF)](https://www.bgpost.bg/cms/static/%D0%9E%D0%A3_2023.pdf) – pontos 43, 45, 46 (documento e assinatura, guarda de 20 dias corridos, segundo aviso em 10 dias, armazenagem após 9 dias) e pontos 56–59 (pedidos de indenização)
+- [Bulgarian Posts: General Terms Overview](https://www.bgpost.bg/en/about_us/conditions) – serviço postal universal e condições do EMS/Bulpost
+- [Bulgarian Posts: Claims and Inquiries](https://www.bgpost.bg/en/complaints) – pedido feito pelo remetente, prazo de 6 meses, resposta em 1 ou 3 meses, portal RQMS e telefones
+- [Bulgarian Posts: Contacts](https://www.bgpost.bg/en/contacts) – `*7678`, `+359 2 962 50 50`, `info@bgpost.bg`, EMS `*6666` / `0700 19 666`, sede em Sófia
+- [Bulgarian Posts: FAQ](https://www.bgpost.bg/en/faq) – perguntas gerais de destinatários
+- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – imposto aduaneiro de €3 e taxa de manuseio da UE de €2
+- [KZP: Online Shopping](https://kzp.bg/bg/potrebiteli/good-to-know/online-shopping) – entrega em 30 dias e direito de arrependimento de 14 dias
+- [CRC (КРС): Complaints](https://crc.bg/bg/rubriki/271/jalbi) – reclamações ao regulador postal e prazo de resposta de 30 dias
+- [Universal Parcel Scraper: bulgarian-posts](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/bulgarian-posts) – detecção de `PS` e S10 `BG`, regras dos links `bgpost.bg`, correspondência dos status IPS em inglês e búlgaro, redirecionamento ao Bulpost, horário de Sófia e link de ajuda
 :::

@@ -36,14 +36,14 @@ updated: 2026-11-26
 | `Receive item at collection point for pick-up (Inb)`、`За получаване в ПС`、`Второ посещение` | 正在当地邮局等待领取（`Второ посещение` 表示满 10 个自然日后发出的第二次书面通知）。 | “待取件” |
 | `Deliver item (Inb)`、`Доставена`、`Доставена пратка` | 已交付并签收。 | “已签收” |
 
-注意：`Създаване`（保加利亚邮政在入境互换局扫描后立即创建国内记录）属于行政登记而非实际移动，因此 Peek 会沿用上一条扫描所处的阶段。同样，`Второ посещение` 并非上门派送失败，而是记录包裹在邮局等待领取期间发出的第二次取件通知。
+注意：`Създаване`（保加利亚邮政在入境互换局扫描后立即创建国内记录）属于行政登记而非实际移动，因此 Peek 会沿用上一条扫描所处的阶段。同样，`Второ посещение` 并不表示上门派送未成功，而是记录包裹在邮局等待领取期间发出的第二次取件通知。
 
 ## 邮局取件、保管期限与仓储费
 
 根据保加利亚邮政[通用条款与条件（ОУ 2023）](https://www.bgpost.bg/cms/static/%D0%9E%D0%A3_2023.pdf)第 43、45、46 条（入口见[通用条款](https://www.bgpost.bg/en/about_us/conditions)）：
 
 - **挂号邮件与包裹：** 由收件人本人或受托人凭带照片身份证件签收领取。除非另行支付送货上门费用，否则邮政包裹（*пощенски колети*）通常在保加利亚邮政投递书面通知单（*писмено служебно известие*）后，于投递邮局窗口领取。
-- **标准保管期——20 个自然日：** 无论是派送未成留存的挂号邮件，还是存放在邮局的包裹，自抵达投递邮局起均保管 **20 个自然日**，逾期退回寄件人。
+- **标准保管期——20 个自然日：** 无论是派送未成功后留存的挂号邮件，还是存放在邮局的包裹，自抵达投递邮局起均保管 **20 个自然日**，逾期退回寄件人。
 - **满 10 天发第二次通知：** 若你在 **10 个自然日**内未领取，保加利亚邮政会发出第二次书面通知（`Второ посещение`）。
 - **超过 9 天收取仓储费：** 邮政包裹自通知起超过 **9 个自然日**未领取的，保加利亚邮政按现行资费收取仓储费（*магазинаж*）。
 - **清关邮件——45 个自然日：** 根据[保加利亚邮政清关规定](https://www.bgpost.bg/en/customs)，**所有经过海关清关的邮件仅可在指定邮局领取**（不提供送货上门），并在退回寄件人前保管 **45 个自然日**。
@@ -85,15 +85,15 @@ updated: 2026-11-26
 
 ## 使用 Peek 跟踪保加利亚邮政包裹
 
-[Peek](/) 可高置信度直接识别 13 位 `PS` 单号（如示例编号 `PS48291736405`）为保加利亚邮政，并支持粘贴 `bgpost.bg/postal-services/track-package?itemid=`（含 `/en/`）及旧版 `IPSWeb_item_events.asp?itemid=` 链接。对于以 `BG` 结尾的国际 UPU S10 单号（如 `RR482917367BG` 或 `CP482917367BG`），Peek 会自动首选保加利亚邮政作为寄出地邮政进行追踪；对于海外寄来的入境 S10 单号，你也可以在添加时点击“更换”或在包裹页点击“更换快递公司”手动选择保加利亚邮政（搜索“Български пощи”“Bulgaria Post”或“BG Post”同样可以找到）。注意：若单号属于 Bulpost（`EMS/Bulpost`），保加利亚邮政会将其跳转至 Bulpost 独立页面。
+[Peek](/) 可高置信度直接识别 13 位 `PS` 单号（如示例编号 `PS48291736405`）为保加利亚邮政，也能识别粘贴的 `bgpost.bg/postal-services/track-package?itemid=`（含 `/en/`）及旧版 `IPSWeb_item_events.asp?itemid=` 链接。对于以 `BG` 结尾的国际 UPU S10 单号（如 `RR482917367BG` 或 `CP482917367BG`），Peek 会自动首选保加利亚邮政作为寄出地邮政进行追踪；对于海外寄来的入境 S10 单号，你也可以在添加时点击“更换”或在包裹页点击“更换快递公司”手动选择保加利亚邮政（搜索“Български пощи”“Bulgaria Post”或“BG Post”同样可以找到）。注意：若单号属于 Bulpost（`EMS/Bulpost`），保加利亚邮政会将其跳转至 Bulpost 独立页面。
 
-Peek 直接调用保加利亚邮政公开查询接口，展示对应阶段（“已揽收”、“运输中”、“清关中”、“派送中”、“派送未成功”、“待取件”、“已签收”）、英文 IPS 记录（含保加利亚语国内记录与海关状态备注）、邮局/国家位置（去除邮编）以及保加利亚邮局的送达时间。保加利亚邮局的扫描按索非亚时间记录，境外邮政的扫描按当地时区记录（例如法兰克福按德国时间），Peek 会统一换算为你设备的本地时间。保加利亚邮政查询系统不提供预计送达日期、重量、服务名称、收寄件人姓名或签收照片。
+Peek 直接查询保加利亚邮政公开的查件系统，展示对应阶段（“已揽收”、“运输中”、“清关中”、“派送中”、“派送未成功”、“待取件”、“已签收”）、英文 IPS 记录（含保加利亚语国内记录与海关状态备注）、邮局/国家位置（去除邮编）以及保加利亚邮局的送达时间。保加利亚邮局的扫描按索非亚时间记录，境外邮政的扫描按当地时区记录（例如法兰克福按德国时间），Peek 会统一换算为你设备的本地时间。保加利亚邮政查询系统不提供预计送达日期、重量、服务名称、收寄件人姓名或签收照片。
 
-当你正在 Peek 中查看该包裹，或派送当天已开启通知且保加利亚邮政官网查询正常响应时，Peek 最快每 10 分钟检查一次；保加利亚邮政显示 `Handover item to delivery agent` 当天，从保加利亚时间早上 6 点起每 2 分钟检查一次。其余情况下每小时检查一次。若包裹停留在“已生成面单”或“已揽收”超过 12 小时，或连续两天无新动态，无论以何种方式关注均改为每小时检查一次；若在“已生成面单”停留满 7 天，则改为每 6 小时一次。当保加利亚邮政官网查询无响应、Peek 仅通过物流查询服务跟踪时，会每小时查询一次，静默一天后每 3 小时一次，派送当天最多每 15 分钟一次。
+当你打开包裹页，或在派送当天开启通知时，Peek 最多每 10 分钟查询一次；在保加利亚邮政显示 `Handover item to delivery agent` 的当天，只要保加利亚邮政自己的查件系统正常响应，自保加利亚时间早上 6 点起每 2 分钟查询一次。其余情况下每小时检查一次。若包裹停留在“已生成面单”或“已揽收”超过 12 小时，或连续两天无新动态，无论以何种方式关注均改为每小时检查一次；若在“已生成面单”停留满 7 天，则改为每 6 小时一次。当保加利亚邮政自己的查件系统无响应、Peek 仅通过物流查询服务跟踪时，会每小时查询一次，静默一天后每 3 小时一次，派送当天最多每 15 分钟一次。
 
-若最新扫描已过 4 天，且包裹仍处于“已生成面单”、“已揽收”或“运输中”，Peek 会按该扫描日期做出提示，例如“自10月12日周一起没有物流更新”。包裹页面会显示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 Bulgarian Posts 查询。”，并提供前往保加利亚邮政联系页面的“向 Bulgarian Posts 寻求帮助”链接。若超过三周没有新扫描，则会提示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 Bulgarian Posts 查询。”
+若最新扫描已过 4 天，且包裹仍处于“已生成面单”、“已揽收”或“运输中”，Peek 会按该扫描日期做出提示，例如“自10月12日周一起没有物流更新”。包裹页面会显示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 Bulgarian Posts 查询。”并提供前往保加利亚邮政联系页面的“向 Bulgarian Posts 寻求帮助”链接。若超过三周没有新扫描，则会提示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 Bulgarian Posts 查询。”
 
-你可以自由选择“每次扫描”、“重要环节”或“仅派送当天”通知方案。Peek 仅提供物流状态监控，无法代你提交清关申报或向保加利亚邮政发起理赔。
+Peek 可以按“每次扫描”、“重要环节”或“仅派送当天”通知你。Peek 仅提供物流状态监控，无法代你提交清关申报或向保加利亚邮政发起理赔。
 
 ## 保加利亚邮政查询常见问题
 
@@ -107,23 +107,23 @@ Peek 直接调用保加利亚邮政公开查询接口，展示对应阶段（“
 
 ### `Return item from customs (Inb)` 是退回寄件人的意思吗？
 
-不是。它表示保加利亚海关已完成查验放行，将邮件交回保加利亚邮政网络继续送往你的邮局，并非退回给寄件人。
+不是。它表示保加利亚海关已清关放行，将邮件交回保加利亚邮政网络继续送往你的邮局，并非退回给寄件人。
 
 ### 保加利亚邮政的清关代理费是多少？
 
 自 2026 年 11 月 2 日起，保加利亚邮政清关代理费（含增值税）为：€150 以下 IOSS 订单（或 €45 以下 C2C 礼品）收 €2.70；€150 以下非 IOSS 订单（或 €45–€1,000 礼品）收 €3.80；€150–€1,000 订单收 €12.00；超过 €1,000 收 €20.00（每增加一类商品加收 €5.00）。此外还需按规定缴纳欧盟关税（€150 以下为 €3）、€2 欧盟处理费及增值税。
 
 :::sources
-- [Bulgarian Posts: Home](https://www.bgpost.bg/en) – national postal operator overview
-- [Bulgarian Posts: Item Tracking](https://www.bgpost.bg/en/postal-services/track-package) – 13-character S10 and `PS` number rules, inbound/outbound tracking scope
-- [Bulgarian Posts: Customs](https://www.bgpost.bg/en/customs) – €3 duty, €2 Union Handling Fee, 2 Nov 2026 customs representation fee schedule (€2.70 / €3.80 / €12 / €20), post-office-only delivery and 45-calendar-day customs storage
-- [Bulgarian Posts: General Terms (ОУ 2023 PDF)](https://www.bgpost.bg/cms/static/%D0%9E%D0%A3_2023.pdf) – points 43, 45, 46 (ID/signature, 20-calendar-day hold, 10-day second notice, 9-day storage fee) and points 56–59 (claims)
-- [Bulgarian Posts: General Terms Overview](https://www.bgpost.bg/en/about_us/conditions) – universal postal service and EMS/Bulpost terms
-- [Bulgarian Posts: Claims and Inquiries](https://www.bgpost.bg/en/complaints) – sender claim rule, 6-month deadline, 1-month/3-month resolution, RQMS portal and claims phones
-- [Bulgarian Posts: Contacts](https://www.bgpost.bg/en/contacts) – `*7678`, `+359 2 962 50 50`, `info@bgpost.bg`, EMS `*6666` / `0700 19 666`, Sofia headquarters
-- [Bulgarian Posts: FAQ](https://www.bgpost.bg/en/faq) – general recipient questions
-- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty and €2 EU handling fee
-- [KZP: Online Shopping](https://kzp.bg/bg/potrebiteli/good-to-know/online-shopping) – 30-day delivery rule and 14-day withdrawal right
-- [CRC (КРС): Complaints](https://crc.bg/bg/rubriki/271/jalbi) – postal regulator complaints and 30-day response timeframe
-- [Universal Parcel Scraper: bulgarian-posts](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/bulgarian-posts) – `PS` and S10 `BG` detection, `bgpost.bg` URL rules, English/Bulgarian IPS status mapping, Bulpost redirect, Sofia clock and help URL
+- [Bulgarian Posts: Home](https://www.bgpost.bg/en) – 国家邮政运营商概况
+- [Bulgarian Posts: Item Tracking](https://www.bgpost.bg/en/postal-services/track-package) – 13 位 S10 与 `PS` 单号规则、出入境邮件的查询范围
+- [Bulgarian Posts: Customs](https://www.bgpost.bg/en/customs) – €3 关税、€2 欧盟处理费、2026 年 11 月 2 日起的清关代理费（€2.70 / €3.80 / €12 / €20）、仅限邮局领取及 45 个自然日的清关保管期
+- [Bulgarian Posts: General Terms (ОУ 2023 PDF)](https://www.bgpost.bg/cms/static/%D0%9E%D0%A3_2023.pdf) – 第 43、45、46 条（证件与签收、20 个自然日保管、10 天第二次通知、9 天后仓储费）及第 56–59 条（理赔）
+- [Bulgarian Posts: General Terms Overview](https://www.bgpost.bg/en/about_us/conditions) – 普遍邮政服务及 EMS/Bulpost 条款
+- [Bulgarian Posts: Claims and Inquiries](https://www.bgpost.bg/en/complaints) – 由寄件人理赔的规则、6 个月时限、1 个月/3 个月答复、RQMS 门户与理赔电话
+- [Bulgarian Posts: Contacts](https://www.bgpost.bg/en/contacts) – `*7678`、`+359 2 962 50 50`、`info@bgpost.bg`、EMS `*6666` / `0700 19 666`、索非亚总部
+- [Bulgarian Posts: FAQ](https://www.bgpost.bg/en/faq) – 收件人一般问题
+- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 关税与 €2 欧盟处理费
+- [KZP: Online Shopping](https://kzp.bg/bg/potrebiteli/good-to-know/online-shopping) – 30 天送达规定与 14 天撤销权
+- [CRC (КРС): Complaints](https://crc.bg/bg/rubriki/271/jalbi) – 向邮政监管机构投诉及 30 天答复时限
+- [Universal Parcel Scraper: bulgarian-posts](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/bulgarian-posts) – `PS` 与 S10 `BG` 单号识别、`bgpost.bg` 链接规则、英文与保加利亚语 IPS 状态对应、Bulpost 跳转、索非亚时间与帮助链接
 :::

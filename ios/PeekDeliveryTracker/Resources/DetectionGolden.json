@@ -11151,6 +11151,29 @@
     ]
   },
   {
+    "input": "07006538199",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "postlogistics",
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "coordinadora",
+      "dhl-ecommerce-pl",
+      "gls-at",
+      "gls-pl",
+      "mainfreight"
+    ],
+    "asked": [
+      "dhl-ecommerce-pl",
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "postlogistics"
+    ]
+  },
+  {
     "input": "07008925817IL",
     "carrier": "israel-post",
     "confidence": "high",
@@ -66337,6 +66360,44 @@
     ]
   },
   {
+    "input": "7013830828",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight",
+      "dpd-ie"
+    ],
+    "asked": [
+      "packeta"
+    ]
+  },
+  {
+    "input": "7014649674",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight",
+      "dpd-ie"
+    ],
+    "asked": [
+      "packeta"
+    ]
+  },
+  {
     "input": "70179000005963",
     "carrier": "unknown",
     "confidence": "low",
@@ -106787,6 +106848,17 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "NT999999998FR",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "chronopost"
+    ],
+    "asked": [
+      "chronopost"
+    ]
   },
   {
     "input": "NTG999000001",

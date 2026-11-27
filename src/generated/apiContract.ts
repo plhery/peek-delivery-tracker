@@ -1539,6 +1539,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^GC\\d{9}FR$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^NT\\d{9}FR$",
+        "confidence": "low"
       }
     ],
     "aliases": [
@@ -2195,7 +2199,7 @@ export const CARRIER_CAPABILITIES = {
           "gls-group.eu",
           "gls-group.com"
         ],
-        "pathPattern": "^/(?:GROUP|BE|BG|DK|FI|HR|IE|LU|NL|RO|RS|SI)/",
+        "pathPattern": "^/(?:GROUP|BE|BG|DK|FI|HR|IE|LU|NL|RO|RS)/",
         "params": [
           "match",
           "parcelNumber",
@@ -71791,6 +71795,40 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ]
+  },
+  "gls-si": {
+    "displayName": "GLS Slovenia",
+    "aliases": [
+      "GLS Slovenija"
+    ],
+    "countries": [
+      "SI"
+    ],
+    "color": "#ffdd00",
+    "selectable": true,
+    "timezone": "Europe/Ljubljana",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "gls-si"
+    },
+    "trackingUrlTemplate": "https://gls-group.com/SI/sl/sledenje-posiljki/?match={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "gls-group.com",
+          "gls-group.eu"
+        ],
+        "pathPattern": "^/SI/",
+        "params": [
+          "match",
+          "parcelNumber",
+          "matchParcelNumber"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://gls-group.com/SI/sl/sledenje-posiljki/",
+    "helpUrl": "https://gls-group.com/SI/sl/gls-kontakt/"
   }
 } as const;
 
@@ -73975,7 +74013,8 @@ export const CARRIER_IDS = [
   "lingxun-logistics",
   "ljs",
   "sunson",
-  "tongxi"
+  "tongxi",
+  "gls-si"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

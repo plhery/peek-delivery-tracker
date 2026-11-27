@@ -35,7 +35,7 @@ O rastreador da DPD responde em romeno ou em inglês; as movimentações em rome
 | `Predict`, `Predict – s-au trimis informațiile cu privire la intervalul orar de livrare.` | A DPD enviou a você a faixa horária de entrega. É uma mensagem, não uma leitura física. |
 | `Out for Delivery`, `Iesire in livrare`, `Expedierea ta a fost preluată spre livrare de către curierul DPD.` | Com o entregador para entrega. |
 | `Livrare nereusita`, `Expedierea ta nu a putut fi livrată.` | Não entregue. O motivo aparece em seguida, como endereço incorreto ou recusa. |
-| `Expedierea ta a fost returnată în depozitul DPD.` | Voltou ao centro de distribuição após uma tentativa sem sucesso; não é devolução ao remetente. |
+| `Expedierea ta a fost returnată în depozitul DPD.` | Voltou ao centro de distribuição após uma entrega não realizada; não é devolução ao remetente. |
 | `Delivered`, `Livrat` | Entregue. O rastreador mostra o nome de quem recebeu. |
 | `Retur catre expeditor` | Voltando ao remetente, com um código AWB de devolução informado na observação. |
 | `Retur livrat catre expeditor` | O remetente já recebeu a encomenda de volta. |
@@ -49,7 +49,7 @@ O rastreador da DPD responde em romeno ou em inglês; as movimentações em rome
 
 **Smart Control.** Antes da entrega, a DPD envia um SMS com a data prevista e o link do Smart Control. O recurso é gratuito e permite confirmar ou alterar o endereço, ver onde está a encomenda, redirecioná-la para um depósito, agência, armário ou DPD Shop, ou adiar a entrega para o próximo dia útil. O redirecionamento dentro da mesma cidade é gratuito. A entrega ocorre sem contato e a assinatura eletrônica não é mais exigida; a DPD pode conferir sua identidade com documento e um PIN enviado por SMS ou e-mail.
 
-**Tentativa sem sucesso.** A DPD faz duas tentativas em dias úteis consecutivos. Depois da segunda, deixa um aviso e guarda a encomenda gratuitamente em um ponto DPD com atendimento por 5 dias corridos, período em que você pode agendar uma última tentativa. Pacotes Express e Livrare specială têm apenas uma tentativa e depois voltam ao remetente. A DPD não entrega em caixas de correio. Se você recusar o pacote ou se recusar a pagar o valor na entrega, a DPD inicia a devolução ao remetente no mesmo dia, sem guardá-lo.
+**Entrega não realizada.** A DPD faz duas tentativas em dias úteis consecutivos. Depois da segunda, deixa um aviso e guarda a encomenda gratuitamente em um ponto DPD com atendimento por 5 dias corridos, período em que você pode agendar uma última tentativa. Pacotes Express e Livrare specială têm apenas uma tentativa e depois voltam ao remetente. A DPD não entrega em caixas de correio. Se você recusar o pacote ou se recusar a pagar o valor na entrega, a DPD inicia a devolução ao remetente no mesmo dia, sem guardá-lo.
 
 **Agências, armários e Parcel Shops.** Prazos de retirada informados pela DPD:
 
@@ -88,13 +88,13 @@ A DPD não informa se os atendentes falam inglês.
 
 ## Como rastrear DPD Romania no Peek
 
-Cole o código AWB de 11 dígitos no [Peek](/). Outras transportadoras usam o mesmo formato, então o Peek consulta primeiro as mais prováveis conforme o seu país (região do celular ou local de acesso na web). Na Romênia, ele consulta a DPD Romania primeiro e mostra "DPD Romania tem esta encomenda." quando ela reconhece o código. Em outros países, consulta outras transportadoras e serviços de rastreamento antes da DPD Romania, exibindo o nome dela assim que o código é encontrado. Se aparecer "ainda não encontrado · O Peek continua consultando", toque em "Alterar" e escolha DPD Romania, ou use "Alterar transportadora" em uma encomenda já adicionada. Cole o código mesmo assim: o Peek acompanha mais de 4.500 transportadoras. Links de tracking.dpd.ro ou services.dpd.ro/tracking com `shipmentNumber=`, e de dpd.com/ro/ ou dpdgroup.com/ro/ com `parcelNumber=`, também funcionam.
+Cole o código AWB de 11 dígitos no [Peek](/). Outras transportadoras usam o mesmo formato, então o Peek consulta primeiro as mais prováveis conforme o seu país (região do celular ou local de acesso na web). Na Romênia, ele consulta a DPD Romania primeiro e mostra "DPD Romania está com esta encomenda." quando ela reconhece o código. Em outros países, consulta outras transportadoras e serviços de rastreamento antes da DPD Romania, exibindo o nome dela assim que o código é encontrado. Se aparecer "ainda não encontrada · o Peek continua verificando", toque em "Trocar" e escolha DPD Romania, ou use "Trocar transportadora" em uma encomenda já adicionada. Cole o código mesmo assim: o Peek acompanha mais de 4.500 transportadoras. Links de tracking.dpd.ro ou services.dpd.ro/tracking com `shipmentNumber=`, e de dpd.com/ro/ ou dpdgroup.com/ro/ com `parcelNumber=`, também funcionam.
 
 O Peek solicita à DPD o rastreamento em inglês e mostra a etapa, o histórico nos termos da DPD com cidade (e país) de cada leitura, a data prevista enquanto está em trânsito — incluindo a faixa horária quando a mensagem Predict traz uma — e o horário da entrega. Ele omite quem recebeu, a assinatura e o código de devolução; a DPD não fornece peso nem remetente.
 
 Quando a DPD repassa o trecho final para a [ACS Courier](carrier:acs-courier), como no Chipre, ela informa a ACS e o código da ACS. Se esse código tiver dez dígitos, como os comprovantes da ACS, o Peek consulta a ACS e passa a acompanhá-la assim que ela tiver uma leitura tão recente quanto a última da DPD. Até lá, ou se o formato for outro, o Peek segue pela DPD, mas o cartão já exibe a ACS e o código dela.
 
-Enquanto a encomenda estiver aberta no Peek, ou no dia da entrega com notificações ativadas, o Peek consulta a cada 10 minutos no máximo, e a cada 2 minutos no dia em que a DPD marca saída para entrega: a partir das 6h no horário da Romênia ou, quando o Predict informa uma faixa horária, meia hora antes do início dela — o que ocorrer por último. Você escolhe receber avisos em "Cada atualização", "Etapas importantes" ou "Somente na entrega". Após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), o Peek passa a consultar de hora em hora, e a cada 6 horas após sete dias parados em "Etiqueta criada". Se a encomenda ficar quatro dias sem nova leitura em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek mostra "Sem atualização de rastreamento desde …" com a data da última linha e o link "Obter ajuda da DPD Romania". Para alterar a entrega, use o Smart Control.
+Enquanto a encomenda estiver aberta no Peek, ou no dia da entrega com notificações ativadas, o Peek consulta a cada 10 minutos no máximo, e a cada 2 minutos no dia em que a DPD marca saída para entrega: a partir das 6h no horário da Romênia ou, quando o Predict informa uma faixa horária, meia hora antes do início dela — o que ocorrer por último. Você escolhe receber avisos em "Cada movimentação", "Etapas importantes" ou "Só a entrega". Após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), o Peek passa a consultar de hora em hora, e a cada 6 horas após sete dias parados em "Etiqueta criada". Se a encomenda ficar quatro dias sem nova leitura em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek mostra "Sem atualizações desde …" com a data da última linha e o link "Pedir ajuda a DPD Romania". Para alterar a entrega, use o Smart Control.
 
 ## Perguntas frequentes sobre o rastreamento DPD na Romênia
 
@@ -104,7 +104,7 @@ De 1 a 2 dias úteis no DPD Standard. Os termos da DPD preveem até 7 dias corri
 
 ### Por quanto tempo a DPD guarda uma encomenda em agência ou armário?
 
-7 dias corridos em agência, 5 em Parcel Shop, 3 em armário e 5 em ponto DPD após duas tentativas sem sucesso. Depois disso, a encomenda volta ao remetente.
+7 dias corridos em agência, 5 em Parcel Shop, 3 em armário e 5 em ponto DPD após duas entregas não realizadas. Depois disso, a encomenda volta ao remetente.
 
 ### Posso rastrear uma encomenda DPD Romania em inglês?
 

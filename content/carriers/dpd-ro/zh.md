@@ -6,22 +6,22 @@ published: 2026-11-27
 updated: 2026-11-27
 ---
 
-DPD Romania（Dynamic Parcel Distribution S.A.）是 Geopost 集团在罗马尼亚的快递公司，自 2008 年起在当地运营，总部位于伊尔福夫县的 Mogoșoaia。每个包裹都有独立的运单号：你可以在 DPD 官网查询页 tracking.dpd.ro（提供英文界面）、DPD 派送短信中的 Smart Control 链接或上方输入框中查询。
+DPD Romania（Dynamic Parcel Distribution S.A.）是 Geopost 集团在罗马尼亚的快递公司，自 2008 年起在当地运营，总部位于伊尔福夫县的 Mogoșoaia。每个包裹都有独立的运单号：你可以在 DPD 的查询页 tracking.dpd.ro（提供英文界面）、DPD 派送短信中的 Smart Control 链接或上方输入框中查询。
 
 ## DPD Romania 快递单号在哪里找
 
-DPD 将其称为运单号（waybill number）或 AWB。DPD 官网未公布统一的长度规则；Peek 识别为 DPD Romania 的运单号为以 8 开头的 11 位数字：
+DPD 将其称为运单号（waybill number）或 AWB。DPD 的页面没有给出长度规则；Peek 识别为 DPD Romania 的运单号为以 8 开头的 11 位数字：
 
 | 单号（虚构示例） | 含义 |
 | --- | --- |
-| `84927163504` | 以 8 开头的 11 位数字：DPD Romania 运单号。该格式也符合 [GLS Germany](carrier:gls-de)、[GLS France](carrier:gls-fr)、[GLS Switzerland](carrier:gls-ch)、[GLS Austria](carrier:gls-at)、[PPL](carrier:ppl) 等承运商。 |
+| `84927163504` | 以 8 开头的 11 位数字：DPD Romania 运单号。该格式也符合 [GLS Germany](carrier:gls-de)、[GLS France](carrier:gls-fr)、[GLS Switzerland](carrier:gls-ch)、[GLS Austria](carrier:gls-at)、[PPL](carrier:ppl) 等快递公司。 |
 | `01204819273645` | 14 位数字：其他 DPD 子公司的包裹单号格式，例如 [DPD Germany](carrier:dpd-de)、[DPD UK](carrier:dpd-uk)、[DPD France](carrier:dpd-fr) 或 [DPD Portugal](carrier:dpd-pt)。Peek 仅通过 11 位运单号追踪 DPD Romania。 |
 
 请在商家的发货邮件或订单页面查看单号。DPD 手机应用提供收件人控制台，可通过短信或邮件验证码登录。如果商家注明由 [Cargus](carrier:cargus)、[FAN Courier](carrier:fan-courier) 或 Sameday 承运，则该单号属于对应公司。如果完全找不到单号，请参阅[如何查找快递单号](guide:find-tracking-number)（英文）。
 
 ## DPD Romania 物流状态含义
 
-DPD 查询页面支持罗马尼亚语和英语；罗马尼亚语扫描记录分为较旧的简短措辞和较新的完整句子两种。按包裹常见流转顺序排列如下：
+DPD 查询页面提供罗马尼亚语和英语；罗马尼亚语扫描记录分为较旧的简短措辞和较新的完整句子两种。按包裹通常经过的顺序排列如下：
 
 | DPD 显示状态 | 对你的含义 |
 | --- | --- |
@@ -51,11 +51,11 @@ DPD 查询页面支持罗马尼亚语和英语；罗马尼亚语扫描记录分�
 
 **派送未成功。** DPD 会在连续两个工作日内尝试派送两次。第二次失败后会留下通知，并将包裹免费存放在人工 DPD 网点 5 个自然日，在此期间你可以预约最后一次派送。Express 和 Livrare specială 包裹仅尝试派送一次，失败后即退回寄件人。DPD 不投递至信箱。如果你拒收包裹或拒绝支付货到付款金额，DPD 会于当日直接启动退回寄件人流程，不予留存。
 
-**网点、自提柜与合作代收点（Parcel Shop）。** 根据 DPD 公布的自提保管期：
+**网点、自提柜与 Parcel Shop。** 根据 DPD 公布的自提保管期：
 
-- DPD 网点（Office）：7 个自然日；支持现金、刷卡或 Pay by Link 支付。
-- DPD 自提柜（Locker）：3 个自然日（条款中为发出通知起 72 小时）；室外自提柜 24/7 开放；支持刷卡或 Pay by Link。
-- DPD Parcel Shop：5 个自然日；支持 Pay by Link 或刷卡（Pay Point 门店不支持刷卡）。
+- DPD 网点（Office）：7 个自然日；可用现金、刷卡或 Pay by Link 支付。
+- DPD 自提柜（Locker）：3 个自然日（条款中为发出通知起 72 小时）；室外自提柜 24/7 开放；可刷卡或用 Pay by Link 支付。
+- DPD Parcel Shop：5 个自然日；可用 Pay by Link 或刷卡（Pay Point 门店不能刷卡）。
 
 超过保管期后，国内包裹将在 5 个工作日内退回寄件人（国际包裹为 10 个工作日）。
 
@@ -71,7 +71,7 @@ DPD 查询页面支持罗马尼亚语和英语；罗马尼亚语扫描记录分�
 
 **投诉与理赔。** 寄件人与收件人均可在寄出后 6 个月内通过 DPD 表格提出投诉：发送邮件至 reclamatii@dpd.ro、在线提交、前往人工 DPD 网点或通过挂号信寄送。DPD 在 3 个月内结案，并在结案后 15 天内赔付。对于未声明保价且非货到付款的丢失或破损包裹，DPD 按运费的 5 倍赔偿。寄出后 1 年内，你也可向罗马尼亚通信监管机构 ANCOM 申诉或提起诉讼。另见[包裹丢失处理指南](guide:lost-parcel)（英文）。
 
-**海关与税费。** 自 2026 年 7 月 1 日起，从欧盟境外网购且货值不超过 150 欧元的包裹，按商品种类每类征收 3 欧元欧盟关税；自 2026 年 11 月 1 日起，无论货值多少，另按商品种类每类征收 2 欧元欧盟处理费。DPD Romania 官网未说明如何向收件人转收这两项费用，请向商家确认售价是否已包含相关税费。此外，DPD 于 2025 年 12 月 22 日发布公告说明了罗马尼亚自 2026 年 1 月 1 日起对每件申报价值低于 150 欧元的非欧盟包裹征收的 25 罗马尼亚列伊（RON）固定费用：该费用由卖家、寄件人或交易平台承担，由 DPD 向其收取。详情见[包裹卡在海关怎么办](guide:customs)（英文）。
+**海关与税费。** 自 2026 年 7 月 1 日起，从欧盟境外网购且货值不超过 150 欧元的包裹，按商品种类每类征收 3 欧元欧盟关税；自 2026 年 11 月 1 日起，无论货值多少，另按商品种类每类征收 2 欧元欧盟处理费。DPD Romania 的页面未说明如何向收件人转收这两项费用，请向商家确认售价是否已包含相关税费。此外，DPD 于 2025 年 12 月 22 日发布公告说明了罗马尼亚自 2026 年 1 月 1 日起对每件申报价值低于 150 欧元的非欧盟包裹征收的 25 罗马尼亚列伊（RON）固定费用：该费用由卖家、寄件人或交易平台承担，由 DPD 向其收取。详情见[包裹卡在海关怎么办](guide:customs)（英文）。
 
 ## DPD Romania 客服与联系方式
 
@@ -79,22 +79,22 @@ Peek 无法代你联系 DPD 或商家。DPD Romania 英文联系页面列出的�
 
 - **罗马尼亚境内包裹：** 031 824 90 90，周一至周五罗马尼亚时间 8:30 至 16:30；邮件请发送至 client@dpd.ro。
 - **国际包裹：** 031 824 90 32 或 international@dpd.ro，服务时间同上。
-- **投诉理赔：** reclamatii@dpd.ro 或官网投诉表单。
+- **投诉理赔：** reclamatii@dpd.ro 或投诉表单。
 - **邮寄地址：** Dynamic Parcel Distribution S.A., Str. Buiacului nr. 2, LogIQ Logistic Park, Corp A (A1-A2), 077135 Mogoșoaia, Ilfov。
 
 DPD 未说明客服人员是否提供英语服务。
 
-> DPD Romania 提醒防范冒充 DPD 名义发送的虚假短信和邮件：此类链接指向仿冒官网，诱导付款或填写银行卡信息。DPD Romania 绝不会通过短信或邮件索要银行资料。请勿点击链接，将其举报为垃圾信息并告知 DPD。另见[快递诈骗短信识别](guide:delivery-scam-texts)（英文）。
+> DPD Romania 提醒防范冒充 DPD 名义发送的虚假短信和邮件：此类链接指向仿冒 DPD 网站的页面，诱导付款或填写银行卡信息。DPD Romania 绝不会通过短信或邮件索要银行资料。请勿点击链接，将其举报为垃圾信息并告知 DPD。另见[快递诈骗短信识别](guide:delivery-scam-texts)（英文）。
 
 ## 使用 Peek 追踪 DPD Romania 包裹
 
-将 11 位运单号粘贴到 [Peek](/)。由于多家承运商共用此格式，Peek 会根据你所在的国家（手机地区设置或网页访问所在地区）优先询问最可能的承运商。在罗马尼亚，Peek 会先查询 DPD Romania，查到后即显示“DPD Romania 有这个包裹。”；在其他地区，Peek 会先询问其他承运商及追踪服务，再查询 DPD Romania，一旦查到便显示其名称。如果看到“暂未查到 · Peek 会继续查询”，请点击“更改”选择 DPD Romania，或对已添加包裹使用“更改快递公司”。尽管粘贴查询：Peek 支持超过 4,500 家快递公司。带有 `shipmentNumber=` 的 tracking.dpd.ro 或 services.dpd.ro/tracking 链接，以及带有 `parcelNumber=` 的 dpd.com/ro/ 或 dpdgroup.com/ro/ 链接也可直接粘贴。
+将 11 位运单号粘贴到 [Peek](/)。由于多家快递公司共用此格式，Peek 会根据你所在的国家（手机地区设置或网页访问所在地区）优先询问最可能的快递公司。在罗马尼亚，Peek 会先查询 DPD Romania，查到后即显示“DPD Romania 有这个包裹的记录。”；在其他地区，Peek 会先询问其他快递公司及追踪服务，再查询 DPD Romania，一旦查到便显示其名称。如果看到“暂未找到 · Peek 会继续查询”，请点“更换”选择 DPD Romania，或对已添加的包裹使用“更换快递公司”。照样粘贴即可：Peek 跟踪 4,500 多家快递公司。带有 `shipmentNumber=` 的 tracking.dpd.ro 或 services.dpd.ro/tracking 链接，以及带有 `parcelNumber=` 的 dpd.com/ro/ 或 dpdgroup.com/ro/ 链接也可直接粘贴。
 
 Peek 向 DPD 请求英文物流信息，展示包裹阶段、采用 DPD 原文的轨迹及每次扫描的城镇（和国家）、运输途中显示的预计派送日期（若 DPD 的 Predict 消息提供了时间段也会一并显示）以及送达时间。Peek 不显示签收人姓名、签名和退件运单号；DPD 本身不提供重量或寄件人信息。
 
-当 DPD 将末端派送交接给 [ACS Courier](carrier:acs-courier)（例如发往塞浦路斯）时，DPD 会给出 ACS 名称和 ACS 单号。若该单号为 10 位数字（即 ACS 凭证号格式），Peek 会向 ACS 查询，并在 ACS 出现不晚于 DPD 最新记录的扫描后改由 ACS 继续追踪；在此之前或单号格式不同时，Peek 继续追踪 DPD，但包裹卡片上已会标明 ACS 及其单号。
+当 DPD 将末端派送交接给 [ACS Courier](carrier:acs-courier)（例如发往塞浦路斯）时，DPD 会给出 ACS 名称和 ACS 单号。若该单号为 10 位数字（即 ACS 凭证号格式），Peek 会向 ACS 查询，并在 ACS 出现不早于 DPD 最新记录的扫描后改由 ACS 继续追踪；在此之前或单号格式不同时，Peek 继续追踪 DPD，但包裹卡片上已会标明 ACS 及其单号。
 
-当你在 Peek 中打开包裹页面，或在派送日开启通知时，Peek 最高每 10 分钟检查一次；在 DPD 扫描出库派送当天，自罗马尼亚时间早上 6 点起（若 Predict 提供了时间段，则自该时间段开始前半小时起，以较晚者为准）每 2 分钟检查一次。通知可选择“每次扫描”、“重要节点”或“仅在送达时”。若连续两天无新动态（处于“已创建运单”或“快递公司已收件”状态时为 12 小时），Peek 改为每小时查询一次；在“已创建运单”状态满七天无新动态后，改为每 6 小时查询一次。若包裹在“已创建运单”、“快递公司已收件”或“运输途中”状态下连续四天没有新扫描，Peek 会显示“自……以来无物流更新”并附带该条记录的日期以及“联系 DPD Romania 获取帮助”链接。如需修改派送安排，请使用 Smart Control。
+当你在 Peek 中打开包裹页面，或在派送日开启通知时，Peek 最高每 10 分钟检查一次；在 DPD 扫描出库派送当天，自罗马尼亚时间早上 6 点起（若 Predict 提供了时间段，则自该时间段开始前半小时起，以较晚者为准）每 2 分钟检查一次。通知可选择“每次扫描”、“重要环节”或“仅派送当天”。若连续两天无新动态（处于“已生成面单”或“已揽收”时为 12 小时），Peek 改为每小时查询一次；在“已生成面单”满七天无新动态后，改为每 6 小时查询一次。若包裹停在“已生成面单”、“已揽收”或“运输中”连续四天没有新记录，Peek 会显示“自……起没有物流更新”并附上该条记录的日期，以及“向 DPD Romania 寻求帮助”链接。如需修改派送安排，请使用 Smart Control。
 
 ## DPD Romania 快递查询常见问题
 
@@ -104,11 +104,11 @@ Peek 向 DPD 请求英文物流信息，展示包裹阶段、采用 DPD 原文�
 
 ### DPD 在网点或自提柜会保管包裹多久？
 
-DPD 网点保管 7 个自然日，Parcel Shop 保管 5 个自然日，自提柜保管 3 个自然日；两次派送失败后在 DPD 网点保管 5 个自然日。逾期后包裹将退回寄件人。
+DPD 网点保管 7 个自然日，Parcel Shop 保管 5 个自然日，自提柜保管 3 个自然日；两次派送未成功后在 DPD 网点保管 5 个自然日。逾期后包裹将退回寄件人。
 
 ### 可以用英文查询 DPD Romania 包裹吗？
 
-可以。DPD 官网查询页提供英文版本，Peek 也会直接展示 DPD 的英文状态措辞。
+可以。DPD 的查询页提供英文版本，Peek 也会直接展示 DPD 的英文状态措辞。
 
 ### DPD Romania 的客服电话是多少？
 

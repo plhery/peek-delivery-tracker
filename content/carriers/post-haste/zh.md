@@ -26,14 +26,14 @@ Post Haste 使用共享的 Freightways 追踪后台（同时服务于 Post Haste
 
 | Post Haste 代码或扫描 | 对你的含义 | Peek 显示 |
 | --- | --- | --- |
-| `Label created` | 寄件人发货系统已创建电子面单，派送员尚未揽收。 | “已建单” |
-| `P`（`Picked Up`） | Post Haste 派送员已向寄件人完成揽收。 | “快递公司已揽收” |
+| `Label created` | 寄件人发货系统已创建电子面单，派送员尚未揽收。 | “已生成面单” |
+| `P`（`Picked Up`） | Post Haste 派送员已向寄件人完成揽收。 | “已揽收” |
 | `STAT/RZDEL` | 乡村或非城区派送提示；交由乡村合作伙伴转派通常额外增加 2–3 个工作日。 | “运输中” |
-| `STAT/REDEL` | 先前错过派送后已重新安排并发出派送。 | “运输中” |
+| `STAT/REDEL` | 先前派送未成功后已重新安排并发出派送。 | “运输中” |
 | `D`（`Delivery Handed Over` / `Delivered by courier or branch` 给乡村合作方） | 已交接给乡村派送承包商，仍在送往你住址途中，尚未送达家门。 | “运输中” |
 | `ONBD` | 已装上当地快递员车辆，今日派送。 | “派送中” |
 | `NOND` / `NOND/*` | 未能投递事件（如家中无人并留卡片、场所关门或门禁受阻）。 | “派送未成功” |
-| `D`、`3P/D` | 已送达收件地址（其中 `3P/D` 为乡村派送合作伙伴完成的最终交付）。 | “已送达” |
+| `D`、`3P/D` | 已送达收件地址（其中 `3P/D` 为乡村派送合作伙伴完成的最终交付）。 | “已签收” |
 
 `STAT/HLDFR8` 表示派送未成功后包裹正暂存在网点货运处，但并未说明是等待自提还是安排二次派送：请在线预约重派或联系当地网点确认。
 
@@ -41,9 +41,9 @@ Post Haste 使用共享的 Freightways 追踪后台（同时服务于 Post Haste
 
 根据 [Post Haste 寄收件服务](https://posthaste.co.nz/services/sending-and-receiving/)、[重新派送](https://posthaste.co.nz/tools/redelivery/)和[收件帮助中心](https://help.posthaste.co.nz/category/receiving-parcels/)：
 
-- **公布时效：** **同城**商业件当日互送；**区域隔夜达**（通常次工作日午饭前送达）；**全国隔夜达**覆盖北岛和南岛内部及跨岛（商业地址通常次工作日中午前，住宅地址当天结束前）；**两日跨岛经济件**；主要大城市另支持**周六派送**。
+- **公布时效：** **同城**企业间市内派送；**区域隔夜达**（通常次工作日午饭前送达）；**全国隔夜达**覆盖北岛和南岛内部及跨岛（商业地址通常次工作日中午前，住宅地址当天结束前）；**两日跨岛经济件**；主要大城市另支持**周六派送**。
 - **非城区与乡村地址：** Post Haste 通过乡村派送合作伙伴覆盖新西兰大多数乡村地址（`STAT/RZDEL`），会在城区参考时效基础上额外增加 2 至 3 个工作日。
-- **无人值守地址与重派：** 除非提前签具授权免签放置（authority to leave），Post Haste 的标准政策是**不将包裹留在无人地址**。若错过派送，请凭 16 位派送参考号在 [posthaste.co.nz/tools/redelivery/](https://posthaste.co.nz/tools/redelivery/) 在线申请重派；如没有该参考号，请联系当地网点。前往网点自提须携带有效身份证件。
+- **无人值守地址与重派：** 除非提前签具授权免签放置（authority to leave），Post Haste 的标准政策是**不将包裹留在无人地址**。若派送未成功，请凭 16 位派送参考号在 [posthaste.co.nz/tools/redelivery/](https://posthaste.co.nz/tools/redelivery/) 在线申请重派；如没有该参考号，请联系当地网点。前往网点自提须携带有效身份证件。
 
 ## Post Haste 包裹延误、暂存或遗失
 
@@ -63,17 +63,17 @@ Post Haste 使用共享的 Freightways 追踪后台（同时服务于 Post Haste
 
 ## 使用 Peek 追踪 Post Haste 包裹
 
-在 [Peek](/) 中添加 Post Haste 包裹最便捷的方式，是直接粘贴发货邮件中的完整追踪链接（`receiver.posthaste.co.nz/?consignmentid=CU..…` 或 `posthaste.co.nz/track?query=`），Peek 会自动识别为 Post Haste，并在需要时提取寄件人账号。如果仅输入裸快递券号、记账标签号或运单号（例如虚构单号 `PH48291736`、`73918462` 或 `KLM4829173`），Peek 无法单凭编号自动锁定 Post Haste（对类似 `PH48291736` 的票号会先询问 TNT Italy，对类似 `KLM4829173` 的运单号会先询问 Australia Post），因此请在添加时点击“更改”（或在包裹页点击“更改快递公司”）并选择 **Post Haste**（搜索“Post Haste Couriers”或“Posthaste”也可找到）。随后 Peek 会提供可选的“完整追踪链接”栏位，方便填入发货邮件链接以携带某些包裹必需的寄件人账号。
+在 [Peek](/) 中添加 Post Haste 包裹最便捷的方式，是直接粘贴发货邮件中的完整追踪链接（`receiver.posthaste.co.nz/?consignmentid=CU..…` 或 `posthaste.co.nz/track?query=`），Peek 会自动识别为 Post Haste，并在需要时提取寄件人账号。如果仅输入裸快递券号、记账标签号或运单号（例如虚构单号 `PH48291736`、`73918462` 或 `KLM4829173`），Peek 无法单凭编号自动锁定 Post Haste（对类似 `PH48291736` 的票号会询问 TNT Italy，对类似 `KLM4829173` 的运单号会询问 Australia Post），因此请在添加时点击“更换”（或在包裹页点击“更换快递公司”）并选择 **Post Haste**（搜索“Post Haste Couriers”或“Posthaste”也可找到）。随后 Peek 会提供可选的“完整物流链接”栏位，方便填入发货邮件链接以携带某些包裹必需的寄件人账号。
 
-Peek 以 Post Haste 名义读取 Freightways 查询接口，并展示阶段（“已建单”、“快递公司已揽收”、“运输中”、“派送中”、“派送未成功”、“已送达”）、扫描文案、郊区与地区、Post Haste 提供的预计送达日以及签收时间。扫描主类与子类用于判定阶段，不会直接显示在 Peek 客户端中。扫描时间以 UTC 时刻传入并按你的设备本地时区展示。若最新扫描由 Castle Parcels 等另一家 Freightways 网络产生，页面会显示“由……派送”及该网络名称。Peek 不保留签收签名与签收人姓名、送达照片、授权放门标签、邮编或司机信息。
+Peek 以 Post Haste 名义读取 Freightways 查询接口，并展示阶段（“已生成面单”、“已揽收”、“运输中”、“派送中”、“派送未成功”、“已签收”）、扫描文案、郊区与地区、Post Haste 提供的预计送达日以及签收时间。扫描主类与子类用于判定阶段，不会直接显示在 Peek 客户端中。扫描时间以 UTC 时刻传入并按你的设备本地时区展示。若最新扫描由 Castle Parcels 等另一家 Freightways 网络产生，页面会显示“由……派送”及该网络名称。Peek 不保留签收签名与签收人姓名、送达照片、授权放门标签、邮编或司机信息。
 
-在 Post Haste 官网追踪正常响应期间，当你打开包裹页面或在派送当天开启通知时，Peek 最高每 10 分钟检查一次；在 Post Haste 出现 `ONBD` 当天，自新西兰时间早上 6 点起改为每 2 分钟检查一次。其余时间每小时检查一次。若停留在“已建单”或“快递公司已揽收”满 12 小时，或连续两天无新动态，则无论你如何关注均改为每小时检查一次；停留在“已建单”满七天后改为每 6 小时一次。当 Post Haste 官网无响应而 Peek 仅通过追踪服务跟进时，每小时检查一次，静默一天后每 3 小时一次，派送中当天最高每 15 分钟一次。
+当你在 Peek 中打开包裹页面，或在派送当日开启通知时，Peek 最多每 10 分钟检查一次；在 Post Haste 显示 `ONBD` 当天，只要 Post Haste 自己的追踪系统有响应，会从新西兰时间早上 6 点起每 2 分钟检查一次。其余情况下每小时检查一次。若包裹停留在“已生成面单”或“已揽收”超过 12 小时，或连续两天没有新动态，无论你以何种方式关注，均改为每小时检查一次；若停留在“已生成面单”超过七天，则每 6 小时检查一次。当Post Haste 追踪系统无响应、Peek 仅通过追踪服务跟进时，每小时检查一次，静默一天后每 3 小时一次，派送当天最多每 15 分钟一次。
 
-若最新扫描已满四天且包裹仍停留在“已建单”、“快递公司已揽收”或“运输中”，Peek 会标出该扫描的日期（例如“自 10月12日 周一 起无物流更新”）。包裹页面随后会显示：“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 Post Haste 查询。”并附带指向 Post Haste 收件帮助中心的“向 Post Haste 求助”链接。若超过三周仍无新扫描，则会显示：“已经三周多没有新动态。如果包裹仍未送达，请联系卖家。Peek 会持续向 Post Haste 查询。”
+当最新扫描距今已满四天，且包裹仍处于“已生成面单”、“已揽收”或“运输中”时，Peek 会用该次扫描的日期加以标记，例如“自10月12日周一起没有物流更新”。包裹页面随后会显示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 Post Haste 查询。”，并附上指向 Post Haste 收件帮助页面的“向 Post Haste 寻求帮助”链接。如果三周没有新扫描，页面会显示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 Post Haste 查询。”
 
-你可以自由选择“每次扫描”、“重要节点”或“仅送达”提醒预设。Peek 仅监控物流更新，无法代你预约重派、授予免签放置授权或联系当地 Post Haste 网点。
+你可以自由选择“每次扫描”、“重要环节”或“仅派送当天”提醒预设。Peek 仅监控物流更新，无法代你预约重派、授予免签放置授权或联系当地 Post Haste 网点。
 
-## Post Haste 追踪常见问题
+## 关于 Post Haste 物流查询的问题
 
 ### Post Haste 支持哪些追踪单号格式？
 
@@ -81,9 +81,9 @@ Post Haste 支持追踪快递券/Express Pack 快件袋（2–4 位字母加 5�
 
 ### 为什么我的 Post Haste 客户自打印运单号查不到？
 
-部分客户自打印标签（如 Despatch IT 运单）绑定了寄件人公司账号。请直接粘贴发货通知邮件中完整的 `receiver.posthaste.co.nz` 链接，以便查询时自动附带账号代码。
+部分客户自打印标签（如 Despatch IT 运单）绑定了寄件人公司账号。请直接粘贴发货通知邮件中完整的 `receiver.posthaste.co.nz` 链接，以便查询时附带账号代码。
 
-### 错过了 Post Haste 派送怎么办？
+### Post Haste 派送未成功怎么办？
 
 除非提前授权免签放置，Post Haste 通常要求有人签收。请凭 16 位派送参考号通过 [posthaste.co.nz/tools/redelivery/](https://posthaste.co.nz/tools/redelivery/) 在线申请重派，或致电 [posthaste.co.nz/about-us/contact/](https://posthaste.co.nz/about-us/contact/) 列出的当地网点。
 

@@ -5858,12 +5858,14 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^\\d{14}$",
-        "confidence": "low"
+        "confidence": "low",
+        "servedCountriesOnly": true
       },
       {
         "pattern": "^\\d{14}[0-9A-Z]$",
         "confidence": "low",
-        "checksum": "dpd"
+        "checksum": "dpd",
+        "servedCountriesOnly": true
       }
     ],
     "trackingSearchUrl": "https://track.dpd.co.uk/",
@@ -6339,7 +6341,8 @@ export const CARRIER_CAPABILITIES = {
     "tracking": {
       "mode": "automatic",
       "adapter": "dhl-ecommerce-es",
-      "recognitionRank": 630
+      "recognitionRank": 630,
+      "recognitionServedCountriesOnly": true
     },
     "trackingUrlTemplate": "https://clientesparcel.dhl.es/LiveTracking/ModificarEnvio/{trackingNumber}",
     "linkRules": [
@@ -6964,7 +6967,8 @@ export const CARRIER_CAPABILITIES = {
     "tracking": {
       "mode": "automatic",
       "adapter": "box-now",
-      "recognitionRank": 250
+      "recognitionRank": 250,
+      "recognitionServedCountriesOnly": true
     },
     "linkRules": [
       {
@@ -10031,7 +10035,7 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       },
       {
-        "pattern": "^\\d{11,13}$",
+        "pattern": "^(?:01\\d{9}|\\d{12,13})$",
         "confidence": "low"
       }
     ],
@@ -24271,7 +24275,7 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [
       {
-        "pattern": "^\\d{12}$",
+        "pattern": "^00\\d{10}$",
         "confidence": "low"
       }
     ],

@@ -1,12 +1,12 @@
 ---
 title: Chunghwa Post (Taiwan Post) tracking: numbers and statuses
-description: Track a Chunghwa Post parcel between Taiwan and Europe: what a TW number looks like, what the Chinese statuses mean, where to follow it and who to ask.
+description: Track a Chunghwa Post (Taiwan Post / 中華郵政) parcel: 13-character TW numbers, Chinese statuses, Europe post handovers, Taiwan/EU customs and 0800-700-365 contact.
 slug: chunghwa-post-tracking
 published: 2026-11-01
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Chunghwa Post (中華郵政) is Taiwan's national post, a government-owned company that also runs savings accounts and life insurance. Track an item on its [Track & Trace Service](https://postserv.post.gov.tw/pstmail/main_mail.html?targetTxn=EB500201), in English or Chinese, or paste the number in the box above. The number is on the sender's posting receipt, so for a parcel from Taiwan, ask the sender or the shop for it. The tracker asks for a picture code (Captcha) and only covers items posted in the past six months.
+Track a Chunghwa Post (Taiwan Post / 中華郵政, Taiwan's national post) parcel by pasting its 13-character international number (two letters such as `EE`, `RR`, `LX` or `CP`, nine digits and `TW`) in the box above or on Chunghwa Post's [Track & Trace Service](https://postserv.post.gov.tw/pstmail/main_mail.html?targetTxn=EB500201). Once scans show `已出口－資料詳如右方` (exported from Taiwan), your destination country's national post takes over using the same `TW` number — Peek checks both Chunghwa Post and your local post automatically.
 
 ## Chunghwa Post tracking number: what it looks like
 
@@ -113,23 +113,23 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ### Is Chunghwa Post the same as Taiwan Post?
 
-Yes. Chunghwa Post (中華郵政, Chunghwa Post Co., Ltd.) is Taiwan's national post, and Peek knows it under both names. Its international tracking numbers end in `TW`.
+Yes. Chunghwa Post Co., Ltd. (中華郵政) is Taiwan's government-owned national postal service, and Peek recognises both names. International tracking numbers have 13 characters ending in `TW` (starting with `E` for EMS, `R` for registered, `L` for ePacket or `C` for parcels).
 
-### Where do I track a Chunghwa Post parcel in Italy?
+### Where do I track a Chunghwa Post parcel after it leaves Taiwan?
 
-On Chunghwa Post's tracker until `已出口－資料詳如右方`, then on Poste Italiane's site with the same number: Chunghwa Post points to poste.it for EMS and parcels to Italy, and says Italy no longer tracks registered letters. Peek asks Poste Italiane for you when you track the parcel from Italy.
+After `已出口－資料詳如右方` (exported), track the exact same `TW` number on your destination country's national post — such as Poste Italiane in Italy, DHL/Deutsche Post in Germany, Chronopost in France, Correos in Spain, Royal Mail/Parcelforce in the UK, An Post in Ireland or PostNL in the Netherlands. Peek asks your local post automatically once fresh scans appear.
 
-### Why is my Chunghwa Post tracking not updating?
+### What does 海關查驗 mean and what customs fees apply?
 
-If the last line is `已出口－資料詳如右方`, the parcel has left Taiwan: check your own post's tracking with the same number, and allow time for customs. Registered letters to Italy, France, the UK and several other countries, and U numbers, can't be tracked online, Chunghwa Post says.
+`海關查驗` means the parcel is undergoing customs inspection. Shipments from Taiwan into the EU face a €3 flat customs duty per kind of product on orders up to €150 (since 1 July 2026) and a €2 EU handling fee per kind of product (since 1 November 2026), plus VAT; parcels into Taiwan are duty-free up to NT$2,000.
 
-### What does 海關查驗 mean?
+### What is the deadline for a lost Chunghwa Post parcel inquiry?
 
-The item is at customs for inspection. For a parcel from Taiwan, see [parcels held at customs](guide:customs) for what your country may charge.
+The sender must file a written inquiry at the Taiwan post office with the original receipt within **4 months** for EMS or **6 months** for parcels and registered mail from the day after posting — after that, Chunghwa Post may refuse the inquiry and compensation.
 
-### How long does Chunghwa Post keep tracking?
+### How do I contact Chunghwa Post customer service in English?
 
-Its tracker only shows items posted in the past six months. The sender's written inquiry has its own deadline: 4 months for EMS, 6 months for parcels and registered mail, from the day after posting.
+Call the 24-hour customer service line `0800-700-365` and press `3` for English (from a mobile or abroad: `+886-4-2354-2030`), or submit the Opinion Box on [post.gov.tw](https://www.post.gov.tw/post/internet/U_english2/index.jsp?ID=35090601) (answered within 7 days). For inbound Taiwan mail customs/delivery queries, call `+886-3-3180-700` (ext. 2431 EMS, 2432 parcels, 2430 letters).
 
 :::sources
 - [Chunghwa Post: Company Profile](https://www.post.gov.tw/post/internet/U_english2/index.jsp?ID=1637282383451) – government-owned national post, mail, savings and life insurance

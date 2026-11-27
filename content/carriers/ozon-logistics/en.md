@@ -1,12 +1,12 @@
 ---
 title: Ozon tracking: order numbers and statuses in English
-description: Track an Ozon order: what its numbers look like, what the Russian steps on Ozon's tracker mean in English, and how Peek follows it.
+description: Track an Ozon (Ozon Rocket) order in English: dashed order numbers, Russian delivery and customs statuses translated, pickup points and tracking.ozon.ru.
 slug: ozon-tracking
 published: 2026-11-02
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Ozon's delivery service carries the orders that sellers hand over to it, to your door or to a pickup point. Peek's catalog lists it in Russia, Belarus and Kazakhstan, also under the names Ozon Rocket and Ozon Доставка. Paste your number in the box above, with its dashes. Ozon's own tracker is tracking.ozon.ru, and Peek reads it for you, as explained below.
+Track an Ozon (Ozon Rocket / Ozon Доставка) order in Russia, Belarus or Kazakhstan by pasting your order number **with its dashes** (three digit groups like 8-4-1 or 10-4-1, or a `PL-` code) in the box above or on tracking.ozon.ru. Peek reads Ozon's tracker directly without an account, shows English status labels alongside Ozon's Russian steps, and translates every domestic delivery, pickup-point (`Заказ в пункте выдачи`) and cross-border customs scan below.
 
 ## Ozon tracking number: what it looks like
 
@@ -121,13 +121,17 @@ Peek links two shapes to Ozon, both with dashes: digits in three groups, 8 or 10
 
 You probably typed it without its dashes, or with spaces. Type it again as `48291057-0362-1`, with your own digits, or press "Change" and pick Ozon.
 
-### What does "Заказ в пункте выдачи" mean?
+### What does "Заказ в пункте выдачи" mean on Ozon tracking?
 
-Your order is at your pickup point, and you can collect it. When you have it, Ozon's tracker shows `Заказ получен в пункте выдачи.`
+Your order has arrived at your pickup point and is ready to collect (choose "Important steps" notifications in Peek so you hear as soon as it arrives). Once you collect it, Ozon shows `Заказ получен в пункте выдачи.`
 
 ### Can I track an Ozon order in English?
 
-Yes. Peek shows the order's status in English, such as "In transit", and its history in Ozon's Russian words. The tables above explain those steps.
+Yes. Paste the dashed order number into Peek to see English stage labels ("In transit", "At customs", "Ready for pickup", "Delivered") and expected delivery dates alongside Ozon's Russian scan history, all converted to your device's time zone.
+
+### What do "Импортная таможня задержала заказ" and "Заказ отменён" mean?
+
+`Импортная таможня задержала заказ` means import customs is holding a cross-border order for further inspection — wait for `Заказ выпущен импортной таможней.` or contact Ozon if it stays stuck. `Заказ отменён` means the order was cancelled, so ask Ozon or the shop for a refund.
 
 :::sources
 - [Universal Parcel Scraper: Ozon](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ozon-logistics) – names, countries, the two number shapes and their dashes, tracking.ozon.ru and rocket.ozon.ru links, what Peek reads from tracking.ozon.ru and leaves out, the Russian steps of Ozon's tracker and their meaning, the courier's call, collection at a pickup point or post office

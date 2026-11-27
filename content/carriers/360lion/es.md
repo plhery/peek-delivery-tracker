@@ -1,12 +1,12 @@
 ---
 title: Seguimiento 360Lion: códigos WSH y AR, estados y ayuda
-description: Rastrea un paquete de 360Lion Express desde China a Latinoamérica o EE. UU.: formatos WSH y AR, códigos de escaneo, entrega local y soporte.
+description: Seguimiento 360Lion Express (纬狮物流) desde China a Latinoamérica y EE. UU.: códigos WSH…YQ y AR, estados WSO/WSD, entrega local y correo customerservice@360lion.com.
 slug: seguimiento-360lion
 published: 2026-11-24
-updated: 2026-11-24
+updated: 2026-11-27
 ---
 
-360Lion (*360Lion Express*, en chino *纬狮物流 / 纬狮物联网*) es un operador chino de logística transfronteriza de comercio electrónico fundado en 2015 con sede en Shenzhen, y delegaciones y centros operativos en Shanghái, Cantón, Dongguan, Yiwu y Hong Kong. Se especializa en líneas aéreas dedicadas de paquetería pequeña, transporte FBA/FBM y almacenes en destino desde China hacia Latinoamérica y Estados Unidos (México, Chile, Perú, Brasil, Colombia, Ecuador, Argentina, Uruguay, Bolivia, Paraguay, El Salvador, Costa Rica, Guatemala, Venezuela, Panamá y EE. UU.) para comercios en Mercado Libre, Amazon, AliExpress, Shopee, SHEIN, Temu, TikTok Shop, Walmart y Falabella. Puedes consultar envíos en el [portal de seguimiento de 360Lion](https://toms.360lion.com/track) o en [360lion.com/en/](https://www.360lion.com/en/) (hasta 50 números a la vez), o pegar tu código en el cuadro superior.
+Para rastrear un paquete de 360Lion (*360Lion Express*, *纬狮物流*, fundado en Shenzhen en 2015), pega tu código `WSH…YQ` (por ejemplo `WSH` + país de 2 letras + 10 dígitos + `YQ`) o `AR` + 10 dígitos (Argentina) en el cuadro superior o en [360lion.com/en/](https://www.360lion.com/en/) (hasta 50 guías a la vez). 360Lion opera vuelos dedicados desde China a 15 países de Latinoamérica y EE. UU. para vendedores en Mercado Libre, Amazon, AliExpress, Shopee, SHEIN y Temu, y traspasa la entrega final a un socio local (`handover to lastmile`); su correo de consultas de paquetes es `customerservice@360lion.com`.
 
 ## Números de seguimiento de 360Lion: formatos WSH y AR
 
@@ -78,21 +78,25 @@ Puedes elegir los avisos «Cada escaneo», «Pasos importantes» o «Solo la ent
 
 ## Preguntas sobre el seguimiento de 360Lion
 
-### ¿Qué es 360Lion Express?
+### ¿Qué es 360Lion Express (纬狮物流)?
 
-360Lion (fundada en 2015 en Shenzhen, China) es una operadora de logística transfronteriza de comercio electrónico enfocada en líneas aéreas de pequeños paquetes desde China a Latinoamérica y Estados Unidos, utilizada por vendedores en Mercado Libre, Amazon, AliExpress, Shopee, SHEIN y Temu.
+360Lion es una operadora china de logística transfronteriza fundada en 2015 en Shenzhen, con centros en Shanghái, Cantón, Dongguan, Yiwu y Hong Kong y almacenes en México, Chile, Brasil, Colombia y EE. UU., que mueve paquetería aérea para vendedores de Mercado Libre, Amazon, AliExpress, Shopee, SHEIN y Temu.
 
-### ¿Qué significan los códigos `WSH...YQ` y `AR...`?
+### ¿Qué significan los códigos `WSH…YQ` y `AR` de 360Lion?
 
-`WSH` + dos letras de país + 10 dígitos + `YQ` (por ejemplo `WSHMX4829173640YQ`, dígitos inventados) es el formato de línea transfronteriza dedicada de 360Lion, mientras que `AR` + 10 dígitos (`AR4829173640`) se emplea en paquetes de 360Lion con destino a Argentina.
+`WSH` + dos letras de país + 10 dígitos + `YQ` (por ejemplo `WSHMX4829173640YQ`, dígitos inventados) es la guía dedicada internacional de 360Lion, y `AR` + 10 dígitos se usa para envíos a Argentina. Peek reconoce ambos y acepta enlaces `toms.360lion.com/track?trackNumber=`.
+
+### ¿Qué significan `Pre-alert` y `handover to lastmile` (`WSD02`)?
+
+`Pre-alert` (`WARNING`) puede ser solo un preaviso, no necesariamente un error (Peek se guía por las líneas de escaneo). `handover to lastmile` (`WSD02`) indica que 360Lion ya entregó el paquete al transportista local en tu país tras el aterrizaje (`WSD00`) y la aduana.
 
 ### ¿Quién reparte localmente los paquetes de 360Lion?
 
-360Lion traslada los paquetes en avión desde China hasta el aeropuerto de tu país y los entrega (`handover to lastmile`) a un servicio postal o mensajería local para la entrega final. Los escaneos del transportista local aparecen dentro del seguimiento de 360Lion.
+Un servicio postal o mensajería local del país de destino, cuyos eventos suelen aparecer dentro del mismo código en 360Lion sin mostrar un segundo número local. Si necesitas el dato del repartidor local tras un intento fallido, pídeselo al vendedor o a `customerservice@360lion.com`.
 
-### ¿Cómo puedo contactar con 360Lion por un paquete desaparecido?
+### ¿Cómo contactar con 360Lion por un paquete atrasado o perdido?
 
-Pregunta primero al vendedor o marketplace para la protección al comprador y reembolsos. También puedes escribir al servicio de consultas de paquetes de 360Lion en `customerservice@360lion.com` o llamar a su oficina en Shenzhen al `+86 755 2360 1325`.
+Reclama primero al vendedor o marketplace para mantener la protección al comprador (las reclamaciones ante 360Lion las presenta el vendedor en 30 días). Para consultas de paquetes escribe a `customerservice@360lion.com` o llama a Shenzhen (`+86 755 2360 1325`).
 
 :::sources
 - [360Lion Express: English Home](https://www.360lion.com/en/) – fundada en 2015, oficinas en Shenzhen/Shanghái/Cantón/Yiwu/Dongguan/Hong Kong, rastreador de 50 números, socios marketplace y dirección de la sede

@@ -1,12 +1,12 @@
 ---
 title: MRW seguimiento: número de envío, estados y teléfono
-description: Pega tu número de MRW, de 12 cifras, y mira dónde está tu paquete: qué significa cada estado, cómo recoger en un MRW Point, cómo reclamar y los teléfonos.
+description: Seguimiento MRW en España y Portugal: número de 12 cifras (sin barra), «No abonados», estados («Pendiente de recoger»), MRW Point y teléfono 91 829 66 89.
 slug: mrw-seguimiento
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Pega tu número de MRW en la casilla de arriba para ver dónde está tu paquete, o escríbelo en la casilla «No abonados» del [seguimiento de MRW](https://www.mrw.es/seguimiento/), sin ser cliente. Suele tener 12 cifras, como `135792468024`. Está en el correo de envío de la tienda, en el SMS de MRW o, si enviaste tú el paquete, en el justificante de la oficina. MRW es una red de franquicias de mensajería urgente con más de 550 oficinas en España, Portugal, Andorra y Gibraltar.
+Para hacer el seguimiento de un paquete de MRW (más de 550 oficinas en España, Portugal, Andorra y Gibraltar), pega tu número de envío de 12 cifras (sin la barra si aparece partido en `5/7`) en la casilla de arriba o en «No abonados» en [mrw.es/seguimiento](https://www.mrw.es/seguimiento/), sin cuenta. Lo encontrarás en el correo de la tienda, el SMS de «MRW-es» o el justificante de oficina; el teléfono oficial de atención al cliente es `+34 91 829 66 89` (`900 103 668` en sus FAQ).
 
 ## Número de envío MRW: dónde encontrarlo
 
@@ -103,25 +103,25 @@ Las horas de MRW no llevan zona horaria: Peek las lee con la hora del lugar de c
 
 ## Preguntas sobre el seguimiento de MRW
 
-### ¿Se puede seguir un envío MRW sin ser cliente abonado?
+### ¿Cómo seguir un envío MRW sin ser abonado?
 
-Sí. La casilla «No abonados» de la página de seguimiento de MRW consulta envíos nacionales e internacionales solo con el número de envío.
+Introduce tu número de envío de 12 cifras (quitando la barra si aparece como `5/7` junto a «N.º Etiqueta») en la casilla «No abonados» de [mrw.es/seguimiento](https://www.mrw.es/seguimiento/) o en Peek (eligiendo MRW en «Cambiar» para 12 cifras).
 
-### ¿Qué significa «pendiente de recibir en destino» en MRW?
+### ¿Qué significan «Pendiente de recoger» y «Pendiente de recibir en destino» en MRW?
 
-Que el paquete ha salido de la oficina de origen pero aún no ha llegado a su destino final. Es un paso normal del viaje, no un problema.
+`Pendiente de recoger` (o `en origen`) significa que existe la etiqueta pero MRW aún no tiene el paquete; `Pendiente de recibir en destino`, que ya salió de origen rumbo a tu oficina; solo `Pendiente de recoger en Franquicia destino` o `Depositado en punto MRW` indica que te espera para ir a buscarlo.
 
-### ¿Cuánto tarda MRW en entregar un pedido?
+### ¿Cuánto tarda MRW en entregar un pedido y reparte los sábados?
 
-MRW no da un plazo para los pedidos de tiendas: depende del servicio que contrató el remitente. Para los envíos contratados en su web dentro de la España peninsular, promete entregar antes de las 19:00 del día laborable siguiente a la recogida. Según el servicio, entrega el mismo día o «de hoy para mañana» antes de las 8:30, las 10:00, las 12:00, las 14:00 o las 19:00; a Portugal, Urgente 19 Portugal tarda de 24 a 48 horas, y a Baleares, Canarias y Melilla, el servicio Económico entrega «de hoy para pasado mañana».
+Depende del servicio contratado: los envíos web en España peninsular se entregan antes de las 19:00 del día laborable siguiente (24–48 h con Urgente 19 Portugal). La entrega en sábado solo existe si el remitente contrata esa prestación complementaria (9:00–13:00 con Urgente 10/12 y Documentos 14; 9:00–12:00 en Portugal peninsular y Madeira).
 
-### ¿MRW entrega los sábados?
+### ¿Cómo recojo en un MRW Point u oficina y qué pasa si estaba ausente?
 
-Solo si el remitente contrata la «Entrega en sábado», una prestación complementaria: de 9:00 a 13:00 con Urgente 10, Urgente 12 y Documentos 14, y de 9:00 a 12:00 en Portugal peninsular y Madeira. No la hay en Ceuta, Melilla ni Gibraltar. Con esa prestación también puedes recoger el envío el sábado en la oficina MRW, sin recargo; consulta antes su horario.
+En una oficina MRW o MRW PointOffice/PointCorner lleva tu DNI o pasaporte (en PointMatic basta el PIN del SMS; otra persona necesita copia de tu DNI y autorización firmada). Tras `Destinatario ausente o cerrado`, usa el código del SMS en «Concertar entrega» o contacta con la oficina de destino.
 
-### ¿Cuál es el teléfono gratuito de MRW?
+### ¿Cuál es el teléfono de atención al cliente de MRW y cómo reclamar?
 
-En sus páginas, MRW no presenta ninguno de sus números como gratuito. Su página de fraude da el +34 91 829 66 89 como único número de atención al cliente, y sus preguntas frecuentes añaden el 900 103 668.
+La página antifraude de MRW señala `+34 91 829 66 89` como su único número de atención al cliente y sus FAQ suman el `900 103 668` (lunes a viernes 8:00–20:00, sábados 9:00–13:00), junto con `informacion@mrw.es` y el [formulario de reclamación](https://www.mrw.es/empresa_mensajeria_urgente/MRW_formulario_reclamacion.asp) (daños ocultos: 7 días naturales; retraso: 21 días).
 
 :::sources
 - [MRW: Seguimiento de envíos](https://www.mrw.es/seguimiento/) – casilla «No abonados», plataformas sin atención al público

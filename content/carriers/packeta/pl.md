@@ -1,12 +1,12 @@
 ---
 title: Packeta śledzenie: numer Z, statusy i punkty odbioru
-description: Paczka Packeta (Zásilkovna) w Polsce: jak wygląda numer Z, co znaczą statusy, ile paczka czeka w punkcie odbioru i jak skontaktować się z Packetą.
+description: Śledzenie Packeta (Zásilkovna) w Polsce: numer Z + 10 cyfr, statusy, 7 dni w punkcie (przedłużenie SMS do 21 dni), Z-BOX, telefon +48 334 457 020 i reklamacje.
 slug: packeta-sledzenie
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Packeta to marka grupy przewozowej, której czeska nazwa to Zásilkovna; w Polsce działa jako Packeta Poland i wysyła przesyłki do 33 krajów. Paczkę śledzisz na [stronie śledzenia Packety](https://tracking.packeta.com/pl/) albo w polu nad tym tekstem. Numer to litera `Z` i dziesięć cyfr: znajdziesz go w e-mailu albo SMS-ie od Packety.
+Aby sprawdzić, gdzie jest paczka Packeta (czeska grupa Zásilkovna, w Polsce Packeta Poland; dostawy do 33 krajów), wklej numer zaczynający się od `Z` i 10 cyfr w pole powyżej albo na [tracking.packeta.com/pl/](https://tracking.packeta.com/pl/). Numer dostaniesz w e-mailu lub SMS-ie po nadaniu przez sklep (nie myl go z kodem odbioru, który przychodzi dopiero po dostawie do punktu). W punkcie odbioru paczka czeka 7 dni (możesz za darmo przedłużyć SMS-em lub na stronie śledzenia do 21 dni kalendarzowych), a infolinia Packeta Poland działa pod numerem `+48 334 457 020` (pon.–pt. 8–17).
 
 ## Numer przesyłki Packeta: litera Z i 10 cyfr
 
@@ -85,21 +85,25 @@ Skany z nazwą magazynu albo punktu odbioru pokazują ją jako miejsce, a te, w 
 
 ## Pytania o paczki Packeta
 
-### Co to za firma Packeta?
+### Co to za firma Packeta (Zásilkovna) i jak wygląda numer `Z`?
 
-To prawdziwy przewoźnik: marka grupy, której czeska nazwa to Zásilkovna, w Polsce spółka Packeta Poland. Packeta wysyła przesyłki do 33 krajów i według packeta.pl ma 16 421 punktów odbioru, a do tego ponad 208 tysięcy punktów partnerskich na całym świecie.
+Packeta to międzynarodowa marka czeskiej grupy Zásilkovna (w Polsce Packeta Poland Sp. z o.o.), wysyłająca do 33 krajów z siecią 16 421 własnych punktów i ponad 208 tys. punktów partnerskich. Numer śledzenia zawsze zaczyna się od litery `Z` i ma 10 cyfr.
+
+### Jak długo paczka Packeta czeka w punkcie i jak przedłużyć termin?
+
+Według packeta.pl paczka czeka w punkcie odbioru 7 dni (przed świętami czas może być krótszy), a na jej odbiór wystarczy kod z SMS-a lub e-maila. Czas odbioru przedłużysz za darmo do 21 dni kalendarzowych SMS-em do Packety albo przyciskiem na stronie śledzenia.
+
+### Czy w Polsce działają automaty Z-BOX Packeta?
+
+Nie: packeta.pl wymienia automaty Z-BOX wyłącznie w Czechach, na Słowacji, Węgrzech i w Rumunii. W Polsce odbierasz przesyłkę w punkcie odbioru albo od kuriera partnerskiego.
 
 ### Czy ORLEN Paczka i Packeta to ta sama firma?
 
-Nie. [ORLEN Paczka](carrier:orlen-paczka) jest partnerem Packety: odbiera paczki od sprzedawców z Allegro w Polsce, wysyłane do Czech, na Słowację i na Węgry, i zawozi je do magazynu Packety, a ostatni odcinek do odbiorcy należy do Packety.
+Nie. [ORLEN Paczka](carrier:orlen-paczka) współpracuje z Packetą na pierwszej mili: odbiera paczki od sprzedawców Allegro w Polsce wysyłane do Czech, na Słowację i na Węgry, a Packeta przejmuje dalszy transport i doręczenie.
 
-### Czy w Polsce są automaty Z-BOX?
+### Jaki jest numer telefonu do Packeta Poland i jak złożyć reklamację?
 
-Packeta wymienia Z-BOX-y tylko w Czechach, na Słowacji, Węgrzech i w Rumunii. W Polsce paczkę odbierasz w punkcie odbioru albo od kuriera.
-
-### Jak długo paczka Packeta czeka w punkcie odbioru?
-
-Według packeta.pl 7 dni. SMS do Packety przedłuża ten czas za darmo do 21 dni kalendarzowych.
+Infolinia działa pod numerem `+48 334 457 020` od poniedziałku do piątku w godzinach 8–17, a na [packeta.pl/kontakt](https://www.packeta.pl/kontakt) znajdziesz formularze kontaktowy i reklamacyjny. Przy zaginięciu lub uszkodzeniu zakupu ze sklepu Packeta prosi odbiorcę o kontakt bezpośrednio ze sklepem (nadawca zgłasza zaginięcie w 20 dni, uszkodzenie w 5 dni roboczych / blog: 7 dni).
 
 :::sources
 - [Packeta.pl: Jak dokładnie działa odbiór paczek](https://www.packeta.pl/doreczanie) – kod z SMS i e-maila, 7 i 21 dni, przedłużenie SMS-em, święta, pobranie, kurier, dzień i godzina doręczenia, e-mail z numerem po nadaniu (czytane 10 listopada 2026)

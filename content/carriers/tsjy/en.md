@@ -1,12 +1,12 @@
 ---
 title: TSJY tracking (通世集运): order numbers and statuses
-description: Track a TSJY (通世集运) consolidated parcel from China: what a TSJY…CN number looks like, what each Chinese status means, and when 17FEIA takes over.
+description: Track a TSJY (通世集运) consolidated parcel from China: TSJY…CN and CFJY…CN formats, Chinese warehouse scans, 17FEIA handover, 180-day storage and support.
 slug: tsjy-tracking
 published: 2026-11-03
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-TSJY (通世集运) is a consolidation service in China, run by 苏州通世供应链有限公司, a supply chain company in Suzhou. You buy on Chinese shopping sites such as Taobao, Tmall, Pinduoduo, JD or Douyin, and the shops send your goods to TSJY's warehouse in Suzhou. TSJY stores them, packs them together and ships them abroad. Track your TSJY number on [TSJY's site](https://www.tsjy56.com/), under 订单查询 (order search), or paste it in the box above.
+Track a TSJY (通世集运, 苏州通世供应链有限公司, Suzhou) consolidated parcel from China by pasting your `TSJY` or `CFJY` + nine digits + `CN` order number in the box above or under 订单查询 on [tsjy56.com](https://www.tsjy56.com/). Founded in 2005 with 180 days of free storage, TSJY consolidates Taobao, Tmall, Pinduoduo, JD and Douyin orders and ships to over 220 countries by air or sea — when an order hands over to [17FEIA](carrier:17feia) (`FEI…YQ`) or another known line, Peek follows the handover automatically.
 
 ## TSJY tracking number: what it looks like
 
@@ -124,23 +124,23 @@ Peek can notify you of "Every scan", "Important steps" or "Delivery only". It ca
 
 ### What is TSJY (通世集运)?
 
-A consolidation service (集运) for people abroad who buy on Chinese shopping sites. Its site says it was founded in 2005, stores parcels free for 180 days and ships to more than 220 countries and regions.
+TSJY (苏州通世供应链有限公司, based in Huaqiao, Suzhou) is a Chinese parcel consolidation service (集运) founded in 2005 that offers 180 days of free storage for Taobao, Tmall, Pinduoduo, JD and Douyin purchases and ships by express air or economy sea to more than 220 countries and regions.
 
-### Where can I track a TSJY number?
+### What do `TSJY…CN` and `CFJY…CN` tracking numbers look like?
 
-On [TSJY's site](https://www.tsjy56.com/), under 订单查询: type the TSJY number or the line's number, then tap 查询. Or paste it in Peek.
+Both are 15-character TSJY shipping order numbers (`TSJY` or `CFJY`, nine digits and `CN`). Paste yours into Peek (which detects TSJY immediately and also accepts `tsjy56.com` links with `nos=`) or enter it under 订单查询 on [tsjy56.com](https://www.tsjy56.com/).
 
-### What does 订单打包完成，等待出库 mean?
+### What does `订单打包完成，等待出库` mean on TSJY tracking?
 
-It's Chinese for order packed, waiting to leave the warehouse: your parcel is packed in TSJY's warehouse and waits for the line. Peek shows "Received by carrier". Next comes `订单已出库，开始国际运输`: it left, and the trip abroad has begun.
+It means TSJY's warehouse has finished packing your consolidated order and is waiting to dispatch it ("Received by carrier" in Peek). Once it leaves the warehouse for international transit, tracking updates to `订单已出库，开始国际运输` ("In transit").
 
-### Why does my TSJY parcel show a 17FEIA number?
+### Why does my TSJY parcel switch to a 17FEIA (`FEI…YQ`) number?
 
-[17FEIA](carrier:17feia) is the line carrying your parcel abroad: TSJY's result card shows its FEI…YQ number after a slash. Once 17FEIA catches up, Peek follows the parcel there.
+[17FEIA](carrier:17feia) is one of the international lines carrying TSJY orders abroad. When TSJY's tracker provides a `FEI…YQ` waybill number, Peek displays "Delivery with 17FEIA" (or "Announced to 17FEIA, not received yet") and follows 17FEIA's tracker once its scans catch up.
 
-### How do I contact TSJY?
+### How do I contact TSJY about a delayed, lost or damaged parcel?
 
-Through the 客服中心 section of its home page: a phone number, an email address and WeChat, all in Chinese.
+Because you usually booked the consolidation yourself, contact TSJY directly via the 客服中心 section on [tsjy56.com](https://www.tsjy56.com/) (phone, email and WeChat QR code, all in Chinese). TSJY's site states it compensates lost or damaged parcels (`丢破必赔`), though no public claim deadline is listed, so report issues immediately.
 
 :::sources
 - [TSJY: 通世集运 (home page)](https://www.tsjy56.com/) – company, services, compensation promise, tracking span, order search and its results page on a phone, ordering, contacts, warehouse

@@ -1,12 +1,12 @@
 ---
 title: Seguimiento BFE Express — códigos CK, WYB, aduana y ayuda
-description: Rastrea paquetes de BFE Express en Argentina, Perú, Uruguay y EE. UU. Formatos CK y WYB, estados de aduana y última milla, y correos de soporte por país.
+description: Seguimiento BFE Express en Argentina, Perú, Uruguay y EE. UU.: códigos CK54, CK512, CK598 y WYB, estados de aduana y última milla, y correos de soporte.
 slug: seguimiento-bfe-express
 published: 2026-11-23
-updated: 2026-11-23
+updated: 2026-11-27
 ---
 
-BFE Express (*BFEexpress*, operado por Hongkong Bfe Info Tech Co Limited y fundado en 2005) es un operador de logística transfronteriza y entrega de última milla que conecta tiendas internacionales — incluidos vendedores de Temu Argentina — con destinatarios en Argentina, Perú, Uruguay y Estados Unidos. Ofrece flete internacional, despacho aduanero, almacenamiento local y distribución de última milla consultable en [bfeexpress.com/tracking](https://www.bfeexpress.com/tracking).
+Para rastrear un paquete de BFE Express (*BFEexpress*, operado por Hongkong Bfe Info Tech Co Limited desde 2005 — habitual en envíos internacionales como Temu Argentina hacia Argentina, Perú, Uruguay y Estados Unidos), pega tu código `CK54…`, `CK512…`, `CK598…` o `WYB…` en el cuadro superior o consúltalo en [bfeexpress.com/tracking](https://www.bfeexpress.com/tracking). El historial combina el tramo aéreo y aduanero en inglés con los escaneos locales de última milla en español, y cada país cuenta con correo de soporte propio (lunes a viernes, 9:00 a 18:00).
 
 Como BFE Express gestiona la llegada aérea y la aduana antes de entregar el paquete al depósito local de última milla, un mismo historial suele combinar eventos internacionales en inglés con escaneos locales en español.
 
@@ -83,21 +83,25 @@ Ten a mano tu código completo `CK...` o `WYB...` al escribir al equipo local.
 
 ## Preguntas frecuentes
 
+### ¿Qué indican `CK54`, `CK512`, `CK598` y `WYB` en BFE Express?
+
+Los prefijos señalan el país de destino: `CK54…` corresponde a Argentina (16 o 17 caracteres), `CK512…` a Perú (17 caracteres), `CK598…` a Uruguay (17 caracteres) y `WYB` + 9 dígitos es otro formato de guía para Perú. En Peek, si pegas el número suelto, pulsa «Cambiar» y selecciona BFE Express (o pega un enlace directo `bfeexpress.com/track?track_number=…`).
+
 ### ¿Por qué mi envío de BFE Express empieza recién en el aeropuerto de destino?
 
-El rastreador de BFE Express puede empezar en `Arrived at Airport of destination`, la llegada del vuelo al país de destino. Antes, revisa en la página del pedido de la tienda cuándo se despachó.
+El rastreador de BFE Express suele mostrar su primera línea con `Arrived at Airport of destination`, al aterrizar el vuelo en el país de destino. Antes de ese hito, consulta el avance del despacho en la página del pedido de la tienda.
 
 ### ¿Por qué aparecen estados en inglés y luego en español?
 
-BFE Express registra en inglés la llegada aérea, la liberación aduanera y la entrega al operador local, mientras que el depósito nacional de última milla publica sus eventos en español (hasta `Reparto en curso` y `Entregado`).
-
-### ¿Qué indican `54`, `512` y `598` en los códigos `CK` de BFE Express?
-
-Identifican el país de destino: `CK54...` corresponde a Argentina (16 o 17 caracteres), `CK512...` a Perú (17 caracteres) y `CK598...` a Uruguay (17 caracteres). Para Perú también existe el formato `WYB` seguido de 9 dígitos.
+BFE Express publica en inglés la llegada aérea, la declaración aduanera (`Customs declaration completed`) y la entrega a última milla (`Turned over to last mile facility`), mientras que el depósito local registra en español el traslado hasta `Reparto en curso` y `Entregado`.
 
 ### ¿Por qué BFE Express dice que no encuentra mi número?
 
-Verifica que no falte ningún carácter en el código `CK` o `WYB` y pregunta a la tienda si ya entregó el paquete a BFE Express.
+Revisa que no falte ningún carácter en el código `CK` o `WYB` y confirma con la tienda si el paquete ya fue entregado a BFE Express o llegó al tramo internacional.
+
+### ¿Cómo contactar con atención al cliente de BFE Express?
+
+Escribe de lunes a viernes de 9:00 a 18:00 (excepto feriados) con tu código completo al correo de tu país en [bfeexpress.com/contactUS](https://www.bfeexpress.com/contactUS): Argentina `info@ar.bfeexpress.com`, Perú `info@pe.bfeexpress.com`, Uruguay `info@uy.bfeexpress.com`, EE. UU. `info@us.bfeexpress.com` y Paraguay `info_py@bfeexpress.com`.
 
 :::sources
 - [BFE Express](https://www.bfeexpress.com/)

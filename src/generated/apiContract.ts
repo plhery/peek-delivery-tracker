@@ -710,7 +710,7 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "frankier-id"
       },
       {
-        "pattern": "^JJD(?:0146\\d{14}|000090\\d{14,16}|000(?:061|268|269|368)\\d{14})$",
+        "pattern": "^JJD(?:0146\\d{14}|000090\\d{14,16}|000(?:061|064|268|269|368)\\d{14})$",
         "confidence": "low"
       },
       {
@@ -2195,7 +2195,7 @@ export const CARRIER_CAPABILITIES = {
           "gls-group.eu",
           "gls-group.com"
         ],
-        "pathPattern": "^/(?:GROUP|BE|BG|DK|FI|HR|IE|LU|NL|RO|RS|SI|SK)/",
+        "pathPattern": "^/(?:GROUP|BE|BG|DK|FI|HR|IE|LU|NL|RO|RS|SI)/",
         "params": [
           "match",
           "parcelNumber",
@@ -6377,7 +6377,7 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       },
       {
-        "pattern": "^JJD000(?:061|268|269|368)\\d{14}$",
+        "pattern": "^JJD000(?:061|064|268|269|368)\\d{14}$",
         "confidence": "high"
       }
     ],
@@ -11366,7 +11366,7 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.castores.com.mx/rastrear.html",
+    "trackingSearchUrl": "https://www.castores.com.mx/",
     "helpUrl": "https://www.castores.com.mx/globales/contacto.html"
   },
   "central-transport": {
@@ -37555,7 +37555,7 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.toyou.co.uk/track",
+    "trackingSearchUrl": "https://www.toyou.co.uk/",
     "helpUrl": "https://www.toyou.co.uk/help"
   },
   "wizmo": {
@@ -37773,7 +37773,6 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.zes-express.com/",
     "helpUrl": "https://www.zes-express.com/language/en/contact-us-2/"
   },
   "dex-pk": {
@@ -39429,7 +39428,7 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.egyptexpress.com.eg/en-us/tracking-shipment/",
+    "trackingSearchUrl": "https://www.egyptexpress.com.eg/en-us/",
     "helpUrl": "https://www.egyptexpress.com.eg/en-us/customer-support"
   },
   "famiport": {
@@ -49012,7 +49011,7 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://alilpost.com/en/tracking/",
+    "trackingSearchUrl": "https://alilpost.com/en/",
     "helpUrl": "https://alilpost.com/en/contacts/"
   },
   "dimex": {
@@ -49180,7 +49179,7 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.paqueteria-flechaamarilla.com.mx/inicio"
+    "trackingSearchUrl": "https://www.paqueteria-flechaamarilla.com.mx/"
   },
   "garantpost": {
     "displayName": "Garantpost",
@@ -71605,6 +71604,193 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [],
     "trackingSearchUrl": "https://gls-group.com/CZ/cs/sledovani-zasilek/",
     "helpUrl": "https://gls-group.com/CZ/cs/kontakty/"
+  },
+  "anhua-international": {
+    "displayName": "Anhua International",
+    "aliases": [
+      "Anhua International Supply Chain",
+      "安华国际",
+      "安华国际供应链",
+      "广州安华国际供应链管理有限公司",
+      "Guangzhou Anhua International Supply Chain Management"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#3F6EB2",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "anhua-international"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "www.ahgjgyl.com",
+          "ahgjgyl.com"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": []
+  },
+  "gls-sk": {
+    "displayName": "GLS Slovakia",
+    "aliases": [
+      "GLS Slovensko"
+    ],
+    "countries": [
+      "SK"
+    ],
+    "color": "#ffdd00",
+    "selectable": true,
+    "timezone": "Europe/Bratislava",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "gls-sk"
+    },
+    "trackingUrlTemplate": "https://gls-group.com/SK/sk/sledovanie-zasielok/?match={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "gls-group.com",
+          "gls-group.eu"
+        ],
+        "pathPattern": "^/SK/",
+        "params": [
+          "match",
+          "parcelNumber",
+          "matchParcelNumber"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://gls-group.com/SK/sk/sledovanie-zasielok/",
+    "helpUrl": "https://gls-group.com/SK/sk/gls-kontakt/"
+  },
+  "lingxun-logistics": {
+    "displayName": "LingXun Logistics",
+    "aliases": [
+      "LingXun",
+      "领讯",
+      "领讯物流",
+      "领讯物流有限公司",
+      "深圳市领讯物流有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#1787C9",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "lingxun-logistics",
+      "recognitionRank": 49
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^LX\\d{12}$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://www.lingxun.top/a/kehufuwu/"
+  },
+  "ljs": {
+    "displayName": "LJS International Freight",
+    "aliases": [
+      "LJS",
+      "Lijiashun",
+      "利佳顺",
+      "利佳顺国际",
+      "利佳顺国际货运",
+      "利佳顺国际物流",
+      "深圳利佳顺国际货运代理有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#FFCC00",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "ljs"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "sunson": {
+    "displayName": "Sunson Logistics",
+    "aliases": [
+      "Sunson",
+      "Sunson Express",
+      "Sunsonexpress",
+      "燊鑫",
+      "燊鑫国际物流",
+      "深圳燊鑫国际物流有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#006CBF",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "sunson",
+      "recognitionRank": 47
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^SUN\\d{12}$",
+        "confidence": "low"
+      }
+    ]
+  },
+  "tongxi": {
+    "displayName": "Tongxi Supply Chain",
+    "aliases": [
+      "TongXi",
+      "桐溪",
+      "桐溪供应链",
+      "深圳市桐溪供应链管理有限公司",
+      "Shenzhen Tongxi Supply Chain Management"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#0096AB",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "tongxi",
+      "recognitionRank": 46
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "1.14.133.93"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^TX\\d{16}$",
+        "confidence": "low"
+      }
+    ]
   }
 } as const;
 
@@ -73783,7 +73969,13 @@ export const CARRIER_IDS = [
   "daraii",
   "masspack",
   "skynet-in",
-  "gls-cz"
+  "gls-cz",
+  "anhua-international",
+  "gls-sk",
+  "lingxun-logistics",
+  "ljs",
+  "sunson",
+  "tongxi"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

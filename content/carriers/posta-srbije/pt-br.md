@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Pošta Srbije: Correios da Sérvia e status
-description: Rastreie envios da Pošta Srbije e Post Express: código de 13 caracteres, significado dos status, prazos de retirada na agência e lockers, reclamações e contatos.
+description: Rastreie envios da Pošta Srbije e Post Express: código de 13 caracteres, significado dos status, prazos de retirada na agência e lockers, indenizações e contatos.
 slug: posta-srbije-serbian-post-tracking
 published: 2026-11-26
 updated: 2026-11-26
@@ -63,9 +63,9 @@ O **Post Express** entrega no endereço até as 19h do próximo dia útil, com S
 
 A Pošta Srbije não garante prazos no exterior e estima de 7 a 15 dias para encomendas internacionais; encomendas domésticas levam até 5 dias úteis. Em posta.rs, o rastreamento de envios ao exterior termina no centro de permuta ao sair da Sérvia; já o serviço do app, lido pelo Peek, também repassa as movimentações do correio estrangeiro. Se nada mudar por dias, veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
-**Extraviada ou atrasada.** O remetente abre a reclamação com o comprovante de postagem, geralmente na agência de origem, mas não antes de 10 dias da postagem (envios expressos e encomendas com prazo definido podem ser reclamados assim que vencer o prazo, e expressos internacionais após 3 dias úteis). Prazos máximos: 60 dias da postagem dentro da Sérvia e 6 meses para internacionais. A Pošta Srbije responde em 8 dias, ou 2 meses em reclamações internacionais. Envios sem registro não têm procedimento de reclamação.
+**Extraviada ou atrasada.** O remetente faz o pedido de indenização com o comprovante de postagem, geralmente na agência de origem, mas não antes de 10 dias da postagem (envios expressos e encomendas com prazo definido permitem o pedido assim que vencer o prazo, e expressos internacionais após 3 dias úteis). Prazos máximos: 60 dias da postagem dentro da Sérvia e 6 meses para internacionais. A Pošta Srbije responde em 8 dias, ou 2 meses em pedidos internacionais. Envios sem registro não têm procedimento de indenização.
 
-**Danificada ou conteúdo faltando.** Reclame no ato do recebimento, ou no máximo no próximo dia útil, na agência postal, que faz a vistoria com você e lavra um termo. Não por e-mail; reclamações posteriores não geram indenização. Se constar entregue e não estiver com você, veja [entregue mas não recebida](guide:delivered-not-received).
+**Danificada ou conteúdo faltando.** Faça o pedido no ato do recebimento, ou no máximo no próximo dia útil, na agência postal, que faz a vistoria com você e lavra um termo. Não por e-mail; pedidos posteriores não geram indenização. Se constar entregue e não estiver com você, veja [entregue mas não recebida](guide:delivered-not-received).
 
 ## Contato e central de atendimento da Pošta Srbije
 
@@ -83,7 +83,7 @@ Canais listados em posta.rs:
 
 O [Peek](/) identifica a Pošta Srbije imediatamente em códigos começados por `C`, `E`, `L` ou `R`, terminados em `RS` e com dígito verificador válido. Para outras iniciais, como `PE` ou `V`, o formato não aponta uma única transportadora, então o Peek consulta Pošta Srbije, M-ONE e [Chronopost](carrier:chronopost), exibindo "Pošta Srbije está com esta encomenda." quando a Pošta Srbije reconhece o código. Se ainda não aparecer, mostra "Ainda não encontrada em …. O Peek continua verificando depois que você adicionar." Com dígito verificador incorreto, nenhuma transportadora é consultada: confira o código na mensagem da loja, pois a Pošta Srbije não rastreará o envio mesmo que você a selecione via "Trocar". Links de posta.rs podem ser colados e sempre apontam para a Pošta Srbije; em links de postexpress.rs, o Peek extrai o código como se você o tivesse digitado.
 
-Para envios vindos do exterior, o Peek acompanha primeiro no correio de origem. Quando esse correio indica que o destino é a Sérvia (ou não informa destino e você acompanha da Sérvia), o Peek também consulta a Pošta Srbije com o mesmo código. Assim que a Pošta Srbije apresenta uma movimentação ao menos tão recente quanto a última do correio estrangeiro, o Peek passa a acompanhá-la lá, preservando o histórico anterior. A busca da Pošta Srbije aceita qualquer código postal: para acompanhar por lá desde o começo, escolha "Pošta Srbije" em "Trocar" ou cole um link de posta.rs.
+Para envios vindos do exterior, o Peek acompanha primeiro no correio de origem. Quando esse correio indica que o destino é a Sérvia (ou não informa destino e você acompanha da Sérvia), o Peek também consulta a Pošta Srbije com o mesmo código. Assim que a Pošta Srbije apresenta uma movimentação ao menos tão recente quanto a última do correio estrangeiro, o Peek passa a acompanhá-la lá, preservando o histórico anterior. A busca da Pošta Srbije aceita qualquer número postal: para acompanhar por lá desde o começo, escolha "Pošta Srbije" em "Trocar" ou cole um link de posta.rs.
 
 O Peek consulta o mesmo serviço usado pelo app da Pošta Srbije. Com a encomenda aberta ou no dia da entrega com notificações ligadas, verifica até a cada 10 minutos (somente por serviços de rastreamento, a cada hora e a cada 3 horas após um dia sem novidades); nos demais momentos, de hora em hora. Como nenhum status da Pošta Srbije indica saída para entrega, não há consultas mais frequentes no dia da entrega. Se outra transportadora assumir a entrega final, o Peek segue a frequência dela. Após dois dias sem novidades (ou 12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica a cada hora. Cada etapa aparece no mapa com a agência sérvia (ou apenas o país em etapas no exterior), além de peso e horário de entrega. Horários na Sérvia seguem o fuso de Belgrado e etapas no exterior seguem o fuso daquele país, tudo convertido para o fuso do seu aparelho; em peektracker.com e nos apps para iPhone e Android, o histórico termina com "Horários no seu fuso horário:" seguido do nome do fuso. A Pošta Srbije não informa data prevista de entrega nem nome de ponto de retirada. Assinatura, códigos postais e dados de pagamento são omitidos. Os status mantêm o texto da Pošta Srbije, exceto `Delivered`, traduzido pelo Peek.
 
@@ -99,24 +99,24 @@ Sim. Os códigos Post Express começam com `PE` e terminam em `RS`, e podem ser 
 
 ### Qual é o e-mail da Pošta Srbije?
 
-`contact@ptt.rs`, para reclamações ou elogios. Reclamações por dano não podem ser enviadas por e-mail: comunique o dano na agência ao receber o objeto.
+`contact@ptt.rs`, para reclamações ou elogios. Pedidos de indenização por dano não podem ser enviados por e-mail: comunique o dano na agência ao receber o objeto.
 
 ### Por quanto tempo a Pošta Srbije guarda uma encomenda na agência?
 
 5 dias úteis para a maioria dos objetos e 20 dias para envios vindos do exterior, contados do dia seguinte ao aviso. Você pode solicitar por escrito prorrogação para até 30 dias.
 
 :::sources
-- [Pošta Srbije: Item's Status Tracking](https://www.posta.rs/eng/alati/pracenje-posiljke.aspx) – number types, status list, signature, free tracking, Serbian and English, tracking abroad, 0700 100 300
-- [Pošta Srbije: Praćenje pošiljke](https://www.posta.rs/lat/alati/pracenje-posiljke.aspx) – Cyrillic, Latin and English versions
-- [Pošta Srbije: Customer Service - Frequently Asked Questions](https://www.posta.rs/eng/korisnicki-servis/najcesca-pitanja.aspx) – number format, storage periods (30 days where delivery is weekly), extension, ID, lockers, claims and deadlines (international express after 3 working days), damage, international times, contact@ptt.rs
-- [Pošta Srbije: Customer Service - Contact Center](https://www.posta.rs/eng/korisnicki-servis/kontakt-centar.aspx) – phone numbers and hours
-- [Pošta Srbije: Korisnički servis - Kontakt centar](https://www.posta.rs/lat/korisnicki-servis/kontakt-centar.aspx) – same numbers and hours
-- [Pošta Srbije: Post Express – courier service](https://www.posta.rs/eng/stanovnistvo/usluga.aspx?usluga=postal-services%2Fexpress-services-serbia%2Fpost-express) – next day by 19:00, SMS, 1,100 post offices, Post Express contact centre, app tracking
-- [Pošta Srbije: Slanje paketa u Srbiji](https://www.posta.rs/lat/stanovnistvo/usluga.aspx?usluga=postanske-usluge/paketske-usluge-srbija/slanje-paketa-u-srbiji) – up to 5 working days, SMS to the recipient
-- [Pošta Srbije: Poštin paketomat](https://paketomat.posta.rs/) – locker notice, three ways to open, 24/7, 48 hours, redirect by 17:00
-- [Pošta Srbije: Customer Service - Claims](https://www.posta.rs/eng/korisnicki-servis/reklamacije.aspx) – claims form, handling hours, Takovska 2
-- [Pošta Srbije: Customer Service - Ask a Question](https://www.posta.rs/eng/korisnicki-servis/postavite-pitanje.aspx) – question form
-- [Pošta Srbije: Upozorenje na nove pokušaje prevare putem lažnih SMS poruka](https://www.posta.rs/lat/info/vest-detaljnije.aspx?ID=17516) – fake SMS warning, verified SMS and Viber
-- [Pošta Srbije: Typical online scams](https://www.posta.rs/eng/online-bezbednost/tipicne-onlajn-prevare.aspx) – lookalike domains, no online payment requests
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [Pošta Srbije: Item's Status Tracking](https://www.posta.rs/eng/alati/pracenje-posiljke.aspx) – tipos de código, lista de status, assinatura, rastreamento gratuito, sérvio e inglês, rastreamento no exterior, 0700 100 300
+- [Pošta Srbije: Praćenje pošiljke](https://www.posta.rs/lat/alati/pracenje-posiljke.aspx) – versões em cirílico, latino e inglês
+- [Pošta Srbije: Customer Service - Frequently Asked Questions](https://www.posta.rs/eng/korisnicki-servis/najcesca-pitanja.aspx) – formato do código, prazos de guarda (30 dias onde a entrega é semanal), prorrogação, documento, lockers, pedidos e prazos (expressos internacionais após 3 dias úteis), danos, prazos internacionais, contact@ptt.rs
+- [Pošta Srbije: Customer Service - Contact Center](https://www.posta.rs/eng/korisnicki-servis/kontakt-centar.aspx) – telefones e horários
+- [Pošta Srbije: Korisnički servis - Kontakt centar](https://www.posta.rs/lat/korisnicki-servis/kontakt-centar.aspx) – mesmos telefones e horários
+- [Pošta Srbije: Post Express – courier service](https://www.posta.rs/eng/stanovnistvo/usluga.aspx?usluga=postal-services%2Fexpress-services-serbia%2Fpost-express) – dia seguinte até 19:00, SMS, 1.100 agências, central Post Express, rastreamento no app
+- [Pošta Srbije: Slanje paketa u Srbiji](https://www.posta.rs/lat/stanovnistvo/usluga.aspx?usluga=postanske-usluge/paketske-usluge-srbija/slanje-paketa-u-srbiji) – até 5 dias úteis, SMS ao destinatário
+- [Pošta Srbije: Poštin paketomat](https://paketomat.posta.rs/) – aviso do locker, três formas de abrir, 24 horas, 48 horas, redirecionamento até 17:00
+- [Pošta Srbije: Customer Service - Claims](https://www.posta.rs/eng/korisnicki-servis/reklamacije.aspx) – formulário de pedidos, horário de atendimento, Takovska 2
+- [Pošta Srbije: Customer Service - Ask a Question](https://www.posta.rs/eng/korisnicki-servis/postavite-pitanje.aspx) – formulário de perguntas
+- [Pošta Srbije: Upozorenje na nove pokušaje prevare putem lažnih SMS poruka](https://www.posta.rs/lat/info/vest-detaljnije.aspx?ID=17516) – alerta de SMS falsos, SMS e Viber verificados
+- [Pošta Srbije: Typical online scams](https://www.posta.rs/eng/online-bezbednost/tipicne-onlajn-prevare.aspx) – domínios parecidos, nenhum pedido de pagamento on-line
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê
 :::

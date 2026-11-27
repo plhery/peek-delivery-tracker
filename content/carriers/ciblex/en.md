@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Ciblex Express (founded in 1977) is a French B2B express parcel carrier operating across France, Belgium and internationally, with early-morning H8/H9/H12 services and 300 C Dispo professional relays. Track a parcel using its 14- or 24-digit label barcode on [Ciblex's tracking page](https://ciblex.eu/en/fast-tracking-of-your-parcels/) or paste the number in the box above; private e-commerce orders are routed through Relais Colis.
+Ciblex Express (founded in 1977) is a French B2B express parcel carrier operating across France, Belgium and internationally, with early-morning H8/H9/H12 services and 300 C Dispo professional relays. Track a parcel using its 14- or 24-digit label barcode on [Ciblex's tracking page](https://ciblex.eu/en/fast-tracking-of-your-parcels/) or paste the number in the box above; Ciblex says its deliveries to private customers go through Relais Colis.
 
 ## Ciblex tracking number: what it looks like and where to find it
 

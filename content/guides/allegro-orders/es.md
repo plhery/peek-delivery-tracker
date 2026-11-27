@@ -1,13 +1,13 @@
 ---
 title: Seguimiento de pedidos de Allegro: transportistas y retrasos
-description: Seguimiento de pedidos en Allegro desde España: envío desde allegro.pl con DPD o DHL (3–4 días), dónde ver «Moje zakupy», devoluciones en 14 días y reclamación.
+description: Seguimiento de pedidos en Allegro desde España: envío desde allegro.pl con DPD o DHL y sus plazos, dónde ver «Moje zakupy», devoluciones en 14 días y reclamación.
 slug: seguimiento-pedido-allegro
 picture: Un paquete en una taquilla One Box abierta, un móvil que muestra un pedido y Pip corriendo a recogerlo.
 published: 2026-10-17
 updated: 2026-11-27
 ---
 
-Allegro es el marketplace polaco (allegro.pl, allegro.cz, allegro.sk y allegro.hu): no tiene web en español, pero permite elegir idioma inglés y envío a España en «Lokalizacja» cuando el vendedor ofrece Allegro Kurier DPD (4 días laborables) o Allegro Kurier DHL (3–4 días laborables). El número de seguimiento está en tu cuenta bajo «Moje przesyłki» y «Moje zakupy», y en el correo que Allegro envía en cuanto se añade el número.
+Allegro es el marketplace polaco (allegro.pl, allegro.cz, allegro.sk y allegro.hu): no tiene web en español, pero permite elegir idioma inglés y envío a España en «Lokalizacja» cuando el vendedor ofrece Allegro Kurier DPD o Allegro Kurier DHL (según Allegro, 4 y 3–4 días laborables de transporte, más el tiempo de envío del vendedor). El número de seguimiento está en tu cuenta bajo «Moje przesyłki» y «Moje zakupy», y en el correo que Allegro envía en cuanto se añade el número.
 
 ## ¿Qué transportista entrega mi pedido de Allegro?
 

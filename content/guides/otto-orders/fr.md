@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-OTTO (otto.de) livre uniquement en Allemagne — pas en France, en Belgique, en Suisse ni au Luxembourg. Si tu fais livrer en Allemagne, suis chaque colis dans « Mein Konto » → « Bestellungen » → « Sendungsverfolgung » : OTTO expédie ses propres articles surtout avec Hermes (ou DHL, et en fret à deux pour les meubles), avec livraison gratuite dès 59,95 € sous OTTO UP Basic ou illimitée avec UP Plus (9,90 €/an), et retours gratuits sous 30 jours.
+OTTO (otto.de) livre uniquement en Allemagne — pas en France, en Belgique, en Suisse ni au Luxembourg. Si tu fais livrer en Allemagne, suis chaque colis dans « Mein Konto » → « Bestellungen » → « Sendungsverfolgung » : OTTO expédie ses propres articles surtout avec Hermes (ou DHL, et en fret à deux pour les meubles) ; avec OTTO UP, les colis sont livrés gratuitement dès 59,95 € (UP Basic) ou toujours (UP Plus, 9,90 € pour 12 mois), et les retours sont gratuits sous 30 jours.
 
 Le site et l'aide d'OTTO sont en allemand. Ce guide donne les libellés d'OTTO en allemand, avec leur traduction.
 

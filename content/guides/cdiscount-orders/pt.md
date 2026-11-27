@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-A Cdiscount (cdiscount.com, site em francês) entrega em França continental e em mais nove países europeus, incluindo Portugal, para produtos pequenos enviados pela própria Cdiscount. Acompanha a entrega na tua conta em «Mes commandes» → «Suivre ma livraison» e no e-mail de envio que indica a transportadora; tens 14 dias da UE para devolver e até 30 dias após a data prevista para sinalizar um pedido não recebido.
+A Cdiscount (cdiscount.com, site em francês) entrega em França continental e em mais nove países europeus, incluindo Portugal, onde só chegam os produtos pequenos. Acompanha a entrega na tua conta em «Mes commandes» → «Suivre ma livraison» e no e-mail de envio que indica a transportadora; tens 14 dias da UE para devolver e até 30 dias após a data prevista para sinalizar um pedido não recebido.
 
 ## A Cdiscount entrega em Portugal, e o que muda nos pedidos do Marketplace?
 

@@ -7,7 +7,7 @@ published: 2026-10-18
 updated: 2026-11-27
 ---
 
-Em Portugal, segues todas as encomendas IKEA online na página «Acompanhar e gerir a sua encomenda» com o número da encomenda e o e-mail da compra. As entregas pequenas (até 60 kg, 3 a 7 dias no continente) seguem pela DPD com número de seguimento próprio ou para mais de 1.500 pontos DPD; os móveis chegam pela transportadora da IKEA numa janela horária confirmada por SMS, e o Apoio ao Cliente atende no 21 989 99 45.
+Em Portugal, segues todas as encomendas IKEA online na página «Acompanhar e gerir a sua encomenda» com o número da encomenda e o e-mail da compra. As entregas pequenas (até 60 kg; no continente, a IKEA prevê 3 a 7 dias) seguem pela DPD com número de seguimento próprio, e até 20 kg podes recolher num dos mais de 1.500 pontos DPD do continente; os móveis chegam pela transportadora da IKEA numa janela horária confirmada por SMS, e o Apoio ao Cliente atende no 21 989 99 45.
 
 ## Quem entrega a minha encomenda IKEA?
 

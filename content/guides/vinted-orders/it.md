@@ -1,6 +1,6 @@
 ---
 title: Tracciare un pacco Vinted: corrieri, codici e ritardi
-description: Tracciare e ritirare un pacco Vinted in Italia: corrieri (Poste, InPost, BRT), tempi di spedizione e ritiro (2–10 giorni), codice QR, rimborsi e assistenza.
+description: Tracciare e ritirare un pacco Vinted in Italia: corrieri (Poste, InPost, BRT), tempi di spedizione e ritiro, codice QR, rimborsi e assistenza.
 slug: tracciamento-pacco-vinted
 picture: Due smartphone, quello di una venditrice e quello di un acquirente, tra cui un pacco viaggia su un furgone, e un Pip allegro.
 published: 2026-10-16

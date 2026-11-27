@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-DPD Ireland delivers next-day parcels across the island of Ireland from 38 depots and its Athlone head office, alongside almost 600 Pickup points. Track your parcel on [DPD Ireland's tracking page](https://www.dpd.ie/tracking/) or in the box above using the 9- or 10-digit consignment number from DPD's collection email or the shop's dispatch notice.
+DPD Ireland delivers parcels across the island of Ireland, North and South, from 38 depots and its Athlone head office, alongside almost 600 Pickup points. Track your parcel on [DPD Ireland's tracking page](https://www.dpd.ie/tracking/) or in the box above using the 9- or 10-digit consignment number from DPD's collection email or the shop's dispatch notice.
 
 ## Where is my DPD Ireland tracking number?
 

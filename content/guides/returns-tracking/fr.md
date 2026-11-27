@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-Un colis de retour possède son propre numéro de suivi, différent de celui de la commande initiale : il figure sur l'étiquette prépayée, sur ta preuve de dépôt (à garder jusqu'au remboursement) et dans ton compte client. Le suivi du transporteur (La Poste, Mondial Relay, bpost ou La Poste suisse) s'arrête souvent à l'arrivée au centre de retours ; en France et en Belgique, après une rétractation dans les 14 jours, la boutique dispose de 14 jours pour te rembourser.
+Un colis de retour possède son propre numéro de suivi, différent de celui de la commande initiale : il figure sur l'étiquette de retour, sur ta preuve de dépôt (à garder jusqu'au remboursement) et dans ton compte client. Le suivi du transporteur (La Poste, Mondial Relay, bpost ou La Poste suisse) s'arrête souvent à l'arrivée au centre de retours ; en France et en Belgique, après une rétractation dans les 14 jours, la boutique dispose de 14 jours pour te rembourser, mais elle peut attendre d'avoir le colis ou ta preuve d'envoi (en Belgique, seulement si tu n'as pas utilisé sa méthode de retour).
 
 ## Comment fonctionne le numéro de suivi ou le QR code de retour ?
 

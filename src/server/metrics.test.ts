@@ -242,6 +242,14 @@ describe('prometheus carrier metrics', () => {
     expect(text).toContain('account_push_sent_total{outcome="skipped",app="web",transport="webpush"} 1');
   });
 
+  it('adds up what each proxy tunnel carried by routed host, ignoring a count that is not one', async () => {
+    metrics.recordTrackingProxyBytes('tracking.example', 21000);
+    metrics.recordTrackingProxyBytes('tracking.example', 4000);
+    metrics.recordTrackingProxyBytes('tracking.example', -1);
+    metrics.recordTrackingProxyBytes('tracking.example', Number.NaN);
+    expect(await scraped()).toContain('tracking_proxy_bytes_total{host="tracking.example"} 25000');
+  });
+
   it('counts scheduled runs that gave way by whose check went ahead, both from 0', async () => {
     expect(await metrics.metricsText()).toContain('scheduled_sync_gave_way_total{to="lookup"} 0');
     metrics.recordScheduledRunGaveWay('lookup');

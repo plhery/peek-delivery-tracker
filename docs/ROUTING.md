@@ -87,7 +87,8 @@ answers the tunnel with a gateway error (502, 503, 504) has sent nothing to the 
 request goes through it once more. A lookup the proxy refused fails as a transport error whose
 health sample keeps the proxy's status (`proxy_status`) and a reason of its own:
 `proxy_payment_required` for a 402, the proxy account out of credit or traffic, which no retry
-helps, and `proxy_refused` for any other.
+helps, and `proxy_refused` for any other. Each tunnel's traffic, both ways, is counted by
+routed host in `tracking_proxy_bytes_total` ([OBSERVABILITY.md](OBSERVABILITY.md)).
 
 1. **The carrier's own adapter**, when it has one. Cainiao (`aliexpress`) is an aggregator
    too, but it is only queried for AliExpress-style numbers (also beside another carrier's

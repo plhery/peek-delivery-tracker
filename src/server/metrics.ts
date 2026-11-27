@@ -43,7 +43,7 @@ export type SyncQueueKind = 'account' | 'lookup' | 'scheduled' | 'release';
 export type SyncQueue = Record<SyncQueueKind, { queued: number; oldestSeconds: number }>;
 
 /** Bump when the series or their labels change, so a hot-reloaded copy does not reuse an older shape. */
-const RUNTIME_VERSION = 25;
+const RUNTIME_VERSION = 26;
 
 interface PrometheusRuntime {
   version: number;
@@ -54,6 +54,7 @@ interface PrometheusRuntime {
   fallbackTotal: Counter<'carrier' | 'from_step' | 'to_step' | 'reason'>;
   recoveryTotal: Counter<'carrier' | 'from_step' | 'to_step' | 'reason' | 'outcome'>;
   browserNetworkBytes: Counter<'carrier' | 'attempt' | 'route'>;
+  trackingProxyBytes: Counter<'host'>;
   browserNetworkTotal: Counter<'carrier' | 'attempt' | 'route' | 'family' | 'outcome' | 'history' | 'partial'>;
   browserNetworkDuration: Histogram<'carrier' | 'attempt' | 'route' | 'outcome'>;
   fedexNetworkTotal: Counter<'attempt' | 'route' | 'family' | 'outcome' | 'history'>;
@@ -153,6 +154,11 @@ function createRuntime(): PrometheusRuntime {
       name: 'browser_network_bytes_total',
       help: 'Observed encrypted proxy payload bytes during browser attempts; excludes missing transport replies and is not billing usage.',
       labelNames: ['carrier', 'attempt', 'route'], registers: [registry],
+    }),
+    trackingProxyBytes: new Counter({
+      name: 'tracking_proxy_bytes_total',
+      help: 'Bytes the tracking proxy routes carried to and from each routed host, counted on every tunnel to the proxy when it closes.',
+      labelNames: ['host'] as const, registers: [registry],
     }),
     browserNetworkTotal: new Counter({
       name: 'browser_network_attempt_total',
@@ -696,6 +702,14 @@ export function recordDeliveryEmail(
 }
 
 export type ProviderInputStep = 'asked' | 'supplied' | 'history' | 'still_required' | 'no_history' | 'failed';
+
+/**
+ * What a tunnel through a tracking proxy route carried (trackingProxy.ts), by the routed host: the proxies bill by
+ * the byte, and the "Peek proxy traffic high" alert reads the day's total.
+ */
+export function recordTrackingProxyBytes(host: string, bytes: number): void {
+  if (Number.isSafeInteger(bytes) && bytes > 0) count(runtime.trackingProxyBytes, 'tracking_proxy_bytes_total', { host }, bytes);
+}
 
 /**
  * Whether relaying a provider's postcode request pays off: how often a parcel

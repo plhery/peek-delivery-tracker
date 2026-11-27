@@ -1,6 +1,7 @@
 import 'server-only';
 
 import { AdapterRegistry, TrawlClient, REGISTRY, type AdapterEnvironment } from 'universal-parcel-scraper/node';
+import { recordTrackingProxyBytes } from './metrics';
 import { reportTrackingBrowser } from './observability';
 import { hostStepRecorder } from './stepRecorder';
 import { trackingProxyFetcher } from './trackingProxy';
@@ -33,7 +34,7 @@ const processFetchers = globalThis as typeof globalThis & { __deliveryTrackingFe
 function hostFetcher(env: Record<string, string | undefined>): typeof fetch | undefined {
   const key = JSON.stringify([env.TRACKING_US_PROXY_URL, env.TRACKING_US_PROXY_HOSTS, env.TRACKING_PROXY_ROUTES]);
   const fetchers = processFetchers.__deliveryTrackingFetchers ??= new Map();
-  if (!fetchers.has(key)) fetchers.set(key, trackingProxyFetcher(env));
+  if (!fetchers.has(key)) fetchers.set(key, trackingProxyFetcher(env, fetch, recordTrackingProxyBytes));
   return fetchers.get(key);
 }
 

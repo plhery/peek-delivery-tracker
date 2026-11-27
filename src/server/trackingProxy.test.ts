@@ -1,3 +1,5 @@
+import { channel } from 'node:diagnostics_channel';
+import { EventEmitter } from 'node:events';
 import { describe, expect, it, vi } from 'vitest';
 import { getGlobalDispatcher, MockAgent, ProxyAgent, type Dispatcher } from 'undici';
 import { proxyTunnelStatus, trackingProxyFetcher } from './trackingProxy';
@@ -89,6 +91,25 @@ describe('tracking proxy scope', () => {
     const proxy = trackingProxyFetcher({ TRACKING_PROXY_ROUTES: '{"tracking.example":"http://proxy.example"}' }, fetcher)!;
     await proxy('https://tracking.example/');
     expect(fetcher.mock.lastCall![1]).toHaveProperty('dispatcher');
+  });
+
+  it('counts what each tunnel to a routed host carried through its own proxies, once the tunnel closes', () => {
+    const onBytes = vi.fn();
+    trackingProxyFetcher({ TRACKING_PROXY_ROUTES: '{"metered.example":"http://fixture:example@meter.example:8080"}' },
+      vi.fn<typeof fetch>(), onBytes);
+    // undici announces each tunnel a proxy accepted, with the CONNECT's target and the proxy's origin.
+    const tunnel = (origin: string, path: string) => {
+      const socket = Object.assign(new EventEmitter(), { bytesRead: 0, bytesWritten: 0 });
+      channel('undici:proxy:connected').publish({ socket, connectParams: { origin, path } });
+      return socket;
+    };
+    const metered = tunnel('http://meter.example:8080', 'Metered.example:443');
+    const otherHost = tunnel('http://meter.example:8080', 'direct.example:443');
+    const otherProxy = tunnel('http://elsewhere.example:8080', 'metered.example:443');
+    Object.assign(metered, { bytesRead: 18600, bytesWritten: 3600 });
+    expect(onBytes).not.toHaveBeenCalled();
+    for (const socket of [metered, otherHost, otherProxy]) socket.emit('close');
+    expect(onBytes.mock.calls).toEqual([['metered.example', 22200]]);
   });
 
   it('asks the proxy once more when it refuses the tunnel with a gateway error, and only then', async () => {

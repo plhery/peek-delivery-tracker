@@ -1,3 +1,5 @@
+import { subscribe } from 'node:diagnostics_channel';
+import type { Socket } from 'node:net';
 import { Dispatcher, getGlobalDispatcher, ProxyAgent } from 'undici';
 
 const HOST = /^[a-z0-9]+(?:[.-][a-z0-9]+)*$/;
@@ -32,8 +34,31 @@ function proxySettings(raw: string, setting: string): { key: string; uri: string
   } catch { throw new TypeError(`${setting} must be an HTTP proxy URL`); }
 }
 
-/** Tracking egress is opt-in per exact hostname; each route can use its own country. */
-export function trackingProxyFetcher(env: Readonly<Record<string, string | undefined>>, fetcher: typeof fetch = fetch): typeof fetch | undefined {
+/** Receives what a tunnel to a routed tracking host carried, both ways, once it closes. */
+export type ProxyBytesListener = (host: string, bytes: number) => void;
+
+/**
+ * Counts each tunnel to a routed host on its socket to the proxy: the CONNECT exchange and the encrypted traffic
+ * inside it, which is what a proxy billed by the byte counts. undici announces every tunnel a proxy accepts; a refused
+ * one carried nothing to the host. A tunnel still open when the process ends goes uncounted.
+ */
+function meterTunnels(proxies: ReadonlySet<string>, hosts: ReadonlySet<string>, onBytes: ProxyBytesListener): void {
+  subscribe('undici:proxy:connected', (message) => {
+    const { socket, connectParams } = (message ?? {}) as { socket?: Socket; connectParams?: { origin?: unknown; path?: unknown } };
+    const host = typeof connectParams?.path === 'string' ? connectParams.path.replace(/:\d+$/, '').toLowerCase() : '';
+    if (!socket || !hosts.has(host) || !proxies.has(String(connectParams?.origin))) return;
+    socket.once('close', () => {
+      try { onBytes(host, socket.bytesRead + socket.bytesWritten); } catch { /* Telemetry never fails a lookup. */ }
+    });
+  });
+}
+
+/**
+ * Tracking egress is opt-in per exact hostname; each route can use its own country. `onBytes` hears what each
+ * tunnel carried.
+ */
+export function trackingProxyFetcher(env: Readonly<Record<string, string | undefined>>, fetcher: typeof fetch = fetch,
+  onBytes?: ProxyBytesListener): typeof fetch | undefined {
   const routes = new Map<string, ReturnType<typeof proxySettings>>();
   const legacy = env.TRACKING_US_PROXY_URL?.trim();
   if (legacy) {
@@ -55,6 +80,7 @@ export function trackingProxyFetcher(env: Readonly<Record<string, string | undef
     }
   }
   if (!routes.size) return undefined;
+  if (onBytes) meterTunnels(new Set([...routes.values()].map(route => route.uri)), new Set(routes.keys()), onBytes);
   const dispatchers = new Map<string, ProxyAgent>();
   function destination(origin: URL, direct: Dispatcher) {
     const route = routes.get(origin.hostname);

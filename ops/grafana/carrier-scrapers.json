@@ -3503,6 +3503,87 @@
           }
         }
       ]
+    },
+    {
+      "type": "row",
+      "id": 96,
+      "title": "Proxy traffic",
+      "collapsed": true,
+      "gridPos": {"x": 0, "y": 187, "w": 24, "h": 1},
+      "panels": [
+        {
+          "type": "stat",
+          "id": 97,
+          "title": "Proxy traffic in the last 24 hours",
+          "description": "Every tunnel of the tracking proxy routes, both ways, and residential browser reads. Australia Post's browser reads through its residential proxy are left out; its daily share caps them. Orange from 60 MB, where \"Peek proxy traffic high\" fires; red from 100 MB, a 3 GB month's daily share.",
+          "datasource": {"type": "prometheus", "uid": "${datasource}"},
+          "gridPos": {"x": 0, "y": 188, "w": 8, "h": 6},
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "(sum(increase(tracking_proxy_bytes_total[24h])) or vector(0)) + (sum(increase(browser_network_bytes_total{route=\"residential\"}[24h])) or vector(0))",
+              "legendFormat": "24 h",
+              "instant": true,
+              "datasource": {"type": "prometheus", "uid": "${datasource}"}
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "bytes",
+              "decimals": 1,
+              "noValue": "No proxy traffic",
+              "color": {"mode": "thresholds"},
+              "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "orange", "value": 60000000}, {"color": "red", "value": 100000000}]},
+              "min": 0
+            },
+            "overrides": []
+          },
+          "options": {
+            "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "center",
+            "textMode": "value",
+            "wideLayout": true
+          }
+        },
+        {
+          "type": "stat",
+          "id": 98,
+          "title": "Proxy traffic by routed host",
+          "description": "What the tunnels to each host routed through a tracking proxy carried over the dashboard's range, counted when each tunnel closes.",
+          "datasource": {"type": "prometheus", "uid": "${datasource}"},
+          "gridPos": {"x": 8, "y": 188, "w": 16, "h": 6},
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "sort_desc(sum by (host) (increase(tracking_proxy_bytes_total[$__range])))",
+              "legendFormat": "{{host}}",
+              "instant": true,
+              "datasource": {"type": "prometheus", "uid": "${datasource}"}
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "bytes",
+              "decimals": 1,
+              "noValue": "No proxy traffic",
+              "color": {"mode": "thresholds"},
+              "thresholds": {"mode": "absolute", "steps": [{"color": "text", "value": null}]},
+              "min": 0
+            },
+            "overrides": []
+          },
+          "options": {
+            "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "center",
+            "textMode": "value",
+            "wideLayout": true
+          }
+        }
+      ]
     }
   ]
 }

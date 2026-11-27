@@ -1411,6 +1411,12 @@ carrier or provider outage, and a scheduled sync that is missed, fails or passes
   healthy, so a provider that says it has no history for every number opens no incident and
   Sentry stays quiet. Ordinary days never reach it. It fires once for each such carrier or
   provider, labelled `source`, read from `metrics.silent_sources`.
+- **Peek proxy traffic high**: the tracking proxy routes and residential browser reads carried
+  over 60 MB in the last 24 hours (`tracking_proxy_bytes_total` and
+  `browser_network_bytes_total{route="residential"}`), about 1.8 GB a month. The residential
+  proxy is billed by the byte and refuses every tunnel with a 402 once its plan is spent, so
+  this leaves time to find the host on the dashboard's "Proxy traffic" row. Australia Post's
+  browser reads through its residential proxy are in neither series; its daily share caps them.
 
 Each threshold sits above what ordinary days reach; a future scan alerts every time, as each
 is a fault to fix. The database rules read
@@ -1464,6 +1470,11 @@ cannot prove that both the page and FedEx's API went through its route fails as
 First browser attempts, including those after optional API credentials fail, remain
 `attempt="initial"`; with `FEDEX_FIRST_ROUTE=datacenter` as well they are `route="datacenter"`,
 so our own address sends FedEx nothing.
+
+`tracking_proxy_bytes_total` (host) counts what each tunnel of the tracking proxy routes
+carried, both ways, on its socket to the proxy when it closes: the CONNECT exchange and the
+encrypted traffic, as a proxy billed by the byte counts it. A tunnel still open when the app
+stops goes uncounted.
 
 `browser_network_bytes_total` counts encrypted proxy payload the worker proves for an
 attempt's lease, page dependencies included. The worker opens a tunnel only under the

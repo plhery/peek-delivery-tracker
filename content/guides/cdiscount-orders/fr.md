@@ -1,15 +1,15 @@
 ---
 title: Suivi de commande Cdiscount : livraison et retards
-description: Qui livre ta commande Cdiscount, où trouver le suivi, quels délais et frais attendre, et que faire si le colis n'arrive pas, en France, en Belgique et ailleurs.
+description: Suivi commande Cdiscount en France et en Belgique : qui livre (Colissimo, Chronopost, Mondial Relay), tarifs Belgique, délais, retards et contact Cdiscount.
 slug: suivi-commande-cdiscount
 picture: Une rangée de consignes à colis, une pile de cartons de toutes les tailles, et Pip qui sort la tête d'une consigne ouverte.
 published: 2026-10-17
-updated: 2026-11-10
+updated: 2026-11-27
 ---
 
 Ta commande Cdiscount se suit dans ton Espace client, rubrique « Mes commandes », et l'e-mail d'expédition nomme le transporteur. Ce que Cdiscount expédie part avec Colissimo, Chronopost, DPD, Mondial Relay ou Relais Colis, ou sur rendez-vous pour un gros colis. Un article vendu et expédié par un vendeur de la marketplace part avec le transporteur du vendeur, sous son propre numéro quand l'envoi est suivi.
 
-Cdiscount vend en ligne sur cdiscount.com, en français. Il livre la France métropolitaine, Corse comprise, et neuf pays d'Europe dont la Belgique et le Luxembourg. La Suisse et l'outre-mer passent par un service de réexpédition. Ce guide détaille la France, puis la Belgique, la Suisse et l'outre-mer.
+Oui, Cdiscount livre en Belgique depuis cdiscount.com (à domicile avec Chronopost dès 6,99 €, en point relais Mondial Relay pour 2,99 €, et même les gros colis), ainsi que la France métropolitaine, la Corse et huit autres pays d'Europe. La Suisse et l'outre-mer passent par un service de réexpédition (ColisExpat). Ce guide détaille la France, puis la Belgique, la Suisse et l'outre-mer.
 
 ## Quel transporteur livre ma commande Cdiscount ?
 
@@ -103,7 +103,7 @@ Le seuil de gratuité vaut par colis, et une commande chez plusieurs vendeurs fa
 
 **Gros colis.** Toujours sur rendez-vous : « Livraison devant chez vous » (au pied de l'immeuble), « Livraison chez vous » (dans la pièce de ton choix) ou « Livraison et installation chez vous » (électroménager, télé, hors Corse). Le livreur appelle 30 minutes avant. En point retrait gros colis, C Chez Vous garde le colis 15 jours, ou 7 jours en Express. Hors Express, cette livraison en point retrait coûte au moins 10 € et se fait sous 4 à 6 jours ouvrés au plus ; pour la Corse, Cdiscount ajoute 30 € sur ses propres envois.
 
-## Cdiscount en Belgique, en Suisse et en outre-mer
+## Cdiscount livre-t-il en Belgique, en Suisse et en outre-mer ?
 
 **Belgique.** Cdiscount livre la Belgique depuis cdiscount.com : à domicile avec Chronopost dès 6,99 €, en point relais Mondial Relay pour 2,99 €. Les petits colis y sont gratuits avec Cdiscount à volonté. C'est le seul pays hors de France où Cdiscount livre les gros colis : devant chez toi dès 55 €, dans la pièce de ton choix dès 90 €. Les vendeurs de la marketplace qui vendent à l'étranger livrent à domicile seulement. Le service client répond au 0800 58 211, gratuit depuis la Belgique.
 

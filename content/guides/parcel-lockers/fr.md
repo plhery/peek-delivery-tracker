@@ -1,13 +1,13 @@
 ---
 title: Consigne à colis : code de retrait, délai et problèmes
-description: Lockers Mondial Relay, consignes Pickup, Amazon Locker, Bbox et My Post 24 : où est ton code, combien de temps le colis attend, et que faire si c'est plein.
+description: Consigne locker Colissimo et Chronopost (Pickup), Mondial Relay, Amazon Locker, Bbox et My Post 24 : code de retrait, délai (3 à 10 j) et consigne pleine.
 slug: consigne-colis-code-retrait
 picture: Une rangée de consignes à colis avec une porte ouverte, un téléphone qui affiche un code, et Pip qui en sort.
 published: 2026-10-17
-updated: 2026-11-14
+updated: 2026-11-27
 ---
 
-Une consigne à colis (ou locker) est un point de retrait sans personne au comptoir : un mur de casiers qui s'ouvre avec un code ou l'appli du transporteur. Le suivi te dit quand ton colis est dedans, le transporteur t'envoie le code, et à partir de là tu as quelques jours, souvent 5. Passé ce délai, il repart en général chez l'expéditeur.
+Une consigne à colis (ou locker) — comme les 7 000 consignes Pickup utilisées par Colissimo et Chronopost, les Lockers Mondial Relay, Amazon Locker, Bbox ou My Post 24 — est un point de retrait sans personne au comptoir qui s'ouvre avec un code ou l'appli du transporteur. Le suivi te dit quand ton colis est dedans, le transporteur t'envoie le code (Pickup Pass ou code à 6 chiffres), et tu as quelques jours pour le retirer (souvent 5 jours, 3 chez Amazon) avant qu'il reparte en général chez l'expéditeur.
 
 ## Comment marche une livraison en consigne ?
 
@@ -22,7 +22,7 @@ Le plus souvent, tu choisis la consigne en passant commande. Le transporteur dé
 
 Ton colis peut aussi finir dans une autre consigne que celle choisie, si elle est pleine ou fermée (plus bas). En Belgique, même si tu as choisi la livraison à domicile, tu peux demander à [bpost](carrier:bpost) de livrer en Bbox : règle cette préférence dans l'appli My bpost ou sur MesPréférences. En Suisse, après un passage manqué, [La Poste suisse](carrier:swiss-post) peut t'inviter à retirer l'envoi à un automate My Post 24. Les autres solutions sont dans [avis de passage](guide:missed-delivery).
 
-## Quelles consignes à colis existent en France, en Belgique et en Suisse ?
+## Consignes et lockers (Colissimo Pickup, Mondial Relay, Amazon, Bbox, My Post 24)
 
 | Consigne | Gérée par | Ton code | Combien de temps elle attend |
 | --- | --- | --- | --- |

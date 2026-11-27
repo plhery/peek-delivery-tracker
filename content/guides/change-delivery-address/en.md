@@ -1,13 +1,13 @@
 ---
 title: How to change a delivery address, before or after shipping
-description: Change a delivery address before or after shipping: what Amazon, eBay and Vinted allow, what USPS, Royal Mail, Evri and DPD let you change, and the fees.
+description: How to change a delivery address before or after shipping: Amazon, eBay and Vinted rules, plus what USPS, Royal Mail, Evri and DPD let you divert and fees.
 slug: change-delivery-address
 picture: A road forking at a signpost, one way to a house and the other to a parcel locker, a van taking the new turn, and Pip looking along the road towards it.
 published: 2026-10-14
-updated: 2026-11-10
+updated: 2026-11-27
 ---
 
-Before your order ships, deal with the shop: Amazon.co.uk lets you edit a third-party seller's order for 30 minutes, and on eBay you ask the seller to cancel so you can buy again. Once it has shipped, ask the carrier: with your tracking number you can usually pick a neighbour, a safe place, a pickup point or another day. A new street address is often off the table, because the sender decides what you may change. Once the parcel is out for delivery, it's usually too late.
+Before your order ships, deal with the shop: Amazon.co.uk lets you edit a third-party seller's order on desktop for 30 minutes, and on eBay or Vinted you cancel before dispatch and buy again. Once it has shipped, use your tracking number with the carrier (USPS, Royal Mail, Evri, DPD, Canada Post or Australia Post) to pick a neighbour, safe place, pickup point or another day. A new street address is often off the table — Evri and DPD UK send you back to the sender — and once the parcel is out for delivery, it's usually too late.
 
 ## Can I change the delivery address after ordering on Amazon?
 
@@ -44,7 +44,7 @@ Can't find the number, or need one of the free carrier accounts some changes req
 
 > A text asking you to "update your address" or pay a small fee before delivery is the classic scam: [how to spot a fake delivery text](guide:delivery-scam-texts).
 
-## How to change the delivery address with USPS, DPD and others
+## How to change the delivery address with USPS, Royal Mail, Evri and DPD
 
 What each carrier lets you change, and what it costs:
 

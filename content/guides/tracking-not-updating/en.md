@@ -1,15 +1,15 @@
 ---
 title: Package tracking not updating? Why, and when to worry
-description: Why parcel tracking stops updating, how long a gap is normal at each stage, when a parcel counts as lost, and whether to contact the seller or the carrier.
+description: Package tracking not updating (USPS Priority Mail, Royal Mail, Evri, UPS, DHL)? Normal quiet gaps, when a parcel counts as lost, and who to contact first.
 slug: tracking-not-updating
 picture: A calendar with several days crossed out, a progress line that stops halfway, and Pip waiting, a little bored.
 published: 2026-10-09
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Tracking not updating usually means nobody has scanned your parcel (or package) lately, not that it has stopped moving. Carriers scan at depots and borders, not on the road, so a long drive, a flight, customs or a weekend can leave days without a new line. Worry only once the carrier's own waiting time has passed (7 days after mailing for a [USPS](carrier:usps) search, 11 working days after posting for a [Royal Mail](carrier:royal-mail) 1st Class claim), and even then, ask the seller first: it's the carrier's customer.
+Tracking not updating — whether on USPS Priority Mail, Royal Mail, Evri, Canada Post or another carrier — usually means nobody has scanned your parcel lately, not that it has stopped moving. Carriers scan at depots and borders, not on the road, so a long drive, a flight, customs or a weekend can leave days without a new line. Worry only once the carrier's own waiting time has passed (7 days after mailing for a [USPS](carrier:usps) Missing Mail search, 11 working days after posting for a [Royal Mail](carrier:royal-mail) 1st Class claim), and even then, ask the seller first: it's the carrier's customer.
 
-## Why has my tracking not updated in 3 days?
+## Why is my USPS, Royal Mail or courier tracking not updating?
 
 Tracking shows scans, not movement, and a parcel is scanned only at certain points:
 

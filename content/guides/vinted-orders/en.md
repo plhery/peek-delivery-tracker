@@ -1,13 +1,13 @@
 ---
 title: Vinted parcel tracking: where to look and why it stalls
-description: Track a Vinted or Vinted Go parcel: which carrier has it in the UK, Ireland, France, Spain, Germany, Italy, Poland or the US, and why tracking stalls.
+description: Track a Vinted or Vinted Go parcel in the conversation under Track parcel: UK, Ireland, Europe and US carriers, 48-hour scan wait, pickup deadlines and loss.
 slug: vinted-tracking
 picture: Two phones, a seller's and a buyer's, with a parcel travelling between them in a van, and a cheerful Pip.
 published: 2026-10-16
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-To see where your Vinted parcel is, open the order's conversation and press **Track parcel**: you get the latest status, a link to the carrier's own tracking page and the tracking number, which you can copy and paste into [Peek](/). Tracking can take up to 48 hours to appear after the seller drops the parcel off, and the seller has 5 business days to do so. The carrier is the one the buyer picked at checkout, and the seller is paid only once the buyer confirms all is well, or 2 days after delivery.
+To track a Vinted or Vinted Go parcel (for any **Buy now** order sent with integrated shipping), open the order's conversation and press **Track parcel**: you get the latest status, a link to the carrier's tracking page and the tracking number, which you can copy and paste into [Peek](/). Tracking can take up to 48 hours to appear after drop-off, and the seller has 5 business days to send it. The buyer picks the carrier at checkout, and the seller is paid once the buyer confirms all is well, or 2 days after delivery.
 
 ## How does shipping work on Vinted?
 
@@ -139,7 +139,7 @@ When the order is completed: the buyer presses "Everything is OK", or 2 days pas
 
 Vinted's refund policy covers purchases made with **Buy now** from sellers who aren't Pro: an order never shipped, lost, damaged or "significantly not as described". Paying outside Vinted leaves you without it.
 
-## Can I track a Vinted parcel outside the app?
+## Can I track a Vinted or Vinted Go parcel outside the app?
 
 Yes: copy the number from **Track parcel** and paste it into [Peek](/). A Vinted Go number starting `VGS` and a vintedgo.com tracking link name Vinted Go at once; for a 16-digit number, Peek asks Vinted Go and the other carriers that use that shape which one has it. Peek also works out most of the other carriers above from their numbers, though a shared shape such as 14 digits may need you to press "Change" and pick the carrier Vinted names. For an 8-digit Mondial Relay number, Peek also asks for the delivery postcode: at once in France, Belgium, the Netherlands, Luxembourg, Spain and Portugal, and elsewhere once you pick Mondial Relay as the carrier. It doesn't know AnyVan: follow that one in Vinted. It can't report a problem for you either; that stays in the conversation.
 

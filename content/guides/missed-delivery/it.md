@@ -1,15 +1,15 @@
 ---
 title: Mancata consegna per destinatario assente: cosa succede
-description: Destinatario assente? Poste Italiane, BRT e GLS ripassano da soli, poi il pacco va in giacenza: fino a quando, come ritirarlo, con quale documento e quale delega.
+description: Cosa succede se Poste Italiane, BRT o GLS non riescono a consegnare un pacco: secondo tentativo automatico, avviso di giacenza (10 giorni), ritiro e delega.
 slug: mancata-consegna-pacco
 picture: Una porta di casa con un avviso infilato sotto, un furgone già lontano e Pip che arriva senza fiato, un attimo troppo tardi.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-27
 ---
 
-Dopo una mancata consegna, l'avviso, l'SMS o l'e-mail ti dicono dov'è finito il pacco e fino a quando ti aspetta. Spesso non devi fare niente: Poste Italiane, BRT e GLS fanno da soli un secondo tentativo. Se anche quello va a vuoto, il pacco va in giacenza e lo ritiri con l'avviso e un documento d'identità, oppure fissi una nuova consegna sul sito o nell'app del corriere. In Ticino la Posta lascia un invito di ritiro, e la seconda consegna alla porta la chiedi tu, gratis.
+Se Poste Italiane, BRT o GLS non riescono a consegnare un pacco per destinatario assente, quasi sempre non devi fare niente subito: fanno da soli un secondo tentativo automatico (con Poste Delivery Express il giorno lavorativo seguente). Se anche quello va a vuoto, il pacco va in giacenza e l'avviso, l'SMS o l'e-mail ti dicono dov'è e fino a quando ritirarlo con un documento d'identità, oppure come fissare una nuova consegna sul sito o nell'app del corriere. In Ticino la Posta lascia un invito di ritiro e la seconda consegna alla porta la chiedi tu, gratis.
 
-## Mancata consegna pacco: cosa fare
+## Cosa succede se Poste Italiane, BRT o GLS non consegnano il pacco?
 
 :::steps
 - Leggi l'avviso | Dov'è il pacco, il codice da usare, da quando puoi ritirarlo e l'ultimo giorno.

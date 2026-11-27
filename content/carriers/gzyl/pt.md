@@ -1,12 +1,12 @@
 ---
 title: Rastreio GZYL: número YL…YQ, estados e a quem perguntar
-description: Seguir uma encomenda GZYL (广州云链) vinda da China: como é o número YL…YQ, o que significam os estados e porque pode aparecer entregue antes de chegar.
+description: Rastreio GZYL (广州云链) da China: formato YL…YQ, significado dos estados, porque surge «Delivered» sem chegar, alfândega UE (3 € e 2 €) e entrega final.
 slug: gzyl-rastreio
 published: 2026-11-18
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-A GZYL (广州云链, Guangzhou Yunlian) é a 广州云链货运代理有限公司, um transitário de Guangzhou (Cantão), na China. Se uma loja chinesa enviou a tua encomenda pela GZYL, o número de seguimento começa por YL, tem dez algarismos pelo meio e termina em YQ: cola-o na caixa acima. O site da GZYL (`yunlianhouyun.com`) está em chinês, e a sua pesquisa de pequenos pacotes (小包查询) abre um sistema de seguimento alojado num simples endereço numérico de servidor, sem nome de domínio. Lê o que lá aparece com cautela: a GZYL escreve de antemão grande parte do percurso de uma encomenda, pelo que um passo — mesmo `Delivered` — nem sempre corresponde a uma leitura real.
+A GZYL (广州云链, Guangzhou Yunlian / 广州云链货运代理有限公司) é um transitário de Guangzhou (Cantão), na China, usado por lojas chinesas em envios internacionais. Se o teu número tem 14 caracteres (`YL` + 10 algarismos + `YQ`), cola-o na caixa acima ou pesquisa-o através da opção 小包查询 em `yunlianhouyun.com`. Atenção: a GZYL regista de antemão grande parte do percurso, pelo que um passo — incluindo `Delivered` — pode ser uma previsão e não uma leitura real.
 
 ## Número de rastreio GZYL: como é
 
@@ -96,19 +96,23 @@ Salvo transferência para a Swiss Post, o Peek mantém-se na GZYL: se o vendedor
 
 ### O que é a GZYL (广州云链)?
 
-É a 广州云链货运代理有限公司 (Guangzhou Yunlian), um transitário de Guangzhou, na China, com site em chinês em `yunlianhouyun.com`. As suas cartas de porte seguem o formato YL, dez algarismos e YQ.
+É a 广州云链货运代理有限公司 (Guangzhou Yunlian), um transitário de Guangzhou, na China, com site em chinês em `yunlianhouyun.com`. As suas cartas de porte têm 14 caracteres: `YL`, dez algarismos e `YQ`.
 
-### Qualquer número YL…YQ pertence de certeza à GZYL?
+### Qualquer número YL…YQ pertence à GZYL?
 
-Não com certeza absoluta. YL, dez algarismos e YQ é o formato da GZYL e nenhuma outra transportadora do catálogo do Peek o utiliza. Quando começa por YL738, o Peek atribui-o logo à GZYL pelo formato; nos restantes, consulta primeiro o sistema da GZYL. Com nove ou onze algarismos, já não é o formato da GZYL.
+`YL`, dez algarismos e `YQ` é o formato da GZYL e nenhuma outra transportadora no catálogo do Peek o usa. Quando começa por `YL738`, o Peek atribui-o logo à GZYL; nos restantes, verifica primeiro no sistema da GZYL. Com nove ou onze algarismos, falta ou sobra um dígito.
 
-### Porque é que a GZYL diz que a encomenda foi entregue se ainda não chegou?
+### Porque é que a GZYL diz «Delivered» se a encomenda ainda não chegou?
 
-Pode fazer parte do plano escrito de antemão pela GZYL: a empresa regista antecipadamente grande parte do percurso e termina-o num `Delivered`, sendo esses passos previsões e não leituras. O Peek nunca conta tais passos do sistema da GZYL como leituras, `Delivered` incluído, e quando exibe «Entregue» avisa logo abaixo que as atualizações seguem um horário fixo. Diz ao vendedor que nada chegou e pergunta que empresa faz a entrega.
+A GZYL escreve grande parte do percurso com antecedência e encerra essa previsão com um passo `Delivered` sem assinatura real. O Peek retém passos escritos antes da hora e avisa quando o rastreio segue um horário fixo: contacta o vendedor e pede o nome e o código da transportadora local.
 
 ### Quem entrega as encomendas GZYL em Portugal?
 
-O Peek não sabe: os passos da GZYL no país de destino não indicam nenhuma transportadora. A página de seguimento da GZYL pode mostrar o número da transportadora local em 渠道转单号 (número de transferência); se não mostrar, pergunta ao vendedor que empresa entrega a encomenda e qual é o seu número, adicionando-o ao Peek como encomenda separada. Apenas na Suíça e no Liechtenstein pode o Peek passar automaticamente uma encomenda da GZYL para a Swiss Post.
+Os passos da GZYL no país de destino não indicam nenhuma transportadora em Portugal (o Peek só transfere automaticamente para a Swiss Post na Suíça e no Liechtenstein). Procura um segundo código nas colunas 渠道转单号 ou 跟踪号码 na página da GZYL, ou pergunta ao vendedor que empresa faz a entrega.
+
+### Pago alfândega numa encomenda GZYL vinda da China para Portugal?
+
+Em compras online vindas de fora da UE aplicam-se 3 € de direito aduaneiro por categoria de artigo em remessas até 150 € (desde 1 de julho de 2026) e 2 € de taxa de tramitação da União por categoria de artigo qualquer que seja o valor (desde 1 de novembro de 2026), além de eventual IVA se não pago na loja.
 
 :::sources
 - [广州云链货运代理有限公司 (GZYL): página inicial (em chinês)](http://yunlianhouyun.com/) – nome da empresa, site em chinês e pesquisa de pequenos pacotes (小包查询)

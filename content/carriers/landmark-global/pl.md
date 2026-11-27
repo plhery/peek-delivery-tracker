@@ -1,12 +1,12 @@
 ---
 title: Landmark Global śledzenie przesyłek: LTN, statusy i cło
-description: Śledź paczkę Landmark Global w Polsce: jak wygląda numer LTN, co oznaczają statusy, kto doręcza przesyłkę, opłaty celne 2026 i kontakt ze sklepem.
+description: Śledzenie Landmark Global w Polsce: numer LTN, tłumaczenie angielskich statusów, kto doręcza paczkę w Polsce, cło 3 EUR i opłata 2 EUR oraz kontakt.
 slug: landmark-global-sledzenie-przesylek
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Landmark Global obsługuje międzynarodowe zamówienia dla sklepów internetowych na ponad 220 kierunkach. Od 2016 roku należy do belgijskiej grupy Bnode (właściciela operatora [bpost](carrier:bpost)): organizuje transport transgraniczny oraz odprawę celną, a na ostatnim odcinku w Polsce przekazuje paczkę lokalnemu operatorowi pocztowemu lub firmie kurierskiej. Przesyłkę sprawdzisz za pomocą numeru LTN ze sklepu na [polskiej stronie śledzenia Landmark Global](https://track.landmarkglobal.com/?lang=pl) albo wklejając go w polu powyżej.
+Landmark Global — operator logistyczny należący od 2016 r. do belgijskiej grupy Bnode (właściciela [bpost](carrier:bpost)) — realizuje przesyłki międzynarodowe dla sklepów internetowych do ponad 220 krajów, a na ostatnim odcinku w Polsce przekazuje paczkę lokalnemu przewoźnikowi. Wklej numer `LTN` od sklepu w polu powyżej lub wpisz go na [polskiej stronie śledzenia Landmark Global](https://track.landmarkglobal.com/?lang=pl), aby sprawdzić status, doręczyciela w Polsce i ewentualne opłaty celne.
 
 ## Numer śledzenia Landmark Global (LTN): formaty i gdzie go znaleźć
 
@@ -84,15 +84,23 @@ Gdy partner końcowy jest bezpośrednio obsługiwany przez Peek (np. [Poczta Pol
 
 ### Co to za firma Landmark Global?
 
-To międzynarodowy operator logistyczny dla e-commerce należący od 2016 r. do belgijskiej grupy Bnode (właściciela [bpost](carrier:bpost)). Sprowadza zamówienia ze sklepów internetowych do ponad 220 krajów i przekazuje je lokalnym przewoźnikom na ostatnią milę.
+Międzynarodowy operator e-commerce należący od 2016 r. do belgijskiej grupy Bnode (właściciela [bpost](carrier:bpost)), obsługujący transport transgraniczny i odprawę celną do ponad 220 krajów z doręczeniem przez lokalnych partnerów.
 
-### Dlaczego mój numer LTN nie działa?
+### Kto doręcza paczki Landmark Global w Polsce?
 
-Sprawdź najpierw format: `LTN` oraz 8 lub 9 cyfr (ewentualnie z końcówką `N1`). Jeśli numer jest poprawny, sklep mógł jeszcze nie przekazać fizycznie paczki albo nowe skany są już wyłącznie u polskiego doręczyciela pod linkiem partnera; w razie wątpliwości napisz do sprzedawcy.
+Landmark nie wskazuje w Polsce jednego stałego kuriera — konkretnego partnera ostatniej mili oraz jego lokalny numer nadania znajdziesz w szczegółach przesyłki na stronie śledzenia Landmark (pod `Delivery Partner`). Gdy Peek obsługuje tego przewoźnika bezpośrednio, automatycznie przełącza się na jego skany.
 
-### Ile trwa dostawa przez Landmark Global?
+### Dlaczego mój numer LTN nie działa lub stoi na `Shipment Data Uploaded`?
 
-Według polskiej strony pomocy Landmark czas dostawy zależy od wybranej przez sklep usługi oraz kraju docelowego. Sprawdź orientacyjny termin w potwierdzeniu zakupu ze sklepu i śledź moment przekazania przesyłki polskiemu przewoźnikowi.
+Sprawdź format: `LTN` i 8 lub 9 cyfr (opcjonalnie z końcówką `N1`). Status `Shipment Data Uploaded` oznacza, że sklep przekazał dopiero dane elektroniczne i nie nadał jeszcze fizycznie paczki; jeśli nic nie rusza po kilku dniach, napisz do sklepu.
+
+### Czy za paczkę Landmark Global spoza UE trzeba zapłacić cło i opłatę 2 EUR?
+
+Z krajów UE cła nie ma. Dla zakupów online spoza UE (np. z Wielkiej Brytanii, USA czy Azji), jeśli sklep nie rozliczył opłat przy zamówieniu, w Polsce obowiązują cło ryczałtowe 3 EUR za kategorię produktu (do 150 EUR), unijna opłata manipulacyjna 2 EUR za pozycję towarową, VAT oraz opłata celna przewoźnika.
+
+### Ile trwa dostawa Landmark Global i jak się z nimi skontaktować?
+
+Czas dostawy zależy od usługi wybranej przez sklep i kraju nadania. W sprawach reklamacji i zagubionych paczek Landmark kieruje w pierwszej kolejności do sprzedawcy; europejski adres e-mail obsługi klienta to `ClientservicesEU@landmarkglobal-group.com` (bez europejskiego numeru telefonu).
 
 :::sources
 - [Landmark Global Polska: Obsługa klienta](https://landmarkglobal.com/eu/pl/obsluga-klienta/) – numer LTN, kontakt ze sprzedawcą, brak zmiany adresu po przetworzeniu, ubezpieczenie tylko dla sklepów, e-mail ClientservicesEU@landmarkglobal-group.com i siedziba w Machelen

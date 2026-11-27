@@ -1,12 +1,12 @@
 ---
 title: Tracciamento Jifan: numeri JFGJ, stati e ora di Pechino
-description: Traccia un pacco Jifan (吉凡国际物流) dalla Cina continentale agli USA: formato dei numeri JFGJ…CN, significato degli stati e orari in fuso di Pechino.
+description: Tracciamento Jifan (吉凡国际物流) dalla Cina agli USA: codici JFGJ…CN, significato degli stati inglesi e cinesi, fuso orario di Pechino, tempi UPS e contatti.
 slug: tracciamento-jifan
 published: 2026-11-21
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Jifan è Shenzhen Jifan International Logistics (`深圳市吉凡国际物流有限公司`, o `吉凡国际物流`), uno spedizioniere fondato nel 2017 a Shenzhen, nella Cina continentale, membro NVOCC. Spedisce pacchi per venditori commerciali dalla Cina continentale ad acquirenti negli Stati Uniti, per via aerea e marittima. I suoi codici di tracciamento sono formati da `JFGJ`, nove cifre e `CN`. Controlla il tuo sul [tracker di Jifan](https://www.szjf56.cn/index/tracknumber/track) oppure incollalo nel riquadro qui sopra; nel catalogo di Peek puoi trovarlo anche cercando `Jifan International Logistics`, `吉凡国际物流` o `深圳市吉凡国际物流有限公司`.
+Jifan (`深圳市吉凡国际物流有限公司`, *Shenzhen Jifan International Logistics*) è uno spedizioniere fondato nel 2017 a Shenzhen (Cina continentale) che invia pacchi e-commerce dalla Cina agli Stati Uniti per via aerea e marittima con codici `JFGJ` + 9 cifre + `CN`. Incolla il tuo codice nel riquadro qui sopra o cercalo sul [tracker di Jifan](https://www.szjf56.cn/index/tracknumber/track) per leggere gli stati tradotti e gli orari convertiti dall'ora di Pechino al tuo fuso orario.
 
 ## Numero di tracciamento Jifan: come riconoscerlo
 
@@ -101,25 +101,25 @@ Finché il tracker di Jifan risponde, Peek controlla fino a ogni 10 minuti con i
 
 ## Domande frequenti sul tracciamento Jifan
 
-### Che cos'è Jifan Logistics?
+### Che cos'è Jifan International Logistics?
 
-Shenzhen Jifan International Logistics (`深圳市吉凡国际物流有限公司`), azienda logistica fondata nel 2017 a Shenzhen, nella Cina continentale, che spedisce pacchi per le imprese dalla Cina continentale agli acquirenti negli Stati Uniti via aerea e via mare con numeri `JFGJ…CN`.
+È Shenzhen Jifan International Logistics (`深圳市吉凡国际物流有限公司`), azienda logistica fondata nel 2017 a Shenzhen, nella Cina continentale (membro NVOCC), che spedisce ordini online dalla Cina agli Stati Uniti via aerea e via mare con lettere di vettura `JFGJ…CN`.
 
-### Dove posso tracciare un numero JFGJ…CN?
+### Dove posso tracciare un numero `JFGJ…CN`?
 
-Sulla pagina [快件跟踪 di szjf56.cn](https://www.szjf56.cn/index/tracknumber/track) digitandolo in maiuscolo, oppure in Peek. Il tracker ufficiale conserva solo le spedizioni degli ultimi due mesi.
+Incollalo nel riquadro in alto in Peek oppure inseriscilo in maiuscolo senza spazi su [szjf56.cn/index/tracknumber/track](https://www.szjf56.cn/index/tracknumber/track) (fino a 20 codici per volta; il tracker ufficiale conserva solo i pacchi degli ultimi due mesi).
 
-### Perché gli orari sul tracker di Jifan sembrano sbagliati?
+### Perché gli orari sul tracker di Jifan sembrano avanti di un giorno?
 
-Sono tutti espressi nell'ora di Pechino (`UTC+8`), anche per le scansioni negli Stati Uniti. In inverno Pechino è avanti di 13 ore rispetto a New York e di 16 rispetto a Los Angeles, quindi una scansione effettuata dopo le 11:00 a New York o dopo le 08:00 a Los Angeles porta la data del giorno dopo. Peek converte ogni orario nel fuso del tuo dispositivo.
+Il tracker di Jifan pubblica ogni scansione in ora di Pechino (`UTC+8`), anche per i passaggi negli Stati Uniti, senza indicare il fuso orario. Peek legge l'ora come Pechino e la converte automaticamente nel fuso orario del tuo dispositivo.
 
-### Cosa significa `查询不到` sul tracker di Jifan?
+### Cosa significa `查询不到` nel tracciamento Jifan?
 
-È il cinese per «impossibile trovare»: nessun pacco sul tracker corrisponde al codice inserito. Controlla che non ci siano refusi, scrivilo in maiuscolo senza spazi e chiedi al venditore se continua a dare esito vuoto; i pacchi spediti da oltre due mesi non sono più presenti sul tracker.
+In cinese significa «impossibile trovare»: nessun pacco corrisponde al codice. Verifica di avere scritto `JFGJ` + 9 cifre + `CN` in maiuscolo senza spazi e contatta il venditore se il risultato resta vuoto (i pacchi spediti da più di due mesi non compaiono più).
 
-### Quanto impiega Jifan a consegnare?
+### Quanto impiega Jifan a consegnare e chi fa la consegna finale?
 
-Il sito indica circa 8–10 giorni di calendario per i piccoli pacchi aerei USA, 10–12 per la linea economica leggera, 20–25 per i pacchi marittimi Matson e 25–40 per i colli marittimi fuori misura. Fai comunque riferimento alla stima comunicata dal venditore.
+Le linee verso gli Stati Uniti usano [UPS](carrier:ups) (`UPS MI` / `UPS GROUND`) o camion per colli fuori misura, con tempi indicativi di 8–10 giorni di calendario via aerea, 10–12 sulla linea economica leggera, 20–25 via mare Matson e 25–40 per spedizioni fuori misura; fai sempre riferimento alla stima del venditore.
 
 :::sources
 - [Jifan: 深圳市吉凡国际物流有限公司 (home page)](https://www.szjf56.cn/) – ragione sociale, fondazione nel 2017, quattro linee verso gli USA, limiti di peso e spessore, consegna UPS e UPS Ground, navi Matson e COSCO, giorni di calendario, unica lettera di vettura, garanzia verso i mittenti, telefono, email e sede a Shenzhen

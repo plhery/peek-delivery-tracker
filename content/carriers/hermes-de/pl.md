@@ -1,12 +1,12 @@
 ---
 title: Śledzenie Hermes Niemcy: statusy po polsku i doręczenie
-description: Sprawdź paczkę Hermes Germany (myHermes) po polsku: formaty numeru nadania, znaczenie angielskich i niemieckich statusów, doręczenie do Polski, cło i Peek.
+description: Śledzenie przesyłek Hermes Germany (myHermes) po polsku: numery H... i 14-cyfrowe, tłumaczenie statusów, doręczenie do Polski, brak cła w UE i reklamacje.
 slug: sledzenie-hermes
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-27
 ---
 
-Hermes Germany (występujący również jako *myHermes* lub *Hermes Borderguru*) to niemiecki przewoźnik paczkowy należący do grupy Otto (*Otto Group*). Gdy zamawiasz towar w niemieckim sklepie internetowym lub od prywatnego sprzedawcy wysyłającego przez Hermes, możesz sprawdzić przesyłkę na niemieckiej stronie `myhermes.de` albo wkleić numer nadania w polu powyżej na [Peek](/), aby odczytać aktualny etap po polsku i godziny zdarzeń w swojej strefie czasowej.
+Hermes Germany (*myHermes*, *Hermes Borderguru*) to niemiecki przewoźnik paczkowy z grupy Otto (*Otto Group*) obsługujący zakupy z niemieckich sklepów i wysyłki do Polski. Wklej numer nadania (*Sendungsnummer*, 14–20 znaków) w polu powyżej w [Peek](/) lub sprawdź go na niemieckiej stronie `myhermes.de`, aby zobaczyć polski etap przesyłki, godziny w swojej strefie czasowej oraz ewentualne przekazanie polskiemu partnerowi.
 
 W Wielkiej Brytanii dawny oddział Hermes UK zmienił w marcu 2022 roku nazwę na [Evri](carrier:evri), natomiast Hermes Germany pozostaje odrębną niemiecką firmą kurierską. Do dostaw mebli i dużego sprzętu AGD z wniesieniem przez dwuosobowe zespoły na terenie Niemiec służy osobna spółka (*Hermes Einrichtungs-Service*).
 
@@ -72,23 +72,27 @@ Dwie istotne uwagi przy czytaniu osi czasu:
 
 Dopóki masz otwartą kartę przesyłki na ekranie — albo w dniu doręczenia przy włączonych powiadomieniach — Peek sprawdza status nawet co 10 minut, a w dniu wydania paczki do doręczenia co 2 minuty od 6:00 czasu niemieckiego (lub pół godziny przed początkiem okna czasowego podanego przez Hermes), o ile system Hermes odpowiada bezpośrednio (przez zewnętrzne serwisy śledzenia: co godzinę, co 3 godziny po dniu bez skanu i do co 15 minut w dniu doręczenia); poza tym sprawdza paczkę co godzinę i utrzymuje rytm godzinny po dwóch dniach bez nowego skanu (lub po 12 godzinach na etapie "Zarejestrowana" bądź "Przyjęta przez przewoźnika"). Gdy doręczenie w Polsce przejmie lokalny partner, Peek dostosowuje częstotliwość do tego przewoźnika. Możesz włączyć powiadomienia o opcji "Każdy skan", "Ważne etapy" lub "Tylko doręczenie"; po usunięciu archiwalnych doręczonych numerów przez Hermes zapytanie zwraca brak przesyłki (404).
 
-## Najczęstsze pytania (FAQ)
+## Najczęstsze pytania o śledzenie Hermes Germany
+
+### Kto doręcza paczki Hermes z Niemiec w Polsce?
+
+Za granicą Hermes Germany przekazuje przesyłkę lokalnemu partnerowi doręczającemu (w dokumentacji technicznej pojawiają się m.in. InPost, PostNord i Correos). Gdy strona śledzenia Hermes zawiera link do partnera rozpoznawanego przez Peek, karta paczki pokazuje „Doręcza: …” i przełącza się na bieżące skany lokalnego kuriera.
 
 ### Czy Hermes i Evri to ta sama firma?
 
-Tylko w Wielkiej Brytanii, gdzie dawny Hermes UK działa od marca 2022 roku pod marką [Evri](carrier:evri). Hermes Germany to osobny niemiecki przewoźnik z grupy Otto; w przypadku 16-znakowych numerów zaczynających się od `H` i 15 cyfr Peek sprawdza obie sieci, jeśli ostatnia cyfra spełnia sumę kontrolną.
+Tylko w Wielkiej Brytanii, gdzie dawny Hermes UK działa od marca 2022 roku jako [Evri](carrier:evri). Hermes Germany to odrębna niemiecka firma kurierska z grupy Otto; przy 16-znakowych numerach zaczynających się od `H` i 15 cyfr Peek sprawdza obie sieci, jeśli suma kontrolna pasuje do Evri.
 
-### Dlaczego opisy skanów Hermes są po angielsku lub po niemiecku?
+### Dlaczego statusy Hermes są po angielsku lub po niemiecku?
 
-Dla polskojęzycznego odbiorcy Peek pobiera od Hermes Germany angielską wersję komunikatów (część wpisów pozostaje po niemiecku) i tłumaczy główny etap na język polski ("Przyjęta przez przewoźnika", "W transporcie", "W doręczeniu", "Do odbioru", "Dostarczona").
+Strona `myhermes.de` działa wyłącznie po niemiecku, natomiast Peek pobiera angielską wersję opisów (część wpisów zostaje po niemiecku) i tłumaczy główny etap przesyłki na język polski („Zarejestrowana”, „Przyjęta przez przewoźnika”, „W transporcie”, „W doręczeniu”, „Do odbioru”, „Dostarczona”).
 
-### Jak śledzić meble wysłane przez Hermes w Niemczech?
+### Czy za paczkę Hermes z Niemiec do Polski płaci się cło?
 
-Dostawy mebli i dużego sprzętu AGD z dwuosobową obsługą realizuje odrębny przewoźnik *Hermes Einrichtungs-Service*. W Niemczech termin jest potwierdzany e-mailem i SMS-em wraz z telefonem na 30–60 minut przed przyjazdem; w Peek możesz wybrać go ręcznie przyciskiem "Zmień przewoźnika", jeśli numer nie zostanie dopasowany automatycznie.
+Nie — przesyłki z Niemiec do Polski poruszają się wewnątrz obszaru celnego Unii Europejskiej bez cła i opłat za odprawę. Ryczałtowe cło 3 EUR (do 150 EUR) oraz opłata manipulacyjna 2 EUR dotyczą wyłącznie przesyłek nadawanych spoza UE.
 
-### Czy za paczkę Hermes z Niemiec do Polski zapłacę cło?
+### Jak śledzić meble i duże AGD wysłane przez Hermes w Niemczech?
 
-Nie. Towary wysyłane z Niemiec do Polski krążą wewnątrz obszaru celnego Unii Europejskiej bez cła i bez opłat za odprawę celną. Opłaty celne (w tym ryczałtowe 3 EUR od 1 lipca 2026 r.) dotyczą wyłącznie paczek nadawanych spoza UE.
+Dostawy gabarytów z dwuosobowym wniesieniem w Niemczech obsługuje osobna spółka *Hermes Einrichtungs-Service*, która potwierdza termin e-mailem i SMS-em oraz dzwoni 30–60 minut przed przyjazdem. W Peek możesz wybrać ją ręcznie przyciskiem „Zmień przewoźnika”.
 
 :::sources
 - [Otto Group: Konzernfirmen (Hermes)](https://www.ottogroup.com/de/ueber-uns/konzernfirmen/hermes-germany.php) – przynależność Hermes do grupy Otto

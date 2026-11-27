@@ -1,12 +1,12 @@
 ---
 title: Seguimiento FAR International: números, estados y contacto
-description: Sigue un paquete de FAR International (泛远国际) desde China: formato FAR…YQ, significado de cada estado, quién entrega, aduanas UE y contacto.
+description: Seguimiento de FAR International (泛远国际) desde China: código FAR…YQ, significado de cada estado, número de última milla, aduanas UE (3 € y 2 €) y contacto.
 slug: seguimiento-far-international
 published: 2026-11-22
-updated: 2026-11-22
+updated: 2026-11-27
 ---
 
-FAR International (泛远国际, FAR International Logistics) es una empresa de logística transfronteriza con sede en Hangzhou, China, fundada en 2004. Tiendas online y marketplaces la contratan para enviar pedidos al extranjero: FAR recoge y revisa los paquetes en China, mientras sus socios gestionan el traslado internacional, las aduanas y la entrega final con un transportista local en tu país. Puedes seguir el envío en la [página Track and Trace de FAR](https://www.far800.com/en/logistics), en inglés, o pegando el código en el cuadro de arriba. El número te lo facilita la tienda con los datos de envío.
+FAR International (泛远国际, FAR International Logistics), fundada en 2004 en Hangzhou (China), gestiona envíos transfronterizos para tiendas online y marketplaces como Temu, TikTok y SHEIN: recoge e inspecciona los paquetes en China y confía el vuelo, las aduanas y el reparto final a operadores locales. Pega tu código `FAR…YQ` en el cuadro de arriba o consúltalo en la [página Track and Trace de FAR](https://www.far800.com/en/logistics) para seguir cada etapa y ver el número de última milla.
 
 ## Número de seguimiento de FAR International: cómo es
 
@@ -96,23 +96,27 @@ Cuando FAR entrega un número de última milla, Peek pregunta al transportista c
 
 Mientras tengas el envío abierto en Peek — o el día de entrega con notificaciones activadas — Peek consulta directamente a FAR hasta cada 10 minutos, y hasta cada 2 minutos desde las 6:00 hora local el día en que sale a reparto; fuera de esos casos, y tras dos días sin novedades (12 horas si sigue en «Etiqueta creada» o «Admitido por el transportista»), comprueba cada hora. Puedes recibir avisos en «Cada escaneo», «Pasos importantes» o «Solo la entrega». Peek no puede contactar con FAR ni con el vendedor en tu nombre.
 
-## Preguntas sobre FAR International
+## Preguntas sobre el seguimiento de FAR International
 
 ### ¿Es fiable FAR International?
 
-Sí. FAR International Logistics se fundó en Hangzhou en 2004. Su matriz, FAR International Holdings Group, nació en noviembre de 2022 y salió a bolsa en Hong Kong en diciembre de 2023 según sus noticias. FAR señala que empezó a operar para UPS China en 2005, lanzó un proyecto transfronterizo con Temu en 2023 y abrió cooperación estratégica con TikTok y SHEIN en 2024.
+Sí. FAR International Logistics se fundó en Hangzhou en 2004, su matriz FAR International Holdings Group salió a bolsa en Hong Kong en diciembre de 2023 y opera proyectos transfronterizos con UPS China, Temu, TikTok y SHEIN.
 
-### ¿Cuánto tarda FAR International en entregar?
+### ¿Quién entrega un paquete de FAR International en España o mi país?
 
-Para sus clientes publica estos plazos orientativos: Express de 3 a 5 días laborables, Standard de 6 a 9 y Economy de 10 a 30, sujetos al código postal de destino. Toma como referencia la estimación de tu tienda.
+Un operador de última milla contratado en tu país (FAR no realiza el reparto final directamente ni publica una lista fija por país). Cuando aparece el número de última milla (尾程单号) en el rastreador de FAR, Peek consulta ese transportista automáticamente si lo reconoce.
 
-### ¿Qué significa «Await Release from Sender»?
+### ¿Cuánto tarda FAR International en entregar desde China?
 
-El almacén de FAR en China tiene el paquete retenido a la espera de confirmación del vendedor. Si no avanza, pregunta a la tienda.
+Para comercios, FAR publica plazos orientativos de 3 a 5 días laborables en Express, 6 a 9 en Standard y 10 a 30 en Economy según el código postal de destino. Toma siempre como referencia la fecha estimada de tu tienda.
 
-### ¿Cómo contacto con FAR International?
+### ¿Qué significa «Await Release from Sender» en FAR International?
 
-A través de la línea global 400-128-5656 o en csc@far800.com. Para incidencias de un pedido, contacta primero con el vendedor.
+El almacén de FAR en China retiene el paquete a la espera de autorización del vendedor. Si el estado no avanza en unos días, escribe a la tienda para que libere el envío.
+
+### ¿Cómo contactar o reclamar con FAR International si el paquete no llega?
+
+Contacta primero con el vendedor (las reclamaciones por paquete entregado y no recibido deben abrirse en los 14 días posteriores a la firma a través del remitente). Los contactos de FAR son la línea `400-128-5656` y el correo `csc@far800.com`.
 
 :::sources
 - [FAR International: Home](https://www.far800.com/en) – empresa, 泛远国际, 2004 y 2022, salida a bolsa en Hong Kong (22 de diciembre de 2023), línea global, correo y dirección

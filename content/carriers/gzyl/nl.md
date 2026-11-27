@@ -1,12 +1,12 @@
 ---
 title: GZYL track & trace: pakket volgen met een YL…YQ-nummer
-description: Volg je GZYL-pakket (广州云链) uit China: hoe een YL…YQ-trackingnummer eruitziet, wat de statussen betekenen en waarom het al op bezorgd kan staan.
+description: Volg je GZYL-pakket (广州云链) uit China: YL…YQ-nummers, betekenis van Engelse statussen, vooraf geschreven 'Delivered'-stappen, douane (€ 2) en bezorging.
 slug: gzyl-pakket-volgen
 published: 2026-11-03
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-GZYL (广州云链, Guangzhou Yunlian) is 广州云链货运代理有限公司, een expediteur in Guangzhou, China. Heeft een Chinese webshop je bestelling met GZYL verstuurd, dan bestaat je trackingnummer uit YL, tien cijfers en YQ: plak het in het vak hierboven. De website van GZYL, yunlianhouyun.com, is in het Chinees, en de pakketzoeker (小包查询) daar opent de trackingpagina van GZYL, die op een IP-adres zonder domeinnaam draait. Neem die tracking met een korreltje zout: GZYL schrijft een groot deel van de reis van een pakket vooraf, dus een stap daar is niet altijd een scan, ook `Delivered` niet.
+GZYL (广州云链, Guangzhou Yunlian / 广州云链货运代理有限公司) is een Chinese expediteur in Guangzhou voor bestellingen uit Chinese webshops. Heb je een trackingnummer van 14 tekens (`YL` + 10 cijfers + `YQ`), plak het dan in het vak hierboven of open de Chinese pakketzoeker (小包查询) via yunlianhouyun.com. Let op: GZYL schrijft een groot deel van de route vooraf, zodat een stap — zelfs `Delivered` — een planning kan zijn in plaats van een echte scan.
 
 ## Trackingnummer van GZYL: hoe ziet het eruit?
 
@@ -96,19 +96,23 @@ Peek blijft bij GZYL en stapt niet over naar het bedrijf dat bezorgt, behalve na
 
 ### Wat is GZYL (广州云链)?
 
-GZYL is 广州云链货运代理有限公司 (Guangzhou Yunlian), een expediteur in Guangzhou, China. Zijn trackingnummers bestaan uit YL, tien cijfers en YQ.
+GZYL is 广州云链货运代理有限公司 (Guangzhou Yunlian), een expediteur in Guangzhou, China, met Chinese website `yunlianhouyun.com`. De trackingnummers tellen 14 tekens: `YL`, tien cijfers en `YQ`.
 
 ### Is elk YL…YQ-nummer van GZYL?
 
-Niet met zekerheid. YL, tien cijfers en YQ is de vorm van GZYL, en geen andere vervoerder in de lijst van Peek gebruikt die. Een nummer dat met YL738 begint, schrijft Peek al op zijn vorm aan GZYL toe; bij elk ander nummer kijkt Peek eerst op de trackingpagina van GZYL of het bekend is. Met negen of elf cijfers is het niet de vorm van GZYL.
+`YL` gevolgd door tien cijfers en `YQ` is de vorm van GZYL en geen andere vervoerder in Peek gebruikt die. Begint het met `YL738`, dan herkent Peek GZYL direct; bij andere `YL…YQ`-nummers controleert Peek eerst op de trackingpagina van GZYL of het nummer bekend is.
 
-### Waarom staat mijn GZYL-pakket op bezorgd terwijl er niets kwam?
+### Waarom staat mijn GZYL-pakket op `Delivered` terwijl er niets is aangekomen?
 
-Die stap kan deel uitmaken van de planning van GZYL. GZYL schrijft een groot deel van de reis van een pakket vooraf en laat die eindigen op `Delivered`, en zulke stappen zijn een planning, geen scans. Peek telt die stappen van de trackingpagina van GZYL niet als scans, `Delivered` inbegrepen, en onder een "Delivered" die het wel toont, meldt het dat de tracking van GZYL een vast schema volgt. Laat de verkoper weten dat het pakket niet is aangekomen en vraag welk bedrijf het bezorgt.
+GZYL schrijft een groot deel van het traject vooraf uit en sluit die planning af met een automatische `Delivered`-stap — dat is geen echte bezorgscan. Peek houdt vooraf geschreven stappen tegen en meldt onder een getoonde bezorging dat GZYL een vast schema volgt; neem bij uitblijven direct contact op met de verkoper.
 
-### Wie bezorgt een GZYL-pakket in België of Nederland?
+### Wie bezorgt een GZYL-pakket in Nederland of België?
 
-Peek weet het niet: de stappen van GZYL in je land noemen geen bedrijf. Vraag de verkoper welk bedrijf je bestelling bezorgt en wat het trackingnummer daarvan is, en voeg dat nummer in Peek toe als apart pakket. Alleen in Zwitserland en Liechtenstein kan Peek een GZYL-pakket zelf aan Swiss Post doorgeven.
+GZYL noemt geen Nederlandse of Belgische bezorger in zijn tracking (alleen in Zwitserland en Liechtenstein kan Peek doorgeven aan Swiss Post). Vraag de verkoper welke bezorgdienst het laatste stuk rijdt en om het lokale trackingnummer, zodat je dat apart in Peek kunt volgen.
+
+### Moet ik douanekosten of € 2 afhandelingsvergoeding betalen?
+
+Bij online bestellingen van buiten de EU int de douane sinds 1 november 2026 € 2 afhandelingsvergoeding per productcategorie (HS-code), naast eventuele € 3 invoerrechten (tot € 150) en btw. Als de webshop dit nog niet bij het afrekenen rekende, kan de Nederlandse bezorger je erom vragen.
 
 :::sources
 - [广州云链货运代理有限公司 (GZYL): home (in het Chinees)](http://yunlianhouyun.com/) – bedrijfsnaam, Chinese website, pakketzoeker (小包查询) naar de trackingpagina van GZYL

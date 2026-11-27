@@ -1,12 +1,12 @@
 ---
 title: Seguimento DPD Ireland: estados, pontos Pickup e contacto
-description: Segue uma encomenda da DPD Ireland: número de 9 dígitos, significado dos estados, alterar a entrega, pontos Pickup, alfândega e contacto.
+description: Seguimento DPD Ireland: número de 9 ou 10 dígitos, estados em inglês, janela Predict de 1 hora, pontos Pickup, alfândega da Irlanda (3 € e 2 €) e contacto.
 slug: seguimento-dpd-ireland
 published: 2026-11-23
-updated: 2026-11-23
+updated: 2026-11-27
 ---
 
-A DPD Ireland entrega encomendas em toda a ilha da Irlanda, a Norte e a Sul, a partir de 38 depósitos e da sede em Athlone. Para acompanhar um envio, introduz o número na [página de seguimento da DPD Ireland](https://www.dpd.ie/tracking/). O número vem no e-mail que a DPD envia ao recolher a encomenda e normalmente também no e-mail de expedição da loja.
+A DPD Ireland entrega encomendas em toda a ilha da Irlanda (Norte e Sul) a partir de 38 depósitos e da sede em Athlone, com quase 600 pontos Pickup. Para seguir a tua encomenda, cola o número de 9 ou 10 dígitos na caixa acima ou introduz o código na [página de seguimento da DPD Ireland](https://www.dpd.ie/tracking/); o número chega no e-mail da DPD após a recolha e no e-mail de envio da loja.
 
 ## Onde está o meu número de seguimento da DPD Ireland?
 
@@ -88,19 +88,23 @@ Um número de 9 ou 10 dígitos corresponde à DPD Ireland, mas também a outras 
 
 ### A DPD Ireland tem número de telefone de apoio ao cliente?
 
-Não há nenhum número geral publicado em dpd.ie. Usa o formulário web ou o chatbot, ou liga para o depósito indicado no seguimento através do Depot Finder.
+Não existe número geral publicado em dpd.ie. Usa o formulário web («Ask Our Team a Question») ou o chatbot em dpd.ie (segunda a sexta 8:00–18:00, sábado 8:00–10:30, hora da Irlanda), ou contacta o depósito indicado no seguimento através do [Depot Finder](https://www.dpd.ie/dpd-depot-finder/).
 
-### Porque é que o meu seguimento da DPD Ireland não funciona?
+### Porque é que o meu número de seguimento da DPD Ireland não funciona?
 
-O seguimento só aceita dígitos: introduz o número sem espaços. Se continuar sem resultados, a encomenda pode ainda não ter chegado ao centro de triagem da DPD ou o número pode ter mais de seis meses.
+Introduz apenas dígitos sem espaços (normalmente 9 dígitos, por vezes 10; códigos de 14 dígitos pertencem a outras redes DPD como a DPD UK). Se aparecer `We couldn't locate the consignment number.`, a encomenda pode ainda não ter chegado ao centro de triagem da DPD ou o número pode ter mais de seis meses.
 
-### Os SMS da DPD Ireland são verdadeiros?
+### Os SMS de pagamento aduaneiro da DPD Ireland são verdadeiros?
 
-A DPD Ireland envia SMS no dia da entrega e quando há encargos aduaneiros a pagar. Também existem mensagens fraudulentas: um pedido aduaneiro legítimo vem de um endereço dpd.ie e indica o remetente.
+A DPD Ireland envia SMS ou e-mail no dia da entrega e quando há encargos aduaneiros a pagar por compras fora da UE (3 € de direitos até 150 € e 2 € de taxa de tratamento por tipo de produto, com 5 dias úteis para pagar). Como existem burlas, confirma que o e-mail vem de `dpd.ie`, apresenta a imagem da DPD Ireland e indica o nome do remetente.
 
 ### Quanto tempo demora a DPD a entregar na Irlanda?
 
-Depende do serviço escolhido pelo remetente. A DPD Ireland oferece entrega no dia seguinte em todo o país e serviços de um ou dois dias para o Reino Unido.
+Depende do serviço escolhido pelo remetente: a DPD Ireland oferece entrega no dia seguinte em toda a Irlanda e serviços de um ou dois dias para o Reino Unido, com janela estimada de uma hora no dia da entrega através do Predict.
+
+### Posso mudar a morada ou redirecionar a encomenda da DPD Ireland para um ponto Pickup?
+
+Sim. No MyDPD ou na app DPD Ireland (Parcel Wizard) podes alterar a morada até ao dia anterior à entrega prevista, reagendar o dia, autorizar um local seguro ou redirecionar para um dos quase 600 pontos Pickup da rede.
 
 :::sources
 - [DPD Ireland: Track Parcels in Realtime](https://www.dpd.ie/track-my-parcel/) – número de encomenda, notificações, janela de uma hora, entrega mesmo ausente, alterar morada, reagendar, pontos Pickup, chatbot

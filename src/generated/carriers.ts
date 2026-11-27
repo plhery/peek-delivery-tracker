@@ -15598,6 +15598,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#cc2027"
     },
     {
+      "id": "lso",
+      "catalog": "lso",
+      "slug": "lso-tracking",
+      "title": "Rastreamento LSO: código airbill, status e atendimento",
+      "name": "LSO",
+      "color": "#0047ba"
+    },
+    {
       "id": "gofo",
       "catalog": "gofo",
       "slug": "rastreamento-gofo-express",
@@ -16332,6 +16340,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Andreani: códigos e status na Argentina",
       "name": "Andreani",
       "color": "#d71920"
+    },
+    {
+      "id": "mainfreight",
+      "catalog": "mainfreight",
+      "slug": "mainfreight-tracking",
+      "title": "Rastreamento Mainfreight: códigos de remessa e status",
+      "name": "Mainfreight",
+      "color": "#005eb8"
     },
     {
       "id": "spx-sg",
@@ -20388,6 +20404,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#cc2027"
     },
     {
+      "id": "lso",
+      "catalog": "lso",
+      "slug": "lso-tracking",
+      "title": "LSO 快递查询：空运单号、状态与派送协助",
+      "name": "LSO",
+      "color": "#0047ba"
+    },
+    {
       "id": "gofo",
       "catalog": "gofo",
       "slug": "gofo-express-meiguo-chaxun",
@@ -21138,6 +21162,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Andreani 物流查询：阿根廷运单号与状态说明",
       "name": "Andreani",
       "color": "#d71920"
+    },
+    {
+      "id": "mainfreight",
+      "catalog": "mainfreight",
+      "slug": "mainfreight-tracking",
+      "title": "Mainfreight 物流查询：运单号与货运状态详解",
+      "name": "Mainfreight",
+      "color": "#005eb8"
     },
     {
       "id": "spx-sg",

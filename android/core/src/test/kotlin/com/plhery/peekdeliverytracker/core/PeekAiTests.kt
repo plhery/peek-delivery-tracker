@@ -306,6 +306,17 @@ class PeekAiTests {
     }
 
     @Test
+    fun writesA12HourTimeOverTwoLinesItsDayPeriodWhole() {
+        assertEquals("10:00\nAM", peekAiStackedClock("10:00 AM"))
+        assertEquals("12:00\nPM", peekAiStackedClock("12:00\u202FPM"))
+        assertEquals("10:00\na.\u00A0m.", peekAiStackedClock("10:00 a. m."))
+        assertEquals("上午\n10:00", peekAiStackedClock("上午10:00"))
+        // A 24-hour time and a day of the month keep to their one line.
+        assertNull(peekAiStackedClock("10:00"))
+        assertNull(peekAiStackedClock("27"))
+    }
+
+    @Test
     fun showsTheHoursOutForDeliveryTwoToACellThePastOnesFadedAndUnshaded() {
         val strip = requireNotNull(english.peekAiStrip(byTime, now))
         assertEquals(PeekAiStrip.Kind.Hours, strip.kind)

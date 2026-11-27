@@ -201,6 +201,25 @@ class DeliveredCelebrationTest {
         assertEquals(1, bursts)
     }
 
+    /** The last parcel on its way delivered: "Everything has arrived" waits for its card to leave, rather than stand over it. */
+    @Test
+    fun everythingHasArrivedWaitsForTheLastCardHeldToLeave() {
+        val trainers = before.first { it.label.startsWith("New trainers") }
+        val arrived = before.filter { it.isDelivered }
+        show(arrived + trainers)
+        assertFalse(shows(ALL_ARRIVED))
+        val nextTop = top("New trainers")
+        deliver(arrived + after.first { it.id == trainers.id })
+
+        // Postmarked and read in its place, the card is the list's last on its way.
+        advance(400)
+        assertTrue(shows(DELIVERED_PAPER))
+        assertFalse(shows(ALL_ARRIVED))
+        assertEquals(nextTop, top("New trainers"), 0.5f)
+        // Once it has left, every parcel has arrived.
+        advanceUntil(3) { shows(ALL_ARRIVED) }
+    }
+
     @Test
     fun underReduceMotionOrWithNobodyLookingTheCardsTakeTheirPlacesAtOnce() {
         show(reduceMotion = true)

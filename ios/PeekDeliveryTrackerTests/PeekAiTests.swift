@@ -339,6 +339,29 @@ final class PeekAiTests: XCTestCase {
         XCTAssertNil(english.peekAiStrip(notToday, now: now))
     }
 
+    func testA12HourTimeIsWrittenOverTwoLinesItsDayPeriodWhole() {
+        XCTAssertEqual(peekAiStackedClock("10:00 AM"), "10:00\nAM")
+        XCTAssertEqual(peekAiStackedClock("12:00\u{202F}PM"), "12:00\nPM")
+        XCTAssertEqual(peekAiStackedClock("10:00 a. m."), "10:00\na.\u{00A0}m.")
+        XCTAssertEqual(peekAiStackedClock("上午10:00"), "上午\n10:00")
+        // A 24-hour time and a day of the month keep to their one line.
+        XCTAssertNil(peekAiStackedClock("10:00"))
+        XCTAssertNil(peekAiStackedClock("27"))
+    }
+
+    /// "10:00 AM" in bold at xxLarge: shrunk on one line where 70 % of it fits, over two lines where even that has no
+    /// room, never cut.
+    func testAnHourWithNoRoomOnOneLineEvenShrunkStandsOverItsDayPeriod() {
+        func height(_ width: CGFloat) -> CGFloat {
+            let cell = PeekAiCellMain(words: "10:00 AM").font(.footnote.weight(.bold)).lineLimit(1).minimumScaleFactor(0.7)
+                .dynamicTypeSize(.xxLarge)
+            return UIHostingController(rootView: cell).sizeThatFits(in: CGSize(width: width, height: 1_000)).height
+        }
+        let whole = height(300)
+        XCTAssertLessThan(height(62), whole * 1.2)
+        XCTAssertGreaterThan(height(40), whole * 1.6)
+    }
+
     /// The hours are the parcel's wall clock: out in Tokyo at 14:30 there, the morning hours have gone by and 14:00 and
     /// 16:00 are still to come, whatever this device's zone.
     func testTheStripTellsTheHoursGoneByOnTheParcelsClock() throws {

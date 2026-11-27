@@ -1165,9 +1165,10 @@ private struct DeliveryListView: View {
                 actions: { Button(localizer.text("view.clear")) { clearFilters() } }
                     .frame(maxWidth: .infinity).padding(.vertical, 32)
             // Someone without an account is not told to track another parcel while the row under the cards speaks to
-            // them; once they hid it, they are, as with an account.
+            // them; once they hid it, they are, as with an account. A card held where it was on its way, delivered,
+            // is still on its way to the list: the words wait for it to leave.
             } else if !(session.isGuest && accountInvitation.stands), !hasCustomView, store.errorMessage == nil,
-                      store.parcels.allSatisfy(\.isDelivered), store.shopWaits.waits.isEmpty {
+                      delivered.arranged(store.parcels).allSatisfy(\.isDelivered), store.shopWaits.waits.isEmpty {
                 VStack(spacing: 12) {
                     Image(systemName: "checkmark").font(.system(size: 36, weight: .ultraLight))
                         .foregroundStyle(Brand.secondaryText).padding(.bottom, 6).accessibilityHidden(true)

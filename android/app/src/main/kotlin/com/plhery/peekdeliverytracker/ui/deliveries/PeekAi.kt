@@ -8,9 +8,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -50,6 +53,7 @@ import androidx.compose.ui.layout.IntrinsicMeasurable
 import androidx.compose.ui.layout.IntrinsicMeasureScope
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.Measurable
+import androidx.compose.ui.layout.MeasurePolicy
 import androidx.compose.ui.layout.MeasureResult
 import androidx.compose.ui.layout.MeasureScope
 import androidx.compose.ui.layout.MultiContentMeasurePolicy
@@ -64,6 +68,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Constraints
@@ -82,6 +87,7 @@ import com.plhery.peekdeliverytracker.core.peekAiChanges
 import com.plhery.peekdeliverytracker.core.peekAiClaim
 import com.plhery.peekdeliverytracker.core.peekAiHeading
 import com.plhery.peekdeliverytracker.core.peekAiReason
+import com.plhery.peekdeliverytracker.core.peekAiStackedClock
 import com.plhery.peekdeliverytracker.core.peekAiRecord
 import com.plhery.peekdeliverytracker.core.peekAiStrip
 import com.plhery.peekdeliverytracker.core.peekAiStripSpoken
@@ -531,13 +537,16 @@ private fun PeekAiStripBox(strip: PeekAiStrip, carrier: String) {
         // Five hours side by side, "10:00 AM" among them, have no room for larger type: TalkBack reads them in words.
         CappedDynamicTypeSize(DynamicTypeSize.XXLarge) {
             val type = PeekTheme.type
-            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            // Where an hour may stand over two lines, every cell is as tall as the tallest.
+            val even = strip.cells.any { peekAiStackedClock(it.main) != null }
+            Row(if (even) Modifier.height(IntrinsicSize.Min) else Modifier, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                 for (cell in strip.cells) {
                     val shape = ContinuousRoundedShape(9.dp)
                     val likeliest = cell.level == 4
                     Column(
                         Modifier
                             .weight(1f)
+                            .then(if (even) Modifier.fillMaxHeight() else Modifier)
                             .alpha(if (cell.past) 0.45f else 1f)
                             .background(stripFill(cell.level), shape)
                             .then(
@@ -549,7 +558,7 @@ private fun PeekAiStripBox(strip: PeekAiStrip, carrier: String) {
                             )
                             .padding(top = 5.dp, bottom = 6.dp),
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(1.dp),
+                        verticalArrangement = Arrangement.spacedBy(1.dp, Alignment.CenterVertically),
                     ) {
                         // On the two strongest shades the weekday takes the ink, which the soft grey would lack contrast against.
                         if (cell.over.isNotEmpty()) {
@@ -603,18 +612,72 @@ private fun stripFill(level: Int): Color {
 private val FILLS = floatArrayOf(0f, 0.05f, 0.11f, 0.19f, 0.30f)
 private val HIGH_CONTRAST_FILLS = floatArrayOf(0f, 0.08f, 0.15f, 0.23f, 0.32f)
 
-/** A strip cell's words, on one line that shrinks to 70 % before it ends in an ellipsis, as the iPhone's. */
+/**
+ * A strip cell's words, on one line that shrinks to 70 % before it ends in an ellipsis, as the iPhone's. A 12-hour time
+ * that would still be cut, "10:00 AM" in bold at a large text size, stands over its "AM" on two lines instead.
+ */
 @Composable
 private fun CellWords(text: String, style: TextStyle) {
     val probe = LocalPeekAiCellWords.current
-    BasicText(
-        text,
-        style = style,
-        overflow = TextOverflow.Ellipsis,
-        maxLines = 1,
-        autoSize = MinimumScale(style.fontSize, 0.7f, 0.1.sp),
-        onTextLayout = { probe?.invoke(it) },
+    val stacked = remember(text) { peekAiStackedClock(text) }
+    val oneLine = @Composable {
+        BasicText(
+            text,
+            style = style,
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1,
+            autoSize = MinimumScale(style.fontSize, CELL_SHRINK, 0.1.sp),
+            onTextLayout = { probe?.invoke(it) },
+        )
+    }
+    if (stacked == null) return oneLine()
+    val measurer = rememberTextMeasurer()
+    val policy = remember(measurer, text, style) {
+        val shrunk = style.copy(fontSize = style.fontSize * CELL_SHRINK)
+        OneLineOrTwo { width -> measurer.measure(text, shrunk, softWrap = false, maxLines = 1).size.width <= width }
+    }
+    Layout(
+        content = {
+            oneLine()
+            BasicText(
+                stacked,
+                style = style.copy(textAlign = TextAlign.Center),
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 2,
+                autoSize = MinimumScale(style.fontSize, CELL_SHRINK, 0.1.sp),
+                onTextLayout = { probe?.invoke(it) },
+            )
+        },
+        measurePolicy = policy,
     )
+}
+
+/** How far a strip cell's words shrink to keep to their line. */
+private const val CELL_SHRINK = 0.7f
+
+/**
+ * Lays out the first of its two views, the words on one line, where they fit at `fits` width once shrunk as far as they
+ * may; otherwise the second, the words over two lines. The other is neither measured nor drawn.
+ */
+private class OneLineOrTwo(private val fits: (Int) -> Boolean) : MeasurePolicy {
+    private fun <T> pick(views: List<T>, width: Int): T = views[if (fits(width)) 0 else 1]
+
+    override fun MeasureScope.measure(measurables: List<Measurable>, constraints: Constraints): MeasureResult {
+        val placeable = pick(measurables, constraints.maxWidth).measure(constraints)
+        return layout(placeable.width, placeable.height) { placeable.place(0, 0) }
+    }
+
+    override fun IntrinsicMeasureScope.minIntrinsicHeight(measurables: List<IntrinsicMeasurable>, width: Int) =
+        pick(measurables, width).minIntrinsicHeight(width)
+
+    override fun IntrinsicMeasureScope.maxIntrinsicHeight(measurables: List<IntrinsicMeasurable>, width: Int) =
+        pick(measurables, width).maxIntrinsicHeight(width)
+
+    override fun IntrinsicMeasureScope.minIntrinsicWidth(measurables: List<IntrinsicMeasurable>, height: Int) =
+        measurables[1].minIntrinsicWidth(height)
+
+    override fun IntrinsicMeasureScope.maxIntrinsicWidth(measurables: List<IntrinsicMeasurable>, height: Int) =
+        measurables[0].maxIntrinsicWidth(height)
 }
 
 /** Told how a strip cell's words are laid out: the tests check they keep to one line, whole. */

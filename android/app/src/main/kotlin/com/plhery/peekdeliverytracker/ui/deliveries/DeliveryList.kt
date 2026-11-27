@@ -617,9 +617,12 @@ private fun listEntries(
             if (shopWaits.isEmpty()) first("empty", "empty", ListItem.Empty)
         } else if (layout.visible.isEmpty()) {
             first("noResults", "noResults", ListItem.NoResults)
-        } else if ((!guest || !state.source.accountInvitation.stands) && !custom && notice == null && parcels.all { it.isDelivered } && shopWaits.isEmpty()) {
+        } else if ((!guest || !state.source.accountInvitation.stands) && !custom && notice == null &&
+            state.hold.arranged(parcels).all { it.isDelivered } && shopWaits.isEmpty()
+        ) {
             // Someone without an account is not told to track another parcel while the row under the cards speaks to
-            // them; once they closed it, they are.
+            // them; once they closed it, they are. A card held where it was on its way, delivered, is still on its way
+            // to the list: the words wait for it to leave.
             first("allArrived", "allArrived", ListItem.AllArrived)
         }
     }

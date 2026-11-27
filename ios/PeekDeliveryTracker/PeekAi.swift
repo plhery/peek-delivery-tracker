@@ -144,6 +144,22 @@ struct PeekAiStrip: Equatable {
     let cells: [Cell]
 }
 
+/// A 12-hour time written over two lines, for a strip cell with no room for it on one: the time over its "AM" or "PM",
+/// or under "上午" in Chinese, each line kept whole ("a. m." stays together). Nil for words that hold no such time: a
+/// day of the month, a 24-hour time.
+func peekAiStackedClock(_ words: String) -> String? {
+    guard let time = words.range(of: #"\d{1,2}:\d{2}"#, options: .regularExpression) else { return nil }
+    func whole(_ part: Substring) -> String {
+        part.components(separatedBy: .whitespaces).filter { !$0.isEmpty }.joined(separator: "\u{00A0}")
+    }
+    let before = whole(words[..<time.lowerBound]), after = whole(words[time.upperBound...])
+    switch (before.isEmpty, after.isEmpty) {
+    case (true, false): return "\(words[time])\n\(after)"
+    case (false, true): return "\(before)\n\(words[time])"
+    default: return nil
+    }
+}
+
 /// Under this chance a cell has no shade: a day or two hours that seldom see a delivery.
 private let peekAiUnshadedBelow = 0.03
 

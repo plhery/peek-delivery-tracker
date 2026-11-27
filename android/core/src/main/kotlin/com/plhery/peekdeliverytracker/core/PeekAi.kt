@@ -331,6 +331,23 @@ data class PeekAiStrip(val kind: Kind, val cells: List<PeekAiCell>) {
     enum class Kind { Days, Hours }
 }
 
+/**
+ * A 12-hour time written over two lines, for a strip cell with no room for it on one: the time over its "AM" or "PM",
+ * or under "上午" in Chinese, each line kept whole ("a. m." stays together). Null for words that hold no such time: a
+ * day of the month, a 24-hour time.
+ */
+fun peekAiStackedClock(words: String): String? {
+    val time = Regex("""\d{1,2}:\d{2}""").find(words) ?: return null
+    fun whole(part: String) = part.split(Regex("""[\s\p{Z}]+""")).filter { it.isNotEmpty() }.joinToString("\u00A0")
+    val before = whole(words.substring(0, time.range.first))
+    val after = whole(words.substring(time.range.last + 1))
+    return when {
+        before.isEmpty() && after.isNotEmpty() -> "${time.value}\n$after"
+        before.isNotEmpty() && after.isEmpty() -> "$before\n${time.value}"
+        else -> null
+    }
+}
+
 /** Under this chance a cell has no shade: a day or two hours that seldom see a delivery. */
 private const val UNSHADED_BELOW = 0.03
 

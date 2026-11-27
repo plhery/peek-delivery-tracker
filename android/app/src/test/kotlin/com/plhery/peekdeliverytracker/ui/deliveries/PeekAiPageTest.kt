@@ -224,6 +224,37 @@ class PeekAiPageTest {
         assertEquals(atXxLarge, cells.mapValues { it.value.layoutInput.style.fontSize })
     }
 
+    /**
+     * At the largest text on a phone 412 wide, an hour with no room on one line even shrunk, as the likeliest in bold,
+     * stands over its "AM" or "PM" on two lines instead of ending in an ellipsis.
+     */
+    @Test
+    fun anHourWithNoRoomOnOneLineStandsOverItsDayPeriod() {
+        val reader = Localizer(AppLanguage.En, variant = "android").apply { clockPreference = ClockPreference.TwelveHour }
+        val cells = mutableMapOf<String, TextLayoutResult>()
+        compose.setContent {
+            PeekTheme(dynamicTypeSize = DynamicTypeSize.Accessibility2, carrierIdentities = DemoCards.identities) {
+                ProvideLocalizer(reader) {
+                    CompositionLocalProvider(LocalPeekAiCellWords provides { cells[it.layoutInput.text.text] = it }) {
+                        Box(Modifier.width(412.dp)) {
+                            PeekAiSheet(
+                                DemoCards.parcel("Belgian chocolate"), ai("Belgian chocolate"), carrier("Belgian chocolate"), shown = true, now = CAPTURED,
+                                onShow = {}, close = {},
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        compose.waitForIdle()
+        val stacked = cells.filterKeys { Regex("""\d{1,2}:\d\d\n[AP]M""").matches(it) }
+        assertTrue(cells.keys.toString(), stacked.isNotEmpty())
+        for ((text, words) in cells) {
+            assertFalse(text, words.isLineEllipsized(words.lineCount - 1) || words.didOverflowWidth)
+        }
+        for ((text, words) in stacked) assertEquals(text, 2, words.lineCount)
+    }
+
     @Test
     fun aListLeftOpenLetsTheChocolatesHourGoAtThatHour() {
         show()

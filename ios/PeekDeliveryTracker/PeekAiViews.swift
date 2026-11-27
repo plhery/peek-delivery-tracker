@@ -288,6 +288,45 @@ struct PeekAiSheet: View {
     }
 }
 
+/// How far a strip cell's words shrink to keep to their line.
+private let peekAiCellShrink: CGFloat = 0.7
+
+/// A strip cell's bold line, on one line that shrinks to 70 % where it must, as the cell's other words. A time that
+/// still has no room, "10:00 AM" in bold at a large text size, stands over its "AM" on two lines instead of ending in
+/// an ellipsis.
+struct PeekAiCellMain: View {
+    let words: String
+
+    var body: some View {
+        if let stacked = peekAiStackedClock(words) {
+            ViewThatFits(in: .horizontal) {
+                ShrinkingWidth(share: peekAiCellShrink) { Text(words) }
+                Text(stacked).lineLimit(2).multilineTextAlignment(.center)
+            }
+        } else {
+            Text(words)
+        }
+    }
+}
+
+/// Gives ViewThatFits its one view's ideal width at `share` of the view's own: the width it takes once shrunk as far
+/// as its minimum scale lets it. Laid out, the view has the width it is offered.
+private struct ShrinkingWidth: Layout {
+    let share: CGFloat
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        guard let view = subviews.first else { return .zero }
+        guard proposal.width == nil else { return view.sizeThatFits(proposal) }
+        let ideal = view.sizeThatFits(ProposedViewSize(width: nil, height: proposal.height))
+        // A point spare: a font shrunk to the last step still rounds its glyphs.
+        return CGSize(width: (ideal.width * share).rounded(.up) + 1, height: ideal.height)
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        subviews.first?.place(at: CGPoint(x: bounds.midX, y: bounds.midY), anchor: .center, proposal: ProposedViewSize(bounds.size))
+    }
+}
+
 /// The days Peek AI expects, each shaded by its chance, the carrier's date ringed; or, out for delivery, the hours, the
 /// past ones faded.
 private struct PeekAiStripView: View {
@@ -321,13 +360,16 @@ private struct PeekAiStripView: View {
                                 .font(.caption2.weight(cell.level == 4 ? .semibold : .regular))
                                 .foregroundStyle(cell.level >= 3 ? Brand.ink : soft)
                         }
-                        Text(cell.main).font(.footnote.weight(cell.level == 4 ? .bold : .medium)).foregroundStyle(Brand.ink)
+                        PeekAiCellMain(words: cell.main)
+                            .font(.footnote.weight(cell.level == 4 ? .bold : .medium))
+                            .foregroundStyle(Brand.ink)
                     }
                     .lineLimit(1)
-                    .minimumScaleFactor(0.7)
+                    .minimumScaleFactor(peekAiCellShrink)
                     .padding(.top, 5)
                     .padding(.bottom, 6)
-                    .frame(maxWidth: .infinity)
+                    // Every cell as tall as the tallest, which may hold a time over two lines.
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(fill(cell.level), in: RoundedRectangle(cornerRadius: 9))
                     .overlay {
                         if cell.carrier {
@@ -337,6 +379,7 @@ private struct PeekAiStripView: View {
                     .opacity(cell.past ? 0.45 : 1)
                 }
             }
+            .fixedSize(horizontal: false, vertical: true)
             // Five hours side by side, "10:00 AM" among them, have no room for larger type: VoiceOver reads them in words.
             .dynamicTypeSize(...DynamicTypeSize.xxLarge)
             .accessibilityHidden(true)

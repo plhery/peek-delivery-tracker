@@ -19530,6 +19530,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffdd00"
     },
     {
+      "id": "chronopost",
+      "catalog": "chronopost",
+      "slug": "chronopost-otslezhivanie",
+      "title": "Отслеживание Chronopost: номера, статусы и пункты Pickup",
+      "name": "Chronopost",
+      "color": "#0056a7"
+    },
+    {
       "id": "amazon-logistics",
       "catalog": "amazon-logistics",
       "slug": "amazon-logistics-otslezhivanie",
@@ -19544,6 +19552,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Отслеживание Allegro One: One Box, One Punkt и Kurier",
       "name": "Allegro One",
       "color": "#006d57"
+    },
+    {
+      "id": "omniva",
+      "catalog": "omniva",
+      "slug": "omniva-otslezhivanie",
+      "title": "Отслеживание Omniva: коды JJEE, статусы и пакоматы",
+      "name": "Omniva",
+      "color": "#f86300"
     },
     {
       "id": "nova-poshta",
@@ -22192,6 +22208,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "sv": [
     {
+      "id": "orlen-paczka",
+      "catalog": "orlen-paczka",
+      "slug": "orlen-paczka-spara-paket",
+      "title": "ORLEN Paczka spårning: 210-nummer, statusar och ombud",
+      "name": "ORLEN Paczka",
+      "color": "#db3830"
+    },
+    {
       "id": "postnord",
       "catalog": "postnord",
       "slug": "postnord-spara-paket",
@@ -22508,6 +22532,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ba1b02"
     },
     {
+      "id": "orlen-paczka",
+      "catalog": "orlen-paczka",
+      "slug": "orlen-paczka-csomagkovetes",
+      "title": "ORLEN Paczka csomagkövetés: 210-es számok és automaták",
+      "name": "ORLEN Paczka",
+      "color": "#db3830"
+    },
+    {
+      "id": "fan-courier",
+      "catalog": "fan-courier",
+      "slug": "fan-courier-csomagkovetes",
+      "title": "FAN Courier csomagkövetés: AWB szám, státuszok és FANbox",
+      "name": "FAN Courier",
+      "color": "#0f2345"
+    },
+    {
       "id": "express-one",
       "catalog": "express-one",
       "slug": "express-one-csomagkovetes",
@@ -22620,6 +22660,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Urmărire colet FAN Courier: AWB, statusuri și FANbox",
       "name": "FAN Courier",
       "color": "#0f2345"
+    },
+    {
+      "id": "dao",
+      "catalog": "dao",
+      "slug": "dao-urmarire-colet",
+      "title": "Urmărire DAO Danemarca: coduri, statusuri și daoSHOP",
+      "name": "DAO",
+      "color": "#e30613"
     },
     {
       "id": "j-and-t-de",
@@ -22876,6 +22924,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#4e79e1"
     },
     {
+      "id": "russian-post",
+      "catalog": "russian-post",
+      "slug": "russian-post-pracenje-posiljke",
+      "title": "Pošta Rusije (Russian Post) praćenje: RU i 80 brojevi",
+      "name": "Russian Post",
+      "color": "#1928dc"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-pracenje-posiljke",
@@ -23052,6 +23108,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GLS відстеження посилки в Німеччині: статуси, ParcelShop",
       "name": "GLS Germany",
       "color": "#ffdd00"
+    },
+    {
+      "id": "dhl-ecommerce-es",
+      "catalog": "dhl-ecommerce-es",
+      "slug": "dhl-ecommerce-iberia-vidstezhennia",
+      "title": "Відстеження DHL eCommerce Iberia: статуси та ServicePoint",
+      "name": "DHL eCommerce Iberia",
+      "color": "#ffcc00"
     },
     {
       "id": "meest",

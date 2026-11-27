@@ -1,13 +1,13 @@
 ---
 title: Colis non retiré : combien de temps est-il gardé, et après ?
-description: Combien de jours ton colis reste en point relais, au bureau de poste ou en consigne, en France, en Belgique et en Suisse : peux-tu prolonger, es-tu remboursé ?
+description: Colis en instance au point de retrait : délai chez La Poste, Relais Colis (9 jours), DPD, Mondial Relay, bpost et La Poste suisse (prolongation en ligne).
 slug: colis-non-retire
 picture: Une consigne à colis avec une porte ouverte, Pip qui attend dans le casier, et un calendrier aux deux derniers jours entourés.
 published: 2026-10-14
-updated: 2026-11-09
+updated: 2026-11-27
 ---
 
-Un colis non retiré au bureau de poste, en point relais ou en consigne repart chez l'expéditeur une fois son dernier jour passé. Les bureaux de poste et les points de retrait le gardent le plus longtemps (14 jours calendaires dans un Point d'enlèvement bpost, par exemple), les consignes souvent 5 jours seulement, et c'est la date de ton avis de passage, de ton SMS ou de ton e-mail qui compte. Si tu l'as raté, demande à la boutique de te rembourser ou de te le renvoyer.
+Un colis en instance au bureau de poste, en point relais ou en consigne repart chez l'expéditeur une fois le délai de retrait passé : 9 jours calendaires chez Relais Colis et DPD Pickup en France, 14 jours au Point d'enlèvement bpost en Belgique, 7 jours en général à La Poste suisse (prolongeable en ligne sur l'invitation à retirer) et souvent 5 jours seulement en consigne. La date de ton avis de passage, SMS ou e-mail fait foi ; si tu l'as ratée, demande à la boutique un remboursement ou un renvoi.
 
 Pas reçu de code, ou la consigne était pleine ? C'est dans [consigne à colis](guide:parcel-lockers).
 
@@ -29,7 +29,7 @@ Il repart chez l'expéditeur, en général par le même réseau, pas chez toi.
 
 Le renvoyer ou te rembourser, c'est ensuite l'affaire de la boutique, pas du transporteur. Une fois qu'il est sur le chemin du retour, [colis retourné à l'expéditeur](guide:returned-to-sender) explique le trajet et ce qu'il faut demander au vendeur.
 
-## Combien de temps un colis reste-t-il au point relais ou à la poste ?
+## Délai de retrait : combien de temps un colis reste-t-il au point relais ou à la poste ?
 
 Les consignes te laissent peu de temps, les bureaux de poste bien plus.
 
@@ -49,7 +49,7 @@ Un même transporteur peut avoir plusieurs délais selon l'endroit : chez bpost,
 
 Les jours calendaires comptent les week-ends et les jours fériés ; les jours ouvrés, non. La date de ton avis passe avant n'importe quel tableau, celui-ci compris.
 
-## Pourquoi mon colis est-il en instance ou en attente de retrait ?
+## « Colis en instance au point de retrait » : pourquoi et combien de temps ?
 
 En général parce que la livraison n'a pas pu se faire, ou parce que tu as choisi un point relais ou une consigne à la commande. Après un passage manqué, le suivi de La Poste peut l'annoncer ainsi : « Nous sommes passés mais nous n'avons pu vous remettre votre colis. Il va être acheminé vers votre point de retrait. »
 

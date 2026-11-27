@@ -1,15 +1,15 @@
 ---
 title: What time do parcels get delivered? Carrier by carrier
-description: What time USPS, UPS, Amazon, Royal Mail, Evri, Canada Post and others deliver until, who comes on Saturday and Sunday, and why late evenings are normal.
+description: What time USPS (5 p.m.), UPS (7 p.m.), Royal Mail (4.30 p.m.), Evri (8 p.m.), InPost UK (9 p.m.), Amazon (10 p.m.) and Canada Post deliver until, plus weekends.
 slug: what-time-do-parcels-get-delivered
 picture: A clock at eight in the evening under a crescent moon, a calendar with its weekends marked, a van with its headlights on, and Pip watching from a window.
 published: 2026-10-14
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Parcels get delivered any time from early morning to late evening, and almost no carrier promises you an hour. USPS aims to finish by 5 p.m., UPS delivers to homes from 9 a.m. to 7 p.m., Evri from 8 a.m. to 8 p.m., and Amazon brings UK Same-Day orders by 10 p.m. Saturday is a normal delivery day for most of them; Sunday usually depends on the service the sender paid for.
+Parcels usually arrive between morning and early evening, though some carriers keep delivering until 8 to 10 p.m. and almost none promise an exact hour. USPS aims to finish by 5 p.m. (sometimes later), UPS delivers to US homes from 9 a.m. to 7 p.m., Royal Mail usually by 4.30 p.m., Evri from 8 a.m. to 8 p.m., InPost UK from 7 a.m. to 9 p.m., and Amazon UK Same-Day by 10 p.m. Saturday is a normal delivery day for most of them; Sunday usually depends on the service the sender paid for.
 
-## What time does each carrier deliver until?
+## What time do USPS, UPS, Royal Mail, Evri and other carriers stop delivering?
 
 | Carrier | Weekdays | Saturday | Sunday |
 | --- | --- | --- | --- |

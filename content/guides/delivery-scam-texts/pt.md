@@ -1,15 +1,15 @@
 ---
 title: SMS ou e-mail falso dos CTT? Como saber se é burla
-description: Como saber se uma mensagem dos CTT, da DPD, da GLS ou da InPost é falsa, o que as transportadoras mandam mesmo e o que fazer se carregaste no link ou pagaste.
+description: Mensagem falsa ou burla dos CTT (SMS, WhatsApp ou e-mail)? Vê os sinais de fraude, o que os CTT, DPD, GLS e InPost nunca pedem e o que fazer se abriste o link.
 slug: burla-ctt-mensagem-falsa
 picture: Um telemóvel com uma mensagem com um triângulo de aviso e um anzol na ligação, uma moeda riscada e o Pip, preocupado, com uma mão de «para» no balão de fala.
 published: 2026-10-14
-updated: 2026-10-28
+updated: 2026-11-27
 ---
 
-Um SMS ou e-mail a dizer que a tua encomenda está suspensa, que falta pagar uma pequena taxa ou corrigir a morada, com um link para resolver, é quase sempre uma burla. Não toques em nada: abre tu o site ou a app da transportadora e segue a encomenda com o número de seguimento que vem no e-mail de envio da loja. Se já introduziste os dados do cartão, liga imediatamente ao teu banco, para o número que está no verso do cartão ou na app do banco.
+Uma mensagem falsa dos CTT por SMS, WhatsApp ou e-mail a dizer que a tua encomenda está suspensa, que falta pagar uma taxa ou corrigir a morada, com um link para resolver, é quase sempre burla. Mesmo quando o remetente parece legítimo (com *spoofing*, mensagens falsas caem na conversa real), não toques em links: abre tu ctt.pt ou a app da transportadora e segue a encomenda com o número da loja. Se já introduziste os dados do cartão, liga imediatamente ao teu banco, para o número no verso do cartão ou na app do banco.
 
-## Como saber se uma mensagem dos CTT é burla?
+## Como saber se um SMS ou e-mail dos CTT é mensagem falsa ou burla?
 
 Uma mensagem falsa costuma juntar vários destes sinais:
 

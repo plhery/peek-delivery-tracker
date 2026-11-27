@@ -1,12 +1,12 @@
 ---
 title: YunExpress tracking: YT numbers, statuses and who delivers
-description: Track a YunExpress (Yun Express) parcel from China: the YT number, what each status means, who delivers in the UK or US and who to ask when it stalls.
+description: Track a YunExpress (YT / YT2) parcel on yuntrack.com: which carrier uses YT numbers, what statuses mean, who delivers in the UK or US and delivery times.
 slug: yunexpress-tracking
 published: 2026-10-10
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-YunExpress, also written Yun Express, is a Shenzhen logistics company that ships small parcels from China for online sellers, including sellers on Amazon, Temu, SHEIN and AliExpress. A tracking number made of YT and 16 digits is a YunExpress number. Track it on [yuntrack.com](https://www.yuntrack.com/), YunExpress's own tracking site, or paste it in the box above. YunExpress's site doesn't mention texts or emails to recipients, so look in the shop's shipping email or your order page.
+YunExpress (also written Yun Express) is the Shenzhen logistics carrier behind tracking numbers starting with `YT` — including `YT2` and `YT22` — followed by 16 digits (18 characters total), used by sellers on Amazon, Temu, SHEIN and AliExpress. Track a `YT` shipment on [yuntrack.com](https://www.yuntrack.com/), YunExpress's own tracking platform, or paste the number in the box above. YunExpress doesn't mention texts or emails to recipients, so look in the shop's shipping email or your order page.
 
 ## YunExpress tracking number: YT and 16 digits
 
@@ -88,13 +88,13 @@ When YunExpress names the local carrier and its number, Peek can follow the parc
 
 ## Questions about YunExpress tracking
 
-### What carrier uses YT tracking numbers?
+### Which carrier uses YT and YT2 tracking numbers?
 
-YunExpress, when YT is followed by 16 digits, 18 characters in all, including numbers that start with YT2 or YT22. Both YunExpress's site and yuntrack ask for a number "starting with YT". YT and 13 digits is [YTO Express](carrier:yto), another Chinese carrier. Track a YunExpress number on yuntrack.com or paste it in the box above; once a local carrier takes over, the tracking can show that carrier's number too.
+YunExpress, when `YT` is followed by 16 digits (18 characters in all), including numbers that start with `YT2` or `YT22`. Both YunExpress's site and yuntrack ask for a number "starting with YT". `YT` and 13 digits is [YTO Express](carrier:yto), another Chinese carrier. Track a YunExpress number on yuntrack.com or paste it in the box above; once a local carrier takes over, the tracking can show that carrier's number too.
 
-### What is yuntrack.com?
+### What is yuntrack.com and what industry is it in?
 
-YunExpress's own tracking site, its "Track & Trace Platform". YunExpress links it as "Tracking" from yunexpress.com, and the tracking box on yunexpress.com opens your results there. It's in English, takes YT numbers, up to 100 per search, and needs no account.
+`yuntrack.com` is the official Track & Trace Platform of YunExpress, a cross-border parcel logistics and shipping carrier founded in Shenzhen in 2014. YunExpress links to it as "Tracking" from yunexpress.com, and the tracking box on yunexpress.com opens your results there. It's in English, takes up to 100 YT numbers per search, and needs no account.
 
 ### Is YunExpress legit?
 

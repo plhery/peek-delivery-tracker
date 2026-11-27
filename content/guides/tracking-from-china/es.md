@@ -1,13 +1,13 @@
 ---
 title: Seguimiento de AliExpress, Temu y Shein: estados y retrasos
-description: Qué significan los estados de Cainiao, por qué se para el seguimiento o aparece un número CNESP, quién reparte en España, cuánto tarda y qué se paga en aduanas.
+description: Qué significa «Leaving Origin» o un envío CN / CNESP en AliExpress, Temu y Shein: estados de Cainiao, quién reparte en España, plazos y aduanas (3 € + 2 €).
 slug: seguimiento-paquete-de-china
 picture: Un avión traza un arco punteado sobre el globo, de un marcador rojo al marcador verde de casa, y Pip viaja entre dos furgonetas.
 published: 2026-10-09
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Un paquete de AliExpress, Temu o Shein cambia de manos por el camino: una empresa logística china lo saca del país, la Aduana lo revisa al llegar y [Correos](carrier:correos-spain) u otra empresa de reparto te lo entrega, a menudo con otro número. Cada una solo escanea su tramo, así que es normal pasar hasta 11 días sin un primer escaneo, no ver nada durante el vuelo y volver a esperar cuando ya ha llegado al país de destino. Sigue primero el número de la tienda y luego el de la empresa de reparto. Con el envío más barato, el seguimiento puede cortarse ahí para siempre. Lo que sale de un almacén en la UE se ahorra el vuelo desde China y el arancel.
+Un paquete de AliExpress, Temu o Shein enviado desde China (`CN`, o con código `CNESP` si lo reparte Ecoscooting) cambia de manos por el camino: una empresa logística china como Cainiao lo saca del país de origen, la Aduana lo revisa al llegar y [Correos](carrier:correos-spain) u otra empresa de reparto te lo entrega, a menudo con otro número. Cada una solo escanea su tramo, así que es normal pasar hasta 11 días sin primer escaneo, no ver nada durante el vuelo tras salir del país de origen y volver a esperar al llegar a España. Con envío económico, el seguimiento puede cortarse al llegar al transportista local; lo que sale de un almacén en la UE se ahorra el vuelo desde China y el arancel.
 
 ## ¿Es fiable el seguimiento de AliExpress?
 
@@ -41,7 +41,7 @@ Depende de la Aduana y de la empresa que lo reparte aquí (antes, a veces, lo de
 
 Si después de ese escaneo no se mueve nada, Cainiao dice que lo habitual es que el país de destino aún no haya actualizado el seguimiento, y te sugiere preguntar al operador postal de tu país: aquí, Correos. Si lo despacha Correos, en su localizador verás `Inicio de tramitación aduanera` y luego `Pendiente de tramitación aduanera` mientras el trámite no termina. Si hay algo que pagar, Correos no te lo entrega hasta que lo pagues. Cuánto puede tardar la aduana: [paquete retenido en aduanas](guide:customs).
 
-### Qué significan los otros estados
+### Qué significan «Leaving Origin», «en tránsito» y los demás estados de Cainiao
 
 Así los escriben Cainiao y las empresas chinas, en inglés:
 
@@ -59,7 +59,7 @@ Así los escriben Cainiao y las empresas chinas, en inglés:
 
 «En reparto» y los demás estados habituales: [qué significa cada estado de un envío](guide:tracking-statuses).
 
-## ¿Por qué ha cambiado mi número de seguimiento?
+## ¿Qué es un código CNESP y por qué ha cambiado mi número de seguimiento?
 
 Hay dos motivos habituales:
 

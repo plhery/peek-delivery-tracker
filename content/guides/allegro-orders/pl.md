@@ -1,15 +1,15 @@
 ---
 title: Śledzenie przesyłki Allegro: przewoźnik i problem z zakupem
-description: Kto doręcza zamówienie z Allegro, gdzie jest numer przesyłki, ile czekać na wysyłkę, jak działa Smart! i co zrobić, gdy paczka nie dotarła.
+description: Śledzenie przesyłki Allegro (Allegro Delivery, One Box, DPD, InPost, DHL, ORLEN Paczka): gdzie znaleźć numer, ile czeka paczka i jak zgłosić problem z zakupem.
 slug: sledzenie-przesylki-allegro
 picture: Paczka w otwartej skrytce One Box, telefon z zamówieniem i Pip, który biegnie ją odebrać.
 published: 2026-10-17
-updated: 2026-11-09
+updated: 2026-11-27
 ---
 
-Numer przesyłki z Allegro jest w „Moich przesyłkach” i w szczegółach zakupu w „Moich zakupach”, razem z nazwą przewoźnika. Paczkę wiezie firma z metody dostawy wybranej przy zakupie: Allegro One, InPost, DPD, DHL, ORLEN Paczka albo Poczta Polska. Gdy paczka nie dociera, piszesz do sprzedającego, potem zgłaszasz problem z zakupem, a jeśli to nie pomoże, Allegro może oddać ci pieniądze w ramach Allegro Ochrony Kupujących.
+Śledzenie przesyłki Allegro – w tym Allegro Delivery, Allegro One Box, DPD, InPost, DHL, ORLEN Paczki i Poczty Polskiej – znajdziesz w zakładce „Moje przesyłki” oraz w szczegółach zakupu w „Moich zakupach”, razem z numerem i nazwą przewoźnika. W programie Allegro Delivery (obejmującym m.in. One Box, One Punkt, DPD, DHL i ORLEN Paczkę) za proces dostawy odpowiada Allegro. Gdy paczka nie dociera, piszesz do sprzedającego, zgłaszasz problem z zakupem, a jeśli to nie pomoże, Allegro może oddać ci pieniądze w ramach Allegro Ochrony Kupujących.
 
-## Który przewoźnik doręcza moje zamówienie z Allegro?
+## Allegro Delivery, One Box i DPD: który przewoźnik doręcza zamówienie z Allegro?
 
 Ten, którego nazwę ma metoda dostawy. Sprzedający decyduje, jakie metody udostępnia w ofercie, a ty wybierasz jedną w formularzu dostawy i płatności. Nazwy metod zwykle mówią, kto wiezie paczkę:
 
@@ -37,7 +37,7 @@ Przy Allegro Delivery, gdy paczka czeka w punkcie albo automacie, dostajesz mail
 
 Kupujesz od osób prywatnych na Allegro Lokalnie? To ma osobny poradnik: [Przesyłka OLX i Allegro Lokalnie](guide:second-hand-orders).
 
-## Gdzie jest numer przesyłki na Allegro?
+## Gdzie sprawdzić śledzenie paczki i numer przesyłki na Allegro?
 
 Allegro pokazuje go w czterech miejscach:
 

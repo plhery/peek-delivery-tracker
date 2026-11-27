@@ -1,12 +1,12 @@
 ---
 title: Paack suivi colis : numéro, code postal et statuts
-description: Suivre un colis Paack en France : numéro de commande et code postal, ce que veulent dire les statuts, les PaackGo Points, le lien avec Colis Privé et le téléphone.
+description: Suivi colis Paack en France : numéro + code postal, statut « Au centre de distribution de Paack », contact (+33 1 87 65 31 89), PaackGo Points et Colis Privé.
 slug: paack-suivi
 published: 2026-10-11
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Paack livre les colis des boutiques en ligne sur le dernier kilomètre, à ta porte ou dans un point de retrait. Rapprochés à l'été 2026, Paack et [Colis Privé](carrier:colis-prive) sont présents ensemble en France, en Belgique, au Luxembourg, en Espagne et au Portugal. Pour suivre ton colis, Paack demande ton numéro et le code postal de livraison. Selon ce que tu as en main :
+Paack livre les colis des boutiques en ligne sur le dernier kilomètre, à ta porte ou dans un point de retrait PaackGo Point. Rapprochés à l'été 2026, Paack et [Colis Privé](carrier:colis-prive) sont présents ensemble en France, en Belgique, au Luxembourg, en Espagne et au Portugal. Pour suivre ton colis, Paack demande ton numéro et le code postal de livraison ; pour joindre le support Paack en France, appelle le +33 1 87 65 31 89 (lun–ven 10 h–20 h, sam–dim 10 h–14 h) ou passe par le chat. Selon ce que tu as en main :
 
 - **Le lien de suivi de Paack**, envoyé une fois le colis arrivé chez Paack : ouvre-le, ou colle-le dans le champ ci-dessus s'il contient `tracking_number=`, et indique ton code postal.
 - **Un numéro `PK` suivi de 18 chiffres** : colle-le, Peek le suit sans code postal.
@@ -86,9 +86,17 @@ Tu vois le statut, l'historique, le jour et le créneau prévus, à l'heure de l
 
 ## Questions sur le suivi Paack
 
-### Paack et Colis Privé, c'est la même société ?
+### Que signifie « Au centre de distribution de Paack » ?
 
-Deux entreprises rapprochées, bientôt sous un même nom. Le 16 octobre 2026, Colis Privé a annoncé qu'après leur rapprochement, « finalisé à l'été 2026 », elles passent sous une marque commune, Paack, « progressivement déployée à partir de janvier 2027 ». D'ici là, la livraison et le suivi « restent accessibles dans les conditions habituelles » : suis ton colis chez le transporteur qui te l'annonce.
+Ton colis est arrivé dans le centre de distribution de Paack : c'est son premier scan chez le transporteur, avant l'affectation d'un livreur et la mise en livraison dans le créneau indiqué sur la page de suivi.
+
+### Comment contacter Paack en France ?
+
+Par téléphone au +33 1 87 65 31 89, du lundi au vendredi de 10 h à 20 h et le samedi et dimanche de 10 h à 14 h, ou via le chat sur la page de suivi et en bas à droite de l'aide en ligne de Paack (notamment pour modifier ou compléter ton adresse avant la mise en livraison).
+
+### Paack, Colis Privé et Mondial Relay : est-ce la même société ?
+
+Paack et Colis Privé se sont rapprochées à l'été 2026 et passent sous une marque commune, Paack, « progressivement déployée à partir de janvier 2027 » (d'ici là, suis ton colis chez le transporteur qui te l'annonce). Paack est en revanche distinct de Mondial Relay : un numéro de 8 chiffres peut ressembler à Mondial Relay, vérifie donc quel transporteur cite la boutique.
 
 ### Pourquoi Paack ne trouve pas ma commande ?
 

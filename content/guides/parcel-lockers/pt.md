@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-Para levantar uma encomenda num cacifo em Portugal (CTT Locky, InPost Locker ou DPD Pickup Locker), usas o código PIN ou QR enviado pela transportadora por SMS, e-mail ou app só depois de a encomenda entrar no compartimento — nunca o número de rastreio. O prazo de levantamento é curto (5 dias nos CTT Locky, com possível prolongamento até 5 dias úteis, e 5 dias de calendário nos cacifos InPost), e não precisas de app para abrir o ecrã tátil; se passar a data-limite, a encomenda volta ao remetente.
+Para levantar uma encomenda num cacifo em Portugal (CTT Locky, InPost Locker ou DPD Pickup Locker), usas o código PIN ou QR enviado pela transportadora por SMS, e-mail ou app só depois de a encomenda entrar no compartimento — nunca o número de rastreio. O prazo de levantamento é curto (5 dias nos CTT Locky, prolongáveis, conforme o envio, até 5 dias úteis, e 5 dias de calendário nos cacifos InPost), e não precisas de app para abrir o ecrã tátil; se passar a data-limite, a encomenda volta ao remetente.
 
 ## Como funciona a entrega num cacifo?
 

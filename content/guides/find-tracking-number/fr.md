@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-11-27
 ---
 
-Ton numéro de suivi — différent du numéro de commande de la boutique, qui ne fonctionne jamais sur le site d'un transporteur — se trouve dans l'e-mail ou le SMS d'expédition, ou dans le détail de ta commande (Amazon, Vinted, eBay, Zalando), et sur ta preuve de dépôt si tu es l'expéditeur. Aucun transporteur ne retrouve un colis par nom ou adresse, mais un avis de passage (bpost, La Poste suisse), un compte transporteur gratuit (« Mes envois », My bpost, Mondial Relay) ou l'expéditeur te permettent de le suivre.
+Ton numéro de suivi — différent du numéro de commande de la boutique, qui ne fonctionne jamais sur le site d'un transporteur — se trouve dans l'e-mail ou le SMS d'expédition, ou dans le détail de ta commande (Amazon, Vinted, eBay, Zalando), et sur ta preuve de dépôt si tu es l'expéditeur. Aucun transporteur ne retrouve un colis par nom ou adresse, mais un avis de passage (bpost, La Poste suisse), un compte transporteur gratuit (« Mes envois », My bpost, Mondial Relay) ou l'expéditeur peuvent quand même te permettre de le suivre.
 
 ## Où trouver mon numéro de suivi ?
 

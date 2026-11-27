@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Track a Landmark Global parcel using your **LTN** (Landmark Tracking Number — `LTN` plus 8 or 9 digits, sometimes ending `N1`) from the shop's shipping email on [track.landmarkglobal.com](https://track.landmarkglobal.com/) or in the box above. Part of Bnode (bpost's Brussels group), Landmark Global carries online orders across borders to over 220 destinations and hands the last leg to a local delivery partner such as bpost, Apple Express, UPS, DHL eCommerce or Evri.
+Track a Landmark Global parcel using your **LTN** (Landmark Tracking Number — `LTN` plus 8 or 9 digits, sometimes ending `N1`) from the shop's shipping email on [track.landmarkglobal.com](https://track.landmarkglobal.com/) or in the box above. Part of Bnode (bpost's Brussels group), Landmark Global carries online orders across borders to over 220 destinations and in most countries hands the last leg to a local delivery partner such as bpost, Apple Express, UPS, DHL eCommerce or Evri.
 
 ## Landmark Global tracking number
 
@@ -95,7 +95,7 @@ LTN stands for Landmark Tracking Number — Landmark Global's identifier (`LTN` 
 
 ### Who delivers Landmark Global parcels in my country?
 
-Landmark Global hands final delivery to local partners: bpost in Belgium, sister company Apple Express in Canada, DHL eCommerce and UPS in the US, and multiple logistics partners in the UK and Europe (such as Evri or national posts). Check "Delivery Partner" on Landmark's tracker or in Peek for the carrier handling your parcel.
+In most countries, Landmark Global hands final delivery to local partners: bpost in Belgium, sister company Apple Express in Canada, DHL eCommerce and UPS in the US, and "multiple logistics partners" in the UK (Evri, on parcels Peek has looked up). Check "Delivery Partner" on Landmark's tracker or in Peek for the carrier handling your parcel.
 
 ### Is Landmark Global a courier?
 

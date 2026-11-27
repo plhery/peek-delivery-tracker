@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-Aby sprawdzić śledzenie zamówienia Temu w Polsce, otwórz historię zamówień w „Twoich zamówieniach” i stuknij „Śledź”: tam znajdziesz numer śledzenia przewoźnika (Poczta Polska, DPD Polska, China Post lub inny), a nie numer zamówienia Temu, którego kurier nie rozpozna. Wklej ten numer do [Peek](/), który sam rozpozna przewoźnika i przełączy się na doręczyciela w Polsce, gdy pierwszy przewoźnik przekaże paczkę dalej.
+Aby sprawdzić śledzenie zamówienia Temu w Polsce, otwórz historię zamówień w „Twoich zamówieniach” i stuknij „Śledź”: tam znajdziesz numer śledzenia przewoźnika (Poczta Polska, DPD Polska, China Post lub inny), a nie numer zamówienia Temu, którego kurier nie rozpozna. Wklej ten numer do [Peek](/), który sam rozpozna przewoźnika, a jeśli pierwszy przewoźnik poda, kto przejmuje paczkę w Polsce, przełączy się na nowego.
 
 ## Czy numer zamówienia Temu to numer śledzenia?
 

@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-11-27
 ---
 
-Awizo (papierowe zawiadomienie w skrzynce albo SMS/e-mail eINFO:awizo) oznacza, że przewoźnik nie zastał cię przy próbie doręczenia i przekazał przesyłkę do odbioru. W Poczcie Polskiej masz 14 dni na odbiór w placówce (w Pocztex Kurier 7 dni — wystarczy dokument tożsamości lub aplikacja mObywatel), a DPD może skierować paczkę do punktu DPD Pickup, skąd odbierzesz ją z PIN-em lub kodem 2D z wiadomości.
+Awizo (papierowe zawiadomienie w skrzynce albo SMS/e-mail eINFO:awizo) oznacza, że przewoźnik nie zastał cię przy próbie doręczenia i przekazał przesyłkę do odbioru. W Poczcie Polskiej masz 14 dni na odbiór w placówce (w Pocztex Kurier 7 dni) i wystarczy ci dokument tożsamości lub aplikacja mObywatel, a DPD może skierować paczkę do punktu DPD Pickup, skąd odbierzesz ją z PIN-em lub kodem 2D z wiadomości.
 
 ## Awizo: co zrobić po nieudanej próbie doręczenia
 

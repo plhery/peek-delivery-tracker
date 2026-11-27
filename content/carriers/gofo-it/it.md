@@ -1,12 +1,12 @@
 ---
 title: GOFO Italy tracking: codici GFIT, stati e reclami
-description: Tracking GOFO in Italia: com'è fatto il codice GFIT o CIIT, cosa vogliono dire gli stati di GOFO e come fare reclamo se il pacco è in ritardo o smarrito.
+description: Traccia un pacco GOFO Italy (codici GFIT e CIIT, anche CIRRO Parcel Italy): significato degli stati, giorni di consegna, reclami AGCOM e assistenza clienti.
 slug: gofo-italy-tracking
 published: 2026-10-11
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-GOFO Italy è la rete italiana di GOFO, un corriere di pacchi presente in diversi Paesi, e consegna pacchi in Italia. Nell'elenco dei corrieri di Peek si chiama anche CIRRO Parcel Italy. I suoi codici di tracking iniziano con `GFIT` o `CIIT`: segui il pacco sulla pagina di tracciamento italiana di GOFO, su gofo.com, oppure incolla il codice nel campo qui sopra. Non hai ancora il codice? Leggi [codice tracking, dove si trova](guide:find-tracking-number).
+GOFO Italy (GOFO Italia s.r.l., nota nell'elenco di Peek anche come CIRRO Parcel Italy) è la rete italiana di GOFO e consegna pacchi con codici di tracking che iniziano con `GFIT` o `CIIT`. Per tracciare il pacco inserisci il codice sulla pagina italiana di GOFO su gofo.com oppure incollalo nel campo qui sopra, dove vedi ogni stato in italiano e la data di consegna prevista indicata da GOFO. Non hai ancora il codice? Leggi [codice tracking, dove si trova](guide:find-tracking-number).
 
 ## Codice di tracking GOFO: com'è fatto
 
@@ -78,9 +78,13 @@ Quando hai il pacco aperto, o il giorno della consegna con le notifiche attive, 
 
 ## Domande sul tracking GOFO
 
-### Dov'è il mio pacco GOFO?
+### Come tracciare un pacco GOFO e capire dov'è?
 
-Te lo dice l'ultima riga del tracciamento: `Arrivato alla struttura di destinazione regionale GOFO` vuol dire che è alla struttura regionale della tua zona, `Preparazione alla consegna` che lo stanno preparando per il corriere, e `Il corriere è fuori per la consegna` che è con il corriere. Se vedi solo la riga di preparazione, il mittente non l'ha ancora affidato a GOFO.
+Incolla il codice `GFIT` o `CIIT` su gofo.com o nel campo qui sopra e guarda l'ultima riga: `Arrivato alla struttura di destinazione regionale GOFO` vuol dire che è alla struttura regionale della tua zona, `Preparazione alla consegna` che lo stanno preparando per il corriere, e `Il corriere è fuori per la consegna` che è con il corriere. Se vedi solo la riga di preparazione da parte del mittente, GOFO non ha ancora il pacco.
+
+### GOFO Italy consegna il sabato?
+
+Le fonti disponibili su GOFO Italy non indicano giorni o orari fissi di consegna per il sabato. Controlla la data di consegna prevista e lo stato `Il corriere è fuori per la consegna` nel tracciamento del tuo codice `GFIT` o `CIIT`.
 
 ### Cos'è GOFO Italia, ed è affidabile?
 

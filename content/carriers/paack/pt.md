@@ -1,12 +1,12 @@
 ---
 title: Paack rastreio: número, código postal e janela horária
-description: Rastreio Paack em Portugal: número de pedido e código postal, o que quer dizer cada estado, a janela horária, os Pontos PaackGo e a ligação à Colis Privé.
+description: Rastreio Paack em Portugal: Pontos PaackGo (pontos de recolha), número de pedido e código postal, janela horária, apoio ao cliente e ligação à Colis Privé.
 slug: paack-rastreio
 published: 2026-10-11
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-A Paack entrega encomendas de lojas online na última milha, em casa ou num ponto de levantamento, numa janela horária que a página de seguimento mostra. Depois da aproximação concluída no verão de 2026, a Paack e a Colis Privé estão presentes, juntas, em Portugal, Espanha, França, Bélgica e Luxemburgo. Para rastreares uma encomenda Paack, escreve o número de pedido e o código postal de entrega na página de seguimento da Paack, em paack.co, ou cola o número na caixa acima e escolhe Paack.
+A Paack entrega encomendas de lojas online em Portugal, Espanha, França, Bélgica e Luxemburgo (junto com a Colis Privé desde o verão de 2026), em casa ou num ponto de recolha (Ponto PaackGo), numa janela horária mostrada no seguimento. Para rastreares uma encomenda Paack, escreve o número de pedido e o código postal de entrega em paack.co ou cola o número acima e escolhe Paack; em Portugal, para apoio ao cliente sobre atrasos, cancelamentos ou encomendas em falta, começa pela loja onde compraste.
 
 ## Paack rastreio: número de pedido e código postal
 
@@ -65,6 +65,14 @@ Vês o estado, o histórico e o dia e a janela previstos, na hora local da morad
 
 ## Perguntas sobre o rastreio Paack
 
+### O que é um Ponto PaackGo e há pontos de recolha Paack em Portugal?
+
+Pontos PaackGo é o nome que a Paack dá aos seus pontos de levantamento, mas a Paack não diz se os há em Portugal nem publica uma lista de pontos. Quando uma encomenda chega a um Ponto PaackGo, a página de seguimento em paack.co mostra o nome e a morada do ponto, um código de levantamento, um código QR e o último dia para a levantares.
+
+### Como contactar o apoio ao cliente da Paack em Portugal?
+
+Começa pela loja onde compraste: na UE, é o vendedor quem responde por atrasos, cancelamentos ou danos até à entrega, e as fontes portuguesas da Paack não publicam um telefone local de apoio ao cliente. Para veres a janela horária ou uma nova tentativa, usa a página de seguimento em paack.co com o número de pedido e o código postal.
+
 ### A Paack e a Colis Privé são a mesma empresa?
 
 São duas empresas que se juntaram e vão ter o mesmo nome. A 16 de outubro de 2026, a Colis Privé anunciou que, depois da aproximação concluída no verão de 2026, passam a usar uma marca comum, Paack, introduzida aos poucos a partir de janeiro de 2027. Até lá, a entrega e o seguimento das encomendas continuam como de costume: segue a encomenda na transportadora que ta anunciou.
@@ -72,10 +80,6 @@ São duas empresas que se juntaram e vão ter o mesmo nome. A 16 de outubro de 2
 ### Quanto tempo demora a Paack a entregar?
 
 O dia e a janela aparecem na página de seguimento da Paack. Enquanto não houver data, conta o prazo da loja: na UE, o vendedor tem 30 dias para entregar, salvo se tiverem combinado outro prazo.
-
-### A Paack tem pontos de recolha em Portugal?
-
-A Paack não diz se os há em Portugal nem onde: chama Pontos PaackGo aos seus pontos de levantamento, mas não publica a lista.
 
 :::sources
 - [Paack: Track your order](https://paack.co/shipments/tracking?lng=pt) – Pontos PaackGo

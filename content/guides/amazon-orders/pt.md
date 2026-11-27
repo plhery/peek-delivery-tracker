@@ -1,15 +1,15 @@
 ---
 title: Seguir encomenda da Amazon: onde está o número de seguimento
-description: Onde a Amazon.es mostra a transportadora e o número de seguimento da tua encomenda, e como a seguir no Peek, à mão ou com o Claude ou o ChatGPT a fazê-lo por ti.
+description: Qual é a transportadora da tua encomenda da Amazon em Portugal (Amazon.es) e onde encontrar o número de seguimento em «Mis pedidos» / «Os meus pedidos».
 slug: seguimento-encomenda-amazon
 picture: Um telemóvel mostra o progresso de uma encomenda, duas carrinhas passam uma encomenda de uma para a outra e o Pip observa.
 published: 2026-10-16
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Em Portugal compras na Amazon.es, que mostra a transportadora e o número de seguimento de cada encomenda em «Mis pedidos» e depois em «Localiza tu paquete». Copia o número para o [Peek](/) e segues a encomenda ao lado de todas as outras. Funciona da mesma maneira em todos os sites da Amazon.
+Em Portugal compras na Amazon.es: para saberes qual é a transportadora da tua encomenda Amazon (como a CTT Express ou a própria Amazon) e o número de seguimento, abre «Mis pedidos» («Os meus pedidos») e clica em «Localiza tu paquete» («Acompanhar embalagem»). Copia o número para o [Peek](/) e segues a encomenda ao lado de todas as outras — funciona da mesma maneira em todos os sites da Amazon.
 
-## Onde encontro o número de seguimento na Amazon?
+## Qual é a transportadora da Amazon em Portugal e onde está o número?
 
 A Amazon.es mostra estes nomes em espanhol. Entre parênteses, o nome que vês se mudares o site para português.
 

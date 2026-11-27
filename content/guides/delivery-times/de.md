@@ -1,15 +1,15 @@
 ---
 title: Wann liefert DHL? Uhrzeit der Paketzustellung im Überblick
-description: Bis wie spät DHL, Hermes, DPD und die Post in Österreich und der Schweiz liefern, wer samstags kommt und warum ein Paket abends noch in Zustellung ist.
+description: DHL Lieferzeiten werktags (Mo–Sa, meist 1–2 Werktage, ohne feste Uhrzeit): bis wie spät DHL, Hermes (8–20 Uhr), DPD und Post zustellen und was abends gilt.
 slug: wann-liefert-dhl-uhrzeit-paketzustellung
 picture: Eine Uhr, die acht Uhr abends zeigt, unter einer Mondsichel, ein Kalender mit markierten Wochenenden, ein Lieferwagen mit eingeschalteten Scheinwerfern und Pip, der aus dem Fenster schaut.
 published: 2026-10-14
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Pakete kommen zwischen früh am Morgen und spät am Abend, und eine feste Uhrzeit verspricht dir fast kein Paketdienst. Hermes stellt von 8 bis 20 Uhr zu. DHL, die Österreichische Post und die Schweizerische Post nennen für normale Pakete gar keine Uhrzeit. Samstag ist in Deutschland ein normaler Zustelltag. Die Schweizerische Post und GLS Österreich stellen montags bis freitags zu, die Post in der Schweiz samstags nur gegen Aufpreis.
+DHL veröffentlicht keine feste Uhrzeit dafür, wie lange ausgeliefert wird: Inlandspakete in Deutschland kommen werktags (Montag bis Samstag außer an Feiertagen) in der Regel binnen 1 bis 2 Werktagen, und am Liefertag zeigt das Live-Tracking oft ein 90-Minuten-Zeitfenster. Hermes stellt montags bis samstags von 8 bis 20 Uhr zu, DPD nennt am Liefertag ein 2-Stunden-Fenster. Die Schweizerische Post und GLS Österreich liefern montags bis freitags (die Post in der Schweiz samstags nur gegen Aufpreis).
 
-## Bis wie spät liefern DHL, Hermes, DPD und die Post?
+## DHL Lieferzeiten werktags: bis wie spät liefern DHL, Hermes, DPD und die Post?
 
 | Paketdienst | Uhrzeit | Zustelltage |
 | --- | --- | --- |

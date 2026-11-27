@@ -1,13 +1,13 @@
 ---
 title: Pacco fermo in dogana: cosa fare, quanto dura e cosa paghi
-description: «In attesa di sdoganamento» o fermo da settimane? Cosa vuol dire, quanto può durare, cosa paghi su Temu, Shein e AliExpress e come riconoscere gli SMS falsi.
+description: Pacco fermo in dogana o «in fase di sdoganamento»? Cosa fare su poste.it, tempi di attesa (anche un mese), cosa paghi su Temu, Shein e AliExpress e SMS falsi.
 slug: pacco-fermo-in-dogana
 picture: Una cabina della dogana con la sbarra a strisce, un documento timbrato con una spunta e Pip che aspetta paziente davanti alla sbarra.
 published: 2026-10-09
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-«Fermo in dogana» di solito vuol dire che il tuo pacco sta passando il controllo di routine previsto per la merce che arriva da fuori UE (in Ticino, da qualsiasi Paese estero), non che è stato sequestrato. Se resta fermo a lungo, forse il corriere aspetta che tu paghi dazio e IVA o che gli mandi una fattura. Per saperlo apri tu il sito o l'app del corriere, mai il link di un SMS.
+Un pacco internazionale fermo in dogana o «in fase di sdoganamento» sta passando il controllo di routine sui pacchi da fuori UE (in Ticino, da qualsiasi Paese estero) presso i centri di Poste o del corriere, non è stato sequestrato. Se resta fermo per settimane o un mese, spesso il corriere aspetta il pagamento di dazio e IVA o una fattura: verifica sempre aprendo tu il sito o l'app del corriere, mai il link di un SMS.
 
 ## Cosa vuol dire «pacco fermo in dogana»?
 
@@ -41,7 +41,7 @@ Con Poste, il conto arriva quando il pacco raggiunge i suoi Centri Internazional
 
 Quasi mai la dogana: comincia dal corriere (passo 4). Poste sdogana solo i pacchi postali che viaggiano secondo la Convenzione dell'Unione postale universale, quindi per un pacco DHL, [UPS](carrier:ups) o [FedEx](carrier:fedex) chiedi a loro. Non sai quale corriere ha il pacco? Spesso [lo dice il numero di tracking](guide:tracking-number-formats). In Ticino l'UDSC dice di non poter dare informazioni sullo stato di un invio; per lo sdoganamento postale la Posta risponde al +41 848 48 48 47, dal lunedì al venerdì dalle 8.00 alle 17.30.
 
-## Quanto tempo può restare un pacco in dogana?
+## Pacco fermo in dogana da settimane o un mese: quanto tempo può restare?
 
 Poste non indica tempi. La Posta svizzera parla di tre o quattro giorni lavorativi, se tutte le informazioni sono complete e corrette; se ne mancano, fa degli accertamenti e il pacco può tardare. Nel suo blog per i venditori, [YunExpress](carrier:yunexpress) parla di tempi da qualche giorno lavorativo a oltre un mese, a seconda del controllo.
 
@@ -103,7 +103,7 @@ Dal 1° luglio 2026 l'UE ha tolto l'esenzione dal dazio per le spedizioni fino a
 
 Dal 1° novembre 2026, secondo la Commissione europea, sugli acquisti online da fuori UE si paga anche la «tassa di gestione dell'Unione»: 2 € per articolo, che si sommano ai 3 €, valgono anche sopra i 150 € e non vengono mai rimborsati. Gli articoli si contano come per il dazio: per Poste, un articolo sono una o più merci della spedizione con la stessa classificazione tariffaria, la stessa descrizione e, se richiesta, la stessa origine. Conta il giorno in cui la spedizione è presentata in dogana, non quello dell'acquisto, precisa Poste: la tassa vale anche per un ordine fatto prima del 1° novembre. Poi c'è il contributo italiano di 2 € a spedizione (legge 199/2025), che Poste elenca tra le spese di importazione: la sua partenza è stata rinviata più volte, l'ultima al 1° gennaio 2027 (decreto-legge 193/2026). In Ticino niente di tutto questo: la Svizzera non è nell'UE.
 
-## Su Temu, Shein e AliExpress si paga la dogana?
+## Dogana su Temu, Shein e AliExpress: cosa si paga e come funziona?
 
 Dipende da dove vivi e da cosa hai pagato al checkout:
 

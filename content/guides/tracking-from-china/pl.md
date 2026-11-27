@@ -1,15 +1,15 @@
 ---
 title: Śledzenie paczki z Chin: AliExpress, Temu, Shein
-description: Jak śledzić paczkę z Chin: czemu numer się zmienia, kto doręcza w Polsce, ile idzie paczka z AliExpress i Shein i kiedy zapłacisz cło.
+description: Śledzenie paczek i przesyłek z Chin (AliExpress, Temu, Shein): co znaczy kod CN, dlaczego numer się zmienia, kto doręcza w Polsce, czas dostawy i cło 3 € + 2 €.
 slug: sledzenie-paczki-z-chin
 picture: Samolot leci przerywanym łukiem nad kulą ziemską, od czerwonej pinezki do zielonej, oznaczającej dom, a Pip podróżuje między dwiema furgonetkami.
 published: 2026-10-09
-updated: 2026-11-07
+updated: 2026-11-27
 ---
 
-Paczka z AliExpress, Temu albo Shein przechodzi z rąk do rąk: chińska firma logistyczna wysyła ją samolotem, celnicy ją sprawdzają, a w Polsce doręcza ją [Poczta Polska](carrier:poczta-polska), [InPost](carrier:inpost) albo inny przewoźnik, często pod nowym numerem. Każda z tych firm skanuje tylko swój odcinek. Licz się więc z tym, że pierwszy skan pojawi się nawet po 11 dniach, w czasie lotu śledzenie zamilknie, a po statusie „arrived at destination country” paczka jeszcze trochę poczeka. Śledź najpierw numer ze sklepu, a potem numer polskiego przewoźnika. Przy najtańszej wysyłce śledzenie może się urwać na dobre właśnie przy tym przekazaniu. Paczka z magazynu w UE omija lot z Chin i odprawę celną.
+Śledzenie paczki z Chin z AliExpress, Temu lub Shein (często z numerem kończącym się na `CN` albo z Cainiao czy YunExpress) przechodzi przez kilka firm: chiński operator wysyła przesyłkę samolotem, celnicy ją sprawdzają, a w Polsce doręcza ją [Poczta Polska](carrier:poczta-polska), [InPost](carrier:inpost) albo inny przewoźnik, często pod nowym numerem. Pierwszy skan pojawia się nawet po 11 dniach, a w czasie lotu i przy przekazaniu do Polski śledzenie milczy; przy najtańszej wysyłce może się tam urwać na dobre. Paczka z magazynu w UE omija lot z Chin i odprawę celną.
 
-## Jak śledzić paczkę z Chin i czy śledzenie jest dokładne?
+## Śledzenie paczek z Chin (kod CN, AliExpress, Temu, Shein): jak działa?
 
 Śledzenie w AliExpress, Temu i Shein jest tak dokładne, jak skany przewoźników. Żaden tracker, także Peek, nie pokaże skanu, którego przewoźnik nie opublikował. AliExpress odsyła cię do strony śledzenia [Cainiao](carrier:cainiao). Luki w śledzeniu biorą się z samej trasy:
 

@@ -1,12 +1,12 @@
 ---
 title: Spåra paket med PostNord: statusar, ombud och tull
-description: Spåra ditt PostNord-paket: så ser försändelse-ID:t ut, det här betyder statusarna, så hämtar du hos ombud och i paketbox, och vem du klagar hos.
+description: Spåra PostNord-paket till ombud eller paketbox: försändelse-ID, vad statusarna betyder, sista hämtdag, tull och moms, kundservice och vem som ansvarar.
 slug: postnord-spara-paket
 published: 2026-10-22
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-PostNord sköter post och paket till, från och inom Norden. I Sverige har Post- och telestyrelsen (PTS) utsett PostNord att sköta den samhällsomfattande posttjänsten: posten ska fungera för alla, oavsett var i landet man bor. Du spårar paketet på [PostNords spårningssida](https://tracking.postnord.com/se/) eller i PostNord-appen, eller så klistrar du in numret i fältet ovanför. Numret får du av den som skickar paketet, oftast webbutiken.
+PostNord sköter post och paket till, från och inom Norden – inklusive paket som hämtas hos postombud eller i paketbox. I Sverige har Post- och telestyrelsen (PTS) utsett PostNord att sköta den samhällsomfattande posttjänsten. Du spårar paketet med ditt försändelse-ID på [PostNords spårningssida](https://tracking.postnord.com/se/), i PostNord-appen eller i fältet ovanför; numret kommer från avsändaren, oftast webbutiken.
 
 ## PostNords försändelse-ID
 
@@ -112,9 +112,9 @@ Peek kan meddela dig vid "Every scan", "Important steps" eller "Delivery only". 
 
 Enligt PostNord är försändelsen antingen inte spårbar, eller så är numret fel. Kontrollera numret hos butiken. Står paketet still klagar du hos butiken, som ansvarar för paketet tills du har fått det.
 
-### Hur länge ligger paketet kvar hos ombudet?
+### Hur hämtar jag paketet hos ombud eller i paketbox och hur länge ligger det kvar?
 
-Det står under `Sista dagen att hämta` i spårningen. Efter det skickas paketet tillbaka till avsändaren, och butiken kan ta ut en avgift om det står i köpvillkoren.
+Ta med legitimation till ombudet (för paketbox behöver du PostNord-appen). Sista hämtdag står under `Sista dagen att hämta` i spårningen; efter det går paketet tillbaka till avsändaren och butiken kan ta ut en avgift om det står i köpvillkoren.
 
 ### Måste jag hämta ut ett paket som jag inte har beställt?
 

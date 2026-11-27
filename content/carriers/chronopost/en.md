@@ -1,12 +1,12 @@
 ---
 title: Chronopost tracking: numbers, statuses and pickup points
-description: Track a Chronopost parcel in or from France: the tracking number format, what the French statuses mean, Pickup relays, missed deliveries and contacts.
+description: Track a Chronopost France parcel in English: 13-character & 15-character DPD numbers, French status translations, 8-day Pickup relay holds and 09 69 39 13 91.
 slug: chronopost-tracking
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Chronopost is the express parcel service of the French La Poste group. Track it on Chronopost's tracking page or in the box above.
+Chronopost is the express parcel carrier of France's La Poste Groupe (part of Geopost alongside DPD). Paste your 13-character (`XY…FR`, `…JB`/`JF`/`TS`), `XN` + 12-digit or 14/15-character parcel number in the box above (or on chronopost.fr) to track your shipment — below you'll find English translations of Chronopost's French statuses, Pickup relay and locker holding limits (8 and 5 days) and support details.
 
 ## Chronopost tracking number format
 
@@ -83,17 +83,25 @@ Peek checks up to every 10 minutes and can notify you of changes. Out for delive
 
 ## Questions about Chronopost tracking
 
-### Is Chronopost part of La Poste?
+### Is Chronopost part of La Poste or DPD?
 
-Yes. Chronopost belongs to Geopost, which belongs to La Poste Groupe.
+Yes: Chronopost belongs to Geopost, the parcel holding of La Poste Groupe alongside DPD. Some Chronopost parcels share DPD's 15-character number shape (14 digits + check character), and parcels to Germany or Portugal can hand over to local DPD.
 
-### Is Chronopost the same as DPD?
+### What does "Livraison reportée de 24h" mean on Chronopost tracking?
 
-Chronopost doesn't present itself as DPD: it is a member of Geopost, La Poste's parcel holding. Some of its numbers have DPD's 15-character shape.
+It means delivery was postponed by 24 hours at the depot (for example after a missort, address check or closed business) and resumes automatically — it does not mean the parcel is lost.
 
-### How long does Chronopost keep a parcel at a Pickup relay?
+### How long does Chronopost hold a parcel at a Pickup relay or locker?
 
-Up to 8 days, says Pickup, which runs the relays; the email or SMS gives the exact deadline. After that the parcel goes back to the sender.
+Pickup says the collection deadline is never more than **8 days** at a Pickup relay and **5 days** in a Pickup locker (the exact date is in your SMS or email), after which the parcel returns to the sender automatically.
+
+### Can someone else pick up my Chronopost parcel at a Pickup point?
+
+Yes: with your Pickup Pass (QR code) or email/SMS codes at a relay or locker, or at a Pickup relay with the originals of both their ID and yours (Pickup does not accept written proxies).
+
+### How do I contact Chronopost or report a missing or damaged parcel?
+
+For an online order, contact the shop first — in France, the seller answers for delivery by the carrier it chose. You can reach Chronopost on `09 69 39 13 91` or via its chatbot Léonard on chronopost.fr (forward scam emails to `abuse@chronopost.fr` and scam SMS to `33700`).
 
 :::sources
 - [La Poste Groupe: Chronopost](https://www.lapostegroupe.com/en/focus/la-poste-groupes-subsidiaries/chronopost) – express parcels; pickup points in France: depots, post offices, Pickup points

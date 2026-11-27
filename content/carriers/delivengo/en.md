@@ -1,12 +1,12 @@
 ---
 title: Delivengo tracking: follow a La Poste parcel from France
-description: Track a Delivengo parcel sent from France: the number, La Poste's tracking messages, who delivers it in your country and who to ask when tracking stops.
+description: Track a Delivengo parcel from France (La Poste export): …FR postal numbers, status meanings, local post hand-off (USPS, Royal Mail, Canada Post) and help.
 slug: delivengo-tracking
 published: 2026-10-12
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Delivengo is [La Poste](carrier:la-poste)'s export service for small international parcels. If a French shop chose it, your parcel leaves France with La Poste, and the post in your own country does the last mile. You track it on La Poste's tracking, on laposte.fr, with the number the shop gives you, or paste it in the box above.
+Delivengo is [La Poste](carrier:la-poste)'s international export service for small parcels shipped from France under a standard 13-character `…FR` postal number (such as `LD482910576FR`, invented). Paste the number from your French seller in the box above (or track it on laposte.fr — MyDelivengo is for senders only): La Poste carries the parcel out of France, then your national post handles customs and last-mile delivery.
 
 ## Your Delivengo tracking number
 
@@ -75,17 +75,25 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ## Questions about Delivengo tracking
 
-### Is Delivengo the same as Colissimo?
+### What is Delivengo and is it the same as Colissimo?
 
-No, though both are La Poste's and they share its tracking. Delivengo is La Poste's export service for small international parcels.
+Delivengo is La Poste's export service for small international parcels from France, distinct from Colissimo, though both use 13-character `…FR` postal numbers and share La Poste's tracking on `laposte.fr`.
 
-### Why has my Delivengo tracking stopped after France?
+### Why has my Delivengo tracking stopped after leaving France?
 
-Once the parcel leaves France, the post in your country does the last mile, and La Poste's history can go quiet. The parcel can still be on its way. Peek also asks some countries' posts (see above); if nothing moves, ask the shop.
+Once your parcel exits France, your destination country's national post takes over the last mile and La Poste's feed can go quiet. Try the same `…FR` number on your local post's site (Peek also queries EU, UK, US, Canada, Australia, Swiss, Norwegian and Japanese posts automatically).
 
-### Can I track a Delivengo parcel to the USA or Canada?
+### Can I track a Delivengo parcel to the USA, UK, Canada or Australia?
 
-Yes, with the same `…FR` number on La Poste's tracking. Once La Poste gives the destination country, Peek also asks [USPS](carrier:usps) or [Canada Post](carrier:canada-post), and switches to it when it shows newer progress.
+Yes, using the same `…FR` tracking number on `laposte.fr` and in Peek. Once La Poste reports the destination country, Peek also checks [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), [Canada Post](carrier:canada-post) or Australia Post and switches when newer progress appears.
+
+### Do I pay customs duties on a Delivengo parcel from France?
+
+No customs duties apply between EU member states (for example France to Ireland). Outside the EU — including the UK, US, Canada and Australia — your local customs rules apply.
+
+### Who do I contact if a Delivengo parcel is late, lost or returned?
+
+Contact the French shop first (it holds the Delivengo account, and under EU rules traders answer for delivery and damage until receipt). Once in your country, you can also check with your local post using the same `…FR` number, or reach La Poste on `36 31` / `+33 810 821 821`.
 
 :::sources
 - [Universal Parcel Scraper: Delivengo](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/delivengo) – La Poste's export service, last mile by the destination post, quiet history after export, account area, no number rule of its own

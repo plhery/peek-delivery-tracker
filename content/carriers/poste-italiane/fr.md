@@ -1,12 +1,12 @@
 ---
 title: Suivi Poste Italiane : codes 1UW et 3UW, statuts et délais
-description: Suivre un colis Poste Italiane depuis la France, la Belgique ou la Suisse : codes 1UW, 3UW, 8UW et 5P, sens des statuts italiens, retrait et contact.
+description: Suivi colis Poste Italiane (Cerca Spedizioni / SDA / Crono) : codes 1UW, 3UW, 8UW, 5P et IT, traduction des statuts italiens, délais et +39 06 4526 3160.
 slug: suivi-poste-italiane
 published: 2026-11-17
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Poste Italiane est l'opérateur postal italien et livre aussi, via ses réseaux Crono et SDA, les achats sur des boutiques italiennes, Vinted ou eBay. Suis ton envoi dans « Cerca Spedizioni » sur poste.it (ancien Dove Quando), dans l'app Poste Italiane ou en collant son code ci-dessus. Vers la France, la Belgique ou la Suisse, poste.it montre le trajet jusqu'au centre d'échange international ; sur un code postal finissant par `IT`, la poste de ton pays prend ensuite le relais.
+Poste Italiane est l'opérateur postal italien qui achemine aussi les commandes e-commerce (boutiques italiennes, Vinted, eBay) via ses réseaux Crono et SDA. Suis ton colis avec son *codice spedizione* (`1UW`, `3UW`, `8UW`, `5P`, `RA` ou code international en `…IT`) dans « Cerca Spedizioni » sur poste.it, dans l'app Poste Italiane ou ci-dessus — vers la France, la Belgique ou la Suisse, un code postal `…IT` bascule ensuite vers ta poste nationale après le centre d'échange italien.
 
 ## Numéro de suivi Poste Italiane : où le trouver et à quoi il ressemble
 
@@ -90,21 +90,25 @@ Vérification horaire et alertes « Chaque scan », « Étapes importantes » ou
 
 ## Questions fréquentes sur le suivi Poste Italiane
 
-### Code 1UW, 3UW ou 8UW : quel est ce transporteur ?
+### Code 1UW, 3UW, 8UW ou 5P : quel transporteur livre ce colis ?
 
-Poste Italiane : `1UW`, `3UW` et `8UW` suivis de dix caractères sont des codes colis Poste Delivery Business, suivis dans « Cerca Spedizioni » ou en haut de cette page.
+Poste Italiane : `1UW`, `3UW` et `8UW` (+ 10 caractères) sont des colis Poste Delivery Business, et `5P` (+ 11 caractères) des colis Crono. Suis-les dans « Cerca Spedizioni » sur `poste.it` ou directement en haut de cette page.
 
-### Combien de temps met un colis Poste Italiane ?
+### Qui livre en France, Belgique ou Suisse un colis Poste Italiane ?
 
-À titre indicatif en Italie : 4 jours ouvrés en Crono, 1–2 en Crono Express, 1–4 après dépôt en Poste Delivery Express (hors samedi, option payante réservée à Business Express). À l'international : 2 jours vers l'UE et 2–4 hors UE en International Express ; 10–15 jours UE et 10–25 hors UE en International Standard (hors samedis et fériés).
+Pour un envoi postal `…IT` (`RR…IT`, `CW…IT`, `ZC…IT`), `poste.it` suit le colis jusqu'au centre d'échange international italien (`Centro di lavorazione Internazionale`), puis La Poste, bpost ou La Poste suisse prend le relais (sans droits de douane au sein de l'UE ; TVA suisse 8,1 % en Suisse au-delà de 5 CHF d'impôt).
 
-### Combien de temps un colis reste-t-il en Punto Poste ou au bureau de poste ?
+### Combien de temps met un colis Poste Italiane en Italie et vers l'Europe ?
 
-En Poste Delivery Web : 7 jours ouvrés en Punto Poste, 3 en locker et 10 en bureau de poste ; en Crono : 10 jours ouvrés en Punto Poste ; recommandé : 30 jours au bureau de poste (15 en Raccomandata 1). La date limite figure sur l'avis ou le SMS.
+À titre indicatif en Italie : 4 jours ouvrés en Crono, 1–2 jours en Crono Express et 1–4 jours en Poste Delivery Express. À l'international : 2 jours vers l'UE (2–4 hors UE) en International Express et 10–15 jours vers l'UE (10–25 hors UE) en International Standard.
 
-### Comment appeler Poste Italiane depuis la France, la Belgique ou la Suisse ?
+### Combien de jours un colis reste-t-il en Punto Poste, locker ou bureau de poste ?
 
-Compose le `+39 06 4526 3160` du lundi au samedi de 8 h à 20 h (hors fériés italiens, tarif opérateur) ; le `803 160` est réservé aux fixes italiens.
+En Poste Delivery Web : 10 jours ouvrés au bureau de poste, 7 en Punto Poste et 3 en locker (10 jours ouvrés en Punto Poste pour Crono ; 30 jours pour un recommandé, 15 pour Raccomandata 1).
+
+### Comment contacter Poste Italiane depuis la France, la Belgique ou la Suisse ?
+
+Appelle le `+39 06 4526 3160` (lundi–samedi 8 h–20 h, hors fériés italiens, tarif opérateur) ou écris à `assistenza.spedizioni@posteitaliane.it` (le `803 160` ne fonctionne que depuis un fixe italien). Signale les SMS frauduleux à `antiphishing@posteitaliane.it`.
 
 :::sources
 - [Poste Italiane : FAQ Spedizioni](https://www.poste.it/assistenza/faq-spedizioni-e-consegne/) – code, avis, procuration, recommandés

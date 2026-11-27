@@ -1,12 +1,12 @@
 ---
 title: DHL eCommerce UK tracking: statuses, ServicePoints, contact
-description: Track a DHL eCommerce UK parcel (formerly DHL Parcel UK): the 14-digit number, what each status means, ServicePoint pickup and how to reach DHL.
+description: Track DHL eCommerce UK (formerly DHL Parcel UK / UK Mail): 14-digit 6012 numbers, calling cards, ServicePoint & depot pickup, Evri Premium and 02476 937770.
 slug: dhl-ecommerce-uk-tracking
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-DHL eCommerce UK, formerly DHL Parcel UK and UK Mail, is DHL's domestic parcel network in the United Kingdom: it delivers for online shops and other businesses, with next-day delivery among its services. Track a parcel on [DHL eCommerce UK's tracker](https://track.dhlecommerce.co.uk/) with the shipment number and, ideally, your postcode, or paste the number in the box above. The number is in DHL's notification or on a driver's calling card; without one, the tracker says to contact your sender.
+DHL eCommerce UK (formerly DHL Parcel UK and UK Mail; announced to rebrand as Evri Premium in 2026 while remaining separate from Evri and DHL Express) is DHL's UK domestic parcel network. Paste your 14-digit shipment number (often starting `6012`, `31`, `41` or `55`) or 9-digit return number above, or track with your postcode or 7-digit calling-card number on [track.dhlecommerce.co.uk](https://track.dhlecommerce.co.uk/).
 
 ## DHL eCommerce UK tracking number
 
@@ -83,21 +83,25 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ## Questions about DHL eCommerce UK tracking
 
-### Is DHL eCommerce UK the same as DHL Parcel UK?
+### Is DHL eCommerce UK the same as DHL Parcel UK or Evri Premium?
 
-Yes. DHL eCommerce UK was formerly known as DHL Parcel UK (and UK Mail); it's the same network under a new name. In 2026 it's due to become Evri Premium, still a network of DHL.
+Yes: DHL eCommerce UK was formerly DHL Parcel UK (and UK Mail). Evri announced in September 2025 that it would rebrand in 2026 as Evri Premium (a separate network of DHL), while its tracker and contact page still use the DHL eCommerce UK name.
 
-### Can I collect a DHL eCommerce UK parcel from the depot?
+### Can DHL eCommerce UK track or help with a DHL Express parcel?
 
-Yes. Rearrange the delivery to a depot on DHL's tracker; the parcel is ready to collect one working day later.
+No. DHL eCommerce UK is a separate UK domestic network and explicitly states it cannot track or help with [DHL Express](carrier:dhl-express) shipments — contact DHL Express instead.
 
-### Can DHL eCommerce UK help with a DHL Express parcel?
+### How do I rearrange a missed DHL eCommerce UK delivery or collect from a depot?
 
-No. DHL eCommerce UK says it can't track or help with DHL Express deliveries, so contact DHL Express.
+Use your shipment number or 7-digit calling-card number with your postcode on `track.dhlecommerce.co.uk` to choose a new delivery day, send the parcel to a local DHL ServicePoint or rearrange to a depot (ready for collection one working day later).
 
-### Is a DHL eCommerce UK text legit?
+### What is the DHL eCommerce UK customer service phone number?
 
-Be careful. Citizens Advice says a text asking you to pay to get a parcel or reschedule its delivery is usually a scam. Check the number on DHL's tracker or in Peek instead of tapping the link, and forward the text to 7726.
+Call `02476 937770` (Monday–Friday 7am–8pm, Saturday 8am–6pm) or use the "Send us a message" form on the [contact page](https://track.dhlecommerce.co.uk/contact-us?nav=1) (next-working-day reply outside opening hours). For lost or damaged orders, contact the retailer first.
+
+### Is a DHL eCommerce UK text asking for a payment fee real?
+
+Citizens Advice warns that messages asking you to pay to receive or reschedule a parcel are usually scams. Never tap the link — check your number directly on `track.dhlecommerce.co.uk` or Peek and forward scam texts free to `7726`.
 
 :::sources
 - [DHL eCommerce UK: Track & Trace](https://track.dhlecommerce.co.uk/) – tracker fields, calling card, rearranging to a day or a ServicePoint, depot collection one working day later, contact your sender, ServicePoint and Depot Finder, live service updates

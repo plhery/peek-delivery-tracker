@@ -1,12 +1,12 @@
 ---
 title: Poste Italiane rastreio: códigos 1UW e 3UW e estados
-description: Seguir uma encomenda Poste Italiane em Portugal: formatos do código (1UW, 3UW, 8UW, 5P), significado dos estados em italiano, prazos e contactos.
+description: Rastreio Poste Italiane em Portugal (Cerca Spedizioni / Crono / SDA): códigos 1UW, 3UW, 8UW, 5P e IT, estados em italiano, entrega CTT e +39 06 4526 3160.
 slug: poste-italiane-rastreio
 published: 2026-11-17
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-A Poste Italiane é o operador postal público de Itália e entrega também, através das redes Crono e SDA, compras em lojas online italianas, Vinted ou eBay. Segue o envio em «Cerca Spedizioni» em poste.it (antigo Dove Quando), na app Poste Italiane ou colando o código acima. Nos envios de Itália para Portugal, o poste.it mostra o percurso até ao centro de permuta internacional; nos códigos postais terminados em `IT`, a distribuição passa depois para o correio português.
+A Poste Italiane é o operador postal público de Itália e entrega também compras em lojas italianas, Vinted ou eBay através das redes Crono e SDA. Segue a encomenda pelo *codice spedizione* (`1UW`, `3UW`, `8UW`, `5P`, `RA` ou código postal `…IT`) em «Cerca Spedizioni» em poste.it, na app Poste Italiane ou na caixa acima — nos envios `…IT` de Itália para Portugal, o operador português (como os CTT) assume a entrega após o centro internacional italiano.
 
 ## Código de rastreio Poste Italiane: onde está e como é
 
@@ -90,21 +90,25 @@ Consulta de hora a hora e alertas para «Todos os registos», «Passos important
 
 ## Perguntas frequentes sobre o rastreio Poste Italiane
 
-### Código 1UW, 3UW ou 8UW: que transportadora é?
+### Código 1UW, 3UW, 8UW ou 5P: que transportadora é?
 
-Poste Italiane: `1UW`, `3UW` e `8UW` seguidos de dez caracteres são códigos de encomenda Poste Delivery Business, rastreáveis em «Cerca Spedizioni» ou no topo desta página.
+Poste Italiane: `1UW`, `3UW` e `8UW` (+ 10 caracteres) identificam encomendas Poste Delivery Business e `5P` (+ 11 caracteres) encomendas Crono. Podes rastreá-los em «Cerca Spedizioni» no `poste.it` ou no topo desta página.
 
-### Quanto tempo demora uma encomenda da Poste Italiane?
+### Quem entrega em Portugal uma encomenda da Poste Italiane?
 
-Indicativamente em Itália: 4 dias úteis em Crono, 1–2 em Crono Express e 1–4 após aceitação no Poste Delivery Express (sem sábados, opção paga apenas no Business Express). Internacional: 2 dias para a UE e 2–4 fora da UE no International Express; 10–15 dias UE e 10–25 fora da UE no International Standard (sem sábados nem feriados).
+Nos envios postais `…IT` (`RR…IT`, `CW…IT`, `ZC…IT`), o rastreio no `poste.it` segue até ao `Centro di lavorazione Internazionale` e a entrega em Portugal passa depois para o correio português (como os [CTT](carrier:ctt)), sem direitos aduaneiros dentro da União Europeia.
 
-### Quanto tempo fica uma encomenda num Punto Poste ou estação de correios?
+### Quanto tempo demora uma encomenda da Poste Italiane de Itália para Portugal?
 
-No Poste Delivery Web: 7 dias úteis em Punto Poste, 3 em locker e 10 na estação de correios; em Crono: 10 dias úteis em Punto Poste; registos: 30 dias na estação (15 na Raccomandata 1). Conta a data do aviso ou SMS.
+Indicativamente no serviço internacional para a UE: 2 dias úteis no International Express e 10–15 dias úteis no International Standard (sem sábados nem feriados). Em Itália: 4 dias úteis em Crono, 1–2 em Crono Express e 1–4 no Poste Delivery Express.
 
-### Como ligar para a Poste Italiane a partir de Portugal?
+### Quanto tempo fica uma encomenda num Punto Poste, locker ou estação em Itália?
 
-Liga `+39 06 4526 3160`, de segunda a sábado das 8h00 às 20h00 (hora italiana, exceto feriados em Itália; tarifa do teu operador); o `803 160` só funciona na rede fixa italiana.
+No Poste Delivery Web: 10 dias úteis na estação de correios, 7 em Punto Poste e 3 em locker (em Crono, 10 dias úteis em Punto Poste; registos: 30 dias na estação, 15 na Raccomandata 1).
+
+### Como contactar a Poste Italiane a partir de Portugal?
+
+Liga `+39 06 4526 3160` (segunda a sábado, 8h00–20h00 hora italiana, exceto feriados em Itália) ou escreve para `assistenza.spedizioni@posteitaliane.it` (o `803 160` só funciona na rede fixa italiana). Encaminha SMS suspeitos para `antiphishing@posteitaliane.it`.
 
 :::sources
 - [Poste Italiane: FAQ Spedizioni](https://www.poste.it/assistenza/faq-spedizioni-e-consegne/) – código, aviso, procuração, registos

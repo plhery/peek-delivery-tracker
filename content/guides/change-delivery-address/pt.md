@@ -1,15 +1,15 @@
 ---
 title: Mudar a morada de uma encomenda: CTT, DPD, GLS e InPost
-description: Como mudar a morada ou o dia de entrega de uma encomenda: o que a Vinted deixa, o que os CTT, a DPD, a GLS e a InPost permitem, e quanto custa.
+description: Como mudar a morada ou data de entrega de uma encomenda em Portugal: regras e preços dos CTT (códigos D), DPD, GLS FlexDeliveryService, InPost e Vinted.
 slug: mudar-morada-encomenda
 picture: Uma estrada que se divide junto a uma placa, para uma casa de um lado e para um cacifo do outro, uma carrinha a tomar o novo caminho e o Pip a olhar pela estrada nessa direção.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-27
 ---
 
-Antes de a encomenda sair, muda a morada na loja: na Vinted, por exemplo, cancelas com quem vende e voltas a comprar. Depois de enviada, é com a transportadora: os CTT, a DPD e a GLS deixam-te escolher outro dia, um ponto de recolha e, às vezes, outra morada, a partir do número de seguimento ou do e-mail que te mandam. Mas é o remetente que decide o que podes mudar, e algumas alterações pagam-se.
+Antes de a encomenda sair do armazém, altera a morada diretamente na loja (na Vinted, combina o cancelamento com quem vende e volta a comprar). Depois de enviada, só a transportadora pode redirecionar: nos CTT (Encomenda Expresso começada por `D` paga taxa + IVA; Encomenda Postal só após aviso), na DPD (myDPD) e na GLS (*FlexDeliveryService*, gratuito) podes alterar dia, ponto de recolha ou morada, se o remetente o permitir — na InPost, o Ponto Pack ou Locker deixa de mudar após admissão.
 
-## Como mudar a morada antes do envio
+## Como mudar a morada antes do envio (Vinted e lojas online)?
 
 Na loja, enquanto a encomenda não sair do armazém.
 
@@ -21,7 +21,7 @@ Na Vinted, combina o cancelamento com quem vende antes de cancelares o pedido, p
 
 Na Shein e noutras lojas, procura a opção na página da encomenda. Se não estiver lá, fala com o apoio ao cliente da loja quanto antes: depois do envio, a loja já não manda na encomenda.
 
-## Como mudar a morada de uma encomenda que já foi enviada
+## Como mudar a morada de uma encomenda já enviada?
 
 Às vezes dá, e quem trata é a transportadora, não a loja. Só que o cliente da transportadora é o remetente, e é ele que escolhe o que podes alterar. Para mudar a morada, a GLS manda usar o «FlexDeliveryService fornecido pelo remetente da encomenda», e a DPD explica que as opções a cinzento não estão disponíveis «por causa do serviço que foi selecionado».
 
@@ -43,7 +43,7 @@ Não encontras o código? Algumas transportadoras mostram as tuas encomendas num
 
 > Um SMS a pedir-te para «atualizar a morada» ou pagar uma pequena taxa antes da entrega é a burla clássica. As opções verdadeiras estão no site ou na app da transportadora, a partir do teu número de seguimento: [como reconhecer uma mensagem falsa](guide:delivery-scam-texts).
 
-## Como alterar a morada de uma encomenda CTT, DPD, GLS ou InPost
+## O que permitem CTT, DPD, GLS e InPost — e quanto custa alterar?
 
 Nos [CTT](carrier:ctt), tudo depende da primeira letra do código de envio.
 
@@ -59,7 +59,7 @@ Nos CTT, pedes a alteração de uma Encomenda Expresso no **Seguir objeto** do c
 
 Na GLS, as opções estão no link do e-mail que recebes quando a GLS recolhe a encomenda no remetente, sem conta nem login. Para redirecionar, a GLS pede que já tenhas recebido esse e-mail ou um aviso de passagem. Na DPD, escolhes no site, a partir do número que vem no e-mail ou no aviso de passagem, ou na app myDPD.
 
-## Como alterar a data de entrega da encomenda
+## Posso mudar apenas a data de entrega ou reter correio nas férias?
 
 Muitas vezes, e é mais fácil do que mudar a morada. Os CTT deixam-te adiar uma Encomenda Expresso até 5 dias úteis além do prazo limite, por 5,01 € mais IVA. A GLS deixa escolher um dia nos 6 dias úteis a seguir ao envio, e a DPD tem «Alterar data» nas opções de redirecionamento.
 
@@ -103,7 +103,7 @@ Numa Encomenda Expresso de um remetente sem contrato, 4,47 € ou 3,14 € mais 
 
 Muitas vezes, se a transportadora tiver pontos e o remetente deixar. A DPD manda-a para um ponto Pickup, a GLS para um GLS Point e os CTT para uma Loja ou Ponto CTT. Na InPost, o ponto escolhido na compra fica, salvo se o seguimento te mostrar outra opção.
 
-### Como evito isto da próxima vez?
+### Como evitar erros de morada nas próximas encomendas?
 
 Confirma a morada antes de pagar, ou escolhe um ponto de recolha ou um cacifo na compra. Dá à loja o teu e-mail e o teu telemóvel: a GLS manda as opções por e-mail, e a DPD costuma mandar-te um e-mail com o número de seguimento. Se te registares na myDPD, podes ainda escolher um ponto Pickup favorito para as próximas entregas.
 

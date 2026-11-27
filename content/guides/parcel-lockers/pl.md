@@ -1,13 +1,13 @@
 ---
 title: Paczkomat i automat paczkowy: kod odbioru i terminy
-description: Jak działają Paczkomaty InPost, One Box, ORLEN Paczka, DPD i Pocztex: gdzie jest kod odbioru, ile czeka paczka i co zrobić, gdy automat jest pełny.
+description: Automaty paczkowe w Polsce (Paczkomat InPost, One Box, ORLEN Paczka, DPD Pickup, Pocztex AUTOMAT): gdzie znaleźć kod odbioru, ile czeka paczka i problemy.
 slug: paczkomat-kod-odbioru-terminy
 picture: Rząd skrytek automatu paczkowego z jednymi otwartymi drzwiczkami, telefon z kodem i Pip wychodzący ze skrytki.
 published: 2026-10-17
-updated: 2026-11-14
+updated: 2026-11-27
 ---
 
-Automat paczkowy to punkt odbioru bez okienka: ściana skrytek, które otwierasz kodem albo w aplikacji przewoźnika. Śledzenie pokazuje, kiedy paczka jest w środku, przewoźnik wysyła ci kod odbioru, a od tej chwili masz mało czasu, często tylko dwa dni. Jeśli nie zdążysz, paczka wraca do nadawcy.
+Automat paczkowy (Paczkomat InPost, One Box, ORLEN Paczka, DPD Pickup lub Pocztex AUTOMAT) pozwala odebrać paczkę bez okienka i bez pokazywania dokumentu: otwierasz skrytkę kodem odbioru albo w aplikacji przewoźnika. Kod dostajesz dopiero wtedy, gdy przesyłka trafi do skrytki, a czas na odbiór jest krótki — często 2 dni (One Box, DPD Pickup) lub 72 godziny (Pocztex AUTOMAT), po czym nieodebrana paczka wraca do nadawcy.
 
 ## Jak działa dostawa do automatu paczkowego?
 
@@ -22,7 +22,7 @@ Przy zamówieniu wybierasz automat zamiast adresu domowego. Sklep przekazuje pac
 
 Przy automacie nikt nie sprawdza dokumentów. W DPD i Pocztex paczkę odbierze każdy, kto ma kod odbioru. To wygodne, ale znaczy, że kod działa jak klucz.
 
-## Jakie sieci automatów paczkowych są w Polsce?
+## Jakie automaty paczkowe działają w Polsce i ile czekają w nich paczki?
 
 | Sieć | Kto ją prowadzi | Ile czeka paczka |
 | --- | --- | --- |
@@ -38,7 +38,7 @@ Termin zależy też od sklepu: paczka wysłana przez Allegro Delivery czeka w DH
 
 Kupujesz od osób prywatnych? Zobacz [Przesyłkę OLX i Allegro Lokalnie](guide:second-hand-orders) oraz [paczki z Vinted](guide:vinted-orders).
 
-## Gdzie jest mój kod odbioru i co, jeśli nie przyszedł?
+## Gdzie znaleźć kod odbioru do automatu i co zrobić, gdy nie przyszedł?
 
 Kod odbioru to nie numer przesyłki. Numerem śledzisz paczkę, kodem otwierasz skrytkę. Kod przychodzi dopiero wtedy, gdy paczka jest w automacie: Poczta Polska pisze wprost, że SMS lub mail z kodem wysyła po zdeponowaniu przesyłki.
 
@@ -56,7 +56,7 @@ Kod nie przyszedł? Sprawdź po kolei:
 3. **Numer telefonu w zamówieniu.** W Poczcie Polskiej zmianę numeru, na który idzie kod, zgłasza nadawca.
 4. **Kontakt z przewoźnikiem.** Miej pod ręką numer przesyłki. Gdy kodu z Pocztex wciąż nie ma, Poczta Polska kieruje do swojego Contact Center.
 
-## Jak długo paczka czeka w automacie?
+## Ile czasu czeka paczka w Paczkomacie, One Box, DPD, ORLEN i Pocztex?
 
 To zależy od sieci.
 
@@ -68,7 +68,7 @@ To zależy od sieci.
 
 Co dzieje się potem i kiedy dostaniesz zwrot pieniędzy: [nieodebrana paczka](guide:uncollected-parcel) i [zwrot do nadawcy](guide:returned-to-sender).
 
-## Automat był pełny albo nie działał: gdzie jest paczka?
+## Pełny lub zepsuty automat paczkowy (Paczkomat tymczasowy): gdzie jest paczka?
 
 Gdy w wybranym Paczkomacie nie ma wolnej skrytki, InPost może zostawić paczkę w pobliskim automacie tymczasowym. Peek pokazuje wtedy status mówiący o Paczkomacie tymczasowym (w innych językach `Stored Parcel - Temporary Parcel Locker`), a paczkę odbierzesz tym samym kodem. Jeśli potem pojawi się status o upływie terminu przechowywania (w innych językach `The storage period has expired`), nikt jej tam nie odebrał na czas i InPost wiezie ją do wybranego automatu.
 

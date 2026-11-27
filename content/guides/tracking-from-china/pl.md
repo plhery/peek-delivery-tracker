@@ -1,6 +1,6 @@
 ---
 title: Śledzenie paczki z Chin: AliExpress, Temu, Shein
-description: Śledzenie paczek i przesyłek z Chin (AliExpress, Temu, Shein): co znaczy kod CN, dlaczego numer się zmienia, kto doręcza w Polsce, czas dostawy i cło 3 € + 2 €.
+description: Śledzenie paczek i przesyłek z Chin (AliExpress, Temu, Shein): co znaczy kod CN, dlaczego numer się zmienia, kto doręcza w Polsce, czas dostawy i opłaty 3 € + 2 €.
 slug: sledzenie-paczki-z-chin
 picture: Samolot leci przerywanym łukiem nad kulą ziemską, od czerwonej pinezki do zielonej, oznaczającej dom, a Pip podróżuje między dwiema furgonetkami.
 published: 2026-10-09

@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-11-27
 ---
 
-Un pacco internazionale fermo in dogana o «in fase di sdoganamento» sta passando il controllo di routine sui pacchi da fuori UE (in Ticino, da qualsiasi Paese estero) presso i centri di Poste o del corriere, non è stato sequestrato. Se resta fermo per settimane o un mese, spesso il corriere aspetta il pagamento di dazio e IVA o una fattura: verifica sempre aprendo tu il sito o l'app del corriere, mai il link di un SMS.
+Un pacco internazionale fermo in dogana o «in fase di sdoganamento» di solito sta passando il controllo di routine sui pacchi da fuori UE (in Ticino, da qualsiasi Paese estero) presso i centri di Poste o del corriere, non è stato sequestrato. Se resta fermo per settimane o un mese, forse il corriere aspetta il pagamento di dazio e IVA o una fattura: verifica sempre aprendo tu il sito o l'app del corriere, mai il link di un SMS.
 
 ## Cosa vuol dire «pacco fermo in dogana»?
 

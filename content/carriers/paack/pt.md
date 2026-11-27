@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-A Paack entrega encomendas de lojas online em Portugal, Espanha, França, Bélgica e Luxemburgo (junto com a Colis Privé desde o verão de 2026), em casa ou num ponto de recolha (Ponto PaackGo), numa janela horária mostrada no seguimento. Para rastreares uma encomenda Paack, escreve o número de pedido e o código postal de entrega em paack.co ou cola o número acima e escolhe Paack; em Portugal, para apoio ao cliente sobre atrasos, cancelamentos ou encomendas em falta, começa pela loja onde compraste.
+A Paack entrega encomendas de lojas online, em casa ou num ponto de recolha (Ponto PaackGo), numa janela horária mostrada no seguimento. Desde a aproximação concluída no verão de 2026, a Paack e a Colis Privé estão presentes, juntas, em Portugal, Espanha, França, Bélgica e Luxemburgo. Para rastreares uma encomenda Paack, escreve o número de pedido e o código postal de entrega em paack.co ou cola o número acima e escolhe Paack; em Portugal, para apoio ao cliente sobre atrasos, cancelamentos ou encomendas em falta, começa pela loja onde compraste.
 
 ## Paack rastreio: número de pedido e código postal
 
@@ -71,7 +71,7 @@ Pontos PaackGo é o nome que a Paack dá aos seus pontos de levantamento, mas a 
 
 ### Como contactar o apoio ao cliente da Paack em Portugal?
 
-Começa pela loja onde compraste: na UE, é o vendedor quem responde por atrasos, cancelamentos ou danos até à entrega, e as fontes portuguesas da Paack não publicam um telefone local de apoio ao cliente. Para veres a janela horária ou uma nova tentativa, usa a página de seguimento em paack.co com o número de pedido e o código postal.
+Começa pela loja onde compraste: é ela que confia a encomenda à Paack, e na UE o vendedor responde por danos até à entrega; cancelamentos, reembolsos e atrasos tratam-se com ela. Para veres a janela horária ou uma nova tentativa, usa a página de seguimento em paack.co com o número de pedido e o código postal.
 
 ### A Paack e a Colis Privé são a mesma empresa?
 

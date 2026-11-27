@@ -1,13 +1,13 @@
 ---
 title: «Devolvido ao remetente»: o que significa e o que fazer
-description: «Devolvido ao remetente» nos CTT, InPost ou GLS: o que significa, se dá para cancelar a devolução, quanto tempo demora e como pedir reembolso ou reenvio.
+description: Encomenda devolvida ao remetente (CTT, InPost, GLS): o que significa, se dá para cancelar a devolução, quanto tempo demora e como pedir reembolso ou reenvio.
 slug: encomenda-devolvida-ao-remetente
 picture: Uma carrinha com uma encomenda com um carimbo redondo de devolução volta para uma loja ao longo de uma seta curva, e o Pip fica a vê-la partir.
 published: 2026-10-14
 updated: 2026-11-27
 ---
 
-«Devolvido ao remetente» ou «devolução ao remetente» quer dizer que a transportadora (CTT, InPost ou GLS) não conseguiu entregar a encomenda e está a devolvê-la a quem a enviou — por causa da morada, de uma recusa, de um prazo de levantamento que passou ou de um desalfandegamento por concluir. Depois de a devolução começar, os CTT dizem que não é possível cancelá-la. Escreve já à loja e diz-lhe, por escrito, se queres que volte a enviar a encomenda ou que te devolva o dinheiro.
+«Devolvida ao remetente» (ou «devolução ao remetente») quer dizer que a transportadora, por exemplo os CTT, a InPost ou a GLS, não conseguiu entregar a encomenda e está a devolvê-la a quem a enviou — por causa da morada, de uma recusa, de um prazo de levantamento que passou ou de um desalfandegamento por concluir. Depois de a devolução começar, os CTT dizem que não é possível cancelá-la. Escreve já à loja e diz-lhe, por escrito, se queres que volte a enviar a encomenda ou que te devolva o dinheiro.
 
 Foste tu a devolver um artigo a uma loja? É outro caminho: [seguir uma devolução e o reembolso](guide:returns-tracking).
 

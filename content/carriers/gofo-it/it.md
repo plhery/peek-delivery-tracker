@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-GOFO Italy (GOFO Italia s.r.l., nota nell'elenco di Peek anche come CIRRO Parcel Italy) è la rete italiana di GOFO e consegna pacchi con codici di tracking che iniziano con `GFIT` o `CIIT`. Per tracciare il pacco inserisci il codice sulla pagina italiana di GOFO su gofo.com oppure incollalo nel campo qui sopra, dove vedi ogni stato in italiano e la data di consegna prevista indicata da GOFO. Non hai ancora il codice? Leggi [codice tracking, dove si trova](guide:find-tracking-number).
+GOFO Italy (GOFO Italia s.r.l., nota nell'elenco di Peek anche come CIRRO Parcel Italy) è la rete italiana di GOFO e consegna pacchi con codici di tracking che iniziano con `GFIT` o `CIIT`. Per tracciare il pacco inserisci il codice sulla pagina italiana di GOFO su gofo.com oppure incollalo nel campo qui sopra, dove vedi ogni stato in italiano e, quando GOFO la indica, la data di consegna prevista. Non hai ancora il codice? Leggi [codice tracking, dove si trova](guide:find-tracking-number).
 
 ## Codice di tracking GOFO: com'è fatto
 
@@ -84,7 +84,7 @@ Incolla il codice `GFIT` o `CIIT` su gofo.com o nel campo qui sopra e guarda l'u
 
 ### GOFO Italy consegna il sabato?
 
-Le fonti disponibili su GOFO Italy non indicano giorni o orari fissi di consegna per il sabato. Controlla la data di consegna prevista e lo stato `Il corriere è fuori per la consegna` nel tracciamento del tuo codice `GFIT` o `CIIT`.
+Le fonti su GOFO Italy non dicono se consegna il sabato, né in quali orari. Controlla la data di consegna prevista, quando GOFO la indica, e lo stato `Il corriere è fuori per la consegna` nel tracciamento del tuo codice `GFIT` o `CIIT`.
 
 ### Cos'è GOFO Italia, ed è affidabile?
 

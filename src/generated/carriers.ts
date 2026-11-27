@@ -19554,6 +19554,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0056a7"
     },
     {
+      "id": "ctt-express",
+      "catalog": "ctt-express",
+      "slug": "ctt-express-otslezhivanie",
+      "title": "Отслеживание CTT Express: статусы, пункты Collectt, связь",
+      "name": "CTT Express",
+      "color": "#df0024"
+    },
+    {
       "id": "amazon-logistics",
       "catalog": "amazon-logistics",
       "slug": "amazon-logistics-otslezhivanie",
@@ -19736,6 +19744,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Отслеживание посылок Почты России: трек-номер и статусы",
       "name": "Russian Post",
       "color": "#1928dc"
+    },
+    {
+      "id": "epost-global",
+      "catalog": "epost-global",
+      "slug": "epost-global-otslezhivanie",
+      "title": "Отслеживание ePost Global: номера EPG, статусы и доставка",
+      "name": "ePost Global",
+      "color": "#27967a"
     },
     {
       "id": "aras-kargo",
@@ -22158,6 +22174,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#eedc00"
     },
     {
+      "id": "ctt-express",
+      "catalog": "ctt-express",
+      "slug": "ctt-express-pakket-volgen",
+      "title": "CTT Express pakket volgen: statussen, Collectt en contact",
+      "name": "CTT Express",
+      "color": "#df0024"
+    },
+    {
       "id": "vinted-go",
       "catalog": "vinted-go",
       "slug": "vinted-go-pakket-volgen",
@@ -22230,6 +22254,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f9bb00"
     },
     {
+      "id": "posta-slovenije",
+      "catalog": "posta-slovenije",
+      "slug": "posta-slovenije-pakket-volgen",
+      "title": "Pošta Slovenije pakket volgen: statussen, afhaal en contact",
+      "name": "Pošta Slovenije",
+      "color": "#ffc600"
+    },
+    {
+      "id": "dao",
+      "catalog": "dao",
+      "slug": "dao-pakket-volgen",
+      "title": "DAO pakket volgen: statussen, daoSHOP en gemiste bezorging",
+      "name": "DAO",
+      "color": "#e30613"
+    },
+    {
       "id": "elta",
       "catalog": "elta",
       "slug": "elta-hellenic-post-pakket-volgen",
@@ -22244,6 +22284,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "UPS pakket volgen: 1Z-nummers, statussen en Access Points",
       "name": "UPS",
       "color": "#351c15"
+    },
+    {
+      "id": "dhl-express",
+      "catalog": "dhl-express",
+      "slug": "dhl-express-pakket-volgen",
+      "title": "DHL Express pakket volgen: 10-cijferige waybill en status",
+      "name": "DHL Express",
+      "color": "#ffcc00"
     },
     {
       "id": "postnl",
@@ -23008,6 +23056,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#4e79e1"
     },
     {
+      "id": "epost-global",
+      "catalog": "epost-global",
+      "slug": "epost-global-proslediavane",
+      "title": "ePost Global проследяване: EPG номера и кой доставя",
+      "name": "ePost Global",
+      "color": "#27967a"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-prosledyavane-na-pratka",
@@ -23115,6 +23171,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ],
   "hr": [
+    {
+      "id": "dpd-ch",
+      "catalog": "dpd",
+      "slug": "dpd-switzerland-pracenje-posiljke",
+      "title": "DPD Švicarska praćenje pošiljke: statusi, dostava, kontakt",
+      "name": "DPD Switzerland",
+      "color": "#dc0032"
+    },
     {
       "id": "vinted-go",
       "catalog": "vinted-go",

@@ -76,12 +76,17 @@ function nameAtStart(rest: string): string {
 
 /**
  * A name the wording holds on both sides ("Ihre X Sendung"): all its words, which start and end with capitalised ones
- * and may hold small ones between them ("Die schöne Werkstatt"), or nothing.
+ * and may hold small ones between them ("Die schöne Werkstatt"), or nothing. A first word in small letters before
+ * capitalised ones is left out: a shop that writes its name that way ("examplia Store Deutschland") is still known by
+ * the rest, and a word such as "neue" or "upcoming" is no name ("Ihre neue Example Sendung").
  */
 function nameBetween(between: string): string {
-  const words = between.trim().split(/\s+/);
+  const all = between.trim().split(/\s+/);
+  const small = all.length > 1 && /^\p{Ll}/u.test(all[0]!);
+  const words = small ? all.slice(1) : all;
   if (words.length > MOST_NAME_WORDS || NAME_END.test(between) || !startsName(words[0]!) || !capital(words.at(-1)!)) return '';
-  return words.slice(1).some((word) => AFTER_NAME.has(word.toLowerCase())) ? '' : words.join(' ');
+  // Words that follow a name end it, the small first word too: "Ihre ist Example Sendung" names nobody.
+  return (small ? all : all.slice(1)).some((word) => AFTER_NAME.has(word.toLowerCase())) ? '' : words.join(' ');
 }
 
 /** Words written in capitals as a name is said: "EXAMPLE SHOP" is "Example Shop", while "IKEA" and "H&M" stay. */

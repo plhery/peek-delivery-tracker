@@ -20,6 +20,10 @@ describe('the shop a carrier\'s email names', () => {
     ['Colis de EXAMPLE® SHOP livré', 'Example Shop'],
     ['Ihre Die schöne Werkstatt Sendung verzögert sich', 'Die schöne Werkstatt'],
     ['Fwd: Your Haus und Hof Example shipment is on its way', 'Haus und Hof Example'],
+    // A first word in small letters is left out, a shop's or not.
+    ['Fwd: Ihre examplia Example Store Sendung ist unterwegs', 'Example Store'],
+    ['Ihre neue Example Sendung ist unterwegs', 'Example'],
+    ['Your upcoming Example Shop delivery', 'Example Shop'],
   ])('reads "%s"', (subject, shop) => {
     expect(shopNamedIn(subject, subject)).toBe(shop);
   });
@@ -36,6 +40,8 @@ describe('the shop a carrier\'s email names', () => {
     'Ihre neue Sendung ist unterwegs',
     'Your Example gift shipment is on its way',
     'Ihre Example ist unterwegs Sendung',
+    'Ihre examplia Sendung ist unterwegs',
+    'Ihre ist Example Sendung',
   ])('reads no shop in "%s"', (subject) => {
     expect(shopNamedIn(subject, subject)).toBe('');
   });
@@ -59,6 +65,7 @@ describe('the shop a carrier\'s email names', () => {
 
   it('never takes the carrier\'s own name for a shop', () => {
     expect(shopNamedIn('Your Example Express shipment is on its way', '', ['Example Express'])).toBe('');
+    expect(shopNamedIn('Ihre neue Example Express Sendung', '', ['Example Express'])).toBe('');
     expect(shopNamedIn('Info', 'Absender: Example Express AG', ['Example Express'])).toBe('');
   });
 });

@@ -315,16 +315,20 @@ export function earnedByParcel(book: PassportBook) {
 }
 
 /** The stamps Friends shares, in the order the apps before the new stamps know them. */
-const SHARED_STAMPS: ApiFriendStamp[] = ['first', 'ten', 'connected', 'express', 'acrossBorders', 'aroundWorld', 'theRegular', 'rightNextDoor', 'worthTheWait', 'busyDoorstep', 'pickedUp', 'homeForHolidays'];
+export const SHARED_STAMPS: ApiFriendStamp[] = ['first', 'ten', 'connected', 'express', 'acrossBorders', 'aroundWorld', 'theRegular', 'rightNextDoor', 'worthTheWait', 'busyDoorstep', 'pickedUp', 'homeForHolidays'];
 
-/** What Friends shows of a Passport: its arrivals, the average journey in whole days and its stamps, the calendar ones in UTC. */
-export function sharedPassport(parcels: readonly ParcelWithEvents[]): ApiFriendStats {
-  const { stats, stamps } = passportBook(parcels, 'UTC');
-  const earned = new Set(stamps.filter((stamp) => stamp.earned).map((stamp) => stamp.key as string));
+/**
+ * What Friends shows of a Passport: its arrivals, the average journey in whole days and its stamps, the calendar ones
+ * in UTC; with `countries`, each country its parcels went through and how many, by code, without their days or order.
+ */
+export function sharedPassport(parcels: readonly ParcelWithEvents[], { countries = false } = {}): ApiFriendStats {
+  const book = passportBook(parcels, 'UTC');
+  const earned = new Set(book.stamps.filter((stamp) => stamp.earned).map((stamp) => stamp.key as string));
   return {
-    deliveredCount: stats.deliveredCount,
-    averageDays: stats.averageDeliveryDuration == null ? null : Math.max(1, Math.ceil(stats.averageDeliveryDuration / 86400_000)),
+    deliveredCount: book.stats.deliveredCount,
+    averageDays: book.stats.averageDeliveryDuration == null ? null : Math.max(1, Math.ceil(book.stats.averageDeliveryDuration / 86400_000)),
     stamps: SHARED_STAMPS.filter((key) => earned.has(key)),
+    ...(countries ? { countries: book.countries.map(({ code, count }) => ({ code, count })).sort((a, b) => a.code.localeCompare(b.code)) } : {}),
   };
 }
 

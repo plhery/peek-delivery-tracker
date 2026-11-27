@@ -58,8 +58,13 @@ begin
    raise exception 'Non-consenting account became a friend';
  exception when invalid_parameter_value then null; end;
  view := public.friends_action('save_profile','B friend',false,false)->'snapshot';
- if view->'profile' is distinct from '{"nickname":"B friend","shareStats":false,"shareArrival":false}'::jsonb
+ -- A new profile shares its countries unless its owner chooses otherwise; saving without a choice keeps the last one.
+ if view->'profile' is distinct from '{"nickname":"B friend","shareStats":false,"shareArrival":false,"shareCountries":true}'::jsonb
     or view->'friends' <> '[]' then raise exception 'Profile setup did not return the saved choices: %',view; end if;
+ view := public.friends_action('save_profile','B friend',false,false,p_share_countries=>false)->'snapshot';
+ if view#>'{profile,shareCountries}' is distinct from 'false' or view#>'{ownCard,sharesCountries}' is distinct from 'false' then raise exception 'Countries choice ignored: %',view; end if;
+ view := public.friends_action('save_profile','B friend',false,false)->'snapshot';
+ if view#>'{profile,shareCountries}' is distinct from 'false' then raise exception 'Saving without a Countries choice changed it: %',view; end if;
  view := public.friends_action('accept_invite',p_code=>code)->'snapshot';
  if jsonb_array_length(view->'friends') <> 1 or view#>>'{friends,0,nickname}' <> 'A friend' then raise exception 'Friend not connected'; end if;
  if view::text like '%PRIVATE_%' or view::text like '%tracking%' or view::text like '%location%' or view::text like '%email%' or view::text like '%'||a::text||'%' then raise exception 'Private parcel/account data leaked'; end if;

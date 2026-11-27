@@ -14,7 +14,7 @@ Was du bekommst, hängt davon ab, wo du Peek nutzt:
 | | Website | Apps für iPhone, iPad, Mac und Android |
 | --- | --- | --- |
 | „Reisepass“ | Sobald du angemeldet bist | Mit oder ohne Konto; ohne Konto zählt er die Pakete auf diesem Gerät |
-| „Freunde“ | Sobald du angemeldet bist | Nur mit Konto: Ohne Konto zeigt der Tab „Teile Briefmarken und besondere Liefermomente mit Freunden.“ und bietet „Anmelden“ an |
+| „Freunde“ | Sobald du angemeldet bist | Nur mit Konto: Ohne Konto zeigt der Tab „Leg deinen Reisepass neben den eines Freundes. Er sieht die Briefmarken, Zahlen und Länder, die du teilst, nie deine Pakete.“ und bietet „Anmelden“ an |
 
 Auf der Website ohne Konto zeigt ein zugestelltes Paket, das eine Grenze überquert hat, „Über Grenzen hinweg“ und „Reisepass starten“, was zur Anmeldung führt. Wie die Anmeldung funktioniert, steht in [Peek ohne Konto nutzen](guide:account-or-guest).
 

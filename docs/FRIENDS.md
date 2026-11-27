@@ -5,16 +5,28 @@ discovery, contact import, follower counts, leaderboards or delivery feed.
 
 ## What is shared
 
-Joining is opt-in. The user picks a nickname and sees a live preview of exactly what
-friends will see. Two switches control:
+Joining is opt-in. Before the form, a made-up pair of passports shows what Friends looks
+like. The user picks a nickname and sees a live preview of exactly what friends will see.
+Three switches control:
 
 - **Passport stats**, on for a new profile: delivered count, average journey (rounded up
   to whole days) and earned Passport stamps.
+- **Countries**, under Passport stats and only with it: each country the owner's parcels
+  went through, with how many, without days or order. On for a new profile; a profile made
+  before the switch keeps it off until its owner turns it on. An app that doesn't know the
+  switch leaves it as it is.
 - **"A parcel arrived this week"**, off for a new profile: a coarse signal with no parcel
   or exact time.
 
 Nothing else crosses the boundary: no parcel names or contents, tracking numbers, carriers,
-locations, emails, photos, active shipments or ids.
+places finer than a country, emails, photos, active shipments or ids.
+
+## A friend's page
+
+It puts the friend's stamps beside the reader's: those they both have, those only the
+friend has (with how far the reader is from each), and those only the reader has; then the
+friend's countries, and how many of them the reader has too. The reader's side is worked out
+on the device from their own parcels, as their Passport is.
 
 ## Invitations
 
@@ -48,13 +60,14 @@ invitations and both sides of every friendship, and account deletion cascades th
 
 ## How it's enforced
 
-- The database's friend functions decide which cards a caller sees and which share stats.
+- The database's friend functions decide which cards a caller sees and which share stats
+  and countries.
   The server then works out each shared card's counts and stamps from the owner's parcels,
   served as the owner's apps get them, with the app's own Passport code
   (`sharedPassport` in [`passport.ts`](../src/lib/passport.ts)). It reads the whole circle's
   parcels at once, then checks again, as it builds the cards, that each owner still shares
-  stats with the viewer: a card whose owner stopped sharing or left the circle meanwhile
-  shows no stats. Client-sent statistics are never accepted.
+  stats, and countries, with the viewer: a card whose owner stopped sharing or left the
+  circle meanwhile shows neither. Client-sent statistics are never accepted.
 - Friend tables deny direct client access. The anonymous preview returns only the
   nickname of an unexpired invitation, and authenticated functions bind `auth.uid()` and
   return mutual friends only. Parcel RLS is unchanged.

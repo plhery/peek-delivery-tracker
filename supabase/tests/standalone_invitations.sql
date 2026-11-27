@@ -76,7 +76,7 @@ begin
     exception when no_data_found then null; end;
   end loop;
   if has_table_privilege('anon','public.friend_invites','select') or has_table_privilege('authenticated','public.friend_invites','select') then raise exception 'Invitation keys exposed through table access'; end if;
-  if has_function_privilege('anon','public.friends_action(text,text,boolean,boolean,text,uuid)','execute') then raise exception 'Anonymous acceptance RPC exposed'; end if;
+  if has_function_privilege('anon','public.friends_action(text,text,boolean,boolean,text,uuid,boolean)','execute') then raise exception 'Anonymous acceptance RPC exposed'; end if;
 end $$;
 rollback;
 select 'Standalone invitations: consent, auth, single use, expiry, revocation and legacy compatibility passed' as result;

@@ -6,6 +6,7 @@ import fixture from '../../shared/friends-demo.json';
 import type { ApiFriendsActionResponse, ApiFriendsSnapshot } from '../generated/apiContract';
 import { createFriendsClient, ownFriendCard, type FriendsClient } from '../lib/friends';
 import { Friends } from './Friends';
+import type { ParcelWithEvents } from '../types';
 import { webcrypto } from 'node:crypto';
 
 const previewId = 'Ab7kP2mQ9xR4tY6n';
@@ -28,9 +29,15 @@ describe('Friends', () => {
     expect(screen.getByText('Stats kept private')).toBeVisible();
     await user.click(screen.getByRole('button', { name: /^Mila/ }));
     const sheet = screen.getByRole('dialog', { name: 'Passport' });
-    await user.click(within(sheet).getByRole('button', { name: 'Express arrival' }));
-    expect(within(sheet).getByRole('button', { name: 'Express arrival' })).toHaveAttribute('popovertarget');
-    expect(sheet.querySelector('.passport-bubble')?.textContent).toContain('First arrival');
+    // With no parcels of the reader's, each of Mila's stamps is hers alone, with how far the reader is.
+    expect(within(sheet).getByRole('heading', { name: 'Only Mila 4' })).toBeVisible();
+    expect(within(sheet).queryByRole('heading', { name: /^You both have|^Only you/ })).toBeNull();
+    expect(within(sheet).getByText('Express arrival')).toBeVisible();
+    expect(within(sheet).getByText('You’re at 0 of 10')).toBeVisible();
+    // Her countries, with how many went there and no days.
+    expect(within(sheet).getByRole('heading', { name: 'Countries 4' })).toBeVisible();
+    expect(within(sheet).getByText('9 parcels')).toBeVisible();
+    expect(within(sheet).queryByText(/You both have \d/)).toBeNull();
     await user.click(within(sheet).getByText('Manage friendship'));
     await user.click(within(sheet).getByRole('button', { name: 'Remove friend' }));
     expect(within(sheet).getByText('Remove Mila?')).toBeVisible();
@@ -41,6 +48,25 @@ describe('Friends', () => {
     await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
     expect(screen.queryByRole('button', { name: /^Mila/ })).toBeNull();
   });
+  it('puts a friend\'s stamps beside the reader\'s: those they both have, then those only the friend has', async () => {
+    const parcel = (id: string, at: string): ParcelWithEvents => ({
+      id, label: `Parcel ${id}`, carrier: 'dhl', trackingNumber: `T${id}`, syncStatus: 'ok', createdAt: '2026-09-01T00:00:00Z',
+      events: [
+        { id: `${id}-1`, parcelId: id, stage: 'in_transit', occurredAt: at.replace('T12', 'T08'), description: 'In transit' },
+        { id: `${id}-2`, parcelId: id, stage: 'delivered', occurredAt: at, description: 'Delivered' },
+      ],
+    });
+    const user = userEvent.setup();
+    render(<Friends client={createFriendsClient(true)} parcels={[parcel('a', '2026-09-03T12:00:00Z')]} demo />);
+    await user.click(await screen.findByRole('button', { name: /^Mila/ }));
+    const sheet = screen.getByRole('dialog', { name: 'Passport' });
+    const both = within(sheet).getByRole('heading', { name: 'You both have 2' }).closest('section')!;
+    expect([...both.querySelectorAll('.stamp-card__name')].map((name) => name.textContent)).toEqual(['First arrival', 'Express arrival']);
+    const hers = within(sheet).getByRole('heading', { name: 'Only Mila 2' }).closest('section')!;
+    expect(within(hers).getByText('You’re at 1 of 10')).toBeVisible();
+    expect(within(hers).getByText('You’re at 1 of 3')).toBeVisible();
+    expect(within(sheet).queryByRole('heading', { name: /^Only you/ })).toBeNull();
+  });
   it('keeps privacy choices mounted, saves them, and omits removed entry points', async () => {
     const { user } = await show();
     expect(screen.queryByRole('button', { name: 'Open an invitation link' })).toBeNull();
@@ -49,8 +75,12 @@ describe('Friends', () => {
     expect(within(sheet).queryByRole('button', { name: 'Turn off Friends' })).toBeNull();
     const stats = within(sheet).getByRole('switch', { name: 'Stats & stamps' });
     const arrival = within(sheet).getByRole('switch', { name: 'Arrivals this week' });
+    expect(within(sheet).getByRole('switch', { name: 'Countries' })).toBeChecked();
     await user.click(stats); await user.click(arrival);
     expect(within(sheet).getByRole('switch', { name: 'Stats & stamps' })).toBe(stats);
+    // Countries ride on Stats & stamps.
+    expect(within(sheet).getByRole('switch', { name: 'Countries' })).toBeDisabled();
+    expect(within(sheet).getByRole('switch', { name: 'Countries' })).not.toBeChecked();
     expect(within(sheet).getByText('Stats kept private')).toBeVisible();
     await user.clear(within(sheet).getByRole('textbox')); expect(within(sheet).getByRole('button', { name: 'Save' })).toBeDisabled();
     await user.type(within(sheet).getByRole('textbox'), '  Robin  '); await user.click(within(sheet).getByRole('button', { name: 'Save' }));
@@ -65,12 +95,17 @@ describe('Friends', () => {
     vi.mocked(client.load).mockResolvedValue({ profile: null, ownCard: null, friends: [] });
     vi.mocked(client.action).mockResolvedValue({ snapshot: { ...enrolled(), friends: [] } });
     const user = userEvent.setup(); render(<Friends client={client} parcels={[]} demo={false} />);
+    // A sample pair comes before the form.
+    expect(await screen.findByText('A sample: Alex and Mila')).toBeVisible();
+    expect(screen.getByText('12 delivered · 3 days')).toBeVisible();
     await user.click(await screen.findByRole('button', { name: 'Create profile' }));
     expect(screen.getByRole('switch', { name: 'Stats & stamps' })).toBeChecked();
     expect(screen.getByRole('switch', { name: 'Arrivals this week' })).not.toBeChecked();
+    // A new profile shares its countries, under Stats & stamps.
+    expect(screen.getByRole('switch', { name: 'Countries' })).toBeChecked();
     const sheet = screen.getByRole('dialog'); expect(within(sheet).getByRole('button', { name: 'Create profile' })).toBeDisabled();
     await user.type(within(sheet).getByRole('textbox'), 'Alex'); await user.click(within(sheet).getByRole('button', { name: 'Create profile' }));
-    expect(client.action).toHaveBeenCalledWith({ action: 'save_profile', nickname: 'Alex', shareStats: true, shareArrival: false }, []);
+    expect(client.action).toHaveBeenCalledWith({ action: 'save_profile', nickname: 'Alex', shareStats: true, shareArrival: false, shareCountries: true }, []);
     expect(await screen.findByText('Add your first friend')).toBeVisible();
   });
   it('keeps demo invitations local and offers sign-in', async () => {

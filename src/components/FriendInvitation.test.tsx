@@ -9,7 +9,8 @@ import { FriendInvitation } from './FriendInvitation';
 
 const code = 'ab'.repeat(16);
 const noProfile: ApiFriendsSnapshot = { profile: null, ownCard: null, friends: [] };
-const enrolled: ApiFriendsSnapshot = { ...noProfile, profile: { nickname: 'Alex', shareStats: true, shareArrival: false } };
+// A profile saved before the Countries switch: it reads as not sharing them.
+const enrolled: ApiFriendsSnapshot = { ...noProfile, profile: { nickname: 'Alex', shareStats: true, shareArrival: false, shareCountries: false } };
 const signIn = vi.fn().mockResolvedValue(undefined);
 function Harness({ client }: { client?: FriendsClient }) {
   const invitation = usePendingInvitation();
@@ -104,13 +105,14 @@ it('shows the profile preview and saves explicit sharing choices before joining'
   expect(setup.getByRole('region', { name: 'Profile preview:' })).toBeVisible();
   expect(setup.getByRole('switch', { name: 'Stats & stamps' })).toBeChecked();
   expect(setup.getByRole('switch', { name: 'Arrivals this week' })).not.toBeChecked();
+  expect(setup.getByRole('switch', { name: 'Countries' })).toBeChecked();
   expect(client.action).not.toHaveBeenCalled();
   await user.type(screen.getByRole('textbox', { name: 'Nickname' }), 'Alex');
   await user.click(screen.getByRole('switch', { name: 'Arrivals this week' }));
   await user.click(screen.getByRole('button', { name: 'Turn on Friends & accept' }));
   await waitFor(() => expect(client.action).toHaveBeenCalledTimes(2));
   expect(vi.mocked(client.action).mock.calls.map(([action]) => action)).toEqual([
-    { action: 'save_profile', nickname: 'Alex', shareStats: true, shareArrival: true }, { action: 'accept_invite', code },
+    { action: 'save_profile', nickname: 'Alex', shareStats: true, shareArrival: true, shareCountries: true }, { action: 'accept_invite', code },
   ]);
   expect(await screen.findByText('Invitation closed')).toBeVisible();
 });
@@ -272,7 +274,7 @@ it('saves sharing edits without accepting the invitation', async () => {
   await user.click(screen.getByRole('switch', { name: 'Arrivals this week' }));
   await user.click(screen.getByRole('button', { name: 'Save' }));
   await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
-  expect(client.action).toHaveBeenCalledExactlyOnceWith({ action: 'save_profile', nickname: 'Alex', shareStats: true, shareArrival: true }, []);
+  expect(client.action).toHaveBeenCalledExactlyOnceWith({ action: 'save_profile', nickname: 'Alex', shareStats: true, shareArrival: true, shareCountries: false }, []);
   expect(screen.getByRole('button', { name: 'Become friends' })).toBeEnabled();
   expect(sessionStorage.getItem('sdt.pendingFriendInvitation.v1')).not.toBeNull();
 });

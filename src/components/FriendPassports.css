@@ -1,0 +1,29 @@
+/* Friends' sample pair, and a friend's Passport beside the reader's. */
+:root .friends-sample { margin: 0; display: grid; justify-items: center; gap: 12px; width: min(100%, 380px); }
+:root .friends-sample figcaption { color: var(--ink-soft); font-size: 12px; }
+:root .friends-sample__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; }
+:root .friends-sample__passport { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; min-width: 0; padding: 14px 12px 12px; border-radius: 16px; background: var(--tone-surface); text-align: left; animation: friends-sample-in 520ms var(--passport-settle) both; }
+:root .friends-sample__passport:first-child { rotate: -2deg; --from: -18px; }
+:root .friends-sample__passport:last-child { rotate: 2deg; --from: 18px; animation-delay: 90ms; }
+:root .friends-sample__passport strong { font-size: 16px; font-weight: 650; letter-spacing: -.3px; }
+:root .friends-sample__passport small { color: var(--tone); font-size: 11px; }
+:root .friends-sample__seals { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+@keyframes friends-sample-in { from { opacity: 0; translate: var(--from, 0) 10px; } }
+
+:root .friend-compare { display: grid; gap: 26px; }
+:root .friend-compare__group h3 { margin: 0 0 14px; font-size: 16px; font-weight: 650; }
+:root .friend-compare__count { color: var(--ink-soft); font-weight: 400; }
+:root .friend-compare__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px 8px; margin: 0; padding: 0; list-style: none; }
+:root .friend-compare__stamp { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; animation: passport-rise 320ms calc(160ms + min(var(--rise), 12) * 45ms) var(--passport-settle) both; }
+:root .friend-compare__stamp .stamp-card__name { color: var(--ink); }
+:root .friend-compare__progress { color: var(--ink-soft); font-size: 10px; line-height: 1.3; }
+:root .friend-countries__common { margin: -8px 0 14px; color: var(--ink-soft); font-size: 12px; }
+:root .friend-countries .passport-countries__grid { margin: 0; padding: 0; list-style: none; }
+:root .friend-country { display: flex; flex-direction: column; align-items: center; gap: 3px; text-align: center; animation: passport-rise 320ms calc(160ms + min(var(--rise), 12) * 45ms) var(--passport-settle) both; }
+/* Countries ride on Stats & stamps: the switch sits under it, and rests while it is off. */
+:root .friends-toggle--within { padding-left: 14px; }
+:root .friends-toggle--within[data-off=true] > span { color: var(--ink-soft); }
+@media (max-width: 360px) { :root .friend-compare__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (prefers-reduced-motion: reduce) {
+  :root .friends-sample__passport, :root .friend-compare__stamp, :root .friend-country { animation: none; }
+}

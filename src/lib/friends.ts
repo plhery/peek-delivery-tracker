@@ -26,7 +26,7 @@ export function ownFriendCard(parcels: readonly ParcelWithEvents[], profile: Api
   const week = new Date(); week.setUTCHours(0, 0, 0, 0); week.setUTCDate(week.getUTCDate() - (week.getUTCDay() + 6) % 7);
   return {
     id: '44000000-0000-4000-8000-000000000004', nickname: profile.nickname,
-    stats: profile.shareStats ? sharedPassport(parcels) : null,
+    stats: profile.shareStats ? sharedPassport(parcels, { countries: profile.shareCountries === true }) : null,
     arrivedThisWeek: profile.shareArrival ? parcels.some((p) => currentStage(p.events, p.returnHeld) === 'delivered' && (() => {
       const arrived = Math.min(...p.events.filter((e) => e.stage === 'delivered').map((e) => Date.parse(e.occurredAt)));
       return arrived >= week.getTime() && arrived <= Date.now();
@@ -56,7 +56,10 @@ export function createFriendsClient(demo: boolean, auth?: ApiAuth) {
     async action(action: ApiFriendsActionRequest, parcels: readonly ParcelWithEvents[]): Promise<ApiFriendsActionResponse> {
       if (!demo) return request(action);
       switch (action.action) {
-        case 'save_profile': local.profile = { nickname: action.nickname!.trim(), shareStats: action.shareStats!, shareArrival: action.shareArrival! }; break;
+        case 'save_profile': local.profile = {
+          nickname: action.nickname!.trim(), shareStats: action.shareStats!, shareArrival: action.shareArrival!,
+          shareCountries: action.shareCountries ?? local.profile?.shareCountries ?? true,
+        }; break;
         case 'disable': local = { profile: null, ownCard: null, friends: [] }; break;
         case 'remove_friend': local.friends = local.friends.filter((friend) => friend.id !== action.friendId); break;
         default: throw new FriendsError('friends.demoInvites');

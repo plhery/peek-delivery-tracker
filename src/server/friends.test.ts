@@ -16,9 +16,9 @@ import type { JsonObject } from './types';
 
 const id = '11000000-0000-4000-8000-000000000001';
 const card = { id, nickname: 'Mila', stats: { deliveredCount: 12, averageDays: 3, stamps: ['first', 'ten'] }, arrivedThisWeek: null };
-const snapshot = { profile: { nickname: 'Alex', shareStats: true, shareArrival: false }, ownCard: card, friends: [card] };
+const snapshot = { profile: { nickname: 'Alex', shareStats: true, shareArrival: false, shareCountries: true }, ownCard: card, friends: [card] };
 /** The card and snapshot as the database gives them: the server works out the shared stats. */
-const storedCard = { id, nickname: 'Mila', sharesStats: true, arrivedThisWeek: null };
+const storedCard = { id, nickname: 'Mila', sharesStats: true, sharesCountries: false, arrivedThisWeek: null };
 const storedSnapshot = { ...snapshot, ownCard: storedCard, friends: [storedCard] };
 const owner = '11000000-0000-4000-8000-0000000000aa';
 /** A stored parcel row, as the database gives it to the server: each scan its stage, time and location. */
@@ -38,7 +38,7 @@ beforeEach(() => {
   vi.spyOn(console, 'log').mockImplementation(() => undefined); vi.spyOn(console, 'error').mockImplementation(() => undefined);
   vi.spyOn(SupabaseAuthenticator.prototype, 'validate').mockResolvedValue({ id, email: null, authenticatedAt: null, sessionId: null });
   vi.stubEnv('SUPABASE_SERVICE_ROLE_KEY', 'test-service');
-  vi.spyOn(SupabaseServiceClient.prototype, 'passportSharers').mockImplementation(async (ids) => new Map(ids.filter((profile) => profile === id).map((profile) => [profile, owner])));
+  vi.spyOn(SupabaseServiceClient.prototype, 'passportSharers').mockImplementation(async (ids) => new Map(ids.filter((profile) => profile === id).map((profile) => [profile, { owner, countries: true }])));
   vi.spyOn(SupabaseServiceClient.prototype, 'passportParcels').mockImplementation(async (owners) => new Map(owners.map((account) => [account, parcels])));
 });
 afterEach(() => { vi.restoreAllMocks(); vi.unstubAllEnvs(); });
@@ -69,6 +69,27 @@ describe('Friends privacy boundary', () => {
     // An accepted friend's card is worked out the same way.
     vi.mocked(SupabaseUserClient.prototype.request).mockResolvedValue({ snapshot: storedSnapshot, acceptedFriend: storedCard });
     expect(await (await call({ action: 'accept_invite', code: 'a'.repeat(32) })).json()).toEqual({ snapshot, acceptedFriend: card });
+  });
+
+  it('adds a friend\'s countries, with how many and no days, only while they share them', async () => {
+    const travelled = [stored(1, [['accepted', '2026-08-10T10:00:00Z', 'Leipzig, DE'], ['in_transit', '2026-08-11T10:00:00Z', 'Basel, CH'], ['delivered', '2026-08-12T10:00:00Z', 'Bern, CH']]),
+      stored(2, [['accepted', '2026-09-10T10:00:00Z', 'Bern, CH'], ['delivered', '2026-09-11T10:00:00Z', 'Zürich, CH']])];
+    vi.mocked(SupabaseServiceClient.prototype.passportParcels).mockImplementation(async (owners) => new Map(owners.map((account) => [account, travelled])));
+    const request = vi.spyOn(SupabaseUserClient.prototype, 'request').mockResolvedValue({ ...storedSnapshot, friends: [{ ...storedCard, sharesCountries: true }] });
+    const countries = [{ code: 'CH', count: 2 }, { code: 'DE', count: 1 }];
+    let body = await (await call()).json();
+    expect(body.friends[0].stats.countries).toEqual(countries);
+    expect(body.ownCard.stats).not.toHaveProperty('countries');
+    expect(JSON.stringify(body)).not.toMatch(/2026-|Bern|Leipzig/);
+    // A friend who turned Countries off while the parcels were read shows none.
+    const sharers = vi.mocked(SupabaseServiceClient.prototype.passportSharers);
+    sharers.mockImplementation(async (ids, viewer) => new Map(ids.filter((profile) => profile === id).map((profile) => [profile, { owner, countries: viewer === undefined }])));
+    body = await (await call()).json();
+    expect(body.friends[0].stats).toMatchObject({ deliveredCount: 2 });
+    expect(body.friends[0].stats).not.toHaveProperty('countries');
+    request.mockResolvedValue(storedSnapshot);
+    sharers.mockImplementation(async (ids) => new Map(ids.filter((profile) => profile === id).map((profile) => [profile, { owner, countries: true }])));
+    expect((await (await call()).json()).friends[0].stats).not.toHaveProperty('countries');
   });
 
   it('counts a code that is also a state toward a friend\'s stamps only where the server placed the scan', async () => {
@@ -122,7 +143,12 @@ describe('Friends privacy boundary', () => {
   it('uses the authenticated database RPC, never a client-supplied owner', async () => {
     const rpc = vi.spyOn(SupabaseUserClient.prototype, 'request').mockResolvedValue({ snapshot: storedSnapshot });
     expect((await call({ action: 'save_profile', nickname: ' Alex ', shareStats: true, shareArrival: false })).status).toBe(200);
-    expect(rpc).toHaveBeenCalledWith('/rest/v1/rpc/friends_action', { method: 'POST', body: { p_action: 'save_profile', p_nickname: 'Alex', p_share_stats: true, p_share_arrival: false, p_code: null, p_friend_id: null } });
+    expect(rpc).toHaveBeenCalledWith('/rest/v1/rpc/friends_action', { method: 'POST', body: { p_action: 'save_profile', p_nickname: 'Alex', p_share_stats: true, p_share_arrival: false, p_code: null, p_friend_id: null, p_share_countries: null } });
+    // The Countries switch is a save_profile choice only: left out, the database keeps a saved one and starts a new one on.
+    expect((await call({ action: 'save_profile', nickname: 'Alex', shareStats: true, shareArrival: false, shareCountries: false })).status).toBe(200);
+    expect(rpc).toHaveBeenLastCalledWith('/rest/v1/rpc/friends_action', { method: 'POST', body: { p_action: 'save_profile', p_nickname: 'Alex', p_share_stats: true, p_share_arrival: false, p_code: null, p_friend_id: null, p_share_countries: false } });
+    expect((await call({ action: 'save_profile', nickname: 'Alex', shareStats: true, shareArrival: false, shareCountries: 'yes' })).status).toBe(400);
+    expect((await call({ action: 'create_invite', shareCountries: true })).status).toBe(400);
     expect((await call({ action: 'disable', userId: id })).status).toBe(400);
   });
   it('denies unauthenticated reads and validates before accessing the database', async () => {
@@ -254,8 +280,8 @@ describe('a circle\'s shared Passports', () => {
   /** One journey of a carrier: accepted at `from`, then delivered at `to` (an `[stage, time, place]` scan in between, if any). */
   const journey = (user_id: string, carrier: string, from: [string, string], to: [string, string], between: Array<[string, string, string]> = [], extra: JsonObject = {}) =>
     held(user_id, carrier, [['accepted', ...from], ...between, ['delivered', ...to]], extra);
-  const storedCardOf = (index: number, nickname: string, sharesStats = true) => ({ id: profileOf(index), nickname, sharesStats, arrivedThisWeek: null });
-  const profile = { nickname: 'Alex', shareStats: true, shareArrival: false };
+  const storedCardOf = (index: number, nickname: string, sharesStats = true) => ({ id: profileOf(index), nickname, sharesStats, sharesCountries: false, arrivedThisWeek: null });
+  const profile = { nickname: 'Alex', shareStats: true, shareArrival: false, shareCountries: false };
   /** The cards and stats as the server worked them out before the circle was read at once: each owner's parcels read on their own. */
   async function readAlone(owners: Map<string, string>): Promise<Map<string, unknown>> {
     const service = new SupabaseServiceClient('https://database.example', 'service-key');
@@ -346,8 +372,8 @@ describe('a circle\'s shared Passports', () => {
     const response = await call();
     expect(response.status).toBe(200);
     const restamped = (card: ReturnType<typeof storedCardOf>) => {
-      const { sharesStats, ...shown } = card;
-      return { ...shown, stats: sharesStats ? before.get(card.id) : null };
+      const { id: profile, nickname, arrivedThisWeek, sharesStats } = card;
+      return { id: profile, nickname, arrivedThisWeek, stats: sharesStats ? before.get(profile) : null };
     };
     expect(await response.json()).toEqual({ profile, ownCard: restamped(stored.ownCard), friends: stored.friends.map(restamped) });
     // The circle is varied enough to tell: most stamps, a provider's copy and a placeholder number left out, an empty

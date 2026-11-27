@@ -14,7 +14,7 @@ Cosa ottieni dipende da dove usi Peek:
 | | Sito | App per iPhone, iPad, Mac e Android |
 | --- | --- | --- |
 | «Passaporto» | Dopo l'accesso | Con o senza account; senza, conta i pacchi su quel dispositivo |
-| «Amici» | Dopo l'accesso | Solo con un account: senza, la scheda dice «Condividi francobolli e traguardi delle consegne con gli amici.» e propone «Accedi» |
+| «Amici» | Dopo l'accesso | Solo con un account: senza, la scheda dice «Metti il tuo passaporto accanto a quello di un amico. Vedrà i francobolli, i numeri e i paesi che condividi, mai i tuoi pacchi.» e propone «Accedi» |
 
 Sul sito senza account, un pacco consegnato che ha attraversato un confine mostra «Oltre confine» e «Inizia un passaporto», che porta all'accesso. Come funziona l'accesso è spiegato in [Usare Peek senza account](guide:account-or-guest).
 

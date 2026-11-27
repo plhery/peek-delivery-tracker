@@ -21,9 +21,9 @@ function nickname(value: unknown): value is string {
 export function friendsAction(payload: JsonObject): ApiFriendsActionRequest {
   if (typeof payload.action !== 'string' || !Object.hasOwn(fields, payload.action)) throw invalid();
   const required = fields[payload.action as ApiFriendsActionRequest['action']];
-  const allowed = payload.action === 'revoke_invite' ? [...required, 'code'] : required;
+  const allowed = payload.action === 'revoke_invite' ? [...required, 'code'] : payload.action === 'save_profile' ? [...required, 'shareCountries'] : required;
   if (Object.keys(payload).some((key) => key !== 'action' && !allowed.includes(key)) || required.some((key) => payload[key] === undefined)) throw invalid();
-  if (payload.action === 'save_profile' && (!nickname(payload.nickname) || typeof payload.shareStats !== 'boolean' || typeof payload.shareArrival !== 'boolean')) throw invalid();
+  if (payload.action === 'save_profile' && (!nickname(payload.nickname) || typeof payload.shareStats !== 'boolean' || typeof payload.shareArrival !== 'boolean' || !(payload.shareCountries === undefined || typeof payload.shareCountries === 'boolean'))) throw invalid();
   if (allowed.includes('code') && payload.code !== undefined && !isInvitationCode(payload.code)) throw invalid();
   if (allowed.includes('friendId') && (typeof payload.friendId !== 'string' || !uuid.test(payload.friendId))) throw invalid();
   return { ...payload, ...(typeof payload.nickname === 'string' ? { nickname: payload.nickname.trim() } : {}) } as unknown as ApiFriendsActionRequest;
@@ -65,17 +65,17 @@ async function invitationPreviewLookup(client: SupabaseServiceClient, column: 'c
 }
 function profile(value: unknown): ApiFriendProfile | null {
   if (value === null) return null;
-  if (!isRecord(value) || !nickname(value.nickname) || typeof value.shareStats !== 'boolean' || typeof value.shareArrival !== 'boolean') return corrupt();
-  return { nickname: value.nickname, shareStats: value.shareStats, shareArrival: value.shareArrival };
+  if (!isRecord(value) || !nickname(value.nickname) || typeof value.shareStats !== 'boolean' || typeof value.shareArrival !== 'boolean' || typeof value.shareCountries !== 'boolean') return corrupt();
+  return { nickname: value.nickname, shareStats: value.shareStats, shareArrival: value.shareArrival, shareCountries: value.shareCountries };
 }
-/** A card as the database gives it: whether its owner shares stats, which the server works out (withSharedPassports). */
-export type StoredFriendCard = Omit<ApiFriendCard, 'stats'> & { sharesStats: boolean };
+/** A card as the database gives it: whether its owner shares stats and countries, which the server works out (withSharedPassports). */
+export type StoredFriendCard = Omit<ApiFriendCard, 'stats'> & { sharesStats: boolean; sharesCountries: boolean };
 export type StoredFriendsSnapshot = Omit<ApiFriendsSnapshot, 'ownCard' | 'friends'> & { ownCard: StoredFriendCard | null; friends: StoredFriendCard[] };
 type StoredFriendsActionResponse = Omit<ApiFriendsActionResponse, 'snapshot' | 'acceptedFriend'> & { snapshot?: StoredFriendsSnapshot; acceptedFriend?: StoredFriendCard };
 /** Explicit projection is a second boundary: adding a DB field can never publish it. */
 export function friendCard(value: unknown): StoredFriendCard {
-  if (!isRecord(value) || typeof value.id !== 'string' || !uuid.test(value.id) || !nickname(value.nickname) || typeof value.sharesStats !== 'boolean' || !(value.arrivedThisWeek === null || typeof value.arrivedThisWeek === 'boolean')) return corrupt();
-  return { id: value.id, nickname: value.nickname, sharesStats: value.sharesStats, arrivedThisWeek: value.arrivedThisWeek };
+  if (!isRecord(value) || typeof value.id !== 'string' || !uuid.test(value.id) || !nickname(value.nickname) || typeof value.sharesStats !== 'boolean' || typeof value.sharesCountries !== 'boolean' || !(value.arrivedThisWeek === null || typeof value.arrivedThisWeek === 'boolean')) return corrupt();
+  return { id: value.id, nickname: value.nickname, sharesStats: value.sharesStats, sharesCountries: value.sharesCountries, arrivedThisWeek: value.arrivedThisWeek };
 }
 export function friendsSnapshot(value: unknown): StoredFriendsSnapshot {
   if (!isRecord(value) || !Array.isArray(value.friends) || value.friends.length > 50) return corrupt();
@@ -84,25 +84,28 @@ export function friendsSnapshot(value: unknown): StoredFriendsSnapshot {
   return { profile: own, ownCard: value.ownCard === null ? null : friendCard(value.ownCard), friends: value.friends.map(friendCard) };
 }
 /**
- * A shared card's counts and stamps, worked out with the app's own Passport rules over the parcels its
- * owner's apps read, as served to them. The whole circle's parcels come in one read (`passportParcels`).
- * The card still carries only those, and only while its owner shares them with the viewer: that is checked
- * again once the parcels are read, so a card whose owner stopped sharing or left the viewer's circle in
- * between loses them.
+ * A shared card's counts and stamps, and its countries while its owner shares those too, worked out with the
+ * app's own Passport rules over the parcels its owner's apps read, as served to them. The whole circle's parcels
+ * come in one read (`passportParcels`). The card still carries only those, and only while its owner shares them
+ * with the viewer: that is checked again once the parcels are read, so a card whose owner stopped sharing or left
+ * the viewer's circle in between loses them.
  */
 export async function withSharedPassports(service: SupabaseServiceClient, viewer: string, snapshot: StoredFriendsSnapshot, acceptedFriend?: StoredFriendCard): Promise<{ snapshot: ApiFriendsSnapshot; acceptedFriend?: ApiFriendCard }> {
   const shared = [snapshot.ownCard, ...snapshot.friends, acceptedFriend].filter((card): card is StoredFriendCard => Boolean(card?.sharesStats));
   const owners = await service.passportSharers(shared.map(({ id }) => id));
-  const parcels = await service.passportParcels([...owners.values()]);
+  const parcels = await service.passportParcels([...owners.values()].map(({ owner }) => owner));
   const allowed = owners.size ? await service.passportSharers([...owners.keys()], viewer) : owners;
   const passports = new Map<string, ApiFriendStats>();
   const passport = (owner: string) => {
-    if (!passports.has(owner)) passports.set(owner, sharedPassport((parcels.get(owner) ?? []).map((row) => toParcel(withEventPlaces(row, { peekAi: false }) as unknown as ApiPackageRow))));
+    if (!passports.has(owner)) passports.set(owner, sharedPassport((parcels.get(owner) ?? []).map((row) => toParcel(withEventPlaces(row, { peekAi: false }) as unknown as ApiPackageRow)), { countries: true }));
     return passports.get(owner)!;
   };
-  const restamp = ({ sharesStats, ...card }: StoredFriendCard): ApiFriendCard => {
-    const owner = sharesStats ? owners.get(card.id) : undefined;
-    return { ...card, stats: owner && allowed.get(card.id) === owner ? passport(owner) : null };
+  const restamp = ({ sharesStats, sharesCountries, ...card }: StoredFriendCard): ApiFriendCard => {
+    const sharer = sharesStats ? owners.get(card.id) : undefined;
+    const still = sharer && allowed.get(card.id);
+    if (!sharer || !still || still.owner !== sharer.owner) return { ...card, stats: null };
+    const { countries, ...stats } = passport(sharer.owner);
+    return { ...card, stats: sharesCountries && sharer.countries && still.countries ? { ...stats, countries } : stats };
   };
   return {
     snapshot: { ...snapshot, ownCard: snapshot.ownCard && restamp(snapshot.ownCard), friends: snapshot.friends.map(restamp) },
@@ -115,6 +118,7 @@ export async function friendsRPC(client: SupabaseUserClient, action?: ApiFriends
       method: 'POST', body: action ? {
         p_action: action.action, p_nickname: action.nickname ?? null, p_share_stats: action.shareStats ?? null,
         p_share_arrival: action.shareArrival ?? null, p_code: action.code ?? null, p_friend_id: action.friendId ?? null,
+        ...(action.action === 'save_profile' ? { p_share_countries: action.shareCountries ?? null } : {}),
       } : {},
     });
   } catch (error) {

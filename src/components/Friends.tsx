@@ -11,7 +11,7 @@ import { captureCardOrigin, type CardOrigin } from '../lib/cardTransition';
 import type { ParcelWithEvents } from '../types';
 import { Icon } from './Icon';
 import { InvitationParcel } from './InvitationParcel';
-import { FriendStampCollection } from './FriendStampCollection';
+import { FriendPassportCompare, FriendsSample } from './FriendPassports';
 import './Friends.css';
 import { useFriendsActivity } from './FriendsActivity';
 
@@ -109,11 +109,11 @@ export function Friends({ client, parcels, demo, onExitDemo }: { client: Friends
     {notice && <p role="status" className="friends-notice"><Icon name="check" />{t(notice)}</p>}
     {!panel && errorView}
     {!data ? <div className="friends-loading" role="status">{error ? <button className="button button--secondary" onClick={() => void load()}>{t('common.retry')}</button> : <div className="skeleton" aria-label={t('friends.title')} />}</div> : !data.profile ? <div className="friends-start">
-      <FriendsPostagePair /><h2>{t('friends.title')}</h2><p>{t('friends.introSummary')}</p>
+      <FriendsSample /><h2>{t('friends.title')}</h2><p>{t('friends.introSideBySide')}</p>
       <button className="button button--primary" onClick={() => setPanel('create')}>{t('friends.join')}</button>
     </div> : <>
       <button className="friends-own-row tone-blue" aria-label={t('friends.settings')} onClick={() => setPanel('settings')}>
-        <FriendAvatar name={data.profile.nickname} /><span><strong>{t('friends.yourSharing')}</strong><small>{t(data.profile.shareStats ? 'friends.shareStats' : 'friends.privateStats')}{data.profile.shareArrival && <> · {t('friends.shareArrival')}</>}</small></span><Icon name="settings" />
+        <FriendAvatar name={data.profile.nickname} /><span><strong>{t('friends.yourSharing')}</strong><small>{t(data.profile.shareStats ? 'friends.shareStats' : 'friends.privateStats')}{data.profile.shareStats && data.profile.shareCountries && <> · {t('friends.shareCountries')}</>}{data.profile.shareArrival && <> · {t('friends.shareArrival')}</>}</small></span><Icon name="settings" />
       </button>
       {data.friends.length ? <section><div className="section-heading friends-circle-heading"><h2>{t('friends.circle')} <span>{data.friends.length}</span></h2><button className="friends-invite-trigger" disabled={busy} onClick={() => void inviteFriend()}><Icon name="plus" />{t('friends.invite')}</button></div>
         <div className="friends-grid">{featured && friendButton(featured)}{remainingFriends.map(friendButton)}</div>
@@ -121,7 +121,7 @@ export function Friends({ client, parcels, demo, onExitDemo }: { client: Friends
     </>}
     {panel && typeof panel === 'object' && <FriendPage friendId={panel.id} origin={origin} title={t('passport.title')} onClose={close} busy={busy}>
       {errorView}
-      {selected && <FriendDetails friend={selected} busy={busy} onRemove={async () => { if (await act({ action: 'remove_friend', friendId: selected.id })) close(); }} />}
+      {selected && <FriendDetails friend={selected} parcels={parcels} busy={busy} onRemove={async () => { if (await act({ action: 'remove_friend', friendId: selected.id })) close(); }} />}
     </FriendPage>}
     {panel && typeof panel === 'string' && <FriendsSheet kind={panel === 'invite' ? 'invite' : 'page'} title={t(panel === 'settings' ? 'friends.settings' : panel === 'create' ? 'friends.join' : 'friends.inviteTitle')} onClose={close} busy={busy}>
       {errorView}
@@ -138,7 +138,7 @@ function FriendCardBody({ friend }: { friend: ApiFriendCard }) {
 }
 export function FriendSharingPreview({ friend }: { friend: ApiFriendCard }) {
   const { t } = useI18n();
-  return <div className="friend-sharing-preview tone-blue"><div><strong>{friend.nickname}</strong><FriendAvatar name={friend.nickname} /></div><p className="friend-sharing-preview__stats">{friend.stats ? <>{friend.stats.deliveredCount} {t('passport.delivered', { count: friend.stats.deliveredCount }).toLocaleLowerCase()} · {friend.stats.averageDays == null ? '—' : t(friend.stats.averageDays === 1 ? 'friends.day' : 'friends.days', { count: friend.stats.averageDays })} · {t('friends.stampCount', { count: friend.stats.stamps.length })}</> : t('friends.privateStats')}</p><p className="friend-sharing-preview__arrival" data-shared={friend.arrivedThisWeek !== null} aria-hidden={friend.arrivedThisWeek === null}>{t(friend.arrivedThisWeek ? 'friends.arrived' : 'friends.noArrival')}</p></div>;
+  return <div className="friend-sharing-preview tone-blue"><div><strong>{friend.nickname}</strong><FriendAvatar name={friend.nickname} /></div><p className="friend-sharing-preview__stats">{friend.stats ? <>{friend.stats.deliveredCount} {t('passport.delivered', { count: friend.stats.deliveredCount }).toLocaleLowerCase()} · {friend.stats.averageDays == null ? '—' : t(friend.stats.averageDays === 1 ? 'friends.day' : 'friends.days', { count: friend.stats.averageDays })} · {t('friends.stampCount', { count: friend.stats.stamps.length })}{friend.stats.countries && <> · {t('friends.countryCount', { count: friend.stats.countries.length })}</>}</> : t('friends.privateStats')}</p><p className="friend-sharing-preview__arrival" data-shared={friend.arrivedThisWeek !== null} aria-hidden={friend.arrivedThisWeek === null}>{t(friend.arrivedThisWeek ? 'friends.arrived' : 'friends.noArrival')}</p></div>;
 }
 export function FriendPostcard({ nickname, arrivedThisWeek, tone = 'lilac' }: { nickname: string; arrivedThisWeek?: boolean | null; tone?: string }) {
   const { t } = useI18n();return <div className={`friend-postcard tone-${tone}`}><div><h2>{nickname}</h2>{arrivedThisWeek && <span className="friend-card__arrival">{t('friends.arrived')}</span>}</div><FriendAvatar name={nickname} /></div>;
@@ -148,13 +148,16 @@ export function FriendProfileForm({ profile, parcels, busy, onSave, submitKey }:
   const [name, setName] = useState(profile?.nickname ?? '');
   const [stats, setStats] = useState(profile?.shareStats ?? true);
   const [arrival, setArrival] = useState(profile?.shareArrival ?? false);
+  // A new profile shares its countries; one saved before the switch reads as not sharing them.
+  const [countries, setCountries] = useState(profile ? profile.shareCountries === true : true);
   const previewId = useId();
-  const value = { nickname: name.trim(), shareStats: stats, shareArrival: arrival };
+  const value = { nickname: name.trim(), shareStats: stats, shareArrival: arrival, shareCountries: countries };
   return <form className="friends-profile" onSubmit={(event) => { event.preventDefault(); if (value.nickname) void onSave(value); }}>
     <label className="friends-name">{t('friends.nickname')}<span className="friends-name__field"><input value={name} onChange={(event) => setName(event.target.value)} maxLength={24} placeholder={t('friends.nicknamePlaceholder')} autoComplete="off" required disabled={busy} /></span></label>
     <section className="friends-preview" aria-labelledby={previewId}><p id={previewId}>{t('friends.preview')}</p><FriendSharingPreview friend={ownFriendCard(parcels, { ...value, nickname: value.nickname || t('friends.you') })} /></section>
     <div className="friends-sharing">
       <label className="friends-toggle"><input type="checkbox" role="switch" aria-label={t('friends.shareStats')} checked={stats} onChange={(event) => { setStats(event.target.checked); }} disabled={busy} /><span>{t('friends.shareStats')}<small>{t('friends.sharedStatsSummary')}</small></span></label>
+      <label className="friends-toggle friends-toggle--within" data-off={!stats}><input type="checkbox" role="switch" aria-label={t('friends.shareCountries')} checked={stats && countries} onChange={(event) => { setCountries(event.target.checked); }} disabled={busy || !stats} /><span>{t('friends.shareCountries')}<small>{t('friends.sharedCountriesSummary')}</small></span></label>
       <label className="friends-toggle"><input type="checkbox" role="switch" aria-label={t('friends.shareArrival')} checked={arrival} onChange={(event) => { setArrival(event.target.checked); }} disabled={busy} /><span>{t('friends.shareArrival')}</span></label>
     </div>
     <p className="friends-privacy"><Icon name="lock" />{t('friends.privacy')}</p><button className="button button--primary friends-join" disabled={busy || !value.nickname}>{t(submitKey ?? (profile ? 'friends.save' : 'friends.join'))}</button>
@@ -211,8 +214,8 @@ function FriendsInvite({ nickname, code, previewId, previousInviteCount, busy, a
     </details>
   </> : busy || code ? <div className="friends-invite__loading" role="status" aria-label={t('friends.link')}><Icon name="refresh" className="spin" /></div> : <button className="button button--primary" onClick={() => void onRetry()}>{t('common.retry')}</button>}</div>;
 }
-function FriendDetails({ friend, busy, onRemove }: { friend: ApiFriendCard; busy: boolean; onRemove: () => Promise<void> }) {
+function FriendDetails({ friend, parcels, busy, onRemove }: { friend: ApiFriendCard; parcels: ParcelWithEvents[]; busy: boolean; onRemove: () => Promise<void> }) {
   const { t } = useI18n(); const [removing, setRemoving] = useState(false);
-  return <div className="friend-details"><FriendPostcard nickname={friend.nickname} arrivedThisWeek={friend.arrivedThisWeek} tone={friendTone(friend.id)} />{friend.stats ? <><div className="friend-details__metrics"><div><strong>{friend.stats.deliveredCount}</strong><span>{t('passport.delivered', { count: friend.stats.deliveredCount })}</span></div><div><strong>{friend.stats.averageDays == null ? '—' : t(friend.stats.averageDays === 1 ? 'friends.day' : 'friends.days', { count: friend.stats.averageDays })}</strong><span>{t('passport.average')}</span></div></div><FriendStampCollection stats={friend.stats} /></> : <p className="friends-privacy"><Icon name="lock" />{t('friends.privateStats')}</p>}
+  return <div className="friend-details"><FriendPostcard nickname={friend.nickname} arrivedThisWeek={friend.arrivedThisWeek} tone={friendTone(friend.id)} />{friend.stats ? <><div className="friend-details__metrics"><div><strong>{friend.stats.deliveredCount}</strong><span>{t('passport.delivered', { count: friend.stats.deliveredCount })}</span></div><div><strong>{friend.stats.averageDays == null ? '—' : t(friend.stats.averageDays === 1 ? 'friends.day' : 'friends.days', { count: friend.stats.averageDays })}</strong><span>{t('passport.average')}</span></div></div><FriendPassportCompare friend={friend} stats={friend.stats} parcels={parcels} /></> : <p className="friends-privacy"><Icon name="lock" />{t('friends.privateStats')}</p>}
   <details className="friends-manage"><summary>{t('friends.manageFriendship')}</summary>{removing ? <div className="friends-remove-confirm"><h3>{t('friends.removeTitle', { name: friend.nickname })}</h3><p>{t('friends.removeDetail')}</p><button className="button button--secondary" disabled={busy} onClick={() => void onRemove()}>{t('friends.remove')}</button><button className="text-button" disabled={busy} onClick={() => setRemoving(false)}>{t('common.cancel')}</button></div> : <button className="friends-remove" disabled={busy} onClick={() => setRemoving(true)}>{t('friends.remove')}</button>}</details></div>;
 }

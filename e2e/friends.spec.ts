@@ -16,7 +16,7 @@ const atRest = (sheet: Locator) => sheet.evaluate(async (element) => {
     .map((animation) => animation.finished));
 });
 
-test('The compact circle opens Passport stamps and keeps bubble dismissal inside its sheet', async ({ page }) => {
+test('The compact circle opens a friend\'s Passport beside the reader\'s', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   const mila = page.getByRole('button', { name: /^Mila/ });
@@ -27,18 +27,17 @@ test('The compact circle opens Passport stamps and keeps bubble dismissal inside
   await mila.click();
   const details = page.locator('.friends-sheet');
   await expect(details.locator('.friend-postcard')).toContainText('Mila');
-  await expect(details.locator('.passport-seal--locked').first()).toBeVisible();
+  // Her stamps beside the demo's, then her countries with how many the demo has too.
+  await expect(details.getByRole('heading', { name: 'You both have 4' })).toBeVisible();
+  await expect(details.getByRole('heading', { name: 'Only you 5' })).toBeVisible();
+  await expect(details.getByRole('heading', { name: 'Countries 4' })).toBeVisible();
+  await expect(details.getByText('You both have 3', { exact: true })).toBeVisible();
   // Both kinds of stamp are die cut by a mask on their paper: one wave tile per edge, and nothing clips the stamp itself.
   for (const stamp of [details.locator('.friend-postcard .postage-stamp'), details.locator('.passport-seal').first()]) {
     expect(await stamp.evaluate((element) => [getComputedStyle(element).clipPath, getComputedStyle(element, '::before').maskImage.split('url(').length - 1])).toEqual(['none', 4]);
   }
-  await details.getByRole('button', { name: 'First arrival', exact: true }).click();
-  await expect(details.locator('.passport-bubble:popover-open')).toContainText('First arrival');
-  await page.keyboard.press('Escape');
-  await expect(details.locator('.passport-bubble:popover-open')).toHaveCount(0);
-  await expect(details).toBeVisible();
-  await details.getByRole('button', { name: 'All stamps' }).click();
-  await expect(details.locator('.stamp-card')).toHaveCount(12);
+  // A friend's days are not shared, so their seals carry no postmark.
+  await expect(details.locator('.passport-postmark')).toHaveCount(0);
   await page.screenshot({ path: `/tmp/friends-passport-${test.info().project.name}.png` });
   await page.keyboard.press('Escape');
   await expect(details).toHaveCount(0);

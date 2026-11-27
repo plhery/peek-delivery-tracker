@@ -73902,12 +73902,19 @@ export interface ApiFriendStats {
   "deliveredCount": number;
   "averageDays": number | null;
   "stamps": Array<ApiFriendStamp>;
+  "countries"?: Array<ApiFriendCountry>;
+}
+
+export interface ApiFriendCountry {
+  "code": string;
+  "count": number;
 }
 
 export interface ApiFriendProfile {
   "nickname": string;
   "shareStats": boolean;
   "shareArrival": boolean;
+  "shareCountries"?: boolean;
 }
 
 export interface ApiFriendCard {
@@ -73932,6 +73939,7 @@ export interface ApiFriendsActionRequest {
   "shareArrival"?: boolean;
   "code"?: string;
   "friendId"?: string;
+  "shareCountries"?: boolean;
 }
 
 export interface ApiFriendsActionResponse {

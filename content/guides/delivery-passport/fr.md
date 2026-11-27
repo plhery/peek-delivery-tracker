@@ -14,7 +14,7 @@ Ce que tu obtiens dépend de l'endroit où tu utilises Peek :
 | | Site web | Apps iPhone, iPad, Mac et Android |
 | --- | --- | --- |
 | « Passeport » | Une fois connecté | Avec ou sans compte ; sans compte, il compte les colis de cet appareil |
-| « Amis » | Une fois connecté | Avec un compte uniquement : sans compte, l'onglet affiche « Partage tes timbres et les moments clés de tes livraisons avec tes amis. » et propose « Se connecter » |
+| « Amis » | Une fois connecté | Avec un compte uniquement : sans compte, l'onglet affiche « Pose ton passeport à côté de celui d’un ami. Il voit les timbres, les chiffres et les pays que tu partages, jamais tes colis. » et propose « Se connecter » |
 
 Sur le site sans compte, un colis livré qui a passé une frontière affiche « Au-delà des frontières » et « Commencer un passeport », qui mène à la connexion. La connexion est expliquée dans [Utiliser Peek sans compte](guide:account-or-guest).
 

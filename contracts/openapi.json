@@ -79826,6 +79826,33 @@
             },
             "uniqueItems": true,
             "maxItems": 12
+          },
+          "countries": {
+            "type": "array",
+            "description": "The countries its owner's parcels went through, each with how many, while the owner shares them. Left out otherwise.",
+            "maxItems": 250,
+            "items": {
+              "$ref": "#/components/schemas/FriendCountry"
+            }
+          }
+        }
+      },
+      "FriendCountry": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "count"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$",
+            "description": "ISO 3166-1 alpha-2 code."
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 1
           }
         }
       },
@@ -79848,6 +79875,10 @@
           },
           "shareArrival": {
             "type": "boolean"
+          },
+          "shareCountries": {
+            "type": "boolean",
+            "description": "Whether friends see the countries. Read as off when left out."
           }
         }
       },
@@ -79972,6 +80003,10 @@
           "friendId": {
             "type": "string",
             "format": "uuid"
+          },
+          "shareCountries": {
+            "type": "boolean",
+            "description": "save_profile only. Left out, a new profile shares its countries and a saved one keeps its choice."
           }
         }
       },

@@ -14,7 +14,7 @@ Co dostajesz, zależy od tego, gdzie korzystasz z Peeka:
 | | Strona | Aplikacje na iPhone’a, iPada, Maca i Androida |
 | --- | --- | --- |
 | „Paszport” | Po zalogowaniu | Z kontem i bez; bez konta liczy przesyłki na tym urządzeniu |
-| „Znajomi” | Po zalogowaniu | Tylko z kontem: bez niego zakładka mówi „Udostępniaj znajomym znaczki i ważne momenty dostaw.” i proponuje „Zaloguj się” |
+| „Znajomi” | Po zalogowaniu | Tylko z kontem: bez niego zakładka mówi „Połóż swój paszport obok paszportu znajomego. Zobaczy znaczki, liczby i kraje, które udostępniasz, ale nigdy twoich przesyłek.” i proponuje „Zaloguj się” |
 
 Na stronie bez konta dostarczona przesyłka, która przekroczyła granicę, pokazuje „Ponad granicami” i „Załóż paszport”, co prowadzi do logowania. Jak działa logowanie, wyjaśnia poradnik o [korzystaniu z Peeka bez konta](guide:account-or-guest).
 

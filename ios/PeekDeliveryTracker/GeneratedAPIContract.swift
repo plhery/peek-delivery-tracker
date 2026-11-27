@@ -5021,12 +5021,19 @@ struct FriendStats: Codable, Equatable, Hashable, Sendable {
     var deliveredCount: Int
     var averageDays: Int? = nil
     var stamps: [FriendStamp]
+    var countries: [FriendCountry]? = nil
+}
+
+struct FriendCountry: Codable, Equatable, Hashable, Sendable {
+    var code: String
+    var count: Int
 }
 
 struct FriendProfile: Codable, Equatable, Hashable, Sendable {
     var nickname: String
     var shareStats: Bool
     var shareArrival: Bool
+    var shareCountries: Bool? = nil
 }
 
 struct FriendCard: Codable, Equatable, Hashable, Sendable, Identifiable {
@@ -5063,6 +5070,7 @@ struct FriendsActionRequest: Codable, Equatable, Hashable, Sendable {
     var shareArrival: Bool? = nil
     var code: String? = nil
     var friendID: UUID? = nil
+    var shareCountries: Bool? = nil
 
     private enum CodingKeys: String, CodingKey {
         case action
@@ -5071,6 +5079,7 @@ struct FriendsActionRequest: Codable, Equatable, Hashable, Sendable {
         case shareArrival
         case code
         case friendID = "friendId"
+        case shareCountries
     }
 }
 

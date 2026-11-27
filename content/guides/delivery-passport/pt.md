@@ -14,7 +14,7 @@ O que tens depende de onde usas o Peek:
 | | Site | Apps para iPhone, iPad, Mac e Android |
 | --- | --- | --- |
 | «Passaporte» | Assim que inicias sessão | Com ou sem conta; sem ela, conta as encomendas desse dispositivo |
-| «Amigos» | Assim que inicias sessão | Só com conta: sem ela, o separador diz «Partilha selos e momentos das tuas entregas com amigos.» e oferece «Iniciar sessão» |
+| «Amigos» | Assim que inicias sessão | Só com conta: sem ela, o separador diz «Põe o teu passaporte ao lado do de um amigo. Ele vê os selos, os números e os países que partilhas, nunca as tuas encomendas.» e oferece «Iniciar sessão» |
 
 No site sem conta, uma encomenda entregue que atravessou uma fronteira mostra «Além-fronteiras» e «Começar um passaporte», que leva ao início de sessão. Como funciona o início de sessão, explica-o [usar o Peek sem conta](guide:account-or-guest).
 

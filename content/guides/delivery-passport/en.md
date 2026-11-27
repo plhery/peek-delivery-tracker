@@ -14,7 +14,7 @@ Who gets what depends on where you use Peek:
 | | Website | iPhone, iPad, Mac and Android apps |
 | --- | --- | --- |
 | "Passport" | Once you sign in | With or without an account; without one, it counts the parcels on that device |
-| "Friends" | Once you sign in | With an account only: without one, the tab says "Share stamps and delivery milestones with friends." and offers "Sign in" |
+| "Friends" | Once you sign in | With an account only: without one, the tab says "Put your passport beside a friend’s. They see the stamps, counts and countries you share, never your parcels." and offers "Sign in" |
 
 On the website without an account, a delivered parcel that crossed a border shows "Across borders" and "Start a passport", which leads to signing in. How signing in works is in [Peek without an account](guide:account-or-guest).
 

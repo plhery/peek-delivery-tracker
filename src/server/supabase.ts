@@ -1296,6 +1296,9 @@ export const ACCOUNT_SYNC_PRIORITY = 10;
 /** The checks a reader waits for, which the readers' lane takes (claim_reader_sync_job): a first check, a link opened, a refresh. */
 export const READER_SYNC_REASONS: readonly string[] = ['added', 'opened', 'refresh'];
 
+/** A Friends profile that shares its Passport: the account behind it, and whether it shares the countries too. */
+export interface PassportSharer { owner: string; countries: boolean }
+
 export class SupabaseServiceClient extends SupabaseClient {
   /**
    * Adds a parcel to an account, with the checks create_owned_package makes
@@ -1947,25 +1950,27 @@ export class SupabaseServiceClient extends SupabaseClient {
   }
 
   /**
-   * The accounts behind those Friends profiles that share their Passport, by profile id. Given the account that
-   * reads them (`viewer`), only its own profile and those of the friends it is still connected with.
+   * The accounts behind those Friends profiles that share their Passport, by profile id, and whether they share its
+   * countries too. Given the account that reads them (`viewer`), only its own profile and those of the friends it is
+   * still connected with.
    */
-  async passportSharers(profileIds: string[], viewer?: string): Promise<Map<string, string>> {
+  async passportSharers(profileIds: string[], viewer?: string): Promise<Map<string, PassportSharer>> {
     if (!profileIds.length) return new Map();
-    const params = query({ select: 'id,user_id', id: `in.(${[...new Set(profileIds)].join(',')})`, share_stats: 'is.true' });
+    const params = query({ select: 'id,user_id,share_countries', id: `in.(${[...new Set(profileIds)].join(',')})`, share_stats: 'is.true' });
     const sharers = new Map(rows(await this.request(`/rest/v1/friend_profiles?${params}`))
-      .flatMap((row) => typeof row.id === 'string' && typeof row.user_id === 'string' ? [[row.id, row.user_id] as const] : []));
+      .flatMap((row) => typeof row.id === 'string' && typeof row.user_id === 'string'
+        ? [[row.id, { owner: row.user_id, countries: row.share_countries === true }] as const] : []));
     if (viewer === undefined) return sharers;
     // The viewer's own profile needs no connection: its connections are read only when a friend's profile shares.
     const friends = new Set<unknown>();
-    if ([...sharers.values()].some((owner) => owner !== viewer)) {
+    if ([...sharers.values()].some(({ owner }) => owner !== viewer)) {
       const params = query({ select: 'user_low,user_high', or: `(user_low.eq.${viewer},user_high.eq.${viewer})` });
       for (const { user_low: low, user_high: high } of rows(await this.request(`/rest/v1/friend_connections?${params}`))) {
         if (low === viewer) friends.add(high);
         else if (high === viewer) friends.add(low);
       }
     }
-    return new Map([...sharers].filter(([, owner]) => owner === viewer || friends.has(owner)));
+    return new Map([...sharers].filter(([, { owner }]) => owner === viewer || friends.has(owner)));
   }
 
   /**

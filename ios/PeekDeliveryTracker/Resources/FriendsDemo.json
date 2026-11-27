@@ -2,7 +2,8 @@
   "profile": {
     "nickname": "Alex",
     "shareStats": true,
-    "shareArrival": false
+    "shareArrival": false,
+    "shareCountries": true
   },
   "ownCard": null,
   "friends": [
@@ -17,6 +18,24 @@
           "ten",
           "connected",
           "express"
+        ],
+        "countries": [
+          {
+            "code": "CH",
+            "count": 9
+          },
+          {
+            "code": "DE",
+            "count": 1
+          },
+          {
+            "code": "FR",
+            "count": 2
+          },
+          {
+            "code": "US",
+            "count": 1
+          }
         ]
       },
       "arrivedThisWeek": true

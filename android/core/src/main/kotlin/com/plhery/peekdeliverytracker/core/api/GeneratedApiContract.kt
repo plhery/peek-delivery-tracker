@@ -4935,6 +4935,13 @@ data class FriendStats(
     val deliveredCount: Int,
     val averageDays: Int? = null,
     val stamps: List<FriendStamp>,
+    val countries: List<FriendCountry>? = null,
+)
+
+@Serializable
+data class FriendCountry(
+    val code: String,
+    val count: Int,
 )
 
 @Serializable
@@ -4942,6 +4949,7 @@ data class FriendProfile(
     val nickname: String,
     val shareStats: Boolean,
     val shareArrival: Boolean,
+    val shareCountries: Boolean? = null,
 )
 
 @Serializable
@@ -4985,6 +4993,7 @@ data class FriendsActionRequest(
     val shareArrival: Boolean? = null,
     val code: String? = null,
     val friendId: UUID? = null,
+    val shareCountries: Boolean? = null,
 )
 
 @Serializable

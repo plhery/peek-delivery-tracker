@@ -14,7 +14,7 @@ Lo que tienes depende de dónde uses Peek:
 | | Web | Apps de iPhone, iPad, Mac y Android |
 | --- | --- | --- |
 | «Pasaporte» | En cuanto inicias sesión | Con o sin cuenta; sin ella, cuenta los paquetes de ese dispositivo |
-| «Amigos» | En cuanto inicias sesión | Solo con cuenta: sin ella, la pestaña dice «Comparte sellos y momentos clave de tus entregas con amigos.» y ofrece «Iniciar sesión» |
+| «Amigos» | En cuanto inicias sesión | Solo con cuenta: sin ella, la pestaña dice «Pon tu pasaporte junto al de un amigo. Verá los sellos, las cifras y los países que compartas, nunca tus paquetes.» y ofrece «Iniciar sesión» |
 
 En la web sin cuenta, un paquete entregado que ha cruzado una frontera muestra «Más allá de las fronteras» y «Empezar un pasaporte», que lleva a iniciar sesión. Cómo se inicia sesión lo explica [usar Peek sin cuenta](guide:account-or-guest).
 

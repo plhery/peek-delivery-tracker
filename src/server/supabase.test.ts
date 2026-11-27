@@ -1509,23 +1509,23 @@ describe('Friends passports', () => {
     const [own, friendly, left, hidden, broken] = [1, 2, 3, 4, 5].map((index) => `11000000-0000-4000-8000-00000000000${index}`);
     const request = vi.spyOn(client, 'request').mockImplementation(postgrestTables({
       friend_profiles: [
-        { id: own, user_id: owner, share_stats: true }, { id: friendly, user_id: friend, share_stats: true },
+        { id: own, user_id: owner, share_stats: true, share_countries: true }, { id: friendly, user_id: friend, share_stats: true, share_countries: false },
         { id: left, user_id: former, share_stats: true }, { id: hidden, user_id: parcel, share_stats: false }, { id: broken, user_id: null, share_stats: true },
       ],
       // The viewer's connections, the rows its `or` keeps: the former friend has left.
       friend_connections: [{ user_low: owner, user_high: friend }],
     }));
     await expect(client.passportSharers([own, own, friendly, left, hidden, broken])).resolves
-      .toEqual(new Map([[own, owner], [friendly, friend], [left, former]]));
+      .toEqual(new Map([[own, { owner, countries: true }], [friendly, { owner: friend, countries: false }], [left, { owner: former, countries: false }]]));
     expect(params(request.mock.calls[0]![0]).pathname).toBe('/rest/v1/friend_profiles');
     expect(Object.fromEntries(params(request.mock.calls[0]![0]).searchParams))
-      .toEqual({ select: 'id,user_id', id: `in.(${[own, friendly, left, hidden, broken].join(',')})`, share_stats: 'is.true' });
-    await expect(client.passportSharers([own, friendly, left], owner)).resolves.toEqual(new Map([[own, owner], [friendly, friend]]));
+      .toEqual({ select: 'id,user_id,share_countries', id: `in.(${[own, friendly, left, hidden, broken].join(',')})`, share_stats: 'is.true' });
+    await expect(client.passportSharers([own, friendly, left], owner)).resolves.toEqual(new Map([[own, { owner, countries: true }], [friendly, { owner: friend, countries: false }]]));
     expect(params(request.mock.calls[2]![0]).pathname).toBe('/rest/v1/friend_connections');
     expect(Object.fromEntries(params(request.mock.calls[2]![0]).searchParams))
       .toEqual({ select: 'user_low,user_high', or: `(user_low.eq.${owner},user_high.eq.${owner})` });
     // The viewer's own card needs no connection, and a card that shares nothing needs no read.
-    await expect(client.passportSharers([own], owner)).resolves.toEqual(new Map([[own, owner]]));
+    await expect(client.passportSharers([own], owner)).resolves.toEqual(new Map([[own, { owner, countries: true }]]));
     await expect(client.passportSharers([friendly], former)).resolves.toEqual(new Map());
     await expect(client.passportSharers([], owner)).resolves.toEqual(new Map());
     expect(request.mock.calls.map(([path]) => params(path).pathname)).toEqual([

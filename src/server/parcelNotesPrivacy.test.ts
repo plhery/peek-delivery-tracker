@@ -113,9 +113,9 @@ describe('a parcel\'s private note', () => {
     const friend = '7b000000-0000-4000-c000-000000000001';
     const owner = '7b000000-0000-4000-c000-0000000000aa';
     const service = new SupabaseServiceClient('https://database.example', 'service-key');
-    vi.spyOn(service, 'passportSharers').mockImplementation(async (ids) => new Map(ids.filter((id) => id === friend).map((id) => [id, owner])));
+    vi.spyOn(service, 'passportSharers').mockImplementation(async (ids) => new Map(ids.filter((id) => id === friend).map((id) => [id, { owner, countries: false }])));
     vi.spyOn(service, 'passportParcels').mockImplementation(async (owners) => new Map(owners.map((account) => [account, [parcel()]])));
-    const card = { id: friend, nickname: 'Mila', sharesStats: true, arrivedThisWeek: null };
+    const card = { id: friend, nickname: 'Mila', sharesStats: true, sharesCountries: false, arrivedThisWeek: null };
     const { snapshot } = await withSharedPassports(service, '7b000000-0000-4000-c000-000000000002', { profile: null, ownCard: null, friends: [card] });
     expect(snapshot.friends[0]!.stats).toMatchObject({ deliveredCount: 1 });
     expect(JSON.stringify(snapshot)).not.toMatch(PRIVATE);

@@ -1,12 +1,12 @@
 ---
 title: Stone3PL tracking: numbers, statuses and contact
-description: Track a Stone3PL parcel from China: what its number can look like, what each tracking line means, who delivers it in your country and how to reach Stone3PL.
+description: Track a Stone3PL parcel from China: S + 18-digit tracking format, status meanings, destination local carrier handover, EU customs rules and Shenzhen contact.
 slug: stone3pl-tracking
 published: 2026-11-03
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Stone3PL is a logistics company with its headquarters in Shenzhen, China, and part of the Stone Group. It ships goods for online sellers and other businesses from China to the world, together with other logistics companies. If a shop sent your order with Stone3PL, look up the number on [Stone3PL's tracking page](https://stone3pl.com/?route=services/track), in English, or paste it in the box above. The number comes from the seller, with your order's shipping details.
+Stone3PL is a Shenzhen-based logistics company in the Stone Group that ships e-commerce parcels from China worldwide with local delivery partners. Track an `S` + 18-digit number (or another shipping code from your seller) in English on [Stone3PL's tracking page](https://stone3pl.com/?route=services/track) or paste it in the box above. Below: what Stone3PL statuses such as `Order Submited.` and `Pick up by local carrier at destination port` mean, how to find the local carrier's number, and how to get help.
 
 ## Stone3PL tracking number: what it looks like
 
@@ -103,23 +103,23 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ### Is Stone3PL legit?
 
-Stone3PL says it is part of the Stone Group, with its headquarters in Shenzhen, 10+ years of experience and 8,000+ contract customers. It publishes an address, a phone number and an email. It works for sellers, so questions about your order go to the shop.
+Stone3PL is part of the Stone Group, headquartered in Baoan, Shenzhen, citing 10+ years of experience and 8,000+ contract customers on its site, with a published address, phone number and support email. Because it works for merchants rather than recipients, questions about your order go to the shop first.
 
-### Where can I track a Stone3PL parcel?
+### Who delivers Stone3PL parcels in my country?
 
-On [Stone3PL's tracking page](https://stone3pl.com/?route=services/track) or in Peek. If Stone3PL's result names the company that delivers in your country, you can track that company's number on its own site too.
+Stone3PL hands parcels to destination logistics partners rather than delivering to your door itself. Check [Stone3PL's tracking page](https://stone3pl.com/?route=services/track) or Peek for the delivering company's name and local tracking number once your parcel reaches the destination country.
 
 ### What does "Pick up by local carrier at destination port" mean?
 
-The company that delivers in your country collected your parcel at the port or airport where it arrived. It doesn't mean you have to collect it.
+It means the local carrier delivering in your country collected the parcel at the arrival port or airport — not that you need to pick it up yourself.
 
 ### How long does Stone3PL take to deliver?
 
-Stone3PL publishes no delivery times. Go by the seller's estimate, and ask the seller if the parcel is late.
+Stone3PL publishes no transit times for recipients. Go by the delivery window from your seller, and contact the seller if tracking stays on `Order Submited.` or stalls after leaving China.
 
-### How do I contact Stone3PL?
+### How do I contact Stone3PL about a delayed or missing parcel?
 
-By email at support@stone3pl.com, or by phone on 86-0755-81466633, a number in Shenzhen, China. About your order, ask the seller first.
+Ask the seller first, as Stone3PL publishes no recipient claims process. Stone3PL's Shenzhen headquarters lists support@stone3pl.com and phone 86-0755-81466633 (no opening hours or languages published).
 
 :::sources
 - [Stone3PL: Home](https://stone3pl.com/) – e-commerce logistics from China to the world, for sellers, DDP customs clearance and Delivered Duty Paid, return and resend service, warehouses in NORAM, APAC and EMEA

@@ -1,12 +1,12 @@
 ---
 title: Posta Shqiptare tracking: Albanian Post numbers and statuses
-description: Track a Posta Shqiptare (Albanian Post) parcel or EMS: what an AL number looks like, what each Albanian status means, customs in Albania and who to call.
+description: Track a Posta Shqiptare (Albanian Post) parcel or EMS item: 13-character AL codes, Albanian-to-English statuses, customs above €22, delivery times and phone.
 slug: posta-shqiptare-tracking
 published: 2026-11-02
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Posta Shqiptare (Albanian Post) is Albania's national post, with 533 post offices across the country. It handles mail and parcels within Albania, from abroad and to other countries, EMS included. Track an item in the "Gjurmo objektin" (track an item) box on [postashqiptare.al](https://www.postashqiptare.al/) or in its e-Posta app, or paste the number in the box above. For an online order, ask the seller for the number.
+Posta Shqiptare (Albanian Post) is Albania's national post, running 533 post offices for domestic and international mail, parcels and EMS. Enter your 13-character tracking number (ending in `AL` for items posted in Albania, or the sending post's code for inbound mail) in the "Gjurmo objektin" box on [postashqiptare.al](https://www.postashqiptare.al/), in the e-Posta app, or in the box above. Below: English translations of Posta Shqiptare's Albanian statuses, customs rules above €22, and how to chase a delayed item.
 
 ## Posta Shqiptare tracking number: what it looks like
 
@@ -105,19 +105,23 @@ While you have the parcel open in Peek, or on its delivery day with notification
 
 ### How do I track a Posta Shqiptare parcel?
 
-Enter the 13-character number in the "Gjurmo objektin" box on postashqiptare.al or in the e-Posta app, or paste it into Peek. A parcel coming to Albania is tracked with the sending post's number.
+Type the 13-character postal barcode (two letters, nine digits and `AL`, or the sending post's country code for inbound mail) into the "Gjurmo objektin" box on postashqiptare.al, the e-Posta app or Peek.
 
 ### Why is my Posta Shqiptare tracking not updating?
 
-A Tracked packet has only three required scans, and once it leaves Albania the next lines come from the destination country's post: check its tracking with the same number. If nothing comes for a long time, the sender can ask for an inquiry where they posted it.
+Small packets sent abroad under Posta Shqiptare's Tracked service require only three scans, and after `Objekti u fut ne thes dhe u dergua jashte` the next lines come from the destination country's post. Check that post's tracking with the same number; if an item is overdue, the sender can file an inquiry form at the posting office.
+
+### Do I pay customs on a Posta Shqiptare parcel from abroad?
+
+In Albania, Posta Shqiptare clears customs in advance on foreign items worth more than €22 for purchases or €44 for gifts (up to €1,000) and sends a written notice to pay duty and the declaration fee at your town's central post office. Parcels sent from Albania into the EU follow EU customs rules, including the €3 customs duty per item on online orders up to €150 and the €2 Union handling fee per item.
 
 ### How long does Posta Shqiptare take to deliver?
 
-By its own standards, in Albania, the next day between cities and up to 3 working days on average to villages. Abroad, packets and parcels take 7 to 10 working days to Europe and 10 to 14 to the Americas, Asia and Africa, on average. EMS takes 2 to 5 days, it says.
+By its universal service standards: next day between Albanian cities and up to 3 working days on average to villages. Internationally, packets and parcels average 7 to 10 working days to Europe and 10 to 14 to the Americas, Asia and Africa; EMS takes 2 to 5 days.
 
-### What is the Posta Shqiptare phone number?
+### What is the Posta Shqiptare contact number and email?
 
-+355 682044727, or email asistence@postashqiptare.al. Its contact page lists 08:00 to 16:30 Monday to Thursday and 08:00 to 14:00 on Friday under the head office's address.
+Call +355 682044727 or email asistence@postashqiptare.al. Hours listed under the Tirana head office address on the contact page are Monday to Thursday 08:00 to 16:30 and Friday 08:00 to 14:00 Albanian time.
 
 :::sources
 - [Posta Shqiptare: Home](https://www.postashqiptare.al/) – tracking box, number shape, post offices

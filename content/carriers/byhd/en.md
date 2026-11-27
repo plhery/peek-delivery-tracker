@@ -1,12 +1,12 @@
 ---
 title: BYHD tracking: BYHD numbers, scans and who delivers
-description: Track a BYHD (博益弘达) parcel from Shenzhen: what a BYHD number looks like, what its few scans mean and why its tracker shows another company's number.
+description: Track a BYHD (博益弘达) parcel from China: BYHD + 9-digit waybill format, English/Chinese scan meanings, finding the local carrier number and who to contact.
 slug: byhd-tracking
 published: 2026-10-28
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-BYHD (博益弘达, Bo Yi Hong Da in pinyin) is the short name of 深圳市博益弘达物流有限公司, a logistics company in Shenzhen, China, that ships parcels abroad for online sellers. Its waybill numbers are BYHD and nine digits: paste yours in the box above, or type it in the 快递查询 (parcel lookup) box on BYHD's site, byhd56.com, which opens BYHD's tracker. Expect a short history from BYHD, and a second number: the one the company that delivers your parcel uses.
+BYHD (博益弘达, Bo Yi Hong Da in pinyin) is 深圳市博益弘达物流有限公司, a logistics company in Shenzhen, China, that ships cross-border parcels abroad for online sellers. Paste your `BYHD` + 9-digit waybill in the box above, or enter it in the 快递查询 (parcel lookup) box on byhd56.com. Expect only a few early scans from BYHD plus a second number — the local delivering carrier's tracking number — once the parcel leaves Shenzhen.
 
 ## BYHD tracking number: what it looks like
 
@@ -72,25 +72,25 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ## Questions about BYHD tracking
 
-### What is BYHD (博益弘达)?
+### What is BYHD (博益弘达) shipping?
 
-It's 深圳市博益弘达物流有限公司, a logistics company in Longhua District, Shenzhen, whose site is byhd56.com. Its profile describes cross-border shipping by sea and by air, and services for online sellers such as Amazon FBA first-leg transport and dropshipping from overseas warehouses, to Europe and America, Southeast Asia and the Middle East. Its waybills are BYHD and nine digits.
+BYHD is 深圳市博益弘达物流有限公司, a Shenzhen logistics firm in Longhua District (`byhd56.com`) offering cross-border air and sea shipping, Amazon FBA first-leg transport and dropshipping for online sellers to Europe, America, Southeast Asia and the Middle East. Its waybills are `BYHD` plus nine digits.
 
 ### Why does BYHD's tracker show a different tracking number?
 
-It's the delivering company's number, not BYHD's: the tracker finds your order by the BYHD number but shows the one the delivering company gave it. Track it with that company, or add it to Peek as a parcel of its own.
+BYHD's tracker looks up your order by the `BYHD` waybill but displays the local delivering company's number under 跟踪号码 (tracking number) and the seller's code under 参考号 (reference). Track that second number directly with the delivering carrier, or add it in Peek as its own parcel.
 
-### Who delivers BYHD parcels?
+### Why is my BYHD tracking stuck on "Goods leaving the operation center"?
 
-BYHD doesn't say: its tracker gives no company's name, and its site doesn't say which partner delivers in which country. The number its tracker shows is the delivering company's; its shape, or the seller, tells you whose.
+`Goods leaving the operation center` is the last line BYHD's tracker normally records. Silence after it does not mean the parcel stopped: switch to the local delivering company's tracking number shown on BYHD's tracker (or ask the seller for it).
 
-### How long does BYHD take to deliver?
+### Who delivers BYHD parcels and how long does delivery take?
 
-BYHD publishes no delivery times. Go by the estimate the shop gave for your order.
+BYHD does not name its destination partners or publish delivery times. Identify the delivering carrier from the shape of the second number under 跟踪号码 (or ask the seller), and go by the shop's delivery estimate.
 
 ### Who do I contact about a missing BYHD parcel?
 
-The seller you ordered from: it booked the parcel with BYHD. BYHD lists only a contact person's mobile number and an address in Shenzhen, and nothing for recipients.
+Contact the seller or marketplace you bought from. BYHD works for shippers, publishes no claims process or email address, and lists only a contact person's mobile number and a Shenzhen address in Chinese.
 
 :::sources
 - [BYHD: 深圳市博益弘达物流有限公司 (home)](http://www.byhd56.com/) – company name, the 快递查询 box and the tracker it opens, login, sign-up and price lookup for shippers, address in the footer

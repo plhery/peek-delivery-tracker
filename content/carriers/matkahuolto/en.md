@@ -1,12 +1,12 @@
 ---
 title: Matkahuolto tracking: statuses, pickup points and contact
-description: Track a Matkahuolto parcel in Finland: where the shipment ID is, what the English statuses mean, pickup codes, storage time, lockers and who to contact.
+description: Track a Matkahuolto parcel in Finland with your shipment ID (MH, MA or 20 digits): English tracking statuses, 5-day pickup time, lockers and phone support.
 slug: matkahuolto-tracking
 published: 2026-10-13
-updated: 2026-10-26
+updated: 2026-11-27
 ---
 
-Matkahuolto is a Finnish parcel carrier with parcel points and lockers across Finland, including some K-markets and R-kiosks. Track a parcel on matkahuolto.fi/tracking (in English) or in the Paketit app, with the shipment ID from the shop's shipping email or Matkahuolto's SMS, or paste it in the box above.
+Matkahuolto is a Finnish parcel carrier with parcel points and lockers across Finland, including some K-markets and R-kiosks. Track your parcel in English on matkahuolto.fi/tracking or in the Paketit app using the shipment ID (lähetystunnus) from the shop's shipping email or Matkahuolto's SMS, or paste it in the box above. Below: what Matkahuolto's English statuses mean, how pickup codes and the 5-day storage limit work, and who to contact if tracking stops.
 
 ## Matkahuolto tracking number and where to find it
 
@@ -95,19 +95,23 @@ While the parcel is open in Peek, or on its delivery day with notifications on, 
 
 ### Is Matkahuolto legit?
 
-Yes, Matkahuolto is a real Finnish carrier. Treat a message asking you to pay in its name as a scam: Matkahuolto says it never relays payments.
+Yes. Matkahuolto is an established Finnish parcel carrier with parcel points and lockers across Finland. Treat any message asking you to pay online in its name as a scam: Matkahuolto says it never relays payments, and its only payment link goes to senders for return costs.
 
 ### Can I track a Matkahuolto parcel in English?
 
-Yes. Matkahuolto's tracking has an English version at matkahuolto.fi/tracking, and the Paketit app's language can be changed in its settings.
+Yes. Matkahuolto's tracker has an English version at matkahuolto.fi/tracking, and you can switch the Paketit app's language in its settings.
 
-### Can I track a Matkahuolto parcel without the code?
+### How long does Matkahuolto hold a parcel at a pickup point?
 
-Yes, if you're registered or use the Paketit app and the sender gave your phone number or email: the parcel appears there. Otherwise ask the shop for the shipment ID.
+Five days before returning it to the sender, or 14 days when the arrival notice goes out on paper because the sender gave no phone number or email. You can buy 1 to 16 extra days in the Paketit app or, if registered, on matkahuolto.fi unless the sender blocked extensions; GLS's page gives its parcels 10 days, so go by the last pickup day in your notice.
 
-### How long does a Matkahuolto parcel take?
+### Can I track a Matkahuolto parcel without the shipment ID?
 
-As a rule 1 to 2 working days to lockers and parcel points, and at most three days once Matkahuolto has the parcel (three working days, says its Finnish Q&A). Parcels from abroad can take a little over a week to reach Matkahuolto.
+Yes, if you're registered with Matkahuolto or use the Paketit app and the sender included your phone number or email: the parcel appears automatically. Otherwise ask the shop for the shipment ID (`MH…FI`, `MA` + 19 digits, or an 18- or 20-digit barcode).
+
+### How long does a Matkahuolto parcel take to arrive?
+
+Usually 1 to 2 working days to lockers and parcel points, and within three days once Matkahuolto has the parcel (three working days in its Finnish Q&A). Parcels sent from abroad can take a little over a week to reach Matkahuolto.
 
 :::sources
 - [Matkahuolto: How to receive a parcel?](https://www.matkahuolto.fi/customer-service/parcels/how-to-receive-a-parcel) – pick-up code, ID, notices, point changes, home parcels, damage, phone numbers

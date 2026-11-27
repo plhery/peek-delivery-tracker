@@ -1,12 +1,12 @@
 ---
 title: Rastreio SkyPostal: códigos SKAMZUS, SP e apoio
-description: Segue uma encomenda SkyPostal dos EUA para a América Latina: códigos SKAMZUS e SP...BR, hub de Miami, alfândega (CEN, HTI, DEL) e emails por país.
+description: Rastreia uma encomenda SkyPostal dos EUA para a América Latina: códigos SKAMZUS e SP...BR, estados DTP, CEN e HTI, alfândega e emails de apoio por país.
 slug: rastreio-skypostal
 published: 2026-11-24
-updated: 2026-11-24
+updated: 2026-11-27
 ---
 
-A **SkyPostal** é uma rede de entregas domésticas nos Estados Unidos e transfronteiriças para a América Latina com sede em Miami, fundada por Albert P. e A.J. Hernandez ([skypostal.com](https://www.skypostal.com/)). A operar a partir do seu principal hub americano de exportação em Miami, Florida, a SkyPostal transporta encomendas de comércio eletrónico de grandes retalhistas e marketplaces — incluindo Amazon, Temu e eBay — para o Brasil, México, Colômbia, Peru, Equador, Chile e Costa Rica, assegurando o desalfandegamento de exportação e importação e entregando a distribuição final à porta a parceiros regionais latino-americanos. Podes consultar um envio em [tracking.skypostal.com](https://tracking.skypostal.com/) ou colar o teu número ou ligação SkyPostal na caixa acima.
+A **SkyPostal** é uma rede de entregas domésticas nos Estados Unidos e transfronteiriças para a América Latina com sede em Miami, fundada por Albert P. e A.J. Hernandez ([skypostal.com](https://www.skypostal.com/)). A partir do seu hub de exportação em Miami, Florida, transporta encomendas de lojas como Amazon, Temu e eBay para o Brasil, México, Colômbia, Peru, Equador, Chile e Costa Rica, assegurando o desalfandegamento e entregando a distribuição final a parceiros locais. Consulta o teu código `SKAMZUS` ou `SP...BR` em [tracking.skypostal.com](https://tracking.skypostal.com/) ou cola-o na caixa acima para ver os estados aduaneiros (`CEN`, `HTI`, `DTP`) e os contactos de apoio.
 
 ## Números de rastreio SkyPostal (formatos `SKAMZUS` e `SP...BR`)
 
@@ -80,19 +80,23 @@ Podes escolher alertas para «Todos os registos», «Passos importantes» ou «S
 
 ### Como é um número de rastreio SkyPostal?
 
-Os códigos SkyPostal mais comuns são números `SKAMZUS` de 17 caracteres (`SKAMZUS0482917365`, inventado) para exportações Amazon EUA e números `SP...BR` de 15 caracteres (`SP04829173605BR`, inventado) para o Brasil, embora a SkyPostal também aceite outras referências comerciais de 8 a 40 caracteres.
+Os códigos SkyPostal mais frequentes são números `SKAMZUS` de 17 caracteres (`SKAMZUS0482917365`, inventado) usados em exportações Amazon EUA e códigos `SP...BR` de 15 caracteres (`SP04829173605BR`, inventado) para o Brasil. O rastreio também aceita outras referências comerciais alfanuméricas de 8 a 40 caracteres com pelo menos um dígito.
 
 ### O que significa `DTP` (`DELIVERED FROM AIRLINE TO OPERATOR`) na SkyPostal?
 
-Não significa que a tua encomenda foi entregue em casa. `DTP` significa que a companhia aérea entregou o envio consolidado ao operador de terra do aeroporto de destino antes do desalfandegamento (`CEN`) e da passagem à transportadora local (`TTC`).
+Não significa que a encomenda foi entregue na tua morada. `DTP` indica que a companhia aérea entregou a carga ao operador de terra no aeroporto de destino antes da entrada na alfândega (`CEN`) e da entrega à transportadora local (`TTC`).
 
 ### O que significa `HTI` (`HOLD FOR PROBLEMATIC TAX ID`)?
 
-A alfândega de destino sinalizou um número fiscal em falta ou incorreto do destinatário (como o CPF no Brasil ou o RFC no México). Contacta a loja e escreve para o endereço de apoio SkyPostal do teu país em [skypostal.com/customer-service](https://www.skypostal.com/customer-service).
+A alfândega de destino assinalou um número fiscal em falta ou incorreto do destinatário. Confirma os teus dados com a loja e envia o número completo de seguimento para o email de apoio SkyPostal do teu país em [skypostal.com/customer-service](https://www.skypostal.com/customer-service).
 
-### Como contactar o apoio ao cliente da SkyPostal?
+### Porque o rastreio SkyPostal parou entre Miami e a entrega?
 
-Envia email para a equipa do teu país (`Brazilcs@`, `Mexicocs@`, `Colombiacs@`, `Perucs@`, `Ecuadorcs@` ou `customerservice@skypostal.com`) com o número de rastreio; a SkyPostal indica respostas em 3–5 dias úteis.
+É habitual existirem pausas entre `FDP` (`FLIGHT DEPARTED`), `ATC` (`ARRIVED IN COUNTRY`) e `CCH` (`CUSTOMS CLEARED`) enquanto cargas consolidadas passam pela inspeção aduaneira. Após `CCH` e `TTC` (`TENDERED TO LOCAL CARRIER`), o parceiro local assume a distribuição final.
+
+### Como contactar o apoio ao cliente da SkyPostal por país?
+
+Escreve com o número completo de seguimento para `Brazilcs@skypostal.com` (Brasil), `Mexicocs@skypostal.com` (México), `Colombiacs@skypostal.com` (Colômbia), `Perucs@skypostal.com` (Peru), `Ecuadorcs@skypostal.com` (Equador) ou `customerservice@skypostal.com` (restantes países); o prazo de resposta publicado é de 3–5 dias úteis.
 
 :::sources
 - [SkyPostal: Official Website](https://www.skypostal.com/) – envios domésticos EUA e transfronteiriços para a América Latina, sede em Miami FL

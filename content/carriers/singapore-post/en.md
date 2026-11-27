@@ -1,12 +1,12 @@
 ---
 title: Singapore Post (SingPost) tracking: numbers and statuses
-description: Track a Singapore Post (SingPost) parcel: what an SG number looks like, what each status means, who delivers it in Europe, customs, and who to ask.
+description: Track a Singapore Post (SingPost) parcel: 13-character SG numbers, status meanings, EU destination-post handover, customs and GST fees, delivery times and 1605.
 slug: singapore-post-tracking
 published: 2026-11-03
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Singapore Post (SingPost) grew out of Singapore's national postal service, whose history goes back to 1858, and now carries letters and eCommerce parcels to more than 220 destinations. Track an item on SingPost's [Track Your Item](https://www.singpost.com/track-items) page or in the SingPost Mobile App, or paste the number in the box above. The number is on the receipt or consignment note the sender got when posting it, so for an online order, ask the shop.
+Singapore Post (SingPost) grew out of Singapore's national postal service (founded in 1858) and carries letters and eCommerce parcels to more than 220 destinations. Track a 13-character `SG` number from your receipt or seller on SingPost's [Track Your Item](https://www.singpost.com/track-items) page, in the SingPost Mobile App, or in the box above. Below: what SingPost statuses such as `Despatched to overseas` and `Held by Custom` mean, which post delivers in Europe, and how GST, EU customs and claims work.
 
 ## Singapore Post tracking number: what it looks like
 
@@ -103,25 +103,25 @@ Peek can notify you of "Every scan", "Important steps" or "Delivery only". It ca
 
 ## Questions about Singapore Post tracking
 
-### Is SingPost the same as Singapore Post?
+### Who delivers Singapore Post (SingPost) parcels overseas?
 
-Yes. SingPost is Singapore Post Limited's short name, and its numbers end in `SG`.
+SingPost is Singapore Post Limited's short name, and its numbers end in `SG`. After `Despatched to overseas`, the destination country's national post takes over delivery — track the same `SG` number on that post's website (such as Royal Mail, USPS, DHL in Germany, La Poste or Poste Italiane).
 
 ### Why is my Singapore Post tracking not updating?
 
-If the last line is `Despatched to overseas`, the parcel has left Singapore: check the destination post's tracking with the same number, and allow time. A brand-new number may show nothing while the item is still being processed.
+Once the latest scan says `Despatched to overseas`, the parcel has left Singapore and the next scans come from the destination post, which may not update in real time while the item is in transit or at customs. A newly posted item may also show no details until SingPost processes it; ordinary mail has no tracking number.
 
-### What does Held by Custom mean?
+### What does "Held by Custom" mean on SingPost tracking?
 
-Customs is holding the item. Coming into Singapore, SingPost says an item on hold is waiting for GST or duty to be paid: it sends a notice, and you have 14 days to pay. From Singapore, it's your country's customs: see [parcels held at customs](guide:customs).
+Customs is holding the item. For parcels arriving in Singapore, SingPost holds items awaiting GST or duty payment and sends a notice with 14 days to pay (plus a S$10.90 handling fee). For parcels sent from Singapore abroad, your own country's customs is inspecting or assessing the shipment: see [parcels held at customs](guide:customs).
 
-### How long does Singapore Post take to deliver?
+### How long does Singapore Post take to deliver internationally?
 
-SingPost's estimates from Singapore to major cities: 2 to 9 working days for Speedpost Express International, 3 to 14 for Speedpost Priority International, 3 to 11 for Speedpost Saver International, and 3 to 15 weeks for Speedpost Economy International.
+SingPost's published estimates from Singapore to major cities are 2 to 9 working days for Speedpost Express International, 3 to 14 working days for Speedpost Priority International, 3 to 11 working days for Speedpost Saver International, and 3 to 15 weeks for Speedpost Economy International.
 
-### Can I track a SingPost item without a tracking number?
+### How do I contact Singapore Post (SingPost) customer service?
 
-No. SingPost gives a number only for tracked services such as smartpac, Registered Service and Speedpost: ask the sender.
+Call 1605 in Singapore or +65 6845 4545 from abroad (Monday to Friday 8:30am to 6pm, Saturday 8:30am to 1pm Singapore time), or submit the [Make an Enquiry](https://www.singpost.com/support/make-enquiry) form with your tracking number. Claims for lost or damaged items must be submitted within 30 days of sending.
 
 :::sources
 - [Singapore Post: Track Your Item](https://www.singpost.com/track-items) – tracker, scan order, reasons, no-result message

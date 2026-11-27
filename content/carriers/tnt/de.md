@@ -1,12 +1,12 @@
 ---
 title: TNT Sendungsverfolgung: Sendungsnummer, Status, Zustellung
-description: TNT-Sendung verfolgen: wo die 9-stellige Sendungsnummer steht, was die Status heißen, verpasste Zustellung, Zoll, Schäden und wie du TNT erreichst.
+description: TNT Sendungsverfolgung in Deutschland: 9-stellige Frachtbriefnummer, Status auf Deutsch erklärt, Zustellkarte, Zoll, Kontakt (06107 6840660) und FedEx-Wechsel.
 slug: tnt-sendungsverfolgung
 published: 2026-10-27
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-TNT bringt Pakete, Dokumente und Paletten per Express ans Ziel und gehört zu FedEx: In Deutschland sind FedEx Express und TNT seit dem 1. Dezember 2021 ein Unternehmen, die FedEx Express Deutschland GmbH. TNT-Sendungen verfolgst du trotzdem weiter auf tnt.com unter [Sendung verfolgen](https://www.tnt.com/express/de_de/site/shipping-tools/tracking.html), oder du fügst die Nummer oben ins Feld ein. Dafür brauchst du die 9-stellige Sendungsnummer vom Frachtbrief. Mit der Referenz des Versenders sucht nur tnt.com, Peek nicht.
+TNT liefert Pakete, Dokumente und Paletten per Express und gehört zu FedEx: In Deutschland firmieren FedEx Express und TNT seit dem 1. Dezember 2021 gemeinsam als FedEx Express Deutschland GmbH. Deine TNT-Sendung verfolgst du dennoch weiter auf tnt.com unter [Sendung verfolgen](https://www.tnt.com/express/de_de/site/shipping-tools/tracking.html) oder oben im Feld mit der 9-stelligen Sendungs- bzw. Frachtbriefnummer (mit der Referenz des Versenders sucht nur tnt.com, nicht Peek). Unten stehen alle Statusmeldungen auf Deutsch, Infos zu verpasster Zustellung, Zoll und Kontakt.
 
 ## TNT Sendungsnummer: wo sie steht und wie sie aussieht
 
@@ -95,25 +95,25 @@ Peek schaut bis zu alle 10 Minuten nach und bis zu alle 2 Minuten, sobald die Se
 
 ## Fragen zur TNT Sendungsverfolgung
 
-### Gehört TNT zu FedEx?
+### Gehört TNT zu FedEx, und wo verfolge ich mein Paket?
 
-Ja. In Deutschland sind FedEx Express und TNT seit dem 1. Dezember 2021 ein Unternehmen, die FedEx Express Deutschland GmbH. TNT-Sendungen verfolgst du weiter auf tnt.com, Sendungen von [FedEx](carrier:fedex) auf fedex.com.
+Ja. In Deutschland sind FedEx Express und TNT seit dem 1. Dezember 2021 ein Unternehmen, die FedEx Express Deutschland GmbH. Sendungen mit 9-stelliger TNT-Frachtbriefnummer verfolgst du trotzdem weiter auf tnt.com (oder oben in Peek), Sendungen von [FedEx](carrier:fedex) auf fedex.com.
 
-### Warum zeigt meine TNT-Nummer eine fremde Sendung?
+### Warum findet TNT meine Nummer nicht oder zeigt eine fremde Sendung?
 
-TNT vergibt seine acht- und neunstelligen Nummern alle drei bis vier Wochen neu. Such deine Sendung anhand von Datum, Ursprungs- und Zielort heraus.
+Laut TNTs deutscher Hilfe kann es bis zu acht Stunden dauern, bis eine neue Sendung auf tnt.com erscheint (danach bleibt sie rund 90 Tage sichtbar). Außerdem vergibt TNT acht- und neunstellige Nummern alle drei bis vier Wochen neu: Zeigt tnt.com mehrere Sendungen, wähle deine anhand von Datum, Ursprungs- und Zielort.
 
-### Kann ich mein TNT-Paket im Lager abholen?
+### Wie vereinbare ich nach einer verpassten TNT-Zustellung Neuzustellung oder Lagerabholung?
 
-Ja. Auf der Karte „Wir haben Sie verpasst“ steht, wie du die Abholung im TNT-Lager vereinbarst. Ohne Karte hilft der Kundendienst weiter.
+Auf der Karte „Wir haben Sie verpasst“ steht, wie du eine neue Zustellung (Montag bis Freitag) oder die Abholung im TNT-Lager vereinbarst. Hast du keine Karte, melde dich mit Sendungsnummer, Lieferadresse und Wunschtag beim TNT-Kundendienst.
 
-### Stellt TNT samstags zu?
+### Stellt TNT am Samstag zu?
 
-TNT bietet Versendern eine „Wochenend- und Feiertagszustellung“ als Zusatzleistung an. Eine Neuzustellung nach einem verpassten Termin gibt es nur von Montag bis Freitag.
+TNT bietet Versendern eine „Wochenend- und Feiertagszustellung“ als kostenpflichtige Zusatzleistung an. Eine Neuzustellung nach einem verpassten Termin erfolgt laut TNT jedoch nur von Montag bis Freitag.
 
-### Wer reklamiert ein beschädigtes TNT-Paket?
+### Wie erreiche ich den TNT-Kundenservice bei Verlust oder Schaden?
 
-Laut TNTs FAQ die Person, die die Sendung angemeldet hat, bei einer Bestellung also meist der Shop. Sag ihm Bescheid und heb Inhalt und Verpackung auf.
+Telefonisch erreichst du TNT Deutschland unter 06107 6840660 (Montag bis Freitag 8 bis 18 Uhr) oder schriftlich über das Kontaktformular auf tnt.com. Bei einem beschädigten Paket reklamiert laut TNTs FAQ die Person, die die Sendung angemeldet hat — bei einer Online-Bestellung also der Shop; heb Inhalt und Originalverpackung für eine Prüfung auf.
 
 :::sources
 - [TNT Deutschland: Support](https://www.tnt.com/express/de_de/site/support.html) – FedEx und TNT seit 1. Dezember 2021, Telefon und Zeiten, Anruf-Link mit 022841000000, neunstellige Nummer auf der Rechnung, Neuzustellung

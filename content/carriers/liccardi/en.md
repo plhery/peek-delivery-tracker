@@ -1,12 +1,12 @@
 ---
 title: Liccardi Express Courier tracking: LDV codes & support
-description: Track a Liccardi Express Courier (F.lli Liccardi) parcel in Italy: 660 label and LDV formats, branch and locker scan meanings, giacenza holds and support.
+description: Track a Liccardi Express Courier parcel in Italy: 13-digit 660 barcode or LDV lookup, Italian status codes, IN GIACENZA holds, 24–48 h transit and contacts.
 slug: liccardi-tracking
 published: 2026-11-23
-updated: 2026-11-23
+updated: 2026-11-27
 ---
 
-**Liccardi Express Courier** (*F.lli Liccardi S.r.l.*) is an Italian national express courier headquartered in Casandrino, near Naples ([liccarditrasporti.com](https://www.liccarditrasporti.com/)). Launched in its modern form in 1992 from a family transport business founded thirty years earlier by Giovanni Liccardi, the company grew from banking document transport in the 1990s into nationwide B2C and e-commerce parcel distribution, handling over 5.9 million shipments a year across more than 20 Italian branches and hubs including Naples, Rome, Milan, Bologna, Turin, Florence, Verona, Bari and Salerno. You can track a shipment through Liccardi's website or paste your 13-digit `660` label code or 7- to 8-digit *lettera di vettura* (LDV) into the box above.
+**Liccardi Express Courier** (*F.lli Liccardi S.r.l.*) is an Italian national express courier headquartered in Casandrino, near Naples ([liccarditrasporti.com](https://www.liccarditrasporti.com/)). Active in its current form since 1992 from a 1960s family business, it handles over 5.9 million B2C and e-commerce shipments a year across more than 20 Italian branches and hubs. Track a parcel on Liccardi's website or paste your 13-digit `660` label code or 7- to 8-digit *lettera di vettura* (LDV) into the box above to see Italian branch codes, locker drop-offs and *giacenza* holds.
 
 ## Liccardi Express Courier tracking numbers (`660` label & LDV)
 
@@ -78,19 +78,23 @@ You can pick alert presets for "Every scan", "Important steps" or "Delivery only
 
 ### What does a Liccardi tracking number look like?
 
-Liccardi uses either a 13-digit label barcode starting with `66` (typically `660`, for example `6604829173605`, invented) or a 7- to 8-digit shipment number (*LDV*, for example `48291736`, invented).
+Liccardi identifies shipments with either a 13-digit label barcode starting with `66` (typically `660`, such as `6604829173605`, invented) or a 7- to 8-digit shipment number (*lettera di vettura* / LDV, such as `48291736`, invented). Both point to the same shipment.
 
 ### What does `IN GIACENZA` mean on Liccardi tracking?
 
-`IN GIACENZA` (code `35`) means the parcel is held at a Liccardi branch after a missed delivery or address issue and requires release instructions (*svincolo*) from the sender. Contact your seller and submit any updated delivery details via [Assistenza / Reclami Destinatari](https://www.liccarditrasporti.com/assistenza-reclami-destinatari/).
+`IN GIACENZA` (code `35`) means the parcel is held at a Liccardi branch after a missed delivery or address issue and requires release instructions (*svincolo giacenza*) from the sender. Contact your online shop first and submit updated delivery details or request branch pickup through [Assistenza / Reclami Destinatari](https://www.liccarditrasporti.com/assistenza-reclami-destinatari/).
+
+### Why does Liccardi show delivered when my parcel is in a locker?
+
+Liccardi's own progress bar treats locker drop-off (`SPEDIZIONE DEPOSITATA NEL LOCKER`, code `11`) as delivered before pickup. Peek maps locker, PUDO and *fermo deposito* scans to **"Ready for pickup"** until collection is scanned (`SPEDIZIONE RITIRATA DA LOCKER DAL DESTINATARIO`, code `12`).
 
 ### How long does Liccardi Express Courier take to deliver in Italy?
 
-Liccardi advertises **24–48 hour** national delivery after pickup (statistically within **72 hours** across its full Italian network), with extra transit time possible for remote areas (*località disagiate*) and seasonal peaks.
+Liccardi advertises **24–48 hour** national delivery after pickup (statistically within **72 hours** across its full Italian network), with longer transit possible for remote areas (*località disagiate*) and seasonal peaks.
 
 ### How do I contact Liccardi Express Courier customer service?
 
-Call the Italian toll-free number `800 029 764` or `+39 081 5053642`, email `assistenzaclienti@liccarditrasporti.com`, or submit a recipient request or claim at [liccarditrasporti.com/assistenza-reclami-destinatari/](https://www.liccarditrasporti.com/assistenza-reclami-destinatari/).
+Call the Italian toll-free *Numero Verde* `800 029 764` or `+39 081 5053642`, email `assistenzaclienti@liccarditrasporti.com`, or submit a recipient support request or dispute (*Contestazione Esito*) at [liccarditrasporti.com/assistenza-reclami-destinatari/](https://www.liccarditrasporti.com/assistenza-reclami-destinatari/).
 
 :::sources
 - [Liccardi Express Courier: Official Website](https://www.liccarditrasporti.com/) – *F.lli Liccardi S.r.l.*, 20+ branches, 5.9M+ annual shipments, Casandrino (NA) HQ and contacts

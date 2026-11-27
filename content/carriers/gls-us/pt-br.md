@@ -16,7 +16,7 @@ O catálogo do Peek reconhece um formato para códigos da GLS US. Veja exemplos 
 | --- | --- |
 | `SH605182704936815247` | `SH` seguido de 18 dígitos, totalizando 20 caracteres. Só a GLS US usa esse formato no catálogo do Peek, mas a correspondência é fraca; por isso o Peek consulta a GLS US antes de confirmar o nome. |
 | `sh 6051 8270 4936 8152 47` | O mesmo código. Letras minúsculas, espaços e hifens não fazem diferença. |
-| Código GLS US em outro formato | O Peek não o reconhece sozinho. Selecione GLS US manualmente (veja "Como rastrear GLS US no Peek" abaixo). |
+| Código GLS US em outro formato | O Peek não o reconhece. Escolha GLS US você mesmo (veja "Como rastrear GLS US no Peek" abaixo). |
 | Link de rastreamento de gls-group.com com `/US/`, ou de gls-us.com ou gso.com | O Peek extrai o código do link e identifica GLS US imediatamente ("Transportadora detectada"). |
 
 **Onde encontrar.** No e-mail de envio da loja, na página do pedido ou nos e-mails e SMS da própria GLS caso a loja tenha cadastrado você. Cada caixa leva uma etiqueta própria; várias caixas podem significar vários códigos. A busca sem código no site da GLS exige o número de conta do remetente e a referência: peça à loja. Veja [como encontrar um código de rastreamento](guide:find-tracking-number), em inglês. O número do pedido não funciona.
@@ -37,13 +37,13 @@ Cada leitura no rastreador da GLS US traz data e hora, e quase todas indicam cid
 
 **Status geral da remessa.** Acima das leituras, o rastreador da GLS US resume o envio em poucas palavras: `label created`, `in transit`, `out for delivery`, `delivered` ou `returned`. Quando esse resumo está mais avançado que as leituras, o Peek segue por ele: um envio resumido como `delivered` aparece como "Entregue" mesmo sem linha correspondente, e `returned` aparece como "Devolvida ao remetente".
 
-**Outras linhas.** O código do Peek não conhece textos específicos da GLS US para tentativa sem sucesso, problema, retenção ou ponto de retirada. Qualquer linha desconhecida é exibida exatamente como a GLS US escreve e classificada pelas regras gerais do Peek. Veja mais em [status de rastreamento explicados](guide:tracking-statuses), em inglês.
+**Outras linhas.** O código do Peek não conhece textos específicos da GLS US para entrega não realizada, problema, retenção ou ponto de retirada. Qualquer linha desconhecida é exibida exatamente como a GLS US escreve e classificada pelas regras gerais do Peek. Veja mais em [status de rastreamento explicados](guide:tracking-statuses), em inglês.
 
-Se nada aparecer depois de `LABEL CREATED` por um dia ou mais, o Peek informa que o remetente ainda não entregou o pacote à GLS US e que o rastreamento começa quando isso ocorrer. Fale com a loja.
+Se nada aparecer depois de `LABEL CREATED` por um dia ou mais, o Peek mostra "O remetente ainda não entregou a encomenda a GLS US. O rastreamento começa quando ele entregar." Fale com a loja.
 
 **E-mails e SMS da GLS.** Quando a loja cadastra seus dados ao gerar a etiqueta, a GLS avisa na entrada no depósito (com a data prevista), em caso de atraso ou falha na entrega, ao sair para entrega (com horário estimado) e na entrega concluída.
 
-## Prazos, assinaturas e tentativas de entrega da GLS US
+## Prazos, assinaturas e entregas não realizadas da GLS US
 
 **Endereço.** A GLS não entrega em caixas postais (P.O. boxes) e faz a triagem pelo código postal americano (ZIP code), então um erro nele pode atrasar o envio. Redirecionamento só ocorre com autorização do remetente: peça à loja. Veja [como alterar o endereço de entrega](guide:change-delivery-address), em inglês.
 
@@ -53,13 +53,13 @@ Se nada aparecer depois de `LABEL CREATED` por um dia ou mais, o Peek informa qu
 
 **Assinatura.** A opção é definida pelo remetente. Por padrão, o motorista coleta assinatura em endereços comerciais. Em casas, o pacote pode ser deixado se ninguém puder assinar e o local for seguro e seco; em prédios de apartamentos, na porta ou na administração/portaria caso o motorista não tenha acesso. Com Signature Required, a GLS não deixa sem assinatura; com Adult Signature Required (exigido para bebidas alcoólicas e tabaco), quem assina precisa ter 21 anos ou mais.
 
-**Tentativa sem sucesso.** Perdeu a entrega ou recebeu um aviso na porta? Reagende pelo link nos e-mails ou SMS da GLS, ou ligue para a linha de destinatários abaixo. As páginas da GLS não informam número de tentativas nem tempo de guarda, e os GLS Points servem apenas para postagem por remetentes. Veja [tentativa de entrega](guide:missed-delivery), em inglês, e [encomendas não retiradas](guide:uncollected-parcel), em inglês.
+**Entrega não realizada.** Perdeu a entrega ou recebeu um aviso na porta? Reagende pelo link nos e-mails ou SMS da GLS, ou ligue para a linha de destinatários abaixo. As páginas da GLS não informam número de tentativas nem tempo de guarda, e os GLS Points servem apenas para postagem por remetentes. Veja [entrega não realizada](guide:missed-delivery), em inglês, e [encomendas não retiradas](guide:uncollected-parcel), em inglês.
 
 ## Encomenda GLS US não encontrada, parada, extraviada ou devolvida
 
-**Não encontrada.** O rastreador da GLS US indica quando desconhece um código. O Peek então mostra "Aguardando a primeira movimentação de GLS US" para um código SH detectado por ele, ou "Aguardando GLS US" se você escolheu GLS US manualmente, e segue tentando. Etiquetas recém-criadas costumam levar um tempo para aparecer. Se após dois dias um código SH continuar sem resposta, o Peek alerta que ainda aguarda a primeira atualização da transportadora; se você escolheu GLS US manualmente e nada aparecer após dois dias em nenhum serviço, ele sugere conferir o número, trocar de transportadora ou remover a encomenda, passando a consultar diariamente e depois semanalmente após uma semana. Confira o número no e-mail da loja e confirme se já foi despachado.
+**Não encontrada.** O rastreador da GLS US indica quando desconhece um código. O Peek então mostra "Aguardando a primeira movimentação de GLS US" para um código SH detectado por ele, ou "Aguardando GLS US" se você mesmo escolheu GLS US, e segue tentando. Etiquetas recém-criadas costumam levar um tempo para aparecer. Se após dois dias um código SH deixado ao Peek continuar sem resposta, o Peek avisa: "Aguardando a primeira atualização da transportadora". Se você mesmo escolheu GLS US e, dois dias depois, ela ainda não reconhece o código e nenhum outro serviço o encontra, o Peek mostra "Depois de dois dias, a transportadora ainda não reconhece este código. Confira o código, escolha outra transportadora ou exclua a encomenda." e passa a consultar diariamente, e semanalmente depois de uma semana da inclusão. Confira o número no e-mail da loja e confirme se já foi despachado.
 
-**Sem novidades por dias.** Após quatro dias sem nova leitura em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek destaca o dia da última leitura ("Sem atualização de rastreamento desde …"), observa que encomendas costumam ficar quietas no fim de semana, continua consultando a GLS US e exibe o link "Obter ajuda da GLS US". Após três semanas sem novidade, passa a recomendar que você procure o vendedor. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating), em inglês.
+**Sem novidades por dias.** Após quatro dias sem nova leitura em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek destaca o dia da última leitura ("Sem atualizações desde …"), observa que encomendas costumam ficar quietas no fim de semana, continua consultando a GLS US e exibe o link "Pedir ajuda a GLS US". Após três semanas sem novidade, mostra em vez disso "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor." Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating), em inglês.
 
 **Entregue, mas não chegou.** `SHIPMENT DELIVERED` e nada na porta? Confira no rastreador da GLS se houve assinatura. Verifique arredores da entrada, sala de correspondência, administração e vizinhos; depois ligue para a linha de destinatários da GLS e avise a loja. Veja [entregue mas não recebida](guide:delivered-not-received), em inglês.
 
@@ -79,14 +79,14 @@ Conforme a [página de suporte ao cliente da GLS US](https://gls-group.com/US/en
 
 ## Como rastrear GLS US no Peek
 
-**Código SH.** Cole-o na caixa acima. Enquanto o Peek consulta a GLS US, a linha da transportadora exibe "Consultando serviços de rastreamento…". Quando a GLS US reconhece o código, a linha exibe GLS US e confirma que ela tem a encomenda. Quando ainda não aparece, mostra "ainda não encontrado · O Peek continua consultando": adicione assim mesmo, e ele aparecerá como "Provavelmente GLS US" até a primeira leitura.
+**Código SH.** Cole-o na caixa acima. Enquanto o Peek consulta a GLS US, a linha da transportadora exibe "Consultando serviços de rastreamento…". Quando a GLS US reconhece o código, a linha exibe GLS US com "está com esta encomenda", e o Peek registra a encomenda nela. Quando ainda não aparece, mostra "ainda não encontrada · o Peek continua verificando": adicione assim mesmo, e ele aparecerá como "Provavelmente GLS US" até a primeira leitura.
 
-**Outro formato.** Cole mesmo assim: o Peek acompanha mais de 4.500 transportadoras. Em seguida, escolha GLS US manualmente:
+**Outro formato.** Cole mesmo assim: o Peek acompanha mais de 4.500 transportadoras. Em seguida, escolha GLS US você mesmo:
 
-1. Toque em "Alterar" ao lado da linha da transportadora e busque por GLS US ("GSO", "Golden State Overnight", "General Logistics Systems US" ou "United States" também funcionam).
-2. Selecione GLS US: a linha passa a indicar escolha manual. Inicie o rastreamento.
+1. Toque em "Trocar" ao lado da linha da transportadora e busque por GLS US ("GSO", "Golden State Overnight", "General Logistics Systems US" ou "United States" também funcionam).
+2. Selecione GLS US: a linha passa a mostrar "Escolhida por você". Inicie o rastreamento.
 
-Em uma encomenda já adicionada, use "Alterar transportadora". O Peek consulta a GLS US apenas para códigos de 5 a 20 letras e dígitos.
+Em uma encomenda já adicionada, use "Trocar transportadora". O Peek consulta a GLS US apenas para códigos de 5 a 20 letras e dígitos.
 
 **O que você vê.** O Peek consulta o rastreador da GLS US só pelo código, sem conta nem código postal. Exibe a etapa, cada leitura com cidade e estado no mapa e, quando disponível, a data prevista até a entrega ou devolução. Na sua página pessoal da encomenda, mostra o nome do destinatário fornecido pela GLS US (em "Destinatário") e encerra a rota do mapa na cidade de destino; links compartilhados ocultam ambos. Não exibe quem assinou, assinatura, comprovante de entrega nem referência do remetente, e não transfere envios da GLS US para outra transportadora. Se a GLS US registrar mais de um envio no mesmo código, o Peek segue o que tiver a leitura mais recente. O botão "Abrir o site de GLS US" abre o código direto no rastreador americano.
 
@@ -94,7 +94,7 @@ Em uma encomenda já adicionada, use "Alterar transportadora". O Peek consulta a
 
 **Quando a GLS US não responde.** Se o rastreador da GLS US ficar fora do ar, o Peek recorre a [serviços de rastreamento](guide:universal-tracker), em inglês, e mostra o histórico nas palavras deles.
 
-**Frequência.** Com a encomenda aberta no Peek, ou no dia da entrega com notificações ligadas, a consulta ocorre a cada 10 minutos no máximo, e a cada 2 minutos a partir das 6h no horário local no dia em que sai para entrega; fora disso, de hora em hora. Após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora, e a cada 6 horas após sete dias parados em "Etiqueta criada". As notificações cobrem "Cada atualização", "Etapas importantes" ou "Somente na entrega".
+**Frequência.** Com a encomenda aberta no Peek, ou no dia da entrega com notificações ligadas, a consulta ocorre a cada 10 minutos no máximo, e a cada 2 minutos a partir das 6h no horário local no dia em que sai para entrega; fora disso, de hora em hora. Após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora, e a cada 6 horas após sete dias parados em "Etiqueta criada". As notificações cobrem "Cada movimentação", "Etapas importantes" ou "Só a entrega".
 
 O Peek não pode contatar a GLS US ou a loja por você, alterar a entrega nem abrir reclamação.
 
@@ -102,11 +102,11 @@ O Peek não pode contatar a GLS US ou a loja por você, alterar a entrega nem ab
 
 ### A GSO é a mesma empresa que a GLS US?
 
-A GLS comprou a Golden State Overnight (GSO) em 2016, e hoje gso.com redireciona para o site da GLS US. A GSO foi fundada em 1995 para entregas na Califórnia, Arizona, Nevada e Novo México. O Peek trata ambas como uma só: lista GSO, Golden State Overnight, GLS USA, GLS United States e General Logistics Systems US como nomes alternativos da GLS US e reconhece links de gso.com e gls-us.com automaticamente.
+A GLS comprou a Golden State Overnight (GSO) em 2016, e hoje gso.com redireciona para o site da GLS US. A GSO foi fundada em 1995 para entregas na Califórnia, Arizona, Nevada e Novo México. O Peek trata ambas como uma só: lista GSO, Golden State Overnight, GLS USA, GLS United States e General Logistics Systems US como nomes alternativos da GLS US, então buscar qualquer um deles encontra a GLS US, e lê os links de rastreamento de gso.com e gls-us.com como da GLS US.
 
 ### Como é um código de rastreamento GLS US?
 
-O formato reconhecido pelo Peek é `SH` seguido de 18 dígitos, como `SH605182704936815247` (fictício). As páginas da GLS não publicam um padrão fixo e pode haver outros formatos: cole mesmo assim e escolha GLS US em "Alterar".
+O formato reconhecido pelo Peek é `SH` seguido de 18 dígitos, como `SH605182704936815247` (fictício). As páginas da GLS não publicam um padrão fixo e pode haver outros formatos: cole mesmo assim e escolha GLS US em "Trocar".
 
 ### O que significa a leitura ARRIVAL SCAN da GLS US?
 

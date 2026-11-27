@@ -1,5 +1,5 @@
 ---
-title: euShipments 快递查询：物流状态与当地派送承运商
+title: euShipments 快递查询：物流状态与当地派送快递公司
 description: 查询 euShipments 订单：单号来源与格式、New/Loaded hub/On delivery 等状态含义、各国末端派送快递公司及客服方式。
 slug: eushipments-tracking
 published: 2026-11-27
@@ -10,14 +10,14 @@ euShipments 是一家总部位于保加利亚鲁塞（Ruse）的电商物流公�
 
 ## euShipments 运单号是什么样的
 
-euShipments 未公布统一的单号格式。官网说明订单处理完成后，你会收到“tracking code, AWB number or tracking ID”，将其填入页面中标有“Enter your tracking number to track packages.”的输入框即可。查询页面按商家发给你的单号显示订单，该单号有时就是派送快递公司的自有单号。常见形式如下（数字为虚构）：
+euShipments 未公布单号格式。它说明订单处理完成后，你会收到“tracking code, AWB number or tracking ID”，将其填入页面中标有“Enter your tracking number to track packages.”的输入框即可。查询页面按商家发给你的单号显示订单，该单号有时就是派送快递公司的自有单号。各种形式如下（数字为虚构）：
 
 | 单号 | 含义 |
 | --- | --- |
 | `74829103` | 8 位数字：Peek 在 euShipments 查询页上见过的唯一格式，用于发往保加利亚的订单，当地快递也沿用同一单号派送。 |
-| “Tracking Number:” 后面的号码 | 当地派送快递公司的自有单号，会在该快递收到包裹后显示在 euShipments 查询结果下方，可直接用于该快递官网查询。 |
+| “Tracking Number:” 后面的号码 | 当地派送快递公司的自有单号，会在该快递收到包裹后显示在 euShipments 查询结果下方，可直接在该快递自己的查询页查询。 |
 
-8 位数字也符合 [Mondial Relay](carrier:mondial-relay)、[Colisweb](carrier:colisweb) 和 Heppner 的单号格式，因此单看数字无法确定就是 euShipments，请核对商家邮件中注明的物流公司。直接粘贴 euShipments 查询页链接无法自动打开订单，其页面只支持在表单内输入单号查询。如果找不到单号，请参阅[如何查找快递单号](guide:find-tracking-number)（英文）。
+8 位数字也符合 [Mondial Relay](carrier:mondial-relay)、[Colisweb](carrier:colisweb) 和 Heppner 的单号格式，因此单看数字无法确定就是 euShipments，请核对商家邮件中注明的物流公司。直接粘贴 euShipments 查询页链接无法打开订单，其页面只接受在表单内输入单号查询。如果找不到单号，请参阅[如何查找快递单号](guide:find-tracking-number)（英文）。
 
 ## euShipments 物流状态详解
 
@@ -27,16 +27,16 @@ euShipments 未公布统一的单号格式。官网说明订单处理完成后�
 | --- | --- |
 | `New` | 商家已向 euShipments 下达订单，可能尚未打包。 |
 | `Warehouse` | 订单位于 euShipments 履约仓，后面会附上仓库名称。 |
-| `Loaded hub` | 已在 euShipments 的某个枢纽装车发往下一站，后附枢纽名称及括号内的国家代码，例如 `(HR)`。 |
+| `Loaded hub` | 已在 euShipments 的某个枢纽装车发往下一站，后附枢纽名称及括号内的国家代码，例如 (HR)。 |
 | `Unloaded hub` | 已在枢纽卸货，命名方式相同。 |
 | `Picked up` | 当地快递公司已揽收该包裹。 |
 | `In transit` | 正在当地快递网络中转运。 |
 | `On delivery` | 已由快递员带出派送。 |
 | `Delivered` | 已送达，是订单的最终状态。 |
 
-`Loaded hub` 和 `Unloaded hub` 可能多次出现，对应沿途经过的各个中转枢纽。在 `Picked up` 之后，表格下方会出现三行信息：“Courier Name:”、“Tracking Number:”和“Tracking Link:”，分别给出派送快递公司名称、单号以及官网查询链接。
+`Loaded hub` 和 `Unloaded hub` 可能多次出现，对应沿途经过的各个中转枢纽。在 `Picked up` 之后，表格下方会出现三行信息：“Courier Name:”、“Tracking Number:”和“Tracking Link:”，分别给出派送快递公司名称、单号以及其查询页链接。
 
-Peek 未见过 euShipments 针对派送失败、待自提或退件使用独立的自有状态。遇到这些情况时，请查看“Tracking Information”中派送快递的原文，或点开“Tracking Link:”查看。
+Peek 未见过 euShipments 针对派送未成功、待自提或退件使用独立的自有状态。遇到这些情况时，请查看“Tracking Information”中派送快递的原文，或点开“Tracking Link:”查看。
 
 ## 各国负责派送 euShipments 包裹的快递公司
 
@@ -44,9 +44,9 @@ euShipments 将最后一公里交由当地快递公司完成。它从自有履�
 
 其首页“Key eCommerce partnerships”一栏展示了多家合作快递徽标，包括 [Speedy](carrier:speedy)、Sameday、[FAN Courier](carrier:fan-courier)、Express One、GLS、DPD、[BOX NOW](carrier:box-now)、[Pošta Slovenije](carrier:posta-slovenije)、[Slovenská pošta](carrier:slovenska-posta)、[PPL](carrier:ppl)、[ACS](carrier:acs-courier) 和 [Geniki Taxydromiki](carrier:geniki-taxydromiki)，但未说明具体由谁负责哪个国家。公司大事记还提到 2026 年与奥地利邮政建立战略合作，未列出具体范围。最终哪家快递送货取决于你的国家以及在商家结账时选择的配送方式，查询结果中的“Courier Name:”会直接告诉你。
 
-**收货方式。** 在保加利亚，euShipments 支持送货到家或公司地址，以及门外自提：快递网点、代收点（PUDO）或自提柜；其克罗地亚和罗马尼亚页面也列出了类似选项。euShipments 在其网络中拥有超过 150,000 个自提点，并说明包裹备妥可取时会发送含取件指引的通知。
+**收货方式。** 在保加利亚，euShipments 可送货到家或公司地址，以及门外自提：快递网点、代收点（PUDO）或自提柜；其克罗地亚和罗马尼亚页面也列出了类似选项。euShipments 在其网络中拥有超过 150,000 个自提点，并说明包裹备妥可取时会发送含取件指引的通知。
 
-**派送次数、保管期与重新派送。** 这些均执行实际派送快递公司的规则，euShipments 本身不作统一规定。请打开“Tracking Link:”并用“Tracking Number:”到对应快递页面查询，如需再次派送或改地址请直接联系该快递。
+**派送次数、保管期与重新派送。** 这些均执行实际派送快递公司的规则，euShipments 没有公布自己的规则。请打开“Tracking Link:”并用“Tracking Number:”到对应快递页面查询，如需再次派送或改地址请直接联系该快递。
 
 **货到付款。** euShipments 在 17 个国家提供货到付款服务，由当地快递代收货款并转交商家。
 
@@ -56,7 +56,7 @@ euShipments 将最后一公里交由当地快递公司完成。它从自有履�
 
 **停在枢纽之间。** 出现 `Loaded hub` 后包裹正在发往下一枢纽的路上，通常要等抵达卸货后才会有下一条记录。如果停滞时间超过商家预计时效，请联系商家。另见[物流为什么停止更新](guide:tracking-not-updating)（英文）。
 
-**`Picked up` 后不动。** 包裹已交由当地快递，请打开“Tracking Link:”并用对方单号在当地快递官网查询。
+**`Picked up` 后不动。** 包裹已交由当地快递，请打开“Tracking Link:”并用对方单号在当地快递自己的查询页查询。
 
 **显示已送达但没收到。** 实际送货的是当地快递，请先联系该快递，再联系商家。参阅[显示已签收但未收到](guide:delivered-not-received)（英文）。
 
@@ -68,21 +68,21 @@ euShipments 将最后一公里交由当地快递公司完成。它从自有履�
 
 ## euShipments 客服电话与联系方式
 
-euShipments 官网公布的联系方式如下：
+euShipments 列出的联系方式如下：
 
 - **电话：** +359 700 70 755（保加利亚号码），见于联系页、FAQ 和查询页，未注明接听时间。
 - **邮箱：** office@eushipments.com。
 - **联系表单：** 面向商家的报价问卷（需填写月订单量、销售市场等），不适用于收件人。
 
-其面向商家的 FAQ 说明，仅在商家“提出需求时”才向终端买家提供电话、邮件和在线客服支持。因此请先联系下单的商家；若涉及具体派送问题，直接联系“Courier Name:”所列快递公司会更快。
+其面向商家的 FAQ 说明，它会在“提出需求时”向商家的顾客提供电话、邮件和在线客服支持。因此请先联系下单的商家；若涉及具体派送问题，直接联系“Courier Name:”所列快递公司会更快。
 
 ## 使用 Peek 追踪 euShipments 包裹
 
-[Peek](/) 无法仅凭格式识别 euShipments 单号：Peek 没有为 euShipments 设置单号规则，且 8 位数字与其他多家快递存在弱匹配。尽管粘贴查询：Peek 支持超过 4,500 家快递公司。粘贴后请点击“更改”并选择“euShipments”，或对已添加包裹使用“更改快递公司”。
+[Peek](/) 无法仅凭格式识别 euShipments 单号：Peek 没有为 euShipments 设置单号规则，且 8 位数字与其他多家快递存在弱匹配。照样粘贴即可：Peek 跟踪 4,500 多家快递公司。粘贴后请点“更换”并选择“euShipments”，或对已添加的包裹使用“更换快递公司”。
 
-Peek 会直接读取 euShipments 查询页，展示当前阶段、轨迹历史以及仓库和枢纽记录的地点（枢纽附带国家代码）。Peek 保留 euShipments 的英文状态，不展示“Tracking Information”中当地快递的原文。如果“Tracking Link:”指向 Peek 支持跟进的承运商（例如 [Econt](carrier:econt)、Sameday、FAN Courier、[Packeta](carrier:packeta)、Slovenská pošta 或 Geniki Taxydromiki）且链接中带有对方单号，Peek 会显示“由……派送”，并在单号不同时列出对方单号。当该当地快递仅收到预报而尚无自身扫描时，则显示“…… 已收到预报，尚未收到包裹”。Peek 会向该快递查询，一旦对方轨迹中出现带日期且不晚于 euShipments 最新记录的进展，便切换为跟进该快递并保留 euShipments 之前的记录；否则继续展示 euShipments 轨迹。
+Peek 会直接读取 euShipments 查询页，展示当前阶段、轨迹历史以及仓库和枢纽记录的地点（枢纽附带国家代码）。Peek 保留 euShipments 的英文状态，不展示“Tracking Information”中当地快递的原文。如果“Tracking Link:”指向 Peek 能跟进的快递公司（例如 [Econt](carrier:econt)、Sameday、FAN Courier、[Packeta](carrier:packeta)、Slovenská pošta 或 Geniki Taxydromiki）且链接中带有对方单号，Peek 会显示“由……派送”，并在单号不同时列出对方单号。当该当地快递仅收到预报而尚无自身扫描时，则显示“…… 已收到预报，尚未收到包裹”。Peek 会向该快递查询，一旦对方轨迹中出现带日期且不早于 euShipments 最新记录的进展，便切换为跟进该快递并保留 euShipments 之前的记录；否则继续展示 euShipments 轨迹。
 
-由于 euShipments 查询结果既不提供预计送达日期也不提供签收证明，Peek 也不会显示这两项。当你打开包裹页面或在派送日开启通知时，只要 euShipments 官网正常响应，Peek 最高每 10 分钟直接查询一次，出库派送当天则自最新扫描所在时钟早上 6 点起每 2 分钟查询一次。若连续两天无新动态（“已创建运单”或“快递公司已收件”状态为 12 小时），改为每小时查询一次；在“已创建运单”满七天无新动态后，改为每 6 小时查询一次。若包裹在“已创建运单”、“快递公司已收件”或“运输途中”状态连续四天无新扫描，Peek 会显示“自……以来无物流更新”、提示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 euShipments 查询。”并提供“联系 euShipments 获取帮助”链接。通知支持“每次扫描”、“重要节点”或“仅在送达时”。Peek 无法代你联系 euShipments、商家或当地快递。
+由于 euShipments 查询结果既不提供预计送达日期也不提供签收证明，Peek 也不会显示这两项。当你打开包裹页面或在派送日开启通知时，只要 euShipments 自己的查询页正常响应，Peek 最高每 10 分钟直接查询一次，出库派送当天则自最新扫描所在时钟早上 6 点起每 2 分钟查询一次。若连续两天无新动态（处于“已生成面单”或“已揽收”时为 12 小时），改为每小时查询一次；在“已生成面单”满七天无新动态后，改为每 6 小时查询一次。若包裹停在“已生成面单”、“已揽收”或“运输中”连续四天无新扫描，Peek 会显示“自……起没有物流更新”、提示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 euShipments 查询。”并提供“向 euShipments 寻求帮助”链接。通知可选“每次扫描”、“重要环节”或“仅派送当天”。Peek 无法代你联系 euShipments、商家或当地快递。
 
 ## euShipments 物流查询常见问题
 

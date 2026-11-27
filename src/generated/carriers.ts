@@ -20591,7 +20591,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "eushipments",
       "catalog": "eushipments",
       "slug": "eushipments-tracking",
-      "title": "euShipments 快递查询：物流状态与当地派送承运商",
+      "title": "euShipments 快递查询：物流状态与当地派送快递公司",
       "name": "euShipments",
       "color": "#0a8fcf"
     },

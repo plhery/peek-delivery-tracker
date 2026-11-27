@@ -27,7 +27,7 @@ O resultado traz "My order N" e o seu código, seguidos por uma tabela de três 
 | --- | --- |
 | `New` | A loja registrou o pedido na euShipments. Ele pode ainda não ter sido embalado. |
 | `Warehouse` | O pedido está no centro de distribuição da euShipments, cujo nome aparece depois do termo. |
-| `Loaded hub` | Carregado em um dos hubs da euShipments para seguir ao próximo. O nome do hub aparece em seguida com a sigla do país entre parênteses, como `(HR)`. |
+| `Loaded hub` | Carregado em um dos hubs da euShipments para seguir ao próximo. O nome do hub aparece em seguida com a sigla do país entre parênteses, como (HR). |
 | `Unloaded hub` | Descarregado em um hub, identificado da mesma forma. |
 | `Picked up` | A transportadora local coletou a encomenda. |
 | `In transit` | Em trânsito pela rede da transportadora local. |
@@ -36,7 +36,7 @@ O resultado traz "My order N" e o seu código, seguidos por uma tabela de três 
 
 `Loaded hub` e `Unloaded hub` podem se repetir várias vezes, uma para cada hub no trajeto. Depois de `Picked up`, três linhas surgem abaixo da tabela: "Courier Name:", "Tracking Number:" e "Tracking Link:", indicando quem faz a entrega, o código local e o link do rastreador dela.
 
-O Peek nunca viu a euShipments usar um status próprio para tentativa sem sucesso, encomenda pronta para retirada ou devolução. Nesses casos, leia o texto da transportadora em "Tracking Information" ou abra o link dela.
+O Peek nunca viu a euShipments usar um status próprio para entrega não realizada, encomenda pronta para retirada ou devolução. Nesses casos, leia o texto da transportadora em "Tracking Information" ou abra o link dela.
 
 ## Quem entrega uma encomenda euShipments no seu país
 
@@ -78,11 +78,11 @@ O FAQ voltado às lojas afirma oferecer atendimento por telefone, e-mail e chat 
 
 ## Como rastrear euShipments no Peek
 
-O [Peek](/) não reconhece códigos da euShipments pelo formato: não há regra própria para ela, e um código de 8 dígitos tem correspondência fraca com outras empresas. Cole-o mesmo assim — o Peek acompanha mais de 4.500 transportadoras — e depois toque em "Alterar" e escolha "euShipments", ou use "Alterar transportadora" em uma encomenda já adicionada.
+O [Peek](/) não reconhece códigos da euShipments pelo formato: não há regra própria para ela, e um código de 8 dígitos tem correspondência fraca com outras empresas. Cole-o mesmo assim — o Peek acompanha mais de 4.500 transportadoras — e depois toque em "Trocar" e escolha "euShipments", ou use "Trocar transportadora" em uma encomenda já adicionada.
 
 O Peek lê o rastreador da euShipments e mostra a etapa, o histórico e, nas linhas de armazém e hub, o local (com país nos hubs). Mantém os status em inglês da euShipments e omite o texto da transportadora vindo de "Tracking Information". Quando "Tracking Link:" aponta para uma transportadora que o Peek consegue acompanhar — como [Econt](carrier:econt), Sameday, FAN Courier, [Packeta](carrier:packeta), Slovenská pošta ou Geniki Taxydromiki — trazendo o número dela no link, o Peek exibe "Entrega por" essa transportadora e o código dela quando for diferente do seu. Enquanto essa transportadora tiver apenas o pré-aviso, sem leitura própria, aparece "Anunciada a …, ainda não recebida". O Peek a consulta e passa a seguir por ela assim que houver progresso datado pelo menos tão recente quanto a última linha da euShipments, preservando as linhas anteriores; caso contrário, mantém o histórico da euShipments.
 
-Como o resultado da euShipments não traz data prevista nem comprovante de entrega, o Peek não exibe nenhum dos dois. Com o cartão aberto no Peek, ou no dia da entrega com notificações ativas, o Peek consulta a euShipments diretamente a cada 10 minutos no máximo, ou a cada 2 minutos a partir das 6h no relógio da última leitura no dia em que sai para entrega, enquanto o rastreador responder. Após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora; após sete dias em "Etiqueta criada", a cada 6 horas. Depois de quatro dias sem leitura em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", mostra "Sem atualização de rastreamento desde …", a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando euShipments." e o link "Obter ajuda da euShipments". Você escolhe alertas para "Cada atualização", "Etapas importantes" ou "Somente na entrega". O Peek não pode contatar a euShipments, a loja ou a transportadora por você.
+Como o resultado da euShipments não traz data prevista nem comprovante de entrega, o Peek não exibe nenhum dos dois. Com o cartão aberto no Peek, ou no dia da entrega com notificações ativas, o Peek consulta a euShipments diretamente a cada 10 minutos no máximo, ou a cada 2 minutos a partir das 6h no relógio da última leitura no dia em que sai para entrega, enquanto o rastreador responder. Após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora; após sete dias em "Etiqueta criada", a cada 6 horas. Depois de quatro dias sem leitura em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", mostra "Sem atualizações desde …", a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando euShipments." e o link "Pedir ajuda a euShipments". Você escolhe alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode contatar a euShipments, a loja ou a transportadora por você.
 
 ## Perguntas frequentes sobre o rastreamento euShipments
 

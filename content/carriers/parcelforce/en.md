@@ -1,12 +1,12 @@
 ---
 title: Parcelforce Worldwide tracking: statuses and customs
-description: Track a Parcelforce Worldwide parcel: where the number is, what each status means, delivery options, customs bills and how to reach Royal Mail's customer services.
+description: Track a Parcelforce Worldwide parcel via Royal Mail: EA…GB and 14-character PB numbers, status meanings, 3-week customs hold and 03457 740 740.
 slug: parcelforce-worldwide-tracking
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Parcelforce Worldwide is part of [Royal Mail](carrier:royal-mail) Group, and you track a Parcelforce parcel on Royal Mail's Track your item page, or paste the number in the box above. The number comes from the shop or sender, usually in the order confirmation email.
+Parcelforce Worldwide is part of [Royal Mail](carrier:royal-mail) Group, so track your 13-character `EA…GB` or 14-character `PB` parcel number on Royal Mail's Track your item page, or paste it in the box above. Below are status meanings, delivery options in the Royal Mail app, UK customs bills (held for about 3 weeks) and Royal Mail Customer Services (03457 740 740).
 
 ## Parcelforce tracking number: where to find it
 
@@ -80,17 +80,21 @@ Peek shows the status, each scan with its place (no postcodes), the expected del
 
 Yes. GOV.UK counts Parcelforce in Royal Mail Group, and its parcels are tracked on Royal Mail's Track your item page.
 
-### Why is my Parcelforce number not recognised?
+### Why is my Parcelforce tracking number not recognised?
 
-The parcel may not have reached Parcelforce yet, or the number may be mistyped. A consignment number on its own isn't tracked: ask the sender for the 14-character `PB` number of each parcel, and try later.
+The parcel may not have reached Parcelforce yet (`Sender has despatched item`), or the number may be mistyped. A consignment number on its own isn't tracked: ask the sender for the 14-character `PB` number of each parcel, and try later.
 
 ### How long does Parcelforce hold a parcel with customs charges?
 
-About 3 weeks. If the bill isn't paid by then, the parcel goes back to the sender.
+About 3 weeks. Parcelforce contacts you with the bill for any VAT, duty or fee; if it isn't paid by then, the parcel goes back to the sender.
 
-### Can I choose another day for a Parcelforce delivery?
+### Can I reschedule a Parcelforce delivery or choose a safe place?
 
-Yes, in the Royal Mail app or through Royal Mail Customer Services. You can also ask for it to go to a neighbour.
+Yes, in the Royal Mail app or through Royal Mail Customer Services. You can choose another delivery date, a neighbour, a safe place or extra delivery needs.
+
+### What is the customer service phone number for Parcelforce?
+
+For delivery options and safe places, call Royal Mail Customer Services on 03457 740 740 (Mon–Fri 8am–6.30pm, Sat 8am–3pm, Sun 9am–2pm UK time; Relay UK: 18001 then 0345 266 0075). Forward scam texts asking for payment to 7726.
 
 :::sources
 - [GOV.UK: Check when you can account for import VAT on your VAT Return](https://www.gov.uk/guidance/check-when-you-can-account-for-import-vat-on-your-vat-return) – Parcelforce part of Royal Mail Group

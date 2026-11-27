@@ -1,12 +1,12 @@
 ---
 title: BRT Sendungsverfolgung: Paket aus Italien, Status
-description: BRT-Paket verfolgen: wo die Sendungsnummer steht, was BRTs Statusmeldungen bedeuten, wer in Deutschland, Österreich und der Schweiz zustellt, Kontakt.
+description: BRT Sendungsverfolgung (Italien → DE/AT/CH): BRTcode mit 12–15 Ziffern, englische Status, Weiterleitung über DPD, 10 Tage Lagerfrist und Kontakt.
 slug: brt-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-BRT ist ein italienischer Expresskurier und gehört wie DPD zur Geopost-Gruppe. Ein Paket verfolgst du mit dem Link in BRTs SMS oder E-Mail, im Suchfeld auf brt.it oder hier: Füg die Nummer oben ins Feld ein. Diese Nummer, den BRTcode, schickt dir BRT, sobald es das Paket hat und der Absender deine Kontaktdaten weitergegeben hat.
+BRT (ehemals Bartolini, Teil der Geopost-Gruppe wie DPD) liefert in Italien meist in 24 bis 48 Stunden und sendet Pakete nach Deutschland, Österreich und in die Schweiz in der Regel über das DPD-Netz (Richtwert 48 bis 72 Stunden). Verfolge deinen BRTcode (12, 14 oder 15 Ziffern bzw. `EOB…`) auf brt.it oder im Feld oben; unten findest du alle Statusmeldungen, die Übergabe an DPD und Kontaktwege.
 
 ## BRT Sendungsnummer: wo sie steht und wie sie aussieht
 
@@ -105,21 +105,25 @@ Peek schaut bis zu alle 10 Minuten nach, bis zu alle 2 Minuten, sobald das Paket
 
 ## Fragen zur BRT Sendungsverfolgung
 
-### Wo ist mein BRT-Paket gerade?
+### Wo ist mein BRT-Paket gerade, und was bedeuten die Status?
 
-Das sagt BRTs neueste Zeile: Bei `ARRIVED AT DEPOT` liegt es in der Filiale aus der Spalte Filiale, bei `FOR DELIVERY` bringt es der Zusteller. Noch keine Zeile? Dann hat BRT das Paket wohl noch nicht, und Peek zeigt „Warten auf BRT“; ist noch kein Paketdienst gewählt, bei einer `EOB`-Nummer „Warten auf den ersten Scan von BRT“.
+BRTs neueste Zeile zeigt den Stand: `ARRIVED AT DEPOT` heißt, das Paket liegt in der genannten Filiale, `FOR DELIVERY`, es ist heute in Zustellung. Bei einer neuen Nummer ohne Scans hat BRT das Paket oft noch nicht übernommen.
 
-### Ist BRT dasselbe wie DPD?
+### Ist BRT dasselbe wie DPD, und wer stellt in DE, AT und CH zu?
 
-Nein, aber beide gehören zur Geopost-Gruppe, und ins europäische Ausland bringt BRT Pakete über das Netz von DPD.
+Nein, aber beide gehören zur Geopost-Gruppe, und ins europäische Ausland bringt BRT Pakete meist über das DPD-Netz. Nennt BRT für ein Einzelpaket die 14-stellige DPD-Nummer, verfolgt Peek das Paket bei [DPD Germany](carrier:dpd-de), DPD Austria oder [DPD Switzerland](carrier:dpd-ch) weiter.
 
-### Wie lange braucht ein Paket mit BRT?
+### Wie lange dauert ein Paket mit BRT aus Italien?
 
-Innerhalb Italiens meist 24 bis 48 Stunden, auf der Straße in die meisten europäischen Länder 48 bis 72 Stunden, schreibt BRT, und nennt das Richtwerte. Als Qualitätsstandard nennt BRTs aktuelle Dienstleistungscharta (Stand Juli 2026), die für Pakete bis 31,5 kg gilt: 96 % der Sendungen innerhalb Italiens in 1 bis 2 Werktagen zugestellt, ins Ausland in 2 bis 10 Werktagen.
+Innerhalb Italiens nennt BRT meist 24 bis 48 Stunden, auf der Straße in die meisten europäischen Länder 48 bis 72 Stunden als Richtwerte (ohne Gewähr).
 
-### Wer stellt ein BRT-Paket in Deutschland, Österreich oder der Schweiz zu?
+### Wie lange liegt ein BRT-Paket im BRT-fermopoint oder in giacenza?
 
-Meist DPD in deinem Land, mit einer eigenen DPD-Nummer. Besteht die Sendung aus einem Paket und nennt BRT diese Nummer, zeigt Peek etwa „Zustellung durch DPD Germany“ (solange es bei DPD nur angekündigt ist: „Bei DPD Germany angekündigt, noch nicht eingetroffen“) und verfolgt das Paket bei DPD weiter, sobald DPD einen aktuellen Scan zeigt.
+Im BRT-fermopoint bleibt das Paket 10 Tage (bis 20 kg). Bei einer Einlagerung („in giacenza“) geht es laut Dienstleistungscharta nach 10 Tagen ohne schriftliche Anweisung des Absenders zurück; freigeben kannst du es über BRTs Link oder mit dem BRTcode.
+
+### Wie erreiche ich den BRT Kundenservice?
+
+Nutze das englische Support-Portal auf services.brt.it/en/support, den Chat auf brt.it oder wende dich an die im Tracking genannte BRT-Filiale. Bei einer Online-Bestellung ist der Shop als Auftraggeber dein erster Ansprechpartner.
 
 :::sources
 - [BRT: FAQ (Englisch)](https://www.brt.it/en/customer-service/faq/) – BRTcode, verpasste Zustellung, Einlagerung, Lieferzeiten, Schäden, Locker, 20 kg

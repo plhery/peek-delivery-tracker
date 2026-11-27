@@ -1,15 +1,15 @@
 ---
 title: Allegro Sendungsverfolgung: Paketdienst, Nummer, Probleme
-description: Wer Allegro-Pakete liefert, ob allegro.pl nach Deutschland, Österreich und in die Schweiz verschickt, wo die Sendungsnummer steht und was tun, wenn nichts kommt.
+description: Allegro Sendungsverfolgung für Deutschland, Österreich & Schweiz: Kurier DPD/DHL (2–4 Werktage), InPost Paczkomat, Moje zakupy, Käuferschutz und Retoure.
 slug: allegro-sendungsverfolgung
 picture: Ein Paket in einem offenen One-Box-Automaten, ein Handy mit einer Bestellung und Pip, der losläuft, um es abzuholen.
 published: 2026-10-17
-updated: 2026-10-28
+updated: 2026-11-27
 ---
 
-Allegro ist ein polnischer Marktplatz: Seine Bedingungen nennen allegro.pl, allegro.cz, allegro.sk und allegro.hu, einen Shop für Deutschland, Österreich oder die Schweiz gibt es nicht. Händler auf allegro.pl können dir per Allegro Kurier DPD oder Allegro Kurier DHL nach Deutschland und Österreich liefern, in die Schweiz nicht. Die Sendungsnummer steht in deinem Allegro-Konto unter „Moje przesyłki“ (Meine Sendungen) und „Moje zakupy“ (Meine Käufe) und in der Mail, die Allegro dir schickt, sobald die Nummer eingetragen ist.
+Allegro ist ein polnischer Marktplatz (allegro.pl, allegro.cz, allegro.sk und allegro.hu) ohne eigenen Shop für Deutschland, Österreich oder die Schweiz. Händler auf allegro.pl liefern per Allegro Kurier DPD oder Allegro Kurier DHL nach Deutschland (2 Werktage) und Österreich (2 bis 4 Werktage), nicht jedoch in die Schweiz; in Polen liefern Allegro One, InPost (Paczkomaty und Kurier24), DPD, DHL, ORLEN Paczka und Pocztex. Die Sendungsnummer steht unter „Moje przesyłki“, „Moje zakupy“ und in Allegros Versandmail; bei Problemen greift der Käuferschutz bis 20 000 zł.
 
-## Welcher Paketdienst liefert meine Allegro-Bestellung?
+## Welcher Paketdienst liefert bei Allegro (InPost, Allegro One, DPD, DHL)?
 
 Auf Allegro verkaufen Händler. Jeder legt fest, welche Versandarten er anbietet, und du wählst eine davon im Liefer- und Zahlungsformular. Für Lieferungen in Polen sagt meist der Name der Versandart, welcher Paketdienst fährt:
 
@@ -33,7 +33,7 @@ Bei Allegro Delivery wartet ein Paket 2 Kalendertage in einer One Box und 2 bis 
 - home | Du | Zugestellt oder abgeholt
 :::
 
-## Wo finde ich die Allegro-Sendungsnummer?
+## Wo finde ich die Sendungsnummer in meinem Allegro-Konto?
 
 An vier Stellen:
 
@@ -79,7 +79,7 @@ Kostenlos ist die Lieferung bei Angeboten mit dem Smart!-Zeichen, wenn die Versa
 
 Wann das Paket kommt, steht auch mit Smart! im Angebot, etwa als „dostawa jutro“ (Lieferung morgen) oder „dostawa pojutrze“ (Lieferung übermorgen). Braucht der Händler mehr als 3 Tage für den Versand, siehst du einen Zeitraum, ein Datum oder eine Anzahl Tage. Bei Allegro Delivery liefern Allegro One Punkt und Allegro One Box am nächsten Tag. Für Lieferungen ins Ausland gilt Smart! nicht.
 
-## Paket nicht angekommen oder als zugestellt markiert: Was tun?
+## Was tun, wenn mein Allegro-Paket nicht ankommt oder zugestellt wirkt?
 
 Bei Problemen meldest du dem Händler ein „problem z zakupem“ (Problem mit dem Kauf). Wird es nicht gelöst, schlägt dir Allegro seinen Käuferschutz „Allegro Ochrona Kupujących“ vor. Der Reihe nach:
 
@@ -97,7 +97,7 @@ Bei Allegro Delivery kannst du auch die Lieferung selbst reklamieren, etwa einen
 
 Mehr dazu, wer haftet und was du als Beleg aufhebst: [Zugestellt, aber nicht erhalten](guide:delivered-not-received) und [Paket verloren](guide:lost-parcel).
 
-## Bei Allegro aus Deutschland, Österreich oder der Schweiz bestellen
+## Liefert allegro.pl nach Deutschland, Österreich und in die Schweiz?
 
 Allegro hat Marktplätze für Polen (allegro.pl), Tschechien (allegro.cz), die Slowakei (allegro.sk) und Ungarn (allegro.hu). Einen deutschen gibt es nicht, Allegro kannst du aber auf Englisch nutzen. In deinem Konto stellst du unter „Lokalizacja“ (Standort) Sprache, Währung und Lieferland ein. Mit einem Lieferland siehst du nur noch Angebote von Händlern, die dorthin liefern.
 
@@ -118,7 +118,7 @@ Was bei diesen Lieferungen anders ist:
 
 Die Sendungsnummer findest du wie in Polen unter „Moje zakupy“. Mit ihr verfolgst du das Paket auch direkt beim Paketdienst.
 
-## Allegro-Bestellung zurücksenden
+## Wie sende ich eine Allegro-Bestellung zurück (14 Tage Widerruf)?
 
 Bei einem gewerblichen Händler hast du mindestens 14 Tage ab dem Tag nach dem Empfang, um ihm deinen Widerruf zu melden, etwa mit dem Formular „Zwróć zakup“ (Kauf zurückgeben) in „Moje zakupy“. Danach hast du weitere 14 Tage, um den Artikel abzuschicken. Kostenlos ist die Rücksendung mit Smart!, bei einer Verbraucher-Rücksendung mit einem Rücksendecode von Allegro Delivery und bei Allegro Kurier24 und miniKurier24 InPost. Kaufst du bei einer Privatperson, hast du kein Widerrufsrecht. Wo du die Nummer einer Retoure findest und wann das Geld kommt: [Retouren verfolgen](guide:returns-tracking).
 

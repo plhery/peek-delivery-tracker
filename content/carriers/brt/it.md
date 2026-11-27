@@ -1,12 +1,12 @@
 ---
 title: BRT tracking: dov'è il pacco e cosa fare se non arriva
-description: Tracking BRT: dove trovi il BRTcode, cosa vogliono dire gli stati, giacenza, BRT-fermopoint e locker, numero verde e cosa fare se il pacco non arriva.
+description: Tracking BRT (ex Bartolini): codice BRTcode a 12, 14, 15 o 19 cifre, stati, tempi 24/48 ore, giacenza e BRT-fermopoint (10 giorni), locker e assistenza.
 slug: brt-tracking
 published: 2026-10-10
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-BRT è un corriere espresso italiano del gruppo Geopost, come DPD. Per seguire il pacco apri il link nell'SMS o nell'e-mail di BRT, cerca il numero in «Dov'è la mia spedizione?» su [brt.it](https://www.brt.it/it/) oppure incollalo nel box qui sopra. Il numero, il BRTcode, te lo comunica BRT quando prende in carico la spedizione, se il mittente le ha dato il tuo cellulare o la tua e-mail.
+BRT (ex Bartolini, gruppo Geopost come DPD) consegna in Italia generalmente in 24/48 ore. Inserisci il BRTcode (12, 14, 15 o 19 cifre) su [brt.it](https://www.brt.it/it/) o qui sopra; sotto trovi gli stati spiegati, giacenza e BRT-fermopoint (10 giorni), locker BRT e contatti.
 
 ## Numero di tracciamento BRT: dove si trova e com'è fatto
 
@@ -102,25 +102,25 @@ Peek controlla il pacco fino a ogni 10 minuti, fino a ogni 2 quando è in conseg
 
 ## Domande sul tracking BRT
 
-### BRT consegna anche il sabato?
+### Quanto impiega BRT e consegna anche il sabato?
 
-Può farlo, se il negozio ha scelto quel servizio: BRT elenca la consegna al sabato tra le opzioni per l'e-commerce, e nessuna sua pagina dice che sia la regola. Nei tempi di consegna del contratto, sabato e domenica non contano.
+In Italia generalmente in 24/48 ore (+12/24 ore per Calabria, Sicilia, Sardegna e località oltre 800 km) e 48/72 ore in Europa. La consegna al sabato è un'opzione che il negozio può scegliere per l'e-commerce; nei tempi contrattuali sabato e domenica non contano.
 
-### Quanto tempo ho per ritirare un pacco al BRT-fermopoint?
+### Quanto tempo resta un pacco al BRT-fermopoint o in giacenza?
 
-10 giorni, secondo la pagina BRT-fermopoint. Per i locker e per il fermo deposito in filiale BRT non pubblica un tempo.
-
-### Pacco BRT in giacenza: quanto tempo resta?
-
-Secondo la Carta dei servizi, 10 giorni dalla comunicazione di giacenza: se intanto il mittente non dà istruzioni scritte, la merce torna indietro (le condizioni di contratto di BRT parlano invece dei giorni concordati con il mittente). Prima puoi sbloccarla dal link nell'e-mail o nell'SMS di BRT, o dal tracciamento con il BRTcode.
+Al BRT-fermopoint resta 10 giorni (limite 20 kg). Per i pacchi in giacenza, la Carta dei servizi prevede 10 giorni dalla comunicazione prima del rientro al mittente se non arrivano istruzioni scritte; puoi sbloccarla dal link BRT o con il BRTcode.
 
 ### Quanto costa la giacenza BRT?
 
-BRT non pubblica una cifra. Il campo «Addebito spese» del dettaglio spedizione dice se le spese di giacenza vanno addebitate e a chi, mittente o destinatario, una volta arrivate le istruzioni del mittente.
+BRT non pubblica una tariffa fissa: il campo «Addebito spese» nel dettaglio spedizione indica se e a chi (mittente o destinatario) vengono addebitate le spese.
 
-### Pacco BRT risulta consegnato ma non ricevuto: cosa fare?
+### Come si ritira in un locker BRT o in filiale?
 
-Chiedi prima a vicini e familiari, poi al negozio di controllare la lettera di vettura firmata, che il mittente vede con il suo codice cliente (P.O.D Image). Se non basta, scegli «La spedizione risulta consegnata ma non l'ho ricevuta» nella pagina Assistenza di BRT e compila il modulo; resta poi il reclamo descritto sopra. Vedi anche [pacco consegnato ma non ricevuto](guide:delivered-not-received).
+Al locker BRT (massimo 20 kg, un collo sotto i 50 cm) usi il QR Code o il PIN di 8 cifre ricevuto via e-mail o SMS. In filiale ritiri di persona oppure con delega, documento del delegato e copia del tuo documento.
+
+### Pacco BRT consegnato ma non ricevuto: cosa fare?
+
+Chiedi prima a vicini e familiari, poi al negozio di verificare la prova di consegna firmata (P.O.D Image). Se manca ancora, segnala il caso nella pagina Assistenza di BRT. Vedi anche [pacco consegnato ma non ricevuto](guide:delivered-not-received).
 
 :::sources
 - [BRT: FAQ, Domande frequenti sui Servizi BRT](https://www.brt.it/it/servizio-clienti/faq/) – BRTcode, consegna mancata, giacenza, tempi, danni, P.O.D

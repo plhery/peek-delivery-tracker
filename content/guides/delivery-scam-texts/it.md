@@ -1,15 +1,15 @@
 ---
 title: Truffa pacco via SMS: come riconoscerla e cosa fare
-description: Come riconoscere un SMS truffa sul pacco, cosa mandano davvero Poste, BRT, GLS, InPost e la Posta, e cosa fare se hai cliccato sul link o hai pagato.
+description: SMS truffa sul pacco: come riconoscerla, cosa mandano davvero Poste Italiane, BRT, GLS, InPost e La Posta, cosa fare se hai cliccato e dove segnalare.
 slug: truffa-pacco-sms
 picture: Un telefono con un messaggio con un triangolo di avviso e un amo sul link, una moneta barrata e Pip preoccupato, con una mano alzata che dice stop nel suo fumetto.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-27
 ---
 
-Un SMS, un'e-mail o un messaggio WhatsApp che ti dice che il pacco è sospeso o in giacenza, e che per sbloccarlo basta pagare una piccola commissione o confermare l'indirizzo da un link, è quasi sempre una truffa. Non toccare niente: apri tu il sito o l'app del corriere e inserisci il codice tracking che trovi nell'e-mail di spedizione del negozio. Se hai già inserito i dati della carta, chiama subito la banca e fai bloccare la carta.
+Un SMS, un'e-mail o un messaggio WhatsApp su un pacco «sospeso» o «in giacenza» che chiede di pagare una piccola commissione o confermare l'indirizzo tramite un link è quasi sempre una truffa. Non cliccare: apri tu il sito o l'app di Poste Italiane, BRT, GLS, InPost o La Posta e verifica il codice tracking dall'e-mail del negozio. Se hai già inserito i dati della carta, bloccala subito con la banca e segnala la frode alla Polizia Postale (o, in Ticino, all'UFCS).
 
-## SMS del corriere vero o truffa: come riconoscerlo
+## Come riconoscere un SMS truffa sul pacco?
 
 Un falso di solito ha più di uno di questi segnali:
 
@@ -36,7 +36,7 @@ I link truffa spesso cominciano con il nome di un corriere. Quello che conta è 
 
 Anche se il link sembra giusto, non usarlo: scrivi tu l'indirizzo del corriere.
 
-## Poste, BRT e GLS mandano davvero SMS?
+## Poste Italiane, BRT, GLS, InPost e La Posta mandano davvero SMS?
 
 Sì, quasi tutti, ed è per questo che i falsi funzionano. Ecco cosa dice ogni corriere dei propri messaggi e cosa non fa mai:
 
@@ -50,7 +50,7 @@ Sì, quasi tutti, ed è per questo che i falsi funzionano. Ecco cosa dice ogni c
 
 I corrieri veri mandano anche dei link, quindi un link da solo non dice niente. E qualche richiesta di pagamento vera esiste: quasi sempre per dazi e IVA su un pacco da fuori UE (in Ticino, dall'estero).
 
-## Pacco sospeso o mancata consegna: cosa dicono gli SMS truffa
+## Cosa scrivono gli SMS truffa su pacco sospeso o mancata consegna?
 
 Tornano sempre gli stessi copioni. Questi sono quelli citati dai corrieri nelle loro pagine di avviso:
 
@@ -64,7 +64,7 @@ Tornano sempre gli stessi copioni. Questi sono quelli citati dai corrieri nelle 
 - **Un falso corriere alla porta.** GLS avverte di finti autisti che si spacciano per sostituti di quello di zona: controlla logo GLS sul furgone, badge e divisa, e diffida di chi ti chiede di restituirgli un pacco già consegnato.
 - **Una vendita online.** Vinted avverte che i truffatori cercano di portarti fuori dalla piattaforma, e ricorda che non serve uscire da Vinted per confermare un pagamento o ricevere un ordine. La Posta svizzera segnala falsi ordini di presa in consegna nei piccoli annunci.
 
-## Come controllare un SMS sul pacco senza rischi
+## Come controllare un SMS sul pacco senza rischi?
 
 Nessuno di questi passi usa il messaggio:
 
@@ -80,7 +80,7 @@ La Posta svizzera lo dice chiaro: gli invii si verificano solo su posta.ch o nel
 
 Se il corriere è passato davvero e non ti ha trovato, come funzionano avviso, giacenza e nuova consegna lo trovi in [mancata consegna pacco](guide:missed-delivery).
 
-## Ho cliccato sul link di un SMS truffa: cosa fare
+## Cosa fare se hai cliccato su un link truffa o inserito la carta?
 
 Dipende da cosa hai fatto sulla pagina:
 
@@ -100,7 +100,7 @@ Anche una commissione minuscola non è innocua: DPD Germania avverte che questi 
 
 Per la denuncia in Italia devi andare di persona in un ufficio di polizia: la denuncia online della Polizia di Stato oggi è solo una sperimentazione nel Lazio, e la segnalazione alla Polizia Postale non la sostituisce. GLS stessa, se hai pagato, consiglia di sporgere denuncia. In Ticino la denuncia va alla polizia cantonale.
 
-## Dove segnalare un SMS truffa sul pacco
+## Dove segnalare un SMS truffa in Italia e in Svizzera?
 
 Segnala il messaggio anche se non hai cliccato, poi cancellalo.
 

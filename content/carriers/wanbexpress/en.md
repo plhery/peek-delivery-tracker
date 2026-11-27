@@ -1,12 +1,12 @@
 ---
 title: WanbExpress tracking: WNB…YQ numbers, scans and who delivers
-description: Track a WanbExpress (Wanb Express) parcel from China: what a WNB…YQ number looks like, what its scans mean and who to ask when it stalls.
+description: Track a WanbExpress (Wanb Express / WANB) parcel from China: WNB…YQ numbers, scan meanings, last-mile carriers (iMile, InPost, Poste Italiane) and customs.
 slug: wanbexpress-tracking
 published: 2026-10-30
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-WanbExpress (also Wanb Express, WanBang Express or WANB) is a Chinese carrier that sends parcels abroad, where a local carrier delivers them. If a shop sent your order with WanbExpress, its number starts with WNB and ends with YQ: paste it in the box above. WanbExpress's own tracker, tracking.wanbexpress.com, can also name the carrier that delivers in your country, with that carrier's number for the parcel.
+WanbExpress (Wanb Express, WanBang Express or WANB) is a Chinese cross-border carrier that moves parcels from Shenzhen through export, flight and customs before handing them to local carriers such as iMile (Germany), InPost (UK) or Poste Italiane (Italy). Paste your 17-character `WNB…YQ` waybill in the box above or check `tracking.wanbexpress.com` (reCAPTCHA-protected) to see scans and the delivering carrier's tracking number.
 
 ## WanbExpress tracking number: what it looks like
 
@@ -106,25 +106,25 @@ While you have the parcel open, or on its delivery day with notifications on, an
 
 ## Questions about WanbExpress tracking
 
-### What is WanbExpress?
+### What is WanbExpress (Wanb Express / WANB)?
 
-A Chinese carrier, also called Wanb Express, WanBang Express or WANB. In Peek's code, its scans start at a sorting centre in Shenzhen, follow the parcel's flight and customs, and end with the scans of the carrier that delivers it in the destination country.
+A Chinese cross-border carrier, also called Wanb Express, WanBang Express or WANB. In Peek's code, its scans begin at a Shenzhen sorting centre, cover the flight and customs, and continue with the local carrier's scans in your country.
 
-### Where can I track a WanbExpress parcel?
+### Where can I track a WanbExpress WNB…YQ parcel?
 
-In the box above, or on WanbExpress's own tracker at tracking.wanbexpress.com. That tracker checks with Google's reCAPTCHA that you're a person, and can also name the delivering carrier. Use the whole WNB…YQ number.
+Paste the full 17-character `WNB…YQ` number (`WNB`, two letters, ten digits, `YQ`) in the box above or on tracking.wanbexpress.com, which uses Google reCAPTCHA and can also show the delivering carrier's name and number.
 
-### What does "Customs declaration completed" mean on WanbExpress tracking?
+### What does "Customs declaration completed" mean on WanbExpress?
 
-That a customs declaration for your parcel is done. The wording doesn't say which country's customs, and it isn't the clearance: that shows as `Custom clearance completed`. Peek shows both as "In transit".
+That a customs declaration for your parcel is done — it isn't import clearance yet, which appears as `Custom clearance completed`. Peek shows both lines as "In transit".
 
-### Who delivers WanbExpress parcels in my country?
+### Who delivers WanbExpress parcels in Germany, the UK, Italy or the US?
 
-A local carrier, which WanbExpress's tracker can name, with its number for the parcel. Peek's code shows iMile delivering on a parcel to Germany and InPost's lines on a parcel to the UK. When Peek can't tell which carrier delivers, check WanbExpress's tracker or ask the seller.
+A local carrier that WanbExpress's tracker can name alongside a second tracking number. Peek's code shows iMile in Germany, InPost lines in the UK, Poste Italiane's network in Italy and local US transit/delivery facilities; check WanbExpress's tracker or ask the seller.
 
-### Who do I contact about a missing WanbExpress parcel?
+### Who do I contact about a stuck or missing WanbExpress parcel?
 
-The seller you ordered from: it booked the parcel with WanbExpress. Peek couldn't check WanbExpress's website for contact details.
+Contact the seller or marketplace first, as the shop booked the shipment with WanbExpress; for last-mile delivery problems, contact the local carrier once you have its tracking number.
 
 :::sources
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, WNB number shape, the tracker, its reCAPTCHA check and the link that opens one parcel, scan wordings and their stages, iMile's relayed scans on a parcel to Germany and its next-run line, the US last-mile partner's and other partners' relayed moves, InPost's relayed lines on a parcel to the UK and its account-settings note that moves nothing, the scan naming Poste Italiane's network, times with UTC offsets, what the tracker shows (delivering carrier, its number, delivery photos, recipient's address), what Peek keeps and leaves out, and the tracking services it turns to

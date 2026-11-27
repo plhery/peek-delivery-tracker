@@ -75,7 +75,7 @@ Peek 以英文读取加拿大邮政的扫描记录。以下为最常见的原文
 
 ## 加拿大寄往境外的包裹由谁派送
 
-**末端派送方。** 对于以 `CA` 结尾且校验位有效的国际邮政单号，Peek 还会用同一单号向你所在国家的邮政查询：例如美国的 [USPS](carrier:usps)、英国的 [Royal Mail](carrier:royal-mail)（`E` 开头为 Parcelforce）、爱尔兰的 An Post、澳大利亚的 [Australia Post](carrier:australia-post)、新西兰的 NZ Post、法国的 [La Poste](carrier:la-poste) 以及德国的 [DHL](carrier:dhl)。
+**末端派送方。** 对于以 `CA` 结尾且校验位有效的国际邮政单号，Peek 还会用同一单号向你所在国家的邮政查询：例如美国的 [USPS](carrier:usps)、英国的 [Royal Mail](carrier:royal-mail)（`E` 开头为 Parcelforce）、爱尔兰的 An Post、澳大利亚的 [Australia Post](carrier:australia-post)、新西兰的 [NZ Post](carrier:nz-post)、法国的 [La Poste](carrier:la-poste) 以及德国的 [DHL](carrier:dhl)。
 
 由于加拿大邮政不向 Peek 返回目的国信息，实际衔接由你所在国家决定：在 iPhone 和 Android 应用中取决于手机地区设置，在浏览器中取决于你添加包裹时的所在国家。一旦当地邮政出现不早于加拿大邮政最新节点的扫描，Peek 就会转至当地邮政追踪并保留加拿大邮政的历史轨迹；此后一天内仍会最多每 55 分钟顺带查一次加拿大邮政。如果在加拿大境内追踪，或使用的是 16 位数字单号，包裹将始终保留在加拿大邮政名下。目的国清关规则见[包裹卡在海关怎么办](guide:customs)（英文）。
 

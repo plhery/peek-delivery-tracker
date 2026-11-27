@@ -45,7 +45,7 @@ Correos de Chile 追踪页以西班牙语大写字母倒序列出各条扫描，
 
 ## 从智利寄往海外的 Correos de Chile 包裹
 
-如果你的包裹从智利寄出且带有 `CL` 单号，离开智利后建议同时用同一单号在收件国邮政的追踪页查询，例如 [USPS](carrier:usps)、[Royal Mail](carrier:royal-mail)、[Parcelforce](carrier:parcelforce)、An Post、[Canada Post](carrier:canada-post)、[Australia Post](carrier:australia-post) 或 NZ Post（Peek 也会替你查询，见下文）。包裹进入本国邮政后，请向本国邮政咨询派送与自提事宜。
+如果你的包裹从智利寄出且带有 `CL` 单号，离开智利后建议同时用同一单号在收件国邮政的追踪页查询，例如 [USPS](carrier:usps)、[Royal Mail](carrier:royal-mail)、[Parcelforce](carrier:parcelforce)、An Post、[Canada Post](carrier:canada-post)、[Australia Post](carrier:australia-post) 或 [NZ Post](carrier:nz-post)（Peek 也会替你查询，见下文）。包裹进入本国邮政后，请向本国邮政咨询派送与自提事宜。
 
 **欧盟海关规定。** 智利位于欧盟之外，因此寄往欧盟国家的包裹需办理清关。自 2026 年 7 月 1 日起，来自欧盟以外、价值不超过 150 欧元的网购订单按每项商品征收 3 欧元欧盟关税；自 2026 年 11 月 1 日起，无论货值高低，另行适用每项商品 2 欧元的欧盟处理费（“一项商品”指同一包裹内税则归类、品名及原产地要求一致的货物）。其他国家请按当地规则办理，详见[包裹滞留海关指南](guide:customs)（英文）。
 

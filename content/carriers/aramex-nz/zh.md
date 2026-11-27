@@ -20,7 +20,7 @@ Aramex 未公布单号格式；在其查件系统中见到的面单号为 12 位
 | `2X4829173654` | 一位数字、一位字母加 10 位数字。 |
 | `A94829173654` | 一位字母、一位数字加 10 位数字。 |
 
-易混淆格式：[Aramex Australia](carrier:aramex-au) 使用完全相同的格式，但属于独立网络并有自己的查询页面；法国 Colis Privé 同样使用 12 位单号。而像 `RR482917367NZ`（两位字母 + 九位数字 + `NZ`）属于邮政件，请通过 NZ Post 查询。
+易混淆格式：[Aramex Australia](carrier:aramex-au) 使用完全相同的格式，但属于独立网络并有自己的查询页面；法国 Colis Privé 同样使用 12 位单号。而像 `RR482917367NZ`（两位字母 + 九位数字 + `NZ`）属于邮政件，请通过 [NZ Post](carrier:nz-post) 查询。
 
 ## Aramex NZ 物流状态含义
 

@@ -17,7 +17,7 @@ DHL ActiveTracing 支持多种参考编号，并将货件数据在线保留 **6 
 | `JND48291736405829173` | 20 位 **DHL 包裹编号 / 标签号（License Plate）**（`JND` + 17 位数字）。 |
 | `FRA-EC-4829173` | **DHL 订单号（Order code）**：3 位货运站代码 + 2 位产品代码（如 `EC` 代表 EuroConnect）+ 7 位数字（可带或不带连字符）。 |
 | `4829173640` | **托运号（Consignment ID）**：9、10 或 11 位数字（10 位数字常见于瑞典国内 *DHL Service Point* 货件）。与 [DHL](carrier:dhl)、[Mondial Relay](carrier:mondial-relay)、Relais Colis 和 [Packeta](carrier:packeta) 共用 10 位长度。 |
-| `00348291736405829177` | 以 `00` 开头、带有效 GS1 校验位的 20 位 **GS1 SSCC** 包装箱编号。与 [USPS](carrier:usps) 和 NZ Post 共用 20 位 SSCC 形态。 |
+| `00348291736405829177` | 以 `00` 开头、带有效 GS1 校验位的 20 位 **GS1 SSCC** 包装箱编号。与 [USPS](carrier:usps) 和 [NZ Post](carrier:nz-post) 共用 20 位 SSCC 形态。 |
 
 注意：德国标准包裹由 [DHL](carrier:dhl)（*DHL Paket*）承运，国际空运文件/包裹由 [DHL Express](carrier:dhl-express) 承运；托盘、大件家具及欧洲公铁联运则通过 DHL Freight 的 ActiveTracing 查询。另见[运单号格式说明](guide:tracking-number-formats)（英文）。
 

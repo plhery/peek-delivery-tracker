@@ -8,7 +8,7 @@ updated: 2026-11-27
 
 A NZ Post é o serviço postal estatal da Nova Zelândia, e seus serviços de courier CourierPost são rastreados da mesma forma. Você pode acompanhar uma encomenda na ferramenta [Track a parcel](https://www.nzpost.co.nz/tools/tracking) em nzpost.co.nz, no [aplicativo NZ Post](https://www.nzpost.co.nz/personal/app) ou colando o código na caixa acima.
 
-O aplicativo exige uma conta gratuita My NZ Post e envia notificações push conforme o pacote avança; no site, faça login para ativar avisos por e-mail. Se uma loja enviar por Courier e informar seu e-mail ou celular, você também pode receber e-mail ou SMS na coleta, saída para entrega, entrega ou tentativa sem sucesso.
+O aplicativo exige uma conta gratuita My NZ Post e envia notificações push conforme o pacote avança; no site, faça login para ativar avisos por e-mail. Se uma loja enviar por Courier e informar seu e-mail ou celular, você também pode receber e-mail ou SMS na coleta, na saída para entrega, na entrega ou quando a entrega não for realizada.
 
 ## Código de rastreamento NZ Post: onde achar e formatos
 
@@ -47,16 +47,16 @@ O site e o rastreamento da NZ Post estão disponíveis apenas em inglês. Estes 
 | `Delivered` | Entregue, possivelmente em local seguro ou a alguém no endereço. |
 | `Delayed` | A NZ Post sabe do atraso e atualizará assim que seguir viagem. |
 | `Delivery attempted - refer to card` | O motorista não conseguiu entregar com segurança; o aviso explica como proceder. |
-| `Handed over` | Após uma tentativa sem sucesso: logo estará pronta para retirada. |
+| `Handed over` | Após uma entrega não realizada: logo estará pronta para retirada. |
 | `Ready to collect` | Aguardando retirada no ponto indicado. |
 
 Encomendas depositadas em caixa de coleta, entregues em loja ou coletadas por entregador rural (Rural Delivery) podem pular `Collected from sender`. Envios Economy recebem menos leituras que envios Courier — muitas vezes apenas `Collected from sender`, `With courier for delivery` e `Delivered`.
 
-`Handed over` não significa entregue: ocorre após tentativa sem sucesso, quando o pacote vai para o ponto indicado no cartão. E `Delivered` pode indicar que foi deixado em local seguro, sem entrega em mãos.
+`Handed over` não significa entregue: ocorre após uma entrega não realizada, quando o pacote vai para o ponto indicado no cartão. E `Delivered` pode indicar que foi deixado em local seguro, sem entrega em mãos.
 
 Em encomendas vindas do exterior, `Import Duty and Tax Payable` indica que a NZ Customs cobrou imposto ou GST: a NZ Post envia uma fatura e libera após o pagamento. `Processing at international depot` acompanhado de nota sobre documentos pode indicar que você será contatado.
 
-## Cartão deixado pela NZ Post: tentativa sem sucesso e Collect my parcel
+## Cartão deixado pela NZ Post: entrega não realizada e Collect my parcel
 
 Quando um pacote exige assinatura ou não há lugar seguro para deixá-lo, o motorista deixa o aviso "Missed my parcel", informando quando tentou entregar e as opções da região. A partir do dia útil seguinte você pode retirar no local indicado levando o cartão ou código e documento com foto, ou pedir reentrega no mesmo endereço ou em outro pelo serviço [Missed my parcel](https://www.nzpost.co.nz/tools/missed-my-parcel). O prazo é de 10 dias; depois disso, volta ao remetente.
 
@@ -91,17 +91,17 @@ Conforme nzpost.co.nz, de segunda a sexta, das 8h às 17h30 no horário da Nova 
 
 ## Como rastrear encomendas NZ Post no Peek
 
-O [Peek](/) identifica NZ Post imediatamente para códigos postais terminados em `NZ` e etiquetas courier de 24 caracteres. Códigos de 20 dígitos são compartilhados com USPS e outras transportadoras; por isso o Peek consulta a NZ Post primeiro e a seleciona se o pacote constar lá — se não conseguir decidir, escolha NZ Post em "Alterar". Links de nzpost.co.nz com `trackid=` também funcionam.
+O [Peek](/) identifica NZ Post imediatamente para códigos postais terminados em `NZ` e etiquetas courier de 24 caracteres. Códigos de 20 dígitos são compartilhados com USPS e outras transportadoras; por isso o Peek consulta a NZ Post primeiro e a seleciona se o pacote constar lá — se não conseguir decidir, escolha NZ Post em "Trocar". Links de nzpost.co.nz com `trackid=` também funcionam.
 
-O Peek lê o rastreamento oficial da NZ Post e exibe a etapa, cada leitura com seu depósito no mapa e o horário da entrega. `Delivered` aparece no texto do Peek e o restante nas palavras da NZ Post. Ele omite destinatário, assinaturas, foto de entrega, data prevista e local de retirada, e não redireciona encomendas nem configura Leave my parcel.
+O Peek lê o próprio rastreamento da NZ Post e exibe a etapa, cada leitura com seu depósito no mapa e o horário da entrega. `Delivered` aparece no texto do Peek e o restante nas palavras da NZ Post. Ele omite destinatário, assinaturas, foto de entrega, data prevista e local de retirada, e não redireciona encomendas nem configura Leave my parcel.
 
 Com a encomenda aberta no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta a cada 10 minutos no máximo, e a cada 2 minutos a partir das 6h (horário da Nova Zelândia) no dia em que aparece `With courier for delivery`, enquanto o rastreador da NZ Post responder (via serviços de rastreamento, a cada 15 minutos). Após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora, e a cada 6 horas após sete dias em "Etiqueta criada".
 
-Quando a última leitura completa quatro dias em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek exibe "Sem atualização de rastreamento desde seg 12 out" e a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando NZ Post.", com o link "Obter ajuda da NZ Post". Após três semanas sem nova leitura, exibe "Nada de novo há mais de três semanas. Se ainda não chegou, fale com o vendedor. O Peek continua consultando NZ Post."
+Quando a última leitura completa quatro dias em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek exibe "Sem atualizações desde seg 12 out" e a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando NZ Post.", com o link "Pedir ajuda a NZ Post". Após três semanas sem nova leitura, exibe "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando NZ Post."
 
-O Peek notifica em "Cada atualização", "Etapas importantes" ou "Somente na entrega".
+O Peek pode notificar você em "Cada movimentação", "Etapas importantes" ou "Só a entrega".
 
-Quando a Aramex New Zealand repassa uma entrega rural para a NZ Post, o Peek acompanha automaticamente ("Entrega por NZ Post"). Envios postados no exterior com código postal (duas letras, nove dígitos, duas letras) também podem mudar automaticamente: quando o correio de origem indica Nova Zelândia como destino — ou não informa país e você rastreia da Nova Zelândia — o Peek consulta a NZ Post com o mesmo número e passa a segui-la assim que houver leitura tão recente quanto a última da origem, preservando o histórico anterior.
+Quando a Aramex New Zealand repassa uma entrega rural para a NZ Post, o Peek passa a acompanhá-la lá ("Entrega por NZ Post"). Envios postados no exterior com código postal (duas letras, nove dígitos, duas letras) também podem passar para a NZ Post: quando o correio de origem indica Nova Zelândia como destino — ou não informa país e você rastreia da Nova Zelândia — o Peek consulta a NZ Post com o mesmo número e passa a segui-la assim que houver leitura tão recente quanto a última da origem, preservando o histórico anterior.
 
 ## Perguntas frequentes sobre o rastreamento NZ Post
 

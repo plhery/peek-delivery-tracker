@@ -48,7 +48,7 @@ updated: 2026-11-24
 
 ## 日本邮政海外包裹：谁负责派送与清关
 
-出现 `Dispatch from outward office of exchange` 后，由目的地国家邮政接手。对于 EMS，日本邮政建议直接到对方国家邮政官网查询（日本邮政称在那里查询更快），例如美国的 [USPS](carrier:usps)、英国的 Parcelforce、爱尔兰的 An Post、加拿大的 Canada Post、澳大利亚的 [Australia Post](carrier:australia-post) 和新西兰的 NZ Post，继续使用同一个 `JP` 单号即可。派送尝试和自提均按当地邮政规则执行，参见[错过派送怎么办](guide:missed-delivery)（英文）。
+出现 `Dispatch from outward office of exchange` 后，由目的地国家邮政接手。对于 EMS，日本邮政建议直接到对方国家邮政官网查询（日本邮政称在那里查询更快），例如美国的 [USPS](carrier:usps)、英国的 Parcelforce、爱尔兰的 An Post、加拿大的 Canada Post、澳大利亚的 [Australia Post](carrier:australia-post) 和新西兰的 [NZ Post](carrier:nz-post)，继续使用同一个 `JP` 单号即可。派送尝试和自提均按当地邮政规则执行，参见[错过派送怎么办](guide:missed-delivery)（英文）。
 
 **显示已签收。** 国际航空小包若无需缴税，会直接投入信箱、无需签收，并显示已签收。日本邮政还提醒，寄往英国或法国的 EMS 若未投递成功，在就近邮局等待自提期间也可能显示已签收；寄往德国的 EMS 在由清关代理或其他快递公司处理时，可能显示为退回或已签收。由于实际由当地邮政投递，请先联系当地邮政；详见[显示已签收但未收到](guide:delivered-not-received)（英文）。
 

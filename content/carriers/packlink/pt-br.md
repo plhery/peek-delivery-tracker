@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Packlink: referência, status e contato
-description: Rastreie uma encomenda Packlink: formato da referência ES…COM/PRO, significado de cada status, tentativas sem sucesso, danos e como contatar a Packlink.
+description: Rastreie uma encomenda Packlink: formato da referência ES…COM/PRO, significado de cada status, entregas não realizadas, danos e como contatar a Packlink.
 slug: packlink-tracking
 published: 2026-11-27
 updated: 2026-11-27
@@ -35,12 +35,12 @@ A Packlink lê cada movimentação da transportadora e a enquadra em um código 
 | `DELEGACION DESTINO` | Chegou à unidade responsável pela entrega na sua região. |
 | `TU ENVÍO ESTÁ PENDIENTE DE LLEGAR A DESTINO` | SEUR: ainda não chegou à filial local. A Packlink marca como problema, mas a encomenda segue apenas em trânsito. |
 | `EN REPARTO` | Saiu para entrega. |
-| `REPARTO FALLIDO` | Tentativa de entrega sem sucesso. |
+| `REPARTO FALLIDO` | Entrega não realizada. |
 | `Package at pick-up point and ready for collection` | Aguardando você em um ponto de retirada. A Packlink agrupa esse status junto aos códigos de entrega, mas você ainda precisa retirar. |
 | `ENTREGADO` | Entregue. |
 | `Package returned to sender` | A encomenda retornou ao remetente. |
 
-Outras linhas vêm em inglês claro: `Recipient not present at indicated address` e `Unsuccessful delivery and final attempt` indicam tentativa sem sucesso, e `Packet delivered to customs for clearance` marca a etapa aduaneira em envios que cruzam fronteira fiscal.
+Outras linhas vêm em inglês claro: `Recipient not present at indicated address` e `Unsuccessful delivery and final attempt` indicam entrega não realizada, e `Packet delivered to customs for clearance` marca a etapa aduaneira em envios que cruzam fronteira fiscal.
 
 Duas mensagens não descrevem o pacote em si: `Pending, there is no information available on the carrier’s page or the tracking number has not yet been activated` indica que a Packlink ainda não encontrou dados na transportadora; `Expired, there is no tracking information for the last 30 days` significa que a transportadora ficou um mês sem atualizar e a Packlink parou de acompanhar.
 
@@ -49,12 +49,12 @@ Duas mensagens não descrevem o pacote em si: `Pending, there is no information 
 A transportadora escolhida pelo remetente. A página de rastreamento da Packlink lista [SEUR](carrier:seur), [Correos](carrier:correos-spain), [Correos Express](carrier:correos-express), [UPS](carrier:ups), GLS, DHL, [TNT](carrier:tnt), [InPost](carrier:inpost), [Mondial Relay](carrier:mondial-relay), [NACEX](carrier:nacex) e Zeleris, entre outras. Segundo os termos da Packlink:
 
 - **Endereço ou ponto de retirada.** O remetente define na contratação se vai para endereço ou ponto de retirada.
-- **Tentativa sem sucesso.** A transportadora pode deixar aviso para reagendar e levar o pacote de volta ao depósito. Nem todas deixam aviso; por isso a Packlink pede que o remetente acompanhe o rastreamento e informe você.
+- **Entrega não realizada.** A transportadora pode deixar aviso para reagendar e levar o pacote de volta ao depósito. Nem todas deixam aviso; por isso a Packlink pede que o remetente acompanhe o rastreamento e informe você.
 - **Tentativas.** Na maioria dos casos há uma primeira tentativa e mais uma gratuita. Cada tentativa adicional custa ao remetente de €2 a €15 mais IVA, conforme a transportadora e o veículo. Em alguns países a transportadora pode deixar com vizinho ou em ponto de retirada.
 - **Retirada.** Um pacote guardado no depósito precisa ser retirado no prazo da transportadora; depois disso, o remetente pode ter de pagar armazenagem, devolução ou destruição.
 - **Recusada ou impossível de entregar.** A Packlink avisa o remetente pelo rastreamento ou e-mail, e ele tem 2 dias úteis para decidir entre devolução ou reenvio para outro endereço.
 
-Veja também [tentativa de entrega](guide:missed-delivery), em inglês, e [encomendas não retiradas](guide:uncollected-parcel), em inglês.
+Veja também [entrega não realizada](guide:missed-delivery), em inglês, e [encomendas não retiradas](guide:uncollected-parcel), em inglês.
 
 **Alfândega.** Em encomendas vindas de fora da União Europeia com compras on-line, aplica-se desde 1º de julho de 2026 um imposto aduaneiro da UE de €3 por tipo de produto em pedidos de até €150, e desde 1º de novembro de 2026 uma taxa de manuseio da União de €2 por tipo de produto, qualquer que seja o valor. Os termos da Packlink determinam que o destinatário paga os impostos e taxas de importação, sem explicar como essas duas cobranças chegam até você. Veja [encomendas retidas na alfândega](guide:customs), em inglês.
 
@@ -82,13 +82,13 @@ Canais publicados pela Packlink:
 
 ## Como rastrear uma encomenda Packlink no Peek
 
-Cole a referência Packlink no [Peek](/). O formato é exclusivo da Packlink, então a tela de adição já mostra Packlink como "Transportadora detectada". Você também pode colar o número próprio da transportadora: o Peek acompanha mais de 4.500 transportadoras. Se o formato coincidir com várias empresas — como os 14 dígitos da SEUR — o Peek exibe "Consultando serviços de rastreamento…" enquanto verifica; toque em "Alterar" se preferir escolher manualmente.
+Cole a referência Packlink no [Peek](/). O formato é exclusivo da Packlink, então a tela de adição já mostra Packlink como "Transportadora detectada". Você também pode colar o número próprio da transportadora: o Peek acompanha mais de 4.500 transportadoras. Se o formato coincidir com várias empresas — como os 14 dígitos da SEUR — o Peek exibe "Consultando serviços de rastreamento…" enquanto verifica; toque em "Trocar" se preferir escolher você mesmo.
 
-Com a encomenda aberta no Peek, ou no dia da entrega com notificações ligadas, o Peek lê o rastreamento da Packlink a cada 10 minutos no máximo, e a cada 2 minutos a partir das 6h (horário de Madri) no dia em que sai para entrega, enquanto o rastreador da Packlink responder; fora disso, de hora em hora. Após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora, e a cada 6 horas após sete dias em "Etiqueta criada". Depois de quatro dias sem nova linha em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", destaca a data da última linha, exibe "Sem atualização de rastreamento desde …", a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Packlink." e o link "Obter ajuda da Packlink"; após três semanas, passa para "Nada de novo há mais de três semanas. Se ainda não chegou, fale com o vendedor. O Peek continua consultando Packlink." Cada leitura aparece nas palavras da transportadora quando a Packlink as repassa (ou no texto em inglês da Packlink), com horários interpretados em Madri e exibidos no fuso do seu dispositivo. Leituras de ponto de retirada aparecem como "Pronta para retirada", e `RECIBIDO EN ORIGEN` como "Recebida pela transportadora". A data prevista aparece enquanto está em trânsito, e remessas com vários volumes aparecem num único histórico. O Peek omite os locais (sem mapa) e a contagem de volumes; a Packlink não informa peso, remetente nem destinatário.
+Com a encomenda aberta no Peek, ou no dia da entrega com notificações ligadas, o Peek lê o rastreamento da Packlink a cada 10 minutos no máximo, e a cada 2 minutos a partir das 6h (horário de Madri) no dia em que sai para entrega, enquanto o rastreador da Packlink responder; fora disso, de hora em hora. Após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora, e a cada 6 horas após sete dias em "Etiqueta criada". Depois de quatro dias sem nova linha em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", destaca a data da última linha, exibe "Sem atualizações desde …", a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Packlink." e o link "Pedir ajuda a Packlink"; após três semanas, passa para "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando Packlink." Cada leitura aparece nas palavras da transportadora quando a Packlink as repassa (ou no texto em inglês da Packlink), com horários interpretados em Madri e exibidos no fuso do seu dispositivo. Leituras de ponto de retirada aparecem como "Pronta para retirada", e `RECIBIDO EN ORIGEN` como "Recebida pela transportadora". A data prevista aparece enquanto está em trânsito, e remessas com vários volumes aparecem num único histórico. O Peek omite os locais (sem mapa) e a contagem de volumes; a Packlink não informa peso, remetente nem destinatário.
 
 O rastreamento da Packlink também traz o código próprio da transportadora. Quando esse formato identifica uma única empresa com certeza — como um código UPS iniciado por `1Z` — o Peek consulta essa empresa também e passa a segui-la assim que surgir uma leitura tão recente quanto a última da Packlink, mantendo o histórico anterior: o cartão mostra "Entrega por UPS" e exibe ambos os números nos detalhes. Como os formatos de SEUR e Correos Express não são exclusivos, seus pacotes continuam acompanhados pela Packlink.
 
-O Peek notifica em "Cada atualização", "Etapas importantes" ou "Somente na entrega", mas não abre reclamações, não altera entregas nem contata terceiros por você.
+O Peek pode notificar você em "Cada movimentação", "Etapas importantes" ou "Só a entrega", mas não abre reclamações, não altera entregas nem contata terceiros por você.
 
 ## Perguntas frequentes sobre o rastreamento Packlink
 
@@ -98,7 +98,7 @@ Não. A Packlink é uma plataforma onde pessoas e lojas comparam e contratam tra
 
 ### Qual é o telefone da Packlink?
 
-Nenhum: a Packlink atua apenas on-line e alerta que números em outros sites não são oficiais. Use o formulário da central de ajuda ou o chat ao vivo.
+Nenhum: a Packlink atua apenas on-line e alerta que números em outros sites não são verificados por ela. Use o formulário da central de ajuda ou o chat ao vivo.
 
 ### Onde fica meu código de rastreamento Packlink?
 

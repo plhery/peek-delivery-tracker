@@ -45,7 +45,7 @@ Uma encomenda vinda do exterior, como uma compra online, passa pela alfândega n
 
 ## Encomendas da Correos de Chile enviadas ao exterior
 
-Sua encomenda saiu do Chile com um código `CL`? Depois que ela deixa o Chile, consulte o mesmo número também no rastreador do correio do seu país, como [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), [Parcelforce](carrier:parcelforce), An Post, [Canada Post](carrier:canada-post), [Australia Post](carrier:australia-post) ou NZ Post. O Peek já consulta esses correios para você (veja abaixo). Se o seu correio já estiver com o pacote, consulte-o sobre entrega e retirada.
+Sua encomenda saiu do Chile com um código `CL`? Depois que ela deixa o Chile, consulte o mesmo número também no rastreador do correio do seu país, como [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), [Parcelforce](carrier:parcelforce), An Post, [Canada Post](carrier:canada-post), [Australia Post](carrier:australia-post) ou [NZ Post](carrier:nz-post). O Peek já consulta esses correios para você (veja abaixo). Se o seu correio já estiver com o pacote, consulte-o sobre entrega e retirada.
 
 **Alfândega na UE.** O Chile fica fora da UE, portanto remessas para países europeus passam pela alfândega. Desde 1º de julho de 2026, compras online de fora da UE de até €150 pagam €3 de imposto aduaneiro da UE por item. Desde 1º de novembro de 2026, aplica-se também a taxa de manuseio da União de €2 por item, qualquer que seja o valor (item é o conjunto de mercadorias no pacote com a mesma classificação tarifária, descrição e origem exigida). Em outros países valem as regras locais: veja [encomendas retidas na alfândega](guide:customs).
 

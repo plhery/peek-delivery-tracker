@@ -62,7 +62,7 @@ Peek 会将这些记录归类为标准阶段：“已揽收”、“运输中”
 
 **国际时效：** Posta Shqiptare 小包与包裹的平均标准时效为寄往欧洲 7 至 10 个工作日，寄往美洲、亚洲和非洲 10 至 14 个工作日。
 
-**谁负责末端派送：** 离开阿尔巴尼亚后由目的地国邮政接手，Posta Shqiptare 追踪器会以阿尔巴尼亚语转发对方轨迹。你也可以用同一 `AL` 单号查询你所在国家邮政的追踪：[USPS](carrier:usps)、[Royal Mail](carrier:royal-mail)、An Post、[Canada Post](carrier:canada-post)、[Australia Post](carrier:australia-post) 或 NZ Post。投递尝试与自提均遵循当地邮政规则，详见[派送未成功怎么办](guide:missed-delivery)（英文）。
+**谁负责末端派送：** 离开阿尔巴尼亚后由目的地国邮政接手，Posta Shqiptare 追踪器会以阿尔巴尼亚语转发对方轨迹。你也可以用同一 `AL` 单号查询你所在国家邮政的追踪：[USPS](carrier:usps)、[Royal Mail](carrier:royal-mail)、An Post、[Canada Post](carrier:canada-post)、[Australia Post](carrier:australia-post) 或 [NZ Post](carrier:nz-post)。投递尝试与自提均遵循当地邮政规则，详见[派送未成功怎么办](guide:missed-delivery)（英文）。
 
 **欧盟海关规定：** 阿尔巴尼亚不属于欧盟，因此寄往爱尔兰、意大利、希腊及其他欧盟国家的包裹均需办理欧盟清关。自 2026 年 7 月 1 日起，从欧盟境外网购且订单金额不超过 €150 的商品按每类品目征收 €3 欧盟关税；自 2026 年 11 月 1 日起，无论货值高低均额外按每类品目征收 €2 欧盟处理费（“品目”指包裹内税则归类、货品描述及必要时原产地相同的商品）。发往其他国家则适用收件国本国税则。
 

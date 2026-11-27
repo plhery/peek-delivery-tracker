@@ -8,18 +8,18 @@ updated: 2026-11-27
 
 NZ Post（新西兰邮政）是新西兰国有邮政企业，其旗下的 CourierPost 快递服务也采用同一套追踪方式。你可以通过 nzpost.co.nz 上的 [Track a parcel](https://www.nzpost.co.nz/tools/tracking) 工具、[NZ Post 应用](https://www.nzpost.co.nz/personal/app)或将单号粘贴到上方输入框中追踪包裹。
 
-使用 NZ Post 应用需注册免费的 My NZ Post 账号，可随包裹移动推送通知；在官网登录后则可开启邮件提醒。若商家使用 Courier 服务并提供你的邮箱或手机号，你也可能在揽收、派送、送达或错过派送时收到邮件或短信。
+使用 NZ Post 应用需注册免费的 My NZ Post 账号，可随包裹移动推送通知；在网站上登录后则可开启邮件提醒。若商家使用 Courier 服务并提供你的邮箱或手机号，你也可能在揽收、派送中、送达或派送未成功时收到邮件或短信。
 
 ## 新西兰邮政单号在哪里找、是什么格式
 
-查找单号的常见位置：
+可以在这些地方找到单号：
 
 - **网购订单：** 商家的发货确认邮件或订单页面。如找不到，请寄件人重新提供。
 - **本人使用可追踪服务寄出：** NZ Post 门店（PostShop）小票底部、寄件单上的可撕贴纸，或 NZ Post 邮袋条码上。同一门店可在 90 天内补打小票副本。
 - **可追踪服务：** 新西兰境内的 Economy、Courier Economy 和 Courier 包裹；国际方向为 Courier、Express 以及适用地区的 Economy 服务。
 - **不可追踪服务**无追踪单号、无法查询：普通平邮信件和卡片（Standard Mail）以及贴邮票寄出的 Economy 包裹。如需追踪信件，须选用 Courier 或 Courier Economy。
 
-输入单号时请去掉空格和括号。常见格式（虚构示例）：
+输入单号时请去掉空格和括号。各种格式（虚构示例）：
 
 | 格式（示例） | 含义 |
 | --- | --- |
@@ -31,7 +31,7 @@ NZ Post（新西兰邮政）是新西兰国有邮政企业，其旗下的 Courie
 
 ## 新西兰邮政物流状态含义
 
-NZ Post 官网及追踪页面仅提供英文版。绝大多数包裹按顺序显示以下状态：
+NZ Post 网站及追踪页面仅提供英文版。绝大多数包裹按顺序显示以下状态：
 
 | NZ Post 状态 | 对你的含义 |
 | --- | --- |
@@ -52,11 +52,11 @@ NZ Post 官网及追踪页面仅提供英文版。绝大多数包裹按顺序显
 
 投入邮筒、门店交寄或由乡村派送员（Rural Delivery）收取的包裹可能会跳过 `Collected from sender`。Economy 包裹的扫描节点比 Courier 少，通常只显示 `Collected from sender`、`With courier for delivery` 和 `Delivered`。
 
-请注意 `Handed over` 并非“已送达”，而是错过派送后包裹正移交给通知卡上标明的领取点。而 `Delivered` 也可能指放在安全位置，并不一定亲手交到你手上。
+请注意 `Handed over` 并不表示已送达，而是派送未成功后包裹正移交给通知卡上标明的领取点。而 `Delivered` 也可能指放在安全位置，并不一定亲手交到你手上。
 
 国际包裹若出现 `Import Duty and Tax Payable`，说明新西兰海关判定须缴关税或 GST：NZ Post 会寄出账单，缴清后放行包裹。`Processing at international depot` 若附带单证提示，则表示可能会联系你补充材料。
 
-## 新西兰邮政未送达通知卡、错派与 Collect my parcel 自提
+## 新西兰邮政通知卡：派送未成功与 Collect my parcel 自提
 
 当包裹需要签收或现场无安全放置处时，司机会留下“Missed my parcel”通知卡，上面写明尝试派送时间及当地后续安排。自次一工作日起，你可凭通知卡或单号及带照片身份证件前往卡上地点领取，或通过 NZ Post 的 [Missed my parcel](https://www.nzpost.co.nz/tools/missed-my-parcel) 服务申请重新派送至原地址或其他地址。保管期限为 10 天，逾期退回寄件人。
 
@@ -87,21 +87,21 @@ NZ Post 官网及追踪页面仅提供英文版。绝大多数包裹按顺序显
 - 在线表单：延误、破损及 You Shop 包裹[在线查询表单](https://www.nzpost.co.nz/contact-support/assistance/form)。
 - 邮寄地址：NZ Post, Customer Care Centre, Private Bag 208038, Highbrook, Auckland 2161。
 
-> NZ Post 绝不会通过邮件或短信索要个人信息，绝不会使用新西兰境外号码发送短信，也不使用 WhatsApp；官方链接仅指向 nzpost.co.nz 或 nzp.st。常见诈骗短信谎称派送失败要求重新预约日期。请将诈骗短信转发至 7726，诈骗邮件转发至 cyber.security@nzpost.co.nz。
+> NZ Post 绝不会通过邮件或短信索要个人信息，绝不会使用新西兰境外号码发送短信，也不使用 WhatsApp；其链接仅指向 nzpost.co.nz 或 nzp.st。诈骗短信会谎称曾尝试派送，要你重新预约日期。请将诈骗短信转发至 7726，诈骗邮件转发至 cyber.security@nzpost.co.nz。
 
 ## 使用 Peek 追踪新西兰邮政包裹
 
-遇到以 `NZ` 结尾的 13 位邮政单号或 24 位快递面单号时，[Peek](/) 会直接识别为 NZ Post。20 位纯数字单号与 USPS 等承运商共用，Peek 会优先向 NZ Post 查询，一旦对方有记录便自动标明；如未能自动确定，请点击“更改”选择 NZ Post。带有 `trackid=` 的 nzpost.co.nz 链接也可直接粘贴。
+遇到以 `NZ` 结尾的 13 位邮政单号或 24 位快递面单号时，[Peek](/) 会直接识别为 NZ Post。20 位纯数字单号与 USPS 等快递公司共用，Peek 会优先向 NZ Post 查询，一旦对方有记录便标明 NZ Post；如无法确定，请点“更换”选择 NZ Post。带有 `trackid=` 的 nzpost.co.nz 链接也可直接粘贴。
 
-Peek 直接读取 NZ Post 官方追踪，展示当前阶段、带中转站点地图定位的逐条扫描以及送达时间。其中 `Delivered` 以 Peek 统一文案展示，其余保留 NZ Post 英文原文。Peek 不显示收件人姓名、签名、送达照片、预计送达日期和自提点地址，也无法办理改派或 Leave my parcel。
+Peek 读取 NZ Post 自己的追踪，展示当前阶段、带中转站点地图定位的逐条扫描以及送达时间。其中 `Delivered` 以 Peek 自己的说法展示，其余保留 NZ Post 英文原文。Peek 不显示收件人姓名、签名、送达照片、预计送达日期和自提点地址，也无法办理改派或 Leave my parcel。
 
-当你打开包裹页面或在派送日开启通知时，只要 NZ Post 官网正常响应，Peek 最高每 10 分钟检查一次，在 NZ Post 显示 `With courier for delivery` 当天自新西兰时间早上 6 点起最高每 2 分钟检查一次（若走追踪服务回退则为每 15 分钟一次）。若连续两天无新动态（处于“已创建运单”或“快递公司已收件”状态时为 12 小时），改为每小时一次；在“已创建运单”满七天无更新后，改为每 6 小时一次。
+当你打开包裹页面或在派送日开启通知时，只要 NZ Post 自己的查询页正常响应，Peek 最高每 10 分钟检查一次，在 NZ Post 显示 `With courier for delivery` 当天自新西兰时间早上 6 点起最高每 2 分钟检查一次（若走追踪服务回退则为每 15 分钟一次）。若连续两天无新动态（处于“已生成面单”或“已揽收”状态时为 12 小时），改为每小时一次；在“已生成面单”满七天无更新后，改为每 6 小时一次。
 
-当包裹在“已创建运单”、“快递公司已收件”或“运输途中”状态且最新扫描已满四天时，Peek 会按该扫描日期标出提示（如“自 10 月 12 日周一以来无物流更新”），并显示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 NZ Post 查询。”及指向 NZ Post 客服页面的“联系 NZ Post 获取帮助”链接。满三周无新扫描时，提示会变为“已超过三周无新动态。如果仍未收到，请联系卖家。Peek 会持续向 NZ Post 查询。”
+当包裹在“已生成面单”、“已揽收”或“运输中”状态且最新扫描已满四天时，Peek 会按该扫描日期标出提示（如“自10月12日周一起没有物流更新”），并显示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 NZ Post 查询。”及指向 NZ Post 客服页面的“向 NZ Post 寻求帮助”链接。满三周无新扫描时，提示会变为“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 NZ Post 查询。”
 
-通知可按“每次扫描”、“重要节点”或“仅在送达时”推送。
+通知可按“每次扫描”、“重要环节”或“仅派送当天”推送。
 
-当 Aramex New Zealand 将乡村件转交 NZ Post 派送时，Peek 会自动接续跟进（显示“由 NZ Post 派送”）。海外以万国邮联格式（两位字母、九位数字、两位字母）寄出的包裹也可自动接续：若发件国邮政指明目的地为新西兰，或未指明目的地而你正从新西兰查询，Peek 会用同一单号向 NZ Post 查询；一旦 NZ Post 出现不早于发件国最新扫描的记录，Peek 即切换至 NZ Post 并保留原有海外轨迹。
+当 Aramex New Zealand 将乡村件转交 NZ Post 派送时，Peek 会接续跟进（显示“由 NZ Post 派送”）。海外以万国邮联格式（两位字母、九位数字、两位字母）寄出的包裹也可接续：若发件国邮政指明目的地为新西兰，或未指明目的地而你正从新西兰查询，Peek 会用同一单号向 NZ Post 查询；一旦 NZ Post 出现不早于发件国最新扫描的记录，Peek 即切换至 NZ Post 并保留原有海外轨迹。
 
 ## 新西兰邮政快递查询常见问题
 

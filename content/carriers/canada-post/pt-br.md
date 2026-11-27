@@ -75,7 +75,7 @@ No histórico, registros de entrega exibem "Entregue"; os demais preservam o ing
 
 ## Encomenda Canada Post enviada ao exterior: quem entrega
 
-**Quem entrega.** Com número postal internacional terminado em `CA` e dígito verificador válido, o Peek também pode consultar os correios do país de onde você acompanha usando o mesmo número: por exemplo, [USPS](carrier:usps) nos Estados Unidos, [Royal Mail](carrier:royal-mail) no Reino Unido (Parcelforce para códigos iniciados em `E`), An Post na Irlanda, [Australia Post](carrier:australia-post), NZ Post, [La Poste](carrier:la-poste) na França e [DHL](carrier:dhl) na Alemanha.
+**Quem entrega.** Com número postal internacional terminado em `CA` e dígito verificador válido, o Peek também pode consultar os correios do país de onde você acompanha usando o mesmo número: por exemplo, [USPS](carrier:usps) nos Estados Unidos, [Royal Mail](carrier:royal-mail) no Reino Unido (Parcelforce para códigos iniciados em `E`), An Post na Irlanda, [Australia Post](carrier:australia-post), [NZ Post](carrier:nz-post), [La Poste](carrier:la-poste) na França e [DHL](carrier:dhl) na Alemanha.
 
 A Canada Post não envia ao Peek o país de destino, portanto o seu país decide: nos apps iPhone e Android, a região configurada no aparelho; no navegador, o país de onde você adicionou o envio. Assim que os correios locais mostrarem um evento ao menos tão recente quanto o último da Canada Post, o Peek acompanha por lá mantendo o histórico canadense. Por mais um dia, ainda consulta a Canada Post no máximo a cada 55 minutos. Acompanhado do Canadá, ou com código de 16 dígitos, permanece na Canada Post. Para alfândega no destino, veja [encomendas retidas na alfândega](guide:customs).
 

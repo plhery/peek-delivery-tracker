@@ -48,7 +48,7 @@ Envios entrando no Japão têm mais três linhas. `Transported in bond` indica t
 
 ## Encomendas da Japan Post no exterior: quem entrega e alfândega
 
-Depois de `Dispatch from outward office of exchange`, os correios do seu país assumem. Para EMS, a Japan Post indica acompanhar no site desses correios, onde, segundo ela, o rastreamento é mais rápido — como [USPS](carrier:usps), Parcelforce no Reino Unido, An Post, Canada Post, [Australia Post](carrier:australia-post) e NZ Post — usando o mesmo número terminado em `JP`. Tentativas e retirada passam a seguir as regras dos correios locais: veja [entrega não realizada](guide:missed-delivery).
+Depois de `Dispatch from outward office of exchange`, os correios do seu país assumem. Para EMS, a Japan Post indica acompanhar no site desses correios, onde, segundo ela, o rastreamento é mais rápido — como [USPS](carrier:usps), Parcelforce no Reino Unido, An Post, Canada Post, [Australia Post](carrier:australia-post) e [NZ Post](carrier:nz-post) — usando o mesmo número terminado em `JP`. Tentativas e retirada passam a seguir as regras dos correios locais: veja [entrega não realizada](guide:missed-delivery).
 
 **Mostrado como entregue.** Um International Air Packet vai para a caixa de correio sem assinatura (salvo se houver imposto a pagar) e aparece como entregue. A Japan Post avisa que envios EMS para o Reino Unido ou a França cuja entrega falhou também podem aparecer como entregues enquanto aguardam na agência mais próxima, e EMS para a Alemanha podem aparecer como devolvidos ou entregues enquanto estão com despachante ou outra transportadora. Como a entrega é feita pelos correios locais, consulte-os primeiro: veja [entregue, mas não recebido](guide:delivered-not-received).
 

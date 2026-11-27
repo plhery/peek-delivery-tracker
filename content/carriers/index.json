@@ -235,7 +235,7 @@
   { "id": "j-and-t-uk", "catalog": "j-and-t-uk", "name": "J&T Express UK", "languages": ["en", "fr", "de", "es", "it", "pt", "pl", "zh", "pt-br"] },
   { "id": "m-one", "catalog": "m-one", "name": "M-ONE", "languages": ["en", "fr", "de", "es", "it", "pt", "pl", "sr", "zh", "pt-br"] },
   { "id": "early-bird", "catalog": "early-bird", "name": "Early Bird", "languages": ["en", "fr", "de", "es", "it", "pt", "pl", "sv", "zh", "pt-br"] },
-  { "id": "xinghe-freight", "catalog": "xinghe-freight", "name": "Xinghe Freight", "languages": ["en", "fr", "de", "es", "it", "pt", "pl", "zh", "pt-br"] },
+  { "id": "xinghe-freight", "catalog": "xinghe-freight", "name": "Xinghe Freight", "languages": ["en", "fr", "de", "es", "it", "pt", "pl", "zh", "pt-br", "el", "nl", "ro", "ru", "sv", "uk"] },
   { "id": "cvc", "catalog": "cvc", "name": "CVC", "languages": ["en", "bg", "fr", "de", "es", "it", "pt", "pl", "zh", "pt-br"] },
   { "id": "transpress", "catalog": "transpress", "name": "Transpress", "languages": ["en", "bg", "fr", "de", "es", "it", "pt", "pl", "zh", "pt-br"] },
   { "id": "gls-us", "catalog": "gls-us", "name": "GLS US", "languages": ["en", "fr", "de", "es", "it", "pt", "pl", "zh", "pt-br"] },

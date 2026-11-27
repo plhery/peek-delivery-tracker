@@ -19642,6 +19642,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005bff"
     },
     {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "xinghe-freight-otslezhivanie",
+      "title": "Отслеживание Xinghe Freight: трек-номер GZXH…YQ и статусы",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
+    },
+    {
       "id": "dobropost",
       "catalog": "dobropost",
       "slug": "dobropost-otslezhivanie",
@@ -22076,6 +22084,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DPD België volgen — pakketnummer, Pickup en bezorging",
       "name": "DPD Belgium",
       "color": "#dc0032"
+    },
+    {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "xinghe-freight-pakket-volgen",
+      "title": "Xinghe Freight pakket volgen: GZXH…YQ-nummer en statussen",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
     }
   ],
   "sv": [
@@ -22142,6 +22158,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Early Bird spårning — nattleverans, paketskåp och hjälp",
       "name": "Early Bird",
       "color": "#dd7f4a"
+    },
+    {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "xinghe-freight-spara-paket",
+      "title": "Spåra paket från Xinghe Freight: GZXH…YQ-nummer och status",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
     }
   ],
   "da": [
@@ -22430,6 +22454,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ea0029"
     },
     {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "xinghe-freight-urmarire-colet",
+      "title": "Urmărire colet Xinghe Freight: cod GZXH…YQ și statusuri",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
+    },
+    {
       "id": "fan-courier-international",
       "catalog": "fan-courier-international",
       "slug": "fan-courier-international-urmarire-awb",
@@ -22560,6 +22592,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Εντοπισμός δέματος GZYL: αριθμός YL…YQ και καταστάσεις",
       "name": "GZYL",
       "color": "#4e79e1"
+    },
+    {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "xinghe-freight-entopismos-dematos",
+      "title": "Εντοπισμός Xinghe Freight: αριθμός GZXH…YQ και καταστάσεις",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
     }
   ],
   "hr": [
@@ -22764,6 +22804,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Відстеження Укрпошта — трек-номери, статуси та митниця",
       "name": "Ukrposhta",
       "color": "#ffbe0c"
+    },
+    {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "xinghe-freight-vidstezhennia",
+      "title": "Відстеження Xinghe Freight: номер GZXH…YQ і статуси",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
     },
     {
       "id": "nova-global",

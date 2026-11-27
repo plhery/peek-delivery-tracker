@@ -1,13 +1,13 @@
 ---
 title: Śledź przesyłkę, nawet gdy nie znasz przewoźnika
-description: Wklej numer przesyłki, link od przewoźnika albo cały e-mail o wysyłce: Peek znajdzie numer i przewoźnika, a gdy numer zna kilku przewoźników, zapyta cię o wybór.
+description: Jak śledzić paczkę, nie znając przewoźnika: wklej numer, link albo cały e-mail o wysyłce w Peek bez konta — wykryje firmę spośród ponad 4500 przewoźników.
 slug: sledzenie-przesylki-bez-znajomosci-przewoznika
 picture: Pip, paczka z buzią, czyta długi e-mail o wysyłce wklejony w pole wyszukiwania, a za wielkim znakiem zapytania czekają trzy furgonetki kurierskie.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-27
 ---
 
-Nie musisz znać przewoźnika, żeby śledzić przesyłkę: wklej jej numer, link do śledzenia od przewoźnika albo cały e-mail czy SMS o wysyłce do pola na stronie [Peeka](/), a Peek wyłowi numer, ustali przewoźnika i otworzy stronę przesyłki. Na peektracker.com nie trzeba zakładać konta, a Peek śledzi przesyłki ponad 4500 przewoźników.
+Nie musisz znać nazwy kuriera ani poczty, żeby śledzić paczkę: wklej numer przesyłki, link śledzenia od przewoźnika albo cały e-mail lub SMS o wysyłce na stronie [Peeka](/). Peek sam wyłowi numer z tekstu, rozpozna przewoźnika po kształcie numeru albo sprawdzi najbardziej prawdopodobnych spośród ponad 4500 przewoźników i otworzy stronę przesyłki — bez zakładania konta.
 
 :::steps
 - Otwórz peektracker.com | W polu pod napisem „Gdzie jest moja paczka?” widać podpowiedź „Wklej numer, link lub wiadomość”.
@@ -18,7 +18,7 @@ Nie musisz znać przewoźnika, żeby śledzić przesyłkę: wklej jej numer, lin
 
 Aplikacje czytają wklejony tekst tak samo: przycisk + otwiera „Dodaj przesyłkę” z przyciskiem „Wklej”, a tekst albo link możesz udostępnić przez „Dodaj do Peeka” (zobacz [Peek na iPhone’a, iPada i Maca](guide:iphone-app) i [Peek na Androida](guide:android-app)). Po zalogowaniu na stronie przycisk „Dodaj przesyłkę” nad listą twoich dostaw otwiera panel, który też czyta wklejony tekst albo link, ale bez listy kilku numerów, podpowiedzi przy literówce i uwag o numerach zamówień ze sklepów.
 
-## Czy mogę śledzić przesyłkę, nie znając przewoźnika?
+## Jak Peek rozpoznaje przewoźnika po samym numerze przesyłki?
 
 Tak. Peek rozpozna przewoźnika po numerze albo zapyta przewoźników, do których numer może należeć.
 
@@ -43,7 +43,7 @@ Peek wypisze je na liście, a ty śledzisz je po jednym. Numery, których przewo
 
 Bez konta lista kończy się pytaniem „Śledzisz wszystkie?” i przyciskiem „Zaloguj się, a Peek zachowa je razem”. Z kontem możesz zamiast tego przekazać dalej e-mail o wysyłce, a Peek doda każdą przesyłkę, która w nim jest: zobacz [dodawanie przesyłek e-mailem](guide:add-parcels-by-email). Panel na stronie po zalogowaniu nie pokazuje listy, więc wklej tam sam numer, o który ci chodzi.
 
-## Co, jeśli mój numer zna więcej niż jeden przewoźnik?
+## Co zrobić, gdy numer przesyłki pasuje do kilku przewoźników?
 
 Wybierasz tego, którego podaje e-mail o wysyłce. Na stronie głównej wiersz przewoźnika mówi na przykład „3 przewoźnicy znają ten numer” i „wybierz swojego”, a pod nim są ci przewoźnicy, każdy z oznaczeniem „Zna ten numer”, i podpowiedź „Przewoźnicy po pewnym czasie używają numerów ponownie. Wybierz tego, którego podaje wiadomość o wysyłce.” W panelu na stronie po zalogowaniu wiersz po słowach „znają ją:” wymienia przewoźników i kończy się przyciskiem „Wybierz”; jeśli nie wybierzesz, Peek zapyta ponownie po dodaniu przesyłki. AliExpress, który śledzi niektóre paczki pod numerem przewoźnika, który je doręcza, zostaje wybrany bez pytania.
 
@@ -55,7 +55,7 @@ Bo niektórzy przewoźnicy pokazują przesyłkę dopiero wtedy, gdy podasz coś 
 
 Wymagany kod pocztowy ma opis „Przewoźnik potrzebuje kodu pocztowego odbiorcy, aby pokazać aktualizacje.” Pole z dopiskiem „Opcjonalnie” mówi, co daje, na przykład zweryfikowane skany i przedział czasowy doręczenia w DPD. Kod pocztowy trafia do przewoźnika, a w razie potrzeby także do serwisów śledzenia przesyłek; cyfry telefonu trafiają tylko do tego przewoźnika. Ani jedno, ani drugie nie pojawia się w udostępnionych linkach.
 
-## Dlaczego Peek mówi, że to numer zamówienia albo kod odbioru?
+## Numer zamówienia ze sklepu albo kod odbioru: dlaczego Peek go nie śledzi?
 
 Bo wpisany numer nie jest numerem przesyłki, a Peek mówi, gdzie znaleźć właściwy. Na stronie głównej i w aplikacjach wstrzymuje numery zamówień z pięciu sklepów: nie pyta o nie żadnego przewoźnika i ich nie dodaje. Komunikat mówi na przykład „To wygląda na numer zamówienia Shein”:
 
@@ -69,7 +69,7 @@ Bo wpisany numer nie jest numerem przesyłki, a Peek mówi, gdzie znaleźć wła
 
 Sześć cyfr bez niczego więcej dostaje komunikat „To wygląda na kod odbioru”, bo taki kod „zwykle otwiera automat paczkowy albo służy do odbioru paczki w punkcie odbioru” (zobacz [przesyłki w automatach paczkowych](guide:parcel-lockers)). Fikcyjny numer, taki jak `123456789`, dostaje komunikat „To nie wygląda na prawdziwy numer śledzenia.” Numer przesyłki Amazon, na przykład zaczynający się od TBA, zostanie dodany tylko wtedy, gdy potwierdzi go publiczne śledzenie Amazon Shipping; w przeciwnym razie Peek proponuje „Otwórz moje zamówienia Amazon”.
 
-## Co, jeśli Peek mówi, że cyfra kontrolna się nie zgadza?
+## Literówka w numerze przesyłki: co oznacza niezgodna cyfra kontrolna?
 
 Numer może zawierać literówkę. Numer w 13-znakowym formacie pocztowym (dwie litery, dziewięć cyfr, dwie litery), którego cyfra kontrolna się nie zgadza, dostaje komunikat „Cyfra kontrolna tego numeru się nie zgadza.” To pytanie, a nie odmowa: niektórzy przewoźnicy używają tego kształtu bez cyfry kontrolnej.
 

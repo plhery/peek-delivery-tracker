@@ -1,13 +1,13 @@
 ---
 title: Paket verfolgen, ohne den Paketdienst zu kennen
-description: Füge eine Sendungsnummer, einen Link vom Paketdienst oder die ganze Versandmail ein: Peek findet Nummer und Paketdienst und fragt dich, wenn mehrere sie kennen.
+description: Paket verfolgen ohne Paketdienst zu kennen: Sendungsnummer, Tracking-Link oder ganze Versandmail ohne Konto in Peek einfügen — erkennt über 4.500 Paketdienste.
 slug: paket-verfolgen-ohne-paketdienst
 picture: Pip, das Paket mit Gesicht, liest eine lange Versandmail, die in ein Suchfeld eingefügt wurde, während hinter einem großen Fragezeichen drei Lieferwagen warten.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-27
 ---
 
-Um ein Paket zu verfolgen, musst du den Paketdienst nicht kennen: Füge die Sendungsnummer, den Tracking-Link des Paketdienstes oder die ganze Versandmail oder SMS ins Feld bei [Peek](/) ein, und Peek fischt die Nummer heraus, erkennt den Paketdienst und öffnet die Seite des Pakets. Auf peektracker.com musst du kein Konto anlegen, und Peek verfolgt Pakete von mehr als 4.500 Paketdiensten.
+Du musst nicht wissen, welcher Paketdienst dein Paket bringt: Füge die Sendungsnummer, den Tracking-Link oder die ganze Versandmail oder SMS ins Feld auf [Peek](/) ein. Peek fischt die Nummer aus dem Text, erkennt den Paketdienst an ihrer Form oder fragt die wahrscheinlichsten unter mehr als 4.500 Paketdiensten ab und öffnet direkt die Sendungsseite — ganz ohne Konto.
 
 :::steps
 - Öffne peektracker.com | Im Feld unter „Wo ist mein Paket?“ steht „Nummer, Link oder Nachricht einfügen“.
@@ -18,7 +18,7 @@ Um ein Paket zu verfolgen, musst du den Paketdienst nicht kennen: Füge die Send
 
 Die Apps lesen einen eingefügten Text genauso: Der +-Knopf öffnet „Paket hinzufügen“, mit „Einfügen“, und du kannst einen Text oder Link an „Zu Peek hinzufügen“ teilen (siehe [Peek für iPhone, iPad und Mac](guide:iphone-app) und [Peek für Android](guide:android-app)). Bist du auf der Website angemeldet, öffnet „Paket hinzufügen“ oben in deinen Sendungen ein Fenster, das ebenfalls einen eingefügten Text oder Link liest, aber ohne die Liste mehrerer Nummern, den Vorschlag bei Tippfehlern und die Hinweise zu Bestellnummern von Shops.
 
-## Kann ich ein Paket verfolgen, ohne den Paketdienst zu kennen?
+## Wie erkennt Peek den Paketdienst anhand der Sendungsnummer?
 
 Ja. Peek erkennt den Paketdienst an der Nummer oder fragt die Paketdienste, zu denen sie gehören könnte.
 
@@ -43,7 +43,7 @@ Peek listet sie auf, und du verfolgst sie einzeln. Nummern, deren Paketdienst si
 
 Ohne Konto endet die Liste mit „Verfolgst du alle?“ und einem Knopf „Anmelden, und Peek behält alle im Blick“. Mit Konto kannst du die Versandmail stattdessen weiterleiten, und Peek fügt jedes Paket darin hinzu: siehe [Pakete aus deinen E-Mails verfolgen](guide:add-parcels-by-email). Das Fenster der Website für Angemeldete zeigt keine Liste, füge dort also nur die gewünschte Nummer ein.
 
-## Was, wenn mehrere Paketdienste meine Nummer kennen?
+## Was tun, wenn mehrere Paketdienste dieselbe Sendungsnummer kennen?
 
 Du wählst den, den deine Versandmail nennt. Auf der Startseite steht in der Zeile des Paketdienstes etwa „3 Paketdienste kennen diese Nummer“ und „wähle deinen“, über den Paketdiensten, jeder mit „Kennt diese Nummer“ markiert, und dem Hinweis „Paketdienste vergeben Nummern nach einiger Zeit neu. Wähle den, den deine Versandnachricht nennt.“ Im Fenster der Website für Angemeldete nennt die Zeile die Paketdienste mit „kennen die Nummer“ und endet mit „Wählen“; wählst du keinen, fragt Peek nach dem Hinzufügen erneut. AliExpress, das manche Pakete unter der Nummer ihres Zustellers verfolgt, wird ohne Nachfrage gewählt.
 
@@ -55,7 +55,7 @@ Weil manche Paketdienste ein Paket nur mit mehr als seiner Nummer zeigen. Peek f
 
 Bei einer nötigen Postleitzahl steht „Der Paketdienst benötigt die Postleitzahl der Lieferadresse, um deine Sendung anzuzeigen.“ Eine als „Optional“ markierte sagt, was sie bringt, etwa bei DPD bestätigte Scans und das Zustellzeitfenster. Die Postleitzahl geht an den Paketdienst und bei Bedarf an Tracking-Dienste; die Telefonziffern gehen nur an diesen Paketdienst. Beides ist auf geteilten Links nie zu sehen.
 
-## Warum sagt Peek, es sei eine Bestellnummer oder ein Abholcode?
+## Bestellnummer oder Abholcode: Warum nimmt Peek manche Nummern nicht an?
 
 Weil das, was du eingegeben hast, keine Sendungsnummer ist, und Peek sagt, wo du die richtige findest. Auf der Startseite und in den Apps hält es die Bestellnummern von fünf Shops zurück: Es fragt keinen Paketdienst danach und fügt sie nicht hinzu. Ein Hinweis sagt zum Beispiel „Das sieht nach einer Shein-Bestellnummer aus“:
 
@@ -69,7 +69,7 @@ Weil das, was du eingegeben hast, keine Sendungsnummer ist, und Peek sagt, wo du
 
 Sechs Ziffern allein bekommen „Das sieht nach einem Abholcode aus“, denn ein solcher Code „öffnet meist eine Paketstation oder gilt für die Abholung an einer Abholstelle“ (siehe [Packstation und Paketautomat](guide:parcel-lockers)). Ein Platzhalter wie `123456789` bekommt „Das sieht nicht nach einer echten Sendungsnummer aus.“ Eine Amazon-Sendungsnummer, etwa eine mit TBA am Anfang, wird nur hinzugefügt, wenn die öffentliche Sendungsverfolgung von Amazon Shipping sie bestätigt; sonst bietet Peek „Meine Amazon-Bestellungen öffnen“ an.
 
-## Was, wenn Peek sagt, dass die Prüfziffer nicht aufgeht?
+## Tippfehler in der Sendungsnummer: Was bedeutet eine falsche Prüfziffer?
 
 Vielleicht steckt ein Tippfehler in der Nummer. Eine Nummer im 13-stelligen Postformat (zwei Buchstaben, neun Ziffern, zwei Buchstaben), deren Prüfziffer nicht aufgeht, bekommt „Die Prüfziffer dieser Nummer geht nicht auf.“ Das ist eine Frage, keine Ablehnung: Manche Paketdienste nutzen diese Form ohne Prüfziffer.
 

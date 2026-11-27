@@ -1,13 +1,13 @@
 ---
 title: Douglas order tracking: delivery, returns and problems
-description: Douglas has no online shop in the UK or the US. How delivery, tracking, returns and parcel problems work at douglas.de, douglas.at and douglas.ch.
+description: Track a Douglas order (douglas.de, douglas.at, douglas.ch): DHL, DPD and Austrian Post delivery times, shipping fees, returns and missing or damaged parcels.
 slug: douglas-order-tracking
 picture: A tall perfume bottle and a lipstick beside a small gift box and a delivery van, and Pip standing on the gift box.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-27
 ---
 
-Douglas, the beauty and perfume retailer, doesn't sell online in the UK, Ireland, the US, Canada or Australia: its online shops are in continental Europe. In Germany, DHL delivers douglas.de orders in 1 to 3 working days, free from €34.95, and Douglas confirms the shipment by email. If a parcel is missing, damaged or leaking, contact Douglas customer service; in Germany, it also sends free return labels.
+Douglas doesn't run an online shop in the UK, Ireland, the US, Canada or Australia — its sites cover continental Europe (with Nocibé in France and Monaco). On douglas.de, DHL delivers standard orders in 1 to 3 working days (free from €34.95) and Douglas confirms dispatch by email with carrier tracking; douglas.at uses DPD, Austrian Post and Atalogic (2–4 working days), and douglas.ch delivers duty-paid in 2–4 working days. For missing, damaged or leaking parcels, contact Douglas customer service.
 
 ## Where does Douglas sell online?
 
@@ -17,7 +17,7 @@ Under their terms, douglas.at delivers to Austrian addresses only, and douglas.c
 
 The rest of this guide uses douglas.de and Douglas's German terms, with their German wording and a translation, and says where Austria and Switzerland differ.
 
-## Who delivers my Douglas order?
+## Who delivers Douglas orders in Germany, Austria and Switzerland?
 
 Douglas's German terms name DHL for standard delivery:
 
@@ -42,7 +42,7 @@ Some items are delivered by a Douglas partner rather than by Douglas itself.
 - home | You | Free from €34.95 in Germany
 :::
 
-## Where is my Douglas tracking number?
+## Where do I find my Douglas tracking number or Packstation code?
 
 Look in these places:
 
@@ -65,7 +65,7 @@ When nothing moves, it's usually one of these:
 
 When waiting is still normal: [tracking not updating](guide:tracking-not-updating) and [delivery times](guide:delivery-times).
 
-## Douglas delivery options and costs
+## How much does Douglas delivery cost (standard, express and store pickup)?
 
 **Germany.** The order total is your subtotal after discounts, partner items included.
 
@@ -88,7 +88,7 @@ For delivery to a Douglas store, you can also pay when you collect; the store th
 
 More: [parcel lockers and pickup points](guide:parcel-lockers) and [uncollected parcels](guide:uncollected-parcel).
 
-## Douglas parcel damaged, missing or marked delivered: what to do
+## What if my Douglas parcel is damaged, missing or marked delivered?
 
 Look first, then report. In order:
 
@@ -102,7 +102,7 @@ Look first, then report. In order:
 
 More: [parcel marked delivered but not received](guide:delivered-not-received), [lost parcel](guide:lost-parcel) and [damaged parcel](guide:damaged-parcel).
 
-## Returning a Douglas order
+## How do I return a Douglas order and get a refund?
 
 **Germany.** You have 14 days from receiving the goods to withdraw; for a split order, from the last parcel. Tell Douglas by letter or email, or online with its withdrawal function (Douglas then confirms receipt by email), and send the items back within 14 days of telling it.
 

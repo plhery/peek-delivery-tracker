@@ -1,15 +1,15 @@
 ---
 title: Śledzenie zamówienia Xiaomi: dostawa, zwroty i problemy
-description: Gdzie śledzić zamówienie z mi.com w Polsce, kto je dostarcza, ile kosztuje dostawa i co zrobić, gdy paczka się spóźnia, przyjdzie uszkodzona albo nie dotrze.
+description: Śledzenie zamówienia Xiaomi (mi.com/pl i Mi Store): dostawa InPost i Paczkomat®, darmowa od 159 zł, wysyłka do 4 dni roboczych, reklamacje i 14 dni na zwrot.
 slug: sledzenie-zamowienia-xiaomi
 picture: Hulajnoga elektryczna, małe pudełko po telefonie i furgonetka kurierska, a Pip stoi na podeście hulajnogi.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-27
 ---
 
-Zamówienie z mi.com śledzisz na stronie, w swoim koncie Mi, albo na stronie przewoźnika z numerem przesyłki. Strona Xiaomi o wysyłce w Polsce odsyła do śledzenia przesyłek InPost i do protokołu szkody InPost. Przy odbiorze sprawdź paczkę: jeśli jest uszkodzona, zaznacz to w pokwitowaniu, nie potwierdzaj odbioru i oddaj ją kurierowi.
+Zamówienie z mi.com/pl lub aplikacji Mi Store śledzisz w Centrum Zamówień na koncie Mi albo na stronie przewoźnika z numerem przesyłki — strona Xiaomi o wysyłce w Polsce odsyła do śledzenia i protokołu szkody InPost. Zamówienia złożone przed 15:00 wychodzą w ciągu 4 dni roboczych, a dostawa powyżej 159 zł jest darmowa. Przy odbiorze sprawdź paczkę: jeśli jest uszkodzona, zaznacz to w pokwitowaniu, nie potwierdzaj odbioru i oddaj ją kurierowi.
 
-## Kto dostarcza zamówienie z Xiaomi?
+## Kto dostarcza zamówienie z Xiaomi (mi.com/pl) w Polsce?
 
 Xiaomi ma własny sklep internetowy w Polsce, mi.com/pl, który działa też w aplikacji Mi Store. Dostarcza tylko na adresy w Polsce: jeśli kupujesz z zagranicy, musisz podać polski adres i sam, na własny koszt, zorganizować odbiór albo dalszą wysyłkę. Przy zamówieniu wpisujesz kod pocztowy; jeśli system go nie przyjmie, Xiaomi pod ten adres nie dostarcza.
 
@@ -33,7 +33,7 @@ Wszystkie przesyłki są ubezpieczone. Jeśli uważasz, że produkt jest uszkodz
 - home | Ty | Sprawdź paczkę przed podpisaniem
 :::
 
-## Gdzie jest śledzenie zamówienia z Xiaomi?
+## Gdzie znaleźć numer przesyłki i śledzenie zamówienia Xiaomi?
 
 Sprawdź w tych miejscach:
 
@@ -49,7 +49,7 @@ Dla innych sklepów: [gdzie znaleźć numer przesyłki](guide:find-tracking-numb
 :::checker
 :::
 
-## Dlaczego zamówienie z Xiaomi się spóźnia albo śledzenie stoi?
+## Dlaczego zamówienie z Xiaomi się spóźnia lub ma status „w trakcie przetwarzania”?
 
 Gdy nic się nie dzieje, zwykle chodzi o jedno z tych:
 
@@ -63,7 +63,7 @@ Gdy nic się nie dzieje, zwykle chodzi o jedno z tych:
 
 Kiedy czekanie to jeszcze norma: [śledzenie się nie aktualizuje](guide:tracking-not-updating). Nie było cię w domu: [nieudana dostawa](guide:missed-delivery).
 
-## Opcje i koszty dostawy Xiaomi
+## Ile kosztuje dostawa z Xiaomi i jak działają Paczkomaty®?
 
 Produkt dostajesz sposobem dostawy, który wybierasz spośród dostępnych na stronie; mogą się one różnić w zależności od produktu. Dostawa jest darmowa dla zamówień powyżej 159 zł, z wyjątkiem niektórych towarów. Koszt dostawy widzisz w trakcie zamawiania, przed jego zakończeniem. Płacisz z góry, przed dostawą.
 
@@ -76,7 +76,7 @@ Produkt dostajesz sposobem dostawy, który wybierasz spośród dostępnych na st
 
 Więcej: [paczkomaty i punkty odbioru](guide:parcel-lockers), [nieodebrana paczka](guide:uncollected-parcel) i [czas dostawy](guide:delivery-times).
 
-## Paczka z Xiaomi uszkodzona, niepełna albo „doręczona”, a jej nie ma: co robić
+## Paczka z Xiaomi uszkodzona, niepełna albo „Dostarczono” bez paczki: co robić?
 
 Najpierw sprawdź, potem zgłoś. Po kolei:
 
@@ -90,7 +90,7 @@ Najpierw sprawdź, potem zgłoś. Po kolei:
 
 Więcej: [paczka doręczona, ale nie odebrana](guide:delivered-not-received), [zgubiona paczka](guide:lost-parcel) i [uszkodzona paczka](guide:damaged-parcel).
 
-## Zwrot zamówienia z Xiaomi
+## Jak zwrócić zamówienie z Xiaomi i kiedy wracają pieniądze?
 
 Masz 14 dni kalendarzowych od otrzymania paczki, żeby odstąpić od umowy bez podawania przyczyny; jeśli zamówienie przyszło w kilku paczkach, liczysz od ostatniej. Wystarczy, że wyślesz oświadczenie przed upływem 14 dni. Najprościej: zaloguj się na konto Mi, otwórz Centrum Zamówień i kliknij „Odstąp od umowy tutaj”, a potem potwierdź na kolejnej stronie. Możesz też złożyć tam wniosek o zwrot albo wymianę, napisać na service.pl@support.mi.com, użyć czatu albo zadzwonić na 800 111 332. Godziny infolinii różnią się na stronach Xiaomi, więc dzwoń w dzień roboczy między 9:00 a 17:00.
 

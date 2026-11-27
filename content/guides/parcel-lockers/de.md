@@ -1,13 +1,13 @@
 ---
 title: Packstation und Paketautomat: Abholcode, Frist, Probleme
-description: So funktionieren Packstation, Amazon Locker, DPD-Paketstation, Hermes Box, Poststation und My Post 24: wo dein Abholcode ist und wie lange das Paket wartet.
+description: DHL Packstation, Amazon Locker, DPD-Paketstation, Hermes Box, Poststation (AT) und My Post 24 (CH): Abholcode finden, Lagerfrist, Abholung ohne App und Hilfe.
 slug: paketautomat-abholcode
 picture: Eine Wand voller Paketfächer mit einer offenen Tür, ein Handy mit einem Code und Pip, der herausspringt.
 published: 2026-10-17
-updated: 2026-11-14
+updated: 2026-11-27
 ---
 
-Ein Paketautomat ist eine Abholstelle ohne Schalter: eine Wand aus Fächern, die sich mit einem Code oder der App des Paketdiensts öffnet. Die Sendungsverfolgung zeigt, wann dein Paket drin liegt, der Paketdienst schickt dir den Code, und ab dann hast du nur wenige Tage, bei Amazon, DPD und Hermes nur 3. Holst du es nicht rechtzeitig ab, geht es meist zurück an den Absender.
+An einem Paketautomaten holst du Pakete ohne Schalter ab: Die Sendungsverfolgung zeigt, sobald dein Paket im Fach liegt, und der Paketdienst schickt dir den Abholcode per App, E-Mail, SMS oder Benachrichtigungskarte. Die Lagerfrist ist kurz — bei Amazon Locker, DPD Paketstation und Hermes Box nur 3 Tage, bei der DHL Packstation 7 Kalendertage (nach verpasster Zustellung 9), bei My Post 24 in der Schweiz 10 Tage und bei der Poststation in Österreich meist mindestens 14 Kalendertage. Holst du es nicht rechtzeitig ab, geht es meist an den Absender zurück.
 
 ## Wie funktioniert die Lieferung an einen Paketautomaten?
 
@@ -22,7 +22,7 @@ Meist wählst du den Automaten bei der Bestellung. Der Paketdienst legt das Pake
 
 Ein Paket kann auch in einem Automaten landen, den du nicht gewählt hast. Nach einem verpassten Zustellversuch kann [DHL](carrier:dhl) es in eine Packstation bringen und die [Österreichische Post](carrier:austrian-post) in eine Poststation. Die [Schweizerische Post](carrier:swiss-post) kann dich zur Abholung am My Post 24 einladen. Mehr dazu: [Paket verpasst](guide:missed-delivery).
 
-## Welche Paketautomaten gibt es in Deutschland, Österreich und der Schweiz?
+## Welche Paketautomaten gibt es in DACH und wie lange lagern Pakete dort?
 
 | Automat | Betreiber | Dein Code | Wie lange er wartet |
 | --- | --- | --- | --- |
@@ -40,7 +40,7 @@ Was nicht in die Tabelle passt:
 - **Poststation:** Über 1.500 Stück in Österreich, früher Abholstation genannt. In Wohnhäusern gibt es dazu die Post Empfangsbox.
 - **My Post 24:** Nur für Privatpersonen mit Wohnsitz in der Schweiz. Du registrierst dich in «Meine Post» und schreibst «My Post 24» mit deiner User-ID in die Adresse.
 
-## Wo ist mein Abholcode, und was, wenn er nie kam?
+## Wo finde ich meinen Abholcode (App, E-Mail, SMS) — und was tun, wenn er fehlt?
 
 Der Code, der das Fach öffnet, ist nicht deine Sendungsnummer. Die Sendungsnummer begleitet das Paket vom Shop bis zu dir. Der Abholcode (PIN, QR-Code oder Barcode) öffnet ein Fach, einmal, und kommt erst, wenn das Paket drin liegt. Vorher gibt es nichts zu finden.
 
@@ -61,7 +61,7 @@ Noch kein Code? So gehst du vor:
 
 Codes kommen vom Paketdienst oder vom Shop und kosten nichts. Eine SMS, die eine kleine Gebühr verlangt, damit dein Paket freigegeben wird, ist fast immer Betrug: siehe [Fake-Paket-SMS](guide:delivery-scam-texts).
 
-## Wie lange bleibt mein Paket im Automaten?
+## Wie lange liegt ein Paket in Packstation, Locker oder Paketautomat?
 
 Nicht lange: 3 Tage bei Amazon, DPD und Hermes, 7 bei der Packstation, 10 bei My Post 24 (siehe Tabelle). DHL erinnert dich 48 Stunden nach der Einlieferung und 2 Tage vor Ablauf.
 
@@ -80,7 +80,7 @@ Dort, wo der Paketdienst es unterbringen konnte, und die Sendungsverfolgung sagt
 
 Die Post Empfangsbox im Wohnhaus nimmt keine Pakete an, die zu groß sind oder für die du etwas zahlen musst. Diese liegen in der Post-Geschäftsstelle.
 
-## Kann jemand anderes abholen, oder geht es ohne App?
+## Kann jemand anderes das Paket abholen — und geht es ohne App?
 
 Den Code weitergeben ist mal erlaubt, mal nicht:
 

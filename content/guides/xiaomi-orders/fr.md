@@ -1,15 +1,15 @@
 ---
 title: Suivi de commande Xiaomi : livraison, retours, problèmes
-description: Où suivre ta commande Xiaomi passée sur mi.com en France et en Belgique, qui la livre, ce que coûte la livraison et que faire si le colis manque ou arrive abîmé.
+description: Suivi de commande Xiaomi (mi.com/fr et mi.com/be-fr) : livraison Colissimo en France (gratuite dès 20 €) et DPD en Belgique, délais, colis abîmé et retours.
 slug: suivi-commande-xiaomi
 picture: Une trottinette électrique, une petite boîte de téléphone et une camionnette de livraison, et Pip debout sur le plateau de la trottinette.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-27
 ---
 
-Tu suis une commande Xiaomi passée sur mi.com dans ton compte, ou sur le site du transporteur avec le numéro de suivi. En France, Xiaomi livre avec Colissimo ; en Belgique, il nomme DPD. Si le carton ou le scellé est abîmé à la livraison, tu as le droit de refuser le colis.
+Tu suis une commande Xiaomi passée sur mi.com/fr ou mi.com/be-fr depuis ton compte Mi, ou sur le site du transporteur avec ton numéro de suivi. En France métropolitaine, Xiaomi expédie de son entrepôt de Paris avec Colissimo (gratuit dès 20 €, livré sous 4 jours ouvrables) ; en Belgique, il nomme DPD (gratuit au-delà de 69 €). Si le carton ou le scellé est abîmé à la livraison, tu as le droit de refuser le colis.
 
-## Qui livre ma commande Xiaomi ?
+## Qui livre ma commande Xiaomi en France et en Belgique ?
 
 Xiaomi a sa propre boutique en ligne en France (mi.com/fr) et en Belgique (mi.com/be-fr). Son sélecteur de pays n'a pas de site pour la Suisse : Xiaomi n'y a donc pas de boutique en ligne.
 
@@ -29,7 +29,7 @@ En Belgique, la livraison se fait du lundi au vendredi. Selon le transporteur, t
 - home | Toi | Vérifie le colis à la livraison
 :::
 
-## Où trouver le suivi de ma commande Xiaomi ?
+## Où trouver le numéro et le suivi de ma commande Xiaomi ?
 
 Regarde ici :
 
@@ -46,7 +46,7 @@ Pour les autres boutiques : [trouver ton numéro de suivi](guide:find-tracking-n
 :::checker
 :::
 
-## Pourquoi ma commande Xiaomi est en retard, ou pourquoi le suivi ne bouge pas ?
+## Pourquoi ma commande Xiaomi est-elle en retard ou bloquée ?
 
 Quand rien ne bouge, c'est souvent l'une de ces raisons :
 
@@ -59,7 +59,7 @@ Quand rien ne bouge, c'est souvent l'une de ces raisons :
 
 Quand l'attente reste normale : [le suivi ne bouge pas](guide:tracking-not-updating). Livreur manqué : [livraison manquée](guide:missed-delivery).
 
-## Options et prix de livraison Xiaomi
+## Quels sont les délais et tarifs de livraison Xiaomi ?
 
 | | France | Belgique |
 | --- | --- | --- |
@@ -73,7 +73,7 @@ En Belgique, Xiaomi ne propose pas le paiement à la livraison. En France, un co
 
 Plus d'infos : [consignes et points relais](guide:parcel-lockers) et [colis non retiré](guide:uncollected-parcel).
 
-## Colis Xiaomi abîmé, incomplet ou marqué livré : que faire ?
+## Que faire si mon colis Xiaomi est abîmé, incomplet ou marqué livré ?
 
 D'abord chercher, ensuite signaler. Dans l'ordre :
 
@@ -87,7 +87,7 @@ D'abord chercher, ensuite signaler. Dans l'ordre :
 
 Plus d'infos : [colis marqué livré mais pas reçu](guide:delivered-not-received), [colis perdu](guide:lost-parcel) et [colis abîmé](guide:damaged-parcel).
 
-## Retourner une commande Xiaomi
+## Comment retourner une commande Xiaomi et obtenir un remboursement ?
 
 **Rétractation.** Tu as 14 jours calendaires pour te rétracter sans donner de motif, en France comme en Belgique. Le plus simple : connecte-toi à ton compte Mi, ouvre le Centre de commandes sur le site ou dans l'application Xiaomi et clique sur « Se rétracter du contrat ici », puis confirme sur la page suivante. Tu peux aussi faire une demande de retour dans le Centre de commandes, écrire un e-mail ou appeler.
 

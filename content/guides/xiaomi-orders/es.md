@@ -1,15 +1,15 @@
 ---
 title: Seguimiento de pedidos Xiaomi: envío, devolución y problemas
-description: Dónde seguir tu pedido de mi.com en España, quién lo entrega, cuánto cuesta el envío y qué hacer si el paquete se retrasa, llega dañado o no aparece.
+description: Seguimiento de pedidos Xiaomi (mi.com/es y Mi Store): SEUR, DHL, Correos y Mobel, envío gratis por encima de 20 €, retrasos, reclamaciones y devoluciones.
 slug: seguimiento-pedido-xiaomi
 picture: Un patinete eléctrico, una caja pequeña de móvil y una furgoneta de reparto, y Pip de pie sobre la plataforma del patinete.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-27
 ---
 
-Sigues un pedido de Xiaomi de mi.com en la página «Cuenta» de tu cuenta Mi, que muestra el estado, las fechas estimadas y el seguimiento, o en la web del transportista con el número de seguimiento. En España, Xiaomi entrega con SEUR, DHL y Correos, y con Mobel los televisores grandes y los electrodomésticos grandes. Si el paquete llega dañado, márcalo como dañado en el recibo, haz una foto, firma como no conforme y avisa a Xiaomi en 48 horas.
+Sigues un pedido de Xiaomi de mi.com/es o de la app Mi Store en la página «Cuenta» de tu cuenta Mi —donde ves el estado, las fechas estimadas y el seguimiento— o en la web del transportista con el número de seguimiento. En España peninsular, Xiaomi entrega con SEUR, DHL y Correos, y con Mobel los televisores de 65 a 100 pulgadas y los electrodomésticos grandes; el envío estándar es gratis en pedidos de más de 20 €. Si el paquete llega dañado, márcalo en el recibo, haz una foto, firma como no conforme y avisa a Xiaomi en 48 horas.
 
-## ¿Quién entrega mi pedido de Xiaomi?
+## ¿Quién entrega mi pedido de Xiaomi en España (SEUR, DHL, Correos, Mobel)?
 
 Xiaomi tiene su propia tienda online en España, mi.com/es, que también funciona en la app Mi Store. Solo entrega en España peninsular: no envía a Baleares, Canarias, Ceuta ni Melilla. Si compras desde fuera, tienes que dar una dirección dentro de ese territorio y encargarte tú de recogerlo o reenviarlo.
 
@@ -30,7 +30,7 @@ Para recibirlo, puede que tú o quien lo reciba tengáis que firmar y enseñar u
 - home | Tú | Revisa la caja antes de firmar
 :::
 
-## ¿Dónde está el seguimiento de mi pedido de Xiaomi?
+## ¿Dónde encontrar el número y el seguimiento de mi pedido de Xiaomi?
 
 Míralo en estos sitios:
 
@@ -48,7 +48,7 @@ Para otras tiendas: [dónde está el número de seguimiento](guide:find-tracking
 :::checker
 :::
 
-## ¿Por qué se retrasa mi pedido de Xiaomi, o por qué no avanza el seguimiento?
+## ¿Por qué se retrasa mi pedido de Xiaomi o no se actualiza el seguimiento?
 
 Cuando nada se mueve, suele ser una de estas:
 
@@ -61,7 +61,7 @@ Cuando nada se mueve, suele ser una de estas:
 
 Cuándo esperar aún es normal: [el seguimiento no se actualiza](guide:tracking-not-updating). Si no estabas: [entrega fallida](guide:missed-delivery).
 
-## Opciones y precios de envío de Xiaomi
+## ¿Cuánto cuesta el envío de Xiaomi y cuánto tarda en llegar?
 
 Xiaomi ofrece la entrega estándar a domicilio, y los televisores grandes llegan desembalados, con cita. El envío estándar es gratis en pedidos de más de 20 €, contados después de los descuentos; por debajo, pagas el envío, que ves al hacer el pedido. Xiaomi no ofrece pago contra reembolso.
 
@@ -74,7 +74,7 @@ Xiaomi ofrece la entrega estándar a domicilio, y los televisores grandes llegan
 
 Más: [lockers y puntos de recogida](guide:parcel-lockers), [paquete no recogido](guide:uncollected-parcel) y [plazos de entrega](guide:delivery-times).
 
-## Paquete de Xiaomi dañado, incompleto o entregado sin llegar: qué hacer
+## ¿Qué hacer si mi pedido de Xiaomi llega dañado, incompleto o no aparece?
 
 Primero mira, luego avisa. Por orden:
 
@@ -88,7 +88,7 @@ Primero mira, luego avisa. Por orden:
 
 Más: [paquete entregado pero no recibido](guide:delivered-not-received), [paquete perdido](guide:lost-parcel) y [paquete dañado](guide:damaged-parcel).
 
-## Devolver un pedido de Xiaomi
+## ¿Cómo devolver un pedido de Xiaomi y cuándo llega el reembolso?
 
 Las condiciones de venta te dan 14 días desde que recibes el pedido para desistir sin dar motivos; la política de devoluciones de Xiaomi los amplía a 15, contados desde el último artículo si llegaron por separado. Para ir sobre seguro, pídelo en los 14 primeros días. Hazlo desde tu cuenta Mi: en el Centro de Pedidos de la web o de la app, pulsa «Desistir del contrato aquí», o pide allí una devolución o sustitución. También por chat, en service.es@support.mi.com o en el 900 128 128. Un producto defectuoso o no conforme se devuelve por el mismo camino durante los 3 años de la garantía legal; antes de darte el número de devolución, Xiaomi puede pedirte el justificante de compra, el número de serie o IMEI y fotos.
 

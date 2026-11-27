@@ -1,15 +1,15 @@
 ---
 title: Tracciamento ordine IKEA: pacchi, camion e problemi
-description: Chi consegna il tuo ordine IKEA in Italia, dove trovi «Traccia e gestisci il tuo ordine», quali pacchi hanno un numero del corriere e cosa fare se qualcosa non va.
+description: Tracciamento ordine IKEA Italia: «Traccia e gestisci il tuo ordine», Pacchi Leggeri con Poste Italiane, camion su appuntamento, costi, ritardi, danni e resi.
 slug: tracciamento-ordine-ikea
 picture: Una pila di lunghe scatole piatte, una chiave a brugola, un camion delle consegne e Pip sulla scatola in cima.
 published: 2026-10-18
-updated: 2026-10-18
+updated: 2026-11-27
 ---
 
-IKEA segue ogni ordine online nella sua pagina «Traccia e gestisci il tuo ordine»: ti servono il numero d'ordine e l'email o il telefono che hai usato per comprare. Gli ordini leggeri viaggiano come Consegna Pacchi Leggeri, affidati a un corriere come Poste Italiane, e ricevi le informazioni per tracciare la spedizione. I mobili arrivano con i trasportatori di IKEA, di solito su appuntamento, e li segui solo nel tracking di IKEA e con la telefonata del trasportatore.
+Puoi seguire ogni ordine IKEA Italia su «Traccia e gestisci il tuo ordine» inserendo il numero d'ordine e l'email o il telefono usati per l'acquisto. Gli ordini fino a 30 kg viaggiano come Consegna Pacchi Leggeri tramite corriere (ad esempio Poste Italiane) con informazioni per tracciare la spedizione, mentre i mobili arrivano con i trasportatori di IKEA su appuntamento, che chiamano circa 30 minuti prima e si seguono nel tracking IKEA.
 
-## Chi consegna il mio ordine IKEA?
+## Chi consegna un ordine IKEA in Italia (Pacchi Leggeri e mobili)?
 
 Dipende dal peso dell'ordine e da come lo vuoi ricevere. IKEA (ikea.com/it) consegna solo in Italia, isole comprese.
 
@@ -32,7 +32,7 @@ Puoi anche non farti consegnare niente. Con «Clicca e ritira» ritiri in un neg
 - home | Tu | Conta i colli prima che il trasportatore riparta
 :::
 
-## Dov'è il tracking del mio ordine IKEA?
+## Come funziona «Traccia e gestisci il tuo ordine» e dove trovare il codice del corriere?
 
 **«Traccia e gestisci il tuo ordine».** È il tracking di IKEA e vale per ogni ordine, pacco o camion. Inserisci il numero d'ordine e il telefono o l'email. Vedi i prodotti, le spedizioni in cui è suddiviso l'ordine e il tuo appuntamento. Da lì puoi anche segnalare i prodotti danneggiati. IKEA ti manda gli aggiornamenti anche per email o SMS. Gli stati che vedi:
 
@@ -65,7 +65,7 @@ Per altri negozi: [dove trovare il numero di tracking](guide:find-tracking-numbe
 :::checker
 :::
 
-## Perché il mio ordine IKEA è in ritardo, o perché il tracking non si muove?
+## Perché il mio ordine IKEA è in ritardo o diviso in più consegne?
 
 I tempi dipendono dai prodotti, dal CAP e dal tipo di trasporto: nel carrello vedi le date disponibili e scegli il giorno. A volte l'ordine arriva già il giorno dopo l'acquisto. Per i Pacchi Leggeri, la consegna al piano strada senza appuntamento e i punti di ritiro Poste Italiane e Partner, però, la data è stimata: è il giorno a partire dal quale ricevi i prodotti.
 
@@ -80,7 +80,7 @@ Se il tracking dice `Consegnato` ma non hai niente, l'avviso può riferirsi a un
 
 **Cambiare la data.** In «Traccia e gestisci il tuo ordine» scegli «Ripianifica l'ordine» e poi la nuova data o fascia oraria. In pochi minuti arriva un'email di conferma. Se l'ordine ha più consegne, cambia la data di tutte. Non si può per la consegna veloce in casa né per il ritiro al Locker, e il cambio può costarti la giacenza. Per i Pacchi Leggeri, la data si cambia solo entro 24 ore dal pagamento. Puoi cancellare l'ordine da solo su IKEA.it, anche con Billie; se non riesci, chiama il Servizio Clienti.
 
-## Opzioni e costi di consegna IKEA
+## Quanto costa la consegna IKEA e come funziona Clicca e ritira?
 
 Il servizio Pacchi Leggeri richiede un ordine di almeno 10 €.
 
@@ -107,7 +107,7 @@ Per il ritiro:
 
 Porta un documento d'identità e la conferma d'ordine. Se non ritiri in tempo, l'ordine viene annullato e ti rimborsano quanto speso, meno i costi del servizio. Di più: [locker e punti di ritiro](guide:parcel-lockers).
 
-## Ordine IKEA non arrivato, incompleto o danneggiato: cosa fare
+## Ordine IKEA danneggiato, incompleto o non consegnato: cosa fare?
 
 Prima guarda, poi segnala. Nell'ordine:
 
@@ -123,7 +123,7 @@ La segnalazione online non vale per gli ordini ritirati al Locker. Per i Pacchi 
 
 **Appuntamento mancato.** Se non ti trovano a casa per una consegna su appuntamento, le condizioni di IKEA prevedono che paghi di nuovo la consegna. Per i Pacchi Leggeri, il corriere fa un secondo tentativo il giorno lavorativo dopo. Poi hai 15 giorni lavorativi per ritirare il pacco nella sede indicata nell'avviso; in Emilia-Romagna, Marche, Puglia e Umbria, 10 giorni di calendario nel deposito del corriere. Di più: [consegna mancata](guide:missed-delivery), [pacco consegnato ma non ricevuto](guide:delivered-not-received), [pacco danneggiato](guide:damaged-parcel) e [pacco smarrito](guide:lost-parcel).
 
-## Restituire un ordine IKEA
+## Come restituire un ordine IKEA (reso entro 365 giorni e recesso)?
 
 Hai 365 giorni, anche per prodotti aperti o montati, purché integri e puliti. Se hai comprato online hai anche il diritto di recesso: 14 giorni dalla consegna dell'ultimo prodotto. IKEA ti rimborsa entro 14 giorni da quando glielo comunichi.
 

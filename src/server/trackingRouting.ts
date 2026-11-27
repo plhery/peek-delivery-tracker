@@ -256,11 +256,13 @@ export function catalogRules(): string {
 }
 
 /**
- * The least time between two lookups of one number a carrier allows (the catalog's `tracking.refresh.minMinutes`), in
- * milliseconds, zero when it sets none: Poste Italiane's hour keeps the parcels it follows within its searches an hour.
+ * The least time between two lookups of one number a carrier allows (the catalog's `tracking.refresh.minMinutes`, or its
+ * `outForDeliveryMinutes` for a parcel out for delivery), in milliseconds, zero when it sets none: Poste Italiane's half
+ * hour keeps the parcels it follows within its searches a minute.
  */
-export function minimumInterval(carrier: string): number {
-  return (CARRIER_DEFINITIONS[carrier as keyof typeof CARRIER_DEFINITIONS]?.tracking.refresh?.minMinutes ?? 0) * 60_000;
+export function minimumInterval(carrier: string, outForDelivery = false): number {
+  const refresh = CARRIER_DEFINITIONS[carrier as keyof typeof CARRIER_DEFINITIONS]?.tracking.refresh;
+  return ((outForDelivery ? refresh?.outForDeliveryMinutes : undefined) ?? refresh?.minMinutes ?? 0) * 60_000;
 }
 
 /** Carriers whose lookup can open a browser (the catalog's `tracking.browser`). */
@@ -1311,7 +1313,8 @@ export class TrackingRouter {
     // minimum interval since the last ask, the router's (`paced_asks`) or a handoff probe's, has passed, zero when it
     // sets none. The parcel's scheduled checks keep its carrier's interval (scheduledSyncDue in trackingSync.ts).
     const askableAt = (carrier: string): number => carrier === declared ? 0
-      : Math.max(millis(state.paced_asks?.[carrier]), this.options.askedElsewhere?.(carrier, number) ?? 0) + minimumInterval(carrier);
+      : Math.max(millis(state.paced_asks?.[carrier]), this.options.askedElsewhere?.(carrier, number) ?? 0)
+        + minimumInterval(carrier, parcel.current_stage === 'out_for_delivery');
     // Those this check asked: the lookup that follows a carrier's recognition is part of the same ask.
     const askedNow = new Set<string>();
     const pacedOut = (carrier: string) => !askedNow.has(carrier) && askableAt(carrier) > now().getTime();

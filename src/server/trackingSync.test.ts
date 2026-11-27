@@ -4039,8 +4039,10 @@ describe('TrackingSyncService', () => {
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
       { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => new Date('2026-09-09T22:30:00Z'));
     await service.sync();
+    // Out for delivery, its 10 minutes passed long ago, so it has waited longer than Swiss Post's parcel: the run
+    // lists it first. The other places keep their order, Poste Italiane's going to the parcel expected today next.
     expect(client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id))
-      .toEqual(['out-for-delivery', 'other-carrier', 'expected-today', 'in-transit', 'expected-yesterday']);
+      .toEqual(['out-for-delivery', 'expected-today', 'other-carrier', 'in-transit', 'expected-yesterday']);
   });
 
   it('records how many parcels of each kind a run finds due, and how long the longest-waiting has been due', async () => {
@@ -7331,6 +7333,8 @@ describe('TrackingSyncService', () => {
 
     // Poste Italiane allows an hour between two lookups of a number; Swiss Post, in the tests above, sets none.
     expect([minimumInterval('poste-italiane'), minimumInterval('swiss-post')]).toEqual([60 * 60_000, 0]);
+    // Its own interval for a parcel out for delivery is shorter.
+    expect(minimumInterval('poste-italiane', true)).toBe(10 * 60_000);
     expect(await refresh('10:00')).toEqual(['la-poste', 'poste-italiane']);
     expect(parcel.carrier_data).toMatchObject({ delivery_probe: { carrier: 'poste-italiane', at: '2026-09-10T10:00:00.000Z', misses: 1 } });
     // The origin's news and a refresh by hand would ask at once: within the hour they wait, counting no miss.

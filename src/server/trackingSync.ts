@@ -462,13 +462,27 @@ function deferredFetchDetails(error: RoutingDeferred): JsonObject {
 }
 
 export function isTrackingSyncDue(parcel: JsonObject, now: Date): boolean {
-  return now.getTime() >= trackingSyncDueAt(parcel);
+  return now.getTime() >= trackingSyncDueAt(parcel, now);
 }
 
-/** The least interval between two checks of the carrier that paces the parcel (`pacedBy`), and after a failed one. */
-function refreshLimit(parcel: JsonObject): { minMinutes: number; afterFailureMinutes?: number } | undefined {
+/**
+ * The least interval between two checks of the carrier that paces the parcel (`pacedBy`), after a failed one, and
+ * while the parcel is out for delivery.
+ */
+function refreshLimit(parcel: JsonObject): { minMinutes: number; afterFailureMinutes?: number; outForDeliveryMinutes?: number } | undefined {
   const carrier = pacedBy(parcel);
   return carrier ? CARRIER_DEFINITIONS[carrier as CarrierId].tracking.refresh : undefined;
+}
+
+/**
+ * The least minutes between two checks of the parcel that its carrier allows (`refreshLimit`): the carrier's shorter
+ * interval while the parcel is out for delivery today, when it sets one (Poste Italiane's 10 minutes beside its 30).
+ */
+function minimumMinutes(parcel: JsonObject, now: Date): number | undefined {
+  const refresh = refreshLimit(parcel);
+  if (!refresh) return undefined;
+  const delivering = parcel.current_stage === 'out_for_delivery' && deliveringToday(parcel, now);
+  return (delivering ? refresh.outForDeliveryMinutes : undefined) ?? refresh.minMinutes;
 }
 
 /**
@@ -512,7 +526,7 @@ function handedTo(parcel: JsonObject): string | null {
  * for every check, a manual refresh's too. Zero when nothing holds it back,
  * infinity when it is never checked.
  */
-export function trackingSyncDueAt(parcel: JsonObject): number {
+export function trackingSyncDueAt(parcel: JsonObject, now = new Date()): number {
   // A review demo parcel's scans are written in Peek: no carrier or provider is ever asked (reviewDemo.ts).
   if (isReviewDemoParcel(parcel)) return Infinity;
   if (parcel.sync_status === 'unsupported' && parcel.carrier === 'amazon-shipping' && parcel.sync_error === AMAZON_HISTORY_EXPIRED) return Infinity;
@@ -529,7 +543,7 @@ export function trackingSyncDueAt(parcel: JsonObject): number {
     && pacedBy(parcel) === String(parcel.carrier)) return after;
   // Counted from the run that made the last check, which lands a little into it, as a scheduled
   // check counts a limit alone (scheduledSyncDue).
-  const interval = (parcel.sync_status === 'error' ? refresh.afterFailureMinutes ?? refresh.minMinutes : refresh.minMinutes) * 60_000;
+  const interval = (parcel.sync_status === 'error' ? refresh.afterFailureMinutes ?? refresh.minMinutes : minimumMinutes(parcel, now)!) * 60_000;
   return Math.max(after, lastChecked + interval - RUN_SPREAD_MS);
 }
 
@@ -897,7 +911,7 @@ function scheduledSyncDue(
   if (sinceNamed >= 0 && sinceNamed < NAMED_CARRIER_DUE_MS) return true;
   // A carrier's own limit counts from the last check, from the run that made it, whatever the cadence below: a check
   // late in one window is not followed by another as the next opens.
-  const minimum = refreshLimit(parcel)?.minMinutes;
+  const minimum = minimumMinutes(parcel, now);
   if (minimum && now.getTime() < lastChecked + minimum * 60_000 - RUN_SPREAD_MS) return false;
   // Archived, daily around the clock, as is a delivery its carrier may yet dispute.
   if (archived || unconfirmedDelivery(parcel, now)) return lastChecked < hourStart.minus({ hours: 23 }).toMillis();

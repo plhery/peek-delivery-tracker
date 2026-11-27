@@ -479,7 +479,7 @@ and providers scan parcels across every time zone.
 | A universal provider alone answers for it (its carrier's own adapter did not answer beside it) | hourly, whoever waits for it; every 3 h once its newest scan is a day old; out for delivery today, every 15 min |
 | A universal provider answers beside the carrier's own partial answer, label or local clocks | the carrier's cadence; the providers every 15 min at most, every 3 h once its newest scan is a day old and the carrier's answer stays the same (below) |
 | PostNL | every 30 min, also after a failure and out for delivery |
-| A carrier whose catalog entry sets a refresh limit (`tracking.refresh`): after a handoff, the one it went to; else the stricter of the carrier filed and an earlier leg that answered last, as a check may ask both | no more often than its interval, counted from the run of its last check, out for delivery and on a manual refresh too: a refresh within it asks nothing; when it also sets a wait after a failure, that wait follows a failed check, counted the same way |
+| A carrier whose catalog entry sets a refresh limit (`tracking.refresh`): after a handoff, the one it went to; else the stricter of the carrier filed and an earlier leg that answered last, as a check may ask both | no more often than its interval, counted from the run of its last check, out for delivery and on a manual refresh too: a refresh within it asks nothing; when it sets a shorter interval out for delivery (`outForDeliveryMinutes`: Poste Italiane's 10 minutes beside its 30), that one holds for a parcel out for delivery today; when it also sets a wait after a failure, that wait follows a failed check, counted the same way |
 | Registered or accepted, no new event for 12 h (from when it was added) | hourly around the clock; manual refresh still allowed |
 | No new event for 48 h (from when it was added) | hourly around the clock; manual refresh still allowed |
 | Pending or registered, no new event for 7 days (from when it was added), or after 12 failed checks in a row (`consecutive_failures`), whether a source answered for it before or not, not expected today | every 6 h, whoever waits for it; opening a link checks it hourly; manual refresh still allowed |
@@ -492,13 +492,13 @@ and providers scan parcels across every time zone.
 | Archived, with a new event in the last 30 days (from when it was added), and no alert on a link shared with someone | daily around the clock; manual refresh still allowed |
 | Delivered on a provider's word alone, which the parcel's carrier did not show (below) | daily around the clock for 3 days |
 
-A carrier the parcel is not filed under keeps that interval (`tracking.refresh.minMinutes`) for the
-number it is asked about. A handoff probe, a recognition read, a lookup of a carrier that detection,
+A carrier the parcel is not filed under keeps that interval (`tracking.refresh.minMinutes`, or
+`outForDeliveryMinutes` while the parcel is out for delivery) for the number it is asked about. A handoff probe, a recognition read, a lookup of a carrier that detection,
 recognition or a provider points to, and the earlier carrier asked after a handoff wait that long
 after the last ask, whatever would ask sooner (the origin's news, an announcement, a refresh by hand).
 The wait is no failure and no miss, and the carrier is asked once it has passed. It holds per
 number, not across the carrier: the carrier's own pacing keeps the total (Poste Italiane's searches
-an hour), and its interval is sized for the parcels that fit it, so a number asked this way costs
+a minute), and its interval is sized for the parcels that fit it, so a number asked this way costs
 what a parcel filed under the carrier does. Copies of a number share the router's asks
 (`routing.paced_asks`); a handoff probe and the earlier carrier keep their own (`delivery_probe`,
 `earlier_checked_at`). The router's asks and a handoff probe's count for each other: the wait runs

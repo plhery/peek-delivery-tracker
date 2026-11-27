@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { describe, expect, it, vi } from 'vitest';
 import { NoHistoryError, type CarrierResult } from 'universal-parcel-scraper';
 import type { SupabaseServiceClient } from './supabase';
-import { TrackingSyncService } from './trackingSync';
+import { TrackingSyncService, trackingSyncDueAt } from './trackingSync';
 import type { JsonObject } from './types';
 
 // A carrier's catalog limit (tracking.refresh.minMinutes) counts from the parcel's last check, whether or not
@@ -37,8 +37,8 @@ function client(packages: JsonObject[], lookups: JsonObject[] = []) {
 }
 
 // Checked late in the 10:00 hour (a backlog), then a run at 11:00:30, 10.5 minutes later.
-async function checks(carrier: string, lastSynced = '2026-09-09T10:50:00Z', now = '2026-09-09T11:00:30Z') {
-  const parcel: JsonObject = { id: 'hourly', user_id: 'owner', carrier, tracking_number: 'TEST00000001', current_stage: 'in_transit',
+async function checks(carrier: string, lastSynced = '2026-09-09T10:50:00Z', now = '2026-09-09T11:00:30Z', stage = 'in_transit') {
+  const parcel: JsonObject = { id: 'hourly', user_id: 'owner', carrier, tracking_number: 'TEST00000001', current_stage: stage,
     created_at: '2026-09-08T08:00:00Z', last_synced_at: lastSynced, sync_status: 'ok', archived_at: null,
     carrier_data: { last_update: '2026-09-09T09:00:00Z', routing: { version: 1, configured_carrier: carrier, last_event_at: '2026-09-09T09:00:00Z' } } };
   const adapter = { fetch: vi.fn(async (): Promise<CarrierResult> => ({ status: 'in_transit', current_stage: 'in_transit', last_update: '2026-09-09T09:00:00Z' })) };
@@ -63,6 +63,24 @@ describe('a carrier asking for at most one check an hour', () => {
 
   it('Royal Mail (an hourly limit alone) likewise', async () => {
     expect(await checks('royal-mail')).toBe(0);
+  });
+});
+
+describe('a carrier with a shorter interval out for delivery', () => {
+  it('Poste Italiane checks a parcel out for delivery today every 10 minutes, any other every 30', async () => {
+    expect(await checks('poste-italiane', '2026-09-09T10:50:00Z', '2026-09-09T11:00:30Z', 'out_for_delivery')).toBe(1);
+    expect(await checks('poste-italiane', '2026-09-09T10:56:00Z', '2026-09-09T11:00:30Z', 'out_for_delivery')).toBe(0);
+    expect(await checks('poste-italiane', '2026-09-09T10:50:00Z', '2026-09-09T11:00:30Z')).toBe(0);
+    // A round from an earlier day is over: the 30 minutes hold.
+    expect(await checks('poste-italiane', '2026-09-10T10:50:00Z', '2026-09-10T11:00:30Z', 'out_for_delivery')).toBe(0);
+  });
+
+  it('lets a refresh by hand through once its 10 minutes have passed', () => {
+    const parcel = (stage: string): JsonObject => ({ carrier: 'poste-italiane', current_stage: stage, sync_status: 'ok',
+      last_synced_at: '2026-09-09T10:50:00Z', carrier_data: { last_update: '2026-09-09T09:00:00Z' } });
+    const now = new Date('2026-09-09T11:00:30Z');
+    expect(trackingSyncDueAt(parcel('out_for_delivery'), now)).toBeLessThanOrEqual(now.getTime());
+    expect(trackingSyncDueAt(parcel('in_transit'), now)).toBeGreaterThan(now.getTime());
   });
 });
 

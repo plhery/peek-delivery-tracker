@@ -1,6 +1,6 @@
 ---
 title: IKEA order tracking: parcels, truck delivery and problems
-description: IKEA order tracking on Track my order: how to track parcel (DPD, FedEx, Purolator) and truck deliveries on any country's IKEA site, plus late or missing items.
+description: IKEA order tracking on Track my order: how to track parcel (DPD, FedEx, Purolator) and truck deliveries on your country's IKEA site, plus late or missing items.
 slug: ikea-order-tracking
 picture: A stack of long flat-pack boxes, an Allen key, a delivery truck, and Pip on the top box.
 published: 2026-10-18

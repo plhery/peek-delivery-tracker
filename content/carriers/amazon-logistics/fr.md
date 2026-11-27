@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Amazon Logistics est le réseau de livraison d'Amazon : en France, des entreprises de livraison indépendantes livrent depuis les agences de livraison de proximité d'Amazon (en plus du groupe [La Poste](carrier:la-poste) et d'autres transporteurs) ; en Belgique, des partenaires locaux livrent notamment depuis l'agence d'Anvers aux côtés de [bpost](carrier:bpost). Amazon Logistics n'a pas de page de suivi publique : selon ce que tu as en main :
+Amazon Logistics est le réseau de livraison d'Amazon : en France, des entreprises de livraison indépendantes livrent depuis les agences de livraison de proximité d'Amazon (en plus du groupe [La Poste](carrier:la-poste) et d'autres transporteurs) ; en Belgique, des partenaires locaux livrent notamment depuis l'agence d'Anvers aux côtés de [bpost](carrier:bpost). Amazon Logistics n'a pas de page de suivi publique. Selon ce que tu as en main :
 
 - **Une commande passée sur Amazon** (numéro de commande comme `000-0000000-0000000`) : ton colis se suit dans Vos commandes, sur le site Amazon où tu as commandé (amazon.fr, amazon.com.be…). Si Vos commandes ou l'e-mail d'expédition donne le numéro d'un autre transporteur, La Poste par exemple, colle ce numéro dans le champ ci-dessus : Peek le suit chez ce transporteur.
 - **Un numéro `TBA`, `FR` ou `BE`, ou un lien track.amazon** : colle-le ci-dessus. Peek interroge d'abord le suivi public d'Amazon. Celui-ci répond quand le vendeur expédie avec [Amazon Shipping](carrier:amazon-shipping), le service de livraison d'Amazon pour les entreprises, que tu aies commandé « sur Amazon.fr ou tout autre site internet », ou quand Amazon expédie pour un vendeur une commande passée ailleurs que sur Amazon. Peek suit alors le colis tout seul ; sinon, il te renvoie vers Vos commandes.
@@ -67,7 +67,7 @@ Sinon, tu lis « Les livraisons Amazon Logistics se suivent généralement dans 
 
 ### Comment suivre un colis Amazon Logistics (numéro FR, BE ou TBA) ?
 
-Ouvre **Vos commandes** sur le site Amazon où tu as commandé (amazon.fr, amazon.com.be…) : Amazon Logistics n'affiche pas son suivi en dehors de ton compte. Tu peux aussi coller ton numéro `FR`, `BE` ou `TBA` ci-dessus : s'il passe par le suivi public d'[Amazon Shipping](carrier:amazon-shipping) (track.amazon.fr), Peek le suit directement ; sinon il t'envoie vers Vos commandes.
+Ouvre **Vos commandes** sur le site Amazon où tu as commandé (amazon.fr, amazon.com.be…) : Amazon Logistics n'affiche pas son suivi en dehors de ton compte. Tu peux aussi coller ton numéro `FR`, `BE` ou `TBA` ci-dessus : s'il passe par le suivi public d'[Amazon Shipping](carrier:amazon-shipping) (track.amazon.fr pour un numéro FR ou BE), Peek le suit directement ; sinon il t'envoie vers Vos commandes.
 
 ### Que veut dire un numéro de suivi TBC sur Amazon ?
 

@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-11-27
 ---
 
-Un pacco in giacenza non ritirato all'ufficio postale, in filiale, in un punto di ritiro o in un locker di solito torna al mittente quando scade il termine. Gli uffici postali lo tengono più a lungo (Poste Italiane da 7 a 10 giorni lavorativi a seconda del servizio, la Posta svizzera 7 giorni e 15 per i pacchi dall'estero), mentre i locker InPost, Punto Poste e Amazon spesso solo 3 giorni. Se la consegna non è andata a buon fine o il locker non era disponibile, conta l'ultimo giorno scritto sull'avviso, nell'SMS o nell'e-mail. Dopo, è il negozio a decidere se rimborsarti o rispedirlo.
+Un pacco in giacenza non ritirato all'ufficio postale, in filiale, in un punto di ritiro o in un locker di solito torna al mittente quando scade il termine. Gli uffici postali lo tengono più a lungo (Poste Italiane da 7 a 10 giorni lavorativi a seconda del servizio, la Posta svizzera 7 giorni e 15 per i pacchi dall'estero), mentre i locker InPost, Punto Poste e Amazon spesso solo 3 giorni. Conta l'ultimo giorno scritto sull'avviso, nell'SMS o nell'e-mail. Dopo, è il negozio a decidere se rimborsarti o rispedirlo.
 
 Il codice non è arrivato o il locker era pieno? Leggi [pacco nel locker](guide:parcel-lockers).
 
@@ -91,7 +91,7 @@ Con gli altri negozi dipende da dove hai comprato. In Italia hai 14 giorni per i
 
 ### Consegna non andata a buon fine o locker non disponibile: dove va il pacco?
 
-Controlla l'avviso, l'SMS o il tracking: dopo un tentativo fallito, Poste porta il pacco all'ufficio postale indicato (7 o 10 giorni lavorativi), BRT in filiale (10 giorni per le istruzioni del mittente) e GLS al GLS Point o in sede. Se il locker era pieno o non disponibile, vedi [pacco nel locker](guide:parcel-lockers).
+Controlla l'avviso, l'SMS o il tracking: Poste ti lascia un avviso con l'ufficio postale dove il pacco resta in giacenza (10 giorni lavorativi per Standard ed Express; con Poste Delivery Business, dopo un secondo tentativo, 7 giorni lavorativi all'ufficio postale o al centro operativo), BRT lo riporta in filiale (10 giorni per le istruzioni del mittente) e GLS lo tiene in sede o, con lo Smart Delivery Service, lo porta a un GLS Point. Se il locker era pieno o non disponibile, vedi [pacco nel locker](guide:parcel-lockers).
 
 ### Quanto tempo rimane un pacco in posta?
 

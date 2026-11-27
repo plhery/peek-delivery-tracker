@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-Zamówienia z Zalando w Polsce dostarczają czterej przewoźnicy wymienieni na zalando.pl: InPost (kurier, Paczkomat i PaczkoPunkt), DPD (kurier i DPD Pickup), DHL oraz UPS (dostawa ekspresowa). Link do śledzenia i numer przesyłki przychodzą w mailu z potwierdzeniem wysyłki i są dostępne w „Moich zamówieniach” na koncie Zalando; produkty sprzedawane i wysyłane przez Partnera jadą osobno, z osobnym mailem i numerem.
+Zamówienia z Zalando w Polsce dostarczają czterej przewoźnicy wymienieni na zalando.pl: InPost (także do Paczkomatu i PaczkoPunktu), DPD (także do punktu DPD Pickup), DHL oraz UPS (dostawa ekspresowa). Link do śledzenia i numer przesyłki przychodzą w mailu z potwierdzeniem wysyłki i są dostępne w „Moich zamówieniach” na koncie Zalando; produkty sprzedawane i wysyłane przez Partnera jadą osobno, z osobnym mailem i numerem.
 
 ## Zalando: jaki kurier doręcza zamówienie w Polsce?
 

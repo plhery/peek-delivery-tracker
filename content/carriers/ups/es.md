@@ -1,12 +1,12 @@
 ---
 title: UPS seguimiento en España: número 1Z, estados y aduanas
-description: Seguimiento de UPS en España (ups.com): número 1Z, qué significa Exception y cada escaneo, UPS Access Point, aduanas (3 € + 2 €) y reclamaciones ante CNMC.
+description: Seguimiento de UPS en España (ups.com): número 1Z, qué significa Exception y cada escaneo, UPS Access Point, aduanas (3 € + 2 €) y cómo reclamar.
 slug: ups-seguimiento
 published: 2026-10-13
 updated: 2026-11-27
 ---
 
-Para el seguimiento de un paquete de UPS en España (United Parcel Service), pega su número `1Z` de 18 caracteres —o un enlace de seguimiento de ups.com— en la casilla de arriba, o consúltalo directamente en ups.com. El número te lo da la tienda en el correo de envío o en la página del pedido.
+Para el seguimiento de un paquete de UPS en España (United Parcel Service), pega su número (suele empezar por `1Z` y tener 18 caracteres) —o un enlace de seguimiento de ups.com— en la casilla de arriba, o consúltalo directamente en ups.com. El número te lo da la tienda en el correo de envío o en la página del pedido.
 
 ## Número de seguimiento de UPS: dónde está y cómo es
 
@@ -74,7 +74,7 @@ Peek no muestra quién firmó, tu dirección, la prueba de entrega, dónde se de
 
 ### ¿Cómo hacer el seguimiento de un envío de UPS en España?
 
-Copia el número `1Z` de 18 caracteres del correo de la tienda (o el enlace con `tracknum=` de ups.com) y pégalo arriba o en ups.com. En España, si hay retraso, pérdida o daño en una compra online, reclama primero a la tienda (responsable hasta que recibas el paquete); ante UPS el plazo postal de reclamación es de seis meses.
+Copia el número de UPS, normalmente un `1Z` de 18 caracteres, del correo de la tienda (o el enlace con `tracknum=` de ups.com) y pégalo arriba o en ups.com. En España, si hay retraso, pérdida o daño en una compra online, reclama primero a la tienda (responsable hasta que recibas el paquete); ante UPS el plazo postal de reclamación es de seis meses desde la admisión del envío.
 
 ### ¿Por qué UPS dice que mi número de seguimiento no es válido?
 

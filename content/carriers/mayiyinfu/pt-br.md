@@ -25,7 +25,7 @@ Letras minúsculas e espaços não importam no Peek.
 
 ## Status de rastreamento da Mayi Yinfu explicados
 
-A Mayi Yinfu não publica lista de status. Suas próprias movimentações vêm em chinês, quase sempre acompanhadas de tradução para o inglês; após a transferência, ela reproduz as movimentações da empresa entregadora em inglês. Principais registros, em ordem:
+A Mayi Yinfu não publica lista de status. Suas próprias movimentações vêm em chinês, a maioria acompanhada de tradução para o inglês; após a transferência, ela reproduz as movimentações da empresa entregadora em inglês. Principais registros, em ordem:
 
 | A Mayi Yinfu diz | O que significa para você |
 | --- | --- |
@@ -36,7 +36,7 @@ A Mayi Yinfu não publica lista de status. Suas próprias movimentações vêm e
 | `货物已交机场` | Entregue no aeroporto para embarque aéreo (não é entrega a você); depois aparece 等待安排航班中 (aguardando voo) ou a data do voo. |
 | `航班延误` | O voo atrasou; a linha informa a data do próximo. |
 | `头程起飞`, `头程落地` | O primeiro voo decolou e depois pousou. |
-| `二程起飞` | O voo de conexão decolou. A tradução automática em inglês ("Flight 202 is taking off") interpreta 二程 (segundo trecho) erroneamente como número de voo. |
+| `二程起飞` | O voo de conexão decolou. O texto em inglês ("Flight 202 is taking off") lê 二程 (segundo trecho) como um número de voo. |
 | `航班落地，拆板清关The flight landed, and the board was dismantled and cleared` | Pousou na sua região; os paletes estão sendo desmontados para desembaraço aduaneiro de importação. |
 | `清关完成，待转运Clearance has been completed and it is awaiting transfer.` | Liberado pela alfândega, aguardando repasse à transportadora local. |
 | `已转运transferred` | Entregue à empresa entregadora, cujo código passa a aparecer no rastreador. |
@@ -45,9 +45,9 @@ A Mayi Yinfu não publica lista de status. Suas próprias movimentações vêm e
 | `The shipment has been loaded onto the delivery vehicle` | Saiu para entrega. |
 | `The shipment has been successfully delivered` | Entregue. |
 
-**Linhas adiantadas.** `国内清关中` (desembaraço de exportação), `已排航班` (voo agendado), `起运地航班起飞` (voo decolou), `已到达目的国` (chegou ao país de destino) e `清关完成` (desembaraço concluído), quando aparecem sozinhas, vêm de um script automático: podem mostrar o pacote no exterior antes mesmo de chegar ao aeroporto, portanto confie nas movimentações ao redor.
+**Linhas adiantadas.** `国内清关中` (desembaraço de exportação), `已排航班` (voo agendado), `起运地航班起飞` (voo decolou), `已到达目的国` (chegou ao país de destino) e `清关完成` (desembaraço concluído), quando aparecem sozinhas, vêm de um script: podem mostrar o pacote no exterior antes mesmo de chegar ao aeroporto, portanto confie nas movimentações ao redor.
 
-Os horários da Mayi Yinfu não trazem fuso horário. Suas linhas na China continental usam horário de Pequim, e em geral as linhas copiadas da DHL também: uma movimentação da DHL às 10:00 na Alemanha costuma aparecer na Mayi Yinfu como 17:00 no inverno.
+Os horários da Mayi Yinfu não trazem fuso horário. Suas linhas na China continental usam horário de Pequim, e em geral as linhas copiadas da DHL também: uma movimentação da DHL às 10:00 na Alemanha aparece no rastreador da Mayi Yinfu como 17:00 no inverno.
 
 ## Quem entrega encomendas da Mayi Yinfu
 
@@ -65,7 +65,7 @@ O site da Mayi Yinfu não informa quem entrega em cada país. O próprio rastrea
 
 **Nada encontrado.** Para um código desconhecido, o rastreador retorna um resultado com o número em 参考号 (referência) e todos os demais campos vazios. O Peek trata isso como não encontrado: mostra "Aguardando Mayi Yinfu" e, se continuar desconhecido após dois dias, pede para você conferir o código. Compare caractere por caractere com a mensagem do vendedor.
 
-**Extraviada, danificada ou devolvida.** A Mayi Yinfu não publica procedimento de reclamação, então procure o vendedor ou marketplace para reembolso ou reenvio. Veja [encomenda extraviada](guide:lost-parcel), [devolvida ao remetente](guide:returned-to-sender) e [entregue mas não recebida](guide:delivered-not-received).
+**Extraviada, danificada ou devolvida.** A Mayi Yinfu não publica procedimento de pedido de indenização, então procure o vendedor ou marketplace para reembolso ou reenvio. Veja [encomenda extraviada](guide:lost-parcel), [devolvida ao remetente](guide:returned-to-sender) e [entregue mas não recebida](guide:delivered-not-received).
 
 ## Telefone e atendimento da Mayi Yinfu
 
@@ -77,9 +77,9 @@ Cole um código `MY…US` no [Peek](/) e ele vai direto para a Mayi Yinfu: nenhu
 
 O Peek exibe cada movimentação no texto original da Mayi Yinfu com o local e o país de destino quando informado; linhas de voo com data prevista aparecem apenas como etapa em inglês, como "The first leg has departed". As linhas iniciais aparecem como "Etiqueta criada", `已入库,到达收货点` como "Recebida pela transportadora", `航班落地，拆板清关…` como "Na alfândega", as linhas de veículo de entrega e entregue como "Saiu para entrega" e "Entregue", e as demais linhas conhecidas como "Em trânsito". As linhas adiantadas e qualquer linha registrada mais de doze horas antes do horário que exibe (ou mais de seis horas no mesmo segundo de uma dessas) são previsões, não movimentações reais, e não alteram o status da encomenda; o histórico abre então com "Outros sites podem mostrar mais etapas, mas são apenas previsões.", mantendo essas etapas esmaecidas atrás de "Ver". Linhas datadas no futuro aguardam até essa hora. Registros na China continental — e linhas copiadas da DHL alocadas em um país depois que o código da DHL surge — usam o horário de Pequim; os demais seguem o relógio do local da etapa, dentro do possível. Nomes, endereços, códigos postais, peso, taxas, assinatura e comprovante ficam de fora, e não há data prevista de entrega.
 
-**A DHL assume o envio.** A DHL é a única entregadora que o Peek aproveita dos registros da Mayi Yinfu, e apenas quando o código entregador ali tem formato exclusivo da DHL no catálogo do Peek. A encomenda exibe então "Entrega por DHL" e o código da DHL após o seu, e o Peek passa a consultar a DHL. Enquanto a DHL tiver somente o anúncio prévio sem movimentação própria, aparece "Anunciada a DHL, ainda não recebida". Assim que a DHL exibir uma movimentação ao menos tão recente quanto a última da Mayi Yinfu, o Peek acompanha na DHL preservando as linhas da Mayi Yinfu. Qualquer outro número entregador — inclusive um da DHL compartilhado com outras transportadoras — não é assumido automaticamente: copie-o do rastreador da Mayi Yinfu e adicione como encomenda separada.
+**A DHL assume o envio.** A DHL é a única entregadora que o Peek aproveita dos registros da Mayi Yinfu, e apenas quando o código entregador ali tem formato exclusivo da DHL no catálogo do Peek. A encomenda exibe então "Entrega por DHL" e o código da DHL após o seu, e o Peek passa a consultar a DHL. Enquanto a DHL tiver somente o anúncio prévio sem movimentação própria, aparece "Anunciada a DHL, ainda não recebida". Assim que a DHL exibir uma movimentação ao menos tão recente quanto a última da Mayi Yinfu, o Peek acompanha na DHL preservando as linhas da Mayi Yinfu. Qualquer outro número entregador — inclusive um da DHL compartilhado com outras transportadoras — não aparece no Peek, e o Peek não acompanha a encomenda por ele: copie-o do rastreador da Mayi Yinfu e adicione como encomenda separada.
 
-O Peek consulta a Mayi Yinfu até a cada 10 minutos, e de hora em hora após dois dias sem novidades (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"). Se dois dias depois o histórico ainda tiver apenas as linhas iniciais, o Peek também recorre a serviços de rastreamento. Entre as linhas conhecidas da Mayi Yinfu, "Etapas importantes" (entrega, retirada, alfândega, tentativas perdidas e devoluções) notifica em `航班落地，拆板清关…`, saída para entrega e entrega; "Só a entrega", apenas nas duas últimas.
+O Peek consulta a Mayi Yinfu até a cada 10 minutos, e de hora em hora após dois dias sem novidades (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"). Se dois dias depois o histórico ainda tiver apenas as linhas iniciais, o Peek também recorre a serviços de rastreamento. Entre as linhas conhecidas da Mayi Yinfu, "Etapas importantes" (entrega, retirada, alfândega, tentativas sem sucesso e devoluções) notifica em `航班落地，拆板清关…`, saída para entrega e entrega; "Só a entrega", apenas nas duas últimas.
 
 ## Perguntas sobre o rastreamento da Mayi Yinfu
 
@@ -100,8 +100,8 @@ A Mayi Yinfu não divulga prazos de entrega. Siga a estimativa informada pela lo
 O vendedor de quem você comprou: foi ele quem contratou a Mayi Yinfu, cujo site divulga apenas um celular de atendimento.
 
 :::sources
-- [Mayi Yinfu: 广东蚂蚁银服国际物流有限公司 (home)](http://www.mayiyinfu.com.cn/Default.aspx) – company name, the 快递查询 box and tracker, login, sign-up, price lookup, the hotline (全国服务热线 in the header, 在线咨询 box)
-- [Mayi Yinfu: 联系我们 (contact)](http://www.mayiyinfu.com.cn/contact.html) – no content beyond the hotline; the company profile, legal and privacy pages are empty too
-- [Mayi Yinfu: 国际小包 (international small parcels)](http://www.mayiyinfu.com.cn/products/category-1.html) – placeholder text only; the express and dedicated-line pages hold no data: no delivery times or partners
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Hualei platform, number shape, search by reference, line wordings and their meaning, scripted lines, clocks, unknown-number answer, hand-over to Deutsche Post DHL into Europe, what Peek shows, holds back and hands over
+- [Mayi Yinfu: 广东蚂蚁银服国际物流有限公司 (home)](http://www.mayiyinfu.com.cn/Default.aspx) – nome da empresa, o campo 快递查询 e o rastreador, login, cadastro, consulta de preços, a linha de atendimento (全国服务热线 no cabeçalho, caixa 在线咨询)
+- [Mayi Yinfu: 联系我们 (contact)](http://www.mayiyinfu.com.cn/contact.html) – nenhum conteúdo além da linha de atendimento; as páginas de perfil da empresa, aviso legal e privacidade também estão vazias
+- [Mayi Yinfu: 国际小包 (international small parcels)](http://www.mayiyinfu.com.cn/products/category-1.html) – apenas texto provisório; as páginas de expresso e de linha dedicada não trazem dados: nem prazos de entrega nem parceiros
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – plataforma Hualei, formato do código, busca por referência, textos das linhas e seu significado, linhas geradas por script, fusos horários, resposta para código desconhecido, passagem à Deutsche Post DHL na Europa, o que o Peek mostra, retém e repassa
 :::

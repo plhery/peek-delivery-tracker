@@ -16,7 +16,7 @@ A Omniva chama o código de "shipment tracking code" ou "shipment code (tracking
 | --- | --- |
 | `JJEE48291736405829173` | Encomenda Omniva: `JJEE` e 17 dígitos, 21 caracteres ao todo. |
 | `JJEEMKP48291736405` | Outro código de encomenda Omniva: `JJEE`, três letras e 11 dígitos. |
-| `CE482917367EE` | Duas letras, nove dígitos e `EE`: envio entregue à Omniva no formato postal internacional. Pacotes para parcel machines na Letônia e na Lituânia também costumam terminar em `EE`. |
+| `CE482917367EE` | Duas letras, nove dígitos e `EE`: envio entregue à Omniva no formato postal internacional. Pacotes para parcel machines na Letônia e na Lituânia também têm códigos terminados em `EE`. |
 | `RR739402812CN` | Encomenda vinda do exterior mantém o código do correio remetente; este termina em `CN`, postado na China. |
 
 O código de porta de seis dígitos no SMS de chegada abre o armário inteligente e não é código de rastreamento; o código de devolução de seis dígitos também não é.
@@ -44,7 +44,7 @@ As páginas de rastreamento da Omniva funcionam em inglês, estoniano, letão, l
 
 Dois status costumam enganar: `Delivery attempt made` significa que a tentativa falhou, e `Shipment delivered` após uma devolução indica que o volume voltou ao remetente.
 
-## Parcel machines da Omniva, entregadores e tentativas perdidas
+## Parcel machines da Omniva, entregadores e entregas não realizadas
 
 **Avisos.** A Omniva avisa por SMS, e-mail ou notificação do app. No app da Omniva, notificações por SMS vêm desligadas por padrão; ative em Profile → Notification preferences.
 
@@ -54,7 +54,7 @@ Dois status costumam enganar: `Delivery attempt made` significa que a tentativa 
 
 **Entregador em domicílio.** Você recebe SMS com a data de entrega e o entregador liga antes de chegar (na Letônia e Lituânia, para combinar dia e horário). Limites na porta: até 30 kg na Estônia e Letônia, e 25 kg na Lituânia. Se o horário não servir, peça ao entregador outro dia ou um parcel machine próximo.
 
-**Tentativa perdida com entregador.** Volumes até tamanho L vão para um parcel machine próximo por 4 dias. Na Estônia, pacotes até XL podem ficar 7 dias em uma agência postal e volumes XXL 7 dias no centro de entrega. Na Letônia, volumes maiores ficam 4 dias no centro de entrega; na Lituânia, retornam ao remetente.
+**Entrega em domicílio não realizada.** Volumes até tamanho L vão para um parcel machine próximo por 4 dias. Na Estônia, pacotes até XL podem ficar 7 dias em uma agência postal e volumes XXL 7 dias no centro de entrega. Na Letônia, volumes maiores ficam 4 dias no centro de entrega; na Lituânia, retornam ao remetente.
 
 **Redirecionamento.** Gratuito até o pacote chegar ao centro de triagem, pelo link no e-mail da Omniva ou no e-service; depois disso, ou para mudar para entrega em domicílio, há taxa. O volume também pode ser redirecionado se a máquina estiver cheia.
 
@@ -64,7 +64,7 @@ Dois status costumam enganar: `Delivery attempt made` significa que a tentativa 
 
 **Compartimento vazio ou local errado.** Contate o atendimento a clientes particulares da Omniva no seu país.
 
-**Danificada.** Na Estônia, o destinatário pode enviar o formulário de encomenda danificada ou extraviada em até **6 meses** da postagem, embora normalmente só o remetente receba reembolso. Na Letônia e Lituânia, as páginas de ajuda orientam falar com o remetente (na Lituânia com fotos do pacote e da embalagem) para abrir reclamação, mas os termos letões da Omniva também permitem que o destinatário reclame por escrito em até **6 meses**.
+**Danificada.** Na Estônia, o destinatário pode enviar o formulário de encomenda danificada ou extraviada em até **6 meses** da postagem, embora normalmente só o remetente receba reembolso. Na Letônia e Lituânia, as páginas de ajuda orientam falar com o remetente (na Lituânia com fotos do pacote e da embalagem) para fazer o pedido de indenização, mas os termos letões da Omniva também permitem que o destinatário reclame por escrito em até **6 meses**.
 
 **Alfândega (Estônia).** Desde 1º de julho de 2021, toda encomenda vinda de fora da UE deve ser declarada, qualquer que seja o valor, em até **30 dias**. Você pode autorizar a Omniva ou declarar por conta própria à Receita e Alfândega. Veja [encomendas retidas na alfândega](guide:customs).
 
@@ -98,7 +98,7 @@ A Omniva informa 1 a 2 dias úteis dentro de um mesmo país báltico e 2 a 3 dia
 
 ### Posso rastrear uma encomenda da Omniva pelo número de telefone?
 
-As páginas da Omniva descrevem rastreamento apenas pelo código de envio. Uma conta no e-service em `minu.omniva.ee` reúne automaticamente suas futuras encomendas em um só lugar.
+As páginas da Omniva descrevem rastreamento apenas pelo código de envio. Uma conta no e-service em `minu.omniva.ee` reúne suas futuras encomendas em um só lugar.
 
 ### O que significa "Delivery attempt made" na Omniva?
 
@@ -109,36 +109,36 @@ O entregador tentou entregar e não conseguiu; o texto apenas soa como algo conc
 Sim, desde que o país remetente tenha registrado o objeto no banco internacional; antes de chegar à Estônia, consulte o site do correio de origem.
 
 :::sources
-- [Omniva Estonia: Track and receive parcels](https://www.omniva.ee/en/track-and-receive-parcels/) – shipment code, door code, receiving options, courier SMS and call
-- [Omniva Latvia: Track and receive](https://www.omniva.lv/en/track-and-receive-parcels/) – receiving in Latvia, courier, 30 kg
-- [Omniva Lithuania: Track and receive](https://www.omniva.lt/en/track-and-receive-parcels/) – receiving in Lithuania, courier, 25 kg
-- [Omniva: How to track your parcel?](https://www.omniva.ee/help/how-to-track-your-parcel-ee) – tracking code by SMS or email, summary and details, parcels from abroad
-- [Omniva: Parcel delivery timeframes](https://www.omniva.ee/help/omniva-parcel-delivery-timeframes-ee) – delivery times, courier next day
-- [Omniva Latvia: Omniva sūtījumu piegādes termiņi](https://www.omniva.lv/palidziba/omniva-sutijumu-piegades-termini) – courier within 3 days (Latvian)
-- [Omniva Lithuania: OMNIVA siuntų pristatymo terminai](https://www.omniva.lt/pagalba/omniva-siuntu-pristatymo-terminai-lt) – courier next working day (Lithuanian)
-- [Omniva: How long items are stored by Omniva?](https://www.omniva.ee/help/how-long-items-are-stored-by-omniva-ee) – storage in each country, returns
-- [Omniva Latvia: Cik ilgi Omniva uzglabā sūtījumus?](https://www.omniva.lv/palidziba/cik-ilgi-omniva-uzglaba-sutijumus) – reminder in Latvia (Latvian)
-- [Omniva: Extend parcel storage time](https://www.omniva.ee/help/extend-parcel-storage-time-ee) – up to 4 days at a time, 12 extra days at most
-- [Omniva: Will I get notified about a delivery?](https://www.omniva.ee/help/will-i-get-notified-about-a-delivery-ee) – notices, courier calls
-- [Omniva: Issue with the delivery SMS or email notification](https://www.omniva.ee/help/i-have-an-issue-with-the-delivery-smsemail-notification) – app notification settings
-- [Omniva: When courier parcels are delivered?](https://www.omniva.ee/help/when-courier-parcels-are-delivered-ee) – courier hours
-- [Omniva: Will the courier deliver parcels to my door?](https://www.omniva.ee/help/will-the-courier-deliver-parcels-to-my-door-ee) – weight limits
-- [Omniva: Not at the address when the courier delivers](https://www.omniva.ee/help/what-happens-if-im-not-at-the-delivery-address-when-the-courier-delivers-the-parcel-ee) – missed courier options
-- [Omniva: Can someone else pick up my parcel?](https://www.omniva.ee/help/can-someone-else-pick-up-my-parcel-ee) – collection by another person
-- [Omniva: Do I need to show ID?](https://www.omniva.ee/help/do-i-need-to-show-id-when-receiving-items-via-omniva-ee) – ID rules
-- [Omniva: Redirect a parcel or letter](https://www.omniva.ee/help/redirect-a-parcel-or-letter-ee) – redirection rules and fees
-- [Omniva: My parcel hasn't been delivered](https://www.omniva.ee/help/my-parcel-hasn%E2%80%99t-been-delivered-ee) – who acts when a parcel is late
-- [Omniva: My parcel is damaged](https://www.omniva.ee/help/my-parcel-is-damaged-ee) – damage form, 6 months
-- [Omniva Latvia: Sūtījumu pakalpojumu standarta noteikumi privātajiem klientiem](https://www.omniva.lv/wp-content/uploads/sites/6/2026/06/LV_Omniva-Standard-Terms-and-Conditions-of-Parcel-Services-for-Private-Customers_2026_07_22.pdf) – sender or recipient complains within 6 months (Latvian)
-- [Omniva: The parcel machine locker is empty](https://www.omniva.ee/help/the-parcel-machine-locker-is-empty-or-a-shipment-is-missing) – contact support
-- [Omniva: How to return a parcel?](https://www.omniva.ee/help/manage-shipments-general/return-a-parcel-containing-items-purchased-in-estonia-latvia-or-lithuania-ee) – example code CEXXXXXXXXEE, return code
-- [Omniva Estonia: Customs: receiving](https://www.omniva.ee/en/customs-receiving/) – declaring within 30 days
-- [Omniva: Which shipments require a customs declaration](https://www.omniva.ee/help/which-shipments-require-a-customs-declaration) – all non-EU parcels since 1 July 2021
-- [Omniva Estonia: Contacts for private customers](https://www.omniva.ee/en/contacts-for-private-customers/) – phone, email, hours, forms, Eesti Post
-- [Omniva Latvia: Contacts for private customers](https://www.omniva.lv/en/contacts-for-private-customers/) – phone, email, hours
-- [Omniva Lithuania: Contacts for private customers](https://www.omniva.lt/en/contacts-for-private-customers/) – phone, email, hours, Telia tariff
-- [Omniva: How to distinguish scams from genuine parcel notifications](https://www.omniva.ee/en/frauds/) – scam signs, phone numbers, email domains
-- [Omniva Estonia: Home](https://www.omniva.ee/en/) – scam warning, e-service
-- [Omniva: Tracker interface strings](https://minu.omniva.ee/locales/common/common_en.json) – tracker languages
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [Omniva Estonia: Track and receive parcels](https://www.omniva.ee/en/track-and-receive-parcels/) – código de envio, código de porta, opções de recebimento, SMS e ligação do entregador
+- [Omniva Latvia: Track and receive](https://www.omniva.lv/en/track-and-receive-parcels/) – recebimento na Letônia, entregador, 30 kg
+- [Omniva Lithuania: Track and receive](https://www.omniva.lt/en/track-and-receive-parcels/) – recebimento na Lituânia, entregador, 25 kg
+- [Omniva: How to track your parcel?](https://www.omniva.ee/help/how-to-track-your-parcel-ee) – código de rastreamento por SMS ou e-mail, resumo e detalhes, encomendas do exterior
+- [Omniva: Parcel delivery timeframes](https://www.omniva.ee/help/omniva-parcel-delivery-timeframes-ee) – prazos de entrega, entregador no dia seguinte
+- [Omniva Latvia: Omniva sūtījumu piegādes termiņi](https://www.omniva.lv/palidziba/omniva-sutijumu-piegades-termini) – entregador em até 3 dias (em letão)
+- [Omniva Lithuania: OMNIVA siuntų pristatymo terminai](https://www.omniva.lt/pagalba/omniva-siuntu-pristatymo-terminai-lt) – entregador no próximo dia útil (em lituano)
+- [Omniva: How long items are stored by Omniva?](https://www.omniva.ee/help/how-long-items-are-stored-by-omniva-ee) – prazo de guarda em cada país, devoluções
+- [Omniva Latvia: Cik ilgi Omniva uzglabā sūtījumus?](https://www.omniva.lv/palidziba/cik-ilgi-omniva-uzglaba-sutijumus) – lembrete na Letônia (em letão)
+- [Omniva: Extend parcel storage time](https://www.omniva.ee/help/extend-parcel-storage-time-ee) – até 4 dias de cada vez, no máximo 12 dias extras
+- [Omniva: Will I get notified about a delivery?](https://www.omniva.ee/help/will-i-get-notified-about-a-delivery-ee) – avisos, ligações do entregador
+- [Omniva: Issue with the delivery SMS or email notification](https://www.omniva.ee/help/i-have-an-issue-with-the-delivery-smsemail-notification) – configurações de notificação do app
+- [Omniva: When courier parcels are delivered?](https://www.omniva.ee/help/when-courier-parcels-are-delivered-ee) – horários do entregador
+- [Omniva: Will the courier deliver parcels to my door?](https://www.omniva.ee/help/will-the-courier-deliver-parcels-to-my-door-ee) – limites de peso
+- [Omniva: Not at the address when the courier delivers](https://www.omniva.ee/help/what-happens-if-im-not-at-the-delivery-address-when-the-courier-delivers-the-parcel-ee) – opções quando a entrega em domicílio não é realizada
+- [Omniva: Can someone else pick up my parcel?](https://www.omniva.ee/help/can-someone-else-pick-up-my-parcel-ee) – retirada por outra pessoa
+- [Omniva: Do I need to show ID?](https://www.omniva.ee/help/do-i-need-to-show-id-when-receiving-items-via-omniva-ee) – regras de documento de identidade
+- [Omniva: Redirect a parcel or letter](https://www.omniva.ee/help/redirect-a-parcel-or-letter-ee) – regras e taxas de redirecionamento
+- [Omniva: My parcel hasn't been delivered](https://www.omniva.ee/help/my-parcel-hasn%E2%80%99t-been-delivered-ee) – quem age quando a encomenda atrasa
+- [Omniva: My parcel is damaged](https://www.omniva.ee/help/my-parcel-is-damaged-ee) – formulário de dano, 6 meses
+- [Omniva Latvia: Sūtījumu pakalpojumu standarta noteikumi privātajiem klientiem](https://www.omniva.lv/wp-content/uploads/sites/6/2026/06/LV_Omniva-Standard-Terms-and-Conditions-of-Parcel-Services-for-Private-Customers_2026_07_22.pdf) – remetente ou destinatário reclama em até 6 meses (em letão)
+- [Omniva: The parcel machine locker is empty](https://www.omniva.ee/help/the-parcel-machine-locker-is-empty-or-a-shipment-is-missing) – contatar o atendimento
+- [Omniva: How to return a parcel?](https://www.omniva.ee/help/manage-shipments-general/return-a-parcel-containing-items-purchased-in-estonia-latvia-or-lithuania-ee) – código de exemplo CEXXXXXXXXEE, código de devolução
+- [Omniva Estonia: Customs: receiving](https://www.omniva.ee/en/customs-receiving/) – declaração em até 30 dias
+- [Omniva: Which shipments require a customs declaration](https://www.omniva.ee/help/which-shipments-require-a-customs-declaration) – todas as encomendas de fora da UE desde 1º de julho de 2021
+- [Omniva Estonia: Contacts for private customers](https://www.omniva.ee/en/contacts-for-private-customers/) – telefone, e-mail, horários, formulários, Eesti Post
+- [Omniva Latvia: Contacts for private customers](https://www.omniva.lv/en/contacts-for-private-customers/) – telefone, e-mail, horários
+- [Omniva Lithuania: Contacts for private customers](https://www.omniva.lt/en/contacts-for-private-customers/) – telefone, e-mail, horários, tarifa da Telia
+- [Omniva: How to distinguish scams from genuine parcel notifications](https://www.omniva.ee/en/frauds/) – sinais de golpe, números de telefone, domínios de e-mail
+- [Omniva Estonia: Home](https://www.omniva.ee/en/) – alerta de golpe, e-service
+- [Omniva: Tracker interface strings](https://minu.omniva.ee/locales/common/common_en.json) – idiomas do rastreador
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê
 :::

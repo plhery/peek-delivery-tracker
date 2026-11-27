@@ -8,16 +8,16 @@ updated: 2026-11-26
 
 Omniva 是爱沙尼亚国家邮政（公司法定名称仍为 Eesti Post），也是覆盖爱沙尼亚、拉脱维亚与立陶宛三国的智能快递柜与包裹派送网络。你可以凭包裹追踪码在 minu.omniva.ee、Omniva 应用中查件，或直接将单号粘贴到上方输入框。追踪码位于商家的发货邮件，或 Omniva 发送的短信与电子邮件中。
 
-## Omniva 运单号格式与查找位置
+## Omniva 运单号是什么样的
 
-Omniva 将其称为“shipment tracking code”或“shipment code (tracking number)”。其英文退货帮助页面给出的示例为 `CEXXXXXXXXEE`。以下是常见的几种格式（数字均为示例）：
+Omniva 将其称为“shipment tracking code”或“shipment code (tracking number)”。其英文退货帮助页面给出的示例为 `CEXXXXXXXXEE`。以下是常见的几种格式（数字均为虚构）：
 
 | 单号 | 含义 |
 | --- | --- |
 | `JJEE48291736405829173` | Omniva 包裹：`JJEE` 加 17 位数字，共 21 位。 |
 | `JJEEMKP48291736405` | 另一种 Omniva 包裹单号：`JJEE` + 三位字母 + 11 位数字。 |
-| `CE482917367EE` | 两位字母 + 九位数字 + `EE`：交寄至 Omniva 的国际邮政标准单号。发往拉脱维亚和立陶宛快递柜的包裹也可能带有以 `EE` 结尾的单号。 |
-| `RR739402812CN` | 境外寄入的包裹保留寄件地邮政编码；此处以 `CN` 结尾，来自中国。 |
+| `CE482917367EE` | 两位字母 + 九位数字 + `EE`：交寄至 Omniva 的国际邮政标准单号。发往拉脱维亚和立陶宛快递柜的包裹也带有以 `EE` 结尾的单号。 |
+| `RR739402812CN` | 境外寄入的包裹保留寄出地邮政的单号；此处以 `CN` 结尾，来自中国。 |
 
 取件短信里的 6 位开门密码用于打开智能快递柜，并非运单号；6 位退货码也不是运单号。
 
@@ -42,9 +42,9 @@ Omniva 官网查询页支持英语、爱沙尼亚语、拉脱维亚语、立陶�
 | `Shipment delivered` | 已送达或已取件，并标注快递柜或邮局名称。 |
 | `Shipment is being returned to the sender` | 正在退回寄件人。 |
 
-有两条状态容易引起误解：`Delivery attempt made` 实际表示派送失败；而出现在退件之后的 `Shipment delivered` 表示包裹已退还给寄件人。
+有两条状态容易引起误解：`Delivery attempt made` 实际表示这次派送没有成功；而出现在退件之后的 `Shipment delivered` 表示包裹已退还给寄件人。
 
-## Omniva 智能快递柜、快递上门与错过派送
+## Omniva 智能快递柜、快递上门与派送未成功
 
 **到件通知。** Omniva 通过短信、邮件或应用通知提醒你。在 Omniva 应用中，短信通知默认关闭，可在 Profile → Notification preferences 中开启。
 
@@ -54,9 +54,9 @@ Omniva 官网查询页支持英语、爱沙尼亚语、拉脱维亚语、立陶�
 
 **送货上门。** 你会收到写明派送日期的短信，快递员到达前会致电联系（拉脱维亚和立陶宛会提前约好日期与时段）。上门派送限重：爱沙尼亚和拉脱维亚为 30 公斤，立陶宛为 25 公斤。若时间不方便，可请快递员改期或改投附近快递柜。
 
-**错过上门派送。** L 号及以下尺寸包裹会转投附近快递柜保管 4 天。在爱沙尼亚，XL 号以内包裹可能改存邮局 7 天，XXL 包裹存派送中心 7 天；在拉脱维亚，大件存派送中心 4 天；在立陶宛，大件直接退回寄件人。
+**上门派送未成功。** L 号及以下尺寸包裹会转投附近快递柜保管 4 天。在爱沙尼亚，XL 号以内包裹可能改存邮局 7 天，XXL 包裹存派送中心 7 天；在拉脱维亚，大件存派送中心 4 天；在立陶宛，大件直接退回寄件人。
 
-**改派。** 包裹抵达分拣中心前，通过 Omniva 邮件链接或 e-service 改派免费；到达分拣中心后改派，或改投上门派送，需支付费用。若原快递柜已满，包裹也可能被自动改投他处。
+**改派。** 包裹抵达分拣中心前，通过 Omniva 邮件链接或 e-service 改派免费；到达分拣中心后改派，或改投上门派送，需支付费用。包裹也可能因快递柜已满而被改投他处。
 
 ## Omniva 包裹延误、破损或滞留海关
 
@@ -86,11 +86,11 @@ Omniva 官网查询页支持英语、爱沙尼亚语、拉脱维亚语、立陶�
 
 [Peek](/) 会直接将上述两种 `JJEE` 单号识别为 Omniva。粘贴 `minu.omniva.ee`、`mana.omniva.lv`、`mano.omniva.lt` 的 `/track/` 链接，以及 `omniva.ee` 或 `omniva.lt` 带 `barcode=` 的链接，无论单号格式如何均直接生效，且无需填写邮编。
 
-以 `C`、`R`、`E` 或 `L` 开头（不含 `CR`、`CV`、`RO`）、以 `EE` 结尾且校验位有效的国际邮政单号会直接识别为 Omniva。以其他字母开头的 `EE` 单号会由 Peek 同时向 Omniva 和 Chronopost 查询，归属查有记录的一方；若暂均无记录，页面会提示“……暂未找到。添加后 Peek 会继续查询。”并按递减频率持续跟进。已归属 Omniva 但官网尚未录入的包裹会显示“等待 Omniva 更新”；如果两天后 Omniva 仍无记录且无其他来源回应，Peek 会提示检查单号、更换快递公司或删除包裹，之后改为每天检查一次，添加满一周后每周一次。校验位错误的单号不会匹配任何快递，即便手动选择 Omniva 也会被拒：请检查是否输错。境外邮政单号可通过“更换”或 Omniva 链接切换至 Omniva 查询；当寄出地邮政注明发往爱沙尼亚（或未标明目的地且你在爱沙尼亚）时，Peek 会同步询问 Omniva 并在 Omniva 出现不早于寄出地最新扫描的记录后转入 Omniva 跟进（发往拉脱维亚或立陶宛则相应询问 Latvijas Pasts 或 Lietuvos paštas）。Omniva 寄往境外的 `EE` 邮政单号同理可接续至目的地邮政。
+以 `C`、`R`、`E` 或 `L` 开头（不含 `CR`、`CV`、`RO`）、以 `EE` 结尾且校验位有效的国际邮政单号会直接识别为 Omniva。以其他字母开头的 `EE` 单号会由 Peek 同时向 Omniva 和 Chronopost 查询，归属查有记录的一方；若暂均无记录，页面会提示“……暂未找到。添加后 Peek 会继续查询。”并按递减频率持续跟进。已归属 Omniva 但 Omniva 尚未录入的包裹会显示“等待 Omniva 更新”；如果两天后 Omniva 仍无记录且无其他来源回应，Peek 会提示检查单号、更换快递公司或删除包裹，之后改为每天检查一次，添加满一周后每周一次。校验位错误的单号不会匹配任何快递，即便手动选择 Omniva 也会被拒：请检查是否输错。境外邮政单号可通过“更换”或 Omniva 链接切换至 Omniva 查询；当寄出地邮政注明发往爱沙尼亚（或未标明目的地且你在爱沙尼亚）时，Peek 会同步询问 Omniva 并在 Omniva 出现不早于寄出地最新扫描的记录后转入 Omniva 跟进（发往拉脱维亚或立陶宛则相应询问 Latvijas Pasts 或 Lietuvos paštas）。Omniva 寄往境外的 `EE` 邮政单号同理可接续至目的地邮政。
 
-Peek 展示 Omniva 英文状态、在地图上标注每次扫描的 Omniva 站点、目的地国家、签收时间以及包裹存放的快递柜或邮局；具体地址、邮编与失败原因会被过滤，且不显示预计送达日或重量。当你正在 Peek 中查看该包裹，或派送当天已开启通知且 Omniva 官网查询正常响应时，Peek 最快每 10 分钟检查一次，并在 Omniva 扫描出派送中当天从爱沙尼亚时间早上 6 点起每 2 分钟检查一次；其余情况下每小时一次。连续两天无新动态（或在“已生成面单”/“已揽收”停留满 12 小时）后改为每小时一次；在“已生成面单”停留满 7 天后每 6 小时一次。若包裹停留在“已生成面单”、“已揽收”或“运输中”满 4 天无新记录，Peek 会显示“自……起没有物流更新”、提示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 Omniva 查询。”并提供“向 Omniva 寻求帮助”链接；满三周后提示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 Omniva 查询。”支持选择“每次扫描”、“重要环节”或“仅派送当天”提醒。历史较久的包裹可能只保留签收记录。
+Peek 展示 Omniva 英文状态、在地图上标注每次扫描的 Omniva 站点、目的地国家、签收时间以及包裹存放的快递柜或邮局；具体地址、邮编与失败原因会被过滤，且不显示预计送达日或重量。当你正在 Peek 中查看该包裹，或派送当天已开启通知时，Peek 最多每 10 分钟查询一次 Omniva；在 Omniva 扫描包裹开始派送的当天，只要 Omniva 自己的查件系统正常响应，自爱沙尼亚时间早上 6 点起每 2 分钟查询一次；其余时候每小时查询一次。连续两天无新动态（或在“已生成面单”/“已揽收”停留满 12 小时）后改为每小时一次；在“已生成面单”停留满 7 天后每 6 小时一次。若包裹停留在“已生成面单”、“已揽收”或“运输中”满 4 天无新记录，Peek 会显示“自……起没有物流更新”、提示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 Omniva 查询。”并提供“向 Omniva 寻求帮助”链接；满三周后提示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 Omniva 查询。”Peek 可以按“每次扫描”、“重要环节”或“仅派送当天”通知你。历史较久的包裹可能只保留签收记录。
 
-## Omniva 物流查询常见问题
+## 关于 Omniva 物流查询的问题
 
 ### Omniva 派送需要多长时间？
 
@@ -98,47 +98,47 @@ Peek 展示 Omniva 英文状态、在地图上标注每次扫描的 Omniva 站�
 
 ### 可以用手机号查询 Omniva 包裹吗？
 
-Omniva 页面仅支持凭运单号追踪。在 `minu.omniva.ee` 注册 Omniva e-service 账号后，可以在同一处自动查看寄给你的未来包裹。
+Omniva 的页面只介绍了凭运单号查件。在 `minu.omniva.ee` 注册 Omniva e-service 账号后，可以在同一处查看寄给你的未来包裹。
 
 ### Omniva 显示 “Delivery attempt made” 是什么意思？
 
-表示快递员尝试上门派送但未能成功——虽然字面看似完成了一次操作，但实际上派送失败。
+表示快递员尝试上门派送但未能成功——虽然字面看似完成了一次操作，但实际上派送没有成功。
 
 ### 能用 Omniva 查询从国外寄往爱沙尼亚的国际包裹吗？
 
 可以，前提是寄出地国家已将数据上传至国际邮政数据库；在包裹进入爱沙尼亚前，请先在寄出地邮政官网查询。
 
 :::sources
-- [Omniva Estonia: Track and receive parcels](https://www.omniva.ee/en/track-and-receive-parcels/) – shipment code, door code, receiving options, courier SMS and call
-- [Omniva Latvia: Track and receive](https://www.omniva.lv/en/track-and-receive-parcels/) – receiving in Latvia, courier, 30 kg
-- [Omniva Lithuania: Track and receive](https://www.omniva.lt/en/track-and-receive-parcels/) – receiving in Lithuania, courier, 25 kg
-- [Omniva: How to track your parcel?](https://www.omniva.ee/help/how-to-track-your-parcel-ee) – tracking code by SMS or email, summary and details, parcels from abroad
-- [Omniva: Parcel delivery timeframes](https://www.omniva.ee/help/omniva-parcel-delivery-timeframes-ee) – delivery times, courier next day
-- [Omniva Latvia: Omniva sūtījumu piegādes termiņi](https://www.omniva.lv/palidziba/omniva-sutijumu-piegades-termini) – courier within 3 days (Latvian)
-- [Omniva Lithuania: OMNIVA siuntų pristatymo terminai](https://www.omniva.lt/pagalba/omniva-siuntu-pristatymo-terminai-lt) – courier next working day (Lithuanian)
-- [Omniva: How long items are stored by Omniva?](https://www.omniva.ee/help/how-long-items-are-stored-by-omniva-ee) – storage in each country, returns
-- [Omniva Latvia: Cik ilgi Omniva uzglabā sūtījumus?](https://www.omniva.lv/palidziba/cik-ilgi-omniva-uzglaba-sutijumus) – reminder in Latvia (Latvian)
-- [Omniva: Extend parcel storage time](https://www.omniva.ee/help/extend-parcel-storage-time-ee) – up to 4 days at a time, 12 extra days at most
-- [Omniva: Will I get notified about a delivery?](https://www.omniva.ee/help/will-i-get-notified-about-a-delivery-ee) – notices, courier calls
-- [Omniva: Issue with the delivery SMS or email notification](https://www.omniva.ee/help/i-have-an-issue-with-the-delivery-smsemail-notification) – app notification settings
-- [Omniva: When courier parcels are delivered?](https://www.omniva.ee/help/when-courier-parcels-are-delivered-ee) – courier hours
-- [Omniva: Will the courier deliver parcels to my door?](https://www.omniva.ee/help/will-the-courier-deliver-parcels-to-my-door-ee) – weight limits
-- [Omniva: Not at the address when the courier delivers](https://www.omniva.ee/help/what-happens-if-im-not-at-the-delivery-address-when-the-courier-delivers-the-parcel-ee) – missed courier options
-- [Omniva: Can someone else pick up my parcel?](https://www.omniva.ee/help/can-someone-else-pick-up-my-parcel-ee) – collection by another person
-- [Omniva: Do I need to show ID?](https://www.omniva.ee/help/do-i-need-to-show-id-when-receiving-items-via-omniva-ee) – ID rules
-- [Omniva: Redirect a parcel or letter](https://www.omniva.ee/help/redirect-a-parcel-or-letter-ee) – redirection rules and fees
-- [Omniva: My parcel hasn't been delivered](https://www.omniva.ee/help/my-parcel-hasn%E2%80%99t-been-delivered-ee) – who acts when a parcel is late
-- [Omniva: My parcel is damaged](https://www.omniva.ee/help/my-parcel-is-damaged-ee) – damage form, 6 months
-- [Omniva Latvia: Sūtījumu pakalpojumu standarta noteikumi privātajiem klientiem](https://www.omniva.lv/wp-content/uploads/sites/6/2026/06/LV_Omniva-Standard-Terms-and-Conditions-of-Parcel-Services-for-Private-Customers_2026_07_22.pdf) – sender or recipient complains within 6 months (Latvian)
-- [Omniva: The parcel machine locker is empty](https://www.omniva.ee/help/the-parcel-machine-locker-is-empty-or-a-shipment-is-missing) – contact support
-- [Omniva: How to return a parcel?](https://www.omniva.ee/help/manage-shipments-general/return-a-parcel-containing-items-purchased-in-estonia-latvia-or-lithuania-ee) – example code CEXXXXXXXXEE, return code
-- [Omniva Estonia: Customs: receiving](https://www.omniva.ee/en/customs-receiving/) – declaring within 30 days
-- [Omniva: Which shipments require a customs declaration](https://www.omniva.ee/help/which-shipments-require-a-customs-declaration) – all non-EU parcels since 1 July 2021
-- [Omniva Estonia: Contacts for private customers](https://www.omniva.ee/en/contacts-for-private-customers/) – phone, email, hours, forms, Eesti Post
-- [Omniva Latvia: Contacts for private customers](https://www.omniva.lv/en/contacts-for-private-customers/) – phone, email, hours
-- [Omniva Lithuania: Contacts for private customers](https://www.omniva.lt/en/contacts-for-private-customers/) – phone, email, hours, Telia tariff
-- [Omniva: How to distinguish scams from genuine parcel notifications](https://www.omniva.ee/en/frauds/) – scam signs, phone numbers, email domains
-- [Omniva Estonia: Home](https://www.omniva.ee/en/) – scam warning, e-service
-- [Omniva: Tracker interface strings](https://minu.omniva.ee/locales/common/common_en.json) – tracker languages
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [Omniva Estonia: Track and receive parcels](https://www.omniva.ee/en/track-and-receive-parcels/) – 包裹追踪码、开门码、收件方式、快递员短信与来电
+- [Omniva Latvia: Track and receive](https://www.omniva.lv/en/track-and-receive-parcels/) – 拉脱维亚的收件、快递上门、30 公斤
+- [Omniva Lithuania: Track and receive](https://www.omniva.lt/en/track-and-receive-parcels/) – 立陶宛的收件、快递上门、25 公斤
+- [Omniva: How to track your parcel?](https://www.omniva.ee/help/how-to-track-your-parcel-ee) – 短信或邮件中的追踪码、概览与详情、境外包裹
+- [Omniva: Parcel delivery timeframes](https://www.omniva.ee/help/omniva-parcel-delivery-timeframes-ee) – 派送时效、快递次日送达
+- [Omniva Latvia: Omniva sūtījumu piegādes termiņi](https://www.omniva.lv/palidziba/omniva-sutijumu-piegades-termini) – 快递 3 天内送达（拉脱维亚语）
+- [Omniva Lithuania: OMNIVA siuntų pristatymo terminai](https://www.omniva.lt/pagalba/omniva-siuntu-pristatymo-terminai-lt) – 快递次个工作日送达（立陶宛语）
+- [Omniva: How long items are stored by Omniva?](https://www.omniva.ee/help/how-long-items-are-stored-by-omniva-ee) – 各国的保管期、退回
+- [Omniva Latvia: Cik ilgi Omniva uzglabā sūtījumus?](https://www.omniva.lv/palidziba/cik-ilgi-omniva-uzglaba-sutijumus) – 拉脱维亚的到期提醒（拉脱维亚语）
+- [Omniva: Extend parcel storage time](https://www.omniva.ee/help/extend-parcel-storage-time-ee) – 每次最多延 4 天、累计最多 12 天
+- [Omniva: Will I get notified about a delivery?](https://www.omniva.ee/help/will-i-get-notified-about-a-delivery-ee) – 到件通知、快递员来电
+- [Omniva: Issue with the delivery SMS or email notification](https://www.omniva.ee/help/i-have-an-issue-with-the-delivery-smsemail-notification) – 应用的通知设置
+- [Omniva: When courier parcels are delivered?](https://www.omniva.ee/help/when-courier-parcels-are-delivered-ee) – 快递派送时间
+- [Omniva: Will the courier deliver parcels to my door?](https://www.omniva.ee/help/will-the-courier-deliver-parcels-to-my-door-ee) – 重量限制
+- [Omniva: Not at the address when the courier delivers](https://www.omniva.ee/help/what-happens-if-im-not-at-the-delivery-address-when-the-courier-delivers-the-parcel-ee) – 上门派送未成功时的选项
+- [Omniva: Can someone else pick up my parcel?](https://www.omniva.ee/help/can-someone-else-pick-up-my-parcel-ee) – 他人代取
+- [Omniva: Do I need to show ID?](https://www.omniva.ee/help/do-i-need-to-show-id-when-receiving-items-via-omniva-ee) – 身份证件规定
+- [Omniva: Redirect a parcel or letter](https://www.omniva.ee/help/redirect-a-parcel-or-letter-ee) – 改派规则与费用
+- [Omniva: My parcel hasn't been delivered](https://www.omniva.ee/help/my-parcel-hasn%E2%80%99t-been-delivered-ee) – 包裹延误时由谁处理
+- [Omniva: My parcel is damaged](https://www.omniva.ee/help/my-parcel-is-damaged-ee) – 破损表单、6 个月
+- [Omniva Latvia: Sūtījumu pakalpojumu standarta noteikumi privātajiem klientiem](https://www.omniva.lv/wp-content/uploads/sites/6/2026/06/LV_Omniva-Standard-Terms-and-Conditions-of-Parcel-Services-for-Private-Customers_2026_07_22.pdf) – 寄件人或收件人在 6 个月内投诉（拉脱维亚语）
+- [Omniva: The parcel machine locker is empty](https://www.omniva.ee/help/the-parcel-machine-locker-is-empty-or-a-shipment-is-missing) – 联系客服
+- [Omniva: How to return a parcel?](https://www.omniva.ee/help/manage-shipments-general/return-a-parcel-containing-items-purchased-in-estonia-latvia-or-lithuania-ee) – 示例单号 CEXXXXXXXXEE、退货码
+- [Omniva Estonia: Customs: receiving](https://www.omniva.ee/en/customs-receiving/) – 30 天内申报
+- [Omniva: Which shipments require a customs declaration](https://www.omniva.ee/help/which-shipments-require-a-customs-declaration) – 自 2021 年 7 月 1 日起所有欧盟境外包裹
+- [Omniva Estonia: Contacts for private customers](https://www.omniva.ee/en/contacts-for-private-customers/) – 电话、邮箱、服务时间、表单、Eesti Post
+- [Omniva Latvia: Contacts for private customers](https://www.omniva.lv/en/contacts-for-private-customers/) – 电话、邮箱、服务时间
+- [Omniva Lithuania: Contacts for private customers](https://www.omniva.lt/en/contacts-for-private-customers/) – 电话、邮箱、服务时间、Telia 资费
+- [Omniva: How to distinguish scams from genuine parcel notifications](https://www.omniva.ee/en/frauds/) – 诈骗迹象、电话号码、邮件域名
+- [Omniva Estonia: Home](https://www.omniva.ee/en/) – 诈骗提醒、e-service
+- [Omniva: Tracker interface strings](https://minu.omniva.ee/locales/common/common_en.json) – 查件页面的语言
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取的内容
 :::

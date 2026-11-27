@@ -22,7 +22,7 @@ Quando o volume chega a um locker, a Lietuvos paštas envia SMS e/ou e-mail com 
 
 Mensagens legítimas usam o remetente `LPASTAS` ou `LP_EXPRESS`, nunca de um número de telefone.
 
-Outras letras finais indicam outro correio: `…LV` é da Latvijas Pasts (Letônia) e `…EE` é da Omniva (Estônia). Um pacote vindo do exterior mantém o código do país de origem. A Venipak, outra transportadora na Lituânia, usa formato diferente (`V48291E7365428`). Perdeu o número? Veja [como encontrar seu código de rastreamento](guide:find-tracking-number).
+Outras letras finais indicam outro correio: `…LV` é da Latvijas Pasts (Letônia) e `…EE` é da [Omniva](carrier:omniva) (Estônia). Um pacote vindo do exterior mantém o código do país de origem. A Venipak, outra transportadora na Lituânia, usa formato diferente (`V48291E7365428`). Perdeu o número? Veja [como encontrar seu código de rastreamento](guide:find-tracking-number).
 
 ## O que significam os status da Lietuvos paštas
 

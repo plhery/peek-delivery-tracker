@@ -21,7 +21,7 @@ A Posti chama o código de "item ID" (às vezes "shipment ID"). Nas encomendas p
 
 Se o remetente informou seu telefone à Posti, o pacote aparece sozinho no OmaPosti; caso contrário, adicione manualmente. O rastreador da Posti só responde ao código exato, nunca por nome ou endereço.
 
-O código de retirada e o código de abertura do armário (6 ou 9 caracteres) não são códigos de rastreamento. Um número iniciado em `JJEE` pertence à Omniva, correios da Estônia, e um terminado em `SE` à PostNord na Suécia. Em dúvida sobre a transportadora? Veja [formatos de código de rastreamento](guide:tracking-number-formats).
+O código de retirada e o código de abertura do armário (6 ou 9 caracteres) não são códigos de rastreamento. Um número iniciado em `JJEE` pertence à [Omniva](carrier:omniva), correios da Estônia, e um terminado em `SE` à PostNord na Suécia. Em dúvida sobre a transportadora? Veja [formatos de código de rastreamento](guide:tracking-number-formats).
 
 ## Status de rastreamento da Posti em inglês
 

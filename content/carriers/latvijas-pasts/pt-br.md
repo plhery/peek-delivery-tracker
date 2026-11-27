@@ -23,7 +23,7 @@ Envios Simple ou Economy não são registrados em nenhuma etapa, portanto não t
 
 Onde procurar: o SMS do entregador traz o número do envio, o horário previsto de chegada e um link para redirecionar o pacote. O SMS do armário informa o endereço, o prazo final de retirada e o código de abertura.
 
-Outras letras finais indicam outros correios: `…LT` é [Lietuvos paštas](carrier:lietuvos-pastas) e `…EE` é Omniva. Objetos vindos do exterior mantêm o código estrangeiro, e mans.pasts.lv/track também os aceita assim que a Latvijas Pasts recebe o envio; etapas no exterior mostram o país em vez de uma agência letã.
+Outras letras finais indicam outros correios: `…LT` é [Lietuvos paštas](carrier:lietuvos-pastas) e `…EE` é [Omniva](carrier:omniva). Objetos vindos do exterior mantêm o código estrangeiro, e mans.pasts.lv/track também os aceita assim que a Latvijas Pasts recebe o envio; etapas no exterior mostram o país em vez de uma agência letã.
 
 ## O que significam os status da Latvijas Pasts
 

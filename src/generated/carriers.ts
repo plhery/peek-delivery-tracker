@@ -15470,6 +15470,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e4a50e"
     },
     {
+      "id": "post-luxembourg",
+      "catalog": "post-luxembourg",
+      "slug": "post-luxembourg-tracking",
+      "title": "Rastreamento POST Luxembourg: códigos LU, status e PackUp",
+      "name": "POST Luxembourg",
+      "color": "#008736"
+    },
+    {
       "id": "maltapost",
       "catalog": "maltapost",
       "slug": "maltapost-tracking",
@@ -16236,6 +16244,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento PIN AG: cartas registradas, pacotes e retirada",
       "name": "PIN AG",
       "color": "#003366"
+    },
+    {
+      "id": "pitney-bowes",
+      "catalog": "pitney-bowes",
+      "slug": "pitney-bowes-tracking",
+      "title": "Rastreamento Pitney Bowes: códigos UPAA, UPBE e PBX",
+      "name": "Pitney Bowes",
+      "color": "#3e53a4"
     },
     {
       "id": "rl-carriers",
@@ -20292,6 +20308,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e4a50e"
     },
     {
+      "id": "post-luxembourg",
+      "catalog": "post-luxembourg",
+      "slug": "post-luxembourg-tracking",
+      "title": "卢森堡邮政（POST Luxembourg）查询：LU 单号与状态",
+      "name": "POST Luxembourg",
+      "color": "#008736"
+    },
+    {
       "id": "maltapost",
       "catalog": "maltapost",
       "slug": "maltapost-tracking",
@@ -21074,6 +21098,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "PIN AG 德国邮政追踪：挂号信、包裹与网点自提指南",
       "name": "PIN AG",
       "color": "#003366"
+    },
+    {
+      "id": "pitney-bowes",
+      "catalog": "pitney-bowes",
+      "slug": "pitney-bowes-tracking",
+      "title": "Pitney Bowes 物流查询：UPAA、UPBE 与 PBX 单号详解",
+      "name": "Pitney Bowes",
+      "color": "#3e53a4"
     },
     {
       "id": "rl-carriers",

@@ -2213,6 +2213,17 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let hotwms = CarrierID(rawValue: "hotwms")
     static let yjsChina = CarrierID(rawValue: "yjs-china")
     static let glsRo = CarrierID(rawValue: "gls-ro")
+    static let infotecServizi = CarrierID(rawValue: "infotec-servizi")
+    static let laNuovaPosta = CarrierID(rawValue: "la-nuova-posta")
+    static let mailExpressIt = CarrierID(rawValue: "mail-express-it")
+    static let mailRunner = CarrierID(rawValue: "mail-runner")
+    static let postAndPost = CarrierID(rawValue: "post-and-post")
+    static let postaExpress = CarrierID(rawValue: "posta-express")
+    static let postaNetwork = CarrierID(rawValue: "posta-network")
+    static let sicilposte = CarrierID(rawValue: "sicilposte")
+    static let smartpostGenova = CarrierID(rawValue: "smartpost-genova")
+    static let spikeExpress = CarrierID(rawValue: "spike-express")
+    static let zerodistanze = CarrierID(rawValue: "zerodistanze")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -4359,6 +4370,17 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .hotwms,
         .yjsChina,
         .glsRo,
+        .infotecServizi,
+        .laNuovaPosta,
+        .mailExpressIt,
+        .mailRunner,
+        .postAndPost,
+        .postaExpress,
+        .postaNetwork,
+        .sicilposte,
+        .smartpostGenova,
+        .spikeExpress,
+        .zerodistanze,
     ]
 
     init(from decoder: Decoder) throws {

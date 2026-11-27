@@ -2210,6 +2210,17 @@ value class CarrierId(val rawValue: String) {
         val Hotwms = CarrierId("hotwms")
         val YjsChina = CarrierId("yjs-china")
         val GlsRo = CarrierId("gls-ro")
+        val InfotecServizi = CarrierId("infotec-servizi")
+        val LaNuovaPosta = CarrierId("la-nuova-posta")
+        val MailExpressIt = CarrierId("mail-express-it")
+        val MailRunner = CarrierId("mail-runner")
+        val PostAndPost = CarrierId("post-and-post")
+        val PostaExpress = CarrierId("posta-express")
+        val PostaNetwork = CarrierId("posta-network")
+        val Sicilposte = CarrierId("sicilposte")
+        val SmartpostGenova = CarrierId("smartpost-genova")
+        val SpikeExpress = CarrierId("spike-express")
+        val Zerodistanze = CarrierId("zerodistanze")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -4356,6 +4367,17 @@ value class CarrierId(val rawValue: String) {
             Hotwms,
             YjsChina,
             GlsRo,
+            InfotecServizi,
+            LaNuovaPosta,
+            MailExpressIt,
+            MailRunner,
+            PostAndPost,
+            PostaExpress,
+            PostaNetwork,
+            Sicilposte,
+            SmartpostGenova,
+            SpikeExpress,
+            Zerodistanze,
         )
     }
 }

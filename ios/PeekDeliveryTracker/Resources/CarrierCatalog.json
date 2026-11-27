@@ -547,6 +547,7 @@
         "Mailing Technology",
         "PostNL - Netherlands Post",
         "Spring Global Mail",
+        "G3 Worldwide Mail",
         "PostNL International Mail",
         "NL Post",
         "Spring Global Delivery Solutions"
@@ -3242,7 +3243,8 @@
         "Crono",
         "SDA",
         "SDA Express Courier",
-        "Nexive"
+        "Nexive",
+        "Nexive Network"
       ],
       "countries": [
         "IT"
@@ -72281,6 +72283,232 @@
       "detectionRules": [],
       "trackingSearchUrl": "https://gls-group.com/RO/ro/urmarire-colet/",
       "helpUrl": "https://gls-group.com/RO/ro/gls-contact/"
+    },
+    "infotec-servizi": {
+      "displayName": "Infotec Servizi",
+      "countries": [
+        "IT"
+      ],
+      "color": "#d03068",
+      "selectable": true,
+      "timezone": "Europe/Rome",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.infotecservizi.it/tracking/"
+    },
+    "la-nuova-posta": {
+      "displayName": "La Nuova Posta",
+      "aliases": [
+        "Gruppo La Nuova Posta"
+      ],
+      "countries": [
+        "IT"
+      ],
+      "color": "#23147d",
+      "selectable": true,
+      "timezone": "Europe/Rome",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.nuovaposta.com/tracking/{trackingNumber}/",
+      "linkRules": [
+        {
+          "domains": [
+            "www.nuovaposta.com",
+            "nuovaposta.com"
+          ],
+          "path": "^/tracking/([^/?#]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.nuovaposta.com/tracking/"
+    },
+    "mail-express-it": {
+      "displayName": "Mail Express",
+      "aliases": [
+        "Mail Express Poste Private",
+        "Mail Express Group"
+      ],
+      "countries": [
+        "IT"
+      ],
+      "color": "#00549c",
+      "selectable": true,
+      "timezone": "Europe/Rome",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://areaclienti-mailexpress.it/servizi_generici.aspx?a=tracingm"
+    },
+    "mail-runner": {
+      "displayName": "Mail Runner",
+      "countries": [
+        "IT"
+      ],
+      "color": "#e4326e",
+      "selectable": true,
+      "timezone": "Europe/Rome",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.mailrunner.it/"
+    },
+    "post-and-post": {
+      "displayName": "Post & Post",
+      "countries": [
+        "IT"
+      ],
+      "color": "#3c129c",
+      "selectable": true,
+      "timezone": "Europe/Rome",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://postandpost.it/tracking/"
+    },
+    "posta-express": {
+      "displayName": "POSTA express",
+      "countries": [
+        "IT"
+      ],
+      "color": "#fc7824",
+      "selectable": true,
+      "timezone": "Europe/Rome",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.postaexpress.it/trackingonline.asp"
+    },
+    "posta-network": {
+      "displayName": "Posta Network",
+      "aliases": [
+        "OK Poste Private"
+      ],
+      "countries": [
+        "IT"
+      ],
+      "color": "#183c90",
+      "selectable": true,
+      "timezone": "Europe/Rome",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.postanetwork.it/"
+    },
+    "sicilposte": {
+      "displayName": "Sicilposte",
+      "countries": [
+        "IT"
+      ],
+      "color": "#0048a8",
+      "selectable": true,
+      "timezone": "Europe/Rome",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.sicilposte.it/index.php?pagina=ricerca&tracking={trackingNumber}&submit_track=Cerca",
+      "linkRules": [
+        {
+          "domains": [
+            "www.sicilposte.it",
+            "sicilposte.it"
+          ],
+          "pathPattern": "^/(index\\.php)?$",
+          "params": [
+            "tracking"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.sicilposte.it/index.php?pagina=ricerca"
+    },
+    "smartpost-genova": {
+      "displayName": "Smartpost Genova",
+      "countries": [
+        "IT"
+      ],
+      "color": "#24609c",
+      "selectable": true,
+      "timezone": "Europe/Rome",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://clienti.postofficemanager.it/Tracking/tracking.php?domain=smartpostgenova",
+      "helpUrl": "https://www.smartpost.it/tracciatura/"
+    },
+    "spike-express": {
+      "displayName": "Spike",
+      "aliases": [
+        "Post & Service"
+      ],
+      "countries": [
+        "IT"
+      ],
+      "color": "#ff0762",
+      "selectable": true,
+      "timezone": "Europe/Rome",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.spike.express/tracking"
+    },
+    "zerodistanze": {
+      "displayName": "Zerodistanze",
+      "aliases": [
+        "Zerodistanze S.r.l."
+      ],
+      "countries": [
+        "IT"
+      ],
+      "color": "#002466",
+      "selectable": true,
+      "timezone": "Europe/Rome",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.zerodistanze.it/Home/Track?Barcode={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.zerodistanze.it",
+            "zerodistanze.it"
+          ],
+          "pathPattern": "^/Home/Track/?$",
+          "params": [
+            "Barcode"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.zerodistanze.it/"
     }
   }
 }

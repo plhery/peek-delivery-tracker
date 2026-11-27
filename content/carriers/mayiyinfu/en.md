@@ -1,12 +1,12 @@
 ---
 title: Mayi Yinfu tracking: MY numbers, flight lines and DHL
-description: Track a Mayi Yinfu (蚂蚁银服) parcel from China: what its MY…US numbers look like, what its flight lines mean and how DHL takes over in Europe.
+description: Track a Mayi Yinfu (蚂蚁银服) parcel from China: MY…US and MYYF…CN numbers, Chinese flight statuses in English, scripted forecasts, DHL handover and contacts.
 slug: mayi-yinfu-tracking
 published: 2026-10-28
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Mayi Yinfu (蚂蚁银服) is the short name of 广东蚂蚁银服国际物流有限公司, a forwarder in Guangdong, mainland China, that ships express and small parcels abroad. Its tracking numbers are MY, ten digits and US, and its tracker also knows numbers made of MYYF, eight digits and CN: paste yours in the box above, or type it in the 快递查询 (parcel lookup) box on mayiyinfu.com.cn, which opens Mayi Yinfu's tracker. Mayi Yinfu flies parcels to your region and hands them to a company that delivers there: into Europe, Deutsche Post DHL.
+Mayi Yinfu (蚂蚁银服) is the short name of 广东蚂蚁银服国际物流有限公司, a forwarder in Guangdong, mainland China, that flies express and small parcels abroad and hands them to a local courier — Deutsche Post DHL into Europe. Paste your `MY…US` (14 characters) or `MYYF…CN` tracking number in the box above, or enter it in the `快递查询` (parcel lookup) box on `mayiyinfu.com.cn`, to see real scans and follow the local courier once it clears customs.
 
 ## Mayi Yinfu tracking number: what it looks like
 
@@ -98,6 +98,10 @@ Mayi Yinfu publishes no delivery times. Go by the estimate the shop gave for you
 ### Who do I contact about a missing Mayi Yinfu parcel?
 
 The seller you ordered from: it booked the parcel with Mayi Yinfu, whose site gives only a mobile hotline.
+
+### Who delivers a Mayi Yinfu parcel in Europe or the US?
+
+Mayi Yinfu hands parcels to a local carrier once they clear import customs (`已转运transferred`). Into Europe, that handover uses a Deutsche Post DHL number; for other countries, check the local tracking number shown on Mayi Yinfu's tracker or ask the seller.
 
 :::sources
 - [Mayi Yinfu: 广东蚂蚁银服国际物流有限公司 (home)](http://www.mayiyinfu.com.cn/Default.aspx) – company name, the 快递查询 box and tracker, login, sign-up, price lookup, the hotline (全国服务热线 in the header, 在线咨询 box)

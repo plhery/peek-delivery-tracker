@@ -1,12 +1,12 @@
 ---
 title: POST Luxembourg tracking: numbers, statuses and contacts
-description: Track a POST Luxembourg parcel or registered item: what the LU number looks like, what the statuses mean, PackUp, notices, customs fees and who to call.
+description: Track a POST Luxembourg parcel or registered letter: LU tracking numbers, English status meanings, PackUp 24/24 lockers, customs fees, claims and 8002 8004.
 slug: post-luxembourg-tracking
 published: 2026-10-13
-updated: 2026-10-26
+updated: 2026-11-27
 ---
 
-POST Luxembourg is Luxembourg's national post, which also runs a telecom network and a bank. Track a parcel or registered item on its [Track and Trace page](https://www.post.lu/en/particuliers/colis-courrier/track-and-trace) (trackandtrace.lu leads there too), in the POST Parcel & Mail app or by pasting the number in the box above. The number comes from whoever sent the item: it's printed on the dispatch slip.
+POST Luxembourg is Luxembourg's national post, which also runs a telecom network and a bank. Track a registered item (`RR…LU`), parcel (`CP…LU`), FollowMe item (`LX…LU`) or incoming foreign postal parcel on its [Track and Trace page](https://www.post.lu/en/particuliers/colis-courrier/track-and-trace) (`trackandtrace.lu`), in the POST Parcel & Mail app, or by pasting the number in the box above. The number comes from the sender's dispatch slip.
 
 ## POST Luxembourg tracking number
 
@@ -117,6 +117,10 @@ No. Only registered mail, parcels and items with a FollowMe label have a trackin
 ### Can I track an international parcel with POST Luxembourg?
 
 Yes, if it has a tracking number. For an item you sent abroad, POST's tracking also shows steps the destination post reports, such as `Arrival at inward office of exchange`.
+
+### How long does POST Luxembourg hold a parcel at a PackUp station or post office?
+
+POST keeps parcels and registered letters for 15 days at a sales outlet or PackUp Point (seven days for legal documents), and seven days in a PackUp 24/24 parcel station.
 
 :::sources
 - [POST Luxembourg: Track and Trace](https://www.post.lu/en/particuliers/colis-courrier/track-and-trace) – tracking page

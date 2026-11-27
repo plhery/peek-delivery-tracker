@@ -1,12 +1,12 @@
 ---
 title: Latvijas Pasts tracking: numbers, statuses and lockers
-description: Track a Latvijas Pasts (Latvian Post) parcel in English: where the number is, what each status means, parcel lockers, missed deliveries and contacts.
+description: Track a Latvijas Pasts (Latvian Post) parcel in English: LV postal numbers, English tracking statuses, 7-day parcel lockers, Unisend, redirection and support.
 slug: latvijas-pasts-tracking
 published: 2026-10-13
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Latvijas Pasts (Latvian Post) is Latvia's state-owned national post, with the country's largest network of parcel lockers. Track an item on [mans.pasts.lv/track](https://mans.pasts.lv/track), which opens in Latvian and has an English switch, or paste the number in the box above. The number comes from the shop's or sender's shipping message, or from the courier's SMS before delivery.
+Latvijas Pasts (Latvian Post) is Latvia's state-owned national post and runs the country's largest network of parcel lockers. Track a `…LV` item (or an incoming foreign postal parcel) in English with the language switch on [mans.pasts.lv/track](https://mans.pasts.lv/track), or paste the number in the box above. The number comes from the shop's shipping message or from Latvijas Pasts's courier or locker SMS.
 
 ## Latvijas Pasts tracking number
 
@@ -122,6 +122,10 @@ Yes, if it was sent with tracking. mans.pasts.lv/track also shows the scans it g
 ### Does ordinary post from Latvia have a tracking number?
 
 Not always. Simple and Economy items aren't registered, so they can't be tracked; registered, traceable, parcel and EMS items can.
+
+### How long does Latvijas Pasts keep a parcel in a parcel locker?
+
+Up to seven days from arrival, with the six-digit code resent on the third day and a reminder before the deadline. If uncollected, it goes back to the sender — or moves to the nearest Customer Service Location for 30 days if the item has a longer storage period.
 
 :::sources
 - [Latvijas Pasts: Customer support](https://pasts.lv/en/client-support) – number letters by service, no compensation for Simple items, tracking FAQ, international search charged within a month and free after 30 days, hours, helpline, Report a problem

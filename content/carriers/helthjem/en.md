@@ -1,12 +1,12 @@
 ---
 title: Helthjem tracking: statuses, pickup points and contact
-description: Track a Helthjem parcel in Norway: where the number is, what the Norwegian statuses mean, night drop-offs, pickup points and how to reach Helthjem.
+description: Track a Helthjem parcel in Norway: 37072476 numbers vs Bring, Norwegian tracking statuses in English, night doormat deliveries, pickup points and support.
 slug: helthjem-tracking
 published: 2026-10-13
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Helthjem is a Norwegian parcel service for online shops: it leaves parcels on your doormat or in your mailbox, including on night rounds, or sends them to a pickup point. Paste the number in the box above to track yours; Helthjem's own site, helthjem.no, has a tracking page too. Helthjem words its tracking in Norwegian, so the statuses are translated below.
+Helthjem is a Norwegian parcel courier for online shops that delivers parcels to your doormat or mailbox — often on night rounds — or to a pickup point (*hentested*). Paste your 18-digit (`37072476…`) or 20-digit (`0037072476…`) Helthjem number in the box above or look it up on `helthjem.no`. Since Helthjem writes its tracking in Norwegian Bokmål, every status is translated into English below.
 
 ## Where to find your Helthjem tracking number
 
@@ -87,23 +87,23 @@ When Helthjem marks a parcel as one PostNord delivers, the card says "Delivery w
 
 ## Questions about Helthjem tracking
 
-### Is Helthjem legit?
+### Is Helthjem legit in Norway?
 
 Yes. Helthjem Netthandel AS is registered in Oslo as a postal and courier company; at its 2025 general meeting, the Norwegian media group Polaris Media listed a 34% stake in it. In 2023 its parcels travelled with the newspaper distributors that took the Helthjem name in 2015. Be wary of texts in its name with links that ask for card details.
 
-### What time does Helthjem deliver?
+### What time does Helthjem deliver on night rounds?
 
 Home deliveries can come on a night round. When Helthjem books one, its tracking shows `Planlagt levering natt til …` the day before, with the date that night leads into. Peek shows that date as the expected day.
 
-### What does Budet fikk ikke med seg pakken din ut i natt mean?
+### What does "Budet fikk ikke med seg pakken din ut i natt" mean?
 
 The night's courier didn't take your parcel out. It stays with Helthjem and waits for a later night round.
 
-### Why can't Helthjem find my tracking number?
+### Why can't Helthjem find my tracking number (or is it Bring)?
 
 Helthjem doesn't know the number, or no longer keeps it, or it belongs to another carrier: Bring's numbers also start `370` or `373`. Check the digits, try Bring, or ask the shop which carrier it booked.
 
-### How do I contact Helthjem?
+### How do I contact Helthjem about a missing parcel?
 
 Through the help and contact page on its own site, helthjem.no. For refunds and claims, contact the shop that sent the parcel.
 

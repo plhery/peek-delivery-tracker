@@ -1,15 +1,15 @@
 ---
 title: Suivi de commande Temu : quel transporteur a ton colis ?
-description: Suis ton colis Temu avec le numéro du transporteur, pas le numéro de commande : qui livre en France et en Belgique, et pourquoi le suivi reste vide.
+description: Suivi de commande Temu en France, Belgique et Suisse : où voir ta dernière commande, trouver le numéro du transporteur (La Poste, bpost) et débloquer un colis.
 slug: suivi-commande-temu
 picture: Une pile de petits colis qui sort de la soute d'un avion, une camionnette, et Pip qui les compte.
 published: 2026-10-17
-updated: 2026-11-19
+updated: 2026-11-27
 ---
 
-Pour suivre ta commande Temu, il te faut le numéro de suivi du transporteur, pas le numéro de commande Temu (PO et 20 chiffres). Colle-le dans [Peek](/) : il retrouve le transporteur parmi plus de 4 500, de La Poste (Colissimo) à bpost, puis suit le partenaire local si le premier transporteur en nomme un. Un numéro tout neuf peut ne rien afficher pendant un jour ou deux : l'étiquette existe avant que le transporteur ait le colis.
+Pour voir où en est ta dernière commande Temu, ouvre **Vos commandes** puis touche **Suivre** : tu y récupères le numéro de suivi du transporteur — indispensable, car le numéro de commande Temu (`PO` et 20 chiffres) ne suffit pas. Colle ce numéro dans [Peek](/), qui reconnaît plus de 4 500 transporteurs (dont La Poste / Colissimo en France et bpost en Belgique) et suit le partenaire local dès qu'il est nommé. Un numéro tout neuf peut ne rien afficher pendant un jour ou deux avant le premier scan.
 
-## Mon numéro de commande Temu est-il un numéro de suivi ?
+## Où voir ma dernière commande Temu, et le numéro PO suffit-il ?
 
 Non. Le numéro de commande Temu est sa propre référence, pas un numéro de suivi : aucun transporteur ne retrouvera ton colis avec. Peek le reconnaît à sa forme, PO suivi de 20 chiffres (`PO-000-00000000000000000`), et le met de côté avec une note qui te dit où chercher : dans Vos commandes, touche Suivre à côté de la commande, et Temu y donne un numéro de suivi par colis. Tu ne sais pas lequel tu as ? Tape-le ici :
 
@@ -20,7 +20,7 @@ Si tu colles un message entier qui contient les deux numéros, Peek prend le num
 
 Un numéro de trois lettres, un `U` et sept chiffres, comme `TEMU1234565` (inventé), n'est pas non plus un numéro de suivi : c'est celui d'un conteneur maritime, et aucun transporteur ne s'en sert pour suivre un colis. Le `TEMU` du début n'a rien à voir avec la boutique : dans le registre des codes propriétaires de conteneurs tenu par le Bureau International des Containers (BIC), `TEMU` est celui du loueur de conteneurs Textainer. Si tu en ajoutes un et qu'aucun transporteur ne répond, Peek affiche « On dirait un numéro de conteneur maritime. Le numéro de suivi figure dans l’e-mail d’expédition ou sur la page de la commande. » et te propose « Choisir le transporteur ».
 
-## Quel transporteur livre mon colis Temu ?
+## Quel transporteur livre un colis Temu en France, en Belgique et en Suisse ?
 
 En général, le numéro de suivi le dit : le champ ci-dessus nomme le transporteur que désigne sa forme, ou les quelques-uns à qui il peut appartenir. Les formes que tu croiseras sans doute en France, en Belgique et en Suisse :
 
@@ -47,7 +47,7 @@ Le numéro existe souvent avant que le transporteur ait le colis. Jusqu'au premi
 
 Un colis venu de Chine par avion peut rester muet bien plus longtemps : jusqu'à 11 jours avant son premier scan, puis rien pendant le vol.
 
-## Colis Temu bloqué, en retard ou jamais arrivé ?
+## Que faire si un colis Temu est bloqué, en retard ou jamais arrivé ?
 
 Un suivi qui ne bouge plus pendant des jours, ou un numéro qui change quand le transporteur local prend le relais, c'est normal sur ce trajet : le [suivi d'un colis venant de Chine](guide:tracking-from-china) explique les deux, et ce qui change pour un produit parti d'un entrepôt en Europe. Combien de jours sans nouvelle ligne restent normaux, au bout de combien de temps un colis est déclaré perdu, et qui contacter, le vendeur ou le transporteur : [suivi de colis qui ne bouge plus](guide:tracking-not-updating).
 

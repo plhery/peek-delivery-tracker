@@ -1,15 +1,15 @@
 ---
 title: Paczka zatrzymana przez urząd celny: ile trwa i ile płacisz
-description: Co znaczy „paczka zatrzymana przez urząd celny”, ile trwa odprawa, ile i komu płacisz za paczkę spoza UE i jak rozpoznać fałszywy SMS o cle.
+description: Paczka zatrzymana przez urząd celny w Polsce: ile trwa odprawa, cło 3 € i opłata 2 € za paczkę spoza UE (Temu, AliExpress), Poczta Polska i fałszywe SMS-y.
 slug: paczka-zatrzymana-przez-urzad-celny
 picture: Budka celna z pasiastym szlabanem, dokument z okrągłą pieczątką i ptaszkiem, a przed szlabanem cierpliwie czeka Pip.
 published: 2026-10-09
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-„Paczka zatrzymana przez urząd celny” zwykle oznacza, że twoja przesyłka spoza Unii Europejskiej przechodzi rutynową odprawę celną, a nie że ktoś ją skonfiskował. Jeśli utknęła na dłużej, [Poczta Polska](carrier:poczta-polska) albo kurier może czekać na twoją zapłatę, pełnomocnictwo lub dokumenty. Sprawdź to na stronie albo w aplikacji przewoźnika, nigdy przez link z SMS-a.
+Status „paczka zatrzymana przez urząd celny” oznacza zwykle standardową odprawę przesyłki spoza Unii Europejskiej (np. z Temu, Shein czy AliExpress), a nie jej konfiskatę. Jeśli przesyłka stoi dłużej, [Poczta Polska](carrier:poczta-polska) lub kurier może czekać na twoje pełnomocnictwo (dla paczek wartych 150–1000 euro), dokumenty zakupu albo zapłatę VAT, cła 3 euro za rodzaj produktu (do 150 euro) i unijnej opłaty manipulacyjnej 2 euro. Sprawdzaj to na stronie lub w aplikacji przewoźnika, nigdy przez link z SMS-a.
 
-## Co znaczy „paczka zatrzymana przez urząd celny”?
+## Co znaczy status „paczka zatrzymana przez urząd celny”?
 
 Każdą przesyłkę pocztową spoza UE trzeba zgłosić do urzędu celnego, bez względu na wartość towaru, przypomina Krajowa Administracja Skarbowa (KAS). Paczkę do 150 euro Poczta Polska zgłasza za ciebie na podstawie tak zwanego pełnomocnictwa domyślnego, chyba że z niego zrezygnujesz. Przy wartości od 150 do 1000 euro potrzebuje twojego pełnomocnictwa, udzielonego w placówce pocztowej. Przy przesyłce kurierskiej formalności celne zwykle załatwia kurier i pobiera za to opłatę, a VAT, którego nie zapłaciłeś w sklepie, może pobrać od ciebie przy doręczeniu, pisze Komisja Europejska.
 
@@ -24,7 +24,7 @@ Urząd celny sprawdza deklarację nadawcy (zawartość, wartość), może skontr
 
 Nic z tego nie oznacza konfiskaty. Inaczej jest tylko z towarami, których przywóz do Polski jest zakazany: Poczta Polska przekazuje takie paczki do dyspozycji KAS i według swojego regulaminu nie zawiadamia wtedy odbiorcy o ich nadejściu.
 
-## Paczka zatrzymana w urzędzie celnym: co robić?
+## Paczka zatrzymana w urzędzie celnym: co muszę zrobić?
 
 Często nic. Żeby się upewnić:
 
@@ -70,7 +70,7 @@ Masz dość odświeżania? Wklej numer do [Peeka](/): sprawdza paczkę nawet co 
 
 Gdy urząd celny zwolni przesyłkę, Poczta Polska doręcza ją albo wydaje w placówce pocztowej i wtedy pobiera należności ustalone przez KAS oraz swoją opłatę. Na twoje żądanie wystawi pokwitowanie. Co znaczą kolejne statusy, wyjaśnia [poradnik o statusach przesyłki](guide:tracking-statuses).
 
-## Ile zapłacę za paczkę spoza UE i komu?
+## Ile zapłacę za odprawę paczki spoza UE (VAT, cło 3 €, opłata 2 €)?
 
 Płacisz to, czego nie pobrano przy zakupie, a Poczta Polska dolicza swoją opłatę za zgłoszenie celne, nawet gdy VAT był już w cenie. Rachunek ma najwyżej trzy części:
 
@@ -118,7 +118,7 @@ Tak, od 1 lipca 2026 r. również za tanie zamówienia, ale część należnośc
 
 Jak takie zamówienia podróżują, opisuje poradnik o [śledzeniu paczki z Chin](guide:tracking-from-china). Co znaczą angielskie statusy odprawy w śledzeniu takich paczek, przeczytasz na stronach o [Cainiao](carrier:cainiao) i [YunExpress](carrier:yunexpress).
 
-## SMS o dopłacie do paczki albo o cle: jak rozpoznać oszustwo?
+## Jak rozpoznać fałszywy SMS o dopłacie celnej do paczki?
 
 Prawdziwe powiadomienia też przychodzą e-mailem czy SMS-em, ale zasady przewoźników zdradzają [większość fałszywek](guide:delivery-scam-texts):
 

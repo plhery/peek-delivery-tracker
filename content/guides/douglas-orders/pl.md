@@ -1,13 +1,13 @@
 ---
 title: Śledzenie zamówienia Douglas: dostawa, zwroty i problemy
-description: Jak Douglas dostarcza zamówienia z douglas.pl, gdzie szukać śledzenia, jak zwrócić towar i co zrobić, gdy paczka się spóźnia, nie dociera albo jest uszkodzona.
+description: Jak śledzić zamówienie z douglas.pl: gdzie znaleźć numer przesyłki, formy dostawy i Click&Collect, reklamacje uszkodzonej paczki oraz zwrot towaru w 30 dni.
 slug: sledzenie-zamowienia-douglas
 picture: Wysoki flakon perfum i szminka obok małego pudełka na prezent i samochodu dostawczego, a na pudełku stoi Pip.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-27
 ---
 
-W Polsce Douglas sprzedaje online na douglas.pl i w aplikacji Douglas, a zamówienia dostarcza tylko na adresy w Polsce: kurierem, do punktu odbioru lub automatu paczkowego albo do wybranej perfumerii Douglas. Wysłanie towaru Douglas potwierdza e-mailem, a przy dostawie w częściach może wysłać osobny e-mail dla każdej części. Na odstąpienie od umowy masz 30 dni od otrzymania towaru, a jeśli czegoś brakuje albo produkt przyjdzie uszkodzony, napisz na info@douglas.pl albo zadzwoń pod 22 278 14 14.
+Zamówienia z douglas.pl i aplikacji Douglas dostarczane są na adresy w Polsce kurierem, do punktu odbioru lub automatu paczkowego albo do wybranej perfumerii Douglas. Po nadaniu paczki Douglas wysyła e-mail z potwierdzeniem wysłania (przy dostawie w częściach — osobny dla każdej przesyłki). Masz 30 dni od odbioru na odstąpienie od umowy, a przy opóźnieniu, braku produktu lub uszkodzeniu skontaktujesz się z obsługą pod numerem 22 278 14 14 lub adresem info@douglas.pl.
 
 ## Gdzie Douglas sprzedaje online?
 
@@ -37,7 +37,7 @@ Przewoźnika rozpoznasz po numerze przesyłki: wpisz go w polu niżej albo w Pee
 - home | Ty | 30 dni na odstąpienie od umowy
 :::
 
-## Gdzie jest śledzenie zamówienia Douglas?
+## Gdzie znaleźć numer przesyłki i śledzenie zamówienia Douglas?
 
 Szukaj tutaj:
 
@@ -64,7 +64,7 @@ Gdy nic się nie dzieje, zwykle chodzi o jedno z tych:
 
 Kiedy czekanie jest jeszcze normalne: [śledzenie się nie aktualizuje](guide:tracking-not-updating) i [czas dostawy](guide:delivery-times).
 
-## Opcje i koszty dostawy Douglas
+## Ile kosztuje dostawa w Douglas i jakie są formy płatności?
 
 Ceny w sklepie zawierają podatki i cła, ale nie koszty dostawy. Dostawę płacisz ty, chyba że umowa mówi inaczej; Douglas może ją pokryć na warunkach z zakładki „Dostawa i zwroty”. Dokładny koszt zobaczysz w trakcie składania zamówienia, zanim je złożysz. Na dopłaty, na przykład za wysyłkę ekspresową albo pakowanie na prezent, sprzedawca potrzebuje twojej wyraźnej zgody: pole zaznaczone z góry nie jest zgodą, a pobraną tak kwotę możesz odzyskać.
 
@@ -97,7 +97,7 @@ Najpierw sprawdź, potem zgłoś. Po kolei:
 
 Regulamin odsyła też do pozasądowych sposobów rozwiązywania sporów, opisanych na stronie UOKiK. Więcej: [paczka doręczona, ale nie dotarła](guide:delivered-not-received), [zaginiona paczka](guide:lost-parcel) i [uszkodzona paczka](guide:damaged-parcel).
 
-## Zwrot zamówienia Douglas
+## Jak zwrócić zamówienie z Douglas i kiedy wracają pieniądze?
 
 Na douglas.pl możesz odstąpić od umowy bez podania przyczyny w ciągu 30 dni od otrzymania towaru; przy dostawie w częściach liczy się dzień otrzymania ostatniej części. Wystarczy, że przed upływem terminu jednoznacznie poinformujesz Douglas, na przykład listem albo e-mailem. Możesz użyć formularza zwrotu dołączanego do każdego zamówienia, który zawiera też oświadczenie o odstąpieniu, albo formularza odstąpienia od umowy.
 

@@ -1,14 +1,12 @@
 ---
 title: Amazon Logistics seguimiento: dónde mirarlo y qué hacer
-description: Sigue un paquete de Amazon Logistics en Mis pedidos: qué número es, quién lo reparte en España, Amazon Locker, puntos de recogida y cómo contactar con Amazon.
+description: Seguimiento de Amazon Logistics en España: números ES y TBA, por qué solo se ven en Mis pedidos, Amazon Locker (3 días), retrasos y contacto con Amazon.
 slug: amazon-logistics-seguimiento
 published: 2026-10-11
-updated: 2026-11-14
+updated: 2026-11-27
 ---
 
-Amazon Logistics es la red de reparto de Amazon. En España, Amazon prepara los pedidos para la entrega en sus estaciones logísticas, y desde allí empresas externas de reparto los llevan a los clientes. Con el programa Hub Delivery, también hay tiendas de barrio que entregan los pedidos de Amazon a sus vecinos.
-
-Amazon Logistics no tiene una web de seguimiento pública: el paquete se sigue en Mis pedidos, en Amazon.es.
+Amazon Logistics es la red de reparto de última milla de Amazon: en España, los paquetes se clasifican en más de 20 estaciones logísticas y empresas externas de reparto — junto con comercios locales del programa Hub Delivery — los llevan a tu domicilio, a un Amazon Locker o a un punto de recogida. Como Amazon Logistics no tiene una web pública de seguimiento, el estado y la foto de entrega solo se consultan en Mis pedidos de Amazon.es (salvo los envíos de Amazon Shipping, que sí tienen seguimiento público).
 
 ## Número de seguimiento de Amazon Logistics
 
@@ -52,17 +50,25 @@ Si no, verás «Las entregas de Amazon Logistics suelen seguirse desde Mis pedid
 
 ## Preguntas sobre el seguimiento de Amazon Logistics
 
-### ¿Qué es Amazon Logistics?
+### ¿Qué es Amazon Logistics en España?
 
-Es la red que lleva los pedidos de Amazon en el último tramo, desde sus estaciones logísticas hasta los clientes. En España, Amazon tiene más de 20 estaciones logísticas, donde clasifica los paquetes que llegan de otros centros; desde allí, empresas externas de reparto los entregan. En la estación de Málaga, por ejemplo, Amazon colabora con cuatro empresas locales de reparto. Con el programa Hub Delivery, 2500 pequeños negocios y tiendas de barrio de más de 900 localidades también entregan pedidos de Amazon a sus vecinos.
+Es la red que entrega los pedidos de Amazon en el último tramo desde más de 20 estaciones logísticas en España a través de empresas locales de reparto. Además, mediante el programa Hub Delivery, 2500 pequeños negocios y tiendas de barrio en más de 900 localidades entregan pedidos de Amazon a sus vecinos.
 
-### ¿Cuál es el teléfono de Amazon Logistics en España?
+### ¿Se puede seguir un paquete de Amazon Logistics fuera de Amazon o en un mapa?
 
-Para cualquier consulta sobre un pedido, contacta con el Servicio de Atención al Cliente de Amazon entrando desde la app o la web oficial de Amazon.es, como recomienda Amazon. Amazon nunca te pedirá por teléfono datos de tu forma de pago.
+No. Amazon no publica el seguimiento de Amazon Logistics fuera de tu cuenta, así que el estado, el historial y la foto de entrega solo se ven en Mis pedidos en Amazon.es. Si pegas un número `ES`, `PT`, `FR`, `DE` o `TBA` en Peek, primero comprueba si corresponde a [Amazon Shipping](carrier:amazon-shipping) (con seguimiento público); si no, te ofrece el botón «Abrir mis pedidos de Amazon».
 
-### ¿Se puede ver el paquete de Amazon Logistics en un mapa?
+### ¿Cuántos días guarda un paquete un Amazon Locker?
 
-Amazon no ofrece un seguimiento público de Amazon Logistics: el estado y la foto de entrega se ven en Mis pedidos. Peek tampoco puede mostrar en el mapa un paquete de Amazon Logistics.
+Tienes 3 días desde que recibes el correo electrónico de confirmación de entrega con tu código único o código de barras para recogerlo en el Amazon Locker. Si no lo recoges en esos 3 días, el paquete se devuelve a Amazon.
+
+### ¿Cuál es el teléfono o contacto de Amazon Logistics en España?
+
+El Servicio de Atención al Cliente de Amazon está disponible 24/7, y Amazon recomienda entrar siempre desde su app o la web oficial de Amazon.es para evitar estafas. Amazon nunca te pedirá por teléfono datos de pago ni la compra de tarjetas regalo.
+
+### ¿Qué hago si mi pedido de Amazon Logistics llega tarde o no lo recibo?
+
+Contacta con el Servicio de Atención al Cliente desde tu cuenta para pedir un reemplazo o un reembolso. Si compraste a un vendedor externo que gestiona el envío, escribe primero al vendedor y, si no lo resuelve, solicita el reembolso mediante la Garantía de la A a la Z de Amazon.
 
 :::sources
 - [About Amazon España: ¿Cómo llegan los paquetes de Amazon a su destino?](https://www.aboutamazon.es/noticias/inversiones-y-creacion-de-empleo/como-llegan-los-paquetes-de-amazon-a-su-destino) – estaciones logísticas, proveedores de transporte, última milla

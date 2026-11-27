@@ -1,12 +1,12 @@
 ---
 title: Raben tracking: shipment number, statuses and delivery
-description: Track a Raben pallet or groupage shipment: what its number looks like, what each step on Raben's tracker means, unloading, damage claims and who to contact.
+description: Track a Raben pallet or groupage shipment: 15-digit 27... numbers, myRaben status meanings, unloading rules (HUN/UNLO), 7-day damage claims and contacts.
 slug: raben-tracking
 published: 2026-11-01
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Raben Group is a family-owned European logistics group that started in 1931 in the Netherlands and is now based near Poznań, Poland. Its road network carries pallets and groupage (part loads) through branches in 17 European countries, and it delivers for online shops, so a bulky order can come on a Raben truck. Track it with the shipment number in the "Shipment tracking" box on raben-group.com, or paste the number in the box above.
+Raben Group is a family-owned European logistics carrier founded in 1931 in the Netherlands and headquartered near Poznań, Poland, moving pallets and groupage (part loads) across 17 European countries — including bulky online shop orders. Paste your shipment number or myRaben link into the box above, or enter it in the "Shipment tracking" box on raben-group.com, to check every depot scan, expected delivery day and unloading or damage rules.
 
 ## Raben shipment number: what it looks like and where to find it
 
@@ -92,25 +92,25 @@ When you have the shipment open in Peek, or on its delivery day with notificatio
 
 ## Questions about Raben tracking
 
-### What is Raben Group?
-
-A family-owned European logistics group, founded in 1931 in Winterswijk, the Netherlands, and based in Robakowo near Poznań, Poland. It moves pallets and part loads by road across 17 countries, usually booked by the sender.
-
 ### How do I track a Raben shipment?
 
-Type the shipment number in the "Shipment tracking" box on raben-group.com and press "Search": Raben's tracker opens in a new tab. Or paste the number or the tracker's link in the box above.
+Paste your shipment number (typically 15 digits starting with `27`) or a `myraben.com` / `oftc.myraben.com` link in the box above, or enter the number in the "Shipment tracking" box on raben-group.com and click "Search". If you do not have the number, ask the shop or business that booked the transport.
 
-### Will the Raben driver unload my order?
+### What is Raben Group?
 
-Under Raben Poland's rules, only if the business that booked the transport ordered it: unloading is the recipient's job, and unloading by the driver is an extra service (HUN or UNLO). A `delivered D&D` step means the driver delivered and unloaded it.
+Raben Group is a family-owned European logistics group founded in 1931 in Winterswijk, the Netherlands, and headquartered in Robakowo near Poznań, Poland. It operates a road network for pallets and part loads across 17 European countries, normally booked by the seller or shipper.
+
+### Will the Raben driver unload my pallet or bulky order?
+
+Under Raben Poland's pallet FAQ, unloading is the recipient's responsibility unless the business that ordered transport booked manual unloading (`HUN`) or unloading at the delivery place (`UNLO`). On tracking, `delivered D&D` means the driver delivered and unloaded the shipment.
 
 ### How long does Raben take to deliver?
 
-Within Poland, one or two working days, depending on the service the sender bought; abroad, it depends on the destination country. Raben's tracker shows the expected delivery date.
+Within Poland, standard pallet delivery takes one or two working days depending on the service booked; international transit depends on the destination country. Raben's tracker displays the expected delivery date (and a time slot once the driver's route sets one).
 
-### Who do I contact about a damaged Raben delivery?
+### Who do I contact about a damaged or missing Raben delivery?
 
-The shop first: in the EU the seller is responsible until you receive the goods. In Poland you can also claim from Raben Logistics Polska yourself, in writing; report hidden damage within 7 days of delivery.
+Contact the shop first — under EU rules (Your Europe), the seller is responsible for the goods until you receive them. Note visible damage on the delivery note at handover and report hidden damage in writing within 7 days of delivery (in Poland, via Raben Logistics Polska's myClaim form, post, fax or email; in Germany, to the handling Raben branch).
 
 :::sources
 - [Raben Group: home page](https://www.raben-group.com/) – tracking box, "Search", new tab, 17 countries

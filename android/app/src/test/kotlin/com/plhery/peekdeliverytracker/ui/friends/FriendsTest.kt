@@ -729,7 +729,7 @@ class FriendsTest {
         assertFalse(exists(FRIENDS_SHARING))
         switch(AuthenticationState.Demo)
         assertEquals(listOf("Mila", "Noé", "Sam"), cards())
-        assertEquals(FriendProfile("Alex", shareStats = true, shareArrival = false), source.friends.snapshotFlow.value?.profile)
+        assertEquals(FriendProfile("Alex", shareStats = true, shareArrival = false, shareCountries = true), source.friends.snapshotFlow.value?.profile)
         assertEquals(0, client.loads)
         assertTrue(client.requests.isEmpty())
     }

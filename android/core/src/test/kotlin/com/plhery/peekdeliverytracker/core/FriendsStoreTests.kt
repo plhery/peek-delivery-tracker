@@ -219,7 +219,7 @@ class FriendsStoreTests {
         store.configure(demo = true)
         store.load(emptyList())
         assertEquals(listOf("Mila", "Noé", "Sam"), store.snapshot?.friends?.map { it.nickname })
-        assertEquals(FriendProfile("Alex", shareStats = true, shareArrival = false), store.snapshot?.profile)
+        assertEquals(FriendProfile("Alex", shareStats = true, shareArrival = false, shareCountries = true), store.snapshot?.profile)
         assertTrue(client.actions.isEmpty())
     }
 

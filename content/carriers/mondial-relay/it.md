@@ -1,12 +1,12 @@
 ---
 title: Tracciamento Mondial Relay: stati, Vinted, InPost e ritiro
-description: Traccia un pacco Mondial Relay in Italia: numero a 8 cifre, significato degli stati francesi, spedizioni Vinted con InPost o BRT, tempi di ritiro e contatti.
+description: Tracciamento Mondial Relay in Italia (Gruppo InPost): codice a 8 cifre e CAP, traduzione stati francesi, tempi Vinted (7–25 giorni), ritiro e +39 0238582894.
 slug: tracciamento-mondial-relay
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Mondial Relay è un corriere francese del **Gruppo InPost** specializzato nelle consegne fuori casa presso *Points Relais* (negozi di prossimità convenzionati), *Locker* automatici e a domicilio. Per seguire una spedizione puoi inserire il numero a 8 cifre insieme al codice postale di destinazione su `mondialrelay.fr` (o `.be` / `.nl`), nell'app Mondial Relay oppure incollarlo nel riquadro qui sopra.
+Mondial Relay è il corriere francese del **Gruppo InPost** (punti *Points Relais*, *Locker* e consegna a domicilio) che incontri spesso in Italia sugli ordini [Vinted](guide:vinted-orders) provenienti da Francia, Belgio o Paesi Bassi. Per seguire il pacco inserisci il numero di spedizione a 8 cifre con il codice postale di destinazione su `mondialrelay.fr` (o `.be`/`.nl`) oppure incollalo qui sopra — sotto trovi la traduzione degli stati francesi, i tempi Vinted e i contatti InPost Italia.
 
 In Italia incontri quasi sempre un codice Mondial Relay quando acquisti dalla Francia, dal Belgio o dai Paesi Bassi, in particolare su [Vinted](guide:vinted-orders). Vinted Italia è infatti collegata con Francia, Belgio, Paesi Bassi, Spagna, Lussemburgo, Portogallo, Austria e Germania: quando un venditore francese o belga spedisce da un Point Relais o da un Locker, il pacco può viaggiare con Mondial Relay (o [Vinted Go](carrier:vinted-go)); per l'Italia Vinted indica come corrieri [Poste Italiane](carrier:poste-italiane), [InPost](carrier:inpost) (dello stesso gruppo di Mondial Relay), [BRT](carrier:brt)-fermopoint, GLS (solo con la Verifica dell'articolo) e [DHL Express](carrier:dhl-express).
 
@@ -75,21 +75,25 @@ Peek mostra le diciture francesi originali di Mondial Relay così come sono pubb
 
 ## Domande frequenti sul tracciamento Mondial Relay
 
-### Chi consegna un pacco Mondial Relay in Italia?
+### Chi consegna un pacco Mondial Relay in Italia (InPost, BRT o Poste Italiane)?
 
-In Italia il gruppo di Mondial Relay opera come [InPost](carrier:inpost). Per gli ordini Vinted verso l'Italia, Vinted indica come corrieri [Poste Italiane](carrier:poste-italiane), InPost, [BRT](carrier:brt)-fermopoint, GLS (solo con la Verifica dell'articolo) e [DHL Express](carrier:dhl-express). Se hai un secondo codice italiano, incollalo separatamente su Peek.
+In Italia il gruppo di Mondial Relay opera direttamente come [InPost](carrier:inpost) (Locker InPost Italia S.r.l.). Sugli ordini Vinted diretti in Italia, Vinted collabora con [Poste Italiane](carrier:poste-italiane), InPost, [BRT](carrier:brt)-fermopoint, GLS (con Verifica dell'articolo) e [DHL Express](carrier:dhl-express): se nella chat trovi un secondo codice italiano, aggiungilo separatamente su Peek.
 
-### Posso tracciare Mondial Relay senza codice postale?
+### Posso tracciare un pacco Mondial Relay senza codice postale (CAP)?
 
-Il codice a barre di 26 cifre e le varianti a 10, 12 o 14 cifre si tracciano su Peek senza codice postale. Il numero standard a 8 cifre richiede invece sempre il «Codice postale di consegna».
+Su Peek il codice a barre completo da 26 cifre e le varianti da 10, 12 o 14 cifre si tracciano senza CAP. Il numero standard a 8 cifre richiede invece sempre il «Codice postale di consegna» (con CAP errato il pacco non viene trovato).
 
-### Quanto tempo impiega una spedizione Mondial Relay da Vinted?
+### Quanto tempo impiega una spedizione Mondial Relay con Vinted e cosa fare se è bloccata?
 
-Secondo il Centro assistenza Vinted, una spedizione internazionale arriva normalmente entro **7 giorni lavorativi** (circa 5 giorni lavorativi per gli invii nazionali), con fino a 48 ore per la comparsa della prima scansione. Se il pacco non arriva entro **25 giorni lavorativi** dalla spedizione, puoi chiedere il rimborso tramite «Ho un problema» nella chat Vinted.
+Su Vinted il primo aggiornamento può richiedere fino a 48 ore e la consegna internazionale impiega mediamente **7 giorni lavorativi** (circa 5 nazionali). Se il pacco non arriva entro **25 giorni lavorativi**, tocca **«Ho un problema»** nella chat dell'ordine per l'annullamento e il rimborso.
 
-### Mondial Relay e InPost sono la stessa azienda?
+### Qual è la differenza tra Mondial Relay e InPost?
 
-Fanno parte dello stesso gruppo: InPost ha acquisito Mondial Relay nel 2021, formando una rete europea di circa 95.000 Locker e punti di ritiro in 9 Paesi. In Italia il servizio opera direttamente come [InPost](carrier:inpost) (Locker InPost Italia S.r.l.), in Spagna e Portogallo è già passato al marchio InPost e nei Paesi Bassi la transizione è in corso.
+Appartengono allo stesso gruppo: InPost S.A. ha acquisito Mondial Relay nel 2021 (circa 95.000 Locker e punti di ritiro in 9 mercati europei). Il nome Mondial Relay resta in Francia, Belgio e Lussemburgo, mentre Italia, Spagna e Portogallo usano InPost.
+
+### Come contattare Mondial Relay / InPost Italia e segnalare SMS truffa?
+
+In Italia chiama Locker InPost Italia al **`+39 0238582894`** (lun–sab 8:00–20:00 CEST); in Francia/Benelux usa i moduli su `mondialrelay.fr`. Mondial Relay non chiede mai costi extra via SMS o e-mail: segnala eventuali phishing a **`phishing@inpost-group.com`**.
 
 :::sources
 - [InPost Group: Regulamin Konta InPost (dal 01.10.2026)](https://terms.inpost-group.com/pl/regulamin) – dati societari di Mondial Relay SASU e di Locker InPost Italia S.r.l. (Viale Cassala 30, Milano, +39 0238582894, lun–sab 8:00–20:00), reclami entro 6 mesi, AGCOM e archiviazione app dopo 7 giorni

@@ -1,12 +1,12 @@
 ---
 title: DHL eCommerce Iberia seguimiento: estados y ServicePoints
-description: Sigue tu paquete DHL eCommerce en España: qué significa cada estado, qué pasa si no estás, el ServicePoint, CTT Express y qué hacer si se pierde o llega dañado.
+description: Seguimiento DHL eCommerce Iberia (antes DHL Parcel) en España y Portugal: números JJD/10 cifras, estados ServicePoint, alianza CTT Express y reclamaciones.
 slug: dhl-ecommerce-iberia-seguimiento
 published: 2026-10-11
-updated: 2026-11-15
+updated: 2026-11-27
 ---
 
-DHL eCommerce Iberia es la red de paquetería de DHL en España y Portugal, la antigua DHL Parcel Iberia (ese nombre aún sale en algunos sitios). Para seguir tu paquete, pega el número en la casilla de arriba; en la ficha del paquete, «Abrir la web de DHL eCommerce Iberia» te lleva al mismo envío en la página de seguimiento de DHL. El número te lo da la tienda que te envía el paquete.
+DHL eCommerce Iberia (antes DHL Parcel Iberia) es la red de paquetería de DHL en España y Portugal — distinta de DHL Express y aliada desde mayo de 2026 con CTT Express para entregas a particulares. Pega el número de seguimiento de la tienda en la casilla de arriba para ver los estados (`Out for delivery`, `Delivered to DHL ServicePoint`, `Delivered, POD pending`) y abrir el envío directamente en la web de DHL.
 
 ## Número de seguimiento DHL eCommerce: dónde está y cómo es
 
@@ -78,17 +78,25 @@ Los escaneos de DHL no llevan zona horaria: Peek los lee en la hora del lugar de
 
 ## Preguntas sobre el seguimiento de DHL eCommerce
 
-### ¿DHL eCommerce es lo mismo que DHL Express?
+### ¿Cuál es la diferencia entre DHL eCommerce Iberia y DHL Express?
 
-No. Los envíos de DHL Express tienen su propio seguimiento (la página de seguimiento de MyDHL+), y en Peek son dos transportistas distintos. Un número de 10 cifras puede ser de cualquiera de los dos: Peek pregunta antes a DHL Express si cuadra su dígito de control y, si DHL Express conoce el número, gana DHL Express.
+Son dos redes y transportistas distintos: DHL Express usa MyDHL+ y DHL eCommerce Iberia (antes DHL Parcel) gestiona paquetería en España y Portugal. Un código de 10 cifras puede ser de cualquiera de los dos; si cumple el dígito de control de DHL Express, Peek consulta primero a DHL Express.
 
-### ¿Cómo pongo una reclamación a DHL eCommerce?
+### ¿Por qué CTT Express entrega paquetes de DHL eCommerce en España y Portugal?
 
-Si el paquete se ha perdido o ha llegado dañado, reclama primero a la tienda: según Your Europe, el vendedor responde de los daños hasta que recibes el pedido y debe entregarlo en el plazo acordado o, si no acordasteis ninguno, en 30 días.
+Por la alianza firmada el 12 de mayo de 2026 entre DHL eCommerce y CTT: en España CTT Express asume las entregas a particulares y DHL las entregas entre empresas, mientras que en Portugal el negocio de DHL eCommerce pasa a CTT Expresso. Si aparece un número de [CTT Express](carrier:ctt-express), Peek puede seguirlo allí.
 
-### ¿CTT Express reparte paquetes de DHL eCommerce?
+### ¿Qué significa "Delivered, POD pending" o "Shipment with incidence"?
 
-Algunos, sí. Con la alianza que DHL eCommerce y CTT firmaron en mayo de 2026, CTT Express se queda con las entregas a particulares en España, y el negocio de DHL eCommerce en Portugal pasa a CTT Expresso. Si el seguimiento te da un número de CTT Express, síguelo en [CTT Express](carrier:ctt-express).
+`Delivered, POD pending` indica que DHL marca el paquete como entregado pero aún no tiene el justificante (POD) y a veces precede a otro reparto o intento fallido. `Shipment with incidence` señala una incidencia y pide expresamente al destinatario contactar con el remitente (la tienda).
+
+### ¿Qué pasa si no estaba en casa o el paquete va a un DHL ServicePoint?
+
+Un intento fallido figura como `The delivery could not be made due to consignee absent` (o `Receiver closed`). Si el paquete pasa a una tienda DHL ServicePoint (`Delivered to DHL ServicePoint, ready for collection by the recipient`), Peek muestra el nombre y la dirección de la tienda; consulta el horario y el plazo de recogida directamente con DHL.
+
+### ¿Cómo reclamar un paquete DHL eCommerce perdido, retrasado o dañado?
+
+Empieza siempre por la tienda que te vendió el artículo: según Your Europe, el vendedor responde de los daños hasta la entrega y debe entregar en el plazo acordado o en 30 días (pasado un plazo adicional razonable, puedes rescindir la compra y pedir el reembolso).
 
 :::sources
 - [CTT: CTT e DHL Ecommerce selam parceria estratégica](https://www.ctt.pt/grupo-ctt/media/noticias/ctt-e-dhl-ecommerce-selam-parceria-estrategica-para-criar-rede-de-distribuicao-de-encomendas-mais-completa-da-peninsula-iberica) – alianza firmada el 12 de mayo de 2026, particulares con CTT Express y empresas con DHL en España, DHL eCommerce Portugal a CTT Expresso

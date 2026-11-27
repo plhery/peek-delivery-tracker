@@ -1,12 +1,12 @@
 ---
 title: Hermes seguimiento: paquetes de Alemania a España
-description: Sigue un paquete Hermes enviado desde Alemania: cómo es el número, qué significan los estados, quién lo entrega en España y qué hacer si se retrasa o se pierde.
+description: Seguimiento Hermes Germany de Alemania a España: número H/14 cifras, estados en alemán e inglés, socio local (Internat. Versandpartner), 6–8 días y contacto.
 slug: hermes-seguimiento
 published: 2026-10-23
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Hermes Germany, con sede en Hamburgo, es la empresa de paquetería del grupo Otto y reparte sobre todo dentro de Alemania. Si una tienda o un vendedor de Alemania te manda un paquete con Hermes, en España te lo entrega una empresa local con la que trabaja Hermes. Puedes seguirlo con el número de Hermes en el [seguimiento de myhermes.de](https://www.myhermes.de/empfangen/sendungsverfolgung/), que está en alemán, o pegándolo en la casilla de arriba. El número te lo tiene que dar quien te envía el paquete.
+Hermes Germany (grupo Otto, sede en Hamburgo) reparte dentro de Alemania y entrega paquetes en España a través de un socio local (*Systempartner*). Sigue tu envío pegando el *Sendungsnummer* (14 a 20 caracteres, como `H` + 16–19 cifras o 14 cifras) en la casilla de arriba o en [myhermes.de](https://www.myhermes.de/empfangen/sendungsverfolgung/) — debajo explicamos los estados, cómo ver al repartidor en España, plazos y reclamaciones.
 
 ## Número de seguimiento Hermes: dónde está y cómo es
 
@@ -101,25 +101,25 @@ Si Hermes enlaza el seguimiento de la empresa que reparte en España y Peek la c
 
 ## Preguntas sobre el seguimiento de Hermes
 
-### ¿Cuánto tarda un paquete Hermes de Alemania a España?
+### ¿Cuánto tarda un paquete Hermes desde Alemania a España?
 
-Si lo manda un particular desde una tienda Hermes en Alemania, de 6 a 8 días laborables (de lunes a sábado), como plazo orientativo. Para los pedidos de tiendas online, Hermes no publica un plazo para España.
+Si lo envía un particular desde un PaketShop en Alemania, Hermes da un plazo orientativo de 6 a 8 días laborables (de lunes a sábado), con 2 intentos y 8 días de almacenaje en punto de recogida. Para pedidos de tiendas online, Hermes no publica plazo fijo para España.
 
-### ¿Qué empresa reparte los paquetes de Hermes en España?
+### ¿Qué empresa reparte los paquetes de Hermes Germany en España?
 
-Una empresa local con la que trabaja Hermes, que sus páginas no nombran. Si myhermes.de muestra «Internat. Versandpartner» en el detalle del envío, su enlace lleva al seguimiento de esa empresa.
+Hermes trabaja con un socio local (*Systempartner*) cuyo nombre no publica en sus condiciones. Si `myhermes.de` muestra «Internat. Versandpartner» con el enlace «Sendungsdetails» en el detalle del envío, ahí verás el transportista español y su seguimiento.
 
-### ¿Hay que pagar aduana por un paquete de Hermes desde Alemania?
+### ¿Hay que pagar aduana por un paquete de Hermes desde Alemania y llega a Canarias?
 
-No, si va a la península o a Baleares: Alemania y España están en la UE, y los derechos de aduana son para compras de fuera de la UE. Hermes Germany no pide aduanas por correo electrónico ni por SMS, así que un mensaje que te las pida en su nombre es un fraude.
+De Alemania a la península o Baleares no hay aduana (ambos países están en la UE); Hermes Germany tampoco envía SMS ni cobra aduanas por correo. Su servicio para particulares excluye Canarias, Ceuta y Melilla.
 
-### ¿Hermes envía a Canarias?
+### ¿Por qué Hermes no encuentra mi número o el seguimiento está parado?
 
-No con su servicio para particulares: Hermes excluye Canarias, Ceuta y Melilla de los envíos de particulares a España.
+Un paquete nuevo aparece como muy tarde al día siguiente (hasta 2 días laborables si se dejó un viernes), y Hermes borra los datos tras 30 días. Si lleva más de 5 días laborables parado, se puede pedir una búsqueda (*Sendungsrecherche*) por el formulario — y si compraste en una tienda, reclama primero al vendedor.
 
-### ¿Tiene Hermes teléfono de atención al cliente?
+### ¿Cómo contactar con Hermes Germany (tiene teléfono o WhatsApp)?
 
-No. Usa el formulario de myhermes.de, en alemán; te contestan por correo electrónico.
+Hermes Germany no tiene teléfono de atención al cliente ni WhatsApp activo. Atiende por el [formulario de contacto en myhermes.de](https://www.myhermes.de/service/kontakt/) (en alemán, respondiendo por correo electrónico), y cualquier SMS que pida dinero en su nombre es fraude.
 
 :::sources
 - [Hermes: Versand nach Spanien](https://www.myhermes.de/preise/versandlaender/spanien/) – seguimiento, 6 a 8 días laborables, 2 intentos y punto de recogida, 8 días, 500 €, sin Canarias, Ceuta ni Melilla

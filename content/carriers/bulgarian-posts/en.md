@@ -1,12 +1,12 @@
 ---
 title: Bulgarian Posts tracking: PS and BG codes, customs, claims
-description: Track a Bulgarian Posts parcel: PS and S10 BG numbers, English and Bulgarian statuses, 20-day post-office pickup, EU customs fees, claims and phone contacts.
+description: Track Bulgarian Posts (Български пощи) by PS or BG S10 code: status meanings, 20-day/45-day post office holds, €2.70–€20 customs fees, claims and *7678.
 slug: bulgarian-posts-tracking
 published: 2026-11-23
-updated: 2026-11-23
+updated: 2026-11-27
 ---
 
-Bulgarian Posts (*Български пощи ЕАД*) is Bulgaria's national universal postal operator, handling domestic letters, e-packages and parcels as well as international Universal Postal Union (UPU) mail and EMS / Bulpost courier deliveries. Track an item on [Bulgarian Posts' tracking page](https://www.bgpost.bg/en/postal-services/track-package), or paste the tracking number into the box above.
+Bulgarian Posts (*Български пощи ЕАД*) is Bulgaria's national postal operator for domestic parcels (`PS` codes), international UPU S10 mail (`…BG`) and EMS / Bulpost deliveries. Track your item on [bgpost.bg](https://www.bgpost.bg/en/postal-services/track-package) or paste the 13-character barcode above — below you'll find English and Bulgarian status meanings (including `Второ посещение`), 20-day/45-day post office holding rules, EU customs fees and contacts (`*7678`).
 
 ## Bulgarian Posts tracking numbers: PS and S10 formats
 
@@ -99,19 +99,23 @@ You can choose notification presets for "Every scan", "Important steps" or "Deli
 
 ### How long does Bulgarian Posts hold a parcel at the post office?
 
-Standard parcels and registered items wait **20 calendar days** from arrival at your delivery post office (with a second notice sent after 10 days and a storage fee applying to parcels after 9 days). Items that have gone through customs clearance are held for **45 calendar days** at the designated post office.
+Standard parcels and registered items wait **20 calendar days** from arrival at your delivery post office (with a second notice at 10 days and a storage fee on parcels after 9 days). Customs-cleared non-EU items are always collected at the designated post office and held for **45 calendar days**.
 
-### What does `Второ посещение` mean in Bulgarian Posts tracking?
+### What does "Второ посещение" mean in Bulgarian Posts tracking?
 
-It means Bulgarian Posts issued the second written pickup notice after 10 calendar days without collection. Your parcel is still waiting at the post office — Peek keeps it in "Ready for pickup".
+It means Bulgarian Posts issued the second written pickup notice after 10 calendar days without collection — it is not a failed home delivery. Your parcel is still waiting at the post office ("Ready for pickup" in Peek).
 
-### What does `Return item from customs (Inb)` mean?
+### What does "Return item from customs (Inb)" mean?
 
-It means Bulgarian customs cleared the item and handed it back into Bulgarian Posts' network so it can travel to your post office. It does not mean your parcel is being returned to the sender.
+It means Bulgarian customs cleared your parcel and returned it to Bulgarian Posts' network for onward transport to your post office — not that it is being returned to the sender.
 
-### How much does Bulgarian Posts charge for customs clearance?
+### How much are Bulgarian Posts customs fees and the €3 / €2 EU charges?
 
-As of 2 November 2026, Bulgarian Posts' representation fee (VAT included) is €2.70 for IOSS purchases up to €150 (or C2C gifts up to €45), €3.80 for non-IOSS purchases up to €150 (or gifts €45–€1,000), €12.00 for purchases €150–€1,000 and €20.00 (+ €5.00 per extra item type) over €1,000, in addition to applicable EU customs duty (€3 up to €150), the €2 EU handling fee and VAT.
+Effective 2 November 2026, Bulgarian Posts' VAT-included representation fee is €2.70 (IOSS orders up to €150 or C2C gifts up to €45), €3.80 (non-IOSS up to €150 or gifts €45–€1,000), €12.00 (€150–€1,000) and €20.00 (+ €5.00 per extra item type) over €1,000, on top of VAT, the €3 EU flat duty (B2C up to €150) and the €2 EU Union Handling Fee.
+
+### How do I contact Bulgarian Posts or file a claim for a lost parcel?
+
+Call `*7678` or `+359 2 962 50 50` (working days 08:00–17:30) or email `info@bgpost.bg` (customs: `customerservice@bgpost.bg`). Before delivery, only the sender (or the recipient with the sender's written consent) can file a claim within 6 months via a post office or the RQMS portal.
 
 :::sources
 - [Bulgarian Posts: Home](https://www.bgpost.bg/en) – national postal operator overview

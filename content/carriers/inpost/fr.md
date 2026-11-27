@@ -1,12 +1,12 @@
 ---
 title: Suivi InPost : numéros, statuts, Lockers et Mondial Relay
-description: Suivre un colis InPost en France, Belgique ou Suisse : formats de numéro, statuts, délai de retrait en Locker ou Point Relais, douane et contact.
+description: Suivi colis InPost (groupe Mondial Relay) en France, Belgique, Suisse et Europe : numéros 24/8 chiffres, Locker & Point Relais (3–5 jours), douane et contacts.
 slug: inpost-suivi
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Fondé en Pologne en 1999, avec des consignes Paczkomat depuis 2009, le groupe InPost (`InPost S.A.`, basé au Luxembourg) réunit environ 95 000 Lockers et points de retrait dans neuf pays européens. Depuis le rachat de [Mondial Relay](carrier:mondial-relay) en 2021, le réseau conserve la marque Mondial Relay en France, en Belgique et au Luxembourg, porte déjà le nom InPost en Espagne et au Portugal, passe progressivement sous le nom InPost aux Pays-Bas et opère directement comme InPost en Pologne, en Italie et au Royaume-Uni (où InPost UK a acquis Yodel en avril 2025).
+Le groupe **InPost** (`InPost S.A.`, 95 000 Lockers et points de retrait dans 9 pays européens) a racheté [Mondial Relay](carrier:mondial-relay) en 2021 : il conserve le nom Mondial Relay en France, Belgique et Luxembourg, opère comme InPost en Pologne, Italie, Espagne, Portugal et au Royaume-Uni (avec Yodel by InPost), et remplace Mondial Relay aux Pays-Bas. Colle ton numéro InPost (24 chiffres, `8YDR`, `JD`/`JJD` ou `FV`) ci-dessus pour suivre le trajet, les délais de garde et les règles douanières.
 
 Pour suivre un colis InPost venant de Pologne, d'Italie ou du Royaume-Uni, collez le numéro fourni par le marchand ci-dessus ou sur le site du pays d'envoi comme [inpost.co.uk/tracking](https://inpost.co.uk/tracking). Pour un envoi français ou belge à 8 chiffres, consultez aussi la page [Mondial Relay](carrier:mondial-relay).
 
@@ -99,21 +99,25 @@ Peek ne suit pas le passage à un autre transporteur. Il vérifie **jusqu’à t
 
 ## Questions sur le suivi InPost
 
-### InPost et Mondial Relay sont-ils la même société ?
+### InPost et Mondial Relay sont-ils la même entreprise ?
 
-Oui : InPost (`InPost S.A.`) a racheté [Mondial Relay](carrier:mondial-relay) en 2021. Le nom Mondial Relay demeure en France, Belgique et Luxembourg, tandis que l'Espagne et le Portugal utilisent déjà InPost.
+Oui : InPost (`InPost S.A.`) a racheté [Mondial Relay](carrier:mondial-relay) en 2021. En France, Belgique et Luxembourg le réseau garde le nom Mondial Relay, tandis que l'Espagne, le Portugal, l'Italie, la Pologne et le Royaume-Uni utilisent InPost (avec transition en cours aux Pays-Bas).
 
-### Combien de jours un colis reste-t-il en Locker InPost ?
+### Combien de jours un colis reste-t-il en Locker ou Point Relais InPost ?
 
-5 jours en France, Belgique, Luxembourg, Espagne et Portugal, 3 jours sans prolongation au Royaume-Uni, 3 jours en Italie (selon le barème international d'InPost Portugal) et selon l'application InPost Mobile en Pologne.
+Comptez 5 jours en France, Belgique, Luxembourg, Espagne et Portugal (certaines pages portugaises mentionnent encore 8 jours), 3 jours en Italie et 3 jours sans prolongation au Royaume-Uni (48 h annoncées à l'international pour la Pologne ; 7 ou 15 jours chez la Poste suisse).
 
-### Pourquoi mon code à 6 ou 9 chiffres ne donne-t-il aucun suivi ?
+### Pourquoi mon code PIN à 6 chiffres ou code à 9 chiffres ne fonctionne pas dans le suivi ?
 
-C'est le code de retrait (PIN à 6 chiffres ou code britannique à 9 chiffres), pas le numéro d'expédition. Utilisez le numéro à 24 ou 8 chiffres, ou débutant par `JD`, `JJD`, `8YDR` ou `FV`.
+Les codes à 6 chiffres (Espagne/Portugal) et 9 chiffres (Royaume-Uni ou « kod nadania » polonais) servent uniquement au retrait ou au dépôt, pas au suivi. Saisis le numéro d'expédition (24 chiffres, 8 chiffres pour Mondial Relay, `8YDR`, `JD`/`JJD` ou `FV`).
 
-### Quel est le délai moyen de livraison chez InPost ?
+### Faut-il payer des frais de douane sur un colis InPost depuis l'étranger ?
 
-Au Royaume-Uni, InPost annonce aux expéditeurs 3 jours ouvrés vers un Locker ou Shop et 4 jours ouvrés à domicile (5 jours ouvrés pour un retour marchand). Pour la France et la Belgique, voir [Mondial Relay](carrier:mondial-relay).
+Aucun frais au sein de l'UE (Pologne, Italie, Espagne, France, Belgique, Luxembourg). Depuis le Royaume-Uni ou hors UE vers l'UE, la TVA (hors IOSS), le droit forfaitaire de 3 € (jusqu'à 150 €) et les frais européens de 2 € par catégorie peuvent s'appliquer ; ne paie jamais via un lien SMS imprévu.
+
+### Quel est le délai de livraison InPost et comment contacter le service client ?
+
+Au Royaume-Uni, InPost annonce 3 jours ouvrés vers un Locker/Shop et 4 jours ouvrés à domicile (pour France/Belgique, voir [Mondial Relay](carrier:mondial-relay)). Contacts : UK `0330 335 0950`, Pologne `+48 722 444 000`, Italie `+39 0238582894`, Espagne `+34 938 16 62 34`, Portugal `211 245 624`.
 
 :::sources
 - [InPost : Who we are](https://inpost.eu/who-we-are) – Pologne 1999, InPost S.A. au Luxembourg

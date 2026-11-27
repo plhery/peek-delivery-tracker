@@ -1,12 +1,12 @@
 ---
 title: DHL Paket seguimiento: estados y envíos a España
-description: Sigue un paquete DHL Paket: cómo es el número, qué significan los estados en alemán e inglés, Packstation y oficinas en Alemania, y quién lo entrega en España.
+description: Seguimiento DHL Paket desde Alemania a España: números JJD y 00340434, estados en alemán/inglés, entrega con Correos o CTT Express, plazos y +49 228 4333112.
 slug: dhl-paket-seguimiento
 published: 2026-10-22
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-DHL Paket es el servicio de paquetería de DHL en Alemania, el de los paquetes de Deutsche Post y DHL. Esta página te sirve si vives en Alemania y también si estás en España esperando un paquete enviado desde allí con DHL Paket International. En los dos casos se sigue con el número en dhl.de (en alemán o en inglés), en la app Post & DHL o pegándolo en la casilla de arriba. El número te lo da quien envía: las tiendas suelen ponerlo en el correo de confirmación del envío.
+DHL Paket es el servicio de paquetería de Deutsche Post y DHL en Alemania. Esta guía sirve tanto si recibes un paquete en Alemania (Filiale o Packstation) como si esperas en España un envío **DHL Paket International** (orientativamente 3–4 días laborables a la península, entregado por Correos, DHL eCommerce Iberia o CTT Express). Pega tu *Sendungsnummer* (10 a 39 caracteres) arriba o consúltalo en dhl.de o en la app Post & DHL.
 
 ## Número de seguimiento DHL Paket: dónde está y cómo es
 
@@ -96,21 +96,25 @@ Muestra el estado, cada evento con su lugar en el mapa, el día previsto de entr
 
 ## Preguntas sobre el seguimiento de DHL Paket
 
-### ¿Cuánto tarda en aparecer el seguimiento de DHL?
+### ¿Quién reparte un paquete de DHL Paket en España (Correos, DHL eCommerce o CTT Express)?
 
-Hasta 24 horas. Mientras tanto, DHL puede decir que espera los datos del envío o solo que el remitente ha mandado los datos de la etiqueta.
+En España, DHL Paket entrega a través de un socio local: DHL cita a [Correos](carrier:correos-spain) y en la península también a [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) (solo Correos en Canarias, Ceuta y Melilla), y tras la alianza de mayo de 2026 muchas entregas a particulares pasan a [CTT Express](carrier:ctt-express). El seguimiento o el aviso te indican cuál lo tiene.
 
-### ¿Cuánto tarda un paquete de DHL de Alemania a España?
+### ¿Cuánto tarda un paquete DHL Paket de Alemania a España y cuándo aparece el seguimiento?
 
-DHL da como orientación de 3 a 4 días laborables a la península; a Canarias tarda más. Dentro de Alemania, un paquete suele llegar en 1 o 2 días laborables desde el envío, y algo más antes de Navidad.
+Un número nuevo tarda hasta 24 horas en mostrar datos. Como referencia, DHL calcula 3 a 4 días laborables hasta la península (más a Canarias) y 1 a 2 días laborables dentro de Alemania; es habitual una pausa en el centro internacional IPZ de Fráncfort antes de que lo escanee el operador español.
 
-### ¿Quién reparte DHL Paket en España?
+### ¿Cuántos días guardan un paquete DHL Paket en Correos (España) o en Alemania?
 
-Depende: DHL nombra a Correos y, en la península, también a DHL eCommerce Iberia; en Canarias, Ceuta y Melilla, solo a Correos. Algunas entregas a particulares pueden llegar con CTT Express. El seguimiento o el aviso te dicen qué empresa lo tiene.
+Si lo reparte Correos en España, dispones de 15 días en oficina con tu DNI. En Alemania, una Filiale o Paketshop lo guarda 7 días laborables (lunes a sábado) y una Packstation 7 días naturales (9 tras un intento fallido, sin prórroga).
 
-### ¿Se puede seguir un DHL Päckchen?
+### ¿Se puede seguir un DHL Päckchen o cambiar la dirección de un DHL Paket?
 
-No. Ni el DHL Päckchen ni el DHL Päckchen International tienen seguimiento; solo los paquetes (Pakete).
+No: ni DHL Päckchen ni DHL Päckchen International tienen seguimiento, y en DHL Paket la dirección no se puede cambiar una vez enviado (en Alemania sí puedes aplazar el día hasta 6 días laborables o elegir Ablageort/Nachbar antes del reparto).
+
+### ¿Cuál es el teléfono de DHL Paket y de Correos si hay un problema?
+
+Desde fuera de Alemania llama a DHL Paket al `+49 228 4333112` (`0228 4333112` en Alemania, lun–vie 8–20 h, sáb 8–18 h) o a Correos en España al `915 197 197` / `900 400 004`. Si el envío se pierde, contacta primero con el remitente (la búsqueda internacional tarda hasta 8 semanas).
 
 :::sources
 - [DHL: What does my shipment status mean?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – estados en inglés, centro de destino, reparto, Filiale 7 días laborables, documento, autorización

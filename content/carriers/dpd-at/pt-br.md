@@ -1,6 +1,6 @@
 ---
 title: Rastreamento DPD Áustria: status, pontos Pickup e contato
-description: Rastreie encomendas da DPD na Áustria: número de 14 dígitos e PIN, tradução dos status do myDPD em alemão e inglês, prazos Pickup e como contatar a DPD.
+description: Rastreie encomendas da DPD na Áustria: número de 14 dígitos e PIN, o que significam os status do myDPD em alemão e inglês, prazos Pickup e como contatar a DPD.
 slug: dpd-austria-tracking
 published: 2026-11-26
 updated: 2026-11-26
@@ -21,7 +21,7 @@ Se a etiqueta mostrar uma letra ou dígito extra após os 14 dígitos, omita-o. 
 
 ## O que significam os status de rastreamento da DPD Áustria
 
-O myDPD mostra cada movimentação com o depósito responsável, em alemão ou inglês. Na ordem habitual (*Paketstation* significa locker de encomendas):
+O myDPD mostra cada movimentação com o depósito responsável, em alemão ou inglês. Na ordem em que a encomenda costuma passar por eles (*Paketstation* significa locker de encomendas):
 
 | O myDPD diz | O que significa para você |
 | --- | --- |
@@ -32,7 +32,7 @@ O myDPD mostra cada movimentação com o depósito responsável, em alemão ou i
 | `In Zustellung` | Com o motorista, a caminho do seu endereço. |
 | `Empfänger leider nicht angetroffen.`, `Unfortunately, consignee not present. Notification was left.` | Ninguém em casa; o motorista deixou cartão de aviso. |
 | `Unfortunately, parcel was not delivered.` | Não entregue nesta rota; retorna ao depósito para nova tentativa. |
-| `In Zustellung an Pickup Paketstation`, `In delivery to Pickup parcel shop` | Após tentativa frustrada, o motorista leva o volume a um locker ou loja Pickup. |
+| `In Zustellung an Pickup Paketstation`, `In delivery to Pickup parcel shop` | Após uma entrega não realizada, o motorista leva o volume a um locker ou loja Pickup. |
 | `Paket wurde in der Pickup Paketstation hinterlegt`, `Parcel was handed over to Pickup parcel shop`, `Takeover by Pickup parcel shop` | Aguardando você em um locker ou loja Pickup. A DPD envia o código de retirada por e-mail ou SMS (com endereço no caso de lockers). |
 | `Paket durch Empfänger abgeholt` | Retirada no ponto Pickup. |
 | `Paket wurde erfolgreich abgestellt` | Deixada no local seguro autorizado por você (deposit okay), como a garagem. |
@@ -46,7 +46,7 @@ O myDPD mostra cada movimentação com o depósito responsável, em alemão ou i
 
 **Alterar a entrega.** Cadastre-se no myDPD para alterar a entrega até pouco antes da chegada usando o código de 14 dígitos ou PIN: outro dia ou endereço, vizinho indicado, ponto ou locker Pickup, ou deposit okay (autorização para deixar em local escolhido, como o terraço). Com conta, você também pode definir ponto/locker favorito ou autorização permanente.
 
-**Ninguém em casa.** A DPD pode entregar a qualquer pessoa que receba no seu endereço residencial ou comercial sem pedir documento. Após uma primeira tentativa perdida, pode deixar com um vizinho ou no ponto/locker Pickup mais próximo, informando nome e endereço no cartão e no myDPD. Veja [entregas perdidas](guide:missed-delivery).
+**Ninguém em casa.** A DPD pode entregar a qualquer pessoa que receba no seu endereço residencial ou comercial sem pedir documento. Após uma primeira entrega não realizada, pode deixar com um vizinho ou, se não houver, no ponto/locker Pickup mais próximo, informando nome e endereço no cartão e no myDPD. Veja [entregas não realizadas](guide:missed-delivery).
 
 **Retirada.**
 - Ponto Pickup: **7 dias corridos**, com lembretes após 3 e 5 dias. Apresente o código de retirada enviado por e-mail ou SMS, ou documento de identidade com assinatura (a DPD não reenvia o código e o myDPD não o exibe). Cada loja tem horário próprio.
@@ -64,7 +64,7 @@ Para reembolso ou reenvio, fale com a loja titular do contrato com a DPD.
 
 **Extraviada.** Se ninguém localizar o volume, contate o suporte da DPD e a loja. Veja [encomenda extraviada](guide:lost-parcel).
 
-**Danificada.** A DPD investiga danos apenas a pedido do remetente, então avise a loja para que ela acione a DPD e lhe ofereça reembolso ou reposição. Os termos da DPD exigem comunicação escrita de danos ocultos em no máximo **seis dias corridos** e de danos visíveis logo após a entrega, então aja rápido. Veja [encomenda danificada](guide:damaged-parcel).
+**Danificada.** A DPD investiga danos apenas a pedido do remetente, então avise a loja para que ela acione a DPD e, conforme os termos dela, lhe ofereça reembolso, nova entrega ou algo parecido. Os termos da DPD exigem comunicação escrita de danos ocultos em no máximo **seis dias corridos** e de danos visíveis logo após a entrega, então aja rápido. Veja [encomenda danificada](guide:damaged-parcel).
 
 **Alfândega.** Compras on-line de fora da UE têm imposto aduaneiro fixo de €3 por item em pacotes até €150 (em vigor desde 1º de julho de 2026) e taxa de manuseio da União de €2 por item, qualquer que seja o valor (desde 1º de novembro de 2026). Cada item reúne mercadorias com mesma classificação tarifária, descrição e, quando exigido, origem. As páginas da DPD Áustria não dizem se ou como ela repassa essas cobranças: confirme com a loja se estavam incluídas no preço. Veja [encomendas retidas na alfândega](guide:customs).
 
@@ -104,7 +104,7 @@ Normalmente um dia útil dentro da Áustria, contado a partir do recebimento do 
 
 ### O que é o código PIN da DPD?
 
-É o Parcel Information Number, impresso no cartão deixado quando a entrega falha. O myDPD aceita o PIN; no Peek, use o código de 14 dígitos.
+É o Parcel Information Number, impresso no cartão deixado quando a entrega não é realizada. O myDPD aceita o PIN; no Peek, use o código de 14 dígitos.
 
 ### O que significa `Auftragsdaten übermittelt`?
 
@@ -115,21 +115,21 @@ A loja transmitiu os dados do envio à DPD, mas ainda não entregou o pacote fí
 `05 03 73 420` para clientes particulares, de segunda a sexta das 7h às 18h (horário da Áustria).
 
 :::sources
-- [DPD Austria: Receiving parcels](https://www.dpd.com/at/en/receiving-parcels/) – Predict, Live-Tracking, changes, deposit okay, lockers
-- [DPD Austria: FAQ receiving parcels](https://www.dpd.com/at/en/support/faq/faq-receiving-parcels/) – parcel number, PIN, one working day, changes
-- [DPD Austria: FAQ Pickup](https://www.dpd.com/at/en/support/faq/pickup/) – storage, pickup code, ID
-- [DPD Austria: General terms and conditions](https://www.dpd.com/at/en/gtc/) – storage, reminders, return
-- [DPD Austria: General terms and conditions, national (PDF)](https://www.dpd.com/wp-content/uploads/sites/224/2022/01/AGB0447_AGBs_DPDA_national_en.pdf) – neighbour or Pickup point after a first attempt, Predict, time window, damage reports
-- [DPD Austria: What does the status "Order data transmitted to DPD" mean?](https://www.dpd.com/at/en/faq/was-bedeuter-der-status-auftragsdaten-an-dpd-uebermittelt/) – ask the sender
-- [DPD Austria: Status not changing in live tracking](https://www.dpd.com/at/en/faq/der-paketstatus-meines-pakets-hat-sich-schon-lange-nicht-mehr-veraendert-woran-kann-das-liegen/) – several hours
-- [DPD Austria: Parcel shown as delivered but not delivered](https://www.dpd.com/at/en/faq/ein-paket-das-mir-als-zugestellt-angezeigt-wird-ist-noch-nicht-geliefert-worden-woran-liegt-das/) – what to check first
-- [DPD Austria: My parcel can't be located](https://www.dpd.com/at/en/faq/mein-paket-ist-unauffindbar-was-soll-ich-tun/) – customer service
-- [DPD Austria: Parcel arrives damaged](https://www.dpd.com/at/en/faq/was-ist-zu-tun-wenn-ein-paket-beschadigt-beim-empfanger-ankommt/) – the sender first
-- [DPD Austria: Contact](https://www.dpd.com/at/en/support/contact/) – phone, hours
-- [DPD Austria: Contact form for consignees](https://www.dpd.com/at/en/support/contact-form-consignee/) – one channel at a time
-- [DPD Austria: Security](https://www.dpd.com/at/en/security/) – fake emails and texts
-- [DPD Austria: Legal notice](https://www.dpd.com/at/en/legal-notice/) – company, address, phone from abroad
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty since 1 July 2026, €2 fee since 1 November 2026
-- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – what an item is
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, myDPD's wordings, depot ranges, hand-overs
+- [DPD Austria: Receiving parcels](https://www.dpd.com/at/en/receiving-parcels/) – Predict, Live-Tracking, alterações, deposit okay, lockers
+- [DPD Austria: FAQ receiving parcels](https://www.dpd.com/at/en/support/faq/faq-receiving-parcels/) – número da encomenda, PIN, um dia útil, alterações
+- [DPD Austria: FAQ Pickup](https://www.dpd.com/at/en/support/faq/pickup/) – prazo de guarda, código de retirada, documento
+- [DPD Austria: General terms and conditions](https://www.dpd.com/at/en/gtc/) – prazo de guarda, lembretes, devolução
+- [DPD Austria: General terms and conditions, national (PDF)](https://www.dpd.com/wp-content/uploads/sites/224/2022/01/AGB0447_AGBs_DPDA_national_en.pdf) – vizinho ou ponto Pickup após a primeira tentativa, Predict, janela de horário, comunicação de danos
+- [DPD Austria: What does the status "Order data transmitted to DPD" mean?](https://www.dpd.com/at/en/faq/was-bedeuter-der-status-auftragsdaten-an-dpd-uebermittelt/) – pergunte ao remetente
+- [DPD Austria: Status not changing in live tracking](https://www.dpd.com/at/en/faq/der-paketstatus-meines-pakets-hat-sich-schon-lange-nicht-mehr-veraendert-woran-kann-das-liegen/) – várias horas
+- [DPD Austria: Parcel shown as delivered but not delivered](https://www.dpd.com/at/en/faq/ein-paket-das-mir-als-zugestellt-angezeigt-wird-ist-noch-nicht-geliefert-worden-woran-liegt-das/) – o que verificar primeiro
+- [DPD Austria: My parcel can't be located](https://www.dpd.com/at/en/faq/mein-paket-ist-unauffindbar-was-soll-ich-tun/) – atendimento ao cliente
+- [DPD Austria: Parcel arrives damaged](https://www.dpd.com/at/en/faq/was-ist-zu-tun-wenn-ein-paket-beschadigt-beim-empfanger-ankommt/) – primeiro o remetente
+- [DPD Austria: Contact](https://www.dpd.com/at/en/support/contact/) – telefone, horários
+- [DPD Austria: Contact form for consignees](https://www.dpd.com/at/en/support/contact-form-consignee/) – um canal por vez
+- [DPD Austria: Security](https://www.dpd.com/at/en/security/) – e-mails e SMS falsos
+- [DPD Austria: Legal notice](https://www.dpd.com/at/en/legal-notice/) – empresa, endereço, telefone do exterior
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – imposto de €3 desde 1º de julho de 2026, taxa de €2 desde 1º de novembro de 2026
+- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – o que é um item
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê, textos do myDPD, faixas de depósito, transferências
 :::

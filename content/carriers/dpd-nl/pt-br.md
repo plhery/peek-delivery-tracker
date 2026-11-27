@@ -22,7 +22,7 @@ Códigos de 14 dígitos não são exclusivos da DPD Países Baixos: outras empre
 
 ## O que significam os status de rastreamento da DPD Países Baixos
 
-O Peek lê as etapas da DPD em inglês. Na ordem habitual:
+O Peek lê as etapas da DPD em inglês. Na ordem em que a encomenda costuma passar por elas:
 
 | Status (como o Peek exibe) | O que significa para você |
 | --- | --- |
@@ -54,7 +54,7 @@ A DPD repassa ao Peek cada etapa apenas uma vez, com sua data mais recente e sem
 
 Você também pode autorizar "Permission to leave" para uma única encomenda pela notificação; para todas as encomendas, preencha, assine e devolva por e-mail o formulário da DPD.
 
-**Ausente em casa.** Se ninguém atender e não puder ficar com um vizinho, a DPD leva a encomenda ao Parcel Point mais próximo já após a primeira tentativa. A DPD conta cerca de 1.500 Parcel Points nos Países Baixos, e o aviso deixado pelo motorista informa o endereço de retirada. Veja [entregas perdidas](guide:missed-delivery).
+**Ausente em casa.** Se ninguém atender e não puder ficar com um vizinho, a DPD leva a encomenda ao Parcel Point mais próximo já após a primeira tentativa. A DPD conta cerca de 1.500 Parcel Points nos Países Baixos, e o aviso deixado pelo motorista informa o endereço de retirada. Veja [entregas não realizadas](guide:missed-delivery).
 
 **Parcel Points e lockers.** A rede da DPD inclui:
 
@@ -65,7 +65,7 @@ Você também pode autorizar "Permission to leave" para uma única encomenda pel
 
 Encomendas permanecem em um locker DPD por **5 dias** antes de retornarem ao remetente. Veja [encomendas não retiradas](guide:uncollected-parcel).
 
-**Bebidas alcoólicas.** A lei holandesa exige verificação de idade (mínimo 18 anos) na entrega de álcool: mostre documento oficial ao motorista, que registra sua data de nascimento, os 5 últimos dígitos do documento e o tipo de documento.
+**Bebidas alcoólicas.** A lei holandesa exige verificação de idade (mínimo 18 anos) na entrega de álcool: mostre um documento de identidade válido ao motorista, que registra sua data de nascimento, os 5 últimos dígitos do documento e o tipo de documento.
 
 **Vinted.** A Vinted determina que todas as dúvidas sobre seus envios passem pelo app da Vinted, por isso a DPD redireciona você para lá. Veja [pedidos Vinted](guide:vinted-orders).
 
@@ -73,7 +73,7 @@ Encomendas permanecem em um locker DPD por **5 dias** antes de retornarem ao rem
 
 Para extravio ou dano, a DPD encaminha você à loja ou remetente, que trata diretamente com a DPD. Para reembolso ou reenvio, fale com a loja.
 
-**Sem atualização.** Se ficar sem movimentação por **3 dias**, a DPD pede que você fale com o atendimento (abaixo). Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
+**Sem atualização.** A encomenda pode ficar retida em algum ponto. Se ficar sem movimentação por **3 dias**, a DPD pede que você fale com o atendimento (abaixo). Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
 **Entregue, mas não recebida.** Avise a loja ou remetente o mais rápido possível, em até **7 dias corridos**, para que acionem a DPD. Veja [entregue mas não recebida](guide:delivered-not-received).
 
@@ -99,7 +99,7 @@ A DPD não informa se o atendimento fala inglês.
 
 Cole o código de 14 dígitos no [Peek](/). Como outras transportadoras usam o mesmo formato, o Peek consulta as mais prováveis pelo seu país (região do celular ou país de acesso na web), priorizando DPD Países Baixos quando você está nos Países Baixos. Aparece "DPD Netherlands está com esta encomenda." assim que a DPD posiciona o volume nos Países Baixos; enquanto ainda estiver em outro país (por exemplo, na Alemanha), pode aparecer como DPD Alemanha e o Peek acompanha a passagem para os Países Baixos. Se aparecer "ainda não encontrada · o Peek continua verificando", clique em "Trocar" e escolha DPD Netherlands (ou "Trocar transportadora" depois). Cole assim mesmo: o Peek acompanha mais de 4.500 transportadoras.
 
-Cole somente os 14 dígitos: qualquer caractere extra ao final impede a detecção automática pela DPD Países Baixos. Links do myDPD em `www.dpdgroup.com/nl/` com `parcelNumber=` também funcionam e selecionam DPD Netherlands imediatamente.
+Cole somente os 14 dígitos: com um caractere a mais depois deles, a verificação de transportadora do Peek deixa a DPD Países Baixos de fora. Links do myDPD em `www.dpdgroup.com/nl/` com `parcelNumber=` também funcionam e selecionam DPD Netherlands imediatamente.
 
 O Peek mostra o status da DPD, as etapas listadas acima, a data prevista e o horário de entrega. Como a DPD exige código postal para mostrar mais detalhes e o Peek não envia código postal à DPD Países Baixos, ela entrega seu resumo curto; por isso o Peek também consulta serviços de rastreamento e exibe histórico mais completo quando disponível.
 
@@ -130,17 +130,17 @@ Sim. Pelo myDPD, até 30 minutos antes da entrega, você pode escolher outro dia
 `085-0022222` (tarifa local) para entregas nos Países Baixos, de segunda a sexta das 8h às 17h30 e sábado das 9h às 17h (horário local). Para entregas no exterior, contate a DPD do país de destino.
 
 :::sources
-- [DPD Netherlands: Receiving parcels](https://www.dpd.com/nl/en/receiving/) – myDPD, changes up to 30 minutes before, permission to leave, age check, import payment requests, objections
-- [DPD Netherlands: Follow your parcel](https://www.dpd.com/nl/en/receiving/track/) – 14-digit number or reference number
-- [DPD Netherlands: Not at home?](https://www.dpd.com/nl/en/receiving/not-at-home/) – neighbours, Parcel Point after the first attempt, about 1,500 Parcel Points
-- [DPD Netherlands: Contact](https://www.dpd.com/nl/en/contact/) – delivery days, emails and time slot, changes in myDPD, phone, hours, form, parcels abroad, Vinted
-- [DPD Netherlands: My parcel hasn't arrived](https://www.dpd.com/nl/en/support/faq/frequently_asked_questions/receiving/my-parcel-hasn-t-arrived-what-should-i-do/) – postcode for more details, 3 days without movement
-- [DPD Netherlands: Damaged or not delivered](https://www.dpd.com/nl/en/support/faq/frequently_asked_questions/receiving/what-should-i-do-if-my-parcel-is-damaged-or-not-delivered/) – 7 calendar days, photo, the shop contacts DPD
-- [DPD Netherlands: Is the email from DPD real or false?](https://www.dpd.com/nl/en/support/faq/frequently_asked_questions/receiving/is-the-email-i-have-received-from-dpd-real-or-false/) – fake messages, payments, no cash
+- [DPD Netherlands: Receiving parcels](https://www.dpd.com/nl/en/receiving/) – myDPD, alterações até 30 minutos antes, autorização para deixar, verificação de idade, cobranças de importação, contestação
+- [DPD Netherlands: Follow your parcel](https://www.dpd.com/nl/en/receiving/track/) – número de 14 dígitos ou número de referência
+- [DPD Netherlands: Not at home?](https://www.dpd.com/nl/en/receiving/not-at-home/) – vizinhos, Parcel Point após a primeira tentativa, cerca de 1.500 Parcel Points
+- [DPD Netherlands: Contact](https://www.dpd.com/nl/en/contact/) – dias de entrega, e-mails e janela de horário, alterações no myDPD, telefone, horários, formulário, encomendas no exterior, Vinted
+- [DPD Netherlands: My parcel hasn't arrived](https://www.dpd.com/nl/en/support/faq/frequently_asked_questions/receiving/my-parcel-hasn-t-arrived-what-should-i-do/) – código postal para mais detalhes, 3 dias sem movimentação
+- [DPD Netherlands: Damaged or not delivered](https://www.dpd.com/nl/en/support/faq/frequently_asked_questions/receiving/what-should-i-do-if-my-parcel-is-damaged-or-not-delivered/) – 7 dias corridos, foto, a loja contata a DPD
+- [DPD Netherlands: Is the email from DPD real or false?](https://www.dpd.com/nl/en/support/faq/frequently_asked_questions/receiving/is-the-email-i-have-received-from-dpd-real-or-false/) – mensagens falsas, pagamentos, nada em dinheiro
 - [DPD Netherlands: DPD Parcel Points](https://www.dpd.com/nl/en/dpd-parcel-point/) – Parcel Points, lockers, Business Points, ViaTim, De Buren
-- [DPD Netherlands: Until when can I collect my parcel?](https://www.dpd.com/nl/en/faq/until-when-can-i-collect-my-parcel/) – 5 days in a locker
+- [DPD Netherlands: Until when can I collect my parcel?](https://www.dpd.com/nl/en/faq/until-when-can-i-collect-my-parcel/) – 5 dias no locker
 - [DPD Netherlands: Terms of use (PDF)](https://www.dpd.com/wp-content/uploads/sites/220/2022/01/Disclaimer-ENG-2022-01.pdf) – DPD (Nederland) B.V.
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per kind of product up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
-- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per kind of product whatever the value
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, the step wordings Peek shows, the hand-over to other DPD companies
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – imposto aduaneiro de €3 por tipo de produto até €150 desde 1º de julho de 2026, taxa de manuseio da União de €2 desde 1º de novembro de 2026
+- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 por tipo de produto, qualquer que seja o valor
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê, os textos de etapa que o Peek mostra, a transferência para outras empresas DPD
 :::

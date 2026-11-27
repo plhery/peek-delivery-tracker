@@ -81,7 +81,7 @@ Na Espanha, o evento do parceiro local após a alfândega pode aparecer como `Pa
 
 **Alemanha.** A [iMile](carrier:imile) pode entregar, e o rastreador da TopYou segue com os eventos dela.
 
-**Áustria.** A DPD Áustria pode entregar, e o rastreador da TopYou segue com as leituras da DPD.
+**Áustria.** A [DPD Áustria](carrier:dpd-at) pode entregar, e o rastreador da TopYou segue com as leituras da DPD.
 
 **Em outros países.** O registro da TopYou pode mostrar o código da entregadora, mas sem citar o nome dela — e o nome da linha da TopYou em que o pacote viaja também não garante qual empresa entregará, pois uma rota pode levar o nome de outra transportadora. Em linhas entregues pelos correios, o código local também aparece no fim da linha `Outbound in sorting center`, após `Lastmile Number:`. Pergunte ao vendedor qual empresa fará a entrega.
 

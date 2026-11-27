@@ -12,17 +12,17 @@ DPD 荷兰（DPD Netherlands，即 DPD (Nederland) B.V.）是 DPD 在荷兰境�
 
 DPD 将其称为包裹号（parcel number）。它位于 DPD 发给你的电子邮件中，也是 DPD 官网查询、myDPD、联系表单及客服电话均会要求提供的编号。
 
-| 单号（示例编号） | 含义 |
+| 单号（虚构） | 含义 |
 | --- | --- |
 | `05284917365428` | 14 位数字：DPD 包裹号。 |
 
-DPD 官网查询页也支持输入参考号（如司机留下的未在家通知单上的编号），但 Peek 仅支持 14 位包裹号。
+DPD 官网查询页也支持输入参考号（如司机留下的未在家通知单上的编号），Peek 则不接受参考号，需要 14 位包裹号。
 
 14 位数字并非仅属于 DPD Netherlands：[DPD Germany](carrier:dpd-de)、[DPD UK](carrier:dpd-uk)、[DPD France](carrier:dpd-fr) 等各国 DPD 分公司，以及 SEUR、BRT 和 Chronopost 同样使用 14 位数字。如果商家邮件写明由 [PostNL](carrier:postnl) 或 [DHL eCommerce Netherlands](carrier:dhl-ecommerce-nl) 承运，则单号归属对方。找不到单号？请看[如何查找运单号](guide:find-tracking-number)（英文）。
 
 ## DPD Netherlands 物流状态含义
 
-Peek 以英文读取 DPD 的各步骤。以下按常见流转顺序列出：
+Peek 以英文读取 DPD 的各步骤。以下按包裹通常经过的顺序列出：
 
 | 状态（Peek 展示原文） | 对你的含义 |
 | --- | --- |
@@ -54,7 +54,7 @@ DPD 向 Peek 仅提供每个步骤的最新日期（各步仅一条，不带地�
 
 你也可以直接通过 DPD 通知单次授权“无接触放置（Permission to leave）”；若想对今后所有包裹生效，需填写并签署 DPD 授权表通过邮件寄回。
 
-**家中无人。** 若家中无人且无法由邻居代收，DPD 会在首次尝试后直接将包裹送至最近的 Parcel Point。DPD 在荷兰拥有约 1,500 家 Parcel Point，司机留下的未在家通知会写明取件地点。另见[错过派送处理](guide:missed-delivery)（英文）。
+**家中无人。** 若家中无人且无法由邻居代收，DPD 会在首次尝试后直接将包裹送至最近的 Parcel Point。DPD 在荷兰拥有约 1,500 家 Parcel Point，司机留下的未在家通知会写明取件地点。另见[派送未成功怎么办](guide:missed-delivery)（英文）。
 
 **自提点与快递柜。** DPD 荷兰自提网络涵盖：
 
@@ -93,11 +93,11 @@ Peek 无法代你联系 DPD 或网店。DPD Netherlands 英文联系页面公布
 
 DPD 未说明客服是否提供英语服务。
 
-> DPD 提醒警惕冒用其名义发送的虚假邮件、短信和 WhatsApp 消息。除来自英国的包裹涉及进口关税外，DPD 绝不会要求你提前转账——且该正规关税邮件一定带有 14 位包裹号，可在 DPD Track & Trace 核实。DPD 也从不收取现金。另见[快递诈骗短信识别](guide:delivery-scam-texts)（英文）。
+> DPD 提醒警惕冒用其名义发送的虚假邮件、短信和 WhatsApp 消息。除来自英国的包裹涉及进口关税外，DPD 绝不会要求你提前转账——且该正规关税邮件一定带有 14 位包裹号，可在 DPD Track & Trace 核实。DPD 也从不索要现金。另见[快递诈骗短信识别](guide:delivery-scam-texts)（英文）。
 
 ## 使用 Peek 跟踪 DPD Netherlands 包裹
 
-将 14 位单号粘贴到 [Peek](/)。由于多家承运商共用 14 位数字，Peek 会结合你的国家（手机地区设置或网页访问所在地）查询可能的承运商，在荷兰会优先询问 DPD Netherlands。一旦 DPD 标明包裹已进入荷兰，即显示“DPD Netherlands 有这个包裹的记录。”在包裹仍位于他国期间，Peek 不会强行归为 DPD Netherlands（例如仍在德国的包裹会先显示为 DPD Germany，随后一路跟进至荷兰）。如果显示“暂未找到 · Peek 会继续查询”，可点击“更换”手动选择 DPD Netherlands（已添加包裹用“更换快递公司”）。尽管粘贴：Peek 支持超过 4,500 家快递公司。
+将 14 位单号粘贴到 [Peek](/)。由于多家承运商共用 14 位数字，Peek 会结合你的国家（手机地区设置或网页访问所在地）查询可能的承运商，在荷兰会优先询问 DPD Netherlands。一旦 DPD 标明包裹已进入荷兰，即显示“DPD Netherlands 有这个包裹的记录。”在包裹仍位于他国期间，Peek 不会强行归为 DPD Netherlands（例如仍在德国的包裹会先显示为 DPD Germany，随后一路跟进至荷兰）。如果显示“暂未找到 · Peek 会继续查询”，可点击“更换”手动选择 DPD Netherlands（已添加包裹用“更换快递公司”）。照样粘贴即可：Peek 可以跟踪超过 4,500 家快递公司。
 
 请仅粘贴 14 位纯数字：末尾多出一位字符会导致 Peek 跳过 DPD Netherlands。直接粘贴 `www.dpdgroup.com/nl/` 带 `parcelNumber=` 的 myDPD 链接同样可用并会立即归属 DPD Netherlands。
 
@@ -105,9 +105,9 @@ Peek 会展示 DPD 状态、上表对应的各步骤文字、预计送达日与�
 
 有时 DPD Netherlands 会将包裹转交给其他国家的 DPD 成员：[DPD Germany](carrier:dpd-de)、[DPD France](carrier:dpd-fr)、[DPD UK](carrier:dpd-uk)、DPD Ireland、[DPD Poland](carrier:dpd-pl)、[DPD Portugal](carrier:dpd-pt)、DPD Austria、[DPD Switzerland](carrier:dpd-ch)、西班牙 [SEUR](carrier:seur) 或意大利 [BRT](carrier:brt)。一旦 DPD 显示包裹进入上述国家的派送站或更靠后节点，Peek 会用同一单号向对方公司查询，并在对方出现不早于 DPD Netherlands 最新扫描的记录后转由对方跟进（此前仍留在 DPD Netherlands，包裹卡片已提前标明末端派送公司）。
 
-当你正在 Peek 中查看包裹，或派送当天已开启通知且 DPD 官网查询正常响应时，Peek 最快每 10 分钟检查一次，并在 DPD 扫描出派送中当天从荷兰时间早上 6 点起最快每 2 分钟检查一次。其余情况下，以及连续两天无新动态（或在“已生成面单”/“已揽收”停留满 12 小时）后，每小时检查一次。支持选择“每次扫描”、“重要环节”或“仅派送当天”通知；如需更改派送，请使用 myDPD。
+当你正在 Peek 中查看包裹，或派送当天已开启通知时，Peek 最多每 10 分钟向 DPD 查询一次；在 DPD 扫描出派送中的当天，只要 DPD 自己的查件系统正常响应，自荷兰时间早上 6 点起最多每 2 分钟查询一次。其余情况下，以及连续两天无新动态（或在“已生成面单”/“已揽收”停留满 12 小时）后，每小时检查一次。Peek 可以按“每次扫描”、“重要环节”或“仅派送当天”通知你。如需更改派送，请使用 myDPD。
 
-## DPD 荷兰查询常见问题
+## 关于 DPD 荷兰物流查询的问题
 
 ### DPD 在荷兰周六派送吗？
 
@@ -130,17 +130,17 @@ Peek 会展示 DPD 状态、上表对应的各步骤文字、预计送达日与�
 荷兰境内派送包裹可拨打 `085-0022222`（本地市话费率），服务时间为荷兰时间周一至周五 08:00–17:30、周六 09:00–17:00。派送至境外的包裹请联系目的地国家的 DPD。
 
 :::sources
-- [DPD Netherlands: Receiving parcels](https://www.dpd.com/nl/en/receiving/) – myDPD, changes up to 30 minutes before, permission to leave, age check, import payment requests, objections
-- [DPD Netherlands: Follow your parcel](https://www.dpd.com/nl/en/receiving/track/) – 14-digit number or reference number
-- [DPD Netherlands: Not at home?](https://www.dpd.com/nl/en/receiving/not-at-home/) – neighbours, Parcel Point after the first attempt, about 1,500 Parcel Points
-- [DPD Netherlands: Contact](https://www.dpd.com/nl/en/contact/) – delivery days, emails and time slot, changes in myDPD, phone, hours, form, parcels abroad, Vinted
-- [DPD Netherlands: My parcel hasn't arrived](https://www.dpd.com/nl/en/support/faq/frequently_asked_questions/receiving/my-parcel-hasn-t-arrived-what-should-i-do/) – postcode for more details, 3 days without movement
-- [DPD Netherlands: Damaged or not delivered](https://www.dpd.com/nl/en/support/faq/frequently_asked_questions/receiving/what-should-i-do-if-my-parcel-is-damaged-or-not-delivered/) – 7 calendar days, photo, the shop contacts DPD
-- [DPD Netherlands: Is the email from DPD real or false?](https://www.dpd.com/nl/en/support/faq/frequently_asked_questions/receiving/is-the-email-i-have-received-from-dpd-real-or-false/) – fake messages, payments, no cash
-- [DPD Netherlands: DPD Parcel Points](https://www.dpd.com/nl/en/dpd-parcel-point/) – Parcel Points, lockers, Business Points, ViaTim, De Buren
-- [DPD Netherlands: Until when can I collect my parcel?](https://www.dpd.com/nl/en/faq/until-when-can-i-collect-my-parcel/) – 5 days in a locker
+- [DPD Netherlands: Receiving parcels](https://www.dpd.com/nl/en/receiving/) – myDPD、最晚提前 30 分钟更改派送、无接触放置许可、年龄核验、进口费用付款通知、申诉
+- [DPD Netherlands: Follow your parcel](https://www.dpd.com/nl/en/receiving/track/) – 14 位包裹号或参考号
+- [DPD Netherlands: Not at home?](https://www.dpd.com/nl/en/receiving/not-at-home/) – 邻居、首次派送后转投 Parcel Point、约 1,500 家 Parcel Point
+- [DPD Netherlands: Contact](https://www.dpd.com/nl/en/contact/) – 派送日、通知邮件与派送时段、在 myDPD 更改派送、电话、服务时间、表单、境外包裹、Vinted
+- [DPD Netherlands: My parcel hasn't arrived](https://www.dpd.com/nl/en/support/faq/frequently_asked_questions/receiving/my-parcel-hasn-t-arrived-what-should-i-do/) – 凭邮编查看更多明细、3 天没有动静
+- [DPD Netherlands: Damaged or not delivered](https://www.dpd.com/nl/en/support/faq/frequently_asked_questions/receiving/what-should-i-do-if-my-parcel-is-damaged-or-not-delivered/) – 7 个自然日、照片、由网店联系 DPD
+- [DPD Netherlands: Is the email from DPD real or false?](https://www.dpd.com/nl/en/support/faq/frequently_asked_questions/receiving/is-the-email-i-have-received-from-dpd-real-or-false/) – 虚假消息、付款、不要现金
+- [DPD Netherlands: DPD Parcel Points](https://www.dpd.com/nl/en/dpd-parcel-point/) – Parcel Point、快递柜、Business Point、ViaTim、De Buren
+- [DPD Netherlands: Until when can I collect my parcel?](https://www.dpd.com/nl/en/faq/until-when-can-i-collect-my-parcel/) – 快递柜保管 5 天
 - [DPD Netherlands: Terms of use (PDF)](https://www.dpd.com/wp-content/uploads/sites/220/2022/01/Disclaimer-ENG-2022-01.pdf) – DPD (Nederland) B.V.
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per kind of product up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
-- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per kind of product whatever the value
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, the step wordings Peek shows, the hand-over to other DPD companies
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 自 2026 年 7 月 1 日起 €150 以下每种商品 €3 关税、自 2026 年 11 月 1 日起的 €2 欧盟处理费
+- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 无论货值高低，每种商品 €2
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取的内容、Peek 显示的步骤文案、转交其他 DPD 公司
 :::

@@ -104,7 +104,7 @@ DPD 网站提供英语、法语和荷兰语版本，但没有说明电话客服�
 
 Peek 会显示 DPD 的状态、上表所列的步骤文字、预计送达日期和签收时间。由于 Peek 查询 DPD 时不传邮编，DPD 只返回简要汇总；因此 Peek 还会询问物流查询服务，并在它们有更详细记录时展示完整历史。
 
-有时 DPD Belgium 会把包裹交给其他国家的 DPD 分公司：[DPD Germany](carrier:dpd-de)、[DPD France](carrier:dpd-fr)、[DPD UK](carrier:dpd-uk)、DPD Ireland、[DPD Poland](carrier:dpd-pl)、[DPD Portugal](carrier:dpd-pt)、[DPD Austria](carrier:dpd-at)、[DPD Switzerland](carrier:dpd-ch)、西班牙的 [SEUR](carrier:seur) 或意大利的 [BRT](carrier:brt)。一旦 DPD 显示包裹已到达这些国家的派送站点或进入后续环节，Peek 会用同一单号向对应公司查询；对方出现不晚于 DPD Belgium 最新记录的扫描后，即转为跟进该公司。在此之前，Peek 继续跟进 DPD Belgium，卡片上则会提前标出负责派送的公司。
+有时 DPD Belgium 会把包裹交给其他国家的 DPD 分公司：[DPD Germany](carrier:dpd-de)、[DPD France](carrier:dpd-fr)、[DPD UK](carrier:dpd-uk)、[DPD Ireland](carrier:dpd-ie)、[DPD Poland](carrier:dpd-pl)、[DPD Portugal](carrier:dpd-pt)、[DPD Austria](carrier:dpd-at)、[DPD Switzerland](carrier:dpd-ch)、西班牙的 [SEUR](carrier:seur) 或意大利的 [BRT](carrier:brt)。一旦 DPD 显示包裹已到达这些国家的派送站点或进入后续环节，Peek 会用同一单号向对应公司查询；对方出现不晚于 DPD Belgium 最新记录的扫描后，即转为跟进该公司。在此之前，Peek 继续跟进 DPD Belgium，卡片上则会提前标出负责派送的公司。
 
 当你打开包裹页，或在派送当天开启通知时，Peek 最多每 10 分钟查询一次；在 DPD 扫描派送当天每 2 分钟查询一次（从比利时时间早上 6 点起，或若 DPD 给了派送时段，则从时段开始前半小时起，以较晚者为准）。连续两天无新动态（在“已生成面单”或“已揽收”状态下为 12 小时）后改为每小时查询一次，在“已生成面单”下连续七天无动态后改为每 6 小时一次。如果包裹在“已生成面单”、“已揽收”或“运输中”状态下连续四天没有新记录，Peek 会显示“自……起没有物流更新”（附该记录日期）以及“向 DPD Belgium 寻求帮助”链接。你可以选择接收“每次扫描”、“重要环节”或“仅派送当天”提醒。如需修改派送安排，请使用 myDPD。
 

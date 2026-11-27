@@ -42,13 +42,13 @@ O rastreador da SPX, conforme lido pelo Peek, exibe todas as linhas em inglês. 
 | `[SPX Express] Parcel is out for delivery` | Saiu para entrega. | "Saiu para entrega" |
 | `Parcel has been delivered` | Entregue. | "Entregue" |
 
-**Outras etapas.** O código do Peek reconhece mais etapas da SPX: pacote coletado do vendedor ou deixado em ponto de postagem ("Recebida pela transportadora"), falha na entrega ("Tentativa de entrega") e devolução ao vendedor ("Devolvida ao remetente", ou "Precisa de atenção" se o retorno ficar parado). Saiba mais em [o que significam os status de rastreamento](guide:tracking-statuses).
+**Outras etapas.** O código do Peek reconhece mais etapas da SPX: pacote coletado do vendedor ou deixado em ponto de postagem ("Recebida pela transportadora"), entrega não realizada ("Tentativa de entrega") e devolução ao vendedor ("Devolvida ao remetente", ou "Precisa de atenção" se o retorno ficar parado). Saiba mais em [o que significam os status de rastreamento](guide:tracking-statuses).
 
 ## Entrega SPX Express em Singapura
 
 Depois de `[SPX Express] Parcel is out for delivery`, a próxima linha deve ser `Parcel has been delivered`. Se a SPX levar a encomenda a um ponto de retirada em vez da sua porta, o Peek mostra "Saiu para entrega" enquanto ela está a caminho de lá.
 
-O Peek não conseguiu ler o site da SPX Express Singapore, portanto esta página não traz horários de entrega, número de tentativas nem regras de retirada. Pergunte ao vendedor ou à Shopee se o pedido foi feito lá. Veja [entregas perdidas](guide:missed-delivery) e [encomendas não retiradas](guide:uncollected-parcel).
+O Peek não conseguiu ler o site da SPX Express Singapore, portanto esta página não traz horários de entrega, número de tentativas nem regras de retirada. Pergunte ao vendedor ou à Shopee se o pedido foi feito lá. Veja [entregas não realizadas](guide:missed-delivery) e [encomendas não retiradas](guide:uncollected-parcel).
 
 ## Encomendas do exterior: GST e alfândega em Singapura
 
@@ -68,7 +68,7 @@ Regras da Alfândega de Singapura (Singapore Customs) para mercadorias compradas
 
 **Parado em `[China]Sender is preparing to ship your parcel`.** O vendedor ainda não despachou a encomenda. Pergunte ao vendedor quando fará o envio.
 
-**Sem atualização há dias.** Encomendas costumam ficar quietas em voos longos, na alfândega ou durante o fim de semana. Quando um pacote em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito" fica quatro dias sem nova linha, o Peek sinaliza a data da última leitura ("Sem atualização de rastreamento desde seg 12 out") e um link "Obter ajuda da SPX Express Singapore", continuando a consultar a SPX. Após três semanas sem novidades, sugere falar com o vendedor. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating) e [rastrear encomendas da China](guide:tracking-from-china).
+**Sem atualização há dias.** Encomendas costumam ficar quietas em voos longos, na alfândega ou durante o fim de semana. Quando um pacote em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito" fica quatro dias sem nova linha, o Peek sinaliza a data da última leitura ("Sem atualizações desde seg 12 out") e um link "Pedir ajuda a SPX Express Singapore", continuando a consultar a SPX. Após três semanas sem novidades, sugere falar com o vendedor. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating) e [rastrear encomendas da China](guide:tracking-from-china).
 
 **Entregue, mas nada chegou.** Verifique ao redor da porta e pergunte a familiares e vizinhos. Em seguida, fale com o vendedor ou com a Shopee. Veja [entregue mas não recebido](guide:delivered-not-received).
 
@@ -76,7 +76,7 @@ Regras da Alfândega de Singapura (Singapore Customs) para mercadorias compradas
 
 ## Atendimento ao cliente e contato da SPX Express Singapore
 
-O Peek não conseguiu ler o site da SPX Express Singapore, portanto esta página não lista telefone nem e-mail: o Peek divulga apenas contatos confirmados nas páginas oficiais da própria transportadora.
+O Peek não conseguiu ler o site da SPX Express Singapore, portanto esta página não lista telefone nem e-mail: o Peek divulga apenas contatos lidos nas páginas da própria transportadora.
 
 Para um pedido da Shopee, fale pelo atendimento da Shopee. Para pedidos de outra loja, procure primeiro a loja que contratou o frete. A Singapore Customs não consegue ajudar: ela não tem acesso ao rastreamento das transportadoras e orienta contatar a transportadora.
 
@@ -84,9 +84,9 @@ Para um pedido da Shopee, fale pelo atendimento da Shopee. Para pedidos de outra
 
 O [Peek](/) acompanha uma encomenda SPX apenas com o código: sem conta, telefone nem código postal.
 
-- **Código SPXSG.** O Peek identifica SPX Express Singapore imediatamente ("Transportadora detectada") e consulta o rastreador da SPX. "Alterar" permite escolher outra transportadora.
-- **Link.** Cole um link do rastreador da SPX em spx.sg contendo um código SPXSG (`/track?`, `/m/track?` ou `/detail/`), e o Peek extrai o número automaticamente.
-- **Código SG.** O Peek não tem certeza da transportadora apenas por esse formato. Cole mesmo assim: o Peek acompanha mais de 4.500 transportadoras. Enquanto verifica, exibe "Consultando serviços de rastreamento…". Para escolher a SPX manualmente, toque em "Alterar": SPX Express Singapore aparece em "Compatível com este código". Melhor ainda, use o código `SPXSG` se tiver: o rastreador da SPX frequentemente encontra encomendas da Shopee apenas por esse número.
+- **Código SPXSG.** O Peek identifica SPX Express Singapore imediatamente ("Transportadora detectada") e consulta o rastreador da SPX. "Trocar" permite escolher outra transportadora.
+- **Link.** Cole um link do rastreador da SPX em spx.sg contendo um código SPXSG (`/track?`, `/m/track?` ou `/detail/`), e o Peek extrai o número.
+- **Código SG.** O Peek não tem certeza da transportadora apenas por esse formato. Cole mesmo assim: o Peek acompanha mais de 4.500 transportadoras. Enquanto verifica, exibe "Consultando serviços de rastreamento…". Para escolher a SPX manualmente, toque em "Trocar": SPX Express Singapore aparece em "Compatível com este código". Melhor ainda, use o código `SPXSG` se tiver: o rastreador da SPX frequentemente encontra encomendas da Shopee apenas por esse número.
 
 Adicionada sem transportadora, a encomenda mostra "Ainda sem histórico de rastreamento" enquanto o Peek consulta serviços de rastreamento. Se algum indicar apenas SPX Express Singapore, com etapas datadas, o Peek vincula o pacote à SPX.
 
@@ -96,7 +96,7 @@ Adicionada sem transportadora, a encomenda mostra "Ainda sem histórico de rastr
 
 Se o rastreador da SPX ficar indisponível, o Peek mostra o que os serviços de rastreamento informam, nas palavras deles.
 
-**Consultas e alertas.** Enquanto você mantém a encomenda aberta no Peek, ou no dia da entrega com notificações ativadas, o Peek consulta a SPX diretamente até a cada 10 minutos, e até a cada 2 minutos a partir das 6h (horário de Singapura) no dia em que a SPX registrar saída para entrega. Após dois dias sem novidades (12 horas enquanto ainda estiver em "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora; após sete dias sem novidades em "Etiqueta criada", a cada 6 horas. Alertas: "Cada leitura", "Etapas importantes" ou "Apenas entrega". O Peek não pode entrar em contato com a SPX, a Shopee nem o vendedor em seu nome.
+**Consultas e alertas.** Enquanto você mantém a encomenda aberta no Peek, ou no dia da entrega com notificações ativadas, o Peek consulta a SPX diretamente até a cada 10 minutos, e até a cada 2 minutos a partir das 6h (horário de Singapura) no dia em que a SPX registrar saída para entrega. Após dois dias sem novidades (12 horas enquanto ainda estiver em "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora; após sete dias sem novidades em "Etiqueta criada", a cada 6 horas. Alertas: "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode entrar em contato com a SPX, a Shopee nem o vendedor em seu nome.
 
 ## Perguntas sobre o rastreamento da SPX Express Singapore
 

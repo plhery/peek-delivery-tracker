@@ -12,7 +12,7 @@ A DPD Ireland entrega encomendas em toda a ilha da Irlanda, Norte e Sul, a parti
 
 A DPD chama o código de número da encomenda (*parcel number*) ou número de rastreamento DPD (*DPD tracking number*); seu rastreador o chama de *"consignment"*. Ao coletar o pacote, a DPD envia por e-mail o número com a data prevista de entrega. A loja também o informa no e-mail de envio ou na página do pedido. Perdeu o código? Veja [como encontrar seu código de rastreamento](guide:find-tracking-number).
 
-A DPD Ireland não publica oficialmente o formato do número. Os códigos vistos em seu rastreador contêm apenas dígitos, geralmente 9:
+A DPD Ireland não publica o formato do número. Os códigos vistos em seu rastreador contêm apenas dígitos, geralmente 9:
 
 | Número (fictício) | O que é |
 | --- | --- |
@@ -24,7 +24,7 @@ Números tão curtos são compartilhados por outras transportadoras, portanto os
 
 ## Status de rastreamento da DPD Ireland explicados
 
-O rastreador da DPD Ireland, apenas em inglês, lista cada etapa com o local (normalmente um depósito DPD ou "Head Office") além de data e hora. Estas são as linhas mais comuns, em ordem:
+O rastreador da DPD Ireland, apenas em inglês, lista cada etapa com o local (normalmente um depósito DPD ou "Head Office") além de data e hora. Estas são as linhas que você mais deve ver, na ordem em que a encomenda passa por elas:
 
 | A DPD Ireland informa | O que significa para você |
 | --- | --- |
@@ -35,13 +35,13 @@ O rastreador da DPD Ireland, apenas em inglês, lista cada etapa com o local (no
 | `DPD IE UK Inbound` | A encomenda veio da rede DPD do Reino Unido e chegou a um depósito irlandês. |
 | `Parcel going through Customs process` | Em processo alfandegário, em encomendas vindas de fora da UE. |
 | `Your parcel is on a van and due for delivery` | Saiu para entrega hoje. O rastreador acrescenta o horário estimado. |
-| `We tried to deliver but you weren't home` | Tentativa de entrega perdida. O rastreador oferece um link para reagendar. |
+| `We tried to deliver but you weren't home` | Entrega não realizada. O rastreador oferece um link para reagendar. |
 | `Delivered Consignee` | Entregue a você (*"consignee"* é o termo da DPD para destinatário). |
 | `Delivered Safe Place` | Deixada no seu local seguro. `Delivered Letterbox` significa na caixa de correio. |
 
 Se o rastreador mostrar `We couldn't locate the consignment number.`, o pacote pode ainda não ter chegado ao centro de triagem da DPD ou o número pode ter mais de seis meses.
 
-## Entrega DPD Ireland, pontos Pickup e ausências
+## Entrega DPD Ireland, pontos Pickup e entregas não realizadas
 
 **Notificações.** Depois do primeiro e-mail, a DPD confirma a entrega com um dia de antecedência. No dia, envia e-mail e/ou SMS avisando que o pacote saiu para entrega, com janela estimada de uma hora. Com o Predict, o rastreamento mostra quantas paradas faltam antes de o motorista chegar e um mapa ao vivo acompanha a van.
 
@@ -60,7 +60,7 @@ Se o rastreador mostrar `We couldn't locate the consignment number.`, o pacote p
 
 **Sem atualização ou atrasada.** A agência de defesa do consumidor da Irlanda, a CCPC, estabelece que a loja onde você comprou é responsável por entregar os bens até você, mesmo usando transportadora. Se o pedido atrasar, contate a loja e combine uma nova data. Se essa data também passar, você tem direito ao reembolso integral. Sem data combinada, a loja tem 30 dias a partir da compra.
 
-**Perda ou dano.** A loja detém o contrato com a DPD e é quem abre a reclamação. Pelos termos da DPD Ireland, o remetente precisa avisar a DPD por escrito em até sete dias da data prevista de entrega para pacote não entregue (ou em até sete dias da entrega em caso de dano) e enviar o formulário de reclamação em até 21 dias. Portanto, avise a loja rapidamente.
+**Perda ou dano.** A loja detém o contrato com a DPD e é quem faz o pedido de indenização. Pelos termos da DPD Ireland, o remetente precisa avisar a DPD por escrito em até sete dias da data prevista de entrega para pacote não entregue (ou em até sete dias da entrega em caso de dano) e enviar o formulário do pedido de indenização em até 21 dias. Portanto, avise a loja rapidamente.
 
 **Alfândega.** Encomendas vindas de fora da UE, incluindo a Grã-Bretanha, podem incorrer em imposto de importação e IVA. Desde 1º de julho de 2026, a Revenue cobra €3 de imposto aduaneiro por tipo de produto em encomendas até €150, e desde 1º de novembro de 2026 aplica-se uma taxa de manuseio de €2 por tipo de produto. Se você não pagou no checkout, a DPD solicita o pagamento por SMS e/ou e-mail antes da entrega e devolve o pacote ao remetente caso o pagamento não seja feito em até 5 dias úteis. Pacotes da Irlanda do Norte não são afetados. Saiba mais em [encomendas retidas na alfândega](guide:customs).
 
@@ -78,11 +78,11 @@ As páginas de contato da DPD Ireland não divulgam um telefone nem e-mail centr
 
 ## Rastreando encomendas DPD Ireland com o Peek
 
-O [Peek](/) consulta diretamente o rastreador próprio da DPD Ireland, sem conta nem código postal. Ele exibe cada leitura nas palavras da DPD com o depósito responsável, sob um título próprio ("Saiu para entrega", "Entregue"). Quando o pacote entra na van, a janela da DPD passa a constar como previsão de entrega. Enquanto o pacote estiver aberto no Peek, ou no dia da entrega com notificações ativadas, o Peek verifica até a cada 10 minutos, e nesse dia a cada 2 minutos a partir de meia hora antes da abertura da janela — mas não antes das 6h no horário irlandês. Após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora, e a cada 6 horas após sete dias sem novidades em "Etiqueta criada". Se o pacote ficar quatro dias sem nova linha em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek mostra "Sem atualização de rastreamento desde …" com a data dessa linha e um link "Obter ajuda da DPD Ireland". Encomendas entregues exibem o horário da leitura de entrega da DPD.
+O [Peek](/) consulta diretamente o rastreador próprio da DPD Ireland, sem conta nem código postal. Ele exibe cada leitura nas palavras da DPD com o depósito responsável, sob um título próprio ("Saiu para entrega", "Entregue"). Quando o pacote entra na van, a janela da DPD passa a constar como previsão de entrega. Enquanto o pacote estiver aberto no Peek, ou no dia da entrega com notificações ativadas, o Peek verifica até a cada 10 minutos, e nesse dia a cada 2 minutos a partir de meia hora antes da abertura da janela — mas não antes das 6h no horário irlandês. Após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora, e a cada 6 horas após sete dias sem novidades em "Etiqueta criada". Se o pacote ficar quatro dias sem nova linha em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek mostra "Sem atualizações desde …" com a data dessa linha e um link "Pedir ajuda a DPD Ireland". Encomendas entregues exibem o horário da leitura de entrega da DPD.
 
 Leituras feitas em redes DPD no exterior vêm sem fuso horário: o Peek interpreta cada uma no relógio do local da leitura e as lista junto ao restante do histórico da DPD Ireland.
 
-Um código de 9 ou 10 dígitos é compatível com a DPD Ireland e com outras transportadoras. Na Irlanda, o Peek consulta primeiro a DPD Ireland — ao lado da TNT para alguns códigos de 9 dígitos e algumas outras para 10 dígitos — e depois serviços de rastreamento; em outro país, consulta primeiro serviços de rastreamento e depois a DPD Ireland. Se apenas a DPD Ireland conhecer o número, o Peek a identifica. Caso contrário, toque em "Alterar" e escolha "DPD Ireland" em "Compatível com este código" (buscar "Interlink Ireland" também encontra), ou cole um link de rastreamento da DPD Ireland contendo `consignmentNumber=` de www.dpd.ie/tracking/, da página track-my-parcel ou de tracking.dpd.ie, que identifica a DPD Ireland na hora. O Peek não consulta a DPD Ireland para códigos DPD de 14 dígitos.
+Um código de 9 ou 10 dígitos é compatível com a DPD Ireland e com outras transportadoras. Na Irlanda, o Peek consulta primeiro a DPD Ireland — ao lado da TNT para alguns códigos de 9 dígitos e algumas outras para 10 dígitos — e depois serviços de rastreamento; em outro país, consulta primeiro serviços de rastreamento e depois a DPD Ireland. Se apenas a DPD Ireland conhecer o número, o Peek a identifica. Caso contrário, toque em "Trocar" e escolha "DPD Ireland" em "Compatível com este código" (buscar "Interlink Ireland" também encontra), ou cole um link de rastreamento da DPD Ireland contendo `consignmentNumber=` de www.dpd.ie/tracking/, da página track-my-parcel ou de tracking.dpd.ie, que identifica a DPD Ireland na hora. O Peek não consulta a DPD Ireland para códigos DPD de 14 dígitos.
 
 ## Perguntas sobre o rastreamento da DPD Ireland
 
@@ -108,14 +108,14 @@ Depende do serviço escolhido pelo remetente. A DPD Ireland oferece entrega no d
 - [DPD Ireland: DPD Quick Tracking](https://tracking.dpd.ie/) – textos de status, locais, apenas dígitos e limite de seis meses
 - [DPD Ireland: página inicial](https://www.dpd.ie/) – 38 depósitos, sede em Athlone, quase 600 pontos Pickup e rede 24/7 em breve
 - [DPD Ireland: Contact Support](https://www.dpd.ie/contact) – formulário online e horários de atendimento
-- [DPD Ireland: Manage My Parcel Delivery](https://www.dpd.ie/manage-my-deliveries/) – Predict, paradas restantes, mapa ao vivo, local seguro e entrega perdida
+- [DPD Ireland: Manage My Parcel Delivery](https://www.dpd.ie/manage-my-deliveries/) – Predict, paradas restantes, mapa ao vivo, local seguro e entrega não realizada
 - [DPD Ireland: MyDPD](https://www.dpd.ie/my-dpd-never-miss-a-delivery/) – reagendar e redirecionar, rede Pickup em breve
 - [DPD Ireland: DPD Pick Up](https://www.dpd.ie/dpd-pick-up-my-parcel/) – pontos Pickup em lojas e postos de combustível, horário estendido
 - [DPD Ireland: Proof of Delivery](https://www.dpd.ie/proof-of-delivery/) – foto de entrega enviada por e-mail
 - [DPD Ireland: Customs Update for Consumers](https://www.dpd.ie/dpd-guide-to-customs/) – pedido de pagamento, prazo de 5 dias úteis, avisos legítimos e Irlanda do Norte
 - [DPD Ireland: Fraudulent Communications](https://www.dpd.ie/fraudulent-communications/) – mensagens falsas de cobrança
 - [DPD Ireland: Find A Depot](https://www.dpd.ie/dpd-depot-finder/) – telefones, e-mails e horários dos depósitos
-- [DPD Ireland: Terms and Conditions of Carriage](https://www.dpd.ie/wp-content/uploads/2024/11/March-2024-Republic-of-Ireland-TCs.pdf) – destinatário (*consignee*), reclamações pelo remetente e prazos de 7 e 21 dias
+- [DPD Ireland: Terms and Conditions of Carriage](https://www.dpd.ie/wp-content/uploads/2024/11/March-2024-Republic-of-Ireland-TCs.pdf) – destinatário (*consignee*), pedidos de indenização pelo remetente e prazos de 7 e 21 dias
 - [DPD Ireland: Send a Parcel](https://www.dpd.ie/send-a-parcel-courier-service/) – entrega no dia seguinte em todo o país
 - [DPD Ireland: Send International Parcels](https://www.dpd.ie/ship-international-parcels/) – serviços em 1 e 2 dias para o Reino Unido
 - [DPD Parcel Wizard](https://www.dpdparcelwizard.ie/) – SMS quando pronto para retirada

@@ -103,7 +103,7 @@ DPD 未说明客服是否提供英语服务。
 
 Peek 会展示 DPD 状态、上表对应的各步骤文字、预计送达日与签收时间。因 DPD 需验证邮编才给出更多明细，而 Peek 不向 DPD Netherlands 发送邮编，DPD 仅返回简版概要，因此 Peek 也会同时查询物流查询服务，并在有更完整轨迹时一并展示。
 
-有时 DPD Netherlands 会将包裹转交给其他国家的 DPD 成员：[DPD Germany](carrier:dpd-de)、[DPD France](carrier:dpd-fr)、[DPD UK](carrier:dpd-uk)、DPD Ireland、[DPD Poland](carrier:dpd-pl)、[DPD Portugal](carrier:dpd-pt)、DPD Austria、[DPD Switzerland](carrier:dpd-ch)、西班牙 [SEUR](carrier:seur) 或意大利 [BRT](carrier:brt)。一旦 DPD 显示包裹进入上述国家的派送站或更靠后节点，Peek 会用同一单号向对方公司查询，并在对方出现不早于 DPD Netherlands 最新扫描的记录后转由对方跟进（此前仍留在 DPD Netherlands，包裹卡片已提前标明末端派送公司）。
+有时 DPD Netherlands 会将包裹转交给其他国家的 DPD 成员：[DPD Germany](carrier:dpd-de)、[DPD France](carrier:dpd-fr)、[DPD UK](carrier:dpd-uk)、[DPD Ireland](carrier:dpd-ie)、[DPD Poland](carrier:dpd-pl)、[DPD Portugal](carrier:dpd-pt)、DPD Austria、[DPD Switzerland](carrier:dpd-ch)、西班牙 [SEUR](carrier:seur) 或意大利 [BRT](carrier:brt)。一旦 DPD 显示包裹进入上述国家的派送站或更靠后节点，Peek 会用同一单号向对方公司查询，并在对方出现不早于 DPD Netherlands 最新扫描的记录后转由对方跟进（此前仍留在 DPD Netherlands，包裹卡片已提前标明末端派送公司）。
 
 当你正在 Peek 中查看包裹，或派送当天已开启通知时，Peek 最多每 10 分钟向 DPD 查询一次；在 DPD 扫描出派送中的当天，只要 DPD 自己的查件系统正常响应，自荷兰时间早上 6 点起最多每 2 分钟查询一次。其余情况下，以及连续两天无新动态（或在“已生成面单”/“已揽收”停留满 12 小时）后，每小时检查一次。Peek 可以按“每次扫描”、“重要环节”或“仅派送当天”通知你。如需更改派送，请使用 myDPD。
 

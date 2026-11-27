@@ -96,7 +96,7 @@ Par téléphone au +33 1 87 65 31 89, du lundi au vendredi de 10 h à 20 h et le
 
 ### Paack, Colis Privé et Mondial Relay : est-ce la même société ?
 
-Paack et Colis Privé se sont rapprochées à l'été 2026 et passent sous une marque commune, Paack, « progressivement déployée à partir de janvier 2027 » (d'ici là, suis ton colis chez le transporteur qui te l'annonce). Paack est en revanche distinct de Mondial Relay : un numéro de 8 chiffres peut ressembler à Mondial Relay, vérifie donc quel transporteur cite la boutique.
+Paack et Colis Privé se sont rapprochées à l'été 2026 et passent sous une marque commune, Paack, « progressivement déployée à partir de janvier 2027 » (d'ici là, suis ton colis chez le transporteur qui te l'annonce). Mondial Relay ne fait pas partie de ce rapprochement : un numéro de commande Paack de 8 chiffres peut seulement ressembler à un numéro Mondial Relay, alors vérifie quel transporteur cite la boutique.
 
 ### Pourquoi Paack ne trouve pas ma commande ?
 

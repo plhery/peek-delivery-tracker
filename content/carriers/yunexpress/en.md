@@ -94,7 +94,7 @@ YunExpress, when `YT` is followed by 16 digits (18 characters in all), including
 
 ### What is yuntrack.com and what industry is it in?
 
-`yuntrack.com` is the official Track & Trace Platform of YunExpress, a cross-border parcel logistics and shipping carrier founded in Shenzhen in 2014. YunExpress links to it as "Tracking" from yunexpress.com, and the tracking box on yunexpress.com opens your results there. It's in English, takes up to 100 YT numbers per search, and needs no account.
+`yuntrack.com` is YunExpress's own Track & Trace Platform. YunExpress is a cross-border parcel logistics and shipping carrier founded in Shenzhen in 2014. YunExpress links to it as "Tracking" from yunexpress.com, and the tracking box on yunexpress.com opens your results there. It's in English, takes up to 100 YT numbers per search, and needs no account.
 
 ### Is YunExpress legit?
 

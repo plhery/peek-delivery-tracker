@@ -1,13 +1,13 @@
 ---
 title: Intento de entrega ausente en Correos: qué hacer
-description: Qué significa «destinatario ausente» o «ausente o cerrado» en Correos, MRW, SEUR y GLS: nuevo intento en 24 h, aviso de llegada, cuándo recoger y con qué DNI.
+description: Intento de entrega por ausencia en Correos, SEUR, GLS o MRW («Destinatario ausente o cerrado» en MRW): nuevo intento, aviso, cuándo recoger y con qué DNI.
 slug: intento-de-entrega-ausente
 picture: Una puerta con un aviso metido por debajo, una furgoneta ya lejos y Pip llegando sin aliento, un momento tarde.
 published: 2026-10-14
 updated: 2026-11-27
 ---
 
-«Destinatario ausente» o «ausente o cerrado» en el seguimiento de Correos, MRW, SEUR o GLS significa que el repartidor pasó y no había nadie para recoger el paquete. El aviso de llegada, el SMS o el email te dicen si habrá un nuevo intento (en Correos, en 24 horas si el producto incluye dos intentos), si puedes reprogramar la entrega o si tienes que recogerlo con tu DNI: en Correos suele estar en la oficina a partir del día siguiente.
+Un intento de entrega por ausencia (en el seguimiento, `Realizado intento de entrega` en Correos, `Destinatario ausente o cerrado` en MRW o «ausencia o cierre» en SEUR) significa que el repartidor pasó y no había nadie para recoger el paquete. El aviso de llegada, el SMS o el email te dicen si habrá un nuevo intento (en Correos, en 24 horas si el producto incluye dos intentos), si puedes reprogramar la entrega o si tienes que recogerlo con tu DNI: en Correos suele estar en la oficina a partir del día siguiente.
 
 ## Intento de entrega ausente: qué hacer
 
@@ -30,7 +30,7 @@ Esto es lo que deja cada transportista y lo que hace después:
 
 ## ¿Qué significa «destinatario ausente» o intento de entrega en Correos, MRW y SEUR?
 
-Que el cartero o repartidor llamó, nadie recogió el paquete y te dejó un aviso. En Correos suele aparecer como `Realizado intento de entrega` (un primer intento no completado por ausencia, con un segundo intento en 24 horas si el envío incluye dos); en MRW verás `Destinatario ausente o cerrado`, y en SEUR `EL ENVÍO NO SE HA ENTREGADO POR AUSENCIA O CIERRE. SE PUEDE REPROGRAMAR UNA NUEVA ENTREGA.`
+Que el cartero o repartidor llamó, nadie recogió el paquete y te dejó un aviso. En Correos suele aparecer como `Realizado intento de entrega` (un primer intento que no se pudo completar, por ejemplo porque no había nadie, con un segundo intento en 24 horas si el envío incluye dos); en MRW verás `Destinatario ausente o cerrado`, y en SEUR `EL ENVÍO NO SE HA ENTREGADO POR AUSENCIA O CIERRE. SE PUEDE REPROGRAMAR UNA NUEVA ENTREGA.`
 
 El Aviso de Llegada de Correos tiene dos caras. Delante, en «Datos del envío», van el número de envío, el origen, el remitente y la fecha del intento; en «Situación del envío», si te lo volverán a llevar o tienes que recogerlo en la oficina; y según el producto, cuántos días te lo guardan. Detrás, en «Oficina», la dirección, el horario y el teléfono de la oficina, y el apartado «Requisitos para la recogida en oficina», que rellenas si va otra persona.
 

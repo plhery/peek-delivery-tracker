@@ -3699,7 +3699,7 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^L[AIEHNX]\\d{8}$",
-        "confidence": "high"
+        "confidence": "low"
       },
       {
         "pattern": "^1LS\\d{12,14}$",
@@ -11690,7 +11690,8 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "CJPacket",
       "CJ Dropshipping",
-      "CJ Packet Ordinary"
+      "CJ Packet Ordinary",
+      "LuWei Express"
     ],
     "countries": [
       "CN"
@@ -11717,7 +11718,7 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^CJP[A-Z]{2,3}\\d{10}YQ$",
+        "pattern": "^(?:CJP|LWP)[A-Z]{2,3}\\d{10}YQ$",
         "confidence": "high"
       }
     ],
@@ -66954,7 +66955,8 @@ export const CARRIER_CAPABILITIES = {
       "星邮国际",
       "星邮",
       "上海星邮供应链有限公司",
-      "Shanghai Xingyou Supply Chain"
+      "Shanghai Xingyou Supply Chain",
+      "XYEX"
     ],
     "countries": [
       "CN"
@@ -71829,6 +71831,248 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [],
     "trackingSearchUrl": "https://gls-group.com/SI/sl/sledenje-posiljki/",
     "helpUrl": "https://gls-group.com/SI/sl/gls-kontakt/"
+  },
+  "dpd-cn": {
+    "displayName": "DPD China",
+    "aliases": [
+      "DPD (CN)"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#dc0032",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "dpd-cn",
+      "recognitionRank": 517,
+      "recognitionPattern": "^8415\\d{10}$"
+    },
+    "trackingUrlTemplate": "https://tracking.dpd.cn/?trackNo={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tracking.dpd.cn"
+        ],
+        "pathPattern": "^/?$",
+        "params": [
+          "trackNo",
+          "trackingNumber"
+        ],
+        "fragment": "^/\\?(?:[^#]*&)?(?:trackNo|trackingNumber)=([^&]+)"
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^8415\\d{10}$",
+        "confidence": "low",
+        "preferred": true
+      }
+    ],
+    "trackingSearchUrl": "https://tracking.dpd.cn/"
+  },
+  "dyj-express": {
+    "displayName": "DYJ Express",
+    "aliases": [
+      "DYJ",
+      "达运佳",
+      "达运佳国际物流",
+      "深圳达运佳国际物流",
+      "Shenzhen Dayunjia International Logistics"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#0078C0",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "dyj-express"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "43.138.180.250"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^DYJCN\\d{10}CN$",
+        "confidence": "high"
+      }
+    ]
+  },
+  "eudore": {
+    "displayName": "Eudore",
+    "aliases": [
+      "腾博物流"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#009688",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "eudore"
+    },
+    "trackingUrlTemplate": "https://tbwl.t6soft.com/track?waybillnumber={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tbwl.t6soft.com"
+        ],
+        "pathPattern": "^/track/?$",
+        "params": [
+          "waybillnumber"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tbwl.t6soft.com/track"
+  },
+  "hd-express": {
+    "displayName": "HD Express",
+    "aliases": [
+      "汇达物流",
+      "HDExpress",
+      "HD Cargo"
+    ],
+    "countries": [
+      "CA"
+    ],
+    "color": "#132B85",
+    "selectable": true,
+    "timezone": "America/Vancouver",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "hd-express"
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^HDC\\d{11}$",
+        "confidence": "high"
+      }
+    ]
+  },
+  "jytwl": {
+    "displayName": "JYTWL",
+    "aliases": [
+      "JYT",
+      "玖运通",
+      "玖运通国际物流",
+      "广州玖运通国际物流",
+      "广州玖运通国际物流服务有限公司",
+      "Jiuyuntong",
+      "Jiuyuntong Logistics"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#0074D9",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "jytwl"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "118.195.157.162"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^JYT\\d{10}CN$",
+        "confidence": "high"
+      }
+    ]
+  },
+  "qinhang-transportation": {
+    "displayName": "Qinhang Transportation",
+    "aliases": [
+      "Qinhang"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#0375D8",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "qinhang-transportation"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "u-speed-express": {
+    "displayName": "U-Speed Express",
+    "aliases": [
+      "U-Speed",
+      "优时派",
+      "优时派跨境物流供应链（深圳）有限公司"
+    ],
+    "countries": [
+      "CN",
+      "IL"
+    ],
+    "color": "#cf2024",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "u-speed-express"
+    },
+    "trackingUrlTemplate": "https://www.u-speedex.com/queryTracks?no={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "u-speedex.com"
+        ],
+        "pathPattern": "^/queryTracks/?$",
+        "params": [
+          "no"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.u-speedex.com/order_query"
+  },
+  "xun-tian-international": {
+    "displayName": "Xun Tian International",
+    "aliases": [
+      "迅田国际",
+      "广东阿信物流有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#0a5191",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "xun-tian-international"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://xtl.itdida.com/itdida-flash/website/landing"
   }
 } as const;
 
@@ -74014,7 +74258,15 @@ export const CARRIER_IDS = [
   "ljs",
   "sunson",
   "tongxi",
-  "gls-si"
+  "gls-si",
+  "dpd-cn",
+  "dyj-express",
+  "eudore",
+  "hd-express",
+  "jytwl",
+  "qinhang-transportation",
+  "u-speed-express",
+  "xun-tian-international"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

@@ -1,22 +1,22 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { passportBook, yearInParcels } from './passport';
+import { passportBook, passportNumbers, yearInParcels } from './passport';
 import type { ParcelWithEvents, Stage } from '../types';
 
 type Scan = [Stage, string, string?, string?];
 interface Case {
   name: string;
   timeZone: string;
-  parcels: Array<{ id: string; label: string; carrier: string; archivedAt?: string; scans: Scan[] }>;
+  parcels: Array<{ id: string; label: string; carrier: string; createdAt?: string; archivedAt?: string; scans: Scan[] }>;
   expect?: unknown;
 }
 
 const file = path.join(__dirname, '../../shared/passport-cases.json');
 const data = JSON.parse(fs.readFileSync(file, 'utf8')) as { '//': string; cases: Case[] };
 
-const parcels = (input: Case['parcels']): ParcelWithEvents[] => input.map(({ id, label, carrier, archivedAt, scans }) => ({
-  id, label, carrier: carrier as ParcelWithEvents['carrier'], syncStatus: 'ok', trackingNumber: `T${id}`, createdAt: '2026-01-01T00:00:00Z',
+const parcels = (input: Case['parcels']): ParcelWithEvents[] => input.map(({ id, label, carrier, createdAt, archivedAt, scans }) => ({
+  id, label, carrier: carrier as ParcelWithEvents['carrier'], syncStatus: 'ok', trackingNumber: `T${id}`, createdAt: createdAt ?? '2026-01-01T00:00:00Z',
   ...(archivedAt ? { archivedAt } : {}),
   events: scans.map(([stage, occurredAt, location, placed], index) => ({ id: `${id}-${index}`, parcelId: id, stage, occurredAt, location, description: stage,
     ...(placed ? { place: { latitude: 0, longitude: 0, precision: 'city' as const, country: placed, name: location ?? placed } } : {}) })),
@@ -34,6 +34,7 @@ function outcome(input: Case) {
     carrierCount: stats.carrierCount,
     stamps: Object.fromEntries(stamps.map((stamp) => [stamp.key, { count: stamp.count, earned: stamp.earned, earnedAt: iso(stamp.earnedAt), parcel: stamp.parcelId }])),
     countries: countries.map((country) => ({ code: country.code, number: country.number, firstAt: iso(country.firstAt), parcel: country.parcelId, count: country.count, continent: country.continent })),
+    numbers: passportNumbers(parcels(input.parcels), input.timeZone),
     year2026: { deliveredCount: year.deliveredCount, countryCount: year.countryCount, countries: year.countries.map((country) => [country.code, country.count]),
       stamps: year.stamps.map((stamp) => stamp.key), fastest: year.fastest },
   };

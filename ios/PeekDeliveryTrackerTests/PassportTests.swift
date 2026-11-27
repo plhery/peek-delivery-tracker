@@ -29,6 +29,7 @@ final class PassportTests: XCTestCase {
             let label: String
             let carrier: String
             let archivedAt: String?
+            let createdAt: String?
             let scans: [[String?]]
         }
 
@@ -48,7 +49,7 @@ final class PassportTests: XCTestCase {
         for (input, expected) in zip(cases, expectations) {
             let expected = try XCTUnwrap(expected, input.name)
             let actual = try outcome(input)
-            for key in ["deliveredCount", "carrierCount", "stamps", "countries", "year2026"] {
+            for key in ["deliveredCount", "carrierCount", "stamps", "countries", "numbers", "year2026"] {
                 XCTAssertEqual(try json(actual[key] as Any), try json(expected[key] as Any), "\(input.name): \(key)")
             }
         }
@@ -72,7 +73,8 @@ final class PassportTests: XCTestCase {
                 }
                 return event
             }
-            return Self.parcel(id: id, label: parcel.label, carrier: CarrierID(rawValue: parcel.carrier), archivedAt: parcel.archivedAt, events: events)
+            return Self.parcel(id: id, label: parcel.label, carrier: CarrierID(rawValue: parcel.carrier), archivedAt: parcel.archivedAt,
+                               createdAt: parcel.createdAt ?? "2026-01-01T00:00:00Z", events: events)
         }
         let book = PassportBook(parcels: parcels, timeZone: try XCTUnwrap(TimeZone(identifier: input.timeZone)))
         let year = book.year(2026)
@@ -90,6 +92,11 @@ final class PassportTests: XCTestCase {
                 ["code": country.code, "number": country.number, "firstAt": iso(country.firstAt), "parcel": name(country.parcelID),
                  "count": country.count, "continent": country.continent.rawValue] as [String: Any]
             },
+            "numbers": [
+                "busiestMonth": book.numbers.busiestMonth.map { ["month": $0.month, "count": $0.count] as [String: Any] } ?? NSNull(),
+                "carrierCount": book.numbers.carrierCount,
+                "topCarrier": book.numbers.topCarrier.map { ["carrier": $0.carrier.rawValue, "count": $0.count] as [String: Any] } ?? NSNull(),
+            ] as [String: Any],
             "year2026": [
                 "deliveredCount": year.deliveredCount, "countryCount": year.countryCount,
                 "countries": year.countries.map { [$0.code, $0.count] as [Any] },
@@ -240,13 +247,13 @@ final class PassportTests: XCTestCase {
 
     // MARK: - Parcels
 
-    static func parcel(id: UUID, label: String, carrier: CarrierID, archivedAt: String? = nil, events: [TrackingEvent]) -> Parcel {
+    static func parcel(id: UUID, label: String, carrier: CarrierID, archivedAt: String? = nil, createdAt: String = "2026-01-01T00:00:00Z", events: [TrackingEvent]) -> Parcel {
         Parcel(
             id: id,
             trackingNumber: "T\(id.uuidString.prefix(8))",
             label: label,
             carrier: carrier,
-            createdAt: "2026-01-01T00:00:00Z",
+            createdAt: createdAt,
             expectedDelivery: nil,
             lastStatusText: nil,
             lastSyncedAt: nil,

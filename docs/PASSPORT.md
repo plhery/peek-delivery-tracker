@@ -18,10 +18,18 @@ cases ([`passport-cases.json`](../shared/passport-cases.json)).
 - **Shared data.** [`passport.json`](../shared/passport.json) holds the stamps in page order,
   their glyphs and tones, each country's continent, ink and tilt, and the continent
   outlines. Paths use absolute `M L C Z` commands only, so every platform draws them alike.
+- **Numbers.** Besides the counts and the two times: the busiest month, the calendar month
+  the most parcels were added in (two at least, the later month on a tie), and the carriers
+  you've used, every parcel's real carrier with the one used most.
+- **Pages.** Under the cover, three pages: Countries (an ink stamp for each, in its
+  continent's outline), Stamps and Numbers. Labels or a swipe turn them; on a wide screen the
+  book lies open on two. The passport opens on the page with news, and a page's news is
+  pressed in the first time it is shown.
 - **New.** What was earned since the passport was last opened is new: a line under the
   delivered or archived card that earned it, and a dot on the Passport tab. The list of
   seen stamps and countries stays on the device, one per account and one for a guest; the
-  first time a passport is read on a device, everything it holds counts as seen.
+  first time a passport is read on a device, everything it holds counts as seen. A list
+  kept before countries counted as news takes the countries it can see then as seen.
 - **The year's card.** In December, once a parcel was delivered that year, the passport
   offers "Your <year> in parcels": a 1080×1350 picture made on the device and handed to the
   share sheet or saved. It carries counts, the countries that year's parcels went through

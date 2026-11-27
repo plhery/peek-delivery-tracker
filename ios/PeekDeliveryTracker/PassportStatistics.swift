@@ -275,12 +275,14 @@ struct PassportBook {
     let stats: PassportStatistics
     let stamps: [StampProgress]
     let countries: [CountryStamp]
+    let numbers: PassportNumbers
 
     private static let day: TimeInterval = 86_400
 
     init(parcels: [Parcel], timeZone: TimeZone = .current) {
         let stats = PassportStatistics(parcels: parcels, timeZone: timeZone)
         self.stats = stats
+        numbers = PassportNumbers(parcels: parcels, timeZone: timeZone)
         var earned: [String: PassportStatistics.Delivery] = [:]
         func earn(_ key: String, _ delivery: PassportStatistics.Delivery, _ when: Bool = true) {
             if when, earned[key] == nil { earned[key] = delivery }
@@ -638,5 +640,36 @@ enum TrackingLocation {
         String(String.UnicodeScalarView(code.unicodeScalars.compactMap {
             UnicodeScalar(127_397 + $0.value)
         }))
+    }
+}
+
+/// The Numbers page's lines beyond today's numbers (the web's `passportNumbers`): the month the most parcels were added in,
+/// on the reader's calendar (two at least, the later month on a tie), and the real carriers of every parcel, the one used
+/// most first (by name on a tie).
+struct PassportNumbers: Equatable {
+    struct Month: Equatable { let month: String; let count: Int }
+    struct Carrier: Equatable { let carrier: CarrierID; let count: Int }
+
+    let busiestMonth: Month?
+    let carrierCount: Int
+    let topCarrier: Carrier?
+
+    init(parcels: [Parcel], timeZone: TimeZone = .current) {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = timeZone
+        var months: [String: Int] = [:]
+        var carriers: [CarrierID: Int] = [:]
+        for parcel in parcels {
+            if let at = DateParser.date(parcel.createdAt) {
+                let parts = calendar.dateComponents([.year, .month], from: at)
+                months[String(format: "%04d-%02d", parts.year ?? 0, parts.month ?? 0), default: 0] += 1
+            }
+            if !PassportStatistics.placeholderCarriers.contains(parcel.carrier) { carriers[parcel.carrier, default: 0] += 1 }
+        }
+        let busiest = months.max { $0.value != $1.value ? $0.value < $1.value : $0.key < $1.key }
+        busiestMonth = busiest.flatMap { $0.value >= 2 ? Month(month: $0.key, count: $0.value) : nil }
+        carrierCount = carriers.count
+        topCarrier = carriers.max { $0.value != $1.value ? $0.value < $1.value : $0.key.rawValue > $1.key.rawValue }
+            .map { Carrier(carrier: $0.key, count: $0.value) }
     }
 }

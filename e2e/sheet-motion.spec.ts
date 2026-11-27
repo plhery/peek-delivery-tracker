@@ -76,9 +76,11 @@ test('a stamp’s bubble grows out of it, and a friend’s page out of their car
   const navigation = page.locator('.app__navigation');
 
   await navigation.getByRole('button', { name: 'Passport', exact: true }).click();
+  await page.getByRole('tab', { name: 'Stamps', exact: true }).click();
   const stamp = page.locator('.stamp-card').first();
   // The page has arrived before the stamp is measured.
   await page.locator('.passport-page').evaluate((element) => Promise.all(element.getAnimations().map((animation) => animation.finished)));
+  await page.locator('.passport-pages__track').evaluate((element) => Promise.all(element.getAnimations().map((animation) => animation.finished)));
   await stamp.click();
   const bubble = page.locator('.passport-bubble[data-positioned]');
   await expect(bubble).toBeVisible();

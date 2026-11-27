@@ -66,7 +66,7 @@ class PassportCasesTests {
         }
         Parcel(
             id = uuid(id), trackingNumber = "T$id", label = parcel.getValue("label").jsonPrimitive.content,
-            carrier = CarrierId(parcel.getValue("carrier").jsonPrimitive.content), createdAt = "2026-01-01T00:00:00Z",
+            carrier = CarrierId(parcel.getValue("carrier").jsonPrimitive.content), createdAt = parcel["createdAt"]?.jsonPrimitive?.content ?: "2026-01-01T00:00:00Z",
             syncStatus = SyncStatus.Ok, archivedAt = parcel["archivedAt"]?.jsonPrimitive?.content, notificationsMuted = false,
             trackingEvents = events,
         )
@@ -110,6 +110,14 @@ class PassportCasesTests {
                         }
                     },
                 ),
+            )
+            put(
+                "numbers",
+                buildJsonObject {
+                    put("busiestMonth", book.numbers.busiestMonth?.let { buildJsonObject { put("month", it.month); put("count", it.count) } } ?: JsonNull)
+                    put("carrierCount", book.numbers.carrierCount)
+                    put("topCarrier", book.numbers.topCarrier?.let { buildJsonObject { put("carrier", it.carrier); put("count", it.count) } } ?: JsonNull)
+                },
             )
             put(
                 "year2026",

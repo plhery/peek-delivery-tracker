@@ -9,6 +9,8 @@ import type { ParcelWithEvents } from '../../types';
  */
 const PREFIX = 'peek-passport-seen:';
 const CHANGE = 'peek-passport-seen-change';
+// In a list once countries count as news. A list kept before then takes every country it can see now as seen.
+const COUNTRIES_ON = 'countries:on';
 // Storage that cannot be read or written keeps the list for as long as the page lives.
 const memory = new Map<string, string>();
 
@@ -52,7 +54,7 @@ export interface PassportNews {
   markSeen: () => void;
 }
 
-export function usePassportNews(parcels: readonly ParcelWithEvents[], scope: string, loading: boolean, { countries = false } = {}): PassportNews {
+export function usePassportNews(parcels: readonly ParcelWithEvents[], scope: string, loading: boolean, { countries = true } = {}): PassportNews {
   const book = useMemo(() => passportBook(parcels), [parcels]);
   const stored = useSyncExternalStore(subscribe, () => readSeen(scope), () => null);
   const seen = useMemo(() => {
@@ -63,13 +65,21 @@ export function usePassportNews(parcels: readonly ParcelWithEvents[], scope: str
     ...(countries ? book.countries.map((country): PassportNewsItem => ({ seen: countrySeenKey(country), parcelId: country.parcelId, country })) : []),
     ...book.stamps.filter((stamp) => stamp.earned).map((stamp): PassportNewsItem => ({ seen: stampSeenKey(stamp), parcelId: stamp.parcelId, stamp })),
   ], [book, countries]);
-  const markSeen = useCallback(() => { if (!loading) writeSeen(scope, earned.map((item) => item.seen)); }, [earned, loading, scope]);
-  // A passport read here for the first time starts with everything it holds already seen.
-  useEffect(() => { if (!loading && seen === null) markSeen(); }, [loading, markSeen, seen]);
+  const markSeen = useCallback(() => {
+    if (!loading) writeSeen(scope, [...earned.map((item) => item.seen), ...(countries ? [COUNTRIES_ON] : [])]);
+  }, [countries, earned, loading, scope]);
+  const before = countries && seen !== null && !seen.has(COUNTRIES_ON);
+  // A passport read here for the first time starts with everything it holds already seen, and so do its countries the
+  // first time they count.
+  useEffect(() => {
+    if (loading) return;
+    if (seen === null) markSeen();
+    else if (before) writeSeen(scope, [...seen, ...book.countries.map(countrySeenKey), COUNTRIES_ON]);
+  }, [before, book, loading, markSeen, scope, seen]);
   return useMemo(() => {
-    const unseen = seen ? earned.filter((item) => !seen.has(item.seen)) : [];
+    const unseen = seen ? earned.filter((item) => !seen.has(item.seen) && !(before && item.country)) : [];
     const byParcel = new Map<string, PassportNewsItem[]>();
     for (const item of unseen) if (item.parcelId) byParcel.set(item.parcelId, [...(byParcel.get(item.parcelId) ?? []), item]);
     return { book, unseen, byParcel, markSeen };
-  }, [book, earned, markSeen, seen]);
+  }, [before, book, earned, markSeen, seen]);
 }

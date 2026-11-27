@@ -6,6 +6,7 @@ import com.plhery.peekdeliverytracker.core.api.Parcel
 import java.time.Duration
 import java.time.Instant
 import java.time.ZoneId
+import java.util.Locale
 import java.util.UUID
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonArray
@@ -126,6 +127,7 @@ class PassportBook(parcels: List<Parcel>, timeZone: ZoneId = ZoneId.systemDefaul
     val stats = PassportStatistics(parcels, timeZone)
     val stamps: List<StampProgress>
     val countries: List<CountryStamp>
+    val numbers = PassportNumbers(parcels, timeZone)
 
     private class Reached(var firstAt: Instant, var delivery: PassportStatistics.Delivery, var count: Int)
 
@@ -225,7 +227,7 @@ class PassportBook(parcels: List<Parcel>, timeZone: ZoneId = ZoneId.systemDefaul
 
     companion object {
         /** Carrier ids that stand for "not known yet" rather than a carrier: they never count toward Well connected. */
-        private val PLACEHOLDER_CARRIERS = setOf("unknown", "intl-post")
+        internal val PLACEHOLDER_CARRIERS = setOf("unknown", "intl-post")
         private const val DAY_SECONDS = 86_400.0
         private const val DAY_MILLIS = 86_400_000L
 
@@ -273,5 +275,36 @@ class YearInParcels(book: PassportBook, val year: Int) {
         }
         stamps = book.stamps.filter { it.earned && it.parcelId != null && it.parcelId in parcels }
         fastest = deliveries.mapNotNull { it.duration }.minOrNull()
+    }
+}
+
+/**
+ * The Numbers page's lines beyond today's numbers (the web's `passportNumbers`): the month the most parcels were added
+ * in, on [timeZone]'s calendar (two at least, the later month on a tie), and the real carriers of every parcel, the one
+ * used most first (by name on a tie).
+ */
+class PassportNumbers(parcels: List<Parcel>, timeZone: ZoneId = ZoneId.systemDefault()) {
+    data class Month(val month: String, val count: Int)
+    data class Carrier(val carrier: String, val count: Int)
+
+    val busiestMonth: Month?
+    val carrierCount: Int
+    val topCarrier: Carrier?
+
+    init {
+        val months = HashMap<String, Int>()
+        val carriers = HashMap<String, Int>()
+        for (parcel in parcels) {
+            DateParser.date(parcel.createdAt)?.let { at ->
+                val day = at.atZone(timeZone)
+                val month = String.format(Locale.ROOT, "%04d-%02d", day.year, day.monthValue)
+                months[month] = (months[month] ?: 0) + 1
+            }
+            if (parcel.carrier.rawValue !in PassportBook.PLACEHOLDER_CARRIERS) carriers[parcel.carrier.rawValue] = (carriers[parcel.carrier.rawValue] ?: 0) + 1
+        }
+        val busiest = months.entries.sortedWith(compareByDescending<Map.Entry<String, Int>> { it.value }.thenByDescending { it.key }).firstOrNull()
+        busiestMonth = busiest?.takeIf { it.value >= 2 }?.let { Month(it.key, it.value) }
+        carrierCount = carriers.size
+        topCarrier = carriers.entries.sortedWith(compareByDescending<Map.Entry<String, Int>> { it.value }.thenBy { it.key }).firstOrNull()?.let { Carrier(it.key, it.value) }
     }
 }

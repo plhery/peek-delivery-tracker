@@ -339,20 +339,7 @@ button .carrier-mark__truck { width: 27px; height: 18px; flex-shrink: 0; stroke:
 .stamp-card--earned { color: var(--ink); }
 .stamp-card > span:last-child { font-size: 10px; font-weight: 400; line-height: 1.4; overflow-wrap: anywhere; }
 .passport-collection-toggle { display: block; min-height: 44px; padding: 0; margin: 8px 0 -10px; background: transparent; color: var(--ink-soft); font-size: 12px; text-align: left; border-radius: 6px; }
-.passport-times { padding: 21px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.passport-times__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
-.time-card { display: flex; flex-direction: column; gap: 6px; min-height: 48px; padding: 0; background: transparent; color: var(--ink); text-align: left; border-radius: 6px; }
-.time-card > strong { font-size: 22px; font-weight: 500; letter-spacing: -.6px; line-height: 1.2; }
-.time-card > span { font-size: 11px; color: var(--ink-soft); }
 .passport-note { font-size: 12px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
-.passport-section-heading { display: flex; align-items: center; gap: 2px; margin-bottom: 12px; }
-.passport-section-heading h2 { margin: 0; }
-.passport-heading-button { min-height: 44px; margin: -10px 0; padding: 0; background: transparent; color: inherit; font: inherit; text-align: left; border-radius: 6px; }
-.country-list { display: flex; flex-direction: column; }
-.country-row { display: flex; align-items: center; gap: 11px; min-height: 44px; padding: 10px 0; font-size: 13px; }
-.country-row + .country-row { border-top: 1px solid var(--line); }
-.country-row__flag { font-size: 16px; }
-.country-row__count { margin-left: auto; font-size: 12px; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
 /* Native popovers live above the page and never move the journal beneath them. */
 .passport-bubble { position: fixed; inset: auto; margin: 0; width: min(300px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); overflow: auto; padding: 20px; border: 1px solid var(--line); border-radius: 18px; background: var(--paper); color: var(--ink); box-shadow: 0 8px 32px rgb(0 0 0 / 12%); opacity: 0; scale: .55; transform-origin: var(--bubble-from, 50% 0); transition: opacity .14s ease-in, scale .16s ease-in, display .16s allow-discrete, overlay .16s allow-discrete; }
 /* The bubble grows out of the stamp it explains, and goes back into it. */
@@ -598,7 +585,7 @@ button .carrier-mark__truck { width: 27px; height: 18px; flex-shrink: 0; stroke:
   .button--primary:hover { filter: brightness(1.025); }
   .parcel-card-swipe:not([data-swipe="dragging"]) .parcel-card:hover .parcel-stamp { scale: 1.025; }
   .postage-stamp, .parcel-stamp { transition: scale .18s ease-out; }
-  .time-card:hover, .stamp-card:hover { scale: 1.012; }
+  .stamp-card:hover, .country-ink:hover { scale: 1.012; }
   .settings-row:hover { filter: brightness(.97); }
   .arrival__open:hover { color: var(--ink); }
   .detail__actions-menu button:hover, .detail__actions-menu a:hover { background: color-mix(in srgb, var(--ink) 6%, transparent); }
@@ -695,7 +682,7 @@ button .carrier-mark__truck { width: 27px; height: 18px; flex-shrink: 0; stroke:
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
 @media (forced-colors: active) {
-  .parcel-card, .passport-cover, .time-card, .stamp-card, .button, .app__navigation, .sheet, .settings-row { border: 1px solid ButtonText; }
+  .parcel-card, .passport-cover, .stamp-card, .country-ink, .button, .app__navigation, .sheet, .settings-row { border: 1px solid ButtonText; }
   .app__navigation-selection { outline: 2px solid Highlight; outline-offset: -2px; }
   .passport-seal, .progress-track__dot--filled { forced-color-adjust: none; }
 }

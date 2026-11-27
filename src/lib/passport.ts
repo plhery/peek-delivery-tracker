@@ -232,7 +232,7 @@ export function passportBook(parcels: readonly ParcelWithEvents[], timeZone?: st
   });
   const countries: CountryStamp[] = [...reached].sort(([a, x], [b, y]) => x.firstAt - y.firstAt || a.localeCompare(b))
     .map(([code, { firstAt, delivery, count }], index) => ({ code, number: index + 1, firstAt, parcelId: delivery.parcelId, label: delivery.label, count, continent: continentOf(code) }));
-  return { stats, stamps, countries };
+  return { stats, stamps, countries, numbers: passportNumbers(parcels, timeZone) };
 }
 
 export type PassportBook = ReturnType<typeof passportBook>;
@@ -270,6 +270,33 @@ export function yearInParcels(book: PassportBook, year: number) {
 }
 
 export type YearInParcels = ReturnType<typeof yearInParcels>;
+
+/**
+ * The Numbers page's extras, from every parcel the reader still has: the month they added the most (two at least; a tie
+ * goes to the later month) and the real carriers they've used, with the one they used most (a tie goes to the carrier
+ * id that sorts first).
+ */
+export function passportNumbers(parcels: readonly ParcelWithEvents[], timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone) {
+  const calendar = new Intl.DateTimeFormat('en-US', { timeZone, calendar: 'gregory', year: 'numeric', month: '2-digit' });
+  const months = new Map<string, number>();
+  const carriers = new Map<string, number>();
+  for (const parcel of parcels) {
+    const at = Date.parse(parcel.createdAt);
+    if (Number.isFinite(at)) {
+      const parts = Object.fromEntries(calendar.formatToParts(at).map((part) => [part.type, part.value]));
+      const month = `${parts.year}-${parts.month}`;
+      months.set(month, (months.get(month) ?? 0) + 1);
+    }
+    if (!PLACEHOLDER_CARRIERS.has(parcel.carrier)) carriers.set(parcel.carrier, (carriers.get(parcel.carrier) ?? 0) + 1);
+  }
+  const busiest = [...months].sort(([a, x], [b, y]) => y - x || b.localeCompare(a))[0];
+  const top = [...carriers].sort(([a, x], [b, y]) => y - x || a.localeCompare(b))[0];
+  return {
+    busiestMonth: busiest && busiest[1] >= 2 ? { month: busiest[0], count: busiest[1] } : null,
+    carrierCount: carriers.size,
+    topCarrier: top ? { carrier: top[0], count: top[1] } : null,
+  };
+}
 
 /** The keys a reader marks as seen: a stamp by its key, a country by its code. */
 export const stampSeenKey = (stamp: Pick<StampProgress, 'key'>) => `stamp:${stamp.key}`;

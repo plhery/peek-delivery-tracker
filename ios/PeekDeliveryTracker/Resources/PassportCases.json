@@ -43,7 +43,8 @@
        "Bern",
        "CH"
       ]
-     ]
+     ],
+     "createdAt": "2026-03-01T08:00:00Z"
     },
     {
      "id": "p2",
@@ -61,7 +62,8 @@
        "Bern",
        "CH"
       ]
-     ]
+     ],
+     "createdAt": "2026-03-10T07:00:00Z"
     },
     {
      "id": "p3",
@@ -73,7 +75,8 @@
        "2026-03-11T07:00:00Z",
        "Paris, France"
       ]
-     ]
+     ],
+     "createdAt": "2026-03-11T07:00:00Z"
     },
     {
      "id": "p4",
@@ -97,7 +100,8 @@
        "Genève",
        "CH"
       ]
-     ]
+     ],
+     "createdAt": "2026-04-01T08:00:00Z"
     },
     {
      "id": "p5",
@@ -114,7 +118,8 @@
        "2026-06-03T08:00:00Z",
        "Lyon, France"
       ]
-     ]
+     ],
+     "createdAt": "2026-06-01T08:00:00Z"
     },
     {
      "id": "p6",
@@ -132,7 +137,8 @@
        "2026-09-15T12:00:00Z",
        "Zürich, Switzerland"
       ]
-     ]
+     ],
+     "createdAt": "2026-09-10T08:00:00Z"
     },
     {
      "id": "p7",
@@ -150,7 +156,8 @@
        "Bern",
        "CH"
       ]
-     ]
+     ],
+     "createdAt": "2026-12-18T08:00:00Z"
     },
     {
      "id": "p8",
@@ -168,7 +175,8 @@
        "Bern",
        "CH"
       ]
-     ]
+     ],
+     "createdAt": "2027-03-07T08:00:00Z"
     },
     {
      "id": "p9",
@@ -190,7 +198,8 @@
        "2026-05-04T08:00:00Z",
        "Zürich, Switzerland"
       ]
-     ]
+     ],
+     "createdAt": "2026-05-01T08:00:00Z"
     }
    ],
    "expect": {
@@ -354,6 +363,17 @@
       "continent": "europe"
      }
     ],
+    "numbers": {
+     "busiestMonth": {
+      "month": "2026-03",
+      "count": 3
+     },
+     "carrierCount": 3,
+     "topCarrier": {
+      "carrier": "dhl",
+      "count": 4
+     }
+    },
     "year2026": {
      "deliveredCount": 6,
      "countryCount": 5,
@@ -610,6 +630,17 @@
       "continent": "europe"
      }
     ],
+    "numbers": {
+     "busiestMonth": {
+      "month": "2026-01",
+      "count": 5
+     },
+     "carrierCount": 3,
+     "topCarrier": {
+      "carrier": "dhl",
+      "count": 1
+     }
+    },
     "year2026": {
      "deliveredCount": 3,
      "countryCount": 1,
@@ -943,6 +974,17 @@
       "continent": "northAmerica"
      }
     ],
+    "numbers": {
+     "busiestMonth": {
+      "month": "2025-12",
+      "count": 10
+     },
+     "carrierCount": 3,
+     "topCarrier": {
+      "carrier": "usps",
+      "count": 8
+     }
+    },
     "year2026": {
      "deliveredCount": 10,
      "countryCount": 2,
@@ -1151,6 +1193,17 @@
       "continent": "europe"
      }
     ],
+    "numbers": {
+     "busiestMonth": {
+      "month": "2026-01",
+      "count": 2
+     },
+     "carrierCount": 1,
+     "topCarrier": {
+      "carrier": "dhl",
+      "count": 2
+     }
+    },
     "year2026": {
      "deliveredCount": 1,
      "countryCount": 2,

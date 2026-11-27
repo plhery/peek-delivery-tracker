@@ -64,7 +64,71 @@
 .passport-year__actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 .passport-year__actions > * { flex: 1 1 120px; }
 
+/* The pages: labels with a sliding pill, then one track of paper sheets, the neighbour's edge showing. */
+:root { --passport-flip: cubic-bezier(.22,.8,.2,1); }
+.passport-pages { display: flex; flex-direction: column; gap: 14px; }
+.passport-pages__tabs { position: relative; display: grid; grid-template-columns: repeat(var(--tabs), minmax(0, 1fr)); border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line); }
+.passport-pages__pill { position: absolute; inset: 0 auto 0 0; width: calc(100% / var(--tabs)); border-radius: 999px; background: var(--yellow-soft); translate: calc(var(--tab) * 100%) 0; transition: translate 240ms var(--passport-move); }
+.passport-pages__tabs button { position: relative; min-height: 38px; padding: 0 8px; background: transparent; color: var(--ink-soft); font-size: 13px; font-weight: 600; border-radius: 999px; }
+.passport-pages__tabs button.is-selected { color: var(--ink); }
+.passport-pages__dot { position: absolute; top: 9px; right: 12px; width: 7px; height: 7px; border-radius: 50%; background: var(--orange); animation: passport-dot 320ms 200ms both; }
+.passport-pages__viewport { margin: 0 -16px; padding: 2px 16px 14px; overflow: hidden; touch-action: pan-y; }
+.passport-pages__track { display: flex; align-items: flex-start; gap: 10px; transition: transform 420ms var(--passport-flip); }
+.passport-pages__track.is-dragging { transition: none; }
+.passport-sheet { position: relative; flex: 0 0 calc(100% - 28px); min-height: 360px; padding: 18px 14px 34px; background: var(--paper); border-radius: 20px; box-shadow: var(--shadow); }
+.passport-sheet:not(.is-shown) { overflow: hidden; }
+.passport-sheet__number { position: absolute; bottom: 12px; left: 0; right: 0; color: var(--ink-soft); font-size: 11px; text-align: center; font-variant-numeric: tabular-nums; }
+.passport-pages--open .passport-sheet { flex-basis: calc(50% - 5px); }
+@media (min-width: 960px) {
+  .passport-page { max-width: 880px; }
+}
+
+/* Countries: one ink stamp per country, its outline the continent's, in its tone and tilt. */
+.passport-countries__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 12px; }
+@media (min-width: 560px) { .passport-countries__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.passport-pages--open .passport-countries__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.country-ink-cell { position: relative; }
+.country-ink { position: relative; display: flex; flex-direction: column; align-items: center; gap: 3px; width: 100%; padding: 4px 0; background: transparent; color: var(--ink); text-align: center; border-radius: 8px; }
+.passport-ink { display: block; width: min(124px, 100%); margin-bottom: 6px; color: var(--tone); rotate: var(--tilt); }
+.passport-ink svg { display: block; width: 100%; height: auto; overflow: visible; }
+.country-ink__name { font-size: 12.5px; line-height: 1.3; }
+.country-ink__count { color: var(--ink-soft); font-size: 11px; line-height: 1.3; }
+.country-ink .passport-new-pill { top: -6px; right: 6px; }
+.passport-countries__empty { display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 22px 10px 8px; color: var(--ink-soft); text-align: center; }
+.passport-countries__empty p { margin: 0; font-size: 14px; line-height: 1.5; }
+.passport-countries__ghost { width: 124px; height: 92px; border: 1.5px dashed var(--line); border-radius: 12px; rotate: -4deg; }
+
+/* A new country drops in, its outline bleeding at the impact; the name rises after. The third and later just appear. */
+.passport-ink--drop { animation: passport-drop 520ms var(--drop-delay) both, passport-ink-in 100ms var(--drop-delay) linear both; }
+.passport-ink--drop .passport-ink__outline { animation: passport-bleed 286ms calc(var(--drop-delay) + 234ms) var(--passport-settle) both; }
+.passport-ink--appear { animation: passport-ink-in 200ms var(--drop-delay) linear both; }
+.country-ink--new .country-ink__name, .country-ink--new .country-ink__count { animation: passport-rise 300ms 494ms var(--passport-settle) both; }
+.country-ink--new .passport-new-pill { animation-delay: 614ms; }
+@keyframes passport-drop {
+  0% { scale: 1.6; rotate: calc(var(--tilt) - 10deg); translate: 0 -14px; animation-timing-function: var(--passport-drop); }
+  45% { scale: .95; rotate: var(--tilt); translate: 0 0; animation-timing-function: var(--passport-settle); }
+  100% { scale: 1; rotate: var(--tilt); translate: 0 0; }
+}
+@keyframes passport-bleed { from { stroke-width: 2.4; } to { stroke-width: 1.7; } }
+
+/* Numbers: the counts, the two times, then the busiest month and the carriers. */
+.passport-numbers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 18px; }
+.passport-number { display: flex; flex-direction: column; gap: 4px; padding: 0; background: transparent; color: var(--ink); text-align: left; border-radius: 6px; }
+.passport-number strong { font-size: 24px; font-weight: 500; letter-spacing: -.5px; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.passport-number span { color: var(--ink-soft); font-size: 12px; }
+.passport-number-rows { display: flex; flex-direction: column; margin: 20px 0 0; border-top: 1px solid var(--line); }
+.passport-number-rows > div { display: flex; align-items: center; gap: 12px; min-height: 46px; border-bottom: 1px solid var(--line); font-size: 13px; }
+.passport-number-rows dt { color: var(--ink); }
+.passport-number-rows dd { margin: 0 0 0 auto; color: var(--ink-soft); text-align: right; font-variant-numeric: tabular-nums; }
+.passport-sheet .passport-year { margin-top: 16px; }
+.passport-sheet .passport-note { margin: 16px 0 0; }
+
 @media (prefers-reduced-motion: reduce) {
+  .passport-pages__pill, .passport-pages__track { transition: none; }
+  .passport-sheet.is-shown { animation: passport-ink-in 200ms linear; }
+  .passport-pages__dot { animation: passport-ink-in 150ms linear both; }
+  .passport-ink--drop, .passport-ink--drop .passport-ink__outline, .passport-ink--appear,
+  .country-ink--new .country-ink__name, .country-ink--new .country-ink__count { animation: none; }
   .passport-seal--press, .passport-seal--press .passport-postmark__outer, .passport-seal--press .passport-postmark__inner,
   .passport-new-pill, .passport-news-line > :first-child, .passport-news-line__text { animation: none; }
   .passport-news-line { animation: passport-ink-in 200ms linear both; }

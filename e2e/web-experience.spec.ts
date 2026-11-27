@@ -233,8 +233,10 @@ test('opens Passport explanation bubbles without moving the journal and restores
   await page.getByRole('button', { name: 'Passport', exact: true }).click();
   await expect(page.locator('.passport-cover__count')).toHaveText('10');
   await expect(page.locator('.passport-note')).toHaveCount(0);
-  await expect(page.locator('.country-row')).toHaveCount(3);
+  await expect(page.locator('.country-ink')).toHaveCount(8);
   await expect(page.locator('.passport-count')).toHaveCount(0);
+  await page.getByRole('tab', { name: 'Stamps', exact: true }).click();
+  await expect(page.getByRole('tab', { name: 'Stamps', exact: true })).toHaveAttribute('aria-selected', 'true');
   await expect(page.locator('.stamp-card')).toHaveCount(13);
   // Allow subpixel rounding while the page's entrance transform settles.
   await expect.poll(() => page.locator('.stamp-card').evaluateAll((cards) => {
@@ -245,7 +247,7 @@ test('opens Passport explanation bubbles without moving the journal and restores
   const stamp = page.getByRole('button', { name: /^First arrival, Earned on / });
   const explanation = page.locator(`[id="${await stamp.getAttribute('aria-controls')}"]`);
   await expect(explanation).toBeHidden();
-  const height = (await page.locator('.passport-stamps').boundingBox())!.height;
+  const height = (await page.locator('.passport-stamps__grid').boundingBox())!.height;
   await stamp.evaluate((element) => element.setAttribute('data-kept', 'yes'));
   await stamp.focus();
   await page.keyboard.press('Enter');
@@ -253,7 +255,7 @@ test('opens Passport explanation bubbles without moving the journal and restores
   await expect(explanation).toContainText('Your first delivered parcel.');
   await expect(explanation).toBeVisible();
   // Transformed bounds can differ by floating-point rounding between frames.
-  expect((await page.locator('.passport-stamps').boundingBox())!.height).toBeCloseTo(height, 2);
+  expect((await page.locator('.passport-stamps__grid').boundingBox())!.height).toBeCloseTo(height, 2);
   await expect(stamp).toHaveAttribute('data-kept', 'yes');
   await expect(page.getByRole('dialog', { name: 'First arrival', exact: true })).toBeVisible();
   await expect(explanation).toBeFocused();
@@ -266,42 +268,65 @@ test('opens Passport explanation bubbles without moving the journal and restores
   await expect(page.locator('.deliveries-page')).toBeVisible();
 });
 
-test('anchors every Passport bubble within a narrow screen and explains the country heading', async ({ page }) => {
+test('anchors every Passport bubble within a narrow screen, on every page', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 740 });
   await page.emulateMedia({ reducedMotion: 'reduce', colorScheme: 'dark' });
   await demo(page);
   await page.getByRole('button', { name: 'Passport', exact: true }).click();
   await expect(page.locator('.stamp-card')).toHaveCount(13);
-  const cards = page.locator('.passport-page button[aria-haspopup="dialog"]');
-  for (const card of await cards.all()) {
-    await card.click();
-    await expect(card).toHaveAttribute('aria-expanded', 'true');
-    await expect(page.locator(`[id="${await card.getAttribute('aria-controls')}"]`)).toBeVisible();
-    await expect(page.locator('.passport-page button[aria-haspopup="dialog"][aria-expanded="true"]')).toHaveCount(1);
-    const bubble = page.getByRole('dialog');
-    await expect(bubble).toHaveCount(1);
-    await expect(bubble).toBeFocused();
-    const bounds = (await bubble.boundingBox())!;
-    expect(bounds.x).toBeGreaterThanOrEqual(12);
-    expect(bounds.y).toBeGreaterThanOrEqual(12);
-    expect(bounds.x + bounds.width).toBeLessThanOrEqual(308);
-    expect(bounds.y + bounds.height).toBeLessThanOrEqual(728);
-    await noOverflow(page);
-    await page.keyboard.press('Escape');
-    await expect(card).toHaveAttribute('aria-expanded', 'false');
-    await expect(card).toBeFocused();
+  for (const name of ['Countries', 'Stamps', 'Numbers']) {
+    await page.getByRole('tab', { name, exact: true }).click();
+    const cards = page.locator('.passport-cover button[aria-haspopup="dialog"], .passport-sheet.is-shown button[aria-haspopup="dialog"]');
+    expect(await cards.count()).toBeGreaterThan(1);
+    for (const card of await cards.all()) {
+      await card.click();
+      await expect(card).toHaveAttribute('aria-expanded', 'true');
+      await expect(page.locator(`[id="${await card.getAttribute('aria-controls')}"]`)).toBeVisible();
+      await expect(page.locator('.passport-page button[aria-haspopup="dialog"][aria-expanded="true"]')).toHaveCount(1);
+      const bubble = page.getByRole('dialog');
+      await expect(bubble).toHaveCount(1);
+      await expect(bubble).toBeFocused();
+      const bounds = (await bubble.boundingBox())!;
+      expect(bounds.x).toBeGreaterThanOrEqual(12);
+      expect(bounds.y).toBeGreaterThanOrEqual(12);
+      expect(bounds.x + bounds.width).toBeLessThanOrEqual(308);
+      expect(bounds.y + bounds.height).toBeLessThanOrEqual(728);
+      await noOverflow(page);
+      await page.keyboard.press('Escape');
+      await expect(card).toHaveAttribute('aria-expanded', 'false');
+      await expect(card).toBeFocused();
+    }
   }
-  const heading = page.getByRole('heading', { name: 'First scanned in', exact: true }).getByRole('button');
-  await expect(heading).toHaveText('First scanned in');
-  await expect(page.locator('.passport-help')).toHaveCount(0);
-  await heading.click();
-  await expect(page.getByRole('dialog', { name: 'First scanned in' })).toContainText('Where the carrier first scanned');
-  await page.locator('.app__title').click();
+  await expect(page.getByText('First scanned in')).toHaveCount(0);
+});
+
+test('turns the Passport’s pages with a swipe, and lays two side by side on a wide screen', async ({ page }) => {
+  await demo(page);
+  await page.getByRole('button', { name: 'Passport', exact: true }).click();
+  const tab = (name: string) => page.getByRole('tab', { name, exact: true });
+  await expect(tab('Countries')).toHaveAttribute('aria-selected', 'true');
+  const shown = () => page.locator('.passport-sheet.is-shown').evaluateAll((sheets) => sheets.map((sheet) => sheet.getAttribute('aria-labelledby') && document.getElementById(sheet.getAttribute('aria-labelledby')!)!.textContent));
+  if ((page.viewportSize()?.width ?? 0) >= 960) {
+    await expect.poll(shown).toEqual(['Countries', 'Stamps']);
+    await tab('Numbers').click();
+    await expect.poll(shown).toEqual(['Stamps', 'Numbers']);
+    await noOverflow(page);
+    return;
+  }
+  await expect.poll(shown).toEqual(['Countries']);
+  const viewport = (await page.locator('.passport-pages__viewport').boundingBox())!;
+  const y = viewport.y + 80;
+  await page.mouse.move(viewport.x + viewport.width - 40, y);
+  await page.mouse.down();
+  for (let step = 1; step <= 8; step++) await page.mouse.move(viewport.x + viewport.width - 40 - step * 30, y);
+  await page.mouse.up();
+  await expect(tab('Stamps')).toHaveAttribute('aria-selected', 'true');
+  await expect.poll(shown).toEqual(['Stamps']);
   await expect(page.getByRole('dialog')).toHaveCount(0);
-  await expect(heading).toHaveAttribute('aria-expanded', 'false');
-  await heading.click();
-  await heading.click();
-  await expect(page.getByRole('dialog')).toHaveCount(0);
+  await tab('Stamps').press('ArrowRight');
+  await expect(tab('Numbers')).toBeFocused();
+  await expect(page.locator('.passport-number-rows')).toContainText('Busiest month');
+  await noOverflow(page);
 });
 
 test('respects reduced motion while retaining every action', async ({ page }) => {

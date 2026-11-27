@@ -1,12 +1,12 @@
 ---
 title: Straightship tracking: STRTD numbers, statuses and delivery
-description: Track a Straightship parcel in Canada: what STRTD, STRCA and STSH numbers look like, what each status means, missed deliveries, customs and who to contact.
+description: Track a Straightship parcel in Canada (STRTD, STRCA, STSH): what ReadyForShipping and "delivered before 9:00pm" mean, customs, SS@straightship.com and support.
 slug: straightship-tracking
 published: 2026-10-23
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Straightship (Straightship Solutions Limited) is a logistics company based in Burnaby, British Columbia, that ships goods from Asia to North America and delivers parcels across Canada with its own drivers. Its site lists SHEIN among its partners. If an online order came with a number starting `STRTD` or `STRCA`, Straightship has it; one starting `STSH` can be Straightship's too. Track it on [straightship.com](https://www.straightship.com/new/), in the "Track Your Shipment" box, or in the box above. The shop gives the number in its shipping email or on the order page.
+Track a Straightship parcel in Canada by pasting your `STRTD`, `STRCA` or `STSH` tracking number in the box above or on [straightship.com](https://www.straightship.com/new/). Based in Burnaby, British Columbia (with over 85 delivery hubs covering 95% of Canada's population and partners including SHEIN), Straightship delivers with its own drivers; ignore a lagging `ReadyForShipping` summary and follow the latest history line (all timestamps are UTC), or contact +1 (800) 452-3304 / SS@straightship.com after a missed attempt.
 
 ## Straightship tracking number: what it looks like
 
@@ -101,25 +101,25 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ## Questions about Straightship tracking
 
-### Is Straightship legit?
+### Why does Straightship still say ReadyForShipping?
 
-Yes. Straightship Solutions Limited is a logistics company in Burnaby, British Columbia. Its site lists SHEIN, Canada Post, FedEx, COSCO and YTO among its partners, names Walmart and Costco among the retailers it works with, and says it has over 85 delivery hubs and handles over 500,000 Amazon packages a day.
+Straightship's "Package Status" summary often stays on `ReadyForShipping` (or `Ready For Shipping`) even while the parcel moves through depots in Canada. Always read the newest timestamped scan in the history below it (times are UTC).
 
 ### What does "Package will be delivered before 9:00pm" mean?
 
-Your parcel is out for delivery today. The driver delivers it, or records an attempt, the same day. If nobody can take it, an attempt line follows and asks you to email SS@straightship.com.
+Your parcel is out for delivery with a Straightship driver today, and a delivery or attempt follows the same day. After a failed attempt (`consignee closed` or `unable to leave package at safe location`), email SS@straightship.com with your tracking number to arrange redelivery.
 
-### Why does Straightship still say ReadyForShipping?
+### Is Straightship legit?
 
-The "Package Status" summary can keep `ReadyForShipping` while the parcel moves between Straightship's depots. Go by the newest line of the history below it.
+Yes. Straightship Solutions Limited is based in Burnaby, British Columbia, lists over 85 delivery hubs covering 95% of Canada's population, partners with SHEIN, Canada Post, FedEx, COSCO and YTO, and offers support at +1 (800) 452-3304 (Mon–Fri 08:00–21:00, Sat 08:00–16:00 ET).
 
 ### How long does Straightship take to deliver?
 
-Straightship publishes no delivery time for parcels from Asia; for its service from the US, it says 6 to 10 days. Go by the estimate the shop gives for your order. Once a line says `Package will be delivered before 9:00pm`, the driver comes that day.
+Straightship gives 6 to 10 days (with customs clearance within 24 hours) for its US-to-Canada service and publishes no fixed transit time from Asia — follow the shop's order estimate until `Package will be delivered before 9:00pm` appears.
 
 ### Who delivers Straightship parcels?
 
-Straightship's own drivers, from its depots across Canada, as far as its tracker shows: it names no other carrier. For parcels from the US, Straightship also lists Canada Post and UPS for the last mile, and Purolator on its English page but FedEx on its Chinese one.
+Straightship's own drivers across Canada as shown on its tracker; for US-to-Canada shipments, Straightship also lists Canada Post, UPS and Purolator (or FedEx on its Chinese services page) as last-mile options.
 
 :::sources
 - [Straightship: Home](https://www.straightship.com/new/) – Asia to North America, own fleet, tracking box, POD image, partners, phone, email, hours (read 14 November 2026)

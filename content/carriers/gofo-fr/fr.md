@@ -1,12 +1,12 @@
 ---
 title: GOFO France suivi colis : numéros GFFR, statuts et aide
-description: Suivi GOFO en France : à quoi ressemble un numéro GFFR ou CIFR, ce que veulent dire les statuts de GOFO, et vers qui te tourner si ton colis tarde ou se perd.
+description: Suivi colis GOFO France (CIRRO Parcel France) : numéros GFFR et CIFR, statuts, délais (3 à 5 jours ouvrables), 3 tentatives et service client +33 9 70 70 90 65.
 slug: gofo-france-suivi
 published: 2026-10-11
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-GOFO France est le réseau français de GOFO, un transporteur de colis présent dans plusieurs pays, et il livre des colis en France. Dans la liste des transporteurs de Peek, il porte aussi le nom de CIRRO Parcel France. Ses numéros de suivi commencent par `GFFR` ou `CIFR` : suis ton colis sur la page de suivi française de GOFO, sur gofo.com, ou colle le numéro dans le champ ci-dessus. Pas encore de numéro ? Lis [comment trouver un numéro de suivi](guide:find-tracking-number).
+Pour le suivi d'un colis GOFO France (aussi appelé CIRRO Parcel France), colle ton numéro commençant par `GFFR` ou `CIFR` (13 ou 14 chiffres) — ou une référence `PK` à 20 chiffres — sur gofo.com ou dans le champ ci-dessus. GOFO annonce en général une livraison sous 3 à 5 jours ouvrables après l'arrivée en France, fait jusqu'à 3 tentatives puis conserve le colis 14 jours à l'entrepôt ; pour joindre le service client GOFO France, appelle le +33 9 70 70 90 65 ou écris à cs@fr.gofo.com.
 
 ## Numéro de suivi GOFO : à quoi il ressemble
 
@@ -74,21 +74,25 @@ Peek lit le suivi de GOFO en français jusqu'à toutes les 10 minutes, et jusqu'
 
 ## Questions sur le suivi GOFO
 
+### Comment contacter le service client GOFO France ?
+
+Appelle le +33 9 70 70 90 65 (du lundi au vendredi de 9 h à 18 h, hors jours fériés) ou écris à cs@fr.gofo.com avec ton numéro `GFFR`/`CIFR` pour une preuve de livraison, une nouvelle tentative ou un changement d'adresse avant la tournée ; pour un retard, une perte ou un remboursement, contacte d'abord la boutique.
+
 ### Que veut dire « Expédition en transit vers GOFO » ?
 
-Le colis est en route vers GOFO, qui ne l'a pas encore reçu. Le premier scan de GOFO vient ensuite : `Arrivé au site de prise en charge` ou `Votre colis a été pris en charge au centre de tri`. Jusque-là, Peek affiche le colis comme « Étiquette créée ».
+Le colis est en route vers GOFO, qui ne l'a pas encore scanné (`Arrivé au site de prise en charge` ou `Votre colis a été pris en charge au centre de tri`). Tant que ce premier scan n'apparaît pas, Peek affiche « Étiquette créée ».
 
 ### GOFO France, c'est une vraie entreprise ?
 
-Oui. GOFO FRANCE est une SAS française inscrite au répertoire Sirene de l'INSEE sous le Siren 978 559 839, active depuis mai 2023, avec son siège à Marly-la-Ville (Val-d'Oise).
+Oui. GOFO France livre en France (en général sous 3 à 5 jours ouvrables après l'arrivée en France, avec jusqu'à 3 tentatives et 14 jours de garde à l'entrepôt) et dispose d'un service client dédié sur gofo.com.
 
 ### GOFO et CIRRO Parcel, c'est pareil ?
 
-En France, pour le suivi, oui : la liste des transporteurs de Peek donne à GOFO France l'autre nom de CIRRO Parcel France. Un suivi qui dit seulement « Cirro » peut désigner le réseau français, italien ou néerlandais de GOFO, ou la ligne internationale de Cirro, qui confie les colis aux postes nationales sous leurs propres numéros.
+En France, pour le suivi, oui : GOFO France figure aussi sous le nom CIRRO Parcel France dans Peek, avec des numéros `GFFR` et `CIFR` (les réseaux d'Italie, des Pays-Bas et d'Espagne utilisent `GFIT`/`CIIT`, `GFNL`/`CINL` et `GFES`/`CIES`).
 
 ### Que faire si mon colis GOFO est perdu ?
 
-Contacte la boutique : GOFO lui-même renvoie les réclamations pour perte vers l'expéditeur. Selon les règles européennes, elle répond de la livraison jusqu'à ce que le colis te parvienne : si elle ne peut pas prouver la livraison, elle doit t'envoyer l'article à nouveau ou te rembourser. Plus d'infos dans [colis perdu](guide:lost-parcel).
+Contacte la boutique : GOFO renvoie les réclamations pour perte vers l'expéditeur, et selon les règles européennes le vendeur répond de la livraison jusqu'à la réception (renvoi ou remboursement s'il ne peut pas prouver la livraison). Plus d'infos dans [colis perdu](guide:lost-parcel).
 
 :::sources
 - [GOFO France : Service client](https://www.gofo.com/fr/contact-us/) – téléphone, e-mail, horaires ; FAQ : délais, en cours de livraison, pas d'heure exacte, dédouanement, suivi figé, tentatives, entrepôt, adresse, lien expiré, pas de retour, preuve de livraison, photos pour l'enquête, perte et dommages

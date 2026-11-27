@@ -1,12 +1,12 @@
 ---
 title: Vinted Go tracking: statuses, lockers and who to contact
-description: Track a Vinted Go parcel: where the number is, what each status means, how long a locker or parcel shop holds it and who to ask when it goes wrong.
+description: Track a Vinted Go parcel (VGS or 16-digit number): locker & parcel shop pickup (7 calendar days), English statuses, 25-day missing rule and locker support.
 slug: vinted-go-tracking
 published: 2026-10-11
-updated: 2026-11-23
+updated: 2026-11-27
 ---
 
-Vinted Go is Vinted's own parcel service: it carries parcels sold on Vinted from a locker or parcel shop to another locker, parcel shop or neighbourhood point, and in some places to the buyer's door. To track one, open the order's conversation in Vinted and tap the tracking button, or enter the number on [Vinted Go's tracking page](https://vintedgo.com/en/tracking).
+Track a Vinted Go parcel by tapping the tracking button in your Vinted order conversation or pasting your `VGS` or 16-digit tracking number on [vintedgo.com/en/tracking](https://vintedgo.com/en/tracking) or in the box above. Vinted Go (Vinted's own parcel network across France, Belgium, the Netherlands, Spain, Portugal and Finland) delivers between lockers and parcel shops — holding parcels for 7 calendar days once ready — while all missing-parcel claims (after 25 business days) and refunds are handled through Vinted support.
 
 ## Where to find your Vinted Go tracking number
 
@@ -96,21 +96,25 @@ Peek checks up to every 10 minutes, or hourly once 48 hours pass with no new sca
 
 ## Questions about Vinted Go tracking
 
+### How long does a Vinted Go locker or parcel shop hold my parcel?
+
+7 calendar days from arrival (`Ready to collect`). Uncollected parcels return to the seller's drop-off point, and Vinted cancels the order and refunds you.
+
 ### Is Vinted Go legit?
 
-Yes. Vinted Go is Vinted's own shipping service, run by Vinted Go, UAB, a company registered in Vilnius, Lithuania.
+Yes. Vinted Go is Vinted's own shipping network, operated by Vinted Go, UAB in Vilnius, Lithuania across France, Belgium, the Netherlands, Spain, Portugal and Finland.
 
 ### How long does Vinted Go take to deliver?
 
-Its terms aim for 3 to 6 business days from drop-off to your point, not counting weekends and public holidays. Vinted Go asks you to wait 25 business days before treating a parcel as missing.
+Vinted Go asks buyers to allow up to 25 business days before reporting a parcel missing in Vinted; once marked delivered or collected, you have 2 days to report a problem in the order conversation.
 
 ### Does Vinted Go have a customer service phone number?
 
-For help at a locker only. In the Netherlands and Belgium it's +31 20 793 2587; in France, Belgium, the Netherlands and Spain the "?" button on the locker screen shows it. Everything about your order goes through Vinted's own support.
+Only for help at a locker: +31 20 793 2587 in the Netherlands and Belgium, the "?" button on locker screens in France, Belgium, the Netherlands and Spain, or "Obter ajuda" QR live chat (7:00–22:00) in Portugal. All order issues go through Vinted support.
 
 ### Why is my Vinted Go tracking not working?
 
-Tracking can take up to 48 hours to appear after the seller ships, and a mistyped number gets "We can't find a parcel with this information". Vinted Go also stops giving a parcel's tracking six months after its label is made.
+Tracking can take up to 48 hours to appear after drop-off; check that you entered the tracking number rather than the pickup code (which starts with a capital letter), and note that Vinted Go stops showing tracking six months after label creation.
 
 :::sources
 - [Vinted Go: Frequently Asked Questions](https://vintedgo.com/en/faq?country=fr&region=europe) – pick-up code, 7 days, other point nearby, 25 business days, 2-day report, timeline gaps, locker phone

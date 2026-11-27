@@ -1,12 +1,12 @@
 ---
 title: Pošta Slovenije tracking: statuses, pickup and contacts
-description: Track a Pošta Slovenije (Post of Slovenia) parcel: the 13-character number, what the English statuses mean, PS Paketomat pickup, claims and contacts.
+description: Track a Pošta Slovenije (Post of Slovenia) parcel on MojaPošta: 13-character SI and foreign barcodes, English statuses, PS Paketomat (60h) and 080 14 00.
 slug: posta-slovenije-tracking
 published: 2026-10-13
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Pošta Slovenije (Post of Slovenia in English) is Slovenia's national post. Track a parcel on its [MojaPošta tracking page](https://moja.posta.si/tracking), which has an English switch, in the MojaPošta app or by pasting the number in the box above. The number usually comes in the sender's message, such as the shop's shipping email.
+Track a Pošta Slovenije (Post of Slovenia) parcel or registered item on [moja.posta.si/tracking](https://moja.posta.si/tracking) (English switch available), in the MojaPošta app or by pasting your 13-character `SI` or foreign postal acceptance number (*sprejemna številka*) in the box above. Domestic parcels typically arrive in 1 to 3 days, PS Paketomat lockers hold items for 60 hours before moving to a post office for 5 days, and customer care answers on 080 14 00 (+386 2 449 20 00 from abroad) or info@posta.si.
 
 ## Pošta Slovenije tracking number
 
@@ -88,19 +88,23 @@ Peek reads the service behind the MojaPošta app. While you have the parcel open
 
 ### Is there Pošta Slovenije tracking in English?
 
-Yes. The MojaPošta tracker's English switch shows every step in English; posta.si is mostly Slovenian, with a smaller English site.
+Yes. Toggle the English switch on MojaPošta (`moja.posta.si/tracking`) to see every tracking event in English, or paste the 13-character acceptance number into Peek.
 
 ### Can I track an international parcel to Slovenia?
 
-Yes, with its postal number: the tracker shows items from abroad once they reach Slovenia. Before that, it depends on the sending country's post.
+Yes: enter the foreign post's 13-character S10 barcode on MojaPošta or Peek. Pošta Slovenije tracks inbound items once they arrive in Slovenia; earlier scans depend on the origin post.
 
 ### How long does Pošta Slovenije keep a parcel?
 
-8 days at the post office for most webshop parcels, 15 for universal postal items. In a PS Paketomat, about 60 hours, then 5 days at a post office.
+8 days at the post office for MojPaket contract webshop parcels and 15 days for universal postal items. In a 24/7 PS Paketomat locker, parcels wait 60 hours before moving to a post office for 5 more days.
 
 ### Why does my parcel say "picked up" when I don't have it?
 
-`The item has been picked up` means it was handed over at its destination. If that wasn't you, check with your household or authorised people, then see [delivered but not received](guide:delivered-not-received).
+`The item has been picked up` means it was handed over at delivery (not collected by a courier). Check with your household or authorised recipients first, then see [delivered but not received](guide:delivered-not-received).
+
+### How do I contact Pošta Slovenije about tracking?
+
+Call 080 14 00 (free within Slovenia, Mon–Fri 7.00–17.00) or +386 2 449 20 00 from abroad, or email sledenje.posiljk@posta.si (tracking) or info@posta.si.
 
 :::sources
 - [Pošta Slovenije: MojaPošta Parcel tracking](https://moja.posta.si/tracking) – English tracker, number shape, two-month window, statuses, help contact

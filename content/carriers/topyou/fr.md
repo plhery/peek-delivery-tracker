@@ -1,12 +1,12 @@
 ---
 title: TopYou suivi colis : numéro TYZR, statuts et livraison
-description: Suivre un colis TopYou (通邮) venu de Chine : le numéro TYZR, ce que disent ses scans en anglais et qui prend le relais en France, en Belgique et en Suisse.
+description: Suivi colis TopYou (通邮, TYZR…YQ) depuis la Chine : statuts en anglais traduits, qui livre en France (GOFO, La Poste), Belgique (bpost) ou Suisse et contact.
 slug: topyou-suivi-colis
 published: 2026-10-30
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-TopYou (通邮, Tongyou, aussi 通邮集团 ou SZTY56) est 深圳市通邮物流科技（集团）股份有限公司, un transitaire de Shenzhen, en Chine, qui fait voyager des colis sur ses propres lignes internationales. Si une boutique chinoise a confié ta commande à TopYou, ton numéro commence par TYZ et finit par YQ : colle-le dans le champ ci-dessus. Le suivi de TopYou va de son entrepôt en Chine jusqu'à ton pays, vol et douane compris ; un transporteur local prend ensuite le relais.
+Pour le suivi d'un colis TopYou (通邮 / Tongyou / SZTY56, transitaire basé à Shenzhen fondé en 2016), colle ton numéro de 17 caractères commençant par `TYZR` (ou `TYZ…`) et finissant par `YQ` dans le champ ci-dessus — ou en majuscules sur [track.szty56.com](https://track.szty56.com/). TopYou assure l'acheminement depuis la Chine jusqu'à la douane, puis remet le colis à un transporteur local en France (souvent GOFO France ou La Poste), en Belgique (bpost) ou en Suisse (La Poste suisse).
 
 ## Numéro de suivi TopYou : à quoi il ressemble
 
@@ -112,19 +112,23 @@ Peek vérifie jusqu'à toutes les 10 minutes, puis toutes les heures quand TopYo
 
 ### C'est quoi, TopYou (通邮) ?
 
-深圳市通邮物流科技（集团）股份有限公司, dit 通邮 ou 通邮集团, aussi Tongyou ou SZTY56, est un transitaire de Shenzhen, en Chine, avec ses propres lignes internationales. Il dit avoir été fondé en 2016, avoir des filiales et des centres de tri à Shenzhen, Guangzhou, Shanghai et dans d'autres villes chinoises, et traiter plus de 800 000 commandes par jour, envoyées par la poste, sur ses propres lignes ou avec les grands transporteurs express. Ses numéros : TYZR, une lettre, dix chiffres et YQ, parfois avec une autre lettre à la place du R.
+深圳市通邮物流科技（集团）股份有限公司 (Tongyou / SZTY56) est un transitaire de Shenzhen fondé en 2016 qui expédie des colis internationaux depuis la Chine (numéros de 17 caractères `TYZR…YQ` ou `TYZ…YQ`, suivis en majuscules sur track.szty56.com ou dans Peek).
 
 ### Qui livre les colis TopYou en France, en Belgique et en Suisse ?
 
-Un transporteur de ton pays, en France parfois GOFO. La fiche TopYou peut donner son numéro, mais pas son nom : demande à la boutique. Si c'est un numéro postal international valide, Peek interroge lui-même la poste du pays : La Poste, bpost ou La Poste suisse.
+Un transporteur local après dédouanement : en France souvent GOFO France ou La Poste, en Belgique bpost et en Suisse La Poste suisse. La fiche TopYou peut afficher le second numéro sans nommer le transporteur ; si c'est un numéro postal international valide, Peek interroge directement la poste du pays.
+
+### Que signifie « Shipment is out for delivery » chez TopYou ?
+
+En France et en Italie, ce libellé ne veut pas encore dire que le livreur arrive aujourd'hui : il marque la remise au premier centre de tri de GOFO, quelques jours avant la vraie tournée (`The driver is out for delivery`).
 
 ### Pourquoi TopYou affiche-t-il mon pays alors que le colis est encore en Chine ?
 
-Parce que TopYou met le pays de destination comme lieu de ses propres scans, même à l'aéroport de départ ; Peek retire ce lieu. Fie-toi au texte : `Arrived at airport of the original country` veut dire que le colis attend encore son vol.
+TopYou indique parfois le pays de destination comme lieu sur ses propres scans en Chine (Peek retire ce lieu). Fie-toi au libellé : `Arrived at airport of the original country` signifie que le colis attend encore son vol en Chine.
 
 ### Qui contacter si mon colis TopYou n'arrive pas ?
 
-La boutique où tu as commandé : c'est elle qui a réservé l'envoi chez TopYou. Si la poste de ton pays a déjà le colis, contacte-la pour la livraison.
+La boutique où tu as commandé, car TopYou ne propose pas de service client destiné aux destinataires (son numéro à Shenzhen est le +86 755 8181 9898). Une fois le colis chez ta poste nationale, contacte La Poste, bpost (02 278 51 27) ou La Poste suisse (+41 848 888 888).
 
 :::sources
 - [bpost : Où se trouve mon envoi international ?](https://www.bpost.be/fr/faq/pourquoi-mon-envoi-international-na-t-il-pas-encore-ete-livre) – importation, « En route pour : Belgique », frais et facture, délais, codes-barres en U

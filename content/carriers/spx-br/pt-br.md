@@ -1,12 +1,12 @@
 ---
 title: Rastreio SPX Express: pedidos da Shopee, status e prazos
-description: Rastreie seu pedido da Shopee pela SPX Express: onde achar o código de rastreio BR, o que cada status significa, Agência Shopee e reembolso.
+description: Rastreio SPX Express (Shopee Xpress) no Brasil: código BR, status de entrega, 3 tentativas, retirada em Agência Shopee (7 dias úteis), Chat Shopee e reembolso.
 slug: rastreio-spx-express
 published: 2026-11-01
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-A SPX Express (Shopee Xpress) é a logística própria da Shopee no Brasil. Ela coleta os pacotes com os vendedores e entrega na sua casa ou em uma Agência Shopee, um comércio parceiro onde você retira o pedido. A Shopee chama o serviço de Entrega Padrão e orienta a acompanhar tudo pelo app, onde ficam o pedido, a data prevista e o eventual reembolso. O site spx.com.br também tem uma busca de rastreio; ou cole o código no campo acima.
+Para fazer o rastreio de um pedido da Shopee pela SPX Express (Shopee Xpress), logística própria da Shopee no Brasil, abra "Eu" > "Minhas Compras" > "Status de Envio" no app da Shopee, busque em spx.com.br ou cole o código `BR` no campo acima. A SPX realiza até 3 tentativas de entrega no endereço (ou aguarda 7 dias úteis com PIN na Agência Shopee, no "Retire Fácil"); como não há contato direto com a transportadora, atrasos e reembolsos são resolvidos pelo Chat Shopee.
 
 ## Código de rastreio SPX Express: onde encontrar
 
@@ -109,23 +109,23 @@ Com o pacote aberto na tela, ou no dia da entrega com as notificações ativadas
 
 ### A SPX Express é da Shopee?
 
-Sim: a Shopee chama a SPX Express de sua logística própria e oficial no Brasil. A empresa por trás do spx.com.br é a SPX Express Brasil Ltda., com mais de 100 hubs logísticos e 11 centros de distribuição.
+Sim: a SPX Express (SPX Express Brasil Ltda., com mais de 100 hubs logísticos e 11 centros de distribuição) é a logística própria e oficial da Shopee no Brasil, usada na Entrega Padrão e nas Agências Shopee.
 
 ### Como rastrear uma encomenda da SPX Express?
 
-No app da Shopee: "Eu" > "Minhas Compras" > o pedido > "Status de Envio". Você também pode colar o código `BR` no Peek ou usar a caixa de rastreio do spx.com.br.
+No app da Shopee, entre em "Eu" > "Minhas Compras" > escolha o pedido > "Status de Envio". Você também pode colar o código `BR` (não o ID do pedido) no Peek ou na busca de rastreio do spx.com.br.
 
 ### O que significa "Pedido em rota de entrega para seu endereço"?
 
-O pacote saiu para entrega no seu endereço, e a SPX pede para aguardar nas próximas horas. Se o pedido tiver palavra-chave, tenha a senha em mãos para o entregador.
+Seu pacote saiu para entrega hoje e a SPX pede para aguardar nas próximas horas (a Shopee faz até 3 tentativas antes de devolver e reembolsar automaticamente). Se o pedido exigir palavra-chave, tenha a senha em mãos na entrega.
 
-### Quanto tempo a SPX Express demora para entregar?
+### Quanto tempo a SPX Express demora para entregar (e quanto fica na Agência Shopee)?
 
-A Shopee fala em 1 a 25 dias úteis a partir da coleta para pedidos de vendedores nacionais, e geralmente 30 a 50 dias corridos para os internacionais. A data prevista está na página do pedido.
+A Shopee informa de 1 a 25 dias úteis a partir da coleta para vendedores nacionais e geralmente 30 a 50 dias corridos para compras internacionais (consulte a data prevista no pedido). Na Agência Shopee ("Retire Fácil"), o pacote fica disponível por 7 dias úteis com PIN e código de rastreio.
 
 ### Como falar com a SPX Express?
 
-Pela Shopee, que diz não ser possível falar direto com a transportadora: use o Chat Shopee, de segunda a sexta das 8h às 22h e nos fins de semana das 8h às 20h, horário de Brasília.
+Não há atendimento direto com a transportadora: tudo passa pelo Chat Shopee no app (segunda a sexta das 8h às 22h, sábados e domingos das 8h às 20h, horário de Brasília), pelo formulário de solicitações ou, se ficar sem solução, pelo consumidor.gov.br.
 
 :::sources
 - [SPX Express: Página inicial](https://spx.com.br/br) – logística integrada da Shopee no Brasil, hubs e centros de distribuição, caixa de rastreio, busca de Agências Shopee, SPX Express Brasil Ltda.

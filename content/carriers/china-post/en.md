@@ -1,12 +1,12 @@
 ---
 title: China Post tracking: number, statuses and who delivers
-description: Track a China Post parcel: what a CN number looks like, what the Chinese statuses mean, which post delivers it in your country and why tracking goes quiet.
+description: Track a China Post or EMS parcel ending in CN: UPU S10 number types (L, R, C, E, U), Chinese scans translated, USPS/Royal Mail/An Post handover and 11183/11185.
 slug: china-post-tracking
 published: 2026-10-22
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-China Post is China's state-owned national post, and EMS is its express brand. If your order from AliExpress, Temu, Shein or another shop came with a tracking number ending in `CN`, China Post issued it, and your own country's post delivers the parcel under that same number. Track it on China Post's site, ems.com.cn, or in the box above. The number is in the shop's shipping details for your order.
+Track a China Post or EMS parcel ending in `CN` (two letters, nine digits and `CN`, the UPU S10 postal format) on ems.com.cn or in the box above. Because the UPU allows one S10 number per item, your own national post — USPS in the US, Royal Mail or Parcelforce in the UK, An Post in Ireland, Canada Post in Canada or Australia Post in Australia — delivers under that same number once the parcel leaves China; for formal inquiries, China Post requires the sender to ask their local post office (China Post lines: 8610 11183 for EMS, 8610 11185 for Postal Business).
 
 ## China Post tracking number: what it looks like
 
@@ -106,23 +106,23 @@ Peek checks China Post hourly, out for delivery too. When your post takes over t
 
 ### Where is my China Post parcel?
 
-The latest scan tells you. A Chinese office in brackets means it's still in China. From `到达寄达地处理中心` on, it's in your country, and your own post's tracking with the same number shows where.
+Check the latest scan: a Chinese sorting office in brackets (`【…】`) means it is still in China; once `到达寄达地处理中心` appears, it has reached your country and you can follow the same `CN` number on your own national post's site.
 
 ### Why is my China Post tracking not updating?
 
-Most often the parcel is in the air or waiting for customs, between China Post's last scan and your post's first. Check your national post's tracking with the same number. A number starting with U may have no tracking in your country at all.
+Tracking typically pauses during the international flight or import customs between China Post's export scan and your national post's first scan. Note that numbers starting with `U` (`UA…CN`) are UPU small packets without customer-oriented tracking and may show no scans abroad.
 
 ### How long does China Post take to deliver?
 
-It depends on the service the shop paid for and where you are: Canada Post says timelines vary with the sending country and the type of service. Go by the delivery estimate the shop or marketplace gives for your order.
+Delivery times depend on the service chosen (EMS express vs standard letter post or parcel) and the destination country, so follow the estimate shown on your shop or marketplace order.
 
 ### What does 已妥投 mean on China Post tracking?
 
-Delivered. `【英国】已妥投`, for example, means delivered in the UK. If you don't have the parcel, start with your own post: see [delivered but not received](guide:delivered-not-received).
+It means delivered (for example `【英国】已妥投` = delivered in the UK). Because your local national post carried out the final delivery, check its tracking and proof of delivery first if nothing arrived: see [delivered but not received](guide:delivered-not-received).
 
-### Who delivers China Post parcels in the US or UK?
+### Who delivers China Post parcels in the US, UK, Ireland, Canada or Australia?
 
-Your national post: USPS in the US, Royal Mail in the UK. They deliver it under the China Post number, since the UPU allows one number per item.
+Your national post under the exact same `CN` number: USPS in the US, Royal Mail in the UK (Parcelforce for `E…CN` EMS items), An Post in Ireland, Canada Post in Canada and Australia Post in Australia.
 
 :::sources
 - [China Post: Introduction to China Post Group](https://english.chinapost.com.cn/en/folder/1408/3969-1.htm) – state-owned national post

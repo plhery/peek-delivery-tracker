@@ -17,7 +17,7 @@ O remetente gera o código, normalmente antes de entregar a encomenda aos correi
 | `RR482917367CH` | Duas letras, nove dígitos e `CH`: código de rastreamento postal internacional emitido na Suíça. O último dígito antes de `CH` é o dígito verificador. |
 | `99.48.291736.05841926` | 18 dígitos começando com `98` ou `99`, com ou sem pontos ou espaços: código de barras doméstico da Swiss Post. |
 
-Copie o código em vez de digitar: um dígito errado, faltando ou sobrando faz com que ele pareça de outra transportadora. Códigos de 18 dígitos começando com `44` pertencem à Quickpac. Paletes e outras cargas viajam pela Swiss Post Cargo, a marca de cargas da Swiss Post, que tem rastreador próprio. Uma encomenda vinda do exterior mantém seu código estrangeiro (terminado em `DE`, `FR` e assim por diante) também na Suíça: um pacote [Delivengo](carrier:delivengo) de uma loja francesa, por exemplo, mantém o número da La Poste terminado em `FR`. Sem nenhum código? Veja [como encontrar o código de rastreamento](guide:find-tracking-number).
+Copie o código em vez de digitar: um dígito errado, faltando ou sobrando faz com que ele pareça de outra transportadora. Códigos de 18 dígitos começando com `44` pertencem à Quickpac. Paletes e outras cargas viajam pela [Swiss Post Cargo](carrier:swiss-post-cargo), a marca de cargas da Swiss Post, que tem rastreador próprio. Uma encomenda vinda do exterior mantém seu código estrangeiro (terminado em `DE`, `FR` e assim por diante) também na Suíça: um pacote [Delivengo](carrier:delivengo) de uma loja francesa, por exemplo, mantém o número da La Poste terminado em `FR`. Sem nenhum código? Veja [como encontrar o código de rastreamento](guide:find-tracking-number).
 
 ## Status do rastreamento Swiss Post explicados
 

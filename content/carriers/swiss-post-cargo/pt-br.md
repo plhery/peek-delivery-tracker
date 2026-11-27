@@ -17,7 +17,7 @@ O rastreador da Swiss Post Cargo aceita o código de barras de um volume ou uma 
 | `00482917365428193648` | 20 dígitos começando com `00`: código de barras de palete ou volume (SSCC), com dígito verificador no final. |
 | `PL-48291736` | `PL-` e 8 dígitos: referência de cliente. |
 
-Procure nos e-mails da loja ou peça ao remetente. Veja mais locais em [como encontrar seu código de rastreamento](guide:find-tracking-number), em inglês. Se o rastreador não retornar nada, confira os dígitos e fale com o remetente.
+Procure nos e-mails da loja e depois pergunte à loja. Veja mais locais em [como encontrar seu código de rastreamento](guide:find-tracking-number), em inglês. Se o rastreador não retornar nada, confira os dígitos e fale com o remetente.
 
 Dois tipos de código que não são rastreados como Swiss Post Cargo:
 
@@ -45,9 +45,9 @@ A Swiss Post Cargo exibe leituras em inglês, alemão, francês ou italiano. Em 
 
 **Onde é entregue.** No serviço padrão, a carga vai até a primeira porta no térreo, doca ou calçada, em horário comercial — não sobe andares. O motorista conta com acesso para paleteira, e a descarga é responsabilidade do destinatário (se o motorista descarregar, age em seu nome). Ele pede sua assinatura confirmando o recebimento correto.
 
-**Serviços extras contratados pelo remetente.** Aviso prévio por telefone, e-mail ou SMS, entrega agendada, entrega em andar e segunda tentativa são serviços adicionais pagos, disponíveis somente se o remetente os contratou.
+**Serviços extras contratados pelo remetente.** Aviso prévio por telefone, e-mail ou SMS, entrega agendada, entrega em andar e segunda tentativa são serviços adicionais, disponíveis somente se o remetente os contratou.
 
-**Tentativa sem sucesso e retirada.** O folheto de cargas não cita pontos de retirada nem armários, e a segunda tentativa é um serviço extra. Tampouco informa quanto tempo a carga fica no depósito ou como reagendar: fale com a loja que contratou o transporte.
+**Entrega não realizada e retirada.** O folheto de cargas não cita pontos de retirada nem armários, e a segunda tentativa é um serviço extra. Tampouco informa quanto tempo a carga fica no depósito ou como reagendar: fale com a loja que contratou o transporte.
 
 ## Carga Swiss Post Cargo atrasada, extraviada ou danificada
 
@@ -67,11 +67,11 @@ Para cartas e encomendas comuns da Swiss Post (não Cargo), o telefone é +41 84
 
 ## Como rastrear Swiss Post Cargo no Peek
 
-Um código de barras de 20 dígitos iniciado em `00` pertence a quem enviou e não a uma transportadora única; por isso o [Peek](/) mostra "Consultando serviços de rastreamento…" e seleciona Swiss Post Cargo apenas se ela reconhecer o código. Referências no formato `PL-48291736` são consultadas na Swiss Post Cargo e na TNT Italy, que usa formato parecido. Para qualquer outra referência de 6 a 40 letras e dígitos, selecione Swiss Post Cargo em "Alterar", ou cole um link Track & Trace de tt.swisspost-cargo.com ou apv.swisspost-cargo.com (`/public/trackandtrace/` seguido do número). Se um link desses trouxer número de encomenda comum da Swiss Post, o Peek o rastreia como Swiss Post.
+Um código de barras de 20 dígitos iniciado em `00` pertence a quem enviou e não a uma transportadora única; por isso o [Peek](/) mostra "Consultando serviços de rastreamento…" e seleciona Swiss Post Cargo apenas se ela reconhecer o código. Referências no formato `PL-48291736` são consultadas na Swiss Post Cargo e na TNT Italy, que usa formato parecido. Para qualquer outra referência de 6 a 40 letras e dígitos, selecione Swiss Post Cargo em "Trocar", ou cole um link Track & Trace de tt.swisspost-cargo.com ou apv.swisspost-cargo.com (`/public/trackandtrace/` seguido do número). Se um link desses trouxer número de encomenda comum da Swiss Post, o Peek o rastreia como Swiss Post.
 
 O Peek mostra a etapa, o histórico com a cidade de cada leitura no mapa e o horário da entrega, interpretado em Zurique e convertido para o fuso do seu dispositivo. Os textos permanecem em inglês, e `Loaded for Delivery` conta como "Saiu para entrega". As linhas de assinatura e imagem se fundem à leitura de entrega (sem exibir a foto). O Peek omite seu nome e endereço e não tem previsão de entrega, peso nem ponto de retirada.
 
-Se várias remessas compartilharem a mesma referência, ela só funciona quando apenas uma tiver leituras nos últimos 60 dias; caso contrário a Swiss Post Cargo não a encontra (o Peek mostra "Aguardando Swiss Post Cargo" e após dois dias sugere conferir o número) — nesses casos, use o código de barras. Com a remessa aberta ou no dia da entrega com notificações ligadas, o Peek consulta a cada 10 minutos no máximo, ou a cada 2 minutos a partir das 6h (horário suíço) no dia em que sai para entrega, enquanto o rastreador oficial responder, notificando cada leitura, etapas importantes ou apenas o dia da entrega. Fora disso, e após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora.
+Se várias remessas compartilharem a mesma referência, ela só funciona quando apenas uma tiver leituras nos últimos 60 dias; caso contrário a Swiss Post Cargo não a encontra (o Peek mostra "Aguardando Swiss Post Cargo" e após dois dias sugere conferir o número) — nesses casos, use o código de barras. Com a remessa aberta ou no dia da entrega com notificações ligadas, o Peek consulta a cada 10 minutos no máximo, ou a cada 2 minutos a partir das 6h (horário suíço) no dia em que sai para entrega, enquanto o rastreador da própria Swiss Post Cargo responder, notificando cada leitura, etapas importantes ou apenas o dia da entrega. Fora disso, e após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora.
 
 ## Perguntas frequentes sobre o rastreamento Swiss Post Cargo
 
@@ -89,7 +89,7 @@ O folheto de cargas da Swiss Post (abril de 2022) traz sales.ls4@post.ch para cl
 
 ### Por que recebi um SMS da Swiss Post Cargo?
 
-Geralmente porque o remetente contratou o aviso de entrega (o folheto lista aviso por telefone, e-mail ou SMS como serviço extra). Como também existem SMS falsos em nome da Swiss Post, confira o código diretamente no rastreador oficial.
+Geralmente porque o remetente contratou o aviso de entrega (o folheto lista aviso por telefone, e-mail ou SMS como serviço extra). Como também existem SMS falsos em nome da Swiss Post, confira o código você mesmo no rastreador.
 
 ### Posso acompanhar a Swiss Post Cargo ao vivo no mapa?
 

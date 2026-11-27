@@ -82,7 +82,7 @@ PostNord 无法更正错误的姓名或地址：无法投递的包裹将退回�
 
 ## 使用 Peek 追踪 PostNord 包裹
 
-[Peek](/) 会直接将以 `SE`、`DK` 结尾的邮政单号及 11 位数字加 `SE` 的单号识别为 PostNord。对于以 `00` 开头且带瑞典或丹麦前缀的 20 位数字，Peek 会先同时向 PostNord、Swiss Post Cargo 和 [NZ Post](carrier:nz-post) 查询（瑞典前缀还会加上 [Matkahuolto](carrier:matkahuolto)），如果只有 PostNord 有记录便显示“PostNord 有这个包裹的记录。”若前三位之后紧跟 `73402216`，则属于瑞典快递公司 [Early Bird](carrier:early-bird)（部分包裹会转交 PostNord），Peek 会先问 Early Bird，再同时询问 PostNord 与其他快递公司。其他 10 至 20 位单号（例如由 PostNord 派送的 DPD 单号）可通过“更换”选定 PostNord。来自 tracking.postnord.com 的查询链接适用于任意单号。
+[Peek](/) 会直接将以 `SE`、`DK` 结尾的邮政单号及 11 位数字加 `SE` 的单号识别为 PostNord。对于以 `00` 开头且带瑞典或丹麦前缀的 20 位数字，Peek 会先同时向 PostNord、[Swiss Post Cargo](carrier:swiss-post-cargo) 和 [NZ Post](carrier:nz-post) 查询（瑞典前缀还会加上 [Matkahuolto](carrier:matkahuolto)），如果只有 PostNord 有记录便显示“PostNord 有这个包裹的记录。”若前三位之后紧跟 `73402216`，则属于瑞典快递公司 [Early Bird](carrier:early-bird)（部分包裹会转交 PostNord），Peek 会先问 Early Bird，再同时询问 PostNord 与其他快递公司。其他 10 至 20 位单号（例如由 PostNord 派送的 DPD 单号）可通过“更换”选定 PostNord。来自 tracking.postnord.com 的查询链接适用于任意单号。
 
 Peek 原样展示 PostNord 的英文状态，附带每次扫描地点、寄件人、重量、尺寸、目的国，以及包裹待取时的自提点地址，并在地图上标注每次扫描。Peek 会过滤短信和邮件通知类记录，将 `The shipment item has been stored.` 标为异常，省略你的姓名，也不显示预计送达日期（即便 PostNord 自己的追踪有给出）。
 

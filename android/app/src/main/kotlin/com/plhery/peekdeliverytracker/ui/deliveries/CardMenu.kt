@@ -31,8 +31,8 @@ import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -89,12 +89,10 @@ import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
-import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.text.style.TextAlign
@@ -961,8 +959,6 @@ private fun RenameAlert(state: DeliveriesState, request: RenameRequest) {
     val colors = PeekTheme.colors
     val heading = remember(request) { AccessibilityFocus() }
     val focus = remember(request) { FocusRequester() }
-    // The name typed so far, from the window's: a window made again finds it as it was.
-    var field by remember(request) { mutableStateOf(state.renameText.let { TextFieldValue(it, TextRange(it.length)) }) }
     LaunchedEffect(request) {
         focus.requestFocus()
         heading.request()
@@ -998,22 +994,18 @@ private fun RenameAlert(state: DeliveriesState, request: RenameRequest) {
             Spacer(Modifier.height(ALERT_FIELD_GAP))
             val placeholder = localizer.text("common.parcel")
             BasicTextField(
-                field,
-                onValueChange = {
-                    field = it
-                    state.renameText = it.text
-                },
+                state.renameField,
                 modifier = Modifier
                     .fillMaxWidth()
                     .testTag(RENAME_FIELD)
                     .focusRequester(focus)
                     .semantics { contentDescription = placeholder },
                 textStyle = font.copy(color = colors.label),
-                singleLine = true,
+                lineLimits = TextFieldLineLimits.SingleLine,
                 cursorBrush = SolidColor(colors.accent),
                 keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences, imeAction = ImeAction.Done),
-                keyboardActions = KeyboardActions(onDone = { state.saveRename() }),
-                decorationBox = { text ->
+                onKeyboardAction = { state.saveRename() },
+                decorator = { text ->
                     Box(
                         Modifier
                             .heightIn(min = ALERT_CAPSULE_HEIGHT)
@@ -1021,7 +1013,7 @@ private fun RenameAlert(state: DeliveriesState, request: RenameRequest) {
                             .padding(horizontal = FIELD_INSET, vertical = ALERT_CAPSULE_PADDING),
                         contentAlignment = Alignment.CenterStart,
                     ) {
-                        if (field.text.isEmpty()) {
+                        if (state.renameField.text.isEmpty()) {
                             Text(placeholder, Modifier.clearAndSetSemantics {}, color = colors.secondaryText, style = font, maxLines = 1)
                         }
                         text()

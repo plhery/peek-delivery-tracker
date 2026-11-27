@@ -15,6 +15,7 @@ import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasScrollAction
+import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.compose.ui.test.onLast
@@ -433,9 +434,13 @@ internal fun ComposeTestRule.exploringByTouch(body: () -> Unit) {
 
 /**
  * What `node` finds, scrolled into the window and up clear of the tab bar floating over the foot of a phone's window
- * (a tablet's stands at its top, over nothing that scrolls), by the innermost of the `scrollable` nodes.
+ * (a tablet's stands at its top, over nothing that scrolls), by the innermost of the `scrollable` nodes: not a text
+ * field, whose single line scrolls sideways.
  */
-internal fun ComposeTestRule.reveal(node: SemanticsNodeInteraction, scrollable: SemanticsMatcher = hasScrollAction()): SemanticsNodeInteraction {
+internal fun ComposeTestRule.reveal(
+    node: SemanticsNodeInteraction,
+    scrollable: SemanticsMatcher = hasScrollAction() and !hasSetTextAction(),
+): SemanticsNodeInteraction {
     node.performScrollTo()
     val bounds = node.fetchSemanticsNode().boundsInRoot
     val bar = onAllNodes(hasTestTag(TAB_BAR)).fetchSemanticsNodes().firstOrNull()?.boundsInRoot

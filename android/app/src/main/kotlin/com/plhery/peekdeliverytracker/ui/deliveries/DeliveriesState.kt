@@ -308,7 +308,7 @@ internal fun rememberListViewStates(launch: UUID): ListViewStates = ListViewStat
 internal class PromptStates(
     val deleting: MutableState<String?>,
     val renaming: MutableState<String?>,
-    val name: MutableState<String>,
+    val name: TextFieldState,
     val changingCarrier: MutableState<String?>,
     val alerts: MutableState<String?>,
     val sharing: MutableState<String?>,
@@ -320,7 +320,7 @@ internal class PromptStates(
 internal fun rememberPromptStates(launch: UUID, adding: MutableState<String?>): PromptStates = PromptStates(
     deleting = rememberForLaunch<String?>(launch, null),
     renaming = rememberForLaunch<String?>(launch, null),
-    name = rememberForLaunch(launch, ""),
+    name = rememberTextFieldStateForLaunch(launch),
     changingCarrier = rememberForLaunch<String?>(launch, null),
     alerts = rememberForLaunch<String?>(launch, null),
     sharing = rememberForLaunch<String?>(launch, null),
@@ -1328,8 +1328,15 @@ internal class DeliveriesState(
             prompts.renaming.value = value?.saved
         }
 
-    /** What the rename alert's field holds (`prompts.name`, the page's `editedTitle`), kept with the window as typed. */
-    var renameText: String by prompts.name
+    /** The rename alert's field (`prompts.name`, the page's `editedTitle`), kept with the window as typed. */
+    val renameField: TextFieldState get() = prompts.name
+
+    /** What the rename alert's field holds ([renameField]); set, its words become these, the cursor after them. */
+    var renameText: String
+        get() = prompts.name.text.toString()
+        set(value) {
+            if (value != renameText) prompts.name.setTextAndPlaceCursorAtEnd(value)
+        }
 
     /**
      * The parcel a card's menu asked to name, as it was then (`prompts.renaming`): the name goes to it, even once it has

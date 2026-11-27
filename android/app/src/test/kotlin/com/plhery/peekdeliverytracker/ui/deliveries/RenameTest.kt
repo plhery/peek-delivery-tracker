@@ -16,7 +16,6 @@ import androidx.compose.ui.test.assertIsFocused
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
-import androidx.compose.ui.test.hasScrollAction
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
@@ -367,7 +366,9 @@ class RenameTest {
         keyboard(250)
         val room = compose.onRoot().getUnclippedBoundsInRoot().bottom - 250.dp
         // The alert keeps to what the keyboard leaves, its field in view and its buttons a scroll away.
-        val alert = compose.onNode(hasScrollAction() and hasAnyAncestor(hasTestTag(RENAME_ALERT))).getUnclippedBoundsInRoot()
+        // The alert's own scroll, which goes up and down; the field's single line scrolls sideways.
+        val alert = compose.onNode(SemanticsMatcher.keyIsDefined(SemanticsProperties.VerticalScrollAxisRange) and hasAnyAncestor(hasTestTag(RENAME_ALERT)))
+            .getUnclippedBoundsInRoot()
         assertTrue("$alert within $room", alert.top >= 0.dp && alert.bottom <= room + 0.5.dp)
         val save = compose.onNodeWithTag(RENAME_SAVE)
         assertTrue(save.getUnclippedBoundsInRoot().bottom > room)

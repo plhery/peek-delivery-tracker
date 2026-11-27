@@ -18,7 +18,7 @@ O Peek reconhece os códigos atuais da GlobalPost pelo formato: `GP`, quatro let
 | `GPSTND4829105736GB` | O mesmo formato terminando em `GB`: enviada do Reino Unido. |
 | `SDC482910573649182` | `SDC` e 15 dígitos: etiqueta antiga da GlobalPost. O Peek não identifica apenas pelo código: escolha GlobalPost em "Trocar". |
 | `GPECON482910573US` | Apenas nove dígitos: o Peek não reconhece nenhuma transportadora. Confira se faltou um dígito. |
-| `LZ482910576US` | Código postal dos EUA, fora do padrão GlobalPost: o Peek aponta [USPS](carrier:usps). Se escolher GlobalPost, o Peek avisa que ela "não emite códigos como este". |
+| `LZ482910576US` | Número postal dos EUA, fora do padrão GlobalPost: o Peek aponta [USPS](carrier:usps). Se escolher GlobalPost, o Peek avisa que ela "não emite códigos como este". |
 
 O Peek ignora espaços, hifens e letras minúsculas.
 
@@ -28,7 +28,7 @@ O Peek ignora espaços, hifens e letras minúsculas.
 
 ## Status de rastreamento da GlobalPost explicados
 
-O rastreador da GlobalPost mostra as movimentações da mais recente para a mais antiga, com horário, descrição e quase sempre o local, reescrevendo os registros dos parceiros com termos próprios. Na ordem usual:
+O rastreador da GlobalPost mostra as movimentações da mais recente para a mais antiga, com horário, descrição e quase sempre o local, reescrevendo os registros dos parceiros com termos próprios. Na ordem em que a encomenda passa por elas:
 
 | A GlobalPost diz | O que significa para você | O Peek mostra |
 | --- | --- | --- |
@@ -54,7 +54,7 @@ Uma linha pode terminar com um aviso da GlobalPost de que atualizações levam t
 
 ## Quem entrega encomendas da GlobalPost no seu país
 
-Nos serviços Economy e Standard, a GlobalPost entrega o pacote a um operador postal como o USPS para o envio internacional. Suas páginas não listam um parceiro fixo por país, mas o rastreador costuma mostrar quem entrega junto com o código dele.
+Nos serviços Economy e Standard, a GlobalPost entrega o pacote a um operador postal como o USPS para o envio internacional. Suas páginas não listam um parceiro fixo por país, mas o rastreador pode mostrar quem entrega junto com o código dele.
 
 **O nível de rastreamento depende do serviço escolhido pelo vendedor:**
 
@@ -67,7 +67,7 @@ Nos serviços Economy e Standard, a GlobalPost entrega o pacote a um operador po
 
 A partir dos EUA, o Plus atende mais de 30 países (incluindo Reino Unido, Irlanda, Canadá e Austrália); o Flat Rate cobre Canadá, Austrália, Nova Zelândia, Hong Kong e México. Não tem certeza do serviço? Pergunte ao vendedor.
 
-**Tentativa perdida e retirada.** A transportadora local realiza as tentativas e guarda o volume não entregue: procure-a usando o código dela. Veja [entrega perdida](guide:missed-delivery), [encomenda não retirada](guide:uncollected-parcel) e as páginas dos correios: [Royal Mail](carrier:royal-mail), An Post, [Canada Post](carrier:canada-post), [Australia Post](carrier:australia-post) e [USPS](carrier:usps).
+**Entrega não realizada e retirada.** A transportadora local realiza as tentativas e guarda o volume não entregue: procure-a usando o código dela. Veja [entrega não realizada](guide:missed-delivery), [encomenda não retirada](guide:uncollected-parcel) e as páginas dos correios: [Royal Mail](carrier:royal-mail), An Post, [Canada Post](carrier:canada-post), [Australia Post](carrier:australia-post) e [USPS](carrier:usps).
 
 **Alfândega.** Em Economy e Standard, impostos e taxas ficam a seu cargo ("Delivered Duties Unpaid"). Na Irlanda e no restante da UE, compras on-line de fora da UE pagam imposto aduaneiro fixo de €3 por tipo de produto em encomendas até €150 (em vigor desde 1º de julho de 2026) e taxa de manuseio da União de €2 por tipo de produto, qualquer que seja o valor (desde 1º de novembro de 2026), além do IVA de importação quando não cobrado no checkout via IOSS. A Irlanda do Norte conta como território da UE para alfândega e IVA de mercadorias, segundo a Comissão Europeia. As páginas da GlobalPost não detalham como a taxa de €2 é cobrada: confirme com o vendedor se estava incluída no preço. Para outros países, veja [encomendas retidas na alfândega](guide:customs).
 
@@ -77,7 +77,7 @@ A partir dos EUA, o Plus atende mais de 30 países (incluindo Reino Unido, Irlan
 
 **Dias sem atualização.** A GlobalPost lembra que atualizações internacionais levam tempo e que clima, feriados, greves e alfândega podem atrasar. No serviço Economy, o rastreamento termina após a alfândega do seu país. Quando uma encomenda em trânsito completa quatro dias sem movimentação, o Peek sinaliza com a data do último registro ("Sem atualizações desde seg 12 out") e lembra que pacotes costumam ficar sem novidades em voos longos, na alfândega ou no fim de semana; após três semanas sem novidades, orienta falar com o vendedor. Não há link para página de ajuda da GlobalPost; quando o Peek passa a acompanhar pela transportadora local, exibe o link dela se houver. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
-**Não chegou após 30 dias.** A GlobalPost orienta contatar o vendedor se o pacote não chegar em até **30 dias** do envio: o vendedor pode investigar e abrir reclamação na GlobalPost em até **90 dias** da postagem, com análise de até três semanas. Veja [encomenda extraviada](guide:lost-parcel).
+**Não chegou após 30 dias.** A GlobalPost orienta contatar o vendedor se o pacote não chegar em até **30 dias** do envio: o vendedor pode investigar e fazer o pedido de indenização à GlobalPost em até **90 dias** da postagem, com análise de até três semanas. Veja [encomenda extraviada](guide:lost-parcel).
 
 **Entregue, mas não chegou.** Consulte a transportadora indicada no rastreamento e depois o vendedor. Veja [entregue mas não recebida](guide:delivered-not-received).
 
@@ -93,13 +93,13 @@ Se o pacote não chegou, procure primeiro o vendedor, responsável pela contrata
 
 O [Peek](/) identifica GlobalPost imediatamente em códigos `GP` ("Transportadora detectada") e consulta o próprio rastreador da GlobalPost apenas com o código, sem exigir código postal nem conta; links do rastreador da GlobalPost também funcionam. Para códigos antigos `SDC`, selecione GlobalPost em "Trocar". Se você só tiver o código da transportadora local, cole assim mesmo: o Peek acompanha mais de 4.500 transportadoras.
 
-O Peek exibe o status, cada movimentação com o local, o país de destino e a transportadora local com seu código quando a GlobalPost os informa. Barra de progresso, cidades de remetente/destinatário e códigos postais são omitidos. Como a GlobalPost não fornece data prevista, peso nem comprovante de entrega, o Peek não os exibe. "Abrir o site de GlobalPost" abre o código direto no rastreador oficial.
+O Peek exibe o status, cada movimentação com o local, o país de destino e a transportadora local com seu código quando a GlobalPost os informa. Barra de progresso, cidades de remetente/destinatário e códigos postais são omitidos. Como a GlobalPost não fornece data prevista, peso nem comprovante de entrega, o Peek não os exibe. "Abrir o site de GlobalPost" abre o código no rastreador da GlobalPost.
 
 Os horários da GlobalPost não trazem fuso horário: o Peek interpreta cada movimentação pelo relógio do local ou do trecho da viagem e converte para o fuso do seu aparelho; em peektracker.com e nos apps para iPhone e Android, o histórico termina com "Horários no seu fuso horário:" seguido do nome do fuso.
 
 Quando a GlobalPost informa uma transportadora local reconhecida pelo Peek, o cartão exibe "Entrega por" seguido do nome dela e do código após o código `GP`, e o Peek passa a consultá-la também. Enquanto essa empresa tiver apenas o aviso prévio, sem movimentação própria, aparece "Anunciada a …, ainda não recebida". Com código mas sem nome reconhecido, o Peek consulta o correio do seu país (se postal) ou a transportadora única correspondente ao formato. Assim que a empresa local registra movimentação ao menos tão recente quanto a última da GlobalPost, o Peek prossegue lá preservando o histórico da GlobalPost.
 
-Com a encomenda aberta, ou no dia da entrega com notificações ligadas, o Peek verifica até a cada 10 minutos — e até a cada 2 minutos (a cada 5 minutos quando precisa abrir o rastreador da GlobalPost no navegador) a partir das 6h no horário local no dia em que sair para entrega, enquanto o próprio rastreador da GlobalPost responder (quando acompanhada apenas por serviços de rastreamento, a cada hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega); nos demais momentos, e após dois dias sem novidades (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora. Quando passa a seguir a transportadora local, adota a frequência dela. Você pode escolher notificações para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não contata a GlobalPost nem o vendedor por você.
+Com a encomenda aberta, ou no dia da entrega com notificações ligadas, o Peek verifica até a cada 10 minutos — e até a cada 2 minutos (a cada 5 minutos quando precisa abrir o rastreador da GlobalPost no navegador) a partir das 6h no horário local no dia em que sair para entrega, enquanto o próprio rastreador da GlobalPost responder (por serviços de rastreamento, até a cada 15 minutos); nos demais momentos, e após dois dias sem novidades (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora. Quando passa a seguir a transportadora local, adota a frequência dela. Você pode escolher notificações para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não contata a GlobalPost nem o vendedor por você.
 
 ## Perguntas sobre o rastreamento da GlobalPost
 
@@ -109,7 +109,7 @@ No GlobalPost Economy, o rastreamento termina quando o pacote chega ao seu país
 
 ### Quem entrega encomendas da GlobalPost?
 
-Um correio ou transportadora do seu país. O rastreador da GlobalPost geralmente mostra qual é e informa o código próprio dela.
+Um correio ou transportadora do seu país. O rastreador da GlobalPost pode mostrar qual é e informa o código próprio dela.
 
 ### Quanto tempo a GlobalPost demora para entregar?
 
@@ -117,21 +117,21 @@ A GlobalPost estima 5 a 6 dias para países próximos e até 20 dias para destin
 
 ### A GlobalPost é confiável?
 
-Sim. A GlobalPost pertence à Auctane e opera por meio de plataformas como ShipStation e Stamps.com, atendendo mais de 220 países e somando mais de 60 milhões de envios entregues.
+Sim. A GlobalPost pertence à Auctane e opera por meio de plataformas como ShipStation e Stamps.com, atendendo mais de 220 países e e afirma ter entregado mais de 60 milhões de envios.
 
 ### Como entrar em contato com a GlobalPost?
 
 Envie e-mail para `info@goglobalpost.com` ou ligue para `(888) 899-1255`, de segunda a sexta das 6h às 18h (horário do Pacífico). Se o pacote não chegou 30 dias após o envio, fale primeiro com o vendedor.
 
 :::sources
-- [GlobalPost: FAQs](https://www.goglobalpost.com/faqs/) – Auctane, how it works, tracking, delays, delivery times, returns, claims, no claims for undeliverable parcels
-- [GlobalPost: Standard](https://www.goglobalpost.com/standard/) – services compared: tracking, duties, transit times
-- [GlobalPost: Contact Support](https://www.goglobalpost.com/contact-support/) – email, phone, hours, form, China Post
-- [GlobalPost: Home](https://www.goglobalpost.com/) – countries, shipments delivered
-- [GlobalPost: Track your package](https://www.goglobalpost.com/tracking/) – the tracker
-- [GlobalPost: Terms and Conditions](https://www.goglobalpost.com/conditions/) – shipping centres, transit time as an estimate
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty per kind of product up to €150, €2 Union handling fee, dates
-- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per kind of product whatever the value
-- [Universal Parcel Scraper: GlobalPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/globalpost) – number shapes, wordings, delivery partner, returns, clocks
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – USPS number shape, hand-off to the delivery company
+- [GlobalPost: FAQs](https://www.goglobalpost.com/faqs/) – Auctane, como funciona, rastreamento, atrasos, prazos de entrega, devoluções, pedidos de indenização, sem indenização para encomendas não entregáveis
+- [GlobalPost: Standard](https://www.goglobalpost.com/standard/) – serviços comparados: rastreamento, impostos, prazos de trânsito
+- [GlobalPost: Contact Support](https://www.goglobalpost.com/contact-support/) – e-mail, telefone, horários, formulário, China Post
+- [GlobalPost: Home](https://www.goglobalpost.com/) – países, envios entregues
+- [GlobalPost: Track your package](https://www.goglobalpost.com/tracking/) – o rastreador
+- [GlobalPost: Terms and Conditions](https://www.goglobalpost.com/conditions/) – centros de envio, prazo de trânsito como estimativa
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – imposto de €3 por tipo de produto até €150, taxa de manuseio da União de €2, datas
+- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 por tipo de produto, qualquer que seja o valor
+- [Universal Parcel Scraper: GlobalPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/globalpost) – formatos de código, textos de status, parceiro de entrega, devoluções, fusos horários
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formato de código do USPS, passagem para a transportadora de entrega
 :::

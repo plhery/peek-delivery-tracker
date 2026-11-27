@@ -24,7 +24,7 @@ Não encontrou nada? Pergunte à loja e consulte [como encontrar seu código de 
 
 ## O que significam os status de rastreamento da Foxpost
 
-O rastreador da Foxpost exibe cada etapa com título curto, data, hora e uma frase. O site é em húngaro, com opção de inglês no menu. Veja as frases em húngaro, na ordem em que costumam aparecer:
+O rastreador da Foxpost exibe cada etapa com título curto, data, hora e uma frase. O site é em húngaro, com opção de inglês no menu. Veja as frases em húngaro, na ordem em que a encomenda passa por elas:
 
 | Status da Foxpost | O que significa para você |
 | --- | --- |
@@ -40,7 +40,7 @@ O rastreador da Foxpost exibe cada etapa com título curto, data, hora e uma fra
 
 Leia sempre a frase inteira, não apenas o título: "Automatában" (no locker) aparece tanto quando o remetente deposita o volume quanto quando ele já está aguardando sua retirada. Os trechos "(vissza)" e "címzett/feladó" existem porque a mesma frase serve para devoluções, então "retirado pelo destinatário/remetente" significa que você retirou o pacote.
 
-## Lockers Foxpost, retirada e entregas perdidas
+## Lockers Foxpost, retirada e entregas não realizadas
 
 **Retirada.** Em lockers A-BOX, digite na tela o código recebido na mensagem; em lockers Z-BOX (com teclado), digite o código de 6 dígitos. Qualquer pessoa com o código consegue abrir o compartimento. Em pontos com atendimento Z-Pont, informe a senha; terceiros podem retirar sem documento, salvo exigência da loja.
 
@@ -52,7 +52,7 @@ Leia sempre a frase inteira, não apenas o título: "Automatában" (no locker) a
 
 **Encomendas DPD.** Desde outubro de 2026 você pode escolher um locker Foxpost no checkout da loja para encomendas tratadas pela DPD. A Foxpost avisa assim que a DPD entrega o pacote ao depósito da Foxpost. Acompanhe com o código de 14 dígitos na DPD ou com o código `CLFOX` na Foxpost. O volume fica guardado por 5 dias corridos como qualquer outro e depois retorna à DPD.
 
-**Entrega em domicílio.** Uma transportadora parceira realiza duas tentativas em dias úteis consecutivos, avisadas por SMS e e-mail. O link no e-mail permite trocar dia ou endereço, mas consome uma tentativa. Tentativas frustradas geram e-mail e SMS, sem aviso em papel. Se continuar sem entrega, retorna ao remetente.
+**Entrega em domicílio.** Uma transportadora parceira realiza duas tentativas em dias úteis consecutivos, avisadas por SMS e e-mail. O link no e-mail permite trocar dia ou endereço, mas consome uma tentativa. Entregas não realizadas geram e-mail e SMS, sem aviso em papel. Se continuar sem entrega, retorna ao remetente.
 
 ## Encomenda Foxpost atrasada, danificada ou extraviada
 
@@ -70,13 +70,13 @@ Nas páginas de contato da Foxpost:
 - **Presencial:** 1097 Budapest, Könyves Kálmán krt. 12-14, escada verde, 2º andar, apenas às quintas-feiras das 08:00 às 20:00 (horário da Hungria).
 - **Por escrito:** [formulários de contato](https://foxpost.hu/kapcsolatfelveteli-urlapok?pageType=c2c) (incluindo consulta de encomenda `Csomag utáni érdeklődés`) e [formulário de reclamação](https://foxpost.hu/reklamacio?pageType=c2c). A Foxpost não publica endereço de e-mail para clientes. Para encomendas Packeta, use o suporte da Packeta.
 
-> A Foxpost envia mensagens apenas de endereços `foxpost.hu`. Qualquer link que não termine em `foxpost.hu` é golpe; a Foxpost nunca pede dados bancários nem liga pedindo para "confirmar a entrega" — desligue imediatamente.
+> A Foxpost envia mensagens apenas de endereços `foxpost.hu`. Qualquer link que não termine em `foxpost.hu` é golpe; a Foxpost nunca pede dados bancários nem liga pedindo para "confirmar a entrega" — desligue.
 
 ## Acompanhe encomendas da Foxpost com o Peek
 
 O [Peek](/) identifica a Foxpost na hora em códigos `CLFOX`. Para códigos residenciais começados por `66639` (de 10 a 20 dígitos), o Peek consulta primeiro a Foxpost junto com outras transportadoras do mesmo tamanho e a confirma assim que ela reconhece o código; enquanto a Foxpost ainda não o reconhece, exibe "Provavelmente Foxpost" e continua verificando. Você também pode escolher "Foxpost" em "Trocar" ou colar um link de rastreamento de foxpost.hu com `code=` (de `/csomagkovetes/` ou `/en/parcel-tracking`), que aponta sempre para a Foxpost. Códigos iniciados por `Z` vão para a Packeta.
 
-O Peek exibe o histórico próprio da Foxpost lido no horário de Budapeste. As linhas do histórico mantêm o húngaro original da Foxpost em qualquer idioma do Peek, enquanto o status principal aparece no seu idioma, como "Pronta para retirada". O Peek pode mostrar o remetente (geralmente a loja) e o locker de destino ou guarda, enviando alertas quando o status mudar. Não exibe data prevista nem peso, omitindo número do pedido e dados de pagamento.
+O Peek exibe o histórico próprio da Foxpost lido no horário de Budapeste. As linhas do histórico mantêm o húngaro original da Foxpost em qualquer idioma do Peek, enquanto o status principal aparece no seu idioma, como "Pronta para retirada". O Peek pode mostrar o remetente (geralmente a loja) e o locker de destino ou guarda, e pode avisar você quando o status mudar. O Peek não exibe data prevista nem peso, omitindo número do pedido e dados de pagamento.
 
 ## Perguntas sobre o rastreamento da Foxpost
 
@@ -97,18 +97,18 @@ Não em dinheiro. Lockers A-BOX aceitam cartão no terminal e lockers Z-BOX rece
 A Foxpost informa que entregas entre lockers podem levar a partir de um dia útil após a coleta, e entregas em casa costumam levar dois ou três dias úteis, sem garantia em nenhum dos casos.
 
 :::sources
-- [Foxpost: Csomagkövetés](https://foxpost.hu/csomagkovetes/) – number shapes, Z numbers sent to Packeta, statuses, tracker fields
-- [Foxpost: Track your parcel](https://foxpost.hu/en/parcel-tracking) – the tracker in English, through the menu
-- [Foxpost: Home](https://foxpost.hu/) – lockers and home delivery, number shapes, Packeta Group
-- [Foxpost: Gyakran ismételt kérdések](https://foxpost.hu/ugyfelszolgalat) – where the number is, app, merger, no sending abroad, delivery times, cash on delivery, full lockers, DPD parcels
-- [Foxpost: Csomagátvétel](https://foxpost.hu/csomagatvetel) – codes, 5-day hold, Z-Pont, cash on delivery, home delivery attempts
-- [Foxpost: ÁSZF](https://www.foxpost.hu/uploads/documents/hu/foxpost_aszf.pdf) – hold times, substitute lockers, claims, deadlines, complaints, NMHH
-- [Foxpost: Kapcsolat](https://foxpost.hu/kapcsolat) – phone, hours, office
-- [Foxpost: Contact](https://foxpost.hu/en/contact) – phone, hours and office in English
-- [Foxpost: Kárigény](https://foxpost.hu/reklamacio?pageType=c2c) – claim form, Foxpost or Packeta
-- [Foxpost: Kapcsolatfelvételi űrlapok](https://foxpost.hu/kapcsolatfelveteli-urlapok?pageType=c2c) – contact forms, parcel enquiry after 3 days without a change
-- [Foxpost: WebAPI integráció](https://foxpost.hu/uzleti-partnereknek/integracios-segedlet/webapi-integracio) – status titles and sentences
-- [Foxpost: Adathalász csalások és visszaélések formái](https://foxpost.hu/adathalaszat) – scam warning
-- [Foxpost: Minden, ami fontos az átirányításról](https://foxpost.hu/blog/maganszemely/minden-ami-fontos-az-atiranyitasrol) – redirect notice and choice
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [Foxpost: Csomagkövetés](https://foxpost.hu/csomagkovetes/) – formatos de código, códigos Z enviados à Packeta, status, campos do rastreador
+- [Foxpost: Track your parcel](https://foxpost.hu/en/parcel-tracking) – o rastreador em inglês, pelo menu
+- [Foxpost: Home](https://foxpost.hu/) – lockers e entrega em casa, formatos de código, Packeta Group
+- [Foxpost: Gyakran ismételt kérdések](https://foxpost.hu/ugyfelszolgalat) – onde está o código, app, fusão, sem envio ao exterior, prazos de entrega, pagamento na entrega, lockers cheios, encomendas DPD
+- [Foxpost: Csomagátvétel](https://foxpost.hu/csomagatvetel) – códigos, guarda de 5 dias, Z-Pont, pagamento na entrega, tentativas de entrega em casa
+- [Foxpost: ÁSZF](https://www.foxpost.hu/uploads/documents/hu/foxpost_aszf.pdf) – prazos de guarda, lockers substitutos, pedidos de indenização, prazos, reclamações, NMHH
+- [Foxpost: Kapcsolat](https://foxpost.hu/kapcsolat) – telefone, horários, escritório
+- [Foxpost: Contact](https://foxpost.hu/en/contact) – telefone, horários e escritório em inglês
+- [Foxpost: Kárigény](https://foxpost.hu/reklamacio?pageType=c2c) – formulário de indenização, Foxpost ou Packeta
+- [Foxpost: Kapcsolatfelvételi űrlapok](https://foxpost.hu/kapcsolatfelveteli-urlapok?pageType=c2c) – formulários de contato, consulta sobre a encomenda após 3 dias sem mudança
+- [Foxpost: WebAPI integráció](https://foxpost.hu/uzleti-partnereknek/integracios-segedlet/webapi-integracio) – títulos e frases de status
+- [Foxpost: Adathalász csalások és visszaélések formái](https://foxpost.hu/adathalaszat) – alerta de golpe
+- [Foxpost: Minden, ami fontos az átirányításról](https://foxpost.hu/blog/maganszemely/minden-ami-fontos-az-atiranyitasrol) – aviso de redirecionamento e escolha
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê
 :::

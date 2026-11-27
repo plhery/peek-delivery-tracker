@@ -98,7 +98,7 @@ Peek 以英文读取 Packeta 官网数据并保留其原文措辞：展示总体
 
 ### Packeta 和 FOXPOST 是一家吗？
 
-两者在匈牙利正在整合：FOXPOST 所属公司负责运营 packeta.hu，Packeta 在匈牙利的 Z-BOX 快递柜现已启用 FOXPOST 品牌。在其他国家，Packeta 查件页仍使用其自己的 `Z` 单号。
+两者在匈牙利正在整合：[FOXPOST](carrier:foxpost) 所属公司负责运营 packeta.hu，Packeta 在匈牙利的 Z-BOX 快递柜现已启用 FOXPOST 品牌。在其他国家，Packeta 查件页仍使用其自己的 `Z` 单号。
 
 ### Packeta 在波兰也有业务吗？
 

@@ -98,7 +98,7 @@ Sim, é uma transportadora real: a marca do grupo por trás da Zásilkovna, envi
 
 ### Packeta e FOXPOST são a mesma empresa?
 
-Na Hungria, as duas estão se fundindo: a empresa da FOXPOST administra packeta.hu, e os Z-BOX húngaros agora levam o nome FOXPOST. Nos demais países, o rastreador da Packeta continua pedindo o código `Z`.
+Na Hungria, as duas estão se fundindo: a empresa da [FOXPOST](carrier:foxpost) administra packeta.hu, e os Z-BOX húngaros agora levam o nome FOXPOST. Nos demais países, o rastreador da Packeta continua pedindo o código `Z`.
 
 ### A Packeta opera na Polônia?
 

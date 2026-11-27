@@ -40,7 +40,7 @@ Foxpost 查询页按简短标题、日期时间和一句说明展示每个步骤
 
 查看状态时请看完整句子而非短标题：因为 “Automatában”（在快递柜中）既可能指寄件人刚投递，也可能指包裹已到达你的取件柜。句中的 “(vissza)” 与 “címzett/feladó” 是因为同一套模板同时用于退货件，所以“收件人/寄件人已签收”在收件场景下即表示已取件。
 
-## Foxpost 快递柜、自提与派送失败
+## Foxpost 快递柜、自提与派送未成功
 
 **取件方式。** 在 A-BOX 快递柜屏幕上输入消息里的取件码即可开柜；在 Z-BOX（按键柜）输入 6 位开柜码。持有取件码的任何人均可代开柜门。在人工值守的 Z-Pont 自提点报出口令即可领取，也可请人代取，除非商家特别要求否则无需出示身份证件。
 
@@ -52,7 +52,7 @@ Foxpost 查询页按简短标题、日期时间和一句说明展示每个步骤
 
 **DPD 包裹。** 自 2026 年 10 月起，网店结账时可为 DPD 承运的包裹选择投递至 Foxpost 快递柜。DPD 交接且包裹到达 Foxpost 仓库后，Foxpost 会向你发出通知。你可以用 DPD 14 位单号在 DPD 官网查询，或用 `CLFOX` 单号在 Foxpost 查询。保管期同样为 5 个自然日，逾期退回 DPD。
 
-**送货上门。** 由合作快递员在连续两个工作日尝试派送两次，并提前通过短信和邮件通知。邮件链接可更改日期或地址，但会消耗一次派送机会。派送未成会发邮件和短信通知，不留纸质条。若仍无人签收，包裹退回寄件人。
+**送货上门。** 由合作快递员在连续两个工作日尝试派送两次，并提前通过短信和邮件通知。邮件链接可更改日期或地址，但会消耗一次派送机会。派送未成功会发邮件和短信通知，不留纸质条。若仍无人签收，包裹退回寄件人。
 
 ## Foxpost 包裹延误、破损或遗失
 
@@ -74,9 +74,9 @@ Foxpost 联系页面公布如下：
 
 ## 使用 Peek 跟踪 Foxpost 包裹
 
-对于 `CLFOX` 单号，[Peek](/) 会直接识别为 Foxpost。对于以 `66639` 开头的上门派送单号（10 至 20 位数字），Peek 会优先查询 Foxpost，同时询问相同长度的其他承运商，一旦 Foxpost 查有记录便立即归属 Foxpost；若暂未查到，Peek 会显示“可能是 Foxpost”并继续定时跟进。你也可以点击“更换”手动选择“Foxpost”，或粘贴带 `code=` 的 foxpost.hu 查询链接（`/csomagkovetes/` 或 `/en/parcel-tracking`），无论单号格式如何都会直接按 Foxpost 跟踪。以 `Z` 开头的单号会自动归属 Packeta。
+对于 `CLFOX` 单号，[Peek](/) 会直接识别为 Foxpost。对于以 `66639` 开头的上门派送单号（10 至 20 位数字），Peek 会优先查询 Foxpost，同时询问相同长度的其他承运商，一旦 Foxpost 查到该单号便归属 Foxpost；若暂未查到，Peek 会显示“可能是 Foxpost”并继续查询。你也可以点击“更换”手动选择“Foxpost”，或粘贴带 `code=` 的 foxpost.hu 查询链接（`/csomagkovetes/` 或 `/en/parcel-tracking`），无论单号格式如何都会直接按 Foxpost 跟踪。以 `Z` 开头的单号会交给 Packeta。
 
-Peek 展示 Foxpost 自身轨迹，时间按布达佩斯时间解析。无论你在 Peek 使用何种语言，每条详细扫描仍保留 Foxpost 匈牙利语原文，而包裹整体阶段会以你的界面语言显示（例如“待取件”）。Peek 还能显示寄件人（通常为网店）及包裹前往或存放的快递柜，并在状态变动时发送通知。系统不提供预计送达日期或重量，订单号与付款信息也会被过滤。
+Peek 展示 Foxpost 自身轨迹，时间按布达佩斯时间解析。无论你在 Peek 使用何种语言，每条详细扫描仍保留 Foxpost 匈牙利语原文，而包裹整体阶段会以你的界面语言显示（例如“待取件”）。Peek 还能显示寄件人（通常为网店）及包裹前往或存放的快递柜，也可以在状态变化时通知你。Peek 不显示预计送达日期或重量，订单号与付款信息也会被过滤。
 
 ## Foxpost 物流查询常见问题
 
@@ -97,18 +97,18 @@ Peek 展示 Foxpost 自身轨迹，时间按布达佩斯时间解析。无论你
 Foxpost 表示柜到柜揽收后最快 1 个工作日送达，送货上门通常 2 至 3 个工作日，但两者均不作时效保证。
 
 :::sources
-- [Foxpost: Csomagkövetés](https://foxpost.hu/csomagkovetes/) – number shapes, Z numbers sent to Packeta, statuses, tracker fields
-- [Foxpost: Track your parcel](https://foxpost.hu/en/parcel-tracking) – the tracker in English, through the menu
-- [Foxpost: Home](https://foxpost.hu/) – lockers and home delivery, number shapes, Packeta Group
-- [Foxpost: Gyakran ismételt kérdések](https://foxpost.hu/ugyfelszolgalat) – where the number is, app, merger, no sending abroad, delivery times, cash on delivery, full lockers, DPD parcels
-- [Foxpost: Csomagátvétel](https://foxpost.hu/csomagatvetel) – codes, 5-day hold, Z-Pont, cash on delivery, home delivery attempts
-- [Foxpost: ÁSZF](https://www.foxpost.hu/uploads/documents/hu/foxpost_aszf.pdf) – hold times, substitute lockers, claims, deadlines, complaints, NMHH
-- [Foxpost: Kapcsolat](https://foxpost.hu/kapcsolat) – phone, hours, office
-- [Foxpost: Contact](https://foxpost.hu/en/contact) – phone, hours and office in English
-- [Foxpost: Kárigény](https://foxpost.hu/reklamacio?pageType=c2c) – claim form, Foxpost or Packeta
-- [Foxpost: Kapcsolatfelvételi űrlapok](https://foxpost.hu/kapcsolatfelveteli-urlapok?pageType=c2c) – contact forms, parcel enquiry after 3 days without a change
-- [Foxpost: WebAPI integráció](https://foxpost.hu/uzleti-partnereknek/integracios-segedlet/webapi-integracio) – status titles and sentences
-- [Foxpost: Adathalász csalások és visszaélések formái](https://foxpost.hu/adathalaszat) – scam warning
-- [Foxpost: Minden, ami fontos az átirányításról](https://foxpost.hu/blog/maganszemely/minden-ami-fontos-az-atiranyitasrol) – redirect notice and choice
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [Foxpost: Csomagkövetés](https://foxpost.hu/csomagkovetes/) – 单号格式、转到 Packeta 的 Z 单号、状态、查件页面的字段
+- [Foxpost: Track your parcel](https://foxpost.hu/en/parcel-tracking) – 英文版查件页面（通过菜单切换）
+- [Foxpost: Home](https://foxpost.hu/) – 快递柜与送货上门、单号格式、Packeta Group
+- [Foxpost: Gyakran ismételt kérdések](https://foxpost.hu/ugyfelszolgalat) – 单号在哪里、应用、合并、不能寄往国外、派送时间、货到付款、快递柜满格、DPD 包裹
+- [Foxpost: Csomagátvétel](https://foxpost.hu/csomagatvetel) – 取件码、5 天保管期、Z-Pont、货到付款、送货上门的派送尝试
+- [Foxpost: ÁSZF](https://www.foxpost.hu/uploads/documents/hu/foxpost_aszf.pdf) – 保管期、替代快递柜、索赔、时限、投诉、NMHH
+- [Foxpost: Kapcsolat](https://foxpost.hu/kapcsolat) – 电话、服务时间、办公室
+- [Foxpost: Contact](https://foxpost.hu/en/contact) – 英文版的电话、服务时间与办公室
+- [Foxpost: Kárigény](https://foxpost.hu/reklamacio?pageType=c2c) – 索赔表单、Foxpost 或 Packeta
+- [Foxpost: Kapcsolatfelvételi űrlapok](https://foxpost.hu/kapcsolatfelveteli-urlapok?pageType=c2c) – 联系表单、状态 3 天无变化后的包裹查询
+- [Foxpost: WebAPI integráció](https://foxpost.hu/uzleti-partnereknek/integracios-segedlet/webapi-integracio) – 状态标题与说明句
+- [Foxpost: Adathalász csalások és visszaélések formái](https://foxpost.hu/adathalaszat) – 诈骗提醒
+- [Foxpost: Minden, ami fontos az átirányításról](https://foxpost.hu/blog/maganszemely/minden-ami-fontos-az-atiranyitasrol) – 改投通知与选择
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取的内容
 :::

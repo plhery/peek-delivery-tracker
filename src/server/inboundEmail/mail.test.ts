@@ -331,12 +331,38 @@ describe('Gmail\'s request to confirm forwarding', () => {
   });
 });
 
+describe('a mailing tool\'s redirects', () => {
+  // Made-up addresses in the mailing tools' shapes.
+  const TRACK = 'https://link.shop.example/u/nrd.php?p=track1';
+  const SOCIAL = 'https://link.shop.example/u/nrd.php?p=social2';
+  const UNSUBSCRIBE = 'https://link.shop.example/u/nrd.php?p=leave3';
+  const headers = { From: '"Example Shop" <news@mail.example-shop.com>', To: 'add+abc@in.example.com', Subject: 'Your order is on its way' };
+
+  it('are kept for following when their words read like tracking and the email links no carrier or platform', async () => {
+    const mail = await readInboundMail(alternative(headers, null, `<html><body><p>Your order is on its way.</p>
+      <a href="${TRACK}"><img src="https://shop.example/button.png" alt="Sendung verfolgen"></a>
+      <a href="${SOCIAL}">Suivez-nous</a> <a href="${UNSUBSCRIBE}">Track your order preferences · Unsubscribe</a></body></html>`));
+    expect(mail.redirectLinks).toEqual([{ platform: 'redirect', url: TRACK }]);
+    expect(mail.trackingLinks).toEqual([]);
+    // In plain text, the words go before the address, on its line or on the line above.
+    for (const text of [`Suivre mon colis <${TRACK}>`, `Track your parcel:\n${TRACK}\n\nFollow us: ${SOCIAL}`]) {
+      const plain = await readInboundMail(alternative(headers, text, '<p>Your order is on its way.</p>'));
+      expect(plain.redirectLinks, text).toEqual([{ platform: 'redirect', url: TRACK }]);
+    }
+    // A carrier's own link is read instead: no click is counted.
+    const linked = await readInboundMail(alternative(headers, null,
+      `<a href="https://www.ups.com/track?tracknum=${UPS}">UPS</a> <a href="${TRACK}">Track your parcel</a>`));
+    expect(linked.redirectLinks).toEqual([]);
+    expect(linked.trackingLinks).toEqual([`https://www.ups.com/track?tracknum=${UPS}`]);
+  });
+});
+
 describe('the HTML helpers', () => {
   it('decode entities and keep only web links', () => {
     expect(htmlText('<p>A&amp;B&#33;&#x21;</p><div>next</div>')).toBe('A&B!!\nnext');
     expect(htmlText('<p>&Eacute;t&eacute; &agrave; 19&euro;&ensp;&rsaquo;</p><p>?a=1&section=2&amp;b=3</p>')).toBe('Été à 19€ ›\n?a=1&section=2&b=3');
-    expect(htmlLinks('<a data-href="https://wrong.example" href=https://carrier.example/parcel>Track</a>'))
-      .toEqual(['https://carrier.example/parcel']);
-    expect(htmlLinks('<a href="mailto:a@example.com">m</a><a href=\'https://x.example/?a=1&amp;b=2\'>x</a>')).toEqual(['https://x.example/?a=1&b=2']);
+    expect([...htmlLinks('<a data-href="https://wrong.example" href=https://carrier.example/parcel>Track</a>')])
+      .toEqual([['https://carrier.example/parcel', 'Track']]);
+    expect([...htmlLinks('<a href="mailto:a@example.com">m</a><a href=\'https://x.example/?a=1&amp;b=2\'>x</a>')]).toEqual([['https://x.example/?a=1&b=2', 'x']]);
   });
 });

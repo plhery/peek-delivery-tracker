@@ -27,6 +27,22 @@ describe('shop tracking-page links in a text', () => {
       .resolves.toMatchObject({ numbers: [], unresolved: [{ reason: 'unavailable' }] });
   });
 
+  it('follows an email\'s worded redirects after the text\'s own shop links, one at a time until one names a parcel', async () => {
+    const redirect = (p: string) => ({ platform: 'redirect' as const, url: `https://link.shop.example/u/nrd.php?p=${p}` });
+    const asked: string[] = [];
+    const reading = await shopLinkNumbers(`Follow package: ${ORDER}`, async (link) => {
+      asked.push(link.url);
+      if (link.platform !== 'redirect') return { platform: 'parcellab', shop: 'hm', status: 'unresolved', reason: 'not_found' };
+      return link.url.endsWith('b')
+        ? { platform: 'redirect', status: 'resolved', parcels: [{ trackingNumber: UPS, carrier: 'ups', confidence: 'high' }] }
+        : { platform: 'redirect', status: 'unresolved', reason: 'unsupported' };
+    }, [redirect('a'), redirect('a'), redirect('b'), redirect('c')]);
+    // Each followed once, and none after the one that named the parcel.
+    expect(asked).toEqual([ORDER, redirect('a').url, redirect('b').url]);
+    expect(reading.numbers.map(({ normalized, match }) => `${normalized} ${match.carrier}`)).toEqual([`${UPS} ups`]);
+    expect(reading.unresolved.map(({ reason }) => reason)).toEqual(['not_found', 'unsupported']);
+  });
+
   it('keeps the number the text names, with the platform\'s carrier when the text was less sure', () => {
     const text = trackingNumbersInText(`Tracking number: ${DHL}\nShipped with UPS: ${UPS}`);
     const linked = [{ normalized: DHL, match: { trackingNumber: DHL, carrier: 'dhl' as const, confidence: 'high' as const, candidates: ['dhl' as const], preferred: [], source: 'link' as const } }];

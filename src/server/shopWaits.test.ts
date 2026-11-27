@@ -60,6 +60,9 @@ describe('a wait for a shop to ship', () => {
       { platform: 'parcellab', shop: 'hm', reason: 'not_found', link },
       { platform: 'parcellab', shop: 'hm', reason: 'unsupported', link },
     ])).toHaveLength(2);
+    // A mailing tool's redirect never waits: each check would count another click.
+    const redirect = { platform: 'redirect' as const, url: 'https://link.shop.example/u/nrd.php?p=abc' };
+    expect(waitableLinks([{ platform: 'parcellab', shop: 'hm', reason: 'no_tracking_yet', link: redirect }])).toEqual([]);
   });
 
   it('keeps one wait per link, for 14 days, asked again within the half hour when the reader asked', async () => {

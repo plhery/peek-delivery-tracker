@@ -32,26 +32,41 @@ export type Resolver = (link: ShopTrackingLink, options: { signal?: AbortSignal;
 
 /**
  * The parcels a text's shop tracking-page links name (parcelLab's `delivery-status.com`, as H&M's "Follow package"),
- * each with the carrier the shop's platform names, read with a few anonymous requests to that platform. Nothing of the
- * page but the number and the carrier is kept: no name, no address.
+ * each with the carrier the shop's platform names, read with a few anonymous requests to that platform. `redirects`,
+ * an email's mailing-tool redirects worded like tracking, come after them, one at a time until one names a parcel,
+ * since following one counts as the reader's click: each is followed to the carrier's or the platform's link, never
+ * loading a page that is neither. All take `RESOLVE_MS` together. Nothing of the page but the number and the carrier
+ * is kept: no name, no address.
  */
-export async function shopLinkNumbers(text: string, resolve: Resolver = resolveShopTrackingLink): Promise<ShopLinkReading> {
-  const links = shopTrackingLinks(text).slice(0, MOST_SHOP_LINKS);
-  if (!links.length) return { numbers: [], unresolved: [] };
-  const resolutions = await Promise.all(links.map((link) => resolveSafely(link, resolve)));
+export async function shopLinkNumbers(
+  text: string,
+  resolve: Resolver = resolveShopTrackingLink,
+  redirects: readonly ShopTrackingLink[] = [],
+): Promise<ShopLinkReading> {
+  const deadline = Date.now() + RESOLVE_MS;
+  const direct = shopTrackingLinks(text).slice(0, MOST_SHOP_LINKS);
+  const known = new Set(direct.map(({ url }) => url));
   const numbers: ShopLinkParcel[] = [];
   const unresolved: UnresolvedShopLink[] = [];
-  resolutions.forEach((resolution, index) => {
+  const read = (link: ShopTrackingLink, resolution: ShopLinkResolution) => {
     if (resolution.status === 'resolved') numbers.push(...resolution.parcels);
-    else unresolved.push({ platform: resolution.platform ?? null, shop: resolution.shop ?? null, reason: resolution.reason, link: links[index] });
-  });
+    else unresolved.push({ platform: resolution.platform ?? null, shop: resolution.shop ?? null, reason: resolution.reason, link });
+    return resolution.status === 'resolved';
+  };
+  const resolutions = await Promise.all(direct.map((link) => resolveSafely(link, resolve)));
+  resolutions.forEach((resolution, index) => read(direct[index], resolution));
+  const followed = [...new Map(redirects.filter(({ url }) => !known.has(url)).map((link) => [link.url, link])).values()];
+  for (const link of followed.slice(0, MOST_SHOP_LINKS - direct.length)) {
+    const left = deadline - Date.now();
+    if (left < 1_000 || read(link, await resolveSafely(link, resolve, left))) break;
+  }
   return { numbers: parcelNumbers(numbers), unresolved };
 }
 
 /** What one link names, a failure of the resolver itself read as the platform being unavailable. */
-export async function resolveSafely(link: ShopTrackingLink, resolve: Resolver = resolveShopTrackingLink): Promise<ShopLinkResolution> {
+export async function resolveSafely(link: ShopTrackingLink, resolve: Resolver = resolveShopTrackingLink, timeoutMs = RESOLVE_MS): Promise<ShopLinkResolution> {
   try {
-    return await resolve(link, { timeoutMs: RESOLVE_MS });
+    return await resolve(link, { timeoutMs });
   } catch (error) {
     captureOperationalError(error, { component: 'shop_links', operation: `resolve_${link.platform}` });
     return { platform: link.platform, ...(link.shop ? { shop: link.shop } : {}), status: 'unresolved', reason: 'unavailable' };

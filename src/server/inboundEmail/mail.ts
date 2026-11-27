@@ -3,7 +3,8 @@ import 'server-only';
 import { decodeHTMLStrict } from 'entities';
 import { Parser } from 'htmlparser2';
 import PostalMime, { type Address, type Email } from 'postal-mime';
-import { shopTrackingLink } from 'universal-parcel-scraper';
+import { shopTrackingLink, type ShopTrackingLink } from 'universal-parcel-scraper';
+import { MOST_SHOP_LINKS } from '../shopLinks';
 import { carrierLink } from './carrierSender';
 
 /** What Peek keeps from an email: the text to read numbers from, which it drops after, and who sent it. */
@@ -26,6 +27,11 @@ export interface InboundMail {
    * as `text` holds them: all that is read of an email whose subject names no shipping word.
    */
   trackingLinks: string[];
+  /**
+   * Its mailing tool's click redirects whose words read like tracking ("Track your parcel"), when it has no link
+   * to a carrier's site or a shop's tracking platform of its own: Peek follows them to that link (`shopTrackingLink`).
+   */
+  redirectLinks: ShopTrackingLink[];
   /** Gmail asking to confirm that it may forward to the address, with its code and link when they are there. */
   confirmation: { code: string | null; link: string | null } | null;
 }
@@ -43,6 +49,8 @@ const MOST_FORWARD_LINES = 300;
 const MOST_LINE_LENGTH = 300;
 const MOST_LINKS = 100;
 const MOST_LINK_LENGTH = 2_000;
+/** A link's words are a button's or a line's: "Track your parcel", "Sendung verfolgen". */
+const MOST_LINK_WORDS = 120;
 /**
  * How the text read for numbers is shared, within the reading's own bound (`MOST_TEXT_LENGTH`). The body is read
  * without its links' addresses, which take the links' share: a shop's email holds dozens, each of hundreds of
@@ -125,29 +133,72 @@ export function htmlText(html: string): string {
  */
 const TEXT_LINK = /<?https?:\/\/[^\s<>"]+>?/gi;
 
-/** The plain text with a space for each address it writes, and those addresses, as `htmlLinks` keeps them. */
-function withoutAddresses(text: string): { text: string; links: string[] } {
-  const links = new Set<string>();
-  const rest = text.replace(TEXT_LINK, (found) => {
-    const link = found.replace(/^<|>$/g, '');
-    if (link.length <= MOST_LINK_LENGTH && links.size < MOST_LINKS) links.add(link);
-    return ' ';
-  });
-  return { text: rest, links: [...links] };
+/**
+ * The words a plain text writes a link after: on its line ("Suivre mon colis <https://…>"), else on the line above
+ * when the link stands alone on its own.
+ */
+function wordsBefore(text: string, at: number): string {
+  const start = text.lastIndexOf('\n', at - 1) + 1;
+  const line = text.slice(Math.max(start, at - MOST_LINK_WORDS), at).replace(TEXT_LINK, ' ');
+  if (/\p{L}/u.test(line) || start === 0) return line.trim();
+  const above = text.slice(Math.max(0, start - 1 - MOST_LINK_WORDS), start - 1);
+  return above.slice(above.lastIndexOf('\n') + 1).replace(TEXT_LINK, ' ').trim();
 }
 
-/** The addresses the HTML links to, decoded, each on its own line: a carrier's link names its number. */
-export function htmlLinks(html: string): string[] {
-  const links = new Set<string>();
+/** Each link's words, those of all the places it is written. */
+function addWords(links: Map<string, string>, link: string, words: string): void {
+  const known = links.get(link);
+  const said = words.replace(/\s+/g, ' ').trim();
+  links.set(link, known && said ? `${known} · ${said}`.slice(0, MOST_LINK_WORDS * 2) : known || said);
+}
+
+/** The plain text with a space for each address it writes, and those addresses with their words, as `htmlLinks` keeps them. */
+function withoutAddresses(text: string): { text: string; links: Map<string, string> } {
+  const links = new Map<string, string>();
+  const rest = text.replace(TEXT_LINK, (found, at: number) => {
+    const link = found.replace(/^<|>$/g, '');
+    if (link.length <= MOST_LINK_LENGTH && (links.has(link) || links.size < MOST_LINKS)) addWords(links, link, wordsBefore(text, at));
+    return ' ';
+  });
+  return { text: rest, links };
+}
+
+/**
+ * The addresses the HTML links to, decoded, in the order written, each with its words: its text, an image's
+ * description and its own title. A carrier's link names its number; a mailing tool's redirect is followed only when
+ * its words read like tracking.
+ */
+export function htmlLinks(html: string): Map<string, string> {
+  const links = new Map<string, string>();
+  let open: { link: string; words: string } | null = null;
+  const close = () => {
+    if (open) addWords(links, open.link, open.words);
+    open = null;
+  };
   const parser = new Parser({
     onopentag(name, attributes) {
-      const link = attributes.href?.trim();
-      if (name === 'a' && link && /^https?:\/\//i.test(link) && link.length <= MOST_LINK_LENGTH) links.add(link);
+      if (name === 'a') {
+        close();
+        const link = attributes.href?.trim();
+        if (link && /^https?:\/\//i.test(link) && link.length <= MOST_LINK_LENGTH) {
+          open = { link, words: [attributes.title, attributes['aria-label']].filter(Boolean).join(' ') };
+          addWords(links, link, '');
+        }
+      } else if (open && name === 'img' && attributes.alt) {
+        open.words += ` ${attributes.alt}`;
+      }
       if (links.size >= MOST_LINKS) parser.pause();
+    },
+    ontext(text) {
+      if (open && open.words.length < MOST_LINK_WORDS) open.words += text;
+    },
+    onclosetag(name) {
+      if (name === 'a') close();
     },
   });
   parser.end(html.slice(0, MOST_HTML_LENGTH));
-  return [...links];
+  close();
+  return links;
 }
 
 function mailbox(address: Address | undefined): { name: string; address: string } | null {
@@ -258,12 +309,20 @@ export async function readInboundMail(raw: Uint8Array): Promise<InboundMail> {
   // A mailing tool may write HTML's entities into the plain part too.
   const plain = email.text?.trim() ? withoutAddresses(decodeEntities(email.text.slice(0, MOST_HTML_LENGTH))) : null;
   const body = withoutPadding(plain ? plain.text : htmlText(html));
-  const links = [...new Set([...htmlLinks(html), ...plain?.links ?? []])];
+  const words = htmlLinks(html);
+  for (const [link, said] of plain?.links ?? []) addWords(words, link, said);
+  const links = [...words.keys()];
   const read: string[] = [];
   let room = LINKS_SHARE;
   // A link to a carrier's site names the parcel's number, as a link to the shop's tracking page names its parcels
   // (shopTrackingLink): those are read first, before the shop's other links.
   const carriers = new Set(links.filter((link) => carrierLink(link) || shopTrackingLink(link)));
+  // A mailing tool's redirect, followed only for want of a link of the shop's or the carrier's own: following one counts
+  // as the reader's click.
+  const redirects = carriers.size ? [] : links
+    .map((link) => shopTrackingLink(link, words.get(link) ?? ''))
+    .filter((link): link is ShopTrackingLink => link?.platform === 'redirect')
+    .slice(0, MOST_SHOP_LINKS);
   for (const link of [...carriers, ...links.filter((link) => !carriers.has(link))]) {
     if (link.length >= room) continue;
     read.push(link);
@@ -279,6 +338,7 @@ export async function readInboundMail(raw: Uint8Array): Promise<InboundMail> {
     subject,
     text,
     trackingLinks: read.filter((link) => carriers.has(link)),
+    redirectLinks: redirects,
     confirmation: gmailConfirmation(email, body, links),
   };
 }

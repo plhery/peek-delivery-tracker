@@ -175,8 +175,10 @@ export async function receiveInboundMail(
   // A seller's notice tells of a parcel the reader sent: still followed, its name says so.
   const name = sentByReader(mail.subject, mail.text) ? await nameSentParcel(service, userId, label) : label;
   let waiting = false;
+  // A mailing tool's redirect is followed for a shipping email alone: a newsletter's "Track order" leads to no parcel.
   const additions = await addParcelsFromText(service, userId, linksOnly ? mail.trackingLinks.join('\n') : mail.text, name, carriers, {
     addNew: !delivered, retryEligibility: true, twins: true, onWaiting: (waits) => { waiting = waits.length > 0; },
+    ...(linksOnly ? {} : { redirectLinks: mail.redirectLinks }),
   });
   const named = await nameFollowedParcels(service, userId, additions, name);
   await announce(service, userId, additions);

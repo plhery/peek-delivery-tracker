@@ -138,9 +138,12 @@ export async function keepShopWaits(
   return kept;
 }
 
-/** The links of a text's unresolved shop links worth waiting for. */
+/**
+ * The links of a text's unresolved shop links worth waiting for. A mailing tool's redirect never waits: each check
+ * would count another click of the reader's.
+ */
 export function waitableLinks(unresolved: readonly UnresolvedShopLink[]): ShopTrackingLink[] {
-  return unresolved.filter(({ reason }) => WAITABLE.has(reason)).map(({ link }) => link);
+  return unresolved.filter(({ reason, link }) => WAITABLE.has(reason) && link.platform !== 'redirect').map(({ link }) => link);
 }
 
 /** The shop links a text holds, read for a wait the reader asks for. */

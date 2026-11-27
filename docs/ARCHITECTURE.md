@@ -493,6 +493,13 @@ Key server modules:
     text's own numbers; a number the text names itself keeps its place. At most three such links
     are read, in eight seconds, anonymously and read-only; only the number and carrier are kept
     (`src/server/shopLinks.ts`, resolved by the scraper's `resolveShopTrackingLink`).
+    A shipping email with no link to a carrier's site or a shop's platform, whose text names no
+    parcel with a sure carrier, has its mailing tool's click redirects followed instead when the
+    link's words read like tracking ("Sendung verfolgen", its text or an image's, or the words
+    written before it in the text part): one at a time until one names a parcel, at most three,
+    within the same eight seconds, to the carrier's or the platform's link, which is never
+    loaded. Following one counts as the reader's click, so a newsletter's, read for its links
+    alone, are never followed, and none is kept as a wait.
     `src/server/parcelsFromText.ts` is that step.
   - An email whose subject says its parcel was delivered adds no parcel: it comes too late
     for following to help. Only the past counts, in the languages of the Gmail filter

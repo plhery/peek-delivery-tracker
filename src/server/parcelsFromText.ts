@@ -5,6 +5,7 @@ import {
   carrierNumberInText, fromCarrier, labelledNumbersInText, nonTrackingShape, numberAlone, numbersInText, type NumberInText, type TextTrust,
 } from '../peek/lookup/reading';
 import type { ApiShopWait } from '../generated/apiContract';
+import type { ShopTrackingLink } from 'universal-parcel-scraper';
 import type { CarrierId } from '../types';
 import { claimAccountTracking } from './accountTrackingBudget';
 import { verifyAmazonShippingAddition } from './amazonShippingEligibility';
@@ -161,6 +162,11 @@ export interface AddingOptions {
    * then waits for. A text's links wait only when `addNew` holds.
    */
   onWaiting?: (waits: ApiShopWait[]) => void;
+  /**
+   * An email's mailing-tool redirects worded like tracking (InboundMail.redirectLinks), followed to the carrier's or
+   * the shop platform's link when the text names no parcel with a sure carrier.
+   */
+  redirectLinks?: readonly ShopTrackingLink[];
 }
 
 /**
@@ -297,7 +303,9 @@ export async function addParcelsFromText(
   const demos = reviewDemoNumbersInText(userId, text.slice(0, MOST_TEXT_LENGTH));
   const named = new Set(demos.map(({ normalized }) => normalized));
   const read = trackingNumbersInText(text, carriers, options.trust).filter(({ normalized }) => !named.has(normalized));
-  const links = await shopLinkNumbers(text.slice(0, MOST_TEXT_LENGTH));
+  // Following a redirect counts as the reader's click: only for a parcel the text leaves unnamed, or its carrier unsure.
+  const redirects = read.some(({ match }) => match.confidence === 'high') ? [] : options.redirectLinks ?? [];
+  const links = await shopLinkNumbers(text.slice(0, MOST_TEXT_LENGTH), undefined, redirects);
   const linked = links.numbers.filter(({ normalized }) => !named.has(normalized));
   const numbers = [...demos, ...withShopLinkNumbers(read, linked)].slice(0, MOST_NUMBERS_PER_TEXT);
   // A link that names no parcel yet waits, unless the text names the parcel itself.

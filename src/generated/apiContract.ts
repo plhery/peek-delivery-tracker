@@ -2199,7 +2199,7 @@ export const CARRIER_CAPABILITIES = {
           "gls-group.eu",
           "gls-group.com"
         ],
-        "pathPattern": "^/(?:GROUP|BE|BG|DK|FI|HR|IE|LU|NL|RO|RS)/",
+        "pathPattern": "^/(?:GROUP|BE|BG|DK|FI|HR|IE|LU|NL|RS)/",
         "params": [
           "match",
           "parcelNumber",
@@ -72248,6 +72248,40 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ]
+  },
+  "gls-ro": {
+    "displayName": "GLS Romania",
+    "aliases": [
+      "GLS România"
+    ],
+    "countries": [
+      "RO"
+    ],
+    "color": "#ffdd00",
+    "selectable": true,
+    "timezone": "Europe/Bucharest",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "gls-ro"
+    },
+    "trackingUrlTemplate": "https://gls-group.com/RO/ro/urmarire-colet/?match={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "gls-group.com",
+          "gls-group.eu"
+        ],
+        "pathPattern": "^/RO/",
+        "params": [
+          "match",
+          "parcelNumber",
+          "matchParcelNumber"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://gls-group.com/RO/ro/urmarire-colet/",
+    "helpUrl": "https://gls-group.com/RO/ro/gls-contact/"
   }
 } as const;
 
@@ -74448,7 +74482,8 @@ export const CARRIER_IDS = [
   "bvc-logistics",
   "hjwl",
   "hotwms",
-  "yjs-china"
+  "yjs-china",
+  "gls-ro"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

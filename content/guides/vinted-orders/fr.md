@@ -1,15 +1,15 @@
 ---
 title: Suivi de colis Vinted : transporteurs, numéros et retards
-description: Suivre un colis Vinted, acheteur ou vendeur : qui le livre en France et en Belgique, à quoi ressemble le numéro, et les délais de Vinted pour envoyer et réclamer.
+description: Suivre un colis Vinted (France et Belgique) : transporteurs, QR code Chronopost/Vinted Go, délais de livraison, retrait en relais (2 à 7 jours) et litiges.
 slug: suivi-colis-vinted
 picture: Deux téléphones, celui d'une vendeuse et celui d'un acheteur, entre lesquels un colis voyage en camionnette, et un Pip tout joyeux.
 published: 2026-10-16
-updated: 2026-11-23
+updated: 2026-11-27
 ---
 
-Sur Vinted, c'est l'acheteur qui choisit le transporteur et paie le bordereau en commandant ; le vendeur le reçoit sous forme de bordereau prépayé ou de code, et a 5 jours ouvrés pour déposer le colis. Tous deux suivent le colis dans la conversation de la commande, avec « Suivre le colis », où l'on peut aussi copier le numéro du transporteur. Le suivi peut mettre jusqu'à 48 h à apparaître après le dépôt, et le vendeur n'est payé qu'une fois que l'acheteur a confirmé que tout est en ordre, ou 2 jours après la livraison.
+Sur Vinted, l'acheteur choisit le transporteur (Mondial Relay, Colissimo, Chronopost, Vinted Go, bpost, DPD ou DHL) et paie le bordereau à l'achat ; le vendeur reçoit un bordereau imprimable ou un QR code (avec Chronopost, Vinted Go ou DHL ServicePoint) et a 5 jours ouvrés pour déposer le colis. Le suivi apparaît dans la conversation via « Suivre le colis » sous 48 h, la livraison prend en général 2 à 5 jours ouvrés dans un même pays, et le délai de retrait varie selon le transporteur (7 jours avec Vinted Go, parfois 2 jours calendaires ailleurs).
 
-## Comment marche l'envoi sur Vinted ?
+## Comment fonctionne l'envoi et le délai de livraison sur Vinted ?
 
 Toute commande passée avec le bouton « Acheter » et un mode d'envoi intégré comprend un bordereau que Vinted génère pour le transporteur choisi par l'acheteur. Le vendeur le trouve dans la conversation avec l'acheteur et par e-mail, avec les instructions : l'imprimer, ou présenter un code au point de dépôt. Ce bordereau « doit être utilisé », prévient Vinted : avec un autre bordereau ou un autre mode d'envoi, la commande est annulée automatiquement. Une fois l'article vendu, le transporteur, le type de bordereau (imprimable ou numérique), l'adresse de livraison et la taille du colis ne changent plus ; la seule solution est d'annuler et de recommander.
 
@@ -76,7 +76,7 @@ Pas sûr du transporteur ? Tape ton numéro ici :
 
 Plus de formes dans [à quoi ressemble un numéro de suivi](guide:tracking-number-formats), et où le trouver dans [où trouver son numéro de suivi](guide:find-tracking-number).
 
-## Pourquoi mon numéro de suivi Vinted a-t-il changé ?
+## QR code Chronopost ou Vinted Go : pourquoi le numéro de suivi Vinted change-t-il ?
 
 En général, parce qu'un code est devenu un bordereau, ou que le colis a pris un chemin plus long :
 
@@ -98,7 +98,7 @@ Chaque silence a sa raison :
 
 Plus d'explications dans [pourquoi un suivi ne bouge plus](guide:tracking-not-updating).
 
-## Combien de temps le point relais garde-t-il mon colis Vinted ?
+## Combien de temps a-t-on pour récupérer un colis Vinted en point relais ou consigne ?
 
 Ça dépend du transporteur : la date limite figure en général dans son message, avec ton code de retrait. Vinted prévient que « certains transporteurs ne stockent les colis que pendant 2 jours calendaires » avant de les renvoyer au vendeur. Vinted Go te laisse 7 jours, sans prolongation possible.
 

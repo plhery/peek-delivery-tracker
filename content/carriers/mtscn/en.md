@@ -1,12 +1,12 @@
 ---
 title: Meiteshun tracking: AMTS numbers, scans and who to ask
-description: Track a Meiteshun Logistics (美特顺) parcel from Shenzhen: what an AMTS number looks like, what its steps mean and why its Delivered step can be written in advance.
+description: Track a Meiteshun Logistics (MTSCN / 美特顺) parcel from Shenzhen: AMTS…FS numbers, why Delivered can be predicted in advance, last-mile hand-over and contact.
 slug: meiteshun-tracking
 published: 2026-10-28
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Meiteshun Logistics (美特顺物流, 深圳市美特顺物流有限公司) is a forwarder in Shenzhen, China. Its numbers start with AMTS and end with FS: if the shop that sent your order gave you one, paste it in the box above. Read Meiteshun's tracking with care: its system writes a parcel's whole journey, delivery included, when the order is created, so a "Delivered" there doesn't prove your parcel arrived.
+Meiteshun Logistics (MTSCN, 深圳市美特顺物流有限公司) is a cross-border forwarder in Shenzhen, China, whose waybills run `AMTS`, nine digits and `FS`. Paste your `AMTS…FS` number in the box above to track your order and filter out advance-written steps: Meiteshun's tracker writes a parcel's entire timeline—including `Delivered`—at order creation, so a `Delivered` line on its page does not by itself prove your parcel arrived.
 
 ## Meiteshun tracking number: what it looks like
 
@@ -87,25 +87,25 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ## Questions about Meiteshun tracking
 
-### What is Meiteshun Logistics (美特顺)?
+### What is Meiteshun Logistics (MTSCN / 美特顺)?
 
-It is 深圳市美特顺物流有限公司, Shenzhen Meiteshun Logistics, a forwarder in Shenzhen, China. Its waybill numbers are AMTS, nine digits and FS, and the service name on its records is MTS全球小包.
+It is 深圳市美特顺物流有限公司 (Shenzhen Meiteshun Logistics), a freight forwarder in Shenzhen, China. Its waybill numbers are `AMTS`, nine digits and `FS`, and its records show the service name MTS全球小包.
 
-### Is an AMTS number a China Post number?
+### Is an AMTS…FS tracking number from China Post?
 
-No. AMTS, nine digits and FS is Meiteshun's layout. China Post's international numbers are two letters, nine digits and CN.
+No. `AMTS`, nine digits and `FS` is Meiteshun's format (eight digits means a missing digit). China Post's international numbers are two letters, nine digits and `CN`.
 
-### Why does Meiteshun say my parcel was delivered when it wasn't?
+### Why does Meiteshun say "Delivered" when my parcel hasn't arrived?
 
-Most likely because Meiteshun's system writes every step of an order, delivery included, when the order is created. A "Delivered" written that way is a forecast, not a scan. Tell the seller the parcel hasn't arrived.
+Meiteshun's Hualei tracker writes an entire planned timeline—delivery included—when the order is created. Peek holds back those predicted steps so they don't trigger false alerts; tell the seller the parcel hasn't arrived and ask for the local carrier's number.
 
-### Who delivers Meiteshun parcels in my country?
+### Who delivers Meiteshun (MTSCN) parcels in my country?
 
-Meiteshun's steps don't say: none names a delivery company. Its tracking page can show the delivering company's number under 渠道转单号 (transfer number); if it doesn't, ask the seller which company delivers your order and for its tracking number.
+Meiteshun's steps never name the local delivery company. Check Meiteshun's tracking page under 渠道转单号 (transfer number) or 跟踪号码 for a second tracking number, or ask the seller which company delivers locally and add that number to Peek.
 
-### Who do I contact about a missing Meiteshun parcel?
+### How do I contact Meiteshun Logistics about a missing parcel?
 
-The seller you ordered from: it booked the parcel with Meiteshun. If neither the seller nor the marketplace helps, 17TRACK lists an email address for Meiteshun, szmeiteshun@163.com.
+Start with the seller (or marketplace), since the seller booked the shipment. If neither responds, 17TRACK lists szmeiteshun@163.com and website mtswl.com.cn (Shenzhen Longgang office, no phone number); include your `AMTS` number and the seller's name.
 
 :::sources
 - [17TRACK: MTSCN tracking](https://www.17track.net/en/carriers/mtscn) – email address, website and Shenzhen office listed for Meiteshun, no phone

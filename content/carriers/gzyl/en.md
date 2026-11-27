@@ -1,12 +1,12 @@
 ---
 title: GZYL tracking: YL…YQ numbers, scans and who to ask
-description: Track a GZYL (广州云链) parcel from Guangzhou: what a YL…YQ number looks like, what its scans mean and why its Delivered step can be written in advance.
+description: Track a GZYL (广州云链, Guangzhou Yunlian) parcel: YL…YQ numbers, scan meanings, why Delivered can be scheduled ahead, Swiss Post hand-over and who to contact.
 slug: gzyl-tracking
 published: 2026-10-30
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-GZYL (广州云链, Guangzhou Yunlian) is 广州云链货运代理有限公司, a freight forwarder in Guangzhou, China. If a Chinese shop sent your order with GZYL, your number is YL, ten digits and YQ: paste it in the box above. GZYL's website, yunlianhouyun.com, is in Chinese, and its parcel search (小包查询) opens a tracker that runs on a bare server address. Read that tracker with care: GZYL writes much of a parcel's journey in advance, so a step there, even `Delivered`, isn't always a scan.
+GZYL (广州云链, Guangzhou Yunlian, 广州云链货运代理有限公司) is a Guangzhou freight forwarder whose waybills follow `YL`, ten digits and `YQ`. Paste your `YL…YQ` number in the box above to track it in English and filter out scheduled predictions: GZYL's tracker (linked from yunlianhouyun.com) can write a parcel's timeline ahead of time, so a `Delivered` line there isn't always a real delivery scan.
 
 ## GZYL tracking number: what it looks like
 
@@ -94,19 +94,23 @@ Apart from a hand-over to Swiss Post, Peek stays with GZYL: if the seller gives 
 
 ### What is GZYL (广州云链)?
 
-广州云链货运代理有限公司 (Guangzhou Yunlian), a freight forwarder in Guangzhou, China, with a website in Chinese, yunlianhouyun.com. Its waybills are YL, ten digits and YQ.
+GZYL is 广州云链货运代理有限公司 (Guangzhou Yunlian), a freight forwarder in Guangzhou, China, with a Chinese-language website at yunlianhouyun.com. Its waybills use the 14-character format `YL`, ten digits and `YQ`.
 
-### Is every YL…YQ number a GZYL number?
+### Is every YL…YQ tracking number from GZYL?
 
-Not for sure. YL, ten digits and YQ is GZYL's layout, and no other carrier in Peek's catalog uses it. Peek counts a number that starts YL738 as GZYL's from its shape alone; for any other, it asks GZYL's tracker first. With nine or eleven digits, it isn't GZYL's layout.
+Not automatically. `YL`, ten digits and `YQ` is GZYL's layout—Peek names GZYL immediately for `YL738…YQ` numbers and checks GZYL's tracker for other `YL…YQ` codes. Nine or eleven digits don't match GZYL, and `GZXH…YQ` belongs to Xinghe Freight.
 
-### Why does GZYL say my parcel was delivered when it wasn't?
+### Why does GZYL show "Delivered" when nothing arrived?
 
-It may be part of GZYL's plan. GZYL writes much of a parcel's timeline ahead and ends it in a `Delivered`, and such steps are a plan, not scans. Peek never counts such steps from GZYL's tracker as scans, `Delivered` included, and under a "Delivered" it does show, it adds that GZYL's tracking follows a fixed schedule. Tell the seller the parcel hasn't arrived and ask which company delivers it.
+GZYL often writes much of a parcel's timeline ahead of time and adds `Delivered` on a fixed schedule, not from a local delivery scan. Peek holds back predicted steps and warns that GZYL updates on a fixed schedule—tell the seller nothing arrived and ask which company delivers it.
 
 ### Who delivers GZYL parcels in my country?
 
-Peek doesn't know: GZYL's steps in your country name no company. GZYL's tracking page can show the delivering company's number under 渠道转单号 (transfer number); if it doesn't, ask the seller which company delivers your order and for its tracking number. Add that number to Peek as a separate parcel. Only in Switzerland and Liechtenstein can Peek hand a GZYL parcel over to Swiss Post itself.
+GZYL's scans never name the local delivery company (only in Switzerland and Liechtenstein can Peek hand a parcel over to Swiss Post). Check 渠道转单号 (transfer number) on GZYL's page or ask the seller for the local carrier and its tracking number.
+
+### How do I contact GZYL about a lost or delayed parcel?
+
+Contact the seller or marketplace first. Although yunlianhouyun.com lists a Chinese 24-hour hotline, WeChat and after-sales QQ for business clients (sellers), GZYL publishes no support channel for recipients.
 
 :::sources
 - [广州云链货运代理有限公司 (GZYL): Home](http://yunlianhouyun.com/) – company name, Chinese site, parcel search (小包查询) on GZYL's tracker

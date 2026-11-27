@@ -1,12 +1,12 @@
 ---
 title: GOFO Italy tracking: GFIT numbers, statuses and complaints
-description: Track a GOFO parcel in Italy: what GFIT and CIIT numbers look like, what GOFO's Italian statuses mean, and how to complain when a parcel is late or lost.
+description: Track a GOFO Italy (CIRRO Parcel Italy) parcel: GFIT and CIIT numbers, Italian status translations, missed deliveries, EU 30-day rule and AGCOM complaints.
 slug: gofo-italy-tracking
 published: 2026-10-11
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-GOFO Italy is the Italian network of GOFO, a parcel carrier with networks in several countries, and it delivers parcels within Italy. Peek's carrier list also knows it as CIRRO Parcel Italy. Its tracking numbers start with `GFIT` or `CIIT`: track one on GOFO's Italian tracking page, on gofo.com, or paste it in the box above. No number yet? See [how to find a tracking number](guide:find-tracking-number).
+GOFO Italy (also listed as CIRRO Parcel Italy, operated by GOFO Italia s.r.l.) is GOFO's domestic delivery network across Italy. Track a `GFIT` or `CIIT` parcel on GOFO Express's Italian tracker on gofo.com, or paste the tracking number in the box above. If you don't have a number yet, see [how to find a tracking number](guide:find-tracking-number).
 
 ## GOFO tracking number: what it looks like
 
@@ -78,21 +78,25 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ## Questions about GOFO tracking
 
-### Where is my GOFO package?
+### How do I track a GOFO Italy parcel with a GFIT or CIIT number?
 
-The latest line of the tracking says. `Arrivato alla struttura di destinazione regionale GOFO` means it's at GOFO's regional facility for your area, `Preparazione alla consegna` that it's being readied for the courier, and `Il corriere è fuori per la consegna` that it's with the courier. If only the preparation line shows, the sender hasn't handed it to GOFO yet.
+Paste your `GFIT` or `CIIT` number (13 or 14 digits) in the box above or enter it on gofo.com. Peek shows the delivery stage while keeping GOFO's Italian scan lines—for example, `Il corriere è fuori per la consegna` means out with the courier.
 
-### Is GOFO legit?
+### Is GOFO Express Italy the same as CIRRO Parcel Italy?
 
-GOFO's Italian company is GOFO Italia s.r.l., with its registered office in Lainate, in the province of Milan. AGCOM, Italy's postal regulator, records in its Determina n. 12/26/DSP of 2 September 2026 that on 17 June 2026 it notified the company of three alleged violations: carrying out postal activity in services within the universal service without the required individual licence, without a service charter (Carta dei servizi) and without dispute-resolution procedures for users. According to the determina, the company admitted the charges about the service charter and the dispute procedures and paid the penalty for those two in the reduced amount, so AGCOM closed that part of the proceeding. The company disputed the charge that its authorisation was inadequate, and on that part the proceeding was to follow its ordinary course.
+Yes, for tracking in Italy: Peek's carrier list indexes GOFO Italy under the alternate name CIRRO Parcel Italy. A label mentioning only "Cirro" may also belong to GOFO's French or Dutch network.
 
-### Is GOFO the same as CIRRO Parcel?
+### What does "Il pacco è stato restituito al centro di smistamento" mean?
 
-In Italy, for tracking purposes, yes: Peek's carrier list gives GOFO Italy the other name CIRRO Parcel Italy. A tracker that says only "Cirro" may mean GOFO's Italian, French or Dutch network.
+It means the parcel went back to GOFO's sorting centre after a failed delivery attempt (such as `Destinatario assente`), not that it is already returning to the shop. Peek marks it "Needs attention", whereas `Restituito` means returning to sender.
 
-### What can I do if my GOFO parcel is lost?
+### Is GOFO Italy legit?
 
-Contact the shop. Under EU rules it answers for the delivery until the parcel reaches you, so if it can't prove delivery, it must send the item again or refund you. If the carrier is at fault, the AGCOM complaint path above applies. More in [lost parcels](guide:lost-parcel).
+GOFO's Italian company is GOFO Italia s.r.l., registered in Lainate (Milan). In Determina n. 12/26/DSP (2 September 2026), postal regulator AGCOM recorded three alleged violations notified on 17 June 2026; GOFO admitted and paid reduced penalties on the service-charter and dispute-procedure charges while contesting the authorisation charge.
+
+### What can I do if my GOFO Italy parcel is late, damaged or lost?
+
+Start with the shop: under EU rules it must deliver within 30 days unless otherwise agreed and prove delivery if a parcel marked `Consegnato` never arrived. Against the carrier itself (for parcels up to 31.5 kg), send a written complaint (45-day reply window), then conciliation (60 days) and AGCOM's Formulario CP (90 days), or call AGCOM on 800.185060 / 081.750750. More in [lost parcels](guide:lost-parcel).
 
 :::sources
 - [AGCOM: Determina n. 12/26/DSP](https://www.agcom.it/sites/default/files/provvedimenti/determina/2026/Determina%20arch%20parziale%2012_26_DSP%20-%20Gofo%20pdf.pdf) – GOFO Italia s.r.l., registered office in Lainate, AGCOM's 2026 proceeding and the penalty paid in the reduced amount (2 September 2026)

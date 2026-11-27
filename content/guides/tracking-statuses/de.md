@@ -1,13 +1,13 @@
 ---
 title: Sendungsstatus: Bedeutung aller Meldungen erklärt
-description: Von „elektronisch angekündigt“ bis „zugestellt“: was die Statusmeldungen von DHL, Hermes, DPD und der Post in Österreich und der Schweiz bedeuten.
+description: Sendungsstatus verstehen: Was „elektronisch angekündigt“, „in transit“, „in Zustellung“, „abholbereit“ und „zugestellt“ bei DHL, Hermes, DPD und Post heißen.
 slug: sendungsstatus-bedeutung-aller-meldungen
 picture: Eine kurvige Route mit abgehakten Stationen (Strichcode-Etikett, Depot, Flugzeug), ein Lieferwagen an der aktuellen Station, weiter vorn ein Haus und Pip, der eilig mitläuft.
 published: 2026-10-09
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Ein Sendungsstatus fasst den letzten Scan des Paketdienstes in ein paar Worten zusammen, und meistens musst du nichts tun. „Elektronisch angekündigt“ heißt, dass der Paketdienst dein Paket noch gar nicht hat, „in transit“ oder „unterwegs“, dass es irgendwo zwischen zwei Scans steckt, und „in Zustellung“, dass es heute im Zustellfahrzeug liegt. Gefragt bist du nur in wenigen Fällen: nach einem verpassten Zustellversuch, wenn ein Paket zur Abholung bereitliegt, wenn der Zoll etwas verlangt und wenn „zugestellt“ dasteht, aber nichts da ist.
+Ein Sendungsstatus zeigt den letzten Scan bei DHL, Hermes, DPD, Österreichischer oder Schweizerischer Post — meistens musst du nichts tun. „Elektronisch angekündigt“ heißt, der Paketdienst hat das Paket noch nicht; „in transit“ oder „unterwegs“, es steckt zwischen zwei Scans; „in Zustellung“, es liegt heute im Zustellfahrzeug. Handeln musst du nur nach einem verpassten Versuch, bei „abholbereit“, bei einer Zoll-Aufforderung oder wenn „zugestellt“ ohne Paket erscheint.
 
 ## Welche Stationen durchläuft ein Paket?
 
@@ -24,7 +24,7 @@ Jedes Paket kommt an denselben Stationen vorbei, ein Paket aus dem Ausland zusä
 - home | Zugestellt | Übergeben oder dort abgelegt, wo es als zugestellt gilt.
 :::
 
-## Wie heißen die Meldungen bei DHL, Hermes und der Post in Österreich und der Schweiz?
+## Was bedeuten die Statusmeldungen bei DHL, Hermes, DPD und der Post?
 
 Dieselben Schritte, andere Worte:
 
@@ -61,7 +61,7 @@ Zwischen zwei Scans ist Funkstille normal:
 
 [DPD](carrier:dpd-de) braucht innerhalb Deutschlands in der Regel 1 bis 2 Werktage ab der Übergabe; bei Hermes kann es ab Versand bis zu 3 Werktage dauern. Der DPD-Status `Das Paket ist unterwegs` heißt, dass das Paket abgeholt oder im Paketshop abgegeben wurde und im Lkw zum ersten Depot fährt. Bleibt es länger still, als der Paketdienst angibt? Dann lies, [warum sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating).
 
-## Pakete aus dem Ausland: Flug, Zoll und Paketdienst vor Ort
+## Was bedeuten Flug-, Zoll- und Auslandsstatus in der Sendungsverfolgung?
 
 - **Ursprungsland verlassen.** DHL bucht den Container mit deinem Paket auf ein Flugzeug, ein Schiff oder einen Zug und nennt dann den Transport, etwa `LH 400` für einen Lufthansa-Flug. Bei Paketen nach Deutschland heißt `Die Sendung befindet sich im Weitertransport zu DHL`, dass DHL das Paket noch nicht hat; bis zum nächsten Status können mehrere Tage vergehen. Die Prüfung bei `Die Sendung wird im Ursprungsland zusätzlich geprüft.` dauert mindestens 2 Werktage. Die Schweizerische Post meldet `Zustelldatum unbekannt`, wenn die Sendung aus dem Ausland kommt, ins Ausland geht oder nicht wie angekündigt eintraf. Und bei der Österreichischen Post heißt `Sendung in Verteilung` auf einem Paket aus dem Ausland: Es ist schon in Österreich.
 - **Zoll.** Bei DHL beginnt die Verzollung mit `Der Zollabfertigungsprozess für den Import ins Zielland/Zielgebiet wurde begonnen.` und kann je nach Unterlagen einige Werktage dauern. Peek zeigt bei solchen Meldungen „Beim Zoll“, bei der Österreichischen Post etwa bei `Sendung im Zollanmeldungsprozess. Weitere Info folgt.` DHL bittet, beim deutschen Zoll nicht nach dem Status zu fragen: Das Paket ist meist gar nicht dort. Bei der [Schweizerischen Post](carrier:swiss-post) folgt auf `Im Postverzollungsprozess` der Status `Vom Schweizer Zoll freigegeben`, dann geht das Paket in die Inlandzustellung. Die Schweizerische Post nennt „drei bis vier Arbeitstage“, wenn alle Angaben vollständig und korrekt sind. Eine allgemeine Höchstdauer nennen die Paketdienste nicht. Handeln musst du nur auf Aufforderung, zum Beispiel bei `Die Sendung wurde dem Zoll übergeben. Ein Schreiben mit Ihren Zollinformationen ist auf dem Weg zu Ihnen.` Dann kommt ein Brief mit allem, was du brauchst, um das Paket beim Zollamt abzuholen. Ist er am dritten Werktag noch nicht da, melde dich bei DHL. Mehr dazu: [Paket beim Zoll](guide:customs).
@@ -127,7 +127,7 @@ Auch DHL und die Post sprechen meist von kurzen Verzögerungen. `Verzögerung we
 
 Genauer hinschauen solltest du, wenn es um die Adresse geht. `Leider war eine Zustellung der Sendung heute nicht möglich, da der Empfänger nicht ermittelt werden konnte.` heißt bei DHL: Die Adresse wird geprüft, in Peek steht „Zustellversuch“. Lässt sie sich nicht zuordnen, geht das Paket an den Absender zurück; dann wendest du dich für eine neue Zusendung und einen Adressabgleich an ihn.
 
-## Rücksendung an Absender: Warum, und lässt sie sich stoppen?
+## Paket geht zurück an Absender: Warum, und lässt es sich stoppen?
 
 Die Paketdienste nennen diese Gründe: nicht rechtzeitig abgeholt, Adresse falsch oder unvollständig, Annahme verweigert, Zollpapiere fehlen oder Einfuhrabgaben nicht bezahlt. Die Schweizerische Post führt außerdem einen nicht angeschriebenen Briefkasten und einen abgelaufenen Nachsendeauftrag auf. Manche Meldungen sagen nicht deutlich, dass das Paket zurückgeht:
 

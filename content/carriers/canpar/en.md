@@ -1,12 +1,12 @@
 ---
 title: Canpar tracking: numbers, statuses and missed deliveries
-description: Track a Canpar Express parcel in Canada: where the tracking number is, what Canpar's statuses mean, SMARTSpot pickup, missed deliveries and how to reach Canpar.
+description: Track a Canpar Express parcel in Canada: 22-character barcode and W notice numbers, delivery hours, 5-day SMARTSpot pickup, claims and 1-800-387-9335 phone.
 slug: canpar-tracking
 published: 2026-10-15
-updated: 2026-10-27
+updated: 2026-11-27
 ---
 
-Canpar Express is a Canadian parcel courier, owned by TFI International, that delivers across Canada. Track a parcel with its barcode number on [canpar.com](https://www.canpar.com/en/tracking/track.htm) or by pasting it in the box above. The shop gives you that number in its shipping email or on your order page, and it's printed on the parcel's label.
+Canpar Express (owned by TFI International) is a private Canadian parcel courier with over 800 SMARTSpot pickup points across Canada. Track a parcel on [canpar.com](https://www.canpar.com/en/tracking/track.htm) with its 22-character barcode or `W` delivery notice number, or paste it in the box above. You'll find the barcode in the shop's shipping email, on your order page or on the shipping label.
 
 ## Canpar tracking number: format and where to find it
 
@@ -98,25 +98,25 @@ Peek can notify you of "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about Canpar tracking
 
-### How many digits is a Canpar tracking number?
+### What does a Canpar tracking number or W delivery notice number look like?
 
-Current numbers are one letter followed by 21 digits, such as the invented `D482917364058291736405`. Canpar's FAQ also lists shorter ones, 8 to 20 digits, which its own tracker finds with the destination postal code. Peek takes them too: pick Canpar with "Change" and give the postal code if Peek asks for it.
+Current Canpar barcodes are one letter (C, D, K, L, S, U, X or Z) followed by 21 digits (22 characters total), while older barcodes run 8 to 20 digits (tracked with your postal code). A missed-delivery card carries a `W` number (`W` plus 8 or 9 digits) that shows which SMARTSpot holds your parcel.
 
-### Does Canpar deliver on weekends?
+### How long does Canpar hold a parcel at a SMARTSpot?
 
-Usually not: Canpar delivers Monday to Friday. During peak season it says weekend deliveries may happen.
+After a missed home delivery, your parcel is ready at the designated SMARTSpot after 12pm the next business day and held for up to 5 business days. Bring ID showing the delivery address, or give someone else a completed Authorization Notice.
 
-### How late does Canpar deliver?
+### Does Canpar deliver on weekends, and how late do drivers deliver?
 
-Canpar's FAQ says until 7pm at home addresses and 5pm at businesses, but also that a parcel out for delivery is attempted between 9am and 6pm. It can't give a smaller window.
+Canpar normally delivers Monday to Friday, with weekend deliveries possible during peak season. Its FAQ cites home deliveries until 7pm (businesses 9am to 5pm), and 9am to 6pm once out for delivery, without narrow time slots.
 
 ### Is Canpar the same as Canada Post?
 
-No. Canpar is a private courier owned by TFI International, with its own terminals and SMARTSpots; [Canada Post](carrier:canada-post) is a separate carrier with its own tracking.
+No. Canpar Express is a private courier owned by TFI International with its own terminals and SMARTSpots, separate from [Canada Post](carrier:canada-post) and its tracking system.
 
-### How long does Canpar take to deliver?
+### What is Canpar's phone number and claim deadline?
 
-It depends on the service and on where the parcel starts and ends. Canpar's Transit Time Calculator gives the time for a route, and your tracking shows the expected day.
+Call 1-800-387-9335 (Monday to Friday, 8am to 8pm EST; Quebec 8am to 5pm EST) or use live chat on canpar.com (10am to 7pm EST). Report damaged parcels within 60 days of delivery and lost parcels within 180 days of shipping after opening a trace.
 
 :::sources
 - [Canpar: Frequently Asked Questions](https://www.canpar.com/en/support/faqs.htm) – number format, no results, in transit, attempts, SMARTSpot hold, hours, weekends, redirect, extra attempt, PO boxes, claims

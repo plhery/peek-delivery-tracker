@@ -1,15 +1,15 @@
 ---
 title: Seguimiento de pedidos Temu: número, reparto y retrasos
-description: Por qué el número de pedido de Temu no sirve para seguir el paquete, qué empresa puede repartirlo en España y cómo lo sigue Peek cuando cambia de empresa.
+description: Rastrear pedido de Temu en España: dónde ver el número real, si reparte CTT Express o Correos, por qué no actualiza al principio, fecha estimada y tasas UE.
 slug: seguimiento-pedido-temu
 picture: Una pila de paquetes pequeños saliendo de la bodega de un avión, una furgoneta y Pip contándolos.
 published: 2026-10-17
-updated: 2026-11-19
+updated: 2026-11-27
 ---
 
-Para seguir tu pedido de Temu necesitas el número de seguimiento de la empresa de reparto, no el número de pedido de Temu («PO» y 20 cifras). Pégalo en [Peek](/), que encuentra la empresa entre más de 4500, de CTT Express a Correos; si la primera empresa indica quién toma el relevo en España, Peek pasa a la nueva. Un número recién creado puede no mostrar nada durante uno o dos días: la etiqueta existe antes de que la empresa tenga el paquete.
+Para rastrear un pedido de Temu en España y ver cuándo llega o si está en reparto, necesitas el número de seguimiento del transportista (como CTT Express o Correos), no el número de pedido de Temu que empieza por «PO». Pégalo en [Peek](/), que identifica la empresa entre más de 4500, muestra la fecha de entrega prevista cuando el transportista la da y pasa al transportista local en España cuando cambia de manos. Un número recién creado puede tardar uno o dos días en mostrar el primer escaneo.
 
-## ¿El número de pedido de Temu es un número de seguimiento?
+## ¿Por qué el número de pedido de Temu (PO) no sirve para rastrear?
 
 No. El número de pedido de Temu empieza por «PO» y lleva 20 cifras (`PO-000-00000000000000000`), pero la empresa de reparto no lo conoce. Peek lo reconoce por esa forma y lo deja aparte, con un aviso que te dice dónde mirar: en «Tus pedidos», toca «Rastrear» junto al pedido, y Temu muestra un número de seguimiento por paquete.
 
@@ -22,7 +22,7 @@ Si pegas un mensaje entero con los dos números, Peek toma el de seguimiento y d
 
 Un número de tres letras, una `U` y siete cifras, como `TEMU1234565` (inventado), tampoco es un número de seguimiento: es el de un contenedor marítimo, y ninguna empresa de reparto sigue un paquete con él. El `TEMU` del principio no tiene que ver con la tienda: en el registro de códigos de propietario de contenedores que lleva el Bureau International des Containers (BIC), `TEMU` es de Textainer, una empresa de alquiler de contenedores. Si añades uno y ninguna empresa de reparto responde, Peek dice «Parece el número de un contenedor marítimo. El número de seguimiento está en el correo de envío o en la página del pedido.» y te ofrece «Elegir transportista».
 
-## ¿Qué empresa reparte los paquetes de Temu en España?
+## ¿Quién reparte los pedidos de Temu en España (CTT Express o Correos)?
 
 Normalmente lo dice el número de seguimiento: el campo de arriba nombra la empresa a la que apunta su forma, o las pocas a las que puede pertenecer. Las formas que puedes encontrarte en España:
 
@@ -47,7 +47,7 @@ El número suele existir antes de que la empresa de reparto tenga el paquete. Ha
 
 Un paquete que viene de China en avión puede tardar mucho más: hasta 11 días sin un primer escaneo, y luego nada durante el vuelo. Si CTT Express muestra `En tránsito internacional. Pendiente de recepción en CTT Express`, el paquete viene del extranjero y aún no ha llegado a su red.
 
-## Paquete de Temu atascado, con retraso o sin llegar
+## ¿Cuánto tarda un pedido de Temu y qué hacer si va con retraso?
 
 Que un paquete pase días sin novedades es habitual en esta ruta. Por qué calla durante el vuelo y la aduana, y por qué a veces cambia de número: [seguimiento de paquetes de China](guide:tracking-from-china). Cuántos días sin novedades son normales, cuándo se da un paquete por perdido y si debes reclamar a la tienda o a la empresa de transporte: [el seguimiento no se actualiza](guide:tracking-not-updating).
 

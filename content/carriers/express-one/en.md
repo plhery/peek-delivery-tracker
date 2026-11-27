@@ -1,12 +1,12 @@
 ---
 title: Express One tracking: statuses, parcel points, contacts
-description: Track an Express One parcel in Hungary: where the number comes from, what the statuses mean, parcel points, lockers, missed deliveries and contacts.
+description: Track an Express One Hungary parcel: package ID, EXOHU status meanings, 2-hour delivery slots, Exopoint parcel points, missed deliveries and +36 1 8 777 400.
 slug: express-one-tracking
 published: 2026-10-13
-updated: 2026-10-26
+updated: 2026-11-27
 ---
 
-Express One Hungary is a Hungarian courier owned by [Austrian Post](carrier:austrian-post), delivering for online shops with around 700 couriers and over 2,300 parcel points and lockers. Track a parcel by its package ID on [tracking.expressone.hu](https://tracking.expressone.hu/) or paste it in the box above. The number comes in the email Express One sends once the parcel is registered and has reached it.
+Express One Hungary (an [Austrian Post](carrier:austrian-post) subsidiary) delivers online orders across Hungary with around 700 couriers and over 2,300 Exopoint parcel points and lockers. Track your shipment by package ID on [tracking.expressone.hu](https://tracking.expressone.hu/) or paste it in the box above. Express One emails your package ID once the sender registers and hands over the parcel.
 
 ## Express One tracking number
 
@@ -88,15 +88,23 @@ Express One's scans carry a time without a time zone: Peek reads them on the clo
 
 ### What does "shipment not yet handed over to EXOHU" mean?
 
-The sender has created the shipment, but Express One Hungary hasn't received the parcel yet. If it stays there for days, ask the shop.
+EXOHU is Express One Hungary. That line means the sender created the shipment details electronically, but Express One hasn't physically received the parcel yet—ask the shop if it stays there for days.
 
-### How long does an Express One parcel wait at a parcel point?
+### What delivery window does Express One give, and can I redirect my parcel?
 
-Up to a week, at any hour, says Express One's parcel-point page; its blog posts give 2 to 7 days depending on the point, and round-the-clock access only at EXOBOX and Alzabox lockers.
+The pre-notice gives a 4-hour interval and the morning message gives an indicative 2-hour window plus live stop count. On the first delivery day, you can use the Modification button up to an hour before arrival to change the date, address or divert to a parcel point.
+
+### How long does Express One hold a parcel at an Exopoint or after a missed delivery?
+
+After a missed attempt, Express One retries once for free and holds the parcel until the 5th working day at most. At Exopoint parcel points and lockers, Express One's parcel-point page states up to a week, while its blog posts cite 2 days at Alzabox, 3 days (72 hours) at EXOBOX and up to 7 days at Packeta points.
+
+### How do I contact Express One Hungary customer service?
+
+Call +36 1 8 777 400 (ugyfelszolgalat@expressone.hu) for domestic parcels, +36 1 8 777 410 (intcs@expressone.hu) for international inquiries, or +36 1 8 777 470 (karugy@expressone.hu) for damage claims, Monday to Friday 8 am to 5 pm Hungarian time.
 
 ### Is Express One in Slovakia or Slovenia the same company?
 
-No. They also belong to Austrian Post but are separate companies; this page and Peek's "Express One" cover the Hungarian one.
+No—while those companies also belong to Austrian Post, they operate separately. This page and Peek's "Express One" carrier cover Express One Hungary.
 
 :::sources
 - [Express One: Parcel Tracking](https://expressone.hu/en/csomagkovetes) – courier's stops, call centre, chatbot

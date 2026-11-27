@@ -1,12 +1,12 @@
 ---
 title: JRT Sendungsverfolgung: JRT…MM-Nummer, Flüge und DHL
-description: JRT-Paket (今日通) aus Xiamen verfolgen: wie die JRT…MM-Nummer aussieht, was die chinesischen und englischen Schritte heißen und wer zustellt.
+description: JRT Sendungsverfolgung (今日通, Jinritong) auf Deutsch: JRT…MM-Nummer, chinesische & englische Flug-Scans, Übergabe an DHL, UPS oder Swiss Post und Kontakt.
 slug: jrt-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-JRT (今日通, Jinritong) ist 厦门今日通商贸有限公司, ein Spediteur aus Xiamen in China. Hat ein Shop in China deine Bestellung mit JRT verschickt, bekommst du eine Nummer, die mit JRT beginnt und auf MM endet: Füg sie oben ins Feld ein. JRTs Tracking-Seite zeigt den Weg des Pakets von China über den Flug und den Zoll bis zur Firma, die zustellt, und übernimmt deren Scans: bei Sendungen nach Europa die von DHL, bei Sendungen in die USA die von UPS. Auf JRTs FedEx-Linie nach Irland übernimmt FedEx die letzte Strecke, auf seiner Linie nach Spanien CTT Express, auf der nach Polen InPost und auf der nach Mexiko J&T Express Mexiko.
+JRT (今日通, Jinritong, 厦门今日通商贸有限公司) ist ein grenzüberschreitender Spediteur aus Xiamen in China, dessen Frachtbriefnummern aus `JRT`, zehn Ziffern und `MM` bestehen. Füge deine `JRT…MM`-Nummer oben ins Feld ein, um dein Paket von China über Flug und Zoll bis zur Zustellung zu verfolgen: Nach Europa endet JRT meist bei DHL (in der Schweiz teils bei der Schweizerischen Post), in den USA bei UPS, auf der Irland-Linie bei FedEx, in Spanien bei CTT Express, in Polen bei InPost und in Mexiko bei J&T Express.
 
 ## JRT Sendungsnummer: so sieht sie aus
 
@@ -150,21 +150,25 @@ Bei den Mitteilungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder �
 
 ## Fragen zur JRT Sendungsverfolgung
 
-### Was ist JRT (今日通)?
+### Was ist JRT (今日通 / Jinritong) und wie sieht die JRT…MM-Nummer aus?
 
-厦门今日通商贸有限公司 (Xiamen Jinritong), ein Spediteur aus Xiamen in China. Seine Frachtbriefnummern bestehen aus JRT, zehn Ziffern und MM, und seine Tracking-Seite läuft auf Hualei (华磊), einer Plattform, die auch andere chinesische Spediteure nutzen.
+JRT ist 厦门今日通商贸有限公司 (Xiamen Jinritong), ein Spediteur aus Xiamen in China. Seine Frachtbriefnummern haben 15 Zeichen (`JRT`, zehn Ziffern und `MM`; neun Ziffern bedeuten eine fehlende Ziffer), und das Tracking läuft auf der Hualei-Plattform (华磊).
 
-### Warum zeigt JRT mein Paket als zugestellt, obwohl es nicht da ist?
+### Warum zeigt JRT „delivered“, obwohl mein Paket nicht da ist?
 
-Wegen JRTs Übersetzungen. `Cargo delivered to airport` heißt, dass JRT das Paket für den Flug am Flughafen abgegeben hat, und `Delivered to service provider` oder `Delivery to final service provider`, dass es an die Firma übergeben ist, die zustellt. Keine dieser Zeilen ist eine Zustellung an dich, und Peek zeigt dafür „Unterwegs“.
+Wegen JRTs englischen Übersetzungen: `Cargo delivered to airport` bedeutet Übergabe am Flughafen für den Flug, und `Delivered to service provider` oder `Delivery to final service provider` heißt Übergabe an den lokalen Zusteller. Keine dieser Zeilen ist eine Zustellung an dich, und Peek zeigt dafür „Unterwegs“.
 
 ### Wer stellt JRT-Pakete in Deutschland, Österreich und der Schweiz zu?
 
-JRTs Linie nach Europa endet bei DHL in Deutschland, und JRTs Tracking-Seite übernimmt die Scans von DHL. In Deutschland stellt DHL zu, in Österreich und der Schweiz DHL oder ein Partner, den DHLs Sendungsverfolgung nennt. Manche Linien in die Schweiz enden bei der Schweizerischen Post: Nennt JRTs Datensatz sie als Linie und eine ihrer Nummern, übergibt Peek ein Paket in die Schweiz oder nach Liechtenstein dorthin.
+JRTs Europa-Linie endet in Deutschland bei DHL, dessen Scans JRT übernimmt. In Österreich und der Schweiz stellt DHL oder ein Partner aus DHLs Sendungsverfolgung zu; manche Linien in die Schweiz und nach Liechtenstein übergeben direkt an die Schweizerische Post.
 
-### Wen frage ich, wenn mein JRT-Paket fehlt?
+### Warum zeigt Peek manchmal weniger Schritte als JRT oder andere Tracker?
 
-Den Shop, bei dem du bestellt hast: Er hat den Versand bei JRT gebucht. Eine Website oder Kontaktdaten von JRT außer der Tracking-Seite kennt Peek nicht.
+Peek hält vorab geschriebene Schritte zurück, die mehr als 12 Stunden vor ihrer angegebenen Uhrzeit erzeugt wurden, und listet sie nur ausgegraut unter „Anzeigen“, damit Vorhersagen keine falschen Zustellmeldungen auslösen.
+
+### Wie kontaktiere ich JRT, wenn mein Paket fehlt oder hängt?
+
+Wende dich an den Online-Shop oder Marktplatz, da der Shop den Versand bei JRT gebucht hat. Außer der Tracking-Seite unter einer IP-Adresse kennt Peek keine Website, Telefonnummer oder E-Mail-Adresse von JRT für Empfänger.
 
 :::sources
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Firmenname und Initialen, Hualei-Plattform, Tracking-Seite unter einer IP-Adresse über unverschlüsseltes HTTP, ihre Links und kein veröffentlichter Link, JRT…MM- und UP-Form, ein O nach JRT als JRT gelesen, Suche nach Nummer oder Referenz mit Bindestrichen, Wortlaute der Zeilen und ihre Phasen, das Englisch für chinesische Zeilen, die chinesischen Zeilen nach Europa von der Landung bis zur Übergabe in Deutschland, von DHL übernommene Zeilen und die Filiale der Deutschen Post, die Linie in die USA und die übernommenen UPS-Zeilen, FedEx-Linie und ihre Scans, die Nummer der zustellenden Firma im Datensatz nach der Übergabe, Übergabe an DHL, FedEx, die Schweizerische Post und die Post des Ziellands, Pekinger Zeit und DHLs Ortszeit für seine Zeilen, übernommene Zeilen von J&T Express Mexiko auf der Linie nach Mexiko und ihre Uhrzeit in Mexiko-Stadt, abgeschlossene Verzollung im Zielland und DHLs Zeilen zu Ankunft im Zielland, Paketzentrum für die Einfuhr und Zustellfahrzeug (9. November), DHLs Zeilen zu „nicht angetroffen“ und zur Abholung im Paketshop mit dem Text des Hilfelinks (10. November), die Zeile mit dem Flug, auf den das Paket verladen werden soll (13. November), die Grenze zwischen Kasachstan und Russland auf der Straßenroute, die Übergabe an den Zusteller auf der Fluglinie nach Spanien und UPS' Hinweis auf den Access Point (14. November), Partner von DHL im Zielland, Antwort bei unbekannter Nummer, was Peek zeigt, zurückhält und weglässt

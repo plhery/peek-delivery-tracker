@@ -1,15 +1,15 @@
 ---
 title: Zamówienie z MediaMarkt: śledzenie i przewoźnicy
-description: Kto doręcza zamówienie z MediaMarkt w Polsce (InPost, kurier, odbiór w markecie), gdzie śledzić paczkę i co zrobić, gdy nie dotarła.
+description: Śledzenie zamówienia MediaMarkt w Polsce: kiedy przychodzi numer przesyłki InPost, czasy dostawy (48 h / 29 min), zwroty 30–45 dni, reklamacje i kontakt.
 slug: sledzenie-zamowienia-mediamarkt
 picture: Płaskie pudło z telewizorem i mała paczka obok furgonetki kurierskiej, wesoły Pip i sklep z szyldem odbioru.
 published: 2026-10-17
-updated: 2026-11-09
+updated: 2026-11-27
 ---
 
-W Polsce MediaMarkt (mediamarkt.pl) wysyła paczki z InPostem: do Paczkomatu albo kurierem. W dniu nadania dostajesz od MediaMarkt numer przesyłki i śledzisz ją na stronie przewoźnika. Status zamówienia sprawdzisz też w mailu, na koncie i na czacie z asystentem eMMa. Produkty od sprzedawców Marketplace wysyła sam sprzedawca, na swoich warunkach.
+W Polsce MediaMarkt (mediamarkt.pl) wysyła zamówienia głównie przez InPost (Paczkomat 24/7 lub kurier, darmowa dostawa od 99 zł, zwykle w 48 godzin w dni robocze) albo do odbioru w markecie nawet w 29 minut. Numer przesyłki dostajesz mailem w dniu nadania, a status zamówienia sprawdzisz też na koncie, u asystenta eMMa na czacie lub SMS-em (735 702 222); zamówienia Marketplace wysyła bezpośrednio sprzedawca.
 
-## Który przewoźnik doręcza zamówienie z MediaMarkt?
+## Kto doręcza zamówienie z MediaMarkt w Polsce (InPost, odbiór w markecie, Marketplace)?
 
 To zależy od tego, jak odbierasz zamówienie i kto je sprzedaje. MediaMarkt dostarcza tylko na terenie Polski.
 
@@ -87,7 +87,7 @@ Gdy śledzenie stoi, zwykle chodzi o jedną z tych rzeczy:
 
 Kiedy czekanie jest jeszcze normalne: [dlaczego śledzenie przesyłki się nie aktualizuje](guide:tracking-not-updating).
 
-## Opcje i koszty dostawy w MediaMarkt
+## Ile kosztuje i ile trwa dostawa w MediaMarkt?
 
 Przy zamówieniu od 99 zł dostawa jest darmowa. Szczegóły dostawy znajdziesz w koszyku.
 
@@ -121,7 +121,7 @@ Według MediaMarkt ubezpieczenie przesyłki obejmuje pełną wartość zamówion
 
 **Zamówienie od sprzedawcy Marketplace.** Za dostawę odpowiada sprzedawca, nie MediaMarkt. Możesz napisać do niego bezpośrednio albo poprosić o pomoc obsługę MediaMarkt, która skontaktuje się ze sprzedawcą w twoim imieniu. Jeśli to nie pomoże, dalsze kroki prawne podejmujesz sam. Domyślnie sprzedawca ma 1 dzień na wysyłkę, a reklamacje dotyczące samej platformy operator rozpatruje w ciągu 14 dni.
 
-## Zwrot zamówienia z MediaMarkt
+## Jak zwrócić zamówienie z MediaMarkt (30 lub 45 dni)?
 
 Masz 30 dni od dostarczenia, a jako członek myMediaMarkt nawet 45 dni. Zwrot zgłaszasz online na zwroty.mediamarkt.pl, gdzie nadajesz paczkę do działu zwrotów MediaMarkt w Warszawie, albo oddajesz towar w dowolnym markecie MediaMarkt w Polsce. Odstąpienie od umowy możesz też zgłosić formularzem kontaktowym: wtedy odeślij towar w ciągu 14 dni. Według regulaminu bezpośredni koszt odesłania ponosisz ty, chyba że sprzedawca zgodził się go pokryć. Pieniądze, razem z kosztem dostawy do ciebie, wracają w ciągu 14 dni od otrzymania zgłoszenia tą samą metodą płatności, a przy płatności za pobraniem na konto, które wskażesz. MediaMarkt może jednak wstrzymać zwrot pieniędzy, dopóki nie dostanie towaru albo dowodu jego nadania.
 

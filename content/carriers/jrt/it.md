@@ -1,12 +1,12 @@
 ---
 title: JRT tracking: numero JRT…MM, stati, dogana e DHL
-description: Tracking JRT (今日通) per i pacchi da Xiamen: com'è fatto il numero JRT…MM, cosa vogliono dire le righe in cinese e in inglese e chi consegna in Italia.
+description: JRT tracking (今日通, Jinritong) in italiano: codice JRT…MM, scansioni in cinese e inglese, consegna in Italia con DHL/SDA (Poste Italiane), dogana UE e aiuto.
 slug: jrt-tracking
 published: 2026-10-31
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-JRT (今日通, Jinritong) è 厦门今日通商贸有限公司, uno spedizioniere di Xiamen, in Cina. Se un negozio cinese ha spedito il tuo ordine con JRT, ti avrà dato un numero che inizia con JRT e finisce con MM: incollalo nel box qui sopra. Il tracking di JRT segue il pacco dalla Cina al volo, alla dogana e poi al corriere che lo consegna, di cui copia le scansioni: verso l'Europa la cronologia finisce con DHL, verso gli Stati Uniti con UPS. Sulla linea di JRT per l'Irlanda con FedEx nel nome del prodotto il pacco passa invece a FedEx, su quelle per la Spagna e la Polonia a CTT Express e a InPost, e su quella per il Messico a J&T Express Messico.
+JRT (今日通, Jinritong, 厦门今日通商贸有限公司) è uno spedizioniere cinese di Xiamen le cui lettere di vettura hanno 15 caratteri (`JRT`, dieci cifre e `MM`). Incolla il tuo numero `JRT…MM` nel box qui sopra per seguire il pacco dalla Cina al volo, alla dogana e alla consegna finale: verso l'Europa la spedizione passa di solito a DHL (in Italia consegnata da SDA / Poste Italiane o DHL Express), verso gli Stati Uniti a UPS, verso la Spagna a CTT Express, verso la Polonia a InPost e verso il Messico a J&T Express.
 
 ## Numero di tracking JRT: com'è fatto
 
@@ -151,21 +151,25 @@ Mentre tieni aperto il pacco, o nel giorno di consegna con avvisi attivi, Peek c
 
 ## Domande sul tracking JRT
 
-### Che cos'è JRT (今日通)?
+### Che cos'è JRT (今日通 / Jinritong) e com'è fatto il codice JRT…MM?
 
-È 厦门今日通商贸有限公司, Xiamen Jinritong, uno spedizioniere di Xiamen, in Cina. Le sue lettere di vettura sono JRT, dieci cifre e MM, e il suo tracking gira su Hualei (华磊), una piattaforma usata anche da altri spedizionieri cinesi.
+JRT è 厦门今日通商贸有限公司 (Xiamen Jinritong), uno spedizioniere di Xiamen, in Cina. I suoi codici hanno 15 caratteri (`JRT`, dieci cifre e `MM`; nove cifre indicano una cifra mancante) e il tracking gira sulla piattaforma Hualei (华磊).
 
 ### Perché JRT scrive «delivered» se il pacco non è arrivato?
 
-È colpa delle traduzioni. «Cargo delivered to airport» vuol dire che JRT ha affidato il pacco all'aeroporto per il volo, e «Delivered to service provider» o «Delivery to final service provider» che l'ha passato al corriere che consegna: nessuna di queste righe è la consegna a te.
+Per le traduzioni in inglese di JRT: `Cargo delivered to airport` indica la consegna all'aeroporto per il volo, e `Delivered to service provider` o `Delivery to final service provider` il passaggio al corriere locale. Nessuna di queste righe è una consegna a te.
 
 ### Chi consegna i pacchi JRT in Italia?
 
-Verso l'Europa la cronologia di JRT finisce con DHL, di cui JRT copia le scansioni: in Italia i pacchi di DHL Paket li consegna SDA, oggi Poste Italiane, oppure DHL Express. Verso gli Stati Uniti finisce con UPS, di cui JRT copia allo stesso modo le scansioni. Alcuni pacchi passano invece a FedEx, come quelli della linea di JRT per l'Irlanda con FedEx nel nome del prodotto, o a CTT Express, a InPost e a J&T Express Messico, come quelli delle sue linee per la Spagna, la Polonia e il Messico. Negli altri casi Peek non lo sa: chiedi al venditore quale corriere consegna e con che numero.
+Sulla linea verso l'Europa JRT affida il pacco a DHL in Germania: in Italia i pacchi DHL Paket arrivano in 2–4 giorni lavorativi con SDA (i cui servizi espresso sono passati a Poste Italiane) o DHL Express, con un tentativo e 15 giorni lavorativi di giacenza in filiale.
 
-### A chi mi rivolgo se il pacco JRT non arriva?
+### Devo pagare dazi o la tassa UE di 2 € su un pacco JRT?
 
-Al venditore da cui hai comprato: è lui che ha prenotato la spedizione con JRT. Oltre al tracking, Peek non conosce siti né contatti di JRT.
+Per gli acquisti online da fuori UE, dal 1° novembre 2026 si applica la tassa di gestione dell'Unione di 2 € per tipo di merce (per voce doganale), oltre a eventuali dazi e IVA; vedi [pacco fermo in dogana](guide:customs).
+
+### Come contattare JRT se il pacco è fermo o smarrito?
+
+Rivolgiti al venditore o al marketplace dove hai ordinato, perché ha prenotato la spedizione con JRT. Oltre al tracking su indirizzo numerico, Peek non conosce alcun sito web, telefono o e-mail di assistenza destinatari di JRT.
 
 :::sources
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nome e iniziali dell'azienda, piattaforma Hualei, tracking su un indirizzo numerico in HTTP semplice, i suoi link e nessun link pubblicato, forme JRT…MM e UP, una O dopo JRT letta come JRT, ricerca per numero o riferimento con i trattini, diciture delle righe e loro fasi, date mese.giorno, l'inglese delle righe solo in cinese, le righe solo in cinese verso l'Europa dall'atterraggio al passaggio in Germania, righe copiate da DHL (arrivo nel Paese di destinazione, centro pacchi per l'importazione, mezzo di consegna, tentativo, ritiro, consegna, reso) e filiale Deutsche Post, linea per gli Stati Uniti e righe copiate da UPS sull'ora locale, riga di FedEx e sue scansioni copiate, il numero DHL o FedEx nei dati dopo la consegna, il passaggio a DHL e, sulla linea per l'Irlanda, a FedEx, passaggio alla Posta Svizzera, ora di Pechino e ora locale di DHL per le sue righe copiate, secondo la città indicata, risposta per un numero sconosciuto, cosa Peek mostra, tiene da parte e lascia fuori; righe DHL con indirizzo non trovato, linea stradale dallo Xinjiang al Kazakistan, volo in ritardo; righe copiate da J&T Express Messico sulla linea per il Messico e la loro ora di Città del Messico, sdoganamento completato a destinazione (9 novembre); righe DHL di destinatario assente e di ritiro in ParcelShop, con il testo del link di aiuto (10 novembre); riga del volo su cui verrà caricato il pacco (13 novembre); frontiera tra Kazakistan e Russia sulla linea stradale, passaggio al corriere sulla linea aerea per la Spagna e avviso di UPS sull'Access Point (14 novembre)

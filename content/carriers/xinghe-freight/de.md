@@ -1,12 +1,12 @@
 ---
 title: Xinghe Freight Sendungsverfolgung: GZXH…YQ-Nummer & Status
-description: Xinghe-Freight-Paket (星和货运) aus Guangzhou verfolgen: wie die GZXH…YQ-Nummer aussieht, auf wessen Tracker sie läuft, was die Status heißen und wen du fragst.
+description: Xinghe Freight Sendungsverfolgung (星和货运): GZXH…YQ-Nummer prüfen, warum sie über GZYL läuft, vorab eingetragenes Delivered, 2-€-EU-Gebühr und Kontakt.
 slug: xinghe-freight-sendungsverfolgung
 published: 2026-11-18
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Xinghe Freight (星和货运, 广州星和货运代理有限公司) ist ein Spediteur aus Guangzhou in China. Hat ein chinesischer Online-Shop deine Bestellung mit Xinghe verschickt, besteht deine Sendungsnummer aus GZXH, zehn Ziffern und YQ – genau die Form, die Peek als Xinghe erkennt. Füg sie oben ins Suchfeld ein. Die Sendungsverfolgung von Xinghe läuft auf dem Tracker von [GZYL](carrier:gzyl), einem weiteren Spediteur aus Guangzhou: Das Suchfeld auf Xinghes eigener Website leitet deine Nummer dorthin weiter. Dieser Tracker liegt ohne Domainnamen auf einer bloßen numerischen Serveradresse über unverschlüsseltes HTTP. Peek liest ihn für dich aus und fragt Tracking-Dienste ab, wenn der Tracker deine Nummer nicht kennt.
+Xinghe Freight (星和货运, 广州星和货运代理有限公司) ist ein 2014 gegründeter Spediteur aus Guangzhou, dessen Sendungsnummern aus `GZXH`, zehn Ziffern und `YQ` bestehen. Füge deine `GZXH…YQ`-Nummer oben ein: Xinghes Tracking läuft über den Tracker des Spediteurs [GZYL](carrier:gzyl), wo Verläufe teils im Voraus geschrieben werden — Peek liest ihn auf Deutsch aus und filtert vorab eingetragene `Delivered`-Vorhersagen heraus.
 
 ## Xinghe Freight Sendungsnummer: so sieht sie aus
 
@@ -99,21 +99,25 @@ Abgesehen von der Schweizerischen Post übergibt Peek ein Xinghe-Paket an keinen
 
 ## Fragen zur Xinghe Freight Sendungsverfolgung
 
-### Was ist Xinghe Freight (星和货运)?
+### Was ist Xinghe Freight (星和货运) und wie sieht eine GZXH…YQ-Nummer aus?
 
-广州星和货运代理有限公司 (Guangzhou Xinghe Freight Forwarding), ein Spediteur mit Sitz in Guangzhou, China. Laut eigener Website wurde das Unternehmen 2014 gegründet und übernimmt See-, Luft- und Landfracht, Schiffsagenturdienste sowie Zollabfertigungen. In Peek laufen darunter die Sendungsnummern aus GZXH, zehn Ziffern und YQ.
+Xinghe Freight (广州星和货运代理有限公司) ist ein 2014 gegründeter Spediteur in Guangzhou, China, für See-, Luft- und Landfracht sowie Zollabfertigung. Seine Sendungsnummern haben 16 Zeichen (`GZXH`, zehn Ziffern und `YQ`).
 
-### Warum zeigt mein Xinghe-Freight-Paket das Tracking von GZYL?
+### Warum läuft meine Xinghe-Freight-Nummer über den Tracker von GZYL?
 
-Weil Xinghes Sendungsverfolgung den Tracker von GZYL nutzt: Das Suchfeld auf Xinghes eigener Seite übergibt deine Nummer dorthin, und die Schritte erscheinen in GZYLs Formulierungen. Peek führt das Paket weiter unter Xinghe Freight und liest diesen Tracker für dich aus.
+Das Suchfeld auf Xinghes Website (`xinghe-express.cn`) leitet `GZXH…YQ`-Nummern an den Tracker von GZYL weiter, weshalb die Schritte in GZYLs englischem Wortlaut erscheinen. Peek führt die Sendung unter Xinghe Freight und fragt bei Bedarf zusätzlich Tracking-Dienste ab.
 
-### Wer stellt Xinghe-Freight-Pakete in meinem Land zu?
+### Warum zeigt Xinghe Freight „Delivered“, obwohl nichts angekommen ist?
 
-Das weiß Peek nicht: Weder die Schritte im Tracker noch Xinghes Website nennen einen lokalen Zusteller. Nur in der Schweiz und in Liechtenstein kann Peek ein Xinghe-Paket an die Schweizerische Post weiterreichen. Frag den Verkäufer, welcher Paketdienst deine Bestellung bringt, und bitte um dessen Sendungsnummer.
+Auf GZYLs Plattform können Spediteure den gesamten Verlauf einschließlich `Delivered` im Voraus nach festem Zeitplan eintragen. Peek hält solche vorab geschriebenen Schritte zurück (nur unter „Anzeigen“ sichtbar); ist nichts angekommen, frag beim Verkäufer nach dem lokalen Zusteller.
 
-### Warum zeigt Peek für meine GZXH-Nummer noch keinen Verlauf?
+### Wer stellt Xinghe-Freight-Pakete in Deutschland, Österreich und der Schweiz zu?
 
-Entweder liegt dem Tracker der Auftrag noch nicht vor, oder es stehen dort bisher nur vorab geschriebene Schritte (bis hin zu `Delivered`), die Peek zurückhält und nur hinter „Anzeigen“ auflistet. Peek fragt zusätzlich Tracking-Dienste ab und prüft weiter. Bei einer Nummer, die der Tracker nicht kennt, heißt die Antwort für Peek, dass die Nummer nicht gefunden wurde: Peek zeigt „Warten auf Xinghe Freight“ und zwei Tage später „Sendungsnummer prüfen“. Bei einer, zu der er nur vorab geschriebene Schritte hat, fordert Peek dich nicht zur Prüfung der Nummer auf. Vergleich die Zeichenfolge mit der Versandnachricht des Shops; passiert nach einigen Tagen nichts, frag beim Verkäufer nach, ob das Paket wirklich verschickt wurde.
+Weder die Schritte im Tracker noch Xinghes Website nennen einen lokalen Zusteller — nur in der Schweiz und in Liechtenstein kann Peek an die Schweizerische Post übergeben. Frag den Verkäufer nach dem Zustellunternehmen und dessen Sendungsnummer.
+
+### Wie kontaktiere ich Xinghe Freight bei Problemen mit meinem Paket?
+
+Wende dich zuerst an den Shop oder Marktplatz, da der Verkäufer den Versand gebucht hat. Xinghes chinesische Website nennt zwar eine 24/7-Hotline (`+86 199 2448 3103`) und `3975605292@qq.com`, bietet aber keinen Endkunden-Support für Empfänger im Ausland.
 
 :::sources
 - [Xinghe Freight: 广州星和货运代理有限公司 (Startseite, auf Chinesisch)](http://xinghe-express.cn/) – Firmenname, Speditionsleistungen, Tracking-Suchfeld, Hotline und E-Mail

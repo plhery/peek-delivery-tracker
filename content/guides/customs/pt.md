@@ -1,13 +1,13 @@
 ---
 title: Encomenda retida na alfândega: o que fazer e quanto pagar
-description: O que significa uma encomenda retida na alfândega, quanto tempo demora, quanto pagas e a quem, e como reconhecer um SMS falso a pedir taxas alfandegárias.
+description: Encomenda retida na alfândega em Portugal? O que fazer no Portal de Desalfandegamento dos CTT, prazo de 20 dias, IVA, direitos, taxa de 2 € e burlas por SMS.
 slug: encomenda-retida-na-alfandega
 picture: Uma cabine de alfândega com uma cancela às riscas, um documento carimbado com um visto e o Pip à espera, paciente, diante da cancela.
 published: 2026-10-09
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-«Retida na alfândega» quer quase sempre dizer que a tua encomenda está no controlo normal das mercadorias que chegam de fora da União Europeia, e não que foi apreendida. Se continuar retida, a transportadora pode estar à espera de que pagues os encargos ou envies uma fatura: nos [CTT](carrier:ctt), isso trata-se no Portal de Desalfandegamento. Confirma sempre no site ou na app da transportadora, nunca num link recebido por SMS.
+«Retida na alfândega» significa quase sempre o controlo aduaneiro normal das encomendas vindas de fora da União Europeia, e não uma apreensão. Nos [CTT](carrier:ctt), quando falta enviar a fatura ou pagar IVA, direitos e a taxa de manuseamento da UE de 2 €, tens 20 dias desde a chegada a Portugal para concluir o processo no Portal de Desalfandegamento (ctt.pt ou App CTT) — nunca por links recebidos por SMS.
 
 ## O que significa «encomenda retida na alfândega»?
 
@@ -24,7 +24,7 @@ A alfândega verifica a declaração do remetente (conteúdo, valor), pode pedir
 
 Nenhum destes estados é uma apreensão. Se houver suspeita de mercadoria proibida (contrafações, medicamentos, armas ou tabaco, por exemplo), os CTT enviam-te um aviso de `Desalfandegamento suspenso`: a análise cabe às entidades competentes, não tem prazo e não são os CTT que decidem. Numa suspeita de contrafação, tens 10 dias úteis desde a notificação para te opores à destruição, com a fatura ou o comprovativo de compra; se não responderes, o silêncio pode valer como consentimento.
 
-## Encomenda retida na alfândega: o que fazer?
+## Como desalfandegar uma encomenda nos CTT passo a passo?
 
 Muitas vezes, nada. Para saberes:
 
@@ -72,7 +72,7 @@ Não te apetece estar sempre a atualizar a página? Cola o número do objeto no 
 
 `Conclusão com autorização de saída` quer dizer que a alfândega libertou a encomenda. Os CTT estimam 10 dias, a contar do dia seguinte, para a levar à morada indicada na embalagem, e podes segui-la no Seguir objeto. Para os estados que vêm a seguir, vê [o que querem dizer os estados do seguimento](guide:tracking-statuses).
 
-## Quanto custa desalfandegar uma encomenda?
+## Quanto custa desalfandegar nos CTT (IVA, 3 €, taxa de 2 € e Serviço CTT)?
 
 Pagas quando o IVA e os direitos não foram cobrados na compra: os CTT pagam-nos à AT em teu nome e cobram-tos depois, com o serviço deles. A conta tem até três partes:
 
@@ -146,7 +146,7 @@ Para denunciar:
 - **Mensagem falsa:** não abras o link, apaga o SMS ou o e-mail e avisa as autoridades, pedem os CTT.
 - **Perdeste dinheiro:** apresenta queixa por burla à PSP ou à GNR, também online, no portal [Queixa Eletrónica](https://queixaselectronicas.mai.gov.pt/).
 
-## E se eu não pagar, ou quiser devolver a encomenda?
+## O que acontece se não pagar ou desistir do desalfandegamento?
 
 Se não terminares o desalfandegamento até à data limite, a encomenda [volta ao remetente](guide:returned-to-sender), sem retrocesso. Também podes desistir: no portal, abre o processo e carrega em «Devolver à Origem» (não dá para anular) ou, se já desalfandegaste, recusa a encomenda na entrega. A devolução não é prioritária e não tem prazo definido.
 

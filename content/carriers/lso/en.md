@@ -1,12 +1,12 @@
 ---
 title: LSO tracking: airbill numbers, statuses and delivery help
-description: Track an LSO (Lone Star Overnight) parcel: what the airbill number looks like, what each status means, delivery times, claims and how to reach LSO.
+description: Track an LSO (Lone Star Overnight) parcel: ZY0 airbill format, 1–3 day Ground and overnight times, 4-day delay texting, 15/30-day claims and (888) 688-6909.
 slug: lso-tracking
 published: 2026-10-15
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-LSO, short for Lone Star Overnight, is a regional parcel carrier based in Texas that delivers across Texas and Oklahoma and in major metropolitan areas of Louisiana, Arkansas, Kansas and Missouri. To track a parcel, enter its number on [LSO's tracking page](https://www.lso.com/tracking), or paste it in the box above. LSO calls that number the airbill number, and the shop or sender that booked LSO has it.
+LSO (Lone Star Overnight) is a regional parcel carrier based in Texas, delivering across Texas and Oklahoma plus major metropolitan areas of Louisiana, Arkansas, Kansas and Missouri. Track a shipment by entering its 8-character `ZY0` airbill number on [LSO's tracking page](https://www.lso.com/tracking) or pasting it in the box above. The airbill number comes from the shop or sender that booked LSO.
 
 ## LSO tracking number: what it looks like and where to find it
 
@@ -85,21 +85,25 @@ Peek can notify you of "Every scan", "Important steps" or "Delivery only". For t
 
 ## Questions about LSO tracking
 
-### Who delivers LSO packages?
+### Who delivers LSO packages, and how long does LSO take?
 
-LSO itself, inside its area: Texas, Oklahoma and major metropolitan areas of Louisiana, Arkansas, Kansas and Missouri. Outside it, LSO works with partner carriers.
+LSO delivers directly across Texas, Oklahoma and major metro areas of Louisiana, Arkansas, Kansas and Missouri, and works with partner carriers outside that footprint. LSO Ground takes 1 to 3 business days, while next-day services deliver by 8:30 am, 10:30 am or 3:00 pm depending on the service.
 
-### Does LSO deliver on Saturdays?
+### Does LSO deliver on Saturdays or require a signature?
 
-Not with LSO Ground, Early Overnight or Economy Next Day: LSO's service pages say Saturday delivery isn't available for them. For other services, ask LSO.
+Saturday delivery isn't available for LSO Ground, Early Overnight or Economy Next Day. LSO doesn't collect a signature on 8:30 am Early Overnight deliveries, while senders can add an adult signature option on LSO Ground.
 
-### What is the LSO customer service phone number?
+### What should I do if my LSO package is delayed or stuck on Label created?
 
-(888) 688-6909, as listed on lso.com. You can also email customerservice@lso.com or use the recipient form on the contact page.
+`Label created` means the shipper created paperwork before LSO collected the parcel—ask the shop if nothing changes after a few days. If your parcel is more than 4 days late, use "Text with a live agent!" on lso.com/tracking during regular business hours.
 
-### Does LSO need a signature?
+### How do I file a claim for a lost or damaged LSO package?
 
-Not for its 8:30 am Early Overnight deliveries: LSO doesn't get a signature for those. On LSO Ground, the sender can pay for an adult signature.
+Only an LSO account holder can file a claim, so online shoppers must reach out to the vendor or shop. LSO requires damaged-package claims within 15 days (keep all packaging for inspection) and lost or late claims within 30 days.
+
+### What is the LSO customer service phone number and email?
+
+Call (888) 688-6909, email customerservice@lso.com, or submit the recipient form on lso.com/contact-us (LSO replies within 24 hours). Have your airbill number ready.
 
 :::sources
 - [LSO: Lone Star Overnight home page](https://www.lso.com/) – who LSO is, coverage, partner carriers, services

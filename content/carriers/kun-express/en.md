@@ -1,12 +1,12 @@
 ---
 title: Kun Express tracking: KUN numbers, statuses and USPS
-description: Track a Kun Express parcel from China: what the KUN number looks like, what each status means, when USPS takes over and who to ask when it stalls.
+description: Track a Kun Express parcel from China: KUN + 10-digit numbers, what every status means, USPS and Canada Post handoff, delivery times and how to get help.
 slug: kun-express-tracking
 published: 2026-10-21
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Kun Express (鲲辰, Hangzhou Kunchen Cross-border Supply Chain Management Co., Ltd.) is a forwarder in Hangzhou, China, that flies parcels for online sellers to the United States, Canada and Europe. On its US line, USPS delivers them. Its numbers start with KUN: type yours in the search box on [kun-express.com](https://www.kun-express.com/en), which opens Kun Express's tracking page, or in the box above. The shop that sold you the item gives the number with its shipping details.
+Kun Express (鲲辰, Hangzhou Kunchen Cross-border Supply Chain Management Co., Ltd.) is a Hangzhou-based forwarder that ships e-commerce parcels from China to the United States, Canada and Europe, handing US orders to USPS and Canadian orders to Canada Post for final delivery. Paste your `KUN` tracking number in the box above or search it on [kun-express.com](https://www.kun-express.com/en) to check every flight, customs and local scan; the seller provides the number in your shipping email or order page.
 
 ## Kun Express tracking number: what it looks like
 
@@ -96,23 +96,23 @@ Peek can notify you of "Every scan", "Important steps" or "Delivery only". It ca
 
 ### What is Kun Express?
 
-Kun Express is the brand of Hangzhou Kunchen Cross-border Supply Chain Management Co., Ltd., a forwarder in Hangzhou, China, that ships parcels for online sellers to the US, Canada and Europe. The brand dates from 2022, and the company lists branches in Shenzhen, Hong Kong, Ho Chi Minh City, New York and Hamburg.
+Kun Express is the brand of Hangzhou Kunchen Cross-border Supply Chain Management Co., Ltd., a Chinese cross-border forwarder founded in 2022 in Hangzhou (with branches in Shenzhen, Hong Kong, Ho Chi Minh City, New York and Hamburg) that flies orders for online sellers to the US, Canada and Europe.
 
-### Who delivers Kun Express parcels in the US?
+### Who delivers Kun Express parcels in the US and Canada?
 
-USPS delivers parcels on Kun Express's US line. Kun Express flies them to the US and clears customs, then USPS takes over, and Kun Express copies USPS's scans into its tracking.
+On Kun Express's US line, USPS delivers the parcel after Kun Express flies it to the US and clears customs, and Kun Express copies USPS scans into its tracking (another US product also names ACI, DHL eCommerce or its own delivery service). On its Canada line, [Canada Post](carrier:canada-post) handles final delivery.
 
 ### What does "U.S. Postal Service, The goods are in transit" mean?
 
-It means the parcel is on its way to the US by air. Kun Express writes this line itself to name the carrier that will deliver; USPS gets the parcel only after US customs.
+Kun Express writes that status itself at the departure and arrival airports to show which local carrier will make the delivery. It means the parcel is flying to the US — USPS does not receive the parcel until after US import customs clears it.
 
 ### How long does Kun Express take to deliver?
 
-Kun Express publishes no delivery time for its USPS line. It tells sellers that over 98% of parcels arrive within 12 calendar days on its Canada line and within 10 on one of its US services, which is no promise for your order.
+Kun Express does not publish a delivery timeframe for its USPS line. In its seller pages, it states that over 98% of parcels on its Canada line arrive within 12 calendar days and over 98% within 10 calendar days on its DHL/UPS US virtual warehouse service, though those are seller benchmarks rather than a guaranteed date for your order.
 
 ### Is Kun Express the same as Kunyoung Express?
 
-No. Kunyoung Express is a Korean carrier with numeric tracking numbers; Kun Express is a Chinese forwarder whose numbers start with KUN.
+No. Kunyoung Express (건영택배) is a South Korean carrier that uses numeric tracking numbers, whereas Kun Express is a Chinese forwarder whose tracking numbers start with `KUN` followed by 10 digits.
 
 :::sources
 - [Kun Express: Home](https://www.kun-express.com/en) – lines to the US, Canada and Europe, brand from 2022, customers, headquarters and branches, warehouses, tracking search box, phone, hours, email, WeChat and WhatsApp

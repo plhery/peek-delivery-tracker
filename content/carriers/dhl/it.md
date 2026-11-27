@@ -1,12 +1,12 @@
 ---
 title: DHL Paket tracking: numero, stati e consegna in Italia
-description: Tracking DHL Paket: com'è fatto il numero, cosa vogliono dire gli stati, Filiale e Packstation in Germania e chi consegna in Italia i pacchi dalla Germania.
+description: Tracking DHL Paket dalla Germania all'Italia: formato del numero, significato degli stati, chi consegna tra Poste Italiane e DHL Express, tempi e contatti.
 slug: dhl-paket-tracking
 published: 2026-10-22
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-DHL Paket è il servizio pacchi tedesco di DHL Group, con i marchi Deutsche Post e DHL. Segui il pacco con il suo numero su dhl.de (in tedesco o in inglese), nell'app Post & DHL o incollandolo nel box qui sopra. Il numero te lo dà il mittente: i negozi di solito lo mettono nell'e-mail di spedizione. Se vivi in Germania, qui trovi consegna, ritiro e reclami; se aspetti in Italia un pacco partito dalla Germania, trovi chi te lo porta e a chi rivolgerti.
+DHL Paket è il servizio pacchi tedesco di DHL Group, con i marchi Deutsche Post e DHL. Incolla il numero di spedizione nel box qui sopra, cercalo su dhl.de (in tedesco o in inglese) o apri l'app Post & DHL: il numero arriva dal mittente nell'e-mail di spedizione. Qui trovi cosa vogliono dire gli stati, chi consegna in Italia un pacco dalla Germania e come funziona il ritiro in Germania.
 
 ## Numero di tracking DHL Paket: dove lo trovi e com'è fatto
 
@@ -96,21 +96,25 @@ Vedi lo stato, ogni scansione su una mappa con il luogo e l'ora esatta di DHL, i
 
 ## Domande sul tracking DHL Paket
 
-### Chi consegna in Italia un pacco DHL partito dalla Germania?
+### Chi consegna in Italia un pacco DHL Paket dalla Germania?
 
-La pagina di DHL per l'Italia nomina SDA, oggi Poste Italiane; la scheda business di DHL aggiunge DHL Express Italia, a seconda del CAP. Chi ha il tuo pacco lo vedi nel tracking, che resta su dhl.de con lo stesso numero.
+La pagina di DHL per l'Italia indica SDA, oggi confluita in Poste Italiane; la scheda business di DHL (settembre 2026) riporta «SDA (Poste Italiane) / DHL Express Italien» in base al CAP. Chi ha in carico il pacco lo vedi nel tracking su dhl.de con lo stesso numero o nell'avviso ricevuto.
 
 ### Quanto ci mette un pacco DHL dalla Germania all'Italia?
 
-DHL indica come orientamento 2-4 giorni lavorativi. Dentro la Germania un pacco arriva di solito 1-2 giorni lavorativi dopo la spedizione, e prima di Natale anche di più.
+Come orientamento DHL indica 2-4 giorni lavorativi dalla Germania all'Italia, con consegna dal lunedì al venerdì (e in alcune zone anche il sabato). Dentro la Germania la consegna richiede di solito 1-2 giorni lavorativi, con possibili tempi più lunghi prima di Natale.
+
+### Perché il tracking DHL dalla Germania è fermo?
+
+Un numero appena creato può richiedere fino a 24 ore per comparire, e dopo la partenza dalla Germania uno stato fermo per qualche giorno — per esempio al centro postale internazionale di Francoforte — è normale nei tempi regolari. In Germania DHL chiede di attendere 5 giorni lavorativi prima di avviare una ricerca (Nachforschung).
 
 ### Si paga la dogana su un pacco DHL dalla Germania?
 
-No, Germania e Italia sono nell'Unione europea: per Poste Italiane l'importazione riguarda le merci da Paesi extra UE. Fanno eccezione i CAP 23041 (Livigno) e 22061 (Campione d'Italia), per cui DHL chiede i documenti doganali.
+No: Germania e Italia fanno parte dell'Unione europea e per Poste Italiane gli oneri di importazione riguardano le merci da Paesi extra UE. Fanno eccezione i CAP 23041 (Livigno) e 22061 (Campione d'Italia), per i quali DHL richiede i documenti doganali.
 
-### Si può seguire un DHL Päckchen?
+### Si può tracciare un DHL Päckchen?
 
-No. DHL Päckchen e Päckchen International non hanno tracking: ce l'hanno solo i pacchi (Pakete).
+No. DHL Päckchen e Päckchen International non includono il tracking: il tracciamento è previsto solo per i pacchi (Pakete).
 
 :::sources
 - [DHL: Was bedeutet mein Sendungsstatus?](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – significato degli stati, 24 ore, righe ripetute, giacenze

@@ -1,12 +1,12 @@
 ---
 title: BUFFALO tracking: BUFZA codes, South Africa customs & help
-description: Track a BUFFALO International Logistics parcel from China to South Africa: BUFZA...YQ codes, SARS customs VAT/duty scans, delivery hours and support emails.
+description: Track a BUFFALO parcel from China to South Africa: BUFZA...YQ numbers, SARS customs VAT & duty statuses, Mon–Sat delivery hours, delays and support contacts.
 slug: buffalo-ex-tracking
 published: 2026-11-23
-updated: 2026-11-23
+updated: 2026-11-27
 ---
 
-**BUFFALO** (*BUFFALO International Logistics*, often known as *Buffaloex* or *Buffalo Express*) is a China-to-Africa cross-border e-commerce logistics carrier that started operating in April 2017 ([buffaloex.com](https://www.buffaloex.com/)). It is headquartered in Shanghai, with its African branch in Johannesburg. Its integrated warehouses cover 35,000 square metres, a 6,500 m² bonded warehouse among them, and it runs 300 vehicles of its own. BUFFALO says its systems are integrated with South Africa's customs and banking systems, and that it ranks first by market share in e-commerce small parcels from China to South Africa. You can check a shipment on [buffaloex.com/tracks.html](https://www.buffaloex.com/tracks.html) or paste your `BUFZA` tracking number into the box above.
+**BUFFALO** (*BUFFALO International Logistics*, often called *Buffaloex* or *Buffalo Express*) is a China-to-Africa cross-border e-commerce carrier operating since April 2017 ([buffaloex.com](https://www.buffaloex.com/)), headquartered in Shanghai with its African branch in Johannesburg. Paste your 17-character `BUFZA...YQ` number into the box above or look it up on [buffaloex.com/tracks.html](https://www.buffaloex.com/tracks.html) to follow China warehousing, air freight, South African customs VAT/duty scans and local delivery. BUFFALO runs 35,000 square metres of integrated warehouses (including a 6,500 m² bonded warehouse) and 300 vehicles, integrates with South African customs and banking systems, and reports holding the top market share in China-to-South Africa e-commerce small parcels.
 
 ## BUFFALO tracking numbers (`BUFZA...YQ` format)
 
@@ -75,19 +75,23 @@ You can pick alert presets for "Every scan", "Important steps" or "Delivery only
 
 ### What does a BUFFALO tracking number look like?
 
-China-to-South Africa BUFFALO tracking numbers are 17 characters long, starting with `BUFZA` and ending with `YQ` — for example `BUFZA6482917305YQ` or `BUFZA4SK73918BUYQ` (invented).
+BUFFALO China-to-South Africa parcels carry a 17-character code starting with `BUFZA` and ending in `YQ` — either `BUFZA` + 10 digits + `YQ` (such as `BUFZA6482917305YQ`, invented) or the `BUFZA...BU...YQ` format (`BUFZA4SK73918BUYQ`, invented). Order numbers starting with `BUFEX-` are handled by ZA-BUFFALO.
 
-### When does BUFFALO deliver in South Africa?
+### Why is my BUFFALO parcel stuck at South African customs?
 
-According to [buffaloex.com/support.html](https://www.buffaloex.com/support.html), BUFFALO delivers Monday through Saturday from **08:00 to 17:00** (excluding Sundays and public holidays), expecting delivery within **1–5 days** once tracking shows the parcel in transit.
+When tracking shows `Customs VAT and duty can be paid now, please pay in time`, import VAT and duty must be paid before South African customs releases the parcel. BUFFALO's support page has videos explaining online/bank transfer payment and uploading proof of payment, and its inquiry form handles tax and ID or importer's code queries.
 
-### Why is my BUFFALO parcel paused at South African customs?
+### When does BUFFALO deliver in South Africa and how long does it take?
 
-If tracking shows `Customs VAT and duty can be paid now, please pay in time`, import VAT and duty are due before South African customs releases the parcel. BUFFALO's inquiry form takes questions about tax payments and about ID or importer's codes.
+According to [buffaloex.com/support.html](https://www.buffaloex.com/support.html), BUFFALO delivers Monday to Saturday from **08:00 to 17:00** (no Sunday or public-holiday deliveries) and expects delivery within **1–5 days** once tracking shows the parcel in transit, depending on your address.
+
+### Can I change my delivery address or phone number on a BUFFALO parcel?
+
+According to BUFFALO's FAQ, the delivery address and contact phone number cannot be changed once the parcel has arrived in South Africa, and declared value, quantity or HS code cannot be edited once the parcel enters the domestic transit warehouse.
 
 ### How do I contact BUFFALO South Africa customer service?
 
-Email `support@buffaloex.com` with your `BUFZA...YQ` order number or submit an enquiry through [buffaloex.com/contact.html](https://www.buffaloex.com/contact.html) (China hotline `+86-400-921-9066`).
+Email `support@buffaloex.com`, call `+27-10-510-9307`, message WhatsApp `+27-67-758-6614` or submit an enquiry on [buffaloex.com/contact.html](https://www.buffaloex.com/contact.html) with your `BUFZA...YQ` number (China hotline `+86-400-921-9066`, `service@bufflogistics.com`).
 
 :::sources
 - [BUFFALO International Logistics: Official Website](https://www.buffaloex.com/) – China-to-Africa cross-border logistics network

@@ -1,12 +1,12 @@
 ---
 title: Royal Mail tracking: numbers, statuses and redelivery
-description: Track a Royal Mail parcel: number shapes, what each status means, missed deliveries and the red card, customs bills, compensation claims and who to contact.
+description: Track a Royal Mail or Parcelforce parcel: 13-character GB, 16- and 21-character numbers, status meanings, red card redelivery, customs bills and claims.
 slug: royal-mail-tracking
 published: 2026-10-13
-updated: 2026-11-10
+updated: 2026-11-27
 ---
 
-Royal Mail is the UK's national post, and its Track your item page also tracks [Parcelforce](carrier:parcelforce) parcels. Type the number there or paste it in the box above. The number comes from the sender: look in the shop's order confirmation, shipping email or invoice.
+Royal Mail is the UK's national post, and its Track your item page tracks [Parcelforce](carrier:parcelforce) parcels as well as Royal Mail items. Paste your tracking number in the box above or enter it on Royal Mail's website to check its status, redelivery options and customs notices. Your number comes from the sender — check the shop's order confirmation, shipping email or invoice.
 
 ## Royal Mail tracking number: format and where to find it
 
@@ -100,19 +100,23 @@ A parcel from abroad with a postal number can be followed on Royal Mail once Roy
 
 ### How long does Royal Mail tracking take to update?
 
-There's no fixed time: the status changes at the item's next scan. Peek checks a Royal Mail parcel on its own about once an hour, delivery day included.
+There is no fixed interval: tracking updates only when the item receives its next scan. Peek checks a Royal Mail parcel automatically about once an hour, including on delivery day, and you can refresh it manually sooner.
 
-### What time does Royal Mail deliver?
+### What time does Royal Mail deliver parcels?
 
-Monday to Saturday, usually by 4.30pm, and on Sundays in some areas. A parcel due at a set time can come later, and there are no deliveries on bank holidays.
+Royal Mail delivers Monday to Saturday, usually by 4.30pm, and on Sundays in some areas. Parcels due at a set time can arrive later than 4.30pm, and there are no deliveries on bank holidays.
 
 ### What does "Due for Redelivery the Next Working Day" mean?
 
-Royal Mail missed you and will bring the item on its next round, which shows as a new out-for-delivery line. After missed deliveries the item waits at a Customer Service Point, and tracking shows `Available for Redelivery or Collection`.
+Royal Mail attempted delivery while nobody was in and will bring the parcel again on its next round, which shows as a separate out-for-delivery scan. If it cannot be delivered, it waits at a Customer Service Point with the status `Available for Redelivery or Collection` and a red card tells you how to collect it or book redelivery.
 
-### Is my Royal Mail tracking number fake?
+### Why does Royal Mail tracking show "Customs charges raised"?
 
-Not necessarily. A sender can create the number before handing the item over, and Royal Mail may not know it before the first scan. If it still shows nothing after a few days, ask the sender.
+VAT, duty or a handling charge is due on an item from abroad. Royal Mail sends a bill stating the exact amount and normally holds the parcel for about 3 weeks; if unpaid by then, it returns to the sender.
+
+### Why is my Royal Mail tracking number not found or showing "Sender preparing item"?
+
+Royal Mail may not recognise a new number before its first scan, and `Sender preparing item` or `We're expecting it` means the sender has announced the parcel without handing it over yet. If nothing appears after a few days, ask the sender to confirm dispatch.
 
 :::sources
 - [Citizens Advice: Check Royal Mail collection and delivery times](https://www.citizensadvice.org.uk/consumer/post-and-parcels/post-collection-delivery-times/) – delivery days and times, 2nd Class letters every other weekday, Sundays, bank holidays, Customer Service Points, phone and hours

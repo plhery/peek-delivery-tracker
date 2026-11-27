@@ -1,12 +1,12 @@
 ---
 title: Mondial Relay seguimiento: estados, Punto Pack e InPost
-description: Sigue tu paquete de Mondial Relay en España: dónde está el número, qué significan sus estados en francés, cuánto espera en un Punto Pack y a quién llamar.
+description: Seguimiento de Mondial Relay en España (ahora InPost): dónde ver el número, estados en francés, recogida en Punto Pack o Locker en 5 días y teléfono gratuito.
 slug: mondial-relay-seguimiento
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Mondial Relay es una empresa francesa de paquetería del grupo InPost que entrega en puntos de recogida, taquillas y a domicilio; en España, InPost adquirió Mondial Relay en 2021 y mondialrelay.es lleva ahora a inpost.es. Para seguir tu paquete en España, escribe el número en [la página de seguimiento de InPost](https://www.inpost.es/seguimiento-del-envio) o pégalo en la casilla de arriba.
+Mondial Relay es la empresa francesa de paquetería del grupo InPost especializada en puntos de recogida, taquillas y entregas a domicilio; en España, InPost compró Mondial Relay en 2021 y mondialrelay.es redirige hoy a inpost.es. Para seguir tu envío, pega el número en la casilla de arriba o introdúcelo en [la página de seguimiento de InPost](https://www.inpost.es/seguimiento-del-envio).
 
 ## Número de seguimiento de Mondial Relay: dónde encontrarlo
 
@@ -87,21 +87,25 @@ Muestra los textos franceses de Mondial Relay tal cual, el centro logístico de 
 
 ## Preguntas sobre el seguimiento de Mondial Relay
 
-### ¿Mondial Relay es lo mismo que InPost?
+### ¿Mondial Relay es lo mismo que InPost en España?
 
-En España, en la práctica sí: InPost adquirió Mondial Relay en 2021 («Nuevo nombre, misma misión», dice InPost) y mondialrelay.es lleva ahora a inpost.es. En Francia y Bélgica, Mondial Relay conserva su marca y forma parte del grupo InPost.
+En la práctica sí: InPost adquirió Mondial Relay en 2021 («Nuevo nombre, misma misión», indica InPost) y mondialrelay.es redirige a inpost.es, donde gestionas tus envíos en Punto Pack y Lockers. En Francia y Bélgica sigue operando bajo la marca Mondial Relay dentro del grupo InPost.
 
-### ¿Cuánto tarda Mondial Relay en llegar?
+### ¿Cuánto tarda en llegar un paquete de Mondial Relay?
 
-InPost da una media de 3 días laborables dentro de España y de 3 a 6 hacia otros países.
+InPost señala un plazo medio de 3 días laborables dentro de España y de entre 3 y 6 días laborables en envíos hacia otros países.
 
-### ¿Mondial Relay entrega los sábados?
+### ¿Cuántos días guardan un paquete en un Punto Pack o Locker?
 
-En España, no en Punto Pack ni Lockers: InPost reparte de lunes a viernes, sin reparto los sábados, domingos ni festivos.
+InPost concede 5 días naturales en envíos nacionales para recogerlo con el PIN de 6 cifras (más DNI o NIE en Punto Pack, o solo PIN/QR en Locker). Si pasa el plazo sin recogida, el paquete vuelve al remitente.
 
-### ¿Cuál es el teléfono gratuito de Mondial Relay en España?
+### ¿Mondial Relay o InPost reparte los sábados?
 
-Es el 900 900 137 de InPost, de lunes a viernes de 8:30 a 20:00 y los sábados de 9:00 a 13:00. Desde fuera de España, InPost da el +34 938 16 62 34.
+No en Punto Pack ni en Lockers en España: InPost indica que reparte de lunes a viernes, sin entregas los sábados, domingos ni festivos.
+
+### ¿Cuál es el teléfono gratuito de Mondial Relay (InPost) en España?
+
+Puedes llamar gratis al 900 900 137 en España o al +34 938 16 62 34 desde cualquier país, de lunes a viernes de 8:30 a 20:00 y los sábados de 9:00 a 13:00.
 
 :::sources
 - [InPost: Seguimiento de Envíos](https://www.inpost.es/seguimiento-del-envio) – solo el número, 8 caracteres, pedidos en la app, el remitente

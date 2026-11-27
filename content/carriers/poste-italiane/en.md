@@ -1,12 +1,12 @@
 ---
 title: Poste Italiane tracking: numbers, statuses and pickup
-description: Track a Poste Italiane parcel: where the code is, what the Italian statuses mean, missed deliveries, Punto Poste lockers, claims and how to call from abroad.
+description: Track a Poste Italiane parcel in English: tracking code formats, Italian status translations, missed delivery and Punto Poste pickup, customs fees and phone.
 slug: poste-italiane-tracking
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Poste Italiane is the Italian post, based in Rome, and it delivers parcels from Italian shops and from abroad. Track one with "Cerca Spedizioni" on poste.it, in the Poste Italiane app or by pasting the code in the box above. The code is on the sender's receipt; for an online order, the shop gives it to you.
+Poste Italiane is Italy's national post, headquartered in Rome, delivering domestic parcels from Italian shops as well as international shipments arriving in Italy. Paste your tracking code ("codice spedizione") in the box above, enter it in "Cerca Spedizioni" on poste.it or check it in the Poste Italiane app — the code appears on the sender's receipt or in the shop's shipping email.
 
 ## Poste Italiane tracking number: where it is and what it looks like
 
@@ -88,21 +88,25 @@ Peek checks hourly, out for delivery too, and an hour after a failed check; it c
 
 ## Questions about Poste Italiane tracking
 
-### Where is my package with Poste Italiane?
+### Where is my Poste Italiane package and what do the Italian statuses mean?
 
-The latest line in Cerca Spedizioni tells you: `In consegna` means it's with the courier, and a pickup line means it waits at a post office or Punto Poste.
+Check the newest scan in Cerca Spedizioni (or above in Peek): `In transito` means moving between Poste's centres, `In consegna` means handed to the courier for delivery, and `disponibile per il ritiro dal giorno lavorativo successivo alla data indicata` means it is ready at a post office or Punto Poste from the next working day.
 
 ### How long does Poste Italiane take to deliver?
 
-Shop parcels on Crono take about 4 working days, says Poste, and Crono Express 1 to 2. Poste Delivery Express takes 1 to 4 working days after posting.
+Poste Italiane lists about 4 working days for shop parcels sent via Crono, 1 to 2 working days for Crono Express, and 1 to 4 working days after posting for Poste Delivery Express.
 
-### Does Poste Italiane deliver on Saturday?
+### Why is my Poste Italiane parcel stuck in customs (`In attesa di sdoganamento`)?
 
-Normally not: Poste's delivery times exclude Saturdays. Saturday delivery is a paid option for Poste Delivery Business Express.
+`In attesa di sdoganamento` means Italian customs is checking an item from outside the EU and may ask for documents. Poste Italiane also warns that technical problems are currently slowing customs clearance for non-EU shipments, with no fixed clearance estimate yet.
 
-### Does Poste Italiane have parcel lockers?
+### Does Poste Italiane deliver on Saturday or use parcel lockers?
 
-Yes: Punto Poste lockers, chosen at the shop's checkout and opened with the PIN Poste sends you.
+Standard delivery times exclude Saturdays (Saturday delivery is a paid option on Poste Delivery Business Express). For collection, you can choose a Punto Poste shop or touchscreen locker at checkout and pick up using the PIN Poste sends by SMS or email.
+
+### How do I call or contact Poste Italiane from abroad in English?
+
+From abroad or a mobile phone, call +39 06 4526 3160 (Monday to Saturday, 8am to 8pm, excluding holidays; operator rates apply). You can also email `assistenza.spedizioni@posteitaliane.it` or use the English [Contact us](https://www.poste.it/assistenza/scrivici-en) form.
 
 :::sources
 - [Poste Italiane: FAQ Spedizioni e consegne](https://www.poste.it/assistenza/faq-spedizioni-e-consegne/) – code, notice, delegation, appointment, parcels from abroad

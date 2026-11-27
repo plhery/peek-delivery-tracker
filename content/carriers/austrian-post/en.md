@@ -1,12 +1,12 @@
 ---
 title: Austrian Post tracking: numbers, statuses and pickup
-description: Track an Austrian Post parcel in English: number formats, what each status means in English and German, yellow notices, Poststation lockers and contacts.
+description: Track an Austrian Post parcel in English: 22-digit and AT tracking numbers, English and German status meanings, yellow notices, Poststation pickup and hotline.
 slug: austrian-post-tracking
 published: 2026-10-11
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Austrian Post (Österreichische Post AG, in Vienna) is Austria's postal company. Track a parcel on post.at, which has an English version, in the Post App, or paste the number in the box above. The number comes from the shop that sent the parcel, from Austrian Post's e-notification, or from the yellow notice left after a missed delivery.
+Austrian Post (Österreichische Post AG, based in Vienna) is Austria's national postal operator. Paste your tracking number in the box above, enter it on post.at (which has an English switch) or open the Post App to follow your parcel. Look for the 22-digit or AT tracking number in the shop's shipping email, in Austrian Post's e-notification or on the yellow notice left after a missed delivery.
 
 ## Austrian Post tracking number format and where to find it
 
@@ -95,21 +95,25 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ## Questions about Austrian Post tracking
 
-### Can I track Austrian Post in English?
+### Can I track an Austrian Post parcel in English?
 
-Yes. post.at has English pages, and its tracking shows English wordings once you switch to EN.
+Yes. post.at has an English version, and switching the tracking page to EN displays Austrian Post's status descriptions in English. Peek also maps each German scan to its stage in English.
 
-### Why does my Austrian Post tracking number not work?
+### Why is my Austrian Post tracking number not working?
 
-The parcel may only be announced: until the sender hands it over, there's little to see. Otherwise check the digits, and whether the number belongs to another carrier, since many use 22 digits.
+A new parcel may only have `Electronic order information was provided by the sender`, meaning Austrian Post has not received it yet. Also check every digit and confirm which carrier the shop named, because many couriers use 22-digit numbers and the 6-digit CRN on a customs sticker is not a tracking number.
 
-### Does Austrian Post have a customer service email?
+### How long does Austrian Post hold a parcel after a missed delivery?
 
-Not for recipients. Use the contact form or the hotline.
+After a missed delivery, the courier leaves a yellow notice (Gelber Zettel) with the pickup location and deadline. Pickup runs from the next day until the third following Monday (at least 14 days), though online shops can set a shorter 5-business-day hold. Bring photo ID and the tracking number at a branch, or use the notice code at a 24/7 Poststation locker.
 
-### What does Zollanmeldungshindernis mean?
+### What does "Zollanmeldungshindernis" mean on Austrian Post tracking?
 
-Something stands in the way of your parcel's customs declaration. Austrian Post stores the parcel with `Lagereingang - Zollanmeldungshindernis`, and its tracking page asks you for the missing documents. Once you have answered, it shows `Zollanmeldungshindernis - Rückmeldung vom Empfänger eingelangt`, and the parcel stays in customs until it is cleared.
+Something is missing for your parcel's customs declaration. Austrian Post stores the parcel under `Lagereingang - Zollanmeldungshindernis` and asks for the missing documents on its tracking page. Once received, tracking shows `Zollanmeldungshindernis - Rückmeldung vom Empfänger eingelangt` while customs finishes clearing it.
+
+### How do I contact Austrian Post customer service in English?
+
+Austrian Post has no customer service email for recipients. Call the private-customer hotline on +43 800 010 100 (Monday to Friday 7:00 to 19:00, Saturday 8:00 to 13:00) or use the 24/7 contact form on [post.at's contact page](https://www.post.at/kontaktformular).
 
 :::sources
 - [Austrian Post: FAQ](https://www.post.at/en/p/c/faq) – number examples, delivery times, 14 days, customs

@@ -1,12 +1,12 @@
 ---
 title: FedEx seguimiento: número, estados del envío y aduanas
-description: Seguimiento de FedEx en España: cómo es el número de 12 cifras, qué significan «Delivery exception» y otros escaneos, aduanas y tus derechos si se pierde.
+description: Seguimiento de FedEx en España: número de 12, 15 o 20 cifras, qué significan «Delivery exception» y los escaneos en inglés, aduanas y cómo reclamar al vendedor.
 slug: fedex-seguimiento
 published: 2026-10-13
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Pega un número de seguimiento de FedEx, o un enlace de seguimiento de FedEx, en la casilla de arriba para seguir el paquete. El seguimiento propio de FedEx está en fedex.com.
+Sigue un paquete de FedEx pegando tu número de seguimiento (12, 15 o 20 cifras) o un enlace de fedex.com en la casilla de arriba, o consúltalo directamente en fedex.com. Aquí puedes ver qué significa cada estado en inglés, qué hacer ante una entrega fallida o retención en aduanas y qué derechos tienes si el pedido se retrasa o se pierde.
 
 ## Número de seguimiento de FedEx: dónde está y cuántas cifras tiene
 
@@ -70,17 +70,25 @@ Ves el estado, cada escaneo con su lugar y la hora que da FedEx (en la zona hora
 
 ## Preguntas sobre el seguimiento de FedEx
 
-### ¿Qué significa «delivery exception» en FedEx?
+### ¿Qué significa «Delivery exception» en el seguimiento de FedEx?
 
-Peek clasifica este escaneo de FedEx como un intento de entrega fallido y muestra «Intento de entrega». El motivo puede aparecer en un escaneo como `Customer not available or business closed` (no había nadie o el negocio estaba cerrado).
+Significa que la entrega no pudo realizarse y Peek lo muestra como «Intento de entrega». El detalle suele aparecer en un escaneo adicional, como `Customer not available or business closed` (ausente o negocio cerrado) o `Local delivery restriction - Delivery not attempted`.
 
-### ¿Por qué el seguimiento de FedEx solo dice «Shipment information sent to FedEx»?
+### ¿Por qué mi seguimiento de FedEx solo muestra «Shipment information sent to FedEx»?
 
-Ese primer escaneo solo indica que el remitente ha enviado a FedEx los datos del envío. El seguimiento avanza cuando FedEx ya tiene el paquete: `Picked up` o `Tendered at FedEx location`.
+Ese primer aviso indica que el remitente ha transmitido los datos del envío a FedEx, pero el transportista aún no tiene el paquete. El historial avanza en cuanto aparece `Picked up` o `Tendered at FedEx location`.
 
-### ¿Es de FedEx un SMS que me pide pagar para entregar el paquete?
+### ¿Cuánto se paga de aduanas en un paquete de FedEx desde fuera de la UE?
 
-Desconfía. INCIBE ha avisado de una campaña de SMS falsos que se hacen pasar por empresas de paquetería: hablan de un problema con la entrega y llevan a una web que pide tus datos personales y los de tu tarjeta. No pulses el enlace: comprueba el envío tú mismo en fedex.com o en Peek, y luego borra el SMS y bloquea al remitente. Si tienes dudas, llama al 017, la Línea de Ayuda en Ciberseguridad de INCIBE. Y la Aduana no se dirige al consumidor para cobrarle el arancel. Más en [estafa del paquete por SMS](guide:delivery-scam-texts).
+Según la Agencia Tributaria y la Comisión Europea, las compras online desde fuera de la UE de hasta 150 euros pagan IVA y un arancel fijo de 3 euros por categoría de artículos, y todas las compras online a tiendas de fuera de la UE llevan además una tasa de tramitación de la UE de 2 euros por categoría. Si la tienda no incluyó estos importes al comprar, el transportista puede cobrártelos junto con sus gastos de gestión antes de la entrega.
+
+### ¿Qué hago si mi paquete de FedEx llega tarde o aparece entregado y no lo tengo?
+
+Si compraste en una tienda, el vendedor responde del envío hasta que lo recibes y, salvo otro plazo pactado, debe entregar en 30 días según Your Europe. Si el estado pone `Delivered` y no lo tienes, comprueba en fedex.com quién firmó la entrega (Peek no guarda el nombre de la firma) y contacta después con la tienda.
+
+### ¿Es de FedEx un SMS que pide pagar para desbloquear la entrega?
+
+Desconfía. INCIBE ha alertado de campañas de SMS falsos que suplantan a empresas de paquetería para pedir datos personales o de tarjeta, y la Aduana nunca contacta directamente al consumidor para cobrar el arancel. No abras el enlace, revisa el envío en fedex.com o en Peek y, ante dudas, llama al 017 de INCIBE. Más en [estafa del paquete por SMS](guide:delivery-scam-texts).
 
 :::sources
 - [Agencia Tributaria: Envíos por un valor de hasta 150 euros](https://sede.agenciatributaria.gob.es/Sede/aduanas/comercio-electronico-pipe-envios-particulares/compras-internet-envios-particulares/envios-valor-hasta-150-euros.html) – arancel de 3 euros desde el 1 de julio de 2026, IVA y gastos de gestión al transportista, la Aduana no cobra al consumidor

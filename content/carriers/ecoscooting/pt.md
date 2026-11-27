@@ -1,12 +1,12 @@
 ---
 title: Ecoscooting rastreio: estados, pontos de recolha e contacto
-description: Rastreio Ecoscooting em Portugal: que número usar, o que querem dizer os estados, entregas falhadas, pontos de recolha e como contactar a Ecoscooting.
+description: Contacto da Ecoscooting em Portugal (+351 300 609 006 e suportecliente@ecoscooting.com), horário de entrega, pontos de recolha e o que querem dizer os estados.
 slug: ecoscooting-rastreio
 published: 2026-10-12
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-A Ecoscooting é uma empresa de entregas em Portugal e Espanha para compras feitas em plataformas internacionais, e pertence à Cainiao, a empresa de logística do grupo Alibaba. Faz só a última parte do caminho: a entrega em casa ou num ponto de recolha. Segue a encomenda no ecoscooting.com com o número que vem nos e-mails da Ecoscooting, ou cola-o na caixa no topo desta página.
+A Ecoscooting entrega em Portugal e Espanha encomendas de plataformas internacionais e pertence à Cainiao, a empresa de logística do grupo Alibaba. Faz só a última parte do caminho, em casa ou num ponto de recolha: segue a encomenda no ecoscooting.com com o número dos e-mails da Ecoscooting, ou cola-o na caixa no topo desta página. Para contactar a Ecoscooting em Portugal (linha única para todo o país, incluindo Lisboa), liga para o +351 300 609 006 ou escreve para suportecliente@ecoscooting.com, de segunda a sexta das 9h00 às 18h00 e ao sábado e domingo das 9h00 às 13h00.
 
 ## Número de rastreio Ecoscooting: onde o encontrar
 
@@ -93,21 +93,25 @@ O Peek verifica até de 10 em 10 minutos, até de 2 em 2 quando a encomenda est�
 
 ## Perguntas sobre o rastreio Ecoscooting
 
+### Qual é o contacto da Ecoscooting em Portugal (e em Lisboa)?
+
+A Ecoscooting indica um único apoio ao cliente para todo o território português, sem número próprio para Lisboa: telefone +351 300 609 006, e-mail suportecliente@ecoscooting.com, além de chat e formulário na página de apoio ao cliente. O atendimento funciona de segunda a sexta das 9h00 às 18h00, e ao sábado e domingo das 9h00 às 13h00.
+
+### Qual é o horário de entrega da Ecoscooting em Portugal?
+
+A Ecoscooting não publica horas de entrega nem deixa escolher um horário. Em Portugal entrega de segunda a sábado; anuncia às lojas 24 a 48 horas na entrega nacional, mas isso não é uma promessa para toda a viagem e o seguimento não mostra dia previsto.
+
 ### O que quer dizer «Encomenda aceite pelo último quilómetro»?
 
 Quer dizer que a Ecoscooting, a empresa que faz a última parte do caminho, já recebeu a encomenda em Portugal ou Espanha. Seguem-se os centros de triagem e depois a saída para entrega ou a passagem para um ponto de recolha.
 
-### Quanto tempo demora a Ecoscooting a entregar?
+### Quantas tentativas de entrega faz a Ecoscooting em Portugal?
 
-A Ecoscooting anuncia às lojas 24 a 48 horas para a entrega nacional. Não é uma promessa para toda a viagem da tua encomenda, e o seguimento não mostra dia previsto.
+Faz duas tentativas em casa: depois de uma tentativa falhada, envia um e-mail com o motivo e volta a tentar dentro de 3 dias úteis. Após duas tentativas falhadas, decide caso a caso e avisa-te por e-mail; o envio automático para um ponto de recolha próximo é só em Espanha.
 
-### Até que horas entrega a Ecoscooting?
+### Onde fica a Ecoscooting e o que fazer se não recebi a encomenda?
 
-A Ecoscooting não publica horas de entrega nem deixa escolher um horário. Em Portugal entrega de segunda a sábado.
-
-### Onde fica a Ecoscooting?
-
-A sede da Ecoscooting Delivery, S.L. fica em San Fernando de Henares, perto de Madrid. Para dúvidas sobre uma encomenda em Portugal, usa o telefone, o e-mail ou o chat do apoio ao cliente.
+A sede da Ecoscooting Delivery, S.L. fica em San Fernando de Henares, perto de Madrid. Se o seguimento der a encomenda como entregue mas não a recebeste, procura o e-mail de entrega da Ecoscooting e carrega em «Não recebido», ou fala com o apoio ao cliente (que responde ao formulário dentro de 10 dias úteis).
 
 :::sources
 - [Ecoscooting: Atendimento ao cliente / Perguntas frequentes](https://www.ecoscooting.com/atencionCliente) – contactos em Portugal, horário, tentativas falhadas, 3 dias úteis, não recebido, 10 dias úteis, perdida ou roubada, devoluções, aviso de fraude (versões portuguesa, espanhola e inglesa)

@@ -1,15 +1,15 @@
 ---
 title: A que horas passa o carteiro dos CTT? Sábado e domingo
-description: Os CTT entregam ao sábado e, nas zonas mais povoadas, ao domingo; nos dias úteis, um Expresso pode chegar das 8h às 22h. E os horários da DPD, GLS e InPost.
+description: A que horas passa o carteiro dos CTT? Sem hora fixa, mas o CTT Expresso entrega das 8h às 22h, ao sábado e, em zonas povoadas, ao domingo. E DPD, GLS e InPost.
 slug: a-que-horas-entrega-ctt
 picture: Um relógio a marcar as oito da noite sob uma lua em quarto crescente, um calendário com os fins de semana assinalados, uma carrinha de faróis acesos e o Pip a espreitar de uma janela.
 published: 2026-10-14
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Uma encomenda pode chegar de manhã cedo ou já de noite, e quase nenhuma transportadora te promete uma hora. Nos CTT, uma Encomenda Expresso pode ter uma janela entre as 8h00 e as 22h00, e a GLS entrega em horário comercial, de segunda a sexta. O sábado depende da transportadora; ao domingo, só entregam os CTT, nas zonas mais povoadas, e o CTT Now.
+Os CTT não publicam uma hora fixa para a passagem do carteiro, mas numa Encomenda Expresso as janelas vão das 8h00 às 22h00, e o CTT Now entrega todos os dias das 9h00 às 21h00. Ao sábado, os CTT entregam encomendas «até ao final do dia» (embora o sábado não conte como dia útil nos prazos do Expresso); ao domingo, só entregam nas áreas de maior densidade populacional e no CTT Now. Na DPD o sábado depende da opção contratada pelo remetente, enquanto a GLS e a InPost só distribuem de segunda a sexta.
 
-## Até que horas entregam os CTT e as outras transportadoras?
+## Até que horas entregam os CTT, o CTT Expresso e as outras transportadoras?
 
 | Transportadora | Dias úteis | Sábado | Domingo |
 | --- | --- | --- | --- |
@@ -23,9 +23,9 @@ O que a tabela não mostra: nos CTT, o horário de sábado, o domingo e as três
 
 Nos Açores e na Madeira, conta com mais tempo. Nas tabelas do Expresso dos CTT, uma encomenda que sai do continente leva de 1 a 4 dias úteis até às ilhas se pesar até 5 kg, e de 5 a 15 se for mais pesada; a DPD entrega nas ilhas em 2 a 5 dias, até às 18h00 numa morada residencial com DPD Home Islands.
 
-## Os CTT entregam ao sábado e ao domingo?
+## Os CTT e o CTT Expresso entregam ao sábado e ao domingo?
 
-**Ao sábado**, sim: os CTT já entregavam encomendas ao sábado «até ao final do dia» quando anunciaram o domingo. Nas outras, depende:
+**Ao sábado**, sim: os CTT já entregavam encomendas ao sábado «até ao final do dia» quando anunciaram o domingo (mas nas tabelas de prazos do Expresso o sábado não conta como dia útil). Nas outras, depende:
 
 - **DPD:** só com DPD Home Saturday ou DPD Business Saturday, até às 13h00. É um serviço que o remetente escolhe.
 - **GLS:** entrega de segunda a sexta-feira, por isso o sábado não conta.
@@ -38,7 +38,7 @@ Nos Açores e na Madeira, conta com mais tempo. Nas tabelas do Expresso dos CTT,
 
 Ou seja: um sábado ou um domingo dependem quase sempre do que o **remetente** contratou, e raramente o acrescentas tu. A exceção é o Expresso dos CTT, onde podes escolher outra data (até 5 dias úteis além do prazo), pagando a alteração.
 
-## Como saber a que horas passa o carteiro?
+## A que horas passa o carteiro dos CTT e como saber a janela horária?
 
 Só sabes a hora se a transportadora te disser uma janela, que é o intervalo em que conta chegar a tua casa, calculado a partir do percurso do dia. Normalmente não a escolhes: dizem-ta, quase sempre no próprio dia.
 

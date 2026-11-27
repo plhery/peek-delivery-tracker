@@ -1,15 +1,15 @@
 ---
 title: À quelle heure livre Colissimo ? Horaires par transporteur
-description: Jusqu'à quelle heure livrent Colissimo, Chronopost, Mondial Relay, bpost et La Poste suisse, qui livre le week-end, et pourquoi le soir est normal.
+description: Horaires de livraison Colissimo (aucun horaire publié, e-mail 24 h avant) et Chronopost (livraison le samedi, Chrono 13 et 10), plus Colis Privé, GLS et bpost.
 slug: a-quelle-heure-livre-colissimo
 picture: Une horloge qui marque huit heures du soir sous un croissant de lune, un calendrier aux week-ends marqués, une camionnette phares allumés, et Pip qui regarde par la fenêtre.
 published: 2026-10-14
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Un colis peut arriver du petit matin jusqu'au soir, et presque aucun transporteur ne te promet une heure. La Poste ne publie aucun horaire pour Colissimo ; Colis Privé livre de 8 h à 19 h, et GLS du lundi au vendredi, de 8 h à 18 h. Le samedi, Chronopost livre aussi, par exemple avant 13 h avec Chrono 13 ; le dimanche dépend presque toujours du service que l'expéditeur a payé.
+La Poste ne publie aucun horaire de livraison pour Colissimo, mais envoie un e-mail 24 h avant le passage ; chez Chronopost, l'heure limite dépend du service payé par l'expéditeur, y compris le samedi en métropole (par exemple avant 13 h avec Chrono 13 ou avant 10 h avec Chrono 10 selon le code postal). Ailleurs, Colis Privé livre de 8 h à 19 h et GLS de 8 h à 18 h du lundi au vendredi ; en Belgique, bpost livre le samedi en point d'enlèvement ou distributeur (8 h à 17 h) et le dimanche à domicile (9 h à 19 h) quand la boutique a un accord.
 
-## Jusqu'à quelle heure livre chaque transporteur ?
+## Horaires de livraison : à quelle heure livrent Colissimo, Chronopost et les autres ?
 
 | Transporteur | En semaine | Samedi | Dimanche |
 | --- | --- | --- | --- |
@@ -23,7 +23,7 @@ Un colis peut arriver du petit matin jusqu'au soir, et presque aucun transporteu
 
 Le tableau ne montre pas **Amazon**, qui livre aussi le soir même : dans plus de 15 grandes villes, dont Paris, Lyon, Marseille et Lille, un membre Prime peut recevoir en quelques heures une commande éligible de plus de 35 euros.
 
-## Livraison de colis le samedi et le dimanche
+## Colissimo, Chronopost et bpost livrent-ils le samedi et le dimanche ?
 
 **Le samedi**, Chronopost livre aussi en France métropolitaine, à une heure qui dépend de l'option choisie par l'expéditeur : par exemple avant 13 h avec Chrono 13, et même avant 10 h avec Chrono 10 selon le code postal. GLS France, elle, ne livre que du lundi au vendredi. En Belgique, les livreurs de Mondial Relay passent dans les Points Relais du mardi au samedi ; chez bpost et à La Poste suisse, le samedi est aussi une option :
 

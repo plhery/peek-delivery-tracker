@@ -1,12 +1,12 @@
 ---
 title: Poste Italiane tracking: codici 1UW e 3UW, stati e giacenza
-description: Tracking Poste Italiane: dove trovi il codice spedizione (anche 1UW e 3UW), cosa vogliono dire gli stati, giacenza, Punto Poste, reclami e numero verde.
+description: Tracking Poste Italiane: codici 1UW e 3UW, ex Pacco Celere 3 (Poste Delivery Express), «disponibile per il ritiro», verifica ritiro e numero verde 803 160.
 slug: poste-italiane-tracking
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Poste Italiane consegna i pacchi dei negozi online italiani e quelli che arrivano dall'estero. Per seguire il tuo pacco cerca il codice spedizione in «Cerca Spedizioni» su poste.it (il servizio che prima si chiamava Dove Quando) o nell'App Poste Italiane, oppure incollalo nel box qui sopra. Il codice è sulla ricevuta di chi ha spedito; se hai comprato online, te lo dà il venditore.
+Poste Italiane è il corriere dei codici 1UW e 3UW, dell'ex Pacco Celere 3 (oggi Poste Delivery Express), delle raccomandate e dei pacchi dall'estero. Cerca il codice spedizione in «Cerca Spedizioni» su poste.it (ex Dove Quando), nell'App Poste Italiane o nel box qui sopra. Il codice è sulla ricevuta o nell'e-mail del venditore; numero verde 803 160 (+39 06 4526 3160 da cellulare).
 
 Sull'avviso di giacenza trovi il numero della raccomandata, da incollare qui sopra, l'ufficio postale e da quando ritirare; se l'avviso lo indica, puoi ritirarla anche online con Ritiro Digitale. Ti chiedono via SMS di pagare lo sdoganamento? Non aprire il link, che può essere falso: cerca il codice su www.poste.it e usa il pulsante «Paga». Peek mostra gli «Oneri doganali» che indica Poste. Il «Codice Prenotazione Ritiro» (CP più cifre) serve a chi spedisce per il ritiro a domicilio, non a seguire il pacco.
 
@@ -106,25 +106,25 @@ Peek controlla ogni ora, anche quando il pacco è in consegna, e un'ora dopo un 
 
 ## Domande sul tracking Poste Italiane
 
-### Codice 1UW o 3UW: che corriere è?
+### Codice 1UW o 3UW: che corriere è e come fare il tracking?
 
-È Poste Italiane: `1UW` e `3UW`, seguiti da 10 lettere o cifre, sono codici spedizione di Poste. A quale servizio corrispondano, poste.it non lo dice. Puoi seguire il pacco in «Cerca Spedizioni» su poste.it o nell'App Poste Italiane, oppure incollare il codice nel box qui sopra.
+Poste Italiane: `1UW` e `3UW`, seguiti da 10 lettere o cifre, sono codici spedizione di Poste (poste.it non dice a quale servizio corrispondano). Seguili in «Cerca Spedizioni» su poste.it, nell'App Poste Italiane o nel box qui sopra.
 
-### In quanto tempo arriva un pacco con Poste Italiane?
+### Cosa significa «disponibile per il ritiro dal giorno lavorativo successivo alla data indicata»?
 
-Per Poste, i pacchi Crono dei negozi online arrivano indicativamente in 4 giorni lavorativi, i Crono Express in 1-2. Poste Delivery Express impiega 1-4 giorni lavorativi oltre quello di accettazione. Questi tempi escludono il sabato: di norma Poste non consegna di sabato, salvo l'opzione a pagamento di Poste Delivery Business Express.
+Il pacco o la raccomandata ti aspetta all'ufficio postale dell'avviso dal giorno lavorativo successivo alla data indicata. Giacenza gratuita: 30 giorni per raccomandate (15 per Raccomandata 1); con Poste Delivery Web, 10 giorni lavorativi in ufficio postale, 7 al Punto Poste e 3 al locker (Crono: 10 al Punto Poste).
 
-### Codice prenotazione ritiro: come verifico il ritiro a domicilio?
+### Come tracciare un Pacco Celere 3 o la posta prioritaria?
 
-Il Codice Prenotazione Ritiro ce l'ha chi spedisce con Poste Delivery Web e chiede il ritiro a domicilio: è nell'Archivio, accanto al codice spedizione. Per sapere lo stato del ritiro chiama l'803 160 (da rete fissa) o lo 06 4526 3160 e comunica quel codice, oppure verifica online in «Prenota e verifica ritiro pacco a domicilio» su poste.it. Il corriere è passato e non c'eri? Porta il pacco in un ufficio postale o Punto Poste abilitato, o fissa gratis un nuovo ritiro al telefono con il codice spedizione.
+Pacco Celere 1 e 3 sono oggi Poste Delivery Express e restano tracciabili in «Cerca Spedizioni» per 2 mesi. La posta prioritaria (Posta1) non è più disponibile dal 1° maggio 2026: resta Postapriority Internazionale in ufficio postale, tracciata fino al Centro di Scambio Internazionale.
 
-### Quanto tempo ho per ritirare un pacco al Punto Poste?
+### Verifica ritiro Poste Italiane: come uso il Codice Prenotazione Ritiro?
 
-Dipende dal servizio: per Poste Delivery Web 7 giorni lavorativi in un Punto Poste e 3 in un locker, per Crono 10 nei Punto Poste. Per Poste Delivery Web i giorni partono dall'arrivo del pacco nel punto.
+Chi spedisce con Poste Delivery Web trova il Codice Prenotazione Ritiro (`CP` più cifre) nell'Archivio, accanto al codice spedizione. Verifica il ritiro in «Prenota e verifica ritiro pacco a domicilio» su poste.it, all'803 160 (da fisso) o allo 06 4526 3160. Se non c'eri, porta il pacco in ufficio postale o Punto Poste, o riprenota gratis al telefono.
 
-### Come parlo con un operatore per un pacco?
+### Tempi di consegna e numero verde Poste Italiane?
 
-Chiama l'803 160 da rete fissa o il +39 06 4526 3160 da cellulare, dal lunedì al sabato dalle 8:00 alle 20:00, con il codice spedizione a portata di mano.
+Indicativamente 4 giorni lavorativi per Crono, 1-2 per Crono Express e 1-4 oltre l'accettazione per Poste Delivery Express, sabato escluso (di sabato solo con l'opzione di Poste Delivery Business Express). Numero verde 803 160 da fisso o +39 06 4526 3160 da cellulare, lun-sab 8:00-20:00.
 
 :::sources
 - [Poste Italiane: FAQ Spedizioni e consegne](https://www.poste.it/assistenza/faq-spedizioni-e-consegne/) – codice, Cerca Spedizioni, avviso, delega, prenotazione, pacchi dall'estero, raccomandate

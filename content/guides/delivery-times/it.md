@@ -1,15 +1,15 @@
 ---
 title: A che ora consegna il corriere? Poste, BRT, GLS e il sabato
-description: Fino a che ora consegnano Poste Italiane, BRT, GLS e Amazon, se il sabato conta come giorno lavorativo, chi passa la domenica e perché si consegna anche alle 20.
+description: Orari di consegna di Poste Italiane, BRT, GLS e Amazon: se il sabato è giorno lavorativo, Poste Delivery Business Express di sabato e chi passa la domenica.
 slug: a-che-ora-consegna-il-corriere
 picture: Un orologio che segna le otto di sera sotto una falce di luna, un calendario con i fine settimana evidenziati, un furgone a fari accesi e Pip che guarda da una finestra.
 published: 2026-10-14
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Il corriere può passare dalla mattina presto alla sera tardi, e quasi nessuno ti promette un'ora. Con la consegna in giornata Amazon porta i pacchi fino alle 22, Poste Italiane e BRT non pubblicano un orario, e la Posta svizzera ti dà una fascia di 40-120 minuti nelle zone dove il servizio è attivo. Il sabato è un giorno normale solo per alcuni, e di solito lo sceglie chi spedisce; tra i corrieri di questa guida, la domenica consegna solo Amazon.
+Poste Italiane, BRT e GLS non pubblicano un orario fisso di consegna, ma puoi ricevere pacchi fino a sera tardi: fino alle 21:00 con la «Consegna di Sera» di Poste Delivery Business Express e il «Recapito serale» della Posta svizzera, fino alle 22:00 con la consegna in giornata di Amazon. Il sabato non conta come giorno lavorativo per Poste Delivery Express e Standard né per BRT; di sabato consegnano solo servizi scelti dal mittente (come Poste Delivery Business Express con «Consegna di Sabato» o GLS SaturdayExpressService) e Amazon, che è anche l'unico di questa guida a consegnare la domenica.
 
-## Fino a che ora consegna il corriere?
+## Orari di consegna: fino a che ora passano Poste Italiane, BRT, GLS e Amazon?
 
 | Corriere | Dal lunedì al venerdì | Sabato | Domenica |
 | --- | --- | --- | --- |
@@ -40,7 +40,7 @@ Dipende dal corriere e dal servizio che ha scelto il mittente. Questi sono i tem
 
 I tempi partono da quando il corriere ritira o accetta il pacco, non da quando ordini. Con Poste Delivery Standard, per un pacco accettato dopo l'orario limite indicato in ufficio postale i tempi decorrono dal giorno lavorativo successivo. Sui siti di BRT e GLS puoi calcolare i tempi per la tua località inserendo il CAP.
 
-## I corrieri consegnano anche il sabato e la domenica?
+## Il sabato è giorno lavorativo? I corrieri consegnano di sabato e domenica?
 
 **Il sabato** dipende dal corriere e da quello che ha pagato il mittente:
 

@@ -1,12 +1,12 @@
 ---
 title: DPD Suisse : suivre un colis, points relais et contact
-description: Suivre un colis DPD Suisse : le numéro à 14 chiffres qui commence par 060, les statuts de myDPD, les points relais, utilisables le samedi, et le téléphone de DPD.
+description: Suivre un colis DPD Suisse : numéro à 14 chiffres (060), contact par téléphone (058 311 13 13), points relais DPD Pickup, statuts myDPD et livraison le samedi.
 slug: suivi-dpd-suisse
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-DPD Suisse, c'est DPD (Schweiz) AG, à Buchs ZH : un service de colis du réseau Geopost, avec plus de 1000 points relais DPD Pickup Location dans tout le pays. Pour suivre ton colis, saisis son numéro de colis à 14 chiffres sur [myDPD](https://www.dpdgroup.com/ch/mydpd/), le site de suivi de DPD, ou colle-le dans le champ ci-dessus. Tu le reçois en général par e-mail, et il figure aussi sur l'avis de passage que DPD laisse dans ta boîte aux lettres quand tu n'es pas là.
+DPD Suisse, c'est DPD (Schweiz) AG, à Buchs ZH : un service de colis du réseau Geopost avec plus de 1000 points relais DPD Pickup Location dans tout le pays. Pour suivre ton colis, saisis son numéro à 14 chiffres (les numéros suisses commencent par 060) sur [myDPD](https://www.dpdgroup.com/ch/mydpd/) ou colle-le dans le champ ci-dessus ; si tu n'étais pas là, il figure aussi sur l'avis de passage (à ne pas confondre avec le numéro d'avis P00). Besoin de contacter DPD Suisse par téléphone ? Un seul numéro sert pour toute la Suisse, y compris Genève et Lausanne : le 058 311 13 13, du lundi au vendredi de 8 h à 18 h.
 
 ## Numéro de suivi DPD Suisse : où le trouver
 
@@ -85,25 +85,25 @@ Au point relais, le magasin est nommé quand DPD le nomme, son adresse en géné
 
 ## Questions sur le suivi DPD Suisse
 
-### Combien de temps DPD garde-t-il un colis en point relais ?
+### Comment contacter DPD Suisse par téléphone ?
 
-Sept jours calendaires, week-end compris, selon l'aide de myDPD. Ensuite, DPD le renvoie à l'expéditeur.
+DPD donne un numéro unique pour toute la Suisse, sans ligne propre à Genève ou à Lausanne : le 058 311 13 13, du lundi au vendredi de 8 h à 18 h (CHF 0.08 la minute au maximum selon l'opérateur ; +41 58 311 13 13 depuis l'étranger). DPD ne fournit aucune adresse e-mail aux destinataires : pour écrire, passe par le formulaire « Contacter DPD » de la page support.
 
-### DPD Suisse livre-t-il le samedi ?
+### Combien de temps un colis reste-t-il en point relais DPD Pickup ?
 
-DPD ne le dit pas pour les livraisons à domicile. Ses points relais sont utilisables le samedi, et son tableau des fêtes prévoit des livraisons, sans enlèvements, le samedi 28 novembre 2026.
+Sept jours calendaires, week-end compris, selon l'aide de myDPD. Les points relais DPD Pickup Location sont des commerces utilisables aussi le soir ou le samedi ; présente une pièce d'identité officielle avec photo. Passé les 7 jours, DPD renvoie le colis à l'expéditeur.
 
-### À quelle heure DPD livre-t-il en Suisse ?
+### Où trouver son numéro de colis DPD Suisse (060 ou avis P00) ?
 
-DPD ne publie pas d'horaires de livraison. Si l'expéditeur a choisi Predict, tu reçois le jour même un créneau d'une heure par SMS ou par e-mail.
+Le numéro de colis compte 14 chiffres (les numéros suisses commencent par 060) et arrive en général par e-mail de l'expéditeur, ou sur l'avis de passage. Le numéro commençant par P00 sous le code-barres de l'avis n'est pas le numéro de colis : c'est le numéro d'avis qui sert à commander une nouvelle livraison sur myDPD.
 
-### Combien de temps met un colis DPD en Suisse ?
+### DPD Suisse livre-t-il le samedi et à quelle heure ?
 
-En règle générale un jour pour un colis national, selon DPD ; pour l'international, cela dépend du pays. Ses conditions précisent que ces délais sont indicatifs, non garantis.
+DPD ne publie pas d'horaires de livraison ni de règle générale pour les livraisons à domicile le samedi. Si l'expéditeur a choisi Predict, tu reçois le jour même un créneau d'une heure par SMS ou par e-mail. Les points relais sont utilisables le samedi, et son tableau des fêtes prévoit des livraisons sans enlèvements le samedi 28 novembre 2026.
 
-### Comment retourner un colis DPD en Suisse ?
+### Combien de temps met un colis DPD en Suisse et comment le retourner ?
 
-Dépose-le dans un point relais DPD avec son bon de retour : sans bon de retour, les points relais ne l'acceptent pas.
+En règle générale un jour pour un colis national, selon DPD (délais indicatifs, non garantis ; à l'international, cela dépend du pays). Pour un retour, dépose le colis dans un point relais DPD avec son bon de retour : sans bon de retour, les points relais ne l'acceptent pas.
 
 :::sources
 - [DPD Suisse : Suivi de colis](https://www.dpd.com/ch/fr/mydpd/) – Predict, créneau d'une heure, modifications, points relais le soir et le samedi

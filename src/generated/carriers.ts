@@ -16686,6 +16686,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#124381"
     },
     {
+      "id": "spee-dee",
+      "catalog": "spee-dee",
+      "slug": "spee-dee-tracking",
+      "title": "Rastreio Spee-Dee Delivery: códigos SP, estados e ajuda",
+      "name": "Spee-Dee",
+      "color": "#ff4734"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "5post-tracking",
@@ -21164,6 +21172,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00308a"
     },
     {
+      "id": "skypostal",
+      "catalog": "skypostal",
+      "slug": "skypostal-tracking",
+      "title": "SkyPostal 物流查询：SKAMZUS 与 SP 单号、状态与客服",
+      "name": "SkyPostal",
+      "color": "#088aea"
+    },
+    {
       "id": "yunda",
       "catalog": "yunda",
       "slug": "yunda-kuaidi-chaxun",
@@ -21266,6 +21282,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "PasarEX 跨境快递追踪：AMZPSR 亚马逊单号、清关与客服",
       "name": "PasarEX",
       "color": "#124381"
+    },
+    {
+      "id": "spee-dee",
+      "catalog": "spee-dee",
+      "slug": "spee-dee-tracking",
+      "title": "Spee-Dee Delivery 物流查询：SP 单号、覆盖州与客服",
+      "name": "Spee-Dee",
+      "color": "#ff4734"
     },
     {
       "id": "5post",

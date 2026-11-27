@@ -157,7 +157,10 @@ export const CARRIER_CAPABILITIES = {
           "placeholder": "https://trackandtrace.planzergroup.com/shared/…",
           "help": "Paste the complete shared link, including its accessKey."
         }
-      ]
+      ],
+      "recognitionRank": 255,
+      "recognitionPattern": "^91\\d{18,20}$",
+      "recognitionServedCountriesOnly": true
     },
     "trackingUrlTemplate": "https://tracking.app.planzer.ch/delivery/info?deliveryNumber={trackingNumber}",
     "linkRules": [
@@ -185,6 +188,11 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^91346097\\d{12}$",
         "confidence": "high"
+      },
+      {
+        "pattern": "^91\\d{18,20}$",
+        "confidence": "low",
+        "servedCountriesOnly": true
       }
     ],
     "aliases": [
@@ -2187,7 +2195,7 @@ export const CARRIER_CAPABILITIES = {
           "gls-group.eu",
           "gls-group.com"
         ],
-        "pathPattern": "^/(?:GROUP|BE|BG|CZ|DK|FI|HR|IE|LU|NL|RO|RS|SI|SK)/",
+        "pathPattern": "^/(?:GROUP|BE|BG|DK|FI|HR|IE|LU|NL|RO|RS|SI|SK)/",
         "params": [
           "match",
           "parcelNumber",
@@ -2577,7 +2585,9 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Dublin",
     "tracking": {
       "mode": "automatic",
-      "adapter": "an-post"
+      "adapter": "an-post",
+      "recognitionRank": 343,
+      "recognitionPattern": "^AIE\\d{8}$"
     },
     "linkRules": [
       {
@@ -2596,6 +2606,10 @@ export const CARRIER_CAPABILITIES = {
         "pattern": "^[A-Z]{2}\\d{9}IE$",
         "confidence": "high",
         "checksum": "s10"
+      },
+      {
+        "pattern": "^AIE\\d{8}$",
+        "confidence": "low"
       }
     ],
     "trackingUrlTemplate": "https://www.anpost.com/Post-Parcels/Track/History?item={trackingNumber}",
@@ -32348,7 +32362,9 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Bucharest",
     "tracking": {
       "mode": "automatic",
-      "adapter": "dpd-ro"
+      "adapter": "dpd-ro",
+      "browserRecognitionRank": 270,
+      "browserRecognitionPattern": "^8\\d{10}$"
     },
     "trackingUrlTemplate": "https://tracking.dpd.ro/?shipmentNumber={trackingNumber}",
     "linkRules": [
@@ -32385,7 +32401,8 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^8\\d{10}$",
-        "confidence": "low"
+        "confidence": "low",
+        "servedCountriesOnly": true
       }
     ],
     "trackingSearchUrl": "https://www.dpd.com/ro/ro/",
@@ -71554,6 +71571,40 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [],
     "trackingSearchUrl": "https://www.skynetww.com/in-en/tracking",
     "helpUrl": "https://www.skynetww.com/in-en/contact"
+  },
+  "gls-cz": {
+    "displayName": "GLS Czech Republic",
+    "aliases": [
+      "GLS Česká republika"
+    ],
+    "countries": [
+      "CZ"
+    ],
+    "color": "#ffdd00",
+    "selectable": true,
+    "timezone": "Europe/Prague",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "gls-cz"
+    },
+    "trackingUrlTemplate": "https://gls-group.com/CZ/cs/sledovani-zasilek/?match={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "gls-group.com",
+          "gls-group.eu"
+        ],
+        "pathPattern": "^/CZ/",
+        "params": [
+          "match",
+          "parcelNumber",
+          "matchParcelNumber"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://gls-group.com/CZ/cs/sledovani-zasilek/",
+    "helpUrl": "https://gls-group.com/CZ/cs/kontakty/"
   }
 } as const;
 
@@ -73731,7 +73782,8 @@ export const CARRIER_IDS = [
   "tmw-express",
   "daraii",
   "masspack",
-  "skynet-in"
+  "skynet-in",
+  "gls-cz"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

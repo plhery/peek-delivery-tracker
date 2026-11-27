@@ -20,7 +20,7 @@ A Slovenská pošta segue o [formato postal internacional](guide:tracking-number
 
 Nem todo envio possui código rastreável: se o remetente não informou um, a Slovenská pošta diz que o objeto provavelmente não tem rastreamento. Se o remetente cadastrou seu e-mail ou telefone, a encomenda aparece no aplicativo da Slovenská pošta assim que você confirma ser o destinatário. Não acha o código? Veja [onde mais procurar um código de rastreamento](guide:find-tracking-number).
 
-Um código de 14 dígitos começando por `703` é o formato da Slovak Parcel Service, uma transportadora privada, não da Slovenská pošta. Já um número postal terminado em `CZ` pertence à Česká pošta. A Slovenská pošta acrescenta que um "código de rastreamento" em qualquer outro formato é sinal de golpe.
+Um código de 14 dígitos começando por `703` é o formato da Slovak Parcel Service, uma transportadora privada, não da Slovenská pošta. Já um número postal terminado em `CZ` pertence à [Česká pošta](carrier:ceska-posta). A Slovenská pošta acrescenta que um "código de rastreamento" em qualquer outro formato é sinal de golpe.
 
 ## O que significam os status da Slovenská pošta
 

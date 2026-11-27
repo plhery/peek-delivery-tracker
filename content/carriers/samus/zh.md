@@ -21,7 +21,7 @@ SAMUS 面向企业客户的文档展示了面单单号与条码的标准格式�
 
 粘贴到 Peek 时，空格、连字符和小写字母不影响识别。在 samus.lt 上，查询结果会显示“Parcel number”和“Parcel code”；若页面提示 `Your letter with number "…" is not found`，请向寄件方核实单号。
 
-如果单号为其他格式，实际承运方可能是 [Lietuvos paštas](carrier:lietuvos-pastas)、[Omniva](carrier:omniva) 或 Venipak。可参阅[快递单号格式指南](guide:tracking-number-formats)（英文）加以区分。
+如果单号为其他格式，实际承运方可能是 [Lietuvos paštas](carrier:lietuvos-pastas)、[Omniva](carrier:omniva) 或 [Venipak](carrier:venipak)。可参阅[快递单号格式指南](guide:tracking-number-formats)（英文）加以区分。
 
 ## SAMUS 物流状态含义
 

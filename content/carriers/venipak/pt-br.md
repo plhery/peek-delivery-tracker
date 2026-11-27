@@ -39,9 +39,9 @@ O Peek consulta a Venipak em inglês, portanto estes são os textos em inglês d
 
 Duas expressões costumam confundir: `Delivered to pickup point` indica que o pacote está aguardando retirada e o prazo de guarda já começou; já `Delivered` também vale quando o volume é retirado de um armário. `Wrong shipment ID` não é um status, mas a recusa do rastreador a um código inválido — confira a digitação.
 
-A Venipak não publica glossário de status, e nenhum status específico de tentativa falha ou devolução apareceu no rastreador. Se ficar em `At terminal`, a orientação da Venipak é aguardar o SMS indicando quando e como chegará.
+A Venipak não publica glossário de status, e nenhum status de entrega não realizada ou devolução apareceu no rastreador. Se ficar em `At terminal`, a orientação da Venipak é aguardar o SMS indicando quando e como chegará.
 
-## Armários, pontos de retirada e entregas falhas da Venipak
+## Armários, pontos de retirada e entregas não realizadas da Venipak
 
 **Quando chega.** A Venipak afirma que cerca de 98% das encomendas chegam no dia útil seguinte. Entregas residenciais ocorrem de segunda a sexta, das 8h às 17h, com SMS matinal trazendo a faixa horária; as páginas da Lituânia e Letônia acrescentam que você pode ligar para o entregador no número da mensagem. Entregas aos sábados ocorrem apenas em Vilnius, Kaunas, Klaipėda, Šiauliai, Panevėžys e Alytus, quando contratadas pelo remetente.
 
@@ -81,11 +81,11 @@ Cada país tem atendimento próprio, no horário local báltico:
 
 O [Peek](/) reconhece imediatamente números como `V48291E7364058` como Venipak, já que nenhuma outra transportadora usa esse formato (minúsculas ou espaço antes do `E` não atrapalham). Links de rastreamento em venipak.com ou venipak.lt com o número também funcionam; em links de venipak.lv o Peek lê apenas códigos `V…E…`.
 
-Números de remessa de 7 a 10 dígitos não são identificados automaticamente como Venipak: escolha Venipak em "Alterar" ou cole um link de venipak.com ou venipak.lt. Remessas de um volume passam a ser acompanhadas pelo número do volume; com vários volumes, adicione o número de cada um.
+Números de remessa de 7 a 10 dígitos nunca são identificados como Venipak: escolha Venipak em "Trocar" ou cole um link de venipak.com ou venipak.lt. Remessas de um volume passam a ser acompanhadas pelo número do volume; com vários volumes, adicione o número de cada um.
 
-As leituras da Venipak não informam fuso horário; o Peek interpreta pelo horário local do ponto de leitura — igual nos três países bálticos — e exibe o histórico oficial da Venipak. Com o pacote aberto no Peek ou no dia da entrega com notificações ligadas, verifica a cada 10 minutos no máximo, e a cada 2 minutos a partir das 6h (horário local) no dia em que sai para entrega, enquanto o rastreador oficial responder; fora disso, de hora em hora. Após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora, e a cada 6 horas após sete dias em "Etiqueta criada". O Peek pode mostrar o armário ou ponto onde o pacote aguarda junto com a cidade. Os textos permanecem em inglês como a Venipak escreve, salvo `Delivered` e `Out for delivery`, exibidos nos termos do Peek. Você escolhe alertas para "Cada atualização", "Etapas importantes" ou "Somente na entrega".
+As leituras da Venipak não informam fuso horário; o Peek interpreta pelo horário local do ponto de leitura — igual nos três países bálticos — e exibe o histórico da própria Venipak. Com o pacote aberto no Peek ou no dia da entrega com notificações ligadas, verifica a cada 10 minutos no máximo, e a cada 2 minutos a partir das 6h (horário local) no dia em que sai para entrega, enquanto o rastreador da própria Venipak responder; fora disso, de hora em hora. Após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora, e a cada 6 horas após sete dias em "Etiqueta criada". O Peek pode mostrar o armário ou ponto onde o pacote aguarda junto com a cidade. Os textos permanecem em inglês como a Venipak escreve, salvo `Delivered` e `Out for delivery`, exibidos nos termos do Peek. Você escolhe alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega".
 
-Após quatro dias sem leitura em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek destaca o dia da última atualização ("Sem atualização de rastreamento desde …"), exibe "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Venipak." e o link "Obter ajuda da Venipak". Após três semanas, mostra "Nada de novo há mais de três semanas. Se ainda não chegou, fale com o vendedor. O Peek continua consultando Venipak."
+Após quatro dias sem leitura em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek destaca o dia da última atualização ("Sem atualizações desde …"), exibe "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Venipak." e o link "Pedir ajuda a Venipak". Após três semanas, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando Venipak."
 
 A Venipak não informa data prevista nem peso; o Peek omite coordenadas do mapa, quantidade de volumes e conferência de destinatário, e não pode contatar a Venipak por você.
 
@@ -93,7 +93,7 @@ A Venipak não informa data prevista nem peso; o Peek omite coordenadas do mapa,
 
 ### Posso rastrear um pacote Venipak sem o código?
 
-Sim, no novo aplicativo da Venipak: segundo notícia da Venipak Estônia, o aplicativo funciona nos três países bálticos e mostra automaticamente todas as encomendas ligadas ao seu e-mail ou telefone. No site, o formulário aceita ID de cliente e número de documento, que só o remetente possui — peça à loja ou, na Lituânia, aguarde o SMS na véspera.
+Sim, no novo aplicativo da Venipak: segundo notícia da Venipak Estônia, o aplicativo funciona nos três países bálticos e mostra todas as encomendas ligadas ao seu e-mail ou telefone. No site, o formulário aceita ID de cliente e número de documento, que só o remetente possui — peça à loja ou, na Lituânia, aguarde o SMS na véspera.
 
 ### Posso alterar o endereço de uma encomenda Venipak?
 

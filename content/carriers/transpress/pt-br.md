@@ -6,7 +6,7 @@ published: 2026-11-27
 updated: 2026-11-27
 ---
 
-A Transpress (Транспрес) é uma empresa búlgara de entregas expressas e logística com sede no parque industrial Sofia-Bozhurishte. Seus serviços de courier operam por meio de duas operadoras postais registradas sob os mesmos termos gerais: Транспрес ООД e Транспрес Деливъри ЕООД. Para acompanhar um pacote, cole o link do rastreador da Transpress na caixa acima ou cole o número e selecione Transpress manualmente, pois o Peek não reconhece números da Transpress apenas pelo formato.
+A Transpress (Транспрес) é uma empresa búlgara de entregas expressas e logística com sede no parque industrial Sofia-Bozhurishte. Seus serviços de courier operam por meio de duas operadoras postais registradas sob os mesmos termos gerais: Транспрес ООД e Транспрес Деливъри ЕООД. Para acompanhar um pacote, cole o link do rastreador da Transpress na caixa acima ou cole o número e selecione Transpress você mesmo, pois o Peek não reconhece números da Transpress apenas pelo formato.
 
 ## Código de rastreamento Transpress: como identificar
 
@@ -14,7 +14,7 @@ O catálogo do Peek não possui um padrão de formato para a Transpress, e o ras
 
 | O que você cola | O que o Peek faz |
 | --- | --- |
-| Apenas o número Transpress | O Peek pode listar outras transportadoras em "Compatível com este código" apenas por semelhança de comprimento. Selecione Transpress manualmente (veja abaixo). |
+| Apenas o número Transpress | O Peek pode listar outras transportadoras em "Compatível com este código": elas só combinam com o formato. Selecione Transpress você mesmo (veja abaixo). |
 | Link do rastreador Transpress: `transpress.bg/bg/prosledjavane?track-number=` ou `/en/prosledjavane?track-number=` seguido do número | O Peek extrai o número do link e identifica Transpress na hora ("Transportadora detectada"). |
 | Número que a loja diz ser de outra transportadora | Rastreie nessa transportadora: o e-mail da loja é a melhor pista sobre quem entrega. |
 
@@ -32,12 +32,12 @@ O Peek não acessa diretamente o rastreador da Transpress, por isso não possui 
 | "Na alfândega" | Uma encomenda internacional está sob análise aduaneira; os dias ali se somam ao prazo. |
 | "Saiu para entrega" | Em rota de entrega hoje. |
 | "Tentativa de entrega" | O entregador tentou e não conseguiu entregar. |
-| "Pronta para retirada" | Aguardando você para retirada, por exemplo em uma agência Transpress. Confirme o local no site da Transpress ou com a loja. |
+| "Pronta para retirada" | Aguardando você para retirada, por exemplo em uma agência Transpress. Confirme o local no rastreador da Transpress ou com a loja. |
 | "Entregue" | Entregue a você ou a quem recebeu em seu nome. |
 | "Devolvida ao remetente" | Voltou para quem enviou. |
 | "Precisa de atenção" | O serviço apontou um problema; leia a linha logo abaixo. |
 
-Antes que algum serviço retorne dados, o Peek mostra "Verificando atualizações" e depois "Aguardando Transpress". Se duas consultas seguidas falharem, continua exibindo "Aguardando Transpress" e avisa na página que ainda não foi possível contatar a Transpress e que segue tentando. Se você deixar a seleção com o Peek, a espera aparece como "Ainda sem histórico de rastreamento", e "Atualização indisponível" indica duas falhas seguidas enquanto ele segue tentando. Mais em [status de rastreamento explicados](guide:tracking-statuses), em inglês.
+Antes que algum serviço retorne dados, o Peek mostra "Buscando atualizações" e depois "Aguardando Transpress". Se duas consultas seguidas falharem, continua exibindo "Aguardando Transpress", e a página diz "Ainda não foi possível acessar Transpress. O Peek continua tentando." Se você deixar a seleção com o Peek, a espera aparece como "Ainda sem histórico de rastreamento", e "Atualização indisponível" indica duas falhas seguidas enquanto ele segue tentando. Mais em [status de rastreamento explicados](guide:tracking-statuses), em inglês.
 
 ## Entrega da Transpress na Bulgária
 
@@ -57,13 +57,13 @@ Segundo a página de serviços de courier e os termos vigentes desde 1º de nove
 
 **Confira na hora.** Verifique o conteúdo com o entregador presente. Havendo dano, ambos assinam relatório em duas vias ou observação no documento de entrega.
 
-Para entregas falhas ou não retiradas, veja [tentativa de entrega](guide:missed-delivery), em inglês, e [encomendas não retiradas](guide:uncollected-parcel), em inglês. Para pacotes fora da UE, veja [alfândega](guide:customs), em inglês.
+Se a entrega não for realizada ou a encomenda ficar esperando por você, veja [tentativa de entrega](guide:missed-delivery), em inglês, e [encomendas não retiradas](guide:uncollected-parcel), em inglês. Para pacotes fora da UE, veja [alfândega](guide:customs), em inglês.
 
 ## Encomenda Transpress parada, extraviada ou devolvida
 
-**Nada ainda.** Pode ser que o serviço de rastreamento ainda não conheça o número ou não acompanhe envios da Transpress. O Peek tenta novamente cada serviço sem dados no máximo a cada dia. Se passarem dois dias sem linha alguma, aparece o aviso de que ainda aguarda a primeira atualização da transportadora. Confira o número no e-mail da loja; se nada surgir após alguns dias, abra o site oficial com "Abrir o site de Transpress" e pergunte à loja se já foi despachada.
+**Nada ainda.** Pode ser que o serviço de rastreamento ainda não conheça o número ou não acompanhe envios da Transpress. O Peek tenta novamente cada serviço sem dados no máximo a cada dia. Se passarem dois dias sem linha alguma, o Peek sinaliza: "Aguardando a primeira atualização da transportadora". Confira o número no e-mail da loja; se nada surgir após alguns dias, abra o rastreador da própria Transpress com "Abrir o site de Transpress" e pergunte à loja se já foi despachada.
 
-**Sem novidades por dias.** Após quatro dias sem nova leitura em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek destaca o dia da última linha ("Sem atualização de rastreamento desde seg 12 out"), exibe "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Transpress." e o link "Obter ajuda da Transpress" para a página de contatos. Após três semanas sem novidade, mostra "Nada de novo há mais de três semanas. Se ainda não chegou, fale com o vendedor. O Peek continua consultando Transpress." Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating), em inglês.
+**Sem novidades por dias.** Após quatro dias sem nova leitura em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek destaca o dia da última linha ("Sem atualizações desde seg 12 out"), exibe "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Transpress." e o link "Pedir ajuda a Transpress" para a página de contatos. Após três semanas sem novidade, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando Transpress." Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating), em inglês.
 
 **Devolvida.** Quando não consegue entregar (recusa, ausência prolongada, destinatário desconhecido ou endereço errado/incompleto), a Transpress avisa o remetente e devolve em até 14 dias do aviso, com frete de ida e volta por conta do remetente. Se o remetente não responder em 3 dias úteis ou não for encontrado, o pacote fica considerado não reclamado por mais 14 dias e depois passa à propriedade da Transpress, que pode vendê-lo ou destruí-lo. Veja [devolvida ao remetente](guide:returned-to-sender), em inglês.
 
@@ -87,21 +87,21 @@ Conforme a página de contatos em transpress.bg:
 
 ## Como rastrear uma encomenda Transpress no Peek
 
-O [Peek](/) acompanha mais de 4.500 transportadoras, mas não identifica códigos da Transpress pelo formato. Um link do rastreador da Transpress já a seleciona na hora; com o número sozinho, escolha manualmente:
+O [Peek](/) acompanha mais de 4.500 transportadoras, mas não identifica códigos da Transpress pelo formato. Um link do rastreador da Transpress já a seleciona na hora; com o número sozinho, escolha você mesmo:
 
 1. Cole o código na caixa acima.
-2. Toque em "Alterar" ao lado da linha da transportadora e busque por Transpress ("Транспрес" ou "Bulgaria" também encontram).
-3. Selecione Transpress e inicie o rastreamento.
+2. Toque em "Trocar" ao lado da linha da transportadora e busque por Transpress. "Транспрес" também a encontra, com "Também chamada de …", assim como "Bulgaria".
+3. Selecione Transpress: a linha passa a mostrar "Escolhida por você". Rastreie a encomenda.
 
-Em pacotes já adicionados, use "Alterar transportadora". Antes de escolher, a linha pode indicar que o Peek consultará ao rastrear ou que ainda não foi encontrado — ambos são normais em códigos novos.
+Em pacotes já adicionados, use "Trocar transportadora". Antes de escolher, a linha da transportadora pode mostrar "o Peek descobre quando você rastrear" ou "ainda não encontrada · o Peek continua verificando": ambos são normais em códigos novos.
 
 Se você deixar a transportadora em aberto, o Peek consulta serviços de rastreamento e registra sob Transpress sozinho assim que houver movimentação indicando Transpress.
 
-**O que você vê.** A etapa e cada linha retornada pelo serviço de rastreamento, com data e local quando informados. Antes que um serviço tenha o pacote, "Abrir o site de Transpress" abre seu código no rastreador oficial em búlgaro (há versão em inglês); depois que um serviço mostra o histórico, o link passa a abrir a página do serviço.
+**O que você vê.** A etapa e cada linha retornada pelo serviço de rastreamento, com data e local quando informados. Antes que um serviço tenha o pacote, "Abrir o site de Transpress" abre seu código no rastreador da própria Transpress, em búlgaro (há versão em inglês); depois que um serviço mostra o histórico, o link passa a abrir a página do serviço.
 
-**Outra transportadora.** Nos primeiros 30 dias, o Peek também consulta transportadoras cujo formato combine com o código e migra automaticamente se alguma delas registrar avanço ("Alterada automaticamente de Transpress").
+**Outra transportadora.** Nos primeiros 30 dias, o Peek também consulta transportadoras cujo formato combine com o código e, se alguma delas mostrar a encomenda em movimento com esse código, passa a encomenda para ela ("Transportadora trocada automaticamente (antes: Transpress)").
 
-**Frequência.** Consulta de hora em hora, a cada 3 horas após um dia sem novidades e a cada 6 horas após sete dias em "Etiqueta criada". No dia em que sai para entrega, verifica a cada 15 minutos no máximo enquanto aberto ou com notificações ativas. Alertas cobrem "Cada atualização", "Etapas importantes" ou "Somente na entrega".
+**Frequência.** Consulta de hora em hora, a cada 3 horas após um dia sem novidades e a cada 6 horas após sete dias em "Etiqueta criada". No dia em que sai para entrega, verifica a cada 15 minutos no máximo enquanto aberto ou com notificações ativas. Alertas cobrem "Cada movimentação", "Etapas importantes" ou "Só a entrega".
 
 O Peek não pode contatar a Transpress, a loja ou o remetente por você, alterar a entrega nem abrir reclamação.
 
@@ -109,7 +109,7 @@ O Peek não pode contatar a Transpress, a loja ou o remetente por você, alterar
 
 ### Como rastrear uma encomenda Transpress?
 
-Cole um link do rastreador da Transpress na caixa acima para seleção automática, ou cole o número, toque em "Alterar" e escolha Transpress (o Peek não a reconhece só pelo formato) para acompanhar via serviços de rastreamento. O rastreador oficial fica em "Shipment tracking" em transpress.bg.
+Cole um link do rastreador da Transpress na caixa acima e o Peek identifica a Transpress sozinho, ou cole o número, toque em "Trocar" e escolha Transpress (o Peek não a reconhece só pelo formato) para acompanhar via serviços de rastreamento. O rastreador da própria Transpress fica em "Shipment tracking" em transpress.bg.
 
 ### Quantas vezes a Transpress tenta entregar?
 

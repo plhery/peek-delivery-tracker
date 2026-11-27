@@ -22,7 +22,7 @@ updated: 2026-11-24
 
 官方短信均以 `LPASTAS` 或 `LP_EXPRESS` 作为发件人名称发送，绝不会来自电话号码。
 
-结尾为其他国家代码则属于对应国家的邮政，例如 `…LV` 为拉脱维亚邮政（Latvijas Pasts），`…EE` 为[爱沙尼亚邮政（Omniva）](carrier:omniva)。境外寄入立陶宛的包裹会保留发件国邮政的原始单号。另一家在立陶宛运营的快递 Venipak 则使用不同格式（如 `V48291E7365428`）。如果找不到单号，请参阅[如何查找运单号](guide:find-tracking-number)（英文）。
+结尾为其他国家代码则属于对应国家的邮政，例如 `…LV` 为拉脱维亚邮政（Latvijas Pasts），`…EE` 为[爱沙尼亚邮政（Omniva）](carrier:omniva)。境外寄入立陶宛的包裹会保留发件国邮政的原始单号。另一家在立陶宛运营的快递 [Venipak](carrier:venipak) 则使用不同格式（如 `V48291E7365428`）。如果找不到单号，请参阅[如何查找运单号](guide:find-tracking-number)（英文）。
 
 ## 立陶宛邮政物流状态中文解读
 

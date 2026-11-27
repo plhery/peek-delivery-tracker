@@ -21,7 +21,7 @@ A documentação técnica da SAMUS para clientes empresariais mostra o código e
 
 Espaços, hifens e letras minúsculas não importam ao colar no Peek. Em samus.lt, o resultado exibe "Parcel number" e "Parcel code". Se o site responder `Your letter with number "…" is not found`, confirme o número com o remetente.
 
-Se seu código tiver outro formato, outra empresa pode estar entregando, como [Lietuvos paštas](carrier:lietuvos-pastas), [Omniva](carrier:omniva) ou Venipak. Veja [formatos de código de rastreamento](guide:tracking-number-formats), em inglês.
+Se seu código tiver outro formato, outra empresa pode estar entregando, como [Lietuvos paštas](carrier:lietuvos-pastas), [Omniva](carrier:omniva) ou [Venipak](carrier:venipak). Veja [formatos de código de rastreamento](guide:tracking-number-formats), em inglês.
 
 ## Status de rastreamento da SAMUS
 

@@ -1,6 +1,6 @@
 ---
 title: Yanwen suivi : numéros, statuts et qui contacter
-description: Suivi colis Yanwen (numéros UL…YP, BYS… et Last Mile Tracking) : track.yw56.com.cn, sens des statuts anglais, livreur en France (Colissimo) et qui contacter.
+description: Suivi colis Yanwen (numéros UL…YP, BYS… et Last Mile Tracking) : track.yw56.com.cn, statuts anglais, livreur local (comme Colissimo en France) et qui contacter.
 slug: yanwen-suivi
 published: 2026-10-11
 updated: 2026-11-27
@@ -97,7 +97,7 @@ Les heures sont lues avec le décalage GMT de Yanwen et affichées dans le fusea
 
 ### Que signifie un numéro Yanwen commençant par UL et finissant par YP ?
 
-Un numéro de 13 caractères composé de deux lettres (souvent `UL` ou `UK`), 9 chiffres et `YP` à la fin est un numéro postal Yanwen. Il se suit sur [track.yw56.com.cn](https://track.yw56.com.cn/en/index) ou dans le champ ci-dessus ; dès la remise au transporteur local, la page affiche aussi son numéro « Last Mile Tracking ».
+Un numéro de 13 caractères composé de deux lettres (souvent `UL` ou `UK`), 9 chiffres et `YP` à la fin est un numéro postal Yanwen. Il se suit sur [track.yw56.com.cn](https://track.yw56.com.cn/en/index) ou dans le champ ci-dessus ; la page de résultat affiche aussi le « Last Mile Tracking », le numéro du transporteur qui livre dans ton pays.
 
 ### Combien de temps met un colis Yanwen pour arriver en France ?
 

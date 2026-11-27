@@ -1,6 +1,6 @@
 ---
 title: Slovenská pošta sledovanie zásielok: podacie číslo a stavy
-description: Sledovanie zásielky Slovenskej pošty (posta.sk): kde nájsť podacie a sledovacie číslo (13 znakov na SK), čo znamenajú stavy, BalíkoBOX, uloženie a kontakt.
+description: Sledovanie zásielky Slovenskej pošty (posta.sk): kde nájsť podacie a sledovacie číslo (13 znakov, na konci SK), čo znamenajú stavy, BalíkoBOX, uloženie a kontakt.
 slug: slovenska-posta-sledovanie-zasielok
 published: 2026-10-22
 updated: 2026-11-27
@@ -102,7 +102,7 @@ Kým máte zásielku otvorenú na obrazovke alebo v deň doručenia so zapnutým
 
 ### Kde nájdem podacie (sledovacie) číslo a ako sledovať zásielku Slovenskej pošty?
 
-Podacie číslo (13 znakov, napríklad vymyslené `RR482917367SK` alebo `BA482917367SK`) vám dá odosielateľ: e-shop ho uvádza v e-maile o odoslaní alebo v detailoch objednávky. Zadajte ho na posta.sk/sledovanie-zasielok, v mobilnej aplikácii Slovenskej pošty alebo do poľa vyššie; na posta.sk si po zadaní čísla môžete zapnúť upozornenia o každej zmene stavu.
+Podacie číslo (13 znakov, napríklad vymyslené `RR482917367SK` alebo `BA482917367SK`) vám dá odosielateľ: e-shop ho zvyčajne uvedie v e-maile o odoslaní alebo v detailoch objednávky. Zadajte ho na posta.sk/sledovanie-zasielok, v mobilnej aplikácii Slovenskej pošty alebo do poľa vyššie; na posta.sk si po zadaní čísla môžete zapnúť upozornenia o každej zmene stavu.
 
 ### Dá sa sledovať aj zásielka zo zahraničia?
 

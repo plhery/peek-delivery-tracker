@@ -1,6 +1,6 @@
 ---
 title: Swiss Post Cargo suivi : statuts, livraison et contact
-description: Suivre un envoi Swiss Post Cargo (ex-PostLogistics) sur tt.swisspost-cargo.com : code à barres SSCC ou référence PL-, statuts, livraison et contact La Poste.
+description: Suivre un envoi Swiss Post Cargo (ex-PostLogistics) sur tt.swisspost-cargo.com : code à barres SSCC ou référence PL-, statuts, livraison et qui contacter.
 slug: swiss-post-cargo-suivi
 published: 2026-10-12
 updated: 2026-11-27

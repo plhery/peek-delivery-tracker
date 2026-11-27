@@ -87,7 +87,7 @@ When GLS names Swiss Post as the deliverer, the parcel page says "Delivery with 
 
 ### How does Swiss Post GLS tracking work in Switzerland?
 
-Enter your parcel number and four-digit Swiss delivery postcode on [GLS's tracking page](https://gls-group.com/EU/en/parcel-tracking), or paste the number in the box above. Swiss Post GLS clears customs and delivers incoming GLS parcels in Switzerland and Liechtenstein; once Swiss Post shows a scan of its own, Peek can follow the parcel on Swiss Post's tracking with the same number.
+Enter your parcel number and four-digit Swiss delivery postcode on [GLS's tracking page](https://gls-group.com/EU/en/parcel-tracking), or paste the number in the box above. Swiss Post GLS clears customs and delivers incoming GLS parcels in Switzerland and Liechtenstein; when GLS names Swiss Post as the deliverer, Peek can follow the parcel on Swiss Post's tracking with the same number once Swiss Post shows a scan at least as recent as GLS's latest.
 
 ### What is GLS Schweiz (GLS Switzerland) and who delivers?
 

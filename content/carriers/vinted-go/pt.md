@@ -99,7 +99,7 @@ Os termos apontam para 3 a 6 dias úteis desde a entrega pelo vendedor até ao t
 
 ### Quanto tempo tenho para levantar uma encomenda da Vinted Go?
 
-Tens 7 dias consecutivos a partir do momento em que a encomenda fica pronta no cacifo ou na loja de encomendas (a Vinted Go envia um novo aviso ao fim de 3 dias). A Vinted Go não prolonga o prazo: se não a levantares, volta ao vendedor e a Vinted cancela a encomenda e reembolsa-te.
+Tens 7 dias consecutivos a partir do momento em que a encomenda fica pronta no cacifo ou na loja de encomendas (os termos da Vinted Go preveem um novo aviso ao fim de 3 dias). Num cacifo ou Parcel Centre, os termos da Vinted Go preveem uma extensão paga do prazo, quando ela a mostrar como disponível; quando a encomenda já vai de volta, não dá para a prolongar. Se não a levantares, volta ao vendedor e a Vinted cancela a encomenda e reembolsa-te.
 
 ### Onde ficam os pontos Vinted Go perto de mim?
 

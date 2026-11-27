@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-11-27
 ---
 
-Para localizar ou procurar uma encomenda, o número de seguimento costuma vir no e-mail ou no SMS que a loja te manda quando a encomenda sai, ou está na página da encomenda, no site ou na app, a um clique do número da encomenda. Se foste tu a enviar, está no talão que te deram ao balcão. Nenhuma transportadora procura uma encomenda pelo teu nome ou pela tua morada (e os CTT explicam que é o remetente quem conhece o código de envio), mas o aviso deixado na caixa do correio, a app de algumas transportadoras ou o próprio remetente podem ajudar-te a segui-la.
+Para localizar ou procurar uma encomenda, o número de seguimento costuma vir no e-mail ou no SMS que a loja te manda quando a encomenda sai, ou está na página da encomenda, no site ou na app, a um clique do número da encomenda. Se foste tu a enviar, está no talão que te deram ao balcão. Nenhuma transportadora procura uma encomenda pelo teu nome ou pela tua morada (e os CTT explicam que, quando o código é gerado no momento do envio, é o remetente quem o conhece), mas o aviso deixado na caixa do correio, a app de algumas transportadoras ou o próprio remetente podem ajudar-te a segui-la.
 
 ## Onde encontrar o número para localizar uma encomenda?
 
@@ -81,7 +81,7 @@ Não. Os sites de seguimento das transportadoras partem sempre de um número:
 - **GLS:** pede o «número de encomenda (Track ID) que lhe foi fornecido pelo expedidor ou pela GLS», e que o tenhas à mão quando a contactas.
 - **CTT:** pesquisas o envio pelo código, em **Seguir objeto**. Só depois, com sessão iniciada, é que os teus dados de registo te podem mostrar mais informação.
 
-O mais parecido são as contas e as apps da secção anterior, ligadas ao teu telemóvel ou ao teu registo. Os sites e as apps que seguem encomendas de várias transportadoras também não conseguem, e o Peek não é exceção: precisa de um número para perguntar à transportadora. Do mesmo modo, o seguimento público das transportadoras não indica o remetente de uma encomenda só pelo teu nome ou morada: para saberes quem enviou uma encomenda que está a caminho, confirma nos teus e-mails, nas contas das lojas onde compraste ou no aviso da transportadora.
+O mais parecido são as contas e as apps da secção anterior, ligadas ao teu telemóvel ou ao teu registo. Os sites e as apps que seguem encomendas de várias transportadoras também não conseguem, e o Peek não é exceção: precisa de um número para perguntar à transportadora. Também não dá para saber pelo teu nome ou pela tua morada quem te enviou uma encomenda que está a caminho: procura nos teus e-mails e nas contas das lojas onde compraste.
 
 > Um site que se ofereça para encontrar todas as encomendas enviadas para o teu nome ou para a tua morada não está a usar o seguimento de nenhuma transportadora: nenhuma o oferece ao público. Não lhe dês os teus dados.
 

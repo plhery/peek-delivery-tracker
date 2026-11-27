@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Pour le suivi d'un colis Landmark Global, prends le numéro LTN envoyé par la boutique (en général dans la confirmation de commande) et colle-le sur [track.landmarkglobal.com](https://track.landmarkglobal.com/?lang=fr) ou dans le champ ci-dessus. Filiale de Bnode (le groupe bruxellois qui gère aussi bpost), Landmark Global transporte les commandes en ligne d'un pays à l'autre puis confie presque toujours ton colis à un livreur local pour la fin du trajet.
+Pour le suivi d'un colis Landmark Global, prends le numéro LTN envoyé par la boutique (en général dans la confirmation de commande) et colle-le sur [track.landmarkglobal.com](https://track.landmarkglobal.com/?lang=fr) ou dans le champ ci-dessus. Filiale de Bnode (le groupe bruxellois qui gère aussi bpost), Landmark Global transporte les commandes en ligne d'un pays à l'autre puis confie le plus souvent ton colis à un livreur local pour la fin du trajet.
 
 ## Numéro de suivi Landmark Global : le LTN
 
@@ -100,7 +100,7 @@ Colle le numéro LTN (`LTN` suivi de 8 ou 9 chiffres, parfois terminé par `N1`)
 
 ### Comment contacter le service client Landmark Global ?
 
-Landmark Global ne publie aucun numéro de téléphone pour la France, la Belgique ou la Suisse. Passe par [sa page service client](https://landmarkglobal.com/eu/fr/formulaire-de-support-client/) ou écris à ClientservicesEU@landmarkglobal-group.com avec ton numéro LTN ; pour un colis perdu, abîmé ou bloqué, contacte d'abord la boutique, puis le livreur local dès qu'il est indiqué.
+Landmark Global ne publie aucun numéro de téléphone pour la France, la Belgique ou la Suisse. Passe par [sa page service client](https://landmarkglobal.com/eu/fr/formulaire-de-support-client/) ou écris à ClientservicesEU@landmarkglobal-group.com avec ton numéro LTN . Pour un colis perdu, abîmé ou bloqué, contacte d'abord la boutique ; une fois le livreur nommé, adresse-toi à lui pour un passage manqué ou un retrait.
 
 ### Landmark Global, c'est quoi ?
 

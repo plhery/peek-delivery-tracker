@@ -19538,6 +19538,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffdd00"
     },
     {
+      "id": "hermes-de",
+      "catalog": "hermes-de",
+      "slug": "hermes-germany-otslezhivanie",
+      "title": "Отслеживание Hermes Germany: статусы, PaketShop и помощь",
+      "name": "Hermes",
+      "color": "#0091cd"
+    },
+    {
       "id": "chronopost",
       "catalog": "chronopost",
       "slug": "chronopost-otslezhivanie",
@@ -20514,6 +20522,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "ACS Courier 物流查询：希腊与塞浦路斯单号、状态与客服",
       "name": "ACS Courier",
       "color": "#e42229"
+    },
+    {
+      "id": "elta",
+      "catalog": "elta",
+      "slug": "xila-youzheng-elta-wuliu-chaxun",
+      "title": "希腊邮政 ELTA 物流查询：单号、状态与 PostBox 自提柜",
+      "name": "ELTA Hellenic Post",
+      "color": "#0063a9"
     },
     {
       "id": "geniki-taxydromiki",
@@ -22166,6 +22182,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005baa"
     },
     {
+      "id": "elta",
+      "catalog": "elta",
+      "slug": "elta-hellenic-post-pakket-volgen",
+      "title": "ELTA Hellenic Post volgen: GR-nummers, statussen & hulp",
+      "name": "ELTA Hellenic Post",
+      "color": "#0063a9"
+    },
+    {
       "id": "postnl",
       "catalog": "spring-gds",
       "slug": "postnl-pakket-volgen",
@@ -22262,6 +22286,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Spåra Posti-paket: försändelsekod, automat och kundtjänst",
       "name": "Posti",
       "color": "#ff8000"
+    },
+    {
+      "id": "omniva",
+      "catalog": "omniva",
+      "slug": "omniva-spara-paket",
+      "title": "Omniva spårning: JJEE-koder, statusar och paketskåp",
+      "name": "Omniva",
+      "color": "#f86300"
     },
     {
       "id": "matkahuolto",
@@ -23056,6 +23088,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "lt": [
     {
+      "id": "orlen-paczka",
+      "catalog": "orlen-paczka",
+      "slug": "orlen-paczka-siuntos-sekimas",
+      "title": "ORLEN Paczka sekimas: 210 numeriai, būsenos ir paštomatai",
+      "name": "ORLEN Paczka",
+      "color": "#db3830"
+    },
+    {
+      "id": "amazon-logistics",
+      "catalog": "amazon-logistics",
+      "slug": "amazon-logistics-siuntos-sekimas",
+      "title": "Amazon Logistics sekimas: TBA kodai, Locker ir pagalba",
+      "name": "Amazon Logistics",
+      "color": "#ff9900"
+    },
+    {
       "id": "omniva",
       "catalog": "omniva",
       "slug": "omniva-siuntu-sekimas",
@@ -23220,6 +23268,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GLS відстеження посилки в Німеччині: статуси, ParcelShop",
       "name": "GLS Germany",
       "color": "#ffdd00"
+    },
+    {
+      "id": "chronopost",
+      "catalog": "chronopost",
+      "slug": "chronopost-vidstezhennia",
+      "title": "Відстеження Chronopost: номери, статуси та пункти Pickup",
+      "name": "Chronopost",
+      "color": "#0056a7"
+    },
+    {
+      "id": "amazon-logistics",
+      "catalog": "amazon-logistics",
+      "slug": "amazon-logistics-vidstezhennia",
+      "title": "Відстеження Amazon Logistics: коди TBA, Locker і чат",
+      "name": "Amazon Logistics",
+      "color": "#ff9900"
     },
     {
       "id": "dhl-ecommerce-es",

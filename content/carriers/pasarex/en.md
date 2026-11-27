@@ -1,14 +1,12 @@
 ---
 title: PasarEX tracking — Amazon AMZPSR codes, customs & help
-description: Track PasarEX (Pasar Express) imports in Colombia, Chile, Panama, and Barbados. Check AMZPSR numbers, customs statuses, PQR claim rules, and phone lines.
+description: Track PasarEX (Pasar Express) packages in Colombia, Chile, Panama and Barbados: AMZPSR numbers, customs statuses, 5-business-day PQR claims and phone numbers.
 slug: pasarex-tracking
 published: 2026-11-23
-updated: 2026-11-23
+updated: 2026-11-27
 ---
 
-PasarEX (the commercial brand of *PASAR EXPRESS SAS*, a Colombian company founded in 1993) offers express courier, air cargo and last-mile delivery for e-commerce platforms. Its sites cover **Colombia**, **Chile**, **Panama** and **Barbados**, and its services include a Miami logistics centre and multimodal shipping from China.
-
-PasarEX clears parcels through customs as their broker, so its tracking runs from the manifest through the consolidated import arrival, customs, warehouses and local delivery.
+PasarEX (the commercial brand of *PASAR EXPRESS SAS*, founded in Colombia in 1993) handles cross-border e-commerce courier, air cargo, customs brokerage and last-mile delivery across **Colombia**, **Chile**, **Panama** and **Barbados**, operating a Miami logistics centre and multimodal routes from China. Paste your tracking number (such as a 15-character `AMZPSR...` Amazon code) or a `tracking.pasarex.com/?awb=...` link above to follow manifest intake, import customs clearance, warehouse scans and final delivery.
 
 ## PasarEX tracking number formats
 
@@ -67,23 +65,27 @@ PasarEX publishes phone lines and email addresses for each country:
 - **Barbados:** `+1 246 4370277`, `+1 305 7042435`
 - **Company overview:** [PasarEX Colombia](https://pasarex.com/co/) and [Nosotros](https://pasarex.com/co/nosotros/)
 
-## Frequently asked questions
+## Frequently asked questions about PasarEX tracking
 
 ### What is an `AMZPSR` tracking number?
 
-`AMZPSR` followed by 9 digits (15 characters total, such as `AMZPSR482917360`) is an Amazon number that PasarEX's tracker looks up. No other carrier in Peek has this shape, but Peek doesn't ask PasarEX by itself: pick PasarEX under "Fits this number".
+`AMZPSR` followed by 9 digits (15 characters, such as `AMZPSR482917360`, invented) is an Amazon tracking number looked up on PasarEX's tracker. No other carrier in Peek shares this shape, but Peek does not query PasarEX automatically for bare numbers — tap "Change" and select PasarEX under "Fits this number" (or paste a `tracking.pasarex.com/?awb=...` URL directly).
 
 ### Why does my PasarEX parcel say `Orden de pedido recibida - paquete no arribado`?
 
-It means PasarEX received the shipment's manifest, but the physical parcel has not yet arrived at PasarEX's destination import station. Scans resume once the consolidated flight arrives.
+It means PasarEX has received the electronic manifest before the physical package reaches its destination import hub (such as Bogotá). Tracking updates again once `Carga consolidada para importación recibida` / `Reception of consolidated cargo in import.` posts.
 
-### Why does Peek refresh PasarEX less frequently than some other carriers?
+### Why does Peek refresh PasarEX hourly instead of every few minutes?
 
-PasarEX allows a check of its tracker at most once an hour, also after a failed check, so Peek checks it hourly. Its tracker also asks for a reCAPTCHA tick on each lookup.
+PasarEX's tracker enforces a reCAPTCHA check per lookup and permits checks at most once per hour (including after a failed check), so Peek refreshes PasarEX hourly even on delivery day.
 
-### How long do I have to file a damage claim with PasarEX in Colombia?
+### How long do I have to file a damage or PQR claim with PasarEX in Colombia?
 
-Under Colombia's CRC Resolution 5050/2016 published on [pasarex.com/co/soporte](https://pasarex.com/co/soporte/), recipients have **5 business days** after delivery to file a claim for damage or missing contents, while senders have 10 calendar days (domestic) or 6 months (international) to file for loss or damage.
+Under CRC Resolution 5050/2016 and Law 1369/2009 published on [pasarex.com/co/soporte](https://pasarex.com/co/soporte/), recipients have **5 business days** after delivery to file spoliation or damage claims, while senders have 10 calendar days (domestic) or 6 months (international) for loss or damage. PasarEX normally responds to PQRs within 15 business days.
+
+### How do I contact PasarEX customer service?
+
+In Colombia, call `+57 601 384 7000`, `+57 601 390 6000` (Bogotá PQR line) or `+57 601 291 6500`, or email `sac@pasar.net` (`pqr@pasar.net` for PQRs). In Chile call `+56 2 2571 7500` (`clgestionpe@pasar.net`), in Panama `+507 836 0399` (`pagestionpe@pasar.net`), and in Barbados `+1 246 4370277` or `+1 305 7042435`.
 
 :::sources
 - [PasarEX Colombia](https://pasarex.com/co/)

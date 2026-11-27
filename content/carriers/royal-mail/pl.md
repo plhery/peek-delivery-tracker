@@ -1,12 +1,12 @@
 ---
 title: Śledzenie Royal Mail: numer GB, statusy, cło i doręczenie
-description: Śledź paczkę Royal Mail w Polsce: formaty numerów GB, statusy po angielsku, doręczenie przez Pocztę Polską, VAT, cło 3 € i unijna opłata 2 €.
+description: Śledzenie paczki Royal Mail z Wielkiej Brytanii do Polski: numery GB, tłumaczenie statusów, doręczenie Pocztą Polską, VAT 23%, cło 3 € i opłata 2 €.
 slug: sledzenie-royal-mail
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Royal Mail to brytyjski narodowy operator pocztowy, a jego wyszukiwarka *Track your item* (na stronie `royalmail.com`) obsługuje również przesyłki kurierskie Parcelforce Worldwide. Aby sprawdzić, gdzie jest paczka, wpisz numer na `royalmail.com` albo wklej go w polu powyżej. Kod śledzenia przekazuje zawsze nadawca — znajdziesz go w potwierdzeniu zamówienia, wiadomości o wysyłce lub na rachunku z brytyjskiego sklepu.
+Royal Mail to brytyjski narodowy operator pocztowy, którego wyszukiwarka *Track your item* na `royalmail.com` śledzi również przesyłki Parcelforce Worldwide — a w Polsce paczki z końcówką `…GB` przejmuje [Poczta Polska](carrier:poczta-polska). Wklej numer śledzenia z brytyjskiego sklepu w polu powyżej lub wpisz go na `royalmail.com`, aby przetłumaczyć angielskie statusy i sprawdzić należności celno-podatkowe.
 
 ## Numer śledzenia Royal Mail: formaty i gdzie go znaleźć
 
@@ -97,19 +97,23 @@ W przypadku paczek z końcówką `…GB` wysyłanych poza Wielką Brytanię, gdy
 
 ### Kto doręcza paczkę Royal Mail w Polsce?
 
-Przesyłkę z końcówką `…GB` przejmuje i doręcza [Poczta Polska](carrier:poczta-polska) pod tym samym numerem śledzenia. Gdy tylko Poczta Polska opublikuje własne skany, Peek automatycznie przełączy się na jej aktualizacje.
+Przesyłki z Wielkiej Brytanii z numerem kończącym się na `…GB` przejmuje i doręcza w Polsce [Poczta Polska](carrier:poczta-polska) pod tym samym kodem (awizo ważne jest 14 dni od dnia po pierwszym zawiadomieniu). Gdy Poczta Polska opublikuje własne skany, Peek automatycznie przełącza się na jej aktualizacje.
 
-### Ile wynoszą opłaty celne za paczkę z Wielkiej Brytanii?
+### Ile wynoszą cło, VAT i opłaty za paczkę z Wielkiej Brytanii?
 
-Do zakupów wysyłanych z Anglii, Szkocji lub Walii doliczany jest polski VAT (23%, jeśli nie pobrano go w sklepie), zryczałtowane cło UE 3 € za rodzaj produktu przy zamówieniach do 150 € (od lipca 2026 r.), stała opłata unijna 2 € za rodzaj produktu (od listopada 2026 r.) oraz opłata Poczty Polskiej za dokonanie zgłoszenia celnego. Prezenty między osobami prywatnymi do 45 € są zwolnione z cła i VAT.
+Zakupy wysyłane z Anglii, Szkocji lub Walii podlegają w Polsce VAT-owi (23%, o ile nie pobrano go w sklepie), zryczałtowanemu cłu UE 3 € za rodzaj produktu do 150 € (od 1 lipca 2026 r.), stałej bezzwrotnej opłacie unijnej 2 € za rodzaj produktu niezależnie od wartości (od 1 listopada 2026 r.) oraz opłacie Poczty Polskiej za zgłoszenie celne. Prezenty prywatne do 45 € pozostają zwolnione z cła i VAT.
 
-### Jak często aktualizuje się śledzenie Royal Mail?
+### Dlaczego śledzenie Royal Mail stoi na `Item Leaving the UK`?
 
-Nowy wpis pojawia się dopiero przy kolejnym fizycznym skanie przesyłki, a między `Item Leaving the UK` a przyjęciem paczki w Polsce mija często kilka dni bez zmian. Peek odpytuje Royal Mail mniej więcej raz na godzinę, a po przejęciu przesyłki przez Pocztę Polską sprawdza ją nawet co 10 minut (nawet co 2 minuty w doręczeniu).
+Nowy wpis pojawia się dopiero po kolejnym fizycznym skanie, a kilka dni przerwy między wylotem z Wielkiej Brytanii a skanem w polskim urzędzie wymiany jest normalne. Peek sprawdza Royal Mail około raz na godzinę, a po przyjęciu paczki przez Pocztę Polską — nawet co 10 minut (co 2 minuty w dniu doręczenia).
 
 ### Co oznacza `Customs charges raised` lub `Your item is currently with Customs`?
 
-`Your item is currently with Customs in the destination country.` oznacza, że paczka przechodzi odprawę celną w kraju docelowym. `Customs charges raised` informuje o naliczeniu opłat importowych — w Polsce Poczta Polska może je pobrać przed doręczeniem przesyłki lub przy jej odbiorze.
+`Your item is currently with Customs in the destination country.` oznacza odprawę celną w kraju docelowym. `Customs charges raised` sygnalizuje naliczenie opłat importowych — w Polsce Poczta Polska pobiera je przed doręczeniem lub przy odbiorze (w Wielkiej Brytanii Royal Mail wysyła rachunek i trzyma paczkę ok. 3 tygodnie).
+
+### Czy SMS z linkiem do opłaty za paczkę z Wielkiej Brytanii jest prawdziwy?
+
+Nie klikaj linków w niespodziewanych SMS-ach: Poczta Polska ostrzega, że nie wysyła linków płatniczych w SMS-ach. Zawsze sprawdzaj status ręcznie na `poczta-polska.pl/sledzenie-przesylek`, a podejrzane wiadomości w Polsce przekazuj na numer **8080** lub `incydent.cert.pl` (w Wielkiej Brytanii na **7726**).
 
 :::sources
 - [Citizens Advice: Check Royal Mail collection and delivery times](https://www.citizensadvice.org.uk/consumer/post-and-parcels/post-collection-delivery-times/) – dni i godziny doręczeń w Wielkiej Brytanii, doręczanie listów 2nd Class co drugi dzień roboczy, Customer Service Points oraz infolinia

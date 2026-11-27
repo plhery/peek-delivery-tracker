@@ -1,12 +1,12 @@
 ---
 title: Śledzenie Posti: kod JJFI, statusy, automaty i kontakt
-description: Śledź paczkę Posti w Finlandii: jak wygląda kod JJFI, znaczenie angielskich statusów, czas przechowywania w automatach, cło i kontakt.
+description: Śledzenie przesyłek Posti (Finlandia) i SmartPosti: kody JJFI i FI, znaczenie statusów po angielsku, 5 dni w automacie OmaPosti, cło (3 € i 2 €) i kontakt.
 slug: sledzenie-posti
 published: 2026-11-22
-updated: 2026-11-22
+updated: 2026-11-27
 ---
 
-Posti to fiński operator pocztowy i paczkowy. Paczkę sprawdzisz na [stronie śledzenia Posti](https://www.posti.fi/en/tracking) albo w aplikacji OmaPosti po jej identyfikatorze (*item ID*), albo wklejając numer w pole powyżej. Numer pochodzi od nadawcy i widnieje też na powiadomieniu o nadejściu w OmaPosti, SMS-ie lub e-mailu.
+Posti to fiński operator pocztowy i paczkowy (działający w Estonii, na Łotwie i Litwie jako SmartPosti). Wklej identyfikator przesyłki (*item ID*, np. 21-znakowy kod `JJFI…` albo międzynarodowy numer `…FI`) w pole powyżej lub sprawdź go na [stronie śledzenia Posti](https://www.posti.fi/en/tracking) i w aplikacji OmaPosti, aby zobaczyć angielskie statusy, kod odbioru i termin przechowywania.
 
 ## Numer śledzenia Posti: identyfikator JJFI
 
@@ -96,21 +96,25 @@ Gdy masz paczkę otwartą na ekranie albo w dniu doręczenia przy włączonych p
 
 ## Pytania o śledzenie Posti
 
-### Jak śledzić paczkę Posti po angielsku?
+### Jak śledzić paczkę Posti lub SmartPosti po angielsku?
 
-Otwórz posti.fi/en/tracking i wpisz identyfikator *item ID* — statusy wyświetlą się po angielsku.
+Wklej kod *item ID* (np. `JJFI` + 17 cyfr lub międzynarodowy kod kończący się na `FI`) w polu powyżej w Peek albo otwórz [posti.fi/en/tracking](https://www.posti.fi/en/tracking). Paczki SmartPosti z Estonii, Łotwy i Litwy sprawdzisz także na `smartposti.ee`.
 
-### Jak długo Posti trzyma paczkę w automacie paczkowym?
+### Jak długo Posti przechowuje paczkę w automacie paczkowym?
 
-Posti prosi o odbiór w ciągu 5 dni; dokładną datę końcową podaje powiadomienie. W OmaPosti można ją przedłużyć nawet o 14 dni za 1,90 € (1,90 € dziennie według fińskiej strony Posti).
+Standardowo 5 dni (paczki z zagranicy zwykle 14 dni, a z awizem listownym 9 dni) — dokładną datę podaje powiadomienie z OmaPosti, SMS lub e-mail. W OmaPosti funkcję „Extend pickup time” można wykupić na maksymalnie 14 dni dodatkowo za 1,90 € (1,90 € dziennie według fińskiej strony Posti).
 
-### Ile trwa doręczenie Posti?
+### Co oznacza status `Item accepted from transport` w Posti?
 
-*Small parcel* dociera w 2 do 5 dni roboczych od przyjęcia przez Posti. Dla pozostałych przesyłek śledzenie Posti podaje przewidywany czas doręczenia.
+Mimo mylącego brzmienia nie oznacza on doręczenia odbiorcy — Posti wyjaśnia, że to rutynowy wpis transportowy oznaczający, iż przesyłka nadal jest w drodze. Doręczenie potwierdzają dopiero komunikaty `The item has been delivered` lub `Item delivered to the recipient.`.
 
-### Czy obsługa klienta Posti ma czat?
+### Ile trwa doręczenie przesyłki Posti?
 
-Tak, w aplikacji OmaPosti.
+Usługa *Small parcel* dociera zazwyczaj w 2 do 5 dni roboczych od przyjęcia przez Posti; dla pozostałych przesyłek Posti podaje szacowany termin doręczenia bezpośrednio w śledzeniu (dla paczek spoza Finlandii dopiero po dotarciu do kraju).
+
+### Jak skontaktować się z obsługą klienta Posti?
+
+Posti nie udostępnia adresu e-mail dla klientów — skorzystaj z czatu w aplikacji OmaPosti albo zadzwoń pod numer `0100 5577` (`+358 100 5577` z zagranicy). Pamiętaj też, że Posti nigdy nie wysyła linków do opłacenia cła (3 €/2 € i opłaty manipulacyjnej 3,10 €) w SMS-ach.
 
 :::sources
 - [Posti: Picking up an item](https://www.posti.fi/en/receiving/picking-up-an-item) – kod JJFI, powiadomienia, przechowywanie (14 dni zagranica, 9 dni list), przedłużenie, automaty, kody, pełnomocnictwo, zwroty, telefon, czat

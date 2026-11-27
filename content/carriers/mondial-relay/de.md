@@ -1,12 +1,12 @@
 ---
 title: Mondial Relay Sendungsverfolgung: Status, Vinted & Abholung
-description: Mondial Relay Paket in Deutschland, Österreich oder der Schweiz verfolgen: 8-stellige Nummer, französische Status auf Deutsch, Vinted-Versand und Abholung.
+description: Mondial Relay Sendungsverfolgung für Deutschland, Österreich & die Schweiz: 8-stellige Nummer mit PLZ, französische Status übersetzt, Vinted-Versand & InPost.
 slug: mondial-relay-sendungsverfolgung
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Mondial Relay ist ein französischer Paketdienst der **InPost Group**, der Sendungen an *Points Relais* (Paketshops im Einzelhandel), Paketstationen (*Lockers*) und Wohnadressen zustellt. Um dein Paket zu verfolgen, gib die 8-stellige Sendungsnummer zusammen mit der Postleitzahl der Lieferadresse auf `mondialrelay.fr` (bzw. `.be` oder `.nl`) oder in der Mondial-Relay-App ein – oder füge die Nummer oben in das Suchfeld ein.
+Mondial Relay ist der französische Paketdienst der **InPost Group** für *Points Relais* (Paketshops), *Lockers* und Haustürzustellungen — im deutschsprachigen Raum begegnet er dir besonders bei Vinted-Käufen aus Frankreich, Belgien oder den Niederlanden. Gib deine 8-stellige Sendungsnummer zusammen mit der Postleitzahl der Lieferadresse oben im Suchfeld oder auf `mondialrelay.fr` ein (26-stellige Etikett-Barcodes funktionieren auch ohne Postleitzahl).
 
 Im deutschsprachigen Raum begegnet dir Mondial Relay vor allem bei Bestellungen aus Frankreich, Belgien oder den Niederlanden, besonders auf [Vinted](guide:vinted-orders). Auf Vinted ist Deutschland mit Frankreich, Italien, den Niederlanden, Belgien und Österreich vernetzt, Österreich wiederum mit Deutschland, Italien und Frankreich: Gibt eine französische oder belgische Verkäuferin dein Paket in einem Point Relais oder Locker ab, kann es mit Mondial Relay (oder [Vinted Go](carrier:vinted-go)) unterwegs sein. Als Versandanbieter nennt Vinted in Deutschland [Hermes](carrier:hermes-de), [DPD](carrier:dpd-de), GLS, [DHL Paket](carrier:dhl) und DHL Express, in Österreich GLS, Hermes und DPD.
 
@@ -76,19 +76,23 @@ Peek zeigt die französischen Originalmeldungen von Mondial Relay unverändert a
 
 ### Wer stellt ein Mondial-Relay-Paket in Deutschland oder Österreich zu?
 
-Laut InPost stellen die Paketdienste der Gruppe auch in Deutschland und Österreich zu. Für integrierte Vinted-Käufe nennt Vinted in Deutschland [Hermes](carrier:hermes-de), [DPD](carrier:dpd-de), GLS, [DHL Paket](carrier:dhl) und DHL Express als Versandanbieter, in Österreich GLS, Hermes und DPD. Wenn im Vinted-Chat eine eigene lokale Sendungsnummer steht, kannst du diese zusätzlich in Peek eingeben.
+Die InPost-Gruppe bedient auch Deutschland und Österreich. Bei integrierten Vinted-Bestellungen nennt Vinted in Deutschland [Hermes](carrier:hermes-de), [DPD](carrier:dpd-de), GLS, [DHL Paket](carrier:dhl) und DHL Express als Versandpartner, in Österreich GLS, Hermes und DPD; eine im Vinted-Chat angezeigte lokale Sendungsnummer kannst du zusätzlich in Peek eintragen.
 
-### Kann ich Mondial Relay ohne Postleitzahl verfolgen?
+### Kann ich ein Mondial-Relay-Paket ohne Postleitzahl verfolgen?
 
-Den 26-stelligen Barcode sowie 10-, 12- und 14-stellige Nummern verfolgt Peek ohne Postleitzahl. Nur die 8-stellige Sendungsnummer erfordert zwingend die „Postleitzahl der Lieferadresse“.
+Für den 26-stelligen Etikett-Barcode sowie 10-, 12- und 14-stellige Nummern ist in Peek keine Postleitzahl nötig. Nur die 8-stellige Sendungsnummer (*numéro d'expédition*) erfordert zwingend die „Postleitzahl der Lieferadresse“.
 
 ### Wie lange dauert der Versand mit Mondial Relay über Vinted?
 
-Laut Vinted-Hilfe kommen internationale Bestellungen normalerweise innerhalb von **7 Werktagen** an (national rund 5 Werktage), nach der Abgabe kann es aber bis zu 48 Stunden bis zum ersten Scan dauern. Erst wenn nach **25 Werktagen** noch keine Zustellung erfolgt ist, greift auf Vinted die Verlustmeldung über „Ich habe ein Problem“.
+Laut Vinted-Hilfe kommen internationale Sendungen meist in **7 Werktagen** an (national rund 5 Werktage), und nach der Abgabe kann es bis zu 48 Stunden bis zum ersten Scan dauern. Kommt nach **25 Werktagen** nichts an, melde den Verlust im Vinted-Chat über „Ich habe ein Problem“.
 
 ### Gehört Mondial Relay zu InPost?
 
-Ja. Die polnisch gegründete InPost-Gruppe (InPost S.A., rund 95.000 Lockers und Abholpunkte in 9 europäischen Ländern) hat Mondial Relay 2021 übernommen. In Spanien und Portugal heißt das Netz bereits InPost, und auch in den Niederlanden wird Mondial Relay schrittweise auf die Marke InPost umgestellt.
+Ja. Die polnisch gegründete InPost-Gruppe (InPost S.A.) hat Mondial Relay 2021 übernommen und betreibt rund 95.000 Lockers und Abholpunkte in 9 europäischen Ländern; in Spanien und Portugal tritt das Netz bereits als InPost auf, in den Niederlanden läuft die Umstellung auf `inpost.nl`.
+
+### Verlangt Mondial Relay Nachzahlungen per SMS oder E-Mail?
+
+Nein. Laut *Cybermalveillance.gouv.fr* fordert Mondial Relay niemals zusätzliche Liefer- oder Zollgebühren per SMS oder E-Mail. Öffne keine verdächtigen Links und leite gefälschte Mondial-Relay-Mails an `phishing@inpost-group.com` weiter.
 
 :::sources
 - [InPost Group: Regulamin Konta InPost (ab 01.10.2026)](https://terms.inpost-group.com/pl/regulamin) – Unternehmensdaten der Mondial Relay SASU in Villeneuve-d'Ascq, Funktionen der Mondial-Relay-Plattform, manuelle Sendungsverfolgung mit Postleitzahl und automatische Archivierung nach 7 Tagen

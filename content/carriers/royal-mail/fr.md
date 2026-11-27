@@ -1,12 +1,12 @@
 ---
 title: Suivi colis Royal Mail : numéro, statuts, douane et relais
-description: Suivre un colis Royal Mail en France, Belgique ou Suisse : formats GB, statuts en anglais, livraison par La Poste, bpost ou La Poste suisse et frais de douane.
+description: Suivi de colis Royal Mail en France, Belgique & Suisse : numéros GB, statuts en anglais, relais La Poste, bpost ou La Poste suisse, frais de douane 3 € / 2 €.
 slug: suivi-royal-mail
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Royal Mail est l'opérateur postal national du Royaume-Uni, et son outil en ligne *Track your item* (sur `royalmail.com`) affiche aussi les colis Parcelforce Worldwide. Pour suivre un envoi, saisis ton numéro sur `royalmail.com` ou colle-le dans le champ ci-dessus. C'est l'expéditeur qui te transmet ce code : cherche-le dans la confirmation de commande, l'e-mail d'expédition ou la facture de la boutique britannique.
+Royal Mail est l'opérateur postal national du Royaume-Uni (son outil *Track your item* sur `royalmail.com` suit aussi les colis Parcelforce Worldwide). Si tu attends un colis britannique en France, en Belgique ou en Suisse, colle ton numéro `…GB` dans le champ ci-dessus ou sur `royalmail.com` pour traduire les statuts anglais, savoir quelle poste locale prend le relais et connaître les frais de douane applicables.
 
 ## Numéro de suivi Royal Mail : formats et où le trouver
 
@@ -109,19 +109,23 @@ Sur un envoi `…GB` vers l'étranger, Peek interroge aussi la poste de destinat
 
 ### Qui livre un colis Royal Mail en France, en Belgique ou en Suisse ?
 
-L'opérateur postal national prend le relais avec le même numéro en `…GB` : [La Poste](carrier:la-poste) en France, [bpost](carrier:bpost) en Belgique et [La Poste suisse](carrier:swiss-post) en Suisse. Peek affiche automatiquement ses scans dès leur publication.
+La poste nationale prend le relais avec le même numéro en `…GB` : [La Poste](carrier:la-poste) (Colissimo) en France, [bpost](carrier:bpost) en Belgique et [La Poste suisse](carrier:swiss-post) en Suisse. Peek interroge automatiquement cette poste locale et affiche ses scans dès leur parution.
 
-### Vais-je payer des frais de douane sur un colis venant du Royaume-Uni ?
+### Quels frais de douane paie-t-on sur un colis venant du Royaume-Uni ?
 
-Dans l'UE (France, Belgique), les achats expédiés de Grande-Bretagne paient la TVA dès le premier euro, le droit fixe de 3 € par type de produit jusqu'à 150 € (depuis juillet 2026) et les frais européens de 2 € par type de produit (depuis novembre 2026), plus d'éventuels frais postaux. En Suisse, TVA (8,1 % ou 2,6 %) et droits ne sont perçus qu'à partir de 5 CHF d'impôt, avec le tarif de dédouanement de La Poste suisse.
+En France et en Belgique (UE), toute commande expédiée de Grande-Bretagne est soumise à la TVA dès le premier euro (20 % en France métropolitaine, 21 % en Belgique), au droit forfaitaire européen de 3 € par type de produit jusqu'à 150 € (depuis juillet 2026) et aux frais européens non remboursables de 2 € par type de produit (depuis novembre 2026), plus les frais de dossier postaux si non prépayés. En Suisse, TVA (8,1 % ou 2,6 %) et droits ne sont perçus qu'à partir de 5 CHF d'impôt, majorés du tarif postal (16 CHF + 3 %).
 
-### En combien de temps le suivi Royal Mail se met-il à jour ?
+### Pourquoi le suivi Royal Mail ne bouge-t-il plus après `Item Leaving the UK` ?
 
-Le statut ne bouge qu'au prochain scan physique, et plusieurs jours sans mise à jour après `Item Leaving the UK` sont normaux. Peek interroge Royal Mail environ une fois par heure, puis adopte le rythme plus rapide de La Poste, bpost ou La Poste suisse après prise en charge locale.
+Le suivi n'évolue qu'au scan physique suivant, et plusieurs jours sans mise à jour entre le départ du Royaume-Uni et l'arrivée chez La Poste, bpost ou La Poste suisse sont courants. Peek vérifie Royal Mail environ une fois par heure, puis bascule sur la cadence plus rapide de ta poste locale dès sa prise en charge.
 
 ### Que signifie `Customs charges raised` ou `Your item is currently with Customs` ?
 
-`Your item is currently with Customs in the destination country.` indique un dédouanement en cours dans ton pays. `Customs charges raised` signale des frais à régler avant remise sur le portail officiel de ta poste locale (ou auprès de Royal Mail sous 3 semaines au Royaume-Uni).
+`Your item is currently with Customs in the destination country.` signale que ton colis passe la douane à l'arrivée. `Customs charges raised` indique que des taxes ou frais de dossier doivent être réglés avant la remise — règle-les uniquement sur le portail officiel de ta poste locale (ou auprès de Royal Mail sous 3 semaines au Royaume-Uni).
+
+### Un SMS demandant de payer des frais de livraison pour un colis Royal Mail est-il fiable ?
+
+En France, Cybermalveillance.gouv.fr rappelle que La Poste ne demande jamais de paiement par SMS ou e-mail pour livrer un colis (transfère le SMS au **33700**). En Belgique, bpost peut envoyer une invitation à payer des droits hors UE, mais ne paie jamais via un lien inconnu : connecte-toi directement dans *My bpost* ou *Track & Trace* (au Royaume-Uni : transfère au **7726**).
 
 :::sources
 - [Citizens Advice : Check Royal Mail collection and delivery times](https://www.citizensadvice.org.uk/consumer/post-and-parcels/post-collection-delivery-times/) – jours et horaires de livraison au Royaume-Uni, lettres 2nd Class un jour ouvré sur deux, Customer Service Points, téléphone et horaires

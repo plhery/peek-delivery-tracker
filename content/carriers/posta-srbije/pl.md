@@ -1,12 +1,12 @@
 ---
 title: Śledzenie Pošta Srbije: Poczta Serbska, statusy i kontakt
-description: Śledź przesyłkę Pošta Srbije lub Post Express: 13-znakowy numer, angielskie statusy, awiza, terminy odbioru, automaty, reklamacje i kontakt.
+description: Śledzenie Pošta Srbije (Poczta Serbska) i Post Express: 13-znakowe numery RS i PE, znaczenie statusów, 5 i 20 dni awiza, paketomaty, reklamacje i kontakt.
 slug: sledzenie-posta-srbije
 published: 2026-11-22
-updated: 2026-11-22
+updated: 2026-11-27
 ---
 
-Pošta Srbije (Poczta Serbska) to narodowy operator pocztowy Serbii, a Post Express to jej usługa kurierska. Przesyłkę sprawdzisz bezpłatnie na stronie [Track and Trace](https://www.posta.rs/eng/alati/pracenje-posiljke.aspx) w serwisie posta.rs, w aplikacji Post of Serbia albo wklejając numer w pole powyżej. Numer pochodzi od nadawcy.
+Pošta Srbije (Poczta Serbska) to narodowy operator pocztowy Serbii, realizujący przesyłki krajowe, międzynarodowe oraz kurierską usługę Post Express. Wklej 13-znakowy numer przesyłki (otrzymany od nadawcy lub sklepu) w pole powyżej, albo sprawdź go bezpłatnie w [Track and Trace na posta.rs](https://www.posta.rs/eng/alati/pracenje-posiljke.aspx) lub w aplikacji Post of Serbia.
 
 ## Numer przesyłki Pošta Srbije
 
@@ -91,21 +91,25 @@ Gdy masz paczkę otwartą na ekranie albo w dniu doręczenia przy włączonych p
 
 ## Pytania o śledzenie Pošta Srbije
 
-### Jak śledzić paczkę z zagranicy do Serbii?
+### Jak śledzić paczkę wysłaną z Polski lub zagranicy do Serbii?
 
-Wpisz numer poczty zagranicznej, zakończony kodem kraju nadania, w Track and Trace na posta.rs — obejmuje przesyłki polecone, paczki i EMS z zagranicy.
+Wpisz 13-znakowy numer nadany przez pocztę kraju nadania (z jej kodem kraju na końcu, np. `PL` lub `CN`) w Track and Trace na posta.rs albo w polu powyżej w Peek — Pošta Srbije śledzi pod tym samym numerem przesyłki polecone, paczki i EMS z zagranicy.
 
-### Czy można śledzić Post Express?
+### Jak śledzić przesyłkę kurierską Post Express?
 
-Tak. Numer Post Express zaczyna się od `PE` i kończy na `RS`, a śledzisz go na posta.rs lub w aplikacji Post of Serbia pokazującej główne punkty przeładunkowe.
+Numery Post Express zaczynają się od `PE` i kończą na `RS` (np. `PE482917367RS`, przykład wymyślony). Sprawdzisz je na posta.rs, w aplikacji Post of Serbia oraz w Peek; Post Express doręcza zwykle do 19:00 następnego dnia roboczego.
 
-### Jaki jest adres e-mail Pošta Srbije?
+### Jak długo Pošta Srbije przechowuje paczkę na poczcie i w automacie?
 
-contact@ptt.rs do ogólnych skarg lub uwag. Uszkodzeń nie zgłasza się e-mailem — zgłoś je na poczcie w momencie odbioru.
+Na poczcie przesyłki czekają 5 dni roboczych (20 dni dla przesyłek z zagranicy i 30 dni dla poste restante), licząc od dnia po awizie, z możliwością pisemnego przedłużenia do 30 dni. W automacie *Poštin paketomat* paczka czeka 48 godzin (2 dni robocze według FAQ), po czym trafia do przypisanej placówki.
 
-### Jak długo Pošta Srbije przechowuje paczkę na poczcie?
+### Co oznacza status `Delivered (to the sender)`?
 
-5 dni roboczych dla większości przesyłek i 20 dni dla przesyłek z zagranicy, licząc od dnia po awizie. Pisemnie możesz poprosić o przechowanie do 30 dni.
+Przesyłka została zwrócona i doręczona z powrotem nadawcy (nie odbiorcy), na przykład po odmowie odbioru lub upływie terminu awiza. W sprawie ponownej wysyłki lub zwrotu pieniędzy skontaktuj się ze sklepem lub nadawcą.
+
+### Jaki jest numer telefonu i adres e-mail Pošta Srbije?
+
+Centrum Kontaktu działa pod numerami `0700 100 300` (Telekom Srbija) i `+381 11 3607 788` (z zagranicy i innych sieci; dni robocze 8:00–20:00, sob.–niedz. 8:00–15:00), a Post Express pod `0800 100 808` lub `+381 11 3607 607`. Ogólny e-mail to `contact@ptt.rs` (uszkodzenia zgłasza się jednak wyłącznie na poczcie przy odbiorze lub najpóźniej następnego dnia roboczego).
 
 :::sources
 - [Pošta Srbije: Item's Status Tracking](https://www.posta.rs/eng/alati/pracenje-posiljke.aspx) – rodzaje numerów, lista statusów, podpis, darmowe śledzenie, serbski i angielski, śledzenie za granicą, 0700 100 300

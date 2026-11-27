@@ -1,12 +1,12 @@
 ---
 title: Seguimento Raben: número de envio, estados e entrega
-description: Segue uma palete ou envio de grupagem Raben: formato do número, significado dos estados no myRaben, descarga, reclamações e contactos.
+description: Seguimento de paletes e grupagem Raben: número de 15 dígitos (27…), estados do myRaben, descarga pelo motorista (HUN/UNLO), danos em 7 dias e contactos.
 slug: seguimento-raben
 published: 2026-11-22
-updated: 2026-11-22
+updated: 2026-11-27
 ---
 
-O Raben Group é um grupo logístico familiar europeu fundado em 1931 nos Países Baixos e atualmente sediado perto de Poznań, na Polónia. A sua rede rodoviária transporta paletes e grupagem (cargas parciais) através de filiais em 17 países europeus e também entrega para lojas online, pelo que uma encomenda volumosa pode chegar num camião Raben. Segue-a com o número de envio na caixa «Shipment tracking» em raben-group.com, ou cola o número acima.
+O Raben Group é um operador logístico familiar europeu fundado em 1931 nos Países Baixos e sediado perto de Poznań, na Polónia, que transporta paletes e grupagem (cargas parciais) por estrada em 17 países europeus — incluindo encomendas volumosas de lojas online. Cola o teu número de envio de 15 dígitos (`27…`) ou link `myraben.com` na caixa acima, ou introduz o código em «Shipment tracking» em raben-group.com.
 
 ## Número de envio Raben: como é e onde encontrar
 
@@ -92,25 +92,25 @@ O Peek consulta diretamente a Raben até de 10 em 10 minutos, e até de 2 em 2 m
 
 ## Perguntas frequentes sobre o seguimento Raben
 
+### Como sigo uma palete ou envio Raben?
+
+Cola o número de envio (geralmente 15 dígitos começados por `27`) ou o link de `myraben.com` / `oftc.myraben.com` na caixa acima, ou escreve o número em «Shipment tracking» em raben-group.com e clica em «Search». Se não tiveres o número, pede-o à loja ou empresa que reservou o transporte.
+
 ### O que é o Raben Group?
 
-Um grupo logístico familiar europeu fundado em 1931 em Winterswijk, nos Países Baixos, e sediado em Robakowo perto de Poznań, na Polónia. Transporta paletes e cargas parciais por estrada em 17 países, geralmente contratado pelo remetente.
-
-### Como sigo um envio Raben?
-
-Introduz o número de envio na caixa «Shipment tracking» em raben-group.com e carrega em «Search»: o seguimento Raben abre num novo separador. Ou cola o número ou link na caixa acima.
+É um grupo logístico familiar europeu fundado em 1931 em Winterswijk (Países Baixos) e sediado em Robakowo perto de Poznań (Polónia), com rede rodoviária de paletes e cargas parciais em 17 países europeus.
 
 ### O motorista da Raben descarrega a minha encomenda?
 
-Segundo as regras da Raben Polónia, apenas se a empresa que reservou o transporte contratou esse serviço: a descarga cabe ao destinatário, e a descarga pelo motorista é um serviço extra (HUN ou UNLO). Um registo `delivered D&D` significa que o motorista entregou e descarregou.
+Nas regras da Raben Polónia, a descarga é responsabilidade do destinatário (sem obrigação de empilhador ou rampa), exceto se quem contratou o transporte reservou descarga manual (`HUN`) ou no local de entrega (`UNLO`). No seguimento, `delivered D&D` indica entrega e descarga pelo motorista.
 
 ### Quanto tempo demora a Raben a entregar?
 
-Dentro da Polónia, um ou dois dias úteis consoante o serviço contratado pelo remetente; para o estrangeiro depende do país de destino. O seguimento Raben mostra a data prevista de entrega.
+Na Polónia uma palete demora um a dois dias úteis consoante o serviço contratado pelo remetente; no transporte internacional depende do país de destino. O seguimento myRaben apresenta a data prevista de entrega (e uma janela horária assim que a rota a define).
 
-### Quem devo contactar por uma entrega Raben danificada?
+### Quem devo contactar se a entrega Raben chegar danificada ou atrasada?
 
-Primeiro a loja: na UE o vendedor é responsável até receberes os bens. Na Polónia também podes reclamar diretamente por escrito à Raben Logistics Polska; comunica danos ocultos no prazo de 7 dias após a entrega.
+Contacta primeiro a loja: segundo o portal europeu Your Europe, na UE o vendedor responde pela mercadoria até à entrega (prazo de 30 dias salvo acordo distinto). Anota danos visíveis na guia no ato da entrega e comunica danos ocultos por escrito no prazo de 7 dias (na Polónia via myClaim, correio, fax ou e-mail; na Alemanha à filial Raben responsável).
 
 :::sources
 - [Raben Group: home page](https://www.raben-group.com/) – caixa de seguimento, «Search», novo separador, 17 países

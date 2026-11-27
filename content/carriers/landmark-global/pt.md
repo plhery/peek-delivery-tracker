@@ -1,12 +1,12 @@
 ---
 title: Rastreio Landmark Global: estados, parceiros e alfândega
-description: Seguir encomenda Landmark Global em Portugal: como funciona o código LTN, significado dos estados, entrega local, taxas nos CTT e como reclamar.
+description: Rastreio Landmark Global em Portugal: código LTN, estados em inglês, quem entrega em Portugal (CTT/parceiro), taxas aduaneiras (3 € e 2 € + IVA) e contacto.
 slug: landmark-global-rastreio
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-A Landmark Global transporta compras online além-fronteiras para lojas eletrónicas em mais de 220 destinos. Integrada desde 2016 no grupo belga Bnode (a casa-mãe da [bpost](carrier:bpost)), a empresa trata da consolidação internacional e do desalfandegamento, entregando a última milha em Portugal a um operador postal ou transportadora local. Para acompanhar a tua encomenda, usa o código LTN enviado pela loja no [portal de seguimento da Landmark Global](https://track.landmarkglobal.com/?lang=en) (que não dispõe de menu em português) ou cola-o na caixa acima.
+A Landmark Global — operadora internacional de comércio eletrónico integrada desde 2016 no grupo belga Bnode (casa-mãe da [bpost](carrier:bpost)) — transporta encomendas para mais de 220 destinos e entrega o último troço em Portugal através de um operador postal ou transportadora local. Cola o código `LTN` da loja na caixa acima ou pesquisa-o no [portal de seguimento da Landmark Global](https://track.landmarkglobal.com/?lang=en) para ver o estado, o `Delivery Partner` em Portugal e eventuais encargos aduaneiros.
 
 ## Número de seguimento Landmark Global (LTN): formatos e onde encontrá-lo
 
@@ -80,19 +80,27 @@ O Peek lê a página inglesa da Landmark: mostra o estado atual, os eventos em i
 
 Quando o parceiro final é seguido diretamente pelo Peek (como [bpost](carrier:bpost), [CTT](carrier:ctt), [Evri](carrier:evri) ou [UPS](carrier:ups)), a ficha passa a indicar «Entrega: …» com ligação direta assim que esse operador publica passos mais recentes (nem todos os envios mudam automaticamente). O Peek verifica **até a cada 10 minutos** — ou **até a cada 2 minutos** a partir das 6h no dia de distribuição (**até a cada 15 minutos** via serviços universais) — com alertas «Todos os registos», «Passos importantes» ou «Só a entrega», passando a consultas de hora a hora após dois dias sem novidades ou 12 horas em «Etiqueta criada» / «Aceite pela transportadora». O Peek não contacta a Landmark nem a loja por ti.
 
-## Perguntas frequentes sobre a Landmark Global
+## Perguntas frequentes sobre o rastreio Landmark Global
 
 ### O que é a Landmark Global?
 
-É o braço internacional de logística de comércio eletrónico do grupo belga Bnode (casa-mãe da [bpost](carrier:bpost)), a que pertence desde 2016, especializado em transportar encomendas de lojas online para mais de 220 destinos através de parceiros locais de última milha.
+É o braço internacional de logística de comércio eletrónico do grupo belga Bnode (casa-mãe da [bpost](carrier:bpost)), a que pertence desde 2016, que consolida encomendas para mais de 220 destinos e entrega a última milha através de parceiros locais.
+
+### Quem entrega as encomendas da Landmark Global em Portugal?
+
+A Landmark não indica um único parceiro fixo para Portugal — o operador responsável e o respetivo código local surgem na secção `Delivery Partner` do seguimento assim que a encomenda chega ao país. Quando o parceiro é seguido diretamente pelo Peek (como os [CTT](carrier:ctt)), o acompanhamento passa automaticamente para os seus registos mais recentes.
 
 ### Porque é que o meu código LTN não devolve resultados?
 
-Confirma primeiro se tem `LTN` seguido de 8 ou 9 algarismos (e apenas `N1` se tiver sufixo). Se o formato estiver certo, a loja pode ainda não ter entregue o pacote à Landmark ou os novos registos podem estar já no link de `Delivery Partner`; em caso de dúvida, contacta o vendedor.
+Confirma se tem `LTN` seguido de 8 ou 9 algarismos (ou com o sufixo `N1`). Se o formato estiver correto e o estado continuar em `Shipment Data Uploaded`, a loja ainda não entregou fisicamente o pacote à Landmark; se já chegou ao país, acompanha também pelo código em `Delivery Partner`.
 
-### Quanto tempo demora uma entrega da Landmark Global?
+### Pago alfândega nos CTT por uma encomenda Landmark Global fora da UE?
 
-Segundo a Landmark, o prazo varia consoante o serviço contratado pelo vendedor e o país de destino. Consulta a estimativa indicada na confirmação de encomenda da loja e acompanha a passagem para o transportador local.
+Sim, se a encomenda vier de fora da UE sem impostos pagos na compra. Segundo os CTT, aplicam-se 3 € + IVA por tipo de artigo até 150 € (desde 1 de julho de 2026), 2 € + IVA de Taxa de Manuseamento Aduaneiro por tipo de artigo qualquer que seja o valor (desde 1 de novembro de 2026), IVA de importação e a taxa de apresentação CTT (7 € + IVA até 150 €). Os CTT nunca pedem pagamento por SMS ou e-mail — paga apenas no Portal de Desalfandegamento em `www.ctt.pt`.
+
+### Quanto tempo demora a Landmark Global e como posso contactar o apoio?
+
+O prazo depende do serviço contratado pela loja e do país de origem. Em caso de atraso, extravio ou danos, a Landmark recomenda contactar primeiro o vendedor; o e-mail europeu de apoio ao cliente é `ClientservicesEU@landmarkglobal-group.com` (não existe telefone europeu para destinatários).
 
 :::sources
 - [Landmark Global: Customer Support (Europe)](https://landmarkglobal.com/eu/en/customer-support/) – código LTN, contacto prioritário com o vendedor, morada após etiquetagem, seguro reservado às lojas, e-mail ClientservicesEU@landmarkglobal-group.com e moradas em Machelen e Feltham

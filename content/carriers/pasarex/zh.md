@@ -45,7 +45,7 @@ PasarEX 在其追踪页面中将各条扫描按大类分组（`COMMENTS`、`IN C
 
 ## 使用 Peek 追踪 PasarEX
 
-将你的单号或 `tracking.pasarex.com/?awb=...` 链接粘贴到 [Peek](/)（Peek 跟踪 4,500 多家快递公司）。粘贴链接会直接交给 PasarEX 查询。对于单纯的单号，Peek 从不向 PasarEX 查询：它可能会询问同格式的其他承运商，再查询追踪服务（显示“正在查询物流服务…”），只有当某个追踪服务指明 PasarEX、没有指明其他承运商，并附有带日期的步骤时，才会把包裹归为 PasarEX。因此请点击“更换”并选择 PasarEX（`AMZPSR` 单号可在“符合这个单号”下找到），或在已添加的包裹页面使用“更换快递公司”。
+将你的单号或 `tracking.pasarex.com/?awb=...` 链接粘贴到 [Peek](/)（它跟踪 4,500 多家快递公司）。粘贴链接会直接交给 PasarEX 查询。对于单纯的单号，Peek 从不向 PasarEX 查询：它可能会询问同格式的其他承运商，再查询追踪服务（显示“正在查询物流服务…”），只有当某个追踪服务指明 PasarEX、没有指明其他承运商，并附有带日期的步骤时，才会把包裹归为 PasarEX。因此请点击“更换”并选择 PasarEX（`AMZPSR` 单号可在“符合这个单号”下找到），或在已添加的包裹页面使用“更换快递公司”。
 
 由于 PasarEX 的追踪页面每次查询都需要勾选 reCAPTCHA 验证，Peek 通过开源的 [universal-parcel-scraper PasarEX 适配器](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/pasarex)配合浏览器辅助组件进行读取。Peek 会提取每条扫描的原文、城市与时间，并按时间倒序排列（而非按 PasarEX 的分组标题）。PasarEX 返回的当地时间不带偏移量：Peek 按所在城市时区解析（迈阿密用纽约时间，波哥大、麦德林和卡利用波哥大时间，圣地亚哥、巴拿马和巴巴多斯按当地时区），无城市名的扫描沿用相邻记录时区，其余默认波哥大时间，并全部以你设备的本地时钟展示。PasarEX 追踪器不提供预计送达日期、重量或签收证明。
 

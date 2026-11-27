@@ -48341,6 +48341,27 @@
     ]
   },
   {
+    "input": "4052766897",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight",
+      "dpd-ie"
+    ],
+    "asked": [
+      "packeta",
+      "dhl-ecommerce-es",
+      "box-now"
+    ]
+  },
+  {
     "input": "4055906722751700096567",
     "carrier": "unknown",
     "confidence": "low",
@@ -49206,6 +49227,17 @@
     "confidence": "high",
     "candidates": [
       "ecoscooting"
+    ]
+  },
+  {
+    "input": "41N0742442",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "australia-post"
+    ],
+    "asked": [
+      "australia-post"
     ]
   },
   {
@@ -51030,6 +51062,17 @@
     ],
     "asked": [
       "fan-courier"
+    ]
+  },
+  {
+    "input": "45N0026043",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "australia-post"
+    ],
+    "asked": [
+      "australia-post"
     ]
   },
   {
@@ -63081,6 +63124,17 @@
       "packeta",
       "dhl-ecommerce-es",
       "box-now"
+    ]
+  },
+  {
+    "input": "62G0171283",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "australia-post"
+    ],
+    "asked": [
+      "australia-post"
     ]
   },
   {
@@ -86262,6 +86316,23 @@
     ]
   },
   {
+    "input": "AWB05912",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
     "input": "AWB7750149870",
     "carrier": "unknown",
     "confidence": "none",
@@ -108138,6 +108209,22 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "NSS3309831094921615360",
+    "carrier": "next-smart-ship",
+    "confidence": "high",
+    "candidates": [
+      "next-smart-ship"
+    ]
+  },
+  {
+    "input": "NSS3623110762978891776",
+    "carrier": "next-smart-ship",
+    "confidence": "high",
+    "candidates": [
+      "next-smart-ship"
+    ]
   },
   {
     "input": "NT4ZRJRUXZHJ",

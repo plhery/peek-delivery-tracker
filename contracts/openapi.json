@@ -70848,6 +70848,111 @@
       "linkRules": [],
       "detectionRules": [],
       "trackingSearchUrl": "https://www.topestexpress.com/track"
+    },
+    "expeditors": {
+      "displayName": "Expeditors",
+      "aliases": [
+        "Expeditors International",
+        "Expeditors International of Washington"
+      ],
+      "countries": [
+        "US"
+      ],
+      "color": "#EB0028",
+      "selectable": true,
+      "timezone": "America/Los_Angeles",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "expeditors"
+      },
+      "trackingUrlTemplate": "https://go2expo.expeditors.com/anonymous-track/tracking-results/shipments/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "go2expo.expeditors.com"
+          ],
+          "path": "^/anonymous-track/(?:tracking-results/)?shipments/(\\d{2}[A-Z0-9]\\d{7})(?:/(?:details|events|references))?/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.expeditors.com/",
+      "helpUrl": "https://www.expeditors.com/contact"
+    },
+    "jomkirim": {
+      "displayName": "Jomkirim",
+      "aliases": [
+        "JOMKIRIM COURIER",
+        "Jomkirim Sdn Bhd"
+      ],
+      "countries": [
+        "MY"
+      ],
+      "color": "#0B71B7",
+      "selectable": true,
+      "timezone": "Asia/Kuala_Lumpur",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "jomkirim"
+      },
+      "trackingUrlTemplate": "https://courier.jomkirim.com/shipment/tracking/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "courier.jomkirim.com"
+          ],
+          "path": "^/shipment/tracking/([^/?#]+)/?$"
+        },
+        {
+          "domains": [
+            "courier.jomkirim.com"
+          ],
+          "pathPattern": "^/shipment/tracking/?$",
+          "params": [
+            "code"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://courier.jomkirim.com/shipment/tracking"
+    },
+    "next-smart-ship": {
+      "displayName": "Next Smart Ship",
+      "aliases": [
+        "NextSmartShip",
+        "NSS Standard",
+        "NSS Expedited"
+      ],
+      "countries": [
+        "CN",
+        "US",
+        "AU"
+      ],
+      "color": "#0554f2",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "next-smart-ship"
+      },
+      "trackingUrlTemplate": "https://fulfillship.nextsmartship.com/track?s={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "fulfillship.nextsmartship.com"
+          ],
+          "pathPattern": "^/track/?$",
+          "params": [
+            "s"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^NSS\\d{19}$",
+          "confidence": "high"
+        }
+      ],
+      "trackingSearchUrl": "https://fulfillship.nextsmartship.com/track"
     }
   },
   "servers": [
@@ -77216,7 +77321,10 @@
           "ylexp",
           "z1-express",
           "austway",
-          "topest"
+          "topest",
+          "expeditors",
+          "jomkirim",
+          "next-smart-ship"
         ]
       },
       "Stage": {

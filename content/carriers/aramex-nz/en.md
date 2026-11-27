@@ -1,12 +1,12 @@
 ---
 title: Aramex New Zealand tracking number: statuses, contacts
-description: Track an Aramex New Zealand (formerly Fastway) parcel: where the label number is, what the statuses mean, missed deliveries, rural parcels and your depot.
+description: Track an Aramex New Zealand (Fastway) parcel: 12-character label numbers, status meanings, NZ Post rural hand-off, redelivery and local depot phone numbers.
 slug: aramex-new-zealand-tracking-number
 published: 2026-10-15
-updated: 2026-10-27
+updated: 2026-11-27
 ---
 
-Aramex New Zealand, formerly Fastway Couriers, is a franchise courier network that delivers parcels for shops from Kaitaia to Bluff. Track a parcel with its label number on [aramex.co.nz](https://www.aramex.co.nz/tools/track/) or by pasting it in the box above. The shop that sent it creates the label, so the number is in its shipping email or on your order page.
+Aramex New Zealand (formerly Fastway Couriers) is a franchise courier network delivering parcels from Kaitaia to Bluff, with rural addresses onforwarded through NZ Post. Paste your 12-character label number in the box above or look it up on [aramex.co.nz](https://www.aramex.co.nz/tools/track/); the number comes from the sender's shipping email or a missed-delivery calling card.
 
 ## Aramex NZ tracking number: format and where to find it
 
@@ -93,19 +93,23 @@ For rural parcels handed to NZ Post, it can follow the NZ Post label ("Delivery 
 
 ## Questions about Aramex NZ tracking
 
-### What do Aramex NZ tracking numbers start with?
+### What does an Aramex NZ tracking number look like?
 
 Usually two letters, sometimes a digit and a letter or a letter and a digit, followed by 10 digits, such as the invented `KM4829173654`.
 
-### How long does Aramex take to deliver in New Zealand?
+### How long does Aramex New Zealand take to deliver?
 
-Aramex aims for overnight within an island and 2 to 3 days between islands, plus 2 to 4 days for rural areas, without a guarantee.
+Aramex aims for overnight within an island and 2 to 3 days between the North and South Island, plus 2 to 4 days for rural or out-of-service areas, without a guarantee.
 
-### Does Aramex NZ have an 0800 number?
+### What does "Delivery onforwarded" mean and how do I arrange redelivery?
 
-No national number appears on Aramex New Zealand's site. Use the online enquiry form or call your local depot.
+`"Delivery onforwarded"` means your address is rural and Aramex has handed the parcel to NZ Post. After a missed delivery, book one free redelivery to the same address or a paid redirect (or Parcel Connect pickup where offered) on Aramex's redelivery page within 7 days of the first attempt.
 
-### Is Aramex the same as Fastway in New Zealand?
+### Does Aramex NZ have an 0800 phone number?
+
+No national or 0800 number appears on Aramex New Zealand's Contact page. Use the online enquiry form on aramex.co.nz or call your local depot Monday to Friday (mostly 8am to 5pm NZ time), such as Auckland `09 634 3704`, Wellington `04 576 0296` or Canterbury `03 341 1090`.
+
+### Is Aramex the same as Fastway Couriers in New Zealand?
 
 Yes. Fastway Couriers joined Aramex in 2016 and became Aramex New Zealand in 2019.
 

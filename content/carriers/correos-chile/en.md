@@ -1,12 +1,12 @@
 ---
 title: Correos de Chile tracking: numbers and statuses explained
-description: Track a Correos de Chile parcel: what a CL or 13-digit number looks like, what its Spanish statuses mean, IVA and customs in Chile, and who Peek asks abroad.
+description: Track a Correos de Chile parcel in English: CL and 13-digit numbers, Spanish status meanings, Chile's 19% IVA import rules, international hand-offs and help.
 slug: correos-chile-tracking
 published: 2026-11-02
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Correos de Chile is Chile's postal service. Chile's customs service says that online orders sent to Chile by post come in through Correos de Chile, while courier companies bring others. Correos de Chile's own tracker is at www.correos.cl/seguimiento-en-linea. Or paste the number in the box above: this page explains each step. Bought online? The number is in the shop's shipping email or on your order page.
+Correos de Chile is Chile's national postal service, handling domestic parcels and postal online orders entering Chile from abroad. Paste your `CL` postal number or 13-digit tracking code in the box above (or look it up on www.correos.cl/seguimiento-en-linea) to follow each Spanish status in English and track hand-offs with partner posts abroad.
 
 ## Correos de Chile tracking number: what it looks like
 
@@ -83,23 +83,23 @@ When you have the parcel open in Peek, or on its delivery day with notifications
 
 ### How do I track a Correos de Chile parcel in English?
 
-Paste the number into Peek. The steps stay in Spanish, but Peek files the lines it knows under English stages, and the table above explains them.
+Paste the number into Peek above. The lines stay in Spanish, but Peek files every scan it knows under English stages and the table above explains each wording.
 
-### What does "ENVÍO EN PROCESO DE INTERNACIÓN AL PAÍS" mean?
+### What does "ENVÍO EN PROCESO DE INTERNACIÓN AL PAÍS" mean on Correos de Chile?
 
 The parcel is being imported into Chile and customs is dealing with it. Correos de Chile contacts you if customs needs a document or a payment.
 
-### Do I pay tax on a parcel from abroad to Chile?
+### Do I pay 19% IVA or customs duty on a parcel sent to Chile?
 
-Since 25 October 2025, online purchases up to USD 500 pay 19% IVA and no customs duty. A registered platform adds it when you pay; otherwise Correos de Chile or the courier collects it at import.
+Since 25 October 2025, online purchases up to USD 500 pay 19% IVA and no customs duty. A platform registered with Chile's tax service (SII) adds IVA at checkout; otherwise Correos de Chile or the courier collects it at import.
 
 ### Why is my Correos de Chile tracking not updating?
 
 The parcel may be at customs, on a flight, or not handed over yet. Sent abroad? Check your own post's tracking with the same `CL` number.
 
-### What does a Correos de Chile tracking number look like?
+### What does a Correos de Chile number look like and how do I contact customs support?
 
-Two letters, nine digits and `CL`, such as `RR482910372CL`, or 13 digits. Peek recognises the first by its shape; for the second, pick Correos de Chile with "Change".
+Two letters, nine digits and `CL` (such as `RR482910372CL`, invented), or 13 digits (pick Correos de Chile with "Change" for 13 digits). For postal parcels going through customs in Chile, Servicio Nacional de Aduanas tells you to check www.correos.cl or email sac@correos.cl.
 
 :::sources
 - [Servicio Nacional de Aduanas: Compras online](https://www.aduana.cl/aduana/site/edic/base/port/comercio_electronico.html) – postal orders through Correos de Chile, couriers for others

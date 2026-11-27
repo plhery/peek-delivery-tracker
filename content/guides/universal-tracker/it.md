@@ -1,13 +1,13 @@
 ---
 title: Tracking universale: tutti i pacchi in un posto solo
-description: Come funziona un tracking universale, cosa non può vedere e un confronto tra 17TRACK, ParcelsApp, AfterShip e altri: pubblicità, account, notifiche e prezzi.
+description: Tracking universale multi corriere: come seguire tutti i pacchi in un'unica app e confronto tra 17TRACK, ParcelsApp, AfterShip, Parcel, Deliveries e Peek.
 slug: tracking-universale-pacchi
 picture: Cinque furgoni colorati i cui percorsi tratteggiati finiscono in un'unica lista su un telefono, e Pip che spunta raggiante da una scatola aperta.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-27
 ---
 
-Un tracking universale, o multi corriere, è un sito o un'app che accetta il codice di tracking di qualsiasi corriere, riconosce di chi è, recupera le scansioni e tiene tutti i tuoi pacchi in un'unica lista. Mostra solo le scansioni che il corriere ha registrato, quindi non ne sa mai più del corriere. I tracker si distinguono per quello che ti chiedono in cambio: un account, l'accesso alla tua casella di posta, un abbonamento per le notifiche o un po' di pazienza con la pubblicità.
+Un tracking universale (o tracciamento multi corriere) accetta il codice di qualsiasi spedizioniere — da Poste Italiane e BRT a DHL, UPS o corrieri cinesi — riconosce il corriere e riunisce tutti i tuoi pacchi in un'unica lista. Mostra però soltanto le scansioni pubblicate dal corriere stesso, quindi non sa mai più del sito ufficiale. I vari tracker si distinguono soprattutto per quello che chiedono in cambio: un account, l'accesso alla casella e-mail, la pubblicità o un abbonamento per le notifiche.
 
 ## Esiste un'app per tracciare tutti i pacchi?
 
@@ -20,7 +20,7 @@ Sì, e forse ce l'hai già: oltre ai tracker universali, mettono insieme i tuoi 
 | Colleghi la tua casella di posta | La tua casella, filtrata con le regole del servizio | Shop, AfterShip, PayPal |
 | Il corriere o il negozio ti riconosce | Il tuo nome, indirizzo, e-mail o telefono | Poste Italiane, InPost, la Posta svizzera; gli ordini Shopify in Shop |
 
-## Come vedo tutti i pacchi in arrivo a casa?
+## Come vedere in automatico tutti i pacchi in arrivo a casa?
 
 Comincia dai servizi gratuiti dei corrieri che usi di più:
 
@@ -53,7 +53,7 @@ Nessuna è la migliore per tutti: dipende dai tuoi corrieri e da cosa sei dispos
 | Per quanto tiene i dati | L'informativa privacy | Deliveries conserva le e-mail inoltrate fino a dieci giorni; la scheda Android di ParcelsApp dice «I dati non possono essere eliminati» |
 | I tuoi corrieri | L'elenco dei corrieri | I numeri li dichiarano i tracker stessi: 17TRACK scrive «più di 2500 servizi» nella scheda italiana dell'App Store e «2800+» sulla sua pagina USPS |
 
-## Gratis o a pagamento: i principali tracker a confronto
+## 17TRACK, ParcelsApp, AfterShip, Parcel, Deliveries e Peek: confronto gratis e prezzi
 
 Quasi tutti partono gratis, ma con pubblicità, un limite o senza notifiche push. In ordine alfabetico, senza classifica, secondo le pagine di ciascuno e le schede dell'App Store italiano al 10 novembre 2026. Peek, che pubblica questa guida, è in lista come gli altri.
 
@@ -102,7 +102,7 @@ Per decifrare un codice da solo, vedi [come capire il corriere dal numero di tra
 
 Ognuno ha le sue fonti e i suoi tempi. Le FAQ di ParcelsApp spiegano che un servizio può aver già trovato il corriere locale mentre un altro non lo mostra ancora. Il riferimento resta il sito del corriere.
 
-## Cosa succede se il pacco cambia corriere?
+## Cosa succede al tracking se un pacco dall'estero cambia corriere?
 
 Un pacco dall'estero passa spesso di mano, e il corriere locale «può mantenere il primo numero oppure crearne un altro», dicono le FAQ di ParcelsApp.
 
@@ -116,7 +116,7 @@ Un pacco dall'estero passa spesso di mano, e il corriere locale «può mantenere
 
 I tracker che collegano i numeri, come ParcelsApp, uniscono A e B quando B compare nei dati del primo corriere. Sulla sua pagina Pro, ParcelsApp porta l'esempio di un pacco passato da DHL eCommerce a [YunExpress](carrier:yunexpress) e poi a Poste Italiane. Se B non compare mai, cerca un nuovo numero nella cronologia completa e provalo sul sito del corriere locale, che sia Poste Italiane, BRT o la Posta svizzera. Per gli ordini dai marketplace cinesi leggi [seguire un pacco dalla Cina](guide:tracking-from-china).
 
-## Cosa non può vedere un tracker
+## Cosa non può vedere o fare un tracker universale?
 
 Tutto ciò che il corriere non ha pubblicato. ParcelsApp lo dice chiaramente: «non può creare una registrazione che il corriere non ha fatto». In più un tracker vede ogni scansione dopo il corriere, e i ritardi si sommano:
 
@@ -127,7 +127,7 @@ Tutto ciò che il corriere non ha pubblicato. ParcelsApp lo dice chiaramente: «
 
 Un tracker non può nemmeno agire al posto tuo: per cambiare la consegna, pagare un importo o segnalare un pacco mancante, ParcelsApp ti rimanda al sito ufficiale del corriere. Se il tracking è fermo da giorni, leggi [perché il tracking non si aggiorna](guide:tracking-not-updating). Se risulta consegnato e non trovi niente, vedi [pacco consegnato ma non ricevuto](guide:delivered-not-received).
 
-## Come capire se 17TRACK è affidabile?
+## 17TRACK e ParcelsApp sono sicuri e affidabili?
 
 Parti da quello che dice di sé. L'informativa privacy di 17TRACK indica VASTAR SINGAPORE TECHNOLOGY PTE. LTD. come titolare del trattamento per gli utenti registrati fuori dalla Cina continentale e da Hong Kong. I dati degli account sono conservati su server Tencent Cloud a Guangzhou, in Cina, e negli Stati Uniti; per i dati che lasciano lo Spazio economico europeo, l'informativa prevede le clausole contrattuali standard approvate dalla Commissione europea oppure un paese di destinazione con un livello di protezione adeguato. Nella scheda italiana dell'App Store, alla voce «Età», 17TRACK dichiara che l'app contiene pubblicità. Per sapere quali dati raccoglie l'app, guarda la sezione «Privacy dell'app».
 

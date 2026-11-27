@@ -1,12 +1,12 @@
 ---
 title: Nova Poshta (Nova Post) śledzenie: numer, statusy, odbiór
-description: Paczka z Ukrainy przez Nova Post: gdzie jest numer listu przewozowego, co znaczą statusy, ile czeka w oddziale, Paczkomacie i punkcie oraz jak się skontaktować.
+description: Nova Post (Nova Poshta) śledzenie w Polsce: numer listu przewozowego, znaczenie statusów, odbiór w oddziale i Paczkomacie, cło z Ukrainy oraz infolinia.
 slug: nova-poshta-sledzenie
 published: 2026-10-12
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Nova Poshta, w Polsce Nova Post, to ukraińska firma kurierska, która sama nazywa się liderem przesyłek ekspresowych na Ukrainie; w Polsce działa jako NOVA POST POLAND z własnymi oddziałami. Paczkę śledzisz po numerze listu przewozowego na [polskiej stronie śledzenia Nova Post](https://novapost.com/pl-pl/tracking/), w aplikacji albo wklejając go w pole powyżej. Numer dostajesz od nadawcy, w SMS-ie albo w powiadomieniu z aplikacji.
+Nova Poshta — działająca w Polsce jako **Nova Post** (NOVA POST POLAND) — to ukraińska firma kurierska z własnymi oddziałami w Polsce oraz dostawą kurierem i do Paczkomatów InPost. Aby sprawdzić przesyłkę z Ukrainy lub międzynarodową, wklej 14-cyfrowy numer listu przewozowego (albo międzynarodowy `SH`/`TN`) w pole powyżej lub wpisz go na [polskiej stronie śledzenia Nova Post](https://novapost.com/pl-pl/tracking/).
 
 ## Numer przesyłki Nova Post: list przewozowy
 
@@ -96,21 +96,25 @@ Pokazuje angielskie komunikaty Nova Poshta, na przykład `Arrived at the branch 
 
 ## Pytania o śledzenie Nova Post
 
-### Nova Post: co to za firma?
+### Nova Post (Nova Poshta): co to za firma?
 
 To ukraińska Nova Poshta, założona w 2001 roku, spółka matka grupy NOVA, która według własnych danych dostarcza 1,5 miliona paczek i ładunków dziennie. W Polsce działa spółka NOVA POST POLAND Sp. z o.o. z siedzibą w Warszawie, a Nova Post Europe ma biura w 13 krajach Europy.
 
-### Gdzie jest moja paczka Nova Post?
+### Jak sprawdzić, gdzie jest moja paczka Nova Post?
 
 Pokazuje to najnowsza linia na stronie śledzenia, z miastem i godziną. `Dotarła do oddziału 300` znaczy, że możesz ją odebrać; numer oddziału jest też w SMS-ie.
 
-### Ile idzie paczka z Ukrainy do Polski?
+### Ile idzie paczka Nova Post z Ukrainy do Polski?
 
 Nova Post podaje terminy „od 3 dni”. Zaznacza, że są orientacyjne, bez gwarancji, i nie obejmują weekendów, świąt, kontroli bezpieczeństwa ani odprawy celnej.
 
-### Ile dni paczka czeka w oddziale Nova Post?
+### Ile dni paczka czeka w oddziale Nova Post i w Paczkomacie InPost?
 
-W Polsce według regulaminu 7 dni bezpłatnie, potem płatnie do 30. dnia. Na Ukrainie od 1 października 2026 bezpłatnie 5 dni.
+W oddziale Nova Post w Polsce przesyłka czeka bezpłatnie 7 dni kalendarzowych (potem płatnie do 30. dnia), a w punkcie Nova Post do 5 dni. W Paczkomacie InPost czeka 2 dni kalendarzowe, po czym Nova Post przewozi ją do swojego oddziału (odbiór: +48 573 504 069). Na Ukrainie bezpłatne przechowanie w oddziale wynosi 5 dni.
+
+### Jaki jest numer infolinii i kontakt do Nova Post w Polsce?
+
+Infolinia Nova Post w Polsce działa codziennie w godzinach 8:00–20:00 pod numerem +48 182 111 609 (e-mail: support@novapost.pl). W sprawach paczek przeniesionych z Paczkomatu po czasie przechowania dzwoń pod +48 573 504 069.
 
 :::sources
 - [Nova Post Polska: Śledź przesyłkę](https://novapost.com/pl-pl/tracking/) – języki, komunikat o nieznanym numerze, statusy, przyczyny opóźnień, „Złożyć reklamację”

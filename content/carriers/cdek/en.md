@@ -1,12 +1,12 @@
 ---
 title: CDEK tracking (СДЭК): order numbers and statuses in English
-description: Track a CDEK (СДЭК) parcel: what its order number looks like, what its Russian statuses mean in English, courier and pickup point steps, and how Peek follows it.
+description: Track a CDEK (СДЭК / my.cdek.ru) parcel in English: 11-digit order numbers, Russian status translations, courier vs pickup point steps and carrier matching.
 slug: cdek-tracking
 published: 2026-11-02
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-CDEK (СДЭК, also written SDEK) is a courier company. Peek's catalog lists it in Russia, Kazakhstan, Belarus and Serbia. It brings parcels to your door by courier, or to a pickup point or parcel locker where you collect them. The shop or the sender gives you the number: paste it in the box above. CDEK's own tracker is on my.cdek.ru. CDEK writes its steps in Russian, and the table below gives them in English.
+CDEK (СДЭК, also spelled SDEK) is a courier and logistics network listed in Peek's catalog across Russia, Kazakhstan, Belarus and Serbia, delivering by courier to your door, to pickup points and to parcel lockers. Paste your CDEK order number (or `my.cdek.ru` link) in the box above to see your parcel's status in English alongside translations of CDEK's Russian scan lines.
 
 ## CDEK tracking number: what it looks like
 
@@ -103,23 +103,23 @@ On a parcel you've already added, use "Change carrier". A parcel added without a
 
 ## Questions about CDEK tracking
 
-### What is СДЭК in English?
+### What is СДЭК (SDEK) in English and where is its official tracker?
 
-CDEK. It is also written SDEK, and sometimes CDEK Express. Its tracker is on my.cdek.ru.
+CDEK (also written SDEK or CDEK Express). Its official order tracking site is `my.cdek.ru`.
 
-### What does a CDEK tracking number look like?
+### What does a CDEK order tracking number look like?
 
-Peek links 11 digits starting with `10` to CDEK, such as `10482917365`, but other carriers have 11-digit numbers too.
+Peek links 11 digits starting with `10` to CDEK (such as `10482917365`, invented), and CDEK's tracker also accepts linked external or international postal numbers of 5 to 40 letters and digits.
 
-### What does "Поступил. Заберите заказ" mean on CDEK tracking?
+### What does "Поступил. Заберите заказ" or "Выдан курьеру" mean on CDEK?
 
-Your parcel has arrived at your pickup point or parcel locker, and you can collect it. Peek shows "Ready for pickup". Check the address and the last day to collect on CDEK's order page.
+`"Поступил. Заберите заказ"` ("Ready for pickup" in Peek) means your parcel has arrived at your pickup point or parcel locker — check the address, hours and collection deadline on `my.cdek.ru`. `"Выдан курьеру"` ("Out for delivery") means the courier has taken the parcel out on a delivery run.
 
-### Can I track a CDEK parcel in English?
+### Can I track a CDEK parcel in English without logging in?
 
-Yes. Peek shows the parcel's status in English, such as "In transit", and its history in CDEK's Russian words, which the table above explains.
+Yes. Paste your order number in Peek above: Peek queries CDEK without an account or phone confirmation, shows the stage in English ("In transit", "Out for delivery", "Ready for pickup") and displays CDEK's Russian scan lines, translated in the table above.
 
-### Why does Peek ask me to choose a carrier for my CDEK number?
+### Why does Peek ask me to choose a carrier for an 11-digit CDEK number?
 
 GLS, PostLogistics and other carriers also use 11 digits. If more than one of them knows your number, Peek can't tell which parcel is yours: pick CDEK from the list.
 

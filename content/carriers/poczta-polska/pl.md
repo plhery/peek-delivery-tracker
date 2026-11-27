@@ -1,12 +1,12 @@
 ---
 title: Poczta Polska śledzenie: numer, statusy, awizo i kontakt
-description: Śledzenie przesyłki Poczty Polskiej i Pocztex: jak wygląda numer, co znaczą statusy, ile czeka awizo, punkt i automat, reklamacje, cło i infolinia.
+description: Poczta Polska i Pocztex – śledzenie eMonitoring: numer przesyłki PX i PL, znaczenie statusów, awizo (7 i 14 dni), odbiór w punkcie lub automacie i infolinia.
 slug: poczta-polska-sledzenie
 published: 2026-10-11
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Poczta Polska to państwowy operator pocztowy, a Pocztex to jej usługa kurierska. Przesyłkę śledzisz w eMonitoringu Poczty Polskiej (ta sama wyszukiwarka jest na poczta-polska.pl i pocztex.pl) albo wklejając numer w pole powyżej. Numer jest na potwierdzeniu nadania, więc ma go sklep lub nadawca, a powtarzają go też SMS-y i e-maile z powiadomieniami Poczty Polskiej.
+Poczta Polska to państwowy operator pocztowy, a **Pocztex** to jej usługa kurierska. Przesyłkę krajową lub zagraniczną sprawdzisz bez logowania w eMonitoringu (`poczta-polska.pl` i `pocztex.pl`) albo wklejając numer (`PX…`, 19/20 cyfr lub `…PL`) w pole powyżej. Numer nadania znajdziesz na potwierdzeniu ze sklepu oraz w SMS-ach i e-mailach z powiadomieniami Poczty Polskiej.
 
 ## Numer przesyłki Poczty Polskiej: gdzie go znaleźć
 
@@ -98,21 +98,25 @@ Gdy masz przesyłkę otwartą albo w dniu doręczenia z włączonymi powiadomien
 
 ## Pytania o śledzenie Poczty Polskiej
 
-### Czy Pocztex to Poczta Polska?
+### Czy Pocztex to Poczta Polska i czy mają wspólne śledzenie?
 
 Tak. Pocztex to usługa kurierska Poczty Polskiej, z własną stroną pocztex.pl i aplikacją Pocztex Mobile. Jej paczki śledzi ten sam eMonitoring.
 
-### Ile trwa dostawa Pocztex?
+### Ile trwa dostawa paczki Pocztex Kurier?
 
 Poczta Polska gwarantuje doręczenie paczki Pocztex Kurier do piątego dnia roboczego po nadaniu, a dla paczek 2XL i niestandardowych do siódmego. Dni robocze to poniedziałek–piątek bez świąt.
 
-### Czy mogę przekierować paczkę Pocztex?
+### Ile dni czeka przesyłka awizowana lub w punkcie i automacie Pocztex?
+
+Listy polecone i paczki pocztowe czekają 14 dni od dnia po pierwszym awizo (po 7 dniach przychodzi powtórne awizo). Paczka Pocztex czeka 7 dni w placówce, 3 dni w sklepie partnerskim (np. Żabka, ABC, Lewiatan) albo 72 godziny w automacie Pocztex.
+
+### Czy mogę przekierować paczkę Pocztex jako odbiorca?
 
 Jako odbiorca nie. Regulamin zostawia zmianę adresu lub odbiorcy nadawcy, a paczki z punktu lub automatu Pocztex nie da się przenieść gdzie indziej.
 
-### Jak śledzić przesyłkę wysłaną za granicę?
+### Jak śledzić przesyłkę zagraniczną i jaki jest numer infolinii Poczty Polskiej?
 
-W eMonitoringu, tym samym numerem. Status `Przyjęta w kraju przeznaczenia` znaczy, że dotarła do kraju odbiorcy; gdy dalszych zdarzeń eMonitoring nie pokazuje, Poczta Polska odsyła na stronę operatora w tym kraju.
+Przesyłkę zagraniczną sprawdzisz tym samym numerem w eMonitoringu (po statusie `Przyjęta w kraju przeznaczenia` Poczta Polska odsyła na stronę operatora w kraju odbiorcy). Infolinia Poczty Polskiej to (+48) 438 420 600 (pn.–pt. 8:00–20:00), a Pocztex: 804 104 104 lub +48 43 842 0 842 (również soboty 8:00–16:00).
 
 :::sources
 - [Poczta Polska: Śledź przesyłkę](https://www.poczta-polska.pl/sledzenie-przesylek/) – format numeru, zakres śledzenia, operatorzy zagraniczni, pełnomocnictwo do zgłoszenia celnego

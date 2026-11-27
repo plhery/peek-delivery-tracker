@@ -15638,6 +15638,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc291e"
     },
     {
+      "id": "nz-post",
+      "catalog": "nz-post",
+      "slug": "nz-post-tracking",
+      "title": "Rastreamento NZ Post: códigos, status e retirada",
+      "name": "NZ Post",
+      "color": "#d8291c"
+    },
+    {
       "id": "aramex-nz",
       "catalog": "aramex-nz",
       "slug": "aramex-new-zealand-tracking-number",
@@ -16308,6 +16316,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento DPD Belgium: status, entrega e contato",
       "name": "DPD Belgium",
       "color": "#dc0032"
+    },
+    {
+      "id": "packlink",
+      "catalog": "packlink",
+      "slug": "packlink-tracking",
+      "title": "Rastreamento Packlink: referência, status e contato",
+      "name": "Packlink",
+      "color": "#ff4f00"
     },
     {
       "id": "sto",
@@ -20444,6 +20460,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc291e"
     },
     {
+      "id": "nz-post",
+      "catalog": "nz-post",
+      "slug": "nz-post-tracking",
+      "title": "新西兰邮政（NZ Post）快递查询：单号、状态与未送达处理",
+      "name": "NZ Post",
+      "color": "#d8291c"
+    },
+    {
       "id": "aramex-nz",
       "catalog": "aramex-nz",
       "slug": "aramex-new-zealand-tracking-number",
@@ -21130,6 +21154,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DPD Belgium 比利时物流查询：状态、派送与联系",
       "name": "DPD Belgium",
       "color": "#dc0032"
+    },
+    {
+      "id": "packlink",
+      "catalog": "packlink",
+      "slug": "packlink-tracking",
+      "title": "Packlink 快递查询：参考号、状态与客服联系",
+      "name": "Packlink",
+      "color": "#ff4f00"
     },
     {
       "id": "sto",

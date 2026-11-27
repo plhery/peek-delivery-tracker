@@ -1,13 +1,13 @@
 ---
 title: Ordini MediaWorld (MediaMarkt): tracking e corrieri
-description: In Italia MediaMarkt si chiama MediaWorld. Chi consegna il tuo ordine, dove trovi il tracking e cosa fare se il pacco è in ritardo o non arriva.
+description: In Italia MediaMarkt si chiama MediaWorld: corrieri (BRT, Poste, Amazon Shipping, InPost), stato ordine in «I tuoi ordini», ritiro in 30 min e resi 30 giorni.
 slug: tracking-ordine-mediaworld-mediamarkt
 picture: Una scatola piatta di un televisore e un piccolo pacco accanto a un furgone delle consegne, Pip allegro e un negozio con il cartello del ritiro.
 published: 2026-10-17
-updated: 2026-11-08
+updated: 2026-11-27
 ---
 
-In Italia MediaMarkt si chiama MediaWorld (mediaworld.it): «In Italia siamo MediaWorld», dice l'azienda, che fa parte del gruppo MediaMarktSaturn, e il gruppo rimanda a mediaworld.it per i negozi italiani. I prodotti leggeri li consegnano Amazon Shipping, BRT, Poste Italiane o altri corrieri; quelli pesanti, come lavatrici e TV grandi, Ceva Logistics, Energo, Rhenus Logistics o altri. Lo stato della spedizione lo vedi in «I tuoi ordini», nell'area «Il mio profilo». I prodotti di altri venditori del Marketplace seguono le condizioni di ciascun venditore.
+In Italia MediaMarkt opera come MediaWorld (mediaworld.it, gruppo MediaMarktSaturn). Segui il tuo ordine in «I tuoi ordini» dentro «Il mio profilo» o dalla terza e-mail di conferma spedizione: i prodotti leggeri viaggiano con Amazon Shipping, BRT, Poste Italiane o InPost (Point/Locker, 5 giorni lavorativi per il ritiro), mentre elettrodomestici e TV grandi li consegnano Ceva Logistics, Energo o Rhenus Logistics su appuntamento telefonico. Per ritardi, danni o ordini mancanti puoi contattare MediaWorld al `+39 02.94751717` (tutti i giorni 9–21) o dal modulo online; i prodotti Marketplace seguono le condizioni del singolo venditore.
 
 ## Quale corriere consegna il mio ordine MediaWorld?
 
@@ -79,7 +79,7 @@ Secondo MediaWorld, la data può cambiare per questi motivi:
 
 Le condizioni di vendita fissano un limite: MediaWorld consegna entro 30 giorni dall'ordine, salvo casi particolari. Quando aspettare è ancora normale: [perché il tracking non si aggiorna](guide:tracking-not-updating).
 
-## Opzioni e costi di consegna di MediaWorld
+## Quanto costa e come funziona la consegna MediaWorld?
 
 Il costo della consegna Basic è nella scheda prodotto e dipende da peso e dimensioni; quello finale lo vedi nel carrello, dove più articoli possono costare meno della somma. Plus, Plus Programmata e InPost hanno il prezzo nel carrello prima del pagamento.
 
@@ -99,7 +99,7 @@ Per i prodotti pesanti in alcune località difficili da raggiungere, l'operatore
 
 **InPost.** Se non ritiri entro 5 giorni lavorativi, l'ordine viene annullato e rimborsato in automatico. Con più prodotti, ricevi un avviso «PRONTO AL RITIRO» per ciascuno. Sui locker: [pacchi nei locker](guide:parcel-lockers).
 
-## Pacco MediaWorld non arrivato o segnato come consegnato: cosa fare
+## Ordine MediaWorld non arrivato o danneggiato: cosa fare?
 
 In quest'ordine:
 
@@ -115,7 +115,7 @@ Se dopo due tentativi il corriere non ti trova, MediaWorld ti chiama per sapere 
 
 Se il pacco arriva rovinato, contesta per iscritto al corriere sulla bolla di consegna e segnalalo a MediaWorld entro 8 giorni. Un danno che scopri dopo, entro 8 giorni da quando lo scopri. Altro: [pacco consegnato ma non ricevuto](guide:delivered-not-received), [pacco smarrito](guide:lost-parcel) e [pacco danneggiato](guide:damaged-parcel).
 
-## Restituire un ordine MediaWorld
+## Come fare un reso MediaWorld entro 30 giorni?
 
 Hai 30 giorni da quando ricevi il prodotto, anche se lo prende il portiere per te. Riportalo in un negozio MediaWorld, senza costi. Oppure chiedi il reso in «Resi online» su aftersales.mediaworld.it: ricevi un Numero di Autorizzazione al Rientro (NAR) e scegli il ritiro a casa, con un corriere incaricato da Poste Italiane, o la consegna in un Ufficio Postale o Punto Poste. Per i prodotti voluminosi il ritiro a domicilio costa 20 €, tolti dal rimborso. MediaWorld rimborsa entro 5 giorni lavorativi da quando il corriere o l'ufficio postale prende il pacco.
 

@@ -1,13 +1,13 @@
 ---
 title: IKEA Sendungsverfolgung: Paket, Spedition und Probleme
-description: Wer deine IKEA-Bestellung in Deutschland, Österreich und der Schweiz bringt, wo du sie verfolgst und was tun, wenn Kartons fehlen oder beschädigt sind.
+description: IKEA Sendungsverfolgung in DE, AT und CH: Bestellstatus mit Bestellnummer, Paketdienst vs. Spedition, Lieferkosten, fehlende Kartons und 365 Tage Rückgabe.
 slug: ikea-sendungsverfolgung
 picture: Ein Stapel langer flacher Möbelkartons, ein Inbusschlüssel, ein Lieferwagen und Pip oben auf dem obersten Karton.
 published: 2026-10-18
-updated: 2026-11-10
+updated: 2026-11-27
 ---
 
-Jede IKEA-Online-Bestellung verfolgst du bei IKEA selbst: mit der Bestellnummer und der E-Mail-Adresse oder Telefonnummer, mit der du bestellt hast. Kleine Bestellungen kommen als Paket und haben eine eigene Sendungsnummer, in Österreich von der Post, in der Schweiz von der Post oder von Planzer. Möbel bringt eine Spedition in einem Zeitfenster. Die verfolgst du nur bei IKEA und über den Anruf oder die SMS des Fahrers.
+Verfolge jede IKEA-Online-Bestellung direkt auf der IKEA-Seite deines Landes („Verfolge und verwalte deine Bestellung“ in Deutschland, „Meine Bestellungen“ in Österreich und der Schweiz) mit deiner Bestellnummer und der E-Mail-Adresse oder Telefonnummer aus der Bestellung. Pakete bekommen zusätzlich eine eigene Sendungsnummer per E-Mail (in Österreich von der Österreichischen Post, in der Schweiz von der Post oder Planzer; in Deutschland nennt IKEA den Paketdienst nicht), die du auch in Peek verfolgen kannst. Möbel liefert eine Spedition im Zeitfenster (in Deutschland 12 Stunden mit Anruf ca. 1 Stunde vorher) — dafür gibt es nur den Status bei IKEA.
 
 ## Wer liefert meine IKEA-Bestellung?
 
@@ -116,7 +116,7 @@ Erst schauen, dann melden. Der Reihe nach:
 
 **Verpasster Termin.** Ist bei einer Speditionslieferung in Deutschland niemand da, musst du eine zweite, kostenpflichtige Lieferung buchen: IKEA meldet sich dann bei dir, um sie zu vereinbaren. Laut AGB können zusätzlich Lagerkosten von 2,50 € pro Tag anfallen. Unterschreiben muss eine volljährige Person. Ein nicht abgeholtes Paket geht nach der Frist an IKEA zurück. In der Schweiz meldest du später entdeckte Mängel sofort nach der Entdeckung. Den Stand deiner Reklamation siehst du dort unter „Fälle“. Mehr dazu: [Zustellung verpasst](guide:missed-delivery), [Zugestellt, aber nicht erhalten](guide:delivered-not-received), [Paket beschädigt](guide:damaged-parcel) und [Paket verloren](guide:lost-parcel).
 
-## IKEA-Bestellung zurückgeben
+## Wie gebe ich eine IKEA-Bestellung zurück?
 
 **Deutschland.** Unbenutzte und unbeschädigte Produkte nimmt jedes IKEA Einrichtungshaus in Deutschland 365 Tage lang zurück, auch geöffnet oder montiert, nicht aber zugeschnittene Ware, Grünpflanzen und Artikel aus dem Zweite-Chance-Markt. In Planungsstudios und an Abholstationen ist keine Rückgabe möglich. Kleinere Produkte schickst du für 2,90 € per Paket mit [DHL](carrier:dhl) zurück, bis 120 × 60 × 60 cm und 30 kg; bewahre den Beleg auf. Große Ware holt eine Spedition für 75 € ab, die IKEA von der Erstattung abzieht. Bei Online-Bestellungen hast du außerdem 14 Tage Widerrufsrecht.
 

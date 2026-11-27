@@ -1,12 +1,12 @@
 ---
 title: DPD Sendungsverfolgung Deutschland: Status und Hilfe
-description: DPD-Paket in Deutschland verfolgen: wo die 14-stellige Paketnummer steht, was die Status heißen, wie Predict und der Paketshop funktionieren und wen du anrufst.
+description: DPD Sendungsverfolgung in Deutschland: 14-stellige Paketnummer, Predict 2-Stunden-Zeitfenster, Paketshop (7 Tage), Umleiten, Hotline 06021 150415 und Status.
 slug: dpd-sendungsverfolgung-deutschland
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-DPD in Deutschland ist die DPD Deutschland GmbH aus Aschaffenburg, ein Paketdienst im Geopost-Netz mit 10.000 Paketshops. Dein Paket verfolgst du mit der 14-stelligen Paketnummer auf DPDs Seite, mit deiner Postleitzahl siehst du dort alle Details. Oder du fügst die Nummer oben ins Feld ein. Je nachdem, was du in der Hand hast:
+Verfolge dein DPD-Paket in Deutschland (DPD Deutschland GmbH, Aschaffenburg, 10.000 Paketshops im Geopost-Netz) mit der 14-stelligen Paketnummer oben im Feld oder mit deiner Postleitzahl auf dpd.de. Die Empfänger-Hotline ist `06021 150415` (`info@dpd.de`). Je nachdem, was du hast:
 
 - **Predict-Nachricht oder Versand-E-Mail:** Darin steht die Paketnummer, bei Predict auch das Zeitfenster von 2 Stunden am Zustelltag. Umleiten kannst du in der DPD App oder in der Sendungsverfolgung.
 - **Paketinfokarte im Briefkasten:** Die Nummer unter dem QR-Code ist die Paketnummer, der QR-Code zeigt, wo das Paket liegt.
@@ -101,25 +101,25 @@ Peek schaut bis zu alle 10 Minuten nach, in Zustellung bis zu alle 2 Minuten (am
 
 ## Fragen zur DPD Sendungsverfolgung
 
-### Wann kommt mein DPD-Paket?
+### Wann kommt mein DPD-Paket und was ist Predict?
 
-Innerhalb Deutschlands dauert der Versand laut DPD in der Regel 1 bis 2 Werktage nach der Übergabe an DPD, feste Termine sind das laut AGB nicht. Die Uhrzeit erfährst du am Zustelltag über Predict, wenn der Versender DPD deine E-Mail-Adresse oder Handynummer gegeben hat.
+In Deutschland dauert der Versand in der Regel 1 bis 2 Werktage ab Übergabe (ohne festen Termin laut AGB). Hat der Versender deine E-Mail-Adresse oder Handynummer übermittelt, kündigt Predict am Zustelltag ein 2-Stunden-Zeitfenster an (im Live-Tracking auf 30 Minuten genau).
 
 ### Warum funktioniert die DPD Sendungsverfolgung nicht?
 
-DPDs Fehlerseite nennt drei mögliche Gründe: Die Nummer ist falsch, sie ist älter als 180 Tage und archiviert, oder das Paket wurde DPD noch nicht übergeben. Prüf die Nummer auf Tippfehler, etwa 0 statt O, wie DPD rät.
+Laut DPDs Fehlerseite gibt es drei Gründe: Tippfehler in der 14-stelligen Paketnummer (etwa 0 statt O), die Sendung ist älter als 180 Tage und archiviert, oder der Versender hat das Paket noch nicht an DPD übergeben.
 
 ### Stellt DPD auch samstags zu?
 
-Die Samstagszustellung ist ein Service, den der Versender bucht: Laut DPDs Beförderungsbedingungen gibt es sie nur mit dem Express-Service DPD 12:00 und nur innerhalb Deutschlands, ohne Inseln.
+Nur wenn der Versender den Express-Service DPD 12:00 gebucht hat, und nur innerhalb Deutschlands ohne Inseln. Normale DPD-Pakete werden montags bis freitags zugestellt.
 
-### Kann ich mein Paket im DPD-Depot abholen?
+### Kann ich mein Paket im DPD-Depot abholen oder wie lange liegt es im Paketshop?
 
-Nein, private Abholungen im DPD-Depot sind laut DPD nicht möglich. Leite das Paket stattdessen in einen Pickup Paketshop um.
+Im DPD-Depot sind private Abholungen nicht möglich — leite das Paket in einen Pickup Paketshop um ([Paketshop Finder](https://www.dpd.com/de/de/pickup-paketshops/paketshop-finden/)). Dort liegt es laut FAQ 7 Kalendertage (3 Tage an der Paketstation; AGB nach verpasster Zustellung: 7 Werktage).
 
-### Wo finde ich einen DPD Paketshop in der Nähe?
+### Wie erreiche ich den DPD Kundenservice in Deutschland?
 
-Im [Paketshop Finder](https://www.dpd.com/de/de/pickup-paketshops/paketshop-finden/) auf DPDs Seite, der auch die Öffnungszeiten zeigt.
+Telefonisch für Empfänger unter `06021 150415` (`+49 6021 150 415`), per E-Mail an `info@dpd.de`, über das Formular „Fragen zu einem Paket“ auf dpd.de oder den Chat in der DPD App. Bei Online-Bestellungen klärt der Versender Erstattung und Nachforschung.
 
 :::sources
 - [DPD: Wo finde ich meine Paketnummer?](https://www.dpd.com/de/de/faq/wo-finde-ich-meine-paketnummer/) – Nummer

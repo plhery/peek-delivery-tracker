@@ -1,12 +1,12 @@
 ---
 title: Śledzenie Xinghe Freight: numery GZXH, statusy i dostawa
-description: Śledź paczkę Xinghe Freight (星和货运) z Chin: jak wygląda numer GZXH…YQ, co oznaczają statusy, dlaczego część etapów powstaje z wyprzedzeniem i kto doręcza.
+description: Śledź paczkę Xinghe Freight (星和货运) z Chin: numer GZXH…YQ, platforma GZYL i z góry wpisane etapy (Delivered), opłaty UE (3 € i 2 €) oraz kontakt.
 slug: xinghe-freight-sledzenie
 published: 2026-11-18
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Xinghe Freight (星和货运, 广州星和货运代理有限公司, Guangzhou Xinghe Freight Forwarding) to spedytor z Kantonu (Guangzhou) w Chinach, którego śledzenie działa na systemie przewoźnika [GZYL](carrier:gzyl). Jeśli sklep internetowy podał ci numer zaczynający się od `GZXH` i kończący na `YQ`, wklej go w pole powyżej albo wpisz w wyszukiwarkę przesyłek na chińskiej stronie Xinghe, xinghe-express.cn. Do historii podchodź jednak ostrożnie: na tej platformie cały harmonogram trasy – łącznie z `Delivered` – bywa wpisany z góry, zanim ktokolwiek fizycznie zeskanuje paczkę.
+Aby śledzić paczkę Xinghe Freight (星和货运, 广州星和货运代理有限公司, spedytor z Kantonu działający od 2014 r.), wklej 16-znakowy numer `GZXH` + 10 cyfr + `YQ` w pole powyżej albo wpisz go na chińskiej stronie xinghe-express.cn. Śledzenie Xinghe korzysta z platformy [GZYL](carrier:gzyl), na której cały harmonogram — łącznie z `Delivered` — bywa wpisany z wyprzedzeniem bez fizycznego skanu: jeśli inny serwis pokazuje `Delivered`, a paczki nie ma, zapytaj sprzedawcę o nazwę i numer lokalnego przewoźnika.
 
 ## Numer śledzenia Xinghe Freight: jak wygląda
 
@@ -95,21 +95,25 @@ Poza Pocztą Szwajcarską w Szwajcarii i Liechtensteinie Peek nie przełącza pr
 
 ## Najczęstsze pytania o śledzenie Xinghe Freight
 
-### Czym jest Xinghe Freight (星和货运)?
+### Czym jest Xinghe Freight (星和货运) i jak wygląda numer GZXH?
 
-To 广州星和货运代理有限公司 (Guangzhou Xinghe Freight Forwarding), spedytor z siedzibą w Kantonie (Guangzhou) w Chinach. Na swojej stronie podaje, że działa od 2014 roku i zajmuje się spedycją morską, lotniczą i lądową, agencją morską oraz obsługą celną. Numery przypisywane przez Peek do Xinghe Freight mają postać `GZXH`, dziesięciu cyfr i `YQ`.
+To 广州星和货运代理有限公司 (Guangzhou Xinghe Freight Forwarding), spedytor z Kantonu (Guangzhou) działający według swojej strony od 2014 roku w spedycji morskiej, lotniczej, lądowej i obsłudze celnej. Numery rozpoznawane przez Peek dla Xinghe Freight mają 16 znaków: `GZXH`, dziesięć cyfr i `YQ`.
 
 ### Dlaczego moja paczka Xinghe Freight pokazuje śledzenie GZYL?
 
-Ponieważ śledzenie Xinghe działa na platformie [GZYL](carrier:gzyl): wyszukiwarka na własnej stronie Xinghe przekazuje twój numer właśnie tam, dlatego zdarzenia wracają w brzmieniu GZYL. Peek zachowuje przesyłkę pod nazwą Xinghe Freight i bezpośrednio odczytuje ten system.
+Wyszukiwarka na stronie xinghe-express.cn wysyła numer do systemu [GZYL](carrier:gzyl), dlatego statusy wracają w angielskim brzmieniu GZYL (włącznie z literówkami, np. `Internationaliy Package received at processing center`). Peek zachowuje przesyłkę jako Xinghe Freight i bezpośrednio odczytuje ten system.
 
-### Kto doręcza paczki Xinghe Freight w Polsce?
+### Dlaczego inne strony pokazują `Delivered`, mimo że paczka Xinghe nie dotarła?
 
-Peek tego nie wie: ani wpisy w systemie śledzenia, ani strona Xinghe nie wymieniają lokalnego doręczyciela. Tylko w Szwajcarii i Liechtensteinie Peek może automatycznie przekazać paczkę Poczcie Szwajcarskiej. W Polsce zapytaj sprzedawcę, który przewoźnik odpowiada za ostatni odcinek i jaki nadał numer przesyłki.
+Na platformie GZYL spedytorzy mogą zapisać z góry cały harmonogram aż po `Delivered`, bez podpisu i prawdziwego skanu doręczenia. Peek wstrzymuje prognozowane kroki pod przyciskiem „Pokaż” i wyświetla ostrzeżenie o stałym harmonogramie pod „Dostarczona”: zgłoś brak paczki sprzedawcy i poproś o lokalny numer śledzenia.
 
-### Dlaczego Peek nie pokazuje jeszcze żadnych zdarzeń dla numeru GZXH?
+### Kto doręcza paczki Xinghe Freight w Polsce i jakie są opłaty celne UE?
 
-System może jeszcze nie mieć tego zlecenia albo zawierać wyłącznie etapy wpisane z wyprzedzeniem (aż po `Delivered`), które Peek wstrzymuje jako niepotwierdzone i pokazuje tylko po kliknięciu „Pokaż”. Peek odpytuje również serwisy śledzenia. Dla numeru, którego system nie zna, traktuje odpowiedź jako nieznaleziony numer: wyświetla „Oczekiwanie na przewoźnika Xinghe Freight”, a po dwóch dniach „Sprawdź numer śledzenia”. Dla numeru, do którego ma tylko etapy wpisane z wyprzedzeniem, nie prosi o weryfikację numeru. Porównaj numer z wiadomością od sklepu, a jeśli po kilku dniach nic się nie pojawi, zapytaj sprzedawcę, czy paczka faktycznie została nadana.
+Ani śledzenie, ani xinghe-express.cn nie podają polskiego doręczyciela (Peek przekazuje przesyłkę wyłącznie Poczcie Szwajcarskiej w Szwajcarii i Liechtensteinie, gdy rekord ją wskaże): zapytaj sprzedawcę. Dla przesyłek spoza UE obowiązują ryczałtowe cło 3 € za kategorię towaru do 150 € (od 1 lipca 2026 r.) oraz unijna opłata manipulacyjna 2 € za kategorię (od 1 listopada 2026 r.).
+
+### Dlaczego Peek nie pokazuje jeszcze zdarzeń dla numeru GZXH i z kim się kontaktować?
+
+System może jeszcze nie mieć zlecenia („Oczekiwanie na przewoźnika Xinghe Freight”) albo zawierać tylko etapy wpisane z wyprzedzeniem, widoczne dopiero po kliknięciu „Pokaż”. W sprawach zamówienia kontaktuj się ze sprzedawcą lub platformą: numer `19924483103` i e-mail `3975605292@qq.com` na xinghe-express.cn służą wyłącznie do zapytań biznesowych po chińsku.
 
 :::sources
 - [Xinghe Freight: 广州星和货运代理有限公司 (strona główna, po chińsku)](http://xinghe-express.cn/) – nazwa firmy, usługi spedycyjne, wyszukiwarka korzystająca z systemu GZYL, infolinia i adres e-mail

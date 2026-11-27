@@ -1,13 +1,13 @@
 ---
 title: Seguimiento de un pedido de Amazon: dónde está el número
-description: Dónde muestra Amazon el transportista y el número de seguimiento de tu paquete, y cómo seguirlo en Peek, a mano o dejando que lo hagan Claude o ChatGPT.
+description: Dónde encontrar el número de seguimiento de Amazon en Mis pedidos y Localiza tu paquete, cómo distinguir el número de pedido y seguirlo en Peek o con IA.
 slug: seguimiento-pedido-amazon
 picture: Un móvil muestra el avance de un pedido, dos furgonetas se pasan un paquete y Pip lo observa.
 published: 2026-10-16
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Amazon muestra el transportista y el número de seguimiento de cada paquete en Mis pedidos, y luego en Localiza tu paquete. Copia el número en [Peek](/) y sigues el paquete junto a todos los demás. Funciona igual en todas las webs de Amazon.
+El número de seguimiento de Amazon no viene en el correo del pedido: entra en tu cuenta, abre **Mis pedidos** y pulsa **Localiza tu paquete** para ver el transportista y su número de seguimiento justo debajo. El número de pedido de 17 cifras no sirve para rastrear. Copia el número de seguimiento en [Peek](/) para verlo junto a todos tus demás envíos; si reparte Amazon Logistics, puede llevar un código propio de dos letras de país y 10 cifras.
 
 ## ¿Dónde está el número de seguimiento en Amazon?
 
@@ -36,13 +36,13 @@ En otras webs de Amazon, los mismos botones se llaman así:
 | amazon.it | I miei ordini | Traccia il mio pacco |
 | amazon.pl | Moje zamówienia | Śledź przesyłkę |
 
-### ¿No hay número de seguimiento?
+### ¿Por qué no aparece el número de seguimiento en Amazon?
 
 - **Un pedido reciente.** El número suele aparecer cuando el transportista ya tiene el paquete.
 - **Lo entrega Amazon.** El pedido puede no mostrar ningún número, o uno de Amazon: dos letras del país y 10 cifras, como `ES1234567890`. Pégalo igualmente en Peek: Peek lo sigue si Amazon lo muestra en su seguimiento público, y te avisa si solo lo muestra tu cuenta de Amazon.
 - **El número de pedido,** tres grupos de cifras como `123-1234567-1234567`, nunca es un número de seguimiento.
 
-## ¿Pueden Claude o ChatGPT hacerlo por mí?
+## ¿Cómo pueden Claude o ChatGPT importar mis paquetes de Amazon?
 
 Sí, en un ordenador: el asistente tiene que controlar el navegador en el que has iniciado sesión en Amazon. Claude lo hace con Claude in Chrome, con un plan de pago de Claude; ChatGPT, desde un chat de Work en su app de escritorio, con su extensión de navegador. En el móvil, o en un chat que solo puede leer tus pestañas abiertas o que navega desde sus propios servidores, el asistente no llega a tus pedidos, y los correos de Amazon no traen el número de seguimiento.
 

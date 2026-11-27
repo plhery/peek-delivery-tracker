@@ -1,12 +1,12 @@
 ---
 title: InPost seguimiento: estados, PIN, Locker y Punto Pack
-description: Sigue tu paquete InPost en España: cómo es el número, qué significa cada estado, cuántos días espera en el Locker o Punto Pack y cómo reclamar.
+description: Seguimiento InPost en España: número de envío (FV u 8–12 cifras), código PIN de 6 dígitos, 5 días en Locker o Punto Pack, teléfono 900 900 137 y estados.
 slug: inpost-seguimiento
 published: 2026-10-26
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-InPost, nacida en Polonia, llegó a España en 2021 al comprar Mondial Relay. Entrega en taquillas (Locker) y tiendas de recogida (Punto Pack), más de 13 000 entre España y Portugal, y, si la tienda lo ofrece, en casa. Para seguir tu paquete, escribe el número en [el seguimiento de inpost.es](https://www.inpost.es/seguimiento-del-envio) o pégalo en la casilla de arriba. El número te lo da la tienda o quien te lo envía; el PIN de 6 dígitos de InPost sirve para recogerlo, no para seguirlo.
+Para hacer el seguimiento de un paquete InPost en España (más de 13 000 Lockers y Puntos Pack entre España y Portugal, además de entrega a domicilio si la tienda la ofrece), introduce el número de envío (`FV` + 8 cifras, u 8, 10 o 12 cifras) en [el seguimiento de inpost.es](https://www.inpost.es/seguimiento-del-envio) o pégalo arriba. El código PIN de 6 dígitos sirve solo para recoger el paquete (tienes 5 días naturales desde el aviso), no para rastrearlo; para incidencias llama gratis al `900 900 137`.
 
 ## Número de seguimiento de InPost: cómo es y dónde encontrarlo
 
@@ -112,21 +112,25 @@ Peek no lee los enlaces de inpost.es: copia solo el número. Con un número FV v
 
 ## Preguntas sobre el seguimiento de InPost
 
-### ¿InPost y Mondial Relay son la misma empresa?
+### ¿InPost y Mondial Relay son la misma empresa en España?
 
-En España, sí: InPost llegó aquí en 2021 comprando Mondial Relay («Nuevo nombre, misma misión»), y en 2025 sumó Sending.
+Sí: InPost entró en España en 2021 al comprar Mondial Relay y sumó Sending en 2025. En Peek, InPost España aparece dentro de la ficha de Mondial Relay («También llamado InPost Spain»).
+
+### ¿Dónde encuentro el código PIN de 6 dígitos de InPost?
+
+InPost envía el PIN de 6 dígitos (y el código QR con la dirección del punto) por correo electrónico y/o SMS cuando el paquete ya está `Listo para recoger en Punto Pack` o Locker, y también aparece en la App de InPost. Si no llega, revisa spam o usa el asistente virtual en inpost.es.
 
 ### ¿Cuántos días tengo para recoger un paquete de InPost?
 
-5 días naturales desde el aviso, en Locker o en Punto Pack. Pero sus condiciones dicen: «El quinto día, el paquete es recogido por nuestro chofer». No esperes al último.
+Tienes 5 días naturales desde el aviso, tanto en Locker como en Punto Pack, aunque las condiciones generales señalan que «el quinto día, el paquete es recogido por nuestro chofer» para devolverlo al remitente: no apures al último día.
 
-### ¿InPost reparte los sábados?
+### ¿Cuánto tarda un envío de InPost y reparte los sábados?
 
-A Lockers y Punto Pack, no: InPost reparte de lunes a viernes, sin festivos. Pero la mayoría de los Lockers abren las 24 horas, así que puedes recoger el fin de semana.
+InPost indica una media de 3 días hábiles dentro de España y entre 3 y 6 días laborables hacia otros países europeos. Reparte a Lockers y Puntos Pack de lunes a viernes (sin festivos), pero la mayoría de los Lockers abren las 24 horas para recoger el fin de semana.
 
-### ¿Cuánto tarda un envío de InPost?
+### ¿Cuál es el teléfono gratuito de atención al cliente de InPost en España?
 
-Dentro de España, una media de 3 días hábiles desde que se deposita en un Punto Pack o Locker, según InPost; hacia otros países europeos, entre 3 y 6 días laborables de media, según el destino. Los fines de semana, los festivos y el Black Friday pueden alargarlo.
+Llama gratis al `900 900 137` (o al `+34 938 16 62 34` desde cualquier país) de lunes a viernes de 8:30 a 20:00 y sábados de 9:00 a 13:00, o usa el formulario y el asistente virtual 24/7 en inpost.es (WhatsApp no está operativo). Para compras online dañadas o perdidas, avisa también primero a la tienda.
 
 :::sources
 - [InPost: Seguimiento de Envíos](https://www.inpost.es/seguimiento-del-envio) – un campo, 8 caracteres, remitente

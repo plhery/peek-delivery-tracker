@@ -1,12 +1,12 @@
 ---
 title: UniUni tracking: statuses, missed deliveries and contact
-description: Track a UniUni parcel in Canada or the US: what the tracking number looks like, what UniUni's statuses mean, missed deliveries, photos and how to reach support.
+description: Track a UniUni parcel in Canada or the US: UUS number formats, delivery photos, 48h reattempt and 30-day storage, delivery PIN, support phones and chatbot.
 slug: uniuni-tracking
 published: 2026-10-15
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-UniUni (Uni Express Inc., based in Richmond, B.C.) is a last-mile delivery company that brings online orders to the door in Canada and the United States, for shops such as Shein and Temu. Track a parcel on [uniuni.com/tracking](https://www.uniuni.com/tracking/) or paste its number in the box above. The number comes from the shop or marketplace you ordered from, which hands the labelled parcel to UniUni for the final stretch.
+Track a UniUni (Uni Express Inc., Richmond, B.C.) parcel in Canada or the US by pasting your `UUS`, `UUSC`, `4C…US`, `U`, `UR`, `CAA0`/`USA0` or `JY` tracking number in the box above or on [uniuni.com/tracking](https://www.uniuni.com/tracking/) (up to 25 numbers at once). UniUni handles last-mile delivery for shops such as Shein and Temu, takes three drop-off proof photos, reattempts missed deliveries within 48 hours and holds parcels in warehouse `storage` for 30 days after a second failed attempt.
 
 No number to hand? Look in the order at the shop; if UniUni's tracking shows nothing yet, the seller most likely still has the parcel. For a new delivery, a new address or delivery instructions, a damaged parcel or feedback on a driver, use the UniUni chatbot on its [support page](https://www.uniuni.com/support/). Missing or wrong items and returns go to the seller. Got a parcel you didn't order? UniUni says it has little information about who sent it.
 
@@ -96,21 +96,25 @@ When UniUni hands a parcel to another courier, that courier's scans show up insi
 
 ## Questions about UniUni tracking
 
-### Are UniUni packages delivered by USPS?
-
-UniUni delivers with its own drivers. Some parcels are handed to a third-party courier to finish the delivery, and UniUni says misrouted parcels can be passed to [USPS](carrier:usps) or [Canada Post](carrier:canada-post).
-
-### How long does UniUni hold packages?
-
-After a second failed attempt, UniUni keeps the parcel in its warehouse for 30 days. Contact support once tracking shows `storage` to arrange a new delivery.
-
 ### Is UniUni legit?
 
-Yes. UniUni is run by Uni Express Inc., a delivery company based in Richmond, British Columbia, that delivers for Shein and Temu among others.
+Yes. UniUni is operated by Uni Express Inc., based in Richmond, British Columbia, and handles last-mile deliveries across Canada (80% coverage) and the United States (65% coverage) for online retailers including Shein and Temu.
 
-### Why does my UniUni tracking show no updates?
+### Are UniUni packages delivered by USPS or Canada Post?
 
-Usually the seller hasn't given UniUni the parcel yet. UniUni's estimated date appears only once it physically has the parcel, so ask the seller first.
+Usually UniUni delivers with its own drivers, though some parcels transfer to a third-party courier (`Parcel has been handed over to a third-party courier`), and UniUni says misrouted parcels can be passed automatically to [USPS](carrier:usps) or [Canada Post](carrier:canada-post).
+
+### What happens after a missed delivery, and how long does UniUni hold packages?
+
+After a first failed attempt, UniUni usually tries again within 48 hours. After a second failed attempt, status changes to `storage` and UniUni holds the parcel in its warehouse for 30 days — use the UniUni chatbot on its support page to request redelivery with your address, contact details and instructions.
+
+### Why does my UniUni tracking show "Order received" or no updates?
+
+That means the seller sent UniUni the shipping data but hasn't handed over the parcel yet; UniUni only shows an estimated delivery date once it physically scans the parcel. Ask the seller when the parcel will ship.
+
+### How do I contact UniUni customer service or see delivery photos?
+
+Use the chatbot on [uniuni.com/support](https://www.uniuni.com/support/), or call Monday to Saturday 10 am to 9 pm EST: Canada `1-604-229-2007` (Pacific/Mountain) or `1-647-360-4178` (Central/Eastern/Atlantic); US `1-424-284-2432` (Pacific/Mountain) or `1-315-533-4690` (Central/Eastern). To view the three drop-off photos, click `View Delivery Confirmation` on uniuni.com and enter your postal or ZIP code.
 
 :::sources
 - [UniUni: Package Tracking](https://www.uniuni.com/tracking/) – tracking, 25 numbers, estimated date, no updates, attempts, delivery photos

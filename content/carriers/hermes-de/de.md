@@ -1,12 +1,12 @@
 ---
 title: Hermes Sendungsverfolgung: Status, PaketShop und Kontakt
-description: Hermes-Paket verfolgen: wo die Sendungsnummer steht, was die Status heißen, wie lange es im PaketShop liegt und wie du Hermes ohne Hotline erreichst.
+description: Hermes Sendungsverfolgung in Deutschland: Sendungsnummer (14–20 Zeichen), Status, 8–20 Uhr Zustellung, 7 Werktage PaketShop, 72 h Hermes Box und Kontaktformular.
 slug: hermes-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Um ein Hermes-Paket zu verfolgen, füg die Sendungsnummer oben ins Feld ein oder gib sie in der [Sendungsverfolgung auf myhermes.de](https://www.myhermes.de/empfangen/sendungsverfolgung/) oder in der Hermes App ein. Sie hat 14 bis 20 Zeichen, etwa ein H mit 16 bis 19 Ziffern wie `H1234567890123456` oder 14 Ziffern. Die Nummer hat der Absender, der die Sendung bei Hermes gebucht hat, bei einer Bestellung also der Shop; E-Mails von Hermes bekommst du, wenn er Hermes deine E-Mail-Adresse gegeben hat oder du dich in der Sendungsverfolgung selbst dafür anmeldest. Hermes Germany aus Hamburg gehört zur Otto Group und stellt vor allem Pakete innerhalb Deutschlands zu.
+Verfolge dein Hermes-Paket direkt oben im Feld, in der [Sendungsverfolgung auf myhermes.de](https://www.myhermes.de/empfangen/sendungsverfolgung/) oder in der Hermes App: Die Sendungsnummer vom Absender hat 14 bis 20 Zeichen (meist `H` plus 16 bis 19 Ziffern oder 14 Ziffern). Hermes Germany (Hamburg, Otto Group) stellt montags bis samstags zwischen 8 und 20 Uhr zu, lagert Pakete 7 Werktage im PaketShop (72 Stunden in der Hermes Box) und ist für Empfänger nur über das Kontaktformular erreichbar — nicht per Hotline oder SMS.
 
 ## Hermes Sendungsnummer: wo du sie findest
 
@@ -95,25 +95,25 @@ Peek schaut bis zu alle 10 Minuten nach, bis zu alle 2 Minuten, sobald das Paket
 
 ## Fragen zur Hermes Sendungsverfolgung
 
-### Wie lange braucht ein Hermes-Paket?
+### Wie lange dauert die Hermes-Lieferung und wann stellt Hermes zu?
 
-Laut Hermes bis zu 3 Werktage ab Versand, innerhalb Deutschlands „wenige Tage“. Einen festen Liefertermin verspricht Hermes in seinen AGB nicht.
+Innerhalb Deutschlands dauert es laut Hermes bis zu 3 Werktage ab Versand (ohne festen Termin in den AGB). Boten liefern montags bis samstags zwischen 8 und 20 Uhr; meist zeigt Hermes am Vortag ein kostenloses Zeitfenster von höchstens 4 Stunden.
 
-### Stellt Hermes samstags oder nach 20 Uhr zu?
+### Wie lange liegt ein Hermes-Paket im PaketShop und kann jemand anderes es abholen?
 
-Samstags ja: Die Boten sind laut Hermes montags bis samstags zwischen 8 und 20 Uhr unterwegs. Zustellungen nach 20 Uhr nennt Hermes nicht.
+Im PaketShop liegt ein Inlandspaket 7 Werktage (in der Hermes Box 72 Stunden), ohne Verlängerung. Abholen mit unterschriebener [Vollmacht](https://www.myhermes.de/service/vollmacht/) und eigenem Ausweis ist möglich (Hermes nennt dort 7 bzw. 10 Tage), sofern der Online-Shop Vollmachten zulässt.
 
-### Kann jemand anderes mein Hermes-Paket abholen?
+### Wie erreiche ich den Hermes Kundenservice (Telefonnummer oder Kontaktformular)?
 
-Ja, mit deiner unterschriebenen [Vollmacht](https://www.myhermes.de/service/vollmacht/) und dem eigenen Ausweis der Person. Hermes nennt dafür mal 7, mal 10 Tage nach Anlieferung im PaketShop, und nicht jeder Online-Shop akzeptiert Vollmachten.
+Hermes Germany nennt weder Hotline noch Empfänger-E-Mail oder WhatsApp. Nutze das Kontaktformular auf [myhermes.de/service/kontakt](https://www.myhermes.de/service/kontakt/) (Antwort per E-Mail) und wende dich bei Online-Bestellungen zuerst an den Shop.
 
-### Ist die SMS „Verfolgen Sie Ihr Paket“ von Hermes?
+### Ist eine SMS „Verfolgen Sie Ihr Paket“ von Hermes echt?
 
-Nein. Hermes Germany nutzt laut eigener Sicherheitsseite keinen SMS-Service und stuft jede SMS in seinem Namen als [Betrug](guide:delivery-scam-texts) ein, ausgenommen die vom Hermes Einrichtungs Service.
+Nein. Hermes Germany verschickt laut Sicherheitsseite keine SMS und stuft jede SMS in seinem Namen als [Betrug](guide:delivery-scam-texts) ein (Ausnahme: Hermes Einrichtungs Service).
 
 ### Wie verfolge ich ein Hermes-Paket nach Österreich?
 
-Ein Paket, das aus Deutschland über myhermes.de nach Österreich geht, verfolgst du auf myhermes.de; Hermes nennt 5 bis 6 Tage Laufzeit, einen Zustellversuch, danach den PaketShop und 21 Tage Lagerung. Die österreichische Hermes Logistik GmbH hat mit myhermes.at eine eigene Sendungsverfolgung, mit Auftragsnummer oder Sendungs-ID von Paketquittung oder Rechnung.
+Pakete aus Deutschland nach Österreich verfolgst du auf myhermes.de (5–6 Tage Laufzeit, ein Zustellversuch, danach 21 Tage im PaketShop). Österreichische Sendungen von myhermes.at laufen über die dortige Sendungsverfolgung mit Auftragsnummer oder Sendungs-ID.
 
 :::sources
 - [Hermes: Sendungsverfolgung](https://www.myhermes.de/empfangen/sendungsverfolgung/) – Nummer

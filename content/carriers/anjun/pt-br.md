@@ -1,12 +1,12 @@
 ---
 title: Rastreio Anjun Express: encomendas da China, status e SAC
-description: Rastreie encomendas da Anjun Express (Anjun Logistics): código AJ, status da China ao Brasil, alfândega e Remessa Conforme, novo e-mail do SAC e telefone.
+description: Rastreie encomendas da Anjun Express (código AJ): status da China ao Brasil, alfândega e repasse aos Correios, novo e-mail do SAC (sac@anjun.com.br) e telefone.
 slug: rastreio-anjun-express
 published: 2026-11-23
-updated: 2026-11-23
+updated: 2026-11-27
 ---
 
-A Anjun Express (marca brasileira da Anjun Logistics) é uma transportadora especializada em comércio eletrônico internacional e entregas no Brasil. Fundada em 2011 na China, entrou no Brasil em 2019 e alcançou cobertura nacional em 2025. Ela cuida da coleta na China, embarque aéreo, desembaraço aduaneiro no Brasil e entrega final — pela própria malha de última milha e pontos de coleta ou repassando o pacote aos Correios após a liberação alfandegária. Você pode acompanhar remessas internacionais no [rastreador internacional da Anjun](https://anjuntrack.com/trajectory), conferir pacotes nacionais no [site da Anjun Express Brasil](https://anjunexpress.com/trackPackage) ou colar o código no campo acima.
+Para rastrear uma encomenda da Anjun Express (Anjun Logistics), cole o código `AJ` de 17 caracteres no campo acima, consulte remessas internacionais em [anjuntrack.com](https://anjuntrack.com/trajectory) ou acompanhe entregas no Brasil em [anjunexpress.com/trackPackage](https://anjunexpress.com/trackPackage). Fundada em 2011 na China e no Brasil desde 2019 (com cobertura nacional em 2025), a Anjun faz a coleta na China, o desembaraço aduaneiro no Brasil e a entrega final pela própria malha ou pelos Correios. Atenção ao contato: `sac@anjunexpress.com.br` foi desativado em 12/08/2026; os canais ativos são `sac@anjun.com.br` e `(11) 5026-7008`.
 
 ## Código de rastreio Anjun Express: formato e onde encontrar
 
@@ -93,21 +93,25 @@ Escolha o nível de avisos entre "Cada movimentação", "Etapas importantes" ou 
 
 ## Perguntas sobre o rastreio Anjun Express
 
+### Como rastrear um código `AJ` da Anjun Express?
+
+O código da Anjun tem 17 caracteres (`AJ` + 6 dígitos de data `AAMMDD` + 9 dígitos). Cole-o no campo acima no Peek (que consulta tanto o rastreio internacional quanto o nacional) ou consulte diretamente em `anjuntrack.com` (compras da China) e `anjunexpress.com/trackPackage` (entregas no Brasil).
+
 ### Por que o rastreio da Anjun mistura inglês e português?
 
-Encomendas vindas da China começam com registros em inglês nos galpões chineses e no aeroporto de Hong Kong; quando chegam ao Brasil para desembaraço aduaneiro e entrega local, os status passam a sair em português.
+Encomendas vindas da China começam com registros em inglês nos galpões chineses e no aeroporto de Hong Kong; quando chegam ao terminal de courier no Brasil para desembaraço aduaneiro e entrega local, os status passam a sair em português.
 
 ### O que significa `A entrega falhou: Pacote não pertence à Base`?
 
-Significa que o pacote chegou por engano à base de distribuição errada da Anjun, e não que o entregador passou na sua casa. A transportadora reencaminha a encomenda para a base correta, por isso o Peek a mantém em "Em trânsito".
+Significa que o pacote foi separado por engano na base de distribuição errada da Anjun, e não que o entregador passou na sua casa. A transportadora redireciona a encomenda internamente para a base correta, por isso o Peek a mantém em "Em trânsito".
 
-### O e-mail `sac@anjunexpress.com.br` ainda funciona?
+### Qual é o telefone e o novo e-mail do SAC da Anjun Express?
 
-Não. A Anjun Express desativou `sac@anjunexpress.com.br` a partir de 12/08/2026. Os canais corretos são `sac@anjun.com.br`, o telefone `(11) 5026-7008` (segunda a sexta, 8h às 17h30) e `atendimento.aduaneiro@anjun.com.br` para temas alfandegários.
+O antigo `sac@anjunexpress.com.br` foi desativado em 12/08/2026. Os canais oficiais ativos são `sac@anjun.com.br`, o telefone `(11) 5026-7008` (segunda a sexta, das 8h às 17h30, exceto feriados), o chat em `anjunexpress.com` e `atendimento.aduaneiro@anjun.com.br` para questões alfandegárias.
 
-### A Anjun pode entregar meu pacote pelos Correios?
+### A Anjun entrega em casa ou repassa meu pacote aos Correios?
 
-Sim. Em parte das encomendas internacionais, após a liberação na alfândega surge o status `Objeto recebido pelos Correios do Brasil`, indicando que os Correios assumem o trecho final até o seu endereço.
+Pode acontecer das duas formas: a Anjun tem malha própria de última milha no Brasil, mas em parte das compras internacionais aparece `Objeto recebido pelos Correios do Brasil` após a alfândega, indicando que os Correios concluem a entrega.
 
 :::sources
 - [Anjun Express: Página inicial](https://anjunexpress.com/home) – serviços no Brasil, estrutura, SAC `(11) 5026-7008`, `sac@anjun.com.br`, e-mails aduaneiros e aviso de desativação de `sac@anjunexpress.com.br` (12/08/2026)

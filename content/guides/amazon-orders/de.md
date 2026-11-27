@@ -1,13 +1,13 @@
 ---
 title: Amazon-Sendungsverfolgung: So findest du die Sendungsnummer
-description: Wo Amazon Paketdienst und Sendungsnummer deines Pakets zeigt und wie du es in Peek verfolgst: selbst oder mit Claude oder ChatGPT, die das für dich erledigen.
+description: Amazon-Sendungsnummer finden unter „Meine Bestellungen“ und „Sendung verfolgen“: Paketdienst erkennen, Amazon Logistics verstehen und Pakete in Peek verfolgen.
 slug: amazon-sendungsverfolgung
 picture: Ein Handy zeigt den Fortschritt einer Bestellung, zwei Lieferwagen reichen sich ein Paket weiter, und Pip schaut zu.
 published: 2026-10-16
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Amazon zeigt Paketdienst und Sendungsnummer jedes Pakets unter „Meine Bestellungen“, dann „Sendung verfolgen“. Kopier die Nummer in [Peek](/), und du verfolgst das Paket neben all deinen anderen. Das geht auf jeder Amazon-Seite gleich.
+Die Amazon-Sendungsnummer steht nicht in der Bestell-E-Mail, sondern in deinem Konto unter „Meine Bestellungen“ und dann „Sendung verfolgen“ – direkt unter dem Namen des Paketdiensts. Die 17-stellige Bestellnummer funktioniert dort nicht. Kopier die Sendungsnummer einfach in [Peek](/), um dein Paket neben allen anderen zu verfolgen; wenn Amazon selbst mit Amazon Logistics liefert, erkennst du es an der eigenen Nummer mit zwei Länderbuchstaben und zehn Ziffern.
 
 ## Wo finde ich die Sendungsnummer bei Amazon?
 
@@ -36,13 +36,13 @@ Auf anderen Amazon-Seiten heißen dieselben Buttons so:
 | amazon.es | Mis pedidos | Localiza tu paquete |
 | amazon.pl | Moje zamówienia | Śledź przesyłkę |
 
-### Keine Sendungsnummer?
+### Warum sehe ich keine Sendungsnummer bei Amazon?
 
 - **Eine neue Bestellung.** Die Nummer erscheint meist, sobald der Paketdienst das Paket hat.
 - **Amazon liefert selbst.** Dann zeigt die Bestellung vielleicht gar keine Nummer oder Amazons eigene: zwei Buchstaben für das Land und zehn Ziffern, etwa `DE1234567890`. Füg sie trotzdem in Peek ein: Peek verfolgt sie, wenn Amazons öffentliche Sendungsverfolgung sie kennt, und sagt dir, wenn nur dein Amazon-Konto sie zeigt.
 - **Die Bestellnummer,** drei Zifferngruppen wie `123-1234567-1234567`, ist nie eine Sendungsnummer.
 
-## Können Claude oder ChatGPT das für mich erledigen?
+## Wie finden Claude oder ChatGPT meine Amazon-Sendungsnummern?
 
 Ja, an einem Computer: Der Assistent muss den Browser steuern, in dem du bei Amazon angemeldet bist. Claude macht das mit Claude in Chrome, mit einem bezahlten Claude-Tarif; ChatGPT aus einem Work-Chat in seiner Desktop-App, mit seiner Browser-Erweiterung. Auf dem Handy oder in einem Chat, der deine offenen Tabs nur lesen kann oder von seinen eigenen Servern aus surft, kommt der Assistent nicht an deine Bestellungen, und in den E-Mails von Amazon steht die Sendungsnummer nicht.
 

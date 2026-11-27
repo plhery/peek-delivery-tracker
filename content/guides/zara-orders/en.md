@@ -1,13 +1,13 @@
 ---
 title: Zara order tracking: delivery, returns and problems
-description: Where to track a Zara order in the UK and US, what each status means, what delivery costs and what to do if a parcel is late, missing or marked delivered.
+description: Track a Zara order in the UK, US, Ireland, Canada or Australia: find your courier number, read every status, check 30-day returns and report missing parcels.
 slug: zara-order-tracking
 picture: A paper shopping bag with rope handles beside a delivery van, and Pip peeking out of the bag.
 published: 2026-10-25
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-You track a Zara order in your Zara account, under Purchases, or through the link in any email Zara sent you if you bought as a guest. Zara's pages don't say which couriers deliver; in the US and Canada, the courier's tracking number is in the shipping email and your order details. If a parcel shows as delivered but isn't there, contact Zara; in the UK and Ireland, it may ask you to fill in a denial of receipt form.
+Track a Zara order under Purchases in your Zara account, or through the link in any Zara order email if you checked out as a guest ("Manage Your Order" in the US and Canada). Zara's UK, US, Ireland, Canada and Australia help pages don't name its delivery couriers; in the US and Canada, the courier's tracking number appears in your shipping confirmation email and order details. If a parcel is late or marked delivered with nothing there, check around first (Zara asks you to wait 72 hours in the US and 48 hours in Canada), then contact Zara — in the UK and Ireland it may ask for a denial of receipt form.
 
 ## Who delivers my Zara order?
 
@@ -71,7 +71,7 @@ How long Zara gives itself: the UK terms aim for the date in the shipping confir
 
 **Changing the order.** You can cancel while the status allows it, from the order details or the guest link. With an account and home delivery, you can change the address while the status allows it. The shipping method and the items can't change once you've paid. More: [change the delivery address](guide:change-delivery-address).
 
-## Zara delivery options and costs
+## How much is Zara delivery and how long does it take?
 
 **UK.** Delivery times grow for Northern Ireland and remote areas:
 
@@ -101,7 +101,7 @@ How long Zara gives itself: the UK terms aim for the date in the shipping confir
 
 Some options disappear depending on the time you order; checkout shows what's left. A large Zara Home item has its own delivery charge. More: [parcel lockers and pickup points](guide:parcel-lockers) and [uncollected parcels](guide:uncollected-parcel).
 
-## Zara parcel not arrived or marked delivered: what to do
+## What if my Zara parcel hasn't arrived or says delivered?
 
 Look first, then report. In order:
 
@@ -115,7 +115,7 @@ Look first, then report. In order:
 
 In the US, Zara's terms add that for a lost or missing parcel it gives you the carrier and tracking number so you can contact the carrier yourself. More: [parcel marked delivered but not received](guide:delivered-not-received), [lost parcel](guide:lost-parcel) and [damaged parcel](guide:damaged-parcel).
 
-## Returning a Zara order
+## How do I return a Zara order?
 
 You have 30 days from the date your order shipped, in all five countries. Items must be in their original condition with all labels, and you return them in the country you bought in. Your order details show the last day.
 

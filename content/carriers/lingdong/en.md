@@ -1,12 +1,12 @@
 ---
 title: Lingdong International tracking: SZLD numbers and statuses
-description: Track a Lingdong International parcel from Shenzhen: what an SZLD number looks like, what its scans mean and why its tracking often stops before the delivery.
+description: Track a Lingdong International (领东国际) SZLD parcel from Shenzhen: number format, status meanings, why updates stop after customs hand-over and who to contact.
 slug: lingdong-tracking
 published: 2026-10-21
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Lingdong International (领东国际, Shenzhen Lingdong International Freight Forwarding Co., Ltd.) is a freight forwarder in Shenzhen, China, that ships parcels abroad for online sellers. Its numbers start with SZLD: type yours in the 快件查询 (parcel lookup) box on Lingdong's site, lingdong56.com, which opens its tracker, or in the box above. The shop that sent your order gives the number with its shipping details.
+Lingdong International (领东国际, Shenzhen Lingdong International Freight Forwarding Co., Ltd.) is a Shenzhen freight forwarder carrying cross-border e-commerce parcels from China. Its waybills start with `SZLD` followed by ten digits: paste yours into the box above, or enter it in the 快件查询 (parcel lookup) box on lingdong56.com. Lingdong's own tracking usually ends once the parcel clears import customs and is handed to a local delivery carrier — if updates stop there, ask the seller for the local carrier's name and tracking number (or look for a 渠道转单号 transfer number on Lingdong's tracker).
 
 ## Lingdong tracking number: what it looks like
 
@@ -91,25 +91,25 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ## Questions about Lingdong tracking
 
-### What is Lingdong International?
+### What is Lingdong International (领东国际)?
 
-It is Shenzhen Lingdong International Freight Forwarding Co., Ltd. (深圳市领东国际货运代理有限公司), a Shenzhen company that ships parcels abroad for Chinese online sellers. Its site is lingdong56.com.
+It is Shenzhen Lingdong International Freight Forwarding Co., Ltd. (深圳市领东国际货运代理有限公司), a Shenzhen freight forwarder that ships parcels abroad for online sellers in China. Its website is lingdong56.com, and its waybills start with `SZLD` followed by ten digits.
 
-### Why is my Lingdong tracking stuck on "Shipment departed from facility"?
+### Where can I track an SZLD tracking number?
 
-That scan marks the parcel leaving Lingdong's warehouse in Shenzhen, and Lingdong's history can stay on it while the parcel travels on. Flight and customs lines can follow, but none of Lingdong's own lines is a delivery line: another company delivers the parcel in your country. Ask the seller which company it is and for your tracking number with it.
+Paste your `SZLD` number into the box above in Peek, which recognises Lingdong International straight away, or enter it in the 快件查询 (parcel lookup) box on lingdong56.com. Lingdong's tracker also accepts the seller's reference number (参考号).
 
-### How long does Lingdong take to deliver?
+### Why is my Lingdong tracking stuck on "Shipment departed from facility" or after customs?
 
-Lingdong publishes no delivery times. Go by the estimate the shop gave for your order.
+`Shipment departed from facility` means the parcel left Lingdong's Shenzhen warehouse, and `货物已交服务商【The shipment has been transferred to the logistics partner.】` is where Lingdong's own history ends. None of Lingdong's own scans is a doorstep delivery scan: look for a 渠道转单号 (channel transfer number) on Lingdong's tracker or ask the seller for the local carrier and its tracking number.
 
-### Where can I track an SZLD number?
+### How long does Lingdong International take to deliver?
 
-On Lingdong's tracker, through the 快件查询 box on lingdong56.com, or in Peek, which recognises SZLD numbers at once.
+Lingdong publishes no delivery times on lingdong56.com. Follow the delivery estimate shown by the shop or marketplace where you placed your order.
 
-### Who do I contact about a missing Lingdong parcel?
+### Who do I contact about a missing or delayed Lingdong parcel?
 
-The seller you ordered from: it booked the parcel with Lingdong and holds the contract. Lingdong lists two Chinese mobile numbers and a QQ chat, but nothing for recipients.
+Contact the seller or marketplace you bought from: the seller booked the shipment and holds the contract with Lingdong. Lingdong's site lists only two Chinese mobile numbers and QQ chat buttons in Chinese, with no recipient support or published claim process.
 
 :::sources
 - [Lingdong: 深圳市领东国际货运代理有限公司 (home)](http://www.lingdong56.com/) – tracking box and the tracker it opens, services for sellers, phones, QQ chat buttons

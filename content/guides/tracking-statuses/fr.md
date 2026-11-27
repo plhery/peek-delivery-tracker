@@ -1,13 +1,13 @@
 ---
 title: Étapes du suivi d'un colis : que veut dire chaque statut ?
-description: Ce que veut dire chaque étape du suivi d'un colis, de « pris en charge » à « livré », chez Mondial Relay, bpost ou La Poste suisse, et quand agir.
+description: Comprendre chaque statut de suivi colis, d'« en préparation » à « en instance » et « livré » chez Colissimo, Chronopost, Mondial Relay, bpost et La Poste suisse.
 slug: etapes-suivi-colis-signification
 picture: Une route sinueuse aux étapes cochées (étiquette, dépôt, avion), une camionnette à l'étape en cours, une maison plus loin et Pip qui file.
 published: 2026-10-09
-updated: 2026-11-19
+updated: 2026-11-27
 ---
 
-Un statut de suivi résume en quelques mots le dernier scan du transporteur, et la plupart ne te demandent rien. « En préparation chez l'expéditeur » veut dire que le transporteur n'a pas encore ton colis, « en cours d'acheminement » qu'il est quelque part entre deux scans, et « en cours de livraison » qu'il est dans la camionnette du jour. Seuls quelques-uns demandent une action de ta part : un avis de passage, un colis en instance, des frais de douane, ou un « livré » alors que rien n'est arrivé.
+Chaque statut de suivi résume le dernier scan chez Colissimo, Chronopost, Mondial Relay, bpost, Colis Privé ou La Poste suisse, et la plupart demandent juste d'attendre. « En préparation chez l'expéditeur » signifie que le transporteur n'a pas encore le colis, « en cours d'acheminement » qu'il voyage entre deux centres, et « en cours de livraison » qu'il est en tournée aujourd'hui. Agis seulement pour un avis de passage, un colis en instance (5 à 15 jours de garde), des frais de douane ou un colis noté « livré » mais absent.
 
 ## Quelles sont les étapes du suivi d'un colis ?
 
@@ -113,13 +113,13 @@ Là, il faut agir : [personne n'a pu prendre le colis](guide:missed-delivery), o
 
 > Des escrocs se font passer pour Mondial Relay, Colissimo, Chronopost ou UPS, par SMS ou par e-mail, prévient Cybermalveillance.gouv.fr : au moindre doute, vérifie le vrai suivi du colis ou contacte directement le transporteur. En France, signale le SMS au 33700, ou l'e-mail à abuse@chronopost.fr s'il imite Chronopost. Ne reprogramme une livraison que sur le site ou l'app du transporteur.
 
-## « En instance » ou « disponible en point de retrait » : où est le colis ?
+## Que veulent dire « en instance » et « disponible en point de retrait » ?
 
 Il t'attend au bureau de poste, en point relais ou en consigne, [jusqu'à la fin du délai](guide:uncollected-parcel) indiqué dans le tableau ci-dessus. Le suivi de La Poste dit alors que le colis « vous attend dans votre point de retrait », et Mondial Relay affiche les jours restants pour le retirer. Chez UPS, `Delivered to UPS Access Point™` veut dire qu'il t'attend au relais, pas chez toi.
 
 Attends ce statut ou le message du transporteur avant d'y aller : bpost demande de vérifier l'état du colis en ligne avant d'aller au Point d'enlèvement. À La Poste suisse, `Arrivée à l'office de retrait / à l'office de distribution` donne l'heure à partir de laquelle tu peux le retirer, et le point de retrait figure sur l'invitation à retirer un envoi.
 
-## « Livré » : l'as-tu vraiment reçu ?
+## Colis marqué « livré » : où le transporteur l'a-t-il déposé ?
 
 Pas toujours. Ça veut dire que le livreur l'a scanné comme remis ou déposé :
 

@@ -1,12 +1,12 @@
 ---
 title: R+L Carriers tracking: PRO numbers, statuses and claims
-description: Track an R+L Carriers freight shipment in the US: what a PRO number looks like, what each tracing line means and what to do if freight is late or damaged.
+description: Track an R+L Carriers freight shipment by PRO number: format and check digit, Shipment Delayed and Not Found errors, 800-543-5589 contact and US freight claims.
 slug: rl-carriers-tracking
 published: 2026-11-02
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-R+L Carriers is a freight carrier in the United States. In Peek's code, it picks the freight up from the shipper, moves it from terminal to terminal and delivers it from the destination terminal. If a large order or other freight is coming to you with R+L, you track it by its PRO number, which comes from the shop or the business that booked the freight: paste it in the box above. R+L's own tracer is the shipment tracing page on rlcarriers.com: it takes a PRO number or a pickup request ID, up to 25 numbers at a time, and with a MyRLC account, other reference numbers too.
+Track an R+L Carriers (R&L Carriers) US freight shipment with its PRO number: nine digits, or two letters and seven digits, ending in a check digit (sometimes written with a dash or a leading `I`). Paste the PRO in the box above, or enter up to 25 PRO numbers or pickup request IDs on the shipment tracing page at rlcarriers.com. If your freight is delayed, missing or damaged, start with the shop or shipper that booked it, or call R+L Carriers on 800-543-5589.
 
 ## R+L Carriers tracking number: the PRO number
 
@@ -93,21 +93,25 @@ Peek checks up to every 10 minutes while you have the shipment open, or on its d
 
 ## Questions about R+L Carriers tracking
 
-### What is a PRO number on R+L Carriers?
+### What is an R+L Carriers PRO number and where do I find it?
 
-R+L's tracking number: nine digits, or two letters and seven digits, the last digit a check digit, sometimes written after a dash. R+L's tracer writes it with an `I` in front. It comes from the shop or the business that booked the freight.
+A PRO number is R+L Carriers' freight tracking number: nine digits, or two letters and seven digits, where the last digit is a check digit (sometimes shown after a dash, or with a leading `I` on R+L's tracer). You get it from the shop's shipping email or the business that booked the freight.
 
-### Why does R+L Carriers say "No records found for Number"?
+### Why does R+L Carriers say "No records found for Number" or check digit failed?
 
-R+L's tracer doesn't know the PRO. Check each digit against the shop's email, check that the email names R+L, and ask the shipper whether R+L has picked the freight up.
+`Pro number failed check digit validation.` means at least one digit was mistyped: compare every digit with the shipping email. `No records found for Number:` means R+L's tracer has no record yet — verify that the email names R+L Carriers and ask the shipper whether R+L has picked up the freight.
 
-### What does "Shipment Delayed" mean on R+L Carriers?
+### What does "Shipment Delayed" mean on R+L Carriers tracking?
 
-Something has held the freight up on its way. The line gives no reason; R+L's summary then calls the shipment delayed and keeps an expected delivery day, and Peek keeps it "In transit". Ask the shop or the shipper why.
+Something has held the freight up between terminals without a published reason. R+L's summary labels the shipment delayed while keeping an expected delivery day, and Peek keeps it "In transit" — ask the shop or shipper for an update.
+
+### What is the R+L Carriers customer service phone number?
+
+Call 800-543-5589 (listed at the top of R+L Carriers' website), or submit the R+L Cares form on rlcarriers.com for unresolved issues. For an online order, contact the shop or shipper first since they hold the freight booking.
 
 ### How long do I have to file a freight claim with R+L Carriers?
 
-For freight carried between US states, federal law gives you at least 9 months to file a claim with the trucking company, and at least 2 years to go to court after it turns down any part of the claim in writing. The bill of lading or contract sets the actual limit; this page doesn't give R+L's own rules. Start with whoever booked the freight; R+L's instructions on filing a cargo claim are under Cargo Claims on its site.
+For interstate US freight, federal law (49 U.S.C. 14706 and 49 CFR Part 370) requires at least 9 months to file a written claim and at least 2 years to sue after a written denial; carriers must acknowledge a claim within 30 days and resolve or update it within 120 days. Start with whoever booked the freight and check R+L's Cargo Claims page.
 
 :::sources
 - [Universal Parcel Scraper: R+L Carriers](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/rl-carriers) – names, PRO shapes and the `I` in front, tracing links, the tracer's wordings and their stages, the summary, not-found and check-digit answers, expected delivery day, weight, clocks, what Peek leaves out

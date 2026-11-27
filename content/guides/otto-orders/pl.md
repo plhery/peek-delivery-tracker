@@ -1,17 +1,17 @@
 ---
 title: Śledzenie zamówienia OTTO: przewoźnicy, dostawa, problemy
-description: Kto dostarcza zamówienie z OTTO w Niemczech, czy OTTO wysyła do Polski, gdzie znaleźć numer przesyłki i co zrobić, gdy paczka nie dociera.
+description: Śledzenie zamówienia OTTO (otto.de): czy OTTO wysyła do Polski, gdzie znaleźć Sendungsverfolgung, dostawa Hermes i DHL, statusy i reklamacja brakującej paczki.
 slug: sledzenie-zamowienia-otto
 picture: Wysoki karton z szafą na wózku dla dwóch tragarzy, furgonetka w stylu Hermesa i Pip przytrzymujący drzwi.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-27
 ---
 
-OTTO (otto.de) dostarcza tylko w Niemczech: do Polski nie wysyła. Jeśli mieszkasz w Niemczech, śledzenie znajdziesz w „Mein Konto” (moje konto), w zakładce „Bestellungen” (zamówienia): przy każdym artykule jest link „Sendungsverfolgung” (śledzenie przesyłki). To, co OTTO sprzedaje samo, przywozi zwykle Hermes, czasem DHL, a duże meble i sprzęty przyjeżdżają jako „Spedition” (dostawa spedycyjna). Artykuły innych sprzedawców z marketplace’u OTTO wysyła sam sprzedawca, swoim przewoźnikiem i z osobnym numerem przesyłki.
+OTTO (otto.de) wysyła wyłącznie na terenie Niemiec i nie dostarcza do Polski. Jeśli zamawiasz na adres w Niemczech, śledzenie znajdziesz w „Mein Konto” (moje konto) w zakładce „Bestellungen” (zamówienia) pod linkiem „Sendungsverfolgung”. Paczki sprzedawane przez OTTO przywozi zwykle Hermes albo DHL, meble i duży sprzęt AGD jadą dostawą spedycyjną („Spedition”), a artykuły innych sprzedawców z marketplace’u mają własnego przewoźnika i osobny numer. Poniżej wyjaśniamy statusy OTTO, czasy dostawy i zasady reklamacji.
 
 Strona i pomoc OTTO są po niemiecku. W tym poradniku podajemy niemieckie nazwy z OTTO razem z tłumaczeniem.
 
-## Który przewoźnik dostarcza zamówienie z OTTO?
+## Który przewoźnik dostarcza zamówienie z OTTO (Hermes, DHL, spedycja)?
 
 To zależy od tego, kto sprzedaje artykuł i jak jest duży. Przy każdym artykule widzisz nazwę sprzedawcy i rodzaj wysyłki: paczka („Paket”) albo dostawa spedycyjna („Spedition”). Według OTTO:
 
@@ -33,7 +33,7 @@ Według OTTO inni sprzedawcy wybierają przewoźnika „unabhängig von OTTO” 
 - home | Ty | Pod drzwiami, u sąsiada albo tam, gdzie artykuł ma stanąć
 :::
 
-## Gdzie znaleźć numer przesyłki z OTTO (Sendungsverfolgung)?
+## Gdzie znaleźć numer śledzenia OTTO (Sendungsverfolgung) i co oznaczają statusy?
 
 W trzech miejscach:
 
@@ -71,7 +71,7 @@ Nie wiesz, co masz? Wpisz to tutaj:
 :::checker
 :::
 
-## Dlaczego zamówienie z OTTO idzie tak długo albo śledzenie stoi w miejscu?
+## Dlaczego zamówienie z OTTO się opóźnia lub śledzenie stoi w miejscu?
 
 Czas dostawy widzisz przy artykule przed zamówieniem. Dla towaru dostępnego od ręki OTTO podaje takie czasy:
 
@@ -110,7 +110,7 @@ UP Plus to nie subskrypcja: po 12 miesiącach automatycznie wracasz do UP Basic.
 
 **Dostawa spedycyjna.** Przy towarze dostępnym od ręki wybierasz termin już przy zamówieniu, chyba że zamawiasz płatny montaż albo instalację. Hermes potwierdza termin e-mailem i SMS-em i dzwoni 30–60 minut przed przyjazdem. Termin zmieniasz online w „Mein Konto”, a w dniu dostawy „Auf der Karte anzeigen” (pokaż na mapie) daje śledzenie na żywo. Przy innej firmie spedycyjnej dzwonisz po nowy termin pod numer z jej e-maila. Jeśli towar jedzie prosto od dostawcy, do twojej ulicy musi dać się dojechać ciężarówką do 40 ton.
 
-## Paczka z OTTO nie dotarła albo ma status doręczonej: co zrobić?
+## Paczka z OTTO nie dotarła lub ma status „Zugestellt”: co zrobić?
 
 Najpierw sprawdź, potem zgłoś. Po kolei:
 
@@ -132,7 +132,7 @@ OTTO zaznacza, że obietnica to „keine Garantie” (nie gwarancja): jeśli OTT
 
 Jeśli paczka przyszła uszkodzona, zachowaj opakowanie i zawartość, zrób zdjęcia i napisz do obsługi klienta. Więcej: [paczka doręczona, a jej nie ma](guide:delivered-not-received), [zaginiona paczka](guide:lost-parcel) i [uszkodzona paczka](guide:damaged-parcel).
 
-## Zamawianie w OTTO z Polski
+## Czy OTTO wysyła do Polski? Zamawianie z zagranicy
 
 OTTO nie dostarcza do Polski: dostarcza „ausschließlich innerhalb Deutschlands” (wyłącznie w Niemczech), pod każdy adres poza Büsingen i wyspą Helgoland, a artykułów innych sprzedawców nie da się nawet zamówić z zagranicy. Potrzebujesz więc adresu dostawy w Niemczech. Domyślnie OTTO dostarcza na adres rozliczeniowy, ale możesz podać inny. Jeśli płacisz na fakturę („Kauf auf Rechnung”), pierwsze zamówienie idzie tylko na adres rozliczeniowy.
 

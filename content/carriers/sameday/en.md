@@ -1,12 +1,12 @@
 ---
 title: Sameday tracking: AWB, easybox and statuses explained
-description: Track a Sameday parcel in Romania or Bulgaria: where to find the AWB, what Sameday's statuses mean, easybox pickup times, missed deliveries and contacts.
+description: Track a Sameday parcel in Romania or Bulgaria with your AWB: English status meanings, easybox 36–72h pickup windows, missed delivery options and phone support.
 slug: sameday-tracking
 published: 2026-10-13
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Sameday is a Romanian courier, also in Bulgaria, with its own easybox parcel lockers. Track a parcel with its AWB, the number in Sameday's SMS, email and SAMEDAY App, on sameday.ro's tracking page or under "Check AWB" on sameday.bg, or by pasting it in the box above.
+Sameday is a Romanian courier also operating in Bulgaria, with its own easybox parcel lockers and SAMEDAY points. Track a parcel with your AWB number (from Sameday's SMS, email or the SAMEDAY App) on sameday.ro, under "Check AWB" on sameday.bg, or in the box above. Below: what Sameday's English statuses mean, easybox pickup times and PIN rules, missed-delivery rescheduling, and customer service numbers.
 
 ## Sameday AWB: your tracking number
 
@@ -81,21 +81,25 @@ Peek can notify you of "Every scan", "Important steps" or "Delivery only". It ca
 
 ## Questions about Sameday tracking
 
-### How long does a parcel stay in an easybox?
+### How long does a parcel stay in a Sameday easybox?
 
-In Romania, 36 hours if loaded Sunday to Thursday, 72 on Friday and 48 on Saturday. Bulgaria's easybox FAQ says 48 hours Monday to Thursday and 72 Friday to Sunday, but Sameday's easybox terms say 36 hours from the notice, 24 at busy times such as Black Friday or Christmas. The app shows the time left.
+In Romania, 36 hours if loaded Sunday to Thursday, 72 hours on Friday and 48 hours on Saturday. Bulgaria's easybox FAQ says 48 hours Monday to Thursday and 72 hours Friday to Sunday, while its easybox terms state 36 hours from the notice (24 at peak periods such as Black Friday or Christmas). You can check the remaining time and extend storage by up to 7 days for a fee in the SAMEDAY App.
 
-### Is easybox Sameday?
+### Why is my Sameday tracking not updating?
 
-Yes. easybox is Sameday's own parcel-locker network, and SAMEDAY points are its partner pickup points in shops, petrol stations and other businesses.
+If tracking stays on `We will pick up your parcel from the sender soon.`, the shop has booked the AWB but hasn't handed the parcel over yet — Sameday's FAQ notes Shein and Temu orders can take 10 to 15 days before handover. Once collected, Sameday's Romanian terms allow up to 5 working days domestically and 12 working days internationally.
 
-### Can you track a Sameday parcel if you lost the AWB?
+### Is easybox the same as Sameday?
 
-Yes, if the order used your phone number: the SAMEDAY App lists its AWBs. Otherwise see [how to find a tracking number](guide:find-tracking-number).
+Yes. easybox is Sameday's own parcel-locker network (more than 4,700 lockers in Romania and 800 to nearly 1,000 in Bulgaria), and SAMEDAY points are its partner pickup shops, holding parcels for 36 working hours in Romania and 48 in Bulgaria.
 
-### Does Sameday have a customer service email?
+### Can I track a Sameday parcel without the AWB number?
 
-In Bulgaria, written claims go to claims@sameday.bg. In Romania, Sameday uses the contact form on sameday.ro and SAMY instead.
+Yes, if the order used the phone number registered in your SAMEDAY App: every AWB linked to that number appears automatically. Otherwise ask the seller or see [how to find a tracking number](guide:find-tracking-number).
+
+### How do I contact Sameday customer service in Romania or Bulgaria?
+
+In Romania, call 021 637 06 60 (Monday to Friday 09:00–13:00 and 13:30–17:00), use the 24/7 SAMY assistant or submit the form at [sameday.ro/contact](https://sameday.ro/contact/). In Bulgaria, call 0700 16 226 (Monday to Friday 09:00–17:00) or email written claims to claims@sameday.bg. Sameday closed operations in Hungary on 23 July 2026 and offers a contact form only there.
 
 :::sources
 - [Sameday: Contact](https://sameday.ro/contact/?lang=en) – phone, hours, SAMY, form, AWB 5–50 characters

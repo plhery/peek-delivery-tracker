@@ -1,15 +1,15 @@
 ---
 title: Do kiedy wysłać paczkę przed świętami: terminy przewoźników
-description: Do kiedy nadać paczkę, żeby doszła przed Wigilią: zeszłoroczne terminy Poczty Polskiej i InPostu, dni wolne przewoźników i czas dostawy za granicę.
+description: Do kiedy wysłać paczkę przed świętami 2026: zeszłoroczne terminy InPost, Poczty Polskiej, DPD i GLS, dni wolne w grudniu oraz czasy wysyłki za granicę.
 slug: do-kiedy-wyslac-paczke-przed-swietami
 picture: Kartka z kalendarza z zakreślonym jednym grudniowym dniem, samochód dostawczy wiozący przez padający śnieg paczkę przewiązaną czerwoną wstążką i biegnący obok Pip.
 published: 2026-10-09
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-InPost, Poczta Polska, ORLEN Paczka, DPD i GLS nie podały jeszcze terminów na święta 2026, a u DHL eCommerce też ich nie znaleźliśmy. W 2025 roku [Poczta Polska](carrier:poczta-polska) radziła nadać paczkę najpóźniej w niedzielę 21 grudnia, a [InPost](carrier:inpost) gwarantował, że paczki nadane do poniedziałku 22 grudnia dotrą do wtorku 23 grudnia. Wszystkie terminy w tabelach poniżej są więc zeszłoroczne: Poczty Polskiej i DPD z ich stron, a InPostu za portalem Super Biznes.
+InPost, Poczta Polska, ORLEN Paczka, DPD i GLS nie podały jeszcze terminów na święta 2026, a u DHL eCommerce też ich nie znaleźliśmy. W 2025 roku [Poczta Polska](carrier:poczta-polska) radziła nadać paczkę najpóźniej w niedzielę 21 grudnia, a [InPost](carrier:inpost) gwarantował, że paczki krajowe nadane w Paczkomacie lub PaczkoPunkcie do poniedziałku 22 grudnia dotrą do wtorku 23 grudnia. Wszystkie terminy w tabelach poniżej są więc zeszłoroczne (Poczty Polskiej i DPD z ich stron, a InPostu za portalem Super Biznes) — wraz ze strefami odbioru, dniami wolnymi i czasami wysyłki za granicę.
 
-## Polska: InPost, Poczta Polska, ORLEN Paczka, DPD, DHL i GLS
+## Do kiedy wysłać paczkę w Polsce: InPost, Poczta Polska, DPD, GLS i ORLEN Paczka
 
 U żadnego z tych przewoźników nie znaleźliśmy jeszcze terminów na święta 2026. [DPD](carrier:dpd-pl) pisze tylko „Tryb pracy na grudzień i styczeń - wkrótce”. Daty poniżej są więc zeszłoroczne, dla paczek wysyłanych w Polsce.
 
@@ -30,13 +30,13 @@ Co kryje się za tymi datami:
 - **Poczta Polska.** W komunikacie ze środy 17 grudnia 2025 r. napisała: „Jeśli ktoś chce mieć pewność, że jego paczka dotrze do 23 grudnia, musi ją nadać maksymalnie do niedzieli 21 grudnia włącznie.” O poniedziałku 22 grudnia pisała ostrożniej: „Prawie wszystkie nadane tak paczki też powinny dotrzeć do adresatów 23 grudnia.”
 - **DPD i GLS.** W 2025 r. nie podały ostatniego dnia nadania na święta. DPD podało tylko harmonogram pracy: paczki nadane we wtorek 23 grudnia trafiały do doręczenia w poniedziałek 29 grudnia, czyli po świętach. GLS pisze, że paczki krajowe zwykle docierają w następnym dniu roboczym, i gwarantuje dostawę w ciągu 3 dni roboczych.
 
-### Kiedy przewoźnicy podadzą terminy na 2026 rok?
+### Kiedy przewoźnicy ogłoszą świąteczne terminy nadania na 2026 rok?
 
 Rok temu Poczta Polska podała swoje terminy w środę 17 grudnia. DPD zapowiada tryb pracy na grudzień i styczeń „wkrótce”. Zaglądaj na strony przewoźników od końca listopada.
 
 W 2026 r. Wigilia wypada w czwartek, a Boże Narodzenie w piątek. W 2025 r. InPost i Poczta Polska celowały w dostawę do 23 grudnia, dnia przed Wigilią. Jeśli zrobią tak samo, będzie to środa 23 grudnia, ale nikt jeszcze tego nie potwierdził.
 
-## Wysyłka paczki za granicę na święta
+## Do kiedy wysłać paczkę za granicę na święta?
 
 Za granicę trzeba nadawać wcześniej, a przedświąteczna gwarancja InPost w 2025 r. nie obejmowała paczek wysyłanych za granicę. W 2025 r. Poczta Polska nie ogłosiła świątecznych terminów dla przesyłek zagranicznych, a DPD i GLS nie podają dat dla poszczególnych krajów.
 
@@ -66,13 +66,13 @@ Na co uważać:
 - **Zawieszenia.** Poczta Polska w 2026 r. kilka razy wstrzymywała i wznawiała przyjmowanie przesyłek do różnych krajów. Przed nadaniem sprawdź kraj na jej stronie [Realizacja przesyłek zagranicznych](https://www.poczta-polska.pl/realizacja-przesylek-zagranicznych/).
 - **Wyspy.** Do części krajów, na przykład Hiszpanii, Grecji czy Włoch, DPD Pickup wozi paczki tylko transportem drogowym. Gdzie nie da się dojechać, usługa jest niedostępna, więc wyspa może być poza zasięgiem.
 
-## Zakupy w internecie: zostaw czas na odprawę celną
+## Zakupy online przed świętami: kiedy zamówić z Polski i spoza UE?
 
 Terminy z tabel dotyczą paczek, które są już u przewoźnika, więc ostatni dzień na zamówienie w sklepie przypada wcześniej. DPD radzi zamawiać prezenty „z co najmniej kilkudniowym wyprzedzeniem” przed Wigilią. Najwięcej paczek jest tuż przed świętami: dla Poczty Polskiej w 2025 r. rekordowy był tydzień od 15 do 21 grudnia.
 
 Paczka spoza UE przechodzi też odprawę celną, która może ją zatrzymać, a z Chin podróż potrafi trwać tygodniami. W 2025 r. gwarancja InPost nie obejmowała paczek nadanych z zagranicy, a Poczta Polska, DPD i GLS nie podają świątecznego terminu dla przesyłek z innych krajów. Zamów więc wcześnie i kieruj się terminem dostawy, który podaje sklep. Przeczytaj, [jak śledzić paczkę z Chin](guide:tracking-from-china) i [co się dzieje, gdy paczka utknie w urzędzie celnym](guide:customs). Jakie czasy dostawy z Chin podają sprzedawcom sami przewoźnicy, przeczytasz na stronach o [Cainiao](carrier:cainiao) i [YunExpress](carrier:yunexpress).
 
-## Co zrobić, gdy świąteczna paczka się spóźnia?
+## Dni wolne przewoźników w święta i co zrobić, gdy paczka się spóźnia?
 
 Nie zdążysz z terminem? W 2025 r. Poczta Polska dawała jeszcze poniedziałek 22 grudnia, ale bez pewności dostawy przed świętami. Później paczka czeka już na koniec świąt: w DPD paczki nadane we wtorek 23 grudnia trafiały do doręczenia dopiero w poniedziałek 29 grudnia.
 

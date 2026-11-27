@@ -1,15 +1,15 @@
 ---
 title: Tracciamento Etsy: dov'è il tuo ordine e chi lo consegna
-description: Perché il tuo ordine Etsy risulta ancora «Non spedito», quale corriere lo consegna, com'è fatto il codice di tracciamento e quando aprire una disputa.
+description: Tracciare un ordine Etsy in Italia: stato «Non spedito» o «Pre-transito», corrieri e codici, dazi UE e IVA, tempi di consegna e come aprire una disputa Etsy.
 slug: tracciamento-ordine-etsy
 picture: Un pacco legato con lo spago e affrancato, un furgone postale e Pip che corre di fretta.
 published: 2026-10-17
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Etsy non spedisce nulla: ogni negozio crea o imballa i propri ordini, li affida al corriere che preferisce e aggiunge un codice di tracciamento quando il servizio ne ha uno. La pagina Acquisti ti dice se l'ordine è partito e quando dovrebbe arrivare; il codice di tracciamento ti dice dov'è adesso. In ritardo o sparito? Chiedi prima al venditore, poi a Etsy.
+Su Etsy ogni negozio spedisce in autonomia: sceglie il corriere che preferisce e aggiunge il codice di tracciamento quando la spedizione lo prevede. In **Acquisti e recensioni** vedi se l'ordine è ancora «Non spedito», «Pre-transito» o «In transito» insieme alla data prevista; con il codice segui il pacco fino alla consegna. Qui sotto trovi cosa significano gli stati Etsy, quali corrieri consegnano in Italia, quando si pagano dogana e oneri UE e come aprire una disputa se l'ordine non arriva.
 
-## Perché il mio ordine Etsy risulta ancora «Non spedito»?
+## Perché il mio ordine Etsy è fermo su «Non spedito» o «Pre-transito»?
 
 Perché il venditore non l'ha ancora creato, imballato o segnato come spedito. Etsy calcola la data di consegna prevista così: «Tempo di lavorazione + Tempo di transito del corriere = Data di consegna prevista». Il tempo di lavorazione è il tempo che serve al venditore per creare l'articolo e prepararlo per la spedizione. L'esempio di Etsy: 3-5 giorni di lavorazione e 2-4 giorni di transito danno una consegna tra 5 e 9 giorni. Sulla ricevuta trovi anche la data di spedizione a cui il venditore si è impegnato.
 
@@ -27,7 +27,7 @@ In **Acquisti e recensioni** (app: **Tu** → **Acquisti**) ogni ordine mostra u
 
 Dove trovi il codice su Etsy e nell'email di spedizione: [trovare il codice di tracciamento](guide:find-tracking-number).
 
-## Quale corriere consegna un ordine Etsy?
+## Quale corriere consegna un ordine Etsy in Italia?
 
 Quello scelto dal venditore. Etsy vende etichette di spedizione solo ai venditori di Stati Uniti, Canada e Regno Unito; gli altri comprano l'affrancatura da soli, alla posta o da un corriere. Per le spedizioni all'estero, Etsy indica i corrieri usati di solito in ogni Paese:
 
@@ -43,7 +43,7 @@ Se il venditore ha usato un corriere supportato direttamente da Etsy, accanto al
 
 Dal 1° luglio 2026 Etsy non vende temporaneamente etichette USPS e Canada Post per l'Italia, a causa, dice Etsy, di un nuovo onere di gestione dell'UE che riguarda alcuni corrieri. I venditori negli Stati Uniti usano allora Global Postal Shipping o comprano l'etichetta altrove. I pacchi dalla Cina seguono una strada tutta loro: vedi [tracciare un pacco dalla Cina](guide:tracking-from-china).
 
-## Com'è fatto un codice di tracciamento Etsy?
+## Dove trovare e com'è fatto un codice di tracciamento Etsy?
 
 È il codice del corriere, non uno di Etsy. Le poste usano il formato postale internazionale: 13 caratteri che restano uguali da un Paese all'altro.
 
@@ -71,7 +71,7 @@ Non sai quale hai? Scrivilo qui:
 
 Tutti gli altri formati, corriere per corriere: [formati dei codici di tracciamento](guide:tracking-number-formats).
 
-## Perché il tracciamento Etsy si ferma o cambia?
+## Perché il tracciamento Etsy non si aggiorna o cambia corriere?
 
 Di solito per uno di questi motivi:
 
@@ -110,7 +110,7 @@ Etsy dice che di solito dazi, imposte e spese di sdoganamento sono a carico di c
 
 Un pacco in ritardo o mai arrivato perché hai rifiutato o non hai pagato gli oneri dovuti alla consegna non è coperto dalla Protezione degli acquisti di Etsy. Di più su oneri e tempi: [pacco fermo in dogana](guide:customs).
 
-## Cosa fare se il tuo ordine Etsy è in ritardo o non arriva?
+## Ordine Etsy in ritardo o mai arrivato: come aprire una disputa?
 
 Procedi in quest'ordine:
 

@@ -1,12 +1,12 @@
 ---
 title: GLS Italy tracking: numbers, statuses and missed deliveries
-description: Track a GLS parcel in Italy: where the shipment number comes from, what GLS Italy's English statuses mean, missed deliveries, GLS Points, giacenza and contacts.
+description: Track a GLS Italy parcel in English: national or 11-digit codes, status meanings, Flex Delivery redelivery, 10-day giacenza/GLS Point holds and phone lines.
 slug: gls-italy-tracking
 published: 2026-10-11
-updated: 2026-10-26
+updated: 2026-11-27
 ---
 
-GLS Italy is the Italian arm of the GLS parcel group, a network of local depots (each called a Sede) run as franchises under GLS Italy S.p.A. Track a parcel on GLS's [Track & Trace page](https://gls-group.com/IT/en/online-services/track-trace/), in the free GLS app or by pasting the number in the box above. The number comes from the sender, usually the shop, when the parcel leaves.
+GLS Italy is the Italian arm of the GLS parcel group, operating franchised local depots (each called a Sede) under GLS Italy S.p.A. Track a parcel in English with the shipment number from the sender or missed-delivery notice on GLS's [Track & Trace page](https://gls-group.com/IT/en/online-services/track-trace/), in the free GLS app, or in the box above. Below: English status explanations, Flex Delivery redelivery, GLS Point and giacenza storage limits, and support numbers.
 
 ## GLS Italy tracking number: where to find it
 
@@ -87,17 +87,25 @@ The only expected delivery day it shows is the one you book a redelivery for aft
 
 ## Questions about GLS tracking in Italy
 
-### Where is my GLS package?
+### Where is my GLS Italy package right now?
 
-The latest status tells you: `Arrived at final Depot.` means your local depot has it, `Delivery scheduled during the day.` means it's with the driver. If GLS finds nothing, the parcel may not have reached GLS yet.
+Read the latest English scan: `Arrived at final Depot.` means your local Sede has it, `Delivery scheduled during the day.` means it is out with the driver, and `Available for collection at GLS POINT.` means it is ready to pick up. If GLS finds nothing, the sender may not have handed the parcel over yet.
 
-### How long does GLS take to deliver in Italy?
+### What happens after a missed GLS Italy delivery or giacenza hold?
 
-GLS's indicative time for its standard service is 24 hours on the mainland and 48 hours in Sicily, Calabria and Sardinia. GLS says it delivers 99% of shipments in Italy within 4 working days.
+The driver leaves a notice and GLS tries again the next working day; if the sender enabled Flex Delivery, use the email or SMS link to pick a new date or pickup point. After a second failed attempt the parcel goes into *giacenza* (held 10 working days domestically or 8 for international parcels, free of charge) and only the sender can issue release instructions.
+
+### How long does GLS Italy take to deliver?
+
+GLS's indicative standard delivery time is 24 hours on the Italian mainland and 48 hours in Sicily, Calabria and Sardinia, with 99% of Italian shipments delivered within 4 working days.
 
 ### Does GLS deliver on Saturday in Italy?
 
-Only if the sender paid for Saturday delivery, which covers provincial capitals. Otherwise Saturday morning is just for picking up a Fermo Deposito parcel at the Sede.
+Only if the sender paid for Saturday delivery, which covers provincial capitals. Otherwise Saturday morning (8.30 to 12.00) is for picking up Fermo Deposito parcels at the Sede.
+
+### How do I contact GLS Italy customer service in English?
+
+Call the Italian freephone 800 184726 or the 24-hour automated tracking line on 02 98 03 55 56 (+39 02 98 03 55 56 from abroad), email customerservice@gls-italy.com (Monday to Friday 9.00–13.00 and 14.30–17.30 Italian time), use the form on GLS's [Customer Service updates](https://gls-group.com/IT/en/online-services/contacts/) page, or look up your local Sede on Trova Sede.
 
 :::sources
 - [GLS Italy: Frequently asked questions](https://gls-group.com/IT/en/faq/) – numbers, status labels, delays, damage, contacts

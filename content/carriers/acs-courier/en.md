@@ -1,12 +1,12 @@
 ---
 title: ACS Courier tracking: numbers, statuses and contacts
-description: Track an ACS Courier parcel in Greece or Cyprus: the 10-digit shipping number, what ACS's English statuses mean, SmartPoint lockers, claims and contacts.
+description: Track an ACS Courier parcel in Greece or Cyprus: 10-digit voucher/shipping number, English statuses, SmartPoint lockers, missed deliveries and phone lines.
 slug: acs-courier-tracking
 published: 2026-10-13
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-ACS Courier is a Greek courier, part of the Quest Group, with its own company in Cyprus and SmartPoint lockers in both countries. Track a parcel with its 10-digit shipping number on the Track and Trace page of acscourier.net (Greece) or cyp.acscourier.net (Cyprus), switching the page to English, or paste the number in the box above and pick ACS Courier. ACS puts that number in every SMS, Viber message and email it sends you about the parcel.
+ACS Courier is a Greek courier in the Quest Group, operating its own company in Cyprus and SmartPoint lockers in both countries. Track your 10-digit shipping number (often called a voucher by shops, included in every ACS SMS, Viber message and email) on acscourier.net or cyp.acscourier.net in English, or paste it in the box above and choose ACS Courier. Below: English status meanings, SmartPoint locker holding times, missed-delivery rescheduling and phone numbers.
 
 ## ACS tracking number: what it looks like
 
@@ -93,21 +93,25 @@ Peek can notify you of "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about ACS Courier tracking
 
-### What is ACS Courier?
+### How do I track an ACS Courier parcel in English?
 
-ACS Courier and Postal Services S.A. is a Greek courier in business since 1981 and part of the Quest Group. It calls itself the leading courier in Greece, with more than 350 service points in Greece, Cyprus, Albania and Bulgaria.
+Enter your 10-digit shipping number (voucher) on the `/en/` Track and Trace page of acscourier.net (five milestones) or cyp.acscourier.net (full scan history), or paste it in Peek and select ACS Courier. ACS Courier and Postal Services S.A. has operated since 1981 as part of the Quest Group, with over 350 service points across Greece, Cyprus, Albania and Bulgaria.
 
-### Is ACS tracking the same as DHL?
+### Why does my 10-digit ACS tracking number show DHL?
 
-No, they are separate companies. Both use 10-digit numbers, so a tracker that guesses from the number may show DHL: pick ACS Courier by hand or use acscourier.net.
+ACS Courier and DHL Express are separate companies that both use 10-digit numbers (as do Geniki Taxydromiki and others). If a tracker guesses DHL from the shape alone, pick ACS Courier manually or track directly on acscourier.net.
 
-### How long does ACS Courier take to deliver?
+### How long does ACS Courier hold a parcel in a SmartPoint locker or store?
 
-In Greece, for parcels leaving Attica, ACS gives 1 to 2 business days to the mainland, 1 to 3 to the islands and up to 5 to hard-to-reach areas. Within Cyprus, 1 to 2 working days.
+Lockers with a screen usually hold parcels for 3 calendar days, followed by 3 working days at the serving ACS store; screenless lockers hold parcels for 2 calendar days before moving them to an ACS store. Parcels with missing contact details or an unclear address stay at the destination store for 5 calendar days before returning.
 
-### What is ACS Courier's email address?
+### How long does ACS Courier take to deliver in Greece and Cyprus?
 
-For complaints in Greece, info@acscourier.gr; in Cyprus, helpdesk@acscyprus.com. Treat emails from other domains as fake.
+For parcels leaving Attica in Greece, ACS gives 1 to 2 business days to the mainland, 1 to 3 to the islands and up to 5 to hard-to-reach areas. Within Cyprus, standard delivery takes 1 to 2 working days.
+
+### What is the ACS Courier phone number and email address?
+
+In Greece, call 210 8190000 or 211 5005000 (press 1 for English) or email info@acscourier.gr for complaints; locker support is 211 500 5264. In Cyprus, call 77777373 (+357 22273000 from abroad) or email helpdesk@acscyprus.com. Treat emails from any other domain as fake.
 
 :::sources
 - [ACS Courier: Track and Trace (Cyprus)](https://cyp.acscourier.net/en/quick-access/non-registered-users/track-and-trace/) – tracking page, English and Greek versions

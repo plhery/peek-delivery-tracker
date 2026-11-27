@@ -1,15 +1,15 @@
 ---
 title: Tracciare un ordine PcComponentes: corrieri e problemi
-description: Chi consegna il tuo ordine PcComponentes in Italia, dove trovi il tracciamento, quanto costa la spedizione e cosa fare se il pacco è in ritardo o non arriva.
+description: Tracciare un ordine PcComponentes in Italia: tempi di consegna 3–5 giorni, corriere nell'e-mail di spedizione, punti di ritiro, resi gratuiti e reclami danni.
 slug: tracciare-ordine-pccomponentes
 picture: Un alto cartone di un case per computer e il cartone di un monitor su un carrello portapacchi, un furgone delle consegne e Pip sulla porta di casa aperta.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-27
 ---
 
-PcComponentes è un negozio online spagnolo di informatica ed elettronica, con un sito per l'Italia: pccomponentes.it. Spedisce in Italia in 3–5 giorni lavorativi. Non ha un corriere fisso: «Useremo l'agenzia disponibile in quel momento», scrive, e a ordine spedito ti manda un'e-mail con l'agenzia assegnata e il numero di tracciamento. Lo stato dell'ordine è nel tuo account, in «Ordini, resi e fatture». Un articolo di un venditore del Marketplace parte da quel venditore.
+PcComponentes è un negozio online spagnolo di informatica ed elettronica con sito dedicato all'Italia (pccomponentes.it) e consegna standard in 3–5 giorni lavorativi. Non utilizza un corriere fisso: «Useremo l'agenzia disponibile in quel momento», scrive, e quando il pacco parte ti manda un'e-mail con il corriere assegnato e il numero di tracciamento (visibile anche nel tuo account in «Ordini, resi e fatture»). Di seguito: come seguire il pacco, costi e punti di ritiro, e cosa fare se l'ordine ritarda o arriva danneggiato.
 
-## Quale corriere consegna il mio ordine PcComponentes?
+## Quale corriere consegna un ordine PcComponentes in Italia?
 
 Lo scopri solo quando l'ordine parte. Le pagine di aiuto di pccomponentes.it non nominano nessun corriere per l'Italia: parlano dell'«agenzia disponibile in quel momento» e dicono che l'e-mail di spedizione ti indica l'agenzia e il numero di tracciamento.
 
@@ -31,7 +31,7 @@ Un monitor o un laptop si riconosce subito: viaggia così come arriva dal produt
 - home | Tu | A casa o in un punto di ritiro
 :::
 
-## Dove trovo il numero di tracciamento PcComponentes?
+## Dove trovare il numero di tracciamento PcComponentes?
 
 Guarda in questi posti:
 
@@ -47,7 +47,7 @@ Non sai di chi è il numero? Scrivilo qui:
 :::checker
 :::
 
-## Perché il mio ordine PcComponentes è in ritardo, o perché il tracciamento non si muove?
+## Ordine PcComponentes in ritardo o tracking fermo: quali sono le cause?
 
 L'ordine parte dopo la conferma del pagamento e arriva in Italia, di solito, in 3–5 giorni lavorativi. Di solito nessuno ti avvisa dell'orario: la data di consegna compare nel tracking.
 
@@ -65,7 +65,7 @@ Devi cambiare indirizzo? Si può solo se l'ordine non è ancora stato preparato,
 
 Se non hai concordato una data, il diritto europeo dà al venditore 30 giorni per consegnare. Passato quel termine o la data promessa, ricordaglielo e dagli un termine supplementare ragionevole. Quando aspettare è ancora normale: [il tracciamento non si aggiorna](guide:tracking-not-updating).
 
-## Opzioni e costi di spedizione
+## Quanto costa la spedizione PcComponentes e come funziona il punto di ritiro?
 
 **Spese di spedizione.** Aggiungi gli articoli al carrello e indica la destinazione: vedi le spese e lo sconto applicato. Gli ordini da 50 € in su non pagano la spedizione, ma solo verso l'Italia, isole escluse, e solo per i prodotti venduti da PcComponentes, grandi elettrodomestici esclusi. La pagina del prodotto ti dice chi lo vende e se ha spese di spedizione.
 
@@ -73,7 +73,7 @@ Se non hai concordato una data, il diritto europeo dà al venditore 30 giorni pe
 
 **Punto di ritiro.** Al momento di pagare, clicca su «Effettua ordine», scegli «Punto di ritiro», inserisci il CAP e scegli un punto sulla mappa: una farmacia, un'edicola o il tuo negozio di frutta di sempre. La pagina parla di una rete di punti «in tutta la Penisola e nelle Isole». Non costa nulla in più delle normali spese di spedizione. PcComponentes ti avvisa quando l'ordine è arrivato. Per farlo ritirare a un'altra persona, indicala in «Dati di ritiro»: le basta mostrare il suo documento d'identità. Di più: [armadietti e punti di ritiro](guide:parcel-lockers).
 
-## Pacco PcComponentes non arrivato o segnato come consegnato: cosa fare
+## Pacco PcComponentes non arrivato, danneggiato o con articoli mancanti: cosa fare?
 
 In quest'ordine:
 

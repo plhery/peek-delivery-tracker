@@ -1,15 +1,15 @@
 ---
 title: Śledzenie Etsy: gdzie jest zamówienie i kto je dostarcza
-description: Dlaczego zamówienie z Etsy wciąż ma status „Niewysłane”, który przewoźnik je dostarcza, jak wygląda numer przesyłki i kiedy złożyć reklamację.
+description: Śledzenie zamówienia z Etsy w Polsce: status „Niewysłane” i „Przygotowane do nadania”, przewoźnicy, cło i opłaty UE, czas dostawy oraz reklamacja na Etsy.
 slug: sledzenie-zamowienia-etsy
 picture: Paczka obwiązana sznurkiem i oklejona znaczkami, pocztowy samochód dostawczy i pędzący Pip.
 published: 2026-10-17
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Etsy niczego samo nie wysyła: każdy sklep sam wytwarza lub pakuje swoje zamówienia, nadaje je u wybranego przewoźnika i dodaje numer do śledzenia, jeśli usługa go ma. Strona Zakupy pokazuje, czy zamówienie opuściło sklep i kiedy powinno dotrzeć; numer przesyłki pokazuje, gdzie jest teraz. Spóźnia się albo zaginęło? Zapytaj najpierw sprzedawcę, potem Etsy.
+Etsy samo nie magazynuje ani nie wysyła towaru: każdy sklep sam przygotowuje zamówienie, nadaje je u wybranego przewoźnika i dodaje numer śledzenia, jeśli usługa go obejmuje. W zakładce **Zakupy i oceny** sprawdzisz status („Niewysłane”, „Wysłane”, „Przygotowane do nadania”, „W drodze”) oraz szacowaną datę dostawy, a po numerze przewoźnika wyśledzisz paczkę aż do doręczenia. Niżej wyjaśniamy, kto dostarcza przesyłki z Etsy do Polski, jakie opłaty celne UE obowiązują i kiedy złożyć reklamację.
 
-## Dlaczego moje zamówienie z Etsy wciąż ma status „Niewysłane”?
+## Dlaczego zamówienie z Etsy ma status „Niewysłane” albo „Przygotowane do nadania”?
 
 Bo sprzedawca jeszcze go nie wykonał, nie spakował albo nie oznaczył jako wysłane. Etsy liczy szacowaną datę dostawy tak: „Czas przetwarzania + czas wysyłki u danego przewoźnika = szacowana data dostawy”. Czas przetwarzania to czas, którego sprzedawca potrzebuje, żeby wytworzyć produkt i przygotować go do wysyłki. Przykład Etsy: 3–5 dni przetwarzania i 2–4 dni wysyłki dają dostawę za 5–9 dni. Na potwierdzeniu zakupu widzisz też datę wysyłki, do której zobowiązał się sprzedawca.
 
@@ -27,7 +27,7 @@ W **Zakupy i oceny** (aplikacja: **Ty** → **Zakupy**) każde zamówienie ma je
 
 Gdzie znaleźć numer na Etsy i w e-mailu o wysyłce: [jak znaleźć numer przesyłki](guide:find-tracking-number).
 
-## Który przewoźnik dostarcza zamówienie z Etsy?
+## Który przewoźnik dostarcza zamówienie z Etsy do Polski?
 
 Ten, którego wybrał sprzedawca. Etsy sprzedaje etykiety wysyłkowe tylko sprzedawcom w Stanach Zjednoczonych, Kanadzie i Wielkiej Brytanii; pozostali sami kupują opłatę na poczcie lub u kuriera. Przy wysyłce za granicę Etsy wymienia przewoźników często wybieranych w każdym kraju:
 
@@ -43,7 +43,7 @@ Jeśli sprzedawca skorzystał z przewoźnika, który współpracuje z Etsy, obok
 
 Od 1 lipca 2026 r. Etsy tymczasowo nie sprzedaje etykiet USPS z wysyłką do Polski, jak podaje, „ze względu na nowe opłaty manipulacyjne w UE wpływające na niektórych dostawców”. Sprzedawcy z USA korzystają wtedy z Global Postal Shipping albo kupują etykietę gdzie indziej. Paczki z Chin mają swoją drogę: zobacz [śledzenie paczki z Chin](guide:tracking-from-china).
 
-## Jak wygląda numer przesyłki z Etsy?
+## Jak wygląda numer przesyłki z Etsy i gdzie go znaleźć?
 
 To numer przewoźnika, nie Etsy. Poczty używają międzynarodowego formatu pocztowego: 13 znaków, które nie zmieniają się na granicy.
 
@@ -72,7 +72,7 @@ Nie wiesz, który masz? Wpisz go tutaj:
 
 Wszystkie inne formaty, przewoźnik po przewoźniku: [formaty numerów przesyłek](guide:tracking-number-formats).
 
-## Dlaczego śledzenie Etsy się zatrzymuje albo zmienia?
+## Dlaczego śledzenie Etsy nie aktualizuje się lub zmienia przewoźnika?
 
 Zwykle z jednego z tych powodów:
 
@@ -111,7 +111,7 @@ Etsy pisze, że cło, podatki i opłaty za odprawę zwykle płaci kupujący, naj
 
 Jeśli paczka spóźni się albo nie dotrze, bo odmówiłeś lub nie zapłaciłeś opłat przy dostawie, program ochrony procesu zakupu na Etsy tego nie obejmuje. Więcej o opłatach i czasie oczekiwania: [paczka zatrzymana w urzędzie celnym](guide:customs).
 
-## Co zrobić, gdy zamówienie z Etsy się spóźnia albo nie dociera?
+## Zamówienie z Etsy spóźnia się lub nie dotarło: jak złożyć reklamację?
 
 W tej kolejności:
 

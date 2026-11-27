@@ -1,7 +1,7 @@
 import 'server-only';
 import { answeredWithoutNews, carrierErrorReason, deferredTrackingFailure, NO_NEW_SCANS, PLACEHOLDER_NUMBER, selfPacedRefusal, trackingFailureCode } from './trackingFailure';
 import { NUMBER_UNKNOWN, REFUSED_NUMBER } from '../lib/messages';
-import { CarrierError, carrierErrorKind, IndeterminateError, inferStage, stageSource, resultStage, resultHasUpdate, CARRIER_DEFINITIONS, type CarrierId } from 'universal-parcel-scraper';
+import { CarrierError, carrierErrorKind, classifyStage, IndeterminateError, inferStage, stageSource, resultStage, resultHasUpdate, CARRIER_DEFINITIONS, type CarrierId } from 'universal-parcel-scraper';
 export { classifyStage, inferStage, stageSource, resultStage, resultHasUpdate } from 'universal-parcel-scraper';
 import { AMAZON_HISTORY_EXPIRED, requiresAmazonAccount } from '../lib/amazon';
 import { normalizeTrackingNumber } from '../lib/carriers';
@@ -1257,6 +1257,21 @@ export function isUnannouncedTrackingError(error: unknown): boolean {
     current = current instanceof Error ? current.cause : null;
   }
   return false;
+}
+
+/** The last leg's stages, and the stages a summary its carrier left behind a scan of that leg still reads. */
+const LAST_LEG_STAGES = new Set(['out_for_delivery', 'ready_for_pickup', 'delivered']);
+const BEFORE_LAST_LEG_STAGES = new Set(['pending', 'registered', 'accepted', 'in_transit', 'customs']);
+
+/**
+ * A summary whose words read a stage before the last leg, beside a scan that took the parcel on to it: Australia
+ * Post's article still "In transit" beside its "Onboard for delivery" scan. A summary in words no rule reads keeps
+ * them ("Your parcel will be delivered today").
+ */
+function summaryBehindScan(summary: string, event: JsonObject): boolean {
+  if (summary === '' || !LAST_LEG_STAGES.has(String(event.stage))) return false;
+  const read = classifyStage(summary, 'pending');
+  return read.source !== 'none' && BEFORE_LAST_LEG_STAGES.has(read.stage);
 }
 
 /**
@@ -3008,8 +3023,10 @@ export class TrackingSyncService {
         const tiedScanNamed = progressEvent !== undefined && summaryOfTie && normalizedSelectedStage === progressEvent.stage
           && newestEvents.some((event) => event.occurred_at === progressEvent.occurred_at && event.stage !== progressEvent.stage
             && String(event.description ?? '').trim() === summaryText);
+        // So does it over a summary left behind it (`summaryBehindScan`).
         const scanText = progressEvent && normalizedSelectedStage === progressEvent.stage && (tiedScanNamed
-          || (result!.status === 'pending' && normalizedSelectedStage !== normalizedReportedStage))
+          || (result!.status === 'pending' && normalizedSelectedStage !== normalizedReportedStage)
+          || summaryBehindScan(summaryText, progressEvent))
           ? String(progressEvent.description ?? '').trim() || null : null;
         // The delivery carrier answers for the parcel's stage: the earlier
         // carrier's stage, seen without a time of its own, dates no row.

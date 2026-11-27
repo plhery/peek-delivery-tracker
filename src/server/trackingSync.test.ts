@@ -3070,6 +3070,35 @@ describe('TrackingSyncService', () => {
     await expect(saved()).resolves.toEqual(['out_for_delivery', 'Out for delivery']);
   });
 
+  it('tells the scan that took the parcel on to its last leg over a summary left behind it', async () => {
+    // Australia Post's article summary still says "In transit" beside the newer scan putting the parcel on
+    // the truck, which sets the stage (synthetic times).
+    const answer = (summary: string, stage = 'out_for_delivery', scan = 'Onboard for delivery') => ({ status: stage,
+      current_stage: stage, last_status_text: summary, last_update: '2026-11-26T23:06:00Z',
+      events: [
+        { time: '2026-11-26T23:06:00Z', description: scan, stage },
+        { time: '2026-11-26T18:40:00Z', description: 'Arrived at facility', stage: 'in_transit' },
+      ] });
+    const client = fakeClient();
+    const adapter = { fetch: vi.fn().mockResolvedValue(answer('In transit')) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-11-27T00:30:00Z'));
+    const parcel = { id: 'summary-behind', carrier: 'australia-post', tracking_number: 'TEST1234', current_stage: 'in_transit' };
+    const saved = async () => {
+      await service.syncPackage(parcel);
+      const values = client.updatePackage.mock.calls.at(-1)![1] as JsonObject;
+      return [values.current_stage, values.last_status_text];
+    };
+    await expect(saved()).resolves.toEqual(['out_for_delivery', 'Onboard for delivery']);
+    // So for a delivery after a summary that the shipment's details were received.
+    adapter.fetch.mockResolvedValue(answer('Shipping information received', 'delivered', 'Delivered'));
+    await expect(saved()).resolves.toEqual(['delivered', 'Delivered']);
+    // A summary in words no rule reads, or in the scan's own stage, keeps them.
+    adapter.fetch.mockResolvedValue(answer('Your parcel will be delivered today'));
+    await expect(saved()).resolves.toEqual(['out_for_delivery', 'Your parcel will be delivered today']);
+    adapter.fetch.mockResolvedValue(answer('Out for delivery'));
+    await expect(saved()).resolves.toEqual(['out_for_delivery', 'Out for delivery']);
+  });
+
   it('reads a summary naming an unstaged scan by that scan\'s words', async () => {
     // The adapter leaves its newest scan unstaged and falls back to the shipment's state for the
     // summary, which names that scan (synthetic wording and times).

@@ -21,7 +21,7 @@ GLS 法国（GLS France）隶属于 GLS 集团，仅面向企业客户承运，�
 
 派送未成功后，GLS 会留下纸质通知单（avis de passage）或通过短信、邮件发送通知，其中包含 GLS 法国称为 Track-ID 的参考码，可在 GLS 查件页面用于跟踪包裹或改期。请注意，GLS 德国用 “Track ID” 指代 8 位单号，两者不同。
 
-8 位单号同样适用于 [GLS 德国](carrier:gls-de)和 GLS 瑞士；11 位数字同样适用于它们以及 PostLogistics 和 [DHL eCommerce 波兰](carrier:dhl-ecommerce-pl)；12 位数字则还适用于 [Colis Privé](carrier:colis-prive)、[Mondial Relay](carrier:mondial-relay)、BRT、DPD 法国等多家快递公司。如果商家邮件写明了另一家承运商，请以邮件为准。详见[快递单号格式说明](guide:tracking-number-formats)（英文）。
+8 位单号同样适用于 [GLS 德国](carrier:gls-de)和 [GLS 瑞士](carrier:gls-ch)；11 位数字同样适用于它们以及 PostLogistics 和 [DHL eCommerce 波兰](carrier:dhl-ecommerce-pl)；12 位数字则还适用于 [Colis Privé](carrier:colis-prive)、[Mondial Relay](carrier:mondial-relay)、BRT、DPD 法国等多家快递公司。如果商家邮件写明了另一家承运商，请以邮件为准。详见[快递单号格式说明](guide:tracking-number-formats)（英文）。
 
 ## GLS 法国物流状态含义
 

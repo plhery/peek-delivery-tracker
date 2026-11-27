@@ -21,7 +21,7 @@ Confira primeiro o e-mail de confirmação da compra enviado pela loja. Se o rem
 
 Após uma entrega não realizada, a GLS deixa um aviso (*avis de passage*) ou envia por SMS ou e-mail uma referência que a GLS France chama de Track-ID. Ela funciona no rastreamento da GLS para acompanhar ou reagendar o envio. A GLS Alemanha usa "Track ID" para o código de 8 caracteres.
 
-Oito caracteres também servem para [GLS Alemanha](carrier:gls-de) e GLS Suíça; 11 dígitos servem para elas, além de PostLogistics e [DHL eCommerce Polônia](carrier:dhl-ecommerce-pl); 12 dígitos servem para [Colis Privé](carrier:colis-prive), [Mondial Relay](carrier:mondial-relay), BRT, DPD France e outras. Se o e-mail da loja citar outra transportadora, siga essa indicação. Veja mais em [formatos de código de rastreamento](guide:tracking-number-formats).
+Oito caracteres também servem para [GLS Alemanha](carrier:gls-de) e [GLS Suíça](carrier:gls-ch); 11 dígitos servem para elas, além de PostLogistics e [DHL eCommerce Polônia](carrier:dhl-ecommerce-pl); 12 dígitos servem para [Colis Privé](carrier:colis-prive), [Mondial Relay](carrier:mondial-relay), BRT, DPD France e outras. Se o e-mail da loja citar outra transportadora, siga essa indicação. Veja mais em [formatos de código de rastreamento](guide:tracking-number-formats).
 
 ## O que significam os status da GLS France
 

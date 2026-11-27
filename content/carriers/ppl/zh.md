@@ -76,7 +76,7 @@ PPL 不公布面向收件人的客服电话。其“关于我们”页面列出�
 
 ## 用 Peek 跟踪 PPL 包裹
 
-[Peek](/) 无法仅凭 11 位数字识别出 PPL，因此对于 2 至 9 开头的 11 位数字会询问同形态承运商：PPL、GLS、GLS Switzerland 和 PostLogistics（在捷克优先问 PPL），再问 Coordinadora、Mainfreight 和 Paquetexpress，并认定查到单号的那一家。你也可以点“更换”（已添加包裹点“更换快递公司”）手动选 PPL，或粘贴带 `shipmentId=` 的 ppl.cz 查询链接，Peek 会识别为 PPL。带 PPL 单号的 dhl.com 链接不起作用。
+[Peek](/) 无法仅凭 11 位数字识别出 PPL，因此对于 2 至 9 开头的 11 位数字会询问同形态承运商：PPL、GLS、[GLS Switzerland](carrier:gls-ch) 和 PostLogistics（在捷克优先问 PPL），再问 Coordinadora、Mainfreight 和 Paquetexpress，并认定查到单号的那一家。你也可以点“更换”（已添加包裹点“更换快递公司”）手动选 PPL，或粘贴带 `shipmentId=` 的 ppl.cz 查询链接，Peek 会识别为 PPL。带 PPL 单号的 dhl.com 链接不起作用。
 
 Peek 按原文显示 PPL 英文状态，时间按布拉格时间读取并换算为你设备的时区。页面显示 PPL 给出时的预计送达日、重量、签收时间，以及包裹待取时的 Parcelshop 或 Parcelbox 名称。PPL 扫描不带地点。派送时段、寄件人、客户参考号、自提点地址、货到付款详情及签收凭证均会被略去。当 PPL 返回中附带海外合作方查询链接及单号时，Peek 会将该合作方标为派送商。Peek 不接受 SmartPIN 码。
 

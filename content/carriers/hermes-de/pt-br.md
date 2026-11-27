@@ -71,7 +71,7 @@ Os canais divulgados pela Hermes são:
 
 A Hermes não lista telefone de atendimento ao cliente, horários nem chat; o telefone da matriz informa que não é canal de atendimento e não é possível falar diretamente com os entregadores.
 
-> A Hermes Germany não envia SMS: qualquer mensagem de texto em nome dela é golpe, exceto quando vem da Hermes Einrichtungs-Service. Os e-mails dela nunca pedem dados de pagamento nem taxas alfandegárias, e destinatários não pagam frete extra.
+> A Hermes Germany não envia SMS: qualquer mensagem de texto em nome dela é golpe, exceto quando vem da [Hermes Einrichtungs-Service](carrier:hermes-einrichtungs-service). Os e-mails dela nunca pedem dados de pagamento nem taxas alfandegárias, e destinatários não pagam frete extra.
 
 ## Como rastrear um pacote da Hermes no Peek
 

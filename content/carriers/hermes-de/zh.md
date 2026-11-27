@@ -71,7 +71,7 @@ Hermes 提供的官方联系渠道如下：
 
 Hermes 不提供客服热线、客服工作时间或在线聊天；其总部电话标注为非客服专线，快递员本人也无法直接联系。
 
-> Hermes Germany 不会发送短信：凡以 Hermes 名义发来的短信均为诈骗（大件家具配送商 Hermes Einrichtungs-Service 除外）。Hermes 邮件绝不会索要付款信息或关税，收件人也无需补缴额外运费。
+> Hermes Germany 不会发送短信：凡以 Hermes 名义发来的短信均为诈骗（大件家具配送商 [Hermes Einrichtungs-Service](carrier:hermes-einrichtungs-service) 除外）。Hermes 邮件绝不会索要付款信息或关税，收件人也无需补缴额外运费。
 
 ## 使用 Peek 跟踪 Hermes 包裹
 

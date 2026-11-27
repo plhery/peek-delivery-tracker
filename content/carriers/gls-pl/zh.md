@@ -14,7 +14,7 @@ GLS 波兰（GLS Poland，*General Logistics Systems Poland Sp. z o.o.*，总部
 
 | 格式（虚构） | 含义 |
 | --- | --- |
-| `48291736405` | 11 位 GLS 包裹号。同样由 [GLS Germany](carrier:gls-de)、[GLS France](carrier:gls-fr)、GLS Switzerland、[GLS Austria](carrier:gls-at) 及 [PPL](carrier:ppl) 使用。 |
+| `48291736405` | 11 位 GLS 包裹号。同样由 [GLS Germany](carrier:gls-de)、[GLS France](carrier:gls-fr)、[GLS Switzerland](carrier:gls-ch)、[GLS Austria](carrier:gls-at) 及 [PPL](carrier:ppl) 使用。 |
 | `482917364052` | 12 位包裹号，末位为校验位。同样由 [BRT](carrier:brt)、[Colis Privé](carrier:colis-prive) 等快递使用。 |
 
 在 [GLS Poland 查询页面](https://gls-group.com/PL/en/parcel-tracking/)输入收件邮编可解锁完整扫描记录及派送改派选项。其他单号形态请参阅[运单号格式说明](guide:tracking-number-formats)（英文）。
@@ -74,7 +74,7 @@ GLS 波兰在波兰语网站显示波兰语扫描说明，并通过 Peek 调用�
 
 ## 使用 Peek 跟踪 GLS Poland 包裹
 
-将运单号粘贴到 [Peek](/)。由于 11 位与 12 位数字单号由多家快递共用，Peek 会同时向可能的承运商查询并结合你的国家（手机地区设置或网页访问所在地）排序。在波兰，Peek 会优先查询 GLS Poland，早于 [GLS France](carrier:gls-fr)、[GLS Germany](carrier:gls-de)、GLS Switzerland 以及 [PPL](carrier:ppl)（11 位）或 [BRT](carrier:brt)、[Colis Privé](carrier:colis-prive)（12 位），通常会直接显示“GLS Poland 有这个包裹的记录。”在波兰以外地区，Peek 会在其他可能的承运商均未查到时再向 GLS Poland 查询。粘贴路径包含 `/PL/` 且带有 `match=`、`parcelNumber=` 或 `matchParcelNumber=` 参数的 `gls-group.com` / `gls-group.eu` 链接会直接按 GLS Poland 追踪。其他情况下，可在添加时点击“更换”或在已添加的包裹页面点击“更换快递公司”选择 GLS Poland。
+将运单号粘贴到 [Peek](/)。由于 11 位与 12 位数字单号由多家快递共用，Peek 会同时向可能的承运商查询并结合你的国家（手机地区设置或网页访问所在地）排序。在波兰，Peek 会优先查询 GLS Poland，早于 [GLS France](carrier:gls-fr)、[GLS Germany](carrier:gls-de)、[GLS Switzerland](carrier:gls-ch) 以及 [PPL](carrier:ppl)（11 位）或 [BRT](carrier:brt)、[Colis Privé](carrier:colis-prive)（12 位），通常会直接显示“GLS Poland 有这个包裹的记录。”在波兰以外地区，Peek 会在其他可能的承运商均未查到时再向 GLS Poland 查询。粘贴路径包含 `/PL/` 且带有 `match=`、`parcelNumber=` 或 `matchParcelNumber=` 参数的 `gls-group.com` / `gls-group.eu` 链接会直接按 GLS Poland 追踪。其他情况下，可在添加时点击“更换”或在已添加的包裹页面点击“更换快递公司”选择 GLS Poland。
 
 添加时的“收件邮编”字段标注为“可选”，但 GLS 仅在核对邮编后才返回详细扫描，正如字段下方提示所示：“GLS Poland 仅在填写收件邮编后才显示扫描记录。”不填邮编时，Peek 只能获取 GLS 主状态而无扫描明细，期间会向其他物流查询服务请求轨迹，并在包裹页面提供“添加邮编”。登录账号后，Peek 会先尝试一次你上次为 GLS Poland 包裹填写的邮编，若无记录则尝试你最近一个包裹的邮编。若 GLS 用该邮编未查到包裹，Peek 会提示并提供“编辑邮编”。当 GLS 等待邮编或邮编不匹配、且已满一天无其他来源返回时，Peek 改为每天查询一次；添加或更改邮编后会立即触发查询。收件邮编仅发给 GLS 及必要时的物流查询服务，绝不会出现在分享链接中。
 

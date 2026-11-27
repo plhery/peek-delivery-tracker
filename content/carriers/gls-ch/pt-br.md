@@ -10,7 +10,7 @@ A GLS é uma rede internacional de encomendas sediada em Amsterdã sem subsidiá
 
 ## Número de encomenda e Track ID da GLS Suíça
 
-O rastreamento da GLS aceita números de encomenda (*parcel numbers*) ou Track IDs. A GLS imprime o Track ID nos cartões de aviso, mas na Suíça quem entrega é a Swiss Post, e nenhuma página indica o uso de cartões da GLS no país. Nem a GLS nem a Swiss Post publicam uma tabela oficial de formatos. Os formatos que o Peek reconhece como da GLS são:
+O rastreamento da GLS aceita números de encomenda (*parcel numbers*) ou Track IDs. A GLS imprime o Track ID nos cartões de aviso, mas na Suíça quem entrega é a Swiss Post, e nenhuma página indica o uso de cartões da GLS no país. Nem a GLS nem a Swiss Post publicam um formato de número. Os formatos que o Peek reconhece como da GLS são:
 
 | Número (fictício) | O que é |
 | --- | --- |
@@ -23,7 +23,7 @@ Copie o código em vez de digitá-lo: um número de 12 dígitos com o último d�
 
 ## Rastreamento GLS na Suíça: o que cada status significa
 
-O rastreamento da GLS para encomendas suíças aparece somente em inglês, e a GLS não publica uma lista oficial de status para a Suíça. Estas são as mensagens usadas pelo rastreamento do grupo, em ordem habitual:
+O rastreamento da GLS para encomendas suíças aparece somente em inglês, e a GLS não publica uma lista de status para a Suíça. Estas são as mensagens usadas pelo rastreamento do grupo, na ordem em que a encomenda passa por elas:
 
 | A GLS informa | O que significa para você |
 | --- | --- |
@@ -35,7 +35,7 @@ O rastreamento da GLS para encomendas suíças aparece somente em inglês, e a G
 | `Final parcel center` | No último centro de distribuição: a entrega vem a seguir. |
 | `In delivery`, `The parcel is in delivery.` | Saiu para entrega, com previsão durante o dia. |
 | `The parcel could not be delivered as the consignee was absent` | Não entregue porque ninguém estava em casa. |
-| `The parcel is stored in the parcel center` | Guardada no depósito após tentativa sem sucesso, por exemplo por ausência no local. |
+| `The parcel is stored in the parcel center` | Guardada no depósito após uma entrega não realizada, por exemplo por ausência no local. |
 | `The parcel is ready for collection at the ParcelShop.` | Aguardando retirada em um ParcelShop ou armário. |
 | `The parcel has been delivered.`, `Delivered` | Entregue. |
 
@@ -47,7 +47,7 @@ O rastreamento da GLS para encomendas suíças aparece somente em inglês, e a G
 
 **ParcelShops.** Nenhuma página da GLS lista um GLS ParcelShop ou armário próprio na Suíça.
 
-**Entrega perdida.** A GLS não publica regras para a Suíça sobre número de tentativas, cartões de aviso ou entrega aos sábados. Se a Swiss Post deixar um aviso de retirada (*collection note*), valem estas regras aplicadas aos seus próprios envios (nenhuma página cita especificamente pacotes GLS):
+**Entrega não realizada.** A GLS não publica regras para a Suíça sobre número de tentativas, cartões de aviso ou entrega aos sábados. Se a Swiss Post deixar um aviso de retirada (*collection note*), valem estas regras aplicadas aos seus próprios envios (nenhuma página cita especificamente pacotes GLS):
 
 - Retire com o aviso ou o QR code no Post-App, normalmente em até sete dias, ou 15 dias para envios internacionais. Prorrogar o prazo é gratuito e dispensa conta.
 - Com acesso a "My consignments", agende uma segunda entrega, redirecione para um terminal My Post 24, outro endereço ou agência (CHF 8 em dias úteis), ou autorize outra pessoa a retirar gratuitamente com uma autorização avulsa.
@@ -60,7 +60,7 @@ O remetente escolheu a GLS e, conforme informam as páginas da Swiss Post GLS, p
 
 **Taxas alfandegárias.** Quem paga depende das condições de entrega (Incoterm) escolhidas pelo remetente: no Incoterm 20 da GLS você paga a taxa de desembaraço, imposto de importação e IVA; nos Incoterms 30 ou 40 os custos são divididos e você paga ao menos o IVA. A Swiss Post aplica aos pacotes GLS suas [taxas habituais de desembaraço](https://www.post.ch/en/business-solutions/exports-imports-and-customs-clearance/exports/swiss-post-gls/import-costs). Para contestar uma cobrança, ligue para o Atendimento Internacional da Swiss Post em +41 848 48 48 47; a alfândega concede 60 dias a partir da decisão de lançamento tributário para corrigir o procedimento, o endereço ou o imposto.
 
-**Perda ou dano.** A GLS não publica regras de reclamação, prazos nem limites de indenização para a Suíça: fale diretamente com a loja.
+**Perda ou dano.** Para a Suíça, a GLS não publica regras nem prazos para o pedido de indenização, nem limite de indenização: fale com a loja.
 
 ## Telefone e e-mail de contato da GLS Suíça
 
@@ -75,7 +75,7 @@ A GLS não mantém uma central telefônica própria na Suíça. Sua página de c
 
 ## Rastreando uma encomenda GLS Suíça com o Peek
 
-O [Peek](/) aceita os quatro formatos e consulta as transportadoras prováveis. Como GLS Germany e GLS Switzerland usam os mesmos números, ele escolhe pelo seu país (a região do celular ou, na web, o local da conexão). Na Suíça ou em Liechtenstein normalmente aparecerá "GLS Switzerland tem esta encomenda."; se o pacote for para a Alemanha, toque em "Alterar" e escolha GLS Germany. Em outros países aparece GLS Germany, que rastreia encomendas suíças igualmente bem com o código postal suíço. Links colados de gls-group com `/EU/` ou `/GROUP/` são acompanhados como GLS Germany.
+O [Peek](/) aceita os quatro formatos e consulta as transportadoras prováveis. Como GLS Germany e GLS Switzerland usam os mesmos números, ele escolhe pelo seu país (a região do celular ou, na web, o local da conexão). Na Suíça ou em Liechtenstein normalmente aparecerá "GLS Switzerland está com esta encomenda."; se o pacote for para a Alemanha, toque em "Trocar" e escolha GLS Germany. Em outros países aparece GLS Germany, que rastreia encomendas suíças igualmente bem com o código postal suíço. Links colados de gls-group com `/EU/` ou `/GROUP/` são acompanhados como GLS Germany.
 
 A GLS exibe o histórico de leituras somente com o código postal de entrega, por isso o campo "Código postal de entrega" é obrigatório: quatro dígitos, como 8000. Ele é enviado à GLS e, quando necessário, aos serviços de rastreamento; se não corresponder à encomenda, o Peek avisa ("GLS Switzerland não encontrou esta encomenda com o código postal ….") para que você corrija.
 

@@ -14,7 +14,7 @@ A CDEK chama cada envio de pedido (заказ), portanto seu código de rastream
 
 | Código (inventado) | O que é |
 | --- | --- |
-| `10482917365` | 11 dígitos começando com `10`: único formato que o Peek vincula à CDEK, e apenas como correspondência fraca. [GLS Germany](carrier:gls-de), GLS Switzerland, [GLS France](carrier:gls-fr), GLS Austria, GLS Poland, PostLogistics, Coordinadora e Mainfreight também usam 11 dígitos. |
+| `10482917365` | 11 dígitos começando com `10`: único formato que o Peek vincula à CDEK, e apenas como correspondência fraca. [GLS Germany](carrier:gls-de), [GLS Switzerland](carrier:gls-ch), [GLS France](carrier:gls-fr), GLS Austria, GLS Poland, PostLogistics, Coordinadora e Mainfreight também usam 11 dígitos. |
 | `48291736548` | 11 dígitos que não começam com `10`. O Peek não sugere a CDEK para ele: confira o código ou escolha a CDEK manualmente (abaixo). |
 | `RR482917367CN` | Número postal vindo do exterior, aqui da [China Post](carrier:china-post). O Peek acompanha nesse correio. Se a CDEK o vinculou a um pedido, selecione CDEK para ver as etapas dela. |
 

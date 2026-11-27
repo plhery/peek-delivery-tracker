@@ -88,7 +88,7 @@ Speedy 未公布客服工作时间或在线聊天，且上述为保加利亚境�
 
 ## 使用 Peek 跟踪 Speedy 包裹
 
-[Peek](/) 无法仅凭 11 位数字断定 Speedy，因此会按每批五家向可能的承运商查询（前五家未查到才查下一批），且仅对以 `6` 开头的 11 位单号包含 Speedy。在保加利亚或罗马尼亚，Peek 会首选 Speedy，其次为 [DHL eCommerce Poland](carrier:dhl-ecommerce-pl)（仅当单号通过其校验位时）、[GLS France](carrier:gls-fr)、[GLS Germany](carrier:gls-de)、GLS Switzerland、Swiss Post PostLogistics 和 PPL；在其他国家，以 `63` 开头时仍首选 Speedy，其余以 `6` 开头的单号则把 Speedy 排在最后，位于上述同一批承运商之后（你所在国家的承运商优先）。如果多家承运商有记录或暂未找到（“暂未找到 · Peek 会继续查询”），请点击“更换”选择“Speedy”。粘贴包含单号的 `speedy.bg` 或 `myspeedy.speedy.bg` 链接则会立刻归属 Speedy。
+[Peek](/) 无法仅凭 11 位数字断定 Speedy，因此会按每批五家向可能的承运商查询（前五家未查到才查下一批），且仅对以 `6` 开头的 11 位单号包含 Speedy。在保加利亚或罗马尼亚，Peek 会首选 Speedy，其次为 [DHL eCommerce Poland](carrier:dhl-ecommerce-pl)（仅当单号通过其校验位时）、[GLS France](carrier:gls-fr)、[GLS Germany](carrier:gls-de)、[GLS Switzerland](carrier:gls-ch)、Swiss Post PostLogistics 和 PPL；在其他国家，以 `63` 开头时仍首选 Speedy，其余以 `6` 开头的单号则把 Speedy 排在最后，位于上述同一批承运商之后（你所在国家的承运商优先）。如果多家承运商有记录或暂未找到（“暂未找到 · Peek 会继续查询”），请点击“更换”选择“Speedy”。粘贴包含单号的 `speedy.bg` 或 `myspeedy.speedy.bg` 链接则会立刻归属 Speedy。
 
 Peek 随后展示物流状态、附带城镇与国家的地图轨迹、在途预计送达日及签收时间。包裹暂存网点或快递柜时会显示名称（不含详细地址）。当希腊或塞浦路斯末端由 [ACS Courier](carrier:acs-courier) 派送时，Speedy 会给出 ACS 名称和单号，Peek 可以改由 ACS 跟踪该包裹。收件人姓名、签收证明及退件单号都会被剔除。
 

@@ -21,7 +21,7 @@ DHL 将运单号称为 *numer listu przewozowego*（运单编号）。波兰国�
 
 找不到单号请联系商家，或参考[如何查找运单号](guide:find-tracking-number)（英文）。
 
-11 位纯数字同样匹配 GLS France、[GLS Germany](carrier:gls-de)、GLS Switzerland 以及[瑞士邮政（Swiss Post）](carrier:swiss-post)的包裹单号；首位是 2 至 9 时，也符合捷克快递公司 PPL 的单号。如果 DHL 提示单号无效，请核对商家邮件中写明的是否确实为 DHL。
+11 位纯数字同样匹配 GLS France、[GLS Germany](carrier:gls-de)、[GLS Switzerland](carrier:gls-ch) 以及[瑞士邮政（Swiss Post）](carrier:swiss-post)的包裹单号；首位是 2 至 9 时，也符合捷克快递公司 PPL 的单号。如果 DHL 提示单号无效，请核对商家邮件中写明的是否确实为 DHL。
 
 ## DHL eCommerce 波兰物流状态中文解读
 

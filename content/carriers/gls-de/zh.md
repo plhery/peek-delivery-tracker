@@ -16,7 +16,7 @@ Peek 识别以下单号格式：
 
 | 单号（虚构） | 说明 |
 | --- | --- |
-| `48291736058` | 11 位数字。GLS 瑞士、GLS 法国、GLS 奥地利、GLS 波兰、PostLogistics 等也使用该长度。 |
+| `48291736058` | 11 位数字。[GLS 瑞士](carrier:gls-ch)、GLS 法国、GLS 奥地利、GLS 波兰、PostLogistics 等也使用该长度。 |
 | `482917360580` | 12 位数字，最后一位为校验位。[BRT](carrier:brt)、[Mondial Relay](carrier:mondial-relay)、Colis Privé 等也使用 12 位数字。 |
 | `KL482917` | 8 位字母与数字组合：部分 Track-ID 也呈此格式，同样适用于 GLS 瑞士、GLS 法国、GLS 荷兰和 Loggi。 |
 | Track-ID | 通知卡上的 6 位字母。Peek 会将其当作包裹单号处理；如果未能识别，请改用包裹单号。 |

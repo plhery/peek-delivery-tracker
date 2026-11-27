@@ -16,7 +16,7 @@ O Peek reconhece estes formatos:
 
 | Código (fictício) | O que é |
 | --- | --- |
-| `48291736058` | 11 dígitos. Também combina com GLS Suíça, GLS França, GLS Áustria, GLS Polônia, PostLogistics e outras. |
+| `48291736058` | 11 dígitos. Também combina com [GLS Suíça](carrier:gls-ch), GLS França, GLS Áustria, GLS Polônia, PostLogistics e outras. |
 | `482917360580` | 12 dígitos, sendo o último verificador. Também combina com [BRT](carrier:brt), [Mondial Relay](carrier:mondial-relay), Colis Privé e outras. |
 | `KL482917` | 8 letras e dígitos: um Track-ID também pode ter esse formato. Serve ainda para GLS Suíça, GLS França, GLS Países Baixos e Loggi. |
 | Track-ID | Seis letras presentes no cartão de aviso. O Peek lê como número de encomenda; se o seu não for aceito, use o número do pacote. |

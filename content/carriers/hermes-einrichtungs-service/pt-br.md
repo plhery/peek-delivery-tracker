@@ -45,7 +45,7 @@ O status de agendamento também pode vir como `per E-Mail mitgeteilt` (informado
 
 Duas mensagens aparecem na caixa da data de entrega. `Liefertermin wird in Kürze bekanntgegeben.` significa que nenhuma data foi definida ainda. `Bitte setze dich zwecks Terminvereinbarung mit deinem Auslieferdepot in Verbindung, damit wir deine Sendung zustellen können.` significa que a HES não conseguiu contato com você: ligue ou envie e-mail ao seu depósito (contatos abaixo), pois sem data combinada a entrega não pode acontecer.
 
-## Agendamento de entrega, ausências e mudança de data
+## Agendamento de entrega, entregas não realizadas e mudança de data
 
 **Quando chega.** A descrição do produto na loja indica o prazo previsto. A HES combina o dia com você em uma de três janelas de horário (noite opcional), avisada por telefone, SMS, e-mail ou carta, e a equipe liga cerca de uma hora antes. Quando a rota começa, o rastreamento ao vivo em myhes.de reduz a janela para 10 minutos.
 
@@ -53,19 +53,19 @@ Duas mensagens aparecem na caixa da data de entrega. `Liefertermin wird in Kürz
 
 **Alterar a data.** Abra seu pedido em myhes.de e use "Liefertermin ändern" (alterar data de entrega) até o meio-dia da véspera. Dependendo da loja, você mesmo escolhe uma nova data ou o depósito entra em contato. Isso funciona uma vez online; depois disso, ligue ou envie e-mail ao depósito.
 
-**Ausência no endereço.** Nos detalhes do pedido você pode autorizar a entrega a um vizinho ou conceder permissão para deixar em local abrigado e discreto na sua propriedade. Esse local fica sob sua própria responsabilidade: a HES informa que, nesse caso, não há direito a indenização contra a HES, a equipe ou a loja por perda ou dano, e a autorização vale apenas para o agendamento atual. Se perder a entrega, a HES entra em contato para remarcar, até três vezes, antes de devolver os produtos à loja.
+**Ausência no endereço.** Nos detalhes do pedido você pode autorizar a entrega a um vizinho ou conceder permissão para deixar em local abrigado e discreto na sua propriedade. Esse local fica sob sua própria responsabilidade: a HES informa que, nesse caso, não há direito a indenização contra a HES, a equipe ou a loja por perda ou dano, e a autorização vale apenas para o agendamento atual. Se a entrega não for realizada, a HES entra em contato para remarcar, até três vezes, antes de devolver os produtos à loja.
 
 **Alteração de endereço.** Peça à loja: a HES não pode alterar o endereço e talvez seja necessário fazer um novo pedido.
 
 ## Produto danificado, cancelado ou sem atualização: o que fazer
 
-A HES atende apenas clientes empresariais, portanto a loja que vendeu o produto é o seu contato para reclamações.
+A HES atende apenas clientes empresariais, portanto a loja que vendeu o produto é o seu contato para pedidos de indenização.
 
 **Danificado na entrega.** Se o dano for visível, peça à equipe para registrá-lo. Você pode recusar a entrega, que volta automaticamente à loja; em seguida, fale com a loja. Danos percebidos somente depois também devem ser reportados à loja.
 
 **Devoluções e cancelamento.** Para devolver, fale com a loja: ela agenda uma coleta com a HES, e a equipe informa o dia da retirada. Para cancelar uma entrega, o FAQ da HES orienta procurar o atendimento ao cliente (*Kundenservice*).
 
-**Sem atualização há dias.** Verifique a caixa de data de entrega em myhes.de e depois consulte o depósito ou a loja. [Rastreamento que não atualiza](guide:tracking-not-updating) explica os motivos mais comuns.
+**Sem atualização há dias.** Verifique a caixa de data de entrega em myhes.de e depois consulte o depósito ou a loja. [Rastreamento que não atualiza](guide:tracking-not-updating) explica os motivos comuns.
 
 ## Contato e telefone da Hermes Einrichtungs-Service
 
@@ -80,15 +80,15 @@ A Hermes Germany não envia SMS, mas a HES envia, portanto uma mensagem de texto
 
 ## Rastreando Hermes Einrichtungs-Service com o Peek
 
-Para um número de guia de 19 dígitos com `0000` nas posições 11 a 14, o [Peek](/) consulta apenas a HES. Um número de 17 dígitos nesse padrão também pode ser da DHL eCommerce, e um de 21 dígitos da SEUR, portanto o Peek consulta ambas. Ele não consulta a HES automaticamente para um *Kollinummer* de 20 dígitos. Se o Peek mostrar outra transportadora ou nenhuma, toque em "Alterar" ("Alterar transportadora" em um pedido já adicionado) e selecione Hermes Einrichtungs-Service para consultar myhes.de sem precisar de código postal. Cole o número, não um link de myhes.de.
+Para um número de guia de 19 dígitos com `0000` nas posições 11 a 14, o [Peek](/) consulta apenas a HES. Um número de 17 dígitos nesse padrão também pode ser da DHL eCommerce, e um de 21 dígitos da SEUR, portanto o Peek consulta ambas. Ele não consulta a HES para um *Kollinummer* de 20 dígitos. Se o Peek mostrar outra transportadora ou nenhuma, toque em "Trocar" ("Trocar transportadora" em uma encomenda já adicionada) e selecione Hermes Einrichtungs-Service para consultar myhes.de sem precisar de código postal. Cole o número, não um link de myhes.de.
 
 O Peek exibe o status e o histórico no texto original em alemão da HES, o dia planejado de entrega com a janela de horário quando myhes.de a informa, a loja ou revendedor e o horário de entrega. Como a HES não informa localidades, nada aparece no mapa e o rastreamento ao vivo do caminhão não é exibido. Um pedido cancelado ou devolvido aparece como problema. Seu nome, endereço e instruções de entrega ficam de fora, e os horários são lidos no fuso da Alemanha.
 
-Enquanto você mantém a entrega aberta no Peek, ou no dia da entrega com notificações ativadas, o Peek verifica até a cada 10 minutos; no dia da rota, a cada 2 minutos enquanto o rastreamento próprio da HES responder, a partir das 6h no horário alemão ou, quando a HES informa uma janela que começa após as 6h30, a partir de meia hora antes da abertura. Nos demais casos, verifica de hora em hora. Após 12 horas apenas em "Etiqueta criada" ou "Recebida pela transportadora", ou dois dias sem novidades, passa a verificar de hora em hora em qualquer modo, e a cada 6 horas após sete dias em "Etiqueta criada".
+Enquanto você mantém a encomenda aberta no Peek, ou no dia da entrega com notificações ativadas, o Peek verifica até a cada 10 minutos; no dia da rota, a cada 2 minutos enquanto o rastreamento próprio da HES responder, a partir das 6h no horário alemão ou, quando a HES informa uma janela que começa após as 6h30, a partir de meia hora antes da abertura. Nos demais casos, verifica de hora em hora. Após 12 horas apenas em "Etiqueta criada" ou "Recebida pela transportadora", ou dois dias sem novidades, passa a verificar de hora em hora em qualquer modo, e a cada 6 horas após sete dias em "Etiqueta criada".
 
-Quando a leitura mais recente tem quatro dias e o pedido segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza a data dessa leitura, como "Sem atualização de rastreamento desde seg 12 out". A página do pedido então informa "Encomendas costumam ficar sem atualizações em voos longos, na alfândega ou durante o fim de semana. O Peek continua consultando Hermes Einrichtungs-Service.", com o link "Obter ajuda da Hermes Einrichtungs-Service" para o FAQ da HES em myhes.de. Após três semanas sem novas leituras, mostra "Nenhuma novidade há mais de três semanas. Se ainda não chegou, fale com o vendedor. O Peek continua consultando Hermes Einrichtungs-Service."
+Quando a leitura mais recente tem quatro dias e o pedido segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza com a data dessa leitura, como "Sem atualizações desde seg 12 out". A página da encomenda então mostra "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Hermes Einrichtungs-Service.", com o link "Pedir ajuda a Hermes Einrichtungs-Service" para o FAQ da HES em myhes.de. Após três semanas sem nova leitura, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando Hermes Einrichtungs-Service."
 
-O Peek pode enviar alertas de "Cada leitura", "Etapas importantes" ou "Apenas entrega".
+O Peek pode enviar alertas de "Cada movimentação", "Etapas importantes" ou "Só a entrega".
 
 ## Perguntas sobre o rastreamento Hermes Einrichtungs-Service
 

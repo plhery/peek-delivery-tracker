@@ -14,7 +14,7 @@ O rastreamento austríaco da GLS aceita números de encomenda e Track IDs — in
 
 | Código (inventado) | O que é |
 | --- | --- |
-| `48291736504` | 11 dígitos. Também compatível com [GLS Alemanha](carrier:gls-de), GLS Suíça, [GLS França](carrier:gls-fr), GLS Polônia, PostLogistics e outras. |
+| `48291736504` | 11 dígitos. Também compatível com [GLS Alemanha](carrier:gls-de), [GLS Suíça](carrier:gls-ch), [GLS França](carrier:gls-fr), GLS Polônia, PostLogistics e outras. |
 | `482917365042` | 12 dígitos, sendo o último um dígito verificador. Também compatível com GLS Alemanha, GLS Suíça, GLS França, GLS Polônia, BRT e outras. |
 | Track ID | Presente no aviso da GLS. O site da GLS aceita o Track ID; no Peek, use o número da encomenda. |
 

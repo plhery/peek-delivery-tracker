@@ -14,7 +14,7 @@ GLS 奥地利查询页面可以查询包裹号和 Track ID，用空格、逗号�
 
 | 单号（虚构） | 含义 |
 | --- | --- |
-| `48291736504` | 11 位数字。同样符合 [GLS Germany](carrier:gls-de)、GLS Switzerland、[GLS France](carrier:gls-fr)、GLS Poland、PostLogistics 等承运商。 |
+| `48291736504` | 11 位数字。同样符合 [GLS Germany](carrier:gls-de)、[GLS Switzerland](carrier:gls-ch)、[GLS France](carrier:gls-fr)、GLS Poland、PostLogistics 等承运商。 |
 | `482917365042` | 12 位数字，末位为校验位。同样符合 GLS Germany、GLS Switzerland、GLS France、GLS Poland、BRT 等承运商。 |
 | Track ID | 印在 GLS 通知单上。GLS 的查询页可以查询此编号；在 Peek 中请使用包裹号。 |
 

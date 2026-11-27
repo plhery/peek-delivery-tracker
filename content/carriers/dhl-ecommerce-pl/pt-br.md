@@ -21,7 +21,7 @@ Procure-o no e-mail de envio da loja. O Mój DHL acompanha vários pacotes ao me
 
 Sem código? Peça à loja ou consulte [como encontrar seu código de rastreamento](guide:find-tracking-number).
 
-Onze dígitos também coincidem com códigos de GLS France, [GLS Germany](carrier:gls-de), GLS Switzerland e [Swiss Post](carrier:swiss-post) e, quando começam com um dígito de 2 a 9, com os da transportadora tcheca PPL. Se a DHL indicar código inválido, confira no e-mail da loja se a transportadora é mesmo a DHL.
+Onze dígitos também coincidem com códigos de GLS France, [GLS Germany](carrier:gls-de), [GLS Switzerland](carrier:gls-ch) e [Swiss Post](carrier:swiss-post) e, quando começam com um dígito de 2 a 9, com os da transportadora tcheca PPL. Se a DHL indicar código inválido, confira no e-mail da loja se a transportadora é mesmo a DHL.
 
 ## O que significam os status da DHL eCommerce Polônia
 

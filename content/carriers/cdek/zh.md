@@ -14,7 +14,7 @@ CDEK 将每票货件称为订单（заказ），因此它的运单号是一�
 
 | 单号（虚构） | 含义 |
 | --- | --- |
-| `10482917365` | 以 `10` 开头的 11 位数字：Peek 唯一关联到 CDEK 的形态，且仅为弱匹配。[GLS Germany](carrier:gls-de)、GLS Switzerland、[GLS France](carrier:gls-fr)、GLS Austria、GLS Poland、PostLogistics、Coordinadora 和 Mainfreight 也使用 11 位数字。 |
+| `10482917365` | 以 `10` 开头的 11 位数字：Peek 唯一关联到 CDEK 的形态，且仅为弱匹配。[GLS Germany](carrier:gls-de)、[GLS Switzerland](carrier:gls-ch)、[GLS France](carrier:gls-fr)、GLS Austria、GLS Poland、PostLogistics、Coordinadora 和 Mainfreight 也使用 11 位数字。 |
 | `48291736548` | 不以 `10` 开头的 11 位数字。Peek 不会推荐 CDEK：请核对单号，或手动选择 CDEK（见下文）。 |
 | `RR482917367CN` | 来自海外的邮政单号，此处为[中国邮政](carrier:china-post)。Peek 会按该邮政跟进；如果 CDEK 已把它关联到一笔订单，可手动选择 CDEK 查看 CDEK 的记录。 |
 

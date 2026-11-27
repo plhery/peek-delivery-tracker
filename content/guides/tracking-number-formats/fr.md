@@ -1,13 +1,13 @@
 ---
 title: Numéro de suivi : à quel transporteur appartient-il ?
-description: Colle ton numéro de suivi pour savoir quel transporteur a ton colis, ou reconnais-le au format : Colissimo, Chronopost, Mondial Relay, DPD, UPS ou Amazon.
+description: À quel transporteur appartient ton numéro de suivi ? Colle-le ou reconnais son format : Colissimo, Chronopost, Mondial Relay, Colis Privé, DPD, bpost ou UPS.
 slug: quel-transporteur-numero-de-suivi
 picture: Trois étiquettes de numéros de suivi découpées en parties colorées, une loupe sur le code pays CH et Pip, curieux.
 published: 2026-10-09
-updated: 2026-11-16
+updated: 2026-11-27
 ---
 
-Colle ton numéro de suivi dans le champ ci-dessous : Peek reconnaît à sa forme quel transporteur a ton colis, et « Suivre ton colis » te montre où il en est. Si le champ affiche « Peut-être », plusieurs transporteurs utilisent cette forme, et le bon est celui que nomme l'e-mail d'expédition ; si tu colles un numéro de commande Amazon, Shein ou Temu, il te dit où trouver le numéro de suivi. À l'œil, les lettres et la longueur suffisent souvent. `1Z` suivi de 16 lettres et chiffres, c'est UPS ; 18 chiffres qui commencent par `99`, c'est [La Poste suisse](carrier:swiss-post) ; 13 caractères construits comme `RR000000005FR` (deux lettres, neuf chiffres, deux lettres) viennent en général d'une poste nationale, et les deux dernières lettres donnent le pays qui a émis le numéro : ici la France, donc La Poste. Les numéros composés uniquement de chiffres sont plus délicats : 10, 12 ou 14 chiffres correspondent à plusieurs transporteurs.
+Colle ton numéro de suivi dans le champ ci-dessous : Peek identifie le transporteur à sa forme et « Suivre ton colis » affiche son parcours. S'il indique « Peut-être », plusieurs transporteurs partagent ce format et l'e-mail d'expédition tranche ; si tu colles un numéro de commande Amazon, Shein ou Temu, il t'indique où trouver le vrai numéro de suivi. À l'œil : `1Z` suivi de 16 caractères désigne UPS, 18 chiffres commençant par `98` ou `99` viennent de [La Poste suisse](carrier:swiss-post), et 13 caractères composés de deux lettres, neuf chiffres et un code pays comme `FR`, `BE` ou `CH` viennent en général d'une poste nationale. Les suites de 10, 12 ou 14 chiffres sans lettre restent plus ambiguës car plusieurs transporteurs les utilisent.
 
 :::checker
 :::
@@ -25,7 +25,7 @@ Quatre vérifications, dans cet ordre :
 
 Le champ du haut fait pour toi les deux premières vérifications, et lit aussi [un lien de transporteur ou tout l'e-mail d'expédition](guide:track-without-carrier). Quand tu suis le colis, [Peek](/) fait la quatrième : il interroge les transporteurs les plus probables, parmi plus de 4 500, jusqu'à cinq à la fois. En attendant, la ligne du transporteur affiche « Vérification des services de suivi… ». Seule compte la réponse sur un colis récent, car les transporteurs finissent par réutiliser leurs numéros. Si un seul transporteur connaît le numéro, tu vois son nom et « a ce colis ». S'ils sont plusieurs, tu vois par exemple « 3 transporteurs connaissent ce numéro » et « choisis le tien » : prends celui que nomme l'e-mail d'expédition. Si aucun ne le connaît encore, tu lis « pas encore trouvé · Peek continue de vérifier ». Les autres [suivis de colis universels](guide:universal-tracker) cherchent aussi le transporteur à ta place.
 
-## Les formats de numéro de suivi, transporteur par transporteur
+## À quoi ressemble un numéro Colissimo, Chronopost, Mondial Relay, DPD ou bpost ?
 
 Voici ce que disent les transporteurs et la norme postale sur les numéros que tu croiseras le plus souvent en France, en Belgique et en Suisse romande :
 
@@ -95,7 +95,7 @@ En général à Amazon. Dans les données de transporteurs qu'utilise Peek, `FR`
 
 Attention aux sosies. Avec ses 12 caractères, un numéro en `FR` a aussi la forme d'un numéro Colis Privé (lettres et chiffres). Et un numéro La Poste qui finit par `FR` en a 13, avec deux lettres au début et deux à la fin : c'est aussi le cas d'un colis [Delivengo](carrier:delivengo), qu'une boutique française envoie à l'étranger par La Poste. Dans le doute, l'e-mail d'expédition tranche.
 
-## Le format postal : deux lettres, neuf chiffres, deux lettres
+## Que veut dire un numéro de 13 caractères finissant par FR, BE, CH ou CN ?
 
 Les postes nationales partagent un format de 13 caractères, fixé par l'Union postale universelle (UPU) dans sa norme S10. Le voici décomposé :
 
@@ -131,7 +131,7 @@ S'il compte 13 caractères et finit par deux lettres, `CN` par exemple, c'est un
 
 > Sur un envoi venu de l'étranger, un numéro postal qui commence par `U` (`UA` à `UZ`) n'est pas fait pour être suivi. L'UPU réserve cette série aux marchandises envoyées comme lettres, sans suivi pour le client, et bpost le dit sans détour : ce code-barres sert seulement à présenter le colis à la douane belge, et tu ne pourras pas le suivre. bpost traite ensuite l'envoi comme une lettre, livrée au plus tard 5 jours ouvrables après [le dédouanement](guide:customs). Ne compte pas sur un suivi qui démarrerait plus tard.
 
-## Les numéros qui ne sont pas ton numéro de suivi
+## Numéro de commande ou de conteneur : quels numéros ne sont pas des numéros de suivi ?
 
 Le numéro de commande est celui de la boutique, pas du transporteur : chez Colis Privé Store, par exemple, il commence en général par `HS` ou `2R` et ne se suit que sur le site du Colis Privé Store. Pour trouver le bon, dans ta commande ou sur un avis de passage, lis [où trouver ton numéro de suivi](guide:find-tracking-number).
 
@@ -156,7 +156,7 @@ Un colis qui franchit une frontière passe souvent de main en main, et chaque so
 - **AliExpress en livraison économique :** Cainiao indique que le suivi s'arrête à la remise au transporteur local, et que le vendeur peut te dire comment joindre ce transporteur. Plus de détails dans [suivre un colis venu de Chine](guide:tracking-from-china).
 - **Douane :** depuis le 1er novembre 2026, une commande en ligne expédiée de l'extérieur de l'UE paie en plus des frais de traitement de 2 € par type de produit (une ligne de déclaration), quelle que soit sa valeur. Avec La Poste, ils se règlent à la commande, sur le site du vendeur, ou à l'arrivée du colis, par toi ; rien de tel en Suisse. Plus de détails dans [colis bloqué en douane](guide:customs).
 
-## Le numéro de suivi ne donne rien ou n'est pas reconnu
+## Pourquoi mon numéro de suivi est-il introuvable ou non reconnu ?
 
 Un numéro « non reconnu » n'est pas forcément mal tapé. Chez Colis Privé, le statut `Colis attendu par Colis Privé` veut dire que l'expéditeur ne lui a pas encore remis le colis. DPD France précise qu'un numéro qui reste « inconnu », même sur le suivi Chronopost, est soit erroné, soit hors du réseau Geopost. Sur peektracker.com, si aucun transporteur ne répond à un numéro `1Z` de 17 caractères, un de moins que chez UPS, Peek affiche « Ça commence comme un numéro de suivi UPS, mais il manque un caractère : il y a peut-être une faute de frappe. Compare-le avec ton message d’expédition. » Si un numéro valide ne bouge simplement pas encore, lis [pourquoi le suivi ne bouge plus](guide:tracking-not-updating).
 

@@ -1,13 +1,13 @@
 ---
 title: Sendungsnummer: Welcher Paketdienst steckt dahinter?
-description: An Anfang, Länge und Endung der Sendungsnummer erkennst du oft den Paketdienst. So sehen die Nummern von DHL, Hermes, DPD, UPS und der Post aus.
+description: Welcher Paketdienst steckt hinter deiner Sendungsnummer? Erkenne DHL, Hermes, DPD, GLS, UPS, Post oder Amazon an Anfang, Länge und Prüfziffer — oder prüf sie.
 slug: sendungsnummer-welcher-paketdienst
 picture: Drei Etiketten mit Sendungsnummern, in farbige Teile zerlegt, eine Lupe auf dem Ländercode CH, und Pip schaut neugierig zu.
 published: 2026-10-09
-updated: 2026-11-15
+updated: 2026-11-27
 ---
 
-Füge deine Sendungsnummer unten ins Feld ein: Peek erkennt an ihrer Form, welcher Paketdienst dein Paket hat, und mit „Dein Paket verfolgen“ siehst du, wo es gerade ist. Steht dort „Könnte sein“, nutzen mehrere Paketdienste diese Form, und der richtige ist der aus der Versandmail. Fügst du eine Bestellnummer von Amazon, Shein oder Temu ein, sagt dir das Feld, wo die Sendungsnummer steht. Oft reicht auch ein Blick: Beginnt die Nummer mit `1Z` und hat 18 Zeichen, ist es UPS; `H` plus 16 bis 19 Ziffern ist Hermes. 18 Ziffern ab `99`, gedruckt wie `99.34.123456.99999980`, kommen von der [Schweizerischen Post](carrier:swiss-post), und 13 Zeichen wie `RR000000005DE` (zwei Buchstaben, neun Ziffern, zwei Buchstaben) stammen meist von einer nationalen Post, deren Land in den letzten zwei Buchstaben steht, hier Deutschland. Schwierig wird es bei reinen Ziffern: 10, 12, 14 oder 22 Stellen passen jeweils zu mehreren Paketdiensten.
+Füge deine Sendungsnummer unten ein: Peek erkennt an Anfang, Länge und Prüfziffer, welcher Paketdienst dein Paket hat, und mit „Dein Paket verfolgen“ siehst du den Status. Zeigt das Feld „Könnte sein“, teilen sich mehrere Anbieter das Format — dann entscheidet die Versandmail; fügst du eine Bestellnummer von Amazon, Shein oder Temu ein, zeigt Peek, wo die Sendungsnummer steht. Auf einen Blick: `1Z` plus 16 Zeichen ist UPS, `H` plus 16 bis 19 Ziffern ist Hermes, 18 Ziffern ab `98` oder `99` gehören zur [Schweizerischen Post](carrier:swiss-post), und 13 Zeichen aus zwei Buchstaben, neun Ziffern und einem Ländercode wie `DE`, `AT` oder `CH` stammen meist von einer nationalen Post. Reine Zahlenfolgen mit 10, 12, 14 oder 22 Stellen passen dagegen zu mehreren Paketdiensten.
 
 :::checker
 :::
@@ -81,7 +81,7 @@ Eine feste Länge gibt es nicht. Hier die Längen, die die Paketdienste selbst n
 
 Wenn die Länge stimmt, ja. In Peeks Paketdienst-Daten steht `TBA`, `TBC` oder `TBM` plus 12 Ziffern für [Amazon Logistics](carrier:amazon-logistics), Amazons eigenen Lieferdienst, oder für [Amazon Shipping](carrier:amazon-shipping), wenn Amazon das Paket für einen anderen Shop bringt. Dasselbe gilt für einen Ländercode wie `DE`, `AT` oder `CH` plus 10 Ziffern. In Amazons eigener Anleitung zur Sendungsverfolgung kommen diese Nummern nicht vor: Du wählst unter „Meine Bestellungen“ die Bestellung aus und klickst auf „Lieferung verfolgen“.
 
-## Das Postformat: zwei Buchstaben, neun Ziffern, zwei Buchstaben
+## Was bedeuten zwei Buchstaben, neun Ziffern und DE, AT oder CH am Ende?
 
 Die nationalen Postunternehmen nutzen ein gemeinsames Format mit 13 Zeichen, festgelegt vom Weltpostverein (UPU) in seinem Standard S10. So ist es aufgebaut:
 
@@ -117,7 +117,7 @@ Hat sie 13 Zeichen, also zwei Buchstaben, neun Ziffern und zwei Buchstaben, ist 
 
 > Beginnt die Postnummer einer Sendung aus dem Ausland mit `U` (`UA` bis `UZ`), ist sie nicht zum Mitverfolgen gedacht. Die UPU reserviert diesen Bereich für Waren im Brief, die für Kunden keine Sendungsverfolgung haben, und die belgische Post bpost schreibt klar: Wenn der Strichcode mit dem Buchstaben U beginnt, „kann die Sendung nicht verfolgt werden“. Rechne nicht damit, dass später doch noch Scans auftauchen.
 
-## Nummern, die nicht deine Sendungsnummer sind
+## Bestellnummer oder Containernummer: Warum ist meine Nummer keine Sendungsnummer?
 
 Die Bestellnummer stammt vom Shop, und DHL erinnert daran, dass sie keine Sendungsnummer ist. Hast du nur eine Bestellnummer oder einen Code von der Benachrichtigungskarte, lies nach, [wo du die Sendungsnummer findest](guide:find-tracking-number).
 
@@ -125,7 +125,7 @@ Drei Bestellnummern, die oft statt der Sendungsnummer eingefügt werden, erkennt
 
 Auch eine Containernummer ist keine Sendungsnummer: drei Buchstaben für den Eigentümer, ein `U`, sechs Ziffern und eine Prüfziffer, etwa `TEMU1234565` (erfunden). Sie bezeichnet einen Seecontainer, kein Paket, und kein Paketdienst verfolgt damit ein Paket. Im Register der Container-Eigentümercodes, das das Bureau International des Containers (BIC) führt, gehört `TEMU` dem Container-Vermieter Textainer, nicht dem Shop Temu. Fügst du eine solche Nummer hinzu und antwortet kein Paketdienst, schreibt Peek „Das sieht nach einer Containernummer aus. Die Sendungsnummer steht in der Versandmail oder bei der Bestellung.“ und bietet „Paketdienst wählen“ an.
 
-## Warum sich die Sendungsnummer unterwegs ändern kann
+## Warum ändert sich meine Sendungsnummer unterwegs?
 
 Ein Paket, das eine Grenze überquert, wechselt oft den Paketdienst, und jeder kann sein eigenes Etikett aufkleben. Die UPU erlaubt der Post im Zielland, neben die ursprüngliche Nummer einen eigenen Strichcode zu setzen, solange er nicht das 13-stellige Postformat hat.
 

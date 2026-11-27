@@ -1,12 +1,12 @@
 ---
 title: bpost tracking: statuses, Pick-up points and contact
-description: Track a bpost parcel: where the barcode is, what each Track & Trace status means, how long Pick-up points and lockers keep it and how to reach bpost.
+description: Track a bpost parcel with Track & Trace: barcode formats, status meanings, 14-day Pick-up point and 5-day Bbox locker limits, weekend delivery and phone.
 slug: bpost-tracking
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-bpost is Belgium's postal company, the brand of the bnode group that delivers the last mile in Belgium and the Netherlands. Track a parcel on [bpost's Track & Trace](https://track.bpost.cloud/) or in the My bpost app with its barcode, or paste the number in the box above. The barcode comes from the shop's shipping email, bpost's text or email, the shipping label or the notice in your letterbox.
+bpost is Belgium's postal company, the bnode group brand delivering last-mile parcels in Belgium and the Netherlands. Track a bpost parcel on [bpost's Track & Trace](https://track.bpost.cloud/) or in the My bpost app using its barcode, or paste the number in the box above. You'll find the barcode in the shop's shipping email, bpost's email or text, the shipping label or the missed-delivery notice in your letterbox.
 
 ## bpost tracking number: where to find the barcode
 
@@ -94,21 +94,25 @@ Peek shows no expected delivery day, and drops the sender, recipient, the recipi
 
 ## Questions about bpost tracking
 
-### What is bpost?
+### How do I track a bpost parcel with Track & Trace?
 
-The brand that delivers parcels and post in Belgium and the Netherlands for the bnode group, formerly bpostgroup. The group's brand for cross-border parcels is Landmark Global.
+Enter your parcel's barcode on bpost's Track & Trace page, in the My bpost app, or in the box above. Track & Trace starts updating once the sender hands the parcel over to bpost.
 
-### Does bpost deliver on Saturday?
+### Why can't I track my bpost parcel or U barcode?
 
-Parcels, sometimes, when the sender (certain web shops) has a weekend agreement with bpost: to a Pick-up point or Parcel Locker on Saturday between 8:00 and 17:00, or to your home on Sunday between 9:00 and 19:00. Letters and registered mail come only on weekdays.
+Usually the sender hasn't handed the parcel to bpost yet. A barcode starting with U is used only for customs and has no Track & Trace at all; bpost says it arrives within 5 working days of customs clearance.
 
-### Does bpost have live chat?
+### How long do bpost Pick-up points and Bbox lockers keep a parcel?
 
-Yes, for some services including Track & Trace. bpost publishes no chat hours.
+A bpost Pick-up point holds a parcel for 14 calendar days, and a Bbox parcel locker holds it for 5 calendar days with no extension. Uncollected parcels go back to the sender.
 
-### Why can't I track my bpost parcel?
+### Does bpost deliver on Saturday and Sunday?
 
-Usually the sender hasn't handed it to bpost yet. A barcode starting with U has no Track & Trace at all.
+Yes, for parcels when the sender has a weekend agreement with bpost: to a Pick-up point or Bbox locker on Saturday between 8:00 and 17:00, or to your home on Sunday between 9:00 and 19:00. Letters and registered mail come only on weekdays.
+
+### How do I contact bpost customer service or live chat?
+
+Call 02 278 51 26 (English and Dutch) or 02 278 51 27 (French and German) Monday to Friday 08:00 to 12:30 and 13:00 to 18:00, or Saturday 09:00 to 13:00, with your barcode ready. bpost also offers live chat for services including Track & Trace, and lists no customer service email address.
 
 :::sources
 - [bpost: What does a barcode look like and where can I find it?](https://www.bpost.be/en/faq/what-does-barcode-look-and-where-can-i-find-it) – barcode shapes, where to find it, U barcodes

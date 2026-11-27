@@ -1,13 +1,13 @@
 ---
 title: Encomenda parada: porque é que o tracking não atualiza
-description: O seguimento da encomenda não atualiza há dias? Vê as causas mais comuns, quanto tempo é normal esperar e quando contactar a loja ou a transportadora.
+description: O seguimento da encomenda não atualiza há dias? Vê porque fica parada nos CTT, DPD, GLS, InPost ou alfândega, quantos dias esperar e quando reclamar à loja.
 slug: tracking-nao-atualiza-encomenda-parada
 picture: Um calendário com vários dias riscados, uma linha de progresso interrompida a meio e o Pip à espera, um pouco aborrecido.
 published: 2026-10-09
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Quando o tracking não atualiza, normalmente é porque ninguém leu a etiqueta da tua encomenda nos últimos dias, não porque ela tenha parado. As transportadoras registam leituras nos centros operacionais e nas fronteiras, não na estrada: uma viagem longa, um voo, a alfândega ou um fim de semana podem deixar-te dias sem uma linha nova. Só vale a pena preocupares-te quando passar o prazo da própria transportadora (os [CTT](carrier:ctt) indicam cerca de 3 dias úteis para uma Encomenda Postal no continente; a [InPost](carrier:inpost) aceita uma reclamação por atraso passados mais de 5 dias desde a notificação de envio) e, mesmo assim, fala primeiro com a loja: foi ela que contratou a transportadora.
+Quando o tracking não atualiza há dias, normalmente a encomenda não parou: as transportadoras só registam leituras nos centros operacionais e nas fronteiras, não em viagem, em voos, na alfândega ou ao fim de semana. Antes de reclamares, compara com o prazo da transportadora — os [CTT](carrier:ctt) indicam cerca de 3 dias úteis para uma Encomenda Postal no continente e a [InPost](carrier:inpost) aceita reclamação por atraso passados mais de 5 dias desde a notificação de envio — e contacta primeiro a loja, que contratou o envio e responde até à entrega.
 
 ## Porque é que o tracking da minha encomenda não atualiza?
 
@@ -18,7 +18,7 @@ O seguimento mostra leituras, não movimento, e uma encomenda só é lida em cer
 - **Ilhas, mau tempo e épocas altas.** Para os Açores e a Madeira, os CTT avisam que os prazos podem alargar-se por limitações de transporte. Na Alemanha, a DHL aponta o mau tempo, o trânsito, os acidentes e as doenças como causas de atraso, e avisa que antes do [Natal](guide:christmas-posting-dates) uma encomenda pode demorar mais.
 - **Uma etiqueta que as máquinas não leem.** A DHL aponta códigos postais mal escritos, números de porta em falta, letra difícil de ler, etiquetas descoladas e embalagens danificadas. A encomenda pode ir parar ao sítio errado ou ser triada à mão, com vários dias de atraso.
 
-## Quanto tempo pode uma encomenda ficar parada?
+## Quanto tempo é normal uma encomenda ficar sem atualizações?
 
 Nenhuma transportadora dá um número único para o tempo que o seguimento pode ficar calado. Antes da data de entrega prevista, os silêncios são normais e costumam aparecer nos mesmos pontos do percurso:
 
@@ -91,7 +91,7 @@ O que fazer, por esta ordem:
 - Atenção ao prazo da plataforma | Abre um caso no eBay ou na Vinted antes de o prazo acabar.
 :::
 
-## Encomenda atrasada: quando reclamar na Amazon, no eBay ou na Vinted?
+## Quando abrir reclamação na Amazon, eBay, Vinted ou Etsy se a encomenda não chega?
 
 Uma plataforma pode devolver-te o dinheiro, mas só dentro do prazo dela:
 
@@ -116,7 +116,7 @@ Dentro de Portugal continental, uma semana é lenta: os CTT indicam cerca de 3 d
 
 Não, e [um serviço de seguimento](guide:universal-tracker) também não: só mostra o que a transportadora publica. O [Peek](/) verifica o seguimento até de 10 em 10 minutos, e até de 2 em 2 minutos quando a encomenda sai para entrega, nas transportadoras que lê diretamente, ou de 5 em 5 minutos quando a verificação tem de abrir um navegador (nesse dia, a partir das 6h00, hora local, ou, se a transportadora der uma janela, a partir de meia hora antes de ela começar, e enquanto for o próprio seguimento da transportadora a responder), e pode enviar-te uma notificação quando aparece uma leitura nova, por isso podes deixar de atualizar a página. Através de serviços de seguimento como o 17TRACK, verifica de hora a hora, de 3 em 3 horas quando passa um dia sem leituras novas e até de 15 em 15 minutos no dia da entrega. Algumas transportadoras fixam um intervalo maior (de hora a hora a GLS na Alemanha, na Áustria, na Suíça, em França, nos Países Baixos e na Polónia, a DHL eCommerce na Polónia, a Royal Mail, a Poste Italiane, a China Post e a Morning Global; de 30 em 30 minutos a PostNL, a USPS, a GOFO nos Estados Unidos, a Cainiao, a J&T Express no Brasil e a Onlog Express). Quando outra transportadora fica com a entrega, o Peek segue o ritmo da que entrega a encomenda. Quando a última leitura tem mais de dois dias (12 horas se a encomenda ainda estiver só com a etiqueta criada ou aceite) e a adicionaste há mais tempo do que isso, o Peek passa a verificá-la de hora a hora, até aparecer uma leitura nova.
 
-### O meu número de seguimento não funciona
+### Porque é que o meu número de seguimento não funciona ou não dá resultados?
 
 A encomenda pode ainda não ter sido lida, o número pode ser de outra transportadora ou ter um carácter errado. [Vê de que transportadora é](guide:tracking-number-formats) ou [encontra o número certo](guide:find-tracking-number). Uma encomenda sem leituras cuja transportadora ainda não registou o número, ou não pôde ser contactada, não mostra um erro, mas «À espera de DPD Portugal» (aqui com a DPD Portugal) e, se não foi possível contactá-la, na página da encomenda, «Ainda não foi possível contactar DPD Portugal. O Peek continua a tentar.» Se ao fim de dois dias a transportadora ainda não reconhecer o número e nenhuma outra fonte responder por ele, o Peek mostra «Ao fim de dois dias, a transportadora ainda não reconhece este número. Verifica-o, escolhe outra transportadora ou elimina a encomenda.» e passa a verificá-la uma vez por dia, e uma vez por semana quando já tiver passado uma semana desde que a adicionaste. Com muitas transportadoras, o Peek percebe pela resposta se o envio já está registado, mas ainda sem nenhuma leitura. Nesse caso, a transportadora conhece o número: o Peek continua a verificar e mostra «À espera de» seguido do nome da transportadora, sem te pedir que confirmes o número.
 

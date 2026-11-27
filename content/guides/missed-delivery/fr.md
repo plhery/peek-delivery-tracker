@@ -1,15 +1,15 @@
 ---
 title: Avis de passage : que faire et comment retirer ton colis
-description: Un avis de passage dans ta boîte ? Ce qu'il veut dire, comment reprogrammer la livraison, quand retirer le colis, avec quelle pièce d'identité, et à qui te plaindre.
+description: Avis de passage pour un colis ou une lettre recommandée ? Comment reprogrammer la livraison, prolonger le délai et le retirer chez La Poste, bpost ou en Suisse.
 slug: avis-de-passage-que-faire
 picture: Une porte d'entrée avec un avis glissé dessous, une camionnette déjà loin, et Pip qui arrive essoufflé, un instant trop tard.
 published: 2026-10-14
-updated: 2026-10-28
+updated: 2026-11-27
 ---
 
-Un avis de passage, papier, SMS ou e-mail, te dit où se trouve ton colis maintenant et jusqu'à quand il t'attend. Selon le transporteur, tu peux choisir une nouvelle livraison sur son site ou son app, ou aller chercher le colis avec l'avis et parfois une pièce d'identité, presque jamais le jour même. bpost ne repasse pas le jour même, et La Poste suisse te laisse demander une deuxième distribution.
+Un avis de passage — papier, SMS ou e-mail — indique où attend ton colis ou ta lettre recommandée et jusqu'à quelle date le retirer. Selon le transporteur (La Poste, Colis Privé, bpost ou La Poste suisse), tu peux reprogrammer une nouvelle livraison en ligne, prolonger le délai de retrait en Suisse ou aller chercher l'envoi au point indiqué dès sa mise à disposition, presque jamais le jour même. Garde l'avis : il sert à reprogrammer et à retirer l'envoi, avec une pièce d'identité pour un recommandé ou un envoi Signature.
 
-## Que faire après un avis de passage ?
+## Que faire après un avis de passage pour un colis ou une lettre recommandée ?
 
 :::steps
 - Lis l'avis | Où est le colis, le numéro à donner, à partir de quand le retirer et le dernier jour.
@@ -29,7 +29,7 @@ Ce que laisse chaque transporteur, et ce qui se passe ensuite :
 
 Chez [Chronopost](carrier:chronopost), un passage manqué peut apparaître dans le suivi sous la forme « Echec de livraison suite à l'absence du destinataire. »
 
-## Qu'est-ce qu'une carte avis de passage ?
+## À quoi sert l'avis de passage (ou invitation à retirer en Suisse) ?
 
 C'est la preuve que le livreur est venu et n'a pas pu te remettre le colis. Garde l'avis : c'est avec lui que tu reprogrammes ou que tu retires le colis.
 
@@ -89,7 +89,7 @@ Note la date et l'heure, garde la vidéo d'une sonnette connectée si tu en as u
 
 Le suivi indique « livré » et tu n'as rien ? Lis plutôt [colis livré mais non reçu](guide:delivered-not-received).
 
-## Combien de temps après un avis de passage ?
+## Combien de temps garder un colis après un avis de passage, et peut-on prolonger le délai ?
 
 En général une à deux semaines au bureau de poste ou au point de retrait, quelques jours en consigne. Le dernier jour est sur ton avis :
 

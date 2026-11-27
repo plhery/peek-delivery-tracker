@@ -1,12 +1,12 @@
 ---
 title: Poczta Polska tracking: numbers, statuses and pickups
-description: Track a Poczta Polska or Pocztex parcel in English: the number shapes, what each status means, notices, pickup points, lockers, customs and contacts.
+description: Track Poczta Polska (Poland Post) and Pocztex parcels in English on eMonitoring: PX and PL numbers, statuses, 7- or 14-day pickups, lockers, customs and phone.
 slug: poczta-polska-tracking
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Poczta Polska is Poland's state-owned postal company, and Pocztex is its courier service. Track a parcel or registered letter on Poczta Polska's eMonitoring page, which has an English version, or paste the number in the box above. The number is the one on the sender's posting confirmation, so the shop that sent it has it, and Poczta Polska's own SMS and notices repeat it.
+Poczta Polska (Poland Post) is Poland's state-owned postal operator, and Pocztex is its domestic courier service. Track a parcel, Pocztex shipment or registered letter in English on Poczta Polska's eMonitoring page (emonitoring.poczta-polska.pl/?lang=en), or paste your PX, 19/20-digit or PL number in the box above. The tracking number appears on the sender's posting confirmation, the shop's dispatch email and Poczta Polska's SMS or notice messages.
 
 ## Poczta Polska tracking number and where to find it
 
@@ -99,21 +99,25 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ## Questions about Poczta Polska tracking
 
-### What is Pocztex?
+### How do I track Poland Post (Poczta Polska) in English?
 
-Pocztex is Poczta Polska's courier service, with its own site, pocztex.pl, and the Pocztex Mobile app. Its parcels use the same eMonitoring tracking.
+Use Poczta Polska's eMonitoring page in English (emonitoring.poczta-polska.pl/?lang=en) or paste your tracking number in the box above. The English eMonitoring interface covers both postal shipments and Pocztex courier parcels.
 
-### Can I track Poczta Polska in English?
+### What is the difference between Poczta Polska and Pocztex?
 
-Yes. eMonitoring opens in Polish but has an English version.
+Poczta Polska is Poland's state-owned postal company, while Pocztex is its courier service with its own site, pocztex.pl, and the Pocztex Mobile app. Both use the same eMonitoring tracking system.
 
-### How long does Pocztex take to deliver?
+### How long does Poczta Polska or Pocztex hold a parcel for pickup?
 
-Poczta Polska guarantees Pocztex Kurier delivery by the fifth working day after posting, or the seventh for 2XL and non-standard parcels. Working days are Monday to Friday, except public holidays.
+A missed Pocztex courier parcel waits 7 days at the post office; Pocztex PUNKT parcels wait 7 days at a post office or 3 days at a partner shop, and AUTOMAT lockers hold them for 72 hours. Registered letters and postal parcels are held for 14 days from the first notice (awizo).
 
-### Can I redirect a Poczta Polska parcel?
+### How long does Pocztex take to deliver, and can I redirect it?
 
-Not as the recipient. Poczta Polska's terms leave changes of address or recipient to the sender, and parcels sent to a Pocztex point or locker can't be moved to another one.
+Poczta Polska guarantees Pocztex Kurier delivery by the fifth working day after posting, or the seventh for 2XL and non-standard parcels (Monday to Friday, excluding public holidays). Recipients can't redirect a parcel: Poczta Polska's terms leave address changes to the sender, and Pocztex point or locker parcels can't be moved to another location.
+
+### How do I contact Poczta Polska or Pocztex about a parcel?
+
+Call the Poczta Polska hotline on +48 438 420 600 (Monday to Friday 8:00 to 20:00) or email kontakt@poczta-polska.pl for tracking questions. For Pocztex, call 804 104 104 from Polish landlines or +48 43 842 0 842 from mobiles and abroad.
 
 :::sources
 - [Poczta Polska: Track your shipment](https://www.poczta-polska.pl/en/sledzenie-przesylek/) – number format, scope, collection points, foreign operators

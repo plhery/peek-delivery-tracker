@@ -1,13 +1,13 @@
 ---
 title: Paket nicht abgeholt: Was passiert dann?
-description: Paket nicht abgeholt? Wie lange es in Filiale, Paketshop oder Packstation liegt, ob du die Abholfrist verlängern kannst und wann du dein Geld zurückbekommst.
+description: Paket nicht abgeholt? Abholfristen bei DHL, Hermes, DPD und Post (3 bis 15 Tage), ob du verlängern kannst und wie du beim Shop dein Geld zurückbekommst.
 slug: paket-nicht-abgeholt
 picture: Eine Packstation mit einer offenen Tür, in deren Fach Pip wartet, und ein Kalender mit den letzten zwei Tagen eingekreist.
 published: 2026-10-14
-updated: 2026-11-14
+updated: 2026-11-27
 ---
 
-Holt niemand ein Paket aus der Filiale, dem Paketshop oder der Packstation ab, geht es nach Ablauf der Abholfrist an den Absender zurück. Bei DHL und Hermes in Deutschland sind das meist 7 Werktage, bei der Österreichischen Post läuft die Frist bis zum dritten Montag nach der Benachrichtigung, bei der Schweizerischen Post in der Regel 7 Tage, die du kostenlos verlängern kannst. Es zählt das Datum auf deiner Benachrichtigung, in der SMS oder E-Mail. Ist es vorbei, frag den Shop, ob er dir das Geld erstattet oder das Paket noch einmal schickt.
+Holst du ein Paket nicht rechtzeitig aus Filiale, Paketshop oder Packstation ab, geht es nach der Abholfrist zurück an den Absender: bei DHL und Hermes meist nach 7 Werktagen, an Automaten wie DPD Paketstation, Hermes Box oder Amazon Locker nach 3 Tagen, bei der Österreichischen Post bis zum dritten Montag, bei der Schweizerischen Post nach 7 Tagen (kostenlos verlängerbar). Es zählt das Datum auf deiner Benachrichtigung; danach fragst du den Shop nach Erstattung oder Neuversand.
 
 Kein Abholcode gekommen oder die Packstation war voll? Das steht unter [Packstation und Paketautomat](guide:parcel-lockers).
 
@@ -29,7 +29,7 @@ Es geht zurück an den Absender, nicht noch einmal zu dir.
 
 Ob du die Ware doch noch bekommst, klärst du mit dem Shop, nicht mit dem Paketdienst. Ist das Paket schon unterwegs zurück, erklärt [Paket zurück an Absender](guide:returned-to-sender) den Rückweg und was du den Shop fragen solltest.
 
-## Wie lange liegt ein Paket in Filiale, Paketshop oder Packstation?
+## Wie lange liegt ein Paket bei DHL, Hermes, DPD und der Post?
 
 Meist rund eine Woche, an manchen Automaten nur 3 Tage. Die Abholfristen der großen Paketdienste:
 
@@ -63,7 +63,7 @@ Steht auf der DHL-Karte eine andere Filiale als in der Sendungsverfolgung, zähl
 
 In der Sendungsverfolgung steht dann zum Beispiel `Die Sendung wird zur Abholung in die Filiale … gebracht.` (DHL) oder `Sendung abholbereit` (Österreichische Post). Was die einzelnen Status bedeuten, erklärt [Sendungsstatus verstehen](guide:tracking-statuses). Die Benachrichtigungskarte brauchst du nicht immer: Im DPD Paketshop reicht dein amtlicher Lichtbildausweis, und auch bei der Österreichischen Post holst du eine Sendung ohne gelben Zettel ab, wenn du einen gültigen mitbringst. Ab wann das geht, zeigt dein Post Account unter „Meine Sendungen“. Was auf der Karte steht und welchen Ausweis du brauchst, erklärt [Paket verpasst](guide:missed-delivery). Und wenn noch Zollgebühren offen sind, lies [Paket beim Zoll](guide:customs).
 
-## Abholfrist verlängern: Geht das?
+## Kann ich die Abholfrist für mein Paket verlängern?
 
 Selten. Hermes schreibt: „Eine Verlängerung der Frist ist leider nicht möglich.“ Auch an der DHL Packstation gibt es keine längere Lagerzeit, und in eine Filiale umleiten kannst du das Paket von dort nicht. DPD, GLS und die Österreichische Post erwähnen auf ihren Seiten keine Verlängerung.
 
@@ -100,7 +100,7 @@ Was bei Käufen über eBay oder Vinted gilt, steht in [Paket zurück an Absender
 
 ## Kurze Antworten
 
-### Gibt mir eine Erinnerung mehr Zeit?
+### Verlängert eine Abholerinnerung die Lagerfrist?
 
 Nein. DHL erinnert dich an der Packstation 48 Stunden nach der Ankunft und noch einmal 2 Tage vor Fristende. Die Frist bleibt dieselbe.
 
@@ -116,7 +116,7 @@ Hast du widerrufen, darf dir der Shop in Deutschland und Österreich nur die dir
 
 Hier, weil es niemand rechtzeitig abgeholt hat. Die anderen Gründe stehen in [Paket zurück an Absender](guide:returned-to-sender).
 
-### Packstation zeigt „zugestellt“, aber das Paket ist nicht da
+### Warum zeigt die Packstation „zugestellt“, obwohl das Paket noch nicht abgeholt wurde?
 
 Ein Paket in der Packstation oder im Paketshop kann für den Paketdienst schon als zugestellt gelten. Mehr dazu in [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
 

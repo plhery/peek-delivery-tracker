@@ -1,15 +1,15 @@
 ---
 title: Rastrear uma encomenda Temu: número, CTT e atrasos
-description: Porque é que o número da encomenda Temu não serve para seguir o volume, quem a entrega em Portugal e como o Peek a segue quando muda de transportadora.
+description: Rastrear encomenda Temu em Portugal: porque o código PO não serve, onde seguir com o número dos CTT, porque demora a atualizar após o armazém e taxas na UE.
 slug: rastrear-encomenda-temu
 picture: Uma pilha de pequenas encomendas a sair do porão de um avião, uma carrinha e o Pip a contá-las.
 published: 2026-10-17
-updated: 2026-11-07
+updated: 2026-11-27
 ---
 
-O número da encomenda Temu não serve para seguir o volume: precisas do número de seguimento da transportadora. Cola-o no [Peek](/), que descobre a transportadora pela forma do número e, se a primeira transportadora indicar quem fica com o volume em Portugal, passa para a nova. Se colares o número da encomenda, o Peek avisa-te de que parece um número de encomenda da Temu, e não de seguimento.
+Para rastrear uma encomenda Temu em Portugal precisas do número de seguimento da transportadora (nos CTT, parceiro exclusivo da Temu em Portugal), e não do número de encomenda começado por «PO» da tua conta Temu. Cola esse código no [Peek](/), que identifica a transportadora pela forma do número e acompanha a passagem para a transportadora local em Portugal. Se colares o número de encomenda começado por «PO», o Peek avisa-te de que é um número de pedido da Temu e não de seguimento.
 
-## O número da encomenda Temu é um número de seguimento?
+## Porque é que o número de encomenda Temu (PO) não funciona no seguimento?
 
 Não. O número da encomenda Temu começa por «PO», seguido de 20 algarismos (`PO-000-00000000000000000`), mas a transportadora não o conhece. O Peek reconhece-o por essa forma e põe-no de lado, com um aviso de que parece um número de encomenda da Temu.
 
@@ -22,7 +22,7 @@ Se colares uma mensagem inteira com os dois números, o Peek fica com o de segui
 
 Um número de três letras, um `U` e sete algarismos, como `TEMU1234565` (inventado), também não é um número de seguimento: é o de um contentor marítimo, e nenhuma transportadora segue uma encomenda por ele. O `TEMU` do início não tem nada a ver com a loja: no registo de códigos de proprietários de contentores mantido pelo Bureau International des Containers (BIC), `TEMU` é da Textainer, uma empresa de aluguer de contentores. Se adicionares um e nenhuma transportadora responder, o Peek diz «Isto parece o número de um contentor marítimo. O número de seguimento está no e-mail de envio ou na página do pedido.» e propõe «Escolher a transportadora».
 
-## Que transportadora entrega as encomendas da Temu em Portugal?
+## Quem entrega as encomendas da Temu em Portugal (CTT, Locky e ilhas)?
 
 Segundo os próprios [CTT](carrier:ctt), são eles: em 2023, anunciaram que passavam a ser o «parceiro exclusivo das entregas da Temu no mercado português», e em 2025 alargaram as entregas aos Açores e à Madeira, em toda a rede CTT, incluindo mais de 1000 cacifos Locky. O número de seguimento também ajuda: o campo acima indica a transportadora para a qual aponta a sua forma, ou as poucas a que pode pertencer.
 
@@ -30,7 +30,7 @@ A Temu explica que muitas encomendas saem de armazéns no estrangeiro: o seguime
 
 Sobre a alfândega: desde 1 de julho de 2026, as compras até 150 € vindas de fora da UE pagam 3 € de direitos por tipo de produto, e a Comissão Europeia indica que, desde 1 de novembro de 2026, se junta uma taxa de tratamento da União de 2 € por tipo de produto, que quem declara a encomenda te pode cobrar. Se a loja não cobrou tudo na compra, pagas o resto no Portal de Desalfandegamento dos CTT. O que sai de um armazém na UE não tem formalidades aduaneiras. Valores e prazos: [encomenda retida na alfândega](guide:customs).
 
-## Encomenda Temu parada, atrasada ou que não chegou
+## Porque é que a encomenda Temu está parada depois de sair do armazém?
 
 Uma encomenda sem novidades durante dias é normal nesta rota. Porque fica calada durante o voo e na alfândega, e porque às vezes muda de número: [rastrear encomendas da China](guide:tracking-from-china). Quantos dias sem novidades são normais, quando é que uma encomenda é dada como perdida e se deves contactar a loja ou a transportadora: [encomenda parada](guide:tracking-not-updating).
 

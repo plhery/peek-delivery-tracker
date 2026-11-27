@@ -19602,12 +19602,28 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#4d148c"
     },
     {
+      "id": "mtscn",
+      "catalog": "mtscn",
+      "slug": "meiteshun-otslezhivanie",
+      "title": "Отслеживание Meiteshun (MTSCN): трек-номер AMTS…FS и статусы",
+      "name": "Meiteshun Logistics",
+      "color": "#f89f3b"
+    },
+    {
       "id": "topyou",
       "catalog": "topyou",
       "slug": "topyou-otslezhivanie-posylki",
       "title": "Отслеживание посылки TopYou: трек-номер TYZR и статусы",
       "name": "TopYou",
       "color": "#045cd7"
+    },
+    {
+      "id": "jrt",
+      "catalog": "jrt",
+      "slug": "jrt-otslezhivanie",
+      "title": "Отслеживание JRT: трек-номер JRT…MM, статусы и доставка",
+      "name": "JRT",
+      "color": "#023053"
     },
     {
       "id": "gzyl",
@@ -22062,6 +22078,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef7d00"
     },
     {
+      "id": "jrt",
+      "catalog": "jrt",
+      "slug": "jrt-pakket-volgen",
+      "title": "JRT pakket volgen: JRT…MM-nummer, scans en lokale bezorging",
+      "name": "JRT",
+      "color": "#023053"
+    },
+    {
       "id": "wanbexpress",
       "catalog": "wanbexpress",
       "slug": "wanbexpress-pakket-volgen",
@@ -22244,12 +22268,28 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffb202"
     },
     {
+      "id": "mtscn",
+      "catalog": "mtscn",
+      "slug": "meiteshun-sporing",
+      "title": "Meiteshun-sporing (MTSCN): AMTS…FS-nummer og statuser",
+      "name": "Meiteshun Logistics",
+      "color": "#f89f3b"
+    },
+    {
       "id": "jrt",
       "catalog": "jrt",
       "slug": "jrt-sporing",
       "title": "JRT-sporing: JRT…MM-nummer, statuser og lokal levering",
       "name": "JRT",
       "color": "#023053"
+    },
+    {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "xinghe-freight-sporing",
+      "title": "Xinghe Freight-sporing: GZXH…YQ-nummer, statuser og hjelp",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
     }
   ],
   "fi": [
@@ -22690,6 +22730,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Praćenje GZYL pošiljke iz Kine: broj YL…YQ i statusi",
       "name": "GZYL",
       "color": "#4e79e1"
+    },
+    {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "xinghe-freight-pracenje-posiljke",
+      "title": "Xinghe Freight praćenje pošiljke: GZXH…YQ broj i statusi",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
     }
   ],
   "sl": [
@@ -22860,6 +22908,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Відстеження Укрпошта — трек-номери, статуси та митниця",
       "name": "Ukrposhta",
       "color": "#ffbe0c"
+    },
+    {
+      "id": "jrt",
+      "catalog": "jrt",
+      "slug": "jrt-vidstezhennia",
+      "title": "Відстеження JRT: номер JRT…MM, статуси та місцева доставка",
+      "name": "JRT",
+      "color": "#023053"
     },
     {
       "id": "xinghe-freight",

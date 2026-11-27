@@ -1,12 +1,12 @@
 ---
 title: Russian Post tracking (Почта России): numbers and steps
-description: Track a Russian Post (Почта России) parcel: its RU and 14-digit numbers, what its steps in Russian mean, and how Peek follows it.
+description: Track a Russian Post (Почта России) parcel in English: RU and 14-digit 80 numbers, Russian status meanings, customs scans and international post hand-offs.
 slug: russian-post-tracking
 published: 2026-11-02
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Russian Post (Почта России, Pochta Rossii) is the postal service of Russia. It carries parcels sent from Russia and parcels sent to Russia. The sender or the shop gives you the tracking number: paste it in the box above. Russian Post's own website is pochta.ru, and Peek reads its tracker for you, as explained below.
+Russian Post (Почта России, Pochta Rossii, pochta.ru) is Russia's national postal service, carrying parcels both within Russia and internationally to and from abroad. Paste your `RU` international postal code or 14-digit `80…` tracking number in the box above to read Russian Post's tracker in English and follow hand-offs with partner posts.
 
 ## Russian Post tracking number: what it looks like
 
@@ -94,21 +94,25 @@ While you have the parcel open, or on its delivery day with notifications on, an
 
 ## Questions about Russian Post tracking
 
-### What is Почта России in English?
+### What is Почта России (Pochta Rossii) in English?
 
-Russian Post. It is also written Pochta Rossii. Its website is pochta.ru.
+Russian Post. It is also written Pochta Rossii, and its website is pochta.ru.
 
 ### What does a Russian Post tracking number look like?
 
-An international one is two letters, nine digits and `RU`, such as `RR482910576RU`. Peek also links 14 digits starting with `80` to Russian Post, when the check digit is right.
+An international one is two letters, nine digits and `RU`, such as `RR482910576RU` (invented). Peek also links 14 digits starting with `80` to Russian Post when the check digit is right.
+
+### What do Russian Post statuses like Прибыло в место вручения or Выпущено таможней mean?
+
+When Peek reads Russian Post steps in Russian (for example via Qwintry), `Выпущено таможней` means released by customs ("In transit"), `Прибыло в место вручения` means arrived at the local delivery post office, `Передано почтальону` means out for delivery, and `Вручение адресату` means delivered.
 
 ### Why don't the steps in Peek match pochta.ru?
 
 Peek reads Russian Post's tracker in English, so it shows Russian Post's English words for most steps, not the Russian ones. When that tracker doesn't answer Peek, a tracking service fills in, in its own words, and it can be behind. Peek shows Russian Post's steps in Russian, as the table above has them, for a parcel it follows on Qwintry's tracker.
 
-### Can Peek track a parcel sent to Russia from another country?
+### Can Peek track parcels sent to or from Russia with another country's post?
 
-Yes. Paste the number the sender gave you. Peek follows it under the carrier that issued it, and moves it over to Russian Post only if that tracking names Russian Post as the company that delivers it.
+Yes. For an `RU` parcel leaving Russia, Peek also checks the destination country's national post (such as USPS, Royal Mail, An Post, Canada Post or Australia Post) and follows it there once that post logs a scan at least as recent as Russian Post's latest. For a parcel sent to Russia, Peek follows the sending carrier and switches to Russian Post when that tracking names Russian Post.
 
 :::sources
 - [Universal Parcel Scraper: Russian Post](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/russian-post) – names, the 80 and RU number shapes with their check digits and weak matches, the tracker Peek reads and its English steps, places, destination and stages, help page

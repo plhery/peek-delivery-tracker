@@ -1,15 +1,15 @@
 ---
 title: Back Market order tracking: delivery, returns and problems
-description: Back Market's sellers ship their own parcels. Where your tracking is, what to do when an order is late, missing or damaged, and how returns and the warranty work.
+description: Back Market order tracking: where to find your tracking number, UK and US carriers, missing or damaged parcels, 30-day returns and 12-month seller warranty.
 slug: back-market-order-tracking
 picture: A refurbished phone and a laptop with a green tag beside a delivery van, and Pip standing on the laptop.
 published: 2026-10-27
-updated: 2026-10-27
+updated: 2026-11-27
 ---
 
-Back Market is a marketplace for refurbished phones, laptops and other electronics. The sellers, professional refurbishers, pack and ship each order themselves, with a carrier they choose. Every order comes with a tracking number, in your Back Market account under "Orders" and linked from the shipping email. If a parcel is late, missing or damaged, ask for help on the order: the request goes to the seller, and Back Market can step in when the seller doesn't sort it out. You get 30 days to return an item and a warranty of at least 12 months.
+Back Market is a marketplace where professional refurbishers pack and ship each order themselves — usually within 1 business day via Royal Mail, DPD, DHL, USPS, UPS or FedEx depending on your country. Your tracking number arrives within 24 hours in your shipping email and under "Orders" in your account. If a parcel is late, missing or damaged, select "Get help" on the order to contact the seller (and Back Market can step in if needed); every item includes 30-day returns and at least a 12-month seller warranty.
 
-## Where does Back Market sell?
+## Which countries does Back Market ship to?
 
 Back Market's country list covers the UK, the US, Australia, Japan and 13 European countries, Ireland among them. Canada isn't on it.
 
@@ -17,7 +17,7 @@ Sellers generally ship only within the country of the site you order from, so or
 
 Back Market itself sells nothing: its terms call it an intermediary, never the seller. Each product page shows the seller, their location and where the shipment comes from. It has no stores or collection points.
 
-## Who delivers my Back Market order?
+## Which carrier delivers my Back Market order?
 
 The seller picks the carrier. You can't choose one, and Back Market doesn't guarantee which it will be. Its help pages name these:
 
@@ -41,7 +41,7 @@ Back Market's help promises free standard shipping on every item, but its UK ter
 - home | You | A signature in most cases
 :::
 
-## Where is my Back Market tracking number?
+## How do I find my Back Market tracking number?
 
 Sellers have to give a tracking number and their carrier's name, and you get the number within 24 hours of ordering. Look here:
 
@@ -66,7 +66,7 @@ Usually, it's one of these:
 
 When waiting is still normal: [tracking not updating](guide:tracking-not-updating) and [delivery times](guide:delivery-times).
 
-## Back Market parcel damaged, missing or marked delivered: what to do
+## What if my Back Market parcel is missing, damaged or marked delivered?
 
 Check the parcel and what's inside before the delivery person leaves, take photos at each step and write any problem on the delivery note. Then:
 
@@ -80,7 +80,7 @@ Check the parcel and what's inside before the delivery person leaves, take photo
 
 More: [parcel marked delivered but not received](guide:delivered-not-received), [lost parcel](guide:lost-parcel) and [damaged parcel](guide:damaged-parcel).
 
-## Returning a Back Market order
+## How do I return a Back Market order and get a refund?
 
 You have 30 days from receiving an item to return it, even if you've just changed your mind. For purchases made between Black Friday and 31 December, the period runs to 31 January.
 

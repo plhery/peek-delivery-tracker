@@ -1,15 +1,15 @@
 ---
 title: Suivi de commande Back Market : livraison, retours, SAV
-description: Sur Back Market, les vendeurs expédient eux-mêmes. Où est ton suivi, que faire si un colis tarde, se perd ou arrive abîmé, et comment marchent retours et garantie.
+description: Suivi commande Back Market : où trouver le numéro de suivi, quel transporteur livre, que faire en cas de retard ou de colis abîmé, retours 30 jours et SAV.
 slug: suivi-commande-back-market
 picture: Un smartphone reconditionné et un ordinateur portable avec une étiquette verte à côté d'une camionnette de livraison, et Pip debout sur l'ordinateur portable.
 published: 2026-10-27
-updated: 2026-10-27
+updated: 2026-11-27
 ---
 
-Back Market est une marketplace de smartphones, d'ordinateurs portables et d'autres appareils reconditionnés. Les vendeurs, des reconditionneurs professionnels, préparent et expédient eux-mêmes chaque commande, avec le transporteur de leur choix. Chaque commande a un numéro de suivi, dans ton compte Back Market sous « Mes commandes » et via l'e-mail d'expédition. Si un colis tarde, disparaît ou arrive abîmé, clique sur « Obtenir de l'aide » dans la commande : la demande part chez le vendeur, et Back Market peut intervenir s'il ne règle pas le problème. Tu as 30 jours pour un retour et une garantie commerciale d'au moins 12 mois.
+Sur Back Market, chaque commande est préparée et expédiée directement par un reconditionneur professionnel (sous 1 jour ouvré, avec Chronopost, Colissimo, DHL, FedEx ou UPS selon le pays). Tu reçois le numéro de suivi sous 24 heures dans « Mes commandes » et dans l'e-mail d'expédition. Si un colis tarde, disparaît ou arrive abîmé, clique sur « Obtenir de l'aide » sur la commande pour contacter le vendeur (Back Market peut intervenir si besoin) ; tu as 30 jours pour un retour et une garantie commerciale d'au moins 12 mois.
 
-## Où Back Market vend-il ?
+## Dans quels pays Back Market livre-t-il ?
 
 La liste des pays de Back Market compte 14 pays européens, dont la France et la Belgique, plus les États-Unis, l'Australie et certains pays d'Asie. La Suisse n'y figure pas.
 
@@ -17,7 +17,7 @@ Les vendeurs livrent généralement uniquement dans le pays du site sur lequel t
 
 Back Market ne vend rien lui-même : ses CGV en font un intermédiaire, pas le vendeur des produits. La fiche produit montre le vendeur, sa localisation et d'où part l'envoi. Back Market n'a ni magasins ni points relais.
 
-## Qui livre ma commande Back Market ?
+## Quel transporteur livre ma commande Back Market ?
 
 C'est le vendeur qui choisit le transporteur. Tu ne peux pas en choisir un, et Back Market ne peut pas garantir lequel livrera. Ses pages d'aide nomment ceux-ci :
 
@@ -39,7 +39,7 @@ L'aide de Back Market dit que la livraison standard est toujours offerte, mais s
 - home | Toi | Le plus souvent contre signature
 :::
 
-## Où trouver le suivi de ma commande Back Market ?
+## Où trouver mon numéro de suivi Back Market ?
 
 Les vendeurs doivent fournir un numéro de suivi et le nom de leur transporteur, et tu reçois le numéro dans les 24 heures qui suivent ta commande. Regarde ici :
 
@@ -64,7 +64,7 @@ Quand rien ne bouge, c'est souvent l'une de ces raisons :
 
 Quand attendre reste normal : [le suivi ne bouge pas](guide:tracking-not-updating) et [délais de livraison](guide:delivery-times).
 
-## Colis Back Market abîmé, perdu ou marqué livré : que faire ?
+## Que faire si mon colis Back Market est perdu, abîmé ou marqué livré ?
 
 Vérifie le colis et son contenu avant le départ du livreur, à domicile ou en point relais, et prends des photos à chaque étape de l'ouverture. Un colis visiblement abîmé, tu peux le refuser à la livraison, puis prévenir le service client. Si tu constates un problème, décris-le sur le bon de livraison. Ensuite :
 
@@ -78,7 +78,7 @@ Vérifie le colis et son contenu avant le départ du livreur, à domicile ou en 
 
 Plus d'infos : [colis marqué livré mais pas reçu](guide:delivered-not-received), [colis perdu](guide:lost-parcel) et [colis endommagé](guide:damaged-parcel).
 
-## Retourner une commande Back Market
+## Comment retourner une commande Back Market et obtenir un remboursement ?
 
 Tu as 30 jours à partir de la réception, même si tu changes simplement d'avis ; pour plusieurs produits livrés séparément, selon les CGV, à partir du dernier. Pour les commandes passées entre le Black Friday et le 31 décembre, le délai court jusqu'au 31 janvier. S'il finit un samedi, un dimanche ou un jour férié, il passe au jour ouvré suivant.
 

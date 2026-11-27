@@ -1,15 +1,15 @@
 ---
 title: Seguimiento de pedidos Zara: envío, entrega y problemas
-description: Dónde seguir tu pedido de Zara en España, qué significa cada estado, cuánto cuesta el envío, cómo devolverlo y qué hacer si no llega o consta entregado.
+description: Seguimiento pedido Zara en España: cómo verlo en tu cuenta o como invitado, plazos y precios de envío, devolución gratis en 30 días y teléfono de atención.
 slug: seguimiento-pedido-zara
 picture: Una bolsa de papel con asas de cuerda junto a una furgoneta de reparto, y Pip asomándose desde dentro de la bolsa.
 published: 2026-10-25
-updated: 2026-10-25
+updated: 2026-11-27
 ---
 
-Sigues tu pedido de Zara en tu cuenta, en el apartado «Compras», o, si compraste como invitado, en el enlace de cualquiera de sus correos. Su ayuda no dice qué transportista lleva el pedido: si algo falla, contacta con Zara, que lo revisa con la empresa de transporte. Tienes 30 días desde el envío para devolverlo, gratis en tienda o en un punto de entrega.
+Para seguir un pedido de Zara en España, entra en tu cuenta en el apartado «Compras» o abre el enlace de cualquiera de los correos de Zara si compraste como invitado. Zara no indica de antemano qué transportista lleva cada envío: si se retrasa o consta como `Entregado a cliente` sin haber llegado, contacta con Zara (chat, WhatsApp o 900 814 900) para que lo revise con la empresa de transporte. Además tienes 30 días desde el envío para devolverlo gratis en tienda o en un punto de entrega.
 
-## ¿Quién entrega mi pedido de Zara?
+## ¿Qué transportista entrega mi pedido de Zara en España?
 
 Zara (zara.com/es) también envía a Baleares, Ceuta y Melilla, con plazos más largos. Canarias tiene su propia tienda online, Zara España - Canarias (zara.com/ic/es): la dirección de envío tiene que ser del mismo mercado en el que compras.
 
@@ -33,7 +33,7 @@ A veces, según el stock, Zara te ofrece al pagar dividir el pedido en varias en
 - home | Tú | El estado pasa a «Entregado a cliente»
 :::
 
-## ¿Dónde está el seguimiento de mi pedido de Zara?
+## ¿Dónde ver el seguimiento y los estados de mi pedido de Zara?
 
 **En tu cuenta.** Abre el apartado «Compras» y elige el pedido. En el detalle ves el estado, la fecha estimada y, si el pedido se dividió, cada entrega.
 
@@ -74,7 +74,7 @@ La ley pide entregar en 30 días naturales como máximo, salvo que acordarais ot
 
 **Cambiar o cancelar.** El método de envío no se cambia una vez terminada la compra. Si estás registrado y elegiste envío a domicilio, puedes cambiar la dirección en el detalle del pedido, siempre que el estado lo permita. Cancelar también se hace ahí, si el estado lo permite; como invitado, desde el enlace del correo de confirmación. Los artículos no se pueden cambiar: cuando te llegue el pedido, pide un cambio o una devolución. Si ya no quieres recibirlo, contacta con Zara. Más: [cambiar la dirección de entrega](guide:change-delivery-address).
 
-## Opciones y precios de envío de Zara
+## ¿Cuánto tarda y cuánto cuesta el envío de Zara?
 
 | Envío | Plazo | Precio |
 | --- | --- | --- |
@@ -90,7 +90,7 @@ Según la hora del pedido, algunas opciones no aparecen. En la tienda online de 
 
 **En un punto de entrega.** Zara te avisa cuando el pedido está disponible en el punto. Tienes que identificarte; si va otra persona en tu lugar, necesita una autorización escrita y una copia de tu documento de identidad. Más: [lockers y puntos de recogida](guide:parcel-lockers) y [paquete no recogido](guide:uncollected-parcel).
 
-## Pedido de Zara que no llega o consta como entregado: qué hacer
+## ¿Qué hacer si mi pedido de Zara no llega o aparece entregado?
 
 Primero mira, luego avisa. Por orden:
 
@@ -104,7 +104,7 @@ Primero mira, luego avisa. Por orden:
 
 Más: [entrega fallida](guide:missed-delivery), [paquete entregado pero no recibido](guide:delivered-not-received), [paquete dañado](guide:damaged-parcel) y [paquete perdido](guide:lost-parcel).
 
-## Devolver un pedido de Zara
+## ¿Cómo devolver un pedido de Zara y cuándo llega el reembolso?
 
 Tienes 30 días desde la fecha de envío del pedido; el detalle del pedido te enseña la fecha límite. Los artículos tienen que estar en su estado original, con todas las etiquetas, y se devuelven en el mismo mercado en el que compraste.
 

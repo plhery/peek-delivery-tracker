@@ -1,12 +1,12 @@
 ---
 title: Mondial Relay suivi : statuts, Point Relais et contact
-description: Suivi Mondial Relay en France et en Belgique : le numéro à 8 chiffres, ce que veut dire chaque statut, le délai de retrait en Point Relais et qui contacter.
+description: Suivi colis Mondial Relay (France et Belgique) : numéro à 8 chiffres et code postal, sens des statuts, retrait en Point Relais ou Locker (5 jours) et contact.
 slug: mondial-relay-suivi
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Mondial Relay est un transporteur français du groupe InPost qui livre en Point Relais (des commerces de proximité), en Locker et à domicile. Pour suivre ton colis, saisis le numéro d'expédition à 8 chiffres et le code postal du destinataire sur le site de Mondial Relay, ou colle le numéro dans le champ ci-dessus.
+Mondial Relay (groupe InPost) livre en France et en Belgique en Point Relais chez des commerçants de proximité, en Locker et à domicile. Pour suivre ton colis, colle ton numéro d'expédition à 8 chiffres (ou le code-barres à 26 chiffres) dans le champ ci-dessus, ou saisis le numéro et le code postal du destinataire sur le site de Mondial Relay.
 
 ## Numéro de suivi Mondial Relay : où le trouver
 
@@ -83,11 +83,11 @@ Peek affiche les libellés français de Mondial Relay tels quels, le site logist
 
 ## Questions sur le suivi Mondial Relay
 
-### Combien de temps pour recevoir un colis Mondial Relay ?
+### Combien de temps met un colis Mondial Relay à arriver ?
 
 En Belgique, en moyenne 3 jours ouvrés après la prise en charge pour une livraison en Point Relais, selon l'aide de Mondial Relay ; sa page de suivi parle de 3 à 5 jours.
 
-### Mondial Relay livre-t-il le samedi ?
+### Mondial Relay livre-t-il le samedi en Point Relais ?
 
 Oui : en Belgique, les livreurs passent dans les Points Relais du mardi au samedi, mais ni le dimanche, ni le lundi, ni les jours fériés.
 
@@ -95,13 +95,13 @@ Oui : en Belgique, les livreurs passent dans les Points Relais du mardi au samed
 
 Pas sur le site belge de Mondial Relay, qui demande le numéro et le code postal de destination. Sur Peek, seul le numéro à 8 chiffres en a besoin : les formes à 10, 12 ou 14 chiffres et le code-barres de 26 chiffres se suivent sans.
 
-### Que devient un colis Mondial Relay non récupéré ?
+### Combien de jours reste un colis Mondial Relay en Point Relais ou Locker ?
 
-En Belgique, il repart automatiquement vers l'expéditeur après 5 jours calendaires. Envoyé par un particulier depuis un Locker ou un Point Relais, il y retourne, aux frais de Mondial Relay ; envoyé par une boutique, il revient au vendeur. Pour le recevoir quand même ou être remboursé, vois avec l'expéditeur.
+En Belgique comme en France (selon le tableau du site belge), le délai de garde est de 5 jours calendaires, dimanches et jours fériés compris, sans prolongation possible. Passé ce délai, le colis repart automatiquement vers l'expéditeur (point d'envoi ou vendeur).
 
-### Le numéro de téléphone de Mondial Relay est-il gratuit ?
+### Quel est le numéro de téléphone de Mondial Relay et est-il surtaxé ?
 
-Non, mais il n'est pas surtaxé : en Belgique, le +32 2 340 06 10 coûte le prix d'un appel local.
+En Belgique, le service client répond au +32 2 340 06 10 (appel non surtaxé, prix d'un appel local, lundi–vendredi 8 h–19 h et samedi 8 h–18 h) ou par e-mail à customerservice@mondialrelay.be. En France, passe par la page de contact du site français de Mondial Relay.
 
 :::sources
 - [Mondial Relay Belgique : Mentions légales](https://www.mondialrelay.be/fr-be/mentions-legales/) – Mondial Relay S.A.S.U., RCS Lille Métropole, Villeneuve-d'Ascq

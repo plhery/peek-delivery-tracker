@@ -15486,6 +15486,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e42229"
     },
     {
+      "id": "elta",
+      "catalog": "elta",
+      "slug": "rastreamento-elta-hellenic-post",
+      "title": "Rastreamento ELTA Hellenic Post: status, PostBox e contato",
+      "name": "ELTA Hellenic Post",
+      "color": "#0063a9"
+    },
+    {
       "id": "geniki-taxydromiki",
       "catalog": "geniki-taxydromiki",
       "slug": "rastreamento-geniki-taxydromiki",
@@ -19666,6 +19674,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f89f3b"
     },
     {
+      "id": "speedaf",
+      "catalog": "speedaf",
+      "slug": "speedaf-otslezhivanie",
+      "title": "Отслеживание Speedaf Express: номера NG/KE/PK и контакты",
+      "name": "Speedaf",
+      "color": "#ff8300"
+    },
+    {
       "id": "topyou",
       "catalog": "topyou",
       "slug": "topyou-otslezhivanie-posylki",
@@ -22264,6 +22280,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#045cd7"
     },
     {
+      "id": "thhy",
+      "catalog": "thhy",
+      "slug": "tianhui-hengyuan-spara-paket",
+      "title": "Tianhui Hengyuan (THHY) spårning: AT…TH-nummer & status",
+      "name": "Tianhui Hengyuan",
+      "color": "#00a2e9"
+    },
+    {
       "id": "gzyl",
       "catalog": "gzyl",
       "slug": "gzyl-spara-paket",
@@ -22544,6 +22568,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GEODIS Poland sledovanie: číslo PL, statusy a doručenie",
       "name": "GEODIS Poland",
       "color": "#3100e6"
+    },
+    {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "xinghe-freight-sledovanie-zasielky",
+      "title": "Xinghe Freight sledovanie: číslo GZXH…YQ a statusy",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
     },
     {
       "id": "sxw-express",
@@ -22914,6 +22946,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f89f3b"
     },
     {
+      "id": "wanbexpress",
+      "catalog": "wanbexpress",
+      "slug": "wanbexpress-entopismos-dematos",
+      "title": "Παρακολούθηση WanbExpress: κωδικός WNB…YQ και στάδια",
+      "name": "WanbExpress",
+      "color": "#da381b"
+    },
+    {
       "id": "gzyl",
       "catalog": "gzyl",
       "slug": "gzyl-entopismos-dematos",
@@ -23054,6 +23094,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GZYL siuntos sekimas: YL…YQ numeris, būsenos ir pagalba",
       "name": "GZYL",
       "color": "#4e79e1"
+    },
+    {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "xinghe-freight-siuntos-sekimas",
+      "title": "Xinghe Freight sekimas: GZXH…YQ numeris ir būsenos",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
     },
     {
       "id": "samus",
@@ -23254,6 +23302,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Praćenje pošiljke Pošte Srbije: statusi, rokovi i kontakt",
       "name": "Pošta Srbije",
       "color": "#fbba00"
+    },
+    {
+      "id": "elta",
+      "catalog": "elta",
+      "slug": "elta-hellenic-post-pracenje-posiljke",
+      "title": "ELTA Hellenic Post praćenje: GR brojevi, statusi i kontakt",
+      "name": "ELTA Hellenic Post",
+      "color": "#0063a9"
+    },
+    {
+      "id": "correos-chile",
+      "catalog": "correos-chile",
+      "slug": "correos-chile-pracenje-posiljke",
+      "title": "Correos de Chile praćenje pošiljke: CL broj i statusi",
+      "name": "Correos de Chile",
+      "color": "#d9232d"
     },
     {
       "id": "m-one",

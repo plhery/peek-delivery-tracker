@@ -13,6 +13,7 @@ extension Parcel {
             expectedDelivery: package.expectedDelivery,
             expectedDeliveryPassed: package.expectedDeliveryPassed,
             deliveryRoundEndsAt: package.deliveryRoundEndsAt,
+            deliveryRoundOverAt: package.deliveryRoundOverAt,
             peekAi: package.peekAi,
             lastStatusText: package.lastStatusText,
             lastSyncedAt: package.lastSyncedAt,

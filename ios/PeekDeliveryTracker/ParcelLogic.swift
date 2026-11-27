@@ -477,11 +477,20 @@ extension Parcel {
         return calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: at))
     }
 
-    /// Whether the parcel is out for delivery on a round that has not ended: a Live Activity follows only such a parcel.
-    /// One out for delivery on a day gone by, with no scan since, is not on its way any more.
+    /// When the day of the parcel's delivery round ends, as the server gives it (`deliveryRoundOverAt`): the round's end
+    /// but for a carrier whose round the server lets last days longer (China Post), whose day still ends that night.
+    /// Without it, the round's end (`deliveryRoundEnd`).
+    var deliveryRoundDayEnd: Date? {
+        guard let event = currentEvent, event.stage == .outForDelivery else { return nil }
+        return deliveryRoundOverAt.flatMap(DateParser.date) ?? deliveryRoundEnd
+    }
+
+    /// Whether the parcel is out for delivery on a round whose day has not ended (`deliveryRoundDayEnd`): the widgets put
+    /// only such a parcel first, and a Live Activity follows only such a parcel. One out for delivery on a day gone by,
+    /// with no scan since, is not on its way any more, though it is flagged for no update only once its round has ended.
     func isOnDeliveryRound(now: Date = Date()) -> Bool {
         guard currentStage == .outForDelivery else { return false }
-        guard let ends = deliveryRoundEnd else { return true }
+        guard let ends = deliveryRoundDayEnd else { return true }
         return now < ends
     }
 

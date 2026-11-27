@@ -1913,8 +1913,8 @@ type LiveActivityDeliveryKind = 'start' | 'update' | 'end';
 
 /**
  * Whether a scan out for delivery is from a round that is over, too old to start a Live Activity: its day has ended
- * on the clock its time states (`event_time`, "…T17:00:00+01:00"; a "Z" or "-00:00" states none), as the round's end
- * the apps go by (`delivery_round_ends_at`), or else it is more than a day old, as for the other notifications
+ * on the clock its time states (`event_time`, "…T17:00:00+01:00"; a "Z" or "-00:00" states none), as the round's day
+ * the apps go by (`delivery_round_over_at`), or else it is more than a day old, as for the other notifications
  * (`isOldNews`), or two days for a scan without a clock. The app would end such an activity as soon as it ran
  * (`isOnDeliveryRound`).
  */

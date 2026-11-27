@@ -15,6 +15,7 @@ function row(fields: JsonObject = {}): JsonObject {
 }
 
 const served = (fields: JsonObject = {}) => withEventPlaces(row(fields)).delivery_round_ends_at;
+const dayOver = (fields: JsonObject = {}) => withEventPlaces(row(fields)).delivery_round_over_at;
 const out = (occurredAt: string) => [scan('in_transit', '2026-11-19T15:00:00Z'), scan('out_for_delivery', occurredAt)];
 
 describe('delivery_round_ends_at', () => {
@@ -23,6 +24,8 @@ describe('delivery_round_ends_at', () => {
     expect(served({ tracking_events: out('2026-11-20T06:10:00Z') })).toBe('2026-11-21T00:00:00+01:00');
     // 00:30 on the 21st in Zurich, still the 20th in UTC: the round is the 21st's.
     expect(served({ tracking_events: out('2026-11-20T23:30:00Z') })).toBe('2026-11-22T00:00:00+01:00');
+    // The round's day ends with it.
+    expect(dayOver({ tracking_events: out('2026-11-20T06:10:00Z') })).toBe('2026-11-21T00:00:00+01:00');
   });
 
   it('reads the day on the clock the carrier declared, not UTC\'s', () => {
@@ -36,6 +39,8 @@ describe('delivery_round_ends_at', () => {
     expect(served({ tracking_events: [...out('2026-11-20T06:10:00Z'), scan('delivered', '2026-11-20T11:00:00Z')] })).toBeUndefined();
     expect(served({ tracking_events: [...out('2026-11-20T06:10:00Z'), scan('failed_attempt', '2026-11-20T11:00:00Z')] })).toBeUndefined();
     expect(served({ archived_at: '2026-11-21T08:00:00Z', tracking_events: out('2026-11-20T06:10:00Z') })).toBeUndefined();
+    expect(dayOver()).toBeUndefined();
+    expect(dayOver({ archived_at: '2026-11-21T08:00:00Z', tracking_events: out('2026-11-20T06:10:00Z') })).toBeUndefined();
   });
   it('ends a China Post round three days after its own: the relay leaves out the destination post\'s attempts', () => {
     const china = (events: JsonObject[], fields: JsonObject = {}) => served({ carrier: 'china-post', tracking_events: events, ...fields });
@@ -43,6 +48,9 @@ describe('delivery_round_ends_at', () => {
     const [relayed, own, destination] = [round('unknown'), round('china-post'), round('la-poste')];
     const before = scan('in_transit', '2026-11-19T15:00:00Z');
     expect(china([before, relayed], { carrier_data: { timezone: 'Europe/Paris' } })).toBe('2026-11-24T00:00:00+01:00');
+    // Its day is over that night: the apps stop showing it out for delivery then, and flag it three days later.
+    expect(withEventPlaces(row({ carrier: 'china-post', tracking_events: [before, relayed], carrier_data: { timezone: 'Europe/Paris' } }))
+      .delivery_round_over_at).toBe('2026-11-21T00:00:00+01:00');
     expect(china([before, own], { carrier_data: { timezone: 'Europe/Paris' } })).toBe('2026-11-24T00:00:00+01:00');
     // The destination post's own scan, or a parcel handed to it, keeps the day's round.
     expect(china([before, destination], { carrier_data: { timezone: 'Europe/Paris' } })).toBe('2026-11-21T00:00:00+01:00');

@@ -205,7 +205,8 @@ Key server modules:
   - A parcel registered, accepted or in transit with no new scan for four days, or out for delivery
     on a day that has ended on the clock of the carrier delivering it (the server serves that
     day's end as `delivery_round_ends_at`, `src/server/deliveryRound.ts`; three days later for a China Post round,
-    whose relay leaves out the destination post's attempts), is flagged with the day of its latest scan, links
+    whose relay leaves out the destination post's attempts, while the apps' widgets and Live Activities stop treating
+    it as out for delivery at the day's own end, `delivery_round_over_at`), is flagged with the day of its latest scan, links
     the help page of the carrier that has it, else of the one it is filed under (the catalog's
     `helpUrl`; no link when neither has one), and says so when that carrier's tracking leaves
     out the destination country (`hidesDestinationLeg`). After three weeks the note says to ask

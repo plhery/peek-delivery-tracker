@@ -1054,6 +1054,34 @@ class ParcelLogicTests {
     }
 
     /**
+     * A round the server lets last days after its own (China Post's, `delivery_round_over_at` before
+     * `delivery_round_ends_at`): the widgets stop putting the parcel first once its day is over, the flag for no update
+     * waits for the round's end, and the widget is drawn again at both.
+     */
+    @Test
+    fun aRoundThatLastsDaysStopsLeadingTheWidgetsWhenItsDayEnds() {
+        val localizer = Localizer(AppLanguage.En)
+        val dayOver = Instant.parse("2026-08-06T14:00:00Z")
+        val ends = Instant.parse("2026-08-09T14:00:00Z")
+        val out = outForDeliveryOnAugustFifth().copy(
+            deliveryRoundEndsAt = "2026-08-10T00:00:00+10:00", deliveryRoundOverAt = "2026-08-07T00:00:00+10:00",
+        )
+        assertEquals(dayOver, out.deliveryRoundDayEnd)
+        assertEquals(ends, out.deliveryRoundEnd)
+        assertTrue(out.isOnDeliveryRound(dayOver.minusSeconds(1)))
+        assertFalse(out.isOnDeliveryRound(dayOver))
+        val published = ParcelStore.nextDeliveries(listOf(out), localizer, dayOver.minusSeconds(60)).first()
+        assertTrue(published.isOutForDelivery)
+        assertEquals(dayOver, published.roundEndsAt)
+        assertFalse(ParcelStore.nextDeliveries(listOf(out), localizer, dayOver).first().isOutForDelivery)
+        assertNull(out.attention(dayOver))
+        assertNull(out.attention(ends.minusSeconds(1)))
+        assertEquals(ParcelAttention.Stalled, out.attention(ends))
+        // Without the day's end, an older server's answer: the round's end, as before.
+        assertTrue(out.copy(deliveryRoundOverAt = null).isOnDeliveryRound(dayOver))
+    }
+
+    /**
      * Published during the round, the parcel stops leading the widgets when the round ends, while the app stays closed:
      * the widget is drawn again then.
      */

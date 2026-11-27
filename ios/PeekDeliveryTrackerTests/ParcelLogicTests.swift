@@ -2594,6 +2594,42 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertFalse(after.isOutForDelivery)
     }
 
+    /// A round the server lets last days after its own (China Post's, `delivery_round_over_at` before
+    /// `delivery_round_ends_at`): the widgets stop putting the parcel first and a Live Activity stops following it once
+    /// its day is over, while the flag for no update waits for the round's end.
+    @MainActor
+    func testARoundThatLastsDaysStopsLeadingTheWidgetsWhenItsDayEnds() throws {
+        let localizer = Localizer()
+        localizer.language = .en
+        let id = UUID()
+        var out = makeParcel(id: id, events: [event(id, .inTransit, "2026-08-05T08:00:00Z"), event(id, .outForDelivery, "2026-08-05T21:10:00Z")])
+        out.deliveryRoundEndsAt = "2026-08-10T00:00:00+10:00"
+        out.deliveryRoundOverAt = "2026-08-07T00:00:00+10:00"
+        let dayOver = try XCTUnwrap(DateParser.date("2026-08-06T14:00:00Z"))
+        let ends = try XCTUnwrap(DateParser.date("2026-08-09T14:00:00Z"))
+        XCTAssertEqual(out.deliveryRoundDayEnd, dayOver)
+        XCTAssertEqual(out.deliveryRoundEnd, ends)
+        XCTAssertTrue(out.isOnDeliveryRound(now: dayOver.addingTimeInterval(-1)))
+        XCTAssertFalse(out.isOnDeliveryRound(now: dayOver))
+        let published = try XCTUnwrap(ParcelStore.nextDeliveries(of: [out], localizer: localizer, now: dayOver.addingTimeInterval(-60)).first)
+        XCTAssertTrue(published.isOutForDelivery)
+        XCTAssertEqual(published.roundEndsAt, dayOver)
+        XCTAssertFalse(try XCTUnwrap(ParcelStore.nextDeliveries(of: [out], localizer: localizer, now: dayOver).first).isOutForDelivery)
+        XCTAssertNil(out.attention(now: dayOver))
+        XCTAssertNil(out.attention(now: ends.addingTimeInterval(-1)))
+        XCTAssertEqual(out.attention(now: ends), .stalled)
+        // A parcel read through a link keeps both moments.
+        let shared = Parcel(shared: PublicPackage(
+            id: id, trackingNumber: "TESTPARCEL123789", label: "", carrier: .chinaPost, createdAt: "2026-08-01T08:00:00Z",
+            deliveryRoundEndsAt: out.deliveryRoundEndsAt, deliveryRoundOverAt: out.deliveryRoundOverAt, syncStatus: .ok,
+            carrierData: PublicPackageCarrierData(), notificationsMuted: false, trackingEvents: out.trackingEvents
+        ))
+        XCTAssertFalse(shared.isOnDeliveryRound(now: dayOver))
+        // Without the day's end, an older server's answer: the round's end, as before.
+        out.deliveryRoundOverAt = nil
+        XCTAssertTrue(out.isOnDeliveryRound(now: dayOver))
+    }
+
     /// Published during the round, the parcel stops leading the widgets when the round ends, while the app stays closed:
     /// the widget's timeline has an entry then.
     @MainActor

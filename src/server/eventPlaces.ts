@@ -14,7 +14,7 @@ import { repeatLeads, scanSource, wordingTwins } from './scanRepeats';
 import { noticeScan, stageNotices } from './stageNotices';
 import { servedCarrierOutage } from './carrierOutages';
 import { passedEstimateDay } from './passedEstimate';
-import { deliveryRoundEnd } from './deliveryRound';
+import { deliveryRound } from './deliveryRound';
 import { peekAiFor } from './peekAi';
 import { datedAfterCheck } from './futureScans';
 import { destinationPlace } from './destinationPlace';
@@ -497,8 +497,8 @@ function placeLenders(row: JsonObject): Map<string, JsonObject[]> {
  * (`written_ahead_by`, `servedWrittenAhead`), with the steps it wrote whose time has passed (`written_ahead_events`,
  * `servedWrittenSteps`). `news_at` dates the parcel's latest scan as Peek stored it (`newsAt`). A parcel whose carrier's
  * site is down says so (`carrier_outage`, carrierOutages.ts), one whose expected day passed up to a week ago names
- * it (`expected_delivery_passed`, passedEstimate.ts), one out for delivery says when that round is over
- * (`delivery_round_ends_at`, deliveryRound.ts), and one Peek has a strong hint for says when Peek thinks it will
+ * it (`expected_delivery_passed`, passedEstimate.ts), one out for delivery says when that round and its day are over
+ * (`delivery_round_ends_at`, `delivery_round_over_at`, deliveryRound.ts), and one Peek has a strong hint for says when Peek thinks it will
  * come (`peek_ai`, peekAi.ts), unless its carrier has planned the delivery among its steps or the caller shows no
  * estimate (`peekAi: false`: emails, friends' passports, a link's preview). The owner's own routes also name the town
  * the parcel is addressed to (`destination: true`, `destination_place`, destinationPlace.ts), which no one else reads.
@@ -515,7 +515,7 @@ export function withEventPlaces(row: JsonObject, { peekAi: withPeekAi = true, de
   const written = ahead ? placedSteps(row, servedWrittenSteps(answered, shown)) : [];
   const outage = servedCarrierOutage(row, shown);
   const passed = passedEstimateDay(row, served);
-  const round = deliveryRoundEnd(row, served);
+  const round = deliveryRound(row, served);
   // A carrier that has planned the delivery has given its word: Peek AI's calls are made against the carrier's date.
   const ai = !withPeekAi || planned.some((step) => DELIVERY_STEPS.has(String(step.stage))) ? null : peekAi(row, served);
   const town = withDestination ? destinationPlace(row, served) : null;
@@ -523,7 +523,7 @@ export function withEventPlaces(row: JsonObject, { peekAi: withPeekAi = true, de
   return { ...served, ...planned.length ? { planned_events: planned } : {}, ...ahead ? { written_ahead_by: ahead } : {},
     ...town ? { destination_place: town } : {},
     ...written.length ? { written_ahead_events: written } : {}, ...outage ? { carrier_outage: outage } : {},
-    ...passed ? { expected_delivery_passed: passed } : {}, ...round ? { delivery_round_ends_at: round } : {}, ...ai ? { peek_ai: ai as unknown as JsonObject } : {} };
+    ...passed ? { expected_delivery_passed: passed } : {}, ...round ? { delivery_round_ends_at: round.ends, delivery_round_over_at: round.over } : {}, ...ai ? { peek_ai: ai as unknown as JsonObject } : {} };
 }
 
 let peekAiReported = false;

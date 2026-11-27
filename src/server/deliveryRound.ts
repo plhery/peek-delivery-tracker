@@ -18,22 +18,25 @@ const RELAYED_ROUND_DAYS: Readonly<Partial<Record<string, number>>> = { 'china-p
 /**
  * When the round a parcel went out on is over (`delivery_round_ends_at`): the end of the day of its newest scan, out
  * for delivery, on the clock of the carrier delivering it (`deliveryDayEnd`), or for a carrier that relays the
- * destination post's round (`RELAYED_ROUND_DAYS`) some days later. The apps say the parcel has had no tracking update
- * since that scan once this moment has passed, whatever the device's clock. None unless the newest scan the apps show
- * (`served`, the row as withEventPlaces serves it, read by the apps' own `currentEvent`) is out for delivery, nor for an
- * archived parcel.
+ * destination post's round (`RELAYED_ROUND_DAYS`) some days later; and when that day is over (`delivery_round_over_at`).
+ * The apps say the parcel has had no tracking update since that scan once the round's end has passed, whatever the
+ * device's clock, and stop showing it out for delivery (widgets, Live Activities) once its day has. None unless the
+ * newest scan the apps show (`served`, the row as withEventPlaces serves it, read by the apps' own `currentEvent`) is
+ * out for delivery, nor for an archived parcel.
  */
-export function deliveryRoundEnd(row: JsonObject, served: JsonObject): string | null {
+export function deliveryRound(row: JsonObject, served: JsonObject): { ends: string; over: string } | null {
   if (row.archived_at || !Array.isArray(served.tracking_events)) return null;
   const events = served.tracking_events.filter(isRecord).map((event) => toEvent(event as unknown as ApiTrackingEventRow));
   const held = isRecord(served.carrier_data) && served.carrier_data.return_held === true ? true : undefined;
   const current = currentEvent(events, held);
   if (current?.stage !== 'out_for_delivery') return null;
-  const end = deliveryDayEnd(row, current.occurredAt);
+  const over = deliveryDayEnd(row, current.occurredAt);
+  if (!over) return null;
   // The scans served leave out their source: the stored row has it.
   const stored = Array.isArray(row.tracking_events) ? row.tracking_events.filter(isRecord).find((scan) => scan.id === current.id) : undefined;
-  const days = end ? relayedRoundDays(row, stored) : 0;
-  return end && days ? DateTime.fromISO(end, { setZone: true }).plus({ days }).toISO({ suppressMilliseconds: true }) : end;
+  const days = relayedRoundDays(row, stored);
+  const ends = days ? DateTime.fromISO(over, { setZone: true }).plus({ days }).toISO({ suppressMilliseconds: true }) : over;
+  return { ends: ends ?? over, over };
 }
 
 /**

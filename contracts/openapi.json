@@ -77767,7 +77767,12 @@
           "delivery_round_ends_at": {
             "type": "string",
             "format": "date-time",
-            "description": "When the delivery round the parcel went out on is over: the end of the day of its newest scan, out for delivery, on the clock of the carrier delivering it, as a moment with that clock's offset; for China Post, whose scan, its own or a provider's copy, stands for the destination post's round without that post's attempts, three days later. Present only while the newest scan is out for delivery and the parcel is not archived. Once this moment has passed, whatever the device's clock, the apps flag the parcel as having had no tracking update since that scan, as they do one in transit with no scan for four days."
+            "description": "When the delivery round the parcel went out on is over: the end of the day of its newest scan, out for delivery, on the clock of the carrier delivering it, as a moment with that clock's offset; for China Post, whose scan, its own or a provider's copy, stands for the destination post's round without that post's attempts, three days later. Present only while the newest scan is out for delivery and the parcel is not archived. Once this moment has passed, whatever the device's clock, the apps flag the parcel as having had no tracking update since that scan, as they do one in transit with no scan for four days. The day of the round itself ends at `delivery_round_over_at`."
+          },
+          "delivery_round_over_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the day of the delivery round the parcel went out on is over: the end of the day of its newest scan, out for delivery, on the clock of the carrier delivering it, as a moment with that clock's offset. Present with `delivery_round_ends_at`, which it equals except where that falls days later (China Post). Once this moment has passed, whatever the device's clock, the apps no longer show the parcel as out for delivery on their widgets and start no Live Activity for it, while the flag for no tracking update still waits for `delivery_round_ends_at`."
           },
           "peek_ai": {
             "description": "Set when Peek AI has a strong hint of when the parcel will come (see PeekAi); absent otherwise, and on a wrapped gift.",
@@ -79864,7 +79869,12 @@
           "delivery_round_ends_at": {
             "type": "string",
             "format": "date-time",
-            "description": "When the delivery round the parcel went out on is over: the end of the day of its newest scan, out for delivery, on the clock of the carrier delivering it, as a moment with that clock's offset; for China Post, whose scan, its own or a provider's copy, stands for the destination post's round without that post's attempts, three days later. Present only while the newest scan is out for delivery and the parcel is not archived. Once this moment has passed, whatever the device's clock, the apps flag the parcel as having had no tracking update since that scan, as they do one in transit with no scan for four days."
+            "description": "When the delivery round the parcel went out on is over: the end of the day of its newest scan, out for delivery, on the clock of the carrier delivering it, as a moment with that clock's offset; for China Post, whose scan, its own or a provider's copy, stands for the destination post's round without that post's attempts, three days later. Present only while the newest scan is out for delivery and the parcel is not archived. Once this moment has passed, whatever the device's clock, the apps flag the parcel as having had no tracking update since that scan, as they do one in transit with no scan for four days. The day of the round itself ends at `delivery_round_over_at`."
+          },
+          "delivery_round_over_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the day of the delivery round the parcel went out on is over: the end of the day of its newest scan, out for delivery, on the clock of the carrier delivering it, as a moment with that clock's offset. Present with `delivery_round_ends_at`, which it equals except where that falls days later (China Post). Once this moment has passed, whatever the device's clock, the apps no longer show the parcel as out for delivery on their widgets and start no Live Activity for it, while the flag for no tracking update still waits for `delivery_round_ends_at`."
           },
           "peek_ai": {
             "description": "Set when Peek AI has a strong hint of when the parcel will come (see PeekAi); absent otherwise, and on a wrapped gift.",

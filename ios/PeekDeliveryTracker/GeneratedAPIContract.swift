@@ -4478,6 +4478,7 @@ struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
     var expectedDelivery: String? = nil
     var expectedDeliveryPassed: String? = nil
     var deliveryRoundEndsAt: String? = nil
+    var deliveryRoundOverAt: String? = nil
     var peekAi: PeekAi? = nil
     var lastStatusText: String? = nil
     var lastSyncedAt: String? = nil
@@ -4511,6 +4512,7 @@ struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
         case expectedDelivery
         case expectedDeliveryPassed
         case deliveryRoundEndsAt
+        case deliveryRoundOverAt
         case peekAi
         case lastStatusText
         case lastSyncedAt
@@ -5151,6 +5153,7 @@ struct PublicPackage: Codable, Equatable, Hashable, Sendable, Identifiable {
     var expectedDelivery: String? = nil
     var expectedDeliveryPassed: String? = nil
     var deliveryRoundEndsAt: String? = nil
+    var deliveryRoundOverAt: String? = nil
     var peekAi: PeekAi? = nil
     var lastStatusText: String? = nil
     var lastSyncedAt: String? = nil
@@ -5179,6 +5182,7 @@ struct PublicPackage: Codable, Equatable, Hashable, Sendable, Identifiable {
         case expectedDelivery
         case expectedDeliveryPassed
         case deliveryRoundEndsAt
+        case deliveryRoundOverAt
         case peekAi
         case lastStatusText
         case lastSyncedAt
@@ -5979,6 +5983,7 @@ extension Parcel {
         expectedDelivery = try values.decodeIfPresent(String.self, forKey: .expectedDelivery)
         expectedDeliveryPassed = try values.decodeIfPresent(String.self, forKey: .expectedDeliveryPassed)
         deliveryRoundEndsAt = try values.decodeIfPresent(String.self, forKey: .deliveryRoundEndsAt)
+        deliveryRoundOverAt = try values.decodeIfPresent(String.self, forKey: .deliveryRoundOverAt)
         peekAi = try? values.decodeIfPresent(PeekAi.self, forKey: .peekAi)
         lastStatusText = try values.decodeIfPresent(String.self, forKey: .lastStatusText)
         lastSyncedAt = try values.decodeIfPresent(String.self, forKey: .lastSyncedAt)
@@ -6051,6 +6056,7 @@ extension PublicPackage {
         expectedDelivery = try values.decodeIfPresent(String.self, forKey: .expectedDelivery)
         expectedDeliveryPassed = try values.decodeIfPresent(String.self, forKey: .expectedDeliveryPassed)
         deliveryRoundEndsAt = try values.decodeIfPresent(String.self, forKey: .deliveryRoundEndsAt)
+        deliveryRoundOverAt = try values.decodeIfPresent(String.self, forKey: .deliveryRoundOverAt)
         peekAi = try? values.decodeIfPresent(PeekAi.self, forKey: .peekAi)
         lastStatusText = try values.decodeIfPresent(String.self, forKey: .lastStatusText)
         lastSyncedAt = try values.decodeIfPresent(String.self, forKey: .lastSyncedAt)

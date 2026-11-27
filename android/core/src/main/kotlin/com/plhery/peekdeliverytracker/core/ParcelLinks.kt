@@ -55,6 +55,7 @@ fun Parcel(shared: PublicPackage): Parcel {
         expectedDelivery = shared.expectedDelivery,
         expectedDeliveryPassed = shared.expectedDeliveryPassed,
         deliveryRoundEndsAt = shared.deliveryRoundEndsAt,
+        deliveryRoundOverAt = shared.deliveryRoundOverAt,
         peekAi = shared.peekAi,
         lastStatusText = shared.lastStatusText,
         lastSyncedAt = shared.lastSyncedAt,

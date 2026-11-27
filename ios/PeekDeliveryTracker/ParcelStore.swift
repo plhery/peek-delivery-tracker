@@ -1877,8 +1877,11 @@ final class ParcelStore: ObservableObject {
         let calendar = Calendar.current
         var transitions = Set(DeliveryWidgetDays.midnights(after: now))
         for parcel in parcels {
-            // The end of a delivery round, at midnight on the carrier's clock: the list then puts the parcel elsewhere.
-            if parcel.isOnDeliveryRound(now: now), let end = parcel.deliveryRoundEnd, end > now { transitions.insert(end) }
+            // The end of a delivery round's day, at midnight on the carrier's clock: the parcel then waits among the
+            // others. And the end of its round, which can be days later: the list then flags it for no update.
+            for end in [parcel.deliveryRoundDayEnd, parcel.deliveryRoundEnd].compactMap({ $0 }) where end > now {
+                transitions.insert(end)
+            }
             for value in [parcel.expectedDelivery, parcel.carrierData?.expectedDeliveryFrom].compactMap({ $0 }) {
                 guard let date = DateParser.deliveryDate(value) else { continue }
                 for offset in -1...1 {
@@ -1972,7 +1975,7 @@ final class ParcelStore: ObservableObject {
             detail: first,
             // Out for delivery on a round that is over, it waits among the others, as on a Live Activity.
             isOutForDelivery: parcel.isOnDeliveryRound(now: now),
-            roundEndsAt: parcel.isOnDeliveryRound(now: now) ? parcel.deliveryRoundEnd : nil,
+            roundEndsAt: parcel.isOnDeliveryRound(now: now) ? parcel.deliveryRoundDayEnd : nil,
             // As the list's rows mark it.
             stage: DeliveryWidgetStage(
                 status: status, symbol: parcel.currentStage?.metadata.symbol ?? "shippingbox.fill",

@@ -425,7 +425,9 @@ describe('what a link shows', () => {
     // Zurich's midnight, in summer time.
     expect(shown({}).delivery_round_ends_at).toBe('2026-10-03T00:00:00+02:00');
     expect(shown({ owner: true }).delivery_round_ends_at).toBe('2026-10-03T00:00:00+02:00');
+    expect(shown({}).delivery_round_over_at).toBe('2026-10-03T00:00:00+02:00');
     expect(shown({ gift: true })).not.toHaveProperty('delivery_round_ends_at');
+    expect(shown({ gift: true })).not.toHaveProperty('delivery_round_over_at');
   });
 
   it('asks the owner to correct a placeholder number, showing nothing of the shipments merged under it', () => {

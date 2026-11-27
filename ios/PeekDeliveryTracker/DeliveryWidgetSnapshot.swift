@@ -13,8 +13,8 @@ struct DeliveryWidgetParcel: Codable, Equatable, Hashable, Identifiable, Sendabl
     /// Whether it is out for delivery on a round that has not ended (`isOnDeliveryRound`): the widgets put it first, with
     /// the bicycle.
     var isOutForDelivery: Bool
-    /// When that round ends (`deliveryRoundEnd`): from then on the parcel waits among the others while the app stays
-    /// closed. None from an app that didn't publish it.
+    /// When that round's day ends (`deliveryRoundDayEnd`): from then on the parcel waits among the others while the app
+    /// stays closed. None from an app that didn't publish it.
     var roundEndsAt: Date? = nil
     /// When a delivered parcel arrived: the widget keeps it for a day after.
     var deliveredAt: Date? = nil

@@ -560,12 +560,24 @@ val Parcel.deliveryRoundEnd: Instant?
     }
 
 /**
- * Whether the parcel is out for delivery on a round that has not ended: the widgets put only such a parcel first. One
- * out for delivery on a day gone by, with no scan since, is not on its way any more.
+ * When the day of the parcel's delivery round ends, as the server gives it ([Parcel.deliveryRoundOverAt]): the round's
+ * end but for a carrier whose round the server lets last days longer (China Post), whose day still ends that night.
+ * Without it, the round's end ([deliveryRoundEnd]).
+ */
+val Parcel.deliveryRoundDayEnd: Instant?
+    get() {
+        currentEvent?.takeIf { it.stage == TrackingStage.OutForDelivery } ?: return null
+        return deliveryRoundOverAt?.let(DateParser::date) ?: deliveryRoundEnd
+    }
+
+/**
+ * Whether the parcel is out for delivery on a round whose day has not ended ([deliveryRoundDayEnd]): the widgets put only
+ * such a parcel first. One out for delivery on a day gone by, with no scan since, is not on its way any more, though it is
+ * flagged for no update only once its round has ended.
  */
 fun Parcel.isOnDeliveryRound(now: Instant = AppClock.now()): Boolean {
     if (currentStage != TrackingStage.OutForDelivery) return false
-    val ends = deliveryRoundEnd ?: return true
+    val ends = deliveryRoundDayEnd ?: return true
     return now < ends
 }
 

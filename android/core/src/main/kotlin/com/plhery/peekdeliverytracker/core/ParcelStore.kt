@@ -2509,8 +2509,9 @@ class ParcelStore(
             val zone = ZoneId.systemDefault()
             val midnights = DeliveryWidgetDays.midnights(after = now, zone = zone).toSortedSet()
             for (parcel in parcels) {
-                // The end of a delivery round, at midnight on the carrier's clock: the list then puts the parcel elsewhere.
-                parcel.deliveryRoundEnd?.takeIf { parcel.isOnDeliveryRound(now) && it > now }?.let(midnights::add)
+                // The end of a delivery round's day, at midnight on the carrier's clock: the parcel then waits among the
+                // others. And the end of its round, which can be days later: the list then flags it for no update.
+                listOfNotNull(parcel.deliveryRoundDayEnd, parcel.deliveryRoundEnd).filter { it > now }.forEach(midnights::add)
                 for (value in listOfNotNull(parcel.expectedDelivery, parcel.carrierData?.expectedDeliveryFrom)) {
                     val day = DateParser.deliveryDate(value)?.atZone(zone)?.toLocalDate() ?: continue
                     for (offset in -1L..1L) {
@@ -2595,7 +2596,7 @@ class ParcelStore(
                 detail = first,
                 // Out for delivery on a round that is over, it waits among the others.
                 isOutForDelivery = parcel.isOnDeliveryRound(now),
-                roundEndsAt = parcel.deliveryRoundEnd.takeIf { parcel.isOnDeliveryRound(now) },
+                roundEndsAt = parcel.deliveryRoundDayEnd.takeIf { parcel.isOnDeliveryRound(now) },
                 // As the list's rows mark it.
                 stage = DeliveryWidgetStage.of(parcel.currentStage, status, localizer.widgetShortStatus(parcel.displayStatus.key, status)),
                 named = parcel.label.nonEmpty != null,

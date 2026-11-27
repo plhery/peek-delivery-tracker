@@ -30,8 +30,8 @@ data class DeliveryWidgetParcel(
     /** Whether it is out for delivery on a round that has not ended ([isOnDeliveryRound]): the widgets put it first, with the bicycle. */
     val isOutForDelivery: Boolean,
     /**
-     * When that round ends ([deliveryRoundEnd]): from then on the parcel waits among the others while the app stays
-     * closed. None from an app that didn't publish it.
+     * When that round's day ends ([deliveryRoundDayEnd]): from then on the parcel waits among the others while the app
+     * stays closed. None from an app that didn't publish it.
      */
     @Serializable(with = ReferenceDateSerializer::class) val roundEndsAt: Instant? = null,
     /** When a delivered parcel arrived: the widget keeps it for a day after. */

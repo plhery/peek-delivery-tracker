@@ -1,12 +1,12 @@
 ---
 title: SF Express tracking: waybill numbers, statuses and delivery
-description: Track an SF Express parcel: the 12-digit or SF waybill number, what SF's status words mean, how SF International delivers abroad and who to call.
+description: Track an SF Express (顺丰) or SF International parcel: 12-digit or SF + 13-digit waybills, "Accepted" status meaning, delivery times and hotline 95338.
 slug: sf-express-tracking
 published: 2026-10-23
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-SF Express (顺丰, SF) is a Chinese logistics company founded in 1993 and based in Shenzhen. Its cross-border arm, SF International, ships abroad for businesses, online sellers and private customers. Each of SF's regional sites has a tracker: [sf-express.com](https://www.sf-express.com/chn/en) for mainland China, [hk.sf-express.com](https://hk.sf-express.com/hk/en/waybill/list) for Hong Kong and [htm.sf-express.com](https://htm.sf-express.com/tw/en/dynamic_function/waybill/) for Taiwan. Or paste the number in the box above.
+SF Express (顺丰, founded in 1993 in Shenzhen) and SF International ship parcels across mainland China, Hong Kong, Taiwan and worldwide. Track your 12-digit or `SF` + 13-digit waybill on [sf-express.com](https://www.sf-express.com/chn/en), [hk.sf-express.com](https://hk.sf-express.com/hk/en/waybill/list), [htm.sf-express.com](https://htm.sf-express.com/tw/en/dynamic_function/waybill/) or in the box above; below are status meanings (including why `Accepted` means delivered), transit estimates and regional hotlines.
 
 ## SF Express tracking number: what it looks like
 
@@ -105,19 +105,23 @@ It checks up to every 10 minutes while you have the parcel open, or on its deliv
 
 ### Is SF Express legit?
 
-Yes. SF was founded in 1993 and is listed on the Shenzhen and Hong Kong stock exchanges. It calls itself the largest comprehensive logistics service provider in China and Asia, citing a Frost & Sullivan report.
+Yes. SF was founded in 1993 in Shenzhen and is listed on the Shenzhen and Hong Kong stock exchanges, calling itself the largest comprehensive logistics service provider in China and Asia.
 
 ### What does "Accepted" mean on SF Express tracking?
 
-Delivered. SF's English tracker uses "Accepted" for 已签收, "signed for": the parcel reached the delivery address. It doesn't mean SF has just taken it in.
+Delivered. SF's English tracker translates 已签收 ("signed for") as `Accepted`, meaning the parcel reached its delivery address rather than SF having just taken it in.
 
 ### How long does SF International take to deliver?
 
-SF gives reference times only: it "does not make any transit time commitment". For E-Parcel, it lists 7 to 12 working days to the US, 6 to 10 to the UK, and 14 to 18 to Ireland and Canada. For EX-CD from South China, it lists 7 to 12 to the US, 6 to 10 to the UK, 10 to 15 to Canada and Ireland and 8 to 12 to Australia.
+SF gives reference times without a transit commitment: for E-Parcel, 7–12 working days to the US, 6–10 to the UK and 14–18 to Ireland and Canada; for EX-CD from South China, 7–12 to the US, 6–10 to the UK, 10–15 to Canada/Ireland and 8–12 to Australia.
 
-### Does SF Express deliver to PO boxes?
+### Does SF Express deliver to PO boxes or allow address changes?
 
-No. SF's terms for shipments from mainland China say it doesn't deliver to an address that is only a PO box or a postcode. Give a street address, or a pickup point where the seller offers one.
+No PO boxes or postcode-only addresses. For Standard Express, Global Express+ and Economy Express from mainland China, customer service can correct an address for RMB 70 (plus extra shipping); E-Parcel and EX-CD don't accept returns, redelivery or address changes.
+
+### What is the SF Express customer service phone number?
+
+Mainland China: 95338 (+86 755 95338 from abroad, daily 08:00–21:00); Hong Kong: +852 2730 0273; US: 1 855 901 1133; Canada: 1 289 203 2630; Australia: 1300 148 168; UK email: uk_csd@sf-express.com; Europe WhatsApp: +31 6 43249528.
 
 :::sources
 - [SF Express: Home, Chinese mainland (English)](https://www.sf-express.com/chn/en) – mainland China tracker

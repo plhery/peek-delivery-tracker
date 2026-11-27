@@ -1,12 +1,12 @@
 ---
 title: Speedaf Express tracking: numbers, statuses and contacts
-description: Track a Speedaf Express parcel from China to Nigeria, Kenya, Ghana, Pakistan or the UAE: number shapes, what each status means, delivery attempts and contacts.
+description: Track a Speedaf Express (速达非) parcel from China to Nigeria, Kenya, Ghana, Pakistan or the UAE: NG/KE/PK numbers, pending Tax status, 3 attempts and hotlines.
 slug: speedaf-tracking
 published: 2026-10-28
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Speedaf Express (速达非) is a courier network, founded in 2019, that flies parcels from its warehouses in China to Africa, the Middle East, Pakistan and a few European countries, and delivers them itself. Track a parcel under "Track" on [speedaf.com](https://www.speedaf.com/cn-en/send-parcel), in Speedaf's customer app or in the box above. The number is in the shop's shipping details.
+Speedaf Express (速达非, founded in 2019 with ZTO among its original shareholders) flies e-commerce parcels from China to Africa, the Middle East, Pakistan and parts of Europe, delivering them through its own couriers (5–10 working days reference time on eParcel). Track your country-coded waybill (`NG…`, `KE…`, `PK…`, `AE…`) in capitals on [speedaf.com](https://www.speedaf.com/cn-en/send-parcel), in Speedaf's app or in the box above.
 
 ## Speedaf tracking number: what it looks like
 
@@ -117,19 +117,23 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ### Is Speedaf Express legit?
 
-Yes. Speedaf is a logistics company founded in 2019, with ZTO among its original shareholders. It runs its own tracking at speedaf.com and its own last-mile couriers in what it calls emerging markets.
+Yes. Speedaf is a logistics company founded in 2019, with ZTO among its original shareholders, operating its own tracking at speedaf.com and last-mile couriers across Africa, the Middle East, Pakistan and selected European markets.
 
-### Which countries does Speedaf deliver to?
+### Which countries does Speedaf deliver to, and how long does it take?
 
-Speedaf's country list names Egypt, South Africa, Morocco, the UAE, Ghana, Nigeria, Kenya, Uganda, Saudi Arabia, Pakistan, Kazakhstan, Mauritius, the Maldives, Switzerland, Montenegro, Albania, Ireland, Serbia and Zambia, besides China. Peek also recognises numbers starting RE (Réunion), RW (Rwanda) and TR (Turkey), countries the list doesn't name.
+Speedaf lists Egypt, South Africa, Morocco, the UAE, Ghana, Nigeria, Kenya, Uganda, Saudi Arabia, Pakistan, Kazakhstan, Mauritius, the Maldives, Switzerland, Montenegro, Albania, Ireland, Serbia and Zambia besides China. Its eParcel service quotes a 5–10 working day reference transit time from China (not guaranteed).
 
-### How long does Speedaf take to deliver?
+### What does "pending Tax" mean on Speedaf tracking?
 
-Speedaf's eParcel page, for parcels from China to Nigeria, Ghana, Kenya, Uganda, Morocco, Egypt, Saudi Arabia, the UAE and Pakistan, gives a "Full Reference Transit Time" of 5-10 working days. Its help page says it depends on the destination, and its Kenyan, Ugandan and Pakistani terms say delivery times aren't guaranteed.
+Duty or tax is due before customs in your country releases the parcel (for South Africa, speedaf.com adds an "I want to pay taxes" link). Once paid, `Customs clearance tax paid` and `Customs Clearance Completed` follow.
 
-### What does pending Tax mean on Speedaf tracking?
+### How many delivery attempts does Speedaf make?
 
-Duty or tax is due before customs in your country releases the parcel. Once it's paid, `Customs clearance tax paid` and then `Customs Clearance Completed` follow.
+In the UAE Speedaf's terms state 3 free delivery attempts, and in Kenya, Uganda and Pakistan a parcel returns to the sender if a third attempt fails or you refuse delivery or charges.
+
+### How do I contact Speedaf customer service in Nigeria, Kenya, Ghana, Pakistan or the UAE?
+
+Use your country's local hotline or email from the table above — e.g. Nigeria `+234 800 070 7070`, Kenya `+254 741 000 666`, Ghana `+233 30 824 9100`, Pakistan `+92 311 118 7654` or UAE `+971 800 178`. Claims are settled only with the shipper, so also contact the shop quickly.
 
 :::sources
 - [Speedaf: Enterprise Introduction](https://www.speedaf.com/ng-en/business/about-us) – founded 2019, ZTO

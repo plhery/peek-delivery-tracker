@@ -1,12 +1,12 @@
 ---
 title: Evri Sendungsverfolgung: Nummer, Status, Zoll und Zustellung
-description: Evri-Paket in Deutschland, Österreich oder der Schweiz verfolgen: 16-stelliger Code, GlobalEco- und UK-Status, Zoll ab Juli 2026, Paketshops und Kontakt.
+description: Evri Sendungsverfolgung (ehem. Hermes UK): 16-stelliger Code, GlobalEco- und UK-Status, Laufzeiten DE/AT/CH (5–10 Tage), EU-Zoll und 0330 808 5456.
 slug: evri-sendungsverfolgung
 published: 2026-11-17
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Evri ist der britische Paketdienst, der bis März 2022 Hermes UK hieß (mit [Hermes in Deutschland](carrier:hermes-de) ist er nicht identisch). Bestellst du bei einem britischen Onlineshop wie ASOS, Boohoo, Gymshark, Lookfantastic, eBay UK oder Vinted, übernimmt Evri häufig den Versand ab Großbritannien und übergibt das Paket im Zielland an einen lokalen Zustellpartner. Internationale Sendungen verfolgst du im [GlobalEco-Portal von Evri International](https://globaleco.app/track/), innerbritische Pakete dagegen auf [evri.com](https://www.evri.com/track-a-parcel) mit der 16-stelligen Sendungsnummer oder der 8-stelligen Nummer einer Benachrichtigungskarte (*calling card*). Du kannst den 16-stelligen Barcode oder deinen `evri.com`-Trackinglink auch direkt oben eingeben.
+Evri (bis März 2022 Hermes UK, eigenständig neben [Hermes in Deutschland](carrier:hermes-de)) bringt Bestellungen britischer Shops nach Deutschland und Österreich (5 bis 8 Tage) sowie in die Schweiz (7 bis 10 Tage) und übergibt sie dort an lokale Zustellpartner. Internationale Pakete verfolgst du im [GlobalEco-Portal](https://globaleco.app/track/), innerbritische Sendungen (oder 8-stellige *calling cards*) auf [evri.com](https://www.evri.com/track-a-parcel) – oder du gibst deinen 16-stelligen Code direkt oben ein.
 
 ## Evri-Sendungsnummer: Aufbau und wo du sie findest
 
@@ -94,25 +94,25 @@ Bei **Evri UK** siehst du Status und Verlauf. Da Evri UK keine Scan-Orte nennt, 
 
 ## Häufige Fragen zur Evri-Sendungsverfolgung
 
-### Ist Evri dasselbe wie Hermes?
+### Ist Evri dasselbe wie Hermes in Deutschland?
 
-In Großbritannien ja: Evri ist der seit März 2022 gültige Name von Hermes UK. [Hermes in Deutschland](carrier:hermes-de) ist dagegen ein eigenständiges Unternehmen; beginnt deine Nummer mit `H` und 15 Ziffern, prüfe in der Versandmail, welchen Dienst der Shop beauftragt hat.
+Nein: Evri ist der seit März 2022 gültige Name von Hermes UK, während [Hermes in Deutschland](carrier:hermes-de) ein eigenständiges Unternehmen ist. Beginnt deine Nummer mit `H` und 15 Ziffern, prüfe in der Versandmail, welcher Dienst beauftragt wurde.
 
 ### Gehört Evri zu DHL oder Royal Mail?
 
-Zu keinem von beiden. Nach der Freigabe durch die britische Wettbewerbsbehörde im September 2025 schloss Evri (damals im Besitz von durch Apollo verwalteten Fonds) am 1. Oktober 2025 den Zusammenschluss mit DHL eCommerce UK zur Evri Group ab, wobei die DHL Group eine Minderheitsbeteiligung an Evri übernahm. DHL eCommerce UK tritt seit 2026 unter dem Namen **Evri Premium – a network of DHL** auf, bleibt aber ein getrenntes Netzwerk für hochwertige und größere Pakete; gewöhnliche Sendungen von [DHL](carrier:dhl) oder [DHL eCommerce](carrier:dhl-ecommerce) laufen nicht über das Standard-Tracking von Evri.
+Zu keinem von beiden. Seit dem 1. Oktober 2025 bilden Evri und DHL eCommerce UK die Evri Group mit einer Minderheitsbeteiligung der DHL Group; DHL eCommerce UK tritt als **Evri Premium – a network of DHL** getrennt auf, während normale [DHL](carrier:dhl)-Sendungen nicht über Evri laufen.
 
-### Wie lange dauert ein Evri-Paket aus Großbritannien?
+### Wie lange dauert ein Evri-Paket nach Deutschland, Österreich und in die Schweiz?
 
-Während Evris allgemeine Auslands-FAQ weltweit 3 bis 7 Werktage nennt, geben die Länderseiten ab Großbritannien 5 bis 8 Tage nach Deutschland, durchschnittlich 5 bis 8 Tage nach Österreich und 7 bis 10 Tage in die Schweiz an, jeweils vorbehaltlich Feiertagen und Zollabfertigung. Innerhalb Großbritanniens nennt das Evri-Hilfecenter 1 bis 2 Tage für *Next Day* und 3 bis 5 Tage für *Standard* (andere Evri-Seiten sprechen von 1 bis 3 Tagen).
+Evris Länderseiten nennen ab Großbritannien 5 bis 8 Tage nach Deutschland und Österreich sowie 7 bis 10 Tage in die Schweiz (allgemeine Auslands-FAQ: 3 bis 7 Werktage), zuzüglich Zoll und Feiertagen. In Großbritannien nennt Evri 1–2 Tage (*Next Day*) bzw. 3–5 Tage (*Standard*).
 
-### Ist eine E-Mail von noreply.priority@evri.com echt?
+### Wie erreiche ich den Evri Kundenservice (Chat, Telefon, E-Mail)?
 
-Evri gibt diese Adresse selbst als Kontaktweg an: Auf `evri.com/contact-us` öffnet „Email us“ unter *Tell us straight* eine Nachricht an `noreply.priority@evri.com`, um nach einem ersten Klärungsversuch des Kundendienstes das Senior-Team zu erreichen (mit Bestätigung binnen einer Stunde während britischer Bürozeiten). Da Evris Sicherheitsseiten nur Domains wie `@evri.com` aufführen, nicht diese Adresse, und Absenderadressen gefälscht oder minimal vertippt sein können, prüfe die Schreibweise Buchstabe für Buchstabe und antworte im Zweifel nicht direkt, sondern nutze die Kontaktwege auf `evri.com`.
+Auf evri.com/contact-us steht rund um die Uhr der Chat-Assistent Ezra bereit (ohne britische Postleitzahl `0` eingeben), telefonisch gilt 0330 808 5456 (Mo–Fr 8–16 Uhr, Sa 8–14 Uhr UK-Zeit), und für das Senior-Team („Tell us straight“) nutzt Evri `noreply.priority@evri.com`.
 
 ### Kann ich ein Evri-Paket nur mit meiner Postleitzahl verfolgen?
 
-Nein. Sowohl auf GlobalEco als auch auf `evri.com` und in Peek brauchst du immer zuerst den 16-stelligen Sendungscode (beziehungsweise auf `evri.com` die 8-stellige britische *calling card*); die Postleitzahl dient auf `evri.com` nur als Zusatzangabe für Details oder Umleitungen innerhalb Großbritanniens.
+Nein. Sowohl auf GlobalEco als auch auf `evri.com` und in Peek brauchst du zuerst den 16-stelligen Sendungscode (bzw. auf `evri.com` die 8-stellige britische *calling card*); die Postleitzahl dient auf `evri.com` nur als Zusatzangabe für Details oder Umleitungen in Großbritannien.
 
 :::sources
 - [Evri: Track a parcel](https://www.evri.com/track-a-parcel) – 16-stelliger Trackingcode, 8-stellige Calling Card und Link zum Auslands-Tracking

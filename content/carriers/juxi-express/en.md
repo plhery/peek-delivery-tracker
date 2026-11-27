@@ -1,12 +1,12 @@
 ---
 title: Juxi Express tracking: JXC numbers, delivery and help
-description: Track a Juxi Express (SHJX) parcel from China: what the JXC waybill looks like, why Juxi has no tracker, who delivers it and who to ask when it stalls.
+description: Track a Juxi Express (SHJX) parcel from China: 17-character JXC…YQ numbers, delivery times (5–8d UK), local carriers (Royal Mail, DHL, Canada Post) and help.
 slug: juxi-express-tracking
 published: 2026-10-21
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Juxi Express (上海驹隙国际物流有限公司, Shanghai Juxi International Freight Forwarding Co., Ltd.) is a Shanghai forwarder that ships parcels abroad for online sellers in China, on its own lines and through the post. It has no tracking page of its own: paste the number in the box above, or look it up on a tracking service such as 17TRACK, which lists Juxi as SHJX. The seller who booked Juxi has the number and gives it with your order's shipping details.
+Juxi Express (上海驹隙国际物流有限公司, founded in 2016 in Shanghai and listed as SHJX on 17TRACK) ships parcels from China on dedicated lines to the UK (Royal Mail), Germany (DHL Paket), Canada (Canada Post), the US and Europe. Because Juxi has no working tracking page of its own, paste your 17-character `JXC…YQ` waybill in the box above or look it up on 17TRACK.
 
 ## Juxi Express tracking number: what it looks like
 
@@ -86,21 +86,25 @@ While Peek follows the parcel through tracking services, it checks hourly, every
 
 ## Questions about Juxi Express tracking
 
-### What is Juxi Express?
+### What is Juxi Express (SHJX)?
 
-A Shanghai forwarder, Shanghai Juxi International Freight Forwarding Co., Ltd., that ships parcels abroad for sellers in China. It says it began operating in 2016 and runs its own lines to the US, the UK, Germany, France, Australia and Canada.
+Shanghai Juxi International Freight Forwarding Co., Ltd., a Shanghai forwarder operating since 2016 with its own lines to the US, UK, Germany, France, Australia and Canada, listed as SHJX on 17TRACK.
 
-### Where can I track a Juxi Express parcel?
+### Where can I track a Juxi Express JXC…YQ parcel?
 
-In the box above, since Juxi has no tracker of its own any more. Peek takes a JXC number as Juxi's, except one with YI, ZO, US or ZI after JXC: it asks only DHLink about those, since DHLink's tracker knows some of them; to follow such a parcel as Juxi's, press "Change" while you add it and pick Juxi Express. For its small-parcel line to the UK and Germany, Juxi points to the tracking service 17TRACK, which lists it as SHJX. Once the local carrier has the parcel, you can also track it there with that carrier's own number.
+In the box above or on 17TRACK (as SHJX), since Juxi has no working tracker of its own. For `JXC` numbers starting `JXCYI`, `JXCZO`, `JXCUS` or `JXCZI`, Peek checks DHLink first — tap "Change" to pick Juxi Express if needed.
 
-### Who delivers Juxi Express parcels?
+### Who delivers Juxi Express parcels in the UK, Germany, Canada and the US?
 
-A carrier in your country: Juxi names Royal Mail on some UK orders, DHL Paket in Germany and Canada Post on its Canada line. On its postal products, the post in your country delivers.
+A local carrier: Juxi names [Royal Mail](carrier:royal-mail) on UK orders, [DHL Paket](carrier:dhl) in Germany and [Canada Post](carrier:canada-post) in Canada, plus national posts on its postal products. On US lines, DHLink's tracker can show a "Last Leg No." for the local carrier.
 
 ### How long does Juxi Express take to deliver?
 
-It depends on the line the seller chose. Juxi quotes 5 to 8 days on its UK line, 8 to 12 working days to Canada, 7 to 15 working days by ePacket, about 18 to 28 days by China–Europe train and 10 to 30 working days on its global tracked small packet. These are sales figures, not a promise for your order.
+Juxi quotes 5 to 8 days on its UK line, 8 to 12 working days to Canada, 7 to 15 working days by ePacket, about 18 to 28 days by China–Europe rail and 10 to 30 working days on its global tracked small packet (estimates, not guarantees).
+
+### How do I contact Juxi Express or claim a lost parcel?
+
+Contact the seller or marketplace first: Juxi handles claims only from the shipper (within 30 days under its consignment terms, and 30–60 days from shipping on dedicated lines). Juxi's Shanghai landline on juxiex.com is +86 21 6073 9366, with no recipient support abroad.
 
 :::sources
 - [Juxi Express: 上海驹隙国际物流有限公司 (home page)](https://www.juxiex.com/) – company and English name, start in 2016, lines, untracked economy small packet, tracking button with no working link, hotline, address

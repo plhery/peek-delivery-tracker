@@ -1,18 +1,18 @@
 ---
 title: Como saber qual é a transportadora pelo número de seguimento
-description: Descobre que transportadora tem a tua encomenda pelo número de seguimento: como são os números dos CTT, DPD, GLS, InPost, DHL e UPS, e o que dizem as letras.
+description: Como saber qual é a transportadora pelo número de seguimento: formatos dos CTT, CTT Express, DPD, GLS, InPost, DHL, UPS (1Z) e código postal S10.
 slug: como-saber-qual-e-a-transportadora
 picture: Três etiquetas de seguimento divididas em partes coloridas, uma lupa sobre o código de país CH e o Pip, curioso.
 published: 2026-10-09
-updated: 2026-11-16
+updated: 2026-11-27
 ---
 
-As letras e o comprimento de um número de seguimento dizem muitas vezes que transportadora tem a tua encomenda. `1Z` seguido de 16 letras e algarismos é UPS, e 13 caracteres como `RR000000005CH` (duas letras, nove algarismos, duas letras) costumam ser de um operador postal, com o país que emitiu o número nas duas últimas letras: `PT` é Portugal. Os números só com algarismos são o caso difícil: 10, 12 ou 14 algarismos podem ser de várias transportadoras, e aí quem decide é o e-mail de envio, ou um serviço de seguimento que as experimente uma a uma.
+As letras e o comprimento de um número de seguimento revelam muitas vezes qual é a transportadora: `1Z` + 16 caracteres é UPS, 13 caracteres no formato postal S10 levam duas letras, nove algarismos e o país no fim (`PT` nos CTT, `CN` na China Post), 22 ou 25 algarismos apontam para CTT Express, e 10 algarismos sem letras para a DHL Express. Já os números só com 8, 12 ou 14 algarismos (como DPD, SEUR ou InPost) são partilhados entre várias empresas — escreve o teu código abaixo para ver a que transportadoras corresponde.
 
 :::checker
 :::
 
-## Como saber qual é a transportadora da minha encomenda?
+## Como descobrir a transportadora pelo número de seguimento?
 
 Quatro passos, por esta ordem:
 
@@ -27,7 +27,7 @@ Se não te apetecer fazer de detetive, [cola o número, uma ligação da transpo
 
 Quando a forma do número serve a mais do que uma transportadora, o verificador acima responde «Pode ser» e mostra as candidatas. No Peek, mal colas o número, ou sais do campo depois de o escreveres, a linha da transportadora mostra «A verificar serviços de seguimento…» enquanto o Peek pergunta às mais prováveis, até cinco de cada vez. Só conta a resposta sobre uma encomenda recente, porque as transportadoras voltam a usar números antigos. Se só uma conhecer o número, aparece o nome dela e «tem esta encomenda». Se forem várias, aparece, por exemplo, «3 transportadoras conhecem este número» e «escolhe a tua»: escolhe a que a mensagem de envio indica. Se nenhuma o conhecer ainda, lês «ainda não encontrada · o Peek continua a verificar».
 
-## Como é o número de seguimento de cada transportadora
+## Como é o número de seguimento dos CTT, DPD, GLS, InPost, DHL e UPS?
 
 Eis o que as transportadoras, e a norma postal, dizem sobre os números que mais vais encontrar em Portugal:
 
@@ -119,13 +119,13 @@ Se tiver 13 caracteres e acabar em duas letras, como `CN`, está no formato post
 
 > Na correspondência que vem do estrangeiro, um número no formato postal começado por `U` (de `UA` a `UZ`) não é para seguires. A UPU reserva essa série para mercadoria enviada como carta, sem seguimento pensado para o cliente, e os correios belgas bpost dizem claramente que uma encomenda assim não se pode seguir. Não esperes que comece a atualizar mais tarde.
 
-## Números que não são o teu número de seguimento
+## Que números não são números de seguimento (encomenda, PIN e contentores)?
 
 O número da encomenda na loja não funciona no site da transportadora (atenção: na DPD, o «número de encomenda» é o próprio número de seguimento, de 14 algarismos), e o PIN de um cacifo Locky ou de um Locker InPost só serve para o abrir. Onde está o número certo, e o que fazer se não tens nenhum: [onde encontrar o número de seguimento](guide:find-tracking-number).
 
 O número de um contentor marítimo também não é um número de seguimento: três letras do proprietário, um `U`, seis algarismos e um algarismo de controlo, como `TEMU1234565` (inventado). Identifica um contentor de carga, não uma encomenda, e nenhuma transportadora segue uma encomenda por ele. No registo de códigos de proprietários de contentores mantido pelo Bureau International des Containers (BIC), `TEMU` é da Textainer, uma empresa de aluguer de contentores, e não da loja Temu. Se adicionares um e nenhuma transportadora responder, o Peek diz «Isto parece o número de um contentor marítimo. O número de seguimento está no e-mail de envio ou na página do pedido.» e propõe «Escolher a transportadora».
 
-## Porque é que o número de seguimento pode mudar pelo caminho
+## Porque é que o número de seguimento muda em envios do estrangeiro?
 
 Uma encomenda que atravessa uma fronteira muda muitas vezes de mãos, e cada empresa pode imprimir a sua etiqueta. A UPU permite que o operador postal que a recebe acrescente o seu próprio código de barras ao lado do original, desde que não seja no formato postal de 13 caracteres.
 

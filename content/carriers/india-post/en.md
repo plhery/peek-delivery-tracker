@@ -1,12 +1,12 @@
 ---
 title: India Post tracking: Speed Post numbers and statuses
-description: Track an India Post or Speed Post item: what an IN number looks like, what each status means, delivery times, parcels abroad, complaints and who to call.
+description: Track an India Post or Speed Post parcel: 13-character IN barcode numbers, status meanings, 1–5 day Speed Post times, international tracking and 1800 266 6868.
 slug: india-post-tracking
 published: 2026-11-02
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-India Post is the Department of Posts, India's national postal service, with 164,999 post offices: the largest postal network in the world, it says. Within India it runs Speed Post, registered mail and India Post Parcel; abroad, EMS (International Speed Post), tracked packets and air parcels. Track an item in the box on [indiapost.gov.in](https://www.indiapost.gov.in/), which asks for a CAPTCHA, or paste the number in the box above. India Post calls it the article barcode number; for an online order, ask the seller for it.
+India Post (the Department of Posts, with 164,999 post offices) runs domestic Speed Post, registered mail and India Post Parcel plus international EMS, tracked packets and air parcels. Track your 13-character `IN` article barcode number on [indiapost.gov.in](https://www.indiapost.gov.in/) or paste it in the box above; below are status meanings, Speed Post delivery times (1–5 days in India), overseas handover and toll-free care (1800 266 6868).
 
 ## India Post tracking number: what it looks like
 
@@ -91,21 +91,25 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ## Questions about India Post tracking
 
-### How do I track India Post Speed Post?
+### How do I track India Post Speed Post or EMS?
 
-Enter the 13-character number ending in `IN` on indiapost.gov.in, or paste it into Peek, which follows it to delivery, abroad too.
+Enter the 13-character article barcode number ending in `IN` on indiapost.gov.in, or paste it in the box above to follow it both inside India and after handover abroad.
 
 ### Why is my India Post tracking not updating?
 
-Scans can take time to show, especially from rural offices or posts abroad. If a parcel going abroad last shows `Aircraft Departure`, it has left India: check your own post's tracking with the same number.
+Scans can take time to appear, especially from rural offices or foreign posts. Once an overseas parcel shows `Aircraft Departure`, check your destination country's national post with the same `IN` number.
 
-### How long does Speed Post take?
+### How long does India Post Speed Post take?
 
-India Post's standard is 1 to 3 days metro to metro and 4 to 5 days to the rest of the country, one more day for a branch office. 24 Speed Post delivers the next day in six metros.
+India Post's standard is 1 to 2 days locally, 1 to 3 days metro to metro and 4 to 5 days to the rest of India (plus a day for a branch office); 24 Speed Post delivers next day in six metros.
 
-### What is the India Post customer care number?
+### How do I track an India Post parcel sent abroad?
 
-1800 266 6868, toll-free: agents from 8am to 8pm India time, an automated line around the clock except on gazetted holidays.
+Use the same 13-character `IN` number on the destination post's tracker — such as [USPS](carrier:usps), [Royal Mail](carrier:royal-mail) ([Parcelforce](carrier:parcelforce) for EMS), [Canada Post](carrier:canada-post) or [Australia Post](carrier:australia-post) — or let Peek switch automatically once inbound scans appear.
+
+### What is the India Post customer care number and complaint deadline?
+
+Call toll-free 1800 266 6868 (agents 8am–8pm India time; automated 24/7 except gazetted holidays) or submit an online complaint on indiapost.gov.in within 60 days of the transaction once the service standard passes.
 
 :::sources
 - [India Post: Home](https://www.indiapost.gov.in/) – tracker, helpline, fraud alert

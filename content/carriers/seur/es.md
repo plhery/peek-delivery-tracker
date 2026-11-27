@@ -1,12 +1,12 @@
 ---
 title: SEUR seguimiento: número, estados y puntos Pickup
-description: Pega tu número de SEUR y mira dónde está tu paquete: cómo es el número, qué significa cada estado, qué pasa si no estás en casa y los puntos Pickup.
+description: Seguimiento SEUR (grupo Geopost): números de 14 o 21 cifras, estados explicados, puntos SEUR Pickup y lockers, plazos (SEUR 24) y soporte en miSEUR.
 slug: seur-seguimiento
 published: 2026-10-11
-updated: 2026-11-15
+updated: 2026-11-27
 ---
 
-Pega tu número de SEUR en la casilla de arriba para ver dónde está tu paquete, o escríbelo en Mis envíos de miSEUR, en seur.com, sin crear una cuenta. Suele tener 14 o 21 cifras y está en el correo de envío de la tienda o en la página de tu pedido. SEUR es una empresa española de paquetería urgente que forma parte del grupo Geopost, el mismo de DPD.
+SEUR es la empresa española de paquetería urgente del grupo Geopost (como DPD), con entrega a domicilio y en miles de tiendas SEUR Pickup y lockers. Pega tu número de 14 o 21 cifras (o referencia `REC`) arriba o en miSEUR en seur.com sin cuenta; abajo tienes cada estado en mayúsculas explicado, plazos (24h en SEUR 24) y soporte.
 
 ## Número de seguimiento de SEUR: cómo es y dónde encontrarlo
 
@@ -92,19 +92,23 @@ Peek muestra el estado, el historial y el peso. SEUR no da el lugar de sus escan
 
 ### ¿Qué significa que mi paquete SEUR está en demora?
 
-SEUR ha marcado un retraso y la entrega puede llegar más tarde de lo previsto, sin dar motivo ni plazo. Espera al siguiente escaneo y, si pasa la fecha prevista, habla con SEUR o con la tienda.
+SEUR ha marcado un retraso sin dar motivo ni plazo. Espera al siguiente escaneo y, si pasa la fecha prevista, contacta con la tienda o con SEUR desde el área de soporte de miSEUR.
 
-### ¿Cuánto tarda un paquete de SEUR?
+### ¿Cuánto tarda un paquete de SEUR (SEUR 24, Canarias, Europa)?
 
-Depende del servicio que haya contratado el remitente. Según Packlink, que vende envíos de SEUR, los plazos estimados son de 24 horas hábiles con SEUR 24, de 48 a 72 horas desde la Península con SEUR Canarias Todo Incluido (de 72 a 96 a La Gomera y El Hierro) y de 2 a 4 días a las principales ciudades europeas con SEUR Classic. Packlink añade que SEUR no se compromete a una franja horaria salvo en servicios urgentes con hora, como SEUR 10.
+Según Packlink, los plazos estimados son de 24 horas hábiles con SEUR 24, de 48 a 72 horas a Canarias con SEUR Canarias Todo Incluido (72 a 96 a La Gomera y El Hierro) y de 2 a 4 días a Europa con SEUR Classic, sin franja horaria fija salvo servicios urgentes con hora.
 
-### ¿Por qué no encuentro mi paquete SEUR?
+### ¿Por qué no aparece mi número de seguimiento SEUR?
 
-Puede que el envío sea demasiado reciente: SEUR da la misma respuesta para un envío reciente que para un número que no conoce. Si sigue sin aparecer, pregunta al remitente si ya ha entregado el paquete a SEUR.
+SEUR da la misma respuesta para un envío recién creado que para un número desconocido. Comprueba las 14 o 21 cifras y, si sigue sin salir, pregunta al remitente si ya entregó el paquete a SEUR.
+
+### ¿Qué pasa si no estaba en casa o mi paquete está en un punto SEUR Pickup?
+
+Si no había nadie, el seguimiento permite reprogramar una nueva entrega o desviar el envío a una tienda SEUR Pickup o locker; espera al aviso `EL ENVÍO ESTÁ DISPONIBLE PARA RECOGER EN EL PUNTO SEUR PICKUP.` antes de acudir.
 
 ### ¿SEUR y DPD son la misma empresa?
 
-No exactamente: SEUR es una de las marcas de reparto del grupo Geopost, como DPD.
+No exactamente: SEUR es una de las marcas de reparto del grupo Geopost, igual que DPD.
 
 :::sources
 - [Geopost: Who we are (en inglés)](https://www.geopost.com/en/about-us/who-we-are/) – SEUR entre las marcas de reparto del grupo, con DPD

@@ -1,12 +1,12 @@
 ---
 title: Tracking WanbExpress: codici WNB…YQ, stati e consegna
-description: Traccia un pacco WanbExpress (Wanb Express) dalla Cina: formato del codice WNB…YQ, significato degli stati in inglese, corriere finale e cosa fare se si ferma.
+description: Traccia un pacco WanbExpress (WNB…YQ) dalla Cina: significato degli stati doganali, chi consegna in Italia, codice del corriere locale e pacco fermo.
 slug: tracking-wanbexpress
 published: 2026-11-21
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-WanbExpress (noto anche come Wanb Express, WanBang Express o WANB) è un corriere cinese che spedisce pacchi all'estero, dove un corriere locale effettua la consegna. Se un negozio ha spedito il tuo ordine con WanbExpress, il codice inizia con `WNB` e termina con `YQ`: incollalo nel campo qui sopra. Il tracciamento di WanbExpress, tracking.wanbexpress.com, può anche indicare il corriere che consegna nel tuo Paese e il relativo codice.
+WanbExpress (noto anche come Wanb Express, WanBang Express o WANB) è un corriere cinese che gestisce spedizioni internazionali dalla Cina fino al Paese di destinazione, dove consegna un corriere locale. Se il tuo ordine ha un codice di 17 caratteri che inizia con `WNB` e termina con `YQ`, incollalo nel campo qui sopra oppure cercalo su `tracking.wanbexpress.com`, che può mostrare anche il corriere locale e il suo secondo codice di tracciamento.
 
 ## Codice di tracking WanbExpress: com'è fatto
 
@@ -106,23 +106,23 @@ Finché tieni il pacco aperto sullo schermo o nel giorno della consegna con le n
 
 ## Domande sul tracking WanbExpress
 
-### Che cos'è WanbExpress?
+### Che cos'è WanbExpress e come funziona il codice WNB…YQ?
 
-Un corriere cinese, noto anche come Wanb Express, WanBang Express o WANB. Nel codice di Peek, le sue scansioni partono da un centro di smistamento a Shenzhen, seguono volo e dogana e si concludono con le scansioni del corriere che consegna nel Paese di destinazione.
+WanbExpress è un corriere cinese (noto anche come Wanb Express, WanBang Express o WANB) con codici da 17 caratteri (`WNB`, due lettere, dieci cifre e `YQ`). Nel codice di Peek, le sue scansioni partono da un centro di smistamento a Shenzhen, seguono volo e dogana e si concludono con le scansioni del corriere che consegna nel Paese di destinazione.
 
-### Dove posso tracciare un pacco WanbExpress?
+### Dove tracciare un pacco WanbExpress dalla Cina?
 
-Nel campo qui sopra oppure sul tracciamento di WanbExpress su tracking.wanbexpress.com. Quel sito esegue un controllo antibot e può anche indicare il corriere finale. Inserisci l'intero codice `WNB…YQ`.
+Nel campo qui sopra oppure sul tracciamento di WanbExpress su `tracking.wanbexpress.com`. Quel sito esegue un controllo antibot e può anche indicare il corriere finale. Inserisci l'intero codice `WNB…YQ`.
 
 ### Cosa significa «Customs declaration completed» sul tracking WanbExpress?
 
 Che è stata completata una dichiarazione doganale per il tuo pacco. La dicitura non specifica di quale Paese e non indica lo sdoganamento all'importazione, che appare come `Custom clearance completed`. Peek mostra entrambi come «In transito».
 
-### Chi consegna i pacchi WanbExpress nel mio Paese?
+### Chi consegna i pacchi WanbExpress in Italia e negli altri Paesi?
 
-Un corriere locale, che il sito di WanbExpress può indicare insieme al proprio codice. Il codice di Peek mostra iMile su un pacco verso la Germania, le righe di InPost verso il Regno Unito e una scansione che cita la rete di Poste Italiane, oltre a passaggi verso J&T Express Australia o codici `DOFR…HD`/`CNFR…HD` in Francia; per gli altri Paesi controlla tracking.wanbexpress.com o chiedi al venditore.
+Un corriere locale, che il sito di WanbExpress può indicare insieme al proprio codice. Il codice di Peek mostra iMile su un pacco verso la Germania, le righe di InPost verso il Regno Unito e una scansione che cita la rete di Poste Italiane, oltre a passaggi verso J&T Express Australia o codici `DOFR…HD`/`CNFR…HD` in Francia; per gli altri Paesi controlla `tracking.wanbexpress.com` o chiedi al venditore.
 
-### Chi devo contattare se il pacco WanbExpress non arriva?
+### Chi contattare se il pacco WanbExpress è fermo o non arriva?
 
 Il venditore da cui hai acquistato: è lui ad aver affidato il pacco a WanbExpress. Peek non ha potuto verificare il sito di WanbExpress per eventuali recapiti.
 

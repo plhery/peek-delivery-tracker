@@ -1,13 +1,13 @@
 ---
 title: Paketverfolgung aller Anbieter: alle Pakete an einem Ort
-description: Was eine Sendungsverfolgung für alle Paketdienste kann, wie sie funktioniert und was 17TRACK, ParcelsApp und andere zu Datenschutz, Werbung und Kosten angeben.
+description: Paketverfolgung aller Anbieter im Vergleich: wie Universal-Tracker funktionieren, ob 17TRACK und ParcelsApp seriös sind, sowie Datenschutz, Werbung und Kosten.
 slug: paketverfolgung-aller-anbieter
 picture: Fünf bunte Lieferwagen, deren gepunktete Wege alle in einer Liste auf einem Handy enden, und Pip, der strahlend aus einem offenen Karton schaut.
 published: 2026-10-09
-updated: 2026-11-10
+updated: 2026-11-27
 ---
 
-Eine Paketverfolgung aller Anbieter, kurz Paket-Tracker, ist eine Website oder App, die Sendungsnummern jedes Paketdienstes annimmt, selbst erkennt, woher eine Nummer stammt, die Scans abruft und alle deine Pakete in einer Liste sammelt. Sie zeigt nur Scans, die der Paketdienst erfasst hat, und ist ihm deshalb nie voraus. Die Tracker unterscheiden sich vor allem darin, was sie von dir wollen: ein Konto, Zugriff auf dein Postfach, ein Abo für Mitteilungen oder Geduld mit Werbung.
+Eine Paketverfolgung aller Anbieter (Universal-Tracker) nimmt Sendungsnummern verschiedener Paketdienste an, erkennt den jeweiligen Dienst, ruft seine Scans ab und bündelt alle Pakete in einer Liste. Weil sie nur bereits erfasste Scans übernimmt, ist sie dem Paketdienst nie voraus. Die Tracker unterscheiden sich bei Konto, Postfach-Zugriff, Werbung, Abo-Kosten und Datenschutz — und genau daran prüfst du auch, ob Dienste wie 17TRACK oder ParcelsApp seriös sind.
 
 ## Gibt es eine Sendungsverfolgung für alle Paketdienste?
 
@@ -57,7 +57,7 @@ Keine ist für alle die beste: Es hängt von deinen Paketdiensten ab und davon, 
 | Händlerstatus | App Store in Deutschland und Österreich, unter „Anbieter“ | Hat sich der Entwickler nicht als Händler ausgewiesen, gelten laut App Store für Verbraucher im EWR die Verbraucherrechte nicht für Verträge mit ihm |
 | Deine Paketdienste | Die Liste der Paketdienste des Trackers | Die Zahlen nennen die Anbieter selbst: 17TRACK spricht im App Store von 2500+, auf seiner USPS-Seite von 2800+ |
 
-## Kostenlos oder mit Abo: Tracker im Vergleich
+## Kostenlos oder mit Abo: welche Paket-Tracker gibt es im Vergleich?
 
 Die meisten kosten erst einmal nichts, haben dann aber Werbung, eine Obergrenze oder keine Push-Mitteilungen. Die Liste ist alphabetisch, ohne Rangfolge, und stützt sich auf die eigenen Seiten der Anbieter und ihre Einträge im deutschen App Store (Stand: 10. November 2026). Peek, das diesen Ratgeber herausgibt, steht wie die anderen in der Liste.
 
@@ -122,7 +122,7 @@ Auf dem Weg aus dem Ausland wechselt ein Paket oft den Paketdienst. Der Paketdie
 
 Tracker, die Nummern verknüpfen, etwa ParcelsApp, verbinden A und B, sobald B in den Daten des ersten Paketdienstes auftaucht. Taucht B dort nie auf, such im vollständigen Verlauf nach einer neuen Nummer und probier sie auf der Seite des Paketdienstes vor Ort aus, etwa bei DHL, der Österreichischen Post oder der Schweizerischen Post. Bei Bestellungen von chinesischen Marktplätzen hilft [Paket aus China verfolgen](guide:tracking-from-china). Wo Cainiao und YunExpress die zweite Nummer zeigen, steht auf den Seiten zu [Cainiao](carrier:cainiao) und [YunExpress](carrier:yunexpress).
 
-## Was ein Tracker nicht sieht
+## Was sieht eine Paketverfolgung aller Anbieter nicht?
 
 Alles, was der Paketdienst nicht veröffentlicht hat. ParcelsApp schreibt es offen: Der Dienst kann keinen Scan erzeugen, den der Paketdienst nicht erfasst hat. Ein Tracker sieht jeden Scan außerdem erst nach dem Paketdienst, und die Verzögerungen addieren sich:
 
@@ -135,7 +135,7 @@ Manchmal gibt es noch gar nichts zu sehen: Laut ParcelsApp kann eine Sendungsnum
 
 Handeln kann ein Tracker auch nicht für dich: Um eine Zustellung zu ändern, eine Gebühr zu bezahlen oder einen Verlust zu melden, schickt dich ParcelsApp auf die Website des Paketdienstes. Bewegt sich die Sendungsverfolgung seit Tagen nicht, lies nach, [warum sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating). Steht dort „Zugestellt“, aber bei dir ist nichts angekommen, hilft [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
-## Woran erkennst du, ob 17TRACK oder ParcelsApp seriös ist?
+## Ist ParcelsApp oder 17TRACK seriös? Woran du es erkennst
 
 Erste Anhaltspunkte liefern die Angaben der Anbieter selbst. Die Datenschutzerklärung von 17TRACK nennt für registrierte Nutzer außerhalb von Festlandchina und Hongkong die VASTAR SINGAPORE TECHNOLOGY PTE. LTD. als Verantwortliche. Kontodaten liegen auf Servern von Tencent Cloud in Guangzhou, China, und in den USA. Für Nutzer in der EU verweist 17TRACK auf die DSGVO: Verlassen ihre Daten den Europäischen Wirtschaftsraum, stützt sich 17TRACK auf Standardvertragsklauseln der EU-Kommission oder darauf, dass das Zielland ein angemessenes Datenschutzniveau bietet. Im deutschen App Store steht bei 17TRACK „Enthält Werbung“, und unter „Anbieter“ hat sich der Entwickler als Händler ausgewiesen. Was die App erfasst, prüfst du im „App-Datenschutz“.
 

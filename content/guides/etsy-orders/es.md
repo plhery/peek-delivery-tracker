@@ -1,15 +1,15 @@
 ---
 title: Seguimiento de Etsy: dónde está tu pedido y quién lo entrega
-description: Por qué tu pedido de Etsy aún dice «No enviado», qué transportista lo entrega, cómo es su número de seguimiento y cuándo abrir un caso con Etsy.
+description: Envíos de Etsy y seguimiento de pedidos: por qué pone «No enviado», qué transportista entrega, cómo es el número, aduanas en la UE y cuándo abrir un caso.
 slug: seguimiento-pedido-etsy
 picture: Un paquete atado con cordel y con sellos, una furgoneta de correos y Pip corriendo a toda prisa.
 published: 2026-10-17
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Etsy no envía nada por sí mismo: cada tienda fabrica o empaqueta sus pedidos, los envía con el transportista que elige y añade un número de seguimiento cuando el servicio lo tiene. Tu página de Compras te dice si el pedido ha salido de la tienda y cuándo debería llegar; el número de seguimiento te dice dónde está ahora. ¿Llega tarde o no aparece? Pregunta primero al vendedor y después a Etsy.
+Los envíos de Etsy los gestiona cada tienda por su cuenta: cada vendedor fabrica o empaqueta el pedido, elige el transportista y añade un número de seguimiento cuando el servicio lo incluye. En **Compras y reseñas** (o **Tu cuenta** → **Compras** en la app) ves el estado del envío, la fecha estimada de entrega y el enlace de seguimiento. Si el pedido llega tarde o no aparece, escribe primero al vendedor en **Ayuda con el pedido** y después abre un caso con Etsy.
 
-## ¿Por qué mi pedido de Etsy sigue diciendo «No enviado»?
+## ¿Cómo funcionan los envíos de Etsy y por qué pone «No enviado»?
 
 Porque el vendedor aún no lo ha fabricado, empaquetado o marcado como enviado. Etsy calcula la fecha de entrega estimada así: «Tiempo de preparación + tiempo de tránsito de la compañía de transporte = Fecha de entrega estimada». El tiempo de preparación es lo que tarda el vendedor en fabricar el artículo y prepararlo para el envío. El ejemplo de Etsy: de 3 a 5 días de preparación y de 2 a 4 días de tránsito dan una entrega en 5 a 9 días. En el recibo también verás la fecha de envío con la que se ha comprometido el vendedor.
 
@@ -27,7 +27,7 @@ En **Compras y reseñas** (app: **Tu cuenta** → **Compras**), cada pedido mues
 
 Dónde está el número en Etsy y en el correo de envío: [encontrar tu número de seguimiento](guide:find-tracking-number).
 
-## ¿Qué transportista entrega un pedido de Etsy?
+## ¿Qué transportista entrega un envío de Etsy?
 
 El que elige el vendedor. Etsy solo vende etiquetas de envío a vendedores de Estados Unidos, Canadá y Reino Unido; los demás compran el franqueo por su cuenta, en correos o en una empresa de mensajería. Para los envíos al extranjero, Etsy nombra los transportistas habituales en cada país:
 
@@ -43,7 +43,7 @@ Si el vendedor ha usado una compañía de transporte compatible con Etsy, verás
 
 Desde el 1 de julio de 2026, Etsy no vende temporalmente etiquetas de USPS ni de Canada Post con destino a España, por una nueva tasa de gestión de la UE que afecta a algunos transportistas, según Etsy. Los vendedores de Estados Unidos usan entonces Global Postal Shipping o compran la etiqueta en otro sitio. Los paquetes desde China siguen su propio camino: mira [seguir un paquete desde China](guide:tracking-from-china).
 
-## ¿Cómo es un número de seguimiento de Etsy?
+## ¿Cómo es el número de seguimiento de un envío de Etsy?
 
 Es el número del transportista, no uno de Etsy. Los correos usan el formato postal internacional: 13 caracteres que no cambian de un país a otro.
 
@@ -110,7 +110,7 @@ Etsy dice que, por lo general, quien compra paga los derechos, impuestos y gasto
 
 Si un paquete llega tarde o no llega porque rechazaste o no pagaste los cargos de la entrega, la protección de compras de Etsy no lo cubre. Más sobre cargos y plazos: [paquete retenido en aduana](guide:customs).
 
-## Qué hacer si tu pedido de Etsy llega tarde o no llega
+## ¿Qué hacer si tu envío de Etsy llega tarde o no llega?
 
 Sigue este orden:
 

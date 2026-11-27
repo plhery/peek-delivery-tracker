@@ -1,15 +1,15 @@
 ---
 title: Come cambiare indirizzo di consegna di un pacco
-description: Come cambiare indirizzo di consegna di un pacco, prima o dopo la spedizione: Amazon, eBay e Vinted, poi Poste, BRT, GLS e la Posta svizzera, con i costi.
+description: Modifica indirizzo di spedizione dopo un acquisto online: come cambiare consegna su Amazon, eBay e Vinted o con PostePlus, myBRT, GLS e La Posta, con i costi.
 slug: come-cambiare-indirizzo-di-consegna
 picture: Una strada che si biforca a un cartello, da una parte verso una casa e dall'altra verso un locker, un furgone che prende la nuova svolta e Pip che guarda lungo la strada in quella direzione.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-27
 ---
 
-Se l'ordine non è ancora partito, cambia l'indirizzo nel negozio: Amazon.it te lo lascia modificare finché l'ordine non entra nel processo di spedizione, su eBay chiedi al venditore di annullare l'ordine e lo ricompri. Quando il pacco è già in viaggio, chiedi al corriere: con il codice tracking, sul suo sito o nella sua app, di solito puoi scegliere un vicino, un luogo sicuro, un punto di ritiro o un altro giorno. Un indirizzo nuovo spesso non è tra le opzioni, perché è il mittente a decidere cosa puoi cambiare; e quando il pacco è già in consegna, di solito è tardi.
+Per modificare l'indirizzo di spedizione di un acquisto online prima che parta, agisci nel negozio: su Amazon.it puoi cambiarlo da **I miei ordini** finché l'ordine non entra nel processo di spedizione (entro 30 minuti per i venditori terzi), mentre su eBay e Vinted annulli l'ordine con il venditore e ricompri. Quando il pacco è già in viaggio, puoi modificare la consegna con il corriere — scegliendo un punto di ritiro, un vicino, un luogo sicuro o un altro giorno con PostePlus, myBRT, GLS FlexDeliveryService o La Posta — ma cambiare via dipende dal mittente e di solito non è più possibile quando il pacco è già in consegna.
 
-## Si può cambiare indirizzo di consegna su Amazon dopo l'ordine?
+## Come modificare l'indirizzo di spedizione su Amazon, eBay o Vinted dopo l'ordine?
 
 Di solito sì, finché l'ordine non è imballato o spedito.
 
@@ -22,7 +22,7 @@ Di solito sì, finché l'ordine non è imballato o spedito.
 
 Se un ordine Amazon non è ancora partito ma non riesci a modificare l'indirizzo, Amazon.it ti dice di chiedere l'annullamento e di fare un nuovo ordine con l'indirizzo corretto. Tieni presente che la modifica può spostare la data di consegna.
 
-## Cambiare indirizzo di consegna di un pacco già spedito
+## Come modificare la consegna di un pacco già spedito?
 
 A volte si può, ma lo chiedi al corriere, non al negozio. Lo dice anche Amazon.it: se l'ordine è già stato spedito, «contatta direttamente il corriere». Il cliente del corriere però è il mittente, ed è lui a decidere cosa puoi cambiare. BRT scrive che la variazione dell'indirizzo «deve essere autorizzata dal mittente», e PostePlus funziona solo per i pacchi che il mittente ha abilitato al servizio.
 
@@ -44,7 +44,7 @@ Non trovi il codice, o ti serve uno degli account gratuiti dei corrieri che alcu
 
 > Un SMS che ti chiede di «aggiornare l'indirizzo» o di pagare una piccola cifra prima della consegna è la truffa classica. Le vere opzioni per cambiare la consegna stanno sul sito o nell'app del corriere, dietro il tuo codice tracking: [come riconoscere un SMS truffa sul pacco](guide:delivery-scam-texts).
 
-## Come cambiare indirizzo di consegna con Poste, BRT, GLS e la Posta
+## Come cambiare consegna o indirizzo con Poste Italiane, BRT, GLS e La Posta?
 
 | Corriere | Dove può andare il pacco | Costo |
 | --- | --- | --- |
@@ -67,7 +67,7 @@ Vai in vacanza? PostePlus ha la «giacenza per vacanza»: il pacco resta in giac
 
 Se il corriere è già passato e ti ha lasciato un avviso, non stai cambiando indirizzo ma fissando una nuova consegna: leggi [cosa fare dopo una mancata consegna](guide:missed-delivery).
 
-## Perché non riesco a cambiare l'indirizzo di consegna?
+## Perché non riesco a modificare l'indirizzo di consegna?
 
 Se le opzioni mancano o sono grigie, di solito è per uno di questi motivi:
 

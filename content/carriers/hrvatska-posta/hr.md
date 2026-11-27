@@ -1,12 +1,12 @@
 ---
 title: Praćenje pošiljke Hrvatske pošte: statusi, rokovi i kontakt
-description: Prati pošiljku Hrvatske pošte: kako izgleda prijamni broj, što znače statusi, koliko pošiljka čeka u uredu ili paketomatu i kako doći do Kontakt centra.
+description: HP praćenje pošiljaka i Paket24 paketa Hrvatske pošte: prijamni broj, značenje statusa, rokovi u paketomatu i poštanskom uredu, carina i Kontakt centar.
 slug: hrvatska-posta-pracenje-posiljke
 published: 2026-10-22
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Hrvatska pošta je nacionalni poštanski operater, a za brzu dostavu paketa ima i uslugu Paket24. Pošiljku pratiš na [posiljka.posta.hr](https://posiljka.posta.hr/hr/tracking) upisom prijamnog broja pošiljke, a broj možeš zalijepiti i u polje iznad. Broj dobiješ od pošiljatelja, primjerice u e-poruci web-trgovine ili na stranici narudžbe, a nalazi se i u službenim obavijestima Hrvatske pošte.
+Hrvatska pošta (HP) nacionalni je poštanski operater koji za brzu dostavu nudi i uslugu Paket24. Za HP praćenje pošiljaka i paketa upiši prijamni broj pošiljke na [posiljka.posta.hr](https://posiljka.posta.hr/hr/tracking) ili ga zalijepi u polje iznad. Prijamni broj dobiješ od pošiljatelja u e-poruci web-trgovine ili na stranici narudžbe, a stoji i u službenim obavijestima Hrvatske pošte.
 
 ## Prijamni broj pošiljke
 
@@ -95,7 +95,11 @@ Peek prikazuje povijest Hrvatske pošte na engleskom, onako kako je ispisuje nje
 
 ## Pitanja o praćenju pošiljaka Hrvatske pošte
 
-### Mogu li pratiti pošiljku iz inozemstva?
+### Kako pratiti Paket24 ili paket Hrvatske pošte?
+
+Upiši prijamni broj pošiljke na [posiljka.posta.hr](https://posiljka.posta.hr/hr/tracking) ili ga zalijepi u polje iznad. Tražilica prati domaće pošiljke s oznakom `HR`, pošiljke Paket24 i pakete iz inozemstva pod brojem strane pošte.
+
+### Mogu li pratiti pošiljku iz inozemstva u Hrvatskoj pošti?
 
 Da, s brojem koji ti je dao pošiljatelj; završava oznakom zemlje iz koje pošiljka dolazi. Kad je Hrvatska pošta preuzme, posiljka.posta.hr pokazuje i njezine korake u Hrvatskoj. Peek je prati kod strane pošte i, kad ta pošta navede Hrvatsku kao odredište (ili ne navede odredište, a ti si u Hrvatskoj), prelazi na Hrvatsku poštu čim ona ima svjež korak, a odmah ako pod "Change" odabereš Hrvatsku poštu.
 

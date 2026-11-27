@@ -1,12 +1,12 @@
 ---
 title: Colissimo e La Poste rastreio: estados e entrega em Portugal
-description: Rastreio Colissimo e La Poste: como é o número, o que querem dizer os estados em francês, a entrega em Portugal e onde reclamar se algo correr mal.
+description: Rastreio Colissimo e La Poste em Portugal: formato do número, tradução dos estados franceses, pontos de levantamento, entrega pelos CTT ou DPD e contactos.
 slug: colissimo-la-poste-rastreio
 published: 2026-10-22
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-A Colissimo é o serviço de encomendas da La Poste, o correio nacional francês. Esta página é para quem está em Portugal à espera de uma encomenda que vem de França, de uma loja online ou da família. Para a seguires, cola o número, ou um link de rastreio do laposte.fr, na caixa acima; o rastreio da própria La Poste está no laposte.fr. O número vem de quem envia: as lojas põem-no no email de envio.
+A Colissimo é o serviço de encomendas da La Poste, o correio nacional francês, com entrega ao domicílio ou em ponto de levantamento (*point de retrait*). Se estás em Portugal à espera de uma encomenda vinda de França, cola o número Colissimo ou um link do `laposte.fr` na caixa acima, ou consulta diretamente no `laposte.fr`. O código vem no email de envio da loja ou de quem expediu o pacote.
 
 ## Número de rastreio Colissimo: como é
 
@@ -83,6 +83,10 @@ Não. Segundo a Autoridade Tributária, só as remessas postais vindas de fora d
 ### Porque é que o rastreio Colissimo não funciona?
 
 Compara o número com as formas acima: se acabar em `FR` e começar por XU, XR, XT, XW, XY ou PZ, é da Chronopost. Quando a encomenda sai de França, a última parte pode ficar a cargo de outra empresa: se ela já te mandou o número dela, usa-o no site dela.
+
+### Quanto tempo fica uma encomenda Colissimo num ponto de levantamento?
+
+O estado do rastreio indica o prazo exato — por exemplo, 5 dias na mensagem `Votre Colissimo vous attend dans votre point de retrait. Le délai de retrait est de 5 jours.` Se ninguém a levantar até à data limite, a encomenda regressa ao remetente.
 
 :::sources
 - [Arcep: Comment résoudre un litige avec un opérateur postal ?](https://www.arcep.fr/mes-demarches-et-services/consommateurs/fiches-pratiques/la-resolution-des-litiges-postaux.html) – reclamação gratuita, remetente ou destinatário, telefones e horários, site, morada postal, serviço de recurso, Médiateur

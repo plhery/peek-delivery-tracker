@@ -1,12 +1,12 @@
 ---
 title: UPS tracking: numero, stati del pacco e consegna
-description: Tracking UPS: com'è fatto il numero 1Z, cosa vogliono dire Exception e le altre scansioni, UPS Access Point, dazi e i tuoi diritti se il pacco si perde.
+description: Tracking UPS e consegne in Italia: codice 1Z, cosa significano Exception e gli altri stati, UPS Access Point, dazi doganali e diritti per pacchi persi o tardi.
 slug: ups-tracking
 published: 2026-10-13
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-I numeri di tracking UPS (United Parcel Service) di solito iniziano con `1Z`. Per seguire il pacco incolla il numero, o un link di tracciamento UPS, nel box qui sopra; il tracking di UPS vero e proprio è su ups.com.
+Per seguire le consegne dei corrieri UPS (United Parcel Service), incolla il codice di tracciamento — di solito 18 caratteri che iniziano con `1Z` — o un link di `ups.com` nel box qui sopra, oppure controlla direttamente su `ups.com`. Qui trovi il significato degli stati come `Exception`, come funzionano gli UPS Access Point, i dazi doganali e i tuoi diritti in caso di ritardo o smarrimento.
 
 ## Numero di tracking UPS: dove si trova e com'è fatto
 
@@ -74,6 +74,10 @@ Per leggere i dati, il suo server apre la pagina di tracciamento di UPS in un br
 Qualunque sia la lingua di Peek, le scansioni compaiono come le scrive UPS in inglese: la consegna si legge «DELIVERED». Se negli Stati Uniti UPS affida un pacco Ground Saver al servizio postale americano e ne indica il numero, il pacco viene seguito su USPS appena USPS mostra progressi («Consegna con USPS»).
 
 ## Domande sul tracking UPS
+
+### Come funzionano le consegne UPS se non sono in casa?
+
+Se il corriere UPS non ti trova, la scansione segnala l'assenza e UPS riprova la consegna. Dopo l'ultimo tentativo una scansione successiva dice se il pacco viene tenuto da UPS, portato in un UPS Access Point (con nome e indirizzo visibili nel tracking) o rispedito al mittente.
 
 ### Perché il tracking UPS non funziona?
 

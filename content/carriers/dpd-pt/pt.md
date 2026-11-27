@@ -1,12 +1,12 @@
 ---
 title: DPD Portugal rastreio: estados, pontos Pickup e contactos
-description: Rastreio DPD Portugal: onde está o número de 14 algarismos, o que quer dizer cada estado, o Predict, os pontos Pickup e cacifos, reclamações e contactos.
+description: Rastreio DPD Portugal: número de 14 algarismos, estados, janela Predict de 1 hora, 2.300 pontos Pickup (7–10 dias), cacifos (72h) e contacto 21 854 6001.
 slug: dpd-portugal-rastreio
 published: 2026-10-22
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-A DPD Portugal é a transportadora de encomendas da Geopost em Portugal, o mesmo grupo da [Chronopost](carrier:chronopost). Entrega no continente, na Madeira e nos Açores. Para saberes onde está a tua encomenda, escreve o número no [Track & Trace](https://tracking.dpd.pt/track-and-trace) da DPD ou cola-o na caixa no topo desta página.
+A DPD Portugal (do grupo Geopost, o mesmo da [Chronopost](carrier:chronopost)) entrega no dia útil seguinte no continente e em 2 a 5 dias na Madeira e nos Açores. Escreve o número de 14 algarismos ou a referência no [Track & Trace](https://tracking.dpd.pt/track-and-trace) ou cola-o no topo desta página; mais abaixo encontras o significado dos estados, a janela Predict de 1 hora, os cerca de 2.300 pontos Pickup e 500 cacifos, reclamações e o contacto 21 854 6001.
 
 ## Número de rastreio DPD: onde o encontrar
 
@@ -97,21 +97,25 @@ Se o rastreio da La Poste disser que a encomenda passou para a DPD Portugal e de
 
 ## Perguntas sobre o rastreio DPD Portugal
 
-### Quanto tempo demora a DPD a entregar?
+### Quanto tempo demora a DPD Portugal a entregar no continente e nas ilhas?
 
-No dia útil seguinte à recolha, no continente, e em 2 a 5 dias na Madeira e nos Açores, segundo a página do serviço nacional da DPD.
+No dia útil seguinte à recolha no continente e em 2 a 5 dias na Madeira e nos Açores, segundo a página do serviço nacional da DPD. A entrega ao sábado até às 13h só acontece se o remetente a contratar.
 
-### Quanto tempo fica a encomenda no ponto Pickup?
+### Quanto tempo fica a encomenda num ponto Pickup ou cacifo DPD?
 
-As FAQ da DPD dão 7 dias úteis numa resposta e 10 noutra, e o prazo pode variar: conta com 7. Num cacifo, 72 horas.
+As FAQ da DPD dão 7 dias úteis numa resposta e 10 noutra, e o prazo pode variar conforme o cliente: conta com 7 dias úteis. Nos cacifos DPD, a encomenda fica 72 horas (3 dias).
 
-### Posso ir buscar a encomenda ao armazém da DPD?
+### Posso levantar a encomenda no armazém da DPD ou alterar a entrega?
 
-Não. Por razões de segurança, não se levantam encomendas nos centros de distribuição da DPD: muda a entrega para um ponto Pickup ou para outro dia.
+Não podes levantar encomendas nos centros de distribuição nem pedi-las ao estafeta durante a volta, por razões de segurança. Usa dpd.pt ou a app myDPD para mudar a data (até 5 dias úteis depois) ou reencaminhar para um ponto Pickup.
+
+### Qual é o telefone e contacto da DPD Portugal?
+
+Para particulares, liga 21 854 6001 (segunda a sexta 8h30–19h30, sábado 9h–13h, hora de Lisboa), escreve para suporte.cliente@dpd.pt ou usa a assistente virtual Maria (24 horas por dia). Para empresas, a linha é 707 45 28 28.
 
 ### A DPD entrega na Madeira e nos Açores?
 
-Sim. A DPD Portugal entrega nas ilhas, em casa ou num ponto Pickup, em 2 a 5 dias.
+Sim. A DPD Portugal entrega na Madeira e nos Açores, em casa ou num ponto Pickup, em 2 a 5 dias.
 
 :::sources
 - [DPD Portugal: Track & Trace](https://tracking.dpd.pt/track-and-trace) – rastreio, versões inglesa e francesa, número desconhecido, descrições dos estados

@@ -1,12 +1,12 @@
 ---
 title: TopYou tracking: TYZR numbers, scans and who delivers
-description: Track a TopYou (通邮) parcel from China: what a TYZR…YQ number looks like, what its English scans mean and who takes the parcel over in your country.
+description: Track a TopYou (通邮 / SZTY56) parcel from China: TYZR…YQ numbers, scan meanings, last-mile carriers (USPS, GOFO, iMile, DPD) and Shenzhen contact details.
 slug: topyou-tracking
 published: 2026-10-28
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-TopYou (通邮, Tongyou, also 通邮集团 or SZTY56) is 深圳市通邮物流科技（集团）股份有限公司, a cross-border forwarder in Shenzhen, China, that runs international lines. If a Chinese online shop sent your order with TopYou, the shop gives you a number that starts with TYZ and ends with YQ: paste it in the box above. TopYou's history runs from its warehouse in China through the flight and customs, and for parcels to the United States on to USPS's delivery.
+TopYou (通邮, Tongyou, 通邮集团 or SZTY56 — 深圳市通邮物流科技（集团）股份有限公司, founded in 2016 in Shenzhen) is a cross-border forwarder running international lines from China. Paste your 17-character `TYZR…YQ` waybill in the box above (or in capitals on `track.szty56.com`) to follow it from Shenzhen through export, flight, customs and last-mile handover, such as USPS in the US, GOFO in France and Italy, iMile in Germany or DPD in Austria.
 
 ## TopYou tracking number: what it looks like
 
@@ -113,21 +113,25 @@ Peek checks up to every 10 minutes while you have the parcel open, or on its del
 
 ## Questions about TopYou tracking
 
-### What is TopYou (通邮)?
+### What is TopYou (通邮 / SZTY56)?
 
-It is 深圳市通邮物流科技（集团）股份有限公司, also called 通邮集团, Tongyou or SZTY56, a cross-border forwarder in Shenzhen, China, with international lines. It says it was founded in 2016, has branches and sorting centres in Shenzhen, Guangzhou, Shanghai and other Chinese cities, and handles more than 800,000 orders a day, sent by post, on its own international lines or with the big express couriers. Its waybills are TYZR, a letter, ten digits and YQ, some with another letter in place of the R.
+It is 深圳市通邮物流科技（集团）股份有限公司, also called 通邮集团, Tongyou or SZTY56, a cross-border forwarder in Shenzhen, China, founded in 2016 with sorting centres across Shenzhen, Guangzhou, Shanghai and other cities handling over 800,000 orders a day.
 
-### Why does TopYou show my country before my parcel has left China?
+### What does a TopYou tracking number look like, and why isn't it found?
+
+TopYou waybills are 17 characters: `TYZR` (or `TYZ` and another letter), one letter, ten digits and `YQ`. TopYou's tracker at track.szty56.com is case-sensitive and answers 查询不到 when unknown or 暂无轨迹信息 before the first scan.
+
+### Why does TopYou show my country before my parcel leaves China?
 
 Because TopYou's tracker writes the destination country next to its own scans, even at the departure airport. Go by the wording: `Arrived at airport of the original country` means the parcel is still waiting for its flight.
 
-### Who delivers TopYou parcels in my country?
+### Who delivers TopYou parcels in the US, Europe and elsewhere?
 
-In the United States, USPS, which takes the parcel over from TopYou's line after the flight. In France and Italy, it can be GOFO, in Germany iMile and in Austria DPD. Elsewhere TopYou's record can give the delivering carrier's number but not its name: ask the seller which company delivers.
+In the United States, USPS takes over after the flight. In France and Italy, it can be GOFO, in Germany iMile and in Austria DPD. Elsewhere TopYou's record may show a second tracking number without naming the carrier: ask the seller which company delivers.
 
-### Who do I contact about a missing TopYou parcel?
+### How do I contact TopYou about a late or missing parcel?
 
-The seller you ordered from: it booked the parcel with TopYou. TopYou's website gives a phone number in Shenzhen (above), but no service for recipients.
+Ask the seller or marketplace first, as the shop booked the shipment with TopYou. TopYou's website szty56.com lists a Shenzhen phone number (+86 755 8181 9898, working days 9:00–18:00) but no recipient support desk.
 
 :::sources
 - [TopYou: 通邮集团 (home page)](https://www.szty56.com/) – phone, hours

@@ -1,12 +1,12 @@
 ---
 title: Allegro One śledzenie przesyłki: One Box, Punkt i Kurier
-description: Śledzenie przesyłki Allegro One Box, One Punkt i One Kurier: gdzie jest numer, co znaczą statusy, ile czeka paczka, opóźnienia, reklamacja i kontakt.
+description: Allegro One Kurier, One Box i One Punkt: kto dostarcza paczki (Allegro One, DPD, DHL, ORLEN Paczka), gdzie śledzić numer A0/AD0, czas odbioru i reklamacje.
 slug: allegro-one-sledzenie
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Allegro One to własna sieć dostaw Allegro: automaty paczkowe Allegro One Box, punkty odbioru Allegro One Punkt i kurier Allegro One Kurier, wszystkie w ramach Allegro Delivery. Paczkę śledzisz tak samo, czy jedzie do One Boxa, do One Punktu, czy z One Kurierem pod drzwi: w „Moich przesyłkach” na allegro.pl i w aplikacji Allegro, na stronie śledzenia Allegro Delivery albo po wklejeniu numeru przesyłki w pole powyżej. Numer przesyłki znajdziesz w szczegółach zakupu, w aplikacji i w e-mailu, który Allegro wysyła, gdy numer zostanie dodany. Do One Punktu paczkę przywozi DPD, do One Boxa DPD, DHL albo ORLEN Paczka, a w wybranych miastach do obu także One Kurier. Gdy One Kurier wiezie paczkę pod drzwi z opcją „dostawa jutro”, Allegro zapowiada doręczenie w najbliższym dniu roboczym albo w sobotę po dniu nadania, a gwarantuje je w ciągu 3 dni roboczych. Niektórzy sprzedający oferują też dostawę tego samego dnia do One Boxa w mieście, w którym mają magazyn: paczkę odbierasz wtedy jeszcze tego dnia, między 16:00 a 22:00.
+Allegro One to własna sieć dostaw Allegro w ramach Allegro Delivery: automaty paczkowe Allegro One Box, punkty Allegro One Punkt i kurier Allegro One Kurier. Kto dostarcza paczkę? Do One Punktu wozi ją DPD, do One Boxa DPD, DHL albo ORLEN Paczka, a w wybranych miastach do automatów, punktów i pod drzwi także własny Allegro One Kurier. Paczkę śledzisz w „Moich przesyłkach” na allegro.pl, w aplikacji Allegro, na stronie Allegro Delivery albo po wklejeniu numeru w pole powyżej; z opcją „dostawa jutro” One Kurier doręcza w najbliższym dniu roboczym lub w sobotę (gwarancja 3 dni robocze), a w wybranych miastach dostępna jest dostawa tego samego dnia do One Boxa z odbiorem 16:00–22:00.
 
 ## Gdzie jest numer przesyłki Allegro One
 
@@ -94,21 +94,25 @@ Gdy masz paczkę otwartą albo w dniu doręczenia z włączonymi powiadomieniami
 
 ## Pytania o śledzenie Allegro One
 
-### Co to jest Allegro One Box?
+### Allegro One Kurier – co to za kurier i kto dostarcza paczkę?
 
-To własny automat paczkowy Allegro, część sieci Allegro One obok punktów One Punkt i kurierów One Kurier. Paczki trafiają do niego w ramach Allegro Delivery, a wozi je Allegro One albo DPD, DHL i ORLEN Paczka.
+Allegro One Kurier to własny kurier Allegro w ramach programu Allegro Delivery, który dowozi paczki pod drzwi w wybranych miastach. W ramach Allegro Delivery do punktów One Punkt paczki przywozi DPD, a do automatów One Box – DPD, DHL, ORLEN Paczka albo Allegro One Kurier.
 
-### Ile kosztuje dostawa Allegro One?
+### Co to jest Allegro One Box i ile czasu czeka w nim paczka?
+
+To automat paczkowy Allegro z sieci Allegro One. Paczka czeka w One Boxie 2 dni kalendarzowe (48 godzin), a w One Punkcie 2 dni robocze; w wybranych punktach czas można przedłużyć, a nieodebrana wraca do sprzedającego (`Skończył się czas na odbiór przesyłki`).
+
+### Ile kosztuje dostawa Allegro One i od jakiej kwoty jest Smart!?
 
 Cenę dostawy ustala sprzedający w cenniku oferty i może ustawić ją na 0 zł. Z Allegro Smart! na obecnych warunkach dostawa do automatów, punktów i kurierem jest darmowa przy zakupach od 49,90 zł u jednego sprzedającego.
 
-### Jaka jest największa paczka do Allegro One Box?
+### Jaka jest największa paczka do Allegro One Box i One Kurier?
 
 Do One Boxa i One Punktu trafiają paczki do 20 kg i do 64 × 41 × 38 cm. One Kurier wozi paczki do 31,5 kg, o długości do 120 cm i sumie trzech boków do 220 cm.
 
-### Co się dzieje z nieodebraną paczką z Allegro One Box?
+### Co zrobić, gdy paczka Allegro One jest opóźniona lub zaginęła?
 
-Po upływie czasu na odbiór, także przedłużonego, paczka wraca do sprzedającego, a w śledzeniu pojawia się `Skończył się czas na odbiór przesyłki`.
+Zgłoś „problem z zakupem” sprzedającemu (ma 24 godziny robocze na odpowiedź i 7 dni na rozwiązanie sprawy opóźnienia lub zaginięcia). Reklamację samej dostawy — paczka uznawana jest za zaginioną po 30 dniach od nadania — składasz elektronicznie bezpośrednio w Allegro.
 
 :::sources
 - [Allegro: Program dostaw Allegro Delivery – informacje dla sprzedających](https://help.allegro.com/pl/sell/a/program-dostaw-allegro-delivery-informacje-dla-sprzedajacych-9gzevkzEGs1) – One Box, One Punkt, One Kurier w wybranych miastach, partnerzy, kto wozi paczki do One Punktu i One Boxa, dostawa tego samego dnia do One Boxa (odbiór 16:00–22:00), czas na odbiór, zaginięcie po 30 dniach, odpowiedź na reklamację zwykle w 7 dni, najpóźniej w 30, infolinia automatu, obsługa klienta, cena dostawy, wymiary

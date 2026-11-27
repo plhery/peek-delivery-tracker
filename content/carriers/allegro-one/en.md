@@ -1,12 +1,12 @@
 ---
 title: Allegro One tracking: One Box, One Punkt and One Kurier
-description: Track an Allegro One parcel in English: where the number is, what each status means, One Box pickup codes and deadlines, delays, complaints and contacts.
+description: Track an Allegro One parcel (One Box, One Punkt, One Kurier) in English: A0/AD0 numbers, status meanings, 2-day pickup deadlines, delays and complaints.
 slug: allegro-one-tracking
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Allegro One is the Polish marketplace Allegro's own delivery network: Allegro One Box parcel lockers, Allegro One Punkt pickup points and Allegro One Kurier home delivery, all part of Allegro Delivery. Track a parcel in Allegro under "Moje przesyłki" (My parcels) or on Allegro's tracking page, or paste the number in the box above. The number is in your purchase details, in the app and in the email Allegro sends once the number is added.
+Allegro One is Allegro's delivery network in Poland — Allegro One Box parcel lockers, Allegro One Punkt pickup points and Allegro One Kurier home delivery — operated under Allegro Delivery alongside DPD, DHL and ORLEN Paczka. Track your `A0`, `AD0` or `AD` parcel under "Moje przesyłki" on allegro.pl, in the Allegro app, or by pasting the number in the box above; below are English status meanings, 2-day pickup deadlines and complaint rules.
 
 ## Where to find your Allegro tracking number
 
@@ -90,17 +90,25 @@ While you have the parcel open, or on its delivery day with notifications on, it
 
 ## Questions about Allegro One tracking
 
-### What is Allegro One Box?
+### What is Allegro One Box, One Punkt and One Kurier?
 
-Allegro's own parcel locker, part of Allegro One with One Punkt pickup points and One Kurier couriers. Parcels reach it through Allegro Delivery, carried by Allegro One or by DPD, DHL and ORLEN Paczka.
+Allegro's own delivery network under Allegro Delivery: One Box parcel lockers, One Punkt pickup points and One Kurier home delivery in selected cities. Parcels also move through Allegro Delivery via DPD, DHL and ORLEN Paczka.
 
-### How long does a parcel wait in an Allegro One Box?
+### How long does a parcel wait in an Allegro One Box or One Punkt?
 
-2 calendar days (48 hours); at selected lockers Allegro may let you extend that. At a One Punkt it's 2 working days.
+2 calendar days at a One Box and 2 working days at a One Punkt. At selected lockers and points Allegro may let you extend the time; otherwise the parcel returns to the seller.
+
+### How do I open an Allegro One Box to collect a parcel?
+
+Enter the pickup code sent by email, SMS or app (alone or with your phone number), scan the QR code, or open the compartment directly from the Allegro app.
 
 ### How much does Allegro One delivery cost?
 
 The seller sets the delivery price in the offer's price list. With Allegro Smart! under its current terms, delivery to lockers, pickup points or by courier is free on purchases of 49.90 zł or more from one seller.
+
+### How do I claim for a late, lost or damaged Allegro One parcel?
+
+Report a "problem z zakupem" to the seller from 1 hour after paying (the seller has 24 hours to reply excluding weekends and holidays, and 7 days to resolve delivery issues), or file a delivery complaint electronically with Allegro within 12 months of posting (7 days for hidden damage); Allegro replies within 30 days.
 
 :::sources
 - [Allegro: The Allegro Delivery program, information for sellers](https://help.allegro.com/en/sell/a/the-allegro-delivery-program-information-for-sellers-MR7exl1wYS4) – One Box, One Punkt, One Kurier in selected cities, partners, waiting times, locker helpline, customer service, price lists

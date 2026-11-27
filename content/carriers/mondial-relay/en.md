@@ -1,12 +1,12 @@
 ---
 title: Mondial Relay tracking: statuses in English and pickup
-description: Track a Mondial Relay parcel: where the 8-digit number is, what the French statuses mean in English, how long a Point Relais keeps it and who to contact.
+description: Track a Mondial Relay parcel in English: 8-digit shipment number and postcode, French status meanings, 5-day Point Relais and locker pickup, and contacts.
 slug: mondial-relay-tracking
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Mondial Relay is a French parcel carrier in the InPost group that delivers to Points Relais (local shops acting as pickup points), lockers and homes. Track a parcel on [Mondial Relay's Belgian tracking page](https://www.mondialrelay.be/fr-be/suivi-de-colis/) with the 8-digit shipment number and the destination postcode, or paste the number in the box above. You get it by email or SMS once the parcel ships, and the sender has it too.
+Mondial Relay (part of the InPost group) delivers parcels to Points Relais, lockers and homes in France, Belgium, the Netherlands and Luxembourg, while Spain and Portugal operate as InPost. Track a parcel on [Mondial Relay's Belgian tracking page](https://www.mondialrelay.be/fr-be/suivi-de-colis/) with your 8-digit shipment number and delivery postcode, or paste the number in the box above; below are English translations of its French statuses, 5-day pickup deadlines and customer service contacts.
 
 ## Mondial Relay tracking number: where to find it
 
@@ -79,21 +79,25 @@ Peek shows Mondial Relay's French wordings as written and each scan's logistics 
 
 ## Questions about Mondial Relay tracking
 
-### Where is my Mondial Relay parcel?
+### Where is my Mondial Relay parcel, and what do the French statuses mean?
 
-The latest tracking line says: a logistics site's name means it's travelling, and `Disponible dans votre Point Relais` means it's waiting for you. Not at your Point Relais after 3 to 6 working days, the usual time in Belgium and the Netherlands? Contact the sender or Mondial Relay's customer service.
+A logistics site name means it is travelling; wait for `Disponible dans votre Point Relais` or `Disponible dans votre locker` before going to collect it. Not at your Point Relais after 3 to 6 working days in Belgium or the Netherlands? Contact the sender or Mondial Relay's customer service.
 
 ### How long does Mondial Relay take to deliver?
 
-Mondial Relay aims for an average of 3 working days from hand-in to a Point Relais in Belgium, where Points Relais get parcels Tuesday to Saturday.
+Mondial Relay aims for an average of 3 working days from drop-off to a Point Relais in Belgium, where relays receive parcels Tuesday to Saturday.
+
+### How long does a Mondial Relay Point Relais or locker keep a parcel?
+
+In Belgium and the Netherlands, 5 calendar days (Sundays and holidays included) with no extension, after which it returns to the sender. At a locker, enter the 6-digit pickup code sent by email, SMS or app.
 
 ### Is Mondial Relay the same as InPost?
 
 It's part of the InPost group. In Spain and Portugal, InPost took over Mondial Relay in 2021, and mondialrelay.es and mondialrelay.pt now lead to InPost's sites. In the Netherlands, Mondial Relay is moving to the InPost brand over the coming months; until then everything runs through Mondial Relay. See [InPost tracking](carrier:inpost).
 
-### Is Mondial Relay legit?
+### Is Mondial Relay legit, and how do I contact customer service?
 
-Yes: Mondial Relay SASU is a French company based in Villeneuve-d'Ascq. Fake messages use its name, though: check them against the warning above.
+Yes: Mondial Relay SASU is a French company based in Villeneuve-d'Ascq. In Belgium, call +32 2 340 06 10 (Monday to Friday 8:00–19:00, Saturday 8:00–18:00) or email customerservice@mondialrelay.be; in Spain and Portugal, contact InPost on 900 900 137 or 211 245 624. Report fake payment messages to abuse@mondialrelay.fr.
 
 :::sources
 - [Mondial Relay Belgique: Suivi](https://www.mondialrelay.be/fr-be/suivi-de-colis/) – 8, 10, 12 digits, destination postcode, email or SMS, ask the sender

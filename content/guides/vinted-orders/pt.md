@@ -1,15 +1,15 @@
 ---
 title: Seguir encomenda Vinted: transportadoras, números e atrasos
-description: Seguir uma encomenda Vinted em Portugal, a comprar ou a vender: quem a entrega, como é o número de seguimento e os prazos da Vinted para enviar e reclamar.
+description: Seguir encomenda Vinted em Portugal: InPost, DPD, CTT Expresso e Vinted Go, número de rastreio, prazos de envio (5 dias) e levantamento e reembolsos.
 slug: seguimento-encomenda-vinted
 picture: Dois telemóveis, o de quem vende e o de quem compra, com uma encomenda a viajar entre eles numa carrinha, e um Pip bem-disposto.
 published: 2026-10-16
-updated: 2026-11-23
+updated: 2026-11-27
 ---
 
-Na Vinted, é quem compra que escolhe a transportadora e paga a etiqueta; quem vende recebe-a como etiqueta pré-paga ou código QR e tem 5 dias úteis para enviar a encomenda. Os dois seguem-na no ecrã da conversa do pedido, em «Acompanhar encomenda», onde também podes copiar o código de acompanhamento da transportadora. O acompanhamento pode demorar até 48 horas a aparecer depois do envio, e quem vende só recebe o pagamento quando quem compra confirma que está tudo OK, ou 2 dias depois da entrega.
+Na Vinted em Portugal, quem compra escolhe a transportadora (InPost, DPD, CTT Expresso, Vinted Go ou DHL Express) e paga a etiqueta; quem vende recebe a etiqueta pré-paga ou o código QR e tem 5 dias úteis para enviar. Os dois seguem a encomenda na conversa do pedido em «Acompanhar encomenda» (o acompanhamento pode demorar até 48 horas após o envio), e quem compra tem 2 dias após a entrega para confirmar «Está tudo OK» ou comunicar um problema.
 
-## Como funcionam os envios na Vinted?
+## Como funcionam o envio e a etiqueta na Vinted?
 
 Cada pedido feito com o botão «Comprar» e envio integrado traz uma etiqueta que a Vinted gera para a transportadora escolhida por quem compra. Quem vende encontra-a na conversa e no e-mail, com as instruções: se a etiqueta é digital ou para imprimir, e onde entregar a encomenda. A Vinted avisa que essa etiqueta «deve ser utilizada»: com outra etiqueta ou a opção de envio errada, o pedido é cancelado automaticamente. Depois da venda, a transportadora, o tipo de etiqueta, a morada e o tamanho da encomenda já não mudam. A única forma é cancelar o pedido e repeti-lo.
 
@@ -49,7 +49,7 @@ Portugal continental está ligado a Espanha continental, Ibiza e Maiorca, Franç
 
 Quem vende pode desativar transportadoras em **Perfil** → **Definições** → **Envio**, menos as que vêm definidas como padrão. A Vinted Go, o serviço de envios da Vinted, tem cacifos e lojas em Portugal, Espanha, França, Bélgica, Países Baixos e Finlândia, e só aparece quando há um cacifo Vinted Go perto de quem compra e de quem vende.
 
-## Como é o número de seguimento da Vinted?
+## Onde encontrar e como é o número de seguimento da Vinted?
 
 É o código da própria transportadora, por isso também funciona no site dela. As formas que o Peek conhece:
 
@@ -108,7 +108,7 @@ Depende da transportadora: o prazo vem normalmente na mensagem dela, com o códi
 
 Mais em [quanto tempo tenho para levantar uma encomenda](guide:uncollected-parcel).
 
-## Encomenda Vinted perdida, ou dada como entregue mas não recebida?
+## O que fazer se a encomenda Vinted se perder ou aparecer como entregue?
 
 Segue esta ordem:
 

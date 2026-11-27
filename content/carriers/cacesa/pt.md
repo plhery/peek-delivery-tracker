@@ -1,12 +1,12 @@
 ---
 title: CACESA rastreio: alfândega, estados e quem entrega
-description: Rastreio CACESA em Portugal: que número usar, o que querem dizer os estados, como pagar a alfândega, quem entrega a encomenda e como contactar a CACESA.
+description: Rastreio CACESA (Cacesa Postal) em Portugal: números CNPRT/CNES, estados da alfândega, pagar impostos, quem entrega (CTT/Ecoscooting) e contacto atc@cacesa.com.
 slug: cacesa-rastreio
 published: 2026-10-12
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-A CACESA (Compañía Auxiliar al Cargo Express) é um agente aduaneiro de Madrid para encomendas de compras online da China para Espanha e Portugal: recebe-as em vários aeroportos, trata do desalfandegamento e passa-as à empresa que as entrega. Ela própria não entrega nada. Segue a encomenda na página de seguimento da CACESA com o número de envio que a loja te deu, ou cola-o na caixa no topo desta página.
+A CACESA (*Compañía Auxiliar al Cargo Express*, também chamada Cacesa Postal) é um agente aduaneiro de Madrid (adquirido pelos CTT em 2025) que desalfandega encomendas de compras online da China para Espanha e Portugal. A CACESA não faz entregas: recebe as encomendas em vários aeroportos, trata da alfândega e passa-as à transportadora escolhida pelo vendedor. Segue o teu envio no cacesa.com com o número de envio da loja (`CNPRT`, `CNESP`, `CNES`, etc.) ou cola-o na caixa acima.
 
 ## Número de rastreio CACESA: qual usar
 
@@ -88,25 +88,25 @@ A CACESA não nomeia a empresa que entrega, e a encomenda segue com o mesmo núm
 
 ## Perguntas sobre o rastreio CACESA
 
-### O que é a Cacesa Postal?
+### O que é a CACESA (Cacesa Postal) e qual a sua relação com os CTT?
 
-A CACESA, também chamada Cacesa Postal ou CACESA Logistics, é o agente aduaneiro de Madrid que desalfandega compras online vindas da China para Espanha e Portugal. Foi fundada pela Iberia em 1987, e os CTT concluíram a compra da empresa em 2025.
+A CACESA (*Compañía Auxiliar al Cargo Express*) é um agente aduaneiro sediado no Centro de Carga Aérea Madrid-Barajas (Calle Golf, 23), fundado pela Iberia em 1987 e adquirido pelos CTT em 2025. Desalfandega compras online vindas da China para Espanha e Portugal, sem escritório em Portugal.
 
-### Onde fica a CACESA?
+### Quem entrega em Portugal uma encomenda desalfandegada pela CACESA?
 
-A sede fica no Centro de Carga Aérea Madrid-Barajas, Calle Golf, 23, 28042 Madrid. A CACESA não tem escritório em Portugal, e quem te entrega a encomenda é a empresa escolhida pelo vendedor.
+A CACESA não entrega encomendas: passa-as à empresa de transporte escolhida pelo vendedor (por exemplo, um número `CNPRT` corresponde à Ecoscooting e um código postal terminado em `PT` aos CTT). A partir da linha `Parcel is going out from Cacesa facilities`, consulta essa transportadora ou o vendedor.
 
-### A CACESA entrega ao sábado?
+### Como pagar a alfândega ou enviar documentos à CACESA?
 
-A CACESA não entrega: quem entrega é a empresa que o vendedor escolheu, e é ela que decide os dias. A CACESA não fala de entregas ao sábado.
+Se a CACESA te contactar por e-mail ou SMS, envia a fatura/comprovativo de compra (com foto do artigo) e o comprovativo de pagamento para `atc@cacesa.com`, ou usa «Pagar impuestos» no cacesa.com (cartão, PayPal ou Bizum). Desde 1 de julho de 2026 aplicam-se 3 € de direitos aduaneiros por tipo de produto nas encomendas até 150 € quando não pagos na compra.
 
-### A CACESA trata da alfândega do AliExpress?
+### Quanto tempo demora uma encomenda CACESA depois de sair da alfândega?
 
-As páginas da CACESA não nomeiam nenhuma loja. A CACESA diz que recebe encomendas de empresas que as juntam na China e as desalfandega para quem compra, sem contacto direto com o site onde a compra foi feita.
+Para encomendas que ficaram retidas, a CACESA indica 3 a 4 dias após a libertação até passar o envio à distribuidora, mais o prazo da entrega até ao teu código postal. Para encomendas que passaram direto pelo canal verde, não publica prazo.
 
-### Quanto tempo demora uma encomenda CACESA depois da alfândega?
+### A CACESA entrega ao sábado ou trata encomendas do AliExpress?
 
-Se ficou retida, a CACESA passa-a à distribuidora 3 a 4 dias depois de ser libertada, mais os dias da entrega até ao teu código postal. Para as encomendas que não ficam retidas, a CACESA não dá prazo.
+A CACESA não faz entregas — os dias de distribuição (incluindo sábados) dependem da transportadora do vendedor. Nas suas páginas também não nomeia lojas específicas: afirma apenas receber encomendas de empresas consolidadoras na China, sem contacto direto com a loja.
 
 :::sources
 - [CACESA: Seguimiento de envíos](https://www.cacesa.com/es/seguimiento) – seguimento, número de envío, empresa que entrega, Pagar impuestos

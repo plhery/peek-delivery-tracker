@@ -1,12 +1,12 @@
 ---
 title: GLS Allemagne suivi colis : statuts, relais et contact
-description: Suivre un colis GLS Allemagne (GLS Germany) : numéro ou Track-ID, code postal requis, statuts en anglais, ParcelShops, douane, litiges et service client.
+description: Suivi colis GLS Allemagne (GLS Germany) : numéro à 11/12 chiffres ou Track-ID, code postal requis, statuts anglais, ParcelShop 7 jours ouvrables et contact.
 slug: gls-allemagne-suivi-colis
 published: 2026-11-14
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-GLS Germany (*General Logistics Systems Germany GmbH & Co. OHG*) livre du lundi au vendredi et compte, d'après les chiffres du groupe, 9 000 ParcelShops et 200 consignes Parcelstation en Allemagne. Que tu attendes un colis à une adresse allemande ou une commande expédiée depuis l'Allemagne vers la France, la Belgique, le Luxembourg ou la Suisse, tu peux le suivre sur [la page de suivi du groupe GLS](https://gls-group.com/EU/en/parcel-tracking) avec son numéro de colis et le code postal de livraison, ou coller le numéro dans le champ ci-dessus. Le numéro figure dans l'e-mail d'expédition de la boutique, et l'avis de passage GLS porte un Track-ID.
+GLS Germany (*General Logistics Systems Germany GmbH & Co. OHG*) livre du lundi au vendredi (jamais le samedi) et s'appuie sur 9 000 ParcelShops et 200 consignes Parcelstation en Allemagne. Que ton colis arrive en Allemagne ou parte d'Allemagne vers la France, la Belgique, le Luxembourg ou la Suisse, suis-le avec son numéro de colis (ou son Track-ID à 6 lettres) et le code postal de livraison sur [la page de suivi GLS](https://gls-group.com/EU/en/parcel-tracking) ou dans le champ ci-dessus.
 
 ## Numéro de colis GLS et Track-ID : où les trouver
 
@@ -85,25 +85,25 @@ Tu vois alors le statut, les étapes telles que GLS les écrit (en anglais), la 
 
 ## Questions fréquentes sur le suivi GLS Allemagne
 
-### Où se trouve mon colis GLS ?
+### Comment suivre un colis GLS Allemagne (numéro, Track-ID et code postal) ?
 
-Le suivi GLS te le montre dès que tu renseignes le numéro et le code postal de livraison : `The parcel is in delivery.` signifie qu'il est dans la camionnette du livreur aujourd'hui, et `The parcel is ready for collection at the ParcelShop.` qu'il t'attend en relais.
+Saisis le numéro de colis (11 ou 12 chiffres) ou le Track-ID de 6 lettres figurant sur l'avis de passage avec le code postal de livraison sur `gls-group.com/EU/en/parcel-tracking` ou dans Peek. `The parcel is in delivery.` annonce la livraison du jour et `The parcel is ready for collection at the ParcelShop.` le dépôt en relais.
 
-### Qu'est-ce que le Track-ID de GLS ?
+### Quel est le délai de livraison GLS depuis l'Allemagne vers la France ou la Belgique ?
 
-C'est le code de six lettres inscrit sur l'avis de passage papier ou électronique laissé par GLS en Allemagne après une tentative de livraison. Il s'utilise exactement comme le numéro de colis sur la page de suivi.
+GLS annonce des délais estimatifs (du lundi au vendredi, sans garantie hors *Guaranteed24Service* en Allemagne continentale) : généralement moins de 24 heures en Allemagne et 24 à 96 heures dans le reste de l'Europe.
 
-### Quel est le délai de livraison de GLS depuis l'Allemagne ?
+### Combien de temps GLS garde-t-il un colis en ParcelShop en Allemagne ?
 
-GLS indique des délais estimatifs sans garantie (hors *Guaranteed24Service* le jour ouvré suivant en Allemagne continentale). Selon le groupe GLS, un colis national arrive généralement en moins de 24 heures et un colis en Europe entre 24 et 96 heures.
+Selon les conditions générales de GLS Germany, un colis déposé en ParcelShop après une absence y reste conservé au moins sept jours ouvrables avant d'être renvoyé à l'expéditeur.
 
-### Combien de temps GLS garde-t-il un colis en ParcelShop ?
+### Puis-je modifier la livraison GLS ou choisir un ParcelShop ?
 
-En Allemagne, après un passage infructueux à domicile, le ParcelShop, le dépôt ou la consigne Parcelstation conserve le colis au moins sept jours ouvrables avant de le renvoyer à l'expéditeur.
+Oui : lorsque GLS propose ses options de redirection (et avec *FlexDeliveryService* pour les envois transfrontaliers), tu peux changer la date, l'adresse, choisir un ParcelShop ou un dépôt, ou donner une autorisation de dépôt — gratuitement pour le destinataire en Allemagne.
 
-### GLS Germany est-il fiable ?
+### Comment contacter GLS Germany et éviter les faux SMS ou e-mails ?
 
-Oui : GLS Germany est la société *General Logistics Systems Germany GmbH & Co. OHG*, établie à Neuenstein en Hesse. Des messages frauduleux circulent toutefois sous son nom : vérifie toujours que les liens renvoient vers `gls-group.com` ou ses sites nationaux officiels.
+Pour une commande en ligne, contacte d'abord le vendeur. Pour le suivi, passe par le service client GLS de ton pays ou le [formulaire de contact du groupe GLS](https://gls-group.com/GROUP/en/contact-form/) (et `versand-service@gls-germany.com` / `+49 6677 646907040` pour les envois GLS-Pakete.de). Les vrais liens pointent vers `gls-group.com` ou ses sites nationaux ; transfère tout e-mail suspect en pièce jointe à `security@gls-group.com`.
 
 :::sources
 - [GLS: Parcel Tracking](https://gls-group.com/EU/en/parcel-tracking) – page de suivi européenne, code postal et Track-ID sur l'avis de passage

@@ -1,12 +1,12 @@
 ---
 title: Blue Dart tracking: waybill numbers and statuses explained
-description: Track a Blue Dart shipment: what its 11-digit waybill looks like, what lines such as Shipment Further Connected mean, and how Peek follows it.
+description: Track a Blue Dart India parcel by 11-digit waybill: what Shipment Further Connected and Cnee Refused Id/Otp mean, ICC Worldwide hand-offs and Peek setup.
 slug: blue-dart-tracking
 published: 2026-11-02
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Blue Dart is an Indian courier: Peek's catalog lists it for India and reads its scans on India time. A Blue Dart shipment goes by an 11-digit waybill number, which the sender gives you. For an online order, it can be in the shop's shipping email or on your order page, for example. Paste it in the box above, or enter it on Blue Dart's own tracker on bluedart.com. Peek couldn't check Blue Dart's website for this page, so what follows comes from what Peek's code knows of Blue Dart's tracker.
+Blue Dart is an Indian courier whose shipments are tracked by an 11-digit waybill number (the last digit is a check digit) from your sender's shipping email or order page. Paste the waybill in the box above (or enter it on bluedart.com) to check India-time scans such as `Shipment Further Connected` or `Shipment Out For Delivery`. Peek couldn't check Blue Dart's website directly for this page, so every detail below comes from what Peek's tracking code reads from Blue Dart's public tracker.
 
 ## Blue Dart waybill number: what it looks like
 
@@ -94,25 +94,25 @@ While you have the shipment open, or on its delivery day with notifications on, 
 
 ## Questions about Blue Dart tracking
 
-### How do I track a Blue Dart shipment?
+### How do I track a Blue Dart shipment by waybill number?
 
-Enter the 11-digit waybill on Blue Dart's tracker on bluedart.com, or paste it into Peek. In India, Peek asks Blue Dart first; elsewhere, it asks Blue Dart last, or you can press "Change" and pick Blue Dart.
+Enter your 11-digit waybill on bluedart.com or paste it into Peek. From India, Peek checks Blue Dart first automatically; outside India, press "Change" and choose Blue Dart under "Fits this number" (or paste a bluedart.com `trackNo=` link).
 
-### What does a Blue Dart waybill number look like?
+### What does a Blue Dart 11-digit waybill number look like?
 
-11 digits, the last a check digit. Aramex and others use 11 digits too, so check that the shop's message names Blue Dart.
+It is always 11 digits with a check digit at the end; 10-digit, 12-digit or alphanumeric codes aren't Blue Dart waybills in Peek. Aramex and Japan Post also use 11-digit numbers with the same check digit, so check which carrier the shop named.
 
-### What does "Shipment Further Connected" mean in Blue Dart tracking?
+### What does "Shipment Further Connected" mean on Blue Dart?
 
-Blue Dart has sent the shipment on from one of its locations to the next. Peek shows "In transit".
+Blue Dart has dispatched your parcel onward from that hub or office to the next facility along its route. Peek maps this scan to "In transit".
 
 ### What does "Cnee Refused Id/Otp Not Shared-Incorrect" mean?
 
-A failed delivery, because of a refusal by the consignee (you) or an ID or one-time code (OTP) not shared or incorrect. Peek shows "Delivery attempted". If you refused nothing, ask the shop to arrange another delivery.
+It is a failed delivery attempt ("Delivery attempted" in Peek), recorded when the consignee refused the parcel or didn't share a matching ID or one-time code (OTP). Keep any delivery OTP handy, or ask the shop to arrange a reattempt if you didn't refuse it.
 
-### Who do I contact about a missing Blue Dart shipment?
+### Why is Blue Dart stuck on "Pickup Employee Is Out To P/U Shipment" or missing?
 
-The shop or the sender, who booked Blue Dart. Peek couldn't check Blue Dart's website, so this page lists no Blue Dart contacts.
+That line means a courier is on the way to collect the parcel and Blue Dart doesn't have it yet. For pickup delays, lost shipments or returns (`Shipment Returned Back To Shipper`), contact the shop or sender who booked Blue Dart — Peek couldn't verify Blue Dart's own phone or email pages.
 
 :::sources
 - [Universal Parcel Scraper: Blue Dart](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/blue-dart) – India, the 11-digit waybill and its check digit, the tracker and its no-information answer, wordings and their stages, India time, what is left out, tracking links

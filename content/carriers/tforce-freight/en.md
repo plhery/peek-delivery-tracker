@@ -1,12 +1,12 @@
 ---
 title: TForce Freight tracking: PRO numbers, statuses and claims
-description: Track a TForce Freight shipment in the US or Canada: what a PRO number looks like, what each tracking line means, home deliveries and freight claims.
+description: Track TForce Freight (formerly UPS Freight) by 9-digit PRO or PARS number: US/Canada LTL status meanings, home delivery appointments, claims and 800-333-7400.
 slug: tforce-freight-tracking
 published: 2026-11-03
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-TForce Freight is a less-than-truckload (LTL) carrier: it moves pallets and heavy freight between its service centers across the United States and all of Canada, and to more than 600 points in Mexico. If a large order or other freight is coming to you with TForce, track it by its PRO number, which comes from the shop or the business that booked the freight: paste it in the box above. TForce's own tracker is the Tracking page on www.tforcefreight.com.
+TForce Freight (formerly UPS Freight) is an LTL freight carrier moving pallets and heavy shipments across the United States, all of Canada and over 600 points in Mexico. Track a delivery with the 9-digit PRO number (or 13-digit `2205` Canadian PARS number) from your shop or shipper in the box above, or look it up by PRO, BOL or PO number on www.tforcefreight.com.
 
 ## TForce Freight tracking number: the PRO number
 
@@ -107,25 +107,25 @@ While you have the shipment open in Peek, or on its delivery day with notificati
 
 ## Questions about TForce Freight tracking
 
-### What is a TForce Freight PRO number?
+### What is a TForce Freight PRO number and how do I check it?
 
-TForce's tracking number: nine digits, the last a check digit from 0 to 6. The shop or the business that booked the freight gives it to you.
+A TForce Freight PRO number is 9 digits long (sometimes given without a leading `0`), where the last digit is a modulo-7 check digit (always 0 to 6). A 9-digit number ending in 7, 8 or 9 has a typo; Canadian customs shipments may also use a 13-digit PARS number starting with `2205` followed by the PRO.
 
-### Can I track TForce Freight without a PRO number?
+### Can I track TForce Freight by BOL or PO number instead of a PRO?
 
-On TForce's tracking page, yes: by bill of lading or purchase order number, with a range of shipping dates. Peek tracks by PRO only.
+Yes, on TForce's own Tracking page on www.tforcefreight.com by supplying a bill of lading (BOL) or purchase order (PO) number with a shipping date range. Peek tracks by PRO (or `2205` PARS) number only.
 
-### Does TForce Freight deliver to homes?
+### How does TForce Freight home (residential) delivery work?
 
-Yes, where its trucks may legally go, at an extra charge. TForce first agrees the date and approximate time with you or the shipper, then delivers to the ground-floor entrance, garage entrance or carport. Inside delivery and a lift gate cost extra too.
+Where its trucks may legally go, TForce first schedules a delivery date and approximate time with you or the shipper, then unloads next to the truck at the ground-floor entrance, garage entrance or carport (or holds it at the terminal for pickup). Residential delivery, inside delivery and lift gate service carry extra charges.
 
-### How long do I have to file a claim with TForce Freight?
+### What is the deadline to report damage or file a TForce Freight claim?
 
-Nine months from delivery, or from the shipping date if nothing arrived. Report damage found after delivery within 5 business days.
+Note visible shortages or damage on both copies of the delivery receipt at handover. Report concealed damage found after delivery within 5 business days for an inspection, and file a written cargo claim within 9 months of delivery (or of the shipping date if nothing arrived).
 
-### What is TForce Freight's customer service number?
+### What is TForce Freight's customer service and claims phone number?
 
-(800) 333-7400, toll-free from the US and Canada. From elsewhere, (804) 231-8555.
+Call Customer Service toll-free from the US and Canada at (800) 333-7400 ((804) 231-8555 from elsewhere), or call the Claims Department at (888) 653-9720 for claim status.
 
 :::sources
 - [Universal Parcel Scraper: TForce Freight](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/tforce-freight) – names, PRO shapes, links, wordings and stages, not-found answer, what Peek keeps, clocks

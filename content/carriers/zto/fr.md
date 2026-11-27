@@ -1,12 +1,12 @@
 ---
 title: Suivi ZTO Express : numéros 中通快递, statuts et contact
-description: Suivez un colis ZTO Express (中通快递) en Chine : format des numéros, sens de 已签收 et des autres étapes, stations et consignes, délais et contact 95311.
+description: Suivi colis ZTO Express (中通快递) en Chine : numéros à 12/14 chiffres, différence ZTO International (771), statuts 已签收/已代收, délais, consignes et 95311.
 slug: suivi-zto-express
 published: 2026-11-21
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-ZTO Express (`中通快递`, Zhongtong) est une entreprise chinoise de livraison express fondée à **Shanghai** le 8 mai 2002 ; en 2025, elle a acheminé 38,52 milliards de colis. Un numéro ZTO Express correspond en général à un envoi circulant en **Chine continentale** — souvent une commande en ligne (ZTO transporte les colis Taobao depuis 2008) en route vers une adresse en Chine ou vers l'entrepôt d'un transitaire international. Vous pouvez le suivre sur le [traceur chinois de ZTO](https://www.zto.com/check) ou dans le champ ci-dessus. Les envois expédiés à l'étranger par le groupe passent par ZTO International (`中通国际`), qui utilise ses propres numéros en `771` sur `ztoglobal.com`.
+ZTO Express (`中通快递`, Zhongtong) est un transporteur chinois fondé à **Shanghai** le 8 mai 2002 (38,52 milliards de colis acheminés en 2025). Un numéro ZTO Express (12 chiffres ou 14 chiffres commençant par `7`) suit un colis circulant en **Chine continentale** — souvent un achat Taobao ou en ligne en route vers une adresse chinoise ou vers l'entrepôt d'un transitaire. Suivez-le sur le [traceur chinois de ZTO](https://www.zto.com/check) ou dans le champ ci-dessus ; pour les envois transfrontaliers du groupe, ZTO International (`中通国际`) utilise des numéros en `771` sur `ztoglobal.com`.
 
 ## Numéro de suivi ZTO Express : format et exemples
 
@@ -90,25 +90,25 @@ Tant que vous gardez la page du colis ouverte ou, le jour de sa livraison, avec 
 
 ## Questions fréquentes sur le suivi ZTO Express
 
-### ZTO Express est-il un transporteur fiable ?
+### Qu'est-ce que ZTO Express (中通快递) et est-ce fiable ?
 
-Oui. Fondée à Shanghai le 8 mai 2002, ZTO Express a été introduite à la Bourse de New York le 27 octobre 2016 puis à celle de Hong Kong le 29 septembre 2020 (première société d'express cotée sur les deux places). En 2025, son réseau comptait plus de 31 000 points de service et couvrait plus de 99 % des districts et comtés chinois.
+ZTO Express est l'un des principaux transporteurs express chinois, fondé à Shanghai le 8 mai 2002 et coté aux Bourses de New York (2016) et de Hong Kong (2020). En 2025, son réseau comptait plus de 31 000 points de service couvrant plus de 99 % des districts et comtés chinois.
 
-### ZTO Express et ZTO International sont-ils identiques ?
+### Quelle est la différence entre ZTO Express et ZTO International (771) ?
 
-Il s'agit du même groupe, mais de deux services et de deux traceurs distincts. Le contrat de ZTO Express couvre uniquement les envois expédiés et livrés en Chine continentale (hors Hong Kong, Macao et Taïwan), suivis sur `zto.com/check` ; ZTO International, branche internationale créée en 2014, achemine les colis transfrontaliers sous des numéros commençant par `771` sur `ztoglobal.com`.
+Ils appartiennent au même groupe mais utilisent deux services et deux traceurs séparés. ZTO Express ne couvre que la Chine continentale (hors Hong Kong, Macao et Taïwan) sur `zto.com/check` ; ZTO International (`中通国际`), créé en 2014, prend en charge les colis internationaux sous des numéros commençant par `771` sur `ztoglobal.com`.
 
-### Quels sont les délais de livraison de ZTO Express en Chine ?
+### Combien de temps prend une livraison ZTO Express en Chine ?
 
-Selon la FAQ de ZTO (à titre indicatif), comptez en général le lendemain au sein d'une même province ainsi qu'entre le Jiangsu, le Zhejiang, Shanghai et l'Anhui, 3 à 5 jours entre les autres provinces et 5 à 7 jours vers certaines régions éloignées. Si le colis rejoint un entrepôt de groupage, ajoutez ensuite le transport international du transitaire.
+D'après la FAQ de ZTO (délais indicatifs), un colis arrive en général le lendemain dans la même province ainsi qu'entre le Jiangsu, le Zhejiang, Shanghai et l'Anhui, en 3 à 5 jours entre les autres provinces et en 5 à 7 jours vers certaines régions éloignées. Pour un achat passant par un transitaire, ajoutez ensuite le transport international.
 
-### Que signifie « 已签收 » sur le suivi ZTO ?
+### Que veulent dire « 已签收 » et « 已代收 » sur le suivi ZTO ?
 
-Réceptionné contre signature : Peek affiche `Signed for` et l'étape « Livré ». Vous, un proche, l'accueil ou l'entrepôt d'un transitaire avez signé. `已代收` est différent : un point de collecte ou une station garde le colis en attendant votre retrait (« Prêt à être retiré »).
+« 已签收 » signifie réceptionné contre signature (`Signed for`, étape « Livré » dans Peek) : vous, un proche, l'accueil ou l'entrepôt du transitaire en Chine a signé. « 已代收 » (`Held at a collection point for the recipient`, étape « Prêt à être retiré ») indique que le colis attend dans une station ou un point de retrait.
 
-### Quel est le numéro de téléphone de ZTO Express ?
+### Comment contacter ZTO Express et que faire sans code de consigne ?
 
-Le `95311`, sa ligne nationale de service client en Chine continentale, ouverte de `08:30` à `17:30` (heure de Chine). Les appels provenant du `95720` y émanent des livreurs de ZTO.
+Appelez la ligne nationale `95311` en Chine continentale (08:30–17:30, heure de Chine) ou utilisez le service client en ligne sur `zto.com` ; les appels du `95720` proviennent des livreurs ZTO. Sans code de consigne, recherchez l'agence locale via `zto.com/service/station` ou demandez son numéro au `95311`.
 
 :::sources
 - [ZTO Express : 运单查询 (recherche d'envoi)](https://www.zto.com/check) – suivi en chinois, jusqu'à 10 numéros et abonnement WeChat

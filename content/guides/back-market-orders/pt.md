@@ -1,13 +1,13 @@
 ---
 title: Seguimento de encomendas Back Market: envio e devoluções
-description: Os vendedores do Back Market enviam as suas próprias encomendas. Onde ver o seguimento, o que fazer se uma encomenda se atrasar, se perder ou chegar danificada.
+description: Seguimento de encomendas Back Market em Portugal (UPS, FedEx, DHL Express): encontrar tracking, prazos, encomenda perdida ou danificada, 30 dias e garantia.
 slug: seguimento-encomenda-back-market
 picture: Um telemóvel e um portátil recondicionados com uma etiqueta verde ao lado de uma carrinha de entregas, e o Pip de pé sobre o portátil.
 published: 2026-10-27
-updated: 2026-10-27
+updated: 2026-11-27
 ---
 
-O Back Market é um marketplace de telemóveis, portáteis e outros aparelhos recondicionados. Os vendedores, recondicionadores profissionais, preparam e enviam cada encomenda com a transportadora que escolhem. Todas as encomendas têm número de seguimento, em «Encomendas» na tua conta Back Market e através do link no e-mail de envio. Se uma encomenda se atrasar, se perder ou chegar danificada, pede ajuda na encomenda com «Obter ajuda»: o pedido chega ao vendedor, e o Back Market pode intervir se o vendedor não o resolver. Tens 30 dias para devolver um artigo e uma garantia comercial de 2 anos.
+No Back Market Portugal (backmarket.pt), cada encomenda de telemóvel, portátil ou aparelho recondicionado é preparada e enviada pelo vendedor (recondicionador profissional) com a transportadora que escolhe — UPS, FedEx ou DHL Express. O número de seguimento chega em 24 horas no e-mail de envio e em «Encomendas» na tua conta. Se a encomenda se atrasar, se perder ou chegar danificada, abre «Encomendas» > «Obter ajuda» (o Back Market intervém se o vendedor não resolver). Tens 30 dias de devolução e 24 meses de garantia comercial.
 
 ## Onde vende o Back Market?
 
@@ -15,7 +15,7 @@ O Back Market tem um site para cada país; o de Portugal é o backmarket.pt. Par
 
 O Back Market não vende nada: as suas condições chamam-lhe intermediário, nunca vendedor. Não tem lojas físicas nem pontos de recolha próprios.
 
-## Quem entrega a minha encomenda do Back Market?
+## Quem entrega uma encomenda Back Market em Portugal (UPS, FedEx, DHL Express)?
 
 É o vendedor que escolhe a transportadora. Não a podes escolher, e o Back Market não garante qual será. A ajuda do Back Market em Portugal nomeia estas: [UPS](carrier:ups), [FedEx](carrier:fedex) e [DHL Express](carrier:dhl-express).
 
@@ -37,7 +37,7 @@ Os vendedores não enviam ao fim de semana nem em feriados, e uma encomenda feit
 - home | Tu | Na maioria dos casos, com assinatura
 :::
 
-## Onde está o número de seguimento da minha encomenda do Back Market?
+## Onde encontrar o número de seguimento (tracking) da encomenda Back Market?
 
 Todos os vendedores têm de dar um número de seguimento e o nome da transportadora, e o Back Market envia-te o número nas 24 horas a seguir à encomenda. Vê aqui:
 
@@ -50,7 +50,7 @@ Para outras lojas: [onde está o número de seguimento](guide:find-tracking-numb
 :::checker
 :::
 
-## Porque é que a minha encomenda do Back Market está atrasada, ou porque não avança o seguimento?
+## Porque é que a encomenda do Back Market está atrasada ou sem atualizações?
 
 Quando nada se mexe, costuma ser uma destas:
 
@@ -62,7 +62,7 @@ Quando nada se mexe, costuma ser uma destas:
 
 Quando esperar ainda é normal: [o seguimento não atualiza](guide:tracking-not-updating) e [prazos de entrega](guide:delivery-times). Para corrigir a morada: [mudar a morada de entrega](guide:change-delivery-address).
 
-## Encomenda do Back Market danificada, perdida ou entregue sem a receberes: o que fazer
+## Encomenda Back Market perdida, danificada ou marcada como entregue: o que fazer?
 
 Verifica a embalagem e o produto antes de a pessoa que faz a entrega se ir embora, tira fotografias em cada passo da abertura e escreve qualquer problema na nota de entrega, ou recusa a mercadoria. Depois:
 
@@ -76,7 +76,7 @@ Verifica a embalagem e o produto antes de a pessoa que faz a entrega se ir embor
 
 Mais: [encomenda entregue mas não recebida](guide:delivered-not-received), [encomenda perdida](guide:lost-parcel) e [encomenda danificada](guide:damaged-parcel).
 
-## Devolver uma encomenda do Back Market
+## Como devolver uma encomenda do Back Market (30 dias) e receber o reembolso?
 
 Tens 30 dias a partir da receção de um artigo para o devolver, mesmo que só tenhas mudado de ideias. Se o último dia calhar a um sábado, domingo ou feriado, passa para o dia útil seguinte, e se a encomenda chegar em vários envios, o prazo conta a partir do último. Para compras entre a Black Friday e 31 de dezembro, tens até 31 de janeiro do ano seguinte.
 

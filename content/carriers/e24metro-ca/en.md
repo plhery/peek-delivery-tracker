@@ -1,12 +1,12 @@
 ---
 title: E24 (Metro Supply Chain) tracking: Canada last-mile & help
-description: Track an E24 (Metro Supply Chain) parcel in Canada: tracking references, delivery support and Montreal HQ contact info.
+description: Track an E24 (Metro E24 / Metro Supply Chain) delivery in Canada: how to select E24 in Peek, contact Metro Supply Chain via "find my package" and HQ info.
 slug: e24metro-ca-tracking
 published: 2026-11-23
-updated: 2026-11-23
+updated: 2026-11-27
 ---
 
-**E24** (*Metro E24*, *Metro E24 Solutions*) is a Canadian delivery carrier. Peek also lists it under the names of **Metro Supply Chain**, a Montreal-based third-party logistics (3PL) company whose own site doesn't use the name E24 ([metroscg.com](https://www.metroscg.com/)). Metro Supply Chain operates 190 sites from 6 countries with 22.5 million square feet of warehousing and makes 7 million last-mile deliveries in North America each year; its services include e-commerce and direct-to-consumer fulfillment, White Glove Delivery, Last-Mile Delivery, Time Critical Logistics and Reverse Logistics. You can paste the tracking reference your retailer gave you into the box above and choose **E24**.
+**E24** (*Metro E24*, *Metro E24 Solutions*) is listed in Peek as a Canadian delivery carrier alongside **Metro Supply Chain** ([metroscg.com](https://www.metroscg.com/), whose website doesn't use the name E24). Based in Montreal, Metro Supply Chain operates 190 sites across 6 countries with 22.5 million square feet of warehousing and completes 7 million last-mile deliveries a year in North America, including White Glove, Last-Mile and Time Critical Logistics. Because Peek has no fixed number pattern for E24, paste the retailer's tracking reference above and choose **E24** manually.
 
 ## E24 (Metro Supply Chain) tracking numbers
 
@@ -58,21 +58,25 @@ You can pick alert presets for "Every scan", "Important steps" or "Delivery only
 
 ## Questions about E24 (Metro Supply Chain) tracking
 
-### What is E24 (*Metro E24*)?
+### What is E24 (Metro E24 / Metro Supply Chain)?
 
-Peek lists E24 as a Canadian delivery carrier, also under the names Metro E24 and Metro Supply Chain. Metro Supply Chain is a Montreal-based 3PL company offering fulfillment, white glove delivery and 7 million last-mile deliveries a year in North America; its site doesn't use the name E24.
+Peek lists E24 as a Canadian delivery carrier under the aliases Metro E24, Metro E24 Solutions and Metro Supply Chain. Metro Supply Chain is a Montreal-based 3PL operating 190 sites in 6 countries and handling 7 million last-mile deliveries per year in North America; its own website doesn't use the E24 name.
 
-### Why didn't Peek auto-detect E24 from my tracking number?
+### Why doesn't Peek auto-detect E24 from my tracking number?
 
-Peek has no number pattern for E24, so select **E24** yourself with "Change" or "Change carrier".
+Peek has no number pattern or tracking-link rule for E24. Paste your retailer's reference, tap "Change" (or "Change carrier" later) and select **E24** (searching "Metro E24" or "Metro Supply Chain" also finds it).
 
-### Who should I contact to reschedule an E24 delivery?
+### How do I track or reschedule a Metro Supply Chain (E24) delivery?
 
-Metro Supply Chain's FAQ says to use its [contact page](https://www.metroscg.com/contact-us/) and choose "find my package" from the drop-down for delivery support.
+Track updates in Peek via tracking services after selecting E24, or for delivery support go to [metroscg.com/contact-us/](https://www.metroscg.com/contact-us/) and select "find my package" from the drop-down menu as Metro Supply Chain's FAQ instructs.
 
-### Where is Metro Supply Chain headquartered?
+### Who should I contact if my E24 parcel is missing or damaged?
 
-Metro Supply Chain's Canadian headquarters is located at 1002 Sherbrooke St West, Suite 2000, Montreal, Quebec, Canada ([metroscg.com/contact-us/](https://www.metroscg.com/contact-us/)).
+Use "find my package" on Metro Supply Chain's contact page for delivery help, and contact the retailer you bought from for a replacement, damage claim or refund.
+
+### Where is Metro Supply Chain's Canadian headquarters?
+
+Metro Supply Chain Inc. is headquartered at 1002 Sherbrooke St West, Suite 2000, Montreal, Quebec, Canada, with a European office at Saxham Business Park in Bury St Edmunds, UK.
 
 :::sources
 - [Metro Supply Chain: Official Website](https://www.metroscg.com/) – 3PL fulfillment, white-glove & last-mile delivery, 22.5M sq ft warehousing, 190 sites from 6 countries, 7M last-mile deliveries a year in North America and the "find my package" support

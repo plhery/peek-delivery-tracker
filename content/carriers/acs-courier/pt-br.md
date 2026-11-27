@@ -21,7 +21,7 @@ Ele aparece nos avisos da ACS por SMS, Viber ou e-mail, na mensagem do locker e 
 
 Códigos de 10 dígitos não são exclusivos da ACS. Os vouchers da [Geniki Taxydromiki](carrier:geniki-taxydromiki) têm o mesmo visual, e [DHL Express](carrier:dhl-express), Relais Colis e outras também usam 10 dígitos. Se o e-mail da loja indicar outra transportadora, rastreie por lá. Veja mais em [formatos de código de rastreamento](guide:tracking-number-formats).
 
-**Chipre e pedidos da [Shein, Temu ou AliExpress](guide:tracking-from-china).** Com DPD ou Speedy, a ACS envia seu código de 10 dígitos por SMS assim que o pacote chega ao Chipre. Se ainda não recebeu SMS ou Viber, segundo a ACS o volume ainda não chegou e ela não tem mais informações.
+**Chipre e pedidos da [Shein, Temu ou AliExpress](guide:tracking-from-china).** Com DPD ou [Speedy](carrier:speedy), a ACS envia seu código de 10 dígitos por SMS assim que o pacote chega ao Chipre. Se ainda não recebeu SMS ou Viber, segundo a ACS o volume ainda não chegou e ela não tem mais informações.
 
 ## Status de rastreamento da ACS Courier em inglês
 

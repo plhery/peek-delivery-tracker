@@ -10,7 +10,7 @@ Speedy（索非亚 Speedy AD）是隶属 DPD 集团（Geopost）的保加利亚�
 
 ## Speedy 运单号：在哪里查找
 
-Speedy 将其称为运单号（waybill number / tracking number）。尽管官网未公布固定长度规则，但其范例与实际单号均为 11 位数字，例如示例编号 `63482917364`。
+Speedy 将其称为运单号（waybill number / tracking number）。尽管官网未公布固定长度规则，但 Speedy 自己的范例和其查件页面上的单号均为 11 位数字，例如 `63482917364`（虚构）。
 
 你可以从以下位置找到单号：
 
@@ -21,11 +21,11 @@ Speedy 将其称为运单号（waybill number / tracking number）。尽管官�
 
 完全找不到单号？请看[如何查找运单号](guide:find-tracking-number)（英文）。
 
-11 位数字同时也符合 GLS 与[瑞士邮政（Swiss Post）](carrier:swiss-post)，请核对商家注明的承运商。DPD 运单号通常为 14 位，因此 Speedy 的 11 位单号并不是 DPD 标准单号。更多说明见[运单号格式指南](guide:tracking-number-formats)（英文）。
+11 位数字同时也符合 GLS 与[瑞士邮政（Swiss Post）](carrier:swiss-post)，请核对商家注明的承运商。DPD 包裹单号更长（14 位），Speedy 的 11 位运单号不是 DPD 单号。更多说明见[运单号格式指南](guide:tracking-number-formats)（英文）。
 
 ## Speedy 英文物流状态含义
 
-speedy.bg 默认打开保加利亚语界面，可切换为英文；查询接口也支持罗马尼亚语。以下按流转顺序列出常见英文状态：
+speedy.bg 默认打开保加利亚语界面，可切换为英文；其查件系统也可以用罗马尼亚语回应。以下是其英文状态，按包裹经过的顺序列出：
 
 | Speedy 显示 | 对你的含义 |
 | --- | --- |
@@ -58,11 +58,11 @@ speedy.bg 默认打开保加利亚语界面，可切换为英文；查询接口�
 
 Speedy 常见问题说明上述操作最多可能让派送顺延 2 天。因 Smart Control 页面提示短信与 Viber“无法保证 100% 送达”，建议同时向商家留邮箱并使用 Speedy Mobile 应用。
 
-**错过派送。** 快递员会拨打面单上的电话：若你接听，可当场约好重派或改派；未接听则转存最近的 Speedy 网点。你可以在 Smart Control 或致电 `1 7001 7001`（手机）/ `0 7001 7001`（固话）申请二次派送。
+**派送未成功。** 快递员会拨打面单上的电话：若你接听，可当场约好重派或改派；未接听则转存最近的 Speedy 网点。你可以在 Smart Control 或致电 `1 7001 7001`（手机）/ `0 7001 7001`（固话）申请二次派送。
 
 **网点自提。** Speedy 网点保管 **7 个自然日**，逾期退回寄件人。除非寄件人指定本人亲收，他人可凭运单号、PIN 码及身份证件代取。
 
-**Speedy Locker 快递柜。** 使用短信/Viber 中的 9 位 PIN 码，或扫描 Smart Control / 应用里的条码开柜。多数快递柜全天 24 小时开放。包裹在柜内保管 **3 个自然日**，随后转往 Speedy 网点；具体截止时间以 Smart Control 链接为准。
+**Speedy Locker 快递柜。** 使用短信/Viber 中的 9 位 PIN 码，或扫描 Smart Control / 应用里的条码开柜。许多快递柜全天 24 小时开放。包裹在柜内保管 **3 个自然日**，随后转往 Speedy 网点；具体截止时间以 Smart Control 链接为准。
 
 **付款方式。** 快递员支持现金或刷卡，快递柜仅支持刷卡；一旦在线完成付款，“付款前查验/试机”功能即失效。可在 Speedy [网点与快递柜地图](https://www.speedy.bg/bg/speedy-offices-automats)查找地址与营业时间。
 
@@ -70,7 +70,7 @@ Speedy 常见问题说明上述操作最多可能让派送顺延 2 天。因 Sma
 
 Speedy 未公布物流停滞的自助指引：请先查看 Smart Control 链接，再致电 Speedy 或联系持有合同的网店卖家。另见[物流停止更新的原因](guide:tracking-not-updating)（英文）。
 
-收货时请当着快递员的面检查内件，若发现破损应立即与快递员共同签署破损记录单（protocol）。
+收货时请当着快递员的面检查内件，如有破损，须写入你与快递员共同签署的破损记录单（protocol）。
 
 对于遗失、被盗、破损、无故退回或延误的包裹，寄件人与收件人均可在 Speedy 收寄日起 **6 个月**内提交理赔：可发邮件至 `r@speedy.bg`、在任意 Speedy 网点留下书面申请、寄信至总部或填写官网理赔表。Speedy 须在 **1 个月**内书面答复保加利亚境内理赔、**3 个月**内答复国际理赔（国际理赔发至 `internationalclaims@speedy.bg`）。赔偿上限见 Speedy 理赔表并取决于寄件人申报价值。
 
@@ -84,21 +84,21 @@ Speedy 未公布物流停滞的自助指引：请先查看 Smart Control 链接�
 
 Speedy 未公布客服工作时间或在线聊天，且上述为保加利亚境内号码，未公布境外拨打格式。
 
-> Speedy 曾警示冒用其名义发送虚假短信与邮件、诱导点击网站填写银行卡号的诈骗行为。官方短信仅来自 `170000` 或其官方 Viber 账号，官方邮件仅来自 `no-reply@speedy.bg`；切勿点击任何其他来源的链接。
+> Speedy 曾在 2026 年 4 月和 7 月警示冒用其名义发送虚假短信与邮件、诱导点击网站填写银行卡号的诈骗行为。官方短信仅来自 `170000` 或其官方 Viber 账号，官方邮件仅来自 `no-reply@speedy.bg`；切勿点击任何其他来源的链接。
 
 ## 使用 Peek 跟踪 Speedy 包裹
 
-[Peek](/) 无法仅凭 11 位数字断定 Speedy，因此会按每批五家向可能的承运商查询（前五家未查到才查下一批），且仅对以 `6` 开头的 11 位单号包含 Speedy。在保加利亚或罗马尼亚，Peek 会首选 Speedy，其次为校验位通过时的 [DHL eCommerce Poland](carrier:dhl-ecommerce-pl)、[GLS France](carrier:gls-fr)、[GLS Germany](carrier:gls-de)、GLS Switzerland、Swiss Post PostLogistics 和 PPL；在其他国家，以 `63` 开头时仍首选 Speedy，其余 `6` 开头单号则排在当地常用承运商之后。如果多家承运商有记录或暂未找到（“暂未找到 · Peek 会继续查询”），请点击“更换”选择“Speedy”。粘贴包含单号的 `speedy.bg` 或 `myspeedy.speedy.bg` 链接则会立刻归属 Speedy。
+[Peek](/) 无法仅凭 11 位数字断定 Speedy，因此会按每批五家向可能的承运商查询（前五家未查到才查下一批），且仅对以 `6` 开头的 11 位单号包含 Speedy。在保加利亚或罗马尼亚，Peek 会首选 Speedy，其次为 [DHL eCommerce Poland](carrier:dhl-ecommerce-pl)（仅当单号通过其校验位时）、[GLS France](carrier:gls-fr)、[GLS Germany](carrier:gls-de)、GLS Switzerland、Swiss Post PostLogistics 和 PPL；在其他国家，以 `63` 开头时仍首选 Speedy，其余以 `6` 开头的单号则把 Speedy 排在最后，位于上述同一批承运商之后（你所在国家的承运商优先）。如果多家承运商有记录或暂未找到（“暂未找到 · Peek 会继续查询”），请点击“更换”选择“Speedy”。粘贴包含单号的 `speedy.bg` 或 `myspeedy.speedy.bg` 链接则会立刻归属 Speedy。
 
-Peek 随后展示物流状态、附带城镇与国家的地图轨迹、在途预计送达日及签收时间。包裹暂存网点或快递柜时会显示名称（不含详细地址）。当希腊或塞浦路斯末端由 [ACS Courier](carrier:acs-courier) 派送时，Speedy 会给出 ACS 名称和单号，Peek 可自动接续至 ACS 追踪。收件人姓名、签收证明及退件单号都会被剔除。
+Peek 随后展示物流状态、附带城镇与国家的地图轨迹、在途预计送达日及签收时间。包裹暂存网点或快递柜时会显示名称（不含详细地址）。当希腊或塞浦路斯末端由 [ACS Courier](carrier:acs-courier) 派送时，Speedy 会给出 ACS 名称和单号，Peek 可以改由 ACS 跟踪该包裹。收件人姓名、签收证明及退件单号都会被剔除。
 
-Speedy 扫描保留英文原文，仅 `Delivered` 改用 Peek 自身文案。当你正在 Peek 中查看包裹，或派送当天已开启通知且 Speedy 官方查询正常响应时，Peek 最快每 10 分钟检查一次；在 Speedy 扫描出派送中当天，从保加利亚时间早上 6 点起每 2 分钟检查一次（需用浏览器读取时每 5 分钟一次；仅通过物流查询服务跟踪时，每小时查询一次，静默一天后每 3 小时一次，派送当天最多每 15 分钟一次）。连续两天无新动态（或在“已生成面单”/“已揽收”停留满 12 小时）后改为每小时一次；在“已生成面单”停留满 7 天后每 6 小时一次。
+Speedy 扫描保留英文原文，仅 `Delivered` 改用 Peek 自身文案。当你正在 Peek 中查看包裹，或派送当天已开启通知时，Peek 最多每 10 分钟查询一次；在 Speedy 扫描包裹开始派送的当天，只要 Speedy 自己的查件系统正常响应，自保加利亚时间早上 6 点起每 2 分钟查询一次（该查件系统需要通过浏览器读取时每 5 分钟一次；只有物流查询服务响应时每 15 分钟一次）。连续两天无新动态（或在“已生成面单”/“已揽收”停留满 12 小时）后改为每小时一次；在“已生成面单”停留满 7 天后每 6 小时一次。
 
 若最新扫描已过 4 天，且包裹仍处于“已生成面单”、“已揽收”或“运输中”，Peek 会按该扫描日期做出提示，例如“自10月12日周一起没有物流更新”。包裹页面会显示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 Speedy 查询。”，并提供前往 Speedy 联系页面的“向 Speedy 寻求帮助”链接。若超过三周没有新扫描，则会提示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 Speedy 查询。”
 
-Peek 支持按“每次扫描”、“重要环节”或“仅派送当天”发送提醒，但无法代你延长保管期或重发 PIN 码。
+Peek 可以按“每次扫描”、“重要环节”或“仅派送当天”通知你，但无法代你延长保管期或重发 PIN 码。
 
-## Speedy 物流查询常见问题
+## 关于 Speedy 物流查询的问题
 
 ### Speedy 送货需要多长时间？
 
@@ -113,22 +113,22 @@ Speedy 官网未公布统一运输时效。具体送达日期请查看 Smart Con
 Speedy 的[网点与快递柜地图](https://www.speedy.bg/bg/speedy-offices-automats)列出了所有服务点与 Speedy Locker 的详细地址和营业时间。
 
 :::sources
-- [Speedy: Frequently Asked Questions](https://www.speedy.bg/en/faq) – waybill number, Smart Control, Predict, attempts, office and locker periods, payment, complaints
-- [Speedy: Smart Control and Predict](https://www.speedy.bg/en/smart-control) – Smart Control options, SMS and Viber, payment options
-- [Speedy: Speedy Lockers](https://www.speedy.bg/en/automats-information) – PIN, 3 calendar days, size and weight
-- [Speedy: Speedy Mobile](https://www.speedy.bg/en/speedy-mobile) – app, PIN sharing, online payment
-- [Speedy: Contact us](https://www.speedy.bg/en/contact-us) – phones, emails, company
-- [Speedy: Свържете се с нас](https://www.speedy.bg/bg/contact-us) – call charges
-- [Speedy: Offices and lockers](https://www.speedy.bg/bg/speedy-offices-automats) – addresses and hours
-- [Speedy: Home](https://www.speedy.bg/en) – tracking box, several numbers
-- [Speedy: International services](https://www.speedy.bg/en/international) – Romania, Greece, Cyprus, DPD services
-- [Speedy: Public tracking](https://myspeedy.speedy.bg/pub/tracking/) – wordings, notes, languages
-- [Speedy: Web API documentation](https://api.speedy.bg/api/docs/) – status wordings
-- [Speedy: Routing label specification](https://api.speedy.bg/api/docs/examples/RoutingLabelSpecification_spd.pdf) – number on the label
-- [Speedy: Общи условия куриерски пратки](https://speedy.bg/uploads/media/speedy_files/2025-01-09%20%D0%9E%D0%B1%D1%89%D0%B8%20%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D1%8F%20%D0%9D%D0%9F%D0%A3%20%D0%A1%D0%BF%D0%B8%D0%B4%D0%B8%20%D0%90%D0%94-1738053907.pdf) – one visit, damage protocol, return after 7 days
-- [Speedy: Claim form](https://www.speedy.bg/uploads/media/speedy_files/speedy-claim-form-en-20260929.docx) – who may claim, 6 months, reply times
-- [Speedy: Фишинг кампания чрез SMS](https://www.speedy.bg/bg/post/Phishing-campaign-via-SMS-messages-impersonating-Speedy-20260421) – SMS only from 170000 or Viber
-- [Speedy: Предупреждение за фишинг имейли](https://www.speedy.bg/bg/posts/actual/Warning-about-phishing-emails-using-Speedys-name-20260706) – fake emails, no-reply@speedy.bg
-- [Transport Intelligence: GeoPost/DPDgroup acquires the majority stake of Speedy AD](https://ti-insight.com/geopost-dpdgroup-acquires-the-majority-stake-of-speedy-ad-in-bulgaria/) – DPD group ownership
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [Speedy: Frequently Asked Questions](https://www.speedy.bg/en/faq) – 运单号、Smart Control、Predict、派送尝试、网点与快递柜保管期、付款、投诉
+- [Speedy: Smart Control and Predict](https://www.speedy.bg/en/smart-control) – Smart Control 的选项、短信与 Viber、付款方式
+- [Speedy: Speedy Lockers](https://www.speedy.bg/en/automats-information) – PIN 码、3 个自然日、尺寸与重量
+- [Speedy: Speedy Mobile](https://www.speedy.bg/en/speedy-mobile) – 应用、分享 PIN 码、在线付款
+- [Speedy: Contact us](https://www.speedy.bg/en/contact-us) – 电话、邮箱、公司
+- [Speedy: Свържете се с нас](https://www.speedy.bg/bg/contact-us) – 通话费用
+- [Speedy: Offices and lockers](https://www.speedy.bg/bg/speedy-offices-automats) – 地址与营业时间
+- [Speedy: Home](https://www.speedy.bg/en) – 查询框、多个单号
+- [Speedy: International services](https://www.speedy.bg/en/international) – 罗马尼亚、希腊、塞浦路斯、DPD 服务
+- [Speedy: Public tracking](https://myspeedy.speedy.bg/pub/tracking/) – 状态措辞、备注、语言
+- [Speedy: Web API documentation](https://api.speedy.bg/api/docs/) – 状态措辞
+- [Speedy: Routing label specification](https://api.speedy.bg/api/docs/examples/RoutingLabelSpecification_spd.pdf) – 面单上的单号
+- [Speedy: Общи условия куриерски пратки](https://speedy.bg/uploads/media/speedy_files/2025-01-09%20%D0%9E%D0%B1%D1%89%D0%B8%20%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D1%8F%20%D0%9D%D0%9F%D0%A3%20%D0%A1%D0%BF%D0%B8%D0%B4%D0%B8%20%D0%90%D0%94-1738053907.pdf) – 一次上门、破损记录单、7 天后退回
+- [Speedy: Claim form](https://www.speedy.bg/uploads/media/speedy_files/speedy-claim-form-en-20260929.docx) – 谁可以索赔、6 个月、答复时限
+- [Speedy: Фишинг кампания чрез SMS](https://www.speedy.bg/bg/post/Phishing-campaign-via-SMS-messages-impersonating-Speedy-20260421) – 短信只来自 170000 或 Viber
+- [Speedy: Предупреждение за фишинг имейли](https://www.speedy.bg/bg/posts/actual/Warning-about-phishing-emails-using-Speedys-name-20260706) – 虚假邮件、no-reply@speedy.bg
+- [Transport Intelligence: GeoPost/DPDgroup acquires the majority stake of Speedy AD](https://ti-insight.com/geopost-dpdgroup-acquires-the-majority-stake-of-speedy-ad-in-bulgaria/) – 归属 DPD 集团
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取的内容
 :::

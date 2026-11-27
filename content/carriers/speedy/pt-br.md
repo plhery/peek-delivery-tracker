@@ -25,7 +25,7 @@ Códigos de 11 dígitos também cabem em GLS e [Swiss Post](carrier:swiss-post),
 
 ## O que significam os status de rastreamento da Speedy
 
-O site da Speedy abre em búlgaro com botão para inglês, e o rastreador também responde em romeno. Estes são os textos em inglês, na ordem usual:
+O site da Speedy abre em búlgaro com botão para inglês, e o rastreador também responde em romeno. Estes são os textos em inglês, na ordem em que a encomenda passa por eles:
 
 | Status da Speedy | O que significa para você |
 | --- | --- |
@@ -42,7 +42,7 @@ O site da Speedy abre em búlgaro com botão para inglês, e o rastreador també
 | `Return to Sender` | Retornando ao remetente sob código de devolução. |
 | `Delivered Back to Sender` | Devolvido ao remetente. |
 
-`Shipment data received` costuma trazer a observação "Expected Delivery Date" com uma data; o FAQ da Speedy ressalva que não há data garantida enquanto o remetente não despachar o pacote. Em `Prepared for Self-collecting by Consignee`, "Consignee" é você, e a nota abaixo informa o nome e endereço da agência ou locker.
+`Shipment data received` costuma trazer a observação "Expected Delivery Date" com uma data; o FAQ da Speedy ressalva que ela não pode informar uma data enquanto o remetente não despachar o pacote. Em `Prepared for Self-collecting by Consignee`, "Consignee" é você, e a nota abaixo informa o nome e endereço da agência ou locker.
 
 `Refuse contents check/test` refere-se às opções de abrir ou testar antes do pagamento e não indica movimento. `Predict` indica a janela de visita de 60 minutos (veja Smart Control abaixo). `Delivery capacity reached (tour/office)` significa rota ou agência lotada, e `Postponed delivery due to inaccurate/incomplete address` indica que a Speedy precisa de endereço mais completo, ajustável no Smart Control.
 
@@ -58,7 +58,7 @@ O site da Speedy abre em búlgaro com botão para inglês, e o rastreador també
 
 O FAQ da Speedy avisa que alterações podem atrasar a entrega em até 2 dias. Como o Smart Control informa que mensagens SMS e Viber não têm garantia de 100%, informe um e-mail à loja e use o app Speedy Mobile.
 
-**Entrega perdida.** O entregador liga para o telefone da etiqueta: se você atender, combina nova tentativa ou redirecionamento; se não atender, o volume vai para a agência Speedy mais próxima. Peça segunda tentativa no Smart Control ou ligue `1 7001 7001` (celular) ou `0 7001 7001` (fixo).
+**Entrega não realizada.** O entregador liga para o telefone da etiqueta: se você atender, combina nova tentativa ou redirecionamento; se não atender, o volume vai para a agência Speedy mais próxima. Peça segunda tentativa no Smart Control ou ligue `1 7001 7001` (celular) ou `0 7001 7001` (fixo).
 
 **Na agência.** A Speedy guarda por **7 dias corridos** antes de devolver ao remetente. Outra pessoa pode retirar levando o número da guia, o PIN e um documento de identidade, salvo se o remetente exigiu entrega pessoal.
 
@@ -72,7 +72,7 @@ A Speedy não publica orientações para rastreamento parado: consulte primeiro 
 
 Na entrega, confira o conteúdo na presença do entregador e registre qualquer dano em um termo assinado por você e pelo entregador.
 
-Tanto remetente quanto destinatário podem abrir reclamação em até **6 meses** da data em que a Speedy recebeu a encomenda (por extravio, roubo, dano, devolução imotivada ou atraso): escreva para `r@speedy.bg`, entregue nota por escrito em qualquer agência Speedy, envie carta à sede ou use o formulário no site. A Speedy responde por escrito em até **1 mês** em envios na Bulgária e **3 meses** em internacionais (reclamações internacionais vão para `internationalclaims@speedy.bg`). Os limites de indenização constam no formulário conforme o valor declarado.
+Tanto remetente quanto destinatário podem fazer o pedido de indenização em até **6 meses** da data em que a Speedy recebeu a encomenda (por extravio, roubo, dano, devolução imotivada ou atraso): escreva para `r@speedy.bg`, entregue nota por escrito em qualquer agência Speedy, envie carta à sede ou use o formulário no site. A Speedy responde por escrito em até **1 mês** em envios na Bulgária e **3 meses** em internacionais (reclamações internacionais vão para `internationalclaims@speedy.bg`). Os limites de indenização constam no formulário conforme o valor declarado.
 
 ## Telefone e atendimento da Speedy
 
@@ -84,15 +84,15 @@ Canais listados na página [Contact us](https://www.speedy.bg/en/contact-us) da 
 
 A Speedy não informa horários de atendimento nem chat, e esses são números locais da Bulgária sem formato divulgado para ligações do exterior.
 
-> A Speedy alertou sobre SMS e e-mails falsos em seu nome levando a páginas que pedem dados de cartão. SMS oficiais vêm apenas de `170000` ou do canal oficial no Viber, e e-mails de `no-reply@speedy.bg`. Não abra links de outros remetentes.
+> A Speedy alertou em abril e julho de 2026 sobre SMS e e-mails falsos em seu nome levando a páginas que pedem dados de cartão. SMS oficiais vêm apenas de `170000` ou do canal oficial no Viber, e e-mails de `no-reply@speedy.bg`. Não abra links de outros remetentes.
 
 ## Acompanhe uma encomenda Speedy com o Peek
 
-O [Peek](/) não identifica a Speedy apenas pelos 11 dígitos, então consulta as transportadoras prováveis de cinco em cinco (só consultando o grupo seguinte se nenhuma do primeiro reconhecer o código), incluindo a Speedy apenas para códigos iniciados por `6`. Na Bulgária ou Romênia, o Peek consulta primeiro a Speedy, depois [DHL eCommerce Polônia](carrier:dhl-ecommerce-pl) (quando o dígito verificador confere), [GLS França](carrier:gls-fr), [GLS Alemanha](carrier:gls-de), GLS Suíça, Swiss Post PostLogistics e PPL. Em outros países, a Speedy ainda vem primeiro para códigos começados por `63`, mas nos demais começados por `6` entra por último após as transportadoras do seu país. Se várias empresas reconhecerem ou nenhuma ainda ("ainda não encontrada · o Peek continua verificando"), selecione "Speedy" em "Trocar". Links de `speedy.bg` ou `myspeedy.speedy.bg` contendo o código atribuem o pacote à Speedy na hora.
+O [Peek](/) não identifica a Speedy apenas pelos 11 dígitos, então consulta as transportadoras prováveis de cinco em cinco (só consultando o grupo seguinte se nenhuma do primeiro reconhecer o código), incluindo a Speedy apenas para códigos iniciados por `6`. Na Bulgária ou Romênia, o Peek consulta primeiro a Speedy, depois [DHL eCommerce Polônia](carrier:dhl-ecommerce-pl) (quando o dígito verificador confere), [GLS França](carrier:gls-fr), [GLS Alemanha](carrier:gls-de), GLS Suíça, Swiss Post PostLogistics e PPL. Em outros países, a Speedy ainda vem primeiro para códigos começados por `63`, mas nos demais começados por `6` entra por último, depois das mesmas transportadoras, com as do seu país primeiro. Se várias empresas reconhecerem ou nenhuma ainda ("ainda não encontrada · o Peek continua verificando"), selecione "Speedy" em "Trocar". Links de `speedy.bg` ou `myspeedy.speedy.bg` contendo o código atribuem o pacote à Speedy na hora.
 
-O Peek exibe o status, o histórico com cidade e país de cada movimentação no mapa, a data prevista enquanto em transporte e o horário de entrega. Quando aguarda em agência ou locker, mostra o nome (sem o endereço). Quando a [ACS Courier](carrier:acs-courier) assume o trecho na Grécia ou no Chipre, a Speedy informa a ACS e seu código, e o Peek acompanha por lá. Destinatário, comprovante de entrega e código de devolução são omitidos.
+O Peek exibe o status, o histórico com cidade e país de cada movimentação no mapa, a data prevista enquanto em transporte e o horário de entrega. Quando aguarda em agência ou locker, mostra o nome (sem o endereço). Quando a [ACS Courier](carrier:acs-courier) assume o trecho na Grécia ou no Chipre, a Speedy informa a ACS e seu código, e o Peek pode acompanhar a encomenda por lá. Destinatário, comprovante de entrega e código de devolução são omitidos.
 
-Os textos da Speedy aparecem no inglês original, com `Delivered` traduzido pelo Peek. Com a encomenda aberta no Peek, ou no dia da entrega com notificações ligadas, verifica até a cada 10 minutos; no dia em que sair para entrega, a cada 2 minutos a partir das 6h (horário da Bulgária) enquanto o próprio rastreador da Speedy responder — ou a cada 5 minutos se precisar abrir navegador; quando acompanhada apenas por serviços de rastreamento, a cada hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega. Após dois dias sem novidades (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora, e a cada 6 horas depois de sete dias em "Etiqueta criada".
+Os textos da Speedy aparecem no inglês original, com `Delivered` traduzido pelo Peek. Com a encomenda aberta no Peek, ou no dia da entrega com notificações ligadas, verifica até a cada 10 minutos; no dia em que sair para entrega, a cada 2 minutos a partir das 6h (horário da Bulgária) enquanto o próprio rastreador da Speedy responder — ou a cada 5 minutos se precisar abrir navegador; quando só os serviços de rastreamento respondem, a cada 15 minutos. Após dois dias sem novidades (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora, e a cada 6 horas depois de sete dias em "Etiqueta criada".
 
 Quando a movimentação mais recente completa quatro dias e a encomenda segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza com a data desse registro, como "Sem atualizações desde seg 12 out". A página então mostra "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Speedy.", com um link "Pedir ajuda a Speedy" para a página de contato. Após três semanas sem novidade, exibe "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando Speedy."
 
@@ -113,22 +113,22 @@ Sim, com o mesmo código de envio. Quando a ACS Courier assume o trecho final, o
 O [mapa de agências e lockers da Speedy](https://www.speedy.bg/bg/speedy-offices-automats) lista cada unidade e Speedy Locker com endereço e horários.
 
 :::sources
-- [Speedy: Frequently Asked Questions](https://www.speedy.bg/en/faq) – waybill number, Smart Control, Predict, attempts, office and locker periods, payment, complaints
-- [Speedy: Smart Control and Predict](https://www.speedy.bg/en/smart-control) – Smart Control options, SMS and Viber, payment options
-- [Speedy: Speedy Lockers](https://www.speedy.bg/en/automats-information) – PIN, 3 calendar days, size and weight
-- [Speedy: Speedy Mobile](https://www.speedy.bg/en/speedy-mobile) – app, PIN sharing, online payment
-- [Speedy: Contact us](https://www.speedy.bg/en/contact-us) – phones, emails, company
-- [Speedy: Свържете се с нас](https://www.speedy.bg/bg/contact-us) – call charges
-- [Speedy: Offices and lockers](https://www.speedy.bg/bg/speedy-offices-automats) – addresses and hours
-- [Speedy: Home](https://www.speedy.bg/en) – tracking box, several numbers
-- [Speedy: International services](https://www.speedy.bg/en/international) – Romania, Greece, Cyprus, DPD services
-- [Speedy: Public tracking](https://myspeedy.speedy.bg/pub/tracking/) – wordings, notes, languages
-- [Speedy: Web API documentation](https://api.speedy.bg/api/docs/) – status wordings
-- [Speedy: Routing label specification](https://api.speedy.bg/api/docs/examples/RoutingLabelSpecification_spd.pdf) – number on the label
-- [Speedy: Общи условия куриерски пратки](https://speedy.bg/uploads/media/speedy_files/2025-01-09%20%D0%9E%D0%B1%D1%89%D0%B8%20%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D1%8F%20%D0%9D%D0%9F%D0%A3%20%D0%A1%D0%BF%D0%B8%D0%B4%D0%B8%20%D0%90%D0%94-1738053907.pdf) – one visit, damage protocol, return after 7 days
-- [Speedy: Claim form](https://www.speedy.bg/uploads/media/speedy_files/speedy-claim-form-en-20260929.docx) – who may claim, 6 months, reply times
-- [Speedy: Фишинг кампания чрез SMS](https://www.speedy.bg/bg/post/Phishing-campaign-via-SMS-messages-impersonating-Speedy-20260421) – SMS only from 170000 or Viber
-- [Speedy: Предупреждение за фишинг имейли](https://www.speedy.bg/bg/posts/actual/Warning-about-phishing-emails-using-Speedys-name-20260706) – fake emails, no-reply@speedy.bg
-- [Transport Intelligence: GeoPost/DPDgroup acquires the majority stake of Speedy AD](https://ti-insight.com/geopost-dpdgroup-acquires-the-majority-stake-of-speedy-ad-in-bulgaria/) – DPD group ownership
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [Speedy: Frequently Asked Questions](https://www.speedy.bg/en/faq) – número da guia, Smart Control, Predict, tentativas, prazos em agência e locker, pagamento, reclamações
+- [Speedy: Smart Control and Predict](https://www.speedy.bg/en/smart-control) – opções do Smart Control, SMS e Viber, formas de pagamento
+- [Speedy: Speedy Lockers](https://www.speedy.bg/en/automats-information) – PIN, 3 dias corridos, tamanho e peso
+- [Speedy: Speedy Mobile](https://www.speedy.bg/en/speedy-mobile) – app, compartilhamento do PIN, pagamento on-line
+- [Speedy: Contact us](https://www.speedy.bg/en/contact-us) – telefones, e-mails, empresa
+- [Speedy: Свържете се с нас](https://www.speedy.bg/bg/contact-us) – custo das ligações
+- [Speedy: Offices and lockers](https://www.speedy.bg/bg/speedy-offices-automats) – endereços e horários
+- [Speedy: Home](https://www.speedy.bg/en) – caixa de rastreamento, vários códigos
+- [Speedy: International services](https://www.speedy.bg/en/international) – Romênia, Grécia, Chipre, serviços DPD
+- [Speedy: Public tracking](https://myspeedy.speedy.bg/pub/tracking/) – textos, observações, idiomas
+- [Speedy: Web API documentation](https://api.speedy.bg/api/docs/) – textos de status
+- [Speedy: Routing label specification](https://api.speedy.bg/api/docs/examples/RoutingLabelSpecification_spd.pdf) – número na etiqueta
+- [Speedy: Общи условия куриерски пратки](https://speedy.bg/uploads/media/speedy_files/2025-01-09%20%D0%9E%D0%B1%D1%89%D0%B8%20%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D1%8F%20%D0%9D%D0%9F%D0%A3%20%D0%A1%D0%BF%D0%B8%D0%B4%D0%B8%20%D0%90%D0%94-1738053907.pdf) – uma visita, termo de dano, devolução após 7 dias
+- [Speedy: Claim form](https://www.speedy.bg/uploads/media/speedy_files/speedy-claim-form-en-20260929.docx) – quem pode pedir indenização, 6 meses, prazos de resposta
+- [Speedy: Фишинг кампания чрез SMS](https://www.speedy.bg/bg/post/Phishing-campaign-via-SMS-messages-impersonating-Speedy-20260421) – SMS só de 170000 ou do Viber
+- [Speedy: Предупреждение за фишинг имейли](https://www.speedy.bg/bg/posts/actual/Warning-about-phishing-emails-using-Speedys-name-20260706) – e-mails falsos, no-reply@speedy.bg
+- [Transport Intelligence: GeoPost/DPDgroup acquires the majority stake of Speedy AD](https://ti-insight.com/geopost-dpdgroup-acquires-the-majority-stake-of-speedy-ad-in-bulgaria/) – controle do grupo DPD
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê
 :::

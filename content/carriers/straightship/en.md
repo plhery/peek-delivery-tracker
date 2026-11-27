@@ -6,7 +6,7 @@ published: 2026-10-23
 updated: 2026-11-27
 ---
 
-Track a Straightship parcel in Canada by pasting your `STRTD`, `STRCA` or `STSH` tracking number in the box above or on [straightship.com](https://www.straightship.com/new/). Based in Burnaby, British Columbia (with over 85 delivery hubs covering 95% of Canada's population and partners including SHEIN), Straightship delivers with its own drivers; ignore a lagging `ReadyForShipping` summary and follow the latest history line (all timestamps are UTC), or contact +1 (800) 452-3304 / SS@straightship.com after a missed attempt.
+Track a Straightship parcel in Canada by pasting your `STRTD`, `STRCA` or `STSH` tracking number in the box above or on [straightship.com](https://www.straightship.com/new/). Based in Burnaby, British Columbia, with partners including SHEIN, Straightship delivers with its own drivers (it says its over 85 delivery hubs cover 95% of Canada's population); ignore a lagging `ReadyForShipping` summary and follow the latest history line (all timestamps are UTC), or contact +1 (800) 452-3304 / SS@straightship.com after a missed attempt.
 
 ## Straightship tracking number: what it looks like
 
@@ -103,7 +103,7 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ### Why does Straightship still say ReadyForShipping?
 
-Straightship's "Package Status" summary often stays on `ReadyForShipping` (or `Ready For Shipping`) even while the parcel moves through depots in Canada. Always read the newest timestamped scan in the history below it (times are UTC).
+Straightship's "Package Status" summary can stay on `ReadyForShipping` (or `Ready For Shipping`) even while the parcel moves through depots in Canada. Always read the newest timestamped scan in the history below it (times are UTC).
 
 ### What does "Package will be delivered before 9:00pm" mean?
 

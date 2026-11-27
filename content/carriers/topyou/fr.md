@@ -6,7 +6,7 @@ published: 2026-10-30
 updated: 2026-11-27
 ---
 
-Pour le suivi d'un colis TopYou (通邮 / Tongyou / SZTY56, transitaire basé à Shenzhen fondé en 2016), colle ton numéro de 17 caractères commençant par `TYZR` (ou `TYZ…`) et finissant par `YQ` dans le champ ci-dessus — ou en majuscules sur [track.szty56.com](https://track.szty56.com/). TopYou assure l'acheminement depuis la Chine jusqu'à la douane, puis remet le colis à un transporteur local en France (souvent GOFO France ou La Poste), en Belgique (bpost) ou en Suisse (La Poste suisse).
+Pour le suivi d'un colis TopYou (通邮 / Tongyou / SZTY56, transitaire basé à Shenzhen fondé en 2016), colle ton numéro de 17 caractères commençant par `TYZR` (ou `TYZ…`) et finissant par `YQ` dans le champ ci-dessus — ou en majuscules sur [track.szty56.com](https://track.szty56.com/). TopYou assure l'acheminement depuis la Chine jusqu'à la douane, puis remet le colis à un transporteur local en France (par exemple GOFO France ou La Poste), en Belgique (bpost) ou en Suisse (La Poste suisse).
 
 ## Numéro de suivi TopYou : à quoi il ressemble
 
@@ -116,7 +116,7 @@ Peek vérifie jusqu'à toutes les 10 minutes, puis toutes les heures quand TopYo
 
 ### Qui livre les colis TopYou en France, en Belgique et en Suisse ?
 
-Un transporteur local après dédouanement : en France souvent GOFO France ou La Poste, en Belgique bpost et en Suisse La Poste suisse. La fiche TopYou peut afficher le second numéro sans nommer le transporteur ; si c'est un numéro postal international valide, Peek interroge directement la poste du pays.
+Un transporteur local après dédouanement : en France par exemple GOFO France ou La Poste, en Belgique bpost et en Suisse La Poste suisse. La fiche TopYou peut afficher le second numéro sans nommer le transporteur ; si c'est un numéro postal international valide, Peek interroge directement la poste du pays.
 
 ### Que signifie « Shipment is out for delivery » chez TopYou ?
 

@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Track a Vinted Go parcel by tapping the tracking button in your Vinted order conversation or pasting your `VGS` or 16-digit tracking number on [vintedgo.com/en/tracking](https://vintedgo.com/en/tracking) or in the box above. Vinted Go (Vinted's own parcel network across France, Belgium, the Netherlands, Spain, Portugal and Finland) delivers between lockers and parcel shops — holding parcels for 7 calendar days once ready — while all missing-parcel claims (after 25 business days) and refunds are handled through Vinted support.
+Track a Vinted Go parcel by tapping the tracking button in your Vinted order conversation or pasting your `VGS` or 16-digit tracking number on [vintedgo.com/en/tracking](https://vintedgo.com/en/tracking) or in the box above. Vinted Go (Vinted's own parcel network across France, Belgium, the Netherlands, Spain, Portugal and Finland) delivers to lockers, parcel shops and neighbourhood points — holding parcels for 7 calendar days once ready — while all missing-parcel claims (after 25 business days) and refunds are handled through Vinted support.
 
 ## Where to find your Vinted Go tracking number
 
@@ -106,7 +106,7 @@ Yes. Vinted Go is Vinted's own shipping network, operated by Vinted Go, UAB in V
 
 ### How long does Vinted Go take to deliver?
 
-Vinted Go asks buyers to allow up to 25 business days before reporting a parcel missing in Vinted; once marked delivered or collected, you have 2 days to report a problem in the order conversation.
+Vinted Go's terms aim for 3 to 6 business days from drop-off to your point. It asks buyers to allow up to 25 business days before reporting a parcel missing in Vinted; once marked delivered or collected, you have 2 days to report a problem in the order conversation.
 
 ### Does Vinted Go have a customer service phone number?
 

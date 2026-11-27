@@ -6,7 +6,7 @@ published: 2026-10-13
 updated: 2026-11-27
 ---
 
-Track a Pošta Slovenije (Post of Slovenia) parcel or registered item on [moja.posta.si/tracking](https://moja.posta.si/tracking) (English switch available), in the MojaPošta app or by pasting your 13-character `SI` or foreign postal acceptance number (*sprejemna številka*) in the box above. Domestic parcels typically arrive in 1 to 3 days, PS Paketomat lockers hold items for 60 hours before moving to a post office for 5 days, and customer care answers on 080 14 00 (+386 2 449 20 00 from abroad) or info@posta.si.
+Track a Pošta Slovenije (Post of Slovenia) parcel or registered item on [moja.posta.si/tracking](https://moja.posta.si/tracking) (English switch available), in the MojaPošta app or by pasting your 13-character `SI` or foreign postal acceptance number (*sprejemna številka*) in the box above. A PS Paketomat locker holds an item for 60 hours, then a post office for 5 days, and customer care answers on 080 14 00 (+386 2 449 20 00 from abroad) or info@posta.si.
 
 ## Pošta Slovenije tracking number
 

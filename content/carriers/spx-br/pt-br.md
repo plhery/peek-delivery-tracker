@@ -6,7 +6,7 @@ published: 2026-11-01
 updated: 2026-11-27
 ---
 
-Para fazer o rastreio de um pedido da Shopee pela SPX Express (Shopee Xpress), logística própria da Shopee no Brasil, abra "Eu" > "Minhas Compras" > "Status de Envio" no app da Shopee, busque em spx.com.br ou cole o código `BR` no campo acima. A SPX realiza até 3 tentativas de entrega no endereço (ou aguarda 7 dias úteis com PIN na Agência Shopee, no "Retire Fácil"); como não há contato direto com a transportadora, atrasos e reembolsos são resolvidos pelo Chat Shopee.
+Para fazer o rastreio de um pedido da Shopee pela SPX Express (Shopee Xpress), logística própria da Shopee no Brasil, abra "Eu" > "Minhas Compras" > "Status de Envio" no app da Shopee, busque em spx.com.br ou cole o código `BR` no campo acima. A SPX realiza até 3 tentativas de entrega no endereço (ou aguarda 7 dias úteis com PIN na Agência Shopee, no "Retire Fácil"); como não há contato direto com a transportadora, atrasos e reembolsos passam pela própria Shopee, no app.
 
 ## Código de rastreio SPX Express: onde encontrar
 

@@ -84,7 +84,7 @@ Le colis est en route vers GOFO, qui ne l'a pas encore scanné (`Arrivé au site
 
 ### GOFO France, c'est une vraie entreprise ?
 
-Oui. GOFO France livre en France (en général sous 3 à 5 jours ouvrables après l'arrivée en France, avec jusqu'à 3 tentatives et 14 jours de garde à l'entrepôt) et dispose d'un service client dédié sur gofo.com.
+Oui. GOFO FRANCE est une SAS française inscrite au répertoire Sirene de l'INSEE sous le Siren 978 559 839, active depuis mai 2023, avec son siège à Marly-la-Ville (Val-d'Oise). Elle livre en France (selon GOFO, en général sous 3 à 5 jours ouvrables après l'arrivée en France, avec jusqu'à 3 tentatives et 14 jours de garde à l'entrepôt) et a un service client sur gofo.com.
 
 ### GOFO et CIRRO Parcel, c'est pareil ?
 

@@ -109,7 +109,7 @@ Xinghe's tracking box forwards queries directly to GZYL's tracker, so its step w
 
 ### Who delivers Xinghe Freight parcels in my country?
 
-Neither Xinghe's site nor the tracker names the local delivery partner (Peek can only hand over to Swiss Post in Switzerland and Liechtenstein when named). Ask the seller which local carrier delivers your parcel and for its tracking number.
+Neither Xinghe's site nor the tracker names the local delivery partner (Peek can hand it over only to Swiss Post, in Switzerland and Liechtenstein, when Xinghe's record names it). Ask the seller which local carrier delivers your parcel and for its tracking number.
 
 ### Why does Peek show no tracking (or fewer steps) for my GZXH number?
 

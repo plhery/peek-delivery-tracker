@@ -81,13 +81,13 @@ Com a encomenda aberta no Peek, ou no dia da entrega com notificações ligadas,
 
 Quando a movimentação mais recente completa quatro dias e a encomenda continua em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza com a data desse registro, como "Sem atualizações desde seg 12 out". A página então exibe "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando HayPost.", com um link "Pedir ajuda a HayPost" para a página de contato do HayPost. Após três semanas sem novidade, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando HayPost."
 
-Você pode escolher alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek apenas acompanha atualizações de rastreamento e não faz desembaraço aduaneiro nem abre reclamações junto ao HayPost por você.
+Você pode escolher alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek apenas acompanha atualizações de rastreamento e não faz desembaraço aduaneiro nem abre uma consulta junto ao HayPost por você.
 
 ## Perguntas sobre o rastreamento do HayPost
 
 ### Como é um código de rastreamento do HayPost?
 
-O HayPost usa códigos postais padrão UPU S10 de 13 caracteres: duas letras, nove dígitos e `AM` no final para envios postados na Armênia (por exemplo, `RR482917367AM` ou `CP482917367AM`, dígitos inventados). Envios internacionais de entrada mantêm as duas letras finais do país remetente.
+O HayPost usa números postais padrão UPU S10 de 13 caracteres: duas letras, nove dígitos e `AM` no final para envios postados na Armênia (por exemplo, `RR482917367AM` ou `CP482917367AM`, dígitos inventados). Envios internacionais de entrada mantêm as duas letras finais do país remetente.
 
 ### Por que minha encomenda HayPost mostrou `Return item from customs (Inb)`?
 
@@ -102,15 +102,15 @@ Sim. Qualquer código internacional rastreado UPU S10 destinado à Armênia pode
 Ligue para `+374 10 514-514` (ou `+374 10 544-444` para serviços corporativos), envie um e-mail para `info@haypost.am` ou use o formulário em [haypost.am/en/contact-us](https://www.haypost.am/en/contact-us) ou o chat ao vivo no site do HayPost.
 
 :::sources
-- [HayPost: Home](https://www.haypost.am/en) – national postal operator portal
-- [HayPost: Track & Trace](https://www.haypost.am/en/track-trace) – online item tracking
-- [HayPost: About Us](https://www.haypost.am/en/about-us) – founded 1994, CJSC since 1998, ~777 post offices, 23 regional hubs, UPU and PostEurop member
-- [HayPost: Domestic Postal Services](https://www.haypost.am/en/postal-services/domestic-postal-services) – 2 kg small packets, 20 kg parcels, YES Yerevan Express Service (`+374 10 514 513`) and HayPost Sprint
-- [HayPost: International Delivery](https://www.haypost.am/en/postal-services/international-delivery) – international small packet (2 kg), parcel (20 kg), M-bag (30 kg) and EMS limits
-- [HayPost: HayPost Express](https://www.haypost.am/en/postal-services/Haypost-Express) – air parcel delivery to Los Angeles (30 kg, 7–10 working days)
-- [HayPost: Our Network](https://www.haypost.am/en/our-network) – Armenian post-office directory
+- [HayPost: Home](https://www.haypost.am/en) – portal do operador postal nacional
+- [HayPost: Track & Trace](https://www.haypost.am/en/track-trace) – rastreamento on-line de objetos
+- [HayPost: About Us](https://www.haypost.am/en/about-us) – fundado em 1994, sociedade anônima fechada desde 1998, cerca de 777 agências, 23 centros regionais, membro da UPU e da PostEurop
+- [HayPost: Domestic Postal Services](https://www.haypost.am/en/postal-services/domestic-postal-services) – pequenos pacotes de 2 kg, encomendas de 20 kg, YES Yerevan Express Service (`+374 10 514 513`) e HayPost Sprint
+- [HayPost: International Delivery](https://www.haypost.am/en/postal-services/international-delivery) – limites internacionais de pequeno pacote (2 kg), encomenda (20 kg), mala M (30 kg) e EMS
+- [HayPost: HayPost Express](https://www.haypost.am/en/postal-services/Haypost-Express) – envio aéreo para Los Angeles (30 kg, 7–10 dias úteis)
+- [HayPost: Our Network](https://www.haypost.am/en/our-network) – diretório de agências na Armênia
 - [HayPost: Contact Us](https://www.haypost.am/en/contact-us) – `+374 10 514-514`, `+374 10 544-444`, `info@haypost.am`, 65/5 Arshakunyats Ave., Yerevan
-- [HayPost: Contact Us (Armenian)](https://www.haypost.am/am/contact-us) – official help URL linked by Peek
-- [HayPost: FAQ](https://www.haypost.am/en/faq) – FAQ topic index
-- [Universal Parcel Scraper: haypost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/haypost) – S10 `AM` detection, `api.haypost.am` JSON lookup, IPS status mapping, Yerevan clock, future-dated EDI filter and help URL
+- [HayPost: Contact Us (Armenian)](https://www.haypost.am/am/contact-us) – página de ajuda indicada pelo Peek
+- [HayPost: FAQ](https://www.haypost.am/en/faq) – índice de perguntas frequentes
+- [Universal Parcel Scraper: haypost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/haypost) – detecção de S10 `AM`, consulta JSON em `api.haypost.am`, correspondência de status IPS, horário de Yerevan, filtro de EDI com data futura e link de ajuda
 :::

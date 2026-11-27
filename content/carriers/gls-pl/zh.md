@@ -6,13 +6,13 @@ published: 2026-11-26
 updated: 2026-11-26
 ---
 
-GLS 波兰（GLS Poland，*General Logistics Systems Poland Sp. z o.o.*，总部位于波兹南附近的格乌霍沃 Głuchowo，中央分拣枢纽位于罗兹附近的斯特雷库夫 Stryków）在波兰运营约 50 家分支机构以及超过 26,000 个户外自提网点——其中包括超过 18,000 家 GLS Point 自提点（涵盖全部 11,000 家 Żabka 便利店）和约 8,000 座共享 [ORLEN Paczka](carrier:orlen-paczka) 24 小时快递柜。你可以使用包裹号或 Track-ID 在 [GLS Poland 查询页面](https://gls-group.com/PL/en/parcel-tracking/)追踪，或直接将单号粘贴到上方输入框。
+GLS 波兰（GLS Poland，*General Logistics Systems Poland Sp. z o.o.*，总部位于波兹南附近的格乌霍沃 Głuchowo，中央分拣枢纽位于罗兹附近的斯特雷库夫 Stryków）在波兰运营约 50 家分支机构以及超过 26,000 个非上门的取件网点——其中包括超过 18,000 家 GLS Point 自提点（涵盖全部 11,000 家 Żabka 便利店）和约 8,000 座共享 [ORLEN Paczka](carrier:orlen-paczka) 24 小时快递柜。你可以使用包裹号或 Track-ID 在 [GLS Poland 查询页面](https://gls-group.com/PL/en/parcel-tracking/)追踪，或直接将单号粘贴到上方输入框。
 
 ## GLS Poland 运单号与 Track-ID 格式
 
-包裹号位于网店发货确认邮件、GLS 邮件/短信提醒或派送未成通知单（*awizo*）上。GLS 查询框同样支持通知单上的 Track-ID。
+包裹号位于网店发货确认邮件、GLS 邮件/短信提醒或派送未成功通知单（*awizo*）上。GLS 查询框也可以查询通知单上的 Track-ID。
 
-| 格式（示例编号） | 含义 |
+| 格式（虚构） | 含义 |
 | --- | --- |
 | `48291736405` | 11 位 GLS 包裹号。同样由 [GLS Germany](carrier:gls-de)、[GLS France](carrier:gls-fr)、GLS Switzerland、[GLS Austria](carrier:gls-at) 及 [PPL](carrier:ppl) 使用。 |
 | `482917364052` | 12 位包裹号，末位为校验位。同样由 [BRT](carrier:brt)、[Colis Privé](carrier:colis-prive) 等快递使用。 |
@@ -38,11 +38,11 @@ GLS 波兰在波兰语网站显示波兰语扫描说明，并通过 Peek 调用�
 
 ## GLS Poland 派送时效、GLS Point、ORLEN 快递柜与 FlexDeliveryService
 
-**派送日期与时效。** GLS Poland 周一至周五派送（仅在寄件人专门订购时提供周六派送）。波兰境内标准件通常次工作日送达（不保证时效；寄件人可付费订购 Express 10:00 或 12:00）。从波兰发往欧盟其他国家通常需要 2 至 7 个工作日，视目的地而定（见 [GLS Points](https://gls-group.com/PL/en/shipping-receiving-points/gls-points/)）。
+**派送日期与时效。** GLS Poland 周一至周五派送（仅在寄件人专门订购时提供周六派送）。波兰境内标准件通常次工作日送达（不保证时效；寄件人可付费订购 Express 10:00 或 12:00）。从波兰发往欧盟其他国家，GLS 给出的时效为 2 至 7 个工作日，视目的地而定（见 [GLS Points](https://gls-group.com/PL/en/shipping-receiving-points/gls-points/)）。
 
 **重量、尺寸与货到付款（CashService）。** 波兰境内上门包裹限重 31.5 公斤（国际上门包裹 40 公斤；部分指定 GLS Point 31.5 公斤；其他 GLS Point、快递柜及 myGLS 限重 20 公斤），尺寸上限为 200 × 80 × 60 厘米且长度加周长不超过 300 厘米。货到付款（`CashService`，每日上限 6,000 波兰兹罗提）可在收货时以现金、银行卡或 BLIK 支付给快递员。
 
-**派送未成与二次尝试。** 根据 [GLS Poland 收件指南](https://gls-group.com/PL/en/receiving/)，若你不在家，快递员可在征得你同意后交由邻居代收，或将符合条件的非货到付款包裹转投附近的 GLS Point。否则包裹返回分部，于次工作日再次派送；若仍未送达，将在退回寄件人前暂留分拨站（通过 FlexDeliveryService 预约分拨站自提保管 5 个工作日，收件指南另注明 6 个工作日后退回）。
+**派送未成功与第二次派送。** 根据 [GLS Poland 收件指南](https://gls-group.com/PL/en/receiving/)，若你不在家，快递员可在征得你同意后交由邻居代收，或将符合条件的非货到付款包裹转投附近的 GLS Point。否则包裹返回分部，于次工作日再次派送；若仍未送达，将在退回寄件人前暂留分拨站（通过 FlexDeliveryService 预约分拨站自提保管 5 个工作日，收件指南另注明 6 个工作日后退回）。
 
 **GLS Point 保管期限。** 根据 GLS Poland 自 2026 年 11 月 9 日起生效的 GLS Point 与快递柜[服务条款](https://gls-group.com/PL/pl/regulamin/)及[常见问题](https://gls-group.com/PL/en/faq/)，包裹在 GLS Point 保管 **7 个自然日**，逾期退回寄件人（[收件指南](https://gls-group.com/PL/en/receiving/)与 GLS Points 页面仍沿用“7 个工作日”旧表述）。取件时请出示短信或邮件收到的 PIN 码，GLS 可能会核验身份证件。
 
@@ -76,15 +76,15 @@ GLS 波兰在波兰语网站显示波兰语扫描说明，并通过 Peek 调用�
 
 将运单号粘贴到 [Peek](/)。由于 11 位与 12 位数字单号由多家快递共用，Peek 会同时向可能的承运商查询并结合你的国家（手机地区设置或网页访问所在地）排序。在波兰，Peek 会优先查询 GLS Poland，早于 [GLS France](carrier:gls-fr)、[GLS Germany](carrier:gls-de)、GLS Switzerland 以及 [PPL](carrier:ppl)（11 位）或 [BRT](carrier:brt)、[Colis Privé](carrier:colis-prive)（12 位），通常会直接显示“GLS Poland 有这个包裹的记录。”在波兰以外地区，Peek 会在其他可能的承运商均未查到时再向 GLS Poland 查询。粘贴路径包含 `/PL/` 且带有 `match=`、`parcelNumber=` 或 `matchParcelNumber=` 参数的 `gls-group.com` / `gls-group.eu` 链接会直接按 GLS Poland 追踪。其他情况下，可在添加时点击“更换”或在已添加的包裹页面点击“更换快递公司”选择 GLS Poland。
 
-添加时的“收件邮编”字段标注为“可选”，但 GLS 仅在核对邮编后才返回详细扫描，正如字段下方提示所示：“GLS Poland 仅在填写收件邮编后才显示扫描记录。”不填邮编时，Peek 只能获取 GLS 主状态而无扫描明细，期间会向其他物流查询服务请求轨迹，并在包裹页面提供“添加邮编”。登录账号后，Peek 会自动尝试一次你上次为 GLS Poland 包裹填写的邮编，若无记录则尝试你最近一个包裹的邮编。若 GLS 用该邮编未查到包裹，Peek 会提示并提供“编辑邮编”。当 GLS 等待邮编或邮编不匹配、且已满一天无其他来源返回时，Peek 改为每天查询一次；添加或更改邮编后会立即触发查询。收件邮编仅发给 GLS 及必要时的物流查询服务，绝不会出现在分享链接中。
+添加时的“收件邮编”字段标注为“可选”，但 GLS 仅在核对邮编后才返回详细扫描，正如字段下方提示所示：“GLS Poland 仅在填写收件邮编后才显示扫描记录。”不填邮编时，Peek 只能获取 GLS 主状态而无扫描明细，期间会向其他物流查询服务请求轨迹，并在包裹页面提供“添加邮编”。登录账号后，Peek 会先尝试一次你上次为 GLS Poland 包裹填写的邮编，若无记录则尝试你最近一个包裹的邮编。若 GLS 用该邮编未查到包裹，Peek 会提示并提供“编辑邮编”。当 GLS 等待邮编或邮编不匹配、且已满一天无其他来源返回时，Peek 改为每天查询一次；添加或更改邮编后会立即触发查询。收件邮编仅发给 GLS 及必要时的物流查询服务，绝不会出现在分享链接中。
 
-填写邮编后，你可以看到物流状态、每次扫描的地图位置、预计送达日、重量、签收时间以及送达 GLS Point 时的网点名称与地址；你的姓名、住址、联系方式、签名和寄件人参考号都会被剔除。Peek 读取的是 GLS 英文接口而非波兰语网页，因此 `W doręczeniu` 会显示为 `In delivery`，`Paczka została doręczona` 显示为 `The parcel has been delivered.`；送达 GLS Point 或快递柜会映射为“待取件”。时间按波兰时间解析。
+填写邮编后，你可以看到物流状态、每次扫描的地图位置、预计送达日、重量、签收时间以及送达 GLS Point 时的网点名称与地址；你的姓名、住址、联系方式、签名和寄件人参考号都会被剔除。Peek 读取的是 GLS 的英文服务而非波兰语网页，因此 `W doręczeniu` 会显示为 `In delivery`，`Paczka została doręczona` 显示为 `The parcel has been delivered.`；送达 GLS Point 或快递柜会映射为“待取件”。时间按波兰时间解析。
 
 Peek 大约每小时向 GLS 查询一次（含派送当天），手动刷新不会提前触发（查询失败后等待 4 小时）；包裹停留在“已生成面单”满 7 天无新动态时，改为每 6 小时查询一次。若仅通过物流查询服务跟踪，则每小时查询一次，静默一天后每 3 小时一次。
 
-若最新扫描已过 4 天，且包裹仍处于“已生成面单”、“已揽收”或“运输中”，Peek 会按该扫描日期做出提示，例如“自10月12日周一起没有物流更新”。包裹页面会显示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 GLS Poland 查询。”，并提供前往 GLS Poland 联系页面的“向 GLS Poland 寻求帮助”链接。若超过三周没有新扫描，则会提示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 GLS Poland 查询。”
+若最新扫描已过 4 天，且包裹仍处于“已生成面单”、“已揽收”或“运输中”，Peek 会按该扫描日期做出提示，例如“自10月12日周一起没有物流更新”。包裹页面会显示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 GLS Poland 查询。”并提供前往 GLS Poland 联系页面的“向 GLS Poland 寻求帮助”链接。若超过三周没有新扫描，则会提示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 GLS Poland 查询。”
 
-你可以自由选择“每次扫描”、“重要环节”或“仅派送当天”通知预设。Peek 仅监控物流状态更新，无法代你改派包裹或向 GLS Poland 提交投诉。
+Peek 可以按“每次扫描”、“重要环节”或“仅派送当天”通知你。Peek 仅监控物流状态更新，无法代你改派包裹或向 GLS Poland 提交投诉。
 
 ## GLS Poland 查询常见问题
 
@@ -94,7 +94,7 @@ Peek 大约每小时向 GLS 查询一次（含派送当天），手动刷新不�
 
 ### 为什么 GLS Poland 需要我输入收件邮编才能看到完整物流？
 
-GLS 为保护货运隐私，仅在运单号与收件邮编一致时返回完整扫描记录、派送选项及自提点详情。在 Peek 中输入收件邮编即可获取 GLS 官方直连轨迹。
+GLS 为保护货运隐私，仅在运单号与收件邮编一致时返回完整扫描记录、派送选项及自提点详情。在 Peek 中输入收件邮编即可获取 GLS 直接提供的轨迹。
 
 ### GLS Poland 的 CashService 货到付款包裹能刷卡或用 BLIK 支付吗？
 
@@ -105,20 +105,20 @@ GLS 为保护货运隐私，仅在运单号与收件邮编一致时返回完整�
 打开 GLS 通知邮件中的 FlexDeliveryService 链接（无需账号），或前往[包裹改派页面](https://gls-group.com/PL/en/parcel-redirection/)，即可将包裹改派至 GLS Point（含 Żabka 门店）、ORLEN Paczka 快递柜、其他地址或稍后的日期。
 
 :::sources
-- [GLS Poland: Parcel Tracking](https://gls-group.com/PL/en/parcel-tracking/) – parcel number, Track-ID and postcode lookup
-- [GLS Poland: About GLS](https://gls-group.com/PL/en/about-gls/) – Stryków central hub, branches and network overview
-- [GLS Poland: Corporate Information](https://gls-group.com/PL/en/corporate-information/) – legal entity, Głuchowo address and `office@gls-poland.com`
-- [GLS Poland: Receiving Parcels](https://gls-group.com/PL/en/receiving/) – weekday delivery, neighbour drop-off, second attempt, depot holding and CashService
-- [GLS Poland: Parcel Redirection](https://gls-group.com/PL/en/parcel-redirection/) – FlexDeliveryService options without an account
-- [GLS Poland: GLS Points](https://gls-group.com/PL/en/shipping-receiving-points/gls-points/) – 18,000+ GLS Points (including 11,000 Żabka stores), 26,000+ OOH points, weight/size limits and EU transit times
-- [GLS Poland: Parcel Lockers](https://gls-group.com/PL/en/shipping-receiving-points/parcel-lockers/) – ~8,000 shared ORLEN Paczka 24/7 lockers, 72-hour pickup window, PIN/QR/myGLS app, 20 kg limit and locker hotline
-- [GLS Poland: Live Tracking](https://gls-group.com/PL/en/live-tracking/) – map view and an expected time to within 15 minutes
-- [GLS Poland: FAQ](https://gls-group.com/PL/en/faq/) – 7-calendar-day GLS Point hold, CashService cash/card/BLIK, missed delivery answers
-- [GLS Poland: Terms of Service (Regulamin)](https://gls-group.com/PL/pl/regulamin/) – terms, those for GLS Points and lockers in force from 9 November 2026: 7-calendar-day pickup window, 7-day hidden-damage notice, 30/45-day complaint windows and 30-day resolution
-- [GLS Poland: Contact](https://gls-group.com/PL/en/gls-contact/) – hotline `+48 46 814 82 20` (Mon–Fri 07:00–19:00, Sat 07:00–15:00), `gls@gls-poland.com` and contact form
-- [GLS Poland: Consumer Complaints](https://gls-group.com/PL/pl/reklamacje-konsumenckie/) – online consumer claim submission
-- [GLS Poland: Security Advices](https://gls-group.com/PL/en/security-advices/) – phishing warnings, `security@gls-poland.com` and CERT NASK reporting
-- [GLS Group: Security Advice](https://gls-group.com/GROUP/en/security-advice/) – official group domains and CashService rules
-- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty up to €150 (since 1 July 2026) and €2 EU handling fee (since 1 November 2026)
-- [Universal Parcel Scraper: gls-pl](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/gls-pl) – 11/12-digit detection, Poland priority, optional postcode, status mapping, hourly/4-hour refresh cadence and help URL
+- [GLS Poland: Parcel Tracking](https://gls-group.com/PL/en/parcel-tracking/) – 包裹号、Track-ID 与邮编查询
+- [GLS Poland: About GLS](https://gls-group.com/PL/en/about-gls/) – 斯特雷库夫中央枢纽、分支机构与网络概况
+- [GLS Poland: Corporate Information](https://gls-group.com/PL/en/corporate-information/) – 法人实体、格乌霍沃地址与 `office@gls-poland.com`
+- [GLS Poland: Receiving Parcels](https://gls-group.com/PL/en/receiving/) – 工作日派送、邻居代收、第二次派送、分拨站保管与 CashService
+- [GLS Poland: Parcel Redirection](https://gls-group.com/PL/en/parcel-redirection/) – 无需账号的 FlexDeliveryService 选项
+- [GLS Poland: GLS Points](https://gls-group.com/PL/en/shipping-receiving-points/gls-points/) – 18,000 多家 GLS Point（含 11,000 家 Żabka 便利店）、26,000 多个非上门的取件网点、重量与尺寸限制及发往欧盟的时效
+- [GLS Poland: Parcel Lockers](https://gls-group.com/PL/en/shipping-receiving-points/parcel-lockers/) – 约 8,000 座共享 ORLEN Paczka 24 小时快递柜、72 小时取件期限、PIN 码/二维码/myGLS 应用、20 公斤限重与快递柜热线
+- [GLS Poland: Live Tracking](https://gls-group.com/PL/en/live-tracking/) – 地图视图与精确到 15 分钟内的预计时间
+- [GLS Poland: FAQ](https://gls-group.com/PL/en/faq/) – GLS Point 保管 7 个自然日、CashService 现金/银行卡/BLIK 付款、派送未成功的解答
+- [GLS Poland: Terms of Service (Regulamin)](https://gls-group.com/PL/pl/regulamin/) – 服务条款（GLS Point 与快递柜条款自 2026 年 11 月 9 日起生效）：7 个自然日取件期限、隐藏破损 7 天内申报、30/45 天投诉时限与 30 天内答复
+- [GLS Poland: Contact](https://gls-group.com/PL/en/gls-contact/) – 客服热线 `+48 46 814 82 20`（周一至周五 07:00–19:00，周六 07:00–15:00）、`gls@gls-poland.com` 与联系表单
+- [GLS Poland: Consumer Complaints](https://gls-group.com/PL/pl/reklamacje-konsumenckie/) – 消费者在线投诉提交
+- [GLS Poland: Security Advices](https://gls-group.com/PL/en/security-advices/) – 钓鱼警示、`security@gls-poland.com` 与向 CERT NASK 举报
+- [GLS Group: Security Advice](https://gls-group.com/GROUP/en/security-advice/) – 集团官方域名与 CashService 规则
+- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €150 以内 €3 关税（2026 年 7 月 1 日起）与 €2 欧盟处理费（2026 年 11 月 1 日起）
+- [Universal Parcel Scraper: gls-pl](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/gls-pl) – 11/12 位单号识别、波兰优先、可选邮编、状态对应、每小时/4 小时的查询节奏与帮助链接
 :::

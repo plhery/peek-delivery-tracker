@@ -10,7 +10,7 @@ A GLS Polônia (GLS Poland, *General Logistics Systems Poland Sp. z o.o.*, sedia
 
 ## Formatos de número da encomenda e Track-ID da GLS Polônia
 
-Encontre o código no e-mail de envio da loja virtual, no alerta por e-mail/SMS da GLS ou no aviso de entrega perdida (*awizo*). A caixa de busca da GLS também aceita o Track-ID dos avisos.
+Encontre o código no e-mail de envio da loja virtual, no alerta por e-mail/SMS da GLS ou no aviso de entrega não realizada (*awizo*). A caixa de busca da GLS também aceita o Track-ID dos avisos.
 
 | Formato (inventado) | O que é |
 | --- | --- |
@@ -42,7 +42,7 @@ No dia da entrega, o [Live Tracking](https://gls-group.com/PL/en/live-tracking/)
 
 **Peso, dimensões e CashService (contra reembolso).** Encomendas domésticas em domicílio podem pesar até 31,5 kg (40 kg em entregas internacionais no endereço; 31,5 kg em GLS Points selecionados; 20 kg nos demais GLS Points, lockers e myGLS), dentro de 200 × 80 × 60 cm e soma de comprimento mais contorno de até 300 cm. O pagamento contra reembolso (`CashService`, até 6.000 PLN por dia) pode ser feito ao entregador em dinheiro, cartão ou BLIK.
 
-**Tentativa perdida e segunda tentativa.** Segundo a [página de recebimento da GLS Polônia](https://gls-group.com/PL/en/receiving/), se você não estiver em casa, o entregador pode deixar o pacote com um vizinho (com seu consentimento) ou redirecionar uma encomenda elegível sem contra reembolso para um GLS Point próximo. Caso contrário, o volume retorna à filial para segunda tentativa no próximo dia útil; se continuar sem entrega, permanece no depósito antes de voltar ao remetente (5 dias úteis para retirada no depósito via FlexDeliveryService, ou devolução após 6 dias úteis conforme o guia de recebimento).
+**Entrega não realizada e segunda tentativa.** Segundo a [página de recebimento da GLS Polônia](https://gls-group.com/PL/en/receiving/), se você não estiver em casa, o entregador pode deixar o pacote com um vizinho (com seu consentimento) ou redirecionar uma encomenda elegível sem contra reembolso para um GLS Point próximo. Caso contrário, o volume retorna à filial para segunda tentativa no próximo dia útil; se continuar sem entrega, permanece no depósito antes de voltar ao remetente (5 dias úteis para retirada no depósito via FlexDeliveryService, ou devolução após 6 dias úteis conforme o guia de recebimento).
 
 **Prazo nos GLS Points.** Conforme os [termos](https://gls-group.com/PL/pl/regulamin/) da GLS Polônia para GLS Points e lockers (vigentes desde 9 de novembro de 2026) e seu [FAQ](https://gls-group.com/PL/en/faq/), encomendas ficam guardadas em um GLS Point por **7 dias corridos** antes de voltarem ao remetente (as páginas de [recebimento](https://gls-group.com/PL/en/receiving/) e GLS Points ainda mencionam sete dias úteis). Retire com o PIN recebido por SMS ou e-mail; a GLS pode solicitar documento de identidade.
 
@@ -105,20 +105,20 @@ Sim. A GLS Polônia informa que entregas CashService (até 6.000 PLN por dia) po
 Abra o link FlexDeliveryService no e-mail de notificação da GLS (sem precisar de conta) ou acesse [redirecionamento de encomendas](https://gls-group.com/PL/en/parcel-redirection/) para encaminhar o pacote a um GLS Point (incluindo lojas Żabka), um locker ORLEN Paczka, outro endereço ou outra data.
 
 :::sources
-- [GLS Poland: Parcel Tracking](https://gls-group.com/PL/en/parcel-tracking/) – parcel number, Track-ID and postcode lookup
-- [GLS Poland: About GLS](https://gls-group.com/PL/en/about-gls/) – Stryków central hub, branches and network overview
-- [GLS Poland: Corporate Information](https://gls-group.com/PL/en/corporate-information/) – legal entity, Głuchowo address and `office@gls-poland.com`
-- [GLS Poland: Receiving Parcels](https://gls-group.com/PL/en/receiving/) – weekday delivery, neighbour drop-off, second attempt, depot holding and CashService
-- [GLS Poland: Parcel Redirection](https://gls-group.com/PL/en/parcel-redirection/) – FlexDeliveryService options without an account
-- [GLS Poland: GLS Points](https://gls-group.com/PL/en/shipping-receiving-points/gls-points/) – 18,000+ GLS Points (including 11,000 Żabka stores), 26,000+ OOH points, weight/size limits and EU transit times
-- [GLS Poland: Parcel Lockers](https://gls-group.com/PL/en/shipping-receiving-points/parcel-lockers/) – ~8,000 shared ORLEN Paczka 24/7 lockers, 72-hour pickup window, PIN/QR/myGLS app, 20 kg limit and locker hotline
-- [GLS Poland: Live Tracking](https://gls-group.com/PL/en/live-tracking/) – map view and an expected time to within 15 minutes
-- [GLS Poland: FAQ](https://gls-group.com/PL/en/faq/) – 7-calendar-day GLS Point hold, CashService cash/card/BLIK, missed delivery answers
-- [GLS Poland: Terms of Service (Regulamin)](https://gls-group.com/PL/pl/regulamin/) – terms, those for GLS Points and lockers in force from 9 November 2026: 7-calendar-day pickup window, 7-day hidden-damage notice, 30/45-day complaint windows and 30-day resolution
-- [GLS Poland: Contact](https://gls-group.com/PL/en/gls-contact/) – hotline `+48 46 814 82 20` (Mon–Fri 07:00–19:00, Sat 07:00–15:00), `gls@gls-poland.com` and contact form
-- [GLS Poland: Consumer Complaints](https://gls-group.com/PL/pl/reklamacje-konsumenckie/) – online consumer claim submission
-- [GLS Poland: Security Advices](https://gls-group.com/PL/en/security-advices/) – phishing warnings, `security@gls-poland.com` and CERT NASK reporting
-- [GLS Group: Security Advice](https://gls-group.com/GROUP/en/security-advice/) – official group domains and CashService rules
-- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty up to €150 (since 1 July 2026) and €2 EU handling fee (since 1 November 2026)
-- [Universal Parcel Scraper: gls-pl](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/gls-pl) – 11/12-digit detection, Poland priority, optional postcode, status mapping, hourly/4-hour refresh cadence and help URL
+- [GLS Poland: Parcel Tracking](https://gls-group.com/PL/en/parcel-tracking/) – número da encomenda, Track-ID e consulta com código postal
+- [GLS Poland: About GLS](https://gls-group.com/PL/en/about-gls/) – centro de triagem de Stryków, filiais e visão geral da rede
+- [GLS Poland: Corporate Information](https://gls-group.com/PL/en/corporate-information/) – razão social, endereço em Głuchowo e `office@gls-poland.com`
+- [GLS Poland: Receiving Parcels](https://gls-group.com/PL/en/receiving/) – entrega em dias úteis, entrega a vizinhos, segunda tentativa, guarda no depósito e CashService
+- [GLS Poland: Parcel Redirection](https://gls-group.com/PL/en/parcel-redirection/) – opções do FlexDeliveryService sem conta
+- [GLS Poland: GLS Points](https://gls-group.com/PL/en/shipping-receiving-points/gls-points/) – mais de 18.000 GLS Points (incluindo 11.000 lojas Żabka), mais de 26.000 pontos fora de casa, limites de peso e tamanho e prazos para a UE
+- [GLS Poland: Parcel Lockers](https://gls-group.com/PL/en/shipping-receiving-points/parcel-lockers/) – cerca de 8.000 lockers 24 horas compartilhados ORLEN Paczka, prazo de retirada de 72 horas, PIN/QR/app myGLS, limite de 20 kg e linha dos lockers
+- [GLS Poland: Live Tracking](https://gls-group.com/PL/en/live-tracking/) – mapa e horário previsto com janela de 15 minutos
+- [GLS Poland: FAQ](https://gls-group.com/PL/en/faq/) – guarda de 7 dias corridos nos GLS Points, CashService em dinheiro/cartão/BLIK, respostas sobre entregas não realizadas
+- [GLS Poland: Terms of Service (Regulamin)](https://gls-group.com/PL/pl/regulamin/) – termos, os de GLS Points e lockers em vigor desde 9 de novembro de 2026: prazo de retirada de 7 dias corridos, aviso de dano oculto em 7 dias, prazos de reclamação de 30/45 dias e resposta em 30 dias
+- [GLS Poland: Contact](https://gls-group.com/PL/en/gls-contact/) – central `+48 46 814 82 20` (seg–sex 07:00–19:00, sáb 07:00–15:00), `gls@gls-poland.com` e formulário de contato
+- [GLS Poland: Consumer Complaints](https://gls-group.com/PL/pl/reklamacje-konsumenckie/) – envio on-line de reclamações de consumidores
+- [GLS Poland: Security Advices](https://gls-group.com/PL/en/security-advices/) – alertas de phishing, `security@gls-poland.com` e denúncia ao CERT NASK
+- [GLS Group: Security Advice](https://gls-group.com/GROUP/en/security-advice/) – domínios oficiais do grupo e regras do CashService
+- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – imposto aduaneiro de €3 até €150 (desde 1º de julho de 2026) e taxa de manuseio da UE de €2 (desde 1º de novembro de 2026)
+- [Universal Parcel Scraper: gls-pl](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/gls-pl) – detecção de 11/12 dígitos, prioridade na Polônia, código postal opcional, correspondência de status, intervalo de 1 hora/4 horas e link de ajuda
 :::

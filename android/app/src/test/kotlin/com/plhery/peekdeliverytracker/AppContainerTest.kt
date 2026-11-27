@@ -53,6 +53,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.sync.withLock
 import mockwebserver3.Dispatcher
 import mockwebserver3.MockResponse
 import mockwebserver3.MockWebServer
@@ -135,6 +136,13 @@ class AppContainerTest {
             Thread.sleep(10)
         }
     }
+
+    /**
+     * The app's dynamic shortcuts, read between its changes to them, which it makes off the main thread: Robolectric
+     * keeps them in a map that such a change can be resizing as the read copies it.
+     */
+    private fun dynamicShortcuts(): List<ShortcutInfoCompat> =
+        runBlocking { LauncherShortcuts.lock.withLock { ShortcutManagerCompat.getDynamicShortcuts(context) } }
 
     private fun requested(path: String) = synchronized(paths) { path in paths }
 
@@ -282,9 +290,9 @@ class AppContainerTest {
         val app = container()
         val widget = DeliveryWidgetSharedStore(PreferencesDefaults.appGroup(context, "group.test.peek"))
         app.start(process.lifecycle)
-        idleUntil("the demo's next delivery") { ShortcutManagerCompat.getDynamicShortcuts(context).isNotEmpty() }
+        idleUntil("the demo's next delivery") { dynamicShortcuts().isNotEmpty() }
         val next = checkNotNull(widget.snapshot).parcels.first { it.deliveredAt == null }
-        val shortcut = ShortcutManagerCompat.getDynamicShortcuts(context).single()
+        val shortcut = dynamicShortcuts().single()
         assertEquals(LauncherShortcuts.NEXT_DELIVERY, shortcut.id)
         assertEquals(next.label, shortcut.shortLabel.toString())
         assertEquals(next.deepLink, shortcut.intent.dataString)
@@ -313,9 +321,9 @@ class AppContainerTest {
             noted = true
         }
         idleUntil("the notes") { noted }
-        idleUntil("the next delivery") { ShortcutManagerCompat.getDynamicShortcuts(context).isNotEmpty() }
+        idleUntil("the next delivery") { dynamicShortcuts().isNotEmpty() }
         assertTrue(app.parcels.parcels.all { it.note == secret })
-        for (shortcut in ShortcutManagerCompat.getDynamicShortcuts(context)) {
+        for (shortcut in dynamicShortcuts()) {
             for (text in listOf(shortcut.shortLabel, shortcut.longLabel, shortcut.intent.dataString)) {
                 assertFalse("$text", "$text".contains("4512") || "$text".contains("Hidden receipt"))
             }
@@ -363,19 +371,19 @@ class AppContainerTest {
         val app = container()
         val widget = DeliveryWidgetSharedStore(PreferencesDefaults.appGroup(context, "group.test.peek"))
         app.start(process.lifecycle)
-        idleUntil("the demo's next delivery") { ShortcutManagerCompat.getDynamicShortcuts(context).isNotEmpty() }
+        idleUntil("the demo's next delivery") { dynamicShortcuts().isNotEmpty() }
         val next = checkNotNull(widget.snapshot).parcels.first { it.deliveredAt == null }
         process.lifecycle.currentState = Lifecycle.State.CREATED
         settle()
         // The shortcut as it stands where the system turned down a change to the next one.
         val earlier = ShortcutInfoCompat.Builder(context, LauncherShortcuts.NEXT_DELIVERY).setShortLabel("Earlier parcel")
             .setIntent(Intent(Intent.ACTION_VIEW, "peek://parcel/earlier".toUri())).build()
-        ShortcutManagerCompat.setDynamicShortcuts(context, listOf(earlier))
+        runBlocking { LauncherShortcuts.lock.withLock { ShortcutManagerCompat.setDynamicShortcuts(context, listOf(earlier)) } }
         process.lifecycle.currentState = Lifecycle.State.RESUMED
         idleUntil("the next delivery's shortcut") {
-            ShortcutManagerCompat.getDynamicShortcuts(context).singleOrNull()?.shortLabel?.toString() == next.label
+            dynamicShortcuts().singleOrNull()?.shortLabel?.toString() == next.label
         }
-        assertEquals(next.deepLink, ShortcutManagerCompat.getDynamicShortcuts(context).single().intent.dataString)
+        assertEquals(next.deepLink, dynamicShortcuts().single().intent.dataString)
     }
 
     /**

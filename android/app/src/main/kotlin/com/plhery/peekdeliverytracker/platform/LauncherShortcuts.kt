@@ -4,6 +4,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.annotation.VisibleForTesting
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
@@ -43,7 +44,9 @@ object LauncherShortcuts {
     /** The next delivery. */
     const val NEXT_DELIVERY = "next-delivery"
 
-    private val lock = Mutex()
+    /** One change to the shortcuts at a time. */
+    @VisibleForTesting
+    internal val lock = Mutex()
 
     /**
      * [widgets], and after them the next delivery's shortcut, each time what the widget shows changes: the store's

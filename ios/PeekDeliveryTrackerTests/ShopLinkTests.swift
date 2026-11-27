@@ -102,7 +102,8 @@ final class ShopLinkTests: XCTestCase {
         XCTAssertFalse(waiting.canWait(signedIn: false))
         XCTAssertEqual(ShopLinkNoticeText(waiting, signedIn: true, localizer: english), ShopLinkNoticeText(
             title: "H&M hasn’t named a parcel on this page yet: it hasn’t shipped.",
-            body: "Peek checks every few hours for 14 days and adds the parcel as soon as a carrier and tracking number appear."))
+            body: "Peek checks every few hours for 14 days and adds the parcel as soon as a carrier and tracking number appear.",
+            calm: true))
         XCTAssertEqual(ShopLinkNoticeText(waiting, signedIn: false, localizer: english)?.body,
                        "Sign in, and Peek waits for it: it checks every few hours for 14 days.")
         XCTAssertEqual(ShopLinkNoticeText.waitAction(waiting, localizer: english), "Wait for H&M")
@@ -115,14 +116,19 @@ final class ShopLinkTests: XCTestCase {
         let unreadable = ShopLinkReading.unresolved(.init(platformName: "parcelLab", shopName: "H&M", waitable: false))
         XCTAssertFalse(unreadable.canWait(signedIn: true))
         XCTAssertEqual(ShopLinkNoticeText(unreadable, signedIn: true, localizer: english),
-                       ShopLinkNoticeText(title: nil, body: "Peek can’t read this shop’s tracking page. Paste the tracking number from the shipping email."))
+                       ShopLinkNoticeText(title: nil, body: "Peek can’t read this shop’s tracking page. Paste the tracking number from the shipping email.",
+                                          calm: false))
 
         // No answer: the page isn't answering.
         XCTAssertEqual(ShopLinkOutcome(ShopLinkAnswer(parcels: [], unresolved: [])), .failed)
         XCTAssertFalse(ShopLinkReading.failed.canWait(signedIn: true))
-        XCTAssertEqual(ShopLinkNoticeText(.failed, signedIn: true, localizer: english)?.body,
-                       "The shop’s tracking page isn’t answering. Try again in a little while.")
+        XCTAssertEqual(ShopLinkNoticeText(.failed, signedIn: true, localizer: english),
+                       ShopLinkNoticeText(title: nil, body: "The shop’s tracking page isn’t answering. Try again in a little while.", calm: false))
         XCTAssertEqual(ShopLinkNoticeText(.reading, signedIn: true, localizer: english)?.spoken, "Reading the shop’s tracking page…")
+        // Being read and not shipped yet are no fault: quiet ink. A page that can't be read or doesn't answer: a warning.
+        XCTAssertEqual(try [ShopLinkReading.reading, waiting, unnamed, unreadable, .failed].map {
+            try XCTUnwrap(ShopLinkNoticeText($0, signedIn: false, localizer: english)).calm
+        }, [true, true, true, false, false])
         XCTAssertNil(ShopLinkNoticeText(.none, signedIn: true, localizer: english))
 
         // A newer server's platform or reason still reads; an answer that isn't one throws.

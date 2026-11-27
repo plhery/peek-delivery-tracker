@@ -468,14 +468,14 @@ struct AddParcelView: View {
         .accessibilityElement(children: .combine)
     }
 
-    /// What a shop's link in the field says: being read, not shipped yet, or unreadable. Calm words, never a warning:
-    /// a parcel not shipped yet is no mistake.
+    /// What a shop's link in the field says: being read or not shipped yet in quiet words, a parcel not shipped yet
+    /// being no mistake; a page Peek can't read or that doesn't answer in the warning colour, as the web and Android say it.
     private func shopLinkNote(_ notice: ShopLinkNoticeText) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             if let title = notice.title {
                 Text(title).font(.caption.weight(.semibold)).foregroundStyle(Brand.ink)
             }
-            Text(notice.body).font(.caption).foregroundStyle(Brand.secondaryText)
+            Text(notice.body).font(.caption).foregroundStyle(notice.calm ? Brand.secondaryText : Brand.warning)
         }
         .fixedSize(horizontal: false, vertical: true)
         .frame(maxWidth: .infinity, alignment: .leading)

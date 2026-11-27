@@ -177,19 +177,22 @@ struct ShopLinkField: Equatable {
     }
 }
 
-/// What Add says under its field while it reads a shop's link, or of one that named no parcel: neutral words, not an
-/// error, as "not shipped yet" is none.
+/// What Add says under its field while it reads a shop's link, and once it has (the web's `ShopLinkNotice`): `title` in
+/// bold over `body`; `calm` in the sheet's quiet ink, a shop that hasn't shipped being no fault, else in the warning
+/// colour, a page Peek can't read or that doesn't answer.
 struct ShopLinkNoticeText: Equatable {
     /// "H&M hasn't named a parcel on this page yet", in bold.
     let title: String?
     let body: String
+    let calm: Bool
 
     /// What VoiceOver reads: the title, then the words.
     var spoken: String { [title, body].compactMap { $0 }.joined(separator: "\n") }
 
-    init(title: String?, body: String) {
+    init(title: String?, body: String, calm: Bool) {
         self.title = title
         self.body = body
+        self.calm = calm
     }
 
     @MainActor init?(_ reading: ShopLinkReading, signedIn: Bool, localizer: Localizer) {
@@ -199,16 +202,20 @@ struct ShopLinkNoticeText: Equatable {
         case .reading:
             title = nil
             body = localizer.text("shopLink.checking")
+            calm = true
         case .failed:
             title = nil
             body = localizer.text("shopLink.unavailable")
+            calm = false
         case .unresolved(let link) where !link.waitable:
             title = nil
             body = localizer.text("shopLink.unreadable")
+            calm = false
         case .unresolved(let link):
             title = link.shopName?.nonEmpty.map { localizer.text("shopLink.noParcelYet", ["shop": $0]) }
                 ?? localizer.text("shopLink.noParcelYet.unnamed")
             body = localizer.text(signedIn ? "shopLink.waitHint" : "shopLink.signIn")
+            calm = true
         }
     }
 

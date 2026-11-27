@@ -69,7 +69,7 @@ Peek shows Cyprus Post's statuses as written, the office or facility and country
 
 ### How do I track and trace an international parcel with Cyprus Post?
 
-Enter the 13-character S10 postal number (two letters, nine digits and `CY`, or the sending country's two-letter code) on cypruspost.post or in Peek. In the English scan history, `(Otb)` marks events in the origin country and `(Inb)` marks events in the destination country.
+Enter the 13-character S10 postal number (two letters, nine digits and `CY`, or another country's two-letter code) on cypruspost.post or in Peek. In the English scan history, `(Otb)` marks events in the origin country and `(Inb)` marks events in the destination country.
 
 ### Is Cyprus Post the Department of Postal Services?
 

@@ -1,6 +1,6 @@
 ---
 title: Colis livré mais non reçu : que faire, étape par étape
-description: Colis marqué livré mais non reçu (La Poste, Colis Privé, bpost, DPD) : où vérifier, qui est responsable en France, Belgique et Suisse, et délais de litige.
+description: Colis marqué livré mais non reçu (La Poste, Colis Privé, bpost, Poste suisse) : où vérifier, qui est responsable en France, Belgique et Suisse, et délais de litige.
 slug: colis-livre-mais-non-recu
 picture: Une porte fermée, une notification avec une coche verte, la silhouette d'un colis en pointillés sur le paillasson et Pip, inquiet.
 published: 2026-10-09
@@ -97,7 +97,7 @@ Commande passée sur AliExpress, Temu ou Shein ? Leurs délais sont dans [suivre
 
 ## Peut-on réclamer directement au transporteur ?
 
-Oui chez La Poste (3631 ou laposte.fr), Colis Privé ou La Poste suisse (mais pas chez bpost, où seul l'expéditeur peut ouvrir une enquête) ; comme [l'indemnisation va en général à l'expéditeur](guide:lost-parcel), passer par le vendeur reste plus rapide.
+Oui chez La Poste (3631 ou laposte.fr), Colis Privé et, pour un envoi national, La Poste suisse (mais pas chez bpost, où seul l'expéditeur peut ouvrir une enquête) ; comme [l'indemnisation va en général à l'expéditeur](guide:lost-parcel), passer par le vendeur reste plus rapide.
 
 | Transporteur | Ce que tu peux faire | Délai |
 | --- | --- | --- |

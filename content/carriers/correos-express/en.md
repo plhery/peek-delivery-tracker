@@ -95,11 +95,11 @@ No. Although Correos is Correos Express's parent company, they use separate numb
 
 ### What is Correos Express?
 
-It is the Correos group's urgent-parcel company, delivering across the Iberian Peninsula in 24 hours and from Spain to mainland Portugal usually in 24 to 48 hours.
+It is the Correos group's urgent-parcel company. It says it reaches anywhere on the Iberian Peninsula in 24 hours, and mainland Portugal from Spain usually in 24 to 48.
 
 ### Does Correos Express deliver to the UK and across Europe?
 
-Yes, from Spain through Internacional Express, which covers more than 180 countries with up to two delivery attempts and tracking until delivery. For countries outside the EU (including the UK), Internacional Express handles customs clearance and extra requirements and costs can apply.
+Yes, from Spain through Internacional Express, which covers more than 180 countries with up to two delivery attempts and tracking until delivery. For countries outside the EU, Internacional Express handles customs clearance; Correos Express warns that since Brexit, parcels to the UK face extra requirements and costs.
 
 ### What time does Correos Express deliver?
 

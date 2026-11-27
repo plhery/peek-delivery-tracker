@@ -7,11 +7,9 @@ published: 2026-10-16
 updated: 2026-11-27
 ---
 
-To track your Amazon shipment, open **Returns & Orders** (in the app, **Your Orders**) and select **Track package**: Amazon shows the carrier after "Delivery By" and the Tracking ID beneath it, distinct from your 17-digit order number. Copy that Tracking ID into [Peek](/) to follow your Amazon parcel alongside all your other deliveries across every Amazon site; "Shipped with Amazon" orders (`TBA` or country-code + 10 digits) sometimes track only inside your Amazon account.
+To track your Amazon shipment, open **Returns & Orders** (in the app, **Your Orders**) and select **Track package**: Amazon shows the carrier after "Delivery By" and the Tracking ID beneath it, distinct from your 17-digit order number. Copy that Tracking ID into [Peek](/) to follow your Amazon parcel alongside all your other deliveries across every Amazon site; "Shipped with Amazon" orders (`TBA` and 12 digits in the US, or a country code and 10 digits) sometimes track only inside your Amazon account.
 
 ## Where's the tracking number on Amazon?
-
-Amazon's dispatch emails don't include the Tracking ID — you'll find it only under **Returns & Orders** (or **Your Orders** in the app) → **Track package**, once the carrier has the parcel.
 
 :::steps
 - Open Your Orders | On the website, select Returns & Orders at the top right. In the Amazon app, tap the person icon, then Your Orders.

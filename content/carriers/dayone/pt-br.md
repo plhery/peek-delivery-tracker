@@ -10,7 +10,7 @@ A DayOne é o armazém que despacha pedidos online de lojas a partir da China. E
 
 ## Código de rastreamento DayOne: como ele se parece
 
-A DayOne não publica uma especificação oficial de formato. Os formatos que o Peek reconhece como DayOne, com dígitos fictícios:
+A DayOne não publica um formato de código. Os formatos que o Peek reconhece como DayOne, com dígitos fictícios:
 
 | Código | O que é |
 | --- | --- |
@@ -35,7 +35,7 @@ O rastreador da DayOne atribui um status geral em inglês e chinês e lista as l
 | `In transit` (运输途中) | A caminho. | "Em trânsito" |
 | `Pick up` (到达待取) | Chegou e aguarda você retirar. | "Pronta para retirada" |
 | `Out for Delivery` (派送途中) | Saiu para entrega. | "Saiu para entrega" |
-| `Undelivered` (投递失败) | Uma tentativa de entrega falhou. | "Tentativa de entrega" |
+| `Undelivered` (投递失败) | A tentativa de entrega não deu certo. | "Tentativa de entrega" |
 | `Delivered` (成功签收) | Entregue. | "Entregue" |
 | `Alert` (可能异常) | Pode haver um problema. | "Precisa de atenção" |
 | `Expired` (运输过久) | Em chinês, "em trânsito há tempo demais": o pacote está circulando há bastante tempo. | o status da leitura mais recente |
@@ -65,23 +65,23 @@ Se a única leitura for `Shipment has begun. In transit to destination city`, a 
 
 A DayOne não declara quem faz a entrega final no seu país, mas as leituras revelam quem está com o volume: Yanwen na China e depois o correio local, como a [Australia Post](carrier:australia-post) em entregas para a Austrália.
 
-A DayOne não publica regras sobre tentativas de entrega, avisos ou pontos de retirada: valem as regras da empresa que entrega. Após `Pick up` ou `Undelivered`, procure um aviso ou mensagem dela. Veja [entregas perdidas](guide:missed-delivery) e [encomendas não retiradas](guide:uncollected-parcel).
+A DayOne não publica regras sobre tentativas de entrega, avisos ou pontos de retirada: valem as regras da empresa que entrega. Após `Pick up` ou `Undelivered`, procure um aviso ou mensagem dela. Veja [entrega não realizada](guide:missed-delivery) e [encomendas não retiradas](guide:uncollected-parcel).
 
 **Alfândega na UE.** Compras online de fora da UE pagam €3 de imposto aduaneiro por item em encomendas até €150 desde 1º de julho de 2026 e a taxa de manuseio da União de €2 por item, qualquer que seja o valor, desde 1º de novembro de 2026 (item são mercadorias com a mesma classificação tarifária, descrição e origem exigida). O site da DayOne nada informa sobre tributos ou quem os cobra. Em outros países valem as regras locais: veja [encomendas retidas na alfândega](guide:customs).
 
 ## Encomenda DayOne sem atualização, perdida ou devolvida
 
-A DayOne encaminha você para a loja. Seu rastreador diz: "Para todas as questões de logística, itens perdidos, reembolsos e reenvios, entre em contato com o atendimento da loja onde fez o pedido."
+A DayOne encaminha você para a loja. Seu rastreador diz, em inglês: "For all package logistics, lost items, refunds, and resending related issues, please contact the customer service of the ordering store." (para questões de logística, itens perdidos, reembolsos e reenvios, fale com o atendimento da loja onde fez o pedido).
 
-**`Not found`.** A DayOne ainda não tem registro para esse código. Confira se digitou `DOT` e 16 dígitos; se estiver certo, o pedido pode ainda não ter saído. O Peek mostra "Aguardando DayOne" e segue verificando. Se após dois dias a DayOne continuar sem reconhecer e nenhuma outra fonte responder, o Peek informa que após dois dias a transportadora ainda não reconhece o código, sugerindo conferir, trocar de transportadora ou excluir o pacote — passando a consultar diariamente e, depois de uma semana, semanalmente. Se nada aparecer em alguns dias, pergunte à loja.
+**`Not found`.** A DayOne ainda não tem registro para esse código. Confira se digitou `DOT` e 16 dígitos; se estiver certo, o pedido pode ainda não ter saído. O Peek mostra "Aguardando DayOne" e segue verificando. Se após dois dias a DayOne continuar sem reconhecer e nenhuma outra fonte responder, o Peek mostra "Depois de dois dias, a transportadora ainda não reconhece este código. Confira o código, escolha outra transportadora ou exclua a encomenda." e passa a consultar diariamente e, uma semana depois de você adicioná-lo, semanalmente. Se nada aparecer em alguns dias, pergunte à loja.
 
 **Apenas `Info received` ou `Order processed by shipper`.** Ninguém bipou o pacote físico ainda; se continuar assim por vários dias, pergunte à loja quando foi enviado.
 
-**Sem nova leitura há dias.** Quando a leitura mais recente tem quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza a data dessa leitura ("Sem atualização de rastreamento desde seg 12 out"). A página então mostra "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando DayOne.", com o link "Obter ajuda da DayOne" para o site oficial (assim que o Peek passa a acompanhar o correio local, o link muda para esse correio se houver página cadastrada). Após três semanas sem novas leituras, mostra "Nenhuma novidade há mais de três semanas. Se ainda não chegou, fale com o vendedor. O Peek continua consultando DayOne." Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating) e [rastrear encomendas da China](guide:tracking-from-china).
+**Sem nova leitura há dias.** Quando a leitura mais recente tem quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza a data dessa leitura, como "Sem atualizações desde seg 12 out". A página do pacote então exibe "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando DayOne.", com o link "Pedir ajuda a DayOne" para a página de contato da DayOne. Quando o Peek passa a acompanhar o correio que faz a entrega, o link leva o nome desse correio, se o Peek tiver uma página de ajuda dele. Após três semanas sem novas leituras, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando DayOne." Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating) e [rastrear encomendas da China](guide:tracking-from-china).
 
 **`Alert` ou `Expired`.** Leia as últimas movimentações e peça ajuda à loja informando seu código `DOT`.
 
-**Perdida, danificada ou devolvida.** A DayOne não oferece canal de reclamação para destinatários. Peça reembolso ou reenvio à loja. Veja [encomendas perdidas](guide:lost-parcel) e [devolvida ao remetente](guide:returned-to-sender).
+**Perdida, danificada ou devolvida.** A DayOne não publica um processo de pedido de indenização para destinatários. Peça reembolso ou reenvio à loja. Veja [encomendas perdidas](guide:lost-parcel) e [devolvida ao remetente](guide:returned-to-sender).
 
 **Entregue, mas não encontrada.** `DELIVERED WITH SAFE DROP` indica entrega deixada no endereço. Olhe ao redor da residência, pergunte a vizinhos e avise a loja. Veja [entregue mas não recebido](guide:delivered-not-received).
 
@@ -96,7 +96,7 @@ O rastreador da DayOne não divulga telefone, chat, formulário nem endereço, e
 
 ## Rastreie uma encomenda DayOne com o Peek
 
-O [Peek](/) identifica DayOne imediatamente a partir de um código `DOT` com 16 dígitos ("Transportadora detectada"). Links de dayonetrack.com com `trackNo=` também funcionam. Para outros códigos, cole normalmente: o Peek acompanha mais de 4.500 transportadoras e exibe "Consultando serviços de rastreamento…" quando vários formatos coincidem. Se o Peek não identificar DayOne, toque em "Alterar" e selecione DayOne em "Todas as transportadoras" (buscar "Day One" também encontra), ou use "Alterar transportadora" em um pacote já adicionado.
+O [Peek](/) identifica DayOne imediatamente a partir de um código `DOT` com 16 dígitos ("Transportadora detectada"). Links de dayonetrack.com com `trackNo=` também funcionam. Para outros códigos, cole normalmente: o Peek acompanha mais de 4.500 transportadoras e exibe "Consultando serviços de rastreamento…" quando vários formatos coincidem. Se o Peek não identificar DayOne, toque em "Trocar" e selecione DayOne em "Todas as transportadoras" (buscar "Day One" também encontra), ou use "Trocar transportadora" em um pacote já adicionado.
 
 Para códigos `DOT0`, o Peek lê diretamente o rastreador da DayOne: status, cada leitura com local, país de destino e horário de entrega. Para códigos `DOT1`, consulta serviços de rastreamento.
 
@@ -106,7 +106,7 @@ O site da DayOne não mostra o código da empresa local, mas sua consulta às ve
 
 Para códigos `DOT0`, enquanto o pacote estiver aberto no Peek ou no dia da entrega com notificações ativadas, o Peek consulta até a cada 10 minutos, ou a cada 2 minutos a partir das 6h (horário local) no dia em que a DayOne registra saída para entrega enquanto o rastreador próprio responder. Após dois dias sem novidades (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora, e a cada 6 horas após sete dias em "Etiqueta criada". Quando serviços de rastreamento respondem (como em códigos `DOT1`), consulta de hora em hora, a cada 3 horas após um dia sem movimento e a cada 6 horas após sete dias em "Etiqueta criada"; no dia da entrega, até a cada 15 minutos com o pacote aberto ou notificações ativadas.
 
-O Peek pode notificar em "Cada leitura", "Etapas importantes" ou "Apenas entrega". Ele não pode contatar a DayOne nem a loja por você.
+O Peek pode notificar em "Cada movimentação", "Etapas importantes" ou "Só a entrega". Ele não pode contatar a DayOne nem a loja por você.
 
 ## Perguntas sobre o rastreamento da DayOne
 

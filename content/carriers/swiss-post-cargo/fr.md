@@ -1,12 +1,12 @@
 ---
 title: Swiss Post Cargo suivi : statuts, livraison et contact
-description: Suivre un envoi Swiss Post Cargo en Suisse romande : quel numéro saisir, ce que veut dire DELIVERED SCANNED, comment se passe la livraison et qui appeler.
+description: Suivre un envoi Swiss Post Cargo (ex-PostLogistics) sur tt.swisspost-cargo.com : code à barres SSCC ou référence PL-, statuts, livraison et contact La Poste.
 slug: swiss-post-cargo-suivi
 published: 2026-10-12
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Swiss Post Cargo, c'est le transport de marchandises de la Poste suisse : palettes et autres marchandises livrées en camion, de l'unité isolée au chargement complet, pas les colis ordinaires. Tu suis ton envoi sur sa page Track & Trace (tt.swisspost-cargo.com) avec le code à barres ou la référence donnés par l'expéditeur, ou en le collant dans le champ ci-dessus. Si tu as un numéro de colis de la Poste, il se suit sur [la page de la Poste suisse](carrier:swiss-post).
+Swiss Post Cargo (anciennement PostLogistics) est le transport de marchandises de la Poste suisse : palettes et autres marchandises livrées en camion, de l'unité isolée au chargement complet, pas les colis ordinaires. Tu suis ton envoi sur sa page Track & Trace (tt.swisspost-cargo.com) avec le code à barres SSCC ou la référence donnés par l'expéditeur, ou en le collant dans le champ ci-dessus. Si tu as un numéro de colis ordinaire de la Poste, il se suit sur [la page de la Poste suisse](carrier:swiss-post).
 
 ## Numéro de suivi Swiss Post Cargo : à quoi il ressemble
 
@@ -75,6 +75,10 @@ Une référence partagée par plusieurs envois n'est lue que tant qu'un seul d'e
 
 ## Questions sur le suivi Swiss Post Cargo
 
+### Comment suivre un envoi sur tt.swisspost-cargo.com ?
+
+Saisis le code à barres SSCC à 20 chiffres commençant par `00` ou la référence client (comme `PL-48291736`) sur tt.swisspost-cargo.com, ou colle-le dans le champ ci-dessus. Il n'y a pas de carte en temps réel, mais le suivi liste chaque scan avec sa localité et, selon la brochure de la Poste, on peut à tout instant se renseigner en ligne sur la progression de l'envoi. Pour un colis postal ordinaire de la Poste (`99…` ou `…CH`), passe plutôt par [le suivi de la Poste suisse](carrier:swiss-post).
+
 ### Qu'est-ce que Swiss Post Cargo ?
 
 C'est le nom sous lequel la logistique de marchandises de la Poste suisse travaille depuis le 1er mars 2025 : de la logistique pour les entreprises, en Suisse et à l'international, transport de marchandises compris. Parmi les sociétés du groupe de la Poste en Suisse figure Swiss Post Cargo CH AG, détenue à 100 % par la Poste.
@@ -90,10 +94,6 @@ La brochure de la Poste sur le transport de marchandises, datée d'avril 2022, d
 ### Pourquoi Swiss Post Cargo m'envoie-t-il un SMS ?
 
 Souvent parce que l'expéditeur a commandé un avis de livraison : la brochure de la Poste range l'avis par téléphone, e-mail ou SMS parmi les options. De faux SMS au nom de la Poste circulent aussi, alors vérifie ton envoi toi-même sur le suivi.
-
-### Peut-on suivre Swiss Post Cargo en direct ?
-
-Pas sur une carte en temps réel. Le suivi liste chaque scan avec sa localité, et selon la brochure de la Poste, on peut à tout instant se renseigner en ligne sur la progression de l'envoi.
 
 :::sources
 - [La Poste : Transports, marchandises](https://www.post.ch/fr/-/media/post/gk/dokumente/stueckgut.pdf) – unités isolées ou chargements complets, ordres via Swiss Post Cargo Web par les entreprises, jour ouvrable suivant, régions de montagne, rez-de-chaussée, déchargement, signature, options dont la deuxième livraison, suivi en ligne, contact à Dintikon et e-mail

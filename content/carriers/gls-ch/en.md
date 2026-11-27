@@ -1,12 +1,12 @@
 ---
 title: GLS Switzerland tracking: statuses, Swiss Post and contact
-description: Track a GLS parcel in Switzerland: the number's shapes, why GLS asks for your postcode, what its English statuses mean, who delivers and who to contact.
+description: Track a GLS Switzerland (GLS Schweiz) parcel with Swiss Post GLS: parcel numbers, why GLS asks for your postcode, English statuses, customs fees and contact.
 slug: gls-switzerland-tracking
 published: 2026-10-11
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-GLS is an international parcel network based in Amsterdam with no company of its own in Switzerland: its partner, Swiss Post, clears and delivers the parcels it brings into Switzerland. Track one on [GLS's tracking page](https://gls-group.com/EU/en/parcel-tracking) with the parcel number and your postcode, or paste the number in the box above. The number comes from the sender, so start with the shop's shipping email.
+GLS is an international parcel network based in Amsterdam with no company of its own in Switzerland (GLS Schweiz): its partner, Swiss Post GLS (a Swiss Post unit in Basel), clears and delivers incoming GLS parcels in Switzerland and Liechtenstein. For Swiss Post GLS tracking, enter your parcel number and delivery postcode on [GLS's tracking page](https://gls-group.com/EU/en/parcel-tracking), or paste the number in the box above. The number comes from the sender, so start with the shop's shipping email.
 
 ## GLS Switzerland parcel number and Track ID
 
@@ -85,9 +85,13 @@ When GLS names Swiss Post as the deliverer, the parcel page says "Delivery with 
 
 ## Questions about GLS Switzerland tracking
 
-### What delivery company is GLS?
+### How does Swiss Post GLS tracking work in Switzerland?
 
-GLS is General Logistics Systems, headquartered in Amsterdam and part of International Distributions Services, formerly Royal Mail Group. In Switzerland its partner, Swiss Post, handles its parcels.
+Enter your parcel number and four-digit Swiss delivery postcode on [GLS's tracking page](https://gls-group.com/EU/en/parcel-tracking), or paste the number in the box above. Swiss Post GLS clears customs and delivers incoming GLS parcels in Switzerland and Liechtenstein; once Swiss Post shows a scan of its own, Peek can follow the parcel on Swiss Post's tracking with the same number.
+
+### What is GLS Schweiz (GLS Switzerland) and who delivers?
+
+GLS is General Logistics Systems, headquartered in Amsterdam and part of International Distributions Services, formerly Royal Mail Group. It has no Swiss company of its own: its partner, Swiss Post GLS in Basel, handles its parcels in Switzerland and Liechtenstein.
 
 ### How long does GLS take to deliver to Switzerland?
 

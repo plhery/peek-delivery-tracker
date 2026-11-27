@@ -1,12 +1,12 @@
 ---
 title: Landmark Global suivi : statuts, livreur et contact
-description: Suivre un colis Landmark Global en France, en Belgique ou en Suisse : le numéro LTN, ce que veulent dire les statuts, qui livre et qui contacter s'il bloque.
+description: Suivi colis Landmark Global (numéro LTN) en France, Belgique et Suisse : où suivre sur track.landmarkglobal.com, statuts, livreur local et service client.
 slug: landmark-global-suivi
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-27
 ---
 
-Landmark Global transporte les commandes en ligne d'un pays à l'autre pour le compte des boutiques. Il fait partie de Bnode, le groupe bruxellois qui gère aussi bpost, et confie le plus souvent ton colis à un livreur de ton pays pour la fin du trajet. Pour le suivre, prends le numéro LTN que la boutique t'a envoyé, en général dans la confirmation de commande, et colle-le sur [le site de suivi de Landmark](https://track.landmarkglobal.com/?lang=fr) ou dans le champ ci-dessus.
+Pour le suivi d'un colis Landmark Global, prends le numéro LTN envoyé par la boutique (en général dans la confirmation de commande) et colle-le sur [track.landmarkglobal.com](https://track.landmarkglobal.com/?lang=fr) ou dans le champ ci-dessus. Filiale de Bnode (le groupe bruxellois qui gère aussi bpost), Landmark Global transporte les commandes en ligne d'un pays à l'autre puis confie presque toujours ton colis à un livreur local pour la fin du trajet.
 
 ## Numéro de suivi Landmark Global : le LTN
 
@@ -93,6 +93,14 @@ Landmark écrit l'heure de chaque scan à l'heure du centre des États-Unis : Pe
 Quand le livreur est un transporteur que Peek suit directement, comme bpost en Belgique ou [UPS](carrier:ups) aux États-Unis, Peek peut suivre le colis chez lui : la page indique alors « Livraison par » ce transporteur, avec son numéro et un lien. Ça ne marche pas pour tous les colis. Chaque scan arrive sur une carte, et tu peux recevoir des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 
 ## Questions sur le suivi Landmark Global
+
+### Comment faire le suivi d'un colis Landmark Global ?
+
+Colle le numéro LTN (`LTN` suivi de 8 ou 9 chiffres, parfois terminé par `N1`) ou la référence de la boutique sur [track.landmarkglobal.com](https://track.landmarkglobal.com/?lang=fr) ou dans le champ ci-dessus. Une fois le livreur local connu, la page affiche son nom (« Delivery Partner » en anglais) et son propre numéro de suivi.
+
+### Comment contacter le service client Landmark Global ?
+
+Landmark Global ne publie aucun numéro de téléphone pour la France, la Belgique ou la Suisse. Passe par [sa page service client](https://landmarkglobal.com/eu/fr/formulaire-de-support-client/) ou écris à ClientservicesEU@landmarkglobal-group.com avec ton numéro LTN ; pour un colis perdu, abîmé ou bloqué, contacte d'abord la boutique, puis le livreur local dès qu'il est indiqué.
 
 ### Landmark Global, c'est quoi ?
 

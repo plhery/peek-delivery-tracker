@@ -1,12 +1,12 @@
 ---
 title: Vinted Go encomenda: rastreio, cacifos e levantamento
-description: Encomenda Vinted Go em Portugal: onde está o código de acompanhamento, o que quer dizer cada estado, quanto tempo espera no cacifo e a quem pedir ajuda.
+description: Envio pela transportadora Vinted Go em Portugal: rastreio do código, estados, prazo de 7 dias para levantar no cacifo ou loja, demora e apoio ao cliente.
 slug: vinted-go-encomenda
 published: 2026-10-11
-updated: 2026-11-23
+updated: 2026-11-27
 ---
 
-A Vinted Go é o serviço de entregas da própria Vinted: leva as encomendas vendidas na Vinted de um cacifo ou loja de encomendas para outro cacifo ou loja de encomendas. Para a acompanhar, abre a conversa da encomenda na Vinted e pressiona «Acompanhar encomenda», ou escreve o código na [página de acompanhamento da Vinted Go](https://vintedgo.com/pt/tracking?country=pt&region=europe).
+A Vinted Go é a transportadora própria da Vinted: faz envios entre cacifos e lojas de encomendas em Portugal (e entre Portugal, Espanha e Itália), com prazo indicativo de 3 a 6 dias úteis e 7 dias consecutivos para levantar. Para acompanhar um envio Vinted Go, abre a conversa da encomenda na Vinted e pressiona «Acompanhar encomenda», ou escreve o código na [página de acompanhamento da Vinted Go](https://vintedgo.com/pt/tracking?country=pt&region=europe) ou no campo acima.
 
 ## Rastrear encomenda Vinted Go: onde está o código
 
@@ -93,13 +93,13 @@ O Peek verifica até de 10 em 10 minutos, de hora a hora quando passam 48 horas 
 
 ## Perguntas sobre encomendas Vinted Go
 
-### Quanto tempo demora a Vinted Go?
+### Quanto tempo demora um envio Vinted Go em Portugal?
 
 Os termos apontam para 3 a 6 dias úteis desde a entrega pelo vendedor até ao teu ponto, sem contar sábados, domingos e feriados. A Vinted Go pede que esperes 25 dias úteis antes de dar uma encomenda como desaparecida.
 
-### Quanto tempo tenho para levantar a encomenda?
+### Quanto tempo tenho para levantar uma encomenda da Vinted Go?
 
-7 dias consecutivos a partir do momento em que a encomenda fica no ponto. Depois volta ao vendedor, e a Vinted cancela a encomenda e reembolsa-te.
+Tens 7 dias consecutivos a partir do momento em que a encomenda fica pronta no cacifo ou na loja de encomendas (a Vinted Go envia um novo aviso ao fim de 3 dias). A Vinted Go não prolonga o prazo: se não a levantares, volta ao vendedor e a Vinted cancela a encomenda e reembolsa-te.
 
 ### Onde ficam os pontos Vinted Go perto de mim?
 

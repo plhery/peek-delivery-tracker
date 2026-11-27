@@ -1,15 +1,15 @@
 ---
 title: Onde encontrar o número de seguimento da encomenda
-description: Onde está o número de seguimento no e-mail, na conta da loja ou no talão, e o que podes fazer para seguir uma encomenda quando não tens número nenhum.
+description: Onde encontrar o número de seguimento para localizar ou procurar uma encomenda (CTT, DPD, GLS), o que fazer sem código e se dá para saber quem a enviou.
 slug: onde-encontrar-numero-de-seguimento
 picture: Um e-mail de envio com o número RR000000005CH destacado a amarelo, uma etiqueta com código de barras ao lado e o Pip a sorrir.
 published: 2026-10-09
-updated: 2026-11-07
+updated: 2026-11-27
 ---
 
-O número de seguimento costuma vir no e-mail ou no SMS que a loja te manda quando a encomenda sai, ou está na página da encomenda, no site ou na app, a um clique do número da encomenda. Se foste tu a enviar, está no talão que te deram ao balcão. Nenhuma transportadora procura uma encomenda pelo teu nome ou pela tua morada, mas o aviso deixado na caixa do correio, a app de algumas transportadoras ou o próprio remetente podem ajudar-te a segui-la.
+Para localizar ou procurar uma encomenda, o número de seguimento costuma vir no e-mail ou no SMS que a loja te manda quando a encomenda sai, ou está na página da encomenda, no site ou na app, a um clique do número da encomenda. Se foste tu a enviar, está no talão que te deram ao balcão. Nenhuma transportadora procura uma encomenda pelo teu nome ou pela tua morada (e os CTT explicam que é o remetente quem conhece o código de envio), mas o aviso deixado na caixa do correio, a app de algumas transportadoras ou o próprio remetente podem ajudar-te a segui-la.
 
-## Onde encontro o número de seguimento?
+## Onde encontrar o número para localizar uma encomenda?
 
 Os [CTT](carrier:ctt), que lhe chamam «código de envio», explicam que, quando o código é gerado no momento do envio, é o remetente quem fica a sabê-lo. Os próprios CTT só to mandam (por SMS, e-mail ou aviso na caixa do correio) em alguns casos: se o serviço que o remetente contratou inclui avisos ao destinatário, se o envio está em desalfandegamento, se não estava ninguém em casa ou se o envio está à tua espera numa Loja ou Ponto CTT. No desalfandegamento, esse código é o número do objeto de que precisas para dar início ao processo (vê [encomenda retida na alfândega](guide:customs)). Por isso, procura por esta ordem:
 
@@ -44,7 +44,7 @@ Compraste no AliExpress ou noutra loja chinesa? Vê [como seguir uma encomenda d
 - **DPD:** o aviso de passagem traz o número da encomenda, que podes pôr no Track & Trace da DPD.
 - **GLS:** cada cartão de notificação traz um «ID de Rastreamento», que podes usar no seguimento da GLS. Se a GLS deixar a encomenda num GLS Point, tens 10 dias úteis para a levantar.
 
-## Como seguir uma encomenda sem número de seguimento
+## Como procurar ou localizar uma encomenda sem número de seguimento
 
 Há três caminhos, e nenhum passa pelo teu nome ou pela tua morada.
 
@@ -73,7 +73,7 @@ Os CTT não anunciam nada parecido. Na App CTT e na área de cliente, segues um 
 
 Se o remetente te disser a referência dele, algumas transportadoras deixam-te procurar por ela, como a DPD em **Procurar por referência**, no Track & Trace.
 
-## Dá para seguir uma encomenda pelo nome ou pela morada?
+## Dá para procurar uma encomenda pelo nome, pela morada ou saber o remetente?
 
 Não. Os sites de seguimento das transportadoras partem sempre de um número:
 
@@ -81,7 +81,7 @@ Não. Os sites de seguimento das transportadoras partem sempre de um número:
 - **GLS:** pede o «número de encomenda (Track ID) que lhe foi fornecido pelo expedidor ou pela GLS», e que o tenhas à mão quando a contactas.
 - **CTT:** pesquisas o envio pelo código, em **Seguir objeto**. Só depois, com sessão iniciada, é que os teus dados de registo te podem mostrar mais informação.
 
-O mais parecido são as contas e as apps da secção anterior, ligadas ao teu telemóvel ou ao teu registo. Os sites e as apps que seguem encomendas de várias transportadoras também não conseguem, e o Peek não é exceção: precisa de um número para perguntar à transportadora.
+O mais parecido são as contas e as apps da secção anterior, ligadas ao teu telemóvel ou ao teu registo. Os sites e as apps que seguem encomendas de várias transportadoras também não conseguem, e o Peek não é exceção: precisa de um número para perguntar à transportadora. Do mesmo modo, o seguimento público das transportadoras não indica o remetente de uma encomenda só pelo teu nome ou morada: para saberes quem enviou uma encomenda que está a caminho, confirma nos teus e-mails, nas contas das lojas onde compraste ou no aviso da transportadora.
 
 > Um site que se ofereça para encontrar todas as encomendas enviadas para o teu nome ou para a tua morada não está a usar o seguimento de nenhuma transportadora: nenhuma o oferece ao público. Não lhe dês os teus dados.
 

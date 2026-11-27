@@ -1,12 +1,12 @@
 ---
 title: Slovenská pošta sledovanie zásielok: podacie číslo a stavy
-description: Ako sledovať zásielku Slovenskej pošty: ako vyzerá podacie číslo, čo znamenajú stavy, ako dlho zásielka čaká na pošte či v BalíkoBOXe, reklamácie a kontakty.
+description: Sledovanie zásielky Slovenskej pošty (posta.sk): kde nájsť podacie a sledovacie číslo (13 znakov na SK), čo znamenajú stavy, BalíkoBOX, uloženie a kontakt.
 slug: slovenska-posta-sledovanie-zasielok
 published: 2026-10-22
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Slovenská pošta je národný poštový operátor. Zásielku môžete sledovať na stránke [Sledovanie zásielok](https://www.posta.sk/sledovanie-zasielok) na posta.sk, v mobilnej aplikácii Slovenskej pošty alebo tak, že podacie číslo vložíte do poľa vyššie. Podacie číslo vám dá odosielateľ: e-shop ho zvyčajne uvedie v e-maile o odoslaní alebo pri objednávke.
+Slovenská pošta je národný poštový operátor. Na sledovanie zásielky potrebujete podacie číslo (sledovacie číslo s 13 znakmi, pri zásielkach zo Slovenska zakončené `SK`), ktoré zadáte na stránke [Sledovanie zásielok](https://www.posta.sk/sledovanie-zasielok) na posta.sk, v mobilnej aplikácii Slovenskej pošty alebo do poľa vyššie. Podacie číslo vám dá odosielateľ: e-shop ho zvyčajne uvedie v e-maile o odoslaní alebo pri objednávke.
 
 ## Podacie číslo: ako vyzerá
 
@@ -100,9 +100,9 @@ Kým máte zásielku otvorenú na obrazovke alebo v deň doručenia so zapnutým
 
 ## Časté otázky o sledovaní zásielok Slovenskej pošty
 
-### Ako sledovať zásielku Slovenskej pošty?
+### Kde nájdem podacie (sledovacie) číslo a ako sledovať zásielku Slovenskej pošty?
 
-Zadajte podacie číslo, napríklad v tvare `RR482917367SK`, na posta.sk/sledovanie-zasielok, v aplikácii Slovenskej pošty alebo do poľa vyššie. Na posta.sk si po zadaní čísla môžete zapnúť upozornenia o každej zmene stavu.
+Podacie číslo (13 znakov, napríklad vymyslené `RR482917367SK` alebo `BA482917367SK`) vám dá odosielateľ: e-shop ho uvádza v e-maile o odoslaní alebo v detailoch objednávky. Zadajte ho na posta.sk/sledovanie-zasielok, v mobilnej aplikácii Slovenskej pošty alebo do poľa vyššie; na posta.sk si po zadaní čísla môžete zapnúť upozornenia o každej zmene stavu.
 
 ### Dá sa sledovať aj zásielka zo zahraničia?
 

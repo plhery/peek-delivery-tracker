@@ -1,12 +1,12 @@
 ---
 title: Yanwen suivi : numéros, statuts et qui contacter
-description: Suivre un colis Yanwen venu de Chine : à quoi ressemble le numéro, ce que veut dire chaque statut, qui le livre chez toi et qui contacter s'il bloque.
+description: Suivi colis Yanwen (numéros UL…YP, BYS… et Last Mile Tracking) : track.yw56.com.cn, sens des statuts anglais, livreur en France (Colissimo) et qui contacter.
 slug: yanwen-suivi
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Yanwen est une société de logistique chinoise, fondée à Pékin en 1998, qui expédie à l'étranger les colis de vendeurs en ligne puis les confie à un transporteur local pour le dernier kilomètre. Pour suivre ton colis, saisis son numéro sur [track.yw56.com.cn](https://track.yw56.com.cn/en/index), le site de suivi de Yanwen, ou colle-le dans le champ ci-dessus. Le numéro vient de la boutique ou de la plateforme où tu as commandé, dans les détails d'expédition de ta commande.
+Pour le suivi d'un colis Yanwen venu de Chine (numéro en `UL…YP`, `UK…YP` ou `BYS…`), saisis-le sur [track.yw56.com.cn](https://track.yw56.com.cn/en/index) ou colle-le dans le champ ci-dessus. Fondée à Pékin en 1998, Yanwen achemine à l'étranger les commandes de vendeurs en ligne puis les confie à un transporteur local pour le dernier kilomètre (comme Colissimo en France), dont le numéro « Last Mile Tracking » apparaît sur la page de résultat. Le numéro vient de la boutique ou de la plateforme, dans les détails d'expédition de ta commande.
 
 ## Numéro de suivi Yanwen : à quoi il ressemble
 
@@ -94,6 +94,10 @@ Il affiche le statut, l'historique avec la ville ou la région de chaque scan su
 Les heures sont lues avec le décalage GMT de Yanwen et affichées dans le fuseau horaire de ton appareil ; les scans répétés sont supprimés. Les scans de La Poste que Yanwen traduit en anglais, comme `Arrived at destination`, portent chez lui l'heure UTC sous le décalage français : Peek les remet à l'heure de La Poste, une ou deux heures plus tard. Peek affiche `Delivered` et `Out for delivery` avec ses propres mots, en français ; les autres lignes restent telles qu'écrites. Tant que tu gardes le colis ouvert, ou le jour de sa livraison avec les notifications activées, il vérifie jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de Yanwen qui répond) ; sinon, toutes les heures. Via les seuls services de suivi, c'est toutes les heures, toutes les 3 heures après une journée sans nouvelle, et jusqu'à toutes les 15 minutes le jour où le colis est en livraison, aux mêmes conditions. Il peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Quand un autre transporteur prend le relais pour la livraison, Peek suit le rythme propre à ce transporteur. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut contacter ni Yanwen ni la boutique à ta place.
 
 ## Questions sur le suivi Yanwen
+
+### Que signifie un numéro Yanwen commençant par UL et finissant par YP ?
+
+Un numéro de 13 caractères composé de deux lettres (souvent `UL` ou `UK`), 9 chiffres et `YP` à la fin est un numéro postal Yanwen. Il se suit sur [track.yw56.com.cn](https://track.yw56.com.cn/en/index) ou dans le champ ci-dessus ; dès la remise au transporteur local, la page affiche aussi son numéro « Last Mile Tracking ».
 
 ### Combien de temps met un colis Yanwen pour arriver en France ?
 

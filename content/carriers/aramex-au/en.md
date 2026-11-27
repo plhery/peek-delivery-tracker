@@ -1,12 +1,12 @@
 ---
 title: Aramex Australia tracking: numbers, statuses, contacts
-description: Track an Aramex Australia (formerly Fastway) parcel: where the label number is, what the statuses mean, missed deliveries, delays and how to reach your depot.
+description: Track an Aramex Australia courier parcel (formerly Fastway): label numbers, status meanings, missed deliveries, depot phone numbers and online enquiries.
 slug: aramex-australia-tracking
 published: 2026-10-15
-updated: 2026-10-26
+updated: 2026-11-27
 ---
 
-Aramex Australia, formerly Fastway Couriers, is a franchise courier network that delivers parcels for Australian shops. Track a parcel with its label number on [aramex.com.au](https://www.aramex.com.au/tools/track/) or by pasting it in the box above. The number comes from the shop that sent it: look in its shipping email or on your order page.
+Aramex Australia, formerly Fastway Couriers, is a franchise courier network operating in every Australian state and territory except the Northern Territory. Track an Aramex Australia parcel with its 12-character label number on [aramex.com.au](https://www.aramex.com.au/tools/track/) or by pasting it in the box above. The label number comes from the sender: check the shop's shipping email, your order page, or the calling card if you missed a delivery.
 
 ## Aramex Australia tracking number: format and where to find it
 
@@ -94,9 +94,9 @@ Aramex's scan times carry no time zone: Peek reads each on the clock of the scan
 
 ## Questions about Aramex tracking in Australia
 
-### What do Aramex tracking numbers start with?
+### What does an Aramex Australia tracking number look like?
 
-Two letters, a digit and a letter, or a letter and a digit, followed by 10 digits, such as the invented `KP4829103756`.
+Aramex Australia label numbers are 12 characters: two letters, a digit and a letter, or a letter and a digit, followed by 10 digits, such as the invented `KP4829103756`.
 
 ### Does Aramex deliver on weekends in Australia?
 
@@ -110,9 +110,9 @@ It depends on the route and the service. Aramex's delivery times page gives esti
 
 Yes in Australia: Fastway Couriers became Aramex Australia, and old fastway.com.au tracking links now open Aramex's tracking.
 
-### Is Aramex in Australia?
+### Where does Aramex Australia deliver and how do I contact my depot?
 
-Yes. Aramex Australia says it operates in every state and territory except the Northern Territory.
+Aramex Australia operates in every state and territory except the Northern Territory. There is no national recipient phone line: use Submit online enquiry on your tracking result or call your local depot Monday to Friday (Sydney, Melbourne, Brisbane and Hobart: 1300 327 892; Perth: (08) 9356 5309; Adelaide: (08) 8345 2300; Canberra: (02) 6260 1718).
 
 :::sources
 - [Aramex Australia: Track](https://www.aramex.com.au/tools/track/) – statuses, panels, delivery services, 48 hours, proof of delivery, damaged, returned, collection

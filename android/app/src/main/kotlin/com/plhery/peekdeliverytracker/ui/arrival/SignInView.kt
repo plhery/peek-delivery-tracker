@@ -33,6 +33,12 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.input.InputTransformation
+import androidx.compose.foundation.text.input.TextFieldBuffer
+import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.placeCursorAtEnd
+import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -83,14 +89,12 @@ import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextLinkStyles
-import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
@@ -162,9 +166,15 @@ internal class SignInForm(
     error: String?,
 ) {
     var step by mutableStateOf(step)
-    var email by mutableStateOf(email)
+    val emailField = TextFieldState(email)
+    var email: String
+        get() = emailField.text.toString()
+        set(value) { if (value != email) emailField.setTextAndPlaceCursorAtEnd(value) }
     var sentTo by mutableStateOf(sentTo)
-    var code by mutableStateOf(code)
+    val codeField = TextFieldState(code)
+    var code: String
+        get() = codeField.text.toString()
+        set(value) { if (value != code) codeField.setTextAndPlaceCursorAtEnd(value) }
     var emailExpanded by mutableStateOf(expanded)
     var errorMessage by mutableStateOf(error)
     val working: Boolean get() = run.working
@@ -235,6 +245,18 @@ internal val String.cleanedEmail: String get() = trim().lowercase()
  */
 internal fun signInCode(typed: String): String =
     typed.filter { it.category in NUMBERS }.take(6)
+
+/** [signInCode] as the code is typed or pasted, the cursor at the end of what is kept when anything was left out. */
+private object SignInCodeDigits : InputTransformation {
+    override fun TextFieldBuffer.transformInput() {
+        val typed = asCharSequence().toString()
+        val kept = signInCode(typed)
+        if (kept != typed) {
+            replace(0, length, kept)
+            placeCursorAtEnd()
+        }
+    }
+}
 
 private val NUMBERS = setOf(CharCategory.DECIMAL_DIGIT_NUMBER, CharCategory.LETTER_NUMBER, CharCategory.OTHER_NUMBER)
 
@@ -663,7 +685,7 @@ private fun EmailForm(form: SignInForm, invited: Boolean, onSend: () -> Unit) {
         SignInField(label) { modifier ->
             NoSuggestions {
                 SignInTextField(
-                    form.email, { form.email = it }, label, EMAIL_FIELD, modifier,
+                    form.emailField, label, EMAIL_FIELD, modifier,
                     placeholder = "you@example.com",
                     keyboard = KeyboardOptions(
                         capitalization = KeyboardCapitalization.None, autoCorrectEnabled = false,
@@ -701,12 +723,13 @@ private fun CodeForm(form: SignInForm, invited: Boolean, focus: AccessibilityFoc
         val label = localized("auth.code")
         SignInField(label) { modifier ->
             SignInTextField(
-                form.code, { form.code = signInCode(it) }, label, CODE_FIELD, modifier.accessibilityFocus(focus),
+                form.codeField, label, CODE_FIELD, modifier.accessibilityFocus(focus),
                 placeholder = "",
                 // `.numberPad`'s digits alone: the number keyboard's password variation, with no password semantics or
                 // transformation, so TalkBack reads each digit typed.
                 keyboard = KeyboardOptions(keyboardType = KeyboardType.NumberPassword, imeAction = ImeAction.Done),
                 autofill = ContentType.SmsOtpCode,
+                filter = SignInCodeDigits,
                 style = type.tracking(type.style(IosTextStyle.Title2, FontWeight.Medium, FontDesign.Monospaced), 10f).sfLines()
                     .copy(textAlign = TextAlign.Center),
             )
@@ -764,8 +787,7 @@ private fun SignInField(label: String, field: @Composable (Modifier) -> Unit) {
  */
 @Composable
 internal fun SignInTextField(
-    value: String,
-    onValueChange: (String) -> Unit,
+    state: TextFieldState,
     label: String,
     tag: String,
     modifier: Modifier,
@@ -773,29 +795,25 @@ internal fun SignInTextField(
     keyboard: KeyboardOptions,
     autofill: ContentType,
     style: androidx.compose.ui.text.TextStyle,
+    filter: InputTransformation? = null,
 ) {
     val colors = PeekTheme.colors
-    var edited by remember { mutableStateOf(TextFieldValue(value, TextRange(value.length))) }
-    val shown = if (edited.text == value) edited else TextFieldValue(value, TextRange(value.length))
     BasicTextField(
-        shown,
-        { edit ->
-            edited = edit
-            if (edit.text != value) onValueChange(edit.text)
-        },
+        state,
         modifier
             .testTag(tag)
             .semantics {
                 contentDescription = label
                 contentType = autofill
             },
+        inputTransformation = filter,
         textStyle = style.copy(color = colors.label),
-        singleLine = true,
+        lineLimits = TextFieldLineLimits.SingleLine,
         cursorBrush = SolidColor(colors.accent),
         keyboardOptions = keyboard,
-        decorationBox = { text ->
+        decorator = { text ->
             Box(Modifier.fillMaxWidth().heightIn(min = 54.dp), contentAlignment = Alignment.CenterStart) {
-                if (value.isEmpty() && placeholder.isNotEmpty()) {
+                if (state.text.isEmpty() && placeholder.isNotEmpty()) {
                     val probe = LocalSignInPlaceholder.current
                     Text(
                         placeholder, Modifier.clearAndSetSemantics {}, color = colors.secondaryText, style = style, maxLines = 1, softWrap = false,

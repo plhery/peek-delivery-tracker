@@ -3,6 +3,7 @@ package com.plhery.peekdeliverytracker.ui
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -124,7 +125,7 @@ class ShrinkThenEllipsisTest {
     fun thePlaceholderShrinksThenEndsInAnEllipsis() {
         show {
             SignInTextField(
-                value = "", onValueChange = {}, label = "Email", tag = "field", modifier = Modifier,
+                state = rememberTextFieldState(), label = "Email", tag = "field", modifier = Modifier,
                 placeholder = "you@example.com", keyboard = KeyboardOptions.Default, autofill = ContentType.EmailAddress,
                 style = PeekTheme.type.body.sfLines(),
             )

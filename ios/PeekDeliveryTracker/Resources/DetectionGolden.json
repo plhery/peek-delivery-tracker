@@ -1678,6 +1678,17 @@
     ]
   },
   {
+    "input": "002836100CABXND0000000",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "islandwide-express"
+    ],
+    "asked": [
+      "islandwide-express"
+    ]
+  },
+  {
     "input": "0029030029039700965786",
     "carrier": "ctt-express",
     "confidence": "high",
@@ -108655,6 +108666,17 @@
     "confidence": "high",
     "candidates": [
       "dai-post"
+    ]
+  },
+  {
+    "input": "NZD1099467",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "australia-post"
+    ],
+    "asked": [
+      "australia-post"
     ]
   },
   {

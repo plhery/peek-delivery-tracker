@@ -2188,6 +2188,7 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let tmwExpress = CarrierID(rawValue: "tmw-express")
     static let daraii = CarrierID(rawValue: "daraii")
     static let masspack = CarrierID(rawValue: "masspack")
+    static let skynetIn = CarrierID(rawValue: "skynet-in")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -4309,6 +4310,7 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .tmwExpress,
         .daraii,
         .masspack,
+        .skynetIn,
     ]
 
     init(from decoder: Decoder) throws {

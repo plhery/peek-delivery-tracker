@@ -31645,10 +31645,20 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Pacific/Auckland",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "fliway"
     },
-    "trackingUrlTemplate": "https://online.fliway.com/Public/Track/{trackingNumber}",
+    "trackingUrlTemplate": "https://www.fliway.com/transport/tracking/jobstatus?connote_or_ticket={trackingNumber}",
     "linkRules": [
+      {
+        "domains": [
+          "www.fliway.com",
+          "fliway.com"
+        ],
+        "pathPattern": "^/transport/tracking/jobstatus/?$",
+        "params": [
+          "connote_or_ticket"
+        ]
+      },
       {
         "domains": [
           "online.fliway.com"
@@ -36368,7 +36378,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Puerto_Rico",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "islandwide-express",
+      "recognitionRank": 52
     },
     "trackingUrlTemplate": "https://www.islandwide.com/tracking?TrackingNumber={trackingNumber}",
     "linkRules": [
@@ -36383,7 +36394,12 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^\\d{9}[A-Z]{6}\\d{7}$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://www.islandwide.com/tracking",
     "helpUrl": "https://www.islandwide.com/contact"
   },
@@ -71498,6 +71514,42 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://mp.masspack-express.com/#/public-tracking"
+  },
+  "skynet-in": {
+    "displayName": "Skynet Express India",
+    "aliases": [
+      "Skynet India",
+      "Skynet (India)",
+      "Skynet Express India Private Limited",
+      "Skynet Worldwide Express India"
+    ],
+    "countries": [
+      "IN"
+    ],
+    "color": "#d9261c",
+    "selectable": true,
+    "timezone": "Asia/Kolkata",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "skynet-in"
+    },
+    "trackingUrlTemplate": "https://www.skynetww.com/in-en/tracking?awb={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.skynetww.com",
+          "skynetww.com"
+        ],
+        "pathPattern": "^/in-(?:en|hi)/tracking/?$",
+        "params": [
+          "awb",
+          "id"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.skynetww.com/in-en/tracking",
+    "helpUrl": "https://www.skynetww.com/in-en/contact"
   }
 } as const;
 
@@ -73674,7 +73726,8 @@ export const CARRIER_IDS = [
   "primetime-express",
   "tmw-express",
   "daraii",
-  "masspack"
+  "masspack",
+  "skynet-in"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

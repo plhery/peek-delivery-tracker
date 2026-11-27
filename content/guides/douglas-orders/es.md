@@ -1,13 +1,13 @@
 ---
 title: Seguir un pedido de Douglas: envío, devolución y problemas
-description: Cómo seguir tu pedido de douglas.es, qué plazo tienes para devolverlo y qué hacer si el paquete se retrasa, no llega o llega dañado.
+description: Cómo seguir un pedido de douglas.es en España: teléfono 900 866 634, plazo legal de 30 días, devoluciones en 30 días naturales y qué hacer si llega dañado.
 slug: seguimiento-pedido-douglas
 picture: Un frasco de perfume alto y un pintalabios junto a una caja de regalo pequeña y una furgoneta de reparto, y Pip de pie sobre la caja de regalo.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-27
 ---
 
-En España, Douglas vende online en douglas.es. Si tu pedido se retrasa, falta algo o un producto llega roto, contacta con Douglas en el 900 866 634 o en web@douglas.es con tu número de pedido. Para devolver lo que no quieras, Douglas te da 30 días naturales desde la entrega, más que los 14 que exige la ley. Y hasta que el paquete llega a tus manos o a las de la persona que indicaste, el riesgo de pérdida o daño es de Douglas.
+Para seguir un pedido de **douglas.es** en España, busca el enlace o número de seguimiento en los correos de tu compra y pégalo en [Peek](/). Si no lo encuentras o tu paquete se retrasa, llega incompleto o con un frasco roto, contacta con Douglas en el `900 866 634` o `web@douglas.es` con tu número de pedido. Douglas responde del envío hasta que lo recibes y te ofrece 30 días naturales para devolverlo (frente a los 14 días legales).
 
 ## ¿Dónde vende Douglas online?
 
@@ -15,7 +15,7 @@ Douglas tiene una web propia en cada país donde vende online: la lista de país
 
 En España compras en douglas.es, la tienda online de Douglas Spain S.A.U. Si vives en otro país, compra en la web de Douglas de ese país.
 
-## ¿Quién entrega mi pedido de Douglas?
+## ¿Quién entrega los pedidos de douglas.es y cuál es el plazo?
 
 Los documentos de Douglas que cita esta guía no dicen qué transportista lleva los pedidos de douglas.es. El número de seguimiento te da una pista: escríbelo en el comprobador de más abajo para ver de qué transportista puede ser, o pégalo en Peek, que pregunta a los más probables cuál lo conoce. Si no tienes número, pregunta a Douglas en el 900 866 634 o en web@douglas.es.
 
@@ -35,7 +35,7 @@ Lo que sí fija la ley española, para cualquier tienda online:
 - home | Tú | 30 días naturales para devolverlo
 :::
 
-## ¿Dónde está el número de seguimiento de mi pedido de Douglas?
+## ¿Dónde encontrar el número de seguimiento de Douglas?
 
 Míralo en estos sitios:
 
@@ -61,7 +61,7 @@ Cuando nada se mueve, puede que el paquete aún no haya salido o que el transpor
 
 Cuándo esperar aún es normal: [el seguimiento no se actualiza](guide:tracking-not-updating) y [plazos de entrega](guide:delivery-times).
 
-## Gastos de envío de Douglas
+## ¿Cuánto cuestan los gastos de envío de Douglas?
 
 Los documentos de Douglas que cita esta guía no dan sus tarifas de envío: el precio de tu pedido lo ves al pagar. La ley europea te garantiza esto:
 
@@ -87,7 +87,7 @@ Primero mira, luego avisa. Por orden:
 
 Más: [paquete entregado pero no recibido](guide:delivered-not-received), [paquete perdido](guide:lost-parcel) y [paquete dañado](guide:damaged-parcel).
 
-## Devolver un pedido de Douglas
+## ¿Cómo devolver un pedido de Douglas (plazo de 30 días)?
 
 La ley te da 14 días naturales para desistir de una compra online. Para lo que compras en douglas.es, Douglas Spain te da 30 días naturales desde que recibes el producto tú o la persona que autorizaste, que no sea el transportista. Antes de desistir, Douglas recomienda contactar con atención al cliente en el 900 866 634 o en web@douglas.es.
 

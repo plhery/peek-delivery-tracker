@@ -1,15 +1,15 @@
 ---
 title: Śledzenie zamówienia Zara: dostawa, zwroty i problemy
-description: Gdzie śledzić zamówienie z Zara w Polsce, co znaczy każdy status, ile kosztuje dostawa, jak zrobić zwrot i co zrobić, gdy paczka nie dotrze albo jest „doręczona”.
+description: Jak śledzić zamówienie Zara w Polsce: statusy w „Zakupach”, ceny dostawy (od 6,90 zł), zwrot w 30 dni (sklep za darmo) i kontakt 800 702 469 przy problemach.
 slug: sledzenie-zamowienia-zara
 picture: Papierowa torba z uchwytami ze sznurka obok samochodu dostawczego i Pip wyglądający ze środka torby.
 published: 2026-10-25
-updated: 2026-10-25
+updated: 2026-11-27
 ---
 
-Zamówienie z Zara śledzisz na swoim koncie, w sekcji „Zakupy”, a jeśli kupiłeś jako gość, przez link z dowolnego e-maila o zamówieniu. Strony Zara nie mówią, który przewoźnik wiezie paczkę: gdy coś pójdzie nie tak, skontaktuj się z Zara, a Zara sprawdzi sprawę z firmą transportową. Na zwrot masz 30 dni od wysyłki, za darmo w sklepie Zara.
+Zamówienie z **zara.com/pl** sprawdzisz w sekcji „Zakupy” na swoim koncie albo — przy zakupie jako gość — przez link w dowolnym e-mailu od Zara, a jeśli masz numer kuriera, także w [Peek](/). Zara nie podaje z góry nazwy przewoźnika i przy opóźnieniu, braku paczki lub błędnym statusie „doręczone” sama wyjaśnia sprawę z firmą transportową (infolinia `800 702 469` lub czat). Na zwrot masz 30 dni od wysyłki: w sklepie Zara za darmo, w punkcie odbioru za 6,90 zł lub z odbiorem kuriera za 9,90 zł.
 
-## Kto doręcza zamówienie z Zara?
+## Kto doręcza zamówienie z Zara i gdzie je odebrać?
 
 Przy zakupie na zara.com/pl adres dostawy musi należeć do tego samego rynku, na którym kupujesz. Regulamin dodaje, że Zara nie dostarcza na adres skrzynki pocztowej, do domów studenckich ani do hoteli.
 
@@ -33,7 +33,7 @@ Czasem, zależnie od dostępności artykułów, Zara proponuje przy zakupie podz
 - home | Ty | Status zmienia się na „Doręczone do klienta”
 :::
 
-## Gdzie śledzić zamówienie z Zara?
+## Gdzie sprawdzić status i numer śledzenia zamówienia Zara?
 
 **Na koncie.** Otwórz sekcję „Zakupy” i wybierz zamówienie. W szczegółach widzisz status, przewidywaną datę i, jeśli zamówienie podzielono, każdą dostawę.
 
@@ -74,7 +74,7 @@ Według regulaminu Zara dostarcza zamówienie w terminie z Potwierdzenia wysyłk
 
 **Zmiana albo anulowanie.** Sposobu wysyłki nie zmienisz po zakończeniu zakupu. Jeśli jesteś zarejestrowany i wybrałeś dostawę do domu, zmienisz adres w szczegółach zamówienia, o ile pozwala na to status. Anulujesz tam samo, jeśli status na to pozwala; jako gość, przez e-mail z potwierdzeniem zamówienia. Artykułów nie da się zmienić: po otrzymaniu zamówienia złóż wniosek o wymianę albo zwrot. Jeśli nie chcesz już przesyłki, skontaktuj się z Zara. Więcej: [zmiana adresu dostawy](guide:change-delivery-address).
 
-## Opcje i ceny dostawy Zara
+## Ile kosztuje dostawa Zara i jak długo trwa?
 
 | Wysyłka | Termin | Cena |
 | --- | --- | --- |
@@ -104,7 +104,7 @@ Najpierw sprawdź, potem zgłoś. Po kolei:
 
 Według regulaminu dostawa jest zrealizowana, gdy ty albo wskazana przez ciebie osoba dostaje paczkę do rąk, co potwierdza podpis na pokwitowaniu odbioru. Jeśli zwlekasz z odbiorem, Zara da ci dodatkowy termin; gdy i wtedy nie da się doręczyć, może anulować zamówienie i zwrócić pieniądze. Więcej: [nieudana dostawa](guide:missed-delivery), [paczka dostarczona, ale jej nie ma](guide:delivered-not-received), [uszkodzona paczka](guide:damaged-parcel) i [zaginiona paczka](guide:lost-parcel).
 
-## Zwrot zamówienia z Zara
+## Jak zwrócić zamówienie z Zara (30 dni na zwrot)?
 
 Masz 30 dni od daty wysyłki zamówienia; termin widzisz w szczegółach zamówienia. Artykuły muszą być w nienaruszonym stanie, ze wszystkimi metkami, a zwrot robisz na tym samym rynku, na którym kupiłeś.
 

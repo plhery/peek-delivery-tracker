@@ -1,15 +1,15 @@
 ---
 title: Tracciare un ordine Temu: codice, corriere e ritardi
-description: Perché il numero d'ordine Temu non serve a tracciare il pacco, quale corriere può consegnarlo in Italia e come lo segue Peek quando passa a un altro corriere.
+description: Come tracciare un ordine Temu in Italia: differenza tra numero d'ordine PO e codice corriere, dazi UE (3 € e 2 €), corrieri locali e cambio codice in Peek.
 slug: tracciare-ordine-temu
 picture: Una pila di piccoli pacchi che esce dalla stiva di un aereo, un furgone e Pip che li conta.
 published: 2026-10-17
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Il numero d'ordine Temu non serve a tracciare il pacco: ti serve il codice di tracciamento del corriere. Incollalo in [Peek](/), che trova il corriere dalla forma del codice e, se il primo corriere indica chi prende in carico il pacco in Italia, passa al nuovo. Se incolli il numero d'ordine, Peek ti avvisa che sembra un numero d'ordine Temu, non un codice di tracciamento.
+Per tracciare un pacco **Temu** in Italia ti serve il **codice di tracciamento del corriere**, non il numero d'ordine Temu (`PO-…`) né un codice container che inizia per `TEMU`. Incolla il codice del corriere in [Peek](/): riconosce il corriere dalla forma del numero, scarta automaticamente l'eventuale numero d'ordine `PO` se incolli l'intero messaggio e passa al corriere italiano dell'ultimo tratto appena il primo corriere lo indica. Per i pacchi spediti da fuori UE si applicano inoltre il dazio di 3 € (fino a 150 €) e la tassa di gestione UE di 2 € per voce doganale.
 
-## Il numero d'ordine Temu è un codice di tracciamento?
+## Perché il numero d'ordine Temu (`PO`) non funziona come codice di tracciamento?
 
 No. Il numero d'ordine Temu inizia con "PO" ed è seguito da 20 cifre (`PO-000-00000000000000000`), ma il corriere non lo conosce. Peek lo riconosce da questa forma e lo mette da parte, con un avviso che sembra un numero d'ordine Temu.
 
@@ -22,19 +22,19 @@ Se incolli un intero messaggio con tutti e due i numeri, Peek prende il codice d
 
 Nemmeno un numero di tre lettere, una `U` e sette cifre, come `TEMU1234565` (inventato), è un codice di tracciamento: è quello di un container marittimo, e nessun corriere segue un pacco con quel numero. Il `TEMU` iniziale non c'entra con il negozio: nel registro dei codici dei proprietari di container tenuto dal Bureau International des Containers (BIC), `TEMU` è della società di noleggio di container Textainer. Se ne aggiungi uno e nessun corriere risponde, Peek scrive «Sembra il numero di un container marittimo. Il numero di tracciamento è nell’e-mail di spedizione o nella pagina dell’ordine.» e ti propone «Scegli il corriere».
 
-## Chi consegna i pacchi Temu in Italia?
+## Quale corriere consegna i pacchi Temu in Italia e si paga dogana?
 
 Di solito lo dice il codice di tracciamento: il campo qui sopra indica il corriere a cui rimanda la sua forma, o i pochi a cui può appartenere. Chi puoi trovare nell'ultimo tratto, da Poste Italiane per gli invii postali ai corrieri privati, è nella tabella di [come tracciare un pacco dalla Cina](guide:tracking-from-china).
 
 Sulla dogana: dal 1° luglio 2026 anche un pacco da fuori UE fino a 150 € paga un dazio di 3 € per voce doganale, e dal 1° novembre 2026, secondo la Commissione europea, si aggiunge la tassa di gestione dell'Unione, 2 € per voce doganale, qualunque sia il valore del pacco. Se il sito non l'ha già incassato al checkout, paghi a Poste o al corriere. Un pacco che parte da un magazzino nell'UE non passa dalla dogana. Importi ed eccezioni: [pacco fermo in dogana](guide:customs).
 
-## Pacco Temu fermo, in ritardo o mai arrivato
+## Pacco Temu fermo, in ritardo o mai arrivato: cosa fare?
 
 Un pacco che resta giorni senza aggiornamenti è normale su questa tratta. Perché resta in silenzio durante il volo e in dogana, e perché a volte cambia codice: [come tracciare un pacco dalla Cina](guide:tracking-from-china). Quanti giorni senza aggiornamenti sono normali, dopo quanto tempo un pacco si considera smarrito e se scrivere al venditore o al corriere: [il tracking non si aggiorna](guide:tracking-not-updating).
 
 Un SMS ti chiede di pagare o di cliccare un link per il tuo pacco? Come riconoscere quelli falsi: [SMS truffa sulle consegne](guide:delivery-scam-texts). Più dettagli su ogni caso: [consegnato ma non ricevuto](guide:delivered-not-received), [pacco smarrito](guide:lost-parcel) e [pacco rispedito al mittente](guide:returned-to-sender).
 
-## Posso tracciare un pacco Temu con Peek?
+## Come tracciare un pacco Temu con Peek quando cambia corriere?
 
 Sì, con il codice del corriere. Incollalo in [Peek](/), che trova il corriere dalla forma del codice e segue il pacco come qualsiasi altro.
 

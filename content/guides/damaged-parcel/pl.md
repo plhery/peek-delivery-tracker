@@ -1,15 +1,15 @@
 ---
 title: Uszkodzona paczka – co robić i jak złożyć reklamację
-description: Paczka przyszła uszkodzona? Jakie zdjęcia zrobić, kiedy odmówić odbioru, kto odpowiada i ile czasu na zgłoszenie dają Poczta Polska, DPD i Vinted.
+description: Paczka przyszła uszkodzona? Jakie zdjęcia zrobić, kiedy odmówić odbioru, odpowiedzialność sklepu (2 lata) oraz termin 7 dni na ukrytą szkodę w Poczcie i DPD.
 slug: uszkodzona-paczka-co-robic
 picture: Wgnieciony karton z rozdartym rogiem i odklejającą się taśmą, telefon robiący mu zdjęcie z fleszem i zmartwiony Pip z przyklejonym plastrem.
 published: 2026-10-14
-updated: 2026-11-09
+updated: 2026-11-27
 ---
 
-Jeśli paczka przyszła uszkodzona, zrób zdjęcia, zanim zaczniesz ją dalej rozpakowywać, zachowaj karton i wszystko, co było w środku, i jeszcze tego samego dnia napisz do sprzedawcy. Przy zakupie od firmy sprzedawca odpowiada za uszkodzenie w transporcie, a dochodzenie pieniędzy od kuriera to jego sprawa, nie twoja. Jeśli karton jest zgnieciony, rozdarty albo mokry już przy odbiorze, możesz odmówić przyjęcia paczki albo przyjąć ją i spisać z kurierem protokół szkody.
+Jeśli paczka przyszła uszkodzona, sfotografuj karton i zawartość przed dalszym rozpakowywaniem, zachowaj opakowanie i zgłoś szkodę sprzedawcy jeszcze tego samego dnia. W zakupie od firmy za przesyłkę do chwili odbioru odpowiada sklep (art. 548 § 3 Kodeksu cywilnego) — nawet jeśli winny jest kurier — a przy ukrytym uszkodzeniu masz 7 dni na zgłoszenie go przewoźnikowi (Poczta Polska, DPD). Widocznie zgniecionego, rozdartego lub mokrego kartonu możesz nie przyjąć albo spisać z kurierem protokół szkody.
 
-## Uszkodzona paczka – co robić?
+## Uszkodzona paczka od kuriera — co zrobić krok po kroku?
 
 :::steps
 - Obejrzyj, zanim podpiszesz | Sprawdź karton przy kurierze: zgniecione rogi, dziury, rozdarcia, mokre plamy, ślady otwarcia albo ponownego zaklejenia, grzechotanie w środku.
@@ -22,7 +22,7 @@ Jeśli paczka przyszła uszkodzona, zrób zdjęcia, zanim zaczniesz ją dalej ro
 
 Uszkodzenie, które zauważysz dopiero po rozpakowaniu, też się liczy: zgłoś je, gdy tylko je zobaczysz. Poczcie Polskiej i DPD ukryte uszkodzenie trzeba zgłosić w ciągu 7 dni od odbioru (szczegóły niżej).
 
-## Paczka uszkodzona w transporcie: kto odpowiada?
+## Kto odpowiada za paczkę uszkodzoną w transporcie (sklep czy kurier)?
 
 Jeśli kupujesz od firmy, odpowiada sprzedawca. W Polsce paczka podróżuje na ryzyko sklepu, dopóki jej nie dostaniesz (art. 548 § 3 Kodeksu cywilnego), co wyjaśnia poradnik [paczka doręczona, a jej nie ma](guide:delivered-not-received). UOKiK dodaje, że sklep nie może uchylić się od odpowiedzialności za przesyłkę, także w regulaminie, „nawet jeśli do jej uszkodzenia doszło z winy profesjonalnego przewoźnika”, a reklamację składasz u sprzedawcy, który potem dochodzi roszczeń od firmy kurierskiej. Przewoźnik odpowiada przed sklepem, swoim klientem.
 
@@ -44,7 +44,7 @@ Inaczej jest w trzech sytuacjach:
 - **Zakup od osoby prywatnej**, na przykład na Vinted, OLX czy Allegro Lokalnie. Przepisy konsumenckie cię wtedy nie chronią, więc najwięcej daje ochrona kupujących na platformie.
 - **Płatność poza platformą.** Vinted pisze, że przy płatności bez przycisku „Kup teraz” „nie przysługuje Ci ochrona”.
 
-## Reklamacja uszkodzonej paczki u przewoźnika
+## Jak złożyć reklamację uszkodzonej paczki u przewoźnika (Poczta Polska, DPD, InPost)?
 
 Przewoźnicy rozliczają się przede wszystkim z nadawcą, więc twoja reklamacja zwykle idzie przez sklep. Odbiorca może ją złożyć sam w kilku przypadkach. Paczka w ogóle nie dotarła? Zajrzyj do poradnika o [zaginionej paczce](guide:lost-parcel).
 
@@ -63,7 +63,7 @@ W Poczcie Polskiej reklamację uszkodzonej paczki możesz złożyć już przy od
 
 DPD Polska prosi o elektroniczny protokół szkody na protokol.dpd.com.pl i od razu zaznacza: „Samo spisanie protokołu nie uruchamia procedury reklamacyjnej”. Reklamację składasz osobno, na stronie „Złóż reklamację”, a DPD radzi też skontaktować się z nadawcą. Według regulaminu DPD przyjęcie paczki bez zastrzeżeń zamyka drogę do roszczeń, z wyjątkiem niewidocznych uszkodzeń zgłoszonych w ciągu 7 dni od przyjęcia.
 
-## Czy można odmówić przyjęcia uszkodzonej paczki?
+## Czy można odmówić odbioru uszkodzonej paczki lub otworzyć ją przy kurierze?
 
 Zwykle tak, przy drzwiach albo w punkcie odbioru. Paczka wraca wtedy do nadawcy, który załatwia sprawę z przewoźnikiem, a sklep nadal jest ci winien sprawny towar albo zwrot pieniędzy. Co dzieje się z odrzuconą paczką w drodze powrotnej, przeczytasz w poradniku [paczka wraca do nadawcy](guide:returned-to-sender).
 
@@ -93,7 +93,7 @@ Vinted chce też zdjęć przedmiotu w opakowaniu, opakowania wewnętrznego i zew
 
 Potem zachowaj wszystko. Vinted zaleca „zachowanie opakowania do czasu zakończenia sprawy”, a przy ukrytym uszkodzeniu przewoźnik musi mieć co obejrzeć, żeby spisać protokół.
 
-## Ile masz czasu na zgłoszenie uszkodzonej paczki?
+## Ile masz dni na zgłoszenie uszkodzonej paczki (Vinted, sklep, kurier)?
 
 Najlepiej tego samego dnia. Wobec sklepu prawo daje ci dużo czasu, ale sklep ma u przewoźnika krótkie terminy na ukryte uszkodzenia, a Vinted daje ci jeszcze mniej czasu:
 

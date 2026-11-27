@@ -1,13 +1,13 @@
 ---
 title: Tracciamento ordine Douglas: spedizione, resi e problemi
-description: Come tracciare il tuo ordine douglas.it, come fare un reso e cosa fare se il pacco è in ritardo, non arriva o arriva danneggiato.
+description: Come tracciare un ordine su douglas.it: dove trovare il tracking, reso entro 30 giorni lavorativi via shop@douglas.it e cosa fare per ritardi o pacchi rotti.
 slug: tracciamento-ordine-douglas
 picture: Un flacone di profumo alto e un rossetto accanto a una piccola scatola regalo e a un furgone delle consegne, e Pip in piedi sulla scatola regalo.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-27
 ---
 
-In Italia Douglas vende online su douglas.it. Per un pacco in ritardo, incompleto o danneggiato, e per i resi, scrivi al servizio clienti di Douglas a shop@douglas.it con il numero d'ordine. Il reso lo chiedi entro 30 giorni lavorativi dal giorno in cui ricevi l'ordine, e il servizio clienti fissa con te il ritiro tramite corriere.
+Per tracciare un ordine effettuato su **douglas.it**, recupera il codice o il link del corriere nelle email di Douglas e incollalo su [Peek](/). Se il codice manca, il pacco è in ritardo, incompleto o arriva rotto, oppure vuoi chiedere un reso, scrivi al servizio clienti a `shop@douglas.it` indicando il numero d'ordine: hai 30 giorni lavorativi dalla consegna per richiedere il ritiro tramite corriere (oltre ai 14 giorni di recesso UE).
 
 ## Dove vende Douglas online?
 
@@ -15,7 +15,7 @@ Douglas ha un sito per ogni paese in cui vende online: l'elenco dei paesi del gr
 
 In Italia compri su douglas.it. Se vivi in un altro paese, compra sul sito Douglas di quel paese.
 
-## Chi consegna il mio ordine Douglas?
+## Quale corriere consegna il mio ordine douglas.it?
 
 Le fonti di Douglas che questa guida cita non dicono quale corriere consegna gli ordini douglas.it. Il numero di tracking ti dà un indizio: scrivilo nel campo qui sotto per vedere di quale corriere può essere, o incollalo in Peek, che chiede ai corrieri più probabili quale lo conosce. Se non hai un numero, chiedilo a shop@douglas.it.
 
@@ -34,7 +34,7 @@ Valgono comunque le regole UE sugli acquisti online:
 - home | Tu | 30 giorni lavorativi per il reso
 :::
 
-## Dov'è il numero di tracking del mio ordine Douglas?
+## Dove trovare il numero di tracking dell'ordine Douglas?
 
 Guarda qui:
 
@@ -58,7 +58,7 @@ Quando non si muove niente, può darsi che il pacco non sia ancora partito o che
 
 Se i giorni passano e il tracking non si muove, scrivi a shop@douglas.it con il numero d'ordine. Quando l'attesa è ancora normale: [il tracking non si aggiorna](guide:tracking-not-updating) e [tempi di consegna](guide:delivery-times).
 
-## Spese di spedizione Douglas
+## Quanto costa la spedizione su Douglas Italia?
 
 Le fonti di Douglas che questa guida cita non riportano le tariffe di spedizione. La legge UE ti tutela così:
 
@@ -83,7 +83,7 @@ Prima guarda, poi segnala. In ordine:
 
 Altro: [pacco consegnato ma non ricevuto](guide:delivered-not-received), [pacco smarrito](guide:lost-parcel) e [pacco danneggiato](guide:damaged-parcel).
 
-## Restituire un ordine Douglas
+## Come fare il reso di un ordine Douglas (30 giorni lavorativi)?
 
 Secondo il modulo di reso di Douglas, per rendere un ordine scrivi a shop@douglas.it entro 30 giorni lavorativi dal giorno in cui lo ricevi. Nell'email indica:
 

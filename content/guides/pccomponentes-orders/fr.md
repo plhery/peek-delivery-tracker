@@ -1,15 +1,15 @@
 ---
 title: Suivi de commande PcComponentes : livraison et problèmes
-description: Qui livre ta commande PcComponentes en France et en Belgique, où trouver le suivi, combien coûte la livraison et que faire si le colis n'arrive pas.
+description: Suivre une commande PcComponentes (FR/BE) : transporteur, délai 3–5 jours ouvrés, livraison gratuite dès 50 €, retours sous 30 jours et numéro +33 1 59 13 10 38.
 slug: suivi-commande-pccomponentes
 picture: Un grand carton de tour d'ordinateur et un carton d'écran sur un diable, une camionnette de livraison, et Pip sur le pas d'une porte d'entrée ouverte.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-27
 ---
 
-PcComponentes est une boutique en ligne espagnole d'informatique et d'électronique, avec un site pour la France, pccomponentes.fr, et un pour la Belgique, pccomponentes.be. Elle n'a pas de transporteur attitré : elle expédie avec « l'agence de transport disponible au moment de l'envoi » et t'envoie alors un e-mail avec le nom du transporteur et le numéro de suivi. Le suivi est aussi dans ton espace client, sous « Commandes, retours et factures ». Un article d'un vendeur de la Marketplace part de chez ce vendeur.
+Pour suivre une commande passée sur **pccomponentes.fr** (ou **pccomponentes.be** en Belgique), ouvre l'e-mail d'expédition qui nomme le transporteur disponible choisi au départ et fournit le numéro de suivi, ou consulte « Commandes, retours et factures » dans ton espace client. La livraison standard prend 3 à 5 jours ouvrés en France métropolitaine et en Belgique (jusqu'à 9 jours ouvrés pour la Corse), est gratuite dès 50 € sur les produits vendus et expédiés par PcComponentes en France métropolitaine, et les retours s'effectuent sous 30 jours calendaires.
 
-## Où PcComponentes livre-t-il ?
+## Où livre PcComponentes (France, Belgique, Corse, Suisse) ?
 
 Le centre d'aide renvoie vers un site par pays : l'Espagne, le Portugal, la France, l'Italie, l'Allemagne et la Belgique. Ce que dit chacun pour toi :
 
@@ -44,7 +44,7 @@ Un écran ou un portable se reconnaît de loin : il voyage tel qu'il sort de che
 - home | Toi | Chez toi ou dans un point de retrait
 :::
 
-## Où est mon numéro de suivi PcComponentes ?
+## Où trouver le numéro de suivi de ma commande PcComponentes ?
 
 Regarde à ces endroits :
 
@@ -85,7 +85,7 @@ Besoin de changer l'adresse ? C'est possible seulement si la commande n'est pas 
 
 Si aucune date n'a été convenue, le droit européen donne au commerçant 30 jours pour livrer. Passé ce délai ou la date promise, rappelle-le à PcComponentes et accorde-lui un délai supplémentaire raisonnable. Quand attendre est encore normal : [le suivi ne se met pas à jour](guide:tracking-not-updating).
 
-## Options et frais de livraison
+## Combien coûte la livraison PcComponentes (frais et points relais) ?
 
 **Frais de port.** Ajoute les articles au panier et indique l'adresse de livraison : le total affiche les frais. La livraison est gratuite à partir de 50 €, seulement vers la France métropolitaine et pour les produits vendus et expédiés par PcComponentes. Le gros électroménager et certains produits volumineux peuvent avoir des frais. La fiche produit dit qui vend l'article et s'il a des frais de port.
 
@@ -113,7 +113,7 @@ Dans cet ordre :
 
 Avec un vendeur de la Marketplace, PcComponentes reçoit aussi les signalements : tu as 7 jours calendaires après réception pour dire que la commande ne correspond pas, qu'il manque des produits, ou qu'elle est arrivée endommagée ou ouverte. Plus d'infos : [colis livré mais pas reçu](guide:delivered-not-received), [colis perdu](guide:lost-parcel) et [colis endommagé](guide:damaged-parcel).
 
-## Retourner une commande PcComponentes
+## Comment retourner une commande PcComponentes sous 30 jours ?
 
 Tu as 30 jours calendaires après réception. Dans « Commandes, retours et factures », clique sur « Retour » et choisis l'article. Le retour apparaît dans « Historique des retours », où tu peux aussi l'annuler tant que la collecte n'a pas eu lieu.
 

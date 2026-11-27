@@ -1,15 +1,15 @@
 ---
 title: Paket beschädigt: Was tun, wer haftet, wer muss melden?
-description: Paket beschädigt angekommen? Welche Fotos du machst, wann du die Annahme verweigerst, wer haftet und welche Fristen DHL, Hermes, DPD und die Post setzen.
+description: Paket beschädigt geliefert? So machst du Fotos, verweigerst die Annahme, nutzt dein Gewährleistungsrecht (DE/AT/CH) und hältst 7-/8-Tage-Fristen ein.
 slug: paket-beschaedigt-was-tun
 picture: Ein eingedellter Karton mit eingerissener Ecke und sich lösendem Klebeband, ein Handy fotografiert ihn mit Blitz, und ein besorgter Pip mit einem aufgeklebten Pflaster.
 published: 2026-10-14
-updated: 2026-11-09
+updated: 2026-11-27
 ---
 
-Ist dein Paket beschädigt angekommen, fotografier es, bevor du weiter auspackst, heb Karton und Inhalt auf und sag dem Händler noch am selben Tag Bescheid. Hast du in Deutschland oder Österreich bei einem Shop gekauft, schuldet er dir einwandfreie Ware, und den Schaden beim Paketdienst zu reklamieren ist seine Aufgabe, nicht deine. In der Schweiz entscheiden die AGB des Shops, wer das Risiko trägt. Ist der Karton schon an der Tür eingedrückt, gerissen oder nass, kannst du die Annahme verweigern oder den Schaden beim Zusteller festhalten lassen.
+Kommt dein Paket beschädigt an, fotografier Karton und Inhalt noch vor dem Auspacken, bewahr alles auf und meld den Schaden sofort dem Händler. In Deutschland und Österreich trägt bei Shop-Käufen der Händler das Transportrisiko und reklamiert beim Paketdienst; in der Schweiz gelten die AGB. Ist der Karton schon bei der Übergabe eingedrückt, nass oder aufgerissen, darfst du die Annahme verweigern oder den Schaden beim Zusteller festhalten lassen.
 
-## Paket beschädigt: Was tun?
+## Paket beschädigt geliefert: Was tun?
 
 :::steps
 - Schauen, bevor du unterschreibst | Prüf den Karton, solange der Zusteller noch da ist: eingedrückte Ecken, Löcher, Risse, nasse Stellen, geöffnetes oder neu verklebtes Klebeband, Klappern im Inneren.
@@ -22,7 +22,7 @@ Ist dein Paket beschädigt angekommen, fotografier es, bevor du weiter auspackst
 
 Auch ein Schaden, den du erst beim Auspacken entdeckst, zählt: Melde ihn, sobald du ihn siehst.
 
-## Paket beschädigt: Wer haftet?
+## Wer haftet bei einem beschädigten Paket (DE, AT, CH)?
 
 Hast du bei einem Händler gekauft, haftet in Deutschland und Österreich der Händler. Bis du das Paket in den Händen hältst, trägt er das Risiko, wie [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received) erklärt. Kaputte Ware ist mangelhaft: Du hast Anspruch auf Reparatur oder Ersatz und, wenn das nicht klappt, auf dein Geld zurück. Der Paketdienst haftet gegenüber dem Händler, seinem Kunden.
 
@@ -38,7 +38,7 @@ In drei Fällen ist nicht der Händler dein Ansprechpartner:
 - **Du hast bei einer Privatperson gekauft**, etwa auf Kleinanzeigen, Vinted oder Ricardo. Das Verbraucherrecht gilt dann nicht. Verschickt der Verkäufer auf deinen Wunsch, trägst du das Risiko schon ab der Übergabe an den Paketdienst, in Deutschland (§ 447 BGB) wie in Österreich (§ 905 mit § 429 ABGB). Helfen kann dann der Käuferschutz der Plattform, in Österreich auch der Verkäufer, indem er dir seine Ansprüche gegen den Paketdienst abtritt.
 - **Du hast bei eBay selbst eine Versandmethode organisiert**, zum Beispiel einen Kurierdienst. Dann deckt der eBay-Käuferschutz deinen Kauf nicht ab.
 
-## Paket beschädigt: Wer muss melden?
+## Wer muss den Transportschaden beim Paketdienst melden?
 
 Fast immer der Absender: Die meisten Paketdienste haben ihren Vertrag nur mit ihm. In Deutschland darfst du als Empfänger zwar auch selbst Ansprüche gegen den Paketdienst geltend machen (§ 421 HGB), aber über den Händler geht es meist schneller. Ist ein Paket nie angekommen, lies [Paket verloren](guide:lost-parcel).
 
@@ -68,7 +68,7 @@ Bei der Schweizerischen Post meldest du den Schaden online über die E-Schadenme
 
 Hermes schickt dich bei einer Bestellung zum Kundenservice des Onlineshops. Bei sichtbaren Schäden gibt dir der Zusteller meist eine Schadenskarte: Hermes will sie mit der Schadenmeldung. DPD Deutschland rät zu Fotos und schickt dich zum Absender, seinem Vertragspartner; DPD Österreich untersucht Schäden nur in dessen Auftrag. GLS Österreich darf den Inhalt eines Pakets nicht prüfen und schickt dich ebenfalls zum Absender. DPD Schweiz bittet dich, den Schaden noch am selben Tag dem Absender zu melden. Auch wenn DPD ihn verursacht hat, etwa weil das Paket im Regen stand, läuft die Reklamation über den Absender.
 
-## Paket beschädigt: Annahme verweigern?
+## Darf ich die Annahme eines beschädigten Pakets verweigern?
 
 Ja, das darfst du, an der Tür oder in der Filiale, bei der Schweizerischen Post nur bei persönlicher Übergabe. Das Paket geht zurück an den Absender, und der klärt den Schaden mit dem Paketdienst. GLS Österreich bringt es ins Depot und informiert den Absender, bei DPD Schweiz scannt der Zusteller es und nimmt es wieder mit. Ein Shop schuldet dir weiterhin einwandfreie Ware: Laut der österreichischen Internet Ombudsstelle ist er dann im Lieferverzug, und du kannst ihm eine Nachfrist setzen und danach vom Vertrag zurücktreten. Was mit einem verweigerten Paket auf dem Rückweg passiert, steht unter [Paket zurück an Absender](guide:returned-to-sender).
 
@@ -86,7 +86,7 @@ Deine Rechte gegenüber dem Shop behältst du. Gegenüber dem Paketdienst zählt
 
 Die Schweiz ist strenger: Nimmst du ein Paket der Schweizerischen Post vorbehaltlos an, erlöschen laut ihren [AGB](https://www.post.ch/-/media/post/agb/agb-postdienstleistungen-pk.pdf?la=de) alle Ansprüche gegen die Post, außer bei Schäden, die von außen nicht sichtbar waren und innerhalb von acht Tagen gemeldet werden. Die Stiftung für Konsumentenschutz schlägt für den Vorbehalt diesen Satz vor: „Weil das Paket äusserliche Beschädigungen aufweist, behalte ich mir eine Meldung von Transportschäden vor.“ Der Zusteller hält ihn fest, du unterschreibst.
 
-## Beschädigtes Paket reklamieren: Welche Beweise brauchst du?
+## Welche Fotos und Beweise brauche ich für die Reklamation?
 
 Fotografier, bevor du etwas bewegst. GLS Österreich verlangt im Kern drei Dinge, und damit bist du bei jedem Paketdienst und Shop gut aufgestellt:
 
@@ -98,7 +98,7 @@ Vinted will zusätzlich Fotos des Artikels in der Verpackung, der Innen- und der
 
 Dann heb alles auf: DHL und die Schweizerische Post wollen das Paket samt Verpackung sehen, und DPD Schweiz bittet, Verpackung und Inhalt bis zu drei Monate nach der Zustellung aufzubewahren.
 
-## Bis wann musst du einen Transportschaden melden?
+## Welche Fristen gelten für die Schadensmeldung (DHL, Post, Vinted, eBay)?
 
 Am besten am selben Tag. Gegenüber einem Shop in Deutschland oder Österreich hast du keine kurze gesetzliche Frist, aber die Paketdienste geben dir meist nur 7 Tage ab Zustellung, die Schweizerische Post 8. Plattformen setzen eigene Fristen:
 

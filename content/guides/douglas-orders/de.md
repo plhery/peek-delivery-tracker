@@ -1,15 +1,15 @@
 ---
 title: Douglas Sendungsverfolgung: Lieferung, Rückgabe, Probleme
-description: Wo du deine Douglas-Bestellung in Deutschland, Österreich und der Schweiz verfolgst, wer sie liefert, was der Versand kostet und was tun bei Problemen.
+description: Douglas-Bestellung verfolgen (DE/AT/CH): DHL-Sendungsnummer, Versandkosten ab 34,95 €, 14 Tage Widerruf, Retourenschein und Douglas-Kundenservice-Kontakte.
 slug: douglas-sendungsverfolgung
 picture: Ein hoher Parfumflakon und ein Lippenstift neben einer kleinen Geschenkbox und einem Lieferwagen, und Pip steht auf der Geschenkbox.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-27
 ---
 
-Eine Bestellung von douglas.de verfolgst du mit der Sendungsnummer des Paketdienstes; den Versand bestätigt dir Douglas per E-Mail. In Deutschland liefert DHL im Standardversand in 1–3 Werktagen, ab 34,95 € versandkostenfrei. Ist ein Paket unvollständig, beschädigt oder ausgelaufen, meldest du dich beim Douglas-Kundenservice unter 0800 690 690 5 oder service@douglas.de.
+Deine Bestellung von **douglas.de** verfolgst du über den Link oder die Sendungsnummer in der Versandbestätigung per E-Mail (auch direkt in [Peek](/)). In Deutschland liefert DHL standardmäßig in 1–3 Werktagen und ab 34,95 € versandkostenfrei; in Österreich liefern DPD, die Österreichische Post oder Atalogic in 2–4 Werktagen. Bei fehlender, beschädigter oder ausgelaufener Ware erreichst du den Douglas-Kundenservice in Deutschland unter 0800 690 690 5 oder `service@douglas.de`.
 
-## Wer liefert meine Douglas-Bestellung?
+## Welcher Paketdienst liefert meine Douglas-Bestellung?
 
 In Deutschland nennen die AGB von Douglas DHL für die Standardlieferung:
 
@@ -48,7 +48,7 @@ Andere Shops: [Sendungsnummer finden](guide:find-tracking-number). Du weißt nic
 :::checker
 :::
 
-## Warum dauert meine Douglas-Lieferung, oder warum bewegt sich nichts?
+## Warum kommt meine Douglas-Bestellung später oder aktualisiert sich nicht?
 
 Meist steckt eines davon dahinter:
 
@@ -68,7 +68,7 @@ Meist steckt eines davon dahinter:
 
 Wann Warten noch normal ist: [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating) und [Lieferzeiten](guide:delivery-times).
 
-## Was kostet der Versand bei Douglas?
+## Wie hoch sind die Douglas-Versandkosten (DE, AT, CH)?
 
 **Deutschland.** Als Bestellsumme gilt die Zwischensumme aller Produkte, auch der Partnerprodukte, abzüglich aller Rabatte.
 
@@ -105,7 +105,7 @@ Erst schauen, dann melden. Der Reihe nach:
 
 Mehr: [Paket als zugestellt markiert, aber nicht erhalten](guide:delivered-not-received), [Paket verloren](guide:lost-parcel) und [Paket beschädigt](guide:damaged-parcel).
 
-## Douglas-Bestellung zurückgeben
+## Wie gebe ich eine Douglas-Bestellung zurück (14 Tage Widerruf)?
 
 **Deutschland.** Du kannst innerhalb von 14 Tagen widerrufen. Die Frist beginnt, wenn du die Ware erhältst, bei einer geteilten Bestellung mit dem letzten Paket. Widerrufen kannst du per Brief oder E-Mail oder online über die Widerrufsfunktion; dann bestätigt Douglas dir den Eingang per E-Mail. Schick die Ware danach innerhalb von 14 Tagen zurück.
 

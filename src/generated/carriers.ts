@@ -19706,6 +19706,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#1928dc"
     },
     {
+      "id": "aras-kargo",
+      "catalog": "aras-kargo",
+      "slug": "aras-kargo-otslezhivanie",
+      "title": "Отслеживание Aras Kargo: номера 60/65 и статусы Турции",
+      "name": "Aras Kargo",
+      "color": "#dc0812"
+    },
+    {
       "id": "cdek",
       "catalog": "cdek",
       "slug": "cdek-otslezhivanie",
@@ -22264,6 +22272,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#4e79e1"
     },
     {
+      "id": "posta-shqiptare",
+      "catalog": "posta-shqiptare",
+      "slug": "posta-shqiptare-spara-paket",
+      "title": "Posta Shqiptare spårning: AL-nummer, statusar och tull",
+      "name": "Posta Shqiptare",
+      "color": "#1a3292"
+    },
+    {
       "id": "dsv",
       "catalog": "dsv",
       "slug": "dsv-sparning",
@@ -22328,6 +22344,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DAO Track & Trace: find din pakke, daoSHOP og natlevering",
       "name": "DAO",
       "color": "#e30613"
+    },
+    {
+      "id": "cne",
+      "catalog": "cne",
+      "slug": "cne-express-sporing",
+      "title": "CNE Express sporing: 3A5V-numre, statusser og kontakt",
+      "name": "CNE Express",
+      "color": "#e83828"
     },
     {
       "id": "dsv",
@@ -22514,6 +22538,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#4e79e1"
     },
     {
+      "id": "geodis-pl",
+      "catalog": "geodis-pl",
+      "slug": "geodis-poland-sledovanie-zasielky",
+      "title": "GEODIS Poland sledovanie: číslo PL, statusy a doručenie",
+      "name": "GEODIS Poland",
+      "color": "#3100e6"
+    },
+    {
       "id": "sxw-express",
       "catalog": "sxw-express",
       "slug": "sxw-express-sledovanie-zasielky",
@@ -22670,6 +22702,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e30613"
     },
     {
+      "id": "cyprus-post",
+      "catalog": "cyprus-post",
+      "slug": "cyprus-post-urmarire-colet",
+      "title": "Urmărire Cyprus Post: coduri CY, statusuri și taxe vamale",
+      "name": "Cyprus Post",
+      "color": "#e4a50e"
+    },
+    {
       "id": "j-and-t-de",
       "catalog": "j-and-t-de",
       "slug": "jt-express-germania-urmarire-colet",
@@ -22692,6 +22732,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Urmărire colet GZYL: cod YL…YQ, statusuri, vamă și contact",
       "name": "GZYL",
       "color": "#4e79e1"
+    },
+    {
+      "id": "cne",
+      "catalog": "cne",
+      "slug": "cne-express-urmarire-colet",
+      "title": "Urmărire CNE Express: cod 3A5V, statusuri și contact",
+      "name": "CNE Express",
+      "color": "#e83828"
     },
     {
       "id": "dpd-ro",
@@ -22924,6 +22972,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#4e79e1"
     },
     {
+      "id": "cne",
+      "catalog": "cne",
+      "slug": "cne-express-pracenje-posiljke",
+      "title": "CNE Express praćenje pošiljke: 3A5V broj, statusi i pomoć",
+      "name": "CNE Express",
+      "color": "#e83828"
+    },
+    {
       "id": "russian-post",
       "catalog": "russian-post",
       "slug": "russian-post-pracenje-posiljke",
@@ -22982,6 +23038,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Lietuvos paštas siuntų sekimas: statusai ir paštomatai",
       "name": "Lietuvos paštas",
       "color": "#fedd00"
+    },
+    {
+      "id": "apc-overnight",
+      "catalog": "apc-overnight",
+      "slug": "apc-overnight-siuntos-sekimas",
+      "title": "APC Overnight sekimas: numeriai, būsenos ir pristatymas",
+      "name": "APC Overnight",
+      "color": "#243269"
     },
     {
       "id": "gzyl",

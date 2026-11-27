@@ -15966,6 +15966,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#045cd7"
     },
     {
+      "id": "zto-international",
+      "catalog": "zto-international",
+      "slug": "zto-international-tracking",
+      "title": "Rastreamento ZTO International: códigos 771 e status",
+      "name": "ZTO International",
+      "color": "#3a8eff"
+    },
+    {
       "id": "mayiyinfu",
       "catalog": "mayiyinfu",
       "slug": "mayi-yinfu-tracking",
@@ -16564,6 +16572,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Siuntos autobusais: encomendas de ônibus",
       "name": "Siuntos autobusais",
       "color": "#00843d"
+    },
+    {
+      "id": "zipasgo",
+      "catalog": "zipasgo",
+      "slug": "zipasgo-tracking",
+      "title": "Rastreamento ZipasGo: Parcel Stars, parceiras e ajuda",
+      "name": "ZipasGo",
+      "color": "#ffdb1c"
     },
     {
       "id": "dk-logistics-ee",
@@ -20876,6 +20892,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#045cd7"
     },
     {
+      "id": "zto-international",
+      "catalog": "zto-international",
+      "slug": "zto-international-tracking",
+      "title": "中通国际（ZTO International）查询：771 单号与状态",
+      "name": "ZTO International",
+      "color": "#3a8eff"
+    },
+    {
       "id": "mayiyinfu",
       "catalog": "mayiyinfu",
       "slug": "mayi-yinfu-wuliu-chaxun",
@@ -21482,6 +21506,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Siuntos autobusais 快递查询：立陶宛大巴包裹自提指南",
       "name": "Siuntos autobusais",
       "color": "#00843d"
+    },
+    {
+      "id": "zipasgo",
+      "catalog": "zipasgo",
+      "slug": "zipasgo-tracking",
+      "title": "ZipasGo 快递查询：Parcel Stars、合作承运商与帮助",
+      "name": "ZipasGo",
+      "color": "#ffdb1c"
     },
     {
       "id": "dk-logistics-ee",

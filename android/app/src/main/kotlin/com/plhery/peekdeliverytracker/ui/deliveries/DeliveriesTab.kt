@@ -403,7 +403,7 @@ internal class WindowArrangement(var last: DeliveriesArrangement? = null) {
         fun saver(launch: UUID): Saver<WindowArrangement, Any> = listSaver(
             save = { listOf(launch.toString(), it.last?.name) },
             restore = { saved ->
-                WindowArrangement((saved[1] as String?)?.takeIf { saved[0] == launch.toString() }?.let(DeliveriesArrangement::valueOf))
+                WindowArrangement(saved[1]?.takeIf { saved[0] == launch.toString() }?.let(DeliveriesArrangement::valueOf))
             },
         )
     }

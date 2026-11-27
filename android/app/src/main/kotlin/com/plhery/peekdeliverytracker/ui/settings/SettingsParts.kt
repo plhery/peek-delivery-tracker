@@ -446,7 +446,7 @@ private fun SettingsPickerRow(
                 trailing = value.right,
                 leading = if (stacked) value.left else null,
                 onClose = {
-                    menus?.content = null
+                    menus.content = null
                     returnFocus.request()
                 },
                 behind = behind,

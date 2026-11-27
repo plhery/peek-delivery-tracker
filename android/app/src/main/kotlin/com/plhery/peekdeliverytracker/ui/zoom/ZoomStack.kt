@@ -291,7 +291,7 @@ fun ZoomStack(
             // The page's bar, outside its container: it stays at the window's top while the page zooms, shrinks or
             // is swiped back under it, its items fading in and out with the flight.
             Box(Modifier.fillMaxSize().then(if (flight.flying) Modifier.clearAndSetSemantics {} else Modifier)) {
-                CompositionLocalProvider(LocalTabBarPadding provides PaddingValues(0.dp), LocalMaterialBackdrop provides backdrop) { bar?.invoke() }
+                CompositionLocalProvider(LocalTabBarPadding provides PaddingValues(0.dp), LocalMaterialBackdrop provides backdrop) { bar() }
             }
         }
         // Nothing takes a touch while the page opens or closes.

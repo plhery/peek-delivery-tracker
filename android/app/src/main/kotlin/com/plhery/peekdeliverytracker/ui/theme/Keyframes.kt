@@ -144,7 +144,7 @@ private class ResolvedTrack(private val initialValue: Double, private val initia
             val previous = segments.lastOrNull()
             val cubicBefore = previous != null && previous.keyframe is CubicKeyframe
             if (previous != null && cubicBefore) {
-                previous.endVelocity = (previous.keyframe as CubicKeyframe).endVelocity ?: when (key) {
+                previous.endVelocity = previous.keyframe.endVelocity ?: when (key) {
                     is MoveKeyframe -> 0.0
                     is LinearKeyframe -> (key.to - value) / key.duration * key.timingCurve.velocity(0.0)
                     is CubicKeyframe -> key.startVelocity ?: slope(previous, key)

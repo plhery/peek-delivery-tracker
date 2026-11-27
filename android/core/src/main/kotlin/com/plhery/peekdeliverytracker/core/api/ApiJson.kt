@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.core.api
 
 import java.util.UUID
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.builtins.ListSerializer
@@ -53,6 +54,7 @@ object TrackingEventsSerializer : KSerializer<List<TrackingEvent>> {
  * kind of call, a reason, an input or a step added after a release, reads as none, and the parcel, link or answer it
  * came in still reads.
  */
+@OptIn(ExperimentalSerializationApi::class)
 class LenientSerializer<T : Any>(private val strict: KSerializer<T>) : KSerializer<T?> {
     override val descriptor: SerialDescriptor = strict.nullable.descriptor
 

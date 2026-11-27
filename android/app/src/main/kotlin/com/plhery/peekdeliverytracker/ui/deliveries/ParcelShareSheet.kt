@@ -367,7 +367,6 @@ internal fun ParcelShareHost(state: DeliveriesState) {
     val news = work?.takeIf { current }?.news
     LaunchedEffect(news) {
         val ready = news ?: return@LaunchedEffect
-        val work = work ?: return@LaunchedEffect
         if (ready.copy) {
             // The button says so for the eyes on every version. TalkBack hears the iPhone's announcement up to Android
             // 12L; from 13 it hears the system's overlay, and nothing of the app's beside it.

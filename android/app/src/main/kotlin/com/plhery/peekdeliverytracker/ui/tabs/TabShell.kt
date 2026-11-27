@@ -283,7 +283,8 @@ class WindowLayers private constructor(restored: List<String>) {
         LaunchedEffect(this) {
             if (!restoring) return@LaunchedEffect
             val start = withFrameNanos { it }
-            while (withFrameNanos { it } - start < RESTORING_NANOS) Unit
+            var now = start
+            while (now - start < RESTORING_NANOS) now = withFrameNanos { it }
             restoring = false
         }
         layers.forEachIndexed { index, layer ->

@@ -119,8 +119,8 @@ private fun <T> List<T>.firstById(id: (T) -> UUID): Map<UUID, T> {
 fun Parcel.automaticallyChangedFrom(at: Instant = AppClock.now()): CarrierId? {
     val from = carrierData?.autoChangedFrom ?: return null
     if (from == carrier || from == CarrierId.Unknown || from == CarrierId.InternationalPost) return null
-    if (carrierData?.autoChangedTo != carrier) return null
-    val changed = carrierData?.autoChangedAt?.let(DateParser::date) ?: return null
+    if (carrierData.autoChangedTo != carrier) return null
+    val changed = carrierData.autoChangedAt?.let(DateParser::date) ?: return null
     if (at < changed || at.timeIntervalSince(changed) >= 12 * 60 * 60) return null
     return from
 }

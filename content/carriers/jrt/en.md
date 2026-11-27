@@ -6,7 +6,7 @@ published: 2026-10-30
 updated: 2026-11-27
 ---
 
-JRT (今日通, Jinritong, 厦门今日通商贸有限公司) is a cross-border freight forwarder in Xiamen, China, whose tracking numbers run `JRT`, ten digits and `MM`. Paste your `JRT…MM` number in the box above to follow the parcel from China through flight departure, import customs and last-mile hand-over: JRT's tracker relays scans from DHL into Europe (CTT Express in Spain, InPost in Poland, FedEx on its Ireland FedEx line), UPS into the United States and J&T Express into Mexico.
+JRT (今日通, Jinritong, 厦门今日通商贸有限公司) is a cross-border freight forwarder in Xiamen, China, whose tracking numbers run `JRT`, ten digits and `MM`. Paste your `JRT…MM` number in the box above to follow the parcel from China through flight departure, import customs and last-mile hand-over: JRT's tracker copies DHL's scans into Europe, UPS's into the United States and J&T Express Mexico's into Mexico, while its lines into Spain and Poland end with CTT Express and InPost, and its FedEx line to Ireland with FedEx.
 
 ## JRT tracking number: what it looks like
 

@@ -1,6 +1,6 @@
 ---
 title: MRW tracking: number, statuses in English and contact
-description: Track an MRW parcel in Spain or Portugal: 12-digit shipment number, Spanish status translations, MRW Point pickup, 7-day damage claims and customer service.
+description: Track an MRW parcel in Spain or Portugal: 12-digit shipment number, Spanish status translations, MRW Point pickup, 7-day hidden-damage claims and customer service.
 slug: mrw-tracking
 published: 2026-10-11
 updated: 2026-11-27

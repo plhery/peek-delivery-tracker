@@ -100,7 +100,7 @@ Enter your 7-digit consignment number and delivery postcode on APC Choice, or pa
 
 ### What does "Carded" mean on APC tracking, and how long do APC hold parcels?
 
-`Carded` means the driver attempted delivery while nobody was in and left a "Sorry we missed you" card. Rearrange delivery, divert to a Parcelly store (over 2,500 UK locations) or book depot collection in APC Choice within three working days, or APC may return the parcel to the sender.
+`Carded` means the driver attempted delivery while nobody was in and left a "Sorry we missed you" card. Rearrange delivery, divert to a Parcelly store (over 2,500 UK locations) or book depot collection in APC Choice (as the service and the sender allow) within three working days, or APC may return the parcel to the sender.
 
 ### What time does APC Overnight deliver, and is there a 2-hour window?
 

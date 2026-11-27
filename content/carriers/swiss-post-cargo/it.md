@@ -85,7 +85,7 @@ Dal 1° marzo 2025 Swiss Post Cargo è il marchio della logistica merci della Po
 
 ### Come avviene la consegna di una spedizione Swiss Post Cargo?
 
-Di norma il collettame arriva il giorno lavorativo successivo entro le 17.00 (secondo giorno lavorativo nelle valli alpine di Vallese, Ticino e Grigioni), al pianterreno, rampa o bordo strada in orario d'ufficio e contro firma. Preavviso, appuntamento, consegna al piano e secondo recapito valgono solo se prenotati dal mittente.
+Secondo l'opuscolo della Posta, di norma il collettame arriva il giorno lavorativo successivo, entro le 17.00 dove arriva un mezzo pesante (il secondo giorno lavorativo nelle valli alpine e nelle zone di montagna difficili da raggiungere di Vallese, Ticino e Grigioni), al pianterreno, rampa o bordo strada in orario d'ufficio e contro firma. Preavviso, appuntamento, consegna al piano e secondo recapito valgono solo se prenotati dal mittente.
 
 ### Perché ho ricevuto un SMS da Swiss Post Cargo o dalla Posta?
 

@@ -94,11 +94,11 @@ It shows Omniva's English statuses, the Omniva site of each scan on a map, the d
 
 ### How do I track an Omniva (Estonian Post) parcel?
 
-Enter your shipment tracking code (such as a `JJEE` code or a 13-character postal code ending `EE`) on minu.omniva.ee, in the Omniva app or in the box above. Omniva tracks by shipment code rather than phone number, though an e-service account at minu.omniva.ee lists your incoming parcels.
+Enter your shipment tracking code (such as a `JJEE` code or a 13-character postal-format number ending `EE`) on minu.omniva.ee, in the Omniva app or in the box above. Omniva tracks by shipment code rather than phone number, though an e-service account at minu.omniva.ee lists your incoming parcels.
 
 ### How long does Omniva take to deliver in Estonia, Latvia and Lithuania?
 
-Omniva estimates 1 to 2 working days within one Baltic country and 2 to 3 working days between them from hand-over. Couriers in Estonia and Lithuania deliver the next working day and no later than 3 days after hand-over (within 3 days in Latvia).
+Omniva estimates 1 to 2 working days within one Baltic country and 2 to 3 working days between them from hand-over. Its Estonian and Lithuanian pages say couriers deliver the next day and no later than 3 days after hand-over; its Latvian page gives only the 3 days.
 
 ### How long does an Omniva parcel machine keep a parcel, and can I extend it?
 

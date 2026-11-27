@@ -1,12 +1,12 @@
 ---
 title: CTT Express tracking: statuses in English and contact
-description: Track a CTT Express parcel in Spain or Portugal: the 22-digit number, its Spanish statuses in plain English, Collectt points, missed deliveries and who to call.
+description: Track a CTT Express parcel in Spain or Portugal: 22- and 25-digit numbers vs CTT Portugal, Spanish statuses in English, Collectt points, PIN pickup and phones.
 slug: ctt-express-tracking
 published: 2026-10-11
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-CTT Express is the Spanish parcel company of Portugal's CTT group, formerly Tourline Express, delivering across Spain and Portugal. Type your number into the [localizador](https://www.cttexpress.com/localizador-de-envios/) on cttexpress.com, or paste it in the box above. The number comes from the sender, usually the shop, and CTT Express sends it to you by SMS or email. CTT Express isn't CTT, Portugal's post: a code with letters ending in `PT` is a [CTT](carrier:ctt) number.
+Track a CTT Express parcel in Spain or Portugal by entering your 22- or 25-digit shipment code on [cttexpress.com/localizador-de-envios](https://www.cttexpress.com/localizador-de-envios/) or in the box above. CTT Express (formerly Tourline Express) is the Spanish express parcel subsidiary of Portugal's CTT group — separate from [CTT](carrier:ctt), Portugal's national post, which uses letter codes ending in `PT`; CTT Express sends your code by SMS or email.
 
 ## Your CTT Express tracking number
 
@@ -88,25 +88,25 @@ Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local 
 
 ## Questions about CTT Express tracking
 
+### What is the difference between CTT Express and CTT tracking?
+
+CTT (Correios de Portugal) is Portugal's national post and uses letter codes ending in `PT`, tracked on ctt.pt; CTT Express is the group's Spanish express parcel carrier (formerly Tourline Express) and uses 22- or 25-digit codes on cttexpress.com. Because the two trackers partially overlap, try the other site if one returns no result.
+
 ### What is CTT Express?
 
-It's the Spanish express parcel subsidiary of Portugal's CTT group, which renamed Tourline Express to CTT Express in 2019. It isn't [CTT](carrier:ctt), Portugal's post, though both belong to the group. It delivers across Spain, including the Balearic and Canary Islands, Ceuta and Melilla, and Portugal.
+It is the Spanish express parcel subsidiary of Portugal's CTT group, renamed from Tourline Express in 2019, delivering across Spain (including the Balearic and Canary Islands, Ceuta and Melilla) and Portugal.
 
 ### Does CTT Express deliver on Saturday?
 
-Only in the Christmas season, in Spain. Otherwise it delivers Monday to Friday.
+Only during the Christmas season in Spain; the rest of the year CTT Express delivers Monday to Friday, generally from 9:00 to 19:00.
 
 ### Can I track CTT Express in English?
 
-No. Its tracking is only in Spanish; the table above translates the common statuses.
-
-### Does CTT Express have live chat?
-
-No chat or WhatsApp appears on its site: phone, email and the contact form are the channels.
+No. Both cttexpress.com and its tracking page appear in Spanish only (even with the English switch), and customer service has no English channel, chat or WhatsApp — contact is by phone (Spain: 900 841 352 or 916 602 200; Portugal: 21 047 16 16), email or the web form.
 
 ### Can I track CTT Express without a tracking number?
 
-No. CTT Express's tracker has one box, for the tracking number, and its contact form asks for the number too. Look for it in the SMS or confirmation email, or ask the shop that sent the parcel.
+No. Both the tracker and the customer-service form require your shipment code. Look in CTT Express's SMS or confirmation email, or ask the shop that sent the parcel.
 
 :::sources
 - [CTT Express: Localizador de envíos](https://www.cttexpress.com/localizador-de-envios/) – tracker, changing a delivery, delivery email

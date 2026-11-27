@@ -1,13 +1,13 @@
 ---
 title: Changer l'adresse de livraison d'un colis : comment faire
-description: Changer l'adresse de livraison d'un colis : ce que permettent eBay et Vinted, puis Colissimo, Chronopost, DPD, bpost et La Poste suisse.
+description: Comment changer l'adresse ou le jour de livraison d'un colis Colissimo (La Poste), Chronopost, DPD, bpost ou La Poste suisse, et sur eBay ou Vinted.
 slug: changer-adresse-livraison-colis
 picture: Une route qui se divise à un panneau, un côté vers une maison et l'autre vers une consigne à colis, une camionnette qui prend le nouveau virage, et Pip qui regarde la route dans cette direction.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-27
 ---
 
-Tant que ta commande n'est pas expédiée, passe par la boutique : sur eBay ou Vinted, tu demandes au vendeur d'annuler pour racheter avec la bonne adresse. Une fois le colis parti, adresse-toi au transporteur avec ton numéro de suivi : il propose souvent un autre jour, un voisin, un lieu sûr ou un point relais près de chez toi. Une adresse dans une autre ville, en revanche, est rarement possible : c'est l'expéditeur qui décide de ce que tu peux modifier. Et une fois le colis en cours de livraison, il est en général trop tard.
+Pour changer l'adresse de livraison d'un colis avant l'expédition, passe par la boutique (sur eBay ou Vinted, il faut annuler avec le vendeur et racheter). Une fois le colis parti, utilise le lien ou le suivi du transporteur : La Poste permet de modifier la livraison d'un colis [Colissimo](carrier:la-poste) jusqu'à minuit la veille, Chronopost et DPD proposent Predict, bpost une adresse proche ou un voisin, et La Poste suisse un réacheminement dans « Mes envois » ; en cours de livraison, il est en général trop tard.
 
 ## Peut-on changer l'adresse de livraison après commande ?
 
@@ -40,9 +40,9 @@ Pas de numéro, ou une option qui demande un compte gratuit chez le transporteur
 
 > Un SMS qui te demande de « mettre à jour ton adresse » ou de payer une petite somme avant la livraison, c'est l'arnaque classique. Les vraies options de livraison sont sur le site ou dans l'app du transporteur, derrière ton numéro de suivi : [comment repérer un faux SMS de colis](guide:delivery-scam-texts).
 
-## Changer l'adresse de livraison chez DPD, bpost, La Poste suisse et les autres
+## Changer l'adresse de livraison chez Colissimo, DPD, bpost et La Poste suisse
 
-Peu de transporteurs acceptent une adresse dans une autre ville : La Poste suisse accepte toute adresse en Suisse ou au Liechtenstein, et DPD Belgique propose « une autre adresse de livraison ». Chez les autres, les choix restent près de l'adresse d'origine.
+Pour un colis [Colissimo](carrier:la-poste), La Poste (juin 2025) indique qu'il est possible de modifier la livraison jusqu'à minuit la veille. Pour une nouvelle adresse dans une autre ville, seuls La Poste suisse (Suisse et Liechtenstein) et DPD Belgique l'acceptent ; ailleurs, les options restent proches de l'adresse initiale :
 
 | Transporteur | Où le colis peut aller à la place | Coût |
 | --- | --- | --- |

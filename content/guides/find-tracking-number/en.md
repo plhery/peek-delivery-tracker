@@ -1,13 +1,13 @@
 ---
 title: How to find your tracking number, or track without one
-description: Where to find your tracking number in a shipping email, order page or post office receipt, what to do if you lost it, and how to track a parcel without one.
+description: Where to find your tracking number in shipping emails, Amazon, eBay, Etsy or Vinted orders and carrier cards, and how to track without one (never by name).
 slug: how-to-find-tracking-number
 picture: A shipping email with the tracking number RR000000005CH highlighted in yellow, a barcode label beside it, and a smiling Pip.
 published: 2026-10-09
-updated: 2026-11-07
+updated: 2026-11-27
 ---
 
-You'll usually find your tracking number in the shop's shipping email or text, or in your order on its website or app, one click past the order number. If you sent the parcel yourself, it's on your post office receipt. No carrier will track a package by your name or address, but a [missed-delivery card](guide:missed-delivery), some carriers' free accounts for incoming parcels, or the sender can still get you tracking.
+Your tracking number is in the shop's shipping confirmation email or text, or inside your order on Amazon, eBay, Etsy or Vinted — one click past the order number, which won't work on a carrier's site. If you sent the parcel yourself, check your post office receipt or label copy; if you missed a delivery, cards from Canada Post (15 digits) and Evri (8 digits) work in their trackers too. No carrier tracks a package by your name or address alone, so without a number you need the sender or a carrier's incoming-parcel account (such as the DPD app, Canada Post automatic tracking or MyPost).
 
 ## Where do I find my tracking number?
 
@@ -78,7 +78,7 @@ Some senders give a parcel their own reference number, and some carriers can sea
 
 ## Can you track a parcel with just a name or address?
 
-No, not on a carrier's tracking page, and not by phone either. The carriers say so:
+No: neither a carrier's tracking page nor phone support can look up a parcel by your name or address ("For privacy reasons, we don't keep records of shipments by address or name," says Canada Post). The carriers spell it out:
 
 - **Canada Post**: "For privacy reasons, we don't keep records of shipments by address or name."
 - **Australia Post**: name or address "can't be used to locate items".

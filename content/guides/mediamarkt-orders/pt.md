@@ -1,17 +1,17 @@
 ---
 title: Encomendas MediaMarkt e Darty: seguimento e entregas
-description: Em Portugal, a MediaMarkt passou a chamar-se Darty. Onde vês o seguimento, prazos e portes, e o que fazer se a encomenda não chega ou chega danificada.
+description: Entrega ao domicílio e seguimento de encomendas MediaMarkt em Portugal (agora Darty): prazos, portes, recolha em loja, contacto 210 042 210 e devoluções.
 slug: seguimento-encomenda-mediamarkt-darty
 picture: Uma caixa plana de televisor e uma encomenda pequena ao lado de uma carrinha de entregas, o Pip contente e uma loja com uma placa de recolha.
 published: 2026-10-17
-updated: 2026-11-09
+updated: 2026-11-27
 ---
 
-Em Portugal, a MediaMarkt passou a chamar-se Darty: o grupo Fnac Darty comprou a operação portuguesa e mudou a marca. O histórico das encomendas passou para o novo site, darty.pt, e o que compraste na MediaMarkt continua válido. Para seguir uma encomenda, usa o link do e-mail da transportadora ou abre «Minha conta» em darty.pt.
+Em Portugal, a MediaMarkt passou a chamar-se Darty (do grupo Fnac Darty), e o histórico de encomendas e garantias da MediaMarkt transitou para darty.pt. Na entrega ao domicílio (em Portugal continental, de segunda a sexta das 8h às 19h em artigos standard e segunda a sábado das 8h às 20h em volumosos), acompanhas o envio pelo link no e-mail da transportadora ou em «Minha conta» em darty.pt; se precisares de apoio, a Darty atende no 210 042 210.
 
 ## Que transportadora entrega a minha encomenda MediaMarkt ou Darty?
 
-A Darty não diz que transportadoras usa: fala sempre em «transportadora». O que muda é o tipo de entrega. A Darty entrega só em Portugal continental; para os Açores e a Madeira, pede-te que a contactes.
+A Darty não divulga o nome das transportadoras usadas na entrega ao domicílio em Portugal continental (para os Açores e a Madeira pede contacto prévio): o horário e o tipo de entrega variam consoante o tamanho do artigo ou a recolha grátis em loja.
 
 | O que encomendas | Como chega | Onde |
 | --- | --- | --- |

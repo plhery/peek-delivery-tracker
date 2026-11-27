@@ -1,12 +1,12 @@
 ---
 title: YunExpress suivi : numéro YT, statuts et qui livre
-description: Suivre un colis YunExpress (Yun Express) venu de Chine : le numéro YT, les statuts en anglais expliqués, qui livre en France, en Belgique et en Suisse.
+description: Suivi colis YunExpress (Yun Express) en France, Belgique et Suisse : numéro YT à 16 chiffres, qui livre en dernier kilomètre, statuts en anglais et délais.
 slug: yunexpress-suivi
 published: 2026-10-10
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-YunExpress, aussi écrit Yun Express, est une société de logistique chinoise, basée à Shenzhen, qui expédie depuis la Chine les petits colis de vendeurs en ligne, notamment de vendeurs présents sur Amazon, Temu, SHEIN ou la Fnac. Pour suivre ton colis, saisis le numéro qui commence par YT sur [yuntrack.com](https://www.yuntrack.com/), le site de suivi de YunExpress, ou colle-le dans le champ ci-dessus. YunExpress ne décrit aucun SMS ni e-mail aux destinataires : le numéro se trouve dans l'e-mail d'expédition de la boutique ou sur la page de ta commande.
+Pour le suivi d'un colis YunExpress (Yun Express) en France, en Belgique ou en Suisse, saisis ton numéro `YT` suivi de 16 chiffres sur [yuntrack.com](https://www.yuntrack.com/) ou dans le champ ci-dessus. Basée à Shenzhen depuis 2014, YunExpress achemine les commandes de boutiques en ligne (Amazon, Temu, SHEIN, Fnac…) depuis la Chine puis confie le dernier kilomètre à un transporteur local, dont le numéro apparaît dans « Last Mile Tracking ».
 
 ## Numéro de suivi YunExpress : YT et 16 chiffres
 
@@ -88,25 +88,25 @@ Quand YunExpress donne le numéro du transporteur local sous une forme connue, P
 
 ## Questions sur le suivi YunExpress
 
+### Qui livre un colis YunExpress en France ?
+
+YunExpress ne nomme aucun transporteur partenaire unique sur ses pages françaises : il confie le dernier kilomètre à des partenaires locaux. Ouvre ton numéro YT sur yuntrack.com (colonne « Last Mile Tracking » et « Additional Notes ») ou dans Peek pour voir quel transporteur prend le relais et son numéro local.
+
 ### YunExpress, c'est quoi ?
 
-Une société chinoise de logistique pour le commerce en ligne : Shenzhen Qianhai YunExpress Logistics Co., Ltd., fondée à Shenzhen en 2014. Elle dit desservir plus de 220 pays et régions depuis la Chine, et être devenue partenaire logistique recommandé d'Amazon en 2017, puis partenaire officiel de la Fnac en 2020.
-
-### Yuntrack, c'est quoi ?
-
-Le site de suivi officiel de YunExpress, sa « Track & Trace Platform » : le lien « Tracking » et le champ de suivi de yunexpress.com y mènent. En anglais et sans compte, il prend jusqu'à 100 numéros YT par recherche.
+Une société chinoise de logistique pour le commerce en ligne (Shenzhen Qianhai YunExpress Logistics Co., Ltd.), fondée à Shenzhen en 2014, qui dessert plus de 220 pays et régions et s'appuie sur sa plateforme de suivi officielle yuntrack.com (en anglais, jusqu'à 100 numéros YT sans compte).
 
 ### Combien de temps met un colis YunExpress pour arriver en France ?
 
-Selon les estimations de YunExpress pour les vendeurs, 3 à 5 jours ouvrés avec Standard Express et 6 à 10 avec sa ligne économique. Vers la Belgique, 3 à 6 jours en standard et 6 à 10 en économique ; vers la Suisse, 6 à 9 en économique. Tu ne sais en général pas quelle ligne le vendeur a choisie, et un contrôle douanier ajoute du temps.
+Selon les estimations de YunExpress pour les vendeurs, 3 à 5 jours ouvrés avec Standard Express et 6 à 10 avec sa ligne économique vers la France (3 à 6 jours standard / 6 à 10 économique vers la Belgique ; 6 à 9 économique vers la Suisse), hors contrôle douanier.
 
 ### Pourquoi un colis Amazon arrive-t-il avec YunExpress ?
 
-Parce que certains vendeurs Amazon expédient eux-mêmes depuis la Chine avec YunExpress : selon lui, son service FBM Ship+, pensé pour eux, est ouvert notamment sur le site Amazon français. En cas de problème, adresse-toi au vendeur ou à Amazon.
+Parce que certains vendeurs Amazon expédient eux-mêmes depuis la Chine avec YunExpress (service FBM Ship+, ouvert sur Amazon France). En cas de problème, adresse-toi au vendeur ou à Amazon.
 
 ### Peut-on retirer un colis YunExpress en point relais ?
 
-Oui, si le vendeur a choisi une ligne de retrait de YunExpress : le suivi affiche alors l'adresse du point relais ou de la consigne. Sinon, après une livraison manquée, demande au transporteur local nommé dans le suivi où ton colis t'attend.
+Oui si le vendeur a choisi une ligne de retrait de YunExpress : le suivi affiche alors l'adresse du point relais ou de la consigne. Sinon, après une livraison manquée, consulte les règles du transporteur local indiqué dans le suivi.
 
 :::sources
 - [YunExpress : Track & Trace Platform, Yuntrack](https://www.yuntrack.com/) – site de suivi de YunExpress, numéro YT, anglais uniquement

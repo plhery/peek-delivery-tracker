@@ -1,17 +1,17 @@
 ---
 title: Cómo cambiar la dirección de entrega de un paquete
-description: Cómo cambiar la dirección o el día de entrega de un paquete: qué permiten Amazon, eBay y Vinted, y qué dejan cambiar Correos, GLS e InPost.
+description: Cómo cambiar la dirección de envío en Amazon, eBay y Vinted, y cómo modificar la entrega en Correos (Correos Modify), GLS, InPost y CTT Express en España.
 slug: cambiar-direccion-de-entrega
 picture: Una carretera que se bifurca en un poste indicador, hacia una casa por un lado y hacia un locker por el otro, una furgoneta que toma el nuevo desvío y Pip mirando la carretera hacia allí.
 published: 2026-10-14
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Si el pedido aún no ha salido, cambia la dirección en la tienda: Amazon te deja modificarla hasta que el pedido entra en el proceso de envío, y en eBay le pides al vendedor que cancele para volver a comprar. Si ya va de camino, el transportista suele dejarte elegir un vecino, un punto de recogida o una oficina desde el enlace de su SMS o su web, y a veces otro día. Mandarlo a una dirección lejana casi nunca es posible, porque quien decide qué puedes cambiar es el remitente, y cuando el paquete ya está en reparto suele ser tarde.
+Para cambiar la dirección de envío de un pedido que aún no ha salido, hazlo desde la tienda: en Amazon.es entra en **Mis pedidos → Detalles del pedido → Modificar** (hasta que entre en proceso de envío, o durante 30 minutos en Marketplace), y en eBay o Vinted acuerda cancelar y volver a comprar. Si el paquete ya se envió, solo el transportista puede redirigirlo antes de que salga a reparto —Correos (Correos Modify, misma provincia), GLS (mismo código postal) o CTT Express (misma zona)— siempre que el remitente lo permita.
 
 ## ¿Puedo cambiar la dirección de entrega después de comprar?
 
-Normalmente sí, mientras el pedido no haya salido del almacén.
+Sí en Amazon.es (mientras no entre en el proceso de envío); en eBay y Vinted, en cambio, hay que cancelar antes del envío y volver a comprar con la dirección corregida:
 
 | Tienda | Cómo cambiar la dirección | Hasta cuándo |
 | --- | --- | --- |
@@ -46,7 +46,7 @@ A veces, y se lo pides al transportista, no a la tienda. Amazon lo dice tal cual
 
 ## Cómo cambiar la dirección de entrega en Correos, GLS e InPost
 
-Correos y GLS te dejan acercar el paquete a donde estés, pero no mandarlo lejos.
+Correos (Correos Modify, dentro de la misma provincia), GLS (en el mismo código postal) y CTT Express (en la misma zona de reparto) permiten redirigir el paquete antes de que salga a reparto, mientras que InPost no cambia el Punto Pack o Locker una vez admitido:
 
 | Transportista | Adónde puedes mandarlo | Condiciones |
 | --- | --- | --- |

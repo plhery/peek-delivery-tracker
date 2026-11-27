@@ -1,12 +1,12 @@
 ---
 title: SpeedPAK tracking: eBay parcels, statuses and who to ask
-description: Track an eBay SpeedPAK parcel: what the 28-character number looks like, what each status means, who delivers it and who to ask when it stalls.
+description: Track an eBay SpeedPAK parcel (28-character ES, EE or EX number via Orange Connex): what statuses and LM Carrier mean, transit times and when to claim on eBay.
 slug: speedpak-tracking
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-SpeedPAK is eBay's shipping service for cross-border orders, run with the logistics company Orange Connex and built for parcels leaving China. Its number has 28 characters and starts with ES, EE or EX: type it on Orange Connex's tracking page, [orangeconnex.com/tracking](https://www.orangeconnex.com/tracking), or in the box above. On eBay, the number shows as a link beside the item in your Purchase history.
+Track an eBay SpeedPAK parcel by pasting its 28-character tracking number (starting `ES`, `EE` or `EX`) into the box above or on [orangeconnex.com/tracking](https://www.orangeconnex.com/tracking). SpeedPAK is eBay's cross-border shipping service run with Orange Connex for parcels from China; find your number next to the item in your eBay Purchase history, and watch for the `LM Carrier` line naming the local carrier that delivers the last leg.
 
 ## SpeedPAK tracking number: what it looks like
 
@@ -96,21 +96,25 @@ Peek puts each scan on a map. For notifications, choose "Every scan", "Important
 
 ## Questions about SpeedPAK tracking
 
+### What does "Destination DC arrival" or "Departed from Destination DC" mean?
+
+It means your SpeedPAK parcel has reached or left a destination distribution centre (depot) in your country or region, after clearing import customs and ahead of handover to the last-mile carrier (`LM Carrier`).
+
 ### What is eBay SpeedPAK?
 
-It is an eBay shipping service for cross-border orders, run by Orange Connex and designed for parcels from China. eBay also lists it from a few other countries; from Germany, it goes to the US, the UK and Australia.
+It is eBay's cross-border shipping service run with Orange Connex, built for parcels from China (and offered from a few other countries, such as Germany to the US, UK and Australia).
 
 ### Is SpeedPAK legit?
 
-eBay presents SpeedPAK as its own shipping service, built with Orange Connex. If the parcel doesn't arrive, you report it to the seller and eBay as for any eBay order.
+Yes: eBay operates SpeedPAK with Orange Connex. If tracking shows no movement for more than five days or the parcel does not arrive, contact the seller and report it through eBay (within 30 calendar days of the estimated delivery date on eBay UK).
 
 ### Is SpeedPAK delivered by Royal Mail?
 
-No official page says which carrier delivers SpeedPAK parcels in the UK. The `LM Carrier` line in the tracking names it for your parcel, when SpeedPAK publishes it.
+No eBay or Orange Connex page names a single UK delivery partner. Check the `LM Carrier` line in your tracking history for the local carrier and its tracking number, or ask the seller.
 
 ### Why does my SpeedPAK tracking show Chinese?
 
-Orange Connex's page shows English or Chinese, and opens in Chinese unless you chose English there before or your browser's language is set to plain "en" (a British or American English setting doesn't count). Switch the language on the page; a few lines stay in Chinese even then.
+Orange Connex's tracker displays Chinese or English and defaults to Chinese unless English is chosen on the page or your browser is set to plain `en`. Switch the page language to English; occasional Chinese lines like `货物运输中` ("goods in transit") may still appear.
 
 :::sources
 - [Orange Connex: Tracking For SpeedPAK](https://www.orangeconnex.com/tracking) – languages, contact lines and hours, status wordings, last-mile carriers

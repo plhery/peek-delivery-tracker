@@ -16,7 +16,7 @@ Procure o código da guia (*número de guía*) no e-mail de envio da loja online
 | --- | --- |
 | `JMX482917364058` | Guia da J&T Express México: `JMX` + 12 dígitos. |
 
-**Por que a J&T Express México pede 4 dígitos do telefone.** Em [jtexpress.mx/trajectoryQuery](https://www.jtexpress.mx/trajectoryQuery), digitar apenas o código `JMX` não libera o histórico de movimentações: o rastreador exige os **últimos 4 dígitos do telefone do destinatário ou do remetente** cadastrado na guia. Tenha em mãos o número informado na compra ao consultar. Se sua encomenda no México tiver uma *guía* com código de filial (como `MEX48WW2917364`, fictício) ou 11 a 13 dígitos sem `JMX`, verifique a Paquetexpress; para outros padrões, veja [formatos de código de rastreamento](guide:tracking-number-formats).
+**Por que a J&T Express México pede 4 dígitos do telefone.** Em [jtexpress.mx/trajectoryQuery](https://www.jtexpress.mx/trajectoryQuery), digitar apenas o código `JMX` não libera o histórico de movimentações: o rastreador exige os **últimos 4 dígitos do telefone do destinatário ou do remetente** cadastrado na guia. Tenha em mãos o número informado na compra ao consultar. Se sua encomenda no México tiver uma *guía* com código de filial (como `MEX48WW2917364`, fictício) ou 11 a 13 dígitos sem `JMX`, verifique a [Paquetexpress](carrier:paquetexpress); para outros padrões, veja [formatos de código de rastreamento](guide:tracking-number-formats).
 
 ## Como funcionam as atualizações da J&T Express México
 

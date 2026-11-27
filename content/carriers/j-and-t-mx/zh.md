@@ -16,7 +16,7 @@ updated: 2026-11-24
 | --- | --- |
 | `JMX482917364058` | 墨西哥极兔运单号：`JMX` 加 12 位数字。 |
 
-**为什么查询需要输入手机号后 4 位？** 在 [jtexpress.mx/trajectoryQuery](https://www.jtexpress.mx/trajectoryQuery) 上，仅输入 `JMX` 单号不会展示扫描轨迹——极兔查件系统要求同时验证运单上登记的**收件人或寄件人手机号后 4 位**。查询前请准备好下单时填写的手机号码。如果你的墨西哥包裹单号是网点字母代码格式（如虚构示例 `MEX48WW2917364`）或不含 `JMX` 的 11 至 13 位编号，请核对是否属于 Paquetexpress；其他快递单号规则见[运单号格式说明](guide:tracking-number-formats)（英文）。
+**为什么查询需要输入手机号后 4 位？** 在 [jtexpress.mx/trajectoryQuery](https://www.jtexpress.mx/trajectoryQuery) 上，仅输入 `JMX` 单号不会展示扫描轨迹——极兔查件系统要求同时验证运单上登记的**收件人或寄件人手机号后 4 位**。查询前请准备好下单时填写的手机号码。如果你的墨西哥包裹单号是网点字母代码格式（如虚构示例 `MEX48WW2917364`）或不含 `JMX` 的 11 至 13 位编号，请核对是否属于 [Paquetexpress](carrier:paquetexpress)；其他快递单号规则见[运单号格式说明](guide:tracking-number-formats)（英文）。
 
 ## 墨西哥极兔物流轨迹如何显示？
 

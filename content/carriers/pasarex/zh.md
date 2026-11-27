@@ -14,17 +14,17 @@ PasarEX 同时作为报关代理为包裹办理清关，因此其追踪节点从
 
 Peek 接受长度为 6 至 30 位、包含字母和数字（至少含 1 位数字）的 PasarEX 单号。其中有一种格式为 PasarEX 独有：
 
-| 格式（虚构示例） | 说明 |
+| 格式（虚构） | 说明 |
 | --- | --- |
 | `AMZPSR482917360` | `AMZPSR` + 9 位数字（共 15 位）——可在 PasarEX 追踪器查询的亚马逊单号，Peek 中没有其他承运商使用该格式。 |
 
-如果您的订单确认信中包含直接追踪链接（`tracking.pasarex.com/?awb=...`），将该链接粘贴到 Peek 后会自动提取运单号并立刻归类为 PasarEX。如需了解其他电商单号格式，请参阅[单号格式指南](guide:tracking-number-formats)（英文）与[亚马逊订单追踪指南](guide:amazon-orders)（英文）。
+如果你的订单确认信中包含直接追踪链接（`tracking.pasarex.com/?awb=...`），将该链接粘贴到 Peek 后会提取运单号并立即归为 PasarEX。如需了解其他电商单号格式，请参阅[单号格式指南](guide:tracking-number-formats)（英文）与[亚马逊订单追踪指南](guide:amazon-orders)（英文）。
 
 ## PasarEX 追踪状态含义
 
 PasarEX 在其追踪页面中将各条扫描按大类分组（`COMMENTS`、`IN CUSTOMS PROCESS`、`RECEIVED FOR DELIVERY`、`IN TRANSIT`、`IN WAREHOUSE`、`OUT FOR DISTRIBUTION`、`DELIVERED`、`SHIPPING WITH DELIVERY ISSUE`），每条具体扫描附带西班牙语或英语说明、城市名称及日期时间。
 
-| PasarEX 扫描原文 | 实际含义 |
+| PasarEX 扫描原文 | 含义 |
 | --- | --- |
 | `Orden de pedido recibida - paquete no arribado` / `Information (Manifest) of the shipment received.` | 电子预报清单已传输至 PasarEX，但实物包裹尚未抵达进口枢纽。 |
 | `Carga consolidada para importación recibida` / `Reception of consolidated cargo in import.` | 空运进口拼箱货已抵达 PasarEX 口岸站点（如波哥大），准备进入清关环节。 |
@@ -45,17 +45,17 @@ PasarEX 在其追踪页面中将各条扫描按大类分组（`COMMENTS`、`IN C
 
 ## 使用 Peek 追踪 PasarEX
 
-将您的单号或 `tracking.pasarex.com/?awb=...` 链接粘贴至 [Peek](/)（支持追踪超过 4,500 家承运商）。粘贴链接会立即指向 PasarEX。对于纯单号，Peek 不会主动向 PasarEX 发起首轮查询：它可能会先询问同格式的其他承运商，再查询追踪服务（显示“正在查询物流服务…”），只有在追踪服务唯一指明 PasarEX 且附有带日期的步骤时才会自动归类。因此建议在添加时点击“更改”选择 PasarEX（对于 `AMZPSR` 单号位于“符合这个单号”下），或在已添加的包裹页面点击“更改承运商”。
+将你的单号或 `tracking.pasarex.com/?awb=...` 链接粘贴到 [Peek](/)（Peek 跟踪 4,500 多家承运商）。粘贴链接会直接交给 PasarEX 查询。对于单纯的单号，Peek 从不向 PasarEX 查询：它可能会询问同格式的其他承运商，再查询追踪服务（显示“正在查询物流服务…”），只有当某个追踪服务指明 PasarEX、没有指明其他承运商，并附有带日期的步骤时，才会把包裹归为 PasarEX。因此请点击“更换”并选择 PasarEX（`AMZPSR` 单号可在“符合这个单号”下找到），或在已添加的包裹页面使用“更换快递公司”。
 
-由于 PasarEX 官网每次查询都需要勾选 reCAPTCHA 验证，Peek 通过开源的 [universal-parcel-scraper PasarEX 适配器](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/pasarex)配合浏览器辅助组件进行读取。Peek 会提取每条扫描的原文、城市与时间，并按时间倒序排列（而非按 PasarEX 的分组标题）。PasarEX 返回的当地时间不带偏移量：Peek 按所在城市时区解析（迈阿密用纽约时间，波哥大、麦德林和卡利用波哥大时间，圣地亚哥、巴拿马和巴巴多斯按当地时区），无城市名的扫描沿用相邻记录时区，其余默认波哥大时间，并全部以您设备的本地时钟展示。PasarEX 追踪器不提供预计送达日期、重量或签收证明。
+由于 PasarEX 的追踪页面每次查询都需要勾选 reCAPTCHA 验证，Peek 通过开源的 [universal-parcel-scraper PasarEX 适配器](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/pasarex)配合浏览器辅助组件进行读取。Peek 会提取每条扫描的原文、城市与时间，并按时间倒序排列（而非按 PasarEX 的分组标题）。PasarEX 返回的当地时间不带偏移量：Peek 按所在城市时区解析（迈阿密用纽约时间，波哥大、麦德林和卡利用波哥大时间，圣地亚哥、巴拿马和巴巴多斯按当地时区），无城市名的扫描沿用相邻记录时区，其余默认波哥大时间，并全部以你设备的本地时钟展示。PasarEX 追踪器不提供预计送达日期、重量或签收证明。
 
-Peek 将 PasarEX 的扫描说明映射为清晰阶段：**已创建面单**（实物到达前的清单接收）、**运输中**（从进口拼箱到达、清关放行、入库到陆运中转；PasarEX 从清单直接跳至进口拼箱到达，不单独显示**承运商已揽收**）、**清关中**（正在海关站点清关）、**派送中**（出发执行本地最终派送）以及**已送达**（最终签收）。
+Peek 将 PasarEX 的扫描说明映射为清晰阶段：**已生成面单**（实物到达前的清单接收）、**运输中**（从进口拼箱到达、清关放行、入库到陆运中转；PasarEX 从清单直接跳至进口拼箱到达，不单独显示**已揽收**）、**清关中**（正在海关站点清关）、**派送中**（出发执行本地最终派送）以及**已签收**（最终签收）。
 
-由于 PasarEX 规定两次查询之间至少间隔一小时（查询失败后亦同），无论您是否打开包裹页面，Peek 最多每小时检查一次 PasarEX 官网，派送当天也不会启动 2 分钟高频检查。停留在“已创建面单”满七天后改为每 6 小时检查一次。当 PasarEX 官网无响应、Peek 仅通过追踪服务跟进时，默认每小时检查一次，静默一天后每 3 小时一次。
+由于 PasarEX 规定两次查询之间至少间隔一小时（查询失败后亦同），无论你是否打开包裹页面，Peek 最多每小时检查一次 PasarEX 的追踪页面，派送当天也不会每 2 分钟检查一次。停留在“已生成面单”满七天后改为每 6 小时检查一次。当 PasarEX 的追踪页面无响应、Peek 仅通过追踪服务跟进时，每小时检查一次，静默一天后每 3 小时一次。
 
-当最新扫描距今已满四天且包裹仍停留在“已创建面单”、“承运商已揽收”或“运输中”时，Peek 会按该次扫描日期加以标记，例如“自 10 月 12 日（周一）起无物流更新”。包裹页面随即会提示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 PasarEX 查询。”如果超过三周仍无新扫描，则会提示“超过三周没有新动态。如果包裹仍未送达，请联系卖家。Peek 会持续向 PasarEX 查询。”
+当最新扫描距今已满四天，且包裹仍处于“已生成面单”、“已揽收”或“运输中”时，Peek 会用该次扫描的日期加以标记，例如“自10月12日周一起没有物流更新”。包裹页面随后会显示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 PasarEX 查询。”如果三周没有新扫描，页面会显示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 PasarEX 查询。”
 
-您可在 Peek 提醒设置中选择**每次扫描**、**重要节点**或**仅送达通知**以控制推送频率。
+你可以在 Peek 的提醒设置中选择**每次扫描**、**重要环节**或**仅派送当天**，决定哪些更新会通知你。
 
 ## 联系 PasarEX
 
@@ -71,7 +71,7 @@ PasarEX 为各运营国家公布了专属电话与邮箱：
 
 ### `AMZPSR` 追踪单号是什么？
 
-`AMZPSR` 后接 9 位数字（共 15 位，如 `AMZPSR482917360`）是可在 PasarEX 追踪器查询的亚马逊跨境单号。Peek 中没有其他承运商采用此格式，但 Peek 不会自动直连 PasarEX：请在“符合这个单号”下手动选择 PasarEX。
+`AMZPSR` 后接 9 位数字（共 15 位，如 `AMZPSR482917360`）是可在 PasarEX 追踪器查询的亚马逊单号。Peek 中没有其他承运商采用此格式，但 Peek 不会自行向 PasarEX 查询：请在“符合这个单号”下手动选择 PasarEX。
 
 ### 为什么我的 PasarEX 包裹显示 `Orden de pedido recibida - paquete no arribado`？
 
@@ -79,7 +79,7 @@ PasarEX 为各运营国家公布了专属电话与邮箱：
 
 ### 为什么 Peek 刷新 PasarEX 的频率比部分其他承运商低？
 
-PasarEX 限制每小时最多查询其追踪系统一次（失败后亦然），因此 Peek 按每小时一次的频率检查；此外其官网每次查询均要求通过 reCAPTCHA 验证。
+PasarEX 限制每小时最多查询其追踪系统一次（失败后亦然），因此 Peek 按每小时一次的频率检查；此外其追踪页面每次查询均要求勾选 reCAPTCHA 验证。
 
 ### 在哥伦比亚向 PasarEX 提交货损理赔的期限是多久？
 

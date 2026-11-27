@@ -19,7 +19,7 @@ Todo envio da Estafeta possui tanto um **código de rastreamento** curto de 10 d
 | `4829173640582917364058` | *Guía* completa de 22 dígitos apenas numéricos. Compartilha o comprimento de 22 dígitos com [Austrian Post](carrier:austrian-post) e [USPS](carrier:usps). |
 | `4829173640` | *Código de rastreo* curto de 10 dígitos. Compartilha o formato de 10 dígitos numéricos com [DHL](carrier:dhl), [Mondial Relay](carrier:mondial-relay), Relais Colis, [Packeta](carrier:packeta) e outras transportadoras. |
 
-Se a sua entrega no México tiver uma guia iniciada por `JMX` ou codificada por filial (como `MEX...`), confira [J&T Express Mexico](carrier:j-and-t-mx) ou Paquetexpress; para outros padrões de transportadoras, veja [formatos de código de rastreamento](guide:tracking-number-formats).
+Se a sua entrega no México tiver uma guia iniciada por `JMX` ou codificada por filial (como `MEX...`), confira [J&T Express Mexico](carrier:j-and-t-mx) ou [Paquetexpress](carrier:paquetexpress); para outros padrões de transportadoras, veja [formatos de código de rastreamento](guide:tracking-number-formats).
 
 ## O que significam os status de rastreamento da Estafeta
 

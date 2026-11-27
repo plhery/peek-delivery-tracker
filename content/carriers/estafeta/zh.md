@@ -19,7 +19,7 @@ Estafeta（*La Fuerza Roja*）是墨西哥规模最大的国内及国际物流�
 | `4829173640582917364058` | 22 位纯数字完整 *guía* 运单号。与 [Austrian Post](carrier:austrian-post) 和 [USPS](carrier:usps) 共享 22 位数字长度。 |
 | `4829173640` | 10 位简短 *código de rastreo* 追踪码。与 [DHL](carrier:dhl)、[Mondial Relay](carrier:mondial-relay)、Relais Colis、[Packeta](carrier:packeta) 等多家承运商共享 10 位数字长度。 |
 
-如果你的墨西哥包裹带有 `JMX` 运单号或按网点前缀编码的 *guía*（如 `MEX...`），请查看 [J&T Express Mexico](carrier:j-and-t-mx) 或 Paquetexpress；如需了解其他快递格式，请参阅[单号格式指南](guide:tracking-number-formats)（英文）。
+如果你的墨西哥包裹带有 `JMX` 运单号或按网点前缀编码的 *guía*（如 `MEX...`），请查看 [J&T Express Mexico](carrier:j-and-t-mx) 或 [Paquetexpress](carrier:paquetexpress)；如需了解其他快递格式，请参阅[单号格式指南](guide:tracking-number-formats)（英文）。
 
 ## Estafeta 追踪状态含义
 

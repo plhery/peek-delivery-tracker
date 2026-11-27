@@ -16217,7 +16217,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "paquetexpress",
       "catalog": "paquetexpress",
       "slug": "paquetexpress-tracking",
-      "title": "Rastreamento Paquetexpress: guías, Ocurre e reclamações",
+      "title": "Rastreamento Paquetexpress: guías, Ocurre e indenizações",
       "name": "Paquetexpress",
       "color": "#002a52"
     },

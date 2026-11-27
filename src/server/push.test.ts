@@ -301,8 +301,10 @@ describe('friendly parcel notifications', () => {
     expect(web.payload({ ...departed, location: '深圳市', locale: 'zh' }).body).toMatch(/\n深圳市$/u);
     expect(web.payload({ ...departed, location: 'МОСКВА', locale: 'fr' }).body).toMatch(/\nMoscow, Russie$/u);
     expect(web.payload({ ...departed, location: 'МОСКВА', locale: 'ru' }).body).toMatch(/\nМОСКВА$/u);
+    // Taipei in Chinese, which the scraper places from 0.1440.3 and left as written before.
+    expect(web.payload({ ...departed, location: '台北' }).body).toMatch(/\n(?:Taipei, Taiwan|台北)$/u);
     // Placed nowhere, or written in Latin script, the place stays as written.
-    expect(web.payload({ ...departed, location: '台北' }).body).toMatch(/\n台北$/u);
+    expect(web.payload({ ...departed, location: '转运中心' }).body).toMatch(/\n转运中心$/u);
     expect(web.payload({ ...departed, location: 'SHENZHEN' }).body).toMatch(/\nSHENZHEN$/u);
   });
 

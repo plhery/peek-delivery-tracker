@@ -19530,6 +19530,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffdd00"
     },
     {
+      "id": "allegro-one",
+      "catalog": "allegro-one",
+      "slug": "allegro-one-otslezhivanie",
+      "title": "Отслеживание Allegro One: One Box, One Punkt и Kurier",
+      "name": "Allegro One",
+      "color": "#006d57"
+    },
+    {
       "id": "nova-poshta",
       "catalog": "nova-poshta",
       "slug": "nova-poshta-otslezhivanie",
@@ -19592,6 +19600,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Отслеживание посылки DHL Paket: статусы и Packstation",
       "name": "DHL Paket",
       "color": "#ffcc00"
+    },
+    {
+      "id": "uniuni",
+      "catalog": "uniuni",
+      "slug": "uniuni-otslezhivanie",
+      "title": "Отслеживание UniUni: статусы, доставка и поддержка",
+      "name": "UniUni",
+      "color": "#f68841"
     },
     {
       "id": "j-and-t-de",
@@ -22242,6 +22258,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "da": [
     {
+      "id": "orlen-paczka",
+      "catalog": "orlen-paczka",
+      "slug": "orlen-paczka-sporing",
+      "title": "ORLEN Paczka sporing: 210-numre, statusser og afhentning",
+      "name": "ORLEN Paczka",
+      "color": "#db3830"
+    },
+    {
       "id": "postnord",
       "catalog": "postnord",
       "slug": "postnord-spor-pakke",
@@ -22532,6 +22556,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Urmărire colet Packeta: numărul Z, statusuri și Z-BOX",
       "name": "Packeta",
       "color": "#ba1b02"
+    },
+    {
+      "id": "amazon-logistics",
+      "catalog": "amazon-logistics",
+      "slug": "amazon-logistics-urmarire-colet",
+      "title": "Urmărire Amazon Logistics: cod TBA, Locker și contact",
+      "name": "Amazon Logistics",
+      "color": "#ff9900"
     },
     {
       "id": "sameday",
@@ -22840,6 +22872,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fedd00"
     },
     {
+      "id": "gzyl",
+      "catalog": "gzyl",
+      "slug": "gzyl-siuntos-sekimas",
+      "title": "GZYL siuntos sekimas: YL…YQ numeris, būsenos ir pagalba",
+      "name": "GZYL",
+      "color": "#4e79e1"
+    },
+    {
       "id": "samus",
       "catalog": "samus",
       "slug": "samus-siuntu-sekimas",
@@ -22888,6 +22928,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Latvijas Pasts sūtījumu izsekošana — numuri, pakomāti",
       "name": "Latvijas Pasts",
       "color": "#0c72ba"
+    },
+    {
+      "id": "gzyl",
+      "catalog": "gzyl",
+      "slug": "gzyl-sutijuma-sekosana",
+      "title": "GZYL sūtījuma izsekošana: YL…YQ numurs un statusi",
+      "name": "GZYL",
+      "color": "#4e79e1"
     },
     {
       "id": "xinghe-freight",
@@ -22980,6 +23028,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Відстеження JRT: номер JRT…MM, статуси та місцева доставка",
       "name": "JRT",
       "color": "#023053"
+    },
+    {
+      "id": "gzyl",
+      "catalog": "gzyl",
+      "slug": "gzyl-vidstezhennia",
+      "title": "Відстеження GZYL: номер YL…YQ, статуси та контакти",
+      "name": "GZYL",
+      "color": "#4e79e1"
     },
     {
       "id": "xinghe-freight",

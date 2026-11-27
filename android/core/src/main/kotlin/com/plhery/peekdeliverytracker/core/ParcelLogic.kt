@@ -967,8 +967,10 @@ object ParcelOrganizer {
         val today = dayKey(now)
         val active = from.filter { it.isActive }.map { it to it.attention(now) }
         val attention = active.filter { it.second != null }.map { it.first }
-        val arrivingToday = active.filter { it.second == null && it.first.expectedDayKey == today }.map { it.first }
-        val onTheWay = active.filter { it.second == null && it.first.expectedDayKey != today }.map { it.first }
+        // A parcel on today's round comes today, whichever day its estimate named.
+        val comesToday = { parcel: Parcel -> parcel.expectedDayKey == today || parcel.isOnDeliveryRound(now) }
+        val arrivingToday = active.filter { it.second == null && comesToday(it.first) }.map { it.first }
+        val onTheWay = active.filter { it.second == null && !comesToday(it.first) }.map { it.first }
         val archived = sortPastParcels(from.filter { it.isArchived })
         val values = listOf(
             ParcelSectionKind.Attention to attention,

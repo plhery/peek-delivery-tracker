@@ -2630,6 +2630,23 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertTrue(out.isOnDeliveryRound(now: dayOver))
     }
 
+    /// A parcel on today's round is listed among today's, whichever day the carrier's estimate named.
+    func testAParcelOnTodaysRoundIsListedAmongTodays() throws {
+        let id = UUID()
+        var out = makeParcel(id: id, events: [event(id, .inTransit, "2026-08-05T08:00:00Z"), event(id, .outForDelivery, "2026-08-05T21:10:00Z")])
+        out.expectedDelivery = "2026-08-09"
+        out.deliveryRoundEndsAt = "2026-08-10T00:00:00+10:00"
+        out.deliveryRoundOverAt = "2026-08-07T00:00:00+10:00"
+        let dayOver = try XCTUnwrap(DateParser.date("2026-08-06T14:00:00Z"))
+        let kind = { (parcel: Parcel, now: Date) in ParcelOrganizer.sections(from: [parcel], now: now).first?.kind }
+        XCTAssertEqual(kind(out, dayOver.addingTimeInterval(-1)), .today)
+        XCTAssertEqual(kind(out, dayOver), .active)
+        // Another stage keeps its estimate's day.
+        var moved = out
+        moved.trackingEvents = Array(out.trackingEvents.dropLast())
+        XCTAssertEqual(kind(moved, dayOver.addingTimeInterval(-1)), .active)
+    }
+
     /// Published during the round, the parcel stops leading the widgets when the round ends, while the app stays closed:
     /// the widget's timeline has an entry then.
     @MainActor

@@ -97,8 +97,9 @@ app also words each parcel's day, with its section in the app's list and whether
 midnights where one changes (`DeliveryWidgetDays`). The widget reads them for the moment it draws, and is drawn again
 at those midnights and at the one after each step it shows, whose time then names its weekday. "Tomorrow" reads "today"
 on the day, under Arriving today, last night's delivery "yesterday", and a passed estimate gives way to the status.
-A parcel out for delivery leads the widget until its round ends, at midnight on the carrier's clock, then waits among
-the others: the app also words the parcels for that moment, and the widget is drawn again then.
+A parcel out for delivery leads the widget, under Arriving today whatever day its estimate names, until its round
+ends, at midnight on the carrier's clock, then waits among the others: the app also words the parcels for that moment,
+and the widget is drawn again then.
 When the time zone changes while the app runs, it words the days again for the new zone's midnights and draws the
 widget again.
 

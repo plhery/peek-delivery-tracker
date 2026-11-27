@@ -137,4 +137,24 @@ describe('parcel priority', () => {
     expect(result.arrivingToday.map((item) => item.id)).toEqual(['today']);
     expect(result.onTheWay.map((item) => item.id)).toEqual(['later']);
   });
+
+  it('puts a parcel on today\'s round among today\'s, whichever day its estimate named', () => {
+    // Out at 07:10 in Sydney with the carrier's estimate days later; the round's day ends at Sydney's midnight, and a
+    // round of China Post's days later.
+    const out = { ...parcel('out', 'out_for_delivery', '2026-08-05T21:10:00Z'), expectedDelivery: '2026-08-09',
+      deliveryRoundOverAt: '2026-08-07T00:00:00+10:00', deliveryRoundEndsAt: '2026-08-10T00:00:00+10:00' };
+    const sections = (parcels: ParcelWithEvents[], at: number) => {
+      const result = prioritizeActiveParcels(parcels, at);
+      return [result.arrivingToday.map((item) => item.id), result.onTheWay.map((item) => item.id)];
+    };
+    expect(sections([out], Date.parse('2026-08-06T13:59:59Z'))).toEqual([['out'], []]);
+    expect(sections([out], Date.parse('2026-08-06T14:00:00Z'))).toEqual([[], ['out']]);
+    // Without the moments, as from a server before them, the scan's day on this device.
+    const older = { ...parcel('older', 'out_for_delivery', '2026-08-05T08:00:00Z'), expectedDelivery: '2026-08-09' };
+    expect(sections([older], NOW)).toEqual([['older'], []]);
+    expect(sections([{ ...older, events: parcel('older', 'out_for_delivery', '2026-08-03T08:00:00Z').events }], NOW))
+      .toEqual([[], ['older']]);
+    // Another stage keeps its estimate's day.
+    expect(sections([{ ...out, events: parcel('moved').events }], Date.parse('2026-08-06T10:00:00Z'))).toEqual([[], ['out']]);
+  });
 });

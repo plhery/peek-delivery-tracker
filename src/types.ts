@@ -68,10 +68,13 @@ export interface Parcel {
    */
   expectedDeliveryPassed?: string;
   /**
-   * While the newest scan is out for delivery: when that round is over, the end of the scan's day on the parcel's clock
-   * (`delivery_round_ends_at`, deliveryRound.ts). Past it, the parcel has had no tracking update since (`parcelAttention`).
+   * While the newest scan is out for delivery: when that round is over, the end of the scan's day on the parcel's clock,
+   * days later for a carrier whose rounds last days (`delivery_round_ends_at`, deliveryRound.ts). Past it, the parcel has
+   * had no tracking update since (`parcelAttention`).
    */
   deliveryRoundEndsAt?: string;
+  /** The end of the round's own day on the parcel's clock (`delivery_round_over_at`): until then it arrives today. */
+  deliveryRoundOverAt?: string;
   /** Peek AI's estimate, when Peek has a strong hint (`peek_ai`). */
   peekAi?: PeekAi;
   pickupPoint?: string;

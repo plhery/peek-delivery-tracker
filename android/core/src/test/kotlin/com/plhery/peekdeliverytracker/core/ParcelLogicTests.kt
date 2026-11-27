@@ -1081,6 +1081,22 @@ class ParcelLogicTests {
         assertTrue(out.copy(deliveryRoundOverAt = null).isOnDeliveryRound(dayOver))
     }
 
+    /** A parcel on today's round is listed among today's, whichever day the carrier's estimate named. */
+    @Test
+    fun aParcelOnTodaysRoundIsListedAmongTodays() {
+        val dayOver = Instant.parse("2026-08-06T14:00:00Z")
+        val out = outForDeliveryOnAugustFifth().copy(
+            expectedDelivery = "2026-08-09",
+            deliveryRoundEndsAt = "2026-08-10T00:00:00+10:00", deliveryRoundOverAt = "2026-08-07T00:00:00+10:00",
+        )
+        val kind = { parcel: Parcel, now: Instant -> ParcelOrganizer.sections(listOf(parcel), now).single().kind }
+        assertEquals(ParcelSectionKind.Today, kind(out, dayOver.minusSeconds(1)))
+        assertEquals(ParcelSectionKind.Active, kind(out, dayOver))
+        // Another stage keeps its estimate's day.
+        val moved = out.copy(trackingEvents = out.trackingEvents.dropLast(1))
+        assertEquals(ParcelSectionKind.Active, kind(moved, dayOver.minusSeconds(1)))
+    }
+
     /**
      * Published during the round, the parcel stops leading the widgets when the round ends, while the app stays closed:
      * the widget is drawn again then.

@@ -85,6 +85,20 @@ export function compareParcelPriority(
   return secondUpdate.localeCompare(firstUpdate);
 }
 
+/**
+ * Whether the parcel is out for delivery on a round whose day has not ended on the parcel's clock
+ * (`deliveryRoundOverAt`), or on this device's when the server named none: it arrives today, whichever day its
+ * estimate named.
+ */
+export function parcelOnDeliveryRound(parcel: ParcelWithEvents, now = Date.now()): boolean {
+  const current = currentEvent(parcel.events, parcel.returnHeld);
+  if (current?.stage !== 'out_for_delivery') return false;
+  const over = Date.parse(parcel.deliveryRoundOverAt ?? parcel.deliveryRoundEndsAt ?? '');
+  if (Number.isFinite(over)) return now < over;
+  const sent = new Date(current.occurredAt);
+  return !Number.isNaN(sent.getTime()) && dateKey(sent) === dateKey(new Date(now));
+}
+
 export function prioritizeActiveParcels(
   parcels: ParcelWithEvents[],
   now: number = Date.now(),
@@ -100,7 +114,7 @@ export function prioritizeActiveParcels(
   for (const parcel of parcels) {
     const reason = parcelAttention(parcel, now);
     if (reason) attention.push({ parcel, reason });
-    else if (expectedDeliveryDay(parcel.expectedDelivery) === today) arrivingToday.push(parcel);
+    else if (expectedDeliveryDay(parcel.expectedDelivery) === today || parcelOnDeliveryRound(parcel, now)) arrivingToday.push(parcel);
     else onTheWay.push(parcel);
   }
 

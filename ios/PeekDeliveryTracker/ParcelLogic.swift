@@ -846,12 +846,10 @@ enum ParcelOrganizer {
         let today = dayKey(now)
         let active = parcels.filter(\.isActive).map { (parcel: $0, attention: $0.attention(now: now)) }
         let attention = active.filter { $0.attention != nil }.map(\.parcel)
-        let arrivingToday = active.filter {
-            $0.attention == nil && $0.parcel.expectedDayKey == today
-        }.map(\.parcel)
-        let onTheWay = active.filter {
-            $0.attention == nil && $0.parcel.expectedDayKey != today
-        }.map(\.parcel)
+        // A parcel on today's round comes today, whichever day its estimate named.
+        let comesToday = { (parcel: Parcel) in parcel.expectedDayKey == today || parcel.isOnDeliveryRound(now: now) }
+        let arrivingToday = active.filter { $0.attention == nil && comesToday($0.parcel) }.map(\.parcel)
+        let onTheWay = active.filter { $0.attention == nil && !comesToday($0.parcel) }.map(\.parcel)
         let archived = sortPastParcels(parcels.filter(\.isArchived))
         let values: [(ParcelSectionKind, [Parcel])] = [
             (.attention, attention),

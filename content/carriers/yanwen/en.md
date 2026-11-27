@@ -1,12 +1,12 @@
 ---
 title: Yanwen tracking number: UL…YP format and who delivers
-description: Two letters (often UL or UK), 9 digits, then YP: that's a Yanwen tracking number. Track it here, see what each status means and who delivers it in your country.
+description: Track a Yanwen parcel (UL…YP, UK…YP, BYS or YW numbers): what each status means, which local carrier delivers it, delivery times and Yanwen contact details.
 slug: yanwen-tracking
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Yanwen is a Chinese logistics company, founded in Beijing in 1998, that ships parcels abroad for online sellers and hands them to a local carrier for the last mile. Track the number on Yanwen's own site, [track.yw56.com.cn](https://track.yw56.com.cn/en/index), or in the box above. The number comes from the shop or marketplace you bought from, in the shipping details of your order.
+A tracking number with two letters (often `UL` or `UK`), 9 digits and `YP` at the end — or `BYS` plus 9 digits — belongs to Yanwen, a Chinese logistics company founded in Beijing in 1998 that ships online orders abroad and hands them to a local carrier for the last mile. Track your parcel on Yanwen's site, [track.yw56.com.cn](https://track.yw56.com.cn/en/index), or in the box above; the number comes from the shop or marketplace in your order's shipping details.
 
 ## Yanwen tracking number: what it looks like
 
@@ -93,21 +93,25 @@ Scan times are read with Yanwen's GMT offsets and shown in your device's time zo
 
 ## Questions about Yanwen tracking
 
+### What does a tracking number ending in YP (like UL…YP) mean?
+
+Two letters (often `UL` or `UK`), 9 digits and `YP` is Yanwen's postal-style tracking format — `YP` marks Yanwen, not a destination country. Yanwen handles the trip out of China and passes the parcel to a local carrier in your country, which may assign a second last-mile tracking number.
+
 ### Where is my Yanwen package?
 
-The latest scan gives its stage, and a town or region when the scan names one. After `Batch delivery to carrier`, a carrier in your country has it: look for its name and number on Yanwen's result page.
+The latest scan shows its stage and, when recorded, a town or region. Once `Batch delivery to carrier` appears, a local carrier in your country has the parcel: check Yanwen's result page or Peek for that carrier's name and last-mile tracking number.
 
 ### What does Yanwen facility - Outbound mean?
 
-The parcel has left Yanwen's sorting centre in China. Next come `Arrived at domestic terminal station`, export customs and the flight out.
+The parcel has left Yanwen's sorting centre in China. Next come `Arrived at domestic terminal station`, export customs (`International shipment release - Export`) and the international flight.
 
 ### Is Yanwen legit?
 
-Yes. Yanwen is a logistics company founded in Beijing in 1998 that runs its own tracking site. It says it became a recommended logistics provider for AliExpress and eBay in 2015.
+Yes. Yanwen is a logistics company founded in Beijing in 1998 that became a recommended logistics provider for AliExpress and eBay in 2015 and ships cross-border parcels with local carriers handling the last mile.
 
 ### How long does Yanwen take to deliver?
 
-Yanwen publishes no delivery times for recipients, so go by the estimate the shop or marketplace shows for your order. For parcels from China in general, see [tracking a parcel from China](guide:tracking-from-china).
+Yanwen publishes no delivery times for recipients, so go by the delivery estimate the shop or marketplace shows on your order. Self-service tracking covers waybills from the past year; for parcels from China in general, see [tracking a parcel from China](guide:tracking-from-china).
 
 :::sources
 - [Yanwen: YW Tracking](https://track.yw56.com.cn/en/index) – tracking site, languages, result columns, categories, notes box, hotline

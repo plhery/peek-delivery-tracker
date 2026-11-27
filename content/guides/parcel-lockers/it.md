@@ -1,13 +1,13 @@
 ---
 title: Pacco nel locker: codice di ritiro, tempi e problemi
-description: Come funzionano i locker InPost, Poste, Amazon, BRT e GLS: dove trovi il codice di ritiro, quanto aspetta il pacco e cosa fare se il locker è pieno o guasto.
+description: Codice di ritiro (PIN o QR), giorni di giacenza (3–8 giorni) e ritiro senza app nei locker InPost, Punto Poste, Amazon, BRT e GLS, e cosa fare se è pieno.
 slug: pacco-locker-codice-ritiro
 picture: Una fila di locker con uno sportello aperto, un telefono che mostra un codice e Pip che esce da una cassetta.
 published: 2026-10-17
-updated: 2026-11-14
+updated: 2026-11-27
 ---
 
-Un locker è un punto di ritiro senza nessuno allo sportello: una parete di cassette che si apre con un codice o con l'app del corriere. Il tracciamento ti dice quando il pacco è dentro, il corriere ti manda il codice per aprirlo, e da quel momento hai pochi giorni, spesso solo 3. Se non passi in tempo, il pacco torna a chi l'ha spedito.
+Per ritirare un pacco in un locker ti serve il codice di ritiro (PIN o QR) che il corriere manda per SMS, e-mail o app solo quando il pacco è già nella cassetta, non il codice di tracciamento. I tempi di giacenza sono brevi: circa 3 giorni nei locker InPost, 3 giorni lavorativi nei Punto Poste Locker, 3 giorni negli Amazon Locker e 8 giorni nei Locker GLS; quasi tutte le reti si aprono anche senza app, ma scaduto il termine il pacco torna automaticamente al mittente.
 
 ## Come funziona la consegna in un locker?
 
@@ -44,7 +44,7 @@ Compri da privati? Per Subito vedi [ordini dell'usato](guide:second-hand-orders)
 
 ## Dove trovo il codice di ritiro, e se non arriva?
 
-Il codice di ritiro non è il codice di tracciamento. Il codice di tracciamento (per InPost sono 24 cifre) serve a seguire il pacco; il codice di ritiro, un PIN o un QR, apre lo sportello. Arriva quando il pacco è già nella cassetta, mai prima.
+Il codice di ritiro (PIN o QR) arriva direttamente dal corriere per SMS, e-mail o app solo quando il pacco è dentro la cassetta, mai prima: non è il codice di tracciamento (che per InPost ha 24 cifre). Se non lo vedi, controlla prima che il tracciamento indichi la consegna nel locker, poi cerca il nome del corriere anche nello spam.
 
 Dove cercarlo:
 
@@ -62,7 +62,7 @@ Il codice non è arrivato? Procedi in quest'ordine:
 
 ## Quanto tempo resta il pacco nel locker?
 
-Meno che in un ufficio postale o in un punto con personale.
+Di norma da 3 a 8 giorni, meno che in un ufficio postale o in un punto con personale; conta sempre la scadenza scritta nell'avviso del corriere:
 
 - **InPost.** Circa 3 giorni dalla notifica di consegna. Il termine è fisso e non si può prolungare. Prima della scadenza ricevi un promemoria per SMS ed e-mail; poi il pacco torna in automatico a chi l'ha spedito, senza costi per te.
 - **Punto Poste Locker.** 3 giorni lavorativi, contro i 7 di un Punto Poste con personale, per le spedizioni Poste Delivery Business.
@@ -86,7 +86,7 @@ Prima di uscire di casa, rileggi l'ultimo avviso e il tracciamento. Se l'indiriz
 
 ## Può ritirarlo un'altra persona, o posso farlo senza l'app?
 
-Sì a tutte e due, con qualche limite.
+Sì a tutte e due: puoi girare il PIN o il QR a una persona di fiducia (con Poste solo il PIN per il ritiro standard), e ai locker InPost, Poste, Amazon e BRT apri lo sportello anche senza app usando lo schermo o il tastierino.
 
 - **InPost.** Ritira solo chi ha il QR o il PIN: basta inoltrare l'e-mail o l'SMS con i codici. Senza app, al locker scegli «Ritira il pacco», poi avvicini il QR al lettore o digiti il tuo numero di telefono e il codice. L'app serve per aprire a distanza, stando entro circa 70 metri.
 - **Poste Italiane.** Puoi delegare qualcun altro, ma solo per il ritiro standard con il codice PIN. Al Locker inserisci il PIN o scansioni il QR ricevuto per SMS o e-mail; in un Punto Poste con personale dai il codice all'operatore.

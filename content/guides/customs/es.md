@@ -1,13 +1,13 @@
 ---
 title: Paquete retenido en aduanas: qué hacer y qué se paga
-description: Qué significa que un paquete esté retenido en aduanas, cuánto puede tardar, qué se paga en España (arancel de 3 € incluido) y cómo reconocer los SMS falsos.
+description: Cómo saber si tu paquete está retenido en aduanas en España o Canarias, qué se paga (IVA, 3 € de arancel, 2 € de tasa, IGIC y AIEM) y teléfonos de contacto.
 slug: paquete-retenido-en-aduanas
 picture: Una caseta de aduanas con una barrera a rayas, un documento con un sello redondo y una marca de verificación, y Pip esperando con paciencia ante la barrera.
 published: 2026-10-09
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-«Retenido en aduanas» casi siempre significa que tu paquete está en el trámite normal que pasa todo lo que llega de fuera de la UE, no que te lo hayan incautado. Si no avanza, puede que el transportista esté esperando a que pagues el IVA, el arancel y la tasa de tramitación o a que le mandes la factura. En una compra de hasta 150 € sin nada cobrado, son el 21 % de IVA (en la Península y Baleares), 3 € de arancel y 2 € de tasa por tipo de producto, más su gestión. Compruébalo en su web o en su app, nunca en un enlace que te llegue por SMS.
+Para saber si un paquete está retenido en aduanas, revisa el seguimiento del transportista o la consulta por número de envío de la AEAT: casi siempre es el trámite normal de lo que llega de fuera de la UE, no una incautación. Si no avanza, el transportista suele esperar el pago de impuestos o la factura: en la Península y Baleares, hasta 150 € sin nada cobrado son el 21 % de IVA, 3 € de arancel y 2 € de tasa por tipo de producto más su gestión; en Canarias todo se declara, sin IGIC hasta 150 € pero con arancel, tasa y AIEM según producto. Compruébalo en su web o app, nunca en un enlace de SMS.
 
 ## ¿Qué significa que un paquete esté retenido en aduanas?
 
@@ -39,7 +39,7 @@ Con Correos, si vale más de 150 €, entra en correosaduanas.es, pulsa «Inicia
 
 ### ¿Cómo contacto con la aduana por mi paquete?
 
-Casi nunca hace falta: empieza por el transportista. La AEAT tiene una consulta por [número de envío](guide:find-tracking-number) que te dice si ya se ha declarado (y entonces no tienes que hacer nada más) o todavía no. Si no, la AEAT aún no tiene información y solo tu transportista puede dártela. Para dudas, la AEAT ofrece un chat y cita telefónica del servicio «Comercio electrónico», y el teléfono de información 901 33 55 33 (o 91 554 87 70). Correos Aduanas atiende en el 91 660 24 54.
+Empieza por el transportista: Correos Aduanas atiende en el 91 660 24 54. La AEAT ofrece una consulta por [número de envío](guide:find-tracking-number) para saber si tu paquete ya se declaró; si no aparece, solo tu transportista tiene datos. Para dudas en España, la AEAT dispone de chat, cita telefónica de «Comercio electrónico» y los teléfonos 901 33 55 33 y 91 554 87 70; en Canarias, los tributos locales (IGIC y AIEM) dependen de la Agencia Tributaria Canaria.
 
 ## ¿Cuánto tarda un paquete en salir de aduanas?
 

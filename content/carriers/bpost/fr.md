@@ -1,12 +1,12 @@
 ---
 title: bpost suivi : code-barres, statuts et point relais
-description: Suivre un colis bpost : où trouver le code-barres, ce que veut dire chaque statut du Track & Trace, combien de temps le colis attend et comment joindre bpost.
+description: Suivre un colis bpost (la poste belge) : trouver le code-barres, lire les statuts Track & Trace, délais en Point d'enlèvement ou Bbox et contact bpost.
 slug: bpost-suivi
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-bpost est l'entreprise postale belge, la marque du groupe bnode qui livre les colis en Belgique et aux Pays-Bas. Pour suivre ton colis, saisis son code-barres sur le [Track & Trace de bpost](https://track.bpost.cloud/), dans l'app My bpost ou dans le champ ci-dessus. Ce code-barres figure dans l'e-mail d'expédition de la boutique, dans le SMS ou l'e-mail de bpost, sur l'étiquette ou sur l'avis de passage.
+Pour suivre un colis bpost (la poste belge, marque du groupe bnode en Belgique et aux Pays-Bas), saisis son code-barres (`3232…`, `3299…`, `JJBEA…` ou numéro postal en `BE`) sur le [Track & Trace de bpost](https://track.bpost.cloud/), dans l'app My bpost ou dans le champ ci-dessus. Le code-barres se trouve dans l'e-mail d'expédition de la boutique, dans le SMS ou l'e-mail de bpost, sur l'étiquette ou sur l'avis de passage.
 
 ## Numéro de suivi bpost : où trouver le code-barres
 
@@ -100,21 +100,25 @@ Dans Peek, les statuts restent en anglais, tels que bpost les écrit (`Item deli
 
 ## Questions sur le suivi bpost
 
+### Comment suivre mon colis bpost en Belgique ou à l'étranger ?
+
+Entre le code-barres reçu de la boutique ou de bpost sur le Track & Trace de bpost, dans l'app My bpost ou dans Peek. Pour un colis vers l'étranger, une fois arrivé chez l'opérateur postal du pays de destination, bpost conseille d'essayer aussi l'outil de suivi de cette poste.
+
 ### Combien de temps pour récupérer un colis chez bpost ?
 
-14 jours calendrier dans un Point d'enlèvement et 5 jours calendrier dans un distributeur Bbox, sans prolongation. Le 6e jour, un colis laissé en distributeur repart chez l'expéditeur.
+14 jours calendrier dans un Point d'enlèvement et 5 jours calendrier dans un distributeur Bbox, sans prolongation possible. Passé ce délai, le colis repart chez l'expéditeur.
 
 ### bpost livre-t-il le samedi et le dimanche ?
 
-Oui pour certains colis, si l'expéditeur a un accord avec bpost : le samedi de 8 h à 17 h en Point d'enlèvement ou en Distributeur de Colis, le dimanche de 9 h à 19 h à domicile. Les lettres et les recommandés ne sont livrés qu'en semaine.
+Oui pour certains colis, si l'expéditeur a un accord avec bpost : le samedi de 8 h à 17 h en Point d'enlèvement ou en Distributeur de Colis, et le dimanche de 9 h à 19 h à domicile. Les lettres et recommandés ne sont livrés qu'en semaine.
 
 ### Qui peut retirer un recommandé bpost ?
 
-Seul le destinataire, avec sa carte d'identité et le code-barres, ou une personne qu'il mandate en signant l'avis de passage. Un colis ordinaire, lui, peut être retiré par toute personne qui a le code-barres.
+Seul le destinataire, avec sa carte d'identité et le code-barres, ou une personne mandatée en signant l'avis de passage. Un colis ordinaire peut être retiré par toute personne qui a le code-barres.
 
 ### Pourquoi je ne peux pas suivre mon colis bpost ?
 
-Le plus souvent, l'expéditeur ne l'a pas encore remis à bpost : le suivi commence dès qu'il le fait. Un code-barres qui commence par U n'a pas de Track & Trace du tout.
+Le plus souvent, l'expéditeur ne l'a pas encore remis à bpost : le suivi démarre dès la prise en charge. Un code-barres qui commence par U sert seulement à la douane et n'a pas de Track & Trace.
 
 :::sources
 - [bpost : A quoi ressemble un code-barres et où puis-je le trouver ?](https://www.bpost.be/fr/faq/what-does-barcode-look-and-where-can-i-find-it) – formes du code-barres, où le trouver, codes en U

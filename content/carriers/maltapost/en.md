@@ -1,12 +1,12 @@
 ---
 title: MaltaPost tracking: numbers, statuses and collection
-description: Track a MaltaPost item: what its tracking number looks like, what each status means, picking it up at a post office or Easipik locker and who to call.
+description: Track a MaltaPost item in Malta or Gozo: MT and foreign barcodes, tracking statuses, post office and Easipik locker pickup, Saturday hours and contact numbers.
 slug: maltapost-tracking
 published: 2026-10-13
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-MaltaPost is Malta's national post, delivering to every address in Malta and Gozo six days a week. Track an item on its [tracking page](https://www.maltapost.com/tracking) or paste the number in the box above. The number comes from whoever posted the item: the sender's receipt, the label under the barcode or your delivery notice.
+Track a MaltaPost parcel or registered item across Malta and Gozo on [maltapost.com/tracking](https://www.maltapost.com/tracking) or by pasting your 13-character `MT` number, foreign postal barcode or SendOn barcode in capital letters into the box above. The number is on the sender's receipt, under the barcode on the label or on your delivery notice; for tracking help, MaltaPost's customer care answers on (+356) 2122 4421 or freephone 800 722 44.
 
 ## MaltaPost tracking number: what it looks like
 
@@ -87,21 +87,25 @@ While MaltaPost's tracker answers, Peek checks up to every 10 minutes with the p
 
 ## Questions about MaltaPost tracking
 
+### What is the MaltaPost tracking contact number (and is it 24/7)?
+
+Call (+356) 2122 4421 or freephone 800 722 44 (free from a fixed line), or email info@maltapost.com. Customer care is not 24/7: it answers Monday to Friday 8.30am to 2.30pm and Saturday 7.30am to 12.30pm, except public holidays; Easipik lockers stay open 24/7.
+
+### How do I track a foreign or SendOn parcel with MaltaPost?
+
+Enter the foreign postal barcode or either SendOn barcode in capital letters on MaltaPost's tracker or in Peek. Items from abroad keep their original foreign barcode, and MaltaPost's tracker may show both a Foreign Barcode and a Local Barcode; untracked items (such as numbers starting with U) can't be tracked in Malta.
+
 ### Is MaltaPost open on Saturday?
 
-Yes. Post offices generally open on Saturday from 7.30am to 1pm, and the phone line answers from 7.30am to 12.30pm, except on public holidays.
+Yes. Post offices generally open on Saturday from 7.30am to 1pm, and customer care answers by phone from 7.30am to 12.30pm, except on public holidays.
 
 ### How long does MaltaPost take to deliver?
 
 MaltaPost gives no general delivery time for items from abroad. International mail landing before 4.30pm on a weekday (1.30pm on Saturday) is processed that day for delivery the next working day; SendOn parcels take about 7 to 12 days from the UK, 10 to 12 from Germany or Italy and about 15 from the USA.
 
-### Is there a 24/7 MaltaPost customer care number?
-
-No. Customer care answers on weekdays from 8.30am to 2.30pm and on Saturday mornings; Easipik lockers are open 24/7.
-
 ### What does an international MaltaPost tracking number look like?
 
-An item sent from Malta abroad has two letters, nine digits and `MT`, such as `RR482917367MT`. An item coming to Malta keeps its foreign number, which MaltaPost's tracking accepts.
+An item posted from Malta abroad carries 13 characters: two letters, nine digits and `MT`, such as `RR482917367MT`. An item sent to Malta keeps the barcode its foreign post gave it.
 
 :::sources
 - [MaltaPost: Tracking](https://www.maltapost.com/tracking) – tracking field, scan columns, progress stages, foreign and local barcodes, not-recognised reasons, customs buttons

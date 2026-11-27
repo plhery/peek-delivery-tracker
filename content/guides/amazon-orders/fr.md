@@ -1,15 +1,17 @@
 ---
 title: Suivi de commande Amazon : trouver le numéro de suivi
-description: Où Amazon affiche le transporteur et le numéro de suivi de ton colis, et comment le suivre dans Peek, toi-même ou avec Claude ou ChatGPT qui le fait pour toi.
+description: Suivi de commande Amazon : où trouver le transporteur et le numéro de suivi dans Vos commandes, quoi faire avec Amazon Logistics et comment suivre dans Peek.
 slug: suivi-commande-amazon
 picture: Un téléphone affiche l'avancée d'une commande, deux camionnettes se passent un colis, et Pip regarde.
 published: 2026-10-16
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Amazon affiche le transporteur et le numéro de suivi de chaque colis dans Vos commandes, puis Suivre le colis. Copie le numéro dans [Peek](/), et tu suis ce colis avec tous les autres. Ça marche pareil sur tous les sites Amazon.
+Pour le suivi d'une commande Amazon, ouvre **Vos commandes** puis **Suivre le colis** : Amazon y affiche le transporteur et le numéro de suivi de chaque colis, distinct du numéro de commande à 17 chiffres. Copie ce numéro dans [Peek](/) pour suivre ton colis Amazon avec tous les autres, sur tous les sites Amazon ; si Amazon livre lui-même (Amazon Logistics), le suivi reste parfois réservé à ton compte Amazon.
 
 ## Où trouver le numéro de suivi sur Amazon ?
+
+Le numéro de suivi ne figure pas dans les e-mails d'Amazon : il apparaît uniquement dans **Vos commandes** → **Suivre le colis**, une fois le colis pris en charge par le transporteur.
 
 :::steps
 - Ouvre Vos commandes | Sur le site, c'est en haut à droite. Dans l'application Amazon, touche l'icône en forme de personne, puis Vos commandes.

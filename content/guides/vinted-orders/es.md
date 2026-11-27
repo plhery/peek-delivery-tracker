@@ -1,13 +1,13 @@
 ---
 title: Seguimiento de envío Vinted: empresas, números y retrasos
-description: Sigue un paquete de Vinted como comprador o vendedor: qué empresa lo lleva en España, cómo es el número y los plazos de Vinted para enviar y reclamar.
+description: Envíos de Vinted en España: qué empresas usa (InPost, Correos, SEUR, GLS, Ontime, Vinted Go), dónde ver el seguimiento, plazos de envío y cómo reclamar.
 slug: seguimiento-envio-vinted
 picture: Dos móviles, el de una vendedora y el de un comprador, entre los que viaja un paquete en una furgoneta, y un Pip muy contento.
 published: 2026-10-16
-updated: 2026-11-23
+updated: 2026-11-27
 ---
 
-En Vinted, el comprador elige la empresa de paquetería y paga el envío al comprar; el vendedor recibe una etiqueta prepagada o un código, y tiene 5 días laborables para enviar el paquete. Los dos lo siguen en la conversación del pedido con «Rastrear paquete», donde también puedes copiar el número de seguimiento. El seguimiento puede tardar hasta 48 horas en aparecer, y el vendedor cobra cuando el comprador pulsa «Todo está bien» o 2 días después de la entrega.
+En los envíos de Vinted en España, el comprador elige la empresa (InPost, Correos, SEUR, Ontime, GLS, Vinted Go o DHL Express) al pagar y el vendedor dispone de 5 días laborables para enviarlo con la etiqueta prepagada o el código QR. Ambos ven el seguimiento en la conversación del pedido desde «Rastrear paquete» (puede tardar hasta 48 horas en activarse), y tras `Entregado` el comprador tiene 2 días para pulsar «Todo está bien» o abrir una incidencia.
 
 ## ¿Cómo funcionan los envíos en Vinted?
 
@@ -26,7 +26,7 @@ Con verificación del artículo o de electrónica, el paquete pasa antes por el 
 
 ## ¿Cuántos días tiene el vendedor para enviar en Vinted?
 
-Cinco días laborables desde la compra. Sin seguimiento ni confirmación de envío en ese plazo, Vinted cancela el pedido al siguiente día laborable y reembolsa al comprador.
+El vendedor tiene 5 días laborables desde la compra para enviar el pedido con la etiqueta de Vinted. Si no hay seguimiento ni confirmación de envío en ese plazo, Vinted cancela el pedido al siguiente día laborable y reembolsa al comprador.
 
 - **¿Necesitas más tiempo?** Pulsa «Ampliar plazo de envío» en la conversación (o ⓘ, arriba a la derecha) y pide 3 o 5 días laborables más. El comprador acepta o rechaza.
 - **¿Ya lo has enviado y no hay seguimiento?** Pulsa «Confirmo que he enviado el pedido», para que no se cancele mientras llega el primer escaneo.
@@ -88,7 +88,7 @@ Casi siempre, por un código que se convierte en etiqueta o por un rodeo:
 
 ## ¿Por qué no se actualiza el seguimiento de Vinted?
 
-Cada silencio tiene su motivo:
+Es normal que el seguimiento tarde hasta 48 horas en activarse tras el envío; si sigue bloqueado en Vinted y en la web de la empresa, el plazo de espera llega hasta 25 días laborables desde que se marcó como enviado. Cada silencio tiene su motivo:
 
 - **Menos de 48 horas después del envío.** Normal: la información «puede tardar hasta 48 horas en aparecer».
 - **Ningún escaneo en 5 días laborables.** Puede que el vendedor no lo haya enviado. Salvo que confirme el envío o aceptes una ampliación, Vinted cancela el pedido y te reembolsa.

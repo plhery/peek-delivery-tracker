@@ -75,7 +75,7 @@ Com a encomenda aberta, ou no dia da entrega com notificações ligadas, o Peek 
 
 ### Como rastrear uma encomenda da Ukrposhta no Reino Unido?
 
-Quando você adiciona um envio da Ukrposhta estando no Reino Unido, o Peek também consulta o [Royal Mail](carrier:royal-mail) com o mesmo código, ou a Parcelforce para códigos iniciados por `E` (EMS). Assim que esse correio registrar uma movimentação ao menos tão recente quanto a última da Ukrposhta, o Peek continua acompanhando por lá mantendo as etapas da Ukrposhta.
+Quando você adiciona um envio da Ukrposhta estando no Reino Unido, o Peek também consulta o [Royal Mail](carrier:royal-mail) com o mesmo código, ou a [Parcelforce](carrier:parcelforce) para códigos iniciados por `E` (EMS). Assim que esse correio registrar uma movimentação ao menos tão recente quanto a última da Ukrposhta, o Peek continua acompanhando por lá mantendo as etapas da Ukrposhta.
 
 ### Por que meu código da Ukrposhta não está funcionando?
 

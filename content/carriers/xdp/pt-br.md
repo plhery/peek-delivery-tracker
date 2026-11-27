@@ -12,7 +12,7 @@ A XDP (XDP Express) é uma rede britânica de encomendas e cargas que entrega vo
 
 A XDP chama o código de número da remessa (consignment number). Sua página de rastreamento explica claramente que você o recebe da empresa que está enviando o produto via XDP, portanto procure no e-mail de envio da loja ou na página do pedido. Os SMS e e-mails da própria XDP só chegam depois, quando o volume já está a caminho.
 
-A XDP não publica um formato oficial; seus códigos têm esta aparência:
+A XDP não publica um formato; seus códigos têm esta aparência:
 
 | Formato (inventado) | O que é |
 | --- | --- |
@@ -44,7 +44,7 @@ O rastreador, o app e o FAQ da XDP existem apenas em inglês. Números de rota e
 
 O app da XDP usa algumas expressões diferentes (`Delivery scheduled`). Após `Consignment Split`, a XDP diz que os itens restantes chegam nos dias seguintes. `RETURN LABEL CREATED` inicia o retorno ao remetente e `Damaged` indica que o item parece danificado (veja abaixo).
 
-## Entregas XDP: faixas de horário, entregas perdidas e retirada
+## Entregas XDP: faixas de horário, entregas não realizadas e retirada
 
 A XDP envia uma janela de duas horas no dia da entrega depois que o motorista carrega a van, geralmente até o meio-dia. Em períodos movimentados, um depósito pode planejar com 24 horas ou mais de antecedência. Depois chega uma mensagem "You Are Next" por SMS, e-mail e aplicativo. Para entregas com duas pessoas (2Man), a XDP combina primeiro a data e depois envia a janela de duas horas no dia. No serviço 1+, o motorista pode levar o item até um cômodo térreo de sua escolha depois que você assina um termo de isenção enviado previamente pela XDP; no 2Man, sobe até um lance interno de escadas (equipamentos de academia somente no térreo).
 
@@ -56,19 +56,19 @@ No aplicativo da XDP você pode:
 
 A XDP avisa que, ao solicitar entrega "Left Safe" (deixar em local seguro), você assume total responsabilidade pelo item a partir do momento em que é deixado.
 
-**Entregas perdidas.** `Carded` significa que o motorista não encontrou ninguém. A XDP informa que fará novas tentativas três vezes antes de devolver ao remetente. Se não houve cartão deixado, o motorista não consegue voltar no mesmo dia: reagende via Change Delivery Date.
+**Entregas não realizadas.** `Carded` significa que o motorista não encontrou ninguém. A XDP informa que fará novas tentativas três vezes antes de devolver ao remetente. Se não houve cartão deixado, o motorista não consegue voltar no mesmo dia: reagende via Change Delivery Date.
 
 **Sem retirada em depósito.** O app da XDP afirma que não oferece retirada em seus depósitos ou hubs. O FAQ orienta falar com a loja se quiser retirar.
 
 ## Encomenda XDP não entregue, atrasada ou danificada
 
-A XDP trabalha para o remetente, não para você. Em qualquer problema de entrega, a orientação da XDP é verificar o rastreamento no app ou no site e depois contatar o fornecedor (a loja) para qualquer providência: o contrato e eventuais reclamações pertencem à loja.
+A XDP trabalha para o remetente, não para você. Em qualquer problema de entrega, a orientação da XDP é verificar o rastreamento no app ou no site e depois contatar o fornecedor (a loja) para qualquer providência: o contrato é da loja, e é ela quem faz eventuais pedidos de indenização.
 
 **Atrasada ou sem atualização.** A XDP não garante entrega no dia seguinte, especialmente em picos como feriados bancários, Black Friday e Cyber Monday. Motoristas presos no trânsito nem sempre atualizam se a janela mudar. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
-**Danificada.** A XDP pede que você aceite a entrega em vez de recusá-la e fale imediatamente com o remetente. Anote o dano no comprovante de entrega ao assinar: o guia de procedimentos da XDP para remetentes determina que reclamações são negadas se a assinatura não registrar ressalva específica, e anotações genéricas como "unchecked" ou "unseen" não valem.
+**Danificada.** A XDP pede que você aceite a entrega em vez de recusá-la e fale imediatamente com o remetente. Anote o dano no comprovante de entrega ao assinar: o guia de procedimentos da XDP para remetentes determina que pedidos de indenização são negados se a assinatura não registrar ressalva específica, e anotações genéricas como "unchecked" ou "unseen" não valem.
 
-**Extraviada.** Os prazos do remetente junto à XDP são curtos: **33 dias** a partir do despacho para reclamar extravio total ou parcial e **7 dias** da entrega em caso de dano, incluindo fins de semana. Avise a loja depressa. Se constar `Delivered` sem você ter recebido, veja [entregue mas não recebida](guide:delivered-not-received).
+**Extraviada.** Os prazos do remetente junto à XDP são curtos: **33 dias** a partir do despacho para pedir indenização por extravio total ou parcial e **7 dias** da entrega em caso de dano, incluindo fins de semana. Avise a loja depressa. Se constar `Delivered` sem você ter recebido, veja [entregue mas não recebida](guide:delivered-not-received).
 
 **Devolvida.** Após `Return`, a XDP orienta falar com o fornecedor.
 
@@ -87,9 +87,9 @@ O site da XDP não informa telefone. O aplicativo menciona ligações com tarifa
 
 O [Peek](/) reconhece na hora códigos iniciados por `ZDB` como da XDP. Links de xdp.co.uk (`/track/` seguido do código, ou `track.php?c=`) também funcionam, embora qualquer código postal incluído no link não seja aproveitado.
 
-O Peek exibe um campo opcional "Código postal de entrega ou coleta" para a XDP. Sem código postal, a XDP não é consultada diretamente e o pacote é acompanhado apenas por [serviços universais de rastreamento](guide:universal-tracker). Com o código postal preenchido, o Peek lê a página de rastreamento da XDP e envia o código postal à XDP e, quando necessário, aos serviços de rastreamento. A XDP responde a um código postal errado da mesma forma que a um número desconhecido, então confira os dois.
+O Peek exibe um campo opcional "Código postal de entrega ou coleta" para a XDP. Sem código postal, a XDP não é consultada e o pacote é acompanhado apenas por [serviços universais de rastreamento](guide:universal-tracker). Com o código postal preenchido, o Peek lê a página de rastreamento da XDP e envia o código postal à XDP e, quando necessário, aos serviços de rastreamento. A XDP responde a um código postal errado da mesma forma que a um número desconhecido, então confira os dois.
 
-As movimentações da XDP não trazem fuso horário: o Peek interpreta tudo no horário do Reino Unido e exibe o histórico próprio da XDP. Os status mantêm o texto em inglês da XDP, exceto `Delivered`, traduzido pelo Peek; o peso pode aparecer, e o Peek notifica mudanças de status. Não há campo próprio para data prevista de entrega, locais das movimentações nem janela de horário, salvo quando aparecem no texto de uma linha como `Scheduled for Delivery - Route 11 - ETA: 10:51am to 12:51pm`. Com a encomenda aberta, ou no dia da entrega com notificações ligadas, o Peek consulta a XDP até a cada 10 minutos (até a cada 2 minutos a partir das 6h no horário do Reino Unido no dia em que sai para entrega, enquanto o próprio rastreador da XDP responder); nos demais casos, e após dois dias sem novidades (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora. Sem código postal, apenas por serviços de rastreamento: a cada hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega com o pacote aberto ou notificações ligadas. Em ambos os casos, a cada 6 horas depois de sete dias sem novidades em "Etiqueta criada".
+As movimentações da XDP não trazem fuso horário: o Peek interpreta tudo no horário do Reino Unido e exibe o histórico próprio da XDP. Os status mantêm o texto em inglês da XDP, exceto `Delivered`, traduzido pelo Peek; o peso pode aparecer, e o Peek pode notificar você quando o status muda. Não há campo próprio para data prevista de entrega, locais das movimentações nem janela de horário, salvo quando aparecem no texto de uma linha como `Scheduled for Delivery - Route 11 - ETA: 10:51am to 12:51pm`. Com a encomenda aberta, ou no dia da entrega com notificações ligadas, o Peek consulta a XDP até a cada 10 minutos (até a cada 2 minutos a partir das 6h no horário do Reino Unido no dia em que sai para entrega, enquanto o próprio rastreador da XDP responder); nos demais casos, e após dois dias sem novidades (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora. Sem código postal, apenas por serviços de rastreamento: a cada hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega com o pacote aberto ou notificações ligadas. Em ambos os casos, a cada 6 horas depois de sete dias sem novidades em "Etiqueta criada".
 
 ## Perguntas sobre o rastreamento da XDP
 
@@ -110,19 +110,19 @@ Não. O aplicativo da XDP afirma que não há retirada em depósitos ou hubs, e 
 Sim. A X D P Limited é registrada na Companies House desde 1995, com sede em Curdworth, perto de Sutton Coldfield, e entrega na Grã-Bretanha continental, Irlanda do Norte, Ilhas do Canal e Ilha de Wight.
 
 :::sources
-- [XDP: Track](https://xdp.co.uk/track/) – consignment number from the sender, postcode, tracker notices
-- [XDP: FAQs](https://xdp.co.uk/faqs/) – status meanings, contact the supplier, depot collection, app rescheduling
-- [XDP: Get In Touch](https://xdp.co.uk/contact/) – Delivery Query form, emails
-- [XDP: About Us](https://xdp.co.uk/about-us/) – formed 1995, coverage, two-hour slot, proof of delivery
-- [XDP: Home](https://xdp.co.uk/) – large and non-standard freight, services, app
-- [XDP: 1Man Delivery](https://xdp.co.uk/services/1man-delivery/) – 1 to 3 days, notifications, proxy phone
-- [XDP: 1+ Delivery](https://xdp.co.uk/services/1-plus-delivery-service/) – 3 to 5 days, room of choice, You Are Next, live chat and email
-- [XDP: 2Man Delivery](https://xdp.co.uk/services/2-man-delivery/) – pre-booked date, two-hour slot
-- [XDP: App (web version)](https://app.xdp.co.uk/) – delivery window, three attempts, Change Delivery Date, left safe, no depot collection, damage, returns, calls, contact form
-- [XDP: Terms and Conditions of Carriage](https://xdp.co.uk/wp-content/uploads/2024/02/XDP-TCFinal.2.24.V1.pdf) – no next-day guarantee, peak periods, claim deadlines
-- [XDP: Procedure Guide](https://xdp.co.uk/wp-content/uploads/2026/03/Procedure-Guide-V.5.pdf) – 33 and 7 days, noting damage on the proof of delivery
-- [XDP: Tracking (track.php)](https://www.xdp.co.uk/track.php) – postcode and not-found notices
-- [Companies House: X D P LIMITED](https://find-and-update.company-information.service.gov.uk/company/03139661) – registration, office
-- [Apple App Store: XDP](https://apps.apple.com/gb/app/xdp/id1485292140) – the XDP app
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [XDP: Track](https://xdp.co.uk/track/) – número da remessa vindo do remetente, código postal, avisos do rastreador
+- [XDP: FAQs](https://xdp.co.uk/faqs/) – significado dos status, contato com o fornecedor, retirada no depósito, reagendamento no app
+- [XDP: Get In Touch](https://xdp.co.uk/contact/) – formulário Delivery Query, e-mails
+- [XDP: About Us](https://xdp.co.uk/about-us/) – fundada em 1995, cobertura, janela de duas horas, comprovante de entrega
+- [XDP: Home](https://xdp.co.uk/) – cargas grandes e fora do padrão, serviços, app
+- [XDP: 1Man Delivery](https://xdp.co.uk/services/1man-delivery/) – 1 a 3 dias, notificações, número intermediário
+- [XDP: 1+ Delivery](https://xdp.co.uk/services/1-plus-delivery-service/) – 3 a 5 dias, cômodo à escolha, You Are Next, chat ao vivo e e-mail
+- [XDP: 2Man Delivery](https://xdp.co.uk/services/2-man-delivery/) – data agendada, janela de duas horas
+- [XDP: App (web version)](https://app.xdp.co.uk/) – janela de entrega, três tentativas, Change Delivery Date, Left Safe, sem retirada no depósito, danos, devoluções, ligações, formulário de contato
+- [XDP: Terms and Conditions of Carriage](https://xdp.co.uk/wp-content/uploads/2024/02/XDP-TCFinal.2.24.V1.pdf) – sem garantia de entrega no dia seguinte, períodos de pico, prazos para pedidos de indenização
+- [XDP: Procedure Guide](https://xdp.co.uk/wp-content/uploads/2026/03/Procedure-Guide-V.5.pdf) – 33 e 7 dias, anotar o dano no comprovante de entrega
+- [XDP: Tracking (track.php)](https://www.xdp.co.uk/track.php) – avisos de código postal e de não encontrado
+- [Companies House: X D P LIMITED](https://find-and-update.company-information.service.gov.uk/company/03139661) – registro, endereço
+- [Apple App Store: XDP](https://apps.apple.com/gb/app/xdp/id1485292140) – o app da XDP
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê
 :::

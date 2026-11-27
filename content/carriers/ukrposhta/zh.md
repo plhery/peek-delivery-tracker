@@ -75,7 +75,7 @@ Peek 读取 Ukrposhta 应用背后的服务；当该服务失败或查不到国�
 
 ### 在英国如何查询 Ukrposhta 包裹？
 
-在英国添加 Ukrposhta 邮件时，Peek 也会用同一单号向[英国皇家邮政（Royal Mail）](carrier:royal-mail)查询；以 `E` 开头的 EMS 单号则改向 Parcelforce 查询。一旦当地邮政出现不早于 Ukrposhta 最新记录的扫描，Peek 即转由对方继续跟踪，并保留 Ukrposhta 先前的全部历史。
+在英国添加 Ukrposhta 邮件时，Peek 也会用同一单号向[英国皇家邮政（Royal Mail）](carrier:royal-mail)查询；以 `E` 开头的 EMS 单号则改向 [Parcelforce](carrier:parcelforce) 查询。一旦当地邮政出现不早于 Ukrposhta 最新记录的扫描，Peek 即转由对方继续跟踪，并保留 Ukrposhta 先前的全部历史。
 
 ### 为什么我的 Ukrposhta 运单号查不到？
 

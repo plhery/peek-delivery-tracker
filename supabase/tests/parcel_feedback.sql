@@ -179,6 +179,19 @@ begin
     raise exception 'An answer from an unknown app must be refused';
   exception when check_violation then null;
   end;
+
+  -- An app's answer keeps its build; anything but a short build name is refused.
+  if pg_temp.answer('f4000000-0000-4000-8000-000000000303', 'FEEDBACKTEST0005', 'right',
+        '{"app": "ios", "app_build": "4521"}') <> 'stored'
+      or (select app_build from public.parcel_feedback where id = 'f4000000-0000-4000-8000-000000000303') <> '4521' then
+    raise exception 'An answer from an app must keep its build';
+  end if;
+  begin
+    perform pg_temp.answer('f4000000-0000-4000-8000-000000000304', 'FEEDBACKTEST0005', 'right',
+      '{"app": "ios", "app_build": "4521 (beta)"}');
+    raise exception 'A build that is not a build name must be refused';
+  exception when check_violation then null;
+  end;
 end;
 $$;
 

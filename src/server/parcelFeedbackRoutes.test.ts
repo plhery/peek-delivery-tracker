@@ -25,6 +25,7 @@ function storedPackage(overrides: JsonObject = {}): JsonObject {
     carrier: 'dpd',
     created_at: '2026-09-20T08:00:00+00:00',
     expected_delivery: '2026-10-03',
+    current_stage: 'in_transit',
     last_status_text: 'In transit',
     last_synced_at: '2026-10-02T09:00:00+00:00',
     sync_status: 'ok',
@@ -57,10 +58,11 @@ function viaLink(body: unknown, id = linkId, key?: string) {
     body: JSON.stringify(body),
   }), { params: Promise.resolve({ linkId: id }) });
 }
-function viaAccount(body: unknown, id = packageId, authenticated = true) {
+function viaAccount(body: unknown, id = packageId, authenticated = true, agent?: string) {
   return fromAccount(new NextRequest(`https://delivery.example/api/packages/${id}/feedback`, {
     method: 'POST',
-    headers: { 'content-type': 'application/json', ...(authenticated ? { Authorization: 'Bearer feedback-test' } : {}) },
+    headers: { 'content-type': 'application/json', ...(authenticated ? { Authorization: 'Bearer feedback-test' } : {}),
+      ...(agent === undefined ? {} : { 'user-agent': agent }) },
     body: JSON.stringify(body),
   }), { params: Promise.resolve({ id }) });
 }
@@ -84,7 +86,7 @@ describe('what the service held when an answer arrived', () => {
   it('keeps the status, the last check and the newest scans first, and nothing private', () => {
     const shown = shownParcel(storedPackage());
     expect(shown).toEqual({
-      status: 'In transit', sync_status: 'ok', sync_error: null, last_synced_at: '2026-10-02T09:00:00+00:00',
+      stage: 'in_transit', status: 'In transit', sync_status: 'ok', sync_error: null, last_synced_at: '2026-10-02T09:00:00+00:00',
       expected_delivery: '2026-10-03', provider: 'ParcelsApp', active_carrier: 'swiss-post', delivery_carrier: null,
       event_count: 2,
       events: [
@@ -327,6 +329,23 @@ describe('an answer from an account', () => {
     expect(response.status).toBe(204);
     expect(record.mock.calls[0][0]).toMatchObject({ via: 'account', app: 'android' });
     expect(counted).toHaveBeenCalledExactlyOnceWith('right', 'account', 'android', 'stored');
+  });
+
+  it('keeps the build the app\'s user-agent names, and none from the web', async () => {
+    vi.spyOn(SupabaseUserClient.prototype, 'getPackage').mockResolvedValue(storedPackage());
+    const apple = 'PeekDeliveryTracker/4521 CFNetwork/3860.100.1 Darwin/27.2.0';
+    const android = 'PeekDeliveryTracker/23 okhttp/5.1.0 Android/16';
+    const kept = async (app: string, agent: string) => {
+      expect((await viaAccount(answer({ answer: 'right', reasons: [], app }), packageId, true, agent)).status).toBe(204);
+      return (record.mock.calls.at(-1)![0] as JsonObject).app_build;
+    };
+    expect(await kept('ios', apple)).toBe('4521');
+    expect(await kept('android', android)).toBe('23');
+    // An answer names its app; a user-agent of another one, or a browser's, gives no build.
+    expect(await kept('android', apple)).toBeNull();
+    expect(await kept('web', apple)).toBeNull();
+    expect(await kept('ios', 'Mozilla/5.0 (iPhone; CPU iPhone OS 26_1 like Mac OS X)')).toBeNull();
+    expect(await kept('ios', 'PeekDeliveryTracker/4521 (beta) CFNetwork/3860.100.1 Darwin/27.2.0')).toBeNull();
   });
 
   it('answers another account\'s parcel like one that does not exist', async () => {

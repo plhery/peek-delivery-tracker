@@ -39,6 +39,15 @@ export function appPlatform(request: Request): NativePlatform | null {
   const platform = userAgentPlatform(request);
   return platform === 'unknown' ? null : platform;
 }
+
+/** The build an app's user-agent names after `PeekDeliveryTracker/`: Apple's build number, Android's version code. */
+const APP_BUILD = /^PeekDeliveryTracker\/([A-Za-z0-9._-]{1,40}) /;
+
+/** The build of the app `app` that a request's user-agent names, or null: from the web, or from another agent. */
+export function appBuild(request: Request, app: 'web' | 'ios' | 'android'): string | null {
+  if (appPlatform(request) !== (app === 'ios' ? 'apple' : app === 'android' ? 'android' : null)) return null;
+  return APP_BUILD.exec(request.headers.get('user-agent') ?? '')?.[1] ?? null;
+}
 const ASSERTION_HEADERS = ['x-app-attest-key-id', 'x-app-attest-challenge', 'x-app-attest-assertion'];
 
 /** Whether the request carries any of an assertion's headers. */

@@ -346,8 +346,9 @@ A parcel's page asks its reader whether it is right, or who carries a parcel no 
 was found for. `parcel_feedback` keeps one row per answer, service-role only: the
 tracking number, the carrier, the answer (`right`, `wrong` with its reasons and note,
 `found_elsewhere` with a carrier name or tracking page, or `not_received` with what the
-page said of the parcel in `page_said` and maybe a note), where it was asked, and `shown`,
-what the service held about the parcel at that moment (status, last check, newest scans
+page said of the parcel in `page_said` and maybe a note), where it was asked, the app's
+build as its user-agent names it (`app_build`, none from the web), and `shown`, what the
+service held about the parcel at that moment (stage, the carrier's status line, last check, newest scans
 as its timeline shows them, the carrier the page says writes the timeline in advance, and
 the newest steps it wrote that the page shows greyed).
 A row names no account, link or device. A note may follow its reason within the hour and

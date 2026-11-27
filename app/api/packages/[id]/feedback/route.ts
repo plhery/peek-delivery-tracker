@@ -8,6 +8,7 @@ import {
   requireUserClient,
   type RouteParameters,
 } from '../../../../../src/server/api';
+import { appBuild } from '../../../../../src/server/nativeVerification';
 import { keepParcelFeedback } from '../../../../../src/server/parcelFeedback';
 import { parcelFeedbackValues } from '../../../../../src/server/validation';
 
@@ -25,6 +26,6 @@ export const POST = apiRoute<PackageParameters>(async (context) => {
   const values = parcelFeedbackValues(await readJsonObject(context.request));
   const parcel = await requireUserClient(context).getPackage(packageId);
   if (!parcel) throw new HttpError(404, 'Package not found');
-  await keepParcelFeedback(requireService(context), parcel, values, 'account');
+  await keepParcelFeedback(requireService(context), parcel, values, 'account', appBuild(context.request, values.app));
   return noContent();
 }, { serviceRequired: true });

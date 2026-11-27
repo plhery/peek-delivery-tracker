@@ -6,6 +6,7 @@ import {
   requireService,
   type RouteParameters,
 } from '../../../../../../src/server/api';
+import { appBuild } from '../../../../../../src/server/nativeVerification';
 import { keepParcelFeedback } from '../../../../../../src/server/parcelFeedback';
 import {
   isParcelLinkId,
@@ -39,6 +40,6 @@ export const POST = apiRoute<LinkParameters>(async (context) => {
   if (found === null) return json(PARCEL_UNAVAILABLE, 404);
   if (found === 'stopped') return json({ error: PARCEL_NOT_SHARED }, 410);
   if (found.link.gift === true && found.link.owner !== true) return json(PARCEL_UNAVAILABLE, 404);
-  await keepParcelFeedback(service, found.package, values, 'link');
+  await keepParcelFeedback(service, found.package, values, 'link', appBuild(context.request, values.app));
   return noContent();
 }, { authenticated: false, serviceRequired: true, capability: true, publicRateLimit: limits });

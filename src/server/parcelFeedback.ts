@@ -25,8 +25,8 @@ function cut(value: unknown, limit: number): string | null {
 }
 
 /**
- * What the service holds about a parcel when an answer arrives: its status,
- * its last check and its newest scans, as its timeline shows them: without
+ * What the service holds about a parcel when an answer arrives: its stage,
+ * which heads its page, its carrier's status line, its last check and its newest scans, as its timeline shows them: without
  * a provider's copies of its carrier's scans, or Peek's own "Tracking added"
  * once carrier scans reach back to it, the carrier the page says writes the
  * timeline in advance (`written_ahead_by`) and the newest steps it wrote that the page
@@ -51,6 +51,7 @@ export function shownParcel(row: JsonObject): JsonObject {
     occurred_at: cut(event.occurred_at, 40),
   });
   return {
+    stage: cut(row.current_stage, 40),
     status: cut(row.last_status_text, 300),
     sync_status: cut(row.sync_status, 40),
     sync_error: cut(row.sync_error, 200),
@@ -68,7 +69,7 @@ export function shownParcel(row: JsonObject): JsonObject {
 
 /**
  * Keeps an answer about the parcel of `row`, reached through an account or a
- * link. An answer the table refuses (`full`, `closed`) is counted and logged;
+ * link, with the build of the app that gave it (`appBuild`). An answer the table refuses (`full`, `closed`) is counted and logged;
  * its reader is thanked like any other.
  */
 export async function keepParcelFeedback(
@@ -76,6 +77,7 @@ export async function keepParcelFeedback(
   row: JsonObject,
   values: ParcelFeedbackValues,
   via: 'account' | 'link',
+  build: string | null,
 ): Promise<'stored' | 'replaced' | 'full' | 'closed'> {
   const carrier = cut(row.carrier, 100) ?? 'unknown';
   const outcome = await service.recordParcelFeedback({
@@ -91,6 +93,7 @@ export async function keepParcelFeedback(
     asked: values.asked,
     via,
     app: values.app,
+    app_build: build,
     locale: values.locale,
     server_version: deployedVersion(),
     shown: shownParcel(row),

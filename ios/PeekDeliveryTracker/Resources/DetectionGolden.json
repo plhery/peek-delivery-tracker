@@ -13014,6 +13014,37 @@
     ]
   },
   {
+    "input": "1000672514",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl-express",
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "acs-courier",
+      "box-now",
+      "cargus",
+      "dhl-ecommerce-es",
+      "dhl-freight",
+      "dpd-ie",
+      "geniki-taxydromiki",
+      "gls-es"
+    ],
+    "preferred": [
+      "dhl-express"
+    ],
+    "asked": [
+      "dhl-express",
+      "acs-courier",
+      "geniki-taxydromiki",
+      "packeta",
+      "dhl-ecommerce-es"
+    ]
+  },
+  {
     "input": "100067364",
     "carrier": "unknown",
     "confidence": "low",
@@ -27905,6 +27936,62 @@
     ]
   },
   {
+    "input": "1RBB-16Q3-B8S1-D610",
+    "carrier": "pass-the-parcel",
+    "confidence": "high",
+    "candidates": [
+      "pass-the-parcel"
+    ]
+  },
+  {
+    "input": "1RBB-18BZ-B1H1-6J58",
+    "carrier": "pass-the-parcel",
+    "confidence": "high",
+    "candidates": [
+      "pass-the-parcel"
+    ]
+  },
+  {
+    "input": "1RBB-1HFH-I5T1-JKZF",
+    "carrier": "pass-the-parcel",
+    "confidence": "high",
+    "candidates": [
+      "pass-the-parcel"
+    ]
+  },
+  {
+    "input": "1RBB-1LBZ-I5E1-6LMG",
+    "carrier": "pass-the-parcel",
+    "confidence": "high",
+    "candidates": [
+      "pass-the-parcel"
+    ]
+  },
+  {
+    "input": "1RBB-1LDV-QWV1-4ECE",
+    "carrier": "pass-the-parcel",
+    "confidence": "high",
+    "candidates": [
+      "pass-the-parcel"
+    ]
+  },
+  {
+    "input": "1RBB-1OEM-XDL1-37FM",
+    "carrier": "pass-the-parcel",
+    "confidence": "high",
+    "candidates": [
+      "pass-the-parcel"
+    ]
+  },
+  {
+    "input": "1RBB-1Y2S-MGY1-11JL",
+    "carrier": "pass-the-parcel",
+    "confidence": "high",
+    "candidates": [
+      "pass-the-parcel"
+    ]
+  },
+  {
     "input": "1SDY241065761001",
     "carrier": "unknown",
     "confidence": "low",
@@ -34285,6 +34372,12 @@
     ]
   },
   {
+    "input": "2330523MF",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "233206309081",
     "carrier": "unknown",
     "confidence": "low",
@@ -34361,6 +34454,14 @@
       "packeta",
       "dhl-ecommerce-es",
       "box-now"
+    ]
+  },
+  {
+    "input": "2341461",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "seur"
     ]
   },
   {
@@ -39462,6 +39563,30 @@
     ]
   },
   {
+    "input": "291460040316",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending",
+      "smsa-express"
+    ],
+    "asked": [
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
     "input": "291725444775",
     "carrier": "unknown",
     "confidence": "low",
@@ -44433,6 +44558,20 @@
       "ukrposhta",
       "imile",
       "fan-courier"
+    ]
+  },
+  {
+    "input": "34LRU5071871",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "australia-post"
+    ],
+    "preferred": [
+      "australia-post"
+    ],
+    "asked": [
+      "australia-post"
     ]
   },
   {
@@ -86390,6 +86529,23 @@
     ]
   },
   {
+    "input": "AYE0312-1",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
     "input": "AZ648883377IE",
     "carrier": "an-post",
     "confidence": "high",
@@ -93902,6 +94058,12 @@
     "candidates": []
   },
   {
+    "input": "ECO0006250557",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "ECR0032042424",
     "carrier": "ecourier",
     "confidence": "high",
@@ -97132,6 +97294,12 @@
     ]
   },
   {
+    "input": "FST1080410004",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "FV99999981",
     "carrier": "unknown",
     "confidence": "low",
@@ -98782,6 +98950,14 @@
     ]
   },
   {
+    "input": "GZXH999999990YQ",
+    "carrier": "xinghe-freight",
+    "confidence": "high",
+    "candidates": [
+      "xinghe-freight"
+    ]
+  },
+  {
     "input": "GZXH9999999980Y",
     "carrier": "xinghe-freight",
     "confidence": "high",
@@ -100111,6 +100287,12 @@
     ]
   },
   {
+    "input": "HSETUC17592",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "HUA005816254YQ",
     "carrier": "unknown",
     "confidence": "none",
@@ -100550,6 +100732,12 @@
   },
   {
     "input": "IP4260320155440",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "IQFAYE002602",
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
@@ -102801,6 +102989,14 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "KDZGZ660002596",
+    "carrier": "king-delivery",
+    "confidence": "high",
+    "candidates": [
+      "king-delivery"
+    ]
   },
   {
     "input": "KE000027882E",
@@ -105224,6 +105420,14 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "LTYBRPD2304000216",
+    "carrier": "latam-you",
+    "confidence": "high",
+    "candidates": [
+      "latam-you"
+    ]
   },
   {
     "input": "LUAC0000794395",
@@ -111868,6 +112072,12 @@
     "candidates": []
   },
   {
+    "input": "R3947",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "R3J6E5S56N",
     "carrier": "unknown",
     "confidence": "low",
@@ -111932,6 +112142,17 @@
     "asked": [
       "gls-it",
       "post-one"
+    ]
+  },
+  {
+    "input": "R581002737",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "australia-post"
+    ],
+    "asked": [
+      "australia-post"
     ]
   },
   {
@@ -115527,6 +115748,14 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "SAUZ012516953",
+    "carrier": "fst-express",
+    "confidence": "high",
+    "candidates": [
+      "fst-express"
+    ]
   },
   {
     "input": "SC0060117",
@@ -121313,6 +121542,24 @@
   },
   {
     "input": "W17514447",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "W296517",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "W299199",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "W313153",
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []

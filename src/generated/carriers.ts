@@ -19530,6 +19530,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffdd00"
     },
     {
+      "id": "amazon-logistics",
+      "catalog": "amazon-logistics",
+      "slug": "amazon-logistics-otslezhivanie",
+      "title": "Отслеживание Amazon Logistics: номера TBA, Locker и чат",
+      "name": "Amazon Logistics",
+      "color": "#ff9900"
+    },
+    {
       "id": "allegro-one",
       "catalog": "allegro-one",
       "slug": "allegro-one-otslezhivanie",
@@ -22086,6 +22094,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#004654"
     },
     {
+      "id": "amazon-logistics",
+      "catalog": "amazon-logistics",
+      "slug": "amazon-logistics-pakket-volgen",
+      "title": "Amazon Logistics pakket volgen: TBA-code, Locker & hulp",
+      "name": "Amazon Logistics",
+      "color": "#ff9900"
+    },
+    {
       "id": "bpost",
       "catalog": "bpost",
       "slug": "bpost-pakje-volgen",
@@ -22516,6 +22532,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#346631"
     },
     {
+      "id": "mtscn",
+      "catalog": "mtscn",
+      "slug": "meiteshun-csomagkovetes",
+      "title": "Meiteshun (MTSCN) csomagkövetés: AMTS szám és státuszok",
+      "name": "Meiteshun Logistics",
+      "color": "#f89f3b"
+    },
+    {
       "id": "gzyl",
       "catalog": "gzyl",
       "slug": "gzyl-csomagkovetes",
@@ -22606,6 +22630,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "mtscn",
+      "catalog": "mtscn",
+      "slug": "meiteshun-urmarire-colet",
+      "title": "Urmărire Meiteshun (MTSCN): cod AMTS…FS și statusuri",
+      "name": "Meiteshun Logistics",
+      "color": "#f89f3b"
+    },
+    {
       "id": "gzyl",
       "catalog": "gzyl",
       "slug": "gzyl-urmarire-colet",
@@ -22686,6 +22718,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Проследяване на euShipments: статуси, куриери и контакт",
       "name": "euShipments",
       "color": "#0a8fcf"
+    },
+    {
+      "id": "mtscn",
+      "catalog": "mtscn",
+      "slug": "meiteshun-prosledyavane-na-pratka",
+      "title": "Meiteshun (MTSCN) проследяване: AMTS номер и статуси",
+      "name": "Meiteshun Logistics",
+      "color": "#f89f3b"
     },
     {
       "id": "gzyl",
@@ -22770,6 +22810,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e4a50e"
     },
     {
+      "id": "mtscn",
+      "catalog": "mtscn",
+      "slug": "meiteshun-entopismos-dematos",
+      "title": "Παρακολούθηση Meiteshun (MTSCN): κωδικός AMTS & στάδια",
+      "name": "Meiteshun Logistics",
+      "color": "#f89f3b"
+    },
+    {
       "id": "gzyl",
       "catalog": "gzyl",
       "slug": "gzyl-entopismos-dematos",
@@ -22787,6 +22835,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ],
   "hr": [
+    {
+      "id": "posti",
+      "catalog": "posti",
+      "slug": "posti-pracenje-posiljke",
+      "title": "Posti praćenje pošiljke: JJFI broj, statusi i paketomati",
+      "name": "Posti",
+      "color": "#ff8000"
+    },
     {
       "id": "box-now",
       "catalog": "box-now",
@@ -23020,6 +23076,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Відстеження Укрпошта — трек-номери, статуси та митниця",
       "name": "Ukrposhta",
       "color": "#ffbe0c"
+    },
+    {
+      "id": "mtscn",
+      "catalog": "mtscn",
+      "slug": "meiteshun-vidstezhennia",
+      "title": "Відстеження Meiteshun (MTSCN): номер AMTS…FS і статуси",
+      "name": "Meiteshun Logistics",
+      "color": "#f89f3b"
     },
     {
       "id": "jrt",

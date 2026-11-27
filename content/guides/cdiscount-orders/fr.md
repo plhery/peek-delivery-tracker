@@ -9,7 +9,7 @@ updated: 2026-11-27
 
 Ta commande Cdiscount se suit dans ton Espace client, rubrique « Mes commandes », et l'e-mail d'expédition nomme le transporteur. Ce que Cdiscount expédie part avec Colissimo, Chronopost, DPD, Mondial Relay ou Relais Colis, ou sur rendez-vous pour un gros colis. Un article vendu et expédié par un vendeur de la marketplace part avec le transporteur du vendeur, sous son propre numéro quand l'envoi est suivi.
 
-Oui, Cdiscount livre en Belgique depuis cdiscount.com (à domicile avec Chronopost dès 6,99 €, en point relais Mondial Relay pour 2,99 €, et même les gros colis), ainsi que la France métropolitaine, la Corse et huit autres pays d'Europe. La Suisse et l'outre-mer passent par un service de réexpédition (ColisExpat). Ce guide détaille la France, puis la Belgique, la Suisse et l'outre-mer.
+Depuis cdiscount.com, Cdiscount livre la Belgique (à domicile avec Chronopost dès 6,99 €, en point relais Mondial Relay pour 2,99 €, et même les gros colis), ainsi que la France métropolitaine, la Corse et huit autres pays d'Europe. La Suisse et l'outre-mer passent par un service de réexpédition (ColisExpat). Ce guide détaille la France, puis la Belgique, la Suisse et l'outre-mer.
 
 ## Quel transporteur livre ma commande Cdiscount ?
 

@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-11-27
 ---
 
-Se Poste Italiane, BRT o GLS non riescono a consegnare un pacco per destinatario assente, quasi sempre non devi fare niente subito: fanno da soli un secondo tentativo automatico (con Poste Delivery Express il giorno lavorativo seguente). Se anche quello va a vuoto, il pacco va in giacenza e l'avviso, l'SMS o l'e-mail ti dicono dov'è e fino a quando ritirarlo con un documento d'identità, oppure come fissare una nuova consegna sul sito o nell'app del corriere. In Ticino la Posta lascia un invito di ritiro e la seconda consegna alla porta la chiedi tu, gratis.
+Se Poste Italiane, BRT o GLS non riescono a consegnare un pacco per destinatario assente, spesso non devi fare niente subito: fanno da soli un secondo tentativo automatico (con Poste Delivery Express il giorno lavorativo seguente). Se anche quello va a vuoto, il pacco va in giacenza e l'avviso, l'SMS o l'e-mail ti dicono dov'è e fino a quando ritirarlo con un documento d'identità, oppure come fissare una nuova consegna sul sito o nell'app del corriere. In Ticino la Posta lascia un invito di ritiro e la seconda consegna alla porta la chiedi tu, gratis.
 
 ## Cosa succede se Poste Italiane, BRT o GLS non consegnano il pacco?
 

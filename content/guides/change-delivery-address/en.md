@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-11-27
 ---
 
-Before your order ships, deal with the shop: Amazon.co.uk lets you edit a third-party seller's order on desktop for 30 minutes, and on eBay or Vinted you cancel before dispatch and buy again. Once it has shipped, use your tracking number with the carrier (USPS, Royal Mail, Evri, DPD, Canada Post or Australia Post) to pick a neighbour, safe place, pickup point or another day. A new street address is often off the table — Evri and DPD UK send you back to the sender — and once the parcel is out for delivery, it's usually too late.
+Before your order ships, deal with the shop: Amazon.co.uk lets you edit a third-party seller's order on desktop for 30 minutes; on eBay you ask the seller to cancel, and on Vinted you cancel together, then buy again. Once it has shipped, use your tracking number with the carrier (USPS, Royal Mail, Evri, DPD, Canada Post or Australia Post): you can usually pick a neighbour, a safe place, a pickup point or another day. A new street address is often off the table — Evri and DPD UK send you back to the sender — and once the parcel is out for delivery, it's usually too late.
 
 ## Can I change the delivery address after ordering on Amazon?
 

@@ -1,6 +1,6 @@
 ---
 title: Consigne à colis : code de retrait, délai et problèmes
-description: Consigne locker Colissimo et Chronopost (Pickup), Mondial Relay, Amazon Locker, Bbox et My Post 24 : code de retrait, délai (3 à 10 j) et consigne pleine.
+description: Consigne locker Colissimo et Chronopost (Pickup), Mondial Relay, Amazon Locker, Bbox et My Post 24 : code de retrait, délai (3 à 15 j) et consigne pleine.
 slug: consigne-colis-code-retrait
 picture: Une rangée de consignes à colis avec une porte ouverte, un téléphone qui affiche un code, et Pip qui en sort.
 published: 2026-10-17

@@ -19,7 +19,7 @@ A página mostra dois formatos de referência. Veja exemplos com caracteres inve
 | `TRXN54BD83` | 10 caracteres: quatro letras, dois dígitos e quatro letras ou dígitos. |
 | `1TRXN482917--69002` | 11 caracteres, dois hifens e o código postal de entrega. |
 
-Alguns códigos de outras transportadoras são parecidos. Um código iniciado por `1G`, como `1G4829173654`, pertence à [GEODIS](carrier:geodis). Códigos de oito dígitos, como `48291736`, também são usados por Heppner, [Colisweb](carrier:colisweb) e [Mondial Relay](carrier:mondial-relay).
+Alguns códigos de outras transportadoras são parecidos. Um código iniciado por `1G`, como `1G4829173654`, pertence à [GEODIS](carrier:geodis). Códigos de oito dígitos, como `48291736`, também são usados por [Heppner](carrier:heppner), [Colisweb](carrier:colisweb) e [Mondial Relay](carrier:mondial-relay).
 
 Se a página responder `La commande est introuvable` (pedido não encontrado), confira os caracteres e revise o e-mail: outra transportadora pode estar com a sua entrega.
 

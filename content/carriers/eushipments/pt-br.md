@@ -17,7 +17,7 @@ A euShipments não publica um formato fixo de código. Ela informa que, assim qu
 | `74829103` | Oito dígitos: o único formato que o Peek já viu no rastreador da euShipments, em um pedido entregue na Bulgária pela transportadora local sob o mesmo número. |
 | O número após "Tracking Number:" | O código próprio da transportadora local, exibido no resultado da euShipments assim que ela recebe a encomenda e aceito no rastreador dela. |
 
-Oito dígitos também coincidem com [Mondial Relay](carrier:mondial-relay), [Colisweb](carrier:colisweb) e Heppner; por isso o número sozinho não identifica a euShipments: confira qual empresa aparece no e-mail da loja. Um link para a página da euShipments não abre o pedido diretamente, pois o site só aceita o número pelo formulário. Sem código algum? Veja [como encontrar um código de rastreamento](guide:find-tracking-number), em inglês.
+Oito dígitos também coincidem com [Mondial Relay](carrier:mondial-relay), [Colisweb](carrier:colisweb) e [Heppner](carrier:heppner); por isso o número sozinho não identifica a euShipments: confira qual empresa aparece no e-mail da loja. Um link para a página da euShipments não abre o pedido diretamente, pois o site só aceita o número pelo formulário. Sem código algum? Veja [como encontrar um código de rastreamento](guide:find-tracking-number), em inglês.
 
 ## Significado dos status de rastreamento da euShipments
 

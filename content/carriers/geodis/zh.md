@@ -19,7 +19,7 @@ GEODIS 说明追踪单号由寄件人或网店提供，通常位于订单确认�
 | `1G4829173605` | “1G 追踪单号”：共 12 位，以 `1G` 开头，后接 10 位大写字母或数字。仅凭此单号即可查询。 |
 | `19482917360580` | 14 位货件编号（“numéro d'envoi”）。GEODIS 仅在同时提供收件邮编时才接受该编号。 |
 
-部分外观相似的单号并非 GEODIS 单号。类似 `KMPQ48TR29` 的编号属于在法国配送大件订单的 [C Chez Vous](carrier:c-chez-vous)。8 位数字在 Peek 中也不是 GEODIS 运单号，它可能属于 Heppner、Colisweb 或 Mondial Relay。请核对商家邮件中注明的承运商名称。
+部分外观相似的单号并非 GEODIS 单号。类似 `KMPQ48TR29` 的编号属于在法国配送大件订单的 [C Chez Vous](carrier:c-chez-vous)。8 位数字在 Peek 中也不是 GEODIS 运单号，它可能属于 [Heppner](carrier:heppner)、Colisweb 或 Mondial Relay。请核对商家邮件中注明的承运商名称。
 
 ## GEODIS 追踪状态含义说明
 

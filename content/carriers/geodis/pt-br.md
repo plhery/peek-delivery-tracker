@@ -19,7 +19,7 @@ O espaço do destinatário aceita dois tipos de código. Veja os formatos com ca
 | `1G4829173605` | O "código de rastreamento 1G": 12 caracteres, `1G` seguido de 10 letras maiúsculas ou dígitos. Basta sozinho. |
 | `19482917360580` | O número de remessa de 14 dígitos ("numéro d'envoi"). A GEODIS só aceita esse código junto com o código postal de entrega. |
 
-Alguns códigos parecem semelhantes, mas não pertencem à GEODIS. Uma referência como `KMPQ48TR29` é da [C Chez Vous](carrier:c-chez-vous), que entrega pedidos volumosos na França. Um número de 8 dígitos não é um código da GEODIS para o Peek: pode pertencer à Heppner, à Colisweb ou à Mondial Relay. Confira qual transportadora aparece no e-mail da loja.
+Alguns códigos parecem semelhantes, mas não pertencem à GEODIS. Uma referência como `KMPQ48TR29` é da [C Chez Vous](carrier:c-chez-vous), que entrega pedidos volumosos na França. Um número de 8 dígitos não é um código da GEODIS para o Peek: pode pertencer à [Heppner](carrier:heppner), à Colisweb ou à Mondial Relay. Confira qual transportadora aparece no e-mail da loja.
 
 ## O que significam os status de rastreamento da GEODIS
 

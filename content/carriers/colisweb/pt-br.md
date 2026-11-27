@@ -19,7 +19,7 @@ O código contém apenas dígitos, com no mínimo 8 números. A caixa de rastrei
 | 8 dígitos | `48291736` |
 | Mais longo, até 32 dígitos | `4829173654` |
 
-Códigos de oito dígitos também batem com os da [Mondial Relay](carrier:mondial-relay) e da Heppner — ambas exigem código postal. Números mais longos coincidem com várias transportadoras. Confira qual empresa aparece no seu SMS ou e-mail: móveis e eletrodomésticos grandes também viajam com a [C Chez Vous](carrier:c-chez-vous), que rastreia pelo número do pedido. E a Colisweb não é a [Colis Privé](carrier:colis-prive): são empresas diferentes com nomes parecidos.
+Códigos de oito dígitos também batem com os da [Mondial Relay](carrier:mondial-relay) e da [Heppner](carrier:heppner) — ambas exigem código postal. Números mais longos coincidem com várias transportadoras. Confira qual empresa aparece no seu SMS ou e-mail: móveis e eletrodomésticos grandes também viajam com a [C Chez Vous](carrier:c-chez-vous), que rastreia pelo número do pedido. E a Colisweb não é a [Colis Privé](carrier:colis-prive): são empresas diferentes com nomes parecidos.
 
 ## Status da Colisweb: o que significam as mensagens em francês
 

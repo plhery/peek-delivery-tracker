@@ -10,7 +10,7 @@ A LinHan International (深圳市林瀚国际物流有限公司, aproximadamente
 
 ## Código de rastreamento LinHan: como identificar
 
-A LinHan não publica um formato oficial. Seus conhecimentos de transporte trazem `LHGJ`, oito dígitos e `CD`. Exemplos com dígitos fictícios:
+A LinHan não publica o formato dos códigos. Seus conhecimentos de transporte trazem `LHGJ`, oito dígitos e `CD`. Exemplos com dígitos fictícios:
 
 | Código | O que é |
 | --- | --- |
@@ -69,7 +69,7 @@ A página inicial da LinHan descreve sua cadeia como coleta, armazenagem e triag
 
 No seu país, um agente assume. O rastreador o chama apenas de "local carrier Agent" e "local acting company", e a rede de entrega de "logistics carrier", sem revelar a empresa nem fornecer um segundo código. Ainda assim, o histórico segue até a entrega, mantendo o rastreador da LinHan como referência.
 
-A LinHan não publica prazos de entrega nem regras para tentativas, pontos de retirada ou guarda. Se um aviso ou mensagem da transportadora local informar quem ela é, valem as regras dela: veja [tentativas de entrega](guide:missed-delivery), em inglês.
+A LinHan não publica prazos de entrega nem regras para tentativas, pontos de retirada ou guarda. Se um aviso ou mensagem da transportadora local informar quem ela é, valem as regras dela: veja [entrega não realizada](guide:missed-delivery), em inglês.
 
 ## Encomenda LinHan não chega ou rastreamento parado
 
@@ -99,7 +99,7 @@ Algumas linhas entram em etapas diferentes do que parecem: `Order information re
 
 A LinHan não fornece data prevista, peso, nome do serviço, transportadora final nem segundo código; portanto o Peek não exibe esses dados e acompanha o código `LHGJ` até o final sem trocar de transportadora.
 
-O Peek verifica a cada 10 minutos no máximo enquanto a encomenda está aberta ou no dia da entrega com notificações ativas, enquanto o site da LinHan responder. Após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora, e a cada 6 horas após sete dias em "Etiqueta criada". Depois de quatro dias sem leitura em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", mostra "Sem atualização de rastreamento desde …" e a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando LinHan International." Você escolhe alertas para "Cada atualização", "Etapas importantes" ou "Somente na entrega". O Peek não pode contatar a LinHan ou o vendedor por você.
+O Peek verifica a cada 10 minutos no máximo enquanto a encomenda está aberta ou no dia da entrega com notificações ativas, enquanto o site da LinHan responder. Após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora, e a cada 6 horas após sete dias em "Etiqueta criada". Depois de quatro dias sem leitura em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", mostra "Sem atualizações desde …" e a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando LinHan International." Você escolhe alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode contatar a LinHan ou o vendedor por você.
 
 ## Perguntas frequentes sobre o rastreamento LinHan
 

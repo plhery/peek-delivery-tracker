@@ -10,7 +10,7 @@ Heppner 是一家法国公路货运公司，承运从小件包裹到托盘及整
 
 ## Heppner 单号在哪里找、是什么格式
 
-Heppner 官网说明追踪单号“可在 Heppner 发送的通知中找到（如适用）”，有时也称为收据号（receipt number）。官网表单要求填写单号、收件邮编和收件国家（默认法国，列表中也含瑞士和比利时）。单号栏也接受商家的订单参考号，Heppner 说明该参考号“通常可向供应商获取”。如果两者都没有，Heppner 建议“直接联系寄件人”。另见[如何查找快递单号](guide:find-tracking-number)（英文）。
+Heppner 说明追踪单号“可在 Heppner 发送的通知中找到（如适用）”，有时也称为收据号（receipt number）。其表单要求填写单号、收件邮编和收件国家（默认法国，列表中也含瑞士和比利时）。单号栏也接受商家的订单参考号，Heppner 说明该参考号“通常可向供应商获取”。如果两者都没有，Heppner 建议“直接联系寄件人”。另见[如何查找快递单号](guide:find-tracking-number)（英文）。
 
 Heppner 未公布单号规则。Peek 为 Heppner 识别 8 位纯数字单号（以下数字为虚构）：
 
@@ -20,11 +20,11 @@ Heppner 未公布单号规则。Peek 为 Heppner 识别 8 位纯数字单号（�
 | `4829173` | 不是 Heppner：7 位数字指向 SEUR。 |
 | `4829173654` | 不是 Heppner：10 位数字符合 [DHL](carrier:dhl)、Mondial Relay、Relais Colis 等。 |
 
-仅凭 8 位数字无法判断是哪家承运商，请核对短信或邮件中的公司名称（见[相似单号格式](guide:tracking-number-formats)（英文））。如果 Heppner 回复“We were unable to locate your order”，页面会提醒你“Check the correspondence between the zip code entered and the tracking number”——邮编填错也会显示成查不到单号。
+仅凭 8 位数字无法判断是哪家公司在派送你的订单，请核对短信或邮件中的公司名称（见[相似单号格式](guide:tracking-number-formats)（英文））。如果 Heppner 回复“We were unable to locate your order”，页面会提醒你“Check the correspondence between the zip code entered and the tracking number”——邮编填错也会显示成查不到单号。
 
 ## Heppner 物流状态及其含义
 
-Heppner 查询页按浏览器语言自动切换法语、英语或德语（其余显示英语）。其英文状态按常见顺序排列如下：
+Heppner 查询页按浏览器语言显示法语、英语或德语（其余显示英语）。其英文状态按出现顺序排列如下：
 
 | Heppner 显示文字 | 对你的含义 |
 | --- | --- |
@@ -60,7 +60,7 @@ Heppner 查询页按浏览器语言自动切换法语、英语或德语（其余
 
 **无代收点或自提柜。** 如需自提，唯一地点就是 Heppner 当地分部。
 
-**错过派送。** 查询页会显示已重新排期。Heppner 未公布具体派送尝试次数。其 EXTENT 页面写明免费仓储期为 5 天（购买 EXTENT 为 7 天），请尽快预约新日期。
+**派送未成功。** 查询页会显示已重新排期。Heppner 未公布具体派送尝试次数。其 EXTENT 页面写明免费仓储期为 5 天（购买 EXTENT 为 7 天），请尽快预约新日期。
 
 ## Heppner 货件延误、破损或丢失怎么办
 
@@ -74,7 +74,7 @@ Heppner 查询页按浏览器语言自动切换法语、英语或德语（其余
 
 ## Heppner 客服与联系方式
 
-根据 Heppner 官网公布信息：
+根据 Heppner 网站公布的信息：
 
 - **法国：** 无面向收件人的全国客服电话、邮箱或在线聊天。请使用 [Contactez-nous 联系表单](https://www.heppner-group.com/contactez-nous/)，主题选择“Suivi d'un transport en cours”并填写你的追踪单号。
 - **派送分部：** 追踪页面中的“Your branch”会显示对应分部的营业时间与电话；全部网点也可在 [Heppner 网点查询页](https://www.heppner-group.com/reseau/)查找。
@@ -83,13 +83,13 @@ Heppner 查询页按浏览器语言自动切换法语、英语或德语（其余
 
 ## 使用 Peek 追踪 Heppner 货件
 
-[Peek](/) 无法主动询问 Heppner、Mondial Relay 或 Colisweb 是否认识某个 8 位数字，因此仅粘贴数字不会自动判定承运商：请点击“更改”并选择 Heppner。在瑞士地区访问时，Peek 会优先展示 Heppner 的邮编栏；在法国、比利时、卢森堡、西班牙或葡萄牙则优先展示 Mondial Relay 的邮编栏，请先切换为 Heppner。粘贴 Heppner 链接无法提取信息，请直接输入 8 位数字。
+[Peek](/) 无法主动询问 Heppner、Mondial Relay 或 Colisweb 是否认识某个 8 位数字，因此单凭这个数字无法确定是哪家快递公司：请点“更换”并选择 Heppner。在瑞士地区访问时，Peek 会优先展示 Heppner 的邮编栏；在法国、比利时、卢森堡、西班牙或葡萄牙则优先展示 Mondial Relay 的邮编栏，请先切换为 Heppner。粘贴 Heppner 链接无法提取信息，请直接输入 8 位数字。
 
 选定后 Peek 会要求输入收件邮编，未填邮编无法向 Heppner 查询：5 位邮编按法国查询；4 位邮编先按瑞士查，再依次尝试比利时和卢森堡。填错邮编的结果看起来和查不到单号一样。
 
-Peek 会展示当前阶段以及带精确时间的完整轨迹，每一步均以 Peek 统一文案呈现：Shipment collected、In transit、Shipment forwarded、Out for delivery、Delivered、Returned to sender、Awaiting delivery instructions、Shipment exception。等待预约指示、入库扫描异常以及货件取消（“Shipment cancelled”）都会标记为异常状态。若 Heppner 提示货物将换用新参考号改寄新地址，Peek 会显示为“Forwarded to a new address under a new reference”，仍归类为运输途中。轨迹不包含扫描地点、预计日期或自提点，且不显示寄件人、收件地址及派送指示。
+Peek 会展示当前阶段以及带精确时间的完整轨迹，每一步均以 Peek 自己的说法呈现：快件已揽收、运输中、快件已转寄、派送中、已签收、已退回寄件人、等待派送指示、快件异常。等待预约指示、入库扫描异常以及货件取消（“Shipment cancelled”）都会标记为异常状态。若 Heppner 提示货物将换用新参考号改寄新地址，Peek 会显示为“Forwarded to a new address under a new reference”，仍归类为运输中。轨迹不包含扫描地点、预计日期或自提点，且不显示寄件人、收件地址及派送指示。
 
-当你打开货件页面或在派送日开启通知时，只要 Heppner 官网正常响应，Peek 最高每 10 分钟检查一次，在 Heppner 扫描出库派送当天自当地早上 6 点起每 2 分钟检查一次；其余时间每小时一次。通知可选择每次扫描、仅重要节点或仅派送日。若连续两天无新动态（处于“已创建运单”或“快递公司已收件”状态时为 12 小时），Peek 改为每小时查询一次。Peek 无法代你预约时段，请在 Heppner 官网页面操作。
+当你打开货件页面或在派送日开启通知时，只要 Heppner 自己的查询页正常响应，Peek 最高每 10 分钟检查一次，在 Heppner 扫描出库派送当天自当地早上 6 点起每 2 分钟检查一次；其余时间每小时一次。通知可选择每次扫描、仅重要环节或仅派送当天。若连续两天无新动态（处于“已生成面单”或“已揽收”状态时为 12 小时），Peek 改为每小时查询一次。Peek 无法代你预约时段，请在 Heppner 的页面上操作。
 
 ## Heppner 物流查询常见问题
 
@@ -103,7 +103,7 @@ Peek 会展示当前阶段以及带精确时间的完整轨迹，每一步均以
 
 ### 可以在比利时查询 Heppner 货件吗？
 
-可以。比利时在 Heppner 官网查询页的国家列表中，Peek 遇到 4 位邮编时也会先查瑞士，再查比利时和卢森堡。
+可以。比利时在 Heppner 自己查询页的国家列表中，Peek 遇到 4 位邮编时也会先查瑞士，再查比利时和卢森堡。
 
 ### Heppner 是一家什么公司？
 

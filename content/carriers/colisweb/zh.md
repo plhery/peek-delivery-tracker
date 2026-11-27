@@ -19,7 +19,7 @@ Colisweb 表示单号位于它发给你的短信和邮件中，通常随派送�
 | 8 位数字 | `48291736` |
 | 更长，最多 32 位数字 | `4829173654` |
 
-8 位纯数字也符合 [Mondial Relay](carrier:mondial-relay) 运单号与 Heppner 单号（两者都需要填写邮编）；更长的纯数字则与许多承运商重合。请核对短信或邮件里写的承运商名称：家具和大家电也可能由 [C Chez Vous](carrier:c-chez-vous) 承运（按订单号追踪）。此外，Colisweb 并非 [Colis Privé](carrier:colis-prive)，两者是名称相近的不同公司。
+8 位纯数字也符合 [Mondial Relay](carrier:mondial-relay) 运单号与 [Heppner](carrier:heppner) 单号（两者都需要填写邮编）；更长的纯数字则与许多承运商重合。请核对短信或邮件里写的承运商名称：家具和大家电也可能由 [C Chez Vous](carrier:c-chez-vous) 承运（按订单号追踪）。此外，Colisweb 并非 [Colis Privé](carrier:colis-prive)，两者是名称相近的不同公司。
 
 ## Colisweb 法语物流状态含义解析
 

@@ -47,7 +47,7 @@ Os termos que mais confundem:
 - Na barra de progresso da página em inglês, a etapa de entrega concluída aparece traduzida por engano como `On delivery` (do francês "Commande livrée"), enquanto a etapa em rota de entrega continua em francês: `En cours de livraison`.
 - `qualification(s)` significa ressalvas: observações escritas no recibo de entrega sobre itens faltantes ou danificados.
 
-## Entregas Heppner: agendamentos, faixas horárias e ausências
+## Entregas Heppner: agendamentos, faixas horárias e entregas não realizadas
 
 Com o Heppner CONNECT, destinatários pessoa física recebem e-mail ou SMS em cada etapa e podem passar instruções na página de rastreamento a qualquer hora:
 
@@ -60,7 +60,7 @@ Você pode trocar a data até o pedido sair em rota; depois disso, a página mos
 
 **Sem pontos de retirada nem armários.** O único local de retirada é a filial da Heppner.
 
-**Tentativa sem sucesso.** O rastreamento mostra como reagendada. A Heppner não divulga quantas tentativas faz. A página do EXTENT informa armazenagem gratuita por 5 dias, ou 7 dias com EXTENT; agende nova data quanto antes.
+**Entrega não realizada.** O rastreamento mostra como reagendada. A Heppner não divulga quantas tentativas faz. A página do EXTENT informa armazenagem gratuita por 5 dias, ou 7 dias com EXTENT; agende nova data quanto antes.
 
 ## Entrega Heppner atrasada, danificada ou extraviada
 
@@ -83,11 +83,11 @@ Conforme listado nas páginas da Heppner:
 
 ## Como rastrear uma entrega Heppner no Peek
 
-O [Peek](/) não consegue consultar automaticamente Heppner, Mondial Relay ou Colisweb apenas por um número de 8 dígitos, então o código sozinho não define a transportadora: toque em "Alterar" e escolha Heppner. Na Suíça, o Peek já sugere o campo de código postal da Heppner; na França, Bélgica, Luxemburgo, Espanha ou Portugal, ele oferece primeiro o da Mondial Relay, portanto escolha Heppner antes. Links da Heppner não trazem o código: digite os dígitos.
+O [Peek](/) não consegue perguntar à Heppner, à Mondial Relay ou à Colisweb se conhecem um número de 8 dígitos, então o código sozinho não indica a transportadora: toque em "Trocar" e escolha Heppner. Na Suíça, o Peek já sugere o campo de código postal da Heppner; na França, Bélgica, Luxemburgo, Espanha ou Portugal, ele oferece primeiro o da Mondial Relay, portanto escolha Heppner antes. Links da Heppner não trazem o código: digite os dígitos.
 
 Em seguida, o Peek pede o código postal de entrega e não consegue consultar a Heppner sem ele: 5 dígitos são buscados na França; 4 dígitos primeiro na Suíça e depois na Bélgica e em Luxemburgo. Um código postal incorreto aparece como código desconhecido.
 
-O Peek mostra o status e o histórico com horários exatos, traduzidos para suas próprias etiquetas: Shipment collected, In transit, Shipment forwarded, Out for delivery, Delivered, Returned to sender, Awaiting delivery instructions e Shipment exception. Aguardar instruções, problema na leitura de entrada e envio cancelado ("Shipment cancelled") entram como problema. A mensagem da Heppner de que o pedido seguirá para novo endereço sob nova referência aparece como "Forwarded to a new address under a new reference", ainda em trânsito. Não há locais de leitura, data prevista nem ponto de retirada, e o Peek omite remetente, endereço e instruções.
+O Peek mostra o status e o histórico com horários exatos, cada etapa com as palavras do próprio Peek: Encomenda coletada, Em trânsito, Encomenda encaminhada, Saiu para entrega, Entregue, Devolvida ao remetente, Aguardando instruções de entrega e Problema com a encomenda. Aguardar instruções, problema na leitura de entrada e envio cancelado ("Shipment cancelled") entram como problema. A mensagem da Heppner de que o pedido seguirá para novo endereço sob nova referência aparece como "Forwarded to a new address under a new reference", ainda em trânsito. Não há locais de leitura, data prevista nem ponto de retirada, e o Peek omite remetente, endereço e instruções.
 
 Com o pedido aberto, ou no dia da entrega com notificações ativas, o Peek verifica a cada 10 minutos no máximo — ou a cada 2 minutos a partir das 6h no horário local no dia em que a Heppner registra saída para entrega — enquanto o portal responder; fora disso, de hora em hora. Você pode escolher avisos em cada leitura, etapas importantes ou somente no dia da entrega. Após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. O Peek não agenda horários: faça isso na página da Heppner.
 

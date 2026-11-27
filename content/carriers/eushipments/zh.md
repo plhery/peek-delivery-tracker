@@ -17,7 +17,7 @@ euShipments 未公布单号格式。它说明订单处理完成后，你会收�
 | `74829103` | 8 位数字：Peek 在 euShipments 查询页上见过的唯一格式，用于发往保加利亚的订单，当地快递也沿用同一单号派送。 |
 | “Tracking Number:” 后面的号码 | 当地派送快递公司的自有单号，会在该快递收到包裹后显示在 euShipments 查询结果下方，可直接在该快递自己的查询页查询。 |
 
-8 位数字也符合 [Mondial Relay](carrier:mondial-relay)、[Colisweb](carrier:colisweb) 和 Heppner 的单号格式，因此单看数字无法确定就是 euShipments，请核对商家邮件中注明的物流公司。直接粘贴 euShipments 查询页链接无法打开订单，其页面只接受在表单内输入单号查询。如果找不到单号，请参阅[如何查找快递单号](guide:find-tracking-number)（英文）。
+8 位数字也符合 [Mondial Relay](carrier:mondial-relay)、[Colisweb](carrier:colisweb) 和 [Heppner](carrier:heppner) 的单号格式，因此单看数字无法确定就是 euShipments，请核对商家邮件中注明的物流公司。直接粘贴 euShipments 查询页链接无法打开订单，其页面只接受在表单内输入单号查询。如果找不到单号，请参阅[如何查找快递单号](guide:find-tracking-number)（英文）。
 
 ## euShipments 物流状态详解
 

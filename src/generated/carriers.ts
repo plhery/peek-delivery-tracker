@@ -15294,6 +15294,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#3fa7ff"
     },
     {
+      "id": "swiss-post-cargo",
+      "catalog": "swiss-post-cargo",
+      "slug": "swiss-post-cargo-tracking",
+      "title": "Rastreamento Swiss Post Cargo: status, entrega e contato",
+      "name": "Swiss Post Cargo",
+      "color": "#ffcc00"
+    },
+    {
       "id": "dachser",
       "catalog": "dachser",
       "slug": "dachser-tracking",
@@ -16532,6 +16540,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento SAMUS: códigos, status e retirada em Vilnius",
       "name": "SAMUS",
       "color": "#e50079"
+    },
+    {
+      "id": "siuntos-autobusais",
+      "catalog": "siuntos-autobusais",
+      "slug": "siuntos-autobusais-tracking",
+      "title": "Rastreamento Siuntos autobusais: encomendas de ônibus",
+      "name": "Siuntos autobusais",
+      "color": "#00843d"
     },
     {
       "id": "dk-logistics-ee",
@@ -20164,6 +20180,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#3fa7ff"
     },
     {
+      "id": "swiss-post-cargo",
+      "catalog": "swiss-post-cargo",
+      "slug": "swiss-post-cargo-tracking",
+      "title": "Swiss Post Cargo 货运查询：单号、状态与派送规则",
+      "name": "Swiss Post Cargo",
+      "color": "#ffcc00"
+    },
+    {
       "id": "dachser",
       "catalog": "dachser",
       "slug": "dachser-tracking",
@@ -21418,6 +21442,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "SAMUS 快递查询：单号、立陶宛语状态与维尔纽斯自提",
       "name": "SAMUS",
       "color": "#e50079"
+    },
+    {
+      "id": "siuntos-autobusais",
+      "catalog": "siuntos-autobusais",
+      "slug": "siuntos-autobusais-tracking",
+      "title": "Siuntos autobusais 快递查询：立陶宛大巴包裹自提指南",
+      "name": "Siuntos autobusais",
+      "color": "#00843d"
     },
     {
       "id": "dk-logistics-ee",

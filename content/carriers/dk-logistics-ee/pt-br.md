@@ -29,7 +29,7 @@ Segundo o site dkl.ee, a DKL oferece:
 - **Carga aérea**, exportação e importação, entre Estônia, Letônia ou Lituânia e qualquer país do mundo, com representantes próprios na Letônia e Lituânia.
 - **Carga rodoviária**, lotação completa e fracionada, além de transporte multimodal e marítimo.
 - **Cargas especiais:** produtos perigosos (códigos DGR, ADR, HUM e AVI) e cargas congeladas ou refrigeradas.
-- **Outros serviços:** escolta armada na Estônia, entrega de presentes e flores, armazenagem comum e alfandegada.
+- **Outros serviços:** escolta vigiada de cargas na Estônia, entrega de presentes e flores, armazenagem comum e alfandegada.
 
 Também oferece solicitação gratuita de coleta, seguro sob pedido do cliente, coleta mundial com código de conta do cliente e pagamento pelo destinatário se combinado antes. Remetentes solicitam coleta pelo formulário em dkl.ee até as 16h00 (horário da Estônia) em dias úteis; pedidos posteriores seguem no próximo dia útil.
 
@@ -51,7 +51,7 @@ A DKL afirma não ter tabela fixa para entregas de importação e não explica c
 
 **Entregue mas não chegou.** O remetente recebe o comprovante por e-mail com sobrenome, data e hora da entrega — peça a ele para saber quem recebeu e consulte [entregue mas não recebida](guide:delivered-not-received).
 
-**Perdida ou danificada.** A DKL não publica procedimento nem prazo de reclamação, segurando mercadorias para todo o trajeto quando o cliente solicita. Avise o atendimento o quanto antes; se veio de uma loja, peça reembolso ou reenvio à loja. Veja [encomendas perdidas](guide:lost-parcel) e [encomendas danificadas](guide:damaged-parcel).
+**Perdida ou danificada.** A DKL não publica procedimento nem prazo para pedidos de indenização, segurando mercadorias para todo o trajeto quando o cliente solicita. Avise o atendimento o quanto antes; se veio de uma loja, peça reembolso ou reenvio à loja. Veja [encomendas perdidas](guide:lost-parcel) e [encomendas danificadas](guide:damaged-parcel).
 
 ## Contato e atendimento ao cliente DK Logistics
 
@@ -67,19 +67,19 @@ Tenha o número da guia pronto ao ligar ou escrever.
 
 ## Acompanhe um envio DK Logistics no Peek
 
-O [Peek](/) não identifica envios da DK Logistics só pelo número: a DKL não publica formato e o catálogo do Peek não vincula nenhum padrão, então ela nunca surge em "Compatível com este código". Ainda assim, cole o número (o Peek acompanha mais de 4.500 transportadoras), toque em "Alterar" e escolha DK Logistics (ou "Alterar transportadora" em pacotes salvos). Buscar "DKL", "DK Logistics OÜ" ou "Estonia" também encontra. Um número de seis dígitos exibe inicialmente aviso de código de retirada, mas ao selecionar DK Logistics é aceito normalmente. Links de dkl.ee não contêm o número da guia, então cole o número diretamente.
+O [Peek](/) não identifica envios da DK Logistics só pelo número: a DKL não publica formato e o catálogo do Peek não vincula nenhum padrão, então ela nunca surge em "Compatível com este código". Ainda assim, cole o número (o Peek acompanha mais de 4.500 transportadoras), toque em "Trocar" e escolha DK Logistics (ou "Trocar transportadora" em pacotes salvos). Buscar "DKL", "DK Logistics OÜ" ou "Estonia" também encontra. Um número só de seis dígitos mostra primeiro "Parece um código de retirada": ao selecionar DK Logistics, o Peek o usa como código de rastreamento. Links de dkl.ee não contêm o número da guia, então cole o número diretamente.
 
-Se deixar a transportadora em aberto, o Peek pesquisa em serviços de rastreamento — imediatamente ao adicionar ("Consultando serviços de rastreamento…") se o número coincidir com outros padrões, ou depois de adicionar se não coincidir — e associa à DK Logistics se algum serviço a apontar com movimentação.
+Se deixar a transportadora em aberto, o Peek a procura nos serviços de rastreamento. Quando o número se parece com os de outras transportadoras, o Peek consulta os serviços enquanto você adiciona ("Consultando serviços de rastreamento…") e, se nenhum o conhece ainda, a lista de transportadoras diz "Ainda não encontrada pelos serviços de rastreamento. O Peek continua verificando depois que você adicionar." Um número que não se parece com o de nenhuma transportadora não é consultado enquanto você adiciona: a lista diz "O Peek consulta depois que você adicionar." Quando os serviços apontam DK Logistics ou DKL como transportadora e mostram a encomenda em movimento, o Peek a coloca em DK Logistics.
 
-Como a DK Logistics não possui rastreador legível diretamente pelo Peek, ele consulta ParcelsApp, Ship24 e 17TRACK em ordem (dependendo do código; Ship24 primeiro para 10 dígitos) e mantém o primeiro que encontrar o envio, mostrando o histórico nos termos daquele serviço (que pode atrasar em relação à DKL ou vir vazio). Quando um serviço encontra, o link do pacote aponta para a página dele. O Peek não compartilha seu IP nem seu país com os serviços.
+Como a DK Logistics não possui rastreador legível diretamente pelo Peek, ele consulta ParcelsApp, Ship24 e 17TRACK em ordem (dependendo do código; Ship24 primeiro para 10 dígitos) e mantém o primeiro que encontrar o envio, mostrando o histórico nos termos daquele serviço (que pode atrasar em relação à DKL ou vir vazio). Quando um serviço encontra, o link do pacote aponta para a página dele; até lá, o pacote não tem link de rastreamento. O Peek não compartilha seu IP nem seu país com os serviços.
 
-O Peek consulta de hora em hora, a cada 3 horas após um dia sem nova leitura e a cada 6 horas após sete dias sem novidades em "Etiqueta criada"; no dia da saída para entrega, verifica até a cada 15 minutos com o app aberto ou notificações ligadas. Serviços sem resultado são reconsultados após um dia. Depois de quatro dias sem atualização em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", exibe o alerta com a data da última leitura (por exemplo, "Sem atualização de rastreamento desde seg 12 out") e um link para ajuda da DK Logistics. As notificações aceitam "Cada atualização", "Etapas importantes" ou "Somente entrega". O Peek não pode entrar em contato com a DK Logistics nem com o remetente por você.
+O Peek consulta de hora em hora, a cada 3 horas após um dia sem nova leitura e a cada 6 horas após sete dias sem novidades em "Etiqueta criada"; no dia da saída para entrega, verifica até a cada 15 minutos com o app aberto ou notificações ligadas. Serviços sem resultado são reconsultados após um dia. Depois de quatro dias sem atualização em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", mostra "Sem atualizações desde …" com o dia dessa linha e o link "Pedir ajuda a DK Logistics". As notificações podem seguir "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode entrar em contato com a DK Logistics nem com o remetente por você.
 
 ## Perguntas sobre o rastreio DK Logistics
 
 ### O que é a DK Logistics?
 
-A DK Logistics OÜ (DKL) é uma transportadora expressa e agente de cargas sediada em Tallinn, Estônia, operando entregas expressas, pequenos pacotes e cargas aéreas, rodoviárias e marítimas entre Estônia, Letônia, Lituânia e parceiros na Europa e CEI.
+A DK Logistics OÜ (DKL) é uma transportadora expressa e agente de cargas sediada em Tallinn, Estônia, operando entregas expressas, pequenos pacotes e cargas aéreas, rodoviárias e marítimas de e para Estônia, Letônia e Lituânia, com empresas parceiras na Europa e na CEI.
 
 ### Onde rastreio um envio da DK Logistics?
 

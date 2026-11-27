@@ -29,21 +29,21 @@ O rastreamento da La Poste responde a códigos Delivengo da mesma forma que a qu
 
 | Etapa no Peek | O que a leitura da La Poste significa |
 | --- | --- |
-| `Label created` | Envio anunciado: a loja gerou a etiqueta, mas a La Poste ainda não está com o pacote. |
-| `Received by carrier` | A La Poste recebeu o pacote sob seus cuidados. |
-| `In transit` | Em movimento pela França, pronto para deixar a França ou já no seu país em trânsito. |
-| `At customs` | Entrou na alfândega; após liberação, volta para `In transit`. |
-| `Delivered` | Entregue. Se não estiver lá, veja [entregue mas não recebida](guide:delivered-not-received). |
-| `Needs attention` | Ocorreu um problema — dano, recusa, endereço errado ou retorno à loja. A leitura da La Poste pode indicar o motivo (endereço incorreto, prazo de retirada vencido ou documentos de importação incompletos). |
-| `Returned to sender` | O pacote voltou para a loja. |
+| "Etiqueta criada" | Envio anunciado: a loja gerou a etiqueta, mas a La Poste ainda não está com o pacote. |
+| "Recebida pela transportadora" | A La Poste recebeu o pacote sob seus cuidados. |
+| "Em trânsito" | Em movimento pela França, pronto para deixar a França ou já no seu país em trânsito. |
+| "Na alfândega" | Entrou na alfândega; após liberação, volta para "Em trânsito". |
+| "Entregue" | Entregue. Se não estiver lá, veja [entregue mas não recebida](guide:delivered-not-received). |
+| "Precisa de atenção" | Ocorreu um problema — dano, recusa, endereço errado ou retorno à loja. A leitura da La Poste pode indicar o motivo (endereço incorreto, prazo de retirada vencido ou documentos de importação incompletos). |
+| "Devolvida ao remetente" | O pacote voltou para a loja. |
 
 Após a exportação, o correio do seu país cuida da entrega final e o histórico da La Poste pode ficar sem atualizações, encerrando na saída da França ou chegada ao destino.
 
-## Entrega e tentativas perdidas
+## Entrega e entregas não realizadas
 
 **Quem entrega.** O serviço postal do seu próprio país faz a entrega final, não a La Poste.
 
-**Se você não estiver em casa.** Valem as regras do seu correio local, não as da La Poste: forma de aviso, prazo de guarda e novas tentativas. Veja [entrega perdida](guide:missed-delivery).
+**Se você não estiver em casa.** Valem as regras do seu correio local, não as da La Poste: forma de aviso, prazo de guarda e novas tentativas. Veja [entrega não realizada](guide:missed-delivery).
 
 **Alfândega.** Dentro da União Europeia — da França para a Irlanda, por exemplo — não há cobrança de tarifas alfandegárias entre países-membros. Fora da UE (como Reino Unido, EUA, Canadá ou Austrália), aplicam-se as regras locais; consulte [encomenda retida na alfândega](guide:customs).
 
@@ -55,7 +55,7 @@ A loja despachou pela conta Delivengo dela, então comece falando com a loja.
 
 **Perdida ou danificada.** Peça novo envio ou reembolso à loja. Se você mora na UE, o portal Your Europe esclarece que o comerciante responde por danos do despacho até você receber o produto e, se não chegar em 30 dias (ou no prazo combinado), você deve notificar o vendedor concedendo prazo adicional razoável; persistindo a falta de entrega, pode cancelar o contrato e receber reembolso. Veja [encomenda perdida](guide:lost-parcel).
 
-**Devolvida.** Encomendas que não podem ser entregues retornam à loja: o Peek mostra `Needs attention` no retorno e depois `Returned to sender`. Pergunte à loja se fará novo envio. Veja [devolvida ao remetente](guide:returned-to-sender).
+**Devolvida.** Encomendas que não podem ser entregues retornam à loja: o Peek mostra "Precisa de atenção" no retorno e depois "Devolvida ao remetente". Pergunte à loja se fará novo envio. Veja [devolvida ao remetente](guide:returned-to-sender).
 
 ## Contato Delivengo
 
@@ -65,13 +65,13 @@ A loja despachou pela conta Delivengo dela, então comece falando com a loja.
 
 ## Como acompanhar encomendas Delivengo no Peek
 
-O [Peek](/) não tem integração separada para Delivengo: acompanha esses pacotes pelo rastreamento da La Poste, como qualquer envio La Poste ou Colissimo. Cole o código `…FR` e o Peek identifica "La Poste / Colissimo" na hora; se quiser selecionar "Delivengo" em "Alterar", o rastreamento é idêntico. Links de laposte.fr (inclusive de mydelivengo.laposte.fr) também funcionam.
+O [Peek](/) não tem integração separada para Delivengo: acompanha esses pacotes pelo rastreamento da La Poste, como qualquer envio La Poste ou Colissimo. Cole o código `…FR` e o Peek identifica "La Poste / Colissimo" na hora; se quiser selecionar "Delivengo" em "Trocar", o rastreamento é idêntico. Links de laposte.fr (inclusive de mydelivengo.laposte.fr) também funcionam.
 
 O Peek exibe o que a La Poste publica: status, histórico com o país de cada leitura e data prevista quando disponível, omitindo seu nome e endereço. Os textos permanecem no francês da La Poste, salvo etapas comuns como entrega, traduzidas para o seu idioma.
 
 Quando a La Poste informa o país de destino, o Peek também pode consultar o correio acompanhado naquele país e alternar para ele assim que houver progresso mais recente — incluindo todos os países da UE, Reino Unido, Suíça, Noruega, EUA, Canadá, Austrália e Japão, entre outros. Ainda assim, o histórico da La Poste pode ficar quieto após a exportação e o último trecho nem sempre aparece.
 
-Enquanto o pacote estiver aberto no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta até a cada 10 minutos — ou a cada 2 minutos a partir das 6h no horário local no dia da saída para entrega, enquanto o site da La Poste responder (após o repasse, no ritmo do correio de destino; via serviços agregadores, até a cada 15 minutos nesse dia); nos demais momentos, a cada hora. As notificações cobrem cada leitura, etapas importantes ou somente o dia da entrega. Após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora.
+Enquanto o pacote estiver aberto no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta até a cada 10 minutos — ou a cada 2 minutos a partir das 6h no horário local no dia da saída para entrega, enquanto o site da La Poste responder (após o repasse, no ritmo do correio de destino; via serviços agregadores, até a cada 15 minutos nesse dia); nos demais momentos, a cada hora. As notificações podem seguir "Cada movimentação", "Etapas importantes" ou "Só a entrega". Após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora.
 
 ## Perguntas sobre o rastreio Delivengo
 

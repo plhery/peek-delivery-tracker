@@ -66,6 +66,25 @@ describe('reading a forwarded shipping email', () => {
   });
 
   it.each([
+    ['Apple Mail in Dutch', 'Doorst: Onderweg',
+      'Begin doorgestuurd bericht:\n\nVan: Sam <sam@example.org>\nDatum: 2 november 2026\nAan: Alex <alex@example.com>\nOnderwerp: Doorst: Onderweg\n\nZie hieronder\n\nBegin doorgestuurd bericht:\n\nVan: "Example Shop" <orders@example-shop.com>\nDatum: 1 november 2026\nAan: Sam <sam@example.org>\nOnderwerp: Onderweg'],
+    ['Gmail', 'Fwd: Fwd: Shipped',
+      '---------- Forwarded message ---------\nFrom: Sam <sam@example.org>\nDate: Mon, 2 Nov 2026\nSubject: Fwd: Shipped\nTo: Alex <alex@example.com>\n\n---------- Forwarded message ---------\nFrom: Example Shop <orders@example-shop.com>\nDate: Sun, 1 Nov 2026\nSubject: Shipped'],
+  ])('labels a forward of a forward in %s with the shop below the first forwarder', async (_, subject, block) => {
+    const mail = await readInboundMail(mime({ From: 'Alex <alex@example.com>', Subject: subject }, `See below\n\n${block}\n\nTracking: ${UPS}`));
+    expect(mail.sender).toBe('Example Shop');
+    expect(mail.origin).toBe('orders@example-shop.com');
+  });
+
+  it('keeps the first forwarder of a forward when nobody is named below them', async () => {
+    const mail = await readInboundMail(mime(
+      { From: 'Alex <alex@example.com>', Subject: 'Fwd: Fwd: Shipped' },
+      `---------- Forwarded message ---------\nFrom: Sam <sam@example.org>\nSubject: Fwd: Shipped\n\nTracking: ${UPS}`,
+    ));
+    expect(mail.sender).toBe('Sam');
+  });
+
+  it.each([
     ['on a 24-hour clock', '01.11.2026 09:15:42'],
     ['on a 12-hour clock', '11/01/2026 9:15:42 PM'],
     ['on a 12-hour clock without seconds', '11/01/2026 9:15 a.m.'],

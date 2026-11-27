@@ -65,6 +65,10 @@ const GMAIL_CONFIRMATION_HOSTS = new Set(['mail-settings.google.com', 'mail.goog
 const FORWARDED_SUBJECT = /^\s*(?:fwd?|fw|tr|wg|rv|enc|i|vs|doorst|pd|пер|переслать|转发|轉寄)\s*:/i;
 /** The line a forwarded message's own sender is on, below the forward's marker. */
 const FORWARDED_FROM = /^[\s>*]*(?:from|von|de|da|van|od|от|från|fra|lähettäjä|发件人|寄件者)\s*:([^]*)$/i;
+/** The forwarded message's own subject line, among the headers a mail app writes under its From line. */
+const FORWARDED_HEADER_SUBJECT = /^[\s>*]*(?:subject|betreff|objet|onderwerp|oggetto|asunto|assunto|temat|předmět|тема|ämne|emne|aihe|主题|主旨)\s*:([^]*)$/i;
+/** Those headers: From, Date or Sent, To, Cc and Subject, in any order. */
+const FORWARDED_HEADER_LINES = 6;
 /**
  * The line some mail apps open a message forwarded whole with, under its own subject: its date and time, on a 24- or
  * 12-hour clock, then its sender ("22.11.2026 17:43:04 Example Shop <notice@example-shop.com>:"), or its address alone
@@ -233,21 +237,36 @@ function senderOfLine(line: string): { name: string; address: string } {
   return bare ? { name: domainName(bare[0]), address: bare[0].toLowerCase() } : { name: cleanLabel(value), address: '' };
 }
 
+/** Whether the forwarded message whose From line is at `index` was itself a forward, by its own subject line. */
+function forwardedAgain(lines: readonly string[], index: number): boolean {
+  for (const line of lines.slice(index + 1, index + FORWARDED_HEADER_LINES)) {
+    if (!line.trim()) return false;
+    const subject = FORWARDED_HEADER_SUBJECT.exec(line.slice(0, MOST_LINE_LENGTH));
+    if (subject) return FORWARDED_SUBJECT.test(subject[1]!);
+  }
+  return false;
+}
+
 /**
  * Who wrote the email. Forwarding by a rule keeps the shop's own From; forwarding by hand puts the forwarder there
- * and the shop's on the first From line of the forwarded part, which is read instead. Some mail apps forward a
- * message whole under its own subject, opened by a line with its date and sender: that sender is read too, unless it
- * is the forwarder's own address.
+ * and the shop's on the first From line of the forwarded part, which is read instead. A forward of a forward names
+ * the person who forwarded it first there, with a forward's subject below: the next From line down is read, the
+ * shop's. Some mail apps forward a message whole under its own subject, opened by a line with its date and sender:
+ * that sender is read too, unless it is the forwarder's own address.
  */
 function senderOf(email: Email, text: string): { name: string; address: string } {
   if (FORWARDED_SUBJECT.test((email.subject ?? '').slice(0, MOST_SUBJECT_LENGTH))) {
-    for (const line of text.split('\n', MOST_FORWARD_LINES)) {
+    const lines = text.split('\n', MOST_FORWARD_LINES);
+    let outer: { name: string; address: string } | null = null;
+    for (const [index, line] of lines.entries()) {
       const found = FORWARDED_FROM.exec(line.slice(0, MOST_LINE_LENGTH));
-      if (found) {
-        const sender = senderOfLine(found[1]!);
-        if (sender.name) return sender;
-      }
+      if (!found) continue;
+      const sender = senderOfLine(found[1]!);
+      if (!sender.name) continue;
+      if (!forwardedAgain(lines, index)) return sender;
+      outer ??= sender;
     }
+    if (outer) return outer;
   }
   const from = mailbox(email.from);
   const opening = text.split('\n', MOST_FORWARD_LINES).filter((line) => line.trim()).slice(0, DATED_SENDER_LINES);

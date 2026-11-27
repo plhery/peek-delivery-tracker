@@ -1,18 +1,18 @@
 ---
 title: Jaki kurier po numerze przesyłki? PX, 1Z, InPost, DPD i inne
-description: PX i 10 cyfr to Poczta Polska, 24 cyfry to zwykle InPost, 1Z to UPS: jak rozpoznać kuriera po numerze i ile cyfr mają numery DPD, DHL i przesyłek z zagranicy.
+description: Jaki to kurier po numerze przesyłki? PX i 10 cyfr to Poczta Polska, 24 cyfry zwykle InPost, 1Z to UPS: rozpoznaj DPD, DHL, Packeta, ORLEN Paczkę i pocztę.
 slug: jaki-kurier-po-numerze-przesylki
 picture: Trzy etykiety z numerami przesyłek podzielonymi na kolorowe części, lupa na kodzie kraju CH i zaciekawiony Pip.
 published: 2026-10-09
-updated: 2026-11-16
+updated: 2026-11-27
 ---
 
-Litery i długość numeru przesyłki często zdradzają, który przewoźnik ma twoją paczkę. `1Z` i 16 liter lub cyfr to UPS, `PX` i 10 cyfr to [Poczta Polska](carrier:poczta-polska), numer [InPost](carrier:inpost) ma zwykle 24 cyfry, a 13 znaków w układzie `RR000000005CH` (dwie litery, dziewięć cyfr, dwie litery) to zwykle numer pocztowy, w którym dwie ostatnie litery wskazują kraj poczty, która go nadała. Najtrudniej jest z samymi cyframi: 10 albo 14 cyfr pasuje do kilku firm, więc rozstrzyga e-mail o wysyłce albo narzędzie, które sprawdzi numer u wszystkich pasujących przewoźników.
+Jeśli zastanawiasz się, jaki to kurier, litery i długość numeru przesyłki często od razu to zdradzają. `PX` i 10 cyfr (np. `PX1234567890`) to [Poczta Polska](carrier:poczta-polska), `1Z` i 16 znaków to UPS, numer [InPost](carrier:inpost) ma zwykle 24 cyfry, a 13 znaków w układzie `RR000000005CH` (dwie litery, dziewięć cyfr, dwie litery) to zwykle numer pocztowy, w którym dwie ostatnie litery wskazują kraj poczty nadania. Najtrudniej jest z samymi cyframi: 10 albo 14 cyfr pasuje do kilku firm, więc rozstrzyga e-mail o wysyłce albo narzędzie, które sprawdzi numer u wszystkich pasujących przewoźników.
 
 :::checker
 :::
 
-## Jak rozpoznać kuriera po numerze przesyłki?
+## Jak rozpoznać, jaki to kurier, po numerze przesyłki?
 
 Ten numer bywa różnie nazywany: numer przesyłki, numer paczki, numer listu przewozowego, a w aplikacjach często numer śledzenia. Niezależnie od nazwy sprawdzaj go po kolei:
 
@@ -49,9 +49,9 @@ Oto, co przewoźnicy i standard pocztowy mówią o numerach, które w Polsce spo
 | [4PX](carrier:4px) | `4PX`, 13 cyfr i `CN`; 4PX nie publikuje przykładowego numeru, a jego strona przyjmuje od 5 do 50 liter i cyfr. `LP`, 13 cyfr i `CN` to prawdopodobnie też 4PX |
 | [China Post](carrier:china-post), EMS | format pocztowy z `CN` na końcu; międzynarodowe numery EMS zaczynają się od `E` |
 
-### Numer zaczyna się od PX, AD albo LP: jaki to kurier?
+### PX, AD albo LP na początku numeru: jaki to kurier?
 
-- **`PX` i 10 cyfr** to Poczta Polska, np. `PX1234567890`.
+- **`PX` i 10 cyfr** (12 znaków, np. `PX1234567890`) to Poczta Polska — w wyszukiwarce emonitoring.poczta-polska.pl sprawdzisz także przesyłki Pocztex.
 - **`AD`** spotkasz przy przesyłkach Allegro Delivery: `AD0` i 14 znaków albo, w starszych numerach, `AD` i 8 liter lub cyfr. Takie paczki śledzisz w Allegro, także te, które wiezie ORLEN Paczka. Na stronie ORLEN Paczki ich nie znajdziesz.
 - **`LP` i 14 cyfr** oznacza prawdopodobnie AliExpress i Cainiao. Tak wynika z danych przewoźników, z których korzysta Peek, choć sam Cainiao tego formatu na swoich stronach nie opisuje.
 

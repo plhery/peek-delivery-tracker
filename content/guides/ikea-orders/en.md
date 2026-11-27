@@ -1,13 +1,13 @@
 ---
 title: IKEA order tracking: parcels, truck delivery and problems
-description: Who delivers your IKEA order in the UK and US, where Track my order is, which items get a carrier number and what to do if boxes are late, missing or damaged.
+description: IKEA order tracking on Track my order: how to track parcel (DPD, FedEx, Purolator) and truck deliveries on any country's IKEA site, plus late or missing items.
 slug: ikea-order-tracking
 picture: A stack of long flat-pack boxes, an Allen key, a delivery truck, and Pip on the top box.
 published: 2026-10-18
-updated: 2026-10-18
+updated: 2026-11-27
 ---
 
-IKEA tracks every online order on its own "Track my order" page: you need the order number and the email or phone number you ordered with. Small orders go by parcel, with DPD in the UK and Ireland, FedEx in the US, and FedEx or Purolator in Canada, and those come with the carrier's own tracking number. Furniture comes by truck with IKEA's delivery partners in a time window, and only IKEA's tracker and the driver's call or text follow it.
+IKEA tracks every online order on the "Track my order" page of the country's IKEA site where you ordered (such as ikea.com/gb, ikea.com/us, ikea.com/ie, ikea.com/ca or ikea.com/au): you need the order number and the email or phone number you ordered with. Small orders go by parcel, with DPD in the UK and Ireland, FedEx in the US, and FedEx or Purolator in Canada, and those come with the carrier's own tracking number. Furniture comes by truck with IKEA's delivery partners in a time window, and only IKEA's tracker and the driver's call or text follow it.
 
 ## Who delivers my IKEA order?
 
@@ -32,7 +32,7 @@ You can also skip delivery. In the UK, Click and collect is free at every IKEA s
 - home | You | Count the boxes before the driver leaves
 :::
 
-## Where is my IKEA tracking?
+## How does IKEA order tracking work (Track my order and carrier numbers)?
 
 **Track my order.** IKEA's own tracker, under "Track and manage your order" on each site, works for every order, parcel or truck. You need your order number and the email or phone number you used to order. Logged in to your IKEA account, you see all your orders. It shows these statuses:
 

@@ -1,12 +1,12 @@
 ---
 title: UPS tracking: śledzenie paczki w Polsce, statusy, reklamacje
-description: Śledzenie paczki UPS: jak wygląda numer 1Z, co znaczą Exception i inne skany, punkty Access Point, cło od paczek spoza UE i reklamacja w UPS Polska.
+description: UPS Polska tracking i śledzenie paczki (ups.com): numer 1Z (18 znaków), znaczenie statusów Exception, punkty Access Point, cło spoza UE i reklamacje w UKE.
 slug: ups-tracking-sledzenie-paczki
 published: 2026-10-13
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Numery przesyłek UPS (United Parcel Service) zwykle zaczynają się od `1Z`. Wklej numer albo link do śledzenia UPS w pole powyżej, żeby śledzić paczkę; własne śledzenie UPS znajdziesz na ups.com.
+Do śledzenia paczki w UPS Polska (tracking UPS) potrzebujesz 18-znakowego numeru zaczynającego się od `1Z`, który sklep podaje w e-mailu o wysyłce lub na stronie zamówienia. Wklej numer albo link do śledzenia z ups.com w pole powyżej albo sprawdź go bezpośrednio na ups.com.
 
 ## UPS tracking number: gdzie jest numer przesyłki i jak wygląda
 
@@ -73,6 +73,10 @@ Serwer Peek otwiera stronę śledzenia ups.com w przeglądarce nawet co 10 minut
 Skany są w każdym języku po angielsku, tak jak pisze je UPS: doręczenie to „DELIVERED”. Gdy w USA UPS przekaże paczkę Ground Saver poczcie amerykańskiej i poda jej numer, śledzenie przechodzi tam, gdy USPS pokaże postęp („Doręcza: USPS”).
 
 ## Pytania o UPS tracking
+
+### Jak sprawdzić tracking paczki UPS Polska?
+
+Wklej 18-znakowy numer zaczynający się od `1Z` (lub link z `tracknum=` z ups.com) w pole powyżej albo na ups.com. Jeśli paczka ze sklepu zaginie lub przyjdzie uszkodzona, zgłoś to najpierw sprzedawcy; w UPS Polska reklamację pocztową możesz złożyć do 12 miesięcy od nadania (przy ukrytym uszkodzeniu najpóźniej 7 dni po odbiorze).
 
 ### Dlaczego UPS odrzuca mój numer przesyłki?
 

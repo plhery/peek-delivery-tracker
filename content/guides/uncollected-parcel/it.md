@@ -1,13 +1,13 @@
 ---
 title: Pacco non ritirato: cosa succede e quanti giorni di giacenza
-description: Un pacco in giacenza non ritirato di solito torna al mittente: Poste Italiane lo tiene 10 giorni lavorativi, i locker InPost e Amazon spesso 3. Proroga e rimborso.
+description: Pacco in giacenza o non ritirato: quanti giorni rimane in posta (Poste 7–10 gg), in filiale BRT/GLS o in un locker (3 gg), proroga, ritiro e cosa succede.
 slug: pacco-in-giacenza-non-ritirato
 picture: Un locker con uno sportello aperto e Pip che aspetta nel vano, e un calendario con gli ultimi due giorni cerchiati.
 published: 2026-10-14
-updated: 2026-11-18
+updated: 2026-11-27
 ---
 
-Un pacco in giacenza che nessuno ritira, all'ufficio postale, in un punto di ritiro o in un locker, di solito torna al mittente quando scade il termine. Gli uffici postali lo tengono più a lungo (Poste Italiane da 7 a 10 giorni lavorativi a seconda del servizio, la Posta svizzera 7 giorni, 15 per i pacchi dall'estero), i locker InPost e Amazon spesso solo 3 giorni. Conta l'ultimo giorno scritto sull'avviso, nell'SMS o nell'e-mail. Dopo, è il negozio a decidere se rimborsarti o rispedirlo.
+Un pacco in giacenza non ritirato all'ufficio postale, in filiale, in un punto di ritiro o in un locker di solito torna al mittente quando scade il termine. Gli uffici postali lo tengono più a lungo (Poste Italiane da 7 a 10 giorni lavorativi a seconda del servizio, la Posta svizzera 7 giorni e 15 per i pacchi dall'estero), mentre i locker InPost, Punto Poste e Amazon spesso solo 3 giorni. Se la consegna non è andata a buon fine o il locker non era disponibile, conta l'ultimo giorno scritto sull'avviso, nell'SMS o nell'e-mail. Dopo, è il negozio a decidere se rimborsarti o rispedirlo.
 
 Il codice non è arrivato o il locker era pieno? Leggi [pacco nel locker](guide:parcel-lockers).
 
@@ -48,7 +48,7 @@ Anche il negozio può fissare il suo termine. InPost dice chiaramente che il tem
 
 I giorni di calendario contano anche i weekend e i festivi. Quelli lavorativi lasciano fuori domeniche e festivi, e spesso anche il sabato: per Poste Delivery Express, invece, il sabato conta. La data scritta sul tuo avviso vale più di qualsiasi tabella, anche di questa.
 
-## Pacco in giacenza: cosa vuol dire e perché succede
+## Pacco in giacenza: cosa significa e perché succede?
 
 Vuol dire che il pacco è fermo all'ufficio postale, in filiale, in un punto di ritiro o in un locker, e aspetta te o le istruzioni del mittente. Di solito succede perché la consegna non è andata a buon fine. BRT mette in giacenza un pacco quando il destinatario è assente, sconosciuto o trasferito, quando l'indirizzo è sbagliato o incompleto, o quando la merce è stata rifiutata.
 
@@ -88,6 +88,10 @@ Con gli altri negozi dipende da dove hai comprato. In Italia hai 14 giorni per i
 > Non lasciare un pacco in giacenza solo perché hai cambiato idea. In Italia la legge chiede una dichiarazione esplicita: scrivi al negozio o usa il suo modulo di recesso, e tieni una copia.
 
 ## Domande veloci
+
+### Consegna non andata a buon fine o locker non disponibile: dove va il pacco?
+
+Controlla l'avviso, l'SMS o il tracking: dopo un tentativo fallito, Poste porta il pacco all'ufficio postale indicato (7 o 10 giorni lavorativi), BRT in filiale (10 giorni per le istruzioni del mittente) e GLS al GLS Point o in sede. Se il locker era pieno o non disponibile, vedi [pacco nel locker](guide:parcel-lockers).
 
 ### Quanto tempo rimane un pacco in posta?
 

@@ -1,15 +1,15 @@
 ---
 title: Zamówienie z Zalando: jaki kurier i jak je śledzić?
-description: Jaki kurier wiezie zamówienie z Zalando w Polsce (InPost, DPD, DHL, UPS), gdzie jest numer przesyłki, czemu paczek bywa kilka i co zrobić, gdy paczka nie dotarła.
+description: Zalando — jaki kurier dostarcza zamówienia w Polsce (InPost, DPD, DHL, UPS), gdzie znaleźć numer przesyłki w „Moich zamówieniach”, terminy i co przy problemie.
 slug: sledzenie-zamowienia-zalando
 picture: Paczka z metką w kształcie wieszaka, kurierska furgonetka i Pip gotowy do przymiarki.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-27
 ---
 
-Link do śledzenia zamówienia z Zalando przychodzi w mailu z potwierdzeniem wysyłki, gdy paczka opuszcza magazyn. Znajdziesz go też w „Moich zamówieniach” na koncie. W Polsce Zalando wymienia jako przewoźników InPost, DPD, DHL i UPS, a produkty sprzedawane i wysyłane przez Partnera jadą osobno, z osobnym mailem i numerem.
+Zamówienia z Zalando w Polsce dostarczają czterej przewoźnicy wymienieni na zalando.pl: InPost (kurier, Paczkomat i PaczkoPunkt), DPD (kurier i DPD Pickup), DHL oraz UPS (dostawa ekspresowa). Link do śledzenia i numer przesyłki przychodzą w mailu z potwierdzeniem wysyłki i są dostępne w „Moich zamówieniach” na koncie Zalando; produkty sprzedawane i wysyłane przez Partnera jadą osobno, z osobnym mailem i numerem.
 
-## Który przewoźnik doręcza moje zamówienie z Zalando?
+## Zalando: jaki kurier doręcza zamówienie w Polsce?
 
 Zalando.pl dostarcza na terenie Polski. W stopce, w „Nasi partnerzy”, wymienia czterech przewoźników: [InPost](carrier:inpost), [DPD](carrier:dpd-pl), DHL i [UPS](carrier:ups). Kto przyjedzie, zależy od dostawy wybranej przy zamówieniu:
 
@@ -39,7 +39,7 @@ Wybierasz Paczkomat albo punkt? Przewoźnik wyśle ci maila albo SMS, gdy paczka
 
 Adresu po złożeniu zamówienia już nie zmienisz. Jeśli musisz, anuluj zamówienie w „Twoje konto”, „Zamówienia”, dopóki widzisz przycisk „Anuluj zamówienie”, i złóż je od nowa. Bez przycisku jest za późno, a obsługa klienta też go nie anuluje.
 
-## Gdzie jest numer przesyłki z Zalando?
+## Zamówienia Zalando: gdzie znaleźć numer przesyłki i śledzenie?
 
 W dwóch miejscach:
 

@@ -1,12 +1,12 @@
 ---
 title: Suivi colis Chronopost : numéro, statuts, délais et relais
-description: Colle ton numéro Chronopost pour suivre ton colis : où le trouver, ce que veut dire chaque statut, les délais, le relais Pickup et qui contacter.
+description: Suivi colis Chronopost : où saisir ton numéro à 13 ou 15 caractères, sens des statuts, délais Chrono 13 et Shop2Shop, relais Pickup (8 j) et service client.
 slug: chronopost-suivi
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Pour suivre un colis Chronopost, colle son numéro dans le champ ci-dessus ou saisis-le sur la page de suivi de Chronopost. Il compte en général 13 caractères, comme `XY000000005FR`, et c'est la boutique qui te le donne. Chronopost est le service de colis express du groupe La Poste.
+Pour le suivi d'un colis Chronopost (express du groupe La Poste), colle son numéro ci-dessus ou sur chronopost.fr (chronoshop2shop.fr pour Shop2Shop). Ce numéro, donné par la boutique, compte souvent 13 caractères (`XY000000005FR`) ou 15 au format DPD.
 
 ## Numéro de suivi Chronopost : où le trouver et à quoi il ressemble
 
@@ -89,6 +89,10 @@ Les statuts restent en français, tels que Chronopost les écrit ; `Livraison ef
 Peek vérifie jusqu'à toutes les 10 minutes et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Une fois le colis en livraison, il vérifie jusqu'à toutes les 2 minutes à partir de 6 h, heure française, tant que c'est le suivi de Chronopost qui répond, mais attend 15 minutes après une vérification qui a échoué ; via des services de suivi, il vérifie toutes les 15 minutes. Il garde son rythme habituel jusqu'à 30 minutes avant le début d'un créneau de livraison indiqué par Chronopost, et tant que le colis est en livraison depuis un jour précédent. Quand un autre transporteur prend le relais pour la livraison, Peek suit le rythme de celui qui livre le colis. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Un scan que Chronopost donne sans fuseau horaire est lu à l'heure de son lieu.
 
 ## Questions sur le suivi Chronopost
+
+### Comment suivre un colis Chronopost ou joindre le service client ?
+
+Saisis ton numéro à 13 ou 15 caractères ci-dessus ou sur chronopost.fr (chronoshop2shop.fr pour Shop2Shop). Service client : chatbot Léonard sur chronopost.fr ou 09 69 39 13 91 ; pour un achat en ligne, contacte d'abord la boutique.
 
 ### Combien de temps un colis reste-t-il en point relais Chronopost ?
 

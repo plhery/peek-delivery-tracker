@@ -1,12 +1,12 @@
 ---
 title: UPS seguimiento en España: número 1Z, estados y aduanas
-description: Seguimiento de UPS en España: cómo es el número 1Z, qué significan Exception y los demás escaneos, los Access Point, el arancel de aduanas y tus derechos.
+description: Seguimiento de UPS en España (ups.com): número 1Z, qué significa Exception y cada escaneo, UPS Access Point, aduanas (3 € + 2 €) y reclamaciones ante CNMC.
 slug: ups-seguimiento
 published: 2026-10-13
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Los números de seguimiento de UPS (United Parcel Service) suelen empezar por `1Z`. Pega el número, o un enlace de seguimiento de UPS, en la casilla de arriba para seguir el paquete; la página de seguimiento de la propia UPS está en ups.com.
+Para el seguimiento de un paquete de UPS en España (United Parcel Service), pega su número `1Z` de 18 caracteres —o un enlace de seguimiento de ups.com— en la casilla de arriba, o consúltalo directamente en ups.com. El número te lo da la tienda en el correo de envío o en la página del pedido.
 
 ## Número de seguimiento de UPS: dónde está y cómo es
 
@@ -71,6 +71,10 @@ Para leer los datos, el servidor de Peek abre la página de seguimiento de ups.c
 Peek no muestra quién firmó, tu dirección, la prueba de entrega, dónde se dejó el paquete ni la foto, y UPS no le da ni el peso ni el remitente. Los escaneos salen en el inglés de UPS: la entrega se lee «DELIVERED». Si en Estados Unidos UPS pasa un paquete Ground Saver al servicio postal estadounidense ([USPS](carrier:usps)) e indica su número, Peek lo sigue allí en cuanto este muestra movimiento («Entrega con USPS»).
 
 ## Preguntas sobre el seguimiento de UPS
+
+### ¿Cómo hacer el seguimiento de un envío de UPS en España?
+
+Copia el número `1Z` de 18 caracteres del correo de la tienda (o el enlace con `tracknum=` de ups.com) y pégalo arriba o en ups.com. En España, si hay retraso, pérdida o daño en una compra online, reclama primero a la tienda (responsable hasta que recibas el paquete); ante UPS el plazo postal de reclamación es de seis meses.
 
 ### ¿Por qué UPS dice que mi número de seguimiento no es válido?
 

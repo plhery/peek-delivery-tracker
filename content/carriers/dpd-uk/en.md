@@ -1,12 +1,12 @@
 ---
 title: DPD UK tracking: statuses, Pickup shops and contact
-description: Track a DPD UK parcel: where the 14-digit number is, what each status means, your Predict delivery options, Pickup shops and how to reach DPD.
+description: Track a DPD UK parcel with your 14-digit number or calling card: what each status means, 1-hour Predict slots, 6,000+ Pickup shops and 0121 275 0500.
 slug: dpd-uk-tracking
 published: 2026-10-11
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-DPD UK is a British parcel company that delivers for many online shops. Track a parcel on [DPD's tracking page](https://track.dpd.co.uk/) with the parcel number and your postcode, or paste the number in the box above. The number comes from the shop, from DPD's SMS or email, or from the "sorry we missed you" card.
+DPD UK (part of Geopost and the La Poste group) delivers parcels across the UK for online shops. Track your parcel on [DPD's tracking page](https://track.dpd.co.uk/) with its 14-digit number (often starting `1550` or `1597`) or "sorry we missed you" calling card number and postcode, or paste the 14-digit number in the box above. On delivery day, DPD Predict sends a one-hour delivery window by SMS and email, and lets you redirect to a neighbour, a safe place or one of more than 6,000 DPD Pickup shops.
 
 ## Where is my DPD tracking number?
 
@@ -88,21 +88,25 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ## Questions about DPD UK tracking
 
-### Is DPD part of Royal Mail?
-
-No. DPD UK is run by DPDgroup UK Ltd and belongs to Geopost, which is part of the French [La Poste](carrier:la-poste) group.
-
-### How long does DPD take to deliver in the UK?
+### How long does DPD UK take to deliver?
 
 It depends on the service the shop chose. DPD Next Day aims for the next working day; the Channel Islands, Isle of Man and Scilly take two days as standard.
 
-### Where is my DPD driver?
+### How do I track my DPD UK driver live?
 
-On the delivery day, DPD's Predict SMS or email gives the driver's name and your place in their queue, and a live map follows the delivery.
+On delivery day, DPD's Predict SMS or email sends your one-hour window, the driver's name, your place in their queue and a live map that narrows the estimate to a 15-minute slot.
 
-### How long does DPD hold parcels at a Pickup shop?
+### How long does DPD hold a parcel at a Pickup shop or depot?
 
-DPD UK doesn't publish a set period. The tracking page shows the date by which you must pick the parcel up.
+DPD UK doesn't publish a fixed Pickup shop holding period: the tracking page shows the date by which you must collect the parcel. If DPD can't deliver a parcel, it may return it to the sender after at least 5 calendar days.
+
+### What is the DPD UK customer service phone number?
+
+Call 0121 275 0500 (Monday to Friday 8am to 6.30pm, Saturday 8am to 4pm, Sunday 9am to 3pm, excluding bank holidays), use the 24/7 chat on DPD's contact page with your reference number and postcode, or call from the DPD app to go to the front of the queue.
+
+### Is DPD part of Royal Mail?
+
+No. DPD UK is run by DPDgroup UK Ltd and belongs to Geopost, which is part of the French [La Poste](carrier:la-poste) group.
 
 :::sources
 - [DPD UK: Help](https://www.dpd.co.uk/content/how-can-we-help/index.jsp) – parcel number, calling card, one-hour window, neighbour, safe place, Pickup shops, ID, missed delivery, where the driver left the card, address change, company (read 8 November 2026)

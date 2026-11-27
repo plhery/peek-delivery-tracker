@@ -1,15 +1,15 @@
 ---
 title: Paquete perdido: cómo reclamar y recuperar tu dinero
-description: Paquete perdido o extraviado: cuándo se da por perdido, a quién reclamar, cuánto indemnizan Correos e InPost y cómo pedir el reembolso en Amazon o Vinted.
+description: Qué pasa si un paquete no llega a su destino: plazos de Correos, InPost y GLS, tus derechos (30 días), indemnizaciones y reembolsos en Amazon, Vinted y más.
 slug: paquete-perdido-como-reclamar
 picture: Una estantería de un centro de clasificación con cajas y un hueco vacío de línea discontinua, una lupa encima y Pip junto a una linterna que ilumina el hueco.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-27
 ---
 
-Si compraste en una tienda, la reclamación de un paquete perdido va al vendedor, no al transportista. Cuando haya pasado el plazo del transportista (con Correos, 4 días desde la admisión para un Paq Estándar), pide a la tienda que te lo reenvíe o te devuelva el dinero: ella contrató el envío, es quien cobra la indemnización y, en España, el paquete viaja a su riesgo hasta que lo tienes en tus manos. Reclamar al transportista es sobre todo cosa del remitente.
+Si un paquete no llega a su destino tras comprar en una tienda, la reclamación va al vendedor, no al transportista: en España el pedido viaja a riesgo de la tienda hasta que lo tienes en tus manos (art. 66 ter LGDCU) y el plazo máximo sin fecha pactada es de 30 días naturales. Pasado el plazo del transportista (4 días desde la admisión en un Paq Estándar de Correos, o 30 días en InPost), pide a la tienda el reenvío o el reembolso, o abre un caso en la plataforma; reclamar al transportista corresponde al remitente.
 
-## ¿Cómo reclamar un paquete perdido y recuperar el dinero?
+## ¿Qué pasa si un paquete no llega a su destino y cómo reclamar?
 
 :::steps
 - Espera el plazo del transportista | Hasta entonces, el paquete va con retraso, no está perdido.
@@ -46,7 +46,7 @@ Si compraste a una empresa, casi siempre el vendedor:
 
 En España, el riesgo pasa a ti si encargaste tú el transporte o elegiste un transportista que la tienda no ofrecía. Si compraste a un particular, esta ley no se aplica: lo que cuenta es la protección de la plataforma (más abajo). Los detalles y las excepciones están en [paquete entregado pero no recibido](guide:delivered-not-received).
 
-## Reembolso de un paquete perdido en Amazon, Vinted, Wallapop, eBay y AliExpress
+## ¿Cómo pedir el reembolso en Amazon, Vinted, Wallapop, eBay o AliExpress?
 
 Si el vendedor no te ayuda, la plataforma puede hacerlo, siempre que pagaras desde su web o su app:
 
@@ -62,7 +62,7 @@ En Amazon, la Garantía de la A a la Z cubre también las compras a vendedores e
 
 Vinted te devuelve el dinero cuando se confirma la pérdida, y eso puede tardar «varias semanas»; el reembolso incluye el artículo, la tasa de Vinted y el envío. Wallapop paga también al vendedor. Etsy excluye los retrasos por huelgas de transportistas o mal tiempo grave. Más sobre AliExpress, Temu y Shein en [cómo seguir un paquete que viene de China](guide:tracking-from-china).
 
-## ¿Cuánto indemniza Correos por un paquete perdido?
+## ¿Cuánto indemnizan Correos e InPost por un paquete extraviado?
 
 Poco. La indemnización incluida tiene tope, a menudo por kilo, y suele sumar la devolución de la tarifa:
 
@@ -101,7 +101,7 @@ La ley de consumo no cubre las ventas entre particulares: el Ministerio de Consu
 
 ¿Pagaste por transferencia o Bizum fuera de la app? Pide al vendedor que reclame al transportista y te pase lo que cobre.
 
-## ¿Y si nadie te devuelve el dinero?
+## ¿Qué hacer si ni la tienda ni la plataforma te devuelven el dinero?
 
 Sí, como último recurso. En PayPal tienes que abrir la disputa por artículo no recibido en 30 días desde la fecha de entrega prevista o en 180 días desde que pagaste, lo que ocurra primero. Con la tarjeta, tu banco tramita la reclamación, pero no está obligado a devolverte el cargo: el Banco de España recuerda que los pagos con tarjeta son «mandatos de pago irrevocables». Si la tienda no contesta o no lo soluciona, te quedan las vías de consumo: la OMIC, tu comunidad autónoma o el Centro Europeo del Consumidor si la empresa es de otro país. Los pasos y los plazos de cada vía están en [paquete entregado pero no recibido](guide:delivered-not-received).
 

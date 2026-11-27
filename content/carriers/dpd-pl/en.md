@@ -1,12 +1,12 @@
 ---
 title: DPD Poland tracking: statuses, pickup points and contact
-description: Track a DPD Poland parcel in English: the 14-character number, what each status means, DPD Pickup points and lockers, claims and who to call.
+description: Track a DPD Poland (DPD Polska) parcel in English: 14-character numbers, status meanings, 35,000+ Pickup points and lockers, 2-day hold and phone numbers.
 slug: dpd-poland-tracking
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-DPD Poland (DPD Polska) is a Warsaw-based parcel carrier in the Geopost group, owned by France's [La Poste](carrier:la-poste). Track a parcel on DPD's [Track & Trace page](https://tracktrace.dpd.com.pl/EN/findParcel) with its 14-character parcel number, or paste it in the box above. The shop usually gives the number in its shipping email or on your order page.
+DPD Poland (DPD Polska) is the Warsaw-based Polish carrier in Geopost, owned by France's [La Poste](carrier:la-poste). Track a parcel in English on DPD's [Track & Trace page](https://tracktrace.dpd.com.pl/EN/findParcel) using your 14-character parcel number (13 digits plus a letter, or 14 digits) from the shop's shipping email, or paste it in the box above. Below you'll find English status meanings, Predict notices, rules for DPD's 35,000+ Pickup points and lockers (held two full working days), claims and Contact Center numbers.
 
 ## Where to find your DPD tracking number in Poland
 
@@ -83,17 +83,25 @@ Peek reads DPD's English tracking and shows the status, the history and the deli
 
 ## Questions about DPD tracking in Poland
 
-### How long does DPD take to deliver in Poland?
+### How long does DPD Poland take to deliver?
 
-Usually the next working day, says DPD, and domestic parcels are guaranteed within three working days. The date depends on the service the sender chose.
+Usually the next working day, says DPD, and domestic parcels are guaranteed within three working days, depending on the service the sender chose.
 
-### How long does DPD hold parcels at a pickup point?
+### How long does DPD Poland hold parcels at a Pickup point or locker?
 
-Two full working days. After that, the parcel goes back to the sender.
+Two full working days, with the exact deadline shown in DPD's notification and DPD Mobile. It cannot be extended; after that, the parcel returns to the sender.
 
-### Can I track a DPD parcel without the number?
+### Can I track or redirect a DPD Poland parcel without the number?
 
-Yes, in DPD Mobile, which lists parcels linked to your account's phone number or email address. DPD's tracking page has no phone-number search.
+Yes. The DPD Mobile app lists parcels linked to your phone number or email address, and both DPD Mobile and Moja Paczka let you move delivery by up to three working days or redirect eligible parcels to a DPD Pickup point or locker.
+
+### What is the DPD Poland customer service phone number?
+
+Call the Contact Center on 801 400 373 or +48 22 577 55 55 (Mon–Fri 9:00–17:00, Sat 8:00–14:00), or the DPD Pickup locker helpline on +48 22 571 52 52 (Mon–Fri 8:00–20:00, Sat 8:00–14:00). DPD's Polish contact pages do not say whether English support is available.
+
+### When is a DPD Poland parcel considered lost, and how do I report damage?
+
+DPD treats a parcel as lost if it hasn't arrived within 30 days of the service deadline. Report visible damage on delivery day on protokol.dpd.com.pl and hidden damage within 7 days; DPD decides complete claims within 30 calendar days.
 
 :::sources
 - [DPD Poland: FAQ](https://www.dpd.com/pl/pl/najczesciej-zadawane-pytania-faq/) – numbers, delivery time, changes, pickup holding, claims

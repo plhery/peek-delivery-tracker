@@ -1,15 +1,15 @@
 ---
 title: Seguir encomendas do Allegro: transportadoras e atrasos
-description: Quem entrega as encomendas do Allegro, se o allegro.pl envia para Portugal, onde está o número de seguimento e o que fazer se a encomenda não chegar.
+description: Como seguir encomendas do Allegro em Portugal: envio por Allegro Kurier DPD, DHL ou Kurier24 InPost, número em Moje zakupy, prazos e reclamações.
 slug: seguir-encomenda-allegro
 picture: Uma encomenda num cacifo One Box aberto, um telemóvel com uma encomenda no ecrã e o Pip a correr para a levantar.
 published: 2026-10-17
-updated: 2026-10-28
+updated: 2026-11-27
 ---
 
-O Allegro é um marketplace polaco: as suas condições referem o allegro.pl, o allegro.cz, o allegro.sk e o allegro.hu, e não há nenhum site para Portugal. Os vendedores do allegro.pl podem enviar-te a encomenda para Portugal com Allegro Kurier DPD ou Allegro Kurier DHL, se o oferecerem no anúncio. O número de seguimento está na tua conta Allegro, em «Moje przesyłki» (As minhas encomendas) e «Moje zakupy» (As minhas compras), e no e-mail que o Allegro te envia quando o número é adicionado.
+O Allegro é um marketplace polaco (allegro.pl, allegro.cz, allegro.sk e allegro.hu), sem site próprio para Portugal. Os vendedores do allegro.pl podem enviar para Portugal por Allegro Kurier DPD (4 dias úteis) ou Allegro Kurier DHL (4 a 5 dias úteis), se oferecerem esse método no anúncio; na Polónia, as entregas seguem por Allegro One, InPost (incluindo Allegro Kurier24 InPost), DPD, DHL, ORLEN Paczka ou Pocztex. O número de seguimento aparece em «Moje przesyłki» (As minhas encomendas), em «Moje zakupy» (As minhas compras) e no e-mail que o Allegro envia quando o número é adicionado.
 
-## Que transportadora entrega a minha encomenda do Allegro?
+## Que transportadora entrega no Allegro (Kurier24 InPost, DPD, DHL, Allegro One)?
 
 No Allegro cada vendedor escolhe os métodos de envio que oferece, e tu escolhes um no formulário de entrega e pagamento. Para as entregas na Polónia, o nome do método costuma dizer que transportadora leva a encomenda:
 
@@ -33,7 +33,7 @@ Com Allegro Delivery a encomenda espera por ti 2 dias de calendário numa One Bo
 - home | Tu | Entregue ou levantada
 :::
 
-## Onde está o número de seguimento no Allegro?
+## Onde encontrar o número de seguimento na conta Allegro?
 
 Em quatro sítios:
 
@@ -60,7 +60,7 @@ Não sabes o que tens? Escreve-o aqui:
 :::checker
 :::
 
-## Porque é que a minha encomenda do Allegro ainda não foi enviada ou o seguimento não avança?
+## Porque é que o seguimento do Allegro não atualiza ou ainda não foi enviado?
 
 O prazo de entrega que o Allegro calcula soma o «czas wysyłki» (tempo de envio), que conta a partir do teu pagamento, ou da encomenda se pagares à cobrança, até o estafeta ler o código da encomenda, e o «czas przewozu» (tempo de transporte) da transportadora. O Allegro tem em conta os fins de semana e os feriados. O resultado aparece no anúncio e nos detalhes da compra, e é uma estimativa, não uma garantia.
 
@@ -79,7 +79,7 @@ A entrega é grátis nas ofertas com o símbolo Smart!, quando o custo de entreg
 
 Também com Smart! o anúncio mostra a entrega prevista, por exemplo «dostawa jutro» (entrega amanhã) ou «dostawa pojutrze» (entrega depois de amanhã). Se o vendedor demorar mais de 3 dias a enviar, vês um intervalo de datas, uma data ou um número de dias. Com Allegro Delivery, o Allegro One Punkt e o Allegro One Box entregam no dia seguinte. O Smart! não se aplica aos envios para o estrangeiro.
 
-## Encomenda não chegou ou aparece como entregue: o que fazer
+## O que fazer se a encomenda do Allegro não chegar ou aparecer como entregue?
 
 Se houver um problema, comunicas ao vendedor um «problem z zakupem» (problema com a compra). Se não ficar resolvido, o Allegro propõe-te a sua proteção do comprador, «Allegro Ochrona Kupujących». Por ordem:
 
@@ -97,7 +97,7 @@ Com Allegro Delivery também podes reclamar da própria entrega, por exemplo uma
 
 Quem responde e que provas guardar: [encomenda entregue mas não recebida](guide:delivered-not-received) e [encomenda perdida](guide:lost-parcel).
 
-## Comprar no Allegro a partir de Portugal
+## O allegro.pl envia para Portugal e quanto tempo demora?
 
 O Allegro tem marketplaces para a Polónia (allegro.pl), a Chéquia (allegro.cz), a Eslováquia (allegro.sk) e a Hungria (allegro.hu). Não há versão portuguesa, mas podes usar o Allegro em inglês. Na tua conta, em «Lokalizacja» (localização), escolhes a língua, a moeda e o país de entrega. Com o país escolhido só vês as ofertas de vendedores que enviam para lá.
 
@@ -116,7 +116,7 @@ O que muda em Portugal:
 
 O número de seguimento está em «Moje zakupy», como na Polónia. Com ele também segues a encomenda diretamente na transportadora.
 
-## Devolver uma encomenda do Allegro
+## Como devolver uma encomenda do Allegro (prazo de 14 dias)?
 
 Com um vendedor profissional tens pelo menos 14 dias a partir do dia seguinte à entrega para lhe comunicar a desistência, por exemplo com o formulário «Zwróć zakup» (devolver a compra) em «Moje zakupy». Depois tens mais 14 dias para enviar o produto. A devolução é grátis com Smart!, numa devolução de consumidor com um código de devolução do Allegro Delivery e com Allegro Kurier24 e miniKurier24 InPost. Se comprares a um particular, não tens direito de retratação. Onde está o número da devolução e quando chega o reembolso: [devolução](guide:returns-tracking).
 

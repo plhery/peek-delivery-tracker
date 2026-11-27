@@ -1,12 +1,12 @@
 ---
 title: FedEx tracking: numbers, statuses and missed deliveries
-description: Track a FedEx parcel: what the 12-digit tracking number looks like, what Delivery exception and other scans mean, customs charges and your rights if it's lost.
+description: Track a FedEx parcel by 12-, 15- or 20-digit number: what Delivery exception, Clearance delay and other statuses mean, customs fees and lost-parcel rights.
 slug: fedex-tracking
 published: 2026-10-13
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Paste a FedEx tracking number, or a FedEx tracking link, in the box above to follow the parcel. FedEx's own tracking is on fedex.com.
+Track a FedEx parcel by pasting your 12-digit, 15-digit or 20-digit FedEx Ground Economy tracking number (or a fedex.com tracking link) in the box above, or look it up directly on fedex.com. Below you'll find what scans such as `Delivery exception` and `Clearance delay` mean, how UK and Ireland import charges work, and your 30-day rights if an online order doesn't arrive.
 
 ## FedEx tracking number: where to find it and how many digits
 
@@ -76,15 +76,23 @@ Most Ground Economy parcels are delivered by FedEx itself. When FedEx says the [
 
 ## Questions about FedEx tracking
 
-### Do FedEx tracking numbers start with 1Z?
+### How many digits is a FedEx tracking number, and does it start with 1Z?
 
-No. A number starting `1Z` is a [UPS](carrier:ups) number. FedEx's are digits only.
+FedEx tracking numbers are digits only: 12 or 15 digits (ending in a check digit), or 20 digits starting `6129` or `7489` for US FedEx Ground Economy. A number starting `1Z` is [UPS](carrier:ups), not FedEx.
 
 ### Why does my FedEx tracking only say Shipment information sent to FedEx?
 
 That first scan only means the sender has sent FedEx the shipment's details. The tracking moves on once FedEx has the parcel: `Picked up` or `Tendered at FedEx location`. If it was handed in after the day's cutoff, the scan reads `Package received after FedEx cutoff` and the parcel leaves on the next business day.
 
-### Is a FedEx delivery text a scam?
+### What does Delivery exception mean on FedEx tracking?
+
+It means the delivery could not be completed. Follow-up lines often say why, such as `Customer not available or business closed` or `Local delivery restriction - Delivery not attempted`; Peek groups `Delivery exception` under "Delivery attempted".
+
+### How long does FedEx hold a parcel at customs, and what if my order is late?
+
+In the UK, GOV.UK says the delivery company normally holds a parcel with unpaid VAT or duty for about 3 weeks before returning it. For online orders in England, Scotland, Wales (Citizens Advice) and Ireland (CCPC) with no agreed delivery date, the seller must deliver within 30 days of purchase.
+
+### Is a FedEx delivery text asking for payment a scam?
 
 It can be. Citizens Advice says a message asking you to pay to get a parcel or to reschedule its delivery is usually a scam, and delivery companies won't ask you to pay through a link in a text or email. Don't tap the link: check the tracking number on fedex.com or in Peek instead. In the UK, forward the text to 7726 for free. In the US, the FTC says to contact the shipping company through a website or phone number you know is real. More in [delivery scam texts](guide:delivery-scam-texts).
 

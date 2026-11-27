@@ -1,12 +1,12 @@
 ---
 title: SPX Express Brazil tracking: Shopee orders and statuses
-description: Track an SPX Express parcel from a Shopee order in Brazil: where to follow it, what BR numbers and SPX's Portuguese statuses mean, Agência Shopee pickup and refunds.
+description: Track an SPX Express (Shopee Xpress) parcel in Brazil: BR numbers, Portuguese status meanings, 3 delivery attempts, Agência Shopee pickup and Shopee refunds.
 slug: spx-express-brazil-tracking
 published: 2026-10-26
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-*Leia em português:* [rastreio da SPX Express, status, prazos e reembolso](https://peektracker.com/pt-br/carriers/rastreio-spx-express). SPX Express (Shopee Xpress) is Shopee's own logistics network in Brazil. It collects orders from sellers and brings them to your door or to an Agência Shopee, a partner shop where you pick parcels up. Shopee calls the service Entrega Padrão (standard delivery), and says you track it in the Shopee app, where the order, its delivery date and any refund live. spx.com.br has a tracking box too, or you can paste the number in the box above.
+*Leia em português:* [rastreio da SPX Express, status, prazos e reembolso](https://peektracker.com/pt-br/carriers/rastreio-spx-express). SPX Express (Shopee Xpress) is Shopee's own logistics network in Brazil, delivering Entrega Padrão orders to your door (up to 3 attempts) or to an Agência Shopee pickup point (held for 7 working days). Track your `BR` tracking number in the Shopee app ("Eu" > "Minhas Compras" > "Status de Envio"), on spx.com.br, or by pasting it in the box above.
 
 ## SPX Express tracking number: where to find it
 
@@ -107,25 +107,25 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ## Questions about SPX Express Brazil tracking
 
-### Is SPX Express the same as Shopee?
+### Is SPX Express the same as Shopee in Brazil?
 
-It's Shopee's own delivery network: Shopee calls SPX Express its own official logistics in Brazil. The company behind spx.com.br is SPX Express Brasil Ltda., with over 100 logistics hubs and 11 distribution centres.
+Yes, it is Shopee's own official logistics network in Brazil, operated by SPX Express Brasil Ltda. across more than 100 logistics hubs and 11 distribution centres.
 
-### How do I track an SPX Express parcel?
+### How do I track an SPX Express BR parcel number?
 
-In the Shopee app: "Eu" > "Minhas Compras" > the order > shipping status. You can also paste the `BR` number into Peek, or use the tracking box on spx.com.br.
+Open the Shopee app ("Eu" > "Minhas Compras" > your order > "Status de Envio"), enter the `BR` tracking number on spx.com.br, or paste it into Peek above.
 
 ### What does "Pedido em rota de entrega para seu endereço" mean?
 
-The parcel is out for delivery to your address, and SPX says to expect it in the next few hours. If the order has a keyword, have it ready for the driver.
+The parcel is out for delivery to your address, and SPX says to expect it in the next few hours. If the order has a delivery keyword (palavra-chave), have it ready for the driver.
 
-### How long does SPX Express take to deliver?
+### How long does SPX Express take, and how many attempts does it make?
 
-Shopee gives 1 to 25 working days from collection for orders from sellers in Brazil, and generally 30 to 50 calendar days for international ones. Your estimated date is on the order page.
+Shopee gives 1 to 25 working days from collection for orders within Brazil and generally 30 to 50 calendar days for international orders. Partners make 3 delivery attempts before returning the parcel for an automatic refund; Agência Shopee pickup points hold parcels for 7 working days.
 
-### Can I contact SPX Express directly?
+### Can I contact SPX Express Brazil directly?
 
-Shopee says no: it handles tracking and delivery problems itself through Chat Shopee, 8:00 to 22:00 on weekdays and 8:00 to 20:00 at weekends, Brasília time.
+Shopee says no: it handles all tracking, delivery issues and refunds through Chat Shopee (Monday to Friday 8:00 to 22:00, weekends 8:00 to 20:00 Brasília time) or the Customer Service request form.
 
 :::sources
 - [SPX Express: Home](https://spx.com.br/br) – Shopee's integrated logistics in Brazil, hubs and distribution centres, tracking box, Agência Shopee finder, SPX Express Brasil Ltda.

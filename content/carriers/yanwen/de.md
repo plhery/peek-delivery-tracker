@@ -1,12 +1,12 @@
 ---
 title: Yanwen Sendungsverfolgung: Nummern, Status und Kontakt
-description: Yanwen-Paket aus China verfolgen: wie die Nummer aussieht, was die englischen Status bedeuten, wer in DE, AT und CH zustellt und wen du fragst.
+description: Yanwen Sendungsverfolgung & Tracking für Pakete aus China: BYS-/YP-Nummern, englische Status, Zusteller in DE/AT/CH, EU-Zoll und Kontakt (400-108-5656).
 slug: yanwen-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Yanwen ist ein chinesischer Logistiker, 1998 in Peking gegründet, der Pakete für Onlinehändler ins Ausland bringt und sie dort einem Paketdienst vor Ort übergibt. Verfolgen kannst du die Nummer auf Yanwens eigener Seite [track.yw56.com.cn](https://track.yw56.com.cn/en/index) oder oben im Feld. Die Nummer bekommst du vom Shop oder Marktplatz, bei dem du bestellt hast, in den Versanddetails deiner Bestellung.
+Yanwen ist ein 1998 in Peking gegründeter Logistiker, der Online-Bestellungen aus China ins Ausland bringt und im Zielland an einen Paketdienst vor Ort übergibt. Für das Yanwen Tracking und die Sendungsverfolgung deiner BYS-, YP- oder Last-Mile-Nummer nutzt du Yanwens englische Seite [track.yw56.com.cn](https://track.yw56.com.cn/en/index) (bis zu 100 Nummern der letzten zwölf Monate) oder das Feld oben. Die Nummer bekommst du vom Shop oder Marktplatz in deinen Bestelldetails.
 
 ## Yanwen Trackingnummer: so sieht sie aus
 
@@ -95,21 +95,25 @@ Die Uhrzeiten liest Peek mit Yanwens GMT-Abweichung und zeigt sie in der Zeitzon
 
 ## Fragen zur Yanwen Sendungsverfolgung
 
-### Welcher Paketdienst liefert Yanwen-Pakete in Deutschland aus?
+### Welcher Paketdienst liefert Yanwen-Pakete in Deutschland, Österreich und der Schweiz aus?
 
-Das steht im Tracking, nicht auf einer festen Liste: Ab `Batch delivery to carrier` hat ein Paketdienst vor Ort das Paket, und der Hinweiskasten nennt ihn, wenn Yanwen ihn kennt. Yanwens Produktliste enthält eine Deutschland-Linie über DHL, aber nicht jedes Paket läuft darüber.
+Yanwen nennt für DE, AT und CH keinen festen Partner: Ab `Batch delivery to carrier` übernimmt ein Paketdienst vor Ort, und der Hinweiskasten auf track.yw56.com.cn zeigt „Distributor“ und „Last Mile Tracking“, wenn Yanwen ihn kennt. In Yanwens Produktliste gibt es eine Deutschland-Linie über DHL, aber nicht jedes Paket läuft darüber.
 
-### Was bedeutet Yanwen facility - Outbound?
+### Was bedeutet „Yanwen facility - Outbound“ oder „Tendered for Delivery“?
 
-Das Paket hat Yanwens Sortierzentrum in China verlassen. Danach folgen `Arrived at domestic terminal station`, die Ausfuhrabfertigung und der Abflug.
+`Yanwen facility - Outbound` heißt, dass das Paket Yanwens Sortierzentrum in China verlassen hat. `Tendered for Delivery` folgt wenige Minuten später für den Weg ins Ausland und vor der Ausfuhrabfertigung – es bedeutet trotz des Wortlauts noch keine Zustellung bei dir.
 
-### Wie lange ist die Lieferzeit bei Yanwen?
+### Wie lange dauert die Lieferung mit Yanwen aus China?
 
 Yanwen nennt Empfängern keine Lieferzeiten, also halte dich an die Schätzung, die der Shop oder Marktplatz zu deiner Bestellung anzeigt. Mehr zu Paketen aus China steht unter [Paket aus China verfolgen](guide:tracking-from-china).
 
 ### Gibt es die Yanwen Sendungsverfolgung auf Deutsch?
 
 Nein. Yanwens Tracking-Seite gibt es nur auf Englisch und Chinesisch, und Yanwens eigene Scans sind immer englisch; die Tabelle oben übersetzt die häufigsten.
+
+### Wie erreiche ich Yanwen bei einem verlorenen oder verspäteten Paket?
+
+Wende dich zuerst an den Shop oder Marktplatz: Er hat den Vertrag mit Yanwen und kann ab 10 bis 60 Tagen nach Versand eine Nachforschung beantragen. Yanwen nennt eine chinesische Hotline (400-108-5656, Mo–Sa 9–18 Uhr) und marketing@yw56.com.cn, veröffentlicht aber keinen eigenen Empfänger-Support für DE, AT oder CH.
 
 :::sources
 - [Yanwen: YW Tracking](https://track.yw56.com.cn/en/index) – Tracking-Seite, Sprachen, Spalten, Kategorien, Hinweiskasten, Hotline

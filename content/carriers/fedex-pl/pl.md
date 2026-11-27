@@ -1,12 +1,12 @@
 ---
 title: FedEx Polska śledzenie przesyłki krajowej: numer i statusy
-description: Śledzenie krajowej przesyłki FedEx po 13-cyfrowym numerze: co znaczą statusy, takie jak Przesyłka awizowana, i jak reklamować zaginioną lub uszkodzoną paczkę.
+description: Śledzenie przesyłek krajowych FedEx Polska po 13-cyfrowym numerze: co znaczą statusy (np. Przesyłka awizowana), okno kuriera, reklamacje UKE i SMS-y 8080.
 slug: fedex-polska-sledzenie-przesylki
 published: 2026-10-22
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-FedEx Polska to krajowa sieć kurierska FedEx w Polsce. Jej przesyłki mają 13-cyfrowe numery i własne śledzenie: numer sprawdzisz na krajowej stronie śledzenia FedEx (w serwisie fedex.com) albo wkleisz w pole powyżej.
+FedEx Polska obsługuje przesyłki krajowe FedEx w Polsce. Do śledzenia przesyłki krajowej FedEx służy 13-cyfrowy numer zaczynający się od 6 (nie działa w światowym śledzeniu FedEx): wpisz go na krajowej stronie śledzenia FedEx w serwisie fedex.com albo wklej w pole powyżej. Niżej sprawdzisz znaczenie polskich statusów (w tym awiza i przedziału godzinowego doręczenia), terminy reklamacji (12 miesięcy od nadania, 30 dni na odpowiedź) oraz jak rozpoznać fałszywy SMS o dopłacie.
 
 ## Numer przesyłki FedEx Polska: 13 cyfr
 
@@ -64,13 +64,17 @@ Peek czyta krajowe śledzenie FedEx bezpośrednio. Pokazuje status, każdy skan 
 
 ## Pytania o śledzenie przesyłek FedEx Polska
 
-### Dlaczego numer FedEx ma 13 cyfr?
+### Jak śledzić przesyłkę krajową FedEx i dlaczego numer ma 13 cyfr?
 
-Bo to krajowa przesyłka FedEx Polska. Światowe śledzenie FedEx nie przyjmuje 13 cyfr; sprawdzasz tam inne numery FedEx, na przykład 12-cyfrowe.
+Przesyłki krajowe FedEx Polska mają 13-cyfrowy numer zaczynający się od 6 z cyfrą kontrolną na końcu i własne krajowe śledzenie w serwisie fedex.com (lub w polu powyżej). Światowe śledzenie FedEx nie przyjmuje 13 cyfr; tam sprawdzisz inne numery FedEx, na przykład 12-cyfrowe.
 
-### Dlaczego strona FedEx nie rozpoznaje mojego numeru?
+### Dlaczego strona FedEx nie rozpoznaje mojego 13-cyfrowego numeru?
 
 Numer, którego nie zna, strona zgłasza jako nierozpoznany, więc sprawdź 13 cyfr albo zapytaj nadawcę. Tak samo może odpowiedzieć na przesyłkę doręczoną dawno temu, bo śledzenie usuwa stare historie. Inna wersja komunikatu odsyła do obsługi klienta FedEx: wtedy numer może istnieć, ale strona go nie pokazuje.
+
+### Jak złożyć reklamację zaginionej lub uszkodzonej przesyłki krajowej FedEx?
+
+Przy zakupie ze sklepu internetowego za paczkę odpowiada sklep. W samym FedEx reklamację (pisemnie, elektronicznie lub ustnie) składa nadawca, a adresat po doręczeniu lub z cesją praw, w ciągu 12 miesięcy od nadania (na ukryte uszkodzenia masz 7 dni od odbioru). FedEx ma 30 dni na odpowiedź, na odwołanie masz 14 dni, a spór może rozpatrzyć Prezes UKE.
 
 ### Czy SMS o dopłacie do przesyłki FedEx jest prawdziwy?
 

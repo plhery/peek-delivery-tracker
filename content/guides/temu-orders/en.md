@@ -1,13 +1,13 @@
 ---
 title: Temu order tracking: which carrier has your parcel
-description: Track a Temu order with the carrier's tracking number, not the PO number: who delivers in the US, UK and Ireland, and why a new number shows nothing.
+description: Track a Temu order with the carrier number (not the PO order number): who delivers in the US, UK and Ireland, delivery times, customs and why scans pause.
 slug: temu-order-tracking
 picture: A stack of small parcels leaving a plane's hold, a van, and Pip counting them.
 published: 2026-10-17
-updated: 2026-11-19
+updated: 2026-11-27
 ---
 
-To track a Temu order, you need the carrier's tracking number, not Temu's order number (PO and 20 digits). Paste it into [Peek](/): it works out the carrier among more than 4,500, from USPS to Royal Mail and Evri, then follows the local partner if the first carrier names one. A new number can show nothing for a day or two: the label exists before the carrier has the parcel.
+To track a Temu order, you need the carrier's tracking number, not Temu's order number (PO and 20 digits). Paste it into [Peek](/): it works out the carrier among more than 4,500, from USPS to Royal Mail, Evri and An Post in Ireland, then follows the local partner if the first carrier names one. Temu shows your estimated delivery time on the product page and in your order, and a new number can show nothing for a day or two before the carrier scans the parcel.
 
 ## Is my Temu order number a tracking number?
 
@@ -50,7 +50,7 @@ The number often exists before the carrier has the parcel. Until its first scan,
 
 A parcel flown from China can stay quiet much longer: up to 11 days before its first scan, then nothing during the flight.
 
-## When will my Temu parcel arrive?
+## How long does Temu delivery take (US, UK and Ireland)?
 
 Temu shows the delivery time on the product page and in your order. In Ireland you choose standard or Click & Collect, and Temu's Irish shipping page gives no number of days. Once the carrier has the parcel, Peek shows the date the carrier expects, when it gives one.
 

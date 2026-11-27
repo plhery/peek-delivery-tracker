@@ -1,13 +1,13 @@
 ---
 title: Paquete entregado pero no recibido: qué hacer
-description: Pone «entregado» y no tienes el paquete: qué comprobar primero, a quién reclamar, quién es responsable y los plazos de Vinted, Wallapop y eBay.
+description: ¿Pone «entregado» pero no tienes el paquete (o sigue en tránsito tras salir de las instalaciones)? Qué comprobar, a quién reclamar y plazos de Vinted y eBay.
 slug: paquete-entregado-pero-no-recibido
 picture: Una puerta cerrada, una notificación con un tic verde, el contorno vacío de una caja con un interrogante sobre el felpudo y Pip, preocupado.
 published: 2026-10-09
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Si el seguimiento pone «Entregado» pero no tienes el paquete, no lo des por perdido: «entregado» es un escaneo en la PDA del repartidor, no la prueba de que llegó a tus manos. Mira si el seguimiento dice dónde o con quién se quedó, busca en los sitios de siempre y date un margen. Si sigue sin aparecer, reclama a la tienda, no al transportista: en España, si compraste a una empresa, el paquete es responsabilidad del vendedor hasta que lo tengas en tus manos.
+Si el seguimiento pone «Entregado» pero no tienes el paquete, no lo des por perdido: «entregado» es un escaneo en la PDA del repartidor, no la prueba de que llegó a tus manos (si solo indica que el paquete ha salido de las instalaciones del transportista o sigue en tránsito, todavía no se ha entregado: consulta [qué significa cada estado](guide:tracking-statuses)). Mira dónde o con quién se quedó, busca en los sitios de siempre y date un margen; si sigue sin aparecer, reclama a la tienda, no al transportista, porque en España el paquete es responsabilidad del vendedor hasta que lo tengas en tus manos.
 
 ## ¿Por qué pone «entregado» si no tengo el paquete?
 
@@ -27,7 +27,7 @@ Dónde puede estar, según quién lo lleve:
 
 ¿El seguimiento nunca llegó a poner «Entregado»? Mira [por qué no se actualiza el seguimiento](guide:tracking-not-updating) o [qué significa cada estado](guide:tracking-statuses).
 
-## Qué hacer y dónde reclamar
+## ¿Qué hacer y dónde reclamar si el paquete no llega?
 
 :::steps
 - Mira la prueba | Busca en el seguimiento una firma, un nombre o el punto de recogida, y revisa la dirección de tu pedido.

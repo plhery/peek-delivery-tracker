@@ -1,13 +1,13 @@
 ---
 title: Suivi de commande Zalando : transporteurs, colis, retards
-description: Qui livre ta commande Zalando en France, en Belgique et en Suisse, où est le numéro de suivi, pourquoi elle arrive en plusieurs colis et que faire s'il en manque un.
+description: Suivre un colis et ma commande Zalando (France, Belgique, Suisse) : où trouver le numéro dans « Mes commandes », transporteurs (La Poste, Mondial Relay), délais.
 slug: suivi-commande-zalando
 picture: Un colis avec une étiquette en forme de cintre, une camionnette de livraison et Pip prêt à essayer ce qu'il contient.
 published: 2026-10-17
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Dès qu'un colis quitte l'entrepôt, Zalando t'envoie un e-mail de confirmation d'expédition avec le numéro de suivi et le lien vers la page du transporteur. Tu retrouves la même chose dans ton compte, rubrique « Mes commandes ». Une commande peut arriver en plusieurs colis, chacun avec son numéro, surtout quand un partenaire Zalando en expédie une partie lui-même.
+Pour suivre un colis Zalando, ouvre l'e-mail de confirmation d'expédition — envoyé dès que le colis quitte l'entrepôt avec le numéro de suivi et le lien vers la page du transporteur — ou connecte-toi à ton compte dans « Mes commandes » (zalando.fr, zalando.be ou zalando.ch). Une commande peut arriver en plusieurs colis, chacun avec son numéro, surtout quand un partenaire Zalando en expédie une partie lui-même.
 
 ## Quel transporteur livre ma commande Zalando ?
 
@@ -36,7 +36,7 @@ Si tu choisis un point de retrait, le transporteur te prévient quand le colis e
 - home | Toi | Livré, ou déposé chez un voisin
 :::
 
-## Où trouver le numéro de suivi Zalando ?
+## Comment suivre ma commande et trouver le numéro de suivi Zalando ?
 
 À deux endroits :
 

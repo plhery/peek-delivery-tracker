@@ -1,12 +1,12 @@
 ---
 title: Česká pošta (Czech Post) tracking: numbers and statuses
-description: Track a Czech Post or Balíkovna parcel: where the number is, what Česká pošta's English statuses mean, missed deliveries, pickup deadlines and contacts.
+description: Czech Post (Česká pošta) and Balíkovna tracking on postaonline.cz: tracking number formats, English statuses, pickup deadlines (15 or 7 days) and contacts.
 slug: ceska-posta-czech-post-tracking
 published: 2026-10-13
-updated: 2026-10-22
+updated: 2026-11-27
 ---
 
-Česká pošta (Czech Post) is the Czech national post, and Balíkovna is its parcel brand. Track a parcel on Czech Post's English [Track & Trace](https://www.postaonline.cz/en/trackandtrace), in the Pošta Online app, or by pasting the number in the box above. The number is on the shipping label, in Czech Post's SMS or email, or on the notice in your mailbox.
+For Czech Post tracking (Česká pošta, the Czech national post, and its parcel brand Balíkovna), enter your tracking number on Czech Post's English [Track & Trace](https://www.postaonline.cz/en/trackandtrace) on postaonline.cz, in the Pošta Online app, or in the box above. The number is on the shipping label, in Czech Post's SMS or email, or on the notice in your mailbox.
 
 ## Czech Post tracking number: where to find it
 
@@ -77,6 +77,10 @@ Czech Post's channels, as listed on its sites:
 Czech Post dates each step by its day, with no time. Peek asks Czech Post and also looks for a history with times at [universal tracking services](guide:universal-tracker): when one adds steps or another status, Peek shows it and asks Czech Post again every 6 hours; when one only dates the same steps, Peek shows those times and still asks Czech Post first; when none has it, Peek lists Czech Post's own steps, each under its day with no time. Statuses keep Czech Post's English wording. Peek can show the post office or Balíkovna point where the parcel waits (by name, not address) and the weight. Czech Post gives no expected delivery day. Peek leaves out postcodes, cash-on-delivery details and the parcel count, and can notify you when the status changes.
 
 ## Questions about Czech Post tracking
+
+### How do I track a Czech Post (Česká pošta) or Balíkovna parcel?
+
+Enter the domestic number (such as the invented `DR4829173654E`) or international `CZ` number (`RR482917367CZ`) on [postaonline.cz](https://www.postaonline.cz/en/trackandtrace) or in the box above. The six-character pickup code in Czech Post's SMS or email is for collection, not tracking.
 
 ### What is Česká pošta?
 

@@ -1,13 +1,13 @@
 ---
 title: Stati della spedizione e del tracking: cosa significano
-description: Cosa vuol dire ogni stato del tracking, da «etichetta creata» a «consegnato», anche per i pacchi dall'estero («consegnato al corriere locale») e quando tocca a te.
+description: Significato degli stati del tracking (Poste, BRT, GLS, UPS, La Posta): da «etichetta creata» a «consegnato al corriere locale», in giacenza e quando agire.
 slug: stati-spedizione-cosa-significano
 picture: Un percorso tortuoso con tappe spuntate (etichetta, deposito, aereo), un furgone alla tappa attuale, una casa ancora davanti e Pip che corre.
 published: 2026-10-09
-updated: 2026-11-19
+updated: 2026-11-27
 ---
 
-Uno stato della spedizione è l'ultima scansione del corriere riassunta in poche parole, e quasi sempre non ti chiede niente. «Etichetta creata» vuol dire che il corriere il pacco non ce l'ha ancora, «in transito» che è da qualche parte tra due scansioni, «in consegna» che è sul furgone di oggi. Solo pochi stati ti chiedono di fare qualcosa: una mancata consegna, un pacco in giacenza da ritirare, qualcosa da pagare in dogana e un «consegnato» quando alla porta non c'è niente.
+Uno stato della spedizione è l'ultima scansione del corriere riassunta in poche parole, e quasi sempre non ti chiede niente. «Etichetta creata» vuol dire che il corriere il pacco non ce l'ha ancora, «in transito» che viaggia tra due scansioni, «consegnato al corriere locale» che dall'estero l'ultimo tratto passa a un corriere del tuo Paese, e «in consegna» che è sul furgone di oggi. Solo pochi stati ti chiedono di fare qualcosa: una mancata consegna, un pacco in giacenza da ritirare, qualcosa da pagare in dogana e un «consegnato» quando alla porta non c'è niente.
 
 ## Quali sono le fasi di una spedizione?
 
@@ -71,7 +71,7 @@ Tra un hub e l'altro, il silenzio è normale: in Germania, DHL avverte che uno s
 
 In Italia, di solito poco. L'obiettivo di Poste per il Poste Delivery Standard è la consegna entro 5 giorni lavorativi (sabato escluso) nel 90% dei casi; [BRT (ex Bartolini)](carrier:brt) dichiara 1 o 2 giorni lavorativi per il 96% delle spedizioni. In Svizzera un PostPac Priority arriva di norma il giorno feriale successivo, un PostPac Economy entro due giorni lavorativi. Tra Paesi diversi ci vuole di più: per le spedizioni dall'Italia all'estero BRT dichiara da 2 a 10 giorni lavorativi nel 96% dei casi. Fermo da più tempo del previsto? Leggi [perché il tracking non si aggiorna](guide:tracking-not-updating).
 
-## Pacchi dall'estero: partenza, dogana, corriere locale
+## Pacchi dall'estero: cosa vuol dire «consegnato al corriere locale»?
 
 - **Partito dal Paese.** Il pacco viaggia in aereo, in nave o in treno, e nel frattempo non lo scansiona nessuno. La Posta mostra `Arrivo alla frontiera del paese di destinazione`, e avverte che prima del recapito il pacco può dover passare dalla dogana. Può comparire anche `Termine di recapito sconosciuto`: per un invio che arriva dall'estero o ci va, la data non si può prevedere. Se invece spedisci tu con Poste Delivery International Standard, `In transito presso il Centro di lavorazione Internazionale` (il pacco ha lasciato l'Italia) è l'ultima traccia che vedrai.
 - **Dogana.** Su Poste compare `In attesa di sdoganamento`: il pacco è sotto controllo doganale e potrebbero chiederti altri documenti. La Posta scrive `L'invio è stato consegnato alla dogana`, poi `Procedura di sdoganamento postale in corso`, infine `Autorizzato dalla dogana svizzera`, quando passa al recapito nazionale. DHL parla di alcuni giorni lavorativi, la Posta di tre o quattro giorni lavorativi se i dati sono completi e corretti; nessuno dei due dà un massimo. Muoviti solo se ti chiedono un documento o un pagamento; leggi [pacco fermo in dogana](guide:customs).

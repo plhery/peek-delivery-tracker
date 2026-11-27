@@ -1,13 +1,13 @@
 ---
 title: Pedido de MediaMarkt: seguimiento y transportistas
-description: Quién entrega tu pedido de MediaMarkt en España (Paack, SEUR, Correos, TIPSA y otros), dónde ver el seguimiento y qué hacer si el paquete no llega.
+description: Gastos de envío y seguimiento de MediaMarkt España: gratis desde 49 € (si no desde 2,99 €), recogida en tienda, Paack/SEUR/Correos/TIPSA, plazos y reclamos.
 slug: seguimiento-pedido-mediamarkt
 picture: Una caja plana de televisor y un paquete pequeño junto a una furgoneta de reparto, Pip contento y una tienda con un cartel de recogida.
 published: 2026-10-17
-updated: 2026-11-09
+updated: 2026-11-27
 ---
 
-En España, MediaMarkt (mediamarkt.es) envía los paquetes con Paack, SEUR, Correos, TIPSA, [InPost](carrier:inpost), Method, Ader o Citylogin. Cuando el pedido sale del almacén, te llega un correo para seguir el envío en la web del transportista, y el estado del pedido también está en «Mi cuenta». Si lo recoges en tienda, no hay número de seguimiento: te avisan por correo o SMS cuando está listo. Lo que venden otros vendedores del marketplace lo envía el propio vendedor, con sus condiciones.
+En España, MediaMarkt (mediamarkt.es) envía la paquetería con Paack, SEUR, Correos, TIPSA, [InPost](carrier:inpost), Method, Ader o Citylogin: los gastos de envío estándar son gratis en pedidos de más de 49 € (desde 2,99 € por debajo, hasta 8,99 € en voluminosos en Península y gratis con recogida en tienda). Cuando el pedido sale del almacén, te llega un correo para seguir el envío en la web del transportista, y el estado también está en «Mi cuenta». Lo que venden otros vendedores del marketplace lo envía el propio vendedor, con sus gastos y condiciones.
 
 ## ¿Qué transportista entrega mi pedido de MediaMarkt?
 
@@ -79,7 +79,7 @@ Si el seguimiento no se mueve, suele ser por uno de estos motivos:
 
 Cuándo esperar sigue siendo normal: [por qué no se actualiza el seguimiento](guide:tracking-not-updating).
 
-## Opciones y gastos de envío de MediaMarkt
+## ¿Cuánto son los gastos de envío y opciones de MediaMarkt?
 
 | Opción | Precio | Detalles |
 | --- | --- | --- |

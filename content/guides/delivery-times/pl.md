@@ -1,15 +1,15 @@
 ---
 title: O której dostarczają paczki? Godziny kurierów i soboty
-description: O której przyjedzie kurier DPD, GLS czy Pocztex, kto dostarcza w sobotę i w niedzielę i od czego zależy pora dostawy paczki.
+description: Czas dostawy kurierów (InPost, DPD, GLS, Pocztex): o której przyjeżdża kurier, jakie dni robocze liczą regulaminy InPost i Pocztex, dostawy w soboty i święta.
 slug: o-ktorej-dostarczaja-paczki
 picture: Zegar wskazujący ósmą wieczorem pod sierpem księżyca, kalendarz z zaznaczonymi weekendami, furgonetka z zapalonymi światłami i Pip patrzący przez okno.
 published: 2026-10-14
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Kurierzy rozwożą paczki przez cały dzień i prawie żaden nie obiecuje ci konkretnej godziny. DPD dokładny czas dostawy podaje ci SMS-em lub e-mailem. W tygodniu jeżdżą wszyscy, a sobota i niedziela zwykle zależą od usługi, którą wykupił nadawca.
+Kurierzy rozwożą paczki przez cały dzień i prawie żaden nie obiecuje konkretnej godziny. W regulaminach [InPost](carrier:inpost) i Pocztex czas dostawy liczy się w dniach roboczych od poniedziałku do piątku (bez sobót, niedziel i świąt), DPD gwarantuje przesyłkę krajową w 3 dni robocze i podaje dokładny czas dostawy SMS-em lub e-mailem, a sobota i niedziela zależą zwykle od usługi wykupionej przez nadawcę.
 
-## O której przyjedzie kurier? Godziny przewoźników
+## Czas dostawy i godziny kurierów: InPost, DPD, GLS, Pocztex
 
 | Przewoźnik | Poniedziałek–piątek | Sobota | Niedziela |
 | --- | --- | --- | --- |

@@ -1,12 +1,12 @@
 ---
 title: Nova Poshta tracking: numbers, statuses and branches
-description: Track a Nova Poshta (Nova Post) parcel in English: where to find the EW number, what each status means, branch and locker pickup, storage days and contacts.
+description: Nova Poshta (Nova Post) tracking in English: 14-digit EW and international SH/TN numbers, European branches, statuses, 5-day free storage and phone contacts.
 slug: nova-poshta-tracking
 published: 2026-10-12
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Nova Poshta, "Nova Post" on its English site, is a Ukrainian express carrier delivering to branches, parcel lockers and doors across Ukraine, with branches in Poland and other European countries. Track a parcel with its express waybill number (EW) on [novaposhta.ua's tracking page](https://novaposhta.ua/en/tracking/), in its app or by pasting it in the box above. The number is at the top of the waybill, in the app and in the arrival notice.
+Nova Poshta ("Nova Post" on its English site) is a Ukrainian express carrier delivering to branches, parcel lockers and doors across Ukraine, with Nova Post branches in Poland and other European countries. Track a parcel with its 14-digit express waybill number (EW) or international `SH`/`TN` number on [novaposhta.ua's tracking page](https://novaposhta.ua/en/tracking/), in its app or by pasting it in the box above. The number is at the top of the waybill, in the app and in the arrival notice.
 
 ## Nova Poshta tracking number: the EW
 
@@ -89,6 +89,10 @@ Other carriers share the 14-digit shapes, and [Peek](/) never names Nova Poshta 
 It shows Nova Poshta's English wordings, each scan's town on a map, the expected arrival, weight, the branch or locker holding it and the delivery time, and drops names, addresses and payment. When an export names its partner abroad, [UPS](carrier:ups) or [GOFO Express](carrier:gofo), Peek can follow the parcel there. While you have the parcel open, or on its delivery day with notifications on, it checks up to every 10 minutes, or every 2 from 6 a.m. Kyiv time on the day Nova Poshta scans the parcel out for delivery, while Nova Poshta's own tracker answers; otherwise hourly. Through tracking services, it's hourly, every 3 hours after a quiet day and up to every 15 minutes on the delivery day under the same condition. It can notify you when the status changes. When another carrier takes over the delivery, Peek follows that carrier's own pace. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about Nova Poshta tracking
+
+### How do I track a Nova Post international parcel in Europe?
+
+Enter your 14-digit express waybill (EW) or international Nova Post number (starting `SH` or `TN`, a two-letter country code and 10 digits, such as invented `SHPL4829173648`) on [novaposhta.ua](https://novaposhta.ua/en/tracking/) or in the box above. When an export names a delivery partner abroad such as UPS or GOFO Express, Peek can follow the parcel there too.
 
 ### Is Nova Poshta legit?
 

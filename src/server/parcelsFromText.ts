@@ -42,6 +42,12 @@ export type ParcelAddition =
 /** A label that ends its line, as an email's plain text prints a table: "Sendungsnummer:" and the number below. */
 const LABEL_ENDING_ITS_LINE = /:[ \t]*(?:\r?\n[ \t]*){1,2}(?=\S)/g;
 /**
+ * Bold or italics as an email's plain text marks them, "*Sendungsnummer:* *1234567899*" or "_Numéro de suivi_": the
+ * marks around a phrase are dropped for the label reader, which still decides whether the words label a number. A mark
+ * inside a word ("VIR_TR") stays.
+ */
+const EMPHASIS = /(?<![\p{L}\p{N}*_])([*_]{1,2})(?=[^\s*_])([^*_\n]{1,80}?)(?<=[^\s*_])\1(?![\p{L}\p{N}*_])/gu;
+/**
  * A label alone on its line without a colon, as a shop's table prints one: "Your parcel number", a blank line, then the
  * number alone on its line. It is joined as a colon would join it; the label reader still decides whether the words
  * label a tracking number, so an order's, a phone's or a sentence's line stays unread.
@@ -65,7 +71,8 @@ export function trackingNumbersInText(text: string, carriers: readonly CarrierId
   const read = text.slice(0, MOST_TEXT_LENGTH);
   const certain = numbersInText(read).filter(({ normalized }) => nonTrackingShape(normalized)?.kind !== 'order');
   const named = new Set(certain.map(({ normalized }) => normalized));
-  const labelled = labelledNumbersInText(read.replace(LABEL_ENDING_ITS_LINE, ': ').replace(LABEL_LINE_ABOVE_NUMBER, '$1: '), trust);
+  const unmarked = read.replace(EMPHASIS, '$2');
+  const labelled = labelledNumbersInText(unmarked.replace(LABEL_ENDING_ITS_LINE, ': ').replace(LABEL_LINE_ABOVE_NUMBER, '$1: '), trust);
   const numbers = [...certain, ...labelled.filter(({ normalized }) => !named.has(normalized))];
   if (!numbers.length) {
     const bare = carrierNumberInText(read, carriers) ?? (trust ? numberAlone(read, trust === 'named') : null);

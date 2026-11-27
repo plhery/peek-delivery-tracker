@@ -26,6 +26,16 @@ describe('the numbers a text names, by how far its sender is trusted', () => {
     ]) expect(read(text), text).toEqual([]);
   });
 
+  it('reads a label and its number set in bold or italics, as a forwarded email\'s plain text marks them', () => {
+    for (const text of ['*Sendungsnummer*: 1234567899', '*Sendungsnummer:* 1234567899', '**Tracking number:** 1234567899',
+      '_Numéro de suivi_ : 1234567899', 'Sendungsnummer: *1234567899*', '*Sendungsnummer*\n\n1234567899', '*Sendungsnummer:*\n*1234567899*']) {
+      expect(read(text), text).toEqual(['1234567899 unknown']);
+    }
+    // Bold words that label no tracking number stay unread, and a mark inside a word is no mark.
+    for (const text of ['*Bestellnummer*: 1234567899', '*Kundennummer:* *1234567899*', 'Code *WINTER2026*', 'Ref_1234567899_x'])
+      expect(read(text), text).toEqual([]);
+  });
+
   it('takes from a text an assistant sends a number alone or labelled, though no carrier\'s shape fits it', () => {
     expect(read('1234567899', [], 'sent')).toEqual(['1234567899 unknown']);
     expect(read(' 1234 5678 9012 ', [], 'sent')).toEqual(['123456789012 unknown']);

@@ -17,7 +17,7 @@ Paack 查询页要求输入订单号（或包裹面单上的条码号）以及�
 | 订单号 | 外观特征 |
 | --- | --- |
 | `482917369AB` | 字母加数字：不对应任何特定快递。 |
-| `48291736` | 8 位数字：Mondial Relay、Colisweb 和 Heppner 也采用此长度。 |
+| `48291736` | 8 位数字：Mondial Relay、[Colisweb](carrier:colisweb) 和 Heppner 也采用此长度。 |
 | `482917360584` | 12 位数字：[FedEx](carrier:fedex)、MRW、BRT 等多家快递同样使用。 |
 
 只要商家写明由 Paack 派送，无论号码格式如何都属于 Paack。

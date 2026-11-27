@@ -39,7 +39,7 @@ A página da Colisweb exibe uma frase em francês para a etapa atual, com o dia 
 | `Votre commande n'a pas pu être retirée par nos ColisDrivers.` | A equipe não conseguiu coletar o pedido na loja ou no armazém. |
 | `Votre commande a été annulée.` | A entrega foi cancelada. |
 
-Os pontos que costumam gerar dúvida:
+Os que podem confundir:
 
 - `retirée` aqui significa a equipe coletando seu pedido na loja, não você retirando algo. Os motoristas da Colisweb são chamados de "ColisDrivers".
 - `Votre commande n'a pas pu être livrée par nos ColisDrivers` vem acompanhada de uma segunda linha que diferencia os dois casos: "Nous vous recontacterons prochainement pour une reprogrammation" indica que a Colisweb retornará o contato para remarcar; "Nous vous invitons à contacter" seguido do nome da loja significa que o pedido está voltando e você deve falar com a loja.
@@ -48,7 +48,7 @@ Os pontos que costumam gerar dúvida:
 
 Mais sobre etapas em [significado dos status de rastreio](guide:tracking-statuses).
 
-## Agendamento Colisweb: marcar, alterar e entregas perdidas
+## Agendamento Colisweb: marcar, alterar e entregas não realizadas
 
 A Colisweb entrega com hora marcada. Para pedidos vindos de armazém, propõe janelas de 2 horas e permite agendar por SMS entre vários dias e horários, com alterações livres até o horário limite. Pedidos enviados de uma loja próxima podem chegar em até 2 horas ou em horário agendado.
 
@@ -60,7 +60,7 @@ O que a equipe executa no local (subir andares, desembalar, instalar, retirar el
 
 ## Entrega Colisweb atrasada, cancelada ou danificada
 
-Seu contrato é com a loja. A própria página da Colisweb direciona você à loja, pelo nome, quando o pedido é cancelado, devolvido ou não pôde ser coletado. A Colisweb não publica procedimento nem prazo de reclamação para destinatários.
+Seu contrato é com a loja. A própria página da Colisweb direciona você à loja, pelo nome, quando o pedido é cancelado, devolvido ou não pôde ser coletado. A Colisweb não publica procedimento nem prazo de pedido de indenização para destinatários.
 
 Pela legislação francesa, conforme explica o Service Public, quando o vendedor escolheu a transportadora, o vendedor assume o risco de perda ou dano até você receber fisicamente o item e responde integralmente pela execução correta do pedido:
 
@@ -81,11 +81,11 @@ A página de privacidade lista um e-mail exclusivo para solicitações de dados 
 
 ## Como acompanhar uma entrega Colisweb no Peek
 
-Um código de 8 dígitos serve para Colisweb, Mondial Relay e Heppner — alguns também para a TForce Freight na América do Norte — e nenhuma delas pode ser consultada sem seleção prévia para confirmar se possui o número, por isso o [Peek](/) não escolhe a transportadora sozinho: toque em "Alterar" e escolha Colisweb. Faça o mesmo com códigos mais longos. Ou cole um link de rastreio de colisweb.com contendo o número, e o Peek identifica Colisweb em qualquer tamanho. O Peek não pede código postal para a Colisweb. Na França e nos demais países atendidos pela Mondial Relay, o Peek pode sugerir adicionar o código postal para a Mondial Relay em um código de 8 dígitos sem resposta; se seu SMS ou e-mail for da Colisweb, não adicione código postal — escolha Colisweb.
+Um código de 8 dígitos serve para Colisweb, Mondial Relay e Heppner — alguns também para a TForce Freight na América do Norte — e nenhuma delas pode ser consultada sem seleção prévia para confirmar se possui o número, por isso o [Peek](/) não escolhe a transportadora sozinho: toque em "Trocar" e escolha Colisweb. Faça o mesmo com códigos mais longos. Ou cole um link de rastreio de colisweb.com contendo o número, e o Peek identifica Colisweb em qualquer tamanho. O Peek não pede código postal para a Colisweb. Na França e nos demais países atendidos pela Mondial Relay, o Peek pode mostrar "Mondial Relay pode estar com esta encomenda. Adicione o código postal de entrega para rastreá-la." para um código de 8 dígitos sem resposta; se seu SMS ou e-mail for da Colisweb, não adicione código postal — escolha Colisweb.
 
 Como a Colisweb envia apenas códigos de etapa, o Peek exibe cada fase no seu idioma: o status, três marcos (entrega confirmada, coletada pela equipe e entregue) com horários mas sem locais, o nome do varejista e o horário de entrega. Enquanto a entrega estiver agendada, coletada ou em rota e sem reagendamento, exibe a janela (dia e horário, no fuso de Paris). Uma entrega cancelada aparece como "Devolvida ao remetente". O Peek omite seu nome e endereço.
 
-Enquanto a entrega estiver aberta no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta até a cada 10 minutos. Quando o Peek mostrar "Saiu para entrega" naquele dia, passa a verificar a cada 2 minutos, a partir das 6h de Paris ou de meia hora antes do início da sua janela (o que ocorrer por último). As notificações podem ser para "Cada atualização", "Etapas importantes" ou "Somente entrega". Após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora, e a cada 6 horas após sete dias sem novidades em "Etiqueta criada", exceto no dia da janela agendada. Se ficar quatro dias sem nova linha em "Etiqueta criada" ou "Em trânsito", o Peek mostra o aviso de ausência de atualização com a data daquela linha (por exemplo, "Sem atualização de rastreamento desde seg 12 out"), mesmo quando a janela ainda está por vir: entregas agendadas para uma data futura podem permanecer em "Etiqueta criada" até a coleta pela equipe. Códigos desconhecidos pela Colisweb não geram aviso de não encontrado, então confira os dígitos no seu SMS. O Peek não pode alterar horário nem endereço, usar o chat da Colisweb ou contatar a loja por você.
+Enquanto a entrega estiver aberta no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta até a cada 10 minutos. Quando o Peek mostrar "Saiu para entrega" naquele dia, passa a verificar a cada 2 minutos, a partir das 6h de Paris ou de meia hora antes do início da sua janela (o que ocorrer por último). As notificações podem ser para "Cada movimentação", "Etapas importantes" ou "Só a entrega". Após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora, e a cada 6 horas após sete dias sem novidades em "Etiqueta criada", exceto no dia da janela agendada. Se ficar quatro dias sem nova linha em "Etiqueta criada" ou "Em trânsito", o Peek mostra "Sem atualizações desde seg 12 out", com a data daquela linha, mesmo quando a janela ainda está por vir: entregas agendadas para uma data futura podem permanecer em "Etiqueta criada" até a coleta pela equipe. Códigos desconhecidos pela Colisweb não geram aviso de não encontrado, então confira os dígitos no seu SMS. O Peek não pode alterar horário nem endereço, usar o chat da Colisweb ou contatar a loja por você.
 
 ## Perguntas sobre o rastreio Colisweb
 

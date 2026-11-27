@@ -20,7 +20,7 @@ Border Express 通过运单号追踪整批货物。Peek 代码已知三种格式
 
 一票货运（consignment）可能包含多件包裹，每件包裹都有各自的标签条码。同一票货的所有标签开头字母和数字都相同，而运单号将它们关联在一起：Border Express 的追踪页只认运单号，不接受标签条码。但 Peek 接受标签条码，并会从中算出运单号（详见下文）。
 
-仅凭单号外观，Peek 无法直接确定它属于 Border Express。Peek 目录中没有为 Border Express 运单号设置识别规则，而标签条码的规则也仅属于弱匹配。其他承运商也使用相同格式：8 位数字时，Peek 会建议欧洲的 [Mondial Relay](carrier:mondial-relay)、Colisweb 和 Heppner，若末位数字通过校验也会建议北美货运商 TForce Freight；4 位字母加 8 位数字也符合 [Colis Privé](carrier:colis-prive) 的 12 位单号格式。如果商家写的是 Border Express，请改选 Border Express（见下文）。粘贴时带空格或小写字母都没有关系。完全找不到单号？请参阅 [如何查找追踪单号](guide:find-tracking-number)（英文） 和 [追踪单号格式说明](guide:tracking-number-formats)（英文）。
+仅凭单号外观，Peek 无法直接确定它属于 Border Express。Peek 目录中没有为 Border Express 运单号设置识别规则，而标签条码的规则也仅属于弱匹配。其他承运商也使用相同格式：8 位数字时，Peek 会建议欧洲的 [Mondial Relay](carrier:mondial-relay)、[Colisweb](carrier:colisweb) 和 Heppner，若末位数字通过校验也会建议北美货运商 TForce Freight；4 位字母加 8 位数字也符合 [Colis Privé](carrier:colis-prive) 的 12 位单号格式。如果商家写的是 Border Express，请改选 Border Express（见下文）。粘贴时带空格或小写字母都没有关系。完全找不到单号？请参阅 [如何查找追踪单号](guide:find-tracking-number)（英文） 和 [追踪单号格式说明](guide:tracking-number-formats)（英文）。
 
 ## Border Express 物流状态含义解析
 

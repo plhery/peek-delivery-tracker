@@ -14,7 +14,7 @@ A Mondial Relay chama o código de "numéro d'expédition": são 8 dígitos envi
 
 | Código (fictício) | O que é |
 | --- | --- |
-| `48291736` | O número de envio de 8 dígitos. Também combina com Colisweb e Heppner. |
+| `48291736` | O número de envio de 8 dígitos. Também combina com [Colisweb](carrier:colisweb) e Heppner. |
 | `0048291736` | 10 dígitos: código da marca seguido do número de envio. Também serve para DHL, Relais Colis e outras. |
 | `004829173602` | 12 dígitos: o mesmo código acrescido da sequência do volume. Também combina com DPD France, Colis Privé, BRT e outras. |
 | `00482917360101` | 14 dígitos: início do código de barras, com código da marca, número de envio, sequência e total de volumes. Também combina com DPD, Chronopost e outras. |

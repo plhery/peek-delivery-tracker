@@ -17,7 +17,7 @@ Sem formato fixo, um número de pedido pode se parecer com o de outra transporta
 | Número do pedido | Com o que se parece |
 | --- | --- |
 | `482917369AB` | Letras e dígitos: nenhuma transportadora em especial. |
-| `48291736` | 8 dígitos: mesmo formato de Mondial Relay, Colisweb e Heppner. |
+| `48291736` | 8 dígitos: mesmo formato de Mondial Relay, [Colisweb](carrier:colisweb) e Heppner. |
 | `482917360584` | 12 dígitos: também usado por [FedEx](carrier:fedex), MRW, BRT e outras. |
 
 Se a loja informar que a Paack faz a entrega, o código é da Paack seja qual for o formato.

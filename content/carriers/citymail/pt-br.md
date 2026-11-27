@@ -10,7 +10,7 @@ A CityMail é uma empresa sueca que entrega encomendas e correspondências. Fund
 
 ## Formato do código de rastreio CityMail
 
-A página de rastreio da CityMail pede o número de rastreamento (*spårningsnummer*), cujo exemplo oficial começa com `BCM`. Veja os formatos que o Peek conhece (dígitos inventados):
+A página de rastreio da CityMail pede o número de rastreamento (*spårningsnummer*), cujo exemplo começa com `BCM`. Veja os formatos que o Peek conhece (dígitos inventados):
 
 | Código (inventado) | O que é |
 | --- | --- |
@@ -23,7 +23,7 @@ Sem código? Pergunte à loja ou empresa remetente. Se o e-mail mencionar PostNo
 
 ## Significado dos status CityMail em português
 
-O rastreador da CityMail mostra os status em sueco. Na página oficial, a atualização mais recente aparece sob "senaste händelse" (último evento). Veja as mensagens conhecidas pelo código do Peek, em ordem aproximada:
+O rastreador da CityMail mostra os status em sueco. Na página de rastreio, a atualização mais recente aparece sob "senaste händelse" (último evento). Veja as mensagens conhecidas pelo código do Peek, em ordem aproximada:
 
 | A CityMail exibe | O que significa para você |
 | --- | --- |
@@ -76,14 +76,14 @@ O Peek não pode contatar a CityMail ou a loja por você. Em citymail.se:
 
 - **Código `BCM`.** Cole no [Peek](/): o Peek identifica a CityMail na hora em "Transportadora detectada". Espaços, hifens e letras minúsculas não importam.
 - **Link do rastreador CityMail.** Um link de tracking.citymail.se com `?search=` e sua referência também identifica a CityMail imediatamente, qualquer que seja a referência.
-- **Outra referência.** O Peek não consegue identificar a CityMail apenas por esse formato nem consulta a CityMail sozinho. Mesmo assim, cole o código: o Peek acompanha mais de 4.500 transportadoras. Depois toque em "Alterar" e escolha CityMail, mesmo se o Peek estiver mostrando "Consultando serviços de rastreamento…" para outras empresas ou tiver escolhido outra. Para uma encomenda já adicionada, use "Alterar transportadora". Para a CityMail, o Peek aceita de 8 a 35 letras e dígitos com pelo menos um dígito; fora disso, avisa que ela não emite códigos desse tipo.
+- **Outra referência.** O Peek não consegue identificar a CityMail apenas por esse formato nem consulta a CityMail sozinho. Mesmo assim, cole o código: o Peek acompanha mais de 4.500 transportadoras. Depois toque em "Trocar" e escolha CityMail, mesmo se o Peek estiver mostrando "Consultando serviços de rastreamento…" para outras empresas ou tiver escolhido outra. Para uma encomenda já adicionada, use "Trocar transportadora". Para a CityMail, o Peek aceita de 8 a 35 letras e dígitos com pelo menos um dígito; fora disso, avisa que a CityMail "não emite códigos como este".
 - **Ainda não encontrado.** Enquanto a CityMail não listar o código, o pacote exibe "Aguardando CityMail" e o Peek continua consultando. Após dois dias, o Peek pede para conferir o código, trocar de transportadora ou excluir a encomenda.
 
-**O que o Peek mostra.** O status da CityMail e cada registro com horário e local nos textos originais em sueco. Como o rastreador não informa fuso horário, o Peek lê os horários no fuso da Suécia. Registro e aviso prévio aparecem como "Etiqueta criada". Chegada ao terminal e trajeto ao ponto aparecem como "Em trânsito": nenhuma mensagem da CityMail no código do Peek corresponde a "Saiu para entrega". `Paketet har levererats till ombud` aparece como "Pronta para retirada", com o nome do ponto. As mensagens de entrega mostram "Entregue". A falha de entrega aparece como "Tentativa de entrega", exibindo o texto original da CityMail. A devolução aparece como "Devolvida ao remetente".
+**O que o Peek mostra.** O status da CityMail e cada registro com horário e local nos textos originais em sueco. Como o rastreador não informa fuso horário, o Peek lê os horários no fuso da Suécia. Registro e aviso prévio aparecem como "Etiqueta criada". Chegada ao terminal e trajeto ao ponto aparecem como "Em trânsito": nenhuma mensagem da CityMail no código do Peek corresponde a "Saiu para entrega". `Paketet har levererats till ombud` aparece como "Pronta para retirada", com o nome do ponto. As mensagens de entrega mostram "Entregue". A falha de entrega aparece como "Tentativa de entrega", com o texto da CityMail em "O que CityMail diz". A devolução aparece como "Devolvida ao remetente".
 
-O Peek também mostra o nome do remetente e, durante o trajeto, a data estimada de entrega da CityMail. Ele omite o seu código postal e o comprovante de entrega: para vê-los, use "Abrir o site de CityMail", que abre seu código direto no rastreador oficial.
+O Peek também mostra o nome do remetente e, durante o trajeto, a data estimada de entrega da CityMail. Ele omite o seu código postal e o comprovante de entrega: para vê-los, use "Abrir o site de CityMail", que abre seu código no rastreador da CityMail.
 
-Enquanto o pacote estiver aberto no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta até a cada 10 minutos. Após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), consulta a cada hora, e a cada 6 horas após sete dias sem novidades em "Etiqueta criada". Se ficar quatro dias sem nova linha em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek mostra o aviso de falta de atualização com a data do último evento (por exemplo, "Sem atualização de rastreamento desde seg 12 out") e um link para ajuda da CityMail. As notificações podem acompanhar "Cada atualização", "Etapas importantes" ou "Somente entrega".
+Enquanto o pacote estiver aberto no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta até a cada 10 minutos. Após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), consulta a cada hora, e a cada 6 horas após sete dias sem novidades em "Etiqueta criada". Se ficar quatro dias sem nova linha em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek mostra "Sem atualizações desde seg 12 out", com a data dessa linha, e o link "Pedir ajuda a CityMail". As notificações podem acompanhar "Cada movimentação", "Etapas importantes" ou "Só a entrega".
 
 ## Perguntas sobre o rastreio CityMail
 

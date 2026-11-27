@@ -19,7 +19,7 @@ C Chez Vous 按订单号而非单个包裹号追踪。其追踪页面要求输�
 | `TRXN54BD83` | 10 位字符：4 位字母、2 位数字、4 位字母或数字。 |
 | `1TRXN482917--69002` | 11 位字符、两个连字符，后接收货邮编。 |
 
-部分其他承运商的单号外观相近。以 `1G` 开头的单号（例如 `1G4829173654`）属于 [GEODIS](carrier:geodis)。8 位纯数字（例如 `48291736`）也被 Heppner、Colisweb 和 [Mondial Relay](carrier:mondial-relay) 使用。
+部分其他承运商的单号外观相近。以 `1G` 开头的单号（例如 `1G4829173654`）属于 [GEODIS](carrier:geodis)。8 位纯数字（例如 `48291736`）也被 Heppner、[Colisweb](carrier:colisweb) 和 [Mondial Relay](carrier:mondial-relay) 使用。
 
 如果页面提示 `La commande est introuvable`（找不到该订单），请核对字符是否有误，再查看邮件确认是否由其他承运商配送。
 

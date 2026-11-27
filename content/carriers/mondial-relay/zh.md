@@ -14,7 +14,7 @@ Mondial Relay 将单号称为“numéro d'expédition”：8 位数字，位于�
 
 | 单号（示例） | 说明 |
 | --- | --- |
-| `48291736` | 8 位发货编号。Colisweb 和 Heppner 也使用相同位数。 |
+| `48291736` | 8 位发货编号。[Colisweb](carrier:colisweb) 和 Heppner 也使用相同位数。 |
 | `0048291736` | 10 位数字：品牌代码加发货编号。DHL、Relais Colis 等快递也使用该长度。 |
 | `004829173602` | 12 位数字：上述号码加包裹序号。DPD France、Colis Privé、BRT 等也使用 12 位数字。 |
 | `00482917360101` | 14 位数字：条形码前段，包含品牌代码、发货编号、包裹序号和总件数。DPD、Chronopost 等也使用该长度。 |

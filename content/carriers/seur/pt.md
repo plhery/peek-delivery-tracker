@@ -1,12 +1,12 @@
 ---
 title: SEUR encomenda: rastreio, estados e contactos em Portugal
-description: Seguir uma encomenda SEUR em Portugal: o número, os estados em espanhol explicados, pontos Pickup, entregas falhadas, reclamações e contactos.
+description: Rastreio SEUR em Portugal: códigos de 7, 14 ou 21 dígitos, estados em espanhol explicados, relação com a DPD Portugal, entregas falhadas e contactos.
 slug: seur-encomenda
 published: 2026-10-11
-updated: 2026-11-15
+updated: 2026-11-27
 ---
 
-A SEUR é uma transportadora espanhola de encomendas e envios urgentes, do grupo Geopost, o mesmo da DPD. Para seguir a tua, abre a página de seguimento miSEUR, em seur.com, sem conta, ou cola o número na caixa acima.
+Para rastrear uma encomenda SEUR em Portugal (transportadora espanhola do grupo Geopost, que em 2019 se juntou à Chronopost para formar a DPD Portugal), cola o código de 7, 14 ou 21 algarismos na caixa acima ou usa o miSEUR em seur.com sem criar conta. Os estados aparecem em espanhol e em maiúsculas (como `EL ENVÍO ESTÁ EN REPARTO.` ou `NO SE HA ENTREGADO POR AUSENCIA O CIERRE`); para encomendas já na DPD Portugal, o apoio é `21 854 6001` e `suporte.cliente@dpd.pt`.
 
 ## Número de seguimento SEUR: como é e onde o encontrar
 
@@ -85,15 +85,23 @@ O Peek mostra o estado, o histórico e o peso. A SEUR não dá o local das leitu
 
 ### A SEUR e a DPD Portugal são a mesma empresa?
 
-Não exatamente. A SEUR é uma das marcas de entrega do grupo Geopost, como a DPD, e em 2019 a SEUR e a Chronopost em Portugal juntaram-se para formar a DPD Portugal.
+Pertencem ambas ao grupo Geopost, e em 2019 a SEUR e a Chronopost em Portugal fundiram-se para criar a DPD Portugal. Nenhuma página oficial garante qual das duas conclui cada envio ibérico, mas se a encomenda passar para a DPD Portugal os contactos de apoio são os da DPD Portugal.
 
-### Porque é que não consigo localizar a encomenda SEUR?
+### Como é o número de seguimento SEUR e onde o encontro?
 
-O envio pode ser demasiado recente: a SEUR dá a mesma resposta para um envio recente e para um número que não conhece. Se continuar assim, pergunta ao remetente se já entregou a encomenda à SEUR.
+Os códigos da SEUR têm 7, 14 ou 21 algarismos (enquanto 23 algarismos são da Correos Express) e aparecem no e-mail de envio ou na página da compra. Podes colar o número ou um link miSEUR/livetracking com `tracking=` diretamente no Peek, sem código postal.
 
-### O que quer dizer o aviso de atraso da SEUR?
+### Porque é que não consigo localizar a minha encomenda SEUR?
 
-A SEUR assinalou um atraso e a entrega pode chegar mais tarde do que o previsto, sem dizer porquê nem quanto tempo. O Peek mantém a encomenda na etapa em que estava antes do aviso. Espera pela próxima leitura e, se a data prevista passar, fala com a SEUR ou com a loja.
+A SEUR devolve a mesma resposta para um envio demasiado recente e para um número que não conhece. Se o código continuar sem leituras, confirma os algarismos com a loja e pergunta se a encomenda já foi entregue à SEUR.
+
+### O que significam o aviso de atraso e a entrega falhada da SEUR?
+
+`EL ENVÍO HA SUFRIDO UN RETRASO` sinaliza atraso sem indicar o motivo nem nova data (o Peek mantém a etapa anterior). `NO SE HA ENTREGADO POR AUSENCIA O CIERRE` significa entrega falhada: podes reprogramar nova entrega ou acompanhar se o envio segue para um ponto SEUR Pickup (`DISPONIBLE PARA RECOGER`).
+
+### Quais são os contactos da SEUR e da DPD Portugal?
+
+Para a SEUR, utiliza a área de suporte do miSEUR em seur.com. Para encomendas já geridas pela DPD Portugal, contacta `suporte.cliente@dpd.pt` ou `21 854 6001` (segunda a sexta 8h30–19h30, sábado 9h00–13h00). Em compras online danificadas ou perdidas, reclama primeiro junto da loja.
 
 :::sources
 - [Geopost: Who we are (em inglês)](https://www.geopost.com/en/about-us/who-we-are/) – a SEUR entre as marcas de entrega do grupo, com a DPD

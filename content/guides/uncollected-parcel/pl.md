@@ -1,13 +1,13 @@
 ---
 title: Nieodebrana paczka z paczkomatu lub poczty: co dalej?
-description: Co się dzieje z nieodebraną paczką z paczkomatu, punktu albo poczty: ile czeka, jak przedłużyć termin odbioru i kiedy dostaniesz zwrot pieniędzy.
+description: Nieodebrana paczka z paczkomatu, punktu lub poczty: terminy (Poczta Polska 14 dni, Pocztex 72 h, DPD i Allegro One 2 dni), przedłużenie i zwrot pieniędzy.
 slug: paczka-nie-odebrana
 picture: Automat paczkowy z jedną otwartą skrytką, w której czeka Pip, i kalendarz z zakreślonymi dwoma ostatnimi dniami.
 published: 2026-10-14
-updated: 2026-11-14
+updated: 2026-11-27
 ---
 
-Nieodebrana paczka z automatu, punktu albo poczty wraca do nadawcy, gdy minie ostatni dzień odbioru. Najdłużej czeka na poczcie (przesyłka polecona Poczty Polskiej 14 dni od dnia po pierwszym awizo), najkrócej w automacie: w Allegro One Box 2 dni kalendarzowe. Liczy się termin z twojego SMS-a, e-maila albo awizo. Potem to sklep decyduje, czy odda ci pieniądze, czy wyśle paczkę jeszcze raz.
+Nieodebrana paczka z automatu, punktu odbioru lub poczty wraca do nadawcy zaraz po upływie terminu z SMS-a, e-maila albo awizo. Czas na odbiór zależy od przewoźnika: najdłużej czeka przesyłka polecona w Poczcie Polskiej (14 dni od dnia po pierwszym awizo), a najkrócej paczka w automacie — w Allegro One Box 2 dni kalendarzowe, w DPD Pickup i DHL BOX 24/7 2 dni robocze, a w Pocztex AUTOMAT 72 godziny. Pamiętaj, że samo nieodebranie paczki nie zastępuje odstąpienia od umowy: złóż sklepowi oświadczenie, aby otrzymać zwrot pieniędzy.
 
 Kod nie przyszedł albo automat był pełny? Zobacz [Paczkomat i automat paczkowy](guide:parcel-lockers).
 
@@ -113,7 +113,7 @@ Tak. Na poczcie twój pełnomocnik, z pełnomocnictwem pocztowym albo zwykłym. 
 
 Tutaj dlatego, że nikt jej nie odebrał w terminie. Inne powody zebraliśmy w poradniku [paczka wraca do nadawcy](guide:returned-to-sender).
 
-### Status „Dostarczona”, a paczki nie mam
+### Status „Dostarczona”, a paczki nie ma: co zrobić?
 
 Przy automacie taki status zwykle znaczy, że paczkę ktoś wyjął. Co wtedy zrobić, opisuje poradnik [paczka doręczona, a jej nie ma](guide:delivered-not-received).
 

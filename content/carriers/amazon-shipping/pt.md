@@ -1,12 +1,12 @@
 ---
 title: Amazon Shipping seguimento: número PT ou ES e o que fazer
-description: Segue uma encomenda da Amazon Shipping sem conta Amazon: formato do número PT, ES ou TBA, qual rastreador responde e com quem falar se atrasar.
+description: Seguir encomenda Amazon Shipping em Portugal sem conta Amazon: códigos PT, ES e TBA, diferença para Amazon Logistics, prazos na UE e a quem reclamar.
 slug: amazon-shipping-seguimento
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-27
 ---
 
-Uma encomenda da Amazon Shipping segue-se sem conta Amazon no rastreador público da Amazon Shipping (como `track.amazon.es` ou `track.amazon.fr`) ou colando o código na caixa acima. A Amazon Shipping é a rede de última milha com que a Amazon entrega envios de outras empresas: segundo esse rastreador, é o vendedor quem cria o envio na Amazon Shipping, quer tenhas comprado na Amazon quer noutro site. Os restantes pedidos da própria Amazon — incluindo compras para Portugal via `Amazon.es` — seguem-se em «Os meus pedidos».
+Podes seguir uma encomenda da Amazon Shipping sem conta Amazon colando o código (`PT` ou `ES` + 10 algarismos, ou `TBA`/`TBC`/`TBM` + 12) na caixa acima ou no rastreador público (`track.amazon.es`, `track.amazon.fr`, `track.amazon.it` ou `track.amazon.co.uk`). A Amazon Shipping é a rede de última milha com que a Amazon entrega envios de outras empresas (comprados na Amazon ou noutras lojas); se o código der «não encontrado» e compraste na Amazon, segue-o em «Os meus pedidos» na [Amazon Logistics](carrier:amazon-logistics).
 
 ## Número de seguimento da Amazon Shipping
 
@@ -47,17 +47,25 @@ O Peek verifica até a cada 10 minutos com a encomenda aberta ou no dia da entre
 
 ## Perguntas sobre a Amazon Shipping
 
-### A Amazon Shipping é o mesmo que a Amazon?
+### Qual é a diferença entre Amazon Shipping e Amazon Logistics?
 
-Não de todo: é a rede da Amazon a entregar para outras empresas (na Amazon ou noutras lojas), com rastreio público por código; as restantes encomendas da Amazon seguem-se em «Os meus pedidos».
+A Amazon Shipping é a rede de entrega usada por outras empresas (vendam na Amazon ou noutras lojas) e tem rastreio público por código sem iniciar sessão. A [Amazon Logistics](carrier:amazon-logistics) entrega as restantes encomendas da própria Amazon e usa os mesmos formatos de código, mas só se segue em «Os meus pedidos».
 
 ### Existe rastreador português da Amazon Shipping?
 
-Não: o rastreador europeu só tem páginas para Espanha, França, Itália, Reino Unido e Índia (clientes em Portugal usam a [Amazon.es](https://www.aboutamazon.eu/news/press-lounge/amazon-prime-now-available-to-customers-in-portugal)). O Peek consulta `track.amazon.es` para `ES` e `track.amazon.fr` para `PT`.
+Não: na Europa existem apenas páginas públicas para Espanha (`track.amazon.es`), França (`track.amazon.fr`), Itália (`track.amazon.it`) e Reino Unido (`track.amazon.co.uk`), além da Índia (clientes em Portugal compram via [Amazon.es](https://www.aboutamazon.eu/news/press-lounge/amazon-prime-now-available-to-customers-in-portugal)). No Peek, códigos `ES` consultam `track.amazon.es` e códigos `PT` consultam `track.amazon.fr`.
 
-### Quanto tempo demora a Amazon Shipping?
+### Como são os códigos PT, ES e TBA (e porque o número de pedido não funciona)?
 
-Se o rastreador indicar dia previsto, o Peek mostra-o (exceto `TBA`, `TBC` e `TBM`). Na UE, sem data combinada, o prazo supletivo é de 30 dias.
+Os códigos da Amazon Shipping têm duas letras de país europeu (`PT`, `ES`, `FR`, `IT`, `DE`, `UK`) seguidas de 10 algarismos, ou `TBA`/`TBC`/`TBM` + 12 algarismos. O número de pedido com hífenes (3-7-7 dígitos) serve apenas para identificar a compra e não rastreia o transporte.
+
+### Quanto tempo demora a Amazon Shipping a entregar?
+
+Quando o rastreador público indica dia previsto, o Peek mostra-o automaticamente (exceto em códigos `TBA`, `TBC` e `TBM`), mantendo o histórico disponível durante 45 dias. Na UE, sem data combinada, o prazo legal máximo de entrega é de 30 dias.
+
+### A quem reclamar se uma encomenda Amazon Shipping atrasar ou não chegar?
+
+Fala sempre com a loja onde compraste: segundo o [Your Europe](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pt.htm), o vendedor responde pela entrega e por danos até receberes a encomenda, cabendo-lhe provar a entrega ou reembolsar/substituir. Desconfia de telefonemas ou links suspeitos a pedir dados de pagamento.
 
 :::sources
 - [About Amazon España: Carta anual 2023](https://www.aboutamazon.es/noticias/noticias-de-la-compania/carta-anual-a-los-accionistas-2023-de-nuestro-ceo-andy-jassy) – rede de última milha para envios de outras empresas

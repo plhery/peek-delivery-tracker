@@ -1,12 +1,12 @@
 ---
 title: GlobalPost tracking: GP numbers and who delivers
-description: Track a GlobalPost parcel: what a GP number looks like, what GlobalPost's tracking lines mean and who delivers it in your country.
+description: Track a GlobalPost parcel (GP…US/GB or SDC): why Economy tracking stops after customs, local delivery partners, transit times, 30-day claims and support.
 slug: globalpost-tracking
 published: 2026-11-02
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-GlobalPost, part of Auctane, is an international shipping service that online sellers buy through platforms such as ShipStation and Stamps.com. The parcel first goes to one of GlobalPost's shipping centres, where GlobalPost puts on the international label and customs form. GlobalPost's partners, postal and commercial carriers, take it on from there, and a post or courier in your country delivers it. The seller gives you the number, which usually starts with GP: paste it in the box above. GlobalPost's own tracker is at goglobalpost.com/tracking.
+Track a GlobalPost parcel (part of Auctane, used by ShipStation and Stamps.com sellers) by pasting its `GP` number (`GP`, four service letters, ten digits and `US` or `GB` — or an older `SDC` + 15-digit label) in the box above or at goglobalpost.com/tracking. GlobalPost processes parcels at its shipping centres and hands final delivery to a local post or courier (shown under "Final Mile Tracking By" on its tracker); on GlobalPost Economy, tracking normally ends after import customs. If a parcel hasn't arrived within 30 days of shipping, contact the seller first.
 
 ## GlobalPost tracking number: what it looks like
 
@@ -103,25 +103,25 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ## Questions about GlobalPost tracking
 
-### Why did my GlobalPost tracking stop after customs?
+### Is GlobalPost legit and what does a GP tracking number look like?
 
-With GlobalPost Economy, tracking ends once the parcel reaches your country and clears customs, and GlobalPost says some shipments have limited tracking there. The parcel is still on its way and can arrive with no new line. If the tracker gives the delivery company's number, Peek asks that company, and so can you.
+Yes: GlobalPost is part of Auctane, ships to over 220 countries through platforms like ShipStation and Stamps.com, and has delivered over 60 million shipments. Current numbers have 18 characters — `GP`, four service letters (such as `GPECON` or `GPSTND`), ten digits and `US` or `GB` — while older labels start with `SDC` plus 15 digits.
 
-### Who delivers GlobalPost parcels?
+### Why did my GlobalPost Economy tracking stop after customs?
 
-A post or courier in your country. GlobalPost's tracker can name it, with that company's number for your parcel.
+On GlobalPost Economy, tracking ends once the parcel arrives in your country and clears customs, so the parcel can still arrive without further updates. Standard, Plus and Flat Rate include door-to-door tracking; check "Final Mile Tracking By" on GlobalPost's tracker for any local carrier number.
+
+### Who delivers GlobalPost parcels in my country?
+
+A local postal or commercial carrier in your destination country. GlobalPost's tracker can show the carrier and its own tracking number under "Final Mile Tracking By", and when Peek recognises that carrier or postal code it automatically follows the handover.
 
 ### How long does GlobalPost take to deliver?
 
-GlobalPost says 5 to 6 days for nearby countries and up to 20 days for farther ones. It quotes sellers 10 to 14 business days for Economy, 6 to 10 for Standard and 5 to 8 for Plus, as an estimate from when its shipping centre has processed the parcel.
+GlobalPost quotes 5 to 6 days to nearby countries and up to 20 days farther afield — specifically 10 to 14 business days for Economy, 6 to 10 for Standard and Flat Rate, and 5 to 8 for Plus (duties and taxes included) from when its shipping centre processes the parcel.
 
-### Is GlobalPost legit?
+### How do I contact GlobalPost or report a missing parcel?
 
-Yes. GlobalPost is part of Auctane and is sold through shipping platforms such as ShipStation and Stamps.com. It ships to more than 220 countries and says it has delivered more than 60 million shipments.
-
-### How do I contact GlobalPost?
-
-Email info@goglobalpost.com or call (888) 899-1255, weekdays from 6 am to 6 pm Pacific time. If the parcel hasn't arrived 30 days after shipping, GlobalPost asks you to go to the seller first.
+Email `info@goglobalpost.com`, call `(888) 899-1255` (Monday to Friday, 6 am to 6 pm Pacific time) or use the "Recipient" option on [goglobalpost.com/contact-support](https://www.goglobalpost.com/contact-support/). If your parcel hasn't arrived within 30 days of shipping, GlobalPost tells recipients to contact the seller first, as the seller files any claim within 90 days.
 
 :::sources
 - [GlobalPost: FAQs](https://www.goglobalpost.com/faqs/) – Auctane, how it works, tracking, delays, delivery times, returns, claims, no claims for undeliverable parcels

@@ -1,12 +1,12 @@
 ---
 title: CTTYEX tracking: CTTY numbers, scans and Beijing time
-description: CTTYEX tracking from Shenzhen: the CTTY…CN number shape, the English scans on its Chinese tracker, and why every time on it is Beijing time.
+description: Track a CTTYEX (诚泰通运) parcel from China: CTTY…CN 16-character format, Beijing time stamps, "查询不到" not-found error, local delivery handover and support.
 slug: cttyex-tracking
 published: 2026-10-28
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-CTTYEX is Shenzhen Chengtai Tongyun International Logistics (深圳诚泰通运国际物流, 诚泰通运 for short), a cross-border e-commerce forwarder in China that ships parcels abroad for online sellers. Its site says it was founded in 2011 and ships for sellers on platforms such as Amazon, Wish, Tophatter, VOVA and Shopify, with charter flights to the US, the UK, Canada, Germany and Australia. Its tracking numbers are CTTY, ten digits and CN, CTTY standing for Chengtai Tongyun. Look yours up on CTTYEX's tracker at [cttyvip888.com](https://www.cttyvip888.com/assets/html/search.html), or paste it in the box above.
+Track a CTTYEX (Shenzhen Chengtai Tongyun International Logistics / 深圳诚泰通运国际物流, founded in 2011) parcel from China by pasting its 16-character `CTTY` + ten digits + `CN` number in the box above or on [cttyvip888.com](https://www.cttyvip888.com/assets/html/search.html) (capitals only, last two months of parcels). CTTYEX flies parcels for sellers on platforms such as Amazon, Wish, Tophatter, VOVA and Shopify and logs every scan — even local scans in your country — in Beijing time (`UTC+8`), which Peek converts to your device's time zone.
 
 ## CTTYEX tracking number: what it looks like
 
@@ -100,25 +100,25 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ## Questions about CTTYEX tracking
 
-### What is CTTYEX?
+### What is CTTYEX (诚泰通运)?
 
-Shenzhen Chengtai Tongyun International Logistics (深圳诚泰通运国际物流), a forwarder in China that ships cross-border e-commerce parcels for online sellers. Its site is cttyvip888.com, and its tracking numbers start with CTTY and end with CN.
+CTTYEX is Shenzhen Chengtai Tongyun International Logistics (深圳诚泰通运国际物流), a cross-border e-commerce forwarder founded in 2011 in Shenzhen that flies parcels abroad to the US, UK, Canada, Germany, Australia and other destinations. Its tracking numbers are 16 characters: `CTTY`, ten digits and `CN`.
 
-### Where can I track a CTTY number?
+### Where do I track a CTTY…CN number and why must it be uppercase?
 
-On CTTYEX's tracker, through 物流查询 on [cttyvip888.com](https://www.cttyvip888.com/assets/html/search.html), typed in capitals, or in Peek.
+Paste it into the box above in Peek (which accepts lowercase and spaces), or open 物流查询 on [cttyvip888.com](https://www.cttyvip888.com/assets/html/search.html) and enter it in capital letters with no spaces — CTTYEX's own tracker only matches uppercase `CTTY…CN` numbers.
 
-### Are CTTYEX's scan times in my time zone?
+### Why are CTTYEX scan dates ahead or on Beijing time?
 
-No. Every time on the tracker is Beijing time (UTC+8), though it doesn't say so, even for scans made in your country, so in Europe and the Americas a scan made late in your day can show tomorrow's date. Peek converts each time to your device's time zone.
+Every timestamp on CTTYEX's tracker is printed in Beijing time (UTC+8) without a time-zone label, even for scans made in Europe or North America, so an afternoon scan locally can carry tomorrow's date. Peek reads every timestamp as Beijing time and converts it to your device's time zone.
 
 ### Why does CTTYEX's tracker say 查询不到?
 
-It's Chinese for "can't be found": no parcel on CTTYEX's tracker matches what you typed. Look for a typo, enter the number in capital letters, and ask the seller if it still fails. A parcel sent more than two months ago is no longer on the tracker either.
+`查询不到` is Chinese for "can't be found": check for a typo, enter the full 16-character number in capitals without spaces, and note that CTTYEX's tracker only keeps parcels from the last two months. If it still fails, confirm the number with the seller.
 
-### Who do I contact about a missing CTTYEX parcel?
+### Who delivers CTTYEX parcels and who do I contact if one is missing?
 
-Start with the seller: CTTYEX's customer is the shop that sent the parcel, not you. CTTYEX's site offers recipients nothing beyond a Shenzhen address and an email address, on a page in Chinese.
+After import customs, a local delivery network finishes delivery, though CTTYEX calls it only "logistics carrier" and publishes no second number. Contact the seller or marketplace first — CTTYEX's Chinese contact page lists only a Shenzhen address and email for shippers, with no recipient support or claims page.
 
 :::sources
 - [CTTYEX: 深圳诚泰通运国际物流 (home)](https://www.cttyvip888.com/) – company name

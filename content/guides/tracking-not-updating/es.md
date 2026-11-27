@@ -1,13 +1,13 @@
 ---
 title: El seguimiento de mi paquete no se actualiza: qué hacer
-description: Por qué el seguimiento de un paquete deja de actualizarse, cuántos días es normal esperar según el caso y a quién escribir cuando toca preocuparse.
+description: ¿El seguimiento de tu paquete no se actualiza? Causas normales, plazos de espera en Correos, InPost, GLS y Vinted, cuándo reclamar y a quién escribir.
 slug: seguimiento-no-se-actualiza
 picture: Un calendario con varios días tachados, una línea de progreso que se queda a medias y Pip esperando, un poco aburrido.
 published: 2026-10-09
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Si el seguimiento no se actualiza, casi siempre es porque nadie ha escaneado tu paquete últimamente, no porque esté parado. Los transportistas lo escanean en sus centros y al cruzar fronteras, no en la carretera: un trayecto largo, un vuelo, la aduana o un fin de semana pueden dejarte días sin una línea nueva. Preocúpate solo cuando haya pasado el plazo del propio transportista ([Correos](carrier:correos-spain) acepta reclamaciones por un Paq Estándar a partir de 4 días desde que lo admitió; InPost, por demora, si el pedido tarda más de 5 días desde el aviso de envío), y aun entonces, escribe primero a la tienda: es ella quien contrató el envío.
+Si el seguimiento de tu paquete no se actualiza desde hace días, casi siempre significa que nadie lo ha escaneado en el siguiente centro, no que esté perdido. Los transportistas escanean en plataformas y aduanas, no en ruta: un fin de semana, un vuelo, la aduana o `Pre-admisión`/`Etiqueta creada` dejan silencios habituales. Espera hasta la fecha prevista y el plazo de cada empresa ([Correos](carrier:correos-spain) admite reclamaciones desde 3 días en Paq Premium o 4 en Paq Estándar; InPost, por demora pasados 5 días desde el aviso de envío y por pérdida a los 30), y reclama siempre primero a la tienda que contrató el envío.
 
 ## ¿Por qué no se actualiza el seguimiento de mi paquete?
 
@@ -114,15 +114,15 @@ En eBay puedes avisar de que no ha llegado en cuanto pasa la fecha de entrega pr
 
 ## Respuestas rápidas
 
-### ¿Es normal que un paquete lleve una semana en tránsito?
+### ¿Es normal que un paquete lleve una semana en tránsito sin moverse?
 
 Dentro de España, va lento. Correos da al Paq Estándar de 48 a 72 horas (5 días más si va a Canarias o sale de allí, 6 más con Ceuta y Melilla, sin contar la aduana); GLS suele entregar en 24 horas laborables fuera de las islas desde que tiene el paquete, e InPost, en 3 días laborables de media. Entre países, una semana puede entrar en lo normal: Vinted dice que la mayoría de sus paquetes llegan en 5 días laborables y los internacionales en 7, e InPost calcula de 3 a 6 días laborables de media para los suyos.
 
-### ¿Puedo hacer que el seguimiento se actualice antes?
+### ¿Se puede acelerar o forzar la actualización del seguimiento?
 
 No, y una [app de seguimiento](guide:universal-tracker) tampoco: solo muestra lo que publica el transportista. [Peek](/) consulta el seguimiento hasta una vez cada 10 minutos, y hasta una vez cada 2 minutos cuando el paquete está en reparto con las empresas que lee directamente, o cada 5 minutos cuando la consulta tiene que abrir un navegador (ese día, desde las 6:00, hora local, o, si la empresa da una franja, desde media hora antes de que empiece, y mientras responda el propio seguimiento de la empresa), y puede enviarte una notificación cuando aparece un escaneo nuevo, así no tienes que estar recargando la página. A través de servicios de seguimiento como 17TRACK consulta cada hora, cada 3 horas cuando pasa un día sin escaneos nuevos y hasta una vez cada 15 minutos el día del reparto. Algunas empresas fijan un intervalo más largo (cada hora, GLS en Alemania, Austria, Suiza, Francia, Países Bajos y Polonia, DHL eCommerce en Polonia, Royal Mail, Poste Italiane, China Post y Morning Global; cada 30 minutos, PostNL, USPS, GOFO en Estados Unidos, Cainiao, J&T Express en Brasil y Onlog Express). Si otra empresa toma el relevo para la entrega, Peek sigue el ritmo de la que reparte el paquete. Cuando el último escaneo tiene más de dos días (12 horas si el paquete sigue con la etiqueta creada o solo admitido) y lo añadiste hace más de ese tiempo, Peek lo consulta cada hora.
 
-### Mi número de seguimiento no aparece en Correos
+### ¿Por qué mi número de seguimiento no aparece en Correos o en el transportista?
 
 Puede que el paquete aún no se haya escaneado, que el número sea de otro transportista o que haya un carácter mal copiado. Correos manda el código de envío por correo electrónico, por SMS o por las dos vías, según los datos que le haya dado el remitente, y también lo pone en el aviso de llegada; si tienes dudas, confírmalo con la tienda. Mientras ningún transportista conozca el número, Peek muestra «Probablemente Correos» si tiene su formato y, si no se parece a ninguno, «Transportista aún no encontrado» y «Guarda esta página: Peek sigue preguntando a los transportistas, y este enlace mostrará el paquete en cuanto uno responda.» Un paquete ya guardado con su transportista y sin escaneos, cuyo número ese transportista aún no ha registrado o con el que no se ha podido conectar, no muestra un error sino «Esperando a Correos» (aquí con Correos) y, si no se ha podido conectar con él, en su página, «Aún no se ha podido conectar con Correos. Peek sigue intentándolo.» Si dos días después el transportista sigue sin reconocer el número y ninguna otra fuente responde por él, Peek muestra «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.» y desde entonces lo comprueba una vez al día, y una vez a la semana cuando ha pasado una semana desde que lo añadiste. Con muchos transportistas, Peek sabe por la respuesta si el envío ya está registrado pero aún sin escanear. En ese caso, el transportista conoce el número: Peek sigue preguntando y muestra «Esperando a» seguido del nombre del transportista, sin pedirte que revises el número. [Comprueba de qué transportista es](guide:tracking-number-formats) o [encuentra el número correcto](guide:find-tracking-number).
 

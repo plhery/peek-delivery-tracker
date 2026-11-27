@@ -15,6 +15,17 @@ describe('the numbers a text names, by how far its sender is trusted', () => {
     expect(read('Tracking ID: AB12CD34EF')).toEqual([]);
   });
 
+  it('reads a label alone on its line above its number, as a shop\'s table prints one', () => {
+    expect(read('Livraison\n\nExpress \n\nVotre numéro de colis\n\n1234567899 \n\nPaiement')).toEqual(['1234567899 unknown']);
+    expect(read('Tracking number\n1234567899')).toEqual(['1234567899 unknown']);
+    expect(read('Sendungsnummer\n\n1234 5678 99')).toEqual(['1234567899 unknown']);
+    for (const text of [
+      // Words that label no tracking number, a sentence, and a number that shares its line with words stay unread.
+      'Numéro de commande\n\n1234567899', 'Service client\n\n0800 123 456', 'Merci pour votre commande !\n\n1234567899',
+      'Tracking number\n\nPlease allow a day for 1234567899', 'Livraison\n\nExpress',
+    ]) expect(read(text), text).toEqual([]);
+  });
+
   it('takes from a text an assistant sends a number alone or labelled, though no carrier\'s shape fits it', () => {
     expect(read('1234567899', [], 'sent')).toEqual(['1234567899 unknown']);
     expect(read(' 1234 5678 9012 ', [], 'sent')).toEqual(['123456789012 unknown']);

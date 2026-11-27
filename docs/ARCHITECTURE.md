@@ -479,7 +479,8 @@ Key server modules:
     links, not as text: a hand-forwarded email inlines every one, and they would fill the
     text's share before its number. It takes the tracking numbers the Add sheet would, without order
     numbers: those a carrier's shape proves. It also takes a number the email's own label
-    calls a tracking number ("Sendungsnummer 1234567899") when its shape fits a carrier
+    calls a tracking number ("Sendungsnummer 1234567899"), on its line or alone on the line
+    above it as a shop's table prints one, when its shape fits a carrier
     without proving one, as most couriers' plain digits do; the carriers are then asked. A
     number holds a digit, so no word is ever one. Invisible padding is dropped before the
     reading. It reads at most 16,000 characters, with patterns that stay linear on any

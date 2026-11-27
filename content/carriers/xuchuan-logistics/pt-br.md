@@ -10,7 +10,7 @@ A Xuchuan International Logistics (旭川国际物流) é uma agente de cargas s
 
 ## Formato do código de rastreio Xuchuan
 
-A Xuchuan não publica um padrão oficial de código. O catálogo do Peek associa um formato à Xuchuan: `XC`, dez dígitos e `CN`, somando 14 caracteres, como `XC4829173640CN` (inventado). Trata-se apenas de uma correspondência fraca: o formato por si só não comprova que o pacote seja da Xuchuan. Nenhuma outra transportadora na lista do Peek usa esse padrão.
+A Xuchuan não publica um formato de código. O catálogo do Peek associa um formato à Xuchuan: `XC`, dez dígitos e `CN`, somando 14 caracteres, como `XC4829173640CN` (inventado). Trata-se apenas de uma correspondência fraca: o formato por si só não comprova que o pacote seja da Xuchuan. Nenhuma outra transportadora na lista do Peek usa esse padrão.
 
 | Código | O que é |
 | --- | --- |
@@ -32,7 +32,7 @@ O Peek exibe mensagens próprias enquanto aguarda a primeira leitura (veja abaix
 
 ## Quem entrega encomendas Xuchuan
 
-O site da Xuchuan não cita as empresas parceiras de entrega nem os países atendidos. Ele lista:
+O site da Xuchuan não cita as empresas que entregam para ela nem os países atendidos. Ele lista:
 
 - frete aéreo, marítimo e multimodal;
 - serviços de cadeia de suprimentos, da compra à distribuição;
@@ -45,7 +45,7 @@ O site diz cuidar da última milha para vendedores on-line, sem indicar quem ent
 
 ## Encomenda Xuchuan atrasada, parada ou perdida
 
-**Sem atualização.** A Xuchuan não divulga prazos de entrega nem promete datas. Se o histórico citar uma transportadora no seu país com código próprio, confira diretamente no site dela, que costuma atualizar antes dos serviços agregadores. Veja [por que o rastreio para de atualizar](guide:tracking-not-updating).
+**Sem atualização.** A Xuchuan não divulga prazos de entrega nem promete datas. Se o histórico citar uma transportadora no seu país com código próprio, confira o rastreamento dela, que pode estar à frente dos serviços de rastreamento. Veja [por que o rastreio para de atualizar](guide:tracking-not-updating).
 
 **Perdida, danificada ou devolvida.** A Xuchuan não publica regras de indenização, atraso ou devolução. Peça reembolso ou reenvio à loja, que foi quem contratou o frete. Para compras em marketplaces, consulte os guias de pedidos do [AliExpress](guide:aliexpress-orders), [Temu](guide:temu-orders) e [Shein](guide:shein-orders), além de [encomendas perdidas](guide:lost-parcel) e [devolvida ao remetente](guide:returned-to-sender).
 
@@ -64,19 +64,19 @@ O seletor de idioma do site lista inglês, mas a página permanece em chinês. N
 
 ## Acompanhe uma encomenda Xuchuan no Peek
 
-O [Peek](/) não identifica um envio Xuchuan apenas pelo número. Como o formato `XC` acima é uma correspondência fraca, o Peek não escolhe Xuchuan automaticamente ao adicionar; mesmo assim, cole o código (o Peek acompanha mais de 4.500 transportadoras). Ao adicionar, o Peek consulta serviços de rastreamento ("Consultando serviços de rastreamento…") e avisa caso nenhum o conheça ainda, continuando a verificar depois.
+O [Peek](/) não identifica um envio Xuchuan apenas pelo número. Como o formato `XC` acima é uma correspondência fraca, o Peek não indica a Xuchuan ao adicionar. Cole mesmo assim: o Peek acompanha mais de 4.500 transportadoras. Ao adicionar, o Peek consulta serviços de rastreamento ("Consultando serviços de rastreamento…"). Se nenhum deles conhece o código ainda, a lista de transportadoras mostra "Ainda não encontrada pelos serviços de rastreamento. O Peek continua verificando depois que você adicionar."
 
-Para acompanhar como Xuchuan, toque em "Alterar": Xuchuan International Logistics aparece em "Compatível com este código", e pesquisar "Xuchuan", "旭川" ou "xcwl" também encontra. Se você deixar a seleção com o Peek e os serviços apontarem Xuchuan com movimentação, o Peek a define sozinho.
+Para acompanhar como Xuchuan, toque em "Trocar": Xuchuan International Logistics aparece em "Compatível com este código", e pesquisar "Xuchuan", "旭川" ou "xcwl" também encontra. Se você deixar a seleção com o Peek e os serviços apontarem Xuchuan com movimentação, o Peek a define sozinho.
 
 Como a Xuchuan não possui rastreador legível pelo Peek, ele consulta ParcelsApp, Ship24 e 17TRACK em ordem e mantém o primeiro que encontrar o pacote, mostrando status e histórico nas palavras daquele serviço (o que pode atrasar em relação à transportadora real ou não retornar nada). O link do pacote abre a página daquele serviço. O Peek não repassa seu IP nem seu país aos serviços.
 
-Enquanto nenhum serviço conhecer o número, o pacote exibe "Ainda sem histórico de rastreamento", ou "Aguardando Xuchuan International Logistics" se você a selecionou. Uma vez cadastrado na Xuchuan, um serviço pode informar a transportadora final e o novo código: se o Peek ler o site dela, passa a consultá-la e migra assim que houver leitura tão recente quanto o histórico anterior, exibindo "Entrega por …" (ou "Anunciada a …, ainda não recebida" se houver apenas pré-aviso).
+Enquanto nenhum serviço conhecer o número, o pacote exibe "Ainda sem histórico de rastreamento", ou "Aguardando Xuchuan International Logistics" se você a selecionou. Uma vez cadastrado na Xuchuan, um serviço pode informar a transportadora final e o novo código: se o Peek consegue ler o rastreamento dela, passa a consultá-la também e migra assim que houver leitura tão recente quanto o histórico anterior, exibindo "Entrega por …" (ou "Anunciada a …, ainda não recebida" se houver apenas pré-aviso).
 
 Enquanto acompanhado via serviço, o Peek verifica a cada hora, a cada 3 horas após um dia sem nova leitura e a cada 6 horas após sete dias em "Etiqueta criada". No dia em que sair para entrega, verifica até a cada 15 minutos com o app aberto ou notificações ligadas. Serviços que não encontraram o código são consultados novamente um dia depois.
 
-Se ficar quatro dias sem nova leitura em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek exibe o aviso com a data do último evento (por exemplo, "Sem atualização de rastreamento desde seg 12 out") e a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Xuchuan International Logistics." Como a Xuchuan não tem página de ajuda no Peek, o link de ajuda só aparece se o rastreio migrar para uma transportadora final que tenha uma. Após três semanas sem novidade, orienta procurar o vendedor enquanto continua consultando.
+Quando a leitura mais recente tem quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza a data dessa leitura, como "Sem atualizações desde seg 12 out". A página do pacote então exibe "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Xuchuan International Logistics." A Xuchuan não tem página de ajuda no Peek, então o link "Pedir ajuda a …" só aparece quando o Peek passa a acompanhar a empresa que entrega, e apenas se ela tiver uma. Após três semanas sem novas leituras, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando Xuchuan International Logistics."
 
-As notificações suportam "Cada atualização", "Etapas importantes" ou "Somente entrega". O Peek não pode entrar em contato com a Xuchuan ou a loja por você.
+O Peek pode avisar você em "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode entrar em contato com a Xuchuan ou a loja por você.
 
 ## Perguntas sobre o rastreio Xuchuan
 
@@ -90,7 +90,7 @@ Não tem um rastreador próprio. A caixa de rastreio em xcwl.ltd usa o widget do
 
 ### Como é um código de rastreio da Xuchuan?
 
-O formato associado pelo Peek é `XC`, dez dígitos e `CN`, como `XC4829173640CN` (inventado). A Xuchuan não publica um padrão oficial, portanto trata-se apenas de correspondência fraca. Com nove dígitos, o formato é do China Post.
+O formato associado pelo Peek é `XC`, dez dígitos e `CN`, como `XC4829173640CN` (inventado). A Xuchuan não publica um formato próprio, portanto trata-se apenas de correspondência fraca. Com nove dígitos, o formato é do China Post.
 
 ### Quem entrega encomendas da Xuchuan?
 

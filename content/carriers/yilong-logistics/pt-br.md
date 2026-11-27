@@ -10,7 +10,7 @@ A Yilong Logistics (一龙物流) é uma agente de cargas em Putian, na provínc
 
 ## Formato do código de rastreio Yilong Logistics
 
-A Yilong não publica um padrão oficial. Os códigos aceitos por seu rastreador seguem `YIL`, nove dígitos e `WL`. Veja três exemplos inventados:
+A Yilong não publica um formato de código. Os códigos aceitos por seu rastreador seguem `YIL`, nove dígitos e `WL`. Veja três exemplos inventados:
 
 | Código | O que é |
 | --- | --- |
@@ -24,7 +24,7 @@ O Peek também aceita letras minúsculas ou espaços. Se o vendedor não enviou 
 
 ## Significado dos status de rastreio Yilong Logistics
 
-As leituras da Yilong aparecem em inglês, com exceção de uma linha em chinês gerada automaticamente por sua plataforma Hualei (华磊). Na ordem habitual:
+As leituras da Yilong aparecem em inglês, com exceção de uma linha em chinês gerada automaticamente por sua plataforma Hualei (华磊). Na ordem em que a encomenda passa por elas:
 
 | A Yilong exibe | O que significa para você |
 | --- | --- |
@@ -41,7 +41,7 @@ As leituras da Yilong aparecem em inglês, com exceção de uma linha em chinês
 
 As linhas de alfândega e companhia aérea não informam local, e nenhuma linha informa fuso horário: todos os horários estão no fuso de Pequim, então uma leitura às 09h00 lá ocorreu na noite anterior pelo relógio de Nova York.
 
-Em pacotes para os EUA, as linhas finais podem vir da SwiftX: `Arrived at Origin Hub` (primeiro centro nos EUA), `Departed Destination Hub`, `Arrived At Warehouse` (armazém de onde saem as rotas), `Out for Delivery` e `Delivery failed` seguido de nota do motorista e linha de ajuda da SwiftX. O aviso `Shipping Label Created` da SwiftX costuma aparecer junto, porém datado logo após a leitura no armazém chinês.
+Em pacotes para os EUA, as linhas finais podem vir da SwiftX: `Arrived at Origin Hub` (primeiro centro nos EUA), `Departed Destination Hub`, `Arrived At Warehouse` (armazém de onde saem as rotas), `Out for Delivery` e `Delivery failed` seguido de nota do motorista e linha de ajuda da SwiftX. O aviso `Shipping Label Created` da SwiftX aparece junto, porém datado logo após a leitura no armazém chinês.
 
 ## Quem entrega encomendas Yilong Logistics
 
@@ -55,27 +55,27 @@ O registro da Yilong não informa o nome da transportadora final nem um segundo 
 
 **Nada encontrado.** Quando o rastreador não conhece o código, exibe apenas esse número sob 参考号 (referência). O Peek mostra "Aguardando Yilong Logistics" e, após dois dias sem reconhecimento, pede para conferir o código, trocar de transportadora ou excluir a encomenda. Compare caractere por caractere com a mensagem do vendedor.
 
-**Perdida, danificada ou devolvida.** O site da Yilong não tem formulário de reclamação nem termos. Como o cliente da Yilong é o vendedor, cabe a ele reembolsar ou reenviar; se ele sumir, abra disputa no marketplace. Veja [encomendas perdidas](guide:lost-parcel) e [devolvida ao remetente](guide:returned-to-sender).
+**Perdida, danificada ou devolvida.** O site da Yilong não tem formulário de pedido de indenização nem termos. Como o cliente da Yilong é o vendedor, cabe a ele reembolsar ou reenviar; se ele sumir, abra disputa no marketplace. Veja [encomendas perdidas](guide:lost-parcel) e [devolvida ao remetente](guide:returned-to-sender).
 
 ## Telefone e contato da Yilong Logistics
 
 Em yxhlexpress.com, tudo em chinês:
 
 - **Páginas:** 联系我们 (contato), 客服中心 (atendimento) e 公司介绍 (sobre a empresa) mostram apenas o título, sem conteúdo.
-- **WeChat:** um QR code intitulado 官网微信二维码 (QR code oficial do WeChat) no painel lateral e no rodapé de cada página.
+- **WeChat:** um QR code intitulado 官网微信二维码 (QR code do WeChat do site) no painel lateral e no rodapé de cada página.
 - **Telefone:** um celular chinês no rodapé do painel lateral, sem legenda indicando de quem é, horários ou idiomas.
 
 Não há e-mail, endereço físico nem orientações para destinatários: o restante da página inicial destina-se a remetentes, com login/cadastro em 寄件下单 (criar envio) e calculadora de frete. Dúvidas sobre o pedido vão para o vendedor.
 
 ## Acompanhe sua encomenda Yilong Logistics no Peek
 
-Cole um código `YIL…WL` no [Peek](/) e ele seleciona Yilong Logistics na hora: nenhuma outra transportadora conhecida pelo Peek usa esse formato. O Peek acompanha mais de 4.500 transportadoras, mas referências próprias do vendedor não têm formato fixo — adicione mesmo assim, toque em "Alterar" e escolha Yilong Logistics (pesquisar 一龙物流 ou YXHL também funciona), ou use "Alterar transportadora" em pacotes já salvos. Se a Yilong reconhecer a referência, o Peek mostra também o código `YIL`; porém o Peek remove hifens, então consulte referências com hifens diretamente na caixa da Yilong.
+Cole um código `YIL…WL` no [Peek](/) e ele seleciona Yilong Logistics na hora: nenhuma outra transportadora conhecida pelo Peek usa esse formato. O Peek acompanha mais de 4.500 transportadoras, mas referências próprias do vendedor não têm formato fixo — adicione mesmo assim, toque em "Trocar" e escolha Yilong Logistics (pesquisar 一龙物流 ou YXHL também funciona), ou use "Trocar transportadora" em pacotes já salvos. Se a Yilong reconhecer a referência, o Peek mostra também o código `YIL`; porém o Peek remove hifens, então consulte referências com hifens diretamente na caixa da Yilong.
 
 O Peek lê o rastreador da Yilong diretamente, exibindo cada linha nas palavras originais (incluindo a linha em chinês), o local nas duas linhas de armazém e o país de destino quando presente. A entrada no armazém conta como "Recebida pela transportadora"; da saída do armazém até o armazém local (incluindo `Shipping Label Created` logo após o armazém chinês) conta como "Em trânsito"; `Out for Delivery` como "Saiu para entrega" e `Delivery failed` como "Tentativa de entrega". Os horários de Pequim aparecem no fuso do seu dispositivo. Nomes, endereço, códigos postais, peso, taxas, referência do vendedor, assinatura e comprovante ficam fora do Peek, e não há previsão de entrega porque a Yilong não informa.
 
-Linhas com horário futuro em relação ao relógio de Pequim ficam retidas até chegar a hora. O Peek também retém linhas gravadas no sistema mais de doze horas antes do horário exibido (ou mais de seis horas antes no mesmo segundo de tal linha), por se tratarem de previsões e não leituras reais: até a entrega ou devolução real, o Peek avisa acima do histórico que o site da Yilong lista a rota inteira antecipadamente — não sendo leituras reais — e mostra essas linhas em cinza com a data; se a entrega pré-escrita vencer sem leitura real de chegada, avisa abaixo do status para falar com o vendedor caso nada tenha chegado. Como a Yilong não nomeia a entregadora final, o Peek acompanha só até onde vai o histórico dela; quando o vendedor informar o número da transportadora local, adicione-o como novo pacote.
+Linhas com horário futuro em relação ao relógio de Pequim ficam retidas até chegar a hora. O Peek também retém linhas gravadas no sistema mais de doze horas antes do horário exibido (ou mais de seis horas antes no mesmo segundo de tal linha), por se tratarem de previsões e não leituras reais: até a entrega ou a devolução, o Peek mostra acima do histórico "O site de Yilong Logistics mostra todo o trajeto com antecedência, entrega incluída. Essas etapas não são movimentações reais." e exibe essas linhas em cinza com o dia; quando chega a data de uma entrega registrada com antecedência e nenhuma leitura diz que o pacote chegou, acrescenta abaixo do status "O site de Yilong Logistics mostra uma entrega registrada com antecedência, não uma movimentação real. Se nada chegou, fale com o vendedor." Como a Yilong não nomeia a entregadora final, o Peek acompanha só até onde vai o histórico dela; quando o vendedor informar o número da transportadora local, adicione-o como novo pacote.
 
-Enquanto o pacote estiver aberto no Peek, ou no dia da entrega com notificações ligadas, o Peek verifica até a cada 10 minutos, e até a cada 2 minutos a partir das 6h de Pequim no dia em que sair para entrega, enquanto o rastreador oficial responder; nos demais casos, e após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Como as próprias linhas da Yilong (inclusive alfândega de importação) são etapas de trânsito, apenas o alerta de cada atualização notifica por elas; "Etapas importantes" e "Somente entrega" começam a disparar a partir de `Out for Delivery` da entregadora local. O Peek não pode cobrar a Yilong nem o vendedor por você.
+Enquanto o pacote estiver aberto no Peek, ou no dia da entrega com notificações ligadas, o Peek verifica até a cada 10 minutos, e até a cada 2 minutos a partir das 6h de Pequim no dia em que sair para entrega, enquanto o rastreador da própria Yilong responder; nos demais casos, e após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Como as próprias linhas da Yilong (inclusive alfândega de importação) são etapas de trânsito, apenas o ajuste "Cada movimentação" avisa sobre elas; "Etapas importantes" e "Só a entrega" começam a disparar a partir de `Out for Delivery` da entregadora local. O Peek não pode cobrar a Yilong nem o vendedor por você.
 
 ## Perguntas sobre o rastreio Yilong Logistics
 

@@ -15238,6 +15238,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "heppner",
+      "catalog": "heppner",
+      "slug": "heppner-tracking",
+      "title": "Rastreamento Heppner: código, código postal e agendamento",
+      "name": "Heppner",
+      "color": "#005baa"
+    },
+    {
       "id": "c-chez-vous",
       "catalog": "c-chez-vous",
       "slug": "c-chez-vous-tracking",
@@ -15828,6 +15836,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Pengyou: códigos PY, etapas e a quem perguntar",
       "name": "Pengyou",
       "color": "#043a82"
+    },
+    {
+      "id": "linhan",
+      "catalog": "linhan",
+      "slug": "linhan-tracking",
+      "title": "Rastreamento LinHan International: códigos LHGJ e status",
+      "name": "LinHan International",
+      "color": "#eb5c20"
     },
     {
       "id": "mtscn",
@@ -20012,6 +20028,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "heppner",
+      "catalog": "heppner",
+      "slug": "heppner-tracking",
+      "title": "Heppner 物流查询：单号、邮编、预约时段与客服",
+      "name": "Heppner",
+      "color": "#005baa"
+    },
+    {
       "id": "c-chez-vous",
       "catalog": "c-chez-vous",
       "slug": "c-chez-vous-tracking",
@@ -20610,6 +20634,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "捧友供应链（Pengyou）查询：PY单号与预设轨迹说明",
       "name": "Pengyou",
       "color": "#043a82"
+    },
+    {
+      "id": "linhan",
+      "catalog": "linhan",
+      "slug": "linhan-tracking",
+      "title": "林瀚国际（LinHan）快递查询：LHGJ 单号与物流状态",
+      "name": "LinHan International",
+      "color": "#eb5c20"
     },
     {
       "id": "mtscn",

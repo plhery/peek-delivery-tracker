@@ -1,13 +1,13 @@
 ---
 title: Où trouver son numéro de suivi, et comment faire sans
-description: E-mail d'expédition, commande, avis de passage, preuve de dépôt : où trouver ton numéro de suivi, et comment suivre un colis quand tu ne l'as pas.
+description: Où trouver ton numéro de suivi (différent du numéro de commande) : e-mail d'expédition, Amazon, Vinted, eBay, avis de passage et suivi sans numéro.
 slug: ou-trouver-numero-de-suivi
 picture: Un e-mail d'expédition où le numéro RR000000005CH est surligné en jaune, une étiquette à code-barres à côté, et Pip qui sourit.
 published: 2026-10-09
-updated: 2026-11-07
+updated: 2026-11-27
 ---
 
-Ton numéro de suivi se trouve en général dans l'e-mail ou le SMS d'expédition de la boutique, ou dans le détail de ta commande sur son site ou son app, à un clic du numéro de commande. Si c'est toi qui as envoyé le colis, il figure sur ta preuve de dépôt ou ton bordereau. Aucun transporteur ne retrouve un colis à partir de ton nom ou de ton adresse, mais un avis de passage, le compte gratuit de certains transporteurs ou l'expéditeur peuvent quand même te permettre de le suivre.
+Ton numéro de suivi — différent du numéro de commande de la boutique, qui ne fonctionne jamais sur le site d'un transporteur — se trouve dans l'e-mail ou le SMS d'expédition, ou dans le détail de ta commande (Amazon, Vinted, eBay, Zalando), et sur ta preuve de dépôt si tu es l'expéditeur. Aucun transporteur ne retrouve un colis par nom ou adresse, mais un avis de passage (bpost, La Poste suisse), un compte transporteur gratuit (« Mes envois », My bpost, Mondial Relay) ou l'expéditeur te permettent de le suivre.
 
 ## Où trouver mon numéro de suivi ?
 
@@ -96,7 +96,7 @@ Non, et sans numéro, pas de recherche non plus : La Poste suisse n'en lance que
 
 ## Numéro de commande ou numéro de suivi : quelle différence ?
 
-Ce sont deux numéros différents. DHL le précise : le numéro de commande est attribué par ton vendeur, et ce n'est pas un numéro de suivi. Le numéro de suivi du transporteur n'existe qu'une fois l'étiquette imprimée.
+Le numéro de commande vient du vendeur et ne sert à rien sur le site d'un transporteur ; le numéro de suivi est créé par le transporteur seulement une fois l'étiquette éditée (DHL le rappelle explicitement).
 
 :::journey
 - shop | Commande passée | La boutique te donne un numéro de commande

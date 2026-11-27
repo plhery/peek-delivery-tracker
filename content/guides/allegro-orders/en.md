@@ -1,13 +1,13 @@
 ---
 title: Allegro order tracking: where's my parcel and who has it
-description: Track an Allegro order in English: where the tracking number is, which carrier has it (Allegro One, InPost, DPD…) and what to do if it doesn't arrive.
+description: Track an Allegro order (Moje przesyłki / My Parcels) in English: carriers (Allegro One, InPost, DPD, ORLEN, Poczta Polska), Smart!, EU shipping and refunds.
 slug: allegro-order-tracking
 picture: A parcel in an open One Box locker, a phone showing an order, and Pip running to collect it.
 published: 2026-10-17
-updated: 2026-11-05
+updated: 2026-11-27
 ---
 
-To see where your Allegro order is, open **My Parcels** (Moje przesyłki), or the order in **Purchase History** (Moje zakupy): Allegro shows the carrier and the tracking number once the seller adds it, and emails you both. Paste the number into [Peek](/), which shows Allegro One's tracking in English, or open it on the carrier's site. The carrier is the one in the delivery method you chose: Allegro One, InPost, DPD, DHL, ORLEN Paczka or Poczta Polska. If the parcel doesn't come, write to the seller, then report a purchase problem, and Allegro Buyer Protection can refund you. Allegro's terms name four marketplaces, allegro.pl, allegro.cz, allegro.sk and allegro.hu, so there's no Allegro site for the US, UK, Ireland, Canada or Australia.
+To track your Allegro parcel in English, open **My Parcels** (`Moje przesyłki`) or **Purchase History** (`Moje zakupy`): Allegro lists the carrier (Allegro One, InPost, DPD, DHL, ORLEN Paczka or Poczta Polska) and tracking number once added, and emails you both. Paste the number into [Peek](/) to read Allegro One's updates in English, switch Allegro's language under **Location settings**, or report a purchase problem for Allegro Buyer Protection (up to PLN 20,000) if a parcel doesn't arrive. Allegro operates allegro.pl, .cz, .sk and .hu (with shipping to 23 EU countries, not the US, UK, Canada or Australia).
 
 Allegro is available in English: in your account, under **Location settings**, change the language. This guide gives Allegro's labels in English with the Polish in brackets, or in Polish with a translation.
 
@@ -37,7 +37,7 @@ With Allegro Delivery, you get an email, SMS or app notification when the parcel
 
 ## Where is the tracking number on Allegro?
 
-In four places:
+Once the seller adds it (or Allegro attaches it automatically), your Allegro tracking number appears in four places:
 
 - **My Parcels (Moje przesyłki).** Every parcel from the moment it's waiting to be sent until you collect it, with the expected date once it's on its way.
 - **Purchase History (Moje zakupy).** The order details show the tracking number, once the seller adds it, and its status.

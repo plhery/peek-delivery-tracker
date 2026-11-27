@@ -1,12 +1,12 @@
 ---
 title: UPS tracking: número 1Z, estados e entregas em Portugal
-description: UPS tracking em Portugal: como é o número 1Z, o que querem dizer Exception e as outras leituras, os Access Point, a alfândega e os teus direitos.
+description: Rastreio UPS em Portugal (UPS tracking): número 1Z de 18 caracteres, estados Exception e Access Point em português, direitos aduaneiros e direitos do comprador.
 slug: ups-tracking
 published: 2026-10-13
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Os números de seguimento da UPS (United Parcel Service) começam normalmente por `1Z`. Cola o número, ou um link de seguimento da UPS, na caixa acima para seguires a encomenda; a página de seguimento da própria UPS está no ups.com.
+Para fazer o rastreio de uma encomenda UPS em Portugal (UPS tracking), cola o teu número `1Z` de 18 caracteres — ou um link de seguimento do ups.com — na caixa acima ou em ups.com. Encontras o número no e-mail de envio ou na página da encomenda da loja, e vês os registos da UPS (`Exception`, `Out For Delivery Today`, `Delivered to UPS Access Point™`) traduzidos em etapas em português, com o ponto Access Point e as regras de alfândega e reclamação na UE.
 
 ## Número de seguimento UPS: onde está e que formato tem
 
@@ -72,21 +72,25 @@ Não vês quem assinou, a tua morada, a prova de entrega, onde ficou a encomenda
 
 ## Perguntas sobre o UPS tracking
 
+### Como fazer o rastreio de uma encomenda UPS em Portugal?
+
+Copia o número `1Z` de 18 caracteres do e-mail de envio ou da página da encomenda (ou um link ups.com com `tracknum=`) e cola-o em ups.com ou no Peek para acompanhar o estado em português, o mapa das leituras e a morada do UPS Access Point.
+
 ### Quantos caracteres tem um número de seguimento UPS?
 
-O mais habitual tem 18: `1Z` e mais 16 letras e algarismos, como `1Z1234567812345674`. O último algarismo serve de controlo, por isso um número mal copiado costuma ser recusado. Se a UPS não o reconhecer, confirma também se o e-mail da loja indica outra transportadora.
+O formato habitual tem 18 caracteres: `1Z` seguido de 16 letras e algarismos (o último é um algarismo de controlo). Um erro de cópia costuma fazer a UPS recusar o número; confirma também na loja se a transportadora é mesmo a UPS.
 
 ### Quanto tempo demora a aparecer o seguimento da UPS?
 
-A primeira leitura, `Shipper created a label, UPS has not received the package yet.`, aparece assim que o remetente cria a etiqueta. Só avança quando o remetente entrega a encomenda ou a UPS a vai buscar (`Drop-Off`, `Pickup Scan`).
+A primeira leitura (`Shipper created a label, UPS has not received the package yet.`) aparece assim que a etiqueta é criada, mas o rastreio só avança depois de a encomenda ser entregue num Access Point ou recolhida pela UPS (`Drop-Off`, `Pickup Scan`).
 
 ### Posso alterar a entrega UPS no Peek?
 
-Não: o Peek só lê o seguimento da UPS. As alterações que fizeres com a UPS aparecem nas leituras, como `The package will be delivered to the UPS Access Point™ location requested by the receiver.`
+Não: o Peek apenas lê o seguimento da UPS. As alterações pedidas diretamente à UPS aparecem depois nas leituras, como `The package will be delivered to the UPS Access Point™ location requested by the receiver.`
 
 ### Uma SMS a pedir para pagar uma encomenda UPS é verdadeira?
 
-Desconfia. O Gabinete Cibercrime da Procuradoria-Geral da República alertou, em julho de 2023, para mensagens falsas em nome dos CTT que dizem haver uma encomenda pendente e pedem uma pequena taxa, de 2 ou 3 euros, antes da entrega; o link abre uma página falsa que pede os dados do cartão e, a seguir, o código recebido por SMS. Lembra também que os serviços de entrega têm sido terreno fértil para este esquema. Ignora e apaga estas mensagens, sem responder, e confirma a encomenda tu mesmo no ups.com ou no Peek. Se já deste os dados do cartão, contacta o banco e cancela-o. Mais em [SMS ou e-mail falso: como saber se é burla](guide:delivery-scam-texts).
+Desconfia: o Gabinete Cibercrime da Procuradoria-Geral da República alerta para SMS falsas de encomendas pendentes que pedem taxas de 2 ou 3 euros através de links para roubar dados do cartão. Apaga a mensagem, confirma sempre o estado diretamente em ups.com ou no Peek e, se já inseriste o cartão, cancela-o no banco. Mais em [SMS ou e-mail falso: como saber se é burla](guide:delivery-scam-texts).
 
 :::sources
 - [Autoridade Tributária e Aduaneira: Mercadorias eCommerce](https://info.portaldasfinancas.gov.pt/pt/destaques/Paginas/Mercadorias_eCommerce.aspx) – 3 € por adição desde 1 de julho de 2026, remessas até 150 €, exemplo de 6 €, encomendas separadas

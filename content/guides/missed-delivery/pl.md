@@ -1,13 +1,13 @@
 ---
 title: Awizo: jak odebrać paczkę po nieudanej próbie doręczenia
-description: Awizo albo SMS o nieudanej próbie doręczenia? Co dalej z paczką w Poczcie Polskiej, Pocztex i DPD, jak ją odebrać bez dowodu, za kogoś i gdzie się skarżyć.
+description: Awizo w skrzynce lub SMS (Poczta Polska, Pocztex, DPD, InPost): ile dni na odbiór (14 i 7 dni), odbiór z mObywatel lub za kogoś i gdzie zgłosić skargę.
 slug: awizo-jak-odebrac-paczke
 picture: Drzwi wejściowe z awizo wsuniętym pod spód, furgonetka już daleko i zdyszany Pip, który przybiegł chwilę za późno.
 published: 2026-10-14
-updated: 2026-10-28
+updated: 2026-11-27
 ---
 
-Awizo, czyli papierowe zawiadomienie albo SMS po nieudanej próbie doręczenia, mówi, gdzie teraz jest twoja paczka i do kiedy na ciebie czeka. Poczta Polska zostawia przesyłkę w placówce z awizo i masz 14 dni, żeby ją tam odebrać. DPD może od razu zostawić paczkę w punkcie odbioru, skąd odbierzesz ją z kodem z powiadomienia.
+Awizo (papierowe zawiadomienie w skrzynce albo SMS/e-mail eINFO:awizo) oznacza, że przewoźnik nie zastał cię przy próbie doręczenia i przekazał przesyłkę do odbioru. W Poczcie Polskiej masz 14 dni na odbiór w placówce (w Pocztex Kurier 7 dni — wystarczy dokument tożsamości lub aplikacja mObywatel), a DPD może skierować paczkę do punktu DPD Pickup, skąd odbierzesz ją z PIN-em lub kodem 2D z wiadomości.
 
 ## Awizo: co zrobić po nieudanej próbie doręczenia
 
@@ -92,7 +92,7 @@ Jeśli śledzenie pokazuje „doręczona”, a paczki nie ma, przeczytaj poradni
 
 ## Awizo: ile dni na odbiór?
 
-Na poczcie dwa tygodnie, przy Pocztex Kurier tydzień. Ostatni dzień zawsze jest na awizo albo w SMS-ie.
+W placówce Poczty Polskiej przesyłka czeka 14 dni od dnia po pierwszym awizo (powtórne awizo po 7 dniach nie przedłuża terminu), przy Pocztex Kurier 7 dni, a w DPD Pickup tyle, ile wskazuje SMS lub e-mail:
 
 - **Poczta Polska:** 14 dni od dnia po pierwszym awizo. Po 7 dniach dostajesz powtórne awizo, ale termin się nie przedłuża.
 - **Pocztex Kurier:** 7 dni w placówce, licząc od dnia po awizo.

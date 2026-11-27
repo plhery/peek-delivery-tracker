@@ -1,12 +1,12 @@
 ---
 title: CACESA tracking: customs, statuses and who delivers
-description: Track a CACESA parcel into Spain or Portugal: the number to use, what CACESA's statuses mean, customs payments, who delivers it and how to contact CACESA.
+description: Track a CACESA parcel clearing customs for Spain or Portugal: tracking statuses (green, orange, red channel), Tax payment, atc@cacesa.com and who delivers.
 slug: cacesa-tracking
 published: 2026-10-12
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-CACESA (Compañía Auxiliar al Cargo Express) is a Madrid customs agent for online shopping parcels from China to Spain and Portugal: it receives them at several airports, clears them through customs and hands them to the company that delivers them. It delivers nothing itself. Track a parcel on CACESA's tracking page with the shipment number the shop gave you, or paste it in the box above.
+Track a CACESA parcel on cacesa.com or in the box above using the shipment number from the shop or Chinese shipping company (`CNES`, `CNESP`, `CNPRT` or postal code). CACESA (Compañía Auxiliar al Cargo Express, based in Madrid and owned by Portugal's CTT since 2025) clears online orders from China through customs for Spain and Portugal and then hands them to the seller's transport company — it never delivers to your door itself. For held parcels or documents, contact atc@cacesa.com.
 
 ## CACESA tracking number: which one to use
 
@@ -93,21 +93,25 @@ CACESA doesn't name the delivery company, and the parcel goes on under the same 
 
 ## Questions about CACESA tracking
 
+### How do I pay customs charges or send documents to CACESA?
+
+Email your invoice/order screenshot and payment proof to atc@cacesa.com if customs holds your parcel (orange or red channel), then pay duties and VAT under "Tax payment" on cacesa.com by card, PayPal or Bizum.
+
 ### What is CACESA Postal?
 
-CACESA, also called Cacesa Postal or CACESA Logistics, is the Madrid customs agent that clears online orders from China into Spain and Portugal. Iberia founded it in 1987, and Portugal's CTT bought it in 2025.
+CACESA (Cacesa Postal / CACESA Logistics) is the Madrid customs agent founded by Iberia in 1987 and acquired by Portugal's CTT in 2025 to clear e-commerce parcels from China into Spain and Portugal.
 
 ### Who delivers a CACESA parcel?
 
-The transport company your seller chose, not CACESA. Its name is in the shop's email or order page; CACESA doesn't list it.
+The transport company chosen by your seller — not CACESA. Once tracking says `Parcel is going out from Cacesa facilities`, check the shop's shipping email or order page for the delivering carrier.
 
 ### Does CACESA handle AliExpress customs?
 
-CACESA's pages name no shop. It says it gets parcels from companies that group orders in China and clears them for the buyers, with no direct contact with the website they ordered from.
+CACESA names no individual marketplace on its site; it receives consolidated e-commerce shipments from China and clears them through customs with no direct contact with the shop you bought from.
 
 ### How long does a CACESA parcel take after customs?
 
-For a held parcel, CACESA hands it on 3 to 4 days after release, plus the days delivery takes to your postcode. CACESA gives no time for parcels that aren't held.
+For a parcel that was held, CACESA hands it to the delivery carrier 3 to 4 days after release, plus local transit time to your postcode; it publishes no timeframe for unheld parcels.
 
 :::sources
 - [CACESA: Shipment tracking](https://www.cacesa.com/en/tracking) – tracker, shipment number, delivery company, Tax payment

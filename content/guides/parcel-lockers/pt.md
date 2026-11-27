@@ -1,13 +1,13 @@
 ---
 title: Encomenda no cacifo: código para levantar e prazos
-description: Como funcionam os cacifos Locky dos CTT, da InPost e da DPD: onde está o PIN para levantar, quanto tempo espera a encomenda e o que fazer se o cacifo avariar.
+description: Cacifos em Portugal (CTT Locky, InPost e DPD): onde receber o código PIN ou QR, prazos de levantamento (5 dias no Locky e InPost), levantar sem app e avarias.
 slug: cacifo-encomendas-codigo-levantamento
 picture: Uma fila de cacifos com uma porta aberta, um telemóvel que mostra um código e o Pip a sair de um compartimento.
 published: 2026-10-17
-updated: 2026-11-14
+updated: 2026-11-27
 ---
 
-Um cacifo é um ponto de levantamento sem ninguém ao balcão: uma parede de compartimentos que se abre com um código ou com a app da transportadora. O rastreio diz-te quando a encomenda está lá dentro, a transportadora envia-te o código para abrir e, a partir daí, tens poucos dias, normalmente 5 e às vezes só 3. Se não passares a tempo, a encomenda volta para quem a enviou.
+Para levantar uma encomenda num cacifo em Portugal (CTT Locky, InPost Locker ou DPD Pickup Locker), usas o código PIN ou QR enviado pela transportadora por SMS, e-mail ou app só depois de a encomenda entrar no compartimento — nunca o número de rastreio. O prazo de levantamento é curto (5 dias nos CTT Locky, com possível prolongamento até 5 dias úteis, e 5 dias de calendário nos cacifos InPost), e não precisas de app para abrir o ecrã tátil; se passar a data-limite, a encomenda volta ao remetente.
 
 ## Como funciona a entrega num cacifo?
 
@@ -38,7 +38,7 @@ A InPost dá 5 dias de calendário a partir do aviso, mas uma resposta da mesma 
 
 ## Onde está o meu código para levantar, e se não chegar?
 
-O código para levantar não é o número de rastreio. O número segue a encomenda; o PIN abre o compartimento. Só chega quando a encomenda já está no cacifo.
+O código de levantamento (PIN ou QR) chega da transportadora por SMS, e-mail ou app apenas quando a encomenda já está no cacifo — não é o número de rastreio. Nos CTT Locky, a disponibilização pode levar até 48 horas após a chegada e o PIN até 24 horas depois disso.
 
 Onde procurar:
 

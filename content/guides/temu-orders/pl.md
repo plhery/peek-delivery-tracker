@@ -1,13 +1,13 @@
 ---
 title: Śledzenie zamówienia Temu: numer, przewoźnik i opóźnienia
-description: Gdzie w Temu szukać numeru śledzenia, czemu numer zamówienia go nie zastąpi, kto doręcza paczki w Polsce i jak Peek śledzi paczkę, gdy przejmie ją ktoś inny.
+description: Śledzenie zamówienia Temu w Polsce: gdzie w historii zamówień znaleźć numer śledzenia, kto doręcza (Poczta Polska, DPD), cło z 2026 r. i opóźnienia paczki.
 slug: sledzenie-zamowienia-temu
 picture: Stos małych paczek wyjeżdżających z luku samolotu, furgonetka i Pip, który je liczy.
 published: 2026-10-17
-updated: 2026-11-08
+updated: 2026-11-27
 ---
 
-W Temu numer śledzenia znajdziesz w „Twoich zamówieniach”: stuknij „Śledź” obok zamówienia, a Temu pokaże numer śledzenia każdej paczki. Numer zamówienia Temu to nie numer śledzenia: przewoźnik go nie zna. Wklej numer śledzenia do [Peek](/): znajdzie przewoźnika po kształcie numeru, a jeśli pierwszy przewoźnik poda, kto przejmuje paczkę w Polsce, przełączy się na nowego.
+Aby sprawdzić śledzenie zamówienia Temu w Polsce, otwórz historię zamówień w „Twoich zamówieniach” i stuknij „Śledź”: tam znajdziesz numer śledzenia przewoźnika (Poczta Polska, DPD Polska, China Post lub inny), a nie numer zamówienia Temu, którego kurier nie rozpozna. Wklej ten numer do [Peek](/), który sam rozpozna przewoźnika i przełączy się na doręczyciela w Polsce, gdy pierwszy przewoźnik przekaże paczkę dalej.
 
 ## Czy numer zamówienia Temu to numer śledzenia?
 

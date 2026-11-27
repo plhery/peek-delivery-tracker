@@ -1,6 +1,6 @@
 ---
 title: Rastreamento M-ONE (Milšped ONE): status, entrega e ajuda
-description: Rastreie encomendas da M-ONE (Milšped ONE) na Sérvia: formato do código, significado dos status em sérvio, tentativas falhas, lockers, reclamações e contatos.
+description: Rastreie encomendas da M-ONE (Milšped ONE) na Sérvia: formato do código, significado dos status em sérvio, entrega não realizada, lockers, indenizações e contatos.
 slug: m-one-tracking
 published: 2026-11-26
 updated: 2026-11-26
@@ -36,7 +36,7 @@ O rastreador da M-ONE responde em sérvio mesmo na versão em inglês do site. O
 | `Na dostavnom vozilu` | Saiu para entrega | No veículo de entrega: deve chegar hoje. |
 | `Zaduzena za paketomat` | Saiu para entrega | O entregador saiu com o pacote para depositá-lo em um armário de encomendas. |
 | `Čeka u paketomatu` | Pronta para retirada | Aguardando no armário de encomendas. Use o código recebido por Viber ou SMS. |
-| `Pokušaj uručenja (primaocu ostavljeno obaveštenje)` | Tentativa de entrega | Tentativa sem sucesso; foi deixado um aviso para você. |
+| `Pokušaj uručenja (primaocu ostavljeno obaveštenje)` | Tentativa de entrega | A entrega não foi realizada; foi deixado um aviso para você. |
 | `Primalac ce doci po paket` | Pronta para retirada | Você irá retirar o volume, que fica aguardando no depósito. A leitura se repete a cada rota até a retirada. |
 | `Uručena pošiljka` | Entregue | Entregue em mãos ou retirada no armário de encomendas. |
 
@@ -52,7 +52,7 @@ O serviço expresso padrão da M-ONE é o "Today for Tomorrow": entrega até as 
 
 **Pagamento na entrega.** Se a loja enviou com pagamento na entrega, você paga o valor definido pela loja no momento do recebimento. O frete é pago pelo remetente ou por você, conforme combinado com a loja.
 
-**Entrega perdida.** Se não houver ninguém no endereço, a M-ONE envia aviso por e-mail, SMS ou Viber informando data e hora da tentativa e quando e onde retirar o volume. A M-ONE o mantém guardado por mais 5 dias úteis, contados a partir do dia útil seguinte ao aviso. Perdeu a entrega? Veja [tentativas de entrega](guide:missed-delivery).
+**Entrega não realizada.** Se não houver ninguém no endereço, a M-ONE envia aviso por e-mail, SMS ou Viber informando data e hora da tentativa e quando e onde retirar o volume. A M-ONE o mantém guardado por mais 5 dias úteis, contados a partir do dia útil seguinte ao aviso. Não estava em casa? Veja [tentativas de entrega](guide:missed-delivery).
 
 **Armários de encomendas (lockers).** A entrega em locker só vale para lojas conveniadas à M-ONE, com seleção no checkout. Quando o volume é depositado, a M-ONE envia uma mensagem no Viber (ou SMS se você não usar Viber ou estiver off-line) com o endereço do locker, um código exclusivo para abrir o compartimento e a data limite de retirada. Sem retirada no prazo, o pacote volta ao remetente e a M-ONE avisa você por escrito. A M-ONE também dispõe de pontos de retirada em lojas parceiras. Mais detalhes em [armários de encomendas](guide:parcel-lockers).
 
@@ -64,7 +64,7 @@ O serviço expresso padrão da M-ONE é o "Today for Tomorrow": entrega até as 
 
 **Conteúdo danificado ou faltando.** Registre a reclamação até o fim do dia útil seguinte à entrega: ligue para `011 222 8 222` ou escreva para `reklamacije@m-one.rs`. A M-ONE elabora um registro e reúne fotos das embalagens interna e externa e do dano, portanto guarde tudo como recebeu. Reclamações fora do prazo não dão direito a indenização. Veja [encomendas danificadas](guide:damaged-parcel).
 
-**Extraviada, atrasada ou marcada como entregue sem recebimento.** Outras reclamações têm prazo de 60 dias para envios dentro da Sérvia e 6 meses para envios internacionais, contados do dia seguinte à postagem. Reivindique por escrito no escritório da M-ONE, por e-mail ou por telefone, informando o número do pacote, nomes e endereços do remetente e do destinatário e, se tiver, comprovante de postagem e nota fiscal ou guia de remessa. Para reclamações na Sérvia, a M-ONE responde em até 8 dias e decide em até 15 dias. Em caso de recusa, você pode recorrer ao regulador postal em até 15 dias da decisão, ou em até 90 dias da reclamação se não houver resposta.
+**Extraviada, atrasada ou marcada como entregue sem recebimento.** Outros pedidos de indenização têm prazo de 60 dias para envios dentro da Sérvia e 6 meses para envios internacionais, contados do dia seguinte à postagem. Reivindique por escrito no escritório da M-ONE, por e-mail ou por telefone, informando o número do pacote, nomes e endereços do remetente e do destinatário e, se tiver, comprovante de postagem e nota fiscal ou guia de remessa. Para pedidos na Sérvia, a M-ONE responde em até 8 dias e decide em até 15 dias. Em caso de recusa, você pode recorrer ao regulador postal em até 15 dias da decisão, ou em até 90 dias do pedido se não houver decisão.
 
 **Quem recebe a indenização.** A compensação vai para quem pagou o frete: a loja, ou você se o tiver pago. O remetente pode ceder o direito a você. Em pedidos on-line, geralmente é mais rápido resolver com a loja. Veja [entregue, mas não recebida](guide:delivered-not-received) e [encomendas perdidas](guide:lost-parcel).
 
@@ -82,17 +82,17 @@ No rodapé de m-one.rs constam os termos gerais da M-ONE e o formulário de pedi
 
 ## Acompanhe uma encomenda da M-ONE com o Peek
 
-O [Peek](/) reconhece o formato postal de duas letras, nove dígitos e `RS` com dígito verificador válido, mas o formato sozinho não identifica a M-ONE. O Peek consulta Pošta Srbije, M-ONE e [Chronopost](carrier:chronopost): aparece "Consultando serviços de rastreamento…" e depois "M-ONE está com esta encomenda." quando a M-ONE reconhece o código. Se ainda não constar, exibe "Ainda não encontrada em … O Peek continuará verificando depois que você adicionar." Com dígito verificador incorreto, nenhuma transportadora é consultada: confira o código na mensagem de envio.
+O [Peek](/) reconhece o formato postal de duas letras, nove dígitos e `RS` com dígito verificador válido, mas o formato sozinho não identifica a M-ONE. O Peek consulta Pošta Srbije, M-ONE e [Chronopost](carrier:chronopost): aparece "Consultando serviços de rastreamento…" e depois "M-ONE está com esta encomenda." quando a M-ONE reconhece o código. Se ainda não constar, exibe "Ainda não encontrada em …. O Peek continua verificando depois que você adicionar." Com dígito verificador incorreto, nenhuma transportadora é consultada: confira o código na mensagem de envio.
 
-Códigos iniciados por `C`, `E`, `L` ou `R`, terminados em `RS` e com dígito verificador válido são identificados como [Pošta Srbije](carrier:posta-srbije) pelo formato. Se o seu veio pela M-ONE, selecione "M-ONE" em "Alterar". O Peek não atribui transportadora automaticamente para `RS` com 12 dígitos, então escolha "M-ONE" em "Alterar" nesse caso também. Links do rastreador da M-ONE com qualquer um dos formatos após `?` (`m-one.rs/en?…`) também podem ser colados e já identificam a M-ONE.
+Códigos iniciados por `C`, `E`, `L` ou `R`, terminados em `RS` e com dígito verificador válido são identificados como [Pošta Srbije](carrier:posta-srbije) pelo formato. Se o seu veio pela M-ONE, selecione "M-ONE" em "Trocar". O Peek não identifica transportadora pelo formato `RS` com 12 dígitos, então escolha "M-ONE" em "Trocar" nesse caso também. Links do rastreador da M-ONE com qualquer um dos formatos após `?` (`m-one.rs/en?…`) também podem ser colados e já identificam a M-ONE.
 
 O Peek consulta o rastreador próprio da M-ONE, exibindo o status e o histórico no texto em sérvio da transportadora, o depósito quando indicado e o peso do pacote. A M-ONE envia horários sem fuso horário: o Peek interpreta no fuso da Sérvia e exibe no relógio do seu aparelho. Como o rastreador da M-ONE não informa dia previsto de entrega nem ponto de retirada, o Peek não exibe nenhum dos dois. O nome do remetente é omitido; o nome do destinatário, quando fornecido pela M-ONE, aparece em "Destinatário" na sua página da encomenda, nunca em links compartilhados. Um volume cadastrado na M-ONE mostra "Aguardando M-ONE" até a transportadora reconhecer o código, e o Peek segue consultando.
 
 Enquanto você mantém a encomenda aberta no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta até a cada 10 minutos, e até a cada 2 minutos a partir das 6h no horário da Sérvia no dia em que o volume sai para entrega, enquanto o rastreador da M-ONE responder. Após dois dias sem novidade (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora, e a cada 6 horas depois de sete dias em "Etiqueta criada".
 
-Quando a leitura mais recente tem quatro dias e o volume permanece em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek marca o dia daquela movimentação, como "Sem atualização desde seg 12 out". A página passa a mostrar: "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando M-ONE.", com o link "Pedir ajuda a M-ONE" para a página de contato da transportadora. Após três semanas sem novas leituras, exibe: "Nenhuma novidade há mais de três semanas. Se ainda não chegou, fale com o vendedor. O Peek continua consultando M-ONE."
+Quando a leitura mais recente tem quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza a data dessa leitura, como "Sem atualizações desde seg 12 out". A página do pacote então exibe "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando M-ONE.", com o link "Pedir ajuda a M-ONE" para a página de contato da M-ONE. Após três semanas sem novas leituras, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando M-ONE."
 
-O Peek pode notificar sobre "Todas as movimentações", "Etapas importantes" ou "Somente entrega". Ele não pode redirecionar pacotes, abrir reclamações nem contatar a M-ONE ou a loja por você.
+O Peek pode notificar sobre "Cada movimentação", "Etapas importantes" ou "Só a entrega". Ele não pode redirecionar pacotes, abrir pedidos de indenização nem contatar a M-ONE ou a loja por você.
 
 ## Perguntas sobre o rastreamento da M-ONE
 
@@ -120,7 +120,7 @@ Em sérvio, significa que o destinatário virá retirar o pacote. A encomenda ag
 - [M-ONE: Home](https://m-one.rs/en) – fundação em 2020, Milšped Group, rede na Sérvia, seção TRACK e mensagens, número de código de barras, "Today for Tomorrow", serviço no mesmo dia em Belgrado, devoluções, lockers e pontos de coleta, horários, e-mails info@ e atendimento, documentos
 - [M-ONE: Frequently asked questions](https://m-one.rs/en/cesta-pitanja) – quem pode receber, aviso após tentativa falha, pagamento do frete, prazo até o dia útil seguinte para danos e `011 222 8 222`
 - [M-ONE: Contact](https://m-one.rs/en/kontakt) – endereço, telefone, e-mails office@, reklamacije@, info@ e atendimento
-- [M-ONE: Opšti uslovi obavljanja poštanskih usluga](https://m-one.rs/pdf/Op%C5%A1ti%20uslovi.docx) – M-ONE e-comm doo, dias úteis e horários da central, prazos, Track&Trace, entrega lacrada, pagamento na entrega, quem pode receber, local seguro, aviso e 5 dias úteis, devoluções, lockers, prazos e dados de reclamação, prazos de resposta, recurso ao regulador e titular da indenização
+- [M-ONE: Opšti uslovi obavljanja poštanskih usluga](https://m-one.rs/pdf/Op%C5%A1ti%20uslovi.docx) – M-ONE e-comm doo, dias úteis e horários da central, prazos, Track&Trace, entrega lacrada, pagamento na entrega, quem pode receber, local seguro, aviso e 5 dias úteis, devoluções, lockers, prazos e dados dos pedidos de indenização, prazos de resposta, recurso ao regulador e titular da indenização
 - [M-ONE: Ostali uslovi korišćenja](https://m-one.rs/pdf/OSTALI%20USLOVI%20KORI%C5%A0%C4%86ENJA%2029072024.pdf) – MILŠPED ONE doo, setor de reclamações `011/2203547` e `reklamacije@m-one.rs`
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formatos de código, textos e significados dos status, dados fornecidos pela M-ONE e o que o Peek lê
 :::

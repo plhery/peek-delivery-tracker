@@ -1965,8 +1965,8 @@ final class ParcelStore: ObservableObject {
     /// `detail` words when the parcel is expected or arrived, as of a moment.
     private static func widgetParcel(_ parcel: Parcel, localizer: Localizer, now: Date, midnights: [Date],
                                      detail: (Date) -> String?) -> DeliveryWidgetParcel {
-        let status = localizer.parcelStatus(parcel)
-        let first = detail(now) ?? status
+        let first = detail(now) ?? localizer.widgetStatus(parcel, now: now)
+        let roundEnd = parcel.isOnDeliveryRound(now: now) ? parcel.deliveryRoundDayEnd : nil
         var item = DeliveryWidgetParcel(
             id: parcel.id,
             label: parcel.label.nonEmpty ?? localizer.text("common.parcel"),
@@ -1975,16 +1975,23 @@ final class ParcelStore: ObservableObject {
             detail: first,
             // Out for delivery on a round that is over, it waits among the others, as on a Live Activity.
             isOutForDelivery: parcel.isOnDeliveryRound(now: now),
-            roundEndsAt: parcel.isOnDeliveryRound(now: now) ? parcel.deliveryRoundDayEnd : nil,
-            // As the list's rows mark it.
-            stage: DeliveryWidgetStage(
-                status: status, symbol: parcel.currentStage?.metadata.symbol ?? "shippingbox.fill",
-                tint: ExperimentalPalette.tintHex(for: parcel.currentStage)
-            ),
+            roundEndsAt: roundEnd,
+            // As the list's rows mark it, in transit again once its round's day is over.
+            stage: widgetRowStage(parcel, localizer: localizer, now: now),
             named: parcel.label.nonEmpty != nil
         )
-        item.later = DeliveryWidgetDays.later(than: first, at: midnights) { detail($0) ?? status }
+        item.afterRound = roundEnd.map { widgetRowStage(parcel, localizer: localizer, now: $0) }.flatMap { $0 == item.stage ? nil : $0 }
+        item.later = DeliveryWidgetDays.later(than: first, at: midnights) { detail($0) ?? localizer.widgetStatus(parcel, now: $0) }
         return item
+    }
+
+    /// How a widget's row marks the parcel at `now` (`Parcel.widgetStage`).
+    private static func widgetRowStage(_ parcel: Parcel, localizer: Localizer, now: Date) -> DeliveryWidgetStage {
+        let stage = parcel.widgetStage(now: now)
+        return DeliveryWidgetStage(
+            status: localizer.widgetStatus(parcel, now: now), symbol: stage?.metadata.symbol ?? "shippingbox.fill",
+            tint: ExperimentalPalette.tintHex(for: stage)
+        )
     }
 
     private func publishDeliveryWidget() {

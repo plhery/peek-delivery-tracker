@@ -581,6 +581,15 @@ fun Parcel.isOnDeliveryRound(now: Instant = AppClock.now()): Boolean {
     return now < ends
 }
 
+/**
+ * The stage a widget's row marks the parcel with at `now`: in transit again once the day of its round is over with no
+ * scan since ([isOnDeliveryRound]), where the list's status is that of being out for delivery.
+ */
+fun Parcel.widgetStage(now: Instant = AppClock.now()): TrackingStage? =
+    if (currentStage == TrackingStage.OutForDelivery && !isOnDeliveryRound(now) &&
+        displayStatus.key == TrackingStage.OutForDelivery.localizationKey
+    ) TrackingStage.InTransit else currentStage
+
 /** Whether the map has a place to draw: a generated track's are left out. */
 val Parcel.hasMappedPlace: Boolean get() = GeneratedTrack.without(trackingEvents).any { it.place != null }
 

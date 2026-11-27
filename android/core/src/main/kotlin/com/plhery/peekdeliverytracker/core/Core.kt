@@ -680,6 +680,13 @@ class Localizer(
         return text(shortKey).takeIf { it != shortKey && it != status }
     }
 
+    /**
+     * The status a widget's row gives the parcel at `now`: in transit again once the day of its round is over with no
+     * scan since ([widgetStage]), else the list's.
+     */
+    fun widgetStatus(parcel: Parcel, now: Instant = AppClock.now()): String =
+        if (parcel.widgetStage(now) == parcel.currentStage) parcelStatus(parcel) else text(TrackingStage.InTransit.localizationKey)
+
     /** The estimate a card, a widget or a shared line gives: a window of days that has begun, by the day it ends. */
     fun parcelDeliveryEstimate(parcel: Parcel, now: Instant = AppClock.now()): String? {
         val value = shownEstimate(parcel, now) ?: return null

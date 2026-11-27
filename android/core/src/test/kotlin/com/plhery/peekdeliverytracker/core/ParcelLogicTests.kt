@@ -1122,6 +1122,36 @@ class ParcelLogicTests {
     }
 
     /**
+     * Once its round's day is over with no scan since, a widget's row and card say the parcel is in transit, not
+     * delivering: from that moment while the app stays closed, and as the app publishes it then, until a scan comes.
+     */
+    @Test
+    fun aWidgetRowSaysInTransitOnceTheRoundsDayIsOver() {
+        val localizer = Localizer(AppLanguage.En)
+        val out = outForDeliveryOnAugustFifth()
+        val ends = Instant.parse("2026-08-06T14:00:00Z")
+        val published = ParcelStore.nextDeliveries(listOf(out), localizer, ends.minusSeconds(60)).first()
+            .copy(card = DeliveryWidgetCard(surface = emptyList(), ink = emptyList(), status = "Out for delivery", pictures = "test", scale = 2.0))
+        assertEquals(listOf("Out for delivery", "Delivering", "Out for delivery"), published.stage.let { listOf(it?.status, it?.short, published.detail) })
+        val during = published.worded(ends.minusSeconds(1))
+        assertEquals(listOf("Out for delivery", "Out for delivery", "Out for delivery"), listOf(during.stage?.status, during.detail, during.card?.status))
+        val over = published.worded(ends)
+        assertEquals(listOf("In transit", "In transit", "In transit"), listOf(over.stage?.status, over.detail, over.card?.status))
+        assertNull(over.stage?.short)
+        assertEquals(DeliveryWidgetStage.of(TrackingStage.InTransit, "In transit"), over.stage)
+        // Published after the round's day, as the widget would have worded it.
+        val after = ParcelStore.nextDeliveries(listOf(out), localizer, ends).first()
+        assertEquals(listOf("In transit", "In transit"), listOf(after.stage?.status, after.detail))
+        assertNull(after.afterRound)
+        // A new round: out for delivery again.
+        val again = out.copy(
+            trackingEvents = out.trackingEvents + event(out.id, TrackingStage.OutForDelivery, "2026-08-07T21:10:00Z"),
+            deliveryRoundEndsAt = "2026-08-09T00:00:00+10:00",
+        )
+        assertEquals("Out for delivery", ParcelStore.nextDeliveries(listOf(again), localizer, Instant.parse("2026-08-07T22:00:00Z")).first().stage?.status)
+    }
+
+    /**
      * The round ends at midnight on the carrier's clock, which may fall between two of the phone's: from that moment, not
      * from the phone's next midnight, the widget takes the parcel out of Next up and Arriving today, as the app does, and
      * not before it.

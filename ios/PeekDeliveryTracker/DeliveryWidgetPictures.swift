@@ -64,7 +64,7 @@ enum DeliveryWidgetPictures {
         let digest = SHA256.hash(data: Data(shown.joined(separator: "\n").utf8)).prefix(8).map { String(format: "%02x", $0) }.joined()
         return DeliveryWidgetCard(
             surface: [identity.colors[0], identity.colors[1]], ink: [identity.colors[2], identity.colors[3]],
-            status: localizer.parcelStatus(parcel), pictures: "\(parcel.id.uuidString.lowercased())-\(digest)", scale: scale
+            status: localizer.widgetStatus(parcel), pictures: "\(parcel.id.uuidString.lowercased())-\(digest)", scale: scale
         )
     }
 

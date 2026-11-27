@@ -2586,8 +2586,10 @@ class ParcelStore(
             midnights: List<Instant>,
             detail: (Instant) -> String?,
         ): DeliveryWidgetParcel {
-            val status = localizer.parcelStatus(parcel)
-            val first = detail(now) ?: status
+            val first = detail(now) ?: localizer.widgetStatus(parcel, now)
+            val roundEnd = parcel.deliveryRoundDayEnd.takeIf { parcel.isOnDeliveryRound(now) }
+            // As the list's rows mark it, in transit again once its round's day is over.
+            val stage = widgetRowStage(parcel, localizer, now)
             return DeliveryWidgetParcel(
                 id = parcel.id,
                 label = parcel.label.nonEmpty ?: localizer.text("common.parcel"),
@@ -2596,12 +2598,20 @@ class ParcelStore(
                 detail = first,
                 // Out for delivery on a round that is over, it waits among the others.
                 isOutForDelivery = parcel.isOnDeliveryRound(now),
-                roundEndsAt = parcel.deliveryRoundDayEnd.takeIf { parcel.isOnDeliveryRound(now) },
-                // As the list's rows mark it.
-                stage = DeliveryWidgetStage.of(parcel.currentStage, status, localizer.widgetShortStatus(parcel.displayStatus.key, status)),
+                roundEndsAt = roundEnd,
+                afterRound = roundEnd?.let { widgetRowStage(parcel, localizer, it) }?.takeIf { it != stage },
+                stage = stage,
                 named = parcel.label.nonEmpty != null,
-                later = DeliveryWidgetDays.later(than = first, at = midnights) { detail(it) ?: status },
+                later = DeliveryWidgetDays.later(than = first, at = midnights) { detail(it) ?: localizer.widgetStatus(parcel, it) },
             )
+        }
+
+        /** How a widget's row marks the parcel at `now` ([widgetStage]). */
+        private fun widgetRowStage(parcel: Parcel, localizer: Localizer, now: Instant): DeliveryWidgetStage {
+            val stage = parcel.widgetStage(now)
+            val key = if (stage == parcel.currentStage) parcel.displayStatus.key else TrackingStage.InTransit.localizationKey
+            val status = localizer.widgetStatus(parcel, now)
+            return DeliveryWidgetStage.of(stage, status, localizer.widgetShortStatus(key, status))
         }
 
         private fun installationIdentifier(defaults: UserDefaults): UUID {

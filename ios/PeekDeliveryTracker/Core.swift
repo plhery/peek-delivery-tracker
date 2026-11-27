@@ -868,6 +868,12 @@ final class Localizer: ObservableObject {
         return text(key, ["carrier": CarrierCatalog.shared.info(for: named, language: language).displayName])
     }
 
+    /// The status a widget's row gives the parcel at `now`: in transit again once the day of its round is over with no
+    /// scan since (`Parcel.widgetStage`), else the list's.
+    func widgetStatus(_ parcel: Parcel, now: Date = Date()) -> String {
+        parcel.widgetStage(now: now) == parcel.currentStage ? parcelStatus(parcel) : text(TrackingStage.inTransit.localizationKey)
+    }
+
     /// The estimate a card, a widget or a shared line gives: a window of days that has begun, by the day it ends.
     func parcelDeliveryEstimate(_ parcel: Parcel, now: Date = Date()) -> String? {
         guard let value = shownEstimate(parcel, now: now) else { return nil }

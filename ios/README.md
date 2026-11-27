@@ -237,7 +237,8 @@ former. Server settings are in [DEPLOYMENT.md](../docs/DEPLOYMENT.md).
   and Next up for the coming week, the days around each delivery estimate and the end of each delivery round, and the
   widget and Siri's Next delivery read the words for the moment they show: "tomorrow" reads "today" on the day, last
   night's delivery "yesterday", and a passed estimate gives way to the status. A parcel out for delivery leads the
-  widgets and Siri's answer until its round ends, at midnight on the carrier's clock, then waits among the others. The widget's timeline has an entry at those midnights, at the end of each round, and at
+  widgets and Siri's answer until its round ends, at midnight on the carrier's clock, then waits among the others, its
+  row saying "In transit" until a scan comes. The widget's timeline has an entry at those midnights, at the end of each round, and at
   the midnight after each step, whose time then names its weekday. When the time zone changes, the app words the
   days again for the new zone's midnights and reloads the widgets.
 - **The delivery email** belongs to the account, not the device. Settings › Notifications

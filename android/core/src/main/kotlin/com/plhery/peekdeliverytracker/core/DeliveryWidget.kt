@@ -251,7 +251,7 @@ object DeliveryWidgetPictures {
             .take(8).joinToString("") { "%02x".format(it) }
         return DeliveryWidgetCard(
             surface = listOf(identity.colors[0], identity.colors[1]), ink = listOf(identity.colors[2], identity.colors[3]),
-            status = localizer.parcelStatus(parcel), pictures = "${parcel.id.toString().lowercase()}-$digest", scale = scale,
+            status = localizer.widgetStatus(parcel), pictures = "${parcel.id.toString().lowercase()}-$digest", scale = scale,
         )
     }
 

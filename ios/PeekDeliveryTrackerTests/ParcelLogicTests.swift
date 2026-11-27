@@ -2672,6 +2672,36 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertNil(try XCTUnwrap(ParcelStore.nextDeliveries(of: [out], localizer: localizer, now: ends).first).roundEndsAt)
     }
 
+    /// Once its round's day is over with no scan since, a widget's row and card say the parcel is in transit, not out
+    /// for delivery: from that moment while the app stays closed, and as the app publishes it then, until a scan comes.
+    @MainActor
+    func testAWidgetRowSaysInTransitOnceTheRoundsDayIsOver() throws {
+        let localizer = Localizer()
+        localizer.language = .en
+        let id = UUID()
+        var out = makeParcel(id: id, events: [event(id, .inTransit, "2026-08-05T08:00:00Z"), event(id, .outForDelivery, "2026-08-05T21:10:00Z")])
+        out.deliveryRoundEndsAt = "2026-08-07T00:00:00+10:00"
+        let ends = try XCTUnwrap(DateParser.date("2026-08-07T00:00:00+10:00"))
+        var published = try XCTUnwrap(ParcelStore.nextDeliveries(of: [out], localizer: localizer, now: ends.addingTimeInterval(-60)).first)
+        published.card = DeliveryWidgetCard(surface: [], ink: [], status: "Out for delivery", pictures: "test", scale: 2)
+        XCTAssertEqual([published.stage?.status, published.detail], ["Out for delivery", "Out for delivery"])
+        let during = published.worded(at: ends.addingTimeInterval(-1))
+        XCTAssertEqual([during.stage?.status, during.detail, during.card?.status], ["Out for delivery", "Out for delivery", "Out for delivery"])
+        let over = published.worded(at: ends)
+        XCTAssertEqual([over.stage?.status, over.detail, over.card?.status], ["In transit", "In transit", "In transit"])
+        XCTAssertEqual(over.stage?.symbol, TrackingStage.inTransit.metadata.symbol)
+        XCTAssertEqual(over.stage?.tint, ExperimentalPalette.tintHex(for: .inTransit))
+        // Published after the round's day, as the widget would have worded it.
+        let after = try XCTUnwrap(ParcelStore.nextDeliveries(of: [out], localizer: localizer, now: ends).first)
+        XCTAssertEqual([after.stage?.status, after.detail], ["In transit", "In transit"])
+        XCTAssertNil(after.afterRound)
+        // A new round: out for delivery again.
+        out.trackingEvents.append(event(id, .outForDelivery, "2026-08-07T21:10:00Z"))
+        out.deliveryRoundEndsAt = "2026-08-09T00:00:00+10:00"
+        let next = try XCTUnwrap(ParcelStore.nextDeliveries(of: [out], localizer: localizer, now: XCTUnwrap(DateParser.date("2026-08-07T22:00:00Z"))).first)
+        XCTAssertEqual(next.stage?.status, "Out for delivery")
+    }
+
     /// The round ends at midnight on the carrier's clock, which may fall between two of the device's: from that moment,
     /// not from the device's next midnight, the widget takes the parcel out of Next up and Arriving today, as the app
     /// does, and not before it.

@@ -16,6 +16,9 @@ struct DeliveryWidgetParcel: Codable, Equatable, Hashable, Identifiable, Sendabl
     /// When that round's day ends (`deliveryRoundDayEnd`): from then on the parcel waits among the others while the app
     /// stays closed. None from an app that didn't publish it.
     var roundEndsAt: Date? = nil
+    /// How the rows mark the parcel from then on, with no scan since: in transit again (`Parcel.widgetStage`). None when
+    /// they mark it as before, or from an app that didn't publish it.
+    var afterRound: DeliveryWidgetStage? = nil
     /// When a delivered parcel arrived: the widget keeps it for a day after.
     var deliveredAt: Date? = nil
     /// The parcel's card, once the app has drawn its pictures: the widget then shows the card rather than words alone.
@@ -477,15 +480,25 @@ extension String {
 
 extension DeliveryWidgetParcel {
     /// The parcel as the widgets word it at `date`: as the app wrote it for the last midnight before it, without Peek
-    /// AI's words once they no longer hold.
+    /// AI's words once they no longer hold, and in transit again once its round's day is over.
     func worded(at date: Date) -> DeliveryWidgetParcel {
         var parcel = self
         if let until = peekAiUntil, until <= date { (parcel.peekAi, parcel.peekAiAlone) = (nil, nil) }
-        if let ends = roundEndsAt, ends <= date { parcel.isOutForDelivery = false }
-        guard let wording = later?.last(where: { $0.midnight() <= date }) else { return parcel }
-        parcel.detail = wording.detail
-        parcel.section = wording.section ?? section
-        parcel.nextUp = wording.nextUp ?? nextUp
+        let roundOver = roundEndsAt.map { $0 <= date } ?? false
+        if roundOver { parcel.isOutForDelivery = false }
+        if let wording = later?.last(where: { $0.midnight() <= date }) {
+            parcel.detail = wording.detail
+            parcel.section = wording.section ?? section
+            parcel.nextUp = wording.nextUp ?? nextUp
+        }
+        if roundOver, let after = afterRound, let stage {
+            if parcel.detail == stage.status { parcel.detail = after.status }
+            parcel.card = card.map {
+                $0.status == stage.status
+                    ? DeliveryWidgetCard(surface: $0.surface, ink: $0.ink, status: after.status, pictures: $0.pictures, scale: $0.scale) : $0
+            }
+            parcel.stage = after
+        }
         return parcel
     }
 

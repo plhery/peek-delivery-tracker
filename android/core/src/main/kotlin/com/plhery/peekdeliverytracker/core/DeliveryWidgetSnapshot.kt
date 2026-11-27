@@ -34,6 +34,11 @@ data class DeliveryWidgetParcel(
      * stays closed. None from an app that didn't publish it.
      */
     @Serializable(with = ReferenceDateSerializer::class) val roundEndsAt: Instant? = null,
+    /**
+     * How the rows mark the parcel from then on, with no scan since: in transit again ([widgetStage]). None when they
+     * mark it as before, or from an app that didn't publish it.
+     */
+    val afterRound: DeliveryWidgetStage? = null,
     /** When a delivered parcel arrived: the widget keeps it for a day after. */
     @Serializable(with = ReferenceDateSerializer::class) val deliveredAt: Instant? = null,
     /** The parcel's card, once the app has drawn its pictures: the widget then shows the card rather than words alone. */
@@ -73,14 +78,25 @@ data class DeliveryWidgetParcel(
     /** `deepLink`: the parcel on the deliveries, as the app's routing opens it (NativeRoute). */
     val deepLink: String get() = "peekdeliverytracker://parcel/${id.uuidString}"
 
-    /** The parcel as the widgets word it at `date`: as the app wrote it for the last midnight before it. */
+    /**
+     * The parcel as the widgets word it at `date`: as the app wrote it for the last midnight before it, and in transit
+     * again once its round's day is over.
+     */
     fun worded(at: Instant): DeliveryWidgetParcel {
         // Peek AI's call goes once its day or hour has passed, as it goes from the app's card.
         val called = if (peekAiUntil?.let { at >= it } == true) copy(peekAi = null) else this
         // Its round over, it loses the bicycle.
-        val held = if (roundEndsAt?.let { at >= it } == true) called.copy(isOutForDelivery = false) else called
-        val wording = later?.lastOrNull { it.midnight() <= at } ?: return held
-        return held.copy(detail = wording.detail, section = wording.section ?: section, nextUp = wording.nextUp ?: nextUp)
+        val roundOver = roundEndsAt?.let { at >= it } == true
+        val held = if (roundOver) called.copy(isOutForDelivery = false) else called
+        val worded = later?.lastOrNull { it.midnight() <= at }
+            ?.let { held.copy(detail = it.detail, section = it.section ?: section, nextUp = it.nextUp ?: nextUp) } ?: held
+        val after = afterRound?.takeIf { roundOver } ?: return worded
+        val before = stage ?: return worded
+        return worded.copy(
+            detail = if (worded.detail == before.status) after.status else worded.detail,
+            card = worded.card?.let { if (it.status == before.status) it.copy(status = after.status) else it },
+            stage = after,
+        )
     }
 }
 

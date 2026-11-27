@@ -494,6 +494,13 @@ extension Parcel {
         return now < ends
     }
 
+    /// The stage a widget's row marks the parcel with at `now`: in transit again once the day of its round is over with
+    /// no scan since (`isOnDeliveryRound`), where the list's status is that of being out for delivery.
+    func widgetStage(now: Date = Date()) -> TrackingStage? {
+        currentStage == .outForDelivery && !isOnDeliveryRound(now: now)
+            && displayStatus.key == TrackingStage.outForDelivery.localizationKey ? .inTransit : currentStage
+    }
+
     /// Whether the map has a place to draw: a generated track's are left out.
     var hasMappedPlace: Bool { GeneratedTrack.without(trackingEvents).contains { $0.place != nil } }
 

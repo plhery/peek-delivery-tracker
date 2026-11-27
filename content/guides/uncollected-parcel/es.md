@@ -1,13 +1,13 @@
 ---
 title: Paquete no recogido: qué pasa y cuánto tiempo lo guardan
-description: Paquete no recogido en Correos, InPost, GLS o un Amazon Locker: cuántos días lo guardan, qué hacer si no llegas a tiempo y si te devuelven el dinero.
+description: Paquete no recogido en Correos (15 días), InPost (5 días), GLS, Correos Express, CTT o Amazon Locker (3 días): plazos, qué pasa y cómo pedir reembolso.
 slug: paquete-no-recogido
 picture: Un locker de paquetes con una puerta abierta y Pip esperando dentro, y un calendario con los dos últimos días rodeados.
 published: 2026-10-14
-updated: 2026-11-14
+updated: 2026-11-27
 ---
 
-Un paquete que nadie recoge en una oficina, una tienda o un locker vuelve al remitente cuando se acaba el plazo. Correos lo guarda 15 días en la oficina; en un locker sueles tener 5 días o menos (3 en un Amazon Locker). La fecha que manda es la de tu aviso, SMS o email. Después, la tienda o la plataforma decide si te devuelve el dinero o te lo vuelve a enviar.
+Si no recoges un paquete a tiempo en una oficina, punto de recogida o locker, vuelve al remitente. El plazo depende del transportista —15 días en oficina de Correos (5 en Citypaq), 5 días naturales en InPost, 7 días en GLS y Correos Express, 10 en Punto Collectt de CTT Express (5 en Locky) y 3 en Amazon Locker—, aunque siempre manda la fecha de tu aviso, SMS o email. Si cambias de idea tras comprar en una tienda en España, debes comunicar el desistimiento para recibir el reembolso.
 
 ¿No te ha llegado el código o la taquilla estaba llena? Lo tienes en [paquete en una taquilla](guide:parcel-lockers).
 
@@ -31,7 +31,7 @@ Vuelve al remitente, normalmente con el mismo transportista, no a tu casa.
 
 Cuando el paquete ya va de vuelta, [paquete devuelto al remitente](guide:returned-to-sender) explica el viaje y qué pedirle a la tienda.
 
-## ¿Cuánto tiempo guarda Correos un paquete?
+## ¿Cuántos días guardan un paquete Correos, InPost, GLS, CTT y Amazon Locker?
 
 Los lockers dan poco tiempo; las oficinas, mucho más.
 
@@ -62,7 +62,7 @@ El seguimiento dirá entonces algo como `A disposición del destinatario` en Cor
 
 [Peek](/) puede mandarte una notificación cuando el seguimiento diga que el paquete está listo para recoger, también con el ajuste «Pasos importantes» (con «Solo la entrega», no). Eso sí, no puede ampliar el plazo: eso solo lo pueden hacer el transportista o la tienda.
 
-## No puedo recoger el paquete a tiempo: ¿qué hago?
+## ¿Qué hacer si no puedes recoger el paquete a tiempo?
 
 Conseguir más días es raro. Ni Correos ni InPost ni GLS ni CTT Express explican en su ayuda cómo ampliar el plazo de un paquete que ya te está esperando. Lo que existe se decide antes: el remitente con contrato puede pedir a Correos hasta 30 días en oficina, y Correos Modify te deja cambiar el destino cuando te avisa de que tu envío está listo para entregarse.
 
@@ -79,7 +79,7 @@ Si no vas a llegar a tiempo:
 
 El enlace de Correos Modify llega en el SMS o el email que te avisa de la entrega, y también puedes usarlo desde la app de Correos; la tienda puede desactivar algunas opciones. En InPost, quien vaya por ti lleva su documento original, el NIF del titular (vale una copia) y una autorización firmada por ti con el nombre y el NIF de los dos y el número de expedición. En un Amazon Locker, el código único te llega por email en cuanto el paquete está en la taquilla.
 
-## Paquete no recogido: ¿me devuelven el dinero?
+## Si no recojo un paquete, ¿me devuelven el dinero?
 
 Con Amazon, el paquete que no recoges de un Amazon Locker vuelve a Amazon, y para cualquier problema con un pedido, Amazon dice que puedes pedir a su atención al cliente un reemplazo o un reembolso.
 

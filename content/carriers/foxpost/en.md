@@ -1,12 +1,12 @@
 ---
 title: Foxpost tracking: statuses, lockers and contacts
-description: Track a Foxpost parcel in Hungary: where the CLFOX number comes from, what the Hungarian statuses mean, locker pickup, hold times, claims and contacts.
+description: Track a Foxpost (Packeta Group) parcel in Hungary: CLFOX and 66639 numbers, Hungarian statuses, 5-day A-BOX/Z-BOX pickup, COD rules and 06-1-999-0-369.
 slug: foxpost-tracking
 published: 2026-10-13
-updated: 2026-10-25
+updated: 2026-11-27
 ---
 
-Foxpost is a Hungarian parcel service that delivers to its parcel lockers, and to the door, across Hungary; since January 2026 it has also absorbed Packeta Hungary. Track a parcel on [foxpost.hu](https://foxpost.hu/csomagkovetes/) or paste its number in the box above. The number is at the end of the email Foxpost sends when the parcel is created, and usually starts with `CLFOX`.
+Foxpost ("FOXPOST – Packeta Group", after absorbing Packeta Hungary on 1 January 2026) delivers to A-BOX and Z-BOX parcel lockers, Z-Pont pickup shops and homes across Hungary. Track your `CLFOX` locker barcode or `66639` home-delivery number on [foxpost.hu](https://foxpost.hu/csomagkovetes/) or paste it in the box above; below are English meanings for Foxpost's Hungarian statuses, 5-day locker hold rules, cash-on-delivery options and customer service (06-1-999-0-369).
 
 ## Foxpost tracking number
 
@@ -81,21 +81,25 @@ Peek lists Foxpost's own history, reading its times as Budapest time. The histor
 
 ## Questions about Foxpost tracking
 
-### Is Foxpost the same as Packeta?
+### Is Foxpost the same as Packeta in Hungary?
 
-They're now one company in Hungary: Packeta Hungary merged into FoxPost Kft. on 1 January 2026, and the site calls itself "FOXPOST – Packeta Group".
+Yes, they merged into one company in Hungary on 1 January 2026 (FoxPost Kft., branded "FOXPOST – Packeta Group"). `Z` numbers still route to [Packeta](carrier:packeta) tracking, while `CLFOX` numbers track on Foxpost.
 
-### Is there Foxpost in Poland?
+### How long does Foxpost delivery take, and how long does a locker hold a parcel?
 
-No. Foxpost delivers in Hungary only, and its FAQ says sending a Foxpost parcel abroad to a Packeta point isn't possible yet.
+Locker-to-locker delivery can take as little as one working day and home delivery usually two or three, without a guarantee. Lockers hold parcels for 5 calendar days (weekends and holidays included, no extension), and Z-Pont shops hold them for 5 to 7 days depending on the season.
 
-### Can I pay cash on delivery at a Foxpost locker?
+### Can I pay cash on delivery at a Foxpost A-BOX or Z-BOX locker?
 
-Not in cash. An A-BOX takes card at its terminal and a Z-BOX takes payment through the link in Foxpost's email; only a Z-Pont or the home-delivery courier takes cash.
+Not in cash. An A-BOX takes card at its terminal and a Z-BOX takes payment through the link in Foxpost's email or app; only a Z-Pont pickup shop or home-delivery courier takes cash.
 
-### How long does Foxpost delivery take?
+### Does Foxpost deliver to Poland or abroad?
 
-Foxpost says locker to locker can take as little as one working day after collection and home delivery usually two or three, without guaranteeing either.
+No. Foxpost delivers within Hungary only, and its FAQ says sending a Foxpost parcel abroad to a Packeta point isn't available yet.
+
+### How do I contact Foxpost if a parcel is stuck or lost?
+
+If tracking hasn't moved for 3 days, submit a "Csomag utáni érdeklődés" enquiry on foxpost.hu, or call 06-1-999-0-369 (Mon/Tue/Wed/Fri 8:00–18:00, Thu 8:00–20:00 Hungarian time). A domestic parcel undelivered after 15 days requires a complaint from the sender.
 
 :::sources
 - [Foxpost: Csomagkövetés](https://foxpost.hu/csomagkovetes/) – number shapes, Z numbers sent to Packeta, statuses, tracker fields

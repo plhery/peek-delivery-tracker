@@ -1,15 +1,15 @@
 ---
 title: Suivi de commande Allegro : transporteurs, numéro, retards
-description: Qui livre ta commande Allegro, si allegro.pl livre en France, en Belgique et en Suisse, où trouver le numéro de suivi et que faire si le colis n'arrive pas.
+description: Suivi de commande Allegro depuis la France, la Belgique ou la Suisse : livraison DPD/DHL en Belgique, numéro dans Moje zakupy, délais et litiges.
 slug: suivi-commande-allegro
 picture: Un colis dans une consigne One Box ouverte, un téléphone qui affiche une commande et Pip qui court le chercher.
 published: 2026-10-17
-updated: 2026-10-28
+updated: 2026-11-27
 ---
 
-Allegro est une place de marché polonaise : ses conditions citent allegro.pl, allegro.cz, allegro.sk et allegro.hu, et il n'y a pas de site pour la France, la Belgique ou la Suisse. Les vendeurs d'allegro.pl peuvent te livrer en Belgique avec Allegro Kurier DPD ou Allegro Kurier DHL. Pour la France et la Suisse, les pages d'aide d'Allegro ne citent ni l'un ni l'autre. Le numéro de suivi est dans ton compte Allegro, sous « Moje przesyłki » (Mes envois) et « Moje zakupy » (Mes achats), et dans l'e-mail qu'Allegro t'envoie dès que le numéro est ajouté.
+Allegro est une place de marché polonaise (allegro.pl, allegro.cz, allegro.sk et allegro.hu), sans site dédié pour la France, la Belgique ou la Suisse. Les vendeurs d'allegro.pl peuvent livrer en Belgique via Allegro Kurier DPD (3 jours ouvrés) ou Allegro Kurier DHL (2 à 3 jours ouvrés) lorsqu'ils proposent l'option, tandis que la France et la Suisse ne figurent pas dans ces modes d'expédition. Le numéro de suivi se trouve dans « Moje przesyłki » (Mes envois), « Moje zakupy » (Mes achats) et dans l'e-mail d'Allegro, avec une protection des acheteurs jusqu'à 20 000 zł en cas de souci.
 
-## Quel transporteur livre ma commande Allegro ?
+## Quel transporteur livre une commande Allegro (One Box, InPost, DPD, DHL) ?
 
 Sur Allegro, chaque vendeur choisit les modes de livraison qu'il propose, et tu en prends un dans le formulaire de livraison et de paiement. Pour les livraisons en Pologne, le nom du mode dit en général quel transporteur s'en charge :
 
@@ -33,7 +33,7 @@ Avec Allegro Delivery, le colis t'attend 2 jours calendaires dans une One Box et
 - home | Toi | Livré ou retiré
 :::
 
-## Où trouver le numéro de suivi Allegro ?
+## Comment trouver le numéro de suivi sur ton compte Allegro ?
 
 À quatre endroits :
 
@@ -79,7 +79,7 @@ La livraison est gratuite sur les offres avec le badge Smart!, quand les frais d
 
 Même avec Smart!, l'offre affiche la livraison prévue, par exemple « dostawa jutro » (livraison demain) ou « dostawa pojutrze » (livraison après-demain). Si le vendeur met plus de 3 jours à expédier, tu vois une fourchette de dates, une date ou un nombre de jours. Avec Allegro Delivery, Allegro One Punkt et Allegro One Box livrent le lendemain. Smart! ne s'applique pas aux livraisons à l'étranger.
 
-## Colis pas arrivé ou marqué livré : que faire ?
+## Que faire si ton colis Allegro n'arrive pas ou apparaît livré ?
 
 En cas de problème, tu le signales au vendeur avec un « problem z zakupem » (problème d'achat). S'il n'est pas réglé, Allegro te propose sa protection des acheteurs, « Allegro Ochrona Kupujących ». Dans l'ordre :
 
@@ -97,7 +97,7 @@ Avec Allegro Delivery, tu peux aussi réclamer pour la livraison elle-même, par
 
 Qui est responsable et quelles preuves garder : [colis livré mais non reçu](guide:delivered-not-received) et [colis perdu](guide:lost-parcel).
 
-## Commander sur Allegro depuis la France, la Belgique ou la Suisse
+## Allegro livre-t-il en France, en Belgique ou en Suisse ?
 
 Allegro gère des places de marché pour la Pologne (allegro.pl), la Tchéquie (allegro.cz), la Slovaquie (allegro.sk) et la Hongrie (allegro.hu). Il n'y a pas de version française, mais tu peux utiliser Allegro en anglais. Dans ton compte, la rubrique « Lokalizacja » (localisation) règle la langue, la devise et le pays de livraison. Une fois le pays choisi, tu ne vois plus que les offres des vendeurs qui y livrent.
 
@@ -117,7 +117,7 @@ Ce qui change pour une livraison en Belgique :
 
 Le numéro de suivi est dans « Moje zakupy », comme en Pologne. Avec lui, tu suis aussi le colis directement chez le transporteur.
 
-## Retourner une commande Allegro
+## Comment retourner une commande Allegro (délai de 14 jours) ?
 
 Chez un vendeur professionnel, tu as au moins 14 jours à partir du lendemain de la réception pour lui signaler ta rétractation, par exemple avec le formulaire « Zwróć zakup » (retourner l'achat) dans « Moje zakupy ». Tu as ensuite 14 jours de plus pour expédier l'article. Le retour est gratuit avec Smart!, pour un retour de consommateur avec un code de retour Allegro Delivery et avec Allegro Kurier24 et miniKurier24 InPost. Si tu achètes à un particulier, tu n'as pas de droit de rétractation. Où trouver le numéro d'un retour et quand arrive l'argent : [suivi de retour](guide:returns-tracking).
 

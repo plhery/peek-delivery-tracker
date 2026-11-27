@@ -1,15 +1,15 @@
 ---
 title: Sendungsverfolgung aktualisiert sich nicht: was tun?
-description: Der Status hängt seit Tagen? Die häufigsten Gründe, wie lange Warten normal ist und ab wann du Händler oder Paketdienst einschalten solltest.
+description: Sendungsverfolgung aktualisiert sich nicht? Gründe bei DHL, Hermes, DPD und Post, wie lange „elektronisch angekündigt“ dauert und wann du reklamierst.
 slug: sendungsverfolgung-aktualisiert-sich-nicht
 picture: Ein Kalender mit mehreren durchgestrichenen Tagen, eine Fortschrittslinie, die auf halbem Weg abbricht, und Pip wartet ein bisschen gelangweilt.
 published: 2026-10-09
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Wenn sich die Sendungsverfolgung nicht aktualisiert, hat meist nur niemand dein Paket gescannt. Stehen geblieben ist es deshalb nicht: Paketdienste scannen in Paketzentren und an Grenzen, nicht auf der Straße, und eine lange Fahrt, ein Flug, der Zoll oder ein Wochenende können Tage ohne neuen Eintrag bedeuten. Sorgen machen musst du dir erst, wenn die Frist des Paketdienstes abgelaufen ist (bei [DHL](carrier:dhl) mehr als 5 Werktage ohne neuen Status, bei der [Schweizerischen Post](carrier:swiss-post) im Inland mehr als zwei Tage über der erwarteten Laufzeit). Und auch dann fragst du zuerst den Händler: Er ist der Kunde des Paketdienstes.
+Wenn sich die Sendungsverfolgung seit Tagen nicht aktualisiert, fehlt meist nur ein neuer Scan: Paketdienste scannen an Paketzentren, im Zoll und beim Beladen, nicht unterwegs auf der Straße. Erst wenn die Wartefrist vorbei ist — bei [DHL](carrier:dhl) mehr als 5 Werktage, bei [Hermes](carrier:hermes-de) 5 Werktage, bei der [Österreichischen Post](carrier:austrian-post) 3 bis 5 Werktage und bei der [Schweizerischen Post](carrier:swiss-post) mehr als zwei Tage über der Laufzeit — solltest du handeln, und zwar zuerst beim Händler.
 
-## Warum aktualisiert sich meine Sendungsverfolgung seit Tagen nicht?
+## Warum hängt die Sendungsverfolgung seit Tagen fest?
 
 Die Sendungsverfolgung zeigt Scans, keine Bewegung. Gescannt wird dein Paket nur an bestimmten Stellen:
 
@@ -31,7 +31,7 @@ Eine feste Zahl, wie lange die Sendungsverfolgung schweigen darf, nennt kein Pak
 - home | Zustellung | In Zustellung, dann zugestellt: Jetzt kommen die Meldungen wieder schnell.
 :::
 
-### Wie lange kann ein Paket „elektronisch angekündigt“ sein?
+### Warum bleibt mein Paket „elektronisch angekündigt“?
 
 Stunden bis Tage. Eine neue Sendungsnummer zeigt anfangs oft gar nichts oder nur diese Ankündigung. Der erste Eintrag kommt meist aus der Versandsoftware des Händlers, nicht von einem Scan. Der Paketdienst hat dein Paket dann womöglich noch gar nicht.
 
@@ -44,7 +44,7 @@ Stunden bis Tage. Eine neue Sendungsnummer zeigt anfangs oft gar nichts oder nur
 
 Was die anderen Status bedeuten, steht in [Sendungsstatus erklärt](guide:tracking-statuses).
 
-### Flug, Zoll und ein neuer Paketdienst
+### Warum gibt es keine Updates bei Flug, Zoll oder Übergabe im Zielland?
 
 Kommt dein Paket aus dem Ausland, steht bei DHL womöglich `Die Sendung befindet sich im Weitertransport zu DHL`. Dann ist das Paket im Ursprungsland versandfertig, DHL hat es aber noch nicht, und bis zum nächsten Status können je nach Transportweg mehrere Tage vergehen. Umgekehrt nennt DHL es bei Paketen ins Ausland je nach Zielland völlig normal, dass sich der Status eine Weile nicht ändert. Die letzte Meldung kommt dann zum Beispiel noch aus dem Internationalen Postzentrum in Frankfurt. Solange die Regellaufzeit nicht überschritten ist, sieht DHL keinen Anlass zur Sorge.
 
@@ -53,7 +53,7 @@ Kommt dein Paket aus dem Ausland, steht bei DHL womöglich `Die Sendung befindet
 
 Bei AliExpress, Temu oder Shein bestellt? Lies, wie du ein [Paket aus China verfolgst](guide:tracking-from-china). Läuft es über Cainiao oder YunExpress, steht auf den Seiten zu [Cainiao](carrier:cainiao) und [YunExpress](carrier:yunexpress), was du tun kannst.
 
-### Seit Tagen „in Zustellung“
+### Was tun, wenn ein Paket seit Tagen „in Zustellung“ steht?
 
 `Die Sendung wurde in das Zustellfahrzeug geladen.` heißt bei DHL: In der Regel kommt das Paket noch am selben Tag. Taucht der Status mehrmals auf, konnte der Zusteller seine Tour wegen einer Störung nicht beenden, etwa einer Straßensperrung oder eines Unfalls, und es kann 1 bis 2 Tage länger dauern. Bei der Österreichischen Post heißt `Sendung in Zustellung`, dass das Paket voraussichtlich heute kommt. Steht in der Sendungsverfolgung „zugestellt“ und es ist nichts da, hilft [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
@@ -117,7 +117,7 @@ So oft, wie jemand dein Paket scannt. Schneller geht es nicht: Auch der DHL-Kund
 
 Antwortet der Paketdienst nicht, steht bei einem Paket, das schon Scans hat, „Aktualisierung fehlgeschlagen“, und Peek fragt von selbst wieder nach. Hat das Paket noch keinen Scan, weil der Paketdienst die Nummer noch nicht führt oder nicht erreichbar war, zeigt Peek keinen Fehler, sondern „Warten auf DHL“ (hier am Beispiel DHL) und, wenn DHL nicht erreichbar war, auf der Seite des Pakets „DHL war noch nicht erreichbar. Peek versucht es weiter.“ Kennt der Paketdienst die Nummer auch zwei Tage später nicht und antwortet sonst niemand für sie, steht dort „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“, und Peek fragt nur noch täglich nach, eine Woche nach dem Hinzufügen nur noch wöchentlich. Bei vielen Paketdiensten erkennt Peek an der Antwort, dass die Sendung schon erfasst, aber noch nicht gescannt ist. Dann kennt der Paketdienst die Nummer: Peek fragt weiter nach und zeigt „Warten auf“ mit dem Namen des Paketdienstes, ohne dich zu bitten, die Nummer zu prüfen. Antworten Paketdienst und Tracking-Dienste zwar, aber ohne einen Scan (die Nummer ist nicht zu finden oder steht ohne Verlauf da), obwohl das Paket schon Scans hat, behält Peek die gefundenen und zeigt auf der Seite des Pakets „Der Paketdienst hat gerade keine neuen Scans. Die bisherigen bleiben erhalten, und Peek prüft weiter.“ Kommt unterwegs vier Tage lang kein neuer Scan, zeigt Peek den Tag des letzten Scans („Keine Aktualisierung seit Mo 12. Okt“), mit dem Hinweis „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei DHL nach.“ (hier am Beispiel DHL) und, wenn es eine gibt, einem Link zur Hilfeseite des Paketdienstes. Nach drei Wochen ohne neuen Scan lautet der Hinweis stattdessen „Seit über drei Wochen nichts Neues. Ist das Paket noch nicht angekommen, frag beim Verkäufer nach. Peek fragt weiter bei DHL nach.“
 
-### Meine Sendungsnummer funktioniert nicht
+### Warum funktioniert meine Sendungsnummer nicht?
 
 Vielleicht wurde das Paket noch nicht gescannt (bei DHL Paket kann es bis zu 24 Stunden dauern, bis es erscheint), die Nummer gehört zu einem anderen Paketdienst, oder ein Zeichen stimmt nicht. Ein DHL Päckchen hat laut DHL gar keine Sendungsverfolgung. Meldet DHL „Die eingegebene Sendungsnummer ist ungültig“, prüf zuerst, ob sich ein Zahlendreher eingeschlichen hat. Für Briefe mit Zusatzleistung wie Einschreiben und für Express-Sendungen gibt es laut DHL eine eigene Sendungsverfolgung. [Prüf, zu welchem Paketdienst sie gehört](guide:tracking-number-formats) oder [finde die richtige Nummer](guide:find-tracking-number). Kennt noch kein Paketdienst die Nummer, zeigt Peek „Paketdienst noch nicht gefunden“ und dazu: „Behalte diese Seite: Peek fragt die Paketdienste weiter, und dieser Link zeigt das Paket, sobald einer antwortet.“ Stattdessen zeigt Peek „Wahrscheinlich“ und den Namen eines Paketdienstes, wenn die Nummer nach ihm aussieht, oder einen Hinweis, wenn sie ungewöhnlich kurz ist, vertippt wirkt oder nach einer Bestell- oder Containernummer aussieht.
 

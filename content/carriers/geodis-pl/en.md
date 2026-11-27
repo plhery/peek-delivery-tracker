@@ -1,12 +1,12 @@
 ---
 title: GEODIS Poland tracking: shipment number, statuses, delivery
-description: Track a GEODIS Poland (formerly Pekaes) shipment: what its number looks like, what each status means, delivery, terminal pickup, claims and who to call.
+description: Track a GEODIS Poland (formerly PEKAES) shipment on Strefa Klienta: PL + 16-digit numbers, status meanings, pallet delivery hours, claims and +48 22 460 26 26.
 slug: geodis-poland-tracking
 published: 2026-10-30
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-GEODIS Poland is the Polish pallet and parcel network of GEODIS, the French transport group owned by SNCF. GEODIS bought PEKAES in 2021, and the network is now run by GEODIS Road Network, based in Błonie. What to do depends on what the sender gave you:
+GEODIS Poland (GEODIS Road Network, based in Błonie, formerly PEKAES until GEODIS bought it in 2021) is the Polish pallet and parcel network of SNCF-owned GEODIS, delivering across Poland in 24 to 48 hours (pallets to private addresses Monday to Friday, 8:00 to 16:00). What to do depends on what the sender gave you:
 
 - **A number of PL and 16 digits, or a link to Strefa Klienta:** a GEODIS Poland shipment, parcel or pallet. Paste either in the box above, or search the number on GEODIS Poland's tracker, [Strefa Klienta](https://strefaklienta.pekaes.geodis.pl/en/).
 - **Another GEODIS number:** Peek reads one other GEODIS tracker, GEODIS France's, whose numbers start with 1G (below). GEODIS's search on geodis.com finds its air, sea and last-mile shipments, and points road shipments to Strefa Klienta.
@@ -86,21 +86,25 @@ While you have the shipment open, or on its delivery day with notifications on, 
 
 ## Questions about GEODIS Poland tracking
 
-### Is GEODIS Poland the same as Pekaes?
+### Is GEODIS Poland the same as PEKAES?
 
 Yes. GEODIS bought PEKAES in 2021, and the network is now run by GEODIS Road Network. Its tracker still lives at strefaklienta.pekaes.geodis.pl.
 
-### Does GEODIS deliver on Saturdays in Poland?
+### How long does GEODIS take to deliver parcels and pallets in Poland?
 
-GEODIS's terms don't mention Saturday deliveries. They set pallet deliveries to private addresses on working days, Monday to Friday, 8:00 to 16:00, and count parcel delivery times without Saturdays, Sundays and public holidays.
+GEODIS quotes 24 to 48 hours within Poland as standard, or next day before noon by express. Its terms give parcels up to 30 kg 48 hours from pickup (excluding weekends and public holidays) and pallets 2 working days, both "as a rule".
 
-### Will the GEODIS driver carry my order inside?
+### Does GEODIS deliver on Saturdays in Poland, and will the driver carry my order inside?
 
-Only a pallet shipment, and only if the client ordered carry-in: up to 300 kg, no more than 150 m from where the truck unloads, and up to the second storey without a lift. Otherwise the driver unloads at ground level at your address.
+GEODIS's terms don't mention Saturday deliveries: private-address pallets deliver Monday to Friday, 8:00 to 16:00 at ground level. Carry-in ("wniesienie") is offered only for pallet shipments when ordered by the sender (up to 300 kg, 150 m from unloading, up to the second storey without a lift).
 
-### How long does GEODIS take to deliver in Poland?
+### How many delivery attempts does GEODIS Poland make, and how long does terminal pickup wait?
 
-GEODIS quotes 24 to 48 hours within Poland as standard, or next day before noon by express. Its terms give parcels up to 30 kg 48 hours from pickup, not counting weekends and public holidays, and pallets 2 working days, both "as a rule".
+After a second failed attempt the shipment returns to the sender. When the sender requests terminal pickup, the shipment waits 48 hours (in working days) and can be collected Monday to Friday, 11:00 to 16:00.
+
+### What is the GEODIS Poland customer service phone number and how do I report damage?
+
+Call Dział Obsługi Klienta on +48 22 460 26 26. For visible damage, sign a damage report ("protokół szkody") with the driver; report hidden damage within 7 days of receipt, and contact the shop for online orders (the client files written claims within 14 days for damage or 21 days for delay/loss).
 
 :::sources
 - [GEODIS Poland: Strefa Klienta, shipment tracking](https://strefaklienta.pekaes.geodis.pl/en/) – search field and button (read 14 November 2026), not-found reply, claim and damage report forms

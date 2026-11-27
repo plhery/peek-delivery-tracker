@@ -1,12 +1,12 @@
 ---
 title: Swiss Post Cargo Tracking: Status, Zustellung, Kontakt
-description: Swiss Post Cargo Sendung verfolgen: welche Nummer funktioniert, was „Received warehouse POST“ heißt, wie Stückgut zugestellt wird und wen du anrufst.
+description: Swiss Post Cargo Track & Trace (ehem. PostLogistics): 20-stellige SSCC-Barcodes und PL-Referenzen verfolgen, Status, Zustellung bis 17 Uhr und Kontakt.
 slug: swiss-post-cargo-sendungsverfolgung
 published: 2026-10-12
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Swiss Post Cargo ist die Gütermarke der Schweizerischen Post: Paletten und andere Güter per Lastwagen, vom einzelnen Stück bis zur ganzen Wagenladung, keine gewöhnlichen Pakete. Du verfolgst die Sendung auf der Track-&-Trace-Seite (tt.swisspost-cargo.com) mit dem Barcode oder der Referenz, die dir der Absender gegeben hat, oder fügst sie oben ins Feld ein. Hast du eine Paketnummer der Post, gehört sie auf [die Seite der Post](carrier:swiss-post).
+Swiss Post Cargo ist seit 1. März 2025 die Güterlogistik-Marke der Schweizerischen Post (ehemals PostLogistics) für Paletten und Stückgut per Lastwagen, keine gewöhnlichen Pakete. Im Track & Trace auf tt.swisspost-cargo.com oder im Feld oben verfolgst du deinen 20-stelligen SSCC-Barcode (`00…`) oder eine `PL-`Referenz; Stückgut kommt in der Regel am nächsten Arbeitstag bis 17 Uhr. Normale Postpakete gehören auf [die Seite der Schweizerischen Post](carrier:swiss-post).
 
 ## Swiss Post Cargo Sendungsnummer: Barcode oder Referenz
 
@@ -75,25 +75,25 @@ Eine Referenz, die mehrere Sendungen teilen, wird nur gelesen, solange nur eine 
 
 ## Fragen zum Swiss Post Cargo Tracking
 
-### Was ist Swiss Post Cargo?
+### Was ist Swiss Post Cargo, und ist PostLogistics jetzt Swiss Post Cargo?
 
-So heißt die Güterlogistik der Post seit dem 1. März 2025: Logistik für Firmen, in der Schweiz und international, Stückgut inklusive. Zu den Konzerngesellschaften der Post in der Schweiz gehört die Swiss Post Cargo CH AG, an der die Post zu 100 Prozent beteiligt ist. PostLogistics gehörte zu den ersten Gesellschaften der Gruppe, die den Namen übernommen haben.
+Seit dem 1. März 2025 heißt die Güterlogistik der Schweizerischen Post Swiss Post Cargo (Swiss Post Cargo CH AG, 100 % Tochter der Post). PostLogistics trat als eine der ersten Gesellschaften unter diesem Namen auf; das alte tracking.postlogistics.ch öffnet sich nicht mehr, das aktuelle Track & Trace ist tt.swisspost-cargo.com.
 
-### Ist PostLogistics jetzt Swiss Post Cargo?
+### Wie nutze ich das Swiss Post Cargo Track & Trace?
 
-Ja, PostLogistics tritt heute als Swiss Post Cargo auf. Das alte Tracking tracking.postlogistics.ch lässt sich nicht mehr öffnen, das Tracking von Swiss Post Cargo ist tt.swisspost-cargo.com. Referenzen wie `48291736-542` verfolgt Peek weiter als PostLogistics.
+Gib deinen 20-stelligen SSCC-Barcode (beginnend mit `00`) oder deine Kundenreferenz (z. B. `PL-…`) auf tt.swisspost-cargo.com oder oben im Feld ein. Das Tracking listet jeden Scan mit Ort (keine Live-Karte); normale Postpakete mit 18 Ziffern ab `99` verfolgst du auf [der Seite der Post](carrier:swiss-post).
 
-### Hat Swiss Post Cargo eine E-Mail-Adresse?
+### Wann liefert Swiss Post Cargo Stückgut in der Schweiz aus?
 
-Die Stückgut-Broschüre der Post vom April 2022 nennt sales.ls4@post.ch, für Geschäftskunden. Als Empfänger schreibst du zuerst dem Shop: Er hat den Transport gebucht.
+In der Schweiz und in Liechtenstein erreicht Stückgut reguläre Orte in der Regel am nächsten Arbeitstag bis 17 Uhr, schwer erreichbare Berggebiete (Wallis, Tessin, Graubünden) am zweiten Arbeitstag bis 17 Uhr, standardmäßig an die erste Tür im Erdgeschoss oder an den Straßenrand.
 
 ### Warum bekomme ich eine SMS von Swiss Post Cargo?
 
-Oft, weil der Absender eine Avisierung gebucht hat: Die Stückgut-Broschüre der Post nennt Avis per Telefon, E-Mail oder SMS als Zusatzleistung. Es gibt auch gefälschte SMS im Namen der Post, prüf die Nummer deshalb selbst im Tracking.
+Oft hat der Absender eine Avisierung per Telefon, E-Mail oder SMS als Zusatzleistung gebucht. Da es auch gefälschte Nachrichten im Namen der Post gibt, prüf die Sendungsnummer immer selbst im Track & Trace statt fremde Links zu öffnen.
 
-### Kann ich Swiss Post Cargo live verfolgen?
+### Wen kontaktiere ich bei Fragen zu einer Swiss Post Cargo Sendung?
 
-Nicht auf einer Live-Karte. Das Tracking listet jeden Scan mit Ort, und laut Stückgut-Broschüre lassen sich Status und Standort der Sendung laufend online abfragen.
+Wende dich zuerst an den Shop oder Absender, denn Swiss Post Cargo arbeitet für Geschäftskunden. Für normale Briefe und Pakete der Schweizerischen Post gilt +41 848 888 888 (Mo–Fr 7.30–18 Uhr, Sa 8–12 Uhr) oder der Chat auf post.ch.
 
 :::sources
 - [Die Post: Stückgut-Broschüre](https://www.post.ch/de/-/media/post/gk/dokumente/stueckgut.pdf) – einzelne Stücke bis ganze Wagenladungen, Aufträge über Swiss Post Cargo Web von Geschäftskunden, nächster Arbeitstag, Berggebiete, Erdgeschoss, Abladen, Unterschrift, Zusatzleistungen samt Zweitzustellung, Status und Standort online, Kontakt in Dintikon und E-Mail

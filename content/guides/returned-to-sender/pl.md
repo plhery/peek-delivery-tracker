@@ -1,17 +1,17 @@
 ---
 title: Paczka wraca do nadawcy: dlaczego, co dalej, zwrot pieniędzy
-description: Dlaczego paczka wraca do nadawcy, czy da się zatrzymać zwrot, po jakim czasie dotrze i jak odzyskać pieniądze na Allegro, Amazon.pl, Vinted i w sklepie.
+description: Paczka wraca do nadawcy: powody (DPD, InPost, Poczta Polska, Allegro One), czy da się zatrzymać zwrot, ile trwa droga powrotna i jak odzyskać pieniądze.
 slug: paczka-wraca-do-nadawcy
 picture: Furgonetka z paczką z okrągłą pieczątką zwrotu jedzie po zakrzywionej strzałce z powrotem do sklepu, a Pip patrzy, jak odjeżdża.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-27
 ---
 
-„Zwrot do nadawcy” znaczy, że przewoźnik nie mógł ci wydać paczki i wiezie ją z powrotem do tego, kto ją wysłał. Powodem bywa błędny adres, odmowa przyjęcia, minięty termin odbioru albo nieopłacone należności. Gdy paczka już jedzie z powrotem, nie zatrzymasz jej, a wcześniej może to zrobić zwykle tylko nadawca. Napisz od razu do sprzedawcy i powiedz na piśmie, czy chcesz ponownej wysyłki, czy zwrotu pieniędzy.
+„Zwrot do nadawcy” oznacza, że przewoźnik (np. DPD, InPost, Allegro One lub Poczta Polska) nie doręczył przesyłki i odsyła ją do nadawcy — zwykle przez błędny adres, odmowę przyjęcia, miniony termin odbioru (2 dni w One Boxie, 14 dni na Poczcie Polskiej) albo nieopłacone cło. Gdy paczka już wraca, nie da się jej zatrzymać; wcześniej może to zrobić wyłącznie nadawca. Napisz od razu do sklepu, czy chcesz ponownej wysyłki, czy zwrotu pieniędzy — samo nieodebranie nie jest odstąpieniem od umowy (sklep oddaje środki w ciągu 14 dni od oświadczenia).
 
 Sam odsyłasz coś do sklepu? To inna droga: [śledzenie zwrotu i zwrotu pieniędzy](guide:returns-tracking).
 
-## Dlaczego paczka wraca do nadawcy?
+## Dlaczego paczka wraca do nadawcy (statusy DPD, InPost, Allegro One, Poczta Polska)?
 
 Powód zwykle widać w ostatnim statusie i na samej paczce, więc nadawca często poznaje go przed tobą.
 
@@ -29,7 +29,7 @@ Peek pyta DPD, InPost, Allegro One i Pocztę Polską w języku aplikacji: gdy ma
 
 Czasem status nie mówi wprost, co dalej: `Parcel return` (po polsku `Zwrot przesyłki`) u DPD znaczy, że paczka wraca do nadawcy pod nowym numerem, a historia pierwotnego numeru na tym się kończy. Co znaczą takie statusy, wyjaśnia poradnik [statusy przesyłek](guide:tracking-statuses). Jeśli chodziło o cło, [paczka zatrzymana przez urząd celny](guide:customs) opisuje, co było do zapłaty i co dzieje się z należnościami, gdy odmówisz przyjęcia.
 
-## Jak zatrzymać zwrot paczki do nadawcy?
+## Czy można zatrzymać zwrot paczki do nadawcy?
 
 Jeśli paczka już zawróciła, raczej nie. Wcześniej zwykle tylko nadawca. Jeśli termin odbioru w Paczkomacie właśnie minął, sprawdź w aplikacji InPost Mobile, czy paczkę da się jeszcze odebrać.
 
@@ -43,7 +43,7 @@ Zatrzymać albo przekierować paczkę w drodze może nadawca, bo to on jest klie
 
 Dopóki paczka jedzie do ciebie, pytaj sprzedawcę. Jeśli wolisz odebrać ją gdzie indziej, zajrzyj do poradnika [zmiana adresu dostawy i przekierowanie paczki](guide:change-delivery-address).
 
-## Paczka wraca do nadawcy: co zrobić?
+## Co zrobić, gdy paczka wraca do nadawcy?
 
 :::steps
 - Sprawdź powód | Jest w ostatnim statusie.
@@ -83,7 +83,7 @@ Przewoźnikowi płaci nadawca, a ile, zależy od usługi:
 
 Czy sklep może przerzucić ten koszt na ciebie? Tylko bezpośredni koszt odesłania towaru, tylko po odstąpieniu od umowy i tylko jeśli cię o nim uprzedził. Dopłaty do droższej dostawy niż najtańsza w ofercie też nie musi oddać.
 
-## Po jakim czasie paczka wraca do nadawcy?
+## Ile trwa zwrot paczki do nadawcy i kiedy pojawi się „doręczona”?
 
 **Oczekiwanie.** Odmówiona paczka wraca zwykle od razu: Pocztex odsyła ją niezwłocznie, a według zasad Światowego Związku Pocztowego odmówione listy i małe pakiety z zagranicy wracają bez zwłoki. Nieodebrana paczka najpierw czeka swój termin: w automacie One Box z Allegro 2 dni kalendarzowe, na poczcie przesyłka polecona 14 dni od dnia po pierwszym awizo. Terminy wszystkich firm i sposoby na ich przedłużenie znajdziesz w poradniku [nieodebrana paczka](guide:uncollected-parcel).
 

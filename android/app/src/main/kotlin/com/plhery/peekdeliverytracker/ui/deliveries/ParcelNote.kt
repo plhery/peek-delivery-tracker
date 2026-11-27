@@ -375,7 +375,9 @@ class ParcelNoteWork(private val undoMillis: Long = ParcelNotes.UNDO_MILLIS) {
         sending[key] = source.scope.launch {
             try {
                 val upload = prepared[key] ?: pick.read().also { prepared[key] = it }
-                val picture = if (upload.type.isPdf) null else withContext(Dispatchers.Default) { tilePicture(upload.bytes) }
+                // A retry keeps the picture its tile has.
+                val shown = uploadList.firstOrNull { it.key == key }?.picture
+                val picture = shown ?: if (upload.type.isPdf) null else withContext(Dispatchers.Default) { tilePicture(upload.bytes) }
                 update(key) { it.copy(name = upload.name, pdf = upload.type.isPdf, size = upload.bytes.size.toLong(), picture = it.picture ?: picture) }
                 val parcel = source.parcels.value.firstOrNull { it.id == parcelId } ?: throw DeliveryApiError.ParcelMissing()
                 source.addNoteFile(parcel, upload)

@@ -32,7 +32,7 @@ updated: 2026-11-17
 | `EE482910576AU` | 国际 EMS、包裹或可跟踪小件的单号：`C`、`E` 或 `L` 开头，再一个字母、9 位数字和 `AU`。 |
 | `RR482910576AU` | 其他以 `AU` 结尾的国际邮政单号，比如挂号信。 |
 
-容易混淆的单号：2 个字母加 10 位数字（`AB4829105736`），Peek 会当作 Aramex 澳大利亚或新西兰等快递公司的单号；以 `9400` 开头的 22 位数字，Peek 会当作美国邮政 USPS 等的单号。在 Peek 里，大小写和空格都不影响查询。澳洲邮政显示 `we couldn't find your tracking number` 或 `unconfirmed tracking number` 时，先核对单号，确认包裹确实是澳洲邮政寄的；也可能只是还没被扫描，24 小时后再查。
+容易混淆的单号：2 个字母加 10 位数字（`AB4829105736`），Peek 会当作 [Aramex Australia](carrier:aramex-au) 或 [Aramex New Zealand](carrier:aramex-nz) 的单号；以 `9400` 开头的 22 位数字，Peek 会当作美国邮政 USPS 等的单号。在 Peek 里，大小写和空格都不影响查询。澳洲邮政显示 `we couldn't find your tracking number` 或 `unconfirmed tracking number` 时，先核对单号，确认包裹确实是澳洲邮政寄的；也可能只是还没被扫描，24 小时后再查。
 
 ## 澳洲邮政物流状态是什么意思
 

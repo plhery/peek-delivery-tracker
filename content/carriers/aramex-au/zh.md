@@ -1,6 +1,6 @@
 ---
 title: Aramex Australia（原 Fastway）物流查询：单号、状态与网点
-description: 查询澳大利亚 Aramex（原 Fastway）包裹：了解 12 位标签单号格式、常见英文状态含义、错过派送处理、理赔时限及网点电话。
+description: 查询澳大利亚 Aramex（原 Fastway）包裹：了解 12 位标签单号格式、常见英文状态含义、派送未成功处理、理赔时限及网点电话。
 slug: aramex-australia-tracking
 published: 2026-11-27
 updated: 2026-11-27
@@ -12,7 +12,7 @@ Aramex Australia（原名 Fastway Couriers）是一家特许经营快递网络�
 
 Aramex 将单号称为追踪单号（tracking number）或标签号（label number）。面单由寄件人创建，因此单号由商家在发货邮件或订单页面中提供；如果错过了派送，快递员留下的通知卡（calling card）上也会写明该编号。Aramex 表示没有单号无法查询：如果你不知道单号，甚至不确定商家用了哪家快递，请直接询问商家。仍然找不到？请参阅 [如何查找追踪单号](guide:find-tracking-number)（英文）。
 
-Aramex 未公布官方格式规范，其追踪系统实际使用的标签均为 12 位：前 2 位字符后接 10 位数字（以下均为虚构示例）：
+Aramex 未公布格式，其追踪系统实际使用的标签均为 12 位：前 2 位字符后接 10 位数字（以下均为虚构示例）：
 
 | 格式（虚构示例） | 说明 |
 | --- | --- |
@@ -26,7 +26,7 @@ Aramex 绝不复用单号。
 
 ## Aramex Australia 物流状态含义解析
 
-Aramex Australia 官网仅提供英文界面，每条扫描包含简短标题和下方详细说明。按包裹常见流转顺序如下：
+Aramex Australia 网站仅提供英文界面，每条扫描包含简短标题和下方详细说明。按包裹经过的顺序如下：
 
 | Aramex 状态原文 | 对你的含义 |
 | --- | --- |
@@ -47,13 +47,13 @@ Aramex Australia 官网仅提供英文界面，每条扫描包含简短标题和
 
 `Authority to Leave` 同时也是寄件人可选的一种免签派送服务。较早期包裹还可能显示旧版措辞，如 `Consignment Information Submitted` 或 `Received into Depot`。
 
-## Aramex 派送、安全放门与错过派送
+## Aramex 派送、安全放门与派送未成功
 
 Aramex 在周一至周五工作时间派送，周末及公共假日不派送。时效均为预估，Aramex 无法承诺具体送达时刻；追踪页会显示预计送达日。
 
 具体派送方式由商家选定：Authority to Leave（免签安全放门）、Signature（签收）、Standard（有人在时签收，否则安全放门）、Secure PIN（邮件或短信发送安全 PIN 码）或 Click & Collect（自提点领取）。
 
-**错过派送。** 如果包裹无法安全放置，会转交附近自提点或退回当地分拨站，快递员会留下通知卡写明存放点；Signature 与 Standard 包裹还会收到邮件或短信通知。取件时请携带载有收货地址的带照片证件、标签单号及取件通知；他人凭相同证明亦可代领。
+**派送未成功。** 如果包裹无法安全放置，会转交附近自提点或退回当地分拨站，快递员会留下通知卡写明存放点；Signature 与 Standard 包裹还会收到邮件或短信通知。取件时请携带载有收货地址的带照片证件、标签单号及取件通知；他人凭相同证明亦可代领。
 
 **修改派送。** 通过通知卡或追踪页可申请重派至原地址（Aramex 说明可能产生费用）；据 Aramex 常见问题，也可付费 5.50 澳元改投至同区域新地址。你也可以前往分拨站自提，但须先联系分拨站备货。若 7 天内既未安排重派也未自提，按 Aramex 条款包裹将退回寄件人。
 
@@ -80,17 +80,17 @@ Aramex 联系页面未设全国收件人客服电话、收件人邮箱或 24 小
 - **在线咨询表单：** 也可在追踪结果页通过 “Submit online enquiry” 打开。
 - **当地分拨站：** 周一至周五（不含公共假日，按各站点当地时间）：悉尼、墨尔本、布里斯班与霍巴特拨打 1300 327 892；珀斯 (08) 9356 5309；阿德莱德 (08) 8345 2300；堪培拉 (02) 6260 1718。多数站点营业时间为 8:00–17:00，堪培拉 16:00 关闭，霍巴特 9:00 开门。
 
-> Aramex 提醒防范谎称因无人签收而无法派送的诈骗短信：官方链接仅以 https://aramex.com.au 或 https://aramex.co.nz 开头，绝不收取取件费用；可疑诈骗可举报至 scams@aramex.com.au。
+> Aramex 提醒防范谎称因无人签收而无法派送的诈骗短信：它的链接仅以 https://aramex.com.au 或 https://aramex.co.nz 开头，绝不收取取件费用；可疑诈骗可举报至 scams@aramex.com.au。
 
 ## 使用 Peek 追踪 Aramex Australia 包裹
 
-[Peek](/) 直接读取 Aramex Australia 官方追踪接口。由于 12 位格式与 Aramex New Zealand 及 Colis Privé 共用，Peek 会同时向这三家查询（澳大利亚用户优先查 Aramex Australia），并显示实际持有包裹的承运商；若澳新两家 Aramex 均有记录，你可通过“更改”自行切换。以 1 位字母加 1 位数字开头的标签不会被自动建议为 Aramex：请直接粘贴 aramex.com.au 追踪链接，或点“更改”手动选择 “Aramex Australia”。旧版 fastway.com.au 链接同样适用。对于寄件人的长 SSCC 条码，Peek 不会主动建议 Aramex，但若是以 `00` 开头的 20 位数字，你可以点“更改”选择 “Aramex Australia”，随后 Peek 会自动追踪并在“Aramex Australia 记录的单号为”下展示其内部标签号。
+[Peek](/) 读取 Aramex Australia 自己的追踪。由于 12 位格式与 Aramex New Zealand 及 Colis Privé 共用，Peek 会同时向这三家查询（澳大利亚用户优先查 Aramex Australia），并显示实际持有包裹的那一家；若澳新两家 Aramex 均有记录，你可通过“更换”自行选择。以 1 位字母加 1 位数字开头的标签不会被列为 Aramex：请直接粘贴 aramex.com.au 追踪链接，或点“更换”选择 “Aramex Australia”。旧版 fastway.com.au 链接同样适用。对于寄件人的长 SSCC 条码，Peek 不会提供 Aramex，但若是以 `00` 开头的 20 位数字，你可以点“更换”选择 “Aramex Australia”，随后 Peek 会跟踪该包裹，并在“Aramex Australia 记录的单号为”下展示 Aramex 自己的标签号。
 
 Peek 显示当前状态与预计送达日；`Delivered` 与 `In transit` 以 Peek 统一文案展示，其余节点保留 Aramex 原文。Peek 省略自提点名称与地址、营业时间、取件码、签收人、照片或签名凭证、派送备注及参考号。
 
 Aramex 扫描时间不带时区：Peek 按扫描地点的本地时钟解析（无地点时沿用相邻扫描或悉尼时间）并在地图上呈现 Aramex 历史轨迹，还可在状态变化时通知你。
 
-## Aramex Australia 追踪常见问题
+## 关于 Aramex 在澳大利亚物流查询的问题
 
 ### Aramex 单号以什么开头？
 
@@ -130,7 +130,7 @@ Aramex 扫描时间不带时区：Peek 按扫描地点的本地时钟解析（�
 - [Aramex Australia: Limited liability](https://www.aramex.com.au/terms-and-conditions/limited-liability/) – 理赔时限与 Authority to Leave 免责
 - [Aramex Australia: Contact Aramex Australia](https://www.aramex.com.au/contact-us/) – 在线表单、无全国统一热线
 - [Aramex Australia: Sydney](https://www.aramex.com.au/sydney/) – 分拨站电话与营业时间（及墨尔本、布里斯班、珀斯、阿德莱德、堪培拉与霍巴特页面）
-- [Aramex Australia: Online security](https://www.aramex.com.au/tools/online-security/) – 防诈骗提示、官方链接域名与举报邮箱
+- [Aramex Australia: Online security](https://www.aramex.com.au/tools/online-security/) – 防诈骗提示、链接域名与举报邮箱
 - [Aramex Australia: Service updates](https://www.aramex.com.au/our-services/service-updates/) – 单号不复用、郊区延误公告
 - [Aramex Australia: Delivery times](https://www.aramex.com.au/tools/delivery-times/) – 工作日派送与参考时效
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 从 Aramex Australia 读取的数据

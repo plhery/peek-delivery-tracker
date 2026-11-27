@@ -18,7 +18,7 @@ O Peek reconhece estes formatos como códigos de rastreamento da Amazon:
 | `FR4829105736` | Outros códigos de países europeus seguem a mesma regra (`FR`, `IT`, `ES`, `DE` e outros). |
 | `TBA482910573649` | `TBA`, `TBC` ou `TBM` e 12 dígitos. |
 
-O detalhe: a Amazon Logistics, que entrega os pedidos da própria Amazon, usa exatamente os mesmos formatos. Apenas o rastreador público da Amazon consegue diferenciá-los, respondendo "não encontrado" para pedidos da própria Amazon. Se não encontrar nada e você comprou na própria Amazon, é uma entrega da Amazon Logistics, normalmente acompanhada em Seus Pedidos. Um número de pedido como `408-2917364-8291057` não é um código de rastreamento. Sem código? A loja tem o número: veja [como encontrar o código de rastreamento](guide:find-tracking-number).
+O detalhe: a Amazon Logistics, que entrega os pedidos da própria Amazon, usa exatamente os mesmos formatos. Apenas o rastreador público da Amazon consegue diferenciá-los, respondendo "não encontrado" para pedidos da própria Amazon. Se não encontrar nada e você comprou na própria Amazon, é uma entrega da [Amazon Logistics](carrier:amazon-logistics), normalmente acompanhada em Seus Pedidos. Um número de pedido como `408-2917364-8291057` não é um código de rastreamento. Sem código? A loja tem o número: veja [como encontrar o código de rastreamento](guide:find-tracking-number).
 
 ## Pacote Amazon Shipping não entregue, desaparecido ou extraviado
 

@@ -18,7 +18,7 @@ O Peek reconhece dois formatos da Ozon, ambos escritos com hifens. Os hifens faz
 | `4829105736-2841-2` | O mesmo padrão começando com 10 dígitos. O Peek também identifica a Ozon. |
 | `4829105703621` | O primeiro código sem hifens, ou com espaços no lugar. DPD France, Ukrposhta e outras usam 13 dígitos, então só os números não indicam Ozon. Adicionando da Rússia, Belarus ou Cazaquistão, o Peek consulta primeiro a Ozon; de outros países, consulta a Ozon por último, se outras transportadoras e serviços não acharem. Digite os hifens novamente ou escolha Ozon manualmente (abaixo). O mesmo vale para 15 dígitos, usados por FedEx e outras. |
 | `PL-482910-57362` | PL, 6 dígitos e mais letras ou dígitos com hifens. O Peek identifica a Ozon. |
-| `PL-482910-5736` | PL com exatamente 10 dígitos coincide com o formato da Amazon. O Peek trata como código da Amazon e não permite escolher Ozon, portanto não consegue acompanhá-lo na Ozon. |
+| `PL-482910-5736` | PL com exatamente 10 dígitos coincide com o formato da Amazon. O Peek trata como código da [Amazon](carrier:amazon-logistics) e não permite escolher Ozon, portanto não consegue acompanhá-lo na Ozon. |
 
 Letras minúsculas não fazem diferença: `pl-` funciona igual a `PL-`. Não encontra seu código? Veja [como encontrar seu código de rastreamento](guide:find-tracking-number) e [formatos de código de rastreamento](guide:tracking-number-formats).
 

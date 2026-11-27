@@ -59,7 +59,7 @@ Onlog Express 以葡萄牙语发布从建单揽收到分拨中心中转及收件
 
 ## 使用 Peek 追踪 Onlog Express 包裹
 
-当你输入 12 位 `AA` 单号（`AA4829173605` 或 `AA7391846208`，均为虚构）时，[Peek](/) 会依次询问 [Colis Privé](carrier:colis-prive)、Aramex Australia 与 [Aramex New Zealand](carrier:aramex-nz)，随后查询追踪服务，再通过浏览器打开 Onlog Express 追踪器查询；Onlog 确认后即显示“Onlog Express 有这个包裹的记录。”Peek 也会直接将粘贴的 `onlog.app.br/rastreio/AA...` 链接识别为 Onlog。如需手动指定 Onlog，可在添加时点击“更换”，或在包裹页面点击“更换快递公司”（搜索“ONLOG”或“Onlog Franqueadora”同样可找到）。
+当你输入 12 位 `AA` 单号（`AA4829173605` 或 `AA7391846208`，均为虚构）时，[Peek](/) 会依次询问 [Colis Privé](carrier:colis-prive)、[Aramex Australia](carrier:aramex-au) 与 [Aramex New Zealand](carrier:aramex-nz)，随后查询追踪服务，再通过浏览器打开 Onlog Express 追踪器查询；Onlog 确认后即显示“Onlog Express 有这个包裹的记录。”Peek 也会直接将粘贴的 `onlog.app.br/rastreio/AA...` 链接识别为 Onlog。如需手动指定 Onlog，可在添加时点击“更换”，或在包裹页面点击“更换快递公司”（搜索“ONLOG”或“Onlog Franqueadora”同样可找到）。
 
 Peek 通过浏览器读取 Onlog 追踪页面，展示阶段（“已生成面单”、“已揽收”、“运输中”、“派送中”、“已签收”）、葡萄牙语扫描文案及扫描地点。Onlog 提供的扫描时间精确到分钟但不带时区偏移：Peek 按扫描地所在时区解析（圣保罗按圣保罗时间，马瑙斯按马瑙斯时间），无地点的扫描沿用相邻记录时区，其余默认圣保罗时间，并全部以你的设备时钟呈现。Onlog 追踪页面不提供预计送达日期、重量、事件代码或送达时间。
 

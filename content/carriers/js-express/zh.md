@@ -76,7 +76,7 @@ updated: 2026-11-23
 - **美国：** 轨迹常见 USPS、GOFO 或 SpeedX 派送。包裹交给 USPS 后，按照 [USPS 遗失邮件说明](https://www.usps.com/help/missing-mail.htm)，寄出满 7 天后即可提交 Missing Mail 寻件申请。
 - **加拿大：** 部分包裹由加拿大本地快递 [Straightship](carrier:straightship) 派送，其扫描会同步在急速国际轨迹中。
 - **欧洲主要国家（德、法、西等）：** [急速国际欧洲专线](https://www.js-exp.com/index.php?aid=35) 覆盖英国、法国、德国、意大利、西班牙、瑞士、丹麦等国（不含部分偏远邮编）。[国际专线页面](https://www.js-exp.com/index.php?catid=13) 介绍德国专线尾程由 DPD 等快递派送且超 98% 包裹在 8 个工作日内妥投，实际轨迹中也常见 DHL Paket、iMile 和 J&T Express Germany；法国常见 Colissimo，西班牙常见 CTT Express。
-- **英国、爱尔兰、澳大利亚及其他地区：** 部分线路使用 [联邦快递（FedEx）](carrier:fedex)。英国线路常见 Yodel（其中 `DESPATCHED AND ON ROUTE TO YODEL` 和 `PARCEL PICKED UP` 在包裹还在中国仓库时就可能提前写入）。澳大利亚专线列明 4 公斤以下由 [澳洲邮政（Australia Post）](carrier:australia-post) 或 Fastway（已更名为 [Aramex Australia](https://www.aramex.com.au/why-aramex/about-us/)）派送，4 公斤以上由 DPEX 派送。急速国际的数据接口有时包含尾程单号但不写快递商名称，Peek 会根据号段与收件国自动匹配（国际邮政 S10 单号也会自动询问目的国邮政）。
+- **英国、爱尔兰、澳大利亚及其他地区：** 部分线路使用 [联邦快递（FedEx）](carrier:fedex)。英国线路常见 Yodel（其中 `DESPATCHED AND ON ROUTE TO YODEL` 和 `PARCEL PICKED UP` 在包裹还在中国仓库时就可能提前写入）。澳大利亚专线列明 4 公斤以下由 [澳洲邮政（Australia Post）](carrier:australia-post) 或 Fastway（已更名为 [Aramex Australia](carrier:aramex-au)）派送，4 公斤以上由 DPEX 派送。急速国际的数据接口有时包含尾程单号但不写快递商名称，Peek 会根据号段与收件国自动匹配（国际邮政 S10 单号也会自动询问目的国邮政）。
 
 派送次数、通知卡和自提点保管期限全部执行当地尾程快递的规则，急速国际本身不公布统一标准。看到 `到达待取` 时因为只显示国家名，请通过尾程单号查询或询问卖家具体取件地点。
 

@@ -1,6 +1,6 @@
 ---
 title: Amazon Logistics 物流查询：TBA 单号、自提柜与客服
-description: 在亚马逊“我的订单”追踪 Amazon Logistics 包裹：了解 TBA 单号格式、实时地图、自提柜与代收点及官方客服渠道。
+description: 在亚马逊“我的订单”追踪 Amazon Logistics 包裹：TBA 单号是什么、地图追踪、自提柜与代收点、卖家，以及如何联系亚马逊。
 slug: amazon-logistics-tracking
 published: 2026-11-27
 updated: 2026-11-27
@@ -36,7 +36,7 @@ Amazon Logistics 是亚马逊自有的派送网络，由配送服务合作伙伴
 
 ## Amazon Logistics 包裹未收到或延误
 
-**延误或丢失。** 订单一旦发货就无法取消，但你可以在送达时拒收，或签收后办理退货。后续处理见 [物流停止更新](guide:tracking-not-updating)（英文）、[错过派送](guide:missed-delivery)（英文）、[显示已送达却未收到](guide:delivered-not-received)（英文） 和 [退回寄件人](guide:returned-to-sender)（英文）。
+**延误或丢失。** 订单一旦发货就无法取消，但你可以在送达时拒收，或签收后办理退货。后续处理见 [物流停止更新](guide:tracking-not-updating)（英文）、[派送未成功](guide:missed-delivery)（英文）、[显示已送达却未收到](guide:delivered-not-received)（英文） 和 [退回寄件人](guide:returned-to-sender)（英文）。
 
 **第三方卖家（Marketplace）。** 由第三方卖家自行发货的订单由卖家负责售后；若商品符合 Prime 资格，亚马逊则指引你直接联系亚马逊客服。联系卖家请在 “Your Orders” 中点击订单旁的 “View Your Item”，再选 “Contact Seller”。卖家应在两个工作日内回复，回复内容显示在 “Message Centre”。如需退款且卖家 48 小时内未答复，大多数 Marketplace 订单受 A-to-z Guarantee 保障（涵盖按时送达与商品完好度），可直接向亚马逊发起索赔。不同订单由谁承运详见 [追踪亚马逊订单](guide:amazon-orders)（英文）。
 
@@ -54,11 +54,11 @@ Amazon Logistics 是亚马逊自有的派送网络，由配送服务合作伙伴
 
 ## 在 Peek 中查询 Amazon Logistics
 
-[Peek](/) 无法追踪或保存 Amazon Logistics 包裹，因为亚马逊仅在登录账户内展示包裹状态、轨迹和送达照片。粘贴上述单号或 track.amazon 链接后，Peek 会先查询亚马逊公开的 Amazon Shipping 追踪系统：若亚马逊返回记录，说明属于 [Amazon Shipping](carrier:amazon-shipping) 包裹或亚马逊替站外卖家承运的订单，Peek 即可正常追踪并持续更新；若亚马逊不再提供历史记录，该条目也可保留作参考。
+[Peek](/) 无法追踪或保存 Amazon Logistics 包裹，因为亚马逊仅在登录账户内展示包裹状态、轨迹和送达照片。粘贴上述单号或 track.amazon 链接后，Peek 会先查询亚马逊公开的 Amazon Shipping 追踪系统：若亚马逊返回记录，说明属于 [Amazon Shipping](carrier:amazon-shipping) 包裹或亚马逊替站外卖家承运的订单，Peek 会跟踪它：“Amazon Shipping 提供公开的物流信息。Peek 会及时更新这个包裹的动态。”若亚马逊不再提供历史记录，该条目也可保留作参考。
 
-否则 Peek 会提示 Amazon Logistics 配送通常在亚马逊“我的订单”中追踪，并提供“打开我的亚马逊订单”按钮，按单号前缀跳转至对应站点（`UK`/`GB` 跳转 amazon.co.uk，`IE` 跳转 amazon.ie，`TBA` 跳转 amazon.com，`TBAU` 跳转 amazon.com.au）。若暂时无法检测，可点击“重新检查”。输入订单号时则会提示该编号看起来像亚马逊订单号。
+否则 Peek 会提示：Amazon Logistics 派送的包裹通常要在 Amazon 的“我的订单”里跟踪。并提供“打开我的 Amazon 订单”，按单号前缀打开对应站点上的订单记录（`UK`/`GB` 为 amazon.co.uk，`IE` 为 amazon.ie，`TBA` 为 amazon.com，`TBAU` 为 amazon.com.au）。若无法查询，可点“重新查询”。输入订单号时会显示“这看起来像 Amazon 订单号”。
 
-## Amazon Logistics 常见问题
+## 关于 Amazon Logistics 的问题
 
 ### 什么是 Amazon Logistics？
 
@@ -66,7 +66,7 @@ Amazon Logistics 是亚马逊自有的派送网络，由配送服务合作伙伴
 
 ### Amazon Logistics 是正规的吗？
 
-是的，它是亚马逊用来派送自家订单的网络，包裹会显示在 “Your Orders” 中。但如果收到意外的派送或购物短信，则须警惕：不要点击链接，直接去亚马逊应用或官网查看 “Your Orders”。
+是的，它是亚马逊用来派送自家订单的网络，包裹会显示在 “Your Orders” 中。但如果收到意外的派送或购物短信，则须警惕：不要点击链接，直接去亚马逊应用或网站查看 “Your Orders”。
 
 ### Amazon Logistics 派送需要多久？
 
@@ -80,7 +80,7 @@ Amazon Logistics 是亚马逊自有的派送网络，由配送服务合作伙伴
 - [About Amazon UK: Who delivers my Amazon package in the UK?](https://www.aboutamazon.co.uk/news/operations/how-your-package-gets-from-amazons-warehouse-to-your-front-door) – 配送服务伙伴、Amazon Flex 及其他快递商
 - [About Amazon EU: Delivery and Logistics](https://www.aboutamazon.eu/what-we-do/delivery-and-logistics) – 从配送站出发的末端派送
 - [About Amazon UK: How to track an Amazon package](https://www.aboutamazon.co.uk/news/retail/how-to-track-an-amazon-package) – Your Orders、Track Package 与实时地图追踪
-- [About Amazon UK: How to use Amazon Locker](https://www.aboutamazon.co.uk/news/operations/how-to-use-amazon-locker) – 选择自提柜、取件码、规格限制、3 天期限、自动退款及机身电话
+- [About Amazon UK: How to use Amazon Locker](https://www.aboutamazon.co.uk/news/operations/how-to-use-amazon-locker) – 选择自提柜、取件码、规格限制、3 天期限、退款及机身电话
 - [About Amazon UK: What is an Amazon Counter and how does it work?](https://www.aboutamazon.co.uk/news/retail/how-to-use-amazon-counter) – 代收点、取件码、身份证件与年龄限制商品
 - [About Amazon UK: How to cancel an order on Amazon](https://www.aboutamazon.co.uk/news/retail/how-to-cancel-an-amazon-order) – 已发货订单与拒收派送
 - [About Amazon UK: How to contact a third-party seller on Amazon](https://www.aboutamazon.co.uk/news/small-businesses/how-to-contact-amazon-seller) – Prime 商品、2 个工作日回复、48 小时与 A-to-z Guarantee

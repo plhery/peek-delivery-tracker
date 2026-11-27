@@ -20,7 +20,7 @@ A Aramex não divulga um formato. As etiquetas vistas em seu rastreamento têm 1
 | `2X4829173654` | Um dígito, uma letra e 10 dígitos. |
 | `A94829173654` | Uma letra, um dígito e 10 dígitos. |
 
-Códigos parecidos: a Aramex Australia usa exatamente o mesmo formato, mas é uma rede independente com rastreamento próprio, e a Colis Privé na França também tem códigos de 12 caracteres. Já códigos como `RR482917367NZ` (duas letras, nove dígitos e `NZ`) são postais e devem ser acompanhados pelo NZ Post.
+Códigos parecidos: a [Aramex Australia](carrier:aramex-au) usa exatamente o mesmo formato, mas é uma rede independente com rastreamento próprio, e a Colis Privé na França também tem códigos de 12 caracteres. Já códigos como `RR482917367NZ` (duas letras, nove dígitos e `NZ`) são postais e devem ser acompanhados pelo NZ Post.
 
 ## O que significam os status de rastreamento da Aramex NZ
 

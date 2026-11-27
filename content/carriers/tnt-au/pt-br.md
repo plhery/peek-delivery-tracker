@@ -46,7 +46,7 @@ A [Central de Ajuda da TNT Australia](https://www.tnt.com/express/en_au/site/sup
 - **Reentregas somente de segunda a sexta:** a TNT Australia esclarece que reentregas reagendadas ocorrem apenas de segunda a sexta-feira.
 - **`New delivery address required`:** o pacote permanece no depósito indicado na coluna `Depot` até você fornecer outro endereço ou retirá-lo; contate a TNT Australia. Veja também o [guia de entrega não realizada](guide:missed-delivery) e [quando o rastreio para de atualizar](guide:tracking-not-updating).
 
-Se seu pedido australiano viaja por outra transportadora local, compare em [Australia Post](carrier:australia-post), Aramex Australia, CouriersPlease ou Border Express.
+Se seu pedido australiano viaja por outra transportadora local, compare em [Australia Post](carrier:australia-post), [Aramex Australia](carrier:aramex-au), CouriersPlease ou Border Express.
 
 ## Como acompanhar TNT Australia no Peek
 

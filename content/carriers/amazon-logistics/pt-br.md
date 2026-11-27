@@ -36,9 +36,9 @@ No Reino Unido, você pode enviar um pedido da Amazon para um Amazon Locker ou u
 
 ## Encomenda Amazon Logistics atrasada ou não recebida
 
-**Atrasada ou sumida.** Depois de enviado, não é possível cancelar o pedido, mas você pode recusar a entrega na porta ou devolver após receber. Próximos passos em [rastreio sem atualização](guide:tracking-not-updating), [entregas perdidas](guide:missed-delivery), [entregue mas não recebida](guide:delivered-not-received) e [devolvida ao remetente](guide:returned-to-sender).
+**Atrasada ou sumida.** Depois de enviado, não é possível cancelar o pedido, mas você pode recusar a entrega na porta ou devolver após receber. Próximos passos em [rastreio sem atualização](guide:tracking-not-updating), [entregas não realizadas](guide:missed-delivery), [entregue mas não recebida](guide:delivered-not-received) e [devolvida ao remetente](guide:returned-to-sender).
 
-**Vendedores parceiros (Marketplace).** O vendedor que envia por conta própria faz seu próprio atendimento; se o anúncio era elegível ao Prime, a Amazon orienta procurar o atendimento da própria Amazon. Para falar com o vendedor, abra *Your Orders*, clique em *View Your Item* e escolha *Contact Seller*. Vendedores devem responder em até dois dias úteis, com mensagens visíveis na Central de Mensagens (*Message Centre*). Se precisar de reembolso e o vendedor não responder em 48 horas, a maioria dos pedidos Marketplace conta com a Garantia de A a Z (*A-to-z Guarantee*), cobrindo prazo de entrega e estado do produto diretamente com a Amazon. Veja quem entrega cada tipo de pedido em [como rastrear um pedido da Amazon](guide:amazon-orders).
+**Vendedores do Marketplace.** O vendedor que envia por conta própria faz seu próprio atendimento; se o anúncio era elegível ao Prime, a Amazon orienta procurar o atendimento da própria Amazon. Para falar com o vendedor, abra *Your Orders*, clique em *View Your Item* e escolha *Contact Seller*. Vendedores devem responder em até dois dias úteis, com mensagens visíveis na Central de Mensagens (*Message Centre*). Se precisar de reembolso e o vendedor não responder em 48 horas, a maioria dos pedidos Marketplace conta com a Garantia de A a Z (*A-to-z Guarantee*), cobrindo prazo de entrega e estado do produto diretamente com a Amazon. Veja quem entrega cada tipo de pedido em [como rastrear um pedido da Amazon](guide:amazon-orders).
 
 ## Telefone e atendimento ao cliente Amazon Logistics
 
@@ -54,9 +54,9 @@ O Atendimento ao Cliente Amazon cuida de dúvidas sobre seus pedidos. Na Amazon.
 
 ## Rastreamento Amazon Logistics no Peek
 
-O [Peek](/) não consegue rastrear nem salvar uma entrega Amazon Logistics: a Amazon exibe status, histórico e foto apenas dentro da sua conta. Ao colar um desses códigos ou um link `track.amazon`, o Peek consulta primeiro o rastreador público da Amazon Shipping: se a Amazon responder, trata-se de um envio [Amazon Shipping](carrier:amazon-shipping) (ou compra feita fora da Amazon enviada pela Amazon ao vendedor) e o Peek acompanha normalmente, mantendo a entrega atualizada; se a Amazon não disponibilizar mais o histórico, ele pode ficar salvo apenas como referência.
+O [Peek](/) não consegue rastrear nem salvar uma entrega Amazon Logistics: a Amazon exibe status, histórico e foto apenas dentro da sua conta. Ao colar um desses códigos ou um link `track.amazon`, o Peek consulta primeiro o rastreador público da Amazon Shipping: se a Amazon responder, trata-se de um envio [Amazon Shipping](carrier:amazon-shipping) (ou compra feita fora da Amazon enviada pela Amazon ao vendedor) e o Peek a acompanha: "A Amazon Shipping oferece rastreamento público. O Peek vai manter esta entrega atualizada." Se a Amazon não disponibilizar mais o histórico, ele pode ficar salvo apenas como referência.
 
-Caso contrário, o Peek avisa que entregas Amazon Logistics costumam ser acompanhadas em Seus Pedidos na Amazon e exibe um botão para abrir o histórico no site correspondente ao prefixo: amazon.co.uk para `UK` e `GB`, amazon.ie para `IE`, amazon.com para `TBA` e amazon.com.au para `TBAU`. Se a verificação falhar, toque em tentar novamente. Um número de pedido é identificado como número de pedido da Amazon.
+Caso contrário, o Peek diz "As entregas da Amazon Logistics costumam ser acompanhadas em “Seus pedidos”, na Amazon." e oferece "Abrir meus pedidos da Amazon", que abre o histórico de pedidos no site indicado pelo código: amazon.co.uk para `UK` e `GB`, amazon.ie para `IE`, amazon.com para `TBA` e amazon.com.au para `TBAU`. Se a verificação não puder ser feita, toque em "Verificar de novo". Um número de pedido recebe "Parece um número de pedido da Amazon".
 
 ## Perguntas sobre a Amazon Logistics
 

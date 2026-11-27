@@ -46,7 +46,7 @@ TNT Australia 国内运单详情页展示四列信息——`Status`、`Date`、`
 - **仅限周一至周五再派送：** TNT Australia 说明改期再派送仅安排在周一至周五进行。
 - **`New delivery address required`：** 包裹将一直保存在 `Depot` 栏所列分拨站，直到你提供新地址或前往自提，请联系 TNT Australia。另见 [派送未成功指南](guide:missed-delivery)（英文） 和 [物流停止更新怎么办](guide:tracking-not-updating)（英文）。
 
-如果你的澳大利亚订单由其他国内快递承运，可对照查询 [澳大利亚邮政（Australia Post）](carrier:australia-post)、Aramex Australia、CouriersPlease 或 Border Express。
+如果你的澳大利亚订单由其他国内快递承运，可对照查询 [澳大利亚邮政（Australia Post）](carrier:australia-post)、[Aramex Australia](carrier:aramex-au)、CouriersPlease 或 Border Express。
 
 ## 使用 Peek 追踪 TNT Australia
 

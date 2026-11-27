@@ -15,7 +15,7 @@ Confira o código de rastreamento na página do seu pedido ou no e-mail de confi
 | Formato (inventado) | O que é |
 | --- | --- |
 | `WSHMX4829173640YQ` | Código de linha dedicada da 360Lion: `WSH`, duas letras do país de destino (como `MX` para México), 10 dígitos e `YQ`. |
-| `AR4829173640` | `AR` seguido de 10 dígitos (usado em encomendas enviadas para a Argentina). Compartilha esse formato com Colis Privé, Aramex Australia e Aramex New Zealand. |
+| `AR4829173640` | `AR` seguido de 10 dígitos (usado em encomendas enviadas para a Argentina). Compartilha esse formato com [Colis Privé](carrier:colis-prive), [Aramex Australia](carrier:aramex-au) e [Aramex New Zealand](carrier:aramex-nz). |
 
 Se o seu pedido segue para o Brasil ou o México com o código de barras de outra transportadora — como `AJ` da [Anjun Logistics](carrier:anjun), `8880` da [J&T Express Brasil](carrier:j-and-t-br) ou `JMX` da J&T Express Mexico — consulte [formatos de códigos de rastreamento](guide:tracking-number-formats).
 
@@ -66,7 +66,7 @@ Contatos divulgados na [página Fale Conosco da 360Lion](https://www.360lion.com
 
 ## Rastrear uma encomenda 360Lion com o Peek
 
-O [Peek](/) consulta a 360Lion automaticamente quando você informa um código `WSH...YQ` (como `WSHMX4829173640YQ`, dígitos inventados) — em que a 360Lion é a única candidata — ou um código `AR` + 10 dígitos (como `AR4829173640`), em que o Peek consulta a 360Lion junto com Colis Privé, Aramex Australia e Aramex New Zealand e mostra "360Lion está com esta encomenda." quando a 360Lion confirma o envio. Colar um link `toms.360lion.com/track?trackNumber=` seleciona a 360Lion na hora; caso contrário, toque em "Trocar" ao adicionar ou em "Trocar transportadora" na tela da encomenda e escolha 360Lion (buscar por "360Lion Express", "WSH" ou "纬狮物流" também encontra).
+O [Peek](/) consulta a 360Lion automaticamente quando você informa um código `WSH...YQ` (como `WSHMX4829173640YQ`, dígitos inventados) — em que a 360Lion é a única candidata — ou um código `AR` + 10 dígitos (como `AR4829173640`), em que o Peek consulta a 360Lion junto com [Colis Privé](carrier:colis-prive), [Aramex Australia](carrier:aramex-au) e [Aramex New Zealand](carrier:aramex-nz) e mostra "360Lion está com esta encomenda." quando a 360Lion confirma o envio. Colar um link `toms.360lion.com/track?trackNumber=` seleciona a 360Lion na hora; caso contrário, toque em "Trocar" ao adicionar ou em "Trocar transportadora" na tela da encomenda e escolha 360Lion (buscar por "360Lion Express", "WSH" ou "纬狮物流" também encontra).
 
 O Peek lê diretamente o rastreador da 360Lion e exibe a etapa ("Etiqueta criada", "Recebida pela transportadora", "Em trânsito", "Na alfândega", "Devolvida ao remetente" ou "Entregue"), o texto de cada leitura (da transportadora local quando repassado pela 360Lion, ou em inglês da própria 360Lion), o local como nome de país ou sigla de aeroporto de três letras, o país de destino e a hora da entrega. Cada leitura vem com a diferença do local em relação ao UTC, como `+8` na China e `-3` na Argentina, e aparece no horário do seu aparelho. O Peek omite a barra de progresso do site, o país de origem, o contador de dias em trânsito e o comprovante de entrega; o rastreador da 360Lion não informa data prevista de entrega, nome do serviço nem peso.
 

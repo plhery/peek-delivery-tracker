@@ -1,6 +1,6 @@
 ---
 title: Rastreio Aramex Australia: códigos, status e contatos
-description: Rastreie encomendas Aramex Australia (antiga Fastway): formato do código, significado dos status, entregas perdidas, atrasos e telefones locais.
+description: Rastreie encomendas Aramex Australia (antiga Fastway): formato do código, significado dos status, entregas não realizadas, atrasos e telefones locais.
 slug: aramex-australia-tracking
 published: 2026-11-27
 updated: 2026-11-27
@@ -12,7 +12,7 @@ A Aramex Australia, anteriormente chamada Fastway Couriers, é uma rede franquea
 
 A Aramex chama o código de número de rastreio (*tracking number*) ou número da etiqueta (*label number*). Como o remetente gera a etiqueta, a loja fornece o código no e-mail de envio ou na página do pedido; se você perdeu uma entrega, o código também consta no cartão de aviso (*calling card*) deixado pelo entregador. A Aramex informa que não é possível rastrear sem esse código: se não o tiver ou não souber qual transportadora a loja escolheu, pergunte à loja. Veja mais em [como encontrar um código de rastreio](guide:find-tracking-number).
 
-A Aramex não divulga um padrão oficial. As etiquetas observadas no rastreamento têm 12 caracteres: dois caracteres iniciais seguidos por 10 dígitos:
+A Aramex não divulga um formato. As etiquetas observadas no rastreamento têm 12 caracteres: dois caracteres iniciais seguidos por 10 dígitos:
 
 | Formato (inventado) | O que é |
 | --- | --- |
@@ -43,17 +43,17 @@ O site da Aramex Australia funciona apenas em inglês. Cada leitura traz um tít
 | `Authority to Leave` | Deixada em local seguro no endereço, sem assinatura. |
 | `Return to sender` | A Aramex não conseguiu entregar e está devolvendo ao remetente. |
 
-Quando `Delivery delayed` é a última leitura, a página oficial mostra `Out of time today`, indicando que o entregador ficou sem tempo na rota; uma janela intitulada `Your delivery has been delayed` avisa que o atraso pode chegar a 48 horas.
+Quando `Delivery delayed` é a última leitura, a página de rastreio mostra `Out of time today`, indicando que o entregador ficou sem tempo na rota; uma janela intitulada `Your delivery has been delayed` avisa que o atraso pode chegar a 48 horas.
 
 `Authority to Leave` também é uma modalidade de serviço que o remetente pode escolher. Encomendas antigas podem exibir textos anteriores como `Consignment Information Submitted` ou `Received into Depot`.
 
-## Entregas Aramex, local seguro e entregas perdidas
+## Entregas Aramex, local seguro e entregas não realizadas
 
 A Aramex entrega em horário comercial, de segunda a sexta-feira, excluindo fins de semana e feriados. Os prazos são estimativas e a empresa não garante horário exato; a página de rastreio informa o dia estimado.
 
 A loja define o serviço: Authority to Leave (local seguro), Signature (assinatura), Standard (assinatura se houver alguém, ou local seguro), Secure PIN (PIN enviado por e-mail ou SMS) ou Click & Collect em ponto de retirada.
 
-**Entrega perdida.** Se não puder ser deixado, o pacote segue para o ponto de retirada mais próximo ou volta ao depósito local, e o entregador deixa um cartão indicando onde retirar. Para pacotes Signature e Standard, a Aramex também envia e-mail ou SMS. Leve documento com foto contendo o endereço de entrega, o número da etiqueta e a notificação; terceiros podem retirar com a mesma documentação.
+**Entrega não realizada.** Se não puder ser deixado, o pacote segue para o ponto de retirada mais próximo ou volta ao depósito local, e o entregador deixa um cartão indicando onde retirar. Para pacotes Signature e Standard, a Aramex também envia e-mail ou SMS. Leve documento com foto contendo o endereço de entrega, o número da etiqueta e a notificação; terceiros podem retirar com a mesma documentação.
 
 **Alterar a entrega.** Pelo cartão ou pela página de rastreio você pode pedir reentrega no mesmo endereço (a Aramex informa que taxas podem se aplicar) ou, segundo as perguntas frequentes, redirecionar para outro endereço na mesma região por AU$ 5,50. Também é possível retirar no depósito, avisando antes para deixarem pronto. Se não houver reentrega nem retirada em 7 dias, os termos da Aramex permitem devolver o pacote ao remetente.
 
@@ -69,7 +69,7 @@ A loja define o serviço: Authority to Leave (local seguro), Signature (assinatu
 
 **Danificada.** Avise a loja o quanto antes e registre uma ocorrência na Aramex em até 24 horas.
 
-Como as faturas exigidas na indenização ficam com a loja, na prática é a loja quem solicita a reclamação. Os termos da Aramex estabelecem: fotos do dano em até 24 horas da entrega e reclamação escrita em até 7 dias úteis; reclamações por extravio em até 30 dias úteis da coleta. A cobertura vai até AU$ 1.500 por remessa, e em entregas com Authority to Leave a foto com GPS dispensa cobertura por perda. Esses limites não reduzem seus direitos previstos na Lei do Consumidor da Austrália (*Australian Consumer Law*).
+Como as faturas exigidas na indenização ficam com a loja, na prática é a loja quem faz o pedido de indenização. Os termos da Aramex estabelecem: fotos do dano em até 24 horas da entrega e pedido de indenização por escrito em até 7 dias úteis; pedidos de indenização por extravio em até 30 dias úteis da coleta. A cobertura vai até AU$ 1.500 por remessa, e em entregas com Authority to Leave a foto com GPS dispensa cobertura por perda. Esses limites não reduzem seus direitos previstos na Lei do Consumidor da Austrália (*Australian Consumer Law*).
 
 **Devolvida.** Endereço errado, falhas de entrega ou devolução solicitada podem devolver o pacote. Fale com a loja.
 
@@ -80,11 +80,11 @@ A página de contato da Aramex não divulga telefone nacional, e-mail para desti
 - **Formulário on-line de consulta**, também acessível por *Submit online enquiry* no resultado do rastreio.
 - **Seu depósito local**, de segunda a sexta exceto feriados, no horário local de cada unidade: Sydney, Melbourne, Brisbane e Hobart `1300 327 892`; Perth `(08) 9356 5309`; Adelaide `(08) 8345 2300`; Canberra `(02) 6260 1718`. A maioria funciona das 8h às 17h; Canberra fecha às 16h e Hobart abre às 9h.
 
-> A Aramex alerta para SMS falsos dizendo que uma encomenda não pôde ser entregue sem assinatura. Seus links oficiais começam apenas por https://aramex.com.au ou https://aramex.co.nz, nunca cobra taxa para retirar pacotes e recebe denúncias em scams@aramex.com.au.
+> A Aramex alerta para SMS falsos dizendo que uma encomenda não pôde ser entregue sem assinatura. Seus links começam apenas por https://aramex.com.au ou https://aramex.co.nz, nunca cobra taxa para retirar pacotes e recebe denúncias em scams@aramex.com.au.
 
 ## Acompanhe encomendas Aramex Australia no Peek
 
-O [Peek](/) lê o rastreador oficial da Aramex Australia. Como o formato de 12 caracteres é compartilhado com Aramex New Zealand e Colis Privé, ele consulta as três simultaneamente — priorizando Aramex Australia na Austrália — e indica qual tem o pacote; se ambas as redes Aramex o reconhecerem, você escolhe em "Alterar". Etiquetas iniciadas por letra seguida de dígito não são sugeridas automaticamente como Aramex: cole o link de aramex.com.au ou selecione "Aramex Australia" em "Alterar". Links antigos de fastway.com.au também funcionam. O Peek não sugere Aramex para códigos SSCC longos do remetente, mas se tiver 20 dígitos começando por `00` você pode selecionar "Aramex Australia" em "Alterar" e o Peek acompanha exibindo o código interno sob "Aramex Australia rastreia com o código".
+O [Peek](/) lê o rastreador da própria Aramex Australia. Como o formato de 12 caracteres é compartilhado com Aramex New Zealand e Colis Privé, ele consulta as três ao mesmo tempo — priorizando Aramex Australia na Austrália — e indica qual tem o pacote; se ambas as redes Aramex o reconhecerem, você escolhe em "Trocar". Etiquetas iniciadas por letra seguida de dígito não são sugeridas como Aramex: cole o link de aramex.com.au ou selecione "Aramex Australia" em "Trocar". Links antigos de fastway.com.au também funcionam. O Peek não sugere Aramex para códigos SSCC longos do remetente, mas se tiver 20 dígitos começando por `00` você pode selecionar "Aramex Australia" em "Trocar": o Peek então acompanha a encomenda e mostra a etiqueta da própria Aramex sob "Aramex Australia rastreia com o código".
 
 O Peek exibe o status e o dia previsto. `Delivered` e `In transit` aparecem nas palavras padrão do Peek e os demais no texto original da Aramex. Ele omite o ponto de retirada e seu endereço, horários de funcionamento, código de retirada, assinante, foto/comprovante de assinatura, instruções de entrega e referências.
 
@@ -127,10 +127,10 @@ Sim. A Aramex Australia informa operar em todos os estados e territórios austra
 - [Aramex Australia: Where do you operate in Australia?](https://www.aramex.com.au/contact-us/faqs/joining-aramex/where-do-you-operate-in-australia/) – todos os estados exceto Território do Norte
 - [Aramex Australia: Who is my contact at Aramex Australia?](https://www.aramex.com.au/contact-us/faqs/find-us/who-is-my-contact-at-aramex-australia/) – depósito local
 - [Aramex Australia: Domestic conditions of carriage](https://www.aramex.com.au/terms-and-conditions/conditions-of-carriage/domestic-conditions-of-carriage/) – 7 dias, documento, AU$ 1.500, Australian Consumer Law
-- [Aramex Australia: Limited liability](https://www.aramex.com.au/terms-and-conditions/limited-liability/) – prazos de reclamação, Authority to Leave
+- [Aramex Australia: Limited liability](https://www.aramex.com.au/terms-and-conditions/limited-liability/) – prazos dos pedidos de indenização, Authority to Leave
 - [Aramex Australia: Contact Aramex Australia](https://www.aramex.com.au/contact-us/) – formulário de consulta, sem telefone nacional
 - [Aramex Australia: Sydney](https://www.aramex.com.au/sydney/) – telefone e horários dos depósitos (junto com páginas de Melbourne, Brisbane, Perth, Adelaide, Canberra e Hobart)
-- [Aramex Australia: Online security](https://www.aramex.com.au/tools/online-security/) – alertas de golpe, domínios oficiais, e-mail de denúncias
+- [Aramex Australia: Online security](https://www.aramex.com.au/tools/online-security/) – alertas de golpe, domínios dos links, e-mail de denúncias
 - [Aramex Australia: Service updates](https://www.aramex.com.au/our-services/service-updates/) – códigos não reutilizados, atrasos por subúrbio
 - [Aramex Australia: Delivery times](https://www.aramex.com.au/tools/delivery-times/) – dias úteis, estimativas
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê da Aramex Australia

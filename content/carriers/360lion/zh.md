@@ -15,7 +15,7 @@ updated: 2026-11-24
 | 单号（虚构） | 归属与说明 |
 | --- | --- |
 | `WSHMX4829173640YQ` | 360Lion 跨境专线运单号：`WSH` 加两位目的国代码（例如 `MX` 代表墨西哥）、10 位数字并以 `YQ` 结尾。 |
-| `AR4829173640` | `AR` 加 10 位数字（用于发往阿根廷的包裹）。该形态与 Colis Privé、Aramex Australia 和 Aramex New Zealand 共享。 |
+| `AR4829173640` | `AR` 加 10 位数字（用于发往阿根廷的包裹）。该形态与 [Colis Privé](carrier:colis-prive)、[Aramex Australia](carrier:aramex-au) 和 [Aramex New Zealand](carrier:aramex-nz) 共享。 |
 
 如果你的订单发往巴西或墨西哥并带有其他承运商的条码——例如[安骏物流（Anjun Logistics）](carrier:anjun)的 `AJ`、J&T Express Brazil 的 `8880` 或 J&T Express Mexico 的 `JMX`——请参阅[运单号格式说明](guide:tracking-number-formats)（英文）。
 
@@ -66,7 +66,7 @@ updated: 2026-11-24
 
 ## 使用 Peek 追踪 360Lion 包裹
 
-在 [Peek](/) 输入 `WSH…YQ` 单号（如虚构示例 `WSHMX4829173640YQ`）时，360Lion 是唯一匹配候选，Peek 会自动查询；输入 `AR` 加 10 位数字（如 `AR4829173640`）时，Peek 会同时向 360Lion 以及 Colis Privé、Aramex Australia 和 Aramex New Zealand 核实，并在 360Lion 返回结果时显示“360Lion 有这个包裹的记录。”。直接粘贴 `toms.360lion.com/track?trackNumber=` 链接也会立刻选中 360Lion；如需手动选择，可在添加时点击“更换”或在包裹页点击“更换快递公司”（搜索“360Lion Express”、“WSH”或“纬狮物流”均可找到）。
+在 [Peek](/) 输入 `WSH…YQ` 单号（如虚构示例 `WSHMX4829173640YQ`）时，360Lion 是唯一匹配候选，Peek 会自动查询；输入 `AR` 加 10 位数字（如 `AR4829173640`）时，Peek 会同时向 360Lion 以及 [Colis Privé](carrier:colis-prive)、[Aramex Australia](carrier:aramex-au) 和 [Aramex New Zealand](carrier:aramex-nz) 核实，并在 360Lion 返回结果时显示“360Lion 有这个包裹的记录。”。直接粘贴 `toms.360lion.com/track?trackNumber=` 链接也会立刻选中 360Lion；如需手动选择，可在添加时点击“更换”或在包裹页点击“更换快递公司”（搜索“360Lion Express”、“WSH”或“纬狮物流”均可找到）。
 
 Peek 直接读取 360Lion 的追踪接口，展示标准中文阶段（“已生成面单”、“已揽收”、“运输中”、“清关中”、“已退回寄件人”或“已签收”）、每条扫描文案（若 360Lion 透传末端快递原文则显示该原文，否则显示 360Lion 英文）、国家名称或机场三字码形式的地点、目的地国家及签收时间。每条扫描均带有当地时区偏移（例如中国为 `+8`、阿根廷为 `-3`），Peek 会自动换算成你设备的本地时间。Peek 不展示网站进度条、始发国、在途天数统计及签收凭证；360Lion 追踪系统本身不提供预计送达日期、服务名称或重量信息。
 

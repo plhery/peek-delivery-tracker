@@ -32,7 +32,7 @@ A Australia Post não publica uma lista oficial de formatos. Estes são os padr�
 | `EE482910576AU` | Código de EMS, encomenda ou carta rastreada: `C`, `E` ou `L`, uma letra, 9 dígitos e `AU`. |
 | `RR482910576AU` | Outro código de rastreamento postal internacional terminado em `AU`, como correspondência registrada. |
 
-Códigos parecidos: 2 letras e 10 dígitos (`AB4829105736`) pertencem à Aramex Australia ou à Aramex New Zealand; um código de 22 dígitos começando com `9400` é da USPS. Código não encontrado? Pode estar errado ou ainda não ter sido bipado: a Australia Post sugere tentar novamente em 24 horas. Veja mais em [formatos de código de rastreamento](guide:tracking-number-formats).
+Códigos parecidos: 2 letras e 10 dígitos (`AB4829105736`) pertencem à [Aramex Australia](carrier:aramex-au) ou à [Aramex New Zealand](carrier:aramex-nz); um código de 22 dígitos começando com `9400` é da USPS. Código não encontrado? Pode estar errado ou ainda não ter sido bipado: a Australia Post sugere tentar novamente em 24 horas. Veja mais em [formatos de código de rastreamento](guide:tracking-number-formats).
 
 ## O que significam os status da Australia Post
 

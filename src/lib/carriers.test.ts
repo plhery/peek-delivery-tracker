@@ -932,10 +932,11 @@ describe('carrier detection', () => {
     for (const number of ['C11031500001879', 'C11121552953069', 'D10011354453707', 'D10011345983010']) {
       expect(detectCarrierMatch(number)).toMatchObject({ carrier: 'ontrac', confidence: 'high' });
     }
-    // OSS legacy LaserShip L-letter + 8 digits (LA/LI/LE/LH/LN forms).
+    // OSS legacy LaserShip L-letter + 8 digits (LA/LI/LE/LH/LN forms). Shops print the same shape as order
+    // references, so the number alone only suggests OnTrac.
     // Source: https://github.com/jkeen/tracking_number_data/blob/main/couriers/lasership.json
     for (const number of ['LX17635036', 'LI12976442', 'LA28376237', 'LH13830790', 'LE10917377', 'LN30083672']) {
-      expect(detectCarrier(number)).toBe('ontrac');
+      expect(detectCarrierMatch(number)).toMatchObject({ carrier: 'unknown', confidence: 'low', candidates: expect.arrayContaining(['ontrac']) });
     }
     // OSS 1LS families; the raw -1 suffix is preserved for the carrier-specific parser.
     // Source: https://github.com/jkeen/tracking_number_data/blob/main/couriers/lasership.json

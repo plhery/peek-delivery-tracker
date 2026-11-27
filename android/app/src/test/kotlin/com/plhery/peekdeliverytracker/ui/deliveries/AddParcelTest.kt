@@ -2022,6 +2022,8 @@ class AddParcelTest {
         val before = node(ADD_NAME).getUnclippedBoundsInRoot().top
         compose.mainClock.autoAdvance = false
         node(ADD_TRACKING).performTextReplacement("1Z999AA10123456784")
+        // The edit's news reaches Add before the clock moves, as it does before the phone's next frame.
+        compose.waitForIdle()
         compose.mainClock.advanceTimeBy(32)
         val now = node(ADD_NAME).getUnclippedBoundsInRoot().top
         compose.mainClock.advanceTimeBy(1_000)
@@ -2039,6 +2041,8 @@ class AddParcelTest {
         val dim = buttonShade()
         compose.mainClock.autoAdvance = false
         node(ADD_TRACKING).performTextReplacement("1Z999AA10123456784")
+        // The edit's news reaches Add before the clock moves, as it does before the phone's next frame.
+        compose.waitForIdle()
         compose.mainClock.advanceTimeBy(80)
         val moving = node(ADD_NAME).getUnclippedBoundsInRoot().top
         val easing = buttonShade()

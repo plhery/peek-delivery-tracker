@@ -54,8 +54,12 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.InputTransformation
+import androidx.compose.foundation.text.input.TextFieldBuffer
+import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.then
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -128,14 +132,12 @@ import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextLinkStyles
-import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -174,6 +176,7 @@ import com.plhery.peekdeliverytracker.core.GivenPostcode
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
+import com.plhery.peekdeliverytracker.ui.KeptTyping
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.NoSuggestions
@@ -185,6 +188,7 @@ import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.experimentalSurface
 import com.plhery.peekdeliverytracker.ui.escapeBeforeKeyboard
 import com.plhery.peekdeliverytracker.ui.keptFocus
+import com.plhery.peekdeliverytracker.ui.setTextIfChanged
 import com.plhery.peekdeliverytracker.ui.sheet.BarCancel
 import com.plhery.peekdeliverytracker.ui.sheet.FullScreenCover
 import com.plhery.peekdeliverytracker.ui.sheet.KeyboardScrollColumn
@@ -1039,6 +1043,7 @@ private fun TrackingSection(
         AddTextField(
             value = form.trackingInput,
             onValueChange = actions::type,
+            kept = TrackingKept,
             placeholder = localized("add.trackingPlaceholder"),
             label = localized("add.tracking"),
             tag = ADD_TRACKING,
@@ -1608,6 +1613,7 @@ private fun RequiredDetails(state: DeliveriesState, addition: ParcelAddition, fo
                 AddTextField(
                     value = form.trackingUrl,
                     onValueChange = { form.trackingUrl = urlRequirement.normalizedValue(it) },
+                    kept = remember(urlRequirement) { KeptTyping(urlRequirement::normalizedValue) },
                     placeholder = urlRequirement.placeholder ?: "https://…",
                     label = localized("add.requirement.trackingUrl"),
                     tag = ADD_TRACKING_URL,
@@ -1658,6 +1664,7 @@ private fun RequiredDetails(state: DeliveriesState, addition: ParcelAddition, fo
                     AddTextField(
                         value = addition.deliveryPostcode,
                         onValueChange = { form.postcodes = form.postcodes.with(carrier, requirement.typedValue(it)) },
+                        kept = remember(requirement) { KeptTyping(requirement::typedValue) },
                         placeholder = addition.postcodeExample(requirement).orEmpty(),
                         label = localized("add.requirement.dpdPostcode"),
                         tag = ADD_POSTCODE,
@@ -1721,6 +1728,7 @@ private fun RequiredDetails(state: DeliveriesState, addition: ParcelAddition, fo
                     AddTextField(
                         value = form.phoneDigits,
                         onValueChange = { form.phoneDigits = digits.normalizedValue(it) },
+                        kept = remember(digits) { KeptTyping(digits::normalizedValue) },
                         placeholder = digits.placeholder.orEmpty(),
                         label = localized("add.requirement.phoneDigits"),
                         tag = ADD_PHONE_DIGITS,
@@ -1806,6 +1814,7 @@ private fun NameField(form: AddForm, focus: AddFocus, actions: AddActions, addit
         AddTextField(
             value = form.label,
             onValueChange = { form.label = ParcelAddition.label(it) },
+            kept = LabelKept,
             placeholder = localized("add.contentsPlaceholder"),
             label = localized("design.parcelTitle"),
             tag = ADD_NAME,
@@ -1833,6 +1842,7 @@ private fun NameField(form: AddForm, focus: AddFocus, actions: AddActions, addit
 private fun AddTextField(
     value: String,
     onValueChange: (String) -> Unit,
+    kept: InputTransformation,
     placeholder: String,
     label: String,
     tag: String,
@@ -1861,18 +1871,31 @@ private fun AddTextField(
     val leading = with(LocalDensity.current) { extra.roundToPx().let { (it / 2).toDp() to (it - it / 2).toDp() } }
     val submit by rememberUpdatedState(onSubmit)
     val placeholderLines = if (maxLines > 1 && PeekTheme.dynamicTypeSize.isAccessibilitySize) 2 else 1
-    // The cursor where the reader left it; at the end of what came otherwise (a paste, a suggestion, the window made again).
-    var edited by remember { mutableStateOf(TextFieldValue(value, TextRange(value.length))) }
-    val shown = if (edited.text == value) edited else TextFieldValue(value, TextRange(value.length))
+    // What is typed goes to [onValueChange] as it is typed, kept as it will keep it, so what follows from it (rows,
+    // their motion) comes with the keystroke; an undo, which no transformation sees, a frame later. What [value]
+    // becomes otherwise (a paste, a scan, a suggestion, another carrier's postcode, the window made again) comes into
+    // the field, the cursor at its end.
+    val state = remember { TextFieldState(value) }
+    val handed = remember { HandedText(value) }
+    SideEffect {
+        if (value != handed.text) {
+            handed.text = value
+            state.setTextIfChanged(value)
+        }
+    }
+    val change by rememberUpdatedState(onValueChange)
+    val typing = remember(kept, handed) { kept.then(HandOver(handed) { change(it) }) }
+    LaunchedEffect(state) {
+        snapshotFlow { state.text.toString() }.collect { handed.hand(it) { typed -> change(typed) } }
+    }
+    LaunchedEffect(state, field) {
+        snapshotFlow { state.composition != null }.collect { composing ->
+            if (composing) focus.composing = field else if (focus.composing == field) focus.composing = null
+        }
+    }
     val textField = @Composable {
         BasicTextField(
-            shown,
-            { edit ->
-                if (edit.composition != null) focus.composing = field
-                else if (focus.composing == field) focus.composing = null
-                edited = edit
-                if (edit.text != value) onValueChange(edit.text)
-            },
+            state,
             modifier
                 .fillMaxWidth()
                 .then(
@@ -1903,20 +1926,19 @@ private fun AddTextField(
                     true
                 }
                 .semantics {
-                    contentDescription = if (value.isEmpty() && placeholder.isNotEmpty()) "$label, $placeholder" else label
+                    contentDescription = if (state.text.isEmpty() && placeholder.isNotEmpty()) "$label, $placeholder" else label
                     if (postalCode) contentType = ContentType.PostalCode
                 },
             textStyle = font.copy(color = if (!enabled) colors.tertiaryLabel else if (inked) colors.ink else colors.label),
             enabled = enabled,
-            singleLine = maxLines == 1,
-            minLines = minLines,
-            maxLines = maxLines,
+            inputTransformation = typing,
+            lineLimits = if (maxLines == 1) TextFieldLineLimits.SingleLine else TextFieldLineLimits.MultiLine(minLines, maxLines),
             cursorBrush = SolidColor(colors.accent),
             keyboardOptions = keyboard,
-            keyboardActions = KeyboardActions(onAny = { submit?.invoke() ?: defaultKeyboardAction(keyboard.imeAction) }),
-            decorationBox = { text ->
+            onKeyboardAction = { performDefault -> submit?.invoke() ?: performDefault() },
+            decorator = { text ->
                 Box(Modifier.padding(top = leading.first, bottom = leading.second), contentAlignment = Alignment.TopStart) {
-                    if (value.isEmpty()) {
+                    if (state.text.isEmpty()) {
                         Text(placeholder, Modifier.clearAndSetSemantics {}, color = colors.secondaryText, style = font, maxLines = placeholderLines, overflow = TextOverflow.Ellipsis)
                     }
                     text()
@@ -1926,6 +1948,24 @@ private fun AddTextField(
     }
     if (suggestions) textField() else NoSuggestions(textField)
 }
+
+/** What a field of Add last handed its holder, or took from it: what comes back from it is no news. */
+private class HandedText(var text: String) {
+    fun hand(typed: String, change: (String) -> Unit) {
+        if (typed == text) return
+        text = typed
+        change(typed)
+    }
+}
+
+/** The words as they are kept, handed to the field's holder with the keystroke ([HandedText]). */
+private class HandOver(private val handed: HandedText, private val change: (String) -> Unit) : InputTransformation {
+    override fun TextFieldBuffer.transformInput() = handed.hand(asCharSequence().toString(), change)
+}
+
+/** The number's field and the name's, each kept within its limit as it is typed ([ParcelAddition.tracking], [ParcelAddition.label]). */
+private val TrackingKept = KeptTyping(ParcelAddition::tracking)
+private val LabelKept = KeptTyping(ParcelAddition::label)
 
 /**
  * `errorBanner`: the red triangle and why it failed in subheadline medium, on the rose surface with 20-point corners;

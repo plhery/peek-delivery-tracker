@@ -11,8 +11,6 @@ Pour le suivi d'une commande Amazon, ouvre **Vos commandes** puis **Suivre le co
 
 ## Où trouver le numéro de suivi sur Amazon ?
 
-Le numéro de suivi ne figure pas dans les e-mails d'Amazon : il apparaît uniquement dans **Vos commandes** → **Suivre le colis**, une fois le colis pris en charge par le transporteur.
-
 :::steps
 - Ouvre Vos commandes | Sur le site, c'est en haut à droite. Dans l'application Amazon, touche l'icône en forme de personne, puis Vos commandes.
 - Choisis Suivre le colis | Le bouton est à côté de chaque colis en route ou tout juste livré. Une commande en plusieurs colis a un bouton par colis.

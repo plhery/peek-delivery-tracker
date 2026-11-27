@@ -6,7 +6,7 @@ published: 2026-10-13
 updated: 2026-11-27
 ---
 
-Track a MaltaPost parcel or registered item across Malta and Gozo on [maltapost.com/tracking](https://www.maltapost.com/tracking) or by pasting your 13-character `MT` number, foreign postal barcode or SendOn barcode in capital letters into the box above. The number is on the sender's receipt, under the barcode on the label or on your delivery notice; for tracking help, MaltaPost's customer care answers on (+356) 2122 4421 or freephone 800 722 44.
+Track a MaltaPost parcel or registered item across Malta and Gozo on [maltapost.com/tracking](https://www.maltapost.com/tracking) (type the number in capital letters) or by pasting your 13-character `MT` number, foreign postal barcode or SendOn barcode into the box above. The number is on the sender's receipt, under the barcode on the label or on your delivery notice; for tracking help, MaltaPost's customer care answers on (+356) 2122 4421 or freephone 800 722 44.
 
 ## MaltaPost tracking number: what it looks like
 
@@ -93,7 +93,7 @@ Call (+356) 2122 4421 or freephone 800 722 44 (free from a fixed line), or email
 
 ### How do I track a foreign or SendOn parcel with MaltaPost?
 
-Enter the foreign postal barcode or either SendOn barcode in capital letters on MaltaPost's tracker or in Peek. Items from abroad keep their original foreign barcode, and MaltaPost's tracker may show both a Foreign Barcode and a Local Barcode; untracked items (such as numbers starting with U) can't be tracked in Malta.
+Enter the foreign postal barcode or either SendOn barcode on MaltaPost's tracker, in capital letters, or in Peek. Items from abroad keep their original foreign barcode, and MaltaPost's tracker may show both a Foreign Barcode and a Local Barcode; some numbers, such as those starting with U, can't be tracked in Malta.
 
 ### Is MaltaPost open on Saturday?
 

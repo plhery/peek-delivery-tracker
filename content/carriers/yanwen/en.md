@@ -95,7 +95,7 @@ Scan times are read with Yanwen's GMT offsets and shown in your device's time zo
 
 ### What does a tracking number ending in YP (like UL…YP) mean?
 
-Two letters (often `UL` or `UK`), 9 digits and `YP` is Yanwen's postal-style tracking format — `YP` marks Yanwen, not a destination country. Yanwen handles the trip out of China and passes the parcel to a local carrier in your country, which may assign a second last-mile tracking number.
+Two letters (often `UL` or `UK`), 9 digits and `YP` is Yanwen's postal-style tracking format — `YP` stands for Yanwen rather than a country's post. Yanwen handles the trip out of China and passes the parcel to a local carrier in your country, which may assign a second last-mile tracking number.
 
 ### Where is my Yanwen package?
 

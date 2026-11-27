@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Para hacer el seguimiento de un pedido de Paack en España, introduce el número de pedido (o el código de barras de la etiqueta, incluidos envíos de SHEIN o números `PK`) junto con el código postal de entrega en la página de Paack, o pega el número en la casilla de arriba y elige Paack. Paack comprueba número y código postal a la vez: si uno falla, responde «Pedido no encontrado» (los números `PK` de Evri International no necesitan código postal).
+Para hacer el seguimiento de un pedido de Paack en España, introduce el número de pedido (o el código de barras de la etiqueta, incluidos envíos de SHEIN o números `PK`) junto con el código postal de entrega en la página de Paack, o pega el número en la casilla de arriba y elige Paack. Paack comprueba número y código postal a la vez: si uno falla, responde «Pedido no encontrado». Peek sigue sin código postal los números `PK` de Evri International.
 
 ## Número de pedido de Paack: dónde encontrarlo
 
@@ -74,19 +74,19 @@ Verás el estado, el historial y el día y la franja previstos, según la hora l
 
 ### ¿Qué significa que Paack ha reprogramado mi pedido?
 
-Que lo intentará de nuevo en una nueva fecha y franja. Tras un intento fallido, Peek muestra `Delivery attempt failed` y la página de Paack indica el nuevo día y la nueva franja; si el nuevo intento se programa más tarde, aparece `New delivery attempt scheduled`. En un PaackGo Point, un envío se reprograma cuando el punto estaba cerrado, lleno o rechazó el paquete (`Problema de entrega`).
+Que lo intentará de nuevo en una nueva fecha y franja. Tras un intento fallido, Peek muestra `Delivery attempt failed` y la página de Paack indica el nuevo día y la nueva franja; si el nuevo intento se programa más tarde, aparece `New delivery attempt scheduled`. En un PaackGo Point, un envío se reprograma cuando el punto estaba cerrado, lleno o rechazó el paquete; Peek lo muestra como `Problema de entrega`.
 
 ### ¿Cómo hacer el seguimiento de un pedido de SHEIN con Paack?
 
-Pega el número de paquete de SHEIN (`C` o `E`, fecha de seis cifras y 8 cifras más) en Peek, pulsa «Cambiar», elige Paack e introduce el código postal de entrega, o pega directamente el enlace de seguimiento de mydeliveries.paack.app o paack.co/shipments/tracking.
+Pega en Peek el número de paquete de SHEIN (`C` o `E`, fecha de seis cifras y 8 cifras más), pulsa «Cambiar» y elige Paack, o pega el enlace de seguimiento de mydeliveries.paack.app o de paack.co/shipments/tracking. Después escribe el código postal de entrega: Paack no muestra el pedido sin él.
 
 ### ¿Por qué Paack me pide el código postal?
 
-Porque Paack solo muestra un pedido si coinciden a la vez el número y el código postal de la dirección de entrega. Si uno de los dos es incorrecto, responde «Pedido no encontrado»; solo los números `PK` con 18 cifras (Evri International) se siguen sin código postal.
+Porque Paack solo muestra un pedido si coinciden a la vez el número y el código postal de la dirección de entrega. Si uno de los dos es incorrecto, responde «Pedido no encontrado». Peek sigue sin código postal los números `PK` con 18 cifras (Evri International).
 
 ### ¿Qué es Paack?
 
-Una empresa de reparto de última milla para tiendas online. Paack y Colis Privé se unieron en el verano de 2026 y compartirán la marca Paack a partir de enero de 2027 en Francia, Bélgica, Luxemburgo, España y Portugal; hasta entonces, la entrega y el seguimiento siguen con la empresa que indique la tienda.
+Una empresa de reparto de última milla para tiendas online. Paack y Colis Privé se unieron en el verano de 2026 y compartirán la marca Paack a partir de enero de 2027 en Francia, Bélgica, Luxemburgo, España y Portugal; hasta entonces, según Colis Privé, la entrega y el seguimiento siguen como siempre, con la empresa que indique la tienda.
 
 ### ¿Cuánto tarda Paack en llegar?
 

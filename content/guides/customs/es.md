@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-11-27
 ---
 
-Para saber si un paquete está retenido en aduanas, revisa el seguimiento del transportista o la consulta por número de envío de la AEAT: casi siempre es el trámite normal de lo que llega de fuera de la UE, no una incautación. Si no avanza, el transportista suele esperar el pago de impuestos o la factura: en la Península y Baleares, hasta 150 € sin nada cobrado son el 21 % de IVA, 3 € de arancel y 2 € de tasa por tipo de producto más su gestión; en Canarias todo se declara, sin IGIC hasta 150 € pero con arancel, tasa y AIEM según producto. Compruébalo en su web o app, nunca en un enlace de SMS.
+Para saber si un paquete está retenido en aduanas, revisa el seguimiento del transportista o la consulta por número de envío de la AEAT: casi siempre es el trámite normal de lo que llega de fuera de la UE, no una incautación. Si no avanza, puede que el transportista espere el pago de impuestos o la factura: en la Península y Baleares, hasta 150 € sin nada cobrado son el 21 % de IVA, 3 € de arancel y 2 € de tasa por tipo de producto más su gestión; en Canarias todo se declara, sin IGIC hasta 150 € pero con arancel, tasa y AIEM según producto. Compruébalo en su web o app, nunca en un enlace de SMS.
 
 ## ¿Qué significa que un paquete esté retenido en aduanas?
 
@@ -39,7 +39,7 @@ Con Correos, si vale más de 150 €, entra en correosaduanas.es, pulsa «Inicia
 
 ### ¿Cómo contacto con la aduana por mi paquete?
 
-Empieza por el transportista: Correos Aduanas atiende en el 91 660 24 54. La AEAT ofrece una consulta por [número de envío](guide:find-tracking-number) para saber si tu paquete ya se declaró; si no aparece, solo tu transportista tiene datos. Para dudas en España, la AEAT dispone de chat, cita telefónica de «Comercio electrónico» y los teléfonos 901 33 55 33 y 91 554 87 70; en Canarias, los tributos locales (IGIC y AIEM) dependen de la Agencia Tributaria Canaria.
+Casi nunca hace falta: empieza por el transportista (si es Correos, Correos Aduanas atiende en el 91 660 24 54). La AEAT ofrece una consulta por [número de envío](guide:find-tracking-number) para saber si tu paquete ya se declaró; si no aparece, solo tu transportista tiene datos. Para dudas en España, la AEAT dispone de chat, cita telefónica de «Comercio electrónico» y los teléfonos 901 33 55 33 y 91 554 87 70; en Canarias, los tributos locales (IGIC y AIEM) dependen de la Agencia Tributaria Canaria.
 
 ## ¿Cuánto tarda un paquete en salir de aduanas?
 

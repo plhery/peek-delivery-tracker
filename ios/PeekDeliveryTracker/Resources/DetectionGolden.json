@@ -71863,6 +71863,21 @@
     ]
   },
   {
+    "input": "7899999999999999999917",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "spring-gds",
+      "austrian-post",
+      "usps",
+      "estafeta"
+    ],
+    "asked": [
+      "austrian-post",
+      "spring-gds"
+    ]
+  },
+  {
     "input": "79034111041",
     "carrier": "unknown",
     "confidence": "low",
@@ -86258,6 +86273,17 @@
     "confidence": "high",
     "candidates": [
       "ecms-express"
+    ]
+  },
+  {
+    "input": "AXP0216971",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "australia-post"
+    ],
+    "asked": [
+      "australia-post"
     ]
   },
   {
@@ -117935,6 +117961,12 @@
     "candidates": [
       "lingdong"
     ]
+  },
+  {
+    "input": "SZTB622432824YQ",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "Shoc0000340153",

@@ -483,7 +483,7 @@ export const CARRIER_CAPABILITIES = {
         }
       ],
       "recognitionRank": 524,
-      "recognitionPattern": "^181\\d{15}$"
+      "recognitionPattern": "^(?:181\\d{15}|78\\d{20})$"
     },
     "trackingUrlTemplate": "https://postnl.post/track?barcodes={trackingNumber}",
     "linkRules": [
@@ -528,6 +528,10 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^181\\d{15}$",
+        "confidence": "low"
+      },
+      {
+        "pattern": "^78\\d{20}$",
         "confidence": "low"
       }
     ],
@@ -70798,6 +70802,47 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": []
+  },
+  "austway": {
+    "displayName": "Austway",
+    "aliases": [
+      "澳华国际物流",
+      "Austway Cargo"
+    ],
+    "countries": [
+      "CN",
+      "AU"
+    ],
+    "color": "#C8102E",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "austway"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://api.austway-cargo.cn/tracking.html"
+  },
+  "topest": {
+    "displayName": "TOPEST",
+    "aliases": [
+      "韬博供应链",
+      "TOPEST Express"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#0B5CAD",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "topest"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.topestexpress.com/track"
   }
 } as const;
 
@@ -72955,7 +73000,9 @@ export const CARRIER_IDS = [
   "unicon-express-us",
   "xendnow",
   "ylexp",
-  "z1-express"
+  "z1-express",
+  "austway",
+  "topest"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

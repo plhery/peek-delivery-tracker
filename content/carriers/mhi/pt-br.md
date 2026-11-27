@@ -10,7 +10,7 @@ A MHI (Mail Handling International) é uma empresa de Bristol que envia pedidos 
 
 ## Código de rastreamento MHI: como ele se parece
 
-A MHI não publica um guia oficial de formatos para compradores. Os formatos que seus códigos assumem, com dígitos fictícios:
+A MHI não publica um formato para compradores. Os formatos que seus códigos assumem, com dígitos fictícios:
 
 | Código | O que é |
 | --- | --- |
@@ -38,7 +38,7 @@ O Trackmail funciona em inglês. Acima do histórico ele indica o serviço contr
 | `Assigned to Transport` | Em veículo circulando entre depósitos. |
 | `Shipment at final delivery center` | Chegou ao depósito responsável pela entrega final. |
 | `Delivery scheduled in the final delivery depot` | Entrou na rota de entrega do dia. |
-| `Delivery attempted` | A tentativa de entrega falhou: ninguém recebeu o pacote. |
+| `Delivery attempted` | A entrega não foi realizada: ninguém recebeu o pacote. |
 | `Arrived at Pick-up Point` | Aguardando você em um ponto de retirada. |
 | `Successfully delivered` | Entregue ou retirado. |
 
@@ -56,7 +56,7 @@ A MHI não faz entregas no exterior diretamente. Ela informa trabalhar com mais 
 
 **Itens sem rastreamento completo (`UNTRACKED`).** O Trackmail avisa que há informações limitadas e muitas vezes exibe apenas a leitura de exportação da MHI. Em alguns casos ele fornece um "local poster number": segundo o Trackmail, ao informar esse número ao correio local ou agência postal, eles podem ajudar com mais detalhes. Tente consultá-lo também no rastreador do seu correio nacional: [USPS](carrier:usps), [Canada Post](carrier:canada-post), [Australia Post](carrier:australia-post) ou An Post.
 
-Avisos, tentativas, reentregas e pontos de retirada seguem as regras da transportadora local: confira o rastreamento dela via "View carrier tracking" e veja [entregas perdidas](guide:missed-delivery).
+Avisos, tentativas, reentregas e pontos de retirada seguem as regras da transportadora local: confira o rastreamento dela via "View carrier tracking" e veja [entregas não realizadas](guide:missed-delivery).
 
 ## Encomenda MHI sem atualização, perdida ou devolvida
 
@@ -66,7 +66,7 @@ Avisos, tentativas, reentregas e pontos de retirada seguem as regras da transpor
 
 **Entregue, mas não chegou.** Quem realizou a entrega foi a transportadora local: consulte o rastreamento dela em "View carrier tracking" e depois contate a loja. Veja [entregue mas não recebido](guide:delivered-not-received).
 
-**Perdida ou danificada.** Fale com a loja. A MHI atende a loja, não publica processo de reclamação para destinatários, e o próprio Trackmail encaminha você ao varejista. Veja [encomendas perdidas](guide:lost-parcel).
+**Perdida ou danificada.** Fale com a loja. A MHI atende a loja, não publica processo de pedido de indenização para destinatários, e o próprio Trackmail encaminha você ao varejista. Veja [encomendas perdidas](guide:lost-parcel).
 
 **Alfândega.** A MHI oferece às lojas diversas modalidades aduaneiras, incluindo DDP (*Delivered Duty Paid*), portanto a existência de taxas a pagar depende da opção escolhida pela loja. Veja o que pode incidir em [encomendas retidas na alfândega](guide:customs).
 
@@ -78,9 +78,9 @@ A MHI divulga:
 
 - **Dúvidas de rastreamento:** e-mail `tracking@mhi.co`, informado na página de entregas de e-commerce e na página de contato da Nexae (sua plataforma de envios).
 - **Telefone:** `+44 (0) 117 977 6655`, número do Reino Unido exibido com o endereço em Bristol, 82 Feeder Road, BS2 0TQ. A MHI não informa horário de atendimento nem indica atendimento a consultas de encomendas por telefone.
-- **Formulário Enquiries:** apenas para assuntos comerciais gerais. A MHI avisa que dúvidas sobre rastreamento enviadas por esse formulário não serão atendidas nem encaminhadas.
+- **Formulário Enquiries:** para assuntos gerais. A MHI avisa que dúvidas sobre rastreamento enviadas por esse formulário não serão atendidas nem encaminhadas.
 
-A orientação da MHI aos compradores é consultar o Trackmail ou falar com o vendedor ou marketplace. A loja é cliente da MHI e pode cobrá-la; para entrega perdida ou retirada, procure a transportadora exibida no Trackmail.
+A orientação da MHI aos compradores é consultar o Trackmail ou falar com o vendedor ou marketplace. A loja é cliente da MHI e pode cobrá-la; para entrega não realizada ou retirada, procure a transportadora exibida no Trackmail.
 
 ## Rastreie uma encomenda MHI com o Peek
 
@@ -92,9 +92,9 @@ Quando o link do Trackmail aponta para uma transportadora que o Peek conhece, a 
 
 Enquanto você mantém a encomenda aberta no Peek, ou no dia da entrega com notificações ativadas, o Peek verifica até a cada 10 minutos, ou a cada 2 minutos a partir das 6h (horário local) no dia em que sai para entrega, enquanto o Trackmail (ou o rastreador da transportadora que assumiu) responder; via serviços de rastreamento, a cada 15 minutos. Após dois dias sem novidades (12 horas enquanto ainda estiver em "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora, e a cada 6 horas depois de sete dias em "Etiqueta criada".
 
-Quando a leitura mais recente tem quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza a data dessa leitura, como "Sem atualização de rastreamento desde seg 12 out". A página então mostra "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando MHI." Como a MHI não tem página de ajuda cadastrada no Peek, o link "Obter ajuda da …" aparece apenas quando o Peek passa a acompanhar a transportadora local e ela possui essa página. Após três semanas sem novas leituras, mostra "Nenhuma novidade há mais de três semanas. Se ainda não chegou, fale com o vendedor. O Peek continua consultando MHI."
+Quando a leitura mais recente tem quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza a data dessa leitura, como "Sem atualizações desde seg 12 out". A página então mostra "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando MHI." Como a MHI não tem página de ajuda cadastrada no Peek, o link "Pedir ajuda a …" aparece apenas quando o Peek passa a acompanhar a transportadora local e ela possui essa página. Após três semanas sem novas leituras, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando MHI."
 
-O Peek pode notificar sobre "Cada leitura", "Etapas importantes" ou "Apenas entrega". Ele não pode entrar em contato com a MHI, a transportadora local nem a loja em seu nome.
+O Peek pode notificar sobre "Cada movimentação", "Etapas importantes" ou "Só a entrega". Ele não pode entrar em contato com a MHI, a transportadora local nem a loja em seu nome.
 
 ## Perguntas sobre o rastreamento da MHI
 
@@ -108,7 +108,7 @@ Significa que a MHI processou a encomenda em sua unidade de exportação no Rein
 
 ### O site trackmail.co.uk é confiável?
 
-Sim. Trackmail é o site de rastreamento da MHI: o link "Track my Parcel" no site oficial da MHI leva diretamente para lá. O registro britânico Companies House lista a Mail Handling International Limited como empresa ativa, constituída em 1996, no endereço de Bristol informado pela MHI.
+Sim. Trackmail é o site de rastreamento da MHI: o link "Track my Parcel" no site da própria MHI leva diretamente para lá. O registro britânico Companies House lista a Mail Handling International Limited como empresa ativa, constituída em 1996, no endereço de Bristol informado pela MHI.
 
 ### A MHI tem telefone de atendimento ao cliente?
 

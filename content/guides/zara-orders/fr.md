@@ -1,15 +1,15 @@
 ---
 title: Suivi de commande Zara : livraison, retours et problèmes
-description: Où suivre ta commande Zara en France, en Belgique et en Suisse, qui la livre, ce que coûte la livraison et que faire si le colis manque ou est marqué livré.
+description: Suivi de commande Zara en France, Belgique et Suisse : où trouver le numéro de suivi, délais et tarifs de livraison, colis manquant ou marqué livré et retours.
 slug: suivi-commande-zara
 picture: Un sac en papier à poignées en corde à côté d'une camionnette de livraison, et Pip qui sort la tête du sac.
 published: 2026-10-25
-updated: 2026-10-25
+updated: 2026-11-27
 ---
 
-Tu suis une commande Zara dans ton compte Zara, rubrique « Achats », ou par le lien des e-mails de commande si tu as commandé en invité. En France, la déclaration de non-réception de Zara te fait choisir le transporteur dans une liste : Paack, Chronopost, Amazon, Mondial Relay, UPS, GLS, VIR, Relais Colis, DHL Express et Asendia (Colissimo). Si le suivi indique « livré » sans que tu aies rien reçu, Zara te demande en France une déclaration sur l'honneur de non-réception, en Belgique une attestation.
+Pour suivre une commande Zara en France, en Belgique ou en Suisse, ouvre la rubrique « Achats » de ton compte Zara, ou utilise le lien présent dans les e-mails de commande si tu as commandé en invité. Tu y vois chaque étape (`En préparation`, `Envoyé`, `Retiré par le coursier`, `Livré au client`) ainsi que la date estimée pour la livraison à domicile, en magasin (15 jours de retrait) ou en point relais. Si le suivi indique livré sans que le colis soit arrivé, Zara demande en France une déclaration sur l'honneur de non-réception et en Belgique une attestation.
 
-## Qui livre ma commande Zara ?
+## Qui livre ma commande Zara en France, en Belgique et en Suisse ?
 
 Les pages d'aide de Zara ne nomment pas les transporteurs : elles parlent du « transporteur » ou de « l'entreprise de transport ». En France, la déclaration de non-réception de Zara fait choisir le transporteur du colis dans une liste, sans dire lequel livre ta commande. En Belgique et en Suisse, Zara ne nomme personne pour la livraison.
 
@@ -30,7 +30,7 @@ Les gros articles HOME ne vont ni en magasin ni en point relais : Zara te contac
 - home | Toi | `Livré au client`
 :::
 
-## Où trouver le suivi de ma commande Zara ?
+## Où trouver mon numéro de suivi Zara ?
 
 Regarde ici :
 
@@ -67,7 +67,7 @@ Combien de temps Zara se donne : les conditions de Zara France visent la date de
 
 **Modifier la commande.** Tu peux annuler tant que le statut le permet, depuis le détail de la commande ou le lien invité. Avec un compte et une livraison à domicile, tu peux aussi changer l'adresse tant que le statut le permet. Le mode de livraison et les articles ne changent plus après le paiement. Plus d'infos : [changer l'adresse de livraison](guide:change-delivery-address).
 
-## Options et prix de livraison Zara
+## Quels sont les délais et tarifs de livraison Zara ?
 
 **France.**
 
@@ -106,7 +106,7 @@ D'abord chercher, ensuite signaler. Dans l'ordre :
 
 Plus d'infos : [colis marqué livré mais pas reçu](guide:delivered-not-received), [colis perdu](guide:lost-parcel) et [colis abîmé](guide:damaged-parcel).
 
-## Retourner une commande Zara
+## Comment retourner une commande Zara et suivre le remboursement ?
 
 Tu as 30 jours à compter de la date d'envoi, dans les trois pays. Les articles doivent être dans leur état d'origine, avec toutes les étiquettes, et le retour se fait dans le pays de l'achat. Le détail de la commande te donne la date limite. En Belgique, ce délai ne remplace pas ton droit légal de rétractation de 14 jours à compter de la livraison.
 

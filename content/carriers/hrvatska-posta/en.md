@@ -1,12 +1,12 @@
 ---
 title: Hrvatska pošta tracking: statuses, lockers and contacts
-description: Track a Hrvatska pošta (Croatian Post) parcel: the item number, what the English statuses mean, paketomat lockers, post office pickup, claims and contacts.
+description: Track a Hrvatska pošta (Croatian Post) parcel in English: HR item number format, tracking statuses, paketomat lockers, post office hold times, customs and phone.
 slug: hrvatska-posta-tracking
 published: 2026-10-13
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Hrvatska pošta (Croatian Post) is Croatia's national post, with its Paket24 parcel service. Track an item on its [English tracking page](https://posiljka.posta.hr/en/tracking) (the plain posiljka.posta.hr address opens in Croatian), or paste the number in the box above. The number comes from the sender: the shop's shipping email or order page, or Hrvatska pošta's own SMS and notices.
+Hrvatska pošta (Croatian Post) is Croatia's national post and runs the Paket24 parcel service and about 300 round-the-clock paketomat lockers. Track a parcel in English on its [English tracking page](https://posiljka.posta.hr/en/tracking) — the plain `posiljka.posta.hr` address opens in Croatian — or paste the item number (*prijamni broj pošiljke*) in the box above. Tracked items sent from Croatia end in `HR`, and parcels from abroad keep their sending post's number from your shipping email or Hrvatska pošta's SMS and notices.
 
 ## Hrvatska pošta tracking number
 
@@ -98,17 +98,21 @@ Peek lists Hrvatska pošta's own history, in the English wording of its English 
 
 ## Questions about Croatian Post tracking
 
-### Can I track Hrvatska pošta in English?
+### How do I track a Hrvatska pošta parcel in English?
 
-Yes. posiljka.posta.hr opens in Croatian, but its EN switch, or the /en/tracking address, shows the form and every step in English.
+Open [posiljka.posta.hr/en/tracking](https://posiljka.posta.hr/en/tracking) directly, or switch to **EN** on `posiljka.posta.hr` (which opens in Croatian by default) to see the form and every scan in English.
 
-### Can I track an international parcel to Croatia?
+### Can I track an international parcel to Croatia with Hrvatska pošta?
 
 Yes, with the postal number the sender gave you, which ends in the sending country's code. Hrvatska pošta's tracker accepts it. Peek follows it at the post abroad and, when that post says the item is going to Croatia (or names no destination and you're in Croatia), moves to Hrvatska pošta once Hrvatska pošta has a fresh scan, or straight away if you pick Hrvatska pošta with "Change".
 
 ### How long does Hrvatska pošta keep a parcel in a paketomat?
 
 3 days from the SMS or e-mail notice, with a reminder 12 hours before. If nobody collects it, it goes back to the sender.
+
+### How do I contact Hrvatska pošta or get a new paketomat code?
+
+Call the Contact Centre on **072 303 304** from Croatia (or **+385 1 6626 870** from abroad) with your item number ready, or submit the web form at [kontakt.posta.hr](https://obrasci.posta.hr/kontakt). If a paketomat PIN didn't arrive, check Viber's business inbox and your spam folder first, then ask the Contact Centre to resend it.
 
 :::sources
 - [Croatian Post: Track your item](https://posiljka.posta.hr/en/tracking) – English tracker, item number, 5-character minimum, format error, HR/EN switch

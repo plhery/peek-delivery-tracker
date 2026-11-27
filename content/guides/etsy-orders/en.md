@@ -1,13 +1,13 @@
 ---
 title: Etsy tracking: where your order is and who delivers it
-description: Why an Etsy order still says Not Shipped, which carrier the seller used, what its tracking number looks like, why tracking stops abroad, and when to open a case.
+description: How to track Etsy packages and orders: where to find your Etsy parcel tracking number, what Not Shipped and Pre-transit mean, carriers, and Etsy delivery help.
 slug: etsy-order-tracking
 picture: A parcel tied with string and stamped, a post van, and Pip hurrying along.
 published: 2026-10-17
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Etsy doesn't ship anything itself: each shop makes or packs its own orders, posts them with the carrier it chooses, and adds a tracking number when the service has one. To see where yours is, open **Purchases and reviews** (app: **You** → **Purchases**): next to each order are its status, its estimated delivery date and, if the seller added one, the tracking number, which tells you where the parcel is now. Late or missing? Ask the seller first, then Etsy.
+To track an Etsy package, open **Purchases and reviews** (or **You** → **Purchases** in the Etsy app), or tap **Track your package** in your shipping email if you checked out as a guest. Etsy doesn't ship orders itself: each shop makes or packs its own parcel, chooses the carrier, and adds a tracking number when the shipping method includes one. Next to each order you'll see its status, estimated delivery date and tracking link. If an Etsy delivery is late or missing, message the seller via **Help with order** first, then open a case with Etsy.
 
 ## Why does my Etsy order still say Not Shipped?
 
@@ -27,7 +27,7 @@ In **Purchases and reviews** (app: **You** → **Purchases**), each order shows 
 
 Where the number sits on Etsy and in the shipping email: [find your tracking number](guide:find-tracking-number).
 
-## Which carrier delivers an Etsy order?
+## Which carrier handles Etsy delivery?
 
 Whichever one the seller chose. Etsy sells shipping labels only to sellers in the US, Canada and the UK; sellers elsewhere buy postage from the post or a courier themselves. For parcels going abroad, Etsy's international shipping page names the carriers commonly used from each country:
 
@@ -44,7 +44,7 @@ If the seller used a carrier Etsy supports directly, a **Track Package** button 
 
 Since 1 July 2026, Etsy has temporarily stopped selling USPS and Canada Post labels to Ireland and much of the rest of the EU, "due to a new EU handling fee affecting some carriers", it says. US sellers then use Global Postal Shipping or buy a label elsewhere. Parcels from China follow their own route: see [tracking a parcel from China](guide:tracking-from-china).
 
-## What does an Etsy tracking number look like?
+## What does an Etsy parcel tracking number look like?
 
 It's the carrier's number, not an Etsy one. Posts use the international postal format: 13 characters that stay the same across borders.
 
@@ -74,7 +74,7 @@ Not sure which you have? Type it here:
 
 Every other format, carrier by carrier: [tracking number formats](guide:tracking-number-formats).
 
-## Why did my Etsy tracking stop or change?
+## Why did my Etsy tracking stop updating or change?
 
 Usually one of these:
 
@@ -134,7 +134,7 @@ Some orders don't qualify: lateness caused by a carrier strike, severe weather, 
 
 Etsy suggests these checks first: ask the people you live or work with, wait a day if it isn't urgent, ask your local post office or delivery depot, and ask the neighbours. Still nothing? Send the seller a **Help with order** request: sellers usually open a search or claim with the carrier on your behalf. Then open a case if it doesn't turn up. More in [delivered but not received](guide:delivered-not-received) and [lost parcels](guide:lost-parcel).
 
-## Can I track an Etsy order outside Etsy?
+## How do I track an Etsy package outside Etsy?
 
 Yes, with the carrier's number. Paste it into [Peek](/): it recognises most of the posts' and couriers' numbers above. It doesn't match Evri numbers or Canada Post's 16-digit ones on its own: press "Change" and pick the carrier the seller used. For a postal item sent abroad, when the sending post reports the destination country but names no partner, Peek can propose one lookup at your country's post (USPS, Royal Mail, Canada Post, An Post or Australia Post) with the same number. It keeps the sending post's history, and follows your post once its tracking shows fresh progress. Etsy's own steps stay on Etsy: Peek can't see a `Not Shipped` order or open a case for you.
 

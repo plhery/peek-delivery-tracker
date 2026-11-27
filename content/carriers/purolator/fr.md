@@ -1,12 +1,12 @@
 ---
 title: Purolator suivi : NIC, statuts et livraison manquée
-description: Suivre un colis Purolator : à quoi ressemble le NIC, ce que veulent dire les statuts, la cueillette après une livraison manquée et qui appeler.
+description: Suivi Purolator en français : où saisir ton NIC ou ta référence, sens des statuts, livraison manquée et cueillette, douanes Canada et service à la clientèle.
 slug: purolator-suivi
 published: 2026-10-15
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Purolator est un transporteur canadien de colis et de fret, détenu à 91 % par Postes Canada. Pour suivre ton colis, entre son NIC dans l'outil de repérage de [purolator.com](https://www.purolator.com/fr/) ou colle-le dans le champ ci-dessus. Ce numéro vient de l'expéditeur : pour une commande en ligne, il est dans le courriel de confirmation d'expédition de la boutique.
+Purolator est un transporteur canadien de colis et de fret, détenu à 91 % par Postes Canada. Pour suivre un colis Purolator en français, entre son NIC (numéro d'identification du colis, ou PIN en anglais) ou la référence de suivi de l'expéditeur dans l'outil de repérage de [purolator.com](https://www.purolator.com/fr/), ou colle le NIC dans le champ ci-dessus. Ce numéro se trouve dans le courriel de confirmation d'expédition envoyé par la boutique.
 
 ## Numéro de suivi Purolator : le NIC et sa forme
 
@@ -89,13 +89,13 @@ Notifications au choix : « Chaque scan », « Étapes importantes » ou « Livr
 
 ## Questions sur le suivi Purolator
 
-### Combien de temps Purolator garde-t-il un colis ?
+### Que faire après une livraison manquée Purolator, et combien de temps le colis est-il gardé ?
 
-5 jours ouvrables à partir de son arrivée au comptoir, comme le dit le statut de Purolator. Apporte une pièce d'identité avec photo émise par le gouvernement si le colis demande une signature d'adulte.
+Après une tentative de livraison manquée, le colis est transféré vers un Centre d'expédition Purolator, un agent autorisé ou un magasin PostNet, où il reste disponible 5 jours ouvrables à partir de son arrivée au comptoir, comme le dit le statut de Purolator. Apporte une pièce d'identité avec photo émise par le gouvernement si le colis demande une signature d'adulte.
 
-### Le suivi Purolator existe-t-il en français ?
+### Comment faire un suivi Purolator en français ?
 
-Oui. Sur purolator.com en français, l'outil de repérage affiche les statuts en français, comme `Envoi livré` ou `Dans un véhicule pour livraison`.
+Sur [purolator.com](https://www.purolator.com/fr/), l'outil de repérage affiche les statuts en français, comme `Dans un véhicule pour livraison` ou `Envoi livré`, dès que tu saisis ton NIC ou la référence de suivi.
 
 ### Le NIC Purolator, c'est le numéro de suivi ?
 

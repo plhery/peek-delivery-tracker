@@ -1,17 +1,17 @@
 ---
 title: OTTO order tracking: carriers, delivery and problems
-description: Who delivers your OTTO order, where the tracking number is, what delivery costs, what to do when it doesn't arrive and whether OTTO ships abroad.
+description: Track an OTTO order: where to find Sendungsverfolgung in Mein Konto, Hermes, DHL and Spedition freight carriers, delivery costs, missing parcels and Germany rules.
 slug: otto-order-tracking
 picture: A tall wardrobe box on a two-person trolley, a Hermes-style van, and Pip holding the door.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-27
 ---
 
-In "Mein Konto" (my account), under "Bestellungen" (orders), each item has a "Sendungsverfolgung" (tracking) link with everything about its delivery. What OTTO sells itself mostly comes with Hermes, sometimes DHL, and large furniture and appliances come by Spedition (freight delivery). Items from other sellers on the OTTO marketplace are sent by the seller, with its own carrier and its own tracking number. OTTO delivers only within Germany.
+Open **Mein Konto** (my account) → **Bestellungen** (orders) and click **Sendungsverfolgung** (tracking) next to an item to see its delivery status and carrier. Parcels sold by OTTO mostly arrive with Hermes or DHL, while furniture and large appliances go by two-person Hermes freight (Spedition) or a supplier's freight forwarder; marketplace sellers ship independently with their own tracked carrier and tracking number. OTTO delivers only within Germany.
 
 OTTO's shop and help pages are in German. This guide gives OTTO's labels in German, with a translation.
 
-## Which carrier delivers my OTTO order?
+## Which carrier delivers an OTTO parcel or freight order?
 
 It depends on who sells the item and how big it is. Each item shows the seller's name and the delivery type, parcel ("Paket") or freight ("Spedition"). According to OTTO:
 
@@ -33,7 +33,7 @@ OTTO says other sellers choose their carrier "unabhängig von OTTO" (independent
 - home | You | At the door, with a neighbour or where the item will stand
 :::
 
-## Where is the OTTO tracking number (Sendungsverfolgung)?
+## Where do I find my OTTO tracking number (Sendungsverfolgung)?
 
 In three places:
 
@@ -93,7 +93,7 @@ A Sunday or public holiday between order and delivery can add a working day. Whe
 
 When waiting is still normal: [tracking not updating](guide:tracking-not-updating).
 
-## OTTO delivery costs and delivery options
+## What does OTTO delivery cost, and how do PaketShop and freight work?
 
 From the seller OTTO, you pay per order and delivery address, whatever the order value. OTTO UP is OTTO's membership:
 
@@ -110,7 +110,7 @@ UP Plus isn't a subscription: after 12 months you go back to UP Basic automatica
 
 **Freight.** For freight items available right away, you pick the delivery date when you order, unless you book a paid assembly or installation service. Hermes confirms the date by email and text message and calls 30 to 60 minutes before arriving. You change the date online in Mein Konto, and on the day, "Auf der Karte anzeigen" (show on the map) gives live tracking. With another forwarder, call the number in its email for a new date. If the item comes directly from the supplier, your street must take lorries of up to 40 tonnes.
 
-## OTTO parcel not arrived or marked delivered: what to do
+## What if my OTTO parcel is missing or marked delivered?
 
 Look first, then report. In this order:
 
@@ -132,7 +132,7 @@ OTTO calls the promise "keine Garantie" (not a guarantee): if OTTO refunds the p
 
 If the parcel arrived damaged, keep the packaging and contents, take photos and contact customer service. More: [delivered but not received](guide:delivered-not-received), [lost parcel](guide:lost-parcel) and [damaged parcel](guide:damaged-parcel).
 
-## Ordering from OTTO from abroad
+## Does OTTO deliver outside Germany?
 
 OTTO delivers "ausschließlich innerhalb Deutschlands" (only within Germany), to any address except in Büsingen and on Helgoland. Items from other sellers can't be ordered from abroad at all. So you need a delivery address in Germany, and if you pay by invoice ("Kauf auf Rechnung"), your first order goes only to your billing address.
 

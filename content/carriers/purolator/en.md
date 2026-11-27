@@ -1,12 +1,12 @@
 ---
 title: Purolator tracking: PIN, statuses and missed deliveries
-description: Track a Purolator parcel: what the PIN looks like, what Purolator's statuses mean, pickup after a missed delivery, customs from the US and who to call.
+description: Track a Purolator parcel with your PIN: what "On vehicle for delivery" and other statuses mean, 5-day pickup holds, customs from the US and phone support.
 slug: purolator-tracking
 published: 2026-10-15
-updated: 2026-10-27
+updated: 2026-11-27
 ---
 
-Purolator is a Canadian courier for parcels and freight, majority owned by Canada Post. To track a parcel, enter its PIN in Purolator's tracker at [purolator.com](https://www.purolator.com/en/shipping/tracker) or paste it in the box above. The PIN comes from the sender: for an online order, it's in the shop's shipping confirmation.
+Purolator is a Canadian parcel and freight courier majority owned by Canada Post. Enter your Purolator PIN (Package Identification Number, usually 12 digits or 3 letters and 9 digits) or the sender's reference of up to 15 characters at [purolator.com](https://www.purolator.com/en/shipping/tracker), or paste the PIN in the box above. The PIN comes from the sender's shipping confirmation and follows the parcel from `Shipper created a label` through `On vehicle for delivery` to pickup or delivery.
 
 ## Purolator tracking number: the PIN and what it looks like
 
@@ -90,6 +90,10 @@ When the newest scan is four days old and the parcel is still at "Label created"
 Peek can notify you of "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about Purolator tracking
+
+### What does "On vehicle for delivery" mean on Purolator?
+
+It means your parcel is on the Purolator delivery truck for delivery today. If nobody can accept it or the driver cannot access the building, tracking typically updates to `Attempted delivery - receiver unavailable` or `Address correction required - missing entry code`, followed by transfer to a local pickup counter.
 
 ### Is a Purolator PIN the same as a tracking number?
 

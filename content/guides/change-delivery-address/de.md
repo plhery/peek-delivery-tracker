@@ -1,13 +1,13 @@
 ---
 title: Paket umleiten oder Lieferadresse ändern: So geht’s
-description: Paket umleiten oder Adresse ändern: was Amazon, eBay und Vinted erlauben, was DHL, Hermes, DPD und die Post möglich machen und was es kostet.
+description: Paket umleiten oder Lieferadresse nachträglich ändern: Regeln bei Amazon, eBay und Vinted sowie Optionen und Kosten bei DHL, Hermes, DPD und der Post.
 slug: paket-umleiten-lieferadresse-aendern
 picture: Eine Straße gabelt sich an einem Wegweiser, ein Weg führt zu einem Haus, der andere zu einer Packstation, ein Lieferwagen nimmt die neue Abzweigung, und Pip schaut die Straße entlang dorthin.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-27
 ---
 
-Ist deine Bestellung noch nicht verschickt, änderst du die Lieferadresse im Shop: Bei Drittanbietern auf Amazon hast du dafür 30 Minuten, bei eBay bittest du den Verkäufer, den Kauf abzubrechen, und kaufst neu. Ist das Paket schon unterwegs, leitest du es beim Paketdienst um, meist an eine Packstation, eine Filiale, einen Paketshop, einen Nachbarn oder einen Ablageort, oder du wählst einen anderen Liefertag. Eine ganz neue Adresse ist selten drin, denn der Absender bestimmt, was du ändern darfst, und liegt das Paket erst im Zustellfahrzeug, ist es meist zu spät.
+Solange deine Bestellung noch nicht verschickt ist, änderst du die Lieferadresse im Shop: Bei Drittanbietern auf Amazon hast du dafür 30 Minuten am Desktop, bei eBay und Vinted brichst du den Kauf mit dem Verkäufer ab und bestellst neu. Ist das Paket bereits unterwegs, leitest du es beim Paketdienst um — an eine Packstation, eine Filiale, einen Paketshop, einen Nachbarn, einen Ablageort oder auf einen anderen Liefertag. Eine völlig neue Straßenadresse erlaubt unterwegs von den Diensten hier nur die Schweizerische Post; liegt das Paket erst im Zustellfahrzeug, ist es meist zu spät.
 
 ## Wie ändere ich die Lieferadresse bei Amazon, eBay oder Vinted?
 
@@ -22,7 +22,7 @@ Im Shop, solange das Paket das Lager noch nicht verlassen hat.
 
 Die 30-Minuten-Änderung bei Drittanbietern geht laut Amazon nur auf dem Desktop. Hat ein eBay-Verkäufer schon verschickt, kann er laut eBay nichts mehr ändern, und das Paket geht an die ursprüngliche Adresse. Dann bleibt dir nur der Paketdienst, oder jemand an der alten Adresse nimmt es für dich an.
 
-## Paket nachträglich umleiten: Geht das noch?
+## Kann ich ein Paket nachträglich umleiten, wenn es schon unterwegs ist?
 
 Manchmal, und dann fragst du den Paketdienst, nicht den Shop. Kunde des Paketdienstes ist aber der Absender, und er legt fest, was du ändern darfst. [DHL](carrier:dhl) nennt als Grund für eine gescheiterte Umleitung ausdrücklich: „Der Versender hat den Service Paketumleitung für seine Sendungen ausgeschlossen.“ Auch die Schweizerische Post zeigt dir nur die Optionen, die der Bearbeitungsstand und die Vorgaben des Absenders erlauben.
 
@@ -44,7 +44,7 @@ Findest du die Nummer nicht, oder brauchst du eines der kostenlosen Kundenkonten
 
 > Eine SMS, die dich bittet, deine „Adresse zu bestätigen“ oder vor der Zustellung eine kleine Gebühr zu zahlen, ist die klassische Betrugsmasche. Umleiten kannst du sicher nur auf der Website oder in der App des Paketdienstes, die du selbst aufrufst, mit deiner Sendungsnummer: [Fake-Paket-SMS erkennen](guide:delivery-scam-texts).
 
-## Paket umleiten bei DHL, Hermes, DPD und der Post
+## Wie leite ich ein Paket bei DHL, Hermes, DPD und der Post um?
 
 Wohin ein Paket stattdessen gehen kann, regelt jeder Paketdienst anders. Eine neue Straßenadresse ist die Ausnahme: Von den Paketdiensten unten bietet sie nur die Schweizerische Post an.
 
@@ -81,7 +81,7 @@ Länger verreist? Sechs Werktage reichen bei DHL nicht weit. Leite das Paket dan
 
 Hat der Zusteller dich schon nicht angetroffen und eine Benachrichtigung dagelassen, geht es nicht mehr ums Umleiten, sondern um die zweite Zustellung: [Paket verpasst, was tun?](guide:missed-delivery)
 
-## Paket umleiten geht nicht: die häufigsten Gründe
+## Warum lässt sich mein Paket nicht umleiten?
 
 Fehlen die Optionen oder sind sie ausgegraut, steckt meist einer dieser Gründe dahinter:
 
@@ -113,7 +113,7 @@ Bei der Deutschen Post bestellst du mindestens 5 Werktage vor dem Start, bei der
 
 Für die Paketumleitung an eine Packstation oder Filiale ja, das Konto ist kostenlos. Einen einmaligen Ablageort wählst du über die Paketankündigung, die Sendungsverfolgung oder die App.
 
-### Wie kann ich ein Paket zur Packstation umleiten?
+### Wie leite ich ein Paket an eine Packstation oder Poststation um?
 
 Bei DHL über die Paketumleitung, wenn das Paket an deine Hausadresse geht und du den Packstation-Service aktiviert hast. Dort liegt es dann 7 Kalendertage, abholen kannst du es mit dem Abholcode in der App. In Österreich wählst du eine Poststation, in der Schweiz einen My Post 24-Automaten, beides kostenlos. Hermes bietet statt einer Packstation den WunschPaketShop.
 

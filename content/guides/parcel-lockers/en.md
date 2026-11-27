@@ -1,15 +1,15 @@
 ---
 title: Parcel lockers: collection codes, time limits and problems
-description: How Amazon, InPost, Evri, USPS and Australia Post lockers work: where your code is, how long the parcel waits, and what if the locker is full.
+description: How parcel locker collection works for Amazon, InPost, Evri, USPS and Australia Post: collection codes, locker addresses, Parcel Collect, deadlines and problems.
 slug: parcel-locker-collection-code
 picture: A bank of parcel lockers with one door open, a phone showing a code, and Pip stepping out.
 published: 2026-10-17
-updated: 2026-11-14
+updated: 2026-11-27
 ---
 
-A parcel locker is a pickup point with no one behind a counter: a wall of doors that opens with a code or with the carrier's app. The tracking tells you when your parcel is inside, the carrier sends you the code, and from then on you have a few days, often only 3. Miss them and the parcel moves to a post office counter or goes back to the sender.
+A collection locker lets you pick up an online order without queuing at a counter: choose a locker at checkout (such as an Amazon Locker, an InPost or Evri locker, or an Australia Post Parcel Locker address from your MyPost account), or redirect a parcel there once it's on the way. Tracking tells you when it arrives, and the carrier sends a one-time PIN, QR code or barcode (or leaves a mailbox key at Canada Post). Most lockers hold parcels for 2 to 5 days — 3 days at Amazon, InPost UK and Evri — before moving them to a Post Office or Parcel Collect counter, or returning them to the sender.
 
-## How does a parcel locker delivery work?
+## How does parcel locker collection work?
 
 Usually you pick the locker when you order. The carrier brings the parcel, puts it in a free compartment and tells you it's ready.
 
@@ -22,7 +22,7 @@ Usually you pick the locker when you order. The carrier brings the parcel, puts 
 
 A parcel can also land in a locker you didn't pick. [InPost](carrier:inpost) and [Australia Post](carrier:australia-post) may leave a parcel they couldn't deliver at home in a nearby locker. [USPS](carrier:usps) and [Evri](carrier:evri) let you redirect a parcel to one. Other options: [missed delivery](guide:missed-delivery).
 
-## Which locker networks are there in the US, UK, Canada and Australia?
+## Which collection locker networks are there in the US, UK, Canada and Australia?
 
 | Network | Run by | Your code | How long it waits |
 | --- | --- | --- | --- |
@@ -39,7 +39,7 @@ A few things the table can't hold:
 - **Australia Post** lockers need a free MyPost account, which gives you a Parcel Locker address to use at checkout.
 - **Canada Post** lockers, in apartment buildings and community mailboxes, take only Canada Post parcels and open with a key.
 
-## Where's my collection code, and what if it never came?
+## Where is my parcel locker collection code, and what if it never came?
 
 The code that opens the locker is not your tracking number. The tracking number follows the parcel from the shop to you. The collection code (a PIN, a QR code or a barcode) opens one door, once, and comes only after the parcel is in the locker. Before that, there's nothing to find.
 
@@ -65,7 +65,7 @@ What happens at the deadline depends on the network:
 
 What happens next, and how to get your money back: [parcel not collected](guide:uncollected-parcel).
 
-## The locker was full or out of order: where's my parcel?
+## What if the parcel locker is full, out of order or moves my parcel to Parcel Collect?
 
 Wherever the carrier could put it, and the tracking says where. Follow the tracking, not the locker you picked at checkout.
 

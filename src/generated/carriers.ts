@@ -19522,6 +19522,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "ru": [
     {
+      "id": "gls-de",
+      "catalog": "gls-de",
+      "slug": "gls-germany-otslezhivanie",
+      "title": "Отслеживание GLS Germany: статусы, ParcelShop и контакты",
+      "name": "GLS Germany",
+      "color": "#ffdd00"
+    },
+    {
+      "id": "nova-poshta",
+      "catalog": "nova-poshta",
+      "slug": "nova-poshta-otslezhivanie",
+      "title": "Отслеживание Новая Почта (Nova Post): ТТН, статусы, связь",
+      "name": "Nova Poshta",
+      "color": "#e30613"
+    },
+    {
       "id": "econt",
       "catalog": "econt",
       "slug": "econt-otslezhivanie",
@@ -19632,6 +19648,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Отслеживание посылки GZYL: трек-номер YL…YQ и статусы",
       "name": "GZYL",
       "color": "#4e79e1"
+    },
+    {
+      "id": "zto",
+      "catalog": "zto",
+      "slug": "zto-express-otslezhivanie",
+      "title": "Отслеживание ZTO Express (中通快递): номера, статусы, 95311",
+      "name": "ZTO Express",
+      "color": "#0279ff"
     },
     {
       "id": "russian-post",
@@ -22102,6 +22126,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#4e79e1"
     },
     {
+      "id": "zto",
+      "catalog": "zto",
+      "slug": "zto-express-pakket-volgen",
+      "title": "ZTO Express pakket volgen (中通快递): nummers, statussen",
+      "name": "ZTO Express",
+      "color": "#0279ff"
+    },
+    {
       "id": "dpd-nl",
       "catalog": "dpd-nl",
       "slug": "dpd-nederland-volgen",
@@ -22360,6 +22392,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#002776"
     },
     {
+      "id": "gzyl",
+      "catalog": "gzyl",
+      "slug": "gzyl-sledovani-zasilek",
+      "title": "Sledování GZYL: číslo YL…YQ, stavy, clo a kontakt",
+      "name": "GZYL",
+      "color": "#4e79e1"
+    },
+    {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "xinghe-freight-sledovani-zasilek",
+      "title": "Sledování Xinghe Freight: číslo GZXH…YQ, stavy a kontakt",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
+    },
+    {
       "id": "wedo",
       "catalog": "wedo",
       "slug": "sledovani-zasilky-one-by-allegro-cz",
@@ -22524,6 +22572,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Urmărire colet J&T Germania: numărul JTDE și statusurile",
       "name": "J&T Express Germany",
       "color": "#e60000"
+    },
+    {
+      "id": "gzyl",
+      "catalog": "gzyl",
+      "slug": "gzyl-urmarire-colet",
+      "title": "Urmărire colet GZYL: cod YL…YQ, statusuri, vamă și contact",
+      "name": "GZYL",
+      "color": "#4e79e1"
     },
     {
       "id": "dpd-ro",
@@ -22832,6 +22888,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Latvijas Pasts sūtījumu izsekošana — numuri, pakomāti",
       "name": "Latvijas Pasts",
       "color": "#0c72ba"
+    },
+    {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "xinghe-freight-sutijuma-sekosana",
+      "title": "Xinghe Freight izsekošana: GZXH…YQ numurs un statusi",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
     }
   ],
   "et": [

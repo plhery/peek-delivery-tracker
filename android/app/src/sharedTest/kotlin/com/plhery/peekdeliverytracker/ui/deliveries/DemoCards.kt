@@ -98,6 +98,9 @@ class ZurichTime : ExternalResource() {
 fun ComposeTestRule.waitsForMaps() {
     runBlocking { WorldAtlases.load().await() }
     registerIdlingResource(object : IdlingResource {
-        override val isIdleNow: Boolean get() = MapScenes.isIdle && WorldAtlases.isIdle && WorldDetails.isIdle
+        override val isIdleNow: Boolean get() = mapsAreIdle
     })
 }
+
+/** Whether no map's picture, atlas or tile is being made or is on its way to a map. */
+val mapsAreIdle: Boolean get() = MapScenes.isIdle && WorldAtlases.isIdle && WorldDetails.isIdle

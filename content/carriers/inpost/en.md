@@ -1,12 +1,12 @@
 ---
 title: InPost tracking: numbers, statuses and locker pickup
-description: Track an InPost parcel in the UK, Poland, Italy or Portugal: what the number looks like, what each update means, how long lockers keep it and who to call.
+description: Track an InPost parcel in the UK, Poland, Italy or Portugal: JD/JJD/8YDR and 24-digit numbers, Yodel by InPost, 3–5 day locker limits and support phone numbers.
 slug: inpost-tracking
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-InPost is a parcel locker network that began in Poland and delivers to lockers, shops and homes in the UK, Poland, Italy, Portugal and beyond. Track a parcel on InPost's site for your country, such as [inpost.co.uk/tracking](https://inpost.co.uk/tracking), or paste the number in the box above. The number comes from the shop or seller; the locker code is something else.
+Track an InPost (or Yodel by InPost) parcel in the UK, Poland, Italy or Portugal by pasting your tracking number (`JD`/`JJD` + 16 digits, `8YDR` + 9 digits, 24 digits or 8 digits) in the box above or on your local InPost site such as [inpost.co.uk/tracking](https://inpost.co.uk/tracking). Get the tracking number from the shop or seller — your locker collection code (9 digits in the UK, 6-digit PIN in Portugal) only opens the locker once the parcel arrives (you have 3 days to collect in the UK and about 3 in Italy).
 
 ## InPost tracking number: shapes and where to find it
 
@@ -93,19 +93,23 @@ Peek doesn't follow an InPost parcel on to another carrier. It checks up to ever
 
 ### Is InPost the same as Yodel?
 
-Yodel is now InPost's. InPost UK bought it in April 2025, and Yodel by InPost parcels are tracked with InPost's app and website.
+Yes in the UK: InPost UK bought Yodel in April 2025, and Yodel by InPost parcels are tracked through InPost's website and app. InPost started in Poland (InPost sp. z o.o., Kraków), while the parent group InPost S.A. is incorporated in Luxembourg.
 
-### Is InPost a Polish company?
+### What does an InPost tracking number look like?
 
-It started in Poland, where its operator, InPost sp. z o.o., is based in Kraków. The group, InPost S.A., is incorporated in Luxembourg.
+In the UK, InPost numbers usually start with `JD` or `JJD` (followed by 16 digits), `8YDR` (plus 9 digits), or follow a Yodel label format. In Poland and Italy they are 24 digits, and in Portugal 8 digits — none of these is your locker collection code or PIN.
 
-### Where is my InPost 6-digit code?
+### Where is my InPost locker collection code or 6-digit PIN?
 
-InPost UK's collection code has 9 digits and comes by email, SMS and the InPost app; InPost Portugal's 6-digit PIN comes by email or SMS. In Poland, check the InPost Mobile app.
+InPost UK emails and texts a 9-digit collection code (also under Tracking → Receiving in the InPost app, which also supports Remote Opening). InPost Portugal sends a 6-digit PIN and QR code by email or SMS; in Italy check InPost's pickup email or the app ("Apri a distanza"), and in Poland check the InPost Mobile app.
 
-### How long does InPost take to deliver?
+### How long does InPost take to deliver and keep parcels in a locker?
 
-InPost UK's tracking page tells senders: within 3 working days to a locker or shop, 4 to a home.
+InPost UK tells senders delivery takes up to 3 working days to a locker or shop and 4 to a home. Once `Delivery day, yay!` appears, UK lockers and shops hold the parcel for 3 days (no extension), Italy about 3 days, and Portugal 5 calendar days (some pages say 8) before returning it to the sender.
+
+### How do I contact InPost customer service?
+
+UK: `0330 335 0950` (Mon–Fri 7am–10pm, weekends 8am–8pm) or "Leave a message" on [inpost.co.uk/yodel-help](https://inpost.co.uk/yodel-help). Poland: `+48 722 444 000` / `+48 746 600 000` or InPost Mobile AI chat. Italy: `+39 0238582894` (Mon–Sat 8:00–20:00) or `servizioclienti@inpost24.it`. Portugal: `211 245 624` (weekdays 9:00–18:00). For refunds, contact the shop or marketplace.
 
 :::sources
 - [InPost UK: Tracking a parcel page](https://inpost.co.uk/tracking) – 72 hours, international parcels, codes, Tracking → Receiving, Remote Opening, delivery times (read 9 November 2026)

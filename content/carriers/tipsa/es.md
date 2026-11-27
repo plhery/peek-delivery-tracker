@@ -1,12 +1,12 @@
 ---
 title: TIPSA seguimiento: número, estados y teléfono
-description: Sigue tu envío TIPSA: el número de 22 cifras, qué significa cada estado, qué pasa si estabas ausente, las agencias y los teléfonos de TIPSA.
+description: Seguimiento TIPSA en España y Portugal: número de 22 dígitos (por qué 10 no sirven), estado Ausente, 15 días en agencia o 7 en Pickup y teléfono 900 10 10 47.
 slug: tipsa-seguimiento
 published: 2026-10-11
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-TIPSA es una empresa española de paquetería urgente, integrada en la red internacional de Geopost, con más de 330 agencias en España, Portugal y Andorra. Para seguir tu paquete, escribe el número de 22 cifras en el [localizador de envíos](https://www.tip-sa.com/es/localizacion-envios) de tip-sa.com o pégalo en la casilla de arriba. El número te lo da quien te envía el paquete, por ejemplo la tienda, en el correo o el SMS de envío. Si no lo tienes, pídeselo a la tienda o a la agencia de TIPSA que reparte en tu zona; la encuentras con tu código postal en el [buscador de agencias](https://www.tip-sa.com/es/agencias-de-transporte). Con esa agencia acuerdas también la entrega si el seguimiento pone `Ausente`, o la recogida si prefieres ir tú; si el paquete se pierde o llega dañado, avisa a la tienda.
+Para hacer el seguimiento de un envío TIPSA (Transporte Integral de Paquetería, red Geopost con más de 330 agencias en España, Portugal y Andorra), pega el número completo de 22 dígitos en la casilla de arriba o introdúcelo con tu código postal en el [localizador de tip-sa.com](https://www.tip-sa.com/es/localizacion-envios) — el albarán suelto de 10 dígitos no funciona. Tras un estado `Ausente`, TIPSA hace un segundo intento el siguiente día hábil y guarda el paquete 15 días en agencia (7 días en puntos Pickup); su teléfono gratuito es `900 10 10 47`.
 
 ## Número de envío TIPSA: cómo es y dónde está
 
@@ -96,21 +96,25 @@ Peek muestra el estado, el historial con la población de cada escaneo en un map
 
 ## Preguntas sobre el seguimiento de TIPSA
 
-### ¿Qué es TIPSA?
+### ¿Qué es TIPSA y cómo es el número de seguimiento de 22 dígitos?
 
-Es Transporte Integral de Paquetería, una empresa de paquetería urgente de la red de Geopost. Trabaja con más de 330 agencias y 13 plataformas, entre ellas Madrid, Barcelona y Valencia, y envía al extranjero a través de DPDgroup.
+TIPSA (Transporte Integral de Paquetería) es una red de paquetería urgente del grupo Geopost con más de 330 agencias y 13 plataformas en España, Portugal y Andorra. Su número de envío tiene 22 dígitos: dos códigos de agencia de 6 cifras seguidos del albarán de 10 cifras.
 
-### ¿Cuánto tarda TIPSA en entregar?
+### ¿Por qué no funciona el seguimiento TIPSA con 10 dígitos?
 
-Depende del servicio que contrató la tienda. TIPSA vende a las tiendas la entrega en 24 horas, con un intento el día laborable siguiente a la recogida, o en las 48 horas siguientes al envío.
+Las 10 cifras finales son solo el albarán: ni el localizador de tip-sa.com ni Peek pueden rastrear un paquete TIPSA sin el código completo de 22 dígitos. Búscalo en el correo o SMS de envío o pídeselo a la tienda (sin él, el localizador exige referencia más identificador de agencia y cliente).
 
-### ¿TIPSA entrega los sábados?
+### ¿Cuánto tarda TIPSA en entregar y reparte los sábados?
 
-Puede hacerlo si la tienda contrata la entrega en sábado: TIPSA la ofrece a los remitentes como una opción del envío.
+Depende del servicio contratado por la tienda: TIPSA ofrece entrega en 24 horas (el siguiente día laborable) o en 48 horas. La entrega en sábado existe solo si el remitente la contrató como servicio adicional.
 
-### ¿Se puede seguir un envío TIPSA con 10 dígitos?
+### ¿Qué hago si el seguimiento pone `Ausente` o quiero recoger en agencia o Pickup?
 
-No: el localizador de TIPSA pide el número de 22 cifras, y Peek tampoco toma 10 cifras por un número de TIPSA. Las 10 cifras son el albarán del final; si solo tienes esas, pide el número completo al remitente.
+Tras un `Ausente`, TIPSA intenta una segunda entrega el siguiente día hábil (2 intentos en Estándar, 3 en Premium) y puedes concertarla con la agencia de destino que aparece en el seguimiento. En delegación el paquete espera 15 días desde la salida (lleva DNI), y en puntos Pickup o lockers compartidos con SEUR espera 7 días.
+
+### ¿Cuál es el teléfono gratuito de TIPSA y a quién reclamo?
+
+Las preguntas frecuentes de TIPSA dan el teléfono gratuito `900 10 10 47` (la página de contacto añade `902 10 10 47`), el correo `info@tip-sa.com` y el [formulario de contacto](https://www.tip-sa.com/es/contacto). Para pérdida, daño o cambio de dirección, contacta siempre con la tienda remitente.
 
 :::sources
 - [TIPSA: Localizar mi envío](https://www.tip-sa.com/es/localizacion-envios) – número de 22 cifras, formulario, búsqueda por referencia con identificador (agencia y cliente), teléfono del pie de página

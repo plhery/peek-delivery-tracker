@@ -1,12 +1,12 @@
 ---
 title: CNE Express tracking: 3A5V numbers, statuses and contact
-description: Track a CNE Express (递一物流) parcel from China: what a 3A5V number looks like, what CNE's statuses mean, who delivers it near you and who to ask.
+description: Track a CNE Express (递一物流) parcel from China: 3A5V… number format, "Arrived at destination" and customs statuses, last-mile partners, transit times and contact.
 slug: cne-express-tracking
 published: 2026-11-02
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-CNE Express (递一物流, CNE EXPRESS CO LTD) is a cross-border logistics company in Shanghai, China, founded in 2003. It ships parcels abroad for online sellers, including sellers on eBay, Walmart, TikTok, Temu and SHEIN, flies them out of China and hands them to a partner in your country for the last stretch. Track the number on [CNE's tracker](https://www.cne.com/en/track), in English, or paste it in the box above. The seller booked CNE and gives you the number with your order's shipping details.
+Track a CNE Express (递一物流, CNE EXPRESS CO LTD, founded in Shanghai in 2003) parcel from China by pasting its `3A5V` + 9-digit number in the box above or on [CNE's English tracker](https://www.cne.com/en/track). CNE ships cross-border orders for sellers on eBay, Walmart, TikTok, Temu and SHEIN and hands final delivery to local partners such as USPS, Royal Mail, DHL, La Poste, Evri, GLS or DPD — check `Last mile number` under `Shipment Information` on CNE's tracker, or let Peek follow recognised handovers automatically.
 
 ## CNE Express tracking number: what it looks like
 
@@ -111,25 +111,25 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ## Questions about CNE Express tracking
 
-### Is CNE Express legit?
+### Is CNE Express (递一物流) legit?
 
-Yes. CNE EXPRESS CO LTD (递一国际物流有限公司) was founded in 2003 and is headquartered in Shanghai, with sorting centres in Jiaxing and Dongguan that have been able to process more than 2 million shipments a day since 2020, it says. It ships for sellers on Amazon, eBay, Walmart, TikTok, Temu and SHEIN, among others.
+Yes. CNE EXPRESS CO LTD (递一国际物流有限公司), founded in 2003 and headquartered in Shanghai, runs sorting centres in Jiaxing and Dongguan with capacity for over 2 million shipments a day since 2020, shipping for sellers on Amazon, eBay, Walmart, TikTok, Temu and SHEIN.
 
-### Who delivers CNE Express parcels?
+### Who delivers CNE Express parcels and where is the last-mile tracking number?
 
-A local post or courier that CNE picks, such as the partners on its partner page: Royal Mail, La Poste, DHL, GLS, DPD or Evri. CNE's tracker can show your parcel's `Last mile number`.
+CNE hands final delivery to a local postal or courier partner — its partner page lists USPS, Royal Mail, DHL, La Poste, Correos, Poste Italiane, Austrian Post, GLS, DPD, Evri and POST Luxembourg. Look under `Shipment Information` on CNE's tracker for `Last mile number` (Peek follows DHL Germany, Royal Mail, USPS and valid destination-post handovers automatically).
 
-### What does "Arrived at destination" mean on CNE Express?
+### What does "Arrived at destination" mean on CNE Express tracking?
 
-The parcel has reached your country. Sorting and import customs can still follow before the delivering carrier takes it, so it isn't at your local delivery office yet. CNE's tracker shows this line on Beijing time, 8 hours ahead of London and 7 ahead of Paris or Berlin in winter, while lines abroad can be on local time: so it can look out of order.
+Your parcel has landed in your country, not at your local delivery office — sorting and import customs still come before handover to the local carrier. CNE logs this scan on Beijing time while local-carrier scans can use local time, so timestamps can look out of order.
 
 ### How long does CNE Express take to deliver?
 
-CNE gives sellers reference times that vary by route: 3 to 8 business days for CNE Priority Express, to the US, the UK, France and Germany, and 5 to 20 for CNE Standard Express. The shop's estimate for your order is the one to go by.
+CNE's service pages give reference times of 3 to 8 business days for CNE Priority Express (to the US, UK, France and Germany) and 5 to 20 business days for CNE Standard Express; go by the delivery estimate shown by the shop.
 
-### How do I contact CNE Express?
+### How do I contact CNE Express about a stuck or missing parcel?
 
-By its hotline, 400-021-5600, or its online consulting form, choosing `Complaint`. About your order, ask the seller first.
+Ask the seller first, since the seller holds the contract with CNE. To reach CNE directly, call its Chinese hotline `400-021-5600` (or Shanghai office `021-5109 6677`, Mon–Sun 08:30–18:00) or submit the consulting form on [cne.com/en/about/contact](https://www.cne.com/en/about/contact) under `Complaint`.
 
 :::sources
 - [CNE: Track your parcel](https://www.cne.com/en/track) – tracker, status labels, lines, Shipment Information, View POD

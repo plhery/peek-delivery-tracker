@@ -1,12 +1,12 @@
 ---
 title: ORLEN Paczka śledzenie: numer, statusy i odbiór paczki
-description: Śledzenie przesyłki ORLEN Paczka: gdzie jest numer paczki, co znaczą statusy, ile czasu masz na odbiór z automatu, paczki z Allegro i reklamacja.
+description: Śledzenie ORLEN Paczka: 13-cyfrowy numer od 210, statusy, 3 dni robocze na odbiór z automatu lub punktu, Allegro Delivery, infolinia 22 33 33 999 i reklamacja.
 slug: orlen-paczka-sledzenie
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-ORLEN Paczka, dawniej Paczka w RUCHu, to polska sieć, która dowozi paczki do automatów paczkowych i punktów odbioru. Paczkę śledzisz na stronie śledzenia ORLEN Paczki na orlenpaczka.pl albo wklejasz numer w pole powyżej. Numer paczki ma 13 cyfr i znajdziesz go w wiadomości od sklepu albo sprzedającego.
+Aby sprawdzić, gdzie jest przesyłka ORLEN Paczka (dawniej Paczka w RUCHu; 5000 automatów paczkowych i 11 000 punktów odbioru w Polsce), wklej 13-cyfrowy numer paczki zaczynający się od `210` w pole powyżej albo na orlenpaczka.pl. Paczki ze sklepów docierają zwykle w 1 dzień roboczy, a na odbiór masz 3 dni robocze od pierwszego SMS-a lub e-maila z kodem odbioru (przesyłki Allegro Delivery z numerem `AD` śledzisz w aplikacji Allegro). Infolinia ORLEN Paczki działa pod numerem `22 33 33 999`.
 
 ## Gdzie jest numer paczki ORLEN Paczka
 
@@ -93,15 +93,23 @@ W powiadomieniach możesz wybrać „Każdy skan”, „Ważne etapy” albo „
 
 ### Czy ORLEN Paczka to dawniej Paczka w RUCHu?
 
-Tak. W 2021 roku ORLEN Paczka zastąpiła usługę Paczka w Ruchu, a jej partnerem logistycznym został RUCH.
+Tak: w 2021 roku ORLEN Paczka zastąpiła usługę Paczka w Ruchu, a RUCH został jej partnerem logistycznym. Dziś sieć obejmuje w Polsce 5000 automatów paczkowych i 11 000 punktów nadawczo-odbiorczych.
 
-### Czy ORLEN Paczka dostarcza do domu?
+### Ile czasu mam na odbiór paczki ORLEN Paczka i co zrobić bez kodu SMS?
 
-ORLEN opisuje ORLEN Paczkę jako usługę dostawy do automatów i punktów odbioru. W opisach usługi na stronach ORLEN nie ma mowy o dostawie pod drzwi.
+Masz 3 dni robocze od pierwszego SMS-a lub e-maila z kodem odbioru (dotyczy to też przesyłek Allegro Delivery), a w niedzielę odbierzesz paczkę z automatu i wybranych stacji ORLEN. Brak SMS-a? Sprawdź folder spam, e-mail i aplikację ORLEN Paczka, albo napisz przez [formularz kontaktowy](https://www.orlenpaczka.pl/formularz-kontaktowy/).
 
-### Jak śledzić paczkę ORLEN Paczka za granicą?
+### Czy ORLEN Paczka dostarcza do domu i ile trwa dostawa?
 
-Według częstych pytań na orlenpaczka.pl ORLEN Paczka realizuje dostawy tylko w Polsce. Paczkę z Vinted ORLEN Paczka może przekazać przewoźnikowi w innym kraju, a dalszą drogę pokazuje wtedy aplikacja Vinted.
+ORLEN Paczka obsługuje dostawy do automatów i punktów odbioru (bez dostawy pod drzwi i bez płatności za pobraniem). Przesyłki ze sklepów docierają według ORLEN Paczki w 1 dzień roboczy (98% paczek), a przesyłki prywatne i z Vinted w 1–3 dni robocze.
+
+### Jak śledzić paczkę ORLEN Paczka z Allegro Delivery lub wysłaną za granicę z Vinted?
+
+Przesyłki z Allegro Delivery mają numer zaczynający się od `AD` i śledzisz je w aplikacji Allegro (sekcja „Moje przesyłki”), nie przez numer `210`. ORLEN Paczka doręcza tylko w Polsce; gdy paczka z Vinted dostanie status przekazania za granicę, dalszą trasę pokazuje aplikacja Vinted.
+
+### Jaki jest numer infolinii ORLEN Paczka i jak złożyć reklamację?
+
+Infolinia działa pod numerem `22 33 33 999` (pon.–pt. 7:00–22:00, sob. 9:00–19:00, ndz. 10:00–16:00). Przy opóźnieniu powyżej 4 dni roboczych od nadania, uszkodzeniu lub zaginięciu użyj [formularza reklamacyjnego](https://www.orlenpaczka.pl/reklamacje/) (operator ma 30 dni na odpowiedź; dla Allegro Delivery obsługę prowadzi Allegro).
 
 :::sources
 - [ORLEN Paczka: Najczęściej zadawane pytania](https://www.orlenpaczka.pl/faq/) – kod odbioru (5 lub 6 cyfr, SMS, e-mail, QR, aplikacja), odbiór przez inną osobę, brak kodu, błędny numer telefonu, 3 dni robocze od pierwszego SMS-a lub e-maila i zwrot do nadawcy albo punktu nadania, odbiór w niedzielę, bez pobrania, czas dostawy (1 dzień roboczy dla 98% paczek ze sklepów, 1–3 dni od osób prywatnych i z Vinted), zwrot kwoty po 4 dniach roboczych, zaginięcie, odpowiedzialność do 500 zł (klienci indywidualni) i 5000 zł (biznesowi), tylko dostawy w Polsce, infolinia i godziny, brak linków w SMS-ach i dopłat przez link

@@ -1,13 +1,13 @@
 ---
 title: Tracciamento ordine Zara: spedizione, consegna e problemi
-description: Dove segui il tuo ordine Zara in Italia, cosa vuol dire ogni stato, quanto costa la spedizione, come fare il reso e cosa fare se non arriva o risulta consegnato.
+description: Traccia il tuo ordine Zara in Italia: stato in «Ordini» o link ospite, tempi (2–6 giorni) e costi di spedizione, ritiro in negozio (7 giorni) e reso in 30 giorni.
 slug: tracciamento-ordine-zara
 picture: Un sacchetto di carta con manici di corda accanto a un furgone delle consegne, e Pip che sbuca dal sacchetto.
 published: 2026-10-25
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Segui il tuo ordine Zara dal tuo account, nella sezione «Ordini», oppure, se hai comprato come ospite, dal link presente in tutte le e-mail sull'ordine. Le pagine di Zara non dicono quale corriere porta l'ordine: se qualcosa va storto, contatta Zara, che verifica il caso con l'impresa di trasporti. Hai 30 giorni dalla spedizione per fare il reso, gratis in negozio.
+Per tracciare il tuo ordine Zara in Italia, entra nella sezione «Ordini» del tuo account oppure apri il link presente in tutte le e-mail sull'ordine se hai comprato come ospite. Le pagine di Zara Italia non nominano il corriere che effettua la consegna (2–6 giorni lavorativi standard, 2,95 € a domicilio o in punto di consegna, gratis in negozio con 7 giorni per il ritiro): se il pacco è in ritardo o risulta consegnato senza che sia arrivato, scrivi a Zara in chat o su WhatsApp (lun–ven 8:30–20:00, sab 10:00–16:00). Per i resi hai 30 giorni dalla spedizione, gratis in negozio.
 
 ## Chi consegna il mio ordine Zara?
 
@@ -75,7 +75,7 @@ La legge chiede di consegnare entro 30 giorni dalla conclusione del contratto, s
 
 **Modificare o annullare.** La modalità di spedizione non si cambia dopo l'acquisto. Se sei registrato e hai scelto la spedizione a domicilio, puoi cambiare l'indirizzo nei dettagli dell'ordine, purché lo stato lo consenta. Anche l'annullamento si fa lì, se lo stato lo consente; come ospite, dal link nell'e-mail di conferma. Gli articoli non si possono modificare: quando ricevi l'ordine, chiedi un cambio o un reso. Se non vuoi più riceverlo, contatta Zara. Di più: [cambiare l'indirizzo di consegna](guide:change-delivery-address).
 
-## Opzioni e costi di spedizione Zara
+## Quanto costa la spedizione Zara e quanto ci mette?
 
 | Spedizione | Tempi | Costo |
 | --- | --- | --- |
@@ -90,7 +90,7 @@ A seconda dell'ora dell'ordine, alcune opzioni non compaiono. Se l'ordine contie
 
 **In un punto di consegna.** Zara ti avvisa quando l'ordine è disponibile nel punto scelto. Devi identificarti; se va un'altra persona al posto tuo, le servono un'autorizzazione scritta e una copia del tuo documento d'identità. Di più: [locker e punti di ritiro](guide:parcel-lockers) e [pacco non ritirato](guide:uncollected-parcel).
 
-## Ordine Zara non arrivato o risulta consegnato: cosa fare
+## Ordine Zara non arrivato o risulta consegnato: cosa fare?
 
 Prima guarda, poi segnala. Nell'ordine:
 
@@ -104,7 +104,7 @@ Prima guarda, poi segnala. Nell'ordine:
 
 Di più: [consegna mancata](guide:missed-delivery), [pacco consegnato ma non ricevuto](guide:delivered-not-received), [pacco danneggiato](guide:damaged-parcel) e [pacco smarrito](guide:lost-parcel).
 
-## Restituire un ordine Zara
+## Come fare un reso Zara in negozio o online?
 
 Hai 30 giorni dalla data di spedizione dell'ordine; nei dettagli dell'ordine trovi la data limite. Gli articoli devono essere nelle condizioni originali, con tutte le etichette, e il reso si fa nello stesso mercato in cui hai comprato.
 

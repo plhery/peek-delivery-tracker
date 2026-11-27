@@ -1,12 +1,12 @@
 ---
 title: TopYou seguimiento: número TYZR, estados y entrega en España
-description: Sigue tu paquete de TopYou (通邮) desde China: cómo es un número TYZR…YQ, qué significan sus escaneos en inglés, quién lo entrega en España y qué se paga en aduanas.
+description: Seguimiento TopYou (通邮) desde China: número TYZR…YQ de 17 caracteres, escaneos en inglés, quién reparte en España, aduanas UE (3 € y 2 €) y reclamaciones.
 slug: topyou-seguimiento
 published: 2026-11-03
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-TopYou (通邮, Tongyou, también 通邮集团 o SZTY56) es 深圳市通邮物流科技（集团）股份有限公司, una empresa de transporte internacional de Shenzhen, en China, con líneas a otros países. Si una tienda online china te ha enviado el pedido con TopYou, te habrá dado un número de seguimiento que empieza por TYZ y acaba en YQ: pégalo en la casilla de arriba para rastrear el paquete. El historial de TopYou va desde su almacén en China hasta el vuelo y la aduana, y a veces sigue con los escaneos de la empresa que hace la entrega.
+Para hacer el seguimiento de un paquete de TopYou (通邮, Tongyou, SZTY56 — 深圳市通邮物流科技（集团）股份有限公司, Shenzhen), pega tu número de 17 caracteres (`TYZR`, una letra, diez cifras y `YQ`, o con otra letra en lugar de la `R`) en la casilla de arriba. TopYou cubre el trayecto desde China hasta el vuelo y la aduana de destino y luego entrega el paquete a un transportista local en España (su web puede mostrar ese segundo número, y si es un número postal internacional Peek comprueba Correos). En la web de TopYou escríbelo siempre en mayúsculas.
 
 ## Número de seguimiento de TopYou: cómo es
 
@@ -101,25 +101,25 @@ Peek consulta hasta una vez cada 10 minutos mientras tengas el paquete abierto, 
 
 ## Preguntas sobre el seguimiento de TopYou
 
-### ¿Qué es TopYou (通邮)?
+### ¿Qué es TopYou (通邮) y cómo es el número TYZR…YQ?
 
-Es 深圳市通邮物流科技（集团）股份有限公司, también llamada 通邮集团, Tongyou o SZTY56, una empresa de transporte internacional de Shenzhen, en China, con líneas a otros países. Sus números de envío son TYZR, una letra, diez cifras y YQ, algunos con otra letra en lugar de la R.
+TopYou (深圳市通邮物流科技（集团）股份有限公司, también SZTY56 o Tongyou) es un transportista internacional de Shenzhen, China. Sus códigos de seguimiento tienen 17 caracteres: `TYZR`, una letra, diez cifras y `YQ` (algunos llevan otra letra en lugar de la `R`).
 
 ### ¿Por qué TopYou pone España si mi paquete sigue en China?
 
-Porque la web de seguimiento de TopYou escribe el país de destino junto a sus propios escaneos, incluso en el aeropuerto de salida. Fíjate en el texto: `Arrived at airport of the original country` quiere decir que el paquete sigue esperando su vuelo en China.
+Porque la web de TopYou añade el país de destino junto a sus propios escaneos incluso en el aeropuerto de origen: fíjate en el texto en inglés (`Arrived at airport of the original country` significa que aún está esperando vuelo en China). Peek quita ese país suelto para evitar la confusión.
 
 ### ¿Quién reparte los paquetes de TopYou en España?
 
-Los datos de TopYou pueden traer el número de la empresa que entrega tu paquete, pero no su nombre: pregúntale a la tienda qué empresa lo reparte. Si se trata de un número postal internacional válido, Peek lo consulta en Correos, aunque eso no demuestra que sea Correos quien lo entrega.
+Los datos de TopYou pueden incluir el número del transportista local (`Lastmile Number:` en las líneas postales), pero no su nombre: pregúntale a la tienda qué empresa entrega en España. Si ese segundo código es un número postal internacional válido, Peek lo comprueba automáticamente en [Correos](carrier:correos-spain).
 
-### ¿Tengo que pagar aduanas por un paquete de TopYou?
+### ¿Cuánto se paga de aduanas en España por un paquete de TopYou?
 
-Desde el 1 de julio de 2026, las compras por internet de hasta 150 € que llegan de fuera de la UE pagan un arancel de 3 € por categoría de artículos. Desde el 1 de noviembre de 2026 se paga además una tasa de tramitación de 2 € por categoría, también en compras de más de 150 €. A eso se suma el IVA. Lo normal es que la plataforma te lo cobre al comprar; si no, el transportista puede pedirte que lo pagues antes de entregarte el paquete.
+Desde el 1 de julio de 2026, los envíos online de hasta 150 € desde fuera de la UE llevan un arancel fijo de 3 € por categoría de artículos, y desde el 1 de noviembre de 2026 se añade una tasa de tramitación UE de 2 € por categoría (también por encima de 150 €), además del IVA. Si la tienda ya los cobró al pagar, el repartidor no debería volver a cobrarlos.
 
-### ¿A quién reclamo si no me llega un paquete de TopYou?
+### ¿A quién reclamo si mi paquete de TopYou no llega o está parado?
 
-A la tienda donde compraste: fue ella quien contrató el envío con TopYou. La web de TopYou da un teléfono en Shenzhen (arriba), pero no ofrece atención a los destinatarios.
+Contacta con la tienda o el marketplace donde compraste: es quien contrató el envío con TopYou. La web de TopYou (`szty56.com`) solo publica un teléfono comercial en Shenzhen (`+86 755 8181 9898`, 9:00–18:00 en días hábiles) sin atención al destinatario.
 
 :::sources
 - [TopYou: 通邮集团 (portada, en chino)](https://www.szty56.com/) – teléfono, horario

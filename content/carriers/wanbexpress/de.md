@@ -1,12 +1,12 @@
 ---
 title: WanbExpress Sendungsverfolgung: WNB…YQ-Nummern und Status
-description: WanbExpress-Paket (Wanb Express) aus China verfolgen: Aufbau der WNB…YQ-Nummer, Bedeutung der englischen Status, Zusteller vor Ort und Hilfe bei Problemen.
+description: WanbExpress Sendungsverfolgung (WNB…YQ): 17-stelliges Format, englische Zoll- und iMile-Status, lokaler Zusteller in Deutschland, EU-Abgaben und Hilfe.
 slug: wanbexpress-sendungsverfolgung
 published: 2026-11-21
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-WanbExpress (auch Wanb Express, WanBang Express oder WANB) ist ein chinesischer Paketdienstleister, der Sendungen ins Ausland befördert, wo ein lokaler Zusteller das Paket ausliefert. Hat ein Shop deine Bestellung mit WanbExpress verschickt, beginnt die Nummer mit `WNB` und endet auf `YQ`: Füge sie oben in das Feld ein. Der eigene Tracker von WanbExpress unter tracking.wanbexpress.com kann zusätzlich den Zusteller in deinem Land und dessen Sendungsnummer nennen.
+Verfolge ein WanbExpress-Paket (auch Wanb Express, WanBang Express oder WANB) aus China mit seiner 17-stelligen Nummer (`WNB`, zwei Buchstaben, zehn Ziffern und `YQ`) oben im Feld oder unter tracking.wanbexpress.com. WanbExpress befördert die Sendung ab dem Sortierzentrum in Shenzhen durch den Zoll und übergibt sie an einen lokalen Zusteller (in Deutschland laut Peek-Verläufen etwa iMile): Den Namen und die Nummer des Zustellers sowie eventuelle Zustellfotos zeigt tracking.wanbexpress.com an.
 
 ## WanbExpress-Sendungsnummer: So sieht sie aus
 
@@ -106,25 +106,25 @@ Solange du das Paket geöffnet hast oder am Zustelltag mit aktivierten Mitteilun
 
 ## Fragen zur WanbExpress-Sendungsverfolgung
 
-### Was ist WanbExpress?
+### Was ist WanbExpress und wie sieht eine WNB…YQ-Nummer aus?
 
-Ein chinesischer Versanddienstleister, auch bekannt als Wanb Express, WanBang Express oder WANB. Im Code von Peek beginnen seine Scans in einem Sortierzentrum in Shenzhen, folgen Flug und Zoll und enden mit den Scans des Zustellers im Zielland.
+WanbExpress (Wanb Express, WanBang Express, WANB) ist ein chinesischer Versanddienstleister, dessen Verläufe in Shenzhen beginnen und nach Flug und Zoll an lokale Zusteller übergeben werden. Seine Sendungsnummern bestehen aus 17 Zeichen: `WNB`, zwei Buchstaben, zehn Ziffern und `YQ` (im Unterschied zu `JSE…YQ` von JS Express oder `JXC…YQ` von Juxi Express).
 
-### Wo kann ich ein WanbExpress-Paket verfolgen?
+### Wo kann ich mein WanbExpress-Paket verfolgen?
 
-Oben im Eingabefeld oder direkt beim Tracker von WanbExpress unter tracking.wanbexpress.com. Dort prüft eine Abfrage gegen Bots die Eingabe; der Tracker kann auch den lokalen Zusteller nennen. Gib die gesamte `WNB…YQ`-Nummer ein.
+Füge die gesamte `WNB…YQ`-Nummer oben in Peek ein (ohne Postleitzahl oder Konto) oder öffne tracking.wanbexpress.com (mit Bot-Prüfung), wo zusätzlich der lokale Paketdienst, dessen Nummer und eventuelle Zustellfotos erscheinen können.
 
-### Was bedeutet „Customs declaration completed“ bei WanbExpress?
+### Was bedeuten „Customs declaration completed“ und „Custom clearance completed“?
 
-Dass eine Zollanmeldung für das Paket abgeschlossen wurde. Die Meldung nennt kein Land und ist nicht die Einfuhrfreigabe – diese heißt `Custom clearance completed`. Peek führt beide als „Unterwegs“.
+`Customs declaration completed` meldet nur eine abgeschlossene Zollanmeldung ohne Landesangabe und ist noch keine Einfuhrfreigabe; erst `Custom clearance completed` bestätigt die Freigabe durch den Einfuhrzoll. Für EU-Bestellungen außerhalb der EU gelten seit 1. Juli 2026 3 € Zoll pro Artikel (bis 150 €) sowie seit 1. November 2026 2 € EU-Bearbeitungsgebühr pro Artikel.
 
-### Wer liefert WanbExpress-Pakete in meinem Land aus?
+### Wer liefert WanbExpress-Pakete in Deutschland und Europa aus?
 
-Ein lokaler Paketdienst, den der Tracker von WanbExpress samt eigener Sendungsnummer nennen kann. Der Code von Peek zeigt iMile bei einem Paket nach Deutschland, InPost-Zeilen ins Vereinigte Königreich und einen Scan mit dem Netz von Poste Italiane sowie Übergaben an J&T Express Australia oder Nummern vom Typ `DOFR…HD`/`CNFR…HD` in Frankreich; für andere Länder schau auf tracking.wanbexpress.com nach oder frag den Verkäufer.
+Ein lokaler Paketdienst, der auf tracking.wanbexpress.com genannt werden kann. In den im Peek-Code hinterlegten Verläufen erscheinen iMile in Deutschland, InPost im Vereinigten Königreich, Poste Italiane in Italien sowie `DOFR…HD`/`CNFR…HD`-Nummern in Frankreich; sonst frag den Verkäufer.
 
-### Wen kontaktiere ich, wenn mein WanbExpress-Paket fehlt?
+### Wen kontaktiere ich, wenn mein WanbExpress-Paket hängt oder fehlt?
 
-Den Verkäufer, bei dem du bestellt hast: Er hat die Sendung bei WanbExpress gebucht. Da Peek die Website von WanbExpress nicht abrufen konnte, nennt diese Seite keine direkten Kontaktdaten von WanbExpress.
+Wende dich an den Shop oder Marktplatz, der WanbExpress beauftragt hat, und nach der Übergabe für Zustellversuche an den lokalen Zusteller. Da Peek die Website von WanbExpress nicht prüfen konnte, nennt diese Seite keine direkten WanbExpress-Kontaktdaten.
 
 :::sources
 - [Universal Parcel Scraper: WanbExpress](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/wanbexpress) – Namen, `WNB…YQ`-Format, Browser-Abruf, Scan-Wortlaute und Stufen (einschließlich `Customs inspection has not yet released`, `A-Scan: shipment in international transit`, iMile-, InPost-, Poste-Italiane- und US-Partnerzeilen), UTC-Zeitstempel, Zusteller-Erkennung (`TrackLastMileCarrier`), verworfene Fotos und Adresse

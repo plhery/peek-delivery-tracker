@@ -1,13 +1,13 @@
 ---
 title: OTTO Sendungsverfolgung: Wo ist meine Bestellung?
-description: Wer deine OTTO-Bestellung liefert, wo du die Sendungsnummer findest, was Paket und Spedition kosten und was du tust, wenn die Lieferung nicht ankommt.
+description: OTTO Sendungsverfolgung in „Mein Konto“: Hermes, DHL oder Spedition (2-Mann-Handling), Lieferzeiten, PaketShop (7 Werktage), OTTO Versprechen und 30 Tage Retoure.
 slug: otto-sendungsverfolgung
 picture: Ein hoher Kleiderschrank-Karton auf einer Sackkarre für zwei Träger, ein Lieferwagen wie von Hermes und Pip, der die Tür aufhält.
 published: 2026-10-17
-updated: 2026-11-10
+updated: 2026-11-27
 ---
 
-Den Stand deiner OTTO-Bestellung siehst du in „Mein Konto“ unter „Bestellungen“: Am Artikel führt der Link „Sendungsverfolgung“ zu allen Infos über die Sendung. Was OTTO selbst verkauft, bringt meist Hermes, manchmal DHL, große Möbel und Geräte kommen per Spedition. Artikel anderer Verkäufer auf dem OTTO-Marktplatz verschickt der Verkäufer selbst, mit eigenem Paketdienst und eigener Sendungsnummer.
+Wo deine OTTO-Bestellung gerade ist, siehst du in „Mein Konto“ unter „Bestellungen“ über den Link „Sendungsverfolgung“ am jeweiligen Artikel (oder per Push-Nachricht in der OTTO-App) – deine Kundennummer auf der Rechnung ist keine Sendungsnummer. Pakete vom Verkäufer OTTO liefern meist [Hermes](carrier:hermes-de) oder [DHL](carrier:dhl) (1–2 Werktage), Möbel und Großgeräte bringt Hermes im 2-Mann-Handling per Spedition (2–3 Werktage), während Marktplatz-Verkäufer ihren Paketdienst selbst wählen und dir eine eigene Sendungsnummer geben.
 
 ## Welcher Paketdienst liefert meine OTTO-Bestellung?
 
@@ -130,14 +130,14 @@ Das OTTO Versprechen ist laut OTTO „keine Garantie“: Erstattet OTTO dir den 
 
 Kam das Paket beschädigt an, heb Verpackung und Inhalt auf, mach Fotos und melde dich beim Kundenservice. Mehr dazu: [Zugestellt, aber nicht erhalten](guide:delivered-not-received), [Paket verloren](guide:lost-parcel) und [Paket beschädigt](guide:damaged-parcel).
 
-## Bei OTTO aus Österreich oder der Schweiz bestellen
+## Wie bestelle ich bei OTTO aus Österreich oder der Schweiz?
 
 Nur mit einer Lieferadresse in Deutschland. OTTO liefert „ausschließlich innerhalb Deutschlands“, an jede Adresse außer in Büsingen und auf Helgoland, und Artikel anderer Verkäufer lassen sich gar nicht aus dem Ausland bestellen. Zahlst du auf Rechnung, geht die erste Bestellung nur an die Rechnungsadresse.
 
 - **Österreich:** OTTO verweist auf die Otto GmbH in Graz, ein Unternehmen der Otto Group mit eigenem Shop unter ottoversand.at. Er liefert innerhalb Österreichs, mit eigenen Versandkosten: Ein Paket kostet unter 75 € Bestellwert 3,99 €, eine Spedition 39,99 €, und je Bestellung kommen 2,40 € gesetzliche Paketsteuer dazu. Ab der zweiten Bestellung lässt du dir Pakete dort auch kostenlos, unabhängig vom Bestellwert, an einen von rund 1.600 Hermes PaketShops liefern. Unter otto.at findest du dagegen OTTO Immobilien, ein Wiener Immobilienbüro.
 - **Schweiz:** Hier nennt OTTO kein Unternehmen der Otto Group. OTTO'S (ottos.ch) ist eine Schweizer Ladenkette aus Sursee, 1978 von Otto Ineichen gegründet und in Familienbesitz, also kein Ableger von otto.de.
 
-## OTTO-Bestellung zurücksenden
+## Wie schicke ich eine OTTO-Bestellung zurück?
 
 Du meldest die Rücksendung in „Mein Konto“ an und bekommst das Etikett als QR-Code oder PDF. Kostenlos ist sie innerhalb von 30 Tagen ab Erhalt, auch bei anderen Verkäufern. Artikel, die du seit dem 1. November 2026 beim Verkäufer OTTO bestellt hast, schickst du laut OTTO bis zum 31. Januar 2027 kostenlos zurück. Artikel anderer Verkäufer gehen an den Verkäufer zurück, nicht an OTTO, mit Hermes, DHL oder GLS an ein Lager in Deutschland oder mit DHL eCommerce in eines von acht EU-Ländern, etwa Österreich oder Polen. Ist eine solche Retoure nach 14 Tagen nicht zugestellt oder fehlt 5 Werktage nach der Zustellung die Gutschrift, hilft auch hier das OTTO Versprechen. Für Speditionsware und Pakete über 25 kg vereinbarst du einen Abholtermin. Wo du die Nummer der Retoure findest und wann das Geld kommt: [Retoure verfolgen](guide:returns-tracking).
 

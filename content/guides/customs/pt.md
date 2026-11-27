@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-11-27
 ---
 
-«Retida na alfândega» significa quase sempre o controlo aduaneiro normal das encomendas vindas de fora da União Europeia, e não uma apreensão. Nos [CTT](carrier:ctt), quando falta enviar a fatura ou pagar IVA, direitos e a taxa de manuseamento da UE de 2 €, tens 20 dias desde a chegada a Portugal para concluir o processo no Portal de Desalfandegamento (ctt.pt ou App CTT) — nunca por links recebidos por SMS.
+«Retida na alfândega» significa quase sempre o controlo aduaneiro normal das encomendas vindas de fora da União Europeia, e não uma apreensão. Nos [CTT](carrier:ctt), quando falta enviar a fatura ou pagar IVA, direitos e a taxa de manuseamento da UE de 2 €, tens 20 dias desde a chegada a Portugal para iniciar o processo no Portal de Desalfandegamento (ctt.pt ou App CTT) — nunca por links recebidos por SMS.
 
 ## O que significa «encomenda retida na alfândega»?
 

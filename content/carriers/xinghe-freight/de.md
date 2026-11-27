@@ -6,7 +6,7 @@ published: 2026-11-18
 updated: 2026-11-27
 ---
 
-Xinghe Freight (星和货运, 广州星和货运代理有限公司) ist ein 2014 gegründeter Spediteur aus Guangzhou, dessen Sendungsnummern aus `GZXH`, zehn Ziffern und `YQ` bestehen. Füge deine `GZXH…YQ`-Nummer oben ein: Xinghes Tracking läuft über den Tracker des Spediteurs [GZYL](carrier:gzyl), wo Verläufe teils im Voraus geschrieben werden — Peek liest ihn auf Deutsch aus und filtert vorab eingetragene `Delivered`-Vorhersagen heraus.
+Xinghe Freight (星和货运, 广州星和货运代理有限公司) ist ein 2014 gegründeter Spediteur aus Guangzhou, dessen Sendungsnummern aus `GZXH`, zehn Ziffern und `YQ` bestehen. Füge deine `GZXH…YQ`-Nummer oben ein: Xinghes Tracking läuft über den Tracker des Spediteurs [GZYL](carrier:gzyl), wo Verläufe teils im Voraus geschrieben werden — Peek liest ihn für dich aus und filtert vorab eingetragene `Delivered`-Vorhersagen heraus.
 
 ## Xinghe Freight Sendungsnummer: so sieht sie aus
 

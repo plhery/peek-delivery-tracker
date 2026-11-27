@@ -161,7 +161,7 @@ Per le traduzioni in inglese di JRT: `Cargo delivered to airport` indica la cons
 
 ### Chi consegna i pacchi JRT in Italia?
 
-Sulla linea verso l'Europa JRT affida il pacco a DHL in Germania: in Italia i pacchi DHL Paket arrivano in 2–4 giorni lavorativi con SDA (i cui servizi espresso sono passati a Poste Italiane) o DHL Express, con un tentativo e 15 giorni lavorativi di giacenza in filiale.
+Sulla linea verso l'Europa JRT affida il pacco a DHL in Germania: in Italia i pacchi DHL Paket li consegna SDA (i cui servizi espresso sono passati a Poste Italiane) o DHL Express. Secondo DHL arrivano in 2–4 giorni lavorativi, con un tentativo e 15 giorni lavorativi di giacenza in filiale.
 
 ### Devo pagare dazi o la tassa UE di 2 € su un pacco JRT?
 

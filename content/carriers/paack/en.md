@@ -1,12 +1,12 @@
 ---
 title: Paack tracking: order number, postcode and delivery slots
-description: Track a Paack parcel with your order number and postcode: delivery time slots, status meanings, PaackGo Points, Evri PK numbers and the Colis Privé merger.
+description: Track a Paack parcel with your order number and postcode: delivery time slots, status meanings, PaackGo Points, Evri PK numbers and its union with Colis Privé.
 slug: paack-tracking
 published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Paack is a last-mile delivery carrier for online shops across Spain, Portugal, France, Belgium and Luxembourg (uniting with Colis Privé under the Paack brand from January 2027). Track your parcel and check its expected delivery day and time slot by entering both the order number (or label barcode) and delivery postcode on Paack's tracking page, or paste the number in the box above and choose Paack.
+Paack is a last-mile delivery carrier for online shops. Together with Colis Privé, which takes the Paack brand gradually from January 2027, it is present in Spain, Portugal, France, Belgium and Luxembourg. Track your parcel and check its expected delivery day and time slot by entering both the order number (or label barcode) and delivery postcode on Paack's tracking page, or paste the number in the box above and choose Paack.
 
 ## Paack tracking number: where to find it
 
@@ -85,7 +85,7 @@ Once your parcel reaches `Ready for pickup`, Paack's tracking page lists the Paa
 
 ### What is Paack, and how is it connected to Colis Privé?
 
-Paack is an e-commerce last-mile carrier that joined with Colis Privé in summer 2026 to operate under the single Paack brand rolled out gradually from January 2027 across France, Belgium, Luxembourg, Spain and Portugal. Until rollout completes, track with the carrier named by your shop.
+Paack is an e-commerce last-mile carrier that joined with Colis Privé in summer 2026 to operate under the single Paack brand rolled out gradually from January 2027 across France, Belgium, Luxembourg, Spain and Portugal. Until then, Colis Privé says, delivery and tracking carry on as usual: track your parcel with the carrier your shop names.
 
 :::sources
 - [Colis Privé: Colis Privé and Paack unite under one brand: Paack](https://colisprive.fr/en/blog/colis-prive-and-paack-unite-under-one-brand-paack/) – 16 October 2026: together since summer 2026, one brand from January 2027, five countries, delivery and tracking as usual

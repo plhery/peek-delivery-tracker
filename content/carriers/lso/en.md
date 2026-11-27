@@ -1,12 +1,12 @@
 ---
 title: LSO tracking: airbill numbers, statuses and delivery help
-description: Track an LSO (Lone Star Overnight) parcel: ZY0 airbill format, 1–3 day Ground and overnight times, 4-day delay texting, 15/30-day claims and (888) 688-6909.
+description: Track an LSO (Lone Star Overnight) parcel: ZY0 airbill numbers, 1–3 day Ground and overnight times, 4-day delay texting, 15/30-day claims and (888) 688-6909.
 slug: lso-tracking
 published: 2026-10-15
 updated: 2026-11-27
 ---
 
-LSO (Lone Star Overnight) is a regional parcel carrier based in Texas, delivering across Texas and Oklahoma plus major metropolitan areas of Louisiana, Arkansas, Kansas and Missouri. Track a shipment by entering its 8-character `ZY0` airbill number on [LSO's tracking page](https://www.lso.com/tracking) or pasting it in the box above. The airbill number comes from the shop or sender that booked LSO.
+LSO (Lone Star Overnight) is a regional parcel carrier based in Texas, delivering across Texas and Oklahoma plus major metropolitan areas of Louisiana, Arkansas, Kansas and Missouri. Track a shipment by entering its airbill number (those seen so far are 8 characters starting `ZY0`) on [LSO's tracking page](https://www.lso.com/tracking) or pasting it in the box above. The airbill number comes from the shop or sender that booked LSO.
 
 ## LSO tracking number: what it looks like and where to find it
 
@@ -87,7 +87,7 @@ Peek can notify you of "Every scan", "Important steps" or "Delivery only". For t
 
 ### Who delivers LSO packages, and how long does LSO take?
 
-LSO delivers directly across Texas, Oklahoma and major metro areas of Louisiana, Arkansas, Kansas and Missouri, and works with partner carriers outside that footprint. LSO Ground takes 1 to 3 business days, while next-day services deliver by 8:30 am, 10:30 am or 3:00 pm depending on the service.
+LSO delivers directly across Texas, Oklahoma and major metro areas of Louisiana, Arkansas, Kansas and Missouri, and works with partner carriers outside that footprint. LSO Ground takes 1 to 3 business days, while next-day services deliver by 8:30 am, 10:30 am (later in some rural areas) or 3:00 pm depending on the service.
 
 ### Does LSO deliver on Saturdays or require a signature?
 

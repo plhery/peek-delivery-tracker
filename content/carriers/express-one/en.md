@@ -92,7 +92,7 @@ EXOHU is Express One Hungary. That line means the sender created the shipment de
 
 ### What delivery window does Express One give, and can I redirect my parcel?
 
-The pre-notice gives a 4-hour interval and the morning message gives an indicative 2-hour window plus live stop count. On the first delivery day, you can use the Modification button up to an hour before arrival to change the date, address or divert to a parcel point.
+The pre-notice gives a 4-hour interval and the morning message gives an indicative 2-hour window plus live stop count. On the first delivery day, you can use the Modification button once, up to an hour before arrival, to change the date or address or send the parcel to a parcel point.
 
 ### How long does Express One hold a parcel at an Exopoint or after a missed delivery?
 

@@ -6,7 +6,7 @@ published: 2026-11-03
 updated: 2026-11-27
 ---
 
-JRT (今日通, Jinritong, 厦门今日通商贸有限公司) ist ein grenzüberschreitender Spediteur aus Xiamen in China, dessen Frachtbriefnummern aus `JRT`, zehn Ziffern und `MM` bestehen. Füge deine `JRT…MM`-Nummer oben ins Feld ein, um dein Paket von China über Flug und Zoll bis zur Zustellung zu verfolgen: Nach Europa endet JRT meist bei DHL (in der Schweiz teils bei der Schweizerischen Post), in den USA bei UPS, auf der Irland-Linie bei FedEx, in Spanien bei CTT Express, in Polen bei InPost und in Mexiko bei J&T Express.
+JRT (今日通, Jinritong, 厦门今日通商贸有限公司) ist ein grenzüberschreitender Spediteur aus Xiamen in China, dessen Frachtbriefnummern aus `JRT`, zehn Ziffern und `MM` bestehen. Füge deine `JRT…MM`-Nummer oben ins Feld ein, um dein Paket von China über Flug und Zoll bis zur Zustellung zu verfolgen: Nach Europa endet JRT meist bei DHL (in der Schweiz teils bei der Schweizerischen Post), in den USA bei UPS, auf der FedEx-Linie nach Irland bei FedEx, in Spanien bei CTT Express, in Polen bei InPost und in Mexiko bei J&T Express.
 
 ## JRT Sendungsnummer: so sieht sie aus
 

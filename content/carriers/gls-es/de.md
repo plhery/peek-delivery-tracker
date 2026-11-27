@@ -1,12 +1,12 @@
 ---
 title: GLS Spanien Sendungsverfolgung: Status, Shops & Kontakt
-description: GLS-Paket in Spanien verfolgen: warum die Postleitzahl nötig ist, was die Status bedeuten, Parcel Shops, Paketstationen, Abwesenheit und Kontakt.
+description: GLS Spanien (GLS Spain) Sendungsverfolgung: Nummer + Postleitzahl eingeben, Status auf Deutsch erklärt, 7–9 Tage Parcel-Shop-Lagerung, Abwesenheit und Kontakt.
 slug: gls-spanien-sendungsverfolgung
 published: 2026-11-23
-updated: 2026-11-23
+updated: 2026-11-27
 ---
 
-GLS Spanien (GLS Spain) ist der spanische Ableger der GLS-Gruppe, die 2016 das Paketnetz ASM Transporte Urgente übernommen hat. Zum Verfolgen öffnest du die Sendungsverfolgung auf der Website von GLS Spanien oder in der App My GLS und gibst Sendungsnummer und Postleitzahl der Lieferadresse ein: GLS verlangt beides. Die Nummer kommt vom Shop, der das Paket verschickt hat.
+GLS Spanien (GLS Spain) ist das spanische Paketnetz der GLS-Gruppe (ehemals ASM Transporte Urgente). Zum Verfolgen gibst du auf der GLS-Spanien-Website, in der App My GLS oder oben in Peek die Sendungsnummer zusammen mit der Empfänger-Postleitzahl ein — ohne Postleitzahl zeigt GLS Spanien keinen Verlauf an. Unten findest du alle Statusmeldungen auf Deutsch, Lagerfristen in Parcel Shops und Paketstationen sowie Telefonnummer und Kontakte.
 
 ## GLS Spanien Sendungsnummer und wo du sie findest
 
@@ -82,21 +82,25 @@ Die Nummer allein verrät GLS Spain nicht, und ohne Postleitzahl antwortet GLS n
 
 ## Fragen zur GLS Sendungsverfolgung in Spanien
 
-### Wo ist mein GLS-Paket?
+### Wo ist mein GLS-Spanien-Paket und warum brauche ich die Postleitzahl?
 
-Den aktuellen Stand siehst du in der GLS-Sendungsverfolgung, sobald du Nummer und Postleitzahl der Lieferadresse eingibst. War niemand zu Hause, steht auf der *nota de paso*, wo das Paket liegt – meist im nächsten Parcel Shop.
+GLS Spanien zeigt sowohl bei nationalen als auch bei internationalen Sendungen nur dann den Verlauf an, wenn du Sendungsnummer (`N° de envio / Albarán`) und Empfänger-Postleitzahl eingibst. War niemand zu Hause, steht auf der *nota de paso*, in welchem Parcel Shop oder Depot das Paket liegt.
 
-### Wie lange liefert GLS innerhalb Spaniens?
+### Wie lange liefert GLS innerhalb Spaniens und nach Europa?
 
-GLS nennt als Regellaufzeit 24 Werktage-Stunden für Sendungen innerhalb Spaniens ab Übernahme (Inseln ausgenommen) und 24 bis 96 Stunden für Europa.
+GLS nennt eine Regellaufzeit von 24 Werktagsstunden innerhalb Spaniens ab Übernahme (Inseln ausgenommen) sowie 24 bis 96 Stunden für Sendungen in Europa.
 
-### Wie lange bewahrt GLS ein Paket auf?
+### Wie lange bewahrt GLS Spanien ein Paket im Parcel Shop oder Locker auf?
 
-Etwa eine Woche: laut den GLS-Seiten 7 Kalendertage in Parcel Shops und Paketstationen, oder 9 Tage nach einem erfolglosen Zustellversuch. Ein im Depot gelagertes Paket geht nach 7 Tagen zurück.
+Laut GLS-Hilfe 7 Kalendertage in Parcel Shops und Paketstationen (GLS empfiehlt bei Lockern Abholung innerhalb von 48 Stunden) beziehungsweise 9 Tage nach einer verpassten Haustürzustellung. Depotlagerung endet nach 7 Kalendertagen mit Rücksendung.
 
-### Ist GLS Spanien dasselbe wie ASM?
+### Ist GLS Spanien dasselbe wie ASM Transporte Urgente?
 
-GLS hat ASM übernommen: Im April 2016 kündigte GLS den Kauf von ASM Transporte Urgente an, damals das zweitgrößte Expressnetz des Landes.
+Ja, GLS übernahm ASM: Im April 2016 kündigte GLS den Kauf von ASM Transporte Urgente an, damals das zweitgrößte Expressnetz in Spanien.
+
+### Wie erreiche ich den GLS-Spanien-Kundenservice?
+
+Telefonisch unter +34 91 080 62 29 (Montag bis Freitag 9:00–14:00 und 16:00–19:00 Uhr Madrider Zeit), über den Webchat Gisela auf gls-group.com/ES, per Direktnachricht (@GLSSpain, @gls_spain, @GLS_clientes) oder für formelle Beschwerden an customersupport@gls-spain.com.
 
 :::sources
 - [GLS Spain: Track your shipment with the tracking number](https://gls-group.com/ES/en/receiving-parcels/shipping-tracking/) – Track ID, Status, Schritte im Parcel Shop

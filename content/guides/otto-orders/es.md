@@ -1,17 +1,17 @@
 ---
 title: Seguimiento de pedidos OTTO: transportistas y retrasos
-description: Quién entrega tu pedido OTTO en Alemania, si OTTO envía a España, dónde está el número de seguimiento y qué hacer si el paquete no llega.
+description: Seguimiento de pedido OTTO (otto.de): ¿envía OTTO a España? Dónde ver Sendungsverfolgung, entregas con Hermes y DHL, estados en alemán y qué hacer si no llega.
 slug: seguimiento-pedido-otto
 picture: Una caja alta de armario en una carretilla para dos personas, una furgoneta al estilo de Hermes y Pip sujetando la puerta.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-27
 ---
 
-OTTO (otto.de) solo entrega en Alemania: a España no envía. Si vives en Alemania, el seguimiento está en «Mein Konto» (mi cuenta), en «Bestellungen» (pedidos): cada artículo tiene un enlace «Sendungsverfolgung» (seguimiento del envío). Lo que vende OTTO directamente llega casi siempre con Hermes, a veces con DHL, y los muebles y electrodomésticos grandes llegan por «Spedition» (entrega con empresa de transporte de mercancías). Los artículos de otros vendedores del marketplace de OTTO los envía el propio vendedor, con su transportista y su propio número de seguimiento.
+OTTO (otto.de) entrega únicamente dentro de Alemania y no realiza envíos directos a España. Si compras para una dirección en Alemania, encontrarás el seguimiento en «Mein Konto» (mi cuenta), dentro de «Bestellungen» (pedidos), en el enlace «Sendungsverfolgung». Los paquetes vendidos por OTTO suelen llegar con Hermes o DHL, los muebles y electrodomésticos grandes por «Spedition», y los artículos de otros vendedores del marketplace llevan su propio transportista y número. Abajo explicamos los estados en alemán, plazos y reclamaciones.
 
 La web y la ayuda de OTTO están en alemán. Esta guía te da los textos de OTTO en alemán, con su traducción.
 
-## ¿Qué transportista entrega mi pedido de OTTO?
+## ¿Qué transportista entrega un pedido OTTO (Hermes, DHL, Spedition)?
 
 Depende de quién vende el artículo y de su tamaño. En cada artículo ves el nombre del vendedor y el tipo de envío: paquete («Paket») o mercancía voluminosa («Spedition»). Según OTTO:
 
@@ -33,7 +33,7 @@ Según OTTO, los demás vendedores eligen el transportista «unabhängig von OTT
 - home | Tú | En la puerta, con un vecino o en el sitio donde va el artículo
 :::
 
-## ¿Dónde está el número de seguimiento de OTTO (Sendungsverfolgung)?
+## ¿Dónde encontrar el número de seguimiento OTTO (Sendungsverfolgung) y qué significan los estados?
 
 En tres sitios:
 
@@ -71,7 +71,7 @@ Los números de los transportistas tienen esta forma (las cifras son inventadas)
 :::checker
 :::
 
-## ¿Por qué tarda tanto mi pedido de OTTO o por qué no se mueve el seguimiento?
+## ¿Por qué tarda mi pedido OTTO o por qué no se actualiza el seguimiento?
 
 El plazo de entrega aparece en el artículo antes de pedir. Para artículos en stock, OTTO da estos plazos:
 
@@ -110,7 +110,7 @@ UP Plus no es una suscripción: a los 12 meses vuelves sin más a UP Basic. El e
 
 **Mercancía voluminosa.** Si el artículo está disponible enseguida, eliges la fecha al hacer el pedido, salvo que reserves un montaje o una instalación de pago. Hermes confirma la fecha por correo y SMS y llama entre 30 y 60 minutos antes de llegar. La fecha la cambias en línea en «Mein Konto», y el día de la entrega «Auf der Karte anzeigen» (ver en el mapa) te da el seguimiento en directo. Con otra empresa de transporte, llama al teléfono de su correo para pedir otra fecha. Si el artículo viene directamente del proveedor, tu calle tiene que admitir camiones de hasta 40 toneladas.
 
-## Paquete de OTTO no recibido o marcado como entregado: qué hacer
+## Pedido OTTO no recibido o marcado como «Zugestellt»: qué hacer
 
 Primero mira, luego avisa. En este orden:
 
@@ -132,7 +132,7 @@ OTTO aclara que la promesa es «keine Garantie» (no es una garantía): si OTTO 
 
 Si el paquete llegó dañado, guarda el embalaje y el contenido, haz fotos y contacta con atención al cliente. Más: [paquete entregado pero no recibido](guide:delivered-not-received), [paquete perdido](guide:lost-parcel) y [paquete dañado](guide:damaged-parcel).
 
-## Comprar en OTTO desde España
+## ¿Envía OTTO a España? Cómo comprar desde fuera de Alemania
 
 OTTO no entrega en España: entrega «ausschließlich innerhalb Deutschlands» (solo en Alemania), en cualquier dirección salvo en Büsingen y en la isla de Helgoland, y los artículos de otros vendedores ni siquiera se pueden pedir desde el extranjero. Así que necesitas una dirección de entrega en Alemania. Por defecto, OTTO entrega en tu dirección de facturación, pero puedes poner otra. Si pagas contra factura («Kauf auf Rechnung»), el primer pedido solo va a la dirección de facturación.
 

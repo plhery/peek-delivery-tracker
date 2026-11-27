@@ -1,12 +1,12 @@
 ---
 title: GLS Svizzera tracking: stati, Posta Svizzera e contatti
-description: Segui un pacco GLS in Ticino e nel resto della Svizzera: com'è fatto il numero, perché serve l'NPA, cosa vogliono dire gli stati in inglese e chi contattare.
+description: Tracking GLS in Svizzera e Ticino: numero di pacco e NPA, stati in inglese, consegna con La Posta (Swiss Post GLS), dazi doganali e numero +41 848 48 48 47.
 slug: gls-svizzera-tracking
 published: 2026-10-11
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-GLS è una rete internazionale di spedizione pacchi con sede ad Amsterdam, senza una società propria in Svizzera: i pacchi GLS che arrivano qui li sdogana e li consegna il suo partner, la Posta Svizzera. Per seguirne uno inserisci il numero del pacco e il tuo NPA sulla [pagina di tracking di GLS](https://gls-group.com/EU/en/parcel-tracking), oppure incolla il numero nel box qui sopra. Il numero lo ha il mittente: cercalo nell'e-mail di spedizione del negozio o nella pagina dell'ordine.
+GLS è una rete europea di spedizione pacchi senza società propria in Svizzera: in Ticino, nel resto della Svizzera e nel Liechtenstein lo sdoganamento e la consegna passano dal partner Swiss Post GLS (La Posta Svizzera). Per tracciare un pacco inserisci numero di spedizione e NPA sulla [pagina di tracking di GLS](https://gls-group.com/EU/en/parcel-tracking) oppure incollalo nel box qui sopra. Di seguito: significato degli stati in inglese, invito di ritiro della Posta, dazi e contatti.
 
 ## Numero di tracking GLS: com'è fatto e dove trovarlo
 
@@ -88,25 +88,25 @@ Quando GLS indica che a consegnare è la Posta, la pagina del pacco mostra «Con
 
 ## Domande sul tracking GLS in Svizzera
 
-### Che corriere è GLS?
+### Che corriere è GLS e chi consegna in Svizzera?
 
-È General Logistics Systems, un corriere internazionale con sede ad Amsterdam, fondato nel 1999 e parte di International Distributions Services (ex Royal Mail Group). In Svizzera e nel Liechtenstein il suo partner è Swiss Post GLS, e i pacchi li consegna la Posta.
+GLS (General Logistics Systems) è un corriere europeo con sede ad Amsterdam, fondato nel 1999 e parte di International Distributions Services. In Svizzera e nel Liechtenstein il partner ufficiale è Swiss Post GLS (Basilea): i pacchi vengono sdoganati e consegnati dalla Posta Svizzera.
+
+### Perché GLS Svizzera chiede l'NPA per il tracciamento?
+
+Sia la pagina di tracking di GLS sia Peek richiedono l'NPA di consegna a quattro cifre per mostrare la cronologia completa delle scansioni di un pacco GLS diretto in Svizzera.
 
 ### Quanto tempo ci mette GLS a consegnare in Svizzera?
 
-GLS dà una cifra solo per i pacchi dall'Austria: 2 giorni di spedizione, sia per la Svizzera sia per il Liechtenstein. Per le altre provenienze vale la stima del negozio.
+GLS pubblica un tempo standard solo per le spedizioni dall'Austria: 2 giorni lavorativi verso Svizzera e Liechtenstein. Per gli altri Paesi di partenza vale la stima indicata dal negozio.
 
-### Pacco GLS non consegnato: cosa fare?
+### Quanto tempo ho per ritirare un pacco GLS con invito della Posta?
 
-Cerca nella bucalettere un invito di ritiro della Posta: indica dove ritirare il pacco. Se il tracking lo dà per non consegnato, scrivi al negozio.
+Con un invito di ritiro della Posta, i termini pubblicati dalla Posta per i propri invii sono 7 giorni (15 giorni per invii dall'estero), prolungabili gratuitamente, oppure secondo recapito tramite «I miei invii» (sabato CHF 7.00).
 
-### Quanto tempo ho per ritirare un pacco GLS?
+### Come contattare GLS Svizzera per dogana o pacco non consegnato?
 
-Con un invito di ritiro della Posta, di norma sette giorni, 15 per gli invii dall'estero, e il termine si può prolungare gratis. Sono le regole della Posta per i suoi invii: nessuna pagina le indica espressamente per i pacchi GLS.
-
-### GLS consegna il sabato?
-
-Per la Svizzera né GLS né la Posta lo dicono. Dopo un invito di ritiro, però, la Posta offre per i suoi invii un secondo recapito anche di sabato, a CHF 7.00.
+Per domande su importazioni e dazi, la linea Swiss Post GLS è +41 848 48 48 47 (lunedì–venerdì 8.00–12.00 e 13.30–17.30, CHF 0.08/min da rete fissa) oppure infogls@posta.ch. Per un pacco mancante o danneggiato scrivi prima al negozio.
 
 :::sources
 - [La Posta: Invito di ritiro: ricezione di invii mancati](https://www.post.ch/it/ricezione/invito-di-ritiro) – termini di ritiro, «I miei invii», secondo recapito, inoltro, prezzi

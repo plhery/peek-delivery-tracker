@@ -1,12 +1,12 @@
 ---
 title: Yanwen tracking: numero, stati e chi consegna in Italia
-description: Tracking Yanwen per i pacchi dalla Cina: com'è fatto il numero, cosa vogliono dire gli stati in inglese, chi consegna in Italia e a chi scrivere.
+description: Tracking Yanwen dalla Cina in Italia: codici BYS e YP, significato degli stati in inglese, codice Last Mile del corriere italiano, dogana UE e chi contattare.
 slug: yanwen-tracking
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Yanwen è un'azienda di logistica cinese, nata a Pechino nel 1998, che spedisce all'estero i pacchi dei venditori online e poi li passa a un corriere locale per l'ultimo tratto. Per il tracking inserisci il numero sul sito di Yanwen, [track.yw56.com.cn](https://track.yw56.com.cn/en/index), oppure incollalo nel box qui sopra. Il numero te lo dà il negozio o il marketplace dove hai comprato, nei dettagli di spedizione dell'ordine.
+Yanwen è un'azienda di logistica cinese fondata a Pechino nel 1998 che spedisce ordini online dalla Cina e li affida a un corriere locale in Italia per la consegna finale. Inserisci il codice `BYS`, `YP` o il numero locale su [track.yw56.com.cn](https://track.yw56.com.cn/en/index) oppure incollalo nel box qui sopra. Sotto: traduzione degli stati in inglese (inclusi `Tendered for Delivery` e `Batch delivery to carrier`), come trovare il numero *Last Mile* in Italia e chi contattare se il pacco si ferma.
 
 ## Numero di tracciamento Yanwen: com'è fatto
 
@@ -97,23 +97,23 @@ Gli orari sono letti nel fuso GMT di Yanwen e mostrati nel fuso orario del tuo d
 
 ### Yanwen che corriere è?
 
-È un'azienda di logistica di Pechino, attiva dal 1998, che spedisce dalla Cina per conto dei venditori online. Dice di essere diventata nel 2015 fornitore logistico raccomandato di piattaforme come AliExpress ed eBay.
+È un'azienda di logistica fondata a Pechino nel 1998 che gestisce le spedizioni internazionali dalla Cina per venditori online (fornitore raccomandato di AliExpress ed eBay dal 2015, secondo il proprio profilo). I suoi codici usano prefisso `BYS`, finale `YP` o `YW` per gli Stati Uniti.
 
-### Chi consegna i pacchi Yanwen in Italia?
+### Chi consegna i pacchi Yanwen in Italia (e Poste Italiane li consegna)?
 
-Un corriere locale, che Yanwen nomina nel riquadro «Distributor» quando lo indica. Nei pacchi verso l'Italia visti sul suo sito il nome mancava: lo trovi dal numero «Last Mile Tracking» o chiedendo al negozio.
+Un corriere locale: Yanwen non consegna in proprio in Europa e nessuna sua pagina indica Poste Italiane come partner fisso. Nei pacchi diretti in Italia visti su track.yw56.com.cn il riquadro «Distributor» era vuoto e le scansioni mostravano depositi a Milano, Roma e Torino; controlla il numero «Last Mile Tracking» o chiedi al venditore.
 
-### Poste Italiane consegna i pacchi Yanwen?
+### Cosa significano «Tendered for Delivery» e «End_of_Tracking» su Yanwen?
 
-Yanwen non lo dice: nessuna sua pagina nomina Poste Italiane. I pacchi verso l'Italia visti sul suo sito passavano da depositi a Milano, Roma e Torino di un corriere non nominato.
+`Tendered for Delivery` compare già in Cina prima della dogana d'esportazione: non significa che il pacco è in consegna a casa tua. `End_of_Tracking` vuol dire soltanto che Yanwen ha smesso di aggiornare quel numero, non che il pacco sia consegnato o perso.
 
-### Yanwen ha un numero verde in Italia?
+### Quali sono i tempi di consegna di Yanwen verso l'Italia?
 
-No. L'unico telefono che Yanwen pubblica è il 400-108-5656, un numero di servizio cinese, e per l'Italia non indica contatti. Per l'ordine scrivi al negozio, per la consegna al corriere locale.
+Yanwen non pubblica tempi di consegna per i destinatari: fa fede la stima indicata dal negozio o marketplace sull'ordine. A consegna avvenuta, il sito di Yanwen mostra il numero totale di giorni impiegati (per esempio `Delivered（7d）`).
 
-### Quali sono i tempi di consegna di Yanwen?
+### Yanwen ha un numero verde o un'assistenza in Italia?
 
-Yanwen non pubblica tempi di consegna per chi riceve: vale la stima che il negozio o il marketplace mostra per il tuo ordine. Quando il pacco è consegnato, la riga del tracking indica i giorni impiegati.
+No. L'unico telefono pubblicato è il numero cinese 400-108-5656 (lunedì–sabato 9:00–18:00), senza contatti dedicati per Italia o Svizzera. Per ritardi, smarrimenti o rimborsi contatta il negozio (che può aprire una ricerca tra 10 e 60 giorni dalla spedizione).
 
 :::sources
 - [Yanwen: YW Tracking](https://track.yw56.com.cn/en/index) – sito di tracciamento, lingue, numeri, categorie, riquadro del corriere, scansioni in Italia, telefono

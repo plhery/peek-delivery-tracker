@@ -1,12 +1,12 @@
 ---
 title: Śledzenie Whistl: kto doręcza paczkę i co zrobić
-description: Śledzenie paczki Whistl (Parcelhub): skąd wziąć numer, znaczenie statusów, który przewoźnik doręcza na końcu i do kogo się zwrócić.
+description: Śledzenie Whistl (Parcelhub) z Wielkiej Brytanii: numer UPI lub L+17 cyfr, znaczenie statusów, przejęcie przez Royal Mail/Evri/DPD i do kogo zgłosić zaginięcie.
 slug: sledzenie-whistl
 published: 2026-11-22
-updated: 2026-11-22
+updated: 2026-11-27
 ---
 
-Whistl, dawniej TNT Post UK, to brytyjska firma logistyczna obsługująca wysyłki ze sklepów i przekazująca paczki na ostatni etap przewoźnikom takim jak [Royal Mail](carrier:royal-mail), [Evri](carrier:evri) czy [DPD UK](carrier:dpd-uk). Śledź paczkę w systemie Parcelhub firmy Whistl za pomocą numeru z e-maila wysyłkowego sklepu albo wklej link śledzenia w polu powyżej. Po przekazaniu przesyłki więcej informacji daje zwykle numer i śledzenie przewoźnika doręczającego.
+Whistl (dawniej TNT Post UK) to brytyjska firma logistyczna obsługująca wysyłki ze sklepów w Wielkiej Brytanii i przekazująca paczki na ostatni etap przewoźnikom takim jak [Royal Mail](carrier:royal-mail), [Evri](carrier:evri) czy [DPD UK](carrier:dpd-uk). Śledź przesyłkę w systemie Parcelhub firmy Whistl numerem z e-maila sklepu (np. `L` i 17 cyfr) albo wklej link śledzenia w polu powyżej. Poniżej wyjaśniamy angielskie statusy, co dzieje się po `Handed over to …` i do kogo zwrócić się, gdy paczka nie dociera.
 
 ## Numer śledzenia Whistl: gdzie go znaleźć
 
@@ -112,19 +112,23 @@ Gdy masz przesyłkę otwartą w Peek — albo w dniu dostawy przy włączonych p
 
 ### Czy Whistl jest częścią Royal Mail?
 
-Nie. Whistl UK Ltd to osobna firma, dawniej TNT Post UK. Przekazuje wiele przesyłek do Royal Mail na ostatni etap doręczenia, stąd status `Handed over to Royal Mail`.
+Nie. Whistl UK Ltd to osobna firma (dawniej TNT Post UK), do której należy też Parcelhub. Przekazuje jednak wiele przesyłek do Royal Mail na ostatni etap doręczenia, stąd status `Handed over to Royal Mail`.
 
 ### Kto doręcza paczki Whistl?
 
-Zazwyczaj inny przewoźnik: DPD, Evri, Yodel, Royal Mail, Amazon Shipping, DHL Parcel UK, Parcelforce lub UPS w Wielkiej Brytanii oraz partnerzy zagraniczni.
+Przewoźnik końcowy, nie Whistl: w Wielkiej Brytanii m.in. Royal Mail, Evri, DPD, Yodel, Amazon Shipping, DHL Parcel UK, Parcelforce lub UPS, a przy wysyłkach zagranicznych lokalni partnerzy pocztowi. Nazwę firmy widać w polu „Carrier:” na stronie śledzenia.
 
-### Czy śledzenie Whistl jest wiarygodne?
+### Co oznacza „Handed over to Delivery Carrier” lub „Handed over to Royal Mail”?
 
-Tak. Oficjalne śledzenie Whistl działa pod adresami `web.parcelhub.net`, `despatch.whistl.co.uk` oraz `trackmyitem.whistl.co.uk`, a Parcelhub należy do grupy Whistl.
+Paczka została przekazana przewoźnikowi doręczającemu. Przy usługach częściowo śledzonych (*part-tracked*) bywa to ostatni wpis w Whistl — dalsze kroki sprawdzaj numerem przewoźnika końcowego.
 
 ### Dlaczego mój numer śledzenia Whistl nie działa?
 
-System odpowiada „Unable to find shipment”, gdy nie zna referencji. Sprawdź ją w sklepie albo śledź numer przewoźnika końcowego z jego SMS-a lub e-maila.
+System zwraca „Unable to find shipment”, gdy nie rozpoznaje podanej referencji UPI lub numeru przesyłki. Potwierdź numer w sklepie albo użyj numeru przewoźnika końcowego z jego SMS-a lub e-maila.
+
+### Czy śledzenie Whistl jest wiarygodne i jak zgłosić problem z paczką?
+
+Tak: oficjalne portale to `web.parcelhub.net`, `despatch.whistl.co.uk` oraz `trackmyitem.whistl.co.uk`. W razie zaginięcia lub uszkodzenia napisz do sklepu — Whistl wyraźnie zaznacza, że adres `packagescustomerservices@whistl.co.uk` nie obsługuje pytań prywatnych o śledzenie.
 
 :::sources
 - [Whistl: Contact Us](https://www.whistl.co.uk/contact) – konsumenci kierowani do sprzedawcy, telefon i godziny, e-mail Customer Services, portal śledzenia, siedziba

@@ -1,15 +1,15 @@
 ---
 title: Seguimento Etsy: onde está a tua encomenda e quem a entrega
-description: Porque é que a tua encomenda Etsy ainda diz «Não enviado», que transportadora a entrega, como é o número de seguimento e quando abrir um caso.
+description: Seguir encomenda Etsy em Portugal: estado «Não enviado» ou «Pré-trânsito», entrega pelos CTT e outros operadores, alfândega UE (3 € + 2 €) e abrir um caso.
 slug: seguimento-encomenda-etsy
 picture: Um pacote atado com cordel e selado, uma carrinha dos correios e o Pip a correr apressado.
 published: 2026-10-17
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-A Etsy não envia nada: cada loja faz ou embala as suas encomendas, envia-as pela transportadora que escolhe e junta um número de seguimento quando o serviço o tem. A tua página Compras diz-te se a encomenda já saiu da loja e quando deve chegar; o número de seguimento diz-te onde está agora. Atrasada ou desaparecida? Pergunta primeiro ao vendedor e depois à Etsy.
+A Etsy não envia diretamente os pedidos: cada loja embala a encomenda, escolhe a transportadora e acrescenta o número de seguimento quando o serviço o inclui. Em **Compras e avaliações** vês se o pedido ainda está «Não enviado», «Pré-trânsito» ou «Em trânsito» e a data prevista; com o código da transportadora segues o percurso até Portugal (frequentemente entregue pelos CTT). Abaixo: o que significam os estados Etsy, impostos e alfândega UE e quando abrir um caso.
 
-## Porque é que a minha encomenda Etsy ainda diz «Não enviado»?
+## Porque é que a minha encomenda Etsy está em «Não enviado» ou «Pré-trânsito»?
 
 Porque o vendedor ainda não a fez, embalou ou marcou como enviada. A Etsy calcula a data de entrega prevista assim: «Tempo de processamento + tempo de envio da transportadora = data de entrega prevista». O tempo de processamento é o tempo de que o vendedor precisa para criar o artigo e prepará-lo para envio. O exemplo da Etsy: 3-5 dias de processamento e 2-4 dias de envio dão uma entrega dentro de 5-9 dias. No recibo também vês a data de envio com que o vendedor se comprometeu.
 
@@ -27,7 +27,7 @@ Em **Compras e avaliações** (app: **Eu** → **Compras**), cada encomenda most
 
 Onde está o número na Etsy e no e-mail de envio: [encontrar o número de seguimento](guide:find-tracking-number).
 
-## Que transportadora entrega uma encomenda Etsy?
+## Que transportadora entrega uma encomenda Etsy em Portugal?
 
 A que o vendedor escolheu. A Etsy só vende etiquetas de envio a vendedores dos Estados Unidos, do Canadá e do Reino Unido; os outros compram o porte por conta própria, nos correios ou numa transportadora. Para envios para o estrangeiro, a Etsy indica as transportadoras habituais em cada país:
 
@@ -43,7 +43,7 @@ Se o vendedor usou uma transportadora com ligação direta à Etsy, aparece um b
 
 Desde 1 de julho de 2026, a Etsy deixou temporariamente de vender etiquetas USPS e Canada Post para Portugal, devido, segundo a própria Etsy, a uma nova taxa de processamento da UE que afeta algumas transportadoras. Os vendedores dos Estados Unidos usam então o Global Postal Shipping ou compram a etiqueta noutro sítio. Os pacotes da China seguem um caminho próprio: vê [seguir um pacote da China](guide:tracking-from-china).
 
-## Como é um número de seguimento Etsy?
+## Onde encontrar e como é um número de seguimento Etsy?
 
 É o número da transportadora, não um número da Etsy. Os correios usam o formato postal internacional: 13 caracteres que se mantêm de país para país.
 
@@ -70,7 +70,7 @@ Não sabes qual tens? Escreve-o aqui:
 
 Todos os outros formatos, transportadora a transportadora: [formatos de números de seguimento](guide:tracking-number-formats).
 
-## Porque é que o seguimento Etsy para ou muda?
+## Porque é que o seguimento Etsy parou ou mudou de transportadora?
 
 Quase sempre por uma destas razões:
 
@@ -109,7 +109,7 @@ A Etsy diz que, em geral, é quem compra que paga direitos, impostos e taxas de 
 
 Um pacote atrasado ou que nunca chega porque recusaste ou não pagaste os encargos devidos na entrega não está coberto pela proteção de compras da Etsy. Mais sobre encargos e prazos: [pacote retido na alfândega](guide:customs).
 
-## O que fazer se a tua encomenda Etsy está atrasada ou não chega?
+## Encomenda Etsy atrasada ou não recebida: como abrir um caso?
 
 Segue esta ordem:
 

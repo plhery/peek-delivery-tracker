@@ -1,12 +1,12 @@
 ---
 title: Omniva sūtījumu izsekošana: statusi, pakomāti un kontakti
-description: Izseko Omniva sūtījumu Latvijā: kā izskatās sūtījuma numurs, ko nozīmē statusi, cik ilgi paka gaida pakomātā, kā piegādā kurjers un kur vērsties.
+description: Omniva sūtījumu izsekošana Latvijā: JJEE un EE numuri, statusu tulkojums, 4 dienu glabāšana pakomātā, pāradresācija, muita (3 € + 2 €) un tālrunis 27042424.
 slug: omniva-sutijumu-izsekosana
 published: 2026-10-26
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Omniva piegādā sūtījumus Igaunijā, Latvijā un Lietuvā, un Latvijā tās pakalpojumus sniedz OMNIVA SIA. Sūtījumu vari izsekot Omniva lapā [Sūtījumu izsekošana](https://www.omniva.lv/sutijumu-izsekosana/), Omniva lietotnē, e-pašapkalpošanās vidē mana.omniva.lv vai vienkārši ielīmējot numuru laukā lapas augšā. Izsekošanas kodu atradīsi Omniva īsziņā vai e-pastā par sūtījumu.
+Omniva piegādā sūtījumus Latvijā, Igaunijā un Lietuvā (Latvijā pakalpojumus sniedz OMNIVA SIA) ar pakomātiem un kurjeriem. Sūtījumu ar `JJEE` vai `EE` kodu izseko lapā [Sūtījumu izsekošana](https://www.omniva.lv/sutijumu-izsekosana/), Omniva lietotnē, mana.omniva.lv vai laukā lapas augšā. Zemāk: anglisko statusu nozīme, 4 dienu glabāšana pakomātā un pagarināšana, kurjera piegāde, pāradresācija un kontakti.
 
 ## Omniva sūtījuma numurs
 
@@ -108,21 +108,25 @@ Peek rāda Omniva statusus angliski, katra soļa vietu Omniva tīklā, galamēr�
 
 ## Biežāk uzdotie jautājumi par Omniva sūtījumu izsekošanu
 
-### Cik ilgi ceļo Omniva sūtījums?
+### Cik ilgi ceļo Omniva sūtījums Latvijā un Baltijā?
 
-Omniva norāda, ka no brīža, kad sūtījums nodots Omniva, uz pakomātu tajā pašā valstī tas nonāk 1–2 darba dienās, bet starp Baltijas valstīm – 2–3 darba dienās. Kurjeri Baltijā piegādā 3 dienu laikā, izņemot svētdienas un svētku dienas. Laikapstākļi, satiksme vai brīvu skapīšu trūkums pakomātā piegādi var aizkavēt.
+No brīža, kad sūtījums nodots Omniva, uz pakomātu tajā pašā valstī tas nonāk 1–2 darba dienās, bet starp Baltijas valstīm – 2–3 darba dienās. Kurjeri Baltijā piegādā 3 dienu laikā (izņemot svētdienas un svētku dienas); laikapstākļi, satiksme vai pilns pakomāts piegādi var aizkavēt.
+
+### Cik ilgi paka glabājas Omniva pakomātā un kā pagarināt termiņu?
+
+Pakomātā sūtījums gaida 4 kalendārās dienas (pirms termiņa beigām Omniva atsūta atgādinājuma īsziņu). Omniva lietotnē vai mana.omniva.lv glabāšanu par maksu vari pagarināt pa 4 dienām līdz papildu 12 dienām; neizņemtu sūtījumu atgriež sūtītājam.
 
 ### Vai Omniva sūtījumu var izsekot pēc tālruņa numura?
 
-Omniva lapās aprakstīta izsekošana tikai pēc sūtījuma numura. Taču, ja izveidosi kontu e-pašapkalpošanās vidē mana.omniva.lv, visus savus turpmākos sūtījumus varēsi izsekot vienuviet.
+Omniva lapās aprakstīta izsekošana tikai pēc sūtījuma numura (līdz 21 zīmei, derīgs 6 mēnešus). Izveidojot kontu e-pašapkalpošanās vidē mana.omniva.lv, turpmākos sūtījumus varēsi skatīt vienuviet.
 
-### Ko nozīmē „Delivery attempt made“?
+### Ko nozīmē „Delivery attempt made“ Omniva izsekošanā?
 
-Kurjers mēģināja sūtījumu piegādāt, bet tas neizdevās: angliskais teksts tikai izklausās pēc piegādes. Ja kurjers tevi nesazvana, S–L izmēra sūtījums 4 dienas gaida tuvējā pakomātā.
+Kurjers mēģināja sūtījumu piegādāt, bet tas neizdevās (angļu teksts tikai izklausās pēc piegādes). Omniva veic vismaz divus mēģinājumus, bet, ja kurjers tevi nesazvana, S–L izmēra sūtījums 4 dienas gaida tuvējā pakomātā, XL – piegādes centrā.
 
-### Vai ar Omniva var izsekot starptautisku sūtījumu?
+### Kā sazināties ar Omniva par kavētu, bojātu vai pazudušu sūtījumu?
 
-Jā, lapā Sūtījumu izsekošana var izsekot arī sūtījumus no ārzemēm, taču, kā brīdina Omniva, to statusi šķirošanas un muitas dēļ var atjaunoties citādi. Sūtījumu ar citas valsts pasta numuru Peek izseko pie sūtītāja valsts pasta, ja vien neizvēlies Omniva ar „Change“.
+Zvanīt Privāto klientu atbalsta centram pa tālruni +371 27042424 (P–Pk 8.00–18.00, S 9.00–15.00) vai rakstīt uz info@omniva.lv. Par bojājumu vai nozaudēšanu vispirms ziņo sūtītājam; rakstisku sūdzību var iesniegt 6 mēnešu laikā.
 
 :::sources
 - [Omniva: Laipni lūdzam!](https://www.omniva.lv/) – krāpnieki, Omniva lietotne, kāpēc sūtījums novirzīts

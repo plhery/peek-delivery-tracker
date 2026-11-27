@@ -1,12 +1,12 @@
 ---
 title: DHL eCommerce Iberia tracking: statuses and ServicePoints
-description: Track a DHL eCommerce parcel in Spain or Portugal: what each status means, missed deliveries, ServicePoints, CTT Express and what to do if it's lost or damaged.
+description: Track a DHL eCommerce Iberia parcel in Spain or Portugal: 10-digit and JJD numbers, status meanings, ServicePoints, CTT Express handover and claim contacts.
 slug: dhl-ecommerce-iberia-tracking
 published: 2026-10-11
-updated: 2026-11-15
+updated: 2026-11-27
 ---
 
-DHL eCommerce Iberia is DHL's parcel network in Spain and Portugal, formerly DHL Parcel Iberia, and the DHL Parcel name still turns up in places. Paste the number in the box above to track the parcel; on its page, "Open the DHL eCommerce Iberia website" takes you to the same shipment on DHL's own tracking page. The number comes from the shop that sent the parcel.
+DHL eCommerce Iberia (formerly DHL Parcel Iberia) is DHL's parcel network in Spain and Portugal, partnering with CTT Express for consumer deliveries in Spain and CTT Expresso in Portugal under their May 2026 joint venture. Paste your 10-digit, two-letter + 7-digit + `0`, or `JJD` number from the shop in the box above (and open DHL's tracker directly from the parcel page). Below: English and Spanish status meanings, ServicePoint pickups and what to do if a parcel is delayed or damaged.
 
 ## DHL eCommerce tracking number: where it is and what it looks like
 
@@ -77,17 +77,25 @@ DHL's scans carry no time zone: Peek reads them on the clock of the scan's place
 
 ## Questions about DHL eCommerce tracking
 
-### Is DHL eCommerce the same as DHL Express?
+### Is DHL eCommerce Iberia the same as DHL Express?
 
-No. DHL Express waybills have their own tracking (the MyDHL+ tracking page), and Peek treats the two as separate carriers. A 10-digit number can belong to either: Peek asks DHL Express first when its check digit passes, and if DHL Express knows the number, it wins.
+No. DHL Express waybills have their own MyDHL+ tracker, and Peek treats the two as separate carriers. Because 10-digit numbers can fit either, Peek asks DHL Express first when its check digit passes, and DHL Express wins if it knows the shipment.
 
-### Why does my DHL eCommerce parcel have no tracking?
+### Does CTT Express deliver DHL eCommerce parcels in Spain and Portugal?
 
-Check the number and the carrier with the shop: 10-digit numbers are shared by several carriers (see the table above). An old shipment can also drop out of DHL's tracking; how long DHL keeps the history isn't known.
+For many consumer shipments, yes. Under the joint venture signed on 12 May 2026, CTT Express handles consumer deliveries in Spain while DHL eCommerce's Portugal business moves to CTT Expresso. If tracking provides a CTT Express number, follow it under [CTT Express](carrier:ctt-express).
 
-### Does CTT Express deliver DHL eCommerce parcels?
+### What do "Delivered, POD pending" and "Shipment with incidence" mean?
 
-Some of them. Under the joint venture DHL eCommerce and CTT signed in May 2026, CTT Express takes deliveries to consumers in Spain, and DHL eCommerce's business in Portugal moves to CTT Expresso. If tracking gives you a CTT Express number, track it with [CTT Express](carrier:ctt-express).
+`Delivered, POD pending` means the parcel is marked delivered before proof of delivery is uploaded — it can appear early, and another delivery round or failed attempt may still follow. `Shipment with incidence` flags a problem, and DHL's own scan instructs recipients to contact the sender.
+
+### Why does my DHL eCommerce Iberia parcel have no tracking?
+
+Confirm both the number and carrier with the shop, as 10-digit numbers are shared across DHL Express, Mondial Relay, GLS Spain and others. Older shipments can also age out of DHL's tracker.
+
+### Who do I contact if a DHL eCommerce Iberia parcel is lost or damaged?
+
+Contact the shop first: DHL's own incidence scan directs recipients to the sender, and under EU Your Europe rules the seller is liable for damage until delivery and must deliver within 30 days unless another date was agreed. For local delivery queries, check DHL eCommerce's website for Spain or Portugal.
 
 :::sources
 - [CTT: CTT e DHL Ecommerce selam parceria estratégica](https://www.ctt.pt/grupo-ctt/media/noticias/ctt-e-dhl-ecommerce-selam-parceria-estrategica-para-criar-rede-de-distribuicao-de-encomendas-mais-completa-da-peninsula-iberica) – joint venture signed 12 May 2026, DHL eCommerce Portugal to CTT Expresso, CTT Express for consumers in Spain, DHL for business deliveries

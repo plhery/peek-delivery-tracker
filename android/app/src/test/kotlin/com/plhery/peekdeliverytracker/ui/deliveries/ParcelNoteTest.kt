@@ -369,7 +369,8 @@ class ParcelNoteTest {
         compose.runOnUiThread { source.notes.online(source) }
         settle()
         assertEquals(0, count(PARCEL_NOTE_RETRY))
-        assertEquals(listOf(gift to "box.jpg", gift to "label.jpg"), source.filesAdded)
+        // Both go again at once, as they first went, so either may get there first.
+        assertEquals(listOf(gift to "box.jpg", gift to "label.jpg"), source.filesAdded.sortedBy { it.second })
     }
 
     @Test

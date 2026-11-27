@@ -60,7 +60,7 @@ Liccardi 的追踪系统会同时发布数字结果码（*codici esito*）和意
 - **收件人支持与投诉入口：** [liccarditrasporti.com/assistenza-reclami-destinatari/](https://www.liccarditrasporti.com/assistenza-reclami-destinatari/)。
 - **总部与中心枢纽：** *F.lli Liccardi S.r.l.*（税号 P.IVA `06588280633`），Via Paolo Borsellino 133（注册地址 123），80025 Casandrino (NA), Italy。
 
-> 请警惕要求线上支付小额费用以重新安排意大利快递派送的诈骗短信。任何派送变更请直接与商家核实，或通过 Liccardi 官网及官方客服渠道确认。详见[警惕快递诈骗短信](guide:delivery-scam-texts)（英文）。
+> 请警惕要求线上支付小额费用以重新安排意大利快递派送的诈骗短信。任何派送变更请直接与商家核实，或通过 Liccardi 网站及官方客服渠道确认。详见[警惕快递诈骗短信](guide:delivery-scam-texts)（英文）。
 
 ## 使用 Peek 追踪 Liccardi Express Courier 包裹
 

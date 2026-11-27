@@ -40,7 +40,7 @@ Early Bird 查询页按你访问的语言显示每一步：英文页为英文，
 | `The package has been delivered to your mailbox.` | `Paketet är levererat till din postlåda.` | 已投进你的信箱。 |
 | `The package has been delivered in a bag on your mailbox.` | `Paketet är levererat i en påse på din postlåda.` | 已装袋挂在你的信箱上。 |
 
-破折号表示 Peek 代码未收录该步的瑞典语原文。在 Early Bird 官网上，第一步也可能写作“Delivery booked”，说明包裹尚未到达 Early Bird。
+破折号表示 Peek 代码未收录该步的瑞典语原文。在 Early Bird 网站上，第一步也可能写作“Delivery booked”，说明包裹尚未到达 Early Bird。
 
 **早期系统的瑞典语记录。** Early Bird 旧系统无论访问何种语言均输出瑞典语。其下单提示以 `Leveransen till dig är bokad av e-handlaren.`（电商已为你预订派送）开头，随后可见：
 
@@ -80,7 +80,7 @@ Early Bird 查询页按你访问的语言显示每一步：英文页为英文，
 
 Early Bird 的[联系我们页面](https://earlybird.se/en/contact-us)未公布电话或邮箱。你需选择主题（如“Damaged package”、“Incorrect delivery”或“Received someone else's package”），并在表单中填写运单号和简要说明。退款或退货请联系商家。Peek 无法替你联系 Early Bird 或商家。
 
-> Early Bird 不会收取额外费用才放行包裹：运费通常已在购物时结清。切勿点击意外消息中的链接或付款，请直接在 Early Bird 官网查询页核实。更多见[快递诈骗短信识别](guide:delivery-scam-texts)（英文）。
+> Early Bird 不会收取额外费用才放行包裹：运费通常已在购物时结清。切勿点击意外消息中的链接或付款，请直接在 Early Bird 网站查询页核实。更多见[快递诈骗短信识别](guide:delivery-scam-texts)（英文）。
 
 ## 用 Peek 跟踪 Early Bird 包裹
 

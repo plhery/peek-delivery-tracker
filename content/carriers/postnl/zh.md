@@ -59,7 +59,7 @@ PostNL 或 Spring GDS 负责把包裹运到你所在国家。Spring GDS 表示�
 - **加拿大：** [Canada Post](carrier:canada-post)。如果其 Track 工具查不到记录，Canada Post 要求由寄件人联系原寄国邮政发起调查。
 - **澳大利亚：** [Australia Post](carrier:australia-post)。
 
-NL 单号遵循万国邮政联盟（UPU）S10 标准（各国邮政互换邮件共用的编号规则），因此包裹入境后你可以直接用同一单号在当地邮政官网查询；不过无追踪的 `UL` 平邮小包在当地可能查不到任何记录。
+NL 单号遵循万国邮政联盟（UPU）S10 标准（各国邮政互换邮件共用的编号规则），因此包裹入境后你可以直接用同一单号在当地邮政网站查询；不过无追踪的 `UL` 平邮小包在当地可能查不到任何记录。
 
 派送尝试次数、纸质通知单和保管天数均按当地承运商规则执行，见[派送未成功怎么办](guide:missed-delivery)（英文）和[无人认领包裹](guide:uncollected-parcel)（英文）；关税和税费见[包裹卡在海关怎么办](guide:customs)（英文）。
 
@@ -77,7 +77,7 @@ NL 单号遵循万国邮政联盟（UPU）S10 标准（各国邮政互换邮件�
 
 ## 荷兰邮政客服与联系方式
 
-以下为 PostNL 与 Spring GDS 官网说明的咨询途径：
+以下为 PostNL 与 Spring GDS 网站说明的咨询途径：
 
 - **postnl.post：** 页面提示“荷兰境外的派送问题请联系你的网店”；荷兰境内派送则引导至 PostNL 客服。
 - **Spring GDS：** 出于数据隐私及与卖家的合同限制，不直接与个人消费者讨论快件；卖家持有账号并负责向 Spring GDS 发起调查。

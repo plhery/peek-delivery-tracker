@@ -6,20 +6,20 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-递一物流（CNE Express，全称递一国际物流有限公司，CNE EXPRESS CO LTD）创立于 2003 年、总部位于上海青浦区，并在嘉兴和东莞建有日处理量超 200 万票的大型分拣中心（见 [递一官网简介](https://www.cne.com/en/about/intro)），为亚马逊、eBay、沃尔玛、TikTok、Temu 及 SHEIN 等跨境平台卖家将包裹空运发往欧美加澳巴等国并交由当地合作伙伴派送。你可以在 [CNE 中文查件页](https://www.cne.com/track) 或 [英文查件页](https://www.cne.com/en/track) 查件，也可以直接把单号粘贴到上方查询框。单号由发货卖家提供。
+递一物流（CNE Express，全称递一国际物流有限公司，CNE EXPRESS CO LTD）创立于 2003 年、总部位于上海青浦区，并在嘉兴和东莞建有日处理量超 200 万票的大型分拣中心（见 [递一网站简介](https://www.cne.com/en/about/intro)），为亚马逊、eBay、沃尔玛、TikTok、Temu 及 SHEIN 等跨境平台卖家将包裹空运发往欧美加澳巴等国并交由当地合作伙伴派送。你可以在 [CNE 中文查件页](https://www.cne.com/track) 或 [英文查件页](https://www.cne.com/en/track) 查件，也可以直接把单号粘贴到上方查询框。单号由发货卖家提供。
 
 ## 递一物流（CNE）单号格式：`3A5V` 开头 13 位编号
 
-递一官网未公布固定格式说明，Peek 识别的 CNE 运单号为 `3A5V` 加 9 位数字，共 13 位字符（以下示例数字均为虚构）：
+递一网站未公布固定格式说明，Peek 识别的 CNE 运单号为 `3A5V` 加 9 位数字，共 13 位字符（以下示例数字均为虚构）：
 
 | 单号（虚构） | 格式说明 |
 | --- | --- |
 | `3A5V482917365` | `3A5V` 加 9 位数字：标准递一物流（CNE Express）单号。 |
 | `3A5V48291736` | 只有 8 位数字（共 12 位）：不符合 CNE 格式。Peek 不会认定为 CNE；它不符合任何快递公司的格式，添加后 Peek 会通过物流查询服务查找。请检查是否漏掉了一位数字。 |
 
-在 Peek 中粘贴时，字母大小写、空格和连字符都不影响识别；CNE 官网查件页支持用空格或逗号分隔批量查多个单号。找不到单号请参阅 [如何找到你的快递单号](guide:find-tracking-number)（英文）、[Temu 订单追踪指南](guide:temu-orders)（英文）或 [SHEIN 订单追踪指南](guide:shein-orders)（英文）。
+在 Peek 中粘贴时，字母大小写、空格和连字符都不影响识别；CNE 网站查件页支持用空格或逗号分隔批量查多个单号。找不到单号请参阅 [如何找到你的快递单号](guide:find-tracking-number)（英文）、[Temu 订单追踪指南](guide:temu-orders)（英文）或 [SHEIN 订单追踪指南](guide:shein-orders)（英文）。
 
-**尾程单号与邮政渠道。** 在 CNE 查件页「Shipment Information」一栏中，还可能显示卖家订单号和 `Last mile number`（目的国当地尾程快递单号及当地快递官网与电话）。此外 CNE 也代理销售中国邮政国际 e 邮宝和小包，遇到 `CN` 结尾国际邮政单号请参阅 [中国邮政](carrier:china-post)。
+**尾程单号与邮政渠道。** 在 CNE 查件页「Shipment Information」一栏中，还可能显示卖家订单号和 `Last mile number`（目的国当地尾程快递单号及当地快递网站与电话）。此外 CNE 也代理销售中国邮政国际 e 邮宝和小包，遇到 `CN` 结尾国际邮政单号请参阅 [中国邮政](carrier:china-post)。
 
 ## 递一物流（CNE）状态是什么意思
 
@@ -78,7 +78,7 @@ CNE 查件页会在轨迹上方显示汇总状态（对应中文与 Peek 阶段�
 - **全国服务热线**：`400-021-5600`（中国国内热线）。
 - **上海总部电话与地址**：`021-5109 6677`，上海市青浦区华隆路 1777 号 G 幢 15 楼。
 - **客服时间**：周一至周日 `08:30–18:00`（未标注时区，分拣中心全天候运行）。
-- **在线咨询/投诉表单**：官网联系页支持选择「Complaint」填写电话、邮箱、姓名、运单号与留言（无公开客服邮箱）。
+- **在线咨询/投诉表单**：其网站联系页支持选择「Complaint」填写电话、邮箱、姓名、运单号与留言（无公开客服邮箱）。
 
 ## 用 Peek 跟踪递一物流（CNE Express）包裹
 
@@ -104,7 +104,7 @@ Peek 直接读取 CNE 轨迹，展示规范化阶段（「已生成面单」「�
 
 ### `Arrived at destination` 是送到当地邮局了吗？
 
-还没有。它只表示国际航班已落地目的国，之后还需分拣和进口清关才会交给当地快递。由于 CNE 把这一行记为北京时间（冬季比伦敦快 8 小时、比巴黎/柏林快 7 小时）而海外节点可能按当地时间记录，在官网上看起来可能会出现时间乱序。
+还没有。它只表示国际航班已落地目的国，之后还需分拣和进口清关才会交给当地快递。由于 CNE 把这一行记为北京时间（冬季比伦敦快 8 小时、比巴黎/柏林快 7 小时）而海外节点可能按当地时间记录，在其网站上看起来可能会出现时间乱序。
 
 ### 递一物流寄到欧美一般要几天？
 
@@ -117,8 +117,8 @@ CNE 给卖家的参考时效为：优先专线（CNE Priority Express）发美�
 :::sources
 - [CNE：英文追踪页](https://www.cne.com/en/track) – 英文状态标签、Shipment Information 与 View POD
 - [CNE：中文运单追踪页](https://www.cne.com/track) – 「未发送」与「扣关」对应中文含义
-- [CNE：英文官网首页](https://www.cne.com/en) – 2003 年上海创立、跨境线路与合作电商平台
-- [递一物流：中文官网首页](https://www.cne.com/) – 递一物流及递一国际物流有限公司名称
+- [CNE：英文网站首页](https://www.cne.com/en) – 2003 年上海创立、跨境线路与合作电商平台
+- [递一物流：中文网站首页](https://www.cne.com/) – 递一物流及递一国际物流有限公司名称
 - [CNE：关于我们](https://www.cne.com/en/about/intro) – 嘉兴与东莞分拣中心及日处理超 200 万票规模
 - [CNE：全球物流合作伙伴](https://www.cne.com/en/about/partner) – USPS、Royal Mail、La Poste、DHL、Evri、DPD 等尾程合作伙伴
 - [CNE：联系我们](https://www.cne.com/en/about/contact) – 400-021-5600 热线、上海总部、服务时间与 Complaint 表单

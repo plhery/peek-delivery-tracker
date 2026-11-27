@@ -40,7 +40,7 @@ ActiveTracing 为每条记录提供英文或德文状态句、货运站名称（
 
 ## 派送预约（*Avisierung*）、清关与货运规则
 
-根据 [DHL Freight 德国官网](https://www.dhl.com/de-en/home/freight.html)及 [DHL Freight 帮助中心](https://www.dhl.com/de-en/home/freight/help-center-for-european-road-and-rail.html)：
+根据 [DHL Freight 德国网站](https://www.dhl.com/de-en/home/freight.html)及 [DHL Freight 帮助中心](https://www.dhl.com/de-en/home/freight/help-center-for-european-road-and-rail.html)：
 
 - **派送预约（*Avisierung*）：** 货件在抵达末端货运站后可能停留在 `Shipment in warehouse - Awaiting delivery appointment`，直至与收货人敲定送货日期；约妥后即更新为 `Delivery appointment booked`。若长时间等待，请联系发货人或末端货运站。
 - **ActiveTracing 保留 6 个月：** [activetracing.dhl.com](https://activetracing.dhl.com/DatPublic/datSelection.do) 支持英语、德语、西班牙语、法语、瑞典语、波兰语和意大利语，在线保存最近 **6 个月**的货运历史。
@@ -56,7 +56,7 @@ ActiveTracing 为每条记录提供英文或德文状态句、货运站名称（
 
 ## DHL Freight 客服与联系方式
 
-以下渠道公布于 [DHL Freight 帮助中心](https://www.dhl.com/de-en/home/freight/help-center-for-european-road-and-rail.html)与 [DHL Freight 德国官网](https://www.dhl.com/de-en/home/freight.html)：
+以下渠道公布于 [DHL Freight 帮助中心](https://www.dhl.com/de-en/home/freight/help-center-for-european-road-and-rail.html)与 [DHL Freight 德国网站](https://www.dhl.com/de-en/home/freight.html)：
 
 - **欧洲公铁货运帮助中心：** [dhl.com/de-en/home/freight/help-center-for-european-road-and-rail.html](https://www.dhl.com/de-en/home/freight/help-center-for-european-road-and-rail.html) —— 提供常见问题、*How to Prepare a Claim*、Incoterms 2020、服务条款及危险品规则。
 - **Viva 与货运站查询：** 帮助中心内置 DHL Freight 的 AI 客服助手 **Viva** 以及按国家查找货运站和办事处的 *Freight Terminals and Locations*。

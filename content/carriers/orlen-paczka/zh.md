@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-ORLEN Paczka 是波兰本土的包裹配送网络（前身为 Paczka w RUCHu），主要配送至自助快递柜和自提点。你可以在 ORLEN Paczka 官网 orlenpaczka.pl 的查件页查询，或直接把单号粘贴到上方输入框。运单号即商家或卖家通知里的 13 位包裹编号。
+ORLEN Paczka 是波兰本土的包裹配送网络（前身为 Paczka w RUCHu），主要配送至自助快递柜和自提点。你可以在 ORLEN Paczka 网站 orlenpaczka.pl 的查件页查询，或直接把单号粘贴到上方输入框。运单号即商家或卖家通知里的 13 位包裹编号。
 
 ## ORLEN Paczka 运单号格式与查找位置
 
@@ -20,7 +20,7 @@ ORLEN Paczka 包裹单号为 13 位纯数字，以 `210` 开头并以校验位�
 单号通常出现在以下位置：
 
 - **网店或卖家的订单详情页。**
-- **官网查件页的复制链接按钮**，复制出的链接里带有运单号。
+- **其网站查件页的复制链接按钮**，复制出的链接里带有运单号。
 
 取件码和手机号码都不是运单号。如果完全没收到单号，请参阅[如何查找运单号](guide:find-tracking-number)（英文）。
 
@@ -57,7 +57,7 @@ ORLEN Paczka 配送至自助快递柜（*automat paczkowy*，大量设在 ORLEN 
 
 ## 时效、延误、破损与理赔
 
-ORLEN 将次日达列为核心优势，其官网常见问题给出具体数据：网店包裹 1 个工作日送达自提点（98% 的包裹），个人寄件或 Vinted 包裹为 1 至 3 个工作日。如果轨迹停滞，请联系与 ORLEN Paczka 签约的商家，并参阅[物流停止更新怎么办](guide:tracking-not-updating)（英文）。若状态提示包裹丢失，ORLEN Paczka 要求通过在线联系表单提交客服工单；另见[包裹丢失怎么办](guide:lost-parcel)（英文）。
+ORLEN 将次日达列为核心优势，其网站常见问题给出具体数据：网店包裹 1 个工作日送达自提点（98% 的包裹），个人寄件或 Vinted 包裹为 1 至 3 个工作日。如果轨迹停滞，请联系与 ORLEN Paczka 签约的商家，并参阅[物流停止更新怎么办](guide:tracking-not-updating)（英文）。若状态提示包裹丢失，ORLEN Paczka 要求通过在线联系表单提交客服工单；另见[包裹丢失怎么办](guide:lost-parcel)（英文）。
 
 **延误：** 若包裹超出承诺时限送达（即交寄次日起超过 4 个工作日），ORLEN Paczka 说明收件人可申请退还未履约服务的运费金额。
 
@@ -67,7 +67,7 @@ ORLEN 将次日达列为核心优势，其官网常见问题给出具体数据�
 
 ## ORLEN Paczka 客服与联系方式
 
-Allegro Delivery 包裹请直接联系 Allegro 客服；普通网购订单请先联系网店。ORLEN Paczka 自家联系入口位于波兰语官网 orlenpaczka.pl 的 “Kontakt” 下，以下渠道均仅提供波兰语服务：
+Allegro Delivery 包裹请直接联系 Allegro 客服；普通网购订单请先联系网店。ORLEN Paczka 自家联系入口位于波兰语网站 orlenpaczka.pl 的 “Kontakt” 下，以下渠道均仅提供波兰语服务：
 
 - **客服热线：** 22 33 33 999（按运营商资费计费）；波兰时间周一至周五 7:00–22:00、周六 9:00–19:00（常见问题页写至 16:00）、周日 10:00–16:00。
 - **[在线联系表单](https://www.orlenpaczka.pl/formularz-kontaktowy/)：** 适用于未收到取件码或包裹丢失等情况。
@@ -79,7 +79,7 @@ ORLEN Paczka 绝不在短信中附带链接，也不会通过链接要求补缴�
 
 [Peek](/) 会识别 `210` 开头且校验位正确的 13 位单号。由于多家快递共用这一格式，Peek 会同时询问 ORLEN Paczka、Ukrposhta 和 [FAN Courier](carrier:fan-courier)，并在其本国以外仅当前三家都查不到时再依次询问 Delhivery、Econt 和 Paquetexpress；当只有 ORLEN Paczka 查到时，界面显示“ORLEN Paczka 有这个包裹的记录。”对于其他以 2 或 3 开头的 13 位单号，请点击“更换”（已添加包裹点击“更换快递公司”）手动选定 ORLEN Paczka，或直接粘贴带 13 位单号的 orlenpaczka.pl 查询链接。7 位和 10 位寄件码无法在 Peek 跟踪，`AD` 开头的单号也不属于 ORLEN Paczka。
 
-Peek 会保留波兰语原文状态，在地图上标出提及的分拣中心城市并显示取件时间；时间按华沙时间解析并换算为你设备的本地时区（在 peektracker.com 及 iPhone、Android 应用中，物流历史底部注明“时间按你所在的时区显示：”及你的时区名称）。Peek 不显示具体自提点地址、预计送达日、重量或寄件人，也会隐去退件新单号。已转交他国承运商的 Vinted 包裹不会跨接追踪，会停留在运输中状态。已取件的包裹数月后会从 ORLEN Paczka 官网下线。
+Peek 会保留波兰语原文状态，在地图上标出提及的分拣中心城市并显示取件时间；时间按华沙时间解析并换算为你设备的本地时区（在 peektracker.com 及 iPhone、Android 应用中，物流历史底部注明“时间按你所在的时区显示：”及你的时区名称）。Peek 不显示具体自提点地址、预计送达日、重量或寄件人，也会隐去退件新单号。已转交他国承运商的 Vinted 包裹不会跨接追踪，会停留在运输中状态。已取件的包裹数月后会从 ORLEN Paczka 网站下线。
 
 当你在 Peek 中打开包裹页面时，Peek 最高每 10 分钟检查一次。由于 ORLEN Paczka 不提供预计送达日期也不推送派送中扫描，Peek 不会切换到派送日高频或 2 分钟检查模式；未打开页面时每小时检查一次。若在“已生成面单”或“已揽收”状态下满 12 小时，或连续两天无新动态，无论是否打开页面均每小时检查一次；“已生成面单”满七天无动态则每 6 小时一次。
 
@@ -95,7 +95,7 @@ ORLEN Paczka 是 2021 年推出的波兰包裹配送服务，前身为 Paczka w 
 
 ### ORLEN Paczka 有英文查询吗？
 
-ORLEN Paczka 官网每条状态均以波兰语显示，你可以对照上方的状态表查看每条记录的中文含义。
+ORLEN Paczka 网站每条状态均以波兰语显示，你可以对照上方的状态表查看每条记录的中文含义。
 
 ### ORLEN Paczka 寄国外吗？
 

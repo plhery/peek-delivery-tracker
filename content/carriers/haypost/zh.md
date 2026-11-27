@@ -67,7 +67,7 @@ HayPost 返回英文万国邮政联盟（IPS）扫描记录，并标注运输方
 - **YES 埃里温特快预约电话：** `+374 10 514 513`。
 - **邮箱：** `info@haypost.am`。
 - **总部地址：** 65/5 Arshakunyats Ave., Yerevan 0061, Republic of Armenia。
-- **在线联系表单：** 见 [haypost.am/en/contact-us](https://www.haypost.am/en/contact-us)，官网 [haypost.am](https://www.haypost.am/en) 同时提供在线客服聊天。
+- **在线联系表单：** 见 [haypost.am/en/contact-us](https://www.haypost.am/en/contact-us)，其网站 [haypost.am](https://www.haypost.am/en) 同时提供在线客服聊天。
 
 > 请警惕通过短信、WhatsApp 或邮件发来的陌生链接，诱导你填写银行卡信息支付小额“重新派送费”或“地址确认费”。请直接在 [haypost.am/en/track-trace](https://www.haypost.am/en/track-trace) 核验你的 S10 单号，或致电 `+374 10 514-514`。另见[快递诈骗短信识别](guide:delivery-scam-texts)（英文）。
 
@@ -99,7 +99,7 @@ HayPost 使用标准 13 位 UPU S10 邮政单号：从亚美尼亚寄出的邮�
 
 ### 如何联系 HayPost 客服？
 
-拨打 `+374 10 514-514`（企业服务拨打 `+374 10 544-444`）、发送邮件至 `info@haypost.am`，或使用 [haypost.am/en/contact-us](https://www.haypost.am/en/contact-us) 的联系表单及 HayPost 官网的在线客服聊天。
+拨打 `+374 10 514-514`（企业服务拨打 `+374 10 544-444`）、发送邮件至 `info@haypost.am`，或使用 [haypost.am/en/contact-us](https://www.haypost.am/en/contact-us) 的联系表单及 HayPost 网站的在线客服聊天。
 
 :::sources
 - [HayPost: Home](https://www.haypost.am/en) – 国家邮政运营商门户

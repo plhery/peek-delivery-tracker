@@ -47,7 +47,7 @@ DHL 会循环复用旧运单号：部分单号可能附带先前旧货件的扫�
 
 ## DHL Express 派送未成功处理
 
-派送未成功后，物流会显示 `Delivery attempted but no response at Consignee address` 或 `Delivery attempt could not be completed`。若随后出现 `Shipment is scheduled for delivery`，表示已预约新一轮派送；出现 `Awaiting collection by the consignee` 则表示包裹正在 DHL 网点等待你自提。如需重新安排派送，请通过 DHL Express 官网或官方应用联系 DHL：Peek 无法代为更改派送。更多指南见[派送未成功指南](guide:missed-delivery)（英文）和[逾期未取包裹指南](guide:uncollected-parcel)（英文）。
+派送未成功后，物流会显示 `Delivery attempted but no response at Consignee address` 或 `Delivery attempt could not be completed`。若随后出现 `Shipment is scheduled for delivery`，表示已预约新一轮派送；出现 `Awaiting collection by the consignee` 则表示包裹正在 DHL 网点等待你自提。如需重新安排派送，请通过 DHL Express 网站或官方应用联系 DHL：Peek 无法代为更改派送。更多指南见[派送未成功指南](guide:missed-delivery)（英文）和[逾期未取包裹指南](guide:uncollected-parcel)（英文）。
 
 ## DHL Express 包裹清关与关税
 
@@ -67,7 +67,7 @@ DHL 会循环复用旧运单号：部分单号可能附带先前旧货件的扫�
 - **英格兰、苏格兰和威尔士：** 英国公民咨询局（Citizens Advice）说明，应由卖家而非你去催促快递公司。如果下单后 30 天内未收到商品，你有权取消订单并要求退款。若快递将包裹放在未经你同意的位置并丢失，须由卖家负责解决。
 - **爱尔兰：** 爱尔兰竞争与消费者保护委员会（CCPC）说明，未另行约定送达日时，订单必须在购买后 30 天内送达；如未按期送达，应与商家重新约定日期，若再次逾期则有权全额退款。运输途中破损或丢失的包裹应由商家补发，在你或你指定的人亲手收到包裹之前，风险均由商家承担。
 
-显示 `Delivered` 但没收到包裹？DHL 官网查询页面有时会显示签收人签名，Peek 不会保留签名信息。请先在 DHL 官网核查记录，再联系商家处理。另见[显示已签收但未收到](guide:delivered-not-received)（英文）和[包裹丢失指南](guide:lost-parcel)（英文）。
+显示 `Delivered` 但没收到包裹？DHL 网站查询页面有时会显示签收人签名，Peek 不会保留签名信息。请先在 DHL 网站核查记录，再联系商家处理。另见[显示已签收但未收到](guide:delivered-not-received)（英文）和[包裹丢失指南](guide:lost-parcel)（英文）。
 
 ## 使用 Peek 查询 DHL Express 包裹
 
@@ -97,7 +97,7 @@ Peek 通过 DHL 移动应用背后的接口读取数据；若不可用，则在�
 
 ### 收到要求付款的 DHL Express 短信是诈骗吗？
 
-有可能。英国公民咨询局（Citizens Advice）指出，要求你付款以领取包裹或重新安排派送的短信通常是诈骗。请勿点击链接，而是直接在 DHL 官网或 Peek 中查询运单号。在英国可将诈骗短信免费转发至 7726。在美国，美国联邦贸易委员会（FTC）建议通过你确知真实的网站或电话联系快递公司。更多防骗方法见[快递诈骗短信指南](guide:delivery-scam-texts)（英文）。
+有可能。英国公民咨询局（Citizens Advice）指出，要求你付款以领取包裹或重新安排派送的短信通常是诈骗。请勿点击链接，而是直接在 DHL 网站或 Peek 中查询运单号。在英国可将诈骗短信免费转发至 7726。在美国，美国联邦贸易委员会（FTC）建议通过你确知真实的网站或电话联系快递公司。更多防骗方法见[快递诈骗短信指南](guide:delivery-scam-texts)（英文）。
 
 :::sources
 - [Citizens Advice: If something you ordered hasn't arrived](https://www.citizensadvice.org.uk/consumer/somethings-gone-wrong-with-a-purchase/if-something-you-ordered-hasnt-been-delivered/) – 卖家责任、30 天期限、约定放置位置与诈骗短信提醒（适用于英格兰、苏格兰与威尔士）

@@ -80,7 +80,7 @@ Poczta Polska 的物流追踪仅供参考，不能作为索赔依据，且官方
 
 ## Poczta Polska 客服电话与联系方式
 
-根据 Poczta Polska 英文与波兰语官网列出的渠道：
+根据 Poczta Polska 英文与波兰语网站列出的渠道：
 
 - **总客服热线：** +48 438 420 600，周一至周五 8:00 至 20:00（按运营商资费计费），也可使用[联系页面](https://www.poczta-polska.pl/en/kontakt/)上的在线咨询表单。
 - **Pocztex 专线：** 波兰固话拨打 804 104 104，手机及海外来电拨打 +48 43 842 0 842，周一至周五 8:00 至 20:00，周六 8:00 至 16:00。
@@ -91,7 +91,7 @@ Poczta Polska 的物流追踪仅供参考，不能作为索赔依据，且官方
 
 ## 使用 Peek 查询 Poczta Polska 包裹
 
-[Peek](/) 会直接识别校验位有效的 `PX` 单号，以及前三位后紧跟 `5900773` 且校验位有效的 20 位单号。对于以 `00` 开头的 19 位单号，Peek 会像 Poczta Polska 官网一样补上校验位并仅向 Poczta Polska 查询。以 `PL` 结尾且以 `R`、`E`、`L` 或 `C`（`CV` 除外）开头的有效国际邮政单号（如 `RR`、`EE` 或 `CP`）会直接归入 Poczta Polska；其他有效 `PL` 单号（如 `VV` 开头）在 Peek 同时询问 Poczta Polska 和 Chronopost 时会显示为“Unknown postal carrier”，一旦 Poczta Polska 认领即切换过去。带有 `numer=` 的 eMonitoring 查询链接同样适用，且无需填写邮编。
+[Peek](/) 会直接识别校验位有效的 `PX` 单号，以及前三位后紧跟 `5900773` 且校验位有效的 20 位单号。对于以 `00` 开头的 19 位单号，Peek 会像 Poczta Polska 网站一样补上校验位并仅向 Poczta Polska 查询。以 `PL` 结尾且以 `R`、`E`、`L` 或 `C`（`CV` 除外）开头的有效国际邮政单号（如 `RR`、`EE` 或 `CP`）会直接归入 Poczta Polska；其他有效 `PL` 单号（如 `VV` 开头）在 Peek 同时询问 Poczta Polska 和 Chronopost 时会显示为“Unknown postal carrier”，一旦 Poczta Polska 认领即切换过去。带有 `numer=` 的 eMonitoring 查询链接同样适用，且无需填写邮编。
 
 Peek 会保留英文扫描原文（将 Peek 设为波兰语时则显示波兰语原文），在地图上标出对应邮局，并展示重量、目的国及保管包裹的取件邮局。不提供预计送达日期，也会省略邮局详细地址、营业时间、付款凭证及附加服务。从海外转发的扫描记录不含时区，Peek 会按其来源国时钟解析。托盘货物、集运拼箱件和普通平信无法追踪。
 

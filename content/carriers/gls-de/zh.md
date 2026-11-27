@@ -71,7 +71,7 @@ GLS 的英文状态文案按包裹流转顺序列出如下：
 
 ## GLS 德国客服与联系方式
 
-如果是网购包裹，商家是你的第一联系人。GLS 德国本地联系渠道位于德国官网 gls-pakete.de。GLS 集团建议将包裹状态咨询发往所在国客服，热线电话可在各国 GLS 官网查到；[集团在线联系表单](https://gls-group.com/GROUP/en/contact-form/)同样受理收件人咨询。如果是你自己通过 GLS-Pakete.de 或应用寄出的包裹，其 2023 年 8 月条款列出的联系方式为 versand-service@gls-germany.com 与 +49 6677 646907040。
+如果是网购包裹，商家是你的第一联系人。GLS 德国本地联系渠道位于德国网站 gls-pakete.de。GLS 集团建议将包裹状态咨询发往所在国客服，热线电话可在各国 GLS 网站查到；[集团在线联系表单](https://gls-group.com/GROUP/en/contact-form/)同样受理收件人咨询。如果是你自己通过 GLS-Pakete.de 或应用寄出的包裹，其 2023 年 8 月条款列出的联系方式为 versand-service@gls-germany.com 与 +49 6677 646907040。
 
 > GLS 集团提醒警惕冒用其名义的虚假邮件、短信和网站。GLS 集团主站为 gls-group.com，仅该站及其链接的站点（如 gls-pakete.de）为官方站点。GLS 绝不会通过邮件要求收件人用银行卡、转账或在线支付货款；不过对于来自欧盟以外的包裹，GLS 或其授权代理可能会通过邮件、短信或信函要求缴纳关税与税费。使用 GLS Cash Service 的货到付款包裹仅在交付时向司机付现，GLS 建议不要为自己或邻居支付意料之外的到付款项。可疑邮件请以附件形式举报至 security@gls-group.com。
 
@@ -110,11 +110,11 @@ GLS 在 gls-pakete.de 公布了预计送达时间但不作保证。其集团说�
 - [GLS: About us](https://gls-group.com/GROUP/en/about-us/) – 德国 ParcelShop 与自提柜数量（2026 年 3 月）
 - [GLS: Parcel, Logistics & Express](https://gls-group.com/GROUP/en/our-business/parcels/) – 境内与欧洲跨境时效、派送前缴关税/增值税与清关费
 - [GLS: B2C Services](https://gls-group.com/GROUP/en/our-business/cross-border-services/b2c/) – 跨境包裹 FlexDeliveryService 与 ShopDeliveryService 说明
-- [GLS: Contact](https://gls-group.com/GROUP/en/contact-form/) – 在线联系表单与各国官网热线提示
+- [GLS: Contact](https://gls-group.com/GROUP/en/contact-form/) – 在线联系表单与各国网站热线提示
 - [GLS Germany: General Terms and Conditions for business customers](https://gls-group.com/DE/media/downloads/AGB_GLS_Germany_2025-01_EN_2024-10-25_FINAL-WEB.pdf) – 周六不派送、参考时效、信箱小件、邻居代收、两次派送、7 个工作日保管期、退回寄件人、Parcelstation、改派与 Guaranteed24Service
 - [GLS Germany: Terms for GLS-Pakete.de and the app](https://gls-group.com/DE/media/downloads/AGB_GLS-paketeApp_EN_2023-08-21.pdf) – 公司主体、通知卡或邮件、免签放置授权、邮政调解处与寄件人客服
 - [GLS Germany: Consumer information on delivery options](https://gls-group.com/DE/media/downloads/180130_Verbraucherinformation_Umverfuegung_DE_EN.pdf) – 收件人改派选项免费说明（2018 年 1 月）
-- [GLS: Security advice](https://gls-group.com/GROUP/en/security-advice/) – 防诈骗提醒、官网域名、欧盟外税费通知、GLS Cash Service、举报邮箱与各国客服指引
+- [GLS: Security advice](https://gls-group.com/GROUP/en/security-advice/) – 防诈骗提醒、其网站域名、欧盟外税费通知、GLS Cash Service、举报邮箱与各国客服指引
 - [Bundesnetzagentur: Schlichtungsstelle Post](https://www.bundesnetzagentur.de/DE/Vportal/Schlichtung/Schlichtung_Post/start.html) – 免费邮政调解、寄收双方适用与 10–2,500 欧元额度
 - [Gesetze im Internet: § 438 HGB](https://www.gesetze-im-internet.de/hgb/__438.html) – 明显破损、隐蔽破损 7 天及延误 21 天通知期限
 - [Gesetze im Internet: § 475 BGB](https://www.gesetze-im-internet.de/bgb/__475.html) – 消费者网购运输风险归属规定

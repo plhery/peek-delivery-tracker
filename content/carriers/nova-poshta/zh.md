@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-Nova Poshta（英文官网品牌名为 “Nova Post”）是乌克兰的快递公司，在乌克兰全国提供营业网点、快递柜和送货上门服务，并在波兰及其他欧洲国家设有门店。你可以凭快递运单号（EW）在 [novaposhta.ua 英文查件页](https://novaposhta.ua/en/tracking/)、官方手机应用中查询，或直接粘贴到上方输入框。运单号印在面单顶部，也会出现在手机应用与到件通知里。
+Nova Poshta（英文网站品牌名为 “Nova Post”）是乌克兰的快递公司，在乌克兰全国提供营业网点、快递柜和送货上门服务，并在波兰及其他欧洲国家设有门店。你可以凭快递运单号（EW）在 [novaposhta.ua 英文查件页](https://novaposhta.ua/en/tracking/)、官方手机应用中查询，或直接粘贴到上方输入框。运单号印在面单顶部，也会出现在手机应用与到件通知里。
 
 ## Nova Poshta 运单号：EW 编号格式
 
@@ -27,7 +27,7 @@ Nova Poshta 未公布官方编号规则，Peek 目录收录了以下格式（均
 - **以 `G` 结尾**（如 `KL4829173MN48291G`）：属于 Meest 快递。
 - **其他 14 位数字：** 可能属于 DPD、SEUR、BRT 等快递公司，请核对短信或邮件里标明的承运商名称。
 
-详见[运单号格式说明](guide:tracking-number-formats)（英文）。如果官网提示 “We have not found a parcel with this number”，请核对数字是否正确：官网不显示超过 90 天的旧运单。
+详见[运单号格式说明](guide:tracking-number-formats)（英文）。如果网站提示 “We have not found a parcel with this number”，请核对数字是否正确：其网站不显示超过 90 天的旧运单。
 
 ## Nova Poshta 英文物流状态中文解读
 
@@ -63,7 +63,7 @@ novaposhta.ua 提供乌克兰语和英语版本，最新动态排在最前，每
 
 ## 包裹延误、丢失、清关与破损怎么办？
 
-Nova Poshta 官网未针对轨迹停滞给出专页指引；波兰站常见问题将收件信息有误与违禁品列为主要延误原因。建议先联系寄件人，并参阅[物流停止更新怎么办](guide:tracking-not-updating)（英文）。
+Nova Poshta 网站未针对轨迹停滞给出专页指引；波兰站常见问题将收件信息有误与违禁品列为主要延误原因。建议先联系寄件人，并参阅[物流停止更新怎么办](guide:tracking-not-updating)（英文）。
 
 寄入乌克兰的国际包裹若涉及关税，Nova Poshta 写明由收件人承担并通过短信、Viber 或邮件通知：货值超过 150 欧元的部分需缴纳 10% 关税及 20% 增值税。另见[包裹滞留海关怎么办](guide:customs)（英文）。
 
@@ -73,11 +73,11 @@ Nova Poshta 官网未针对轨迹停滞给出专页指引；波兰站常见问�
 
 ## Nova Poshta 客服电话与联系方式
 
-Nova Poshta 与 Nova Post 波兰官网公布的联系渠道：
+Nova Poshta 与 Nova Post 波兰网站公布的联系渠道：
 
 - **乌克兰（全天候 24 小时）：** +38 098 450 0609、+38 050 450 0609、+38 093 450 0609 或 +38 044 450 0609。
 - **客服中心热线：** 0 800 500 609（见常见问题与快递柜页面）。
-- **电子邮件与在线渠道：** support_ua@novaposhta.ua，官网 [novaposhta.ua](https://novaposhta.ua/) 还提供 Telegram 客服机器人。
+- **电子邮件与在线渠道：** support_ua@novaposhta.ua，其网站 [novaposhta.ua](https://novaposhta.ua/) 还提供 Telegram 客服机器人。
 - **波兰：** +48 182 111 609（波兰时间每日 8:00 至 20:00）或发邮件至 support@novapost.pl。
 
 > Nova Poshta 提醒防范声称你欠费的诈骗邮件；公司不会发送所谓 “Reliable Purchase” 链接，也绝不会发链接引导填写银行卡信息。

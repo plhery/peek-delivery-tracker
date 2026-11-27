@@ -10,13 +10,13 @@ DPD 荷兰（DPD Netherlands，即 DPD (Nederland) B.V.）是 DPD 在荷兰境�
 
 ## DPD Netherlands 运单号：在哪里查找
 
-DPD 将其称为包裹号（parcel number）。它位于 DPD 发给你的电子邮件中，也是 DPD 官网查询、myDPD、联系表单及客服电话均会要求提供的编号。
+DPD 将其称为包裹号（parcel number）。它位于 DPD 发给你的电子邮件中，也是 DPD 网站查询、myDPD、联系表单及客服电话均会要求提供的编号。
 
 | 单号（虚构） | 含义 |
 | --- | --- |
 | `05284917365428` | 14 位数字：DPD 包裹号。 |
 
-DPD 官网查询页也支持输入参考号（如司机留下的未在家通知单上的编号），Peek 则不接受参考号，需要 14 位包裹号。
+DPD 网站查询页也支持输入参考号（如司机留下的未在家通知单上的编号），Peek 则不接受参考号，需要 14 位包裹号。
 
 14 位数字并非仅属于 DPD Netherlands：[DPD Germany](carrier:dpd-de)、[DPD UK](carrier:dpd-uk)、[DPD France](carrier:dpd-fr) 等各国 DPD 分公司，以及 SEUR、BRT 和 Chronopost 同样使用 14 位数字。如果商家邮件写明由 [PostNL](carrier:postnl) 或 [DHL eCommerce Netherlands](carrier:dhl-ecommerce-nl) 承运，则单号归属对方。找不到单号？请看[如何查找运单号](guide:find-tracking-number)（英文）。
 

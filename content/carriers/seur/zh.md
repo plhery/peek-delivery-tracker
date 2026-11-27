@@ -24,7 +24,7 @@ SEUR 运单号通常为 14 位或 21 位数字，也支持 7 位编码：
 
 ## SEUR 物流状态说明
 
-SEUR 查询官网提供西班牙语和英语版本。下表列出的是 SEUR 原文的全大写西班牙语状态——除签收状态外，Peek 也会按此原文展示：
+SEUR 查询其网站提供西班牙语和英语版本。下表列出的是 SEUR 原文的全大写西班牙语状态——除签收状态外，Peek 也会按此原文展示：
 
 | SEUR 状态 | 中文含义 |
 | --- | --- |
@@ -70,7 +70,7 @@ SEUR 查询官网提供西班牙语和英语版本。下表列出的是 SEUR 原
 
 如需联系 SEUR 客服，请前往 seur.com 上的 miSEUR 客户支持专区。
 
-> 2021 年 2 月，西班牙国家网络安全研究所（INCIBE）曾发布预警，指出出现冒充 SEUR 的诈骗短信：短信中的链接指向仿冒 SEUR 网站，诱导支付小额费用以盗取银行卡信息。INCIBE 建议：切勿点击短信链接，手动在浏览器输入 SEUR 官网地址查询包裹；如果已经输入银行卡信息，请尽快联系发卡银行。
+> 2021 年 2 月，西班牙国家网络安全研究所（INCIBE）曾发布预警，指出出现冒充 SEUR 的诈骗短信：短信中的链接指向仿冒 SEUR 网站，诱导支付小额费用以盗取银行卡信息。INCIBE 建议：切勿点击短信链接，手动在浏览器输入 SEUR 网站地址查询包裹；如果已经输入银行卡信息，请尽快联系发卡银行。
 
 ## 使用 Peek 跟踪 SEUR 包裹
 
@@ -96,6 +96,6 @@ Peek 会显示包裹状态、物流轨迹和重量。由于 SEUR 的扫描记录
 - [Geopost: Who we are](https://www.geopost.com/en/about-us/who-we-are/) – SEUR 与 DPD 同为 Geopost 集团旗下派送品牌
 - [Geopost: SEUR](https://www.geopost.com/en/about-us/our-companies-and-partners/seur/) – 西班牙快递服务、Pickup 门店与自提柜
 - [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – 欧盟规则下收货前的运输破损责任由卖家承担
-- [INCIBE: Circulan SMS fraudulentos que suplantan a SEUR (西班牙语)](https://www.incibe.es/ciudadania/avisos/circulan-sms-fraudulentos-que-suplantan-seur-que-no-te-enganen) – 2021 年 2 月防诈骗警示：虚假短信、小额收费、盗刷银行卡、手动输入官网及联系银行
+- [INCIBE: Circulan SMS fraudulentos que suplantan a SEUR (西班牙语)](https://www.incibe.es/ciudadania/avisos/circulan-sms-fraudulentos-que-suplantan-seur-que-no-te-enganen) – 2021 年 2 月防诈骗警示：虚假短信、小额收费、盗刷银行卡、手动输入其网站及联系银行
 - [Universal Parcel Scraper: SEUR](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/seur) – 免账号查询、西班牙语和英语跟踪页、单号格式、状态与阶段、“未找到”提示、客服页面、Peek 读取的内容
 :::

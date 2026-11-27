@@ -40,14 +40,14 @@ CJ Packet 将整体进度标签（`0` 至 `7`）与 CJ 仓库、出口货代及�
 
 根据 [cjpacket.com](https://www.cjpacket.com/)，CJ Packet 主打三类跨境方案——*小包运输（Small-package Transportation）*、*低成本大宗包裹（Low-cost Bulk Packages）*与*快速专线（Fast Express）*——整合合作航线、清关协助与全球末端快递。
 
-**末端派送由谁负责。** 当轨迹出现 `Delivery to local courier` 后，接手的当地邮政或快递商将决定派送尝试次数、安全放置点、自提点保管期限与退件流程。CJ Packet 官网主要面向商业发货卖家：如遇延误、需要退款或理赔，请联系你下单的在线店铺。有关进口增值税、关税和海关扣留（含欧盟对非欧盟包裹的进口规定），详见[包裹被海关扣留怎么办](guide:customs)（英文）。
+**末端派送由谁负责。** 当轨迹出现 `Delivery to local courier` 后，接手的当地邮政或快递商将决定派送尝试次数、安全放置点、自提点保管期限与退件流程。CJ Packet 网站主要面向商业发货卖家：如遇延误、需要退款或理赔，请联系你下单的在线店铺。有关进口增值税、关税和海关扣留（含欧盟对非欧盟包裹的进口规定），详见[包裹被海关扣留怎么办](guide:customs)（英文）。
 
 ## CJ Packet 包裹停滞、静默或显示已签收怎么办
 
 由于买卖合同签订在你与网店之间（而非 CJ Dropshipping 或 CJ Packet），包裹超期未到、破损或丢失时请始终先联系卖家。
 
 - **`Label created` 或航班起飞后多日无更新：** 跨境小包在 CJ 仓库备货打包（`Label created. Warehouse is processing this order.`）或空运等待目的国清关期间，停滞数天属于常见情况。请参阅[为什么物流停止更新](guide:tracking-not-updating)（英文）。
-- **使用末端承运商单号核查：** 当 CJ Packet 显示出目的国本地单号（如 USPS、Canada Post 或当地快递单号）后，去对方官网查询，可能会看到取件地址或改约派送选项。
+- **使用末端承运商单号核查：** 当 CJ Packet 显示出目的国本地单号（如 USPS、Canada Post 或当地快递单号）后，去对方网站查询，可能会看到取件地址或改约派送选项。
 - **投递失败（`6`）或显示已签收但未收到：** 请先排查家人、邻居、大楼前台及当地快递公司，并赶在银行卡或电商平台申诉期限前联系网店卖家。详见[显示已签收但未收到](guide:delivered-not-received)（英文）、[包裹破损](guide:damaged-parcel)（英文）、[包裹丢失](guide:lost-parcel)（英文）和[包裹退回寄件人](guide:returned-to-sender)（英文）。
 
 ## CJ Packet 官方客服与联系方式
@@ -66,7 +66,7 @@ CJ Packet 将整体进度标签（`0` 至 `7`）与 CJ 仓库、出口货代及�
 
 Peek 直接读取 CJ Packet 追踪接口，展示对应阶段（“已生成面单”、“已揽收”、“运输中”、“清关中”、“派送中”、“待取件”、“需要留意”、“已签收”）、仓库、货代及末端快递的扫描文案（自动剔除快递员电话、邮箱及客服热线）、扫描地点与目的地国家。所有 Peek 应用均不显示具体线路或服务名称，也会隐藏签收人姓名。自带时区偏移的扫描按原偏移解析，不带时区的按扫描地点时区解析，Peek 会统一换算为你设备的本地时间，并在签收扫描带有偏移时显示签收时间。当 CJ Packet 给出末端承运商及本地单号且 Peek 识别出该承运商时，Peek 会核实对方是否已收录该包裹：确认后页面会显示“由 <承运商> 派送”，并同时列出两个单号。Peek 不会展示始发国、别名单号、订单及商户参考号或联系信息；CJ Packet 追踪系统本身不提供预计送达日期、重量或签收照片。
 
-在打开包裹页面或预计派送当天开启提醒时，只要 CJ Packet 官网追踪接口正常响应，Peek 最高每 10 分钟检查一次；在 CJ Packet 扫出 `Out for Delivery`（`4`）的当天，自最新扫描所在地早上 6 点起最高每 2 分钟检查一次；其余时间每小时检查一次。若停留在“已生成面单”或“已揽收”满 12 小时，或连续两天无新动态，无论怎么关注都会转为每小时检查一次；停留在“已生成面单”满七天后降为每 6 小时一次。当 CJ Packet 官网无响应、Peek 仅通过第三方追踪服务跟进时，Peek 每小时检查一次，静默满一天后改为每 3 小时一次，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次。
+在打开包裹页面或预计派送当天开启提醒时，只要 CJ Packet 网站追踪接口正常响应，Peek 最高每 10 分钟检查一次；在 CJ Packet 扫出 `Out for Delivery`（`4`）的当天，自最新扫描所在地早上 6 点起最高每 2 分钟检查一次；其余时间每小时检查一次。若停留在“已生成面单”或“已揽收”满 12 小时，或连续两天无新动态，无论怎么关注都会转为每小时检查一次；停留在“已生成面单”满七天后降为每 6 小时一次。当 CJ Packet 网站无响应、Peek 仅通过第三方追踪服务跟进时，Peek 每小时检查一次，静默满一天后改为每 3 小时一次，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次。
 
 当最新扫描满四天且包裹仍停留在“已生成面单”、“已揽收”或“运输中”时，Peek 会标出该扫描日期（如“自10月12日周一起没有物流更新”），并在页面提示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 CJ Packet 查询。”。若超过三周仍无新扫描，则提示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 CJ Packet 查询。”
 
@@ -92,6 +92,6 @@ CJ Packet 是供使用 [CJ Dropshipping](https://cjdropshipping.com/) 的跨境�
 
 :::sources
 - [CJ Packet 官方查询网站](https://www.cjpacket.com/) – 小包运输、低成本大宗包裹、快速专线、24/7 客服与 `logistics@cjpacket.com`
-- [CJ Dropshipping 官网](https://cjdropshipping.com/) – 上游跨境代发履约平台
+- [CJ Dropshipping 网站](https://cjdropshipping.com/) – 上游跨境代发履约平台
 - [Universal Parcel Scraper: cj-packet](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/cj-packet) – `CJP[A-Z]{2,3}\d{10}YQ` 格式识别、`cjpacket.com/?trackingNumber=` 链接规则、汇总状态 `0`–`7`、末端交接与签收人解析、时区换算及隐藏字段
 :::

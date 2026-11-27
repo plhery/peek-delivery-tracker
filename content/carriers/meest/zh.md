@@ -10,7 +10,7 @@ Meest 是一家起源于乌克兰的国际包裹集团，在美国、加拿大�
 
 ## Meest 运单号在哪里找、长什么样
 
-Meest 美国和加拿大官网指出，单号位于发货确认邮件和包裹面单上。网购却没收到单号？参见[如何查找运单号](guide:find-tracking-number)（英文）。
+Meest 美国和加拿大网站指出，单号位于发货确认邮件和包裹面单上。网购却没收到单号？参见[如何查找运单号](guide:find-tracking-number)（英文）。
 
 Meest 未公布统一格式，美国页面只提到单号“通常以特定字母代码开头，后接一串数字”。你可能遇到的形态如下（以下数字为虚构）：
 
@@ -46,7 +46,7 @@ t.meest-group.com 仅显示乌克兰语步骤；Meest 美国、加拿大和英�
 
 `To be delivered to Box Now` 听起来像最后一步，其实很早就会出现（有时包裹还在中国）：它只是标明由 [BOX NOW](carrier:box-now) 承担末端派送。含“office of exchange”的记录指邮政进出口互换局，而非货币兑换处。`Shipment handed over to the courier` 可能出现在 `Shipment ready for pickup` 之前，不一定代表快递员正在上门。
 
-官网查询框的部分文案与上表略有不同：一处写 `Shipment received`，另一处可能写 `Delivered`。Meest 加拿大提醒，“Delivered”“并不总是意味着你本人当面签收，请检查门廊或信箱。”
+其网站查询框的部分文案与上表略有不同：一处写 `Shipment received`，另一处可能写 `Delivered`。Meest 加拿大提醒，“Delivered”“并不总是意味着你本人当面签收，请检查门廊或信箱。”
 
 ## Meest 派送、自提点与快递柜
 

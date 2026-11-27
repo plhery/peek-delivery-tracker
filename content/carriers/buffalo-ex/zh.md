@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-**BUFFALO**（*BUFFALO International Logistics*，常称 *Buffaloex* 或 *Buffalo Express*）是一家自 2017 年 4 月开始运营的中国至非洲跨境电商物流承运商（[buffaloex.com](https://www.buffaloex.com/)）。公司总部位于上海，非洲分公司设在南非约翰内斯堡，拥有 35,000 平方米综合仓储（含 6,500 平方米保税仓）和 300 辆自营配送车。BUFFALO 官网介绍其系统已与南非海关及银行系统直连，并在中国至南非跨境电商小包市场份额位居第一。你可以在 [buffaloex.com/tracks.html](https://www.buffaloex.com/tracks.html) 查询快件，也可以直接把 `BUFZA` 单号粘贴到上方查询框中。
+**BUFFALO**（*BUFFALO International Logistics*，常称 *Buffaloex* 或 *Buffalo Express*）是一家自 2017 年 4 月开始运营的中国至非洲跨境电商物流承运商（[buffaloex.com](https://www.buffaloex.com/)）。公司总部位于上海，非洲分公司设在南非约翰内斯堡，拥有 35,000 平方米综合仓储（含 6,500 平方米保税仓）和 300 辆自营配送车。BUFFALO 网站介绍其系统已与南非海关及银行系统直连，并在中国至南非跨境电商小包市场份额位居第一。你可以在 [buffaloex.com/tracks.html](https://www.buffaloex.com/tracks.html) 查询快件，也可以直接把 `BUFZA` 单号粘贴到上方查询框中。
 
 ## BUFFALO 单号格式（`BUFZA…YQ`）
 
@@ -90,7 +90,7 @@ Peek 目前没有 BUFFALO 直连查询接口，而是通过第三方聚合追踪
 可将你的 `BUFZA…YQ` 单号发邮件至 `support@buffaloex.com`，或通过 [buffaloex.com/contact.html](https://www.buffaloex.com/contact.html) 提交工单（中国客服热线 `+86-400-921-9066`）。
 
 :::sources
-- [BUFFALO 国际物流官网](https://www.buffaloex.com/) – 中国至非洲跨境电商物流网络
+- [BUFFALO 国际物流网站](https://www.buffaloex.com/) – 中国至非洲跨境电商物流网络
 - [关于 BUFFALO](https://www.buffaloex.com/about.html) – 2017 年 4 月起运营、上海总部、约翰内斯堡分公司、35,000 m² 仓库（含 6,500 m² 保税仓）、300 辆配送车及海关银行系统对接
 - [BUFFALO 支持与常见问题](https://www.buffaloex.com/support.html) – 官方状态含义（`Order Confirmed` 至 `Client Received`）、周一至周六 08:00–17:00 派送时段、1–5 天在途时效及修改地址截止规则
 - [BUFFALO 联系我们](https://www.buffaloex.com/contact.html) – `support@buffaloex.com`、`service@bufflogistics.com`、`+86-400-921-9066` 及办公仓储地址（Peek 帮助链接指向此页）

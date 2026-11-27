@@ -26,7 +26,7 @@ updated: 2026-11-24
 | DPD 状态原文 | 对你的含义 |
 | --- | --- |
 | `Order information has been transmitted to DPD.` | 已生成面单：DPD 尚未拿到包裹。 |
-| `Parcelinfo handed to DPD` | 已生成面单：寄件人预报数据已传给 DPD，但包裹未交寄。该状态仅通过物流查询服务显示，不会出现在 DPD 官网查询中。 |
+| `Parcelinfo handed to DPD` | 已生成面单：寄件人预报数据已传给 DPD，但包裹未交寄。该状态仅通过物流查询服务显示，不会出现在 DPD 网站查询中。 |
 | `Parcel handed to DPD` | DPD 已收到包裹。 |
 | `In transit.`、`Your parcel is on its way` | 正在 DPD 网络中转运。 |
 | `At parcel delivery centre.` | 已到达负责当地派送的网点。 |
@@ -43,7 +43,7 @@ updated: 2026-11-24
 
 **派送时段窗口。** 如果寄件人向 DPD 提供了你的邮箱或手机号，Predict 会在派送当天发送 2 小时送达窗口；实时追踪会进一步缩小到约 30 分钟。Predict 不覆盖海岛地区。
 
-**更改派送。** 在网点完成派送扫描前，你可以通过 DPD 应用、myDPD 或在 DPD 官网输入邮编，将包裹改寄给邻居或 Pickup 合作点、同意无接触放置（“Drop-off okay”）或改选派送日期。选择无接触放置时，DPD 会拍照留证，且丢失或破损风险转移给你。
+**更改派送。** 在网点完成派送扫描前，你可以通过 DPD 应用、myDPD 或在 DPD 网站输入邮编，将包裹改寄给邻居或 Pickup 合作点、同意无接触放置（“Drop-off okay”）或改选派送日期。选择无接触放置时，DPD 会拍照留证，且丢失或破损风险转移给你。
 
 **派送未成功。** DPD 会在当天或下一个工作日再次尝试派送，之后将包裹送往最近的 Pickup 合作点。根据条款，司机也可交给 50 米内的邻居或放入 Pickup 自提柜，DPD 会告知你具体位置。信箱里的通知卡附有二维码，可用于改派。
 
@@ -63,7 +63,7 @@ updated: 2026-11-24
 
 ## DPD 德国客服电话与联系方式
 
-DPD 德国官网列出的联系渠道如下：
+DPD 德国网站列出的联系渠道如下：
 
 - **客服热线：** 06021 150415（境外拨打 +49 6021 150 415）。
 - **在线表单：** 访问 [DPD 联系页面](https://www.dpd.com/de/en/support/kontakt/)并提供包裹单号；DPD 会通过电子邮件回复。

@@ -49,7 +49,7 @@ Quick Rabbit 查询页默认以西班牙语打开（也有英语和中文版）�
 
 ## Quick Rabbit 派送：快递员、Citibox 与自提点
 
-Quick Rabbit 表示其服务覆盖西班牙全部 50 个省，官网服务页向商家提供短信与邮件通知及失败重派。派送没成功？参见[派送未成功](guide:missed-delivery)（英文）。
+Quick Rabbit 表示其服务覆盖西班牙全部 50 个省，其网站服务页向商家提供短信与邮件通知及失败重派。派送没成功？参见[派送未成功](guide:missed-delivery)（英文）。
 
 **Citibox 快递柜与自提点。** 快递员除了送货上门，也可把包裹放进 Citibox 快递柜或送至自提点。Quick Rabbit 网页未提供开箱码、未列出自提点名录，也未写明各自保管期限。`Retirado de Citibox por Repartidor`（“快递员已从 Citibox 取回”）表示快递员已将包裹从柜中取出。更多见[快递柜取件](guide:parcel-lockers)（英文）和[未领取的包裹](guide:uncollected-parcel)（英文）。
 

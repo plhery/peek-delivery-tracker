@@ -16,7 +16,7 @@ DPD 说明其包裹单号为 14 位字符，实际为 13 位数字加 1 位字�
 | --- | --- |
 | `4829105736491A` | 13 位数字加 1 位字母：DPD Poland 包裹单号。 |
 | `13482910573649` | 以 `13` 开头的 14 位数字：同样属于 DPD Poland。 |
-| `482910573` | 寄件人使用的 9 位发件码：DPD 官网支持查询，但 Peek 不支持。 |
+| `482910573` | 寄件人使用的 9 位发件码：DPD 网站支持查询，但 Peek 不支持。 |
 
 14 位纯数字也可能属于 [DPD Germany](carrier:dpd-de)、DPD Switzerland、DPD UK、SEUR、BRT 等多家快递，请以商家发货邮件中注明的快递公司为准。如果 DPD 返回 `There is no trace for this parcel`，说明单号有误或尚未录入系统，DPD 建议在交寄次日上午再查。
 
@@ -93,7 +93,7 @@ DPD 表示通常在次工作日送达，波兰境内包裹承诺不超过三个�
 
 ### 没有运单号可以查波兰 DPD 包裹吗？
 
-可以，在 DPD Mobile App 中查看即可——它会列出与你账号手机号或邮箱绑定的包裹。DPD 官网查询页不支持按手机号搜索。
+可以，在 DPD Mobile App 中查看即可——它会列出与你账号手机号或邮箱绑定的包裹。DPD 网站查询页不支持按手机号搜索。
 
 :::sources
 - [DPD Poland: FAQ](https://www.dpd.com/pl/pl/najczesciej-zadawane-pytania-faq/) – 单号、派送时效、改派、自提保留期与理赔

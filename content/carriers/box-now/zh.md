@@ -10,7 +10,7 @@ BOX NOW 是一家在希腊、塞浦路斯、保加利亚和克罗地亚专营全
 
 ## BOX NOW 运单号在哪里找
 
-BOX NOW 在五个国家的帮助页面均指出，单号在你收到的邮件、短信或 Viber 消息中。官网查件只需输入单号，无需邮编。希腊语联系页称之为“voucher ID”。
+BOX NOW 在五个国家的帮助页面均指出，单号在你收到的邮件、短信或 Viber 消息中。其网站查件只需输入单号，无需邮编。希腊语联系页称之为“voucher ID”。
 
 | 格式（虚构） | 含义 |
 | --- | --- |
@@ -76,7 +76,7 @@ BOX NOW 未公布各位数字的含义。PIN 码只有在包裹投入快递柜�
 
 ## BOX NOW 客服电话与联系方式
 
-BOX NOW 各国官网公布的信息（希腊、塞浦路斯和保加利亚为东欧时间；克罗地亚和斯洛文尼亚为中欧时间）：
+BOX NOW 各国网站公布的信息（希腊、塞浦路斯和保加利亚为东欧时间；克罗地亚和斯洛文尼亚为中欧时间）：
 
 - **希腊：** +30 211 1005 333，周一至周五 08:00–20:00、周六 10:00–18:00（摘自 BOX NOW 消费者章程；其联系页未列电话）。包裹问题发 dema@boxnow.gr（附姓名、手机号、voucher ID）；一般咨询发 care@boxnow.gr；或使用联系表单。
 - **塞浦路斯：** 客服中心 +357 240 42000，周一至周五 8:00–20:00、周六 10:00–18:00。包裹问题发 dema@boxnow.cy，或使用联系表单。
@@ -90,9 +90,9 @@ BOX NOW 各国官网公布的信息（希腊、塞浦路斯和保加利亚为东
 
 [Peek](/) 无法仅凭 10 位数字识别出 BOX NOW 包裹，因此会询问符合该形态的承运商是否有这个单号：BOX NOW、DHL eCommerce Iberia，以及视具体数字和输入方式再问 [DHL Express](carrier:dhl-express)、ACS Courier、Geniki Taxydromiki 或 Packeta，在部分国家还会问 DHL Freight。若都未查到，Peek 会转向物流查询服务，接着再问 DPD Ireland 和 Estafeta，以 33 或 34 开头时问 GLS Hungary，以及尚未问过的 DHL Freight。如果只有 BOX NOW 查到，Peek 就认定为 BOX NOW；若多家同时查到，则由你选择（但若 DHL Express 查到且 ACS 与 Geniki Taxydromiki 均未查到，则直接归入 DHL Express）。否则点“更换”手动选择“BOX NOW”。粘贴 boxnow.gr、boxnow.cy、boxnow.bg、boxnow.hr 或 boxnow.si 上带 `/track?track=…`（路径中可含语言如 `/en/track`）的查询链接，Peek 会立刻识别为 BOX NOW。
 
-随后 Peek 会展示当前状态、带地点的扫描历史、在途预计送达日、目的国、签收时间，以及包裹待取或已取时的快递柜名称。快递柜地址与定位、取件截止时间、格口尺寸、付款信息、寄件人和邮编均不显示，因此最晚取件时间请查看 BOX NOW 官网。
+随后 Peek 会展示当前状态、带地点的扫描历史、在途预计送达日、目的国、签收时间，以及包裹待取或已取时的快递柜名称。快递柜地址与定位、取件截止时间、格口尺寸、付款信息、寄件人和邮编均不显示，因此最晚取件时间请查看 BOX NOW 网站。
 
-Peek 的文案可能与 BOX NOW 官网略有不同：待取件显示为 `Parcel has reached its final destination, waiting for pickup`，已取件显示为 `Parcel has been delivered`。`Expired`、`Delivery has expired`、`Lost`、`Parcel search - We will update you shortly` 以及寄件人取消均归在“需要留意”下。当你打开包裹页，或在派送当天开启通知时，Peek 最多每 10 分钟查询一次。连续两天无新动态（在“已生成面单”或“已揽收”状态下为 12 小时）后改为每小时查询一次，在“已生成面单”下连续七天无动态后改为每 6 小时一次。如果包裹在“已生成面单”、“已揽收”或“运输中”状态下连续四天无新记录，Peek 会显示“自……起没有物流更新”（附该记录日期）以及“向 BOX NOW 寻求帮助”链接。通知可选“每次扫描”、“重要环节”或“仅派送当天”。Peek 无法替你延长取件时间或重发 PIN 码。
+Peek 的文案可能与 BOX NOW 网站略有不同：待取件显示为 `Parcel has reached its final destination, waiting for pickup`，已取件显示为 `Parcel has been delivered`。`Expired`、`Delivery has expired`、`Lost`、`Parcel search - We will update you shortly` 以及寄件人取消均归在“需要留意”下。当你打开包裹页，或在派送当天开启通知时，Peek 最多每 10 分钟查询一次。连续两天无新动态（在“已生成面单”或“已揽收”状态下为 12 小时）后改为每小时查询一次，在“已生成面单”下连续七天无动态后改为每 6 小时一次。如果包裹在“已生成面单”、“已揽收”或“运输中”状态下连续四天无新记录，Peek 会显示“自……起没有物流更新”（附该记录日期）以及“向 BOX NOW 寻求帮助”链接。通知可选“每次扫描”、“重要环节”或“仅派送当天”。Peek 无法替你延长取件时间或重发 PIN 码。
 
 ## 关于 BOX NOW 物流查询的常见问题
 

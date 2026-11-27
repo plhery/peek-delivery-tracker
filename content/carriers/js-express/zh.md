@@ -18,9 +18,9 @@ updated: 2026-11-23
 | `JSEKP482917360YQ` | 中间只有 9 位数字：不符合急速国际格式，请检查是否漏输了一位数字。 |
 | `JXCKP4829173605YQ` | 同样以 `YQ` 结尾，但开头是 `JXC`：这是驹隙物流（Juxi Express）的单号，不是急速国际。 |
 
-不少中国跨境专线货代都采用「3 位公司前缀 + 2 位字母 + 10 位数字 + `YQ`」的结构，例如 `FEI`（17FEIA）、`WNB`（WanbExpress）、`SFC`（三态速递）和 `CJP`（CJ Packet），其中 `JSE` 专属于急速国际。在 Peek 里粘贴时无需在意空格和大小写；Peek 还会自动把第二位字母处误输的数字 `0` 纠正为字母 `O`，把 10 位数字里误输的字母 `O` 纠正为数字 `0`。注意急速国际官网查件必须输入完整单号，截断输入查不到结果。
+不少中国跨境专线货代都采用「3 位公司前缀 + 2 位字母 + 10 位数字 + `YQ`」的结构，例如 `FEI`（17FEIA）、`WNB`（WanbExpress）、`SFC`（三态速递）和 `CJP`（CJ Packet），其中 `JSE` 专属于急速国际。在 Peek 里粘贴时无需在意空格和大小写；Peek 还会自动把第二位字母处误输的数字 `0` 纠正为字母 `O`，把 10 位数字里误输的字母 `O` 纠正为数字 `0`。注意急速国际网站查件必须输入完整单号，截断输入查不到结果。
 
-**在哪里找单号。** 发货后可在商家的发货邮件或订单详情页找到单号。[急速国际官网简介](https://www.js-exp.com/index.php?page=6) 提到其与 Amazon、Walmart、Shopify、eBay、AliExpress、Wish 和 Shopee 等跨境平台合作密切。如果找不到单号，可参考 [如何找到你的快递单号](guide:find-tracking-number) 和 [快递单号格式指南](guide:tracking-number-formats)。
+**在哪里找单号。** 发货后可在商家的发货邮件或订单详情页找到单号。[急速国际网站简介](https://www.js-exp.com/index.php?page=6) 提到其与 Amazon、Walmart、Shopify、eBay、AliExpress、Wish 和 Shopee 等跨境平台合作密切。如果找不到单号，可参考 [如何找到你的快递单号](guide:find-tracking-number) 和 [快递单号格式指南](guide:tracking-number-formats)。
 
 **没有可分享的单件直达链接。** 急速国际的查件页面需要手动填表单提交，无法靠链接直接打开某一个包裹，请直接复制单号查询。其 [英文查件页 Express Query](https://www.js-exp.com/EN/index.php?page=19) 可直接出结果，而 [中文快件查询页](https://www.js-exp.com/index.php?page=19) 查询前会先要求输入图形验证码。
 
@@ -137,7 +137,7 @@ Peek 只在你打开这个包裹时，或在派送当天且开启了通知时，
 应优先联系你下单的卖家或购物平台：急速国际只受理签约寄件客户在 30 天内提交的书面理赔申请。
 
 :::sources
-- [急速国际：官网首页](https://www.js-exp.com/) – 运营公司主体与跨境物流业务
+- [急速国际：其网站首页](https://www.js-exp.com/) – 运营公司主体与跨境物流业务
 - [急速国际：企业介绍](https://www.js-exp.com/index.php?page=6) – 2011 年苏州基地、分支网点及合作跨境电商平台
 - [急速国际：快件查询（中文）](https://www.js-exp.com/index.php?page=19) – 中文查询表单与验证码要求
 - [急速国际：Express Query（英文）](https://www.js-exp.com/EN/index.php?page=19) – 免验证码英文查询

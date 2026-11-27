@@ -27,11 +27,11 @@ Pošta Srbije 对所有可追踪邮件均使用[国际邮政标准格式](guide:
 
 ## 塞尔维亚邮政物流状态含义
 
-posta.rs 提供西里尔字母、拉丁字母及英文三个版本。下表按流转顺序结合了 Pošta Srbije 应用中的英文简写与官网公布的状态列表：
+posta.rs 提供西里尔字母、拉丁字母及英文三个版本。下表按流转顺序结合了 Pošta Srbije 应用中的英文简写与其网站公布的状态列表：
 
 | Pošta Srbije 显示 | 对你的含义 |
 | --- | --- |
-| `Receipt` | 已在邮局柜台收寄并称重（官网列表中称 `Reception`）。 |
+| `Receipt` | 已在邮局柜台收寄并称重（其网站列表中称 `Reception`）。 |
 | `Dispatch` | 已发往下一站邮局，亦适用于境外邮政的发运记录。 |
 | `Transport` | 已在国际互换局交由跨境运输。 |
 | `Arrived` | 已抵达塞尔维亚境内或境外某邮局。 |
@@ -77,7 +77,7 @@ posta.rs 公布的联系渠道如下：
 - **在线表单：** posta.rs 上的“Ask a Question”与“Claims”表单，工作日 07:30–15:30 处理。
 - **邮寄地址：** Pošta Srbije, Takovska 2, 11120 Beograd，或前往任意邮局。
 
-> Pošta Srbije 警示用户提防声称“未缴关税”或“需要更新地址”的诈骗短信，这类短信常附带 `posta-rs.com` 等仿冒域名链接。Pošta Srbije 绝不会要求你在线或通过邮件付款，且仅通过已认证账号发送短信或 Viber 通知到件。唯一官网是 `posta.rs`。
+> Pošta Srbije 警示用户提防声称“未缴关税”或“需要更新地址”的诈骗短信，这类短信常附带 `posta-rs.com` 等仿冒域名链接。Pošta Srbije 绝不会要求你在线或通过邮件付款，且仅通过已认证账号发送短信或 Viber 通知到件。唯一网站是 `posta.rs`。
 
 ## 使用 Peek 跟踪塞尔维亚邮政包裹
 

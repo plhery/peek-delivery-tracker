@@ -84,7 +84,7 @@ TForce 的《零担运价规则》（LTL Rules Tariff UPGF 102-T，自 2026 年 
 
 ## TForce Freight 客服与联系方式
 
-TForce 官网公布的联系渠道如下：
+TForce 网站公布的联系渠道如下：
 
 - **客服热线：** `(800) 333-7400`（美国、加拿大、关岛、波多黎各和美属维尔京群岛免费），受理查件、签收证明及异常处理；其他地区拨打 `(804) 231-8555`。
 - **邮件咨询：** 通过 TForce Contact Us 页面进入 “Email TForce Freight Customer Support” 表单，内设 PRO 单号栏位。
@@ -113,7 +113,7 @@ TForce 每条记录给的是当地服务中心时间但不带时区：Peek 按�
 
 ### 没有 PRO 单号能查 TForce Freight 吗？
 
-在 TForce 官网查询页可以，支持用提单号（BOL）或采购订单号（PO）加发货日期范围查询；Peek 只按 PRO 单号跟踪。
+在 TForce 网站查询页可以，支持用提单号（BOL）或采购订单号（PO）加发货日期范围查询；Peek 只按 PRO 单号跟踪。
 
 ### TForce Freight 提供住宅送货吗？
 

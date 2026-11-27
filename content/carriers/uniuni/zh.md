@@ -8,7 +8,7 @@ updated: 2026-11-24
 
 UniUni（Uni Express Inc.，总部位于加拿大不列颠哥伦比亚省列治文市）是北美一家尾程派送公司，在加拿大和美国为 Shein、Temu 等电商平台提供送货上门服务。你可以在 [uniuni.com/tracking](https://www.uniuni.com/tracking/) 输入单号查询，或直接把单号粘贴到上方查询框。单号由你下单的商家或平台提供，商家贴好面单后将包裹交给 UniUni 完成最后一段派送。
 
-手头没有单号？请查看商家订单详情；如果 UniUni 官网尚无任何记录，包裹大概率还在卖家手里。如需预约重新派送、修改地址或派送说明、申报包裹破损或反馈司机服务，请通过 [UniUni 客服页面](https://www.uniuni.com/support/)的聊天机器人提交。少件、错货和退货须联系卖家。收到未下单的陌生包裹时，UniUni 表示其掌握的寄件人信息非常有限。
+手头没有单号？请查看商家订单详情；如果 UniUni 网站尚无任何记录，包裹大概率还在卖家手里。如需预约重新派送、修改地址或派送说明、申报包裹破损或反馈司机服务，请通过 [UniUni 客服页面](https://www.uniuni.com/support/)的聊天机器人提交。少件、错货和退货须联系卖家。收到未下单的陌生包裹时，UniUni 表示其掌握的寄件人信息非常有限。
 
 ## UniUni 运单号格式与查找位置
 
@@ -24,7 +24,7 @@ UniUni（Uni Express Inc.，总部位于加拿大不列颠哥伦比亚省列治�
 | `JY48CA29A482910573` | `JY`、2 位数字、`CA`、2 位数字、`A` 加 9 位数字 |
 | `UR48291057364918273` | `UR` 加 17 位数字，来自 UniUni 卖家平台 |
 
-以 `UNI` 开头的编号是订单号，`URB` 加 16 位数字是批次号（batch ID），两者都不是包裹运单号。UniUni 官网一次最多支持用逗号分隔查询 25 个单号。
+以 `UNI` 开头的编号是订单号，`URB` 加 16 位数字是批次号（batch ID），两者都不是包裹运单号。UniUni 网站一次最多支持用逗号分隔查询 25 个单号。
 
 这些单号格式与 USPS、[GOFO](carrier:gofo) 或 [SpeedX](carrier:speedx) 的单号不会重叠。
 
@@ -84,15 +84,15 @@ UniUni 官方渠道如下：
 - **美国电话：** 太平洋与山地时区拨打 1-424-284-2432；中部与东部时区拨打 1-315-533-4690。
 - **服务时间：** 美国东部时间（EST）周一至周六 10:00 至 21:00。
 
-官网查询结果页面也会显示对应包裹的联系电话。
+其网站查询结果页面也会显示对应包裹的联系电话。
 
 ## 使用 Peek 跟踪 UniUni 包裹
 
 遇到 `UUS`、`UUSC`、`4C`（以 `US` 结尾）、`U9999` 开头单号、`UR` 单号，以及 `CAA0` 后紧跟 `U` 的格式时，[Peek](/) 会立刻识别为 UniUni。对于其他 `U` 加 15 位数字、其他 `CAA0`、`USA0` 以及 `JY` 格式的单号，Peek 会向 UniUni 查询并在确认归属后选中 UniUni。粘贴含单号的 uniuni.com 查询链接同样有效。一票多件的主单号无法整体跟踪，请分别添加每件包裹各自的单号。
 
-Peek 读取 UniUni 跟踪数据，显示包裹状态、每条扫描的城镇与省/州并在地图上标出、预计送达日或派送时段、签收时间以及目的地国家。时间按你的设备时区换算显示；在 peektracker.com 以及 iPhone 和 Android App 中，轨迹末尾会注明“时间按你所在的时区显示：”及对应时区名称。Peek 会隐藏具体街道地址、司机姓名和签收照片，如需查看照片请前往 UniUni 官网。`Delivered` 和 `Out for delivery` 会以 Peek 自身的“已签收”和“派送中”显示，其余扫描保留 UniUni 原文（不显示括号里的失败原因）。
+Peek 读取 UniUni 跟踪数据，显示包裹状态、每条扫描的城镇与省/州并在地图上标出、预计送达日或派送时段、签收时间以及目的地国家。时间按你的设备时区换算显示；在 peektracker.com 以及 iPhone 和 Android App 中，轨迹末尾会注明“时间按你所在的时区显示：”及对应时区名称。Peek 会隐藏具体街道地址、司机姓名和签收照片，如需查看照片请前往 UniUni 网站。`Delivered` 和 `Out for delivery` 会以 Peek 自身的“已签收”和“派送中”显示，其余扫描保留 UniUni 原文（不显示括号里的失败原因）。
 
-当 UniUni 将包裹转交给第三方快递时，该快递的扫描会出现在 UniUni 的轨迹中，但 Peek 不会单独跟进第三方快递的新单号。通过 [SpeedPAK](carrier:speedpak) 或 DHL eCommerce 发出的包裹若指定 UniUni 负责尾程派送，Peek 则可以继续在 UniUni 上跟进。在你打开页面或开启派送当天提醒期间，只要 UniUni 官网正常响应，Peek 最高每 10 分钟检查一次，并在 UniUni 扫描进入派送当天自当地时间早上 6 点起（若 UniUni 给出了派送时段，则从时段开始前半小时起）最高每 2 分钟检查一次（通过物流查询服务时，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次）；其余时候以及连续两天无新动态后（若仍处于“已生成面单”或“已揽收”，则为 12 小时后）每小时检查一次。状态变化时，Peek 可以提醒你。
+当 UniUni 将包裹转交给第三方快递时，该快递的扫描会出现在 UniUni 的轨迹中，但 Peek 不会单独跟进第三方快递的新单号。通过 [SpeedPAK](carrier:speedpak) 或 DHL eCommerce 发出的包裹若指定 UniUni 负责尾程派送，Peek 则可以继续在 UniUni 上跟进。在你打开页面或开启派送当天提醒期间，只要 UniUni 网站正常响应，Peek 最高每 10 分钟检查一次，并在 UniUni 扫描进入派送当天自当地时间早上 6 点起（若 UniUni 给出了派送时段，则从时段开始前半小时起）最高每 2 分钟检查一次（通过物流查询服务时，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次）；其余时候以及连续两天无新动态后（若仍处于“已生成面单”或“已揽收”，则为 12 小时后）每小时检查一次。状态变化时，Peek 可以提醒你。
 
 ## UniUni 快递查询常见问题
 
@@ -113,7 +113,7 @@ UniUni 由自己的司机派送。部分包裹会转交给第三方快递完成�
 通常是因为卖家尚未将包裹交给 UniUni。UniUni 只有在收到实物包裹后才会生成预计送达日期，建议先向卖家核实发货进度。
 
 :::sources
-- [UniUni: Package Tracking](https://www.uniuni.com/tracking/) – 官网查询、一次 25 单、预计日期、无更新说明、派送尝试与签收照片
+- [UniUni: Package Tracking](https://www.uniuni.com/tracking/) – 网站查询、一次 25 单、预计日期、无更新说明、派送尝试与签收照片
 - [UniUni: Customer Support](https://www.uniuni.com/support/) – 聊天机器人、二次派送、重派资料、拒收原因、30 天仓库保管、不投邮政信箱、自提城市、改地址、破损、已签收未收到、司机反馈、退货与陌生包裹说明
 - [UniUni: Home](https://www.uniuni.com/) – 尾程派送、美加覆盖、客服电话与服务时间、签收照片
 - [UniUni: Shipping & Last Mile Delivery Services](https://www.uniuni.com/shipping-last-mile-delivery-services/) – 次日至 7 天时效、加拿大 80% 与美国 65% 覆盖、三张签收照

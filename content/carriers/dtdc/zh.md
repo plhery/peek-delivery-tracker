@@ -61,7 +61,7 @@ DTDC 服务页面未公布派送尝试次数或保管天数；派送未成功显
 
 - **客服热线：** `+91-9606 911 811`。
 - **客服邮箱：** `customersupport@dtdc.com`。
-- **在线支持：** [dtdc.com/customer-care/](https://www.dtdc.com/customer-care/) 咨询/争议表单、官网 **DIVA** 智能助手以及 **MyDTDC** 手机应用。
+- **在线支持：** [dtdc.com/customer-care/](https://www.dtdc.com/customer-care/) 咨询/争议表单、其网站 **DIVA** 智能助手以及 **MyDTDC** 手机应用。
 
 > DTDC 在 [dtdc.com](https://www.dtdc.com/in/) 首页醒目警示：**`www.dtdc.com` 是 DTDC 唯一官方网站**，对通过仿冒网站获取的优惠、电话或付款概不负责。切勿在冒充 DTDC 的陌生链接上付费或透露验证码（OTP）。另见[快递诈骗短信识别](guide:delivery-scam-texts)（英文）。
 

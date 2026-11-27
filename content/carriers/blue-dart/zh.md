@@ -6,7 +6,7 @@ published: 2026-11-26
 updated: 2026-11-26
 ---
 
-Blue Dart 是一家印度快递公司：Peek 目录将其归属印度，并按印度时间读取扫描记录。Blue Dart 货件使用 11 位数字运单号（waybill number），由寄件人提供；网购订单的运单号可能在商家的发货邮件或订单页里。把它粘贴到上方输入框，或前往 Blue Dart 官网 bluedart.com 查询。由于 Peek 无法查看 Blue Dart 官网，以下内容来自 Peek 代码对 Blue Dart 查询系统的记录。
+Blue Dart 是一家印度快递公司：Peek 目录将其归属印度，并按印度时间读取扫描记录。Blue Dart 货件使用 11 位数字运单号（waybill number），由寄件人提供；网购订单的运单号可能在商家的发货邮件或订单页里。把它粘贴到上方输入框，或前往 Blue Dart 网站 bluedart.com 查询。由于 Peek 无法查看 Blue Dart 网站，以下内容来自 Peek 代码对 Blue Dart 查询系统的记录。
 
 ## Blue Dart 运单号长什么样
 
@@ -55,7 +55,7 @@ Peek 暂未收录的文案会按 Blue Dart 原文显示并归为“运输中”�
 
 **通过 ICC Worldwide 寄送。** ICC Worldwide 的查询系统可能在 Blue Dart 单号旁注明 Blue Dart。只有当该单号为 11 位数字时，Peek 才会继续向 Blue Dart 查询，并在 Blue Dart 出现不早于 ICC Worldwide 最新记录的扫描后转为在 Blue Dart 处跟进（同时保留 ICC Worldwide 历史记录）。其他位数单号则停留在 ICC Worldwide。添加时输入 ICC Worldwide 单号，然后点“更换”搜索 ICC Worldwide（Peek 不会根据单号推荐它）。
 
-**清关。** Peek 代码仅覆盖印度境内的 Blue Dart，且无法查看其官网上关于国际货件的说明。包裹卡在海关请看[包裹卡在海关怎么办](guide:customs)（英文）。
+**清关。** Peek 代码仅覆盖印度境内的 Blue Dart，且无法查看其网站上关于国际货件的说明。包裹卡在海关请看[包裹卡在海关怎么办](guide:customs)（英文）。
 
 ## Blue Dart 物流停更、延误或退回
 
@@ -75,7 +75,7 @@ Peek 暂未收录的文案会按 Blue Dart 原文显示并归为“运输中”�
 
 ## Blue Dart 客服与联系方式
 
-由于 Peek 无法查看 Blue Dart 官网，本页不列 Blue Dart 电话或邮箱：Peek 只提供从承运商自有页面核实过的联系方式。
+由于 Peek 无法查看 Blue Dart 网站，本页不列 Blue Dart 电话或邮箱：Peek 只提供从承运商自有页面核实过的联系方式。
 
 网购订单请先联系向 Blue Dart 下单的商家。Peek 无法替你联系 Blue Dart 或商家。
 
@@ -112,7 +112,7 @@ Peek 暂未收录的文案会按 Blue Dart 原文显示并归为“运输中”�
 
 ### Blue Dart 包裹丢失联系谁？
 
-联系向 Blue Dart 下单的商家或寄件人。由于 Peek 无法检查 Blue Dart 官网，本页未列出 Blue Dart 联系方式。
+联系向 Blue Dart 下单的商家或寄件人。由于 Peek 无法检查 Blue Dart 网站，本页未列出 Blue Dart 联系方式。
 
 :::sources
 - [Universal Parcel Scraper: Blue Dart](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/blue-dart) – 印度归属、11 位运单号与校验位、查询系统与无信息回复、状态文案及阶段、印度时间、略去字段、查询链接

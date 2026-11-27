@@ -10,7 +10,7 @@ Speedy（索非亚 Speedy AD）是隶属 DPD 集团（Geopost）的保加利亚�
 
 ## Speedy 运单号：在哪里查找
 
-Speedy 将其称为运单号（waybill number / tracking number）。尽管官网未公布固定长度规则，但 Speedy 自己的范例和其查件页面上的单号均为 11 位数字，例如 `63482917364`（虚构）。
+Speedy 将其称为运单号（waybill number / tracking number）。尽管网站未公布固定长度规则，但 Speedy 自己的范例和其查件页面上的单号均为 11 位数字，例如 `63482917364`（虚构）。
 
 你可以从以下位置找到单号：
 
@@ -72,7 +72,7 @@ Speedy 未公布物流停滞的自助指引：请先查看 Smart Control 链接�
 
 收货时请当着快递员的面检查内件，如有破损，须写入你与快递员共同签署的破损记录单（protocol）。
 
-对于遗失、被盗、破损、无故退回或延误的包裹，寄件人与收件人均可在 Speedy 收寄日起 **6 个月**内提交理赔：可发邮件至 `r@speedy.bg`、在任意 Speedy 网点留下书面申请、寄信至总部或填写官网理赔表。Speedy 须在 **1 个月**内书面答复保加利亚境内理赔、**3 个月**内答复国际理赔（国际理赔发至 `internationalclaims@speedy.bg`）。赔偿上限见 Speedy 理赔表并取决于寄件人申报价值。
+对于遗失、被盗、破损、无故退回或延误的包裹，寄件人与收件人均可在 Speedy 收寄日起 **6 个月**内提交理赔：可发邮件至 `r@speedy.bg`、在任意 Speedy 网点留下书面申请、寄信至总部或填写网站理赔表。Speedy 须在 **1 个月**内书面答复保加利亚境内理赔、**3 个月**内答复国际理赔（国际理赔发至 `internationalclaims@speedy.bg`）。赔偿上限见 Speedy 理赔表并取决于寄件人申报价值。
 
 ## Speedy 客服电话与联系方式
 
@@ -102,7 +102,7 @@ Peek 可以按“每次扫描”、“重要环节”或“仅派送当天”通
 
 ### Speedy 送货需要多长时间？
 
-Speedy 官网未公布统一运输时效。具体送达日期请查看 Smart Control 链接，或留意 `Shipment data received` 下方的 “Expected Delivery Date” 备注。
+Speedy 网站未公布统一运输时效。具体送达日期请查看 Smart Control 链接，或留意 `Shipment data received` 下方的 “Expected Delivery Date” 备注。
 
 ### 可以用 Speedy 查询发往希腊或塞浦路斯的包裹吗？
 

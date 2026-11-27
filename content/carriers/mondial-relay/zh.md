@@ -45,7 +45,7 @@ Mondial Relay 官方查询页面仅提供法语（比利时站提供法语或荷
 
 **取件方式。** 在比利时，前往 Point Relais 取件需出示有效身份证件，或提供 Mondial Relay 通过邮件或短信发送的 PIN 码；在自提柜取件则需输入邮件、短信或应用中的 6 位取件码。他人也可代领：凭你的取件码，或在 Point Relais 同时出示代领人本人和你的有效身份证件原件。
 
-**保管期限。** 在比利时为 5 个自然日（含周日和法定节假日），不可延期：周三送达的包裹保管至周一，逾期退回寄件人。荷兰的 Point Relais 同样保管 5 天。InPost 页面说明西班牙和葡萄牙的境内包裹保管 5 天，不过葡萄牙有一处页面也写了 8 天。法国的具体保管期限请查看 Mondial Relay 法国官网。
+**保管期限。** 在比利时为 5 个自然日（含周日和法定节假日），不可延期：周三送达的包裹保管至周一，逾期退回寄件人。荷兰的 Point Relais 同样保管 5 天。InPost 页面说明西班牙和葡萄牙的境内包裹保管 5 天，不过葡萄牙有一处页面也写了 8 天。法国的具体保管期限请查看 Mondial Relay 法国网站。
 
 **更改取件点。** 在比利时，包裹交由 Mondial Relay 揽收后无法更改取件点。如果原取件点歇业或满仓无法接收，你会收到邮件或短信让你等待或另选网点；若未回复，Mondial Relay 可能会为你指定附近的替代网点。
 
@@ -63,11 +63,11 @@ Mondial Relay 官方查询页面仅提供法语（比利时站提供法语或荷
 
 各国客服联系渠道如下：
 
-- **法国：** 请查看 Mondial Relay 法国官网的联系页面。
+- **法国：** 请查看 Mondial Relay 法国网站的联系页面。
 - **比利时：** 拨打 +32 2 340 06 10（按市话标准计费），周一至周五 8:00–19:00、周六 8:00–18:00，或发邮件至 customerservice@mondialrelay.be。
 - **西班牙和葡萄牙：** 现已并入 InPost，西班牙免费电话 900 900 137，葡萄牙电话 211 245 624。
 
-> Mondial Relay 比利时官网声明，公司绝不会要求你拨打高额付费电话、支付额外费用或进行银行转账。官方邮件仅来自 noreply@mondialrelay.fr 或 noreply@mondialrelay.com。可疑邮件可举报至 abuse@mondialrelay.fr。
+> Mondial Relay 比利时网站声明，公司绝不会要求你拨打高额付费电话、支付额外费用或进行银行转账。官方邮件仅来自 noreply@mondialrelay.fr 或 noreply@mondialrelay.com。可疑邮件可举报至 abuse@mondialrelay.fr。
 
 ## 使用 Peek 查询 Mondial Relay 包裹
 

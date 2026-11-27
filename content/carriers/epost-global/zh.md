@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-ePost Global 是一家美国物流公司，其运单号以 `EPG` 开头。从 Peek 掌握的历史轨迹来看，包裹先在美国境内的一处 ePost Global 处理中心扫描入库，随后交由各国邮政或快递合作伙伴继续运输和派送。运单号由商家或寄件人提供，直接粘贴到上方输入框即可查询；ePost Global 自家官网查件入口在 epgtrack.com。Peek 快递目录同时将 ePost Global 关联至 PPX Track，以及 RR Donnelley、RRD Donnelley 和 RRD International Logistics 等别称，在 Peek 里选择快递公司时搜索任意一个名称都能找到 ePost Global。
+ePost Global 是一家美国物流公司，其运单号以 `EPG` 开头。从 Peek 掌握的历史轨迹来看，包裹先在美国境内的一处 ePost Global 处理中心扫描入库，随后交由各国邮政或快递合作伙伴继续运输和派送。运单号由商家或寄件人提供，直接粘贴到上方输入框即可查询；ePost Global 自家网站查件入口在 epgtrack.com。Peek 快递目录同时将 ePost Global 关联至 PPX Track，以及 RR Donnelley、RRD Donnelley 和 RRD International Logistics 等别称，在 Peek 里选择快递公司时搜索任意一个名称都能找到 ePost Global。
 
 ## ePost Global 运单号是什么样的？
 
@@ -73,7 +73,7 @@ ePost Global 称其邮政与末端快递合作网络覆盖六大洲。在 Peek �
 
 **暂时查不到：** 当 ePost Global 官方查询页尚未显示任何更新时，Peek 会显示“等待 ePost Global 更新”并持续查询。请核对单号是否为 `EPG` 加 10 至 15 位数字。如果两天后 ePost Global 仍查不到记录且综合跟踪服务也无结果，Peek 会提示：“两天过去了，快递公司仍查不到这个单号。请检查单号、更换快递公司，或删除这个包裹。”若几天后依旧无动静，请向商家确认是否已实际交寄。
 
-**交接后没新动态：** 包裹此时已移交末端合作方，合作方自己的轨迹可能比 ePost Global 的更新。Peek 能做到时会转到合作方那里跟踪包裹（见下文）；否则请从交接记录里找到合作方名称与转单号前往其官网查询。
+**交接后没新动态：** 包裹此时已移交末端合作方，合作方自己的轨迹可能比 ePost Global 的更新。Peek 能做到时会转到合作方那里跟踪包裹（见下文）；否则请从交接记录里找到合作方名称与转单号前往其网站查询。
 
 **连续多日无更新：** 若连续四天无新轨迹，Peek 会标出最新扫描日期（如“自10月12日周一起没有物流更新”），提示包裹在长途航班、海关或周末时常暂停更新（超过三周无更新则建议联系卖家），并附上“向 ePost Global 寻求帮助”链接（若 Peek 已切换至已知帮助页的末端合作方，则显示该合作方的帮助链接）。另见[物流停止更新怎么办](guide:tracking-not-updating)（英文）。
 
@@ -83,7 +83,7 @@ ePost Global 称其邮政与末端快递合作网络覆盖六大洲。在 Peek �
 
 ## ePost Global 客服与联系方式
 
-ePost Global 官网 epostglobalshipping.com 列有免费电话 +1 866-784-8444 和本地电话 +1 310-784-8485，未注明服务时间，也没有公布客服邮箱。在线客服助手 ePost Assist 位于 epostassist.epgtrack.com，其支持页面（contact-support）也提供在线工单表单。当包裹长时间无动态时，Peek 的“向 ePost Global 寻求帮助”链接会打开 ePost Global 的联系支持页面。
+ePost Global 网站 epostglobalshipping.com 列有免费电话 +1 866-784-8444 和本地电话 +1 310-784-8485，未注明服务时间，也没有公布客服邮箱。在线客服助手 ePost Assist 位于 epostassist.epgtrack.com，其支持页面（contact-support）也提供在线工单表单。当包裹长时间无动态时，Peek 的“向 ePost Global 寻求帮助”链接会打开 ePost Global 的联系支持页面。
 
 网购订单建议优先联系商家，因为运输服务由商家预订；包裹交接后涉及具体派送事宜，则直接联系末端承运商。
 
@@ -91,9 +91,9 @@ ePost Global 官网 epostglobalshipping.com 列有免费电话 +1 866-784-8444 �
 
 只要输入 `EPG` 加 10 至 15 位数字，[Peek](/) 会立即识别出 ePost Global（显示“识别出的快递公司”），并仅凭单号向其官方查件系统拉取数据，无需邮编或账号。也可以直接粘贴 ePost Global 或 PPX Track 的查件链接，Peek 会从中提取单号（若含多个单号则取第一个）。如果手头只有末端合作方的单号，也照样可以粘贴：Peek 跟踪 4,500 多家快递公司。
 
-Peek 会展示物流状态、每条扫描记录及其地点、目的国家，以及 ePost Global 给出的合作承运商名称与转单号，略去官网进度条、邮编和航空总运单号。由于 ePost Global 官网本身不提供预计送达日期、重量和签收凭证，Peek 也不显示这些字段。包裹页面里的“打开 ePost Global 官网”链接可直接带着你的单号跳转官方查件页。
+Peek 会展示物流状态、每条扫描记录及其地点、目的国家，以及 ePost Global 给出的合作承运商名称与转单号，略去其网站进度条、邮编和航空总运单号。由于 ePost Global 网站本身不提供预计送达日期、重量和签收凭证，Peek 也不显示这些字段。包裹页面里的“打开 ePost Global 官网”链接可直接带着你的单号跳转官方查件页。
 
-ePost Global 官网显示的时间不含时区信息。Peek 会按处理中心所在州的时钟解析 `Parcel Received and Processing` 与 `Parcel Shipped`（前提是该州使用单一时区），GLS 轨迹按中欧时间、英国皇家邮政按英国时间，其余记录按发生地或所属航段时钟换算，并全部转换到你设备的本地时区；在 peektracker.com 及 iPhone、Android 应用中，物流历史下方会标明“时间按你所在的时区显示：”及其时区名称。
+ePost Global 网站显示的时间不含时区信息。Peek 会按处理中心所在州的时钟解析 `Parcel Received and Processing` 与 `Parcel Shipped`（前提是该州使用单一时区），GLS 轨迹按中欧时间、英国皇家邮政按英国时间，其余记录按发生地或所属航段时钟换算，并全部转换到你设备的本地时区；在 peektracker.com 及 iPhone、Android 应用中，物流历史下方会标明“时间按你所在的时区显示：”及其时区名称。
 
 当 ePost Global 给出 Peek 已收录的末端合作方时，包裹卡片会加以标示（例如“由 PostNL 派送”，若合作方仅收到预报尚无实物扫描则显示“PostNL 已收到预报，尚未收到包裹”），并在 ePost Global 给出合作方单号时，将其列在 EPG 单号之后。随后 Peek 也会直接向该合作方查询（有转单号则用转单号，没有则用 EPG 单号）。若未写明合作方，Peek 会对国际邮政单号询问目的国邮政，对其他单号询问格式唯一对应的那一家快递公司。Peek 只向它能读取官方轨迹的承运商查询。一旦末端承运商出现不早于 ePost Global 最新记录的扫描，Peek 便转到该承运商继续跟踪并保留 ePost Global 的前期轨迹；否则仍沿用 ePost Global 转发的合作方记录。通过 GLS 欧洲网络派送的包裹亦是如此，因为 ePost Global 不会写明具体由哪一国的 GLS 分公司派送。
 

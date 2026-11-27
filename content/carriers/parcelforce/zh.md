@@ -51,7 +51,7 @@ Parcelforce Worldwide 隶属于[英国皇家邮政（Royal Mail）](carrier:roya
 
 **暂无扫描记录。** 寄件人可能在交寄前就生成了单号：`Sender has despatched item` 表示 Parcelforce 尚未拿到包裹。请核对单号并稍后再试。详见[物流停止更新的原因](guide:tracking-not-updating)（英文）。
 
-**延误、遗失或破损。** 如为网购订单，请优先联系卖家：英国公民咨询局（Citizens Advice）指出通常找卖家处理更有效，你可以要求退款或补发。如需申请承运商赔偿，请在 Parcelforce 官网查看索赔流程。
+**延误、遗失或破损。** 如为网购订单，请优先联系卖家：英国公民咨询局（Citizens Advice）指出通常找卖家处理更有效，你可以要求退款或补发。如需申请承运商赔偿，请在 Parcelforce 网站查看索赔流程。
 
 **海关税费。** Parcelforce 负责将境外入境英国的包裹送交海关清关；如有增值税、关税或其他费用应付，Parcelforce 会向你发出账单列明应付金额（详见[海关滞留包裹指南](guide:customs)（英文））。包裹通常保管约 **3 周**，逾期未缴则退回寄件人。关于货物的清关咨询也请直接联系 Parcelforce。
 
@@ -78,7 +78,7 @@ Peek 会展示物流状态、附带地点的每次扫描（不含邮编）、预
 
 ### Parcelforce 属于 Royal Mail 吗？
 
-是的。英国政府官网（GOV.UK）将 Parcelforce 归入 Royal Mail 集团，其包裹也在 Royal Mail 的“Track your item”页面追踪。
+是的。英国政府网站（GOV.UK）将 Parcelforce 归入 Royal Mail 集团，其包裹也在 Royal Mail 的“Track your item”页面追踪。
 
 ### 为什么我的 Parcelforce 单号无法识别？
 

@@ -6,7 +6,7 @@ published: 2026-11-25
 updated: 2026-11-25
 ---
 
-加拿大邮政（Canada Post / Canada Post Corporation）是负责运营加拿大全国邮政服务的联邦国有企业。你可以在加拿大邮政官网的 [Track 页面](https://www.canadapost-postescanada.ca/track-reperage/en)或免费官方应用中查询包裹，也可以直接把单号粘贴到上方查询框中。单号由寄件人提供，通常在商家的发货邮件里：加拿大邮政无法按你的姓名或地址查找包裹。如果单号以 `CA` 结尾且你在加拿大境外追踪，Peek 还可以用同一单号向你所在国家的邮政查询。
+加拿大邮政（Canada Post / Canada Post Corporation）是负责运营加拿大全国邮政服务的联邦国有企业。你可以在加拿大邮政网站的 [Track 页面](https://www.canadapost-postescanada.ca/track-reperage/en)或免费官方应用中查询包裹，也可以直接把单号粘贴到上方查询框中。单号由寄件人提供，通常在商家的发货邮件里：加拿大邮政无法按你的姓名或地址查找包裹。如果单号以 `CA` 结尾且你在加拿大境外追踪，Peek 还可以用同一单号向你所在国家的邮政查询。
 
 ## 加拿大邮政单号格式
 

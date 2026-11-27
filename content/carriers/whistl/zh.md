@@ -1,6 +1,6 @@
 ---
-title: Whistl 英国包裹追踪：末端派送承运商、状态与客服
-description: 追踪英国 Whistl（Parcelhub）包裹：参考号来源、英文状态含义、皇家邮政/Evri/DPD 等末端承运商交接规则及客服联系。
+title: Whistl 英国包裹追踪：末端派送快递公司、状态与客服
+description: 追踪英国 Whistl（Parcelhub）包裹：参考号来源、英文状态含义、皇家邮政/Evri/DPD 等末端快递公司交接规则及客服联系。
 slug: whistl-tracking
 published: 2026-11-26
 updated: 2026-11-26

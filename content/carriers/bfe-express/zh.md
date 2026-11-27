@@ -1,6 +1,6 @@
 ---
 title: BFE Express 国际快递查询：CK 与 WYB 单号、状态与客服
-description: 查询 BFE Express 跨境包裹（发往阿根廷、秘鲁、乌拉圭和美国）：CK 与 WYB 单号规则、清关与西语末端状态、派送延迟及各区域支持邮箱。
+description: 查询 BFE Express 跨境包裹（发往阿根廷、秘鲁、乌拉圭和美国）：CK 与 WYB 单号规则、清关与西语末端状态、派送延迟及各区域客服邮箱。
 slug: bfe-express-kuajing-chaxun
 published: 2026-11-24
 updated: 2026-11-24
@@ -44,9 +44,9 @@ BFE Express 的英文扫描把地点写在逗号前（如 `<城市>, Customs dec
 
 ## 清关、末端交接与延误说明
 
-BFE Express 官网提供小包运输、国际货运、清关、本地仓储及末端派送，并积极面向 Temu 阿根廷卖家招商。以下几点有助于理解其轨迹节奏：
+BFE Express 网站提供小包运输、国际货运、清关、本地仓储及末端派送，并积极面向 Temu 阿根廷卖家招商。以下几点有助于理解其轨迹节奏：
 
-- **抵达目的国机场之前：** 如果 BFE Express 官网暂时查不到任何记录，请先查看购物平台的卖家发货页，并参阅[为什么物流停止更新](guide:tracking-not-updating)（英文）。
+- **抵达目的国机场之前：** 如果 BFE Express 网站暂时查不到任何记录，请先查看购物平台的卖家发货页，并参阅[为什么物流停止更新](guide:tracking-not-updating)（英文）。
 - **清关与末端交接：** `Customs declaration completed` 与 `Turned over to last mile facility` 常在同一地点间隔约一小时发布，当地网点入库扫描（`Se ha recibido el paquete.` 或 `Tu paquete fue recibido por en: ...`）则往往在次日出现。若包裹在目的国海关停滞，请参阅[包裹被海关扣留怎么办](guide:customs)（英文）。
 - **预计派送日期：** 包裹在途期间，BFE Express 有时会给出预计派送日，Peek 会同步显示；一旦包裹签收、退回、待取件或出现晚于该日期的新扫描，Peek 会自动撤下该预计日期。
 - **显示已签收未收到或破损：** BFE Express 的[客户支持页面](https://www.bfeexpress.com/contactUS)在常见问题中列出了这两种情况，并提醒联系区域支持团队前先准备好完整运单号。另请参阅[显示已签收但未收到](guide:delivered-not-received)（英文）。
@@ -77,7 +77,7 @@ BFE Express 在其[联系我们页面](https://www.bfeexpress.com/contactUS)公�
 - **美国：** `info@us.bfeexpress.com`
 - **巴拉圭：** `info_py@bfeexpress.com`
 - **其他支持地区（哥伦比亚、厄瓜多尔、塞尔维亚、多米尼克）：** `info@other.bfeexpress.com`
-- **官网与查询入口：** [bfeexpress.com](https://www.bfeexpress.com/) 与 [bfeexpress.com/tracking](https://www.bfeexpress.com/tracking)
+- **其网站与查询入口：** [bfeexpress.com](https://www.bfeexpress.com/) 与 [bfeexpress.com/tracking](https://www.bfeexpress.com/tracking)
 
 发邮件联系对应国家客服时，请务必附上完整的 `CK…` 或 `WYB…` 运单号。
 
@@ -85,7 +85,7 @@ BFE Express 在其[联系我们页面](https://www.bfeexpress.com/contactUS)公�
 
 ### 为什么我的 BFE Express 轨迹直接从目的国机场开始、前面没有记录？
 
-BFE Express 官网轨迹有时会从航班抵达目的国机场的 `Arrived at Airport of destination` 开始显示。更早之前的中国端发货进度，请在购物平台的卖家订单页查看。
+BFE Express 网站轨迹有时会从航班抵达目的国机场的 `Arrived at Airport of destination` 开始显示。更早之前的中国端发货进度，请在购物平台的卖家订单页查看。
 
 ### 为什么 BFE Express 的扫描同时包含英文和西班牙语？
 
@@ -100,7 +100,7 @@ BFE Express 用英文记录国际到港、清关申报与末端交接节点，�
 请核对 `CK` 或 `WYB` 单号是否漏掉字母或数字，并向卖家确认包裹是否已经正式移交给 BFE Express。
 
 :::sources
-- [BFE Express 官网](https://www.bfeexpress.com/)
+- [BFE Express 网站](https://www.bfeexpress.com/)
 - [BFE Express 运单查询](https://www.bfeexpress.com/tracking)
 - [BFE Express 客户支持](https://www.bfeexpress.com/contactUS)
 - [universal-parcel-scraper BFE Express 适配器](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/bfe-express)

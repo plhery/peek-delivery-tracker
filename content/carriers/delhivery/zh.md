@@ -10,14 +10,14 @@ Delhivery 是一家印度物流公司，自称印度规模最大的全链路综�
 
 ## Delhivery 运单号（AWB）格式
 
-Delhivery 将快递单号称为 AWB（航空运单号，airway bill number），其官网查件页也接受 LRN。以下是 Peek 识别为 Delhivery AWB 的单号形态（数字为虚构示例）：
+Delhivery 将快递单号称为 AWB（航空运单号，airway bill number），其网站查件页也接受 LRN。以下是 Peek 识别为 Delhivery AWB 的单号形态（数字为虚构示例）：
 
 | 单号（虚构示例） | 说明 |
 | --- | --- |
 | `1482910573642` | 13 位数字：Delhivery AWB 单号。从 DPD 法国到韩国邮政，多家快递也使用 13 位数字。 |
 | `14829105736425` | 14 位数字：同样是 Delhivery AWB 单号。DPD、SEUR、BRT、Xpressbees 等也使用 14 位数字。 |
 
-仅凭位数无法直接断定属于 Delhivery，因此请核对商家消息中写明的承运商名称。订单号、LRN 或手机号仅在 Delhivery 官网可用，Peek 无法识别，必须输入 AWB。在 Delhivery 查件页面，查询 AWB 请选 “AWB” 标签页，查询网店订单号请选 “Order Id”；使用手机号登录后，则会列出所有由 Delhivery 派送给你的快件。找不到任何单号？参考[如何查找快递单号](guide:find-tracking-number)（英文）。
+仅凭位数无法直接断定属于 Delhivery，因此请核对商家消息中写明的承运商名称。订单号、LRN 或手机号仅在 Delhivery 网站可用，Peek 无法识别，必须输入 AWB。在 Delhivery 查件页面，查询 AWB 请选 “AWB” 标签页，查询网店订单号请选 “Order Id”；使用手机号登录后，则会列出所有由 Delhivery 派送给你的快件。找不到任何单号？参考[如何查找快递单号](guide:find-tracking-number)（英文）。
 
 ## Delhivery 物流状态含义
 
@@ -64,7 +64,7 @@ Delhivery 查件页面顶部有分步进度条，下方按城市列出已发生�
 
 申请退款或补发请联系商家：由商家委托 Delhivery 承运。
 
-**无更新。** 如果 Peek 仍显示“已生成面单”，说明商家只预订了 Delhivery 但尚未交出包裹，请联系商家。如果包裹已在流转但轨迹停滞，请用手机号登录 Delhivery 官网或应用：你能看到 Delhivery 派送给你的所有包裹并直接提交咨询。详见[物流长时间不更新怎么办](guide:tracking-not-updating)（英文）。
+**无更新。** 如果 Peek 仍显示“已生成面单”，说明商家只预订了 Delhivery 但尚未交出包裹，请联系商家。如果包裹已在流转但轨迹停滞，请用手机号登录 Delhivery 网站或应用：你能看到 Delhivery 派送给你的所有包裹并直接提交咨询。详见[物流长时间不更新怎么办](guide:tracking-not-updating)（英文）。
 
 **丢失或破损。** `LOST` 表示 Delhivery 已标记包裹丢失，请通知商家。对于 Delhivery Direct 个人寄件，丢失或破损索赔必须在 3 天内通过应用工单提出；破损件需提供 3 张包裹与包装照片及文字说明，官方还建议拍摄开箱视频。根据该条款，赔付审核需 30 至 45 个工作日，未购买付费保障 Delhivery Protect 时最高赔付 2,000 印度卢比，且按品类设更低上限（如书籍文件 500 卢比、电子产品 1,000 卢比），延误不予赔偿。详见[包裹丢失怎么办](guide:lost-parcel)（英文）和[包裹破损怎么办](guide:damaged-parcel)（英文）。
 
@@ -76,7 +76,7 @@ Delhivery 查件页面顶部有分步进度条，下方按城市列出已发生�
 
 Peek 无法代你联系 Delhivery 或商家。以下为 Delhivery 官方说明：
 
-- **客服入口：** Delhivery 声明客服仅可通过官网或应用联系。请在[帮助页面](https://www.delhivery.com/support)使用手机号加一次性验证码（OTP）登录后提交工单，或在 Delhivery 应用内发起咨询。
+- **客服入口：** Delhivery 声明客服仅可通过其网站或应用联系。请在[帮助页面](https://www.delhivery.com/support)使用手机号加一次性验证码（OTP）登录后提交工单，或在 Delhivery 应用内发起咨询。
 - **投诉主题：** 帮助页面的快件咨询类别包含 “Report Issues”、“Grievance Officer” 和 “Report on-field staff issues”，并列于 “Destination and Contact details” 与 “Returns” 旁。
 - **电话警示：** Delhivery 警告称，网上搜到的其他客服渠道或联系电话均可能是诈骗。
 - **社交媒体：** Delhivery 仅通过其官方 Facebook、X 和 Instagram 账号联系和服务客户，其他账号发来的消息均应视为可疑。
@@ -109,10 +109,10 @@ Peek 会把节点归入自有阶段：`Picked Up` 归为“已揽收”，`In Tr
 
 ### Delhivery 客服电话是多少？
 
-Delhivery 说明其客服仅可通过官网或应用联系：使用手机号登录后提交工单即可，并提醒网上搜到的其他电话号码可能存在诈骗风险。
+Delhivery 说明其客服仅可通过其网站或应用联系：使用手机号登录后提交工单即可，并提醒网上搜到的其他电话号码可能存在诈骗风险。
 
 :::sources
-- [Delhivery: Track your order](https://www.delhivery.com/tracking) – 可用手机号、AWB、订单号或 LRN 查件、防骗警示及仅限官网/应用客服
+- [Delhivery: Track your order](https://www.delhivery.com/tracking) – 可用手机号、AWB、订单号或 LRN 查件、防骗警示及仅限网站/应用客服
 - [Delhivery: Support](https://www.delhivery.com/support) – AWB/LRN 查件、手机号登录、提交工单及含 Grievance Officer 的咨询类别
 - [Delhivery: About us](https://www.delhivery.com/about-us) – 印度最大全链路综合物流商、邮编覆盖、派送中心与 24/7 运营
 - [Delhivery: Home](https://www.delhivery.com/) – 220 多个国家和地区及 FedEx、Aramex 两家战略伙伴

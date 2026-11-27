@@ -1,6 +1,6 @@
 ---
 title: MHI（Trackmail）包裹追踪：状态含义、本地派送商与客服
-description: 收到来自英国商家的 MHI 单号？查看 Trackmail 追踪入口、各英文状态含义、当地派送承运商交接、无更新排查与客服联系方式。
+description: 收到来自英国商家的 MHI 单号？查看 Trackmail 追踪入口、各英文状态含义、当地派送快递公司交接、无更新排查与客服联系方式。
 slug: mhi-tracking
 published: 2026-11-26
 updated: 2026-11-26

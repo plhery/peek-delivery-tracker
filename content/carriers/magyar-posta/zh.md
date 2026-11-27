@@ -93,7 +93,7 @@ posta.hu 公布的渠道：
 
 ### Magyar Posta 是哪个国家的邮政？
 
-匈牙利。Magyar Posta Zrt. 是匈牙利指定的普遍邮政服务提供商，英文官网称为 Hungarian Post。
+匈牙利。Magyar Posta Zrt. 是匈牙利指定的普遍邮政服务提供商，英文网站称为 Hungarian Post。
 
 ### 可以用英文查 Magyar Posta 吗？
 

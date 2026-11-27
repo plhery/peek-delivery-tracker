@@ -6,7 +6,7 @@ published: 2026-11-25
 updated: 2026-11-25
 ---
 
-如需查询 Sending 包裹，请在 Sending 官网的 [Localiza tu envío](https://www.sending.es/localiza-tu-envio/) 页面输入 12 位运单号或参考号，或直接把单号粘贴到上方查询框。物流节点以西班牙语显示，下表逐条给出中文含义。如有查询问题，Sending 公布的联系电话为西班牙 +34 919 012 048 与葡萄牙 +351 211 252 884。Sending（Sending Transporte Urgente）是一家覆盖西班牙和葡萄牙的西班牙快递与物流公司。InPost 表示于 2025 年纳入了 Sending，目前 Sending 网站已带有 “Sending by InPost” 标志。Sending 说明收件人会通过邮件、短信或应用收到单号。
+如需查询 Sending 包裹，请在 Sending 网站的 [Localiza tu envío](https://www.sending.es/localiza-tu-envio/) 页面输入 12 位运单号或参考号，或直接把单号粘贴到上方查询框。物流节点以西班牙语显示，下表逐条给出中文含义。如有查询问题，Sending 公布的联系电话为西班牙 +34 919 012 048 与葡萄牙 +351 211 252 884。Sending（Sending Transporte Urgente）是一家覆盖西班牙和葡萄牙的西班牙快递与物流公司。InPost 表示于 2025 年纳入了 Sending，目前 Sending 网站已带有 “Sending by InPost” 标志。Sending 说明收件人会通过邮件、短信或应用收到单号。
 
 ## Sending 快递单号格式
 
@@ -15,9 +15,9 @@ Sending 查件页要求填写 *código de envío*（运单号），也接受参�
 | 单号 | 说明 |
 | --- | --- |
 | `048291057362` | 12 位数字（含前导零）：Sending 运单号。[MRW](carrier:mrw)、[FedEx](carrier:fedex)、[Mondial Relay](carrier:mondial-relay) 等公司也使用 12 位数字。 |
-| 商家或寄件人参考号 | Sending 官网查件页可通过参考号查到包裹，但 Peek 不行，它需要 12 位运单号。 |
+| 商家或寄件人参考号 | Sending 网站查件页可通过参考号查到包裹，但 Peek 不行，它需要 12 位运单号。 |
 
-由于许多快递公司都用 12 位数字，请先确认商家邮件写明的承运商确为 Sending。如果 Sending 官网返回 `LO SENTIMOS, NO HEMOS ENCONTRADO TU ENVIO.`（“抱歉，未找到您的快件”），请核对数字并向商家确认单号和快递公司。完全找不到单号？参考[如何查找快递单号](guide:find-tracking-number)（英文）。
+由于许多快递公司都用 12 位数字，请先确认商家邮件写明的承运商确为 Sending。如果 Sending 网站返回 `LO SENTIMOS, NO HEMOS ENCONTRADO TU ENVIO.`（“抱歉，未找到您的快件”），请核对数字并向商家确认单号和快递公司。完全找不到单号？参考[如何查找快递单号](guide:find-tracking-number)（英文）。
 
 ## Sending 西班牙语物流状态含义
 
@@ -41,9 +41,9 @@ Sending 查件页要求填写 *código de envío*（运单号），也接受参�
 
 ## Sending 西班牙派送时段、派送未成功及改址
 
-针对网购订单，Sending 表示收件人可以选择期望的派送时间段，且在送达前一小时提供短信提醒，但官网未说明具体选时段的操作入口。Sending 网站还提供自提点查询工具 “Localiza tu punto de recogida”，同样未说明何种情况下包裹会送往自提点。
+针对网购订单，Sending 表示收件人可以选择期望的派送时间段，且在送达前一小时提供短信提醒，但网站未说明具体选时段的操作入口。Sending 网站还提供自提点查询工具 “Localiza tu punto de recogida”，同样未说明何种情况下包裹会送往自提点。
 
-**派送未成功。** 派送未成功后，轨迹会显示 `Has sido ausente`。Sending 官网未公布重派次数、是否留纸质通知单或保管天数，请致电或通过下文联系表单询问后续安排。更多内容见[派送未成功怎么办](guide:missed-delivery)（英文）。
+**派送未成功。** 派送未成功后，轨迹会显示 `Has sido ausente`。Sending 网站未公布重派次数、是否留纸质通知单或保管天数，请致电或通过下文联系表单询问后续安排。更多内容见[派送未成功怎么办](guide:missed-delivery)（英文）。
 
 **地址错误或不全。** 若看到 `Direccion incorrecta - faltan datos` 或地址确实填错，请使用 Sending 的[地址变更表单](https://www.sending.es/formulario-contacto/cambio-direccion-datos/)。需填写运单号、收件人全名、邮箱、电话（选填）以及新地址（街道、门牌号、楼层户号、邮编、城镇及补充说明）。Sending 未说明改址是否收费以及最晚提交时限。另见[更改收件地址](guide:change-delivery-address)（英文）。
 
@@ -54,14 +54,14 @@ Sending 受商家委托承运，申请退款或补发应直接联系商家。西
 - **长时间不动：** 查看[物流长时间不更新怎么办](guide:tracking-not-updating)（英文），并致电或填写 Sending 状态查询表单核实进度。
 - **出现 `FALTA DEFINITIVA`：** 包裹已被认定丢失。请直接通知商家，损失由卖家承担。详见[包裹丢失怎么办](guide:lost-parcel)（英文）。
 - **显示已签收但未收到：** 先核对 `Recibido` 签收人姓名，询问邻居或楼宇门卫，再联系商家。参考[显示已签收但未收到包裹](guide:delivered-not-received)（英文）。
-- **破损：** Sending 官网未公布索赔流程或时限。拆箱前先拍照留证并通知商家，见[包裹破损怎么办](guide:damaged-parcel)（英文）。
+- **破损：** Sending 网站未公布索赔流程或时限。拆箱前先拍照留证并通知商家，见[包裹破损怎么办](guide:damaged-parcel)（英文）。
 - **无理由退货：** 通常自收货日起享有 14 个日历日的撤回权，需通知卖家。Sending 也设有[撤回购买表单](https://www.sending.es/formulario-contacto/desistimiento-compra/)（*desistimiento de compra*）。
 
 ## Sending 客服电话与联系途径
 
-以下信息来自 Sending 官网：
+以下信息来自 Sending 网站：
 
-- **电话：** 西班牙 +34 919 012 048，葡萄牙 +351 211 252 884（官网页面印作 +35 1211252884），用于咨询包裹状态。两个号码仅列在西班牙语查件页，英文页未提供电话，也未公布服务时间。
+- **电话：** 西班牙 +34 919 012 048，葡萄牙 +351 211 252 884（其网站页面印作 +35 1211252884），用于咨询包裹状态。两个号码仅列在西班牙语查件页，英文页未提供电话，也未公布服务时间。
 - **在线表单：** 西班牙语版 [formulario de contacto](https://www.sending.es/formulario-contacto/)，分四个主题：包裹状态查询、一般运输条款及其他咨询、更改地址或信息、撤回购买。状态查询表单要求填写寄件人全名或昵称、运单号、你的邮箱、内件详细描述（衣物需注明颜色、品牌和尺码）及问题内容，并可附带最大 3 MB 的附件。
 - **电子邮箱：** hello@inpost.es（InPost 西班牙邮箱），同样列在西班牙语查件页上。
 

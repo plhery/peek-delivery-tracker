@@ -19,7 +19,7 @@ updated: 2026-11-24
 | `PK482910573649T` | 国家代码、12 位数字末尾加 `T`。 |
 | `LP48291057364918` | 非速达非单号：属于速卖通的[菜鸟（Cainiao）](carrier:cainiao)参考号。 |
 
-速达非官网一次最多可查询 20 个单号，每行一个；请输入大写字母——小写会被视作未知单号。找不到单号？请看[如何查找运单号](guide:find-tracking-number)（英文）或[速卖通订单跟踪](guide:aliexpress-orders)（英文）。
+速达非网站一次最多可查询 20 个单号，每行一个；请输入大写字母——小写会被视作未知单号。找不到单号？请看[如何查找运单号](guide:find-tracking-number)（英文）或[速卖通订单跟踪](guide:aliexpress-orders)（英文）。
 
 ## 速达非物流状态含义
 
@@ -83,7 +83,7 @@ updated: 2026-11-24
 
 ## 速达非各国客服电话与联系方式
 
-速达非各国官网页脚列出了各自的联系方式（爱尔兰与赞比亚可在国家切换器中选择国家后再选 English 查看）：
+速达非各国网站页脚列出了各自的联系方式（爱尔兰与赞比亚可在国家切换器中选择国家后再选 English 查看）：
 
 | 国家/地区 | 电话 | 邮箱 | 服务时间 |
 | --- | --- | --- | --- |
@@ -107,7 +107,7 @@ updated: 2026-11-24
 
 当单号以 NG、GH、KE、UG、RW、ZM、ZA、EG、MA、SA、AE、PK、KZ、MU、RE、MV 或 TR 开头、后接 9 位数字加 R 或 E 时，[Peek](/) 会按格式识别为 Speedaf。若这些代码或 IE 后接的是 12 位数字，光靠格式不足以定夺，Peek 会向 Speedaf 查询：界面显示“正在查询物流服务…”，如果 Speedaf 有这个单号的记录，随后显示“Speedaf 有这个包裹的记录。”Peek 未收录瑞士、阿尔巴尼亚、黑山或塞尔维亚的专属格式：遇到这些国家或其他不匹配的号码，点击“更换”选择“Speedaf”即可。粘贴带 `tradeNo=` 参数的 speedaf.com 链接，无论其中是什么单号，都会按 Speedaf 读取。Peek 会把单号转为大写发送，因此输入小写也没问题。
 
-Peek 读取速达非官网数据，显示状态、轨迹、目的地国家和签收时间。每条扫描按所在网点时间读取（中国仓库按中国时间，抵达后按目的地国时间），再换算为你设备的时区；在 peektracker.com 以及 iPhone 和 Android App 中，轨迹末尾会注明“时间按你所在的时区显示：”及对应时区名称。速达非仅在文本中提及站点，因此没有地图，也不提供预计送达日期。如果速达非识别该单但尚无扫描（如部分较旧包裹），Peek 会显示“等待 Speedaf 更新”（对尚未归入 Speedaf 的 12 位单号则显示“等待 Speedaf 的首次扫描”）并继续查询。若归入 Speedaf 的单号两天后仍无任何记录且无其他来源响应，Peek 会提示“两天过去了，快递公司仍查不到这个单号。请检查单号、更换快递公司，或删除这个包裹。”并改为每天检查一次，自你添加起满一周后改为每周检查一次。
+Peek 读取速达非网站数据，显示状态、轨迹、目的地国家和签收时间。每条扫描按所在网点时间读取（中国仓库按中国时间，抵达后按目的地国时间），再换算为你设备的时区；在 peektracker.com 以及 iPhone 和 Android App 中，轨迹末尾会注明“时间按你所在的时区显示：”及对应时区名称。速达非仅在文本中提及站点，因此没有地图，也不提供预计送达日期。如果速达非识别该单但尚无扫描（如部分较旧包裹），Peek 会显示“等待 Speedaf 更新”（对尚未归入 Speedaf 的 12 位单号则显示“等待 Speedaf 的首次扫描”）并继续查询。若归入 Speedaf 的单号两天后仍无任何记录且无其他来源响应，Peek 会提示“两天过去了，快递公司仍查不到这个单号。请检查单号、更换快递公司，或删除这个包裹。”并改为每天检查一次，自你添加起满一周后改为每周检查一次。
 
 速达非扫描保留英文或中文原文，但会去除快递员/操作员姓名及快递员电话。签收人姓名仅对你本人可见，分享链接会隐去姓名，并将这条扫描显示为“已签收”。Peek 也会省略签收凭证、缴税链接和箱数，且只跟踪你添加的这一单，不关联同运单下的其他箱件。由于速达非自行完成尾程派送，不会转交第二家快递。
 
@@ -137,7 +137,7 @@ Peek 读取速达非官网数据，显示状态、轨迹、目的地国家和签
 - [Speedaf: Speedaf eParcel](https://www.speedaf.com/ke-en/product/intl-straight-small) – 中国跨境电商小包与 5–10 个工作日参考时效
 - [Speedaf: Warehouse & Fulfillment](https://www.speedaf.com/ke-en/product/warehouse-promise) – 自营尾程派送与货到付款
 - [Speedaf: Last-mile delivery](https://www.speedaf.com/ke-en/product/warehouse-delivery) – 货到付款与送货上门
-- [Speedaf: Help Center](https://www.speedaf.com/ng-en/help) – 时效说明、官网与 App 查询及各国热线
+- [Speedaf: Help Center](https://www.speedaf.com/ng-en/help) – 时效说明、其网站与 App 查询及各国热线
 - [Speedaf: Track](https://www.speedaf.com/ng-en/send-parcel) – 一次最多查 20 单与南非缴税链接
 - [Speedaf: Look for Service Site](https://www.speedaf.com/ke-en/location-map) – 服务网点地图
 - [Speedaf: Customer Support](https://www.speedaf.com/ng-en/service/support) – 在线客服表单

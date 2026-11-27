@@ -41,7 +41,7 @@ updated: 2026-11-23
 
 ## 安骏巴西本土派送网络与巴西合规清关（Remessa Conforme）
 
-根据 [Anjun Express 巴西官网首页](https://anjunexpress.com/home)、[尾程派送页](https://anjunexpress.com/lastMile) 与 [代收点页](https://anjunexpress.com/collectionPoint)，安骏在巴西运营头程、尾程、B2B 物流、仓储、直发（Envio direto）及 Super Express 业务，官网列明拥有超 1,000 个代收点（合作页列超 500 个）、超 350 辆车及超 2,000 名员工。安骏官网未公开统一派送尝试次数、固定时效或保管期，具体期限请查看购物平台的订单页面。
+根据 [Anjun Express 巴西网站首页](https://anjunexpress.com/home)、[尾程派送页](https://anjunexpress.com/lastMile) 与 [代收点页](https://anjunexpress.com/collectionPoint)，安骏在巴西运营头程、尾程、B2B 物流、仓储、直发（Envio direto）及 Super Express 业务，其网站列明拥有超 1,000 个代收点（合作页列超 500 个）、超 350 辆车及超 2,000 名员工。安骏网站未公开统一派送尝试次数、固定时效或保管期，具体期限请查看购物平台的订单页面。
 
 从中国发往巴西的电商件普遍适用 [巴西联邦税务局合规计划（Programa Remessa Conforme，PRC）](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona)：
 
@@ -60,7 +60,7 @@ updated: 2026-11-23
 
 ## 安骏巴西客服（SAC）与最新邮箱公告
 
-[Anjun Express 巴西官网首页](https://anjunexpress.com/home) 明确公告旧邮箱 `sac@anjunexpress.com.br` 已于 2026 年 8 月 12 日停用，现行有效联系方式为：
+[Anjun Express 巴西网站首页](https://anjunexpress.com/home) 明确公告旧邮箱 `sac@anjunexpress.com.br` 已于 2026 年 8 月 12 日停用，现行有效联系方式为：
 
 - **巴西全国客服电话（SAC）：** `(11) 5026-7008`，周一至周五 `08:00–17:30`（节假日除外）。
 - **现行 SAC 客服邮箱：** `sac@anjun.com.br`。
@@ -93,14 +93,14 @@ Peek 会先查询 `anjuntrack.com` 获取中巴跨境全程，若暂无记录则
 
 ### `sac@anjunexpress.com.br` 邮箱还能用吗？
 
-不能。安骏巴西官网公告该旧邮箱已于 2026 年 8 月 12 日停用，请改用新客服邮箱 `sac@anjun.com.br`、致电 `(11) 5026-7008`（周一至周五 `08:00–17:30`），或将清关问题发至 `atendimento.aduaneiro@anjun.com.br`。
+不能。安骏巴西网站公告该旧邮箱已于 2026 年 8 月 12 日停用，请改用新客服邮箱 `sac@anjun.com.br`、致电 `(11) 5026-7008`（周一至周五 `08:00–17:30`），或将清关问题发至 `atendimento.aduaneiro@anjun.com.br`。
 
 ### 安骏物流会把包裹交给巴西邮政（Correios）派送吗？
 
 会的。部分跨境包裹在巴西清关放行后会出现 `Objeto recebido pelos Correios do Brasil`，说明已由巴西邮政接手最终投递，安骏查件系统仍会同步这一交接记录。
 
 :::sources
-- [Anjun Express：巴西官网首页](https://anjunexpress.com/home) – 巴西物流业务、网点规模、现行 SAC 电话/邮箱、海关申诉邮箱及旧邮箱停用公告
+- [Anjun Express：巴西网站首页](https://anjunexpress.com/home) – 巴西物流业务、网点规模、现行 SAC 电话/邮箱、海关申诉邮箱及旧邮箱停用公告
 - [Anjun Express：关于我们](https://anjunexpress.com/aboutUs) – 2011 年中国创立、2019 年进入巴西、2025 年巴西全国覆盖
 - [Anjun Express：巴西本土查件页](https://anjunexpress.com/trackPackage) – 巴西境内包裹追踪入口
 - [Anjun Express：尾程派送](https://anjunexpress.com/lastMile) – 巴西尾程派送服务

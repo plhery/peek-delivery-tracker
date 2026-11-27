@@ -6,18 +6,18 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-Morning Global（简称 MG）成立于 1987 年，是香港快递集团 Morning Express Group 旗下的国际物流板块。公司为跨境电商卖家和购物平台提供出境包裹运输服务，在香港及中国内地多地设有办事处，包裹抵达目的国后通常交由当地合作伙伴完成末端投递。你可以在 Morning Global 官网的 [Trace & Track 英文查询页](https://www.morninglobal.com/trace-track/)输入卖家提供的单号，或直接粘贴到上方查询框中。
+Morning Global（简称 MG）成立于 1987 年，是香港快递集团 Morning Express Group 旗下的国际物流板块。公司为跨境电商卖家和购物平台提供出境包裹运输服务，在香港及中国内地多地设有办事处，包裹抵达目的国后通常交由当地合作伙伴完成末端投递。你可以在 Morning Global 网站的 [Trace & Track 英文查询页](https://www.morninglobal.com/trace-track/)输入卖家提供的单号，或直接粘贴到上方查询框中。
 
 ## Morning Global 单号格式规则
 
-Morning Global 官网未公开单号格式文档，Peek 承运商库收录的典型单号格式如下（以下数字均为虚构示例）：
+Morning Global 网站未公开单号格式文档，Peek 承运商库收录的典型单号格式如下（以下数字均为虚构示例）：
 
 | 单号 | 说明 |
 | --- | --- |
 | `BR482910573MG` | `BR` 加 9 位数字再加 `MG`：Morning Global 单号。由于该结构与部分邮政单号相似，Peek 会先向 Morning Global 核实再确认归属。 |
 | `BR48291057MG` | 仅有 8 位数字：不符合 Morning Global 格式，Peek 不会指向该公司，请检查是否少输了一位数字。 |
 
-在 Peek 中输入单号时，小写字母、空格和连字符均不影响识别。Morning Global 官网查询页支持单次最多输入 20 个单号，以英文逗号分隔。
+在 Peek 中输入单号时，小写字母、空格和连字符均不影响识别。Morning Global 网站查询页支持单次最多输入 20 个单号，以英文逗号分隔。
 
 **在哪里找到单号。** 可在店铺发货邮件或订单详情页中查看。若找不到，可参阅[如何查找快递单号](guide:find-tracking-number)（英文）和[中国跨境包裹追踪指南](guide:tracking-from-china)（英文）。
 
@@ -47,11 +47,11 @@ Morning Global 追踪页面在 `Shipment Journey` 下方按条列出物流记录
 
 当一条记录的补充说明比状态标题包含更多信息时，Peek 会以“状态：说明”的格式呈现，并去掉其中的电话号码。未列入上表的其他措辞会按 Peek 通用规则解读，或原样保留不改变阶段。
 
-**查无此单。** 若后台查不到该单号，Morning Global 官网会提示 `No shipment record was found for this tracking number.`。
+**查无此单。** 若后台查不到该单号，Morning Global 网站会提示 `No shipment record was found for this tracking number.`。
 
 ## 谁负责派送 Morning Global 包裹
 
-出现 `Handed Over for Delivery` 后，Morning Global 会把包裹转交给目的国当地派送合作伙伴。其官网并未公开各国具体合作伙伴名单，查询结果也不向 Peek 标明合作商名称，也没有显示合作商自有单号的栏目；如需改约投递时间，请联系卖家或 Morning Global 客服获取末端转单号。
+出现 `Handed Over for Delivery` 后，Morning Global 会把包裹转交给目的国当地派送合作伙伴。其网站并未公开各国具体合作伙伴名单，查询结果也不向 Peek 标明合作商名称，也没有显示合作商自有单号的栏目；如需改约投递时间，请联系卖家或 Morning Global 客服获取末端转单号。
 
 **自营网点与合作网络。** Morning Global 将英国与美国列为自营地区，并在伦敦与洛杉矶设有区域总部；加拿大与美国同属其重点布局市场，澳大利亚则依托当地合作伙伴网络派送。
 
@@ -59,9 +59,9 @@ Morning Global 追踪页面在 `Shipment Journey` 下方按条列出物流记录
 
 **欧盟进口关税与 2 欧元处理费。** 自 2026 年 7 月 1 日起，从欧盟境外网购且货值不超过 150 欧元的包裹每类货品须缴纳 3 欧元欧盟关税；自 2026 年 11 月 1 日起，无论货值高低，每类货品另须缴纳 2 欧元欧盟处理费。2026 年 10 月 22 日，Morning Global 向发件商家发布公告称，自 11 月 1 日起按每条报关品目收取 2 欧元清关处理费（视目的国规定另计增值税），但公告未说明商家是否将该费用转嫁给消费者。英国、美国、加拿大和澳大利亚则遵循各自海关规定，详见[包裹被海关扣留怎么办](guide:customs)（英文）。
 
-**清关资料上传。** 若海关要求收件人补充身份证件复印件、发票或其他文件，Morning Global 官网设有专门的 [Upload Clearance Documents](https://www.morninglobal.com/upload-clearance-documents/) 表单（需填写运单号）。切记只在 `morninglobal.com` 官方域名下提交资料，切勿轻信陌生短信里的付费或身份上传链接，详见[防范快递诈骗短信](guide:delivery-scam-texts)（英文）。
+**清关资料上传。** 若海关要求收件人补充身份证件复印件、发票或其他文件，Morning Global 网站设有专门的 [Upload Clearance Documents](https://www.morninglobal.com/upload-clearance-documents/) 表单（需填写运单号）。切记只在 `morninglobal.com` 官方域名下提交资料，切勿轻信陌生短信里的付费或身份上传链接，详见[防范快递诈骗短信](guide:delivery-scam-texts)（英文）。
 
-**延误公告。** Morning Global 会在官网[新闻公告页](https://www.morninglobal.com/news/)发布异常提醒，例如 2026 年 10 月 30 日曾公告澳大利亚劳资纠纷可能导致 MGIP 渠道延误约 2 至 3 个工作日。
+**延误公告。** Morning Global 会在其网站[新闻公告页](https://www.morninglobal.com/news/)发布异常提醒，例如 2026 年 10 月 30 日曾公告澳大利亚劳资纠纷可能导致 MGIP 渠道延误约 2 至 3 个工作日。
 
 ## Morning Global 包裹无更新、丢失或退回怎么办
 
@@ -79,7 +79,7 @@ Morning Global 的签约方是委托发货的商家。遇到包裹延误、丢�
 
 **地址错误或拒收。** Morning Global 条款明确写明，因地址错误/不全、无人应门或收件人拒收导致的派送失败，对商家仍按已完成订单结算。请及时向卖家核对收货地址；若包裹被退回，参阅[包裹退回寄件人](guide:returned-to-sender)（英文）。
 
-**显示已签收但没拿到。** 请先检查门口、信箱并询问邻居。Morning Global 官网在 `Signed By` 栏可能会显示签收人信息（Peek 不显示该栏），核查后尽快联系商家，详见[显示已签收但未收到包裹](guide:delivered-not-received)（英文）。
+**显示已签收但没拿到。** 请先检查门口、信箱并询问邻居。Morning Global 网站在 `Signed By` 栏可能会显示签收人信息（Peek 不显示该栏），核查后尽快联系商家，详见[显示已签收但未收到包裹](guide:delivered-not-received)（英文）。
 
 ## Morning Global 客服与联系方式
 
@@ -92,29 +92,29 @@ Morning Global 的签约方是委托发货的商家。遇到包裹延误、丢�
 - **全球其他地区**：cs.mgworldwide@morninglobal.com，并支持 WhatsApp（`+1 (479) 777 3307`）及页面上的二维码联络。
 - **在线留言表单**：同页提供，需填写姓名、电子邮箱与留言内容。
 
-官网未标注具体客服办公时间，并在追踪页面提示联系客服时请务必附上运单号。涉及订单退款或重发，仍请先找下单店铺。
+其网站未标注具体客服办公时间，并在追踪页面提示联系客服时请务必附上运单号。涉及订单退款或重发，仍请先找下单店铺。
 
 ## 使用 Peek 追踪 Morning Global 包裹
 
 单凭 `BR…MG` 格式，[Peek](/) 不会直接武断判定为 Morning Global，而是直接粘贴即可：Peek 跟踪 4,500 多家快递公司，会先联网核实，一旦 Morning Global 后台认领该包裹，便会显示“Morning Global 有这个包裹的记录。”；如果你粘贴的是带有 `tracking_number=` 参数的 morninglobal.com 追踪链接，则会直接自动归类为 Morning Global。如未自动识别，可在添加包裹时点击“更换”手动选中 Morning Global，或在包裹详情页点击“更换快递公司”。
 
-Peek 仅凭单号即可直接读取 Morning Global 官网追踪（无需邮编），展示当前阶段（“已生成面单”、“已揽收”、“运输中”、“清关中”、“派送中”、“已签收”）、每条轨迹及其地点、目的地国家以及签收时间。对于标注了 UTC 偏移量的行，Peek 会严格按该偏移量解析；未附偏移量的行则依次按扫描地点时钟、相邻行时钟或香港时间解析，再换算为你所在的时区显示，物流记录下方注明「时间按你所在的时区显示：…」。Peek 会略去始发地、`Estimated Delivery`（预计送达）、重量、件数、`Reference` 与签收人信息，因此不展示预计送达日期。
+Peek 仅凭单号即可直接读取 Morning Global 网站追踪（无需邮编），展示当前阶段（“已生成面单”、“已揽收”、“运输中”、“清关中”、“派送中”、“已签收”）、每条轨迹及其地点、目的地国家以及签收时间。对于标注了 UTC 偏移量的行，Peek 会严格按该偏移量解析；未附偏移量的行则依次按扫描地点时钟、相邻行时钟或香港时间解析，再换算为你所在的时区显示，物流记录下方注明「时间按你所在的时区显示：…」。Peek 会略去始发地、`Estimated Delivery`（预计送达）、重量、件数、`Reference` 与签收人信息，因此不展示预计送达日期。
 
-由于 Morning Global 不标明当地派送伙伴，即便单号恰好符合邮政校验码，Peek 也不会转交本国邮政，而是持续通过 Morning Global 官网跟进至签收。
+由于 Morning Global 不标明当地派送伙伴，即便单号恰好符合邮政校验码，Peek 也不会转交本国邮政，而是持续通过 Morning Global 网站跟进至签收。
 
 Peek 对 Morning Global 最高每小时检查一次（包括派送当天），若单次请求失败则会等待 2 小时后再重试，手动刷新同样受此冷却限制。包裹处于「已生成面单」「已揽收」或「运输中」且 4 天没有新扫描时，Peek 会显示「自10月12日周一起没有物流更新」这样的提醒（日期为最后一条扫描的日期），并附上说明「包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 Morning Global 查询。」；超过三周后，说明改为「已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 Morning Global 查询。」。
 
-你可以按需选择“每次扫描”、“重要环节”（覆盖 `Customs Clearance Begins`、`Out for Delivery` 与 `Delivered`）或“仅派送当天”三种通知预设，也可以通过详情页的“向 Morning Global 寻求帮助”链接直接访问官网联系页面。Peek 无法代你联系 Morning Global 或卖家。
+你可以按需选择“每次扫描”、“重要环节”（覆盖 `Customs Clearance Begins`、`Out for Delivery` 与 `Delivered`）或“仅派送当天”三种通知预设，也可以通过详情页的“向 Morning Global 寻求帮助”链接直接访问其网站联系页面。Peek 无法代你联系 Morning Global 或卖家。
 
 ## 关于 Morning Global 物流查询的常见问题
 
 ### Morning Global 是正规物流公司吗？
 
-是的。Morning Global 创立于 1987 年，是香港快递集团 Morning Express Group 的国际业务部门，全球总部位于香港，官网介绍其在 14 个国家和地区拥有自营团队，为品牌方、零售商及电商平台提供跨境物流服务。
+是的。Morning Global 创立于 1987 年，是香港快递集团 Morning Express Group 的国际业务部门，全球总部位于香港，其网站介绍其在 14 个国家和地区拥有自营团队，为品牌方、零售商及电商平台提供跨境物流服务。
 
 ### 如何追踪 Morning Global 包裹？
 
-直接把卖家给你的单号粘贴到页面上方查询框，或前往 Morning Global 官网的 Trace & Track 页面查询。
+直接把卖家给你的单号粘贴到页面上方查询框，或前往 Morning Global 网站的 Trace & Track 页面查询。
 
 ### Morning Global 显示 `Handed Over for Delivery` 是什么意思？
 
@@ -122,7 +122,7 @@ Peek 对 Morning Global 最高每小时检查一次（包括派送当天），�
 
 ### 谁负责在当地派送 Morning Global 包裹？
 
-由 Morning Global 在目的国的本地物流合作伙伴负责，官网并未公开具体承运商名称。如需获知本地承运商及转单号，请向卖家或 Morning Global 客服查询。
+由 Morning Global 在目的国的本地物流合作伙伴负责，其网站并未公开具体承运商名称。如需获知本地承运商及转单号，请向卖家或 Morning Global 客服查询。
 
 ### 如何联系 Morning Global 客服？
 
@@ -130,7 +130,7 @@ Peek 对 Morning Global 最高每小时检查一次（包括派送当天），�
 
 :::sources
 - [Morning Global：Trace & Track](https://www.morninglobal.com/trace-track/) – 追踪页面、单次最多 20 单、Shipment Journey、Estimated Delivery、Reference、Signed By、查无记录提示及附单号联系客服
-- [Morning Global 官网首页](https://www.morninglobal.com/) – 1987 年创立、亚洲起家、14 个自营国家与服务公告
+- [Morning Global 网站首页](https://www.morninglobal.com/) – 1987 年创立、亚洲起家、14 个自营国家与服务公告
 - [Morning Global：About Us](https://www.morninglobal.com/about-us/) – Morning Express Group 国际部门、香港总部及服务品牌/平台定位
 - [Morning Global：Services](https://www.morninglobal.com/services/) – MGIE 与 MGIP 渠道、覆盖 220+ 目的地、最高 30 公斤
 - [Morning Global：Global Network](https://www.morninglobal.com/global-network/) – 英美自营网点、澳大利亚合作网络及北美重点市场

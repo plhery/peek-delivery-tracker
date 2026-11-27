@@ -17,7 +17,7 @@ updated: 2026-11-24
 | `MX48291736PD` | 12 位 PDU 跨境运单号（`MX` + 8 位数字 + `PD`）。 |
 | `CO73918462PD` | 国际线路常用的另一组 12 位 `..PD` 运单号示例。 |
 
-当你手动选择 PDU 时，其官网查询页面也支持其他 6 至 40 位字母数字服务运单号。对于这一 12 位形态，PDU 是唯一匹配候选，Peek 会直接询问 PDU。详见[运单号格式说明](guide:tracking-number-formats)（英文）。
+当你手动选择 PDU 时，其网站查询页面也支持其他 6 至 40 位字母数字服务运单号。对于这一 12 位形态，PDU 是唯一匹配候选，Peek 会直接询问 PDU。详见[运单号格式说明](guide:tracking-number-formats)（英文）。
 
 ## PDU 友递联物流状态含义
 
@@ -60,7 +60,7 @@ PDU 为每票包裹和每条扫描分配状态代码（如 `TRANSIT`、`COLLECTI
 - **客服热线：** `021-50837888`（`+86 21 5083 7888`）。
 - **客服邮箱：** `service@pduni.com`。
 - **总部地址：** 中国上海市普陀区真北路中海大厦 6 楼 305 室。
-- **官网查件与帮助中心：** [pduni.com/MV/en/customer-services/waybill-inquiry](https://www.pduni.com/MV/en/customer-services/waybill-inquiry) 与 [pduni.com/MV/en/customer-services/help-center](https://www.pduni.com/MV/en/customer-services/help-center)。
+- **其网站查件与帮助中心：** [pduni.com/MV/en/customer-services/waybill-inquiry](https://www.pduni.com/MV/en/customer-services/waybill-inquiry) 与 [pduni.com/MV/en/customer-services/help-center](https://www.pduni.com/MV/en/customer-services/help-center)。
 
 > PDU 帮助中心特别提醒用户警惕冒用 PDU 标识或联系方式的诈骗行为。切勿通过未经核实的短信链接支付关税或派送费——任何收费请先通过购物商家或官方快递门户确认。详见[快递诈骗短信识别指南](guide:delivery-scam-texts)（英文）。
 
@@ -70,7 +70,7 @@ PDU 为每票包裹和每条扫描分配状态代码（如 `TRANSIT`、`COLLECTI
 
 Peek 直接读取 PDU 追踪接口，展示标准阶段（“已生成面单”、“运输中”、“派送中”、“需要留意”、“已退回寄件人”、“已签收”）、已去除末端快递代码前缀的扫描文案（例如显示 `Entregado` 而非 `ENT,Entregado`）、地点及签收时间。PDU 状态码用于判定阶段，不会出现在任何 Peek 应用界面中。PDU 每条扫描如附带 UTC 偏移则按原偏移解析，否则按北京时间处理，Peek 会统一换算为你设备的本地时间。PDU 追踪接口本身不提供预计送达日期。
 
-在打开包裹页面或预计派送当天开启提醒时，只要 PDU 官方追踪接口正常响应，Peek 最高每 10 分钟检查一次；在 PDU 扫出 `Salida a Ruta` 的当天，自最新扫描所在地早上 6 点起最高每 2 分钟检查一次；其余时间每小时检查一次。若停留在“已生成面单”或“已揽收”满 12 小时，或连续两天无新动态，无论怎么关注都会转为每小时检查一次；停留在“已生成面单”满七天后降为每 6 小时一次。当 PDU 官网无响应、Peek 仅通过第三方追踪服务跟进时，Peek 每小时检查一次，静默满一天后改为每 3 小时一次，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次。
+在打开包裹页面或预计派送当天开启提醒时，只要 PDU 官方追踪接口正常响应，Peek 最高每 10 分钟检查一次；在 PDU 扫出 `Salida a Ruta` 的当天，自最新扫描所在地早上 6 点起最高每 2 分钟检查一次；其余时间每小时检查一次。若停留在“已生成面单”或“已揽收”满 12 小时，或连续两天无新动态，无论怎么关注都会转为每小时检查一次；停留在“已生成面单”满七天后降为每 6 小时一次。当 PDU 网站无响应、Peek 仅通过第三方追踪服务跟进时，Peek 每小时检查一次，静默满一天后改为每 3 小时一次，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次。
 
 当最新扫描满四天且包裹仍停留在“已生成面单”、“已揽收”或“运输中”时，Peek 会标出该扫描日期（如“自10月12日周一起没有物流更新”），并在页面提示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 PDU 查询。”。若超过三周没有新扫描，则显示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 PDU 查询。”
 
@@ -84,7 +84,7 @@ PDU（*友递联科技*，*Shanghai Youdilian Technology Co., Ltd.*）是一家 
 
 ### PDU 运单号是什么格式？
 
-常见 PDU 跨境运单号为 12 位字符：2 位字母、8 位数字加 `PD`（如虚构示例 `MX48291736PD`）；PDU 官网也可查询其他 6 至 40 位字母数字运单。
+常见 PDU 跨境运单号为 12 位字符：2 位字母、8 位数字加 `PD`（如虚构示例 `MX48291736PD`）；PDU 网站也可查询其他 6 至 40 位字母数字运单。
 
 ### `Package not found in last mile or customs process.` 是指被海关扣了吗？
 
@@ -95,7 +95,7 @@ PDU（*友递联科技*，*Shanghai Youdilian Technology Co., Ltd.*）是一家 
 退款或修改派送信息请先联系网店卖家。PDU 在 [pduni.com/MV/en/customer-services/help-center](https://www.pduni.com/MV/en/customer-services/help-center) 公布的上海支持电话为 `021-50837888`，邮箱为 `service@pduni.com`。
 
 :::sources
-- [PDU 友递联官网](https://www.pduni.com/) – 2022 年成立于上海普陀区、10 余国自营清关与末端派送网络及 COD 服务
+- [PDU 友递联网站](https://www.pduni.com/) – 2022 年成立于上海普陀区、10 余国自营清关与末端派送网络及 COD 服务
 - [PDU 运单查询门户](https://www.pduni.com/MV/en/customer-services/waybill-inquiry) – 公开英文运单查询、`service@pduni.com` 与 `021-50837888`
 - [PDU 帮助中心与常见问题](https://www.pduni.com/MV/en/customer-services/help-center) – 清关常见问题、防冒充诈骗提示及上海总部地址（*Shanghai Youdilian Technology Co., Ltd.*）
 - [Universal Parcel Scraper: pdu](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/pdu) – `^[A-Z]{2}\d{8}PD$` 识别规则、`traceByWeb` 接口、状态与文案映射（`DELIVERY` 与 `Salida a Ruta`）、前缀清理及 UTC/北京时间处理

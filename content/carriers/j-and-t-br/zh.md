@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-极兔速递巴西（J&T Express Brazil）是 J&T Express 的巴西分支；J&T Express 是成立于 2015 年的快递物流网络，业务遍及多个国家，其发展历程页面点名了其中 13 个。在巴西，它通过 50 多个转运中心、1,600 多条区域干线以及 6,000 多个 Pontos J&T 合作寄件网点，覆盖全巴西全部 5,571 个市镇，承接电商包裹、个人寄件和跨境直邮。你可以在 [J&T Express Brazil 官网查询页](https://www.jtexpress.com.br/trajectoryQuery)查件，或直接把运单号粘贴到上方查询框。
+极兔速递巴西（J&T Express Brazil）是 J&T Express 的巴西分支；J&T Express 是成立于 2015 年的快递物流网络，业务遍及多个国家，其发展历程页面点名了其中 13 个。在巴西，它通过 50 多个转运中心、1,600 多条区域干线以及 6,000 多个 Pontos J&T 合作寄件网点，覆盖全巴西全部 5,571 个市镇，承接电商包裹、个人寄件和跨境直邮。你可以在 [J&T Express Brazil 网站查询页](https://www.jtexpress.com.br/trajectoryQuery)查件，或直接把运单号粘贴到上方查询框。
 
 ## 极兔巴西运单号格式与查找方式
 
@@ -36,9 +36,9 @@ J&T Express Brazil 的扫描描述均为葡萄牙语。其中 `Em transferencia`
 
 J&T Express Brazil 提供面向网店和电商平台的 [B2C 电商物流](https://www.jtexpress.com.br/service/b2c)、[C2C 个人寄件](https://www.jtexpress.com.br/clients/c2c)以及国际跨境配送。
 
-**重量与尺寸限制。** 根据[极兔巴西官网首页](https://www.jtexpress.com.br/)的运费计算器，单个包裹最重 30 公斤，单边长度不超过 120 厘米，长宽高之和不超过 240 厘米。
+**重量与尺寸限制。** 根据[极兔巴西网站首页](https://www.jtexpress.com.br/)的运费计算器，单个包裹最重 30 公斤，单边长度不超过 120 厘米，长宽高之和不超过 240 厘米。
 
-**Pontos J&T 网点。** 极兔在巴西共有 6,000 多家合作门店（[Pontos J&T](https://www.jtexpress.com.br/joinUs/pudo)），供寄件人交寄包裹、再由极兔揽收。极兔官网页面并未将其作为收件人自提点介绍。
+**Pontos J&T 网点。** 极兔在巴西共有 6,000 多家合作门店（[Pontos J&T](https://www.jtexpress.com.br/joinUs/pudo)），供寄件人交寄包裹、再由极兔揽收。极兔网站页面并未将其作为收件人自提点介绍。
 
 **派送尝试与预约。** 极兔巴西公开页面未说明派送尝试次数、承诺时效或保管期限。请在下单商家或电商平台 App 内查看预计送达日期和派送备注。
 
@@ -78,7 +78,7 @@ J&T Express Brazil 还提供接入巴西税务合规计划 *Programa Remessa Con
 
 输入以 `8880` 开头的 15 位运单号时，[Peek](/) 会以高置信度自动识别为 J&T Express Brazil；同时也支持粘贴包含 `waybillNo=` 的 `jtexpress.com.br/trajectoryQuery` 或 `/mobile/expressTracking` 链接。如果遇到其他格式而 Peek 猜成别家，可在添加时点击“更换”或在包裹页点击“更换快递公司”选择 J&T Express Brazil（搜索“J&T Express Brasil”或“J&T Brazil”也能找到）。
 
-Peek 直接查询 J&T Express Brazil 官网访客跟踪接口，显示当前阶段（“已生成面单”、“已揽收”、“运输中”、“派送中”、“已签收”）、极兔的葡萄牙语扫描描述，以及按巴西本地时间（`America/Sao_Paulo`）解析并换算为你设备时区的时间戳。Peek 不显示预计送达日期、自提点或签收照片；当极兔记录里出现快递员姓名时，会按极兔原文以脱敏方式显示。
+Peek 直接查询 J&T Express Brazil 网站访客跟踪接口，显示当前阶段（“已生成面单”、“已揽收”、“运输中”、“派送中”、“已签收”）、极兔的葡萄牙语扫描描述，以及按巴西本地时间（`America/Sao_Paulo`）解析并换算为你设备时区的时间戳。Peek 不显示预计送达日期、自提点或签收照片；当极兔记录里出现快递员姓名时，会按极兔原文以脱敏方式显示。
 
 Peek 最多每 30 分钟向 J&T Express Brazil 查询一次，在你打开包裹页面时，或在派送当天且开启了通知时也是如此，手动刷新也不会提前触发；若查询失败则等待一小时再试。其余情况每小时检查一次。若停留在“已生成面单”或“已揽收”满 12 小时，或连续两天无新动态，不论如何跟踪都改为每小时检查一次；若在“已生成面单”停留满七天，则每 6 小时检查一次。Peek 不会为极兔巴西询问任何物流查询服务，所有更新均来自极兔自己的查询系统。
 
@@ -98,7 +98,7 @@ J&T Express Brazil 运单号是以 `8880` 开头的 15 位数字（例如 `88804
 
 ### 极兔巴西会通过 WhatsApp 或短信收取关税吗？
 
-不会。极兔官网查询页明确警告，绝不会通过 WhatsApp、短信或第三方链接要求支付关税；任何催促点击链接付款的消息都应视为诈骗。
+不会。极兔网站查询页明确警告，绝不会通过 WhatsApp、短信或第三方链接要求支付关税；任何催促点击链接付款的消息都应视为诈骗。
 
 ### 如何联系极兔巴西客服？
 

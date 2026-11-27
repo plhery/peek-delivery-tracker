@@ -61,7 +61,7 @@ Peek 将 Memphis Courier 的 12 个扫描代码清晰归类：`FLT` 对应 **已
 
 ## 联系 Memphis Courier 客服
 
-Memphis Courier 在官网公布了官方支持渠道，并在官方免责声明中明确指出，不将 Reclame Aqui 等第三方投诉网站视作官方客服或工单渠道。
+Memphis Courier 在其网站公布了官方支持渠道，并在官方免责声明中明确指出，不将 Reclame Aqui 等第三方投诉网站视作官方客服或工单渠道。
 
 - **官方联系页面：** [Fale Conosco](https://memphiscourier.com.br/fale-conosco/)（在线联系表单）
 - **电话/客户服务：** +55 11 94264-7550（同时适用于 GRU 快件货站与圣保罗办事处）
@@ -87,7 +87,7 @@ Memphis Courier 在官网公布了官方支持渠道，并在官方免责声明�
 
 ### Memphis Courier 会回复发布在 Reclame Aqui 上的求助吗？
 
-不会。Memphis Courier 官网声明指出，为确保可追溯性与数据保密，公司仅通过 [memphiscourier.com.br](https://memphiscourier.com.br/) 公布的官方渠道（电话、邮箱及联系表单）受理投诉、咨询与说明。
+不会。Memphis Courier 网站声明指出，为确保可追溯性与数据保密，公司仅通过 [memphiscourier.com.br](https://memphiscourier.com.br/) 公布的官方渠道（电话、邮箱及联系表单）受理投诉、咨询与说明。
 
 :::sources
 - [Memphis Courier](https://memphiscourier.com.br/)

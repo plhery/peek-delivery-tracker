@@ -10,7 +10,7 @@ updated: 2026-11-23
 
 ## 递四方（4PX）单号格式：怎么看、怎么区分
 
-递四方官网未固定单一示例，查件框接受 5 至 50 位字母和数字。以下是常见递四方单号及易混格式（数字均为虚构）：
+递四方网站未固定单一示例，查件框接受 5 至 50 位字母和数字。以下是常见递四方单号及易混格式（数字均为虚构）：
 
 | 单号（虚构） | 归属与说明 |
 | --- | --- |
@@ -46,16 +46,16 @@ updated: 2026-11-23
 
 ## 递四方派送、自提与派送失败处理
 
-递四方不直接上门投递最后一公里，包裹清关后移交给目的国尾程公司（例如英国常用 Royal Mail，美国常用 USPS）。交接完成后，递四方结果页的「Terminal Service Provider」（末端服务商）信息栏会提供当地派送公司的联系方式与官网链接。
+递四方不直接上门投递最后一公里，包裹清关后移交给目的国尾程公司（例如英国常用 Royal Mail，美国常用 USPS）。交接完成后，递四方结果页的「Terminal Service Provider」（末端服务商）信息栏会提供当地派送公司的联系方式与其网站链接。
 
 派送次数、通知卡、改约和代保管期限均由当地尾程快递决定，递四方不发布收件人派送条款。看到 `Arrived for Pickup` 时，递四方提醒收件人尽快领取以免被服务商退回；遇到 `Delivery attempt unsuccessful` 时，请带上「Tracking No.」按末端服务商栏的联系方式直接找当地快递重派或自提。参见 [错过派送怎么办](guide:missed-delivery)（英文） 和 [未领取包裹退件说明](guide:uncollected-parcel)（英文）。
 
 ## 递四方包裹不更新、丢失或退件怎么办
 
 - **暂时查不到轨迹。** 查无记录时页面提示包裹暂无轨迹，请耐心等待或向商家核实发货状态；也请仔细核对单号是否抄错。
-- **连续多日停滞（`Trajectory stalled`）。** 满 15 天无新扫描时，递四方会将包裹标为轨迹停滞并提示可能延误、遗失或承运商漏扫。先用「Tracking No.」去当地尾程快递官网查件，并参考 [物流为什么停止更新](guide:tracking-not-updating)（英文）。
+- **连续多日停滞（`Trajectory stalled`）。** 满 15 天无新扫描时，递四方会将包裹标为轨迹停滞并提示可能延误、遗失或承运商漏扫。先用「Tracking No.」去当地尾程快递网站查件，并参考 [物流为什么停止更新](guide:tracking-not-updating)（英文）。
 - **显示已签收却没收到。** 先联系实际投递的当地尾程快递核实签收记录，再通知网店。详见 [显示已签收但未收到](guide:delivered-not-received)（英文）。
-- **退件或丢件。** [递四方官网](https://www.4px.com/view/index.html) 没有面向收件人的理赔流程或截止期限说明，[退换货服务页](https://www.4px.com/view/return.html) 介绍的是为卖家提供的退货服务。请携带订单号与单号找网店或购物平台申请退款或重发。参见 [包裹丢失怎么办](guide:lost-parcel)（英文） 和 [包裹退回寄件人](guide:returned-to-sender)（英文）。
+- **退件或丢件。** [递四方网站](https://www.4px.com/view/index.html) 没有面向收件人的理赔流程或截止期限说明，[退换货服务页](https://www.4px.com/view/return.html) 介绍的是为卖家提供的退货服务。请携带订单号与单号找网店或购物平台申请退款或重发。参见 [包裹丢失怎么办](guide:lost-parcel)（英文） 和 [包裹退回寄件人](guide:returned-to-sender)（英文）。
 
 ## 递四方（4PX）客服电话与联系方式
 
@@ -96,7 +96,7 @@ Peek 读取递四方英文轨迹并展示规范化阶段（「已生成面单」
 递四方不向个人收件人公布统一时效，请以网店或购物平台给出的预计送达时间为准。如果连续 15 天没有任何扫描更新，递四方系统会自动将其标记为轨迹停滞（`Trajectory stalled`）。
 
 :::sources
-- [递四方：企业官网首页](https://www.4px.com/view/index.html) – 跨境电商卖家物流服务与公司简介
+- [递四方：企业网站首页](https://www.4px.com/view/index.html) – 跨境电商卖家物流服务与公司简介
 - [递四方：退换货服务](https://www.4px.com/view/return.html) – 面向卖家的退换货服务说明
 - [递四方新闻：成都至伦敦全货机航线首航](https://www.4px.com/view/newsCenterContentfive.html) – 创立于 2004 年
 - [递四方新闻：菜鸟&递四方国际智慧物流园](https://www.4px.com/view/newsCenterContentsix.html) – 与菜鸟共建东莞国际智慧物流园

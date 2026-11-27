@@ -6,7 +6,7 @@ published: 2026-11-02
 updated: 2026-11-17
 ---
 
-把 FedEx（联邦快递）的快递单号或 FedEx 查询链接粘贴到上方的查询框，就能跟踪包裹。FedEx 自己的物流查询在 fedex.com 官网上。
+把 FedEx（联邦快递）的快递单号或 FedEx 查询链接粘贴到上方的查询框，就能跟踪包裹。FedEx 自己的物流查询在 fedex.com 网站上。
 
 ## FedEx 快递单号在哪里找，有几位数
 

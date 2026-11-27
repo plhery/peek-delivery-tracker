@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-顺丰速运（SF Express，简称顺丰或 SF）创立于 1993 年、总部位于中国深圳，在深交所与港交所上市。其跨境业务板块顺丰国际（SF International）为企业、跨境电商卖家及个人客户承运国际快递与小包。顺丰各地区站点均提供在线查件：[中国大陆官网](https://www.sf-express.com/chn/en)、[中国香港站](https://hk.sf-express.com/hk/en/waybill/list) 与 [中国台湾站](https://htm.sf-express.com/tw/en/dynamic_function/waybill/)，你也可以直接把运单号粘贴到上方查询框里。
+顺丰速运（SF Express，简称顺丰或 SF）创立于 1993 年、总部位于中国深圳，在深交所与港交所上市。其跨境业务板块顺丰国际（SF International）为企业、跨境电商卖家及个人客户承运国际快递与小包。顺丰各地区站点均提供在线查件：[中国大陆网站](https://www.sf-express.com/chn/en)、[中国香港站](https://hk.sf-express.com/hk/en/waybill/list) 与 [中国台湾站](https://htm.sf-express.com/tw/en/dynamic_function/waybill/)，你也可以直接把运单号粘贴到上方查询框里。
 
 ## 顺丰国际单号格式：怎么看、怎么查
 
@@ -19,7 +19,7 @@ updated: 2026-11-23
 
 在 Peek 中粘贴单号时，大小写和空格都不会影响识别。运单号印在包裹面单上，网购订单可在发货邮件或订单页查看；找不到请参阅 [如何找到你的快递单号](guide:find-tracking-number)（英文） 和 [快递单号格式指南](guide:tracking-number-formats)（英文）。
 
-**在顺丰各官网查件的限制。** 台湾站查件前需先完成图形滑块拼图验证，并输入寄件人或收件人手机号才能查看明细；开启隐私保护的运单只显示文字轨迹、不显示地图。澳大利亚地区可访问 [sf-international.com/au/en](https://www.sf-international.com/au/en) 的「Track and Trace」；发自中国大陆的运单，顺丰国际页面有时会要求登录中国大陆顺丰官网查看详情。
+**在顺丰各网站查件的限制。** 台湾站查件前需先完成图形滑块拼图验证，并输入寄件人或收件人手机号才能查看明细；开启隐私保护的运单只显示文字轨迹、不显示地图。澳大利亚地区可访问 [sf-international.com/au/en](https://www.sf-international.com/au/en) 的「Track and Trace」；发自中国大陆的运单，顺丰国际页面有时会要求登录中国大陆顺丰网站查看详情。
 
 ## 顺丰国际物流状态是什么意思
 
@@ -37,7 +37,7 @@ updated: 2026-11-23
 
 明细轨迹还会描述进出中转场、航班起降与海关清关：遇到提示收件地址受限或无法进入的记录属于派送未成功；提示已存放邮局或自提点说明包裹在等你领取。清关中在 Peek 显示为「清关中」，清关放行后恢复「运输中」；`The shipment is queuing up for flight resources，please wait patiently` 表示正排队等待航班舱位（「运输中」）；`The shipment has arrived at the warehouse and is waiting for inspection and acceptance. Please wait patiently.` 表示送往需要验收签字的仓库（签收前显示为「派送中」）。
 
-顺丰查件页上的所有时间均按中国北京时间（UTC+8）记录，包括海外当地扫描——因此伦敦傍晚的扫描在顺丰官网上可能显示为次日清晨的日期。
+顺丰查件页上的所有时间均按中国北京时间（UTC+8）记录，包括海外当地扫描——因此伦敦傍晚的扫描在顺丰网站上可能显示为次日清晨的日期。
 
 ## 顺丰国际在欧美澳的派送规则与改址费用
 

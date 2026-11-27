@@ -6,7 +6,7 @@ published: 2026-11-26
 updated: 2026-11-26
 ---
 
-DHL eCommerce Iberia（原名 DHL Parcel Iberia，旧名称仍偶有出现）是 DHL 在西班牙和葡萄牙的包裹配送网络。直接将运单号粘贴到上方输入框即可跟踪；在包裹页面点击“打开 DHL eCommerce Iberia 官网”可直达 DHL 官网同一单号的查询页。运单号由发货网店提供。
+DHL eCommerce Iberia（原名 DHL Parcel Iberia，旧名称仍偶有出现）是 DHL 在西班牙和葡萄牙的包裹配送网络。直接将运单号粘贴到上方输入框即可跟踪；在包裹页面点击“打开 DHL eCommerce Iberia 官网”可直达 DHL 网站同一单号的查询页。运单号由发货网店提供。
 
 ## DHL eCommerce 运单号：格式与查找位置
 
@@ -65,7 +65,7 @@ Peek 会向 DHL 请求英文状态文案，不过少数扫描仍以西班牙语�
 
 ## 联系 DHL eCommerce
 
-请前往包裹派送国（西班牙或葡萄牙）的 DHL 官网查询当地 DHL eCommerce 联系方式。如遇包裹遗失或破损，请先联系购买商品的网店。
+请前往包裹派送国（西班牙或葡萄牙）的 DHL 网站查询当地 DHL eCommerce 联系方式。如遇包裹遗失或破损，请先联系购买商品的网店。
 
 ## 使用 Peek 跟踪 DHL eCommerce Iberia 包裹
 

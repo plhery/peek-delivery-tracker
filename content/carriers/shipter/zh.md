@@ -64,7 +64,7 @@ Peek 将 Shipter 节点映射为清晰阶段：**已生成面单**（揽收前�
 
 Shipter 主要直接对接发货企业客户：
 
-- **官网与业务咨询：** [shipter.kr](https://www.shipter.kr/)（H3 NETWORKS Co., Ltd.；服务咨询入口 *이용문의*）
+- **其网站与业务咨询：** [shipter.kr](https://www.shipter.kr/)（H3 NETWORKS Co., Ltd.；服务咨询入口 *이용문의*）
 - **官方在线追踪：** [shipter.kr/tracking](https://www.shipter.kr/tracking)
 - **先联系卖家：** Shipter 为每家客户企业配备专属客服经理，异常、退货和理赔均通过企业客户处理。若包裹延误、破损或丢失，请携带 `H3...KR` 单号联系发货商家。
 

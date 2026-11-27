@@ -25,7 +25,7 @@ ACS 将其称为运单号（shipping number），网店则常称之为“voucher
 
 ## ACS Courier 英文物流状态含义
 
-两个 ACS 官网在 `/en/` 路径显示英文，在 `/el/` 显示希腊语。塞浦路斯站点会列出每一条扫描记录，而希腊站点只显示五个里程碑。以下按包裹经过顺序列出塞浦路斯站点的英文扫描记录：
+两个 ACS 网站在 `/en/` 路径显示英文，在 `/el/` 显示希腊语。塞浦路斯站点会列出每一条扫描记录，而希腊站点只显示五个里程碑。以下按包裹经过顺序列出塞浦路斯站点的英文扫描记录：
 
 | ACS 显示 | 对你的含义 |
 | --- | --- |
@@ -40,7 +40,7 @@ ACS 将其称为运单号（shipping number），网店则常称之为“voucher
 | `Delivery to consignee` | 已交由收件人签收。 |
 | `Delivery via SmartPoint` | 你已从 SmartPoint 取走包裹。 |
 
-`SENT NOTIFICATION` 和 `SENT EMAIL NOTIFICATION` 只表示 ACS 给你发了消息，包裹本身并未移动。希腊官网则改以里程碑显示：`Pick up`、`At the ACS hub`（后接枢纽城市）、`At the ACS point`，随后 `Out for delivery` 或 `In ACS Smartpoint Locker`，最后 `Delivered`。
+`SENT NOTIFICATION` 和 `SENT EMAIL NOTIFICATION` 只表示 ACS 给你发了消息，包裹本身并未移动。希腊网站则改以里程碑显示：`Pick up`、`At the ACS hub`（后接枢纽城市）、`At the ACS point`，随后 `Out for delivery` 或 `In ACS Smartpoint Locker`，最后 `Delivered`。
 
 页面中的“Shipment Status”栏用于汇总整体状态：`In Transit` 通常指运输中，但 ACS 在破损等情形下也会显示该词，务必结合最新扫描判断；`Absent` 表示家中无人并已留条；`Attention required` 表示收件人不明或地址变更、有误、不完整；`Denial of delivery` 表示拒收包裹或拒付费用；`Pending` 表示异常待处理；`Return in transit to sender` 与 `Returned to sender` 表示退回寄件人；`Shipment not found` 表示 ACS（暂）未查到该编号。通用阶段含义请参阅[物流状态含义指南](guide:tracking-statuses)（英文）。
 
@@ -68,12 +68,12 @@ ACS Smartpoint 快递柜分为带屏幕和无屏幕两种，开柜方式不同�
 
 ## ACS Courier 客服电话与联系方式
 
-以下信息来自 ACS 官网：
+以下信息来自 ACS 网站：
 
 - **希腊：** `210 8190000` 或 `211 5005000`（境外加拨 `+30`），希腊时间周一至周五 08:00–20:00、周六 08:00–15:00，按 1 选择英语服务；致电前请准备好单号。
 - **希腊线上渠道：** 通过 acscourier.gr 全天候提交“File a Claim”理赔表或查询申请；投诉邮箱 `info@acscourier.gr`；提供全天候希腊语/英语智能客服。
 - **希腊快递柜开柜故障热线：** `211 500 5264`，希腊时间周一至周五 09:00–19:00。
-- **塞浦路斯：** `77777373`（境外拨打 `+357 22273000`），塞浦路斯时间周一至周五 07:45–19:00、周六 09:00–13:00。热线繁忙时 ACS 塞浦路斯建议填写官网联系表单；投诉请发至 `helpdesk@acscyprus.com` 或使用“File a Claim”表单。
+- **塞浦路斯：** `77777373`（境外拨打 `+357 22273000`），塞浦路斯时间周一至周五 07:45–19:00、周六 09:00–13:00。热线繁忙时 ACS 塞浦路斯建议填写网站联系表单；投诉请发至 `helpdesk@acscyprus.com` 或使用“File a Claim”表单。
 
 ACS 在英国或其他地区不设单独热线，请使用上述电话。
 
@@ -81,7 +81,7 @@ ACS 在英国或其他地区不设单独热线，请使用上述电话。
 
 ## 使用 Peek 跟踪 ACS Courier 包裹
 
-[Peek](/) 无法仅凭 10 位数字判定是否属于 ACS，因此会向所有符合格式的承运商同时查询：包括 ACS（需末位符合 ACS 校验位且输入时不含空格或连字符）、DHL Express、Geniki Taxydromiki（同样规则）、[BOX NOW](carrier:box-now)、[DHL eCommerce Iberia](carrier:dhl-ecommerce-es)、DHL Freight、[DPD Ireland](carrier:dpd-ie)、Estafeta、GLS Hungary（以 33 或 34 开头时），以及首位非 0 时的 [Packeta](carrier:packeta)。若仅 ACS 查有记录，Peek 会直接标出 ACS；若包含 DHL Express 在内的其他快递也有记录，则由你选择。如果 Peek 没有询问 ACS，或标出了其他快递，可在添加时点击“更换”手动选择“ACS Courier”，或直接粘贴任一官网带 `trackingNumber=` 的 Track and Trace 链接（Peek 不读取 myACS 链接），即可立刻识别为 ACS。
+[Peek](/) 无法仅凭 10 位数字判定是否属于 ACS，因此会向所有符合格式的承运商同时查询：包括 ACS（需末位符合 ACS 校验位且输入时不含空格或连字符）、DHL Express、Geniki Taxydromiki（同样规则）、[BOX NOW](carrier:box-now)、[DHL eCommerce Iberia](carrier:dhl-ecommerce-es)、DHL Freight、[DPD Ireland](carrier:dpd-ie)、Estafeta、GLS Hungary（以 33 或 34 开头时），以及首位非 0 时的 [Packeta](carrier:packeta)。若仅 ACS 查有记录，Peek 会直接标出 ACS；若包含 DHL Express 在内的其他快递也有记录，则由你选择。如果 Peek 没有询问 ACS，或标出了其他快递，可在添加时点击“更换”手动选择“ACS Courier”，或直接粘贴任一网站带 `trackingNumber=` 的 Track and Trace 链接（Peek 不读取 myACS 链接），即可立刻识别为 ACS。
 
 Peek 通过 ACS 塞浦路斯英文站点读取轨迹，按 ACS 英文原文呈现每条扫描及其网点/枢纽与时间；运输途中可显示 ACS 预计送达日，并标出包裹存放的 SmartPoint。出现 `Not delivered` 时，只要原因中不含姓名、电话或地址，Peek 会将其附在括号中。页面不显示重量，并剔除收件人、签收人、寄件人、其他备注及网点联系方式。当你正在 Peek 中查看该包裹，或派送当天已开启通知时，Peek 最多每 10 分钟查询一次；在 ACS 扫描包裹开始派送的当天，只要 ACS 自己的查件系统正常响应，自希腊时间早上 6 点起每 2 分钟查询一次。连续两天无新动态（或在“已生成面单”/“已揽收”停留满 12 小时）后改为每小时一次；在“已生成面单”停留满 7 天后改为每 6 小时一次。
 

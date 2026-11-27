@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-云途物流（YunExpress，全称深圳市前海云途物流有限公司，英文亦常写作 Yun Express）是一家总部位于深圳龙岗区的跨境电商物流企业，创立于 2014 年，专门为中国跨境卖家（包括 Amazon 和速卖通等平台卖家）承运国际小包专线。由 `YT` 加 16 位数字组成的单号就是云途物流运单号。你可以在云途自有追踪平台 `yuntrack.com` 查询，也可以直接把单号粘贴到上方查询框。云途官网没有说明会给个人收件人发送短信或邮件，单号请在网店的发货邮件或订单详情页查找。
+云途物流（YunExpress，全称深圳市前海云途物流有限公司，英文亦常写作 Yun Express）是一家总部位于深圳龙岗区的跨境电商物流企业，创立于 2014 年，专门为中国跨境卖家（包括 Amazon 和速卖通等平台卖家）承运国际小包专线。由 `YT` 加 16 位数字组成的单号就是云途物流运单号。你可以在云途自有追踪平台 `yuntrack.com` 查询，也可以直接把单号粘贴到上方查询框。云途网站没有说明会给个人收件人发送短信或邮件，单号请在网店的发货邮件或订单详情页查找。
 
 ## 云途物流单号格式：YT 加 16 位数字
 
@@ -53,12 +53,12 @@ updated: 2026-11-23
 云途的标准流程是从中国空运出境、完成进口清关后交由当地快递商派送尾程（参见 [中国直邮包裹跟踪指南](guide:tracking-from-china)），`Delivered to local carrier` 之后的轨迹有时会写出具体接手的当地快递名称。
 
 - **英国与爱尔兰：** 据 [云途关于我们页面](https://www.yunexpress.com/about-us)，云途早在 2016 年就开通了英国专线，但公开页面未写明英国和爱尔兰固定尾程快递商，也没有设立面向收件人的当地电话或办公室；包裹派送问题请直接联系轨迹中显示的当地快递。部分专线覆盖英国本土及内岛，但不含泽西岛、根西岛等离岛。增值税和关税规定请参阅 [包裹海关扣留与清关指南](guide:customs)。
-- **美国：** [云途中文官网](https://www.yunexpress.cn/) 向卖家介绍自有尾程服务 CIRRO-E-COMMERCE，且早在 2020 年就上线了美国标准邮政渠道，但未公开每票包裹固定走哪家尾程。在实际轨迹中，部分美国包裹由 GOFO 派送，GOFO 官网也能直接用同一个 `YT` 单号查询。
-- **欧洲自提点与派送规则：** 云途中文新闻提到欧洲部分专线支持距离收件人 3 公里内自提点或快递柜投递（入库到自提点平均约 6–10 个自然日，轨迹会显示网点地址）。云途官网未向个人收件人公布派送次数、通知卡、保管期或改约规则，一切以实际派送的当地快递为准。
+- **美国：** [云途中文网站](https://www.yunexpress.cn/) 向卖家介绍自有尾程服务 CIRRO-E-COMMERCE，且早在 2020 年就上线了美国标准邮政渠道，但未公开每票包裹固定走哪家尾程。在实际轨迹中，部分美国包裹由 GOFO 派送，GOFO 网站也能直接用同一个 `YT` 单号查询。
+- **欧洲自提点与派送规则：** 云途中文新闻提到欧洲部分专线支持距离收件人 3 公里内自提点或快递柜投递（入库到自提点平均约 6–10 个自然日，轨迹会显示网点地址）。云途网站未向个人收件人公布派送次数、通知卡、保管期或改约规则，一切以实际派送的当地快递为准。
 
 ## 云途物流不更新、海关查验、延误或丢件怎么办
 
-依据 [云途隐私政策](https://www.yunexpress.com/privacy-policy)，云途的签约客户是开通账号的发货商家而非终端收件人，官网没有面向收件人的理赔入口或时限说明。若包裹严重延误、丢失或破损，请携带订单号与 `YT` 单号直接联系卖家或购物平台。长时间无扫描原因见 [物流为什么停止更新](guide:tracking-not-updating)。
+依据 [云途隐私政策](https://www.yunexpress.com/privacy-policy)，云途的签约客户是开通账号的发货商家而非终端收件人，其网站没有面向收件人的理赔入口或时限说明。若包裹严重延误、丢失或破损，请携带订单号与 `YT` 单号直接联系卖家或购物平台。长时间无扫描原因见 [物流为什么停止更新](guide:tracking-not-updating)。
 
 **遇到 `Customs inspection - Import`（进口海关查验）怎么办？** [云途香港博客关于海关抽查的说明](https://hk.yunexpress.com/blog/2179/) 指出，被抽查本身不一定意味着长期滞留，具体耗时取决于查验等级：单证审核通常多花几个工作日至约一周；机检或开箱实物查验一般需要 1–2 周，且可能产生仓储或查验费；若移交主管部门专项审查，则可能耗时数周甚至超过一个月。涉税说明见 [包裹海关扣留与清关指南](guide:customs)。
 
@@ -68,8 +68,8 @@ updated: 2026-11-23
 
 云途在英国、爱尔兰和美国均未公布面向个人收件人的客服电话、表单或门店，公开渠道如下：
 
-- **客服邮箱**：[云途英文官网](https://www.yunexpress.com/) 页脚列出 `info@yunexpress.com`（标注服务时间 `08:00–23:00`，未注明时区，首页提示提供中英双语人工响应，但未说明是否直接受理个人收件人咨询）。
-- **中国大陆热线**：[云途中文官网](https://www.yunexpress.cn/) 列出 `400-8575-500`（中国国内客服号，未说明海外能否拨通）。
+- **客服邮箱**：[云途英文网站](https://www.yunexpress.com/) 页脚列出 `info@yunexpress.com`（标注服务时间 `08:00–23:00`，未注明时区，首页提示提供中英双语人工响应，但未说明是否直接受理个人收件人咨询）。
+- **中国大陆热线**：[云途中文网站](https://www.yunexpress.cn/) 列出 `400-8575-500`（中国国内客服号，未说明海外能否拨通）。
 - **区域办事处**：[云途区域联系页](https://sg.yunexpress.com/contact/) 仅列出亚洲和澳大利亚联络方式。
 
 收件人遇到问题应先联系签约发货的卖家，再联系轨迹中署名的当地尾程快递（例如美国 GOFO 可前往 `gofo.com` 联系其美国客服）。
@@ -109,12 +109,12 @@ Peek 直接查询云途轨迹并显示规范化阶段（「已生成面单」「
 按云途向商家公布的产品参考时效：[标准专线（Standard Express）](https://www.yunexpress.com/our-solutions/b2c/33) 发英国 3–5 个工作日、美国 5–8 个工作日、加拿大 8–10 个工作日、澳大利亚 4–7 个工作日；[特快专线（Priority Express）](https://www.yunexpress.com/our-solutions/b2c/priority-express) 发英国 3–5 个工作日（不含偏远邮编）、美国 5–8 个工作日；部分特惠带电专线发英国 5–8 个工作日、爱尔兰 6–10 个工作日、美国 8–15 个工作日。买家通常看不到卖家选的具体渠道，且海关查验会额外增加耗时。
 
 :::sources
-- [YunExpress：官网首页（英文）](https://www.yunexpress.com/) – 公司背景、深圳总部、客服邮箱 `info@yunexpress.com` 与服务时段
+- [YunExpress：其网站首页（英文）](https://www.yunexpress.com/) – 公司背景、深圳总部、客服邮箱 `info@yunexpress.com` 与服务时段
 - [YunExpress：关于我们（英文）](https://www.yunexpress.com/about-us) – 2014 年成立、2016 英国专线、2020 美国邮政专线、2024 Priority Express 与亚马逊合作
 - [YunExpress：隐私政策（英文）](https://www.yunexpress.com/privacy-policy) – 签约客户关系与香港云途物流主体
 - [YunExpress：标准专线 Standard Express（英文）](https://www.yunexpress.com/our-solutions/b2c/33) – 英、美、加、澳标准专线参考时效
 - [YunExpress：特快专线 Priority Express（英文）](https://www.yunexpress.com/our-solutions/b2c/priority-express) – 英美特快时效与偏远邮编说明
-- [云途物流：中文官网](https://www.yunexpress.cn/) – 跨境小包专线、中国大陆热线 `400-8575-500` 与 CIRRO-E-COMMERCE
+- [云途物流：中文网站](https://www.yunexpress.cn/) – 跨境小包专线、中国大陆热线 `400-8575-500` 与 CIRRO-E-COMMERCE
 - [云途香港博客：为什么你的包裹会被海关抽查？](https://hk.yunexpress.com/blog/2179/) – 单证、机检/实物查验与专项审查耗时说明
 - [YunExpress：区域联系方式（英文）](https://sg.yunexpress.com/contact/) – 亚洲及澳大利亚联络方式
 - [YunExpress：Yuntrack 查件页代码](https://www.yuntrack.com/static/js/0.38a2ccebfb56bd50819e.js) – 以 YT 开头的提示、分隔符、分类标签、进度条、Additional Notes、签收凭证、预计送达时间

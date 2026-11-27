@@ -81,7 +81,7 @@ India Post 提醒谨防假冒其名义的钓鱼链接：请仅访问 www.indiapo
 
 对于 2 位字母、9 位数字加 `IN` 且校验位正确的单号，[Peek](/) 会直接识别为 India Post 并显示“识别出的快递公司”；点击“更换”可切换其他承运商。如果校验位有误，Peek 会提示“这个单号的校验位对不上。”：请核对单号，或点击“按输入的单号跟踪”。归入 India Post 后，在首次扫描出现前页面显示“等待 India Post 更新”。
 
-Peek 不直接读取 India Post 官网，而是通过从 India Post 获取扫描数据、但不在 India Post 域名下的查询网站 MySpeedPost（或当 MySpeedPost 转发查询时通过其运营方的 track91）获取数据。如果该副本超过 30 分钟未更新，Peek 会请求 MySpeedPost 刷新，若刷新失败则保留旧副本，因此扫描可能较晚才到达 Peek。
+Peek 不直接读取 India Post 网站，而是通过从 India Post 获取扫描数据、但不在 India Post 域名下的查询网站 MySpeedPost（或当 MySpeedPost 转发查询时通过其运营方的 track91）获取数据。如果该副本超过 30 分钟未更新，Peek 会请求 MySpeedPost 刷新，若刷新失败则保留旧副本，因此扫描可能较晚才到达 Peek。
 
 Peek 保留 India Post 的英文状态文案，显示处理邮局及印度境内的 PIN 邮编（track91 不提供邮编），并在位置核实后标于地图上。航班起飞显示为“Aircraft Departure”，若 India Post 给出航线信息还会附带航班号与起降机场。Peek 会将记录归类到对应阶段：派送未成功归为“派送未成功”，拒收、破损、遗失或地址不全归为“需要留意”。通过 track91 返回的文案更简短：`Dispatched`（互换局发往海外）和 `Aircraft arrival in Transit country`（经停中转枢纽）显示为“运输中”，`Delivered` 显示为“已签收”。Peek 会去除收件人姓名、地址与签名，且不显示预计送达日期。印度境内的扫描按印度时间解析，包裹抵达目的国或出现首条 `(Inb)` 扫描后的记录（无论来自 MySpeedPost 还是 track91）按目的国时钟解析，并统一换算为你设备的时区显示；在 peektracker.com 以及 iPhone 和 Android 应用中，物流历史底部会注明所在时区。
 

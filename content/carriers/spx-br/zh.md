@@ -91,7 +91,7 @@ Peek 读取与 `spx.com.br` 相同的轨迹源，展示标准阶段、SPX 葡语
 
 在 SPX 尚未录入单号前，Peek 会显示“等待 SPX Express Brazil 更新”并持续查询；若两天后仍无记录，则提示“两天过去了，快递公司仍查不到这个单号。请检查单号、更换快递公司，或删除这个包裹。”并改为每日查询、满一周后改为每周查询。包裹在途满 4 天无更新时，Peek 会提供指向 Shopee 客服页面的“向 SPX Express Brazil 寻求帮助”链接。
 
-在打开包裹页面或预计派送当天开启提醒时，只要 SPX 官网正常响应，Peek 最高每 10 分钟检查一次，在 SPX 扫出派送中当天自当地时间早上 6 点起最高每 2 分钟检查一次；其余时间每小时检查一次。通过聚合追踪服务跟进时，每小时检查一次，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次。通知预设可选“每次扫描”、“重要环节”或“仅派送当天”。Peek 无法代你联系 SPX 或 Shopee。
+在打开包裹页面或预计派送当天开启提醒时，只要 SPX 网站正常响应，Peek 最高每 10 分钟检查一次，在 SPX 扫出派送中当天自当地时间早上 6 点起最高每 2 分钟检查一次；其余时间每小时检查一次。通过聚合追踪服务跟进时，每小时检查一次，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次。通知预设可选“每次扫描”、“重要环节”或“仅派送当天”。Peek 无法代你联系 SPX 或 Shopee。
 
 ## 关于巴西 SPX Express 追踪的常见问题
 
@@ -116,7 +116,7 @@ Shopee 公布的参考时效为：巴西本土卖家订单自揽收起 **1–25 
 Shopee 说明不提供直连快递客服，所有物流与派送问题均通过 Shopee App 内的 Chat Shopee 处理（巴西利亚时间工作日 `08:00–22:00`，周末 `08:00–20:00`）。
 
 :::sources
-- [SPX Express 巴西官网](https://spx.com.br/br) – Shopee 巴西自营物流、枢纽与分拨中心、查件框及 *SPX Express Brasil Ltda.*
+- [SPX Express 巴西网站](https://spx.com.br/br) – Shopee 巴西自营物流、枢纽与分拨中心、查件框及 *SPX Express Brasil Ltda.*
 - [SPX Express 关于我们](https://spx.com.br/br/help-center/about-us.html) – Shopee App 内查件说明
 - [SPX Express 自提点地图](https://spx.com.br/service-point) – 查找 Agência Shopee 网点
 - [Shopee 帮助中心：什么是 SPX Express](https://help.shopee.com.br/portal/4/article/197188) – Shopee 巴西官方自营物流说明

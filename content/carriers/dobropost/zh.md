@@ -54,9 +54,9 @@ DobroPost 结合内部状态码与俄文节点描述发布轨迹——前段来�
 
 ## DobroPost 官方客服与链接
 
-DobroPost 官网设有“Напишите в поддержку”（联系客服）按钮、客户社区与 Telegram 频道，并开放向首席执行官 Sergey Serbin 直接提交建议与投诉的通道。其[知识库](https://dobropost.com/baza_main)详细介绍了如何提交客服工单、更改已创建包裹的资费渠道及办理清关。
+DobroPost 网站设有“Напишите в поддержку”（联系客服）按钮、客户社区与 Telegram 频道，并开放向首席执行官 Sergey Serbin 直接提交建议与投诉的通道。其[知识库](https://dobropost.com/baza_main)详细介绍了如何提交客服工单、更改已创建包裹的资费渠道及办理清关。
 
-- **俄罗斯运营主体：** *OOO "Dobropost Logistika"*（*ООО "Добропост Логистика"*，税号 INN `9722023780`），莫斯科（`119192, Lomonosovsky Prospekt, 43 bldg. 2, office 4/1/1`；官网同时列出 `Michurinsky Prospekt, 54 bldg. 2`）。
+- **俄罗斯运营主体：** *OOO "Dobropost Logistika"*（*ООО "Добропост Логистика"*，税号 INN `9722023780`），莫斯科（`119192, Lomonosovsky Prospekt, 43 bldg. 2, office 4/1/1`；其网站同时列出 `Michurinsky Prospekt, 54 bldg. 2`）。
 - **亚美尼亚运营主体：** *OOO ICOM DP SOLUTIONS*（*ООО ИКОМ ДП СОЛУШНС*），亚美尼亚洛里州瓦纳佐尔。
 - **服务条款、资费与自提点：** [dobropost.com/rules](https://dobropost.com/rules)、[dobropost.com/tariffs](https://dobropost.com/tariffs) 与 [dobropost.com/pvz](https://dobropost.com/pvz)。
 
@@ -68,7 +68,7 @@ DobroPost 官网设有“Напишите в поддержку”（联系客�
 
 Peek 直接读取 DobroPost 追踪接口，展示对应阶段（“已生成面单”、“已揽收”、“运输中”、“清关中”、“待取件”、“需要留意”、“已退回寄件人”、“已签收”）、DobroPost 及回传合作方（CDEK、Boxberry、俄罗斯邮政）的俄文扫描文案（自动剔除电话号码）以及签收后的送达时间。CDEK 扫描末尾括号中标明的城镇会被提取为该条扫描的地点。所有 Peek 应用均不显示内部状态码。DobroPost 为全部扫描（含中国仓库扫描）均附上莫斯科时区偏移，Peek 会自动换算成你设备的本地时间。DobroPost 追踪接口本身不提供预计送达日期、重量、签收人姓名或末端本地单号。
 
-在打开包裹页面或预计派送当天开启提醒时，只要 DobroPost 官网追踪接口正常响应，Peek 最高每 10 分钟检查一次；其余时间每小时检查一次。由于 DobroPost 追踪流中不含“派送中”节点，Peek 不会切换到 2 分钟一次的派送日高频刷新。若停留在“已生成面单”或“已揽收”满 12 小时，或连续两天无新动态，无论如何关注都会转为每小时检查一次；停留在“已生成面单”满七天后降为每 6 小时一次。当 DobroPost 官网无响应、Peek 仅通过第三方追踪服务跟进时，Peek 每小时检查一次，静默满一天后改为每 3 小时一次，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次。
+在打开包裹页面或预计派送当天开启提醒时，只要 DobroPost 网站追踪接口正常响应，Peek 最高每 10 分钟检查一次；其余时间每小时检查一次。由于 DobroPost 追踪流中不含“派送中”节点，Peek 不会切换到 2 分钟一次的派送日高频刷新。若停留在“已生成面单”或“已揽收”满 12 小时，或连续两天无新动态，无论如何关注都会转为每小时检查一次；停留在“已生成面单”满七天后降为每 6 小时一次。当 DobroPost 网站无响应、Peek 仅通过第三方追踪服务跟进时，Peek 每小时检查一次，静默满一天后改为每 3 小时一次，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次。
 
 当最新扫描满四天且包裹仍停留在“已生成面单”、“已揽收”或“运输中”时，Peek 会标出该扫描日期（如“自10月12日周一起没有物流更新”），并在页面提示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 DobroPost 查询。”。若超过三周没有新扫描，则显示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 DobroPost 查询。”
 
@@ -93,7 +93,7 @@ DobroPost 可送至俄罗斯与明斯克的自营 PVZ 自提点；按资费页�
 `AWAITING_PAYMENT` 表示包裹已在中国仓库完成合箱称重，正等待你在客户后台支付运费。若停留在清关环节，可查阅 [DobroPost 知识库](https://dobropost.com/baza_main)了解清关流程，并联系客服核查当前进度。
 
 :::sources
-- [DobroPost 官网](https://dobropost.com/) – 中国至俄罗斯/白俄罗斯电商集运、鸡西仓库、客服与 CEO 直达渠道、莫斯科与亚美尼亚运营实体（*OOO "Dobropost Logistika"*，INN 9722023780）
+- [DobroPost 网站](https://dobropost.com/) – 中国至俄罗斯/白俄罗斯电商集运、鸡西仓库、客服与 CEO 直达渠道、莫斯科与亚美尼亚运营实体（*OOO "Dobropost Logistika"*，INN 9722023780）
 - [DobroPost 运单查询页](https://tracking.dobropost.com/) – 公开 `DBRPST` 追踪页面
 - [DobroPost 资费与时效](https://dobropost.com/tariffs) – Express、Economy、远东与重货时效、重量规则及合作承运商
 - [DobroPost 自提点（PVZ）](https://dobropost.com/pvz) – 俄罗斯与明斯克自营 PVZ 网点、取件费与保管期

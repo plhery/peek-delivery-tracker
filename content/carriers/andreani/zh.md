@@ -55,7 +55,7 @@ Peek 会保留 Andreani 的西班牙语原文，并将其归入 Peek 的状态�
 4. **派送当天。** `Hoy te visitaremos para entregarte tu envío.` 表示当天有人送货上门。
 5. **签收。** `Ya entregamos tu envío.` 标志行程完成。
 
-由于 Peek 无法读取 Andreani 官网说明页，本页不列出派送时效、派送未成功的规则，也不涉及网点自提和保管天数。相关问题请询问商家或 Andreani。另见[派送未成功](guide:missed-delivery)（英文）和[未领取的包裹](guide:uncollected-parcel)（英文）。
+由于 Peek 无法读取 Andreani 网站说明页，本页不列出派送时效、派送未成功的规则，也不涉及网点自提和保管天数。相关问题请询问商家或 Andreani。另见[派送未成功](guide:missed-delivery)（英文）和[未领取的包裹](guide:uncollected-parcel)（英文）。
 
 ## Andreani 物流停更、丢失或退回
 
@@ -75,7 +75,7 @@ Peek 会保留 Andreani 的西班牙语原文，并将其归入 Peek 的状态�
 
 ## Andreani 客服与联系方式
 
-由于 Peek 无法读取 Andreani 官网，本页不列电话、邮箱或营业时间：Peek 仅提供从官方页面核实过的联系方式。Andreani 官网为 andreani.com。
+由于 Peek 无法读取 Andreani 网站，本页不列电话、邮箱或营业时间：Peek 仅提供从官方页面核实过的联系方式。Andreani 网站为 andreani.com。
 
 网购订单请先联系商家：商家负责订购配送并掌握运单详情。
 
@@ -118,7 +118,7 @@ Peek 会保留 Andreani 的西班牙语原文，并将其归入 Peek 的状态�
 把单号粘贴到 Peek 即可。Andreani 原文保留西班牙语，但 Peek 会为每条记录标上中文阶段，同时上方表格也解释了这些句子。
 
 :::sources
-- [Universal Parcel Scraper: Andreani](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/andreani) – 名称与国家、15 位形态、其他参考号、andreani.com 链接、查询请求、西班牙语记录与分组及其阶段、隐藏电话与证件号、阿根廷时区、官网展示与 Peek 省略内容、无预计送达日
+- [Universal Parcel Scraper: Andreani](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/andreani) – 名称与国家、15 位形态、其他参考号、andreani.com 链接、查询请求、西班牙语记录与分组及其阶段、隐藏电话与证件号、阿根廷时区、其网站展示与 Peek 省略内容、无预计送达日
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – 其他 15 位单号承运商、Peek 询问顺序、物流查询服务、Andreani 无交接规则
 - [Argentina.gob.ar: Iniciar un reclamo ante Defensa del Consumidor](https://www.argentina.gob.ar/servicio/iniciar-un-reclamo-ante-defensa-del-consumidor) – 针对未履约企业的投诉、Ventanilla Federal Única、免费在线办理、所需资料与邮件投诉编号
 :::

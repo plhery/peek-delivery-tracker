@@ -1,6 +1,6 @@
 ---
 title: Nova Global 快递追踪：NPG 与 NGUS 单号、清关状态与客服
-description: 追踪 Nova Global 跨境包裹：NPG 与 NGUS 运单号格式、数字状态码含义、海关清关、本地合作承运商交接及客服联系方式。
+description: 追踪 Nova Global 跨境包裹：NPG 与 NGUS 运单号格式、数字状态码含义、海关清关、本地合作快递公司交接及客服联系方式。
 slug: nova-global-tracking
 published: 2026-11-26
 updated: 2026-11-26

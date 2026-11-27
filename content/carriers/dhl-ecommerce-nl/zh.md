@@ -18,9 +18,9 @@ DHL eCommerce 荷兰（前身为 DHL Parcel）负责荷兰与比利时的电商�
 | `3SDHL48291736` | `3S` 加三位字母再加数字：一种 DHL 条码格式。 |
 | `JJD00009048291736482917` | `JJD000090` 后跟 14 至 16 位数字：DHL 荷兰网络的 `JJD` 面单号。 |
 | `MDP48291736` | `MDP` 加 8 位字符（数字 1 至 9 与部分大写字母）：Peek 目录归入 DHL eCommerce 荷兰的格式。 |
-| 黄色通知卡编号 | 未妥投黄色卡片上的派送码，需在官网配合邮编查询。 |
+| 黄色通知卡编号 | 未妥投黄色卡片上的派送码，需在其网站配合邮编查询。 |
 
-有些单号外貌相近：`3S` 后接四位字母通常属于 PostNL；其他 `JJD` 单号多为[德国 DHL（DHL Paket）](carrier:dhl)格式（尽管 DHL 荷兰官网有时也能查到）；[DHL Express](carrier:dhl-express) 的运单号则印在条码下方。如果查不到结果，请先核对商家邮件中写明的承运商。
+有些单号外貌相近：`3S` 后接四位字母通常属于 PostNL；其他 `JJD` 单号多为[德国 DHL（DHL Paket）](carrier:dhl)格式（尽管 DHL 荷兰网站有时也能查到）；[DHL Express](carrier:dhl-express) 的运单号则印在条码下方。如果查不到结果，请先核对商家邮件中写明的承运商。
 
 ## DHL eCommerce 物流状态中文解读
 
@@ -73,7 +73,7 @@ DHL 面向消费者的官方联系渠道如下：
 - **比利时：** 访问[比利时客服页面](https://www.dhlecommerce.be/en/consumer/customer-service)开启在线聊天（先由数字助手核查是否有人工在线）；同样未公布客服电话。
 - **手机应用：** 从 App Store 或 Google Play 下载 My DHL。
 
-> DHL 警示防范要求付款或点击链接的诈骗短信、WhatsApp 消息和邮件。官方邮件发件域名均以 dhl.com、dhl.nl、dhlparcel.nl 或 dhlecommerce.nl 结尾。请直接在官网查件页手动输入运单号，不要点消息中的链接，并将可疑邮件作为附件举报至 spam.ecommerce@dhl.com。仅通过官方渠道安装 My DHL 应用。
+> DHL 警示防范要求付款或点击链接的诈骗短信、WhatsApp 消息和邮件。官方邮件发件域名均以 dhl.com、dhl.nl、dhlparcel.nl 或 dhlecommerce.nl 结尾。请直接在其网站查件页手动输入运单号，不要点消息中的链接，并将可疑邮件作为附件举报至 spam.ecommerce@dhl.com。仅通过官方渠道安装 My DHL 应用。
 
 ## 用 Peek 查询和跟踪 DHL eCommerce 包裹
 

@@ -67,7 +67,7 @@ Poste 官方页面并未对物流停止更新给出具体说明。请先联系�
 
 寄件人和收件人均可提出投诉，但除非寄件人正式放弃索赔权并转让给你，否则赔偿金会支付给寄件人，因此网购订单找商家处理通常更快。如果是海外寄来的包裹，Poste 建议由寄件人联系发件国邮政。收货时如发现外包装或物品破损，请当场指出：使用“consegna cautelare”保留异议签收表签收，或直接拒收。
 
-申诉时限取决于寄件人选用的服务：Crono 和 Poste Delivery Business 为 Poste 向寄件人揽收后 20 个自然日内；Poste Delivery Standard 为寄出后第 6 个工作日起至 3 个月内。你可以通过官网的包裹投诉表单在线提交、使用认证电子邮件（PEC）发送 Poste 投诉信、寄送挂号信至 Casella Postale 160, 00144 Roma，或直接到邮局办理。Poste 的服务宪章承诺在 45 天内答复，随后可申请调解，再之后可向监管机构 AGCOM 申诉。如果包裹[显示已签收但未收到](guide:delivered-not-received)（英文），也按相同流程处理：Poste 没有另设专门程序。
+申诉时限取决于寄件人选用的服务：Crono 和 Poste Delivery Business 为 Poste 向寄件人揽收后 20 个自然日内；Poste Delivery Standard 为寄出后第 6 个工作日起至 3 个月内。你可以通过其网站的包裹投诉表单在线提交、使用认证电子邮件（PEC）发送 Poste 投诉信、寄送挂号信至 Casella Postale 160, 00144 Roma，或直接到邮局办理。Poste 的服务宪章承诺在 45 天内答复，随后可申请调解，再之后可向监管机构 AGCOM 申诉。如果包裹[显示已签收但未收到](guide:delivered-not-received)（英文），也按相同流程处理：Poste 没有另设专门程序。
 
 ## Poste Italiane 客服电话与英文支持
 
@@ -78,7 +78,7 @@ poste.it 上列出的客服联系方式如下：
 - **电子邮件：** assistenza.spedizioni@posteitaliane.it，或使用英文 [Contact us](https://www.poste.it/assistenza/scrivici-en) 页面上的表单。
 - **在线客服：** poste.it 上的 Poste 智能助手，全天 24 小时提供服务。
 
-> Poste 提醒，诈骗短信可能会混入其真实短信会话中。请勿点击短信中的链接，而应自己手动输入 www.poste.it 访问官网。Poste 绝不会索要银行卡信息、验证码或密码。
+> Poste 提醒，诈骗短信可能会混入其真实短信会话中。请勿点击短信中的链接，而应自己手动输入 www.poste.it 访问其网站。Poste 绝不会索要银行卡信息、验证码或密码。
 
 ## 使用 Peek 查询 Poste Italiane 包裹
 

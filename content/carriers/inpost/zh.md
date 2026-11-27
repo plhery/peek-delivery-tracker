@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-InPost 是一家起源于波兰的自提柜网络，目前在英国、波兰、意大利、葡萄牙及其他国家提供自提柜、合作门店及上门派送服务。你可以在对应国家或地区的 InPost 官网查询包裹（例如英国站 [inpost.co.uk/tracking](https://inpost.co.uk/tracking)），或直接把单号粘贴到上方输入框中。单号由商家或寄件人提供；自提柜取件码则是另外一组码。
+InPost 是一家起源于波兰的自提柜网络，目前在英国、波兰、意大利、葡萄牙及其他国家提供自提柜、合作门店及上门派送服务。你可以在对应国家或地区的 InPost 网站查询包裹（例如英国站 [inpost.co.uk/tracking](https://inpost.co.uk/tracking)），或直接把单号粘贴到上方输入框中。单号由商家或寄件人提供；自提柜取件码则是另外一组码。
 
 ## InPost 运单号：格式与查找位置
 
@@ -50,7 +50,7 @@ InPost 英国 2024 年 7 月的官方博客按顺序列出了其网站显示的�
 | 国家/地区 | 取件保管期限 |
 | --- | --- |
 | 英国自提柜或门店 | 3 天，截止前 24 小时发送提醒，不可延期。 |
-| 波兰 | 请在 InPost Mobile 应用或 InPost 波兰官网查看。InPost 账户条款将延长 Paczkomat 取件期限列为其提供的服务之一。 |
+| 波兰 | 请在 InPost Mobile 应用或 InPost 波兰网站查看。InPost 账户条款将延长 Paczkomat 取件期限列为其提供的服务之一。 |
 | 意大利 | 通常约为 3 天；具体截止日期见 InPost 邮件，很少提供延期。 |
 | 葡萄牙 | 境内包裹为 5 个自然日，不过 InPost 部分页面也写为 8 天。 |
 
@@ -93,7 +93,7 @@ Peek 不会将 InPost 包裹继续转交至其他快递公司追踪。只要 InP
 
 ### InPost 和 Yodel 是同一家公司吗？
 
-Yodel 现已归属 InPost。InPost 英国于 2025 年 4 月收购了 Yodel，Yodel by InPost 的包裹均可通过 InPost 应用和官网查询。
+Yodel 现已归属 InPost。InPost 英国于 2025 年 4 月收购了 Yodel，Yodel by InPost 的包裹均可通过 InPost 应用和其网站查询。
 
 ### InPost 是波兰公司吗？
 
@@ -110,7 +110,7 @@ InPost 英国的查询页面告知寄件人：寄至自提柜或合作门店不�
 :::sources
 - [InPost UK: Tracking a parcel page](https://inpost.co.uk/tracking) – 72 小时规则、国际包裹、取件码、Tracking → Receiving、Remote Opening 与派送时效
 - [InPost UK: Yodel by InPost help](https://inpost.co.uk/yodel-help) – Yodel 收购、单号格式、取件、满柜处理、Deliver to Locker、上门派送、次工作日再派、退款与电话
-- [InPost UK: Track to the Future](https://inpost.co.uk/blog/tracking-explained) – 官网物流状态标题及其写法
+- [InPost UK: Track to the Future](https://inpost.co.uk/blog/tracking-explained) – 网站物流状态标题及其写法
 - [InPost: Who we are](https://inpost.eu/who-we-are) – 波兰起源与卢森堡注册信息
 - [InPost: Home](https://inpost.eu/) – 服务国家列表
 - [InPost: Regulamin Konta InPost](https://terms.inpost-group.com/pl/regulamin) – InPost Mobile、Paczkomat 延长取件期、改派服务、波兰表单、AI 聊天、电话、地址与 AGCOM

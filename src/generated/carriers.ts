@@ -20439,7 +20439,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "whistl",
       "catalog": "whistl",
       "slug": "whistl-tracking",
-      "title": "Whistl 英国包裹追踪：末端派送承运商、状态与客服",
+      "title": "Whistl 英国包裹追踪：末端派送快递公司、状态与客服",
       "name": "Whistl",
       "color": "#fd4f00"
     },

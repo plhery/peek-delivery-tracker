@@ -14,7 +14,7 @@ Colissimo 是法国国家邮政 La Poste 旗下的包裹服务。将 Colissimo �
 | --- | --- |
 | `6A48291736055` | 1 位数字、1 位字母加 11 位数字：Colissimo 包裹，或可追踪信件、挂号信。最后一位是校验码。 |
 | `LA482917367FR` | 2 位字母、9 位数字加 `FR`：从法国寄出的国际邮政单号，用于 Colissimo 包裹以及可追踪和挂号信件。`FR` 前面的那位数字是校验码。 |
-| `87048291736058D` | 以 `863` 至 `866`、`870`、`875`、`880` 或 `885` 开头的 15 位字符：Smart Data 单号，La Poste 用于可追踪和挂号信件。最后一位是校验字符；去掉最后一位，La Poste 官网同样能查到。 |
+| `87048291736058D` | 以 `863` 至 `866`、`870`、`875`、`880` 或 `885` 开头的 15 位字符：Smart Data 单号，La Poste 用于可追踪和挂号信件。最后一位是校验字符；去掉最后一位，La Poste 网站同样能查到。 |
 
 以 `XU`、`XR`、`XT`、`XW`、`XY` 或 `PZ` 开头并以 `FR` 结尾的邮政单号属于 Chronopost。12 位单号通常属于 Colis Privé。普通 14 位纯数字单号也符合 DPD 等其他快递公司，因此请核对商家邮件。找不到单号？请参阅[如何查找运单号](guide:find-tracking-number)（英文）。
 
@@ -59,7 +59,7 @@ ARCEP 与法国官方公共服务目录列出的 La Poste 联系渠道如下：
 
 - **从法国境外拨打：** +33 810 821 821（国际客户服务），周一至周五法国时间 8:00 至 19:00。
 - **从法国境内拨打：** 3631，周一至周五 8:30 至 19:00，周六 8:30 至 13:00。服务本身免费，仅按普通固话通话计费。
-- **在线办理：** 通过 La Poste 官网 laposte.fr。
+- **在线办理：** 通过 La Poste 网站 laposte.fr。
 - **邮寄信件：** Service consommateurs, 99 999 La Poste；也可直接前往邮局咨询。
 
 > 法国政府网络犯罪援助平台 Cybermalveillance.gouv.fr 援引 La Poste 的声明称：La Poste “绝不会通过短信或电子邮件要求你付款以领取包裹”。如有疑问，请勿点击链接，直接前往 laposte.fr 或在 Peek 中核对真实物流。如收到冒充 La Poste 或 Colissimo 的钓鱼邮件，请举报至 phishing@laposte.fr；在法国境内收到诈骗短信可免费转发至 33700 举报。更多防范方法见[快递诈骗短信指南](guide:delivery-scam-texts)（英文）。
@@ -92,7 +92,7 @@ La Poste 集团公布数据显示，2025 年有 41% 的 Colissimo 包裹在寄�
 
 :::sources
 - [La Poste Groupe: La branche Services-Courrier-Colis](https://www.lapostegroupe.com/fr/services-courrier-colis) – Colissimo 服务、每周六天派送与 2025 年 41% 次日达数据
-- [ARCEP: Comment résoudre un litige avec un opérateur postal ?](https://www.arcep.fr/mes-demarches-et-services/consommateurs/fiches-pratiques/la-resolution-des-litiges-postaux.html) – 寄收双方免费投诉、客服电话与时间、官网、邮寄地址、邮局渠道、申诉部门及调解员
+- [ARCEP: Comment résoudre un litige avec un opérateur postal ?](https://www.arcep.fr/mes-demarches-et-services/consommateurs/fiches-pratiques/la-resolution-des-litiges-postaux.html) – 寄收双方免费投诉、客服电话与时间、其网站、邮寄地址、邮局渠道、申诉部门及调解员
 - [Le Médiateur du Groupe La Poste: Foire aux questions](https://mediateur.groupelaposte.com/pages/foire-aux-questions) – 免费调解、需先走两级投诉、满两个月及一年时限
 - [Service-Public.fr: Service consommateur de La Poste](https://lannuaire.service-public.gouv.fr/centres-contact/R11647) – 3631 服务时间与资费、国际客服电话与邮寄地址
 - [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – 30 天送达规则、额外宽限期、退款、商家承担破损责任及由卖家或承运商代收 3 欧元关税

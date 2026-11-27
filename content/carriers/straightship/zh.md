@@ -6,7 +6,7 @@ published: 2026-11-03
 updated: 2026-11-20
 ---
 
-Straightship（中文名迅联捷航，公司全称 Straightship Solutions Limited）是一家总部在加拿大不列颠哥伦比亚省本拿比（Burnaby）的物流公司，把货物从亚洲运到北美，并用自己的司机在加拿大各地派送包裹。它的官网把 SHEIN 列为合作伙伴之一。如果网购包裹的快递单号以 `STRTD` 或 `STRCA` 开头，就是 Straightship 在送；以 `STSH` 开头的也可能是它。你可以在 [Straightship 中文官网](https://www.straightship.com/new/cn/)首页的“跟踪您的货物”一栏输入单号查询，也可以把单号粘贴到上方的查询框。单号在商家的发货邮件或订单页面里。
+Straightship（中文名迅联捷航，公司全称 Straightship Solutions Limited）是一家总部在加拿大不列颠哥伦比亚省本拿比（Burnaby）的物流公司，把货物从亚洲运到北美，并用自己的司机在加拿大各地派送包裹。它的网站把 SHEIN 列为合作伙伴之一。如果网购包裹的快递单号以 `STRTD` 或 `STRCA` 开头，就是 Straightship 在送；以 `STSH` 开头的也可能是它。你可以在 [Straightship 中文网站](https://www.straightship.com/new/cn/)首页的“跟踪您的货物”一栏输入单号查询，也可以把单号粘贴到上方的查询框。单号在商家的发货邮件或订单页面里。
 
 ## Straightship 快递单号长什么样
 
@@ -53,13 +53,13 @@ Straightship 的查询页面是英文的。上方是摘要，其中一栏是“P
 
 Straightship 的查询页面只针对加拿大：标题是“Canada B2C Shipment Tracking”。Straightship 说，它的自营派送网络覆盖加拿大 95% 的人口，有 85 个以上的派送站点；派送当天的记录写明 21:00 前送达。
 
-对从美国运进加拿大的货物（中文官网叫“美转加跨境集运”），Straightship 提供几种尾程派送方式：自营网络、加拿大邮政（Canada Post）或 UPS，英文页面另写了 Purolator，中文页面写的则是 FedEx。用哪一家要看具体货件。它的查询页面只显示 Straightship 自己的网点，不写其他快递公司，也不给第二个单号。
+对从美国运进加拿大的货物（中文网站叫“美转加跨境集运”），Straightship 提供几种尾程派送方式：自营网络、加拿大邮政（Canada Post）或 UPS，英文页面另写了 Purolator，中文页面写的则是 FedEx。用哪一家要看具体货件。它的查询页面只显示 Straightship 自己的网点，不写其他快递公司，也不给第二个单号。
 
 Straightship 没有公布会上门几次、会不会留取件通知单、没送达的包裹在网点放多久。它写明的有：
 
 - **派送失败后**：按记录里的要求，发邮件到 SS@straightship.com，写上你的快递单号。
 - **要改地址或电话**：用它的联系表单，联系原因选“地址和/或联系方式更新”。
-- **送达照片**：中文官网的查询栏写着可以查看最新包裹交付状态“和POD图像 (如有)”，POD 图像就是送达时拍的照片。
+- **送达照片**：中文网站的查询栏写着可以查看最新包裹交付状态“和POD图像 (如有)”，POD 图像就是送达时拍的照片。
 
 ## 从亚洲寄来的 Straightship 包裹要交关税吗
 
@@ -93,7 +93,7 @@ Straightship 为用它发货的企业办理清关，它的中文服务页写明�
 
 ## 用 Peek 跟踪 Straightship 包裹
 
-[Peek](/) 看到上面那几种 `STRTD` 或 `STRCA` 单号，会马上认出 Straightship，查询框里显示“识别出的快递公司”：Peek 收录的快递公司里，没有别家用这种单号。`STSH` 单号就不一定了，有些也符合 Colis Privé 的单号格式：Peek 会先问 Straightship 有没有这个包裹（显示“正在查询物流服务…”），有的话就选它（显示“查到了这个包裹”）。如果没出现 Straightship，点“更换”，在“符合这个单号”下面选它。straightship.com 的查询链接（`/track-your-shipment/tracking-id/` 加单号）也可以直接粘贴。Peek 只按这几种格式向 Straightship 查询：如果你用“更换”给别的单号选了 Straightship，Peek 会提示它“不使用这种格式的单号”。其他格式的 Straightship 单号，请到 Straightship 官网查。
+[Peek](/) 看到上面那几种 `STRTD` 或 `STRCA` 单号，会马上认出 Straightship，查询框里显示“识别出的快递公司”：Peek 收录的快递公司里，没有别家用这种单号。`STSH` 单号就不一定了，有些也符合 Colis Privé 的单号格式：Peek 会先问 Straightship 有没有这个包裹（显示“正在查询物流服务…”），有的话就选它（显示“查到了这个包裹”）。如果没出现 Straightship，点“更换”，在“符合这个单号”下面选它。straightship.com 的查询链接（`/track-your-shipment/tracking-id/` 加单号）也可以直接粘贴。Peek 只按这几种格式向 Straightship 查询：如果你用“更换”给别的单号选了 Straightship，Peek 会提示它“不使用这种格式的单号”。其他格式的 Straightship 单号，请到 Straightship 网站查。
 
 Peek 读取的是 Straightship 自己的查询页面，显示状态、物流记录（含每次扫描的城市和省份）和送达时间。页面注明时间是 UTC，Peek 就按 UTC 读取，再换算成你设备所在的时区显示；在 peektracker.com 网页和 iPhone、Android App 上，物流记录末尾会写明“时间按你所在的时区显示：”和时区名称。`Package will be delivered before 9:00pm` 算作“派送中”，`Attempted Delivery` 和上面两条派送失败记录算作“派送未成功”，`Delivery is in progress` 算作“运输中”；`Delivered` 这一行在 Peek 里显示为“已签收”。Straightship 不提供预计送达日期，Peek 也就不显示；客户参考号和送达照片 Peek 不显示，请到 Straightship 的查询页面看。Straightship 不写其他快递公司，所以 Peek 一直用 Straightship 的单号跟踪到底。
 
@@ -103,7 +103,7 @@ Straightship 还查不到这个单号时，Peek 在 peektracker.com 上显示“
 
 ### Straightship 是什么快递，正规吗？
 
-是正规的物流公司。Straightship Solutions Limited 位于不列颠哥伦比亚省本拿比，中文名迅联捷航，把货物从亚洲运到北美，并在加拿大自己派送。官网列出的合作伙伴有 SHEIN、加拿大邮政、FedEx、中远海运（COSCO）和圆通（YTO），还说它有 85 个以上的派送站点。
+是正规的物流公司。Straightship Solutions Limited 位于不列颠哥伦比亚省本拿比，中文名迅联捷航，把货物从亚洲运到北美，并在加拿大自己派送。其网站列出的合作伙伴有 SHEIN、加拿大邮政、FedEx、中远海运（COSCO）和圆通（YTO），还说它有 85 个以上的派送站点。
 
 ### “Package will be delivered before 9:00pm”是什么意思？
 

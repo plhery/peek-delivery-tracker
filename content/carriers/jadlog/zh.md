@@ -20,7 +20,7 @@ Peek 仅凭 14 位包裹单号即可查询，从不索要你的 CPF。如果单�
 
 ## Jadlog 物流状态含义
 
-由于 Jadlog 隶属 Geopost，物流记录在 Jadlog 官网显示为葡萄牙语，经由 Geopost 的查件系统读取时则显示为英语。
+由于 Jadlog 隶属 Geopost，物流记录在 Jadlog 网站显示为葡萄牙语，经由 Geopost 的查件系统读取时则显示为英语。
 
 | Jadlog / Geopost 显示 | 对你的含义 | Peek 显示 |
 | --- | --- | --- |
@@ -42,7 +42,7 @@ Jadlog 在 [jadlog.com.br/jadlog/servicos](https://www.jadlog.com.br/jadlog/serv
 - **[Jadlog Pickup](https://www.jadlog.com.br/jadlog/pickup)：** 全巴西超过 4,000 家合作门店（覆盖 90% 以上人口），可用于包裹自提、寄件与电商逆向退货（*Reversa*），并通过短信和邮件通知进度。
 - **[Jadlog Internacional](https://www.jadlog.com.br/jadlog/internacional)：** 依托 Geopost 国际网络，从巴西出口寄送至 154 个国家和地区（300 个目的地）。
 
-**Jadlog 未公开说明的规则。** Jadlog 官网没有为所有网店公布统一的派送尝试次数上限、保证送达时效或 Pickup 网点固定保管天数。请查看 Pickup 包裹发来的短信或邮件通知，或查看网店订单页上的具体取件截止日期与重派规则。
+**Jadlog 未公开说明的规则。** Jadlog 网站没有为所有网店公布统一的派送尝试次数上限、保证送达时效或 Pickup 网点固定保管天数。请查看 Pickup 包裹发来的短信或邮件通知，或查看网店订单页上的具体取件截止日期与重派规则。
 
 ## Jadlog 包裹停更、延误或未收到
 

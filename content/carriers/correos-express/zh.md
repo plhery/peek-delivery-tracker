@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-Correos Express 是西班牙邮政集团（Correos）旗下的快递公司，负责西班牙和葡萄牙全境的速递包裹派送；它不同于提供普通邮政服务的[西班牙邮政（Correos）](carrier:correos-spain)。你可以在其西班牙语[官网查询页面](https://s.correosexpress.com/)输入单号，或直接粘贴到上方输入框查询。包裹由寄件人（通常是商家）向 Correos Express 登记，如果没有单号请联系商家索取。
+Correos Express 是西班牙邮政集团（Correos）旗下的快递公司，负责西班牙和葡萄牙全境的速递包裹派送；它不同于提供普通邮政服务的[西班牙邮政（Correos）](carrier:correos-spain)。你可以在其西班牙语[网站查询页面](https://s.correosexpress.com/)输入单号，或直接粘贴到上方输入框查询。包裹由寄件人（通常是商家）向 Correos Express 登记，如果没有单号请联系商家索取。
 
 ## Correos 还是 Correos Express：你拿的是哪种单号？
 
@@ -17,7 +17,7 @@ Correos（西班牙邮政）是 Correos Express 的母公司，但两家使用�
 
 ## Correos Express 运单号格式
 
-Correos Express 官网并未公布固定编号规则，查件框只要求输入 *número de envío*（运单号）。Peek 的快递目录收录了两种全数字格式，末尾均带校验位（以下均为虚构示例）：
+Correos Express 网站并未公布固定编号规则，查件框只要求输入 *número de envío*（运单号）。Peek 的快递目录收录了两种全数字格式，末尾均带校验位（以下均为虚构示例）：
 
 | 单号示例 | 所属快递公司 |
 | --- | --- |
@@ -28,11 +28,11 @@ Correos Express 官网并未公布固定编号规则，查件框只要求输入 
 
 Correos Express 没有说明单号具体出现在哪里，也没有公布官方短信发件人名称，因此请查看商家的发货邮件或订单详情页（更多查找方法见[如何查找运单号](guide:find-tracking-number)（英文））。
 
-如果官网提示 *no se ha encontrado ningún envío*（未找到运单），Correos Express 建议先核对这是否确为 Correos Express 单号，并等待几小时让新登记的包裹同步上网；若仍查不到，请联系寄件人。
+如果网站提示 *no se ha encontrado ningún envío*（未找到运单），Correos Express 建议先核对这是否确为 Correos Express 单号，并等待几小时让新登记的包裹同步上网；若仍查不到，请联系寄件人。
 
 ## Correos Express 西班牙语物流状态中文说明
 
-Correos Express 不提供英文或中文查件界面。西班牙官网以西班牙语显示以下状态；葡萄牙官网菜单为葡萄牙语，但其状态措辞未经核实。
+Correos Express 不提供英文或中文查件界面。西班牙网站以西班牙语显示以下状态；葡萄牙网站菜单为葡萄牙语，但其状态措辞未经核实。
 
 | 官方状态 | 中文含义 |
 | --- | --- |
@@ -51,11 +51,11 @@ Correos Express 不提供英文或中文查件界面。西班牙官网以西班�
 
 `ENTREGADO EN PUNTO DE CONVENIENCIA` 最容易让人误解：虽然 *entregado* 字面意思是“已送达”，但这里指交给了自提点而不是你本人。请等状态变为 `DISPONIBLE EN PUNTO DE CONVENIENCIA`，并备好 PIN 码再去取件。
 
-Correos Express 仅在葡萄牙官网常见问题里解释了 `ESTACIONADO`，而未官方注释 `EN DESTINO`、`Su envío no ha podido ser entregado`、`NUEVO REPARTO`、`ENTREGADO EN PUNTO DE CONVENIENCIA`、`DEVUELTO`、`ADMITIDO EN OFICINA DE CORREOS`（已在 Correos 邮局交寄）或 `EN ALMACÉN`（在仓库中）。这些状态的含义是字面直译或 Peek 的解读；若想了解各物流阶段定义，请参见[物流状态说明](guide:tracking-statuses)（英文）。
+Correos Express 仅在葡萄牙网站常见问题里解释了 `ESTACIONADO`，而未官方注释 `EN DESTINO`、`Su envío no ha podido ser entregado`、`NUEVO REPARTO`、`ENTREGADO EN PUNTO DE CONVENIENCIA`、`DEVUELTO`、`ADMITIDO EN OFICINA DE CORREOS`（已在 Correos 邮局交寄）或 `EN ALMACÉN`（在仓库中）。这些状态的含义是字面直译或 Peek 的解读；若想了解各物流阶段定义，请参见[物流状态说明](guide:tracking-statuses)（英文）。
 
 ## 更改派送日期、地址或改投自提点
 
-**西班牙境内：** 在包裹进入派送前，若寄件人与所选服务允许修改，查询页面可能会显示 **Gestionar entrega**（管理派送）按钮：你可以改投至 Punto Correos 自提点、授权他人（如邻居或门房）代收、修改收件地址或另选派送日期。如果错过派送，Correos Express 会在服务时限内再次尝试派送。如需重新预约，可在官网的 **Solicita nueva entrega**（申请重新派送）表单中选择新日期与上午/下午时段，或改送至 Correos 邮局或自提点。地址有误需联系寄件人更正。若是货到付款（*contra reembolso*），快递员上门收款，Correos Express 建议提前备好准确金额的现金。
+**西班牙境内：** 在包裹进入派送前，若寄件人与所选服务允许修改，查询页面可能会显示 **Gestionar entrega**（管理派送）按钮：你可以改投至 Punto Correos 自提点、授权他人（如邻居或门房）代收、修改收件地址或另选派送日期。如果错过派送，Correos Express 会在服务时限内再次尝试派送。如需重新预约，可在其网站的 **Solicita nueva entrega**（申请重新派送）表单中选择新日期与上午/下午时段，或改送至 Correos 邮局或自提点。地址有误需联系寄件人更正。若是货到付款（*contra reembolso*），快递员上门收款，Correos Express 建议提前备好准确金额的现金。
 
 **葡萄牙境内：** 首次派送失败后会自动安排第二次派送，并发送通知供你改选派送日期、同一行政区内的其他地址或可用的 Ponto Correos 自提点。一旦包裹已进入派送环节，需等收到该通知后再改地址。按运输条款，派送失败后满 3 个工作日无人认领的包裹将退回寄件人。
 
@@ -67,16 +67,16 @@ Correos Express 仅在葡萄牙官网常见问题里解释了 `ESTACIONADO`，�
 
 - **物流不更新：** 分拨中心之间转运时，轨迹可能延迟数小时才更新。若连续 24 至 48 小时无任何变动，Correos Express 建议联系寄件人。另见[物流停止更新怎么办](guide:tracking-not-updating)（英文）。
 - **人在家却显示派送失败：** 先查看轨迹详情。Correos Express 表示无法进入或信息不全可能导致无法派送，确认后可按上文步骤重新预约。
-- **显示已签收但没收到：** 西班牙收件人先在 Correos Express 官网核对签收详情，再联系寄件人；葡萄牙收件人可发邮件至 destinatarioscep@correosexpress.com。另见[显示已签收但未收到](guide:delivered-not-received)（英文）。
+- **显示已签收但没收到：** 西班牙收件人先在 Correos Express 网站核对签收详情，再联系寄件人；葡萄牙收件人可发邮件至 destinatarioscep@correosexpress.com。另见[显示已签收但未收到](guide:delivered-not-received)（英文）。
 - **包裹破损：** 西班牙境内运输条款要求签收时书面注明异议，隐蔽性破损或短少需在 7 个自然日内提出；葡萄牙收件人应拍摄外包装与内物照片，并在 7 天内联系寄件人。
 - **恶劣天气受限：** Correos Express 可能因天气限制部分地区收派，当前受限地区列在[特别情况公告页](https://www.correosexpress.es/es/atencion-al-cliente/situaciones-especiales)。
 - **包裹已退回：** 状态显示 `DEVUELTO` 后，请联系寄件人。
 
 ## Correos Express 客服电话与联系渠道
 
-Correos Express 官网列出的联系渠道（均不提供中文或英文服务）：
+Correos Express 网站列出的联系渠道（均不提供中文或英文服务）：
 
-- **西班牙：** 900 122 333（未公布服务时间；西班牙通信监管机构 CNMC 表示拨打 900 号段手机与固话均免费）。官网查件页还列有 913 277 020。也可填写[客户服务表单](https://www.correosexpress.es/es/atencion-al-cliente/contacto/atencion-al-cliente)（需填运单号和邮编），或在 X 上联系 [@Cex_responde](https://x.com/Cex_responde)。
+- **西班牙：** 900 122 333（未公布服务时间；西班牙通信监管机构 CNMC 表示拨打 900 号段手机与固话均免费）。其网站查件页还列有 913 277 020。也可填写[客户服务表单](https://www.correosexpress.es/es/atencion-al-cliente/contacto/atencion-al-cliente)（需填运单号和邮编），或在 X 上联系 [@Cex_responde](https://x.com/Cex_responde)。
 - **葡萄牙：** 229 762 810（按固话资费计费，周一至周五 08:30 至 19:00）。收件人也可发送邮件至 destinatarioscep@correosexpress.com。
 
 > Correos Express 声明绝不会索要银行账户信息或网站登录密码，也未开设 807 付费高价热线；如有疑问请拨打 900 122 333 核实。西班牙网络安全机构 INCIBE 曾于 2022 年发布预警，提醒防范冒充“CORREOS EXPRESS”的诈骗短信，这类短信以派送失败为由要求补缴小额关税。切勿打开其中的链接。
@@ -95,11 +95,11 @@ Peek 最高每 10 分钟检查一次；在 Correos Express 扫描包裹外出派
 
 ### Correos Express 能寄到英国吗？
 
-可以。通过西班牙发出的 Internacional Express 服务可通达 180 多个国家和地区，提供最多两次派送尝试，官网全程可查直至签收。Correos Express 提醒，自英国 2020 年底退出欧盟单一市场与关税同盟后，发往英格兰、威尔士、苏格兰和北爱尔兰的包裹面临额外要求和费用；发往非欧盟国家时，Internacional Express 会负责清关手续。
+可以。通过西班牙发出的 Internacional Express 服务可通达 180 多个国家和地区，提供最多两次派送尝试，其网站全程可查直至签收。Correos Express 提醒，自英国 2020 年底退出欧盟单一市场与关税同盟后，发往英格兰、威尔士、苏格兰和北爱尔兰的包裹面临额外要求和费用；发往非欧盟国家时，Internacional Express 会负责清关手续。
 
 ### Correos Express 几点派送？
 
-取决于寄件人所选服务：Paq 10 会在 10:00 前送达，Paq 14 会在 14:00 前送达。官网显示的预计送达时间根据该邮编历史派送记录推算，可能随路线情况变动。
+取决于寄件人所选服务：Paq 10 会在 10:00 前送达，Paq 14 会在 14:00 前送达。其网站显示的预计送达时间根据该邮编历史派送记录推算，可能随路线情况变动。
 
 ### 可以用英文或中文联系 Correos Express 吗？
 

@@ -62,14 +62,14 @@ XYL-Ships 的追踪轨迹以英文发布，记录包裹从中国始发分拣中�
 
 ## 联系 XYL-Ships（以及为何应先找卖家）
 
-`xylships.com` 是一个面向企业客户的货运代理官网，面向个人消费者的支持渠道非常有限：
+`xylships.com` 是一个面向企业客户的货运代理网站，面向个人消费者的支持渠道非常有限：
 
 - **电子邮箱**：`fzxyl9527@163.com`（[xylships.com](https://xylships.com/) 页脚列出的唯一联系方式）。
 - **客服电话、办公地址与理赔门户**：`xylships.com` 上均未公布。
 
 由于 XYL-Ships 仅与企业发货人建立合作关系，不直接对接终端收件人，涉及丢件、地址更正或退款时请直接联系网购店铺或电商平台，商家才能通过其货运账户推进核查或执行买家保护。
 
-> 若收到陌生短信或邮件，要求你点击链接缴费以“解锁”或“重新安排” XYL-Ships 包裹，请务必高度警惕。任何真实的关税缴费都应直接通过本国邮政官网或海关渠道核实，切勿通过未经证实的短信链接付款。详见[防范快递诈骗短信](guide:delivery-scam-texts)（英文）。
+> 若收到陌生短信或邮件，要求你点击链接缴费以“解锁”或“重新安排” XYL-Ships 包裹，请务必高度警惕。任何真实的关税缴费都应直接通过本国邮政网站或海关渠道核实，切勿通过未经证实的短信链接付款。详见[防范快递诈骗短信](guide:delivery-scam-texts)（英文）。
 
 ## 使用 Peek 追踪 XYL-Ships 包裹
 
@@ -100,6 +100,6 @@ XYL-Ships International Logistics 是一家拥有中国民航（CAAC）和 IATA 
 包裹进入目的国后，XYL-Ships 会将其交给当地运输合作伙伴或邮政网络进行最终投递，但其追踪系统不公布该本地承运商名称，也不返回第二个转单号。如果投递失败，请联系卖家获取当地派送商信息。
 
 :::sources
-- [XYL-Ships International Logistics 官网](https://xylships.com/) – CAAC 与 IATA 航空运输销售代理资质、空海铁陆运及跨境电商单件小包业务、Track Order 查询入口与页脚联系邮箱 `fzxyl9527@163.com`
+- [XYL-Ships International Logistics 网站](https://xylships.com/) – CAAC 与 IATA 航空运输销售代理资质、空海铁陆运及跨境电商单件小包业务、Track Order 查询入口与页脚联系邮箱 `fzxyl9527@163.com`
 - [Universal Parcel Scraper: xyl-ships](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/xyl-ships) – `NUDE` 与 `XLWL` 格式识别、FXYL 别名、JSON 追踪接口对接、英文轨迹阶段映射、敏感字段过滤及刷新频率规则
 :::

@@ -14,7 +14,7 @@ A Tu Hora Express（*A TU HORA EXPRESS, S.L.*）是西班牙本土末端派送�
 
 | 格式（虚构） | 含义 |
 | --- | --- |
-| `0000004829173640` | 16 位 A Tu Hora Express 服务单号（`000000` 加 10 位数字）。在官网查询时须配合 5 位西班牙收件邮编。 |
+| `0000004829173640` | 16 位 A Tu Hora Express 服务单号（`000000` 加 10 位数字）。在其网站查询时须配合 5 位西班牙收件邮编。 |
 | `4829173640` | 10 位短单号（前方补齐六个 0 即为 16 位服务单号）。同样需要配合 5 位收件邮编。 |
 | `000000482917364000128013` | 24 位完整条码：16 位服务单号 + `001` + 5 位西班牙收件邮编（此处为 `28013`）。与 [Ciblex](carrier:ciblex)、[InPost](carrier:inpost)、[bpost](carrier:bpost)、[Austrian Post](carrier:austrian-post) 和 [Express One](carrier:express-one) 共用 24 位长度。 |
 
@@ -36,11 +36,11 @@ A Tu Hora Express 每条扫描均以西班牙语提供，附带状态码（`cod`
 | `Realizado con éxito`（`4`） / `Entregado con éxito` | A Tu Hora Express 已签收送达。 | “已签收” |
 | `Devuelto` | 正在退回寄件人。 | “已退回寄件人” |
 
-## 派送服务与官网公开信息
+## 派送服务与其网站公开信息
 
 在 [atuhoraexpress.com/home/](https://atuhoraexpress.com/home/) 和 [atuhoraexpress.com](https://atuhoraexpress.com/) 上，A Tu Hora Express 列出了覆盖其西班牙网点的五项核心服务——*Express 24h*、*Economy 48h*、*Masivo 72h*、*Reverse Logistics* 与 *B2B Premium*——并通过 [atuhoraexpress.com/tracking/](https://atuhoraexpress.com/tracking/) 和 [mydelivery.atuhoraexpress.com](https://mydelivery.atuhoraexpress.com/#/login-form-cli) 提供物流查询。
 
-A Tu Hora Express 官网未公布派送尝试次数、重量或尺寸限制以及保管期限。若你的订单来自欧盟境外，除非商家在结账时已代收，否则货值不超过 €150 时每项商品需缴纳 €3 关税，且每项商品均需缴纳 €2 欧盟处理费；详见[海关滞留包裹指南](guide:customs)（英文）。
+A Tu Hora Express 网站未公布派送尝试次数、重量或尺寸限制以及保管期限。若你的订单来自欧盟境外，除非商家在结账时已代收，否则货值不超过 €150 时每项商品需缴纳 €3 关税，且每项商品均需缴纳 €2 欧盟处理费；详见[海关滞留包裹指南](guide:customs)（英文）。
 
 ## A Tu Hora Express 包裹延误、停滞或遗失
 
@@ -97,7 +97,7 @@ Peek 可以按“每次扫描”、“重要环节”或“仅派送当天”通
 :::sources
 - [A Tu Hora Express: Home (Spanish)](https://atuhoraexpress.com/) – 西班牙末端派送快递、网点、马德里总部、`911 631 356` 与 `info@atuhoraexpress.com`
 - [A Tu Hora Express: Home (English)](https://atuhoraexpress.com/home/) – Express 24h、Economy 48h、Masivo 72h、Reverse Logistics、B2B Premium 与网点列表
-- [A Tu Hora Express: Tracking Page](https://atuhoraexpress.com/tracking/) – 官网查件入口
+- [A Tu Hora Express: Tracking Page](https://atuhoraexpress.com/tracking/) – 网站查件入口
 - [A Tu Hora Express: MyDelivery Portal](https://mydelivery.atuhoraexpress.com/#/login-form-cli) – 直接查件门户
 - [A Tu Hora Express: Legal Notice](https://atuhoraexpress.com/aviso-legal/) – *A TU HORA EXPRESS, S.L.*、NIF `B19300748`、位于 Alovera（Guadalajara）的注册地址与 `protecciondedatos@atuhoraexpress.com`
 - [A Tu Hora Express: Feedback Form](https://atuhoraexpress.com/ayudanos-a-mejorar/) – 客户意见反馈表单

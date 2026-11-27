@@ -17,7 +17,7 @@ Chukou1（*CK1*，中文名*出口易*，运营主体为*广州市贝法易信�
 | `CZN261015ABCD482917` | 19 位出口易处理号（`CZN` + 日期 `261015` + 4 位客户码 `ABCD` + 6 位流水号）。 |
 | `CUE261015KLM4829173` | 19 位出口易处理号（`CUE` + 日期 `261015` + 3 位客户码 `KLM` + 7 位流水号）。 |
 
-完成出口清关后，出口易会将包裹移交给后续承运商——EC-FirstClass 官网列举的合作承运商包括[中国邮政](carrier:china-post)、USPS、DHL、[FedEx](carrier:fedex) 和 UPS 等——并在你的处理号下同时展示出口易首程轨迹与合作承运商回传的扫描记录。详见[运单号格式说明](guide:tracking-number-formats)（英文）。
+完成出口清关后，出口易会将包裹移交给后续承运商——EC-FirstClass 网站列举的合作承运商包括[中国邮政](carrier:china-post)、USPS、DHL、[FedEx](carrier:fedex) 和 UPS 等——并在你的处理号下同时展示出口易首程轨迹与合作承运商回传的扫描记录。详见[运单号格式说明](guide:tracking-number-formats)（英文）。
 
 ## 出口易（EC-FirstClass）物流状态含义解析
 
@@ -49,7 +49,7 @@ Chukou1 将整体状态（`InProcess`、`InTransit`、`Delivered`）与首程英
 因为发件账号由网店商家在出口易开立，遇到退款、补发或修改收件地址时，请始终优先联系卖家或购物平台。
 
 - **中国至目的国途中静默数日：** 国际航空中转与海关批量查验常导致 `Departed from Airport of Origin`、`Arrived at Airport of destination` 与 `Last mile Ascan` 之间数天无新记录。请参阅[为什么物流停止更新](guide:tracking-not-updating)（英文）。
-- **使用交接后的本地单号追踪：** 当 EC-FirstClass 给出目的国合作方的条码单号后，直接到该本地快递官网查询往往能看到更详细的派送时间窗或改约选项。
+- **使用交接后的本地单号追踪：** 当 EC-FirstClass 给出目的国合作方的条码单号后，直接到该本地快递网站查询往往能看到更详细的派送时间窗或改约选项。
 - **已签收未收到、破损或丢件：** 请先核查家人、邻居及当地派送快递，并在平台买家保护期到期前向卖家提起争议。详见[显示已签收但未收到](guide:delivered-not-received)（英文）、[包裹破损](guide:damaged-parcel)（英文）、[包裹丢失](guide:lost-parcel)（英文）和[包裹退回寄件人](guide:returned-to-sender)（英文）。
 
 ## 出口易（Chukou1）官方客服与联系方式
@@ -60,7 +60,7 @@ Chukou1 将整体状态（`InProcess`、`InTransit`、`Delivered`）与首程英
 - **投诉专线（周一至周五）：** `13360562736`。
 - **各分公司电话与总部地址：** 广州总部 `020-23380666`（广州市黄埔区黄埔大道东 840 号行信中心 A1 栋 2403–04 单元）、深圳 `0755-28263408`、上海 `021-59793099`、武汉 `027-59083347`。
 
-> 请警惕要求通过陌生网页支付小额“海关放行费”的虚假短信。任何真实进口税费请先通过购物平台订单页面或当地邮政官网确认。详见[快递诈骗短信识别指南](guide:delivery-scam-texts)（英文）。
+> 请警惕要求通过陌生网页支付小额“海关放行费”的虚假短信。任何真实进口税费请先通过购物平台订单页面或当地邮政网站确认。详见[快递诈骗短信识别指南](guide:delivery-scam-texts)（英文）。
 
 ## 使用 Peek 追踪出口易（Chukou1）包裹
 
@@ -90,10 +90,10 @@ Peek 直接读取出口易的 EC-FirstClass 追踪接口，展示标准阶段（
 
 ### 如何联系出口易客服？
 
-需要退款或更改收件地址请先联系网店卖家。出口易官网 [chukou1.com/About/Contact.aspx](https://www.chukou1.com/About/Contact.aspx) 公布的中国客服热线为 `4006 908 223`（周一至周五投诉专线 `13360562736`，广州总部 `020-23380666`）。
+需要退款或更改收件地址请先联系网店卖家。出口易网站 [chukou1.com/About/Contact.aspx](https://www.chukou1.com/About/Contact.aspx) 公布的中国客服热线为 `4006 908 223`（周一至周五投诉专线 `13360562736`，广州总部 `020-23380666`）。
 
 :::sources
-- [出口易（Chukou1）官网](https://www.chukou1.com/) – 跨境小包专线、海外仓（美、英、德、法、波兰、加、澳、秘鲁、阿根廷）、FBA 头程及广州总部（*广州市贝法易信息科技有限公司*）
+- [出口易（Chukou1）网站](https://www.chukou1.com/) – 跨境小包专线、海外仓（美、英、德、法、波兰、加、澳、秘鲁、阿根廷）、FBA 头程及广州总部（*广州市贝法易信息科技有限公司*）
 - [出口易联系我们](https://www.chukou1.com/About/Contact.aspx) – 服务热线 `4006 908 223`、投诉电话 `13360562736` 及广州/深圳/上海/武汉分公司电话与地址（Peek 帮助链接指向此页）
 - [EC-FirstClass（出口易追踪平台）](https://ec.chukou1.com/) – 支持 100 单查询的全球追踪平台及合作承运商列表（中国邮政、USPS、DHL、FedEx、UPS）
 - [Universal Parcel Scraper: chukou1](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/chukou1) – 处理号格式、`ec.chukou1.com`/`chukou1.com` 链接规则、首程与末端扫描解析、签收人/邮编/交接提取、过滤 PDF 签收单及帮助链接

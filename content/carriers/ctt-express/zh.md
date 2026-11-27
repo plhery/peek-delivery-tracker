@@ -25,7 +25,7 @@ CTT Express 查询页面要求输入 *código de envío*（发货代码），通
 
 ## CTT Express 物流状态中文说明
 
-官网不提供英文追踪。cttexpress.com 的英文切换仍显示西班牙语页面，查询页仅提供西班牙语，顶部显示四个阶段（`Grabado`、`Enviado`、`En reparto` 以及带日期或 `Sin determinar` 的 `Entrega prevista`），下方为每条扫描记录的原文。
+其网站不提供英文追踪。cttexpress.com 的英文切换仍显示西班牙语页面，查询页仅提供西班牙语，顶部显示四个阶段（`Grabado`、`Enviado`、`En reparto` 以及带日期或 `Sin determinar` 的 `Entrega prevista`），下方为每条扫描记录的原文。
 
 | 状态原文 | 对你的含义 |
 | --- | --- |
@@ -35,7 +35,7 @@ CTT Express 查询页面要求输入 *código de envío*（发货代码），通
 | `En tránsito internacional. Pendiente de recepción en CTT Express` | 跨境发来途中，CTT Express 尚未收到包裹。 |
 | `En reparto` 或 `Entrega hoy` | 已分配派送路线，今天外出派送。 |
 | `Incidencia en el reparto` 或 `Reparto fallido` | 派送受阻未成功，具体原因显示在该条下方。 |
-| `Recogerán en Delegación` | 字面意为“将在网点领取”：在葡萄牙由 CTT 派送的包裹发生派送失败并等待你自提。CTT 官网会同时显示派送失败，随后显示待领取。 |
+| `Recogerán en Delegación` | 字面意为“将在网点领取”：在葡萄牙由 CTT 派送的包裹发生派送失败并等待你自提。CTT 网站会同时显示派送失败，随后显示待领取。 |
 | `Almacenado temporalmente` | “临时存放”：派送失败后退回网点暂存，等待新一轮派送或退回。 |
 | `Nuevo reparto` | “重新派送”：再次装车安排派送。 |
 | `Disponible en Punto Collectt Express` | 已到达 Collectt 合作自提点待领，取件 PIN 码通过邮件和短信发送。 |
@@ -73,12 +73,12 @@ CTT Express 提供两次派送尝试，第二次在下一个工作日进行。�
 
 ## CTT Express 客服电话与联系方式
 
-CTT Express 与 CTT 官网列出的客服渠道如下（均无英语服务）：
+CTT Express 与 CTT 网站列出的客服渠道如下（均无英语服务）：
 
 - **西班牙：** 900 841 352（免费，载于帮助页面；其 2026 年 10 月 27 日的海关指南文章则给出 900 110 898）或 916 602 200（境外拨打 +34 916 602 200），周一至周五 9:00 至 19:00（节假日除外）。邮箱 ccaweb@cttexpress.com，或使用[在线联系表单](https://www.cttexpress.com/contacto-atc)。客服中心位于马德里，仅支持电话和邮件，通常在 24 个工作小时内答复，不设在线聊天或 WhatsApp。
 - **葡萄牙：** CTT 热线 21 047 16 16（境外拨打 +351 21 047 16 16），工作日 8:30 至 19:30，及 ctt.pt/ajuda 表单。
 
-> CTT Express 声明绝不会要求你拨打 807 高费率电话，并提醒警惕假借“待派包裹”通过链接索要额外费用的诈骗短信和邮件。在葡萄牙，CTT 也通报过冒充“CTT Expresso”催缴关税的诈骗短信；CTT 真实链接均以 www.ctt.pt 开头，请仅在官网查件。
+> CTT Express 声明绝不会要求你拨打 807 高费率电话，并提醒警惕假借“待派包裹”通过链接索要额外费用的诈骗短信和邮件。在葡萄牙，CTT 也通报过冒充“CTT Expresso”催缴关税的诈骗短信；CTT 真实链接均以 www.ctt.pt 开头，请仅在其网站查件。
 
 ## 使用 Peek 查询 CTT Express 包裹
 
@@ -102,7 +102,7 @@ Peek 最高每 10 分钟检查一次，在 CTT Express 扫描包裹进入派送�
 
 ### CTT Express 有在线聊天客服吗？
 
-官网不提供在线聊天或 WhatsApp，仅支持电话、邮件和在线联系表单。
+其网站不提供在线聊天或 WhatsApp，仅支持电话、邮件和在线联系表单。
 
 ### 没有运单号可以查 CTT Express 吗？
 

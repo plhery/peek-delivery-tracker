@@ -6,7 +6,7 @@ published: 2026-11-26
 updated: 2026-11-26
 ---
 
-PPL（PPL CZ）是隶属于 DHL 集团的捷克包裹承运商，在捷克全境提供送货上门、Parcelshop 自提网点和 Parcelbox 快递柜服务。你可以在 [PPL 官网查询页](https://www.ppl.cz/en/track-a-shipment)、mojePPL 应用中输入 11 位运单号查件，或粘贴到上方输入框后选择 PPL。单号来自商家的发货邮件、订单页，或 PPL 发出的邮件和短信。
+PPL（PPL CZ）是隶属于 DHL 集团的捷克包裹承运商，在捷克全境提供送货上门、Parcelshop 自提网点和 Parcelbox 快递柜服务。你可以在 [PPL 网站查询页](https://www.ppl.cz/en/track-a-shipment)、mojePPL 应用中输入 11 位运单号查件，或粘贴到上方输入框后选择 PPL。单号来自商家的发货邮件、订单页，或 PPL 发出的邮件和短信。
 
 ## PPL 运单号及查找方法
 

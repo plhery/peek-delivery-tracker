@@ -25,6 +25,7 @@ export {
   localizedDatePhrase,
   localizedDeliveryDate,
   localizedDeliveryEstimate,
+  localizedExpectedDay,
   localizedDeliveryWindow,
   localizedEventDescription,
   localizedExpectedDelivery,

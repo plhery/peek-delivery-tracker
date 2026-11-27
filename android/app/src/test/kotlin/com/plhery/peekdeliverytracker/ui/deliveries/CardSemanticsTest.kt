@@ -146,7 +146,7 @@ class CardSemanticsTest {
         var opened = false
         compose.setContent { CardHost { ParcelPassCard(parcel, notice = null, onOpen = { opened = true }) } }
         val card = button()
-        assertEquals("${fullName(parcel)}, Sat 31 Oct, Moon lamp 🌙, In transit", card.label())
+        assertEquals("${fullName(parcel)}, expected Sat 31 Oct, Moon lamp 🌙, In transit", card.label())
         assertNull(card.hint())
         assertNull(card.selected())
         card.performClick()
@@ -160,7 +160,7 @@ class CardSemanticsTest {
         val parcel = DemoCards.parcel("Moon lamp")
         var new by mutableStateOf(true)
         compose.setContent { CardHost { ParcelPassCard(parcel, notice = null, onOpen = {}, newUpdate = new) } }
-        val read = "${fullName(parcel)}, Sat 31 Oct, Moon lamp 🌙, In transit"
+        val read = "${fullName(parcel)}, expected Sat 31 Oct, Moon lamp 🌙, In transit"
         assertEquals("${localizer.text("parcel.newUpdate")}. $read", button().label())
         new = false
         compose.waitForIdle()

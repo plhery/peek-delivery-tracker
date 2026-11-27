@@ -123,7 +123,7 @@ class ParcelLogicFormattingTests {
         assertNull(localizer.sharedParcelDetail(moving))
         assertNull(localizer.giftDetail(moving, opened = false))
         moving = moving.copy(expectedDelivery = "$today 13:00–17:00")
-        assertEquals("Today, 13:00–17:00", localizer.sharedParcelDetail(moving))
+        assertEquals("Expected today, 13:00–17:00", localizer.sharedParcelDetail(moving))
         assertEquals("Arrives today, 13:00–17:00", localizer.giftDetail(moving, opened = false))
         // Out for delivery, a card names no day; a gift's names no stage, so it says what out for delivery means.
         moving = moving.copy(expectedDelivery = today)

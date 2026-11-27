@@ -108,7 +108,7 @@ fun ParcelPassCard(
     val type = PeekTheme.type
     val reduceMotion = PeekTheme.reduceMotion
 
-    val date = if (stale) null else localizer.parcelDeliveryEstimate(parcel, now) ?: localizer.parcelCompletionDate(parcel, now)
+    val date = if (stale) null else localizer.parcelExpectedDay(parcel, now) ?: localizer.parcelCompletionDate(parcel, now)
     val peekAiWords = if (stale) null else localizer.parcelPeekAiWords(parcel, peekAi, now)
     // Scans with places are drawn as a small route at the end of the card; at the largest text sizes the words take
     // the whole card, and the route goes.

@@ -667,7 +667,7 @@ describe('App', () => {
 
     renderApp(repo);
 
-    expect(await screen.findByText('tomorrow', { selector: '.parcel-card__eta' }))
+    expect(await screen.findByText('expected tomorrow', { selector: '.parcel-card__eta' }))
       .toBeInTheDocument();
     const onTheWay = screen.getByRole('region', { name: 'On the way' });
     expect(within(onTheWay).getByRole('button', { name: /Next up: Tomorrow parcel/ })).toBeInTheDocument();
@@ -708,7 +708,7 @@ describe('App', () => {
 
     const section = await screen.findByRole('button', { name: /Next up: Today parcel/ });
     expect(within(section).getByText('Today parcel')).toBeInTheDocument();
-    expect(within(section).queryAllByText(/^today/)).toHaveLength(shown);
+    expect(within(section).queryAllByText(/^expected today/)).toHaveLength(shown);
     expect(screen.getByRole('region', { name: 'On the way' })).toContainElement(section);
   });
 

@@ -638,6 +638,7 @@
   "parcel.onDate": "{{date}}",
   "parcel.byDate": "до {{date}}",
   "parcel.byTomorrow": "до завтра",
+  "parcel.expectedDay": "ожидается {{date}}",
   "parcel.wasExpected": "Доставку ожидали {{date}}",
   "parcel.sender": "Отправитель: {{sender}}",
   "parcel.pickedUpAt": "Получена: {{place}}",

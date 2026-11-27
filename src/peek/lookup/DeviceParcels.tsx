@@ -11,7 +11,7 @@ import { WorldMap } from '../../components/map/WorldMap';
 import { CardRoute, useParcelRoute } from '../../components/ParcelMap';
 import { PeekAiPhrase, useParcelPeekAi } from '../../components/PeekAi';
 import { ProgressTrack } from '../../components/ProgressTrack';
-import { localizedDeliveryEstimate, useI18n, type Locale } from '../../i18n';
+import { localizedExpectedDay, useI18n, type Locale } from '../../i18n';
 import { carrierBrand } from '../../lib/carrierBrand';
 import { ON_THE_WAY, useDeliveredHold } from '../../lib/deliveredHold';
 import type { CardList } from '../../lib/deliveredMove';
@@ -105,7 +105,7 @@ function DeviceParcel({ recent, arrived = false, archived = false }: { recent: R
   const carrier = carrierInfo(displayedCarrierId(parcel), locale);
   const stale = frozenOnTheWay(recent);
   const estimate = stale ? null : parcelDeliveryEstimate(parcel);
-  const when = estimate ? localizedDeliveryEstimate(parcel.expectedDeliveryFrom, estimate, t, languageTag, undefined, use24HourTime) : localizedParcelCompletionDate(parcel, languageTag, t);
+  const when = estimate ? localizedExpectedDay(parcel.expectedDeliveryFrom, estimate, t, languageTag, undefined, use24HourTime) : localizedParcelCompletionDate(parcel, languageTag, t);
   const title = useParcelTitle(recent);
   const { placed, route } = useParcelRoute(parcel, languageTag);
   const news = useNewUpdate(recent);

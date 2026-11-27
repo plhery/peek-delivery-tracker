@@ -67,12 +67,13 @@ object DeliveryWidgetListSample {
             val estimate = sample.day?.let { offset ->
                 val day = today.plusDays(offset)
                 val hours = sample.hours
-                if (hours == null) {
+                val words = if (hours == null) {
                     localizer.deliveryEstimate(null, day.toString(), now)
                 } else {
                     fun at(time: LocalTime) = day.atTime(time).atZone(zone).format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
                     localizer.deliveryEstimate(at(hours.first), at(hours.second), now)
                 }
+                localizer.text("parcel.expectedDay", mapOf("date" to words))
             }
             val number = index + 1
             DeliveryWidgetParcel(
@@ -88,6 +89,7 @@ object DeliveryWidgetListSample {
                 section = section(sample).rawValue,
                 nextUp = sample.stage == TrackingStage.ReadyForPickup,
                 carrierId = sample.carrierId,
+                dayAlone = (estimate != null && sample.stage !in setOf(null, TrackingStage.Pending, TrackingStage.Registered)).takeIf { it },
             )
         }
         return DeliveryWidgetSnapshot(now, localizer.language.rawValue, parcels)

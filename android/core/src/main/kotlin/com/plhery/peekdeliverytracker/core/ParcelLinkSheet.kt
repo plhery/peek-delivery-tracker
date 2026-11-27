@@ -9,7 +9,7 @@ import java.time.Instant
 
 /** Where a shared parcel waits and when it is expected, or the day it arrived. It is a line of its own, so it starts with a capital. */
 fun Localizer.sharedParcelDetail(parcel: Parcel, now: Instant = AppClock.now()): String? {
-    val line = listOfNotNull(parcel.pickupPlace, parcelCompletionDate(parcel, now) ?: parcelDeliveryEstimate(parcel, now))
+    val line = listOfNotNull(parcel.pickupPlace, parcelCompletionDate(parcel, now) ?: parcelExpectedDay(parcel, now))
         .joinToString(" · ")
     val first = line.characterPrefix(1)
     return (first.uppercase(language.locale) + line.substring(first.length)).nonEmpty

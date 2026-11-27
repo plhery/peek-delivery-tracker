@@ -210,7 +210,7 @@ struct MenuBarPanel: View {
                             .accessibilityHidden(!parcel.isOutForDelivery || parcel.detail == outForDelivery)
                         VStack(alignment: .leading, spacing: 1) {
                             Text(parcel.label).lineLimit(1)
-                            Text([parcel.detail, parcel.carrier].joined(separator: " · "))
+                            Text([parcel.detail.openingLine(in: localizer.language.locale), parcel.carrier].joined(separator: " · "))
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                                 .lineLimit(1)

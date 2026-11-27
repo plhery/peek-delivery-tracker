@@ -2763,7 +2763,7 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertNil(localizer.parcelCompletionDate(makeParcel(id: id, events: [event(id, .delivered, "invalid")]), now: now))
     }
 
-    /// The app last opened late on Thursday: on Friday the widgets and Siri say "today" for the parcel expected then and
+    /// The app last opened late on Thursday: on Friday the widgets and Siri say "expected today" for the parcel expected then and
     /// "yesterday" for Thursday evening's delivery, and on Saturday the passed estimate gives way to the status.
     @MainActor
     func testTheWidgetsDaysFollowTheClockWhileTheAppStaysClosed() throws {
@@ -2780,21 +2780,54 @@ final class ParcelLogicTests: XCTestCase {
         let delivered = makeParcel(id: arrived, events: [event(arrived, .delivered, DateParser.isoString(thursday.addingTimeInterval(19.9 * 3_600)))])
 
         let published = ParcelStore.widgetDeliveries(of: [expected, delivered], localizer: localizer, now: lateThursday)
-        XCTAssertEqual(published.map(\.detail), ["tomorrow", "today"])
+        XCTAssertEqual(published.map(\.detail), ["expected tomorrow", "today"])
+        // Where a row holds one or the other, the parcel on its way keeps its day, the delivered one its stage.
+        XCTAssertEqual(published.map(\.dayAlone), [true, nil])
         // On Tuesday the parcel last scanned on Thursday morning has gone four days without a scan, and needs the reader.
         let tuesday = try XCTUnwrap(calendar.date(byAdding: .day, value: 5, to: thursday))
         XCTAssertEqual(DeliveryWidgetDays.changes(in: published, after: lateThursday), [friday, saturday, tuesday])
         XCTAssertEqual(published.first?.worded(at: tuesday).section, "attention")
-        XCTAssertEqual(DeliveryWidgetSelection.listed(published, now: lateThursday).map(\.detail), ["tomorrow", "today"])
+        XCTAssertEqual(DeliveryWidgetSelection.listed(published, now: lateThursday).map(\.detail), ["expected tomorrow", "today"])
 
         let fridayMorning = friday.addingTimeInterval(8 * 3_600)
-        XCTAssertEqual(DeliveryWidgetSelection.listed(published, now: fridayMorning).map(\.detail), ["today", "yesterday"])
+        XCTAssertEqual(DeliveryWidgetSelection.listed(published, now: fridayMorning).map(\.detail), ["expected today", "yesterday"])
         let snapshot = DeliveryWidgetSnapshot(generatedAt: lateThursday, languageCode: "en", parcels: published)
         XCTAssertTrue(NextDeliveryAnswer.text(snapshot: snapshot, copy: ExtensionLocalizer(languageCode: "en"), now: fridayMorning)
-            .hasSuffix(": today."))
+            .hasSuffix(": expected today."))
 
         // A day later the estimate has passed, and the delivery has left the widgets.
         XCTAssertEqual(DeliveryWidgetSelection.listed(published, now: saturday.addingTimeInterval(8 * 3_600)).map(\.detail), ["In transit"])
+    }
+
+    /// A parcel the carrier has only the label of: the widgets and the list say its day is expected, after its stage,
+    /// and a row too narrow for both keeps the stage, never a bare day, which reads as the day a parcel came. Once the
+    /// day has passed with no scan, the stage alone.
+    @MainActor
+    func testALabelsDayReadsAsExpectedBesideItsStage() throws {
+        let localizer = Localizer()
+        localizer.language = .fr
+        let now = try XCTUnwrap(DateParser.date("2026-11-27T15:00:00Z"))
+        let id = UUID()
+        var labelOnly = makeParcel(id: id, events: [event(id, .registered, "2026-11-26T12:33:00Z")])
+        labelOnly.expectedDelivery = "2026-11-27"
+
+        let published = try XCTUnwrap(ParcelStore.nextDeliveries(of: [labelOnly], localizer: localizer, now: now,
+                                                                  midnights: DeliveryWidgetDays.midnights(after: now)).first)
+        XCTAssertEqual(published.listLine.day, "prévu aujourd’hui")
+        XCTAssertEqual(published.listLine.status, localizer.widgetStatus(labelOnly, now: now))
+        XCTAssertNil(published.dayAlone)
+        XCTAssertEqual(localizer.parcelExpectedDay(labelOnly, now: now), "prévu aujourd’hui")
+        XCTAssertEqual(localizer.sharedParcelDetail(labelOnly, now: now), "Prévu aujourd’hui")
+
+        let nextDay = now.addingTimeInterval(86_400)
+        XCTAssertNil(try XCTUnwrap(ParcelStore.nextDeliveries(of: [labelOnly], localizer: localizer, now: nextDay).first).listLine.day)
+        XCTAssertNil(published.worded(at: Calendar.current.startOfDay(for: nextDay)).listLine.day)
+
+        var moving = labelOnly
+        moving.trackingEvents.append(event(id, .inTransit, "2026-11-27T06:00:00Z"))
+        let carried = try XCTUnwrap(ParcelStore.nextDeliveries(of: [moving], localizer: localizer, now: now).first)
+        XCTAssertEqual(carried.listLine.day, "prévu aujourd’hui")
+        XCTAssertEqual(carried.dayAlone, true)
     }
 
     /// The app publishes where its list puts each parcel, which one is its Next up, and the carrier shown, and the last
@@ -2890,7 +2923,7 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertNil(localizer.sharedParcelDetail(moving))
         XCTAssertNil(localizer.giftDetail(moving, opened: false))
         moving.expectedDelivery = today.string(from: now) + " 13:00–17:00"
-        XCTAssertEqual(localizer.sharedParcelDetail(moving), "Today, 13:00–17:00")
+        XCTAssertEqual(localizer.sharedParcelDetail(moving), "Expected today, 13:00–17:00")
         XCTAssertEqual(localizer.giftDetail(moving, opened: false), "Arrives today, 13:00–17:00")
         // Out for delivery, a card names no day; a gift's names no stage, so it says what out for delivery means.
         moving.expectedDelivery = today.string(from: now)

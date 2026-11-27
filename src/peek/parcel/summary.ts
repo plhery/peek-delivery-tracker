@@ -190,7 +190,8 @@ function shortEstimate(parcel: ParcelWithEvents, wording: Wording): string | nul
   if (!estimate) return null;
   const text = localizedDeliveryEstimate(parcel.expectedDeliveryFrom, estimate, t, languageTag, now, use24HourTime);
   const today = `${t('time.today')}, `;
-  return text.startsWith(today) ? text.slice(today.length) : text;
+  // A day says it is expected: after the stage, a bare one reads as the day the parcel came.
+  return text.startsWith(today) ? text.slice(today.length) : t('parcel.expectedDay', { date: text });
 }
 
 /**

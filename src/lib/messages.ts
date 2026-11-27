@@ -237,3 +237,11 @@ export function localizedDeliveryEstimate(from: string | undefined, to: string, 
   return days.last.getTime() === tomorrow.getTime() ? t('parcel.byTomorrow')
     : t('parcel.byDate', { date: localizedCalendarDate(days.last, languageTag, now) });
 }
+
+/**
+ * The estimate as a list's line gives it, which says it is expected: "expected today". A bare day would read as the
+ * day the parcel came, as a delivered one's does.
+ */
+export function localizedExpectedDay(from: string | undefined, to: string, t: Translate, languageTag: string, now = Date.now(), use24HourTime = true): string {
+  return t('parcel.expectedDay', { date: localizedDeliveryEstimate(from, to, t, languageTag, now, use24HourTime) });
+}

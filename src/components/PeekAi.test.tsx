@@ -44,7 +44,7 @@ describe('Peek AI on a card', () => {
     render(<ParcelCard parcel={parcel} onOpen={vi.fn()} />);
     const card = screen.getByRole('button', { name: /Trail weekend kit/ });
     const dates = card.querySelector('.parcel-card__dates')!;
-    expect(dates.querySelector('.parcel-card__eta')).toHaveTextContent(/^today$/i);
+    expect(dates.querySelector('.parcel-card__eta')).toHaveTextContent(/^expected today$/i);
     expect(within(dates as HTMLElement).getByText('Peek AI').closest('.peek-ai-sig')).toBeInTheDocument();
     expect(dates.querySelector('.peek-ai-phrase__words')).toHaveTextContent('unlikely');
     expect(card.getAttribute('aria-label')).toContain('Peek AI: unlikely');
@@ -84,7 +84,7 @@ describe('Peek AI on a card', () => {
     window.localStorage.setItem(SHOW_PEEK_AI_STORAGE_KEY, 'off');
     const { container } = render(<ParcelCard parcel={parcel} onOpen={vi.fn()} />);
     expect(screen.queryByText('Peek AI')).toBeNull();
-    expect(container.querySelector('.parcel-card__top > .parcel-card__eta')).toHaveTextContent(/^today$/i);
+    expect(container.querySelector('.parcel-card__top > .parcel-card__eta')).toHaveTextContent(/^expected today$/i);
   });
 });
 

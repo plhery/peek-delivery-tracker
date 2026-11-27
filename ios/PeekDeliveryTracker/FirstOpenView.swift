@@ -578,7 +578,7 @@ struct FirstOpenView: View {
     }
 
     private func status(_ parcel: Parcel) -> String {
-        [localizer.parcelStatus(parcel), localizer.parcelDeliveryEstimate(parcel)].compactMap { $0 }.joined(separator: " · ")
+        [localizer.parcelStatus(parcel), localizer.parcelExpectedDay(parcel)].compactMap { $0 }.joined(separator: " · ")
     }
 
     /// The picture opens on the parcel's own page, picked up.

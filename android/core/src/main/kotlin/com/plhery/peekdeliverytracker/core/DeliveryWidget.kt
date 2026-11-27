@@ -191,6 +191,10 @@ val DeliveryWidgetParcel.listShortStatus: String?
 val DeliveryWidgetParcel.listDay: String?
     get() = stage?.let { detail.takeIf { it != stage.status } }
 
+/** The day where a line holds the stage or the day alone: the day it is expected, of a parcel the carrier has ([DeliveryWidgetParcel.dayAlone]). */
+val DeliveryWidgetParcel.listDayAlone: String?
+    get() = listDay?.takeIf { dayAlone == true }
+
 /** `ParcelListStatus.whole`: the stage, then the day. */
 val DeliveryWidgetParcel.listLine: String
     get() = listDay?.let { "$listStatus · $it" } ?: listStatus

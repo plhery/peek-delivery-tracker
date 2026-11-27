@@ -638,6 +638,7 @@
   "parcel.onDate": "on {{date}}",
   "parcel.byDate": "by {{date}}",
   "parcel.byTomorrow": "by tomorrow",
+  "parcel.expectedDay": "expected {{date}}",
   "parcel.wasExpected": "Was expected {{date}}",
   "parcel.sender": "From {{sender}}",
   "parcel.pickedUpAt": "Picked up at {{place}}",

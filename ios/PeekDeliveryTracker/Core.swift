@@ -880,6 +880,12 @@ final class Localizer: ObservableObject {
         return deliveryEstimate(from: parcel.carrierData?.expectedDeliveryFrom, to: value, now: now)
     }
 
+    /// The estimate as a list's line or a widget gives it, which says it is expected: "expected today". A bare day
+    /// would read as the day the parcel came, as a delivered one's does.
+    func parcelExpectedDay(_ parcel: Parcel, now: Date = Date()) -> String? {
+        parcelDeliveryEstimate(parcel, now: now).map { text("parcel.expectedDay", ["date": $0]) }
+    }
+
     /// The estimate the parcel's page gives, with a window of days whole.
     func parcelDeliveryWindow(_ parcel: Parcel, now: Date = Date()) -> String? {
         guard let value = shownEstimate(parcel, now: now) else { return nil }

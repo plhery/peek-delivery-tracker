@@ -638,6 +638,7 @@
   "parcel.onDate": "{{date}}",
   "parcel.byDate": "do {{date}}",
   "parcel.byTomorrow": "do jutra",
+  "parcel.expectedDay": "dostawa {{date}}",
   "parcel.wasExpected": "Dostawa była planowana na {{date}}",
   "parcel.sender": "Nadawca: {{sender}}",
   "parcel.pickedUpAt": "Odebrano w {{place}}",

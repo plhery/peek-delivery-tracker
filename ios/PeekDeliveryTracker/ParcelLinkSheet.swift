@@ -688,7 +688,7 @@ private extension VerticalAlignment {
 extension Localizer {
     /// Where a shared parcel waits and when it is expected, or the day it arrived. It is a line of its own, so it starts with a capital.
     func sharedParcelDetail(_ parcel: Parcel, now: Date = Date()) -> String? {
-        let line = [parcel.pickupPlace, parcelCompletionDate(parcel, now: now) ?? parcelDeliveryEstimate(parcel, now: now)]
+        let line = [parcel.pickupPlace, parcelCompletionDate(parcel, now: now) ?? parcelExpectedDay(parcel, now: now)]
             .compactMap { $0 }.joined(separator: " · ")
         return (line.prefix(1).uppercased(with: language.locale) + line.dropFirst()).nonEmpty
     }

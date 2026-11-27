@@ -347,7 +347,7 @@ class DeliveryWidgetTests {
             fun app() = ParcelStore.widgetOrder(store.parcels, localizer, evening).map { it.id to it.listDay }
             fun widget() = DeliveryWidgetList.make(evening, languageCode = "en", snapshot = shared.snapshot).parcels
                 .map { it.id to it.listDay }
-            assertTrue("A parcel of the demo is due on Friday", app().any { it.second == "tomorrow" })
+            assertTrue("A parcel of the demo is due on Friday", app().any { it.second == "expected tomorrow" })
             assertEquals("Even before the app returns, the widget follows New York's midnights", app(), widget())
 
             store.timeZoneChanged()

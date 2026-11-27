@@ -693,6 +693,13 @@ class Localizer(
         return deliveryEstimate(parcel.carrierData?.expectedDeliveryFrom, value, now)
     }
 
+    /**
+     * The estimate as a list's line or a widget gives it, which says it is expected: "expected today". A bare day would
+     * read as the day the parcel came, as a delivered one's does.
+     */
+    fun parcelExpectedDay(parcel: Parcel, now: Instant = AppClock.now()): String? =
+        parcelDeliveryEstimate(parcel, now)?.let { text("parcel.expectedDay", mapOf("date" to it)) }
+
     /** The estimate the parcel's page gives, with a window of days whole. */
     fun parcelDeliveryWindow(parcel: Parcel, now: Instant = AppClock.now()): String? {
         val value = shownEstimate(parcel, now) ?: return null

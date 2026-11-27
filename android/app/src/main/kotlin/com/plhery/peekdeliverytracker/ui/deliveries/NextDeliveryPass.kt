@@ -147,7 +147,7 @@ fun NextDeliveryPass(
     val status = listOfNotNull(
         localizer.parcelStatus(parcel),
         parcel.pickupPlace,
-        localizer.parcelDeliveryEstimate(parcel, now) ?: if (arrived) localizer.parcelCompletionDate(parcel, now) else null,
+        localizer.parcelExpectedDay(parcel, now) ?: if (arrived) localizer.parcelCompletionDate(parcel, now) else null,
     ).joinToString(" · ")
     val peekAiWords = localizer.parcelPeekAiWords(parcel, peekAi, now)
     // The carrier's site down for every parcel says so calmly, in place of the failed update.

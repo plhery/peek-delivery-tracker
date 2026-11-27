@@ -1905,7 +1905,7 @@ private struct ExperimentalNextDeliveryPass: View {
                 HStack(spacing: 5) {
                     if arrived { Image(systemName: "checkmark").font(.caption2.weight(.light)).accessibilityHidden(true) }
                     let status = Text([localizer.parcelStatus(parcel), parcel.pickupPlace,
-                                       localizer.parcelDeliveryEstimate(parcel) ?? (arrived ? localizer.parcelCompletionDate(parcel) : nil)]
+                                       localizer.parcelExpectedDay(parcel) ?? (arrived ? localizer.parcelCompletionDate(parcel) : nil)]
                         .compactMap { $0 }.joined(separator: " · "))
                     // Peek AI's own estimate beside the status, or under it where the line has no room.
                     if let words = localizer.parcelPeekAiWords(parcel, shown: showsPeekAi, now: now) {
@@ -2005,7 +2005,7 @@ private struct ExperimentalParcelPassCard: View {
     /// A copy no longer updated of a parcel still on its way says so in place of its estimate; one that arrived needs no mark.
     private var date: String? {
         if frozen, parcel.currentStage?.isFinal != true { return localizer.text("link.frozen.label") }
-        return localizer.parcelDeliveryEstimate(parcel) ?? localizer.parcelCompletionDate(parcel)
+        return localizer.parcelExpectedDay(parcel) ?? localizer.parcelCompletionDate(parcel)
     }
     /// Peek AI's own estimate, under the carrier's date or in its place; none on a copy no longer updated.
     private func peekAi(at now: Date) -> String? { frozen ? nil : localizer.parcelPeekAiWords(parcel, shown: showsPeekAi, now: now) }

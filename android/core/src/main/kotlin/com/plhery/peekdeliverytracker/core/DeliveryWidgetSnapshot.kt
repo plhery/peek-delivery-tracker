@@ -25,7 +25,7 @@ data class DeliveryWidgetParcel(
     val label: String,
     val carrier: String,
     val trackingNumber: String,
-    /** When it is expected or arrived, as the app words it when it publishes; else its status. */
+    /** When it is expected ("expected today") or arrived ("today"), as the app words it when it publishes; else its status. */
     val detail: String,
     /** Whether it is out for delivery on a round that has not ended ([isOnDeliveryRound]): the widgets put it first, with the bicycle. */
     val isOutForDelivery: Boolean,
@@ -74,6 +74,11 @@ data class DeliveryWidgetParcel(
      */
     val peekAi: String? = null,
     @Serializable(with = ReferenceDateSerializer::class) val peekAiUntil: Instant? = null,
+    /**
+     * Whether the day may stand for the stage where a line holds one or the other: the day it is expected, which says
+     * so, of a parcel the carrier has. None for the day it arrived, a bare day, or a parcel not handed over yet.
+     */
+    val dayAlone: Boolean? = null,
 ) {
     /** `deepLink`: the parcel on the deliveries, as the app's routing opens it (NativeRoute). */
     val deepLink: String get() = "peekdeliverytracker://parcel/${id.uuidString}"

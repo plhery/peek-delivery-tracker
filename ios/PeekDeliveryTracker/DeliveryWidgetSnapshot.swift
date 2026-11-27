@@ -8,7 +8,7 @@ struct DeliveryWidgetParcel: Codable, Equatable, Hashable, Identifiable, Sendabl
     let label: String
     let carrier: String
     let trackingNumber: String
-    /// When it is expected or arrived, as the app words it when it publishes; else its status.
+    /// When it is expected ("expected today") or arrived ("today"), as the app words it when it publishes; else its status.
     var detail: String
     /// Whether it is out for delivery on a round that has not ended (`isOnDeliveryRound`): the widgets put it first, with
     /// the bicycle.
@@ -49,6 +49,9 @@ struct DeliveryWidgetParcel: Codable, Equatable, Hashable, Identifiable, Sendabl
     var peekAiUntil: Date? = nil
     /// Peek AI's words where they stand apart from the carrier's date, when they differ: "not today" for "unlikely".
     var peekAiAlone: String? = nil
+    /// Whether the day may stand for the stage where a line holds one or the other: the day it is expected, which says
+    /// so, of a parcel the carrier has. None for the day it arrived, a bare day, or a parcel not handed over yet.
+    var dayAlone: Bool? = nil
 
     var deepLink: URL {
         URL(string: "peekdeliverytracker://parcel/\(id.uuidString)")!

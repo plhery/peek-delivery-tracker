@@ -139,8 +139,13 @@ class ParcelsWidgetTest {
         }
         assertEquals(listOf(LIST_FOUR_BY_THREE, LIST_LARGE), listOf(LIST_SMALL, LIST_MEDIUM, LIST_TWO_BY_FOUR, LIST_FOUR_BY_THREE, LIST_LARGE).filter { layout(it).lineRows })
 
-        // Two cells across leave the first row's line too little room for its stage: its day stays, opening the line.
-        assertEquals(sample.parcels[0].listDay?.openingLine(Locale.ENGLISH), narrowLine(sample.parcels[0], sample))
+        // Two cells across leave a row's line too little room for its stage and its day. The day it is expected stays,
+        // saying so and opening the line, where it fits; else the stage. One not handed over yet keeps its stage: none
+        // shows a bare day, which reads as the day a parcel came.
+        fun row(label: String) = sample.parcels.single { it.label == label }
+        assertEquals("Expected tomorrow", narrowLine(row("Vintage vinyl records"), sample))
+        assertFalse(narrowLine(row("Ceramic pour-over set"), sample).contains("xpected"))
+        assertFalse(narrowLine(row("Terracotta plant pots"), sample).contains("xpected"))
     }
 
     /**

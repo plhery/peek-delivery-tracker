@@ -50,6 +50,7 @@ import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.ParcelSectionKind
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.listDay
+import com.plhery.peekdeliverytracker.core.listDayAlone
 import com.plhery.peekdeliverytracker.core.listLine
 import com.plhery.peekdeliverytracker.core.listName
 import com.plhery.peekdeliverytracker.core.openingLine
@@ -371,7 +372,7 @@ private fun Pass(parcel: DeliveryWidgetParcel, art: WidgetCardArt, metrics: Pass
         } else {
             val whole = parcel.listLine.openingLine(locale)
             val room = words - parcel.dotRoom
-            val line = if (width(whole) <= room) whole else parcel.listDay?.openingLine(locale) ?: type.fittingStatus(parcel, locale, metrics.caption2, room)
+            val line = if (width(whole) <= room) whole else parcel.listDayAlone?.openingLine(locale) ?: type.fittingStatus(parcel, locale, metrics.caption2, room)
             val points = type.lineFit(line, metrics.caption2, room)
             val peekAi = type.peekAiFit(parcel, languageCode, metrics.caption2, room - type.width(line, points, FontWeight.Normal) - PEEK_AI_GAP)
             Text(parcel.listName, maxLines = 1, style = nameStyle)

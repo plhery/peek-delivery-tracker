@@ -8,13 +8,14 @@ import java.util.TimeZone
 import java.util.UUID
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 
 /**
  * The widgets' days follow the phone's clock while the app stays closed: the app words each parcel's day ahead for the
  * next midnights where it changes ([DeliveryWidgetDays]), and the widgets read the words for the moment they draw. A
- * parcel published as "tomorrow" late in the evening reads "Today" on its delivery day, and last night's delivery
+ * parcel published as "expected tomorrow" late in the evening reads "Expected today" on its delivery day, and last night's delivery
  * "yesterday"; each widget is drawn again at those midnights.
  */
 class WidgetDayRolloverTest {
@@ -56,12 +57,12 @@ class WidgetDayRolloverTest {
         return requireNotNull(store.snapshot)
     }
 
-    /** Control: published at 08:00 on the day, the app's words say "today". */
+    /** Control: published at 08:00 on the day, the app's words say "expected today". */
     @Test
     fun controlTheAppsOwnWordsOnTheDayAreToday() {
         val fresh = ParcelStore.widgetOrder(listOf(parcel), localizer, morning).single()
-        assertEquals("today", fresh.listDay)
-        assertEquals("tomorrow", ParcelStore.widgetOrder(listOf(parcel), localizer, published).single().listDay)
+        assertEquals("expected today", fresh.listDay)
+        assertEquals("expected tomorrow", ParcelStore.widgetOrder(listOf(parcel), localizer, published).single().listDay)
     }
 
     @Test
@@ -70,7 +71,7 @@ class WidgetDayRolloverTest {
         TimeZone.setDefault(TimeZone.getTimeZone("America/New_York"))
         val evening = Instant.parse("2026-11-13T00:00:00Z")
         val row = DeliveryWidgetList.make(evening, "en", snapshot).parcels.single()
-        assertEquals("tomorrow", row.listDay)
+        assertEquals("expected tomorrow", row.listDay)
         assertEquals(Instant.parse("2026-11-13T05:00:00Z"), DeliveryWidgetDays.changes(snapshot.parcels, evening).first())
     }
 
@@ -78,7 +79,7 @@ class WidgetDayRolloverTest {
     fun anEstimateBeyondTheFirstWeekReachesTodayAndExpires() {
         val distant = parcel.copy(expectedDelivery = "2026-11-24")
         val row = ParcelStore.widgetOrder(listOf(distant), localizer, published).single()
-        assertEquals("today", row.worded(Instant.parse("2026-11-24T12:00:00Z")).listDay)
+        assertEquals("expected today", row.worded(Instant.parse("2026-11-24T12:00:00Z")).listDay)
         assertEquals("In transit", row.worded(Instant.parse("2026-11-25T12:00:00Z")).listLine)
     }
 
@@ -88,8 +89,8 @@ class WidgetDayRolloverTest {
         val row = list.parcels.single()
         assertEquals(
             "At 08:00 on Fri 13 Nov (Zurich) the Parcels widget's row for a parcel expected that day should read " +
-                "\"In transit · today\"; it reads the words the app wrote at 23:30 the evening before",
-            "In transit · today",
+                "\"In transit · expected today\"; it reads the words the app wrote at 23:30 the evening before",
+            "In transit · expected today",
             row.listLine.openingLine(ExtensionLocalizer.locale("en")),
         )
     }
@@ -98,9 +99,9 @@ class WidgetDayRolloverTest {
     fun theParcelsWidgetsCardStillSaysTomorrowOnTheDeliveryDay() {
         val list = DeliveryWidgetList.make(morning, languageCode = "en", snapshot = storedAt23h30())
         assertEquals(
-            "At 08:00 on Fri 13 Nov (Zurich) the Parcels widget's card should say \"Today\" for a parcel expected that " +
+            "At 08:00 on Fri 13 Nov (Zurich) the Parcels widget's card should say \"Expected today\" for a parcel expected that " +
                 "day; it says what the app wrote at 23:30 the evening before",
-            "Today",
+            "Expected today",
             list.parcels.single().detail.openingLine(ExtensionLocalizer.locale("en")),
         )
     }
@@ -159,7 +160,7 @@ class WidgetDayRolloverTest {
             sections(list),
         )
         assertEquals("Friday's parcel leads the cards as Next up", id, list.cardOrder.first().id)
-        assertEquals(listOf("In transit · today", "In transit"), list.sections.flatMap { it.parcels }.map { it.listLine })
+        assertEquals(listOf("In transit · expected today", "In transit"), list.sections.flatMap { it.parcels }.map { it.listLine })
     }
 
     /**
@@ -198,5 +199,30 @@ class WidgetDayRolloverTest {
             "yesterday",
             row.listDay,
         )
+    }
+
+    /**
+     * A parcel the carrier has only the label of: the widgets, the list and a shared parcel's line say its day is
+     * expected, after its stage, and a row too narrow for both keeps the stage, never a bare day, which reads as the day
+     * a parcel came. Once the day has passed with no scan, the stage alone.
+     */
+    @Test
+    fun aLabelsDayReadsAsExpectedBesideItsStage() {
+        val french = Localizer(AppLanguage.Fr)
+        val labelOnly = parcel.copy(trackingEvents = listOf(event(id, TrackingStage.Registered, "2026-11-12T12:33:00Z")))
+        val row = ParcelStore.widgetOrder(listOf(labelOnly), french, morning).single()
+        assertEquals("prévu aujourd’hui", row.listDay)
+        assertEquals(french.widgetStatus(labelOnly, morning), row.listStatus)
+        assertNull(row.dayAlone)
+        assertNull(row.listDayAlone)
+        assertEquals("prévu aujourd’hui", french.parcelExpectedDay(labelOnly, morning))
+        assertEquals("Prévu aujourd’hui", french.sharedParcelDetail(labelOnly, morning))
+
+        val nextMorning = Instant.parse("2026-11-14T07:00:00Z")
+        assertNull(ParcelStore.widgetOrder(listOf(labelOnly), french, nextMorning).single().listDay)
+        assertNull(row.worded(nextMorning).listDay)
+
+        val carried = ParcelStore.widgetOrder(listOf(parcel), french, morning).single()
+        assertEquals("prévu aujourd’hui", carried.listDayAlone)
     }
 }

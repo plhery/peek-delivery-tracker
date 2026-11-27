@@ -48,6 +48,7 @@ import com.plhery.peekdeliverytracker.core.DeliveryWidgetPicture
 import com.plhery.peekdeliverytracker.core.ExtensionLocalizer
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.listDay
+import com.plhery.peekdeliverytracker.core.listDayAlone
 import com.plhery.peekdeliverytracker.core.listLine
 import com.plhery.peekdeliverytracker.core.listName
 import com.plhery.peekdeliverytracker.core.listStatus
@@ -194,15 +195,16 @@ internal fun listIntent(context: Context): Intent = Intent(Intent.ACTION_VIEW, D
 internal fun openList(context: Context): Action = actionStartActivity(listIntent(context))
 
 /**
- * `ParcelListStatus`'s `ViewThatFits`: a row's line where it fits `width`, the stage and the day; else the day alone;
- * else the stage, in the widget's shorter words where the app's don't fit ([fittingStatus]). What opens the line takes
- * a capital, "Tomorrow" ([openingLine]).
+ * `ParcelListStatus`'s `ViewThatFits`: a row's line where it fits `width`, the stage and the day; else the day it is
+ * expected alone, for a parcel the carrier has ([listDayAlone]), never a bare day; else the stage, in the widget's
+ * shorter words where the app's don't fit ([fittingStatus]). What opens the line takes a capital, "Expected tomorrow"
+ * ([openingLine]).
  */
 internal fun fittingLine(parcel: DeliveryWidgetParcel, layout: ListLayout, width: Dp): String {
     fun fits(text: String) = layout.type.width(text, layout.statusPoints, FontWeight.Normal) <= width
     val whole = parcel.listLine.openingLine(layout.locale)
     if (fits(whole)) return whole
-    return parcel.listDay?.openingLine(layout.locale)?.takeIf(::fits) ?: layout.type.fittingStatus(parcel, layout.locale, layout.statusPoints, width)
+    return parcel.listDayAlone?.openingLine(layout.locale)?.takeIf(::fits) ?: layout.type.fittingStatus(parcel, layout.locale, layout.statusPoints, width)
 }
 
 /** `listAccessibilityLabel`: what TalkBack reads for a row, the parcel's name, its carrier, its stage and its day. */

@@ -1024,7 +1024,7 @@ extension ParcelRouteTests {
                     carrier: item.carrier, trackingNumber: item.trackingNumber, detail: item.detail, isOutForDelivery: item.isOutForDelivery,
                     card: DeliveryWidgetCard(surface: card.surface, ink: card.ink, status: card.status, pictures: "sample-\(index)",
                                              scale: DeliveryWidgetPictures.scale),
-                    stage: item.stage, named: item.named
+                    stage: item.stage, named: item.named, dayAlone: item.dayAlone
                 ))
                 guard redraw != nil, let drawn = sample.last?.card else { continue }
                 let folder = drawings.appending(path: language.rawValue)

@@ -356,7 +356,7 @@ private fun rememberScene(
     val status = { at: Int ->
         statuses.getOrPut(at) {
             val parcel = parcel(at)
-            listOfNotNull(localizer.parcelStatus(parcel), localizer.parcelDeliveryEstimate(parcel, now())).joinToString(" · ")
+            listOfNotNull(localizer.parcelStatus(parcel), localizer.parcelExpectedDay(parcel, now())).joinToString(" · ")
         }
     }
     val ping = { at: Int -> FirstOpenJourney.ping(at, localizer) }

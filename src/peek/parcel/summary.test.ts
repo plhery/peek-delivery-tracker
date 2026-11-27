@@ -180,7 +180,7 @@ describe('a scan the carrier dated by its day alone', () => {
 describe('the tab’s title and the link preview', () => {
   it('follows the parcel: the hours when it comes today, the app’s name when there is no estimate', () => {
     expect(parcelTabTitle({ parcel: moving({ expectedDelivery: '2026-10-02 13:00-17:00' }) }, wording)).toBe('In transit · 13:00–17:00');
-    expect(parcelTabTitle({ parcel: moving({ expectedDelivery: '2026-10-03' }) }, wording)).toBe('In transit · tomorrow');
+    expect(parcelTabTitle({ parcel: moving({ expectedDelivery: '2026-10-03' }) }, wording)).toBe('In transit · expected tomorrow');
     expect(parcelTabTitle({ parcel: moving() }, wording)).toBe('In transit · Peek');
     expect(parcelTabTitle({ parcel: moving(), name: 'New sneakers' }, wording)).toBe('New sneakers · In transit · Peek');
   });

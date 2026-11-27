@@ -1859,7 +1859,11 @@ final class ParcelStore: ObservableObject {
             sort: .standard
         )
         return ordered.map { parcel in
-            widgetParcel(parcel, localizer: localizer, now: now, midnights: midnights) { localizer.parcelDeliveryEstimate(parcel, now: $0) }
+            var item = widgetParcel(parcel, localizer: localizer, now: now, midnights: midnights) { localizer.parcelExpectedDay(parcel, now: $0) }
+            // Where its line holds one or the other, a parcel the carrier has keeps its day, which says it is expected;
+            // one not handed over yet keeps its stage, as a label's date often doesn't hold.
+            if ![nil, .pending, .registered].contains(parcel.currentStage) { item.dayAlone = true }
+            return item
         }
     }
 

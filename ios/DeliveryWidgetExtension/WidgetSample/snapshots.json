@@ -48,7 +48,8 @@
           ]
         },
         "carrier" : "DPD Switzerland",
-        "detail" : "morgen",
+        "dayAlone" : true,
+        "detail" : "erwartet morgen",
         "id" : "00000000-0000-4000-8000-000000000001",
         "isOutForDelivery" : false,
         "label" : "Trail-Wochenend-Set 🏕️",
@@ -114,7 +115,8 @@
           ]
         },
         "carrier" : "DPD Switzerland",
-        "detail" : "tomorrow",
+        "dayAlone" : true,
+        "detail" : "expected tomorrow",
         "id" : "00000000-0000-4000-8000-000000000001",
         "isOutForDelivery" : false,
         "label" : "Trail weekend kit 🏕️",
@@ -180,7 +182,8 @@
           ]
         },
         "carrier" : "DPD Switzerland",
-        "detail" : "mañana",
+        "dayAlone" : true,
+        "detail" : "previsto mañana",
         "id" : "00000000-0000-4000-8000-000000000001",
         "isOutForDelivery" : false,
         "label" : "Kit trail de fin de semana 🏕️",
@@ -246,7 +249,8 @@
           ]
         },
         "carrier" : "DPD Switzerland",
-        "detail" : "demain",
+        "dayAlone" : true,
+        "detail" : "prévu demain",
         "id" : "00000000-0000-4000-8000-000000000001",
         "isOutForDelivery" : false,
         "label" : "Kit week-end trail 🏕️",
@@ -312,7 +316,8 @@
           ]
         },
         "carrier" : "DPD Switzerland",
-        "detail" : "domani",
+        "dayAlone" : true,
+        "detail" : "previsto domani",
         "id" : "00000000-0000-4000-8000-000000000001",
         "isOutForDelivery" : false,
         "label" : "Kit weekend trail 🏕️",
@@ -378,7 +383,8 @@
           ]
         },
         "carrier" : "DPD Switzerland",
-        "detail" : "jutro",
+        "dayAlone" : true,
+        "detail" : "dostawa jutro",
         "id" : "00000000-0000-4000-8000-000000000001",
         "isOutForDelivery" : false,
         "label" : "Zestaw na weekend w górach 🏕️",
@@ -444,7 +450,8 @@
           ]
         },
         "carrier" : "DPD Switzerland",
-        "detail" : "amanhã",
+        "dayAlone" : true,
+        "detail" : "prevista amanhã",
         "id" : "00000000-0000-4000-8000-000000000001",
         "isOutForDelivery" : false,
         "label" : "Kit trail de fim de semana 🏕️",
@@ -510,7 +517,8 @@
           ]
         },
         "carrier" : "DPD Switzerland",
-        "detail" : "amanhã",
+        "dayAlone" : true,
+        "detail" : "prevista amanhã",
         "id" : "00000000-0000-4000-8000-000000000001",
         "isOutForDelivery" : false,
         "label" : "Kit de trilha para o fim de semana 🏕️",
@@ -576,7 +584,8 @@
           ]
         },
         "carrier" : "DPD Switzerland",
-        "detail" : "завтра",
+        "dayAlone" : true,
+        "detail" : "ожидается завтра",
         "id" : "00000000-0000-4000-8000-000000000001",
         "isOutForDelivery" : false,
         "label" : "Набор для похода на выходные 🏕️",
@@ -642,7 +651,8 @@
           ]
         },
         "carrier" : "DPD Switzerland",
-        "detail" : "明天",
+        "dayAlone" : true,
+        "detail" : "预计明天送达",
         "id" : "00000000-0000-4000-8000-000000000001",
         "isOutForDelivery" : false,
         "label" : "周末越野装备 🏕️",

@@ -2489,7 +2489,12 @@ class ParcelStore(
             midnights: List<Instant> = emptyList(),
         ): List<DeliveryWidgetParcel> {
             val ordered = ParcelOrganizer.visible(parcels, query = "", status = ParcelStatusFilter.Active, carrier = null, sort = ParcelSort.Eta, now = now)
-            return ordered.map { parcel -> widgetParcel(parcel, localizer, now, midnights) { localizer.parcelDeliveryEstimate(parcel, it) } }
+            return ordered.map { parcel ->
+                val item = widgetParcel(parcel, localizer, now, midnights) { localizer.parcelExpectedDay(parcel, it) }
+                // Where its line holds one or the other, a parcel the carrier has keeps its day, which says it is
+                // expected; one not handed over yet keeps its stage, as a label's date often doesn't hold.
+                if (parcel.currentStage in setOf(null, TrackingStage.Pending, TrackingStage.Registered)) item else item.copy(dayAlone = true)
+            }
         }
 
         /** The first [DeliveryWidgetSelection.limit] parcels in the widget's order ([widgetOrder]). */

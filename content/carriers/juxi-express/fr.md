@@ -1,12 +1,12 @@
 ---
 title: Juxi Express suivi : numéro JXC, livraison et contact
-description: Suivre un colis Juxi Express (SHJX) venu de Chine : à quoi ressemble le numéro JXC, pourquoi Juxi n'a pas de suivi, qui le livre et qui contacter s'il bloque.
+description: Suivi colis Juxi Express (SHJX) depuis la Chine : format JXC…YQ, pourquoi Juxi n'a plus de traceur, délais, douane France/Belgique et qui livre le colis.
 slug: juxi-express-suivi
 published: 2026-10-23
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Juxi Express (上海驹隙国际物流有限公司, Shanghai Juxi International Freight Forwarding Co., Ltd.) est un transitaire de Shanghai qui expédie à l'étranger les colis de vendeurs en ligne chinois, sur ses propres lignes ou par la poste. Il n'a pas de page de suivi à lui : colle le numéro dans le champ ci-dessus, ou cherche-le sur un service de suivi comme 17TRACK, où Juxi s'appelle SHJX. C'est le vendeur qui a choisi Juxi : il te donne le numéro avec les informations d'expédition de ta commande.
+Juxi Express (上海驹隙国际物流有限公司, aussi référencé sous le nom **SHJX** sur 17TRACK) est un transitaire de Shanghai qui expédie à l'étranger les colis de vendeurs chinois sous des numéros de 17 caractères en `JXC…YQ` (ou via China Post / PostNL). Comme Juxi n'a plus de page de suivi fonctionnelle, colle ton numéro dans le champ ci-dessus pour suivre le trajet depuis la Chine jusqu'au transporteur local en France ou en Belgique.
 
 ## Numéro de suivi Juxi Express : à quoi il ressemble
 
@@ -101,21 +101,25 @@ Tant que Peek suit le colis via des services de suivi, il vérifie toutes les he
 
 ## Questions sur le suivi Juxi Express
 
-### Juxi Express, c'est quoi ?
+### Qu'est-ce que Juxi Express (SHJX) ?
 
-Un transitaire de Shanghai qui expédie à l'étranger les colis de vendeurs en Chine. Il dit avoir démarré en 2016, avoir été officiellement créé en 2019 et exploiter ses propres lignes vers les États-Unis, le Royaume-Uni, l'Allemagne, la France, l'Australie et le Canada.
+C'est un transitaire basé à Shanghai (démarré en 2016, officiellement créé en 2019) qui achemine les commandes de boutiques chinoises vers l'Europe (dont la France et la Belgique), le Royaume-Uni, les États-Unis, le Canada et l'Australie. Sur 17TRACK, il apparaît sous le code SHJX.
 
-### Où suivre un colis Juxi Express ?
+### Où suivre un colis Juxi Express (numéro JXC…YQ) ?
 
-Dans le champ ci-dessus, car Juxi n'a plus de suivi à lui. Peek reconnaît un numéro JXC comme celui de Juxi, sauf s'il porte YI, ZO, US ou ZI après JXC : pour ceux-là, Peek n'interroge que DHLink, dont le suivi en connaît certains ; pour suivre un tel colis comme un colis Juxi, touche « Changer » en l'ajoutant et choisis Juxi Express. Pour sa ligne de petits colis vers le Royaume-Uni et l'Allemagne, Juxi renvoie au service de suivi 17TRACK, qui le répertorie sous le nom SHJX. Une fois le colis chez le transporteur local, tu peux aussi le suivre chez lui avec son propre numéro.
+Directement dans le champ ci-dessus (ou sur 17TRACK sous SHJX), car le bouton « 在线追踪 » du site de Juxi n'ouvre plus aucun suivi. Pour les numéros commençant par `JXCYI`, `JXCZO`, `JXCUS` ou `JXCZI`, Peek interroge d'abord DHLink : touche « Changer » et choisis Juxi Express si besoin. Une fois le relais pris, suis aussi le numéro du transporteur local.
 
-### Qui livre les colis Juxi Express en Belgique et en France ?
+### Qui livre un colis Juxi Express en France et en Belgique ?
 
-Un transporteur de ton pays, mais Juxi ne dit pas lequel. Pour ses produits postaux, c'est la poste du pays de destination ; pour le reste, le suivi ou le vendeur te le diront.
+Juxi confie la livraison finale à un transporteur local sans le nommer sur son site : la poste du pays de destination pour les produits postaux (et PostNL pour le petit paquet suivi mondial), ou un partenaire local sur ses lignes dédiées. Regarde les derniers scans ou demande le transporteur final au vendeur.
 
-### Combien de temps met un colis Juxi Express ?
+### Quels sont les délais annoncés par Juxi Express vers la France et la Belgique ?
 
-Ça dépend de la ligne choisie par le vendeur. Juxi annonce environ 18 à 28 jours par le train Chine–Europe, 5 à 7 jours ouvrables vers la France en E特快, sans engagement de délai, 7 à 15 jours ouvrables en ePacket et 10 à 30 jours ouvrables sur le petit paquet suivi mondial. Ce sont des arguments de vente, pas une date pour ta commande.
+Selon la ligne réservée par le vendeur, Juxi indique à titre commercial 5 à 7 jours ouvrables vers la France en E特快 (sans engagement), 7 à 15 jours ouvrables en ePacket, 10 à 30 jours ouvrables en petit paquet suivi mondial et environ 18 à 28 jours par train Chine–Europe.
+
+### Qui contacter si mon colis Juxi Express est bloqué, taxé en douane ou perdu ?
+
+Juxi n'a aucun service client francophone (seulement une ligne fixe à Shanghai au `+86 21 6073 9366`). Pour un colis bloqué en douane, interroge le transporteur local (pas la douane) ; pour un retard, une perte ou un remboursement, contacte vite le vendeur — Juxi limite ses recherches à 1 mois (aucune réclamation après 60 jours) sur ses lignes dédiées.
 
 :::sources
 - [Juxi Express : 上海驹隙国际物流有限公司 (accueil)](https://www.juxiex.com/) – société et nom anglais, début en 2016 et création en 2019, petit paquet économique non suivi, bouton de suivi sans lien, téléphone, adresse

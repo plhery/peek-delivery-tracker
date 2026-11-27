@@ -1,12 +1,12 @@
 ---
 title: InPost tracking: codice, stati e ritiro al locker
-description: Tracking InPost in Italia: dove trovi il codice di 24 cifre, cosa vogliono dire gli stati, quanto resta il pacco al locker e chi chiamare se non arriva.
+description: Tracking InPost Italia: codice spedizione di 24 cifre (non il PIN), stati locker e InPost Point, giacenza di circa 3 giorni, consegna a casa e +39 0238582894.
 slug: inpost-tracking
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-InPost è la rete di locker nata in Polonia che in Italia, con Locker InPost Italia, consegna i pacchi degli acquisti online nei suoi Locker, negli InPost Point (negozi, bar ed edicole) e a casa. Per seguire il pacco inserisci il codice di spedizione nella [pagina di tracking di inpost.it](https://inpost.it/trova-il-tuo-pacco), oppure incollalo nel box qui sopra. Il codice è nelle e-mail di conferma dell'ordine e in quelle di InPost per il ritiro; il PIN che apre il locker è un'altra cosa.
+InPost (Locker InPost Italia) consegna acquisti online in oltre 9.500 Locker e InPost Point (negozi, bar ed edicole) e a domicilio dal lunedì al venerdì. Per seguire il pacco inserisci il codice di spedizione di 24 cifre nella [pagina di tracking di inpost.it](https://inpost.it/trova-il-tuo-pacco) o nel box qui sopra — lo trovi nelle e-mail di conferma ordine e di ritiro (il PIN o QR code che apre il locker è diverso e non serve per il tracking).
 
 ## Codice di tracciamento InPost: dove si trova
 
@@ -92,25 +92,25 @@ Peek non segue il pacco se InPost lo passa a un altro corriere. Lo controlla fin
 
 ## Domande sul tracking InPost
 
-### InPost consegna anche di sabato?
+### Perché il tracking InPost non trova il mio codice di spedizione?
 
-Per la consegna a casa, InPost Italia indica solo i giorni dal lunedì al venerdì, dalle 9.00 alle 20.00. Per l'arrivo nei locker e negli InPost Point le sue pagine non indicano i giorni.
+Assicurati di aver inserito il codice di spedizione di 24 cifre ricevuto per e-mail e non il PIN di ritiro del locker (che serve solo allo sportello). Su `inpost.it` puoi cercare fino a 5 codici separati da virgola.
 
-### Si può prolungare la giacenza InPost?
+### Quanto resta in giacenza un pacco InPost al locker o InPost Point — e si può prolungare?
 
-Di norma no: «Salvo rare eccezioni, non è possibile estendere la validità del codice di ritiro». Se non riesci a passare in tempo, scrivi al servizio clienti con il codice di spedizione, o fai ritirare il pacco a qualcun altro.
+Di solito circa 3 giorni (la scadenza esatta è nell'e-mail di InPost, ma i tempi dipendono dal negozio). Prolungare la giacenza non è possibile «salvo rare eccezioni»: scrivi a `servizioclienti@inpost24.it` con il codice di spedizione oppure fai ritirare il pacco a un'altra persona.
 
 ### Chi può ritirare un pacco InPost al posto mio?
 
-Una persona a cui giri i codici: InPost Italia dice «Condividi la mail o l'SMS con i codici ricevuti da InPost». All'InPost Point serve anche il nome dell'acquirente registrato sul sito del negozio.
+Chiunque a cui giri l'e-mail o l'SMS di InPost con il PIN e il QR code. Presso un InPost Point occorre indicare anche il nome dell'acquirente registrato sul sito del negozio (e il blog InPost consiglia un documento d'identità).
 
-### Dove si ritira un pacco InPost?
+### InPost consegna anche di sabato e quante volte tenta a domicilio?
 
-Nel locker o nell'InPost Point indicato nella notifica di InPost, che ne riporta l'indirizzo. InPost Italia dichiara oltre 9.500 Locker e InPost Point.
+Per la consegna a casa, InPost Italia indica dal lunedì al venerdì (9:00–20:00) e fino a due tentativi prima di lasciare il pacco al locker o InPost Point più vicino. Per l'arrivo nei locker e negli InPost Point le sue pagine non indicano i giorni.
 
-### Perché il tracking InPost non trova il mio codice?
+### Qual è il numero di telefono del servizio clienti InPost Italia?
 
-Controlla di aver inserito il codice di spedizione di 24 cifre e non il PIN di ritiro, che non serve per il tracking. Il codice è nelle e-mail di conferma dell'ordine e in quelle di InPost.
+Il numero indicato come gratuito è `+39 0238582894` (lunedì–sabato, 8:00–20:00), utile anche per segnalare smarrimenti, ritardi o locker guasti; in alternativa scrivi a `servizioclienti@inpost24.it` o usa il [modulo di reclamo](https://inpost.it/reclamo/utente-privato).
 
 :::sources
 - [InPost Italia: Traccia il tuo pacco con il tracking InPost](https://inpost.it/trova-il-tuo-pacco) – forme accettate, fino a 5 codici, titoli degli stati

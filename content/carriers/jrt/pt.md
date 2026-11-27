@@ -1,12 +1,12 @@
 ---
 title: Rastreio JRT: número JRT…MM, voos, alfândega e DHL
-description: Seguir uma encomenda JRT (今日通, Jinritong) desde Xiamen: como é o número JRT…MM, o que significam os passos em chinês e inglês e quem entrega na Europa e nos EUA.
+description: Rastreio JRT (今日通, Jinritong) da China: número JRT…MM, significado de «Delivered to service provider», alfândega UE e entrega final por DHL, CTT Express ou UPS.
 slug: jrt-rastreio
 published: 2026-11-18
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-A JRT (今日通, Jinritong) é a 厦门今日通商贸有限公司, um transitário sediado em Xiamen, na China. Se uma loja chinesa enviou a tua encomenda pela JRT, deu-te um número de seguimento que começa por JRT e termina em MM: cola-o na caixa acima. O site de seguimento da JRT acompanha a encomenda desde a China, passando pelo voo e pela alfândega, até à transportadora responsável pela entrega final, cujas leituras copia: nos envios para a Europa, o histórico termina na DHL, e nos envios para os Estados Unidos, na UPS. Na linha da JRT para a Irlanda cujo nome de serviço inclui a FedEx, a entrega passa antes para a FedEx; na linha para Espanha, para a CTT Express; na linha para a Polónia, para a InPost; e na linha para o México, para a J&T Express México.
+A JRT (`今日通`, Jinritong — 厦门今日通商贸有限公司) é um transitário de Xiamen, na China, que emite cartas de porte de 15 caracteres com o formato `JRT` + 10 algarismos + `MM`. Cola o número na caixa acima para acompanhar a encomenda desde a China, voo e alfândega até à transportadora local: na Europa, as linhas da JRT terminam na DHL (CTT Express em Espanha, InPost na Polónia e FedEx na linha FedEx para a Irlanda); nos Estados Unidos, na UPS; e no México, na J&T Express México.
 
 ## Número de rastreio JRT: como é
 
@@ -126,21 +126,25 @@ O Peek verifica até de 10 em 10 minutos enquanto tens a encomenda aberta ou no 
 
 ## Perguntas sobre o rastreio JRT
 
-### O que é a JRT (今日通)?
+### O que é a JRT (今日通 / Jinritong)?
 
-É a 厦门今日通商贸有限公司, Xiamen Jinritong, um transitário de Xiamen, na China. As suas cartas de porte têm JRT, dez algarismos e MM, e o seu seguimento funciona na Hualei (华磊), plataforma usada também por outros transitários chineses.
+É a 厦门今日通商贸有限公司 (Xiamen Jinritong), um transitário sediado em Xiamen, na China. As suas cartas de porte têm 15 caracteres (`JRT` + 10 algarismos + `MM`) e o seu seguimento corre na plataforma Hualei (华磊).
 
-### Porque é que a JRT diz «delivered» se a minha encomenda ainda não chegou?
+### Porque é que a JRT mostra «Delivered» se a encomenda ainda não chegou?
 
-Por causa das traduções em inglês. `Cargo delivered to airport` quer dizer que a JRT entregou a carga no aeroporto para o voo, e `Delivered to service provider` ou `Delivery to final service provider` que a passou à empresa encarregada da entrega final. Nenhum destes passos significa entrega na tua morada, e o Peek mostra «Em trânsito» em todos eles.
+Por causa das traduções da JRT: `Cargo delivered to airport` indica entrega no aeroporto para o voo, e `Delivered to service provider` / `Delivery to final service provider` (`已交服务商`) significa entrega à transportadora do último troço — nunca na tua morada. O Peek mostra «Em trânsito» em todos estes passos.
 
-### Quem entrega as encomendas da JRT no meu país?
+### Quem entrega em Portugal, na Europa ou nos EUA uma encomenda JRT?
 
-Nos envios para a Europa, o histórico da JRT termina na DHL, e nos envios para os Estados Unidos, na UPS, copiando as respetivas leituras. Algumas encomendas seguem pela FedEx, como na linha FedEx da JRT para a Irlanda, enquanto as linhas para Espanha, Polónia e México terminam na CTT Express, na InPost e na J&T Express México. Noutros casos, o Peek não sabe: pergunta ao vendedor que transportadora faz a entrega e pede o respetivo número.
+Para a Europa, o seguimento da JRT termina na DHL (ou na CTT Express na linha para Espanha, InPost na Polónia e FedEx na linha FedEx para a Irlanda), copiando as leituras da transportadora; para os EUA termina na UPS e para o México na J&T Express México. Se o Peek não mostrar o número local, pede-o ao vendedor.
 
-### Quem devo contactar se uma encomenda JRT desaparecer?
+### Tenho de pagar alfândega numa encomenda JRT vinda da China para a UE?
 
-O vendedor a quem compraste: foi ele quem contratou o envio com a JRT. Fora o site de seguimento, o Peek não conhece nenhum site nem contactos da JRT.
+Nas linhas aéreas para a UE, o desalfandegamento ocorre no aeroporto de chegada. Desde 1 de julho de 2026 aplica-se um direito aduaneiro de 3 € por categoria de artigo em compras online até 150 €, acrescido desde 1 de novembro de 2026 da taxa de tramitação da UE de 2 € por categoria, independentemente do valor.
+
+### Como contactar a JRT se a encomenda parar ou desaparecer?
+
+Fora o sistema de seguimento, o Peek não conhece nenhum site corporativo, telefone nem e-mail da JRT para destinatários. Contacta o vendedor ou o marketplace onde compraste — foi quem contratou o envio com a JRT.
 
 :::sources
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nome e iniciais da empresa, plataforma Hualei, site de seguimento num endereço numérico em HTTP simples, ligações reconhecidas e ausência de ligação publicada, formatos JRT…MM e UP, letra O após JRT lida como JRT, pesquisa por número ou referência com hífenes, textos dos passos e estados, inglês das linhas só em chinês, linhas europeias da aterragem à entrega na Alemanha, linhas copiadas da DHL e loja Deutsche Post, rota para os EUA e linhas copiadas da UPS na hora local, linha FedEx e leituras copiadas, número DHL ou FedEx no registo após entrega, passagem para DHL, FedEx e Swiss Post, hora de Pequim e hora local da DHL consoante a cidade, resposta a número desconhecido, o que o Peek mostra, retém e omite, linhas de morada não encontrada da DHL, linha rodoviária por Xinjiang, Cazaquistão e fronteira cazaque-russa, voo atrasado, pré-aviso CTT Express e passagem na linha aérea espanhola, linhas da J&T Express México na hora da Cidade do México e nota UPS Access Point

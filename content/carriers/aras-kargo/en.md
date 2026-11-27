@@ -1,12 +1,12 @@
 ---
 title: Aras Kargo tracking: numbers and statuses in English
-description: Track an Aras Kargo parcel: what its 13-digit number looks like, what Turkish statuses such as TESLİMAT ŞUBESİNDE mean in English, and how Peek follows it.
+description: Track Aras Kargo Turkey in English: 13-digit numbers (60/65), Turkish status meanings (TESLİMAT ŞUBESİNDE, YOLDA, TESLİM EDİLDİ), failed delivery and help.
 slug: aras-kargo-tracking
 published: 2026-11-02
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Aras Kargo (also written Aras Cargo) is a courier in Turkey. Aras's tracker, as Peek reads it, writes every step in Turkish. The shop or the sender gives you the tracking number: paste it in the box above. Aras Kargo's own tracker is at kargotakip.araskargo.com.tr. The tables below explain its Turkish statuses in English.
+Aras Kargo (Aras Cargo) is a Turkish courier whose official tracker at kargotakip.araskargo.com.tr prints every scan in Turkish. Paste the 13-digit tracking number (often starting with `60` or `65`) from your shop or sender into the box above to track your parcel on Turkish time, and use the tables below to read statuses such as `TESLİMAT ŞUBESİNDE`, `YOLDA` and `TESLİM EDİLDİ` in English.
 
 ## Aras Kargo tracking number: what it looks like
 
@@ -111,23 +111,23 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ### What does TESLİMAT ŞUBESİNDE mean on Aras Kargo tracking?
 
-It means at the delivery branch: the Aras branch that brings the parcel to you has it. The status stays the same after a failed delivery: look for a line with a reason, which Peek shows as "Delivery attempted".
+It means "at the delivery branch": the local Aras Kargo branch responsible for delivering to your address has the parcel ("In transit" in Peek). Because the status stays `TESLİMAT ŞUBESİNDE` even after a failed attempt, check for a `Teslim Edilememe Nedeni` line (shown as "Delivery attempted" in Peek).
 
-### What does YOLDA mean on Aras Kargo?
+### What do YOLDA, ÇIKIŞ ŞUBESİNDE and TESLİM EDİLDİ mean?
 
-It means on the way: the parcel is travelling between Aras's transfer centres, towards the delivery branch. Peek shows "In transit".
+`ÇIKIŞ ŞUBESİNDE` means received at the origin branch ("Received by carrier"), `YOLDA` means on the way between Aras transfer centres ("In transit"), and `TESLİM EDİLDİ` means delivered ("Delivered", with date and time).
 
 ### What does an Aras Kargo tracking number look like?
 
-13 digits, in Peek's code. Peek links the ones starting with 60 or 65 to Aras Kargo, such as `6048291736542`. For other 13 digits, pick Aras Kargo yourself.
+Aras Kargo uses 13-digit numbers in Peek's code. Peek automatically checks Aras Kargo for 13-digit numbers starting with `60` or `65` (such as `6048291736542`), or when you paste a `kargotakip.araskargo.com.tr` link; for other 13-digit numbers, tap "Change" and choose Aras Kargo.
 
-### Why can't Aras Kargo find my tracking number?
+### Why does Aras Kargo say "Girdiğiniz bilgiler için bir sonuç bulunamamıştır"?
 
-`Girdiğiniz bilgiler için bir sonuç bulunamamıştır.` means Aras has no result for the number yet. The shop may not have handed the parcel over. Check the 13 digits, wait a day, then ask the shop.
+That Turkish message means no result was found for the number entered — usually because the shop hasn't handed the parcel to Aras Kargo yet or a digit is wrong. Double-check all 13 digits, wait a day and confirm dispatch with the seller.
 
-### How do I contact Aras Kargo?
+### Who do I contact if an Aras Kargo parcel is delayed, missing or outside the delivery area?
 
-Ask the shop first: it booked the delivery. Peek couldn't read Aras Kargo's website, so this page gives no phone number or email.
+Contact the shop or sender first (they booked the delivery), and quote the branch name shown on Peek's latest scan. If you see `ALICI ADRESİ DAĞITIM ALANI DIŞINDA`, the branch doesn't serve your address — ask the seller what happens next. Peek couldn't read Aras Kargo's site, so this page lists no phone number or email.
 
 :::sources
 - [Universal Parcel Scraper: Aras Kargo](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/aras-kargo) – names, the 13-digit number and the 60 and 65 shape, the tracker and its link, its sections and Turkish wordings with their stages, the not-found message, planned delivery day, times on Turkish time, what Peek leaves out

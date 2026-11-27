@@ -1,12 +1,12 @@
 ---
 title: Mainfreight tracking: consignment numbers and statuses
-description: Track a Mainfreight consignment in New Zealand, Australia or the US: what its numbers look like, what each status means and what to do when freight is late.
+description: Track a Mainfreight consignment (NZ, Australia, US & Europe): 11-digit road & air/ocean numbers, At Delivery Depot status meanings, NZ customs and US claims.
 slug: mainfreight-tracking
 published: 2026-11-03
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Mainfreight moves freight by road, air and sea. Peek's catalog lists it for New Zealand (its home), Australia and the United States; its tracker also covers road freight in Europe and container moves. To track freight or a large item coming to you with Mainfreight, paste the consignment number from whoever booked it in the box above. Mainfreight's own tracker is on www.mainfreight.com.
+Mainfreight moves road, air and ocean freight across New Zealand (its home market), Australia, the United States and Europe. Track your consignment by pasting the 11-digit road consignment number — or a job number, house bill, master bill or sender reference — into the box above (or on www.mainfreight.com). Below you'll find what Mainfreight's NZ, AU, US and air/ocean statuses mean, NZ Customs rules and US interstate claim deadlines.
 
 ## Mainfreight tracking number: what it looks like
 
@@ -120,17 +120,25 @@ While you have the shipment open, or on its delivery day with notifications on, 
 
 ## Questions about Mainfreight tracking
 
-### What does a Mainfreight tracking number look like?
+### What does a Mainfreight consignment or tracking number look like?
 
-For road freight in New Zealand, Australia and the United States, a consignment number of 11 digits. Job numbers, house bills and senders' references mix letters and digits: pick Mainfreight in Peek for those.
+Road consignments in New Zealand, Australia and the US use an 11-digit consignment number (shared with GLS and others). Air/ocean shipments, job numbers, house bills and sender references mix 4–40 letters and digits — paste them in Peek and select Mainfreight via "Change".
 
 ### What does "At Delivery Depot" mean on Mainfreight tracking?
 
-The freight has reached the depot that will deliver it, and Peek shows "In transit". Next comes `On Delivery Vehicle`, when it's on the truck to you. If it sits there for days, ask the sender when delivery is planned.
+Your freight has arrived at the local Mainfreight depot that will handle delivery ("In transit" in Peek). The next delivery milestone is `On Delivery Vehicle` ("Out for delivery"). If it sits at the depot for several days, ask the sender when delivery is booked.
 
 ### What does "Pickup Allocated to Driver" mean?
 
-A driver has the pickup, but the goods are still with the sender, so Peek shows "Label created". The next step is `Picked Up`.
+A Mainfreight driver has been assigned to collect the shipment, but the goods are still with the sender ("Label created" in Peek). Once collected, tracking moves to `Picked Up` ("Received by carrier").
+
+### Do I pay customs duty or GST on a Mainfreight import into New Zealand?
+
+Under NZ Customs rules, overseas website purchases of NZ$1,000 or less carry no duty (overseas sellers collect the 15% GST) unless part of a larger consignment over NZ$1,000, or tobacco/alcohol. Shipments worth NZ$1,000 or more require a Customs Number, and Customs will not release goods until duty, 15% GST and the Customs/MPI Goods Levy are paid.
+
+### Who do I contact if a Mainfreight shipment is late, damaged or missing?
+
+Contact the shop, supplier or shipper who booked Mainfreight — Peek couldn't read Mainfreight's own site so this page lists no phone numbers. For US interstate truck freight, federal law (49 U.S.C. 14706 / 49 CFR 370) gives at least 9 months to file a written claim, which carriers must acknowledge within 30 days.
 
 :::sources
 - [Universal Parcel Scraper: Mainfreight](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/mainfreight) – names and countries, the 11-digit shape, other references and master bills, links, the tracker's search and services, wordings and their stages, planned steps, clocks, weight, expected day, what Peek leaves out

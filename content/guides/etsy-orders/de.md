@@ -1,13 +1,13 @@
 ---
 title: Etsy-Sendungsverfolgung: wo deine Bestellung ist
-description: Warum deine Etsy-Bestellung noch „Nicht verschickt“ zeigt, welcher Versanddienst sie bringt, wie die Nummer aussieht und wann du einen Fall eröffnest.
+description: Etsy-Bestellungen verfolgen: wo deine Sendungsnummer unter Einkäufe oder Beleg anzeigen steht, warum „Nicht verschickt“ erscheint und Fristen für einen Fall.
 slug: etsy-sendungsverfolgung
 picture: Ein mit Schnur verschnürtes, frankiertes Paket, ein Postauto und Pip, der eilig vorbeiläuft.
 published: 2026-10-17
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Etsy verschickt selbst nichts: Jeder Shop fertigt oder packt seine Bestellungen selbst, gibt sie bei einem Versanddienst seiner Wahl auf und trägt eine Sendungsnummer ein, wenn der Dienst eine hat. Unter deinen Einkäufen siehst du, ob die Bestellung den Shop verlassen hat und wann sie ankommen soll; die Sendungsnummer zeigt, wo sie gerade ist. Zu spät oder verschwunden? Frag zuerst den Shop, dann Etsy.
+Deine Etsy-Bestellungen verfolgst du unter **Einkäufe und Bewertungen** (in der App: **Du** → **Einkäufe**): Da Etsy selbst nichts verschickt, packt jeder Shop seine Bestellung eigenständig und trägt die Sendungsnummer des Versanddienstes ein — sichtbar über **Paket verfolgen** oder **Beleg anzeigen**. Bleibt der Status auf `Nicht verschickt`, ist die Bestellung zu spät oder fehlt sie, schreib zuerst dem Shop über **Hilfe bei einer Bestellung** und eröffne bei Bedarf nach 48 Stunden (bis 30 Tage nach dem Liefertermin) einen Fall im Etsy-Einkaufsschutz.
 
 ## Warum zeigt meine Etsy-Bestellung noch „Nicht verschickt“?
 
@@ -117,7 +117,7 @@ Kommt ein Paket zu spät oder gar nicht, weil du Gebühren bei der Lieferung ver
 
 ## Was tun, wenn deine Etsy-Bestellung zu spät kommt oder fehlt?
 
-Geh in dieser Reihenfolge vor:
+Kontaktiere zuerst den Shop über **Einkäufe und Bewertungen** → **Hilfe bei einer Bestellung**; ab 48 Stunden danach kannst du bis 30 Tage nach dem Liefertermin einen Fall für Etsys Einkaufsschutz öffnen (Erstattungen über Etsy bis 180 Tage nach dem Kauf):
 
 :::steps
 - Termine prüfen | Der Liefertermin steht an der Bestellung. Etsy rechnet ihn neu, wenn der Shop früher verschickt.

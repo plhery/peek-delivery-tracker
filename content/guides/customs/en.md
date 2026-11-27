@@ -1,13 +1,13 @@
 ---
 title: Parcel held at customs: how long and what you pay
-description: What "held at customs" means, how long it can last, what you pay in the UK, Ireland, US, Canada or Australia, and how to spot a fake customs charge text.
+description: How customs contacts you and what to do when a parcel is held for payment of charges: UK, Ireland, US, Canada and Australia rules, wait times and fake texts.
 slug: parcel-held-at-customs
 picture: A customs booth with a striped barrier, a stamped document with a tick, and Pip waiting patiently before the barrier.
 published: 2026-10-09
-updated: 2026-11-06
+updated: 2026-11-27
 ---
 
-"Held at customs" usually means your parcel (or package) is in the routine import check for goods from abroad, not that it was seized. If it stays held, the carrier may be waiting for you to pay a charge or send an invoice. Check the carrier's own website or app, never a link in a text.
+When tracking shows "held at customs" or "payment of charges", your parcel is usually in routine import clearance — not seized — and the carrier (not customs directly) handles any bill or document request. In the UK (about 3 weeks to pay before return; no charge at the door on purchases up to £135), Ireland (An Post sends a postcard, text or email, never a payment link in an SMS), Canada (CBSA/Canada Post), Australia (AUD 1,000 threshold) and the US (CBP, with the $800 de minimis suspended), always check the carrier's official website or app yourself and never tap a link in an unexpected text.
 
 ## What does "held at customs" mean?
 
@@ -112,9 +112,9 @@ It depends on your country and the checkout:
 
 For how these orders travel, see [tracking a parcel from China](guide:tracking-from-china).
 
-## How do I know if a customs charge text is real?
+## How do I know if a customs charge text is real (and how does customs contact you)?
 
-Real charges can come by text or email too, but each carrier's rules give most fakes away:
+Customs authorities themselves do not text payment links (Revenue in Ireland never sends click-to-pay texts or emails, CBSA never asks for card details by phone/text, and real seizures arrive in writing). Your carrier contacts you instead, and each carrier's rules give most fakes away:
 
 | Carrier | What its real messages look like |
 | --- | --- |

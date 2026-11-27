@@ -1,12 +1,12 @@
 ---
 title: GLS tracking in Germany: statuses, ParcelShops and contact
-description: Track a GLS parcel in Germany: where the parcel number or Track-ID is, why GLS needs your postcode, what its statuses mean, ParcelShops and how to reach GLS.
+description: Track a GLS parcel in Germany or across Europe: 11- or 12-digit parcel number plus postcode, English statuses, 9,000 ParcelShops, delivery times and contact.
 slug: gls-tracking-germany
 published: 2026-10-11
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-GLS Germany delivers on weekdays and, by its group's count, has 9,000 ParcelShops and 200 Parcelstations in Germany. Track a parcel on [GLS's tracking page](https://gls-group.com/EU/en/parcel-tracking) with its parcel number and the recipient's postcode, or paste the number in the box above. The number is in the shop's email, and GLS's notification card carries a Track-ID.
+Track a GLS parcel in Germany or sent internationally across Europe by entering its 11- or 12-digit parcel number and the recipient's postcode on [gls-group.com/EU/en/parcel-tracking](https://gls-group.com/EU/en/parcel-tracking) or in the box above. GLS Germany delivers Monday to Friday across a network of 9,000 ParcelShops and 200 Parcelstations, with typical delivery under 24 hours domestically and 24 to 96 hours across Europe; your parcel number is in the shop's shipping email.
 
 ## GLS tracking number and Track-ID: where to find them
 
@@ -85,25 +85,25 @@ You then see the status, each scan's town and country on a map, the expected day
 
 ## Questions about GLS tracking in Germany
 
+### How do I track an international GLS parcel to or from Germany?
+
+Enter your 11- or 12-digit GLS parcel number and the delivery postcode on GLS's group tracking page (`gls-group.com/EU/en/parcel-tracking`) or in Peek: the same number tracks across European borders, typically arriving in 24 to 96 hours, and parcels sent with FlexDeliveryService let you choose delivery options in advance.
+
 ### Where is my GLS package?
 
-GLS's tracking shows it once you enter the number and the recipient's postcode: `The parcel is in delivery.` means it's in the van today.
+Enter your GLS parcel number and recipient postcode to see the latest depot or ParcelShop scan: `The parcel is in delivery.` means it is on today's van (Monday to Friday, no Saturday delivery).
 
 ### What is the GLS Track-ID?
 
-The six-letter code on GLS's notification card. It works like the parcel number in GLS's tracking.
+The six-letter code on GLS's notification card, which works in place of the 11- or 12-digit parcel number in GLS's tracking.
 
-### How long does GLS take to deliver?
+### How long does GLS take to deliver in Germany and Europe?
 
-GLS lists estimated delivery times on gls-pakete.de and doesn't guarantee them. Its group says a parcel within one country usually arrives in under 24 hours, and one sent across Europe in 24 to 96 hours. Only a parcel the sender booked with GLS's Guaranteed24Service is due the next working day (Monday to Friday) within Germany, except on its islands.
+GLS's group states parcels within one country usually arrive in under 24 hours, and parcels across Europe in 24 to 96 hours (estimated, not guaranteed unless sent with Guaranteed24Service within mainland Germany).
 
-### How long does GLS keep a parcel?
+### How long does GLS keep a parcel at a ParcelShop?
 
-After a missed delivery, the ParcelShop, depot or Parcelstation keeps it at least seven working days. Then it goes back to the sender.
-
-### Is GLS legit?
-
-Yes: GLS Germany is General Logistics Systems Germany GmbH & Co. OHG, of Neuenstein. Fake messages use its name, though: see the warning above.
+After a missed delivery, GLS holds the parcel at the ParcelShop, depot or Parcelstation before returning it to the sender; disputes over loss or damage (€10 to €2,500) can be taken free of charge to the Bundesnetzagentur's Schlichtungsstelle Post.
 
 :::sources
 - [GLS: Parcel Tracking](https://gls-group.com/EU/en/parcel-tracking) – GLS's group tracking page, Track-ID on the notification card

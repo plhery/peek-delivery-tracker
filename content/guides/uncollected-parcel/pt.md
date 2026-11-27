@@ -1,13 +1,13 @@
 ---
 title: Quanto tempo tenho para levantar uma encomenda?
-description: Quanto tempo fica uma encomenda nos CTT, num cacifo Locky ou num Ponto Pack, como ganhar mais tempo e o que acontece se não a levantares.
+description: Quanto tempo tens para levantar uma encomenda nos CTT (5–15 dias), Locky (5 dias), InPost (5 dias), GLS (10) e DPD (7–10 / 72h), prolongamentos e reembolso.
 slug: quanto-tempo-tenho-para-levantar-encomenda
 picture: Um cacifo de encomendas com uma porta aberta e o Pip à espera lá dentro, e um calendário com os dois últimos dias assinalados.
 published: 2026-10-14
-updated: 2026-11-14
+updated: 2026-11-27
 ---
 
-Depende de onde está a encomenda: nos CTT tens 10 dias úteis para levantar uma Encomenda Postal numa Loja ou Ponto CTT (15 se vier do estrangeiro), mas só 5 dias num cacifo Locky ou num Locker da InPost. O que conta é a data-limite do aviso, do SMS ou do e-mail. Passado esse dia, a encomenda volta para o remetente, e é a loja que decide se te reembolsa ou se a envia outra vez.
+O prazo para levantar uma encomenda em Portugal depende do serviço e do local: nos [CTT](carrier:ctt) tens 10 dias úteis numa Loja ou Ponto CTT para Encomenda Postal (15 se vier do estrangeiro), 6 dias úteis em Correio Registado, 5 dias úteis em Encomenda Expresso nacional e 5 dias num cacifo Locky; na [InPost](carrier:inpost) são 5 dias seguidos, na GLS 10 dias úteis num GLS Point e na DPD 7 ou 10 dias úteis num Ponto Pickup (72 horas num locker). Vale sempre a data-limite do aviso, SMS ou e-mail — passada essa data, a encomenda volta ao remetente.
 
 O código não chegou ou o cacifo estava cheio? Vê [encomenda no cacifo](guide:parcel-lockers).
 
@@ -58,9 +58,7 @@ Atenção ao estado `Em espera` dos CTT: quer dizer que o envio aguarda instruç
 
 ## Posso prolongar o prazo para levantar a encomenda?
 
-Nos CTT, sim, conforme o envio. Numa Encomenda Postal, podes prolongar o prazo até 30 dias: o serviço chama-se Armazenagem de Encomendas, custa 1,84 € por dia, até 55,20 €, mais IVA, e tens de o pedir até 2 dias úteis antes da data-limite. Numa Encomenda Expresso, podes ganhar até 5 dias úteis, se o remetente autorizar alterações. Num cacifo Locky, até mais 5 dias úteis, dependendo do tipo de envio.
-
-A InPost, a GLS e a DPD não falam de prolongamento nas suas páginas para quem recebe.
+Nos CTT, sim (até 30 dias na Armazenagem de Encomendas em Encomenda Postal, por 1,84 €/dia mais IVA, pedida até 2 dias úteis antes do fim do prazo, ou até 5 dias úteis em Encomenda Expresso e Locky conforme o envio); InPost, GLS e DPD não indicam prolongamento para destinatários.
 
 Se não consegues ir a tempo:
 

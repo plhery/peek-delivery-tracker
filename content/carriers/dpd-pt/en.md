@@ -1,12 +1,12 @@
 ---
 title: DPD Portugal tracking: statuses, Pickup points and contact
-description: Track a DPD Portugal parcel: the 14-digit number, what the Portuguese statuses mean, Predict, Pickup points and lockers, claims and who to call.
+description: Track a DPD Portugal parcel with your 14-digit number: Portuguese statuses in English, Predict time window, 2,300 Pickup points & 72h lockers, and 21 854 6001.
 slug: dpd-portugal-tracking
 published: 2026-10-22
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-DPD Portugal is the Portuguese parcel carrier of Geopost, the parcel group behind DPD and [Chronopost](carrier:chronopost). It delivers parcels across mainland Portugal, Madeira and the Azores. Track a parcel on DPD's [Track & Trace](https://tracking.dpd.pt/track-and-trace) with its 14-digit number, or paste the number in the box above.
+Track a DPD Portugal parcel across mainland Portugal, Madeira and the Azores by pasting your 14-digit parcel number (often starting `0955` to `0988`) in the box above or on [tracking.dpd.pt/track-and-trace](https://tracking.dpd.pt/track-and-trace). Part of Geopost, DPD Portugal offers Predict one-hour delivery windows, around 2,300 Pickup shops and 500 24/7 lockers (72-hour hold), and customer support on 21 854 6001 or via its 24/7 chatbot Maria.
 
 ## DPD Portugal tracking number: where to find it
 
@@ -101,19 +101,23 @@ When La Poste's tracking names DPD Portugal and gives its number, Peek can follo
 
 ### How long does DPD Portugal take to deliver?
 
-The next working day after collection in mainland Portugal, and 2 to 5 days on Madeira and the Azores, says DPD.
+Next working day after collection in mainland Portugal, and 2 to 5 days to Madeira and the Azores (Saturday delivery until 1pm is available when booked by the sender).
 
-### How long does DPD Portugal keep a parcel at a Pickup point?
+### How long does DPD Portugal keep a parcel at a Pickup point or locker?
 
-7 or 10 working days, depending on the DPD page, and the period can vary: count on 7. In a locker, 72 hours.
+7 or 10 working days at a Pickup parcelshop depending on the DPD FAQ page and sender terms (count on 7 to be safe), and 72 hours (3 days) in a Pickup locker.
 
 ### Can I collect my parcel at the DPD depot?
 
-No. DPD doesn't hand parcels over at its delivery centres: redirect yours to a Pickup point or another day.
+No. For security reasons DPD Portugal does not hand parcels over at its delivery centres: redirect yours to a Pickup point or another day (up to 5 working days later) on dpd.pt or in the myDPD app.
 
 ### Does DPD deliver to Madeira and the Azores?
 
-Yes. DPD Portugal delivers to the islands, to the door or to a Pickup point, in 2 to 5 days.
+Yes, to the door or to a Pickup point in 2 to 5 days.
+
+### How do I contact DPD Portugal customer service?
+
+Call 21 854 6001 (+351 21 854 6001 from abroad, Mon–Fri 8:30am–7:30pm and Sat 9am–1pm Lisbon time), message DPD's 24/7 chatbot Maria on dpd.pt, or use the contact form with your 14-digit parcel number.
 
 :::sources
 - [DPD Portugal: Track & Trace](https://tracking.dpd.pt/track-and-trace) – tracking, English and French versions, not-found message, wordings

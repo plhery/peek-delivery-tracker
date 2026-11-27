@@ -1,12 +1,12 @@
 ---
 title: NACEX tracking: number, statuses in English and contact
-description: Track a NACEX parcel in Spain, Portugal or Andorra: the 0000/00000000 number, its Spanish statuses in plain English, NACEX.shop points, claims and contacts.
+description: Track a NACEX parcel in Spain, Portugal or Andorra: agency/delivery-note format, Spanish statuses in English, NACEX.shop points, delivery times and 900 100 000.
 slug: nacex-tracking
 published: 2026-10-10
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-NACEX is an express courier of the Logista group that delivers across Spain, Portugal, Andorra and the Netherlands. To track a parcel, type its number (four digits, a slash, eight digits) into the box on [NACEX's site](https://www.nacex.es/), or paste it in the box above. The number belongs to the shipment the sender, usually the shop, booked; NACEX can't search by order number or postcode.
+Track a NACEX parcel across Spain, Portugal, Andorra and the Netherlands by entering its shipment number (4-digit franchise office, a slash, and 8-digit delivery note) on [nacex.es](https://www.nacex.es/) or in the box above. Founded in 1995 and part of the Logista group, NACEX operates over 4,000 NACEX.shop points and lockers and cannot search by order number or postcode; for Spain customer support, call 900 100 000 or email atencion.cliente@nacex.com.
 
 ## NACEX tracking number: what it looks like
 
@@ -96,19 +96,23 @@ It checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on t
 
 ### What is NACEX?
 
-NACEX is an express courier founded in 1995, part of the Logista group, delivering across mainland Spain, the Balearic and Canary Islands, Andorra, Portugal and the Netherlands.
+NACEX is an express courier founded in 1995 as part of the Logista group, delivering across mainland Spain, the Balearic and Canary Islands, Andorra, Portugal and the Netherlands with over 4,000 NACEX.shop points and lockers.
 
 ### Is NACEX legit?
 
-Yes, it's an established courier. Its tracking is on nacex.es and nacex.pt, and its customer service emails end in @nacex.com.
+Yes: its official tracking runs on nacex.es and nacex.pt, its Spain freephone is 900 100 000 and its customer-service emails end in @nacex.com (atencion.cliente@nacex.com).
 
 ### What is NACEX's delivery time?
 
-It depends on the service the sender bought: NACEX 19:00 H delivers before 19:00 the next working day in mainland Spain, Andorra, Portugal and the Balearics, or before 13:00 on the second working day in towns more than 50 km from the delivering franchise office. The Canaries take 24 to 48 hours, the Azores and Madeira 2 to 5 days.
+With NACEX 19:00 H, delivery is before 19:00 on the next working day across mainland Spain, Andorra, Portugal and the Balearics (or before 13:00 on the second working day beyond 50 km from the franchise office), 24 to 48 hours to the Canaries and 2 to 5 days to the Azores and Madeira.
+
+### How long does a NACEX office hold a parcel?
+
+Up to 15 days at a NACEX franchise office before it returns to the sender; notify the office and collect Monday to Friday (someone else needs your signed authorisation and an ID photocopy).
 
 ### Can I change the delivery address of a NACEX parcel?
 
-An address change needs the authorisation of the customer paying for the shipment, usually the shop: free within the same franchise office's area, at extra cost elsewhere. A Pre-Alert's link can also send it to a NACEX point.
+Yes, with the authorisation of the paying sender (usually the shop): free within the same franchise area, or at extra cost elsewhere. If the sender enabled Pre-Alert, its link opens My Preferred Delivery to pick another date, time slot or NACEX.shop point.
 
 :::sources
 - [NACEX: Tracking and Tracing](https://www.nacex.es/irSeguimiento.do) – number parts, other references

@@ -15118,6 +15118,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005d69"
     },
     {
+      "id": "colisweb",
+      "catalog": "colisweb",
+      "slug": "colisweb-tracking",
+      "title": "Rastreio Colisweb: mensagens em francês e agendamento",
+      "name": "Colisweb",
+      "color": "#15cbe3"
+    },
+    {
       "id": "ciblex",
       "catalog": "ciblex",
       "slug": "ciblex-tracking",
@@ -16212,6 +16220,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Ozon: códigos de pedido e status em russo",
       "name": "Ozon",
       "color": "#005bff"
+    },
+    {
+      "id": "citymail",
+      "catalog": "citymail",
+      "slug": "citymail-tracking",
+      "title": "Rastreio CityMail: códigos, status e entregas na Suécia",
+      "name": "CityMail",
+      "color": "#fc4c02"
     },
     {
       "id": "dayone",
@@ -19796,6 +19812,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005d69"
     },
     {
+      "id": "colisweb",
+      "catalog": "colisweb",
+      "slug": "colisweb-tracking",
+      "title": "Colisweb 物流查询：法语状态含义与预约时段说明",
+      "name": "Colisweb",
+      "color": "#15cbe3"
+    },
+    {
       "id": "ciblex",
       "catalog": "ciblex",
       "slug": "ciblex-tracking",
@@ -20906,6 +20930,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Ozon 物流（Ozon Rocket）查询：单号格式与俄语状态",
       "name": "Ozon",
       "color": "#005bff"
+    },
+    {
+      "id": "citymail",
+      "catalog": "citymail",
+      "slug": "citymail-tracking",
+      "title": "CityMail 物流查询：BCM 单号、瑞典语状态与派送指南",
+      "name": "CityMail",
+      "color": "#fc4c02"
     },
     {
       "id": "dayone",

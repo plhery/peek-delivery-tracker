@@ -16622,12 +16622,28 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef172f"
     },
     {
+      "id": "yunda",
+      "catalog": "yunda",
+      "slug": "yunda-tracking",
+      "title": "Rastreio Yunda Express: códigos, status chineses e 95546",
+      "name": "Yunda Express",
+      "color": "#ffce00"
+    },
+    {
       "id": "onlog-express",
       "catalog": "onlog-express",
       "slug": "rastreamento-onlog-express",
       "title": "Rastreamento Onlog Express: códigos AA, status e contato",
       "name": "Onlog Express",
       "color": "#1a345d"
+    },
+    {
+      "id": "a-duie-pyle",
+      "catalog": "a-duie-pyle",
+      "slug": "a-duie-pyle-tracking",
+      "title": "Rastreio A. Duie Pyle: números PRO, carga LTL e contato",
+      "name": "A. Duie Pyle",
+      "color": "#f27629"
     },
     {
       "id": "buffalo-ex",
@@ -21266,6 +21282,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Onlog Express 巴西快递追踪：AA 单号、状态与圣保罗客服",
       "name": "Onlog Express",
       "color": "#1a345d"
+    },
+    {
+      "id": "a-duie-pyle",
+      "catalog": "a-duie-pyle",
+      "slug": "a-duie-pyle-tracking",
+      "title": "A. Duie Pyle 物流查询：PRO 单号、零担货运状态与客服",
+      "name": "A. Duie Pyle",
+      "color": "#f27629"
     },
     {
       "id": "buffalo-ex",

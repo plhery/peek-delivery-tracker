@@ -1,12 +1,12 @@
 ---
 title: GLS Italy tracking: pacco, stati, giacenza e contatti
-description: Tracking GLS in Italia: dove trovi il numero di spedizione, cosa vogliono dire gli stati, giacenza, GLS Point, pacco non consegnato e numero verde.
+description: Tracking GLS Italy: codice spedizione nazionale o 11 cifre, stati e giacenza (10 giorni lavorativi), GLS Point, consegna 24/48 h e numero verde 800 184726.
 slug: gls-italy-tracking
 published: 2026-10-11
-updated: 2026-10-26
+updated: 2026-11-27
 ---
 
-GLS Italy è la rete italiana del gruppo GLS: una rete di sedi locali indipendenti, affiliate in franchising a GLS Italy S.p.A. Per seguire il pacco cerca il numero nella [Ricerca Spedizione](https://gls-group.com/IT/it/servizi-online/ricerca-spedizioni/) di GLS, nell'app gratuita GLS oppure incollalo nel box qui sopra. Il numero te lo dà il mittente, di solito il negozio, quando la spedizione parte.
+Per tracciare un pacco **GLS Italy**, incolla nel riquadro qui sopra il numero di spedizione nazionale (due lettere — o una lettera e una cifra — seguite da fino a 9 cifre) o internazionale a 11 cifre ricevuto dal mittente, oppure cercalo nella [Ricerca Spedizione](https://gls-group.com/IT/it/servizi-online/ricerca-spedizioni/) o sull'app gratuita GLS. GLS consegna indicativamente dal lunedì al venerdì dalle 8.30 alle 18.30 (24 h sul continente, 48 h in Sicilia, Calabria e Sardegna) e dispone di oltre 10.000 GLS Point e locker.
 
 ## Numero di spedizione GLS: dove si trova e com'è fatto
 
@@ -88,21 +88,25 @@ L'unico giorno di consegna previsto che mostra è quello per cui prenoti la rico
 
 ## Domande sul tracking GLS
 
-### Quanto tempo resta un pacco GLS in giacenza?
+### Quanto tempo resta un pacco GLS in giacenza e come si sblocca?
 
-Secondo la Carta dei Servizi, 10 giorni lavorativi, 8 per i pacchi dall'estero. Senza istruzioni del mittente in quel periodo, il pacco torna indietro.
+Secondo la Carta dei Servizi, dopo due tentativi falliti GLS tiene il pacco in giacenza per **10 giorni lavorativi** (8 per le spedizioni dall'estero) senza costi aggiuntivi. Per sbloccare una giacenza (`IN ATTESA DI ISTRUZIONI DAL MITTENTE`) devi contattare il negozio o mittente; senza istruzioni il pacco torna indietro.
 
-### Quanto tempo ho per ritirare un pacco al GLS Point?
+### Quanto tempo ho per ritirare un pacco al GLS Point o in fermo deposito?
 
-10 giorni lavorativi dall'arrivo, con un promemoria dopo 5. Se non lo ritiri, torna alla Sede.
+Al GLS Point o locker hai **10 giorni lavorativi** dall'arrivo (con promemoria dopo 5 giorni) prima che torni in Sede. In caso di fermo deposito presso la Sede GLS, il ritiro va effettuato entro il terzo giorno lavorativo dall'arrivo con documento e numero di spedizione.
 
-### In quanto tempo consegna GLS?
+### In quanto tempo consegna GLS e consegna anche il sabato?
 
-Per il servizio standard GLS indica 24 ore sul continente e 48 ore in Sicilia, Calabria e Sardegna. Dice anche di consegnare il 99% delle spedizioni in Italia entro 4 giorni lavorativi.
+Per lo standard GLS indica **24 ore** sul continente e **48 ore** in Sicilia, Calabria e Sardegna (99% entro 4 giorni lavorativi), dal lunedì al venerdì indicativamente 8.30–18.30. La consegna di sabato c'è solo se il mittente ha aggiunto il servizio dedicato (capoluoghi di provincia); altrimenti il sabato mattina (8.30–12.00) è solo per il ritiro in fermo deposito.
 
-### GLS consegna il sabato?
+### Qual è il numero verde di GLS Italy e come fare reclamo?
 
-Solo se il mittente ha pagato la consegna al sabato, che copre i capoluoghi di provincia. Altrimenti il sabato mattina serve solo a ritirare un fermo deposito in Sede.
+Il numero verde del customer care è `800 184726` e la linea automatica 24 ore su 24 per lo stato spedizione è `02 98 03 55 56` (e-mail `customerservice@gls-italy.com`, lun.–ven. 9.00–13.00 e 14.30–17.30). I reclami scritti vanno inviati entro 90 giorni dalla spedizione (8 giorni di calendario per danni occulti tramite mittente) e GLS risponde entro 45 giorni.
+
+### Un SMS di GLS che chiede un pagamento con carta è una truffa?
+
+Sì: GLS Italy avverte che non chiede mai pagamenti con carta via SMS o e-mail (un pacco da fuori UE può però comportare una richiesta reale di dazi doganali). Non cliccare sui link sospetti e segnala i messaggi falsi a `cybersec@gls-italy.com`.
 
 :::sources
 - [GLS Italia: Domande frequenti](https://gls-group.com/IT/it/faq/) – numeri, etichette di stato, orari, danni, contatti

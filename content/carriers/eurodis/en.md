@@ -1,12 +1,12 @@
 ---
 title: EURODIS tracking: shipment numbers and delivery partners
-description: Track a EURODIS pallet or parcel in Germany or Austria: what its numbers look like, which partner delivers it, and who to contact when tracking fails.
+description: Track a EURODIS parcel or pallet across 38 European countries: 13-/24-digit numbers, delivery partners (trans-o-flex DE, Austrian Post AT) and recipient contacts.
 slug: eurodis-tracking
 published: 2026-11-03
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-EURODIS is a European network for parcels and pallets. In each country a partner company collects and delivers the goods: trans-o-flex in Germany, Österreichische Post (Austrian Post) in Austria. EURODIS's [Track & Trace page](https://eurodis.com/track-trace/) tracks a shipment across the network (more below). If the partner gave you its own tracking number, paste that in the box above.
+To track a **EURODIS** parcel or pallet shipment across its 38-country European network, enter your 13-digit EURODIS shipment number or 24-character package barcode on [EURODIS Track & Trace](https://eurodis.com/track-trace/) — or paste it into the box above and select EURODIS (or add your national partner's own tracking number). Each country is delivered by a local partner, including **trans-o-flex** in Germany and **Österreichische Post (Austrian Post)** in Austria.
 
 ## EURODIS tracking number: what it looks like
 
@@ -97,21 +97,25 @@ This page doesn't list EURODIS's exact wordings: Peek's code knows them only fro
 
 ## Questions about EURODIS tracking
 
-### How do I track a EURODIS shipment?
+### How do I track a EURODIS parcel or pallet?
 
-On EURODIS's [Track & Trace page](https://eurodis.com/track-trace/), with the 24-digit barcode, the 13-digit shipment number, the shipper's reference or the dispatch partner's number. Or paste the 13- or 24-digit number in Peek and pick EURODIS with "Change".
+Use EURODIS's [Track & Trace page](https://eurodis.com/track-trace/) with the 24-character barcode, the 13-digit EURODIS shipment number, the shipper's reference plus destination country and postcode, or the dispatch partner's number. In Peek, paste a 13- or 24-character number and choose EURODIS via "Change" (or paste a `eurodis.com/track-trace` link).
 
 ### Who delivers EURODIS shipments in Germany?
 
-trans-o-flex, an express and logistics company based in Weinheim and EURODIS's member for Germany. Its Recipient Customer Service is on +49 6201 988 222, Monday to Friday from 7:00 to 17:00, German time. Its own tracking for recipients is trans-o-flex insight.
+**trans-o-flex** (based in Weinheim) is EURODIS's German member. Regular deliveries run Monday to Friday 8:00–17:00 and Saturdays 7:00–14:00 (German time), and recipients can track via *trans-o-flex insight* or call Recipient Customer Service on `+49 6201 988 222` (Mon–Fri 7:00–17:00).
 
-### Who delivers EURODIS shipments in Austria?
+### Who delivers EURODIS shipments in Austria and other European countries?
 
-Österreichische Post (Austrian Post), says EURODIS's partner list. Its tracking and contacts are on our [Austrian Post](carrier:austrian-post) page.
+Österreichische Post ([Austrian Post](carrier:austrian-post)) delivers EURODIS shipments in Austria; other members across the 38-country network include Express One (Hungary, Slovakia, Slovenia, Bulgaria, Bosnia, Montenegro), [PostNL](carrier:postnl) (Netherlands), SDA / [Poste Italiane](carrier:poste-italiane) (Italy), Redur (Spain, Portugal, Andorra) and Bonafide (Switzerland, Liechtenstein).
 
-### How do I contact EURODIS?
+### How do I contact EURODIS about a shipment?
 
-Use the "Shipment request" form on EURODIS's [contact page](https://eurodis.com/contact/): choose the dispatch and delivery countries to find the contact for your shipment. For business enquiries and general questions, email contact@eurodis.com.
+Use the "Shipment request" form on EURODIS's [contact page](https://eurodis.com/contact/) by choosing your dispatch and delivery countries to get the right local contact. For business or general enquiries, email `contact@eurodis.com`.
+
+### Who handles damage, loss or address changes on EURODIS deliveries?
+
+Contact the sender or online shop first: trans-o-flex specifies that only the shipper can claim for damage or loss, change the delivery address or request a second delivery attempt. Under EU consumer rules (Your Europe), the seller must deliver within 30 days unless agreed otherwise and remains responsible for transit damage until you receive the goods.
 
 :::sources
 - [EURODIS: home page](https://eurodis.com/) – network of 38 countries, tracking by 24-digit barcode

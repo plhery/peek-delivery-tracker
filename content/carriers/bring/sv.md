@@ -1,12 +1,12 @@
 ---
 title: Spåra Bring-paket: statusar, ombud, paketbox och tull
-description: Spåra ditt Bring-paket: så ser kollinumret ut, det här betyder statusarna, så hämtar du hos ombud och i paketbox, och vem du klagar hos om något går fel.
+description: Spåra Bring-paket i Sverige: kollinummer (17/18/20 siffror), statusar, 7 dagar hos ombud och 4 dagar i paketbox, tull 3 €/2 € från Norge och tel 0770-11 33 00.
 slug: bring-spara-paket
 published: 2026-10-26
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Bring hör till norska Posten Bring-koncernen och levererar paket från webbutiker i hela Sverige: till ett ombud, till en paketbox eller hem till dörren. Du spårar paketet på [Brings spårningssida](https://tracking.bring.se/tracking/) eller i Bring-appen, eller så klistrar du in numret i fältet ovanför. Numret hittar du oftast i orderbekräftelsen som du har fått på mejl eller sms.
+För att spåra ett **Bring**-paket i Sverige (en del av norska Posten Bring-koncernen) klistrar du in ditt kollinummer (17, 18 eller 20 siffror, eller ett `…NO`-nummer) i fältet ovanför, på [Brings spårningssida](https://tracking.bring.se/tracking/) eller i Bring-appen. Bring levererar till ombud, dygnet-runt-öppna paketboxar och hem till dörren, och du kan gratis byta utlämningsställe i appen under `Ändra leverans` innan paketet skickats ut.
 
 ## Brings kollinummer
 
@@ -100,21 +100,25 @@ Peek visar status, platsen för varje skanning på en karta, avsändaren, vikt, 
 
 ## Frågor om att spåra paket med Bring
 
-### Är Bring samma sak som Posten?
+### Är Bring samma sak som Posten eller PostNord?
 
-Bring hör till den norska posten: Posten Bring-koncernen, som Brings sida Om Bring kallar Posten Norge-koncernen. Bring är alltså inte PostNord, den största postoperatören i Sverige. Har du frågor om post hänvisar Bring till Citymail, som inte längre hör till Bring.
+Bring hör till den norska posten (Posten Bring-koncernen / Posten Norge-koncernen) och är skilt från PostNord i Sverige. För frågor om brev hänvisar Bring till Citymail, som inte längre ingår i Bring.
 
-### Hur lång tid tar ett paket med Bring?
+### Hur lång tid tar leverans med Bring?
 
-Bring lovar ingen leveranstid. Spårningen visar `Förväntad leverans` när Bring har en uppskattning. Har butiken inte lovat något räknas varan som försenad när det har gått 30 dagar sedan köpet.
+Bring garanterar ingen fast leveranstid, men spårningen visar `Förväntad leverans` när det finns en uppskattning. Har webbutiken inte lovat någon leveranstid räknas varan som försenad efter 30 dagar från köpet.
 
-### Hur länge ligger paketet kvar hos ombudet eller i paketboxen?
+### Hur länge ligger ett Bring-paket hos ombud eller i paketbox?
 
-Normalt i 7 dagar hos ombudet och i 4 dagar i paketboxen. Hos ombudet kan du förlänga med 7 dagar när du får den första påminnelsen, och i paketboxen till totalt 7 dagar. Sedan går paketet tillbaka till avsändaren.
+Normalt 7 dagar hos ombud (kan förlängas med 7 dagar vid första påminnelsen) och 4 dagar i paketbox (kan förlängas till totalt 7 dagar) gratis i appen eller via `Förläng uthämtningsperioden`. Därefter går paketet i retur till avsändaren.
 
-### Vad händer om mitt Bring-paket försvinner?
+### Tillkommer tull och moms på Bring-paket från Norge eller länder utanför EU?
 
-Kontakta butiken skriftligen. Den ansvarar för paketet tills du har fått det, och det är butiken som reklamerar till Bring. Kräv att den skickar varan på nytt. Kommer den ändå inte kan du begära pengarna tillbaka.
+Ja. Norge står utanför EU, så du betalar 25 % moms, en tullavgift på 3 euro per vara för försändelser upp till 150 euro (sedan 1 juli 2026) samt EU:s hanteringsavgift på 2 euro per vara oavsett värde (sedan 1 november 2026) — plus eventuell deklarationsavgift från transportören om inte butiken tog ut avgifterna i kassan.
+
+### Vad gör jag om mitt Bring-paket är borta, och hur når jag kundservice?
+
+Klagomål om borttappat eller skadat paket tar du skriftligen med butiken, som ansvarar tills du fått varan och reklamerar till Bring (vid skada ber Bring dig kontakta butiken inom två dagar). Brings egen kundservice når du via chatt dygnet runt eller på telefon `0770-11 33 00` vardagar 08.00–17.00.
 
 :::sources
 - [Bring: Spåra din sändning](https://tracking.bring.se/tracking/) – statusarna, uthämtningsperiod, förlängning, levererat på angiven plats, ingen träff, kollinummer och sändningsnummer

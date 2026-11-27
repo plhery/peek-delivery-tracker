@@ -1,14 +1,12 @@
 ---
 title: Kühne+Nagel Sendungsverfolgung — Nummern und Status
-description: Verfolge Kühne+Nagel Landverkehr-, Luft- und Seefrachtsendungen per Referenz oder myKN-Link. Nummernformate, Statusmeldungen, Zoll und Kontakt.
+description: Kühne+Nagel Sendungsverfolgung (myKN): RWM-, RAPI- und 26A-Nummern für Land-, Luft- und Seefracht, 90-Tage-Fenster, Zollstatus, Freight handover und Kontakt.
 slug: kuehne-nagel-sendungsverfolgung
 published: 2026-11-23
-updated: 2026-11-23
+updated: 2026-11-27
 ---
 
-Kühne+Nagel ist einer der weltweit führenden Logistikdienstleister, mit fast 92.000 Mitarbeitern an fast 1.300 Standorten in fast 100 Ländern. Das Unternehmen befördert See-, Luft- und Landverkehrsfracht; die öffentliche Sendungsverfolgung [myKN Public Tracking](https://mykn.kuehne-nagel.com/public-tracking/) sucht Sendungen jeder Verkehrsart.
-
-Die öffentliche myKN-Abfrage deckt Sendungen ab, die in den letzten 90 Tagen gestartet wurden. Da Kühne+Nagel Fracht über Umschlaglager, Flughäfen, Containerterminals und Häfen bewegt, zeigt eine Sendung sowohl physische Strecken-Meilensteine als auch gesonderte Buchungs-, Zoll- und Dokumentenmeldungen.
+Um eine See-, Luft- oder Landverkehrsfracht von **Kühne+Nagel** (fast 92.000 Mitarbeiter an fast 1.300 Standorten in fast 100 Ländern) zu verfolgen, gib deine `RWM`-, `RAPI`- oder `26A`-Sendungsnummer, deinen Frachtbrief (AWB/B/L), deine Kundenreferenz oder einen myKN-Link oben ein — oder suche auf [myKN Public Tracking](https://mykn.kuehne-nagel.com/public-tracking/). Die öffentliche Abfrage zeigt alle Sendungen der letzten 90 Tage samt Strecken-Meilensteinen, Zoll- und Dokumentenmeldungen.
 
 ## Sendungsnummern bei Kühne+Nagel
 
@@ -78,21 +76,25 @@ Auf seiner Website bietet Kühne+Nagel eine Standortsuche und ein Kontaktformula
 
 ## Häufige Fragen
 
+### Wie verfolge ich eine Kühne+Nagel-Sendung mit RWM-, RAPI- oder 26A-Nummer?
+
+Füge eine 12-stellige `RWM`- oder `RAPI`-Nummer oder einen Link von `mykn.kuehne-nagel.com/public-tracking/shipments?query=…` direkt oben ein — Peek erkennt Kühne+Nagel sofort. Bei `26A…` prüft Peek Kühne+Nagel automatisch mit; bei Luftfrachtbriefen (AWB) oder Kundenreferenzen wählst du Kühne+Nagel über **Ändern** aus.
+
 ### Warum findet myKN meine Kühne+Nagel-Sendungsnummer nicht?
 
-Die öffentliche Suche deckt nur Sendungen ab, die in den letzten 90 Tagen gestartet wurden. Prüfe die Nummer auf Tippfehler und warte bei ganz frischen Buchungen auf den ersten erreichten Meilenstein. Trifft eine Referenz auf mehrere Sendungen gleichzeitig zu, bitte den Absender um die `RWM`-, `RAPI`- oder eine andere Kühne+Nagel-Sendungsnummer.
+Die öffentliche Suche auf `mykn.kuehne-nagel.com` deckt nur Sendungen ab, die in den letzten **90 Tagen** gestartet wurden. Prüfe die Nummer auf Tippfehler, warte bei frischen Buchungen auf den ersten erreichten Meilenstein und bitte bei mehrdeutigen Kundenreferenzen den Absender um die eindeutige `RWM`- oder `RAPI`-Nummer.
 
-### Was bedeutet „Freight handover“ oder „Service complete“?
+### Was bedeutet „Freight handover“ oder „Service complete“ bei Kühne+Nagel?
 
-`Freight handover` bedeutet, dass Kühne+Nagel die Fracht an einen Zollagenten oder einen nachgelagerten Frachtführer übergeben hat — die Sendung ist also weiter unterwegs. `Service complete` schließt die beauftragte Kühne+Nagel-Teilstrecke ab (z. B. bis zum Zielhafen); für die Zustellung bis zur Haustür kann eine eigene Nummer des nachgelagerten Spediteurs gelten.
+`Freight handover` heißt, dass Kühne+Nagel die Fracht an einen Zollagenten oder nachgelagerten Frachtführer übergeben hat — die Sendung ist weiter unterwegs. `Service complete` schließt die beauftragte Kühne+Nagel-Teilstrecke ab (etwa bis zum Zielhafen); für den Nachlauf bis zur Tür kann eine eigene Speditionsnummer gelten.
 
 ### Warum erscheinen geplante Termine aus myKN nicht als Scans in Peek?
 
-Auf der öffentlichen myKN-Seite stehen geplante Prognosedaten neben bereits erreichten Meilensteinen. Peek übernimmt nur Meilensteine, die Kühne+Nagel als tatsächlich erreicht meldet, damit geplante Ziele nicht wie abgeschlossene Bewegungen wirken.
+Auf der öffentlichen myKN-Seite stehen Prognosetermine neben tatsächlich erreichten Meilensteinen. Peek übernimmt nur real erreichte Meilensteine (und keine bloßen Plantermine oder `Delivery appointment submission`), damit Prognosen nicht wie abgeschlossene Bewegungen wirken.
 
-### Wie lange bleiben Sendungen im öffentlichen Kühne+Nagel-Tracking sichtbar?
+### Wie erreiche ich den Kühne+Nagel-Kundenservice in Deutschland oder der Schweiz?
 
-Das öffentliche Tracking auf `mykn.kuehne-nagel.com` umfasst Sendungen, die in den letzten 90 Tagen gestartet wurden. Wer mehr sehen will, kann sich bei myKN kostenlos registrieren.
+Nutze die [Standortsuche](https://www.kuehne-nagel.com/de/unternehmen/standorte) für das zuständige Büro oder das Kontaktformular [Experten kontaktieren](https://www.kuehne-nagel.com/de/kontakt/experten-kontaktieren). Die deutsche Zentrale in Bremen erreichst du laut Impressum unter `+49 (0)421 3605-0` oder `info.bremen@kuehne-nagel.com`.
 
 :::sources
 - [Kühne+Nagel Deutschland](https://www.kuehne-nagel.com/de)

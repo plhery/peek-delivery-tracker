@@ -1,12 +1,12 @@
 ---
 title: euShipments tracking: statuses and who delivers your parcel
-description: Track a euShipments order: where the number comes from, what New, Loaded hub or On delivery mean, which local courier delivers it and who to contact.
+description: Track a euShipments parcel across the EU and UK: New, Loaded hub & On delivery statuses, local courier handover, 1–4 day transit times and +359 700 70 755.
 slug: eushipments-tracking
 published: 2026-10-28
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-euShipments is an e-commerce logistics company based in Ruse, Bulgaria. It stores, packs and ships online shops' orders to the countries on its "We deliver to" list, the 27 of the EU and the UK, and hands each parcel to a local courier for the last mile. Track your number on its "Track my order" page, [eushipments.com/tracking](https://eushipments.com/tracking), or paste it in the box above. The number is the one the shop sends you.
+To track a **euShipments** order (fulfilment and cross-border logistics based in Ruse, Bulgaria, covering all 27 EU countries and the UK), paste the shop's tracking code into the box above and choose euShipments, or enter it on [eushipments.com/tracking](https://eushipments.com/tracking). euShipments moves parcels between its European hubs and hands final delivery to over 60 local couriers — once picked up, the tracking page reveals the local courier's name, number and link.
 
 ## euShipments tracking number: what it looks like
 
@@ -86,25 +86,25 @@ euShipments' result shows no expected delivery date and no proof of delivery, so
 
 ## Questions about euShipments tracking
 
-### Is euShipments legit?
+### Is euShipments legit and which countries does it cover?
 
-Yes. It's a logistics company in Ruse, Bulgaria, founded in 2012 as InOut Trade and renamed euShipments.com in 2019. It ships for online shops, including sellers on Temu and eMAG, which it connects to through its own integrations.
+Yes. Founded in Ruse, Bulgaria in 2012 (as InOut Trade, renamed euShipments.com in 2019), it fulfils orders for online shops — including Temu and eMAG sellers — across 28 countries: all 27 EU member states and the UK, partnering with over 60 local couriers and 150,000+ out-of-home pickup locations.
 
-### Which courier delivers my euShipments parcel?
+### Which local courier delivers my euShipments parcel?
 
-A local courier in your country. Once it has the parcel, euShipments' result shows "Courier Name:", "Tracking Number:" and "Tracking Link:" under the table.
+A local courier in your country (such as Speedy, Sameday, FAN Courier, Express One, GLS, DPD, BOX NOW, Pošta Slovenije, Slovenská pošta, PPL, ACS or Geniki Taxydromiki). Once handed over (`Picked up`), euShipments' tracker displays "Courier Name:", "Tracking Number:" and "Tracking Link:" below the scan table.
+
+### What do `New`, `Loaded hub` and `On delivery` mean on euShipments?
+
+`New` means the shop placed the order before warehouse/hub scans begin. `Loaded hub` and `Unloaded hub` track line-haul transfers between euShipments' European hubs (with country codes in brackets). `Picked up` marks handover to the local courier, and `On delivery` means it is out for delivery today.
 
 ### How long does euShipments take to deliver?
 
-It depends on where the shop's stock is. From its centres in Sofia and Ruse, euShipments states next-day delivery to Bulgaria and Romania, and 2 to 4 days to Croatia, Slovenia, Slovakia and Czechia. From Zagreb, Ljubljana or Senec, it states 1 business day to their own countries. For your order, go by the shop's estimate. More in [delivery times](guide:delivery-times).
+From its Sofia and Ruse hubs, euShipments quotes next-day delivery to Bulgaria and Romania and 2–4 days to Croatia, Slovenia, Slovakia and Czechia (1 business day domestically from Zagreb, Ljubljana or Senec). For your specific order, follow the online shop's checkout estimate.
 
-### What does Loaded hub mean on euShipments?
+### How do I contact euShipments or claim a missing parcel?
 
-The parcel was loaded at one of euShipments' hubs for the next leg, named with its country in brackets. `Unloaded hub` is its arrival at the next one.
-
-### Which countries does euShipments deliver to?
-
-Its "We deliver to" list names 28 countries: the 27 of the EU and the UK. In each, a local courier makes the last-mile delivery.
+Start with the online shop — it holds the contract, and under EU rules (Your Europe) must deliver within 30 days unless agreed otherwise and covers transit damage until receipt. For local delivery adjustments, contact the courier listed under "Courier Name:"; euShipments also lists `+359 700 70 755` and `office@eushipments.com`.
 
 :::sources
 - [euShipments: Track Your Order](https://eushipments.com/tracking) – tracking form and its wording, phone, email

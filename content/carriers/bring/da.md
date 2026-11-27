@@ -1,12 +1,12 @@
 ---
 title: Bring sporing: spor din pakke i Danmark
-description: Spor din Bring-pakke: sådan ser nummeret ud, det betyder statusserne, så længe ligger pakken i pakkeshop og pakkeboks, og sådan kontakter du Bring.
+description: Bring sporing i Danmark: 20-/17-cifret kollinummer, statusser, 7 dage i pakkeshop og 4 dage i pakkeboks, told 3 €/2 €, leveringstid og telefon 70 28 60 70.
 slug: bring-spor-pakke
 published: 2026-10-26
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Bring er en del af Posten Bring-koncernen. I Danmark er det Bring E-commerce & Logistics A/S, der leverer pakkerne til en pakkeshop, en pakkeboks eller hjem til døren. Du sporer pakken på [Brings sporingsside](https://tracking.bring.dk/tracking/) eller i Bring-appen, eller du sætter nummeret ind i feltet ovenfor.
+For at spore en **Bring**-pakke i Danmark (Bring E-commerce & Logistics A/S, en del af Posten Bring-koncernen) indsætter du dit 20-, 18- eller 17-cifrede kollinummer (eller et `…NO`-nummer) i feltet ovenfor, på [Brings sporingsside](https://tracking.bring.dk/tracking/) eller i Bring-appen. Bring leverer til omkring 1.100 pakkeshops, døgnåbne pakkebokse og hjem til døren, og du kan gratis ændre leveringssted i appen, før pakken er ude til levering.
 
 ## Brings kollinummer
 
@@ -93,23 +93,23 @@ Peek viser hvert trin med en kort engelsk betegnelse som "Handed in", "At termin
 
 ### Er Bring det samme som Posten eller PostNord?
 
-Ikke helt. Bring og Posten Norge hører begge til Posten Bring-koncernen, og i Danmark leverer Bring E-commerce & Logistics A/S pakkerne med sin egen posttilladelse fra Trafikstyrelsen. PostNord er noget andet: Trafikstyrelsen fører Post Danmark A/S (PostNord A/S) som en anden postvirksomhed.
+Bring og Posten Norge hører begge til Posten Bring-koncernen, og i Danmark leverer Bring E-commerce & Logistics A/S med egen posttilladelse fra Trafikstyrelsen. PostNord (Post Danmark A/S) er en separat postvirksomhed.
 
-### Hvor lang tid tager en pakke med Bring?
+### Hvor lang tid tager en Bring-pakke i Danmark?
 
-Det afhænger af, hvornår pakken er sendt, og hvilket produkt afsenderen har købt, men ifølge Bring kommer de fleste pakker frem inden for 1–2 dage. Efter sine vilkår garanterer Bring dog ingen leveringstid. Under `Forventet levering` ser du Brings bud på dagen.
+Ifølge Bring når de fleste pakker frem inden for 1–2 dage afhængigt af afsendelsestidspunkt og produkt, men efter vilkårene giver Bring ingen leveringsgaranti. Den forventede dag vises under `Forventet levering`.
 
-### Hvor længe ligger en pakke i pakkeshop eller pakkeboks?
+### Hvor længe ligger en Bring-pakke i pakkeshop eller pakkeboks?
 
-7 dage i en pakkeshop og normalt 4 dage i en pakkeboks. Efter vilkårene kan du forlænge til højst 14 og 7 dage i alt. Derefter går pakken retur til afsenderen.
+7 dage i en pakkeshop (kan forlænges til højst 14 dage i alt ved første påmindelse) og normalt 4 dage i en pakkeboks (kan forlænges til 7 dage i alt efter vilkårene). Uafhentede pakker sendes retur til afsenderen.
 
-### Hvad gør jeg, hvis min Bring-pakke er forsvundet?
+### Skal jeg betale told og moms på Bring-pakker fra Norge eller lande uden for EU?
 
-Kontakt webshoppen. Som privatperson reklamerer du til den, du har købt af, og den tager sagen op med Bring. Det er sælgers ansvar, indtil du har fået varen.
+Ja. Norge står uden for EU, så på pakker fra lande uden for EU betaler du 25 % moms, told på 3 euro pr. varepost for varer op til 150 euro (siden 1. juli 2026) samt EU-håndteringsgebyr på 2 euro pr. varepost (siden 1. november 2026), ofte med transportørgebyr, hvis det ikke er betalt i webshoppen.
 
-### Kan man ringe til Bring?
+### Hvordan kontakter jeg Bring ved forsvundet eller beskadiget pakke?
 
-Ja, på 70 28 60 70 på hverdage kl. 8–17. Først svarer en AI-assistent. Chatten på bring.dk er åben døgnet rundt.
+Som privatperson reklamerer du altid til webshoppen, som har ansvaret indtil levering og tager sagen videre med Bring. Brings egen kundeservice træffes døgnet rundt i chatten på `bring.dk` eller på telefon `70 28 60 70` hverdage kl. 8–17 (først AI-assistent).
 
 :::sources
 - [Bring: Om Bring](https://www.bring.dk/om-bring) – Posten Bring-koncernen

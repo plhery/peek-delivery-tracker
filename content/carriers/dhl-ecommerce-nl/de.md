@@ -1,12 +1,12 @@
 ---
 title: DHL eCommerce Niederlande Sendungsverfolgung & Kontakt
-description: DHL eCommerce Paket in den Niederlanden oder Belgien verfolgen (früher DHL Parcel): JVGL-Nummer, Statusmeldungen, ServicePoints und Kontakt.
+description: DHL eCommerce Niederlande & Belgien (früher DHL Parcel) verfolgen: JVGL-/3S-Nummer, Statusmeldungen, 5 Tage im ServicePoint (NL), bpost in Belgien und Chat.
 slug: dhl-ecommerce-netherlands-sendungsverfolgung
 published: 2026-11-22
-updated: 2026-11-22
+updated: 2026-11-27
 ---
 
-DHL eCommerce Netherlands, früher DHL Parcel, liefert Pakete für Online-Shops in den Niederlanden und Belgien; die belgische Website tritt als DHL eCommerce Benelux auf. Verfolge ein Paket über „Track and trace“ auf [dhlecommerce.nl](https://www.dhlecommerce.nl/en/consumer/track-and-trace) mit der Sendungsnummer (die belgische Seite fragt zusätzlich deine Postleitzahl ab), oder füge die Nummer aus der E-Mail des Shops oder von DHL oben ein.
+Um ein Paket von **DHL eCommerce Netherlands** (früher *DHL Parcel*, in Belgien *DHL eCommerce Benelux*) zu verfolgen, füge deine `JVGL`-, `3S`-, `JJD000090`- oder `MDP`-Sendungsnummer oben ein oder nutze „Track and trace“ auf [dhlecommerce.nl](https://www.dhlecommerce.nl/en/consumer/track-and-trace) (für Belgien zusätzlich mit Postleitzahl). In den Niederlanden stellt DHL Montag bis Samstag zu (mit rund 5.000 ServicePoints), in Belgien übernimmt meist [bpost](carrier:bpost).
 
 ## Sendungsnummer von DHL eCommerce Niederlande
 
@@ -85,21 +85,25 @@ Peek fragt DHL eCommerce Netherlands direkt bis zu alle 10 Minuten ab – und bi
 
 ## Häufige Fragen zu DHL eCommerce Niederlande
 
-### Ist DHL eCommerce dasselbe wie DHL Parcel?
+### Ist DHL eCommerce Niederlande dasselbe wie DHL Parcel oder DHL Express?
 
-Ja. DHL Parcel in den Niederlanden und Belgien wurde in DHL eCommerce umbenannt; laut DHL hat sich nur der Name geändert.
+DHL eCommerce ist der neue Name von DHL Parcel in den Niederlanden und Belgien — laut DHL änderte sich nur der Name. Mit DHL Express hat das Netz dagegen nichts zu tun: DHL-Express-Sendungen tragen eine eigene Luftfrachtbriefnummer unter dem Barcode.
 
-### Ist DHL eCommerce dasselbe wie DHL Express?
+### Wie sieht eine DHL-eCommerce-Sendungsnummer aus (JVGL, 3S, JJD)?
 
-Nein. Es sind getrennte Netze: ein DHL-Express-Paket trägt eine Frachtbriefnummer unter dem Barcode.
+Üblich sind `JVGL`-Nummern, `3S`-Barcodes (meist mit drei Buchstaben und Ziffern; vier Buchstaben stammen oft von PostNL), `JJD000090` mit 14–16 Ziffern oder `MDP`-Codes. Fehlt die Nummer, wende dich an den Absender.
 
-### Liefert DHL eCommerce am Wochenende?
+### Liefert DHL eCommerce Niederlande oder Belgien am Samstag?
 
-In den Niederlanden liefert DHL von Montag bis Samstag, also auch samstags. In Belgien wird Montag bis Freitag zugestellt, samstags nur, wenn der Absender die Samstagszustellung gebucht hat.
+In den Niederlanden stellt DHL von Montag bis Samstag tagsüber oder abends zu. In Belgien liefert meist bpost von Montag bis Freitag, samstags nur, wenn der Absender ausdrücklich Samstagszustellung gebucht hat.
 
-### Wie lange lagert DHL mein Paket in einem ServicePoint?
+### Wie lange liegt ein Paket im DHL ServicePoint oder in der Paketstation?
 
-In den Niederlanden höchstens 5 Tage; in Belgien 14 Kalendertage an einem bpost-Punkt und 5 Tage in einer Paketstation.
+In den Niederlanden maximal 5 Tage im ServicePoint oder in der Paketstation (mit Erinnerung nach zwei Tagen), danach geht es zurück. In Belgien wartet es 14 Kalendertage an einem bpost-Punkt und 5 Tage in einer Paketstation.
+
+### Gibt es eine Telefonnummer für DHL eCommerce Niederlande oder Belgien?
+
+Nein — auf den Verbraucherseiten nennt DHL weder für die Niederlande noch für Belgien eine Hotline, sondern nur den Online-Chat (und die App My DHL). Bei Verlust, Schäden oder fehlenden Scans reklamiert der Online-Shop bei DHL; verdächtige Phishing-Mails meldest du als Anhang an `spam.ecommerce@dhl.com`.
 
 :::sources
 - [DHL eCommerce: Track and trace](https://www.dhlecommerce.nl/en/consumer/track-and-trace) – Postleitzahl, Liefertage, Umleitung an ServicePoint, My DHL

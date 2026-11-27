@@ -42,7 +42,7 @@ A página da PIN exibe uma barra de progresso em quatro etapas (`Sortierzentrum`
 | --- | --- |
 | `Sortierzentrum` | Seu item está no centro de triagem da PIN. |
 | `Zustelldepot` | Chegou ao depósito de entrega da sua região. |
-| `In Zustellung` | Saiu para entrega. A PIN costuma entregar no mesmo dia (os carteiros trabalham até a tarde). Se falhar, tentam novamente no dia seguinte. |
+| `In Zustellung` | Saiu para entrega. A PIN costuma entregar no mesmo dia (os carteiros trabalham até a tarde). Se a entrega não for realizada, tentam novamente no dia seguinte. |
 | `Zugestellt`, `Die Sendung wurde zugestellt.` | Entregue. |
 | `Unzustellbar` | Não pôde ser entregue. A PIN devolve itens não entregáveis ao remetente. |
 | `Die Sendung wurde in unserem Sortierzentrum erfasst und wird ohne weitere Aktualisierung der Sendungsverfolgung in den kommenden Tagen zugestellt. Hinweis: Bitte beachten Sie, dass es sich um eine Sendung handelt, bei dem der Zustellverlauf nicht dokumentiert wird. Für zusätzliche Informationen schauen Sie gerne in unsere FAQ.` | A PIN registrou no centro de triagem e entregará nos próximos dias sem novas atualizações: a PIN não documenta o percurso de entrega desse tipo de envio. |
@@ -83,20 +83,20 @@ O Peek não pode contatar a PIN AG nem o remetente por você. A PIN AG informa:
 
 ## Rastreando um item PIN AG com o Peek
 
-Cole o número no [Peek](/), com ou sem parênteses: o Peek junta automaticamente um dígito final entre parênteses aos demais.
+Cole o número no [Peek](/), com ou sem parênteses: o Peek junta um dígito final entre parênteses aos demais.
 
-- **16 dígitos começando com `0100`.** Outras transportadoras também usam 16 dígitos, então o Peek consulta as prováveis conforme seu país (região do celular ou fuso do navegador na web). Na Alemanha, pergunta primeiro à PIN AG enquanto exibe "Consultando serviços de rastreamento…". Se a PIN tiver o envio, mostra "PIN AG tem esta encomenda." e vincula à PIN. Fora da Alemanha, consulta a PIN AG apenas depois que as outras transportadoras não reconhecem o número.
+- **16 dígitos começando com `0100`.** Outras transportadoras também usam 16 dígitos, então o Peek consulta as prováveis conforme seu país (região do celular ou fuso do navegador na web). Na Alemanha, pergunta primeiro à PIN AG enquanto exibe "Consultando serviços de rastreamento…". Se a PIN tiver o envio, mostra "PIN AG está com esta encomenda." e vincula à PIN. Fora da Alemanha, consulta a PIN AG apenas depois que as outras transportadoras não reconhecem o número.
 - **Ainda sem registro.** Adicione mesmo assim. Na Alemanha, quando a PIN ainda não lista o código, o envio mostra "Aguardando a primeira movimentação de PIN AG" e "Provavelmente PIN AG", e o Peek segue consultando. Após uma semana, sugere conferir o número com o remetente ou escolher outra transportadora.
-- **13 dígitos.** O Peek não identifica a PIN apenas por esse formato. Cole mesmo assim (o Peek acompanha mais de 4.500 transportadoras), toque em "Alterar" e escolha PIN AG (digite PIN). Em um item já adicionado, use "Alterar transportadora".
+- **13 dígitos.** O Peek não identifica a PIN apenas por esse formato. Cole mesmo assim (o Peek acompanha mais de 4.500 transportadoras), toque em "Trocar" e escolha PIN AG (digite PIN). Em um item já adicionado, use "Trocar transportadora".
 - **Link da página de rastreamento da PIN** com seu código identifica PIN AG imediatamente ("Transportadora detectada").
 
 **O que o Peek mostra.** O status da PIN e cada etapa com horário no texto original em alemão, no fuso alemão. `Sortierzentrum`, `Zustelldepot` e o aviso sem atualizações futuras aparecem como "Em trânsito"; `In Zustellung` como "Saiu para entrega"; `Zugestellt` como "Entregue"; e `Unzustellbar` como "Precisa de atenção". Um envio aguardando no depósito (quando a página da PIN exibe endereço e horário do depósito) aparece como "Pronta para retirada", independentemente da etapa da PIN. A PIN não informa local das leituras, previsão de entrega, peso nem recebedor. O Peek omite seu endereço e o endereço do depósito: para consultar o depósito, use "Abrir o site de PIN AG", que abre seu número diretamente no rastreador da PIN. Cartas simples não têm rastreamento na PIN, logo o Peek também não consegue acompanhá-las.
 
 Enquanto o item estiver aberto no Peek, ou no dia da entrega com notificações ativadas, o Peek consulta até a cada 10 minutos, e até a cada 2 minutos a partir das 6h (horário alemão) no dia em que a PIN registra saída para entrega enquanto o rastreador próprio responder (via serviços de rastreamento, a cada 15 minutos). Após dois dias sem novidades (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora, e a cada 6 horas após sete dias em "Etiqueta criada".
 
-Quando a leitura mais recente tem quatro dias e o item segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza a data dessa leitura, como "Sem atualização de rastreamento desde seg 12 out". A página então exibe "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando PIN AG.", com o link "Obter ajuda da PIN AG" para o ServiceCenter da PIN. Após três semanas sem novas leituras, mostra "Nenhuma novidade há mais de três semanas. Se ainda não chegou, fale com o vendedor. O Peek continua consultando PIN AG."
+Quando a leitura mais recente tem quatro dias e o item segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza a data dessa leitura, como "Sem atualizações desde seg 12 out". A página do item então exibe "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando PIN AG.", com o link "Pedir ajuda a PIN AG" para o ServiceCenter da PIN. Após três semanas sem novas leituras, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando PIN AG."
 
-O Peek pode notificar em "Cada leitura", "Etapas importantes" ou "Apenas entrega".
+O Peek pode notificar em "Cada movimentação", "Etapas importantes" ou "Só a entrega".
 
 ## Perguntas sobre o rastreamento da PIN AG
 

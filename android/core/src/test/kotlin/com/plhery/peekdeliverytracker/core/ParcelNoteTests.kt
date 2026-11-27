@@ -227,7 +227,8 @@ class ParcelNoteTests {
         store.setDeliveryLiveActivitiesEnabled(false)
         session.enterDemo()
         runCurrent()
-        val secret = "Door code 4512 behind the blue gate"
+        // Words, not digits alone: a snapshot's times hold any run of digits by chance.
+        val secret = "Door code BLUEGATE behind the blue gate"
         for (parcel in store.parcels) {
             store.setNote(parcel, secret)
             store.addFile(parcel, NoteFileUpload(byteArrayOf(1, 2, 3), "Hidden receipt.pdf", PackageFileType.ApplicationPdf))
@@ -245,10 +246,10 @@ class ParcelNoteTests {
                 is ByteArray -> value.decodeToString()
                 else -> value.toString()
             }
-            assertFalse(text, text.contains("4512"))
+            assertFalse(text, text.contains("BLUEGATE"))
             assertFalse(text, text.contains("Hidden receipt"))
         }
-        assertTrue(store.nextDeliveries.none { it.toString().contains("4512") })
+        assertTrue(store.nextDeliveries.none { it.toString().contains("BLUEGATE") })
 
     }
 

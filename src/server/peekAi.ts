@@ -240,20 +240,122 @@ function nthWeekday(year: number, month: number, weekday: number, n: number): nu
   return first + mod(weekday - mod(first + 3, 7), 7) + (n - 1) * 7;
 }
 
+/** Easter Sunday of a year (the Gregorian computus), in days since 1970-01-01. */
+function easterSunday(year: number): number {
+  const a = year % 19, b = Math.floor(year / 100), c = year % 100;
+  const h = (19 * a + b - Math.floor(b / 4) - Math.floor((b - Math.floor((b + 8) / 25) + 1) / 3) + 15) % 30;
+  const l = (32 + 2 * (b % 4) + 2 * Math.floor(c / 4) - h - (c % 4)) % 7;
+  return dateDay(year, 3, 22) + h + l - 7 * Math.floor((a + 11 * h + 22 * l) / 451);
+}
+
+/** Orthodox Easter Sunday of a year (the Julian computus, 13 days behind until 2100), in days since 1970-01-01. */
+function orthodoxEasterSunday(year: number): number {
+  const d = (19 * (year % 19) + 15) % 30;
+  return dateDay(year, 3, 22) + d + (2 * (year % 4) + 4 * (year % 7) - d + 34) % 7 + 13;
+}
+
+/** A year to read holidays from: a date, a day from Easter Sunday or the Orthodox one, the n-th weekday of a month (0 for Monday, -1 for its last), the first weekday on or after a date. */
+function yearOf(year: number) {
+  const easter = easterSunday(year), orthodox = orthodoxEasterSunday(year);
+  return {
+    date: (month: number, date: number) => dateDay(year, month, date),
+    easter: (days: number) => easter + days,
+    orthodox: (days: number) => orthodox + days,
+    nth: (month: number, weekday: number, n: number) => nthWeekday(year, month, weekday, n),
+    from: (month: number, date: number, weekday: number) => dateDay(year, month, date) + mod(weekday - mod(dateDay(year, month, date) + 3, 7), 7),
+  };
+}
+type Year = ReturnType<typeof yearOf>;
+
 /**
- * The days no carrier delivers on in the country: in the US, the six holidays USPS, UPS and FedEx all close on (New
- * Year's Day, Memorial Day, Independence Day, Labor Day, Thanksgiving and Christmas), with the Friday before one that
- * falls on a Saturday and the Monday after one on a Sunday, as they observe it. None for other countries yet.
+ * Holidays in a year: `days`, and `moves`, those that also close a weekday when they fall on a weekend: the Friday
+ * before a Saturday and the Monday after a Sunday ('nearest'), or the first weekday after it not closed already ('next').
  */
-export function closedDays(country: string | null, years: readonly number[]): Set<number> {
+interface Holidays { days(y: Year): number[]; moves?: { to: 'nearest' | 'next'; days(y: Year): number[] } }
+
+// The national holidays of the countries Peek's parcels go to the most, without the regional ones. A day only some of
+// a country's carriers close on is theirs (CARRIER_HOLIDAYS); a day Peek isn't sure about stays a delivery day.
+const HOLIDAYS: Record<string, Holidays> = {
+  // The six USPS, UPS and FedEx all close on.
+  US: { days: (y) => [y.nth(5, 0, -1), y.nth(9, 0, 1), y.nth(11, 3, 4)],
+    moves: { to: 'nearest', days: (y) => [y.date(1, 1), y.date(7, 4), y.date(12, 25)] } },
+  DE: { days: (y) => [y.date(1, 1), y.easter(-2), y.easter(1), y.date(5, 1), y.easter(39), y.easter(50), y.date(10, 3), y.date(12, 25), y.date(12, 26)] },
+  // Whit Monday is a working day for many (the solidarity day).
+  FR: { days: (y) => [y.date(1, 1), y.easter(1), y.date(5, 1), y.date(5, 8), y.easter(39), y.date(7, 14), y.date(8, 15), y.date(11, 1), y.date(11, 11), y.date(12, 25)] },
+  // Saint Francis's Day, 4 October, is a holiday again from 2026.
+  IT: { days: (y) => [y.date(1, 1), y.date(1, 6), y.easter(1), y.date(4, 25), y.date(5, 1), y.date(6, 2), y.date(8, 15), y.date(10, 4), y.date(11, 1), y.date(12, 8), y.date(12, 25), y.date(12, 26)] },
+  ES: { days: (y) => [y.date(1, 1), y.date(1, 6), y.easter(-2), y.date(5, 1), y.date(8, 15), y.date(10, 12), y.date(11, 1), y.date(12, 6), y.date(12, 8), y.date(12, 25)] },
+  // Christmas Eve is a holiday from 2025.
+  PL: { days: (y) => [y.date(1, 1), y.date(1, 6), y.easter(1), y.date(5, 1), y.date(5, 3), y.easter(60), y.date(8, 15), y.date(11, 1), y.date(11, 11), y.date(12, 24), y.date(12, 25), y.date(12, 26)] },
+  // Some couriers deliver on the other bank holidays.
+  GB: { days: (y) => [y.date(1, 1), y.date(12, 25), y.date(12, 26)] },
+  CA: { days: (y) => [y.easter(-2), y.from(5, 18, 0), y.nth(9, 0, 1), y.nth(10, 0, 2)],
+    moves: { to: 'next', days: (y) => [y.date(1, 1), y.date(7, 1), y.date(12, 25), y.date(12, 26)] } },
+  // The King's Birthday and Labour Day differ by state.
+  AU: { days: (y) => [y.easter(-2), y.easter(1), y.date(4, 25)],
+    moves: { to: 'next', days: (y) => [y.date(1, 1), y.date(1, 26), y.date(12, 25), y.date(12, 26)] } },
+  BE: { days: (y) => [y.date(1, 1), y.easter(1), y.date(5, 1), y.easter(39), y.easter(50), y.date(7, 21), y.date(8, 15), y.date(11, 1), y.date(11, 11), y.date(12, 25)] },
+  // Those nearly every canton keeps.
+  CH: { days: (y) => [y.date(1, 1), y.easter(-2), y.easter(1), y.easter(39), y.easter(50), y.date(8, 1), y.date(12, 25), y.date(12, 26)] },
+  // King's Day is kept on the Saturday before when it falls on a Sunday.
+  NL: { days: (y) => [y.date(1, 1), y.easter(1), mod(y.date(4, 27) + 3, 7) === 6 ? y.date(4, 26) : y.date(4, 27), y.easter(39), y.easter(50), y.date(12, 25), y.date(12, 26)] },
+  AT: { days: (y) => [y.date(1, 1), y.date(1, 6), y.easter(1), y.date(5, 1), y.easter(39), y.easter(50), y.easter(60), y.date(8, 15), y.date(10, 26), y.date(11, 1), y.date(12, 8), y.date(12, 25), y.date(12, 26)] },
+  PT: { days: (y) => [y.date(1, 1), y.easter(-2), y.date(4, 25), y.date(5, 1), y.easter(60), y.date(6, 10), y.date(8, 15), y.date(10, 5), y.date(11, 1), y.date(12, 1), y.date(12, 8), y.date(12, 25)] },
+  MX: { days: (y) => [y.date(1, 1), y.nth(2, 0, 1), y.nth(3, 0, 3), y.date(5, 1), y.date(9, 16), y.nth(11, 0, 3), y.date(12, 25)] },
+  // Its days from Easter follow the Orthodox one.
+  GR: { days: (y) => [y.date(1, 1), y.date(1, 6), y.orthodox(-48), y.date(3, 25), y.orthodox(1), y.date(5, 1), y.date(8, 15), y.date(10, 28), y.date(12, 25), y.date(12, 26)] },
+  // Midsummer Eve and Christmas Eve close nearly everything.
+  SE: { days: (y) => [y.date(1, 1), y.date(1, 6), y.easter(-2), y.easter(1), y.date(5, 1), y.easter(39), y.date(6, 6), y.from(6, 19, 4), y.date(12, 24), y.date(12, 25), y.date(12, 26)] },
+  // Saint Brigid's Day is 1 February when it is a Friday, else the first Monday of February.
+  IE: { days: (y) => [y.date(1, 1), mod(y.date(2, 1) + 3, 7) === 4 ? y.date(2, 1) : y.nth(2, 0, 1), y.date(3, 17), y.easter(1), y.nth(5, 0, 1), y.nth(6, 0, 1), y.nth(8, 0, 1), y.nth(10, 0, -1), y.date(12, 25), y.date(12, 26)] },
+  BR: { days: (y) => [y.date(1, 1), y.easter(-2), y.date(4, 21), y.date(5, 1), y.date(9, 7), y.date(10, 12), y.date(11, 2), y.date(11, 15), y.date(11, 20), y.date(12, 25)] },
+};
+
+// England's other bank holidays, which Royal Mail, Parcelforce and DPD close on too, with the weekday after a
+// Christmas, Boxing or New Year's Day on a weekend.
+const BANK_HOLIDAYS: Holidays = { days: (y) => [y.easter(-2), y.easter(1), y.nth(5, 0, 1), y.nth(5, 0, -1), y.nth(8, 0, -1)],
+  moves: { to: 'next', days: (y) => [y.date(1, 1), y.date(12, 25), y.date(12, 26)] } };
+// Amazon delivers on most holidays: it closes on Christmas Day, and in the US on New Year's Day and Thanksgiving too.
+const amazonHolidays = (country: string): Holidays => ({ days: (y) => country === 'US' ? [y.date(1, 1), y.nth(11, 3, 4), y.date(12, 25)] : [y.date(12, 25)] });
+
+/** Carriers whose holidays differ from their country's other carriers': more in one country, or their own in each. */
+const CARRIER_HOLIDAYS: Record<string, { country: string; also: Holidays } | { instead: (country: string) => Holidays }> = {
+  // The federal holidays it closes on besides the six.
+  usps: { country: 'US', also: { days: (y) => [y.nth(1, 0, 3), y.nth(2, 0, 3), y.nth(10, 0, 2)],
+    moves: { to: 'nearest', days: (y) => [y.date(6, 19), y.date(11, 11)] } } },
+  'royal-mail': { country: 'GB', also: BANK_HOLIDAYS },
+  parcelforce: { country: 'GB', also: BANK_HOLIDAYS },
+  'dpd-uk': { country: 'GB', also: BANK_HOLIDAYS },
+  // The national holidays it closes on besides the couriers'.
+  'canada-post': { country: 'CA', also: { days: (y) => [y.easter(1), y.date(9, 30), y.date(11, 11)] } },
+  'amazon-logistics': { instead: amazonHolidays },
+  'amazon-order': { instead: amazonHolidays },
+  'amazon-shipping': { instead: amazonHolidays },
+};
+
+/**
+ * The days the carrier doesn't deliver on in the country, in the years given: the country's holidays (HOLIDAYS), with
+ * the carrier's own where they differ (CARRIER_HOLIDAYS). None in a country not in the table.
+ */
+export function closedDays(country: string | null, years: readonly number[], carrier?: string): Set<number> {
   const closed = new Set<number>();
-  if (country !== 'US') return closed;
+  const national = country ? HOLIDAYS[country] : undefined;
+  if (!country || !national) return closed;
+  const own = carrier ? CARRIER_HOLIDAYS[carrier] : undefined;
+  const lists = !own ? [national] : 'instead' in own ? [own.instead(country)] : own.country === country ? [national, own.also] : [national];
   for (const year of years) {
-    for (const day of [dateDay(year, 1, 1), nthWeekday(year, 5, 0, -1), dateDay(year, 7, 4), nthWeekday(year, 9, 0, 1),
-      nthWeekday(year, 11, 3, 4), dateDay(year, 12, 25)]) {
-      closed.add(day);
-      if (mod(day + 3, 7) === 5) closed.add(day - 1);
-      if (mod(day + 3, 7) === 6) closed.add(day + 1);
+    const y = yearOf(year);
+    const moves = lists.flatMap(({ moves }) => moves ? moves.days(y).map((day) => ({ day, to: moves.to })) : []).sort((a, b) => a.day - b.day);
+    for (const day of [...lists.flatMap((list) => list.days(y)), ...moves.map(({ day }) => day)]) closed.add(day);
+    for (const { day, to } of moves) {
+      const weekday = mod(day + 3, 7);
+      if (weekday < 5) continue;
+      if (to === 'nearest') closed.add(weekday === 5 ? day - 1 : day + 1);
+      else {
+        let next = day + 1;
+        while (mod(next + 3, 7) >= 5 || closed.has(next)) next++;
+        closed.add(next);
+      }
     }
   }
   return closed;
@@ -526,10 +628,10 @@ function call(row: JsonObject, c: string, placed: Placed, local: DateTime, blob:
   const zone = local.zone;
   const today = ordinal(local);
   const days = blob.deliveryDays[c]?.length ? blob.deliveryDays[c]! : DEFAULT_DELIVERY_DAYS;
-  // The holidays of the country the parcel goes to, else of the one its newest placed scan is in.
+  // The holidays of the country the parcel goes to, else of the one its newest placed scan is in, as its carrier keeps them.
   const country = text(isRecord(row.carrier_data) ? row.carrier_data.destination_country : null)
     ?? [...past].reverse().find((scan) => scan.country)?.country ?? null;
-  const closed = closedDays(country, [local.year, local.year + 1]);
+  const closed = closedDays(country, [local.year, local.year + 1], c);
   const delivers: Delivers = (day) => days.includes(mod(day + 3, 7)) && !closed.has(day);
   const estimate = /^\d{4}-\d{2}-\d{2}/.exec(typeof row.expected_delivery === 'string' ? row.expected_delivery.trim() : '')?.[0];
   const carrierDay = estimate ? dayOf(estimate) : null;

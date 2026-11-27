@@ -258,7 +258,61 @@ describe('the model', () => {
       '2026-01-01', '2026-05-25', '2026-07-03', '2026-07-04', '2026-09-07', '2026-11-26', '2026-12-25',
       '2027-01-01', '2027-05-31', '2027-07-04', '2027-07-05', '2027-09-06', '2027-11-25', '2027-12-24', '2027-12-25',
     ]);
-    expect(closedDays('FR', [2026]).size).toBe(0);
+    expect(closedDays('JP', [2026]).size).toBe(0);
+  });
+
+  it("names no day the country closes on over Christmas or Easter, as the parcel's carrier keeps it", () => {
+    // A parcel on Berlin's clock, checked in the afternoon.
+    const de = (carrier: string, now: string, country = 'DE') => ai(row({ carrier, last_synced_at: now,
+      carrier_data: { timezone: 'Europe/Berlin', destination_country: country } },
+    [scan('accepted', new Date(Date.parse(now) - 2 * 86_400_000).toISOString()), scan('in_transit', `${now.slice(0, 10)}T05:00:00Z`)]), now);
+    // On Christmas Eve, a Thursday: Christmas and Boxing Day close Germany, a weekend follows.
+    expect(de('dpd', '2026-12-24T13:30:00Z', 'JP')).toMatchObject({ says: 'today_or_tomorrow', day: '2026-12-25' });
+    expect(de('dpd', '2026-12-24T13:30:00Z')).toMatchObject({ says: 'by_day', day: '2026-12-28' });
+    // On Easter Sunday: DPD keeps Easter Monday, Amazon delivers on it.
+    expect(de('dpd', '2026-04-05T12:30:00Z')).toMatchObject({ says: 'by_day', day: '2026-04-07' });
+    expect(de('amazon-logistics', '2026-04-05T12:30:00Z')).toMatchObject({ says: 'today_or_tomorrow', day: '2026-04-06' });
+  });
+
+  it('works out each country\'s holidays for the year, Easter\'s with it, and a carrier\'s own', () => {
+    const days = (country: string, years: number[], carrier?: string) =>
+      [...closedDays(country, years, carrier)].map((day) => new Date(day * 86_400_000).toISOString().slice(0, 10)).sort();
+    // Good Friday, Easter Monday, Ascension and Whit Monday move with Easter, 5 April 2026 and 28 March 2027.
+    expect(days('DE', [2026, 2027])).toEqual([
+      '2026-01-01', '2026-04-03', '2026-04-06', '2026-05-01', '2026-05-14', '2026-05-25', '2026-10-03', '2026-12-25', '2026-12-26',
+      '2027-01-01', '2027-03-26', '2027-03-29', '2027-05-01', '2027-05-06', '2027-05-17', '2027-10-03', '2027-12-25', '2027-12-26',
+    ]);
+    // Greece's follow the Orthodox Easter, 12 April 2026.
+    expect(days('GR', [2026])).toEqual(expect.arrayContaining(['2026-02-23', '2026-04-13']));
+    expect(days('GR', [2026])).not.toContain('2026-04-06');
+    // Poland's Corpus Christi and Christmas Eve; Italy's Saint Francis, a Monday in 2027.
+    expect(days('PL', [2026])).toEqual(expect.arrayContaining(['2026-06-04', '2026-12-24']));
+    expect(days('IT', [2027])).toContain('2027-10-04');
+    // King's Day on a Sunday is kept the Saturday before; Midsummer Eve is the Friday from 19 June.
+    expect(days('NL', [2025, 2026])).toEqual(expect.arrayContaining(['2025-04-26', '2026-04-27']));
+    expect(days('SE', [2026, 2027])).toEqual(expect.arrayContaining(['2026-06-19', '2027-06-25']));
+    // In the UK only Christmas, Boxing and New Year's Day close every carrier; Royal Mail keeps every bank holiday, and
+    // the Monday after a Boxing Day on a Saturday, or both weekdays after a Christmas on one.
+    expect(days('GB', [2026])).toEqual(['2026-01-01', '2026-12-25', '2026-12-26']);
+    expect(days('GB', [2026, 2027], 'royal-mail')).toEqual([
+      '2026-01-01', '2026-04-03', '2026-04-06', '2026-05-04', '2026-05-25', '2026-08-31', '2026-12-25', '2026-12-26', '2026-12-28',
+      '2027-01-01', '2027-03-26', '2027-03-29', '2027-05-03', '2027-05-31', '2027-08-30', '2027-12-25', '2027-12-26', '2027-12-27', '2027-12-28',
+    ]);
+    // A carrier's own days hold only in its country.
+    expect(days('DE', [2026], 'royal-mail')).toEqual(days('DE', [2026]));
+    // USPS also closes on the other federal holidays, Juneteenth 2027 on the Friday before.
+    expect(days('US', [2026, 2027], 'usps')).toEqual(expect.arrayContaining([
+      '2026-01-19', '2026-02-16', '2026-06-19', '2026-10-12', '2026-11-11', '2027-06-18',
+    ]));
+    expect(days('US', [2026])).not.toContain('2026-11-11');
+    // Canada Post keeps Easter Monday, Truth and Reconciliation and Remembrance Day besides the couriers' days.
+    expect(days('CA', [2026])).toEqual([
+      '2026-01-01', '2026-04-03', '2026-05-18', '2026-07-01', '2026-09-07', '2026-10-12', '2026-12-25', '2026-12-26', '2026-12-28',
+    ]);
+    expect(days('CA', [2026], 'canada-post')).toEqual(expect.arrayContaining(['2026-04-06', '2026-09-30', '2026-11-11']));
+    // Amazon closes on Christmas Day, and in the US on New Year's Day and Thanksgiving, on no weekday instead.
+    expect(days('DE', [2026], 'amazon-order')).toEqual(['2026-12-25']);
+    expect(days('US', [2027], 'amazon-shipping')).toEqual(['2027-01-01', '2027-11-25', '2027-12-25']);
   });
 
   it("places the scans to tell how far the parcel has come, on the clock of the destination it reached", () => {

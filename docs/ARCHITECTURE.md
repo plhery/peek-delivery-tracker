@@ -909,7 +909,9 @@ number, which no carrier tracks.
 - **Peek AI**: when Peek has a strong hint of when a parcel will come, its row is served with
   `peek_ai` (`src/server/peekAi.ts`), Peek's own estimate beside the carrier's: not today, by
   a time, by a day, today or tomorrow, this week, by the end of next week or maybe sooner,
-  with why and how often such a call came true. Each kind of call was right at least 8 times
+  with why and how often such a call came true. The days it counts are those the carrier
+  delivers on, without the holidays of the country the parcel goes to as the carrier keeps
+  them (`closedDays`). Each kind of call was right at least 8 times
   in 10 on the parcels Peek has followed; below that, once the carrier has planned the
   delivery among its steps, while an hour or slot it names for today is still to come, or
   against a window of days it gives, it says nothing. "By a time" is said only of a round that

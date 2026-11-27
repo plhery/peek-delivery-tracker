@@ -14870,6 +14870,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0056a7"
     },
     {
+      "id": "relais-colis",
+      "catalog": "relais-colis",
+      "slug": "relais-colis-tracking",
+      "title": "Rastreamento Relais Colis: status, retirada e contato",
+      "name": "Relais Colis",
+      "color": "#7bb928"
+    },
+    {
       "id": "poste-italiane",
       "catalog": "poste-italiane",
       "slug": "rastreamento-poste-italiane",
@@ -16516,6 +16524,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Xuchuan Logistics: códigos XC, entrega e contato",
       "name": "Xuchuan International Logistics",
       "color": "#0a2463"
+    },
+    {
+      "id": "samus",
+      "catalog": "samus",
+      "slug": "samus-tracking",
+      "title": "Rastreamento SAMUS: códigos, status e retirada em Vilnius",
+      "name": "SAMUS",
+      "color": "#e50079"
     },
     {
       "id": "dk-logistics-ee",
@@ -19724,6 +19740,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0056a7"
     },
     {
+      "id": "relais-colis",
+      "catalog": "relais-colis",
+      "slug": "relais-colis-tracking",
+      "title": "Relais Colis 快递查询：单号、法语状态与自提指南",
+      "name": "Relais Colis",
+      "color": "#7bb928"
+    },
+    {
       "id": "poste-italiane",
       "catalog": "poste-italiane",
       "slug": "poste-italiane-tracking",
@@ -21386,6 +21410,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "旭川国际物流（Xuchuan Logistics）查询：XC 单号、派送与客服",
       "name": "Xuchuan International Logistics",
       "color": "#0a2463"
+    },
+    {
+      "id": "samus",
+      "catalog": "samus",
+      "slug": "samus-tracking",
+      "title": "SAMUS 快递查询：单号、立陶宛语状态与维尔纽斯自提",
+      "name": "SAMUS",
+      "color": "#e50079"
     },
     {
       "id": "dk-logistics-ee",

@@ -20,7 +20,7 @@ Ecoscooting 未公开发布单号格式。实际常见格式如下（数字均�
 | `CNPRT48291736058419263748` | `CNPRT` 加 20 位数字，发往葡萄牙的包裹。 |
 | `280010000482917360` | 18 位数字，Ecoscooting 在西班牙使用的面单号：邮编、`0000` 再加 9 位数字。 |
 
-外观相近的单号可能属于其他公司。在速卖通（AliExpress）订单上常见的 `LP` 加 14 位数字是速卖通的物流参考号，可通过[菜鸟（Cainiao）](carrier:cainiao)查询。从中国发出的包裹在进入本地派送前会先完成清关，例如由清关代理 CACESA 处理。如果 ecoscooting.com 查不到你的单号，请改查订单页面上的原始单号。另请参阅[追踪来自中国的包裹](guide:tracking-from-china)（英文）。
+外观相近的单号可能属于其他公司。在速卖通（AliExpress）订单上常见的 `LP` 加 14 位数字是速卖通的物流参考号，可通过[菜鸟（Cainiao）](carrier:cainiao)查询。从中国发出的包裹在进入本地派送前会先完成清关，例如由清关代理 [CACESA](carrier:cacesa) 处理。如果 ecoscooting.com 查不到你的单号，请改查订单页面上的原始单号。另请参阅[追踪来自中国的包裹](guide:tracking-from-china)（英文）。
 
 未知单号会显示 `No data found` 以及提示你核对订单号的消息。
 

@@ -20,7 +20,7 @@ A Ecoscooting não publica um formato fixo de código. Na prática, seus código
 | `CNPRT48291736058419263748` | `CNPRT` seguido de 20 dígitos, encomenda para Portugal. |
 | `280010000482917360` | 18 dígitos, etiqueta da Ecoscooting na Espanha: o código postal, `0000` e depois 9 dígitos. |
 
-Números parecidos pertencem a outras transportadoras. Em pedidos do AliExpress, costuma aparecer um código `LP` com 14 dígitos: essa é a referência logística do AliExpress, rastreada pela [Cainiao](carrier:cainiao). Uma encomenda vinda da China passa pela alfândega antes da entrega local, por exemplo com a CACESA, despachante aduaneira. Se ecoscooting.com não reconhecer seu número, rastreie o código informado na página do pedido. Saiba mais em [como rastrear uma encomenda da China](guide:tracking-from-china).
+Números parecidos pertencem a outras transportadoras. Em pedidos do AliExpress, costuma aparecer um código `LP` com 14 dígitos: essa é a referência logística do AliExpress, rastreada pela [Cainiao](carrier:cainiao). Uma encomenda vinda da China passa pela alfândega antes da entrega local, por exemplo com a [CACESA](carrier:cacesa), despachante aduaneira. Se ecoscooting.com não reconhecer seu número, rastreie o código informado na página do pedido. Saiba mais em [como rastrear uma encomenda da China](guide:tracking-from-china).
 
 Um código desconhecido exibe `No data found` e uma mensagem pedindo para conferir o número do pedido.
 

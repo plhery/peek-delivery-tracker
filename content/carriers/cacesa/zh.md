@@ -1,6 +1,6 @@
 ---
 title: CACESA 物流与清关查询：状态含义、关税缴纳与派送商
-description: 查询经由 CACESA 发往西班牙或葡萄牙的包裹：了解追踪单号、英文状态含义、清关与税费缴纳流程、末端派送说明以及官方联系方式。
+description: 查询经由 CACESA 发往西班牙或葡萄牙的包裹：了解追踪单号、英文状态含义、清关与税费缴纳流程、末端派送说明以及联系方式。
 slug: cacesa-tracking
 published: 2026-11-27
 updated: 2026-11-27
@@ -10,9 +10,9 @@ CACESA（Compañía Auxiliar al Cargo Express）是一家位于马德里的报�
 
 ## CACESA 追踪单号该用哪一个
 
-CACESA 未公布固定的单号格式。其追踪页要求输入 “Shipment number”（运单号），也就是商家或其中国合作物流随包裹提供的编号，通常位于商家的发货邮件或订单页面中。CACESA 与你下单的购物网站没有直接往来。
+CACESA 未公布单号格式。其追踪页要求输入 “Shipment number”（运单号），也就是商家或其中国物流公司随包裹提供的编号，位于商家的发货邮件或订单页面中。CACESA 与你下单的购物网站没有直接往来。
 
-CACESA 追踪页上常见的格式（以下数字均为虚构示例）：
+CACESA 追踪页上见到的格式（以下数字均为虚构示例）：
 
 | 格式 | 说明 |
 | --- | --- |
@@ -20,7 +20,7 @@ CACESA 追踪页上常见的格式（以下数字均为虚构示例）：
 | `CNESP48291736548291736548` | `CNESP` 后接 20 位数字，发往西班牙的包裹。 |
 | `CNPRT48291736548291736548` | `CNPRT` 后接 20 位数字，发往葡萄牙的包裹。 |
 
-Peek 目录没有将上述任何格式直接绑定给 CACESA。`CNESP` 和 `CNPRT` 单号同时也属于菜鸟在西班牙和葡萄牙的派送服务 [Ecoscooting](carrier:ecoscooting)；以 `LP` 开头加 14 位数字则是速卖通物流参考号，可通过 [菜鸟（Cainiao）](carrier:cainiao) 追踪。如果 CACESA 官网查不到你的单号，请尝试商家邮件里标明的承运商。更多格式说明请参阅 [追踪单号格式](guide:tracking-number-formats)（英文）。
+Peek 目录没有将上述任何格式直接绑定给 CACESA。`CNESP` 和 `CNPRT` 单号同时也属于菜鸟在西班牙和葡萄牙的派送服务 [Ecoscooting](carrier:ecoscooting)；以 `LP` 开头加 14 位数字则是速卖通物流参考号，可通过 [菜鸟（Cainiao）](carrier:cainiao) 追踪。如果 CACESA 的追踪页查不到你的单号，请尝试商家邮件里标明的承运商。更多格式说明请参阅 [追踪单号格式](guide:tracking-number-formats)（英文）。
 
 你可以在 CACESA 追踪页一次输入多个单号。如果提示未找到，CACESA 表示请先核对单号，刚发出的订单可能尚未同步到其系统，较早期的包裹也会从系统中清除。
 
@@ -44,9 +44,9 @@ CACESA 西班牙语页面显示西班牙语状态，英文页面显示如下英�
 
 “going out” 通常是 CACESA 显示的最后一条记录。此后包裹交由末端运输公司处理，CACESA 页面也会提示你向该运输公司查询派送信息。
 
-## CACESA 末端派送、错过派送与退货
+## CACESA 末端派送、派送未成功与退货
 
-CACESA 明确说明：“执行派送的不是 Cacesa，而是你的网店卖家选择的运输公司。”CACESA 不会列出这些派送公司的名称，因此需查看商家的发货邮件或订单页面。
+CACESA 说得很直白：“it is not Cacesa who performs the delivery but the transport company chosen by your internet trader”（执行派送的不是 Cacesa，而是你的网店卖家选择的运输公司）。CACESA 不会列出这些派送公司的名称，因此需查看商家的发货邮件或订单页面。
 
 派送日期、自提点、快递柜和周六派送均由末端派送公司决定，CACESA 对此不做说明，相关问题请直接询问派送公司。CACESA 表示，派送公司在完成其规定次数的派送尝试后会将包裹退回卖家，但未公布具体尝试次数。
 
@@ -54,7 +54,7 @@ CACESA 明确说明：“执行派送的不是 Cacesa，而是你的网店卖家
 
 CACESA 不受理个人买家的退货寄递。如需退货，请与商家或派送公司安排。
 
-## CACESA 清关：缴税、提交材料与常见问题
+## CACESA 清关：缴税、提交材料与问题
 
 **收到 CACESA 邮件或短信。** 如果通知称包裹正在等待清关，说明海关需要补充资料，或需要先缴纳税费才能放行。CACESA 要求将以下材料发送至 atc@cacesa.com：
 
@@ -76,7 +76,7 @@ CACESA 不受理个人买家的退货寄递。如需退货，请与商家或派�
 
 ## CACESA 联系电话与电子邮箱
 
-以下渠道公布于 cacesa.com。CACESA 没有葡萄牙语官网，在葡萄牙也无办公室，葡萄牙收件人使用相同的联系方式。
+以下渠道公布于 cacesa.com。CACESA 没有葡萄牙语网站，在葡萄牙也无办公室，葡萄牙收件人使用相同的联系方式。
 
 - **电子邮箱：** atc@cacesa.com，用于处理暂扣包裹、提交资料、税费缴纳及弃货申请。
 - **电话：** +34 91 746 1860（总部，Calle Golf 23, Madrid）或 +34 91 333 54 50（马德里巴拉哈斯航空货运办公室）。CACESA 未公布服务时间，也未设专门的收件人热线。
@@ -85,13 +85,13 @@ CACESA 不受理个人买家的退货寄递。如需退货，请与商家或派�
 
 ## 使用 Peek 追踪 CACESA 包裹
 
-由于没有专属于 CACESA 的单号格式，[Peek](/) 不会仅凭单号自动识别为 CACESA。请添加单号后点击“更改”选择 CACESA，或直接粘贴 cacesa.com 追踪链接（带有 `busqueda=` 参数的 `/en/tracking` 或 `/es/seguimiento` 链接），此类链接无论单号格式如何都会直接识别为 CACESA。而 `CNESP` 或 `CNPRT` 单号会立即被识别为 Ecoscooting。
+由于没有专属于 CACESA 的单号格式，[Peek](/) 不会仅凭单号识别为 CACESA。请添加单号后点“更换”选择 CACESA，或直接粘贴 cacesa.com 追踪链接（带有 `busqueda=` 参数的 `/en/tracking` 或 `/es/seguimiento` 链接），此类链接无论单号格式如何都会直接识别为 CACESA。而 `CNESP` 或 `CNPRT` 单号会立即被识别为 Ecoscooting。
 
-Peek 会按原文展示 CACESA 的英文状态，轨迹时间按马德里时间读取并换算为你设备的本地时区。送达记录会归为“已送达”，`Start Custom clearance Process` 显示为“清关中”，绿色通道放行后显示为继续运输；不过 Peek 不显示具体税费金额，也不能代缴税款。由于 CACESA 不提供地点信息，地图上不会显示定位点，也没有预计送达日、重量、寄件人或收件人信息。
+Peek 会按原文展示 CACESA 的英文状态，轨迹时间按马德里时间读取并换算为你设备的本地时区。送达记录会显示为“已签收”，`Start Custom clearance Process` 显示为“清关中”，绿色通道放行后显示为继续运输；不过 Peek 不显示具体税费金额，也不能代缴税款。由于 CACESA 不提供地点信息，地图上不会显示定位点，也没有预计送达日、重量、寄件人或收件人信息。
 
-CACESA 不披露末端派送公司，且包裹会沿用同一单号继续运输。只有在单号明确属于另一家承运商时 Peek 才能自动接力追踪：例如 `CNESP` 和 `CNPRT` 转由 Ecoscooting 追踪；邮政单号会匹配 Peek 判断的所在国家邮政（依据手机地区或网页端连接地），例如西班牙的 [Correos](carrier:correos-spain) 或葡萄牙的 [CTT](carrier:ctt)；以及 [CTT Express](carrier:ctt-express) 的自有单号。`CNES` 和 `LP` 单号不会自动接力。当你打开包裹页面，或在开启通知的情况下进入派送日时，Peek 最高每 10 分钟检查一次（其余时间每小时一次），并可在状态变化时通知你。连续两天无新动态时（处于“已创建运单”或“承运商已揽收”时为 12 小时），Peek 改为每小时检查一次。
+CACESA 不披露末端派送公司，且包裹会沿用同一单号继续运输。只有在单号明确属于另一家快递公司时 Peek 才能接力追踪：例如 `CNESP` 和 `CNPRT` 转由 Ecoscooting 追踪；邮政单号会匹配 Peek 判断的所在国家邮政（依据手机地区或网页端连接地），例如西班牙的 [Correos](carrier:correos-spain) 或葡萄牙的 [CTT](carrier:ctt)；以及 [CTT Express](carrier:ctt-express) 的自有单号。`CNES` 和 `LP` 单号不会被接力追踪。当你打开包裹页面，或在开启通知的情况下进入派送日时，Peek 最高每 10 分钟检查一次（其余时间每小时一次），并可在状态变化时通知你。连续两天无新动态时（处于“已生成面单”或“已揽收”时为 12 小时），Peek 改为每小时检查一次。
 
-## CACESA 追踪常见问题
+## 关于 CACESA 物流查询的问题
 
 ### 什么是 CACESA Postal？
 
@@ -103,7 +103,7 @@ CACESA（又称 Cacesa Postal 或 CACESA Logistics）是总部位于马德里的
 
 ### CACESA 处理速卖通（AliExpress）的清关吗？
 
-CACESA 官网不点名具体购物平台。它说明自己是从中国集运公司接收包裹并为买家清关，与买家下单的网站没有直接联系。
+CACESA 的页面不点名具体购物平台。它说明自己是从中国集运公司接收包裹并为买家清关，与买家下单的网站没有直接联系。
 
 ### CACESA 清关完成后多久能收到包裹？
 

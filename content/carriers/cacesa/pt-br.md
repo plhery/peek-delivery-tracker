@@ -10,7 +10,7 @@ A CACESA (Compañía Auxiliar al Cargo Express) é uma despachante aduaneira em 
 
 ## Qual código de rastreio usar na CACESA
 
-A CACESA não publica um padrão único de código. Seu rastreador pede o "Shipment number", isto é, o código que a loja ou a operadora logística chinesa enviou junto com a encomenda. Ele aparece no e-mail de envio da loja ou na página do pedido. A CACESA não tem contato direto com o site onde você fez a compra.
+A CACESA não publica um formato de código. Seu rastreador pede o "Shipment number", isto é, o código que a loja ou a operadora logística chinesa enviou junto com a encomenda. Ele aparece no e-mail de envio da loja ou na página do pedido. A CACESA não tem contato direto com o site onde você fez a compra.
 
 Formatos observados no rastreador da CACESA (dígitos inventados):
 
@@ -44,7 +44,7 @@ O canal verde (*Green channel*) é o caminho sem pendências. As perguntas frequ
 
 A linha "going out" costuma ser a última exibida pela CACESA. A partir daí, a encomenda está com a transportadora local, e a página da CACESA orienta buscar detalhes de entrega com essa empresa.
 
-## Entrega final, tentativas perdidas e devoluções na CACESA
+## Entrega final, entregas não realizadas e devoluções na CACESA
 
 A CACESA explica de forma direta: não é ela quem faz a entrega, mas sim a empresa de transporte escolhida pela loja virtual. Como a CACESA não informa o nome dessas transportadoras, procure essa informação no e-mail da loja ou na página do pedido.
 
@@ -85,11 +85,11 @@ Conforme listado em cacesa.com. A CACESA não tem site em português nem escrit�
 
 ## Como acompanhar encomendas CACESA no Peek
 
-Como nenhum formato de código é exclusivo da CACESA, o [Peek](/) nunca identifica a CACESA automaticamente pelo número. Adicione o código e selecione CACESA em "Alterar", ou cole um link de rastreio de cacesa.com (`/en/tracking` ou `/es/seguimiento` com `busqueda=`), que identifica a CACESA para qualquer código. Já códigos `CNESP` ou `CNPRT` identificam a Ecoscooting na hora.
+Como nenhum formato de código é exclusivo da CACESA, o [Peek](/) nunca identifica a CACESA pelo número. Adicione o código e selecione CACESA em "Trocar", ou cole um link de rastreio de cacesa.com (`/en/tracking` ou `/es/seguimiento` com `busqueda=`), que identifica a CACESA para qualquer código. Já códigos `CNESP` ou `CNPRT` identificam a Ecoscooting na hora.
 
 O Peek exibe os textos originais em inglês da CACESA, lendo os horários no fuso de Madri e convertendo para o fuso do seu aparelho. Uma linha de entrega aparece como "Entregue". `Start Custom clearance Process` aparece como "Na alfândega" e a liberação pelo canal verde volta a avançar, mas o Peek não exibe o valor dos impostos nem faz pagamentos. Como a CACESA não informa locais, nada é marcado no mapa, e não há previsão de entrega, peso, remetente ou destinatário.
 
-A CACESA não informa o nome da transportadora final, e o pacote segue com o mesmo código. O Peek só consegue continuar o rastreamento quando esse código pertence claramente a outra transportadora: Ecoscooting para `CNESP` e `CNPRT`; para códigos postais internacionais, os correios do país onde o Peek situa você (pela região do celular ou, na web, pela origem da conexão), como [Correos](carrier:correos-spain) na Espanha ou [CTT](carrier:ctt) em Portugal; ou [CTT Express](carrier:ctt-express) para os códigos dela. Códigos `CNES` e `LP` não recebem acompanhamento automático posterior. Enquanto o pacote estiver aberto no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta até a cada 10 minutos (caso contrário, de hora em hora) e pode avisar quando o status mudar. Após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), passa a verificar de hora em hora.
+A CACESA não informa o nome da transportadora final, e o pacote segue com o mesmo código. O Peek só consegue continuar o rastreamento quando esse código pertence claramente a outra transportadora: Ecoscooting para `CNESP` e `CNPRT`; para códigos postais internacionais, os correios do país onde o Peek situa você (pela região do celular ou, na web, pela origem da conexão), como [Correos](carrier:correos-spain) na Espanha ou [CTT](carrier:ctt) em Portugal; ou [CTT Express](carrier:ctt-express) para os códigos dela. Códigos `CNES` e `LP` não são seguidos depois. Enquanto o pacote estiver aberto no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta até a cada 10 minutos (caso contrário, de hora em hora) e pode avisar quando o status mudar. Após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), passa a verificar de hora em hora.
 
 ## Perguntas sobre o rastreio CACESA
 

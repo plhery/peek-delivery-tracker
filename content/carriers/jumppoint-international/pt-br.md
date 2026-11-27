@@ -15,7 +15,7 @@ A Jumppoint International Express gera códigos de 14 caracteres iniciados por `
 | Formato (inventado) | O que é |
 | --- | --- |
 | `JPHK4829173605` | Código de 14 caracteres da Jumppoint International Express (`JP` + 2 letras + 10 dígitos). |
-| `JPUS7391846208` | Outro exemplo de código internacional `JP` de 14 caracteres. |
+| `JPUS7391846208` | Outro código internacional `JP` de 14 caracteres. |
 
 O serviço expresso local de Hong Kong da Jumppoint tem rastreador próprio em `tracking.jumppoint.io`, para códigos compostos por `JP` e 12 dígitos (que o Peek acompanha como Jumppoint). Já códigos `JP` com duas letras e 10 dígitos pertencem a [int-tracking.jumppoint.io](https://int-tracking.jumppoint.io/) ou ao Peek. Veja [formatos de código de rastreamento](guide:tracking-number-formats).
 
@@ -90,11 +90,11 @@ A Jumppoint mantém dois portais separados: envios expressos domésticos de Hong
 Fale com o atendimento da Jumppoint pelo WhatsApp `+852 6058 8546`, pelo e-mail `info@jumppoint.io` ou pelo formulário on-line em [jumppoint.io/en/contact-us](https://www.jumppoint.io/en/contact-us).
 
 :::sources
-- [Jumppoint: Official Website](https://www.jumppoint.io/en/home) – Hong Kong e-commerce logistics platform and domestic vs. international tracking portals
-- [Jumppoint: International Economy Express](https://www.jumppoint.io/en/international-express) – 125+ destinations, transit times (SEA, Taiwan, EU, US), HKD 200 warranty and pickup schedule
-- [Jumppoint: About Us](https://www.jumppoint.io/en/about-us) – founded 2020 in Hong Kong, *jumppoint.ai* routing platform and Asia-Pacific footprint
-- [Jumppoint: Contact Us (English)](https://www.jumppoint.io/en/contact-us) – WhatsApp `+852 6058 8546`, `info@jumppoint.io` and Hung Hom Kowloon headquarters
-- [Jumppoint: Contact Us (Help URL)](https://www.jumppoint.io/contact-us) – official help URL linked by Peek
-- [Jumppoint International Tracking Portal](https://int-tracking.jumppoint.io/) – dedicated international `JP` waybill tracker
-- [Universal Parcel Scraper: jumppoint-international](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/jumppoint-international) – `JP[A-Z]{2}\d{10}` format, `int-tracking.jumppoint.io` link rule, 12-label status mapping, browser-backed lookup and help URL
+- [Jumppoint: Official Website](https://www.jumppoint.io/en/home) – plataforma de logística de e-commerce de Hong Kong e os portais de rastreamento doméstico e internacional
+- [Jumppoint: International Economy Express](https://www.jumppoint.io/en/international-express) – mais de 125 destinos, prazos de trânsito (Sudeste Asiático, Taiwan, UE, EUA), garantia de HKD 200 e agenda de coleta
+- [Jumppoint: About Us](https://www.jumppoint.io/en/about-us) – fundada em 2020 em Hong Kong, plataforma de roteamento *jumppoint.ai* e presença na Ásia-Pacífico
+- [Jumppoint: Contact Us (English)](https://www.jumppoint.io/en/contact-us) – WhatsApp `+852 6058 8546`, `info@jumppoint.io` e sede em Hung Hom, Kowloon
+- [Jumppoint: Contact Us (Help URL)](https://www.jumppoint.io/contact-us) – página de ajuda oficial que o Peek indica
+- [Jumppoint International Tracking Portal](https://int-tracking.jumppoint.io/) – rastreador dedicado aos códigos internacionais `JP`
+- [Universal Parcel Scraper: jumppoint-international](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/jumppoint-international) – formato `JP[A-Z]{2}\d{10}`, regra de links `int-tracking.jumppoint.io`, mapeamento de 12 status, consulta via navegador e página de ajuda
 :::

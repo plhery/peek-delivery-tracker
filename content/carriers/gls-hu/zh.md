@@ -12,7 +12,7 @@ GLS 匈牙利（GLS Hungary，*GLS General Logistics Systems Hungary Csomag-Logi
 
 请查看网店发货邮件、FlexDeliveryService 通知、Viber/短信消息或快递员留下的通知卡。GLS Hungary 包裹号为 10 位或 11 位数字：
 
-| 格式（示例编号） | 含义 |
+| 格式（虚构） | 含义 |
 | --- | --- |
 | `3482917364` | 10 位匈牙利国内 GLS 包裹号。 |
 | `03482917364` | 首位补 0 写成的 11 位匈牙利国内 GLS 包裹号。 |
@@ -38,7 +38,7 @@ GLS 匈牙利（GLS Hungary，*GLS General Logistics Systems Hungary Csomag-Logi
 
 - **运输时效：** 匈牙利境内包裹通常于**次工作日**（`< 24 小时`）送达，周一至周五工作时间派送；**布达佩斯支持周六派送**，并可选 *Guaranteed24Service*。发往欧洲周边国家需 **24–48 小时**，发往较远欧洲国家需 **48–120 小时**（通常 72–120 小时）。
 - **重量与尺寸上限：** 国内与出口件均限重 **40 公斤**；最大尺寸为 **长 200 厘米 × 宽 80 厘米 × 高 60 厘米**，且长度加周长（`2 × 高 + 2 × 宽 + 1 × 最长边`）不超过 **300 厘米**。
-- **错过派送与邻居代收：** 首次上门无人时，GLS 会先询问邻居是否可代收签字；否则留下通知卡并将包裹带回分拨站。系统会安排**第二次派送**，在退回寄件人前的 **5 个工作日保管期**内还可申请**第三次派送**。
+- **派送未成功与邻居代收：** 首次上门无人时，GLS 会先询问邻居是否可代收签字；否则留下通知卡并将包裹带回分拨站。GLS 会安排**第二次派送**，在退回寄件人前的 **5 个工作日保管期**内还可申请**第三次派送**。
 - **FlexDeliveryService、自提点与快递柜：** 若寄件人启用 *FlexDeliveryService*（将你的邮箱提供给 GLS），你可以改选派送日期、新地址、分拨站自提（保管 **5 个工作日**）、近 1,000 家 **GLS Parcel Shop**（保管 **5 个工作日**）或 **GLS Parcel Locker 快递柜**（保管 **5 天**；含开柜码的通知通过邮件与 Viber 发送，未用 Viber 则发邮件与短信）。
 - **货到付款（COD）：** 当寄件人在 *CashService* 之外同时开通 *BankCardService* 时，货到付款包裹可刷银行卡支付（支持的 Parcel Shop 同样适用）。
 - **欧盟境外进口包裹：** 根据[欧盟海关改革规定](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en)，除非商家在结账时已代缴，否则欧盟境外网购订单对货值不超过 €150 的包裹征收 €3 关税，且每项商品加收 €2 欧盟处理费；详见[海关滞留包裹指南](guide:customs)（英文）。
@@ -64,17 +64,17 @@ GLS Hungary [常见问题](https://gls-group.com/HU/en/faq/)建议收货时当�
 
 ## 使用 Peek 跟踪 GLS Hungary 包裹
 
-[Peek](/) 会直接将粘贴的 `gls-group.com/HU/...` 或 `gls-group.eu/HU/...` 查询链接（带有 `match=`、`parcelNumber=` 或 `matchParcelNumber=` 参数）识别为 GLS Hungary。以 `33` 或 `34` 开头的 10 位数字（如示例编号 `3482917364`）也符合其他快递公司，Peek 会先询问其他承运商，均无结果时再询问 GLS Hungary；只要包裹时间未超过两个月，查到后会显示“GLS Hungary 有这个包裹的记录。”其他编号（如示例 `03482917364` 或 `94829173640`）不会自动匹配到 GLS Hungary。如果 Peek 未列出 GLS Hungary，可在添加时点击“更换”或在包裹页点击“更换快递公司”手动选择（搜索“GLS Magyarország”同样可找到）。
+[Peek](/) 会直接将粘贴的 `gls-group.com/HU/...` 或 `gls-group.eu/HU/...` 查询链接（带有 `match=`、`parcelNumber=` 或 `matchParcelNumber=` 参数）识别为 GLS Hungary。以 `33` 或 `34` 开头的 10 位数字（如 `3482917364`，虚构）也符合其他快递公司，Peek 会先询问其他承运商，均无结果时再询问 GLS Hungary；只要包裹时间未超过两个月，查到后会显示“GLS Hungary 有这个包裹的记录。”其他编号（如 `03482917364` 或 `94829173640`，均为虚构）从不会被匹配到 GLS Hungary。如果 Peek 未列出 GLS Hungary，可在添加时点击“更换”或在包裹页点击“更换快递公司”手动选择（搜索“GLS Magyarország”同样可找到）。
 
-Peek 向 GLS Hungary 获取其官网在不填邮编时返回的概览状态，展示对应阶段（“已生成面单”、“已揽收”、“运输中”、“已退回寄件人”、“已签收”）以及 GLS 原文。该概览不包含逐条扫描、地点、预计送达日或 Parcel Shop/快递柜详情：GLS 仅在输入收件邮编后才显示这些内容，因此如需查看详细轨迹、取件地址或进行 FlexDeliveryService 改派，请前往 [gls-group.com/HU/en/parcel-tracking/](https://gls-group.com/HU/en/parcel-tracking/) 输入邮编查看。
+Peek 向 GLS Hungary 获取其查件页面在不填邮编时显示的概览，展示对应阶段（“已生成面单”、“已揽收”、“运输中”、“已退回寄件人”、“已签收”）以及 GLS 原文。该概览不包含逐条扫描、地点、预计送达日或 Parcel Shop/快递柜详情：GLS 仅在输入收件邮编后才显示这些内容，因此如需查看详细轨迹、取件地址或进行 FlexDeliveryService 改派，请前往 [gls-group.com/HU/en/parcel-tracking/](https://gls-group.com/HU/en/parcel-tracking/) 输入邮编查看。
 
 Peek 对 GLS Hungary 包裹最多每小时检查一次（含手动刷新），查询失败后等待 4 小时；停留在“已生成面单”满 7 天后改为每 6 小时一次。
 
 若 GLS Hungary 状态连续 4 天无变化且包裹仍处于“已生成面单”、“已揽收”或“运输中”，Peek 会以上次见到变化的日期提示，例如“自10月12日周一起没有物流更新”。包裹页面会显示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 GLS Hungary 查询。”，并提供前往 GLS Hungary 联系页面的“向 GLS Hungary 寻求帮助”链接。若超过三周无新动态，则会提示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 GLS Hungary 查询。”
 
-你可以自由选择“每次扫描”、“重要环节”或“仅派送当天”提醒方案。Peek 仅监控物流状态，无法代你通过 FlexDeliveryService 改派、延长保管期或联系 GLS Hungary。
+你可以选择“每次扫描”、“重要环节”或“仅派送当天”提醒。Peek 仅监控物流状态，无法代你通过 FlexDeliveryService 改派、延长保管期或联系 GLS Hungary。
 
-## GLS 匈牙利查询常见问题
+## 关于 GLS Hungary 物流查询的问题
 
 ### GLS Hungary 在 Parcel Shop 或快递柜替我保管包裹多久？
 
@@ -93,13 +93,13 @@ GLS Hungary 单件限重 **40 公斤**，最大尺寸为 **200 厘米（长）×
 收件人可拨打 **`+36 29 886-700`**（寄件人热线 `+36 29 88 66 70`）、发邮件至 `info@gls-hungary.com`，或填写 [gls-group.com/HU/hu/kapcsolat/](https://gls-group.com/HU/hu/kapcsolat/) 在线联系表单。
 
 :::sources
-- [GLS Hungary: Home (English)](https://gls-group.com/HU/en/home/) – `< 24h` domestic delivery, 24–48h / 48–120h EU delivery, nearly 1,000 Parcel Shops, 5-working-day Parcel Shop / 5-day Locker storage and fraud alerts
-- [GLS Hungary: Parcel Tracking (English)](https://gls-group.com/HU/en/parcel-tracking/) – public tracking portal
-- [GLS Hungary: Csomagkövetés (Hungarian)](https://gls-group.com/HU/hu/csomagkovetes/) – Hungarian tracking portal
-- [GLS Hungary: FAQ (English)](https://gls-group.com/HU/en/faq/) – 40 kg / `200×80×60 cm` / `300 cm` limits, Saturday Budapest delivery, neighbour delivery, 2nd/3rd attempts, FlexDeliveryService, Viber/SMS locker notices, BankCardService COD, damage refusal, `+36 29 886-700` and `+36 29 88 66 70`
-- [GLS Hungary: Contact (Hungarian)](https://gls-group.com/HU/hu/kapcsolat/) – `info@gls-hungary.com` and online inquiry form (help URL linked by Peek)
+- [GLS Hungary: Home (English)](https://gls-group.com/HU/en/home/) – 国内 `< 24h` 送达、欧盟 24–48 小时 / 48–120 小时送达、近 1,000 家 Parcel Shop、Parcel Shop 保管 5 个工作日 / 快递柜保管 5 天、防诈骗警示
+- [GLS Hungary: Parcel Tracking (English)](https://gls-group.com/HU/en/parcel-tracking/) – 公开查件页面
+- [GLS Hungary: Csomagkövetés (Hungarian)](https://gls-group.com/HU/hu/csomagkovetes/) – 匈牙利语查件页面
+- [GLS Hungary: FAQ (English)](https://gls-group.com/HU/en/faq/) – 40 公斤 / `200×80×60 cm` / `300 cm` 限制、布达佩斯周六派送、邻居代收、第二次/第三次派送、FlexDeliveryService、快递柜的 Viber/短信通知、BankCardService 货到付款、破损拒收、`+36 29 886-700` 与 `+36 29 88 66 70`
+- [GLS Hungary: Contact (Hungarian)](https://gls-group.com/HU/hu/kapcsolat/) – `info@gls-hungary.com` 与在线咨询表单（Peek 链接的帮助页面）
 - [GLS Hungary: Corporate Information](https://gls-group.com/HU/en/corporate-information/) – *GLS General Logistics Systems Hungary Csomag-Logisztikai Kft.*, `GLS Európa u. 2., 2351 Alsónémedi`
-- [GLS Hungary: General Terms & Conditions](https://gls-group.com/HU/hu/altalanos-uzleti-feltetelek/) – postal GTCs and complaint handling notices
-- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty up to €150 and €2 EU handling fee
-- [Universal Parcel Scraper: gls-hu](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/gls-hu) – 10/11-digit parcel numbers, `/HU/` link rules, summary-only overview statuses (`PREADVICE`, `INPICKUP`, `INTRANSIT`, `DELIVERED`, `CANCELED`), 60-minute / 240-minute refresh policy, `Europe/Budapest` timezone and help URL
+- [GLS Hungary: General Terms & Conditions](https://gls-group.com/HU/hu/altalanos-uzleti-feltetelek/) – 邮政通用条款与投诉处理说明
+- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 150 欧元以下 3 欧元关税与 2 欧元欧盟手续费
+- [Universal Parcel Scraper: gls-hu](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/gls-hu) – 10/11 位包裹号、`/HU/` 链接规则、仅概览的状态（`PREADVICE`、`INPICKUP`、`INTRANSIT`、`DELIVERED`、`CANCELED`）、60 分钟 / 240 分钟的刷新规则、`Europe/Budapest` 时区与帮助页面
 :::

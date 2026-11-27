@@ -60,7 +60,7 @@ Když Česká pošta číslo nezná, napíše česky „Zásilka tohoto podacíh
 
 SMS a e-maily o cestě balíku dostaneš zdarma, pokud pošta zná tvůj telefon nebo e-mail. Ty jí předává e-shop, takže je při objednávce vyplň.
 
-**Balíkovna.** Balík si vyzvedneš v Balíkovně na poště, v Balíkovně u partnera (třeba v potravinách, papírnictví, trafice nebo drogerii), nebo v samoobslužném boxu: AlzaBox, OX Point, Penguin Box. Na poště a u partnera na tebe čeká 7 kalendářních dní, v boxu 2 pracovní dny. Prodloužit se to nedá; před koncem lhůty ti Balíkovna napíše e-mailem nebo SMS. Na poště stačí kód a jméno příjemce, případně doklad totožnosti; v boxu zadáš kód na displeji. Dobírku v boxu musíš zaplatit předem kartou online, jinak se schránka neotevře.
+**Balíkovna.** Balíkovna uvádí, že balík je běžně už druhý den na výdejním místě, v boxu nebo na adrese. Vyzvedneš si ho v Balíkovně na poště, v Balíkovně u partnera (třeba v potravinách, papírnictví, trafice nebo drogerii), nebo v samoobslužném boxu: AlzaBox, OX Point, Penguin Box. Na poště a u partnera na tebe čeká 7 kalendářních dní, v boxu 2 pracovní dny. Prodloužit se to nedá; před koncem lhůty ti Balíkovna napíše e-mailem nebo SMS. Na poště stačí kód a jméno příjemce, případně doklad totožnosti; v boxu zadáš kód na displeji. Dobírku v boxu musíš zaplatit předem kartou online, jinak se schránka neotevře.
 
 Když je tvoje Balíkovna plná, převeze balík na náhradní výdejní místo a dá ti vědět SMS nebo e-mailem. Box nefunguje? Zavolej na číslo zákaznické podpory, které je na boxu; když balík nejde vyzvednout, volej linku Balíkovny 218 218 218. Balíkovna má i vlastní [sledování balíku](https://www.balikovna.cz/cs/sledovat-balik), kde si můžeš nechat kód poslat znovu.
 
@@ -112,7 +112,7 @@ Hláška „Zásilka tohoto podacího čísla není v evidenci.“ znamená, že
 
 ### Jaký je kontakt na Českou poštu a Balíkovnu při sledování zásilky?
 
-Zákaznická linka České pošty je +420 210 123 456 v pracovní dny od 8:00 do 18:00 (e-mail info@cpost.cz). Pro problémy s balíkem nebo boxem v Balíkovně volej linku Balíkovny 218 218 218 (případně technickou podporu uvedenou na boxu).
+Zákaznická linka České pošty je +420 210 123 456 v pracovní dny od 8:00 do 18:00 (e-mail info@cpost.cz). Když box Balíkovny nefunguje, volej číslo zákaznické podpory uvedené na boxu; když balík nejde vyzvednout, linku Balíkovny 218 218 218.
 
 ### Můžu balík vyzvednout bez občanky?
 

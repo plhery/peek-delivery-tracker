@@ -6,7 +6,7 @@ published: 2026-10-15
 updated: 2026-11-27
 ---
 
-Postes Canada (Société canadienne des postes) exploite le service postal fédéral du Canada. Pour le suivi d'un colis ou courrier Postes Canada, entre son numéro de repérage (16 chiffres, numéro postal finissant par `CA`, ou 15 chiffres d'un avis de livraison) dans l'outil Repérage sur [canadapost-postescanada.ca](https://www.canadapost-postescanada.ca/track-reperage/fr), dans l'appli gratuite de Postes Canada ou dans le champ ci-dessus. Ce numéro vient de l'expéditeur (pas de recherche par nom ou adresse) ; s'il finit par `CA` et que tu es en Europe, Peek peut aussi interroger La Poste, bpost ou La Poste suisse.
+Postes Canada, c'est la Société canadienne des postes, la société d'État fédérale qui exploite le service postal du Canada. Pour le suivi d'un colis ou courrier Postes Canada, entre son numéro de repérage (16 chiffres, numéro postal finissant par `CA`, ou 15 chiffres d'un avis de livraison) dans l'outil Repérage sur [canadapost-postescanada.ca](https://www.canadapost-postescanada.ca/track-reperage/fr), dans l'appli gratuite de Postes Canada ou dans le champ ci-dessus. Ce numéro vient de l'expéditeur (pas de recherche par nom ou adresse) ; s'il finit par `CA` et que tu suis le colis depuis un autre pays, Peek peut aussi interroger la poste de ce pays avec le même numéro, par exemple La Poste en France, bpost en Belgique ou La Poste suisse.
 
 ## Numéro de repérage Postes Canada : à quoi il ressemble
 

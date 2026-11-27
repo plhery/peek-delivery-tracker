@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-11-27
 ---
 
-Status „Przesyłka doręczona” albo „paczka doręczona” to wpis z terminala kuriera, a nie dowód, że paczka trafiła w twoje ręce: mógł ją odebrać dorosły domownik, sąsiad, recepcja albo ktoś z kodem odbioru, bądź kurier zostawił ją w uzgodnionym miejscu (np. safeplace w DPD). Sprawdź w szczegółach przesyłki, kto ją odebrał, zapytaj domowników i sąsiadów i odczekaj dzień lub dwa. Jeśli nadal jej nie ma, napisz do sprzedawcy, nie do kuriera: przy zakupie od firmy ryzyko przechodzi na ciebie dopiero z wydaniem paczki (art. 548 § 3 Kodeksu cywilnego).
+Status „Przesyłka doręczona” albo „paczka doręczona” to wpis z terminala kuriera, a nie dowód, że paczka trafiła w twoje ręce: mógł ją odebrać dorosły domownik, sąsiad, recepcja albo ktoś z kodem odbioru, bądź kurier zostawił ją w uzgodnionym miejscu (np. safeplace w DPD). Sprawdź w szczegółach przesyłki, kto ją odebrał, zapytaj domowników i sąsiadów i odczekaj dzień lub dwa. Jeśli nadal jej nie ma, napisz do sprzedawcy, nie do kuriera: przy zakupie od firmy ryzyko utraty paczki przechodzi na ciebie dopiero z chwilą, gdy ci ją wydano (art. 548 § 3 Kodeksu cywilnego).
 
 ## Co znaczy „Przesyłka doręczona”, skoro paczki nie ma?
 

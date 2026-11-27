@@ -1,6 +1,6 @@
 ---
 title: Mondial Relay rastreio: estados, InPost e levantamento
-description: Rastreio e contactos da Mondial Relay em Portugal (agora InPost, 211 245 624): número de 8 algarismos, estados em francês, Pontos Pack e prazos de entrega.
+description: Rastreio e contactos da Mondial Relay em Portugal (agora InPost, 211 245 624): número de 8 algarismos, estados em francês e quanto tempo espera no Ponto Pack.
 slug: mondial-relay-rastreio
 published: 2026-10-11
 updated: 2026-11-27

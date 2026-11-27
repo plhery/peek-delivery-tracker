@@ -1,13 +1,13 @@
 ---
 title: Estados da encomenda nos CTT: o que significam
-description: O que significam «Aguarda entrada nos CTT», «Em trânsito» (centro de trânsito), «Em entrega» e «Entregue» nos CTT, InPost, DPD, GLS e UPS, e quando agir.
+description: O que significam «Aguarda entrada nos CTT», «Em trânsito», «Em entrega» e «Entregue» nos CTT, InPost, DPD, GLS e UPS, e quando agir.
 slug: estados-da-encomenda-significado
 picture: Um percurso sinuoso com paragens marcadas com um visto (etiqueta, armazém, avião), uma carrinha na paragem atual, uma casa mais à frente e o Pip a correr.
 published: 2026-10-09
 updated: 2026-11-27
 ---
 
-Nos [CTT](carrier:ctt), `Aguarda entrada nos CTT` quer dizer que a loja criou a etiqueta mas os CTT ainda não têm a encomenda; `Em trânsito` aparece sempre que o envio circula ou passa por um centro ou delegação operacional de trânsito dos CTT, e `Em entrega` indica que o carteiro já está no percurso do dia. A maioria dos estados não exige nada de ti: só tens de agir numa entrega não conseguida, numa encomenda para levantar, num pedido da alfândega ou num «Entregue» sem nada à porta.
+Nos [CTT](carrier:ctt), `Aguarda entrada nos CTT` quer dizer que a loja criou a etiqueta mas os CTT ainda não têm a encomenda; `Em trânsito` aparece várias vezes: quando o carteiro ou distribuidor recolhe o envio e sempre que é transportado ou tratado num centro de distribuição ou operacional dos CTT; e `Em entrega` indica que o carteiro já está no percurso do dia. A maioria dos estados não exige nada de ti: só tens de agir numa entrega não conseguida, numa encomenda para levantar, num pedido da alfândega ou num «Entregue» sem nada à porta.
 
 ## Quais são os estados de uma encomenda?
 
@@ -46,7 +46,7 @@ Não: a loja imprimiu uma etiqueta e mandou os dados, mais nada. Os CTT explicam
 
 Os CTT não dão um prazo para este estado. Se nada mudar, fala com a loja, não com a transportadora: a encomenda ainda está do lado de quem a vendeu.
 
-## O que significa «Em trânsito» (ou centro de trânsito) nos CTT?
+## O que significa «Em trânsito» nos CTT?
 
 A transportadora já tem a encomenda, algures na rede dela, o que não quer dizer que esteja a andar. Nos CTT, `Em trânsito` aparece várias vezes ao longo do percurso: quando o carteiro ou distribuidor recolhe o envio e sempre que é transportado ou tratado num centro de distribuição ou operacional. Um envio internacional pode ainda passar por vários países.
 

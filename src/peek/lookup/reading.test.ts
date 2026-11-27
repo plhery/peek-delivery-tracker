@@ -58,6 +58,27 @@ describe('reading the field', () => {
     expect(read('Your parcel 1ZDEMO202600000001, 100% on time')).toEqual([['1ZDEMO202600000001', 'ups']]);
   });
 
+  it('reads no number after a tax or company-number label', () => {
+    const read = (text: string) => numbersInText(text).map(({ normalized, match }) => [normalized, match.carrier]);
+    // Made-up numbers in Amazon's country-and-ten-digits shape, which VAT numbers share.
+    expect(read('Example Wholesale BV\nBTW: BE0123456789\nTVA intracommunautaire : BE0123456789')).toEqual([]);
+    expect(read('VAT No. PL1234567890 | Order 12345')).toEqual([]);
+    // The same shape with no such label is still read.
+    expect(read('Your parcel BE0123456789 is on its way')).toEqual([['BE0123456789', 'amazon-logistics']]);
+  });
+
+  it('reads no number out of a bank account', () => {
+    const read = (text: string) => numbersInText(text).map(({ normalized, match }) => [normalized, match.carrier]);
+    // The registry's example IBANs, after a bank's made-up name: their first twelve characters fit Amazon's shape.
+    expect(read('Example Bank: BE68 5390 0754 7034 - BIC EXAMBEBB')).toEqual([]);
+    expect(read('IBAN DE89 3704 0044 0532 0130 00')).toEqual([]);
+    expect(read('Pay to DE89370400440532013000.')).toEqual([]);
+    // Check digits that fail, or a run too long for its country, are no IBAN.
+    expect(read('Your parcel BE0123456789 0123')).toEqual([['BE0123456789', 'amazon-logistics']]);
+    expect(read('Example Bank: BE68 5390 0754 70341')).toEqual([['BE6853900754', 'amazon-logistics']]);
+    expect(labelledNumbersInText('Example Bank: BE68 5390 0754 7034')).toEqual([]);
+  });
+
   it('lists the numbers a label calls tracking numbers though their shape proves no carrier', () => {
     const labelled = (text: string) => labelledNumbersInText(text).map(({ normalized, match }) => `${normalized} ${match.confidence}`);
     expect(labelled('Sendungsnummer 1234567899\nVotre colis 01234567890123 sera livré demain\nTracking: 1234567899'))

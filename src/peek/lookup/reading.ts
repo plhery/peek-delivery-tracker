@@ -1,5 +1,5 @@
 import {
-  CARRIER_DEFINITIONS, keywordNumberInText, recognizedNumberInText, TRACKING_CANDIDATE_PATTERNS, validTrackingNumber,
+  CARRIER_DEFINITIONS, followsTaxLabel, keywordNumberInText, recognizedNumberInText, TRACKING_CANDIDATE_PATTERNS, validTrackingNumber,
 } from 'universal-parcel-scraper';
 import {
   type CarrierDetection,
@@ -41,6 +41,47 @@ const LINK = /https?:\/\/[^\s<>"']+/gi;
  * nine digits.
  */
 const PERCENT_ESCAPE = /%[0-9A-F]{2}/gi;
+/** Each country's IBAN length (ISO 13616), for the countries whose shops and carriers print one. */
+const IBAN_LENGTHS: Readonly<Record<string, number>> = {
+  AD: 24, AT: 20, BE: 16, BG: 22, CH: 21, CY: 28, CZ: 24, DE: 22, DK: 18, EE: 20, ES: 24, FI: 18, FO: 18, FR: 27,
+  GB: 22, GI: 23, GL: 18, GR: 27, HR: 21, HU: 28, IE: 22, IS: 26, IT: 27, LI: 21, LT: 20, LU: 20, LV: 21, MC: 27,
+  MT: 31, NL: 18, NO: 15, PL: 28, PT: 25, RO: 24, SE: 24, SI: 19, SK: 24, SM: 27,
+};
+const IBAN_START = /\b[A-Z]{2}\d{2}/g;
+/** An IBAN's check digits hold when, its first four characters moved to its end and its letters read as 10 to 35, 97 leaves 1. */
+function ibanChecks(iban: string): boolean {
+  let rest = 0;
+  for (const char of iban.slice(4) + iban.slice(0, 4)) {
+    const value = parseInt(char, 36);
+    rest = (value > 9 ? rest * 100 + value : rest * 10 + value) % 97;
+  }
+  return rest === 1;
+}
+/**
+ * A line without its bank account numbers, each set apart by spaces. An IBAN printed in groups of four
+ * ("BE68 5390 0754 7034") starts with a country, two digits and ten more, which is the shape of Amazon's numbers,
+ * and a shop's footer prints one after its bank's name, which is no label the readers know. Only an IBAN as long as
+ * its country's, whose check digits hold, is set apart.
+ */
+function withoutBankAccounts(line: string): string {
+  let out = line;
+  for (const start of line.matchAll(IBAN_START)) {
+    const length = IBAN_LENGTHS[start[0].slice(0, 2)];
+    if (!length) continue;
+    let index = start.index, taken = '';
+    while (index < line.length && taken.length < length) {
+      const char = line[index]!;
+      if (/[A-Z0-9]/.test(char)) taken += char;
+      // One space between groups of four.
+      else if (char !== ' ' || taken.length % 4 !== 0 || !/[A-Z0-9]/.test(line[index + 1] ?? '')) break;
+      index += 1;
+    }
+    if (taken.length === length && !/[A-Za-z0-9]/.test(line[index] ?? '') && ibanChecks(taken)) {
+      out = out.slice(0, start.index) + ' '.repeat(index - start.index) + out.slice(index);
+    }
+  }
+  return out;
+}
 /** Whether a number read out of a link's own text stands in it once its percent escapes are set apart. */
 const standsInLink = (link: string, number: string) => link.replace(PERCENT_ESCAPE, ' ').toUpperCase().includes(number.toUpperCase());
 /** Each shop's order number, tried in turn and read without regard to case. The iPhone reads the same file. */
@@ -208,7 +249,9 @@ const CANDIDATE_PATTERNS = TRACKING_CANDIDATE_PATTERNS.map((pattern) => new RegE
  * A candidate holds a digit: some carriers' shapes also fit a word,
  * "additional" for one, and a word in a message is not a number. A percent
  * escape is no part of a number, in a link the parser read as text or in the
- * rest of one an email's text wrapped onto the next line.
+ * rest of one an email's text wrapped onto the next line. A number after a
+ * tax or company-number label ("VAT: BE0123456789") or inside a bank
+ * account's IBAN is a business's, which Amazon's shape also fits.
  */
 export function numbersInText(text: string): NumberInText[] {
   const found = new Map<string, NumberInText>();
@@ -234,12 +277,12 @@ export function numbersInText(text: string): NumberInText[] {
       const match = parseTrackingInput(link);
       if (match.trackingNumber && (match.source === 'link' || standsInLink(link, match.trackingNumber))) keep(match);
     }
-    const prose = line.replace(SHIPPING_DATE, ' ').replace(LINK, ' ').replace(PERCENT_ESCAPE, ' ');
+    const prose = withoutBankAccounts(line).replace(SHIPPING_DATE, ' ').replace(LINK, ' ').replace(PERCENT_ESCAPE, ' ');
     const candidates: { index: number; end: number; text: string; detection: CarrierDetection }[] = [];
     for (const pattern of CANDIDATE_PATTERNS) {
       for (const hit of prose.matchAll(pattern)) {
         const candidate = hit[0].trim();
-        if (!/\d/.test(candidate)) continue;
+        if (!/\d/.test(candidate) || followsTaxLabel(prose, hit.index)) continue;
         const detected = detection(candidate);
         if (detected?.confidence !== 'high') continue;
         const index = hit.index, end = index + hit[0].length;
@@ -275,11 +318,11 @@ const NUMBER_WORDS = new RegExp(rules.numberWords, 'i');
 function uncertainNumberInText(text: string): TrackingInputMatch | null {
   const candidates = new Map<string, { match: TrackingInputMatch; introduced: boolean }>();
   for (const line of text.split(/\r?\n/)) {
-    const prose = withoutOrders(line.replace(SHIPPING_DATE, ' ').replace(LINK, ' '));
+    const prose = withoutOrders(withoutBankAccounts(line).replace(SHIPPING_DATE, ' ').replace(LINK, ' '));
     for (const pattern of TRACKING_CANDIDATE_PATTERNS) {
       for (const hit of prose.matchAll(new RegExp(pattern.source, pattern.flags))) {
         const candidate = hit[0].trim();
-        if (!/\d/.test(candidate)) continue;
+        if (!/\d/.test(candidate) || followsTaxLabel(prose, hit.index)) continue;
         const detection = detectCarrierMatch(candidate, IN_TEXT);
         if (detection.confidence !== 'low') continue;
         const normalized = normalizeTrackingNumber(candidate);
@@ -326,7 +369,7 @@ function numberEnd(prose: string, number: string): number {
 export function labelledNumbersInText(text: string, trust?: TextTrust): NumberInText[] {
   const found = new Map<string, NumberInText>();
   for (const line of text.split(/\r?\n/)) {
-    let prose = withoutOrders(line.replace(SHIPPING_DATE, ' ').replace(LINK, ' '));
+    let prose = withoutOrders(withoutBankAccounts(line).replace(SHIPPING_DATE, ' ').replace(LINK, ' '));
     for (let label = 0; label < MOST_LABELS_PER_LINE && found.size < MOST_CANDIDATES_READ; label += 1) {
       const number = keywordNumberInText(prose);
       if (!number) break;
@@ -390,7 +433,7 @@ export function carrierNumberInText(text: string, carriers: readonly CarrierId[]
   const found = new Map<string, NumberInText>();
   for (const line of text.split(/\r?\n/)) {
     if (PHONE_LINE.test(line)) continue;
-    const prose = withoutOrders(line.replace(SHIPPING_DATE, ' ').replace(LINK, ' '));
+    const prose = withoutOrders(withoutBankAccounts(line).replace(SHIPPING_DATE, ' ').replace(LINK, ' '));
     for (const pattern of CANDIDATE_PATTERNS) {
       for (const hit of prose.matchAll(pattern)) {
         const candidate = hit[0].trim();

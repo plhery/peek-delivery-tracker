@@ -39,6 +39,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.ADD_SAVE
 import com.plhery.peekdeliverytracker.ui.deliveries.ADD_TRACKING
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
+import com.plhery.peekdeliverytracker.ui.draw.phoneLocales
 import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.PeekTypography
 import kotlin.math.abs
@@ -97,7 +98,7 @@ class AddButtonLargeTextDeviceTest {
 
     /** How wide Add's words are on one line in headline at [scale], set in the app's fonts. */
     private fun oneLine(scale: Float): Dp {
-        val measurer = TextMeasurer(createFontFamilyResolver(compose.activity), Density(compose.density.density, scale), LayoutDirection.Ltr)
+        val measurer = TextMeasurer(createFontFamilyResolver(compose.activity), phoneLocales(), Density(compose.density.density, scale), LayoutDirection.Ltr)
         val laid = measurer.measure(words, style = type(scale).headline, softWrap = false, maxLines = 1)
         return with(compose.density) { laid.multiParagraph.intrinsics.maxIntrinsicWidth.toDp() }
     }
@@ -144,7 +145,7 @@ class AddButtonLargeTextDeviceTest {
     /** Whether a text fits whole at `size`, on its lines and width. */
     private fun fitsAt(layout: TextLayoutResult, size: TextUnit): Boolean {
         val input = layout.layoutInput
-        val measurer = TextMeasurer(input.fontFamilyResolver, input.density, input.layoutDirection)
+        val measurer = TextMeasurer(input.fontFamilyResolver, phoneLocales(), input.density, input.layoutDirection)
         val laid = measurer.measure(
             input.text, style = input.style.copy(fontSize = size), overflow = input.overflow, softWrap = input.softWrap, maxLines = input.maxLines,
             constraints = Constraints(maxWidth = input.constraints.maxWidth),
@@ -155,7 +156,7 @@ class AddButtonLargeTextDeviceTest {
     /** How much smaller than [full] a text is drawn: its width on one line against its width on one line at [full]. */
     private fun scaleOf(layout: TextLayoutResult, full: TextUnit): Float {
         val input = layout.layoutInput
-        val measurer = TextMeasurer(input.fontFamilyResolver, input.density, input.layoutDirection)
+        val measurer = TextMeasurer(input.fontFamilyResolver, phoneLocales(), input.density, input.layoutDirection)
         val oneLine = measurer.measure(input.text, style = input.style.copy(fontSize = full), softWrap = false, maxLines = 1)
         return layout.multiParagraph.intrinsics.maxIntrinsicWidth / oneLine.multiParagraph.intrinsics.maxIntrinsicWidth
     }
@@ -181,7 +182,7 @@ class AddButtonLargeTextDeviceTest {
     /** How wide the widest of a text's words is on one line at `size`. */
     private fun widestWord(layout: TextLayoutResult, size: TextUnit): Float {
         val input = layout.layoutInput
-        val measurer = TextMeasurer(input.fontFamilyResolver, input.density, input.layoutDirection)
+        val measurer = TextMeasurer(input.fontFamilyResolver, phoneLocales(), input.density, input.layoutDirection)
         return input.text.text.split(' ').filter { it.isNotEmpty() }.maxOf { word ->
             measurer.measure(word, style = input.style.copy(fontSize = size), softWrap = false, maxLines = 1).multiParagraph.intrinsics.maxIntrinsicWidth
         }

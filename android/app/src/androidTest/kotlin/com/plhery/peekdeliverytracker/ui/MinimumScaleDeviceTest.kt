@@ -38,6 +38,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.LocalNextUpWords
 import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_LIST
 import com.plhery.peekdeliverytracker.ui.deliveries.PULL_INDICATOR
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
+import com.plhery.peekdeliverytracker.ui.draw.phoneLocales
 import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.PeekTypography
@@ -113,7 +114,7 @@ class MinimumScaleDeviceTest {
     private fun shrinkOf(layout: TextLayoutResult, full: TextUnit): Shrink {
         val input = layout.layoutInput
         val style = input.style.copy(fontSize = full)
-        val measurer = TextMeasurer(input.fontFamilyResolver, input.density, input.layoutDirection)
+        val measurer = TextMeasurer(input.fontFamilyResolver, phoneLocales(), input.density, input.layoutDirection)
         val oneLine = measurer.measure(input.text, style = style, softWrap = false, maxLines = 1)
         val atFull = measurer.measure(
             input.text, style = style, overflow = input.overflow, softWrap = input.softWrap, maxLines = input.maxLines,

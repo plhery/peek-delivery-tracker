@@ -8,6 +8,7 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.plhery.peekdeliverytracker.ui.draw.phoneLocales
 import kotlin.concurrent.thread
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -25,7 +26,7 @@ class TextSnapshotDeviceTest {
     @Test
     fun textMeasuredOutsideAnOpenSnapshotAndThenInItIsMeasured() {
         val context = ApplicationProvider.getApplicationContext<Context>()
-        val measurer = TextMeasurer(createFontFamilyResolver(context), Density(1f), LayoutDirection.Ltr)
+        val measurer = TextMeasurer(createFontFamilyResolver(context), phoneLocales(), Density(1f), LayoutDirection.Ltr)
         val composing = Snapshot.takeMutableSnapshot()
         try {
             thread { measurer.measure("Härkingen") }.join()

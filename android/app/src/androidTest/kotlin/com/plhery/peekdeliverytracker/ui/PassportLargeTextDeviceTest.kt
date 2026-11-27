@@ -20,10 +20,10 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
-import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.hasContentDescription
+import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
@@ -43,6 +43,7 @@ import com.plhery.peekdeliverytracker.core.PassportStatistics
 import com.plhery.peekdeliverytracker.ui.ParcelWalk.Companion.LONG_MILLIS
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
+import com.plhery.peekdeliverytracker.ui.draw.phoneLocales
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_AVERAGE
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_COVER
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_PAGE
@@ -258,7 +259,7 @@ class PassportLargeTextDeviceTest {
         val density = Density(compose.density.density, scale)
         val size = DynamicTypeSize.of(scale)
         val type = PeekTypography(size, density, walk.language)
-        val measurer = TextMeasurer(createFontFamilyResolver(compose.activity), density, LayoutDirection.Ltr)
+        val measurer = TextMeasurer(createFontFamilyResolver(compose.activity), phoneLocales(), density, LayoutDirection.Ltr)
         val time = type.tracking(type.fixed(type.scaled(NUMBER_SIZE, IosTextStyle.Title2), FontWeight.Medium), NUMBER_TRACKING)
             .monospacedDigit().sfLines()
         val line = measurer.measure(duration, style = time, softWrap = false, maxLines = 1).size.height

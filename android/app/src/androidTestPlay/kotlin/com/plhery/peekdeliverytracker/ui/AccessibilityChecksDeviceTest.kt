@@ -73,7 +73,8 @@ class AccessibilityChecksDeviceTest(private val appearance: String) {
 
     private val validator = AccessibilityValidator()
         .setRunChecksFromRootView(true)
-        .setThrowExceptionForErrors(false)
+        // Nothing thrown: the listener gathers the errors, each with its screen.
+        .setThrowExceptionFor(null)
         .addCheckListener(
             AccessibilityValidator.AccessibilityCheckListener { _, results ->
                 runs++

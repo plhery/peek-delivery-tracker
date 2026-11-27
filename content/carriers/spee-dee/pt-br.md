@@ -38,34 +38,34 @@ A tabela de progresso da Spee-Dee traz três colunas — `Date / Time`, `Locatio
 | --- | --- |
 | `ARRIVAL SCAN` | Registrada em um terminal ou centro de triagem da Spee-Dee na rede terrestre do Meio-Oeste. |
 | `OUT FOR DELIVERY` *(frequentemente seguida do número da rota entre parênteses)* | Carregada em um caminhão local da Spee-Dee para entrega residencial ou comercial hoje. |
-| `Delivered` | Entrega concluída; o resumo na página oficial também informa horário, endereço e assinatura quando coletada. |
+| `Delivered` | Entrega concluída; o resumo na própria página da Spee-Dee também informa horário, endereço e assinatura quando coletada. |
 | `No packages were found matching the barcode supplied.` | O código ainda não foi lido no sistema da Spee-Dee ou contém erro de digitação. |
 
 ### Códigos de 16 dígitos reutilizados
 
-A Spee-Dee reaproveita códigos `SP` antigos de 16 dígitos em novos envios. Na página oficial bruta da Spee-Dee, linhas de uma encomenda entregue anteriormente ainda podem aparecer abaixo das leituras do seu pacote atual. Ao consultar um código reutilizado no site da Spee-Dee, observe as datas no topo da tabela e pare de ler ao encontrar um `Delivered` antigo de um envio anterior.
+A Spee-Dee reaproveita códigos `SP` antigos de 16 dígitos em novos envios. Na página de progresso bruta da Spee-Dee, linhas de uma encomenda entregue anteriormente ainda podem aparecer abaixo das leituras do seu pacote atual. Ao consultar um código reutilizado no site da Spee-Dee, observe as datas no topo da tabela e pare de ler ao encontrar um `Delivered` antigo de um envio anterior.
 
-## Atrasos, ausência de leituras e reclamações
+## Atrasos, falta de leituras e pedidos de indenização
 
 Alguns pontos úteis quando o rastreamento parece estranho:
 
 - **Sem leituras ainda:** se a página responder `No packages were found matching the barcode supplied.`, a Spee-Dee ainda não escaneou o pacote ou há erro no número. Confira o código e pergunte ao vendedor se já houve postagem, ou consulte [quando o rastreio para de atualizar](guide:tracking-not-updating).
 - **Limite de consultas por minuto:** o servidor da Spee-Dee limita buscas repetidas em sequência e pode devolver HTTP 503 temporariamente. Aguardar um minuto ou deixar o Peek atualizar automaticamente evita esse bloqueio.
-- **Reclamações por não entrega ou dano:** o [formulário de atendimento da Spee-Dee](https://speedeedelivery.com/customer-service/) traz opções dedicadas **Claims – Non-Delivery** e **Claims – Damage**, e pede o **endereço completo de entrega** ao enviar dúvidas de rastreamento. Veja o [guia de entregue mas não recebida](guide:delivered-not-received) se constar entregue sem ter chegado.
+- **Pedidos de indenização por não entrega ou dano:** o [formulário de atendimento da Spee-Dee](https://speedeedelivery.com/customer-service/) traz opções dedicadas **Claims – Non-Delivery** e **Claims – Damage**, e pede o **endereço completo de entrega** ao enviar dúvidas de rastreamento. Veja o [guia de entregue mas não recebida](guide:delivered-not-received) se constar entregue sem ter chegado.
 
 ## Como acompanhar Spee-Dee no Peek
 
-Cole qualquer código Spee-Dee de 18 caracteres (`SP` + 16 dígitos) ou 20 caracteres (`SP` + 18 dígitos), ou um link de `speedeedelivery.com`, e o Peek reconhece a Spee-Dee imediatamente. Se precisar alterar a transportadora, use **Alterar** ao adicionar ou **Alterar transportadora** na tela do pacote.
+Cole qualquer código Spee-Dee de 18 caracteres (`SP` + 16 dígitos) ou 20 caracteres (`SP` + 18 dígitos), ou um link de `speedeedelivery.com`, e o Peek reconhece a Spee-Dee imediatamente. Se precisar trocar a transportadora, use **Trocar** ao adicionar ou **Trocar transportadora** na tela do pacote.
 
-O Peek consulta a página da Spee-Dee diretamente pelo [adaptador Spee-Dee de código aberto do universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/spee-dee), recorrendo a uma rede remota quando o host recusa conexão direta. Em **códigos reutilizados**, ele mantém apenas as linhas posteriores à entrega anterior ocorrida um dia ou mais antes, remove comentários de depuração do HTML e o número da rota após `OUT FOR DELIVERY` e registra cidade/terminal e horário de cada leitura. A Spee-Dee informa horários locais sem fuso: o Peek interpreta cada leitura pelo fuso do local (Chicago para St. Cloud, Fargo, Milwaukee ou Sioux Falls; Detroit para Detroit), usando o da leitura vizinha se faltar local — ou Nova York — e exibe tudo no relógio do seu aparelho. O site da Spee-Dee não fornece data prevista de entrega nem peso.
+O Peek consulta a página da Spee-Dee diretamente pelo [adaptador Spee-Dee de código aberto do universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/spee-dee), recorrendo a uma rede remota quando o host recusa conexão direta. Em **códigos reutilizados**, ele mantém apenas as linhas posteriores à entrega anterior ocorrida um dia ou mais antes, remove comentários de depuração do HTML e o número da rota após `OUT FOR DELIVERY` e registra cidade/terminal e horário de cada leitura. A Spee-Dee informa horários locais sem fuso: o Peek interpreta cada leitura pelo fuso do local (Chicago para St. Cloud, Fargo, Milwaukee ou Sioux Falls; Detroit para Detroit), usando o da leitura vizinha se faltar local — ou Nova York — e exibe tudo no relógio do seu aparelho. O rastreador da Spee-Dee não fornece data prevista de entrega nem peso.
 
 O Peek mapeia `ARRIVAL SCAN` para **Em trânsito**, `OUT FOR DELIVERY` para **Saiu para entrega** e `Delivered` para **Entregue**, aplicando regras padrão às demais atividades.
 
-Enquanto o pacote estiver aberto no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta até a cada 10 minutos; no dia em que a Spee-Dee exibir `OUT FOR DELIVERY`, a cada 2 minutos a partir das 6h no relógio da leitura mais recente — ou a cada 5 minutos se a última consulta precisou abrir navegador — enquanto o site oficial responder. Nos demais casos, verifica de hora em hora. Após 12 horas apenas em "Etiqueta criada" ou "Recebida pela transportadora", ou dois dias sem novidades, consulta a cada hora, e a cada 6 horas após sete dias em "Etiqueta criada". Quando a Spee-Dee não responde e o Peek acompanha por serviços de rastreamento, consulta de hora em hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da saída para entrega.
+Enquanto o pacote estiver aberto no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta até a cada 10 minutos; no dia em que a Spee-Dee exibir `OUT FOR DELIVERY`, a cada 2 minutos a partir das 6h no relógio da leitura mais recente — ou a cada 5 minutos se a última consulta precisou abrir navegador — enquanto o rastreador da Spee-Dee responder. Nos demais casos, verifica de hora em hora. Após 12 horas apenas em "Etiqueta criada" ou "Recebida pela transportadora", ou dois dias sem novidades, consulta a cada hora, e a cada 6 horas após sete dias em "Etiqueta criada". Quando a Spee-Dee não responde e o Peek acompanha por serviços de rastreamento, consulta de hora em hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da saída para entrega.
 
-Quando o registro mais recente completa quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek destaca a data daquela leitura (por exemplo, "Sem atualização de rastreamento desde seg 12 out") com a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Spee-Dee." e link para a página de atendimento da Spee-Dee. Após três semanas sem novidade, sugere consultar o vendedor enquanto continua verificando.
+Quando a leitura mais recente tem quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza a data dessa leitura, como "Sem atualizações desde seg 12 out". A página do pacote então exibe "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Spee-Dee.", com o link "Pedir ajuda a Spee-Dee" para a página de atendimento da Spee-Dee. Após três semanas sem novas leituras, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando Spee-Dee."
 
-Nas preferências de notificação do Peek, escolha **Cada atualização**, **Etapas importantes** ou **Somente entrega**.
+Nas preferências de notificação do Peek, escolha **Cada movimentação**, **Etapas importantes** ou **Só a entrega**.
 
 ## Como entrar em contato com a Spee-Dee Delivery
 
@@ -74,7 +74,7 @@ A Spee-Dee destaca em sua [página de atendimento ao cliente](https://speedeedel
 - **Telefone gratuito (EUA):** `800-862-5578`
 - **Telefone local:** `320-251-6697`
 - **Fax:** `320-251-1846` (fax LTL: `320-240-7995`)
-- **Formulário on-line e reclamações:** [Spee-Dee Customer Service](https://speedeedelivery.com/customer-service/) (inclua o código `SP` e o endereço completo de entrega em dúvidas de rastreio)
+- **Formulário on-line e pedidos de indenização:** [Spee-Dee Customer Service](https://speedeedelivery.com/customer-service/) (inclua o código `SP` e o endereço completo de entrega em dúvidas de rastreio)
 - **Endereço físico:** Spee-Dee Delivery Service Inc., 4101 Clearwater Road, St. Cloud, MN 56301
 - **Endereço postal:** P.O. Box 1417, St. Cloud, MN 56302
 - **Sobre a empresa e rastreio:** [About Spee-Dee](https://speedeedelivery.com/about-us/) e [Track a Shipment](https://speedeedelivery.com/track-a-shipment/)
@@ -83,7 +83,7 @@ A Spee-Dee destaca em sua [página de atendimento ao cliente](https://speedeedel
 
 ### Por que minha página da Spee-Dee mostra uma entrega feita meses atrás?
 
-A Spee-Dee reutiliza códigos `SP` de 16 dígitos ao longo do tempo, então a página oficial pode listar um envio antigo já concluído abaixo das leituras do seu pacote atual. O Peek detecta automaticamente esse limite e oculta as linhas de entregas anteriores.
+A Spee-Dee reutiliza códigos `SP` de 16 dígitos ao longo do tempo, então a página bruta pode listar um envio antigo já concluído abaixo das leituras do seu pacote atual. O Peek detecta automaticamente esse limite e oculta as linhas de entregas anteriores.
 
 ### Quais estados dos EUA a Spee-Dee Delivery atende?
 

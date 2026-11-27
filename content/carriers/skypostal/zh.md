@@ -17,7 +17,7 @@ SkyPostal 会根据发货商户和目的国签发多种跨境单号，最常见�
 | `SKAMZUS0482917365` | 17 位 SkyPostal 亚马逊美国出口单号（`SKAMZUS` 加 10 位数字）。 |
 | `SP04829173605BR` | 15 位 SkyPostal 巴西跨境包裹单号（`SP` 加 11 位数字加 `BR`）。 |
 
-手动选择 SkyPostal 时，其追踪系统也支持其他 8 至 40 位、至少包含 1 位数字的字母数字商户运单号及合作方参考号。详见 [追踪单号格式](guide:tracking-number-formats)（英文）。
+手动选择 SkyPostal 时，其追踪器也会查询其他 8 至 40 位、至少包含 1 位数字的字母数字商户运单号及合作方参考号。详见 [追踪单号格式](guide:tracking-number-formats)（英文）。
 
 ## SkyPostal 物流状态含义解析
 
@@ -25,16 +25,16 @@ SkyPostal 为每个节点附带 3 位字母事件代码，涵盖电子预清关�
 
 | SkyPostal 代码与原文 | 对你的含义 | Peek 显示 |
 | --- | --- | --- |
-| `DRC`（`DATA RECEIVED`）、`HCV`（`HS_CODE VALIDATION`）、`TIC`（`TAX ID COLLECTED`）、`DCO`（`DOCUMENTATION COMPLETE`） | 包裹到达 SkyPostal 枢纽前已收到订单数据、HS 税号校验及买家税号信息。 | “已创建运单” |
-| `RUT`（`RECEPTACLE RECEIVED IN US TRANSPORT FACILITY`）、`REC`（`RECEIVED`） | 包裹实物已抵达 SkyPostal 迈阿密出口设施。 | “承运商已揽收” |
+| `DRC`（`DATA RECEIVED`）、`HCV`（`HS_CODE VALIDATION`）、`TIC`（`TAX ID COLLECTED`）、`DCO`（`DOCUMENTATION COMPLETE`） | 包裹到达 SkyPostal 枢纽前已收到订单数据、HS 税号校验及买家税号信息。 | “已生成面单” |
+| `RUT`（`RECEPTACLE RECEIVED IN US TRANSPORT FACILITY`）、`REC`（`RECEIVED`） | 包裹实物已抵达 SkyPostal 迈阿密出口设施。 | “已揽收” |
 | `XRS`（`X-RAY SCAN`）、`PLP`（`PROVIDER LABEL PRINTED`）、`INC`（`NESTED TO RECEPTACLE`）、`PRO`、`MNF`、`FDP`（`FLIGHT DEPARTED`）、`ATT`、`ATC`（`ARRIVED IN COUNTRY`）、`DTP`（`DELIVERED FROM AIRLINE TO OPERATOR`） | 已在迈阿密处理、装机起飞并在目的国由航空公司移交地面操作商（并非送达收件人门口）。 | “运输中” |
 | `CEN`（`CUSTOMS ENTRY`）、`CHE`（`CUSTOMS HOLD AT CONTROL ENTITY`） | 已进入目的国清关流程，或在机场保税仓等待海关放行。 | “清关中” |
 | `CCH`（`CUSTOMS CLEARED`）、`TTC`（`TENDERED TO LOCAL CARRIER`）、`TDP`、`PES`（`PROVIDER ENTRY SCAN`）、`INT`、`PRH`、`PDH`、`SLH`（`HOLD RESOLVED`） | 已清关放行、移交拉美本地承运商并在当地分拨中心转运。 | “运输中” |
 | `OFD`（`OUT FOR DELIVERY`） | 今天已由目的地合作快递员外出派送。 | “派送中” |
 | `PIK`（`AVAILABLE FOR PICKUP`） | 已在当地自提点或邮局备妥，可前往领取。 | “待取件” |
 | `CNA`（`CONSIGNEE NOT AVAILABLE`） | 投递未能完成，因为现场无人签收。 | “派送未成功” |
-| `HTI`（`HOLD FOR PROBLEMATIC TAX ID`）、`ICA`（`INCORRECT / INCOMPLETE ADDRESS`）、`DRF`（`DELIVERY REFUSED`）、`PLR`（`PROVIDER LABEL REJECTED`）、`INH`（`ON HOLD`） | 因税号问题、地址错误或不完整、标签被拒或拒收而被暂扣。 | “需关注” |
-| `DEL`（`DELIVERED`） | 目的地合作商已将包裹送达收件人。 | “已送达” |
+| `HTI`（`HOLD FOR PROBLEMATIC TAX ID`）、`ICA`（`INCORRECT / INCOMPLETE ADDRESS`）、`DRF`（`DELIVERY REFUSED`）、`PLR`（`PROVIDER LABEL REJECTED`）、`INH`（`ON HOLD`） | 因税号问题、地址错误或不完整、标签被拒或拒收而被暂扣。 | “需要留意” |
+| `DEL`（`DELIVERED`） | 目的地合作商已将包裹送达收件人。 | “已签收” |
 
 需注意 `DTP`（*Delivered from airline to operator*）仅表示航空公司把航空邮袋交给了目的地地面代理，并非妥投，因此 Peek 会将其保持在“运输中”。内部计费事件（`CUT`、`PAY`、`FSC`）不会改变阶段。
 
@@ -42,12 +42,12 @@ SkyPostal 为每个节点附带 3 位字母事件代码，涵盖电子预清关�
 
 经由 SkyPostal 从美国发往拉美的跨境包裹对海关与税号合规要求严格：
 
-- **买家税号（`TIC` / `HTI`）：** SkyPostal 会记录收到买家税号（`TAX ID COLLECTED`）及因税号异常导致的暂扣（`HOLD FOR PROBLEMATIC TAX ID`）。若轨迹显示 `HTI`，请立即联系卖家，或附完整追踪单号发送邮件至对应国家的 SkyPostal 客服邮箱。详见 [包裹被海关扣留指南](guide:customs)（英文）。
+- **买家税号（`TIC` / `HTI`）：** SkyPostal 会记录收到买家税号（`TAX ID COLLECTED`）及因税号异常导致的暂扣（`HOLD FOR PROBLEMATIC TAX ID`）。若轨迹显示 `HTI`，请联系卖家，或附完整追踪单号发送邮件至对应国家的 SkyPostal 客服邮箱。详见 [包裹被海关扣留指南](guide:customs)（英文）。
 - **当地末端派送：** 一旦出现 `CCH`（清关放行）和 `TTC`（移交当地承运商），即由当地承运商负责投递，SkyPostal 追踪器也会同步列出合作商的扫描节点及城镇名称。
 
 ## SkyPostal 包裹延误、暂扣或丢失
 
-- **迈阿密与目的国海关之间的静默期：** 集运包裹在 `FDP`（航班起飞）、`ATC`（抵达目的国）与 `CCH`（清关放行）之间常会暂停更新数日以等待清关查验。参阅 [物流为何停止更新](guide:tracking-not-updating)（英文）。
+- **迈阿密与目的国海关之间的静默期：** 集运包裹在 `FDP`（航班起飞）、`ATC`（抵达目的国）与 `CCH`（清关放行）之间常会暂停更新，以等待清关查验。参阅 [物流为何停止更新](guide:tracking-not-updating)（英文）。
 - **地址有误（`ICA`）或拒收（`DRF`）：** 请先联系下单平台（Amazon、Temu、eBay 等）申请补发或退款；如果包裹仍在当地暂扣，可附完整追踪单号给对应国家的 SkyPostal 客服邮箱发信。另见 [显示已送达却未收到](guide:delivered-not-received)（英文）、[包裹丢失](guide:lost-parcel)（英文）、[包裹破损](guide:damaged-parcel)（英文） 和 [退回寄件人](guide:returned-to-sender)（英文）。
 
 ## SkyPostal 客服与各国支持邮箱
@@ -62,21 +62,21 @@ SkyPostal 为每个节点附带 3 位字母事件代码，涵盖电子预清关�
 - **其他国家：** `customerservice@skypostal.com`
 - **美国总部：** *SkyPostal*, 2990 NW 75th Ave, Miami, FL 33122, United States（[skypostal.com/about-us](https://www.skypostal.com/about-us)）。
 
-> 请警惕要求点击陌生网站紧急缴税以放行拉美进口包裹的虚假 WhatsApp 或短信。任何真实税费请务必通过电商平台订单页或官方国家海关/邮政门户核实。参阅 [防范快递诈骗短信](guide:delivery-scam-texts)（英文）。
+> 请警惕要求点击陌生网站紧急缴税以放行拉美进口包裹的虚假 WhatsApp 或短信。任何真实税费请通过电商平台订单页或官方国家海关/邮政门户核实。参阅 [防范快递诈骗短信](guide:delivery-scam-texts)（英文）。
 
 ## 使用 Peek 追踪 SkyPostal 包裹
 
-输入 `SKAMZUS` 单号（虚构示例 `SKAMZUS0482917365`）或 `SP...BR` 单号（虚构示例 `SP04829173605BR`）时，[Peek](/) 会将 SkyPostal 自动识别为唯一候选，并在 SkyPostal 返回历史后确认承运；直接粘贴 `tracking.skypostal.com/?trck_number=` 或 `tracking.skypostal.com/single-tracking.aspx?trck_number=` 链接也能直接识别。其他商户运单号请在添加时点“更改”或在详情页点“更换承运商”选择 **SkyPostal**（搜 “Sky Postal” 同样可找到）。
+输入 `SKAMZUS` 单号（虚构示例 `SKAMZUS0482917365`）或 `SP...BR` 单号（虚构示例 `SP04829173605BR`）时，[Peek](/) 会自动将 SkyPostal 识别为唯一候选，并在 SkyPostal 的追踪器返回记录后显示“SkyPostal 有这个包裹的记录。”；直接粘贴 `tracking.skypostal.com/?trck_number=` 或 `tracking.skypostal.com/single-tracking.aspx?trck_number=` 链接也能直接识别。其他商户运单号请在添加时点“更换”或在详情页点“更换快递公司”选择 **SkyPostal**（搜 “Sky Postal” 同样可找到）。
 
-Peek 读取 SkyPostal 官方追踪器，展示对应阶段（“已创建运单”、“承运商已揽收”、“运输中”、“清关中”、“派送中”、“待取件”、“派送未成功”、“需关注”、“已送达”）、英文扫描原文，以及合作商城镇名或 SkyPostal 机场代码。3 位字母代码用于判定阶段，不会在 Peek 界面展示。SkyPostal 扫描时间不带时区偏移：Peek 按地点所在时区解析（`MIA` 用纽约时间、`GRU` 用圣保罗时间，波哥大或利马亦然；无地点的沿用相邻节点时区）并换算为你设备的本地时钟。由于合作商记录可能从不同数据源分时段重复回传，送达之后补传的早期节点不会把已送达状态回退。Peek 不保存签收凭证、备注或合作商单号，也不会显示签收人姓名；SkyPostal 追踪器不提供预计送达日、重量或签收时刻。
+Peek 读取 SkyPostal 的追踪器，展示对应阶段（“已生成面单”、“已揽收”、“运输中”、“清关中”、“派送中”、“待取件”、“派送未成功”、“需要留意”、“已签收”）、英文扫描原文，以及合作商城镇名或 SkyPostal 机场代码。3 位字母代码用于判定阶段，不会在 Peek 界面展示。SkyPostal 扫描时间不带时区偏移：Peek 按地点所在时区解析（`MIA` 用纽约时间、`GRU` 用圣保罗时间，波哥大或利马亦然；无地点的沿用相邻节点时区）并换算为你设备的本地时钟。由于合作商记录可能从不同数据源分时段重复回传，送达之后补传的早期节点不会把已送达状态回退。Peek 不保存签收凭证、备注或合作商单号，也不会显示签收人姓名；SkyPostal 追踪器不提供预计送达日、重量或送达时间。
 
-当你打开包裹，或在开启通知的情况下进入派送日时，只要 SkyPostal 官网正常响应，Peek 最高每 10 分钟检查一次；在出现 `OFD`（`OUT FOR DELIVERY`）当天，自最新扫描所在时钟早上 6 点起每 2 分钟检查一次。其余时间每小时一次；在“已创建运单”或“承运商已揽收”下满 12 小时或连续两天无新动态时改为每小时一次，在“已创建运单”下满七天改为每 6 小时一次。若 SkyPostal 追踪器无响应而改由综合追踪服务跟进，Peek 每小时检查一次，静默满一天后每 3 小时一次，派送当天最高每 15 分钟一次。
+当你在 Peek 中打开包裹页面，或在派送当日开启通知时，Peek 最多每 10 分钟检查一次；在 SkyPostal 显示 `OFD`（`OUT FOR DELIVERY`）当天，只要 SkyPostal 的追踪器有响应，会从最新扫描所在时钟的早上 6 点起每 2 分钟检查一次。其余情况下每小时检查一次。若包裹停留在“已生成面单”或“已揽收”超过 12 小时，或连续两天没有新动态，无论你以何种方式关注，均改为每小时检查一次；若停留在“已生成面单”超过七天，则每 6 小时检查一次。当 SkyPostal 的追踪器无响应、Peek 仅通过追踪服务跟进时，每小时检查一次，静默一天后每 3 小时一次，派送当天最多每 15 分钟一次。
 
-若包裹处于“已创建运单”、“承运商已揽收”或“运输中”且最新扫描满四天，Peek 会按该扫描日期标示并提示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 SkyPostal 查询。”，同时提供指向 SkyPostal 客服页面的帮助链接；超过三周无更新时会建议联系卖家并继续查询。
+当最新扫描距今已满四天，且包裹仍处于“已生成面单”、“已揽收”或“运输中”时，Peek 会用该次扫描的日期加以标记，例如“自10月12日周一起没有物流更新”。包裹页面随后会显示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 SkyPostal 查询。”，并附上指向 SkyPostal 客户服务页面的“向 SkyPostal 寻求帮助”链接。如果三周没有新扫描，页面会显示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 SkyPostal 查询。”
 
-你可设置“每次扫描”、“重要节点”或“仅派送和送达”通知。Peek 仅监控物流进度，无法代交税号、办理拉美清关或替你联系 SkyPostal。
+你可设置“每次扫描”、“重要环节”或“仅派送当天”通知。Peek 仅监控物流进度，无法代交税号、办理拉美清关或替你联系 SkyPostal。
 
-## SkyPostal 追踪常见问题
+## 关于 SkyPostal 物流查询的问题
 
 ### SkyPostal 追踪单号是什么格式？
 

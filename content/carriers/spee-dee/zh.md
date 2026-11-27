@@ -38,34 +38,34 @@ Spee-Dee 包裹进度表包含三列——`Date / Time`、`Location` 和 `Activi
 | --- | --- |
 | `ARRIVAL SCAN` | 已扫描进入中西部陆运网络中的 Spee-Dee 转运场站或分拣中心。 |
 | `OUT FOR DELIVERY` *（后常附带括号内的路线号）* | 已装上当地 Spee-Dee 派送车，今天正送往住宅或商业地址。 |
-| `Delivered` | 已送达；Spee-Dee 官网摘要还会列出送达时间、地址以及（如有）签收人签名。 |
+| `Delivered` | 已送达；Spee-Dee 自己页面上的摘要还会列出送达时间、地址以及（如有）签收人签名。 |
 | `No packages were found matching the barcode supplied.` | 该条码尚未扫描入 Spee-Dee 系统，或输入有误。 |
 
 ### 循环复用的 16 位条码
 
-Spee-Dee 会将旧的 16 位 `SP` 条码重新用于新包裹。在 Spee-Dee 原始网页上，你当前包裹的扫描下方仍可能残留几个月前已签收包裹的旧记录。在官网查看复用条码时，请看表格顶部的最新日期，读到前一次货运更早的 `Delivered` 记录即可停止。
+Spee-Dee 会将旧的 16 位 `SP` 条码重新用于新包裹。在 Spee-Dee 原始网页上，你当前包裹的扫描下方仍可能残留几个月前已签收包裹的旧记录。在 Spee-Dee 的网站上查看复用条码时，请看表格顶部的最新日期，读到前一次货运更早的 `Delivered` 记录即可停止。
 
 ## 延误、无扫描与理赔
 
 当追踪结果看似异常时，可留意以下几点：
 
-- **暂无扫描：** 如果官网提示 `No packages were found matching the barcode supplied.`，说明 Spee-Dee 还未扫描包裹或条码有误。核对条码后可询问卖家是否已交寄，或参阅 [物流停止更新怎么办](guide:tracking-not-updating)（英文）。
+- **暂无扫描：** 如果 Spee-Dee 的页面返回 `No packages were found matching the barcode supplied.`，说明 Spee-Dee 还未扫描包裹或条码有误。核对条码后可询问卖家是否已交寄，或参阅 [物流停止更新怎么办](guide:tracking-not-updating)（英文）。
 - **频繁刷新触发限流：** Spee-Dee 追踪主机限制每分钟查询次数，短时间连续刷新可能临时返回 HTTP 503。稍等一分钟或交给 Peek 自动轮询即可避免触发限流。
 - **未收到货或破损理赔：** Spee-Dee 的 [客户服务表单](https://speedeedelivery.com/customer-service/) 专门设有 **Claims – Non-Delivery** 和 **Claims – Damage** 选项，并要求提交物流查询时附上**完整收货地址**。若显示已送达却未收到，请参阅 [显示已送达却未收到指南](guide:delivered-not-received)（英文）。
 
 ## 使用 Peek 追踪 Spee-Dee
 
-将任意 18 位（`SP` 加 16 位数字）或 20 位（`SP` 加 18 位数字）Spee-Dee 条码，或 `speedeedelivery.com` 链接粘贴到 Peek 中，Peek 会立即识别为 Spee-Dee。如需改选承运商，请在添加时点**更改**或在追踪页点**更换承运商**。
+将任意 18 位（`SP` 加 16 位数字）或 20 位（`SP` 加 18 位数字）Spee-Dee 条码，或 `speedeedelivery.com` 链接粘贴到 Peek 中，Peek 会立即识别为 Spee-Dee。如需更换快递公司，请在添加时点**更换**或在追踪页点**更换快递公司**。
 
-Peek 通过开源的 [universal-parcel-scraper Spee-Dee 适配器](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/spee-dee) 直接读取 Spee-Dee 进度页（若主机拒绝直连则经由远程网络读取）。遇到**复用条码**时，Peek 会自动截断，仅保留距前一次送达至少一天之后的新包裹记录；同时剔除网页调试注释与 `OUT FOR DELIVERY` 后的路线号，并记录每次扫描的城市/场站与时间。Spee-Dee 给出无时区偏移的本地时间：Peek 按地点所在时区解析（St. Cloud、Fargo、Milwaukee、Sioux Falls 用芝加哥时间，Detroit 用底特律时间；无地点则沿用相邻扫描，否则按纽约时间），再换算为你设备的本地时钟。Spee-Dee 官网不提供预计送达日或包裹重量。
+Peek 通过开源的 [universal-parcel-scraper Spee-Dee 适配器](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/spee-dee) 直接读取 Spee-Dee 进度页（若主机拒绝直连则经由远程网络读取）。遇到**复用条码**时，Peek 只保留上一次送达（一天或更早之前）以来的记录；同时剔除网页调试注释与 `OUT FOR DELIVERY` 后的路线号，并记录每次扫描的城市/场站与时间。Spee-Dee 给出无时区偏移的本地时间：Peek 按地点所在时区解析（St. Cloud、Fargo、Milwaukee、Sioux Falls 用芝加哥时间，Detroit 用底特律时间；无地点则沿用相邻扫描，否则按纽约时间），再换算为你设备的本地时钟。Spee-Dee 的追踪器不提供预计送达日或包裹重量。
 
-Peek 将 `ARRIVAL SCAN` 归为**运输中**、`OUT FOR DELIVERY` 归为**派送中**、`Delivered` 归为**已送达**，其余活动则按通用状态规则归类。
+Peek 将 `ARRIVAL SCAN` 归为**运输中**、`OUT FOR DELIVERY` 归为**派送中**、`Delivered` 归为**已签收**，其余活动则按通用状态规则归类。
 
-当你打开包裹，或在开启通知的情况下进入派送日时，只要 Spee-Dee 官网正常响应，Peek 最高每 10 分钟检查一次；在显示 `OUT FOR DELIVERY` 当天，自最新扫描所在时钟早上 6 点起每 2 分钟检查一次（若上次查询需经浏览器模式则每 5 分钟一次）。其余时间每小时一次；在“已创建运单”或“承运商已揽收”下满 12 小时或连续两天无新动态时改为每小时一次，在“已创建运单”下满七天改为每 6 小时一次。若 Spee-Dee 无响应而改由综合追踪服务跟进，Peek 每小时检查一次，静默满一天后每 3 小时一次，派送当天最高每 15 分钟一次。
+当你在 Peek 中打开包裹页面，或在派送当日开启通知时，Peek 最多每 10 分钟检查一次；在 Spee-Dee 显示 `OUT FOR DELIVERY` 当天，只要 Spee-Dee 的追踪器有响应，会从最新扫描所在时钟的早上 6 点起每 2 分钟检查一次（若上次检查需要打开浏览器，则每 5 分钟一次）。其余情况下每小时检查一次。若包裹停留在“已生成面单”或“已揽收”超过 12 小时，或连续两天没有新动态，无论你以何种方式关注，均改为每小时检查一次；若停留在“已生成面单”超过七天，则每 6 小时检查一次。当 Spee-Dee 无响应、Peek 仅通过追踪服务跟进时，每小时检查一次，静默一天后每 3 小时一次，派送当天最多每 15 分钟一次。
 
-若包裹处于“已创建运单”、“承运商已揽收”或“运输中”且最新扫描满四天，Peek 会按该扫描日期标示并提示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 Spee-Dee 查询。”，同时附上指向 Spee-Dee 客服页的帮助链接；超过三周无更新时会建议联系卖家并继续查询。
+当最新扫描距今已满四天，且包裹仍处于“已生成面单”、“已揽收”或“运输中”时，Peek 会用该次扫描的日期加以标记，例如“自10月12日周一起没有物流更新”。包裹页面随后会显示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 Spee-Dee 查询。”，并附上指向 Spee-Dee 客户服务页面的“向 Spee-Dee 寻求帮助”链接。如果三周没有新扫描，页面会显示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 Spee-Dee 查询。”
 
-你可在 Peek 通知偏好中选择**每次扫描**、**重要节点**或**仅派送和送达**。
+你可在 Peek 通知偏好中选择**每次扫描**、**重要环节**或**仅派送当天**。
 
 ## 联系 Spee-Dee Delivery
 

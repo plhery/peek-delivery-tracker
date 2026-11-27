@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Express One: status, pontos de coleta e ajuda
-description: Rastreie encomendas da Express One na Hungria: onde encontrar o código, significado dos status, pontos e armários Exopoint, entregas perdidas e contatos.
+description: Rastreie encomendas da Express One na Hungria: onde encontrar o código, significado dos status, pontos e armários Exopoint, entregas não realizadas e contatos.
 slug: express-one-tracking
 published: 2026-11-26
 updated: 2026-11-26
@@ -14,7 +14,7 @@ A Express One envia um pré-aviso por e-mail assim que o remetente registra a en
 
 O rastreador também aceita a referência do remetente ou o número do documento, mas essas opções exigem o Company ID de 5 dígitos do remetente; portanto, use o ID do pacote (o número do código de barras).
 
-A Express One não publica um padrão oficial. Os IDs de pacote vistos até agora aparecem em dois formatos (dígitos inventados):
+A Express One não publica um formato. Os IDs de pacote vistos até agora aparecem em dois formatos (dígitos inventados):
 
 | Código | A quem pertence |
 | --- | --- |
@@ -35,37 +35,37 @@ O site tracking.expressone.hu abre em inglês ou húngaro conforme o idioma do n
 | `Shipping details received, shipment not yet handed over to EXOHU` | O remetente [registrou a encomenda](guide:tracking-statuses); a Express One ainda não está com ela. |
 | `Shipment (pan) data uploaded` | Os dados da encomenda entraram no sistema da Express One, geralmente logo após uma leitura no hub. |
 | `Arrived at central hub` | Chegou ao centro de distribuição central em Budapeste. |
-| `Departed central hub` | Saiu do centro central. |
+| `Departed central hub` | Saiu do centro de distribuição central. |
 | `Arrived at depot` | Chegou ao depósito que faz entregas no seu endereço. |
 | `Out for delivery` | Está na van do entregador hoje. |
 | `Delivery schedule updated` | O plano de entrega foi recalculado; o volume não se moveu. |
 | `Processing in progress` | A entrega foi transferida para mais tarde, sem motivo informado. |
 | `Addressee not present at delivery address` | O entregador compareceu e não havia ninguém no local. |
-| `Addressee unavailable` | A segunda tentativa também falhou. |
+| `Addressee unavailable` | A segunda tentativa também não deu certo. |
 | `Obstacles of nature` | Mau tempo interrompeu a rota; conta como tentativa e a encomenda sai novamente. |
 | `Successful delivery` | Entregue. |
 
 EXOHU significa Express One Hungary: o primeiro status indica apenas que a etiqueta existe. A barra acima do histórico tem seus próprios rótulos, de `Shipment data uploaded` até `Successfully delivered`. Em húngaro, entregue aparece como `Sikeres kézbesítés`.
 
-## Entregas da Express One, pontos de coleta e tentativas falhas
+## Entregas da Express One, pontos de coleta e entregas não realizadas
 
 **Quando chega.** O pré-aviso informa um intervalo de 4 horas. Na manhã da entrega, uma mensagem traz uma janela de 2 horas, que a Express One classifica apenas como indicativa: o entregador pode chegar antes ou depois. Nesse dia, a página de rastreamento mostra quantas paradas faltam antes da sua. Não há entregas no fim de semana, exceto entrega paga aos sábados para remetentes comerciais.
 
-**Alteração da entrega.** O botão "Modification" no SMS ou e-mail da manhã permite alterar data ou endereço, ou direcionar o pacote para uma loja parceira ou armário, funcionando até uma hora antes de o entregador chegar. Alterações só são permitidas no primeiro dia de entrega e apenas uma vez. Algumas opções dependem do remetente (pacotes grandes não cabem em armários). Os termos da Express One afirmam que a alteração conta como tentativa de entrega e pode custar taxa extra; já um post do blog da Express One de 2024 diz que o redirecionamento é gratuito.
+**Alteração da entrega.** O botão "Modification" no SMS ou e-mail da manhã permite alterar o horário ou o endereço, ou direcionar o pacote para uma loja parceira ou armário, funcionando até uma hora antes de o entregador chegar. Alterações só são permitidas no primeiro dia de entrega e apenas uma vez. Algumas opções dependem do remetente (pacotes grandes não cabem em armários). Os termos da Express One afirmam que a alteração conta como tentativa de entrega e pode custar taxa extra; já um post do blog da Express One de 2024 diz que o redirecionamento é gratuito.
 
 **Na entrega.** Destinatários pessoa física assinam e fornecem o número de um documento de identidade. O pagamento na entrega pode ser feito em dinheiro (até 300.000 Ft), no cartão (até 1.000.000 Ft) ou antecipadamente pelo link na mensagem de pré-chegada; em um Exopoint, o limite em dinheiro é de 250.000 Ft. Não é permitido abrir a caixa antes de assinar e pagar.
 
-**Entrega perdida.** Pelos termos da Express One, ela avisa por e-mail ou SMS até o dia útil seguinte, faz mais uma tentativa gratuita e guarda o volume até o 5º dia útil no máximo. Enquanto isso, você pode pedir nova data ou ponto de retirada. Após a segunda falha, a encomenda retorna ao remetente; um post de 2024 no blog diz que ela primeiro aguarda 5 dias úteis no depósito central de Budapeste.
+**Entrega não realizada.** Pelos termos da Express One, ela avisa por e-mail ou SMS até o dia útil seguinte, faz mais uma tentativa gratuita e guarda o volume até o 5º dia útil no máximo. Enquanto isso, você pode pedir nova data ou ponto de retirada. Após uma segunda tentativa não realizada, a encomenda retorna ao remetente; um post de 2024 no blog diz que ela primeiro aguarda 5 dias úteis no depósito central de Budapeste.
 
 **Pontos de coleta e armários.** Muitas lojas permitem escolher um ponto ou armário Exopoint no checkout. A página de pontos da Express One afirma que o volume aguarda até uma semana, 24 horas por dia. Os artigos do blog divergem: 3 dias em um EXOBOX, 2 em um Alzabox, até 7 em um ponto Packeta (2025), 72 horas em armário (2026), 5 dias em ponto de coleta (2024), com acesso 24 horas apenas nos armários EXOBOX e Alzabox. Retirar no centro logístico de Budapeste (H-1239 Budapest, Európa street 12, prédio L1) exige agendamento com o atendimento.
 
 ## Encomenda da Express One atrasada, danificada ou perdida
 
-**Sem atualização ou não encontrada.** A Express One não define prazo mínimo de espera. O rastreador informa que o número pode estar incorreto, ter mais de 180 dias ou ainda não ter sido registrado pelo remetente, orientando tentar novamente mais tarde. Seus termos permitem apagar os dados se nenhum volume chegar em 5 dias úteis e classificam o prazo previsto apenas como informativo. Veja [rastreamento que não atualiza](guide:tracking-not-updating).
+**Sem atualização ou não encontrada.** A Express One não informa prazo de espera. O rastreador informa que o número pode estar incorreto, ter mais de 180 dias ou ainda não ter sido registrado pelo remetente, orientando tentar novamente mais tarde. Seus termos permitem apagar os dados se nenhum volume chegar em 5 dias úteis e classificam o prazo previsto apenas como informativo. Veja [rastreamento que não atualiza](guide:tracking-not-updating).
 
 **Produto danificado ou errado.** Avise a loja o quanto antes: a Express One abre reclamação após o relato do remetente e responde pelo transporte, não pelo conteúdo. Registre danos visíveis no ato da entrega; reporte danos ocultos por escrito em até 3 dias úteis após o recebimento, sob pena de perder o direito.
 
-**Extravio.** Normalmente o remetente abre o pedido, embora você também possa fazê-lo se recebeu o pacote ou se o remetente transferiu o direito por escrito. A reclamação escrita por perda total deve ser feita em até 6 meses a partir do 15º dia após a postagem, com número do conhecimento, comprovação do conteúdo e valor e formulário da Express One. A Express One responde em até 30 dias corridos; se não ficar satisfeito, você pode recorrer à NMHH, autoridade húngara de mídia e comunicações, em até 30 dias.
+**Extravio.** Normalmente o remetente abre o pedido, embora você também possa fazê-lo se recebeu o pacote ou se o remetente transferiu o direito por escrito. O pedido de indenização por perda total deve ser feito por escrito em até 6 meses a partir do 15º dia após a postagem, com número do conhecimento, comprovação do conteúdo e valor e o formulário de indenização da Express One. A Express One responde em até 30 dias corridos; se não ficar satisfeito, você pode recorrer à NMHH, autoridade húngara de mídia e comunicações, em até 30 dias.
 
 ## Telefone de contato e atendimento da Express One
 
@@ -73,14 +73,14 @@ Conforme a página de contato em inglês da Express One, em dias úteis das 8h �
 
 - **Atendimento ao cliente:** +36 1 8 777 400, ugyfelszolgalat@expressone.hu (inclusive se o entregador não atender). Em períodos de pico, a Express One recomenda escrever.
 - **Atendimento internacional:** +36 1 8 777 410, intcs@expressone.hu; reclamações em intcsreklamacio@expressone.hu.
-- **Reclamações por dano:** +36 1 8 777 470, karugy@expressone.hu.
+- **Pedidos de indenização por dano:** +36 1 8 777 470, karugy@expressone.hu.
 - **Formulário de contato:** na [página de contato da Express One](https://expressone.hu/en/kapcsolat), com assuntos como "I am expecting a parcel" e "Delivery complaint"; ambos exigem o código da encomenda.
 
 A página de rastreamento da Express One também lista o telefone +36 1 8 777 444 e um chatbot.
 
 ## Acompanhe encomendas da Express One com o Peek
 
-O [Peek](/) não consulta a Express One automaticamente para um código de 13 dígitos, pois testa outras transportadoras. Um código de 24 dígitos vai primeiro para a Express One quando você busca da Hungria, antes de Austrian Post, InPost e Ciblex; fora da Hungria, o Peek consulta essas três primeiro e depois a Express One. Se nenhuma reconhecer, você verá "ainda não encontrada · o Peek continua verificando": escolha "Express One" em "Alterar". Ou cole um link de tracking.expressone.hu com `?plc_number=`, que identifica a Express One qualquer que seja o número.
+O [Peek](/) não consulta a Express One por conta própria para um código de 13 dígitos: ele o oferece a outras transportadoras. Um código de 24 dígitos vai primeiro para a Express One quando você busca da Hungria, antes de Austrian Post, InPost e Ciblex; fora da Hungria, o Peek consulta essas três primeiro e depois a Express One. Se nenhuma reconhecer, você verá "ainda não encontrada · o Peek continua verificando": escolha "Express One" com "Trocar". Ou cole um link de tracking.expressone.hu com `?plc_number=`, que identifica a Express One qualquer que seja o número.
 
 As movimentações da Express One vêm sem fuso horário: o Peek interpreta cada uma no relógio do local da leitura (horário da Hungria para leituras na Hungria) e exibe o histórico próprio da Express One. Ele lê o status e, nas leituras de hub, a cidade e o país. Os textos permanecem como a Express One os envia, exceto `Out for delivery`; `Successful delivery` conta como entregue e um trajeto de retorno conta como devolvida. Uma leitura desconhecida pelo Peek exibe o texto da Express One sem etapa. Você pode ativar notificações de mudança de status. Não há previsão de entrega, peso nem ponto de coleta, e a barra de progresso e a assinatura ficam de fora.
 

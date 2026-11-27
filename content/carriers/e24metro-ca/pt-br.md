@@ -1,19 +1,19 @@
 ---
 title: Rastreamento E24 (Metro Supply Chain): entrega no Canadá
-description: Rastreie uma encomenda da E24 (Metro Supply Chain) no Canadá: referências de rastreamento, serviços de entrega, suporte ao cliente e sede em Montreal.
+description: Rastreie uma encomenda da E24 (Metro Supply Chain) no Canadá: referências de rastreamento, suporte à entrega e contato da sede em Montreal.
 slug: e24metro-ca-tracking
 published: 2026-11-26
 updated: 2026-11-26
 ---
 
-**E24** (*Metro E24*, *Metro E24 Solutions*) é uma transportadora canadense de entregas. O Peek também a lista sob os nomes da **Metro Supply Chain**, uma empresa de logística terceirizada (3PL) sediada em Montreal cujo site oficial não utiliza o nome E24 ([metroscg.com](https://www.metroscg.com/)). A Metro Supply Chain opera 190 unidades em 6 países, com 22,5 milhões de pés quadrados de armazenagem, e realiza 7 milhões de entregas de última milha por ano na América do Norte; seus serviços incluem fulfillment para e-commerce e venda direta ao consumidor, White Glove Delivery, Last-Mile Delivery, Time Critical Logistics e Reverse Logistics. Cole a referência de rastreamento fornecida pela loja na caixa acima e escolha **E24**.
+**E24** (*Metro E24*, *Metro E24 Solutions*) é uma transportadora canadense de entregas. O Peek também a lista sob os nomes da **Metro Supply Chain**, uma empresa de logística terceirizada (3PL) sediada em Montreal cujo próprio site não utiliza o nome E24 ([metroscg.com](https://www.metroscg.com/)). A Metro Supply Chain opera 190 unidades em 6 países, com 22,5 milhões de pés quadrados de armazenagem, e realiza 7 milhões de entregas de última milha por ano na América do Norte; seus serviços incluem fulfillment para e-commerce e venda direta ao consumidor, White Glove Delivery, Last-Mile Delivery, Time Critical Logistics e Reverse Logistics. Cole a referência de rastreamento fornecida pela loja na caixa acima e escolha **E24**.
 
 ## Códigos de rastreamento da E24 (Metro Supply Chain)
 
 O Peek não possui padrão numérico nem regra de link de rastreamento para a E24:
 
 - **Onde encontrar seu código:** use a referência de rastreamento presente no e-mail de confirmação de envio ou na página do pedido da loja.
-- **Como escolher a E24:** o Peek nunca seleciona a E24 automaticamente pelo formato do código; portanto, insira a referência e escolha **E24** manualmente. Veja também [formatos de código de rastreamento](guide:tracking-number-formats).
+- **Como escolher a E24:** o Peek nunca seleciona a E24 pelo formato do código; portanto, insira a referência e escolha **E24** você mesmo. Veja também [formatos de código de rastreamento](guide:tracking-number-formats).
 
 ## Serviços da Metro Supply Chain
 
@@ -25,9 +25,9 @@ De acordo com a [Metro Supply Chain](https://www.metroscg.com/):
 
 ## O que significam as etapas de rastreamento da E24
 
-A E24 não publica uma lista oficial de status de rastreamento. O Peek acompanha a E24 por meio de serviços de rastreamento, de modo que as movimentações mantêm o texto fornecido por eles, e o Peek atribui a cada movimentação a etapa correspondente ao que o texto indica.
+A E24 não publica uma lista de seus status de rastreamento. O Peek acompanha a E24 por meio de serviços de rastreamento, de modo que as movimentações mantêm o texto fornecido por eles, e o Peek atribui a cada movimentação a etapa correspondente ao que o texto indica.
 
-## Encomenda da E24 atrasada, perdida ou não entregue
+## Encomenda da E24 atrasada, não entregue ou desaparecida
 
 Para suporte de entrega, o FAQ da Metro Supply Chain orienta usar a [página de contato](https://www.metroscg.com/contact-us/) e selecionar "find my package" no menu suspenso. Para reembolso ou item danificado, entre em contato com a loja onde você fez a compra.
 
@@ -42,19 +42,19 @@ Endereços oficiais e portal de contato publicados em [Metro Supply Chain Contac
 - **Sede no Canadá:** *Metro Supply Chain Inc.*, 1002 Sherbrooke St West, Suite 2000, Montreal, Quebec, Canadá.
 - **Escritório na Europa:** *Metro Supply Chain Europe*, Saxham Business Park, Little Saxham, Bury St Edmunds, Suffolk, IP28 6RX, Reino Unido.
 
-> Desconfie de mensagens SMS falsas cobrando uma pequena taxa on-line para reagendar a entrega de uma encomenda no Canadá. Confirme sempre qualquer aviso diretamente na página do pedido na loja ou no e-mail oficial de confirmação de entrega. Veja [golpes de SMS de entrega](guide:delivery-scam-texts).
+> Desconfie de mensagens SMS falsas cobrando uma pequena taxa on-line para reagendar a entrega de uma encomenda no Canadá. Confirme sempre qualquer aviso diretamente na página do pedido na loja ou no e-mail de confirmação de entrega verificado. Veja [golpes de SMS de entrega](guide:delivery-scam-texts).
 
 ## Acompanhe uma encomenda da E24 com o Peek
 
-Como o Peek não tem padrão de código nem regra de link para a E24, insira sua referência no [Peek](/), toque em "Alterar" ao adicionar (ou em "Alterar transportadora" na tela da encomenda) e selecione **E24** (buscar por "Metro E24", "Metro E24 Solutions", "e24 Metro" ou "Metro Supply Chain" também encontra a transportadora).
+Como o Peek não tem padrão de código nem regra de link para a E24, insira sua referência no [Peek](/), toque em "Trocar" ao adicionar (ou em "Trocar transportadora" na tela da encomenda) e selecione **E24** (buscar por "Metro E24", "Metro E24 Solutions", "e24 Metro" ou "Metro Supply Chain" também encontra a transportadora).
 
 O Peek não consulta a E24 diretamente e acompanha as remessas da E24 por meio de serviços de rastreamento, exibindo a etapa ("Etiqueta criada", "Recebida pela transportadora", "Em trânsito", "Saiu para entrega", "Tentativa de entrega", "Precisa de atenção", "Devolvida ao remetente", "Entregue") e as movimentações sempre que houver atualizações para a sua referência.
 
 Enquanto acompanha a encomenda por serviços de rastreamento, o Peek verifica a cada hora, passa a consultar a cada 3 horas depois de um dia sem nova movimentação e verifica até a cada 15 minutos no dia em que a encomenda sai para entrega, enquanto você estiver com ela aberta ou com notificações ativadas.
 
-Quando a movimentação mais recente tem quatro dias e a encomenda continua em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek destaca o dia daquela leitura, como "Sem atualização desde seg 12 out". A página da encomenda passa a mostrar: "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando E24." Após três semanas sem novas movimentações, aparece: "Nenhuma novidade há mais de três semanas. Se ainda não chegou, fale com o vendedor. O Peek continua consultando E24."
+Quando a leitura mais recente tem quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza a data dessa leitura, como "Sem atualizações desde seg 12 out". A página do pacote então exibe "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando E24." Após três semanas sem novas leituras, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando E24."
 
-Você pode escolher alertas para "Todas as movimentações", "Etapas importantes" ou "Somente entrega". O Peek apenas acompanha atualizações de rastreamento e não pode agendar entregas, alterar seu endereço nem contatar a Metro Supply Chain ou a loja em seu nome.
+Você pode escolher alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek apenas acompanha atualizações de rastreamento e não pode agendar entregas, alterar seu endereço nem contatar a Metro Supply Chain ou a loja em seu nome.
 
 ## Perguntas sobre o rastreamento E24 (Metro Supply Chain)
 
@@ -64,7 +64,7 @@ O Peek lista a E24 como uma transportadora canadense de entregas, também sob os
 
 ### Por que o Peek não detectou a E24 automaticamente pelo meu código?
 
-O Peek não tem um padrão de código definido para a E24; por isso, selecione **E24** manualmente usando "Alterar" ou "Alterar transportadora".
+O Peek não tem um padrão de código definido para a E24; por isso, selecione **E24** você mesmo com "Trocar" ou "Trocar transportadora".
 
 ### Quem devo contatar para reagendar uma entrega da E24?
 

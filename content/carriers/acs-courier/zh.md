@@ -19,7 +19,7 @@ ACS 将其称为运单号（shipping number），网店则常称之为“voucher
 
 你可以在 ACS 的短信、Viber 或邮件、快递柜取件消息以及网店发货邮件中找到该编号。派送未成功后留下的“Absent”通知单上的编号同样可以在 ACS 查询页面使用；退货包裹则会获得一个全新单号。
 
-10 位纯数字并非 ACS 独有：[Geniki Taxydromiki](carrier:geniki-taxydromiki) 单号外观完全相同，[DHL Express](carrier:dhl-express)、Relais Colis 等快递也使用 10 位数字。如果网店邮件写明了其他快递，请前往对应承运商查询。更多说明见[运单号格式指南](guide:tracking-number-formats)（英文）。
+10 位纯数字并非 ACS 独有：[Geniki Taxydromiki](carrier:geniki-taxydromiki) 单号外观完全相同，[DHL Express](carrier:dhl-express)、[Relais Colis](carrier:relais-colis) 等快递也使用 10 位数字。如果网店邮件写明了其他快递，请前往对应承运商查询。更多说明见[运单号格式指南](guide:tracking-number-formats)（英文）。
 
 **塞浦路斯及来自 [Shein、Temu 或 AliExpress](guide:tracking-from-china)（英文）的订单。** 通过 DPD 或 [Speedy](carrier:speedy) 转运时，包裹抵达塞浦路斯后 ACS 会短信发送其 10 位单号。ACS 表示，如果尚未收到短信或 Viber 通知，说明包裹还未到达，ACS 也无法提供更多信息。
 

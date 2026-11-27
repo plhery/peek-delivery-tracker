@@ -10,13 +10,13 @@ A Relais Colis é uma rede francesa que entrega encomendas em comércios locais 
 
 ## Código de rastreamento Relais Colis (numéro de colis)
 
-O formulário da Relais Colis pede um "numéro de colis" de 12 a 16 caracteres, sem detalhar o significado de letras ou dígitos. Formatos mais comuns (exemplos fictícios):
+O formulário da Relais Colis pede um "numéro de colis" de 12 a 16 caracteres, sem detalhar o significado de letras ou dígitos. Formatos (exemplos fictícios):
 
 | Formato (fictício) | O que saber |
 | --- | --- |
 | `CC4829103756` a `CC48291037561829` | `CC` seguido de 10 a 14 dígitos: o Peek registra como Relais Colis imediatamente. |
 | `7482910375` | 10 dígitos. Também coincide com DHL, [Mondial Relay](carrier:mondial-relay) e outras. |
-| `18492037164829` | 14 dígitos. Coincide com DPD, SEUR, BRT, [Ciblex](carrier:ciblex) e outras; o Peek não consulta a Relais Colis automaticamente nesse formato. |
+| `18492037164829` | 14 dígitos. Coincide com DPD, SEUR, BRT, [Ciblex](carrier:ciblex) e outras; o Peek não consulta a Relais Colis nesse formato. |
 | `VD4829103756` | `VD` e 10 dígitos. Também coincide com [Colis Privé](carrier:colis-prive). |
 
 Para compras on-line, procure no e-mail de envio da loja ou na página do pedido. Não tem o número? A busca "Je n'ai pas mon numéro de colis" da Relais Colis usa o e-mail ou telefone do destinatário e o nome da loja; veja também [como encontrar um código de rastreamento](guide:find-tracking-number), em inglês.
@@ -30,13 +30,13 @@ O site e o rastreamento da Relais Colis existem apenas em francês. Cada leitura
 | A Relais Colis mostra | O que significa para você |
 | --- | --- |
 | `colis a été annoncé` | A loja anunciou o envio, mas a Relais Colis ainda não está com o pacote. |
-| `pris en charge` | A Relais Colis coletou/recebeu a encomenda. |
+| `pris en charge` | A Relais Colis está com a encomenda. |
 | `en transit` | Em trânsito pela rede da Relais Colis. |
 | `livraison dans votre relais` | A caminho do seu ponto de retirada; ainda não chegou lá. |
 | `en cours de livraison` | Saiu para entrega. |
 | `disponible dans votre relais` | Pronta para retirada no seu ponto Relais Colis. |
 | `retiré par le destinataire` | Retirada por você: entregue. |
-| `livraison impossible` | Tentativa de entrega sem sucesso. |
+| `livraison impossible` | Entrega não realizada. |
 | `retourné à votre vendeur` | Retornando à loja remetente. |
 | `Aucune donnée de suivi pour votre colis, veuillez réessayer plus tard` | A página ainda não tem dados de rastreamento para esse código. |
 
@@ -74,13 +74,13 @@ Conforme listado em relaiscolis.com (todo atendimento é em francês):
 - **Formulário de reclamação:** o link "Pour une réclamation" no FAQ leva à central de ajuda da Relais Colis.
 - **E-mail:** contactctoc@relaiscolis.com, para pacotes extraviados enviados via relaiscolis.com.
 
-> A Relais Colis alerta para e-mails e ligações falsas em seu nome. Todos os e-mails oficiais terminam em `@relaiscolis.com`, a empresa nunca pede dados pessoais por telefone ou e-mail e você não deve retornar ligações para números tarifados.
+> A Relais Colis alerta para e-mails e ligações falsas em seu nome. Todos os endereços dela terminam em `@relaiscolis.com`, a empresa nunca pede dados pessoais por telefone ou e-mail e você não deve retornar ligações para números tarifados.
 
 ## Como rastrear encomendas Relais Colis no Peek
 
-O [Peek](/) identifica códigos `CC` como Relais Colis imediatamente. Outros formatos são compartilhados, então o Peek consulta as transportadoras prováveis primeiro: para 10 dígitos consulta [DHL eCommerce Iberia](carrier:dhl-ecommerce-es), Packeta, BOX NOW e outras, mas não a Relais Colis (e consulta [DHL Express](carrier:dhl-express), ACS Courier e Geniki Taxydromiki antes quando o número passa no dígito verificador da DHL Express); para códigos `VD`, consulta Colis Privé, Relais Colis e outras. Com 14 dígitos, consulta Chronopost, DPD e outras, não Relais Colis, mesmo na França. Se várias reconhecerem o código — ou nenhuma — toque em "Alterar" e escolha Relais Colis. Links de rastreamento de relaiscolis.com também funcionam, sem precisar de código postal.
+O [Peek](/) identifica códigos `CC` como Relais Colis imediatamente. Outros formatos são compartilhados, então o Peek consulta primeiro as transportadoras prováveis e mostra "consultando…": para 10 dígitos consulta [DHL eCommerce Iberia](carrier:dhl-ecommerce-es), Packeta, BOX NOW e outras, mas não a Relais Colis (e consulta [DHL Express](carrier:dhl-express), ACS Courier e Geniki Taxydromiki antes quando o número passa no dígito verificador da DHL Express); para códigos `VD`, consulta Colis Privé, Relais Colis e outras. Com 14 dígitos, consulta Chronopost, DPD e outras, não Relais Colis, mesmo na França. Se várias reconhecerem o código — ou nenhuma — toque em "Trocar" e escolha Relais Colis. Links de rastreamento de relaiscolis.com também funcionam, sem precisar de código postal.
 
-O Peek mostra apenas a etapa e o histórico: sem ponto no mapa, sem previsão de entrega e sem detalhes do comércio onde aguarda retirada, omitindo também seu nome e endereço. Os textos permanecem em francês exatamente como a Relais Colis escreve, salvo poucas expressões exatas como `Livraison effectuée`, trocadas pela etiqueta padrão do Peek ("Entregue"). Os horários seguem o fuso de Paris. Quando uma leitura traz data sem hora, o Peek tenta buscar um histórico datado em serviços de rastreamento. Com a encomenda aberta no Peek, ou no dia da entrega com notificações ligadas, consulta a cada 10 minutos no máximo — ou a cada 2 minutos a partir das 6h (horário de Paris) no dia em que sai para entrega — enquanto o rastreador oficial responder, com alertas para "Cada atualização", "Etapas importantes" ou "Somente na entrega". Após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora, e a cada 6 horas após sete dias em "Etiqueta criada". Depois de quatro dias sem leitura em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", mostra "Sem atualização de rastreamento desde …", a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Relais Colis." e o link "Obter ajuda da Relais Colis".
+O Peek mostra apenas a etapa e o histórico: sem ponto no mapa, sem previsão de entrega e sem detalhes do comércio onde aguarda retirada, omitindo também seu nome e endereço. Os textos permanecem em francês exatamente como a Relais Colis escreve, salvo poucas expressões exatas como `Livraison effectuée`, trocadas pela etiqueta do próprio Peek ("Entregue"). Os horários seguem o fuso de Paris. Quando uma leitura traz data sem hora, o Peek tenta buscar um histórico datado em serviços de rastreamento. Com a encomenda aberta no Peek, ou no dia da entrega com notificações ligadas, consulta a cada 10 minutos no máximo — ou a cada 2 minutos a partir das 6h (horário de Paris) no dia em que sai para entrega — enquanto o rastreador da Relais Colis responder, com alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". Após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora, e a cada 6 horas após sete dias em "Etiqueta criada". Depois de quatro dias sem leitura em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", mostra "Sem atualizações desde …", a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Relais Colis." e o link "Pedir ajuda a Relais Colis".
 
 ## Perguntas frequentes sobre o rastreamento Relais Colis
 

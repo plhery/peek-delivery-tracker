@@ -19,7 +19,7 @@ Geniki 将其称为快递运单编号（ΣΥ.ΔΕ.ΤΑ.，投诉表单上写作 
 
 Geniki 没有说明收件人从哪里获取单号：请查看商家的发货邮件或订单页，或直接询问商家。详见[如何查找运单号](guide:find-tracking-number)（英文）。
 
-10 位数字并非 Geniki 独有。ACS Courier 的运单号外观完全一样，[DHL Express](carrier:dhl-express)、[Mondial Relay](carrier:mondial-relay)、Relais Colis 等快递也使用 [10 位数字单号](guide:tracking-number-formats)（英文）。如果商家邮件写的是其他快递公司，请去那家查询。Geniki 查询页一次最多可查 10 个单号，用逗号分隔。
+10 位数字并非 Geniki 独有。ACS Courier 的运单号外观完全一样，[DHL Express](carrier:dhl-express)、[Mondial Relay](carrier:mondial-relay)、[Relais Colis](carrier:relais-colis) 等快递也使用 [10 位数字单号](guide:tracking-number-formats)（英文）。如果商家邮件写的是其他快递公司，请去那家查询。Geniki 查询页一次最多可查 10 个单号，用逗号分隔。
 
 ## Geniki Taxydromiki 物流状态含义
 

@@ -17,7 +17,7 @@ A DHL Express chama seu código de rastreamento de waybill number (número de co
 | `4829173602` | O waybill: 10 dígitos que rastreiam toda a remessa. O último dígito é verificador. |
 | `JD014600004829173605` | Número de volume (piece number): `JD01` e 16 dígitos, impresso como `(J)JD…` sob o código de barras inferior da etiqueta. Cada volume de uma remessa tem o seu próprio e remete ao waybill. |
 
-Códigos de 10 dígitos também combinam com [Mondial Relay](carrier:mondial-relay), Relais Colis, Estafeta, Packeta, [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) e [DHL Paket](carrier:dhl), portanto confira qual transportadora aparece no e-mail da loja.
+Códigos de 10 dígitos também combinam com [Mondial Relay](carrier:mondial-relay), [Relais Colis](carrier:relais-colis), Estafeta, Packeta, [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) e [DHL Paket](carrier:dhl), portanto confira qual transportadora aparece no e-mail da loja.
 
 A DHL reutiliza números de waybill: um código pode retornar leituras de uma remessa antiga, que o Peek ignora automaticamente.
 

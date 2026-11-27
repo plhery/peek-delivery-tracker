@@ -52,7 +52,7 @@ O site de rastreamento da GLS abre em francês, com botão EN no cabeçalho. Est
 
 **Alterar a entrega.** Insira a referência do aviso no rastreamento da GLS para escolher nova data ou endereço, autorizar local seguro ou retirar no depósito. Com o FlexDeliveryService, os e-mails da GLS também oferecem um Relais GLS, e um link enviado no dia da entrega permite alterar a escolha (considere até 24 horas). As opções disponíveis dependem do serviço contratado pelo remetente.
 
-**Pontos de retirada.** A GLS France soma mais de 10.000 pontos na França: comércios Relais GLS, armários GLS, "Voisins Relais" (particulares da rede Pickme que guardam pacotes e entram em contato com você) e pontos Mondial Relay e Relais Colis. O pacote aguarda 8 dias — ou 5 em pontos Mondial Relay — com lembrete após 3 dias, voltando depois ao remetente. Leve documento válido e o aviso; terceiros precisam da sua autorização por escrito e de documento próprio. Sem código do armário? Ligue para 09 74 910 910, tecle 2 e depois 2.
+**Pontos de retirada.** A GLS France soma mais de 10.000 pontos na França: comércios Relais GLS, armários GLS, "Voisins Relais" (particulares da rede Pickme que guardam pacotes e entram em contato com você) e pontos Mondial Relay e [Relais Colis](carrier:relais-colis). O pacote aguarda 8 dias — ou 5 em pontos Mondial Relay — com lembrete após 3 dias, voltando depois ao remetente. Leve documento válido e o aviso; terceiros precisam da sua autorização por escrito e de documento próprio. Sem código do armário? Ligue para 09 74 910 910, tecle 2 e depois 2.
 
 ## Encomenda GLS atrasada, extraviada ou danificada na França
 

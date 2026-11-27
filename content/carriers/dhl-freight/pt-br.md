@@ -16,7 +16,7 @@ O DHL ActiveTracing aceita vários tipos de referência e mantém o histórico o
 | --- | --- |
 | `JND48291736405829173` | **DHL Package ID / License Plate** de 20 caracteres (`JND` + 17 dígitos). |
 | `FRA-EC-4829173` | **Código de pedido DHL (Order code)**: código do terminal de 3 letras + código de produto de 2 letras (como `EC` para EuroConnect) + 7 dígitos (com ou sem hifens). |
-| `4829173640` | **Consignment ID**: 9, 10 ou 11 dígitos (IDs de 10 dígitos são comuns em remessas suecas *DHL Service Point*). Compartilha o tamanho de 10 dígitos com [DHL](carrier:dhl), [Mondial Relay](carrier:mondial-relay), Relais Colis e [Packeta](carrier:packeta). |
+| `4829173640` | **Consignment ID**: 9, 10 ou 11 dígitos (IDs de 10 dígitos são comuns em remessas suecas *DHL Service Point*). Compartilha o tamanho de 10 dígitos com [DHL](carrier:dhl), [Mondial Relay](carrier:mondial-relay), [Relais Colis](carrier:relais-colis) e [Packeta](carrier:packeta). |
 | `00348291736405829177` | **GS1 SSCC** de 20 dígitos iniciado por `00` (com dígito verificador GS1 válido). Compartilha o formato SSCC de 20 dígitos com [USPS](carrier:usps) e [NZ Post](carrier:nz-post). |
 
 Encomendas comuns na Alemanha usam [DHL](carrier:dhl) (*DHL Paket*) e remessas aéreas expressas internacionais usam [DHL Express](carrier:dhl-express), enquanto paletes, móveis pesados e cargas rodoviárias/ferroviárias europeias são acompanhadas no ActiveTracing da DHL Freight. Veja [formatos de código de rastreamento](guide:tracking-number-formats).

@@ -19,7 +19,7 @@ A Geniki chama esse número de código da guia de remessa expressa (ΣΥ.ΔΕ.Τ
 
 A Geniki não informa onde o destinatário recebe o código: procure no e-mail de envio ou na página do pedido da loja, ou pergunte à loja. Veja [como encontrar seu código de rastreamento](guide:find-tracking-number).
 
-Dez dígitos não são exclusivos da Geniki. Os vouchers da ACS Courier têm exatamente a mesma aparência, e a [DHL Express](carrier:dhl-express), a [Mondial Relay](carrier:mondial-relay), a Relais Colis e outras empresas também usam [códigos de 10 dígitos](guide:tracking-number-formats). Se o e-mail da loja citar outra transportadora, rastreie nela. O rastreador da Geniki aceita até 10 vouchers de uma vez, separados por vírgulas.
+Dez dígitos não são exclusivos da Geniki. Os vouchers da ACS Courier têm exatamente a mesma aparência, e a [DHL Express](carrier:dhl-express), a [Mondial Relay](carrier:mondial-relay), a [Relais Colis](carrier:relais-colis) e outras empresas também usam [códigos de 10 dígitos](guide:tracking-number-formats). Se o e-mail da loja citar outra transportadora, rastreie nela. O rastreador da Geniki aceita até 10 vouchers de uma vez, separados por vírgulas.
 
 ## Status de rastreamento da Geniki Taxydromiki explicados
 

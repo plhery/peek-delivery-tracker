@@ -21,7 +21,7 @@ Ciblex 查询系统要求输入印在面单上的包裹条码。官网未公布�
 
 在 Ciblex 查询结果页的轨迹上方，有时会额外显示一个较短的编号以及括号中的寄件人参考号，这两者都不是运单号。
 
-14 位数字同时也符合 [Chronopost](carrier:chronopost)、DPD、SEUR、BRT 和 DHL eCommerce UK；24 位数字同样符合 InPost、[Austrian Post](carrier:austrian-post) 和 [bpost](carrier:bpost)。如果单号来自 Relais Colis 或 DPD 的邮件或短信，则属于对方承运商。Ciblex 的电商服务页面也明确写着个人消费者订单通过 Relais Colis 派送，因此网购包裹可能需要在 Relais Colis 追踪。更多辨别方法见[运单号格式指南](guide:tracking-number-formats)（英文）。
+14 位数字同时也符合 [Chronopost](carrier:chronopost)、DPD、SEUR、BRT 和 DHL eCommerce UK；24 位数字同样符合 InPost、[Austrian Post](carrier:austrian-post) 和 [bpost](carrier:bpost)。如果单号来自 [Relais Colis](carrier:relais-colis) 或 DPD 的邮件或短信，则属于对方承运商。Ciblex 的电商服务页面也明确写着个人消费者订单通过 Relais Colis 派送，因此网购包裹可能需要在 Relais Colis 追踪。更多辨别方法见[运单号格式指南](guide:tracking-number-formats)（英文）。
 
 ## Ciblex 法语物流状态含义
 

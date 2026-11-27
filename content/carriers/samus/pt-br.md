@@ -17,7 +17,7 @@ A documentação técnica da SAMUS para clientes empresariais mostra o código e
 | Código (fictício) | O que é |
 | --- | --- |
 | `RD482917367LT` | Duas letras, nove dígitos e `LT`: padrão da documentação da SAMUS. O Peek trata o nono dígito como dígito verificador, como nos códigos postais. |
-| `RD482917360LT` | Mesmo formato, mas com dígito verificador errado: o Peek não identifica nenhuma transportadora. Confira o código ou selecione SAMUS manualmente (veja abaixo). |
+| `RD482917360LT` | Mesmo formato, mas com dígito verificador errado: o Peek não identifica nenhuma transportadora. Confira o código ou selecione SAMUS você mesmo (veja abaixo). |
 
 Espaços, hifens e letras minúsculas não importam ao colar no Peek. Em samus.lt, o resultado exibe "Parcel number" e "Parcel code". Se o site responder `Your letter with number "…" is not found`, confirme o número com o remetente.
 
@@ -93,25 +93,25 @@ Informe o código do volume ao escrever. Para questões sobre o pedido, devoluç
 
 ## Como rastrear SAMUS no Peek
 
-O [Peek](/) não reconhece um objeto da SAMUS só pelo código: duas letras, nove dígitos e `LT` seguem o padrão postal lituano. Ao adicioná-lo ("Consultando serviços de rastreamento…"), o Peek consulta Lietuvos paštas e Chronopost e depois serviços de rastreamento. Se algum já tiver o objeto, o resultado indica qual; se um serviço identificar SAMUS com leituras reais de trânsito, o Peek seleciona SAMUS; se nenhum encontrar ainda, exibe aviso de que seguirá verificando após você adicionar.
+O [Peek](/) não reconhece um objeto da SAMUS só pelo código: duas letras, nove dígitos e `LT` seguem o padrão postal lituano. Ao adicioná-lo ("Consultando serviços de rastreamento…"), o Peek consulta Lietuvos paštas e Chronopost e depois serviços de rastreamento. Se algum já tiver o objeto, o resultado indica qual; se um serviço identificar SAMUS com leituras reais de trânsito, o Peek seleciona SAMUS; se nenhum encontrar ainda, mostra "Ainda não encontrada pelos serviços de rastreamento. O Peek continua verificando depois que você adicionar."
 
-Para acompanhar especificamente como SAMUS, toque em "Alterar" e digite "SAMUS" em "Pesquisar transportadoras" ("UAB SAMUS" também encontra; ela não aparece em "Compatível com este código"). Em itens já adicionados, use "Alterar transportadora".
+Para acompanhar especificamente como SAMUS, toque em "Trocar" e digite "SAMUS" em "Buscar transportadoras" ("UAB SAMUS" também encontra; ela não aparece em "Compatível com este código"). Em itens já adicionados, use "Trocar transportadora".
 
 Você também pode colar um link do rastreador em lituano da SAMUS terminado em `/siuntu-sekimas/?id=` seguido do código: o Peek extrai o número e escolhe SAMUS ("Transportadora detectada"). Links do rastreador em inglês (`/en/parcel-tracking/?id=`) não identificam SAMUS — o Peek lê apenas se tiver formato postal e trata como postal. Prefira colar o código ou o link em lituano.
 
-Em objetos atribuídos à SAMUS, o Peek consulta ParcelsApp, Ship24 e 17TRACK em sequência e fica com o primeiro que tiver dados; se o dígito verificador estiver correto, tenta por último a UPU. Durante os primeiros 30 dias em trânsito, também consulta Lietuvos paštas e Chronopost e migra automaticamente se um deles mostrar avanço real ("Alterada automaticamente de SAMUS"). O histórico exibido usa os termos do serviço, podendo atrasar em relação a samus.lt ou não trazer dados. Antes que um serviço encontre o código, o link do Peek abre o rastreador da SAMUS; depois, abre o do serviço. O Peek não envia seu IP nem seu país a esses serviços.
+Em objetos atribuídos à SAMUS, o Peek consulta ParcelsApp, Ship24 e 17TRACK em sequência e fica com o primeiro que tiver dados; se o dígito verificador estiver correto, tenta por último a UPU. Durante os primeiros 30 dias em trânsito, também consulta Lietuvos paštas e Chronopost e passa o objeto para ele se um deles mostrar avanço real ("Transportadora trocada automaticamente (antes: SAMUS)"). O histórico exibido usa os termos do serviço, podendo atrasar em relação a samus.lt ou não trazer dados. Se você deixou a escolha da transportadora com o Peek e os serviços indicam SAMUS, com leituras que mostram o objeto em trânsito, o Peek escolhe SAMUS para você. Antes que um serviço encontre o código, o link do Peek abre o rastreador da SAMUS; depois, abre o do serviço. O Peek não envia seu IP nem seu país a esses serviços.
 
 Enquanto nenhum serviço conhecer o código, aparece "Aguardando SAMUS", com nova tentativa diária para cada serviço sem resposta. Quando há dados, o Peek verifica de hora em hora, a cada 3 horas após um dia sem novidade e a cada 6 horas após sete dias em "Etiqueta criada"; no dia em que sai para entrega, verifica a cada 15 minutos no máximo enquanto aberto ou com notificações ligadas.
 
-Quando a última leitura completa quatro dias em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", exibe "Sem atualização de rastreamento desde seg 12 out", a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando SAMUS." e o link "Obter ajuda da SAMUS". Após três semanas sem novidade, mostra "Nada de novo há mais de três semanas. Se ainda não chegou, fale com o vendedor. O Peek continua consultando SAMUS."
+Quando a última leitura completa quatro dias em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", exibe "Sem atualizações desde seg 12 out", a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando SAMUS." e o link "Pedir ajuda a SAMUS", que abre a página de contato da SAMUS. Após três semanas sem novidade, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando SAMUS."
 
-Você escolhe alertas em "Cada atualização", "Etapas importantes" ou "Somente na entrega". O Peek não pode contatar a SAMUS nem o remetente por você.
+Você escolhe alertas em "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode contatar a SAMUS nem o remetente por você.
 
 ## Perguntas frequentes sobre o rastreamento SAMUS
 
 ### Por que o Peek consulta a Lietuvos paštas com meu código SAMUS?
 
-Porque os códigos da SAMUS têm exatamente o mesmo formato dos códigos postais da Lituânia, e o Peek não consegue distingui-los apenas pela forma. Toque em "Alterar" e busque "SAMUS", ou cole o link do rastreador em lituano.
+Porque os códigos da SAMUS têm exatamente o mesmo formato dos códigos postais da Lituânia, e o Peek não consegue distingui-los apenas pela forma. Toque em "Trocar" e busque "SAMUS", ou cole o link do rastreador em lituano.
 
 ### Onde fica o ponto de retirada da SAMUS em Vilnius?
 

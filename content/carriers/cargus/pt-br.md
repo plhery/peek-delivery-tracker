@@ -20,7 +20,7 @@ Onde encontrar:
 
 O AWB não é o número do pedido. Perdeu o e-mail ou SMS? A Cargus orienta pedir à loja onde comprou. Veja mais em [como encontrar seu código de rastreamento](guide:find-tracking-number).
 
-Códigos de 10 dígitos também cabem em outras transportadoras como DHL e Relais Colis. Siga a empresa indicada pela loja no e-mail ou SMS e consulte [formatos de código de rastreamento](guide:tracking-number-formats).
+Códigos de 10 dígitos também cabem em outras transportadoras como DHL e [Relais Colis](carrier:relais-colis). Siga a empresa indicada pela loja no e-mail ou SMS e consulte [formatos de código de rastreamento](guide:tracking-number-formats).
 
 ## O que significam os status de rastreamento da Cargus
 

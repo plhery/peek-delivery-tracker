@@ -21,7 +21,7 @@ Os dois formatos em uso:
 
 Na página de resultados da Ciblex, a linha acima do histórico pode exibir um número menor e a referência do remetente entre parênteses; nenhum deles é o código de rastreamento.
 
-Códigos de 14 dígitos também cabem em [Chronopost](carrier:chronopost), DPD, SEUR, BRT e DHL eCommerce UK, e 24 dígitos também cabem em InPost, [Austrian Post](carrier:austrian-post) e [bpost](carrier:bpost). Se o código veio em e-mail ou SMS da Relais Colis ou da DPD, pertence a essa transportadora. A página de e-commerce da própria Ciblex também informa que pedidos de pessoas físicas seguem pela Relais Colis, então compras de lojas virtuais podem precisar ser rastreadas lá. Saiba diferenciar em [formatos de código de rastreamento](guide:tracking-number-formats).
+Códigos de 14 dígitos também cabem em [Chronopost](carrier:chronopost), DPD, SEUR, BRT e DHL eCommerce UK, e 24 dígitos também cabem em InPost, [Austrian Post](carrier:austrian-post) e [bpost](carrier:bpost). Se o código veio em e-mail ou SMS da [Relais Colis](carrier:relais-colis) ou da DPD, pertence a essa transportadora. A página de e-commerce da própria Ciblex também informa que pedidos de pessoas físicas seguem pela Relais Colis, então compras de lojas virtuais podem precisar ser rastreadas lá. Saiba diferenciar em [formatos de código de rastreamento](guide:tracking-number-formats).
 
 ## Status de rastreamento Ciblex: tradução do francês
 

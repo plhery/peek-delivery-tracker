@@ -20,7 +20,7 @@ AWB 是 Air Way Bill（航空运单/快递运单）的缩写，是 Cargus 用来
 
 AWB 并非你的网店订单号。如果丢了邮件或短信，Cargus 建议向购买商品的网店索取。另见[如何查找运单号](guide:find-tracking-number)（英文）。
 
-10 位纯数字同样符合 DHL、Relais Colis 等其他快递公司，请以网店邮件或短信中注明的快递公司为准，并参阅[运单号格式说明](guide:tracking-number-formats)（英文）。
+10 位纯数字同样符合 DHL、[Relais Colis](carrier:relais-colis) 等其他快递公司，请以网店邮件或短信中注明的快递公司为准，并参阅[运单号格式说明](guide:tracking-number-formats)（英文）。
 
 ## Cargus 物流状态含义
 

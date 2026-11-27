@@ -1,12 +1,12 @@
 ---
 title: Jifan tracking: JFGJ numbers, scans and Beijing time
-description: Track a Jifan (吉凡国际物流) parcel from China to the US: what a JFGJ…CN number looks like, what the tracker's lines mean, and why every time on it is Beijing time.
+description: Track a Jifan (吉凡国际物流) parcel from China to the US: JFGJ…CN format, status meanings, UPS final delivery, Beijing time stamps and how to contact the seller.
 slug: jifan-tracking
 published: 2026-11-02
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Jifan is Shenzhen Jifan International Logistics (深圳市吉凡国际物流有限公司, or 吉凡国际物流 for short), a logistics company in Shenzhen, China, founded in 2017. It ships parcels from businesses in China to buyers in the United States, by air and by sea. Its tracking numbers are JFGJ, nine digits and CN. Look yours up on [Jifan's tracker](https://www.szjf56.cn/index/tracknumber/track), or paste it in the box above. The seller gives you the number with your order's shipping details.
+Jifan — Shenzhen Jifan International Logistics (深圳市吉凡国际物流有限公司, or 吉凡国际物流) — is a Shenzhen logistics company founded in 2017 that ships parcels from China to the United States by air and by sea, with UPS delivering most small and standard US parcels. Its tracking numbers follow the `JFGJ` + nine digits + `CN` format. Paste yours in the box above or look it up in capitals on [Jifan's tracker](https://www.szjf56.cn/index/tracknumber/track).
 
 ## Jifan tracking number: what it looks like
 
@@ -105,25 +105,25 @@ While Jifan's tracker answers, Peek checks up to every 10 minutes with the parce
 
 ## Questions about Jifan tracking
 
-### What is Jifan logistics?
+### What is Jifan International Logistics (吉凡国际物流)?
 
-Shenzhen Jifan International Logistics (深圳市吉凡国际物流有限公司), a Shenzhen company founded in 2017, it says. It ships parcels for businesses from China to buyers in the United States, by air and by sea. Its numbers start with JFGJ and end with CN.
+Shenzhen Jifan International Logistics (深圳市吉凡国际物流有限公司), a Shenzhen company founded in 2017, it says. It ships parcels for businesses from China to buyers in the United States, by air and by sea. Its numbers start with `JFGJ` and end with `CN`.
 
-### Where can I track a JFGJ number?
+### How do I track a JFGJ…CN number?
 
-On Jifan's tracker, [快件跟踪 on szjf56.cn](https://www.szjf56.cn/index/tracknumber/track), typed in capitals, or in Peek. The tracker only finds parcels from the last two months.
+Paste it in the box above, or type it in capital letters without spaces on Jifan's tracker, [快件跟踪 on szjf56.cn](https://www.szjf56.cn/index/tracknumber/track) (which accepts up to 20 numbers at once and only finds parcels from the last two months).
 
-### Why are the times on Jifan's tracker wrong?
+### Who delivers Jifan parcels in the US and how long does it take?
 
-They aren't wrong, they're in Beijing time (UTC+8), even for scans in the United States. Beijing is 13 hours ahead of New York and 16 ahead of Los Angeles in winter, so a scan made after 11:00 in New York or after 08:00 in Los Angeles shows the next day's date. Peek shows each time in your device's time zone.
+Jifan's site says UPS delivers its US air, economy and Matson sea small parcels (UPS Ground for 4.5 to 68 kg sea parcels; truck to the door for 100 to 2,000 kg oversize freight). Its stated times are about 8 to 10 calendar days for US air, 10 to 12 for economy small parcels, 20 to 25 for Matson sea parcels and 25 to 40 for oversize freight — go by the seller's estimate for your order.
+
+### Why do Jifan tracking times look ahead by a day?
+
+They aren't wrong: Jifan's tracker prints every scan in Beijing time (UTC+8), even for scans inside the United States. Beijing is 13 hours ahead of New York and 16 ahead of Los Angeles in winter, so a scan after 11:00 in New York or 08:00 in Los Angeles shows the next day's date. Peek shows each time in your device's time zone.
 
 ### What does 查询不到 mean on Jifan's tracker?
 
 It's Chinese for "can't be found": no parcel on Jifan's tracker matches what you typed. Check for a typo, type the number in capitals, and ask the seller if it still fails. Parcels older than two months aren't on the tracker any more.
-
-### How long does Jifan take to deliver?
-
-Jifan's site gives about 8 to 10 calendar days for its US air parcels, about 10 to 12 for its economy small parcels, about 20 to 25 for its Matson sea parcels, and about 25 to 40 for oversize freight. The seller's estimate for your order is the one to go by.
 
 :::sources
 - [Jifan: 深圳市吉凡国际物流有限公司 (home page)](https://www.szjf56.cn/) – company name, founded 2017, US lines only, weights and sizes, UPS and UPS Ground delivery, Matson and COSCO, areas served, calendar days, one waybill, compensation promise to its customers, hotline, email, office district

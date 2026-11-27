@@ -1,12 +1,12 @@
 ---
 title: GZYL tracking: numero YL…YQ, stati e pacco non arrivato
-description: Tracking GZYL (广州云链) per i pacchi dalla Cina: com'è fatto il numero YL…YQ, cosa vogliono dire gli stati e perché il pacco può risultare consegnato senza esserlo.
+description: Tracking GZYL (广州云链) dalla Cina: codice YL…YQ, significato degli stati, perché risulta Delivered senza consegna, chi consegna in Italia e chi contattare.
 slug: gzyl-tracking
 published: 2026-11-03
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-GZYL (广州云链, Guangzhou Yunlian) è 广州云链货运代理有限公司, uno spedizioniere di Guangzhou (Canton), in Cina. Se un negozio cinese ha spedito il tuo ordine con GZYL, il numero di tracking è composto da YL, dieci cifre e YQ: incollalo nel box qui sopra. Il sito web di GZYL, yunlianhouyun.com, è in cinese, e la sua ricerca pacchi (小包查询) apre un tracking che si trova su un semplice indirizzo IP, senza nome di dominio. Prendi con cautela quello che mostra: GZYL scrive in anticipo buona parte del viaggio di un pacco, quindi un passaggio, persino `Delivered`, non è sempre una vera scansione.
+GZYL (广州云链, 广州云链货运代理有限公司, Guangzhou Yunlian) è uno spedizioniere di Guangzhou, in Cina, i cui codici di spedizione hanno 14 caratteri (`YL`, dieci cifre e `YQ`). Incolla il tuo numero nel box qui sopra o cerca la spedizione su yunlianhouyun.com (`小包查询`), che apre un tracking su indirizzo IP senza nome di dominio. Prendi con cautela quello che mostra: GZYL può scrivere in anticipo buona parte del viaggio, persino `Delivered`, che non sempre è una scansione reale.
 
 ## Numero di tracking GZYL: com'è fatto
 
@@ -94,21 +94,25 @@ A parte il passaggio alla Posta Svizzera, Peek resta con GZYL e non passa a un a
 
 ## Domande sul tracking GZYL
 
-### Che cos'è GZYL (广州云链)?
+### Che cos'è GZYL (广州云链) e come funziona il codice YL…YQ?
 
-È 广州云链货运代理有限公司 (Guangzhou Yunlian), uno spedizioniere di Guangzhou, in Cina. I suoi numeri di spedizione sono composti da YL, dieci cifre e YQ.
+È 广州云链货运代理有限公司 (Guangzhou Yunlian), uno spedizioniere di Guangzhou, in Cina. I suoi numeri di spedizione hanno 14 caratteri: `YL`, dieci cifre e `YQ` (nessun altro corriere del catalogo di Peek usa questa forma; `YL738…YQ` viene riconosciuto subito, gli altri dopo verifica sul tracking di GZYL).
 
-### Tutti i numeri YL…YQ sono di GZYL?
+### Perché GZYL segna «Delivered» (consegnato) se non ho ricevuto nulla?
 
-Non è detto. YL, dieci cifre e YQ è la forma di GZYL e nessun altro corriere del catalogo di Peek la usa. Un numero che inizia con YL738 Peek lo attribuisce a GZYL già dalla forma; per ogni altro chiede prima al tracking di GZYL. Con nove o undici cifre il numero non ha la forma di GZYL.
-
-### Perché GZYL dice che il pacco è stato consegnato se non è arrivato?
-
-Perché quel `Delivered` può far parte del programma di GZYL. GZYL scrive in anticipo buona parte della cronologia di un pacco e la chiude con un `Delivered`: questi passaggi sono un programma, non scansioni. Quando legge il tracking di GZYL, Peek non conta questi passaggi come scansioni, `Delivered` compreso, e se mostra comunque «Consegnato», sotto aggiunge che il tracciamento di GZYL segue un calendario fisso. Avvisa il venditore che il pacco non è arrivato e chiedigli quale corriere lo consegna.
+Perché quel `Delivered` può far parte del programma scritto in anticipo da GZYL, non di una scansione reale. Quando legge il tracking di GZYL, Peek tiene da parte questi passaggi e, se mostra comunque «Consegnato», aggiunge sotto che GZYL aggiorna secondo un calendario fisso. Avvisa il venditore che il pacco non è arrivato e chiedigli quale corriere lo consegna.
 
 ### Chi consegna i pacchi GZYL in Italia?
 
-Peek non lo sa: i passaggi di GZYL nel Paese di destinazione non nominano alcun corriere. Chiedi al venditore quale corriere consegna il tuo ordine e con quale numero di tracking, poi aggiungi quel numero a Peek come pacco separato. Solo in Svizzera e nel Liechtenstein Peek può passare da sé il tracciamento di un pacco GZYL alla Posta Svizzera.
+Peek non lo sa: i passaggi di GZYL nel Paese di destinazione non nominano alcun corriere. Chiedi al venditore quale corriere consegna il tuo ordine e con quale numero di tracking, poi aggiungi quel numero a Peek come pacco separato. Solo in Svizzera e nel Liechtenstein Peek può passare automaticamente il tracciamento alla Posta Svizzera.
+
+### Perché il tracking GZYL mostra più passaggi di Peek?
+
+Perché Peek tiene da parte i passaggi scritti in anticipo rispetto all'ora che riportano, il `Delivered` finale del programma e le righe datate oltre il controllo, elencandoli in grigio sotto «Mostrali». Regolati sulla data di consegna stimata dal negozio e, quando è passata, scrivi al venditore.
+
+### Come contattare GZYL o chiedere assistenza per un pacco fermo?
+
+Rivolgiti al venditore o al marketplace da cui hai acquistato: la pagina contatti in cinese di GZYL (yunlianhouyun.com) indica una linea 24 ore, WeChat e QQ pensati per i venditori suoi clienti, non per chi riceve il pacco.
 
 :::sources
 - [广州云链货运代理有限公司 (GZYL): home (in cinese)](http://yunlianhouyun.com/) – nome dell'azienda, sito in cinese, ricerca pacchi (小包查询) sul tracking di GZYL

@@ -1,12 +1,12 @@
 ---
 title: Forza Delivery rastreo: número de guía, estados y teléfono
-description: Rastrea tu paquete de Forza Delivery Express en Guatemala, El Salvador u Honduras: cómo es la guía FD, qué significa cada estado y a qué número llamar.
+description: Rastreo Forza Delivery Express (Guatemala, El Salvador y Honduras): guía FD, significado de estados, agencias Express Center, contra entrega y teléfonos.
 slug: forza-delivery-rastreo
 published: 2026-11-02
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Forza Delivery Express es una empresa de paquetería que trabaja en Guatemala, El Salvador y Honduras. Nació en Guatemala en 2020 y es parte de Grupo Forza Logistics. Hace envíos para tiendas en línea y emprendedores, entrega a domicilio o en una agencia Express Center y puede cobrarte el pedido contra entrega. Rastrea tu paquete en la [página de rastreo de Forza](https://rastreo.forzadelivery.com/) con el número de guía que te dio la tienda, o pégalo en la casilla de arriba.
+Forza Delivery Express (parte de Grupo Forza Logistics, nacida en Guatemala en 2020) reparte paquetes en Guatemala, El Salvador y Honduras para tiendas en línea y emprendedores, con entrega a domicilio, retiro en agencias Express Center y pago contra entrega (COD). Para rastrear tu envío, pega la guía `FD` que te dio la tienda en la casilla de arriba o escríbela en la [página de rastreo de Forza](https://rastreo.forzadelivery.com/).
 
 ## Número de guía de Forza Delivery: cómo es
 
@@ -94,25 +94,25 @@ Mientras tengas el paquete abierto en Peek, o el día de la entrega con las noti
 
 ## Preguntas sobre el rastreo de Forza Delivery
 
-### ¿Cómo rastreo mi paquete de Forza Delivery?
+### ¿Cómo rastrear un paquete de Forza Delivery con número de guía FD?
 
-Pega tu guía (FD y de seis a nueve dígitos) en la casilla de arriba, o escríbela en rastreo.forzadelivery.com, la página de rastreo de Forza.
+Pega tu guía (`FD` y de seis a nueve dígitos) en la casilla de arriba, o escríbela en rastreo.forzadelivery.com, la página de rastreo de Forza.
 
-### ¿Cuánto tarda Forza Delivery en entregar?
+### ¿Cuánto tarda Forza Delivery en entregar en Guatemala, El Salvador y Honduras?
 
 Con el Servicio Estándar, generalmente de 24 a 48 horas dentro de Guatemala, El Salvador u Honduras, según Forza. Sus términos dicen que esos tiempos no son vinculantes.
 
-### ¿Qué significa «En ruta» en Forza Delivery?
+### ¿Qué significa «En ruta» o «Generado» en el rastreo de Forza Delivery?
 
-Que el paquete va con el mensajero en su ruta de entrega. Lo siguiente es la entrega, así que asegúrate de que haya alguien en la dirección para recibirlo.
+«Generado» significa que la tienda creó la guía pero puede que Forza todavía no tenga el paquete. «En ruta» indica que el paquete va con el mensajero en su ruta de entrega, así que conviene que haya alguien en la dirección para recibirlo.
 
-### ¿Qué pasa si no estoy en casa cuando llega Forza?
+### ¿Qué pasa si no estoy en casa o quiero recoger en una agencia Express Center?
 
-El Servicio Estándar incluye dos intentos de entrega, y Forza puede ofrecerte entregarlo otro día o que lo recojas en un Punto de Venta de Forza. Llama a Forza. Si no logra entregarlo, el paquete vuelve a la tienda.
+El Servicio Estándar incluye dos intentos de entrega, y Forza puede ofrecerte entregar otro día o recogerlo en un Punto de Venta de Forza (con el Servicio Económico de agencia a agencia, el retiro es directamente en una agencia Express Center). Si no logra entregarlo, el paquete vuelve a la tienda.
 
-### ¿Cuál es el teléfono de Forza Delivery?
+### ¿Cuál es el teléfono y horario de atención al cliente de Forza Delivery?
 
-El 1753 en Guatemala, el +503 2535-1818 en El Salvador y el +504 2276-1818 en Honduras. Ten tu guía a mano. Para un reembolso o un nuevo envío, habla con la tienda.
+Llama al 1753 en Guatemala, al +503 2535-1818 en El Salvador o al +504 2276-1818 en Honduras con tu guía a mano (el encabezado de su web indica lunes a sábado de 7:00 a 19:00, hora de Centroamérica). Para un reembolso o un nuevo envío, habla primero con la tienda.
 
 :::sources
 - [Forza Delivery Express: Rastreo](https://rastreo.forzadelivery.com/) – página de rastreo, guía o referencia, FD y de seis a nueve dígitos

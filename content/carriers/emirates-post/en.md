@@ -1,12 +1,12 @@
 ---
 title: Emirates Post tracking: AE numbers and statuses explained
-description: Track an Emirates Post item sent from or within the UAE: what an AE number looks like, what each status means and how Peek follows it to your country's post.
+description: Track an Emirates Post (UAE) parcel: AE tracking number format, status meanings like Yet to be received or Import terminated, and hand-off to your local post.
 slug: emirates-post-tracking
 published: 2026-11-02
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Emirates Post (بريد الإمارات) is the post of the United Arab Emirates; Peek's catalog also knows it as Emirates Post Group. Its postal numbers end in `AE`, and its tracker names the place of most steps: in the UAE and, for an item sent abroad, in the destination country too. Paste the number in the box above, or look it up on Emirates Post's own tracker at emiratespost.ae. Peek couldn't check Emirates Post's website for this page, so what follows is what Peek's code knows about its tracker.
+Emirates Post (بريد الإمارات, Emirates Post Group) is the national post of the United Arab Emirates. Its international tracking numbers end in `AE` (13 characters, alongside 13-digit numbers), and its tracker names locations in the UAE and abroad. Paste your number in the box above or look it up on emiratespost.ae; because Emirates Post's site puts a browser challenge in front of automated checks, what follows is what Peek's code knows about its tracker and destination-post hand-offs.
 
 ## Emirates Post tracking number: what it looks like
 
@@ -85,21 +85,25 @@ While you have the parcel open in Peek, or on its delivery day with notification
 
 ## Questions about Emirates Post tracking
 
-### What does an Emirates Post tracking number look like?
+### What does an Emirates Post (AE) tracking number look like?
 
-Two letters, nine digits and `AE`, such as `EE482910372AE`. Peek names Emirates Post at once when the number starts with C, E, L or R and the check digit adds up.
+Two letters, nine digits and `AE`, such as `EE482910372AE` (invented), or a 13-digit number. Peek names Emirates Post at once when an `AE` number starts with C, E, L or R and its check digit adds up.
 
 ### Why is my Emirates Post tracking stuck on "Yet to be received"?
 
 Emirates Post has the item's details, but it hasn't been handed in at a counter yet: the step can show days before posting. Ask the sender when they'll post it.
 
-### What does "Import terminated" mean on Emirates Post tracking?
+### What does "Import terminated" or "Ready for collection by customer" mean?
 
-The destination country stopped the item's import. Peek shows it as "Needs attention". Later steps can still follow, so keep watching, and ask the sender or the shop what happened.
+`"Import terminated"` ("Needs attention" in Peek) means the destination country stopped the item's import — later steps can still follow, so keep watching and ask the sender or shop. `"Ready for collection by customer"` ("Ready for pickup" in Peek) means the item is waiting at the named office for you to collect.
 
-### Can I track an Emirates Post parcel with my own country's post?
+### Can I track an Emirates Post parcel with USPS, Royal Mail or my own country's post?
 
-In many countries, yes, with the same `AE` number. For a parcel it follows on Emirates Post's tracker, Peek asks your post for you in the US, the UK, Ireland, Canada, Australia, every EU country except the Netherlands and some others, and follows the parcel there once that post shows a scan at least as recent as Emirates Post's newest.
+In many countries, yes, with the same `AE` number. Peek automatically asks USPS, Royal Mail (Parcelforce for EMS items starting with E), An Post, Canada Post, Australia Post, NZ Post and every EU national post except the Netherlands', and follows the parcel there once that post logs a scan at least as recent as Emirates Post's newest.
+
+### Why is my Emirates Post tracking not updating after leaving the UAE?
+
+Flights and import customs often leave gaps of several days after `Shipped to`. Check the same `AE` number with your country's post (Peek does this automatically where supported), and if there is no movement or the parcel seems lost, contact the sender or shop that booked the delivery.
 
 :::sources
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026

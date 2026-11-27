@@ -1,12 +1,12 @@
 ---
 title: GEODIS Pologne suivi : numéro PL, statuts et livraison
-description: Suivre un envoi GEODIS Pologne (ex-Pekaes) avec un numéro PL et 16 chiffres : sens des statuts, livraison, retrait en terminal, réclamations et contact.
+description: Suivi GEODIS Pologne (ex-PEKAES) sur Strefa Klienta : numéro PL à 16 chiffres, sens des statuts, livraison de palettes, délais, réclamations et téléphone.
 slug: geodis-pologne-suivi
 published: 2026-11-18
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-GEODIS Poland est le réseau polonais de transport de palettes et de colis du groupe français GEODIS, filiale de la SNCF (chemins de fer publics français). GEODIS a racheté PEKAES en 2021 et le réseau est aujourd'hui exploité par GEODIS Road Network sp. z o.o., basée à Błonie en Pologne. La marche à suivre dépend de ce que l'expéditeur t'a transmis :
+GEODIS Poland (exploité par GEODIS Road Network sp. z o.o. à Błonie depuis le rachat de PEKAES en 2021) est le réseau polonais de transport de colis et de palettes du groupe GEODIS, filiale de la SNCF. Pour suivre un envoi en Pologne ou sur ses liaisons routières européennes, la marche à suivre dépend de ce que l'expéditeur t'a transmis :
 
 - **Un numéro composé de `PL` et de 16 chiffres, ou un lien vers Strefa Klienta :** il s'agit d'un envoi GEODIS Poland (colis ou palette). Colle le numéro ou le lien dans le champ ci-dessus, ou recherche-le sur l'outil de suivi de GEODIS Poland, [Strefa Klienta](https://strefaklienta.pekaes.geodis.pl/en/).
 - **Un autre numéro GEODIS :** Peek lit également le suivi français de [GEODIS](carrier:geodis), dont les numéros commencent par `1G` (voir plus bas). Sur `geodis.com`, le moteur de recherche localise les envois aériens, maritimes et du dernier kilomètre, et renvoie le transport routier vers Strefa Klienta.
@@ -84,21 +84,25 @@ Tant que tu gardes le colis ouvert à l'écran, ou le jour de sa livraison avec 
 
 ## Questions fréquentes sur le suivi GEODIS Pologne
 
-### GEODIS Poland et Pekaes sont-ils la même entreprise ?
+### GEODIS Poland et PEKAES sont-ils la même entreprise ?
 
 Oui. GEODIS a racheté PEKAES en 2021, et ce réseau polonais est désormais exploité par GEODIS Road Network. Son outil de suivi utilise toujours l'adresse `strefaklienta.pekaes.geodis.pl`.
 
-### GEODIS livre-t-il le samedi en Pologne ?
+### GEODIS livre-t-il le samedi en Pologne et à quels horaires ?
 
 Les Conditions générales de GEODIS Road Network ne prévoient pas de livraison le samedi : les palettes destinées à une adresse privée en Pologne (`DDOP`) sont livrées les jours ouvrés du lundi au vendredi de `8:00` à `16:00`, et le délai d'acheminement des colis nationaux (`PAC DOM`) exclut les samedis, dimanches et jours fériés.
 
-### Le chauffeur GEODIS monte-t-il ma commande à l'étage en Pologne ?
+### Le chauffeur GEODIS monte-t-il une palette ou un colis lourd à l'étage en Pologne ?
 
 Uniquement pour un envoi national de messagerie en Pologne (`LTL DOM` ou `LTL DOM NST`) lorsque le donneur d'ordre a commandé l'option payante *Usługa Wniesienia* : jusqu'à 300 kg brut (30 kg max. par colis), à moins de 150 m du point de déchargement et jusqu'au deuxième niveau s'il n'y a pas d'ascenseur utilisable. Sans cette option, le déchargement se fait au niveau du sol.
 
 ### Quels sont les délais de livraison de GEODIS en Pologne et en Europe ?
 
 Sur sa page dédiée aux palettes et colis, GEODIS annonce en Pologne une livraison standard en 24 à 48 heures (3 à 5 jours en Europe) et une livraison express le lendemain avant midi en Pologne (1 ou 2 jours en Europe). Dans ses Conditions générales, GEODIS livre en principe les colis nationaux `PAC DOM` jusqu'à 30 kg sous 48 heures hors week-ends et jours fériés, et les envois de messagerie `LTL` sous 2 jours ouvrés après l'enlèvement.
+
+### Quel est le numéro de téléphone de GEODIS Pologne et comment réclamer ?
+
+Le service client en Pologne (*Dział Obsługi Klienta*) affiché sur Strefa Klienta répond au `+48 22 460 26 26`. Pour un achat en boutique, adresse ta réclamation au vendeur (donneur d'ordre) ; en cas d'avarie visible à la livraison, fais immédiatement établir un procès-verbal d'avarie (*protokół szkodowy*) avec le chauffeur.
 
 :::sources
 - [GEODIS Poland : Strefa Klienta, shipment tracking (en anglais)](https://strefaklienta.pekaes.geodis.pl/en/) – champ `Enter Shipment No.`, bouton `Search`, formulaires de réclamation et d'avarie

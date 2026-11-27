@@ -1,12 +1,12 @@
 ---
 title: Heppner suivi : numéro, code postal et rendez-vous
-description: Suivi Heppner en France et en Suisse : où trouver le numéro à 8 chiffres, pourquoi il faut ton code postal, ce que veut dire chaque étape et qui contacter.
+description: Suivi colis Heppner (France, Suisse, Belgique) : numéro à 8 chiffres, code postal, prise de rendez-vous, horaires de livraison, retrait en agence et contact.
 slug: heppner-suivi
 published: 2026-10-12
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Heppner est un transporteur routier français, « du petit colis au camion complet » : messagerie, palettes et lots complets. Son service Heppner CONNECT livre aux particuliers les commandes en ligne, même celles de plus de 30 kilos ; en Suisse, Heppner passe par SAFRAM, qui fait partie du groupe. Pour suivre ta livraison, saisis sur [la page destinataire de Heppner](https://www.heppner-group.com/destinataire-suivez-votre-marchandise/) le numéro reçu dans ses notifications et ton code postal de livraison, ou colle ce numéro dans la case ci-dessus et choisis Heppner.
+Heppner est un transporteur routier français qui achemine colis, palettes et commandes en ligne de plus de 30 kilos aux particuliers via Heppner CONNECT (et via SAFRAM en Suisse). Pour suivre ta marchandise ou choisir ton créneau de livraison, saisis le numéro de récépissé à 8 chiffres et ton code postal de livraison dans la case ci-dessus (en choisissant Heppner) ou sur [la page destinataire de Heppner](https://www.heppner-group.com/destinataire-suivez-votre-marchandise/).
 
 ## Numéro de suivi Heppner : où le trouver
 
@@ -95,25 +95,25 @@ Tant que tu as la commande ouverte, ou le jour de sa livraison avec les notifica
 
 ## Questions sur le suivi Heppner
 
-### Heppner livre-t-il les particuliers ?
+### Pourquoi le suivi Heppner demande-t-il mon code postal et affiche-t-il « En attente d’instructions » ?
 
-Oui. Heppner CONNECT livre les commandes en ligne, même lourdes, aux particuliers et aux petites entreprises, à l'entrée du bâtiment sauf si l'expéditeur a payé une livraison à l'intérieur.
+Le portail de Heppner (et Peek) exige le code postal de livraison en plus du numéro de récépissé : un mauvais code postal renvoie une commande introuvable. Si le suivi affiche `En attente d’instructions`, rien ne part tant que tu n'as pas choisi une date de livraison ou un retrait en agence sur la page de suivi.
 
-### Heppner livre-t-il le samedi ?
+### Quels sont les horaires de livraison Heppner et livre-t-il le samedi ?
 
-Seulement si l'expéditeur a pris l'option EXTENT, qui ouvre aussi les livraisons du soir. Sinon, la livraison a lieu en journée, entre 8h30 et 18h00, et Heppner te confirme un créneau de 2 heures le jour même.
+En journée, la livraison a lieu entre 8h30 et 18h00 avec un créneau de 2 heures confirmé le jour même. Le soir (jusqu'à 21 h) et le samedi (de 8h30 à 18h) ne sont proposés que si l'expéditeur a pris l'option EXTENT.
 
-### Y a-t-il un point relais Heppner ?
+### Y a-t-il un point relais Heppner ou un retrait en agence ?
 
-Non. Heppner n'a ni point relais ni consigne : si tu ne te fais pas livrer, tu choisis « Je récupère mon colis » et tu vas le chercher à ton agence Heppner.
+Non. Heppner n'a ni point relais ni consigne : si tu ne te fais pas livrer, choisis « Je récupère mon colis » et retire ta commande à ton agence Heppner (stockage gratuit de 5 jours, ou 7 avec EXTENT).
 
-### Peut-on suivre un colis Heppner en Belgique ?
+### Heppner livre-t-il à l'étage, en Suisse ou en Belgique ?
 
-Oui. La Belgique est dans la liste de pays de la page de Heppner, et Peek cherche un code postal à 4 chiffres d'abord en Suisse, puis en Belgique et au Luxembourg.
+Les livraisons s'entendent à l'entrée du bâtiment, sauf si l'expéditeur a payé l'option INHOME (livraison dans la pièce de ton choix, avec ascenseur requis au-delà du 4e étage). Heppner livre également en Suisse (via SAFRAM) et en Belgique.
 
-### Qui est Heppner ?
+### Comment contacter Heppner pour un suivi de colis ?
 
-Une entreprise de transport française basée à Strasbourg, qui se présente comme « familiale et indépendante depuis un siècle ». En Suisse, elle travaille avec SAFRAM, fondée en 1965 et aujourd'hui intégrée au groupe Heppner.
+En France, il n'y a pas de numéro national pour les destinataires : passe par le [formulaire Contactez-nous](https://www.heppner-group.com/contactez-nous/) (objet « Suivi d’un transport en cours ») ou appelle ton agence, dont le numéro figure sur la page de suivi. En Suisse, SAFRAM répond à Genève (+41 22 827 03 11) et Bâle (+41 61 338 93 33) du lundi au vendredi de 8 h à 17 h.
 
 :::sources
 - [Heppner : Destinataire, suivez votre marchandise](https://www.heppner-group.com/destinataire-suivez-votre-marchandise/) – champs du formulaire, où est le numéro, messages d'erreur, pays, lien de contact

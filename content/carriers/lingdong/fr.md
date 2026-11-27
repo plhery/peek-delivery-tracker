@@ -1,12 +1,12 @@
 ---
 title: Suivi Lingdong International : numéro SZLD et statuts
-description: Suis ton colis Lingdong International (领东国际) depuis Shenzhen : format du numéro SZLD, sens de chaque étape, relais final et frais de douane à l'arrivée.
+description: Suivi colis Lingdong International (领东国际) : numéro SZLD, sens des statuts chinois-anglais, qui livre en France ou Suisse, frais de douane et contact.
 slug: suivi-lingdong
 published: 2026-11-18
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Lingdong International (领东国际, de son nom complet 深圳市领东国际货运代理有限公司, Shenzhen Lingdong International Freight Forwarding Co., Ltd.) est un transitaire installé à Shenzhen, en Chine, qui expédie à l'étranger les commandes de vendeurs en ligne chinois. Ses propres numéros commencent par SZLD : colle le tien dans le champ ci-dessus ou saisis-le dans la case 快件查询 (recherche d'envoi) sur lingdong56.com, qui ouvre le site de suivi de Lingdong. C'est la boutique où tu as commandé qui réserve l'envoi et te transmet ce numéro avec les détails d'expédition.
+Lingdong International (领东国际, 深圳市领东国际货运代理有限公司) est un transitaire de Shenzhen qui expédie à l'étranger les commandes de boutiques en ligne chinoises. Ses numéros propres commencent par `SZLD` suivi de dix chiffres : colle le tien dans le champ ci-dessus ou dans la case 快件查询 sur lingdong56.com pour suivre ton colis.
 
 ## Numéro de suivi Lingdong : à quoi il ressemble
 
@@ -99,25 +99,25 @@ Tant que tu gardes le colis ouvert ou le jour de sa livraison avec les notificat
 
 ## Questions sur le suivi Lingdong
 
-### Qu'est-ce que Lingdong International ?
+### Qu'est-ce que Lingdong International (领东国际) ?
 
-C'est 深圳市领东国际货运代理有限公司 (Shenzhen Lingdong International Freight Forwarding Co., Ltd.), aussi appelée 领东国际, un transitaire de Shenzhen qui expédie à l'étranger les colis de boutiques en ligne chinoises. Ses numéros propres commencent par SZLD et se suivent dans la case 快件查询 de lingdong56.com ou dans Peek.
+C'est 深圳市领东国际货运代理有限公司 (Shenzhen Lingdong International Freight Forwarding Co., Ltd.), un transitaire de Shenzhen qui expédie à l'étranger les colis de boutiques chinoises. Ses numéros propres commencent par `SZLD` et se suivent sur lingdong56.com ou dans Peek.
 
-### Pourquoi mon suivi Lingdong reste-t-il sur « Shipment departed from facility » ?
+### Pourquoi mon suivi Lingdong bloque-t-il sur « Shipment departed from facility » ?
 
-Cette étape signale le départ du colis de l'entrepôt de Lingdong à Shenzhen. Les étapes de vol et de douane peuvent suivre, mais aucune ligne propre à Lingdong n'annonce la tournée finale : dans ton pays, une autre société livre le colis. Demande au vendeur laquelle et sous quel numéro la suivre.
+Cette étape marque le départ de l'entrepôt de Lingdong à Shenzhen. Les étapes de vol et de douane peuvent suivre, mais aucune ligne propre à Lingdong n'annonce la livraison finale : une autre société livre le colis dans ton pays. Demande au vendeur laquelle et sous quel numéro la suivre.
 
-### Combien de temps met un colis Lingdong à arriver ?
+### Qui livre les colis Lingdong et en combien de temps ?
 
-Lingdong ne publie aucun délai de livraison sur son site. Fie-toi à l'estimation annoncée par la boutique lors de ta commande.
+Lingdong ne publie ni délais ni liste de transporteurs finaux par pays (le suivi relaie parfois Poste Italiane en Italie ou GOFO aux États-Unis, et Peek bascule vers La Poste suisse si la fiche porte un numéro Swiss Post). Fie-toi à l'estimation de la boutique et demande-lui le numéro local.
 
-### Vais-je payer des frais de douane sur un colis Lingdong ?
+### Quels frais de douane prévoir sur un colis Lingdong ?
 
-Dans l'Union européenne, les commandes à distance venues hors UE jusqu'à 150 € paient un droit de douane de 3 € par catégorie d'article depuis le 1er juillet 2026, auquel s'ajoutent 2 € de frais de traitement de l'Union par catégorie depuis le 1er novembre 2026 quelle que soit la valeur, en plus de la TVA (sauf paiement via l'IOSS en France métropole ou en Belgique ; dans les DOM français et en Suisse s'appliquent leurs propres seuils et taxes). Lingdong n'indique pas ce que le vendeur a réglé d'avance.
+Dans l'UE, les achats hors UE jusqu'à 150 € paient 3 € de droit de douane par catégorie d'article (depuis le 1er juillet 2026) et 2 € de frais de traitement de l'Union par catégorie quelle que soit la valeur (depuis le 1er novembre 2026), plus la TVA hors IOSS. En Suisse, droits et TVA ne sont pas perçus sous 5 CHF.
 
 ### Qui contacter si mon colis Lingdong n'arrive pas ?
 
-La boutique où tu as commandé : c'est elle qui a réservé l'envoi auprès de Lingdong et détient le contrat. Lingdong n'affiche que deux numéros de portable chinois et un chat QQ destinés aux expéditeurs.
+La boutique où tu as commandé : c'est elle qui a réservé l'envoi auprès de Lingdong. Lingdong n'affiche que deux numéros de portable chinois et un chat QQ destinés aux expéditeurs.
 
 :::sources
 - [Lingdong : 深圳市领东国际货运代理有限公司 (accueil)](http://www.lingdong56.com/) – case de suivi 快件查询, services aux marchands, téléphones, boutons QQ, adresse

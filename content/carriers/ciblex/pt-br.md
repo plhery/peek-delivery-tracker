@@ -16,7 +16,7 @@ Os dois formatos em uso:
 
 | Formato | Exemplo inventado |
 | --- | --- |
-| 14 dígitos | `14829173640582` |
+| 14 dígitos | `19999999999980` |
 | 24 dígitos, código de barras completo da etiqueta | `482917365482917365482917` |
 
 Na página de resultados da Ciblex, a linha acima do histórico pode exibir um número menor e a referência do remetente entre parênteses; nenhum deles é o código de rastreamento.
@@ -25,7 +25,7 @@ Códigos de 14 dígitos também cabem em [Chronopost](carrier:chronopost), DPD, 
 
 ## Status de rastreamento Ciblex: tradução do francês
 
-Os resultados da Ciblex aparecem somente em francês: os formulários em inglês e neerlandês em ciblex.eu abrem a mesma página francesa, sem opção de idioma. As colunas são `Date`, `Heure livraison` (horário), `Action` e `Lieu` (local, geralmente a cidade do depósito com o código do departamento). Na ordem habitual:
+Os resultados da Ciblex aparecem somente em francês: os formulários em inglês e neerlandês em ciblex.eu abrem a mesma página francesa, sem opção de idioma. As colunas são `Date`, `Heure livraison` (horário), `Action` e `Lieu` (local, geralmente a cidade do depósito com o código do departamento). Na ordem em que a encomenda passa por eles:
 
 | A Ciblex diz | O que significa para você |
 | --- | --- |
@@ -34,13 +34,13 @@ Os resultados da Ciblex aparecem somente em francês: os formulários em inglês
 | `Colis Contrôle` | Movimentação em um depósito ou filial da Ciblex, indicado na coluna `Lieu`. |
 | `Acheminement contractuel du colis en 48h00` | Prazo contratual do serviço escolhido pelo remetente, não uma nova etapa física. |
 | `Mis en livraison` | Saiu para entrega hoje. |
-| `PROBLEME DESTINATAIRE` | Ocorrência ligada ao destinatário na rota, antes de o pacote retornar ao depósito. O Peek exibe como "Shipment exception". |
+| `PROBLEME DESTINATAIRE` | Ocorrência ligada ao destinatário na rota, antes de o pacote retornar ao depósito. O Peek exibe como "Problema com a encomenda". |
 | `COMPLEMENT ADRESSE` | É preciso complementar os dados do endereço para a Ciblex concluir a entrega. |
 | `Disponible au relais` | Disponível para retirada em um ponto de retirada. |
 | `Colis Livré` | Entregue. |
 | `Retour expéditeur` | Retornando ao remetente. |
 
-`COLIS NON REMIS` soa preocupante ("pacote não entregue"), mas a Ciblex não explica o termo; quando aparece na primeira linha, vem simplesmente antes da primeira bipagem no depósito, e o histórico avança assim que a Ciblex registra o volume. `Colis Contrôle` é apenas uma passagem por depósito, não fiscalização alfandegária, e costuma repetir-se várias vezes durante o trajeto. A linha de 48 horas acompanha uma movimentação de depósito indicando o contrato, não o paradeiro. `Colis pris en charge`, `COMPLEMENT ADRESSE`, `Disponible au relais` e `Retour expéditeur` vêm de registros anteriores do rastreador, não necessariamente da página atual.
+`COLIS NON REMIS` soa preocupante ("pacote não entregue"), mas a Ciblex não explica o termo; quando aparece na primeira linha, vem simplesmente antes da primeira bipagem no depósito, e o histórico avança assim que a Ciblex registra o volume. `Colis Contrôle` é apenas uma passagem por depósito, não fiscalização alfandegária: aparece várias vezes em cada trajeto, nos depósitos por onde o volume passa. A linha de 48 horas acompanha uma movimentação de depósito indicando o contrato, não o paradeiro. `Colis pris en charge`, `COMPLEMENT ADRESSE`, `Disponible au relais` e `Retour expéditeur` vêm de registros anteriores do rastreador da Ciblex, e não da página como aparece hoje.
 
 ## Entregas Ciblex: assinaturas, locais seguros e pontos C Dispo
 
@@ -50,7 +50,7 @@ Com SP8 e SP9, a Ciblex entrega na França metropolitana antes das 8h ou 9h mesm
 
 **Pontos C Dispo.** A Ciblex mantém 300 pontos de retirada voltados a profissionais, escolhidos pelo remetente. Os volumes ficam disponíveis a partir das 8h mediante documento de identidade ou crachá empresarial; você recebe SMS na chegada e, após três dias sem retirada, lembrete por SMS ou e-mail.
 
-**Tentativa perdida ou recusa.** Os termos da Ciblex estabelecem que volumes avisados ou recusados retornam ao remetente em até **7 dias corridos**, por conta do remetente. A Ciblex comunica ao remetente ocorrências como endereço incorreto, aviso de ausência ou fechamento por férias, cabendo ao remetente enviar novas instruções na área do cliente. Não há página para destinatários reagendarem: fale com o remetente. A Ciblex não divulga número de tentativas, se deixa cartão impresso nem o prazo de guarda em pontos C Dispo.
+**Entrega não realizada ou recusa.** Os termos da Ciblex estabelecem que volumes avisados ou recusados retornam ao remetente em até **7 dias corridos**, por conta do remetente. A Ciblex comunica ao remetente ocorrências como endereço incorreto, aviso de ausência ou fechamento por férias, cabendo ao remetente enviar novas instruções na área do cliente. Não há página para destinatários reagendarem: fale com o remetente. A Ciblex não divulga número de tentativas, se deixa cartão impresso nem o prazo de guarda em pontos C Dispo.
 
 ## Encomenda Ciblex atrasada, extraviada ou danificada
 
@@ -62,7 +62,7 @@ Os termos vigentes desde 1º de janeiro de 2026 fixam estes prazos:
 - **Extravio:** a reclamação deve chegar à Ciblex em até **60 dias** após a data prevista de entrega.
 - **Atraso:** prejuízos por atraso devem ser comunicados em até **3 dias** da entrega na França, ou **21 dias** em envios internacionais.
 
-A responsabilidade da Ciblex limita-se a €23 por kg e €750 por volume na França, e a 8,33 DES por kg em envios internacionais. Volumes não reclamados ou não identificáveis são mantidos por 4 meses. Quando há alfândega, impostos, taxas e honorários aduaneiros são cobrados do destinatário na entrega.
+A responsabilidade da Ciblex limita-se a €23 por kg e €750 por volume na França, e a 8,33 DES por kg em envios internacionais. Volumes não reclamados ou não identificáveis são mantidos por 4 meses. Quando há alfândega, impostos, taxas e honorários do despachante aduaneiro são cobrados do destinatário na entrega.
 
 ## Contato da Ciblex: telefone, e-mail e filiais
 
@@ -79,7 +79,7 @@ O formulário de contato em ciblex.eu destina-se a consultas comerciais de empre
 
 O [Peek](/) conhece os códigos de 14 e 24 dígitos da Ciblex, mas ambos são compartilhados com outras transportadoras, por isso consulta as mais prováveis em paralelo. Para 14 dígitos na França, consulta Chronopost e Ciblex primeiro (ficando atrás de DPD, DHL ou outra rede apenas quando o início do código aponta para ela); fora da França, a Ciblex fica em 11º lugar ou depois — além das dez consultadas antes de salvar —, sendo consultada apenas depois que você salva o pacote. A exceção são códigos de 14 dígitos iniciados por `10`, na França ou fora dela: o Peek consulta Ciblex, SEUR e BRT (sem Chronopost) e só recorre à [DPD França](carrier:dpd-fr) via navegador se nenhuma delas nem os serviços de rastreamento encontrarem o código. Para 24 dígitos, consulta Ciblex, Austrian Post e InPost (e bpost primeiro apenas em códigos começados por `3232` ou `3299`). Se duas transportadoras reconhecerem o código, você escolhe. Links de `secure.extranet.ciblex.fr` com `colis=` também funcionam; links de ciblex.eu não.
 
-Com a encomenda aberta, ou no dia da entrega com notificações ligadas, o Peek consulta a Ciblex até a cada 10 minutos — e até a cada 2 minutos a partir das 6h no horário de Paris no dia em que sair para entrega, enquanto o próprio rastreador da Ciblex responder; nos demais casos, de hora em hora. Após dois dias sem novidades (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora. Exibe o status, o histórico com a cidade do depósito de cada movimentação no mapa e o horário de entrega, lido no horário de Paris e exibido no fuso do seu aparelho. Linhas conhecidas pelo Peek aparecem em texto claro (como Delivered, Out for delivery, Ready for pickup, Delivery issue, "Shipment exception" para `PROBLEME DESTINATAIRE` ou `COMPLEMENT ADRESSE`, ou "Parcel processed at a Ciblex facility"); outras linhas, incluindo `COLIS NON REMIS` e a linha de 48 horas, mantêm o francês original da Ciblex. Você pode escolher notificações para "Cada movimentação", "Etapas importantes" ou "Só a entrega".
+Com a encomenda aberta, ou no dia da entrega com notificações ligadas, o Peek consulta a Ciblex até a cada 10 minutos — e até a cada 2 minutos a partir das 6h no horário de Paris no dia em que sair para entrega, enquanto o próprio rastreador da Ciblex responder; nos demais casos, de hora em hora. Após dois dias sem novidades (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora. Exibe o status, o histórico com a cidade do depósito de cada movimentação no mapa e o horário de entrega, lido no horário de Paris e exibido no fuso do seu aparelho. Linhas conhecidas pelo Peek aparecem em palavras simples (como "Entregue", "Saiu para entrega", "Pronta para retirada", "Problema na entrega", "Problema com a encomenda" para `PROBLEME DESTINATAIRE` ou `COMPLEMENT ADRESSE`, ou "Encomenda processada em uma unidade Ciblex"); outras linhas, incluindo `COLIS NON REMIS` e a linha de 48 horas, mantêm o francês original da Ciblex. Você pode escolher notificações para "Cada movimentação", "Etapas importantes" ou "Só a entrega".
 
 Não há data prevista de entrega, nome ou endereço do ponto de retirada nem peso, e seu endereço é omitido quando a Ciblex o insere na coluna de local.
 
@@ -102,20 +102,20 @@ Não, são duas transportadoras com rastreamentos separados. Porém a página de
 Sim. A Ciblex tem filial em Zaventem e depósitos na Bélgica — incluindo Schaerbeek, Charleroi e Namur — e informa enviar para mais de 166 países.
 
 :::sources
-- [Ciblex: Fast tracking of your parcels](https://ciblex.eu/en/fast-tracking-of-your-parcels/) – barcode, free tracking, customer area, French results
-- [Ciblex: Suivi rapide de vos colis](https://ciblex.eu/suivi-colis-express/) – same in French, problems reported to the sender
-- [Ciblex: Suivi de vos colis](https://secure.extranet.ciblex.fr/extranet/client/corps.php?module=colis) – French wordings, columns
-- [Ciblex: Mentions légales](https://ciblex.eu/mentions-legales/) – terms from 1 January 2026, delivery level, returns, reserves, claims, liability, customs, phone, email
-- [Ciblex: Legal notice](https://ciblex.eu/en/legal-notice/) – the same terms in English
-- [Ciblex: Entreprise](https://ciblex.eu/entreprise/) – B2B express carrier since 1977
-- [Ciblex: C Dispo – Point relais](https://ciblex.eu/offres-de-livraison-express/cdispo-point-relais/) – 300 relays, ID, SMS, 3-day reminder
-- [Ciblex: E-Commerce – The Express Service for Private Individuals](https://ciblex.eu/en/services/e-commerce-the-express-service-for-private-individuals/) – private deliveries via Relais Colis
-- [Ciblex: Agences](https://ciblex.eu/agences/) – agencies, depots, hours, 166 countries
-- [Ciblex: Contact](https://ciblex.eu/en/contact/) – sales form
-- [Ciblex: SP9 – Livraison en SAS avant 9h](https://ciblex.eu/offres-de-livraison-express/sp9-livraison-sas-avant-9h/) – safe-place delivery
-- [Ciblex: H12 – L'express avant midi](https://ciblex.eu/offres-de-livraison-express/h12-livraison-24h/) – before noon, signature
-- [Ciblex: Livraison samedi matin](https://ciblex.eu/offres-de-livraison-express/livraison-samedi-matin/) – Saturday mornings
-- [Ciblex: Le groupe Walden a finalisé le rachat de Relais Colis](https://ciblex.eu/le-groupe-walden-a-finalise-le-rachat-de-relais-colis/) – link with Relais Colis
-- [Relais Colis: Accueil](https://relaiscolis.com/) – Relais Colis's own site
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads and shows
+- [Ciblex: Fast tracking of your parcels](https://ciblex.eu/en/fast-tracking-of-your-parcels/) – código de barras, rastreamento gratuito, área do cliente, resultados em francês
+- [Ciblex: Suivi rapide de vos colis](https://ciblex.eu/suivi-colis-express/) – a mesma página em francês, problemas comunicados ao remetente
+- [Ciblex: Suivi de vos colis](https://secure.extranet.ciblex.fr/extranet/client/corps.php?module=colis) – termos em francês, colunas
+- [Ciblex: Mentions légales](https://ciblex.eu/mentions-legales/) – termos desde 1º de janeiro de 2026, nível de entrega, devoluções, ressalvas, pedidos de indenização, responsabilidade, alfândega, telefone, e-mail
+- [Ciblex: Legal notice](https://ciblex.eu/en/legal-notice/) – os mesmos termos em inglês
+- [Ciblex: Entreprise](https://ciblex.eu/entreprise/) – transportadora expressa B2B desde 1977
+- [Ciblex: C Dispo – Point relais](https://ciblex.eu/offres-de-livraison-express/cdispo-point-relais/) – 300 pontos, documento de identidade, SMS, lembrete após 3 dias
+- [Ciblex: E-Commerce – The Express Service for Private Individuals](https://ciblex.eu/en/services/e-commerce-the-express-service-for-private-individuals/) – entregas a pessoas físicas pela Relais Colis
+- [Ciblex: Agences](https://ciblex.eu/agences/) – filiais, depósitos, horários, 166 países
+- [Ciblex: Contact](https://ciblex.eu/en/contact/) – formulário comercial
+- [Ciblex: SP9 – Livraison en SAS avant 9h](https://ciblex.eu/offres-de-livraison-express/sp9-livraison-sas-avant-9h/) – entrega em local seguro
+- [Ciblex: H12 – L'express avant midi](https://ciblex.eu/offres-de-livraison-express/h12-livraison-24h/) – antes do meio-dia, assinatura
+- [Ciblex: Livraison samedi matin](https://ciblex.eu/offres-de-livraison-express/livraison-samedi-matin/) – sábados de manhã
+- [Ciblex: Le groupe Walden a finalisé le rachat de Relais Colis](https://ciblex.eu/le-groupe-walden-a-finalise-le-rachat-de-relais-colis/) – relação com a Relais Colis
+- [Relais Colis: Accueil](https://relaiscolis.com/) – site da própria Relais Colis
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e exibe
 :::

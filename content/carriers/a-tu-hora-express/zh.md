@@ -16,7 +16,7 @@ A Tu Hora Express（*A TU HORA EXPRESS, S.L.*）是西班牙本土末端派送�
 | --- | --- |
 | `0000004829173640` | 16 位 A Tu Hora Express 服务单号（`000000` 加 10 位数字）。在官网查询时须配合 5 位西班牙收件邮编。 |
 | `4829173640` | 10 位短单号（前方补齐六个 0 即为 16 位服务单号）。同样需要配合 5 位收件邮编。 |
-| `000000482917364000128013` | 24 位完整条码：16 位服务单号 + `001` + 5 位西班牙收件邮编（此处为 `28013`）。与 Ciblex、[InPost](carrier:inpost)、[bpost](carrier:bpost)、[Austrian Post](carrier:austrian-post) 和 Express One 共用 24 位长度。 |
+| `000000482917364000128013` | 24 位完整条码：16 位服务单号 + `001` + 5 位西班牙收件邮编（此处为 `28013`）。与 [Ciblex](carrier:ciblex)、[InPost](carrier:inpost)、[bpost](carrier:bpost)、[Austrian Post](carrier:austrian-post) 和 Express One 共用 24 位长度。 |
 
 **为什么必须填写邮编。** 在 [mydelivery.atuhoraexpress.com](https://mydelivery.atuhoraexpress.com/#/login-form-cli) 上，10 位和 16 位单号只有在配对输入 **5 位西班牙收件邮编**时才会返回包裹详情；24 位条码末五位已内嵌该邮编，因此无需再单独输入邮编。其他西班牙与国际条码形态请参阅[运单号格式说明](guide:tracking-number-formats)（英文）。
 
@@ -64,7 +64,7 @@ A Tu Hora Express 官网未公布派送尝试次数、重量或尺寸限制以�
 
 ## 使用 Peek 跟踪 A Tu Hora Express 包裹
 
-[Peek](/) 会以高置信度自动将任意以六个 0 开头的 16 位单号（如虚构单号 `0000004829173640`）识别为 A Tu Hora Express。24 位条码（`000000482917364000128013`）符合多家快递公司格式：Peek 会带条码内嵌邮编向 A Tu Hora Express 查询，并同时询问 [Austrian Post](carrier:austrian-post)、[InPost](carrier:inpost) 和 Ciblex（若均无记录再询问 Express One），在 A Tu Hora Express 查到记录时显示“A Tu Hora Express 有这个包裹的记录。”对于 10 位单号（`4829173640`），请在添加时点击“更换”或在包裹页点击“更换快递公司”选择 A Tu Hora Express（搜索“A Tu Hora”同样可找到）。
+[Peek](/) 会以高置信度自动将任意以六个 0 开头的 16 位单号（如虚构单号 `0000004829173640`）识别为 A Tu Hora Express。24 位条码（`000000482917364000128013`）符合多家快递公司格式：Peek 会带条码内嵌邮编向 A Tu Hora Express 查询，并同时询问 [Austrian Post](carrier:austrian-post)、[InPost](carrier:inpost) 和 [Ciblex](carrier:ciblex)（若均无记录再询问 Express One），在 A Tu Hora Express 查到记录时显示“A Tu Hora Express 有这个包裹的记录。”对于 10 位单号（`4829173640`），请在添加时点击“更换”或在包裹页点击“更换快递公司”选择 A Tu Hora Express（搜索“A Tu Hora”同样可找到）。
 
 对于 10 位与 16 位单号，Peek 会提供可选的“收件邮编”字段，并提示“A Tu Hora Express 仅在填写收件邮编后才显示包裹。”在填写邮编前，包裹页面会显示“添加邮编”，Peek 会改由物流查询服务跟进，并在满一天无响应后改为每天检查一次；输入邮编后 Peek 会立刻重新查询。24 位条码末五位已自带邮编，因此无需另填。
 

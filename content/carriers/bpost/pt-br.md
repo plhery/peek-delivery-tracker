@@ -25,7 +25,7 @@ Os formatos mais comuns divulgados pela bpost (exemplos fictícios):
 
 Um código começando por `U` existe apenas para a alfândega: o remetente ou comprador escolheu envio sem Track & Trace, e o item chega em até 5 dias úteis após o desembaraço aduaneiro, segundo a bpost.
 
-Um número postal terminado nas letras de outro país pertence ao correio daquele país. Um dígito trocado num código terminado em `BE` invalida o dígito verificador e faz o Peek não sugerir nenhuma transportadora. Alguns códigos de 24 dígitos pertencem à [InPost](carrier:inpost) ou à Ciblex.
+Um número postal terminado nas letras de outro país pertence ao correio daquele país. Um dígito trocado num código terminado em `BE` invalida o dígito verificador e faz o Peek não sugerir nenhuma transportadora. Alguns códigos de 24 dígitos pertencem à [InPost](carrier:inpost) ou à [Ciblex](carrier:ciblex).
 
 ## Status do Track & Trace da bpost explicados
 

@@ -18,7 +18,7 @@ A InPost Itália informa que o código aparece nos e-mails do pedido enviados pe
 | `JJD4829173605841926` | `JJD` seguido de 16 dígitos: Reino Unido. |
 | `8YDR482917360` | `8YDR` seguido de 9 dígitos: Reino Unido. |
 | `48KLT2917360A582` | Dois dígitos, três letras, sete dígitos, `A` e três dígitos: etiqueta Yodel, Reino Unido. |
-| `648291736058419263748591` | 24 dígitos: Polônia e Itália. A bpost e a Ciblex também usam esse formato. |
+| `648291736058419263748591` | 24 dígitos: Polônia e Itália. A bpost e a [Ciblex](carrier:ciblex) também usam esse formato. |
 | `48291736` | 8 dígitos, como o exemplo na página de rastreamento do inpost.pt. Também combina com a Mondial Relay. |
 
 A InPost Reino Unido afirma que seus códigos geralmente começam com `JD`, `JJD` ou `8`. Já `JJD` ou `JD` seguidos de 18 dígitos pertencem à DHL. O código de retirada, o PIN, o QR code e o "kod nadania" polonês (pelas regras da Allegro Lokalnie, um código de 9 dígitos que a InPost dá ao vendedor para postar um pacote sem imprimir etiqueta) não servem para rastreamento. Se o e-mail da loja mencionar outra transportadora, [o código pode ser dela](guide:tracking-number-formats).

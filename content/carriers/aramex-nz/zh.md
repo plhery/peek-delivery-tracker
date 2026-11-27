@@ -1,6 +1,6 @@
 ---
 title: Aramex 新西兰（Aramex NZ）物流查询：单号、状态与网点电话
-description: 查询新西兰 Aramex（原 Fastway）包裹：12 位面单号查找与格式、英文状态含义、乡村转运与错过派送处理、理赔时限及各地分拨站电话。
+description: 查询新西兰 Aramex（原 Fastway）包裹：12 位面单号查找与格式、英文状态含义、乡村转运、派送未成功处理、理赔时限及各地分拨站电话。
 slug: aramex-new-zealand-tracking-number
 published: 2026-11-26
 updated: 2026-11-26
@@ -10,13 +10,13 @@ Aramex 新西兰（Aramex New Zealand，前身为 Fastway Couriers）是一家�
 
 ## Aramex NZ 运单号格式与查找位置
 
-Aramex 将其称为面单号（label number）或运单号（tracking number）；错过派送时，该编号也会印在投递通知卡（calling card）上。Aramex 表示没有编号无法查件，不确定时请联系寄件人。仍找不到单号？请看[如何查找运单号](guide:find-tracking-number)（英文）。
+Aramex 将其称为面单号（label number）或运单号（tracking number）；派送未成功时，该编号也会写在通知卡（calling card）上。Aramex 表示没有编号无法查件，不确定时请联系寄件人。仍找不到单号？请看[如何查找运单号](guide:find-tracking-number)（英文）。
 
-Aramex 未公开官方编码规则；其查询中常见的面单号为 12 位：前 2 位字符 + 10 位数字。
+Aramex 未公布单号格式；在其查件系统中见到的面单号为 12 位：前 2 位字符 + 10 位数字。
 
-| 格式（示例编号） | 含义 |
+| 格式（虚构） | 含义 |
 | --- | --- |
-| `KM4829173654` | 两位字母加 10 位数字：最常见的面单号。 |
+| `KM4829173654` | 两位字母加 10 位数字：常规的面单号。 |
 | `2X4829173654` | 一位数字、一位字母加 10 位数字。 |
 | `A94829173654` | 一位字母、一位数字加 10 位数字。 |
 
@@ -24,7 +24,7 @@ Aramex 未公开官方编码规则；其查询中常见的面单号为 12 位：
 
 ## Aramex NZ 物流状态含义
 
-Aramex 新西兰官网仅提供英文界面。以下按大致流转顺序列出最常见的状态标题：
+Aramex 新西兰官网仅提供英文界面。以下是你最可能遇到的状态标题，大致按先后顺序排列：
 
 | Aramex 显示 | 对你的含义 |
 | --- | --- |
@@ -44,13 +44,13 @@ Aramex 新西兰官网仅提供英文界面。以下按大致流转顺序列出�
 
 延误包裹会显示 `Parcel delayed`，并可能弹出标题为 `Your delivery has been delayed` 的提示框（“Your parcel is delayed, up to 48 hours.”）。`Out of time today` 表示快递员当天线路超时未及派送。`Ready for collection at` 会标明包裹存放的自提点名称。
 
-## Aramex NZ 派送、乡村地址与错过派送
+## Aramex NZ 派送、乡村地址与派送未成功
 
-Aramex 周一至周五工作时间派送，公众假期不派送，且不承诺具体送达时刻。其不作保证的参考时效为：同岛次日达，南北岛之间 2 至 3 天；乡村或非直派区域需额外增加 2 至 4 天。Aramex 不支持投递至快递柜或邮政信箱（PO Box）。
+Aramex 周一至周五工作时间派送，公众假期不派送，且不承诺具体送达时刻。其不作保证的参考时效为：同岛次日达，南北岛之间 2 至 3 天；乡村或非直派区域需额外增加 2 至 4 天。Aramex 无法投递至快递柜或邮政信箱（PO Box）。
 
 具体签收方式由寄件商家选择：授权无接触放置（Authority to Leave，放安全位置）、签收件（Signature）、标准件（Standard，优先签收否则放安全位置）或安全 PIN 码（Secure PIN，通过邮件或短信发送）。
 
-**错过派送。** 若包裹无法安全放置，会送至最近的自提点或退回本地分拨站，快递员会留下写明地点的通知卡。自提时请携带带照片身份证件与面单号。
+**派送未成功。** 若包裹无法安全放置，会送至最近的自提点或退回本地分拨站，快递员会留下写明地点的通知卡。自提时请携带带照片身份证件与面单号。
 
 **修改派送。** 在 Aramex 的重新预约派送（arrange-a-redelivery）页面，你可以免费预约一次原地址重派，或支付小额费用改寄新地址。Aramex 无法预约具体日期或时段。部分地区支持改投至 Parcel Connect 合作网点，方便包括周末在内的时间自提。如需去分拨站自提，请先联系该分拨站。根据 Aramex 条款，若首次派送尝试后 **7 天**内既未重派也未领取，Aramex 可将包裹退回寄件人。
 
@@ -70,9 +70,9 @@ Aramex 周一至周五工作时间派送，公众假期不派送，且不承诺�
 
 **破损。** 请尽快通知商家，并在 **24 小时**内向 Aramex 提交咨询。
 
-由于理赔所需发票保存在商家处，实际通常由商家发起理赔。Aramex 理赔指南要求破损在签收后 **7 天**内、未送达在发货后 **30 天**内提出通知；赔付上限为 2,000 纽币（含 GST 及运费），无免赔额。这些限制不影响你在新西兰《消费者保障法》（Consumer Guarantees Act）下的法定权益。
+由于理赔所需发票保存在商家处，实际上由商家发起理赔。Aramex 理赔指南要求破损在签收后 **7 天**内、未送达在发货后 **30 天**内提出通知；赔付上限为 2,000 纽币（含 GST 及运费），无免赔额。这些限制不影响你在新西兰《消费者保障法》（Consumer Guarantees Act）下的法定权益。
 
-**退回寄件人。** 寄件人要求退回、地址错误或多次派送失败都会触发退件，请联系商家处理。
+**退回寄件人。** 寄件人要求退回、地址错误或多次派送未成功都会触发退件，请联系商家处理。
 
 ## Aramex NZ 联系电话与分拨站查询
 
@@ -81,21 +81,21 @@ Aramex 新西兰联系页面未列出全国统一客服电话、0800 免费热�
 - **在线查询表单：** 联系页面的 Submit enquiry 表单。
 - **当地快递加盟商或分拨站（Aramex 指定的日常联络窗口）：** 周一至周五营业，大多为新西兰时间 08:00–17:00：奥克兰 `09 634 3704`；惠灵顿 `04 576 0296`；坎特伯雷 `03 341 1090`；怀卡托 `(07) 847 8210`；陶朗加 `07 541 0100`；但尼丁 `03 477 4040`。
 
-> Aramex 声明绝不会通过短信索要银行卡信息。诈骗短信多来自境外号码，诱导点击链接或支付“未缴关税”；官方链接仅指向 `aramex.co.nz` 或 `aramex.com.au`。如遇钓鱼信息，请向新西兰内政部（Department of Internal Affairs）举报。
+> Aramex 声明绝不会通过短信索要银行卡信息。诈骗短信多来自境外号码，诱导点击链接或支付“未缴关税”；真实链接只会指向 `aramex.co.nz` 或 `aramex.com.au`。如遇钓鱼信息，请向新西兰内政部（Department of Internal Affairs）举报。
 
 ## 使用 Peek 跟踪 Aramex NZ 包裹
 
-[Peek](/) 直接读取 Aramex 新西兰官方查询接口。以 `MX` 开头的面单号会被立刻识别为 Aramex New Zealand；其余 12 位格式由于与 Aramex Australia 和 Colis Privé 重叠，Peek 会同时查询这几家并显示查有记录的一家——若两家 Aramex 网络均有记录，可通过“更换快递公司”手动切换。以“字母 + 数字”开头的面单号不会自动推荐给 Aramex：请直接粘贴 aramex.co.nz 查询链接（含 `?l=` 加单号）或在“更换快递公司”中手动选择 Aramex New Zealand；旧版 fastway.co.nz 链接同样可用。寄件人的长 SSCC 条码（`00` 加 18 位数字）不能用于 Aramex New Zealand，请使用 12 位面单号。
+[Peek](/) 读取 Aramex 新西兰自己的查件系统。以 `MX` 开头的面单号会被立刻识别为 Aramex New Zealand；其余 12 位格式由于与 Aramex Australia 和 Colis Privé 重叠，Peek 会同时查询这几家并显示查有记录的一家——若两家 Aramex 网络均有记录，可通过“更换快递公司”手动切换。以“字母 + 数字”开头的面单号不会被列为 Aramex：请直接粘贴 aramex.co.nz 查询链接（含 `?l=` 加单号）或在“更换快递公司”中手动选择 Aramex New Zealand；旧版 fastway.co.nz 链接同样可用。寄件人的长 SSCC 条码（`00` 加 18 位数字）不能用于 Aramex New Zealand，请使用 12 位面单号。
 
 Peek 会展示物流状态、每次扫描的分拨站，并在 Aramex 掌握起止分拨站时显示预计送达日。`Delivered` 和 `In transit` 会以 Peek 自身状态词显示，`In transit with our freight partners` 显示为派送中，其余状态保留 Aramex 英文原文。自提点名称与地址、营业时间、取件码、签收人、照片或签名凭证、派送备注及参考号都会被过滤。
 
-对于转交 NZ Post 派送的乡村包裹，Peek 可接续跟踪 NZ Post 单号（显示“由 NZ Post 派送”）。新西兰境内扫描按奥克兰时间解析；国际段扫描不含时区，Peek 按扫描地点所在时区解析，并统一呈现 Aramex 自身轨迹。每次扫描都会标在地图上，并在状态变动时发送通知。
+对于转交 NZ Post 派送的乡村包裹，Peek 可接续跟踪 NZ Post 单号（显示“由 NZ Post 派送”）。新西兰境内扫描按奥克兰时间解析；国际段扫描不含时区，Peek 按扫描地点所在时区解析，并统一呈现 Aramex 自身轨迹。每次扫描都会标在地图上，Peek 也可以在状态变化时通知你。
 
 ## Aramex NZ 物流查询常见问题
 
 ### Aramex NZ 运单号以什么开头？
 
-通常以两位字母开头，有时为“一位数字 + 一位字母”或“一位字母 + 一位数字”，后接 10 位数字，例如示例编号 `KM4829173654`。
+通常以两位字母开头，有时为“一位数字 + 一位字母”或“一位字母 + 一位数字”，后接 10 位数字，例如虚构编号 `KM4829173654`。
 
 ### Aramex 在新西兰送货需要多久？
 
@@ -110,27 +110,27 @@ Aramex 新西兰官网未公布全国统一电话。请使用官网在线查询�
 是的。Fastway Couriers 于 2016 年加入 Aramex，并于 2019 年正式更名为 Aramex New Zealand。
 
 :::sources
-- [Aramex New Zealand: Track](https://www.aramex.co.nz/tools/track/) – status panels and pop-ups, delivery services, collection, proof of delivery, damaged, returned, redirect fee
-- [Aramex New Zealand: tracking page script](https://www.aramex.co.nz/scripts/track/track21_NZ.js) – rural agent text, NZ Post link
-- [Aramex New Zealand: tracking service](https://www.aramex.co.nz/umbraco/api/TrackingApi/GetTrackingData) – scan headings and explanations
-- [Aramex New Zealand: About us](https://www.aramex.co.nz/why-aramex/about-us/) – Fastway history, rebrand, franchise network
-- [Aramex New Zealand: How do I track my parcel?](https://www.aramex.co.nz/contact-us/faqs/receiving-parcels/how-do-i-track-my-parcel/) – label number
-- [Aramex New Zealand: What should I do if my parcel hasn't arrived?](https://www.aramex.co.nz/contact-us/faqs/receiving-parcels/what-should-i-do-if-my-parcel-hasnt-arrived/) – online enquiry
-- [Aramex New Zealand: How do I arrange a redelivery?](https://www.aramex.co.nz/contact-us/faqs/receiving-parcels/how-do-i-arrange-a-redelivery/) – free redelivery, redirect, depot, Parcel Connect
-- [Aramex New Zealand: Can I arrange a redelivery for a specific time?](https://www.aramex.co.nz/contact-us/faqs/receiving-parcels/can-i-arrange-a-redelivery-for-a-specific-time/) – no specific day or time
-- [Aramex New Zealand: Can I pick my parcel up from the depot?](https://www.aramex.co.nz/contact-us/faqs/receiving-parcels/can-i-pick-my-parcel-up-from-the-depot/) – contact first
-- [Aramex New Zealand: What if I'm unable to sign for the delivery?](https://www.aramex.co.nz/contact-us/faqs/receiving-parcels/what-if-im-unable-to-sign-for-the-delivery/) – Authority to Leave
-- [Aramex New Zealand: How long will it take for my parcel to be delivered?](https://www.aramex.co.nz/contact-us/faqs/sending-parcels/how-long-will-it-take-for-my-parcel-to-be-delivered/) – service standards
-- [Aramex New Zealand: Are there any addresses that Aramex New Zealand can't deliver to?](https://www.aramex.co.nz/contact-us/faqs/sending-parcels/are-there-any-addresses-that-aramex-new-zealand-can-t-deliver-to/) – no lockers or PO Boxes
-- [Aramex New Zealand: Claims guide](https://www.aramex.co.nz/terms-and-conditions/claims-guide/) – 7 and 30 days, $2,000 cover
-- [Aramex New Zealand: Is there an excess?](https://www.aramex.co.nz/contact-us/faqs/limited-liability-cover/is-there-an-excess/) – no excess
-- [Aramex New Zealand: Domestic conditions of carriage](https://www.aramex.co.nz/terms-and-conditions/conditions-of-carriage/domestic-conditions-of-carriage/) – 7-day return, Parcel Connect ID, rural delivery, Consumer Guarantees Act
-- [Aramex New Zealand: Parcel Connect](https://www.aramex.co.nz/our-services/parcel-connect/) – redirect to an agent, weekend collection
-- [Aramex New Zealand: Network Service Updates](https://www.aramex.co.nz/our-services/network-service-updates/) – delays by suburb
-- [Aramex New Zealand: aramexConnect](https://www.aramex.co.nz/tools/aramexconnect/) – Receiving Mode, proof of delivery
-- [Aramex New Zealand: Contact us](https://www.aramex.co.nz/contact-us/) – enquiry form, no national phone
-- [Aramex New Zealand: Who is my contact?](https://www.aramex.co.nz/contact-us/faqs/sending-parcels/who-is-my-contact/) – courier franchisee, depot
-- [Aramex New Zealand: Aramex Auckland](https://www.aramex.co.nz/auckland/) – depot phone and hours (with the Wellington, Canterbury, Waikato, Tauranga and Dunedin pages)
-- [Aramex New Zealand: SMS & Online Security](https://www.aramex.co.nz/tools/sms-online-security/) – scam warnings, link domains, reporting
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads from Aramex New Zealand
+- [Aramex New Zealand: Track](https://www.aramex.co.nz/tools/track/) – 状态面板与弹窗、派送服务、自提、签收凭证、破损、退回、改址费用
+- [Aramex New Zealand: tracking page script](https://www.aramex.co.nz/scripts/track/track21_NZ.js) – 乡村代理说明、NZ Post 链接
+- [Aramex New Zealand: tracking service](https://www.aramex.co.nz/umbraco/api/TrackingApi/GetTrackingData) – 扫描状态标题与说明
+- [Aramex New Zealand: About us](https://www.aramex.co.nz/why-aramex/about-us/) – Fastway 的历史、更名、加盟网络
+- [Aramex New Zealand: How do I track my parcel?](https://www.aramex.co.nz/contact-us/faqs/receiving-parcels/how-do-i-track-my-parcel/) – 面单号
+- [Aramex New Zealand: What should I do if my parcel hasn't arrived?](https://www.aramex.co.nz/contact-us/faqs/receiving-parcels/what-should-i-do-if-my-parcel-hasnt-arrived/) – 在线查询表单
+- [Aramex New Zealand: How do I arrange a redelivery?](https://www.aramex.co.nz/contact-us/faqs/receiving-parcels/how-do-i-arrange-a-redelivery/) – 免费重派、改址、分拨站、Parcel Connect
+- [Aramex New Zealand: Can I arrange a redelivery for a specific time?](https://www.aramex.co.nz/contact-us/faqs/receiving-parcels/can-i-arrange-a-redelivery-for-a-specific-time/) – 不能指定日期或时段
+- [Aramex New Zealand: Can I pick my parcel up from the depot?](https://www.aramex.co.nz/contact-us/faqs/receiving-parcels/can-i-pick-my-parcel-up-from-the-depot/) – 先联系分拨站
+- [Aramex New Zealand: What if I'm unable to sign for the delivery?](https://www.aramex.co.nz/contact-us/faqs/receiving-parcels/what-if-im-unable-to-sign-for-the-delivery/) – Authority to Leave（授权放置）
+- [Aramex New Zealand: How long will it take for my parcel to be delivered?](https://www.aramex.co.nz/contact-us/faqs/sending-parcels/how-long-will-it-take-for-my-parcel-to-be-delivered/) – 服务时效标准
+- [Aramex New Zealand: Are there any addresses that Aramex New Zealand can't deliver to?](https://www.aramex.co.nz/contact-us/faqs/sending-parcels/are-there-any-addresses-that-aramex-new-zealand-can-t-deliver-to/) – 不投递快递柜或邮政信箱
+- [Aramex New Zealand: Claims guide](https://www.aramex.co.nz/terms-and-conditions/claims-guide/) – 7 天与 30 天时限、2,000 纽币赔付上限
+- [Aramex New Zealand: Is there an excess?](https://www.aramex.co.nz/contact-us/faqs/limited-liability-cover/is-there-an-excess/) – 无免赔额
+- [Aramex New Zealand: Domestic conditions of carriage](https://www.aramex.co.nz/terms-and-conditions/conditions-of-carriage/domestic-conditions-of-carriage/) – 7 天后退回、Parcel Connect 取件证件、乡村派送、《消费者保障法》
+- [Aramex New Zealand: Parcel Connect](https://www.aramex.co.nz/our-services/parcel-connect/) – 改投至代理网点、周末自提
+- [Aramex New Zealand: Network Service Updates](https://www.aramex.co.nz/our-services/network-service-updates/) – 按郊区列出的延误
+- [Aramex New Zealand: aramexConnect](https://www.aramex.co.nz/tools/aramexconnect/) – Receiving Mode、签收凭证
+- [Aramex New Zealand: Contact us](https://www.aramex.co.nz/contact-us/) – 查询表单、没有全国统一电话
+- [Aramex New Zealand: Who is my contact?](https://www.aramex.co.nz/contact-us/faqs/sending-parcels/who-is-my-contact/) – 快递加盟商、分拨站
+- [Aramex New Zealand: Aramex Auckland](https://www.aramex.co.nz/auckland/) – 分拨站电话与营业时间（另见惠灵顿、坎特伯雷、怀卡托、陶朗加和但尼丁页面）
+- [Aramex New Zealand: SMS & Online Security](https://www.aramex.co.nz/tools/sms-online-security/) – 诈骗提醒、链接域名、举报方式
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 从 Aramex 新西兰读取的内容
 :::

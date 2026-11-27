@@ -1,12 +1,12 @@
 ---
 title: DPD Poland śledzenie paczki: statusy, Pickup i kontakt
-description: Śledzenie paczki DPD po 14-znakowym numerze: co znaczą statusy, ile paczka czeka w punkcie DPD Pickup, jak złożyć reklamację i gdzie dzwonić.
+description: DPD Polska śledzenie paczki po 14-znakowym numerze: statusy, DPD Pickup (2 dni robocze), numer do kuriera, reklamacja w 30 dni oraz infolinia 22 577 55 55.
 slug: dpd-poland-sledzenie-paczki
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-DPD Polska to firma kurierska z Warszawy, część grupy Geopost, której właścicielem jest francuska poczta La Poste. Paczkę śledzisz na stronie [Track & Trace DPD](https://tracktrace.dpd.com.pl/findParcel) po 14-znakowym numerze przesyłki albo wklejasz numer w pole powyżej. Numer zwykle podaje sklep w e-mailu o wysyłce lub na stronie zamówienia.
+DPD Polska (część grupy Geopost należącej do francuskiej La Poste) dostarcza paczki kurierem oraz do ponad 35 000 punktów i automatów DPD Pickup. Wpisz 14-znakowy numer przesyłki (13 cyfr i litera lub 14 cyfr) na stronie [Track & Trace DPD](https://tracktrace.dpd.com.pl/findParcel) albo wklej go w pole powyżej — numer znajdziesz w e-mailu ze sklepu lub w aplikacji DPD Mobile.
 
 ## DPD: gdzie jest numer paczki i jak wygląda
 
@@ -82,23 +82,23 @@ Gdy korzystasz z Peek po polsku, Peek czyta polską stronę DPD (a całą histor
 
 ## Pytania o śledzenie paczki DPD
 
-### Czy paczkę DPD można śledzić po numerze telefonu?
+### Czy paczkę DPD Polska można śledzić po numerze telefonu?
 
 Tylko w aplikacji DPD Mobile, która pokazuje paczki przypisane do telefonu lub e-maila z twojego konta. Strona śledzenia DPD nie ma wyszukiwania po numerze telefonu.
 
-### Czy do śledzenia przesyłki DPD potrzebny jest PIN?
+### Czy do śledzenia przesyłki DPD potrzebny jest kod PIN?
 
 Nie, strona tt.dpd.com.pl wymaga tylko numeru. PIN jest potrzebny w serwisie Moja Paczka, gdzie zarządzasz doręczeniem, i można go tam wygenerować.
 
-### Jak zadzwonić do kuriera DPD?
+### Jak znaleźć numer telefonu do kuriera DPD?
 
 Numer kuriera pojawia się w DPD Mobile i na tt.dpd.com.pl, gdy paczka zostanie wydana do doręczenia.
 
-### Ile trwa reklamacja w DPD?
+### Ile czeka paczka w DPD Pickup i ile trwa reklamacja?
 
-DPD wydaje decyzję w ciągu 30 dni kalendarzowych od złożenia kompletnej reklamacji.
+W punkcie lub automacie DPD Pickup paczka czeka 2 pełne dni robocze bez możliwości przedłużenia. Na kompletną reklamację DPD Polska wydaje decyzję w ciągu 30 dni kalendarzowych.
 
-### Jak śledzić paczkę DPD z Allegro?
+### Jak śledzić paczkę DPD z Allegro Delivery?
 
 Paczki Allegro Delivery są widoczne tylko w narzędziach Allegro, nie w DPD Mobile.
 

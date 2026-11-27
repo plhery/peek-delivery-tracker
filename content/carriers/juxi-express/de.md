@@ -1,12 +1,12 @@
 ---
 title: Juxi Express Sendungsverfolgung: JXC-Nummer, Zusteller, Zoll
-description: Juxi-Express-Paket (SHJX) aus China verfolgen: wie die JXC-Sendungsnummer aussieht, wer in Deutschland, Österreich und der Schweiz zustellt und wen du fragst.
+description: Juxi Express (SHJX / 驹隙) Sendungsverfolgung aus China: 17-stellige JXC…YQ Nummer, DHL-Übergabe in Deutschland, Laufzeiten, EU-Zoll und Kontakt in Shanghai.
 slug: juxi-express-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Juxi Express (上海驹隙国际物流有限公司, Shanghai Juxi International Freight Forwarding Co., Ltd.) ist ein Spediteur aus Shanghai, der Pakete von Onlinehändlern in China ins Ausland bringt, auf eigenen Linien und über die Post. Steht bei deiner Bestellung SHJX oder 驹隙, ist ebenfalls Juxi gemeint. Eine eigene Sendungsverfolgung hat Juxi nicht: Füg die Sendungsnummer oben ins Feld ein. Du bekommst sie vom Shop, der Juxi gebucht hat, mit den Versanddaten deiner Bestellung.
+Juxi Express (*Shanghai Juxi International Freight Forwarding Co., Ltd.*, auch `SHJX` oder `驹隙`) ist ein Spediteur aus Shanghai, der Pakete chinesischer Onlinehändler über eigene Linien und Postdienste nach Europa bringt — auf der Deutschland-Kleinpaketlinie übernimmt vor Ort DHL Paket. Weil Juxi keine eigene Sendungsverfolgung mehr betreibt, füg deine 17-stellige `JXC…YQ`-Sendungsnummer direkt oben ins Feld ein.
 
 ## Juxi Express Sendungsnummer: so sieht sie aus
 
@@ -91,11 +91,11 @@ Solange Peek das Paket über Tracking-Dienste verfolgt, schaut es stündlich nac
 
 ## Fragen zur Juxi Express Sendungsverfolgung
 
-### Was ist Juxi Express?
+### Was ist Juxi Express (SHJX / 驹隙)?
 
 Ein Spediteur aus Shanghai, der Pakete von Verkäufern in China ins Ausland bringt. Die Firma heißt Shanghai Juxi International Freight Forwarding Co., Ltd. (上海驹隙国际物流有限公司). Nach eigenen Angaben ist Juxi seit 2016 tätig und wurde 2019 offiziell gegründet. Eigene Linien hat Juxi in die USA, nach Großbritannien, Deutschland, Frankreich, Australien und Kanada.
 
-### Wo kann ich ein Juxi-Express-Paket verfolgen?
+### Wo kann ich eine JXC…YQ Nummer von Juxi Express verfolgen?
 
 Oben im Feld, denn eine eigene Sendungsverfolgung hat Juxi nicht mehr. Eine JXC-Nummer erkennt Peek als Juxi-Nummer; nur bei YI, ZO, US oder ZI nach JXC fragt Peek nur DHLink, dessen Sendungsverfolgung manche dieser Nummern kennt. Willst du ein solches Paket als Juxi-Paket verfolgen, tipp beim Hinzufügen auf „Ändern“ und wähl Juxi Express. Für seine Kleinpaketlinie nach Großbritannien und Deutschland verweist Juxi auf den Tracking-Dienst 17TRACK, der Juxi unter SHJX führt. Übernimmt DHL oder die Post deines Landes, kannst du das Paket auch dort mit deren Nummer verfolgen.
 
@@ -103,11 +103,11 @@ Oben im Feld, denn eine eigene Sendungsverfolgung hat Juxi nicht mehr. Eine JXC-
 
 In Deutschland nennt Juxi für seine Kleinpaketlinie nach Großbritannien und Deutschland DHL Paket. Für Österreich und die Schweiz nennt Juxi keinen Zusteller. Postsendungen stellt laut Juxi die Post des Ziellands zu. Sonst frag den Shop, wer zustellt.
 
-### Wie lange braucht ein Paket von Juxi Express aus China?
+### Wie lange dauert die Lieferung mit Juxi Express aus China?
 
 Das hängt von der Linie ab, die der Verkäufer gebucht hat. Juxi nennt etwa 18 bis 28 Tage per China-Europa-Zug, 7 bis 15 Arbeitstage mit ePacket und 10 bis 30 Arbeitstage mit dem weltweit verfolgbaren Kleinpaket. Das sind Richtwerte aus Juxis Angebot, keine Zusage für deine Bestellung.
 
-### Muss ich für ein Juxi-Express-Paket Zoll zahlen?
+### Muss ich bei Juxi Express Zoll oder die EU-Bearbeitungsgebühr zahlen?
 
 Das hängt von der Linie ab. Auf Juxis DDP-Linien kassiert Juxi die Mehrwertsteuer vorab beim Verkäufer, beim weltweit verfolgbaren Kleinpaket zahlst du Zoll und Mehrwertsteuer im Zielland. In Deutschland und Österreich gelten dazu die EU-Regeln: 3 € Zoll je Warenkategorie bei Sendungen bis 150 € und 2 € Bearbeitungsgebühr je Warenkategorie. Wer sie bei deiner Bestellung trägt, sagt Juxi nicht. In der Schweiz zahlst du Zoll und Mehrwertsteuer laut BAZG in der Regel als Empfänger, dazu die Verzollungskosten des Transporteurs.
 

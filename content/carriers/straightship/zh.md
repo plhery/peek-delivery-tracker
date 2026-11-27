@@ -1,12 +1,12 @@
 ---
 title: Straightship（迅联捷航）物流查询：STRTD 单号、状态与派送
-description: Straightship（迅联捷航）物流查询：STRTD、STRCA、STSH 单号怎么查，各物流状态什么意思，派送未成功、延误或退回时怎么办，以及客服电话和邮箱。
+description: Straightship（迅联捷航）加拿大物流查询：STRTD、STRCA、STSH 单号查件、英文轨迹含义、派送失败改约与 800 客服电话。
 slug: straightship-wuliu-chaxun
 published: 2026-11-03
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Straightship（中文名迅联捷航，公司全称 Straightship Solutions Limited）是一家总部在加拿大不列颠哥伦比亚省本拿比（Burnaby）的物流公司，把货物从亚洲运到北美，并用自己的司机在加拿大各地派送包裹。它的网站把 SHEIN 列为合作伙伴之一。如果网购包裹的快递单号以 `STRTD` 或 `STRCA` 开头，就是 Straightship 在送；以 `STSH` 开头的也可能是它。你可以在 [Straightship 中文网站](https://www.straightship.com/new/cn/)首页的“跟踪您的货物”一栏输入单号查询，也可以把单号粘贴到上方的查询框。单号在商家的发货邮件或订单页面里。
+Straightship（中文名迅联捷航，全称 Straightship Solutions Limited）总部位于加拿大不列颠哥伦比亚省本拿比（Burnaby），承运亚洲至北美跨境包裹并用自有司机在加拿大派送（官网列出 SHEIN 为合作伙伴）。如果快递单号以 `STRTD`、`STRCA` 或 `STSH` 开头，你可以在 [Straightship 中文官网](https://www.straightship.com/new/cn/)的“跟踪您的货物”一栏输入单号查询，或直接粘贴到上方查询框；单号通常在商家的发货邮件或订单详情中。
 
 ## Straightship 快递单号长什么样
 
@@ -101,25 +101,25 @@ Straightship 还查不到这个单号时，Peek 在 peektracker.com 上显示“
 
 ## 关于 Straightship 物流查询的常见问题
 
-### Straightship 是什么快递，正规吗？
+### Straightship（迅联捷航）是什么快递，靠谱吗？
 
 是正规的物流公司。Straightship Solutions Limited 位于不列颠哥伦比亚省本拿比，中文名迅联捷航，把货物从亚洲运到北美，并在加拿大自己派送。其网站列出的合作伙伴有 SHEIN、加拿大邮政、FedEx、中远海运（COSCO）和圆通（YTO），还说它有 85 个以上的派送站点。
 
-### “Package will be delivered before 9:00pm”是什么意思？
+### “Package will be delivered before 9:00pm” 是今天派送吗？
 
 包裹今天派送，司机当天会上门。如果没人能收，接着会出现一条派送失败记录，请你发邮件到 SS@straightship.com 约下一次派送。
 
-### Straightship 为什么一直显示 ReadyForShipping？
+### 为什么 Straightship 摘要一直停在 ReadyForShipping？
 
 包裹在 Straightship 的网点之间运输时，摘要里的“Package Status”可能一直停在 `ReadyForShipping`。请以下方物流记录的最新一条为准。
 
-### Straightship 多久能送到？
+### Straightship 从亚洲寄到加拿大要多久？
 
 Straightship 没有公布从亚洲寄来的包裹要多久。请以商家给你的订单预计时间为准。一旦出现 `Package will be delivered before 9:00pm`，司机当天就会上门。
 
-### Straightship 的包裹由谁派送？
+### Straightship 包裹在加拿大由谁派送，没收到怎么联系？
 
-从查询页面看，是 Straightship 自己的司机，从它在加拿大各地的网点出发：页面上不写别的快递公司。从美国运来的货物，Straightship 还列出加拿大邮政和 UPS 做尾程派送，英文页面另写了 Purolator，中文页面写的是 FedEx。
+从查询页面看，是 Straightship 自己的司机，从它在加拿大各地的网点出发：页面上不写别的快递公司。从美国运来的货物，Straightship 还列出加拿大邮政和 UPS 做尾程派送，英文页面另写了 Purolator，中文页面写的是 FedEx。如需联系客服，可拨打 +1 (800) 452-3304 或发邮件至 SS@straightship.com。
 
 :::sources
 - [Straightship：首页（英文）](https://www.straightship.com/new/) – 从亚洲到北美的门到门运输、自有车队、查询框、电话、邮箱、服务时间、合作伙伴

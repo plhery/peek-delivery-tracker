@@ -1,12 +1,12 @@
 ---
 title: Suivi colis JRT : numéro JRT…MM, vols, douane et DHL
-description: Suivre un colis JRT (今日通, Jinritong) depuis Xiamen : format du numéro JRT…MM, sens des étapes en chinois et en anglais et qui livre en Europe et aux États-Unis.
+description: Suivi colis JRT (今日通 / Jinritong) depuis la Chine : format JRT…MM, traduction des statuts, relais DHL, UPS, FedEx, CTT Express ou InPost et recours.
 slug: jrt-suivi-colis
 published: 2026-11-18
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-JRT (今日通, Jinritong) est 厦门今日通商贸有限公司, un transitaire basé à Xiamen, en Chine. Si une boutique chinoise a expédié ta commande avec JRT, elle te transmet un numéro de suivi qui commence par JRT et finit par MM : colle-le dans le champ ci-dessus. Le suivi de JRT accompagne le colis depuis la Chine, à travers le vol et la douane, jusqu'au transporteur chargé du dernier kilomètre, dont il recopie les scans : vers l'Europe, l'historique débouche sur DHL, et vers les États-Unis, sur UPS. Sur la ligne de JRT vers l'Irlande dont le nom de produit mentionne FedEx, le relais passe en revanche à FedEx ; sur sa ligne vers l'Espagne, à CTT Express ; sur celle vers la Pologne, à InPost ; et sur celle vers le Mexique, à J&T Express Mexique.
+JRT (今日通, Jinritong, *厦门今日通商贸有限公司*) est un transitaire de Xiamen, en Chine, dont les lettres de transport de 15 caractères commencent par `JRT` et finissent par `MM`. Colle ton numéro `JRT…MM` dans le champ ci-dessus pour suivre le colis depuis la Chine, à travers le vol et la douane, jusqu'au transporteur final dont JRT recopie les scans : DHL en Europe, UPS aux États-Unis, FedEx sur sa ligne vers l'Irlande, CTT Express en Espagne, InPost en Pologne et J&T Express Mexique au Mexique.
 
 ## Numéro de suivi JRT : à quoi il ressemble
 
@@ -141,6 +141,10 @@ Vers l'Europe, l'historique de JRT aboutit chez DHL, et vers les États-Unis, ch
 ### Qui contacter si mon colis JRT n'arrive pas ?
 
 Le vendeur auprès duquel tu as passé commande : c'est lui qui a expédié le colis avec JRT. En dehors du site de suivi, Peek ne connaît ni site web ni coordonnées de contact pour JRT.
+
+### Dois-je payer des frais de douane sur un colis JRT dans l'UE ?
+
+Pour les achats à distance hors UE livrés dans l'UE, un droit de douane de 3 € par catégorie d'article s'applique jusqu'à 150 € depuis le 1er juillet 2026, auquel s'ajoutent depuis le 1er novembre 2026 des frais de traitement de l'Union de 2 € par catégorie d'article, quelle que soit la valeur. Les règles de perception sont détaillées dans [colis bloqué en douane](guide:customs).
 
 :::sources
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nom complet et initiales de l'entreprise, plateforme Hualei, site de suivi sur adresse numérique en HTTP non chiffré, liens reconnus et absence de lien publié, formats JRT…MM et UP, lettre O après JRT lue comme JRT, recherche par numéro ou par référence avec tirets, libellés des étapes et statuts, anglais des lignes uniquement en chinois, lignes européennes de l'atterrissage à la remise en Allemagne, lignes DHL recopiées et dépôt Deutsche Post, ligne vers les États-Unis et lignes UPS recopiées à l'heure locale, ligne FedEx et scans recopiés, numéro DHL ou FedEx dans la fiche après remise, relais vers DHL, FedEx et La Poste suisse, heure de Pékin et heure locale de DHL selon la ville mentionnée, réponse pour un numéro inconnu, ce que Peek affiche, écarte et laisse de côté, lignes DHL d'adresse introuvable, ligne routière par le Xinjiang, le Kazakhstan et la frontière kazakho-russe, vol retardé, préavis CTT Express et remise sur la ligne aérienne espagnole, lignes J&T Express Mexique à l'heure de Mexico et note UPS Access Point

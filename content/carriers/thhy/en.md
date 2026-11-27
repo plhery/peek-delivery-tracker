@@ -1,12 +1,12 @@
 ---
 title: Tianhui Hengyuan (THHY) tracking: AT numbers and scans
-description: Track a Tianhui Hengyuan (天汇恒源, THHY) parcel from China: what its AT…TH number looks like, which of its lines are real scans and who to ask.
+description: Track a Tianhui Hengyuan (天汇恒源, THHY) AT…TH parcel from China: 14-character format, scripted Hualei tracks vs real scans, Swiss Post handover and seller help.
 slug: tianhui-hengyuan-tracking
 published: 2026-10-30
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-Tianhui Hengyuan (天汇恒源, also written THHY or TH) is a Chinese forwarder. If a shop in China sent your order with it, your number is AT, ten digits and TH: paste it in the box above. Peek knows of no website for the company, and its tracker runs on a bare server address. Read that tracker with care: after Tianhui Hengyuan's own first lines, the ones that follow are written to a script and don't show where your parcel is.
+Tianhui Hengyuan (天汇恒源, also written THHY or TH) is a Chinese cross-border forwarder whose 14-character waybills start with `AT`, followed by ten digits and `TH`. Paste your `AT…TH` number in the box above to check real scans: Peek knows of no website for the company, and after its own early scans its Hualei tracker appends scripted lines that don't show where your parcel really is.
 
 ## Tianhui Hengyuan tracking number: what it looks like
 
@@ -89,23 +89,23 @@ While you have the parcel open in Peek, it checks up to every 10 minutes, and ho
 
 ## Questions about Tianhui Hengyuan tracking
 
-### What is Tianhui Hengyuan (THHY)?
+### What is Tianhui Hengyuan (THHY / 天汇恒源)?
 
 A Chinese forwarder, 天汇恒源, also written THHY or TH, whose tracker runs on the Hualei forwarder platform. Peek's catalog lists two company names for it, 深圳市天汇恒源供应链有限公司 and 广州市天慧恒源供应链有限公司, a Shenzhen and a Guangzhou supply-chain (供应链) company by their names. Its waybills are AT, ten digits and TH.
 
-### Is an AT…TH number a Thailand Post number?
+### Is an AT…TH tracking number Thailand Post or Tianhui Hengyuan?
 
 Not with ten digits. AT, ten digits and TH is Tianhui Hengyuan's layout. Thailand Post's international numbers have nine: two letters, nine digits and TH.
 
-### Why does Tianhui Hengyuan's tracking show more steps than Peek?
+### Why does Tianhui Hengyuan's tracker show more steps than Peek?
 
 Because after its own first lines, Tianhui Hengyuan's tracker shows lines a custom track product writes to a script. They read like China Post's scans but aren't scans of your parcel, so Peek keeps them out of the scans and lists them, greyed, under "Show them".
 
-### Who delivers Tianhui Hengyuan parcels?
+### Who delivers Tianhui Hengyuan parcels in my country?
 
 Peek doesn't know, and Tianhui Hengyuan's records name no post number: ask the seller which company delivers and for its tracking number. The only delivering company Peek can hand a Tianhui Hengyuan parcel over to is Swiss Post, when the record names it with a Swiss Post number.
 
-### Who do I contact about a missing Tianhui Hengyuan parcel?
+### Who do I contact if my Tianhui Hengyuan parcel doesn't arrive?
 
 The seller you ordered from: it booked the parcel with Tianhui Hengyuan. Peek knows of no website or contact details for Tianhui Hengyuan.
 

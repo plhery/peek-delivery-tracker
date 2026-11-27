@@ -1,12 +1,12 @@
 ---
 title: Sledenje pošiljk Pošte Slovenije: statusi, prevzem, kontakt
-description: Sledite pošiljki Pošte Slovenije: oblika sprejemne številke, pomen statusov, koliko časa paket čaka na pošti ali v PS Paketomatu in kje dobite pomoč.
+description: Sledenje pošiljk Pošte Slovenije: 13-mestna sprejemna številka (SI in tujina), pomen statusov, roki v PS Paketomatu in na pošti, carina ter 080 14 00.
 slug: posta-slovenije-sledenje-posiljk
 published: 2026-10-25
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Pošta Slovenije je izvajalec univerzalne poštne storitve v Sloveniji: pisma in pakete dostavlja po vsej državi, tudi tiste, ki prispejo iz tujine. Pošiljki sledite v storitvi [Sledenje pošiljk](https://moja.posta.si/tracking) na moja.posta.si, v aplikaciji MojaPošta ali tako, da številko prilepite v polje zgoraj. Številko običajno najdete v sporočilu pošiljatelja, na primer v e-pošti spletne trgovine o odpremi.
+Pošta Slovenije je izvajalec univerzalne poštne storitve v Sloveniji in dostavlja domače ter mednarodne pošiljke po vsej državi. Vnesite 13-mestno sprejemno številko (domače se končajo na `SI`, pošiljke iz tujine obdržijo tujo oznako) v [Sledenje pošiljk](https://moja.posta.si/tracking), v aplikacijo MojaPošta ali v polje zgoraj. Številko najdete v sporočilu spletne trgovine o odpremi ali pri pošiljatelju.
 
 ## Sprejemna številka pošiljke
 
@@ -95,23 +95,23 @@ Peek bere storitev, na kateri deluje aplikacija MojaPošta. Dokler imate pošilj
 
 ## Vprašanja o sledenju pošiljk Pošte Slovenije
 
-### Zakaj so statusi v Peeku v angleščini?
+### Zakaj so statusi Pošte Slovenije v Peeku v angleščini?
 
 Peek prevzame angleško besedilo, ki ga Pošta Slovenije pripravi za vsak korak; enako ga vidite v Sledenju pošiljk, ko preklopite na EN. V slovenščini so koraki v Sledenju pošiljk na moja.posta.si.
 
-### Ali lahko sledim paketu iz tujine?
+### Kako sledim paketu Pošte Slovenije iz tujine?
 
 Da, s številko, ki vam jo je dal pošiljatelj; konča se z oznako države, iz katere paket prihaja. Ko paket prispe v Slovenijo, Sledenje pošiljk pokaže tudi korake Pošte Slovenije. Prej so podatki odvisni od pošte v državi pošiljatelja.
 
-### Koliko časa Pošta Slovenije hrani paket?
+### Koliko časa Pošta Slovenije hrani paket na pošti ali v PS Paketomatu?
 
 Paket univerzalne storitve 15 dni od obvestila, paket MojPaket 8 dni na pošti. V PS Paketomatu paket čaka 60 ur, nato še 5 dni na izročilni pošti. Potem se vrne pošiljatelju.
 
-### Kaj storim, če piše, da je paket dostavljen, pa ga nimam?
+### Kaj storim, če sledenje piše dostavljeno, paketa pa nimam?
 
 `The item was delivered to the mailbox / P.O. box` pomeni, da je bil paket vložen v hišni predalčnik ali poštni predal ali izročen na vašem naslovu. Prevzame ga lahko tudi pooblaščena oseba ali odrasel član gospodinjstva, zato najprej vprašajte domače. Nato vložite reklamacijo na pošti ali na reklamacije.posta.si. Več o tem v vodiču [dostavljeno, a ne prejeto](guide:delivered-not-received) (v angleščini).
 
-### Kaj pomeni »Pošiljke s sprejemno številko nismo našli«?
+### Kaj pomeni »Pošiljke s sprejemno številko nismo našli« in koga poklicati?
 
 Sledenje pošiljk številke ne pozna. Preverite, ali ste jo vpisali pravilno, in poskusite znova; sledenje pokaže le pošiljke, sprejete v zadnjih dveh mesecih. Če težava ostane, pokličite 080 14 00 ali pišite na PomocMojaPosta@posta.si.
 

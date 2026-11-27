@@ -1,12 +1,12 @@
 ---
 title: GLS Sendungsverfolgung Deutschland: Status und Paketshop
-description: GLS-Paket in Deutschland verfolgen: wo Paketnummer und Track-ID stehen, warum GLS deine PLZ braucht, was die Status heißen und wie du GLS erreichst.
+description: GLS Sendungsverfolgung Deutschland: Paketnummer oder Track-ID mit PLZ prüfen, Status-Bedeutungen, Paketshop-Lagerfrist (7 Werktage), Zoll und GLS-Kontakt.
 slug: gls-sendungsverfolgung-deutschland
 published: 2026-10-11
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-GLS Germany (General Logistics Systems Germany aus Neuenstein) stellt montags bis freitags zu und hat laut der GLS-Gruppe 9.000 Paketshops und 200 Paketstationen in Deutschland. Dein Paket verfolgst du in der [Sendungsverfolgung von GLS](https://gls-group.com/EU/en/parcel-tracking) (auf Englisch) mit Paketnummer und Postleitzahl des Empfängers, oder du fügst die Nummer oben ins Feld ein. Die Nummer steht in der Versand-E-Mail des Shops oder, als Track-ID, auf der Benachrichtigungskarte.
+GLS Germany (*General Logistics Systems Germany*, Neuenstein) liefert montags bis freitags zu und hat laut GLS-Gruppe 9.000 Paketshops und 200 Paketstationen in Deutschland. Für die Sendungsverfolgung gibst du die Paketnummer (oder die Track-ID von der Benachrichtigungskarte) zusammen mit der Empfänger-PLZ auf [gls-group.com](https://gls-group.com/EU/en/parcel-tracking) oder direkt oben im Feld ein.
 
 ## GLS Paketnummer und Track-ID: wo du sie findest
 
@@ -106,6 +106,10 @@ Nein. GLS stellt montags bis freitags zu, laut AGB an Werktagen außer samstags.
 ### Wie lange bleibt ein GLS-Paket im Paketshop?
 
 Nach einem verpassten Zustellversuch mindestens sieben Werktage, im Paketshop wie in der Paketstation. Danach geht das Paket an den Versender zurück.
+
+### Wie erreiche ich den Kundenservice von GLS Germany?
+
+Bei einer Online-Bestellung wende dich zuerst an den Shop, da er der Vertragspartner von GLS ist. Fragen zum Paketstatus nimmt GLS über `gls-pakete.de` oder das [Kontaktformular der GLS-Gruppe](https://gls-group.com/GROUP/en/contact-form/) entgegen; für selbst über GLS-Pakete.de verschickte Pakete gelten `versand-service@gls-germany.com` und `+49 6677 646907040`.
 
 :::sources
 - [GLS: Parcel Tracking (auf Englisch)](https://gls-group.com/EU/en/parcel-tracking) – Sendungsverfolgung der GLS-Gruppe, Track-ID auf der Benachrichtigungskarte

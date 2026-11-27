@@ -7,6 +7,7 @@ import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.MutableState
@@ -272,7 +273,7 @@ internal fun rememberTextFieldStateForLaunch(launch: UUID, initial: String = "")
  */
 internal class ListViewStates(
     val showingSearch: MutableState<Boolean>,
-    val query: MutableState<String>,
+    val query: TextFieldState,
     val status: MutableState<ParcelStatusFilter>,
     val carrier: MutableState<String?>,
     val sort: MutableState<ParcelSort>,
@@ -286,7 +287,7 @@ internal class ListViewStates(
 @Composable
 internal fun rememberListViewStates(launch: UUID): ListViewStates = ListViewStates(
     showingSearch = rememberForLaunch(launch, false),
-    query = rememberForLaunch(launch, ""),
+    query = rememberTextFieldStateForLaunch(launch),
     status = rememberForLaunch(launch, ParcelStatusFilter.All),
     carrier = rememberForLaunch<String?>(launch, null),
     sort = rememberForLaunch(launch, ParcelSort.Eta),
@@ -379,8 +380,15 @@ internal class DeliveriesState(
     var archiveOpen: Boolean by archiveOpenState
     var showingSearch: Boolean by views.showingSearch
 
-    /** What the search field holds, kept as it is while the search hides, as the iPhone keeps it. */
-    var query: String by views.query
+    /** The search field's words, kept as they are while the search hides, as the iPhone keeps them. */
+    val queryField: TextFieldState get() = views.query
+
+    /** What the search field holds ([queryField]); set, its words become these, the cursor after them. */
+    var query: String
+        get() = views.query.text.toString()
+        set(value) {
+            if (value != query) views.query.setTextAndPlaceCursorAtEnd(value)
+        }
 
     /**
      * The search field has the keyboard's focus (`@FocusState searchFocused`), kept with the window so that a rotation

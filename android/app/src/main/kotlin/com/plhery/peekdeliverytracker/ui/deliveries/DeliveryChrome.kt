@@ -19,9 +19,9 @@ import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.activity.compose.LocalActivity
+import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -751,8 +751,7 @@ internal fun SearchControls(state: DeliveriesState) {
         PeekSymbol("magnifyingglass", Modifier.clearAndSetSemantics {}, font = font, tint = colors.secondaryText)
         NoSuggestions {
             BasicTextField(
-                query,
-                onValueChange = { state.query = it },
+                state.queryField,
                 modifier = Modifier
                     .weight(1f)
                     .testTag(SEARCH_FIELD)
@@ -760,7 +759,7 @@ internal fun SearchControls(state: DeliveriesState) {
                     .onFocusChanged { if (it.isFocused || !refocus.value && !windowMadeAgain()) state.searchFocused = it.isFocused }
                     .semantics { contentDescription = label },
                 textStyle = font.copy(color = colors.label),
-                singleLine = true,
+                lineLimits = TextFieldLineLimits.SingleLine,
                 cursorBrush = SolidColor(colors.ink),
                 keyboardOptions = KeyboardOptions(
                     capitalization = KeyboardCapitalization.None,
@@ -768,8 +767,8 @@ internal fun SearchControls(state: DeliveriesState) {
                     keyboardType = KeyboardType.Text,
                     imeAction = ImeAction.Search,
                 ),
-                keyboardActions = KeyboardActions(onSearch = { state.focusSearch(false) }),
-                decorationBox = { field ->
+                onKeyboardAction = { state.focusSearch(false) },
+                decorator = { field ->
                     Box(contentAlignment = Alignment.CenterStart) {
                         if (query.isEmpty()) {
                             Text(

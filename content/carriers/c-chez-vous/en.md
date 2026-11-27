@@ -1,12 +1,12 @@
 ---
 title: C Chez Vous tracking: order number, statuses and contact
-description: Track a C Chez Vous delivery of furniture or appliances in France: where the order number is, what the French statuses mean and how to change the date.
+description: Track a C Chez Vous bulky furniture or appliance delivery in France: order number lookup, French status meanings, appointment changes, pickup and phone lines.
 slug: c-chez-vous-tracking
 published: 2026-10-12
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-C Chez Vous delivers bulky online orders of more than 30 kg, such as furniture and large appliances, to homes and pickup points in France, on a booked appointment. The shop chose it when you ordered. Track it on [C Chez Vous's tracking page](https://www.cchezvous.fr/suivi-colis) with the order number from its email or SMS, or paste that number in the box above.
+C Chez Vous delivers bulky online orders over 30 kg — such as furniture and large appliances — to homes and 400 pickup points in France by booked appointment. Track your shipment with the order number from C Chez Vous's email or SMS on [cchezvous.fr/suivi-colis](https://www.cchezvous.fr/suivi-colis) (in French) or paste it in the box above. Below: English meanings of statuses such as `En livraison` and `Prise de rendez-vous`, how to change your delivery slot, and customer service contacts.
 
 ## C Chez Vous order number: where to find it
 
@@ -103,17 +103,25 @@ It reads your name (under "Recipient") and delivery address, and leaves out the 
 
 ## Questions about C Chez Vous tracking
 
+### How do I track a C Chez Vous order or change my delivery date?
+
+Enter the order number from C Chez Vous's email or SMS on [cchezvous.fr/suivi-colis](https://www.cchezvous.fr/suivi-colis) and click "Modifier la livraison", or call customer service. Changes to your address, phone, email or delivery comment require at least 48 hours' notice before the appointment, and cancellations require at least 24 hours.
+
+### What does "En livraison" mean on C Chez Vous tracking?
+
+Unlike standard parcel couriers, C Chez Vous uses `En livraison` to mean the order is on its way to its regional depot with your appointment set — not necessarily on the delivery truck yet. On delivery day, you receive an SMS or email with a live driver map about 30 minutes before arrival.
+
 ### Is there a free phone number for C Chez Vous?
 
-No freephone is published. Customer service is on 09 70 17 05 58, a 09 number, and the site doesn't give the call cost.
+No freephone is published. Customer service is on 09 70 17 05 58 (Monday to Friday 8:00 to 18:00 and Saturday 9:00 to 13:00, Paris time; call cost not stated), with Acceo available via the FAQ for deaf or hard-of-hearing recipients.
 
 ### How do I contact the C Chez Vous driver?
 
-C Chez Vous publishes no number for drivers. The driver may call you about 20 minutes before arriving, sometimes from a hidden number; otherwise call customer service.
+C Chez Vous publishes no direct driver phone numbers. The driver may call about 20 minutes before arriving, sometimes from a hidden number; otherwise call customer service on 09 70 17 05 58.
 
 ### Does C Chez Vous deliver on Saturdays and Sundays?
 
-It can. C Chez Vous delivers from Monday to Sunday depending on your area and the service the shop sold you.
+Yes, depending on your area and the delivery tier the shop sold you — C Chez Vous delivers Monday to Sunday, with pickup-point orders held for 15 days across 400 French pickup points.
 
 :::sources
 - [C Chez Vous: Foire aux questions](https://www.cchezvous.fr/foire-aux-questions) – services, slots, delivery days, changes, cancelling, ID, missed delivery, pickup 15 days, damage, returns, phone, hours, Acceo

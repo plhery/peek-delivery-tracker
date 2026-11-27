@@ -1,12 +1,12 @@
 ---
 title: SunYou tracking: SY numbers, statuses and who delivers
-description: Track a SunYou (SYPost) parcel from China: what the SY number looks like, what each status means, which carrier delivers it and who to ask when it stalls.
+description: Track a SunYou (SYPost) parcel from China: SY tracking numbers, status meanings, local last-mile carrier handover (Royal Mail, USPS, DHL) and support email.
 slug: sunyou-tracking
 published: 2026-10-12
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-SunYou, also written SYPost, is a Shenzhen logistics company that carries small parcels for online sellers in China and hands them to a local carrier in your country for the last stretch. Its numbers start with SY: type yours on SunYou's tracking site, [sypost.net](https://www.sypost.net), or in the box above. The shop gives the number with your order's shipping details.
+SunYou (also written SYPost) is a Shenzhen logistics company that carries small parcels from Chinese online sellers and hands them to a local carrier in your country for final delivery. Enter your `SY` tracking number on [sypost.net](https://www.sypost.net) (available in 15 languages) or paste it in the box above. Below: what SunYou statuses such as `Arrived At GMTC` and `Hand Over To Last Mile` mean, how to find your local carrier's number, and who to contact if tracking stalls.
 
 ## SunYou tracking number: what it looks like
 
@@ -92,25 +92,25 @@ While you have the parcel open in Peek, or on its delivery day with notification
 
 ## Questions about SunYou tracking
 
-### Is SunYou tracking real or fake?
+### Is SunYou (SYPost) tracking real or fake?
 
-SunYou is a real logistics company, founded in Shenzhen in 2008, and its tracking is at sypost.net. If your number shows `Not Found` there, ask the seller to check it.
+SunYou Logistics is a real company founded in Shenzhen in 2008 (with branches in Guangzhou, Dongguan, Yiwu, Kunshan and Ningbo) that ships small parcels abroad for online sellers in China. Official tracking is at sypost.net; if your `SY` number returns `Not Found`, ask the seller to verify it.
 
-### What is SunYou Post?
+### What do "Departed Sunyou Facility" and "Hand Over To Last Mile" mean?
 
-It is SunYou Logistics, a Shenzhen company that ships small parcels abroad for online sellers in China and hands them to a local carrier for delivery.
+`Departed Sunyou Facility` means the parcel left SunYou's hub in China — this scan often adds a `Carrier Tracking Number:` and `Distributor:` for the local delivery company. `Hand Over To Last Mile` means that local carrier has the parcel; switch to its tracking number for detailed delivery scans.
 
-### Where is the SunYou facility?
+### Who delivers SunYou parcels in the UK, US, Germany and Canada?
 
-SunYou is based in Shenzhen, China, with branches in Guangzhou, Dongguan, Yiwu, Kunshan and Ningbo. `Departed Sunyou Facility` means the parcel has left SunYou's centre in China.
+SunYou does not deliver to your door itself. In tracking histories on sypost.net, Royal Mail delivered in the UK, USPS or GOFO in the US, DHL Paket in Germany and Canada Post in Canada. Check your parcel's own `Distributor:` line after `Departed Sunyou Facility`.
 
 ### How long does SunYou take to deliver?
 
-SunYou tells sellers 4 to 5 days to some main destinations on its general line and 20 to 30 calendar days on its US economy line. They are not a promise for your order.
+SunYou's published figures for sellers cite 4 to 5 days to some main destinations on its general line, fastest delivery within 5 days to main European and American countries on its commercial line, and 20 to 30 calendar days on its US economy line. Treat them as seller marketing figures rather than a guaranteed date.
 
-### Who delivers SunYou parcels in the UK?
+### How do I contact SunYou about a lost or delayed parcel?
 
-In the UK histories read on SunYou's tracking, Royal Mail delivered. Your parcel's own history names the carrier after `Departed Sunyou Facility`, with that carrier's number.
+Contact the seller or marketplace first, as SunYou's claim and compensation rules apply only to shippers, and check the local carrier for delivery issues. SunYou's published global channels are hotline +86 4006075388 (Chinese number, no hours listed), mto@sypost.com and complaints mailbox tousu@sypost.com.
 
 :::sources
 - [SunYou: Sunyou Package Tracking](https://www.sypost.net/) – tracking site, languages, number input, hotline, track-and-trace email, status labels, carrier number lines, scan wordings and local carriers

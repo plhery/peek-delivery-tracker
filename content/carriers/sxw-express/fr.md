@@ -1,12 +1,12 @@
 ---
 title: Suivi SXW Express : numéros SXW, statuts et livraison
-description: Suivez un colis SXW Express (Shengxingwang) expédié de Shenzhen : format du numéro SXW, suivi officiel, sens des statuts, transporteur final et douane.
+description: Suivi SXW Express (Shengxingwang) depuis Shenzhen : numéro SXW à 15 caractères, statuts chinois et anglais, transporteur final, douane UE/France et contact.
 slug: suivi-sxw-express
 published: 2026-11-21
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-SXW Express est le nom utilisé par Peek pour `Shenzhen Shengxingwang Supply Chain Management Co., Ltd.` (`深圳胜兴旺供应链管理有限公司`), un commissionnaire logistique transfrontalier basé à **Shenzhen, en Chine**, qui expédie des marchandises à l'international pour les exportateurs et les vendeurs en ligne. Si une boutique chinoise a confié votre commande à SXW Express, cherchez un numéro composé de `SXW` suivi de douze chiffres et collez-le dans le champ ci-dessus. Vous pouvez aussi le vérifier sur le traceur officiel ouvert depuis l'encadré *Express Tracking* de `sxwexpress.cn`, que Peek interroge directement pour vous.
+SXW Express est le nom utilisé par Peek pour `Shenzhen Shengxingwang Supply Chain Management Co., Ltd.` (`深圳胜兴旺供应链管理有限公司`), un prestataire logistique transfrontalier basé à **Shenzhen, en Chine**, qui expédie des colis à l'international pour des boutiques en ligne. Collez votre numéro `SXW` + 12 chiffres dans le champ ci-dessus ou consultez-le dans l'encadré *Express Tracking* de `sxwexpress.cn`. Ci-dessous : le sens des statuts chinois et anglais, le transporteur final, la douane (UE, France, Suisse) et les démarches si le suivi bloque.
 
 ## Numéro de suivi SXW Express : format et exemples
 
@@ -82,25 +82,25 @@ Tant que vous gardez la page du colis ouverte ou, le jour de sa livraison, avec 
 
 ## Questions fréquentes sur le suivi SXW Express
 
-### Qu'est-ce que SXW Express ?
+### Qu'est-ce que SXW Express (Shengxingwang) ?
 
-C'est le nom utilisé par Peek pour `Shenzhen Shengxingwang Supply Chain Management Co., Ltd.` (`深圳胜兴旺供应链管理有限公司`, `sxwexpress.cn`), prestataire logistique transfrontalier à Shenzhen proposant fret maritime et aérien, rail Chine-Europe, express international et livraison porte-à-porte DDU/DDP.
+C'est le nom affiché par Peek pour `Shenzhen Shengxingwang Supply Chain Management Co., Ltd.` (`深圳胜兴旺供应链管理有限公司`, `sxwexpress.cn`), un commissionnaire logistique basé à Shenzhen assurant fret aérien, maritime et ferroviaire, express international et livraisons porte-à-porte DDU/DDP.
 
-### Où suivre moi-même un colis SXW Express ?
+### Où suivre un colis SXW Express avec son numéro `SXW` ?
 
-Dans l'encadré *Express Tracking* sur la page d'accueil de `sxwexpress.cn` : saisissez le numéro et cliquez sur *Track*. Le traceur officiel s'ouvre en chinois et dispose aussi d'une page en anglais ; le logo 17TRACK voisin mène à un site tiers distinct.
+Collez le numéro à 15 caractères (`SXW` + 12 chiffres) dans Peek, ou saisissez-le dans l'encadré *Express Tracking* de `sxwexpress.cn` puis cliquez sur *Track* (traceur officiel en chinois, avec une version anglaise sur `sxwexpress.cn:8082/en/trackIndex.htm`). Le logo 17TRACK voisin renvoie vers un service tiers.
 
 ### Que signifie « Customs declaration completed » sur le suivi SXW ?
 
-Que la déclaration douanière d'exportation en Chine est terminée avant le vol. Peek l'affiche en « En transit » : il ne s'agit pas de la douane de votre pays et le colis n'est pas bloqué.
+Que la déclaration douanière d'exportation en Chine est terminée avant l'embarquement aérien. Peek le classe en « En transit » : ce n'est pas la douane de votre pays et le colis n'est pas retenu.
 
-### Qui livre les colis SXW Express dans mon pays ?
+### Qui assure la livraison finale d'un colis SXW Express ?
 
-Le site de SXW ne publie pas de liste par pays. Vers les États-Unis, le dossier peut contenir un numéro GOFO Express que Peek suit dès que GOFO scanne le colis (et vers la Suisse, La Poste suisse lorsque le canal la désigne) ; sinon, demandez le nom du transporteur final et son numéro au vendeur.
+SXW ne publie pas de liste par pays. Vers les États-Unis, le dossier peut inclure un numéro GOFO Express (suivi automatiquement par Peek dès le premier scan GOFO), et vers la Suisse ou le Liechtenstein, La Poste suisse lorsque le canal la désigne ; sinon demandez le transporteur local et son numéro au vendeur.
 
-### Qui contacter si mon colis SXW Express n'arrive pas ?
+### Comment contacter SXW Express si mon colis n'arrive pas ?
 
-Contactez d'abord le vendeur chez qui vous avez commandé, car `sxwexpress.cn` ne mentionne ni téléphone ni e-mail. Si le vendeur ne répond pas, ouvrez une réclamation auprès de la place de marché.
+Adressez-vous d'abord au vendeur ou ouvrez un litige sur la place de marché : `sxwexpress.cn` ne publie aucun téléphone, aucune adresse e-mail ni aucune adresse postale (sa page *Contact US* est vide et l'accès membre sur le port `8082` est réservé aux expéditeurs).
 
 :::sources
 - [SXW Express : page d'accueil](http://www.sxwexpress.cn/) – raison sociale, encadré Express Tracking et bouton Track, lien 17TRACK, présentation DDU/DDP

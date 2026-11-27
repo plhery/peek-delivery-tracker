@@ -1,12 +1,12 @@
 ---
 title: SunYou seguimiento: número SY, estados y quién entrega
-description: Sigue tu paquete de SunYou (SYPost) desde China: cómo es el número SY, qué significa cada estado, quién lo reparte en España y a quién preguntar si se para.
+description: Seguimiento SunYou (SYPost) desde China: formato del número SY, traducción de estados, cómo ver el transportista local en España y contacto si no actualiza.
 slug: sunyou-seguimiento
 published: 2026-10-12
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-SunYou, también llamada SYPost, es una empresa de logística de Shenzhen que envía al extranjero los paquetes pequeños de vendedores online chinos y se los pasa a un transportista local para el último tramo. Su número empieza por SY: escríbelo en su web de seguimiento, [sypost.net](https://www.sypost.net), que tiene versión en español, o pégalo en la casilla de arriba. El número te lo da la tienda en los datos de envío de tu pedido.
+SunYou (también llamada SYPost) es una empresa logística de Shenzhen que envía paquetes pequeños de tiendas chinas al extranjero y los entrega a un transportista local para el reparto final. Introduce tu número `SY` en [sypost.net](https://www.sypost.net) (disponible en español) o pégalo en la casilla de arriba. Abajo encontrarás el significado de cada estado de SunYou, cómo localizar el número del transportista local en España y a quién reclamar si el envío se detiene.
 
 ## Número de seguimiento de SunYou: cómo es
 
@@ -91,21 +91,25 @@ Mientras tengas el paquete abierto o, el día de entrega, las notificaciones act
 
 ## Preguntas sobre el seguimiento de SunYou
 
-### ¿El seguimiento de SunYou es real o falso?
+### ¿El seguimiento de SunYou (SYPost) es real o falso?
 
-Es real: SunYou es una empresa de logística fundada en Shenzhen en 2008, y su seguimiento está en sypost.net. Si allí tu número sale como `No encontrado`, pide a la tienda que lo compruebe.
+Es real: SunYou Logistics es una empresa fundada en Shenzhen en 2008 que envía paquetes pequeños de tiendas chinas al extranjero, con seguimiento oficial en sypost.net. Si tu número `SY` aparece como `No encontrado`, pide a la tienda que lo compruebe.
 
-### ¿Qué es SunYou Post?
+### ¿Quién entrega SunYou en España y dónde veo el segundo número?
 
-Es SunYou Logistics, una empresa de Shenzhen que envía al extranjero paquetes pequeños de vendedores online chinos y los entrega a un transportista local para el reparto.
+Un transportista local, ya que SunYou no reparte en Europa. Aunque SunYou muestra a Correos entre sus socios, no publica qué empresa reparte cada envío en España: consulta en tu historial el nombre tras «Distributor» y el «Número de seguimiento del transportista» que suele aparecer junto a `Departed Sunyou Facility`.
 
-### ¿Quién entrega SunYou en España?
+### ¿Qué significan «Alert», «Expired» y «Hand Over To Last Mile»?
 
-Un transportista local, que el historial de tu paquete suele nombrar junto a su propio número. SunYou no publica cuál es para España.
+En el resumen de sypost.net, `Alert` (`Posible excepción`) y `Expired` (`Transporte demorado`) indican un aviso o demora larga, no necesariamente una entrega fallida (esa es `Undelivered`). `Hand Over To Last Mile` (`Recepción para entrega`) significa que ya lo tiene el transportista local: desde ahí conviene seguir su propio número.
 
-### ¿SunYou tiene teléfono en España?
+### ¿Cuánto tarda un paquete de SunYou en llegar?
 
-No. Sus teléfonos son chinos, como el +86 4006075388 de su web de seguimiento, y para un pedido conviene escribir antes a la tienda.
+Las cifras comerciales que SunYou da a vendedores indican de 4 a 5 días desde la admisión en su línea general y desde 5 días como entrega más rápida a principales países de Europa en su línea comercial, pero no son un plazo garantizado para tu pedido.
+
+### ¿Tiene SunYou teléfono de contacto en España?
+
+No. SunYou no dispone de oficina ni teléfono español: solo publica el número chino +86 4006075388, el correo mto@sypost.com y tousu@sypost.com para quejas. Para un envío perdido o retrasado, escribe primero a la tienda.
 
 :::sources
 - [SunYou: Sunyou Package Tracking](https://www.sypost.net/) – web de seguimiento, idiomas, número, teléfono, correo, estados, número del transportista, escaneos y transportistas locales

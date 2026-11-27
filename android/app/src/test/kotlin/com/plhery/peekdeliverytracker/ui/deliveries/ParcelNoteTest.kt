@@ -146,6 +146,10 @@ class ParcelNoteTest {
 
     private fun outcomes(name: String): List<DeliveryAnalytics.Outcome?> = source.actions.indices.filter { source.actions[it] == name }.map { source.outcomes[it] }
 
+    /**
+     * Chooses the photos `names`, each read and its tile's picture made as this returns: the picture is made off the
+     * main thread, which waitForIdle doesn't wait for, and the tile is given its size as the file then goes up.
+     */
     private fun add(vararg names: String) {
         compose.runOnUiThread {
             source.notes.add(
@@ -153,6 +157,7 @@ class ParcelNoteTest {
                 names.map { name -> NotePick(name, pdf = false) { NoteFileUpload(byteArrayOf(1, 2, 3), name, PackageFileType.ImageJpeg, 10, 10) } },
             )
         }
+        compose.waitUntil(10_000) { source.notes.uploads(gift).all { it.size != null } }
         compose.waitForIdle()
     }
 
@@ -367,6 +372,8 @@ class ParcelNoteTest {
         assertTrue(shows(PARCEL_NOTE_PROBLEM, "You’re offline."))
         source.uploadFailure = null
         compose.runOnUiThread { source.notes.online(source) }
+        // Each goes once its tile's picture is made again, off the main thread: there, or stopped again.
+        compose.waitUntil(10_000) { source.notes.uploads(gift).all { it.problem != null } }
         settle()
         assertEquals(0, count(PARCEL_NOTE_RETRY))
         // Both go again at once, as they first went, so either may get there first.

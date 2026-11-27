@@ -217,6 +217,32 @@ describe('withEventPlaces', () => {
     expect('recipient_action' in served[2]!).toBe(false);
   });
 
+  it('serves the template of a common scan its carrier worded, and none for a scan of no carrier or another', () => {
+    const scan = (id: string, source: string, description: string, extra: Record<string, unknown> = {}) => ({
+      ...event(id, null, `2026-01-0${id}T09:00:00+00:00`), provider_event_id: `${source}:${id}`, description, ...extra,
+    });
+    const row = {
+      id: 'parcel',
+      carrier: 'js-express',
+      tracking_events: [
+        scan('1', 'js-express', 'Item has been collected'),
+        scan('2', 'ups', 'Arrived at Facility', { provider_code: 'AR' }),
+        // A universal provider's copy is read by its words alone: the code is the provider's.
+        scan('3', 'ups', 'Arrived at Facility', { provider_code: 'AR', universal_provider: 'ParcelsApp' }),
+        // Peek's own row, which carrier scans leave unserved.
+        scan('4', 'app', 'Tracking added'),
+        scan('5', 'unknown', 'Item has been collected'),
+        scan('6', 'js-express', 'During security check operation'),
+      ],
+    };
+    const served = (withEventPlaces(row) as { tracking_events: Record<string, unknown>[] }).tracking_events;
+    const templates = Object.fromEntries(served.map((event) => [event.id, event.template]));
+    expect(templates).toMatchObject({ 1: { id: 'picked_up', language: 'en' }, 2: { id: 'arrived_facility', language: 'en' } });
+    expect(Object.keys(templates)).toEqual(['1', '2', '3', '5', '6']);
+    expect([templates[3], templates[5], templates[6]]).toEqual([undefined, undefined, undefined]);
+    expect(served.every((event) => !('provider_code' in event) && !('provider_event_id' in event))).toBe(true);
+  });
+
   it("serves a scan's place among those its source dated alike, and nothing else in its stead", () => {
     const at = '2026-01-05T11:47:00+00:00';
     const row = {

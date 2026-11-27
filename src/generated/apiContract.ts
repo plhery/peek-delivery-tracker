@@ -74556,6 +74556,12 @@ export interface ApiTrackingEventRow {
   "relay_of"?: string;
   "recipient_action"?: ApiRecipientAction;
   "tie_order"?: number;
+  "template"?: ApiScanTemplate;
+}
+
+export interface ApiScanTemplate {
+  "id": string;
+  "language": string;
 }
 
 export interface ApiPlannedTrackingEvent {

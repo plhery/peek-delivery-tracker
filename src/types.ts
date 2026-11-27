@@ -6,6 +6,7 @@ import type {
   ApiPackageFileType,
   ApiPeekAi,
   ApiRecipientAction,
+  ApiScanTemplate,
   ApiStage,
   ApiSyncStatus,
 } from './generated/apiContract';
@@ -182,6 +183,8 @@ export interface TrackingEvent {
   recipientAction?: RecipientAction;
   /** The scan's place among those its source dated alike, from the oldest, in the order the source listed them. */
   tieOrder?: number;
+  /** The common scan this one is, which the reader of another language than its words' reads in theirs. */
+  template?: ApiScanTemplate;
 }
 
 /**

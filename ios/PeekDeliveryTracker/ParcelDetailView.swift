@@ -2100,7 +2100,7 @@ private struct JournalEventRow: View {
     }
 
     private func wording(_ event: TrackingEvent) -> String {
-        localizer.eventDescription(event.description.nonEmpty ?? localizer.text(event.stage.localizationKey))
+        localizer.eventDescription(event.description.nonEmpty ?? localizer.text(event.stage.localizationKey), template: event.template)
     }
 
     /// The copies' words, once each, when they differ from the scan's.

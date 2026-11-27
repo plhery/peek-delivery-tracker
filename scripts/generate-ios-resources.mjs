@@ -64,8 +64,15 @@ function worldDetailPack() {
   return Buffer.concat([Buffer.from(`${JSON.stringify({ degrees, precision, tiles: places })}\n`), ...parts]);
 }
 
+// The common scans' words in every language, by template: a scan the server serves with a template reads in them.
+const scanTemplates = JSON.parse(fs.readFileSync(
+  fileURLToPath(import.meta.resolve('universal-parcel-scraper/data/scan-templates.json')), 'utf8',
+));
 const outputs = new Map([
-  ['TrackingMessages.json', trackingMessagesSource],
+  ['TrackingMessages.json', `${JSON.stringify({
+    ...trackingMessages,
+    templates: Object.fromEntries(Object.entries(scanTemplates.templates).map(([id, { text }]) => [id, text])),
+  }, null, 2)}\n`],
   ['Analytics.json', fs.readFileSync(path.join(root, 'shared', 'analytics.json'), 'utf8')],
   ['Localization.json', `${JSON.stringify(languages, null, 2)}\n`],
   ['CarrierCatalog.json', `${JSON.stringify({ 'x-carriers': contract['x-carriers'] }, null, 2)}\n`],

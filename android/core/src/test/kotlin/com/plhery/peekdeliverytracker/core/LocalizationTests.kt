@@ -5,6 +5,7 @@ import com.plhery.peekdeliverytracker.core.api.ErrorResponseScope
 import com.plhery.peekdeliverytracker.core.api.EventPlace
 import com.plhery.peekdeliverytracker.core.api.EventPlacePrecision
 import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
+import com.plhery.peekdeliverytracker.core.api.ScanTemplate
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import kotlinx.serialization.builtins.MapSerializer
@@ -299,6 +300,20 @@ class LocalizationTests {
         val localizer = Localizer(AppLanguage.De)
         assertEquals(localizer.text("app.refreshTimeout"), localizer.errorMessage(DeliveryApiError.RefreshTimeout()))
         assertEquals("app.refreshTimeout", ParcelStore.RefreshResult.StillChecking.messageKey)
+    }
+
+    @Test
+    fun commonScansReadInTheirTemplatesWordsForAReaderOfAnotherLanguage() {
+        val pickedUp = ScanTemplate(id = "picked_up", language = "en")
+        val german = Localizer(AppLanguage.De)
+        assertEquals("Vom Paketdienst abgeholt", german.eventDescription("Item has been collected", pickedUp))
+        assertEquals("Item has been collected", german.eventDescription("Item has been collected", null))
+        assertEquals(
+            "Item has been collected",
+            german.eventDescription("Item has been collected", ScanTemplate(id = "not_a_template", language = "en")),
+        )
+        assertEquals("Coletada pela transportadora", Localizer(AppLanguage.PtBr).eventDescription("Item has been collected", pickedUp))
+        assertEquals("Item has been collected", Localizer(AppLanguage.En).eventDescription("Item has been collected", pickedUp))
     }
 
     @Test

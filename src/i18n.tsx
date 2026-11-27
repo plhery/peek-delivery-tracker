@@ -31,6 +31,7 @@ export {
   localizedExpectedDelivery,
   localizedRelativeTime,
   localizedScanAge,
+  localizedScanWording,
   stageLabel,
   trackingFailureMessage,
 } from './lib/messages';

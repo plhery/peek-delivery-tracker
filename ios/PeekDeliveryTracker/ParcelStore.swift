@@ -1958,7 +1958,9 @@ final class ParcelStore: ObservableObject {
                 return DeliveryWidgetStep(
                     // A step dated by its day alone is on that day where the reader is.
                     at: event.calendarDay ?? step.at,
-                    text: localizer.eventDescription(event.description.nonEmpty ?? localizer.text(event.stage.localizationKey)),
+                    text: localizer.eventDescription(
+                        event.description.nonEmpty ?? localizer.text(event.stage.localizationKey), template: event.template
+                    ),
                     place: location.map { EventLocation.spoken($0, placed: event.place, language: localizer.language) } ?? event.place?.name,
                     clock: event.calendarDay == nil ? localizer.clockTime(step.at) : ""
                 )

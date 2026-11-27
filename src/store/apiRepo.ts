@@ -133,6 +133,7 @@ export function toEvent(row: ApiTrackingEventRow): TrackingEvent {
     relayOf: row.relay_of ?? undefined,
     recipientAction: row.recipient_action ?? undefined,
     tieOrder: row.tie_order ?? undefined,
+    ...(row.template ? { template: row.template } : {}),
   };
 }
 

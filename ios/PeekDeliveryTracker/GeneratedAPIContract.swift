@@ -4451,6 +4451,7 @@ struct TrackingEvent: Codable, Equatable, Hashable, Sendable, Identifiable {
     var relayOf: UUID? = nil
     var recipientAction: RecipientAction? = nil
     var tieOrder: Int? = nil
+    var template: ScanTemplate? = nil
 
     private enum CodingKeys: String, CodingKey {
         case id
@@ -4465,7 +4466,13 @@ struct TrackingEvent: Codable, Equatable, Hashable, Sendable, Identifiable {
         case relayOf
         case recipientAction
         case tieOrder
+        case template
     }
+}
+
+struct ScanTemplate: Codable, Equatable, Hashable, Sendable, Identifiable {
+    var id: String
+    var language: String
 }
 
 struct PlannedTrackingEvent: Codable, Equatable, Hashable, Sendable {

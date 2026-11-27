@@ -23,6 +23,7 @@ import {
   useI18n,
   translate,
   localizedEventDescription,
+  localizedScanWording,
   localizedDeliveryWindow,
   localizedDeliveryEstimate,
   trackingFailureMessage,
@@ -87,6 +88,22 @@ describe('localization', () => {
       expect(trackingFailureMessage('carrier:new_kind', t)).toBe(t('detail.trackingUnavailable'));
     }
     expect(localizedEventDescription('Shipment exception', key => translate('fr', key))).toBe('Problème avec le colis');
+  });
+
+  it('reads a common scan in its template\'s words where the reader reads another language than the carrier wrote', () => {
+    const scan = { description: 'Item has been collected', template: { id: 'picked_up', language: 'en' } };
+    const words = (locale: Locale) => localizedScanWording(scan, (key, variables) => translate(locale, key, variables), locale);
+    expect(words('de')).toBe('Vom Paketdienst abgeholt');
+    expect(words('pt-br')).toBe('Coletada pela transportadora');
+    expect(words('zh')).toBe('快递员已揽收');
+    // The reader of the carrier's language keeps its words.
+    expect(words('en')).toBe('Item has been collected');
+    expect(localizedScanWording({ ...scan, template: { id: 'picked_up', language: 'pt' } }, (key) => translate('pt-br', key), 'pt-br'))
+      .toBe('Item has been collected');
+    // A template this build does not know, and a scan without one, read as before.
+    expect(localizedScanWording({ ...scan, template: { id: 'not_yet', language: 'en' } }, (key) => translate('de', key), 'de'))
+      .toBe('Item has been collected');
+    expect(localizedScanWording({ description: 'Tracking added' }, (key) => translate('fr', key), 'fr')).toBe('Ajouté à tes colis.');
   });
 
   it('shows delivery windows and ignores missing, reversed or invalid starts', () => {

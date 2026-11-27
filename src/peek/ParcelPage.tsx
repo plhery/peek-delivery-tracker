@@ -13,7 +13,7 @@ import { PeekAiCard } from '../components/PeekAi';
 import { PickupPointCard } from '../components/PickupPointCard';
 import { stampOrigin } from '../components/ParcelStamp';
 import { TrackingJournal } from '../components/TrackingJournal';
-import { localizedDeliveryWindow, localizedEventDescription, stageLabel, trackingFailureMessage, useI18n, type MessageKey } from '../i18n';
+import { localizedDeliveryWindow, localizedScanWording, stageLabel, trackingFailureMessage, useI18n, type MessageKey } from '../i18n';
 import { trackAction, trackScreen } from '../lib/analytics';
 import { carrierBrand } from '../lib/carrierBrand';
 import { activeTrackingCarrierId, carrierInfo, deliveringCarrierId, deliveryLineKey, displayedCarrierId, formatTrackingNumber, normalizeTrackingNumber, scheduledDelivery, tracksAutomatically, writtenDelivery } from '../lib/carriers';
@@ -642,7 +642,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
       onRestore={archivable && state.archived && afterwards ? restore : undefined} />
 
     {news && <Toast place="top" tone mark={<Icon name="truck" />}>
-      <strong>{t('link.updateToast')}</strong> · {localizedEventDescription(news.description, t) || stageLabel(t, news.stage)}
+      <strong>{t('link.updateToast')}</strong> · {localizedScanWording(news, t, locale) || stageLabel(t, news.stage)}
     </Toast>}
     {word?.kind === 'own-link' && <Toast tone mark={<Glyph name="link" />} action={<button type="button" onClick={() => void copyLink()}>{t('detail.copy')}</button>}>
       {t('link.own')}<small>{address.replace(/^https?:\/\//, '')}</small>

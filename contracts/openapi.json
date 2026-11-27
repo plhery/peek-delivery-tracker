@@ -78932,6 +78932,28 @@
             "type": "integer",
             "minimum": 0,
             "description": "Set on a scan its source dated alike with others of its answer, to the second or by the same day alone: its place among them, from the oldest, in the order the source listed them. Apps order scans of one instant in one stage by it, the highest first, then by id; a scan without one goes after those with one."
+          },
+          "template": {
+            "$ref": "#/components/schemas/ScanTemplate",
+            "description": "Set on a common scan whose carrier's status record names a template of the scraper's data/scan-templates.json, which the apps bundle: its id, and the language of the carrier's wording it stands for. Apps show the template's text in the reader's language when that language is another than the wording's, and the description otherwise."
+          }
+        }
+      },
+      "ScanTemplate": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "language"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The template's key in data/scan-templates.json."
+          },
+          "language": {
+            "type": "string",
+            "description": "The language of the carrier's wording, as the apps name languages, such as en or pt-br."
           }
         }
       },

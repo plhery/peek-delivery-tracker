@@ -4454,6 +4454,13 @@ data class TrackingEvent(
     @SerialName("relay_of") val relayOf: UUID? = null,
     @SerialName("recipient_action") val recipientAction: RecipientAction? = null,
     @SerialName("tie_order") val tieOrder: Int? = null,
+    val template: ScanTemplate? = null,
+)
+
+@Serializable
+data class ScanTemplate(
+    val id: String,
+    val language: String,
 )
 
 @Serializable

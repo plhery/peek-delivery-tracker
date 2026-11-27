@@ -4,6 +4,7 @@ import com.plhery.peekdeliverytracker.core.api.ApiJson
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
+import com.plhery.peekdeliverytracker.core.api.ScanTemplate
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.core.api.UuidSerializer
@@ -423,6 +424,19 @@ class Localizer(
         return text(event.key, event.variables)
     }
 
+    /**
+     * A scan's words for the reader. A common scan the carrier worded in another language than the reader's names its
+     * template, whose words in the reader's language it reads in; the rest read as [eventDescription] reads them.
+     */
+    fun eventDescription(description: String, template: ScanTemplate?): String {
+        val base = { value: String -> value.substringBefore('-') }
+        if (template != null && base(template.language) != base(language.rawValue)) {
+            val texts = trackingMessages.templates[template.id]
+            (texts?.get(language.rawValue) ?: texts?.get("en"))?.let { return it }
+        }
+        return eventDescription(description)
+    }
+
     fun trackingFailureMessage(error: String): String {
         val kind = if (error.hasCharacterPrefix("carrier:")) error.removePrefix("carrier:") else ""
         return text(trackingMessages.failures[canonical(kind)] ?: "detail.trackingUnavailable")
@@ -828,7 +842,12 @@ class Localizer(
     }
 
     @Serializable
-    private data class TrackingMessages(val events: Map<String, Event>, val failures: Map<String, String>) {
+    private data class TrackingMessages(
+        val events: Map<String, Event>,
+        val failures: Map<String, String>,
+        /** The common scans' words in every language, by template (the scraper's data/scan-templates.json). */
+        val templates: Map<String, Map<String, String>> = emptyMap(),
+    ) {
         @Serializable
         data class Event(val key: String, val variables: Map<String, String>)
     }
@@ -877,7 +896,9 @@ class Localizer(
                 val messages = Json { ignoreUnknownKeys = true }
                     .decodeFromString(TrackingMessages.serializer(), SharedResources.text("TrackingMessages.json"))
                 // Carriers' own words, accents included, found as Swift finds them: canonically, so a decomposed é finds é.
-                TrackingMessages(messages.events.mapKeys { canonical(it.key) }, messages.failures.mapKeys { canonical(it.key) })
+                TrackingMessages(
+                    messages.events.mapKeys { canonical(it.key) }, messages.failures.mapKeys { canonical(it.key) }, messages.templates,
+                )
             }.getOrElse { TrackingMessages(emptyMap(), emptyMap()) }
         }
 

@@ -371,6 +371,8 @@ final class Localizer: ObservableObject {
         struct Event: Decodable { let key: String; let variables: [String: String] }
         let events: [String: Event]
         let failures: [String: String]
+        /// The common scans' words in every language, by template (the scraper's data/scan-templates.json).
+        var templates: [String: [String: String]]? = nil
     }
     private let trackingMessages: TrackingMessages
     /// Where the copy names the iPhone, an iPad reads the key's `.ipad` variant and a Mac its `.mac` one.
@@ -585,6 +587,18 @@ final class Localizer: ObservableObject {
     func eventDescription(_ description: String) -> String {
         guard let event = trackingMessages.events[description] else { return description }
         return text(event.key, event.variables)
+    }
+
+    /// A scan's words for the reader. A common scan the carrier worded in another language than the reader's names its
+    /// template, whose words in the reader's language it reads in; the rest read as `eventDescription(_:)` reads them.
+    func eventDescription(_ description: String, template: ScanTemplate?) -> String {
+        let base = { (language: String) in language.split(separator: "-").first.map(String.init) ?? language }
+        if let template, base(template.language) != base(language.rawValue),
+           let texts = trackingMessages.templates?[template.id],
+           let text = texts[language.rawValue] ?? texts["en"] {
+            return text
+        }
+        return eventDescription(description)
     }
 
     func trackingFailureMessage(_ error: String) -> String {

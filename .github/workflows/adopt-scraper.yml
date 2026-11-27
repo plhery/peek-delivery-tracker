@@ -81,6 +81,7 @@ env:
     ios/PeekDeliveryTracker/Resources/DetectionGolden.json
     ios/PeekDeliveryTracker/Resources/ChecksumVectors.json
     ios/PeekDeliveryTracker/Resources/Reading.json
+    ios/PeekDeliveryTracker/Resources/TrackingMessages.json
     src/generated/carriers.ts
 
 jobs:

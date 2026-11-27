@@ -190,9 +190,12 @@ fun Localizer.journalTime(event: TrackingEvent): String {
     return clockTime(date)
 }
 
-/** A scan's words in the journal (`wording`): the carrier's, else its stage's, in the app language. */
+/**
+ * A scan's words in the journal (`wording`): the carrier's, or its template's in the app language when the carrier's are
+ * in another, else its stage's.
+ */
 fun Localizer.journalWording(event: TrackingEvent): String =
-    eventDescription(event.description.nonEmpty ?: text(event.stage.localizationKey))
+    eventDescription(event.description.nonEmpty ?: text(event.stage.localizationKey), event.template)
 
 /** The words of a row's copies (`relayed`), once each, and only those that differ from the scan's. */
 fun Localizer.relayedWordings(entry: JournalEntry): List<String> {

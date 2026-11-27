@@ -5,6 +5,7 @@ import { currentScan, EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
 import { recordPeekAiServed } from './metrics';
 import { captureOperationalError } from './observability';
 import { CARRIER_DEFINITIONS, classifyWording, RECIPIENT_ACTIONS, recipientAction, type CarrierId } from 'universal-parcel-scraper';
+import { scanTemplate } from 'universal-parcel-scraper/app';
 import { placesForEvents, type EventPoint } from 'universal-parcel-scraper/places';
 import { clockDay, placesApart, placeWithin, placeWords, scanDay, UNWORDED_STEP } from './eventIdentity';
 import { DIRECT_HISTORY, heldRows, providerCopies, providerCopyScans } from './providerCopies';
@@ -33,12 +34,14 @@ let reported = false;
  * scan dated by its day alone names that day. A scan or stage change its source
  * gave no words for is served without Peek's stand-in, so the apps name its
  * stage. A scan in which the carrier asks
- * the recipient to act names what (`recipient_action`, see `scanAction`).
+ * the recipient to act names what (`recipient_action`, see `scanAction`), and a common scan the template that words
+ * it in every language (`template`, see `servedTemplate`).
  */
 function served(event: JsonObject, relayOf?: string): JsonObject {
   const action = scanAction(event);
+  const template = servedTemplate(event);
   const rest: JsonObject = { ...dated(event), ...(relayOf ? { relay_of: relayOf } : {}),
-    ...(event.description === UNWORDED_STEP ? { description: '' } : {}) };
+    ...(event.description === UNWORDED_STEP ? { description: '' } : {}), ...(template ? { template } : {}) };
   delete rest.point;
   delete rest.provider_event_id;
   delete rest.stored_at;
@@ -51,6 +54,22 @@ function served(event: JsonObject, relayOf?: string): JsonObject {
   delete rest.written_at;
   if (tieOrder(rest.tie_order) < 0) delete rest.tie_order;
   return action ? { ...rest, recipient_action: action } : rest;
+}
+
+/**
+ * The template of a carrier's scan whose status record names one for its code or words (`scanTemplate`), with the
+ * language of those words: the apps show the template's text to a reader of another language. Peek's own rows and the
+ * rows of no known carrier take none, and a universal provider's copy of the carrier's scan is read by its words
+ * alone, since its code is the provider's.
+ */
+function servedTemplate(event: JsonObject): JsonObject | undefined {
+  const source = typeof event.provider_event_id === 'string' ? event.provider_event_id.split(':')[0]! : '';
+  const description = typeof event.description === 'string' ? event.description : '';
+  if (['', 'app', 'unknown'].includes(source) || !description || description === UNWORDED_STEP) return undefined;
+  const relayed = typeof event.universal_provider === 'string' && event.universal_provider !== '';
+  const providerCode = !relayed && typeof event.provider_code === 'string' ? event.provider_code : null;
+  const template = scanTemplate(source, { providerCode, description });
+  return template ? { id: template.id, language: template.language } : undefined;
 }
 
 /**

@@ -2,7 +2,7 @@ import { useState, useSyncExternalStore } from 'react';
 import { useDateTitle } from '../lib/dateTitle';
 import { dayAndTime, localizedCalendarDate, localizedClockTime, scanDate, timeZoneName } from '../lib/format';
 import { countryFlag, countryName } from 'universal-parcel-scraper/app';
-import { localizedEventDescription, stageLabel, useI18n } from '../i18n';
+import { localizedEventDescription, localizedScanWording, stageLabel, useI18n } from '../i18n';
 import { scanPlace } from '../lib/scanPlace';
 import { currentEvent, sortEventsDesc, withRelays } from '../lib/stages';
 import type { EventPlace as EventPlaceData, PlannedEvent, TrackingEvent } from '../types';
@@ -28,12 +28,12 @@ export function TrackingJournal({ events: allEvents, planned = [], written = [],
   /** The server holds the parcel's return (`currentEvent`). */
   returnHeld?: boolean;
 }) {
-  const { languageTag, t, use24HourTime } = useI18n();
+  const { languageTag, locale, t, use24HourTime } = useI18n();
   const dateTitle = useDateTitle();
   const [oldestShown, setOldestShown] = useState(false);
   const { listed: events, relays } = withRelays(allEvents);
   const current = currentEvent(events, returnHeld);
-  const wording = (event: TrackingEvent) => localizedEventDescription(event.description, t) || stageLabel(t, event.stage);
+  const wording = (event: TrackingEvent) => localizedScanWording(event, t, locale) || stageLabel(t, event.stage);
   const groups = new Map<string, { date: Date | null; events: TrackingEvent[] }>();
   for (const event of sortEventsDesc(events)) {
     const date = scanDate(event)?.date ?? null;

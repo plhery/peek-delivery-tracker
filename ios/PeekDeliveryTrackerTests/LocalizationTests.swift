@@ -234,6 +234,22 @@ final class LocalizationTests: XCTestCase {
         )
     }
 
+    func testCommonScansReadInTheirTemplatesWordsForAReaderOfAnotherLanguage() {
+        let localizer = Localizer()
+        let pickedUp = ScanTemplate(id: "picked_up", language: "en")
+        localizer.language = .de
+        XCTAssertEqual(localizer.eventDescription("Item has been collected", template: pickedUp), "Vom Paketdienst abgeholt")
+        XCTAssertEqual(localizer.eventDescription("Item has been collected", template: nil), "Item has been collected")
+        XCTAssertEqual(
+            localizer.eventDescription("Item has been collected", template: ScanTemplate(id: "not_a_template", language: "en")),
+            "Item has been collected"
+        )
+        localizer.language = .ptBR
+        XCTAssertEqual(localizer.eventDescription("Item has been collected", template: pickedUp), "Coletada pela transportadora")
+        localizer.language = .en
+        XCTAssertEqual(localizer.eventDescription("Item has been collected", template: pickedUp), "Item has been collected")
+    }
+
     func testServerErrorsAndAppEventsFollowTheSelectedLanguage() {
         let localizer = Localizer()
         localizer.language = .fr

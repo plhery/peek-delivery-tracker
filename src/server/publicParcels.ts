@@ -581,6 +581,8 @@ export function publicParcelResponse(
     ...(typeof event.relay_of === 'string' ? { relay_of: event.relay_of } : {}),
     ...(typeof event.recipient_action === 'string' ? { recipient_action: event.recipient_action as ApiTrackingEventRow['recipient_action'] } : {}),
     ...(tieOrder(event.tie_order) >= 0 ? { tie_order: tieOrder(event.tie_order) } : {}),
+    ...(isRecord(event.template) && typeof event.template.id === 'string' && typeof event.template.language === 'string'
+      ? { template: { id: event.template.id, language: event.template.language } } : {}),
   }));
   const step = (stored: JsonObject): ApiPlannedTrackingEvent => ({
     description: told(String(stored.description ?? '')), stage: String(stored.stage ?? 'in_transit') as ApiTrackingEventRow['stage'],

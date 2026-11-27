@@ -1,4 +1,5 @@
 import trackingMessages from '../../shared/tracking-messages.json';
+import scanTemplates from 'universal-parcel-scraper/data/scan-templates.json';
 import type en from '../../shared/locales/en.json';
 import type { Stage, TrackingEvent } from '../types';
 import { dayAndTime, localizedCalendarDate, localizedCalendarDateTime, localizedClockTime, scanDate } from './format';
@@ -140,6 +141,23 @@ export function localizedEventDescription(description: string, t: Translate): st
   const messages: Record<string, { key: string; variables: Record<string, string> }> = trackingMessages.events;
   const message = Object.hasOwn(messages, description) ? messages[description] : undefined;
   return message ? t(message.key as MessageKey, message.variables) : description;
+}
+
+const templateTexts: Record<string, Record<string, string>> = Object.fromEntries(
+  Object.entries(scanTemplates.templates).map(([id, template]) => [id, template.text]),
+);
+const baseLanguage = (language: string) => language.split('-')[0];
+
+/**
+ * A scan's words for the reader. A common scan the carrier worded in another language than the reader's names its
+ * template (the scraper's data/scan-templates.json), whose words in the reader's language it reads in; the rest read
+ * as `localizedEventDescription` reads them.
+ */
+export function localizedScanWording(event: Pick<TrackingEvent, 'description' | 'template'>, t: Translate, locale: Locale): string {
+  const { template } = event;
+  const texts = template && baseLanguage(template.language) !== baseLanguage(locale) && Object.hasOwn(templateTexts, template.id)
+    ? templateTexts[template.id] : undefined;
+  return texts?.[locale] ?? texts?.en ?? localizedEventDescription(event.description, t);
 }
 
 /** A placeholder number, such as 123456789: no carrier will ever know it, and only the owner can correct it. */

@@ -2,15 +2,25 @@
 
 App copy is fully translated ([shared/locales](../shared/locales/README.md)). Carrier scan
 text is a different problem. This page covers what happens to it today and a plan for
-translating it (not implemented).
+translating the rest.
 
 ## Today
 
 - Stage headings, app messages and the exact descriptions our adapters synthesize are
   translated through [`shared/tracking-messages.json`](../shared/tracking-messages.json).
-- Any other carrier description is shown as the carrier wrote it, on web
-  (`localizedEventDescription` in [`i18n.tsx`](../src/i18n.tsx)) and iOS
-  (`eventDescription` in `Core.swift`). The [multilingual classifier](https://github.com/plhery/universal-parcel-scraper/blob/main/core/status/language.ts)
+- A common scan reads in the reader's language through a scan template. An entry of a
+  carrier's `statuses.json` in the scraper names a template of its
+  [`data/scan-templates.json`](https://github.com/plhery/universal-parcel-scraper/blob/main/data/scan-templates.json),
+  which holds its text in every app language ([CORPUS.md](https://github.com/plhery/universal-parcel-scraper/blob/main/CORPUS.md)).
+  The server names it on each served scan (`template`: the id and the language of the
+  carrier's wording, from `scanTemplate()` by provider code, then wording; `servedTemplate`
+  in [`eventPlaces.ts`](../src/server/eventPlaces.ts)). A reader of another language sees
+  the template's text in their language, else English; a reader of the wording's language
+  keeps the carrier's words. The apps bundle the texts (web imports the JSON; iOS and Android
+  read them from `TrackingMessages.json`), so this needs no request per language
+  (`localizedScanWording` in [`messages.ts`](../src/lib/messages.ts), `eventDescription` in
+  `Core.swift` and `Core.kt`).
+- Any other carrier description is shown as the carrier wrote it. The [multilingual classifier](https://github.com/plhery/universal-parcel-scraper/blob/main/core/status/language.ts)
   reads wording to pick a stage. It doesn't translate.
 - Scan locations keep the carrier's text, except for a country it wrote out: a flag leads
   the place and the country's name in the reader's language closes it, so "Zürich, CH"
@@ -67,9 +77,8 @@ translating it (not implemented).
    event codes and time provenance. Map codes before wording heuristics. Translation must
    never decide status, handoffs or freshness. 17TRACK sub-status codes are already mapped
    this way.
-2. **Translate stable codes with shared templates.** Common scans get provider-scoped codes
-   and validated messages in the shared catalog. This works on web and iOS without extra
-   requests per language.
+2. **Translate stable codes with shared templates.** Done for common scans (see Today);
+   map more of each carrier's entries as their volume calls for it.
 3. **Machine-translate the rest separately, with a cache.** Mark machine output as such
    and keep the original. Cache by source text, source language, target language and
    translator version. Send only the text, never the tracking number or raw payload, and
@@ -78,5 +87,5 @@ translating it (not implemented).
    delays a refresh or hides the original. Changing language never inserts scans, triggers
    notifications, changes status or switches source.
 
-Done means: fallbacks work, originals stay available, web and iOS match, no duplicate events
+Done means: fallbacks work, originals stay available, web, iOS and Android match, no duplicate events
 across language changes, and status and notifications are unchanged.

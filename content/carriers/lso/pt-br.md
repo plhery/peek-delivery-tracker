@@ -12,7 +12,7 @@ A LSO, sigla de Lone Star Overnight, é uma transportadora regional sediada no T
 
 O rastreador da LSO pede o "Airbill No", e cada etiqueta recebe um código único. A LSO não informa onde o destinatário recebe esse número: procure na mensagem de envio da loja ou na página do pedido; se não encontrar, peça ao remetente. Veja mais locais em [como encontrar seu código de rastreamento](guide:find-tracking-number), em inglês.
 
-A LSO não publica um padrão oficial. Os números airbill da LSO vistos até hoje têm 8 caracteres: `ZY0` seguido por cinco letras ou dígitos.
+A LSO não publica o formato dos códigos. Os números airbill da LSO vistos até hoje têm 8 caracteres: `ZY0` seguido por cinco letras ou dígitos.
 
 | Código (fictício) | O que é |
 | --- | --- |
@@ -79,9 +79,9 @@ O Peek não consegue ler diretamente o rastreador da LSO; em vez disso, acompanh
 
 O Peek consulta de hora em hora, a cada 3 horas depois de um dia sem nova leitura, e a cada 6 horas após sete dias em "Etiqueta criada". No dia em que sai para entrega, verifica a cada 15 minutos no máximo enquanto você estiver com a encomenda aberta ou com notificações ativas.
 
-Quando a última leitura completa quatro dias e a encomenda continua em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek exibe o alerta com a data daquela leitura, como "Sem atualização de rastreamento desde seg 12 out". A página passa a mostrar "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando LSO." e o link "Obter ajuda da LSO" para a página de contato. Após três semanas sem novidade, mostra "Nada de novo há mais de três semanas. Se ainda não chegou, fale com o vendedor. O Peek continua consultando LSO."
+Quando a última leitura completa quatro dias e a encomenda continua em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek exibe o alerta com a data daquela leitura, como "Sem atualizações desde seg 12 out". A página passa a mostrar "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando LSO." e o link "Pedir ajuda a LSO" para a página de contato. Após três semanas sem novidade, mostra "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando LSO."
 
-O Peek notifica em "Cada atualização", "Etapas importantes" ou "Somente na entrega". Para ver quem assinou, abrir reclamação ou resolver problemas de entrega, procure a LSO ou a loja.
+O Peek pode notificar você em "Cada movimentação", "Etapas importantes" ou "Só a entrega". Para ver quem assinou, abrir reclamação ou resolver problemas de entrega, procure a LSO ou a loja.
 
 ## Perguntas frequentes sobre o rastreamento LSO
 

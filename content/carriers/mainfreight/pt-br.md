@@ -68,7 +68,7 @@ Partidas e chegadas planejadas, marcadas como estimadas, ainda não ocorreram e 
 
 **Outras etapas.** Movimentações de contêineres entre pátios, como `Picked Up (Site Movement)`, aparecem como "Em trânsito", e `Final Delivery (Empty to Customer)` como "Entregue". Na carga rodoviária europeia, `Order received` vira "Etiqueta criada" e `Out for delivery` vira "Saiu para entrega". Sem etapas detalhadas, o Peek usa o status geral do rastreador, como `Created` ou `Final Delivery`.
 
-O código do Peek não conhece textos próprios da Mainfreight para tentativa sem sucesso, problema ou devolução. Outras linhas seguem as regras gerais do Peek ou aparecem sem alterar a etapa. Mais em [status de rastreamento explicados](guide:tracking-statuses), em inglês.
+O código do Peek não conhece textos próprios da Mainfreight para entrega não realizada, problema ou devolução. Outras linhas seguem as regras gerais do Peek ou aparecem sem alterar a etapa. Mais em [status de rastreamento explicados](guide:tracking-statuses), em inglês.
 
 ## Como a Mainfreight entrega
 
@@ -88,7 +88,7 @@ Para outros destinos, consulte [encomendas retidas na alfândega](guide:customs)
 
 **Nada ainda.** Uma remessa registrada em Mainfreight que ainda não aparece no sistema dela mostra "Aguardando Mainfreight" enquanto o Peek segue consultando. Um número de 11 dígitos que nenhuma transportadora reconhece mostra "Ainda sem histórico de rastreamento". Confira os dígitos e pergunte ao remetente se a coleta já ocorreu.
 
-**Parada.** Após quatro dias sem nova etapa em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o envio ganha o alerta com o dia da última atualização ("Sem atualização de rastreamento desde seg 12 out"). Pergunte à loja ou ao remetente o motivo. Veja [rastreamento que não atualiza](guide:tracking-not-updating), em inglês.
+**Parada.** Após quatro dias sem nova etapa em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o envio ganha o alerta com o dia da última atualização ("Sem atualizações desde seg 12 out"). Pergunte à loja ou ao remetente o motivo. Veja [rastreamento que não atualiza](guide:tracking-not-updating), em inglês.
 
 **Danificada, incompleta ou extraviada.** Avise primeiro a loja ou o remetente, pois foram eles que contrataram o transporte. Na Nova Zelândia e na Austrália, valem os termos da Mainfreight e a legislação local. Para frete rodoviário interestadual nos Estados Unidos, a lei federal americana determina:
 
@@ -106,23 +106,23 @@ Procure primeiro quem contratou o frete: a loja ou fornecedor em um pedido, ou a
 
 ## Como rastrear uma remessa Mainfreight no Peek
 
-A partir da Nova Zelândia, Austrália ou Estados Unidos, ao colar 11 dígitos o Peek consulta a Mainfreight imediatamente junto com GLS France, GLS Germany, GLS Switzerland e PostLogistics ("Consultando serviços de rastreamento…"), escolhendo Mainfreight quando só o rastreador dela encontra a remessa; se mais de uma responder, você escolhe. De outros países, o Peek não consulta a Mainfreight automaticamente: selecione-a como abaixo.
+A partir da Nova Zelândia, Austrália ou Estados Unidos, ao colar 11 dígitos o Peek consulta a Mainfreight ao mesmo tempo que GLS France, GLS Germany, GLS Switzerland e PostLogistics ("Consultando serviços de rastreamento…"), escolhendo Mainfreight quando só o rastreador dela encontra a remessa; se mais de uma responder, você escolhe. De outros países, o Peek não consulta a Mainfreight ao adicionar o código: selecione-a como abaixo.
 
-Qualquer outro formato não indica Mainfreight ao Peek. Cole mesmo assim — o Peek acompanha mais de 4.500 transportadoras — toque em "Alterar" e selecione Mainfreight (para 11 dígitos, ela aparece em "Compatível com este código"; nos demais casos, pesquise pelo nome). Em uma remessa já adicionada, use "Alterar transportadora". Um link do rastreador da Mainfreight (mainfreight.com/tracking com `trackingnumber=` ou mainfreight.com/track/…) identifica Mainfreight imediatamente ("Transportadora detectada").
+Qualquer outro formato não indica Mainfreight ao Peek. Cole mesmo assim — o Peek acompanha mais de 4.500 transportadoras — toque em "Trocar" e selecione Mainfreight (para 11 dígitos, ela aparece em "Compatível com este código"; nos demais casos, pesquise pelo nome). Em uma remessa já adicionada, use "Trocar transportadora". Um link do rastreador da Mainfreight (mainfreight.com/tracking com `trackingnumber=` ou mainfreight.com/track/…) identifica Mainfreight imediatamente ("Transportadora detectada").
 
 Não é preciso conta nem código postal. Se a busca geral da Mainfreight não localizar 11 dígitos, o Peek tenta simultaneamente os sistemas da Nova Zelândia, Austrália e EUA; se mais de um conhecer o número, não há como saber qual remessa é a sua. Para house bill, master bill ou referência do remetente, o Peek exibe o código retornado pela Mainfreight em "Mainfreight rastreia com o código".
 
-O Peek mostra a etapa, cada linha nos termos da Mainfreight com o local e o peso nas suas unidades quando disponível, omitindo contatos de filiais, códigos postais, referência do remetente e documentos. "Abrir o site de Mainfreight" abre o número no rastreador oficial. Quando o rastreador não responde ou não consegue ler o envio, o Peek consulta [serviços de rastreamento](guide:universal-tracker), em inglês, e exibe o histórico deles.
+O Peek mostra a etapa, cada linha nos termos da Mainfreight com o local e o peso nas suas unidades quando disponível, omitindo contatos de filiais, códigos postais, referência do remetente e documentos. "Abrir o site de Mainfreight" abre o número no rastreador da Mainfreight. Quando o rastreador não responde ou não consegue ler o envio, o Peek consulta [serviços de rastreamento](guide:universal-tracker), em inglês, e exibe o histórico deles.
 
 Etapas rodoviárias com fuso da Nova Zelândia, Austrália ou EUA (`NZDT`, `AEST`, `PST` etc.) mostram a hora exata. As demais não trazem fuso: o Peek usa o relógio do local da etapa ou das etapas vizinhas quando reconhecido, ou o horário da Nova Zelândia (como em leituras rodoviárias europeias e eventos aéreos e marítimos, que podem apresentar diferença de algumas horas).
 
-Com a remessa aberta ou no dia da entrega com notificações ativas, o Peek consulta a cada 10 minutos no máximo, e a cada 2 minutos a partir das 6h no relógio da última leitura no dia em que sai para entrega, enquanto o rastreador da Mainfreight responder. Fora disso, e após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Você pode escolher notificações para "Cada atualização", "Etapas importantes" ou "Somente na entrega". O Peek não pode contatar a Mainfreight por você, agendar entregas nem abrir reclamações.
+Com a remessa aberta ou no dia da entrega com notificações ativas, o Peek consulta a cada 10 minutos no máximo, e a cada 2 minutos a partir das 6h no relógio da última leitura no dia em que sai para entrega, enquanto o rastreador da Mainfreight responder. Fora disso, e após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Você pode escolher notificações para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode contatar a Mainfreight por você, agendar entregas nem abrir reclamações.
 
 ## Perguntas frequentes sobre o rastreamento Mainfreight
 
 ### Como é um código de rastreamento da Mainfreight?
 
-Para carga rodoviária na Nova Zelândia, Austrália e Estados Unidos, um número de remessa de 11 dígitos. Números de operação, house bills e referências do remetente misturam letras e dígitos: nesses casos, selecione Mainfreight manualmente no Peek.
+Para carga rodoviária na Nova Zelândia, Austrália e Estados Unidos, um número de remessa de 11 dígitos. Números de operação, house bills e referências do remetente misturam letras e dígitos: nesses casos, selecione Mainfreight no Peek.
 
 ### O que significa "At Delivery Depot" no rastreamento Mainfreight?
 

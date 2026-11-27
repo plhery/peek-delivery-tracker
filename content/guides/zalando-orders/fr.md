@@ -1,6 +1,6 @@
 ---
 title: Suivi de commande Zalando : transporteurs, colis, retards
-description: Suivre un colis et ma commande Zalando (France, Belgique, Suisse) : où trouver le numéro dans « Mes commandes », transporteurs (La Poste, Mondial Relay), délais.
+description: Suivre un colis et ma commande Zalando (France, Belgique, Suisse) : où trouver le numéro dans « Mes commandes », transporteurs de chaque pays, délais.
 slug: suivi-commande-zalando
 picture: Un colis avec une étiquette en forme de cintre, une camionnette de livraison et Pip prêt à essayer ce qu'il contient.
 published: 2026-10-17

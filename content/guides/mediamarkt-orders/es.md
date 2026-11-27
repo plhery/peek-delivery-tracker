@@ -1,6 +1,6 @@
 ---
 title: Pedido de MediaMarkt: seguimiento y transportistas
-description: Gastos de envío y seguimiento de MediaMarkt España: gratis desde 49 € (si no desde 2,99 €), recogida en tienda, Paack/SEUR/Correos/TIPSA, plazos y reclamos.
+description: Gastos de envío y seguimiento de MediaMarkt España: gratis en pedidos de más de 49 € (si no, desde 2,99 €), recogida en tienda, Paack/SEUR/Correos/TIPSA y plazos.
 slug: seguimiento-pedido-mediamarkt
 picture: Una caja plana de televisor y un paquete pequeño junto a una furgoneta de reparto, Pip contento y una tienda con un cartel de recogida.
 published: 2026-10-17

@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-11-27
 ---
 
-Si el seguimiento pone «Entregado» pero no tienes el paquete, no lo des por perdido: «entregado» es un escaneo en la PDA del repartidor, no la prueba de que llegó a tus manos (si solo indica que el paquete ha salido de las instalaciones del transportista o sigue en tránsito, todavía no se ha entregado: consulta [qué significa cada estado](guide:tracking-statuses)). Mira dónde o con quién se quedó, busca en los sitios de siempre y date un margen; si sigue sin aparecer, reclama a la tienda, no al transportista, porque en España el paquete es responsabilidad del vendedor hasta que lo tengas en tus manos.
+Si el seguimiento pone «Entregado» pero no tienes el paquete, no lo des por perdido: «entregado» es un escaneo en la PDA del repartidor, no la prueba de que llegó a tus manos (si solo indica que el paquete ha salido de las instalaciones del transportista o sigue en tránsito, todavía no se ha entregado: consulta [qué significa cada estado](guide:tracking-statuses)). Mira dónde o con quién se quedó, busca en los sitios de siempre y date un margen; si sigue sin aparecer, reclama a la tienda, no al transportista, porque en España, si compraste a una empresa, el paquete es responsabilidad del vendedor hasta que lo tengas en tus manos.
 
 ## ¿Por qué pone «entregado» si no tengo el paquete?
 

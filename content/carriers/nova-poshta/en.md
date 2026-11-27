@@ -92,7 +92,7 @@ It shows Nova Poshta's English wordings, each scan's town on a map, the expected
 
 ### How do I track a Nova Post international parcel in Europe?
 
-Enter your 14-digit express waybill (EW) or international Nova Post number (starting `SH` or `TN`, a two-letter country code and 10 digits, such as invented `SHPL4829173648`) on [novaposhta.ua](https://novaposhta.ua/en/tracking/) or in the box above. When an export names a delivery partner abroad such as UPS or GOFO Express, Peek can follow the parcel there too.
+Enter your 14-digit express waybill (EW) or international Nova Post number (starting `SH` or `TN`, a two-letter country code and 10 digits, such as invented `SHPL4829173648`) on [novaposhta.ua](https://novaposhta.ua/en/tracking/) or in the box above. When an export names its partner abroad, UPS or GOFO Express, Peek can follow the parcel there too.
 
 ### Is Nova Poshta legit?
 

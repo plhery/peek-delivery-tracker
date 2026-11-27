@@ -1,13 +1,13 @@
 ---
 title: Avis de passage : que faire et comment retirer ton colis
-description: Avis de passage pour un colis ou une lettre recommandée ? Comment reprogrammer la livraison, prolonger le délai et le retirer chez La Poste, bpost ou en Suisse.
+description: Avis de passage pour un colis ou une lettre recommandée ? Reprogrammer la livraison, retirer l'envoi chez La Poste, bpost ou en Suisse, où le délai se prolonge.
 slug: avis-de-passage-que-faire
 picture: Une porte d'entrée avec un avis glissé dessous, une camionnette déjà loin, et Pip qui arrive essoufflé, un instant trop tard.
 published: 2026-10-14
 updated: 2026-11-27
 ---
 
-Un avis de passage — papier, SMS ou e-mail — indique où attend ton colis ou ta lettre recommandée et jusqu'à quelle date le retirer. Selon le transporteur (La Poste, Colis Privé, bpost ou La Poste suisse), tu peux reprogrammer une nouvelle livraison en ligne, prolonger le délai de retrait en Suisse ou aller chercher l'envoi au point indiqué dès sa mise à disposition, presque jamais le jour même. Garde l'avis : il sert à reprogrammer et à retirer l'envoi, avec une pièce d'identité pour un recommandé ou un envoi Signature.
+Un avis de passage — papier, SMS ou e-mail — indique où attend ton colis ou ta lettre recommandée et jusqu'à quelle date le retirer. Selon le transporteur (La Poste, Colis Privé, bpost ou La Poste suisse), tu peux reprogrammer une nouvelle livraison en ligne, prolonger le délai de retrait en Suisse ou aller chercher l'envoi au point indiqué dès sa mise à disposition, presque jamais le jour même. Garde l'avis : il sert à reprogrammer et à retirer l'envoi, avec parfois une pièce d'identité, selon le transporteur.
 
 ## Que faire après un avis de passage pour un colis ou une lettre recommandée ?
 

@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-11-27
 ---
 
-Quando o tracking não atualiza há dias, normalmente a encomenda não parou: as transportadoras só registam leituras nos centros operacionais e nas fronteiras, não em viagem, em voos, na alfândega ou ao fim de semana. Antes de reclamares, compara com o prazo da transportadora — os [CTT](carrier:ctt) indicam cerca de 3 dias úteis para uma Encomenda Postal no continente e a [InPost](carrier:inpost) aceita reclamação por atraso passados mais de 5 dias desde a notificação de envio — e contacta primeiro a loja, que contratou o envio e responde até à entrega.
+Quando o tracking não atualiza há dias, normalmente a encomenda não parou: as transportadoras registam leituras nos centros operacionais e nas fronteiras, não na estrada, e uma viagem longa, um voo, a alfândega ou um fim de semana podem deixar-te dias sem uma linha nova. Antes de reclamares, compara com o prazo da transportadora — os [CTT](carrier:ctt) indicam cerca de 3 dias úteis para uma Encomenda Postal no continente e a [InPost](carrier:inpost) aceita reclamação por atraso passados mais de 5 dias desde a notificação de envio — e contacta primeiro a loja: foi ela que contratou o envio e, se compraste a uma empresa, responde por ele até à entrega.
 
 ## Porque é que o tracking da minha encomenda não atualiza?
 

@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-11-27
 ---
 
-Holst du ein Paket nicht rechtzeitig aus Filiale, Paketshop oder Packstation ab, geht es nach der Abholfrist zurück an den Absender: bei DHL und Hermes meist nach 7 Werktagen, an Automaten wie DPD Paketstation, Hermes Box oder Amazon Locker nach 3 Tagen, bei der Österreichischen Post bis zum dritten Montag, bei der Schweizerischen Post nach 7 Tagen (kostenlos verlängerbar). Es zählt das Datum auf deiner Benachrichtigung; danach fragst du den Shop nach Erstattung oder Neuversand.
+Holst du ein Paket nicht rechtzeitig aus Filiale, Paketshop oder Packstation ab, geht es nach der Abholfrist zurück an den Absender: bei DHL und Hermes meist nach 7 Werktagen, an Automaten wie DPD Paketstation, Hermes Box oder Amazon Locker nach 3 Tagen, bei der Österreichischen Post am dritten Montag nach der Benachrichtigung, bei der Schweizerischen Post in der Regel nach 7 Tagen, bei Sendungen aus dem Ausland nach 15 (kostenlos verlängerbar). Es zählt das Datum auf deiner Benachrichtigung; danach fragst du den Shop nach Erstattung oder Neuversand.
 
 Kein Abholcode gekommen oder die Packstation war voll? Das steht unter [Packstation und Paketautomat](guide:parcel-lockers).
 

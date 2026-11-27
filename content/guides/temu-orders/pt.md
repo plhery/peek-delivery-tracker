@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-Para rastrear uma encomenda Temu em Portugal precisas do número de seguimento da transportadora (nos CTT, parceiro exclusivo da Temu em Portugal), e não do número de encomenda começado por «PO» da tua conta Temu. Cola esse código no [Peek](/), que identifica a transportadora pela forma do número e acompanha a passagem para a transportadora local em Portugal. Se colares o número de encomenda começado por «PO», o Peek avisa-te de que é um número de pedido da Temu e não de seguimento.
+Para rastrear uma encomenda Temu em Portugal precisas do número de seguimento da transportadora (os CTT, que em 2023 se anunciaram parceiro exclusivo da Temu em Portugal), e não do número de encomenda começado por «PO» da tua conta Temu. Cola esse código no [Peek](/), que identifica a transportadora pela forma do número e, se a primeira transportadora indicar quem fica com o volume em Portugal, passa para a nova. Se colares o número de encomenda começado por «PO», o Peek avisa-te de que parece um número de encomenda da Temu e não de seguimento.
 
 ## Porque é que o número de encomenda Temu (PO) não funciona no seguimento?
 

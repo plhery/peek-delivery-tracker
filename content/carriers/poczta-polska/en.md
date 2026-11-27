@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Poczta Polska (Poland Post) is Poland's state-owned postal operator, and Pocztex is its domestic courier service. Track a parcel, Pocztex shipment or registered letter in English on Poczta Polska's eMonitoring page (emonitoring.poczta-polska.pl/?lang=en), or paste your PX, 19/20-digit or PL number in the box above. The tracking number appears on the sender's posting confirmation, the shop's dispatch email and Poczta Polska's SMS or notice messages.
+Poczta Polska (Poland Post) is Poland's state-owned postal operator, and Pocztex is its courier service. Track a parcel, Pocztex shipment or registered letter in English on Poczta Polska's eMonitoring page (emonitoring.poczta-polska.pl/?lang=en), or paste your PX, 19/20-digit or PL number in the box above. The tracking number appears on the sender's posting confirmation, the shop's dispatch email and Poczta Polska's SMS or notice messages.
 
 ## Poczta Polska tracking number and where to find it
 

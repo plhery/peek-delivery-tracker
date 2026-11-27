@@ -15806,6 +15806,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee4d2d"
     },
     {
+      "id": "eushipments",
+      "catalog": "eushipments",
+      "slug": "eushipments-tracking",
+      "title": "Rastreamento euShipments: status e transportadora local",
+      "name": "euShipments",
+      "color": "#0a8fcf"
+    },
+    {
       "id": "mhi",
       "catalog": "mhi",
       "slug": "mhi-tracking",
@@ -16404,6 +16412,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio CVC (Си Ви Си): acompanhe encomendas na Bulgária",
       "name": "CVC",
       "color": "#652b9e"
+    },
+    {
+      "id": "gls-us",
+      "catalog": "gls-us",
+      "slug": "gls-us-tracking",
+      "title": "Rastreamento GLS US (GSO): códigos, status e entrega",
+      "name": "GLS US",
+      "color": "#ffdd00"
     },
     {
       "id": "sxw-express",
@@ -20572,6 +20588,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee4d2d"
     },
     {
+      "id": "eushipments",
+      "catalog": "eushipments",
+      "slug": "eushipments-tracking",
+      "title": "euShipments 快递查询：物流状态与当地派送承运商",
+      "name": "euShipments",
+      "color": "#0a8fcf"
+    },
+    {
       "id": "mhi",
       "catalog": "mhi",
       "slug": "mhi-tracking",
@@ -21178,6 +21202,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "CVC（Си Ви Си）保加利亚物流查询：单号、状态与追踪指南",
       "name": "CVC",
       "color": "#652b9e"
+    },
+    {
+      "id": "gls-us",
+      "catalog": "gls-us",
+      "slug": "gls-us-tracking",
+      "title": "GLS US（GSO）快递查询：单号、状态与派送指南",
+      "name": "GLS US",
+      "color": "#ffdd00"
     },
     {
       "id": "sxw-express",

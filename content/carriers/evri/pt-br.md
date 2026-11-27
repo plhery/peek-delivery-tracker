@@ -84,7 +84,7 @@ Sim: a Evri é a antiga Hermes UK, renomeada em março de 2022. A Hermes na Alem
 
 ### A Evri faz parte da DHL ou da Royal Mail?
 
-De nenhuma das duas. Na operação aprovada pela autoridade de concorrência britânica em setembro de 2025, a Evri — então controlada por fundos geridos pela Apollo — comprou a DHL eCommerce UK do Grupo DHL, e o Grupo DHL assumiu participação minoritária na Evri. A fusão foi concluída em 1º de outubro de 2025 formando o Evri Group, anunciando que a DHL eCommerce UK passaria a se chamar Evri Premium (rede da DHL) em 2026 mantendo operação separada; o site da Evri já oferece Evri Premium para encomendas maiores e de alto valor. O rastreador da Evri pede código de 16 caracteres ou cartão de aviso de 8 dígitos e não diz nada sobre pacotes da DHL.
+De nenhuma das duas. Na operação aprovada pela autoridade de concorrência britânica em setembro de 2025, a Evri — então controlada por fundos geridos pela Apollo — comprou a DHL eCommerce UK do Grupo DHL, e o Grupo DHL assumiu participação minoritária na Evri. A fusão foi concluída em 1º de outubro de 2025 formando o Evri Group, anunciando que a DHL eCommerce UK passaria a se chamar Evri Premium (rede da DHL) em 2026 mantendo operação separada; o site da Evri já oferece Evri Premium para encomendas maiores e de alto valor. O rastreador da Evri pede código de 16 caracteres ou cartão de aviso de 8 dígitos e não diz nada sobre pacotes da DHL: para eles, veja o [rastreamento da DHL eCommerce UK](carrier:dhl-ecommerce-uk).
 
 ### Um e-mail de noreply.priority@evri.com é legítimo?
 

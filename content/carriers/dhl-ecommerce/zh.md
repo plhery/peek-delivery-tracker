@@ -22,7 +22,7 @@ DHL eCommerce 单号至少包含 10 位字符，通常以 GM 开头。Webtrack �
 
 Webtrack 页面上的 “Delivery by” 一栏会写明末端派送承运商，后续也可能显示对方的自有单号。
 
-容易混淆的单号：16 位数字同样可能属于 TNT、Evri、Canada Post 或 Correos Express，9261 或 9361 开头也可能直接是 USPS 单号。14 位数字可能属于拥有独立查件系统的 DHL eCommerce UK，`JVGL` 开头属于 [DHL eCommerce 荷兰](carrier:dhl-ecommerce-nl)，而 [DHL Express](carrier:dhl-express) 和 [DHL Paket](carrier:dhl) 则采用完全不同的单号形态。详见[快递单号格式说明](guide:tracking-number-formats)（英文）。
+容易混淆的单号：16 位数字同样可能属于 TNT、Evri、Canada Post 或 Correos Express，9261 或 9361 开头也可能直接是 USPS 单号。14 位数字可能属于拥有独立查件系统的 [DHL eCommerce UK](carrier:dhl-ecommerce-uk)，`JVGL` 开头属于 [DHL eCommerce 荷兰](carrier:dhl-ecommerce-nl)，而 [DHL Express](carrier:dhl-express) 和 [DHL Paket](carrier:dhl) 则采用完全不同的单号形态。详见[快递单号格式说明](guide:tracking-number-formats)（英文）。
 
 ## DHL eCommerce 物流状态含义
 

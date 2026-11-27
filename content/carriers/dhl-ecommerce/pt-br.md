@@ -22,7 +22,7 @@ Os códigos da DHL eCommerce têm pelo menos dez caracteres e costumam começar 
 
 A linha "Delivery by" no Webtrack indica a transportadora de última milha, cujo próprio código pode aparecer depois.
 
-Formatos parecidos: 16 dígitos também podem pertencer à TNT, Evri, Canada Post ou Correos Express, e um número iniciado por 9261 ou 9361 à USPS. Códigos de 14 dígitos podem ser da DHL eCommerce UK (uma rede separada com rastreamento próprio), códigos `JVGL` pertencem à [DHL eCommerce Países Baixos](carrier:dhl-ecommerce-nl), e [DHL Express](carrier:dhl-express) e [DHL Paket](carrier:dhl) usam outros formatos. Veja mais em [formatos de código de rastreamento](guide:tracking-number-formats).
+Formatos parecidos: 16 dígitos também podem pertencer à TNT, Evri, Canada Post ou Correos Express, e um número iniciado por 9261 ou 9361 à USPS. Códigos de 14 dígitos podem ser da [DHL eCommerce UK](carrier:dhl-ecommerce-uk) (uma rede separada com rastreamento próprio), códigos `JVGL` pertencem à [DHL eCommerce Países Baixos](carrier:dhl-ecommerce-nl), e [DHL Express](carrier:dhl-express) e [DHL Paket](carrier:dhl) usam outros formatos. Veja mais em [formatos de código de rastreamento](guide:tracking-number-formats).
 
 ## Status de rastreamento da DHL eCommerce explicados
 

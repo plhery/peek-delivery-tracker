@@ -20,7 +20,7 @@ As páginas da DPD não descrevem o formato oficial dos códigos. Os números vi
 | `15504829105730K` | O mesmo código com o caractere verificador da DPD ao final. |
 | `48291736058419` | Outros 14 dígitos: pode ser DPD UK, DPD de outro país ou outra transportadora. |
 
-Outros países da DPD também usam 14 dígitos, assim como DHL eCommerce UK, SEUR e BRT, então os dígitos sozinhos não provam quem está com seu pacote. As mensagens da DPD confirmam: seus SMS agora vêm como "DPD UK" (ou "DPD Local" ou "DPDgroup UK"), trazendo o nome da loja no texto. A DPD Local é marca irmã da DPD. Na Irlanda, as entregas seguem pela DPD Ireland, que tem códigos próprios.
+Outros países da DPD também usam 14 dígitos, assim como [DHL eCommerce UK](carrier:dhl-ecommerce-uk), SEUR e BRT, então os dígitos sozinhos não provam quem está com seu pacote. As mensagens da DPD confirmam: seus SMS agora vêm como "DPD UK" (ou "DPD Local" ou "DPDgroup UK"), trazendo o nome da loja no texto. A DPD Local é marca irmã da DPD. Na Irlanda, as entregas seguem pela DPD Ireland, que tem códigos próprios.
 
 ## Status do rastreamento DPD explicados
 

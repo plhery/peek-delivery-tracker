@@ -62,7 +62,7 @@ Consta `Delivered`, mas o pacote não chegou? A leitura de entrega da FedEx incl
 
 ## Rastrear encomendas FedEx com o Peek
 
-O [Peek](/) identifica códigos FedEx de 12 e 15 dígitos quando o dígito verificador é válido. Como outras transportadoras compartilham esses comprimentos, o reconhecimento pode vir de um serviço de rastreamento após breve consulta. Números que falham na verificação — ou de 15 dígitos começando por `8880`, `30000`, `31000` ou `36000` — não são enviados automaticamente à FedEx: escolha a transportadora em "Trocar". Códigos Ground Economy de 20 dígitos são reconhecidos imediatamente, códigos de barras escaneados têm o número extraído e links de `fedex.com` com `trknbr=` ou `tracknumbers=` também funcionam. Números domésticos de 13 dígitos da Polônia seguem pela FedEx Poland.
+O [Peek](/) identifica códigos FedEx de 12 e 15 dígitos quando o dígito verificador é válido. Como outras transportadoras compartilham esses comprimentos, o reconhecimento pode vir de um serviço de rastreamento após breve consulta. Números que falham na verificação — ou de 15 dígitos começando por `8880`, `30000`, `31000` ou `36000` — não são enviados automaticamente à FedEx: escolha a transportadora em "Trocar". Códigos Ground Economy de 20 dígitos são reconhecidos imediatamente, códigos de barras escaneados têm o número extraído e links de `fedex.com` com `trknbr=` ou `tracknumbers=` também funcionam. Números domésticos de 13 dígitos da Polônia seguem pela [FedEx Poland](carrier:fedex-pl).
 
 O Peek abre o rastreamento de `fedex.com` em navegador no próprio servidor; quando a FedEx recusa ou solicita verificação do destinatário, serviços de rastreamento assumem a leitura.
 

@@ -20,7 +20,7 @@ DPD 官网未说明单号格式。在 DPD UK 跟踪页上看到的包裹单号�
 | `15504829105730K` | 同一个单号末尾加上 DPD 校验字符。 |
 | `48291736058419` | 其他 14 位数字：可能是 DPD UK、其他国家的 DPD 或其他快递。 |
 
-其他国家的 DPD 以及 DHL eCommerce UK、SEUR 和 BRT 同样使用 14 位数字，因此光看数字无法断定由哪家承运。DPD 的通知可以作为依据：其短信发件人现为“DPD UK”（或“DPD Local”、“DPDgroup UK”），内容中包含商家名称。DPD Local 是 DPD 的姐妹品牌。爱尔兰境内的包裹则由使用独立单号的 DPD Ireland 派送。
+其他国家的 DPD 以及 [DHL eCommerce UK](carrier:dhl-ecommerce-uk)、SEUR 和 BRT 同样使用 14 位数字，因此光看数字无法断定由哪家承运。DPD 的通知可以作为依据：其短信发件人现为“DPD UK”（或“DPD Local”、“DPDgroup UK”），内容中包含商家名称。DPD Local 是 DPD 的姐妹品牌。爱尔兰境内的包裹则由使用独立单号的 DPD Ireland 派送。
 
 ## DPD UK 物流状态说明
 

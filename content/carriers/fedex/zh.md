@@ -66,7 +66,7 @@ updated: 2026-11-17
 
 ## 用 Peek 跟踪 FedEx 包裹
 
-[Peek](/) 能认出校验位正确的 12 位和 15 位 FedEx 单号。不过别的快递公司也用这些格式，所以 Peek 往往要稍等片刻，或者等第三方物流查询服务确认，才能定下是 FedEx。校验位不对的单号，以及以 8880、30000、31000 或 36000 开头的 15 位单号，Peek 不会自动归到 FedEx，请点“更换”自己选快递公司。Ground Economy 的 20 位单号，Peek 马上就能认作 FedEx；扫描面单条形码得到的一长串数字，Peek 会从中读出单号；带 `trknbr=` 或 `tracknumbers=` 的 fedex.com 链接也可以直接粘贴。FedEx 在波兰国内用的 13 位单号，Peek 按 FedEx Poland 跟踪。
+[Peek](/) 能认出校验位正确的 12 位和 15 位 FedEx 单号。不过别的快递公司也用这些格式，所以 Peek 往往要稍等片刻，或者等第三方物流查询服务确认，才能定下是 FedEx。校验位不对的单号，以及以 8880、30000、31000 或 36000 开头的 15 位单号，Peek 不会自动归到 FedEx，请点“更换”自己选快递公司。Ground Economy 的 20 位单号，Peek 马上就能认作 FedEx；扫描面单条形码得到的一长串数字，Peek 会从中读出单号；带 `trknbr=` 或 `tracknumbers=` 的 fedex.com 链接也可以直接粘贴。FedEx 在波兰国内用的 13 位单号，Peek 按 [FedEx Poland](carrier:fedex-pl) 跟踪。
 
 Peek 在自己的服务器上用浏览器打开 fedex.com 的查询页面。FedEx 拒绝查询或要求验证收件人身份时，改由第三方物流查询服务补上。
 

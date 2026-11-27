@@ -84,7 +84,7 @@ Peek 最高每 10 分钟检查一次，进入派送中后最高每 2 分钟检�
 
 ### Evri 属于 DHL 还是 Royal Mail？
 
-都不是。根据英国竞争监管机构于 2025 年 9 月批准的交易，由 Apollo 旗下基金控股的 Evri 收购了 DHL 集团旗下的 DHL eCommerce UK，DHL 集团则持有 Evri 少数股权。Evri 于 2025 年 10 月 1 日完成合并组建 Evri Group，并宣布 DHL eCommerce UK 将于 2026 年更名为 Evri Premium（DHL 网络）并保持独立运营；目前 Evri 网站已针对高价值和大件包裹提供 Evri Premium 服务。Evri 查件页仅要求输入 16 位运单号或 8 位通知卡号，未涉及 DHL 包裹，查询此类包裹请使用 DHL eCommerce UK 追踪。
+都不是。根据英国竞争监管机构于 2025 年 9 月批准的交易，由 Apollo 旗下基金控股的 Evri 收购了 DHL 集团旗下的 DHL eCommerce UK，DHL 集团则持有 Evri 少数股权。Evri 于 2025 年 10 月 1 日完成合并组建 Evri Group，并宣布 DHL eCommerce UK 将于 2026 年更名为 Evri Premium（DHL 网络）并保持独立运营；目前 Evri 网站已针对高价值和大件包裹提供 Evri Premium 服务。Evri 查件页仅要求输入 16 位运单号或 8 位通知卡号，未涉及 DHL 包裹，查询此类包裹请看 [DHL eCommerce UK 物流查询](carrier:dhl-ecommerce-uk)。
 
 ### 来自 noreply.priority@evri.com 的邮件是真的吗？
 

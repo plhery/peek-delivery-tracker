@@ -1,15 +1,15 @@
 ---
 title: Apple-Bestellung verfolgen: Lieferung, Rückgabe, Probleme
-description: Wo du eine Bestellung aus dem Apple Online Store verfolgst, wer sie liefert, wann du unterschreiben musst und was tun, wenn ein Paket fehlt oder beschädigt ist.
+description: Apple-Bestellung verfolgen in Deutschland, Österreich und der Schweiz: Sendungsnummer, Lieferstatus, Versand per Kurier oder Post, Packstation und Rückgabe.
 slug: apple-sendungsverfolgung
 picture: Ein flacher Laptop-Karton mit einer kleinen Handy-Schachtel darauf neben einem Lieferwagen, und Pip steht ganz oben.
 published: 2026-10-26
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Eine Bestellung aus dem Apple Online Store verfolgst du im Bestellstatus auf apple.com, angemeldet mit deinem Apple Account oder mit deiner Bestellnummer, und über die Versandbenachrichtigung, die Apple per E-Mail schickt, sobald der Artikel das Lager verlässt. Den Paketdienst wählt Apple. In Deutschland gehen Bestellungen unter 40 € per Post und ohne Sendungsverfolgung, Bestellungen über 100 € per Kurierdienst. Ist ein Paket verspätet, verschwunden oder beschädigt, meldest du dich bei Apple: Apple klärt das mit dem Spediteur.
+Eine Bestellung aus dem Apple Online Store verfolgst du im Bestellstatus auf `apple.com` (mit deinem Apple Account oder deiner Bestellnummer) sowie über den Tracking-Link in der Versandbenachrichtigung per E-Mail oder SMS. Den Spediteur wählt Apple selbst: In Deutschland gehen Bestellungen unter 40 € per Post ohne Sendungsverfolgung raus, Bestellungen über 100 € per Kurierdienst. Ist ein Paket verspätet, fehlt es oder kommt beschädigt an, wendest du dich direkt an Apple — Apple klärt den Fall mit dem Spediteur.
 
-## Wer liefert meine Apple-Bestellung?
+## Welcher Paketdienst liefert meine Apple-Bestellung?
 
 Jedes Land hat seinen eigenen Apple Online Store, und den Paketdienst kannst du nicht wählen. Das steht auf den Seiten der einzelnen Stores:
 
@@ -28,7 +28,7 @@ Welcher Kurierdienst kommt, sagt dir die Versandbenachrichtigung: In allen drei 
 - home | Du | `Geliefert` im Bestellstatus
 :::
 
-## Wo finde ich meine Apple-Sendungsnummer?
+## Wo finde ich meine Apple-Sendungsnummer und den Bestellstatus?
 
 Hier schaust du nach:
 
@@ -70,7 +70,7 @@ Ist das Lieferdatum aus der Versandbestätigung überschritten, meld dich bei Ap
 
 **Bestellung ändern.** Steht ein Artikel auf `Bestellung aufgegeben` oder `Bestellung in Bearbeitung`, kannst du ihn eventuell im Bestellstatus bearbeiten, und bis `Versand wird vorbereitet` oder `Versandt` eventuell stornieren („Artikel stornieren“). Solange keine Versandbestätigung da ist, änderst du Angaben im Bestellstatus, sonst hilft der Apple Store Customer Service. Danach kann Apple die Lieferadresse womöglich nicht mehr ändern; hat der Spediteur das Paket, wendest du dich direkt an ihn. Ist die Bestellung schon unterwegs, wartest du die Zustellung ab und startest dann die Rückgabe. Mehr: [Lieferadresse ändern](guide:change-delivery-address).
 
-## Was kostet der Versand bei Apple?
+## Was kostet der Versand bei Apple, und wie funktionieren Abholung und Packstation?
 
 Laut Apples Hilfeseiten ist der Standardversand für alle Online-Bestellungen kostenlos. Optionen, Termine und Kosten für deine Adresse zeigt die Kasse, bevor du bezahlst:
 
@@ -90,7 +90,7 @@ Gravierte Produkte und konfigurierte Macs brauchen mehr Zeit; das Lieferdatum ak
 
 **Unterschrift.** In Deutschland ist bei Bestellungen unter 150 € keine Unterschrift nötig; bei Kurierlieferungen darüber rechne damit, dass der Kurierdienst eine verlangt. In der Schweiz ist laut Apple meistens eine Unterschrift erforderlich; bist du nicht da, folge in der Auflistung deiner Bestellungen dem Link „Vorabquittierung der Lieferung“. Für Österreich nennen Apples Seiten keine Wertgrenzen. Wer bei einer Kurierlieferung nicht da ist, bekommt eine Benachrichtigungskarte. An einer Geschäftsadresse quittiert der Post- oder Wareneingang, in einem Haus mit Concierge der Concierge. Mehr: [Paketstationen und Abholpunkte](guide:parcel-lockers) und [nicht abgeholte Pakete](guide:uncollected-parcel).
 
-## Apple-Paket nicht angekommen oder als zugestellt markiert: was tun?
+## Was tun, wenn ein Apple-Paket fehlt oder als zugestellt markiert ist?
 
 Erst nachsehen, dann melden. Der Reihe nach:
 

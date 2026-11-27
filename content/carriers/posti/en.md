@@ -1,12 +1,12 @@
 ---
 title: Posti tracking: item ID, statuses, lockers and contact
-description: Track a Posti parcel in Finland: what the JJFI item ID looks like, what each English status means, how long lockers keep parcels and how to reach Posti.
+description: Track a Posti (SmartPosti) parcel in Finland in English: JJFI item ID, English tracking statuses, 5-day locker holds, OmaPosti, customs fees and 0100 5577.
 slug: posti-tracking
 published: 2026-10-12
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Posti is Finland's postal and parcel company. Track a parcel on [Posti's tracking page](https://www.posti.fi/en/tracking) or in Posti's OmaPosti app with its item ID, or paste the number in the box above. The number comes from the sender, and it is also on Posti's notice of arrival in OmaPosti, by SMS or by email.
+Posti is Finland's national postal and parcel carrier (and operates as SmartPosti in Estonia, Latvia and Lithuania). Track a `JJFI` parcel, `…FI` registered item or incoming foreign postal parcel in English on [posti.fi/en/tracking](https://www.posti.fi/en/tracking), in the OmaPosti app, or by pasting the item ID in the box above. The item ID comes from the sender or Posti's arrival notice in OmaPosti, by SMS or by email.
 
 ## Posti tracking number: the JJFI item ID
 
@@ -109,6 +109,10 @@ A Small parcel arrives 2 to 5 business days after Posti receives it. Otherwise, 
 ### Does Posti customer service have chat?
 
 Yes, in the OmaPosti app.
+
+### What does "Item accepted from transport" mean on Posti tracking?
+
+It is an internal transport marking showing your parcel is still on its way through Posti's network — it does not mean the parcel has been delivered to you.
 
 :::sources
 - [Posti: Picking up an item](https://www.posti.fi/en/receiving/picking-up-an-item) – JJFI item ID, notices, storage (14 days from abroad, 9 days with a letter notice), extension, lockers, codes, power of attorney, returns, phone, chat

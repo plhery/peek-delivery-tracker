@@ -1,12 +1,12 @@
 ---
 title: UniUni suivi colis : statuts, livraison et contact
-description: Suivre un colis UniUni au Québec et au Canada : où trouver le numéro, ce que disent les statuts, la livraison manquée, les photos de preuve et qui appeler.
+description: Suivi colis UniUni au Canada et au Québec : formats UUS/UUSC, sens des statuts, livraison manquée et stockage 30 jours, photos de preuve, OPC et téléphone.
 slug: uniuni-suivi-colis
 published: 2026-10-27
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-UniUni (Uni Express inc.) est une entreprise de livraison du dernier kilomètre fondée à Vancouver en 2019 et établie à Richmond, en Colombie-Britannique. Elle livre au Canada et aux États-Unis des commandes en ligne, notamment de Shein, de Temu ou de TikTok. Ton numéro de suivi vient du marchand : entre-le sur [uniuni.com/fr/suivi](https://www.uniuni.com/fr/suivi/) ou colle-le dans le champ ci-dessus.
+UniUni (Uni Express inc.) est un transporteur du dernier kilomètre fondé à Vancouver en 2019 et établi à Richmond, en Colombie-Britannique, qui livre au Canada et aux États-Unis des commandes en ligne (Shein, Temu, TikTok, etc.). Entre ton numéro de suivi UniUni (`UUS…`, `UUSC…`, `4C…US`, etc.) sur [uniuni.com/fr/suivi](https://www.uniuni.com/fr/suivi/) ou colle-le dans le champ ci-dessus.
 
 Pas de numéro sous la main ? Regarde ta commande chez le marchand ; si le suivi d'UniUni ne montre encore rien, le marchand a sans doute encore le colis. Pour une nouvelle livraison, un changement d'adresse ou de consignes, un colis endommagé ou un commentaire sur un livreur, passe par le chatbot de la [page de soutien](https://www.uniuni.com/support/) d'UniUni, en anglais. Pour un article manquant, un mauvais article ou un retour, adresse-toi au marchand.
 
@@ -127,6 +127,10 @@ Non. UniUni, c'est Uni Express inc., une entreprise de livraison fondée à Vanc
 ### Pourquoi mon suivi UniUni ne bouge-t-il pas ?
 
 Le plus souvent, le marchand n'a pas encore remis le colis à UniUni. La date estimée n'apparaît qu'une fois le colis arrivé dans ses installations : écris d'abord au marchand.
+
+### Comment voir la photo de preuve de livraison UniUni ou joindre le soutien ?
+
+Suis ton colis sur [uniuni.com/fr/suivi](https://www.uniuni.com/fr/suivi/), clique sur « Voir la confirmation de livraison » et entre ton code postal. Pour contacter UniUni au Canada : 1 604 229-2007 (Pacifique et Rocheuses) ou 1 647 360-4178 (Centre, Est et Atlantique), du lundi au samedi de 10 h à 21 h (HE), ou via le chatbot sur la page de soutien.
 
 :::sources
 - [UniUni : Suivi](https://www.uniuni.com/fr/suivi/) – date estimée, tentatives, stockage 30 jours, informations pour une nouvelle livraison, boîte postale USPS, photos, récupération, boîtes postales

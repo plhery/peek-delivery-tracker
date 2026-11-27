@@ -1,12 +1,12 @@
 ---
 title: La Poste / Colissimo : suivi de colis, numéro et statuts
-description: Suivi Colissimo et La Poste : à quoi ressemble le numéro, ce que veulent dire les statuts, la livraison manquée, le point de retrait et qui contacter.
+description: Suivi Colissimo et La Poste : format du numéro d'envoi, signification des statuts, avis de passage et retrait (15 jours), douane et 3631.
 slug: suivi-la-poste-colissimo
 published: 2026-10-13
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Colissimo, c'est le service de colis de La Poste. Pour suivre ton colis, colle son numéro, ou un lien de suivi laposte.fr, dans le champ ci-dessus. Le suivi de La Poste elle-même se trouve sur laposte.fr. Ce numéro te vient de l'expéditeur, en général dans l'e-mail d'expédition de la boutique.
+Colissimo est le service de colis de La Poste. Pour suivre ton colis, colle son numéro d'envoi (13 à 15 caractères) ou un lien `laposte.fr` dans le champ ci-dessus, ou consulte `laposte.fr`. Ce numéro vient de l'expéditeur, dans l'e-mail d'expédition de la boutique.
 
 ## Numéro de suivi Colissimo : à quoi il ressemble
 
@@ -79,7 +79,7 @@ Un service Chronopost est suivi chez Chronopost, un partenaire nommé par La Pos
 
 ## Questions sur le suivi Colissimo
 
-### Combien de temps met un Colissimo ?
+### Combien de temps met un Colissimo pour arriver ?
 
 Selon La Poste Groupe, 41 % des Colissimo ont été livrés en J+1, le lendemain du dépôt, en 2025, et La Poste accélère le tri et la livraison pour en faire la norme. Elle ne donne pas de chiffre pour les autres. Peek affiche la livraison prévue quand La Poste en donne une.
 
@@ -87,11 +87,11 @@ Selon La Poste Groupe, 41 % des Colissimo ont été livrés en J+1, le lendemain
 
 Oui. La Poste Groupe indique une distribution du courrier, de la presse et des colis 6 jours sur 7, et après un passage manqué, le suivi peut annoncer une nouvelle livraison le lendemain « hors dimanche et jours fériés ».
 
-### Combien de temps un colis reste-t-il en point relais ?
+### Combien de temps La Poste garde-t-elle un colis en bureau de poste ou point relais ?
 
 Le suivi peut le dire quand le colis y arrive, par exemple `Le délai de retrait est de 5 jours.` ou 15 jours calendaires. Après un avis de passage, La Poste indique 15 jours calendaires au bureau de poste, 14 en relais commerçant et 5 en consigne Pick Up Station, à compter du lendemain du dépôt de l'avis. Passé ce délai, il repart chez l'expéditeur.
 
-### Pourquoi mon numéro Colissimo ne marche pas ?
+### Pourquoi mon numéro de suivi Colissimo ne fonctionne-t-il pas ?
 
 Compare-le aux formes ci-dessus : un numéro en …FR qui commence par XU, XR, XT, XW, XY ou PZ est un numéro Chronopost. Une fois le colis sorti de France, le suivi de La Poste peut nommer l'entreprise qui le livre à l'étranger et donner son numéro ; Peek peut alors le suivre chez elle dès qu'elle montre une progression. Si le suivi est simplement figé, lis [suivi de colis qui ne bouge plus](guide:tracking-not-updating).
 

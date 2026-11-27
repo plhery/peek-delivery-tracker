@@ -1,12 +1,12 @@
 ---
 title: TopYou tracking: codice TYZR, stati e consegna in Italia
-description: Tracking TopYou (通邮) per un pacco dalla Cina: com'è fatto un codice TYZR…YQ, cosa vogliono dire le scansioni in inglese e chi prende il pacco in Italia.
+description: Tracking TopYou (通邮) in Italia: codice TYZR…YQ dalla Cina, significato degli stati doganali, consegna finale con GOFO o Poste Italiane e contatti utili.
 slug: topyou-tracking
 published: 2026-11-03
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-TopYou (通邮, Tongyou, anche 通邮集团 o SZTY56) è 深圳市通邮物流科技（集团）股份有限公司, uno spedizioniere internazionale di Shenzhen, in Cina, che gestisce linee verso l'estero. Se un negozio online cinese ha spedito il tuo ordine con TopYou, il codice che ti ha dato inizia con TYZ e finisce con YQ: incollalo nel box qui sopra. Il tracking di TopYou segue il pacco dal suo magazzino in Cina fino in Italia, volo e dogana compresi. Poi il pacco passa al corriere che lo consegna.
+TopYou (通邮, Tongyou o SZTY56, *深圳市通邮物流科技（集团）股份有限公司*) è uno spedizioniere internazionale di Shenzhen che gestisce spedizioni dalla Cina verso l'Italia — volo e dogana compresi — prima di passare il pacco a un corriere locale come GOFO o Poste Italiane. Se il tuo codice inizia con `TYZ` e finisce con `YQ` (17 caratteri), incollalo nel box qui sopra per seguire le scansioni e scoprire l'eventuale secondo codice del corriere finale.
 
 ## Codice di tracking TopYou: com'è fatto
 
@@ -118,6 +118,10 @@ Può essere GOFO: sul sito di TopYou il passaggio compare come `Shipment is out 
 ### Chi contatto se il pacco TopYou non arriva?
 
 Il negozio dove hai ordinato: è lui che ha prenotato la spedizione con TopYou. Se il pacco ce l'ha già Poste Italiane, per la consegna chiama Poste.
+
+### Cosa significa «Shipment is out for delivery» su TopYou?
+
+In Italia e in Francia questo stato non indica ancora il giro di consegna del giorno: segna il passaggio a GOFO e compare con la prima scansione in un centro di smistamento GOFO, qualche giorno prima dell'uscita effettiva del corriere (`The driver is out for delivery`).
 
 :::sources
 - [Poste Italiane: FAQ Spedizioni e consegne](https://www.poste.it/assistenza/faq-spedizioni-e-consegne/) – tracking delle spedizioni dall'estero, Prenota, numeri e orari dell'assistenza

@@ -1,12 +1,12 @@
 ---
 title: Suivi WanbExpress : numéros WNB…YQ, statuts et livraison
-description: Suivre un colis WanbExpress (Wanb Express) depuis la Chine : format WNB…YQ, signification des statuts, transporteur final et recours en cas de blocage.
+description: Suivi WanbExpress (WNB…YQ) depuis la Chine : sens des statuts douaniers, qui livre en France, numéro du transporteur local et que faire si le colis bloque.
 slug: suivi-wanbexpress
 published: 2026-11-21
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-WanbExpress (aussi appelé Wanb Express, WanBang Express ou WANB) est un transporteur chinois qui achemine des colis à l'étranger, où un transporteur local assure la livraison. Si une boutique a expédié ta commande avec WanbExpress, le numéro commence par `WNB` et se termine par `YQ` : colle-le dans le champ ci-dessus. Le suivi propre à WanbExpress, tracking.wanbexpress.com, peut aussi indiquer le transporteur qui livre dans ton pays et le numéro qu'il attribue au colis.
+WanbExpress (aussi appelé Wanb Express, WanBang Express ou WANB) est un transporteur chinois qui expédie des colis de Chine vers l'étranger, où un transporteur local assure la livraison finale. Si ta commande porte un numéro de 17 caractères commençant par `WNB` et finissant par `YQ`, colle-le dans le champ ci-dessus ou consulte `tracking.wanbexpress.com`, qui peut aussi indiquer le transporteur local et son second numéro de suivi.
 
 ## Numéro de suivi WanbExpress : à quoi il ressemble
 
@@ -106,23 +106,23 @@ Tant que tu gardes le colis ouvert à l'écran ou le jour de la livraison avec l
 
 ## Questions sur le suivi WanbExpress
 
-### Qu'est-ce que WanbExpress ?
+### Qu'est-ce que WanbExpress et comment fonctionne le numéro WNB…YQ ?
 
-Un transporteur chinois, aussi connu sous les noms Wanb Express, WanBang Express ou WANB. Dans le code de Peek, ses scans démarrent dans un centre de tri à Shenzhen, suivent le vol et le passage en douane, puis se terminent par les scans du transporteur qui livre dans le pays de destination.
+WanbExpress (Wanb Express, WanBang Express ou WANB) est un transporteur chinois utilisant des bordereaux de 17 caractères (`WNB`, deux lettres, dix chiffres et `YQ`). Dans le code de Peek, ses scans démarrent dans un centre de tri à Shenzhen, suivent le vol et le passage en douane, puis se terminent par les scans du transporteur qui livre dans le pays de destination.
 
-### Où suivre un colis WanbExpress ?
+### Où suivre un colis WanbExpress depuis la Chine ?
 
-Dans le champ ci-dessus, ou sur le suivi de WanbExpress à l'adresse tracking.wanbexpress.com. Ce suivi applique un contrôle anti-robot et peut aussi indiquer le transporteur final. Saisis le numéro complet `WNB…YQ`.
+Dans le champ ci-dessus, ou sur le suivi de WanbExpress à l'adresse `tracking.wanbexpress.com`. Ce suivi applique un contrôle anti-robot et peut aussi indiquer le transporteur final. Saisis le numéro complet `WNB…YQ`.
 
 ### Que signifie « Customs declaration completed » sur le suivi WanbExpress ?
 
 Qu'une déclaration en douane a été complétée pour ton colis. Le libellé ne précise pas de quel pays il s'agit et ne signifie pas que la douane d'importation a libéré le colis : cette étape apparaît sous `Custom clearance completed`. Peek affiche les deux en « En transit ».
 
-### Qui livre les colis WanbExpress dans mon pays ?
+### Qui livre les colis WanbExpress en France et en Europe ?
 
-Un transporteur local, que le suivi de WanbExpress peut nommer avec son propre numéro. Le code de Peek montre iMile sur un colis vers l'Allemagne, les lignes d'InPost vers le Royaume-Uni et un scan mentionnant le réseau de Poste Italiane, ainsi que des relais de J&T Express Australia ou de numéros `DOFR…HD`/`CNFR…HD` en France ; pour les autres pays, vérifie tracking.wanbexpress.com ou demande au vendeur.
+Un transporteur local, que le suivi de WanbExpress peut nommer avec son propre numéro. Le code de Peek montre iMile sur un colis vers l'Allemagne, les lignes d'InPost vers le Royaume-Uni et un scan mentionnant le réseau de Poste Italiane, ainsi que des relais de J&T Express Australia ou de numéros `DOFR…HD`/`CNFR…HD` en France ; pour les autres pays, vérifie `tracking.wanbexpress.com` ou demande au vendeur.
 
-### Qui contacter si mon colis WanbExpress est introuvable ou perdu ?
+### Qui contacter si mon colis WanbExpress est bloqué ou perdu ?
 
 Le vendeur auprès duquel tu as commandé : c'est lui qui a confié le colis à WanbExpress. Peek n'ayant pas pu consulter le site de WanbExpress, aucune coordonnée directe de WanbExpress ne figure ici.
 

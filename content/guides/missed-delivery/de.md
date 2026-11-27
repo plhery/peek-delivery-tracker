@@ -1,15 +1,15 @@
 ---
 title: Paket verpasst: Was tun? Erneut zustellen oder abholen
-description: Paket verpasst? Was die Benachrichtigungskarte sagt, wie du es neu zustellen lässt, ab wann du abholen kannst, welchen Ausweis du brauchst und wo du dich beschwerst.
+description: Paket verpasst — was tun? Zweite Zustellung buchen, Lagerfrist bei DHL, Hermes, DPD und der Post, Ausweis & Vollmacht zur Abholung sowie Fake-SMS erkennen.
 slug: paket-verpasst-was-tun
 picture: Eine Haustür mit einer Karte darunter, ein Lieferwagen schon in der Ferne, und Pip kommt außer Atem einen Moment zu spät.
 published: 2026-10-14
-updated: 2026-11-09
+updated: 2026-11-27
 ---
 
-Nach einem verpassten Zustellversuch sagt dir die Benachrichtigung, wo dein Paket jetzt liegt und wie lange es wartet: in Deutschland die Benachrichtigungskarte, in Österreich der gelbe Zettel, in der Schweiz die Abholungseinladung, oft auch per SMS oder E-Mail. Abholen kannst du es meist mit dieser Benachrichtigung und einem Lichtbildausweis, frühestens zur Uhrzeit, die darauf steht, also selten noch am selben Tag. Hermes versucht es von selbst an drei Werktagen hintereinander, DHL bringt das Paket, wenn kein Nachbar es annimmt, in eine Filiale, einen Paketshop oder eine Packstation, und die Schweizerische Post stellt es auf Wunsch kostenlos ein zweites Mal zu.
+Hast du ein Paket verpasst, zeigt dir die Benachrichtigung (Benachrichtigungskarte in Deutschland, gelber Zettel in Österreich, Abholungseinladung in der Schweiz, oft auch per SMS oder E-Mail), wo das Paket liegt und bis wann du es abholen kannst. Abholen geht meist mit Benachrichtigung und Lichtbildausweis erst ab dem angegebenen Zeitpunkt, selten noch am selben Tag. Hermes unternimmt von selbst drei Zustellversuche an aufeinanderfolgenden Werktagen, DHL liefert sonst an Filiale, Paketshop oder Packstation (zweite Zustellung online buchbar), und die Schweizerische Post stellt auf Wunsch kostenlos ein zweites Mal zu.
 
-## Paket verpasst: Was tun?
+## Paket verpasst: Was tun Schritt für Schritt?
 
 :::steps
 - Benachrichtigung lesen | Wo das Paket liegt, welche Nummer zählt, ab wann du abholen kannst und bis wann.
@@ -29,7 +29,7 @@ So benachrichtigen die großen Paketdienste, und das passiert danach:
 | GLS (AT) | Benachrichtigungskarte oder E-Mail | Erst ein Nachbar, dann ein PaketShop oder eine PaketBox. Nach dem zweiten Versuch ins Depot |
 | [Schweizerische Post](carrier:swiss-post) | Abholungseinladung, auch Abholschein oder „Avis“ | Das Paket wartet in der Filiale auf dem Schein. Eine zweite Zustellung ist kostenlos |
 
-## Paket nicht angetroffen: Was heißt die Benachrichtigung?
+## Was bedeutet die Benachrichtigungskarte („nicht angetroffen“)?
 
 Der Zusteller war da, niemand hat das Paket angenommen, und er hat eine Benachrichtigung hinterlassen. Heb sie auf: Mit ihr lässt du neu zustellen oder holst ab.
 
@@ -37,7 +37,7 @@ Bei DHL zeigt die Sendungsverfolgung dann `Die Sendung wird zur Abholung in die 
 
 Am Schalter landen vor allem Pakete, die jemand persönlich annehmen muss oder die sich nirgends sicher ablegen lassen. Die Schweizerische Post nimmt ein Paket wieder mit, wenn sie es weder übergeben noch wettergeschützt ablegen kann. Hermes gibt Nachnahme- und Ident-Service-Sendungen nicht beim Nachbarn ab: Dann sagt die Benachrichtigung, dass der Bote am nächsten Werktag wiederkommt. Sind noch Zollgebühren offen, lies [Paket beim Zoll](guide:customs).
 
-## Kann man ein Paket erneut zustellen lassen?
+## Wie lasse ich ein verpasstes Paket erneut zustellen?
 
 Bei den meisten Paketdiensten ja, aber nicht überall von selbst. Buch die neue Zustellung nur auf der Website oder in der App des Paketdienstes.
 
@@ -59,7 +59,7 @@ Meist nicht mehr am selben Tag: Das Paket kommt erst nach der Tour des Zusteller
 
 In Ausnahmefällen gibt der DHL-Zusteller das Paket woanders ab, als er auf der Karte vermerkt hat. Der tatsächliche Ort steht in der Sendungsverfolgung: Schau also nach, bevor du losgehst.
 
-## Paket abholen: Welchen Ausweis brauche ich?
+## Welchen Ausweis brauche ich zur Paketabholung?
 
 Die Benachrichtigung und einen amtlichen Lichtbildausweis auf deinen Namen. Was genau zählt, ist unterschiedlich:
 

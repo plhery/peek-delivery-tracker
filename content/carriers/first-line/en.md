@@ -1,12 +1,12 @@
 ---
 title: FIRST LINE tracking: 1ST numbers, statuses and delivery
-description: Track a FIRST LINE (壹号专线) parcel from China: what a 1ST number looks like, what each status means, who delivers it in the US and who to ask when it stalls.
+description: Track a FIRST LINE (壹号专线) 1ST parcel from China: 1ST number format, English tracking statuses, USPS/GOFO/UniUni delivery in the US, transit times and support.
 slug: first-line-tracking
 published: 2026-10-21
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-FIRST LINE (壹号专线, Shenzhen First Line Supply Chain Co., Ltd.) is a Shenzhen forwarder that ships parcels from China for online sellers, mostly to the United States, and hands them to a local carrier there for delivery. It belongs to the 1ST group (一代国际集团), whose forwarders print waybills starting with 1ST. Track yours in the tracking box on firstline56.com's home page, which opens FIRST LINE's 追踪单号 (track a number) page, or in the box above. The shop gives the number with your order's shipping details.
+FIRST LINE (壹号专线, *Shenzhen First Line Supply Chain Co., Ltd.*) is a Shenzhen forwarder in the 1ST group (*一代国际集团*) that ships e-commerce parcels from China — mostly to the US, Canada and Europe — and hands them to a local carrier for delivery. Paste your 14-character `1ST` tracking number (1ST + 11 digits) in the box above or into the tracking box on `firstline56.com`, using the number from your shop's shipping details.
 
 ## FIRST LINE tracking number: what it looks like
 
@@ -103,6 +103,10 @@ The number may be mistyped, not registered yet, or belong to another of the 1ST 
 ### How long does FIRST LINE take to deliver to the US?
 
 FIRST LINE quotes sellers 7 to 16 days door to door by air and 19 to 31 days by sea. These are sales figures, not a date for your order.
+
+### Who do I contact if my FIRST LINE parcel is delayed or missing?
+
+Contact the seller or marketplace where you ordered: FIRST LINE's Shenzhen customer service serves sellers, and claims on US and Canada lines must be raised by the seller within 60 days of dispatch.
 
 :::sources
 - [FIRST LINE: 壹号专线 (home)](http://www.firstline56.com/) – tracking box, Chinese site, address in the footer

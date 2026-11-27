@@ -22062,6 +22062,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef7d00"
     },
     {
+      "id": "wanbexpress",
+      "catalog": "wanbexpress",
+      "slug": "wanbexpress-pakket-volgen",
+      "title": "WanbExpress pakket volgen: WNB…YQ-nummer en statussen",
+      "name": "WanbExpress",
+      "color": "#da381b"
+    },
+    {
       "id": "gzyl",
       "catalog": "gzyl",
       "slug": "gzyl-pakket-volgen",
@@ -22134,6 +22142,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Spåra paket med TopYou: TYZR-nummer, statusar och leverans",
       "name": "TopYou",
       "color": "#045cd7"
+    },
+    {
+      "id": "gzyl",
+      "catalog": "gzyl",
+      "slug": "gzyl-spara-paket",
+      "title": "Spåra paket från GZYL: YL…YQ-nummer, status och kontakt",
+      "name": "GZYL",
+      "color": "#4e79e1"
     },
     {
       "id": "dsv",
@@ -22226,6 +22242,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Helthjem sporing — sporingsnummer, statuser og hentested",
       "name": "Helthjem",
       "color": "#ffb202"
+    },
+    {
+      "id": "jrt",
+      "catalog": "jrt",
+      "slug": "jrt-sporing",
+      "title": "JRT-sporing: JRT…MM-nummer, statuser og lokal levering",
+      "name": "JRT",
+      "color": "#023053"
     }
   ],
   "fi": [
@@ -22260,6 +22284,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Matkahuollon seuranta: lähetystunnus, nouto ja tilat",
       "name": "Matkahuolto",
       "color": "#001e60"
+    },
+    {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "xinghe-freight-seuranta",
+      "title": "Xinghe Freight seuranta: GZXH…YQ-numero ja tilat",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
     }
   ],
   "cs": [
@@ -22328,6 +22360,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Sledovanie zásielky GZYL z Číny: číslo YL…YQ a stavy",
       "name": "GZYL",
       "color": "#4e79e1"
+    },
+    {
+      "id": "sxw-express",
+      "catalog": "sxw-express",
+      "slug": "sxw-express-sledovanie-zasielky",
+      "title": "Sledovanie SXW Express: číslo SXW, stavy a doručenie",
+      "name": "SXW Express",
+      "color": "#003876"
     }
   ],
   "hu": [
@@ -22370,6 +22410,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GZYL csomagkövetés Kínából: YL…YQ szám, státuszok",
       "name": "GZYL",
       "color": "#4e79e1"
+    },
+    {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "xinghe-freight-csomagkovetes",
+      "title": "Xinghe Freight csomagkövetés: GZXH…YQ szám és státuszok",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
     },
     {
       "id": "gls-hu",
@@ -22518,6 +22566,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Проследяване на пратка GZYL: номер YL…YQ и статуси",
       "name": "GZYL",
       "color": "#4e79e1"
+    },
+    {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "xinghe-freight-prosledyavane-na-pratka",
+      "title": "Проследяване на Xinghe Freight: номер GZXH…YQ и статуси",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
     },
     {
       "id": "cvc",

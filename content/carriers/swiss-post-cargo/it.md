@@ -1,12 +1,12 @@
 ---
 title: Swiss Post Cargo tracking: stati, consegna e contatti
-description: Segui una spedizione Swiss Post Cargo: quale numero usare, cosa vuol dire Loaded for Delivery, come arriva la merce e chi chiamare.
+description: Swiss Post Cargo tracking (ex PostLogistics): come seguire il codice a barre o riferimento, significato di Loaded for Delivery, consegna collettame e contatti.
 slug: swiss-post-cargo-tracking
 published: 2026-10-12
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Swiss Post Cargo è il marchio della Posta Svizzera per il trasporto merci: pallet e altra merce viaggiano su camion, dal singolo collo al carico completo, non come pacchi normali. Segui la spedizione sulla pagina Track & Trace (tt.swisspost-cargo.com) con il codice a barre o il riferimento che ti ha dato il mittente, oppure incollalo nel box qui sopra. Se hai un numero di pacco della Posta, usa invece la [pagina della Posta Svizzera](carrier:swiss-post).
+Swiss Post Cargo (dal 1° marzo 2025 il marchio della logistica merci della Posta Svizzera, che comprende PostLogistics) trasporta pallet e collettame su camion per le aziende. Segui la spedizione su Track & Trace (`tt.swisspost-cargo.com`) con il codice a barre da 20 cifre (`00…`) o il riferimento del mittente, oppure incollalo nel box qui sopra. Per un normale pacco postale usa invece la [pagina della Posta Svizzera](carrier:swiss-post).
 
 ## Swiss Post Cargo tracking number: che aspetto ha
 
@@ -75,25 +75,25 @@ Un riferimento condiviso da più spedizioni viene letto solo se una sola di ques
 
 ## Domande sul tracking Swiss Post Cargo
 
-### Che cos'è Swiss Post Cargo?
+### Che cos'è Swiss Post Cargo, e che legame ha con PostLogistics?
 
-È il nome con cui opera dal 1° marzo 2025 la logistica merci della Posta Svizzera: logistica per le aziende, in Svizzera e all'estero, collettame compreso. PostLogistics è stata una delle prime società del gruppo a prendere il nome. Tra le società svizzere del gruppo c'è Swiss Post Cargo CH AG, controllata al 100% dalla Posta.
+Dal 1° marzo 2025 Swiss Post Cargo è il marchio della logistica merci della Posta Svizzera (tra cui Swiss Post Cargo CH AG, controllata al 100% dalla Posta). PostLogistics opera ora sotto questo nome: il vecchio tracking `tracking.postlogistics.ch` non si apre più e le spedizioni si seguono su `tt.swisspost-cargo.com` (Peek traccia comunque i riferimenti PostLogistics).
 
-### PostLogistics e Swiss Post Cargo sono la stessa cosa?
+### Che cosa significano "Data entry POST" e "Loaded for Delivery"?
 
-Sì, PostLogistics ora opera come Swiss Post Cargo. Il suo vecchio tracking, tracking.postlogistics.ch, non si apre più; quello di Swiss Post Cargo è tt.swisspost-cargo.com. Peek traccia ancora i riferimenti PostLogistics come `48291736-542`.
+`Data entry POST` indica che il mittente ha trasmesso i dati ma la merce non è ancora stata scansionata nei centri Swiss Post Cargo; `Loaded for Delivery` significa che il collo è sul camion delle consegne.
 
-### Swiss Post Cargo ha un indirizzo e-mail?
+### Come avviene la consegna di una spedizione Swiss Post Cargo?
 
-L'opuscolo della Posta sul collettame, datato aprile 2022, indica sales.ls4@post.ch, per i clienti aziendali. Se sei tu a ricevere, scrivi prima al negozio: è il negozio che ha prenotato il trasporto.
+Di norma il collettame arriva il giorno lavorativo successivo entro le 17.00 (secondo giorno lavorativo nelle valli alpine di Vallese, Ticino e Grigioni), al pianterreno, rampa o bordo strada in orario d'ufficio e contro firma. Preavviso, appuntamento, consegna al piano e secondo recapito valgono solo se prenotati dal mittente.
 
-### Perché Swiss Post Cargo mi manda un SMS?
+### Perché ho ricevuto un SMS da Swiss Post Cargo o dalla Posta?
 
-Può essere un preavviso prenotato dal mittente: l'opuscolo della Posta lo elenca tra i servizi aggiuntivi, per telefono, e-mail o SMS. Esistono però anche SMS falsi a nome della Posta, quindi controlla il numero tu stesso sul tracking.
+Può essere un preavviso di consegna ordinato dal mittente, ma circolano anche SMS di phishing a nome della Posta su pacchi e spese: non cliccare link sospetti e controlla sempre il numero direttamente sul tracking.
 
-### Si vede dove si trova il camion in tempo reale?
+### Come contattare Swiss Post Cargo o la Posta Svizzera?
 
-No, non c'è una mappa in diretta. Il tracking elenca ogni scansione con il suo comune, e secondo l'opuscolo della Posta stato e luogo dell'invio si possono conoscere in ogni momento.
+Per spedizioni Cargo rivolgiti prima al negozio che ha prenotato il trasporto (l'opuscolo collettame indica solo il contatto aziendale di Dintikon, `sales.ls4@post.ch`). Per lettere e pacchi normali della Posta Svizzera chiama il +41 848 888 888 (lun–ven 07.30–18.00, sab 08.00–12.00) o usa la chat su post.ch.
 
 :::sources
 - [Posta Svizzera: opuscolo Trasporti, collettame](https://www.post.ch/it/-/media/post/gk/dokumente/stueckgut.pdf) – dai pacchi singoli agli interi carichi, ordini tramite Swiss Post Cargo Web da parte delle aziende, giorno lavorativo successivo, zone di montagna, pianterreno, scarico, firma, servizi aggiuntivi compreso il secondo recapito, stato e luogo degli invii, contatto di Dintikon ed e-mail

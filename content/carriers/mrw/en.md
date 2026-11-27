@@ -1,12 +1,12 @@
 ---
 title: MRW tracking: number, statuses in English and contact
-description: Track an MRW parcel in Spain or Portugal: where the 12-digit number is, its Spanish statuses in plain English, MRW Point pickup, claims and contacts.
+description: Track an MRW parcel in Spain or Portugal: 12-digit shipment number, Spanish status translations, MRW Point pickup, 7-day damage claims and customer service.
 slug: mrw-tracking
 published: 2026-10-11
-updated: 2026-10-26
+updated: 2026-11-27
 ---
 
-MRW is a Spanish courier franchise network with more than 550 offices across Spain, Portugal, Andorra and Gibraltar. To track a parcel, type its shipment number into the "No abonados" box on [MRW's tracking page](https://www.mrw.es/seguimiento/) (in Portugal, [mrw.pt](https://www.mrw.pt/seguimiento/)), or paste it in the box above. The number is in the shop's shipping email, MRW's SMS or, if you sent the parcel yourself, the office receipt.
+MRW is a Spanish courier network with more than 550 franchise offices across Spain, Portugal, Andorra and Gibraltar. Track your parcel by entering its 12-digit shipment number (without the slash) into the "No abonados" field on [MRW's tracking page](https://www.mrw.es/seguimiento/) or [mrw.pt](https://www.mrw.pt/seguimiento/), or paste it in the box above. The number comes from the shop's dispatch email, MRW's SMS (`MRW-es`) or your MRW office receipt.
 
 ## MRW tracking number: where to find it
 
@@ -90,19 +90,23 @@ MRW's times carry no time zone: Peek reads them on the clock of each office's pl
 
 ### Is there MRW tracking in English?
 
-No. MRW's site is in Spanish, Portuguese and Catalan; the table above translates the common statuses.
+No—MRW's tracking sites run in Spanish, Portuguese and Catalan. Use the status table above to translate common Spanish scans such as `Pendiente de recoger` (awaiting collection from the sender) and `Envío en reparto` (out for delivery).
 
-### How do I email MRW customer service?
+### How do I enter an MRW tracking number with a slash?
 
-Write to informacion@mrw.es, which MRW's Spanish contact page gives as its customer service email, or use the topic forms there, including "Quiero hacer una reclamación" for a claim, or phone.
+On MRW labels, the shipment number appears as 12 digits under the barcode and as 5 digits, a slash and 7 digits next to "N.º Etiqueta". Remove the slash before entering the 12 digits on mrw.es or in Peek.
 
-### What are MRW's delivery hours?
+### How does MRW Point (PointOffice, PointCorner and PointMatic) pickup work?
 
-MRW's pages give none for shop parcels. For shipments booked on its own site within mainland Spain, its FAQ promises delivery before 19:00 on the next working day.
+When your parcel reaches your chosen MRW Point, MRW sends an SMS or email. Bring photo ID or passport to a PointOffice or PointCorner (or a signed authorisation plus ID copy if collecting for someone else), or use the SMS PIN at a PointMatic locker.
 
-### Where is an MRW parcel point near me?
+### How do I claim for a damaged or missing MRW parcel?
 
-MRW's office finder lists offices; you choose an MRW Point when you check out at the shop, and MRW texts or emails you when the parcel is there.
+Start with the shop that sent the order, since MRW's contract is with the sender, or submit MRW's online claim form with your shipment number. Note visible damage on delivery; MRW's terms allow 7 calendar days for hidden damage and 21 days for delay claims.
+
+### How do I contact MRW customer service in Spain?
+
+Call +34 91 829 66 89 or 900 103 668 (Monday to Friday 8:00 to 20:00, Saturday 9:00 to 13:00), email informacion@mrw.es, message @mrw_clientes on X or use the topic forms on MRW's contact page.
 
 :::sources
 - [MRW: Seguimiento de envíos](https://www.mrw.es/seguimiento/) – tracking form, languages, hubs, number help

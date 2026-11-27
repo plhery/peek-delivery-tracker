@@ -1,12 +1,12 @@
 ---
 title: JRT seguimiento: número JRT…MM, vuelos, DHL y UPS
-description: Sigue tu paquete de JRT (今日通) desde Xiamen: cómo es un número JRT…MM, qué significan sus pasos en chino y en inglés y quién lo entrega en Europa y en EE. UU.
+description: Seguimiento JRT (今日通, Jinritong) en español: formato JRT…MM, qué significan sus pasos en chino e inglés, entrega con DHL, UPS o CTT Express y aduanas UE.
 slug: jrt-seguimiento
 published: 2026-11-03
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-JRT (今日通, Jinritong) es 厦门今日通商贸有限公司, una empresa de logística de Xiamen, en China. Si una tienda china te ha enviado el pedido con JRT, te habrá dado un número de seguimiento que empieza por JRT y acaba en MM: pégalo en la casilla de arriba para rastrear el paquete. La web de seguimiento de JRT lo sigue desde China: el vuelo, la aduana y el paso a DHL, en los envíos a Europa, o a UPS, en los envíos a Estados Unidos. JRT copia en su web los escaneos de DHL y de UPS. En su línea a Irlanda con FedEx en el nombre del producto, el paquete pasa en cambio a FedEx; en su línea a España, a CTT Express; en la de Polonia, a InPost, y en la de México, a J&T Express México.
+JRT (今日通, Jinritong, 厦门今日通商贸有限公司) es una empresa de logística de Xiamen, China, cuyos envíos llevan un número de 15 caracteres (`JRT`, diez cifras y `MM`). Pega tu número `JRT…MM` en la casilla de arriba para seguir el paquete desde China hasta la entrega final: la web de JRT registra el vuelo, la aduana y el relevo al transportista local — DHL en Europa (CTT Express en su línea a España e InPost en Polonia), UPS en Estados Unidos, FedEx en su línea a Irlanda y J&T Express en México.
 
 ## Número de seguimiento de JRT: cómo es
 
@@ -176,21 +176,25 @@ Mientras tengas el paquete abierto en Peek, o el día de su entrega con las noti
 
 ## Preguntas sobre el seguimiento de JRT
 
-### ¿Qué es JRT (今日通)?
+### ¿Qué es JRT (今日通 / Jinritong) y cómo es su número de seguimiento?
 
-Es 厦门今日通商贸有限公司, Xiamen Jinritong, una empresa de logística de Xiamen, en China. Sus números de envío son JRT, diez cifras y MM, y su web de seguimiento funciona sobre Hualei (华磊), una plataforma que también usan otras empresas de logística chinas.
+JRT es 厦门今日通商贸有限公司 (Xiamen Jinritong), una empresa de logística de Xiamen, China. Sus números de envío tienen 15 caracteres (`JRT`, diez cifras y `MM`; nueve cifras indica que falta una) y su web de seguimiento funciona sobre la plataforma Hualei (华磊).
 
 ### ¿Por qué JRT pone «delivered» si mi paquete no ha llegado?
 
-Por cómo traduce sus pasos. `Cargo delivered to airport` quiere decir que JRT entregó el paquete en el aeropuerto para su vuelo, y `Delivered to service provider` o `Delivery to final service provider`, que se lo pasó a la empresa que reparte. Ninguno de esos pasos es una entrega a ti.
+Por cómo traduce sus pasos al inglés: `Cargo delivered to airport` quiere decir que JRT entregó el paquete en el aeropuerto para el vuelo, y `Delivered to service provider` o `Delivery to final service provider`, que se lo pasó a la empresa que reparte. Ninguno es una entrega a ti.
 
-### ¿Quién reparte los paquetes de JRT en España y en Estados Unidos?
+### ¿Quién reparte los paquetes de JRT en España, Europa, EE. UU. y México?
 
-En los envíos a Europa, el historial de JRT acaba con DHL, y en los envíos a Estados Unidos, con UPS: la web de JRT copia sus escaneos. Quién entrega en España los paquetes de DHL Paket te lo cuenta la página de [DHL Paket](carrier:dhl). Algunos paquetes pasan a FedEx, como los de la línea de JRT a Irlanda con FedEx en el nombre del producto, a CTT Express, como los de su línea a España, a InPost, como los de su línea a Polonia, o a J&T Express México, como los de su línea a México. En los demás casos, Peek no lo sabe: pregunta a la tienda qué empresa reparte el tuyo y con qué número.
+En los envíos a Europa, JRT suele entregar a DHL (en su línea a España, a CTT Express; en Polonia, a InPost; en su línea con FedEx a Irlanda, a FedEx). En Estados Unidos el relevo es con UPS y en México con J&T Express México; en el resto de casos, pregunta a la tienda qué empresa reparte y con qué número.
 
-### ¿A quién reclamo si no me llega un paquete de JRT?
+### ¿Tengo que pagar aduanas o la tasa de 2 € de la UE por un envío de JRT?
 
-A la tienda donde compraste: fue ella quien contrató el envío con JRT. Aparte de su web de seguimiento, Peek no conoce ninguna web ni datos de contacto de JRT.
+Según la Comisión Europea, los envíos de fuera de la UE de hasta 150 € pagan un arancel de 3 € por tipo de producto (desde el 1 de julio de 2026) y las compras a distancia pagan además la tasa de tramitación de 2 € por tipo de producto (desde el 1 de noviembre de 2026), cualquiera que sea su valor.
+
+### ¿Cómo contactar con JRT si mi paquete no llega o se pierde?
+
+Contacta con la tienda o el marketplace donde compraste, porque fue la tienda quien contrató el envío con JRT. Aparte de su web de seguimiento, Peek no conoce ningún sitio web, teléfono ni correo de atención al destinatario de JRT.
 
 :::sources
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nombre de la empresa y sus iniciales, plataforma Hualei, la web de seguimiento en una dirección numérica por HTTP sin cifrar, sus enlaces y ningún enlace publicado, formatos JRT…MM y UP, una O detrás de JRT leída como JRT, búsqueda por número o por referencia con sus guiones, textos de los pasos y sus estados, el inglés de los pasos solo en chino, los pasos solo en chino del final del trayecto a Europa, fechas mes.día, pasos copiados de DHL y la oficina de Deutsche Post, la ruta a Estados Unidos y los pasos copiados de UPS en hora local, el paso de FedEx y sus escaneos copiados, el número de DHL o de FedEx en los datos tras la entrega, el traspaso a DHL y, en la línea a Irlanda, a FedEx, traspaso a Swiss Post, hora de Pekín y hora local de DHL en sus pasos copiados, según la ciudad que nombran, la respuesta a un número desconocido, lo que Peek muestra, aparta y deja fuera, los pasos de DHL con dirección no encontrada, la línea por carretera de Xinjiang a Kazajistán, el vuelo retrasado, los pasos en español de la línea a México, el aviso de CTT Express, los pasos copiados de J&T Express México en hora de Ciudad de México, el despacho terminado en destino y los pasos de DHL de llegada al país de destino, centro de importación y vehículo de reparto (9 de noviembre), los pasos de DHL de destinatario ausente y de recogida en ParcelShop, con el texto de su enlace de ayuda (10 de noviembre), el paso del vuelo en el que se cargará el paquete (13 de noviembre), la frontera entre Kazajistán y Rusia en la línea por carretera, el paso a la empresa que reparte en la línea aérea a España y el aviso de UPS sobre el Access Point (14 de noviembre)

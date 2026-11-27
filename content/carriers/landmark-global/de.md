@@ -1,12 +1,12 @@
 ---
 title: Landmark Global Sendungsverfolgung: Status, Partner, Kontakt
-description: Landmark-Global-Paket verfolgen: woher die LTN kommt, was die englischen Status heißen, wer in Deutschland und Österreich zustellt und wen du fragst.
+description: Landmark Global Sendungsverfolgung: LTN-Nummer prüfen, englische Status auf Deutsch verstehen, Zustellpartner in Deutschland, Österreich und Schweiz & Support.
 slug: landmark-global-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-27
 ---
 
-Landmark Global bringt Online-Bestellungen für Shops über die Grenze. Es gehört zu Bnode, der Brüsseler Gruppe, zu der auch bpost gehört, und gibt dein Paket für das letzte Stück meist an einen Paketdienst in deinem Land weiter. Verfolgen kannst du es mit der Landmark Trackingnummer (LTN) aus der Bestätigung des Shops, auf [Landmarks Tracking-Seite](https://track.landmarkglobal.com/?lang=de) oder im Feld oben.
+Landmark Global (Teil der Brüsseler Bnode-Gruppe, zu der auch bpost gehört) befördert Online-Bestellungen grenzüberschreitend in über 220 Ziele und übergibt das Paket im Zielland meist an einen lokalen Zustellpartner. Verfolge deine Sendung mit der Landmark Trackingnummer (LTN) aus der Versandbestätigung des Shops auf [Landmarks Tracking-Seite](https://track.landmarkglobal.com/?lang=de) oder direkt im Feld oben.
 
 ## Landmark Global Trackingnummer: so sieht sie aus
 
@@ -87,17 +87,21 @@ Ist der Partner einer, den Peek direkt verfolgt, etwa [bpost](carrier:bpost) in 
 
 ## Fragen zur Landmark Global Sendungsverfolgung
 
-### Was ist Landmark Global?
+### Was ist Landmark Global, und wer stellt das Paket in Deutschland zu?
 
-Ein Versanddienst für Online-Shops, der mit Post- und Paketpartnern in über 220 Ziele liefert. Seit 2016 gehört er zu Bnode, der Gruppe hinter bpost. Zugestellt wird meist von einem Partner vor Ort, den das Tracking nennt.
+Landmark Global ist ein grenzüberschreitender Versanddienst für Online-Shops in über 220 Ziele und gehört seit 2016 zur Bnode-Gruppe (bpost). In Deutschland übergibt Landmark Pakete an lokale Zustellpartner, die im Tracking unter „Delivery Partner“ mit eigener Nummer genannt werden (auf abgefragten Paketen etwa Hermes).
 
-### Warum funktioniert meine Landmark Global Trackingnummer nicht?
+### Warum funktioniert meine Landmark Global LTN-Nummer nicht?
 
-Prüf zuerst die Form: LTN, 8 oder 9 Ziffern, eventuell N1. Stimmt sie, hat Landmark das Paket vielleicht noch nicht, oder die neuen Scans stehen beim Zustellpartner; im Zweifel fragst du den Shop.
+Prüfe zuerst das Format: `LTN` gefolgt von 8 oder 9 Ziffern (optional mit `N1`). Stimmt die Nummer, hat der Shop das Paket möglicherweise noch nicht an Landmark übergeben, oder die neuen Scans stehen bereits beim Zustellpartner; im Zweifel fragst du den Shop.
 
-### Wie lange braucht Landmark Global?
+### Wie lange dauert der Versand mit Landmark Global?
 
-Laut Landmark hängt die Lieferzeit vom Service ab, den der Shop gewählt hat, und vom Ziel. Schau in die Versandangaben des Shops oder ins Tracking.
+Laut Landmark hängt die Lieferzeit vom gewählten Versandservice des Shops und vom Zielland ab. Schau in die Versandangaben des Shops oder ins Tracking.
+
+### Wie erreiche ich den Landmark Global Kundenservice?
+
+Kontaktiere zuerst den Online-Shop, denn Landmark arbeitet im Auftrag des Versenders. Für Rückfragen bietet Landmark auf seiner deutschen Support-Seite ein Kontaktformular (Adresse: Brucargo Building 829 C, 1830 Machelen, Belgien) sowie den Support über die europäische Hilfeseite.
 
 :::sources
 - [Landmark Global: Customer Support Form (Deutsch)](https://landmarkglobal.com/eu/de/customer-support-form/) – Formularfelder, Adresse in Machelen

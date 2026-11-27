@@ -1,12 +1,12 @@
 ---
 title: APC Overnight tracking: numbers, statuses, missed deliveries
-description: Track an APC parcel: the 7-digit consignment number and the 22-digit one, what Carded means, rearranging a missed delivery and how to reach your depot.
+description: Track an APC Overnight (The APC) parcel in the UK: 7- and 22-digit numbers, Carded status, 2-hour delivery slots, 3-day hold, Parcelly pickup and depot contact.
 slug: apc-overnight-tracking
 published: 2026-10-13
-updated: 2026-10-26
+updated: 2026-11-27
 ---
 
-APC Overnight, now calling itself The APC, is the UK's largest independent parcel network: more than 90 locally owned depots that mostly deliver on the next working day. Track a parcel on APC Choice with the consignment number and your postcode, or paste the long number or the tracking link in the box above. You'll find the number in the sender's dispatch confirmation, in an email or text from APC or the retailer, or on APC's "Sorry we missed you" card.
+APC Overnight (now branded The APC) is the UK's largest independent parcel delivery network, running over 90 local member depots and a National Sortation Centre in Cannock for mostly next-working-day delivery. Track your parcel on APC Choice with your 7-digit consignment number and postcode, or paste the 22-digit booking number or APC Choice link in the box above. You'll find the number in the dispatch confirmation, APC's email or text, or on a "Sorry we missed you" card.
 
 ## APC tracking number: what it looks like
 
@@ -94,21 +94,25 @@ Peek can notify you of "Every scan", "Important steps" or "Delivery only". Peek 
 
 ## Questions about APC tracking
 
-### Where is my APC parcel?
+### How do I track an APC Overnight parcel with a 7-digit or 22-digit number?
 
-At the last scan on APC Choice: the sending depot, the hub in Cannock, your delivery depot or the van. For anything more, your local depot knows; find it with the Depot Finder.
+Enter your 7-digit consignment number and delivery postcode on APC Choice, or paste the 22-digit number from your APC Choice link (starting with the booking date) into Peek without needing a postcode.
 
-### How long do APC hold parcels?
+### What does "Carded" mean on APC tracking, and how long do APC hold parcels?
 
-APC may return a parcel to the sender if you don't respond within three working days of a missed delivery. Rearrange or book a depot collection before then.
+`Carded` means the driver attempted delivery while nobody was in and left a "Sorry we missed you" card. Rearrange delivery, divert to a Parcelly store (over 2,500 UK locations) or book depot collection in APC Choice within three working days, or APC may return the parcel to the sender.
 
-### What time does APC deliver?
+### What time does APC Overnight deliver, and is there a 2-hour window?
 
-It depends on the service the sender paid for: by 10:30am, by 12 noon (UK time) or any time on the next working day. When the parcel is out for delivery, APC Choice and APC's email or text give a 2-hour window.
+Delivery timing depends on the service the sender booked—by 10:30am, by 12 noon (UK time) or standard next working day, with Saturday options in many areas. Once out for delivery, APC Choice and APC's email or text give a 2-hour estimated window.
 
-### Is APC Parcelforce?
+### How do I contact APC Overnight or report a damaged parcel?
 
-No. APC is The Alternative Parcels Company Limited, an independent network of local depots, while Parcelforce is a separate carrier with its own numbers ending `GB` or starting `PBAB`.
+APC has no national recipient phone line: use the Depot Finder with your postcode or submit the Customer Service Enquiry form on apc.co.uk/contact-us, which forwards to your local depot. For damaged or missing items, contact the sender straight away—the sender has three business days after delivery to notify APC (compensation capped at £100 for parcels).
+
+### Is APC Overnight the same as Parcelforce?
+
+No. APC (The Alternative Parcels Company Limited) is an independent network of local UK depots, while Parcelforce is a separate carrier whose numbers end in `GB` or start with `PBAB`.
 
 :::sources
 - [APC: Receiving a Parcel](https://apc.co.uk/receiving-a-parcel/) – next working day, services, APC Choice options, safe place, neighbour, missed delivery, depot collection, three days, phishing advice

@@ -1,12 +1,12 @@
 ---
 title: JRT tracking: JRT…MM numbers, flight scans and DHL
-description: Track a JRT (今日通, Jinritong) parcel from Xiamen, China: what a JRT…MM number looks like, what its Chinese and English scans mean and who delivers it.
+description: Track a JRT (今日通, Jinritong) parcel from Xiamen, China: JRT…MM numbers, Chinese and English flight scans, DHL/UPS/FedEx/CTT hand-over and who to contact.
 slug: jrt-tracking
 published: 2026-10-30
-updated: 2026-11-21
+updated: 2026-11-27
 ---
 
-JRT (今日通, Jinritong) is 厦门今日通商贸有限公司, a forwarder in Xiamen, China. If a Chinese shop sent your order with JRT, it gives you a number that starts with JRT and ends with MM: paste it in the box above. Its tracker follows the parcel from China through the flight and customs to the company that delivers: into Europe, DHL, and into the United States, UPS, whose scans it copies. JRT's FedEx line to Ireland ends with FedEx instead, its line into Spain with CTT Express, its line into Poland with InPost and its line into Mexico with J&T Express Mexico.
+JRT (今日通, Jinritong, 厦门今日通商贸有限公司) is a cross-border freight forwarder in Xiamen, China, whose tracking numbers run `JRT`, ten digits and `MM`. Paste your `JRT…MM` number in the box above to follow the parcel from China through flight departure, import customs and last-mile hand-over: JRT's tracker relays scans from DHL into Europe (CTT Express in Spain, InPost in Poland, FedEx on its Ireland FedEx line), UPS into the United States and J&T Express into Mexico.
 
 ## JRT tracking number: what it looks like
 
@@ -126,21 +126,25 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ## Questions about JRT tracking
 
-### What is JRT (今日通)?
+### What is JRT (今日通 / Jinritong) and what does a JRT…MM number look like?
 
-It is 厦门今日通商贸有限公司, Xiamen Jinritong, a forwarder in Xiamen, China. Its waybills are JRT, ten digits and MM, and its tracker runs on Hualei (华磊), a platform other Chinese forwarders use too.
+JRT is 厦门今日通商贸有限公司 (Xiamen Jinritong), a forwarder in Xiamen, China. Its waybills are 15 characters (`JRT`, ten digits and `MM`; nine digits means a missing digit), and its tracker runs on the Hualei (华磊) platform.
 
 ### Why does JRT say "delivered" when my parcel hasn't arrived?
 
-Because of its translations. `Cargo delivered to airport` means JRT handed the parcel over for its flight, and `Delivered to service provider` or `Delivery to final service provider` means it handed it to the delivering company. None is a delivery to you, and Peek shows "In transit" for each.
+Because of JRT's English translations: `Cargo delivered to airport` means JRT dropped the parcel off for its flight, and `Delivered to service provider` or `Delivery to final service provider` means hand-over to the local carrier. Neither means delivered to you, and Peek keeps them as "In transit".
 
-### Who delivers JRT parcels in my country?
+### Who delivers JRT parcels in Europe, the US and Mexico?
 
-Into Europe, DHL, and into the United States, UPS: JRT's tracker copies their scans. Some parcels go to FedEx, such as those on JRT's FedEx line to Ireland, and JRT's lines into Spain, Poland and Mexico end with CTT Express, InPost and J&T Express Mexico. Elsewhere Peek doesn't know: ask the seller which company delivers and for its number.
+Into Europe, most JRT lines hand over to DHL (with CTT Express on its Spain line, InPost in Poland and FedEx on its FedEx line to Ireland). Into the United States, JRT hands over to UPS, and into Mexico to J&T Express Mexico. Elsewhere, ask the seller which company delivers and for its number.
 
-### Who do I contact about a missing JRT parcel?
+### Are EU customs fees due on JRT parcels from China?
 
-The seller you ordered from: it booked the parcel with JRT. Peek knows no website or contact details for JRT besides its tracker.
+For online orders shipped from outside the EU, the European Commission's €2 Union handling fee per kind of product applies from 1 November 2026 alongside applicable duty or VAT; see [parcels held at customs](guide:customs) for how carriers collect it.
+
+### How do I contact JRT about a stuck or missing parcel?
+
+Contact the seller or marketplace where you ordered—the seller booked the shipment with JRT. Besides its plain-HTTP tracker, Peek found no website, phone number or recipient email address for JRT.
 
 :::sources
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company name and initials, Hualei platform, the tracker on a bare address over plain HTTP, its links and no link published, JRT…MM and UP number shapes, a letter O after JRT read as JRT, search by number or reference with its dashes, line wordings and their stages, the English for Chinese-only lines, the Chinese-only lines into Europe from the landing to the hand-over in Germany, DHL's copied lines and the Deutsche Post outlet, the US line and UPS's copied lines on their local clock, FedEx's line and its copied scans, DHL's or FedEx's number in the record after the hand-over, the hand-over to DHL and, on the FedEx line to Ireland, to FedEx, Swiss Post hand-over, Beijing clock and DHL's local clock for its copied lines, by the town they name, the answer for an unknown number, what Peek shows, holds back and leaves out, DHL's bad-address lines, the road line through Xinjiang and Kazakhstan, the delayed flight, CTT Express's notice, J&T Express Mexico's copied lines into Mexico and their Mexico City clock, the completed clearance at the destination and DHL's arrival, import parcel centre and delivery vehicle lines (9 November), DHL's missed-delivery and ParcelShop lines with their help-link text (10 November), the line of the flight the parcel is to be loaded on (13 November), the Kazakhstan–Russia border on the road line, the transfer to the provider on the air line to Spain and UPS's Access Point note (14 November)

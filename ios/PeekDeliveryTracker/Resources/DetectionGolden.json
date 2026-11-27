@@ -119235,6 +119235,37 @@
     "candidates": []
   },
   {
+    "input": "TRF0116800030358",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "TRF0116800428704",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "TRF0116800602129",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "evri",
+      "evri-uk"
+    ],
+    "asked": [
+      "evri-uk",
+      "evri"
+    ]
+  },
+  {
+    "input": "TRF0116800919270",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "TRG312170012310",
     "carrier": "unknown",
     "confidence": "none",

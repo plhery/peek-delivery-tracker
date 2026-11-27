@@ -71235,6 +71235,40 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.ezyfms.com/tfm/tracker.asp"
+  },
+  "huahai-express": {
+    "displayName": "Huahai Express",
+    "aliases": [
+      "Huahai",
+      "Huahai Supply Chain",
+      "Huahai International Logistics",
+      "Hangzhou Huahai Supply Chain Management",
+      "花海供应链",
+      "杭州花海供应链管理有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#2F6E96",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "huahai-express"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "119.45.241.73"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.huahaiexpress.com/track.html"
   }
 } as const;
 
@@ -73405,7 +73439,8 @@ export const CARRIER_IDS = [
   "king-delivery",
   "latam-you",
   "pass-the-parcel",
-  "tfmxpress"
+  "tfmxpress",
+  "huahai-express"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

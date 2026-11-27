@@ -1,5 +1,5 @@
 ---
-title: Rastreamento DAO: status, daoSHOP e entregas na Dinamarca
+title: Rastreamento DAO: status, daoSHOP e entregas não realizadas
 description: Rastreie encomendas da DAO na Dinamarca: onde encontrar o código de 20 dígitos, significado dos status, entregas noturnas, retirada no daoSHOP e contato.
 slug: dao-tracking
 published: 2026-11-26
@@ -20,7 +20,7 @@ A DAO informa que seus códigos têm 9, 13 ou 20 dígitos (os dígitos abaixo s�
 | `7482917364058` | Um código de 13 dígitos começando com `7`. |
 | `482917364` | Um código e-label de 9 dígitos: quem compra postagem particular na DAO escreve esse código no pacote em vez de imprimir etiqueta. |
 
-Espaços não interferem. Encomendas dinamarquesas de outras transportadoras têm [formatos diferentes](guide:tracking-number-formats): os códigos postais da PostNord terminam em `DK` e seus códigos de 20 dígitos usam outros prefixos, os da GLS têm 11 ou 12 dígitos e os da DPD têm 14. Se o site da DAO não localizar o código, confira os dígitos e consulte a loja. Veja [como encontrar seu código de rastreamento](guide:find-tracking-number) se nada tiver chegado.
+Espaços não interferem. Encomendas dinamarquesas de outras transportadoras têm [formatos diferentes](guide:tracking-number-formats): os números postais da PostNord terminam em `DK` e seus códigos de 20 dígitos usam outros prefixos, os da GLS têm 11 ou 12 dígitos e os da DPD têm 14. Se o site da DAO não localizar o código, confira os dígitos e consulte a loja. Veja [como encontrar seu código de rastreamento](guide:find-tracking-number) se nada tiver chegado.
 
 ## Status de rastreamento DAO explicados
 
@@ -43,7 +43,7 @@ O rastreamento da DAO mostra os status em inglês na versão inglesa do site e e
 
 Dois pontos costumam confundir. `Parcel has arrived at terminal` é uma etapa de triagem, não o fim do trajeto. Já um `Parcel delivered` residencial costuma ocorrer de madrugada, então confira a caixa de correio ou a maçaneta da porta pela manhã. Não há texto registrado para devoluções.
 
-## Entregas domiciliares da DAO, daoSHOP e entregas perdidas
+## Entregas domiciliares da DAO, daoSHOP e entregas não realizadas
 
 **Em casa.** A DAO entrega durante a noite e início da manhã, 365 dias por ano, sem exigir assinatura; seus termos dizem que quase sempre antes das 7h. O entregador coloca o pacote na caixa de correio quando cabe, ou o pendura na maçaneta em saco plástico reciclado, ou deixa junto à porta, como no capacho. Não há recibo em papel: os registros de GPS, horário e foto da DAO servem como comprovante.
 
@@ -63,7 +63,7 @@ A loja detém o contrato com a DAO, mas a página de contato da DAO também orie
 
 **Entregue, mas não localizada.** Verifique a caixa de correio, a porta e arredores, depois contate a DAO; itens faltando dentro do pacote devem ser reportados para `kundeservice@dao.as`. Veja [entregue mas não recebida](guide:delivered-not-received).
 
-**Danificada.** A página de ajuda da DAO orienta informar em até **5 dias úteis** após a entrega (5 dias na resposta para remetentes), enviando fotos da embalagem externa, interna e do item danificado; os termos aceitam reclamação por escrito até **7 dias** após a entrega. Como o formulário de dano da página saiu do ar, escreva para `kundeservice@dao.as`. Os termos limitam a indenização ao valor comprovado ou DKK 2.500 por encomenda, o que for menor. Danos causados pelo entregador à sua propriedade devem ser informados para `erstatning@dao.as`.
+**Danificada.** A página de ajuda da DAO orienta informar em até **5 dias úteis** após a entrega (5 dias na resposta para remetentes), enviando fotos da embalagem externa, interna e do item danificado; os termos aceitam pedido de indenização por escrito até **7 dias** após a entrega. Como o formulário de dano da página saiu do ar, escreva para `kundeservice@dao.as`. Os termos limitam a indenização ao valor comprovado ou DKK 2.500 por encomenda, o que for menor. Danos causados pelo entregador à sua propriedade devem ser informados para `erstatning@dao.as`.
 
 **Insatisfeito com a resposta.** Reclame primeiro à DAO; a licença postal lhe dá um mês para responder. Se discordar da decisão — sobre atraso ou indenização, por exemplo — recorra à Trafikstyrelsen, órgão que licencia a DAO. Os termos da DAO citam o Center for Klageløsning em Nævnenes Hus, mas o Nævnenes Hus encaminha reclamações sobre empresas postais licenciadas para a Trafikstyrelsen.
 
@@ -109,25 +109,25 @@ Sim, o app dao, disponível para iPhone e Android. Ele adiciona automaticamente 
 Não. A DAO afirma que não envia links pedindo pagamento ou transferência; confira sua encomenda no app dao ou em dao.as.
 
 :::sources
-- [DAO: Track your parcel](https://dao.as/en/track-your-parcel/) – number formats, not-found message, status page
-- [DAO: Find din pakke](https://dao.as/find-din-pakke/) – Danish tracking and wording
-- [DAO: Help and contact](https://dao.as/en/contact-dao/) – phone, hours, emails, forms, redirect, collection code, missing parcels, 5 days for damage
-- [DAO: Parcels](https://dao.as/en/private-parcels/) – night drop-offs, mailbox and door, more than 1,500 daoSHOPs, collection, e-label
-- [DAO: daoSHOP parcels](https://dao.as/en/private-parcels-daoshop/) – 2 to 4 days for private senders
-- [DAO: daoSHOP for businesses](https://dao.as/en/business-parcels-daoshop/) – more than 1,600 daoSHOPs, next-day delivery
-- [DAO: daoHOME for businesses](https://dao.as/en/business-parcels-daohome/) – under 16 hours
-- [DAO: Hjemmelevering](https://dao.as/privat-pakker-daohome/) – 365 days, size and weight limits for homes
-- [DAO: Terms and Conditions](https://dao.as/wp-content/uploads/2025/10/Terms-and-Conditions-Dansk-Avis-Omdeling_211025.pdf) – no signature, proof, collection deadline, 7-day claims, liability, complaints
-- [DAO: Handelsbetingelser](https://dao.as/wp-content/uploads/2025/10/Handelsbetingelser-for-Dansk-Avis-Omdeling-2025_211025.pdf) – 7 calendar days, Danish version prevails
-- [DAO: Find daoSHOP](https://dao.as/en/find-daoshop-en/) – map search, opening hours
-- [DAO: Grant access](https://dao.as/en/grant-access/) – access to blocks of flats
-- [DAO: Avoid fraud](https://dao.as/en/avoid-fraud/) – fake messages and what to do
-- [DAO: dao app](https://dao.as/en/daoapp/) – automatic parcels, parcel number and pickup code
-- [DAO: Om dao](https://dao.as/om-dao/) – company, newspapers since 1921
-- [DAO: API documentation](https://api.dao.as/docs/v1) – 20-digit GS1-128 label barcode
-- [Trafikstyrelsen: Posttilladelse – DAO – 2024](https://www.trafikstyrelsen.dk/publikationsliste/post-og-koerekort-publikationer/2024/mar/posttilladelse-dao-2024) – complaints answered within a month
-- [Trafikstyrelsen: Klager over postvirksomheder](https://www.trafikstyrelsen.dk/post-og-koerekort/styrelsens-arbejde-paa-postomraadet/klager) – complaints after the company's decision
-- [Nævnenes Hus: Til køber](https://naevneneshus.dk/naevnsoversigt/maeglingsteamet-for-forbrugerklager-og-forbrugerklagenaevnet/til-koeber/) – postal complaints go to Trafikstyrelsen
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty, €2 handling fee
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [DAO: Track your parcel](https://dao.as/en/track-your-parcel/) – formatos de código, mensagem de código não encontrado, página de status
+- [DAO: Find din pakke](https://dao.as/find-din-pakke/) – rastreamento e textos em dinamarquês
+- [DAO: Help and contact](https://dao.as/en/contact-dao/) – telefone, horários, e-mails, formulários, redirecionamento, código de retirada, encomendas extraviadas, 5 dias para danos
+- [DAO: Parcels](https://dao.as/en/private-parcels/) – entregas noturnas, caixa de correio e porta, mais de 1.500 daoSHOPs, retirada, e-label
+- [DAO: daoSHOP parcels](https://dao.as/en/private-parcels-daoshop/) – 2 a 4 dias para remetentes particulares
+- [DAO: daoSHOP for businesses](https://dao.as/en/business-parcels-daoshop/) – mais de 1.600 daoSHOPs, entrega no dia seguinte
+- [DAO: daoHOME for businesses](https://dao.as/en/business-parcels-daohome/) – menos de 16 horas
+- [DAO: Hjemmelevering](https://dao.as/privat-pakker-daohome/) – 365 dias, limites de tamanho e peso para entrega em casa
+- [DAO: Terms and Conditions](https://dao.as/wp-content/uploads/2025/10/Terms-and-Conditions-Dansk-Avis-Omdeling_211025.pdf) – sem assinatura, comprovante, prazo de retirada, pedidos de indenização em 7 dias, responsabilidade, reclamações
+- [DAO: Handelsbetingelser](https://dao.as/wp-content/uploads/2025/10/Handelsbetingelser-for-Dansk-Avis-Omdeling-2025_211025.pdf) – 7 dias corridos, prevalece a versão em dinamarquês
+- [DAO: Find daoSHOP](https://dao.as/en/find-daoshop-en/) – busca no mapa, horários de funcionamento
+- [DAO: Grant access](https://dao.as/en/grant-access/) – acesso a prédios de apartamentos
+- [DAO: Avoid fraud](https://dao.as/en/avoid-fraud/) – mensagens falsas e o que fazer
+- [DAO: dao app](https://dao.as/en/daoapp/) – encomendas adicionadas automaticamente, número do pacote e código de retirada
+- [DAO: Om dao](https://dao.as/om-dao/) – empresa, jornais desde 1921
+- [DAO: API documentation](https://api.dao.as/docs/v1) – código de barras GS1-128 de 20 dígitos na etiqueta
+- [Trafikstyrelsen: Posttilladelse – DAO – 2024](https://www.trafikstyrelsen.dk/publikationsliste/post-og-koerekort-publikationer/2024/mar/posttilladelse-dao-2024) – reclamações respondidas em até um mês
+- [Trafikstyrelsen: Klager over postvirksomheder](https://www.trafikstyrelsen.dk/post-og-koerekort/styrelsens-arbejde-paa-postomraadet/klager) – reclamações após a decisão da empresa
+- [Nævnenes Hus: Til køber](https://naevneneshus.dk/naevnsoversigt/maeglingsteamet-for-forbrugerklager-og-forbrugerklagenaevnet/til-koeber/) – reclamações postais vão para a Trafikstyrelsen
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – imposto de €3, taxa de manuseio de €2
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê
 :::

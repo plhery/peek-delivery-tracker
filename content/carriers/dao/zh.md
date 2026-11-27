@@ -1,5 +1,5 @@
 ---
-title: 丹麦 DAO 物流查询：状态含义、daoSHOP 取件与派送失败处理
+title: 丹麦 DAO 物流查询：状态含义、daoSHOP 取件与派送未成功
 description: 查询丹麦 DAO 包裹：20 位、13 位与 9 位单号查找方法、物流状态说明、夜间上门投递、daoSHOP 取件与 7 天保管期，以及联系 DAO 客服方式。
 slug: dao-tracking
 published: 2026-11-26
@@ -12,7 +12,7 @@ DAO（Dansk Avis Omdeling）是丹麦快递公司，自 1921 年起从事报纸�
 
 商家会在发货确认邮件中提供运单号。包裹送达 daoSHOP 等待领取时，DAO 会通过短信和邮件向你发送包裹号及 5 位取件码。dao 应用则会在运单创建后立即自动添加你的包裹。
 
-DAO 说明其包裹号为 9 位、13 位或 20 位数字（以下数字均为示例）：
+DAO 说明其包裹号为 9 位、13 位或 20 位数字（以下数字为虚构）：
 
 | 单号 | 含义 |
 | --- | --- |
@@ -24,7 +24,7 @@ DAO 说明其包裹号为 9 位、13 位或 20 位数字（以下数字均为示
 
 ## DAO 物流状态说明
 
-DAO 查询页面在英文版显示英文状态，在 dao.as 丹麦语版显示丹麦语状态。以下按常见流转顺序列出英文状态；分拨站或转运中心名称常出现在冒号后面，例如 `Parcel arrived at dao depot: dao Erritsø`。
+DAO 查询页面在英文版显示英文状态，在 dao.as 丹麦语版显示丹麦语状态。以下按顺序列出英文状态；分拨站或转运中心名称常出现在冒号后面，例如 `Parcel arrived at dao depot: dao Erritsø`。
 
 | 状态 | 对你的含义 |
 | --- | --- |
@@ -43,7 +43,7 @@ DAO 查询页面在英文版显示英文状态，在 dao.as 丹麦语版显示�
 
 有两点容易让人误解：`Parcel has arrived at terminal` 只是分拣环节，并非最终送达；此外，上门派送的 `Parcel delivered` 通常发生在夜间，早上请检查信箱或门把手。目前未记录到 DAO 的退件状态文案。
 
-## DAO 夜间送货上门、daoSHOP 取件与派送失败
+## DAO 夜间送货上门、daoSHOP 取件与派送未成功
 
 **送货上门。** DAO 全年 365 天在夜间与清晨投递，无需签收；其条款指出大多数情况下在早上 7 点前完成。如果信箱放得下，快递员会放进信箱；放不下则装入再生塑料袋挂在门把上，或放在门垫等家门附近位置。投递不提供纸质回执，DAO 以 GPS、时间及现场照片记录作为妥投凭证。
 
@@ -59,13 +59,13 @@ DAO 未公布收件人改期、改派功能，也未公布派送尝试次数。
 
 虽然与 DAO 签订运输合同的是商家，但 DAO 联系页面也面向收件人列明了处理步骤。
 
-**48 小时无更新。** 如果包裹最近 48 小时内没有任何扫描记录，DAO 建议通过邮件或电话报失并提供内装物品描述。你会收到邮件确认，DAO 最多有 10 个工作日进行排查。详见[物流停止更新的原因](guide:tracking-not-updating)（英文）。
+**48 小时无更新。** 如果包裹最近 48 小时内没有任何扫描记录，DAO 请你通过邮件或电话报失，并描述内装物品。你会收到邮件确认，DAO 最多有 10 个工作日进行排查。详见[物流停止更新的原因](guide:tracking-not-updating)（英文）。
 
 **显示已送达却未找到。** 请检查信箱、门把及门前周围角落，随后联系 DAO；若内件缺失，请发送邮件至 `kundeservice@dao.as`。详见[显示已签收却未收到](guide:delivered-not-received)（英文）。
 
 **包裹破损。** DAO 帮助页面要求在送达后 **5 个工作日**内申报（面向寄件人的说明写为 5 天），并附外包装、内包装及破损商品照片；其服务条款允许在送达后 **7 天**内提交书面索赔。由于帮助页上的破损表单链接已失效，请直接发送邮件至 `kundeservice@dao.as`。条款规定每件包裹的赔偿上限为有凭证价值或 2,500 丹麦克朗（以较低者为准）。如快递员损坏你的财物，请联系 `erstatning@dao.as`。
 
-**对处理结果不满意。** 请先向 DAO 投诉，其邮政牌照规定须在一个月内回复。若你对延误或赔偿决定仍有异议，可向发牌监管机构丹麦交通局（Trafikstyrelsen）申诉。尽管 DAO 条款提及 Nævnenes Hus 旗下的 Center for Klageløsning，但 Nævnenes Hus 会将针对持牌邮政企业的投诉转交 Trafikstyrelsen 处理。
+**对处理结果不满意。** 请先向 DAO 投诉，其邮政牌照规定须在一个月内回复。若你对其决定（例如关于延误或赔偿的决定）仍有异议，可向发牌监管机构丹麦交通局（Trafikstyrelsen）申诉。尽管 DAO 条款提及 Nævnenes Hus 旗下的 Center for Klageløsning，但 Nævnenes Hus 会将针对持牌邮政企业的投诉转交 Trafikstyrelsen 处理。
 
 **来自欧盟境外的包裹。** 自 2026 年 7 月 1 日起，货值不超过 €150 的跨境网购订单按商品类别每项征收 €3 关税；自 2026 年 11 月 1 日起，另加收每项 €2 欧盟处理费。详见[海关滞留包裹指南](guide:customs)（英文）。
 
@@ -78,17 +78,17 @@ DAO 未公布收件人改期、改派功能，也未公布派送尝试次数。
 - **在线表单：** [DAO 帮助与联系页面](https://dao.as/en/contact-dao/)提供“Need help?”与反馈表单（页面中链接的破损申报表已下线）。
 - **快递员投诉：** `kvalitetabo@dao.as` 或 `44 51 75 70`。
 
-> DAO 提醒防范冒充其名义、以“缺少门牌号”“包裹滞留”或“补缴费用”为由发送的虚假短信与邮件。DAO 不会发送付款链接，请一律在 dao 应用或 dao.as 核实。如已泄露银行卡信息，请立即联系发卡行；如误批了非本人发起的 MitID 请求，请立刻冻结 MitID。
+> DAO 提醒防范冒充其名义、以“缺少门牌号”“包裹滞留”或“补缴费用”为由发送的虚假短信与邮件。DAO 不会发送付款链接，请一律在 dao 应用或 dao.as 核实。如已提供银行卡信息，请致电你的银行；如批准了不是你发起的 MitID 请求，请冻结 MitID。
 
 ## 使用 Peek 跟踪 DAO 包裹
 
-对于以 `0005712696` 或 `0005715127` 开头的 20 位单号，[Peek](/) 会同时向 DAO 及 PostNord 等其他可能的快递公司查询。如果只有 DAO 有记录，页面会显示“DAO 有这个包裹的记录。”；如果 PostNord 同样查得到，Peek 会告知共有几家快递公司识别出该单号，供你选择。13 位或 9 位单号需要在添加时点击“更换”选择 DAO，或者直接粘贴 dao.as 查询链接（支持任意位数）。随后 DAO 会返回对应的 20 位包裹号，后续追踪即以此编号为准。
+对于以 `0005712696` 或 `0005715127` 开头的 20 位单号，[Peek](/) 会同时向 DAO 及 PostNord 等其他可能的快递公司查询。如果只有 DAO 有记录，页面会显示“DAO 有这个包裹的记录。”；如果 PostNord 同样查得到，Peek 会告知共有几家快递公司识别出该单号，供你选择。13 位或 9 位单号需要在添加时点击“更换”选择 DAO，或者直接粘贴 dao.as 查询链接（适用于任意位数）。随后 DAO 会返回对应的 20 位包裹号，后续追踪即以此编号为准。
 
-DAO 的扫描时间不带时区：Peek 按扫描地时钟解析（丹麦境内按丹麦时间），并完整列出 DAO 自身轨迹，同时可显示包裹发往或暂存的 daoSHOP。物流状态保留 DAO 英文原文。当你正在 Peek 中查看该包裹，或派送当天已开启通知且 DAO 官网查询正常响应时，Peek 最快每 10 分钟检查一次；在显示 `To be delivered today` 当天，从丹麦时间早上 6 点起每 2 分钟检查一次（需要通过浏览器查询时每 5 分钟一次；仅通过物流查询服务跟踪时，每小时查询一次，静默一天后每 3 小时一次，派送当天最多每 15 分钟一次）；其余情况下每小时检查一次。若连续两天无新动态（或在“已生成面单”/“已揽收”停留满 12 小时），同样改为每小时检查一次；若在“已生成面单”停留满 7 天，则改为每 6 小时一次。
+DAO 的扫描时间不带时区：Peek 按扫描地时钟解析（丹麦境内按丹麦时间），并完整列出 DAO 自身轨迹，同时可显示包裹发往或暂存的 daoSHOP。物流状态保留 DAO 英文原文。当你打开包裹页，或在派送当天开启通知时，Peek 最多每 10 分钟查询一次；在显示 `To be delivered today` 的当天，只要 DAO 自己的查件系统正常响应，自丹麦时间早上 6 点起每 2 分钟查询一次（需要通过浏览器查询时每 5 分钟一次；仅通过物流查询服务跟踪时，每小时查询一次，静默一天后每 3 小时一次，派送当天最多每 15 分钟一次）；其余情况下每小时检查一次。若连续两天无新动态（或在“已生成面单”/“已揽收”停留满 12 小时），同样改为每小时检查一次；若在“已生成面单”停留满 7 天，则改为每 6 小时一次。
 
-若最新扫描已过 4 天，且包裹仍处于“已生成面单”、“已揽收”或“运输中”，Peek 会按该扫描日期做出提示，例如“自10月12日周一起没有物流更新”。包裹页面会显示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 DAO 查询。”，并提供前往 DAO 帮助中心的“向 DAO 寻求帮助”链接。若超过三周没有新扫描，则会提示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 DAO 查询。”
+若最新扫描已过 4 天，且包裹仍处于“已生成面单”、“已揽收”或“运输中”，Peek 会按该扫描日期做出提示，例如“自10月12日周一起没有物流更新”。包裹页面会显示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 DAO 查询。”并提供前往 DAO 帮助中心的“向 DAO 寻求帮助”链接。若超过三周没有新扫描，则会提示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 DAO 查询。”
 
-Peek 支持按“每次扫描”、“重要环节”或“仅派送当天”发送通知。对于发往海外的包裹，页面会展示合作伙伴运单号，且当 DAO 链接指向 Peek 支持列表中的快递公司时，可以继续在对方系统跟踪。DAO 不提供预计送达日期或重量；脱敏姓名、收件地址与邮编，以及自提点的地址、营业时间和地图坐标均不会显示。Peek 无法代你联系 DAO。
+Peek 可以按“每次扫描”、“重要环节”或“仅派送当天”通知你。对于发往海外的包裹，页面会展示合作伙伴运单号，且当 DAO 的链接指向 Peek 跟踪的快递公司时，可以继续在对方系统跟踪。DAO 不提供预计送达日期或重量；脱敏姓名、收件地址与邮编，以及自提点的地址、营业时间和地图坐标均不会显示。Peek 无法代你联系 DAO。
 
 ## DAO 物流查询常见问题
 
@@ -98,7 +98,7 @@ Peek 支持按“每次扫描”、“重要环节”或“仅派送当天”发
 
 ### DAO 配送需要多长时间？
 
-DAO 向个人寄件人说明 daoSHOP 包裹通常 2 至 4 天送达；面向网店则承诺送货上门 16 小时内完成、发往 daoSHOP 次日送达。上门包裹全年 365 天在夜间或清晨投递。
+DAO 向个人寄件人说明 daoSHOP 包裹 2 至 4 天内送达；面向网店则承诺送货上门 16 小时内完成、发往 daoSHOP 次日送达。上门包裹全年 365 天在夜间或清晨投递。
 
 ### DAO 有官方查询应用吗？
 
@@ -109,25 +109,25 @@ DAO 向个人寄件人说明 daoSHOP 包裹通常 2 至 4 天送达；面向网�
 不是。DAO 声明不会发送要求付款或转账的链接；请直接打开 dao 应用或访问 dao.as 核对包裹状态。
 
 :::sources
-- [DAO: Track your parcel](https://dao.as/en/track-your-parcel/) – number formats, not-found message, status page
-- [DAO: Find din pakke](https://dao.as/find-din-pakke/) – Danish tracking and wording
-- [DAO: Help and contact](https://dao.as/en/contact-dao/) – phone, hours, emails, forms, redirect, collection code, missing parcels, 5 days for damage
-- [DAO: Parcels](https://dao.as/en/private-parcels/) – night drop-offs, mailbox and door, more than 1,500 daoSHOPs, collection, e-label
-- [DAO: daoSHOP parcels](https://dao.as/en/private-parcels-daoshop/) – 2 to 4 days for private senders
-- [DAO: daoSHOP for businesses](https://dao.as/en/business-parcels-daoshop/) – more than 1,600 daoSHOPs, next-day delivery
-- [DAO: daoHOME for businesses](https://dao.as/en/business-parcels-daohome/) – under 16 hours
-- [DAO: Hjemmelevering](https://dao.as/privat-pakker-daohome/) – 365 days, size and weight limits for homes
-- [DAO: Terms and Conditions](https://dao.as/wp-content/uploads/2025/10/Terms-and-Conditions-Dansk-Avis-Omdeling_211025.pdf) – no signature, proof, collection deadline, 7-day claims, liability, complaints
-- [DAO: Handelsbetingelser](https://dao.as/wp-content/uploads/2025/10/Handelsbetingelser-for-Dansk-Avis-Omdeling-2025_211025.pdf) – 7 calendar days, Danish version prevails
-- [DAO: Find daoSHOP](https://dao.as/en/find-daoshop-en/) – map search, opening hours
-- [DAO: Grant access](https://dao.as/en/grant-access/) – access to blocks of flats
-- [DAO: Avoid fraud](https://dao.as/en/avoid-fraud/) – fake messages and what to do
-- [DAO: dao app](https://dao.as/en/daoapp/) – automatic parcels, parcel number and pickup code
-- [DAO: Om dao](https://dao.as/om-dao/) – company, newspapers since 1921
-- [DAO: API documentation](https://api.dao.as/docs/v1) – 20-digit GS1-128 label barcode
-- [Trafikstyrelsen: Posttilladelse – DAO – 2024](https://www.trafikstyrelsen.dk/publikationsliste/post-og-koerekort-publikationer/2024/mar/posttilladelse-dao-2024) – complaints answered within a month
-- [Trafikstyrelsen: Klager over postvirksomheder](https://www.trafikstyrelsen.dk/post-og-koerekort/styrelsens-arbejde-paa-postomraadet/klager) – complaints after the company's decision
-- [Nævnenes Hus: Til køber](https://naevneneshus.dk/naevnsoversigt/maeglingsteamet-for-forbrugerklager-og-forbrugerklagenaevnet/til-koeber/) – postal complaints go to Trafikstyrelsen
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty, €2 handling fee
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [DAO: Track your parcel](https://dao.as/en/track-your-parcel/) – 单号格式、查无结果提示、状态页面
+- [DAO: Find din pakke](https://dao.as/find-din-pakke/) – 丹麦语查询页与状态文字
+- [DAO: Help and contact](https://dao.as/en/contact-dao/) – 电话、服务时间、邮箱、表单、转投、取件码、包裹遗失、破损 5 天内申报
+- [DAO: Parcels](https://dao.as/en/private-parcels/) – 夜间投递、信箱与门把、1,500 多家 daoSHOP、取件、电子面单
+- [DAO: daoSHOP parcels](https://dao.as/en/private-parcels-daoshop/) – 个人寄件 2 至 4 天
+- [DAO: daoSHOP for businesses](https://dao.as/en/business-parcels-daoshop/) – 1,600 多家 daoSHOP、次日送达
+- [DAO: daoHOME for businesses](https://dao.as/en/business-parcels-daohome/) – 16 小时内
+- [DAO: Hjemmelevering](https://dao.as/privat-pakker-daohome/) – 全年 365 天、上门投递的尺寸与重量限制
+- [DAO: Terms and Conditions](https://dao.as/wp-content/uploads/2025/10/Terms-and-Conditions-Dansk-Avis-Omdeling_211025.pdf) – 无需签收、投递凭证、取件期限、7 天内索赔、赔偿责任、投诉
+- [DAO: Handelsbetingelser](https://dao.as/wp-content/uploads/2025/10/Handelsbetingelser-for-Dansk-Avis-Omdeling-2025_211025.pdf) – 7 个自然日、以丹麦语版本为准
+- [DAO: Find daoSHOP](https://dao.as/en/find-daoshop-en/) – 地图查找、营业时间
+- [DAO: Grant access](https://dao.as/en/grant-access/) – 公寓楼门禁权限
+- [DAO: Avoid fraud](https://dao.as/en/avoid-fraud/) – 虚假消息及应对方法
+- [DAO: dao app](https://dao.as/en/daoapp/) – 自动添加包裹、包裹号与取件码
+- [DAO: Om dao](https://dao.as/om-dao/) – 公司简介、1921 年起投递报纸
+- [DAO: API documentation](https://api.dao.as/docs/v1) – 20 位 GS1-128 面单条码
+- [Trafikstyrelsen: Posttilladelse – DAO – 2024](https://www.trafikstyrelsen.dk/publikationsliste/post-og-koerekort-publikationer/2024/mar/posttilladelse-dao-2024) – 投诉须在一个月内答复
+- [Trafikstyrelsen: Klager over postvirksomheder](https://www.trafikstyrelsen.dk/post-og-koerekort/styrelsens-arbejde-paa-postomraadet/klager) – 对企业的决定有异议时的投诉
+- [Nævnenes Hus: Til køber](https://naevneneshus.dk/naevnsoversigt/maeglingsteamet-for-forbrugerklager-og-forbrugerklagenaevnet/til-koeber/) – 邮政投诉转交 Trafikstyrelsen
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 关税、€2 处理费
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取的内容
 :::

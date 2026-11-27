@@ -15233,7 +15233,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "dao",
       "catalog": "dao",
       "slug": "dao-tracking",
-      "title": "Rastreamento DAO: status, daoSHOP e entregas na Dinamarca",
+      "title": "Rastreamento DAO: status, daoSHOP e entregas não realizadas",
       "name": "DAO",
       "color": "#e30613"
     },
@@ -19087,7 +19087,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "dao",
       "catalog": "dao",
       "slug": "dao-tracking",
-      "title": "丹麦 DAO 物流查询：状态含义、daoSHOP 取件与派送失败处理",
+      "title": "丹麦 DAO 物流查询：状态含义、daoSHOP 取件与派送未成功",
       "name": "DAO",
       "color": "#e30613"
     },

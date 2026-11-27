@@ -12,9 +12,9 @@ DHL eCommerce Iberia（原名 DHL Parcel Iberia，旧名称仍偶有出现）是
 
 没有单号？请向网店索取，或参阅[如何查找运单号](guide:find-tracking-number)（英文）。
 
-以下是 Peek 目录识别的常见格式（均为示例编号）：
+以下是 Peek 目录识别的格式（示例均为虚构）：
 
-| 格式 | 示例编号 | 所属快递 |
+| 格式 | 示例 | 可能所属的快递 |
 | --- | --- | --- |
 | 10 位数字 | `4829173649` | DHL eCommerce Iberia，但也可能属于 [DHL Express](carrier:dhl-express)、Mondial Relay、Relais Colis 和 GLS Spain |
 | 两位字母 + 7 位数字 + `0` | `KL48291730` | DHL eCommerce Iberia |
@@ -24,7 +24,7 @@ DHL eCommerce Iberia（原名 DHL Parcel Iberia，旧名称仍偶有出现）是
 
 ## DHL eCommerce 物流状态含义
 
-Peek 会向 DHL 请求英文状态文案，不过少数扫描仍以西班牙语返回，例如 `Llegada a`、`Tránsito en`、`Salida de` 和 `Entregado`。常见英文状态按流转顺序如下：
+Peek 会向 DHL 请求英文状态文案，不过少数扫描仍以西班牙语返回，例如 `Llegada a`、`Tránsito en`、`Salida de` 和 `Entregado`。常见英文状态按包裹收到它们的顺序如下：
 
 | DHL 显示 | 对你的含义 |
 | --- | --- |
@@ -41,13 +41,13 @@ Peek 会向 DHL 请求英文状态文案，不过少数扫描仍以西班牙语�
 
 以下几条需特别留意：
 
-- `Delivered, POD pending`：已标记签收但签收凭证尚未回传；该状态有时会提前出现，后续仍可能有派送或派送未成记录。
+- `Delivered, POD pending`：已标记签收但签收凭证尚未回传；该状态有时会提前出现，后续仍可能有派送或派送未成功记录。
 - `Shipment with incidence If you are the sender, please contact DHL Parcel, if you are the recipient please contact the sender`：包裹出现异常；正如提示所写，收件人请直接联系网店卖家。
 - `The expected delivery date might be postponed one working day` 和 `Not delivered today: delivery expected for the next working day` 仅属短期顺延，并非包裹遗失。
 
-## 错过派送与 ServicePoint 自提点
+## 派送未成功与 ServicePoint 自提点
 
-**家中无人。** 派送失败会显示 `The delivery could not be made due to consignee absent`，场所关闭则显示 `Receiver closed: delivery not possible`。随后若出现 `New delivery date requested` 或 `Delivery agreed with recipient`，说明已申请或约妥新日期。若看到 `Incorrect address details: delivery not possible`，表示地址信息有误导致无法投递：Peek 会显示“需要留意”，需由你或寄件人补正地址后包裹才会继续推进。
+**家中无人。** 派送未成功会显示 `The delivery could not be made due to consignee absent`，场所关闭则显示 `Receiver closed: delivery not possible`。随后若出现 `New delivery date requested` 或 `Delivery agreed with recipient`，说明已申请或约妥新日期。若看到 `Incorrect address details: delivery not possible`，表示地址信息有误导致无法投递：Peek 会显示“需要留意”，需由你或寄件人补正地址后包裹才会继续推进。
 
 **ServicePoint 自提点。** `Parcel will be delivered to a DHL ServicePoint` 与 `Parcel is on it's way to our DHL ServicePoint` 表示包裹正转往自提点。备妥待取后，Peek 会展示“取件点”卡片，包含门店名称、地址、导航及复制地址按钮；营业时间与保管期限未随接口提供，请直接向 DHL 查询。
 
@@ -69,13 +69,13 @@ Peek 会向 DHL 请求英文状态文案，不过少数扫描仍以西班牙语�
 
 ## 使用 Peek 跟踪 DHL eCommerce Iberia 包裹
 
-对于“两位字母 + 7 位数字 + `0`”的单号，[Peek](/) 会同时询问 DHL eCommerce Iberia 和采用同一形态的 [TNT Italy](carrier:tnt-it)。对于 10 位数字，Peek 会询问 DHL eCommerce Iberia、Packeta 和 BOX NOW，并在葡萄牙或无地区信息且其余均未查到时询问 DHL Freight；若通过 DHL Express 校验位，则会先询问 DHL Express（以及同样通过校验的 ACS Courier 与 Geniki Taxydromiki），且若 DHL Express 查有记录则以 DHL Express 为准。如果不同品牌的多家承运商均有记录或暂均无记录，可在“更换快递公司”中手动挑选。上表所列前缀的 `JJD` 条码会直接识别为 DHL eCommerce Iberia。DHL 的其他编号（12 或 22 位数字、其他 `JJD` 条码、邮政编码）在手动选择“DHL eCommerce Iberia”后同样可查，且无需邮编。
+对于“两位字母 + 7 位数字 + `0`”的单号，[Peek](/) 会同时询问 DHL eCommerce Iberia 和采用同一形态的 [TNT Italy](carrier:tnt-it)。对于 10 位数字，Peek 会询问 DHL eCommerce Iberia、Packeta 和 BOX NOW，并在葡萄牙或无地区信息且其余均未查到时询问 DHL Freight；若通过 DHL Express 校验位，则会先询问 DHL Express（以及同样通过校验的 ACS Courier 与 Geniki Taxydromiki），且若 DHL Express 查有记录则以 DHL Express 为准。如果不同品牌的多家承运商均有记录或暂均无记录，可在“更换快递公司”中手动挑选。上表所列前缀的 `JJD` 条码会直接识别为 DHL eCommerce Iberia。DHL 的其他编号（12 或 22 位数字、其他 `JJD` 条码、邮政单号）只有在那里手动选择“DHL eCommerce Iberia”后才能查询，且无需邮编。
 
 你也可以直接粘贴西班牙语、葡萄牙语或英语的 DHL eCommerce Iberia 追踪链接（含 `/LiveTracking/ModificarEnvio/`、`ModificarMeuEnvio` 或 `ModifyMyShipment`），无论单号形态如何均直接归属 DHL eCommerce Iberia（链接末尾的邮编会被忽略，因为查询无需邮编）。
 
-DHL 扫描时间不含时区：Peek 按扫描地时钟解析并展示 DHL 自身轨迹。当 DHL 返回的结果中带有 CTT Express 单号时，Peek 也会询问 [CTT Express](carrier:ctt-express)，并在 CTT Express 出现不早于 DHL 最新扫描的记录后转由对方继续跟进。除 `Delivered` 和 `Out for delivery` 改用 Peek 自身文案外，其余状态保留 DHL 英文原文。Peek 支持状态变动提醒，但不显示 DHL eCommerce Iberia 的预计送达日或送达时刻。
+DHL 扫描时间不含时区：Peek 按扫描地时钟解析并展示 DHL 自身轨迹。当 DHL 返回的结果中带有 CTT Express 单号时，Peek 也会询问 [CTT Express](carrier:ctt-express)，并在 CTT Express 出现不早于 DHL 最新扫描的记录后转由对方继续跟进。除 `Delivered` 和 `Out for delivery` 改用 Peek 自身文案外，其余状态保留 DHL 英文原文。Peek 可以在状态变化时通知你，但不显示 DHL eCommerce Iberia 的预计送达日或送达时刻。
 
-## DHL eCommerce 查询常见问题
+## 关于 DHL eCommerce 物流查询的问题
 
 ### DHL eCommerce 和 DHL Express 是一样的吗？
 
@@ -83,14 +83,14 @@ DHL 扫描时间不含时区：Peek 按扫描地时钟解析并展示 DHL 自身
 
 ### 为什么我的 DHL eCommerce 包裹查不到物流？
 
-请先向网店确认单号与承运商，因为 10 位数字被多家快递共用（见上表）。此外，历史较久的包裹也会从 DHL 查询系统下线，具体保留时长未公开。
+请先向网店确认单号与承运商，因为 10 位数字被多家快递共用（见上表）。此外，历史较久的包裹也可能从 DHL 查询系统下线，具体保留时长未公开。
 
 ### CTT Express 会派送 DHL eCommerce 包裹吗？
 
 会派送其中一部分。根据 DHL eCommerce 与 CTT 于 2026 年 5 月签署的合资协议，西班牙的个人消费者配送由 CTT Express 承接，葡萄牙的 DHL eCommerce 业务并入 CTT Expresso。若物流中提供了 CTT Express 单号，请在 [CTT Express](carrier:ctt-express) 追踪。
 
 :::sources
-- [CTT: CTT e DHL Ecommerce selam parceria estratégica](https://www.ctt.pt/grupo-ctt/media/noticias/ctt-e-dhl-ecommerce-selam-parceria-estrategica-para-criar-rede-de-distribuicao-de-encomendas-mais-completa-da-peninsula-iberica) – joint venture signed 12 May 2026, DHL eCommerce Portugal to CTT Expresso, CTT Express for consumers in Spain, DHL for business deliveries
-- [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – shop responsible for damage until delivery, 30 days, extra time, refund
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, status wordings and their stages, ServicePoint shop, shipment links, former DHL Parcel Iberia name, CTT Express numbers
+- [CTT: CTT e DHL Ecommerce selam parceria estratégica](https://www.ctt.pt/grupo-ctt/media/noticias/ctt-e-dhl-ecommerce-selam-parceria-estrategica-para-criar-rede-de-distribuicao-de-encomendas-mais-completa-da-peninsula-iberica) – 2026 年 5 月 12 日签署合资协议、DHL eCommerce 葡萄牙业务转入 CTT Expresso、西班牙个人消费者配送由 CTT Express 承接、DHL 保留企业件配送
+- [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – 送达前由网店承担损坏责任、30 天、额外期限、退款
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取的内容、状态文案及对应阶段、ServicePoint 门店、货件链接、原名 DHL Parcel Iberia、CTT Express 单号
 :::

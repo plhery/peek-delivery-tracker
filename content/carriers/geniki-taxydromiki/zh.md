@@ -80,7 +80,7 @@ taxydromiki.com 公布的联系方式：
 
 ## 用 Peek 跟踪 Geniki Taxydromiki 包裹
 
-[Peek](/) 无法仅凭 10 位数字确定是 Geniki 运单。当末位数字通过 Geniki 与 ACS、DHL Express 共用的校验规则时，Peek 会同时向 Geniki、DHL Express、ACS 以及其他符合该格式的公司——如 DHL eCommerce Iberia，以及首位不为 0 时的 [Packeta](carrier:packeta)——查询是否有此包裹。若只有 Geniki 查到，页面会显示“Geniki Taxydromiki 有这个包裹的记录。”；若多家快递同时查到（包括 DHL Express），则需要你手动选择。否则点击“更换”选择“Geniki Taxydromiki”：搜索 Bulgaria、Cyprus 或 Romania 也能找到，输入保加利亚语名称 Геники Тахидромики 同样可以。你也可以直接粘贴完整查询链接，如 `https://taxydromiki.com/track/4829173650`（或 `/en/track/`、`/bg/track/`、`/ro/track/`），Peek 会立刻识别为 Geniki。在“符合这个单号”列表中，位于希腊、保加利亚、塞浦路斯或罗马尼亚的用户会看到 Geniki 排在 Peek 目录中未覆盖该国的快递前面。包含多个用 `-` 连接单号的链接无法跟踪，请逐个粘贴单号。
+[Peek](/) 无法仅凭 10 位数字确定是 Geniki 运单。当末位数字通过 Geniki 与 ACS、DHL Express 共用的校验规则时，Peek 会同时向 Geniki、DHL Express、ACS 以及其他符合该格式的公司——如 [DHL eCommerce Iberia](carrier:dhl-ecommerce-es)，以及首位不为 0 时的 [Packeta](carrier:packeta)——查询是否有此包裹。若只有 Geniki 查到，页面会显示“Geniki Taxydromiki 有这个包裹的记录。”；若多家快递同时查到（包括 DHL Express），则需要你手动选择。否则点击“更换”选择“Geniki Taxydromiki”：搜索 Bulgaria、Cyprus 或 Romania 也能找到，输入保加利亚语名称 Геники Тахидромики 同样可以。你也可以直接粘贴完整查询链接，如 `https://taxydromiki.com/track/4829173650`（或 `/en/track/`、`/bg/track/`、`/ro/track/`），Peek 会立刻识别为 Geniki。在“符合这个单号”列表中，位于希腊、保加利亚、塞浦路斯或罗马尼亚的用户会看到 Geniki 排在 Peek 目录中未覆盖该国的快递前面。包含多个用 `-` 连接单号的链接无法跟踪，请逐个粘贴单号。
 
 Geniki 查询页的时间不带时区：Peek 按希腊时间读取，并列出 Geniki 自己的历史记录。扫描记录保留 Geniki 的英文原文，如上表所示。表中未列出的扫描也会保留 Geniki 原文，但不单独归入某一阶段。被 Geniki 撤销的扫描会连同撤销记录一起隐藏。
 

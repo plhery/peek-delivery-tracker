@@ -1,6 +1,6 @@
 ---
 title: Rastreamento DHL eCommerce Ibéria: status e ServicePoints
-description: Rastreie encomendas DHL eCommerce na Espanha ou Portugal: significado dos status, entregas perdidas, ServicePoints, CTT Express e danos ou extravios.
+description: Rastreie encomendas DHL eCommerce na Espanha ou Portugal: significado dos status, entregas não realizadas, ServicePoints, CTT Express e danos ou extravios.
 slug: dhl-ecommerce-iberia-tracking
 published: 2026-11-26
 updated: 2026-11-26
@@ -24,7 +24,7 @@ Se o e-mail da loja indicar [Mondial Relay](carrier:mondial-relay) ou [GLS Spain
 
 ## Status de rastreamento da DHL eCommerce explicados
 
-O Peek solicita à DHL os textos em inglês, embora algumas movimentações ainda venham em espanhol, como `Llegada a`, `Tránsito en`, `Salida de` e `Entregado`. Principais status, em ordem:
+O Peek solicita à DHL os textos em inglês, embora algumas movimentações ainda venham em espanhol, como `Llegada a`, `Tránsito en`, `Salida de` e `Entregado`. Os principais, na ordem em que a encomenda os recebe:
 
 | A DHL diz | O que significa para você |
 | --- | --- |
@@ -41,13 +41,13 @@ O Peek solicita à DHL os textos em inglês, embora algumas movimentações aind
 
 Alguns textos merecem atenção:
 
-- `Delivered, POD pending`: marcada como entregue sem comprovante confirmado ainda; pode aparecer antes da hora e ser seguida por nova rota ou tentativa frustrada.
+- `Delivered, POD pending`: marcada como entregue sem comprovante confirmado ainda; pode aparecer antes da hora e ser seguida por nova rota ou entrega não realizada.
 - `Shipment with incidence If you are the sender, please contact DHL Parcel, if you are the recipient please contact the sender`: ocorreu um problema com o envio; conforme a própria mensagem, o destinatário deve falar com a loja.
 - `The expected delivery date might be postponed one working day` e `Not delivered today: delivery expected for the next working day` indicam atrasos curtos, não extravio.
 
-## Entrega perdida e ServicePoints
+## Entrega não realizada e ServicePoints
 
-**Ninguém em casa.** Tentativas frustradas aparecem como `The delivery could not be made due to consignee absent`, ou `Receiver closed: delivery not possible` quando o local estava fechado. Registros posteriores como `New delivery date requested` ou `Delivery agreed with recipient` indicam novo agendamento solicitado ou combinado. Se aparecer `Incorrect address details: delivery not possible`, os dados do endereço impediram a entrega: o Peek mostra "Precisa de atenção", e você ou o remetente precisam corrigir antes que o pacote siga.
+**Ninguém em casa.** Entregas não realizadas aparecem como `The delivery could not be made due to consignee absent`, ou `Receiver closed: delivery not possible` quando o local estava fechado. Registros posteriores como `New delivery date requested` ou `Delivery agreed with recipient` indicam novo agendamento solicitado ou combinado. Se aparecer `Incorrect address details: delivery not possible`, os dados do endereço impediram a entrega: o Peek mostra "Precisa de atenção", e você ou o remetente precisam corrigir antes que o pacote siga.
 
 **ServicePoints.** `Parcel will be delivered to a DHL ServicePoint` e `Parcel is on it's way to our DHL ServicePoint` significam que a encomenda está indo para um ponto de retirada DHL ServicePoint. Assim que ficar pronta, o Peek mostra um cartão "Ponto de retirada" com nome, endereço, rota e botão para copiar o endereço; horários de funcionamento e prazo de guarda devem ser conferidos diretamente com a DHL.
 
@@ -69,11 +69,11 @@ Procure os canais da DHL eCommerce no site da DHL do país de entrega (Espanha o
 
 ## Acompanhe encomendas DHL eCommerce Ibéria com o Peek
 
-Para duas letras, 7 dígitos e `0`, o [Peek](/) consulta DHL eCommerce Iberia e [TNT Itália](carrier:tnt-it), cujos códigos têm o mesmo padrão. Para 10 dígitos, consulta DHL eCommerce Iberia, Packeta e BOX NOW — além de DHL Freight (de Portugal ou sem país identificado, apenas se as demais não encontrarem) e DHL Express primeiro quando o dígito verificador bate (junto com ACS Courier e Geniki Taxydromiki, que passam no mesmo teste); se a DHL Express também reconhecer o código, ela prevalece. Se marcas diferentes reconhecerem ou nenhuma reconhecer, escolha em "Trocar transportadora". Códigos `JJD` no formato da tabela acima são atribuídos à DHL eCommerce Iberia na hora. Demais códigos da DHL (12 ou 22 dígitos, outros `JJD`, códigos postais) funcionam após escolher "DHL eCommerce Iberia", sem exigir código postal.
+Para duas letras, 7 dígitos e `0`, o [Peek](/) consulta DHL eCommerce Iberia e [TNT Itália](carrier:tnt-it), cujos códigos têm o mesmo padrão. Para 10 dígitos, consulta DHL eCommerce Iberia, Packeta e BOX NOW — além de DHL Freight (de Portugal ou sem país identificado, apenas se as demais não encontrarem) e DHL Express primeiro quando o dígito verificador bate (junto com ACS Courier e Geniki Taxydromiki, que passam no mesmo teste); se a DHL Express também reconhecer o código, ela prevalece. Se marcas diferentes reconhecerem ou nenhuma reconhecer, escolha em "Trocar transportadora". Códigos `JJD` no formato da tabela acima são atribuídos à DHL eCommerce Iberia na hora. Demais códigos da DHL (12 ou 22 dígitos, outros `JJD`, números postais) só funcionam depois de escolher "DHL eCommerce Iberia" ali, sem exigir código postal.
 
 Links de envio da página da DHL eCommerce Iberia em espanhol, português ou inglês (`/LiveTracking/ModificarEnvio/`, `ModificarMeuEnvio` ou `ModifyMyShipment`) também podem ser colados e apontam direto para DHL eCommerce Iberia independentemente do formato (qualquer código postal no link é descartado, pois não é necessário).
 
-As movimentações da DHL não trazem fuso horário: o Peek interpreta pelo relógio do local e lista o histórico próprio da DHL. Quando a resposta da DHL traz um código da CTT Express, o Peek também consulta a [CTT Express](carrier:ctt-express) e passa a acompanhá-la assim que surgir movimentação tão recente quanto a última da DHL. Os status preservam o inglês da DHL, exceto `Delivered` e `Out for delivery`, traduzidos pelo Peek, com alertas de mudança de status. Não há data prevista nem horário exato de entrega exibidos para a DHL eCommerce Iberia.
+As movimentações da DHL não trazem fuso horário: o Peek interpreta pelo relógio do local e lista o histórico próprio da DHL. Quando a resposta da DHL traz um código da CTT Express, o Peek também consulta a [CTT Express](carrier:ctt-express) e passa a acompanhá-la assim que surgir movimentação tão recente quanto a última da DHL. Os status preservam o inglês da DHL, exceto `Delivered` e `Out for delivery`, que aparecem com o texto do próprio Peek. O Peek pode avisar quando o status muda. Não há data prevista nem horário exato de entrega exibidos para a DHL eCommerce Iberia.
 
 ## Perguntas sobre o rastreamento da DHL eCommerce
 
@@ -90,7 +90,7 @@ Confirme o código e a transportadora com a loja: códigos de 10 dígitos são c
 Parte delas. Pela joint venture assinada em maio de 2026 entre DHL eCommerce e CTT, a CTT Express assume entregas a consumidores na Espanha e a operação em Portugal migra para a CTT Expresso. Se surgir um código da CTT Express no rastreamento, acompanhe em [CTT Express](carrier:ctt-express).
 
 :::sources
-- [CTT: CTT e DHL Ecommerce selam parceria estratégica](https://www.ctt.pt/grupo-ctt/media/noticias/ctt-e-dhl-ecommerce-selam-parceria-estrategica-para-criar-rede-de-distribuicao-de-encomendas-mais-completa-da-peninsula-iberica) – joint venture signed 12 May 2026, DHL eCommerce Portugal to CTT Expresso, CTT Express for consumers in Spain, DHL for business deliveries
-- [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – shop responsible for damage until delivery, 30 days, extra time, refund
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, status wordings and their stages, ServicePoint shop, shipment links, former DHL Parcel Iberia name, CTT Express numbers
+- [CTT: CTT e DHL Ecommerce selam parceria estratégica](https://www.ctt.pt/grupo-ctt/media/noticias/ctt-e-dhl-ecommerce-selam-parceria-estrategica-para-criar-rede-de-distribuicao-de-encomendas-mais-completa-da-peninsula-iberica) – joint venture assinada em 12 de maio de 2026, DHL eCommerce Portugal para a CTT Expresso, CTT Express para consumidores na Espanha, DHL para entregas a empresas
+- [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – loja responsável por danos até a entrega, 30 dias, prazo adicional, reembolso
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê, textos de status e suas etapas, loja ServicePoint, links de envio, antigo nome DHL Parcel Iberia, códigos da CTT Express
 :::

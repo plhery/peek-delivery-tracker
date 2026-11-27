@@ -17,7 +17,7 @@ DHL Express 将追踪单号称为运单号（waybill number）。你可以在商
 | `4829173602` | 运单号：10 位数字，用于追踪整票货件，最后一位是校验位。 |
 | `JD014600004829173605` | 单件编号（piece number）：`JD01` 加 16 位数字，在面单下方条形码处印作 `(J)JD…`。一票多件货件中的每个包裹都有各自件号，并可关联回主运单号。 |
 
-10 位纯数字格式也适用于 [Mondial Relay](carrier:mondial-relay)、Relais Colis、Estafeta、Packeta、DHL eCommerce Iberia 和 [DHL Paket](carrier:dhl)，因此请先核对商家发货邮件中写明的承运商。
+10 位纯数字格式也适用于 [Mondial Relay](carrier:mondial-relay)、Relais Colis、Estafeta、Packeta、[DHL eCommerce Iberia](carrier:dhl-ecommerce-es) 和 [DHL Paket](carrier:dhl)，因此请先核对商家发货邮件中写明的承运商。
 
 DHL 会循环复用旧运单号：部分单号可能附带先前旧货件的扫描记录，Peek 会自动忽略这些历史旧记录。
 

@@ -16,7 +16,7 @@ A GLS não publica tamanho nem formato para os códigos espanhóis. O formulári
 
 A página pergunta primeiro se o envio é nacional ou internacional; em qualquer caso, sem o código postal de destino não mostra nada.
 
-Dez dígitos também servem para outras transportadoras, como a DHL eCommerce Iberia: se a GLS não localizar o código com o código postal correto, confira qual empresa aparece no e-mail da loja.
+Dez dígitos também servem para outras transportadoras, como a [DHL eCommerce Iberia](carrier:dhl-ecommerce-es): se a GLS não localizar o código com o código postal correto, confira qual empresa aparece no e-mail da loja.
 
 ## O que significam os status da GLS Espanha
 

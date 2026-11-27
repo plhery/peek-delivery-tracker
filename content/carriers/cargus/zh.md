@@ -80,7 +80,7 @@ Cargus 英文联系页面公布如下（罗马尼亚时间）：
 
 ## 使用 Peek 跟踪 Cargus 包裹
 
-[Peek](/) 无法仅凭数字断定 Cargus AWB。当你在罗马尼亚查件时，Peek 会对以 `1` 开头的 10 位数字，或以 `85`/`86` 开头的 9 位数字同时询问 Cargus 以及其他格式相符的快递（如 DHL eCommerce Iberia、[BOX NOW](carrier:box-now) 或 [TNT](carrier:tnt)）；在罗马尼亚以外地区，Peek 仅在物流查询服务均无结果后才将 Cargus 与 DPD Ireland 等作为兜底查询。当只有 Cargus 查有记录时，会显示“Cargus 有这个包裹的记录。”；若多家均有记录则由你选择。遇到其他格式时，可点击“更换”手动选“Cargus”，或直接粘贴罗马尼亚语/英文 `cargus.ro` 查件链接，无论单号格式如何都会直接按 Cargus 追踪。
+[Peek](/) 无法仅凭数字断定 Cargus AWB。当你在罗马尼亚查件时，Peek 会对以 `1` 开头的 10 位数字，或以 `85`/`86` 开头的 9 位数字同时询问 Cargus 以及其他格式相符的快递（如 [DHL eCommerce Iberia](carrier:dhl-ecommerce-es)、[BOX NOW](carrier:box-now) 或 [TNT](carrier:tnt)）；在罗马尼亚以外地区，Peek 仅在物流查询服务均无结果后才将 Cargus 与 DPD Ireland 等作为兜底查询。当只有 Cargus 查有记录时，会显示“Cargus 有这个包裹的记录。”；若多家均有记录则由你选择。遇到其他格式时，可点击“更换”手动选“Cargus”，或直接粘贴罗马尼亚语/英文 `cargus.ro` 查件链接，无论单号格式如何都会直接按 Cargus 追踪。
 
 Peek 读取 Cargus 应用背后的服务（它能查到部分网页端显示未找到的包裹），列出带日期、时间、城镇及县名的每条扫描，状态保留 Cargus 原文（多为英文，少量罗马尼亚语）。当你正在 Peek 中查看包裹，或派送当天已开启通知时，Peek 最多每 10 分钟查询一次；在 Cargus 扫描包裹为 `With courier` 的当天，自罗马尼亚时间早上 6 点起每 2 分钟查询一次。连续两天无新动态（或在“已生成面单”/“已揽收”停留满 12 小时）后改为每小时一次；在“已生成面单”停留满 7 天后每 6 小时一次。若包裹在“已生成面单”、“已揽收”或“运输中”连续 4 天无新记录，Peek 会显示“自……起没有物流更新”并提供“向 Cargus 寻求帮助”链接。Peek 可以按“每次扫描”、“重要环节”或“仅派送当天”通知你。Cargus 不提供预计送达日，也不会在接口中标明具体存放包裹的 SHIP & GO 网点或快递柜（请查看 Cargus 通知）。
 

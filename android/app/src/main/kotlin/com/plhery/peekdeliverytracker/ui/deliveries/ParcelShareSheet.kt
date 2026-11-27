@@ -18,8 +18,10 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.InputTransformation
+import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
@@ -30,6 +32,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.autofill.ContentType
@@ -87,6 +90,7 @@ import com.plhery.peekdeliverytracker.core.masked
 import com.plhery.peekdeliverytracker.core.sharedParcelDetail
 import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.platform.ShareTargetChosen
+import com.plhery.peekdeliverytracker.ui.KeptTyping
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
@@ -97,6 +101,7 @@ import com.plhery.peekdeliverytracker.ui.draw.CarrierFleetMark
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.SmallPip
 import com.plhery.peekdeliverytracker.ui.draw.Toggle
+import com.plhery.peekdeliverytracker.ui.setTextIfChanged
 import com.plhery.peekdeliverytracker.ui.sheet.KeyboardScrollColumn
 import com.plhery.peekdeliverytracker.ui.sheet.Sheet
 import com.plhery.peekdeliverytracker.ui.sheet.SheetDetent
@@ -181,9 +186,16 @@ internal class ParcelShareSheetWork(
     val parcel: Parcel? = null,
     private val preview: LaunchPreviews = LaunchPreviews(),
 ) {
-    /** `model.words`, as typed: set with each keystroke, so the fields never show a frame behind it. */
+    /** `model.words` as the sheet shows them: the switches at once, what the fields hold once they hand it over. */
     var words: ParcelShareWords by mutableStateOf(model.words)
         private set
+
+    /** A gift's note and who it is from as their fields hold them, handed to the model as they change. */
+    val noteField = TextFieldState(model.words.note)
+    val fromField = TextFieldState(model.words.from)
+
+    /** What the fields handed the model last, which comes back from it: no news for them. */
+    private var handed: Pair<String, String>? = null
 
     /** The sheet stands at its large detent: dragged there, or opened fully to write a gift's note (`detent`). */
     var large: Boolean by mutableStateOf(false)
@@ -210,7 +222,22 @@ internal class ParcelShareSheetWork(
     private val jobs = mutableListOf<Job>()
 
     fun start() {
-        jobs += scope.launch { model.wordsFlow.collect { words = it } }
+        jobs += scope.launch {
+            model.wordsFlow.collect {
+                words = it
+                if (it.note to it.from != handed) {
+                    noteField.setTextIfChanged(it.note)
+                    fromField.setTextIfChanged(it.from)
+                }
+            }
+        }
+        jobs += scope.launch {
+            snapshotFlow { noteField.text.toString() to fromField.text.toString() }.collect { typed ->
+                if (typed == words.note to words.from) return@collect
+                handed = typed
+                type(words.copy(note = typed.first, from = typed.second))
+            }
+        }
         jobs += scope.launch {
             preview.prepareShare(model.parcelId)
             model.load()
@@ -615,18 +642,14 @@ private fun GiftWords(work: ParcelShareSheetWork, words: ParcelShareWords) {
     val writing = { work.large = true }
     Column(Modifier.fillMaxWidth().background(colors.raised, ContinuousRoundedShape(14.dp)).padding(vertical = 14.dp)) {
         Column(Modifier.padding(horizontal = 14.dp)) {
-            WordsField(PARCEL_SHARE_NOTE, localizer.text(if (words.early) "share.gift.noteNow" else "share.gift.note"), words.note, name = false, writing) {
-                work.type(work.words.copy(note = it))
-            }
+            WordsField(PARCEL_SHARE_NOTE, localizer.text(if (words.early) "share.gift.noteNow" else "share.gift.note"), work.noteField, GiftNoteKept, name = false, writing)
         }
         // Right under the note it shows early; its own 14 in, as the switches above.
         ShareSwitch(PARCEL_SHARE_EARLY, null, localizer.text("share.gift.early"), null, words.early, enabled = true) {
             work.type(work.words.copy(early = it))
         }
         Column(Modifier.padding(horizontal = 14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            WordsField(PARCEL_SHARE_FROM, localizer.text("share.gift.from"), words.from, name = true, writing) {
-                work.type(work.words.copy(from = it))
-            }
+            WordsField(PARCEL_SHARE_FROM, localizer.text("share.gift.from"), work.fromField, GiftFromKept, name = true, writing)
             Text(
                 localizer.text(if (words.early) "share.gift.privateEarly" else "share.gift.private"),
                 color = colors.secondaryText,
@@ -636,6 +659,10 @@ private fun GiftWords(work: ParcelShareSheetWork, words: ParcelShareWords) {
     }
 }
 
+/** A gift's note and who it is from, each kept within what a link carries as it is typed. */
+private val GiftNoteKept = KeptTyping { ParcelShareWords(note = it).limited.note }
+private val GiftFromKept = KeptTyping { ParcelShareWords(from = it).limited.from }
+
 /**
  * `wordsField`: its label in caption secondary, which TalkBack leaves for the field it names, 5 over the field in
  * subheadline, 12 and 10 in on Brand's background with 10-point continuous corners, 44 tall at least. The note grows
@@ -643,15 +670,14 @@ private fun GiftWords(work: ParcelShareSheetWork, words: ParcelShareWords) {
  * keeps the focus and the keyboard through the window made again.
  */
 @Composable
-private fun WordsField(tag: String, label: String, value: String, name: Boolean, writing: () -> Unit, change: (String) -> Unit) {
+private fun WordsField(tag: String, label: String, state: TextFieldState, kept: InputTransformation, name: Boolean, writing: () -> Unit) {
     val colors = PeekTheme.colors
     val style = PeekTheme.type.subheadline.sfLines()
     val focusManager = LocalFocusManager.current
     Column(verticalArrangement = Arrangement.spacedBy(5.dp)) {
         Text(label, Modifier.clearAndSetSemantics {}, color = colors.secondaryText, style = PeekTheme.type.caption.sfLines())
         BasicTextField(
-            value,
-            change,
+            state,
             Modifier
                 .fillMaxWidth()
                 .testTag(tag)
@@ -661,17 +687,16 @@ private fun WordsField(tag: String, label: String, value: String, name: Boolean,
                     contentDescription = label
                     if (name) contentType = ContentType.PersonFullName
                 },
+            inputTransformation = kept,
             textStyle = style.copy(color = colors.label),
-            singleLine = name,
-            minLines = if (name) 1 else 2,
-            maxLines = if (name) 1 else 5,
+            lineLimits = if (name) TextFieldLineLimits.SingleLine else TextFieldLineLimits.MultiLine(minHeightInLines = 2, maxHeightInLines = 5),
             cursorBrush = SolidColor(colors.ink),
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.Sentences,
                 imeAction = if (name) ImeAction.Done else ImeAction.Default,
             ),
-            keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
-            decorationBox = { text ->
+            onKeyboardAction = { performDefault -> if (name) focusManager.clearFocus() else performDefault() },
+            decorator = { text ->
                 Box(
                     Modifier
                         .background(colors.sheet, ContinuousRoundedShape(10.dp))

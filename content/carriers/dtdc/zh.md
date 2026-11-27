@@ -6,13 +6,13 @@ published: 2026-11-26
 updated: 2026-11-26
 ---
 
-DTDC（*DTDC Express Limited*）创立于 1990 年 7 月 26 日，总部位于班加罗尔，是印度规模最大的快递物流网络之一。DTDC 依托超过 16,500 家渠道合作伙伴覆盖 96% 的印度人口（Express Parcel 服务覆盖超过 15,300 个邮编区），在 7 个国家设有本土网点并通达全球 220 多个目的地，承运印度国内快递、次日达 *Express Premium*、*AirMax*、*Raftaar*、第三方物流（3PL）、零担货运（LTL）以及 *DTDC WorldWyde* 国际快递。你可以在 [DTDC 官方查询页](https://www.dtdc.com/track-your-shipment/)或 [MyDTDC](https://web.mydtdc.in/) 查件，或直接将 AWB 单号粘贴到上方输入框。
+DTDC（*DTDC Express Limited*）创立于 1990 年 7 月 26 日，总部位于班加罗尔，是印度规模最大的快递物流网络之一。DTDC 依托超过 16,500 家渠道合作伙伴覆盖 96% 的印度人口（Express Parcel 服务覆盖超过 15,300 个邮编区），在 7 个国家设有本土网点并通达全球 220 多个目的地，承运印度国内快递、次日达 *Express Premium*、*AirMax*、*Raftaar*、第三方物流（3PL）、零担货运（LTL）以及 *DTDC WorldWyde* 国际快递。你可以在 [DTDC 的查件页面](https://www.dtdc.com/track-your-shipment/)或 [MyDTDC](https://web.mydtdc.in/) 查件，或直接将 AWB 单号粘贴到上方输入框。
 
 ## DTDC 运单号格式（AWB）
 
 订单确认后，DTDC 会通过邮件和短信发送你的航空运单号（AWB）。印度国内与国际 DTDC 运单常见字母数字组合如下：
 
-| 格式（示例编号） | 含义 |
+| 格式（虚构） | 含义 |
 | --- | --- |
 | `N48291736` | 标准 9 位 DTDC 运单号（`N` + 8 位数字）。 |
 | `7D482917364` | 11 位 DTDC 运单号（`7D` + 9 位数字）。 |
@@ -35,7 +35,7 @@ DTDC 按印度标准时间（`Asia/Kolkata`，UTC+5:30）记录里程碑状态�
 | `Delivered`（正向派送段） | 已签收送达给收件人。 | “已签收” |
 | `Delivered`（位于 `RTO` 退件段） | 已退回并交还给原寄件人。 | “已退回寄件人” |
 
-**注意识别 `RTO` 退件。** 包裹无法投递时，DTDC 会开启 Return To Origin（`RTO`）退回航段，并在退还给寄件人时同样记录一条 `Delivered`。在以为包裹已送达给你之前，务必核对最新航段是正向派送还是 `RTO`。
+**注意识别 `RTO` 退件。** 包裹无法投递时，DTDC 会开启一段 Return To Origin（`RTO`）退件行程；包裹回到寄件人手中时，这段行程也会记录一条 `Delivered`。在认定包裹已送达给你之前，先核对最新一段是正向派送还是 `RTO`。
 
 ## DTDC 国内与国际服务
 
@@ -45,14 +45,14 @@ DTDC 按印度标准时间（`Asia/Kolkata`，UTC+5:30）记录里程碑状态�
 - **周日与节假日营业：** DTDC [常见问题](https://www.dtdc.com/faq/)注明，部分 DTDC 地方网点视各自营业时间在周日及公众假期照常运营。
 - **国际运输参考时效（*DTDC WorldWyde*）：** 通达全球 220+ 目的地并提供自有清关与电子 KYC / CSB-V 申报——*WorldWyde Express Premium*（**4–5 天**）、*WorldWyde Express Standard*（**7–8 天**）、*WorldWyde Imports Standard*（**10–12 天**）及 *WorldWyde B2C Standard*（**15–20 天**）。实际清关时长视目的地海关而定，详见[海关滞留包裹指南](guide:customs)（英文）。
 
-DTDC 服务页面未公布派送尝试次数或保管天数；派送失败显示 `Undelivered`，再次派送显示 `Reattempt Initiated`。
+DTDC 服务页面未公布派送尝试次数或保管天数；派送未成功显示 `Undelivered`，再次派送显示 `Reattempt Initiated`。
 
 ## DTDC 包裹延误、未送达或遗失
 
 如为电商购物订单，请先联系网店卖家授权修改地址、重派或退款——尤其是当轨迹显示 `Return Approval awaited` 或 `RTO Booked` 时。
 
 - **修改地址、改期或网点自提：** 可在 [Track Your Shipment](https://www.dtdc.com/track-your-shipment/) 页面发起争议申诉、在线客服对话或申请回电，也可通过 [Customer Care](https://www.dtdc.com/customer-care/) 表单提交变更地址/手机号、改选派送日或自提申请。
-- **显示 `Delivered` 却未收到：** 先确认是否为退回寄件人的 `RTO` 航段；若是正向派送，请向家人、邻居和物业保安核实，并立即向 DTDC 客服与卖家申诉。
+- **显示 `Delivered` 却未收到：** 先确认是否为退回寄件人的 `RTO` 退件；若是正向派送，请向家人、邻居和物业保安核实，并立即向 DTDC 客服与卖家申诉。
 - 详见[物流停止更新的原因](guide:tracking-not-updating)（英文）、[显示已签收却未收到](guide:delivered-not-received)（英文）、[包裹破损处理](guide:damaged-parcel)（英文）、[包裹遗失处理](guide:lost-parcel)（英文）和[包裹被退回寄件人](guide:returned-to-sender)（英文）。
 
 ## DTDC 客服与官方联系方式
@@ -67,21 +67,21 @@ DTDC 服务页面未公布派送尝试次数或保管天数；派送失败显示
 
 ## 使用 Peek 跟踪 DTDC 包裹
 
-[Peek](/) 会以高置信度自动识别 `N` + 8 位数字（示例 `N48291736`）以及 `7D` / `7X` + 9 位数字（`7D482917364`、`7X482917364`）为 DTDC，同时直接识别带 `trackingId=` 或 `awb=` 参数的 `dtdc.com` 链接。对于以其他字母开头的 9 位或 11 位字母数字单号，可在添加时点击“更换”或在包裹页点击“更换快递公司”手动选择 DTDC。
+[Peek](/) 会以高置信度自动识别 `N` + 8 位数字（`N48291736`，虚构）以及 `7D` / `7X` + 9 位数字（`7D482917364`、`7X482917364`）为 DTDC，也能识别粘贴的带 `trackingId=` 或 `awb=` 参数的 `dtdc.com` 链接。对于以其他字母开头的 9 位或 11 位字母数字单号，可在添加时点击“更换”或在包裹页点击“更换快递公司”手动选择 DTDC。
 
-Peek 通过两步直连方式查询 DTDC——先请求 MyDTDC 匿名接口，必要时回退读取 `dtdc.com` 查询页。页面展示对应阶段（“已生成面单”、“已揽收”、“运输中”、“派送中”、“派送未成功”、“需要留意”、“已退回寄件人”、“已签收”）、DTDC 扫描原文、枢纽或网点位置，并将印度标准时间（`Asia/Kolkata`）换算为你的设备本地时间。尤为重要的是，当 DTDC 将 `RTO` 退件航段标为 `Delivered` 时，Peek 会准确映射为“已退回寄件人”而非“已签收”。街道地址、电话/联系信息、下单元数据与无标注重量数值都会被剔除；DTDC 查询系统不提供预计送达日期或自提点信息。
+Peek 通过两步直连方式查询 DTDC——先请求 MyDTDC 匿名接口，必要时回退读取 `dtdc.com` 查询页。页面展示对应阶段（“已生成面单”、“已揽收”、“运输中”、“派送中”、“派送未成功”、“需要留意”、“已退回寄件人”、“已签收”）、DTDC 扫描原文、枢纽或网点位置，并将印度标准时间（`Asia/Kolkata`）换算为你的设备本地时间。尤为重要的是，当 DTDC 将 `RTO` 退件段标为 `Delivered` 时，Peek 会显示“已退回寄件人”，而不是“已签收”。街道地址、电话/联系信息、下单元数据与无标注重量数值都会被剔除；DTDC 查询系统不提供预计送达日期或自提点信息。
 
-当你正在 Peek 中查看该包裹，或派送当天已开启通知且 DTDC 官网查询正常响应时，Peek 最快每 10 分钟检查一次；在 DTDC 显示 `Out For Delivery` 当天，从印度时间早上 6 点起每 2 分钟检查一次。其余情况下每小时检查一次。若在“已生成面单”或“已揽收”停留超过 12 小时，或连续两天无新动态，无论如何关注均改为每小时一次；在“已生成面单”停留满 7 天改为每 6 小时一次。当 DTDC 查询无响应、Peek 仅通过物流查询服务跟踪时，会每小时查询一次，静默一天后每 3 小时一次，派送当天最多每 15 分钟一次。
+当你正在 Peek 中查看该包裹，或派送当天已开启通知时，Peek 最多每 10 分钟检查一次；在 DTDC 显示 `Out For Delivery` 的当天，只要 DTDC 自己的查件系统正常响应，自印度时间早上 6 点起每 2 分钟检查一次。其余情况下每小时检查一次。若在“已生成面单”或“已揽收”停留超过 12 小时，或连续两天无新动态，无论如何关注均改为每小时一次；在“已生成面单”停留满 7 天改为每 6 小时一次。当 DTDC 查询无响应、Peek 仅通过物流查询服务跟踪时，会每小时查询一次，静默一天后每 3 小时一次，派送当天最多每 15 分钟一次。
 
 若最新扫描已过 4 天，且包裹仍处于“已生成面单”、“已揽收”或“运输中”，Peek 会按该扫描日期做出提示，例如“自10月12日周一起没有物流更新”。包裹页面会显示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 DTDC 查询。”，并提供前往 DTDC Customer Care 的“向 DTDC 寻求帮助”链接。若超过三周没有新扫描，则会提示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 DTDC 查询。”
 
-你可以自由选择“每次扫描”、“重要环节”或“仅派送当天”提醒方案。Peek 仅监控物流更新，无法代你改约 DTDC 派送、更改地址或发起争议申诉。
+Peek 可以按“每次扫描”、“重要环节”或“仅派送当天”通知你。Peek 仅监控物流更新，无法代你改约 DTDC 派送、更改地址或发起争议申诉。
 
-## DTDC 物流查询常见问题
+## 关于 DTDC 物流查询的问题
 
 ### DTDC 运单号（AWB）长什么样？
 
-常见 DTDC 运单号为以 `N` 开头的 9 位字符（如示例 `N48291736`），或以 `7D`/`7X` 开头的 11 位字符（如 `7D482917364`、`7X482917364`）；DTDC 也会使用其他单字母开头的 9 位与 11 位前缀。
+常见 DTDC 运单号为以 `N` 开头的 9 位字符（如 `N48291736`，虚构），或以 `7D`/`7X` 开头的 11 位字符（如 `7D482917364`、`7X482917364`）；DTDC 也会使用其他单字母开头的 9 位与 11 位前缀。
 
 ### DTDC 显示 `RTO Booked` 或 `Return Initiated` 是什么意思？
 
@@ -96,13 +96,13 @@ Peek 通过两步直连方式查询 DTDC——先请求 MyDTDC 匿名接口，�
 拨打 `+91-9606 911 811`、发邮件至 `customersupport@dtdc.com`，或在 [dtdc.com/customer-care/](https://www.dtdc.com/customer-care/) 使用查询表单与 DIVA 智能助手。
 
 :::sources
-- [DTDC: Home](https://www.dtdc.com/in/) – official website notice (`www.dtdc.com` only), DIVA support and service overview
-- [DTDC: About Us](https://www.dtdc.com/about-us/) – founded 26 July 1990, Bengaluru headquarters, 16,500+ channel partners, 96% Indian population reach, 7 countries, 220+ destinations and 5.6M+ MyDTDC users
-- [DTDC: Track Your Shipment](https://www.dtdc.com/track-your-shipment/) – AWB / reference lookup, SMS/email AWB notice, dispute, chat and callback options
-- [DTDC: Express Parcel](https://www.dtdc.com/express-parcel/) – 15,300+ pincodes, COD, delivery authentication and reverse logistics
-- [DTDC: International Shipping (WorldWyde)](https://www.dtdc.com/international-shipping/) – 220+ destinations, WorldWyde delivery windows (4–5, 7–8, 10–12, 15–20 days) and CSB-V/KYC clearance
-- [DTDC: FAQ](https://www.dtdc.com/faq/) – Sunday/holiday branch availability and tracking FAQs
-- [DTDC: Customer Care](https://www.dtdc.com/customer-care/) – `+91-9606 911 811`, `customersupport@dtdc.com`, online query form for address, date and self-collection requests (help URL linked by Peek)
-- [MyDTDC Portal](https://web.mydtdc.in/) – MyDTDC web tracking portal
-- [Universal Parcel Scraper: dtdc](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/dtdc) – `N`/`7D`/`7X` high-confidence detection, `dtdc.com` link rules, two-step lookup, RTO return-leg handling, `Asia/Kolkata` timezone, dropped fields and help URL
+- [DTDC: Home](https://www.dtdc.com/in/) – 官方网站声明（仅 `www.dtdc.com`）、DIVA 智能助手与服务概况
+- [DTDC: About Us](https://www.dtdc.com/about-us/) – 1990 年 7 月 26 日创立、总部班加罗尔、16,500 多家渠道合作伙伴、覆盖 96% 的印度人口、7 个国家、220 多个目的地及 560 多万 MyDTDC 用户
+- [DTDC: Track Your Shipment](https://www.dtdc.com/track-your-shipment/) – AWB / 参考号查询、短信与邮件发送的 AWB 通知、争议申诉、在线客服与回电
+- [DTDC: Express Parcel](https://www.dtdc.com/express-parcel/) – 15,300 多个邮编区、货到付款、签收验证与逆向物流
+- [DTDC: International Shipping (WorldWyde)](https://www.dtdc.com/international-shipping/) – 220 多个目的地、WorldWyde 运输时效（4–5、7–8、10–12、15–20 天）与 CSB-V/KYC 清关
+- [DTDC: FAQ](https://www.dtdc.com/faq/) – 网点周日与节假日营业情况及查件常见问题
+- [DTDC: Customer Care](https://www.dtdc.com/customer-care/) – `+91-9606 911 811`、`customersupport@dtdc.com`、用于修改地址、改期和自提申请的在线表单（Peek 链接的帮助页面）
+- [MyDTDC Portal](https://web.mydtdc.in/) – MyDTDC 网页查件门户
+- [Universal Parcel Scraper: dtdc](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/dtdc) – `N`/`7D`/`7X` 高置信度识别、`dtdc.com` 链接规则、两步查询、RTO 退件段处理、`Asia/Kolkata` 时区、舍弃的字段及帮助链接
 :::

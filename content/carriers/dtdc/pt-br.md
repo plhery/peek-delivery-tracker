@@ -35,7 +35,7 @@ A DTDC registra marcos e passagens por centros de triagem (como `Arrived at DELH
 | `Delivered` (trecho normal) | Entregue ao destinatário. | "Entregue" |
 | `Delivered` (em trecho `RTO`) | Devolvida e entregue de volta ao remetente original. | "Devolvida ao remetente" |
 
-**Atenção às devoluções `RTO`.** Quando um envio não pode ser entregue, a DTDC abre um trecho de retorno à origem (`RTO`) que gera seu próprio registro `Delivered` ao chegar de volta ao remetente. Confira sempre se o trecho mais recente é o envio normal ou um `RTO` antes de presumir que foi entregue a você.
+**Atenção às devoluções `RTO`.** Quando um envio não pode ser entregue, a DTDC abre um trecho de retorno à origem (`RTO`) que gera seu próprio registro `Delivered` ao chegar de volta ao remetente. Confira se o trecho mais recente é o envio normal ou um `RTO` antes de presumir que foi entregue a você.
 
 ## Serviços domésticos e internacionais da DTDC
 
@@ -45,7 +45,7 @@ Segundo [DTDC Express Parcel](https://www.dtdc.com/express-parcel/), [DTDC Inter
 - **Funcionamento aos domingos e feriados:** o [FAQ da DTDC](https://www.dtdc.com/faq/) informa que algumas agências locais funcionam aos domingos e feriados públicos conforme o expediente local.
 - **Prazos internacionais (*DTDC WorldWyde*):** cobrindo mais de 220 destinos com desembaraço aduaneiro próprio e KYC/CSB-V digital — *WorldWyde Express Premium* (**4–5 dias**), *WorldWyde Express Standard* (**7–8 dias**), *WorldWyde Imports Standard* (**10–12 dias**) e *WorldWyde B2C Standard* (**15–20 dias**). O prazo real depende da alfândega de destino; veja [encomendas retidas na alfândega](guide:customs).
 
-As páginas da DTDC não publicam número fixo de tentativas ou prazo de guarda: falhas aparecem como `Undelivered` e novas tentativas como `Reattempt Initiated`.
+As páginas de serviço da DTDC não publicam um número de tentativas de entrega nem um prazo de guarda. Uma entrega não realizada aparece como `Undelivered`, e uma nova tentativa como `Reattempt Initiated`.
 
 ## Encomenda DTDC atrasada, não entregue ou extraviada
 
@@ -69,7 +69,7 @@ Contatos publicados em [DTDC Customer Care](https://www.dtdc.com/customer-care/)
 
 O [Peek](/) reconhece automaticamente com alta confiança códigos `N` + 8 dígitos (`N48291736`, inventado) e `7D` / `7X` + 9 dígitos (`7D482917364`, `7X482917364`) como DTDC, além de links colados de `dtdc.com` contendo `trackingId=` ou `awb=`. Para códigos alfanuméricos de 9 ou 11 caracteres com outras letras iniciais, toque em "Trocar" ao adicionar ou "Trocar transportadora" na tela da encomenda e selecione DTDC.
 
-O Peek consulta a DTDC em duas etapas diretas — primeiro pelo feed anônimo do MyDTDC e, se necessário, recorrendo à página de rastreamento de `dtdc.com`. Exibe a etapa mapeada ("Etiqueta criada", "Recebida pela transportadora", "Em trânsito", "Saiu para entrega", "Tentativa de entrega", "Precisa de atenção", "Devolvida ao remetente", "Entregue"), o texto da DTDC, o hub ou filial e os horários convertidos de `Asia/Kolkata` para o fuso do seu aparelho. Quando a DTDC marca um trecho `RTO` como `Delivered`, o Peek mapeia corretamente para "Devolvida ao remetente" em vez de "Entregue". Endereços completos, telefones/contatos, metadados de reserva e valores de peso sem unidade são descartados; o rastreador da DTDC não informa data prevista nem ponto de retirada.
+O Peek consulta a DTDC em duas etapas diretas — primeiro pelo feed anônimo do MyDTDC e, se necessário, recorrendo à página de rastreamento de `dtdc.com`. Exibe a etapa mapeada ("Etiqueta criada", "Recebida pela transportadora", "Em trânsito", "Saiu para entrega", "Tentativa de entrega", "Precisa de atenção", "Devolvida ao remetente", "Entregue"), o texto da DTDC, o hub ou filial e os horários convertidos de `Asia/Kolkata` para o fuso do seu aparelho. Quando a DTDC marca um trecho `RTO` como `Delivered`, o Peek mostra "Devolvida ao remetente" em vez de "Entregue". Endereços completos, telefones/contatos, metadados de reserva e valores de peso sem identificação são descartados; o rastreador da DTDC não informa data prevista nem ponto de retirada.
 
 Com a encomenda aberta no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta até a cada 10 minutos; no dia em que a DTDC exibe `Out For Delivery`, a cada 2 minutos a partir das 6h no horário da Índia enquanto o próprio rastreador da DTDC responder. Nos demais momentos, verifica de hora em hora. Após 12 horas apenas em "Etiqueta criada" ou "Recebida pela transportadora", ou dois dias sem novidades, passa a verificar a cada hora de qualquer modo, e a cada 6 horas depois de sete dias em "Etiqueta criada". Quando o rastreador da DTDC não responde e o Peek acompanha apenas por serviços de rastreamento, consulta a cada hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega.
 
@@ -81,7 +81,7 @@ Você pode escolher alertas para "Cada movimentação", "Etapas importantes" ou 
 
 ### Como é um código de rastreamento (AWB) da DTDC?
 
-Os códigos mais comuns da DTDC têm 9 caracteres começando por `N` (`N48291736`, inventado) ou 11 caracteres começando por `7D` ou `7X` (`7D482917364`, `7X482917364`), embora a DTDC também use outros prefixos de uma letra com 9 ou 11 caracteres.
+Os códigos comuns da DTDC têm 9 caracteres começando por `N` (`N48291736`, inventado) ou 11 caracteres começando por `7D` ou `7X` (`7D482917364`, `7X482917364`), embora a DTDC também use outros prefixos de uma letra com 9 ou 11 caracteres.
 
 ### O que significa `RTO Booked` ou `Return Initiated` na DTDC?
 
@@ -96,13 +96,13 @@ Em [dtdc.com/international-shipping/](https://www.dtdc.com/international-shippin
 Ligue para `+91-9606 911 811`, envie e-mail para `customersupport@dtdc.com` ou utilize o formulário e a assistente DIVA em [dtdc.com/customer-care/](https://www.dtdc.com/customer-care/).
 
 :::sources
-- [DTDC: Home](https://www.dtdc.com/in/) – official website notice (`www.dtdc.com` only), DIVA support and service overview
-- [DTDC: About Us](https://www.dtdc.com/about-us/) – founded 26 July 1990, Bengaluru headquarters, 16,500+ channel partners, 96% Indian population reach, 7 countries, 220+ destinations and 5.6M+ MyDTDC users
-- [DTDC: Track Your Shipment](https://www.dtdc.com/track-your-shipment/) – AWB / reference lookup, SMS/email AWB notice, dispute, chat and callback options
-- [DTDC: Express Parcel](https://www.dtdc.com/express-parcel/) – 15,300+ pincodes, COD, delivery authentication and reverse logistics
-- [DTDC: International Shipping (WorldWyde)](https://www.dtdc.com/international-shipping/) – 220+ destinations, WorldWyde delivery windows (4–5, 7–8, 10–12, 15–20 days) and CSB-V/KYC clearance
-- [DTDC: FAQ](https://www.dtdc.com/faq/) – Sunday/holiday branch availability and tracking FAQs
-- [DTDC: Customer Care](https://www.dtdc.com/customer-care/) – `+91-9606 911 811`, `customersupport@dtdc.com`, online query form for address, date and self-collection requests (help URL linked by Peek)
-- [MyDTDC Portal](https://web.mydtdc.in/) – MyDTDC web tracking portal
-- [Universal Parcel Scraper: dtdc](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/dtdc) – `N`/`7D`/`7X` high-confidence detection, `dtdc.com` link rules, two-step lookup, RTO return-leg handling, `Asia/Kolkata` timezone, dropped fields and help URL
+- [DTDC: Home](https://www.dtdc.com/in/) – aviso de site oficial (só `www.dtdc.com`), assistente DIVA e visão geral dos serviços
+- [DTDC: About Us](https://www.dtdc.com/about-us/) – fundada em 26 de julho de 1990, sede em Bengaluru, mais de 16.500 parceiros de canal, alcance de 96% da população indiana, 7 países, mais de 220 destinos e mais de 5,6 milhões de usuários do MyDTDC
+- [DTDC: Track Your Shipment](https://www.dtdc.com/track-your-shipment/) – consulta por AWB / referência, aviso do AWB por SMS/e-mail, contestação, chat e retorno telefônico
+- [DTDC: Express Parcel](https://www.dtdc.com/express-parcel/) – mais de 15.300 pincodes, pagamento na entrega, autenticação na entrega e logística reversa
+- [DTDC: International Shipping (WorldWyde)](https://www.dtdc.com/international-shipping/) – mais de 220 destinos, prazos WorldWyde (4–5, 7–8, 10–12, 15–20 dias) e desembaraço CSB-V/KYC
+- [DTDC: FAQ](https://www.dtdc.com/faq/) – funcionamento das agências aos domingos e feriados e perguntas sobre rastreamento
+- [DTDC: Customer Care](https://www.dtdc.com/customer-care/) – `+91-9606 911 811`, `customersupport@dtdc.com`, formulário on-line para pedidos de endereço, data e retirada (página de ajuda vinculada pelo Peek)
+- [MyDTDC Portal](https://web.mydtdc.in/) – portal web de rastreamento MyDTDC
+- [Universal Parcel Scraper: dtdc](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/dtdc) – detecção de alta confiança de `N`/`7D`/`7X`, regras de links `dtdc.com`, consulta em duas etapas, tratamento do trecho de devolução RTO, fuso `Asia/Kolkata`, campos descartados e URL de ajuda
 :::

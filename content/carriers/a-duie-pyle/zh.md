@@ -25,10 +25,10 @@ A. Duie Pyle 货运状态历史展示简明的英文分拨站与派送节点（�
 
 | A. Duie Pyle 原文 | 对你的含义 | Peek 显示 |
 | --- | --- | --- |
-| `PICKED UP` | 已从寄件方月台揽收货物并扫描入 A. Duie Pyle 网络。 | “承运商已揽收” |
+| `PICKED UP` | 已从寄件方月台揽收货物并扫描入 A. Duie Pyle 网络。 | “已揽收” |
 | `DEPARTED TERMINAL`、`ARRIVED AT TERMINAL` | 正在各越库服务中心（如 West Chester、Carteret、Camp Hill、Albany、Buffalo、Baltimore 或 Cleveland）之间中转。 | “运输中” |
 | `OUT FOR DELIVERY` | 今天已从目的服务中心装上当地派送卡车外出派送。 | “派送中” |
-| `DELIVERED` | 已送达收货人地址并完成签收。 | “已送达” |
+| `DELIVERED` | 已送达收货人地址并完成签收。 | “已签收” |
 
 注意 A. Duie Pyle 历史记录中还会出现非位移条目（`PICKUP WINDOW`、`ETA WINDOW`、`DELIVERY APPOINTMENT WINDOW`）：Peek 会将它们从扫描列表中排除，并优先读取 `ETA WINDOW`（无则取 `DELIVERY APPOINTMENT WINDOW`）作为你的预计送达时间。送达后的开票记录 `INVOICED` 不会触发状态变化。
 
@@ -38,7 +38,7 @@ A. Duie Pyle 货运状态历史展示简明的英文分拨站与派送节点（�
 
 - **美东次日达：** A. Duie Pyle 按小时而非按天衡量时效，**98.6%** 的货物次日送达，揽收到签收平均耗时 **20 小时**。
 - **住宅大件与升降尾板：** Pyle 承接住宅货运，超过 85% 的派送车辆配备液压升降尾板（liftgate）；追踪记录中可能出现标明预约时段的 `DELIVERY APPOINTMENT WINDOW`。
-- **美东以外联运：** Pyle 通过合作货运商通达美国其他地区与加拿大。当货物移交 Dayton Freight（`DAFG`）、Southeastern Freight Lines（`SEFL`）或 Oak Harbor Freight Lines（`OAKH`）时，官网会以 SCAC 代码标出合作商并提供其 PRO 单号。
+- **美东以外联运：** Pyle 通过合作货运商通达美国其他地区与加拿大。当货物移交 Dayton Freight（`DAFG`）、Southeastern Freight Lines（`SEFL`）或 Oak Harbor Freight Lines（`OAKH`）时，其追踪页会以 SCAC 代码标出合作商并提供其 PRO 单号。
 
 ## A. Duie Pyle 货物延误、破损或缺失
 
@@ -58,17 +58,17 @@ A. Duie Pyle 货运状态历史展示简明的英文分拨站与派送节点（�
 
 ## 使用 Peek 追踪 A. Duie Pyle 货运
 
-将 `aduiepyle.com/resources/shipment-status/?tracking=` 链接粘贴到 [Peek](/) 中，Peek 会立即识别为 A. Duie Pyle。由于 8 位和 9 位纯数字与其他承运商重合（9 位数字会先问 [TNT](carrier:tnt)、[TForce Freight](carrier:tforce-freight) 和 XPO），Peek 不会仅凭裸 PRO 单号（虚构示例 `748291736` 或 `48291736`）自动查 A. Duie Pyle：输入 PRO 单号后点击添加页“更改”或包裹页“更换承运商”选择 **A. Duie Pyle**（搜 “Pyle” 或 “A Duie Pyle” 也可找到），确认后即显示承运。
+将 `aduiepyle.com/resources/shipment-status/?tracking=` 链接粘贴到 [Peek](/) 中，Peek 会识别为 A. Duie Pyle。由于 8 位和 9 位纯数字与其他承运商重合（9 位数字会先问 [TNT](carrier:tnt)、[TForce Freight](carrier:tforce-freight) 和 XPO），Peek 从不仅凭裸 PRO 单号（虚构示例 `748291736` 或 `48291736`）查询 A. Duie Pyle：输入 PRO 单号后，在添加时点“更换”或在包裹页点“更换快递公司”，选择 **A. Duie Pyle**（搜 “Pyle” 或 “A Duie Pyle” 也可找到）；Peek 随后向 A. Duie Pyle 查询该 PRO 单号，确认后显示“A. Duie Pyle 有这个包裹的记录。”
 
-Peek 读取 A. Duie Pyle 状态，展示阶段（“承运商已揽收”、“运输中”、“派送中”、“已送达”）、英文原文、分拨站所在城镇与州、预计送达日或时段（`ETA WINDOW`，无则取 `DELIVERY APPOINTMENT WINDOW`）、送达时间以及由磅换算成公斤的重量。Pyle 自带时区偏移：若与扫描地所在州一致则保留，否则按扫描地时区解析（安大略省用多伦多时间、得州埃尔帕索用山地时间；无地点则沿用相邻节点）并换算为你设备时钟；午夜零点条目仅保留日期不标具体时刻。当 Pyle 附新 PRO 号交接给 Dayton Freight、Southeastern Freight Lines 或 Oak Harbor Freight Lines 时，Peek 会查验并显示“由……派送”及双单号。在你自己的包裹页上，“收件人”栏显示收货人姓名且在途地图终点可标至目的城镇；分享链接不显示这两项，街道地址亦不显示。发货人、提单/采购单号、件数、备注、签名和签收单据均不展示。
+Peek 读取 A. Duie Pyle 状态，展示阶段（“已揽收”、“运输中”、“派送中”、“已签收”）、英文原文、分拨站所在城镇与州、预计送达日或时段（`ETA WINDOW`，无则取 `DELIVERY APPOINTMENT WINDOW`）、送达时间以及由磅换算成公斤的重量。Pyle 自带时区偏移：若与扫描地所在州一致则保留，否则按扫描地时区解析（安大略省用多伦多时间、得州埃尔帕索用山地时间；无地点则沿用相邻节点）并换算为你设备时钟；午夜零点条目仅保留日期不标具体时刻。当 Pyle 附新 PRO 号交接给 Dayton Freight、Southeastern Freight Lines 或 Oak Harbor Freight Lines 时，Peek 会查验并显示“由……派送”及双单号。在你自己的包裹页上，“收件人”栏显示收货人姓名且在途地图终点可标至目的城镇；分享链接不显示这两项，街道地址亦不显示。发货人、提单/采购单号、件数、备注、签名和签收单据均不展示。
 
-当你打开包裹，或在开启通知的情况下进入派送日时，只要 A. Duie Pyle 追踪页正常响应，Peek 最高每 10 分钟检查一次；在显示 `OUT FOR DELIVERY` 当天，自最新扫描所在时钟早上 6 点起每 2 分钟检查一次。其余时间每小时一次；在“已创建运单”或“承运商已揽收”下满 12 小时或连续两天无新动态时改为每小时一次，在“已创建运单”下满七天改为每 6 小时一次。若官网无响应而改由综合追踪服务跟进，Peek 每小时检查一次，静默满一天后每 3 小时一次，派送当天最高每 15 分钟一次。
+当你在 Peek 中打开包裹页面，或在派送当日开启通知时，Peek 最多每 10 分钟检查一次；在 A. Duie Pyle 显示 `OUT FOR DELIVERY` 当天，只要 A. Duie Pyle 的追踪器有响应，会从最新扫描所在时钟的早上 6 点起每 2 分钟检查一次。其余情况下每小时检查一次。若包裹停留在“已生成面单”或“已揽收”超过 12 小时，或连续两天没有新动态，无论你以何种方式关注，均改为每小时检查一次；若停留在“已生成面单”超过七天，则每 6 小时检查一次。当 A. Duie Pyle 的追踪器无响应、Peek 仅通过追踪服务跟进时，每小时检查一次，静默一天后每 3 小时一次，派送当天最多每 15 分钟一次。
 
-若包裹处于“已创建运单”、“承运商已揽收”或“运输中”且最新扫描满四天，Peek 会按该扫描日期标示并提示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 A. Duie Pyle 查询。”，同时附上指向联系页面的帮助链接；超过三周无更新时会建议联系卖家并继续查询。
+当最新扫描距今已满四天，且包裹仍处于“已生成面单”、“已揽收”或“运输中”时，Peek 会用该次扫描的日期加以标记，例如“自10月12日周一起没有物流更新”。包裹页面随后会显示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 A. Duie Pyle 查询。”，并附上指向 A. Duie Pyle 联系页面的“向 A. Duie Pyle 寻求帮助”链接。如果三周没有新扫描，页面会显示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 A. Duie Pyle 查询。”
 
-你可设置“每次扫描”、“重要节点”或“仅派送和送达”通知。Peek 仅监控物流更新，无法替你预约货运、申请升降尾板或联系 A. Duie Pyle。
+你可以选择“每次扫描”、“重要环节”或“仅派送当天”通知。Peek 仅监控物流更新，无法替你预约货运、申请升降尾板或联系 A. Duie Pyle。
 
-## A. Duie Pyle 追踪常见问题
+## 关于 A. Duie Pyle 物流查询的问题
 
 ### A. Duie Pyle PRO 单号长什么样？
 

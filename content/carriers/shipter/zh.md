@@ -1,6 +1,6 @@
 ---
 title: Shipter 物流查询：韩国 H3 出口单号与追踪状态说明
-description: 查询韩国 Shipter（H3 Networks）国际空运包裹：了解 H3…KR 单号格式、各国末端交接、英文物流状态含义以及追踪链接用法。
+description: 查询韩国 Shipter（H3 Networks）国际空运包裹：了解 H3…KR 单号格式、各国末端交接、物流状态含义以及追踪链接用法。
 slug: shipter-tracking
 published: 2026-11-26
 updated: 2026-11-26
@@ -50,15 +50,15 @@ Shipter 负责将包裹从韩国空运出境，并在目的国移交当地快递
 
 ## 使用 Peek 追踪 Shipter
 
-将 `H3...KR` 单号，或 `shipter.kr/tracking/...`、`shiptertracking.com/trackingResult/...` 链接直接粘贴到 Peek 中。对于 12 位单号，Peek 会询问 [Colis Privé](carrier:colis-prive) 和 Shipter（韩国优先 Shipter）；对于 11 位单号则仅问 Shipter，一旦返回结果即确认包裹由 Shipter 承运。若 Peek 识别为其他承运商，可在添加时点“更改”或在详情页点“更换承运商”改选 Shipter。
+将 `H3...KR` 单号，或 `shipter.kr/tracking/...`、`shiptertracking.com/trackingResult/...` 链接直接粘贴到 Peek 中。对于 12 位单号，Peek 会询问 [Colis Privé](carrier:colis-prive) 和 Shipter（韩国优先 Shipter）；对于 11 位单号则仅问 Shipter。Shipter 一旦返回结果，Peek 即显示“Shipter 有这个包裹的记录。”若 Peek 识别为其他承运商，可在添加时点“更换”或在详情页点“更换快递公司”改选 Shipter。
 
-Peek 通过开源的 [universal-parcel-scraper Shipter 适配器](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/shipter) 读取 Shipter 轨迹，遇到网络波动会自动重试。界面会显示每条英文扫描原文、站点或地点名称以及送达时间；Shipter 附带 GMT 时区偏移的记录会换算为你设备的本地时间，无偏移的则按原时间展示。
+Peek 通过开源的 [universal-parcel-scraper Shipter 适配器](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/shipter) 读取 Shipter 轨迹，遇到网络错误会重试。界面会显示每条英文扫描原文、站点或地点名称以及送达时间；Shipter 附带 GMT 时区偏移的记录会换算为你设备的本地时间，无偏移的则按原时间展示。
 
-Peek 将 Shipter 节点映射为清晰阶段：**已创建运单**（揽收前预报）、**承运商已揽收**（Shipter 在韩国完成收货扫描）、**运输中**（航班起飞、机场抵达、清关放行及当地快递枢纽转运）、**派送中**（当地快递开始派送）和**已送达**（妥投）。滞后回传的末端预报提示（`Shipping information received` 与 `Your parcel will be entrusted to last mile...`）会保留在时间线中，但不会让状态回退。
+Peek 将 Shipter 节点映射为清晰阶段：**已生成面单**（揽收前预报）、**已揽收**（Shipter 在韩国完成收货扫描）、**运输中**（航班起飞、机场抵达、清关放行及当地快递枢纽转运）、**派送中**（当地快递开始派送）和**已签收**（妥投）。滞后回传的末端预报提示（`Shipping information received` 与 `Your parcel will be entrusted to last mile...`）会保留在时间线中，但不会让状态回退。
 
-若包裹处于“已创建运单”、“承运商已揽收”或“运输中”且最新扫描满四天，Peek 会按该扫描日期标示（如“自 10 月 12 日（周一）起无物流更新”），并提示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 Shipter 查询。”；超过三周无更新时会建议联系卖家，同时继续查询。
+当最新扫描距今已满四天，且包裹仍处于“已生成面单”、“已揽收”或“运输中”时，Peek 会用该次扫描的日期加以标记，例如“自10月12日周一起没有物流更新”。包裹页面随后会显示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 Shipter 查询。”如果三周没有新扫描，页面会显示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 Shipter 查询。”
 
-当你打开包裹，或在开启通知的情况下进入派送日时，只要 Shipter 追踪接口正常响应，Peek 最高每 10 分钟检查一次；在 Shipter 出现 `Out for delivery` 或 `Your parcel is with your local courier and ready for delivery..` 当天，自最新扫描所在时钟早上 6 点起每 2 分钟检查一次。其余时间每小时检查一次；在“已创建运单”或“承运商已揽收”下满 12 小时或连续两天无新动态时改为每小时一次，在“已创建运单”下满七天改为每 6 小时一次。当 Shipter 接口无响应而改由综合追踪服务跟进时，Peek 每小时检查一次，静默满一天后每 3 小时一次，派送当天最高每 15 分钟一次。通知支持“每次扫描”、“重要节点”或“仅派送和送达”。
+当你在 Peek 中打开包裹页面，或在派送当日开启通知时，Peek 最多每 10 分钟检查一次；在 Shipter 出现 `Out for delivery` 或 `Your parcel is with your local courier and ready for delivery..` 当天，只要 Shipter 的追踪接口有响应，会从最新扫描所在时钟的早上 6 点起每 2 分钟检查一次。其余情况下每小时检查一次。若包裹停留在“已生成面单”或“已揽收”超过 12 小时，或连续两天没有新动态，无论你以何种方式关注，均改为每小时检查一次；若停留在“已生成面单”超过七天，则每 6 小时检查一次。当 Shipter 的追踪接口无响应、Peek 仅通过追踪服务跟进时，每小时检查一次，静默一天后每 3 小时一次，派送当天最多每 15 分钟一次。Peek 可以按“每次扫描”、“重要环节”或“仅派送当天”提醒你。
 
 ## 联系 Shipter
 
@@ -66,13 +66,13 @@ Shipter 主要直接对接发货企业客户：
 
 - **官网与业务咨询：** [shipter.kr](https://www.shipter.kr/)（H3 NETWORKS Co., Ltd.；服务咨询入口 *이용문의*）
 - **官方在线追踪：** [shipter.kr/tracking](https://www.shipter.kr/tracking)
-- **先联系卖家：** Shipter 为每家合作企业配备专属客服经理，异常、退货和理赔均通过企业客户处理。若包裹延误、破损或丢失，请携带 `H3...KR` 单号联系发货商家。
+- **先联系卖家：** Shipter 为每家客户企业配备专属客服经理，异常、退货和理赔均通过企业客户处理。若包裹延误、破损或丢失，请携带 `H3...KR` 单号联系发货商家。
 
 ## 常见问题
 
 ### Shipter 追踪单号是什么格式？
 
-以 `H3` 开头、`KR` 结尾，中间为 2 位字母加 5 或 6 位数字，总长 11 或 12 位（如虚构示例 `H3AU482917KR`）。Shipter 官网未说明中间两位字母的含义。
+以 `H3` 开头、`KR` 结尾，中间为 2 位字母加 5 或 6 位数字，总长 11 或 12 位（如虚构示例 `H3AU482917KR`）。Shipter 的网站未说明中间两位字母的含义。
 
 ### 为什么包裹已发出好几天后才出现 “Shipping information received”？
 

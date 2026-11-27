@@ -164,6 +164,8 @@ html[data-entry=device] .door > :not(.door-header), html[data-entry=device] .doo
 .door-note__action { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; margin-top: 4px; padding: 0; background: none; color: inherit; font-size: 13px; font-weight: 600; text-decoration: none; }
 .door-note__action svg { width: 13px; height: 13px; }
 .door-note__action + .door-note__action { margin-top: 0; }
+/* The app, offered under a failed browser check on a phone or a tablet, across the note. */
+.door-note__app { justify-self: stretch; margin-top: 8px; }
 .door-shapes { margin-top: 12px; padding: 16px; border: 1px solid var(--line); border-radius: 18px; background: var(--paper); }
 .door-shapes h2 { margin: 0 0 10px; font-size: 13px; font-weight: 600; letter-spacing: 0; }
 .door-shapes ul { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }

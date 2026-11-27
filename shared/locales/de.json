@@ -1264,6 +1264,8 @@
   "native.pasteLead": "Füge eine Nummer, einen Link oder eine ganze E-Mail ein.",
   "door.verification.title": "Eine kurze Browserprüfung",
   "door.verification.body": "Die Prüfung konnte nicht abgeschlossen werden. Schließe sie ab, falls sie angezeigt wird, und versuche es erneut. Deine Nummer bleibt erhalten.",
+  "door.verification.app.title": "In der Peek-App verfolgen",
+  "door.verification.app.body": "Die App braucht meist keine Browserprüfung.",
   "native.verification.title": "Eine kurze Überprüfung",
   "add.checkingServices": "Tracking-Dienste werden geprüft…",
   "add.historyFound": "Sendungsverlauf gefunden. Peek bestätigt den Paketdienst nach dem Speichern.",

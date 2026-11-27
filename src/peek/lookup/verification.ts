@@ -1,4 +1,4 @@
-import type { VerificationReason } from '../../lib/analytics';
+import { trackAction, type VerificationReason } from '../../lib/analytics';
 
 /**
  * Browser verification is kept in this tab's session storage, so a reload keeps
@@ -125,7 +125,15 @@ function loadScript(): Promise<void> {
   return script;
 }
 
-/** The widget stays in the form; Cloudflare shows it only when interaction is needed. */
+/** Failures of the widget itself, after which the next check is shown (`mountLookupVerification`). */
+const WIDGET_FAILED = (reason: VerificationReason) => reason === 'timeout' || reason.startsWith('widget');
+
+/**
+ * The widget stays in the form; Cloudflare shows it only when interaction is needed. Once the widget has failed or
+ * timed out on this page, the next check is shown from the start, with Cloudflare's box to tick where it asks for one,
+ * and counted (`door-verification-shown`). A token that comes after a check gave up, from Cloudflare's own retry or a
+ * box ticked late, still gives the tab its proof for the next try.
+ */
 export function mountLookupVerification(container: HTMLElement, language: string) {
   let disposed = false;
   let widget: string | null = null;
@@ -133,6 +141,8 @@ export function mountLookupVerification(container: HTMLElement, language: string
   let cancel: (() => void) | null = null;
   /** The server verifies no one: asked once per page. */
   let unprotected = false;
+  /** The widget failed on this page: the next check is shown. */
+  let shown = false;
 
   async function start(): Promise<string | null> {
     if (lookupProof()) return lookupProof();
@@ -152,6 +162,7 @@ export function mountLookupVerification(container: HTMLElement, language: string
     await loadScript();
     if (disposed || !window.turnstile) throw new LookupVerificationError(disposed ? 'other' : 'script');
     if (widget !== null) window.turnstile.remove(widget);
+    const visible = shown;
     return new Promise<string>((resolve, reject) => {
       let finished = false;
       let exchanging = false;
@@ -161,19 +172,23 @@ export function mountLookupVerification(container: HTMLElement, language: string
         finished = true;
         clearTimeout(timer);
         cancel = null;
-        if (typeof result === 'object' && !disposed) { keep(result); resolve(result.proof); }
+        const passed = typeof result === 'object' && !disposed;
+        if (visible && result !== 'other') trackAction('door-verification-shown', passed ? 'success' : 'error', undefined,
+          typeof result === 'string' ? result : undefined);
+        if (typeof result === 'string' && WIDGET_FAILED(result)) shown = true;
+        if (passed) { keep(result); resolve(result.proof); }
         else reject(new LookupVerificationError(typeof result === 'string' ? result : 'other'));
       }
       cancel = () => finish('other');
       widget = window.turnstile!.render(container, {
         sitekey: configuration.siteKey,
         action: 'parcel_lookup',
-        appearance: 'interaction-only',
+        appearance: visible ? 'always' : 'interaction-only',
         theme: 'auto',
         language,
         'response-field': false,
         callback: (token: string) => {
-          if (finished || exchanging) return;
+          if (exchanging || disposed) return;
           exchanging = true;
           void fetch('/api/public/verification', {
             method: 'POST', credentials: 'omit', cache: 'no-store', referrerPolicy: 'no-referrer',
@@ -185,8 +200,11 @@ export function mountLookupVerification(container: HTMLElement, language: string
             if (typeof result.proof !== 'string' || typeof result.expiresAt !== 'number') throw new LookupVerificationError('refused');
             const expiresAt = localExpiry(result.expiresAt, response.headers.get('Date'));
             if (expiresAt <= Date.now()) throw new LookupVerificationError('refused');
-            finish({ proof: result.proof, expiresAt });
-          }).catch((error: unknown) => finish(error instanceof LookupVerificationError ? error.reason : 'unanswered'));
+            // After the check gave up, the proof waits in the tab for the reader's next try.
+            if (finished) { if (!disposed) keep({ proof: result.proof, expiresAt }); }
+            else finish({ proof: result.proof, expiresAt });
+          }).catch((error: unknown) => finish(error instanceof LookupVerificationError ? error.reason : 'unanswered'))
+            .finally(() => { exchanging = false; });
         },
         'error-callback': (code: unknown) => { finish(widgetFailure(code)); return true; },
         'expired-callback': () => finish('timeout'),

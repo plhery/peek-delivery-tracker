@@ -1264,6 +1264,8 @@
   "native.pasteLead": "Pega un número, un enlace o un correo entero.",
   "door.verification.title": "Una comprobación rápida del navegador",
   "door.verification.body": "No se ha podido completar la verificación. Completa la comprobación si aparece e inténtalo de nuevo. Tu número sigue aquí.",
+  "door.verification.app.title": "Síguelo en la app Peek",
+  "door.verification.app.body": "La app no suele necesitar esta comprobación.",
   "native.verification.title": "Una comprobación rápida",
   "add.checkingServices": "Comprobando servicios de seguimiento…",
   "add.historyFound": "Historial encontrado. Peek confirmará el transportista después de guardar.",

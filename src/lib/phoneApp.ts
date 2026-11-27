@@ -16,12 +16,15 @@ export const PHONE_APP_QR_SOURCE = 'landing-qr';
 export const PHONE_APP_SETTINGS_SOURCE = 'settings';
 /** …and of the code a computer shows there instead (`web-settings-qr`). */
 export const PHONE_APP_SETTINGS_QR_SOURCE = 'settings-qr';
+/** The `utm_source` of the app row under a failed browser check on a phone or a tablet (`web-check`). */
+export const PHONE_APP_CHECK_SOURCE = 'door-check';
 
 /** The App Store campaign of each source of the site's own; any other source counts as `/app` itself, `web-app`. */
 const STORE_CAMPAIGNS = new Map<string, AppStoreCampaign>([
   [PHONE_APP_QR_SOURCE, 'web-qr'],
   [PHONE_APP_SETTINGS_SOURCE, 'web-settings'],
   [PHONE_APP_SETTINGS_QR_SOURCE, 'web-settings-qr'],
+  [PHONE_APP_CHECK_SOURCE, 'web-check'],
 ]);
 
 /** `/app`, with the source its link or code carries. */

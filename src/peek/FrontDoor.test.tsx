@@ -23,6 +23,9 @@ import { CARRIER_HANDOFF_STORAGE_KEY, writeCarrierHandoff } from '../lib/carrier
 import { POSTCODES_STORAGE_KEY, rememberPostcode } from '../lib/postcodeMemory';
 import { pickCandidate, pressEnter } from '../test/inputMethod';
 import { servingGuides } from '../test/guidePages';
+import { PLAIN_SITE, type Site } from '../lib/site';
+import { SiteProvider } from '../SiteContext';
+import type { ReactNode } from 'react';
 
 const mocks = vi.hoisted(() => ({ lookup: vi.fn(), change: vi.fn(), detect: vi.fn(), read: vi.fn(), forget: vi.fn(), sample: vi.fn() }));
 vi.mock('./links', async (original) => ({
@@ -47,10 +50,11 @@ const onSignIn = vi.fn();
 const notFound = 'Peek couldn’t find a tracking number. Paste the number or a tracking link.';
 const TYPO_NUMBER = 'LX1234367B5DE';
 
-function door() {
+function door(site?: Site) {
   // The clipboard the Paste button reads exists from here on, as it does in a browser.
   const user = userEvent.setup();
-  const view = render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />, { wrapper: servingGuides });
+  const wrapper = site ? ({ children }: { children: ReactNode }) => servingGuides({ children: <SiteProvider site={site}>{children}</SiteProvider> }) : servingGuides;
+  const view = render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />, { wrapper });
   return {
     view,
     user,
@@ -699,6 +703,30 @@ describe('FrontDoor', () => {
     await screen.findByRole('alert');
     expect(counted.mock.calls.filter(([name]) => name === 'door-verification')).toEqual([['door-verification', undefined, undefined, 'widget-300']]);
     expect(JSON.stringify(counted.mock.calls)).not.toContain(UPS);
+    counted.mockRestore();
+  });
+
+  it('offers a phone the app under a failed browser check, and a computer nothing', async () => {
+    const analytics = await import('../lib/analytics');
+    const counted = vi.spyOn(analytics, 'trackAction');
+    const agent = vi.spyOn(navigator, 'userAgent', 'get').mockReturnValue('Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X)');
+    mocks.lookup.mockRejectedValueOnce(new LookupVerificationError('widget-600'));
+    const { user, field, view } = door({ ...PLAIN_SITE, appStore: { id: '123456789', providerToken: null } });
+    await user.type(field, `${UPS}{Enter}`);
+    const alert = await screen.findByRole('alert');
+    const get = within(alert).getByRole('link', { name: 'Get' });
+    expect(get).toHaveAttribute('href', '/app?utm_source=door-check');
+    expect(alert).toHaveTextContent('Track it in the Peek app');
+    get.addEventListener('click', (event) => event.preventDefault());
+    await user.click(get);
+    expect(counted).toHaveBeenCalledWith('door-verification-app');
+    agent.mockReturnValue('Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/131.0');
+    view.unmount();
+    mocks.lookup.mockRejectedValueOnce(new LookupVerificationError('widget-600'));
+    const desktop = door({ ...PLAIN_SITE, appStore: { id: '123456789', providerToken: null } });
+    await desktop.user.type(desktop.field, `${UPS}{Enter}`);
+    expect(within(await screen.findByRole('alert')).queryByRole('link', { name: 'Get' })).toBeNull();
+    agent.mockRestore();
     counted.mockRestore();
   });
 

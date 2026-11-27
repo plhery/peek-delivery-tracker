@@ -1,16 +1,21 @@
 import type { ReactNode } from 'react';
 import { CarrierMark, CarrierTruck } from '../../components/CarrierMark';
 import { PostcodeCountry } from '../../components/PostcodeCountry';
+import { AppOffer } from '../../components/AppOffer';
 import { Icon } from '../../components/Icon';
 import { useI18n, type MessageKey } from '../../i18n';
 import { useGuidePages } from '../../guides/GuidePagesContext';
 import { guideHref } from '../../guides/paths';
 import { amazonOrdersUrl } from '../../lib/amazon';
+import { trackAction } from '../../lib/analytics';
+import { onIPad } from '../../lib/appStore';
 import { carrierBrand } from '../../lib/carrierBrand';
 import { carrierInfo, carrierTrackingHintKey, formatTrackingNumber, requirementHelpKey, tracksAutomatically, typedRequirementValue } from '../../lib/carriers';
 import { useNumberRefusal } from '../../lib/numberRefusal';
 import { forgetPostcode } from '../../lib/postcodeMemory';
+import { PHONE_APP_CHECK_SOURCE, phoneAppLink } from '../../lib/phoneApp';
 import { lettersPostcode, postcodeExample } from '../../lib/postcodeExample';
+import { useSite } from '../../SiteContext';
 import type { CarrierId } from '../../types';
 import { usePeekSession } from '../session';
 import { DoorNote } from './DoorNote';
@@ -241,12 +246,33 @@ export function LookupFeedback({ lookup, pointer, onUnlock, onPickCarrier, onSug
     </DoorNote>}
     {trouble === 'offline' && <DoorNote icon="offline" title={t('offline.title')} urgent><p>{t('door.offline.body')}</p></DoorNote>}
     {trouble === 'server' && <DoorNote icon="refresh" tone="warm" title={t('door.trouble.title')} urgent><p>{t('door.trouble.body')}</p></DoorNote>}
-    {trouble === 'verification' && <DoorNote icon="refresh" tone="warm" title={t('door.verification.title')} urgent><p>{t('door.verification.body')}</p></DoorNote>}
+    {trouble === 'verification' && <DoorNote icon="refresh" tone="warm" title={t('door.verification.title')} urgent>
+      <p>{t('door.verification.body')}</p>
+      <CheckFreeApp />
+    </DoorNote>}
     {state.paste && <DoorNote icon="clipboard" title={t('door.paste.blocked.title')} urgent>
       <p>{t(state.paste === 'empty' ? 'door.paste.empty' : state.paste === 'share-failed' ? 'add.shareFailed'
         : state.paste === 'share-too-large' ? 'add.shareTooLarge' : pointer === 'touch' ? 'door.paste.blocked.touch' : 'door.paste.blocked.keys')}</p>
     </DoorNote>}
   </div>;
+}
+
+/** A phone or tablet, by what its browser says: one the site's apps run on. */
+function onPhone(): boolean {
+  return typeof navigator !== 'undefined' && (/\b(?:iPhone|iPad|iPod|Android)\b/.test(navigator.userAgent) || onIPad());
+}
+
+/**
+ * Under a failed browser check, a phone or tablet is offered the app, which proves itself without one. It goes through
+ * `/app`, which sends each phone to its own app; a site without an iPhone app has no `/app` and offers none.
+ */
+function CheckFreeApp() {
+  const { t } = useI18n();
+  const { appStore } = useSite();
+  if (!appStore || !onPhone()) return null;
+  return <AppOffer className="door-note__app" title={t('door.verification.app.title')} body={t('door.verification.app.body')}>
+    <a href={phoneAppLink(PHONE_APP_CHECK_SOURCE)} onClick={() => trackAction('door-verification-app')}>{t('alerts.app.get')}</a>
+  </AppOffer>;
 }
 
 /**

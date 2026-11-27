@@ -15,9 +15,10 @@ export interface AppStoreApp {
  * Notifications, `web-settings` is the app row an iPhone or iPad shows outside the Home
  * Screen, or a phone or tablet under its switch or in a browser that can't notify, and
  * `web-settings-qr` the code a computer shows there instead; those two go through `/app`. `web-invite` is
- * the button of the deliveries' invitation to notifications in the same place.
+ * the button of the deliveries' invitation to notifications in the same place. `web-check` is the app row under a
+ * failed browser check on a phone or a tablet, through `/app`.
  */
-export type AppStoreCampaign = 'web-banner' | 'web-more' | 'web-moves' | 'web-footer' | 'web-qr' | 'web-app' | 'web-notify' | 'web-settings' | 'web-settings-qr' | 'web-invite';
+export type AppStoreCampaign = 'web-banner' | 'web-more' | 'web-moves' | 'web-footer' | 'web-qr' | 'web-app' | 'web-notify' | 'web-settings' | 'web-settings-qr' | 'web-invite' | 'web-check';
 
 /** The app's page on the App Store, counted under a campaign where the account is known. */
 export function appStoreLink(app: AppStoreApp, campaign: AppStoreCampaign): string {

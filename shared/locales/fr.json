@@ -1264,6 +1264,8 @@
   "native.pasteLead": "Colle un numéro, un lien ou tout un e-mail.",
   "door.verification.title": "Une vérification rapide",
   "door.verification.body": "La vérification n’a pas abouti. Effectue le contrôle s’il apparaît, puis réessaie. Ton numéro est toujours là.",
+  "door.verification.app.title": "Suis-le dans l’app Peek",
+  "door.verification.app.body": "L’app n’a en général pas besoin de cette vérification.",
   "native.verification.title": "Une petite vérification",
   "add.checkingServices": "Vérification des services de suivi…",
   "add.historyFound": "Historique trouvé. Peek confirmera le transporteur après l’ajout.",

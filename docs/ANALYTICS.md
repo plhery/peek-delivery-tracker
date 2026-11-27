@@ -70,7 +70,9 @@ are virtual names, never real URLs.
   script not loaded (`script`), a widget error by its code's family, the code's first three digits
   (`widget-300`; `widget` for a code outside the known families), a challenge not passed in time
   (`timeout`), the token refused by Peek (`refused`) or left unanswered (`unanswered`), the proof
-  just given refused (`proof`), or `other`. A paste that fails is a paste with outcome `error`.
+  just given refused (`proof`), or `other`. After the widget fails or times out, the page's next check is
+  shown, and how it ends is counted once (`door-verification-shown`, outcome `success`, or `error` with
+  the reason). A paste that fails is a paste with outcome `error`.
   Never the text.
 - **Parcel links**: lookup without an account, share or copy the link, change what the
   link shows, stop sharing, open "Notify me", turn a browser's alerts on or off, get the
@@ -105,9 +107,10 @@ are virtual names, never real URLs.
   the landing's "Android app" button and footer link, and `get-app` for the button of
   `/app`'s page (opened only). Google Play counts the testers ([Google Play](google-play/README.md)).
 - **Getting the app** (web): the landing's code to scan leads to `/app?utm_source=landing-qr`,
-  Settings' app row to `/app?utm_source=settings` and Settings' code to
-  `/app?utm_source=settings-qr`. The server answers by the user agent: an iPhone or an iPad that
-  says so goes to the App Store (campaign `web-qr`, `web-settings` or `web-settings-qr`, or
+  Settings' app row to `/app?utm_source=settings`, Settings' code to
+  `/app?utm_source=settings-qr` and the app row under a failed browser check on a phone or a tablet
+  (`door-verification-app`) to `/app?utm_source=door-check`. The server answers by the user agent: an iPhone or an iPad that
+  says so goes to the App Store (campaign `web-qr`, `web-settings`, `web-settings-qr` or `web-check`, or
   `web-app` for any other source) and an Android phone to the Android test's steps, whose view
   carries the source. A computer, or an iPad whose Safari says
   it is a Mac, gets a page with the code and both apps (`get-app`); the iPad goes on to the App
@@ -179,7 +182,7 @@ sees the IP, user agent, basic device data and language.
 
 On the web, every event carries the app's language (`locale`) when the page declares one, the
 Android test's events the place they come from (`spot`), and a failed `parcel-link-alerts` or
-`door-verification` its `reason`.
+`door-verification` or `door-verification-shown` its `reason`.
 A page load's first page view also says where the visitor came from, since Umami counts
 sources from page views only: the `referrer`, as origin and path without query or fragment,
 when it is another site (or an Android app), and the landing address's `utm_source`,

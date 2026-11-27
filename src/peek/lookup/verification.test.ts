@@ -73,6 +73,52 @@ it('recovers after verification fails without retaining a bad token', async () =
   await expect(second).resolves.toBe('verified-proof');
 });
 
+it('shows the check on the retry after the widget failed, and counts how the shown check ends', async () => {
+  const analytics = await import('../../lib/analytics');
+  const counted = vi.spyOn(analytics, 'trackAction');
+  const first = getLookupProof();
+  const failure = expect(first).rejects.toMatchObject({ reason: 'widget-600' });
+  await vi.waitFor(() => expect(window.turnstile?.render).toHaveBeenCalled());
+  expect(options.appearance).toBe('interaction-only');
+  (options['error-callback'] as (code: string) => void)('600010');
+  await failure;
+  expect(counted.mock.calls.filter(([name]) => name === 'door-verification-shown')).toEqual([]);
+  const second = getLookupProof();
+  await vi.waitFor(() => expect(window.turnstile?.render).toHaveBeenCalledTimes(2));
+  expect(options.appearance).toBe('always');
+  await complete();
+  await expect(second).resolves.toBe('verified-proof');
+  expect(counted.mock.calls.filter(([name]) => name === 'door-verification-shown'))
+    .toEqual([['door-verification-shown', 'success', undefined, undefined]]);
+  counted.mockRestore();
+});
+
+it('keeps the check out of sight after a failure that is not the widget’s', async () => {
+  vi.mocked(fetch).mockResolvedValueOnce(Response.json({ siteKey: 'public-key' })).mockResolvedValueOnce(new Response(null, { status: 403 }));
+  const first = getLookupProof();
+  const failure = expect(first).rejects.toMatchObject({ reason: 'refused' });
+  await vi.waitFor(() => expect(window.turnstile?.render).toHaveBeenCalled());
+  (options.callback as (token: string) => void)('refused-token');
+  await failure;
+  void getLookupProof().catch(() => undefined);
+  await vi.waitFor(() => expect(window.turnstile?.render).toHaveBeenCalledTimes(2));
+  expect(options.appearance).toBe('interaction-only');
+});
+
+it('keeps a proof that comes after the check gave up, for the next try', async () => {
+  const first = getLookupProof();
+  const failure = expect(first).rejects.toMatchObject({ reason: 'timeout' });
+  await vi.waitFor(() => expect(window.turnstile?.render).toHaveBeenCalled());
+  (options['timeout-callback'] as () => void)();
+  await failure;
+  expect(lookupProof()).toBeNull();
+  vi.mocked(fetch).mockResolvedValueOnce(Response.json({ proof: 'late-proof', expiresAt: Date.now() + 900_000 }));
+  (options.callback as (token: string) => void)('late-token');
+  await vi.waitFor(() => expect(lookupProof()).toBe('late-proof'));
+  await expect(getLookupProof()).resolves.toBe('late-proof');
+  expect(window.turnstile?.render).toHaveBeenCalledTimes(1);
+});
+
 it('waits for the page verification instead of sending a request it would refuse', async () => {
   const request = vi.fn().mockResolvedValue(Response.json({ trackingNumber: 'TEST123456', carrier: 'unknown' }));
   const answer = createApiLinks(request).detectCarrierPublic('TEST123456');

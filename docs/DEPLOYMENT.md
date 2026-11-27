@@ -518,7 +518,10 @@ together; leave them unset to disable verification. Test keys are refused in
 production. Keep the secret out of build arguments and browser configuration.
 
 The lookup form starts verification when used, sends its first lookup or
-detection once it is done, and shows a checkbox only when needed. A successful check grants a 15-minute proof, kept in the tab's session
+detection once it is done, and shows a checkbox only when needed. Once the widget has failed
+or timed out on a page, the next check is shown from the start, with Cloudflare's box where it
+asks for one, and a phone or a tablet is offered the app beside the notice; a token that comes
+after a check gave up still gives the tab its proof. A successful check grants a 15-minute proof, kept in the tab's session
 storage; existing lookup budgets still apply. The proof works on the network it
 was issued on and on two more, so a device moving between IPv4 and IPv6 or
 Wi-Fi and mobile data keeps it; each process remembers those moves in memory.

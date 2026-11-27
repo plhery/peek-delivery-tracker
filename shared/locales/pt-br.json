@@ -1264,6 +1264,8 @@
   "native.pasteLead": "Cole um código, um link ou um e-mail inteiro.",
   "door.verification.title": "Uma verificação rápida do navegador",
   "door.verification.body": "Não foi possível concluir a verificação. Faça a verificação se ela aparecer e tente novamente. Seu código continua aqui.",
+  "door.verification.app.title": "Acompanhe no app Peek",
+  "door.verification.app.body": "O app normalmente não precisa dessa verificação.",
   "native.verification.title": "Uma verificação rápida",
   "add.checkingServices": "Consultando serviços de rastreamento…",
   "add.historyFound": "Histórico de rastreamento encontrado. O Peek confirma a transportadora depois que você salvar.",

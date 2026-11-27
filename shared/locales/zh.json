@@ -1264,6 +1264,8 @@
   "native.pasteLead": "粘贴单号、链接或整封邮件。",
   "door.verification.title": "浏览器快速验证",
   "door.verification.body": "验证没能完成。如果页面上出现验证，请先完成，然后重试。你的单号还在这里。",
+  "door.verification.app.title": "在 Peek App 中跟踪",
+  "door.verification.app.body": "App 通常不需要这项验证。",
   "native.verification.title": "快速验证",
   "add.checkingServices": "正在查询物流服务…",
   "add.historyFound": "已找到物流记录。保存后，Peek 会确认快递公司。",

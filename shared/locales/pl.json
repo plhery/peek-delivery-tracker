@@ -1264,6 +1264,8 @@
   "native.pasteLead": "Wklej numer, link albo cały e-mail.",
   "door.verification.title": "Szybkie sprawdzenie przeglądarki",
   "door.verification.body": "Nie udało się zakończyć weryfikacji. Wykonaj sprawdzenie, jeśli się pojawi, i spróbuj ponownie. Twój numer nadal tu jest.",
+  "door.verification.app.title": "Śledź w aplikacji Peek",
+  "door.verification.app.body": "Aplikacja zwykle nie potrzebuje tej weryfikacji.",
   "native.verification.title": "Krótka weryfikacja",
   "add.checkingServices": "Sprawdzanie usług śledzenia…",
   "add.historyFound": "Znaleziono historię. Peek potwierdzi przewoźnika po zapisaniu.",

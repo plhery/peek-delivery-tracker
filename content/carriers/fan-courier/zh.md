@@ -22,7 +22,7 @@ AWB（Air Waybill，空运单/运单）是 FAN 为每个包裹配发的随附单
 
 `The AWB was not found` 可能是单号输错，也可能是 FAN 尚未揽收：FAN 会在向寄件人取件时自动登记该运单。
 
-容易混淆的单号：Econt 运单号同样是 13 位数字，Cargus 也把单号称为 AWB，而 Sameday 的 AWB 以 `1` 和字母开头（如 `1ABC482910573`）。请以商家邮件中写明的快递公司为准。更多见[运单号格式指南](guide:tracking-number-formats)（英文）。
+容易混淆的单号：Econt 运单号同样是 13 位数字，[Cargus](carrier:cargus) 也把单号称为 AWB，而 Sameday 的 AWB 以 `1` 和字母开头（如 `1ABC482910573`）。请以商家邮件中写明的快递公司为准。更多见[运单号格式指南](guide:tracking-number-formats)（英文）。
 
 ## FAN Courier 物流状态含义
 

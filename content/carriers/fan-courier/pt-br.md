@@ -22,7 +22,7 @@ Sem código nenhum? Veja [como encontrar um código de rastreamento](guide:find-
 
 `The AWB was not found` pode indicar erro de digitação ou um pacote que a FAN ainda não coletou: a FAN registra o código automaticamente quando coleta com o remetente.
 
-Códigos parecidos: números da Econt também têm 13 dígitos, a Cargus igualmente chama seus códigos de AWB e os AWBs da Sameday começam com `1` seguido de letras (`1ABC482910573`). Siga a transportadora indicada no e-mail da loja. Mais em [formatos de código de rastreamento](guide:tracking-number-formats).
+Códigos parecidos: números da Econt também têm 13 dígitos, a [Cargus](carrier:cargus) igualmente chama seus códigos de AWB e os AWBs da Sameday começam com `1` seguido de letras (`1ABC482910573`). Siga a transportadora indicada no e-mail da loja. Mais em [formatos de código de rastreamento](guide:tracking-number-formats).
 
 ## O que significam os status da FAN Courier
 

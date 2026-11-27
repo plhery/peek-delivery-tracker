@@ -31,7 +31,7 @@ Segundo [Suporte BUFFALO](https://www.buffaloex.com/support.html) e o histórico
 | `Clearance`, `At Destination`, `Arrival at South Africa customs`, `Customs VAT and duty can be paid now, please pay in time`, `Tax Paid`, `Clearance finished` | Desembaraço de exportação na China enquanto aguarda voo, ou alfândega de importação na África do Sul; IVA e imposto de importação precisam ser pagos antes da liberação. | "Na alfândega" |
 | `Inbound`, `AIR DC Received the parcel`, `BUFFALO Airport Warehouse received`, `Transit the parcel from AIRDC to JHBDC`, `JHB DC Received the parcel`, `Dispatching`, `WAYBILL IMPORTED`, `Transit to thirdparty Express`, `RETURNS` | Liberada pela alfândega e circulando pelos depósitos da BUFFALO no aeroporto (`AIR DC`) e Joanesburgo (`JHB DC`), repassada a uma transportadora parceira sul-africana ou retornando ao depósito entre rotas de entrega. | "Em trânsito" |
 | `Driver Pick the Order`, `SCAN VEHICLE DEPARTURE` | Carregada com um motorista da BUFFALO ou parceiro local para entrega hoje. | "Saiu para entrega" |
-| `Returned to BUFFALO warehouse[...]` | Recolhida de volta pelo depósito BUFFALO indicado entre colchetes após falha na entrega pelo parceiro local; siga o SMS ou e-mail da BUFFALO ou contate o atendimento. | "Precisa de atenção" |
+| `Returned to BUFFALO warehouse[...]` | Recolhida de volta pelo depósito BUFFALO indicado entre colchetes após uma entrega não realizada pelo parceiro local; siga o SMS ou e-mail da BUFFALO ou contate o atendimento. | "Precisa de atenção" |
 | `Client Received` | Entregue no seu endereço ou retirada em balcão. | "Entregue" |
 
 ## IVA/imposto aduaneiro sul-africano, horários e alterações de endereço
@@ -45,7 +45,7 @@ Conforme [Suporte BUFFALO](https://www.buffaloex.com/support.html) e [Sobre a BU
 ## Encomenda BUFFALO atrasada, devolvida ao depósito ou extraviada
 
 - **Rastreamento sem atualizar:** o FAQ da BUFFALO esclarece que o pacote segue em trânsito e ainda não alcançou o próximo ponto de controle; o atendimento pode dar mais detalhes. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
-- **Registro noturno `RETURNS`:** em movimentações de parceiros locais repassadas por serviços de rastreamento, `RETURNS` pode surgir na noite seguinte a `SCAN VEHICLE DEPARTURE`: o volume voltou ao depósito após a rota e saiu novamente na manhã seguinte. Já `Returned to BUFFALO warehouse[...]` ocorre após entrega frustrada e requer contato.
+- **Registro noturno `RETURNS`:** em movimentações de parceiros locais repassadas por serviços de rastreamento, `RETURNS` já apareceu à noite, depois de um `SCAN VEHICLE DEPARTURE` do mesmo dia: o volume voltou ao depósito após a rota e saiu novamente na manhã seguinte. Já `Returned to BUFFALO warehouse[...]` ocorre após uma entrega não realizada e pede acompanhamento.
 - **Marcada como `Client Received` sem recebimento:** a BUFFALO orienta verificar primeiro com familiares, vizinhos e portaria/segurança do condomínio e depois contatar o atendimento sul-africano (`support@buffaloex.com`). Veja [entregue mas não recebida](guide:delivered-not-received), [encomenda extraviada](guide:lost-parcel), [encomenda danificada](guide:damaged-parcel) e [devolvida ao remetente](guide:returned-to-sender).
 
 ## Atendimento e contatos da BUFFALO
@@ -63,7 +63,7 @@ Contatos oficiais publicados em [Contato BUFFALO](https://www.buffaloex.com/cont
 
 O [Peek](/) detecta BUFFALO automaticamente como única candidata quando você insere um código `BUFZA...YQ` de 17 caracteres (`BUFZA6482917305YQ` ou `BUFZA4SK73918BUYQ`, inventados) e também reconhece links colados de `buffaloex.com/tracks.html?order=`, `buffaloex.com/track.html?order=` e `buffaloex.com/express/record?order=`. Se precisar selecionar manualmente, toque em "Trocar" ao adicionar ou "Trocar transportadora" na tela da encomenda (buscar por "Buffaloex", "Buffalo Express" ou "BUFFALO International" também encontra).
 
-O Peek não consulta o site da BUFFALO diretamente e acompanha envios BUFFALO por meio de serviços de rastreamento, aplicando regras próprias de leitura para os textos da BUFFALO — assim um `RETURNS` noturno segue como "Em trânsito", `SCAN VEHICLE DEPARTURE` aparece como "Saiu para entrega" e `Returned to BUFFALO warehouse[...]` aparece como "Precisa de atenção", exibindo cada etapa correspondente ("Etiqueta criada", "Recebida pela transportadora", "Em trânsito", "Na alfândega", "Saiu para entrega", "Precisa de atenção", "Entregue").
+O Peek não consulta o site da BUFFALO diretamente e acompanha envios BUFFALO por meio de serviços de rastreamento, aplicando as regras de leitura dos textos da BUFFALO — assim um `RETURNS` noturno segue como "Em trânsito", `SCAN VEHICLE DEPARTURE` aparece como "Saiu para entrega" e `Returned to BUFFALO warehouse[...]` aparece como "Precisa de atenção", exibindo cada etapa correspondente ("Etiqueta criada", "Recebida pela transportadora", "Em trânsito", "Na alfândega", "Saiu para entrega", "Precisa de atenção", "Entregue").
 
 Enquanto acompanha por serviços de rastreamento, o Peek verifica a cada hora, a cada 3 horas após um dia sem nova movimentação e até a cada 15 minutos no dia em que a encomenda sai para entrega com o app aberto ou notificações ligadas.
 
@@ -90,10 +90,10 @@ Se o rastreamento mostrar `Customs VAT and duty can be paid now, please pay in t
 Envie e-mail para `support@buffaloex.com` com seu número `BUFZA...YQ` ou preencha o formulário em [buffaloex.com/contact.html](https://www.buffaloex.com/contact.html) (linha na China `+86-400-921-9066`).
 
 :::sources
-- [BUFFALO International Logistics: Official Website](https://www.buffaloex.com/) – China-to-Africa cross-border logistics network
-- [BUFFALO: About Us](https://www.buffaloex.com/about.html) – operating since April 2017, Shanghai HQ, Johannesburg branch, 35,000 m² of warehouses (6,500 m² bonded), 300 vehicles, customs and banking integration
-- [BUFFALO: Support & Tracking FAQ](https://www.buffaloex.com/support.html) – official status meanings (`Order Confirmed` to `Client Received`), Mon–Sat 08:00–17:00 delivery hours, 1–5 day transit and address-change cut-offs
-- [BUFFALO: Contact Us](https://www.buffaloex.com/contact.html) – `support@buffaloex.com`, `service@bufflogistics.com`, `+86-400-921-9066` and office/warehouse addresses (help URL linked by Peek)
-- [BUFFALO: Parcel Tracker](https://www.buffaloex.com/tracks.html) – official tracking lookup page
-- [Universal Parcel Scraper: buffalo-ex](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/buffalo-ex) – `BUFZA...YQ` detection rule, `buffaloex.com` link rules, status catalog (`RETURNS`, `SCAN VEHICLE DEPARTURE`, `Returned to BUFFALO warehouse`), universal tracking routing and help URL
+- [BUFFALO International Logistics: Official Website](https://www.buffaloex.com/) – rede de logística internacional da China para a África
+- [BUFFALO: About Us](https://www.buffaloex.com/about.html) – em operação desde abril de 2017, sede em Xangai, filial em Joanesburgo, 35.000 m² de armazéns (6.500 m² alfandegados), 300 veículos, integração com alfândega e bancos
+- [BUFFALO: Support & Tracking FAQ](https://www.buffaloex.com/support.html) – significado oficial dos status (de `Order Confirmed` a `Client Received`), entregas de segunda a sábado das 08:00 às 17:00, trânsito de 1–5 dias e prazos para alterar o endereço
+- [BUFFALO: Contact Us](https://www.buffaloex.com/contact.html) – `support@buffaloex.com`, `service@bufflogistics.com`, `+86-400-921-9066` e endereços de escritórios e armazéns (link de ajuda usado pelo Peek)
+- [BUFFALO: Parcel Tracker](https://www.buffaloex.com/tracks.html) – página oficial de rastreamento
+- [Universal Parcel Scraper: buffalo-ex](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/buffalo-ex) – regra de reconhecimento de `BUFZA...YQ`, regras de links de `buffaloex.com`, catálogo de status (`RETURNS`, `SCAN VEHICLE DEPARTURE`, `Returned to BUFFALO warehouse`), consulta por serviços de rastreamento e link de ajuda
 :::

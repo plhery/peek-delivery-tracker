@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Cargus: código AWB, status e SHIP & GO
-description: Rastreie encomendas da Cargus na Romênia: onde achar o AWB, significado dos status, pontos SHIP & GO, lockers, entregas perdidas e contatos.
+description: Rastreie encomendas da Cargus na Romênia: onde achar o AWB, significado dos status, pontos SHIP & GO, lockers, entregas não realizadas e contatos.
 slug: cargus-tracking
 published: 2026-11-26
 updated: 2026-11-26
@@ -24,7 +24,7 @@ Códigos de 10 dígitos também cabem em outras transportadoras como DHL e Relai
 
 ## O que significam os status de rastreamento da Cargus
 
-O site cargus.ro abre em romeno; sua versão em inglês mostra os textos em inglês. O site exibe apenas o status mais recente e uma data, enquanto o app Cargus Mobile lista todas as movimentações com a cidade. Veja os textos em inglês, na ordem usual:
+O site cargus.ro abre em romeno; sua versão em inglês mostra os textos em inglês. O site exibe apenas o status mais recente e uma data, enquanto o app Cargus Mobile lista todas as movimentações com a cidade. Veja os textos em inglês, na ordem em que a encomenda passa por eles:
 
 | Status da Cargus | O que significa para você |
 | --- | --- |
@@ -41,7 +41,7 @@ O site cargus.ro abre em romeno; sua versão em inglês mostra os textos em ingl
 
 Três status costumam confundir. `Pickup shipment` indica a Cargus coletando o pacote com o remetente, não você retirando. `Drop off at delivery location by sender` também marca o início do trajeto (postagem pelo remetente), não disponibilidade para retirada. E a Cargus não explica o texto longo sobre entrega por terceiros, que pode aparecer logo após um depósito — se aparecer e nada chegar, fale com a loja.
 
-Em romeno, a coleta pela Cargus aparece como `Expediere colectata`. Tentativa frustrada aparece como `Destinatar avizat la adresă`: o entregador não conseguiu localizar você e o aviso informa onde e até quando retirar.
+Em romeno, a coleta pela Cargus aparece como `Expediere colectata`. Uma entrega não realizada aparece como `Destinatar avizat la adresă`: o entregador não conseguiu localizar você e o aviso informa onde e até quando retirar.
 
 ## Entregas Cargus, pontos SHIP & GO e lockers
 
@@ -82,7 +82,7 @@ Feriados podem alterar o expediente. A Cargus não lista canal específico para 
 
 O [Peek](/) não identifica um AWB da Cargus apenas pelos dígitos. Ao consultar a partir da Romênia, o Peek pergunta à Cargus em códigos de 10 dígitos iniciados por `1`, ou de 9 dígitos iniciados por `85` ou `86`, junto a outras transportadoras compatíveis como DHL eCommerce Iberia, [BOX NOW](carrier:box-now) ou [TNT](carrier:tnt). Fora da Romênia, consulta a Cargus apenas em último caso se serviços de rastreamento não encontrarem o número, junto com DPD Ireland e outros. Se só a Cargus reconhecer o código, aparece "Cargus está com esta encomenda."; se outra também reconhecer, você escolhe. Para outros formatos, selecione "Cargus" em "Trocar" ou cole um link de rastreamento de cargus.ro (em romeno ou inglês), que aponta sempre para a Cargus.
 
-O Peek consulta o serviço usado pelo app da Cargus — que muitas vezes encontra encomendas que o site dá como não encontradas — e exibe cada etapa com data, hora, cidade e condado quando distinto, mantendo o texto original (majoritariamente inglês, com alguns trechos em romeno). Com a encomenda aberta no Peek, ou no dia da entrega com notificações ligadas, consulta até a cada 10 minutos — e a cada 2 minutos a partir das 6h (horário da Romênia) no dia em que aparecer `With courier`. Após dois dias sem novidades (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora, e a cada 6 horas depois de sete dias em "Etiqueta criada". Se ficar quatro dias sem atualização em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", exibe "Sem atualizações desde …" com link "Pedir ajuda a Cargus". Notificações podem seguir "Cada movimentação", "Etapas importantes" ou "Só a entrega". Como a Cargus não informa data prevista nem qual ponto SHIP & GO ou locker guarda o volume, o Peek não os exibe (confira o aviso da Cargus).
+O Peek consulta o serviço usado pelo app da Cargus — que conhece algumas encomendas que o site dá como não encontradas — e exibe cada etapa com data, hora, cidade e condado quando distinto, mantendo o texto original (majoritariamente inglês, com alguns trechos em romeno). Com a encomenda aberta no Peek, ou no dia da entrega com notificações ligadas, consulta até a cada 10 minutos — e a cada 2 minutos a partir das 6h (horário da Romênia) no dia em que aparecer `With courier`. Após dois dias sem novidades (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora, e a cada 6 horas depois de sete dias em "Etiqueta criada". Se ficar quatro dias sem atualização em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", exibe "Sem atualizações desde …" com link "Pedir ajuda a Cargus". Notificações podem seguir "Cada movimentação", "Etapas importantes" ou "Só a entrega". Como a Cargus não informa data prevista nem qual ponto SHIP & GO ou locker guarda o volume, o Peek não os exibe (confira o aviso da Cargus).
 
 Não mostra data prevista, ponto de retirada nem peso, omitindo também quem assinou, PIN de retirada, referência do remetente e quantidade de volumes.
 
@@ -98,25 +98,25 @@ Dentro da Romênia, no máximo 3 dias úteis após a coleta segundo as condiçõ
 
 ### Onde fica o ponto de entrega da Cargus para o meu pacote?
 
-Após duas tentativas frustradas, no ponto SHIP & GO mais próximo do seu endereço, indicado na notificação. Volumes grandes aguardam no armazém local da Cargus.
+Após duas entregas não realizadas, no ponto SHIP & GO mais próximo do seu endereço, indicado na notificação. Volumes grandes aguardam no armazém local da Cargus.
 
 ### Preciso do app da Cargus para abrir um locker?
 
 Sim. Os lockers da Cargus abrem exclusivamente pelo app Cargus Mobile, conectado à internet, enquanto você está diante do compartimento.
 
 :::sources
-- [Cargus: Frequently Asked Questions](https://www.cargus.ro/en/personal/frequently-asked-questions/) – AWB, attempts, redirection, SHIP & GO, lockers, PIN, payment, damage, returns
-- [Cargus: Track your parcel](https://www.cargus.ro/en/personal/track-your-parcel/) – AWB only, English wordings, not-found message
-- [Cargus: Urmărește un colet](https://www.cargus.ro/personal/urmareste-coletul/) – Romanian wordings
-- [Cargus: Contact us](https://www.cargus.ro/en/contact-us/) – phone, hours, Carly, forms
-- [Cargus: Reclamații](https://www.cargus.ro/contacteaza-ne/sugestii/) – complaints form
-- [Cargus: Ce înseamnă AWB](https://www.cargus.ro/blog/ce-inseamna-awb-si-cum-te-ajuta-sa-urmaresti-un-colet/) – 10-digit example, where the AWB comes from, not-found advice, Romanian statuses
-- [Cargus: Livrare nereușită](https://www.cargus.ro/blog/livrare-colet-ratata/) – notice content, return to sender
-- [Cargus: Ce înseamnă destinatar avizat la adresă](https://www.cargus.ro/blog/ce-inseamna-destinatar-avizat-la-adresa/) – missed-delivery status
-- [Cargus: Cum ridici un colet de la SHIP & GO](https://www.cargus.ro/personal/cum-ridici-un-colet/) – PIN, QR code, lockers
-- [Cargus: General Conditions for the Provision of Postal Services](https://www.cargus.ro/wp-content/uploads/Conditii_Generale_de_Furnizare_a_Serviciilor_Postale_Cargus_SRL_en_290926.pdf) – attempts, holds, lockers, delivery times, complaints, compensation
-- [Cargus: Terms and conditions for courier services](https://www.cargus.ro/wp-content/uploads/Termeni_si_conditii_aplicabile_serviciilor_de_curierat_si_transport_ro_en_010926.pdf) – complaint deadline
-- [Cargus: Aplicația Cargus Mobile](https://www.cargus.ro/cargus-mobile-app-ro/) – changing the date or place of delivery
-- [ANCOM: Comanzi online? Ce obligații au cei care îți livrează colete?](https://www.ancom.ro/despre-noi/media/comunicate-de-presa/comanzi-online-63-ce-obligatii-au-cei-care-iti-livreaza-colete-63/) – what ANCOM can and can't do
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [Cargus: Frequently Asked Questions](https://www.cargus.ro/en/personal/frequently-asked-questions/) – AWB, tentativas, redirecionamento, SHIP & GO, lockers, PIN, pagamento, danos, devoluções
+- [Cargus: Track your parcel](https://www.cargus.ro/en/personal/track-your-parcel/) – só o AWB, textos em inglês, mensagem de não encontrado
+- [Cargus: Urmărește un colet](https://www.cargus.ro/personal/urmareste-coletul/) – textos em romeno
+- [Cargus: Contact us](https://www.cargus.ro/en/contact-us/) – telefone, horários, Carly, formulários
+- [Cargus: Reclamații](https://www.cargus.ro/contacteaza-ne/sugestii/) – formulário de reclamações
+- [Cargus: Ce înseamnă AWB](https://www.cargus.ro/blog/ce-inseamna-awb-si-cum-te-ajuta-sa-urmaresti-un-colet/) – exemplo de 10 dígitos, de onde vem o AWB, orientação para não encontrado, status em romeno
+- [Cargus: Livrare nereușită](https://www.cargus.ro/blog/livrare-colet-ratata/) – conteúdo do aviso, devolução ao remetente
+- [Cargus: Ce înseamnă destinatar avizat la adresă](https://www.cargus.ro/blog/ce-inseamna-destinatar-avizat-la-adresa/) – status de entrega não realizada
+- [Cargus: Cum ridici un colet de la SHIP & GO](https://www.cargus.ro/personal/cum-ridici-un-colet/) – PIN, código QR, lockers
+- [Cargus: General Conditions for the Provision of Postal Services](https://www.cargus.ro/wp-content/uploads/Conditii_Generale_de_Furnizare_a_Serviciilor_Postale_Cargus_SRL_en_290926.pdf) – tentativas, prazos de guarda, lockers, prazos de entrega, reclamações, indenização
+- [Cargus: Terms and conditions for courier services](https://www.cargus.ro/wp-content/uploads/Termeni_si_conditii_aplicabile_serviciilor_de_curierat_si_transport_ro_en_010926.pdf) – prazo para reclamar
+- [Cargus: Aplicația Cargus Mobile](https://www.cargus.ro/cargus-mobile-app-ro/) – alterar a data ou o local de entrega
+- [ANCOM: Comanzi online? Ce obligații au cei care îți livrează colete?](https://www.ancom.ro/despre-noi/media/comunicate-de-presa/comanzi-online-63-ce-obligatii-au-cei-care-iti-livreaza-colete-63/) – o que a ANCOM pode e não pode fazer
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê
 :::

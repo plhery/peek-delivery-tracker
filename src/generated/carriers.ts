@@ -15222,6 +15222,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "c-chez-vous",
+      "catalog": "c-chez-vous",
+      "slug": "c-chez-vous-tracking",
+      "title": "Rastreio C Chez Vous: pedido, status e agendamento",
+      "name": "C chez vous",
+      "color": "#e50046"
+    },
+    {
       "id": "geodis",
       "catalog": "geodis",
       "slug": "geodis-tracking",
@@ -16036,6 +16044,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Morning Global: código BR…MG, status e ajuda",
       "name": "Morning Global",
       "color": "#050059"
+    },
+    {
+      "id": "border-express",
+      "catalog": "border-express",
+      "slug": "border-express-tracking",
+      "title": "Rastreio Border Express: códigos, status e entregas",
+      "name": "Border Express",
+      "color": "#cc092f"
     },
     {
       "id": "delhivery",
@@ -19868,6 +19884,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "c-chez-vous",
+      "catalog": "c-chez-vous",
+      "slug": "c-chez-vous-tracking",
+      "title": "C Chez Vous 物流查询：订单号、法语状态与预约派送",
+      "name": "C chez vous",
+      "color": "#e50046"
+    },
+    {
       "id": "geodis",
       "catalog": "geodis",
       "slug": "geodis-tracking",
@@ -20698,6 +20722,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Morning Global 物流查询：BR…MG单号、状态与客服联系",
       "name": "Morning Global",
       "color": "#050059"
+    },
+    {
+      "id": "border-express",
+      "catalog": "border-express",
+      "slug": "border-express-tracking",
+      "title": "Border Express 物流查询：运单号格式、状态含义与追踪指南",
+      "name": "Border Express",
+      "color": "#cc092f"
     },
     {
       "id": "delhivery",

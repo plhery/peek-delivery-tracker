@@ -16,7 +16,7 @@ Verifique o recibo da agência postal, a página do pedido na loja sul-coreana o
 | --- | --- |
 | `EM482917367KR` | Envio internacional **EMS** de mercadorias (formato UPU S10 terminado em `KR`; documentos normalmente começam com `EE`). |
 | `RR482917367KR` | Correspondência registrada internacional ou item K-Packet (formato UPU S10: 2 letras + 9 dígitos com dígito verificador + `KR`). |
-| `6482917364058` | Número doméstico sul-coreano de 13 dígitos para encomenda ou registrado (começando com os dígitos `1`–`6`). Compartilha o formato de 13 dígitos numéricos com Correos de Chile, [Delhivery](carrier:delhivery), [Econt](carrier:econt), [Paquetexpress](carrier:paquetexpress) e outras. |
+| `6482917364058` | Número doméstico sul-coreano de 13 dígitos para encomenda ou registrado (começando com os dígitos `1`–`6`). Compartilha o formato de 13 dígitos numéricos com [Correos de Chile](carrier:correos-chile), [Delhivery](carrier:delhivery), [Econt](carrier:econt), [Paquetexpress](carrier:paquetexpress) e outras. |
 
 Na [visão geral EMS da Korea Post](https://ems.epost.go.kr/front.Introduction01.postal), prefixos `EE` identificam documentos EMS (dispensados de inspeção aduaneira de mercadorias), enquanto prefixos `EM` indicam envios EMS de mercadorias. Para outros códigos postais internacionais, veja [formatos de código de rastreamento](guide:tracking-number-formats).
 

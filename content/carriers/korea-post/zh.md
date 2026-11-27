@@ -16,7 +16,7 @@ updated: 2026-11-26
 | --- | --- |
 | `EM482917367KR` | 国际 **EMS** 商品类快件（以 `KR` 结尾的 UPU S10 格式；文件类通常以 `EE` 开头）。 |
 | `RR482917367KR` | 国际挂号邮件或 K-Packet 货件（UPU S10 格式：2 位字母 + 9 位含校验码数字 + `KR`）。 |
-| `6482917364058` | 13 位韩国国内挂号信或包裹单号（以数字 `1`–`6` 开头）。与 Correos de Chile、[Delhivery](carrier:delhivery)、[Econt](carrier:econt)、[Paquetexpress](carrier:paquetexpress) 等承运商共享 13 位纯数字格式。 |
+| `6482917364058` | 13 位韩国国内挂号信或包裹单号（以数字 `1`–`6` 开头）。与 [Correos de Chile](carrier:correos-chile)、[Delhivery](carrier:delhivery)、[Econt](carrier:econt)、[Paquetexpress](carrier:paquetexpress) 等承运商共享 13 位纯数字格式。 |
 
 根据 [Korea Post EMS 服务概览](https://ems.epost.go.kr/front.Introduction01.postal)，`EE` 前缀用于 EMS 文件（无需商品海关查验），而 `EM` 前缀用于 EMS 商品包裹。如需了解其他国际邮政单号格式，请参阅[单号格式指南](guide:tracking-number-formats)（英文）。
 

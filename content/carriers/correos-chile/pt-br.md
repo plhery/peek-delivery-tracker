@@ -41,7 +41,7 @@ Uma encomenda vinda do exterior, como uma compra online, passa pela alfândega n
 
 **Inspeções aduaneiras.** Ao chegar à planta da Correos de Chile, a alfândega pode selecionar seu pacote para vistoria física nos armazéns da Correos de Chile. Se precisar de comprovante de compra, certificado ou permissão (*visto bueno*), a Correos de Chile avisa como proceder e onde obtê-lo; sem isso a alfândega não libera o volume. Havendo impostos ou IVA a cobrar, a Correos de Chile pede prova do valor pago (recibo ou fatura); sem comprovante, a alfândega avalia a mercadoria a preços de mercado. Após a liberação aduaneira, a Correos de Chile realiza a entrega.
 
-**Entrega e retirada.** O Peek não conseguiu ler as regras próprias da Correos de Chile sobre tentativas de entrega, retirada ou prazo de guarda, portanto esta página não traz esses dados. Veja [entregas perdidas](guide:missed-delivery) e [encomendas não retiradas](guide:uncollected-parcel).
+**Entrega e retirada.** O Peek não conseguiu ler as regras próprias da Correos de Chile sobre tentativas de entrega, retirada ou prazo de guarda, portanto esta página não traz esses dados. Veja [entrega não realizada](guide:missed-delivery) e [encomendas não retiradas](guide:uncollected-parcel).
 
 ## Encomendas da Correos de Chile enviadas ao exterior
 
@@ -53,9 +53,9 @@ Sua encomenda saiu do Chile com um código `CL`? Depois que ela deixa o Chile, c
 
 **Nenhuma etapa ainda.** O remetente pode ainda não ter postado o volume. Vinculado à Correos de Chile, o pacote exibe "Aguardando Correos de Chile" e o Peek continua consultando. Se nada surgir em alguns dias, confirme o código com o remetente. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
-**Parado na alfândega.** A última linha é `ENVÍO EN PROCESO DE INTERNACIÓN AL PAÍS` e o Peek sinaliza "Na alfândega". A alfândega pode estar fiscalizando ou aguardando documento/pagamento: a Correos de Chile avisa quando algo for necessário.
+**Parado na alfândega.** A última linha é `ENVÍO EN PROCESO DE INTERNACIÓN AL PAÍS` e o Peek sinaliza "Desembaraço aduaneiro". A alfândega pode estar fiscalizando ou aguardando documento/pagamento: a Correos de Chile avisa quando algo for necessário.
 
-**Sem novidades há dias.** Quando um pacote em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito" fica quatro dias sem nova etapa, o Peek exibe a data da última leitura ("Sem atualização de rastreamento desde seg 12 out") e um link "Obter ajuda da Correos de Chile". Encomendas costumam ficar quietas em voos longos ou fins de semana. Após três semanas sem novidade, mostra "Nenhuma novidade há mais de três semanas. Se ainda não chegou, fale com o vendedor."
+**Sem novidades há dias.** Quando um pacote em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito" fica quatro dias sem nova etapa, o Peek sinaliza o dia dessa etapa ("Sem atualizações desde seg 12 out") com um link "Pedir ajuda a Correos de Chile". Encomendas costumam ficar quietas em voos longos ou fins de semana. Após três semanas sem nova etapa, mostra em vez disso "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor."
 
 **Entregue, mas não chegou.** Pergunte a vizinhos e à agência de entrega, e depois ao remetente. Veja [entregue mas não recebido](guide:delivered-not-received).
 
@@ -69,15 +69,15 @@ Em compras online, fale primeiro com a loja que contratou o envio.
 
 ## Rastreie uma encomenda Correos de Chile com o Peek
 
-O [Peek](/) reconhece duas letras, nove dígitos e `CL` como Correos de Chile quando o dígito verificador está correto e mostra "Transportadora detectada"; "Alterar" permite escolher outra. Com dígito verificador incorreto, avisa "O dígito verificador deste código não confere.": confira o e-mail de envio ou escolha "Rastrear como digitado".
+O [Peek](/) reconhece duas letras, nove dígitos e `CL` como Correos de Chile quando o dígito verificador está correto e mostra "Transportadora detectada"; "Trocar" permite escolher outra. Com dígito verificador incorreto, avisa "O dígito verificador deste código não confere.": confira o e-mail de envio ou escolha "Rastrear como digitado".
 
-Um número de 13 dígitos não identifica a Correos de Chile apenas pelo formato. Cole mesmo assim: o Peek acompanha mais de 4.500 transportadoras. Sem transportadora definida, o Peek consulta primeiro FAN Courier (e Paquetexpress no México), depois serviços de rastreamento ("Consultando serviços de rastreamento…") e, se ninguém conhecer o código, outras transportadoras de 13 dígitos como Delhivery, Econt ou Ozon — nunca a Correos de Chile automaticamente. Ele vincula à Correos de Chile somente se um serviço indicar exclusivamente ela com etapas datadas. Portanto, se a loja informar Correos de Chile, toque em "Alterar" e escolha em "Compatível com este código", ou use "Alterar transportadora" em um pacote já adicionado. Um código emitido por outro correio (como terminado em `CN`) não pertence à Correos de Chile: ao escolhê-la para ele, o Peek informa que ela não emite códigos nesse formato.
+Um número de 13 dígitos não identifica a Correos de Chile apenas pelo formato. Cole mesmo assim: o Peek acompanha mais de 4.500 transportadoras. Sem transportadora definida, o Peek consulta primeiro FAN Courier (e Paquetexpress no México), depois serviços de rastreamento ("Consultando serviços de rastreamento…") e, se ninguém conhecer o código, outras transportadoras de 13 dígitos como Delhivery, Econt ou Ozon — mas nunca a Correos de Chile. Ele vincula à Correos de Chile somente se um serviço indicar exclusivamente ela com etapas datadas. Portanto, se a loja informar Correos de Chile, toque em "Trocar" e escolha em "Compatível com este código", ou use "Trocar transportadora" em um pacote já adicionado. Um código emitido por outro correio (como terminado em `CN`) não pertence à Correos de Chile: ao escolhê-la para ele, o Peek informa que ela "não emite códigos como este".
 
 Vinculada à Correos de Chile, a encomenda mostra "Aguardando Correos de Chile" até a primeira etapa. Depois, o Peek consulta diretamente o rastreador da Correos de Chile e mostra as linhas conhecidas em espanhol com a agência sob suas próprias etapas ("Recebida pela transportadora", "Na alfândega" etc.), omitindo o nome do destinatário e sem data estimada de entrega. Os horários da Correos de Chile não trazem fuso horário: o Peek interpreta no horário local da agência indicada ou das etapas vizinhas. Se o rastreador não responder, consulta serviços de rastreamento (começando por 17TRACK) e exibe o texto deles.
 
 Ao rastrear um código `CL` fora do Chile, o Peek consulta também o correio do seu país com o mesmo código: USPS nos EUA, Royal Mail no Reino Unido (Parcelforce para códigos iniciados em `E`), An Post na Irlanda, Canada Post, Australia Post, NZ Post, [DHL](carrier:dhl) na Alemanha, [La Poste](carrier:la-poste) na França, [Correos](carrier:correos-spain) na Espanha, [Correios](carrier:correios-br) no Brasil e os correios dos demais países da UE (exceto Países Baixos), Argentina e Peru, entre outros. Ele alterna para esse correio assim que surgir etapa tão recente quanto a última da Correos de Chile, preservando o histórico anterior. Do México ou da China não consulta outro correio. No sentido inverso, o Peek não consulta na Correos de Chile uma encomenda enviada ao Chile sob código de outro correio: segue acompanhando pelo correio emissor.
 
-Enquanto o pacote estiver aberto no Peek, ou no dia da entrega com notificações ativadas, o Peek consulta a Correos de Chile até a cada 10 minutos e, no dia em que sai para entrega, a partir das 6h no relógio da última leitura (horário chileno no Chile), até a cada 2 minutos — ou a cada 5 minutos quando a consulta usa navegador — enquanto o rastreador oficial responder. Após dois dias sem novidades (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora; após sete dias em "Etiqueta criada" ou sem nenhuma etapa, a cada 6 horas. Alertas: "Cada leitura", "Etapas importantes" ou "Apenas entrega". O Peek não pode contatar a Correos de Chile, seu correio nem a loja por você.
+Enquanto o pacote estiver aberto no Peek, ou no dia da entrega com notificações ativadas, o Peek consulta a Correos de Chile até a cada 10 minutos e, no dia em que sai para entrega, a partir das 6h no relógio da última leitura (horário chileno no Chile), até a cada 2 minutos — ou a cada 5 minutos quando a consulta usa navegador — enquanto o rastreador da própria Correos de Chile responder. Após dois dias sem novidades (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora; após sete dias em "Etiqueta criada" ou sem nenhuma etapa, a cada 6 horas. Alertas: "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode contatar a Correos de Chile, seu correio nem a loja por você.
 
 ## Perguntas sobre o rastreamento da Correos de Chile
 
@@ -99,7 +99,7 @@ O pacote pode estar na alfândega, em voo ou ainda não postado. Enviado ao exte
 
 ### Como é um código de rastreamento da Correos de Chile?
 
-Duas letras, nove dígitos e `CL` (como `RR482910372CL`), ou 13 dígitos. O Peek reconhece o primeiro pelo formato; para o segundo, escolha Correos de Chile em "Alterar".
+Duas letras, nove dígitos e `CL` (como `RR482910372CL`), ou 13 dígitos. O Peek reconhece o primeiro pelo formato; para o segundo, escolha Correos de Chile em "Trocar".
 
 :::sources
 - [Servicio Nacional de Aduanas: Compras online](https://www.aduana.cl/aduana/site/edic/base/port/comercio_electronico.html) – compras postais via Correos de Chile e demais via courier

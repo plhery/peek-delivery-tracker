@@ -32,8 +32,10 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.clearText
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -129,6 +131,7 @@ import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestAsked
 import com.plhery.peekdeliverytracker.core.labelKey
 import com.plhery.peekdeliverytracker.core.text
 import com.plhery.peekdeliverytracker.core.thanksKey
+import com.plhery.peekdeliverytracker.ui.KeptTyping
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.NoSuggestions
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
@@ -245,12 +248,13 @@ internal class ParcelFeedbackWork(val model: ParcelFeedbackModel, private val sc
 
     var reasons: Set<ParcelFeedbackReason> by mutableStateOf(emptySet())
         private set
-    var note: String by mutableStateOf("")
-        private set
-    var who: String by mutableStateOf("")
-        private set
-    var address: String by mutableStateOf("")
-        private set
+    /** What is typed, each kept within its limit as it is typed ([NoteKept], [WhoKept], [AddressKept]). */
+    val noteField = TextFieldState()
+    val note: String get() = noteField.text.toString()
+    val whoField = TextFieldState()
+    val who: String get() = whoField.text.toString()
+    val addressField = TextFieldState()
+    val address: String get() = addressField.text.toString()
     var failed: Boolean by mutableStateOf(false)
         private set
 
@@ -308,15 +312,15 @@ internal class ParcelFeedbackWork(val model: ParcelFeedbackModel, private val sc
         val words = model.words
         if (words != null && words != this.words) {
             reasons = words.reasons
-            note = ""
+            noteField.clearText()
             failed = false
             large = false
         }
         this.words = words
         val naming = model.namingCarrier
         if (naming && !namingCarrier) {
-            who = ""
-            address = ""
+            whoField.clearText()
+            addressField.clearText()
             failed = false
             large = false
         }
@@ -388,19 +392,6 @@ internal class ParcelFeedbackWork(val model: ParcelFeedbackModel, private val sc
 
     fun toggle(reason: ParcelFeedbackReason) {
         reasons = if (reason in reasons) reasons - reason else reasons + reason
-    }
-
-    /** What is typed, each kept within its limit as it is typed (the sheets' `onChange`). */
-    fun typeNote(typed: String) {
-        note = ParcelFeedbackWordsSheet.note(typed)
-    }
-
-    fun typeWho(typed: String) {
-        who = ParcelFeedbackCarrierSheet.who(typed)
-    }
-
-    fun typeAddress(typed: String) {
-        address = ParcelFeedbackCarrierSheet.page(typed)
     }
 
     /** The sheet's `send()`: what it holds, and the failure said where it couldn't go. */
@@ -1243,6 +1234,11 @@ private fun WordToast(work: ParcelFeedbackWork, word: Word, backdrop: MaterialBa
     }
 }
 
+/** The sheets' fields, each kept within its limit as it is typed (the sheets' `onChange`). */
+private val NoteKept = KeptTyping(ParcelFeedbackWordsSheet::note)
+private val WhoKept = KeptTyping(ParcelFeedbackCarrierSheet::who)
+private val AddressKept = KeptTyping(ParcelFeedbackCarrierSheet::page)
+
 /**
  * ParcelFeedbackWordsSheet (B-S61): the reasons as chips, several at once, each toggled with the selection tap and
  * waiting while the words go; the note, two to six lines, the characters it has left said under it once 200 or fewer;
@@ -1269,15 +1265,14 @@ private fun WordsSheet(work: ParcelFeedbackWork, writing: () -> Unit) {
         val label = localizer.text(if (missing) "feedback.missing.note" else "feedback.note")
         FeedbackField(label) { focused ->
             BasicTextField(
-                work.note,
-                work::typeNote,
+                work.noteField,
                 Modifier.feedbackField(FEEDBACK_NOTE, label, focused, writing),
+                inputTransformation = NoteKept,
                 textStyle = fieldStyle(),
-                minLines = 2,
-                maxLines = 6,
+                lineLimits = TextFieldLineLimits.MultiLine(minHeightInLines = 2, maxHeightInLines = 6),
                 cursorBrush = SolidColor(PeekTheme.colors.ink),
                 keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
-                decorationBox = { FieldFrame(focused.value, it) },
+                decorator = { FieldFrame(focused.value, it) },
             )
         }
         ParcelFeedbackWordsSheet.noteLeftText(work.note, localizer)?.let {
@@ -1310,15 +1305,15 @@ private fun CarrierSheet(work: ParcelFeedbackWork, writing: () -> Unit) {
         FeedbackField(whoLabel) { focused ->
             NoSuggestions {
                 BasicTextField(
-                    work.who,
-                    work::typeWho,
+                    work.whoField,
                     Modifier.feedbackField(FEEDBACK_WHO, whoLabel, focused, writing),
+                    inputTransformation = WhoKept,
                     textStyle = fieldStyle(),
-                    singleLine = true,
+                    lineLimits = TextFieldLineLimits.SingleLine,
                     cursorBrush = SolidColor(PeekTheme.colors.ink),
                     keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences, autoCorrectEnabled = false, imeAction = ImeAction.Next),
-                    keyboardActions = KeyboardActions(onNext = { next.requestFocus() }),
-                    decorationBox = { FieldFrame(focused.value, it) },
+                    onKeyboardAction = { next.requestFocus() },
+                    decorator = { FieldFrame(focused.value, it) },
                 )
             }
         }
@@ -1327,17 +1322,17 @@ private fun CarrierSheet(work: ParcelFeedbackWork, writing: () -> Unit) {
             // An address as its reader has it, with or without its scheme: a person reads it, nothing opens it.
             NoSuggestions {
                 BasicTextField(
-                    work.address,
-                    work::typeAddress,
+                    work.addressField,
                     Modifier.feedbackField(FEEDBACK_WHERE, whereLabel, focused, writing).focusRequester(next),
+                    inputTransformation = AddressKept,
                     textStyle = fieldStyle(),
-                    singleLine = true,
+                    lineLimits = TextFieldLineLimits.SingleLine,
                     cursorBrush = SolidColor(PeekTheme.colors.ink),
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.None, autoCorrectEnabled = false, keyboardType = KeyboardType.Uri, imeAction = ImeAction.Send,
                     ),
-                    keyboardActions = KeyboardActions(onSend = { if (!work.carrierEmpty) work.sendCarrier() }),
-                    decorationBox = { FieldFrame(focused.value, it) },
+                    onKeyboardAction = { if (!work.carrierEmpty) work.sendCarrier() },
+                    decorator = { FieldFrame(focused.value, it) },
                 )
             }
         }

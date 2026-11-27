@@ -31,6 +31,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.InputTransformation
+import androidx.compose.foundation.text.input.TextFieldBuffer
+import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.then
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -107,6 +112,7 @@ import com.plhery.peekdeliverytracker.core.noteFileProblem
 import com.plhery.peekdeliverytracker.core.notePieces
 import com.plhery.peekdeliverytracker.platform.NoteFileHandOut
 import com.plhery.peekdeliverytracker.platform.NoteFilePreparation
+import com.plhery.peekdeliverytracker.ui.KeptTyping
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
@@ -181,8 +187,8 @@ internal class NotePick(val name: String, val pdf: Boolean, val read: suspend ()
  */
 @Stable
 internal class NoteSheetWork(val request: NoteRequest, opened: String, val openedWithNote: Boolean, val parcel: Parcel?) {
-    var text: String by mutableStateOf(opened)
-        private set
+    val textField = TextFieldState(opened)
+    val text: String get() = textField.text.toString()
 
     var saving: Boolean by mutableStateOf(false)
         internal set
@@ -196,10 +202,14 @@ internal class NoteSheetWork(val request: NoteRequest, opened: String, val opene
     /** The three ways to add a file show under its button. */
     var choosing: Boolean by mutableStateOf(false)
 
-    fun type(value: String) {
-        text = ParcelNotes.clip(value)
-        failed = false
-    }
+    /** What is typed, cut to the limit as it comes, and the last save's failure forgotten once the words change. */
+    val typing: InputTransformation = KeptTyping(ParcelNotes::clip).then(
+        object : InputTransformation {
+            override fun TextFieldBuffer.transformInput() {
+                if (!asCharSequence().contentEquals(originalText)) failed = false
+            }
+        },
+    )
 }
 
 /**
@@ -997,20 +1007,19 @@ private fun NoteField(sheet: NoteSheetWork, name: String) {
     val placeholder = localizer.text("note.placeholder")
     val shape = ContinuousRoundedShape(14.dp)
     BasicTextField(
-        sheet.text,
-        sheet::type,
+        sheet.textField,
         Modifier
             .fillMaxWidth()
             .testTag(PARCEL_NOTE_FIELD)
             .keptFocus(PARCEL_NOTE_FIELD)
             .onFocusChanged { focused = it.isFocused }
             .semantics { contentDescription = label },
+        inputTransformation = sheet.typing,
         textStyle = style.copy(color = colors.label),
-        minLines = 5,
-        maxLines = 12,
+        lineLimits = TextFieldLineLimits.MultiLine(minHeightInLines = 5, maxHeightInLines = 12),
         cursorBrush = SolidColor(colors.accent),
         keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
-        decorationBox = { text ->
+        decorator = { text ->
             Box(
                 Modifier
                     .background(colors.paper, shape)

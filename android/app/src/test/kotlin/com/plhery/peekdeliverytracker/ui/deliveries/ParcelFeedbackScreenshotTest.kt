@@ -3,6 +3,7 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 import android.view.View
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
@@ -240,7 +241,7 @@ class ParcelFeedbackScreenshotTest {
         tap(FEEDBACK_REASON + ParcelFeedbackReason.Steps.name)
         tap(FEEDBACK_ADD_NOTE)
         doing {
-            typeNote("The last step came a day late.")
+            noteField.setTextAndPlaceCursorAtEnd("The last step came a day late.")
             sendWords()
         }
         compose.screenshot("parcel_feedback_noted_light")
@@ -265,7 +266,7 @@ class ParcelFeedbackScreenshotTest {
         tap(FEEDBACK_NOT_QUITE)
         tap(FEEDBACK_NOT_RECEIVED)
         tap(FEEDBACK_ADD_NOTE)
-        doing { typeNote("Nothing yet, and the seller hasn't answered.") }
+        doing { noteField.setTextAndPlaceCursorAtEnd("Nothing yet, and the seller hasn't answered.") }
         compose.screenshot("parcel_feedback_missing_sheet_dark")
         doing { sendWords() }
         toTheEnd()
@@ -298,8 +299,8 @@ class ParcelFeedbackScreenshotTest {
         show(lamp)
         tap(FEEDBACK_YES)
         doing(lamp) {
-            typeWho("Parcel Line")
-            typeAddress("https://example.com/track")
+            whoField.setTextAndPlaceCursorAtEnd("Parcel Line")
+            addressField.setTextAndPlaceCursorAtEnd("https://example.com/track")
             sendCarrier()
         }
         compose.screenshot("parcel_feedback_unknown_named_light")
@@ -314,7 +315,7 @@ class ParcelFeedbackScreenshotTest {
         tap(FEEDBACK_ADD_NOTE)
         doing {
             toggle(ParcelFeedbackReason.Arrived)
-            typeNote("It says delivered, but nothing came.")
+            noteField.setTextAndPlaceCursorAtEnd("It says delivered, but nothing came.")
         }
     }
 
@@ -343,8 +344,8 @@ class ParcelFeedbackScreenshotTest {
     private fun carrierSheet() {
         tap(FEEDBACK_YES)
         doing(lamp) {
-            typeWho("Parcel Line")
-            typeAddress("https://example.com/track")
+            whoField.setTextAndPlaceCursorAtEnd("Parcel Line")
+            addressField.setTextAndPlaceCursorAtEnd("https://example.com/track")
         }
     }
 

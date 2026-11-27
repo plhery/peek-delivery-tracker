@@ -34,10 +34,8 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.input.InputTransformation
-import androidx.compose.foundation.text.input.TextFieldBuffer
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.TextFieldState
-import androidx.compose.foundation.text.input.placeCursorAtEnd
 import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
@@ -106,6 +104,7 @@ import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthenticationError
 import com.plhery.peekdeliverytracker.core.SessionStore
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
+import com.plhery.peekdeliverytracker.ui.KeptTyping
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.NoSuggestions
@@ -246,17 +245,8 @@ internal val String.cleanedEmail: String get() = trim().lowercase()
 internal fun signInCode(typed: String): String =
     typed.filter { it.category in NUMBERS }.take(6)
 
-/** [signInCode] as the code is typed or pasted, the cursor at the end of what is kept when anything was left out. */
-private object SignInCodeDigits : InputTransformation {
-    override fun TextFieldBuffer.transformInput() {
-        val typed = asCharSequence().toString()
-        val kept = signInCode(typed)
-        if (kept != typed) {
-            replace(0, length, kept)
-            placeCursorAtEnd()
-        }
-    }
-}
+/** [signInCode] as the code is typed or pasted. */
+private val SignInCodeDigits = KeptTyping(::signInCode)
 
 private val NUMBERS = setOf(CharCategory.DECIMAL_DIGIT_NUMBER, CharCategory.LETTER_NUMBER, CharCategory.OTHER_NUMBER)
 

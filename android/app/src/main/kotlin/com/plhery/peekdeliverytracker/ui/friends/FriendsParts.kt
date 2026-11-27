@@ -12,6 +12,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextStyle
+import com.plhery.peekdeliverytracker.ui.KeptTyping
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.button
 import kotlinx.coroutines.currentCoroutineContext
@@ -47,8 +48,6 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.text.input.InputTransformation
-import androidx.compose.foundation.text.input.TextFieldBuffer
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.rememberTextFieldState
@@ -470,13 +469,7 @@ internal fun String.cutToScalars(limit: Int = NICKNAME_SCALARS): String =
     if (codePointCount(0, length) <= limit) this else substring(0, offsetByCodePoints(0, limit))
 
 /** The nickname's field keeps its first 24 scalars of whatever is typed or pasted ([cutToScalars]). */
-private object NicknameScalars : InputTransformation {
-    override fun TextFieldBuffer.transformInput() {
-        val text = asCharSequence().toString()
-        val cut = text.cutToScalars()
-        if (cut.length < text.length) replace(cut.length, length, "")
-    }
-}
+private val NicknameScalars = KeptTyping { it.cutToScalars() }
 
 /**
  * `FriendsProfileForm`: "friends.nickname" over its field (raised with 14-point corners, in by 14, the nickname's

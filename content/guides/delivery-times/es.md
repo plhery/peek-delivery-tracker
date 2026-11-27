@@ -1,15 +1,15 @@
 ---
 title: ¿A qué hora reparte Correos? Sábados y otras empresas
-description: Correos reparte paquetes de lunes a viernes, sin horario publicado. A qué hora reparten GLS, MRW, NACEX y Amazon, y quién entrega los sábados y los domingos.
+description: Correos no reparte paquetes los sábados (solo de lunes a viernes, sin hora fija). Horarios de GLS, MRW, NACEX, CTT Express y Amazon, y reparto en sábado.
 slug: a-que-hora-reparte-correos
 picture: Un reloj que marca las ocho de la tarde bajo una luna creciente, un calendario con los fines de semana marcados, una furgoneta con los faros encendidos y Pip mirando desde una ventana.
 published: 2026-10-14
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Un paquete puede llegarte desde primera hora de la mañana hasta bien entrada la tarde, y casi ninguna empresa te promete una hora. Correos no publica horario de reparto, GLS reparte más o menos de 9:00 a 20:00, CTT Express en general de 9:00 a 19:00, y Amazon, con «Entrega hoy», hasta las 22:00. La mayoría reparte de lunes a viernes: el sábado depende casi siempre del servicio que pagó quien envía, y el domingo solo lo anuncia Amazon, en determinados códigos postales.
+Correos no reparte paquetes los sábados ni publica horario de reparto: según sus condiciones de paquetería entrega de lunes a viernes (y con Paq Premium quien envía puede elegir franja hasta las 21:00). GLS reparte aproximadamente de 9:00 a 20:00 (los sábados antes de mediodía solo con ExpressSaturday, sin mención a domingos), CTT Express en general de 9:00 a 19:00 (sábados solo en Navidad), y Amazon llega hasta las 22:00 con «Entrega hoy» y también reparte fines de semana con Prime en determinados códigos postales.
 
-## ¿A qué hora reparte Correos y hasta qué hora reparten los demás?
+## ¿Cuándo y a qué hora reparte Correos y hasta qué hora reparten los demás?
 
 | Empresa | De lunes a viernes | Sábado | Domingo |
 | --- | --- | --- | --- |
@@ -43,9 +43,9 @@ Depende de la empresa y del servicio que pagó quien envía. Estos son los plazo
 
 El plazo empieza a contar cuando la empresa recoge o admite el paquete, no cuando haces el pedido. En Correos, si quien envía lo deja en un punto de conveniencia de Correos o asociado, o en una Citypaq, el plazo no empieza hasta que el paquete se admite en la oficina, y si llega después de la hora límite del día, que depende de la provincia de origen, se suma un día. En los envíos con origen o destino en Canarias, Ceuta, Melilla o Andorra, Correos tampoco cuenta el tiempo de la tramitación aduanera.
 
-## ¿Reparten paquetes los sábados y los domingos?
+## ¿Correos y GLS reparten paquetes los sábados y fines de semana?
 
-**Los sábados**, casi siempre solo si quien envía lo ha pagado. La Ley 43/2010 obliga a Correos, como operador del servicio postal universal, a entregar «al menos, todos los días laborables, de lunes a viernes», y sus condiciones de paquetería describen un servicio de lunes a viernes. GLS, NACEX y Correos Express reparten en sábado solo como un servicio añadido que contrata el remitente, y CTT Express solo en Navidad.
+**Los sábados**, Correos no reparte paquetes: la Ley 43/2010 le obliga, como operador del servicio postal universal, a entregar «al menos, todos los días laborables, de lunes a viernes», y sus condiciones de paquetería describen un servicio de lunes a viernes. En las demás casi siempre depende de si quien envía lo ha pagado: GLS (antes de mediodía con ExpressSaturday), NACEX y Correos Express reparten en sábado solo como servicio añadido que contrata el remitente, y CTT Express solo en Navidad.
 
 **Los domingos**, solo Amazon dice que reparte: sus envíos Prime en un día incluyen «entregas en fin de semana en determinados códigos postales». Ninguna otra empresa de la tabla lo ofrece en sus páginas.
 

@@ -1,12 +1,12 @@
 ---
 title: Vinted Go suivi : statuts, consigne, point relais et contact
-description: Suivre un colis Vinted Go : où trouver le numéro, ce que veut dire chaque statut, combien de temps le colis t'attend en consigne et qui contacter en cas de souci.
+description: Suivi colis Vinted Go : où trouver le numéro, statuts (« en chemin vers la consigne »), retrait en consigne (7 jours), pays desservis et support Vinted.
 slug: vinted-go-suivi
 published: 2026-10-11
-updated: 2026-11-23
+updated: 2026-11-27
 ---
 
-Vinted Go est le service de livraison de Vinted : il achemine les colis vendus sur Vinted d'une consigne ou d'un point relais vers une autre consigne, un point relais ou un voisin relais, et en France parfois jusqu'à ta porte. Pour suivre ton colis, ouvre la conversation de la commande sur Vinted et clique sur « Suivre le colis », ou saisis le numéro sur la [page de suivi de Vinted Go](https://vintedgo.com/fr/tracking).
+Vinted Go est le service de livraison de Vinted : il achemine les colis en consigne Vinted Go (locker), point relais ou chez un voisin relais en France, Belgique, Pays-Bas, Espagne, Portugal et Finlande (mais pas au Luxembourg). Pour le suivi d'un colis Vinted Go, ouvre la conversation sur Vinted puis « Suivre le colis », saisis le numéro sur la [page de suivi de Vinted Go](https://vintedgo.com/fr/tracking), ou colle-le ci-dessus ; en consigne comme en point relais, le colis t'attend 7 jours calendaires.
 
 ## Numéro de suivi Vinted Go : où le trouver
 
@@ -102,25 +102,25 @@ Le suivi est vérifié jusqu'à toutes les 10 minutes, toutes les heures dès qu
 
 ## Questions sur le suivi Vinted Go
 
-### Combien de temps pour récupérer un colis Vinted Go en consigne ?
+### Combien de temps pour récupérer un colis en consigne Vinted Go ?
 
-7 jours calendaires à partir de son arrivée, en consigne comme en point relais. Ensuite, il repart chez le vendeur et Vinted te rembourse.
+7 jours calendaires à partir de son arrivée, en consigne comme en point relais, avec ton code de retrait envoyé par e-mail (et parfois SMS). Passé ce délai, le colis repart chez le vendeur et Vinted te rembourse.
 
-### Combien de temps met une livraison Vinted Go ?
+### Que veut dire « Le colis est en chemin vers le/la consigne » ?
 
-Les conditions de Vinted Go visent 3 à 6 jours ouvrés entre le dépôt et ton point, hors samedis, dimanches et jours fériés. Vinted Go demande d'attendre 25 jours ouvrés avant de considérer un colis comme manquant.
+Le colis est en transit vers ta consigne Vinted Go, mais n'est pas encore déposé dans le casier. Attends le statut `Le colis est prêt à être retiré en consigne` et ton code de retrait avant de te déplacer.
+
+### Vinted Go existe-t-il au Luxembourg et quel est le délai ?
+
+Non : au Luxembourg, Vinted propose Mondial Relay, DPD, Shop2Shop by Chronopost et DHL Express. Ailleurs, les conditions de Vinted Go visent 3 à 6 jours ouvrés entre le dépôt et ton point, et demandent d'attendre 25 jours ouvrés avant de signaler un colis manquant.
 
 ### Quel est le numéro de téléphone de Vinted Go ?
 
-Seulement pour l'aide aux consignes. En Belgique, c'est le +31 20 793 2587 (en anglais et en français) ; en France, en Belgique, aux Pays-Bas et en Espagne, le bouton « ? » de l'écran de la consigne le donne ; au Portugal, la consigne ouvre un chat à la place. Pour tout le reste, tu passes par le support de Vinted.
+Uniquement pour l'aide aux consignes : +31 20 793 2587 en Belgique, ou via le bouton « ? » sur l'écran en France, Belgique, Pays-Bas et Espagne ; chat au Portugal. Pour tout problème de commande, passe par le support de Vinted.
 
-### Que faire si le point relais Vinted Go est fermé ?
+### Pourquoi mon suivi Vinted Go ne marche pas ou le point relais est fermé ?
 
-Repasse pendant ses heures d'ouverture, que tu trouves sur la carte de Vinted Go. Tu as 7 jours pour retirer ton colis.
-
-### Pourquoi mon suivi Vinted Go ne fonctionne pas ?
-
-Le suivi peut mettre jusqu'à 48 h à apparaître après l'envoi, et un numéro mal saisi affiche un message d'erreur. Et Vinted Go ne donne plus le suivi d'un colis six mois après la création de son bordereau.
+Le suivi peut mettre jusqu'à 48 h à apparaître après l'envoi, et Vinted Go ne le garde plus six mois après la création du bordereau. Si le point relais est fermé, repasse pendant ses horaires sur la carte de Vinted Go, dans les 7 jours.
 
 :::sources
 - [Vinted Go : Foire aux questions](https://vintedgo.com/fr/faq?country=fr&region=europe) – code de retrait, code refusé, 7 jours, autre point proche, 25 jours ouvrés, 2 jours pour signaler, suivi sans mise à jour, téléphone de la consigne, dépôt, dimensions, e-mail de dépôt

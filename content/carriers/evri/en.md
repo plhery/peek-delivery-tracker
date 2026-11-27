@@ -1,12 +1,12 @@
 ---
 title: Evri tracking: statuses, ParcelShops and missed deliveries
-description: Track an Evri parcel in the UK: where to find the 16-character number, what Evri's statuses mean, calling cards, ParcelShops, lockers and how to reach Evri.
+description: Track an Evri parcel or ParcelShop delivery (formerly Hermes UK): 16-character number, Evri Group / DHL merger, noreply.priority@evri.com and 0330 808 5456.
 slug: evri-tracking
 published: 2026-10-11
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-Evri is the UK parcel carrier known as Hermes UK until March 2022. Track a parcel on [evri.com](https://www.evri.com/track-a-parcel) with its 16-character tracking number or a calling card's 8-digit number, or paste the barcode or Evri's tracking link in the box above. The sender usually emails you the number; Evri's texts and emails carry it too.
+Evri is the UK parcel carrier formerly known as Hermes UK (renamed March 2022) and now part of the Evri Group following its October 2025 merger with DHL eCommerce UK (kept as a separate network being renamed Evri Premium). Track a home, Locker or ParcelShop parcel on [evri.com](https://www.evri.com/track-a-parcel) with its 16-character tracking number or an 8-digit calling card number, or paste the barcode or link above. For issues unresolved by Customer Services (0330 808 5456 or 24/7 chat), Evri's "Tell us straight" button emails its senior team at noreply.priority@evri.com.
 
 ## Evri tracking number: where to find it
 
@@ -78,21 +78,21 @@ Peek checks up to every 10 minutes, or every 2 once out for delivery (every 5 wh
 
 ## Questions about Evri tracking
 
-### Is Evri the same as Hermes?
-
-Yes: Evri is the former Hermes UK, renamed in March 2022. Hermes in Germany is a separate carrier.
-
-### Is Evri part of DHL or Royal Mail?
-
-Neither. In the deal the UK competition authority cleared in September 2025, Evri, then owned by funds managed by Apollo, was to buy DHL eCommerce UK from DHL Group, and DHL Group was to take a minority stake in Evri. Evri completed the merger on 1 October 2025, forming the Evri Group, and said DHL eCommerce UK would be renamed Evri Premium, a network of DHL, in 2026 and stay a separate network; Evri's site now offers Evri Premium for high-value and larger parcels. Evri's tracker asks for a 16-digit tracking number or an 8-digit calling card number and says nothing about DHL parcels: for those, see [DHL eCommerce UK tracking](carrier:dhl-ecommerce-uk).
-
 ### Is an email from noreply.priority@evri.com genuine?
 
 Evri gives it as an address to write to. On its contact page, the "Email us" button under Tell us straight opens an email to it: that's how you reach Evri's senior team once Customer Services has tried to help. Evri says it acknowledges those emails within one hour in normal office hours and, if it has to investigate, updates you every day. Its pages on genuine messages don't mention this address, so the address alone doesn't prove an email is from Evri. Scam emails often use a slightly misspelt address, so check it letter by letter. If you have any doubt, Evri says don't respond: contact it with the details on its website, not those in the message.
 
-### How long does Evri take to deliver?
+### How do Evri Group and DHL eCommerce UK tracking differ?
 
-Evri says typically 1 to 3 days once it has the parcel, depending on the sender's service; its help centre says 1 to 2 days for next-day parcels, 3 to 5 for standard.
+Evri is not part of Royal Mail, and its merger with DHL eCommerce UK kept the networks separate. After completing the merger on 1 October 2025 to form the Evri Group (with Apollo funds and a minority DHL Group stake), Evri said DHL eCommerce UK would be renamed Evri Premium, a network of DHL, in 2026 and stay separate; Evri's site offers Evri Premium for high-value and larger parcels. Evri's tracker takes a 16-digit tracking number or an 8-digit calling card number — for DHL eCommerce UK parcels, see [DHL eCommerce UK tracking](carrier:dhl-ecommerce-uk).
+
+### How does Evri ParcelShop tracking work, and what does "on its way" mean?
+
+Every parcel in Evri's network is tracked, including Standard and ParcelShop deliveries. For a ParcelShop delivery, `on its way` means the parcel is moving through Evri's depots to your ParcelShop (`We're expecting it` means Evri hasn't received it from the sender yet). Evri texts or emails you when it is ready to collect; bring ID or the sender's PIN within 10 days.
+
+### Is Evri the same as Hermes, and how long does delivery take?
+
+Yes: Evri is the former Hermes UK, renamed in March 2022 (Hermes in Germany is separate). Once Evri has the parcel, delivery typically takes 1 to 3 days depending on the service — 1 to 2 days for next-day parcels and 3 to 5 for standard, according to Evri's help centre.
 
 ### Can I track an Evri parcel by postcode?
 

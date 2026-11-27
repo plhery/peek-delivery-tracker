@@ -1,13 +1,13 @@
 ---
 title: Śledzenie paczki z Vinted: przewoźnicy, numery, opóźnienia
-description: Jak śledzić paczkę z Vinted jako kupujący lub sprzedający: kto ją doręcza w Polsce, jak wygląda numer przesyłki i jakie terminy wyznacza Vinted.
+description: Jak śledzić paczkę z Vinted w Polsce i z zagranicy (gdy przejmuje ją przewoźnik w innym kraju): przewoźnicy, numery przesyłek, czas dostawy i reklamacje.
 slug: sledzenie-paczki-vinted
 picture: Dwa telefony, sprzedającego i kupującego, a między nimi paczka jadąca furgonetką, i wesoły Pip.
 published: 2026-10-16
-updated: 2026-11-23
+updated: 2026-11-27
 ---
 
-Na Vinted to kupujący wybiera przewoźnika i płaci za etykietę, a sprzedający dostaje ją do wydruku albo jako kod i ma 5 dni roboczych na nadanie paczki. Obie strony śledzą przesyłkę w oknie rozmowy, pod „Śledź przesyłkę”, gdzie można też skopiować numer przewoźnika. Pierwsze informacje mogą się tam pojawić do 48 godzin po nadaniu, a sprzedający dostaje pieniądze dopiero, gdy kupujący potwierdzi, że wszystko jest OK, albo 2 dni po dostawie.
+Na Vinted to kupujący wybiera przewoźnika i płaci za etykietę, a sprzedający ma 5 dni roboczych na nadanie paczki. Obie strony śledzą przesyłkę w oknie rozmowy pod „Śledź przesyłkę” – także przy zamówieniach zagranicznych (Polska jest połączona z 12 krajami, dostawa trwa zwykle 4 do 7 dni roboczych), gdy paczkę przejmuje przewoźnik w innym kraju i na etykiecie pojawia się inny adres lub kraj. Pierwsze skany mogą się pojawić do 48 godzin po nadaniu, a sprzedający dostaje pieniądze po potwierdzeniu „Wszystko OK” albo 2 dni po dostawie.
 
 ## Jak działa wysyłka na Vinted?
 
@@ -79,12 +79,12 @@ Nie wiesz, czyj to numer? Wpisz go tutaj:
 
 Więcej kształtów: [jak rozpoznać przewoźnika po numerze](guide:tracking-number-formats). Gdzie szukać numeru: [gdzie znaleźć numer przesyłki](guide:find-tracking-number).
 
-## Dlaczego zmienił się numer przesyłki z Vinted?
+## Paczka z zagranicy i zmiana numeru przesyłki na Vinted: co to znaczy?
 
-Zwykle dlatego, że kod zamienił się w etykietę albo paczka pojechała dłuższą drogą:
+Zwykle dlatego, że kod zamienił się w etykietę albo paczka jedzie przez granicę dłuższą drogą:
 
 - **Najpierw kod, potem etykieta.** Przy etykiecie cyfrowej InPost sprzedający dostaje kod QR i 9-cyfrowy kod nadania, a InPost dołącza później etykietę w fizycznej postaci. Przy DHL sprzedający pisze kod nadania na paczce, a kurier nakleja etykietę, gdy odbiera ją ze skrytki. Śledź numer przewoźnika, nie kod.
-- **Zamówienie z zagranicy.** Vinted uprzedza, że z przyczyn logistycznych na etykiecie bywa inny adres, a nawet inny kraj, zwykle przy zamówieniach za granicę.
+- **Zamówienie z zagranicy i przewoźnik w innym kraju.** Polska na vinted.pl jest połączona z 12 krajami (dostawa trwa zwykle 4 do 7 dni roboczych), a Vinted uprzedza, że z przyczyn logistycznych na etykiecie bywa inny adres, a nawet inny kraj. Dalszą drogę sprawdzaj w aplikacji Vinted w oknie rozmowy („Śledź przesyłkę”) albo przez link przewoźnika.
 - **Centrum weryfikacji.** Z Weryfikacją Przedmiotów albo Elektroniki paczka jedzie najpierw do centrum Vinted, a dopiero potem do ciebie.
 - **Nowe zamówienie.** Etykiety nie da się wymienić na etykietę innego przewoźnika. Jeśli zamówienie anulowano i złożono jeszcze raz, nowa etykieta ma nowy numer.
 - **Inny punkt odbioru.** Kurierzy InPost i DHL Express próbują doręczyć paczkę dwa razy, a potem zostawiają ją w punkcie odbioru. Paczkę mogą też przekierować do innego punktu w okolicy: sprawdź link do śledzenia, zanim wyjdziesz z domu.

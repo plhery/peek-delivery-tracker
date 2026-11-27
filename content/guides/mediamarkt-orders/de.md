@@ -1,13 +1,13 @@
 ---
 title: MediaMarkt-Bestellung verfolgen: Status und Sendungsnummer
-description: Wie du den Bestellstatus unter „Meine Käufe“ oder als Gast prüfst, wo der Tracking-Link steht, wer in DE, AT und CH liefert und was tun, wenn nichts ankommt.
+description: MediaMarkt-Bestellung verfolgen (im Konto unter „Meine Käufe“ oder als Gast mit Bestellnummer), Versandpartner DHL, Hermes & DPD und Hilfe bei Verzögerung.
 slug: mediamarkt-sendungsverfolgung
 picture: Ein flacher Fernseher-Karton und ein kleines Paket neben einem Lieferwagen, ein fröhlicher Pip und ein Markt mit Abholschild.
 published: 2026-10-17
-updated: 2026-11-09
+updated: 2026-11-27
 ---
 
-Den Stand deiner MediaMarkt-Bestellung siehst du in deinem Kundenkonto unter „Meine Käufe“, und mit der Versandbestätigung kommt per E-Mail ein Link zur Sendungsverfolgung. In Deutschland bringen DHL, Hermes oder DPD die Pakete, Großgeräte kommen per Spedition, in Österreich liefern die Post oder GLS, in der Schweiz die Post. Steht am Artikel „Verkauf und Versand durch …“, verschickt ihn ein Marketplace-Händler selbst.
+Den Bestellstatus deiner MediaMarkt-Bestellung prüfst du im Kundenkonto unter „Meine Käufe“ – oder ohne Konto als Gast auf der Seite für Gastbestellungen und im Chatbot (mit Bestellnummer, E-Mail-Adresse und Postleitzahl der Rechnungsanschrift). Mit der Versandbestätigung per E-Mail kommt der Link zur Sendungsverfolgung: In Deutschland liefern DHL, Hermes oder DPD die Pakete und Speditionen die Großgeräte, in Österreich die Post oder GLS, in der Schweiz die Post. Steht am Artikel „Verkauf und Versand durch …“, verschickt ihn ein Marketplace-Händler selbst.
 
 ## Welcher Paketdienst liefert meine MediaMarkt-Bestellung?
 
@@ -37,7 +37,7 @@ Beim Marketplace bezahlst du zwar im MediaMarkt-Shop, die Ware schickt dir aber 
 - home | Du | An der Tür, in der Packstation oder am Aufstellort
 :::
 
-## Wo finde ich die MediaMarkt-Sendungsverfolgung und die Sendungsnummer?
+## MediaMarkt-Bestellung verfolgen: im Konto, als Gast oder mit Bestellnummer?
 
 In Deutschland an drei Stellen:
 

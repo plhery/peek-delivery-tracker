@@ -1,12 +1,12 @@
 ---
 title: CTT Express seguimiento: número, estados y teléfono
-description: Sigue tu paquete CTT Express: el número de 22 cifras, qué significa cada estado, los puntos Collectt, qué hacer si no estabas y los teléfonos de CTT Express.
+description: Seguimiento CTT Express (antigua Tourline Express): qué significa «pendiente de entrada en red», número de 22 cifras, puntos Collectt y teléfono gratuito.
 slug: ctt-express-seguimiento
 published: 2026-10-11
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-CTT Express es la filial española de paquetería urgente del grupo portugués CTT, la antigua Tourline Express, y reparte en toda España y Portugal. Para seguir tu paquete, escribe el número en el [localizador de envíos](https://www.cttexpress.com/localizador-de-envios/) de cttexpress.com o pégalo en la casilla de arriba. El número te llega en el SMS o en el correo de confirmación de CTT Express.
+CTT Express es la filial española de paquetería urgente del grupo portugués CTT —la antigua Tourline Express— y reparte en toda España y Portugal. Para seguir tu paquete, escribe el número de 22 o 25 cifras en el [localizador de envíos](https://www.cttexpress.com/localizador-de-envios/) de cttexpress.com o pégalo en la casilla de arriba. Si el seguimiento marca «pendiente de entrada en red» (`Pendiente de recepción en CTT Express`), el remitente ha grabado el envío pero CTT Express aún no tiene el paquete; el teléfono gratuito de ayuda es el 900 841 352.
 
 ## Número de seguimiento CTT Express: dónde está
 
@@ -93,13 +93,17 @@ Peek consulta el seguimiento de CTT Express hasta una vez cada 10 minutos, hasta
 
 ## Preguntas sobre el seguimiento de CTT Express
 
+### ¿Qué significa «pendiente de entrada en red» en CTT Express?
+
+Así llaman las preguntas frecuentes de CTT Express a un envío que sigue en `Pendiente de recepción en CTT Express`, que es el estado que verás en el seguimiento: el remitente lo ha grabado, pero el paquete aún no ha entrado en la red. Si sale de España o Portugal y han pasado más de 24 horas desde que se pidió la recogida, CTT Express te pide que rellenes su [formulario de contacto](https://www.cttexpress.com/contacto-atc); allí la opción se llama «Mi envío sigue en “Pendiente de recepción en CTT Express”». Si viene del extranjero, verás `En tránsito internacional. Pendiente de recepción en CTT Express` hasta que llegue a CTT Express.
+
+### ¿Qué pasó con Tourline Express? ¿Cómo hago el seguimiento hoy?
+
+CTT Express es la filial española de paquetería urgente del grupo portugués CTT: Tourline Express era la marca con la que el Grupo CTT operaba en España hasta cambiarla a CTT Express en 2019, y hoy todos los envíos se siguen en el [localizador de CTT Express](https://www.cttexpress.com/localizador-de-envios/). Reparte en la península, Baleares, Canarias, Ceuta, Melilla y Portugal. En mayo de 2026, CTT Express y DHL eCommerce firmaron una alianza bajo la marca «CTT Express together with DHL», sin fusión: en España, CTT Express lleva los envíos a particulares (B2C) y DHL los envíos entre empresas (B2B) y transfronterizos.
+
 ### ¿Cuánto tarda CTT Express en entregar un paquete?
 
 CTT Express anuncia entregas en menos de 24 horas en España y Portugal, pero el plazo depende del servicio que contrató el remitente. Con CTT 24h, su servicio urgente, la entrega es en 24 horas en la península; con CTT 48h, en un plazo de 48 horas, también en Baleares, Canarias, Ceuta, Melilla, Madeira y Azores. En los servicios para particulares, el plazo cuenta desde la recogida: con CTT e24h, la entrega está prevista el día laborable siguiente al de la recogida, y con CTT 10h o CTT 14h, antes de las 10:00 o de las 14:00 de ese día. Las compras en marketplaces internacionales tardan más, porque la admisión en el país de origen y el viaje hasta la península llevan su tiempo.
-
-### ¿Qué es CTT Express?
-
-Es la filial española de paquetería urgente del grupo portugués CTT. Tourline Express era la marca con la que el Grupo CTT operaba en España hasta que, en 2019, la cambió por CTT Express; hoy los envíos se siguen en el [localizador de CTT Express](https://www.cttexpress.com/localizador-de-envios/). Reparte en la península, Baleares, Canarias, Ceuta, Melilla y Portugal. En mayo de 2026, CTT Express y DHL eCommerce firmaron una alianza, y ahora la marca aparece como «CTT Express together with DHL». No es una fusión: en España, CTT Express se ocupará de los envíos de empresas a particulares (B2C) y DHL, de los envíos entre empresas (B2B) y los transfronterizos.
 
 ### ¿CTT Express entrega los sábados?
 
@@ -108,10 +112,6 @@ Solo en campaña de Navidad. El resto del año reparte de lunes a viernes.
 ### ¿Cuál es el teléfono gratuito de CTT Express?
 
 El 900 841 352, según sus páginas de ayuda (su artículo sobre aduanas del 27 de octubre de 2026 da el 900 110 898), de lunes a viernes de 9:00 a 19:00. El 916 602 200 tiene tarifa normal. Si prefieres escribir, el correo electrónico de atención al cliente es ccaweb@cttexpress.com.
-
-### ¿Qué significa «pendiente de entrada en red» en CTT Express?
-
-Así llaman las preguntas frecuentes de CTT Express a un envío que sigue en `Pendiente de recepción en CTT Express`, que es el estado que verás en el seguimiento: el remitente lo ha grabado, pero el paquete aún no ha entrado en la red. Si sale de España o Portugal y han pasado más de 24 horas desde que se pidió la recogida, CTT Express te pide que rellenes su [formulario de contacto](https://www.cttexpress.com/contacto-atc); allí la opción se llama «Mi envío sigue en “Pendiente de recepción en CTT Express”». Si viene del extranjero, verás `En tránsito internacional. Pendiente de recepción en CTT Express` hasta que llegue a CTT Express.
 
 :::sources
 - [CTT Express: Localizador de envíos](https://www.cttexpress.com/localizador-de-envios/) – localizador, cambios de entrega

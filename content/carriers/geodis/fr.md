@@ -1,12 +1,12 @@
 ---
 title: GEODIS suivi : numéro 1G, étapes et livraison
-description: Suivi GEODIS en France : où trouver le numéro 1G, ce que veut dire chaque étape, comment changer la date de livraison et qui contacter en cas de souci.
+description: Suivi GEODIS : Espace destinataire (numéro 1G, sans compte) ou Mon espace GEODIS (expéditeurs), étapes du suivi, changer la date et contact destinataire.
 slug: geodis-suivi
 published: 2026-10-12
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-GEODIS est un groupe de transport français, filiale de la SNCF, dont le réseau de colis et de palettes livre les commandes en ligne partout en France. Pour suivre ta livraison, saisis le numéro de 12 caractères qui commence par `1G` dans l'« Espace destinataire » de GEODIS, [espace-client.geodis.com/services/destinataires](https://espace-client.geodis.com/services/destinataires/), ou colle-le dans la case ci-dessus. Pas besoin de compte : « Mon espace GEODIS » est réservé aux clients de GEODIS qui expédient. C'est le magasin ou l'expéditeur qui te donne ce numéro, le plus souvent dans l'e-mail de confirmation ou d'expédition.
+GEODIS est un groupe de transport français, filiale de la SNCF, dont le réseau de colis et de palettes livre les commandes en ligne partout en France. Si tu attends un colis, passe par l'« Espace destinataire » ([espace-client.geodis.com/services/destinataires](https://espace-client.geodis.com/services/destinataires/)) avec ton numéro de 12 caractères commençant par `1G`, ou colle-le dans la case ci-dessus : aucun compte n'est nécessaire. « Mon espace GEODIS » est réservé aux clients expéditeurs. Ton numéro `1G` vient du magasin ou de l'expéditeur, le plus souvent dans l'e-mail de confirmation ou d'expédition.
 
 ## Numéro de suivi GEODIS : 1G, 14 chiffres ou 8 chiffres
 
@@ -102,9 +102,9 @@ Il ne reprend pas le nombre de colis, ton nom, ton adresse, les instructions de 
 
 ## Questions sur le suivi GEODIS
 
-### Mon espace GEODIS, c'est quoi ?
+### Mon espace GEODIS ou Espace destinataire : où suivre mon colis ?
 
-C'est l'Espace Client de GEODIS, sur [espace-client.geodis.com/index](https://espace-client.geodis.com/index/), réservé à ses clients expéditeurs : ils s'y connectent avec identifiant et mot de passe pour gérer leurs enlèvements et suivre leurs envois. Tu attends un colis ? La page elle-même te renvoie vers l'Espace destinataire, où ton numéro `1G` suffit.
+Pour un colis que tu attends, utilise l'Espace destinataire ([espace-client.geodis.com/services/destinataires](https://espace-client.geodis.com/services/destinataires/)) : ton numéro `1G` suffit, sans compte. « Mon espace GEODIS » ([espace-client.geodis.com/index](https://espace-client.geodis.com/index/)) est l'Espace Client réservé aux expéditeurs (identifiant et mot de passe pour gérer enlèvements et envois) et renvoie lui-même vers l'Espace destinataire.
 
 ### Un colis GEODIS ou Calberson, c'est quoi ?
 

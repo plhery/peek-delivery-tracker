@@ -12,13 +12,13 @@ A Roadie, empresa do grupo UPS, realiza entregas no mesmo dia e entregas locais 
 
 Procure nos e-mails e SMS da Roadie: o link de rastreio contém o código. Muitas lojas também informam um código próprio, e a Roadie avisa que números em outro formato não funcionam em track.roadie.com — nesses casos, consulte a loja. Veja mais em [como encontrar seu código de rastreio](guide:find-tracking-number).
 
-Os códigos da Roadie começam com `1R`. Veja exemplos com dígitos e letras inventados:
+Os códigos da Roadie começam com `1R`. Com dígitos inventados:
 
 | Código (inventado) | O que é |
 | --- | --- |
-| `1R4a82f91c73e605` | 16 caracteres: `1R` seguido de 14 dígitos ou letras de a a f. A central de ajuda da Roadie descreve como uma mistura de números e letras minúsculas (`1r…`). |
-| `1R4A82F91C73E605B2D47198A3C6` | 28 caracteres: `1R` seguido de 26 letras ou dígitos. O rastreador da Roadie também aceita esse tamanho. |
-| `1R4a-82f9-1c73-e605` | O código de 16 caracteres separado em grupos de quatro, como aparece no rastreador da Roadie. |
+| `1R00000000000000` | 16 caracteres: `1R` seguido de 14 dígitos ou letras de a a f. A central de ajuda da Roadie descreve como uma mistura de números e letras minúsculas (`1r…`). |
+| `1R00000000000000000000000000` | 28 caracteres: `1R` seguido de 26 letras ou dígitos. O rastreador da Roadie também aceita esse tamanho. |
+| `1R00-0000-0000-0000` | O código de 16 caracteres separado em grupos de quatro, como aparece no rastreador da Roadie. |
 
 O rastreador da Roadie aceita apenas 16 ou 28 caracteres e responde "Delivery not found. Please confirm that your tracking number is correct." quando não conhece o código. Espaços, hifens e maiúsculas/minúsculas não fazem diferença no Peek.
 
@@ -53,7 +53,7 @@ O rastreador da Roadie lista as etapas da mais recente para a mais antiga, cada 
 
 **Onde o pedido fica.** Sem assinatura exigida, o motorista deixa em local seguro no endereço: fora da vista da rua, coberto e fácil de achar, como porta principal, porta lateral ou área de encomendas. Sem local seguro, tenta entregar em mãos ou deixar na recepção ou administração do prédio. Motoristas não podem usar caixas de correio (exclusivas do correio americano) e não entram na residência: a Roadie frisa que eles não fazem mudança e não cruzam a soleira da porta.
 
-**Quem usa a Roadie.** O site oficial cita The Home Depot, Tractor Supply, Walmart, BJ's Wholesale Club, Fanatics e Benjamin Moore entre seus clientes, além de entregas de bagagens atrasadas para companhias aéreas como a Delta.
+**Quem usa a Roadie.** O site da própria Roadie cita The Home Depot, Tractor Supply, Walmart, BJ's Wholesale Club, Fanatics e Benjamin Moore entre seus clientes, além de entregas de bagagens atrasadas para companhias aéreas como a Delta.
 
 ## Alterar uma entrega Roadie
 
@@ -63,7 +63,7 @@ O que você pode mudar depende de o motorista já ter coletado ou não:
 - **Depois da coleta:** a Roadie não pode mudar o endereço, adiar a entrega nem trocar o horário. Peça ajuda à loja.
 - **Assinatura:** se você pediu assinatura e mudou de ideia, contate o suporte da Roadie.
 
-Se a assinatura era obrigatória e ninguém estava presente, a entrega volta para a loja e você reagenda diretamente com ela. Saiba mais em [entregas perdidas](guide:missed-delivery).
+Se a assinatura era obrigatória e ninguém estava presente, a entrega volta para a loja e você reagenda diretamente com ela. Saiba mais em [entregas não realizadas](guide:missed-delivery).
 
 ## Entrega Roadie atrasada, sumida ou marcada como entregue
 
@@ -71,7 +71,7 @@ Se a assinatura era obrigatória e ninguém estava presente, a entrega volta par
 
 **Marcada como entregue, mas não está lá.** Abra o rastreador da Roadie, informe seu código postal e confira a foto da entrega (disponível por 14 dias) para ver onde o motorista deixou. Verifique portas laterais, varandas, garagem e a recepção ou administração do prédio. Depois fale com a loja: a Roadie informa que, salvo acordo diferente, reembolsos e reenvios são feitos pela loja, não pela Roadie. Em suspeita de furto, a Roadie pede boletim de ocorrência policial, que muitas delegacias exigem que seja aberto pelo remetente. Veja [entregue mas não recebida](guide:delivered-not-received) e [encomendas perdidas](guide:lost-parcel).
 
-**Danificada.** Avise a loja imediatamente: apenas o remetente pode abrir reclamação na Roadie, geralmente em até três dias úteis após a entrega. Guarde o item e toda a embalagem exatamente como chegaram até o encerramento do processo. Sendo procedente, a Roadie envia e-mail para você dar andamento. Se o motorista causou dano à sua propriedade, a Roadie também pede que avise o remetente em até três dias úteis. Veja [encomendas danificadas](guide:damaged-parcel).
+**Danificada.** Avise a loja imediatamente: apenas o remetente pode abrir um pedido de indenização na Roadie, geralmente em até três dias úteis após a entrega. Guarde o item e toda a embalagem exatamente como chegaram até o encerramento do processo. Sendo procedente, a Roadie envia e-mail para você dar andamento. Se o motorista causou dano à sua propriedade, a Roadie também pede que avise o remetente em até três dias úteis. Veja [encomendas danificadas](guide:damaged-parcel).
 
 ## Atendimento ao cliente e contato Roadie
 
@@ -87,13 +87,13 @@ Tenha o código de rastreio em mãos. Para reembolso, substituição ou nova dat
 
 O [Peek](/) identifica a Roadie imediatamente a partir de qualquer um dos dois formatos: `1R` seguido de 14 dígitos ou letras de a a f, ou `1R` seguido de 26 letras ou dígitos. Links de track.roadie.com também funcionam: `/id/…`, `/track/…` e `/track?tracking_number=…`, inclusive com o nome de um parceiro antes.
 
-O Peek lê o rastreador oficial da Roadie e mostra as etapas nos termos da própria Roadie, como na tabela acima. Também pode exibir o avanço do motorista, como `Driver at pickup` ou `Driver approaching delivery`; quando o motorista está se aproximando ou chega ao endereço, o status passa a "Saiu para entrega". A Roadie não informa locais por etapa, então não há mapa, e o Peek não mostra o horário previsto de entrega. Enquanto a Roadie não conhecer o código, o Peek exibe "Aguardando Roadie"; dois dias após a Roadie informar que não encontrou, pede para conferir o código. Se o rastreador da Roadie não responder, o Peek consulta serviços de rastreamento e mostra o histórico do primeiro que encontrar a entrega, nas palavras desse serviço.
+O Peek lê o rastreador da própria Roadie e mostra as etapas nos termos da própria Roadie, como na tabela acima. Também pode exibir o avanço do motorista, como `Driver at pickup` ou `Driver approaching delivery`; quando o motorista está se aproximando ou chega ao endereço, o status passa a "Saiu para entrega". A Roadie não informa locais por etapa, então não há mapa, e o Peek não mostra o horário previsto de entrega. Enquanto a Roadie não conhecer o código, o Peek exibe "Aguardando Roadie"; dois dias após a Roadie informar que não encontrou, pede para conferir o código. Se o rastreador da Roadie não responder, o Peek consulta serviços de rastreamento e mostra o histórico do primeiro que encontrar a entrega, nas palavras desse serviço.
 
-O Peek não exibe a foto da entrega, o motorista nem outros dados protegidos pelo bloqueio de código postal: use "Abrir o site de Roadie" na página da encomenda para abrir o rastreador oficial. Se um serviço de rastreamento tiver preenchido o histórico, o link abre a página desse serviço (como ParcelsApp); nesse caso, acesse track.roadie.com diretamente para ver a foto.
+O Peek não exibe a foto da entrega, o motorista nem outros dados protegidos pelo bloqueio de código postal: use "Abrir o site de Roadie" na página da encomenda para abrir o rastreador da Roadie com o seu código. Se um serviço de rastreamento tiver preenchido o histórico, o link abre a página desse serviço, como "Abrir o site de ParcelsApp"; nesse caso, acesse track.roadie.com diretamente para ver a foto.
 
-O Peek não extrai do rastreador da Roadie o código da transportadora para a qual a entrega foi transferida. Após `Transferred to Carrier`, desbloqueie o novo código em track.roadie.com com seu código postal e adicione-o ao Peek — se for um código `1Z` válido, o Peek identifica a UPS na hora.
+O Peek não extrai do rastreador da Roadie o código da transportadora para a qual a entrega foi transferida. Após `Transferred to Carrier`, desbloqueie o novo código em track.roadie.com com seu código postal e adicione-o ao Peek — se for um código `1Z` com dígito verificador correto, o Peek identifica a UPS na hora.
 
-Enquanto a encomenda estiver aberta no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta o rastreador da Roadie até a cada 10 minutos, e até a cada 2 minutos a partir das 6h no fuso do registro mais recente no dia em que mudar para "Saiu para entrega", enquanto o site oficial responder. Nos demais casos, e após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Você pode receber alertas de "Cada atualização", "Etapas importantes" ou "Somente entrega". O Peek não pode contatar a Roadie ou a loja por você.
+Enquanto a encomenda estiver aberta no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta o rastreador da Roadie até a cada 10 minutos, e até a cada 2 minutos a partir das 6h no fuso do registro mais recente no dia em que mudar para "Saiu para entrega", enquanto o próprio rastreador da Roadie responder. Nos demais casos, e após dois dias sem novidades (12 horas enquanto ainda mostrar "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Você pode receber alertas de "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode contatar a Roadie ou a loja por você.
 
 ## Perguntas sobre o rastreio Roadie
 
@@ -130,8 +130,8 @@ A loja onde você comprou: a Roadie explica que destinatários recebem reembolso
 - [Roadie Support: Driver Gig Logistics: Issues at Delivery](https://support.roadie.com/support/article/Issues-at-delivery) – proibição de caixas de correio
 - [Roadie Support: Sender rules: Understanding delivery signatures](https://support.roadie.com/support/article/What-Do-Delivery-Signatures-Mean-for-Senders) – quem pode assinar, registro de nome
 - [Roadie Support: Driver policies: Understanding important terms](https://support.roadie.com/support/article/Understanding-important-terms) – assinaturas para medicamentos prescritos
-- [Roadie Support: Sender order management: Get to know the Roadie Protection Plan](https://support.roadie.com/support/article/Roadie-Protection-Plan) – reclamações via remetente, não cruzar a soleira
-- [Roadie Support: Claims and insurance: Filing a claim with Roadie](https://support.roadie.com/support/article/How-to-file-a-claim-with-Roadie) – reclamações do remetente, três dias úteis, danos a bens, embalagem
+- [Roadie Support: Sender order management: Get to know the Roadie Protection Plan](https://support.roadie.com/support/article/Roadie-Protection-Plan) – pedidos de indenização via remetente, não cruzar a soleira
+- [Roadie Support: Claims and insurance: Filing a claim with Roadie](https://support.roadie.com/support/article/How-to-file-a-claim-with-Roadie) – pedidos de indenização do remetente, três dias úteis, danos a bens, embalagem
 - [Roadie Support: Sender rules: Learn about theft](https://support.roadie.com/support/article/Theft-FAQs) – polícia, reembolso pelo remetente
 - [Roadie Support: Payments and billing: Understanding Walmart's tip policy](https://support.roadie.com/support/article/Payments-and-billing-Understanding-Walmart-s-tip-policy) – Walmart
 - [Roadie Support: App and tech support: Contacting Customer Service](https://support.roadie.com/support/article/How-to-Get-Help-and-Contact-Customer-Service) – chat e e-mail

@@ -1,15 +1,15 @@
 ---
 title: Como seguir todas as encomendas num só lugar
-description: Como funciona o seguimento universal de encomendas, o que nenhum serviço vê e como se comparam 17TRACK, ParcelsApp, AfterShip e outros em conta, anúncios e preço.
+description: Como seguir todas as encomendas num só lugar em Portugal: apps grátis e pagas (App CTT, 17TRACK, ParcelsApp, AfterShip, Peek), segurança, limites e burlas.
 slug: seguir-todas-as-encomendas
 picture: Cinco carrinhas coloridas cujos caminhos tracejados acabam numa lista num telemóvel, e o Pip, radiante, numa caixa aberta.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-27
 ---
 
-Um serviço universal de seguimento (ou de rastreio) de encomendas é um site ou uma app que aceita o número de seguimento de qualquer transportadora, descobre de quem é, vai buscar as leituras e junta todas as tuas encomendas numa só lista. Só mostra as leituras que a transportadora registou, por isso nunca vai à frente dela. O que muda de um serviço para outro é o que te pede em troca: uma conta, acesso ao teu e-mail, uma assinatura para teres notificações ou paciência para os anúncios.
+Um serviço universal de seguimento (ou rastreio) de encomendas junta num só site ou app códigos dos CTT, DPD, GLS, InPost e transportadoras internacionais, descobre qual é o operador e organiza tudo numa única lista. Como só mostra as leituras publicadas por cada transportadora, nunca vai à frente do site oficial; o que muda entre serviços é o que pedem em troca: conta, acesso ao e-mail, assinatura para notificações ou anúncios. Abaixo comparamos as principais apps em Portugal, como funcionam e o que verificar em privacidade.
 
-## Há alguma app para seguir todas as encomendas num só lugar?
+## Qual app permite seguir todas as encomendas num só lugar?
 
 Há, e talvez já a tenhas no telemóvel: além dos serviços universais, a App CTT segue objetos dos [CTT](carrier:ctt) e de outros operadores, e a app Carteira do iPhone e a app Shop também juntam encomendas. A forma como a encomenda entra na lista decide o que o serviço fica a ver:
 
@@ -40,7 +40,7 @@ Outras opções, com os seus limites:
 - **O PayPal** segue compras em vários países, como Espanha e França, mas Portugal não está entre os que nomeia.
 - **A Shop** junta sozinha as encomendas de lojas Shopify e as compras com Shop Pay. O seguimento só funciona na app, e os e-mails reencaminhados têm de estar em inglês.
 
-## Qual é a melhor app para seguir encomendas?
+## Qual é a melhor app de rastreio de encomendas em Portugal?
 
 Nenhuma é a melhor para toda a gente: depende das tuas transportadoras e do que aceitas dar em troca das notificações. Verifica tu mesmo estes pontos, incluindo o que esta página afirma:
 
@@ -54,7 +54,7 @@ Nenhuma é a melhor para toda a gente: depende das tuas transportadoras e do que
 | Quanto tempo guarda os dados | A política de privacidade | A Deliveries guarda os e-mails reencaminhados até dez dias; no Google Play, a ficha da ParcelsApp diz «Não é possível eliminar os dados» |
 | As tuas transportadoras | A lista de transportadoras | Procura CTT, DPD, GLS, [InPost](carrier:inpost) ou [Paack](carrier:paack) em vez de olhares para o total: o 17TRACK diz 2500+ na App Store e 2800+ na sua página sobre a USPS |
 
-## Grátis ou pagas: as principais apps comparadas
+## Grátis ou pagas: 17TRACK, ParcelsApp, AfterShip, Parcel e Peek comparados
 
 Quase todas começam grátis, mas com anúncios, com um limite ou sem notificações push. Estão por ordem alfabética, não por preferência, segundo as páginas de cada uma e as fichas da App Store portuguesa lidas em outubro de 2026, com os preços revistos a 10 de novembro. O Peek, que publica este guia, entra na lista como as outras.
 
@@ -72,7 +72,7 @@ A Seguir Encomenda é uma app portuguesa, de um programador de Ponta Delgada, s�
 
 Os preços mudam: vê «Compras integradas» na App Store portuguesa antes de assinares.
 
-## Como funciona um site que segue encomendas de todas as transportadoras?
+## Como funciona um rastreador universal de encomendas?
 
 Quase todos seguem cinco passos:
 
@@ -123,7 +123,7 @@ Nada que a transportadora não tenha publicado. A ParcelsApp di-lo sem rodeios: 
 
 Um serviço de seguimento também não age por ti: para mudar uma entrega, pagar uma taxa ou comunicar uma perda, a ParcelsApp manda-te para o site da transportadora. A App CTT, por exemplo, tem uma opção para alterar a hora, o local ou outros dados da entrega. Se o seguimento não mexe há dias, lê [porque é que o tracking não atualiza](guide:tracking-not-updating). Se diz entregue e não tens nada, vê [encomenda entregue mas não recebida](guide:delivered-not-received).
 
-## Como saber se é seguro usar o 17TRACK ou outro site que não é da transportadora?
+## É seguro usar o 17TRACK, a ParcelsApp ou outro site externo?
 
 Qualquer serviço de seguimento tem de enviar o teu número à transportadora, e às vezes a outros serviços. O que muda é quem o gere e o que faz com os teus dados, e é isso que deves procurar na ficha da app e na política de privacidade de cada um. A política de privacidade do 17TRACK nomeia a VASTAR SINGAPORE TECHNOLOGY PTE. LTD. como responsável pelo tratamento dos dados dos utilizadores registados fora da China continental e de Hong Kong. O 17TRACK guarda os dados das contas em servidores da Tencent Cloud em Cantão, na China, e nos Estados Unidos e, quando os dados saem do Espaço Económico Europeu, diz usar cláusulas contratuais-tipo ou transferi-los para países com um nível de proteção adequado. A ficha do 17TRACK na App Store portuguesa declara publicidade.
 

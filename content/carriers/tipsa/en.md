@@ -1,12 +1,12 @@
 ---
 title: TIPSA tracking: numbers, statuses and missed deliveries
-description: Track a TIPSA parcel in Spain or Portugal: the 22-digit number, what TIPSA's Spanish statuses mean, missed deliveries, agencies and how to reach TIPSA.
+description: Track a TIPSA parcel in Spain or Portugal: 22-digit number vs 10-digit waybill, Spanish statuses like Ausente, 15-day agency hold, SEUR Pickup and phone 900.
 slug: tipsa-tracking
 published: 2026-10-11
-updated: 2026-11-20
+updated: 2026-11-27
 ---
 
-TIPSA is a Spanish express parcel carrier, part of the Geopost group, with agencies in Spain, Portugal and Andorra. Track a parcel with its 22-digit number on TIPSA's [Delivery locator](https://www.tip-sa.com/en/delivery-locator), or paste it in the box above. The number comes from the shop or person who sent the parcel, for example in the shipping email or SMS. If you don't have it, ask the shop or the TIPSA agency that delivers in your area; find it by postcode in TIPSA's [agency finder](https://www.tip-sa.com/es/agencias-de-transporte). You also arrange delivery with that agency after an `Ausente`, or a collection if you'd rather pick the parcel up yourself; if it's lost or arrives damaged, tell the shop.
+TIPSA is a Spanish express parcel carrier in the Geopost group, with over 300 agencies across Spain, Portugal and Andorra. Track a parcel using its full 22-digit shipment number on TIPSA's [Delivery locator](https://www.tip-sa.com/en/delivery-locator) (with your destination postcode) or paste it in the box above. If you lack the number or need to rearrange delivery after an `Ausente`, contact the shop or your local TIPSA agency through TIPSA's [agency finder](https://www.tip-sa.com/es/agencias-de-transporte).
 
 ## TIPSA tracking number: what it looks like
 
@@ -94,21 +94,25 @@ Peek shows the status, the history with each scan's town on a map, the sender's 
 
 ## Questions about TIPSA tracking
 
-### What is TIPSA in Spain?
+### What is TIPSA in Spain and Portugal?
 
-TIPSA is Transporte Integral de Paquetería, an express parcel company in the Geopost group. Its about page counts more than 330 agencies, its Portuguese home page more than 300. It has 13 hubs, among them Madrid, Barcelona and Valencia, and delivers abroad through DPDgroup.
+TIPSA (*Transporte Integral de Paquetería*) is an express parcel company in the Geopost group, with more than 330 agencies listed on its Spanish about page (over 300 on its Portuguese home page), 13 hubs including Madrid, Barcelona and Valencia, and international delivery through DPDgroup.
+
+### Can I track a TIPSA parcel with a 10-digit number?
+
+No. Both TIPSA's Delivery locator and Peek require the full 22-digit shipment number (two 6-digit agency codes plus the 10-digit waybill/*albarán*). If you only have the 10-digit waybill, ask the sender for the complete 22-digit code or tracking link.
+
+### What does "Ausente" mean on TIPSA tracking, and how long is a parcel held?
+
+`Ausente` means nobody could be reached on delivery. TIPSA tries again the next working day (two attempts standard, three on Premium) and lets you call the destination agency to arrange redelivery or collection. Parcels stay at the agency for 15 days from dispatch (bring DNI or passport), or 7 days at Pickup points shared with SEUR.
 
 ### How long does TIPSA take to deliver?
 
-It depends on the service the shop bought. TIPSA sells shops delivery in 24 hours (one attempt the next working day) or within 48 hours; in Portugal, 24 hours to the main towns and 24 to 48 hours elsewhere.
+It depends on the service the shop bought: TIPSA offers 24-hour (next working day) or 48-hour delivery in Spain, and 24 hours to main towns (24 to 48 hours elsewhere) in Portugal.
 
-### Can I track a TIPSA parcel with 10 digits?
+### What is the TIPSA customer service phone number and email?
 
-No: TIPSA's locator asks for the 22-digit number, and Peek doesn't take 10 digits as a TIPSA number either. The 10 digits are the waybill at its end; ask the sender for the full number if you only have those.
-
-### Does TIPSA have parcel shops?
-
-Yes, Pickup points in shops and lockers, shared with SEUR, where a parcel waits 7 days. You get one only if the shop offers delivery to a point.
+TIPSA lists 900 10 10 47 and 902 10 10 47 (Spanish FAQ gives only 900 10 10 47; Portugal uses the same numbers), email info@tip-sa.com for missing shipment numbers, and the form at [tip-sa.com/en/contact](https://www.tip-sa.com/en/contact). For scheduling delivery, contact the destination agency named on your tracking page.
 
 :::sources
 - [TIPSA: Delivery locator](https://www.tip-sa.com/en/delivery-locator) – 22-digit number, form, search by reference with an identifier (agency + client)

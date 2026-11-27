@@ -1,12 +1,12 @@
 ---
 title: Swiss Post Cargo tracking: statuses, delivery and contact
-description: Track a Swiss Post Cargo shipment: which number works, what Data entry POST and Loaded for Delivery mean, how freight is delivered and who to call.
+description: Track a Swiss Post Cargo freight shipment (formerly PostLogistics): 20-digit SSCC or PL- reference lookup, status meanings, kerbside delivery and contacts.
 slug: swiss-post-cargo-tracking
 published: 2026-10-12
-updated: 2026-11-17
+updated: 2026-11-27
 ---
 
-Swiss Post Cargo is Swiss Post's freight brand: pallets and other goods carried by truck, from single items to whole truckloads, not ordinary parcels. Track a shipment on its Track & Trace page (tt.swisspost-cargo.com) with the barcode or the reference the sender gave you, or paste it in the box above. If what you have is a Swiss Post parcel number, it belongs on [Swiss Post's page](carrier:swiss-post) instead.
+Swiss Post Cargo (formerly PostLogistics, trading under this brand since 1 March 2025) is Swiss Post's freight network for pallets and heavy goods carried by truck across Switzerland, Liechtenstein and abroad. Track your 20-digit `00` SSCC barcode or `PL-` sender reference on `tt.swisspost-cargo.com` or paste it in the box above (ordinary Swiss Post parcels belong on [Swiss Post's page](carrier:swiss-post)). Below: what `Data entry POST` and `Loaded for Delivery` mean, kerbside delivery rules and who to contact.
 
 ## Swiss Post Cargo tracking number
 
@@ -77,23 +77,23 @@ A reference shared by several shipments is read only while just one of them has 
 
 ### What is Swiss Post Cargo?
 
-It's the name Swiss Post's goods logistics has traded under since 1 March 2025: logistics for businesses, in Switzerland and abroad, freight included. Swiss Post's group companies in Switzerland include Swiss Post Cargo CH AG, wholly owned by Swiss Post. PostLogistics was one of the first group companies to take the name.
+It is the brand Swiss Post's goods logistics has used since 1 March 2025 (including Swiss Post Cargo CH AG, wholly owned by Swiss Post) for business freight from single pallets to full truckloads in Switzerland, Liechtenstein and abroad.
 
 ### Is PostLogistics the same as Swiss Post Cargo?
 
-Yes, PostLogistics now trades as Swiss Post Cargo. Its old tracker, tracking.postlogistics.ch, no longer opens; Swiss Post Cargo's tracker is tt.swisspost-cargo.com. Peek still tracks PostLogistics references like `48291736-542`.
+Yes. PostLogistics now trades as Swiss Post Cargo; its old `tracking.postlogistics.ch` tracker no longer opens, replaced by `tt.swisspost-cargo.com`. Peek still tracks older PostLogistics references like `48291736-542`.
 
-### Is there a Swiss Post Cargo email address?
+### What do "Data entry POST" and "Loaded for Delivery" mean?
 
-Swiss Post's freight brochure, dated April 2022, gives sales.ls4@post.ch, for business customers. As a recipient, write to the shop first: it booked the transport.
+`Data entry POST` means Swiss Post Cargo received the sender's electronic data but does not have the freight yet (`POST` is part of the label, not physical movement). `Loaded for Delivery` means the shipment is on the delivery truck today; `IMAGE` and `SIGNATURE` accompany `DELIVERED SCANNED` as delivery proof.
 
-### Why does Swiss Post Cargo send me an SMS?
+### How long does Swiss Post Cargo take and where does the driver deliver?
 
-Often because the sender booked a delivery notice: Swiss Post's freight brochure lists notice by phone, email or SMS as an extra. Fake texts in Swiss Post's name exist too, so check the number on the tracker yourself.
+Swiss Post's freight brochure states next-working-day delivery by 17:00 across accessible parts of Switzerland and Liechtenstein, and by 17:00 on the second working day in mountain areas (Valais, Ticino, Graubünden). Standard delivery goes to the ground-floor door, ramp or kerb, with unloading by the recipient unless the sender booked extras.
 
-### Can I track Swiss Post Cargo live?
+### How do I contact Swiss Post Cargo about a delivery, SMS or damage?
 
-Not on a live map. The tracker lists each scan with its town, and Swiss Post's freight brochure speaks of regular updates on where the consignment is.
+Start with the shop that booked the transport — especially for damage (report immediately with photos), rescheduling or verifying an SMS notice. Swiss Post's freight brochure lists business contact sales.ls4@post.ch (Dintikon); Swiss Post's parcel/letter helpline is +41 848 888 888.
 
 :::sources
 - [Swiss Post: Transport freight brochure](https://www.post.ch/en/-/media/post/gk/dokumente/stueckgut.pdf) – single items to whole truckloads, orders through Swiss Post Cargo Web by business customers, next working day, mountain areas, ground floor, unloading, signature, sender extras including a second delivery, regular location updates, Dintikon contact and email

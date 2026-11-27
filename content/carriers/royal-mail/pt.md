@@ -1,12 +1,12 @@
 ---
 title: Royal Mail rastreio: estados, IVA e entrega em Portugal
-description: Rastreio Royal Mail: como é o número, o que querem dizer os estados em inglês, quem entrega em Portugal (os CTT) e como pagar o IVA na alfândega.
+description: Rastreio Royal Mail para Portugal: código GB de 13 caracteres, estados em inglês, entrega pelos CTT, IVA e taxas aduaneiras (3 € + 2 €) e prazos para reclamar.
 slug: royal-mail-rastreio
 published: 2026-10-22
-updated: 2026-10-27
+updated: 2026-11-27
 ---
 
-A Royal Mail é o correio do Reino Unido. Segues a encomenda no Track your item, o rastreio da Royal Mail, em inglês, ou colando o número na caixa acima. O número dá-to o remetente.
+A Royal Mail é o serviço postal do Reino Unido; quando uma encomenda chega a Portugal, a entrega e o desalfandegamento ficam a cargo dos [CTT](carrier:ctt) com o mesmo código terminado em `GB`. Acompanha o envio no Track your item da Royal Mail, no Seguir objeto dos CTT ou colando o número na caixa acima. Abaixo explicamos o que significam os estados em inglês, quanto pagas de IVA, direitos e taxa dos CTT na alfândega e como reclamar se a encomenda parar.
 
 ## Número de rastreio Royal Mail: como é
 
@@ -95,17 +95,25 @@ Com um número `…GB` a caminho de Portugal, o Peek pode procurá-lo também no
 
 ## Perguntas sobre o rastreio Royal Mail
 
-### Quem entrega a Royal Mail em Portugal?
+### Quem entrega encomendas da Royal Mail em Portugal?
 
-Os CTT: em Portugal, diz a Autoridade Tributária, as remessas postais estão a cargo deles. Procura o número da Royal Mail no Seguir objeto.
+Os CTT: em Portugal, segundo a Autoridade Tributária, as remessas postais internacionais ficam sempre a cargo dos CTT. A encomenda mantém o mesmo número terminado em `GB`, pelo que podes acompanhá-la no Seguir objeto dos CTT.
 
-### Tenho de pagar alfândega numa encomenda do Reino Unido?
+### Quanto pago de alfândega e IVA numa encomenda do Reino Unido?
 
-Pode ser. O Reino Unido está fora da UE: se a loja não cobrou o IVA e os direitos na compra, pagas no Portal de Desalfandegamento dos CTT. As ofertas entre particulares até 45 € não pagam.
+O Reino Unido (exceto Irlanda do Norte) conta como fora da UE. Se a loja não cobrou tudo na compra, pagas no Portal de Desalfandegamento dos CTT (prazo de 20 dias): IVA, direitos de 3 € + IVA por tipo de artigo até 150 € (salvo origem preferencial), taxa de manuseamento da UE de 2 € + IVA por tipo de artigo e 7 € + IVA de serviço CTT (14 € entre 150 € e 1.000 €). Ofertas entre particulares até 45 € ficam isentas.
 
-### Porque é que o rastreio da Royal Mail parou depois de sair do Reino Unido?
+### Porque é que o rastreio da Royal Mail parou em «Item Leaving the UK»?
 
-Entre a saída do Reino Unido e a chegada aos CTT podem passar dias sem leituras. Procura o mesmo número no Seguir objeto: se falar de uma notificação enviada, falta desalfandegar a encomenda.
+Entre a saída do Reino Unido e a receção pelos CTT podem passar vários dias sem leituras. Pesquisa o mesmo número no Seguir objeto dos CTT: se aparecer indicação de notificação enviada, a encomenda aguarda desalfandegamento online.
+
+### Quanto tempo os CTT guardam uma encomenda Royal Mail após entrega falhada?
+
+Segundo a tabela dos CTT, uma encomenda postal internacional (`CA`, `CB`, `CC`…) fica guardada 15 dias úteis (prolongável até 30 dias) e o correio registado 6 dias úteis na Loja ou Ponto CTT indicado no aviso. Leva o aviso e um documento de identificação.
+
+### Qual o contacto dos CTT e da Royal Mail para reclamar uma encomenda perdida?
+
+Para entregas em Portugal, liga aos CTT através do 21 047 16 16 (dias úteis, 8h30–19h30); no Reino Unido, a Royal Mail atende no 03457 740 740. Numa compra online perdida, contacta primeiro a loja: para indemnização na Royal Mail para a Europa é preciso esperar 20 dias úteis após a data prevista e apresentar comprovativo de envio até 6 meses depois.
 
 :::sources
 - [Citizens Advice: Telling delivery companies about your delivery or collection needs](https://www.citizensadvice.org.uk/consumer/post-and-parcels/telling-delivery-companies-about-your-delivery-or-collection-needs/) – sítio seguro ou vizinho, cartão vermelho, Customer Service Point, nova entrega no site

@@ -1,15 +1,15 @@
 ---
 title: Suivi de commande IKEA : colis, camion et problèmes
-description: Qui livre ta commande IKEA en France, en Belgique et en Suisse, où la suivre et que faire si des colis sont en retard, manquants ou abîmés.
+description: Suivi de commande IKEA en France, Belgique et Suisse : Colissimo, bpost, Planzer ou camion, statuts IKEA, délais, prix de livraison et réclamation colis abîmé.
 slug: suivi-commande-ikea
 picture: Une pile de longs cartons de meubles en kit, une clé Allen, un camion de livraison et Pip sur le carton du dessus.
 published: 2026-10-18
-updated: 2026-10-18
+updated: 2026-11-27
 ---
 
-Tu suis chaque commande IKEA en ligne chez IKEA, avec ton numéro de commande et l'e-mail ou le téléphone utilisé pour commander. Les petites commandes partent en colis : Colissimo en France, La Poste suisse ou Planzer en Suisse, bpost pour les points de retrait en Belgique. Les meubles arrivent en camion avec un prestataire d'IKEA, sur un créneau, et ne se suivent que chez IKEA.
+Tu suis chaque commande IKEA en ligne dans « Suivre et gérer ma commande » (France), « Suivi et gestion de votre commande » (Belgique) ou « Mes commandes » (Suisse), avec ton numéro de commande et l'e-mail ou le téléphone utilisé à l'achat. Les petits colis partent via Colissimo en France, bpost en point de retrait en Belgique, et La Poste suisse ou Planzer en Suisse ; les meubles arrivent en camion sur créneau et se suivent uniquement chez IKEA. Ci-dessous : statuts, délais, tarifs et démarches en cas de colis manquant ou abîmé.
 
-## Qui livre ma commande IKEA ?
+## Qui livre ma commande IKEA (Colissimo, bpost, Planzer ou camion) ?
 
 Ça dépend du poids de la commande et du pays. Chaque pays a son propre site IKEA, et voici ce que chacun indique :
 
@@ -30,7 +30,7 @@ Tu peux aussi aller chercher ta commande. En France, Cliquez et emportez fonctio
 - home | Toi | Compter les colis avant le départ du livreur
 :::
 
-## Où suivre ma commande IKEA ?
+## Où suivre ma commande IKEA et que signifient les statuts ?
 
 **Chez IKEA.** La page s'appelle « Suivre et gérer ma commande » en France, « Suivi et gestion de votre commande » en Belgique et « Mes commandes » en Suisse. Elle vaut pour toutes les commandes, colis ou camion. Il te faut le numéro de commande et l'e-mail ou le téléphone donné à la commande. Connecté à ton compte IKEA, tu vois toutes tes commandes. En France et en Belgique, elle affiche ces statuts :
 
@@ -60,7 +60,7 @@ Pour les autres boutiques : [trouver ton numéro de suivi](guide:find-tracking-n
 :::checker
 :::
 
-## Pourquoi ma commande IKEA est en retard, ou pourquoi le suivi ne bouge pas ?
+## Commande IKEA en retard ou suivi bloqué : pourquoi et quels délais ?
 
 Le délai dépend de ton adresse, de la taille de la commande et du stock. Avant de payer, tu vois les options et les dates. Voici ce que disent les sites :
 
@@ -82,7 +82,7 @@ En France, contacte le service client si la commande est « livrée » sans que 
 
 **Changer la date.** Tu la modifies dans le suivi de commande. Pour un camion en France, préviens le service client au plus tard 72 heures avant la date prévue. En Suisse, c'est possible jusqu'à un certain statut de la commande.
 
-## Options et prix de livraison IKEA
+## Tarifs et options de livraison IKEA en France, Belgique et Suisse
 
 **France.** Il faut 10 € d'achat minimum :
 
@@ -110,7 +110,7 @@ Pour un colis, chaque article doit peser au plus 19 kg et mesurer au plus 115 cm
 
 Les colis arrivent du lundi au samedi entre 8 h et 21 h. Pour en savoir plus : [consignes et points relais](guide:parcel-lockers).
 
-## Commande IKEA non reçue, incomplète ou abîmée : que faire ?
+## Colis IKEA manquant, non reçu ou abîmé : comment faire une réclamation ?
 
 Regarde d'abord, signale ensuite. Dans l'ordre :
 

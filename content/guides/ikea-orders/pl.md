@@ -1,15 +1,15 @@
 ---
 title: Śledzenie zamówienia IKEA: GLS, InPost, transport i problemy
-description: Kto doręcza zamówienie z IKEA w Polsce, gdzie jest „Śledź i zarządzaj swoim zamówieniem”, które paczki mają numer przewoźnika i co zrobić, gdy coś nie dotrze.
+description: Śledzenie zamówienia IKEA w Polsce: „Śledź i zarządzaj swoim zamówieniem”, dostawa kurierem GLS, Paczkomat InPost i transport mebli, ceny oraz reklamacje.
 slug: sledzenie-zamowienia-ikea
 picture: Stos długich płaskich kartonów, klucz imbusowy, ciężarówka dostawcza i Pip na najwyższym kartonie.
 published: 2026-10-18
-updated: 2026-10-18
+updated: 2026-11-27
 ---
 
-IKEA śledzi każde zamówienie internetowe na własnej stronie „Śledź i zarządzaj swoim zamówieniem”: potrzebujesz numeru zamówienia oraz adresu e-mail albo numeru telefonu podanego przy zakupie. Małe zamówienia jadą kurierem GLS albo do Paczkomatu InPost i dostają numer przesyłki przewoźnika. Meble przywozi firma transportowa w dniu wybranym przy zamówieniu: śledzisz je w IKEA, a kierowca dzwoni około pół godziny przed przyjazdem.
+Każde zamówienie online z IKEA.pl sprawdzisz na stronie „Śledź i zarządzaj swoim zamówieniem” po podaniu numeru zamówienia oraz adresu e-mail lub numeru telefonu z zakupu. Mniejsze przesyłki jadą kurierem GLS (do 50 kg) albo do Paczkomatu InPost (do 24 kg) z osobnym numerem przewoźnika, natomiast meble przywozi firma transportowa w wybranym dniu (kierowca dzwoni ok. pół godziny przed przyjazdem). Poniżej: statusy IKEA, zmiana terminu, cennik dostaw i reklamacja brakujących lub uszkodzonych paczek.
 
-## Kto doręcza zamówienie z IKEA?
+## Kto doręcza zamówienie z IKEA w Polsce (GLS, InPost czy transport)?
 
 To zależy od wagi i wielkości zamówienia. To, czy produkt może jechać kurierem albo do Paczkomatu, pokazuje koszyk w IKEA.pl.
 
@@ -33,7 +33,7 @@ Możesz też odebrać zamówienie sam. W usłudze „Zamów i odbierz” wybiera
 - home | Ty | Policz paczki, zanim kierowca odjedzie
 :::
 
-## Gdzie śledzić zamówienie z IKEA?
+## Gdzie śledzić zamówienie z IKEA i co oznaczają statusy?
 
 **„Śledź i zarządzaj swoim zamówieniem”.** To śledzenie IKEA dla każdego zamówienia, kurierskiego i transportowego. Wpisujesz numer zamówienia oraz e-mail lub numer telefonu. Jeśli przy zakupie podałeś dane Klubowicza IKEA Family, widzisz wszystkie swoje zamówienia. Tu sprawdzisz przewidywaną datę dostawy, pobierzesz potwierdzenie zakupu, zgłosisz uszkodzony albo brakujący produkt. Statusy:
 
@@ -60,7 +60,7 @@ Inne sklepy: [gdzie znaleźć numer przesyłki](guide:find-tracking-number). Nie
 :::checker
 :::
 
-## Dlaczego zamówienie z IKEA się spóźnia albo śledzenie stoi?
+## Dlaczego zamówienie z IKEA się spóźnia i jak zmienić termin dostawy?
 
 Termin zależy od kodu pocztowego, wartości zamówienia i formy dostawy. Zanim zapłacisz, koszyk pokaże najbliższy możliwy termin. IKEA podaje:
 
@@ -81,7 +81,7 @@ Przy dostawie do domu na konkretny dzień poczekaj do końca przedziału czasowe
 
 **Zmiana terminu.** Dostawę firmą transportową przełożysz sam w „Śledź i zarządzaj”, przyciskiem „Zmień termin dostawy”, ale tylko na wczesnym etapie. Nie widzisz przycisku? Napisz na czacie albo zadzwoń pod 22 275 00 00, najpóźniej 48 godzin przed terminem. Jeśli przesuniesz dostawę na później, IKEA może doliczyć opłatę za przechowanie. Terminu kuriera IKEA nie zmieni za ciebie: GLS daje w wiadomości link do jednorazowej zmiany terminu albo przekierowania do punktu odbioru, gdzie paczka czeka 5 dni. Daty dostawy do Paczkomatu nie da się zmienić. Adres zmienisz u GLS tym samym linkiem, najpóźniej 24 godziny przed dostawą; przy firmie transportowej przez czat lub telefon, najpóźniej 2 dni przed.
 
-## Opcje i ceny dostawy IKEA
+## Cennik i opcje dostawy IKEA oraz „Zamów i odbierz”
 
 Dostawa jest dostępna dla zamówień od 25 zł. Ceny dla Klubowiczów IKEA Family obowiązują też w IKEA Business Network.
 
@@ -108,7 +108,7 @@ Odbiór osobisty:
 
 W zaplanowanym dniu dostaniesz e-mail, że zamówienie jest gotowe. Weź potwierdzenie zamówienia i dokument tożsamości ze zdjęciem: dowód osobisty, prawo jazdy albo paszport. To samo musi mieć osoba, która odbiera za ciebie. Produkty ładujesz do auta sam. Po terminie odbioru towar wraca do IKEA, a zamówienie zostaje anulowane. Więcej: [paczkomaty i punkty odbioru](guide:parcel-lockers).
 
-## Zamówienie z IKEA nie dotarło, jest niekompletne albo uszkodzone: co robić
+## Brakujący, uszkodzony lub niedostarczony towar z IKEA: jak złożyć reklamację?
 
 Najpierw sprawdź, potem zgłoś. Po kolei:
 

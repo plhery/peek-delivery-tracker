@@ -55,7 +55,7 @@ Na linha 17FEIA, a TSJY passa então a reproduzir as movimentações da 17FEIA, 
 | `The package is on the way to the facility.`, `Warehouse receipt.` | A caminho do armazém da 17FEIA na China e, depois, recebido lá. | "Em trânsito" |
 | `The order has information pending customer confirmation.`, `Order Confirmed.` | O armazém da 17FEIA retém o pacote até a confirmação do pedido. | "Em trânsito" |
 | `Order dispatched from warehouse.` | Saiu do armazém da 17FEIA. | "Em trânsito" |
-| `Export declaration in progress.` | Declaração de exportação da China em andamento, etapa de rotina antes do voo. Não está retido nem passou pela alfândega do seu país. | "Em trânsito" |
+| `Export declaration in progress.` | Declaração de exportação da China em andamento, etapa de rotina antes do voo. A alfândega não o retém, e não é a alfândega do seu país. | "Em trânsito" |
 | `Flight has departed.` | O voo decolou. | "Em trânsito" |
 | `Flight delayed.` | O voo atrasou. A encomenda não se moveu. | mantém o status da linha anterior |
 | `Flight Arrived at Transit Hub.`, `Flight Departed from Transit Hub.` | Escala no caminho. | "Em trânsito" |
@@ -76,7 +76,7 @@ O site da TSJY informa que envia para mais de 220 países e regiões por frete a
 
 O Peek conhece uma dessas linhas pelo nome: a [17FEIA](carrier:17feia) (一起飞), empresa de logística na China com rastreador próprio em `www.17feia.com`. O rastreamento da 17FEIA pode informar a transportadora local no seu país e o código dela.
 
-A TSJY não divulga regras para tentativas de entrega ou pontos de retirada, que ficam a cargo da empresa entregadora. Veja [entrega perdida](guide:missed-delivery).
+A TSJY não divulga regras para tentativas de entrega ou pontos de retirada, que ficam a cargo da empresa entregadora. Veja [entrega não realizada](guide:missed-delivery).
 
 **Alfândega na UE.** Compras on-line trazidas de fora da UE pagam imposto aduaneiro temporário de €3 por item em pacotes até €150, em vigor desde 1º de julho de 2026, e taxa de manuseio da União de €2 por item, qualquer que seja o valor, desde 1º de novembro de 2026. Cada item reúne mercadorias com mesma classificação tarifária, descrição e, quando exigido, origem. Ambos incidem sobre vendas à distância (bens enviados pelo vendedor ou em seu nome). A orientação da Comissão Europeia indica que bens não são enviados pelo vendedor quando o próprio cliente contrata o transporte sem participação do vendedor, o que pode ocorrer ao contratar a TSJY diretamente — a decisão cabe à alfândega do seu país. O site da TSJY não informa como impostos ou taxas são pagos. Veja [encomendas retidas na alfândega](guide:customs).
 
@@ -92,7 +92,7 @@ Na TSJY, normalmente você mesmo é o cliente contratante do envio. Por isso, em
 
 **Sem atualizações após o voo.** Depois de `Flight has departed.`, pode não haver novidades até o pouso ou a alfândega. Quando a linha mais recente completa quatro dias e o pacote segue em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek marca com a data daquela movimentação, como "Sem atualizações desde seg 12 out". A página então mostra "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando TSJY." Como TSJY e 17FEIA não têm página de ajuda cadastrada no Peek, o link "Pedir ajuda a …" só aparece quando o Peek passa a acompanhar a transportadora final (se ela tiver página de ajuda). Após três semanas sem novidade, aparece "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando TSJY." Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating) e [rastrear encomendas da China](guide:tracking-from-china).
 
-**Extraviada ou danificada.** O site da TSJY promete indenização integral por perda ou dano (丢破必赔), mas suas páginas públicas não informam regras ou prazos de reclamação: contate o suporte imediatamente e guarde a caixa e os produtos. Veja [encomenda extraviada](guide:lost-parcel) e [encomenda danificada](guide:damaged-parcel).
+**Extraviada ou danificada.** O site da TSJY promete indenização integral por perda ou dano (丢破必赔), mas suas páginas públicas não informam regras ou prazos para pedidos de indenização: contate o suporte imediatamente e guarde a caixa e os produtos. Veja [encomenda extraviada](guide:lost-parcel) e [encomenda danificada](guide:damaged-parcel).
 
 **Entregue sem recebimento ou devolvida.** Verifique ao redor da casa e pergunte aos vizinhos, depois avise a TSJY. O site não traz regras sobre devoluções. Veja [entregue mas não recebida](guide:delivered-not-received) e [devolvida ao remetente](guide:returned-to-sender).
 
@@ -104,7 +104,7 @@ Na [página inicial da TSJY](https://www.tsjy56.com/), na seção 客服中心 (
 - **WeChat:** código QR para adicionar o atendimento no WeChat (添加微信客服), além da conta de serviço e miniprograma no WeChat.
 - **Armazém:** em Huaqiao (花桥镇), Suzhou, com endereço completo na página.
 
-O site está disponível apenas em chinês e não menciona atendimento em outros idiomas.
+O site está disponível apenas em chinês e não menciona atendimento em inglês.
 
 ## Acompanhe uma encomenda TSJY com o Peek
 
@@ -143,10 +143,10 @@ A [17FEIA](carrier:17feia) é a linha que leva seu pacote ao exterior: o cartão
 Pela seção 客服中心 na página inicial do site: há telefone, e-mail e WeChat, todos em chinês.
 
 :::sources
-- [TSJY: 通世集运 (home page)](https://www.tsjy56.com/) – company, services, compensation promise, tracking span, order search and its results page on a phone, ordering, contacts, warehouse
-- [TSJY: 轨迹查询 (tracking results)](https://www.tsjy56.com/orderResult.html) – results on a phone: cards with both numbers, card statuses, no-result message
-- [TSJY: 轨迹详情 (track details)](https://www.tsjy56.com/orderDetail.html) – channel (渠道) name and number, tracking lines, times on the device's clock
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty since 1 July 2026, €2 Union handling fee since 1 November 2026
-- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value, what an item is, distance sales and transport the customer arranges
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape, link, wordings and stages, clocks, hand-over to the line, what Peek reads
+- [TSJY: 通世集运 (home page)](https://www.tsjy56.com/) – empresa, serviços, promessa de indenização, período do rastreamento, busca de pedidos e sua página de resultados no celular, pedidos de envio, contatos, armazém
+- [TSJY: 轨迹查询 (tracking results)](https://www.tsjy56.com/orderResult.html) – resultados no celular: cartões com os dois códigos, status dos cartões, mensagem sem resultado
+- [TSJY: 轨迹详情 (track details)](https://www.tsjy56.com/orderDetail.html) – nome e código do canal (渠道), movimentações, horários no relógio do aparelho
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – imposto de €3 desde 1º de julho de 2026, taxa de manuseio da União de €2 desde 1º de novembro de 2026
+- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 por item qualquer que seja o valor, o que é um item, vendas à distância e transporte contratado pelo cliente
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formato do código, link, textos e etapas, fusos, passagem para a linha, o que o Peek lê
 :::

@@ -6,7 +6,7 @@ published: 2026-11-26
 updated: 2026-11-26
 ---
 
-A Ukrposhta (*Укрпошта*) é o operador postal nacional da Ucrânia. Rastreie sua encomenda no rastreador oficial track.ukrposhta.ua, no aplicativo Ukrposhta ou colando o código na caixa acima. O código é fornecido pelo remetente: 13 dígitos dentro da Ucrânia, ou duas letras, nove dígitos e duas letras para envios de ou para o exterior.
+A Ukrposhta (*Укрпошта*) é o operador postal nacional da Ucrânia. Rastreie sua encomenda no rastreador track.ukrposhta.ua, no aplicativo Ukrposhta ou colando o código na caixa acima. O código é fornecido pelo remetente: 13 dígitos dentro da Ucrânia, ou duas letras, nove dígitos e duas letras para envios de ou para o exterior.
 
 ## Código de rastreamento Ukrposhta
 
@@ -53,21 +53,21 @@ As linhas indicam se o envio vai até você (`Item out for physical delivery`) o
 
 Se não houver movimento por vários dias, veja [por que o rastreamento para de atualizar](guide:tracking-not-updating); se estiver retida na alfândega, veja [encomendas retidas na alfândega](guide:customs).
 
-**Extraviada ou atrasada em envios internacionais.** Pelas regras da União Postal Universal (UPU), todo correio nacional deve aceitar reclamação de busca para encomendas ou registrados/segurados, enviada pelo remetente ou por você, em até seis meses a contar do dia seguinte à postagem. Pelas regras da UPU a reclamação é gratuita, mas a Ucrânia reserva-se o direito de cobrar taxa. A indenização por extravio ou dano vai ao remetente, ou a você caso o remetente renuncie por escrito. Em compras on-line que não chegaram, contate o vendedor primeiro.
+**Extraviada ou atrasada em envios internacionais.** Pelas regras da União Postal Universal (UPU), todo correio nacional deve aceitar um pedido de busca para encomendas ou registrados/segurados, enviada pelo remetente ou por você, em até seis meses a contar do dia seguinte à postagem. Pelas regras da UPU o pedido de busca é gratuito, mas a Ucrânia reserva-se o direito de cobrar taxa. A indenização por extravio ou dano vai ao remetente, ou a você caso o remetente renuncie por escrito. Em compras on-line que não chegaram, contate o vendedor primeiro.
 
 **Danificada na chegada.** Aponte o dano antes de receber o pacote. Pelas mesmas regras da UPU, os correios respondem por danos constatados antes ou no ato da entrega, e quem entrega deve lavrar um termo para você assinar junto, entregando-lhe uma cópia.
 
 ## Atendimento da Ukrposhta
 
-Para problemas no aplicativo, a ficha da Ukrposhta no Google Play informa o e-mail `mobile-app@ukrposhta.ua`. Em casos de envio internacional extraviado ou atrasado, abra uma reclamação conforme descrito acima: pelas regras da UPU, a Ukrposhta deve recebê-la tanto de você quanto do remetente.
+Para problemas no aplicativo, a ficha da Ukrposhta no Google Play informa o e-mail `mobile-app@ukrposhta.ua`. Em casos de envio internacional extraviado ou atrasado, faça um pedido de busca conforme descrito acima: pelas regras da UPU, a Ukrposhta deve aceitá-lo tanto de você quanto do remetente.
 
 ## Acompanhe a Ukrposhta com o Peek
 
 Para códigos de 13 dígitos com o dígito verificador da Ukrposhta, o [Peek](/) consulta a Ukrposhta — além de FAN Courier ou iMile se o formato também couber nelas — e exibe "Ukrposhta está com esta encomenda." quando só a Ukrposhta reconhece o código; se outra transportadora também o reconhecer, você escolhe entre elas. Um código de 13 dígitos com dígito verificador incorreto não é sugerido para a Ukrposhta: escolha Ukrposhta em "Trocar". Códigos iniciados por `C`, `E`, `L` ou `R`, terminados em `UA` e com dígito verificador válido são identificados como Ukrposhta na hora; códigos `UA` válidos com outra inicial fazem o Peek consultar Ukrposhta e [Chronopost](carrier:chronopost), continuando a verificar após a adição se nenhuma ainda o conhecer. Links de track.ukrposhta.ua contendo o código sempre apontam para a Ukrposhta.
 
-Códigos postais de outros países não vão direto para a Ukrposhta. Quando o objeto se dirige à Ucrânia, o Peek pode acompanhar a transição para a Ukrposhta, ou você pode escolher "Ukrposhta" em "Trocar".
+Números postais de outros países não vão direto para a Ukrposhta. Quando o objeto se dirige à Ucrânia, o Peek pode acompanhar a transição para a Ukrposhta, ou você pode escolher "Ukrposhta" em "Trocar".
 
-O Peek lê o serviço usado pelo app da Ukrposhta; quando esse serviço falha ou não encontra um envio internacional, o Peek abre a página de rastreamento da Ukrposhta em navegador no servidor. Exibe cada etapa no mapa com local e país, movimentações aduaneiras e horário de entrega. A Ukrposhta envia horários sem fuso horário: o Peek interpreta etapas na Ucrânia no horário de Kyiv e estima o fuso de etapas no exterior pelo local ou pelas etapas vizinhas (podendo haver pequena diferença), convertendo tudo para o fuso do seu aparelho. Não mostra data prevista de entrega e omite data planejada e códigos postais; o único ponto de retirada exibido é a agência de `Arrived to the Branch`. Os status preservam o texto em inglês da Ukrposhta, inclusive `Final delivery`.
+O Peek lê o serviço usado pelo app da Ukrposhta; quando esse serviço falha ou não encontra um envio internacional, o Peek abre a página de rastreamento da Ukrposhta em navegador no servidor. Exibe cada etapa no mapa com local e país, movimentações aduaneiras e horário de entrega. A Ukrposhta envia horários sem fuso horário: o Peek interpreta etapas na Ucrânia no horário de Kyiv e estima o fuso de etapas no exterior pelo local ou pelas etapas vizinhas (e esse horário pode não ser exato), convertendo tudo para o fuso do seu aparelho. Não mostra data prevista de entrega e omite data planejada e códigos postais; o único ponto de retirada exibido é a agência de `Arrived to the Branch`. Os status preservam o texto em inglês da Ukrposhta, inclusive `Final delivery`.
 
 Com a encomenda aberta, ou no dia da entrega com notificações ligadas, o Peek verifica até a cada 10 minutos. Quando sai para entrega, consulta até a cada 2 minutos — ou a cada 5 minutos se a última consulta usou o navegador no servidor — a partir das 6h no relógio da movimentação mais recente (horário de Kyiv na Ucrânia) enquanto o serviço ou site da Ukrposhta responder. Nos demais casos, e após dois dias sem novidades (ou 12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), consulta de hora em hora e envia notificações quando o status muda.
 
@@ -86,8 +86,8 @@ Compare caractere por caractere com o código fornecido pelo remetente. Um códi
 Cole o código fornecido pelo remetente. O Peek acompanha no correio de origem. Quando esse correio informa destino Ucrânia, ou você adiciona o código estando na Ucrânia, o Peek passa a consultar também a Ukrposhta e, assim que ela tiver uma movimentação ao menos tão recente quanto a última do correio de origem, prossegue lá preservando o histórico anterior. Para seguir pela Ukrposhta desde o início, escolha "Ukrposhta" em "Trocar". Uma encomenda DHL da Alemanha cujo código começa com `C` é seguida pela [Meest](carrier:meest).
 
 :::sources
-- [Universal Parcel Scraper: Ukrposhta](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ukrposhta) – number shapes and check digits, track.ukrposhta.ua links, the app's service and the tracker Peek reads, the English lines and their statuses, return lines, Kyiv time and steps abroad, what Peek leaves out
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – carriers Peek asks by number, Ukraine's national post, hand-offs to Ukrposhta (to Meest for DHL's C numbers) and from it to Royal Mail or Parcelforce, Nova Poshta and Meest numbers
-- [Universal Postal Union: Convention Manual](https://www.upu.int/UPU/media/upu/files/aboutUpu/acts/06-manualsInThreeVolumes/actInThreeVolumesConventionManual202609En.pdf) – inquiries within six months, Ukraine's right to charge for them, compensation to the sender or, by written waiver, to you, damage found at delivery and its report
-- [Google Play: Ukrposhta](https://play.google.com/store/apps/details?id=ua.ukrposhta.android.app) – the app tracks parcels and finds branches with their postcodes, addresses and opening hours; email for app problems
+- [Universal Parcel Scraper: Ukrposhta](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ukrposhta) – formatos de código e dígitos verificadores, links de track.ukrposhta.ua, o serviço do app e o rastreador que o Peek lê, as linhas em inglês e seus status, linhas de devolução, horário de Kyiv e etapas no exterior, o que o Peek omite
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – transportadoras que o Peek consulta pelo código, correio nacional da Ucrânia, passagens para a Ukrposhta (para a Meest nos códigos C da DHL) e dela para Royal Mail ou Parcelforce, códigos da Nova Poshta e da Meest
+- [Universal Postal Union: Convention Manual](https://www.upu.int/UPU/media/upu/files/aboutUpu/acts/06-manualsInThreeVolumes/actInThreeVolumesConventionManual202609En.pdf) – pedidos de busca em até seis meses, direito da Ucrânia de cobrar por eles, indenização ao remetente ou, por renúncia escrita, a você, dano constatado na entrega e seu termo
+- [Google Play: Ukrposhta](https://play.google.com/store/apps/details?id=ua.ukrposhta.android.app) – o app rastreia encomendas e localiza agências com código postal, endereço e horários; e-mail para problemas no app
 :::

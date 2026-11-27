@@ -86,7 +86,7 @@ Shopee 订单请直接通过 Shopee App 客服处理；其他网店订单请先�
 
 - **输入 `SPXSG` 单号：** Peek 会立刻识别为 SPX Express Singapore（“识别出的快递公司”）并直连 SPX 查询；点击“更换”可切换其他承运商。
 - **粘贴追踪链接：** 粘贴包含 `SPXSG` 单号的 `spx.sg` 链接（含 `/track?`、`/m/track?` 或 `/detail/`），Peek 会自动提取单号。
-- **输入 `SG` 单号：** 仅凭 15 位 `SG` 形态 Peek 无法直接确定承运商，但照常粘贴即可——Peek 支持超过 4,500 家承运商，查询时会显示“正在查询物流服务…”。如需手动选定，点击“更换”并在“符合这个单号”下选择 SPX Express Singapore。如有 `SPXSG` 单号建议优先使用，因为 SPX 官网往往仅凭 `SPXSG` 单号才能查到 Shopee 包裹。
+- **输入 `SG` 单号：** 仅凭 15 位 `SG` 形态 Peek 无法直接确定承运商，但照常粘贴即可——Peek 跟踪 4,500 多家快递公司，查询时会显示“正在查询物流服务…”。如需手动选定，点击“更换”并在“符合这个单号”下选择 SPX Express Singapore。如有 `SPXSG` 单号建议优先使用，因为 SPX 官网往往仅凭 `SPXSG` 单号才能查到 Shopee 包裹。
 
 添加时若暂未确定承运商，包裹会先显示“暂无物流记录”，同时 Peek 会向聚合追踪服务查询；只要追踪服务唯一返回 SPX Express Singapore 并附带日期节点，Peek 就会自动归入 SPX。
 

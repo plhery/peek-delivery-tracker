@@ -1,6 +1,6 @@
 ---
 title: BUFFALO 国际物流单号查询：BUFZA 轨迹、南非清关与客服
-description: 查询 BUFFALO 国际物流中国至南非专线包裹：BUFZA…YQ 单号格式、南非海关增值税与关税节点、周一至周六派送时段及中非官方客服。
+description: 查询 BUFFALO 国际物流中国至南非专线包裹：BUFZA…YQ 单号格式、南非海关增值税与关税节点、周一至周六派送时段及客服邮箱。
 slug: buffalo-ex-nanfei-chaxun
 published: 2026-11-24
 updated: 2026-11-24

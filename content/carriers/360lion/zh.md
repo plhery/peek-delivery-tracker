@@ -1,6 +1,6 @@
 ---
 title: 纬狮物流（360Lion）单号查询：WSH 与 AR 格式、轨迹与客服
-description: 查询纬狮物流（360Lion）中国发往拉美和美国的跨境包裹：WSH 与 AR 单号规则、WSO/WSD 轨迹含义、末端派送交接、清关停滞及官方客服指南。
+description: 查询纬狮物流（360Lion）中国发往拉美和美国的跨境包裹：WSH 与 AR 单号规则、WSO/WSD 轨迹含义、末端派送交接、清关停滞及客服指南。
 slug: 360lion-wuliu-chaxun
 published: 2026-11-24
 updated: 2026-11-24

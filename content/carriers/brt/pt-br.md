@@ -1,6 +1,6 @@
 ---
 title: Rastreamento BRT: códigos, status e entregas na Itália
-description: Rastreie encomendas BRT na Itália ou vindas de lá: onde achar o BRTcode ou o número de envio, status em inglês, entregas sem sucesso, armários e contato.
+description: Rastreie encomendas BRT na Itália ou vindas de lá: onde achar o BRTcode ou o número de envio, status em inglês, entregas não realizadas, armários e contato.
 slug: rastreamento-brt
 published: 2026-11-24
 updated: 2026-11-24

@@ -1,6 +1,6 @@
 ---
 title: 义达跨境（YDH）快递查询：YQ 与 AZ 单号、状态与客服
-description: 查询义达跨境（YDH）从中国发往海外的跨境包裹：YDH…YQ 与 AZ 单号格式、DSD 与 CARR 轨迹代码含义、末端派送交接及官方客服联系方式。
+description: 查询义达跨境（YDH）从中国发往海外的跨境包裹：YDH…YQ 与 AZ 单号格式、DSD 与 CARR 轨迹代码含义、末端派送交接及客服联系方式。
 slug: ydh-yida-kuajing-chaxun
 published: 2026-11-24
 updated: 2026-11-24

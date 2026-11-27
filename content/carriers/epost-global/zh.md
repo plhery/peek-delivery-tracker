@@ -1,6 +1,6 @@
 ---
 title: ePost Global 快递查询：EPG 单号、物流状态与末端派送
-description: 查询 ePost Global 包裹：EPG 运单号格式、官方与合作承运商物流状态含义、欧盟关税规则、客服联系方式以及 Peek 如何跟踪负责派送的合作方。
+description: 查询 ePost Global 包裹：EPG 运单号格式、其查询页各条记录的含义、欧盟关税规则、客服联系方式以及 Peek 如何跟踪负责派送的合作方。
 slug: epost-global-kuaidi-chaxun
 published: 2026-11-24
 updated: 2026-11-24

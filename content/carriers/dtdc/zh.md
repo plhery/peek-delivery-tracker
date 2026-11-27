@@ -1,6 +1,6 @@
 ---
 title: 印度 DTDC 物流查询：AWB 单号格式、RTO 退件与客服联系
-description: 查询印度及国际 DTDC 包裹：N、7D 与 7X 运单号格式、中转扫描与 RTO 退件说明、WorldWyde 国际时效及官方客服联系。
+description: 查询印度及国际 DTDC 包裹：N、7D 与 7X 运单号格式、中转扫描与 RTO 退件说明、WorldWyde 国际时效及客服联系。
 slug: dtdc-tracking
 published: 2026-11-26
 updated: 2026-11-26

@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Ecoscooting: status, retirada e contato
-description: Rastreie encomendas da Ecoscooting na Espanha ou em Portugal: qual código usar, significado dos status, entregas sem sucesso, pontos de retirada e contato.
+description: Rastreie encomendas da Ecoscooting na Espanha ou em Portugal: qual código usar, significado dos status, entregas não realizadas, pontos de retirada e contato.
 slug: rastreamento-ecoscooting
 published: 2026-11-24
 updated: 2026-11-24

@@ -1,6 +1,6 @@
 ---
 title: Rastreamento GOFO France: códigos GFFR, status e ajuda
-description: Rastreie encomendas da GOFO na França: formatos GFFR e CIFR, significado dos status em francês, entregas sem sucesso e contato em caso de atraso ou extravio.
+description: Rastreie encomendas da GOFO na França: formatos GFFR e CIFR, significado dos status em francês, entregas não realizadas e contato em caso de atraso ou extravio.
 slug: rastreamento-gofo-franca
 published: 2026-11-24
 updated: 2026-11-24

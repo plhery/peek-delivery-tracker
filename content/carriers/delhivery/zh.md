@@ -1,6 +1,6 @@
 ---
 title: Delhivery 印度快递查询：AWB 单号、状态与客服
-description: 查询印度 Delhivery 境内外包裹：13/14 位 AWB 单号格式、RTO 等状态含义、派送规则、理赔与官方防骗提醒。
+description: 查询印度 Delhivery 境内外包裹：13/14 位 AWB 单号格式、RTO 等状态含义、派送规则、理赔与防骗提醒。
 slug: delhivery-yindu-kuaidi-chaxun
 published: 2026-11-25
 updated: 2026-11-25

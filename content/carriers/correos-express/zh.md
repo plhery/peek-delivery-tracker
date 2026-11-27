@@ -1,6 +1,6 @@
 ---
 title: Correos Express 快递查询：单号、西班牙语状态与客服
-description: 查询西班牙和葡萄牙 Correos Express 包裹：16 位或 23 位运单号格式、西班牙语物流状态中文说明、派送失败的处理及客服联系方式。
+description: 查询西班牙和葡萄牙 Correos Express 包裹：16 位或 23 位运单号格式、西班牙语物流状态中文说明、派送未成功的处理及客服联系方式。
 slug: correos-express-kuaidi-chaxun
 published: 2026-11-24
 updated: 2026-11-24

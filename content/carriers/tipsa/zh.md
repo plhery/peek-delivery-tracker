@@ -1,6 +1,6 @@
 ---
-title: TIPSA 快递查询：22 位单号、西班牙语状态与派送失败
-description: 查询西班牙和葡萄牙 TIPSA 包裹：22 位运单号结构、西班牙语物流状态中文解读、派送失败与营业网点、Pickup 自提点及客服联系方式。
+title: TIPSA 快递查询：22 位单号、西班牙语状态与派送未成功
+description: 查询西班牙和葡萄牙 TIPSA 包裹：22 位运单号结构、西班牙语物流状态中文解读、派送未成功与营业网点、Pickup 自提点及客服联系方式。
 slug: tipsa-kuaidi-chaxun
 published: 2026-11-24
 updated: 2026-11-24

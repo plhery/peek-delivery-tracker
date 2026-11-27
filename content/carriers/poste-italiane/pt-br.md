@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Poste Italiane: códigos, status e retirada
-description: Rastreie encomendas da Poste Italiane: onde achar o código, status em italiano, entregas sem sucesso, Punto Poste, reclamações e contato.
+description: Rastreie encomendas da Poste Italiane: onde achar o código, status em italiano, entregas não realizadas, Punto Poste, reclamações e contato.
 slug: rastreamento-poste-italiane
 published: 2026-11-24
 updated: 2026-11-24

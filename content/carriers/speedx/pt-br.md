@@ -1,6 +1,6 @@
 ---
 title: Rastreamento SpeedX: status, tentativas de entrega e contato
-description: Rastreie um pacote da SpeedX nos EUA: formato do código SPX, o que significam os status, entregas sem sucesso, fotos de entrega e como falar com o suporte.
+description: Rastreie um pacote da SpeedX nos EUA: formato do código SPX, o que significam os status, entregas não realizadas, fotos de entrega e como falar com o suporte.
 slug: rastreamento-speedx
 published: 2026-11-24
 updated: 2026-11-24

@@ -1,6 +1,6 @@
 ---
 title: 壹号专线（FIRST LINE）物流查询：1ST单号、状态与美国派送
-description: 查询深圳壹号专线（FIRST LINE）跨境包裹：1ST 开头单号规则、官网英文轨迹含义、美国与加拿大末端派送商，以及停滞或异常时的处理方式。
+description: 查询深圳壹号专线（FIRST LINE）跨境包裹：1ST 开头单号规则、各状态含义、美国与加拿大末端派送商，以及停滞或异常时的处理方式。
 slug: yihao-zhuanxian-first-line-chaxun
 published: 2026-11-23
 updated: 2026-11-23

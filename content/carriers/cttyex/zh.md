@@ -1,6 +1,6 @@
 ---
 title: 诚泰通运（CTTYEX）查询：CTTY单号、英文轨迹与北京时间
-description: 查询深圳诚泰通运（CTTYEX）跨境电商包裹：CTTY…CN单号规则、官网英文扫描轨迹的中文解读，以及为何所有扫描时间均按北京时间显示。
+description: 查询深圳诚泰通运（CTTYEX）跨境电商包裹：CTTY…CN单号规则、其中文查询页上英文扫描的解读，以及为何所有扫描时间均按北京时间显示。
 slug: chengtai-tongyun-cttyex-chaxun
 published: 2026-11-23
 updated: 2026-11-23

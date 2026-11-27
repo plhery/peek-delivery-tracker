@@ -1,6 +1,6 @@
 ---
 title: 出口易（Chukou1 / CK1）单号查询：EC-FirstClass 轨迹与客服
-description: 查询出口易（Chukou1 / CK1）EC-FirstClass 跨境包裹：18 至 20 位处理号结构、英文扫描状态、末端快递交接及中国官方客服指南。
+description: 查询出口易（Chukou1 / CK1）EC-FirstClass 跨境包裹：18 至 20 位处理号结构、英文扫描状态、末端快递交接及中国客服指南。
 slug: chukou1-chukouyi-chaxun
 published: 2026-11-24
 updated: 2026-11-24

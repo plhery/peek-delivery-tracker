@@ -78,7 +78,7 @@ GEODIS 在波兰的官方渠道如下：
 
 ## 使用 Peek 跟踪 GEODIS Poland 包裹
 
-`PL` 加 16 位数字并非 GEODIS 独占格式（`PL` 代表波兰），因此 Peek 无法单凭单号直接锁定 GEODIS Poland。但直接粘贴即可（Peek 跟踪超过 4,500 家快递）：它会向 GEODIS Poland 核实，确认有记录时显示“GEODIS Poland 有这个包裹的记录。”如果 GEODIS 尚未录入，页面会先显示“可能是 GEODIS Poland”和“等待 GEODIS Poland 的首次扫描”并持续查询；满一周仍查不到时，Peek 会建议与寄件人核对单号或换一家快递。如需手动指定，点击快递栏的“更换”，在“符合这个单号”下选择“GEODIS Poland”或搜索（输入 Pekaes 也能找到；单独的“GEODIS”指的是 GEODIS France）；已添加的包裹则使用“更换快递公司”。粘贴包含单号的 Strefa Klienta 链接无需手动选择，Peek 会直接识别为 GEODIS Poland。
+`PL` 加 16 位数字并非 GEODIS 独占格式（`PL` 代表波兰），因此 Peek 无法单凭单号直接锁定 GEODIS Poland。但直接粘贴即可（Peek 跟踪 4,500 多家快递公司）：它会向 GEODIS Poland 核实，确认有记录时显示“GEODIS Poland 有这个包裹的记录。”如果 GEODIS 尚未录入，页面会先显示“可能是 GEODIS Poland”和“等待 GEODIS Poland 的首次扫描”并持续查询；满一周仍查不到时，Peek 会建议与寄件人核对单号或换一家快递。如需手动指定，点击快递栏的“更换”，在“符合这个单号”下选择“GEODIS Poland”或搜索（输入 Pekaes 也能找到；单独的“GEODIS”指的是 GEODIS France）；已添加的包裹则使用“更换快递公司”。粘贴包含单号的 Strefa Klienta 链接无需手动选择，Peek 会直接识别为 GEODIS Poland。
 
 Peek 读取英文版 Strefa Klienta，展示状态、每条 GEODIS 英文扫描及场站地点、签收时间以及目的地国家。波兰场站按华沙时间解析，境外场站按当地时钟解析，再全部换算为你设备的时区；在 peektracker.com 以及 iPhone 和 Android App 中，轨迹末尾会注明“时间按你所在的时区显示：”及对应时区名称。当出现 `Pseudoscan` 冲销先前扫描时，Peek 会同步移除被取消的条目，而 `Claim Received` 不会改变包裹当前状态。GEODIS 查询页不提供预计送达日、重量、服务名、收件人姓名或签收证明；Peek 也会省略收件邮编、地址、件数、场站代码以及可能包含签收人姓名的备注栏。
 

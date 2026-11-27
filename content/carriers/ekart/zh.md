@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-Ekart（又称 eKart Logistics）是印度一家快递公司，负责向卖家揽收电商订单，经旗下分拨枢纽转运并派送至收件人手中。运单号（tracking ID）由卖家或网店提供：请在发货通知里查找或向卖家索取，然后粘贴到上方输入框即可查询；Ekart 官方查件网站为 ekartlogistics.in。
+Ekart（又称 eKart Logistics）是印度一家快递公司，负责向卖家揽收电商订单，经旗下分拨枢纽转运并派送至收件人手中。运单号（tracking ID）由卖家或网店提供：请在发货通知里查找或向卖家索取，然后粘贴到上方输入框即可查询；Ekart 的查询页在 ekartlogistics.in。
 
 ## Ekart 运单号是什么样的？
 
@@ -15,7 +15,7 @@ Peek 代码识别的 Ekart 运单号由 3 个字母、接着 `C`、`P` 或 `R`�
 | 虚构运单号示例 | 说明 |
 | --- | --- |
 | `FMPP4829105736` | Peek 绑定至 Ekart 的字母前缀（见下方列表）+ `C`/`P`/`R` + 10 位数字。Peek 仅凭格式就能立刻识别为 Ekart。 |
-| `ABCP4829105736` | 其他三位字母前缀但结构相同：可能属于 Ekart，但 Peek 无法单凭格式确认，会向 Ekart 官网查询核实（见下文）。 |
+| `ABCP4829105736` | 其他三位字母前缀但结构相同：可能属于 Ekart，但 Peek 无法单凭格式确认，会向 Ekart 的查询页核实（见下文）。 |
 
 Peek 直接绑定为 Ekart 的三位字母前缀共有：`AMI`、`BAL`、`BGS`、`BSI`、`DEL`、`FLO`、`FMP`、`GLA`、`LUA`、`MYE`、`MYN`、`MYS`、`SDL`、`SHO`、`SPO`、`SRT` 和 `TEL`。往 Peek 粘贴时空格和大小写均不影响识别。有两个例外：同样结构但以 `PB` 开头的编号会被识别为英国快递 Parcelforce；以 `HRBC` 开头的编号因符合速卖通（AliExpress）格式，Peek 不会推荐 Ekart。如果你的包裹来自印度网店，请点击“更换”手动选择 Ekart。
 
@@ -62,7 +62,7 @@ Peek 代码仅覆盖印度境内的 Ekart 派送。从上述状态可以看出�
 
 **出现 `undelivered_attempted`、`undelivered_unattempted` 或 `Unsuccessful`：** 本次未能送达；`Rescheduled to:` 注明下次计划派送日期。随后轨迹会显示包裹是再次出车派送还是退回。请向商家核对你的收件地址与电话是否无误。
 
-**出现 `ShipmentRtoConfirmed` 或 `Marked RTO: ORDER_REJECT`：** 包裹正在退回卖家。待 Ekart 官网显示退回 `Delivered` 后，Peek 会显示“已退回寄件人”。请联系商家退款或重新发货，详见[包裹退回寄件人](guide:returned-to-sender)（英文）。
+**出现 `ShipmentRtoConfirmed` 或 `Marked RTO: ORDER_REJECT`：** 包裹正在退回卖家。待 Ekart 的查询页显示退回 `Delivered` 后，Peek 会显示“已退回寄件人”。请联系商家退款或重新发货，详见[包裹退回寄件人](guide:returned-to-sender)（英文）。
 
 **出现 `PickupCancel`：** 向卖家揽收已取消，包裹从未进入 Ekart 网络，请向商家确认订单是否仍会发货。
 
@@ -72,17 +72,17 @@ Peek 代码仅覆盖印度境内的 Ekart 派送。从上述状态可以看出�
 
 ## Ekart 客服与联系方式
 
-Ekart 官网并未向收件人公布客服电话或邮箱；其常见问题页面只引导卖家在商家后台提交工单（承诺 24 小时内回复）。网购订单请优先联系商家或电商平台，因为运费由其预订，退款或补发也由商家处理。
+Ekart 的网站并未向收件人公布客服电话或邮箱；其常见问题页面只引导卖家在商家后台提交工单（承诺 24 小时内回复）。网购订单请优先联系商家或电商平台，因为运费由其预订，退款或补发也由商家处理。
 
 收到要求付款的快递短信前，请先阅读[防范快递诈骗短信](guide:delivery-scam-texts)（英文）。
 
 ## 用 Peek 查询和跟踪 Ekart 包裹
 
-把运单号直接粘贴到 [Peek](/) 即可。若以本文列出的 17 组前缀加 `C`、`P` 或 `R` 开头，Peek 会立刻识别为 Ekart（显示“识别出的快递公司”），点击“更换”可切换其他快递。若是其他三位字母前缀，Peek 会先显示“正在查询物流服务…”并向 Ekart 官方查件页核实：只要查到扫描记录，就显示“Ekart 有这个包裹的记录。”并在 Ekart 上继续跟踪；如果 Ekart 的查件页暂时查不到，则改问物流查询服务；如仍想看 Ekart 自己的记录，点“更换”，在“符合这个单号”下选定 Ekart 即可。
+把运单号直接粘贴到 [Peek](/) 即可。若以本文列出的 17 组前缀加 `C`、`P` 或 `R` 开头，Peek 会立刻识别为 Ekart（显示“识别出的快递公司”），点击“更换”可切换其他快递。若是其他三位字母前缀，Peek 会先显示“正在查询物流服务…”并向 Ekart 的查询页核实：只要查到扫描记录，就显示“Ekart 有这个包裹的记录。”并在 Ekart 上继续跟踪；如果 Ekart 的查件页暂时查不到，则改问物流查询服务；如仍想看 Ekart 自己的记录，点“更换”，在“符合这个单号”下选定 Ekart 即可。
 
-也可以直接粘贴 Ekart 查件链接（ekartlogistics.com 路径含 shipmenttrack 与运单号），无论前缀是什么字母，Peek 都会提取单号并归为 Ekart。如果卖家发来的是 shiprocket.co 查件链接，也可以粘贴，但 Peek 会通过 [Shiprocket](carrier:shiprocket) 查询页而不是 Ekart 官网跟进。若为非“4 位字母 + 10 位数字”的单号强行选定 Ekart，界面会提示“不使用这种格式的单号”。
+也可以直接粘贴 Ekart 查件链接（ekartlogistics.com 路径含 shipmenttrack 与运单号），无论前缀是什么字母，Peek 都会提取单号并归为 Ekart。如果卖家发来的是 shiprocket.co 查件链接，也可以粘贴，但 Peek 会通过 [Shiprocket](carrier:shiprocket) 查询页而不是 Ekart 的查询页跟进。若为非“4 位字母 + 10 位数字”的单号强行选定 Ekart，界面会提示“不使用这种格式的单号”。
 
-归入 Ekart 的包裹在首次扫描前会显示“等待 Ekart 更新”；若 Ekart 首次回复查无此号满两天仍无记录，Peek 会提示你核对单号、更换快递公司或删除包裹。未指定承运商添加的包裹则显示“暂无物流记录”。Peek 无需账号或手机号即可直连读取 Ekart 官方轨迹，按时间倒序、去重保留原文措辞与状态码、精确时间及城市名。所有时间均换算为你设备的本地时区（在 peektracker.com 及 iPhone、Android 应用中，物流历史底部注明“时间按你所在的时区显示：”及你的时区名称）。在途期间还会展示 Ekart 给出的预计送达日期，签收或进入退件后则不再显示。
+归入 Ekart 的包裹在首次扫描前会显示“等待 Ekart 更新”；若 Ekart 首次回复查无此号满两天仍无记录，Peek 会提示你核对单号、更换快递公司或删除包裹。未指定快递公司添加的包裹则显示“暂无物流记录”。Peek 无需账号或手机号即可读取 Ekart 自己的轨迹，按时间倒序、去重保留原文措辞与状态码、精确时间及城市名。所有时间均换算为你设备的本地时区（在 peektracker.com 及 iPhone、Android 应用中，物流历史底部注明“时间按你所在的时区显示：”及你的时区名称）。在途期间还会展示 Ekart 给出的预计送达日期，签收或进入退件后则不再显示。
 
 当你打开包裹页面或在派送当天开启提醒时，Peek 最高每 10 分钟检查一次；在 Ekart 扫描包裹进入派送的当天，只要 Ekart 自己的查询系统正常响应，自印度时间早上 6 点起最高每 2 分钟检查一次；通过物流查询服务时，派送当天在打开包裹页面或开启通知时最高每 15 分钟检查一次；其余情况每小时一次。连续两天无新动态（或在“已生成面单”、“已揽收”状态下满 12 小时），改为每小时检查一次。可以设置“每次扫描”、“重要环节”或“仅派送当天”提醒。Peek 无法代你联系 Ekart 或商家。
 
@@ -90,7 +90,7 @@ Ekart 官网并未向收件人公布客服电话或邮箱；其常见问题页�
 
 ### 怎么查询我的 Ekart 包裹？
 
-把网店发货通知里的运单号（tracking ID）粘贴到 Peek，或输入 ekartlogistics.in 的官方查件框即可。注意填写的是运单号而非订单号。
+把网店发货通知里的运单号（tracking ID）粘贴到 Peek，或输入 ekartlogistics.in 的查件框即可。注意填写的是运单号而非订单号。
 
 ### Ekart 运单号是什么格式？
 
@@ -106,7 +106,7 @@ RTO 指退回寄件人（Return to Origin）。出现 `ShipmentRtoConfirmed` 或
 
 ### Ekart 包裹丢了该联系谁？
 
-请联系下单的网店或电商平台，因为是由商家预订的 Ekart；Ekart 官网没有面向收件人的客服电话。
+请联系下单的网店或电商平台，因为是由商家预订的 Ekart；Ekart 的网站没有面向收件人的客服电话。
 
 :::sources
 - [Ekart Logistics: FAQ](https://www.ekartlogistics.in/faq) – 面向卖家的商家后台工单与 24 小时回复说明

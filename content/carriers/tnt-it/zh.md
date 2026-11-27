@@ -1,6 +1,6 @@
 ---
-title: TNT Italy 意大利快递查询：运单号、状态与派送失败处理
-description: 在 tnt.it 查询意大利 TNT Italy 包裹：运单号规则、意大利语物流状态含义、派送失败与重派、网点自提、理赔与客服电话。
+title: TNT Italy 意大利快递查询：运单号、状态与派送未成功处理
+description: 在 tnt.it 查询意大利 TNT Italy 包裹：运单号规则、意大利语物流状态含义、派送未成功与重派、网点自提、理赔与客服电话。
 slug: tnt-italy-tracking
 published: 2026-11-24
 updated: 2026-11-24

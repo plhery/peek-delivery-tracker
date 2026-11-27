@@ -1,6 +1,6 @@
 ---
 title: 菜鸟（Cainiao）国际物流查询：单号、状态与客服
-description: 查询菜鸟（Cainiao）与速卖通跨境包裹：LP、CNG、DOFR单号格式、物流与清关状态含义、自提点与派送失败处理、联系客服与Peek跟踪。
+description: 查询菜鸟（Cainiao）与速卖通跨境包裹：LP、CNG、DOFR单号格式、物流与清关状态含义、自提点与派送未成功处理、联系客服与Peek跟踪。
 slug: cainiao-wuliu-chaxun
 published: 2026-11-23
 updated: 2026-11-23

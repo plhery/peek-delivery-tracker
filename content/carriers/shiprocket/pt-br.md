@@ -1,6 +1,6 @@
 ---
 title: Rastreio Shiprocket: códigos AWB, status e RTO
-description: Rastreie encomendas Shiprocket ou ShiprocketX: formato do AWB, significado dos status, falhas de entrega (NDR) e devolução (RTO), além de contato.
+description: Rastreie encomendas Shiprocket ou ShiprocketX: formato do AWB, significado dos status, entregas não realizadas (NDR) e devolução (RTO), além de contato.
 slug: shiprocket-tracking
 published: 2026-11-26
 updated: 2026-11-26

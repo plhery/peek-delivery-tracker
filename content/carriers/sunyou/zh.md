@@ -1,6 +1,6 @@
 ---
 title: 顺友物流（SunYou / SYPost）查询：SY单号、状态与派送
-description: 查询深圳顺友物流（SunYou / SYPost）跨境小包：SY 单号格式、官网各节点含义、末端派送商及换单号查询方法，与异常停滞处理指南。
+description: 查询深圳顺友物流（SunYou / SYPost）跨境小包：SY 单号格式、各状态含义、末端派送商及换单号查询方法，与异常停滞处理指南。
 slug: shunyou-wuliu-sunyou-chaxun
 published: 2026-11-23
 updated: 2026-11-23

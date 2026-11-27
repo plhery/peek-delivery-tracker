@@ -1,6 +1,6 @@
 ---
 title: Straightship（迅联捷航）物流查询：STRTD 单号、状态与派送
-description: Straightship（迅联捷航）物流查询：STRTD、STRCA、STSH 单号怎么查，各物流状态什么意思，派送失败、延误或退回时怎么办，以及客服电话和邮箱。
+description: Straightship（迅联捷航）物流查询：STRTD、STRCA、STSH 单号怎么查，各物流状态什么意思，派送未成功、延误或退回时怎么办，以及客服电话和邮箱。
 slug: straightship-wuliu-chaxun
 published: 2026-11-03
 updated: 2026-11-20

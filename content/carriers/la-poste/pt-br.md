@@ -1,6 +1,6 @@
 ---
 title: Rastreamento La Poste / Colissimo: códigos e status
-description: Rastreie encomendas Colissimo ou La Poste: formatos do código de rastreamento, significado dos status em francês, entregas sem sucesso, retirada e contato.
+description: Rastreie encomendas Colissimo ou La Poste: formatos do código de rastreamento, significado dos status em francês, entregas não realizadas, retirada e contato.
 slug: rastreamento-la-poste-colissimo
 published: 2026-11-24
 updated: 2026-11-24

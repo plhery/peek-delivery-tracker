@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Chronopost: códigos, status e retirada
-description: Rastreie encomendas Chronopost na França ou vindas de lá: formatos do código, status em francês, pontos Pickup, entregas sem sucesso e contato do suporte.
+description: Rastreie encomendas Chronopost na França ou vindas de lá: formatos do código, status em francês, pontos Pickup, entregas não realizadas e contato do suporte.
 slug: rastreamento-chronopost
 published: 2026-11-24
 updated: 2026-11-24

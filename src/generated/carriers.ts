@@ -19919,7 +19919,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "tipsa",
       "catalog": "tipsa",
       "slug": "tipsa-kuaidi-chaxun",
-      "title": "TIPSA 快递查询：22 位单号、西班牙语状态与派送失败",
+      "title": "TIPSA 快递查询：22 位单号、西班牙语状态与派送未成功",
       "name": "TIPSA",
       "color": "#001e62"
     },
@@ -20471,7 +20471,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "fedex",
       "catalog": "fedex",
       "slug": "fedex-wuliu-chaxun",
-      "title": "FedEx 联邦快递物流查询：单号格式、状态含义与派送失败",
+      "title": "FedEx 联邦快递物流查询：单号格式、状态含义与派送未成功",
       "name": "FedEx",
       "color": "#4d148c"
     },
@@ -20743,7 +20743,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "tnt-it",
       "catalog": "tnt-it",
       "slug": "tnt-italy-tracking",
-      "title": "TNT Italy 意大利快递查询：运单号、状态与派送失败处理",
+      "title": "TNT Italy 意大利快递查询：运单号、状态与派送未成功处理",
       "name": "TNT Italy",
       "color": "#ff6600"
     },

@@ -1,6 +1,6 @@
 ---
 title: Rastreamento DHL Express: número de conhecimento e status
-description: Rastreie encomendas DHL Express: onde achar o código de 10 dígitos, significado dos status, taxas alfandegárias, entregas sem sucesso e extravios.
+description: Rastreie encomendas DHL Express: onde achar o código de 10 dígitos, significado dos status, taxas alfandegárias, entregas não realizadas e extravios.
 slug: rastreamento-dhl-express
 published: 2026-11-24
 updated: 2026-11-24

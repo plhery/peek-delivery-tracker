@@ -97,7 +97,7 @@ TForce 官网公布的联系渠道如下：
 
 ## 使用 Peek 跟踪 TForce Freight 货件
 
-仅凭 9 位数字无法断定属于 TForce Freight（同样符合 TNT 和 XPO）。直接粘贴即可：Peek 可以跟踪超过 4,500 家快递公司。在显示“正在查询物流服务…”期间，Peek 会同时询问这三家（若都查不到再询问 DPD Ireland 及物流查询服务）；若仅 TForce 有记录则显示“TForce Freight 有这个包裹的记录。”，多家均有记录时由你选择。对于 PARS 编号，Peek 会同时向 TForce 与 FAN Courier 查询；对于 8 位 PRO 单号，Peek 只询问物流查询服务。你也可以点击“更换”在“符合这个单号”下选择 TForce Freight，或在添加后使用“更换快递公司”。粘贴 TForce 查询链接（含 `proNumbers=`）或 UPS Freight 链接（含 `TrackProNumber=`）则会立刻识别为 TForce Freight（“识别出的快递公司”）。
+仅凭 9 位数字无法断定属于 TForce Freight（同样符合 TNT 和 XPO）。直接粘贴即可：Peek 跟踪 4,500 多家快递公司。在显示“正在查询物流服务…”期间，Peek 会同时询问这三家（若都查不到再询问 DPD Ireland 及物流查询服务）；若仅 TForce 有记录则显示“TForce Freight 有这个包裹的记录。”，多家均有记录时由你选择。对于 PARS 编号，Peek 会同时向 TForce 与 FAN Courier 查询；对于 8 位 PRO 单号，Peek 只询问物流查询服务。你也可以点击“更换”在“符合这个单号”下选择 TForce Freight，或在添加后使用“更换快递公司”。粘贴 TForce 查询链接（含 `proNumbers=`）或 UPS Freight 链接（含 `TrackProNumber=`）则会立刻识别为 TForce Freight（“识别出的快递公司”）。
 
 Peek 仅凭 PRO 单号查询 TForce 的查件系统，展示状态、每条记录的城镇与州/省、预计送达日、地图上的目的地国家、按你常用单位换算的重量，以及仅对你本人可见的收货人城镇和“收件人”姓名；发货人、预约详情、BOL 与 PO 编号及件数会被过滤，也不获取签收证明。点击“打开 TForce Freight 官网”会在 TForce 的查件页面打开你的单号（PARS 编号则打开其中的 PRO）。如果该查件系统无法访问或要求验证码，Peek 会改向[物流查询服务](guide:universal-tracker)（英文）获取轨迹。
 

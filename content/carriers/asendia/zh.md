@@ -1,6 +1,6 @@
 ---
 title: Asendia 物流查询：单号格式、状态含义、本地派送与客服
-description: 查询 Asendia 跨境包裹：运单号来源与单号形态、A1 与官网状态含义、目的地本地派送说明、包裹延误或未送达处理，以及联系客服和用 Peek 跟踪的方法。
+description: 查询 Asendia 跨境包裹：运单号来源与单号形态、A1 与各状态含义、目的地本地派送说明、包裹延误或未送达处理，以及联系客服和用 Peek 跟踪的方法。
 slug: asendia-tracking
 published: 2026-11-26
 updated: 2026-11-26

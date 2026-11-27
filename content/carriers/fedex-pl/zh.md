@@ -56,7 +56,7 @@ FedEx 国内件扫描均以波兰语记录，并注明经办分部名称。在�
 
 ## 使用 Peek 跟踪 FedEx Poland 包裹
 
-[Peek](/) 无法仅凭格式判断 FedEx Poland：以 `6` 开头的 13 位数字同样符合 Correos Chile、Delhivery、韵达和韩国邮政。直接粘贴即可：Peek 可以跟踪超过 4,500 家快递公司。只要末位通过校验位验证，添加时 Peek 会优先询问 FedEx Poland，对方有记录即显示“FedEx Poland 有这个包裹的记录。”若暂均未查到或多家均有记录，可点击“更换”手动选择 FedEx Poland（搜索“Opek”或“FedEx Polska”同样可找到）。仅当末位校验位正确时 Peek 才会推荐 FedEx Poland，但你随时可以手动指定。
+[Peek](/) 无法仅凭格式判断 FedEx Poland：以 `6` 开头的 13 位数字同样符合 Correos Chile、Delhivery、韵达和韩国邮政。直接粘贴即可：Peek 跟踪 4,500 多家快递公司。只要末位通过校验位验证，添加时 Peek 会优先询问 FedEx Poland，对方有记录即显示“FedEx Poland 有这个包裹的记录。”若暂均未查到或多家均有记录，可点击“更换”手动选择 FedEx Poland（搜索“Opek”或“FedEx Polska”同样可找到）。仅当末位校验位正确时 Peek 才会推荐 FedEx Poland，但你随时可以手动指定。
 
 粘贴来自 `fds2tracking.emea.fedex.com` 或 `fedex.com` 波兰国内查询页的链接，或带 `packageId=` 的 `poland.fedex.com` 链接，都会直接归属 FedEx Poland。
 

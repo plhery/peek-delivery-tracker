@@ -97,7 +97,7 @@ DPD 未说明客服是否提供英语服务。
 
 ## 使用 Peek 跟踪 DPD Netherlands 包裹
 
-将 14 位单号粘贴到 [Peek](/)。由于多家承运商共用 14 位数字，Peek 会结合你的国家（手机地区设置或网页访问所在地）查询可能的承运商，在荷兰会优先询问 DPD Netherlands。一旦 DPD 标明包裹已进入荷兰，即显示“DPD Netherlands 有这个包裹的记录。”在包裹仍位于他国期间，Peek 不会强行归为 DPD Netherlands（例如仍在德国的包裹会先显示为 DPD Germany，随后一路跟进至荷兰）。如果显示“暂未找到 · Peek 会继续查询”，可点击“更换”手动选择 DPD Netherlands（已添加包裹用“更换快递公司”）。照样粘贴即可：Peek 可以跟踪超过 4,500 家快递公司。
+将 14 位单号粘贴到 [Peek](/)。由于多家承运商共用 14 位数字，Peek 会结合你的国家（手机地区设置或网页访问所在地）查询可能的承运商，在荷兰会优先询问 DPD Netherlands。一旦 DPD 标明包裹已进入荷兰，即显示“DPD Netherlands 有这个包裹的记录。”在包裹仍位于他国期间，Peek 不会强行归为 DPD Netherlands（例如仍在德国的包裹会先显示为 DPD Germany，随后一路跟进至荷兰）。如果显示“暂未找到 · Peek 会继续查询”，可点击“更换”手动选择 DPD Netherlands（已添加包裹用“更换快递公司”）。照样粘贴即可：Peek 跟踪 4,500 多家快递公司。
 
 请仅粘贴 14 位纯数字：末尾多出一位字符会导致 Peek 跳过 DPD Netherlands。直接粘贴 `www.dpdgroup.com/nl/` 带 `parcelNumber=` 的 myDPD 链接同样可用并会立即归属 DPD Netherlands。
 

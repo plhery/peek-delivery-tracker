@@ -91,7 +91,7 @@ GlobalPost 客服邮箱为 `info@goglobalpost.com`，电话为 `(888) 899-1255`�
 
 ## 使用 Peek 跟踪 GlobalPost 包裹
 
-输入 `GP` 开头单号后，[Peek](/) 会立刻识别为 GlobalPost（“识别出的快递公司”），仅凭单号即可查询，无需邮编或账号；直接粘贴 GlobalPost 查询链接也可以。较早期的 `SDC` 单号需点击“更换”手动选择 GlobalPost。如果你手上只有末端派送公司的单号，也尽管粘贴：Peek 可以跟踪超过 4,500 家快递公司。
+输入 `GP` 开头单号后，[Peek](/) 会立刻识别为 GlobalPost（“识别出的快递公司”），仅凭单号即可查询，无需邮编或账号；直接粘贴 GlobalPost 查询链接也可以。较早期的 `SDC` 单号需点击“更换”手动选择 GlobalPost。如果你手上只有末端派送公司的单号，也尽管粘贴：Peek 跟踪 4,500 多家快递公司。
 
 Peek 会显示包裹状态、附带地点的每条扫描、目的地国家，以及 GlobalPost 公布时的末端派送公司与单号；进度条、收寄城镇与邮编均会被剔除。GlobalPost 不提供预计送达日期、重量或签收凭证，因此 Peek 也不会显示。点击“打开 GlobalPost 官网”会在 GlobalPost 的查件页面打开该单号。
 

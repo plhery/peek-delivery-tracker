@@ -101,7 +101,7 @@ Verifique se falta algum caractere no código `CK` ou `WYB` e pergunte ao vended
 
 :::sources
 - [BFE Express](https://www.bfeexpress.com/)
-- [BFE Express Tracking](https://www.bfeexpress.com/tracking)
-- [BFE Express Customer Support](https://www.bfeexpress.com/contactUS)
-- [universal-parcel-scraper BFE Express adapter](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/bfe-express)
+- [Rastreamento da BFE Express](https://www.bfeexpress.com/tracking)
+- [Atendimento ao cliente da BFE Express](https://www.bfeexpress.com/contactUS)
+- [Adaptador da BFE Express no universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/bfe-express)
 :::

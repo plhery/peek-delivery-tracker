@@ -1,6 +1,6 @@
 ---
 title: Rastreamento CTT Express: status em espanhol e contato
-description: Rastreie encomendas CTT Express na Espanha ou em Portugal: código de 22 dígitos, status em espanhol explicados, pontos Collectt, entregas sem sucesso e telefones.
+description: Rastreie encomendas CTT Express na Espanha ou em Portugal: código de 22 dígitos, status em espanhol explicados, pontos Collectt, entregas não realizadas e telefones.
 slug: rastreamento-ctt-express
 published: 2026-11-24
 updated: 2026-11-24

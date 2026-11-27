@@ -81,7 +81,7 @@ FAN 的官方联系渠道：
 
 ## 使用 Peek 跟踪 FAN Courier 包裹
 
-遇到以 `2`、`3`、`4`、`5` 或 `7` 开头的 13 位数字时，[Peek](/) 会直接向 FAN Courier 查询；若以 `3` 开头，还会同时查询 iMile。如果你的手机地区或网络位于保加利亚，还会一并查询 Econt；若位于印度且符合 Delhivery 规则，则会同时查询 Delhivery。只有 FAN 查到记录时，页面会显示“FAN Courier 有这个包裹的记录”；若多家快递都有记录，由你选择。其他格式的 AWB 不会被识别：你仍可照常粘贴（Peek 支持超过 4,500 家快递），然后点击“更换”并选择“FAN Courier”。粘贴 FAN 官网罗马尼亚语（`/awb-tracking/`）或英语（`/en/awb-track/`）查询链接（带 `tracking=`、`awb=` 或 `/awb-tracking/` 后紧跟 13 位 AWB）会直接定位到 FAN Courier。
+遇到以 `2`、`3`、`4`、`5` 或 `7` 开头的 13 位数字时，[Peek](/) 会直接向 FAN Courier 查询；若以 `3` 开头，还会同时查询 iMile。如果你的手机地区或网络位于保加利亚，还会一并查询 Econt；若位于印度且符合 Delhivery 规则，则会同时查询 Delhivery。只有 FAN 查到记录时，页面会显示“FAN Courier 有这个包裹的记录”；若多家快递都有记录，由你选择。其他格式的 AWB 不会被识别：你仍可照常粘贴（Peek 跟踪 4,500 多家快递公司），然后点击“更换”并选择“FAN Courier”。粘贴 FAN 官网罗马尼亚语（`/awb-tracking/`）或英语（`/en/awb-track/`）查询链接（带 `tracking=`、`awb=` 或 `/awb-tracking/` 后紧跟 13 位 AWB）会直接定位到 FAN Courier。
 
 Peek 会显示 FAN 的每一条扫描记录及其所在城镇和时间。FAN 的时间戳不含时区，因此 Peek 会按 FAN 所列城镇的当地时间读取（罗马尼亚城镇按罗马尼亚时间），再换算为你设备的时区；在 peektracker.com 以及 iPhone 和 Android App 中，轨迹底部会注明“时间按你所在的时区显示：”及对应时区名称。扫描文本保留 FAN 英文原文，只有 `Shipment picked up` 会显示为“快件已揽收”。在你打开该包裹页面时，或在派送当天且已开启通知时，只要 FAN 官网正常响应，Peek 最高每 10 分钟检查一次，在 FAN 扫描派送当天自罗马尼亚时间早上 6 点起最高每 2 分钟检查一次；其余时候每小时检查一次。状态变化时，Peek 可以通知你。连续两天无新动态后（若仍停留在“已生成面单”或“已揽收”，则为 12 小时后），改为每小时检查一次。
 

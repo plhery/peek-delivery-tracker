@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Royal Mail: códigos, status e nova entrega
-description: Rastreie encomendas do Royal Mail: formatos de código, significado dos status, entregas sem sucesso e cartão vermelho, alfândega, indenizações e contato.
+description: Rastreie encomendas do Royal Mail: formatos de código, significado dos status, entregas não realizadas e cartão vermelho, alfândega, indenizações e contato.
 slug: rastreamento-royal-mail
 published: 2026-11-24
 updated: 2026-11-24

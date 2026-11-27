@@ -1,6 +1,6 @@
 ---
 title: 吉凡国际物流（Jifan）查询：JFGJ单号、状态与北京时间
-description: 查询深圳吉凡国际物流（Jifan）发往美国的包裹：JFGJ…CN单号格式、官网中文追踪界面的英文轨迹含义，以及为何所有时间均为北京时间。
+description: 查询深圳吉凡国际物流（Jifan）发往美国的包裹：JFGJ…CN单号格式、查询页各条记录的含义，以及为何所有时间均为北京时间。
 slug: jifan-guoji-wuliu-chaxun
 published: 2026-11-23
 updated: 2026-11-23

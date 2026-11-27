@@ -1,6 +1,6 @@
 ---
 title: CJ Packet 快递查询：CJP 单号、汇总状态与客服联系
-description: 查询 CJ Packet（CJ Dropshipping）中国跨境包裹：CJP…YQ 单号规则、0 至 7 汇总状态与末端快递交接单号、清关停滞及官方客服。
+description: 查询 CJ Packet（CJ Dropshipping）中国跨境包裹：CJP…YQ 单号规则、0 至 7 汇总状态与末端快递交接单号、清关停滞及客服。
 slug: cj-packet-kuaidi-chaxun
 published: 2026-11-24
 updated: 2026-11-24

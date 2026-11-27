@@ -32,7 +32,7 @@ A loja não enviou o código? Veja [onde encontrar um código de rastreamento](g
 
 ## O que significam os status da POST Luxembourg
 
-Os status da POST seguem os [nomes internacionais de eventos postais da UPU](guide:tracking-statuses), em inglês, mostrados aqui conforme o Peek os exibe. Cada leitura informa a data sem horário, às vezes indicando a agência ou centro de triagem. Na ordem habitual:
+Os status da POST seguem os [nomes internacionais de eventos postais da UPU](guide:tracking-statuses), em inglês, mostrados aqui conforme o Peek os exibe. Cada leitura informa a data sem horário, às vezes indicando a agência ou centro de triagem. Na ordem em que um objeto passa por eles:
 
 | Status da POST Luxembourg | O que significa para você |
 | --- | --- |
@@ -88,17 +88,17 @@ Canais de correio e encomendas divulgados na página de contato da POST:
 
 ## Como rastrear encomendas POST Luxembourg no Peek
 
-Para um código terminado em `LU` com dígito verificador válido, o [Peek](/) consulta POST Luxembourg e [Chronopost](carrier:chronopost) ao mesmo tempo e mostra "POST Luxembourg tem esta encomenda." quando a POST reconhece o código, ou avisa que ainda não foi encontrada e seguirá verificando após você adicionar. Se o dígito verificador estiver incorreto, a POST não é consultada e recusa o número mesmo selecionado em "Alterar": confira os dígitos. Um link do Track and Trace de post.lu ou trackandtrace.lu com o código sempre seleciona POST Luxembourg.
+Para um código terminado em `LU` com dígito verificador válido, o [Peek](/) consulta POST Luxembourg e [Chronopost](carrier:chronopost) ao mesmo tempo e mostra "POST Luxembourg está com esta encomenda." quando a POST reconhece o código, ou "Ainda não encontrada em …. O Peek continua verificando depois que você adicionar." Se o dígito verificador estiver incorreto, a POST não é consultada, e a consulta dela recusa o número mesmo se você escolher a POST em "Trocar": confira os dígitos. Um link do Track and Trace de post.lu ou trackandtrace.lu com o código sempre seleciona POST Luxembourg.
 
-Encomendas vindas do exterior ficam com o correio estrangeiro, mas a consulta da POST aceita o código: escolha "POST Luxembourg" em "Alterar" ou cole um link post.lu. O Peek também consulta a POST sozinho quando o correio estrangeiro a menciona ou quando um código postal válido indica Luxemburgo como destino (ou não informa país e o Peek detecta você em Luxemburgo), migrando para a POST — e preservando o histórico anterior — assim que houver leitura datada pelo menos tão recente quanto a última do correio de origem.
+Encomendas vindas do exterior ficam com o correio estrangeiro, mas a consulta da POST aceita o código: escolha "POST Luxembourg" em "Trocar" ou cole um link post.lu. O Peek também consulta a POST sozinho quando o correio estrangeiro a menciona ou quando um código postal válido indica Luxemburgo como destino (ou não informa país e o Peek detecta você em Luxemburgo), migrando para a POST — e preservando o histórico anterior — assim que houver leitura datada pelo menos tão recente quanto a última do correio de origem.
 
-As leituras da POST informam apenas a data, sem hora: o Peek lista o histórico agrupado por dia na ordem da POST, mantendo o inglês oficial. Não há data prevista, ponto de retirada nem peso.
+As leituras da POST informam apenas a data, sem hora: o Peek lista o histórico agrupado por dia na ordem da POST, mantendo o inglês da POST. Não há data prevista, ponto de retirada nem peso.
 
 Com a encomenda aberta no Peek, ou no dia da entrega com notificações ligadas, o Peek consulta a cada 10 minutos no máximo, e a cada 2 minutos a partir das 6h (horário de Luxemburgo) no dia em que aparece `Item out for delivery`, enquanto o rastreador da POST responder. Após dois dias sem novidade (12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora, e a cada 6 horas após sete dias em "Etiqueta criada".
 
-Quando a leitura mais recente tem quatro dias em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek exibe "Sem atualização de rastreamento desde seg 12 out", a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando POST Luxembourg." e o link "Obter ajuda da POST Luxembourg". Após três semanas sem novidade, passa a mostrar "Nada de novo há mais de três semanas. Se ainda não chegou, fale com o vendedor. O Peek continua consultando POST Luxembourg."
+Quando a leitura mais recente tem quatro dias em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek exibe "Sem atualizações desde seg 12 out", a nota "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando POST Luxembourg." e o link "Pedir ajuda a POST Luxembourg", que leva à página de ajuda dos serviços postais da POST. Após três semanas sem novidade, passa a mostrar "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando POST Luxembourg."
 
-Você pode receber avisos para "Cada atualização", "Etapas importantes" ou "Somente na entrega".
+O Peek pode notificar você em "Cada movimentação", "Etapas importantes" ou "Só a entrega".
 
 ## Perguntas frequentes sobre o rastreamento POST Luxembourg
 

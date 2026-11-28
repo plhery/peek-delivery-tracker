@@ -1,6 +1,6 @@
 ---
 title: Raben tracking: shipment number, statuses and delivery
-description: Track a Raben pallet or groupage shipment: 15-digit 27... numbers, myRaben status meanings, unloading rules (HUN/UNLO), 7-day damage claims and contacts.
+description: Track a Raben pallet or groupage shipment: where to find the number, myRaben status meanings, unloading rules (HUN/UNLO), 7-day damage claims and contacts.
 slug: raben-tracking
 published: 2026-11-01
 updated: 2026-11-27

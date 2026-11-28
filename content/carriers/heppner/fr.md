@@ -6,7 +6,7 @@ published: 2026-10-12
 updated: 2026-11-27
 ---
 
-Heppner est un transporteur routier français qui achemine colis, palettes et commandes en ligne de plus de 30 kilos aux particuliers via Heppner CONNECT (et via SAFRAM en Suisse). Pour suivre ta marchandise ou choisir ton créneau de livraison, saisis le numéro de récépissé à 8 chiffres et ton code postal de livraison dans la case ci-dessus (en choisissant Heppner) ou sur [la page destinataire de Heppner](https://www.heppner-group.com/destinataire-suivez-votre-marchandise/).
+Heppner est un transporteur routier français, du petit colis aux palettes ; son service Heppner CONNECT livre aux particuliers les commandes en ligne, même celles de plus de 30 kilos (en Suisse, Heppner passe par SAFRAM). Pour suivre ta marchandise, colle le numéro reçu dans ses notifications (le numéro de récépissé) dans la case ci-dessus, choisis Heppner et donne ton code postal de livraison. Pour choisir ton créneau, saisis ce numéro et ce code postal sur [la page destinataire de Heppner](https://www.heppner-group.com/destinataire-suivez-votre-marchandise/).
 
 ## Numéro de suivi Heppner : où le trouver
 

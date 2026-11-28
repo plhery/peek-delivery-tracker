@@ -1,12 +1,12 @@
 ---
 title: Jifan tracking: JFGJ numbers, scans and Beijing time
-description: Track a Jifan (吉凡国际物流) parcel from China to the US: JFGJ…CN format, status meanings, UPS final delivery, Beijing time stamps and how to contact the seller.
+description: Track a Jifan (吉凡国际物流) parcel from China to the US: JFGJ…CN format, status meanings, UPS final delivery, Beijing time stamps and when to ask the seller.
 slug: jifan-tracking
 published: 2026-11-02
 updated: 2026-11-27
 ---
 
-Jifan — Shenzhen Jifan International Logistics (深圳市吉凡国际物流有限公司, or 吉凡国际物流) — is a Shenzhen logistics company founded in 2017 that ships parcels from China to the United States by air and by sea, with UPS delivering most small and standard US parcels. Its tracking numbers follow the `JFGJ` + nine digits + `CN` format. Paste yours in the box above or look it up in capitals on [Jifan's tracker](https://www.szjf56.cn/index/tracknumber/track).
+Jifan — Shenzhen Jifan International Logistics (深圳市吉凡国际物流有限公司, or 吉凡国际物流) — is a Shenzhen logistics company founded in 2017 that ships parcels from China to the United States by air and by sea, with UPS delivering its parcels up to 68 kg in the US, it says. Its tracking numbers follow the `JFGJ` + nine digits + `CN` format. Paste yours in the box above or look it up in capitals on [Jifan's tracker](https://www.szjf56.cn/index/tracknumber/track).
 
 ## Jifan tracking number: what it looks like
 

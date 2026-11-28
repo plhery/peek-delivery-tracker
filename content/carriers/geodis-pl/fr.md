@@ -6,7 +6,7 @@ published: 2026-11-18
 updated: 2026-11-27
 ---
 
-GEODIS Poland (exploité par GEODIS Road Network sp. z o.o. à Błonie depuis le rachat de PEKAES en 2021) est le réseau polonais de transport de colis et de palettes du groupe GEODIS, filiale de la SNCF. Pour suivre un envoi en Pologne ou sur ses liaisons routières européennes, la marche à suivre dépend de ce que l'expéditeur t'a transmis :
+GEODIS Poland (l'ancien PEKAES, racheté en 2021 et aujourd'hui exploité par GEODIS Road Network sp. z o.o. à Błonie) est le réseau polonais de transport de colis et de palettes du groupe GEODIS, filiale de la SNCF. Pour suivre un envoi en Pologne ou sur ses liaisons routières européennes, la marche à suivre dépend de ce que l'expéditeur t'a transmis :
 
 - **Un numéro composé de `PL` et de 16 chiffres, ou un lien vers Strefa Klienta :** il s'agit d'un envoi GEODIS Poland (colis ou palette). Colle le numéro ou le lien dans le champ ci-dessus, ou recherche-le sur l'outil de suivi de GEODIS Poland, [Strefa Klienta](https://strefaklienta.pekaes.geodis.pl/en/).
 - **Un autre numéro GEODIS :** Peek lit également le suivi français de [GEODIS](carrier:geodis), dont les numéros commencent par `1G` (voir plus bas). Sur `geodis.com`, le moteur de recherche localise les envois aériens, maritimes et du dernier kilomètre, et renvoie le transport routier vers Strefa Klienta.

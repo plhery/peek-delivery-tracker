@@ -1,6 +1,6 @@
 ---
 title: Suivi Lingdong International : numéro SZLD et statuts
-description: Suivi colis Lingdong International (领东国际) : numéro SZLD, sens des statuts chinois-anglais, qui livre en France ou Suisse, frais de douane et contact.
+description: Suivi colis Lingdong International (领东国际) : numéro SZLD, sens des statuts chinois-anglais, qui livre à l'arrivée, frais de douane et contact.
 slug: suivi-lingdong
 published: 2026-11-18
 updated: 2026-11-27
@@ -109,11 +109,11 @@ Cette étape marque le départ de l'entrepôt de Lingdong à Shenzhen. Les étap
 
 ### Qui livre les colis Lingdong et en combien de temps ?
 
-Lingdong ne publie ni délais ni liste de transporteurs finaux par pays (le suivi relaie parfois Poste Italiane en Italie ou GOFO aux États-Unis, et Peek bascule vers La Poste suisse si la fiche porte un numéro Swiss Post). Fie-toi à l'estimation de la boutique et demande-lui le numéro local.
+Lingdong ne publie ni délais ni liste de transporteurs finaux par pays (le suivi relaie parfois Poste Italiane en Italie ou GOFO aux États-Unis, et Peek peut passer à La Poste suisse quand la fiche nomme une ligne et un numéro Swiss Post pour la Suisse ou le Liechtenstein). Fie-toi à l'estimation de la boutique et demande-lui le numéro local.
 
 ### Quels frais de douane prévoir sur un colis Lingdong ?
 
-Dans l'UE, les achats hors UE jusqu'à 150 € paient 3 € de droit de douane par catégorie d'article (depuis le 1er juillet 2026) et 2 € de frais de traitement de l'Union par catégorie quelle que soit la valeur (depuis le 1er novembre 2026), plus la TVA hors IOSS. En Suisse, droits et TVA ne sont pas perçus sous 5 CHF.
+Dans l'UE, les achats hors UE jusqu'à 150 € paient 3 € de droit de douane par catégorie d'article (depuis le 1er juillet 2026) et 2 € de frais de traitement de l'Union par catégorie quelle que soit la valeur (depuis le 1er novembre 2026), plus la TVA si elle n'a pas été payée à l'achat via l'IOSS (les départements d'outre-mer ont leurs propres seuils et l'octroi de mer). En Suisse, droits et TVA ne sont pas perçus quand leur montant est inférieur à 5 francs.
 
 ### Qui contacter si mon colis Lingdong n'arrive pas ?
 

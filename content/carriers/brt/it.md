@@ -1,12 +1,12 @@
 ---
 title: BRT tracking: dov'è il pacco e cosa fare se non arriva
-description: Tracking BRT (ex Bartolini): codice BRTcode a 12, 14, 15 o 19 cifre, stati, tempi 24/48 ore, giacenza e BRT-fermopoint (10 giorni), locker e assistenza.
+description: Tracking BRT (ex Bartolini): numeri a 12, 14, 15 o 19 cifre, stati, tempi 24/48 ore, giacenza e BRT-fermopoint (10 giorni), locker e assistenza.
 slug: brt-tracking
 published: 2026-10-10
 updated: 2026-11-27
 ---
 
-BRT (ex Bartolini, gruppo Geopost come DPD) consegna in Italia generalmente in 24/48 ore. Inserisci il BRTcode (12, 14, 15 o 19 cifre) su [brt.it](https://www.brt.it/it/) o qui sopra; sotto trovi gli stati spiegati, giacenza e BRT-fermopoint (10 giorni), locker BRT e contatti.
+BRT (ex Bartolini, gruppo Geopost come DPD) dice di consegnare in Italia «generalmente in 24/48 ore», tempi indicativi. Cerca il numero su [brt.it](https://www.brt.it/it/) (12, 14, 15 o 19 cifre) o incollalo qui sopra, tranne il BRTcode di 19 cifre; sotto trovi gli stati spiegati, giacenza e BRT-fermopoint (10 giorni), locker BRT e contatti.
 
 ## Numero di tracciamento BRT: dove si trova e com'è fatto
 
@@ -104,7 +104,7 @@ Peek controlla il pacco fino a ogni 10 minuti, fino a ogni 2 quando è in conseg
 
 ### Quanto impiega BRT e consegna anche il sabato?
 
-In Italia generalmente in 24/48 ore (+12/24 ore per Calabria, Sicilia, Sardegna e località oltre 800 km) e 48/72 ore in Europa. La consegna al sabato è un'opzione che il negozio può scegliere per l'e-commerce; nei tempi contrattuali sabato e domenica non contano.
+BRT indica tempi indicativi: in Italia «generalmente in 24/48 ore» (+12/24 ore per Calabria, Sicilia, Sardegna e località oltre 800 km) e 48/72 ore nella maggior parte dei Paesi europei. La consegna al sabato è un'opzione che il negozio può scegliere per l'e-commerce; nei tempi contrattuali sabato e domenica non contano.
 
 ### Quanto tempo resta un pacco al BRT-fermopoint o in giacenza?
 
@@ -112,7 +112,7 @@ Al BRT-fermopoint resta 10 giorni (limite 20 kg). Per i pacchi in giacenza, la C
 
 ### Quanto costa la giacenza BRT?
 
-BRT non pubblica una tariffa fissa: il campo «Addebito spese» nel dettaglio spedizione indica se e a chi (mittente o destinatario) vengono addebitate le spese.
+BRT non pubblica una cifra: il campo «Addebito spese» nel dettaglio spedizione indica se e a chi (mittente o destinatario) vengono addebitate le spese, una volta arrivate le istruzioni del mittente.
 
 ### Come si ritira in un locker BRT o in filiale?
 
@@ -123,6 +123,7 @@ Al locker BRT (massimo 20 kg, un collo sotto i 50 cm) usi il QR Code o il PIN di
 Chiedi prima a vicini e familiari, poi al negozio di verificare la prova di consegna firmata (P.O.D Image). Se manca ancora, segnala il caso nella pagina Assistenza di BRT. Vedi anche [pacco consegnato ma non ricevuto](guide:delivered-not-received).
 
 :::sources
+- [Wikipedia: BRT (azienda)](https://it.wikipedia.org/wiki/BRT_%28azienda%29) – già Bartolini S.p.A., gruppo Geopost
 - [BRT: FAQ, Domande frequenti sui Servizi BRT](https://www.brt.it/it/servizio-clienti/faq/) – BRTcode, consegna mancata, giacenza, tempi, danni, P.O.D
 - [BRT: Servizio Assistenza Clienti BRT](https://www.brt.it/it/servizio-clienti/codici-assistenza/) – 14 cifre, dove si trova
 - [BRT: Home](https://www.brt.it/it/) – riquadro di ricerca, chat

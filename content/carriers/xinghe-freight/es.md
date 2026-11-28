@@ -6,7 +6,7 @@ published: 2026-11-18
 updated: 2026-11-27
 ---
 
-Xinghe Freight (星和货运, 广州星和货运代理有限公司, fundada en 2014 en Guangzhou) es un transitario chino cuyos envíos llevan un número de 16 caracteres: `GZXH`, diez cifras y `YQ`. Pégalo en la casilla de arriba: su seguimiento funciona sobre el servidor de [GZYL](carrier:gzyl) (con los mismos textos en inglés), donde las etapas —incluido `Delivered`— pueden haberse escrito de antemano como previsión y no como escaneo real.
+Xinghe Freight (星和货运, 广州星和货运代理有限公司, con sede en Guangzhou y, según su web, fundada en 2014) es un transitario chino; Peek reconoce sus números de 16 caracteres: `GZXH`, diez cifras y `YQ`. Pega el tuyo en la casilla de arriba: su seguimiento funciona sobre el servidor de [GZYL](carrier:gzyl) (con los mismos textos en inglés), donde las etapas —incluido `Delivered`— pueden haberse escrito de antemano como previsión y no como escaneo real.
 
 ## Número de seguimiento de Xinghe Freight: cómo es
 
@@ -101,7 +101,7 @@ Dejando aparte a Swiss Post, Peek no traspasa un paquete de Xinghe al transporti
 
 ### ¿Qué es Xinghe Freight (星和货运)?
 
-广州星和货运代理有限公司 (Guangzhou Xinghe Freight Forwarding), un transitario de Guangzhou, en China, fundado en 2014 (transporte marítimo, aéreo, terrestre y despacho aduanero). Sus números tienen `GZXH`, diez cifras y `YQ`.
+广州星和货运代理有限公司 (Guangzhou Xinghe Freight Forwarding), un transitario de Guangzhou, en China, que, según su web, se fundó en 2014 (transporte marítimo, aéreo, terrestre y despacho aduanero). Los números que Peek le asocia tienen `GZXH`, diez cifras y `YQ`.
 
 ### ¿Por qué mi paquete de Xinghe Freight muestra el seguimiento de GZYL?
 
@@ -113,7 +113,7 @@ En el sistema compartido con GZYL, la cronología (incluido `Delivered`) puede e
 
 ### ¿Quién reparte los paquetes de Xinghe Freight en España o Latinoamérica?
 
-Ni el seguimiento ni la web de Xinghe nombran al transportista local (solo en Suiza y Liechtenstein puede pasar a [Swiss Post](carrier:swiss-post)). Pregunta al vendedor qué empresa entrega tu pedido y su número de seguimiento.
+Ni el seguimiento ni la web de Xinghe nombran al transportista local (Peek solo puede pasar el envío a [Swiss Post](carrier:swiss-post), en Suiza y Liechtenstein, cuando la ficha la nombra). Pregunta al vendedor qué empresa entrega tu pedido y su número de seguimiento.
 
 ### ¿Cómo contactar con Xinghe Freight o reclamar un pedido no recibido?
 

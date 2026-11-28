@@ -6,7 +6,7 @@ published: 2026-10-30
 updated: 2026-11-27
 ---
 
-WanbExpress (Wanb Express, WanBang Express or WANB) is a Chinese cross-border carrier that moves parcels from Shenzhen through export, flight and customs before handing them to local carriers such as iMile (Germany), InPost (UK) or Poste Italiane (Italy). Paste your 17-character `WNB…YQ` waybill in the box above or check `tracking.wanbexpress.com` (reCAPTCHA-protected) to see scans and the delivering carrier's tracking number.
+WanbExpress (Wanb Express, WanBang Express or WANB) is a Chinese cross-border carrier whose scans follow parcels out of China, through the flight and customs, before it hands them to local carriers such as iMile (Germany), InPost (UK) or Poste Italiane (Italy). Paste your 17-character `WNB…YQ` waybill in the box above or check `tracking.wanbexpress.com` (reCAPTCHA-protected) to see scans and the delivering carrier's tracking number.
 
 ## WanbExpress tracking number: what it looks like
 

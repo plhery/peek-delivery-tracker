@@ -1,13 +1,13 @@
 ---
 title: Allegro Sendungsverfolgung: Paketdienst, Nummer, Probleme
-description: Allegro Sendungsverfolgung für Deutschland, Österreich & Schweiz: Kurier DPD/DHL (2–4 Werktage), InPost Paczkomat, Moje zakupy, Käuferschutz und Retoure.
+description: Allegro Sendungsverfolgung für Deutschland, Österreich & Schweiz: Allegro Kurier DPD/DHL, InPost Paczkomat, Moje zakupy, Käuferschutz und Retoure.
 slug: allegro-sendungsverfolgung
 picture: Ein Paket in einem offenen One-Box-Automaten, ein Handy mit einer Bestellung und Pip, der losläuft, um es abzuholen.
 published: 2026-10-17
 updated: 2026-11-27
 ---
 
-Allegro ist ein polnischer Marktplatz (allegro.pl, allegro.cz, allegro.sk und allegro.hu) ohne eigenen Shop für Deutschland, Österreich oder die Schweiz. Händler auf allegro.pl liefern per Allegro Kurier DPD oder Allegro Kurier DHL nach Deutschland (2 Werktage) und Österreich (2 bis 4 Werktage), nicht jedoch in die Schweiz; in Polen liefern Allegro One, InPost (Paczkomaty und Kurier24), DPD, DHL, ORLEN Paczka und Pocztex. Die Sendungsnummer steht unter „Moje przesyłki“, „Moje zakupy“ und in Allegros Versandmail; bei Problemen greift der Käuferschutz bis 20 000 zł.
+Allegro ist ein polnischer Marktplatz (allegro.pl, allegro.cz, allegro.sk und allegro.hu) ohne eigenen Shop für Deutschland, Österreich oder die Schweiz. Händler auf allegro.pl können per Allegro Kurier DPD oder Allegro Kurier DHL nach Deutschland und Österreich liefern, wenn sie es anbieten (laut Allegro 2 Werktage Transport nach Deutschland, 2 bis 4 nach Österreich, dazu die Versandzeit des Händlers), nicht jedoch in die Schweiz; in Polen liefern Allegro One, InPost (Paczkomaty und Kurier24), DPD, DHL, ORLEN Paczka und Pocztex. Die Sendungsnummer steht unter „Moje przesyłki“, „Moje zakupy“ und in Allegros Versandmail; bei Problemen greift der Käuferschutz bis 20 000 zł.
 
 ## Welcher Paketdienst liefert bei Allegro (InPost, Allegro One, DPD, DHL)?
 

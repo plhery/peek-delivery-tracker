@@ -1,12 +1,12 @@
 ---
 title: Parcelforce Worldwide tracking: statuses and customs
-description: Track a Parcelforce Worldwide parcel via Royal Mail: EA…GB and 14-character PB numbers, status meanings, 3-week customs hold and 03457 740 740.
+description: Track a Parcelforce Worldwide parcel via Royal Mail: …GB and PB numbers, status meanings, 3-week customs hold and 03457 740 740.
 slug: parcelforce-worldwide-tracking
 published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Parcelforce Worldwide is part of [Royal Mail](carrier:royal-mail) Group, so track your 13-character `EA…GB` or 14-character `PB` parcel number on Royal Mail's Track your item page, or paste it in the box above. Below are status meanings, delivery options in the Royal Mail app, UK customs bills (held for about 3 weeks) and Royal Mail Customer Services (03457 740 740).
+Parcelforce Worldwide is part of [Royal Mail](carrier:royal-mail) Group, so track your parcel number (13 characters ending `GB`, such as `EA482917367GB`, or 14 starting `PB`) on Royal Mail's Track your item page, or paste it in the box above. Below are status meanings, delivery options in the Royal Mail app, UK customs bills (held for about 3 weeks) and Royal Mail Customer Services (03457 740 740).
 
 ## Parcelforce tracking number: where to find it
 

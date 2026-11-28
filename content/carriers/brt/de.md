@@ -1,12 +1,12 @@
 ---
 title: BRT Sendungsverfolgung: Paket aus Italien, Status
-description: BRT Sendungsverfolgung (Italien → DE/AT/CH): BRTcode mit 12–15 Ziffern, englische Status, Weiterleitung über DPD, 10 Tage Lagerfrist und Kontakt.
+description: BRT Sendungsverfolgung (Italien → DE/AT/CH): Nummern mit 12, 14 oder 15 Ziffern, englische Status, Weiterleitung über DPD, 10 Tage Lagerfrist und Kontakt.
 slug: brt-sendungsverfolgung
 published: 2026-11-03
 updated: 2026-11-27
 ---
 
-BRT (ehemals Bartolini, Teil der Geopost-Gruppe wie DPD) liefert in Italien meist in 24 bis 48 Stunden und sendet Pakete nach Deutschland, Österreich und in die Schweiz in der Regel über das DPD-Netz (Richtwert 48 bis 72 Stunden). Verfolge deinen BRTcode (12, 14 oder 15 Ziffern bzw. `EOB…`) auf brt.it oder im Feld oben; unten findest du alle Statusmeldungen, die Übergabe an DPD und Kontaktwege.
+BRT (ehemals Bartolini, Teil der Geopost-Gruppe wie DPD) nennt als Richtwerte innerhalb Italiens meist 24 bis 48 Stunden und auf der Straße in die meisten europäischen Länder 48 bis 72 Stunden; nach Deutschland, Österreich und in die Schweiz bringt es Pakete meist über das DPD-Netz. Verfolge deine BRT-Nummer (12, 14 oder 15 Ziffern oder `EOB…`) auf brt.it oder im Feld oben; unten findest du alle Statusmeldungen, die Übergabe an DPD und Kontaktwege.
 
 ## BRT Sendungsnummer: wo sie steht und wie sie aussieht
 
@@ -111,7 +111,7 @@ BRTs neueste Zeile zeigt den Stand: `ARRIVED AT DEPOT` heißt, das Paket liegt i
 
 ### Ist BRT dasselbe wie DPD, und wer stellt in DE, AT und CH zu?
 
-Nein, aber beide gehören zur Geopost-Gruppe, und ins europäische Ausland bringt BRT Pakete meist über das DPD-Netz. Nennt BRT für ein Einzelpaket die 14-stellige DPD-Nummer, verfolgt Peek das Paket bei [DPD Germany](carrier:dpd-de), DPD Austria oder [DPD Switzerland](carrier:dpd-ch) weiter.
+Nein, aber beide gehören zur Geopost-Gruppe, und ins europäische Ausland bringt BRT Pakete meist über das DPD-Netz. Nennt BRT für ein Einzelpaket die 14-stellige DPD-Nummer und kommt der neueste Scan aus einem DPD-Depot in Deutschland, Österreich oder der Schweiz, verfolgt Peek das Paket bei [DPD Germany](carrier:dpd-de), DPD Austria oder [DPD Switzerland](carrier:dpd-ch) weiter.
 
 ### Wie lange dauert ein Paket mit BRT aus Italien?
 
@@ -126,6 +126,7 @@ Im BRT-fermopoint bleibt das Paket 10 Tage (bis 20 kg). Bei einer Einlagerung (�
 Nutze das englische Support-Portal auf services.brt.it/en/support, den Chat auf brt.it oder wende dich an die im Tracking genannte BRT-Filiale. Bei einer Online-Bestellung ist der Shop als Auftraggeber dein erster Ansprechpartner.
 
 :::sources
+- [Wikipedia (Italienisch): BRT (azienda)](https://it.wikipedia.org/wiki/BRT_%28azienda%29) – früher Bartolini S.p.A., Geopost-Gruppe
 - [BRT: FAQ (Englisch)](https://www.brt.it/en/customer-service/faq/) – BRTcode, verpasste Zustellung, Einlagerung, Lieferzeiten, Schäden, Locker, 20 kg
 - [BRT: Rintraccia spedizione (Italienisch)](https://vas.brt.it/vas/sped_numspe_par.htm) – Nummernlängen, Suchzeiträume, Sprachen
 - [BRT: Details of the shipment, Hilfe (Englisch)](https://vas.brt.it/vas/aiuto/aiuto.hsm?urlaiuto=sped_det_show.htm&lang=en) – Filiale, Einlagerung, Lagerkosten, DPD

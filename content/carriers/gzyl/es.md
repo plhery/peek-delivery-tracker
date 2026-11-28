@@ -104,11 +104,11 @@ No con total seguridad. `YL`, diez cifras y `YQ` es el formato de GZYL: si empie
 
 ### ¿Por qué GZYL marca «Delivered» si mi paquete no ha llegado?
 
-Porque GZYL escribe de antemano buena parte del recorrido de un paquete y lo cierra con un `Delivered` programado: es una previsión, no un escaneo real. Peek aparta esos pasos y avisa si el envío sigue un calendario fijo; informa a la tienda y pide el número del transportista local.
+Puede ser parte de la previsión de GZYL: escribe de antemano buena parte del recorrido de un paquete y lo cierra con un `Delivered` programado, que es una previsión, no un escaneo real. Peek aparta esos pasos y avisa si el envío sigue un calendario fijo; informa a la tienda y pide el número del transportista local.
 
 ### ¿Quién reparte los paquetes de GZYL en España o Latinoamérica?
 
-Los pasos de GZYL no nombran a la empresa de reparto final (solo en Suiza y Liechtenstein puede pasar a Swiss Post). Pregunta a la tienda qué empresa entrega tu pedido y añade su número en Peek como otro paquete.
+Los pasos de GZYL no nombran a la empresa de reparto final (Peek solo puede pasar el seguimiento a Swiss Post, en Suiza y Liechtenstein). Pregunta a la tienda qué empresa entrega tu pedido y añade su número en Peek como otro paquete.
 
 ### ¿Cómo contactar o reclamar un paquete de GZYL perdido o retrasado?
 

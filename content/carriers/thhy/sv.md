@@ -1,6 +1,6 @@
 ---
 title: Tianhui Hengyuan (THHY) spårning: AT…TH-nummer & status
-description: Spåra ett Tianhui Hengyuan-paket (天汇恒源, THHY) med AT…TH-nummer från Kina: 14-teckens format, skriptade Hualei-rader mot riktiga skanningar och Swiss Post.
+description: Spåra ett Tianhui Hengyuan-paket (天汇恒源, THHY) med AT…TH-nummer från Kina: 14 tecken, skriptade Hualei-rader mot riktiga skanningar och vem som levererar.
 slug: tianhui-hengyuan-spara-paket
 published: 2026-11-27
 updated: 2026-11-27
@@ -32,11 +32,11 @@ Spårningens egna rader är få, och två av dem står bara på kinesiska. I den
 
 | Tianhui Hengyuan skriver | Vad det betyder för dig | Peek visar |
 | --- | --- | --- |
-| `货物电子信息已经收到` | ”Den elektroniska fraktinformationen har tagits emot”. Plattformen skriver denna rad av sig själv för en order utan skanningar: säljaren har skapat ordern, men Tianhui Hengyuan har ännu inte skannat paketet. | "Label created" |
+| `货物电子信息已经收到` | "Den elektroniska fraktinformationen har tagits emot". Plattformen skriver denna rad av sig själv för en order utan skanningar: säljaren har skapat ordern, men Tianhui Hengyuan har ännu inte skannat paketet. | "Label created" |
 | `Arrived at the receiving point` | Tianhui Hengyuan har paketet: första fysiska skanningen i deras händer. | "Received by carrier" |
-| `货物离开操作中心` | ”Godset lämnar driftcentret”: paketet har lämnat Tianhui Hengyuans driftcenter. | "In transit" |
+| `货物离开操作中心` | "Godset lämnar driftcentret": paketet har lämnat Tianhui Hengyuans driftcenter. | "In transit" |
 
-**Skriptade rader.** Efter dessa fortsätter Tianhui Hengyuans spårning med rader som liknar China Posts skanningar, samt engelska rader om slutsträckan. De kommer från Hualei-plattformens produkt för anpassade spårningar (`轨迹定制`, ”customised track”), som skriver dem efter ett manus. De är inga riktiga skanningar av ditt paket. Några exempel i översättning:
+**Skriptade rader.** Efter dessa fortsätter Tianhui Hengyuans spårning med rader som liknar China Posts skanningar, samt engelska rader om slutsträckan. De kommer från Hualei-plattformens produkt för anpassade spårningar (轨迹定制, "customised track"), som skriver dem efter ett manus. De är inga riktiga skanningar av ditt paket. Några exempel i översättning:
 
 | Tianhui Hengyuan skriver | Läses som |
 | --- | --- |
@@ -53,7 +53,7 @@ De engelska raderna omfattar `Transporting to the next facility`, `Packages read
 
 ## Vem levererar Tianhui Hengyuan-paket
 
-Peek vet inte vem som levererar Tianhui Hengyuans paket. Det enda levererande företaget dess kod kan lämna över till är [Swiss Post](carrier:swiss-post), och bara när Tianhui Hengyuans post nämner Swiss Post och innehåller ett Swiss Post-nummer (mer nedan). Tianhui Hengyuans poster anger dock inget postnummer, så de skriptade raderna kan inte stämmas av mot något postverks spårning. Ett Swiss Post-nummer är två bokstäver, nio siffror och `CH`, eller 18 siffror som börjar med `98` eller `99`.
+Peek vet inte vem som levererar Tianhui Hengyuans paket. Det enda levererande företaget dess kod kan lämna över till är [Swiss Post](carrier:swiss-post), och bara när Tianhui Hengyuans post nämner Swiss Post och innehåller ett Swiss Post-nummer (mer nedan). Tianhui Hengyuans poster anger dock inget nummer från något postverk, så de skriptade raderna kan inte stämmas av mot något postverks spårning. Ett Swiss Post-nummer är två bokstäver, nio siffror och `CH`, eller 18 siffror som börjar med `98` eller `99`.
 
 Peek hittade inga leveranstider från Tianhui Hengyuan och inga regler för leveransförsök, ombud eller liggtid: det är det levererande bolagets regler som gäller. Fråga säljaren vilket företag som levererar din order och be om dess nummer. I Schweiz täcker Swiss Post-sidan avier och hämtning. Om du blir ombedd att betala importavgifter, se [paket i tullen](guide:customs) (på engelska).
 
@@ -65,7 +65,7 @@ Peek hittade inga leveranstider från Tianhui Hengyuan och inga regler för leve
 
 **Spårningen visar paketet längre fram än Peek.** Peek håller tillbaka de raderna eftersom de är skriptade (ovan) eller skrivna i förväg (nedan). Gå efter butikens angivna leveransdatum och hör av dig till säljaren när det har passerat.
 
-**Inget hittades.** För ett okänt nummer visar Tianhui Hengyuans spårning en rad med ditt nummer under `参考号` (referens) och alla andra fält tomma. Peek visar "Waiting for Tianhui Hengyuan" och ber dig två dagar senare — om inget annat svarat — kontrollera numret, välja en annan transportör eller ta bort paketet. Jämför numret tecken för tecken med säljarens meddelande.
+**Inget hittades.** För ett okänt nummer visar Tianhui Hengyuans spårning en rad med ditt nummer under 参考号 (referens) och alla andra fält tomma. Peek visar "Waiting for Tianhui Hengyuan" och ber dig två dagar senare — om inget annat svarat — kontrollera numret, välja en annan transportör eller ta bort paketet. Jämför numret tecken för tecken med säljarens meddelande.
 
 **Levererat men inget kom fram.** En leveransskanning kommer från det levererande bolaget, inte från Tianhui Hengyuans egna rader: fråga det bolaget först och kontakta sedan säljaren. Se [levererat men inte mottaget](guide:delivered-not-received) (på engelska).
 
@@ -77,7 +77,7 @@ Peek hittade inga kontaktuppgifter för Tianhui Hengyuan: det känner inte till 
 
 ## Spåra ett Tianhui Hengyuan-paket med Peek
 
-[Peek](/) kan inte vara säker på Tianhui Hengyuan enbart utifrån numrets form: `AT`, tio siffror och `TH` är bara en svag träff. Klistra in det ändå: Peek följer över 4 500 transportörer. Medan du lägger till paketet frågar Peek Tianhui Hengyuans spårning ("Checking tracking services…") och visar "Tianhui Hengyuan has this parcel." när spårningen känner till numret. Annars trycker du "Change" och väljer Tianhui Hengyuan (att söka på `天汇恒源` eller `THHY` hittar den också), eller använder "Change carrier" på ett redan tillagt paket. Gör likadant för en säljarreferens: då visar Peek orderns eget nummer med "Tianhui Hengyuan tracks this as". Peek tar dock bort bindestreck, så en referens med bindestreck hittas inte via Peek — be säljaren om `AT…TH`-numret.
+[Peek](/) kan inte vara säker på Tianhui Hengyuan enbart utifrån numrets form: `AT`, tio siffror och `TH` är bara en svag träff. Klistra in det ändå: Peek följer över 4 500 transportörer. Medan du lägger till paketet frågar Peek Tianhui Hengyuans spårning ("Checking tracking services…") och visar "Tianhui Hengyuan has this parcel." när spårningen känner till numret. Annars trycker du "Change" och väljer Tianhui Hengyuan (att söka på 天汇恒源 eller THHY hittar den också), eller använder "Change carrier" på ett redan tillagt paket. Gör likadant för en säljarreferens: då visar Peek orderns eget nummer med "Tianhui Hengyuan tracks this as". Peek tar dock bort bindestreck, så en referens med bindestreck hittas inte via Peek — be säljaren om `AT…TH`-numret.
 
 Peek läser Tianhui Hengyuans egen spårning och visar status, varje rad med sin plats samt destinationslandet när posten ger det. De två kinesiska raderna visas på den engelska som plattformens andra speditörer använder: `Goods leave the operation center` och `The electronic cargo information has been received`. Tider läses i Pekingtid och visas i din enhets tidszon. Peek utelämnar namn, adress, postnummer, vikt, avgifter, signatur och leveransbevis som posten kan innehålla, och visar inget förväntat leveransdatum eftersom Tianhui Hengyuan inte ger något.
 
@@ -91,7 +91,7 @@ Medan paketet är öppet i Peek kontrollerar Peek upp till var 10:e minut, och v
 
 ### Vad är Tianhui Hengyuan (THHY / 天汇恒源)?
 
-En kinesisk speditör, `天汇恒源` (även THHY eller TH), vars spårning körs på speditörsplattformen Hualei. Peeks katalog listar två företagsnamn: `深圳市天汇恒源供应链有限公司` och `广州市天慧恒源供应链有限公司`. Fraktsedlarna har formatet `AT`, tio siffror och `TH`.
+En kinesisk speditör, 天汇恒源 (även THHY eller TH), vars spårning körs på speditörsplattformen Hualei. Peeks katalog listar två företagsnamn: 深圳市天汇恒源供应链有限公司 och 广州市天慧恒源供应链有限公司. Fraktsedlarna har formatet `AT`, tio siffror och `TH`.
 
 ### Tillhör ett AT…TH-spårningsnummer Thailand Post eller Tianhui Hengyuan?
 
@@ -103,7 +103,7 @@ För att Tianhui Hengyuans spårning efter sina första egna rader visar rader s
 
 ### Vem levererar Tianhui Hengyuan-paket i mitt land?
 
-Peek vet inte, och Tianhui Hengyuans poster anger inget postnummer: fråga säljaren vilket företag som levererar och be om dess spårningsnummer. Enda levererande företaget Peek kan lämna över till är Swiss Post när posten anger det med ett Swiss Post-nummer.
+Peek vet inte, och Tianhui Hengyuans poster anger inget nummer från något postverk: fråga säljaren vilket företag som levererar och be om dess spårningsnummer. Enda levererande företaget Peek kan lämna över till är Swiss Post när posten anger det med ett Swiss Post-nummer.
 
 ### Vem kontaktar jag om mitt Tianhui Hengyuan-paket inte kommer fram?
 

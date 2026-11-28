@@ -29,25 +29,25 @@ Xinghe sekimas veikia GZYL sistemoje, todėl visi etapai pateikiami GZYL formulu
 
 | Ką rašo sistema | Ką tai reiškia tau | Ką rodo Peek |
 | --- | --- | --- |
-| `Order information received` | Pardavėjas perdavė užsakymo duomenis. Siuntos dar niekas neturi. | "Label created" |
-| `Arrive at the cross border receiving point` | Ekspeditorius priėmė siuntą: pirmasis fizinis skenavimas jo rankose. | "Received by carrier" |
-| `Goods leave the operation center` | Siunta išvyko iš operacijų centro. | "In transit" |
-| `Arrive at the international airport` | Tarptautiniame oro uoste, laukia skrydžio. | "In transit" |
-| `Departing from the airport` | Lėktuvas išskrido. | "In transit" |
-| `Item arrives at destination airport` | Nusileido paskirties šalyje. | "In transit" |
-| `local carrier Agent Import customs clearance` | Vietinis tarpininkas tavo šalyje vykdo importo muitinės procedūras. | "At customs" |
-| `The import customs keep it for inspection` | Tavo šalies muitinė tikrina siuntą. | "At customs" |
-| `Customs clearance completed` | Muitinė praeita, siunta tęsia kelionę. | "In transit" |
-| `Internationaliy Package received at processing center` | Paskirties šalies apdorojimo centras priėmė išmuitintą siuntą. Tai nėra naujas išsiuntimas. | "In transit" |
-| `Leave the email processing center` | Siunta išvyko iš to apdorojimo centro. | "In transit" |
-| `Arrival sorting, distribution center` | Paskirties šalies skirstymo centre, po teksto nurodant miestą. | "In transit" |
-| `Leaving the sorting center` | Išvyksta iš skirstymo centro, nurodant miestą. | "In transit" |
-| `Package is on the way` | Juda tavo šalyje, nurodant miestą. Tai nereiškia, kad siunta jau perduota kurjeriui pristatymui. | "In transit" |
-| `Delivered` | Pristatymo įrašas su miestu. Tai gali būti planas, o ne skenavimas (žr. žemiau). | "Delivered" su pastaba apie fiksuotą grafiką, nebent Peek jį sulaiko (žr. žemiau) |
+| `Order information received` | Pardavėjas perdavė užsakymo duomenis. Siuntos dar niekas neturi. | „Label created“ |
+| `Arrive at the cross border receiving point` | Ekspeditorius priėmė siuntą: pirmasis fizinis skenavimas jo rankose. | „Received by carrier“ |
+| `Goods leave the operation center` | Siunta išvyko iš operacijų centro. | „In transit“ |
+| `Arrive at the international airport` | Tarptautiniame oro uoste, laukia skrydžio. | „In transit“ |
+| `Departing from the airport` | Lėktuvas išskrido. | „In transit“ |
+| `Item arrives at destination airport` | Nusileido paskirties šalyje. | „In transit“ |
+| `local carrier Agent Import customs clearance` | Vietinis tarpininkas tavo šalyje vykdo importo muitinės procedūras. | „At customs“ |
+| `The import customs keep it for inspection` | Tavo šalies muitinė tikrina siuntą. | „At customs“ |
+| `Customs clearance completed` | Muitinė praeita, siunta tęsia kelionę. | „In transit“ |
+| `Internationaliy Package received at processing center` | Paskirties šalies apdorojimo centras priėmė išmuitintą siuntą. Tai nėra naujas išsiuntimas. | „In transit“ |
+| `Leave the email processing center` | Siunta išvyko iš to apdorojimo centro. | „In transit“ |
+| `Arrival sorting, distribution center` | Paskirties šalies skirstymo centre, po teksto nurodant miestą. | „In transit“ |
+| `Leaving the sorting center` | Išvyksta iš skirstymo centro, nurodant miestą. | „In transit“ |
+| `Package is on the way` | Juda tavo šalyje, nurodant miestą. Tai nereiškia, kad siunta jau perduota kurjeriui pristatymui. | „In transit“ |
+| `Delivered` | Pristatymo įrašas su miestu. Tai gali būti planas, o ne skenavimas (žr. žemiau). | „Delivered“ su pastaba apie fiksuotą grafiką, nebent Peek jį sulaiko (žr. žemiau) |
 
-**Per Honkongą.** Siunta taip pat gali rodyti `香港处理中心已收寄【Hong Kong】`: tai pašto priėmimas Honkongo apdorojimo centre, kurį sistema perduoda kinų kalba su miestu skliaustuose. Peek rodo eilutę taip, kaip parašyta, su būsena "Received by carrier".
+**Per Honkongą.** Siunta taip pat gali rodyti `香港处理中心已收寄【Hong Kong】`: tai pašto priėmimas Honkongo apdorojimo centre, kurį sistema perduoda kinų kalba su miestu skliaustuose. Peek rodo eilutę taip, kaip parašyta, su būsena „Received by carrier“.
 
-**Eilutė kinų kalba.** Užsakymui be skenavimų sistemos puslapyje gali pasirodyti `货物电子信息已经收到`, reiškianti, kad gauta elektroninė informacija apie prekes. Šią eilutę platforma įrašo pati: pardavėjas sukūrė užsakymą, bet siuntos dar niekas neskenavo. Peek rodo ją kinų kalba po "Label created".
+**Eilutė kinų kalba.** Užsakymui be skenavimų sistemos puslapyje gali pasirodyti `货物电子信息已经收到`, reiškianti, kad gauta elektroninė informacija apie prekes. Šią eilutę platforma įrašo pati: pardavėjas sukūrė užsakymą, bet siuntos dar niekas neskenavo. Peek rodo ją kinų kalba po „Label created“.
 
 **Laikas.** Peek visus šios sistemos laikus skaito Pekino laiku, įskaitant etapus tavo šalyje, ir rodo tavo įrenginio laiko juostoje. Žiemą 20:00 Pekine yra 13:00 Paryžiuje ar Berlyne, 12:00 Londone ir 7:00 Niujorke.
 
@@ -65,37 +65,37 @@ Pačioje Xinghe svetainėje nėra informacijos apie siuntas pirkėjams internete
 
 **Tik `Order information received` arba `货物电子信息已经收到`.** Pardavėjas sukūrė užsakymą, bet siuntos dar niekas neskenavo. Jei po kelių dienų niekas nepasikeičia, pasiteirauk pardavėjo, ar ji tikrai išsiųsta.
 
-**"Waiting for Xinghe Freight".** Peek dar neturi nė vieno tikro etapo: GZYL sistema nežino numerio arba laiko tik iš anksto įrašytą planą (galintį baigtis `Delivered`), o kiti sekimo servisai taip pat nieko neranda. Peek toliau tikrina. Nežinomam numeriui GZYL sistema pateikia vieną tuščią eilutę su numeriu nuorodos laukelyje; Peek tai laiko nerastu, rodo "Waiting for Xinghe Freight", o po dviejų dienų — "Check the tracking number". Iš anksto įrašytas planas patvirtina, kad Xinghe turi užsakymą, todėl Peek toliau rodo "Waiting for Xinghe Freight" be raginimo tikrinti numerį. Palygink numerį su pardavėjo žinute.
+**„Waiting for Xinghe Freight“.** Peek dar neturi nė vieno tikro etapo: GZYL sistema nežino numerio arba laiko tik iš anksto įrašytą planą (galintį baigtis `Delivered`), o kiti sekimo servisai taip pat nieko neranda. Peek toliau tikrina. Nežinomam numeriui GZYL sistema pateikia vieną tuščią eilutę su numeriu nuorodos laukelyje; Peek tai laiko nerastu, rodo „Waiting for Xinghe Freight“, o po dviejų dienų — „Check the tracking number“. Iš anksto įrašytas planas patvirtina, kad Xinghe turi užsakymą, todėl Peek toliau rodo „Waiting for Xinghe Freight“ be raginimo tikrinti numerį. Palygink numerį su pardavėjo žinute.
 
 **Užstrigo muitinėje.** Jei prašoma importo mokesčių, žr. [muitinėje sulaikytos siuntos](guide:customs) (anglų kalba). Jei siunta stovi muitinėje kelias dienas, pranešk pardavėjui.
 
 **Sistema ar kitas servisas rodo daugiau nei Peek.** Papildomi etapai — įskaitant `Delivered` — gali būti iš anksto suplanuoti įrašai, kuriuos Peek sulaiko. Vadovaukis parduotuvės pristatymo terminu ir parašyk pardavėjui jam pasibaigus. Plačiau: [kodėl sekimas neatnaujinamas](guide:tracking-not-updating) (anglų kalba).
 
-**`Delivered`, bet nieko negavai.** Šis etapas gali būti iš anksto įrašyto grafiko dalis. Jei siuntos nepristato Swiss Post, Peek po "Delivered" rodo: "Xinghe Freight updates on a fixed schedule, with no signature. If nothing came, ask the seller." Pranešk pardavėjui, kad siunta neatvyko, ir paklausk, kokia įmonė ją pristato bei koks jos numeris. Žr. [pažymėta kaip pristatyta, bet negauta](guide:delivered-not-received) (anglų kalba).
+**`Delivered`, bet nieko negavai.** Šis etapas gali būti iš anksto įrašyto grafiko dalis. Jei siuntos nepristato Swiss Post, Peek po „Delivered“ rodo: „Xinghe Freight updates on a fixed schedule, with no signature. If nothing came, ask the seller.“ Pranešk pardavėjui, kad siunta neatvyko, ir paklausk, kokia įmonė ją pristato bei koks jos numeris. Žr. [pažymėta kaip pristatyta, bet negauta](guide:delivered-not-received) (anglų kalba).
 
 **Pamesta arba grąžinta.** Siuntą per Xinghe užsakė pardavėjas, tad dėl pinigų grąžinimo ar naujos siuntos kreipkis į pardavėją arba prekyvietę.
 
 ## Xinghe Freight kontaktai ir klientų aptarnavimas
 
-2026 m. lapkričio 6 d. duomenimis, tik kinų kalba veikianti Xinghe svetainė (`xinghe-express.cn`) nurodo:
+2026 m. lapkričio 6 d. duomenimis, tik kinų kalba veikianti Xinghe svetainė (xinghe-express.cn) nurodo:
 
-- **Karštoji linija:** `19924483103`, anot svetainės veikianti visą parą kasdien (iš užsienio `+86 199 2448 3103`).
-- **El. paštas:** `3975605292@qq.com`, skirtas verslo užklausoms ir kainų pasiūlymams.
+- **Karštoji linija:** 19924483103, anot svetainės veikianti visą parą kasdien (iš užsienio +86 199 2448 3103).
+- **El. paštas:** 3975605292@qq.com, skirtas verslo užklausoms ir kainų pasiūlymams.
 - **Adresas:** Guangdžou, Guangdongo provincija, be gatvės; norint gauti visą adresą, prašoma pirmiausia susisiekti.
 
 Svetainėje nėra pagalbos gavėjams užsienyje: kontaktų forma tik atidaro el. laišką minėtu adresu. Xinghe klientas yra pardavėjas, todėl pirmiausia kreipkis į pardavėją, o jei jis neatsako — į prekyvietę.
 
 ## Xinghe Freight siuntos sekimas su Peek
 
-[Peek](/) iškart atpažįsta Xinghe Freight pagal `GZXH…YQ` numerį su žyma "Detected carrier". Jei pardavėjas davė kitokio formato numerį, vis tiek įklijuok jį: Peek seka daugiau nei 4 500 vežėjų. Norėdamas priskirti rankiniu būdu, paspausk "Change" ir ieškok Xinghe Freight (tinka ir `星和货运`) arba naudok "Change carrier" jau pridėtai siuntai.
+[Peek](/) iškart atpažįsta Xinghe Freight pagal `GZXH…YQ` numerį su žyma „Detected carrier“. Jei pardavėjas davė kitokio formato numerį, vis tiek įklijuok jį: Peek seka daugiau nei 4 500 vežėjų. Norėdamas priskirti rankiniu būdu, paspausk „Change“ ir ieškok Xinghe Freight (tinka ir `星和货运`) arba naudok „Change carrier“ jau pridėtai siuntai.
 
 Peek užklausia GZYL sistemą lygiai taip pat, kaip pačios Xinghe sekimo langelis. Rodo būseną, kiekvieną etapą su vietove ir paskirties šalį, jei įrašas ją turi. Laikai skaitomi Pekino laiku ir rodomi tavo įrenginio laiko juostoje. Peek nerodo vardų, adreso, pašto kodų, svorio, mokėjimo duomenų, parašo ar pristatymo patvirtinimo, ir nerodo numatomos pristatymo datos, nes sistema jos neduoda.
 
-Kai GZYL sistema nežino tavo numerio, Peek užklausia kitų sekimo servisų ir parodo jų turimą kopiją, kuri kartais būna vieninteliai duomenys Xinghe numeriui. Kol nė vienas neturi etapo, rodoma "Waiting for Xinghe Freight", o po dviejų dienų — "Check the tracking number".
+Kai GZYL sistema nežino tavo numerio, Peek užklausia kitų sekimo servisų ir parodo jų turimą kopiją, kuri kartais būna vieninteliai duomenys Xinghe numeriui. Kol nė vienas neturi etapo, rodoma „Waiting for Xinghe Freight“, o po dviejų dienų — „Check the tracking number“.
 
-Peek sulaiko kiekvieną etapą, įrašytą daugiau nei 12 valandų anksčiau už jo rodomą laiką, bet kurį etapą, įrašytą tą pačią sekundę kaip etapas, sukurtas daugiau nei pusvalandį prieš savo laiką (išskyrus užsakymo registraciją), ir bet kurį etapą su ateities data pagal Pekino laiką. Įrašui su iš anksto sukurtais etapais sulaikomas ir `Delivered`, net jei įrašytas tą pačią dieną. Peek vadovaujasi paliktais etapais, o ne suvestine būsena, ir atideda sekimo servisų kopijuojamus sulaikytus etapus (įskaitant `Delivered`), net kai kiti etapai paliekami. Tačiau jei pati sistema neturi įrašo arba nepasiekiama, Peek negali atskirti suplanuoto etapo sekimo serviso kopijoje nuo skenavimo. Sulaikius prognozes, istorija prasideda eilute (iki pristatymo ar grąžinimo): "Other sites may show more steps, but they’re only predictions.", o mygtukas "Show them" pilkai parodo sulaikytus etapus su diena ("Predicted for Mon 12 Oct"). Toks etapas niekada nelaikomas skenavimu: nekeičia būsenos ir nesiunčia pranešimo.
+Peek sulaiko kiekvieną etapą, įrašytą daugiau nei 12 valandų anksčiau už jo rodomą laiką, bet kurį etapą, įrašytą tą pačią sekundę kaip etapas, sukurtas daugiau nei pusvalandį prieš savo laiką (išskyrus užsakymo registraciją), ir bet kurį etapą su ateities data pagal Pekino laiką. Įrašui su iš anksto sukurtais etapais sulaikomas ir `Delivered`, net jei įrašytas tą pačią dieną. Peek vadovaujasi paliktais etapais, o ne suvestine būsena, ir atideda sekimo servisų kopijuojamus sulaikytus etapus (įskaitant `Delivered`), net kai kiti etapai paliekami. Tačiau jei pati sistema neturi įrašo arba nepasiekiama, Peek negali atskirti suplanuoto etapo sekimo serviso kopijoje nuo skenavimo. Sulaikius prognozes, istorija prasideda eilute (iki pristatymo ar grąžinimo): „Other sites may show more steps, but they’re only predictions.“, o mygtukas „Show them“ pilkai parodo sulaikytus etapus su diena („Predicted for Mon 12 Oct“). Toks etapas niekada nelaikomas skenavimu: nekeičia būsenos ir nesiunčia pranešimo.
 
-Išskyrus Swiss Post, Peek neperkelia Xinghe siuntos pas galutinį vežėją: jei pardavėjas davė to vežėjo numerį, pridėk jį kaip atskirą siuntą. Kol siunta atidaryta arba jos pristatymo dieną su įjungtais pranešimais, Peek tikrina iki kas 10 minučių; kitu metu ir nurimus skenavimams — kas valandą. Pranešimai: kiekvienas skenavimas, tik svarbūs etapai arba tik pristatymas ("Important steps" apima du muitinės etapus ir `Delivered`, bet ne skrydžius ar skirstymą). Peek negali susisiekti su Xinghe Freight, GZYL ar pardavėju tavo vardu.
+Išskyrus Swiss Post, Peek neperkelia Xinghe siuntos pas galutinį vežėją: jei pardavėjas davė to vežėjo numerį, pridėk jį kaip atskirą siuntą. Kol siunta atidaryta arba jos pristatymo dieną su įjungtais pranešimais, Peek tikrina iki kas 10 minučių; kitu metu ir nurimus skenavimams — kas valandą. Pranešimai: kiekvienas skenavimas, tik svarbūs etapai arba tik pristatymas („Important steps“ apima du muitinės etapus ir `Delivered`, bet ne skrydžius ar skirstymą). Peek negali susisiekti su Xinghe Freight, GZYL ar pardavėju tavo vardu.
 
 ## Klausimai apie Xinghe Freight sekimą
 
@@ -109,15 +109,15 @@ Xinghe sekimo langelis užklausas siunčia tiesiai į GZYL sekimo sistemą, tod�
 
 ### Kas pristato Xinghe Freight siuntas mano šalyje?
 
-Nei Xinghe svetainė, nei sekimo sistema nenurodo vietinio pristatymo partnerio (Peek gali perduoti tik Swiss Post Šveicarijoje ir Lichtenšteine, kai ji įvardyta). Paklausk pardavėjo, koks vietinis vežėjas pristato siuntą, ir paprašyk jo numerio.
+Nei Xinghe svetainė, nei sekimo sistema nenurodo vietinio pristatymo partnerio (Peek gali siuntą perduoti tik Swiss Post Šveicarijoje ir Lichtenšteine, kai Swiss Post nurodyta Xinghe įraše). Paklausk pardavėjo, koks vietinis vežėjas pristato siuntą, ir paprašyk jo numerio.
 
 ### Kodėl Peek nerodo įrašų arba rodo mažiau etapų mano GZXH numeriui?
 
-Arba sistema dar neturi įrašo, arba jame yra iš anksto suplanuoti etapai — įskaitant numatytą `Delivered` — kuriuos Peek perkelia po "Show them" ir nelaiko skenavimais. Sutikrink numerį su pardavėjo laišku ir paklausk pardavėjo, jei po kelių dienų niekas neatsinaujina.
+Arba sistema dar neturi įrašo, arba jame yra iš anksto suplanuoti etapai — įskaitant numatytą `Delivered` — kuriuos Peek perkelia po „Show them“ ir nelaiko skenavimais. Sutikrink numerį su pardavėjo laišku ir paklausk pardavėjo, jei po kelių dienų niekas neatsinaujina.
 
 ### Kaip susisiekti su Xinghe Freight?
 
-Pirmiausia kreipkis į pardavėją arba prekyvietę, nes siuntimą užsakė pardavėjas. Kinų kalbos svetainė `xinghe-express.cn` nurodo visą parą veikiančią liniją `19924483103` (`+86 199 2448 3103` iš užsienio) ir verslo el. paštą `3975605292@qq.com`, tačiau atskiro kanalo gavėjams užsienyje nėra.
+Pirmiausia kreipkis į pardavėją arba prekyvietę, nes siuntimą užsakė pardavėjas. Kinų kalbos svetainė `xinghe-express.cn` nurodo visą parą veikiančią liniją 19924483103 (+86 199 2448 3103 iš užsienio) ir verslo el. paštą 3975605292@qq.com, tačiau atskiro kanalo gavėjams užsienyje nėra.
 
 :::sources
 - [Xinghe Freight: 广州星和货运代理有限公司 (home page)](http://xinghe-express.cn/) – company name, freight forwarding services, tracking box that opens GZYL's tracker, hotline and email

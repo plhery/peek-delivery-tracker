@@ -6,7 +6,7 @@ published: 2026-11-27
 updated: 2026-11-27
 ---
 
-Η WanbExpress (Wanb Express, WanBang Express ή WANB) είναι κινεζικός διασυνοριακός μεταφορέας που διακινεί δέματα από τη Σεντζέν μέσω εξαγωγής, πτήσης και τελωνείου προτού τα παραδώσει σε τοπικούς μεταφορείς όπως οι iMile (Γερμανία), InPost (Ηνωμένο Βασίλειο) ή Poste Italiane (Ιταλία). Επικολλήστε τον 17ψήφιο κωδικό `WNB…YQ` στο πεδίο παραπάνω ή ελέγξτε στο `tracking.wanbexpress.com` (με προστασία reCAPTCHA) για να δείτε τα σκαναρίσματα και τον αριθμό παρακολούθησης του τοπικού μεταφορέα.
+Η WanbExpress (Wanb Express, WanBang Express ή WANB) είναι κινεζικός διασυνοριακός μεταφορέας του οποίου τα σκαναρίσματα ακολουθούν τα δέματα από την Κίνα, μέσα από την πτήση και το τελωνείο, προτού τα παραδώσει σε τοπικούς μεταφορείς όπως οι iMile (Γερμανία), InPost (Ηνωμένο Βασίλειο) ή Poste Italiane (Ιταλία). Επικολλήστε τον κωδικό `WNB…YQ` των 17 χαρακτήρων στο πεδίο παραπάνω ή ελέγξτε στο `tracking.wanbexpress.com` (με προστασία reCAPTCHA) για να δείτε τα σκαναρίσματα και τον αριθμό παρακολούθησης του τοπικού μεταφορέα.
 
 ## Αριθμός παρακολούθησης WanbExpress: πώς μοιάζει
 
@@ -33,48 +33,48 @@ updated: 2026-11-27
 
 | Τι γράφει η WanbExpress | Τι σημαίνει για εσάς | Τι δείχνει το Peek |
 | --- | --- | --- |
-| `Shipping Order Created.`, `Parcel Data Received` | Το κατάστημα έκλεισε την αποστολή και έστειλε τα στοιχεία. Η WanbExpress δεν έχει ακόμη το δέμα. | "Label created" |
-| `Parcel received at Shenzhen Sorting Centre.` | Το κέντρο διαλογής στη Σεντζέν της Κίνας παρέλαβε το δέμα: το πρώτο φυσικό σκανάρισμα. | "Received by carrier" |
-| `Parcel processed at Shenzhen Sorting Centre.`, `Parcel departure in Shenzhen Sorting Centre.` | Ταξινομήθηκε και αναχωρεί από το κέντρο διαλογής. | "In transit" |
-| `Customs declaration completed` | Ολοκληρώθηκε η τελωνειακή διασάφηση. Η διατύπωση δεν αναφέρει ποιας χώρας και δεν είναι ο τελικός εκτελωνισμός (`Custom clearance completed`). | "In transit" |
-| `Parcel departure in Transit Facility, Parcel Departure` | Αναχώρησε από ενδιάμεση εγκατάσταση. | "In transit" |
-| `Parcel is leaving Airport, Parcel Leaving Port` | Αναχωρεί με την πτήση προς τη χώρα προορισμού. | "In transit" |
-| `Parcel arrives at Airport, Parcel Arrival` | Έφτασε αεροπορικώς στη χώρα σας ή κοντά σε αυτήν. Ακολουθεί το τελωνείο. | "In transit" |
-| `Custom clearance completed` | Ολοκληρώθηκε ο εκτελωνισμός εισαγωγής. | "In transit" |
-| `Parcel received by in JFK01.` | Η WanbExpress το καταχωρεί ως παραλαβή για το τελευταίο σκέλος, χωρίς να αναφέρει ποιος το παρέλαβε. | "In transit" |
-| `Your package is being prepared by the sender and will be handed over to us soon`, `Your parcel will soon be handed over to us! It is being prepared by the sender.`, `Order information received. We're expecting your parcel to arrive with us.` | Ειδοποίηση συνεργάτη με δικά του λόγια, χωρίς κωδικό WanbExpress: το δέμα δεν έχει παραδοθεί ακόμη σε αυτόν. | "Label created" ή μεταγενέστερο στάδιο αν έχει ήδη κινηθεί |
-| `In transit along Poste Italiane’s logistic network` | Σε διακίνηση μέσω του δικτύου του τοπικού μεταφορέα, εδώ της [Poste Italiane](carrier:poste-italiane). | "In transit" |
-| `Parcel is out for delivery.` | Σε διανομή προς εσάς. | "Out for delivery" |
-| `Consignee absent, Consignee could not be found.` | Ο διανομέας του συνεργάτη δεν βρήκε κανέναν. | "Delivery attempted" |
-| `Placed in Parcelshop/Parcel locker` | Μετά την αποτυχημένη προσπάθεια, ο συνεργάτης άφησε το δέμα σε σημείο παραλαβής ή θυρίδα. | "Ready for pickup" |
-| `Parcel has been delivered.(Front door)` | Παραδόθηκε. Το `(Front door)` δηλώνει πού αφέθηκε. | "Delivered" |
+| `Shipping Order Created.`, `Parcel Data Received` | Το κατάστημα έκλεισε την αποστολή και έστειλε τα στοιχεία. Η WanbExpress δεν έχει ακόμη το δέμα. | «Label created» |
+| `Parcel received at Shenzhen Sorting Centre.` | Το κέντρο διαλογής στη Σεντζέν της Κίνας παρέλαβε το δέμα: το πρώτο φυσικό σκανάρισμα. | «Received by carrier» |
+| `Parcel processed at Shenzhen Sorting Centre.`, `Parcel departure in Shenzhen Sorting Centre.` | Ταξινομήθηκε και αναχωρεί από το κέντρο διαλογής. | «In transit» |
+| `Customs declaration completed` | Ολοκληρώθηκε η τελωνειακή διασάφηση. Η διατύπωση δεν αναφέρει ποιας χώρας και δεν είναι ο τελικός εκτελωνισμός (`Custom clearance completed`). | «In transit» |
+| `Parcel departure in Transit Facility, Parcel Departure` | Αναχώρησε από ενδιάμεση εγκατάσταση. | «In transit» |
+| `Parcel is leaving Airport, Parcel Leaving Port` | Αναχωρεί με την πτήση προς τη χώρα προορισμού. | «In transit» |
+| `Parcel arrives at Airport, Parcel Arrival` | Έφτασε αεροπορικώς στη χώρα σας ή κοντά σε αυτήν. Ακολουθεί το τελωνείο. | «In transit» |
+| `Custom clearance completed` | Ολοκληρώθηκε ο εκτελωνισμός εισαγωγής. | «In transit» |
+| `Parcel received by in JFK01.` | Η WanbExpress το καταχωρεί ως παραλαβή για το τελευταίο σκέλος, χωρίς να αναφέρει ποιος το παρέλαβε. | «In transit» |
+| `Your package is being prepared by the sender and will be handed over to us soon`, `Your parcel will soon be handed over to us! It is being prepared by the sender.`, `Order information received. We're expecting your parcel to arrive with us.` | Ειδοποίηση συνεργάτη με δικά του λόγια, χωρίς κωδικό WanbExpress: το δέμα δεν έχει παραδοθεί ακόμη σε αυτόν. | «Label created» ή μεταγενέστερο στάδιο αν έχει ήδη κινηθεί |
+| `In transit along Poste Italiane’s logistic network` | Σε διακίνηση μέσω του δικτύου του τοπικού μεταφορέα, εδώ της [Poste Italiane](carrier:poste-italiane). | «In transit» |
+| `Parcel is out for delivery.` | Σε διανομή προς εσάς. | «Out for delivery» |
+| `Consignee absent, Consignee could not be found.` | Ο διανομέας του συνεργάτη δεν βρήκε κανέναν. | «Delivery attempted» |
+| `Placed in Parcelshop/Parcel locker` | Μετά την αποτυχημένη προσπάθεια, ο συνεργάτης άφησε το δέμα σε σημείο παραλαβής ή θυρίδα. | «Ready for pickup» |
+| `Parcel has been delivered.(Front door)` | Παραδόθηκε. Το `(Front door)` δηλώνει πού αφέθηκε. | «Delivered» |
 
 **Τα σκαναρίσματα του τοπικού μεταφορέα.** Μετά την πτήση, το σύστημα της WanbExpress μεταφέρει τα σκαναρίσματα του τοπικού μεταφορέα με τα δικά του λόγια, συνήθως χωρίς κωδικό WanbExpress. Σε δέμα προς τη Γερμανία, το ιστορικό δείχνει την [iMile](carrier:imile), με κάθε γραμμή μετά το όνομα του κέντρου ή σταθμού της σε αγκύλες 【…】:
 
 | Τι γράφει η iMile | Τι σημαίνει για εσάς | Τι δείχνει το Peek |
 | --- | --- | --- |
-| `Received.` | Το κέντρο της iMile στη χώρα προορισμού παρέλαβε το δέμα. | "In transit" |
-| `Arrived.` | Στον σταθμό διανομής που εξυπηρετεί την περιοχή σας. | "In transit" |
-| `Dispatch task assigned to DA.` | Ορίστηκε διανομέας (DA, delivery associate) για τη διαδρομή, συχνά ώρες πριν ξεκινήσει. | "In transit" |
-| `Shipment out for delivery.` | Σε διανομή. | "Out for delivery" |
-| `<Route not completed>`, `Back To DS.` | Η διαδρομή έληξε χωρίς παράδοση και το δέμα επέστρεψε στον σταθμό διανομής (DS). | "Delivery attempted" |
-| `Scheduled to <2026-11-02> .` | Η ημερομηνία που ορίστηκε για την επόμενη προσπάθεια μετά την επιστροφή στον σταθμό. | Παραμένει "Delivery attempted" |
+| `Received.` | Το κέντρο της iMile στη χώρα προορισμού παρέλαβε το δέμα. | «In transit» |
+| `Arrived.` | Στον σταθμό διανομής που εξυπηρετεί την περιοχή σας. | «In transit» |
+| `Dispatch task assigned to DA.` | Ορίστηκε διανομέας (DA, delivery associate) για τη διαδρομή, κάτι που μπορεί να γίνει ώρες πριν ξεκινήσει. | «In transit» |
+| `Shipment out for delivery.` | Σε διανομή. | «Out for delivery» |
+| `<Route not completed>`, `Back To DS.` | Η διαδρομή έληξε χωρίς παράδοση και το δέμα επέστρεψε στον σταθμό διανομής (DS). | «Delivery attempted» |
+| `Scheduled to <2026-11-02> .` | Η ημερομηνία που ορίστηκε για την επόμενη προσπάθεια μετά την επιστροφή στον σταθμό. | Παραμένει «Delivery attempted» |
 
-Κινήσεις άλλων συνεργατών εμφανίζονται παρόμοια. Σε δέματα προς τις ΗΠΑ, οι γραμμές `Parcel received by Transit Facility.`, `In Processing at Transit Facility.`, `In Transit to Next Facility.` και `Parcel received by local Facility.` περιγράφουν την παραλαβή, τη διαλογή και τη μεταφορά του τοπικού συνεργάτη πριν από τη διανομή. Τα `It is currently in transit to the next facility`, `The package is being transferred to the next facility` και `Shipment arrived to sorting centre / Shipment in the sorting centre` είναι επίσης μετακινήσεις συνεργάτη, και το Peek εμφανίζει και τις επτά ως "In transit". Σε δέμα προς το Ηνωμένο Βασίλειο, οι γραμμές της [InPost](carrier:inpost) μπορεί να εμφανιστούν πριν από το σκανάρισμα στη Σεντζέν: `Your parcel is on its way to InPost. Please check back for updates` ("Label created") και `We have your parcel. Please check back for updates` ("Received by carrier"). Η σημείωση της InPost `We'll apply your My Account preferences to this parcel delivery` και το `Consignee Contacted` (τηλεφώνημα διανομέα που καταγράφεται το ίδιο λεπτό με αποτυχημένη προσπάθεια) διατηρούνται στο ιστορικό αλλά δεν αλλάζουν στάδιο.
+Κινήσεις άλλων συνεργατών εμφανίζονται παρόμοια. Σε δέματα προς τις ΗΠΑ, οι γραμμές `Parcel received by Transit Facility.`, `In Processing at Transit Facility.`, `In Transit to Next Facility.` και `Parcel received by local Facility.` περιγράφουν την παραλαβή, τη διαλογή και τη μεταφορά του τοπικού συνεργάτη πριν από τη διανομή. Τα `It is currently in transit to the next facility`, `The package is being transferred to the next facility` και `Shipment arrived to sorting centre / Shipment in the sorting centre` είναι επίσης μετακινήσεις συνεργάτη, και το Peek εμφανίζει και τις επτά ως «In transit». Σε δέμα προς το Ηνωμένο Βασίλειο, οι γραμμές της [InPost](carrier:inpost) μπορεί να εμφανιστούν πριν από το σκανάρισμα στη Σεντζέν: `Your parcel is on its way to InPost. Please check back for updates` («Label created») και `We have your parcel. Please check back for updates` («Received by carrier»). Η σημείωση της InPost `We'll apply your My Account preferences to this parcel delivery` και το `Consignee Contacted` (τηλεφώνημα διανομέα που καταγράφεται το ίδιο λεπτό με αποτυχημένη προσπάθεια) διατηρούνται στο ιστορικό αλλά δεν αλλάζουν στάδιο.
 
 **Ώρες.** Κάθε σκανάρισμα φέρει τη διαφορά του από UTC. Το Peek τα διαβάζει έτσι και τα προβάλλει στη ζώνη ώρας της συσκευής σας, με τα νεότερα πρώτα.
 
 ## Ποιος παραδίδει τα δέματα της WanbExpress
 
-Τα σκαναρίσματα της WanbExpress ακολουθούν το δέμα από την Κίνα μέσω τελωνείου έως έναν τοπικό μεταφορέα, ο οποίος εκτελεί την παράδοση. Το σύστημα της WanbExpress μπορεί να αναφέρει αυτόν τον μεταφορέα, τον κωδικό του και φωτογραφία παράδοσης. Το Peek παραλείπει τη φωτογραφία· όταν αναγνωρίζει σε ποιον ανήκει ο αριθμός του τοπικού μεταφορέα, εμφανίζει "Delivery with …" και τον παρακολουθεί, αλλιώς ελέγξτε στο σύστημα της WanbExpress ή ρωτήστε τον πωλητή.
+Τα σκαναρίσματα της WanbExpress ακολουθούν το δέμα από την Κίνα μέσω τελωνείου έως έναν τοπικό μεταφορέα, ο οποίος εκτελεί την παράδοση. Το σύστημα της WanbExpress μπορεί να αναφέρει αυτόν τον μεταφορέα, τον κωδικό του και φωτογραφία παράδοσης. Το Peek παραλείπει τη φωτογραφία· όταν αναγνωρίζει σε ποιον ανήκει ο αριθμός του τοπικού μεταφορέα, εμφανίζει «Delivery with …» και τον παρακολουθεί, αλλιώς ελέγξτε στο σύστημα της WanbExpress ή ρωτήστε τον πωλητή.
 
 **Τι δείχνει ο κώδικας του Peek.** Σε δέμα προς τη Γερμανία εμφανίζεται η iMile, ένα σκανάρισμα αναφέρει το δίκτυο της Poste Italiane στην Ιταλία, και προς το Ηνωμένο Βασίλειο εμφανίζονται οι γραμμές της InPost.
 
-**Προσπάθειες παράδοσης και παραλαβή.** Όποιος παραδίδει, ισχύουν οι δικοί του κανόνες (πόσες προσπάθειες γίνονται, αν αφήνεται ειδοποίηση, πού και πόσο μένει το δέμα). Το Peek δεν εντόπισε κανόνες της WanbExpress γι' αυτά. Μόλις μάθετε τον τοπικό μεταφορέα και τον αριθμό του, ελέγξτε το δικό του σύστημα.
+**Προσπάθειες παράδοσης και παραλαβή.** Όποιος παραδίδει, ισχύουν οι δικοί του κανόνες (πόσες προσπάθειες γίνονται, αν αφήνεται ειδοποίηση, πού και πόσο μένει το δέμα). Το Peek δεν εντόπισε κανόνες της WanbExpress γι' αυτά. Μόλις μάθετε τον τοπικό μεταφορέα και τον αριθμό του, ελέγξτε το δικό του σύστημα και ρωτήστε τον πώς να κανονίσετε νέα παράδοση.
 
 ## Το δέμα WanbExpress δεν φτάνει ή η παρακολούθηση έχει κολλήσει
 
-**Ο αριθμός δεν βρέθηκε.** Αν το σύστημα της WanbExpress δεν γνωρίζει τον αριθμό, το Peek δείχνει "Waiting for WanbExpress" και συνεχίζει τους ελέγχους. Αν ούτε δύο ημέρες αργότερα δεν τον γνωρίζει ούτε η WanbExpress ούτε κάποια υπηρεσία παρακολούθησης, το Peek εμφανίζει "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." Ελέγξτε χαρακτήρα προς χαρακτήρα: `WNB`, δύο γράμματα, δέκα ψηφία, `YQ`. Αν δεν αλλάξει τίποτα μετά από μερικές ημέρες, ρωτήστε τον πωλητή αν στάλθηκε.
+**Ο αριθμός δεν βρέθηκε.** Αν το σύστημα της WanbExpress δεν γνωρίζει τον αριθμό, το Peek δείχνει «Waiting for WanbExpress» και συνεχίζει τους ελέγχους. Αν ούτε δύο ημέρες αργότερα δεν τον γνωρίζει ούτε η WanbExpress ούτε κάποια υπηρεσία παρακολούθησης, το Peek εμφανίζει «After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel.» Ελέγξτε χαρακτήρα προς χαρακτήρα: `WNB`, δύο γράμματα, δέκα ψηφία, `YQ`. Αν δεν αλλάξει τίποτα μετά από μερικές ημέρες, ρωτήστε τον πωλητή αν στάλθηκε.
 
 **Κολλημένο σε `Shipping Order Created.` ή `Parcel Data Received`.** Το κατάστημα καταχώρισε την αποστολή, αλλά η WanbExpress δεν έχει σκανάρει ακόμη το δέμα. Ρωτήστε το κατάστημα πότε το παρέδωσε.
 
@@ -100,9 +100,9 @@ updated: 2026-11-27
 
 Από το σύστημα της WanbExpress το Peek εμφανίζει την κατάσταση, κάθε σκανάρισμα με την τοποθεσία του και τις χώρες προέλευσης και προορισμού. Όταν η εγγραφή σημειώνει το δέμα σε μεταφορά, σε διανομή ή παραδομένο, το Peek ακολουθεί αυτή την ένδειξη ακόμη κι αν το τελευταίο σκανάρισμα λέει λιγότερα. Δεν εμφανίζει εκτιμώμενη ημερομηνία παράδοσης.
 
-Το Peek παραλείπει τις φωτογραφίες παράδοσης και τη διεύθυνση του παραλήπτη. Όταν η WanbExpress δίνει τον αριθμό του τοπικού μεταφορέα και το Peek τον αναγνωρίζει, εμφανίζει "Delivery with …" και συνεχίζει εκεί· διαφορετικά προσθέστε τον αριθμό του τοπικού μεταφορέα ξεχωριστά στο Peek (υποστηρίζει πάνω από 4.500 μεταφορείς).
+Το Peek παραλείπει τις φωτογραφίες παράδοσης και τη διεύθυνση του παραλήπτη. Όταν η WanbExpress δίνει τον αριθμό του τοπικού μεταφορέα και το Peek τον αναγνωρίζει, εμφανίζει «Delivery with …» και συνεχίζει εκεί· διαφορετικά προσθέστε τον αριθμό του τοπικού μεταφορέα ξεχωριστά στο Peek (υποστηρίζει πάνω από 4.500 μεταφορείς).
 
-Όσο έχετε ανοιχτό το δέμα, ή την ημέρα παράδοσης με ενεργές ειδοποιήσεις και όσο απαντά η WanbExpress, το Peek ελέγχει έως κάθε 10 λεπτά και έως κάθε 2 λεπτά από τις 6:00 π.μ. ώρας WanbExpress την ημέρα διανομής (κάθε 5 λεπτά όταν ανοίγει πρόγραμμα περιήγησης)· διαφορετικά κάθε ώρα. Όταν απαντούν υπηρεσίες παρακολούθησης, ελέγχει κάθε ώρα, κάθε 3 ώρες μετά από μία ήσυχη ημέρα και έως κάθε 15 λεπτά την ημέρα παράδοσης. Μετά από δύο ημέρες χωρίς νέα (12 ώρες σε "Label created" ή "Received by carrier"), ελέγχει κάθε ώρα. Ειδοποιεί για κάθε σκανάρισμα, σημαντικά στάδια ή "Delivery only": τα "Important steps" καλύπτουν τη διανομή, την αποτυχημένη προσπάθεια και την παράδοση, όχι όμως τις γραμμές τελωνείου της WanbExpress που το Peek κατατάσσει ως "In transit". Δεν μπορεί να επικοινωνήσει με τη WanbExpress ή τον πωλητή εκ μέρους σας.
+Όσο έχετε ανοιχτό το δέμα, ή την ημέρα παράδοσης με ενεργές ειδοποιήσεις και όσο απαντά η WanbExpress, το Peek ελέγχει έως κάθε 10 λεπτά και έως κάθε 2 λεπτά από τις 6:00 π.μ. ώρας WanbExpress την ημέρα διανομής (κάθε 5 λεπτά όταν ανοίγει πρόγραμμα περιήγησης)· διαφορετικά κάθε ώρα. Όταν απαντούν υπηρεσίες παρακολούθησης, ελέγχει κάθε ώρα, κάθε 3 ώρες μετά από μία ήσυχη ημέρα και έως κάθε 15 λεπτά την ημέρα διανομής, όσο έχετε ανοιχτό το δέμα ή ενεργές ειδοποιήσεις. Μετά από δύο ημέρες χωρίς νέα (12 ώρες σε «Label created» ή «Received by carrier»), ελέγχει κάθε ώρα. Ειδοποιεί για κάθε σκανάρισμα, σημαντικά στάδια ή «Delivery only»: τα «Important steps» καλύπτουν τη διανομή, την αποτυχημένη προσπάθεια και την παράδοση, όχι όμως τις γραμμές τελωνείου της WanbExpress που το Peek κατατάσσει ως «In transit». Δεν μπορεί να επικοινωνήσει με τη WanbExpress ή τον πωλητή εκ μέρους σας.
 
 ## Συχνές ερωτήσεις για την παρακολούθηση WanbExpress
 
@@ -112,11 +112,11 @@ updated: 2026-11-27
 
 ### Πού μπορώ να παρακολουθήσω ένα δέμα WanbExpress WNB…YQ;
 
-Επικολλήστε τον πλήρη 17ψήφιο κωδικό `WNB…YQ` (`WNB`, δύο γράμματα, δέκα ψηφία, `YQ`) στο πεδίο παραπάνω ή στο `tracking.wanbexpress.com`, το οποίο χρησιμοποιεί Google reCAPTCHA και μπορεί να δείξει το όνομα και τον κωδικό του τοπικού μεταφορέα.
+Επικολλήστε ολόκληρο τον κωδικό `WNB…YQ` των 17 χαρακτήρων (`WNB`, δύο γράμματα, δέκα ψηφία, `YQ`) στο πεδίο παραπάνω ή στο tracking.wanbexpress.com, το οποίο χρησιμοποιεί Google reCAPTCHA και μπορεί να δείξει το όνομα και τον κωδικό του τοπικού μεταφορέα.
 
 ### Τι σημαίνει «Customs declaration completed» στη WanbExpress;
 
-Ότι ολοκληρώθηκε η τελωνειακή διασάφηση του δέματος — δεν είναι ακόμη ο τελικός εκτελωνισμός εισαγωγής, ο οποίος εμφανίζεται ως `Custom clearance completed`. Το Peek κατατάσσει και τις δύο γραμμές ως "In transit".
+Ότι ολοκληρώθηκε η τελωνειακή διασάφηση του δέματος — δεν είναι ακόμη ο τελικός εκτελωνισμός εισαγωγής, ο οποίος εμφανίζεται ως `Custom clearance completed`. Το Peek κατατάσσει και τις δύο γραμμές ως «In transit».
 
 ### Ποιος παραδίδει δέματα WanbExpress στη Γερμανία, το Ηνωμένο Βασίλειο, την Ιταλία ή τις ΗΠΑ;
 

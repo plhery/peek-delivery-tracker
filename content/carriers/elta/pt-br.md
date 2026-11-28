@@ -6,7 +6,7 @@ published: 2026-11-27
 updated: 2026-11-27
 ---
 
-A ELTA Hellenic Post (ΕΛΤΑ) é o serviço postal nacional da Grécia, e a ELTA Courier agora faz parte dela. Rastreie uma encomenda na [página em inglês da ELTA](https://www.elta.gr/en/track), que aceita até cinco códigos por vez (um por linha), ou cole o código na caixa acima. Um envio da ELTA Courier também pode ser consultado na [busca da elta-courier.gr](https://www.elta-courier.gr/search), que aceita vários números de comprovante (voucher), um por linha. O código vem do remetente: no recibo de postagem, no voucher ou na mensagem da loja. Em resumo: a tabela abaixo explica cada status; um pacote que a ELTA não conseguiu entregar aguarda na agência postal ou loja courier indicada no rastreamento (encomendas domésticas pelo prazo do aviso ou SMS; itens desembaraçados na alfândega por 20 dias a partir do aviso); e a central telefônica da ELTA atende pelo `800-11-82000` (telefone fixo na Grécia), `212-0000-800` (celular) e `+30 212-0000-800` do exterior.
+A ELTA Hellenic Post (ΕΛΤΑ) é o serviço postal nacional da Grécia, e a ELTA Courier agora faz parte dela. Rastreie uma encomenda na [página em inglês da ELTA](https://www.elta.gr/en/track), que aceita até cinco códigos por vez (um por linha), ou cole o código na caixa acima. Um envio da ELTA Courier também pode ser consultado na [busca da elta-courier.gr](https://www.elta-courier.gr/search), que aceita vários números de comprovante (voucher), um por linha. O código vem do remetente: no recibo de postagem, no voucher ou na mensagem da loja. Em resumo: a tabela abaixo explica cada status; um pacote que a ELTA não conseguiu entregar aguarda na agência postal ou loja courier indicada no rastreamento (encomendas domésticas pelo prazo do aviso ou SMS; itens desembaraçados na alfândega por 20 dias a partir do aviso); e a central telefônica da ELTA atende pelo 800-11-82000 (telefone fixo na Grécia), 212-0000-800 (celular) e +30 212-0000-800 do exterior.
 
 ## Código de rastreamento ELTA
 
@@ -45,7 +45,7 @@ O rastreador da ELTA mostra cada leitura em grego ou inglês (há um seletor de 
 
 `Arrival in` é seguido por vários espaços e o nome da estação, podendo parecer cortado. `Notification of attempted delivery` e o motivo chegam no mesmo minuto.
 
-Se o rastreador responder «No Tracking History», o objeto ainda não tem leituras ou é antigo demais: a ELTA mantém o histórico por seis meses a partir da data de postagem.
+Se o rastreador responder "No Tracking History", o objeto ainda não tem leituras ou é antigo demais: a ELTA mantém o histórico por seis meses a partir da data de postagem.
 
 ## Entrega, armários PostBox e retirada na ELTA
 
@@ -55,9 +55,9 @@ A ELTA entrega encomendas domésticas em casa, em uma loja ELTA (você recebe SM
 
 **ELTA Courier** faz duas tentativas de entrega. Após o primeiro aviso, ligue para a loja courier local para agendar a entrega; após dois avisos, retire lá ou agende nova entrega, o que pode ter custo adicional. As lojas courier abrem de segunda a sexta das 08:00 às 20:00 e sábado das 08:00 às 14:00, podendo variar por região. Uma remessa porta a porta que não pode ser entregue retorna ao remetente em até duas semanas após o envio, salvo contrato diferente do remetente.
 
-**Armários PostBox.** Os armários inteligentes da ELTA funcionam 24/7 (os instalados em estações do Metrô e ISAP seguem o horário da estação). Quando o objeto é colocado, uma mensagem por Viber ou SMS envia um PIN de 6 dígitos e a localização do armário. Retire em até 48 horas; depois disso ele vai para a loja ELTA mais próxima e você recebe nova mensagem. Itens com impostos ou taxas não vão para PostBox. Você pode solicitar esse serviço respondendo «Θέλω από PostBox» no SMS ou Viber da ELTA; para envios do exterior, a disponibilidade depende do momento da triagem. Um PostBox aceita itens de até 62 × 36 × 60 cm e 20 kg, sem custo extra.
+**Armários PostBox.** Os armários inteligentes da ELTA funcionam 24/7 (os instalados em estações do Metrô e ISAP seguem o horário da estação). Quando o objeto é colocado, uma mensagem por Viber ou SMS envia um PIN de 6 dígitos e a localização do armário. Retire em até 48 horas; depois disso ele vai para a loja ELTA mais próxima e você recebe nova mensagem. Itens com impostos ou taxas não vão para PostBox. Você pode pedir um PostBox tocando na opção "Θέλω από PostBox" no SMS ou Viber da ELTA; para envios do exterior, a disponibilidade depende do momento da triagem. Um PostBox aceita itens de até 62 × 36 × 60 cm e 20 kg, sem custo extra.
 
-**Alteração de endereço.** Em envios courier, apenas o remetente pode pedir, por escrito para `customerservice@elta-courier.gr`. Em envios postais totalmente rastreados, o remetente pode solicitar a mudança pessoalmente em uma agência com documento de identidade.
+**Alteração de endereço.** Em envios courier, apenas o remetente pode pedir, por escrito para customerservice@elta-courier.gr. Em envios postais totalmente rastreados, o remetente pode solicitar a mudança pessoalmente em uma agência com documento de identidade.
 
 ## Encomenda ELTA atrasada, extraviada ou danificada
 
@@ -67,7 +67,7 @@ Se o rastreamento parar de atualizar por dias, veja primeiro [por que o rastream
 
 **Extraviada.** O remetente ou o destinatário pode abrir um pedido de busca em uma loja ELTA, com documento e recibo de postagem, em até seis meses após o envio. Vale apenas para itens totalmente rastreados. A ELTA responde por carta registrada em até 8 semanas (4 semanas para alguns envios ao exterior).
 
-**Pacote courier danificado.** Aceite com ressalva e declare o dano em até um dia útil, pelo formulário de contato da ELTA Courier ou na agência. Sem essa ressalva, a ELTA não assume responsabilidade. O formulário de indenização é enviado para `apozimiwseis@elta-courier.gr` com o voucher, a nota fiscal e fotos do item e da embalagem. Para dúvidas, ligue para o departamento de indenizações da ELTA Courier em `+30 210-6073066`.
+**Pacote courier danificado.** Aceite com ressalva e declare o dano em até um dia útil, pelo formulário de contato da ELTA Courier ou na agência. Sem essa ressalva, a ELTA não assume responsabilidade. O formulário de indenização é enviado para apozimiwseis@elta-courier.gr com o voucher, a nota fiscal e fotos do item e da embalagem. A indenização é paga ao remetente, ou a você se o remetente abrir mão dela por escrito: numa compra online, fale com a loja. Para dúvidas, ligue para o departamento de indenizações da ELTA Courier em +30 210-6073066.
 
 **Reclamações.** A ELTA deve responder em até 15 dias. Se não ficar satisfeito, peça por escrito ao Atendimento ao Cliente para encaminhar o caso ao Comitê de Resolução de Disputas.
 
@@ -75,14 +75,14 @@ Se o rastreamento parar de atualizar por dias, veja primeiro [por que o rastream
 
 Canais oficiais listados em elta.gr e elta-courier.gr:
 
-- **Central telefônica:** `800-11-82000` de telefone fixo na Grécia, `212-0000-800` de celular, `+30 212-0000-800` do exterior; segunda a sexta das 08:00 às 18:00.
-- **Novos pontos de atendimento:** `212 00 00 700`, linha exclusiva para dúvidas sobre novos pontos de atendimento da ELTA, segunda a sexta das 08:00 às 18:00, com tarifa de chamada local.
-- **E-mail:** `service@elta-net.gr`, ou o formulário em [elta.gr/en/contact](https://www.elta.gr/en/contact).
-- **ELTA Courier:** `210 6073000` (chamada comum) ou `11120` (tarifa da sua operadora), suporte de rastreamento de segunda a sexta das 08:00 às 16:00 (fins de semana e feriados apenas rastreamento online); `info@elta-courier.gr` e `customercare@elta-courier.gr`. Reclamações escritas por correio: 200 Ionias Ave. & 61 Iakovaton St., 111 44 Atenas, aos cuidados do Customer Service Department.
+- **Central telefônica:** 800-11-82000 de telefone fixo na Grécia, 212-0000-800 de celular, +30 212-0000-800 do exterior; segunda a sexta das 08:00 às 18:00.
+- **Novos pontos de atendimento:** 212 00 00 700, linha exclusiva para dúvidas sobre novos pontos de atendimento da ELTA, segunda a sexta das 08:00 às 18:00, com tarifa de chamada local.
+- **E-mail:** service@elta-net.gr, ou o formulário em [elta.gr/en/contact](https://www.elta.gr/en/contact).
+- **ELTA Courier:** 210 6073000 (chamada comum) ou 11120 (tarifa da sua operadora), suporte de rastreamento de segunda a sexta das 08:00 às 16:00 (fins de semana e feriados apenas rastreamento online); info@elta-courier.gr e customercare@elta-courier.gr. Reclamações escritas por correio: 200 Ionias Ave. & 61 Iakovaton St., 111 44 Atenas, aos cuidados do Customer Service Department.
 - **Por correio:** Hellenic Post Customer Service, Adrianoupoleos 45, 16070 Kessariani.
 - **Presencialmente:** qualquer agência ELTA (localizador em elta.gr).
 
-> A ELTA nunca pede dados bancários ou de cartão, nunca cobra taxa por SMS ou e-mail para entregar um pacote e nunca liga de números de fora da Grécia. Taxas alfandegárias são pagas somente em uma agência ELTA. E-mails falsos com título «Ειδοποίηση αποτυχίας παράδοσης» não são da ELTA.
+> A ELTA nunca pede dados bancários ou de cartão, nunca cobra taxa por SMS ou e-mail para entregar um pacote e nunca liga de números de fora da Grécia. Taxas alfandegárias são pagas somente em uma agência ELTA. E-mails falsos com título "Ειδοποίηση αποτυχίας παράδοσης" não são da ELTA.
 
 ## Rastreando encomendas da ELTA com o Peek
 
@@ -90,13 +90,13 @@ Para um código terminado em `GR` com dígito verificador válido, o [Peek](/) c
 
 Uma encomenda vinda do exterior é acompanhada primeiro nos correios de origem. Quando esses correios informam que o destino é a Grécia (ou não indicam destino e você rastreia da Grécia), o Peek também consulta a ELTA com o mesmo código e passa para ela assim que surgir uma leitura mais recente, mantendo o histórico anterior. Para acompanhar direto na ELTA, escolha "ELTA Hellenic Post" em "Trocar".
 
-A ELTA fornece data e hora de cada leitura sem fuso horário: o Peek lê pelo horário do local indicado (horário da Grécia para eventos na Grécia) e lista o histórico próprio da ELTA com os textos em inglês. Os horários aparecem no fuso do seu dispositivo; no peektracker.com e nos apps de iPhone e Android, o histórico termina com "Horários no seu fuso horário:" seguido do nome do fuso. O Peek mostra a agência postal ou loja courier onde o pacote aguarda e pode notificar mudanças de status. A ELTA não informa dia previsto de entrega nem peso.
+A ELTA fornece data e hora de cada leitura sem fuso horário: o Peek lê pelo horário do local indicado (horário da Grécia para eventos na Grécia) e lista o histórico próprio da ELTA com os textos em inglês. Os horários aparecem no fuso do seu dispositivo; no peektracker.com e nos apps de iPhone e Android, o histórico termina com "Horários no seu fuso horário:" seguido do nome do fuso. O Peek pode mostrar a agência postal ou loja courier onde o pacote aguarda e avisar você quando o status mudar. A ELTA não informa dia previsto de entrega nem peso.
 
 ## Perguntas sobre o rastreamento da ELTA
 
 ### Posso ver o rastreamento da ELTA em inglês?
 
-Sim. A página `elta.gr/en/track` exibe o formulário e todas as leituras em inglês; já `elta.gr/track` abre em grego com seletor de idioma.
+Sim. A página elta.gr/en/track exibe o formulário e todas as leituras em inglês; já elta.gr/track abre em grego com seletor de idioma.
 
 ### Posso rastrear uma encomenda internacional com a ELTA?
 
@@ -104,7 +104,7 @@ Sim, usando o código postal fornecido pelo remetente (que termina na sigla do p
 
 ### O que é a ELTA Courier?
 
-É o serviço de entrega expressa da ELTA, com site próprio (`elta-courier.gr`), para entregas porta a porta na Grécia, EMS e pacotes para Chipre. A ELTA Courier foi incorporada à ELTA em 2024.
+É o serviço de entrega expressa da ELTA, com site próprio (elta-courier.gr), para entregas porta a porta na Grécia, EMS e pacotes para Chipre. A ELTA Courier foi incorporada à ELTA em 2024.
 
 ### Onde encontro a agência ELTA mais próxima?
 

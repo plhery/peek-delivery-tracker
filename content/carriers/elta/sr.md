@@ -6,7 +6,7 @@ published: 2026-11-27
 updated: 2026-11-27
 ---
 
-ELTA Hellenic Post (ΕΛΤΑ) je nacionalna pošta Grčke, a ELTA Courier je sada deo nje. Pratite pošiljku na [engleskoj stranici za praćenje ELTA](https://www.elta.gr/en/track), koja prima do pet brojeva odjednom (jedan po redu), ili nalepite broj u polje iznad. Pošiljku ELTA Couriera možete proveriti i na [pretrazi elta-courier.gr](https://www.elta-courier.gr/search), koja prima više brojeva vaučera, po jedan u redu. Broj dobijate od pošiljaoca: na potvrdi o slanju, kurirskom vaučeru ili u poruci prodavnice. Ukratko: tabela ispod objašnjava svaku liniju; paket koji ELTA nije mogla da uruči čeka u pošti ili kurirskoj poslovnici navedenoj u praćenju (domaći paket koliko piše na obaveštenju ili SMS-u, ocarinjena pošiljka 20 dana od obaveštenja); a pozivni centar ELTA je `800-11-82000` sa fiksnog u Grčkoj, `212-0000-800` sa mobilnog i `+30 212-0000-800` iz inostranstva.
+ELTA Hellenic Post (ΕΛΤΑ) je nacionalna pošta Grčke, a ELTA Courier je sada deo nje. Pratite pošiljku na [engleskoj stranici za praćenje ELTA](https://www.elta.gr/en/track), koja prima do pet brojeva odjednom (jedan po redu), ili nalepite broj u polje iznad. Pošiljku ELTA Couriera možete proveriti i na [pretrazi elta-courier.gr](https://www.elta-courier.gr/search), koja prima više brojeva vaučera, po jedan u redu. Broj dobijate od pošiljaoca: na potvrdi o slanju, kurirskom vaučeru ili u poruci prodavnice. Ukratko: tabela ispod objašnjava svaku liniju; paket koji ELTA nije mogla da uruči čeka u pošti ili kurirskoj poslovnici navedenoj u praćenju (domaći paket koliko piše na obaveštenju ili SMS-u, ocarinjena pošiljka 20 dana od obaveštenja); a pozivni centar ELTA je 800-11-82000 sa fiksnog u Grčkoj, 212-0000-800 sa mobilnog i +30 212-0000-800 iz inostranstva.
 
 ## ELTA broj za praćenje
 
@@ -45,7 +45,7 @@ Sistem ELTA prikazuje svako skeniranje na grčkom ili engleskom (prekidač jezik
 
 Posle `Arrival in` stoji niz razmaka pa naziv stanice, što može delovati isečeno. `Notification of attempted delivery` i njegov razlog stižu u istom minutu.
 
-Ako sistem odgovori «No Tracking History», pošiljka još nema skeniranja ili je prestara: ELTA čuva istoriju šest meseci od datuma slanja.
+Ako sistem odgovori „No Tracking History“, pošiljka još nema skeniranja ili je prestara: ELTA čuva istoriju šest meseci od datuma slanja.
 
 ## Dostava, PostBox paketomati i preuzimanje kod ELTA
 
@@ -55,9 +55,9 @@ ELTA dostavlja domaće pakete na kućnu adresu, u ELTA poslovnicu (dobijate SMS 
 
 **ELTA Courier** obavlja dva pokušaja dostave. Nakon prvog obaveštenja pozovite lokalnu kurirsku poslovnicu da zakažete dostavu; posle dva obaveštenja preuzmite je tamo ili zakažite novu dostavu, što može dodatno koštati. Kurirske poslovnice rade od ponedeljka do petka 08:00–20:00 i subotom 08:00–14:00, zavisno od oblasti. Kurirska pošiljka od vrata do vrata koja se ne može uručiti vraća se pošiljaocu u roku od dve nedelje od slanja, osim ako ugovor pošiljaoca ne kaže drugačije.
 
-**PostBox paketomati.** Pametni paketomati ELTA rade 24/7 (oni u stanicama metroa i ISAP-a prate radno vreme stanica). Kad pošiljka bude smeštena, Viber ili SMS poruka daje 6-cifreni PIN i lokaciju paketomata. Preuzmite u roku od 48 sati; nakon toga ide u najbližu ELTA poslovnicu i dobijate novu poruku. Pošiljke sa dažbinama ili porezima ne idu u PostBox. Možete ga zatražiti odgovorom «Θέλω από PostBox» u SMS-u ili Viberu ELTA; za pošiljku iz inostranstva to zavisi od trenutka sortiranja. PostBox prima pošiljke do 62 × 36 × 60 cm i 20 kg bez dodatne naplate.
+**PostBox paketomati.** Pametni paketomati ELTA rade 24/7 (oni u stanicama metroa i ISAP-a prate radno vreme stanica). Kad pošiljka bude smeštena, Viber ili SMS poruka daje 6-cifreni PIN i lokaciju paketomata. Preuzmite u roku od 48 sati; nakon toga ide u najbližu ELTA poslovnicu i dobijate novu poruku. Pošiljke sa dažbinama ili porezima ne idu u PostBox. Možete ga zatražiti dodirom na opciju „Θέλω από PostBox“ u SMS ili Viber poruci ELTA; za pošiljku iz inostranstva to zavisi od trenutka sortiranja. PostBox prima pošiljke do 62 × 36 × 60 cm i 20 kg bez dodatne naplate.
 
-**Promena adrese.** Za kurirsku pošiljku to može samo pošiljalac, pisanim putem na `customerservice@elta-courier.gr`. Za potpuno praćenu poštansku pošiljku pošiljalac podnosi zahtev lično u poslovnici uz lični dokument.
+**Promena adrese.** Za kurirsku pošiljku to može samo pošiljalac, pisanim putem na customerservice@elta-courier.gr. Za potpuno praćenu poštansku pošiljku pošiljalac podnosi zahtev lično u poslovnici uz lični dokument.
 
 ## ELTA paket kasni, izgubljen je ili oštećen
 
@@ -67,7 +67,7 @@ Ako praćenje danima stoji u mestu, pogledajte prvo [zašto se praćenje ne ažu
 
 **Izgubljeno.** Pošiljalac ili primalac može podneti zahtev za potragu u ELTA poslovnici, uz lični dokument i potvrdu o slanju, do šest meseci od slanja. Važi samo za potpuno praćene pošiljke. ELTA odgovara preporučenim pismom u roku od 8 nedelja (4 nedelje za deo pošiljaka u inostranstvu).
 
-**Oštećena kurirska pošiljka.** Primite je uz rezervu i prijavite štetu u roku od jednog radnog dana putem kontakt forme ELTA Couriera ili u poslovnici; bez toga ELTA ne snosi odgovornost. Obrazac za naknadu štete šalje se na `apozimiwseis@elta-courier.gr` sa vaučerom, fakturom i fotografijama predmeta i ambalaže. Za pitanja pozovite odeljenje za naknade ELTA Couriera na `+30 210-6073066`.
+**Oštećena kurirska pošiljka.** Primite je uz rezervu i prijavite štetu u roku od jednog radnog dana putem kontakt forme ELTA Couriera ili u poslovnici; bez toga ELTA ne snosi odgovornost. Obrazac za naknadu štete šalje se na apozimiwseis@elta-courier.gr sa vaučerom, fakturom i fotografijama predmeta i ambalaže. Naknada se isplaćuje pošiljaocu, ili vama ako se pošiljalac pismeno odrekne nje: za online narudžbinu obratite se prodavnici. Za pitanja pozovite odeljenje za naknade ELTA Couriera na +30 210-6073066.
 
 **Žalbe.** ELTA mora odgovoriti u roku od 15 dana. Ako niste zadovoljni, pisanim putem zatražite od Korisničke službe da predmet prosledi Odboru za rešavanje sporova.
 
@@ -75,28 +75,28 @@ Ako praćenje danima stoji u mestu, pogledajte prvo [zašto se praćenje ne ažu
 
 Kanali ELTA navedeni na elta.gr i elta-courier.gr:
 
-- **Pozivni centar:** `800-11-82000` sa fiksnog telefona u Grčkoj, `212-0000-800` sa mobilnog, `+30 212-0000-800` iz inostranstva; ponedeljak–petak 08:00–18:00.
-- **Novi servisni punktovi:** `212 00 00 700`, linija samo za pitanja o novim servisnim punktovima ELTA, ponedeljak–petak 08:00–18:00 po ceni lokalnog poziva.
-- **Imejl:** `service@elta-net.gr`, ili obrazac na [elta.gr/en/contact](https://www.elta.gr/en/contact).
-- **ELTA Courier:** `210 6073000` (standardan poziv) ili `11120` (po tarifi operatera), podrška za praćenje ponedeljak–petak 08:00–16:00 (vikendom i praznicima samo online praćenje); `info@elta-courier.gr` i `customercare@elta-courier.gr`. Pisane žalbe poštom: 200 Ionias Ave. & 61 Iakovaton St., 111 44 Atina, na pažnju Customer Service Department.
+- **Pozivni centar:** 800-11-82000 sa fiksnog telefona u Grčkoj, 212-0000-800 sa mobilnog, +30 212-0000-800 iz inostranstva; ponedeljak–petak 08:00–18:00.
+- **Novi servisni punktovi:** 212 00 00 700, linija samo za pitanja o novim servisnim punktovima ELTA, ponedeljak–petak 08:00–18:00 po ceni lokalnog poziva.
+- **Imejl:** service@elta-net.gr, ili obrazac na [elta.gr/en/contact](https://www.elta.gr/en/contact).
+- **ELTA Courier:** 210 6073000 (standardan poziv) ili 11120 (po tarifi operatera), podrška za praćenje ponedeljak–petak 08:00–16:00 (vikendom i praznicima samo online praćenje); info@elta-courier.gr i customercare@elta-courier.gr. Pisane žalbe poštom: 200 Ionias Ave. & 61 Iakovaton St., 111 44 Atina, na pažnju Customer Service Department.
 - **Poštom:** Hellenic Post Customer Service, Adrianoupoleos 45, 16070 Kessariani.
 - **Lično:** bilo koja ELTA poslovnica (lokator na elta.gr).
 
-> ELTA nikada ne traži podatke o banci ili kartici, nikada ne zahteva uplatu za dostavu putem SMS-a ili imejla i nikada ne zove sa brojeva van Grčke. Carinske dažbine plaćaju se samo u ELTA poslovnici. Lažni imejlovi sa naslovom «Ειδοποίηση αποτυχίας παράδοσης» nisu od ELTA.
+> ELTA nikada ne traži podatke o banci ili kartici, nikada ne zahteva uplatu za dostavu putem SMS-a ili imejla i nikada ne zove sa brojeva van Grčke. Carinske dažbine plaćaju se samo u ELTA poslovnici. Lažni imejlovi sa naslovom „Ειδοποίηση αποτυχίας παράδοσης“ nisu od ELTA.
 
 ## Praćenje ELTA pošiljaka pomoću Peeka
 
-Za broj koji se završava na `GR` sa ispravnom kontrolnom cifrom, [Peek](/) istovremeno pita ELTA (i [Chronopost](carrier:chronopost)) i prikazuje "ELTA Hellenic Post has this parcel." kada ELTA zna broj, ili "Not found at … yet. Peek will keep checking after you add it." Sa pogrešnom kontrolnom cifrom ELTA se ne pita i ručni izbor ne pomaže (Peek kaže da "doesn’t issue numbers like this one"): proverite broj sa pošiljaocem. 12-cifreni broj iz Nemačke ukucan ručno ide drugim prevoznicima, nikad ELTA: koristite "Change" ili nalepite ELTA link. Linkovi sa elta.gr i pretrage elta-courier.gr uvek biraju ELTA.
+Za broj koji se završava na `GR` sa ispravnom kontrolnom cifrom, [Peek](/) istovremeno pita ELTA (i [Chronopost](carrier:chronopost)) i prikazuje „ELTA Hellenic Post has this parcel.“ kada ELTA zna broj, ili „Not found at … yet. Peek will keep checking after you add it.“ Sa pogrešnom kontrolnom cifrom ELTA se ne pita i ručni izbor ne pomaže (Peek kaže da „doesn’t issue numbers like this one“): proverite broj sa pošiljaocem. 12-cifreni broj iz Nemačke ukucan ručno ide drugim prevoznicima, nikad ELTA: koristite „Change“ ili nalepite ELTA link. Linkovi sa elta.gr i pretrage elta-courier.gr uvek biraju ELTA.
 
-Pošiljka iz inostranstva prvo se prati kod strane pošte. Kad ta pošta javi da pošiljka ide u Grčku (ili ne navede odredište, a pratite je iz Grčke), Peek istim brojem pita i ELTA i prelazi na nju čim se pojavi sveže skeniranje, zadržavajući raniju istoriju. Da biste je odmah pratili kod ELTA, izaberite "ELTA Hellenic Post" preko "Change".
+Pošiljka iz inostranstva prvo se prati kod strane pošte. Kad ta pošta javi da pošiljka ide u Grčku (ili ne navede odredište, a pratite je iz Grčke), Peek istim brojem pita i ELTA i prelazi na nju čim se pojavi sveže skeniranje, zadržavajući raniju istoriju. Da biste je odmah pratili kod ELTA, izaberite „ELTA Hellenic Post“ preko „Change“.
 
-ELTA uz svako skeniranje daje datum i vreme bez vremenske zone: Peek ih čita po lokalnom satu navedenog mesta (grčko vreme za događaje u Grčkoj) i prikazuje sopstvenu istoriju ELTA na engleskom. Vremena se prikazuju u vremenskoj zoni vašeg uređaja; na peektracker.com i u iPhone i Android aplikacijama istorija se završava sa "Times are in your time zone:" i imenom zone. Peek može prikazati poštu ili kurirsku poslovnicu gde paket čeka i slati obaveštenja pri promeni statusa. ELTA ne daje očekivani dan dostave ni težinu.
+ELTA uz svako skeniranje daje datum i vreme bez vremenske zone: Peek ih čita po lokalnom satu navedenog mesta (grčko vreme za događaje u Grčkoj) i prikazuje sopstvenu istoriju ELTA na engleskom. Vremena se prikazuju u vremenskoj zoni vašeg uređaja; na peektracker.com i u iPhone i Android aplikacijama istorija se završava sa „Times are in your time zone:“ i imenom zone. Peek može prikazati poštu ili kurirsku poslovnicu gde paket čeka i slati obaveštenja pri promeni statusa. ELTA ne daje očekivani dan dostave ni težinu.
 
 ## Pitanja o ELTA praćenju
 
 ### Mogu li videti ELTA praćenje na engleskom?
 
-Da. `elta.gr/en/track` prikazuje formular i svako skeniranje na engleskom, dok `elta.gr/track` otvara grčku verziju sa prekidačem jezika.
+Da. elta.gr/en/track prikazuje formular i svako skeniranje na engleskom, dok elta.gr/track otvara grčku verziju sa prekidačem jezika.
 
 ### Mogu li pratiti međunarodnu pošiljku kod ELTA?
 
@@ -104,7 +104,7 @@ Da, pomoću poštanskog broja koji vam je dao pošiljalac i koji se završava ko
 
 ### Šta je ELTA Courier?
 
-Kurirska služba ELTA sa sopstvenim sajtom `elta-courier.gr` za dostavu od vrata do vrata u Grčkoj, EMS i pakete za Kipar. Spojena je sa ELTA 2024. godine.
+Kurirska služba ELTA sa sopstvenim sajtom elta-courier.gr za dostavu od vrata do vrata u Grčkoj, EMS i pakete za Kipar. Spojena je sa ELTA 2024. godine.
 
 ### Gde se nalazi najbliža ELTA pošta?
 

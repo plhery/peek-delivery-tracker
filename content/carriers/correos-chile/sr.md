@@ -6,7 +6,7 @@ published: 2026-11-27
 updated: 2026-11-27
 ---
 
-Correos de Chile je nacionalna poštanska služba Čilea koja obrađuje domaće pakete i poštanske internet narudžbine koje ulaze u Čile iz inostranstva. Nalepite svoj poštanski broj sa završetkom `CL` ili 13-cifreni kod za praćenje u polje iznad (ili ga proverite na www.correos.cl/seguimiento-en-linea) da biste pratili španske statuse i predaju partnerskim poštama u inostranstvu.
+Correos de Chile je nacionalna poštanska služba Čilea koja obrađuje domaće pakete i poštanske internet narudžbine koje ulaze u Čile iz inostranstva. Nalepite u polje iznad broj koji vam je dala prodavnica: poštanski broj za praćenje sa završetkom `CL` ili 13-cifreni kod za praćenje za pošiljku koju je numerisao Correos de Chile, koji možete proveriti i na www.correos.cl/seguimiento-en-linea, ili broj pošte pošiljaoca za pošiljku poslatu u Čile, koju Peek prati kod te pošte. Peek svrstava španske redove koje poznaje pod engleske faze i može pratiti `CL` pošiljku dalje do pošte u inostranstvu.
 
 ## Broj za praćenje Correos de Chile: kako izgleda
 
@@ -26,10 +26,10 @@ Sistem praćenja Correos de Chile prikazuje korake od najnovijeg, velikim slovim
 
 | Šta piše Correos de Chile | Šta to znači za vas | Šta prikazuje Peek |
 | --- | --- | --- |
-| `ENVÍO ADMITIDO` | Correos de Chile je primio pošiljku. Za pošiljku iz inostranstva ovo je prvi red pre uvoza. | "Received by carrier" |
-| `ENVÍO EN PROCESO DE INTERNACIÓN AL PAÍS` | U postupku je uvoza u Čile: carina obrađuje pošiljku. | "At customs" |
-| `ENVÍO EN REPARTO` | Na dostavi. | "Out for delivery" |
-| `ENVÍO ENTREGADO` | Isporučeno. | "Delivered" |
+| `ENVÍO ADMITIDO` | Correos de Chile je primio pošiljku. Za pošiljku iz inostranstva ovo je prvi red pre uvoza. | „Received by carrier“ |
+| `ENVÍO EN PROCESO DE INTERNACIÓN AL PAÍS` | U postupku je uvoza u Čile: carina obrađuje pošiljku. | „At customs“ |
+| `ENVÍO EN REPARTO` | Na dostavi. | „Out for delivery“ |
+| `ENVÍO ENTREGADO` | Isporučeno. | „Delivered“ |
 
 Red koji ne poznaje Peek prikazuje kao `Actualización del envío` (ažuriranje pošiljke) bez izvornih reči Correos de Chile, jer takvi redovi mogu sadržati lične podatke o vama ili dostavi. Pogledajte sistem na www.correos.cl da biste ga pročitali u celosti.
 
@@ -39,7 +39,7 @@ Paket iz inostranstva, poput internet narudžbine, prolazi kroz carinu u Čileu.
 
 **IVA na internet narudžbine.** Od 25. oktobra 2025. internet kupovine iz inostranstva do 500 USD plaćaju PDV (IVA 19%) bez carinske dažbine. Ako je prodavnica ili platforma registrovana kod čileanske poreske uprave (SII), IVA se dodaje u cenu pri plaćanju. Ako nije, porez se naplaćuje pri uvozu — putem kurira ili, za poštanske pošiljke, preko Correos de Chile. Proverite specifikaciju cene pre plaćanja. Neka roba podleže drugim ili dodatnim porezima (polovna odeća, duvan, alkohol, nakit), a za deo je potrebna dozvola. Iznad 500 USD porez plaćate pri uvozu.
 
-**Carinske provere.** Kada paketi stignu u pogon Correos de Chile, carina može izabrati vaš za fizički pregled u skladištima Correos de Chile. Ako carina traži dokaz o kupovini, sertifikat ili dozvolu (`visto bueno`), Correos de Chile vas obaveštava šta treba da uradite i gde da pribavite dokument. Bez toga carina ne može pustiti paket. Ako su dospele dažbine ili IVA, Correos de Chile traži dokaz o plaćenom iznosu (račun ili fakturu); bez njega carina procenjuje robu po tržišnoj vrednosti. Kad carina oslobodi paket, Correos de Chile ga dostavlja.
+**Carinske provere.** Kada paketi stignu u pogon Correos de Chile, carina može izabrati vaš za fizički pregled u skladištima Correos de Chile. Ako carina traži dokaz o kupovini, sertifikat ili dozvolu (visto bueno), Correos de Chile vas obaveštava šta treba da uradite i gde da pribavite dokument. Bez toga carina ne može pustiti paket. Ako su dospele dažbine ili IVA, Correos de Chile traži dokaz o plaćenom iznosu (račun ili fakturu); bez njega carina procenjuje robu po tržišnoj vrednosti. Kad carina oslobodi paket, Correos de Chile ga dostavlja.
 
 **Dostava i preuzimanje.** Peek nije mogao da učita sopstvena pravila Correos de Chile o pokušajima dostave, preuzimanju ili roku čuvanja, pa ih ova stranica ne navodi.
 
@@ -51,11 +51,11 @@ Da li je vaš paket poslat iz Čilea sa brojem koji se završava na `CL`? Čim n
 
 ## Praćenje Correos de Chile se ne ažurira, paket je izgubljen ili vraćen
 
-**Još nema koraka.** Pošiljalac možda još nije predao paket. Zaveden pod Correos de Chile, paket prikazuje "Waiting for Correos de Chile" dok Peek nastavlja da proverava. Ako nakon nekoliko dana nema novosti, proverite broj sa pošiljaocem. Pogledajte [zašto praćenje prestaje da se ažurira](guide:tracking-not-updating) (na engleskom).
+**Još nema koraka.** Pošiljalac možda još nije predao paket. Zaveden pod Correos de Chile, paket prikazuje „Waiting for Correos de Chile“ dok Peek nastavlja da proverava. Ako nakon nekoliko dana nema novosti, proverite broj sa pošiljaocem. Pogledajte [zašto praćenje prestaje da se ažurira](guide:tracking-not-updating) (na engleskom).
 
-**Zastoj na carini.** Poslednji red je `ENVÍO EN PROCESO DE INTERNACIÓN AL PAÍS` i Peek označava paket kao "Customs clearance". Carina možda pregleda paket ili čeka dokument ili uplatu: Correos de Chile vas obaveštava kada je nešto potrebno.
+**Zastoj na carini.** Poslednji red je `ENVÍO EN PROCESO DE INTERNACIÓN AL PAÍS` i Peek označava paket kao „Customs clearance“. Carina možda pregleda paket ili čeka dokument ili uplatu: Correos de Chile vas obaveštava kada je nešto potrebno.
 
-**Danima bez promena.** Kad pošiljka u statusu "Label created", "Received by carrier" ili "In transit" nema novi korak četiri dana, Peek je označava datumom tog koraka ("No tracking update since Mon 12 Oct") i dodaje link "Get help from Correos de Chile". Paketi često miruju tokom dugih letova ili vikendom. Posle tri nedelje bez novog koraka Peek prikazuje "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller."
+**Danima bez promena.** Kad pošiljka u statusu „Label created“, „Received by carrier“ ili „In transit“ nema novi korak četiri dana, Peek je označava datumom tog koraka („No tracking update since Mon 12 Oct“) i dodaje link „Get help from Correos de Chile“. Paketi često miruju tokom dugih letova ili vikendom. Posle tri nedelje bez novog koraka Peek prikazuje „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller.“
 
 **Isporučeno, ali ništa nije stiglo.** Pitajte komšije i lokalnu poštu, a zatim pošiljaoca. Više u [isporučeno, ali nije primljeno](guide:delivered-not-received) (na engleskom).
 
@@ -63,21 +63,21 @@ Da li je vaš paket poslat iz Čilea sa brojem koji se završava na `CL`? Čim n
 
 ## Korisnička služba i kontakt Correos de Chile
 
-Peek nije mogao da učita sajt Correos de Chile, pa ova stranica ne navodi broj telefona ni radno vreme: Peek daje samo kontakte pročitane sa zvaničnih stranica. Za poštanske pošiljke u carinskom postupku čileanska carina upućuje da proverite status na www.correos.cl ili pišete na `sac@correos.cl`.
+Peek nije mogao da učita sajt Correos de Chile, pa ova stranica ne navodi broj telefona ni radno vreme: Peek daje samo kontakte pročitane sa zvaničnih stranica. Za poštanske pošiljke u carinskom postupku čileanska carina upućuje da proverite status na www.correos.cl ili pišete na sac@correos.cl.
 
 Za internet porudžbinu prvo kontaktirajte prodavnicu koja je ugovorila dostavu.
 
 ## Praćenje paketa Correos de Chile pomoću Peeka
 
-[Peek](/) prepoznaje dva slova, devet cifara i `CL` kao Correos de Chile kad je kontrolna cifra ispravna i prikazuje "Detected carrier"; "Change" bira drugog prevoznika. S pogrešnom kontrolnom cifrom prikazuje "This number’s check digit doesn’t add up.": proverite imejl o slanju ili izaberite "Track it as typed".
+[Peek](/) prepoznaje dva slova, devet cifara i `CL` kao Correos de Chile kad je kontrolna cifra ispravna i prikazuje „Detected carrier“; „Change“ bira drugog prevoznika. S pogrešnom kontrolnom cifrom prikazuje „This number’s check digit doesn’t add up.“: proverite imejl o slanju ili izaberite „Track it as typed“.
 
-13-cifreni broj sam po sebi ne pripada isključivo Correos de Chile. Ipak ga nalepite: Peek prati preko 4.500 prevoznika. Ako ga dodate bez prevoznika, Peek prvo pita FAN Courier (uz Paquetexpress iz Meksika), zatim servise za praćenje ("Checking tracking services…") i, samo ako ga niko ne zna, druge 13-cifrene prevoznike poput Delhivery, Econt ili Ozon — ali nikad Correos de Chile. Pod Correos de Chile ga svrstava samo ako ga servis za praćenje navede kao jedinog prevoznika sa datiranim koracima. Zato, ako prodavnica kaže Correos de Chile, kliknite "Change" i izaberite ga pod "Fits this number" ili upotrebite "Change carrier" za već dodati paket. Broj druge pošte, kao onaj sa `CN`, ne pripada Correos de Chile: ako ga ručno izaberete, Peek kaže da "doesn’t issue numbers like this one".
+13-cifreni broj sam po sebi ne pripada isključivo Correos de Chile. Ipak ga nalepite: Peek prati preko 4.500 prevoznika. Ako ga dodate bez prevoznika, Peek prvo pita FAN Courier (uz Paquetexpress iz Meksika), zatim servise za praćenje („Checking tracking services…“) i, samo ako ga niko ne zna, druge 13-cifrene prevoznike poput Delhivery, Econt ili Ozon — ali nikad Correos de Chile. Pod Correos de Chile ga svrstava samo ako ga servis za praćenje navede kao jedinog prevoznika sa datiranim koracima. Zato, ako prodavnica kaže Correos de Chile, kliknite „Change“ i izaberite ga pod „Fits this number“ ili upotrebite „Change carrier“ za već dodati paket. Broj druge pošte, kao onaj sa `CN`, ne pripada Correos de Chile: ako ga ručno izaberete, Peek kaže da „doesn’t issue numbers like this one“.
 
-Zaveden pod Correos de Chile, paket prikazuje "Waiting for Correos de Chile" do prvog koraka. Peek potom čita sistem Correos de Chile i prikazuje poznate redove na španskom sa nazivom pošte pod svojim fazama ("Received by carrier", "At customs"). Izostavlja ime primaoca i ne daje očekivani datum dostave. Vremena Correos de Chile nemaju vremensku zonu: Peek ih čita po lokalnom satu navedene pošte ili okolnih koraka. Kad sistem Correos de Chile ne odgovori, Peek pita servise za praćenje (prvo 17TRACK) i prikazuje njihovu verziju.
+Zaveden pod Correos de Chile, paket prikazuje „Waiting for Correos de Chile“ do prvog koraka. Peek potom čita sistem Correos de Chile i prikazuje poznate redove na španskom sa nazivom pošte pod svojim fazama („Received by carrier“, „At customs“). Izostavlja ime primaoca i ne daje očekivani datum dostave. Vremena Correos de Chile nemaju vremensku zonu: Peek ih čita po lokalnom satu navedene pošte ili okolnih koraka. Kad sistem Correos de Chile ne odgovori, Peek pita servise za praćenje (prvo 17TRACK) i prikazuje njihovu verziju.
 
 Kad pratite `CL` broj izvan Čilea, Peek istim brojem pita i poštu vaše zemlje: USPS iz SAD, Royal Mail iz UK (Parcelforce za brojeve na E), An Post iz Irske, Canada Post, Australia Post, NZ Post, [DHL](carrier:dhl) iz Nemačke, [La Poste](carrier:la-poste) iz Francuske, [Correos](carrier:correos-spain) iz Španije, [Correios](carrier:correios-br) iz Brazila i pošte ostalih zemalja EU osim Holandije, kao i Argentine i Perua. Prelazi na tu poštu čim pokaže korak najmanje jednako nov kao najnoviji kod Correos de Chile, uz čuvanje prethodne istorije. Iz Meksika ili Kine ne pita drugu poštu. Obrnuto, Peek ne može tražiti paket poslat u Čile pod brojem druge pošte na sistemu Correos de Chile, već ga prati kod pošte koja ga je numerisala.
 
-Dok je paket otvoren u Peeku, ili na dan dostave sa uključenim obaveštenjima, Peek proverava Correos de Chile do svakih 10 minuta, a na dan dostave od 6 ujutro po satu poslednjeg skeniranja (čileansko vreme u Čileu) do svake 2 minute (ili svakih 5 kada provera otvara pregledač), dok sopstveni sistem odgovara. Posle dva dana bez novosti (12 sati u "Label created" ili "Received by carrier") proverava svakog sata, a posle sedam dana bez novosti na "Label created" ili bez koraka svakih 6 sati. Obaveštenja: "Every scan", "Important steps" ili "Delivery only". Peek ne može kontaktirati Correos de Chile, vašu poštu niti prodavnicu umesto vas.
+Dok je paket otvoren u Peeku, ili na dan dostave sa uključenim obaveštenjima, Peek proverava Correos de Chile do svakih 10 minuta, a na dan dostave od 6 ujutro po satu poslednjeg skeniranja (čileansko vreme u Čileu) do svake 2 minute (ili svakih 5 kada provera otvara pregledač), dok sopstveni sistem odgovara. Posle dva dana bez novosti (12 sati u „Label created“ ili „Received by carrier“) proverava svakog sata, a posle sedam dana bez novosti na „Label created“ ili bez koraka svakih 6 sati. Obaveštenja: „Every scan“, „Important steps“ ili „Delivery only“. Peek ne može kontaktirati Correos de Chile, vašu poštu niti prodavnicu umesto vas.
 
 ## Pitanja o praćenju Correos de Chile
 
@@ -85,7 +85,7 @@ Dok je paket otvoren u Peeku, ili na dan dostave sa uključenim obaveštenjima, 
 
 Nalepite broj u Peek iznad. Redovi ostaju na španskom, ali Peek svaki prepoznati sken svrstava u jasne faze, a gornja tabela objašnjava svaku formulaciju.
 
-### Šta znači «ENVÍO EN PROCESO DE INTERNACIÓN AL PAÍS» kod Correos de Chile?
+### Šta znači „ENVÍO EN PROCESO DE INTERNACIÓN AL PAÍS“ kod Correos de Chile?
 
 Paket je u postupku uvoza u Čile i obrađuje ga carina. Correos de Chile će vas kontaktirati ako carina traži dokument ili uplatu.
 
@@ -99,7 +99,7 @@ Paket može biti na carini, na letu ili još nije predat pošti. Ako je poslat u
 
 ### Kako izgleda broj Correos de Chile i kome se obratiti za carinu?
 
-Dva slova, devet cifara i `CL` (npr. `RR482910372CL`, izmišljen), ili 13 cifara (za 13 cifara izaberite Correos de Chile preko "Change"). Za poštanske pakete u carinskom postupku u Čileu, Servicio Nacional de Aduanas upućuje na www.correos.cl ili imejl `sac@correos.cl`.
+Dva slova, devet cifara i `CL` (npr. `RR482910372CL`, izmišljen), ili 13 cifara (za 13 cifara izaberite Correos de Chile preko „Change“). Za poštanske pakete u carinskom postupku u Čileu, Servicio Nacional de Aduanas upućuje na www.correos.cl ili imejl sac@correos.cl.
 
 :::sources
 - [Servicio Nacional de Aduanas: Compras online](https://www.aduana.cl/aduana/site/edic/base/port/comercio_electronico.html) – postal orders through Correos de Chile, couriers for others

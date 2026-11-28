@@ -1547,6 +1547,24 @@ describe('persistent tracking routing', () => {
       expect(next.dpd).toEqual({ count: 7, retry_at: '2026-09-10T18:00:00.000Z' });
       expect(next[fourteen.find((carrier) => carrier !== 'dpd')!]).toEqual({ count: 7, retry_at: '2026-09-11T12:00:00.000Z', asked_as: expect.any(String) });
     });
+    it('asks a carrier that does not know the number of a parcel added today again two hours on, the first time', async () => {
+      const check = async (at: string, added: string, saved?: JsonObject) => {
+        const run = setup(new Date(at));
+        const result = await run.router.fetch(parcel({ tracking_number: swissDpd, created_at: added,
+          ...(saved ? { carrier_data: { routing: saved } } : {}) }), false);
+        return { asked: asked(run.recognize), routing: result.result.routing as JsonObject };
+      };
+      // Added a quarter of an hour before the check, perhaps before the carrier had its data.
+      const first = await check('2026-09-10T08:20:00Z', '2026-09-10T08:05:00Z');
+      expect(first.routing.candidate_probes).toMatchObject(missedProbes(1, '2026-09-10T10:20:00.000Z'));
+      // Asked again two hours on, a carrier that still does not know it waits a day.
+      const second = await check('2026-09-10T10:25:00Z', '2026-09-10T08:05:00Z', first.routing);
+      expect(second.asked).toEqual(expect.arrayContaining(fourteen.filter((carrier) => carrier !== 'dpd')));
+      expect(second.routing.candidate_probes).toMatchObject(missedProbes(2, '2026-09-11T10:25:00.000Z'));
+      // On a parcel added more than a day ago, the first miss waits a day too.
+      const older = await check('2026-09-10T08:20:00Z', '2026-09-09T08:05:00Z');
+      expect(older.routing.candidate_probes).toMatchObject(missedProbes(1, '2026-09-11T08:20:00.000Z'));
+    });
     it('asks again by the last hourly check of a number nobody has seen', async () => {
       // Added at 08:20 and checked hourly until 14:20; the carrier ranked first is among those asked.
       const added = '2026-09-10T08:20:00Z';
@@ -1559,21 +1577,24 @@ describe('persistent tracking routing', () => {
         saved = result.result.routing as JsonObject;
         return { asked: asked(run.recognize), probes: saved.candidate_probes };
       };
-      // DPD, which the number points to, keeps the hourly turns; the others that do not know it wait a day.
+      // DPD, which the number points to, keeps the hourly turns; the others that do not know it wait two hours, as the
+      // parcel was added today, then a day.
       const dpd = (probes: unknown) => (probes as JsonObject).dpd;
       expect(await check('2026-09-10T08:20:00Z')).toEqual({ asked: fourteen,
-        probes: { ...missedProbes(1, '2026-09-11T08:20:00.000Z'), dpd: { count: 1, retry_at: '2026-09-10T09:20:00.000Z' } } });
+        probes: { ...missedProbes(1, '2026-09-10T10:20:00.000Z'), dpd: { count: 1, retry_at: '2026-09-10T09:20:00.000Z' } } });
       expect(dpd((await check('2026-09-10T09:30:00Z')).probes)).toEqual({ count: 2, retry_at: '2026-09-10T11:30:00.000Z' });
       const before = saved;
       // The third miss would wait 4 hours, past the hourly checks: it waits until their last hour.
-      expect(dpd((await check('2026-09-10T11:40:00Z')).probes)).toEqual({ count: 3, retry_at: '2026-09-10T13:20:00.000Z' });
+      const third = await check('2026-09-10T11:40:00Z');
+      expect(dpd(third.probes)).toEqual({ count: 3, retry_at: '2026-09-10T13:20:00.000Z' });
+      expect(third.probes).toMatchObject(missedProbes(2, '2026-09-11T11:40:00.000Z'));
       // In between, only carriers ranked lower are asked.
       expect((await check('2026-09-10T12:40:00Z')).asked.filter((carrier) => fourteen.includes(carrier))).toEqual([]);
       const last = await check('2026-09-10T13:40:00Z');
       expect(last.asked.filter((carrier) => fourteen.includes(carrier))).toEqual(['dpd']);
       // Asked in that last hour, the next wait is the usual one.
       expect(dpd(last.probes)).toEqual({ count: 4, retry_at: '2026-09-10T19:40:00.000Z' });
-      expect(last.probes).toMatchObject(missedProbes(1, '2026-09-11T08:20:00.000Z'));
+      expect(last.probes).toMatchObject(missedProbes(2, '2026-09-11T11:40:00.000Z'));
       // A number someone has seen, or one past its hourly checks, keeps the usual waits.
       saved = before;
       expect(dpd((await check('2026-09-10T11:40:00Z', null)).probes)).toEqual({ count: 3, retry_at: '2026-09-10T15:40:00.000Z' });

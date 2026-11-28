@@ -951,7 +951,9 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   failures, so they decide neither the parcel's status, nor the filed carrier's retry, nor
   the health evidence of the check. A carrier that answers it does not know the number is
   asked again for that parcel a day later, or sooner once the number, the parcel's carrier,
-  the carrier a provider named or the lookup country changes (`asked_as`). This holds unless
+  the carrier a provider named or the lookup country changes (`asked_as`). Its first such
+  answer on a parcel added less than a day ago waits two hours instead: a parcel is often
+  added before its carrier has the data. This holds unless
   the number points to that carrier (above), or it is the only carrier recognition asks.
   For those carriers, and for one that knew the number or gave no answer, the next check
   waits 1, 2, 4, then 6 hours, since a parcel appears once it is handed over. After six

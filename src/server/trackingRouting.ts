@@ -836,6 +836,12 @@ export function detectionExpects(number: string, carrier: string, countryHint?: 
 
 /** How long after a parcel is added recognition asks the carriers its number could belong to. */
 export const CANDIDATE_PROBE_WINDOW = 30 * DAY;
+
+/**
+ * How long a carrier that said it does not know the number of a parcel added less than a day ago waits, the first
+ * time: the carrier often gets its data an hour or two after the parcel is added. Later misses wait a day.
+ */
+const FIRST_MISS_WAIT = 2 * HOUR;
 /** Every recognition answer a sync waits for; later answers are ignored. */
 const RECOGNITION_BUDGET_MS = 15_000;
 /** A recognition answer in a check's trail, from the least to the most a carrier said. */
@@ -1943,13 +1949,15 @@ export class TrackingRouter {
       // first scan, since a parcel shows up once it is handed over; so is a carrier that knew the number or gave no
       // answer, daily after six misses, and by the last hourly check of a number nobody has seen. Any other carrier
       // that said it does not know the number is asked again a day on, or once the number or what points to a carrier
-      // changes: asked at every check, such carriers almost never knew the number later. These answers decide neither
-      // the parcel's status nor the filed carrier's retry.
+      // changes: asked at every check, such carriers almost never knew the number later. Its first miss on a parcel
+      // added less than a day ago waits two hours: such a parcel is often added before its carrier has its data. These
+      // answers decide neither the parcel's status nor the filed carrier's retry.
       const guessed = guessedCarrier(number);
       const stillAsked = new Set([...(recognize ? recognitionCandidates(number, recognitionOrder(excluded)) : []),
         ...(this.options.recognizeBrowser ? recognitionCandidates(number, { ...recognitionOrder(excluded), phase: 'browser' }) : [])]
         .map(({ carrier }) => carrier));
       const pointsTo = (carrier: string) => carrier === guessed || (stillAsked.size === 1 && stillAsked.has(carrier));
+      const addedToday = typeof parcel.created_at === 'string' && now().getTime() - millis(parcel.created_at) < DAY;
       const counted = new Set<string>();
       for (const carrier of new Set(outcomes.map((outcome) => outcome.carrier))) {
         // Our own pacing refused the read before any request: the carrier was not asked, so no miss counts.
@@ -1961,8 +1969,9 @@ export class TrackingRouter {
         const known = outcomes.some((outcome) => outcome.carrier === carrier && settleRecognition([outcome], now()).carrier === carrier);
         const answered = outcomes.some((outcome) => outcome.carrier === carrier && outcome.status !== 'failed');
         const missed = answered && !known && !pointsTo(carrier);
+        const missWait = addedToday && !state.candidate_probes?.[carrier]?.asked_as ? FIRST_MISS_WAIT : DAY;
         state.candidate_probes = { ...state.candidate_probes, [carrier]: {
-          count, retry_at: iso(missed ? now().getTime() + DAY : beforeHourlyEnd(now().getTime() + Math.min(longest, HOUR * 2 ** (count - 1)))),
+          count, retry_at: iso(missed ? now().getTime() + missWait : beforeHourlyEnd(now().getTime() + Math.min(longest, HOUR * 2 ** (count - 1)))),
           ...(known ? { known: true as const } : {}),
           ...(answered ? {} : { unanswered: true as const }),
           ...(missed ? { asked_as: askedAs } : {}),

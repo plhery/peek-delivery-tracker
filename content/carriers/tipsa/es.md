@@ -112,7 +112,7 @@ Depende del servicio contratado por la tienda: TIPSA ofrece entrega en 24 horas 
 
 Tras un `Ausente`, TIPSA intenta una segunda entrega el siguiente día hábil (2 intentos en Estándar, 3 en Premium) y puedes concertarla con la agencia de destino que aparece en el seguimiento. En delegación el paquete espera 15 días desde la salida (lleva DNI), y en puntos Pickup o lockers compartidos con SEUR espera 7 días.
 
-### ¿Cuál es el teléfono gratuito de TIPSA y a quién reclamo?
+### ¿Cuál es el teléfono de TIPSA y a quién reclamo?
 
 Las preguntas frecuentes de TIPSA dan el teléfono `900 10 10 47` (la página de contacto añade `902 10 10 47`; TIPSA no indica horario ni coste de la llamada), el correo `info@tip-sa.com` y el [formulario de contacto](https://www.tip-sa.com/es/contacto). Para pérdida, daño o cambio de dirección, contacta siempre con la tienda remitente.
 

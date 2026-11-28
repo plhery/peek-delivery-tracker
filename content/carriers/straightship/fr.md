@@ -6,7 +6,7 @@ published: 2026-11-18
 updated: 2026-11-27
 ---
 
-Straightship (Straightship Solutions Limited), établi à Burnaby en Colombie-Britannique (**Canada**), achemine les commandes d’Asie vers l’Amérique du Nord et assure la livraison au Canada avec sa propre flotte de chauffeurs — notamment pour SHEIN. Si votre commande porte un numéro commençant par `STRTD`, `STRCA` ou `STSH` (transmis dans l’e-mail d’expédition de la boutique), collez-le dans le champ ci-dessus ou dans l’encadré « Track Your Shipment » de [straightship.com](https://www.straightship.com/new/) pour suivre chaque étape.
+Straightship (Straightship Solutions Limited), établi à Burnaby en Colombie-Britannique (**Canada**), achemine les commandes d’Asie vers l’Amérique du Nord et assure la livraison au Canada avec sa propre flotte de chauffeurs — notamment pour SHEIN. Si votre commande porte un numéro commençant par `STRTD` ou `STRCA` (transmis dans l’e-mail d’expédition de la boutique), elle est prise en charge par Straightship, et un numéro `STSH` peut aussi lui appartenir : collez-le dans le champ ci-dessus ou dans l’encadré « Track Your Shipment » de [straightship.com](https://www.straightship.com/new/) pour suivre chaque étape.
 
 ## Numéro de suivi Straightship : à quoi il ressemble
 
@@ -103,7 +103,7 @@ Tant que vous gardez le colis ouvert, ou le jour de sa livraison avec les notifi
 
 ### Straightship est-il un transporteur fiable au Canada ?
 
-Oui. Straightship Solutions Limited est un transporteur établi à Burnaby, en Colombie-Britannique (Canada), qui exploite plus de 85 centres de livraison couvrant plus de 95 % de la population canadienne et cite notamment SHEIN, Postes Canada, FedEx, COSCO et [YTO](carrier:yto) parmi ses partenaires.
+Oui. Straightship Solutions Limited est un transporteur établi à Burnaby, en Colombie-Britannique (Canada), qui annonce plus de 85 centres de livraison couvrant plus de 95 % de la population canadienne ; son site cite notamment SHEIN, Postes Canada, FedEx, COSCO et [YTO](carrier:yto) parmi ses partenaires.
 
 ### Que signifie « Package will be delivered before 9:00pm » ?
 
@@ -115,7 +115,7 @@ Le champ récapitulatif « Package Status » prend souvent du retard et peut aff
 
 ### Quel est le délai de livraison Straightship et y a-t-il des frais de douane ?
 
-Straightship ne publie pas de délai fixe depuis l’Asie (il annonce 6 à 10 jours pour son service États-Unis–Canada). Côté douane canadienne (ASFC), les commandes SHEIN vers le Canada sont expédiées tous droits acquittés (`DDP`), tandis que pour d’autres marchands hors États-Unis/Mexique, droits et taxes s’appliquent au-delà de 20 $ CA.
+Straightship ne publie pas de délai fixe depuis l’Asie (il annonce 6 à 10 jours pour son service États-Unis–Canada). Côté douane canadienne (ASFC), les commandes SHEIN vers le Canada sont expédiées tous droits acquittés (`DDP`), tandis que pour un bien d’un autre marchand expédié d’un autre pays que les États-Unis ou le Mexique, droits et taxes s’appliquent au-delà de 20 $ CA.
 
 ### Comment contacter Straightship Canada après une tentative manquée ou un colis introuvable ?
 

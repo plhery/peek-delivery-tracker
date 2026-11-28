@@ -6,7 +6,7 @@ published: 2026-11-01
 updated: 2026-11-27
 ---
 
-Raben Group is a family-owned European logistics carrier founded in 1931 in the Netherlands and headquartered near Poznań, Poland, moving pallets and groupage (part loads) across 17 European countries — including bulky online shop orders. Paste your shipment number or myRaben link into the box above, or enter it in the "Shipment tracking" box on raben-group.com, to check every depot scan, expected delivery day and unloading or damage rules.
+Raben Group is a family-owned European logistics carrier founded in 1931 in the Netherlands and headquartered near Poznań, Poland, moving pallets and groupage (part loads) across 17 European countries — including bulky online shop orders. Paste your shipment number or myRaben link into the box above, or enter it in the "Shipment tracking" box on raben-group.com, to follow each step and the planned delivery day; the sections below explain unloading and what to do about damage.
 
 ## Raben shipment number: what it looks like and where to find it
 
@@ -94,7 +94,7 @@ When you have the shipment open in Peek, or on its delivery day with notificatio
 
 ### How do I track a Raben shipment?
 
-Paste your shipment number (typically 15 digits starting with `27`) or a `myraben.com` / `oftc.myraben.com` link in the box above, or enter the number in the "Shipment tracking" box on raben-group.com and click "Search". If you do not have the number, ask the shop or business that booked the transport.
+Paste your shipment number or a `myraben.com` / `oftc.myraben.com` link in the box above, or enter the number in the "Shipment tracking" box on raben-group.com and click "Search". If you do not have the number, ask the shop or business that booked the transport.
 
 ### What is Raben Group?
 

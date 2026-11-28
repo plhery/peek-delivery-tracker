@@ -666,7 +666,18 @@ describe('rows stored with a place the source now names with a part more or less
       .toEqual([['unknown:town-state', 'unknown:town']]);
   });
 
-  it('needs the same source, instant, wording and stage, codes that agree, and a place whose parts it keeps', () => {
+  it('lets a release that reads the place in the words and their stage anew take the row over', () => {
+    // A transit scan stored without a place; a release reads the bracketed place and maps the words to an acceptance.
+    const words = '[Example Town XYZ] Consignment received at transit point';
+    const placeless = { provider_event_id: 'jetspeed:none', occurred_at: '2026-11-20T02:15:00+00:00', stage: 'in_transit',
+      description: words, location: '' };
+    const placed = { ...placeless, provider_event_id: 'jetspeed:town', stage: 'accepted', location: 'Example Town XYZ' };
+    expect(pairs(requalifiedPlaces([placed], [placeless]))).toEqual([['jetspeed:town', 'jetspeed:none']]);
+    // Still one to one: the answer listing the placeless scan too keeps both rows.
+    expect(requalifiedPlaces([placed, { ...placeless }], [placeless]).size).toBe(0);
+  });
+
+  it('needs the same source, instant and wording, codes that agree, and a place whose parts it keeps', () => {
     for (const row of [
       { ...saved, provider_event_id: 'dhl:town' },
       { ...saved, provider_event_id: 'app:pending' },
@@ -675,8 +686,6 @@ describe('rows stored with a place the source now names with a part more or less
       { ...saved, occurred_at: '2026-10-21T07:41:01+00:00' },
       { ...saved, description: 'Object posted' },
       { ...saved, description: '' },
-      // A stage the carrier changed is another reading of the scan, which the place alone cannot tell.
-      { ...saved, stage: 'out_for_delivery' },
       { ...saved, provider_code: 'MD1' },
       { ...saved, observed_without_provider_timestamp: true },
       // As many parts as the scan: another place, not a qualifier ("Other Town, EX" beside "Example Town, EX").

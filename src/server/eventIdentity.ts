@@ -547,15 +547,16 @@ function requalified(left: JsonObject, right: JsonObject): boolean {
  * more or less: a release that adds a qualifier to the carrier's place ("São Paulo, SP" for
  * "São Paulo"), or a source that names the country in one answer and no place in the next, would
  * otherwise store the scan beside its row, the place being part of the identity. The same source
- * (and universal provider), instant, wording and stage, codes that agree when both carry one, never an observation, a scan
- * whose own identity is not stored and a row no event of the batch carries, matched one to one.
+ * (and universal provider), instant and wording, codes that agree when both carry one, never an observation, a scan
+ * whose own identity is not stored and a row no event of the batch carries, matched one to one. The stage may differ:
+ * a release that reads a place in the words may read their stage anew too (JETSPEED's "[Guangzhou CHN] …", an
+ * acceptance stored as a transit scan), and the row takes the scan's stage.
  */
 export function requalifiedPlaces(
   events: readonly JsonObject[],
   stored: readonly JsonObject[],
 ): Map<string, string> {
-  return restatedRows(events, stored, (scan, row) => sameSource(scan, row)
-    && instantOf(row) === instantOf(scan) && stageOf(row) === stageOf(scan)
+  return restatedRows(events, stored, (scan, row) => sameSource(scan, row) && instantOf(row) === instantOf(scan)
     && wordingOf(row) !== '' && wordingOf(row) === wordingOf(scan) && codesAgree(scan, row) && requalified(scan, row));
 }
 

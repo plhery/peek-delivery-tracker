@@ -19578,6 +19578,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0091cd"
     },
     {
+      "id": "evri",
+      "catalog": "evri-uk",
+      "slug": "evri-otslezhivanie",
+      "title": "Отслеживание Evri: статусы, ParcelShop и доставка",
+      "name": "Evri",
+      "color": "#00014d"
+    },
+    {
       "id": "chronopost",
       "catalog": "chronopost",
       "slug": "chronopost-otslezhivanie",
@@ -22230,6 +22238,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef3026"
     },
     {
+      "id": "evri",
+      "catalog": "evri-uk",
+      "slug": "evri-pakket-volgen",
+      "title": "Evri tracking: statussen, ParcelShops en gemiste bezorging",
+      "name": "Evri",
+      "color": "#00014d"
+    },
+    {
       "id": "poste-italiane",
       "catalog": "poste-italiane",
       "slug": "poste-italiane-pakket-volgen",
@@ -22276,6 +22292,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "bpost pakje volgen: barcode, statussen en Afhaalpunt",
       "name": "bpost",
       "color": "#ef2637"
+    },
+    {
+      "id": "postnord",
+      "catalog": "postnord",
+      "slug": "postnord-pakket-volgen",
+      "title": "PostNord tracking: nummers, statussen en afhaaltijden",
+      "name": "PostNord",
+      "color": "#00a0d6"
     },
     {
       "id": "dhl-ecommerce-nl",
@@ -22832,6 +22856,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0063a9"
     },
     {
+      "id": "js-express",
+      "catalog": "js-express",
+      "slug": "js-express-sledovani-zasilek",
+      "title": "JS Express sledování zásilek: čísla JSE…YQ a stavy",
+      "name": "JS Express",
+      "color": "#fe9b00"
+    },
+    {
       "id": "gzyl",
       "catalog": "gzyl",
       "slug": "gzyl-sledovani-zasilek",
@@ -22940,6 +22972,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "hu": [
     {
+      "id": "evri",
+      "catalog": "evri-uk",
+      "slug": "evri-csomagkovetes",
+      "title": "Evri csomagkövetés: státuszok, ParcelShopok, kézbesítés",
+      "name": "Evri",
+      "color": "#00014d"
+    },
+    {
       "id": "poste-italiane",
       "catalog": "poste-italiane",
       "slug": "poste-italiane-csomagkovetes",
@@ -23002,6 +23042,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Meiteshun (MTSCN) csomagkövetés: AMTS szám és státuszok",
       "name": "Meiteshun Logistics",
       "color": "#f89f3b"
+    },
+    {
+      "id": "js-express",
+      "catalog": "js-express",
+      "slug": "js-express-csomagkovetes",
+      "title": "JS Express csomagkövetés: JSE…YQ számok, státuszok",
+      "name": "JS Express",
+      "color": "#fe9b00"
     },
     {
       "id": "gzyl",
@@ -23814,6 +23862,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DPD Švajcarska praćenje pošiljke: statusi, dostava, kontakt",
       "name": "DPD Switzerland",
       "color": "#dc0032"
+    },
+    {
+      "id": "evri",
+      "catalog": "evri-uk",
+      "slug": "evri-pracenje-posiljke",
+      "title": "Evri praćenje paketa: statusi, ParcelShop i dostava",
+      "name": "Evri",
+      "color": "#00014d"
     },
     {
       "id": "posta-srbije",

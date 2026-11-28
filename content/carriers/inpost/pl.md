@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Aby sprawdzić, gdzie jest paczka InPost (InPost sp. z o.o. z Krakowa), wklej 24-cyfrowy numer przesyłki w pole powyżej albo wpisz go na inpost.pl lub w aplikacji InPost Mobile. Numer przesyłki dostajesz od sklepu lub nadawcy — kod odbioru służy wyłącznie do otwarcia skrytki w Paczkomacie, a 9-cyfrowy kod nadania jest dla sprzedającego. W razie problemu z paczką zadzwoń na infolinię `+48 722 444 000` / `+48 746 600 000` albo napisz przez czat w aplikacji InPost Mobile.
+Aby sprawdzić, gdzie jest paczka InPost (InPost sp. z o.o. z Krakowa), wklej 24-cyfrowy numer przesyłki w pole powyżej albo wpisz go na inpost.pl lub w aplikacji InPost Mobile. Numer przesyłki dostajesz od sklepu lub nadawcy — kod odbioru służy wyłącznie do otwarcia skrytki w Paczkomacie, a kod nadania jest dla sprzedającego. W razie problemu z paczką zadzwoń na infolinię `+48 722 444 000` / `+48 746 600 000` albo napisz przez czat w aplikacji InPost Mobile.
 
 ## Numer przesyłki InPost: gdzie jest i jak wygląda
 
@@ -79,7 +79,7 @@ Peek sprawdza śledzenie nawet co 10 minut, a gdy paczka jest w doręczeniu, naw
 
 ### Gdzie jest moja paczka InPost i jaki numer wpisać?
 
-Wklej 24-cyfrowy numer przesyłki z wiadomości od nadawcy w pole powyżej albo na inpost.pl (w aplikacji InPost Mobile paczka pojawia się przy twoim koncie). Gdy przesyłka czeka w Paczkomacie, kodu odbioru szukaj w aplikacji InPost Mobile.
+Wklej 24-cyfrowy numer przesyłki z wiadomości od nadawcy w pole powyżej albo na inpost.pl (w aplikacji InPost Mobile paczka pojawia się przy twoim koncie, gdy nadawca podał numer telefonu z tego konta). Gdy przesyłka czeka w Paczkomacie, kodu odbioru szukaj w aplikacji InPost Mobile.
 
 ### Czy paczkę InPost można śledzić po numerze telefonu?
 

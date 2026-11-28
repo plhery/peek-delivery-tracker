@@ -6,7 +6,7 @@ published: 2026-11-18
 updated: 2026-11-27
 ---
 
-Per tracciare un pacco Xinghe Freight (星和货运, 广州星和货运代理有限公司, spedizioniere di Canton fondato nel 2014), incolla il codice da 16 caratteri `GZXH` + 10 cifre + `YQ` nel riquadro qui sopra oppure cercalo sul sito cinese xinghe-express.cn. Il tracciamento di Xinghe usa la piattaforma di [GZYL](carrier:gzyl), dove l'intera tabella di marcia — fino a `Delivered` — può essere scritta in anticipo prima che qualcuno scansioni davvero il pacco: se un sito mostra `Delivered` ma non hai ricevuto nulla, chiedi subito al venditore il nome e il numero del corriere locale.
+Per tracciare un pacco Xinghe Freight (星和货运, 广州星和货运代理有限公司, spedizioniere di Canton che dice di essere stato fondato nel 2014), incolla il codice da 16 caratteri `GZXH` + 10 cifre + `YQ` nel riquadro qui sopra oppure cercalo sul sito cinese xinghe-express.cn. Il tracciamento di Xinghe usa la piattaforma di [GZYL](carrier:gzyl), dove l'intera tabella di marcia — fino a `Delivered` — può essere scritta in anticipo prima che qualcuno scansioni davvero il pacco: se un sito mostra `Delivered` ma non hai ricevuto nulla, chiedi subito al venditore il nome e il numero del corriere locale.
 
 ## Numero di tracciamento Xinghe Freight: com'è fatto
 
@@ -97,7 +97,7 @@ Eccetto [La Posta Svizzera](carrier:swiss-post) in Svizzera e nel Liechtenstein,
 
 ### Che cos'è Xinghe Freight (星和货运) e com'è fatto il codice GZXH?
 
-È 广州星和货运代理有限公司 (Guangzhou Xinghe Freight Forwarding), uno spedizioniere di Canton (Guangzhou) fondato nel 2014 attivo nel trasporto marittimo, aereo e terrestre e nelle pratiche doganali. I codici riconosciuti da Peek hanno 16 caratteri: `GZXH`, dieci cifre e `YQ`.
+È 广州星和货运代理有限公司 (Guangzhou Xinghe Freight Forwarding), uno spedizioniere di Canton (Guangzhou) che sul proprio sito dichiara di essere stato fondato nel 2014 e di occuparsi di trasporto marittimo, aereo e terrestre e di pratiche doganali. I codici riconosciuti da Peek hanno 16 caratteri: `GZXH`, dieci cifre e `YQ`.
 
 ### Perché il mio pacco Xinghe Freight mostra il tracking di GZYL?
 
@@ -113,7 +113,7 @@ Né il tracking né xinghe-express.cn nominano il corriere italiano (solo in Svi
 
 ### Perché Peek non mostra ancora tappe per il mio codice GZXH e chi contatto?
 
-Il sistema potrebbe non avere ancora ricevuto l'ordine («In attesa di Xinghe Freight») oppure contenere solo tappe scritte in anticipo tenute da parte sotto «Mostrali». Contatta prima il venditore o il marketplace: il telefono (`19924483103`) e l'e-mail (`3975605292@qq.com`) su xinghe-express.cn sono solo in cinese per richieste commerciali.
+Il sistema potrebbe non avere ancora ricevuto l'ordine («In attesa di Xinghe Freight») oppure contenere solo tappe scritte in anticipo tenute da parte sotto «Mostrali». Contatta prima il venditore o il marketplace: xinghe-express.cn, solo in cinese, indica un telefono attivo 24 ore su 24 (`19924483103`) e un'e-mail per richieste commerciali e preventivi (`3975605292@qq.com`), ma nessuna assistenza per i destinatari.
 
 :::sources
 - [Xinghe Freight: 广州星和货运代理有限公司 (home page, in cinese)](http://xinghe-express.cn/) – ragione sociale, servizi di spedizione internazionale, riquadro di ricerca che interroga il sistema di GZYL, telefono ed e-mail

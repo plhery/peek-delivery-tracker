@@ -6,7 +6,7 @@ published: 2026-10-10
 updated: 2026-11-27
 ---
 
-Für die YunExpress Sendungsverfolgung (auch Yun Express) fügst du die Nummer mit `YT` und 16 Ziffern aus deiner Versand-E-Mail oder Bestellübersicht oben ins Feld ein – oder gibst sie auf [yuntrack.com](https://www.yuntrack.com/) ein (nur auf Englisch). Der Logistiker aus Shenzhen verschickt Bestellungen aus China für Händler etwa auf Amazon, Temu oder SHEIN und übergibt sie im Zielland an einen lokalen Paketdienst (oft DHL oder DPD in Deutschland): „Delivered to local carrier“ heißt daher Übergabe an den Zusteller, nicht Zustellung an dich.
+Für die YunExpress Sendungsverfolgung (auch Yun Express) fügst du die Nummer mit `YT` und 16 Ziffern aus deiner Versand-E-Mail oder Bestellübersicht oben ins Feld ein – oder gibst sie auf [yuntrack.com](https://www.yuntrack.com/) ein (nur auf Englisch). Der Logistiker aus Shenzhen verschickt Bestellungen aus China für Händler etwa auf Amazon, Temu oder SHEIN und übergibt sie im Zielland an einen lokalen Paketdienst (einen festen Partner nennt YunExpress nicht; in den Verläufen tauchen DHL und DPD auf): „Delivered to local carrier“ heißt daher Übergabe an den Zusteller, nicht Zustellung an dich.
 
 ## YunExpress Trackingnummer: YT und 16 Ziffern
 
@@ -88,7 +88,7 @@ Nennt YunExpress die Nummer des Paketdiensts vor Ort in einer Form, die Peek ken
 
 ### Was ist YunExpress und wie sieht die Trackingnummer aus?
 
-YunExpress (Shenzhen Qianhai YunExpress Logistics Co., Ltd., gegründet 2014 in Shenzhen) verschickt Online-Bestellungen aus China in über 220 Länder und Regionen. Die Sendungsnummer besteht aus `YT` und 16 Ziffern (`YT` mit nur 13 Ziffern gehört zu YTO Express).
+YunExpress (Shenzhen Qianhai YunExpress Logistics Co., Ltd., nach eigenen Angaben 2014 in Shenzhen gegründet) verschickt Online-Bestellungen aus China in über 220 Länder und Regionen. Die Sendungsnummer besteht aus `YT` und 16 Ziffern (`YT` mit nur 13 Ziffern gehört zu YTO Express).
 
 ### Wie lange dauert der Versand mit YunExpress nach Deutschland, Österreich und in die Schweiz?
 
@@ -104,7 +104,7 @@ Es heißt nur, dass YunExpress das Paket nach der Einfuhrverzollung an den Paket
 
 ### Wie erreiche ich YunExpress und wohin schicke ich eine Retoure?
 
-Für Empfänger in Deutschland, Österreich und der Schweiz nennt YunExpress weder Telefonnummer noch Rücksendeadresse (yunexpress.de gehört nicht zu YunExpress; YUN DE in Dreieich ist nur ein Großempfänger-Eintrag ohne Rückgabefunktion). Wende dich für Probleme, Erstattungen und Retouren immer zuerst an den Shop, und nach der Übergabe an den lokalen Zusteller.
+Für Empfänger in Deutschland, Österreich und der Schweiz nennt YunExpress weder Telefonnummer noch Rücksendeadresse (yunexpress.de gehört nicht zu YunExpress, und wofür die Deutsche Post den Großempfänger YUN DE in Dreieich führt, sagt sie nicht: Schick nichts dorthin, solange der Shop es dir nicht sagt). Wende dich für Probleme, Erstattungen und Retouren immer zuerst an den Shop, und nach der Übergabe an den lokalen Zusteller.
 
 :::sources
 - [YunExpress: Track & Trace Platform, Yuntrack](https://www.yuntrack.com/) – YT-Nummer, nur Englisch, Feedback

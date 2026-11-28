@@ -6,7 +6,7 @@ published: 2026-11-02
 updated: 2026-11-27
 ---
 
-Track an ePost Global (also known as PPX Track, RR Donnelley or RRD International Logistics) parcel by pasting its `EPG` number (`EPG` followed by 10 to 15 digits) in the box above or on epgtrack.com. ePost Global processes US outbound parcels at its US centres and hands them to a local postal or courier partner named on the `In transit to … tracking #: …` line — when Peek knows that partner, it follows the handover automatically.
+Track an ePost Global (also known as PPX Track, RR Donnelley or RRD International Logistics) parcel by pasting its `EPG` number (`EPG` followed by 10 to 15 digits) in the box above or on epgtrack.com. In the histories Peek's code holds, one of its US processing centres scans the parcel in, then ePost Global hands it to a local postal or courier partner named on the `In transit to … tracking #: …` line — when Peek knows that partner, it follows the handover automatically.
 
 ## ePost Global tracking number: what it looks like
 
@@ -115,7 +115,7 @@ PPX Track (and RR Donnelley / RRD International Logistics) are other names Peek'
 
 ### Who delivers ePost Global parcels in my country?
 
-The local partner named on ePost Global's handover line: in Peek's live histories, partners include OSM Worldwide, DAI Post (New Zealand), ECMS Express, GLS's European network, Royal Mail (UK), PostNL through Spring and La Poste (France), plus destination national posts for international postal numbers.
+The local partner named on ePost Global's handover line: in the histories Peek's code holds, partners include OSM Worldwide, DAI Post (New Zealand), ECMS Express, GLS's European network, Royal Mail (UK), PostNL through Spring and La Poste (France), plus destination national posts for international postal numbers.
 
 ### How do I contact ePost Global?
 

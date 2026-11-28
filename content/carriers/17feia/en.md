@@ -109,11 +109,11 @@ Import customs are finished and 17FEIA has dropped the parcel at the local deliv
 
 ### Who delivers 17FEIA parcels after customs?
 
-The local carrier 17FEIA hands the parcel to after import clearance. Peek's code recognises handovers to DPD Germany (`DPD-DE`), DHL in Germany (`DE-DHL`) and FedEx (`FEDEX-GROUND`) when 17FEIA's record includes that carrier and number; for other destinations, ask the seller or forwarder.
+The local carrier 17FEIA hands the parcel to after import clearance. Peek's code recognises handovers to DPD Germany (`DPD-DE`), DHL in Germany (`DE-DHL`) and FedEx (`FEDEX-GROUND`) when 17FEIA's record includes that carrier and number; otherwise, ask the seller or forwarder.
 
 ### Who do I contact if my 17FEIA parcel is stuck or missing?
 
-Contact the seller or forwarder that booked the shipment: they are 17FEIA's customer (and 17FEIA's website sits behind a bot check, so no direct 17FEIA phone or email is listed here). Once a local carrier has scanned the parcel, contact that carrier about delivery.
+Contact the seller or forwarder that booked the shipment: they are 17FEIA's customer (17FEIA's website answered Peek with a bot check, so this page lists no 17FEIA phone or email). Once a local carrier has scanned the parcel, contact that carrier about delivery.
 
 :::sources
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026

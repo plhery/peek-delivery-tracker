@@ -17,6 +17,7 @@ import com.plhery.peekdeliverytracker.ui.arrival.UnlockRequests
 import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 /** Whether a parcel link's sheet is up (`links.route != nil`): the first open's journey waits under it. */
 val LocalParcelLinkOpen = compositionLocalOf { false }
@@ -51,6 +52,11 @@ interface ParcelLinkSource {
      * Firebase's settings; without them, following a parcel here promises no notifications.
      */
     val pushAvailable: Boolean get() = true
+
+    /** Whether Peek AI's estimates show, "Peek AI" in Settings, which its card on the sheet switches too. */
+    val showPeekAi: StateFlow<Boolean>
+
+    fun setShowPeekAi(enabled: Boolean)
 
     /** `parcels.keep(_:)`: the parcel kept in the account. */
     suspend fun keep(link: ParcelLinkRoute): ParcelLinkClaim
@@ -99,6 +105,12 @@ class ContainerParcelLinks(private val container: AppContainer) : ParcelLinkSour
     override val authenticationConfigured get() = container.configuration.authenticationConfigured
     override val tracksWithoutAccount get() = container.parcels.tracksWithoutAccount
     override val pushAvailable get() = container.notifications.available
+
+    override val showPeekAi get() = container.parcels.showPeekAiFlow
+
+    override fun setShowPeekAi(enabled: Boolean) {
+        container.scope.launch { container.parcels.setShowPeekAi(enabled) }
+    }
 
     override suspend fun keep(link: ParcelLinkRoute) = container.parcels.keep(link)
 

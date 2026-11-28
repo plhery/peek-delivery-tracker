@@ -635,6 +635,8 @@ private fun LinkShared(
                         state.refresh(source)
                     }
                 }
+                // Peek AI's own estimate while it holds; a wrapped gift's link has none.
+                if (!wrapped) PeekAiPageCard(parcel, source.showPeekAi, source::setShowPeekAi, source::action, "linkPeekAi")
                 refreshFailure?.let { LinkNote(localizer.text(it.messageKey)) }
                 if (wrapped) {
                     // Shown early, the note and who it is from come before the delivery; only what is inside waits.

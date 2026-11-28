@@ -62,6 +62,9 @@ import com.plhery.peekdeliverytracker.core.api.ImportCharges
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackAnswer
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackReason
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestAsked
+import com.plhery.peekdeliverytracker.core.api.PeekAi
+import com.plhery.peekdeliverytracker.core.api.PeekAiSays
+import com.plhery.peekdeliverytracker.core.api.PeekAiWhy
 import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
 import com.plhery.peekdeliverytracker.core.api.PublicParcelResponse
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
@@ -111,6 +114,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.LinkFixtures
 import com.plhery.peekdeliverytracker.ui.deliveries.PAGE_CARRIER_LINK
 import com.plhery.peekdeliverytracker.ui.deliveries.PAGE_COPY_NUMBER
 import com.plhery.peekdeliverytracker.ui.deliveries.PAGE_NUMBER
+import com.plhery.peekdeliverytracker.ui.deliveries.PEEK_AI_CARD
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import com.plhery.peekdeliverytracker.ui.deliveries.assertAnnounced
 import com.plhery.peekdeliverytracker.ui.sheet.FullScreenCover
@@ -986,6 +990,23 @@ class ParcelLinkSheetTest {
         compose.onNodeWithTag(LINK_GIFT_NOTE).assert(hasText("trail running shoes", substring = true))
         assertTrue(exists(LINK_FOLLOW))
         assertTrue(shows("TESTPARCEL123789"))
+    }
+
+    /** As the iPhone's and the web's: Peek AI's estimate while it holds and Peek AI is on, but on a wrapped gift's link. */
+    @Test
+    fun aLinkShowsPeekAisEstimateWhileItIsOnButAWrappedGiftsDoesNot() {
+        val ai = PeekAi(says = PeekAiSays.ByDay, why = PeekAiWhy.NoOutForDelivery, sure = 0.8, day = "2026-10-31")
+        fun PublicParcelResponse.estimated() = copy(parcel = parcel.copy(peekAi = ai))
+        show(FakeParcelLinks().apply { read = { id, _ -> if (id == giftId) LinkFixtures.wrappedGift().estimated() else LinkFixtures.viewer().estimated() } })
+        open()
+        assertTrue(exists(PEEK_AI_CARD))
+        compose.runOnUiThread { links.setShowPeekAi(false) }
+        settle()
+        assertFalse(exists(PEEK_AI_CARD))
+        compose.runOnUiThread { links.setShowPeekAi(true) }
+        open(giftId)
+        check(exists(LINK_SURPRISE))
+        assertFalse(exists(PEEK_AI_CARD))
     }
 
     // Sign-in

@@ -932,7 +932,7 @@ number, which no carrier tracks.
   leave it out (`withEventPlaces(row, { peekAi: false })`), and an assistant's `list_parcels` and `get_parcel` give it
   as `peekAi` unless the account switched it off. Cards show one line under the carrier's
   date or in its place (beside the status on Next up), guests' lists too, and the parcel's
-  page a short card that opens what Peek AI expects, the days or hours shaded by their
+  page and a link's a short card that opens what Peek AI expects, the days or hours shaded by their
   chance, those gone by faded (hours on the parcel's clock), why (what parcels like it did,
   and how many: `parcels`) and how sure. Each estimate ends at
   `ends_at`, a moment on the parcel's clock, and the apps drop it then, even on a screen left

@@ -117,6 +117,7 @@ import java.time.Duration
 import java.time.Instant
 import java.time.temporal.ChronoUnit
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.StateFlow
 
 // Peek AI (core PeekAi.kt): Peek's own estimate, always named as Peek's, never the carrier's. The web's is
 // src/components/PeekAi.tsx.
@@ -316,12 +317,27 @@ private fun peekAiClock(watching: Boolean, next: (Instant) -> Instant?): Instant
  * open: switching Peek AI off there does not pull it away. It goes with the estimate, once its hour or day has passed.
  */
 @Composable
-internal fun PeekAiPageCard(state: DeliveriesState, parcel: Parcel, modifier: Modifier = Modifier) {
+internal fun PeekAiPageCard(state: DeliveriesState, parcel: Parcel, modifier: Modifier = Modifier) =
+    PeekAiPageCard(parcel, state.source.showPeekAi, state.source::setShowPeekAi, state.source::action, "peekAi", modifier)
+
+/**
+ * The same card on any page: Peek AI shown while `showPeekAi`, switched with `setShowPeekAi`, its opens and switches
+ * counted with `action`, its sheet the window's layer `sheetId`.
+ */
+@Composable
+internal fun PeekAiPageCard(
+    parcel: Parcel,
+    showPeekAi: StateFlow<Boolean>,
+    setShowPeekAi: (Boolean) -> Unit,
+    action: (String) -> Unit,
+    sheetId: String,
+    modifier: Modifier = Modifier,
+) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
     LocalUse24HourTime.current
     val identities = LocalCarrierIdentities.current ?: return
-    val shown by state.source.showPeekAi.collectAsState()
+    val shown by showPeekAi.collectAsState()
     var open by rememberSaveable(parcel.id) { mutableStateOf(false) }
     val now = peekAiMinute(parcel, shown || open)
     // The estimate while it holds, which the sheet keeps showing once Peek AI is switched off there.
@@ -355,7 +371,7 @@ internal fun PeekAiPageCard(state: DeliveriesState, parcel: Parcel, modifier: Mo
                         .button(interactionSource = null, indication = PlainPress, role = Role.Button, shape = CircleShape) {
                             kept = ai
                             open = true
-                            state.source.action("peek-ai-open")
+                            action("peek-ai-open")
                         }
                         .semantics { contentDescription = about },
                     contentAlignment = Alignment.Center,
@@ -375,15 +391,15 @@ internal fun PeekAiPageCard(state: DeliveriesState, parcel: Parcel, modifier: Mo
     Sheet(
         visible = open && current != null,
         onDismiss = { open = false },
-        paneTitle = localizer.text("peekAi.name"), id = "peekAi",
+        paneTitle = localizer.text("peekAi.name"), id = sheetId,
         detents = listOf(SheetDetent.Fitted, SheetDetent.Large),
         onClosed = { kept = null },
         lit = true,
     ) {
         if (sheet != null) {
             PeekAiSheet(parcel, sheet, carrier, shown, now, onShow = { on ->
-                state.source.setShowPeekAi(on)
-                state.source.action(if (on) "peek-ai-on" else "peek-ai-off")
+                setShowPeekAi(on)
+                action(if (on) "peek-ai-on" else "peek-ai-off")
             }, close = { open = false })
         }
     }

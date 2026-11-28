@@ -66,6 +66,12 @@ class FakeParcelLinks(
     }
     override val session = MutableStateFlow(session)
     override val parcels = MutableStateFlow<List<Parcel>>(emptyList())
+
+    override val showPeekAi = MutableStateFlow(true)
+
+    override fun setShowPeekAi(enabled: Boolean) {
+        showPeekAi.value = enabled
+    }
     private val job = SupervisorJob()
     override val scope: CoroutineScope get() = CoroutineScope(job + Dispatchers.Main.immediate)
     override val sheet = ParcelLinkSheetState()

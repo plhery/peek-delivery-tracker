@@ -36327,12 +36327,20 @@
       "timezone": "Europe/Stockholm",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "airmee"
       },
-      "linkRules": [],
+      "linkRules": [
+        {
+          "domains": [
+            "tracking.airmee.com"
+          ],
+          "fragment": "^/shipment-track/([A-Za-z0-9]{4,40})(?:\\?.*)?$"
+        }
+      ],
       "detectionRules": [],
       "trackingSearchUrl": "https://tracking.airmee.com/#/shipment-search",
-      "helpUrl": "https://www.airmee.com/en/support/"
+      "helpUrl": "https://www.airmee.com/en/support/",
+      "trackingUrlTemplate": "https://tracking.airmee.com/#/shipment-track/{trackingNumber}?startDate=2018-01-01&endDate=2099-12-31"
     },
     "akis-express": {
       "displayName": "AKIS Express",
@@ -42597,10 +42605,13 @@
       "timezone": "America/Toronto",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "e24metro-ca"
       },
       "linkRules": [],
-      "detectionRules": []
+      "detectionRules": [],
+      "trackingUrlTemplate": "https://tracking-ca.fareye.co/universal-search?encodedString=Qg8NNI2PxmSa3TWy2asu6u3MzTI0ThS54ELjfozEWy2Wvg%3D%3D&lang=en&param1={trackingNumber}",
+      "trackingSearchUrl": "https://tracking-ca.fareye.co/universal-search?encodedString=Qg8NNI2PxmSa3TWy2asu6u3MzTI0ThS54ELjfozEWy2Wvg%3D%3D&lang=en",
+      "helpUrl": "https://www.metroscg.com/contact-us/"
     },
     "expedico": {
       "displayName": "Expedico",
@@ -43968,7 +43979,7 @@
       "timezone": "Australia/Perth",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "bridge-intl"
       },
       "linkRules": [],
       "detectionRules": [],
@@ -76292,6 +76303,226 @@
       "detectionRules": [],
       "trackingSearchUrl": "https://www.kalittaair.com/utilities/track-cargo",
       "helpUrl": "https://www.kalittaair.com/services/cargo-services/sales-contacts"
+    },
+    "aae": {
+      "displayName": "AAE",
+      "aliases": [
+        "American Asia Express",
+        "AAE全球专递",
+        "AAE全球快递",
+        "AAE-中国件"
+      ],
+      "countries": [
+        "US",
+        "CN"
+      ],
+      "color": "#158CEF",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "aae"
+      },
+      "linkRules": [
+        {
+          "domains": [
+            "cn.aaeweb.com"
+          ],
+          "pathPattern": "^/searchwaybill/?$",
+          "params": [
+            "danhao"
+          ]
+        }
+      ],
+      "detectionRules": []
+    },
+    "cdxinchen56": {
+      "displayName": "Xinchen Logistics",
+      "aliases": [
+        "鑫宸物流",
+        "成都鑫宸物流",
+        "成都鑫宸物流有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#009966",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "cdxinchen56"
+      },
+      "trackingUrlTemplate": "https://wx.lqfast.com/Pub/UnitListDetail?companyid=6n09opswzrylt7MBDbTGSg%3D%3D&unit={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "wx.lqfast.com"
+          ],
+          "pathPattern": "^/Pub/UnitListDetail$",
+          "query": "^(?=(?:.*&)?companyid=6n09opswzrylt7MBDbTGSg==(?:&|$))(?:.*&)?unit=([^&]+)(?=&|$)"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://wx.lqfast.com/Pub/UnitCheck?CompanyId=6n09opswzrylt7MBDbTGSg%3D%3D"
+    },
+    "dyb-express": {
+      "displayName": "DYB Express",
+      "aliases": [
+        "DYB",
+        "DYB Logistics",
+        "dybservice"
+      ],
+      "countries": [
+        "CA",
+        "CN"
+      ],
+      "color": "#1B2A5C",
+      "selectable": true,
+      "timezone": "America/Toronto",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "dyb-express"
+      },
+      "linkRules": [],
+      "detectionRules": []
+    },
+    "gdqwwl": {
+      "displayName": "Quanwang Logistics",
+      "aliases": [
+        "全网物流",
+        "广东全网物流",
+        "广东全网物流有限公司",
+        "Guangdong Quanwang Logistics"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#E60012",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "gdqwwl"
+      },
+      "linkRules": [],
+      "detectionRules": []
+    },
+    "hongshu-express": {
+      "displayName": "HongShu Express",
+      "aliases": [
+        "红树国际快递",
+        "红树快递",
+        "小红树集运",
+        "HongShu International Express"
+      ],
+      "countries": [
+        "CA",
+        "CN"
+      ],
+      "color": "#f7cea0",
+      "selectable": true,
+      "timezone": "America/Toronto",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "hongshu-express"
+      },
+      "linkRules": [],
+      "detectionRules": []
+    },
+    "huaxia-express": {
+      "displayName": "Huaxia Express",
+      "aliases": [
+        "华夏快递",
+        "华夏国际快递",
+        "加拿大华夏快递",
+        "Huaxia International Express"
+      ],
+      "countries": [
+        "CA",
+        "CN"
+      ],
+      "color": "#3c88c6",
+      "selectable": true,
+      "timezone": "America/Vancouver",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "huaxia-express"
+      },
+      "trackingUrlTemplate": "https://www.huaxiaglobal.ca/cgi-bin/GInfo.dll?MfcISAPICommand=EmmisTrack&w=nacv&cno={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.huaxiaglobal.ca",
+            "huaxiaglobal.ca"
+          ],
+          "pathPattern": "^/cgi-bin/ginfo\\.dll$",
+          "query": "^(?=(?:.*&)?MfcISAPICommand=(?:emmistrack|EmsApiTrack)(?:&|$))(?:.*&)?cno=([^&]+)(?=&|$)"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.huaxiaglobal.ca/track/"
+    },
+    "parcel100": {
+      "displayName": "Parcel100",
+      "aliases": [
+        "Parcel100 B.V.",
+        "Parcel100物流"
+      ],
+      "countries": [
+        "NL",
+        "CN"
+      ],
+      "color": "#F07D1A",
+      "selectable": true,
+      "timezone": "Europe/Amsterdam",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "parcel100"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://track.parcel100.com/"
+    },
+    "stwles": {
+      "displayName": "Shengtai Logistics",
+      "aliases": [
+        "盛泰物流",
+        "北京盛泰物流有限公司",
+        "Beijing Shengtai Logistics"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#FF6600",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "stwles"
+      },
+      "linkRules": [],
+      "detectionRules": []
+    },
+    "xhongda56": {
+      "displayName": "Xinhongda Logistics",
+      "aliases": [
+        "新宏达物流",
+        "乐清市新宏达物流有限公司",
+        "Yueqing Xinhongda Logistics"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#FBA84A",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "xhongda56"
+      },
+      "linkRules": [],
+      "detectionRules": []
     }
   },
   "servers": [
@@ -82855,7 +83086,16 @@
           "tobkk",
           "yadex",
           "iag-cargo",
-          "kalitta-air"
+          "kalitta-air",
+          "aae",
+          "cdxinchen56",
+          "dyb-express",
+          "gdqwwl",
+          "hongshu-express",
+          "huaxia-express",
+          "parcel100",
+          "stwles",
+          "xhongda56"
         ]
       },
       "Stage": {

@@ -32,7 +32,7 @@ Două numere care pot crea confuzie. Un număr de comandă precum `408-4829105-7
 
 **Amazon Locker.** Alege un Locker la finalizarea comenzii: caută după cod poștal, adresă sau reper, ori adaugă unul în Your Addresses. Amazon trimite apoi un e-mail de confirmare a livrării cu instrucțiuni. Pentru a deschide compartimentul poți avea nevoie de codul din șase cifre, de un cod de bare sau de aplicația Amazon Shopping, așa că ia telefonul cu tine. Pentru a lăsa pe altcineva să ridice coletul, redirecționează-i e-mailul. Nu orice articol poate fi trimis la Locker: printre alte condiții, trebuie să cântărească sub 4,5 kg și să măsoare sub 42 × 35 × 32 cm, iar produsele cu restricție de vârstă nu pot fi livrate acolo. Ai la dispoziție trei zile calendaristice pentru ridicare; după expirarea termenului, Amazon returnează coletul și îți rambursează suma automat.
 
-**Amazon Counter.** Punctele Counter sunt puncte de ridicare cu personal în magazine partenere. La finalizarea comenzii, alege «Find a collect location nearby» pentru a vedea atât punctele Counter, cât și Lockerele cu programul lor de ridicare. Amazon te anunță pe e-mail când ajunge coletul. În funcție de magazin, ți se poate cere un cod de ridicare, un act de identitate și/sau o semnătură; codul apare și în detaliile de urmărire ale comenzii. Dacă nu ridici coletul la timp, Amazon îl returnează și îți face rambursarea automat.
+**Amazon Counter.** Punctele Counter sunt puncte de ridicare cu personal în magazine partenere. La finalizarea comenzii, alege „Find a collect location nearby” pentru a vedea atât punctele Counter, cât și Lockerele cu programul lor de ridicare. Amazon te anunță pe e-mail când ajunge coletul. În funcție de magazin, ți se poate cere un cod de ridicare, un act de identitate și/sau o semnătură; codul apare și în detaliile de urmărire ale comenzii. Dacă nu ridici coletul la timp, Amazon îl returnează și îți face rambursarea automat.
 
 ## Colet Amazon Logistics întârziat sau neprimit
 
@@ -45,8 +45,8 @@ Două numere care pot crea confuzie. Un număr de comandă precum `408-4829105-7
 Amazon Customer Service gestionează întrebările despre comenzile tale. Pe Amazon.co.uk:
 
 - **Pagini de ajutor.** Pagina Customer Service răspunde la întrebările frecvente, de la urmărirea unei comenzi până la înlocuirea unui articol deteriorat.
-- **Chat live.** Pe pagina Customer Service, alege Something else, apoi Contact Us (în aplicație: I need more help). Scrie «Chat with an associate now».
-- **Telefon.** În același chat, scrie «Request a phone call», introdu numărul tău și alege «Call me now»: Amazon te sună. Operatorii preiau apeluri zilnic între orele 6:00 și miezul nopții.
+- **Chat live.** Pe pagina Customer Service, alege Something else, apoi Contact Us (în aplicație: I need more help). Scrie „Chat with an associate now”.
+- **Telefon.** În același chat, scrie „Request a phone call”, introdu numărul tău și alege „Call me now”: Amazon te sună. Operatorii preiau apeluri zilnic între orele 6:00 și miezul nopții.
 - **Rețele sociale.** Contul @AmazonHelp răspunde 24/7 pe Facebook, X și Instagram.
 - **La un Locker.** Numărul direct de asistență clienți este tipărit pe fiecare Amazon Locker.
 
@@ -54,9 +54,9 @@ Amazon Customer Service gestionează întrebările despre comenzile tale. Pe Ama
 
 ## Urmărirea Amazon Logistics în Peek
 
-[Peek](/) nu poate urmări sau salva un colet Amazon Logistics: Amazon afișează statusul, istoricul și fotografia de livrare doar în interiorul contului tău. Dacă lipești unul dintre aceste coduri sau un link track.amazon, Peek verifică mai întâi sistemul public de urmărire Amazon Shipping. Dacă Amazon răspunde, înseamnă că este un colet [Amazon Shipping](carrier:amazon-shipping) (o achiziție făcută în afara Amazon pe care Amazon o livrează pentru vânzător), iar Peek îl urmărește: "Public tracking is available with Amazon Shipping. Peek will keep this delivery up to date." Dacă Amazon nu mai oferă istoricul, poate rămâne salvat ca referință.
+[Peek](/) nu poate urmări sau salva un colet Amazon Logistics: Amazon afișează statusul, istoricul și fotografia de livrare doar în interiorul contului tău. Dacă lipești unul dintre aceste coduri sau un link track.amazon, Peek verifică mai întâi sistemul public de urmărire Amazon Shipping. Dacă Amazon răspunde, înseamnă că este un colet [Amazon Shipping](carrier:amazon-shipping) (o achiziție făcută în afara Amazon pe care Amazon o livrează pentru vânzător), iar Peek îl urmărește: „Public tracking is available with Amazon Shipping. Peek will keep this delivery up to date.” Dacă Amazon nu mai oferă istoricul, poate rămâne salvat ca referință.
 
-În caz contrar, Peek afișează "Amazon Logistics deliveries are usually tracked in Your Orders on Amazon." și îți oferă butonul "Open my Amazon orders", care deschide istoricul comenzilor pe site-ul indicat de cod: amazon.co.uk pentru `UK` și `GB`, amazon.ie pentru `IE`, amazon.com pentru `TBA`, amazon.com.au pentru `TBAU`. Dacă verificarea nu poate rula, apasă "Check again". Un număr de comandă primește mesajul "That looks like an Amazon order number".
+În caz contrar, Peek afișează „Amazon Logistics deliveries are usually tracked in Your Orders on Amazon.” și îți oferă butonul „Open my Amazon orders”, care deschide istoricul comenzilor pe site-ul indicat de cod: amazon.co.uk pentru `UK` și `GB`, amazon.ie pentru `IE`, amazon.com pentru `TBA`, amazon.com.au pentru `TBAU`. Dacă verificarea nu poate rula, apasă „Check again”. Un număr de comandă primește mesajul „That looks like an Amazon order number”.
 
 ## Întrebări despre Amazon Logistics
 
@@ -78,7 +78,7 @@ Secțiunea Your Orders afișează ziua livrării, iar când șoferul mai are 10 
 
 ### Cum contactez serviciul clienți Amazon Logistics sau raportez un SMS fals?
 
-Folosește pagina Customer Service a Amazon pentru chat live («Chat with an associate now») sau solicitarea unui apel («Request a phone call», zilnic 6:00–00:00), ori scrie la @AmazonHelp 24/7. Nu accesa linkuri din mesaje neașteptate despre comenzi — Amazon nu cere plăți prin telefon sau e-mail și nici carduri cadou.
+Folosește pagina Customer Service a Amazon pentru chat live („Chat with an associate now”) sau solicitarea unui apel („Request a phone call”, zilnic 6:00–00:00), ori scrie la @AmazonHelp 24/7. Nu accesa linkuri din mesaje neașteptate despre comenzi — Amazon nu cere plăți prin telefon sau e-mail și nici carduri cadou.
 
 :::sources
 - [About Amazon UK: Who delivers my Amazon package in the UK?](https://www.aboutamazon.co.uk/news/operations/how-your-package-gets-from-amazons-warehouse-to-your-front-door) – Delivery Service Partners, Amazon Flex, other couriers

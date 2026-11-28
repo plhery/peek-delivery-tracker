@@ -6,7 +6,7 @@ published: 2026-11-27
 updated: 2026-11-27
 ---
 
-ORLEN Paczka (tidligere Paczka w RUCHu) er et polsk netværk af pakkebokse og pakkeshops, som bruges meget af polske webshops, Allegro og Vinted. Indsæt dit 13-cifrede pakkenummer, der begynder med `210`, i feltet ovenfor (eller spor pakken på orlenpaczka.pl) — herunder finder du danske oversættelser af ORLEN Paczkas polske sporingsstatusser, afhentningsfristen på 3 hverdage, søndagsafhentning og kontaktoplysninger.
+ORLEN Paczka (tidligere Paczka w RUCHu) er et polsk netværk af pakkebokse og pakkeshops, som bruges af polske webshops, Allegro og Vinted. Indsæt dit 13-cifrede pakkenummer, der begynder med `210`, i feltet ovenfor (eller spor pakken på orlenpaczka.pl) — herunder finder du danske oversættelser af ORLEN Paczkas polske sporingsstatusser, afhentningsfristen på 3 hverdage, søndagsafhentning og kontaktoplysninger.
 
 ## ORLEN Paczka sporingsnummer og hvor du finder det
 
@@ -33,7 +33,7 @@ ORLEN Paczkas sporing giver hvert trin en dato, et klokkeslæt og en polsk formu
 | ORLEN Paczkas status | Hvad det betyder for dig |
 | --- | --- |
 | `Twoja paczka jest w trakcie przygotowania przez nadawcę` | Afsenderen har oprettet pakken. ORLEN Paczka har den ikke endnu. |
-| `Paczka nadana w punkcie` | Afsenderen har indleveret pakken i en pakkeshop eller pakkeboks. |
+| `Paczka nadana w punkcie` | Afsenderen har indleveret pakken på et indleveringssted. |
 | `Twoja paczka została odebrana przez kuriera i ruszyła w drogę` | En kurér har afhentet pakken hos afsenderen. |
 | `Twoja paczka została przyjęta w sortowni` | Ankommet til et regionalt sorteringscenter, som nævnes efter teksten. |
 | `W sortowni centralnej` | På det centrale sorteringscenter. |
@@ -43,7 +43,7 @@ ORLEN Paczkas sporing giver hvert trin en dato, et klokkeslæt og en polsk formu
 | `Paczka przekazana do przewoźnika w innym kraju. Dalszą drogę możesz śledzić w aplikacji Vinted` | En Vinted-pakke overdraget til en transportør i et andet land. Følg den videre i Vinted-appen. |
 | `Cieszymy się, że Twoja paczka została już odebrana z punktu odbioru` | Afhentet fra afhentningsstedet. |
 
-Nogle pakker viser ældre formuleringer for de samme trin: `Paczka przygotowywana przez nadawcę`, `Paczka przyjęta w sortowni regionalnej` (uden bynavn) og `Odebrana przez Klienta`, hvor „Klient“ er dig. Overdragelsen til udlandet skrives af og til kortere: `Paczka w innym kraju`. Den første linje svarer til en «label created»-status: pakken er endnu ikke sat i bevægelse.
+Nogle pakker viser ældre formuleringer for de samme trin: `Paczka przygotowywana przez nadawcę`, `Paczka przyjęta w sortowni regionalnej` (uden bynavn) og `Odebrana przez Klienta`, hvor "Klient" er dig. Overdragelsen til udlandet skrives af og til kortere: `Paczka w innym kraju`. Den første linje svarer til en "label created"-status: pakken er endnu ikke sat i bevægelse.
 
 ## ORLEN Paczka pakkebokse og pakkeshops
 
@@ -53,7 +53,7 @@ ORLEN Paczka leverer til en pakkeboks (automat paczkowy) — mange af dem står 
 
 **Hvor længe pakken ligger.** Du har 3 hverdage, regnet fra den første SMS eller e-mail med afhentningskoden. Derefter går en pakke fra en webshop retur til afsenderen, mens en pakke fra en privatperson — eksempelvis en Vinted-pakke — går tilbage til det sted, hvor den blev indleveret. Allegro giver de samme 3 hverdage for Allegro Delivery-pakker hos ORLEN Paczkas pakkeshops og pakkebokse; uafhentede pakker returneres til sælgeren.
 
-**Allegro Delivery-pakker** håndteres af Allegro, som står for levering og kundeservice: afhentningsbeskeden kommer via e-mail, SMS eller i Allegro-appen, og du sporer og afhenter dem via Allegro-appen under «Moje przesyłki».
+**Allegro Delivery-pakker** håndteres af Allegro, som står for levering og kundeservice: afhentningsbeskeden kommer via e-mail, SMS eller i Allegro-appen, og du sporer og afhenter dem via Allegro-appen under "Moje przesyłki".
 
 ## Leveringstid, forsinkelser, skader og reklamation hos ORLEN Paczka
 
@@ -67,7 +67,7 @@ ORLEN fremhæver dag-til-dag-levering som en af tjenestens styrker, og ORLEN Pac
 
 ## ORLEN Paczka kundeservice og kontakt
 
-For en Allegro Delivery-pakke skal du kontakte Allegro, som håndterer kundeservice for disse pakker. For en webshopordre starter du hos butikken. ORLEN Paczkas egen kontaktside ligger på det polske site orlenpaczka.pl under «Kontakt». Kanalerne foregår alle på polsk:
+For en Allegro Delivery-pakke skal du kontakte Allegro, som håndterer kundeservice for disse pakker. For en webshopordre starter du hos butikken. ORLEN Paczkas egen kontaktside ligger på det polske site orlenpaczka.pl under "Kontakt". Kanalerne foregår alle på polsk:
 
 - **Telefon:** 22 33 33 999 til almindelig takst hos din teleudbyder. Mandag til fredag 7:00–22:00, lørdag 9:00–19:00 (FAQ’en nævner til 16:00) og søndag 10:00–16:00 polsk tid.
 - **[Kontaktformular](https://www.orlenpaczka.pl/formularz-kontaktowy/)**, for eksempel hvis du mangler afhentningskode eller pakken er bortkommet.
@@ -91,7 +91,7 @@ Peek kan give dig notifikationer for "Every scan", "Important steps" eller "Deli
 
 ### Hvad er ORLEN Paczka, og hvordan ser sporingsnummeret ud?
 
-ORLEN Paczka er et polsk netværk af pakkebokse og pakkeshops lanceret i 2021 (tidligere Paczka w RUCHu, med RUCH som logistikpartner). Pakkenummeret har **13 cifre begyndende med `210`** (10-cifrede indleveringskoder og Allegro Delivery `AD`-numre spores separat).
+ORLEN Paczka er et polsk netværk af pakkebokse og pakkeshops lanceret i 2021 (tidligere Paczka w RUCHu, med RUCH som logistikpartner). Pakkenummeret har **13 cifre begyndende med `210`** (den 10-cifrede kode er afsenderens indleveringskode, ikke et sporingsnummer, og Allegro Delivery `AD`-numre spores i Allegro-appen eller på allegro.pl).
 
 ### Kan jeg spore ORLEN Paczka på dansk eller engelsk?
 
@@ -107,7 +107,7 @@ ORLEN Paczka leverer selv kun inden for Polen (1 hverdag for 98 % af webshoppakk
 
 ### Hvordan kontakter jeg ORLEN Paczka eller indsender en reklamation?
 
-Ring til den polske telefonlinje `22 33 33 999` (man–fre 7:00–22:00, lør 9:00–19:00, søn 10:00–16:00 Warszawa-tid) eller brug [kontaktformularen](https://www.orlenpaczka.pl/formularz-kontaktowy/) / [reklamationsformularen](https://www.orlenpaczka.pl/reklamacje/) inden for 12 måneder (7 dage for skjulte skader). Ved Allegro Delivery-pakker skal du kontakte Allegro.
+Ring til den polske telefonlinje 22 33 33 999 (man–fre 7:00–22:00, lør 9:00–19:00, søn 10:00–16:00 Warszawa-tid) eller brug [kontaktformularen](https://www.orlenpaczka.pl/formularz-kontaktowy/) / [reklamationsformularen](https://www.orlenpaczka.pl/reklamacje/) (en reklamation inden for 12 måneder efter afsendelsen, 7 dage for skjulte skader). Ved Allegro Delivery-pakker skal du kontakte Allegro.
 
 :::sources
 - [ORLEN Paczka: Najczęściej zadawane pytania](https://www.orlenpaczka.pl/faq/) – pickup code (5 or 6 digits, SMS, email, QR, app), collection by someone else, no code, wrong phone number, 3 working days from the first SMS or email and return to the sender or the drop-off point, Sunday pickup, no cash on delivery, delivery times (1 working day for 98% of shop parcels, 1–3 days from private senders and Vinted), refund after 4 working days, lost parcels, liability up to 500 zł (private customers) and 5,000 zł (businesses), deliveries in Poland only, helpline and hours, no links in SMS or payment requests by link

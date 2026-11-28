@@ -1,15 +1,46 @@
 import { render } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { CARRIERS, carrierInfo } from '../lib/carriers';
-import { CarrierMark } from './CarrierMark';
+import { CarrierMark, CarrierTruck } from './CarrierMark';
 import markup from './carrierMark.fixture.json';
-import { CARRIER_DECALS, CARRIER_TRUCK, carrierDecal } from '../brand';
+import { CARRIER_DECALS, LIVERY_VERSION, carrierDecal, type CarrierDecal } from '../brand';
+import { CARRIER_LIVERIES, allLiveriesFile, liveryFile } from '../server/liveries';
+
+const LIVERY = /^\/liveries\/([^/]+)\/([a-z0-9-]+)\.svg#livery-([a-z0-9-]+)$/;
+
+/** The mark as a browser draws it: each livery's `<use>` replaced by the group its file holds. */
+function drawn(container: Element): string {
+  const copy = container.cloneNode(true) as Element;
+  for (const use of copy.querySelectorAll('use[href^="/liveries/"]')) {
+    const [, version, file, decal] = use.getAttribute('href')!.match(LIVERY)!;
+    expect(version).toBe(LIVERY_VERSION);
+    expect(file).toBe(decal);
+    const svg = new DOMParser().parseFromString(liveryFile(decal as CarrierDecal), 'image/svg+xml');
+    use.replaceWith(...[...svg.getElementById(`livery-${decal}`)!.childNodes].map((node) => document.importNode(node, true)));
+  }
+  return copy.innerHTML;
+}
 
 /** Recorded SVG markup anchors the shared truck and selected liveries. */
 describe('carrier mark', () => {
   it.each(Object.keys(markup) as (keyof typeof markup)[])('draws %s exactly as recorded', (id) => {
     const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);
-    expect(container.innerHTML).toBe(markup[id]);
+    expect(drawn(container)).toBe(markup[id]);
+  });
+
+  it("draws a livery from its own file, and a long list's from the file that holds them all", () => {
+    const { container } = render(<><CarrierMark carrier={carrierInfo('dhl')} /><CarrierTruck carrier={carrierInfo('ups')} shared="list" /></>);
+    expect([...container.querySelectorAll('use')].map((use) => use.getAttribute('href'))).toEqual([
+      `/liveries/${LIVERY_VERSION}/dhl.svg#livery-dhl`,
+      '#list-body',
+      `/liveries/${LIVERY_VERSION}/all.svg#livery-ups`,
+      '#list-wheels',
+    ]);
+    const all = new DOMParser().parseFromString(allLiveriesFile(), 'image/svg+xml');
+    for (const decal of Object.keys(CARRIER_LIVERIES) as CarrierDecal[]) {
+      const own = new DOMParser().parseFromString(liveryFile(decal), 'image/svg+xml');
+      expect(all.getElementById(`livery-${decal}`)?.outerHTML).toBe(own.getElementById(`livery-${decal}`)!.outerHTML);
+    }
   });
 
   it.each([
@@ -896,9 +927,11 @@ describe('carrier mark', () => {
     'z-leading',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
-      const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);
+      const { container: mark } = render(<CarrierMark carrier={carrierInfo(id)} />);
+      const container = document.createElement('div');
+      container.innerHTML = drawn(mark);
       const paths = [...container.querySelectorAll('svg > path')].map(path => path.getAttribute('d'));
-      for (const shape of CARRIER_TRUCK.decals[carrierDecal(id)]) {
+      for (const shape of CARRIER_LIVERIES[carrierDecal(id)]) {
         if (shape.type === 'circle') {
           expect(container.querySelector(`svg > circle[cx="${shape.cx}"][cy="${shape.cy}"][r="${String(shape.r).replace(/^0\./, '.')}"]`)).not.toBeNull();
         } else expect(paths).toContain(shape.d);

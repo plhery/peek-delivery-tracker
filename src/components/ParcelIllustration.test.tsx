@@ -27,7 +27,7 @@ describe('Pip with its carrier’s label', () => {
     // The carrier's own truck, at half size, in its livery.
     const truck = label.querySelector('g[transform="translate(5 5) scale(.5)"]')!;
     expect(truck.querySelector('rect')).toHaveAttribute('fill', 'var(--carrier-truck)');
-    expect(truck.querySelector('path[d="M4 8h12M3 10h12"]')).toHaveAttribute('stroke', 'var(--carrier-accent)');
+    expect(truck.querySelector('use')).toHaveAttribute('href', expect.stringMatching(/^\/liveries\/[0-9a-f]+\/dhl\.svg#livery-dhl$/));
     expect(label.style.getPropertyValue('--carrier-truck')).toBe('#ffcc00');
     expect(label.style.getPropertyValue('--carrier-brand-light')).toBe('#d40511');
     const name = label.querySelector('.parcel-illustration__label-name')!;

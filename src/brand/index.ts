@@ -4,6 +4,7 @@ import {
   CARRIER_FAMILIES as GENERATED_FAMILIES,
   CARRIER_PALETTES as GENERATED_PALETTES,
   CARRIER_TRUCK as GENERATED_TRUCK,
+  LIVERY_VERSION as GENERATED_LIVERY_VERSION,
 } from '../generated/brand';
 import paletteData from './palette.json';
 import type {
@@ -42,8 +43,11 @@ export const CARRIER_PALETTES = GENERATED_PALETTES;
 /** Declared liveries, by carrier id. Everything else wears `default`. */
 export const CARRIER_DECALS = GENERATED_DECALS;
 
-/** One truck, rendered by `CarrierMark` on the web and `CarrierFleetMark` on iOS. */
+/** One truck, rendered by `CarrierMark` on the web and `CarrierFleetMark` on iOS. Its liveries are served apart. */
 export const CARRIER_TRUCK: TruckGeometry = GENERATED_TRUCK;
+
+/** Names the liveries' files (`app/liveries`): it changes with any livery's shapes. */
+export const LIVERY_VERSION: string = GENERATED_LIVERY_VERSION;
 
 const HEX = /^#[\da-f]{6}$/i;
 

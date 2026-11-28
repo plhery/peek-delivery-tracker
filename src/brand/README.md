@@ -34,8 +34,12 @@ truck's glass and tyres take their `dark` paints.
 the same outline in straight lines, for the iPhone app's canvas.
 
 `scripts/generate-brand.mjs` writes `src/generated/brand.ts`, which leaves `points` and
-`segments` out so the browser does not download them. The iOS resource generator writes
-the whole data to `Brand.json`. Web and native parity tests check their rendering
+`segments` out so the browser does not download them, and the liveries' shapes to
+`src/generated/liveries.ts`, which only the server reads. A page draws each truck's livery
+from its own file, `/liveries/<version>/<livery>.svg` (`app/liveries`), and the carrier
+picker draws every livery from `all.svg`. The version is a hash of the shapes, so a
+browser keeps each file for good. The iOS resource generator writes the whole data to
+`Brand.json`. Web and native parity tests check their rendering
 inputs. Run `npm run brand:generate` after editing them: it writes those two files alone, so
 the iPhone's catalog and detection files keep the scraper release `main` pins.
 

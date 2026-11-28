@@ -130,13 +130,15 @@ describe('carrier picker', () => {
     // Automatic detection, the two sections and the start of the A to Z list.
     expect(rows().length).toBeLessThan(SELECTABLE_CARRIERS.length / 10);
     const truck = rows()[1].querySelector('svg')!;
-    const uses = [...truck.querySelectorAll('use')].map((use) => use.getAttribute('href')!);
-    expect(uses).toHaveLength(2);
-    // Each row draws its own livery, between the body and the wheels it takes from the one shared drawing.
+    const [body, livery, wheels, ...more] = [...truck.querySelectorAll('use')].map((use) => use.getAttribute('href')!);
+    expect(more).toEqual([]);
+    // Each row draws its own livery, from the one file that holds them all, between the body and the wheels it takes
+    // from the one shared drawing.
+    expect(livery).toMatch(/^\/liveries\/[0-9a-f]+\/all\.svg#livery-[a-z0-9-]+$/);
     expect(truck.querySelector('rect')).toBeNull();
     expect(truck.firstElementChild).toBe(truck.querySelector('use'));
-    expect(truck.lastElementChild).toBe(truck.querySelectorAll('use')[1]);
-    for (const href of uses) expect(picker.querySelector('.truck-definitions')).toContainElement(document.getElementById(href.slice(1)));
+    expect(truck.lastElementChild).toBe(truck.querySelectorAll('use')[2]);
+    for (const href of [body, wheels]) expect(picker.querySelector('.truck-definitions')).toContainElement(document.getElementById(href.slice(1)));
     expect(picker.querySelectorAll('.truck-definitions rect')).toHaveLength(1);
 
     // The keyboard reaches past the rows drawn so far: the highlighted row is drawn at once.

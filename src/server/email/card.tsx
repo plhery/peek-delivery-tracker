@@ -3,6 +3,7 @@ import 'server-only';
 import { ImageResponse } from 'next/og';
 import type { CSSProperties } from 'react';
 import { CARRIER_PALETTES, CARRIER_TRUCK, carrierBrand, carrierBrandFamily, carrierDecal, mix, type CarrierPalette, type TruckDecalShape } from '../../brand';
+import { CARRIER_LIVERIES } from '../liveries';
 import { PARCEL, flapPoints } from '../../components/Icon';
 import { PIP_FRAME } from '../../components/map/pipGeometry';
 import type { Rect } from '../../components/map/layout';
@@ -57,7 +58,7 @@ function Drawing({ svg, width, height, style }: { svg: string; width: number; he
 
 /** The carrier's truck in its own livery, with every paint resolved: a picture has no style sheet. */
 function truckSvg(carrier: CarrierInfo, palette: CarrierPalette): string {
-  const { viewBox, strokeWidth, body, cab, windshield, wheels, decals } = CARRIER_TRUCK;
+  const { viewBox, strokeWidth, body, cab, windshield, wheels } = CARRIER_TRUCK;
   const paint = (value: string) => value.startsWith('#') ? value : palette[value as keyof CarrierPalette];
   const decal = (shape: TruckDecalShape) => shape.type === 'circle' ? `<circle cx="${shape.cx}" cy="${shape.cy}" r="${shape.r}" fill="${paint(shape.fill)}"/>`
     : shape.type === 'polygon' ? `<path d="${shape.d}" fill="${paint(shape.fill)}"/>`
@@ -66,7 +67,7 @@ function truckSvg(carrier: CarrierInfo, palette: CarrierPalette): string {
     + `<rect x="${body.x}" y="${body.y}" width="${body.width}" height="${body.height}" rx="${body.rx}" fill="${paint(body.fill)}" stroke="${paint(body.stroke)}" stroke-width="${strokeWidth}"/>`
     + `<path d="${cab.d}" fill="${paint(cab.fill)}" stroke="${paint(cab.stroke)}" stroke-width="${strokeWidth}"/>`
     + `<path d="${windshield.d}" fill="${paint(windshield.fill)}"/>`
-    + decals[carrierDecal(carrier.id)].map(decal).join('')
+    + CARRIER_LIVERIES[carrierDecal(carrier.id)].map(decal).join('')
     + wheels.centers.map(([x, y]) => `<circle cx="${x}" cy="${y}" r="${wheels.tire.r}" fill="${paint(wheels.tire.fill)}"/><circle cx="${x}" cy="${y}" r="${wheels.hub.r}" fill="${paint(wheels.hub.fill)}"/>`).join('')
     + '</svg>';
 }

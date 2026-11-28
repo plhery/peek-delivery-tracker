@@ -4,8 +4,8 @@
  * What it is: the shape of the nine brand properties, of a palette declared in
  * `src/brand/identities.json`, and of the truck geometry the web renders.
  * What it is not: no data and no behaviour; every declaration here is erased at
- * build time. `src/generated/brand.ts` annotates its constants
- * with these types, which is why they live in their own module: the generated
+ * build time. `src/generated/brand.ts` and `src/generated/liveries.ts` annotate
+ * their constants with these types, which is why they live in their own module: the generated
  * file must not import the runtime side of `src/brand`.
  */
 
@@ -992,5 +992,10 @@ export interface TruckGeometry {
   cab: TruckPanel;
   windshield: TruckGlass;
   wheels: TruckWheels;
-  decals: Record<CarrierDecal, readonly TruckDecalShape[]>;
 }
+
+/**
+ * Every livery's shapes, painted over the body and under the wheels. The server keeps them
+ * (`src/generated/liveries.ts`) and sends each as a file of its own, `app/liveries`.
+ */
+export type TruckLiveries = Record<CarrierDecal, readonly TruckDecalShape[]>;

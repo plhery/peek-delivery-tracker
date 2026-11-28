@@ -22,6 +22,7 @@ import {
   type TruckDecalPolygon,
   type TruckPoint,
 } from './index';
+import { CARRIER_LIVERIES } from '../server/liveries';
 import paletteSource from './palette.json';
 import truckSource from './truck.json';
 
@@ -1021,10 +1022,11 @@ describe('carrier brand', () => {
     }
   });
 
-  it('gives the web the same truck without the native outlines', () => {
-    const drawn: unknown = JSON.parse(JSON.stringify(truckSource, (key, value: unknown) =>
-      (key === 'points' || key === 'segments' ? undefined : value)));
-    expect(CARRIER_TRUCK).toEqual(drawn);
+  it('gives the web the same truck without the native outlines, its liveries kept by the server', () => {
+    const { decals, ...shared } = JSON.parse(JSON.stringify(truckSource, (key, value: unknown) =>
+      (key === 'points' || key === 'segments' ? undefined : value))) as { decals: unknown };
+    expect(CARRIER_TRUCK).toEqual(shared);
+    expect(CARRIER_LIVERIES).toEqual(decals);
   });
 
   it('keeps a carrier that declares nothing on its own identity', () => {
@@ -1040,7 +1042,7 @@ describe('carrier brand', () => {
     }
     for (const [id, decal] of Object.entries(CARRIER_DECALS)) {
       expect(CARRIER_DEFINITIONS).toHaveProperty(id);
-      expect(CARRIER_TRUCK.decals).toHaveProperty(decal);
+      expect(CARRIER_LIVERIES).toHaveProperty(decal);
     }
   });
 
@@ -1060,7 +1062,7 @@ describe('carrier brand', () => {
     const paints = [
       CARRIER_TRUCK.body.fill, CARRIER_TRUCK.body.stroke, CARRIER_TRUCK.cab.fill, CARRIER_TRUCK.cab.stroke,
       CARRIER_TRUCK.windshield.fill, CARRIER_TRUCK.wheels.tire.fill, CARRIER_TRUCK.wheels.hub.fill,
-      ...Object.values(CARRIER_TRUCK.decals).flatMap((shapes) =>
+      ...Object.values(CARRIER_LIVERIES).flatMap((shapes) =>
         shapes.map((shape) => (shape.type === 'line' ? shape.stroke : shape.fill))),
     ];
     for (const paint of paints) {

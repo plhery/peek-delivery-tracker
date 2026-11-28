@@ -1,15 +1,17 @@
-import { CARRIER_TRUCK } from '../brand';
-import type { CarrierDecal, TruckDecalShape } from '../brand';
+import { CARRIER_TRUCK, LIVERY_VERSION } from '../brand';
+import type { CarrierDecal } from '../brand';
 import type { CarrierInfo } from '../lib/carriers';
 import { carrierBrand } from '../lib/carrierBrand';
 
 /** SVG numbers in the compact spelling the markup uses: `0.6` is written `.6`. */
-function n(value: number): string {
+export function svgNumber(value: number): string {
   return String(value).replace(/^(-?)0\./, '$1.');
 }
 
+const n = svgNumber;
+
 /** A paint is a hex literal, or the name of one of the nine brand properties. */
-function paint(value: string): string {
+export function paint(value: string): string {
   return value.startsWith('#') ? value : `var(--carrier-${value})`;
 }
 
@@ -23,14 +25,6 @@ function night(property: 'fill' | 'stroke', light: string, dark: string) {
 
 /** On a dark card the outline can light up (`litEdge`). */
 const EDGE_IN_DARK = night('stroke', 'var(--carrier-edge)', 'var(--carrier-edge-dark, var(--carrier-edge))');
-
-function Decal({ shape }: { shape: TruckDecalShape }) {
-  if (shape.type === 'circle') {
-    return <circle cx={n(shape.cx)} cy={n(shape.cy)} r={n(shape.r)} fill={paint(shape.fill)} />;
-  }
-  if (shape.type === 'polygon') return <path d={shape.d} fill={paint(shape.fill)} />;
-  return <path d={shape.d} stroke={paint(shape.stroke)} strokeWidth={n(shape.strokeWidth)} />;
-}
 
 /** What every truck shares, under its livery: the body, the cab and the windshield. */
 function TruckBody() {
@@ -57,9 +51,20 @@ function TruckWheels() {
   </g>);
 }
 
-/** The livery: decals have a fixed paint order, and concentric layers can share coordinates. */
-function TruckDecals({ decal }: { decal: CarrierDecal }) {
-  return CARRIER_TRUCK.decals[decal].map((shape, index) => <Decal key={`${decal}-${index}`} shape={shape} />);
+/**
+ * Where a livery is drawn from: its own file, or with `all` the file that holds every livery. The address names the
+ * liveries' version, so a browser keeps the file for good.
+ */
+export function liveryAddress(decal: CarrierDecal, all = false): string {
+  return `/liveries/${LIVERY_VERSION}/${all ? 'all' : decal}.svg#livery-${decal}`;
+}
+
+/**
+ * The livery, from its file (`app/liveries`): a page downloads the liveries it shows, not every carrier's in its
+ * scripts. A list that shows them all, the carrier picker, draws them from the one file that holds them.
+ */
+function TruckDecals({ decal, all }: { decal: CarrierDecal; all?: boolean }) {
+  return <use href={liveryAddress(decal, all)} />;
 }
 
 /** The truck's shapes in its own frame, for any SVG whose ancestors carry the carrier's brand properties. */
@@ -89,7 +94,7 @@ function Truck({ decal, shared }: { decal: CarrierDecal; shared?: string }) {
   return <svg className="carrier-mark__truck" viewBox={`0 0 ${n(viewBox.width)} ${n(viewBox.height)}`} fill="none" aria-hidden="true">
     {shared ? <>
       <use href={`#${shared}-body`} />
-      <TruckDecals decal={decal} />
+      <TruckDecals decal={decal} all />
       <use href={`#${shared}-wheels`} />
     </> : <TruckArt decal={decal} />}
   </svg>;

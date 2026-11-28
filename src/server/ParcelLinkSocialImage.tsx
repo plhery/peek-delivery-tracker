@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { createElement } from 'react';
 import { CARRIER_PALETTES, CARRIER_TRUCK, carrierBrand, carrierBrandFamily, carrierDecal, mix, type CarrierPalette, type TruckDecalShape } from '../brand';
+import { CARRIER_LIVERIES } from './liveries';
 import mark from '../brand/mark.json';
 import type { CarrierInfo } from '../lib/carriers';
 import type { Locale } from '../lib/locale';
@@ -32,7 +33,7 @@ const BOX = {
  * `<svg>`, so the shapes come as a list rather than as a component.
  */
 function truckShapes(carrier: CarrierInfo, palette: CarrierPalette) {
-  const { strokeWidth, body, cab, windshield, wheels, decals } = CARRIER_TRUCK;
+  const { strokeWidth, body, cab, windshield, wheels } = CARRIER_TRUCK;
   const paint = (value: string) => value.startsWith('#') ? value : palette[value as keyof CarrierPalette];
   const decal = (shape: TruckDecalShape, index: number) => shape.type === 'circle'
     ? <circle key={`decal-${index}`} cx={shape.cx} cy={shape.cy} r={shape.r} fill={paint(shape.fill)} />
@@ -42,7 +43,7 @@ function truckShapes(carrier: CarrierInfo, palette: CarrierPalette) {
     <rect key="body" x={body.x} y={body.y} width={body.width} height={body.height} rx={body.rx} fill={paint(body.fill)} stroke={paint(body.stroke)} strokeWidth={strokeWidth} />,
     <path key="cab" d={cab.d} fill={paint(cab.fill)} stroke={paint(cab.stroke)} strokeWidth={strokeWidth} strokeLinejoin="round" />,
     <path key="windshield" d={windshield.d} fill={paint(windshield.fill)} />,
-    ...decals[carrierDecal(carrier.id)].map(decal),
+    ...CARRIER_LIVERIES[carrierDecal(carrier.id)].map(decal),
     ...wheels.centers.map(([x, y]) => <circle key={`tire-${x}`} cx={x} cy={y} r={wheels.tire.r} fill={paint(wheels.tire.fill)} />),
     ...wheels.centers.map(([x, y]) => <circle key={`hub-${x}`} cx={x} cy={y} r={wheels.hub.r} fill={paint(wheels.hub.fill)} />),
   ];

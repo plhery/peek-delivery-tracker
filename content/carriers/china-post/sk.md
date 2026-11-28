@@ -36,7 +36,7 @@ China Post zapisuje skeny v čínštine. Názvy miest sú v zátvorkách, tu uve
 | `已揽收` | Prijaté: China Post má zásielku. |
 | `邮件到达【…】` | Dorazilo na poštu alebo do triediaceho centra China Post. |
 | `邮件离开【…】，正在发往下一站` | Opustilo túto poštu smerom k ďalšej zastávke. |
-| `【…】退回，备注:安检退回` | Triediace centrum zásielku vrátilo pri bezpečnostnej kontrole a vybaví ju pred ďalším odoslaním; nevracia sa odosielateľovi. Peek zobrazí "Needs attention". |
+| `【…】退回，备注:安检退回` | Triediace centrum zásielku vrátilo pri bezpečnostnej kontrole a vybaví ju pred ďalším odoslaním; nevracia sa odosielateľovi. Peek zobrazí „Needs attention“. |
 | `送交出口海关` | Predložené čínskej vývoznej colnici. |
 | `出口海关/留存待验` | Zadržané vývoznou colnicou na kontrolu. |
 | `出口海关/放行` | Vývozná colnica zásielku prepustila. |
@@ -71,7 +71,7 @@ Pokusy o doručenie, oznámenia a dĺžka uloženia na pošte sa riadia pravidla
 
 ## Sledovanie China Post sa neaktualizuje, zásielka sa stratila alebo vrátila
 
-**Zatiaľ žiadne skeny.** China Post nezobrazí nič, kým zásielku nenaskenuje; predtým obchod iba vytvoril štítok. Opýtajte sa obchodu, kedy ju odovzdal. Peek medzitým zobrazuje "Waiting for China Post". Ak China Post ani po dvoch dňoch k číslu nič neukáže a nič iné naň neodpovedalo, Peek zobrazí "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel."
+**Zatiaľ žiadne skeny.** China Post nezobrazí nič, kým zásielku nenaskenuje; predtým obchod iba vytvoril štítok. Opýtajte sa obchodu, kedy ju odovzdal. Peek medzitým zobrazuje „Waiting for China Post“. Ak China Post ani po dvoch dňoch k číslu nič neukáže a nič iné naň neodpovedalo, Peek zobrazí „After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel.“
 
 **Ticho po odchode z Číny.** Medzi letom a prvým skenom vašej pošty môžu bez noviniek uplynúť celé dni. Skontrolujte sledovanie svojej pošty pod tým istým číslom. Číslo začínajúce na `U` nemusí vo vašej krajine získať žiadne skeny. Viac v [why tracking stops updating](guide:tracking-not-updating) a [tracking a parcel from China](guide:tracking-from-china) (v angličtine).
 
@@ -88,19 +88,19 @@ K 10. novembru 2026 uvádza anglický web China Post tieto linky:
 - **Logistics and EMS**: 8610 11183.
 - **Postal Business**: 8610 11185.
 
-China Post neuvádza, akými jazykmi operátori hovoria. Formálnu reklamáciu musí podať odosielateľ, takže rýchlejší je obchod. Vo veci doručenia, opätovného doručenia alebo colnice kontaktujte svoju vlastnú poštu.
+China Post neuvádza, akými jazykmi operátori hovoria. Formálne pátranie musí podať odosielateľ, takže rýchlejší je obchod. Vo veci doručenia, opätovného doručenia alebo colnice kontaktujte svoju vlastnú poštu.
 
 ## Sledovanie zásielky China Post v Peeku
 
-[Peek](/) okamžite rozpozná dve písmená, deväť číslic a `CN` ako China Post, ak sedí kontrolná číslica — pokiaľ nezačína na `YY`, lebo tie patria YYpost. Pri nesprávnej kontrolnej číslici číslo ako China Post neberie, a ak China Post vyberiete ručne, vypíše, že China Post "doesn’t issue numbers like this one": skontrolujte číslo v e-maile z obchodu. Rovnako okamžite rozpozná ako China Post aj čísla `ZS`, `ZC` alebo `ZA` s 11 číslicami. Akékoľvek iné číslo vložte pokojne tiež: Peek sleduje viac ako 4 500 dopravcov. Ak sa ustáli na nesprávnom dopravcovi, vyberte China Post cez "Change".
+[Peek](/) okamžite rozpozná dve písmená, deväť číslic a `CN` ako China Post, ak sedí kontrolná číslica — pokiaľ nezačína na `YY`, lebo tie patria YYpost. Pri nesprávnej kontrolnej číslici číslo ako China Post neberie, a ak China Post vyberiete ručne, vypíše, že China Post „doesn’t issue numbers like this one“: skontrolujte číslo v e-maile z obchodu. Rovnako okamžite rozpozná ako China Post aj čísla `ZS`, `ZC` alebo `ZA` s 11 číslicami. Akékoľvek iné číslo vložte pokojne tiež: Peek sleduje viac ako 4 500 dopravcov. Ak sa ustáli na nesprávnom dopravcovi, vyberte China Post cez „Change“.
 
 Peek číta vlastné sledovanie China Post. Keď China Post pýta číslice telefónu, Peek namiesto toho skúsi verejný náhľad na ems.com.cn; Peek si ich od vás nikdy nepýta. Ak odmietne aj náhľad a žiadna sledovacia služba zásielku nemá, Peek oznámi, že treba viac údajov: vyhľadajte číslo na webe China Post so štyrmi číslicami. China Post zobrazuje návštevníkom iba tri najnovšie skeny, preto Peek dopĺňa dátum podania, keď ho China Post poskytne, a preberá úplnejšiu históriu zo sledovacích služieb, ak ju niektorá má.
 
-Zobrazuje stav, históriu s poštou každého skenu (čínsku poštu pod názvom jej mesta, alebo tak ako je zapísaná, ak ju Peek nevie zaradiť) a cieľovú krajinu. Skeny sa zobrazujú v angličtine tam, kde Peek pozná znenie China Post, inak v čínštine. China Post časuje vlastné skeny podľa čínskeho času, dokonca aj príchod do vašej krajiny; neskoršie skeny prevzaté z vašej národnej pošty si zvyčajne zachovávajú miestny čas tej pošty. Peek zobrazuje každý sken v časovom pásme vášho zariadenia; na peektracker.com a v aplikáciách pre iPhone a Android história končí riadkom "Times are in your time zone:" a jeho názvom. China Post neuvádza očakávaný dátum doručenia, hmotnosť ani výdajné miesto a Peek vynecháva názov služby, kontakty, údaje o odosielateľovi a príjemcovi, mená a telefóny kuriérov aj mapové súradnice.
+Zobrazuje stav, históriu s poštou každého skenu (čínsku poštu pod názvom jej mesta, alebo tak ako je zapísaná, ak ju Peek nevie zaradiť) a cieľovú krajinu. Skeny sa zobrazujú v angličtine tam, kde Peek pozná znenie China Post, inak v čínštine. China Post časuje vlastné skeny podľa čínskeho času, dokonca aj príchod do vašej krajiny; neskoršie skeny prevzaté z vašej národnej pošty si zvyčajne zachovávajú miestny čas tej pošty. Peek zobrazuje každý sken v časovom pásme vášho zariadenia; na peektracker.com a v aplikáciách pre iPhone a Android história končí riadkom „Times are in your time zone:“ a jeho názvom. China Post neuvádza očakávaný dátum doručenia, hmotnosť ani výdajné miesto a Peek vynecháva názov služby, kontakty, údaje o odosielateľovi a príjemcovi, mená a telefóny kuriérov aj mapové súradnice.
 
 Pri čísle končiacom na `CN`, len čo China Post uvedie vašu krajinu, Peek sa s rovnakým číslom pýta aj vašej národnej pošty (USPS, Royal Mail, An Post, Canada Post alebo Australia Post; Parcelforce pri zásielkach EMS do Spojeného kráľovstva) a prepne na ňu, hneď ako ukáže novšie skeny, pričom históriu China Post zachová. Ak China Post žiadnu krajinu neuvedie, Peek sa riadi vašou: v aplikáciách pre iPhone a Android podľa regiónu nastaveného v telefóne, na peektracker.com podľa krajiny, z ktorej ste zásielku pridali.
 
-Peek kontroluje China Post každú hodinu, aj keď je zásielka na doručení. Keď doručenie prevezme vaša pošta, Peek prejde na tempo doručujúceho dopravcu. Môže vás upozorňovať na "Every scan", "Important steps" alebo "Delivery only". Nemôže za vás kontaktovať China Post, vašu poštu ani obchod.
+Peek kontroluje China Post každú hodinu, aj keď je zásielka na doručení. Keď doručenie prevezme vaša pošta, Peek prejde na tempo doručujúceho dopravcu. Môže vás upozorňovať na „Every scan“, „Important steps“ alebo „Delivery only“. Nemôže za vás kontaktovať China Post, vašu poštu ani obchod.
 
 ## Otázky k sledovaniu China Post
 
@@ -136,6 +136,6 @@ Vaša národná pošta pod tým istým číslom `CN`: Slovenská pošta na Slove
 - [Australia Post: International tracking](https://auspost.com.au/help/parcel-tracking/international-parcel/tracking) – sledovanie závisí od služby v krajine odoslania
 - [Australia Post: Customs](https://auspost.com.au/help/parcel-tracking/international-parcel/customs) – až 15 dní
 - [USPS: International Inquiries – The Basics](https://faq.usps.com/s/article/International-Inquiries-The-Basics) – zásielky zo zahraničia: pátranie cez poštu odosielateľa
-- [Slovenská pošta: Tracking of Items](https://www.posta.sk/en/tracking-of-items) – sledovanie medzinárodných poštových zásielok doručovaných Slovenskou poštou
+- [Slovenská pošta: Sledovanie zásielok](https://www.posta.sk/sledovanie-zasielok) – medzinárodné zásielky s poštovým číslom sa väčšinou dajú sledovať
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – znenia skenov China Post, overenie číslic telefónu, verejný náhľad v prehliadači a čo Peek zobrazuje
 :::

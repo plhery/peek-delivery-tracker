@@ -55,7 +55,7 @@ China Post skriver sina skanningar på kinesiska. Ortsnamn står inom hakparente
 | `【…】已妥投`, `已签收` | Levererat. |
 | `已退回` | Returnerat till avsändaren. |
 
-De sista skanningarna kommer från ditt lands post och återges av China Post, ibland först efter leveransen. Din egen posts spårning, med samma nummer, har sista sträckan i första hand.
+De sista skanningarna kommer från ditt lands post och återges av China Post, ibland först efter leveransen. Din egen posts spårning, med samma nummer, har sista sträckan från första hand.
 
 ## Vem levererar China Post-paket i ditt land
 
@@ -64,7 +64,7 @@ China Post flyger ut paketet; i mottagarlandet tar den nationella posten över, 
 - **USA**: [USPS](carrier:usps).
 - **Storbritannien**: [Royal Mail](carrier:royal-mail). Tar paketet genom brittisk tull och meddelar om moms eller tull ska betalas. EMS-nummer (som börjar med `E`) går i stället till [Parcelforce](carrier:parcelforce), Storbritanniens EMS-operatör.
 - **Irland och EU**: på Irland [An Post](carrier:an-post). Sedan den 1 november 2026 tar EU ut en hanteringsavgift på 2 € per varuslag; om butiken inte tog ut den i kassan ber postoperatören (som An Post på Irland) om den, tillsammans med tull och eventuell moms, före leverans.
-- **Kanada**: [Canada Post](carrier:canada-post). Sök numret i verktyget Track; om inget visas ber Canada Post att du låter avsändaren reklamera hos posten i avsändarlandet.
+- **Kanada**: [Canada Post](carrier:canada-post). Sök numret i verktyget Track; om inget visas ber Canada Post att du låter avsändaren utreda saken med posten i avsändarlandet.
 - **Australien**: [Australia Post](carrier:australia-post). Anger att spårning för försändelser från utlandet beror på tjänsten som använts i avsändarlandet, och att tullen kan ta upp till 15 dagar.
 
 Leveransförsök, avier och hur länge ett paket ligger på ombudet följer din posts regler; se dess sida och [missed a delivery](guide:missed-delivery) (på engelska). Ett paket som inte hämtas ut ([uncollected](guide:uncollected-parcel), på engelska) går tillbaka till avsändaren. Tull, skatter och hanteringsavgifter för paket utanför ditt land finns i [parcels held at customs](guide:customs) (på engelska).
@@ -132,7 +132,7 @@ Den nationella posten under exakt samma `CN`-nummer: USPS i USA, Royal Mail i St
 - [UPU: S10 standard, Identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – nummerformat, tjänstebokstäver, U-serien utan spårning, ett nummer per försändelse
 - [GOV.UK: Tax and customs for goods sent from abroad: Overview](https://www.gov.uk/goods-sent-from-abroad) – Royal Mail tar varor genom brittisk tull och meddelar om moms eller tull ska betalas
 - [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – 2 € per varuslag från 1 november 2026, betalas i kassan eller till posttjänsten före leverans
-- [Canada Post: Tracking international packages](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/tracking-international-packages.page) – paket till Kanada, avsändaren reklamerar, tidsramar
+- [Canada Post: Tracking international packages](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/tracking-international-packages.page) – paket till Kanada, avsändaren utreder, tidsramar
 - [Australia Post: International tracking](https://auspost.com.au/help/parcel-tracking/international-parcel/tracking) – spårning beror på tjänsten i avsändarlandet
 - [Australia Post: Customs](https://auspost.com.au/help/parcel-tracking/international-parcel/customs) – upp till 15 dagar
 - [USPS: International Inquiries – The Basics](https://faq.usps.com/s/article/International-Inquiries-The-Basics) – försändelser från utlandet: efterlysning via avsändarens post

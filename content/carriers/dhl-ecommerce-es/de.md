@@ -6,7 +6,7 @@ published: 2026-11-22
 updated: 2026-11-27
 ---
 
-DHL eCommerce Iberia (früher DHL Parcel Iberia) ist das Paketnetz von DHL für Spanien und Portugal — im Rahmen des Joint Ventures mit CTT übernimmt [CTT Express](carrier:ctt-express) dabei einen Teil der Verbraucherzustellungen. Füge deine Sendungsnummer (10 Ziffern, zwei Buchstaben + 7 Ziffern + `0` oder `JJD...`) oder deinen DHL-Tracking-Link oben ein, um alle Status, ServicePoint-Abholungen und Übergaben direkt zu verfolgen.
+DHL eCommerce Iberia (früher DHL Parcel Iberia) ist das Paketnetz von DHL für Spanien und Portugal ; im Rahmen des Gemeinschaftsunternehmens mit CTT übernimmt [CTT Express](carrier:ctt-express) in Spanien Zustellungen an Verbraucher. Füge deine Sendungsnummer oder deinen DHL-Tracking-Link oben ein, um alle Status, ServicePoint-Abholungen und Übergaben direkt zu verfolgen.
 
 ## DHL-eCommerce-Sendungsnummer: Fundort und Format
 
@@ -89,7 +89,7 @@ Nein. DHL Express nutzt ein eigenes Tracking (MyDHL+) und wird in Peek als eigen
 
 ### Liefert CTT Express Pakete von DHL eCommerce in Spanien und Portugal aus?
 
-Teilweise ja. Durch das am 12. Mai 2026 vereinbarte Gemeinschaftsunternehmen zwischen DHL eCommerce und CTT geht DHL eCommerce in Portugal zu CTT Expresso über, und in Spanien übernimmt [CTT Express](carrier:ctt-express) Verbraucherzustellungen. Nennt DHL eine CTT-Express-Nummer, folgt Peek dem Paket automatisch bei CTT Express weiter.
+Teilweise ja. Durch das am 12. Mai 2026 vereinbarte Gemeinschaftsunternehmen zwischen DHL eCommerce und CTT geht DHL eCommerce in Portugal zu CTT Expresso über, und in Spanien übernimmt [CTT Express](carrier:ctt-express) Verbraucherzustellungen. Nennt DHL eine CTT-Express-Nummer, fragt Peek auch CTT Express und folgt ihm, sobald es einen Scan liefert, der nicht älter ist als der letzte von DHL.
 
 ### Was bedeutet „Delivered, POD pending“ oder „Shipment with incidence“?
 

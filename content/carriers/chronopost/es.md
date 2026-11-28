@@ -6,7 +6,7 @@ published: 2026-11-14
 updated: 2026-11-27
 ---
 
-Chronopost es el servicio de paquetería urgente del grupo francés La Poste dentro de Geopost (el mismo grupo de DPD y [SEUR](carrier:seur)) y reparte envíos desde Francia a 230 países. Pega tu código de 13, 14 o 15 caracteres en la casilla de arriba o consúltalo en chronopost.fr para ver qué significa cada estado en francés, qué ocurre al llegar a España y cómo actuar si hay retraso o incidencia.
+Chronopost es el servicio de paquetería urgente del grupo francés La Poste dentro de Geopost (el mismo grupo de DPD y [SEUR](carrier:seur)) y, según La Poste Groupe, envía paquetes desde Francia a 230 países. Pega tu código en la casilla de arriba o consúltalo en chronopost.fr para ver qué significa cada estado en francés, qué ocurre al llegar a España y cómo actuar si hay retraso o incidencia.
 
 ## Número de seguimiento de Chronopost: cómo es
 
@@ -114,7 +114,7 @@ En Francia, Pickup establece un máximo de 8 días en tienda Pickup y de 5 días
 
 ### ¿Cómo contactar con Chronopost por un paquete desde Francia?
 
-A través de la página de contacto en chronopost.fr, el chatbot Léonard o el teléfono francés `09 69 39 13 91`. Para pedidos de tiendas online retrasados, dañados o no entregados, contacta primero con el vendedor, que responde de la entrega en la UE.
+A través de la página de contacto en chronopost.fr, el chatbot Léonard o el teléfono francés `09 69 39 13 91`. Para pedidos de tiendas online retrasados, dañados o no entregados, reclama primero al vendedor: en ventas a distancia desde Francia, si el transportista es el que propone el vendedor, este es el único responsable de la entrega.
 
 :::sources
 - [La Poste Groupe: Chronopost (en inglés)](https://www.lapostegroupe.com/en/focus/la-poste-groupes-subsidiaries/chronopost) – hasta 30 kg en 230 países y 19.555 puntos en Francia

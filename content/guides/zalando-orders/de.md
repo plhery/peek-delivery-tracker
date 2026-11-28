@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-Sobald dein Paket das Lager verlässt, sendet dir Zalando eine Versandbestätigung mit der Sendungsverfolgungsnummer und dem direkten Link zum Paketdienst (DHL, Hermes, Österreichische Post oder Schweizerische Post). Denselben Live-Status findest du im Konto unter „Meine Bestellungen“; wird eine Bestellung auf mehrere Pakete oder Zalando Partner aufgeteilt, hat jedes Paket eine eigene Nummer.
+Sobald dein Paket das Lager verlässt, sendet dir Zalando eine Versandbestätigung mit der Sendungsverfolgungsnummer und dem direkten Link zum Paketdienst (DHL, Hermes, Österreichische Post oder Schweizerische Post). Denselben Status findest du im Konto unter „Meine Bestellungen“; wird eine Bestellung auf mehrere Pakete oder Zalando Partner aufgeteilt, hat jedes Paket eine eigene Nummer.
 
 ## Welcher Paketdienst liefert meine Zalando-Bestellung?
 

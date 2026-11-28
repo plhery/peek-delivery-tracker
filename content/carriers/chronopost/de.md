@@ -6,7 +6,7 @@ published: 2026-11-04
 updated: 2026-11-27
 ---
 
-Chronopost ist der Express-Paketdienst der französischen La Poste Groupe innerhalb von Geopost (zu der auch DPD gehört) und liefert Pakete aus Frankreich in 230 Länder — nach Deutschland oft mit Übergabe an DPD. Füge deine 13-, 14- oder 15-stellige Sendungsnummer oben ins Feld ein oder prüfe sie auf chronopost.fr, um die französischen Statusmeldungen und den zuständigen Zusteller zu sehen.
+Chronopost ist der Express-Paketdienst der französischen La Poste Groupe innerhalb von Geopost (zu der auch DPD gehört) und liefert laut La Poste Groupe in 230 Länder; nach Deutschland stellt DPD zu, wenn Chronopost für das Paket eine DPD-Paketnummer nennt. Füge deine Sendungsnummer oben ins Feld ein oder prüfe sie auf chronopost.fr, um die französischen Statusmeldungen und den zuständigen Zusteller zu sehen.
 
 ## Chronopost Sendungsnummer: so sieht sie aus
 
@@ -117,7 +117,7 @@ Laut Pickup maximal 8 Tage in einem Pickup-Relais und maximal 5 Tage in einem Pi
 
 ### Wie erreiche ich den Chronopost Kundenservice?
 
-Über die Kontaktseite auf chronopost.fr, den Chatbot Léonard (der komplexe Fälle an einen Mitarbeiter weitergibt) oder die französische Telefonnummer `09 69 39 13 91`. Bei verspäteten, verlorenen oder beschädigten Online-Bestellungen wende dich zuerst an den Shop.
+Über die Kontaktseite auf chronopost.fr, den Chatbot Léonard (der komplexe Fälle an einen Mitarbeiter weitergibt) oder die französische Telefonnummer 09 69 39 13 91. Bei verspäteten, verlorenen oder beschädigten Online-Bestellungen wende dich zuerst an den Shop.
 
 :::sources
 - [La Poste Groupe: Chronopost (Englisch)](https://www.lapostegroupe.com/en/focus/la-poste-groupes-subsidiaries/chronopost) – Expressdienst von La Poste, 230 Länder, 19.555 Abholstellen in Frankreich

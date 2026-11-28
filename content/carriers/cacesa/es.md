@@ -99,7 +99,7 @@ Es CACESA (Compañía Auxiliar al Cargo Express), el agente de aduanas de Madrid
 
 ### ¿Quién entrega un paquete que pasa por CACESA?
 
-La empresa de transporte elegida por tu vendedor (no CACESA, que solo gestiona el despacho de aduanas). Mira el nombre del repartidor en el correo de la tienda o en la página del pedido; en cuanto aparece `Sale de Instalaciones de Cacesa`, la entrega depende ya de esa empresa.
+La empresa de transporte elegida por tu vendedor (no CACESA, que solo gestiona el despacho de aduanas). Mira el nombre del repartidor en el correo de la tienda o en la página del pedido; en cuanto aparece «Sale de Instalaciones de Cacesa», la entrega depende ya de esa empresa.
 
 ### ¿Cuánto tarda un paquete de CACESA tras pasar aduanas?
 
@@ -107,11 +107,11 @@ Si tu envío estuvo retenido en aduanas, CACESA indica que tarda de 3 a 4 días 
 
 ### ¿Cómo pago los impuestos o envío documentos a CACESA?
 
-Si CACESA te avisa por correo o SMS de un trámite aduanero, envía la factura/captura del pedido y el justificante de pago a `atc@cacesa.com`. Para pagar impuestos, entra en «Pagar impuestos» en cacesa.com con el número de envío y el importe en euros (admite tarjeta, PayPal o Bizum).
+Si CACESA te avisa por correo o SMS de un trámite aduanero, envía a atc@cacesa.com la factura o una captura del pedido, una foto de la mercancía y el justificante de pago. Para pagar impuestos, entra en «Pagar impuestos» en cacesa.com con el número de envío y el importe en euros (admite tarjeta, PayPal o Bizum).
 
 ### ¿Cuál es el teléfono o contacto de CACESA?
 
-CACESA no publica un teléfono gratuito ni una línea en Canarias: su web muestra los teléfonos de Madrid `+34 91 746 1860` (sede) y `+34 91 333 54 50` (oficina de Madrid-Barajas), sin horario indicado. Para paquetes retenidos, documentos o abandonos, escribe a `atc@cacesa.com`.
+CACESA no publica un teléfono gratuito ni una línea en Canarias: su web muestra los teléfonos de Madrid +34 91 746 1860 (sede) y +34 91 333 54 50 (oficina de Madrid-Barajas), sin horario indicado. Para paquetes retenidos, documentos o abandonos, escribe a atc@cacesa.com.
 
 :::sources
 - [CACESA: Seguimiento de envíos](https://www.cacesa.com/es/seguimiento) – localizador, número de envío, empresa de reparto, Pagar impuestos

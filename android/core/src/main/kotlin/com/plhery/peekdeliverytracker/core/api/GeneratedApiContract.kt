@@ -2225,6 +2225,40 @@ value class CarrierId(val rawValue: String) {
         val ExigentExpress = CarrierId("exigent-express")
         val HainanAirlinesCargo = CarrierId("hainan-airlines-cargo")
         val RanExpress = CarrierId("ran-express")
+        val AbestExpress = CarrierId("abest-express")
+        val Anjiexin56 = CarrierId("anjiexin56")
+        val Annengyuntong = CarrierId("annengyuntong")
+        val AtlasShippers = CarrierId("atlas-shippers")
+        val Chinastarlogistics = CarrierId("chinastarlogistics")
+        val Cloudlogistics365 = CarrierId("cloudlogistics365")
+        val Cyxfx = CarrierId("cyxfx")
+        val DarnaExpress = CarrierId("darna-express")
+        val ForexCargo = CarrierId("forex-cargo")
+        val ForexCargoAu = CarrierId("forex-cargo-au")
+        val FutaExpress = CarrierId("futa-express")
+        val Global99 = CarrierId("global99")
+        val Gopost = CarrierId("gopost")
+        val HighlightExpress = CarrierId("highlight-express")
+        val HopNhat = CarrierId("hop-nhat")
+        val Hpexpress = CarrierId("hpexpress")
+        val Hubologistics = CarrierId("hubologistics")
+        val JohnnyAirCargo = CarrierId("johnny-air-cargo")
+        val Longtengus = CarrierId("longtengus")
+        val ManilaForwarder = CarrierId("manila-forwarder")
+        val NascoExpress = CarrierId("nasco-express")
+        val NetcoPost = CarrierId("netco-post")
+        val NewPostVn = CarrierId("new-post-vn")
+        val PinasCargo = CarrierId("pinas-cargo")
+        val Pinoy24 = CarrierId("pinoy24")
+        val PlusCargo = CarrierId("plus-cargo")
+        val ProshipVn = CarrierId("proship-vn")
+        val RafPh = CarrierId("raf-ph")
+        val Supership = CarrierId("supership")
+        val TikinowLogistics = CarrierId("tikinow-logistics")
+        val Torbon = CarrierId("torbon")
+        val Wlkgo = CarrierId("wlkgo")
+        val Yijiangky = CarrierId("yijiangky")
+        val Ztcce = CarrierId("ztcce")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -4386,6 +4420,40 @@ value class CarrierId(val rawValue: String) {
             ExigentExpress,
             HainanAirlinesCargo,
             RanExpress,
+            AbestExpress,
+            Anjiexin56,
+            Annengyuntong,
+            AtlasShippers,
+            Chinastarlogistics,
+            Cloudlogistics365,
+            Cyxfx,
+            DarnaExpress,
+            ForexCargo,
+            ForexCargoAu,
+            FutaExpress,
+            Global99,
+            Gopost,
+            HighlightExpress,
+            HopNhat,
+            Hpexpress,
+            Hubologistics,
+            JohnnyAirCargo,
+            Longtengus,
+            ManilaForwarder,
+            NascoExpress,
+            NetcoPost,
+            NewPostVn,
+            PinasCargo,
+            Pinoy24,
+            PlusCargo,
+            ProshipVn,
+            RafPh,
+            Supership,
+            TikinowLogistics,
+            Torbon,
+            Wlkgo,
+            Yijiangky,
+            Ztcce,
         )
     }
 }

@@ -29744,6 +29744,14 @@
     ]
   },
   {
+    "input": "2023462",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "seur"
+    ]
+  },
+  {
     "input": "202347869",
     "carrier": "unknown",
     "confidence": "low",
@@ -29812,6 +29820,14 @@
     "asked": [
       "seur",
       "austrian-post"
+    ]
+  },
+  {
+    "input": "2029125",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "seur"
     ]
   },
   {
@@ -63922,6 +63938,16 @@
     ]
   },
   {
+    "input": "66602451",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colisweb",
+      "heppner"
+    ]
+  },
+  {
     "input": "666174400825",
     "carrier": "unknown",
     "confidence": "low",
@@ -66364,7 +66390,45 @@
     ]
   },
   {
+    "input": "7011015543",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight",
+      "dpd-ie"
+    ],
+    "asked": [
+      "packeta"
+    ]
+  },
+  {
     "input": "7011234567",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight",
+      "dpd-ie"
+    ],
+    "asked": [
+      "packeta"
+    ]
+  },
+  {
+    "input": "7013052114",
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
@@ -72770,6 +72834,25 @@
     "asked": [
       "brt",
       "colis-prive"
+    ]
+  },
+  {
+    "input": "8201650677",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight",
+      "dpd-ie"
+    ],
+    "asked": [
+      "packeta"
     ]
   },
   {
@@ -84345,6 +84428,14 @@
     ],
     "asked": [
       "meest"
+    ]
+  },
+  {
+    "input": "ANYT2025070290",
+    "carrier": "annengyuntong",
+    "confidence": "high",
+    "candidates": [
+      "annengyuntong"
     ]
   },
   {
@@ -98860,6 +98951,39 @@
     "candidates": []
   },
   {
+    "input": "HP888183356",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-it"
+    ],
+    "asked": [
+      "gls-it"
+    ]
+  },
+  {
+    "input": "HP888189116",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-it"
+    ],
+    "asked": [
+      "gls-it"
+    ]
+  },
+  {
+    "input": "HP888331722",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-it"
+    ],
+    "asked": [
+      "gls-it"
+    ]
+  },
+  {
     "input": "HPPY000434592",
     "carrier": "unknown",
     "confidence": "none",
@@ -107804,6 +107928,21 @@
     ]
   },
   {
+    "input": "OZ2024031834",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "colis-prive",
+      "aramex-au",
+      "aramex-nz"
+    ],
+    "asked": [
+      "colis-prive",
+      "aramex-au",
+      "aramex-nz"
+    ]
+  },
+  {
     "input": "P-0044-2639",
     "carrier": "unknown",
     "confidence": "low",
@@ -114378,6 +114517,12 @@
     ]
   },
   {
+    "input": "S2025100990405",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "S21424125.SG04-C25.1711792139",
     "carrier": "ghtk",
     "confidence": "high",
@@ -115676,6 +115821,12 @@
   },
   {
     "input": "SO000014701SO",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "SO202403121566",
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
@@ -116982,6 +117133,19 @@
     ]
   },
   {
+    "input": "SYS000000287",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "purolator",
+      "tnt-au"
+    ],
+    "asked": [
+      "tnt-au",
+      "purolator"
+    ]
+  },
+  {
     "input": "SYUS019503044",
     "carrier": "sunyou",
     "confidence": "high",
@@ -117075,6 +117239,12 @@
   },
   {
     "input": "T03D23446F1868EE13CL",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "T20261221",
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
@@ -117218,6 +117388,12 @@
       "aramex-au",
       "aramex-nz"
     ]
+  },
+  {
+    "input": "TB2025026636CN",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "TBA000000000000",
@@ -117788,6 +117964,28 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "TK500261017008",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "global99"
+    ],
+    "asked": [
+      "global99"
+    ]
+  },
+  {
+    "input": "TK620061370079",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "global99"
+    ],
+    "asked": [
+      "global99"
+    ]
   },
   {
     "input": "TK649569025",
@@ -119470,6 +119668,17 @@
     "asked": [
       "aliexpress",
       "chronopost"
+    ]
+  },
+  {
+    "input": "UT20220209001",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "la-poste"
+    ],
+    "asked": [
+      "la-poste"
     ]
   },
   {
@@ -121845,6 +122054,14 @@
     ]
   },
   {
+    "input": "YBJS2024100900628",
+    "carrier": "chinastarlogistics",
+    "confidence": "high",
+    "candidates": [
+      "chinastarlogistics"
+    ]
+  },
+  {
     "input": "YC2025021939876",
     "carrier": "unknown",
     "confidence": "none",
@@ -121990,6 +122207,14 @@
     "candidates": []
   },
   {
+    "input": "YGZS2023041000460",
+    "carrier": "chinastarlogistics",
+    "confidence": "high",
+    "candidates": [
+      "chinastarlogistics"
+    ]
+  },
+  {
     "input": "YHC251680103912CN",
     "carrier": "unknown",
     "confidence": "low",
@@ -122023,6 +122248,12 @@
     "candidates": [
       "yilong-logistics"
     ]
+  },
+  {
+    "input": "YJ362260506067",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "YJF0019250",
@@ -122208,6 +122439,14 @@
     "confidence": "high",
     "candidates": [
       "yunexpress"
+    ]
+  },
+  {
+    "input": "YT2554632210988",
+    "carrier": "yto",
+    "confidence": "high",
+    "candidates": [
+      "yto"
     ]
   },
   {
@@ -122925,6 +123164,12 @@
     "asked": [
       "zecheng"
     ]
+  },
+  {
+    "input": "ZD202611001024",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "ZDBBXK034308",

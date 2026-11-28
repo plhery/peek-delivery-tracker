@@ -112,7 +112,7 @@ Royal Mail attempted delivery while nobody was in and will bring the parcel agai
 
 ### Why does Royal Mail tracking show "Customs charges raised"?
 
-VAT, duty or a handling charge is due on an item from abroad. Royal Mail sends a bill stating the exact amount and normally holds the parcel for about 3 weeks; if unpaid by then, it returns to the sender.
+VAT, duty or other charges are due on an item from abroad. Royal Mail sends a bill stating the exact amount and normally holds the parcel for about 3 weeks; if unpaid by then, it returns to the sender.
 
 ### Why is my Royal Mail tracking number not found or showing "Sender preparing item"?
 

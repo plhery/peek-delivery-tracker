@@ -6,7 +6,7 @@ published: 2026-10-22
 updated: 2026-11-27
 ---
 
-DHL Paket è il servizio pacchi tedesco di DHL Group, con i marchi Deutsche Post e DHL. Incolla il numero di spedizione nel box qui sopra, cercalo su dhl.de (in tedesco o in inglese) o apri l'app Post & DHL: il numero arriva dal mittente nell'e-mail di spedizione. Qui trovi cosa vogliono dire gli stati, chi consegna in Italia un pacco dalla Germania e come funziona il ritiro in Germania.
+DHL Paket è il servizio pacchi tedesco di DHL Group, con i marchi Deutsche Post e DHL. Incolla il numero di spedizione nel box qui sopra, cercalo su dhl.de (in tedesco o in inglese) o apri l'app Post & DHL: il numero te lo dà il mittente, di solito nell'e-mail di spedizione. Qui trovi cosa vogliono dire gli stati, chi consegna in Italia un pacco dalla Germania e come funziona il ritiro in Germania.
 
 ## Numero di tracking DHL Paket: dove lo trovi e com'è fatto
 
@@ -106,7 +106,7 @@ Come orientamento DHL indica 2-4 giorni lavorativi dalla Germania all'Italia, co
 
 ### Perché il tracking DHL dalla Germania è fermo?
 
-Un numero appena creato può richiedere fino a 24 ore per comparire, e dopo la partenza dalla Germania uno stato fermo per qualche giorno — per esempio al centro postale internazionale di Francoforte — è normale nei tempi regolari. In Germania DHL chiede di attendere 5 giorni lavorativi prima di avviare una ricerca (Nachforschung).
+Un numero appena creato può richiedere fino a 24 ore per comparire, e dopo la partenza dalla Germania uno stato fermo per qualche giorno — per esempio al centro postale internazionale di Francoforte — è normale nei tempi regolari. In Germania DHL chiede di attendere 5 giorni lavorativi prima di avviare una ricerca (Nachforschung), ma conviene parlare prima con il mittente.
 
 ### Si paga la dogana su un pacco DHL dalla Germania?
 

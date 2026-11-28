@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Austrian Post (Österreichische Post AG, based in Vienna) is Austria's national postal operator. Paste your tracking number in the box above, enter it on post.at (which has an English switch) or open the Post App to follow your parcel. Look for the 22-digit or AT tracking number in the shop's shipping email, in Austrian Post's e-notification or on the yellow notice left after a missed delivery.
+Austrian Post (Österreichische Post AG, based in Vienna) is Austria's national postal operator. Paste your tracking number in the box above, enter it on post.at (which has an English switch) or open the Post App to follow your parcel. Look for the tracking number in the shop's shipping email, in Austrian Post's e-notification or on the yellow notice left after a missed delivery.
 
 ## Austrian Post tracking number format and where to find it
 
@@ -97,7 +97,7 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ### Can I track an Austrian Post parcel in English?
 
-Yes. post.at has an English version, and switching the tracking page to EN displays Austrian Post's status descriptions in English. Peek also maps each German scan to its stage in English.
+Yes. post.at has an English version, and switching the tracking page to EN displays Austrian Post's status descriptions in English. Peek shows Austrian Post's wordings in German, as its tracking gives them, with a stage of its own such as "At customs".
 
 ### Why is my Austrian Post tracking number not working?
 

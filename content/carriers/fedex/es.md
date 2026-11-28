@@ -6,7 +6,7 @@ published: 2026-10-13
 updated: 2026-11-27
 ---
 
-Sigue un paquete de FedEx pegando tu número de seguimiento (12, 15 o 20 cifras) o un enlace de fedex.com en la casilla de arriba, o consúltalo directamente en fedex.com. Aquí puedes ver qué significa cada estado en inglés, qué hacer ante una entrega fallida o retención en aduanas y qué derechos tienes si el pedido se retrasa o se pierde.
+Sigue un paquete de FedEx pegando tu número de seguimiento o un enlace de fedex.com en la casilla de arriba, o consúltalo directamente en fedex.com. Aquí puedes ver qué significa cada estado en inglés, qué hacer ante una entrega fallida o retención en aduanas y qué derechos tienes si el pedido se retrasa o se pierde.
 
 ## Número de seguimiento de FedEx: dónde está y cuántas cifras tiene
 
@@ -72,7 +72,7 @@ Ves el estado, cada escaneo con su lugar y la hora que da FedEx (en la zona hora
 
 ### ¿Qué significa «Delivery exception» en el seguimiento de FedEx?
 
-Significa que la entrega no pudo realizarse y Peek lo muestra como «Intento de entrega». El detalle suele aparecer en un escaneo adicional, como `Customer not available or business closed` (ausente o negocio cerrado) o `Local delivery restriction - Delivery not attempted`.
+Significa que la entrega no pudo realizarse y Peek lo muestra como «Intento de entrega». El motivo puede aparecer en otro escaneo, como `Customer not available or business closed` (ausente o negocio cerrado) o `Local delivery restriction - Delivery not attempted`.
 
 ### ¿Por qué mi seguimiento de FedEx solo muestra «Shipment information sent to FedEx»?
 
@@ -80,7 +80,7 @@ Ese primer aviso indica que el remitente ha transmitido los datos del envío a F
 
 ### ¿Cuánto se paga de aduanas en un paquete de FedEx desde fuera de la UE?
 
-Según la Agencia Tributaria y la Comisión Europea, las compras online desde fuera de la UE de hasta 150 euros pagan IVA y un arancel fijo de 3 euros por categoría de artículos, y todas las compras online a tiendas de fuera de la UE llevan además una tasa de tramitación de la UE de 2 euros por categoría. Si la tienda no incluyó estos importes al comprar, el transportista puede cobrártelos junto con sus gastos de gestión antes de la entrega.
+Según la Agencia Tributaria, desde el 1 de julio de 2026 las compras online de hasta 150 euros enviadas desde fuera de la UE pagan, además del IVA, un arancel fijo de 3 euros por categoría de artículos. Si el precio de la tienda no incluía el arancel, el transportista puede pedirte el arancel y el IVA, y quizá unos gastos de gestión, antes de la entrega. Y desde el 1 de noviembre de 2026, según la Comisión Europea, todas las compras online a tiendas de fuera de la UE pagan además una tasa de tramitación de la UE de 2 euros por categoría.
 
 ### ¿Qué hago si mi paquete de FedEx llega tarde o aparece entregado y no lo tengo?
 

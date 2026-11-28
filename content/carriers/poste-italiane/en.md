@@ -106,7 +106,7 @@ Standard delivery times exclude Saturdays (Saturday delivery is a paid option on
 
 ### How do I call or contact Poste Italiane from abroad in English?
 
-From abroad or a mobile phone, call +39 06 4526 3160 (Monday to Saturday, 8am to 8pm, excluding holidays; operator rates apply). You can also email `assistenza.spedizioni@posteitaliane.it` or use the English [Contact us](https://www.poste.it/assistenza/scrivici-en) form.
+From abroad or a mobile phone, call +39 06 4526 3160 (Monday to Saturday, 8am to 8pm, excluding holidays; operator rates apply). You can also email assistenza.spedizioni@posteitaliane.it or use the English [Contact us](https://www.poste.it/assistenza/scrivici-en) form.
 
 :::sources
 - [Poste Italiane: FAQ Spedizioni e consegne](https://www.poste.it/assistenza/faq-spedizioni-e-consegne/) – code, notice, delegation, appointment, parcels from abroad

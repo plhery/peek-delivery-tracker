@@ -3237,6 +3237,34 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(storage.parcels.compactMap(\.alertToken).count, links.count)
     }
 
+    /// A parcel followed while a round asks for another's notifications, whose own round found that one under way, is
+    /// asked for at the next refresh, as on Android, rather than at the next launch.
+    func testAParcelFollowedDuringARoundIsAskedForAtTheNextRefresh() async throws {
+        let calls = Calls()
+        let gate = AlertGate()
+        var gated = client(calls)
+        gated.setAlert = { linkID, _, request in
+            calls.add("alert \(linkID) \(request.token)")
+            if linkID == "33333333333A" { await gate.pass(linkID) }
+            return .on
+        }
+        let now = Date(timeIntervalSince1970: 1_800_000_000)
+        let device = DeviceParcels(client: gated, storage: Memory(), now: { now })
+        _ = try device.follow(PublicParcelResponse(link: reader("33333333333A"), package: package(UUID())), key: nil, label: nil)
+        let round = Task { await device.registerAlerts(token: "token1", locale: .en) }
+        await gate.arrived("33333333333A")
+        _ = try device.follow(PublicParcelResponse(link: reader("33333333333B"), package: package(UUID(), number: "TESTPARCEL999")),
+                              key: nil, label: nil)
+        await device.registerAlerts(token: "token1", locale: .en)
+        await gate.release("33333333333A")
+        await round.value
+        XCTAssertEqual(calls.all, ["alert 33333333333A token1"])
+        XCTAssertEqual(device.alertsRetryAt, now)
+        await device.retryAlerts()
+        XCTAssertEqual(calls.all, ["alert 33333333333A token1", "alert 33333333333B token1"])
+        XCTAssertNil(device.alertsRetryAt)
+    }
+
     /// The guest list's refresh is what tries a round cut short again.
     func testTheGuestListsRefreshTriesNotificationsAgainAfterAnOutage() async throws {
         let transport = PostcodeTestURLProtocol.transport()

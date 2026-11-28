@@ -1195,12 +1195,13 @@ final class DeviceParcels {
         defer { alertRounds.remove(round) }
         // How long the service asked to be left alone, when the round is cut short.
         var pause: TimeInterval?
-        // More parcels wait than a round asks for.
-        var more = false
-        defer { if round == alertGeneration { holdAlerts(pause, wanted, more: more) } }
-        let waiting = entries.filter { alertsAsked[$0.linkID] != asked && !Self.over($0.parcel) && !$0.isMuted && !$0.isFrozen }
-        more = waiting.count > Self.alertsPerRound
-        let due = waiting.prefix(Self.alertsPerRound)
+        func waiting() -> [DeviceParcel] {
+            entries.filter { alertsAsked[$0.linkID] != asked && !Self.over($0.parcel) && !$0.isMuted && !$0.isFrozen }
+        }
+        // Parcels past this round, and those added or turned back on while it ran, whose own round found this one
+        // under way, wait for the next one, as on Android.
+        defer { if round == alertGeneration { holdAlerts(pause, wanted, more: !waiting().isEmpty) } }
+        let due = waiting().prefix(Self.alertsPerRound)
         for entry in due {
             guard round == alertGeneration else { return }
             // Forgotten, followed through another link, turned off with its bell or forgotten by the service since the

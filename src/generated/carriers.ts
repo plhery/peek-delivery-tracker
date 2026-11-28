@@ -3540,6 +3540,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e2393c"
     },
     {
+      "id": "jcex",
+      "catalog": "jcex",
+      "slug": "jcex-sendungsverfolgung",
+      "title": "JCEX Sendungsverfolgung: JCZ-Nummern, Status & Zusteller",
+      "name": "JCEX",
+      "color": "#0080cc"
+    },
+    {
       "id": "lingdong",
       "catalog": "lingdong",
       "slug": "lingdong-sendungsverfolgung",
@@ -3866,6 +3874,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Sending Sendungsverfolgung: Nummer, Status und Telefon",
       "name": "Sending",
       "color": "#e52021"
+    },
+    {
+      "id": "hywl",
+      "catalog": "hywl",
+      "slug": "hywl-sendungsverfolgung",
+      "title": "HYWL Sendungsverfolgung: Huiyi Logistics TRK & Status",
+      "name": "Huiyi Logistics",
+      "color": "#0b8f91"
     },
     {
       "id": "ywe",
@@ -5988,6 +6004,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Juxi Express suivi\u00a0: numéro JXC, livraison et contact",
       "name": "Juxi Express",
       "color": "#e2393c"
+    },
+    {
+      "id": "jcex",
+      "catalog": "jcex",
+      "slug": "jcex-suivi-colis",
+      "title": "Suivi colis JCEX\u00a0: numéros JCZ, statuts et livraison",
+      "name": "JCEX",
+      "color": "#0080cc"
     },
     {
       "id": "lingdong",
@@ -19530,6 +19554,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "ru": [
     {
+      "id": "cainiao",
+      "catalog": "aliexpress",
+      "slug": "cainiao-otslezhivanie",
+      "title": "Отслеживание Cainiao: трек-номера, статусы и контакты",
+      "name": "Cainiao",
+      "color": "#e62e04"
+    },
+    {
       "id": "gls-de",
       "catalog": "gls-de",
       "slug": "gls-germany-otslezhivanie",
@@ -19776,6 +19808,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Отслеживание Ozon: трек-номер заказа и статусы доставки",
       "name": "Ozon",
       "color": "#005bff"
+    },
+    {
+      "id": "sto",
+      "catalog": "sto",
+      "slug": "sto-express-otslezhivanie",
+      "title": "Отслеживание STO Express (申通快递): номера и статусы",
+      "name": "STO Express",
+      "color": "#ff6700"
     },
     {
       "id": "xinghe-freight",
@@ -22720,6 +22760,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#4e79e1"
     },
     {
+      "id": "huahan",
+      "catalog": "huahan",
+      "slug": "huahan-logistics-sledovani-zasilek",
+      "title": "HuaHan Logistics sledování zásilek: HHW…YQ a dopravci",
+      "name": "HuaHan Logistics",
+      "color": "#0069e8"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-sledovani-zasilek",
@@ -22996,6 +23044,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Urmărire colet GZYL: cod YL…YQ, statusuri, vamă și contact",
       "name": "GZYL",
       "color": "#4e79e1"
+    },
+    {
+      "id": "shouwu",
+      "catalog": "shouwu",
+      "slug": "shouwu-urmarire-colet",
+      "title": "Shouwu urmărire colet: SWECN…YQ, statusuri și curieri",
+      "name": "Shouwu International",
+      "color": "#be2c33"
     },
     {
       "id": "cne",

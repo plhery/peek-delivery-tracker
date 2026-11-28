@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { GET } from '../../app/liveries/[version]/[file]/route';
 import { config } from '../../proxy';
 import { LIVERY_VERSION, type CarrierDecal } from '../brand';
-import { ALL_LIVERIES, CARRIER_LIVERIES, isLivery, liveryFile } from './liveries';
+import { ALL_LIVERIES, allLiveriesFile, CARRIER_LIVERIES, isLivery, liveryFile } from './liveries';
 
 const ask = (version: string, file: string) =>
   GET(new Request(`https://peek.test/liveries/${version}/${file}`), { params: Promise.resolve({ version, file }) });
@@ -37,10 +37,17 @@ describe('livery files', () => {
   });
 
   it('writes every livery as well-formed SVG', () => {
+    // Each livery's file is its group in the wrapper the file of them all has: parsing that one file checks them all,
+    // where parsing hundreds of files outlasted the test's time under coverage.
+    const text = allLiveriesFile();
+    const all = parsed(text);
+    expect(all.querySelector('parsererror')).toBeNull();
+    const [open, close] = liveryFile('dhl').split(/<g id="livery-dhl">.*<\/g>/);
     for (const decal of Object.keys(CARRIER_LIVERIES) as CarrierDecal[]) {
-      const svg = parsed(liveryFile(decal));
-      expect(svg.querySelector('parsererror'), decal).toBeNull();
-      expect(svg.getElementById(`livery-${decal}`)?.children.length, decal).toBe(CARRIER_LIVERIES[decal].length);
+      const file = liveryFile(decal);
+      expect(file.startsWith(open!) && file.endsWith(close!), decal).toBe(true);
+      expect(text, decal).toContain(file.slice(open!.length, -close!.length));
+      expect(all.getElementById(`livery-${decal}`)?.children.length, decal).toBe(CARRIER_LIVERIES[decal].length);
     }
   });
 

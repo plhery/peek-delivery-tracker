@@ -791,6 +791,9 @@ class DeviceParcels(
             if (old.parcel.id == replacing) {
                 entry = entry.copy(label = old.label, archivedAt = old.archivedAt, replaced = old.replaced, muted = old.muted, note = old.note)
                 noteFiles?.move(old.linkId, entry.linkId)
+            } else {
+                // Followed here through another link: its note and files come along, as on the iPhone.
+                entry = carryNote(Superseded(true, null, noted(old)), entry)
             }
         }
         // The start of this number, looked up here minutes before and with no scan yet, was the number half typed: this
@@ -1186,11 +1189,12 @@ class DeviceParcels(
             if (response.parcel.id != id) stamped(it.copy(parcel = answer).startingSeen()).copy(replaced = it.replaced ?: id) else stamped(it.taking(answer))
         }
         val superseded = supersede(response.parcel, number)
-        val name = superseded.name
-        client?.let { removeTwin(response.parcel.id, besides = linkId, it) }
+        val twin = client?.let { removeTwin(response.parcel.id, besides = linkId, it) }
+        // The parcel followed here under another link leaves its name and note too, after the copies', as on the iPhone.
+        val name = superseded.name ?: twin?.label?.nonEmpty
         val moved = entries.indexOfFirst { it.linkId.equalsCanonically(linkId) }
         if (name != null && entries[moved].label.isEmpty()) change(moved) { it.copy(label = name) }
-        change(moved) { carryNote(superseded, it) }
+        change(moved) { carryNote(superseded.copy(noted = superseded.noted ?: noted(twin)), it) }
         save()
         return shown(entries[moved])
     }
@@ -1591,9 +1595,11 @@ class DeviceParcels(
     private fun supersede(answer: PublicPackage, number: String? = null, linkId: String? = null): Superseded {
         val gone = entries.filter { superseded(it, answer, number) || (it.isFrozen && linkId != null && it.linkId.equalsCanonically(linkId)) }
         if (gone.isNotEmpty()) entries = entries.filter { entry -> gone.none { it === entry } }
-        val noted = gone.firstOrNull { it.note != null || noteFiles?.of(it.linkId)?.isNotEmpty() == true }
-        return Superseded(gone.isNotEmpty(), gone.firstNotNullOfOrNull { it.label.nonEmpty }, noted)
+        return Superseded(gone.isNotEmpty(), gone.firstNotNullOfOrNull { it.label.nonEmpty }, gone.firstNotNullOfOrNull(::noted))
     }
+
+    /** `entry` when it holds a note or a note's files. */
+    private fun noted(entry: DeviceParcel?): DeviceParcel? = entry?.takeIf { it.note != null || noteFiles?.of(it.linkId)?.isNotEmpty() == true }
 
     /** Whether copies gave way, the first name among them, and the first with a note. */
     private data class Superseded(val any: Boolean, val name: String?, val noted: DeviceParcel? = null)
@@ -1637,7 +1643,7 @@ class DeviceParcels(
     /**
      * This phone's own lookups that one of `number` takes the place of: the start of that number, looked up here within
      * [halfTypedFor] and with no scan yet, which was the number half typed. An older lookup, one with a scan, one named,
-     * archived or no longer updated here, and someone else's link all stay.
+     * noted, archived or no longer updated here, and someone else's link all stay, as on the iPhone.
      */
     private fun halfTyped(number: String): List<DeviceParcel> {
         val typed = CarrierCatalog.normalize(number)
@@ -1647,7 +1653,7 @@ class DeviceParcels(
             val made = entry.linkCreatedAt?.let(DateParser::date) ?: return@filter false
             val age = at - made.timeIntervalSinceReferenceDate
             keys.keyOf(entry.linkId) != null && !entry.isViewer && !entry.isFrozen && entry.archivedAt == null && entry.label.isEmpty() &&
-                start.isNotEmpty() && typed.characterCount > start.characterCount && typed.hasCanonicalPrefix(start) &&
+                noted(entry) == null && start.isNotEmpty() && typed.characterCount > start.characterCount && typed.hasCanonicalPrefix(start) &&
                 age >= 0 && age <= halfTypedFor && entry.parcel.trackingEvents.all { it.stage == TrackingStage.Pending }
         }
     }

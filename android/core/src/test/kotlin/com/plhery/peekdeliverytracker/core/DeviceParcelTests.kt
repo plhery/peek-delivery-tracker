@@ -1422,6 +1422,32 @@ class DeviceParcelTests {
         )
     }
 
+    /** The link moved onto a parcel followed here under another link takes its name and note when it has none, as on the iPhone. */
+    @Test
+    fun aLinkMovedToAParcelFollowedHereUnderAnotherLinkTakesItsNameAndNote() = runTest {
+        val previousId = UUID.randomUUID()
+        val nextId = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key, "22222222222B" to key)
+        storage.parcels = listOf(
+            parcel("22222222222A", "", previousId),
+            parcel("22222222222B", "Lamp", nextId, pkg = pkg(nextId, number = "TESTPARCEL555000")).copy(note = "Leave it with the neighbour"),
+        )
+        val calls = Calls()
+        val device = device(
+            client(calls, move = { linkId, _ -> PublicParcelResponse(link = link(linkId), parcel = pkg(nextId, carrier = CarrierId.Dpd)) }),
+            storage, this,
+        )
+
+        val parcel = device.changeCarrier(id = previousId, carrier = CarrierId.Dpd, trackingUrl = null, dpdPostcode = null)
+        advanceUntilIdle()
+
+        assertEquals("Lamp", parcel.label)
+        assertEquals("Leave it with the neighbour", parcel.note)
+        assertEquals(listOf("22222222222A"), storage.parcels.map { it.linkId })
+        assertEquals(listOf("Leave it with the neighbour"), storage.parcels.map { it.note })
+    }
+
     /** A lookup made here of `number`, `ago` seconds before `now`, with no scan yet unless `stage` is one. */
     private fun lookedUp(linkId: String, number: String, now: Instant, ago: Long = 60, stage: TrackingStage = TrackingStage.Pending): DeviceParcel {
         val id = UUID.randomUUID()
@@ -1483,6 +1509,7 @@ class DeviceParcelTests {
             lookedUp("22222222222A", "1234567", now, ago = DeviceParcels.halfTypedFor.toLong() + 1),
             lookedUp("22222222222B", "1234567", now, stage = TrackingStage.InTransit),
             lookedUp("22222222222C", "1234567", now).copy(label = "Shoes"),
+            lookedUp("22222222222K", "1234567", now).copy(note = "Gate code on the back"),
             lookedUp("22222222222D", "1234567", now).copy(archivedAt = "2026-11-20T09:59:30Z"),
             lookedUp("22222222222E", "1234567", now).copy(frozen = "2026-11-20T09:59:30Z"),
             // Someone else's link, read without a key.

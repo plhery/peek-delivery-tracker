@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Verfolge dein Hermes-Paket direkt oben im Feld, in der [Sendungsverfolgung auf myhermes.de](https://www.myhermes.de/empfangen/sendungsverfolgung/) oder in der Hermes App: Die Sendungsnummer vom Absender hat 14 bis 20 Zeichen (meist `H` plus 16 bis 19 Ziffern oder 14 Ziffern). Hermes Germany (Hamburg, Otto Group) stellt montags bis samstags zwischen 8 und 20 Uhr zu, lagert Pakete 7 Werktage im PaketShop (72 Stunden in der Hermes Box) und ist für Empfänger nur über das Kontaktformular erreichbar — nicht per Hotline oder SMS.
+Verfolge dein Hermes-Paket direkt oben im Feld, in der [Sendungsverfolgung auf myhermes.de](https://www.myhermes.de/empfangen/sendungsverfolgung/) oder in der Hermes App: Die Sendungsnummer vom Absender hat 14 bis 20 Zeichen (etwa `H` plus 16 bis 19 Ziffern oder 14 Ziffern). Hermes Germany (Hamburg, Otto Group) stellt montags bis samstags zwischen 8 und 20 Uhr zu, lagert Inlandspakete 7 Werktage im PaketShop (72 Stunden in der Hermes Box) und ist für Empfänger nur über das Kontaktformular erreichbar — nicht per Hotline oder SMS.
 
 ## Hermes Sendungsnummer: wo du sie findest
 

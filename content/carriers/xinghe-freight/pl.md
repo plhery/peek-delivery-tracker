@@ -6,7 +6,7 @@ published: 2026-11-18
 updated: 2026-11-27
 ---
 
-Aby śledzić paczkę Xinghe Freight (星和货运, 广州星和货运代理有限公司, spedytor z Kantonu działający od 2014 r.), wklej 16-znakowy numer `GZXH` + 10 cyfr + `YQ` w pole powyżej albo wpisz go na chińskiej stronie xinghe-express.cn. Śledzenie Xinghe korzysta z platformy [GZYL](carrier:gzyl), na której cały harmonogram — łącznie z `Delivered` — bywa wpisany z wyprzedzeniem bez fizycznego skanu: jeśli inny serwis pokazuje `Delivered`, a paczki nie ma, zapytaj sprzedawcę o nazwę i numer lokalnego przewoźnika.
+Aby śledzić paczkę Xinghe Freight (星和货运, 广州星和货运代理有限公司, spedytor z Kantonu, według swojej strony działający od 2014 r.), wklej 16-znakowy numer `GZXH` + 10 cyfr + `YQ` w pole powyżej albo wpisz go na chińskiej stronie xinghe-express.cn. Śledzenie Xinghe korzysta z platformy [GZYL](carrier:gzyl), na której cały harmonogram — łącznie z `Delivered` — bywa wpisany z wyprzedzeniem bez fizycznego skanu: jeśli inny serwis pokazuje `Delivered`, a paczki nie ma, zapytaj sprzedawcę o nazwę i numer lokalnego przewoźnika.
 
 ## Numer śledzenia Xinghe Freight: jak wygląda
 
@@ -109,11 +109,11 @@ Na platformie GZYL spedytorzy mogą zapisać z góry cały harmonogram aż po `D
 
 ### Kto doręcza paczki Xinghe Freight w Polsce i jakie są opłaty celne UE?
 
-Ani śledzenie, ani xinghe-express.cn nie podają polskiego doręczyciela (Peek przekazuje przesyłkę wyłącznie Poczcie Szwajcarskiej w Szwajcarii i Liechtensteinie, gdy rekord ją wskaże): zapytaj sprzedawcę. Dla przesyłek spoza UE obowiązują ryczałtowe cło 3 € za kategorię towaru do 150 € (od 1 lipca 2026 r.) oraz unijna opłata manipulacyjna 2 € za kategorię (od 1 listopada 2026 r.).
+Ani śledzenie, ani xinghe-express.cn nie podają polskiego doręczyciela (Peek przekazuje przesyłkę wyłącznie Poczcie Szwajcarskiej w Szwajcarii i Liechtensteinie, gdy rekord ją wskaże): zapytaj sprzedawcę. Dla przesyłek spoza UE obowiązują ryczałtowe cło 3 € za kategorię towaru w przesyłkach do 150 € (od 1 lipca 2026 r.) oraz unijna opłata manipulacyjna 2 € za kategorię (od 1 listopada 2026 r.).
 
 ### Dlaczego Peek nie pokazuje jeszcze zdarzeń dla numeru GZXH i z kim się kontaktować?
 
-System może jeszcze nie mieć zlecenia („Oczekiwanie na przewoźnika Xinghe Freight”) albo zawierać tylko etapy wpisane z wyprzedzeniem, widoczne dopiero po kliknięciu „Pokaż”. W sprawach zamówienia kontaktuj się ze sprzedawcą lub platformą: numer `19924483103` i e-mail `3975605292@qq.com` na xinghe-express.cn służą wyłącznie do zapytań biznesowych po chińsku.
+System może jeszcze nie mieć zlecenia („Oczekiwanie na przewoźnika Xinghe Freight”) albo zawierać tylko etapy wpisane z wyprzedzeniem, widoczne dopiero po kliknięciu „Pokaż”. W sprawach zamówienia kontaktuj się ze sprzedawcą lub platformą: xinghe-express.cn, dostępna tylko po chińsku, podaje całodobową infolinię (`19924483103`) i e-mail do zapytań biznesowych i wycen (`3975605292@qq.com`), ale żadnych informacji dla kupujących w sieci.
 
 :::sources
 - [Xinghe Freight: 广州星和货运代理有限公司 (strona główna, po chińsku)](http://xinghe-express.cn/) – nazwa firmy, usługi spedycyjne, wyszukiwarka korzystająca z systemu GZYL, infolinia i adres e-mail

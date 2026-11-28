@@ -103,7 +103,7 @@ Peek schaut bis zu alle 10 Minuten nach, in Zustellung bis zu alle 2 Minuten (am
 
 ### Wann kommt mein DPD-Paket und was ist Predict?
 
-In Deutschland dauert der Versand in der Regel 1 bis 2 Werktage ab Übergabe (ohne festen Termin laut AGB). Hat der Versender deine E-Mail-Adresse oder Handynummer übermittelt, kündigt Predict am Zustelltag ein 2-Stunden-Zeitfenster an (im Live-Tracking auf 30 Minuten genau).
+Laut DPD dauert der Versand in Deutschland in der Regel 1 bis 2 Werktage ab Übergabe (ohne festen Termin laut AGB). Hat der Versender deine E-Mail-Adresse oder Handynummer übermittelt, kündigt Predict am Zustelltag ein 2-Stunden-Zeitfenster an (im Live-Tracking auf 30 Minuten genau).
 
 ### Warum funktioniert die DPD Sendungsverfolgung nicht?
 

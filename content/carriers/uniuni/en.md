@@ -6,7 +6,7 @@ published: 2026-10-15
 updated: 2026-11-27
 ---
 
-Track a UniUni (Uni Express Inc., Richmond, B.C.) parcel in Canada or the US by pasting your `UUS`, `UUSC`, `4C…US`, `U`, `UR`, `CAA0`/`USA0` or `JY` tracking number in the box above or on [uniuni.com/tracking](https://www.uniuni.com/tracking/) (up to 25 numbers at once). UniUni handles last-mile delivery for shops such as Shein and Temu, takes three drop-off proof photos, reattempts missed deliveries within 48 hours and holds parcels in warehouse `storage` for 30 days after a second failed attempt.
+Track a UniUni (Uni Express Inc., Richmond, B.C.) parcel in Canada or the US by pasting your `UUS`, `UUSC`, `4C…US`, `U`, `UR`, `CAA0`/`USA0` or `JY` tracking number in the box above or on [uniuni.com/tracking](https://www.uniuni.com/tracking/) (up to 25 numbers at once). UniUni handles last-mile delivery for shops such as Shein and Temu, takes three drop-off proof photos, usually reattempts a missed delivery within 48 hours and holds parcels in warehouse `storage` for 30 days after a second failed attempt.
 
 No number to hand? Look in the order at the shop; if UniUni's tracking shows nothing yet, the seller most likely still has the parcel. For a new delivery, a new address or delivery instructions, a damaged parcel or feedback on a driver, use the UniUni chatbot on its [support page](https://www.uniuni.com/support/). Missing or wrong items and returns go to the seller. Got a parcel you didn't order? UniUni says it has little information about who sent it.
 
@@ -98,7 +98,7 @@ When UniUni hands a parcel to another courier, that courier's scans show up insi
 
 ### Is UniUni legit?
 
-Yes. UniUni is operated by Uni Express Inc., based in Richmond, British Columbia, and handles last-mile deliveries across Canada (80% coverage) and the United States (65% coverage) for online retailers including Shein and Temu.
+Yes. UniUni is operated by Uni Express Inc., based in Richmond, British Columbia, and handles last-mile deliveries in Canada and the United States for online retailers including Shein and Temu; it tells shippers it reaches 80% of Canada and 65% of the US.
 
 ### Are UniUni packages delivered by USPS or Canada Post?
 

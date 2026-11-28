@@ -1,13 +1,13 @@
 ---
 title: Ordini MediaWorld (MediaMarkt): tracking e corrieri
-description: In Italia MediaMarkt si chiama MediaWorld: corrieri (BRT, Poste, Amazon Shipping, InPost), stato ordine in «I tuoi ordini», ritiro in 30 min e resi 30 giorni.
+description: In Italia MediaMarkt si chiama MediaWorld: corrieri (BRT, Poste, Amazon Shipping, InPost), stato ordine in «I tuoi ordini», ritiro anche in 30 min e resi 30 giorni.
 slug: tracking-ordine-mediaworld-mediamarkt
 picture: Una scatola piatta di un televisore e un piccolo pacco accanto a un furgone delle consegne, Pip allegro e un negozio con il cartello del ritiro.
 published: 2026-10-17
 updated: 2026-11-27
 ---
 
-In Italia MediaMarkt opera come MediaWorld (mediaworld.it, gruppo MediaMarktSaturn). Segui il tuo ordine in «I tuoi ordini» dentro «Il mio profilo» o dalla terza e-mail di conferma spedizione: i prodotti leggeri viaggiano con Amazon Shipping, BRT, Poste Italiane o InPost (Point/Locker, 5 giorni lavorativi per il ritiro), mentre elettrodomestici e TV grandi li consegnano Ceva Logistics, Energo o Rhenus Logistics su appuntamento telefonico. Per ritardi, danni o ordini mancanti puoi contattare MediaWorld al `+39 02.94751717` (tutti i giorni 9–21) o dal modulo online; i prodotti Marketplace seguono le condizioni del singolo venditore.
+In Italia MediaMarkt opera come MediaWorld (mediaworld.it, gruppo MediaMarktSaturn). Segui il tuo ordine in «I tuoi ordini» dentro «Il mio profilo» o dalla terza e-mail di conferma spedizione: i prodotti leggeri viaggiano con Amazon Shipping, BRT, Poste Italiane o altri corrieri, oppure li ritiri in un InPost Point o Locker entro 5 giorni lavorativi, mentre elettrodomestici e TV grandi li consegnano Ceva Logistics, Energo, Rhenus Logistics o altri corrieri su appuntamento telefonico. Per ritardi, danni o ordini mancanti puoi contattare MediaWorld al `+39 02.94751717` (tutti i giorni 9–21) o dal modulo online; i prodotti Marketplace seguono le condizioni del singolo venditore.
 
 ## Quale corriere consegna il mio ordine MediaWorld?
 

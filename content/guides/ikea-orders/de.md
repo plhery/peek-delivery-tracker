@@ -7,7 +7,7 @@ published: 2026-10-18
 updated: 2026-11-27
 ---
 
-Verfolge jede IKEA-Online-Bestellung direkt auf der IKEA-Seite deines Landes („Verfolge und verwalte deine Bestellung“ in Deutschland, „Meine Bestellungen“ in Österreich und der Schweiz) mit deiner Bestellnummer und der E-Mail-Adresse oder Telefonnummer aus der Bestellung. Pakete bekommen zusätzlich eine eigene Sendungsnummer per E-Mail (in Österreich von der Österreichischen Post, in der Schweiz von der Post oder Planzer; in Deutschland nennt IKEA den Paketdienst nicht), die du auch in Peek verfolgen kannst. Möbel liefert eine Spedition im Zeitfenster (in Deutschland 12 Stunden mit Anruf ca. 1 Stunde vorher) — dafür gibt es nur den Status bei IKEA.
+Verfolge jede IKEA-Online-Bestellung direkt auf der IKEA-Seite deines Landes („Verfolge und verwalte deine Bestellung“ in Deutschland, „Meine Bestellungen“ in Österreich und der Schweiz) mit deiner Bestellnummer und der E-Mail-Adresse oder Telefonnummer aus der Bestellung. Pakete bekommen zusätzlich eine eigene Sendungsnummer per E-Mail (in Österreich von der Österreichischen Post, in der Schweiz von der Post oder Planzer; in Deutschland nennt IKEA den Paketdienst nicht), die du auch in Peek verfolgen kannst. Möbel liefert eine Spedition im Zeitfenster (in Deutschland 12 Stunden mit Anruf ca. 1 Stunde vorher) — die verfolgst du bei IKEA und über den Anruf oder die Nachricht des Fahrers.
 
 ## Wer liefert meine IKEA-Bestellung?
 

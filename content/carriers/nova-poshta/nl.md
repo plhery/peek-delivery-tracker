@@ -92,7 +92,7 @@ Peek toont de Engelse formuleringen van Nova Poshta, de plaats van elke scan op 
 
 ### Hoe volg ik een internationaal Nova Post pakket in Europa?
 
-Vul je 14-cijferige express waybill (EW) of internationale Nova Post-nummer (beginnend met `SH` of `TN`, gevolgd door een landcode van twee letters en 10 cijfers, zoals het verzonnen `SHPL4829173648`) in op [novaposhta.ua](https://novaposhta.ua/en/tracking/) of in het zoekvak hierboven. Wanneer een exportzending een buitenlandse partner zoals UPS of GOFO Express vermeldt, kan Peek het pakket daar ook volgen.
+Vul je 14-cijferige express waybill (EW) of internationale Nova Post-nummer (beginnend met `SH` of `TN`, gevolgd door een landcode van twee letters en 10 cijfers, zoals het verzonnen `SHPL4829173648`) in op [novaposhta.ua](https://novaposhta.ua/en/tracking/) of in het zoekvak hierboven. Wanneer een exportzending haar buitenlandse partner noemt, UPS of GOFO Express, kan Peek het pakket daar ook volgen.
 
 ### Is Nova Poshta betrouwbaar?
 

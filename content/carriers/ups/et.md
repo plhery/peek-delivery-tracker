@@ -30,13 +30,13 @@ UPS-i jälgimislehel on edenemisriba (`Label Created`, `We Have Your Package`, `
 | `Your package has been released by a government agency.` | In transit | Riigiasutus on paki vabastanud. |
 | `Duties or taxes are due on this package.` | At customs | Enne kättetoimetamist tuleb tasuda impordimaksud (vt allpool). |
 | `Loaded on Delivery Vehicle`, `Out For Delivery Today` | Out for delivery | Pakk on kulleri autos. |
-| `Delivery instructions have been provided by the receiver.` | Unchanged | Saaja on andnud UPS-ile tarnejuhised. See on teade, mitte liikumisskaneering: Peek jätab alles eelmise staatuse, näiteks "Out for delivery". |
+| `Delivery instructions have been provided by the receiver.` | Unchanged | Saaja on andnud UPS-ile tarnejuhised. See on teade, mitte liikumisskaneering: Peek jätab alles eelmise staatuse, näiteks „Out for delivery“. |
 | `The receiver was not available at the time of the final delivery attempt.` | Delivery attempted | Viimane kättetoimetamiskatse ebaõnnestus. |
 | `Delivered to UPS Access Point™`, `UPS Access Point™ possession` | Ready for pickup | Pakk ootab sind UPS Access Pointi punktis. |
 | `DELIVERED` | Delivered | Kohale toimetatud või Access Pointist kätte saadud. |
 | `Return to Sender` | Returned to sender | Pakk liigub tagasi saatjale. |
 
-`Exception` on UPS-i üldstaatus ja võib tähendada pelgalt viivitust. Loe selle all olevat skaneeringut: `We're sorry this package may experience a temporary delay.` tähistab ajutist viivitust, samas kui `The company or receiver name is incorrect. This will delay delivery.` tähendab, et tarne ootab sinu andmete täpsustamist (Peek näitab "Needs attention"). Peek lähtub kõige värskemast skaneeringust, mitte üldstaatusest.
+`Exception` on UPS-i üldstaatus ja võib tähendada pelgalt viivitust. Loe selle all olevat skaneeringut: `We're sorry this package may experience a temporary delay.` tähistab ajutist viivitust, samas kui `The company or receiver name is incorrect. This will delay delivery.` tähendab, et tarne ootab sinu andmete täpsustamist (Peek näitab „Needs attention“). Peek lähtub kõige värskemast skaneeringust, mitte üldstaatusest.
 
 ## Ebaõnnestunud UPS-i tarne ja Access Pointid
 
@@ -46,9 +46,9 @@ UPS võib viia paki ka UPS Access Pointi. Kui pakk on kohal, ilmuvad skaneeringu
 
 ## Tollimaksud UPS-i pakkidel
 
-Väljastpoolt Ühendkuningriiki saadetud paki või Iirimaa puhul väljastpoolt EL-i tulnud paki eest võib enne üleandmist olla vaja maksta impordimaksud; jälgimises ilmuvad siis read `Duties or taxes are due on this package.` ja `Your package is being held until duties and taxes are paid. Awaiting customer action.` Peek näitab staatust "At customs" koos teatega "Import duties or taxes to pay".
+Väljastpoolt Ühendkuningriiki saadetud paki või Iirimaa puhul väljastpoolt EL-i tulnud paki eest võib enne üleandmist olla vaja maksta impordimaksud; jälgimises ilmuvad siis read `Duties or taxes are due on this package.` ja `Your package is being held until duties and taxes are paid. Awaiting customer action.` Peek näitab staatust „At customs“ koos teatega „Import duties or taxes to pay“.
 
-Kui toll vajab selle asemel sinu maksunumbrit, on UPS-i skaneering `Importer's consumer or business Identification number is required for clearance. Awaiting information from the customer.`: tollivormistus ootab importija eraisiku- või ettevõtte tunnust ning sina kui saaja pead selle esitama. Peek näitab staatust "At customs" koos teatega "Customs needs your tax number".
+Kui toll vajab selle asemel sinu maksunumbrit, on UPS-i skaneering `Importer's consumer or business Identification number is required for clearance. Awaiting information from the customer.`: tollivormistus ootab importija eraisiku- või ettevõtte tunnust ning sina kui saaja pead selle esitama. Peek näitab staatust „At customs“ koos teatega „Customs needs your tax number“.
 
 - **Ühendkuningriik:** GOV.UK andmetel võtab kuller sinuga ühendust arvega käibemaksu, tollimaksu või kättetoimetamistasude kohta ja hoiab pakki tavaliselt umbes 3 nädalat. Tasumata jätmisel saadetakse pakk tagasi saatjale.
 - **Iirimaa:** alates 1. juulist 2026 kehtib enamikule väljastpoolt EL-i saabuvatele kuni 150-eurose väärtusega pakkidele 3-eurone tollimaks tooteliigi kohta. Kui pood ei kogunud seda kassas, küsib kuller selle maksuameti Revenue teatel enne üleandmist ning lisab oma haldustasu. Alates 1. novembrist 2026 lisandub väljastpoolt EL-i veebist tellitud kaupadele väärtusest sõltumata ka EL-i 2-eurone käitlemistasu (Union handling fee) tooteliigi kohta.
@@ -70,9 +70,9 @@ Märgitud `DELIVERED`, aga pakki pole? UPS-i leht võib näidata, kuhu pakk jäe
 
 [Peek](/) tunneb UPS-i kohe ära õige kontrollnumbriga `1Z`-numbri järgi; vale kontrollnumbri korral lükkab UPS selle trükiveana tagasi. Töötavad ka `1Z`-numbrit sisaldavad lingid. UPS-ist otsib Peek ainult `1Z`-numbreid: muud kujud suunatakse jälgimisteenustesse.
 
-Peek avab ups.com jälgimislehe oma serveri brauseris ja loeb vastust kuni iga 10 minuti järel ning alates kell 6.00 kohaliku aja järgi päeval, mil UPS skaneerib paki kullerile üleantuks, iga 5 minuti järel, kuni UPS-i enda jälgimine vastab (jälgimisteenuste kaudu iga 15 minuti järel). Pärast kahte uudisteta päeva (või 12 tunni möödudes, kui pakil on endiselt staatus "Label created" või "Received by carrier") kontrollib Peek kord tunnis. Kui UPS keeldub vastamast või loetav on ainult staatus, täidavad ajaloo jälgimisteenused. Peek näitab staatust, iga skaneeringut kaardil täpse kellaajaga, planeeritud tarnepäeva (mitte kunagi ajavahemikku), kohaletoimetamise aega ning paki ootel olles Access Pointi nime ja aadressi. Teavitused saab seada iga skaneeringu, oluliste sammude või ainult tarnepäeva kohta.
+Peek avab ups.com jälgimislehe oma serveri brauseris ja loeb vastust kuni iga 10 minuti järel ning alates kell 6.00 kohaliku aja järgi päeval, mil UPS skaneerib paki kullerile üleantuks, iga 5 minuti järel, kuni UPS-i enda jälgimine vastab (jälgimisteenuste kaudu iga 15 minuti järel). Pärast kahte uudisteta päeva (või 12 tunni möödudes, kui pakil on endiselt staatus „Label created“ või „Received by carrier“) kontrollib Peek kord tunnis. Kui UPS keeldub vastamast või loetav on ainult staatus, täidavad ajaloo jälgimisteenused. Peek näitab staatust, iga skaneeringut kaardil täpse kellaajaga, planeeritud tarnepäeva (mitte kunagi ajavahemikku), kohaletoimetamise aega ning paki ootel olles Access Pointi nime ja aadressi. Teavitused saab seada iga skaneeringu, oluliste sammude või ainult tarnepäeva kohta.
 
-Peek jätab kõrvale allkirjastaja, sinu aadressi, kättetoimetamistõendi ja koha, kuhu pakk jäeti, ega näita tarnefotot ega kaalu. Skaneeringud ilmuvad UPS-i inglise keeles; üleandmine kannab silti "DELIVERED". Kui UPS annab Ground Saveri paki üle [US Postal Service'ile](carrier:usps) ja lisab selle numbri, jälgib Peek pakki edasi seal, kui USPS-il tekivad uued kanded ("Delivery with USPS").
+Peek jätab kõrvale allkirjastaja, sinu aadressi, kättetoimetamistõendi ja koha, kuhu pakk jäeti, ega näita tarnefotot ega kaalu. Skaneeringud ilmuvad UPS-i inglise keeles; üleandmine kannab silti „DELIVERED“. Kui UPS annab Ground Saveri paki üle [US Postal Service'ile](carrier:usps) ja lisab selle numbri, jälgib Peek pakki edasi seal, kui USPS-il tekivad uued kanded („Delivery with USPS“).
 
 ## Küsimused UPS-i paki jälgimise kohta
 
@@ -90,7 +90,7 @@ Ei: Peek ainult loeb UPS-i jälgimisandmeid. Muudatused, mille teed otse UPS-is,
 
 ### Kas UPS-i tarne-SMS võib olla pettus?
 
-Jah. Citizens Advice hoiatab, et sõnum, mis palub paki kättesaamiseks või tarne ümberplaneerimiseks tasuda, on tavaliselt pettus, ning kullerfirmad ei küsi makset SMS-is või e-kirjas oleva lingi kaudu. Tõelised impordimaksud ilmuvad jälgimisse tolliskaneeringutena, seega kontrolli numbrit ise lehel ups.com või Peekis, mitte lingil klõpsates. Ühendkuningriigis saab kahtlase SMS-i tasuta edastada numbrile 7726. Loe lisaks [tarnepettuse sõnumitest](guide:delivery-scam-texts) (inglise keeles).
+Jah. Citizens Advice hoiatab, et sõnum, mis palub paki kättesaamiseks või tarne ümberplaneerimiseks tasuda, on tavaliselt pettus, ning kullerfirmad ei küsi makset SMS-is või e-kirjas oleva lingi kaudu. Tõelised impordimaksud ilmuvad jälgimisse tolliskaneeringutena, seega kontrolli numbrit ise lehel ups.com või Peekis, mitte lingil klõpsates. Ühendkuningriigis saab kahtlase SMS-i tasuta edastada numbrile 7726. USA-s soovitab FTC võtta vedajaga ühendust veebisaidi või telefoninumbri kaudu, mille ehtsuses oled kindel. Loe lisaks [tarnepettuse sõnumitest](guide:delivery-scam-texts) (inglise keeles).
 
 :::sources
 - [Citizens Advice: If something you ordered hasn't arrived](https://www.citizensadvice.org.uk/consumer/somethings-gone-wrong-with-a-purchase/if-something-you-ordered-hasnt-been-delivered/) – müüja vastutus, 30 päeva, kokkulepitud koht, petusõnumid (Inglismaa, Šotimaa ja Wales)
@@ -101,5 +101,6 @@ Jah. Citizens Advice hoiatab, et sõnum, mis palub paki kättesaamiseks või tar
 - [Revenue: Buying goods online for personal use](https://www.revenue.ie/en/customs/individuals/buying-online-personal/index.aspx) – kullerite haldustasu
 - [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2-eurone EL-i käitlemistasu alates 1. novembrist 2026
 - [European Commission: The temporary EUR 3 customs duty and the Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 eurot tooteliigi kohta kaugmüügil olenemata kauba väärtusest
+- [FTC: Fake shipping notification emails and text messages](https://consumer.ftc.gov/consumer-alerts/2023/12/fake-shipping-notification-emails-text-messages-what-you-need-know-holiday-season) – vedajaga ühenduse võtmine veebisaidi või numbri kaudu, mille ehtsuses oled kindel
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – numbrikujud, kontrollnumber, UPS-i skaneeringute sõnastused (riigiasutuse kinnipidamine ja vabastamine, saaja tarnejuhised, importija tunnuse nõue), mida Peek UPS-ist loeb
 :::

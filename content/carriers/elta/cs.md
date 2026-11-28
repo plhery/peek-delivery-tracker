@@ -67,7 +67,7 @@ Pokud sledování několik dní stojí na místě, podívejte se nejdříve na [
 
 **Ztráta.** Odesílatel nebo adresát může podat žádost o pátrání na pobočce ELTA s dokladem totožnosti a podacím lístkem do šesti měsíců od podání. Týká se pouze plně sledovaných zásilek. ELTA odpovídá doporučeným dopisem do 8 týdnů (u vybraných zahraničních zásilek do 4 týdnů).
 
-**Poškozená kurýrní zásilka.** Převezměte ji s výhradou a škodu nahlaste do jednoho pracovního dne prostřednictvím kontaktního formuláře ELTA Courier nebo na pobočce. Bez toho ELTA nenese odpovědnost. Formulář pro náhradu škody se zasílá na apozimiwseis@elta-courier.gr s kurýrním dokladem, fakturou a fotografiemi obsahu i obalu. S dotazy volejte oddělení náhrad škod ELTA Courier na +30 210-6073066.
+**Poškozená kurýrní zásilka.** Převezměte ji s výhradou a škodu nahlaste do jednoho pracovního dne prostřednictvím kontaktního formuláře ELTA Courier nebo na pobočce. Bez toho ELTA nenese odpovědnost. Formulář pro náhradu škody se zasílá na apozimiwseis@elta-courier.gr s kurýrním dokladem, fakturou a fotografiemi obsahu i obalu. Náhradu dostane odesílatel, nebo vy, pokud se jí odesílatel písemně vzdá ve váš prospěch: u online objednávky se obraťte na obchod. S dotazy volejte oddělení náhrad škod ELTA Courier na +30 210-6073066.
 
 **Stížnosti.** ELTA musí odpovědět do 15 dnů. Pokud nejste spokojeni, požádejte písemně zákaznický servis o postoupení Výboru pro řešení sporů.
 

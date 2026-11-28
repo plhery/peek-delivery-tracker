@@ -90,7 +90,7 @@ Peek отбрасывает имя подписавшего, ваш адрес, 
 
 ### Может ли SMS о доставке UPS быть мошенничеством?
 
-Да. Citizens Advice предупреждает, что сообщение с требованием заплатить за получение или перенос доставки посылки обычно является мошенническим: службы доставки не просят оплату по ссылке из SMS или письма. Настоящие таможенные сборы отражаются в отслеживании как таможенные отметки, поэтому проверяйте номер на ups.com или в Peek, не переходя по ссылке. В Великобритании подозрительное SMS можно бесплатно переслать на номер 7726. Подробнее — о [мошеннических SMS о доставке](guide:delivery-scam-texts) (на английском).
+Да. Citizens Advice предупреждает, что сообщение с требованием заплатить за получение или перенос доставки посылки обычно является мошенническим: службы доставки не просят оплату по ссылке из SMS или письма. Настоящие таможенные сборы отражаются в отслеживании как таможенные отметки, поэтому проверяйте номер на ups.com или в Peek, не переходя по ссылке. В Великобритании подозрительное SMS можно бесплатно переслать на номер 7726. В США FTC советует связываться со службой доставки через сайт или номер телефона, в подлинности которых вы уверены. Подробнее — о [мошеннических SMS о доставке](guide:delivery-scam-texts) (на английском).
 
 :::sources
 - [Citizens Advice: If something you ordered hasn't arrived](https://www.citizensadvice.org.uk/consumer/somethings-gone-wrong-with-a-purchase/if-something-you-ordered-hasnt-been-delivered/) – ответственность продавца, 30 дней, согласованное место, мошеннические сообщения (Англия, Шотландия и Уэльс)
@@ -101,5 +101,6 @@ Peek отбрасывает имя подписавшего, ваш адрес, 
 - [Revenue: Buying goods online for personal use](https://www.revenue.ie/en/customs/individuals/buying-online-personal/index.aspx) – административный сбор курьерских служб
 - [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – сбор ЕС за обработку €2 с 1 ноября 2026 года
 - [European Commission: The temporary EUR 3 customs duty and the Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 за вид товара при дистанционных продажах независимо от стоимости
+- [FTC: Fake shipping notification emails and text messages](https://consumer.ftc.gov/consumer-alerts/2023/12/fake-shipping-notification-emails-text-messages-what-you-need-know-holiday-season) – связываться со службой доставки через сайт или номер, в подлинности которых вы уверены
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – форматы номеров, контрольная цифра, формулировки отметок UPS (задержка и выпуск госорганом, инструкции получателя, запрос налогового номера импортёра), что читает Peek
 :::

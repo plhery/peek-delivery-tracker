@@ -90,7 +90,7 @@ Nee: Peek leest alleen de tracking van UPS uit. Wijzigingen die je rechtstreeks 
 
 ### Is een sms over een UPS-bezorging oplichting?
 
-Dat kan. Volgens Citizens Advice is een bericht waarin je moet betalen om een pakket te ontvangen of opnieuw in te plannen meestal oplichting, en vragen bezorgdiensten niet om betaling via een link in een sms of e-mail. Echte invoerkosten verschijnen als douanescans in de tracking, dus controleer het nummer zelf op ups.com of in Peek in plaats van op de link te tikken. In het VK kun je de sms gratis doorsturen naar 7726. Meer in [nepmeldingen over bezorging](guide:delivery-scam-texts) (Engels).
+Dat kan. Volgens Citizens Advice is een bericht waarin je moet betalen om een pakket te ontvangen of opnieuw in te plannen meestal oplichting, en vragen bezorgdiensten niet om betaling via een link in een sms of e-mail. Echte invoerkosten verschijnen als douanescans in de tracking, dus controleer het nummer zelf op ups.com of in Peek in plaats van op de link te tikken. In het VK kun je de sms gratis doorsturen naar 7726. In de VS raadt de FTC aan contact op te nemen met het bezorgbedrijf via een website of telefoonnummer waarvan je weet dat het echt is. Meer in [nepmeldingen over bezorging](guide:delivery-scam-texts) (Engels).
 
 :::sources
 - [Citizens Advice: If something you ordered hasn't arrived](https://www.citizensadvice.org.uk/consumer/somethings-gone-wrong-with-a-purchase/if-something-you-ordered-hasnt-been-delivered/) – verantwoordelijkheid verkoper, 30 dagen, afgesproken plek, nepberichten (Engeland, Schotland en Wales)
@@ -101,5 +101,6 @@ Dat kan. Volgens Citizens Advice is een bericht waarin je moet betalen om een pa
 - [Revenue: Buying goods online for personal use](https://www.revenue.ie/en/customs/individuals/buying-online-personal/index.aspx) – administratiekosten van koeriers
 - [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €2 EU-afhandelingsvergoeding sinds 1 november 2026
 - [European Commission: The temporary EUR 3 customs duty and the Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per productsoort op verkopen op afstand, ongeacht de waarde
+- [FTC: Fake shipping notification emails and text messages](https://consumer.ftc.gov/consumer-alerts/2023/12/fake-shipping-notification-emails-text-messages-what-you-need-know-holiday-season) – contact opnemen met het bezorgbedrijf via een website of nummer waarvan je weet dat het echt is
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – nummerformaten, controlecijfer, UPS-scanteksten (overheidsstop en vrijgave, bezorginstructies ontvanger, verzoek om identificatienummer importeur), wat Peek van UPS leest
 :::

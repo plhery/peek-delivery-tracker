@@ -21,7 +21,7 @@ Codes komen in verschillende vormen voor. Deze voorbeelden zijn verzonnen:
 | `2IMA4829173654` | `2IMA` gevolgd door 10 cijfers. |
 | `5PA4829173654` | `5P` gevolgd door 11 letters of cijfers. |
 | `482917A365482` | Cijfers met een letter ertussen: codes in SDA-stijl. |
-| `RR482917365IT` | Een internationaal postnummer uit Italië. |
+| `RR482917367IT` | Een internationaal postnummer uit Italië. |
 
 Veel formaten worden gedeeld. Een `5P`-code met alleen cijfers kan ook een nummer van [La Poste (Colissimo)](carrier:la-poste) zijn, en gewone codes van 12 of 13 cijfers passen bij talloze vervoerders, dus controleer welke vervoerder in de e-mail van de winkel staat. Voor een pakket dat in het buitenland is verzonden, toont poste.it pas tracking zodra Poste Italiane het in Italië verwerkt.
 
@@ -65,13 +65,13 @@ Op het afhaalbericht of in de sms staat de uiterste afhaaldatum; de pagina's van
 
 De pagina's van Poste zeggen niets over tracking die niet meer beweegt. Neem eerst contact op met de winkel, die het verzendcontract met Poste heeft; zie [tracking die niet bijwerkt](guide:tracking-not-updating) (Engels).
 
-Zowel afzender als ontvanger mag een klacht indienen, maar een vergoeding gaat naar de afzender tenzij die daar formeel schriftelijk afstand van doet ten gunste van jou; voor een online bestelling is de webwinkel dus de snelste weg. Voor een pakket uit het buitenland raadt Poste de afzender aan contact op te nemen met de postdienst van het land van verzending. Meld schade direct bij aflevering: accepteer het pakket met een formulier voor "consegna cautelare", of weiger het.
+Zowel afzender als ontvanger mag een klacht indienen, maar een vergoeding gaat naar de afzender tenzij die daar formeel afstand van doet ten gunste van jou; voor een online bestelling is de webwinkel dus de snelste weg. Voor een pakket uit het buitenland raadt Poste de afzender aan contact op te nemen met de postdienst van het land van verzending. Meld schade direct bij aflevering: accepteer het pakket met een formulier voor "consegna cautelare", of weiger het.
 
 Termijnen hangen af van de gekozen dienst: voor Crono en Poste Delivery Business 20 kalenderdagen nadat Poste het pakket bij de afzender heeft opgehaald; voor Poste Delivery Standard vanaf de 6e werkdag na verzending, tot maximaal 3 maanden. Dien een klacht online in via het pakketklachtenformulier, per gecertificeerde e-mail (PEC) met de klachtenbrief van Poste, per aangetekende brief aan Casella Postale 160, 00144 Roma, of op een postkantoor. Het dienstverleningshandvest van Poste belooft binnen 45 dagen antwoord, gevolgd door bemiddeling (conciliazione) en daarna de toezichthouder AGCOM. Voor een pakket dat als [bezorgd staat gemeld maar niet is ontvangen](guide:delivered-not-received) (Engels) geldt dezelfde weg: Poste biedt geen aparte procedure.
 
 ## Telefoonnummer en klantenservice van Poste Italiane
 
-De contactkanalen van Poste Italiane op poste.it:
+De contactkanalen van Poste Italiane, zoals vermeld op poste.it op 11 oktober 2026:
 
 - **Vanuit het buitenland of mobiel:** +39 06 4526 3160, maandag tot en met zaterdag (behalve feestdagen) van 8:00 tot 20:00 uur, tegen het tarief van je provider.
 - **Vanaf een Italiaanse vaste lijn:** 803 160, gratis, dezelfde tijden.
@@ -106,7 +106,7 @@ Standaard bezorgtijden zijn exclusief zaterdagen (zaterdagbezorging is een betaa
 
 ### Hoe bel of bereik ik Poste Italiane vanuit het buitenland in het Engels?
 
-Bel vanuit het buitenland of mobiel naar +39 06 4526 3160 (maandag tot en met zaterdag van 8:00 tot 20:00 uur, behalve op feestdagen; tarief van je provider). Je kunt ook mailen naar `assistenza.spedizioni@posteitaliane.it` of het Engelse formulier [Contact us](https://www.poste.it/assistenza/scrivici-en) gebruiken.
+Bel vanuit het buitenland of mobiel naar +39 06 4526 3160 (maandag tot en met zaterdag van 8:00 tot 20:00 uur, behalve op feestdagen; tarief van je provider). Je kunt ook mailen naar assistenza.spedizioni@posteitaliane.it of het Engelse formulier [Contact us](https://www.poste.it/assistenza/scrivici-en) gebruiken.
 
 :::sources
 - [Poste Italiane: FAQ Spedizioni e consegne](https://www.poste.it/assistenza/faq-spedizioni-e-consegne/) – verzendcode, afhaalbericht, machtiging, afspraak, zendingen uit het buitenland

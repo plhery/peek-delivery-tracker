@@ -1,6 +1,6 @@
 ---
 title: Amazon Logistics sporing: hvor du finner pakken og hjelp
-description: Spor en Amazon Logistics-ordre i Your Orders: TBA- og UK/DE/FR-numre, Amazon Map Tracking, 3 dagers Amazon Lockers og Counters, A-to-z Guarantee og kontakt.
+description: Spor en Amazon Logistics-ordre i Your Orders: TBA- og UK/DE/FR-numre, Amazon Map Tracking, Amazon Lockers (3 dager) og Counters, A-to-z Guarantee og kontakt.
 slug: amazon-logistics-sporing
 published: 2026-11-27
 updated: 2026-11-27

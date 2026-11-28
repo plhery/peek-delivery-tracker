@@ -96,7 +96,7 @@ Volgens Balíkovna liggen de meeste pakketten al op de volgende werkdag na verze
 
 ### Hoe lang blijft een pakket liggen bij Česká pošta of Balíkovna?
 
-Op een postkantoor blijft een zending standaard 15 dagen liggen (of 10 dagen als de afzender dat instelde). Bij een Balíkovna-winkel of postkantoor geldt 7 kalenderdagen, en in een pakketkluis tot 7:00 uur op de tweede werkdag nadat het pakket klaarligt.
+Op een postkantoor blijft een zending standaard 15 dagen liggen (of 10 dagen als de afzender dat instelde). Een Balíkovna-pakket blijft 7 kalenderdagen liggen op een postkantoor of in een winkel, en in een pakketkluis tot 7:00 uur op de tweede werkdag nadat het klaarligt.
 
 :::sources
 - [Česká pošta: Track & Trace](https://www.postaonline.cz/en/trackandtrace) – voorbeeldnummer, 20 nummers, Engels en Tsjechisch

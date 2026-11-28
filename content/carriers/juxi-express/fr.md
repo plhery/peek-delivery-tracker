@@ -6,7 +6,7 @@ published: 2026-10-23
 updated: 2026-11-27
 ---
 
-Juxi Express (上海驹隙国际物流有限公司, aussi référencé sous le nom **SHJX** sur 17TRACK) est un transitaire de Shanghai qui expédie à l'étranger les colis de vendeurs chinois sous des numéros de 17 caractères en `JXC…YQ` (ou via China Post / PostNL). Comme Juxi n'a plus de page de suivi fonctionnelle, colle ton numéro dans le champ ci-dessus pour suivre le trajet depuis la Chine jusqu'au transporteur local en France ou en Belgique.
+Juxi Express (上海驹隙国际物流有限公司, aussi référencé sous le nom **SHJX** sur 17TRACK) est un transitaire de Shanghai qui expédie à l'étranger les colis de vendeurs chinois, sur ses propres lignes ou par la poste (China Post, PostNL) ; ses lettres de transport connues font 17 caractères, en `JXC…YQ`. Comme Juxi n'a plus de page de suivi fonctionnelle, colle ton numéro dans le champ ci-dessus pour suivre le trajet depuis la Chine jusqu'au transporteur local en France ou en Belgique.
 
 ## Numéro de suivi Juxi Express : à quoi il ressemble
 
@@ -107,11 +107,11 @@ C'est un transitaire basé à Shanghai (démarré en 2016, officiellement créé
 
 ### Où suivre un colis Juxi Express (numéro JXC…YQ) ?
 
-Directement dans le champ ci-dessus (ou sur 17TRACK sous SHJX), car le bouton « 在线追踪 » du site de Juxi n'ouvre plus aucun suivi. Pour les numéros commençant par `JXCYI`, `JXCZO`, `JXCUS` ou `JXCZI`, Peek interroge d'abord DHLink : touche « Changer » et choisis Juxi Express si besoin. Une fois le relais pris, suis aussi le numéro du transporteur local.
+Directement dans le champ ci-dessus (ou sur 17TRACK sous SHJX), car le bouton « 在线追踪 » du site de Juxi n'ouvre plus aucun suivi. Pour les numéros commençant par `JXCYI`, `JXCZO`, `JXCUS` ou `JXCZI`, Peek n'interroge que DHLink, dont le suivi en connaît certains : pour suivre un tel colis comme un colis Juxi, touche « Changer » et choisis Juxi Express. Une fois le relais pris, suis aussi le numéro du transporteur local.
 
 ### Qui livre un colis Juxi Express en France et en Belgique ?
 
-Juxi confie la livraison finale à un transporteur local sans le nommer sur son site : la poste du pays de destination pour les produits postaux (et PostNL pour le petit paquet suivi mondial), ou un partenaire local sur ses lignes dédiées. Regarde les derniers scans ou demande le transporteur final au vendeur.
+Un transporteur de ton pays, que Juxi ne nomme pas sur son site : pour les produits postaux, la poste du pays de destination, selon Juxi ; sur ses lignes dédiées, un transporteur local. Son petit paquet suivi mondial passe par PostNL, la poste néerlandaise. Regarde les derniers scans ou demande le transporteur final au vendeur.
 
 ### Quels sont les délais annoncés par Juxi Express vers la France et la Belgique ?
 
@@ -119,7 +119,7 @@ Selon la ligne réservée par le vendeur, Juxi indique à titre commercial 5 à 
 
 ### Qui contacter si mon colis Juxi Express est bloqué, taxé en douane ou perdu ?
 
-Juxi n'a aucun service client francophone (seulement une ligne fixe à Shanghai au `+86 21 6073 9366`). Pour un colis bloqué en douane, interroge le transporteur local (pas la douane) ; pour un retard, une perte ou un remboursement, contacte vite le vendeur — Juxi limite ses recherches à 1 mois (aucune réclamation après 60 jours) sur ses lignes dédiées.
+Juxi ne donne aucun contact pour les destinataires en France ou en Belgique et n'a aucune page en français ; son site, en chinois, donne une ligne fixe à Shanghai (+86 21 6073 9366). Pour un colis bloqué en douane, interroge le transporteur local (pas la douane) ; pour un retard, une perte ou un remboursement, contacte vite le vendeur — sur ses lignes dédiées, Juxi n'accepte une recherche que dans le mois qui suit la sortie de son entrepôt, et plus aucune réclamation après 60 jours.
 
 :::sources
 - [Juxi Express : 上海驹隙国际物流有限公司 (accueil)](https://www.juxiex.com/) – société et nom anglais, début en 2016 et création en 2019, petit paquet économique non suivi, bouton de suivi sans lien, téléphone, adresse

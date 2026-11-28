@@ -106,7 +106,7 @@ Chiunque a cui giri l'e-mail o l'SMS di InPost con il PIN e il QR code. Presso u
 
 ### InPost consegna anche di sabato e quante volte tenta a domicilio?
 
-Per la consegna a casa, InPost Italia indica dal lunedì al venerdì (9:00–20:00) e fino a due tentativi prima di lasciare il pacco al locker o InPost Point più vicino. Per l'arrivo nei locker e negli InPost Point le sue pagine non indicano i giorni.
+Per la consegna a casa, InPost Italia indica dal lunedì al venerdì (9:00–20:00) e due tentativi; dopo, il pacco va al locker o all'InPost Point disponibile più vicino se il negozio lo permette, altrimenti torna al mittente. Per l'arrivo nei locker e negli InPost Point le sue pagine non indicano i giorni.
 
 ### Qual è il numero di telefono del servizio clienti InPost Italia?
 

@@ -6,7 +6,7 @@ published: 2026-11-02
 updated: 2026-11-27
 ---
 
-Aras Kargo (Aras Cargo) is a Turkish courier whose official tracker at kargotakip.araskargo.com.tr prints every scan in Turkish. Paste the 13-digit tracking number (often starting with `60` or `65`) from your shop or sender into the box above to track your parcel on Turkish time, and use the tables below to read statuses such as `TESLİMAT ŞUBESİNDE`, `YOLDA` and `TESLİM EDİLDİ` in English.
+Aras Kargo (Aras Cargo) is a Turkish courier whose official tracker at kargotakip.araskargo.com.tr prints every scan in Turkish. Paste the 13-digit tracking number from your shop or sender into the box above to track your parcel on Turkish time, and use the tables below to read statuses such as `TESLİMAT ŞUBESİNDE`, `YOLDA` and `TESLİM EDİLDİ` in English.
 
 ## Aras Kargo tracking number: what it looks like
 

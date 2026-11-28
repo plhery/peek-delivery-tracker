@@ -122,7 +122,7 @@ While you have the shipment open, or on its delivery day with notifications on, 
 
 ### What does a Mainfreight consignment or tracking number look like?
 
-Road consignments in New Zealand, Australia and the US use an 11-digit consignment number (shared with GLS and others). Air/ocean shipments, job numbers, house bills and sender references mix 4–40 letters and digits — paste them in Peek and select Mainfreight via "Change".
+Road consignments in New Zealand, Australia and the US use an 11-digit consignment number (shared with GLS and others). Job numbers, house bills and senders' references mix letters and digits, and an air or ocean job can also go by its master bill: paste them in Peek and select Mainfreight via "Change".
 
 ### What does "At Delivery Depot" mean on Mainfreight tracking?
 
@@ -134,7 +134,7 @@ A Mainfreight driver has been assigned to collect the shipment, but the goods ar
 
 ### Do I pay customs duty or GST on a Mainfreight import into New Zealand?
 
-Under NZ Customs rules, overseas website purchases of NZ$1,000 or less carry no duty (overseas sellers collect the 15% GST) unless part of a larger consignment over NZ$1,000, or tobacco/alcohol. Shipments worth NZ$1,000 or more require a Customs Number, and Customs will not release goods until duty, 15% GST and the Customs/MPI Goods Levy are paid.
+Under NZ Customs rules, overseas website purchases of NZ$1,000 or less carry no duty (overseas sellers collect the 15% GST) unless part of a larger consignment over NZ$1,000, or tobacco/alcohol. Shipments worth NZ$1,000 or more require a Customs Number, and Customs can't release goods until the charges are paid: duty, GST and, unless exempt, the Customs and MPI Goods Levy, which your broker or freight forwarder pays and may pass on to you.
 
 ### Who do I contact if a Mainfreight shipment is late, damaged or missing?
 

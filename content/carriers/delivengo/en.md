@@ -77,15 +77,15 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ### What is Delivengo and is it the same as Colissimo?
 
-Delivengo is La Poste's export service for small international parcels from France, distinct from Colissimo, though both use 13-character `…FR` postal numbers and share La Poste's tracking on `laposte.fr`.
+Delivengo is La Poste's export service for small international parcels from France, distinct from Colissimo, though both use 13-character `…FR` postal numbers and share La Poste's tracking on laposte.fr.
 
 ### Why has my Delivengo tracking stopped after leaving France?
 
-Once your parcel exits France, your destination country's national post takes over the last mile and La Poste's feed can go quiet. Try the same `…FR` number on your local post's site (Peek also queries EU, UK, US, Canada, Australia, Swiss, Norwegian and Japanese posts automatically).
+Once your parcel exits France, your destination country's national post takes over the last mile and La Poste's feed can go quiet. Try the same `…FR` number on your local post's site (once La Poste gives the destination country, Peek also queries EU, UK, US, Canada, Australia, Swiss, Norwegian and Japanese posts automatically).
 
 ### Can I track a Delivengo parcel to the USA, UK, Canada or Australia?
 
-Yes, using the same `…FR` tracking number on `laposte.fr` and in Peek. Once La Poste reports the destination country, Peek also checks [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), [Canada Post](carrier:canada-post) or Australia Post and switches when newer progress appears.
+Yes, using the same `…FR` tracking number on laposte.fr and in Peek. Once La Poste reports the destination country, Peek also checks [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), [Canada Post](carrier:canada-post) or Australia Post and switches when newer progress appears.
 
 ### Do I pay customs duties on a Delivengo parcel from France?
 
@@ -93,7 +93,7 @@ No customs duties apply between EU member states (for example France to Ireland)
 
 ### Who do I contact if a Delivengo parcel is late, lost or returned?
 
-Contact the French shop first (it holds the Delivengo account, and under EU rules traders answer for delivery and damage until receipt). Once in your country, you can also check with your local post using the same `…FR` number, or reach La Poste on `36 31` / `+33 810 821 821`.
+Contact the French shop first (it holds the Delivengo account, and under EU rules traders answer for delivery and damage until receipt). Once in your country, you can also check with your local post using the same `…FR` number, or reach La Poste on 36 31 or +33 810 821 821.
 
 :::sources
 - [Universal Parcel Scraper: Delivengo](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/delivengo) – La Poste's export service, last mile by the destination post, quiet history after export, account area, no number rule of its own

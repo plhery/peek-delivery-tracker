@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-ORLEN Paczka (formerly Paczka w RUCHu) is a Polish parcel locker and pickup-point network widely used by Polish online shops, Allegro and Vinted. Paste your 13-digit parcel number starting with `210` in the box above (or track it on orlenpaczka.pl) — below you'll find English translations of ORLEN Paczka's Polish tracking statuses, the 3-working-day collection window, Sunday locker access and helpline details.
+ORLEN Paczka (formerly Paczka w RUCHu) is a Polish parcel locker and pickup-point network used by Polish online shops, Allegro and Vinted. Paste your 13-digit parcel number starting with `210` in the box above (or track it on orlenpaczka.pl) — below you'll find English translations of ORLEN Paczka's Polish tracking statuses, the 3-working-day collection window, Sunday locker access and helpline details.
 
 ## ORLEN Paczka tracking number and where to find it
 
@@ -91,7 +91,7 @@ Peek can notify you of "Every scan", "Important steps" or "Delivery only".
 
 ### What is ORLEN Paczka and what does its tracking number look like?
 
-ORLEN Paczka is a Polish locker and pickup-point network launched in 2021 (formerly Paczka w RUCHu, with RUCH as logistics partner). Its parcel number has **13 digits starting with `210`** (10-digit drop-off codes and Allegro Delivery `AD` numbers are tracked separately).
+ORLEN Paczka is a Polish locker and pickup-point network launched in 2021 (formerly Paczka w RUCHu, with RUCH as logistics partner). Its parcel number has **13 digits starting with `210`** (the 10-digit code is the sender's drop-off code, not a tracking number, and Allegro Delivery `AD` numbers are tracked in the Allegro app or on allegro.pl).
 
 ### Can I track ORLEN Paczka in English?
 
@@ -103,11 +103,11 @@ You have **3 working days** from the first SMS or email with the 5- or 6-digit p
 
 ### Does ORLEN Paczka deliver abroad (e.g. Vinted international orders)?
 
-ORLEN Paczka itself delivers only within Poland (1 working day for 98% of shop parcels; 1–3 working days for private/Vinted parcels). Cross-border Vinted parcels show `Paczka przekazana do przewoźnika w innym kraju` (`Paczka w innym kraju`) and continue in the Vinted app.
+ORLEN Paczka itself delivers only within Poland (1 working day for 98% of shop parcels; 1–3 working days for private/Vinted parcels). Cross-border Vinted parcels show `Paczka przekazana do przewoźnika w innym kraju. Dalszą drogę możesz śledzić w aplikacji Vinted` (`Paczka w innym kraju`) and continue in the Vinted app.
 
 ### How do I contact ORLEN Paczka or file a complaint?
 
-Call the Polish helpline `22 33 33 999` (Mon–Fri 7:00–22:00, Sat 9:00–19:00, Sun 10:00–16:00 Warsaw time) or use the [contact form](https://www.orlenpaczka.pl/formularz-kontaktowy/) / [complaint form](https://www.orlenpaczka.pl/reklamacje/) within 12 months (7 days for hidden damage). For Allegro Delivery parcels, contact Allegro.
+Call the Polish helpline 22 33 33 999 (Mon–Fri 7:00–22:00, Sat 9:00–19:00, Sun 10:00–16:00 Warsaw time) or use the [contact form](https://www.orlenpaczka.pl/formularz-kontaktowy/) / [complaint form](https://www.orlenpaczka.pl/reklamacje/) (a complaint within 12 months of posting, 7 days for hidden damage). For Allegro Delivery parcels, contact Allegro.
 
 :::sources
 - [ORLEN Paczka: Najczęściej zadawane pytania](https://www.orlenpaczka.pl/faq/) – pickup code (5 or 6 digits, SMS, email, QR, app), collection by someone else, no code, wrong phone number, 3 working days from the first SMS or email and return to the sender or the drop-off point, Sunday pickup, no cash on delivery, delivery times (1 working day for 98% of shop parcels, 1–3 days from private senders and Vinted), refund after 4 working days, lost parcels, liability up to 500 zł (private customers) and 5,000 zł (businesses), deliveries in Poland only, helpline and hours, no links in SMS or payment requests by link

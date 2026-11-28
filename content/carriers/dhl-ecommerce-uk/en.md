@@ -93,15 +93,15 @@ No. DHL eCommerce UK is a separate UK domestic network and explicitly states it 
 
 ### How do I rearrange a missed DHL eCommerce UK delivery or collect from a depot?
 
-Use your shipment number or 7-digit calling-card number with your postcode on `track.dhlecommerce.co.uk` to choose a new delivery day, send the parcel to a local DHL ServicePoint or rearrange to a depot (ready for collection one working day later).
+Use your shipment number or 7-digit calling-card number with your postcode on track.dhlecommerce.co.uk to choose a new delivery day, send the parcel to a local DHL ServicePoint or rearrange to a depot (ready for collection one working day later).
 
 ### What is the DHL eCommerce UK customer service phone number?
 
-Call `02476 937770` (Monday–Friday 7am–8pm, Saturday 8am–6pm) or use the "Send us a message" form on the [contact page](https://track.dhlecommerce.co.uk/contact-us?nav=1) (next-working-day reply outside opening hours). For lost or damaged orders, contact the retailer first.
+Call 02476 937770 (Monday–Friday 7am–8pm, Saturday 8am–6pm) or use the "Send us a message" form on the [contact page](https://track.dhlecommerce.co.uk/contact-us?nav=1) (next-working-day reply outside opening hours). For lost or damaged orders, contact the retailer first.
 
 ### Is a DHL eCommerce UK text asking for a payment fee real?
 
-Citizens Advice warns that messages asking you to pay to receive or reschedule a parcel are usually scams. Never tap the link — check your number directly on `track.dhlecommerce.co.uk` or Peek and forward scam texts free to `7726`.
+Citizens Advice warns that messages asking you to pay to receive or reschedule a parcel are usually scams. Never tap the link — check your number directly on track.dhlecommerce.co.uk or Peek and forward scam texts free to 7726.
 
 :::sources
 - [DHL eCommerce UK: Track & Trace](https://track.dhlecommerce.co.uk/) – tracker fields, calling card, rearranging to a day or a ServicePoint, depot collection one working day later, contact your sender, ServicePoint and Depot Finder, live service updates

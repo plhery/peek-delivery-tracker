@@ -100,7 +100,7 @@ Pour un envoi postal `…IT` (`RR…IT`, `CW…IT`, `ZC…IT`), `poste.it` suit 
 
 ### Combien de temps met un colis Poste Italiane en Italie et vers l'Europe ?
 
-À titre indicatif en Italie : 4 jours ouvrés en Crono, 1–2 jours en Crono Express et 1–4 jours en Poste Delivery Express. À l'international : 2 jours vers l'UE (2–4 hors UE) en International Express et 10–15 jours vers l'UE (10–25 hors UE) en International Standard.
+À titre indicatif en Italie : 4 jours ouvrés en Crono, 1–2 jours en Crono Express et 1–4 jours après le dépôt en Poste Delivery Express (hors samedi, option payante réservée à Business Express). À l'international : 2 jours vers l'UE (2–4 hors UE) en International Express et 10–15 jours vers l'UE (10–25 hors UE) en International Standard (hors samedis et fériés).
 
 ### Combien de jours un colis reste-t-il en Punto Poste, locker ou bureau de poste ?
 

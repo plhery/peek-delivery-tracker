@@ -101,7 +101,7 @@ Yes: with your Pickup Pass (QR code) or email/SMS codes at a relay or locker, or
 
 ### How do I contact Chronopost or report a missing or damaged parcel?
 
-For an online order, contact the shop first — in France, the seller answers for delivery by the carrier it chose. You can reach Chronopost on `09 69 39 13 91` or via its chatbot Léonard on chronopost.fr (forward scam emails to `abuse@chronopost.fr` and scam SMS to `33700`).
+For an online order, contact the shop first — in France, the seller answers for delivery by the carrier it chose. You can reach Chronopost on 09 69 39 13 91 or via its chatbot Léonard on chronopost.fr (forward scam emails to abuse@chronopost.fr and scam SMS to 33700).
 
 :::sources
 - [La Poste Groupe: Chronopost](https://www.lapostegroupe.com/en/focus/la-poste-groupes-subsidiaries/chronopost) – express parcels; pickup points in France: depots, post offices, Pickup points

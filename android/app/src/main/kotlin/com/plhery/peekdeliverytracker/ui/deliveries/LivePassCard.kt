@@ -622,8 +622,7 @@ internal fun carrierPrompt(
     val text = when (shape) {
         is NonTrackingShape.Order -> NonTrackingShape.orderNote(shape.shop, localizer, language)
         NonTrackingShape.Container -> localizer.text("link.notTracking.container")
-        is NonTrackingShape.Mistyped ->
-            named(if (shape.change == NonTrackingShape.Change.Missing) "link.notTracking.missing" else "link.notTracking.extra", shape.carrier)
+        is NonTrackingShape.Mistyped -> named(shape.noteKey, shape.carrier)
         NonTrackingShape.Short -> localizer.text("link.notTracking.short")
     }
     return CarrierPromptCopy(text, localizer.text("link.chooseCarrier"))

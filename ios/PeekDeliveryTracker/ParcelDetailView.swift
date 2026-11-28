@@ -810,8 +810,8 @@ struct ParcelDetailView: View {
     }
 
     /// A number that looks like a shop's order number or a shipping container's, one carrier's with a character
-    /// missing or one too many, or is shorter than tracking numbers are: where the tracking number is, or that it
-    /// may be mistyped, and the way to choose the carrier.
+    /// missing or one too many, a post's with a digit, or is shorter than tracking numbers are: where the tracking
+    /// number is, or that it may be mistyped, and the way to choose the carrier.
     private func nonTrackingPrompt(_ shape: NonTrackingShape, tint: Color) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             switch shape {
@@ -819,8 +819,8 @@ struct ParcelDetailView: View {
                 Text(NonTrackingShape.orderNote(shop, localizer: localizer))
             case .container:
                 Text(localizer.text("link.notTracking.container"))
-            case .mistyped(let carrier, let change):
-                Text(localizer.text(change == .missing ? "link.notTracking.missing" : "link.notTracking.extra",
+            case .mistyped(let carrier, let change, let postal):
+                Text(localizer.text(NonTrackingShape.mistypedKey(change, postal: postal),
                                     ["carrier": catalog.info(for: carrier, language: localizer.language).displayName]))
             case .short:
                 Text(localizer.text("link.notTracking.short"))

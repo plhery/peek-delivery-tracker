@@ -452,6 +452,8 @@
   "link.likely.choose": "Escolher outra transportadora",
   "link.notTracking.container": "Isto parece o número de um contêiner marítimo. O código de rastreamento está no e-mail de envio ou na página do pedido.",
   "link.notTracking.extra": "Começa como um código de rastreamento de {{carrier}}, mas tem um caractere a mais: pode haver um erro de digitação. Compare com a sua mensagem de envio.",
+  "link.notTracking.digitMissing": "Parece um código de rastreamento de {{carrier}}, mas falta um dígito: pode haver um erro de digitação. Compare com a sua mensagem de envio.",
+  "link.notTracking.digitExtra": "Parece um código de rastreamento de {{carrier}}, mas tem um dígito a mais: pode haver um erro de digitação. Compare com a sua mensagem de envio.",
   "link.notTracking.mercadolibre": "Isto parece um número de compra do Mercado Livre, que nenhuma transportadora rastreia. Abra a compra em “Minhas compras”: a seção de envio mostra o código de rastreamento quando os Correios ou uma transportadora fazem a entrega.",
   "link.notTracking.missing": "Começa como um código de rastreamento de {{carrier}}, mas falta um caractere: pode haver um erro de digitação. Compare com a sua mensagem de envio.",
   "link.notTracking.order": "Isto parece um número de pedido de {{shop}}. O código de rastreamento está no e-mail de envio ou na página do pedido.",

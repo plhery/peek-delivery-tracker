@@ -482,9 +482,10 @@ class CarrierCatalog private constructor(
     }
 
     /**
-     * A number that starts like one carrier's numbers but is one character short of their length or one over it: it
-     * may be mistyped. Only when no high-confidence rule takes the number as it is, and the rules it is one character
-     * off are one carrier's (`mistypedNumber` in src/peek/lookup/reading.ts).
+     * A number that starts like one carrier's numbers but is one character short of their length or one over it, or
+     * is one digit off a post's international shape (`postal`): it may be mistyped. Only when no high-confidence rule
+     * takes the number as it is, and the rules it is one character off are one carrier's (`mistypedNumber` in
+     * src/peek/lookup/reading.ts).
      */
     fun mistypedNumber(normalized: String): NonTrackingShape.Mistyped? {
         if (detect(normalized).confidence == CarrierMatch.Confidence.High) return null
@@ -494,8 +495,36 @@ class CarrierCatalog private constructor(
                 oneCharacterOff(normalized, start, rule.pattern)?.let { NonTrackingShape.Mistyped(carrier, it) }
             }
         }
-        val first = found.firstOrNull() ?: return null
+        val first = found.firstOrNull() ?: return postalDigitOff(normalized)
         return if (found.all { it.carrier == first.carrier }) first else null
+    }
+
+    /**
+     * The post a number is one digit off the international postal shape of: two letters, eight digits and a check
+     * digit, two letters. Each reading with a digit put back, or taken out, whose check digit adds up is that one
+     * post's (`postalDigitOff` in src/peek/lookup/reading.ts).
+     */
+    private fun postalDigitOff(normalized: String): NonTrackingShape.Mistyped? {
+        if (!matches(normalized, POSTAL_DIGIT_OFF)) return null
+        val start = normalized.take(2)
+        val end = normalized.takeLast(2)
+        val digits = normalized.drop(2).dropLast(2)
+        val change = if (digits.length == 8) NonTrackingShape.Change.Missing else NonTrackingShape.Change.Extra
+        val readings = (0..digits.length).flatMap { index ->
+            val before = digits.substring(0, index)
+            val after = digits.substring(index)
+            when {
+                change == NonTrackingShape.Change.Missing -> ('0'..'9').map { before + it + after }
+                after.isNotEmpty() -> listOf(before + after.substring(1))
+                else -> emptyList()
+            }
+        }
+        val posts = readings.map { start + it + end }.filter { isValidS10(it) }.map { reading ->
+            val match = detect(reading)
+            if (match.confidence == CarrierMatch.Confidence.High) match.carrier else CarrierId.Unknown
+        }.toSet()
+        val post = posts.singleOrNull() ?: return null
+        return if (post != CarrierId.Unknown && post != CarrierId.InternationalPost) NonTrackingShape.Mistyped(post, change, postal = true) else null
     }
 
     private class RuleMatch(
@@ -1325,8 +1354,8 @@ class CarrierCatalog private constructor(
             orderNumbers.firstOrNull { matches(text, it.pattern, caseInsensitive = true) }?.shop
 
         /** Whether a normalized number no carrier answered for looks like a shop's order number or a shipping
-         * container's, starts like one carrier's numbers with one character too few or too many, or is shorter than
-         * tracking numbers are: the parcel says so instead of waiting for a carrier. */
+         * container's, starts like one carrier's numbers with one character too few or too many, or a post's with
+         * one digit, or is shorter than tracking numbers are: the parcel says so instead of waiting for a carrier. */
         fun nonTrackingShape(normalized: String, catalog: CarrierCatalog = shared): NonTrackingShape? {
             val shop = orderShop(normalized)?.rawValue
                 ?: storedOrderNumbers.firstOrNull { matches(normalized, it.pattern) }?.shop
@@ -1355,6 +1384,10 @@ class CarrierCatalog private constructor(
         }
 
         private const val NUMBER_CHARACTERS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+        /** The international postal shape (S10) with a digit too few or too many: two letters, 8 or 10 digits, two
+         * letters. */
+        private const val POSTAL_DIGIT_OFF = """^[A-Z]{2}(?:\d{8}|\d{10})[A-Z]{2}$"""
 
         /** Whether leaving out one character after the rule's start, or adding one, makes the number fit the rule. */
         private fun oneCharacterOff(number: String, start: String, pattern: String): NonTrackingShape.Change? {

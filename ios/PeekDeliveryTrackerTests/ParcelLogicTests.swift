@@ -933,6 +933,14 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertNil(CarrierCatalog.nonTrackingShape("JJD0000000000000000"))
         XCTAssertNil(CarrierCatalog.nonTrackingShape("1Z999AA10123456"))
         XCTAssertNil(CarrierCatalog.nonTrackingShape("JTE12345678901"))
+        // Synthetic numbers a digit short of the international postal shape and one over it: each reading with the
+        // digit put back or taken out whose check digit adds up is India Post's, or Swiss Post's. No post ends in XX.
+        XCTAssertEqual(CarrierCatalog.nonTrackingShape("CH12345678IN"), .mistyped(carrier: .indiaPost, change: .missing, postal: true))
+        XCTAssertEqual(CarrierCatalog.nonTrackingShape("RR1234567850CH"), .mistyped(carrier: .swissPost, change: .extra, postal: true))
+        XCTAssertNil(CarrierCatalog.nonTrackingShape("CH12345678XX"))
+        XCTAssertNil(CarrierCatalog.nonTrackingShape("CH123456785IN"))
+        XCTAssertEqual(NonTrackingShape.mistypedKey(.missing, postal: true), "link.notTracking.digitMissing")
+        XCTAssertEqual(NonTrackingShape.mistypedKey(.extra, postal: false), "link.notTracking.extra")
 
         let packageID = UUID()
         let json = """

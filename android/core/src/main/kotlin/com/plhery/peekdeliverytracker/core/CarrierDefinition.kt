@@ -270,8 +270,16 @@ sealed interface NonTrackingShape {
 
     data object Container : NonTrackingShape
 
-    /** The number starts like the carrier's numbers and is one character short of their length, or one over it. */
-    data class Mistyped(val carrier: CarrierId, val change: Change) : NonTrackingShape
+    /** The number starts like the carrier's numbers and is one character short of their length, or one over it;
+     * or, [postal], it is a digit off the international postal shape the post's numbers have. */
+    data class Mistyped(val carrier: CarrierId, val change: Change, val postal: Boolean = false) : NonTrackingShape {
+        /** What the parcel says of it, naming its carrier (`nonTrackingNote` in src/peek/lookup/reading.ts). */
+        val noteKey: String
+            get() = when (change) {
+                Change.Missing -> if (postal) "link.notTracking.digitMissing" else "link.notTracking.missing"
+                Change.Extra -> if (postal) "link.notTracking.digitExtra" else "link.notTracking.extra"
+            }
+    }
 
     data object Short : NonTrackingShape
 

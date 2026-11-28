@@ -128,11 +128,13 @@ export const shopName = (shop: StoredOrderShop, locale?: string) => (locale && L
 /** What a looked-up number no carrier answered for looks like instead of a tracking number. */
 export type NonTrackingShape = { kind: 'order'; shop: StoredOrderShop } | { kind: 'container' } | MistypedNumber | { kind: 'short' };
 
-/** A number that starts like one carrier's numbers and is one character short of their length, or one over it. */
+/** A number that starts like one carrier's numbers and is one character short of their length or one over it, or one digit off a post's. */
 export interface MistypedNumber {
   kind: 'mistyped';
   carrier: CarrierId;
   change: 'missing' | 'extra';
+  /** The number is a digit off the international postal shape the post's numbers have (`postalDigitOff`). */
+  postal?: true;
 }
 
 /** Tracking numbers have 8 characters or more, but for a few carriers' own. */
@@ -205,10 +207,32 @@ function oneCharacterOff(number: string, rule: LengthRule): MistypedNumber['chan
   return null;
 }
 
+/** The international postal shape (S10) with a digit too few or too many: two letters, 8 or 10 digits, two letters. */
+const POSTAL_DIGIT_OFF = /^([A-Z]{2})(\d{8}|\d{10})([A-Z]{2})$/;
+
 /**
- * A number that starts like one carrier's numbers but is one character short of their length or one over it: it
- * may be mistyped. Only when no high-confidence rule takes the number as it is, and the rules it is one character
- * off are one carrier's.
+ * The post a number is one digit off the international postal shape of: two letters, eight digits and a check digit,
+ * two letters. Each reading with a digit put back, or taken out, whose check digit adds up is that one post's.
+ */
+function postalDigitOff(normalized: string): MistypedNumber | null {
+  const [, start, digits, end] = POSTAL_DIGIT_OFF.exec(normalized) ?? [];
+  if (!start || !digits || !end) return null;
+  const change = digits.length === 8 ? 'missing' : 'extra';
+  const readings = Array.from({ length: digits.length + 1 }, (_, index) => change === 'missing'
+    ? [...'0123456789'].map((digit) => digits.slice(0, index) + digit + digits.slice(index))
+    : [digits.slice(0, index) + digits.slice(index + 1)]).flat().map((read) => start + read + end);
+  const posts = new Set(readings.filter(isValidS10TrackingNumber).map((reading) => {
+    const detection = detectCarrierMatch(reading);
+    return detection.confidence === 'high' ? detection.carrier : 'unknown';
+  }));
+  const [post] = posts;
+  return posts.size === 1 && post !== 'unknown' && post !== 'intl-post' ? { kind: 'mistyped', carrier: post, change, postal: true } : null;
+}
+
+/**
+ * A number that starts like one carrier's numbers but is one character short of their length or one over it, or is
+ * one digit off a post's international shape: it may be mistyped. Only when no high-confidence rule takes the number
+ * as it is, and the rules it is one character off are one carrier's.
  */
 export function mistypedNumber(normalized: string): MistypedNumber | null {
   if (detectCarrierMatch(normalized).confidence === 'high') return null;
@@ -216,13 +240,14 @@ export function mistypedNumber(normalized: string): MistypedNumber | null {
     const change = oneCharacterOff(normalized, rule);
     return change ? [{ kind: 'mistyped' as const, carrier: rule.carrier, change }] : [];
   });
-  return found.length > 0 && found.every(({ carrier }) => carrier === found[0].carrier) ? found[0] : null;
+  if (!found.length) return postalDigitOff(normalized);
+  return found.every(({ carrier }) => carrier === found[0].carrier) ? found[0] : null;
 }
 
 /**
  * Whether a normalized number no carrier answered for looks like a shop's order number or a shipping container's,
- * starts like one carrier's numbers with one character too few or too many, or is shorter than tracking numbers
- * are: the parcel page says so instead of waiting for a carrier.
+ * starts like one carrier's numbers with one character too few or too many, or a post's with one digit, or is shorter
+ * than tracking numbers are: the parcel page says so instead of waiting for a carrier.
  */
 export function nonTrackingShape(normalized: string): NonTrackingShape | null {
   const shop = orderShop(normalized) ?? STORED_ORDER_NUMBERS.find(({ pattern }) => pattern.test(normalized))?.shop;
@@ -236,7 +261,9 @@ export function nonTrackingNote(shape: NonTrackingShape, t: Translate, locale?: 
   if (shape.kind === 'order' && shape.shop === 'mercadolibre') return t('link.notTracking.mercadolibre');
   if (shape.kind === 'order') return t('link.notTracking.order', { shop: shopName(shape.shop, locale) });
   if (shape.kind === 'mistyped') {
-    return t(shape.change === 'missing' ? 'link.notTracking.missing' : 'link.notTracking.extra', { carrier: carrierInfo(shape.carrier, locale).name });
+    const key = shape.postal ? (shape.change === 'missing' ? 'link.notTracking.digitMissing' : 'link.notTracking.digitExtra')
+      : shape.change === 'missing' ? 'link.notTracking.missing' : 'link.notTracking.extra';
+    return t(key, { carrier: carrierInfo(shape.carrier, locale).name });
   }
   return t(shape.kind === 'container' ? 'link.notTracking.container' : 'link.notTracking.short');
 }

@@ -452,6 +452,8 @@
   "link.likely.choose": "Choose another carrier",
   "link.notTracking.container": "This looks like a shipping container number. The tracking number is in the shipping email or on the order page.",
   "link.notTracking.extra": "This starts like a {{carrier}} tracking number but has one character too many, so it may be mistyped. Compare it with your shipping message.",
+  "link.notTracking.digitMissing": "This looks like a tracking number from {{carrier}} but is one digit short, so it may be mistyped. Compare it with your shipping message.",
+  "link.notTracking.digitExtra": "This looks like a tracking number from {{carrier}} but has one digit too many, so it may be mistyped. Compare it with your shipping message.",
   "link.notTracking.mercadolibre": "This looks like a Mercado Libre order number, which no carrier tracks. Open the purchase in My purchases: its shipping section shows the carrier’s tracking number when a carrier delivers it.",
   "link.notTracking.missing": "This starts like a {{carrier}} tracking number but is one character short, so it may be mistyped. Compare it with your shipping message.",
   "link.notTracking.order": "This looks like an order number from {{shop}}. The tracking number is in the shipping email or on the order page.",

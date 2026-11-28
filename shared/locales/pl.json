@@ -452,6 +452,8 @@
   "link.likely.choose": "Wybierz innego przewoźnika",
   "link.notTracking.container": "To wygląda na numer kontenera morskiego. Numer śledzenia znajdziesz w e-mailu o wysyłce albo na stronie zamówienia.",
   "link.notTracking.extra": "Zaczyna się jak numer śledzenia przewoźnika {{carrier}}, ale ma o jeden znak za dużo: może jest w nim literówka. Porównaj go z wiadomością o wysyłce.",
+  "link.notTracking.digitMissing": "Wygląda jak numer śledzenia przewoźnika {{carrier}}, ale brakuje jednej cyfry: może jest w nim literówka. Porównaj go z wiadomością o wysyłce.",
+  "link.notTracking.digitExtra": "Wygląda jak numer śledzenia przewoźnika {{carrier}}, ale ma o jedną cyfrę za dużo: może jest w nim literówka. Porównaj go z wiadomością o wysyłce.",
   "link.notTracking.mercadolibre": "To wygląda na numer zamówienia Mercado Libre, którego nie śledzi żaden przewoźnik. Otwórz ten zakup na liście zakupów w Mercado Libre: w sekcji wysyłki jest numer śledzenia przewoźnika, jeśli paczkę dostarcza przewoźnik.",
   "link.notTracking.missing": "Zaczyna się jak numer śledzenia przewoźnika {{carrier}}, ale brakuje jednego znaku: może jest w nim literówka. Porównaj go z wiadomością o wysyłce.",
   "link.notTracking.order": "To wygląda na numer zamówienia {{shop}}. Numer śledzenia znajdziesz w e-mailu o wysyłce albo na stronie zamówienia.",

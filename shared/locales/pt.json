@@ -452,6 +452,8 @@
   "link.likely.choose": "Escolher outra transportadora",
   "link.notTracking.container": "Isto parece o número de um contentor marítimo. O número de seguimento está no e-mail de envio ou na página do pedido.",
   "link.notTracking.extra": "Começa como um número de seguimento de {{carrier}}, mas tem um carácter a mais: pode estar mal escrito. Compara-o com a tua mensagem de envio.",
+  "link.notTracking.digitMissing": "Parece um número de seguimento de {{carrier}}, mas falta-lhe um dígito: pode estar mal escrito. Compara-o com a tua mensagem de envio.",
+  "link.notTracking.digitExtra": "Parece um número de seguimento de {{carrier}}, mas tem um dígito a mais: pode estar mal escrito. Compara-o com a tua mensagem de envio.",
   "link.notTracking.mercadolibre": "Isto parece um número de compra do Mercado Libre, que nenhuma transportadora segue. Abre a compra em «Minhas compras»: a secção de envio mostra o número de seguimento quando é uma transportadora a entregar.",
   "link.notTracking.missing": "Começa como um número de seguimento de {{carrier}}, mas falta-lhe um carácter: pode estar mal escrito. Compara-o com a tua mensagem de envio.",
   "link.notTracking.order": "Isto parece um número de pedido de {{shop}}. O número de seguimento está no e-mail de envio ou na página do pedido.",

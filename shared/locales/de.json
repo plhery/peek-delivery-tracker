@@ -452,6 +452,8 @@
   "link.likely.choose": "Anderen Paketdienst wählen",
   "link.notTracking.container": "Das sieht nach einer Containernummer aus. Die Sendungsnummer steht in der Versandmail oder bei der Bestellung.",
   "link.notTracking.extra": "Das beginnt wie eine Sendungsnummer von {{carrier}}, hat aber ein Zeichen zu viel. Vielleicht ist es ein Tippfehler: Vergleiche die Nummer mit deiner Versandnachricht.",
+  "link.notTracking.digitMissing": "Das sieht aus wie eine Sendungsnummer von {{carrier}}, aber eine Ziffer fehlt. Vielleicht ist es ein Tippfehler: Vergleiche die Nummer mit deiner Versandnachricht.",
+  "link.notTracking.digitExtra": "Das sieht aus wie eine Sendungsnummer von {{carrier}}, hat aber eine Ziffer zu viel. Vielleicht ist es ein Tippfehler: Vergleiche die Nummer mit deiner Versandnachricht.",
   "link.notTracking.mercadolibre": "Das sieht nach einer Mercado-Libre-Bestellnummer aus, die kein Paketdienst verfolgt. Öffne den Kauf in deinen Käufen bei Mercado Libre: Im Versandbereich steht die Sendungsnummer des Paketdienstes, wenn ein Paketdienst liefert.",
   "link.notTracking.missing": "Das beginnt wie eine Sendungsnummer von {{carrier}}, aber ein Zeichen fehlt. Vielleicht ist es ein Tippfehler: Vergleiche die Nummer mit deiner Versandnachricht.",
   "link.notTracking.order": "Das sieht nach einer Bestellnummer von {{shop}} aus. Die Sendungsnummer steht in der Versandmail oder bei der Bestellung.",

@@ -182,6 +182,12 @@ describe('a looked-up number no carrier answered for', () => {
     // Two characters short, and a character short of two carriers' numbers at once.
     ['1Z999AA10123456', null],
     ['JTE12345678901', null],
+    // Synthetic numbers a digit short of the international postal shape and one over it: each reading with the digit
+    // put back or taken out whose check digit adds up is India Post's, or Swiss Post's. No post ends in XX.
+    ['CH12345678IN', { kind: 'mistyped', carrier: 'india-post', change: 'missing', postal: true }],
+    ['RR1234567850CH', { kind: 'mistyped', carrier: 'swiss-post', change: 'extra', postal: true }],
+    ['CH12345678XX', null],
+    ['CH123456785IN', null],
   ])('%s', (number, shape) => {
     expect(nonTrackingShape(number)).toEqual(shape);
   });
@@ -198,10 +204,12 @@ describe('a looked-up number no carrier answered for', () => {
     expect(nonTrackingNote({ kind: 'short' }, t)).toBe('link.notTracking.short');
   });
 
-  it('names the carrier a mistyped number starts like', () => {
+  it('names the carrier a mistyped number looks like', () => {
     const t = ((key: string, values?: Record<string, string>) => `${key}:${values?.carrier}`) as Translate;
     expect(nonTrackingNote({ kind: 'mistyped', carrier: 'ups', change: 'missing' }, t, 'en')).toBe('link.notTracking.missing:UPS');
     expect(nonTrackingNote({ kind: 'mistyped', carrier: 'ups', change: 'extra' }, t, 'en')).toBe('link.notTracking.extra:UPS');
+    expect(nonTrackingNote({ kind: 'mistyped', carrier: 'india-post', change: 'missing', postal: true }, t, 'en')).toBe('link.notTracking.digitMissing:India Post');
+    expect(nonTrackingNote({ kind: 'mistyped', carrier: 'swiss-post', change: 'extra', postal: true }, t, 'en')).toBe('link.notTracking.digitExtra:Swiss Post');
   });
 
   it('reads a container number only as normalized', () => {

@@ -844,6 +844,15 @@ class ParcelLogicTests {
         assertNull(CarrierCatalog.nonTrackingShape("JJD0000000000000000"))
         assertNull(CarrierCatalog.nonTrackingShape("1Z999AA10123456"))
         assertNull(CarrierCatalog.nonTrackingShape("JTE12345678901"))
+        // Synthetic numbers a digit short of the international postal shape and one over it: each reading with the
+        // digit put back or taken out whose check digit adds up is India Post's, or Swiss Post's. No post ends in XX.
+        val indiaPost = NonTrackingShape.Mistyped(CarrierId.IndiaPost, missing, postal = true)
+        assertEquals(indiaPost, CarrierCatalog.nonTrackingShape("CH12345678IN"))
+        assertEquals("link.notTracking.digitMissing", indiaPost.noteKey)
+        assertEquals(NonTrackingShape.Mistyped(CarrierId.SwissPost, NonTrackingShape.Change.Extra, postal = true), CarrierCatalog.nonTrackingShape("RR1234567850CH"))
+        assertNull(CarrierCatalog.nonTrackingShape("CH12345678XX"))
+        assertNull(CarrierCatalog.nonTrackingShape("CH123456785IN"))
+        assertEquals("link.notTracking.extra", NonTrackingShape.Mistyped(CarrierId.Ups, NonTrackingShape.Change.Extra).noteKey)
 
         val packageId = UUID.randomUUID()
         val json = """

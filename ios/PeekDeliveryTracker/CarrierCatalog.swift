@@ -267,8 +267,8 @@ enum OrderShop: String, Decodable, Sendable {
 }
 
 /// What a looked-up number no carrier answered for looks like instead of a tracking number: a shop's
-/// order number, a shipping container's, one carrier's with a character missing or one too many, or one
-/// shorter than tracking numbers are (`nonTrackingShape` in src/peek/lookup/reading.ts).
+/// order number, a shipping container's, one carrier's with a character missing or one too many, a post's
+/// with a digit, or one shorter than tracking numbers are (`nonTrackingShape` in src/peek/lookup/reading.ts).
 enum NonTrackingShape: Equatable, Sendable {
     /// A character missing from a number, or one too many.
     enum Change: String, Sendable {
@@ -278,9 +278,20 @@ enum NonTrackingShape: Equatable, Sendable {
     /// The shop by its id in `shared/reading.json`: amazon, aliexpress, mercadolibre, shein, shopee or temu.
     case order(shop: String)
     case container
-    /// The number starts like the carrier's numbers and is one character short of their length, or one over it.
-    case mistyped(carrier: CarrierID, change: Change)
+    /// The number starts like the carrier's numbers and is one character short of their length, or one over it;
+    /// or, `postal`, it is a digit off the international postal shape the post's numbers have.
+    case mistyped(carrier: CarrierID, change: Change, postal: Bool = false)
     case short
+
+    /// What the parcel says of a mistyped number, naming its carrier (`nonTrackingNote` in src/peek/lookup/reading.ts).
+    static func mistypedKey(_ change: Change, postal: Bool) -> String {
+        switch (change, postal) {
+        case (.missing, false): "link.notTracking.missing"
+        case (.extra, false): "link.notTracking.extra"
+        case (.missing, true): "link.notTracking.digitMissing"
+        case (.extra, true): "link.notTracking.digitExtra"
+        }
+    }
 
     /// The shop by the name the app writes.
     static let shopNames = [
@@ -1687,15 +1698,17 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     }
 
     /// Whether a normalized number no carrier answered for looks like a shop's order number or a shipping
-    /// container's, starts like one carrier's numbers with one character too few or too many, or is shorter than
-    /// tracking numbers are: the parcel says so instead of waiting for a carrier.
+    /// container's, starts like one carrier's numbers with one character too few or too many, or a post's with one
+    /// digit, or is shorter than tracking numbers are: the parcel says so instead of waiting for a carrier.
     static func nonTrackingShape(_ normalized: String, catalog: CarrierCatalog = .shared) -> NonTrackingShape? {
         if let shop = orderShop(in: normalized)?.rawValue
             ?? storedOrderNumbers.first(where: { matches(normalized, pattern: $0.pattern) })?.shop {
             return .order(shop: shop)
         }
         if isContainerNumber(normalized) { return .container }
-        if let mistyped = catalog.mistypedNumber(normalized) { return .mistyped(carrier: mistyped.carrier, change: mistyped.change) }
+        if let mistyped = catalog.mistypedNumber(normalized) {
+            return .mistyped(carrier: mistyped.carrier, change: mistyped.change, postal: mistyped.postal)
+        }
         return normalized.count < 8 ? .short : nil
     }
 
@@ -1735,10 +1748,42 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         return nil
     }
 
-    /// A number that starts like one carrier's numbers but is one character short of their length or one over it:
-    /// it may be mistyped. Only when no high-confidence rule takes the number as it is, and the rules it is one
-    /// character off are one carrier's (`mistypedNumber` in src/peek/lookup/reading.ts).
-    func mistypedNumber(_ normalized: String) -> (carrier: CarrierID, change: NonTrackingShape.Change)? {
+    /// The international postal shape (S10) with a digit too few or too many: two letters, 8 or 10 digits, two letters.
+    private static let postalDigitOffShape = #"^[A-Z]{2}(?:\d{8}|\d{10})[A-Z]{2}$"#
+
+    /// The post a number is one digit off the international postal shape of: two letters, eight digits and a check
+    /// digit, two letters. Each reading with a digit put back, or taken out, whose check digit adds up is that one
+    /// post's (`postalDigitOff` in src/peek/lookup/reading.ts).
+    private func postalDigitOff(_ normalized: String) -> (carrier: CarrierID, change: NonTrackingShape.Change)? {
+        guard Self.matches(normalized, pattern: Self.postalDigitOffShape) else { return nil }
+        let characters = Array(normalized)
+        let start = String(characters.prefix(2))
+        let end = String(characters.suffix(2))
+        let digits = Array(characters.dropFirst(2).dropLast(2))
+        let change: NonTrackingShape.Change = digits.count == 8 ? .missing : .extra
+        var readings: [String] = []
+        for index in 0...digits.count {
+            let before = String(digits[..<index])
+            let after = String(digits[index...])
+            if change == .missing {
+                readings += "0123456789".map { before + String($0) + after }
+            } else if !after.isEmpty {
+                readings.append(before + after.dropFirst())
+            }
+        }
+        let posts = Set(readings.map { start + $0 + end }.filter(Self.isValidS10).map { reading -> CarrierID in
+            let match = detect(reading)
+            return match.confidence == .high ? match.carrier : .unknown
+        })
+        guard posts.count == 1, let post = posts.first, post != .unknown, post != .internationalPost else { return nil }
+        return (post, change)
+    }
+
+    /// A number that starts like one carrier's numbers but is one character short of their length or one over it,
+    /// or is one digit off a post's international shape (`postal`): it may be mistyped. Only when no high-confidence
+    /// rule takes the number as it is, and the rules it is one character off are one carrier's (`mistypedNumber` in
+    /// src/peek/lookup/reading.ts).
+    func mistypedNumber(_ normalized: String) -> (carrier: CarrierID, change: NonTrackingShape.Change, postal: Bool)? {
         guard detect(normalized).confidence != .high else { return nil }
         var found: [(carrier: CarrierID, change: NonTrackingShape.Change)] = []
         for (carrier, definition) in definitions {
@@ -1748,8 +1793,8 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
                 found.append((carrier, change))
             }
         }
-        guard let first = found.first, found.allSatisfy({ $0.carrier == first.carrier }) else { return nil }
-        return first
+        guard let first = found.first else { return postalDigitOff(normalized).map { ($0.carrier, $0.change, true) } }
+        return found.allSatisfy({ $0.carrier == first.carrier }) ? (first.carrier, first.change, false) : nil
     }
 
     /// ISO 6346's letter values: 10 for A and up from there, leaving out 11, 22 and 33.

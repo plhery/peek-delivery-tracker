@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-OTTO (otto.de) entrega únicamente dentro de Alemania y no realiza envíos directos a España. Si compras para una dirección en Alemania, encontrarás el seguimiento en «Mein Konto» (mi cuenta), dentro de «Bestellungen» (pedidos), en el enlace «Sendungsverfolgung». Los paquetes vendidos por OTTO suelen llegar con Hermes o DHL, los muebles y electrodomésticos grandes por «Spedition», y los artículos de otros vendedores del marketplace llevan su propio transportista y número. Abajo explicamos los estados en alemán, plazos y reclamaciones.
+OTTO (otto.de) entrega únicamente dentro de Alemania y no envía a España. Si compras para una dirección en Alemania, encontrarás el seguimiento en «Mein Konto» (mi cuenta), dentro de «Bestellungen» (pedidos), en el enlace «Sendungsverfolgung». Los paquetes vendidos por OTTO suelen llegar con Hermes o DHL, los muebles y electrodomésticos grandes por «Spedition», y los artículos de otros vendedores del marketplace llevan su propio transportista y número. Abajo explicamos los estados en alemán, plazos y reclamaciones.
 
 La web y la ayuda de OTTO están en alemán. Esta guía te da los textos de OTTO en alemán, con su traducción.
 

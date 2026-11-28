@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-27
 ---
 
-GLS Spanien (GLS Spain) ist das spanische Paketnetz der GLS-Gruppe (ehemals ASM Transporte Urgente). Zum Verfolgen gibst du auf der GLS-Spanien-Website, in der App My GLS oder oben in Peek die Sendungsnummer zusammen mit der Empfänger-Postleitzahl ein — ohne Postleitzahl zeigt GLS Spanien keinen Verlauf an. Unten findest du alle Statusmeldungen auf Deutsch, Lagerfristen in Parcel Shops und Paketstationen sowie Telefonnummer und Kontakte.
+GLS Spanien (GLS Spain) ist das spanische Paketnetz der GLS-Gruppe, die 2016 das Paketnetz ASM Transporte Urgente übernommen hat. Zum Verfolgen gibst du auf der GLS-Spanien-Website, in der App My GLS oder oben in Peek die Sendungsnummer zusammen mit der Empfänger-Postleitzahl ein — ohne Postleitzahl zeigt GLS Spanien keinen Verlauf an. Unten findest du die englischen Statusmeldungen von GLS mit ihrer Bedeutung, Lagerfristen in Parcel Shops und Paketstationen sowie Telefonnummer und Kontakte.
 
 ## GLS Spanien Sendungsnummer und wo du sie findest
 
@@ -96,7 +96,7 @@ Laut GLS-Hilfe 7 Kalendertage in Parcel Shops und Paketstationen (GLS empfiehlt 
 
 ### Ist GLS Spanien dasselbe wie ASM Transporte Urgente?
 
-Ja, GLS übernahm ASM: Im April 2016 kündigte GLS den Kauf von ASM Transporte Urgente an, damals das zweitgrößte Expressnetz in Spanien.
+GLS hat ASM übernommen: Im April 2016 kündigte GLS den Kauf von ASM Transporte Urgente an, damals das zweitgrößte Expressnetz in Spanien.
 
 ### Wie erreiche ich den GLS-Spanien-Kundenservice?
 

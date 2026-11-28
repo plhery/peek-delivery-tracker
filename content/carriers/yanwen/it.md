@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Yanwen è un'azienda di logistica cinese fondata a Pechino nel 1998 che spedisce ordini online dalla Cina e li affida a un corriere locale in Italia per la consegna finale. Inserisci il codice `BYS`, `YP` o il numero locale su [track.yw56.com.cn](https://track.yw56.com.cn/en/index) oppure incollalo nel box qui sopra. Sotto: traduzione degli stati in inglese (inclusi `Tendered for Delivery` e `Batch delivery to carrier`), come trovare il numero *Last Mile* in Italia e chi contattare se il pacco si ferma.
+Yanwen è un'azienda di logistica cinese fondata a Pechino nel 1998 che spedisce ordini online dalla Cina e li affida a un corriere locale in Italia per la consegna finale. Inserisci il numero Yanwen (per esempio `BYS…` o `…YP`) o quello del corriere locale su [track.yw56.com.cn](https://track.yw56.com.cn/en/index) oppure incollalo nel box qui sopra. Sotto: traduzione degli stati in inglese (inclusi `Tendered for Delivery` e `Batch delivery to carrier`), come trovare il numero *Last Mile* in Italia e chi contattare se il pacco si ferma.
 
 ## Numero di tracciamento Yanwen: com'è fatto
 
@@ -97,11 +97,11 @@ Gli orari sono letti nel fuso GMT di Yanwen e mostrati nel fuso orario del tuo d
 
 ### Yanwen che corriere è?
 
-È un'azienda di logistica fondata a Pechino nel 1998 che gestisce le spedizioni internazionali dalla Cina per venditori online (fornitore raccomandato di AliExpress ed eBay dal 2015, secondo il proprio profilo). I suoi codici usano prefisso `BYS`, finale `YP` o `YW` per gli Stati Uniti.
+È un'azienda di logistica fondata a Pechino nel 1998 che gestisce le spedizioni internazionali dalla Cina per venditori online (fornitore raccomandato di AliExpress ed eBay dal 2015, secondo il proprio profilo). I suoi numeri iniziano con `BYS` o finiscono con `YP`; quelli che iniziano con `YW` sono dell'ultimo miglio negli Stati Uniti.
 
 ### Chi consegna i pacchi Yanwen in Italia (e Poste Italiane li consegna)?
 
-Un corriere locale: Yanwen non consegna in proprio in Europa e nessuna sua pagina indica Poste Italiane come partner fisso. Nei pacchi diretti in Italia visti su track.yw56.com.cn il riquadro «Distributor» era vuoto e le scansioni mostravano depositi a Milano, Roma e Torino; controlla il numero «Last Mile Tracking» o chiedi al venditore.
+Un corriere locale: Yanwen non consegna in proprio in Europa e nessuna sua pagina nomina Poste Italiane. Nei pacchi diretti in Italia visti su track.yw56.com.cn il riquadro «Distributor» era vuoto e le scansioni mostravano depositi a Milano, Roma e Torino; controlla il numero «Last Mile Tracking» o chiedi al venditore.
 
 ### Cosa significano «Tendered for Delivery» e «End_of_Tracking» su Yanwen?
 

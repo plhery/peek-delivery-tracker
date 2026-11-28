@@ -120,7 +120,7 @@ Przewoźnik końcowy, nie Whistl: w Wielkiej Brytanii m.in. Royal Mail, Evri, DP
 
 ### Co oznacza „Handed over to Delivery Carrier” lub „Handed over to Royal Mail”?
 
-Paczka została przekazana przewoźnikowi doręczającemu. Przy usługach częściowo śledzonych (*part-tracked*) bywa to ostatni wpis w Whistl — dalsze kroki sprawdzaj numerem przewoźnika końcowego.
+Paczka została przekazana przewoźnikowi doręczającemu. To często ostatni wpis w Whistl, a dla przesyłek częściowo śledzonych (*part-tracked*) Whistl zaznacza, że po przekazaniu dalsze śledzenie nie jest możliwe — dalsze kroki sprawdzaj numerem przewoźnika końcowego.
 
 ### Dlaczego mój numer śledzenia Whistl nie działa?
 

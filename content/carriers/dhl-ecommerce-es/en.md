@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-DHL eCommerce Iberia (formerly DHL Parcel Iberia) is DHL's parcel network in Spain and Portugal, partnering with CTT Express for consumer deliveries in Spain and CTT Expresso in Portugal under their May 2026 joint venture. Paste your 10-digit, two-letter + 7-digit + `0`, or `JJD` number from the shop in the box above (and open DHL's tracker directly from the parcel page). Below: English and Spanish status meanings, ServicePoint pickups and what to do if a parcel is delayed or damaged.
+DHL eCommerce Iberia (formerly DHL Parcel Iberia) is DHL's parcel network in Spain and Portugal, and under a joint venture signed in May 2026, CTT Express takes its deliveries to consumers in Spain and CTT Expresso its business in Portugal. Paste the number from the shop in the box above (and open DHL's tracker directly from the parcel page). Below: English and Spanish status meanings, ServicePoint pickups and what to do if a parcel is delayed or damaged.
 
 ## DHL eCommerce tracking number: where it is and what it looks like
 
@@ -83,7 +83,7 @@ No. DHL Express waybills have their own MyDHL+ tracker, and Peek treats the two 
 
 ### Does CTT Express deliver DHL eCommerce parcels in Spain and Portugal?
 
-For many consumer shipments, yes. Under the joint venture signed on 12 May 2026, CTT Express handles consumer deliveries in Spain while DHL eCommerce's Portugal business moves to CTT Expresso. If tracking provides a CTT Express number, follow it under [CTT Express](carrier:ctt-express).
+Some of them. Under the joint venture signed on 12 May 2026, CTT Express handles deliveries to consumers in Spain, while DHL keeps business deliveries, and DHL eCommerce's Portugal business moves to CTT Expresso. If tracking provides a CTT Express number, follow it under [CTT Express](carrier:ctt-express).
 
 ### What do "Delivered, POD pending" and "Shipment with incidence" mean?
 
@@ -95,7 +95,7 @@ Confirm both the number and carrier with the shop, as 10-digit numbers are share
 
 ### Who do I contact if a DHL eCommerce Iberia parcel is lost or damaged?
 
-Contact the shop first: DHL's own incidence scan directs recipients to the sender, and under EU Your Europe rules the seller is liable for damage until delivery and must deliver within 30 days unless another date was agreed. For local delivery queries, check DHL eCommerce's website for Spain or Portugal.
+Contact the shop first: DHL's own incidence scan directs recipients to the sender, and in the EU, Your Europe says the shop is responsible for damage until you receive the goods and, without an agreed date, must deliver within 30 days. For local delivery queries, check DHL eCommerce's website for Spain or Portugal.
 
 :::sources
 - [CTT: CTT e DHL Ecommerce selam parceria estratégica](https://www.ctt.pt/grupo-ctt/media/noticias/ctt-e-dhl-ecommerce-selam-parceria-estrategica-para-criar-rede-de-distribuicao-de-encomendas-mais-completa-da-peninsula-iberica) – joint venture signed 12 May 2026, DHL eCommerce Portugal to CTT Expresso, CTT Express for consumers in Spain, DHL for business deliveries

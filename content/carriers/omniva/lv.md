@@ -6,7 +6,7 @@ published: 2026-10-26
 updated: 2026-11-27
 ---
 
-Omniva piegādā sūtījumus Latvijā, Igaunijā un Lietuvā (Latvijā pakalpojumus sniedz OMNIVA SIA) ar pakomātiem un kurjeriem. Sūtījumu ar `JJEE` vai `EE` kodu izseko lapā [Sūtījumu izsekošana](https://www.omniva.lv/sutijumu-izsekosana/), Omniva lietotnē, mana.omniva.lv vai laukā lapas augšā. Zemāk: anglisko statusu nozīme, 4 dienu glabāšana pakomātā un pagarināšana, kurjera piegāde, pāradresācija un kontakti.
+Omniva piegādā sūtījumus Latvijā, Igaunijā un Lietuvā (Latvijā pakalpojumus sniedz OMNIVA SIA) ar pakomātiem un kurjeriem. Sūtījumu (Omniva kodi visbiežāk sākas ar `JJEE` vai beidzas ar `EE`) izseko lapā [Sūtījumu izsekošana](https://www.omniva.lv/sutijumu-izsekosana/), Omniva lietotnē, mana.omniva.lv vai laukā lapas augšā. Zemāk: anglisko statusu nozīme, 4 dienu glabāšana pakomātā un pagarināšana, kurjera piegāde, pāradresācija un kontakti.
 
 ## Omniva sūtījuma numurs
 
@@ -110,7 +110,7 @@ Peek rāda Omniva statusus angliski, katra soļa vietu Omniva tīklā, galamēr�
 
 ### Cik ilgi ceļo Omniva sūtījums Latvijā un Baltijā?
 
-No brīža, kad sūtījums nodots Omniva, uz pakomātu tajā pašā valstī tas nonāk 1–2 darba dienās, bet starp Baltijas valstīm – 2–3 darba dienās. Kurjeri Baltijā piegādā 3 dienu laikā (izņemot svētdienas un svētku dienas); laikapstākļi, satiksme vai pilns pakomāts piegādi var aizkavēt.
+Omniva norāda, ka no brīža, kad sūtījums nodots Omniva, uz pakomātu tajā pašā valstī tas nonāk 1–2 darba dienās, bet starp Baltijas valstīm – 2–3 darba dienās. Kurjeri Baltijā piegādā 3 dienu laikā (izņemot svētdienas un svētku dienas); laikapstākļi, satiksme vai pilns pakomāts piegādi var aizkavēt.
 
 ### Cik ilgi paka glabājas Omniva pakomātā un kā pagarināt termiņu?
 
@@ -126,7 +126,7 @@ Kurjers mēģināja sūtījumu piegādāt, bet tas neizdevās (angļu teksts tik
 
 ### Kā sazināties ar Omniva par kavētu, bojātu vai pazudušu sūtījumu?
 
-Zvanīt Privāto klientu atbalsta centram pa tālruni +371 27042424 (P–Pk 8.00–18.00, S 9.00–15.00) vai rakstīt uz info@omniva.lv. Par bojājumu vai nozaudēšanu vispirms ziņo sūtītājam; rakstisku sūdzību var iesniegt 6 mēnešu laikā.
+Zvanīt Privāto klientu atbalsta centram pa tālruni +371 27042424 (P–Pk 8.00–18.00, S 9.00–15.00) vai rakstīt uz info@omniva.lv. Par bojājumu vai nozaudēšanu vispirms ziņo sūtītājam; rakstisku sūdzību var iesniegt 6 mēnešu laikā, skaitot no brīža, kad sūtījums nodots Omniva.
 
 :::sources
 - [Omniva: Laipni lūdzam!](https://www.omniva.lv/) – krāpnieki, Omniva lietotne, kāpēc sūtījums novirzīts

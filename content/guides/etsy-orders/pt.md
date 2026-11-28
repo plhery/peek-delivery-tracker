@@ -7,9 +7,9 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-A Etsy não envia diretamente os pedidos: cada loja embala a encomenda, escolhe a transportadora e acrescenta o número de seguimento quando o serviço o inclui. Em **Compras e avaliações** vês se o pedido ainda está «Não enviado», «Pré-trânsito» ou «Em trânsito» e a data prevista; com o código da transportadora segues o percurso até Portugal (frequentemente entregue pelos CTT). Abaixo: o que significam os estados Etsy, impostos e alfândega UE e quando abrir um caso.
+A Etsy não envia nada: cada loja embala a encomenda, escolhe a transportadora e acrescenta o número de seguimento quando o serviço o inclui. Em **Compras e avaliações** vês se o pedido ainda está «Não enviado», «Pré-trânsito» ou «Em trânsito» e a data prevista; com o código da transportadora segues o percurso até Portugal (num envio postal, os CTT entregam-no). Abaixo: o que significam os estados Etsy, impostos e alfândega UE e quando abrir um caso.
 
-## Porque é que a minha encomenda Etsy está em «Não enviado» ou «Pré-trânsito»?
+## Porque é que a minha encomenda Etsy ainda diz «Não enviado»?
 
 Porque o vendedor ainda não a fez, embalou ou marcou como enviada. A Etsy calcula a data de entrega prevista assim: «Tempo de processamento + tempo de envio da transportadora = data de entrega prevista». O tempo de processamento é o tempo de que o vendedor precisa para criar o artigo e prepará-lo para envio. O exemplo da Etsy: 3-5 dias de processamento e 2-4 dias de envio dão uma entrega dentro de 5-9 dias. No recibo também vês a data de envio com que o vendedor se comprometeu.
 

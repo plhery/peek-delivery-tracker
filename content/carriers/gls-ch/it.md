@@ -102,7 +102,7 @@ GLS pubblica un tempo standard solo per le spedizioni dall'Austria: 2 giorni lav
 
 ### Quanto tempo ho per ritirare un pacco GLS con invito della Posta?
 
-Con un invito di ritiro della Posta, i termini pubblicati dalla Posta per i propri invii sono 7 giorni (15 giorni per invii dall'estero), prolungabili gratuitamente, oppure secondo recapito tramite «I miei invii» (sabato CHF 7.00).
+Con un invito di ritiro della Posta, i termini pubblicati dalla Posta per i propri invii sono di norma 7 giorni (15 giorni per invii dall'estero), prolungabili gratuitamente, oppure secondo recapito tramite «I miei invii» (sabato CHF 7.00).
 
 ### Come contattare GLS Svizzera per dogana o pacco non consegnato?
 

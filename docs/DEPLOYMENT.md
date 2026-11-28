@@ -37,7 +37,11 @@ with the line `-- After its server.`: the deployment lets it be missing and name
 run's notices, to apply once that commit is live. CI applied it before the migrations named
 after it, so the run also names those: when they are missing too, check that they work
 without it; when production already has them, its warning asks to check that the late one
-does not undo them.
+does not undo them. `scripts/test-migrations.sh` holds functions to this: each call a server
+could make before a migration must find one function that takes it afterwards, with the
+same argument types and a result that keeps its type and columns. A new argument takes a
+default, and a migration that drops a function, or changes one that a running server still
+calls, starts with `-- After its server.`
 
 **Locks.** A migration that alters a table, such as a carrier check on `packages`, needs the
 table to itself, and every later query of that table waits behind it while it waits. Users'

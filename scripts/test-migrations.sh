@@ -44,6 +44,36 @@ fi
 psql "$database_url" -X -v ON_ERROR_STOP=1 \
   -f "$repo_root/supabase/tests/bootstrap.sql"
 
+# A migration is applied before the server it serves, and the running server keeps calling the functions it changes
+# (docs/DEPLOYMENT.md): each call that worked before a migration must work after it, unless the migration starts with
+# "-- After its server.". These two dropped functions before the check, each applied with the server it served.
+calls_changed_before=" 20260715000000_shared_backend 20261008230000_drop_on_screen_deliveries "
+calls_before=$(mktemp)
+trap 'rm -f "$calls_before"' EXIT
+server_calls() {
+  psql "$database_url" -X -At -v ON_ERROR_STOP=1 "$@" -f "$repo_root/supabase/tests/server_calls.sql"
+}
+# The check finds a required argument added to a function, and lets an optional one through.
+psql "$database_url" -X -q -v ON_ERROR_STOP=1 \
+  -c "create function public.server_calls_probe(p_a text) returns boolean language sql as 'select true'"
+server_calls > "$calls_before"
+psql "$database_url" -X -q -v ON_ERROR_STOP=1 --single-transaction \
+  -c "drop function public.server_calls_probe(text)" \
+  -c "create function public.server_calls_probe(p_a text, p_b boolean default false) returns boolean language sql as 'select p_b'"
+if [[ -n "$(server_calls -v before_file="$calls_before")" ]]; then
+  echo "The check of the running server's calls refuses an optional argument" >&2
+  exit 1
+fi
+psql "$database_url" -X -q -v ON_ERROR_STOP=1 --single-transaction \
+  -c "drop function public.server_calls_probe(text, boolean)" \
+  -c "create function public.server_calls_probe(p_a text, p_b boolean) returns boolean language sql as 'select p_b'"
+if [[ "$(server_calls -v before_file="$calls_before")" != *"server_calls_probe(text): a call with (p_a) finds no function"* ]]; then
+  echo "The check of the running server's calls misses a required argument" >&2
+  exit 1
+fi
+psql "$database_url" -X -q -v ON_ERROR_STOP=1 -c "drop function public.server_calls_probe(text, boolean)"
+broken_calls=0
+
 while IFS= read -r migration; do
   if [[ "$(basename "$migration")" == "20260715000000_shared_backend.sql" ]]; then
     psql "$database_url" -X -v ON_ERROR_STOP=1 \
@@ -85,7 +115,22 @@ while IFS= read -r migration; do
     psql "$database_url" -X -v ON_ERROR_STOP=1 \
       -f "$repo_root/supabase/tests/pre_review_queue_replays.sql"
   fi
+  name=$(basename "$migration" .sql)
+  checked=0
+  if [[ "$(head -n 1 "$migration")" != '-- After its server.' && "$calls_changed_before" != *" $name "* ]] \
+    && grep -qiE 'function|procedure|cascade' "$migration"; then
+    server_calls > "$calls_before"
+    checked=1
+  fi
   psql "$database_url" -X -v ON_ERROR_STOP=1 --single-transaction -f "$migration"
+  if (( checked )); then
+    broken=$(server_calls -v before_file="$calls_before")
+    if [[ -n "$broken" ]]; then
+      echo "$name breaks calls that the running server makes until its own server is deployed:" >&2
+      sed 's/^/  /' <<< "$broken" >&2
+      broken_calls=1
+    fi
+  fi
   if [[ "$(basename "$migration")" == "20261008050000_review_queue_replays.sql" ]]; then
     psql "$database_url" -X -v ON_ERROR_STOP=1 \
       -f "$repo_root/supabase/tests/review_queue_replays.sql"
@@ -103,6 +148,10 @@ while IFS= read -r migration; do
       -f "$repo_root/supabase/tests/parcel_sharing_upgrade.sql"
   fi
 done < <(find "$repo_root/supabase/migrations" -maxdepth 1 -type f -name '*.sql' | sort)
+if (( broken_calls )); then
+  echo "Keep the old calls working (a new argument takes a default), or start the migration with \"-- After its server.\"" >&2
+  exit 1
+fi
 
 # A deployment asks production which migrations it lacks, so each one must record itself.
 unrecorded=$(comm -23 \

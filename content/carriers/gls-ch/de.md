@@ -1,12 +1,12 @@
 ---
 title: GLS Schweiz Sendungsverfolgung: Status, Post und Kontakt
-description: GLS Schweiz Sendungsverfolgung: Paketnummer mit PLZ prüfen, Zustellung durch Swiss Post GLS in Basel, Zollkosten, Abholungseinladung und Telefonnummer.
+description: GLS Schweiz Sendungsverfolgung: Paketnummer mit PLZ prüfen, Zustellung durch die Post (Swiss Post GLS, Basel), Zollkosten, Abholungseinladung und Telefonnummer.
 slug: gls-schweiz-sendungsverfolgung
 published: 2026-10-11
 updated: 2026-11-27
 ---
 
-GLS hat in der Schweiz keine eigene Gesellschaft: Pakete aus dem GLS-Netzwerk verzollt und stellt in der Schweiz und in Liechtenstein der Partner **Swiss Post GLS** mit Sitz in Basel (Post-Passage 11) zu. Du verfolgst ein GLS-Paket in der [Sendungsverfolgung von GLS](https://gls-group.com/EU/en/parcel-tracking) mit Paketnummer und vierstelliger Schweizer Postleitzahl oder direkt oben im Feld; die Nummer steht in der Versand-E-Mail des Shops.
+GLS hat in der Schweiz keine eigene Gesellschaft: Partner für die Schweiz und Liechtenstein ist **Swiss Post GLS** in Basel, ein Exportdienst der Post, und die Post verzollt die Pakete aus dem GLS-Netzwerk und stellt sie zu. Du verfolgst ein GLS-Paket in der [Sendungsverfolgung von GLS](https://gls-group.com/EU/en/parcel-tracking) mit Paketnummer und vierstelliger Schweizer Postleitzahl oder direkt oben im Feld; die Nummer steht in der Versand-E-Mail des Shops.
 
 ## GLS Paketnummer und Track-ID: so sehen sie aus
 
@@ -96,7 +96,7 @@ Ohne Postleitzahl zeigt die Sendungsverfolgung von GLS nur eine Übersicht ohne 
 
 ### Wer stellt GLS-Pakete in der Schweiz zu und wie lange dauert es?
 
-Die Schweizerische Post über ihren Partner Swiss Post GLS in Basel verzollt und stellt GLS-Pakete in der Schweiz und in Liechtenstein zu. Eine feste Laufzeit nennt GLS nur ab Österreich: in der Regel 2 Versandtage (48 Stunden). Kommt das Paket von anderswo, richte dich nach der Angabe des Shops.
+Die Schweizerische Post: Partner von GLS für die Schweiz und Liechtenstein ist Swiss Post GLS in Basel, ein Exportdienst der Post, und die Post verzollt die GLS-Pakete und stellt sie zu. Eine feste Laufzeit nennt GLS nur ab Österreich: in der Regel 2 Versandtage (48 Stunden). Kommt das Paket von anderswo, richte dich nach der Angabe des Shops.
 
 ### Stellt GLS in der Schweiz am Samstag zu und gibt es GLS-Paketshops?
 

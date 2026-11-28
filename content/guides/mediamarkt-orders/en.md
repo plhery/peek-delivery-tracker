@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-MediaMarkt sells online across 11 European countries (as MediaWorld in Italy, alongside Saturn in Germany, and rebranded Darty in Portugal), with a separate shop for each country. Check your order status in your account or on the guest order page, and find the carrier tracking link in your shipping confirmation email. Who delivers depends on country and item size: DHL, Hermes or DPD for parcels in Germany (plus freight carriers for large appliances), Paack, SEUR, Correos, TIPSA, InPost, Method, Ader or Citylogin in Spain, and national posts in Austria, Switzerland and Belgium.
+MediaMarkt sells online in 11 countries, each with its own shop (in Italy as MediaWorld; in Germany the group also runs Saturn). In Portugal it was rebranded Darty. Check your order status in your account or, as a guest, on the shop's order page. In Germany, Austria, Switzerland and Belgium the shipping email brings the tracking link, and in Spain it sends you to the carrier's website. Who delivers depends on country and item size: DHL, Hermes or DPD for parcels in Germany (plus freight carriers for large appliances), Paack, SEUR, Correos, TIPSA, InPost, Method, Ader or Citylogin in Spain, Austrian Post or GLS Austria in Austria, Swiss Post in Switzerland, and bpost or PostNL in Belgium.
 
 ## Where does MediaMarkt sell online?
 

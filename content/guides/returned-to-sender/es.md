@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-11-27
 ---
 
-Cuando un envío figura como «Devuelto al remitente», el transportista no ha podido entregarlo — por dirección incompleta, rechazo, plazo de recogida agotado o aduanas sin pagar — y lo lleva de vuelta a quien lo envió. Una vez iniciada la devolución, transportistas como DHL avisan de que no se puede detener; escribe hoy mismo al vendedor por escrito para indicar si quieres un reenvío o el reembolso.
+Cuando un envío figura como «Devuelto al remitente», el transportista no ha podido entregarlo — por un problema con la dirección, rechazo, plazo de recogida agotado o aduanas sin pagar — y lo lleva de vuelta a quien lo envió. Una vez iniciada la devolución, transportistas como DHL avisan de que no se puede detener; escribe hoy mismo al vendedor y dile por escrito si quieres un reenvío o el reembolso.
 
 ¿Has devuelto tú algo a una tienda? Es otro camino: [seguir una devolución y su reembolso](guide:returns-tracking).
 

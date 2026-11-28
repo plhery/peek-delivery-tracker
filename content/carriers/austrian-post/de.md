@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Ein Paket der Österreichischen Post (Österreichische Post AG, Sitz in Wien, international Austrian Post) verfolgst du ohne Konto direkt oben im Feld, auf post.at unter „Sendungsverfolgung“ oder in der Post App. Die 22-stellige Nummer oder internationale `AT`-Nummer findest du in der Versandmail des Shops, in der e-Benachrichtigung oder auf dem gelben Zettel. Abholbereite Pakete warten in Filiale oder Poststation meist mindestens 14 Kalendertage (bei manchen Versandhändlern 5 Werktage); die Hotline erreichst du unter +43 800 010 100.
+Ein Paket der Österreichischen Post (Österreichische Post AG, Sitz in Wien, international Austrian Post) verfolgst du ohne Konto direkt oben im Feld, auf post.at unter „Sendungsverfolgung“ oder in der Post App. Die Sendungsnummer (22 Ziffern oder eine internationale Nummer wie `RR…AT`) findest du in der Versandmail des Shops, in der e-Benachrichtigung oder auf dem gelben Zettel. Abholbereite Pakete warten in Filiale oder Poststation meist mindestens 14 Kalendertage (bei manchen Versandhändlern 5 Werktage); die Hotline erreichst du unter +43 800 010 100.
 
 ## Post Sendungsnummer: wie sie aussieht und wo sie steht
 

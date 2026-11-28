@@ -6,7 +6,7 @@ published: 2026-10-13
 updated: 2026-11-27
 ---
 
-Ukrposhta (Укрпошта) is Ukraine's national post. Track domestic 13-digit parcels or international `UA` shipments in English by pasting the number in the box above, on track.ukrposhta.ua, or in the Ukrposhta app. For parcels moving to or from abroad, Peek can also follow the hand-off with the partner post under the same international number.
+Ukrposhta (Укрпошта) is Ukraine's national post. Track a parcel in English by pasting the number in the box above, on track.ukrposhta.ua, or in the Ukrposhta app: 13 digits within Ukraine, or two letters, nine digits and two letters to or from abroad (`UA` when posted in Ukraine). For parcels moving to or from abroad, Peek can also follow the hand-off with the partner post under the same international number.
 
 ## Ukrposhta tracking number
 

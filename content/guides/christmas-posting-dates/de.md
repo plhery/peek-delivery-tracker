@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-11-27
 ---
 
-Bis wann Pakete und Briefe für Weihnachten 2026 abgegeben sein müssen, haben DHL, die Deutsche Post, Hermes, [GLS](carrier:gls-de) und die [Schweizerische Post](carrier:swiss-post) bereits veröffentlicht: Innerhalb Deutschlands gibst du Pakete, Briefe und Postkarten bei DHL und der Deutschen Post bis Montag, 21. Dezember, ab, Pakete bei GLS bis Montag, 21. Dezember, 12 Uhr, und im Hermes PaketShop bis Samstag, 19. Dezember; in der Schweiz gilt Mittwoch, 23. Dezember, für A-Post und PostPac Priority. DPD und die [Österreichische Post](carrier:austrian-post) haben ihre Termine für 2026 noch nicht genannt (die Tabellen zeigen ihre Daten von 2025 als Anhaltspunkt); für Online-Bestellungen liegt der letzte Bestelltag im Shop wegen Pack- und Zollzeit jeweils noch früher.
+Bis wann Pakete und Briefe für Weihnachten 2026 abgegeben sein müssen, haben DHL, die Deutsche Post, Hermes, [GLS](carrier:gls-de) und die [Schweizerische Post](carrier:swiss-post) bereits veröffentlicht: Innerhalb Deutschlands gibst du Pakete, Briefe und Postkarten bei DHL und der Deutschen Post bis Montag, 21. Dezember, ab, Pakete bei GLS bis Montag, 21. Dezember, 12 Uhr, und im Hermes PaketShop bis Samstag, 19. Dezember; in der Schweiz gilt Mittwoch, 23. Dezember, für A-Post und PostPac Priority. DPD und die [Österreichische Post](carrier:austrian-post) haben ihre Termine für 2026 noch nicht genannt (die Tabellen zeigen ihre Daten von 2025 als Anhaltspunkt); der letzte Bestelltag eines Online-Shops liegt noch früher, und ein Paket von außerhalb der EU (in der Schweiz aus dem Ausland) muss außerdem durch den Zoll.
 
 ## Wann ist der letzte Abgabetermin für Weihnachtspakete 2026 in Deutschland?
 

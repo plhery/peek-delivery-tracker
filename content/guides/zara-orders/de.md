@@ -7,7 +7,7 @@ published: 2026-10-25
 updated: 2026-11-27
 ---
 
-Deine Zara-Bestellung verfolgst du in Deutschland, Österreich und der Schweiz im Zara-Konto unter „Bestellungen“ oder als Gast über den Link in deinen Bestell-E-Mails. Zara nennt vorab keinen festen Paketdienst, zeigt aber Status, voraussichtliches Lieferdatum und Teillieferungen direkt in den Bestelldetails. Steht dort `Dem Kunden zugestellt`, obwohl kein Paket ankam, melde es bei Zara — Zara klärt den Fall mit dem Transportunternehmen.
+Deine Zara-Bestellung verfolgst du in Deutschland, Österreich und der Schweiz im Zara-Konto unter „Bestellungen“ oder als Gast über den Link in deinen Bestell-E-Mails. Zara nennt keinen Paketdienst, zeigt aber Status, voraussichtliches Lieferdatum und Teillieferungen direkt in den Bestelldetails. Steht dort `Dem Kunden zugestellt`, obwohl kein Paket ankam, melde es bei Zara — Zara klärt den Fall mit dem Transportunternehmen.
 
 ## Welcher Paketdienst liefert meine Zara-Bestellung?
 

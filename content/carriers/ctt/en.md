@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-CTT (CTT – Correios de Portugal) is Portugal's national postal service, alongside its express division CTT Expresso (separate from Spanish-run [CTT Express](carrier:ctt-express)). Track a `PT` postal code or express shipment on [ctt.pt's Seguir objeto](https://www.ctt.pt/feapl_2/app/open/objectSearch/objectSearch.jspx?request_locale=pt) (available in English), in the CTT app, or by pasting the number in the box above. The tracking code arrives by CTT SMS or email, on a paper notice, or from the sender.
+CTT (CTT – Correios de Portugal) is Portugal's national postal service, alongside its express division CTT Expresso (separate from Spanish-run [CTT Express](carrier:ctt-express)). Track a postal or express parcel on [ctt.pt's Seguir objeto](https://www.ctt.pt/feapl_2/app/open/objectSearch/objectSearch.jspx?request_locale=pt) (available in English), in the CTT app, or by pasting the number in the box above. The tracking code arrives by CTT SMS or email, on a paper notice, or from the sender.
 
 ## CTT tracking number: what it looks like
 

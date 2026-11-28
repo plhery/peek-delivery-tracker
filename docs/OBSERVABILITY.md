@@ -1011,8 +1011,9 @@ provider failure in an `AggregateError` so every cause is visible.
   direct step's incident: its failures say little while the lookup's next step answers. A
   carrier's site down for every parcel is shown to its readers too ([ROUTING.md](ROUTING.md)), and an incident whose
   latest failure is the carrier's own answer that its tracking is unavailable (`carrier_unavailable`, as CTT Express's
-  "Invalid token.", or `maintenance_page`) is titled as the carrier's outage, not as a failing lookup. See
-  [ops/sentry](../ops/sentry/README.md).
+  "Invalid token.", or `maintenance_page`) is titled as the carrier's outage, not as a failing lookup. Incidents
+  whose latest failure is the tracking proxy refusing its account (402 or 407) are one issue for every carrier, as
+  one proxy outage fails them all at once. See [ops/sentry](../ops/sentry/README.md).
 - **Review signals**: routing signals, sync anomalies, health recoveries and direct-step
   incidents open no issue;
   see [Review signals](#review-signals).

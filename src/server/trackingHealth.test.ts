@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { ChallengeError, IndeterminateError, NoHistoryError, NotFoundError, RateLimitedError, SchemaError, UpstreamHttpError } from 'universal-parcel-scraper';
 import { TrackingCaptureError, type LookupRecord } from 'universal-parcel-scraper/node';
-import { confirmationLookup, healthMessage, healthStepRecorder, observeTrackingHealth, type HealthSample } from './trackingHealth';
+import { confirmationLookup, healthMessage, healthStepRecorder, observeTrackingHealth, proxyAccountRefusal, type HealthSample } from './trackingHealth';
 import { TrackingSyncAudit } from './trackingAudit';
 import type { SupabaseServiceClient } from './supabase';
 import type { JsonObject } from './types';
@@ -285,16 +285,32 @@ describe('tracking health evidence', () => {
     await observeTrackingHealth(samples, async () => {
       healthStepRecorder.step({ ...step, carrier: 'russian-post', error: refused(402) });
       healthStepRecorder.lookup({ carrier: 'dhl-express', finalStep: 'direct', outcome: 'transport', errorType: 'UpstreamNetworkError', durationMs: 1, attempts: 1, error: refused(502) });
+      healthStepRecorder.lookup({ carrier: 'swiss-post', finalStep: 'direct', outcome: 'transport', errorType: 'UpstreamNetworkError', durationMs: 1, attempts: 1, error: refused(407) });
       healthStepRecorder.lookup({ carrier: 'ups', finalStep: 'direct', outcome: 'transport', errorType: 'UpstreamNetworkError', durationMs: 1, attempts: 1, error: new TypeError('fetch failed') });
     });
     expect([...samples.values()].map(({ subject, details }) => [subject, details.category, details.reason, details.proxy_status, details.http_status])).toEqual([
       ['russian-post', 'transport', 'proxy_payment_required', 402, null],
       ['dhl-express', 'transport', 'proxy_refused', 502, null],
+      ['swiss-post', 'transport', 'proxy_auth_refused', 407, null],
       ['ups', 'transport', null, undefined, null],
     ]);
     expect(healthMessage({ subject: 'russian-post', kind: 'direct', state: 'open', evidence: { reason: 'proxy_payment_required', proxy_status: 402 } }).nextSteps)
       .toContain('out of credit');
     expect(healthMessage({ subject: 'dhl-express', state: 'open', evidence: { reason: 'proxy_refused', proxy_status: 502 } }).nextSteps).toContain('with 502');
+    expect(healthMessage({ subject: 'swiss-post', state: 'open', evidence: { reason: 'proxy_auth_refused', proxy_status: 407 } }).nextSteps)
+      .toContain('no longer accepts the account');
+  });
+
+  it('titles an incident the proxy refusing its account caused after the proxy, a gateway error after the carrier', () => {
+    const incident = (proxyStatus: number, state = 'open') => ({ kind: 'provider', subject: 'ptt', state, attempts: 48, failures: 7,
+      window_hours: 24, evidence: { category: 'transport', proxy_status: proxyStatus } });
+    expect(proxyAccountRefusal(incident(402))).toBe(402);
+    expect(proxyAccountRefusal(incident(407))).toBe(407);
+    expect(proxyAccountRefusal(incident(502))).toBeNull();
+    expect(proxyAccountRefusal({ kind: 'provider', subject: 'ptt', state: 'open' })).toBeNull();
+    expect(healthMessage(incident(402)).title).toBe('Tracking proxy refusing tunnels (402): provider lookups failing for ptt (7/48 in 24h)');
+    expect(healthMessage(incident(502)).title).toBe('Provider lookups repeatedly failing: ptt (7/48 in 24h)');
+    expect(healthMessage(incident(407, 'recovered')).title).toBe('Provider lookups recovered: ptt');
   });
 
   it('explains user impact, maintenance and rate-limit next steps', () => {

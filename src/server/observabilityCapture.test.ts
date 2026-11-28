@@ -234,6 +234,19 @@ it('retains original exceptions, provider causes, and SDK diagnostic context', a
   expect(incident.tags).toMatchObject({ component: 'tracking-health', incident_state: 'open' });
   expect(incident.contexts?.tracking_health?.next_steps).toContain('maintenance');
   expect(incident.fingerprint).toEqual(['delivery-tracker', 'tracking-health', 'provider', 'la-poste']);
+  // The tracking proxy refusing its account, out of credit (402) and then its credentials (407), fails every carrier it
+  // routes: their incidents are one issue. A gateway error is the carrier's own.
+  const proxied = [['provider', 'ptt', 402], ['refresh', 'swiss-post', 407], ['provider', 'dhl-express', 502]].map(([kind, subject, status]) =>
+    captureTrackingHealth({ id: `test-${subject}`, kind, subject, state: 'open', attempts: 48, failures: 7, window_hours: 24,
+      evidence: { category: 'transport', proxy_status: status } }));
+  await flushObservability();
+  const [ptt, swissPost, dhlExpress] = proxied.map((id) => captured.events.find((event) => event.event_id === id)!);
+  expect(ptt!.fingerprint).toEqual(['delivery-tracker', 'tracking-health', 'proxy-account']);
+  expect(swissPost!.fingerprint).toEqual(ptt!.fingerprint);
+  expect(ptt!.message).toBe('Tracking proxy refusing tunnels (402): provider lookups failing for ptt (7/48 in 24h)');
+  expect(swissPost!.tags).toMatchObject({ provider: 'swiss-post', proxy_status: '407', incident_kind: 'refresh' });
+  expect(dhlExpress!.fingerprint).toEqual(['delivery-tracker', 'tracking-health', 'provider', 'dhl-express']);
+  expect(dhlExpress!.tags).not.toHaveProperty('proxy_status');
   // A recovery, a closing or a direct step's incident is a review signal, not an issue.
   const before = captured.events.length;
   expect(captureTrackingHealth({ id: 'test-recovery', kind: 'direct', subject: 'la-poste', state: 'recovered',

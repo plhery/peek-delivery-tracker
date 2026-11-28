@@ -76,7 +76,8 @@ function category(record: StepRecord | LookupRecord): string {
  * number a parser refuses), which no server sent. A tracking proxy that refused
  * the request's tunnel sent it nowhere: its status is the proxy's (`proxy_status`),
  * with a reason of its own, `proxy_payment_required` for a 402 (the proxy account
- * out of credit or traffic) and `proxy_refused` for any other, such as a 502.
+ * out of credit or traffic), `proxy_auth_refused` for a 407 (the account's credentials
+ * no longer accepted) and `proxy_refused` for any other, such as a 502.
  */
 function details(record: StepRecord | LookupRecord, outcome: string): JsonObject {
   let status: number | null = null;
@@ -86,7 +87,7 @@ function details(record: StepRecord | LookupRecord, outcome: string): JsonObject
   }
   const proxy = proxyTunnelStatus(record.error);
   const reason = carrierErrorReason(record.error)
-    ?? (proxy === null ? null : proxy === 402 ? 'proxy_payment_required' : 'proxy_refused');
+    ?? (proxy === null ? null : proxy === 402 ? 'proxy_payment_required' : proxy === 407 ? 'proxy_auth_refused' : 'proxy_refused');
   return { error_type: record.errorType, category: outcome, reason, http_status: status,
     ...(proxy === null ? {} : { proxy_status: proxy }), step: 'step' in record ? record.step : record.finalStep };
 }
@@ -162,6 +163,16 @@ export function confirmationLookup<T>(operation: () => Promise<T>): Promise<T> {
  * its final outcome, has the incident that tells an outage. Sentry gets the lookups and refreshes
  * that went unanswered, once per outage.
  */
+/**
+ * The tracking proxy's status when an incident's latest failure is the proxy refusing its account, every tunnel of
+ * every carrier it routes alike: 402 (out of credit or traffic) or 407 (credentials no longer accepted). Null otherwise,
+ * as for a gateway error, which is the proxy's exit failing to reach one carrier.
+ */
+export function proxyAccountRefusal(incident: JsonObject): number | null {
+  const status = (incident.evidence as JsonObject | undefined)?.proxy_status;
+  return status === 402 || status === 407 ? status : null;
+}
+
 export function healthReviewSignal(incident: JsonObject): boolean {
   return incident.state === 'recovered' || incident.state === 'closed' || incident.kind === 'direct';
 }
@@ -207,11 +218,16 @@ export function healthMessage(incident: JsonObject): { title: string; nextSteps:
   // The carrier's own tracking said it is unavailable, as CTT Express's "Invalid token." while its credential has lapsed:
   // the carrier's outage, which its parcels' readers are told of (carrier_outages), not Peek's lookup failing.
   const carrierDown = !recovered && CARRIER_DOWN_REASONS.has(String(evidence?.reason));
+  // The proxy refusing its account fails every carrier it routes: one issue for all of them (captureTrackingHealth).
+  const proxy = recovered ? null : proxyAccountRefusal(incident);
+  const counts = `(${incident.failures}/${incident.attempts} in ${incident.window_hours}h${run})`;
   const title = recovered ? `${scope} recovered: ${subject}`
-    : `${carrierDown ? `${scope} failing on the carrier's outage` : `${scope} repeatedly failing`}: ${subject} (${incident.failures}/${incident.attempts} in ${incident.window_hours}h${run})`;
+    : proxy ? `Tracking proxy refusing tunnels (${proxy}): ${scope.toLowerCase()} failing for ${subject} ${counts}`
+    : `${carrierDown ? `${scope} failing on the carrier's outage` : `${scope} repeatedly failing`}: ${subject} ${counts}`;
   let nextSteps = 'Inspect the carrier scraper dashboard and the latest error type. Check the provider response and adapter parsing; retain the working fallback and scheduled backoff.';
   if (carrierDown) nextSteps = 'The carrier\'s own tracking answered that it is unavailable, for every number: its outage, not the adapter\'s or Peek\'s. Readers of its parcels are told its site is down. Nothing to fix here; if it lasts past a day, check the carrier\'s page by hand and tell the scraper lane.';
   else if (evidence?.reason === 'proxy_payment_required') nextSteps = 'The tracking proxy refused the tunnel with 402 Payment Required: its account is out of credit or traffic. Top it up or move the route to another proxy; retries will not help.';
+  else if (evidence?.reason === 'proxy_auth_refused') nextSteps = 'The tracking proxy refused the tunnel with 407 Proxy Authentication Required: it no longer accepts the account\'s credentials, as when its plan has ended or the account is suspended. Check the proxy account; retries will not help.';
   else if (evidence?.reason === 'proxy_refused') nextSteps = `The tracking proxy refused the tunnel with ${String(evidence.proxy_status)}: a gateway error means its exit could not reach the carrier. Check the proxy provider's status before the carrier's.`;
   else if (evidence?.http_status === 429 || evidence?.category === 'rate_limited') nextSteps = 'Honor Retry-After and inspect provider cooldowns. Reduce request frequency; do not increase retries or browser parallelism.';
   else if (['input_required','not_found'].includes(String(evidence?.category))) nextSteps = 'Check whether the shipment has been announced and whether its required postcode or tracking credentials were supplied. Do not retry invalid inputs immediately.';

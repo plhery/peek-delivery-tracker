@@ -26,6 +26,13 @@ While a threshold is still breached and the 3 latest samples are healthy, an inc
 waits: no recovery and no reminder. It recovers once enough later checks succeed or its
 failures age out of the window; a new failure meanwhile reminds as usual.
 
+An incident whose latest failure is the tracking proxy refusing its account, a 402 (out of
+credit or traffic) or a 407 (its credentials no longer accepted), joins one issue for every
+carrier: "Tracking proxy refusing tunnels", each carrier's incident an event of it tagged
+`provider` and `proxy_status`. One proxy outage fails every carrier it routes at once, so it
+is one issue rather than one per carrier. A gateway error (502–504) is the proxy's exit
+failing to reach one carrier, and stays that carrier's own issue.
+
 A direct transport incident opens no issue: it is logged at info and counted
 (`tracking_health_incident_total{kind="direct"}`, the carrier dashboard's Health incidents
 panel). A direct step failing while the lookup's browser or proxy step answers left no parcel

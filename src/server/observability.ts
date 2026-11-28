@@ -5,7 +5,7 @@ import * as Sentry from '@sentry/node';
 import type { Breadcrumb, ErrorEvent } from '@sentry/node';
 import { sourceUrl } from './siteSettings';
 import { carrierErrorReason } from './trackingFailure';
-import { healthMessage, healthReviewSignal } from './trackingHealth';
+import { healthMessage, healthReviewSignal, proxyAccountRefusal } from './trackingHealth';
 import { isRecord, type JsonObject } from './types';
 import { scrubAddress, scrubQuery, scrubQueryString, scrubValue, shopPageAddress, withoutCredentials } from '../lib/credentials';
 import { UpstreamHttpError, type UpstreamHttpDiagnostics } from 'universal-parcel-scraper/node';
@@ -662,11 +662,15 @@ export function captureTrackingHealth(incident: JsonObject): string | null {
     scope.setTag('incident_kind', String(incident.kind));
     scope.setTag('incident_state', String(incident.state));
     scope.setTag('provider', String(incident.subject));
+    const proxy = proxyAccountRefusal(incident);
+    if (proxy) scope.setTag('proxy_status', String(proxy));
     scope.setContext('tracking_health', { ...incident, impact: message.impact, next_steps: message.nextSteps,
       suppression: 'Repeated incident notifications are limited to one per six hours.',
       runbook: `${sourceUrl()}/blob/main/ops/sentry/README.md` });
-    // Opening and reminders are one issue.
-    scope.setFingerprint(['delivery-tracker', 'tracking-health', String(incident.kind), String(incident.subject)]);
+    // Opening and reminders are one issue. The tracking proxy refusing its account fails every carrier it routes at
+    // once: their incidents are one issue, the proxy's, each carrier an event of it.
+    scope.setFingerprint(proxy ? ['delivery-tracker', 'tracking-health', 'proxy-account']
+      : ['delivery-tracker', 'tracking-health', String(incident.kind), String(incident.subject)]);
     scope.setLevel(incident.kind === 'refresh' ? 'error' : 'warning');
     id = Sentry.captureMessage(message.title);
   });

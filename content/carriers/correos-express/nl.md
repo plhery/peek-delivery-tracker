@@ -13,7 +13,7 @@ Volg een pakket van Correos Express in Spanje, Portugal en Europa door je 16- of
 De nationale post Correos is het moederbedrijf van Correos Express, maar beide hebben eigen nummers en een eigen tracker. Aan het nummer zie je direct wie je pakket heeft:
 
 - **Alleen cijfers, 16 of 23 stuks:** Correos Express, al delen andere vervoerders deze formaten (zie onder). Volg het nummer in het zoekvak hierboven.
-- **Letters en cijfers:** Correos. Die codes bestaan uit 23 of 16 tekens die beginnen en eindigen met een letter, `PR` plus 15 cijfers plus `C`, of 13 tekens eindigend op `ES`. Onze [Correos-pagina](carrier:correos-spain) legt de statussen daarvan uit.
+- **Letters en cijfers:** Correos. Die codes bestaan uit 23 of 16 tekens die beginnen en eindigen met een letter, `PR` plus 15 cijfers plus `C`, of 13 tekens eindigend op `ES`. Correos heeft een [Engelstalige tracker](https://www.correos.es/es/en/tools/tracker/items), en onze [Correos-pagina](carrier:correos-spain) legt de statussen daarvan uit.
 
 ## Je Correos Express trackingnummer
 
@@ -21,9 +21,9 @@ Correos Express publiceert geen vast nummerformaat; de tracker vraagt om het *n�
 
 | Nummer | Van wie het is |
 | --- | --- |
-| `4829 1736 5482 9172` | 16 cijfers: Correos Express, maar ook [DHL eCommerce](carrier:dhl-ecommerce), [Canada Post](carrier:canada-post), TNT en Evri UK. |
+| `4829 1736 5482 9176` | 16 cijfers: Correos Express, maar ook [DHL eCommerce](carrier:dhl-ecommerce), [Canada Post](carrier:canada-post), TNT en Evri UK. |
 | `48291736548291736548293` | 23 cijfers: Correos Express, tenzij cijfer 15 tot en met 17 `000` is: de catalogus van Peek wijst die toe aan [Australia Post](carrier:australia-post). |
-| `RR482917365ES` | Letters en cijfers in [het postformaat](guide:tracking-number-formats): de post Correos, niet Correos Express. |
+| `RR482917367ES` | Letters en cijfers in [het postformaat](guide:tracking-number-formats): de post Correos, niet Correos Express. |
 | `4829/17365482` | Met een schuine streep: [NACEX](carrier:nacex), een andere koerier. |
 
 Correos Express vermeldt niet waar je het nummer vindt en publiceert geen sms-afzendernaam, dus kijk in de verzendbevestiging van de winkel of op je bestelpagina ([meer plekken om te zoeken](guide:find-tracking-number), Engels).
@@ -74,12 +74,12 @@ De afzender — meestal de webwinkel — heeft het contract; voor de meeste prob
 
 ## Telefoonnummer en klantenservice van Correos Express
 
-De contactkanalen op de websites van Correos Express (geen ondersteuning in het Engels):
+Contactkanalen zoals de websites van Correos Express ze op 9 oktober 2026 vermeldden (geen ondersteuning in het Engels):
 
 - **Spanje:** 900 122 333, zonder vermelde openingstijden; volgens de Spaanse toezichthouder CNMC zijn 900-nummers gratis vanaf mobiel en vast. De tracker toont daarnaast 913 277 020. Er is ook het [klantenserviceformulier](https://www.correosexpress.es/es/atencion-al-cliente/contacto/atencion-al-cliente), dat om het zendingsnummer en je postcode vraagt, en [@Cex_responde](https://x.com/Cex_responde) op X.
 - **Portugal:** 229 762 810 tegen vastelijntarief, maandag tot en met vrijdag van 08:30 tot 19:00 uur. Ontvangers kunnen ook mailen naar destinatarioscep@correosexpress.com.
 
-> Correos Express zegt nooit om bankgegevens of inloggegevens te vragen en geen 807-betaallijn te hebben; bel bij twijfel 900 122 333.
+> Correos Express zegt nooit om bankgegevens of inloggegevens te vragen en geen 807-betaallijn te hebben; bel bij twijfel 900 122 333. In 2022 waarschuwde de Spaanse instantie INCIBE voor valse sms'jes ondertekend met "CORREOS EXPRESS" die na een mislukte bezorging om een kleine douanevergoeding vroegen. Open de link niet.
 
 ## Correos Express pakketten volgen met Peek
 
@@ -91,15 +91,15 @@ Peek controleert tot elke 10 minuten, en tot elke 2 minuten vanaf 6:00 uur lokal
 
 ### Is Correos Express tracking hetzelfde als Correos tracking?
 
-Nee. Hoewel Correos het moederbedrijf van Correos Express is, gebruiken beide aparte nummers en trackers: Correos Express gebruikt 16 of 23 cijfers zonder letters (`s.correosexpress.com`), terwijl postnummers van [Correos](carrier:correos-spain) letters en cijfers combineren (zoals `…ES` of `PR…C`).
+Nee. Hoewel Correos het moederbedrijf van Correos Express is, gebruiken beide aparte nummers en trackers: Correos Express gebruikt 16 of 23 cijfers zonder letters (`s.correosexpress.com`), terwijl postnummers van [Correos](carrier:correos-spain) letters en cijfers combineren (zoals `…ES` of `PR…C`) en Correos een Engelstalige tracker heeft op correos.es.
 
 ### Wat is Correos Express?
 
-De spoedpakketdochter van de Correos-groep, die binnen 24 uur bezorgt op het Iberisch Schiereiland en vanuit Spanje naar het vasteland van Portugal doorgaans in 24 tot 48 uur.
+Het spoedpakketbedrijf van de Correos-groep. Volgens eigen zeggen bereikt het elke plek op het Iberisch Schiereiland binnen 24 uur, en vanuit Spanje het vasteland van Portugal doorgaans in 24 tot 48 uur.
 
 ### Bezorgt Correos Express naar het VK en door heel Europa?
 
-Ja, vanuit Spanje via Internacional Express, dat meer dan 180 landen bestrijkt met maximaal twee bezorgpogingen en tracking tot aan levering. Voor landen buiten de EU (inclusief het VK) verzorgt Internacional Express de douane-inklaring en kunnen extra vereisten en kosten gelden.
+Ja, vanuit Spanje via Internacional Express, dat meer dan 180 landen bestrijkt met maximaal twee bezorgpogingen en tracking tot aan levering. Voor landen buiten de EU verzorgt Internacional Express de douane-inklaring; Correos Express waarschuwt dat zendingen naar het VK sinds de brexit met extra vereisten en kosten te maken hebben.
 
 ### Hoe laat bezorgt Correos Express?
 
@@ -123,6 +123,7 @@ Nee. Correos Express publiceert geen Engelstalig klantenservicekanaal, en de tra
 - [Correos Express: Envíos internacionales](https://www.correosexpress.es/es/atencion-al-cliente/envios-internacionales1) – eisen en kosten VK
 - [Correos Express: Internacional Express](https://www.correosexpress.es/es/particulares/enviar/internacionales/internacional-express) – 180 landen, tracking
 - [Correos Express: Internacional Express para empresas](https://www.correosexpress.es/es/empresas/productos/internacional-express) – twee pogingen, douane buiten EU
+- [Correos: Correos delivery tracker](https://www.correos.es/es/en/tools/tracker/items) – Engelstalige tracker van Correos
 - [Correos Express: Términos y condiciones del transporte](https://www.correosexpress.es/es/atencion-al-cliente/tyc-transporte) – voorbehoud
 - [Correos Express: Restricciones y avisos](https://www.correosexpress.es/es/atencion-al-cliente/situaciones-especiales) – weerbeperkingen
 - [Correos Express: Alerta de seguridad](https://www.correosexpress.es/es/legales/alerta-de-seguridad) – waarschuwing voor oplichting
@@ -132,5 +133,6 @@ Nee. Correos Express publiceert geen Engelstalig klantenservicekanaal, en de tra
 - [Correos Express Portugal: Termos e Condições de Transporte](https://www.correosexpress.pt/pt/apoio-ao-cliente/tec-transporte) – 3 werkdagen, pincode
 - [Correos Express Portugal: Paq Ponto](https://www.correosexpress.pt/pt/empresa/enviar/peninsulares/paq-ponto) – pakketkluizen
 - [CNMC: Números 800 y 900](https://blog.cnmc.es/2019/04/24/llamadas-a-numeros-800-y-900-gratis-para-el-consumidor-y-quien-paga/) – gratis bellen naar 900-nummers
+- [INCIBE: SMS fraudulentos](https://www.incibe.es/ciudadania/avisos/en-circulacion-sms-fraudulentos-que-suplantan-correos-y-otras-empresas-de) – valse sms
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – wat Peek uitleest
 :::

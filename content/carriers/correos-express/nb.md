@@ -13,7 +13,7 @@ Spor en Correos Express-pakke i Spania, Portugal og Europa ved å lime inn ditt 
 Postvesenet Correos er morselskapet til Correos Express, men begge har sine egne numre og sporingssider. Nummeret viser hvilken tjeneste som har pakken din:
 
 - **Kun sifre, 16 eller 23 av dem:** Correos Express, selv om andre transportører deler disse formatene (se under). Spor det i feltet over.
-- **Bokstaver og sifre:** Correos. Kodene deres har 23 eller 16 tegn som begynner og slutter med en bokstav, `PR` pluss 15 sifre pluss `C`, eller 13 tegn som slutter på `ES`. Vår [Correos-side](carrier:correos-spain) forklarer statusene deres.
+- **Bokstaver og sifre:** Correos. Kodene deres har 23 eller 16 tegn som begynner og slutter med en bokstav, `PR` pluss 15 sifre pluss `C`, eller 13 tegn som slutter på `ES`. Correos har en [engelsk sporingsside](https://www.correos.es/es/en/tools/tracker/items), og vår [Correos-side](carrier:correos-spain) forklarer statusene deres.
 
 ## Ditt Correos Express sporingsnummer
 
@@ -21,9 +21,9 @@ Correos Express publiserer ikke noe fast nummerformat; sporingen ber om *número
 
 | Nummer | Hvem det tilhører |
 | --- | --- |
-| `4829 1736 5482 9172` | 16 sifre: Correos Express, men også [DHL eCommerce](carrier:dhl-ecommerce), [Canada Post](carrier:canada-post), TNT og Evri UK. |
+| `4829 1736 5482 9176` | 16 sifre: Correos Express, men også [DHL eCommerce](carrier:dhl-ecommerce), [Canada Post](carrier:canada-post), TNT og Evri UK. |
 | `48291736548291736548293` | 23 sifre: Correos Express, med mindre siffer 15 til 17 er `000`: Peeks katalog tildeler disse til [Australia Post](carrier:australia-post). |
-| `RR482917365ES` | Bokstaver og sifre i [postformatet](guide:tracking-number-formats): postvesenet Correos, ikke Correos Express. |
+| `RR482917367ES` | Bokstaver og sifre i [postformatet](guide:tracking-number-formats): postvesenet Correos, ikke Correos Express. |
 | `4829/17365482` | Med skråstrek: [NACEX](carrier:nacex), et annet budfirma. |
 
 Correos Express oppgir ikke hvor du finner nummeret og publiserer ikke noe SMS-avsendernavn, så sjekk butikkens sendingsbekreftelse eller ordreside ([flere steder å lete](guide:find-tracking-number), engelsk).
@@ -74,12 +74,12 @@ Avsenderen, vanligvis butikken, har kontrakten; Correos Express henviser mottake
 
 ## Telefonnummer og kundeservice for Correos Express
 
-Kontaktkanalene på Correos Express' nettsider (ingen på engelsk):
+Kontaktkanalene slik Correos Express' nettsider oppga dem 9. oktober 2026 (ingen på engelsk):
 
 - **Spania:** 900 122 333, uten oppgitte åpningstider; spanske CNMC bekrefter at samtaler til 900-numre er gratis fra mobil og fasttelefon. Sporingen viser også et annet nummer, 913 277 020. Det finnes også et [kundeserviceskjema](https://www.correosexpress.es/es/atencion-al-cliente/contacto/atencion-al-cliente) som ber om sendingsnummer og postnummer, samt [@Cex_responde](https://x.com/Cex_responde) på X.
 - **Portugal:** 229 762 810 til fasttelefontakst, mandag til fredag kl. 08:30–19:00. Mottakere kan også sende e-post til destinatarioscep@correosexpress.com.
 
-> Correos Express sier at selskapet aldri ber om bankopplysninger eller innloggingsdata til nettsider og ikke driver noen betalt 807-linje; ved tvil ring 900 122 333.
+> Correos Express sier at selskapet aldri ber om bankopplysninger eller innloggingsdata til nettsider og ikke driver noen betalt 807-linje; ved tvil ring 900 122 333. I 2022 advarte den spanske myndigheten INCIBE mot falske SMS-er signert "CORREOS EXPRESS" som ba om et lite tollgebyr etter en mislykket levering. Ikke åpne lenken.
 
 ## Sporing av Correos Express-pakker med Peek
 
@@ -91,15 +91,15 @@ Peek sjekker opptil hvert 10. minutt, og opptil hvert 2. minutt fra kl. 06:00 lo
 
 ### Er Correos Express sporing det samme som Correos sporing?
 
-Nei. Selv om Correos er morselskapet til Correos Express, bruker de separate numre og sporingssider: Correos Express-numre har 16 eller 23 sifre uten bokstaver (`s.correosexpress.com`), mens postnumre fra [Correos](carrier:correos-spain) kombinerer bokstaver og sifre (som `…ES` eller `PR…C`).
+Nei. Selv om Correos er morselskapet til Correos Express, bruker de separate numre og sporingssider: Correos Express-numre har 16 eller 23 sifre uten bokstaver (`s.correosexpress.com`), mens postnumre fra [Correos](carrier:correos-spain) kombinerer bokstaver og sifre (som `…ES` eller `PR…C`) og har en engelsk sporingsside på correos.es.
 
 ### Hva er Correos Express?
 
-Ekspresspakkeselskapet i Correos-gruppen, som leverer over hele Den iberiske halvøy på 24 timer og fra Spania til fastlands-Portugal vanligvis på 24 til 48 timer.
+Ekspresspakkeselskapet i Correos-gruppen. Det sier selv at det når hele Den iberiske halvøy på 24 timer, og fastlands-Portugal fra Spania vanligvis på 24 til 48 timer.
 
 ### Leverer Correos Express til Storbritannia og resten av Europa?
 
-Ja, fra Spania gjennom Internacional Express, som dekker mer enn 180 land med opptil to leveringsforsøk og sporing frem til levering. For land utenfor EU (inkludert Storbritannia) håndterer Internacional Express fortolling, og ekstra krav og kostnader kan tilkomme.
+Ja, fra Spania gjennom Internacional Express, som dekker mer enn 180 land med opptil to leveringsforsøk og sporing frem til levering. For land utenfor EU håndterer Internacional Express fortolling; Correos Express advarer om at pakker til Storbritannia siden brexit møter ekstra krav og kostnader.
 
 ### Når på dagen leverer Correos Express?
 
@@ -123,6 +123,7 @@ Nei. Correos Express oppgir ingen engelskspråklig kundeservicekanal, og sporing
 - [Correos Express: Envíos internacionales](https://www.correosexpress.es/es/atencion-al-cliente/envios-internacionales1) – krav og kostnader for Storbritannia
 - [Correos Express: Internacional Express](https://www.correosexpress.es/es/particulares/enviar/internacionales/internacional-express) – 180 land, sporing
 - [Correos Express: Internacional Express para empresas](https://www.correosexpress.es/es/empresas/productos/internacional-express) – to forsøk, toll utenfor EU
+- [Correos: Correos delivery tracker](https://www.correos.es/es/en/tools/tracker/items) – engelsk sporingsside hos Correos
 - [Correos Express: Términos y condiciones del transporte](https://www.correosexpress.es/es/atencion-al-cliente/tyc-transporte) – forbehold
 - [Correos Express: Restricciones y avisos](https://www.correosexpress.es/es/atencion-al-cliente/situaciones-especiales) – værbegrensninger
 - [Correos Express: Alerta de seguridad](https://www.correosexpress.es/es/legales/alerta-de-seguridad) – svindeladvarsel
@@ -132,5 +133,6 @@ Nei. Correos Express oppgir ingen engelskspråklig kundeservicekanal, og sporing
 - [Correos Express Portugal: Termos e Condições de Transporte](https://www.correosexpress.pt/pt/apoio-ao-cliente/tec-transporte) – 3 virkedager, PIN
 - [Correos Express Portugal: Paq Ponto](https://www.correosexpress.pt/pt/empresa/enviar/peninsulares/paq-ponto) – pakkebokser
 - [CNMC: Números 800 y 900](https://blog.cnmc.es/2019/04/24/llamadas-a-numeros-800-y-900-gratis-para-el-consumidor-y-quien-paga/) – gratis samtaler til 900-numre
+- [INCIBE: SMS fraudulentos](https://www.incibe.es/ciudadania/avisos/en-circulacion-sms-fraudulentos-que-suplantan-correos-y-otras-empresas-de) – falske SMS-er
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – hva Peek leser
 :::

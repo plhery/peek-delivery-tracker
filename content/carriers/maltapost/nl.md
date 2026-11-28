@@ -6,25 +6,25 @@ published: 2026-11-27
 updated: 2026-11-27
 ---
 
-Volg een pakket of aangetekende zending van MaltaPost op Malta en Gozo door je 13-tekens `MT`-nummer, buitenlandse postbarcode of SendOn-barcode in hoofdletters in het zoekvak hierboven te plakken (of op maltapost.com). Je vindt het nummer op het afgiftebewijs van de afzender, onder de streepjescode op het label of op je afhaalbericht; voor hulp bij tracking is de klantenservice van MaltaPost bereikbaar op (+356) 2122 4421 of het gratis nummer 800 722 44.
+Volg een pakket of aangetekende zending van MaltaPost op Malta en Gozo op maltapost.com/tracking (typ het nummer in hoofdletters) of door je 13-tekens `MT`-nummer, buitenlandse postbarcode of SendOn-barcode in het zoekvak hierboven te plakken. Je vindt het nummer op het afgiftebewijs van de afzender, onder de streepjescode op het label of op je afhaalbericht; voor hulp bij tracking is de klantenservice van MaltaPost bereikbaar op (+356) 2122 4421 of het gratis nummer 800 722 44.
 
 ## MaltaPost trackingnummer: hoe het eruitziet
 
-Eigen aangetekende zendingen van MaltaPost hebben 13 tekens: [twee letters, negen cijfers](guide:tracking-number-formats) en `MT`.
+Eigen aangetekende zendingen van MaltaPost hebben 13 tekens: [twee letters, negen cijfers](guide:tracking-number-formats) en `MT`. Het formulier voor herbezorging noemt de lokale voorvoegsels RH, RR, RT en RI.
 
 :::anatomy RR 482917367 MT
-- RR | Type zending: twee letters voor aangetekende en traceerbare zendingen
+- RR | Type zending: RR, RH, RT of RI voor lokale aangetekende zendingen
 - 482917367 | Negen cijfers, waarvan het laatste een controlecijfer is
 - MT | Verstuurd vanuit Malta
 :::
 
-Een zending uit het buitenland behoudt het nummer van de buitenlandse post (`RR482917367GB`, `CP482917367CN` of een ander formaat) en de tracking van MaltaPost accepteert dat nummer. SendOn-pakketten zijn met beide barcodes te volgen.
+Een zending uit het buitenland behoudt het nummer van de buitenlandse post (`RR482917367GB`, `CP482917367CN` of een ander formaat) en de tracking van MaltaPost accepteert dat nummer. De pagina kan dan zowel een "Foreign Barcode" als een "Local Barcode" tonen. SendOn-pakketten zijn met beide barcodes te volgen.
 
-De FAQ van MaltaPost vraagt het nummer in hoofdletters in te voeren. Sommige nummers, zoals zendingen die beginnen met `U`, zijn op Malta niet te volgen of worden door een ander lokaal bedrijf bezorgd. Een zending zonder trackingnummer kan niet worden gevolgd of opgespoord. Nummer kwijt? Zie [waar je een trackingnummer vindt](guide:find-tracking-number) (Engels).
+De FAQ van MaltaPost vraagt het nummer in hoofdletters in te voeren. Antwoordt de pagina "Tracking number not recognised.", controleer het nummer dan bij de afzender. Sommige nummers, zoals zendingen die beginnen met `U`, zijn op Malta niet te volgen of worden door een ander lokaal bedrijf bezorgd. Een zending zonder trackingnummer kan niet worden gevolgd of opgespoord. Nummer kwijt? Zie [waar je een trackingnummer vindt](guide:find-tracking-number) (Engels).
 
 ## Betekenis van de trackingstatussen van MaltaPost
 
-Elke scan heeft een datum, tijd, gebeurtenis en scanlocatie. Voor een zending die naar jou onderweg is:
+Elke scan heeft een datum, tijd, gebeurtenis en scanlocatie, soms met een regel "Reason:" en "Action:" eronder. Voor een zending die naar jou onderweg is:
 
 | MaltaPost meldt | Wat het voor jou betekent |
 | --- | --- |
@@ -41,19 +41,23 @@ Elke scan heeft een datum, tijd, gebeurtenis en scanlocatie. Voor een zending di
 | `Item delivered/collected by recipient` | Bezorgd of door jou opgehaald. |
 | `Item could not be processed further. Item not collected. Item returned to sender` | Niemand haalde het op tijd op; het gaat terug naar de afzender. |
 
+Een voortgangsbalk op de pagina vat het samen in fases zoals `Arrived in Country`, `Ready for Collection` en `Attempted Delivery`.
+
 Drie regels geven geen fysieke verplaatsing aan: `Declaration Submitted`, `Payment Submitted` en `Online payment complete` leggen alleen vast wat je online hebt ingevuld of betaald. `Forwarded to the next processing centre` is een verplaatsing tussen de eigen centra van MaltaPost. MaltaPost waarschuwt dat de datum en tijd die van de scan zijn, niet altijd van het feitelijke moment.
 
 ## Afhaalbericht, postkantoor en Easipik-kluizen van MaltaPost
 
 MaltaPost probeert aangetekende zendingen aan de deur te bezorgen. Is er niemand thuis, dan valt er een bericht in de brievenbus waarmee je het pakket ophaalt bij het genoemde postkantoor. Berichten hebben verschillende kleuren die aangeven hoe de zending kan worden afgehaald of opnieuw bezorgd.
 
-**Afhalen:** neem het afhaalbericht en een origineel legitimatiebewijs mee (identiteitskaart, paspoort, rijbewijs, verblijfskaart of werkvergunning). Haalt iemand anders namens jou op, dan zijn het bericht, jouw originele legitimatiebewijs én zijn eigen legitimatiebewijs nodig, of een volmacht. Postkantoren zijn over het algemeen geopend van maandag tot en met zaterdag van 7:30 tot 13:00 uur; sommige vestigingen hebben afwijkende tijden. Niet-afgehaalde zendingen gaan terug naar de afzender.
+**Afhalen:** neem het afhaalbericht en een origineel legitimatiebewijs mee (identiteitskaart, paspoort, rijbewijs, verblijfskaart of werkvergunning). Haalt iemand anders namens jou op, dan zijn het bericht, jouw originele legitimatiebewijs én diens eigen legitimatiebewijs nodig, of een volmacht. Postkantoren zijn over het algemeen geopend van maandag tot en met zaterdag van 7:30 tot 13:00 uur; sommige vestigingen hebben afwijkende tijden.
+
+**Bezorging gemist?** Het [formulier Missed a Delivery](https://www.maltapost.com/delivery/missed-delivery) vraagt de kleur van het bericht, het trackingnummer en een foto van het bericht. Je kunt de zending opnieuw laten bezorgen op een adres, bij een ander (sub)postkantoor of in een Easipik-kluis, of op het kantoor laten bewaren na de standaardtermijn van 12 werkdagen. Een tweede bezorging door een koerier op een adres kost €5,50 voor één gevolgde zending. Na de termijn voor herbezorging kan MaltaPost een zending tot 12 weken bewaren. Niet-afgehaalde zendingen gaan terug naar de afzender.
 
 **Easipik-pakketkluizen:** 24/7 toegankelijke kluizen verspreid over Malta en Gozo voor pakketten tot 40 × 40 × 60 cm en 30 kg. MaltaPost stuurt de kluiscode per sms en e-mail; het pakket blijft 72 uur liggen na ontvangst van de code en gaat daarna naar de balie van het lokale postkantoor. Easipik is gratis voor bezorgingen van MaltaPost; pakketten van andere koeriers kosten €3,50.
 
 ## Douanekosten, vertraging en vermiste zendingen bij MaltaPost
 
-**Vastgehouden voor kosten.** Voor zendingen van buiten de EU zijn invoerrechten en btw verschuldigd, en MaltaPost mag ze wettelijk pas vrijgeven na betaling. Op de trackingpagina en via de douaneportal kun je documenten aanleveren en de kosten betalen; een betaalde zending wordt vrijgegeven en de volgende werkdag bezorgd. Meer in [pakketten bij de douane](guide:customs) (Engels).
+**Vastgehouden voor kosten.** Voor zendingen van buiten de EU zijn invoerrechten en btw verschuldigd, en MaltaPost mag ze wettelijk pas vrijgeven na betaling. Op de trackingpagina kun je met de knop "Declare Items" de documenten uploaden en met "Pay Charges" betalen; een betaalde zending wordt vrijgegeven en de volgende werkdag bezorgd. Meer in [pakketten bij de douane](guide:customs) (Engels).
 
 **Geen update of niet aangekomen.** Voor een zending uit het buitenland stelt de FAQ van MaltaPost dat een onderzoek via het postkantoor van verzending loopt, dus vraag de winkel of afzender een onderzoek te starten. MaltaPost rekent vier of meer werkdagen na verzending als vertraging, en navraag of klachten zijn mogelijk tot zes maanden na verzending. Voor internationale navraag streeft MaltaPost naar afhandeling binnen 90 dagen. Zie [waarom tracking niet bijwerkt](guide:tracking-not-updating) (Engels).
 
@@ -79,7 +83,7 @@ Peek volgt een nummer uit het buitenland eerst bij de buitenlandse post. Zodra d
 
 De tijden van MaltaPost bevatten geen tijdzone: Peek leest ze op de klok van de scanlocatie (Maltese tijd voor scans op Malta) en toont de eigen geschiedenis van MaltaPost. Tijden verschijnen in de tijdzone van je apparaat; op peektracker.com en in de iPhone- en Android-apps eindigt de geschiedenis met "Times are in your time zone:" en de naam ervan. Statussen behouden de formulering van MaltaPost. Peek kan het postkantoor tonen waar een zending wacht of is opgehaald en meldingen sturen bij statuswijzigingen. Er is geen verwachte bezorgdag en geen gewicht. Een zending die MaltaPost van tracking uitsluit kan niet worden gevolgd.
 
-Zolang de tracker van MaltaPost antwoordt, controleert Peek tot elke 10 minuten wanneer je het pakket open hebt staan of met meldingen aan als bezorging vandaag wordt verwacht. Vanaf 6:00 uur op de klok van de vervoerder op de dag dat MaltaPost "Item scheduled for physical delivery" scant, kunnen controles elke 2 minuten lopen bij een open scherm of ingeschakelde meldingen. Op de achtergrond zonder meldingen controleert Peek doorgaans elk uur. Wanneer alleen een trackingdienst antwoordt, controleert Peek elk uur, elke 3 uur zodra de laatste scan een dag oud is en tot elke 15 minuten op de bezorgdag zolang het pakket openstaat of meldingen aan staan. Neemt een andere vervoerder het over, dan volgt Peek diens tempo. Bij directe controles geldt na twee dagen zonder nieuws (12 uur bij "Label created" of "Received by carrier") een controle per uur. Na vier dagen zonder nieuwe scan in "Label created", "Received by carrier" of "In transit" toont Peek de dag van de laatste scan ("No tracking update since Mon 12 Oct").
+Zolang de tracker van MaltaPost antwoordt, controleert Peek tot elke 10 minuten wanneer je het pakket open hebt staan of met meldingen aan als bezorging vandaag wordt verwacht. Vanaf 6:00 uur op de klok van de vervoerder op de dag dat MaltaPost "Item scheduled for physical delivery" scant, kunnen controles elke 2 minuten lopen bij een open scherm of ingeschakelde meldingen. Op de achtergrond zonder meldingen controleert Peek doorgaans elk uur. Wanneer alleen een trackingdienst antwoordt, controleert Peek elk uur, elke 3 uur zodra de laatste scan een dag oud is en tot elke 15 minuten op de bezorgdag zolang het pakket openstaat of meldingen aan staan. Neemt een andere vervoerder het over, dan volgt Peek diens tempo. Bij directe controles geldt na twee dagen zonder nieuws (12 uur bij "Label created" of "Received by carrier") een controle per uur. Na vier dagen zonder nieuwe scan in "Label created", "Received by carrier" of "In transit" toont Peek in je lijst de dag van de laatste scan ("No tracking update since Mon 12 Oct").
 
 ## Veelgestelde vragen over MaltaPost tracking
 
@@ -89,7 +93,7 @@ Bel (+356) 2122 4421 of het gratis nummer 800 722 44 (vanaf een vaste lijn), of 
 
 ### Hoe volg ik een buitenlands pakket of SendOn-pakket bij MaltaPost?
 
-Vul de buitenlandse postbarcode of een van beide SendOn-barcodes in hoofdletters in op maltapost.com of in Peek. Zendingen uit het buitenland behouden hun oorspronkelijke barcode; niet-traceerbare zendingen (zoals nummers beginnend met `U`) zijn op Malta niet te volgen.
+Vul de buitenlandse postbarcode of een van beide SendOn-barcodes in op de tracker van MaltaPost, in hoofdletters, of in Peek. Zendingen uit het buitenland behouden hun oorspronkelijke barcode, en de tracker van MaltaPost kan zowel een Foreign Barcode als een Local Barcode tonen; sommige nummers, zoals die beginnend met `U`, zijn op Malta niet te volgen.
 
 ### Is MaltaPost op zaterdag open?
 
@@ -104,7 +108,9 @@ MaltaPost geeft geen algemene levertijd voor zendingen uit het buitenland. Inter
 Een zending vanuit Malta naar het buitenland telt 13 tekens: twee letters, negen cijfers en `MT`, zoals `RR482917367MT`. Een pakket naar Malta behoudt de barcode die de buitenlandse post heeft toegekend.
 
 :::sources
+- [MaltaPost: Tracking](https://www.maltapost.com/tracking) – zoekveld, scankolommen, voortgangsfases, buitenlandse en lokale barcode, redenen voor "niet herkend", douaneknoppen
 - [MaltaPost: Frequently Asked Questions](https://www.maltapost.com/faqs?l=1) – hoofdletters, berichten, openingstijden postkantoren, Easipik 72 uur en hulplijn, douanebetaling, verwerking volgende dag, zendingen uit het buitenland, SendOn-tijden vanuit VK, Duitsland, Italië en VS
+- [MaltaPost: Missed a Delivery?](https://www.maltapost.com/delivery/missed-delivery) – herbezorgopties, 12 werkdagen, 12 weken, herbezorgtarief, lokale voorvoegsels
 - [MaltaPost: Packet Collection](https://www.maltapost.com/packets) – legitimatie en afhaalbericht, afhalen voor iemand anders
 - [MaltaPost: courier it](https://www.maltapost.com/courier) – bezorgpoging en bericht
 - [MaltaPost: Easipik](https://www.maltapost.com/easipik) – pakketkluizen, code per sms en e-mail, afmetingen, tarief derden

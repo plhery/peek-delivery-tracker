@@ -6,25 +6,25 @@ published: 2026-11-27
 updated: 2026-11-27
 ---
 
-Pratite MaltaPost paket ili preporučenu pošiljku širom Malte i Goza tako što ćete uneti 13-znakovni `MT` broj, strani poštanski barkod ili SendOn barkod velikim slovima u polje iznad (ili na sajtu maltapost.com). Broj se nalazi na potvrdi pošiljaoca, ispod barkoda na nalepnici ili na obaveštenju o dostavi; za pomoć oko praćenja korisnička podrška MaltaPosta dostupna je na (+356) 2122 4421 ili na besplatnom broju 800 722 44.
+Pratite MaltaPost paket ili preporučenu pošiljku širom Malte i Goza na maltapost.com/tracking (broj unesite velikim slovima) ili tako što ćete uneti 13-znakovni `MT` broj, strani poštanski barkod ili SendOn barkod u polje iznad. Broj se nalazi na potvrdi pošiljaoca, ispod barkoda na nalepnici ili na obaveštenju o dostavi; za pomoć oko praćenja korisnička podrška MaltaPosta dostupna je na (+356) 2122 4421 ili na besplatnom broju 800 722 44.
 
 ## MaltaPost broj za praćenje: kako izgleda
 
-Preporučene pošiljke same pošte MaltaPost imaju 13 znakova: [dva slova, devet cifara](guide:tracking-number-formats) i `MT`.
+Preporučene pošiljke same pošte MaltaPost imaju 13 znakova: [dva slova, devet cifara](guide:tracking-number-formats) i `MT`. Obrazac za ponovnu dostavu navodi lokalne prefikse RH, RR, RT i RI.
 
 :::anatomy RR 482917367 MT
-- RR | Vrsta pošiljke: dva slova za preporučene i praćene pošiljke
+- RR | Vrsta pošiljke: RR, RH, RT ili RI za lokalne preporučene pošiljke
 - 482917367 | Devet cifara, od kojih je poslednja kontrolna cifra
 - MT | Poslato sa Malte
 :::
 
-Pošiljka iz inostranstva zadržava broj koji joj je dodelila strana pošta (`RR482917367GB`, `CP482917367CN` ili drugi oblik), i praćenje MaltaPosta ga prihvata. SendOn paketi mogu se pratiti pomoću bilo kog od dva barkoda.
+Pošiljka iz inostranstva zadržava broj koji joj je dodelila strana pošta (`RR482917367GB`, `CP482917367CN` ili drugi oblik), i praćenje MaltaPosta ga prihvata. Stranica tada može prikazati i „Foreign Barcode“ i „Local Barcode“. SendOn paketi mogu se pratiti pomoću bilo kog od dva barkoda.
 
-Česta pitanja MaltaPosta traže da broj unesete velikim slovima. Neki brojevi, kao što su oni koji počinju slovom `U`, ne mogu se pratiti na Malti ili pošiljku dostavlja druga lokalna kompanija. Pošiljka poslata bez broja za praćenje ne može se pratiti niti locirati. Izgubili ste broj? Pogledajte [gde pronaći broj za praćenje](guide:find-tracking-number) (na engleskom).
+Česta pitanja MaltaPosta traže da broj unesete velikim slovima. Ako stranica odgovori „Tracking number not recognised.“, proverite broj kod pošiljaoca. Neki brojevi, kao što su oni koji počinju slovom `U`, ne mogu se pratiti na Malti ili pošiljku dostavlja druga lokalna kompanija. Pošiljka poslata bez broja za praćenje ne može se pratiti niti locirati. Izgubili ste broj? Pogledajte [gde pronaći broj za praćenje](guide:find-tracking-number) (na engleskom).
 
 ## Objašnjenje statusa praćenja MaltaPost
 
-Svako skeniranje ima datum, vreme, događaj i lokaciju skeniranja. Za pošiljku koja stiže vama:
+Svako skeniranje ima datum, vreme, događaj i lokaciju skeniranja, ponekad sa redovima „Reason:“ i „Action:“ ispod. Za pošiljku koja stiže vama:
 
 | MaltaPost prikazuje | Šta to znači za vas |
 | --- | --- |
@@ -32,7 +32,7 @@ Svako skeniranje ima datum, vreme, događaj i lokaciju skeniranja. Za pošiljku 
 | `Item arrived at inbound mail sorting centre` | Pošiljka je stigla na Maltu. |
 | `Item to be submitted for clearance` | Ide na carinjenje. |
 | `Item undergoing border agency clearance` | Carina ili druga granična služba proverava pošiljku. |
-| `Item held at inbound mail sorting centre` | Zadržano. Uz napomenu "Awaiting payment of charges" ništa se ne pomera dok ne platite. |
+| `Item held at inbound mail sorting centre` | Zadržano. Uz napomenu „Awaiting payment of charges“ ništa se ne pomera dok ne platite. |
 | `Item returned from local Customs office` | Carina je pustila pošiljku. |
 | `Item to be forwarded to the delivery centre` | Na putu ka pošti koja će izvršiti dostavu. |
 | `Item scheduled for physical delivery` | Na dostavi. |
@@ -41,19 +41,23 @@ Svako skeniranje ima datum, vreme, događaj i lokaciju skeniranja. Za pošiljku 
 | `Item delivered/collected by recipient` | Dostavljeno ili ste lično preuzeli. |
 | `Item could not be processed further. Item not collected. Item returned to sender` | Niko nije preuzeo na vreme; vraća se pošiljaocu. |
 
+Traka napretka na stranici to sažima u faze kao što su `Arrived in Country`, `Ready for Collection` i `Attempted Delivery`.
+
 Tri reda ne predstavljaju fizičko kretanje: `Declaration Submitted`, `Payment Submitted` i `Online payment complete` samo beleže ono što ste uradili na mreži. `Forwarded to the next processing centre` je prenos između centara samog MaltaPosta. MaltaPost napominje da datum i vreme označavaju trenutak skeniranja, ne nužno i samog događaja.
 
 ## Obaveštenje o dostavi, preuzimanje u pošti i Easipik paketomati
 
 MaltaPost pokušava da dostavi preporučene pošiljke na vašu adresu. Ako nikoga nema kod kuće, ostavlja obaveštenje u poštanskom sandučetu, a pošiljku preuzimate u pošti navedenoj na obaveštenju. Obaveštenja dolaze u različitim bojama koje pokazuju kako se pošiljka može preuzeti ili ponovo dostaviti.
 
-**Preuzimanje:** ponesite obaveštenje i originalni lični dokument (ličnu kartu, pasoš, vozačku dozvolu, boravišnu karticu ili radnu dozvolu). Ako neko drugi preuzima umesto vas, potrebni su obaveštenje, vaš originalni dokument i njihov dokument, ili punomoćje. Pošte uglavnom rade od ponedeljka do subote od 7:30 do 13:00; pojedine poslovnice imaju drugačije radno vreme. Nepreuzete pošiljke vraćaju se pošiljaocu.
+**Preuzimanje:** ponesite obaveštenje i originalni lični dokument (ličnu kartu, pasoš, vozačku dozvolu, boravišnu karticu ili radnu dozvolu). Ako neko drugi preuzima umesto vas, potrebni su obaveštenje, vaš originalni dokument i njihov dokument, ili punomoćje. Pošte uglavnom rade od ponedeljka do subote od 7:30 do 13:00; pojedine poslovnice imaju drugačije radno vreme.
+
+**Propustili ste dostavu?** [Obrazac Missed a Delivery](https://www.maltapost.com/delivery/missed-delivery) traži boju obaveštenja, broj za praćenje i fotografiju obaveštenja. Možete zatražiti ponovnu dostavu na adresu, u drugu (pod)poštu ili u Easipik paketomat, ili da pošta čuva pošiljku i posle standardnih 12 radnih dana. Druga dostava kurirom na adresu košta €5,50 za jednu praćenu pošiljku. Posle roka za ponovnu dostavu MaltaPost može da čuva pošiljku do 12 nedelja. Nepreuzete pošiljke vraćaju se pošiljaocu.
 
 **Easipik paketomati:** paketomati dostupni 24/7 širom Malte i Goza za pakete do 40 × 40 × 60 cm i 30 kg. MaltaPost šalje kod za otvaranje SMS-om i e-poštom; paket ostaje 72 sata nakon slanja koda, a zatim se prebacuje na šalter lokalne pošte. Easipik je besplatan za dostave MaltaPosta, dok paketi drugih kurira koštaju €3,50.
 
 ## Carinske takse, kašnjenja i izgubljene pošiljke kod MaltaPosta
 
-**Zadržano zbog taksi.** Na pošiljke izvan EU obračunavaju se carina i PDV, a zakon zabranjuje MaltaPostu da ih izda dok se takse ne plate. Na stranici za praćenje i carinskom delu možete dostaviti dokumentaciju i uplatiti dažbine; plaćena pošiljka se pušta i dostavlja narednog radnog dana. Više u vodiču za [pakete na carini](guide:customs) (na engleskom).
+**Zadržano zbog taksi.** Na pošiljke izvan EU obračunavaju se carina i PDV, a zakon zabranjuje MaltaPostu da ih izda dok se takse ne plate. Na stranici za praćenje dugme „Declare Items“ omogućava da otpremite dokumentaciju, a „Pay Charges“ da platite; plaćena pošiljka se pušta i dostavlja narednog radnog dana. Više u vodiču za [pakete na carini](guide:customs) (na engleskom).
 
 **Bez ažuriranja ili pošiljka nije stigla.** Za pošiljku iz inostranstva, česta pitanja MaltaPosta navode da se potražnica pokreće preko pošte u kojoj je poslata, pa zamolite prodavnicu ili pošiljaoca da je podnese. MaltaPost računa kašnjenje kao četiri ili više radnih dana nakon slanja, a potražnice i reklamacije moguće su do šest meseci od slanja. Cilj MaltaPosta je da međunarodne upite reši u roku od 90 dana. Pogledajte [zašto se praćenje ne ažurira](guide:tracking-not-updating) (na engleskom).
 
@@ -73,13 +77,13 @@ Stranica korisničke podrške MaltaPosta navodi:
 
 ## Praćenje MaltaPost pošiljki u Peeku
 
-Za broj koji se završava na `MT` sa ispravnom kontrolnom cifrom, [Peek](/) istovremeno pita MaltaPost i [Chronopost](carrier:chronopost) i prikazuje "MaltaPost has this parcel." kada MaltaPost poznaje broj, ili "Not found at … yet. Peek will keep checking after you add it." Za pet slova, devet cifara i `MT`, Peek pita samo MaltaPost. Sa pogrešnom kontrolnom cifrom MaltaPost se ne pita, a ručni izbor ne pomaže (Peek javlja da "doesn’t issue numbers like this one"): proverite broj kod pošiljaoca. Link za praćenje sa maltapost.com koji sadrži `barcode=` uvek bira MaltaPost, bez obzira na broj.
+Za broj koji se završava na `MT` sa ispravnom kontrolnom cifrom, [Peek](/) istovremeno pita MaltaPost i [Chronopost](carrier:chronopost) i prikazuje „MaltaPost has this parcel.“ kada MaltaPost poznaje broj, ili „Not found at … yet. Peek will keep checking after you add it.“ Za pet slova, devet cifara i `MT`, Peek pita samo MaltaPost. Sa pogrešnom kontrolnom cifrom MaltaPost se ne pita, a ručni izbor ne pomaže (Peek javlja da „doesn’t issue numbers like this one“): proverite broj kod pošiljaoca. Link za praćenje sa maltapost.com koji sadrži `barcode=` uvek bira MaltaPost, bez obzira na broj.
 
-Peek pošiljku iz inostranstva prvo prati kod njene polazne pošte. Kada ta pošta navede Maltu kao odredište (ili ne navede odredište dok ste na Malti), Peek istim brojem pita i MaltaPost i prelazi na njega čim se pojavi novo skeniranje; ranija istorija ostaje. Pretraga MaltaPosta prihvata takve brojeve, uključujući SendOn barkodove: da biste ih odmah pratili kod MaltaPosta, izaberite "MaltaPost" putem "Change" ili nalepite link sa maltapost.com.
+Peek pošiljku iz inostranstva prvo prati kod njene polazne pošte. Kada ta pošta navede Maltu kao odredište (ili ne navede odredište dok ste na Malti), Peek istim brojem pita i MaltaPost i prelazi na njega čim se pojavi novo skeniranje; ranija istorija ostaje. Pretraga MaltaPosta prihvata takve brojeve, uključujući SendOn barkodove: da biste ih odmah pratili kod MaltaPosta, izaberite „MaltaPost“ putem „Change“ ili nalepite link sa maltapost.com.
 
-Vremena MaltaPosta nemaju vremensku zonu: Peek ih čita po lokalnom satu mesta skeniranja (malteško vreme za skeniranja na Malti) i prikazuje istoriju MaltaPosta. Vremena se prikazuju u vremenskoj zoni vašeg uređaja; na peektracker.com i u iPhone i Android aplikacijama istorija se završava tekstom "Times are in your time zone:" i njenim nazivom. Statusi zadržavaju formulacije MaltaPosta. Peek može prikazati poštu u kojoj pošiljka čeka ili gde je preuzeta i slati obaveštenja pri promeni statusa. Nema očekivanog dana dostave ni težine. Pošiljka koju MaltaPost izuzme iz praćenja ne može se pratiti.
+Vremena MaltaPosta nemaju vremensku zonu: Peek ih čita po lokalnom satu mesta skeniranja (malteško vreme za skeniranja na Malti) i prikazuje istoriju MaltaPosta. Vremena se prikazuju u vremenskoj zoni vašeg uređaja; na peektracker.com i u iPhone i Android aplikacijama istorija se završava tekstom „Times are in your time zone:“ i njenim nazivom. Statusi zadržavaju formulacije MaltaPosta. Peek može prikazati poštu u kojoj pošiljka čeka ili gde je preuzeta i slati obaveštenja pri promeni statusa. Nema očekivanog dana dostave ni težine. Pošiljka koju MaltaPost izuzme iz praćenja ne može se pratiti.
 
-Dok tracker MaltaPosta odgovara, Peek proverava do svakih 10 minuta kada vam je pošiljka otvorena na ekranu ili sa uključenim obaveštenjima ako se dostava očekuje danas. Od 6:00 po satu prevoznika na dan kada MaltaPost skenira "Item scheduled for physical delivery", provere mogu ići na svaka 2 minuta uz otvoren ekran ili uključena obaveštenja. U pozadini bez obaveštenja provere su obično na sat vremena. Kada odgovara samo servis za praćenje, Peek proverava svakog sata, na svaka 3 sata kada je poslednje skeniranje staro dan i do svakih 15 minuta na dan dostave dok je paket otvoren ili su obaveštenja uključena. Kada drugi prevoznik preuzme dostavu, Peek prati njegov ritam. Kod direktnih provera, nakon dva dana bez novosti (12 sati na statusu "Label created" ili "Received by carrier"), Peek proverava svakog sata. Nakon četiri dana bez novog skeniranja u statusu "Label created", "Received by carrier" ili "In transit" prikazuje datum poslednjeg skeniranja ("No tracking update since Mon 12 Oct").
+Dok tracker MaltaPosta odgovara, Peek proverava do svakih 10 minuta kada vam je pošiljka otvorena na ekranu ili sa uključenim obaveštenjima ako se dostava očekuje danas. Od 6:00 po satu prevoznika na dan kada MaltaPost skenira „Item scheduled for physical delivery“, provere mogu ići na svaka 2 minuta uz otvoren ekran ili uključena obaveštenja. U pozadini bez obaveštenja provere su obično na sat vremena. Kada odgovara samo servis za praćenje, Peek proverava svakog sata, na svaka 3 sata kada je poslednje skeniranje staro dan i do svakih 15 minuta na dan dostave dok je paket otvoren ili su obaveštenja uključena. Kada drugi prevoznik preuzme dostavu, Peek prati njegov ritam. Kod direktnih provera, nakon dva dana bez novosti (12 sati na statusu „Label created“ ili „Received by carrier“), Peek proverava svakog sata. Nakon četiri dana bez novog skeniranja u statusu „Label created“, „Received by carrier“ ili „In transit“ prikazuje u vašoj listi dan poslednjeg skeniranja („No tracking update since Mon 12 Oct“).
 
 ## Pitanja o praćenju MaltaPost pošiljki
 
@@ -89,7 +93,7 @@ Pozovite (+356) 2122 4421 ili besplatni broj 800 722 44 (sa fiksne linije), ili 
 
 ### Kako da pratim stranu ili SendOn pošiljku preko MaltaPosta?
 
-Unesite strani poštanski barkod ili bilo koji od SendOn barkodova velikim slovima na sajtu MaltaPosta ili u Peeku. Pošiljke iz inostranstva zadržavaju originalni strani barkod; nepraćene pošiljke (poput brojeva koji počinju sa `U`) ne mogu se pratiti na Malti.
+Unesite strani poštanski barkod ili bilo koji od SendOn barkodova u tracker MaltaPosta, velikim slovima, ili u Peek. Pošiljke iz inostranstva zadržavaju originalni strani barkod, a tracker MaltaPosta može prikazati i Foreign Barcode i Local Barcode; neki brojevi, poput onih koji počinju sa `U`, ne mogu se pratiti na Malti.
 
 ### Da li MaltaPost radi subotom?
 
@@ -104,7 +108,9 @@ MaltaPost ne daje opšti rok dostave za pošiljke iz inostranstva. Međunarodna 
 Pošiljka poslata sa Malte u inostranstvo ima 13 znakova: dva slova, devet cifara i `MT`, poput `RR482917367MT`. Pošiljka poslata na Maltu zadržava barkod koji je izdala strana pošta.
 
 :::sources
+- [MaltaPost: Tracking](https://www.maltapost.com/tracking) – polje za praćenje, kolone skeniranja, faze napretka, strani i lokalni barkod, razlozi za „nije prepoznat“, dugmad za carinu
 - [MaltaPost: Frequently Asked Questions](https://www.maltapost.com/faqs?l=1) – velika slova, obaveštenja, radno vreme pošta, Easipik 72 sata i podrška, plaćanje carine, obrada narednog dana, pošiljke iz inostranstva, SendOn rokovi iz UK, Nemačke, Italije i SAD
+- [MaltaPost: Missed a Delivery?](https://www.maltapost.com/delivery/missed-delivery) – opcije ponovne dostave, 12 radnih dana, 12 nedelja, naknada za ponovnu dostavu, lokalni prefiksi
 - [MaltaPost: Packet Collection](https://www.maltapost.com/packets) – lični dokument i obaveštenje za preuzimanje, preuzimanje za drugu osobu
 - [MaltaPost: courier it](https://www.maltapost.com/courier) – pokušaj dostave i obaveštenje
 - [MaltaPost: Easipik](https://www.maltapost.com/easipik) – paketomati, kod SMS-om i e-poštom, dimenzije, naknada za treće kurire

@@ -6,7 +6,7 @@ published: 2026-11-27
 updated: 2026-11-27
 ---
 
-JRT (今日通, Jinritong, 厦门今日通商贸有限公司) on Kiinan Xiamenissa toimiva rajat ylittävä huolintayritys, jonka seurantanumerot koostuvat etuliitteestä `JRT`, kymmenestä numerosta ja päätteestä `MM`. Liitä `JRT…MM`-numerosi yllä olevaan kenttään seurataksesi pakettia Kiinasta lennon lähdön, tuontitullauksen ja paikallisen jakelijan luovutuksen läpi: JRT:n seuranta välittää Eurooppaan DHL:n tapahtumia (Espanjassa CTT Express, Puolassa InPost, Irlannin FedEx-linjalla FedEx), Yhdysvaltoihin UPS:n tapahtumia ja Meksikoon J&T Expressin tapahtumia.
+JRT (今日通, Jinritong, 厦门今日通商贸有限公司) on Kiinan Xiamenissa toimiva rajat ylittävä huolintayritys, jonka seurantanumerot koostuvat etuliitteestä `JRT`, kymmenestä numerosta ja päätteestä `MM`. Liitä `JRT…MM`-numerosi yllä olevaan kenttään seurataksesi pakettia Kiinasta lennon lähdön, tuontitullauksen ja paikallisen jakelijan luovutuksen läpi: JRT:n seuranta kopioi DHL:n skannaukset Eurooppaan, UPS:n Yhdysvaltoihin ja J&T Express Mexicon Meksikoon, kun taas sen Espanjan- ja Puolan-linjat päättyvät CTT Expressille ja InPostille ja sen Irlannin FedEx-linja FedExille.
 
 ## JRT-seurantanumero: miltä se näyttää
 
@@ -18,7 +18,7 @@ JRT:n omat rahtikirjanumerot muodostuvat kirjaimista `JRT`, kymmenestä numerost
 | `JRT482917365MM` | Vain yhdeksän numeroa: ei vastaa JRT:n muotoa. Tarkista, puuttuuko yksi numero. |
 | `JRTO4829173654MM` | Kirjain O `JRT`-etuliitteen jälkeen: Peek lukee sen muodossa `JRT4829173654MM`, joka on ainoa JRT:n seurannan tuntema muoto. |
 | `UP4829173654829173` | `UP` ja kuusitoista numeroa: lähettäjän viite, jolla JRT-tilaus voi löytyä. Mikään ei kuitenkaan osoita, että sitä käyttäisivät vain JRT:n lähettäjät. |
-| `RR482917365CN` | Kaksi kirjainta, yhdeksän numeroa ja `CN`: [China Post](carrier:china-post) -numero, ei JRT:n. |
+| `RR482917367CN` | Kaksi kirjainta, yhdeksän numeroa ja `CN`: [China Post](carrier:china-post) -numero, ei JRT:n. |
 
 Välilyönneillä ja kirjainkoolla ei ole merkitystä Peekissä. Etkö löydä numeroa? Katso [mistä seurantanumeron löytää](guide:find-tracking-number) (englanniksi). JRT:n seuranta löytää tilauksen myös myyjän omalla viitteellä, kun se kirjoitetaan täsmälleen myyjän antamassa muodossa väliviivoineen.
 
@@ -92,7 +92,7 @@ Euroopan-linjalla JRT:n omat rivit ovat Pekingin ajassa: klo 17.00 siellä on ta
 
 **Irlannin FedEx-linjalla**, jonka tuotenimessä mainitaan FedEx, JRT luovuttaa paketin FedExille, ja tietueeseen tulee JRT:n numeron tilalle FedExin numero. Kun numero vastaa jotakin FedExin muodoista, Peek näyttää "Delivery with FedEx" numeron kera (tai "Announced to FedEx, not received yet", kun FedExillä on vasta ennakkoilmoitus) ja siirtyy FedExin omaan seurantaan heti kun FedEx skannaa paketin, samoin kuin DHL:llä (alla). Jos FedEx hoitaa jakelun eikä Peek näytä FedEx-numeroa, kysy se myyjältä ja seuraa sivulla [FedEx](carrier:fedex).
 
-**Muualle** Peek ei tiedä, mikä yhtiö jakaa JRT:n paketit. Kysy myyjältä jakeluyhtiön nimi ja sen seurantanumero: jakeluyritykset, noutopisteet ja säilytysajat noudattavat kyseisen yhtiön sääntöjä. Pyydetäänkö sinulta tullimaksuja? Katso [tullissa olevat paketit](guide:customs) (englanniksi).
+**Muualle** Peek ei tiedä, mikä yhtiö jakaa JRT:n paketit. Kysy myyjältä jakeluyhtiön nimi ja sen seurantanumero: jakelukerrat, noutopisteet ja säilytysajat noudattavat kyseisen yhtiön sääntöjä. Pyydetäänkö sinulta tullimaksuja? Katso [tullissa olevat paketit](guide:customs) (englanniksi).
 
 ## JRT-paketti ei saavu tai seuranta on jumissa
 
@@ -112,7 +112,7 @@ Euroopan-linjalla JRT:n omat rivit ovat Pekingin ajassa: klo 17.00 siellä on ta
 
 ## JRT-yhteystiedot ja asiakaspalvelu
 
-Peek ei ole löytänyt JRT:lle asiakaspalvelun yhteystietoja: yhtiölle ei tunneta muuta verkkosivustoa kuin sen seurantasivu, eikä vastaanottajille tarkoitettua puhelinnumeroa, sähköpostiosoitetta tai katuosoitetta. Myyjä on tilannut kuljetuksen JRT:ltä, joten ota tilaustasi koskevissa asioissa yhteyttä myyjään tai kauppapaikkaan, jos myyjä ei vastaa.
+29. lokakuuta 2026 mennessä Peek ei ollut löytänyt JRT:lle yhteystietoja: yhtiölle ei tunneta muuta verkkosivustoa kuin sen seurantasivu, eikä vastaanottajille tarkoitettua puhelinnumeroa, sähköpostiosoitetta tai katuosoitetta. Myyjä on tilannut kuljetuksen JRT:ltä, joten ota tilaustasi koskevissa asioissa yhteyttä myyjään tai kauppapaikkaan, jos myyjä ei vastaa.
 
 ## JRT-paketin seuranta Peekissä
 

@@ -13,7 +13,7 @@ Sledujte balík Correos Express ve Španělsku, Portugalsku a po Evropě vložen
 Mateřskou společností Correos Express je pošta Correos, každá však má vlastní čísla i sledovací systém. Podle tvaru čísla poznáte, kdo zásilku veze:
 
 - **Pouze číslice, celkem 16 nebo 23:** Correos Express, i když tyto tvary sdílejí i další dopravci (viz níže). Sledujte jej v poli výše.
-- **Písmena a číslice:** Correos. Její kódy mají 23 nebo 16 znaků začínajících a končících písmenem, `PR` plus 15 číslic plus `C`, nebo 13 znaků končících na `ES`. Podrobnosti a stavy popisuje naše [stránka Correos](carrier:correos-spain).
+- **Písmena a číslice:** Correos. Její kódy mají 23 nebo 16 znaků začínajících a končících písmenem, `PR` plus 15 číslic plus `C`, nebo 13 znaků končících na `ES`. Correos má [anglické sledování](https://www.correos.es/es/en/tools/tracker/items) a její stavy popisuje naše [stránka Correos](carrier:correos-spain).
 
 ## Vaše sledovací číslo Correos Express
 
@@ -21,9 +21,9 @@ Correos Express oficiální formát čísel nezveřejňuje; jeho sledování vy�
 
 | Číslo | Komu patří |
 | --- | --- |
-| `4829 1736 5482 9172` | 16 číslic: Correos Express, ale také [DHL eCommerce](carrier:dhl-ecommerce), [Canada Post](carrier:canada-post), TNT a Evri UK. |
+| `4829 1736 5482 9176` | 16 číslic: Correos Express, ale také [DHL eCommerce](carrier:dhl-ecommerce), [Canada Post](carrier:canada-post), TNT a Evri UK. |
 | `48291736548291736548293` | 23 číslic: Correos Express, ledaže 15. až 17. číslice tvoří `000`: taková čísla řadí katalog Peeku pod [Australia Post](carrier:australia-post). |
-| `RR482917365ES` | Písmena a číslice v [poštovním formátu](guide:tracking-number-formats): pošta Correos, nikoli Correos Express. |
+| `RR482917367ES` | Písmena a číslice v [poštovním formátu](guide:tracking-number-formats): pošta Correos, nikoli Correos Express. |
 | `4829/17365482` | S lomítkem: [NACEX](carrier:nacex), jiný kurýr. |
 
 Correos Express neuvádí, kde přesně číslo najdete, ani název odesílatele SMS, proto zkontrolujte potvrzovací e-mail z obchodu nebo stránku objednávky ([další místa, kde hledat](guide:find-tracking-number), anglicky).
@@ -74,12 +74,12 @@ Smlouvu s dopravcem má odesílatel, obvykle obchod; u většiny potíží proto
 
 ## Telefonní číslo a zákaznický servis Correos Express
 
-Kontaktní kanály uvedené na webech Correos Express (bez anglické podpory):
+Kontaktní kanály uvedené na webech Correos Express k 9. říjnu 2026 (bez anglické podpory):
 
 - **Španělsko:** 900 122 333, bez uvedených provozních hodin; španělský regulátor CNMC uvádí, že hovory na čísla 900 jsou zdarma z mobilů i pevných linek. Sledovací stránka uvádí také číslo 913 277 020. K dispozici je i [formulář zákaznického servisu](https://www.correosexpress.es/es/atencion-al-cliente/contacto/atencion-al-cliente), který vyžaduje číslo zásilky a vaše PSČ, a účet [@Cex_responde](https://x.com/Cex_responde) na síti X.
 - **Portugalsko:** 229 762 810 za sazbu pevné linky, pondělí až pátek 08:30–19:00. Příjemci mohou také napsat na destinatarioscep@correosexpress.com.
 
-> Correos Express uvádí, že nikdy nežádá bankovní údaje ani přihlašovací údaje k webům a neprovozuje placené linky 807; v případě pochybností volejte 900 122 333.
+> Correos Express uvádí, že nikdy nežádá bankovní údaje ani přihlašovací údaje k webům a neprovozuje placené linky 807; v případě pochybností volejte 900 122 333. V roce 2022 varoval španělský úřad INCIBE před falešnými SMS podepsanými „CORREOS EXPRESS“, které po nezdařeném doručení žádaly malý celní poplatek. Odkaz neotvírejte.
 
 ## Sledování zásilek Correos Express v Peeku
 
@@ -91,15 +91,15 @@ Peek kontroluje aktualizace až každých 10 minut a od 6:00 místního času v 
 
 ### Je sledování Correos Express totéž co sledování Correos?
 
-Ne. Přestože je Correos mateřskou firmou Correos Express, každá má vlastní čísla i sledování: Correos Express používá 16- nebo 23místná čísla bez písmen (`s.correosexpress.com`), zatímco poštovní kódy [Correos](carrier:correos-spain) kombinují písmena a číslice (například `…ES` nebo `PR…C`).
+Ne. Přestože je Correos mateřskou firmou Correos Express, každá má vlastní čísla i sledování: Correos Express používá 16- nebo 23místná čísla bez písmen (`s.correosexpress.com`), zatímco poštovní kódy [Correos](carrier:correos-spain) kombinují písmena a číslice (například `…ES` nebo `PR…C`) a Correos má anglické sledování na correos.es.
 
 ### Co je Correos Express?
 
-Expresní balíková společnost skupiny Correos, která doručuje po Pyrenejském poloostrově do 24 hodin a ze Španělska do pevninského Portugalska obvykle za 24 až 48 hodin.
+Expresní balíková společnost skupiny Correos. Podle vlastních slov doručí kamkoli na Pyrenejském poloostrově do 24 hodin a ze Španělska do pevninského Portugalska obvykle za 24 až 48 hodin.
 
 ### Doručuje Correos Express do Spojeného království a po Evropě?
 
-Ano, ze Španělska prostřednictvím služby Internacional Express, která pokrývá více než 180 zemí až se dvěma pokusy o doručení a sledováním až do předání. Pro země mimo EU (včetně Spojeného království) vyřizuje Internacional Express celní řízení a mohou se uplatnit další požadavky a poplatky.
+Ano, ze Španělska prostřednictvím služby Internacional Express, která pokrývá více než 180 zemí až se dvěma pokusy o doručení a sledováním až do předání. Pro země mimo EU vyřizuje Internacional Express celní řízení; Correos Express upozorňuje, že zásilky do Spojeného království od brexitu čelí dalším požadavkům a poplatkům.
 
 ### V kolik hodin Correos Express doručuje?
 
@@ -123,6 +123,7 @@ Ne. Correos Express neuvádí žádný anglický kanál zákaznické podpory a j
 - [Correos Express: Envíos internacionales](https://www.correosexpress.es/es/atencion-al-cliente/envios-internacionales1) – požadavky a náklady do UK
 - [Correos Express: Internacional Express](https://www.correosexpress.es/es/particulares/enviar/internacionales/internacional-express) – 180 zemí, sledování
 - [Correos Express: Internacional Express para empresas](https://www.correosexpress.es/es/empresas/productos/internacional-express) – dva pokusy, celní řízení mimo EU
+- [Correos: Correos delivery tracker](https://www.correos.es/es/en/tools/tracker/items) – anglické sledování Correos
 - [Correos Express: Términos y condiciones del transporte](https://www.correosexpress.es/es/atencion-al-cliente/tyc-transporte) – výhrady
 - [Correos Express: Restricciones y avisos](https://www.correosexpress.es/es/atencion-al-cliente/situaciones-especiales) – omezení kvůli počasí
 - [Correos Express: Alerta de seguridad](https://www.correosexpress.es/es/legales/alerta-de-seguridad) – varování před podvody
@@ -132,5 +133,6 @@ Ne. Correos Express neuvádí žádný anglický kanál zákaznické podpory a j
 - [Correos Express Portugal: Termos e Condições de Transporte](https://www.correosexpress.pt/pt/apoio-ao-cliente/tec-transporte) – 3 pracovní dny, PIN
 - [Correos Express Portugal: Paq Ponto](https://www.correosexpress.pt/pt/empresa/enviar/peninsulares/paq-ponto) – výdejní boxy
 - [CNMC: Números 800 y 900](https://blog.cnmc.es/2019/04/24/llamadas-a-numeros-800-y-900-gratis-para-el-consumidor-y-quien-paga/) – bezplatné hovory na čísla 900
+- [INCIBE: SMS fraudulentos](https://www.incibe.es/ciudadania/avisos/en-circulacion-sms-fraudulentos-que-suplantan-correos-y-otras-empresas-de) – falešné SMS
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek čte
 :::

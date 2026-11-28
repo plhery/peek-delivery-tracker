@@ -2262,6 +2262,93 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let wlkgo = CarrierID(rawValue: "wlkgo")
     static let yijiangky = CarrierID(rawValue: "yijiangky")
     static let ztcce = CarrierID(rawValue: "ztcce")
+    static let twentyFourPlus = CarrierID(rawValue: "24plus")
+    static let accurateCourier = CarrierID(rawValue: "accurate-courier")
+    static let airTahitiNuiCargo = CarrierID(rawValue: "air-tahiti-nui-cargo")
+    static let akaz = CarrierID(rawValue: "akaz")
+    static let alaskaAirCargo = CarrierID(rawValue: "alaska-air-cargo")
+    static let alohaAirCargo = CarrierID(rawValue: "aloha-air-cargo")
+    static let bejot = CarrierID(rawValue: "bejot")
+    static let bester = CarrierID(rawValue: "bester")
+    static let bmExpress = CarrierID(rawValue: "bm-express")
+    static let boxme = CarrierID(rawValue: "boxme")
+    static let buyer1688 = CarrierID(rawValue: "buyer1688")
+    static let cargoPartner = CarrierID(rawValue: "cargo-partner")
+    static let cargo24 = CarrierID(rawValue: "cargo24")
+    static let chinaqingguan = CarrierID(rawValue: "chinaqingguan")
+    static let courierConnection = CarrierID(rawValue: "courier-connection")
+    static let crowley = CarrierID(rawValue: "crowley")
+    static let crst = CarrierID(rawValue: "crst")
+    static let csLogistics = CarrierID(rawValue: "cs-logistics")
+    static let diakon = CarrierID(rawValue: "diakon")
+    static let diamondLine = CarrierID(rawValue: "diamond-line")
+    static let douglasExpress = CarrierID(rawValue: "douglas-express")
+    static let dyexpress = CarrierID(rawValue: "dyexpress")
+    static let epaka = CarrierID(rawValue: "epaka")
+    static let esoway = CarrierID(rawValue: "esoway")
+    static let eurosender = CarrierID(rawValue: "eurosender")
+    static let evertsAirCargo = CarrierID(rawValue: "everts-air-cargo")
+    static let express2global = CarrierID(rawValue: "express2global")
+    static let fastEst = CarrierID(rawValue: "fast-est")
+    static let fracht = CarrierID(rawValue: "fracht")
+    static let geisPl = CarrierID(rawValue: "geis-pl")
+    static let globalexp = CarrierID(rawValue: "globalexp")
+    static let guisnel = CarrierID(rawValue: "guisnel")
+    static let hailify = CarrierID(rawValue: "hailify")
+    static let hellmannPl = CarrierID(rawValue: "hellmann-pl")
+    static let hyeship = CarrierID(rawValue: "hyeship")
+    static let invioHome = CarrierID(rawValue: "invio-home")
+    static let jasFbg = CarrierID(rawValue: "jas-fbg")
+    static let jdexpressusa = CarrierID(rawValue: "jdexpressusa")
+    static let jdxexpress = CarrierID(rawValue: "jdxexpress")
+    static let jetDelivery = CarrierID(rawValue: "jet-delivery")
+    static let lynden = CarrierID(rawValue: "lynden")
+    static let mailAlliance = CarrierID(rawValue: "mail-alliance")
+    static let mbeIt = CarrierID(rawValue: "mbe-it")
+    static let meixi = CarrierID(rawValue: "meixi")
+    static let messengerDe = CarrierID(rawValue: "messenger-de")
+    static let mrSpedag = CarrierID(rawValue: "mr-spedag")
+    static let ngNetwork = CarrierID(rawValue: "ng-network")
+    static let northernAirCargo = CarrierID(rawValue: "northern-air-cargo")
+    static let nowCourierUs = CarrierID(rawValue: "now-courier-us")
+    static let onlineSystemlogistik = CarrierID(rawValue: "online-systemlogistik")
+    static let overseaex = CarrierID(rawValue: "overseaex")
+    static let pallexIt = CarrierID(rawValue: "pallex-it")
+    static let paxy = CarrierID(rawValue: "paxy")
+    static let pegasusLogistics = CarrierID(rawValue: "pegasus-logistics")
+    static let pickwings = CarrierID(rawValue: "pickwings")
+    static let quehenberger = CarrierID(rawValue: "quehenberger")
+    static let quickCourierPa = CarrierID(rawValue: "quick-courier-pa")
+    static let rdsDelivery = CarrierID(rawValue: "rds-delivery")
+    static let roh56 = CarrierID(rawValue: "roh56")
+    static let saettaVerde = CarrierID(rawValue: "saetta-verde")
+    static let sanMarinoMail = CarrierID(rawValue: "san-marino-mail")
+    static let savinoDelBene = CarrierID(rawValue: "savino-del-bene")
+    static let schoeni = CarrierID(rawValue: "schoeni")
+    static let senpex = CarrierID(rawValue: "senpex")
+    static let shunjie = CarrierID(rawValue: "shunjie")
+    static let southwestCargo = CarrierID(rawValue: "southwest-cargo")
+    static let spanAlaska = CarrierID(rawValue: "span-alaska")
+    static let spediamo = CarrierID(rawValue: "spediamo")
+    static let spedirecomodo = CarrierID(rawValue: "spedirecomodo")
+    static let streck = CarrierID(rawValue: "streck")
+    static let swissWorldcargo = CarrierID(rawValue: "swiss-worldcargo")
+    static let trailerBridge = CarrierID(rawValue: "trailer-bridge")
+    static let transportami = CarrierID(rawValue: "transportami")
+    static let ubnSpeed = CarrierID(rawValue: "ubn-speed")
+    static let ubuy = CarrierID(rawValue: "ubuy")
+    static let upela = CarrierID(rawValue: "upela")
+    static let urbify = CarrierID(rawValue: "urbify")
+    static let velocite = CarrierID(rawValue: "velocite")
+    static let velokurierStGallen = CarrierID(rawValue: "velokurier-st-gallen")
+    static let vemoLogistik = CarrierID(rawValue: "vemo-logistik")
+    static let vtl = CarrierID(rawValue: "vtl")
+    static let wing = CarrierID(rawValue: "wing")
+    static let xiongda = CarrierID(rawValue: "xiongda")
+    static let yhtlogistics = CarrierID(rawValue: "yhtlogistics")
+    static let zadbano = CarrierID(rawValue: "zadbano")
+    static let zgtux = CarrierID(rawValue: "zgtux")
+    static let zsda56 = CarrierID(rawValue: "zsda56")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -4457,6 +4544,93 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .wlkgo,
         .yijiangky,
         .ztcce,
+        .twentyFourPlus,
+        .accurateCourier,
+        .airTahitiNuiCargo,
+        .akaz,
+        .alaskaAirCargo,
+        .alohaAirCargo,
+        .bejot,
+        .bester,
+        .bmExpress,
+        .boxme,
+        .buyer1688,
+        .cargoPartner,
+        .cargo24,
+        .chinaqingguan,
+        .courierConnection,
+        .crowley,
+        .crst,
+        .csLogistics,
+        .diakon,
+        .diamondLine,
+        .douglasExpress,
+        .dyexpress,
+        .epaka,
+        .esoway,
+        .eurosender,
+        .evertsAirCargo,
+        .express2global,
+        .fastEst,
+        .fracht,
+        .geisPl,
+        .globalexp,
+        .guisnel,
+        .hailify,
+        .hellmannPl,
+        .hyeship,
+        .invioHome,
+        .jasFbg,
+        .jdexpressusa,
+        .jdxexpress,
+        .jetDelivery,
+        .lynden,
+        .mailAlliance,
+        .mbeIt,
+        .meixi,
+        .messengerDe,
+        .mrSpedag,
+        .ngNetwork,
+        .northernAirCargo,
+        .nowCourierUs,
+        .onlineSystemlogistik,
+        .overseaex,
+        .pallexIt,
+        .paxy,
+        .pegasusLogistics,
+        .pickwings,
+        .quehenberger,
+        .quickCourierPa,
+        .rdsDelivery,
+        .roh56,
+        .saettaVerde,
+        .sanMarinoMail,
+        .savinoDelBene,
+        .schoeni,
+        .senpex,
+        .shunjie,
+        .southwestCargo,
+        .spanAlaska,
+        .spediamo,
+        .spedirecomodo,
+        .streck,
+        .swissWorldcargo,
+        .trailerBridge,
+        .transportami,
+        .ubnSpeed,
+        .ubuy,
+        .upela,
+        .urbify,
+        .velocite,
+        .velokurierStGallen,
+        .vemoLogistik,
+        .vtl,
+        .wing,
+        .xiongda,
+        .yhtlogistics,
+        .zadbano,
+        .zgtux,
+        .zsda56,
     ]
 
     init(from decoder: Decoder) throws {

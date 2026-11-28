@@ -753,7 +753,8 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "DHL Paket",
       "Deutsche Post DHL",
-      "Deutsche Post"
+      "Deutsche Post",
+      "DHL 2-Mann-Handling"
     ],
     "countries": [
       "DE"
@@ -1547,7 +1548,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "aliases": [
-      "Chrono Shop2Shop"
+      "Chrono Shop2Shop",
+      "Chronopost Nouvelle-Calédonie"
     ],
     "countries": [
       "FR"
@@ -3245,7 +3247,11 @@ export const CARRIER_CAPABILITIES = {
       "SDA",
       "SDA Express Courier",
       "Nexive",
-      "Nexive Network"
+      "Nexive Network",
+      "Kipoint",
+      "Punto Poste",
+      "Poste Delivery Business",
+      "Poste Delivery Express"
     ],
     "countries": [
       "IT"
@@ -5138,7 +5144,8 @@ export const CARRIER_CAPABILITIES = {
       "Zásilkovna",
       "Zasilkovna",
       "Packeta Slovakia",
-      "Z-BOX"
+      "Z-BOX",
+      "Przesyłkownia"
     ],
     "countries": [
       "CZ",
@@ -6071,11 +6078,14 @@ export const CARRIER_CAPABILITIES = {
       "Nova Post",
       "Nova Post Ukraine",
       "Нова Пошта",
-      "New Post International MLD"
+      "New Post International MLD",
+      "Nova Post Polska",
+      "Nova Post Poland"
     ],
     "countries": [
       "UA",
-      "MD"
+      "MD",
+      "PL"
     ],
     "color": "#e30613",
     "selectable": true,
@@ -6561,7 +6571,8 @@ export const CARRIER_CAPABILITIES = {
   "dpd-pl": {
     "displayName": "DPD Poland",
     "aliases": [
-      "DPD Polska"
+      "DPD Polska",
+      "Masterlink Express"
     ],
     "countries": [
       "PL"
@@ -6856,7 +6867,8 @@ export const CARRIER_CAPABILITIES = {
       "Allegro Delivery",
       "Allegro One Box",
       "Allegro One Kurier",
-      "Allegro One Punkt"
+      "Allegro One Punkt",
+      "X-press Couriers"
     ],
     "countries": [
       "PL"
@@ -8084,7 +8096,8 @@ export const CARRIER_CAPABILITIES = {
       "Міст Експрес",
       "Meest International",
       "Міст Інтернешнл",
-      "Росан"
+      "Росан",
+      "Meest Polska"
     ],
     "countries": [
       "UA",
@@ -9523,7 +9536,8 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "GO! Express & Logistics",
       "GO Express",
-      "General Overnight"
+      "General Overnight",
+      "GO! Express & Logistics (Schweiz) AG"
     ],
     "countries": [
       "DE",
@@ -9533,7 +9547,8 @@ export const CARRIER_CAPABILITIES = {
       "LU",
       "NL",
       "PL",
-      "SK"
+      "SK",
+      "CH"
     ],
     "color": "#b9242b",
     "selectable": true,
@@ -9956,7 +9971,8 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "Paczka w RUCHu",
       "Paczka w Ruchu",
-      "Orlen Paczka"
+      "Orlen Paczka",
+      "Stacja z Paczką"
     ],
     "countries": [
       "PL"
@@ -11429,7 +11445,8 @@ export const CARRIER_CAPABILITIES = {
       "GEFCO"
     ],
     "countries": [
-      "FR"
+      "FR",
+      "IT"
     ],
     "color": "#1d2546",
     "selectable": true,
@@ -13779,7 +13796,9 @@ export const CARRIER_CAPABILITIES = {
   "palletways": {
     "displayName": "Palletways",
     "aliases": [
-      "Palletways UK"
+      "Palletways UK",
+      "Palletways Italia",
+      "Palletways Italy"
     ],
     "countries": [
       "GB",
@@ -14300,7 +14319,12 @@ export const CARRIER_CAPABILITIES = {
       "Raben Group",
       "Raben Logistics",
       "Raben Logistics Polska",
-      "DGO Express"
+      "DGO Express",
+      "Sittam",
+      "Raben Sittam",
+      "Fresh Logistics",
+      "Raben Sieber",
+      "Raben Sieber AG"
     ],
     "countries": [
       "PL",
@@ -14897,11 +14921,13 @@ export const CARRIER_CAPABILITIES = {
       "Deltec Courier",
       "SkyNet UAE",
       "SkyNet Worldwide Express UAE",
-      "Skynet Cyprus"
+      "Skynet Cyprus",
+      "SkyNet Italy"
     ],
     "countries": [
       "GB",
-      "CY"
+      "CY",
+      "IT"
     ],
     "color": "#fe0000",
     "selectable": true,
@@ -19862,7 +19888,8 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "Aeropost",
     "aliases": [
       "Aeropost Costa Rica",
-      "Aerocasillas"
+      "Aerocasillas",
+      "Mailpac"
     ],
     "countries": [
       "CR",
@@ -34062,7 +34089,9 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "Boxtal",
     "aliases": [
       "Boxtal Connect",
-      "Boxtal Shipping"
+      "Boxtal Shipping",
+      "Envoimoinscher",
+      "EnvoiMoinsCher.com"
     ],
     "countries": [
       "FR"
@@ -38355,11 +38384,14 @@ export const CARRIER_CAPABILITIES = {
       "C.E. Noerpel",
       "C.E. Noerpel GmbH",
       "Noerpel SE",
-      "Noerpel Gruppe"
+      "Noerpel Gruppe",
+      "Lebert",
+      "Lebert AG"
     ],
     "countries": [
       "DE",
-      "AT"
+      "AT",
+      "CH"
     ],
     "color": "#ffa900",
     "selectable": true,
@@ -41011,7 +41043,9 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/New_York",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "usasd",
+      "recognitionRank": 657,
+      "recognitionPattern": "^SDL\\d{10}$"
     },
     "trackingUrlTemplate": "https://www.usasd.com/index.php?c=index&f=search&sn={trackingNumber}",
     "linkRules": [
@@ -41026,7 +41060,12 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^SDL\\d{10}$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://www.usasd.com/",
     "helpUrl": "https://www.usasd.com/index.php?id=contactus"
   },
@@ -43064,7 +43103,10 @@ export const CARRIER_CAPABILITIES = {
       "Frontline Freight",
       "Frontline Freight, Inc.",
       "Frontline Freight Inc",
-      "STG"
+      "STG",
+      "Clear Lane Freight Systems",
+      "Clear Lane Freight",
+      "Clear Lane"
     ],
     "countries": [
       "US"
@@ -47775,7 +47817,8 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "Vert Chez Vous",
     "aliases": [
       "Vert Chez Vous (Labatut Group)",
-      "Vert Chez Vous SAS"
+      "Vert Chez Vous SAS",
+      "Labatut Group"
     ],
     "countries": [
       "FR"
@@ -52622,7 +52665,8 @@ export const CARRIER_CAPABILITIES = {
       "MZZ Briefdienst",
       "MZZ Briefdienst GmbH",
       "biber post",
-      "biberpost"
+      "biberpost",
+      "sent24"
     ],
     "countries": [
       "DE"
@@ -55951,7 +55995,8 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "Citytrans",
     "aliases": [
       "Citytrans GmbH",
-      "Citytrans Kurier GmbH"
+      "Citytrans Kurier GmbH",
+      "Citytrans Bern GmbH"
     ],
     "countries": [
       "CH"
@@ -64776,10 +64821,12 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "a. hartrodt",
     "aliases": [
       "A Hartrodt",
-      "a. hartrodt GmbH & Co. KG"
+      "a. hartrodt GmbH & Co. KG",
+      "a. hartrodt (Schweiz) AG"
     ],
     "countries": [
-      "DE"
+      "DE",
+      "CH"
     ],
     "color": "#163d72",
     "selectable": true,
@@ -73535,6 +73582,2243 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.ztcce.com/index.html"
+  },
+  "24plus": {
+    "displayName": "24plus",
+    "aliases": [
+      "24plus Systemverkehre",
+      "24plus logistics network"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#035094",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://portal.cubit24.de/Track/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "portal.cubit24.de"
+        ],
+        "path": "^/Track/([^/?#]+)(?:/\\d{5})?/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://portal.cubit24.de/Track"
+  },
+  "accurate-courier": {
+    "displayName": "Accurate Courier Express",
+    "aliases": [
+      "Accurate Courier",
+      "Accurate Logistics"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#eb2026",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://online.accuratecourierexpress.com/Xcelerator/ClientPortal"
+  },
+  "air-tahiti-nui-cargo": {
+    "displayName": "Air Tahiti Nui Cargo",
+    "aliases": [
+      "Air Tahiti Nui"
+    ],
+    "countries": [
+      "PF",
+      "FR"
+    ],
+    "color": "#003565",
+    "selectable": true,
+    "timezone": "Pacific/Tahiti",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://fr.airtahitinui.com/notre-service-fret-et-suivi-de-fret"
+  },
+  "akaz": {
+    "displayName": "AKAZ",
+    "aliases": [
+      "A-KAZ"
+    ],
+    "countries": [
+      "FR",
+      "MQ",
+      "GP",
+      "GF",
+      "RE"
+    ],
+    "color": "#f15a24",
+    "selectable": true,
+    "timezone": "Europe/Paris",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://a-kaz.com/suivi/?trackingCode={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "a-kaz.com"
+        ],
+        "pathPattern": "^/suivi/?$",
+        "params": [
+          "trackingCode"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://a-kaz.com/suivi/"
+  },
+  "alaska-air-cargo": {
+    "displayName": "Alaska Air Cargo",
+    "aliases": [
+      "Alaska Airlines Cargo",
+      "Hawaiian Air Cargo"
+    ],
+    "countries": [
+      "US",
+      "CA",
+      "MX"
+    ],
+    "color": "#01426a",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://alaska-icargo.ibsplc.aero/icargoportal/portal/loginFlow"
+  },
+  "aloha-air-cargo": {
+    "displayName": "Aloha Air Cargo",
+    "aliases": [
+      "Aloha Air Cargo, LLC"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#f68f1e",
+    "selectable": true,
+    "timezone": "Pacific/Honolulu",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.alohaaircargo.com/shipment-tracking/"
+  },
+  "bejot": {
+    "displayName": "Bejot",
+    "aliases": [
+      "Bejot Logistics",
+      "G.M.J Bejot"
+    ],
+    "countries": [
+      "PL",
+      "DE",
+      "CZ",
+      "AT",
+      "NL",
+      "BE",
+      "LU"
+    ],
+    "color": "#34328c",
+    "selectable": true,
+    "timezone": "Europe/Warsaw",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "bejotlogistics.com"
+        ],
+        "path": "^/order/tracking/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://bejotlogistics.com/"
+  },
+  "bester": {
+    "displayName": "Bester Express",
+    "aliases": [
+      "飛斯特運通",
+      "飞斯特运通",
+      "飛斯特",
+      "飛斯特運通股份有限公司",
+      "深圳市飞斯特运通供应链管理有限公司",
+      "BTR",
+      "Best International Transportation",
+      "exbtr"
+    ],
+    "countries": [
+      "TW",
+      "CN"
+    ],
+    "color": "#23357F",
+    "selectable": true,
+    "timezone": "Asia/Taipei",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "bester"
+    },
+    "trackingUrlTemplate": "https://www.exbtr.com/waybill.html?orderid={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "exbtr.com"
+        ],
+        "pathPattern": "^/waybill\\.html$",
+        "params": [
+          "orderid"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.exbtr.com/waybill.html",
+    "helpUrl": "https://www.exbtr.com/customer/contact.html"
+  },
+  "bm-express": {
+    "displayName": "BM Express",
+    "aliases": [
+      "BM Express International Services",
+      "BM Express International Services Pty. Ltd."
+    ],
+    "countries": [
+      "AU",
+      "NZ",
+      "SG",
+      "GB",
+      "PG",
+      "PH"
+    ],
+    "color": "#ec4b40",
+    "selectable": true,
+    "timezone": "Australia/Sydney",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.bmexpress.com/au-tracking"
+  },
+  "boxme": {
+    "displayName": "Boxme",
+    "aliases": [
+      "Boxme Asia"
+    ],
+    "countries": [
+      "VN",
+      "TH"
+    ],
+    "color": "#2454dd",
+    "selectable": true,
+    "timezone": "Asia/Ho_Chi_Minh",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://track.boxme.asia/?tracking_number={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "track.boxme.asia"
+        ],
+        "pathPattern": "^/?$",
+        "params": [
+          "tracking_number"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://track.boxme.asia/"
+  },
+  "buyer1688": {
+    "displayName": "1688 International Logistics",
+    "aliases": [
+      "1688国际物流",
+      "buyer1688"
+    ],
+    "countries": [
+      "CA"
+    ],
+    "color": "#15337B",
+    "selectable": true,
+    "timezone": "America/Toronto",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "buyer1688"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.buyer1688.ca/api86/waybill_query2.htm"
+  },
+  "cargo-partner": {
+    "displayName": "cargo-partner",
+    "aliases": [
+      "cargo-partner GmbH",
+      "Cargo Partner"
+    ],
+    "countries": [
+      "AT"
+    ],
+    "color": "#95c11f",
+    "selectable": true,
+    "timezone": "Europe/Vienna",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://public-tracking.cargo-partner.com/"
+  },
+  "cargo24": {
+    "displayName": "Cargo24",
+    "aliases": [
+      "Cargo24 AG"
+    ],
+    "countries": [
+      "CH"
+    ],
+    "color": "#d71c2c",
+    "selectable": true,
+    "timezone": "Europe/Zurich",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "cargo24.app"
+        ],
+        "pathPattern": "^/portal/aor/tracking\\.aspx$",
+        "params": [
+          "id"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.cargo24.ch/send-and-track/"
+  },
+  "chinaqingguan": {
+    "displayName": "Rongtong International",
+    "aliases": [
+      "荣通国际",
+      "荣通清关",
+      "荣通国际货运",
+      "荣通国际货运有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#ED1C24",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "chinaqingguan"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "courier-connection": {
+    "displayName": "The Courier Connection",
+    "aliases": [
+      "Courier Connection"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#ffcb08",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.tccdelivers.net/clientportal"
+  },
+  "crowley": {
+    "displayName": "Crowley",
+    "aliases": [
+      "Crowley Maritime",
+      "Crowley Logistics"
+    ],
+    "countries": [
+      "US",
+      "PR",
+      "VI"
+    ],
+    "color": "#000082",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://csight.crowley.com/crowley/s/shipment-tracking"
+  },
+  "crst": {
+    "displayName": "CRST",
+    "aliases": [
+      "CRST The Transportation Solution",
+      "CRST Final Mile",
+      "CRST International"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#182838",
+    "selectable": true,
+    "timezone": "America/Chicago",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tracking.crst.com/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tracking.crst.com"
+        ],
+        "path": "^/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.crst.com/"
+  },
+  "cs-logistics": {
+    "displayName": "CS Logistics",
+    "aliases": [
+      "CS Logistics, Inc."
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#236040",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.cslogisticsinc.com/xcelerator/clientportal"
+  },
+  "diakon": {
+    "displayName": "Diakon Logistics",
+    "aliases": [
+      "Diakon"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#304058",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://diakon.homedeliverycentral.com/Home/Login"
+  },
+  "diamond-line": {
+    "displayName": "Diamond Line Delivery Systems",
+    "aliases": [
+      "Diamond Line",
+      "Diamond Line Delivery",
+      "DLDS"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#0a1628",
+    "selectable": true,
+    "timezone": "America/Boise",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.dlds.com/manage/track-shipment/"
+  },
+  "douglas-express": {
+    "displayName": "Douglas Express Delivery",
+    "aliases": [
+      "Douglas Express",
+      "Douglas Delivery"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#85329a",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.douglasdelivery.net/clientportal"
+  },
+  "dyexpress": {
+    "displayName": "Dayi Express",
+    "aliases": [
+      "大億國際快遞",
+      "大亿国际快递",
+      "大億快遞",
+      "大亿快递",
+      "深圳大亿快递",
+      "DYE",
+      "Da Yi International Express"
+    ],
+    "countries": [
+      "CN",
+      "TW",
+      "HK",
+      "MO",
+      "SG",
+      "IN"
+    ],
+    "color": "#F41834",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "dyexpress"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.dy-express.com/query/serchi",
+    "helpUrl": "https://www.dy-express.com/contact/"
+  },
+  "epaka": {
+    "displayName": "epaka.pl",
+    "aliases": [
+      "epaka",
+      "epaka.pl S.A."
+    ],
+    "countries": [
+      "PL"
+    ],
+    "color": "#d90000",
+    "selectable": true,
+    "timezone": "Europe/Warsaw",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.epaka.pl/sledzenie-przesylek"
+  },
+  "esoway": {
+    "displayName": "ESOWAY",
+    "aliases": [
+      "易速递",
+      "加拿大易速递",
+      "ESOWAY.COM"
+    ],
+    "countries": [
+      "CA"
+    ],
+    "color": "#FF7200",
+    "selectable": true,
+    "timezone": "America/Vancouver",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "esoway",
+      "recognitionRank": 87
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^ES\\d{10}CA$",
+        "confidence": "low"
+      }
+    ]
+  },
+  "eurosender": {
+    "displayName": "Eurosender",
+    "aliases": [
+      "Eurosender SARL"
+    ],
+    "countries": [
+      "LU",
+      "FR",
+      "DE",
+      "ES",
+      "IT"
+    ],
+    "color": "#007bff",
+    "selectable": true,
+    "timezone": "Europe/Luxembourg",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.eurosender.com/fr/suivi-colis"
+  },
+  "everts-air-cargo": {
+    "displayName": "Everts Air Cargo",
+    "aliases": [
+      "Everts Air",
+      "Everts Air Alaska"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#1a4886",
+    "selectable": true,
+    "timezone": "America/Anchorage",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://apps1.tflite.com/Public/EVT/Freight/Tracking/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "apps1.tflite.com"
+        ],
+        "path": "^/Public/EVT/Freight/Tracking/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://apps1.tflite.com/Public/EVT/Freight/Tracking"
+  },
+  "express2global": {
+    "displayName": "E2G Express",
+    "aliases": [
+      "E2G速递",
+      "E2G"
+    ],
+    "countries": [
+      "US",
+      "CN"
+    ],
+    "color": "#E72940",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "express2global",
+      "recognitionRank": 659,
+      "recognitionPattern": "^E2G\\d{9}US$"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "hainaexpress.com",
+          "www.hainaexpress.com"
+        ],
+        "pathPattern": "^/track$",
+        "params": [
+          "num"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^E2G\\d{9}US$",
+        "confidence": "low"
+      }
+    ]
+  },
+  "fast-est": {
+    "displayName": "Fast.Est",
+    "aliases": [
+      "Fast Est",
+      "Fast.Est s.r.l."
+    ],
+    "countries": [
+      "IT"
+    ],
+    "color": "#6c7a89",
+    "selectable": true,
+    "timezone": "Europe/Rome",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://transitpoint.us/tracking/67/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "transitpoint.us"
+        ],
+        "path": "^/tracking/67/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.fast-est.it/tracking.html"
+  },
+  "fracht": {
+    "displayName": "Fracht",
+    "aliases": [
+      "Fracht AG",
+      "Fracht Group"
+    ],
+    "countries": [
+      "CH"
+    ],
+    "color": "#00539b",
+    "selectable": true,
+    "timezone": "Europe/Zurich",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://your.fracht.com/Track.php?SearchValue={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "your.fracht.com"
+        ],
+        "pathPattern": "^/Track\\.php$",
+        "params": [
+          "SearchValue",
+          "MultiSearch"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://your.fracht.com/Track.php"
+  },
+  "geis-pl": {
+    "displayName": "Geis PL",
+    "aliases": [
+      "Geis Polska",
+      "Geis PL Sp. z o.o.",
+      "Geis Parcel Sp. z o.o."
+    ],
+    "countries": [
+      "PL"
+    ],
+    "color": "#ffe501",
+    "selectable": true,
+    "timezone": "Europe/Warsaw",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.geis.pl/pl/sledzenie-przesylki?packNumber={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "geis.pl"
+        ],
+        "pathPattern": "^/[a-z]{2}/sledzenie-przesylki/?$",
+        "params": [
+          "packNumber"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.geis.pl/pl/sledzenie-przesylki"
+  },
+  "globalexp": {
+    "displayName": "Global Express",
+    "aliases": [
+      "全球捷运",
+      "全球捷运国际快运",
+      "全球捷运国际快运有限公司"
+    ],
+    "countries": [
+      "HK"
+    ],
+    "color": "#FF6600",
+    "selectable": true,
+    "timezone": "Asia/Hong_Kong",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "globalexp",
+      "recognitionRank": 88
+    },
+    "trackingUrlTemplate": "https://www.global-express168.com/search_kuai_di/search/orderid/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "global-express168.com"
+        ],
+        "path": "^/search_kuai_di/search/orderid/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^(?:GX\\d{12}JY|JY\\d{12}GX)$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://www.global-express168.com/cms/c/orders"
+  },
+  "guisnel": {
+    "displayName": "Guisnel",
+    "aliases": [
+      "Groupe Guisnel",
+      "Maison Guisnel",
+      "Guisnel Distribution",
+      "Transporter mon meuble"
+    ],
+    "countries": [
+      "FR"
+    ],
+    "color": "#f7ad42",
+    "selectable": true,
+    "timezone": "Europe/Paris",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.traplus.com/profoundui/traplus?pgm=TRAPLUSPUI/PUITRAPCL&p1=TRACKWEB%20%20----WebTrackingGUISN&l1=256&p2=fr_FR&l2=15&lang=fr_FR"
+  },
+  "hailify": {
+    "displayName": "Hailify",
+    "aliases": [
+      "Drive Hailify"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#011931",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tracking.hailify.liota.ai/track?{trackingNumber}",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.hailify.liota.ai/"
+  },
+  "hellmann-pl": {
+    "displayName": "Hellmann Poland",
+    "aliases": [
+      "Hellmann Polska",
+      "Hellmann Worldwide Logistics Polska"
+    ],
+    "countries": [
+      "PL"
+    ],
+    "color": "#004c99",
+    "selectable": true,
+    "timezone": "Europe/Warsaw",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://info.hwl.pl/tt/?searchKey={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "info.hwl.pl"
+        ],
+        "pathPattern": "^/tt/?$",
+        "params": [
+          "searchKey"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://info.hwl.pl/tt/"
+  },
+  "hyeship": {
+    "displayName": "Hongyuan Express",
+    "aliases": [
+      "鸿远快递",
+      "鸿远物流",
+      "鸿远国际物流集团",
+      "HYeship",
+      "Hongyuan Logistics Group"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#E8B828",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "hyeship"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.hyeship.com/track/#/trackForm"
+  },
+  "invio-home": {
+    "displayName": "Invio Home",
+    "aliases": [
+      "Invio Logistics",
+      "Invio S.A.S."
+    ],
+    "countries": [
+      "IT"
+    ],
+    "color": "#d06434",
+    "selectable": true,
+    "timezone": "Europe/Rome",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://prologico.inviologistics.com/v/trk/"
+  },
+  "jas-fbg": {
+    "displayName": "JAS-FBG",
+    "aliases": [
+      "JAS-FBG S.A.",
+      "JAS FBG"
+    ],
+    "countries": [
+      "PL"
+    ],
+    "color": "#5cbc14",
+    "selectable": true,
+    "timezone": "Europe/Warsaw",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://parcel.jasfbg.com.pl/pubtracing.aspx"
+  },
+  "jdexpressusa": {
+    "displayName": "JD Express USA",
+    "aliases": [
+      "骏达快递",
+      "駿達快遞",
+      "骏达"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#EC7400",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "jdexpressusa"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "jdxexpress": {
+    "displayName": "JDX Express",
+    "aliases": [
+      "永创捷国际",
+      "永创捷"
+    ],
+    "countries": [
+      "HK"
+    ],
+    "color": "#17366E",
+    "selectable": true,
+    "timezone": "Asia/Hong_Kong",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "jdxexpress",
+      "recognitionRank": 612,
+      "recognitionPattern": "^YCJ\\d{7}HK$"
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^YCJ\\d{7}HK$",
+        "confidence": "low"
+      }
+    ]
+  },
+  "jet-delivery": {
+    "displayName": "Jet Delivery",
+    "aliases": [
+      "Jet Delivery, Inc."
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#e11f26",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.jetdelivery.com/track/?idx={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "jetdelivery.com"
+        ],
+        "pathPattern": "^/track/?$",
+        "params": [
+          "idx"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.jetdelivery.com/track/"
+  },
+  "lynden": {
+    "displayName": "Lynden",
+    "aliases": [
+      "Lynden Transport",
+      "Alaska Marine Lines",
+      "Lynden Air Cargo",
+      "Lynden Inc."
+    ],
+    "countries": [
+      "US",
+      "CA"
+    ],
+    "color": "#006e3d",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://ezc.lynden.com/tracking/?webctl=read.traceio&everybody=ON&lnbr={trackingNumber}#/search",
+    "linkRules": [
+      {
+        "domains": [
+          "ezc.lynden.com"
+        ],
+        "pathPattern": "^/tracking/?$",
+        "params": [
+          "lnbr"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.lynden.com/online-tools/tracking-center/"
+  },
+  "mail-alliance": {
+    "displayName": "mail alliance",
+    "aliases": [
+      "mailalliance",
+      "mailworXs GmbH"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#c9252b",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "sendungsverfolgung.tomatotools.de"
+        ],
+        "path": "^/([A-Za-z0-9]+)/\\d{5}/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://sendungsverfolgung.tomatotools.de/"
+  },
+  "mbe-it": {
+    "displayName": "MBE Italy",
+    "aliases": [
+      "Mail Boxes Etc. Italia",
+      "MBE Italia"
+    ],
+    "countries": [
+      "IT"
+    ],
+    "color": "#e20613",
+    "selectable": true,
+    "timezone": "Europe/Rome",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.mbe.it/it/tracking?c={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "mbe.it"
+        ],
+        "pathPattern": "^/it/tracking$",
+        "params": [
+          "c"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.mbe.it/it/tracking"
+  },
+  "meixi": {
+    "displayName": "Meixi Express",
+    "aliases": [
+      "美西速运",
+      "美西环球速运",
+      "J-FIVE GLOBAL INC"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#1E3C72",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "meixi"
+    },
+    "trackingUrlTemplate": "https://www.j5ex.com/select.html?num={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.j5ex.com",
+          "j5ex.com"
+        ],
+        "pathPattern": "^/select\\.html$",
+        "params": [
+          "num"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.j5ex.com/select.html"
+  },
+  "messenger-de": {
+    "displayName": "messenger Transport + Logistik",
+    "aliases": [
+      "messenger Berlin",
+      "messenger Transport + Logistik GmbH"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#e30613",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://messenger.de/mtl/sendungsverfolgung/sendungsverfolgung-berlin/"
+  },
+  "mr-spedag": {
+    "displayName": "M+R Spedag",
+    "aliases": [
+      "M + R Spedag",
+      "M+R Spedag Group",
+      "M + R Spedag Group AG"
+    ],
+    "countries": [
+      "CH"
+    ],
+    "color": "#0060ac",
+    "selectable": true,
+    "timezone": "Europe/Zurich",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.mrspedag.com/track-and-trace/"
+  },
+  "ng-network": {
+    "displayName": "NG.network",
+    "aliases": [
+      "NG network",
+      "NG.network GmbH"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#10ab49",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://trackandtrace.innovation365.ng.network/Track/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "trackandtrace.innovation365.ng.network"
+        ],
+        "path": "^/Track/([^/?#]+)(?:/\\d{5})?/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://trackandtrace.innovation365.ng.network/Track/"
+  },
+  "northern-air-cargo": {
+    "displayName": "Northern Air Cargo",
+    "aliases": [
+      "NAC",
+      "Northern Air Cargo, LLC"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#ed2024",
+    "selectable": true,
+    "timezone": "America/Anchorage",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.nac.aero/shipment-tracking/"
+  },
+  "now-courier-us": {
+    "displayName": "NOW Courier",
+    "aliases": [
+      "NOW Courier Inc."
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#03aeda",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://xcelerator.nowcourier.com/Xcelerator/ClientPortal"
+  },
+  "online-systemlogistik": {
+    "displayName": "ONLINE Systemlogistik",
+    "aliases": [
+      "ONLINE Systemlogistik GmbH & Co. KG"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#dd0b2f",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "oslnet.de"
+        ],
+        "pathPattern": "^/(?:de/|en/)?sendungsverfolgung/?$",
+        "params": [
+          "id"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.oslnet.de/de/sendungsverfolgung/"
+  },
+  "overseaex": {
+    "displayName": "Oversea Express",
+    "aliases": [
+      "Overseaex",
+      "波音速递",
+      "Oversea Express Boston Corp"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#00185A",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "overseaex"
+    },
+    "trackingUrlTemplate": "https://www.overseaex.com/index.php?c=index&f=search&sn={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "overseaex.com",
+          "www.overseaex.com"
+        ],
+        "pathPattern": "^/index\\.php$",
+        "params": [
+          "sn"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.overseaex.com/"
+  },
+  "pallex-it": {
+    "displayName": "Pallex Italia",
+    "aliases": [
+      "Italian Pallet Network",
+      "Italian Pallet Network S.p.A."
+    ],
+    "countries": [
+      "IT"
+    ],
+    "color": "#e10000",
+    "selectable": true,
+    "timezone": "Europe/Rome",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tracking.pallexitalia.it/#track-and-trace/{trackingNumber}",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.pallexitalia.it/"
+  },
+  "paxy": {
+    "displayName": "Paxy",
+    "aliases": [
+      "Paxy Courier",
+      "Paxy Courier s.r.o."
+    ],
+    "countries": [
+      "PL",
+      "CZ"
+    ],
+    "color": "#00005e",
+    "selectable": true,
+    "timezone": "Europe/Warsaw",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.paxy.pl/"
+  },
+  "pegasus-logistics": {
+    "displayName": "Pegasus Logistics Group",
+    "aliases": [
+      "Pegasus Logistics",
+      "Pegasus Logistics Group, Inc."
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#002040",
+    "selectable": true,
+    "timezone": "America/Chicago",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://partners.pegasuslogistics.com/Tracking/ShipmentTrackingWithoutLogin?ID={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "partners.pegasuslogistics.com"
+        ],
+        "pathPattern": "^/Tracking/ShipmentTrackingWithoutLogin/?$",
+        "params": [
+          "ID"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://partners.pegasuslogistics.com/Tracking/TrackingWithoutLogin"
+  },
+  "pickwings": {
+    "displayName": "Pickwings",
+    "aliases": [
+      "Pickwings AG"
+    ],
+    "countries": [
+      "CH"
+    ],
+    "color": "#1f2532",
+    "selectable": true,
+    "timezone": "Europe/Zurich",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://pickwings.ch/de"
+  },
+  "quehenberger": {
+    "displayName": "Quehenberger Logistics",
+    "aliases": [
+      "Quehenberger",
+      "Augustin Quehenberger Group"
+    ],
+    "countries": [
+      "AT"
+    ],
+    "color": "#a2232b",
+    "selectable": true,
+    "timezone": "Europe/Vienna",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://ccp.quehenberger.com/dw/request/QTrack/getShipmentInformation?id=51&GENERIC={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "ccp.quehenberger.com"
+        ],
+        "pathPattern": "^/dw/request/QTrack/getShipmentInformation$",
+        "params": [
+          "GENERIC"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.quehenberger.com/de"
+  },
+  "quick-courier-pa": {
+    "displayName": "Quick Courier Service",
+    "aliases": [
+      "Quick Courier Services"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#0e4475",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.goqcs.biz/clientportal"
+  },
+  "rds-delivery": {
+    "displayName": "RDS Delivery Service",
+    "aliases": [
+      "RDS Delivery",
+      "Tri-State Messenger Service"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#005c40",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.tristatemessengerservice.com/ClientPortal"
+  },
+  "roh56": {
+    "displayName": "Ronghui Supply Chain",
+    "aliases": [
+      "融辉供应链",
+      "融辉物流",
+      "广东省融辉供应链管理有限公司",
+      "Guangdong Ronghui Supply Chain Management"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#0090CB",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "roh56"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "saetta-verde": {
+    "displayName": "Saetta Verde",
+    "aliases": [
+      "Associazione Saetta Verde"
+    ],
+    "countries": [
+      "CH"
+    ],
+    "color": "#00ab4e",
+    "selectable": true,
+    "timezone": "Europe/Zurich",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://svlcrm.qstools.ch/"
+  },
+  "san-marino-mail": {
+    "displayName": "San Marino Mail",
+    "aliases": [
+      "San Marino Mail Italia",
+      "San Marino Mail Italia Srl"
+    ],
+    "countries": [
+      "IT",
+      "SM"
+    ],
+    "color": "#0052a2",
+    "selectable": true,
+    "timezone": "Europe/Rome",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tracking.sanmarinomail.it/area/search/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tracking.sanmarinomail.it"
+        ],
+        "path": "^/area/search/([^/?#]+)(?:/(?:details|parcel))?/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.sanmarinomail.it/area/"
+  },
+  "savino-del-bene": {
+    "displayName": "Savino Del Bene",
+    "aliases": [
+      "Savino Del Bene S.p.A."
+    ],
+    "countries": [
+      "IT"
+    ],
+    "color": "#07153c",
+    "selectable": true,
+    "timezone": "Europe/Rome",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "webapps.cloud.savinodelbene.com",
+          "webapps.savinodelbene.com"
+        ],
+        "pathPattern": "^/webtng/tracking/fastTrackingView\\.xhtml$",
+        "params": [
+          "value"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://webapps.cloud.savinodelbene.com/webtng/tracking/fastTrackingView.xhtml"
+  },
+  "schoeni": {
+    "displayName": "Schöni Transport",
+    "aliases": [
+      "Schöni",
+      "Schoeni",
+      "Schöni Transport AG"
+    ],
+    "countries": [
+      "CH"
+    ],
+    "color": "#a6192e",
+    "selectable": true,
+    "timezone": "Europe/Zurich",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://my.schoeni.ch/public/de-ch/track-and-trace/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "my.schoeni.ch"
+        ],
+        "path": "^/public/[a-z]{2}-[a-z]{2}/track-and-trace/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://my.schoeni.ch/public/de-ch/track-and-trace"
+  },
+  "senpex": {
+    "displayName": "Senpex",
+    "aliases": [
+      "Senpex Inc."
+    ],
+    "countries": [
+      "US",
+      "CA"
+    ],
+    "color": "#ff5100",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://web.senpex.com/t2/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "web.senpex.com"
+        ],
+        "path": "^/t2/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://web.senpex.com/t2"
+  },
+  "shunjie": {
+    "displayName": "Passerby A Express",
+    "aliases": [
+      "顺捷美中速递",
+      "顺捷速递"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#00B0E0",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "shunjie"
+    },
+    "trackingUrlTemplate": "https://www.passerbyaexpress.com/index.php?c=index&f=search&sn={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "passerbyaexpress.com",
+          "www.passerbyaexpress.com"
+        ],
+        "pathPattern": "^/index\\.php$",
+        "params": [
+          "sn"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.passerbyaexpress.com/"
+  },
+  "southwest-cargo": {
+    "displayName": "Southwest Airlines Cargo",
+    "aliases": [
+      "Southwest Cargo",
+      "SWA Cargo"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#304cb2",
+    "selectable": true,
+    "timezone": "America/Chicago",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "swacargo.com"
+        ],
+        "pathPattern": "^/swacargo_com_ui/tracking-results/?$",
+        "params": [
+          "trackingInfo"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.swacargo.com/swacargo_com_ui/tracking"
+  },
+  "span-alaska": {
+    "displayName": "Span Alaska",
+    "aliases": [
+      "Span Alaska Transportation",
+      "Span Alaska Transportation, LLC"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#0033a0",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://portal.spanalaska.com/tracker?pro={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "portal.spanalaska.com"
+        ],
+        "pathPattern": "^/tracker/?$",
+        "params": [
+          "pro",
+          "pronum",
+          "shipmentid"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://portal.spanalaska.com/"
+  },
+  "spediamo": {
+    "displayName": "Spediamo",
+    "aliases": [
+      "Spediamo.it",
+      "Salesteam S.r.l."
+    ],
+    "countries": [
+      "IT"
+    ],
+    "color": "#41b1d8",
+    "selectable": true,
+    "timezone": "Europe/Rome",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://spediamo.it/ext/tracking?code={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "spediamo.it"
+        ],
+        "pathPattern": "^/ext/tracking/?$",
+        "params": [
+          "code"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://spediamo.it/ext/tracking"
+  },
+  "spedirecomodo": {
+    "displayName": "SpedireComodo",
+    "aliases": [
+      "Spedire Comodo",
+      "METAXY S.r.l."
+    ],
+    "countries": [
+      "IT"
+    ],
+    "color": "#42b0df",
+    "selectable": true,
+    "timezone": "Europe/Rome",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.spedirecomodo.it/Tracking/Track?trackingNumber={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "spedirecomodo.it"
+        ],
+        "pathPattern": "^/Tracking/Track/?$",
+        "params": [
+          "trackingNumber"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.spedirecomodo.it/cms/cerca-spedizione/"
+  },
+  "streck": {
+    "displayName": "Streck Transport",
+    "aliases": [
+      "Streck",
+      "Streck Transportgesellschaft mbH",
+      "myStreck"
+    ],
+    "countries": [
+      "DE",
+      "CH"
+    ],
+    "color": "#00203e",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://mystreck.streck.de/?loginToken=myStreck&locale=de"
+  },
+  "swiss-worldcargo": {
+    "displayName": "SWISS WorldCargo",
+    "aliases": [
+      "Swiss World Cargo",
+      "SWISS Cargo",
+      "Swiss International Air Lines Cargo"
+    ],
+    "countries": [
+      "CH"
+    ],
+    "color": "#cf2026",
+    "selectable": true,
+    "timezone": "Europe/Zurich",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://offerandorder.swissworldcargo.com/app/offerandorder/"
+  },
+  "trailer-bridge": {
+    "displayName": "Trailer Bridge",
+    "aliases": [
+      "Trailer Bridge, Inc."
+    ],
+    "countries": [
+      "US",
+      "PR",
+      "VI"
+    ],
+    "color": "#215e7e",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://quicktrack.trailerbridge.com/"
+  },
+  "transportami": {
+    "displayName": "transportami",
+    "aliases": [
+      "transportami AG"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#203343",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://transportami.com/sendung-verfolgen"
+  },
+  "ubn-speed": {
+    "displayName": "UBN Speed",
+    "aliases": [
+      "UBN Speed Service France",
+      "UBN Speed Réunion",
+      "Speed24"
+    ],
+    "countries": [
+      "FR",
+      "RE"
+    ],
+    "color": "#d40511",
+    "selectable": true,
+    "timezone": "Europe/Paris",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://ubn-speed.fr/suivi-colis/?ubn_tracking={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "ubn-speed.fr"
+        ],
+        "pathPattern": "^/suivi-colis/?$",
+        "params": [
+          "ubn_tracking"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://ubn-speed.fr/suivi-colis/"
+  },
+  "ubuy": {
+    "displayName": "UBUYLOGI",
+    "aliases": [
+      "优拜物流",
+      "德国优拜物流",
+      "广州优拜科技有限公司"
+    ],
+    "countries": [
+      "DE",
+      "CN"
+    ],
+    "color": "#003054",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "ubuy"
+    },
+    "trackingUrlTemplate": "https://www.ubuylogi.com/track/?num={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "ubuylogi.com"
+        ],
+        "pathPattern": "^/track/?$",
+        "params": [
+          "num"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.ubuylogi.com/",
+    "helpUrl": "https://www.ubuylogi.com/contact-us/"
+  },
+  "upela": {
+    "displayName": "Upela",
+    "aliases": [
+      "MPG Upela"
+    ],
+    "countries": [
+      "FR"
+    ],
+    "color": "#ef670e",
+    "selectable": true,
+    "timezone": "Europe/Paris",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.upela.com/fr/suivi.html?tracking_number={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "upela.com"
+        ],
+        "pathPattern": "^/fr/suivi\\.html$",
+        "params": [
+          "tracking_number"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.upela.com/fr/suivi.html"
+  },
+  "urbify": {
+    "displayName": "Urbify",
+    "aliases": [
+      "Urbify Technologies",
+      "Urbify Technologies GmbH"
+    ],
+    "countries": [
+      "DE",
+      "AT"
+    ],
+    "color": "#1d1e1c",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tracking.urbify.com/{trackingNumber}",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.urbify.com/"
+  },
+  "velocite": {
+    "displayName": "Vélocité",
+    "aliases": [
+      "vélocité Sàrl",
+      "Vélocité Riviera",
+      "vélocité riviera sàrl"
+    ],
+    "countries": [
+      "CH"
+    ],
+    "color": "#f83600",
+    "selectable": true,
+    "timezone": "Europe/Zurich",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.velocite.ch/"
+  },
+  "velokurier-st-gallen": {
+    "displayName": "Velokurier St.Gallen",
+    "aliases": [
+      "Velokurier St. Gallen",
+      "die Fliege Velokurier",
+      "die Fliege Velokurier St. Gallen GmbH"
+    ],
+    "countries": [
+      "CH"
+    ],
+    "color": "#ff640a",
+    "selectable": true,
+    "timezone": "Europe/Zurich",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://diefliege.kuz.ch/"
+  },
+  "vemo-logistik": {
+    "displayName": "VEMO Logistik",
+    "aliases": [
+      "VEMO",
+      "VEMO Logistik GmbH"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#0b6ea7",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "vemo-logistik.de"
+        ],
+        "pathPattern": "^/(?:en/)?sendungsverfolgung/?$",
+        "params": [
+          "nummer"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://vemo-logistik.de/sendungsverfolgung"
+  },
+  "vtl": {
+    "displayName": "VTL",
+    "aliases": [
+      "VTL Vernetzte-Transport-Logistik",
+      "Vernetzte-Transport-Logistik GmbH"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#0a4481",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://my.vtl.de/portal/aor/sendungsauskunft.aspx"
+  },
+  "wing": {
+    "displayName": "Wing",
+    "countries": [
+      "FR"
+    ],
+    "color": "#2058f8",
+    "selectable": true,
+    "timezone": "Europe/Paris",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.wing.eu/"
+  },
+  "xiongda": {
+    "displayName": "Xiong Da International Logistics",
+    "aliases": [
+      "雄达国际物流",
+      "雄达国际物流有限公司",
+      "上海雄达国际物流有限公司",
+      "Xiong Da",
+      "XD International"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#EB2E2F",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "xiongda"
+    },
+    "trackingUrlTemplate": "https://www.xdint.com/no/EmmisTrack.aspx?no={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "xdint.com"
+        ],
+        "pathPattern": "^/no/EmmisTrack\\.aspx$",
+        "params": [
+          "no"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.xdint.com/"
+  },
+  "yhtlogistics": {
+    "displayName": "Shanghai Aerospace Logistics",
+    "aliases": [
+      "宇航通物流",
+      "宇航通",
+      "宇航通快递",
+      "上海宇航通",
+      "宇航通国际"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#008040",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "yhtlogistics"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "zadbano": {
+    "displayName": "Zadbano",
+    "aliases": [
+      "Allegro Zadbano",
+      "Zadbano SA"
+    ],
+    "countries": [
+      "PL"
+    ],
+    "color": "#002245",
+    "selectable": true,
+    "timezone": "Europe/Warsaw",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://zadbano.pl/pl/lp/sledz-przesylke"
+  },
+  "zgtux": {
+    "displayName": "Tuxing Supply Chain",
+    "aliases": [
+      "途兴供应链",
+      "广东途兴供应链管理有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#C30D23",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "zgtux"
+    },
+    "trackingUrlTemplate": "https://vip.zgtux.com/routes?no={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "vip.zgtux.com"
+        ],
+        "pathPattern": "^/routes$",
+        "params": [
+          "no"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://vip.zgtux.com/routes"
+  },
+  "zsda56": {
+    "displayName": "Zhuanshunda",
+    "aliases": [
+      "转瞬达",
+      "转瞬达集运",
+      "转瞬达国际集运",
+      "转瞬达国际集运公司",
+      "ZSD"
+    ],
+    "countries": [
+      "CN",
+      "CA",
+      "US",
+      "AU",
+      "TW"
+    ],
+    "color": "#2C3088",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "zsda56",
+      "recognitionRank": 44,
+      "recognitionPattern": "^ZSD\\d{6}$"
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^ZSD\\d{6}$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://www.zsda56.com/",
+    "helpUrl": "https://www.zsda56.com/contact_us.php"
   }
 } as const;
 
@@ -75785,7 +78069,94 @@ export const CARRIER_IDS = [
   "torbon",
   "wlkgo",
   "yijiangky",
-  "ztcce"
+  "ztcce",
+  "24plus",
+  "accurate-courier",
+  "air-tahiti-nui-cargo",
+  "akaz",
+  "alaska-air-cargo",
+  "aloha-air-cargo",
+  "bejot",
+  "bester",
+  "bm-express",
+  "boxme",
+  "buyer1688",
+  "cargo-partner",
+  "cargo24",
+  "chinaqingguan",
+  "courier-connection",
+  "crowley",
+  "crst",
+  "cs-logistics",
+  "diakon",
+  "diamond-line",
+  "douglas-express",
+  "dyexpress",
+  "epaka",
+  "esoway",
+  "eurosender",
+  "everts-air-cargo",
+  "express2global",
+  "fast-est",
+  "fracht",
+  "geis-pl",
+  "globalexp",
+  "guisnel",
+  "hailify",
+  "hellmann-pl",
+  "hyeship",
+  "invio-home",
+  "jas-fbg",
+  "jdexpressusa",
+  "jdxexpress",
+  "jet-delivery",
+  "lynden",
+  "mail-alliance",
+  "mbe-it",
+  "meixi",
+  "messenger-de",
+  "mr-spedag",
+  "ng-network",
+  "northern-air-cargo",
+  "now-courier-us",
+  "online-systemlogistik",
+  "overseaex",
+  "pallex-it",
+  "paxy",
+  "pegasus-logistics",
+  "pickwings",
+  "quehenberger",
+  "quick-courier-pa",
+  "rds-delivery",
+  "roh56",
+  "saetta-verde",
+  "san-marino-mail",
+  "savino-del-bene",
+  "schoeni",
+  "senpex",
+  "shunjie",
+  "southwest-cargo",
+  "span-alaska",
+  "spediamo",
+  "spedirecomodo",
+  "streck",
+  "swiss-worldcargo",
+  "trailer-bridge",
+  "transportami",
+  "ubn-speed",
+  "ubuy",
+  "upela",
+  "urbify",
+  "velocite",
+  "velokurier-st-gallen",
+  "vemo-logistik",
+  "vtl",
+  "wing",
+  "xiongda",
+  "yhtlogistics",
+  "zadbano",
+  "zgtux",
+  "zsda56"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

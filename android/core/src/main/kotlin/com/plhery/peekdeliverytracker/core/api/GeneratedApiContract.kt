@@ -2259,6 +2259,93 @@ value class CarrierId(val rawValue: String) {
         val Wlkgo = CarrierId("wlkgo")
         val Yijiangky = CarrierId("yijiangky")
         val Ztcce = CarrierId("ztcce")
+        val TwentyFourPlus = CarrierId("24plus")
+        val AccurateCourier = CarrierId("accurate-courier")
+        val AirTahitiNuiCargo = CarrierId("air-tahiti-nui-cargo")
+        val Akaz = CarrierId("akaz")
+        val AlaskaAirCargo = CarrierId("alaska-air-cargo")
+        val AlohaAirCargo = CarrierId("aloha-air-cargo")
+        val Bejot = CarrierId("bejot")
+        val Bester = CarrierId("bester")
+        val BmExpress = CarrierId("bm-express")
+        val Boxme = CarrierId("boxme")
+        val Buyer1688 = CarrierId("buyer1688")
+        val CargoPartner = CarrierId("cargo-partner")
+        val Cargo24 = CarrierId("cargo24")
+        val Chinaqingguan = CarrierId("chinaqingguan")
+        val CourierConnection = CarrierId("courier-connection")
+        val Crowley = CarrierId("crowley")
+        val Crst = CarrierId("crst")
+        val CsLogistics = CarrierId("cs-logistics")
+        val Diakon = CarrierId("diakon")
+        val DiamondLine = CarrierId("diamond-line")
+        val DouglasExpress = CarrierId("douglas-express")
+        val Dyexpress = CarrierId("dyexpress")
+        val Epaka = CarrierId("epaka")
+        val Esoway = CarrierId("esoway")
+        val Eurosender = CarrierId("eurosender")
+        val EvertsAirCargo = CarrierId("everts-air-cargo")
+        val Express2global = CarrierId("express2global")
+        val FastEst = CarrierId("fast-est")
+        val Fracht = CarrierId("fracht")
+        val GeisPl = CarrierId("geis-pl")
+        val Globalexp = CarrierId("globalexp")
+        val Guisnel = CarrierId("guisnel")
+        val Hailify = CarrierId("hailify")
+        val HellmannPl = CarrierId("hellmann-pl")
+        val Hyeship = CarrierId("hyeship")
+        val InvioHome = CarrierId("invio-home")
+        val JasFbg = CarrierId("jas-fbg")
+        val Jdexpressusa = CarrierId("jdexpressusa")
+        val Jdxexpress = CarrierId("jdxexpress")
+        val JetDelivery = CarrierId("jet-delivery")
+        val Lynden = CarrierId("lynden")
+        val MailAlliance = CarrierId("mail-alliance")
+        val MbeIt = CarrierId("mbe-it")
+        val Meixi = CarrierId("meixi")
+        val MessengerDe = CarrierId("messenger-de")
+        val MrSpedag = CarrierId("mr-spedag")
+        val NgNetwork = CarrierId("ng-network")
+        val NorthernAirCargo = CarrierId("northern-air-cargo")
+        val NowCourierUs = CarrierId("now-courier-us")
+        val OnlineSystemlogistik = CarrierId("online-systemlogistik")
+        val Overseaex = CarrierId("overseaex")
+        val PallexIt = CarrierId("pallex-it")
+        val Paxy = CarrierId("paxy")
+        val PegasusLogistics = CarrierId("pegasus-logistics")
+        val Pickwings = CarrierId("pickwings")
+        val Quehenberger = CarrierId("quehenberger")
+        val QuickCourierPa = CarrierId("quick-courier-pa")
+        val RdsDelivery = CarrierId("rds-delivery")
+        val Roh56 = CarrierId("roh56")
+        val SaettaVerde = CarrierId("saetta-verde")
+        val SanMarinoMail = CarrierId("san-marino-mail")
+        val SavinoDelBene = CarrierId("savino-del-bene")
+        val Schoeni = CarrierId("schoeni")
+        val Senpex = CarrierId("senpex")
+        val Shunjie = CarrierId("shunjie")
+        val SouthwestCargo = CarrierId("southwest-cargo")
+        val SpanAlaska = CarrierId("span-alaska")
+        val Spediamo = CarrierId("spediamo")
+        val Spedirecomodo = CarrierId("spedirecomodo")
+        val Streck = CarrierId("streck")
+        val SwissWorldcargo = CarrierId("swiss-worldcargo")
+        val TrailerBridge = CarrierId("trailer-bridge")
+        val Transportami = CarrierId("transportami")
+        val UbnSpeed = CarrierId("ubn-speed")
+        val Ubuy = CarrierId("ubuy")
+        val Upela = CarrierId("upela")
+        val Urbify = CarrierId("urbify")
+        val Velocite = CarrierId("velocite")
+        val VelokurierStGallen = CarrierId("velokurier-st-gallen")
+        val VemoLogistik = CarrierId("vemo-logistik")
+        val Vtl = CarrierId("vtl")
+        val Wing = CarrierId("wing")
+        val Xiongda = CarrierId("xiongda")
+        val Yhtlogistics = CarrierId("yhtlogistics")
+        val Zadbano = CarrierId("zadbano")
+        val Zgtux = CarrierId("zgtux")
+        val Zsda56 = CarrierId("zsda56")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -4454,6 +4541,93 @@ value class CarrierId(val rawValue: String) {
             Wlkgo,
             Yijiangky,
             Ztcce,
+            TwentyFourPlus,
+            AccurateCourier,
+            AirTahitiNuiCargo,
+            Akaz,
+            AlaskaAirCargo,
+            AlohaAirCargo,
+            Bejot,
+            Bester,
+            BmExpress,
+            Boxme,
+            Buyer1688,
+            CargoPartner,
+            Cargo24,
+            Chinaqingguan,
+            CourierConnection,
+            Crowley,
+            Crst,
+            CsLogistics,
+            Diakon,
+            DiamondLine,
+            DouglasExpress,
+            Dyexpress,
+            Epaka,
+            Esoway,
+            Eurosender,
+            EvertsAirCargo,
+            Express2global,
+            FastEst,
+            Fracht,
+            GeisPl,
+            Globalexp,
+            Guisnel,
+            Hailify,
+            HellmannPl,
+            Hyeship,
+            InvioHome,
+            JasFbg,
+            Jdexpressusa,
+            Jdxexpress,
+            JetDelivery,
+            Lynden,
+            MailAlliance,
+            MbeIt,
+            Meixi,
+            MessengerDe,
+            MrSpedag,
+            NgNetwork,
+            NorthernAirCargo,
+            NowCourierUs,
+            OnlineSystemlogistik,
+            Overseaex,
+            PallexIt,
+            Paxy,
+            PegasusLogistics,
+            Pickwings,
+            Quehenberger,
+            QuickCourierPa,
+            RdsDelivery,
+            Roh56,
+            SaettaVerde,
+            SanMarinoMail,
+            SavinoDelBene,
+            Schoeni,
+            Senpex,
+            Shunjie,
+            SouthwestCargo,
+            SpanAlaska,
+            Spediamo,
+            Spedirecomodo,
+            Streck,
+            SwissWorldcargo,
+            TrailerBridge,
+            Transportami,
+            UbnSpeed,
+            Ubuy,
+            Upela,
+            Urbify,
+            Velocite,
+            VelokurierStGallen,
+            VemoLogistik,
+            Vtl,
+            Wing,
+            Xiongda,
+            Yhtlogistics,
+            Zadbano,
+            Zgtux,
+            Zsda56,
         )
     }
 }

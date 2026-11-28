@@ -100,7 +100,7 @@ Salvo transferência para a Swiss Post, o Peek mantém-se na GZYL: se o vendedor
 
 ### Qualquer número YL…YQ pertence à GZYL?
 
-`YL`, dez algarismos e `YQ` é o formato da GZYL e nenhuma outra transportadora no catálogo do Peek o usa. Quando começa por `YL738`, o Peek atribui-o logo à GZYL; nos restantes, verifica primeiro no sistema da GZYL. Com nove ou onze algarismos, falta ou sobra um dígito.
+Não com certeza absoluta. `YL`, dez algarismos e `YQ` é o formato da GZYL e nenhuma outra transportadora no catálogo do Peek o usa. Quando começa por `YL738`, o Peek atribui-o logo à GZYL; nos restantes, verifica primeiro no sistema da GZYL. Com nove ou onze algarismos, já não é o formato da GZYL.
 
 ### Porque é que a GZYL diz «Delivered» se a encomenda ainda não chegou?
 

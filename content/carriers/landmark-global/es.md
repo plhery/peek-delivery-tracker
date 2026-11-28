@@ -6,7 +6,7 @@ published: 2026-10-27
 updated: 2026-11-27
 ---
 
-Landmark Global —filial internacional del grupo belga Bnode (matriz de bpost)— transporta pedidos online entre países y entrega el último tramo mediante socios locales. Para seguir tu envío, pega el código `LTN` (8 o 9 cifras) en la casilla de arriba o en [la web de seguimiento de Landmark](https://track.landmarkglobal.com/?lang=es), donde también aparece el transportista local y su código.
+Landmark Global —filial internacional del grupo belga Bnode (matriz de bpost)— transporta pedidos online entre países y para el último tramo suele confiar el paquete a un socio local. Para seguir tu envío, pega el código `LTN` (8 o 9 cifras) en la casilla de arriba o en [la web de seguimiento de Landmark](https://track.landmarkglobal.com/?lang=es), donde también aparece el transportista local y su código.
 
 ## Número de seguimiento de Landmark Global: el LTN
 
@@ -112,7 +112,7 @@ Un transportista local que Landmark no nombra de forma fija en sus páginas. En 
 
 ### ¿Cuánto tarda en llegar un paquete de Landmark Global a España?
 
-Depende del servicio contratado por la tienda y del origen; en su página en inglés para comercios, Landmark estima de 4 a 5 días para envíos a España.
+Según Landmark, depende del servicio contratado por la tienda y del destino; en su página en inglés para comercios, Landmark estima de 4 a 5 días para envíos a España.
 
 ### ¿Tengo que pagar aduanas con Landmark Global?
 
@@ -120,7 +120,7 @@ Solo si llega de fuera de la UE y la tienda no abonó los impuestos en origen (D
 
 ### ¿Cuál es el teléfono o correo de Landmark Global en España?
 
-Landmark no publica teléfono ni horario en España. Para seguimiento recomienda escribir primero a la tienda; su botón de atención al cliente envía a `ClientservicesEU@landmarkglobal-group.com`.
+Landmark no publica teléfono ni horario en España. Para seguimiento recomienda escribir primero a la tienda; su botón de atención al cliente envía a ClientservicesEU@landmarkglobal-group.com.
 
 :::sources
 - [Landmark Global: Atención al cliente](https://landmarkglobal.com/eu/es/customer-support/) – LTN, la tienda primero, ausencia, cambio de dirección, pérdida y daños, seguro, plazos, correo, dirección de Machelen

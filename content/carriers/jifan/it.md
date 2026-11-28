@@ -6,7 +6,7 @@ published: 2026-11-21
 updated: 2026-11-27
 ---
 
-Jifan (`深圳市吉凡国际物流有限公司`, *Shenzhen Jifan International Logistics*) è uno spedizioniere fondato nel 2017 a Shenzhen (Cina continentale) che invia pacchi e-commerce dalla Cina agli Stati Uniti per via aerea e marittima con codici `JFGJ` + 9 cifre + `CN`. Incolla il tuo codice nel riquadro qui sopra o cercalo sul [tracker di Jifan](https://www.szjf56.cn/index/tracknumber/track) per leggere gli stati tradotti e gli orari convertiti dall'ora di Pechino al tuo fuso orario.
+Jifan (`深圳市吉凡国际物流有限公司`, *Shenzhen Jifan International Logistics*) è uno spedizioniere fondato nel 2017 a Shenzhen (Cina continentale) che invia pacchi e-commerce dalla Cina agli Stati Uniti per via aerea e marittima con codici `JFGJ` + 9 cifre + `CN`. Incolla il tuo codice nel riquadro qui sopra per seguirlo con gli orari convertiti dall'ora di Pechino al tuo fuso orario, oppure cercalo sul [tracker di Jifan](https://www.szjf56.cn/index/tracknumber/track).
 
 ## Numero di tracciamento Jifan: come riconoscerlo
 

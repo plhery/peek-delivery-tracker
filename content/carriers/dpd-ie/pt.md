@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-27
 ---
 
-A DPD Ireland entrega encomendas em toda a ilha da Irlanda (Norte e Sul) a partir de 38 depósitos e da sede em Athlone, com quase 600 pontos Pickup. Para seguir a tua encomenda, cola o número de 9 ou 10 dígitos na caixa acima ou introduz o código na [página de seguimento da DPD Ireland](https://www.dpd.ie/tracking/); o número chega no e-mail da DPD após a recolha e no e-mail de envio da loja.
+A DPD Ireland entrega encomendas em toda a ilha da Irlanda (Norte e Sul) a partir de 38 depósitos e da sede em Athlone, com quase 600 pontos Pickup. Para seguir a tua encomenda, cola o número de 9 ou 10 dígitos na caixa acima ou introduz o código na [página de seguimento da DPD Ireland](https://www.dpd.ie/tracking/); o número chega no e-mail da DPD após a recolha e normalmente também no e-mail de envio da loja.
 
 ## Onde está o meu número de seguimento da DPD Ireland?
 
@@ -96,7 +96,7 @@ Introduz apenas dígitos sem espaços (normalmente 9 dígitos, por vezes 10; có
 
 ### Os SMS de pagamento aduaneiro da DPD Ireland são verdadeiros?
 
-A DPD Ireland envia SMS ou e-mail no dia da entrega e quando há encargos aduaneiros a pagar por compras fora da UE (3 € de direitos até 150 € e 2 € de taxa de tratamento por tipo de produto, com 5 dias úteis para pagar). Como existem burlas, confirma que o e-mail vem de `dpd.ie`, apresenta a imagem da DPD Ireland e indica o nome do remetente.
+A DPD Ireland envia SMS ou e-mail no dia da entrega e quando há encargos aduaneiros a pagar por compras fora da UE (3 € de direitos até 150 € e 2 € de taxa de tratamento por tipo de produto, com 5 dias úteis para pagar). Como existem burlas, confirma que o e-mail vem de um endereço dpd.ie, apresenta a imagem da DPD Ireland e indica o nome do remetente.
 
 ### Quanto tempo demora a DPD a entregar na Irlanda?
 

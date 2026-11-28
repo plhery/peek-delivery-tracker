@@ -100,7 +100,7 @@ GZYL is 广州云链货运代理有限公司 (Guangzhou Yunlian), een expediteur
 
 ### Is elk YL…YQ-nummer van GZYL?
 
-`YL` gevolgd door tien cijfers en `YQ` is de vorm van GZYL en geen andere vervoerder in Peek gebruikt die. Begint het met `YL738`, dan herkent Peek GZYL direct; bij andere `YL…YQ`-nummers controleert Peek eerst op de trackingpagina van GZYL of het nummer bekend is.
+Niet met zekerheid. `YL` gevolgd door tien cijfers en `YQ` is de vorm van GZYL, en geen andere vervoerder in de lijst van Peek gebruikt die. Begint het met `YL738`, dan herkent Peek GZYL direct; bij andere `YL…YQ`-nummers controleert Peek eerst op de trackingpagina van GZYL of het nummer bekend is. Met negen of elf cijfers is het niet de vorm van GZYL.
 
 ### Waarom staat mijn GZYL-pakket op `Delivered` terwijl er niets is aangekomen?
 

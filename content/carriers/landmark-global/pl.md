@@ -88,11 +88,11 @@ Międzynarodowy operator e-commerce należący od 2016 r. do belgijskiej grupy B
 
 ### Kto doręcza paczki Landmark Global w Polsce?
 
-Landmark nie wskazuje w Polsce jednego stałego kuriera — konkretnego partnera ostatniej mili oraz jego lokalny numer nadania znajdziesz w szczegółach przesyłki na stronie śledzenia Landmark (pod `Delivery Partner`). Gdy Peek obsługuje tego przewoźnika bezpośrednio, automatycznie przełącza się na jego skany.
+Landmark nie wskazuje w Polsce jednego stałego kuriera — konkretnego partnera ostatniej mili oraz jego lokalny numer nadania znajdziesz w szczegółach przesyłki na stronie śledzenia Landmark (pod `Delivery Partner`). Gdy Peek obsługuje tego przewoźnika bezpośrednio, karta paczki może przełączyć się na jego skany, kiedy pojawią się u niego nowsze zdarzenia (nie przy każdej przesyłce).
 
 ### Dlaczego mój numer LTN nie działa lub stoi na `Shipment Data Uploaded`?
 
-Sprawdź format: `LTN` i 8 lub 9 cyfr (opcjonalnie z końcówką `N1`). Status `Shipment Data Uploaded` oznacza, że sklep przekazał dopiero dane elektroniczne i nie nadał jeszcze fizycznie paczki; jeśli nic nie rusza po kilku dniach, napisz do sklepu.
+Sprawdź format: `LTN` i 8 lub 9 cyfr (opcjonalnie z końcówką `N1`). Status `Shipment Data Uploaded` oznacza, że sklep przekazał dopiero dane elektroniczne i nie nadał jeszcze fizycznie paczki; jeśli nic się nie zmienia, zapytaj sklep o datę fizycznego nadania.
 
 ### Czy za paczkę Landmark Global spoza UE trzeba zapłacić cło i opłatę 2 EUR?
 
@@ -100,7 +100,7 @@ Z krajów UE cła nie ma. Dla zakupów online spoza UE (np. z Wielkiej Brytanii,
 
 ### Ile trwa dostawa Landmark Global i jak się z nimi skontaktować?
 
-Czas dostawy zależy od usługi wybranej przez sklep i kraju nadania. W sprawach reklamacji i zagubionych paczek Landmark kieruje w pierwszej kolejności do sprzedawcy; europejski adres e-mail obsługi klienta to `ClientservicesEU@landmarkglobal-group.com` (bez europejskiego numeru telefonu).
+Według strony pomocy Landmark czas dostawy zależy od usługi wybranej przez sklep i kraju docelowego. W sprawach reklamacji i zagubionych paczek Landmark kieruje w pierwszej kolejności do sprzedawcy; europejski adres e-mail obsługi klienta to `ClientservicesEU@landmarkglobal-group.com` (bez europejskiego numeru telefonu).
 
 :::sources
 - [Landmark Global Polska: Obsługa klienta](https://landmarkglobal.com/eu/pl/obsluga-klienta/) – numer LTN, kontakt ze sprzedawcą, brak zmiany adresu po przetworzeniu, ubezpieczenie tylko dla sklepów, e-mail ClientservicesEU@landmarkglobal-group.com i siedziba w Machelen

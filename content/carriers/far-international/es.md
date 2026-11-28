@@ -100,7 +100,7 @@ Mientras tengas el envío abierto en Peek — o el día de entrega con notificac
 
 ### ¿Es fiable FAR International?
 
-Sí. FAR International Logistics se fundó en Hangzhou en 2004, su matriz FAR International Holdings Group salió a bolsa en Hong Kong en diciembre de 2023 y opera proyectos transfronterizos con UPS China, Temu, TikTok y SHEIN.
+Sí. FAR International Logistics se fundó en Hangzhou en 2004, su matriz FAR International Holdings Group salió a bolsa en Hong Kong en diciembre de 2023, según sus noticias. FAR señala que empezó a operar para UPS China en 2005, lanzó un proyecto transfronterizo con Temu en 2023 y abrió una cooperación estratégica con TikTok y SHEIN en 2024.
 
 ### ¿Quién entrega un paquete de FAR International en España o mi país?
 
@@ -112,11 +112,11 @@ Para comercios, FAR publica plazos orientativos de 3 a 5 días laborables en Exp
 
 ### ¿Qué significa «Await Release from Sender» en FAR International?
 
-El almacén de FAR en China retiene el paquete a la espera de autorización del vendedor. Si el estado no avanza en unos días, escribe a la tienda para que libere el envío.
+El almacén de FAR en China retiene el paquete a la espera de autorización del vendedor. Si el estado no avanza, escribe a la tienda para que libere el envío.
 
 ### ¿Cómo contactar o reclamar con FAR International si el paquete no llega?
 
-Contacta primero con el vendedor (las reclamaciones por paquete entregado y no recibido deben abrirse en los 14 días posteriores a la firma a través del remitente). Los contactos de FAR son la línea `400-128-5656` y el correo `csc@far800.com`.
+Contacta primero con el vendedor (las reclamaciones por paquete entregado y no recibido deben abrirse en los 14 días posteriores a la firma a través del remitente). Los contactos de FAR son la línea 400-128-5656 y el correo csc@far800.com.
 
 :::sources
 - [FAR International: Home](https://www.far800.com/en) – empresa, 泛远国际, 2004 y 2022, salida a bolsa en Hong Kong (22 de diciembre de 2023), línea global, correo y dirección

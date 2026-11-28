@@ -1,12 +1,12 @@
 ---
 title: Śledzenie Hermes Niemcy: statusy po polsku i doręczenie
-description: Śledzenie przesyłek Hermes Germany (myHermes) po polsku: numery H... i 14-cyfrowe, tłumaczenie statusów, doręczenie do Polski, brak cła w UE i reklamacje.
+description: Śledzenie przesyłek Hermes Germany (myHermes) po polsku: numer nadania, tłumaczenie statusów, doręczenie do Polski, brak cła w UE i reklamacje.
 slug: sledzenie-hermes
 published: 2026-11-18
 updated: 2026-11-27
 ---
 
-Hermes Germany (*myHermes*, *Hermes Borderguru*) to niemiecki przewoźnik paczkowy z grupy Otto (*Otto Group*) obsługujący zakupy z niemieckich sklepów i wysyłki do Polski. Wklej numer nadania (*Sendungsnummer*, 14–20 znaków) w polu powyżej w [Peek](/) lub sprawdź go na niemieckiej stronie `myhermes.de`, aby zobaczyć polski etap przesyłki, godziny w swojej strefie czasowej oraz ewentualne przekazanie polskiemu partnerowi.
+Hermes Germany (*myHermes*, *Hermes Borderguru*) to niemiecki przewoźnik paczkowy z grupy Otto (*Otto Group*) obsługujący zakupy z niemieckich sklepów i wysyłki do Polski. Wklej numer nadania (*Sendungsnummer*) w polu powyżej w [Peek](/) lub sprawdź go na niemieckiej stronie `myhermes.de`, aby zobaczyć polski etap przesyłki, godziny w swojej strefie czasowej oraz ewentualne przekazanie polskiemu partnerowi.
 
 W Wielkiej Brytanii dawny oddział Hermes UK zmienił w marcu 2022 roku nazwę na [Evri](carrier:evri), natomiast Hermes Germany pozostaje odrębną niemiecką firmą kurierską. Do dostaw mebli i dużego sprzętu AGD z wniesieniem przez dwuosobowe zespoły na terenie Niemiec służy osobna spółka (*Hermes Einrichtungs-Service*).
 

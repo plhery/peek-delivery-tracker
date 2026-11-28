@@ -582,7 +582,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/encomenda-retida-na-alfandega" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/paczka-zatrzymana-przez-urzad-celny" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/parcel-held-at-customs" />
-<lastmod>2026-11-20</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/guides/colis-bloque-en-douane</loc>
@@ -1338,7 +1338,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/rastrear-encomenda-temu" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-temu" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/temu-order-tracking" />
-<lastmod>2026-11-08</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/guides/suivi-commande-temu</loc>
@@ -5481,7 +5481,7 @@
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-11-23</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/zh/carriers</loc>
@@ -6624,7 +6624,7 @@
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/gls-tracking-germany" />
 <xhtml:link rel="alternate" hreflang="uk" href="https://peektracker.com/uk/carriers/gls-vidstezhennia-posylky-nimechchyna" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/gls-tracking-germany" />
-<lastmod>2026-11-20</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/carriers/gls-allemagne-suivi-colis</loc>
@@ -8728,7 +8728,7 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/dpd-poland-sledzenie-paczki" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/dpd-poland-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dpd-poland-tracking" />
-<lastmod>2026-11-17</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/zh/carriers/dpd-poland-tracking</loc>
@@ -14609,7 +14609,7 @@
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/heppner-tracking" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/heppner-zending-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/heppner-tracking" />
-<lastmod>2026-11-17</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/it/carriers/tracciamento-heppner</loc>
@@ -15008,7 +15008,7 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/delivengo-tracking" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/delivengo-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/delivengo-tracking" />
-<lastmod>2026-11-17</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/it/carriers/delivengo-tracking</loc>
@@ -17448,7 +17448,7 @@
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/posta-slovenije-siluowenniya-youzheng-chaxun" />
 <xhtml:link rel="alternate" hreflang="sl" href="https://peektracker.com/sl/carriers/posta-slovenije-sledenje-posiljk" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/posta-slovenije-tracking" />
-<lastmod>2026-11-17</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/hrvatska-posta-tracking</loc>
@@ -23622,7 +23622,7 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-przesylek-juxi-express" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/juxi-wuliu-juxi-express-chaxun" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/juxi-express-tracking" />
-<lastmod>2026-11-20</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/carriers/juxi-express-suivi</loc>
@@ -23786,7 +23786,7 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-lingdong" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/lingdong-guoji-wuliu-chaxun" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/lingdong-tracking" />
-<lastmod>2026-11-21</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/it/carriers/tracciamento-lingdong</loc>
@@ -25514,7 +25514,7 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-przesylek-straightship" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/straightship-wuliu-chaxun" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/straightship-tracking" />
-<lastmod>2026-11-20</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/correios-brazil-tracking</loc>
@@ -26248,7 +26248,7 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-pengyou" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/pengyou-wuliu-chaxun" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/pengyou-tracking" />
-<lastmod>2026-11-21</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/es/carriers/pengyou-seguimiento</loc>
@@ -26472,7 +26472,7 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/meiteshun-sledzenie" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/meiteshun-wuliu-chaxun" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/meiteshun-tracking" />
-<lastmod>2026-11-21</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/carriers/meiteshun-suivi-colis</loc>
@@ -26486,7 +26486,7 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/meiteshun-sledzenie" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/meiteshun-wuliu-chaxun" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/meiteshun-tracking" />
-<lastmod>2026-11-21</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/it/carriers/meiteshun-tracking</loc>
@@ -27018,7 +27018,7 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-quick-rabbit" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/quick-rabbit-wuliu-chaxun" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/quick-rabbit-tracking" />
-<lastmod>2026-11-17</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pt/carriers/seguimento-quick-rabbit</loc>
@@ -27964,7 +27964,7 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/jrt-sledzenie" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/jinritong-jrt-wuliu-chaxun" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jrt-tracking" />
-<lastmod>2026-11-21</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/it/carriers/jrt-tracking</loc>
@@ -28062,7 +28062,7 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-tianhui-hengyuan" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/tianhui-hengyuan-thhy-wuliu-chaxun" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/tianhui-hengyuan-tracking" />
-<lastmod>2026-11-21</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/de/carriers/tianhui-hengyuan-sendungsverfolgung</loc>
@@ -28510,7 +28510,7 @@
 <xhtml:link rel="alternate" hreflang="el" href="https://peektracker.com/el/carriers/gzyl-entopismos-dematos" />
 <xhtml:link rel="alternate" hreflang="hr" href="https://peektracker.com/hr/carriers/gzyl-pracenje-posiljke" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/gzyl-tracking" />
-<lastmod>2026-11-21</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/es/carriers/gzyl-seguimiento</loc>
@@ -28930,7 +28930,7 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/geodis-polska-sledzenie" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/geodis-poland-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/geodis-poland-tracking" />
-<lastmod>2026-11-20</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/it/carriers/geodis-polonia-tracciamento</loc>
@@ -31104,7 +31104,7 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-morning-global" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/morning-global-mg-wuliu-chaxun" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/morning-global-tracking" />
-<lastmod>2026-11-21</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/de/carriers/morning-global-sendungsverfolgung</loc>
@@ -31608,7 +31608,7 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-emirates-post" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/emirates-post-wuliu-chaxun" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/emirates-post-tracking" />
-<lastmod>2026-11-21</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/de/carriers/emirates-post-sendungsverfolgung</loc>
@@ -32509,7 +32509,7 @@
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers/cdek-otslezhivanie" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/cdek-wuliu-chaxun" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/cdek-tracking" />
-<lastmod>2026-11-23</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/zh/carriers/cdek-wuliu-chaxun</loc>
@@ -32584,7 +32584,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/seguimento-forza-delivery" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-forza-delivery" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/forza-delivery-tracking" />
-<lastmod>2026-11-21</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pt/carriers/seguimento-forza-delivery</loc>
@@ -33764,7 +33764,7 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-jifan" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/jifan-guoji-wuliu-chaxun" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jifan-tracking" />
-<lastmod>2026-11-21</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/de/carriers/jifan-sendungsverfolgung</loc>
@@ -37026,7 +37026,7 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/xinghe-freight-sledzenie" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/xinghe-huoyun-wuliu-chaxun" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/xinghe-freight-tracking" />
-<lastmod>2026-11-21</lastmod>
+<lastmod>2026-11-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pt-br/carriers/rastreamento-xinghe-freight</loc>

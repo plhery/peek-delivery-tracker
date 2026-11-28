@@ -38254,10 +38254,12 @@
         "Emons Spedition",
         "Emons Spedition GmbH",
         "Emons Logistik",
-        "myEmons"
+        "myEmons",
+        "Emons Schweiz AG"
       ],
       "countries": [
-        "DE"
+        "DE",
+        "CH"
       ],
       "color": "#c00719",
       "selectable": true,
@@ -58144,11 +58146,13 @@
     "ziegler": {
       "displayName": "Ziegler",
       "aliases": [
-        "Ziegler Group"
+        "Ziegler Group",
+        "Ziegler (Schweiz) AG"
       ],
       "countries": [
         "BE",
-        "FR"
+        "FR",
+        "CH"
       ],
       "color": "#066a5d",
       "selectable": true,
@@ -75818,6 +75822,153 @@
       ],
       "trackingSearchUrl": "https://www.zsda56.com/",
       "helpUrl": "https://www.zsda56.com/contact_us.php"
+    },
+    "bmxps": {
+      "displayName": "BMXPS",
+      "aliases": [
+        "北美快运",
+        "北美国际物流"
+      ],
+      "countries": [
+        "US",
+        "CN"
+      ],
+      "color": "#3164AF",
+      "selectable": true,
+      "timezone": "America/New_York",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "bmxps"
+      },
+      "trackingUrlTemplate": "https://www.bmxps.com/Home/OrderTracking?orderNumber={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "bmxps.com"
+          ],
+          "pathPattern": "^/Home/OrderTracking/?$",
+          "params": [
+            "orderNumber"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.bmxps.com/Home/OrderTracking"
+    },
+    "hltop": {
+      "displayName": "Hailian Express",
+      "aliases": [
+        "上海海联快递",
+        "上海海联快递有限公司",
+        "海联快递"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#004080",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "hltop"
+      },
+      "linkRules": [],
+      "detectionRules": []
+    },
+    "lot-cargo": {
+      "displayName": "LOT Cargo",
+      "aliases": [
+        "LOT Polish Airlines Cargo",
+        "LOT Polish Airlines",
+        "Polskie Linie Lotnicze LOT"
+      ],
+      "countries": [
+        "PL"
+      ],
+      "color": "#252668",
+      "selectable": true,
+      "timezone": "Europe/Warsaw",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "lot-cargo"
+      },
+      "trackingUrlTemplate": "https://cargo-tracking.lot.com/",
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://cargo-tracking.lot.com/",
+      "helpUrl": "https://www.lot.com/pl/en/cargo/cargo-offices"
+    },
+    "morelink56": {
+      "displayName": "MoreLink",
+      "aliases": [
+        "无限链接",
+        "广东无限链接信息科技有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#FF0000",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "morelink56"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://client.morelink56.com/homepage/order_tracking"
+    },
+    "sunspeedy": {
+      "displayName": "Sunspeedy",
+      "aliases": [
+        "新速航",
+        "香港新速航",
+        "新速航香港國際轉運"
+      ],
+      "countries": [
+        "HK"
+      ],
+      "color": "#2684B7",
+      "selectable": true,
+      "timezone": "Asia/Hong_Kong",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "sunspeedy"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.sunspeedy.hk/"
+    },
+    "sutongst": {
+      "displayName": "Sutong International Express",
+      "aliases": [
+        "香港速通国际快运",
+        "香港速通国际物流",
+        "速通国际快运",
+        "速通国际物流",
+        "香港速通"
+      ],
+      "countries": [
+        "HK",
+        "CN",
+        "US",
+        "CA"
+      ],
+      "color": "#1E50A2",
+      "selectable": true,
+      "timezone": "Asia/Hong_Kong",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "sutongst"
+      },
+      "linkRules": [],
+      "detectionRules": [
+        {
+          "pattern": "^ST\\d{12}$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://www.sutongst.com/list-1793.html"
     }
   }
 }

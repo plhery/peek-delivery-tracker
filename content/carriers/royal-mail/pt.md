@@ -109,7 +109,7 @@ Entre a saída do Reino Unido e a receção pelos CTT podem passar vários dias 
 
 ### Quanto tempo os CTT guardam uma encomenda Royal Mail após entrega falhada?
 
-Segundo a tabela dos CTT, uma encomenda postal internacional (`CA`, `CB`, `CC`…) fica guardada 15 dias úteis (prolongável até 30 dias) e o correio registado 6 dias úteis na Loja ou Ponto CTT indicado no aviso. Leva o aviso e um documento de identificação.
+Segundo a tabela dos CTT, uma encomenda postal internacional (`CA`, `CB`, `CC`…) fica guardada 15 dias úteis (prolongáveis em até 30 dias) e o correio registado 6 dias úteis na Loja ou Ponto CTT indicado no aviso. Leva o aviso e um documento de identificação.
 
 ### Qual o contacto dos CTT e da Royal Mail para reclamar uma encomenda perdida?
 

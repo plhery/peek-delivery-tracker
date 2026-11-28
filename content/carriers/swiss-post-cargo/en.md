@@ -1,12 +1,12 @@
 ---
 title: Swiss Post Cargo tracking: statuses, delivery and contact
-description: Track a Swiss Post Cargo freight shipment (formerly PostLogistics): 20-digit SSCC or PL- reference lookup, status meanings, kerbside delivery and contacts.
+description: Track a Swiss Post Cargo freight shipment (formerly PostLogistics): barcode or reference lookup, status meanings, delivery to the kerb or ramp and contacts.
 slug: swiss-post-cargo-tracking
 published: 2026-10-12
 updated: 2026-11-27
 ---
 
-Swiss Post Cargo (formerly PostLogistics, trading under this brand since 1 March 2025) is Swiss Post's freight network for pallets and heavy goods carried by truck across Switzerland, Liechtenstein and abroad. Track your 20-digit `00` SSCC barcode or `PL-` sender reference on `tt.swisspost-cargo.com` or paste it in the box above (ordinary Swiss Post parcels belong on [Swiss Post's page](carrier:swiss-post)). Below: what `Data entry POST` and `Loaded for Delivery` mean, kerbside delivery rules and who to contact.
+Swiss Post Cargo (formerly PostLogistics, trading under this brand since 1 March 2025) is Swiss Post's freight network for pallets and heavy goods carried by truck across Switzerland, Liechtenstein and abroad. Track the barcode or the reference the sender gave you on `tt.swisspost-cargo.com` or paste it in the box above (ordinary Swiss Post parcels belong on [Swiss Post's page](carrier:swiss-post)). Below: what `Data entry POST` and `Loaded for Delivery` mean, kerbside delivery rules and who to contact.
 
 ## Swiss Post Cargo tracking number
 
@@ -89,7 +89,7 @@ Yes. PostLogistics now trades as Swiss Post Cargo; its old `tracking.postlogisti
 
 ### How long does Swiss Post Cargo take and where does the driver deliver?
 
-Swiss Post's freight brochure states next-working-day delivery by 17:00 across accessible parts of Switzerland and Liechtenstein, and by 17:00 on the second working day in mountain areas (Valais, Ticino, Graubünden). Standard delivery goes to the ground-floor door, ramp or kerb, with unloading by the recipient unless the sender booked extras.
+Swiss Post's freight brochure states next-working-day delivery by 17:00 across accessible parts of Switzerland and Liechtenstein, and by 17:00 on the second working day in mountain areas (Valais, Ticino, Graubünden). Standard delivery goes to the ground-floor door, ramp or kerb, and unloading is the recipient's job; delivery to another floor is an extra the sender books.
 
 ### How do I contact Swiss Post Cargo about a delivery, SMS or damage?
 

@@ -2358,6 +2358,7 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let emiratesSkycargo = CarrierID(rawValue: "emirates-skycargo")
     static let koreanAirCargo = CarrierID(rawValue: "korean-air-cargo")
     static let lufthansaCargo = CarrierID(rawValue: "lufthansa-cargo")
+    static let jAndTSg = CarrierID(rawValue: "j-and-t-sg")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -4649,6 +4650,7 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .emiratesSkycargo,
         .koreanAirCargo,
         .lufthansaCargo,
+        .jAndTSg,
     ]
 
     init(from decoder: Decoder) throws {

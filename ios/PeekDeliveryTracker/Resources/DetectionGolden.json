@@ -25088,6 +25088,21 @@
     ]
   },
   {
+    "input": "173007016",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "tnt",
+      "dpd-ie"
+    ],
+    "preferred": [
+      "tnt"
+    ],
+    "asked": [
+      "tnt"
+    ]
+  },
+  {
     "input": "173011266985",
     "carrier": "unknown",
     "confidence": "low",
@@ -84986,6 +85001,17 @@
     ]
   },
   {
+    "input": "AO10101000000",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "la-poste"
+    ],
+    "asked": [
+      "la-poste"
+    ]
+  },
+  {
     "input": "AP00808868960945",
     "carrier": "aliexpress",
     "confidence": "high",
@@ -85590,6 +85616,21 @@
     "asked": [
       "gls-it",
       "asendia"
+    ]
+  },
+  {
+    "input": "AW2314163530",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "colis-prive",
+      "aramex-au",
+      "aramex-nz"
+    ],
+    "asked": [
+      "colis-prive",
+      "aramex-au",
+      "aramex-nz"
     ]
   },
   {
@@ -89804,6 +89845,17 @@
     ]
   },
   {
+    "input": "CN26112899999990",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "four-px"
+    ],
+    "asked": [
+      "four-px"
+    ]
+  },
+  {
     "input": "CN261130478159",
     "carrier": "unknown",
     "confidence": "low",
@@ -93914,6 +93966,7 @@
       "intl-post"
     ],
     "asked": [
+      "bh-posta",
       "chronopost"
     ]
   },
@@ -94369,6 +94422,17 @@
     "confidence": "high",
     "candidates": [
       "parcelforce"
+    ]
+  },
+  {
+    "input": "EK493768244MO",
+    "carrier": "intl-post",
+    "confidence": "high",
+    "candidates": [
+      "intl-post"
+    ],
+    "asked": [
+      "chronopost"
     ]
   },
   {
@@ -101790,6 +101854,14 @@
     ]
   },
   {
+    "input": "JT43326470943122",
+    "carrier": "j-and-t-sg",
+    "confidence": "high",
+    "candidates": [
+      "j-and-t-sg"
+    ]
+  },
+  {
     "input": "JT47095857164",
     "carrier": "jne",
     "confidence": "high",
@@ -101823,6 +101895,26 @@
     ],
     "asked": [
       "j-and-t-cn"
+    ]
+  },
+  {
+    "input": "JT9999999999901",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "j-and-t",
+      "j-and-t-cn"
+    ],
+    "asked": [
+      "j-and-t-cn"
+    ]
+  },
+  {
+    "input": "JT99999999999901",
+    "carrier": "j-and-t-sg",
+    "confidence": "high",
+    "candidates": [
+      "j-and-t-sg"
     ]
   },
   {
@@ -102104,6 +102196,9 @@
     "confidence": "high",
     "candidates": [
       "juxi-express"
+    ],
+    "asked": [
+      "dhlink"
     ]
   },
   {
@@ -102123,6 +102218,9 @@
     "confidence": "high",
     "candidates": [
       "juxi-express"
+    ],
+    "asked": [
+      "dhlink"
     ]
   },
   {
@@ -114355,6 +114453,7 @@
       "intl-post"
     ],
     "asked": [
+      "bh-posta",
       "chronopost"
     ]
   },

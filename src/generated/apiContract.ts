@@ -4206,6 +4206,10 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       },
       {
+        "pattern": "^CN\\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])\\d{8}$",
+        "confidence": "low"
+      },
+      {
         "pattern": "^311\\d{9}$",
         "confidence": "low",
         "preferred": true
@@ -5586,8 +5590,7 @@ export const CARRIER_CAPABILITIES = {
       "ID",
       "MY",
       "TH",
-      "VN",
-      "SG"
+      "VN"
     ],
     "trackingSearchUrl": "https://www.jtexpress.ph/track-and-trace",
     "helpUrl": "https://www.jtexpress.ph/contact-us"
@@ -15863,7 +15866,7 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       },
       {
-        "pattern": "^JXC(?:YI|ZO|US|ZI)\\d{10}YQ$",
+        "pattern": "^JXC[A-Z]{2}\\d{10}YQ$",
         "confidence": "low",
         "preferred": true
       }
@@ -37970,7 +37973,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/London",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "hart2hart-express"
     },
     "trackingUrlTemplate": "https://harttohart.couriernavigator-secure.com/tracking?consign_note={trackingNumber}",
     "linkRules": [
@@ -39215,7 +39218,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/London",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "ubx-uk"
     },
     "trackingUrlTemplate": "https://www.ubx.uk.net/tracking/?consign_note={trackingNumber}",
     "linkRules": [
@@ -40000,7 +40003,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Africa/Harare",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "zimpost"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -40024,7 +40027,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kolkata",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "airwings-india"
     },
     "trackingUrlTemplate": "https://airwingsindia.com/tracking.html?awbno={trackingNumber}",
     "linkRules": [
@@ -40363,7 +40366,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Australia/Brisbane",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "fastgo"
     },
     "trackingUrlTemplate": "https://www.fastgo.com.au/WaybillQuery/?from=bs&bill={trackingNumber}",
     "linkRules": [
@@ -41107,7 +41110,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/London",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "world-package"
     },
     "trackingUrlTemplate": "https://wpl-uk.couriernavigator-secure.com/tracking?consign_note={trackingNumber}",
     "linkRules": [
@@ -48212,7 +48215,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/London",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "ecourier-uk"
     },
     "trackingUrlTemplate": "https://www.ecourier.co.uk/tracking/?consign_note={trackingNumber}",
     "linkRules": [
@@ -48278,7 +48281,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Ho_Chi_Minh",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "greenway-vn"
     },
     "trackingUrlTemplate": "https://greenwayvn.com/tracking?code={trackingNumber}",
     "linkRules": [
@@ -48934,7 +48937,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Ho_Chi_Minh",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "the-human-express"
     },
     "trackingUrlTemplate": "https://thehuman.express/trackings?trackings={trackingNumber}",
     "linkRules": [
@@ -50124,7 +50127,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/London",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "flight-logistics"
     },
     "linkRules": [
       {
@@ -54941,10 +54944,17 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Sarajevo",
     "tracking": {
       "mode": "automatic",
-      "adapter": "bh-posta"
+      "adapter": "bh-posta",
+      "recognitionRank": 934
     },
     "linkRules": [],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^[A-Z]{2}\\d{9}BA$",
+        "confidence": "low",
+        "checksum": "s10"
+      }
+    ],
     "trackingSearchUrl": "https://www.posta.ba/pracenje-posiljaka/",
     "helpUrl": "https://www.posta.ba/contact/"
   },
@@ -74071,7 +74081,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Boise",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "diamond-line"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -76052,6 +76062,33 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.lufthansa-cargo.com/en/eservices/etracking"
+  },
+  "j-and-t-sg": {
+    "displayName": "J&T Express Singapore",
+    "aliases": [
+      "J&T Express (SG)",
+      "J&T Express SG",
+      "J&T Singapore"
+    ],
+    "countries": [
+      "SG"
+    ],
+    "color": "#ed1c24",
+    "selectable": true,
+    "timezone": "Asia/Singapore",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^JT\\d{14}$",
+        "confidence": "high"
+      }
+    ],
+    "trackingSearchUrl": "https://www.jtexpress.sg/trackmyparcel",
+    "helpUrl": "https://www.jtexpress.sg/contact-us"
   }
 } as const;
 
@@ -78398,7 +78435,8 @@ export const CARRIER_IDS = [
   "sutongst",
   "emirates-skycargo",
   "korean-air-cargo",
-  "lufthansa-cargo"
+  "lufthansa-cargo",
+  "j-and-t-sg"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

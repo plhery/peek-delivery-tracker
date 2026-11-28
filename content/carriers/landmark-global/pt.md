@@ -88,7 +88,7 @@ Quando o parceiro final é seguido diretamente pelo Peek (como [bpost](carrier:b
 
 ### Quem entrega as encomendas da Landmark Global em Portugal?
 
-A Landmark não indica um único parceiro fixo para Portugal — o operador responsável e o respetivo código local surgem na secção `Delivery Partner` do seguimento assim que a encomenda chega ao país. Quando o parceiro é seguido diretamente pelo Peek (como os [CTT](carrier:ctt)), o acompanhamento passa automaticamente para os seus registos mais recentes.
+A Landmark não indica um único parceiro fixo para Portugal — o operador responsável e o respetivo código local surgem na secção `Delivery Partner` do seguimento assim que a encomenda chega ao país. Quando o parceiro é seguido diretamente pelo Peek (como os [CTT](carrier:ctt)), a ficha passa a indicar «Entrega: …» assim que esse operador publica passos mais recentes (nem todos os envios mudam automaticamente).
 
 ### Porque é que o meu código LTN não devolve resultados?
 
@@ -100,7 +100,7 @@ Sim, se a encomenda vier de fora da UE sem impostos pagos na compra. Segundo os 
 
 ### Quanto tempo demora a Landmark Global e como posso contactar o apoio?
 
-O prazo depende do serviço contratado pela loja e do país de origem. Em caso de atraso, extravio ou danos, a Landmark recomenda contactar primeiro o vendedor; o e-mail europeu de apoio ao cliente é `ClientservicesEU@landmarkglobal-group.com` (não existe telefone europeu para destinatários).
+Segundo a Landmark, o prazo varia consoante o serviço contratado pelo vendedor e o país de destino. Em caso de atraso, extravio ou danos, a Landmark recomenda contactar primeiro o vendedor; o e-mail europeu de apoio ao cliente é `ClientservicesEU@landmarkglobal-group.com` (não existe telefone europeu para destinatários).
 
 :::sources
 - [Landmark Global: Customer Support (Europe)](https://landmarkglobal.com/eu/en/customer-support/) – código LTN, contacto prioritário com o vendedor, morada após etiquetagem, seguro reservado às lojas, e-mail ClientservicesEU@landmarkglobal-group.com e moradas em Machelen e Feltham

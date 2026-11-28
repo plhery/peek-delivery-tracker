@@ -6,7 +6,7 @@ published: 2026-11-17
 updated: 2026-11-27
 ---
 
-Mondial Relay ist der französische Paketdienst der **InPost Group** für *Points Relais* (Paketshops), *Lockers* und Haustürzustellungen — im deutschsprachigen Raum begegnet er dir besonders bei Vinted-Käufen aus Frankreich, Belgien oder den Niederlanden. Gib deine 8-stellige Sendungsnummer zusammen mit der Postleitzahl der Lieferadresse oben im Suchfeld oder auf `mondialrelay.fr` ein (26-stellige Etikett-Barcodes funktionieren auch ohne Postleitzahl).
+Mondial Relay ist der französische Paketdienst der **InPost Group** für *Points Relais* (Paketshops), *Lockers* und Haustürzustellungen — im deutschsprachigen Raum begegnet er dir vor allem bei Bestellungen aus Frankreich, Belgien oder den Niederlanden, besonders auf Vinted. Gib deine 8-stellige Sendungsnummer zusammen mit der Postleitzahl der Lieferadresse oben im Suchfeld oder auf `mondialrelay.fr` ein (in Peek funktioniert der 26-stellige Etikett-Barcode auch ohne Postleitzahl).
 
 Im deutschsprachigen Raum begegnet dir Mondial Relay vor allem bei Bestellungen aus Frankreich, Belgien oder den Niederlanden, besonders auf [Vinted](guide:vinted-orders). Auf Vinted ist Deutschland mit Frankreich, Italien, den Niederlanden, Belgien und Österreich vernetzt, Österreich wiederum mit Deutschland, Italien und Frankreich: Gibt eine französische oder belgische Verkäuferin dein Paket in einem Point Relais oder Locker ab, kann es mit Mondial Relay (oder [Vinted Go](carrier:vinted-go)) unterwegs sein. Als Versandanbieter nennt Vinted in Deutschland [Hermes](carrier:hermes-de), [DPD](carrier:dpd-de), GLS, [DHL Paket](carrier:dhl) und DHL Express, in Österreich GLS, Hermes und DPD.
 
@@ -76,7 +76,7 @@ Peek zeigt die französischen Originalmeldungen von Mondial Relay unverändert a
 
 ### Wer stellt ein Mondial-Relay-Paket in Deutschland oder Österreich zu?
 
-Die InPost-Gruppe bedient auch Deutschland und Österreich. Bei integrierten Vinted-Bestellungen nennt Vinted in Deutschland [Hermes](carrier:hermes-de), [DPD](carrier:dpd-de), GLS, [DHL Paket](carrier:dhl) und DHL Express als Versandpartner, in Österreich GLS, Hermes und DPD; eine im Vinted-Chat angezeigte lokale Sendungsnummer kannst du zusätzlich in Peek eintragen.
+Laut InPost stellen die Paketdienste der Gruppe auch in Deutschland und Österreich zu. Bei integrierten Vinted-Bestellungen nennt Vinted in Deutschland [Hermes](carrier:hermes-de), [DPD](carrier:dpd-de), GLS, [DHL Paket](carrier:dhl) und DHL Express als Versandpartner, in Österreich GLS, Hermes und DPD; eine im Vinted-Chat angezeigte lokale Sendungsnummer kannst du zusätzlich in Peek eintragen.
 
 ### Kann ich ein Mondial-Relay-Paket ohne Postleitzahl verfolgen?
 

@@ -114,7 +114,7 @@ Usługa *Small parcel* dociera zazwyczaj w 2 do 5 dni roboczych od przyjęcia pr
 
 ### Jak skontaktować się z obsługą klienta Posti?
 
-Posti nie udostępnia adresu e-mail dla klientów — skorzystaj z czatu w aplikacji OmaPosti albo zadzwoń pod numer `0100 5577` (`+358 100 5577` z zagranicy). Pamiętaj też, że Posti nigdy nie wysyła linków do opłacenia cła (3 €/2 € i opłaty manipulacyjnej 3,10 €) w SMS-ach.
+Posti nie udostępnia adresu e-mail dla klientów — skorzystaj z czatu w aplikacji OmaPosti albo zadzwoń pod numer 0100 5577 (+358 100 5577 z zagranicy). Pamiętaj też, że Posti nigdy nie wysyła linków do opłacenia cła (3 €/2 €) ani opłaty manipulacyjnej (3,10 €).
 
 :::sources
 - [Posti: Picking up an item](https://www.posti.fi/en/receiving/picking-up-an-item) – kod JJFI, powiadomienia, przechowywanie (14 dni zagranica, 9 dni list), przedłużenie, automaty, kody, pełnomocnictwo, zwroty, telefon, czat

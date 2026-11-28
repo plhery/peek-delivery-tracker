@@ -81,7 +81,7 @@ PasarEX's tracker enforces a reCAPTCHA check per lookup and permits checks at mo
 
 ### How long do I have to file a damage or PQR claim with PasarEX in Colombia?
 
-Under CRC Resolution 5050/2016 and Law 1369/2009 published on [pasarex.com/co/soporte](https://pasarex.com/co/soporte/), recipients have **5 business days** after delivery to file spoliation or damage claims, while senders have 10 calendar days (domestic) or 6 months (international) for loss or damage. PasarEX normally responds to PQRs within 15 business days.
+Under CRC Resolution 5050/2016 and Law 1369/2009 published on [pasarex.com/co/soporte](https://pasarex.com/co/soporte/), recipients have **5 business days** after delivery to file spoliation or damage claims, while senders have 10 calendar days (domestic) or 6 months (international) for loss or damage. PasarEX normally resolves PQRs within 15 business days.
 
 ### How do I contact PasarEX customer service?
 

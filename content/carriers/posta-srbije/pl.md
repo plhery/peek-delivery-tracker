@@ -6,7 +6,7 @@ published: 2026-11-22
 updated: 2026-11-27
 ---
 
-Pošta Srbije (Poczta Serbska) to narodowy operator pocztowy Serbii, realizujący przesyłki krajowe, międzynarodowe oraz kurierską usługę Post Express. Wklej 13-znakowy numer przesyłki (otrzymany od nadawcy lub sklepu) w pole powyżej, albo sprawdź go bezpłatnie w [Track and Trace na posta.rs](https://www.posta.rs/eng/alati/pracenje-posiljke.aspx) lub w aplikacji Post of Serbia.
+Pošta Srbije (Poczta Serbska) to narodowy operator pocztowy Serbii, realizujący przesyłki krajowe, międzynarodowe oraz kurierską usługę Post Express. Wklej numer przesyłki (otrzymany od nadawcy lub sklepu) w pole powyżej, albo sprawdź go bezpłatnie w [Track and Trace na posta.rs](https://www.posta.rs/eng/alati/pracenje-posiljke.aspx) lub w aplikacji Post of Serbia.
 
 ## Numer przesyłki Pošta Srbije
 
@@ -101,7 +101,7 @@ Numery Post Express zaczynają się od `PE` i kończą na `RS` (np. `PE482917367
 
 ### Jak długo Pošta Srbije przechowuje paczkę na poczcie i w automacie?
 
-Na poczcie przesyłki czekają 5 dni roboczych (20 dni dla przesyłek z zagranicy i 30 dni dla poste restante), licząc od dnia po awizie, z możliwością pisemnego przedłużenia do 30 dni. W automacie *Poštin paketomat* paczka czeka 48 godzin (2 dni robocze według FAQ), po czym trafia do przypisanej placówki.
+Na poczcie przesyłki czekają 5 dni roboczych (20 dni dla przesyłek z zagranicy i 30 dni dla poste restante), licząc od dnia po awizie, z możliwością pisemnego przedłużenia do 30 dni. W automacie *Poštin paketomat* strona automatów podaje 48 godzin, a FAQ 2 dni robocze (licz krótszy termin); potem paczka trafia do przypisanej placówki.
 
 ### Co oznacza status `Delivered (to the sender)`?
 
@@ -109,7 +109,7 @@ Przesyłka została zwrócona i doręczona z powrotem nadawcy (nie odbiorcy), na
 
 ### Jaki jest numer telefonu i adres e-mail Pošta Srbije?
 
-Centrum Kontaktu działa pod numerami `0700 100 300` (Telekom Srbija) i `+381 11 3607 788` (z zagranicy i innych sieci; dni robocze 8:00–20:00, sob.–niedz. 8:00–15:00), a Post Express pod `0800 100 808` lub `+381 11 3607 607`. Ogólny e-mail to `contact@ptt.rs` (uszkodzenia zgłasza się jednak wyłącznie na poczcie przy odbiorze lub najpóźniej następnego dnia roboczego).
+Centrum Kontaktu działa pod numerami 0700 100 300 (Telekom Srbija), 011 3607 788 (inne sieci) i +381 11 3607 788 (z zagranicy), w dni robocze 8:00–20:00, w soboty i niedziele 8:00–15:00, a Post Express pod 0800 100 808 lub +381 11 3607 607. Ogólny e-mail to contact@ptt.rs (uszkodzenia zgłasza się jednak wyłącznie na poczcie przy odbiorze lub najpóźniej następnego dnia roboczego).
 
 :::sources
 - [Pošta Srbije: Item's Status Tracking](https://www.posta.rs/eng/alati/pracenje-posiljke.aspx) – rodzaje numerów, lista statusów, podpis, darmowe śledzenie, serbski i angielski, śledzenie za granicą, 0700 100 300

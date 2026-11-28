@@ -6,7 +6,7 @@ published: 2026-11-17
 updated: 2026-11-27
 ---
 
-Royal Mail est l'opérateur postal national du Royaume-Uni (son outil *Track your item* sur `royalmail.com` suit aussi les colis Parcelforce Worldwide). Si tu attends un colis britannique en France, en Belgique ou en Suisse, colle ton numéro `…GB` dans le champ ci-dessus ou sur `royalmail.com` pour traduire les statuts anglais, savoir quelle poste locale prend le relais et connaître les frais de douane applicables.
+Royal Mail est l'opérateur postal national du Royaume-Uni (son outil *Track your item* sur `royalmail.com` suit aussi les colis Parcelforce Worldwide). Si tu attends un colis britannique en France, en Belgique ou en Suisse, saisis ton numéro sur `royalmail.com` ou colle-le dans le champ ci-dessus. Cette page traduit les statuts anglais et indique quelle poste locale prend le relais et quels frais de douane s'appliquent.
 
 ## Numéro de suivi Royal Mail : formats et où le trouver
 
@@ -121,11 +121,11 @@ Le suivi n'évolue qu'au scan physique suivant, et plusieurs jours sans mise à 
 
 ### Que signifie `Customs charges raised` ou `Your item is currently with Customs` ?
 
-`Your item is currently with Customs in the destination country.` signale que ton colis passe la douane à l'arrivée. `Customs charges raised` indique que des taxes ou frais de dossier doivent être réglés avant la remise — règle-les uniquement sur le portail officiel de ta poste locale (ou auprès de Royal Mail sous 3 semaines au Royaume-Uni).
+`Your item is currently with Customs in the destination country.` signale que ton colis passe la douane à l'arrivée. `Customs charges raised` indique que des taxes ou frais de dossier doivent être réglés avant la remise — règle-les sur le portail officiel de ta poste locale (ou auprès de Royal Mail sous 3 semaines au Royaume-Uni).
 
 ### Un SMS demandant de payer des frais de livraison pour un colis Royal Mail est-il fiable ?
 
-En France, Cybermalveillance.gouv.fr rappelle que La Poste ne demande jamais de paiement par SMS ou e-mail pour livrer un colis (transfère le SMS au **33700**). En Belgique, bpost peut envoyer une invitation à payer des droits hors UE, mais ne paie jamais via un lien inconnu : connecte-toi directement dans *My bpost* ou *Track & Trace* (au Royaume-Uni : transfère au **7726**).
+En France, Cybermalveillance.gouv.fr rappelle que La Poste ne demande jamais de paiement par SMS ou e-mail pour livrer un colis (transfère le SMS au **33700**). En Belgique, bpost envoie une vraie invitation à payer les frais d'importation d'un colis hors UE par e-mail, SMS ou lettre : ne paie pas via un lien, connecte-toi directement dans *My bpost* ou *Track & Trace* (au Royaume-Uni : transfère au **7726**).
 
 :::sources
 - [Citizens Advice : Check Royal Mail collection and delivery times](https://www.citizensadvice.org.uk/consumer/post-and-parcels/post-collection-delivery-times/) – jours et horaires de livraison au Royaume-Uni, lettres 2nd Class un jour ouvré sur deux, Customer Service Points, téléphone et horaires

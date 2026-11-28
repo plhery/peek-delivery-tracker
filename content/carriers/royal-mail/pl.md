@@ -6,7 +6,7 @@ published: 2026-11-17
 updated: 2026-11-27
 ---
 
-Royal Mail to brytyjski narodowy operator pocztowy, którego wyszukiwarka *Track your item* na `royalmail.com` śledzi również przesyłki Parcelforce Worldwide — a w Polsce paczki z końcówką `…GB` przejmuje [Poczta Polska](carrier:poczta-polska). Wklej numer śledzenia z brytyjskiego sklepu w polu powyżej lub wpisz go na `royalmail.com`, aby przetłumaczyć angielskie statusy i sprawdzić należności celno-podatkowe.
+Royal Mail to brytyjski narodowy operator pocztowy, którego wyszukiwarka *Track your item* na `royalmail.com` śledzi również przesyłki Parcelforce Worldwide — a w Polsce paczki z końcówką `…GB` przejmuje [Poczta Polska](carrier:poczta-polska). Wklej numer śledzenia z brytyjskiego sklepu w polu powyżej lub wpisz go na `royalmail.com`. Ta strona tłumaczy angielskie statusy i wyjaśnia należności celno-podatkowe.
 
 ## Numer śledzenia Royal Mail: formaty i gdzie go znaleźć
 
@@ -109,11 +109,11 @@ Nowy wpis pojawia się dopiero po kolejnym fizycznym skanie, a kilka dni przerwy
 
 ### Co oznacza `Customs charges raised` lub `Your item is currently with Customs`?
 
-`Your item is currently with Customs in the destination country.` oznacza odprawę celną w kraju docelowym. `Customs charges raised` sygnalizuje naliczenie opłat importowych — w Polsce Poczta Polska pobiera je przed doręczeniem lub przy odbiorze (w Wielkiej Brytanii Royal Mail wysyła rachunek i trzyma paczkę ok. 3 tygodnie).
+`Your item is currently with Customs in the destination country.` oznacza odprawę celną w kraju docelowym. `Customs charges raised` sygnalizuje naliczenie opłat importowych — w Polsce Poczta Polska może je pobrać przed doręczeniem lub przy odbiorze (w Wielkiej Brytanii Royal Mail wysyła rachunek i trzyma paczkę ok. 3 tygodnie).
 
 ### Czy SMS z linkiem do opłaty za paczkę z Wielkiej Brytanii jest prawdziwy?
 
-Nie klikaj linków w niespodziewanych SMS-ach: Poczta Polska ostrzega, że nie wysyła linków płatniczych w SMS-ach. Zawsze sprawdzaj status ręcznie na `poczta-polska.pl/sledzenie-przesylek`, a podejrzane wiadomości w Polsce przekazuj na numer **8080** lub `incydent.cert.pl` (w Wielkiej Brytanii na **7726**).
+Nie klikaj linków w niespodziewanych SMS-ach: Poczta Polska ostrzega, że Pocztex nigdy nie wysyła SMS-ów z linkami do płatności. Zawsze sprawdzaj status ręcznie na `poczta-polska.pl/sledzenie-przesylek`, a podejrzane wiadomości w Polsce przekazuj na numer **8080** lub `incydent.cert.pl` (w Wielkiej Brytanii na **7726**).
 
 :::sources
 - [Citizens Advice: Check Royal Mail collection and delivery times](https://www.citizensadvice.org.uk/consumer/post-and-parcels/post-collection-delivery-times/) – dni i godziny doręczeń w Wielkiej Brytanii, doręczanie listów 2nd Class co drugi dzień roboczy, Customer Service Points oraz infolinia

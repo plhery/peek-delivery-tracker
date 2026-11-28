@@ -1,6 +1,6 @@
 ---
 title: Morning Global tracking: BR…MG numbers, statuses, contact
-description: Track a Morning Global (MG) parcel: BR…MG number format, status meanings like Handed Over for Delivery, local delivery partners and customer service contact.
+description: Track a Morning Global (MG) parcel: BR…MG numbers, status meanings like Handed Over for Delivery, local delivery partners and customer service contact.
 slug: morning-global-tracking
 published: 2026-11-02
 updated: 2026-11-27

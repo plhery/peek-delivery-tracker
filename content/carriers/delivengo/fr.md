@@ -91,7 +91,7 @@ C'est la poste de ton pays qui assure la livraison finale avec le même numéro 
 
 ### Qui contacter si mon colis Delivengo est en retard ou perdu ?
 
-Contacte d'abord la boutique, qui a expédié le colis depuis son compte Delivengo. Pour une réclamation auprès de La Poste, l'Arcep indique le 3631 ou le +33 810 821 821 (ainsi que son site, le courrier ou un point de contact postal), et une fois le colis dans ton pays tu peux aussi interroger ta poste locale avec le même numéro.
+Contacte d'abord la boutique, qui a expédié le colis depuis son compte Delivengo. Pour une réclamation auprès de La Poste, l'Arcep indique le 3631 ou le +33 810 821 821 (ainsi que son site, le courrier ou un point de contact postal), sans dire si ces canaux traitent les colis Delivengo. Une fois le colis dans ton pays, tu peux aussi interroger ta poste locale avec le même numéro.
 
 :::sources
 - [Universal Parcel Scraper : Delivengo](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/delivengo) – service d'export de La Poste, dernier kilomètre par la poste du pays, historique muet après l'export, espace client de la boutique, pas de règle de numéro propre

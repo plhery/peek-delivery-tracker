@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-Ein Temu-Paket verfolgst du nicht mit der Temu-Bestellnummer (`PO-…`), sondern mit der Sendungsnummer des Paketdienstes unter „Deine Bestellungen“ → „Verfolgen“. Fügst du diese Sendungsnummer in [Peek](/) ein, erkennt Peek den passenden unter mehr als 4.500 Paketdiensten und folgt dem Partner vor Ort, sobald der erste Dienst ihn nennt. Gibst du stattdessen die `PO`-Bestellnummer ein, sagt dir Peek, dass sie nach einer Temu-Bestellnummer aussieht und nicht nach einer Sendungsnummer.
+Ein Temu-Paket verfolgst du nicht mit der Temu-Bestellnummer (`PO-…`), sondern mit der Sendungsnummer des Paketdienstes unter „Deine Bestellungen“ → „Verfolgen“. Fügst du diese Sendungsnummer in [Peek](/) ein, erkennt Peek den passenden unter mehr als 4.500 Paketdiensten. Nennt der erste Paketdienst einen Partner vor Ort, folgt Peek ihm, sobald dessen Tracking neue Schritte zeigt. Gibst du stattdessen die `PO`-Bestellnummer ein, sagt dir Peek, dass sie nach einer Temu-Bestellnummer aussieht und nicht nach einer Sendungsnummer.
 
 ## Kann ich mein Temu-Paket mit der Bestellnummer verfolgen?
 

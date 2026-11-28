@@ -6,7 +6,7 @@ published: 2026-11-18
 updated: 2026-11-27
 ---
 
-Pengyou (捧友, 深圳市捧友供应链有限公司, nel logo inglese Shenzhen Pony Supply Chain Co., Ltd) è uno spedizioniere di Shenzhen che trasporta pacchi per via aerea verso Europa e Stati Uniti per venditori online ed esportatori. Per tracciare un codice con suffisso `PY` (come `ZXA…PY`), incollalo nel campo qui sopra o inseriscilo nel riquadro `运单查询` su szpy56.com; tieni presente che la sua piattaforma può scrivere in anticipo tutte le tappe fino alla consegna.
+Pengyou (捧友, 深圳市捧友供应链有限公司, nel logo inglese Shenzhen Pony Supply Chain Co., Ltd) è uno spedizioniere di Shenzhen che trasporta pacchi per via aerea verso Europa e Stati Uniti per venditori online ed esportatori. Per tracciare una spedizione, incolla il codice nel campo qui sopra (Peek riconosce subito i codici `ZXA`, nove cifre e `PY`) o inseriscilo, anche come riferimento del negozio, nel riquadro `运单查询` su szpy56.com; tieni presente che la sua piattaforma può scrivere in anticipo tutte le tappe fino alla consegna.
 
 ## Numero di tracciamento Pengyou: com'è fatto
 

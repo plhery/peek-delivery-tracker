@@ -109,11 +109,11 @@ O Peek não tem forma de saber: nem as etapas do sistema nem o site da Xinghe in
 
 ### Porque é que o código GZXH…YQ não mostra etapas ou marca Delivered sem entrega?
 
-O sistema pode ainda não ter registos físicos, ou ter apenas etapas escritas com antecedência (incluindo um `Delivered` final) que o Peek retém e só lista a cinzento em «Ver». Para um código que o sistema não conhece, o Peek mostra «À espera de Xinghe Freight» e, dois dias depois, «Verifica o número de seguimento». Confirma o código com a loja e, se nada surgir ou nada chegou, contacta o vendedor.
+O sistema pode ainda não ter registos físicos, ou ter apenas etapas escritas com antecedência (incluindo um `Delivered` final) que o Peek retém e só lista a cinzento em «Ver». Para um código que o sistema não conhece, o Peek mostra «À espera de Xinghe Freight» e, dois dias depois, «Verifica o número de seguimento». Confirma o código com a loja e, se nada surgir ao fim de alguns dias ou a encomenda não chegar, contacta o vendedor.
 
 ### Como contactar a Xinghe Freight se a encomenda não chegar?
 
-Fala primeiro com a loja ou o marketplace onde compraste, porque o cliente da Xinghe é o vendedor. O site chinês xinghe-express.cn publica apenas a linha `19924483103` (`+86 199 2448 3103`) e o e-mail comercial `3975605292@qq.com`, sem apoio dedicado a destinatários particulares no estrangeiro.
+Fala primeiro com a loja ou o marketplace onde compraste, porque o cliente da Xinghe é o vendedor. O site chinês xinghe-express.cn publica a linha `19924483103` (`+86 199 2448 3103`) e o e-mail comercial `3975605292@qq.com`, sem apoio dedicado a destinatários particulares no estrangeiro.
 
 :::sources
 - [Xinghe Freight: 广州星和货运代理有限公司 (página inicial, em chinês)](http://xinghe-express.cn/) – denominação social, serviços de trânsito internacional, caixa de pesquisa ligada ao sistema da GZYL, telefone e e-mail

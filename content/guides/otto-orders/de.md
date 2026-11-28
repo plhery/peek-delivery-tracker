@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-Wo deine OTTO-Bestellung gerade ist, siehst du in „Mein Konto“ unter „Bestellungen“ über den Link „Sendungsverfolgung“ am jeweiligen Artikel (oder per Push-Nachricht in der OTTO-App) – deine Kundennummer auf der Rechnung ist keine Sendungsnummer. Pakete vom Verkäufer OTTO liefern meist [Hermes](carrier:hermes-de) oder [DHL](carrier:dhl) (1–2 Werktage), Möbel und Großgeräte bringt Hermes im 2-Mann-Handling per Spedition (2–3 Werktage), während Marktplatz-Verkäufer ihren Paketdienst selbst wählen und dir eine eigene Sendungsnummer geben.
+Wo deine OTTO-Bestellung gerade ist, siehst du in „Mein Konto“ unter „Bestellungen“ über den Link „Sendungsverfolgung“ am jeweiligen Artikel (oder per Push-Nachricht in der OTTO-App) – deine Kundennummer auf der Rechnung ist keine Sendungsnummer. Pakete vom Verkäufer OTTO liefern meist [Hermes](carrier:hermes-de) oder [DHL](carrier:dhl), in der Regel in 1–2 Werktagen. Speditionsartikel vom Verkäufer OTTO bringt Hermes im 2-Mann-Handling (in der Regel 2–3 Werktage), solche direkt vom Lieferanten eine Spedition bis zur Bordsteinkante. Marktplatz-Verkäufer wählen ihren Paketdienst selbst und geben dir eine eigene Sendungsnummer.
 
 ## Welcher Paketdienst liefert meine OTTO-Bestellung?
 

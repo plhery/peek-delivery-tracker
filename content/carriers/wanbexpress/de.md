@@ -6,7 +6,7 @@ published: 2026-11-21
 updated: 2026-11-27
 ---
 
-Verfolge ein WanbExpress-Paket (auch Wanb Express, WanBang Express oder WANB) aus China mit seiner 17-stelligen Nummer (`WNB`, zwei Buchstaben, zehn Ziffern und `YQ`) oben im Feld oder unter tracking.wanbexpress.com. WanbExpress befördert die Sendung ab dem Sortierzentrum in Shenzhen durch den Zoll und übergibt sie an einen lokalen Zusteller (in Deutschland laut Peek-Verläufen etwa iMile): Den Namen und die Nummer des Zustellers sowie eventuelle Zustellfotos zeigt tracking.wanbexpress.com an.
+Verfolge ein WanbExpress-Paket (auch Wanb Express, WanBang Express oder WANB) aus China mit seiner 17-stelligen Nummer (`WNB`, zwei Buchstaben, zehn Ziffern und `YQ`) oben im Feld oder unter tracking.wanbexpress.com. WanbExpress befördert die Sendung ab dem Sortierzentrum in Shenzhen durch den Zoll und übergibt sie an einen lokalen Zusteller (in Deutschland laut Peek-Verläufen etwa iMile): Den Namen und die Nummer des Zustellers sowie ein Zustellfoto kann tracking.wanbexpress.com anzeigen.
 
 ## WanbExpress-Sendungsnummer: So sieht sie aus
 
@@ -116,11 +116,11 @@ Füge die gesamte `WNB…YQ`-Nummer oben in Peek ein (ohne Postleitzahl oder Kon
 
 ### Was bedeuten „Customs declaration completed“ und „Custom clearance completed“?
 
-`Customs declaration completed` meldet nur eine abgeschlossene Zollanmeldung ohne Landesangabe und ist noch keine Einfuhrfreigabe; erst `Custom clearance completed` bestätigt die Freigabe durch den Einfuhrzoll. Für EU-Bestellungen außerhalb der EU gelten seit 1. Juli 2026 3 € Zoll pro Artikel (bis 150 €) sowie seit 1. November 2026 2 € EU-Bearbeitungsgebühr pro Artikel.
+`Customs declaration completed` meldet nur eine abgeschlossene Zollanmeldung ohne Landesangabe und ist noch keine Einfuhrfreigabe; erst `Custom clearance completed` bestätigt die Freigabe durch den Einfuhrzoll. Für Online-Bestellungen aus Ländern außerhalb der EU gelten seit 1. Juli 2026 vorübergehend 3 € Zoll pro Artikel (Warenart) für Sendungen bis 150 € sowie seit 1. November 2026 2 € EU-Bearbeitungsgebühr pro Artikel, unabhängig vom Wert.
 
 ### Wer liefert WanbExpress-Pakete in Deutschland und Europa aus?
 
-Ein lokaler Paketdienst, der auf tracking.wanbexpress.com genannt werden kann. In den im Peek-Code hinterlegten Verläufen erscheinen iMile in Deutschland, InPost im Vereinigten Königreich, Poste Italiane in Italien sowie `DOFR…HD`/`CNFR…HD`-Nummern in Frankreich; sonst frag den Verkäufer.
+Ein lokaler Paketdienst, der auf tracking.wanbexpress.com genannt werden kann. In den im Peek-Code hinterlegten Verläufen erscheinen bei einer Sendung nach Deutschland iMile und ein Scan im Netz von Poste Italiane, InPost im Vereinigten Königreich, `DOFR…HD`/`CNFR…HD`-Nummern in Frankreich und J&T Express Australia in Australien; sonst frag den Verkäufer.
 
 ### Wen kontaktiere ich, wenn mein WanbExpress-Paket hängt oder fehlt?
 

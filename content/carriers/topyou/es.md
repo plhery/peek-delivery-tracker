@@ -111,7 +111,7 @@ Porque la web de TopYou añade el país de destino junto a sus propios escaneos 
 
 ### ¿Quién reparte los paquetes de TopYou en España?
 
-Los datos de TopYou pueden incluir el número del transportista local (`Lastmile Number:` en las líneas postales), pero no su nombre: pregúntale a la tienda qué empresa entrega en España. Si ese segundo código es un número postal internacional válido, Peek lo comprueba automáticamente en [Correos](carrier:correos-spain).
+Los datos de TopYou pueden incluir el número del transportista local (`Lastmile Number:` en las líneas postales), pero no su nombre: pregúntale a la tienda qué empresa entrega en España. Si ese segundo código es un número postal internacional válido, Peek lo comprueba automáticamente en [Correos](carrier:correos-spain), aunque eso no demuestra que sea Correos quien lo entrega.
 
 ### ¿Cuánto se paga de aduanas en España por un paquete de TopYou?
 
@@ -119,7 +119,7 @@ Desde el 1 de julio de 2026, los envíos online de hasta 150 € desde fuera de 
 
 ### ¿A quién reclamo si mi paquete de TopYou no llega o está parado?
 
-Contacta con la tienda o el marketplace donde compraste: es quien contrató el envío con TopYou. La web de TopYou (`szty56.com`) solo publica un teléfono comercial en Shenzhen (`+86 755 8181 9898`, 9:00–18:00 en días hábiles) sin atención al destinatario.
+Contacta con la tienda o el marketplace donde compraste: es quien contrató el envío con TopYou. La web de TopYou (`szty56.com`) solo publica un teléfono en Shenzhen (`+86 755 8181 9898`, 9:00–18:00 en días hábiles) sin atención al destinatario.
 
 :::sources
 - [TopYou: 通邮集团 (portada, en chino)](https://www.szty56.com/) – teléfono, horario

@@ -113,7 +113,7 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ### Is CNE Express (递一物流) legit?
 
-Yes. CNE EXPRESS CO LTD (递一国际物流有限公司), founded in 2003 and headquartered in Shanghai, runs sorting centres in Jiaxing and Dongguan with capacity for over 2 million shipments a day since 2020, shipping for sellers on Amazon, eBay, Walmart, TikTok, Temu and SHEIN.
+Yes. CNE EXPRESS CO LTD (递一国际物流有限公司), founded in 2003 and headquartered in Shanghai, runs sorting centres in Jiaxing and Dongguan that have been able to process more than 2 million shipments a day since 2020, it says, and ships for sellers on Amazon, eBay, Walmart, TikTok, Temu and SHEIN.
 
 ### Who delivers CNE Express parcels and where is the last-mile tracking number?
 
@@ -129,7 +129,7 @@ CNE's service pages give reference times of 3 to 8 business days for CNE Priorit
 
 ### How do I contact CNE Express about a stuck or missing parcel?
 
-Ask the seller first, since the seller holds the contract with CNE. To reach CNE directly, call its Chinese hotline `400-021-5600` (or Shanghai office `021-5109 6677`, Mon–Sun 08:30–18:00) or submit the consulting form on [cne.com/en/about/contact](https://www.cne.com/en/about/contact) under `Complaint`.
+Ask the seller first, since the seller holds the contract with CNE. To reach CNE directly, call its Chinese hotline `400-021-5600` or its Shanghai office `021-5109 6677` (08:30 to 18:00, Monday to Sunday, no time zone given), or submit the consulting form on [cne.com/en/about/contact](https://www.cne.com/en/about/contact) under `Complaint`.
 
 :::sources
 - [CNE: Track your parcel](https://www.cne.com/en/track) – tracker, status labels, lines, Shipment Information, View POD

@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Aby sprawdzić, gdzie jest przesyłka ORLEN Paczka (dawniej Paczka w RUCHu; 5000 automatów paczkowych i 11 000 punktów odbioru w Polsce), wklej 13-cyfrowy numer paczki zaczynający się od `210` w pole powyżej albo na orlenpaczka.pl. Paczki ze sklepów docierają zwykle w 1 dzień roboczy, a na odbiór masz 3 dni robocze od pierwszego SMS-a lub e-maila z kodem odbioru (przesyłki Allegro Delivery z numerem `AD` śledzisz w aplikacji Allegro). Infolinia ORLEN Paczki działa pod numerem `22 33 33 999`.
+Aby sprawdzić, gdzie jest przesyłka ORLEN Paczka (dawniej Paczka w RUCHu; według ORLEN-u 5000 automatów paczkowych i 11 000 punktów odbioru w Polsce), wklej 13-cyfrowy numer paczki zaczynający się od `210` w pole powyżej albo na orlenpaczka.pl. Według ORLEN Paczki przesyłki ze sklepów docierają do punktu zwykle w 1 dzień roboczy, a na odbiór masz 3 dni robocze od pierwszego SMS-a lub e-maila z kodem odbioru (przesyłki Allegro Delivery z numerem `AD` śledzisz w aplikacji Allegro). Infolinia ORLEN Paczki działa pod numerem `22 33 33 999`.
 
 ## Gdzie jest numer paczki ORLEN Paczka
 
@@ -93,7 +93,7 @@ W powiadomieniach możesz wybrać „Każdy skan”, „Ważne etapy” albo „
 
 ### Czy ORLEN Paczka to dawniej Paczka w RUCHu?
 
-Tak: w 2021 roku ORLEN Paczka zastąpiła usługę Paczka w Ruchu, a RUCH został jej partnerem logistycznym. Dziś sieć obejmuje w Polsce 5000 automatów paczkowych i 11 000 punktów nadawczo-odbiorczych.
+Tak: w 2021 roku ORLEN Paczka zastąpiła usługę Paczka w Ruchu, a RUCH został jej partnerem logistycznym. Według ORLEN-u sieć obejmuje dziś w Polsce 5000 automatów paczkowych i 11 000 punktów nadawczo-odbiorczych.
 
 ### Ile czasu mam na odbiór paczki ORLEN Paczka i co zrobić bez kodu SMS?
 
@@ -101,11 +101,11 @@ Masz 3 dni robocze od pierwszego SMS-a lub e-maila z kodem odbioru (dotyczy to t
 
 ### Czy ORLEN Paczka dostarcza do domu i ile trwa dostawa?
 
-ORLEN Paczka obsługuje dostawy do automatów i punktów odbioru (bez dostawy pod drzwi i bez płatności za pobraniem). Przesyłki ze sklepów docierają według ORLEN Paczki w 1 dzień roboczy (98% paczek), a przesyłki prywatne i z Vinted w 1–3 dni robocze.
+ORLEN opisuje ORLEN Paczkę jako dostawę do automatów i punktów odbioru: o dostawie pod drzwi jej strony nie wspominają, a płatności za pobraniem nie ma. Przesyłki ze sklepów docierają według ORLEN Paczki w 1 dzień roboczy (98% paczek), a przesyłki prywatne i z Vinted w 1–3 dni robocze.
 
 ### Jak śledzić paczkę ORLEN Paczka z Allegro Delivery lub wysłaną za granicę z Vinted?
 
-Przesyłki z Allegro Delivery mają numer zaczynający się od `AD` i śledzisz je w aplikacji Allegro (sekcja „Moje przesyłki”), nie przez numer `210`. ORLEN Paczka doręcza tylko w Polsce; gdy paczka z Vinted dostanie status przekazania za granicę, dalszą trasę pokazuje aplikacja Vinted.
+Przesyłki z Allegro Delivery mają numer zaczynający się od `AD` i śledzisz je w Allegro, w aplikacji (sekcja „Moje przesyłki”) albo na allegro.pl, nie przez numer `210`. ORLEN Paczka doręcza tylko w Polsce; gdy paczka z Vinted dostanie status przekazania za granicę, dalszą trasę pokazuje aplikacja Vinted.
 
 ### Jaki jest numer infolinii ORLEN Paczka i jak złożyć reklamację?
 

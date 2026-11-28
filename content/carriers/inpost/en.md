@@ -101,15 +101,15 @@ In the UK, InPost numbers usually start with `JD` or `JJD` (followed by 16 digit
 
 ### Where is my InPost locker collection code or 6-digit PIN?
 
-InPost UK emails and texts a 9-digit collection code (also under Tracking → Receiving in the InPost app, which also supports Remote Opening). InPost Portugal sends a 6-digit PIN and QR code by email or SMS; in Italy check InPost's pickup email or the app ("Apri a distanza"), and in Poland check the InPost Mobile app.
+InPost UK emails and texts a 9-digit collection code (also under Tracking → Receiving in the InPost app, which also supports Remote Opening). InPost Portugal sends a 6-digit PIN and QR code by email or SMS; in Italy check InPost's pickup email (the app's "Apri a distanza" opens the locker within about 70 metres), and in Poland check the InPost Mobile app.
 
 ### How long does InPost take to deliver and keep parcels in a locker?
 
-InPost UK tells senders delivery takes up to 3 working days to a locker or shop and 4 to a home. Once `Delivery day, yay!` appears, UK lockers and shops hold the parcel for 3 days (no extension), Italy about 3 days, and Portugal 5 calendar days (some pages say 8) before returning it to the sender.
+InPost UK tells senders delivery takes up to 3 working days to a locker or shop and 4 to a home. UK lockers and shops hold the parcel for 3 days once `Delivery day, yay!` appears (no extension), Italy usually about 3 days, and Portugal 5 calendar days for domestic parcels (some pages say 8), before it goes back to the sender.
 
 ### How do I contact InPost customer service?
 
-UK: `0330 335 0950` (Mon–Fri 7am–10pm, weekends 8am–8pm) or "Leave a message" on [inpost.co.uk/yodel-help](https://inpost.co.uk/yodel-help). Poland: `+48 722 444 000` / `+48 746 600 000` or InPost Mobile AI chat. Italy: `+39 0238582894` (Mon–Sat 8:00–20:00) or `servizioclienti@inpost24.it`. Portugal: `211 245 624` (weekdays 9:00–18:00). For refunds, contact the shop or marketplace.
+UK: `0330 335 0950` (Mon–Fri 7am–10pm, weekends 8am–8pm) or "Leave a message" on [inpost.co.uk/yodel-help](https://inpost.co.uk/yodel-help). Poland: `+48 722 444 000` / `+48 746 600 000` or InPost Mobile AI chat. Italy: `+39 0238582894` (Mon–Sat 8:00–20:00) or `servizioclienti@inpost24.it`. Portugal: `211 245 624` (weekdays 9:00–18:00). In the UK, InPost says refunds are handled by the retailer or marketplace.
 
 :::sources
 - [InPost UK: Tracking a parcel page](https://inpost.co.uk/tracking) – 72 hours, international parcels, codes, Tracking → Receiving, Remote Opening, delivery times (read 9 November 2026)

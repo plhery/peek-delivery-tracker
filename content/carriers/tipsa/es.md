@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Para hacer el seguimiento de un envío TIPSA (Transporte Integral de Paquetería, red Geopost con más de 330 agencias en España, Portugal y Andorra), pega el número completo de 22 dígitos en la casilla de arriba o introdúcelo con tu código postal en el [localizador de tip-sa.com](https://www.tip-sa.com/es/localizacion-envios) — el albarán suelto de 10 dígitos no funciona. Tras un estado `Ausente`, TIPSA hace un segundo intento el siguiente día hábil y guarda el paquete 15 días en agencia (7 días en puntos Pickup); su teléfono gratuito es `900 10 10 47`.
+Para hacer el seguimiento de un envío TIPSA (Transporte Integral de Paquetería, red Geopost con más de 330 agencias en España, Portugal y Andorra), pega el número completo de 22 dígitos en la casilla de arriba o introdúcelo con tu código postal en el [localizador de tip-sa.com](https://www.tip-sa.com/es/localizacion-envios) — el albarán suelto de 10 dígitos no funciona. Tras un estado `Ausente`, TIPSA hace un segundo intento el siguiente día hábil, y si prefieres recogerlo, la delegación lo guarda 15 días desde su salida; su teléfono es `900 10 10 47`.
 
 ## Número de envío TIPSA: cómo es y dónde está
 
@@ -114,7 +114,7 @@ Tras un `Ausente`, TIPSA intenta una segunda entrega el siguiente día hábil (2
 
 ### ¿Cuál es el teléfono gratuito de TIPSA y a quién reclamo?
 
-Las preguntas frecuentes de TIPSA dan el teléfono gratuito `900 10 10 47` (la página de contacto añade `902 10 10 47`), el correo `info@tip-sa.com` y el [formulario de contacto](https://www.tip-sa.com/es/contacto). Para pérdida, daño o cambio de dirección, contacta siempre con la tienda remitente.
+Las preguntas frecuentes de TIPSA dan el teléfono `900 10 10 47` (la página de contacto añade `902 10 10 47`; TIPSA no indica horario ni coste de la llamada), el correo `info@tip-sa.com` y el [formulario de contacto](https://www.tip-sa.com/es/contacto). Para pérdida, daño o cambio de dirección, contacta siempre con la tienda remitente.
 
 :::sources
 - [TIPSA: Localizar mi envío](https://www.tip-sa.com/es/localizacion-envios) – número de 22 cifras, formulario, búsqueda por referencia con identificador (agencia y cliente), teléfono del pie de página

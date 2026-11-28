@@ -168,8 +168,7 @@ function withoutServiceData(row: JsonObject): JsonObject {
   // schedule (GZYL) delivers nothing itself: the partner that only has the parcel announced is why the apps tell the
   // reader to ask the seller (`scheduledDelivery`).
   const announced = named !== null && deliveryAnnounced(named) && (SCHEDULED_DELIVERIES.has(String(row.carrier) as CarrierId)
-    || !['delivered', 'returned'].includes(String(row.current_stage ?? currentScan(shownEvents(row)
-      .filter((event) => event.stage !== 'pending').sort(newestFirst))?.stage ?? '')));
+    || !['delivered', 'returned'].includes(shownStage(row) ?? ''));
   if (!stored || !named || !(SERVICE_DATA.some((key) => key in stored) || apart)) return row;
   const data: JsonObject = { ...named, ...announced ? { delivery_announced: true } : {} };
   for (const key of SERVICE_DATA) delete data[key];
@@ -237,6 +236,16 @@ export function shownEvents(row: JsonObject): JsonObject[] {
   const kept = events.filter((event) => !copied.has(String(event.id)) && !restated.has(String(event.id)));
   const twins = wordingTwins(kept);
   return timeline(kept.filter((event) => !twins.has(String(event.id)) && (!placeholder || isOwnRow(event))));
+}
+
+/**
+ * The stage a stored row's page heads with: the row's own, or where it has none (an account's read) the stage its shown
+ * scans give as the apps read them (`currentScan`), Peek's own rows aside.
+ */
+export function shownStage(row: JsonObject): string | null {
+  const stage = row.current_stage
+    ?? currentScan(shownEvents(row).filter((event) => event.stage !== 'pending').sort(newestFirst))?.stage;
+  return typeof stage === 'string' ? stage : null;
 }
 
 /**

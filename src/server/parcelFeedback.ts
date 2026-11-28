@@ -1,7 +1,7 @@
 import 'server-only';
 
 import { EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
-import { shownEvents, withoutPlaceholderAnswers } from './eventPlaces';
+import { shownEvents, shownStage, withoutPlaceholderAnswers } from './eventPlaces';
 import { recordParcelFeedback } from './metrics';
 import { logOperationalEvent } from './observability';
 import { servedWrittenAhead, servedWrittenSteps } from './plannedSteps';
@@ -26,7 +26,7 @@ function cut(value: unknown, limit: number): string | null {
 
 /**
  * What the service holds about a parcel when an answer arrives: its stage,
- * which heads its page, its carrier's status line, its last check and its newest scans, as its timeline shows them: without
+ * which heads its page (`shownStage`: an account's read has none of its own), its carrier's status line, its last check and its newest scans, as its timeline shows them: without
  * a provider's copies of its carrier's scans, or Peek's own "Tracking added"
  * once carrier scans reach back to it, the carrier the page says writes the
  * timeline in advance (`written_ahead_by`) and the newest steps it wrote that the page
@@ -51,7 +51,7 @@ export function shownParcel(row: JsonObject): JsonObject {
     occurred_at: cut(event.occurred_at, 40),
   });
   return {
-    stage: cut(row.current_stage, 40),
+    stage: cut(shownStage(row), 40),
     status: cut(row.last_status_text, 300),
     sync_status: cut(row.sync_status, 40),
     sync_error: cut(row.sync_error, 200),

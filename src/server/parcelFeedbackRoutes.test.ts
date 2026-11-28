@@ -322,6 +322,18 @@ describe('an answer from an account', () => {
     expect(counted).toHaveBeenCalledExactlyOnceWith('right', 'account', 'web', 'stored');
   });
 
+  it('holds the stage its page heads with, which an account\'s read leaves to its scans', async () => {
+    const read = storedPackage();
+    delete read.current_stage;
+    const added = { id: 'e0', package_id: packageId, stage: 'pending', description: 'Tracking added', location: null, occurred_at: '2026-10-02T09:00:00+00:00', provider_event_id: 'app:pending' };
+    vi.spyOn(SupabaseUserClient.prototype, 'getPackage')
+      .mockResolvedValueOnce({ ...read, tracking_events: [added, (read.tracking_events as JsonObject[])[0]!] })
+      .mockResolvedValueOnce({ ...read, tracking_events: [added] });
+    expect((await viaAccount(answer())).status).toBe(204);
+    expect((await viaAccount(answer())).status).toBe(204);
+    expect(record.mock.calls.map((call: unknown[]) => ((call[0] as JsonObject).shown as JsonObject).stage)).toEqual(['accepted', null]);
+  });
+
   it('is kept from the Android app under its own name', async () => {
     vi.spyOn(SupabaseUserClient.prototype, 'getPackage').mockResolvedValue(storedPackage());
     const counted = vi.spyOn(metrics, 'recordParcelFeedback');

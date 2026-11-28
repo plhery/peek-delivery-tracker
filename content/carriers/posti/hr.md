@@ -10,7 +10,7 @@ Posti je finski nacionalni poštanski i paketni prijevoznik (a u Estoniji, Latvi
 
 ## Posti broj za praćenje: JJFI item ID
 
-Posti ovaj broj naziva «item ID» (ponekad «shipment ID»). Za vlastite Posti pakete počinje s `JJFI`. Postijeva web-stranica ima i englesku verziju («EN» na vrhu stranice).
+Posti ovaj broj naziva „item ID“ (ponekad „shipment ID“). Za vlastite Posti pakete počinje s `JJFI`. Postijeva web-stranica ima i englesku verziju („EN“ na vrhu stranice).
 
 | Broj (izmišljeni) | Što predstavlja |
 | --- | --- |
@@ -36,19 +36,19 @@ Postijevo praćenje prikazuje statuse na engleskom, finskom ili švedskom jeziku
 | `The item is in sorting` | U sortirnom centru. Paketi se obično sortiraju jednom ili dvaput, a češće na duljim rutama. |
 | `Item accepted from transport` | Još uvijek u tijeku dostave. Nije isporučeno unatoč formulaciji. |
 | `Item is routed to an outlet because the locker was full.` | Odabrani paketomat bio je pun pa pošiljka ide u Posti poslovnicu ili preuzimno mjesto. |
-| `Item is in delivery transportation.` | U dostavnom je vozilu na putu prema vama. Peek prikazuje "Out for delivery". |
+| `Item is in delivery transportation.` | U dostavnom je vozilu na putu prema vama. Peek prikazuje „Out for delivery“. |
 | `Item is ready for a pick up` | Čeka na preuzimanje. Obavijest o prispijeću sadrži lokaciju i kod. |
 | `We sent the recipient a text message about the item` | Posti vam je poslao SMS. Sama pošiljka se nije pomaknula. |
-| `The item has been delivered` | Isporučeno, uključujući i nakon što ste ga preuzeli iz paketomata. |
+| `The item has been delivered` | Isporučeno, uključujući i nakon što ste ga preuzeli. |
 | `Item delivered to the recipient.` | Uručeno primatelju. |
 
-Status `Item accepted from transport` zbunjuje mnoge korisnike. Posti objašnjava da je riječ o unutarnjoj transportnoj oznaci: dostava je još u tijeku i nitko još nije uručio paket. Skeniranja u inozemstvu u svim jezicima nose oznaku lokacije `ULKOMAILLA` (finsko za «u inozemstvu»).
+Status `Item accepted from transport` zbunjuje mnoge korisnike. Posti objašnjava da je riječ o unutarnjoj transportnoj oznaci: dostava je još u tijeku i nitko još nije uručio paket. Skeniranja u inozemstvu u svim jezicima nose oznaku lokacije `ULKOMAILLA` (finsko za „u inozemstvu“).
 
 ## Posti paketomati, preuzimanje i propuštene dostave
 
 **Obavijest o prispijeću.** Kad pošiljka stigne u paketomat (Parcel Locker) ili na preuzimno mjesto, Posti šalje podatke i kod za otvaranje u aplikaciji OmaPosti, SMS-om i e-poštom. Preuzmite je u roku od 5 dana. Neke pošiljke čekaju dulje, poput paketa iz inozemstva (obično 14 dana) ili onih čija obavijest dolazi pismom (9 dana), stoga se uvijek vodite zadnjim danom preuzimanja s vaše obavijesti.
 
-**Produženje roka.** U aplikaciji OmaPosti opcija «Extend pickup time» produžuje rok za do 14 dana od izvornog zadnjeg dana preuzimanja, po cijeni od 1,90 € prema Postijevoj engleskoj stranici odnosno 1,90 € po danu prema finskoj stranici.
+**Produženje roka.** U aplikaciji OmaPosti opcija „Extend pickup time“ produžuje rok za do 14 dana od izvornog zadnjeg dana preuzimanja, po cijeni od 1,90 € prema Postijevoj engleskoj stranici odnosno 1,90 € po danu prema finskoj stranici.
 
 **Na paketomatu.** Unesite kod za otvaranje (na paketomatima s tipkovnicom: C, kod, zatim OK). Svatko tko ima kod može preuzeti paket umjesto vas bez osobne iskaznice. Za preporučene i osigurane pošiljke potrebna je punomoć. Pošiljke bez koda za preuzimanje čekaju u Posti poslovnici: ponesite broj pošiljke (item ID) i osobni dokument.
 
@@ -62,7 +62,7 @@ Status `Item accepted from transport` zbunjuje mnoge korisnike. Posti objašnjav
 
 **Nema novosti.** Dok paket iz inozemstva ne stigne u Finsku, Posti ne može procijeniti kada će stići. Pogledajte [zašto se praćenje ne ažurira](guide:tracking-not-updating) (na engleskom).
 
-**Izgubljen ili kasni.** Ako u praćenju nema traga pošiljci, kontaktirajte Postijevu korisničku službu za zahtjev za provjeru (clarification request); mogu ga zatražiti i pošiljatelj i primatelj. Ako se paket ne pronađe, naknadu traži pošiljatelj jer Posti isplaćuje onoga tko je platio prijevoz, što je gotovo uvijek pošiljatelj. Prema finskom zakonu internetska trgovina odgovara za prijevoz i obično šalje zamjenu. Finsko tijelo za zaštitu potrošača KKV smatra domaći paket izgubljenim 14 dana nakon dogovorenog roka dostave ili 28 dana nakon preuzimanja ako rok nije dogovoren.
+**Izgubljen ili kasni.** Ako u praćenju nema traga pošiljci, kontaktirajte Postijevu korisničku službu za zahtjev za provjeru (clarification request); mogu ga zatražiti i pošiljatelj i primatelj. Ako se paket ne pronađe, naknadu traži pošiljatelj jer Posti isplaćuje onoga tko je platio prijevoz, što je gotovo uvijek pošiljatelj. Prema finskom zakonu internetska trgovina odgovara za prijevoz i obično šalje zamjenu. Finsko tijelo za zaštitu potrošača KKV smatra domaći paket izgubljenim 14 dana nakon dogovorenog roka dostave ili 28 dana nakon što ga je prijevoznik preuzeo od pošiljatelja ako rok nije dogovoren.
 
 **Označeno kao isporučeno, ali nema paketa.** Provjerite poštanski sandučić za mali paket, zatim kontaktirajte korisničku službu. Pogledajte [isporučeno, ali nije primljeno](guide:delivered-not-received) (na engleskom).
 
@@ -76,7 +76,7 @@ Status `Item accepted from transport` zbunjuje mnoge korisnike. Posti objašnjav
 
 Kako je navedeno na posti.fi:
 
-- **Telefon:** `0100 5577` ili `+358 100 5577` iz inozemstva. Pozivi se naplaćuju po tarifi mobilne ili lokalne mreže. Radno vrijeme nalazi se na [Postijevoj stranici korisničke službe](https://www.posti.fi/en/customer-service).
+- **Telefon:** 0100 5577 ili +358 100 5577 iz inozemstva. Pozivi se naplaćuju po tarifi mobilne ili lokalne mreže. Radno vrijeme nalazi se na [Postijevoj stranici korisničke službe](https://www.posti.fi/en/customer-service).
 - **Chat:** u aplikaciji OmaPosti.
 - **Obrasci:** zahtjev za naknadu štete, prijava oštećene pošiljke i neisporučivi paket (kad ga Posti nije mogao uručiti ni vama ni vratiti pošiljatelju).
 
@@ -86,11 +86,11 @@ Posti ne objavljuje adresu e-pošte za korisničku podršku.
 
 [Peek](/) odmah prepoznaje `JJFI` broj kao Postijev. Poveznica za praćenje s posti.fi (`/tracking/`, `/seuranta/` ili `/uppfoljning/` s brojem, uključujući nakon jezičnog prefiksa poput `/en/`) prepoznaje Posti za bilo koji broj. Poštanski broj nije potreban.
 
-Za poštanski broj koji završava na `FI`, Peek prvo provjerava Posti zajedno s Chronopostom i navodi Posti čim potvrdi pošiljku. Ako je Posti još ne poznaje, prikazuje se "Not found at … yet. Peek will keep checking after you add it." Kad je dodana u Peek račun, provjerava se svakih sat vremena prvih 6 sati, a zatim sve rjeđe; bez računa provjere staju nakon 6 sati osim ako uključite "Notify me when it’s found", što održava dnevne provjere do 30 dana od dodavanja. Za SSCC gornjeg formata Peek provjerava Posti, Matkahuolto, Swiss Post Cargo, PostNord i NZ Post. S pogrešnom kontrolnom znamenkom odaberite Posti putem "Change". Strani broj prati se kod Postija nakon "Change" ili putem posti.fi poveznice. Inače ga Peek prvo prati kod polazne pošte; kad ta pošta javi da pošiljka ide u Finsku (ili ne navede odredište a pratite iz Finske), Peek s istim brojem provjerava i Posti te, čim Posti prikaže skeniranje barem jednako novo kao polazna pošta, nastavlja praćenje tamo zadržavajući raniju povijest.
+Za poštanski broj koji završava na `FI`, Peek prvo provjerava Posti zajedno s Chronopostom i navodi Posti čim potvrdi pošiljku. Ako je Posti još ne poznaje, prikazuje se „Not found at … yet. Peek will keep checking after you add it.“ Kad je dodana u Peek račun, provjerava se svakih sat vremena prvih 6 sati, a zatim sve rjeđe; bez računa provjere staju nakon 6 sati osim ako uključite „Notify me when it’s found“, što održava dnevne provjere do 30 dana od dodavanja. Za SSCC gornjeg formata Peek provjerava Posti, Matkahuolto, Swiss Post Cargo, PostNord i NZ Post. S pogrešnom kontrolnom znamenkom odaberite Posti putem „Change“. Strani broj prati se kod Postija nakon „Change“ ili putem posti.fi poveznice. Inače ga Peek prvo prati kod polazne pošte; kad ta pošta javi da pošiljka ide u Finsku (ili ne navede odredište a pratite iz Finske), Peek s istim brojem provjerava i Posti te, čim Posti prikaže skeniranje barem jednako novo kao polazna pošta, nastavlja praćenje tamo zadržavajući raniju povijest.
 
-U Estoniji, Latviji i Litvi Posti posluje kao SmartPosti: Peekova pretraga prijevoznika pronalazi Posti i pod tim imenom ("Also called SmartPosti"), a poveznice za praćenje sa smartposti.ee ili itella.ee (te njihovih .lv i .lt domena) dodjeljuju Posti za bilo koji kod. Peek zadržava Postijev odgovor samo kada točno jedna pošiljka nosi točan upisani kod, pa za SmartPosti kod ponekad neće naći ništa — tada ga provjerite na smartposti.ee.
+U Estoniji, Latviji i Litvi Posti posluje kao SmartPosti: Peekova pretraga prijevoznika pronalazi Posti i pod tim imenom („Also called SmartPosti“), a poveznice za praćenje sa smartposti.ee ili itella.ee (te njihovih .lv i .lt domena) dodjeljuju Posti za bilo koji kod. Peek zadržava Postijev odgovor samo kada točno jedna pošiljka nosi točan upisani kod, pa za SmartPosti kod ponekad neće naći ništa — tada ga provjerite na smartposti.ee.
 
-Peek čita Posti na engleskom i prikazuje svaki status s Postijevim retkom objašnjenja, grad svakog skeniranja, težinu, dimenzije te naziv i adresu preuzimnog mjesta. Dok imate otvorenu pošiljku ili na dan dostave s uključenim obavijestima, provjerava do svakih 10 minuta (svake 2 minute od 6 sati po lokalnom vremenu na dan kada Posti skenira pošiljku na dostavu, dok Postijev vlastiti sustav odgovara), inače svakih sat vremena. Prikazuje svako skeniranje na karti i može vas obavijestiti o promjenama. Kad drugi prijevoznik preuzme dostavu, Peek slijedi tempo tog prijevoznika. Vremena se prikazuju u vremenskoj zoni vašeg uređaja; na peektracker.com te u aplikacijama za iPhone i Android povijest završava s "Times are in your time zone:" i nazivom zone. Nakon dva dana bez novosti (12 sati dok je status "Label created" ili "Received by carrier"), Peek provjerava svakih sat vremena. Izostavlja kod za preuzimanje i vašu adresu te ne prikazuje očekivani datum dostave ni pošiljatelja. Broj koji obuhvaća više paketa ne prati se, a stare pošiljke javljaju se kao nepronađene.
+Peek čita Posti na engleskom i prikazuje svaki status s Postijevim retkom objašnjenja, grad svakog skeniranja, težinu, dimenzije te naziv i adresu preuzimnog mjesta. Dok imate otvorenu pošiljku ili na dan dostave s uključenim obavijestima, provjerava do svakih 10 minuta (svake 2 minute od 6 sati po lokalnom vremenu na dan kada Posti skenira pošiljku na dostavu, dok Postijev vlastiti sustav odgovara), inače svakih sat vremena. Prikazuje svako skeniranje na karti i može vas obavijestiti o promjenama. Kad drugi prijevoznik preuzme dostavu, Peek slijedi tempo tog prijevoznika. Vremena se prikazuju u vremenskoj zoni vašeg uređaja; na peektracker.com te u aplikacijama za iPhone i Android povijest završava s „Times are in your time zone:“ i nazivom zone. Nakon dva dana bez novosti (12 sati dok je status „Label created“ ili „Received by carrier“), Peek provjerava svakih sat vremena. Izostavlja kod za preuzimanje i vašu adresu te ne prikazuje očekivani datum dostave ni pošiljatelja. Broj koji obuhvaća više paketa ne prati se, a stare pošiljke javljaju se kao nepronađene.
 
 ## Pitanja o Posti praćenju pošiljaka
 
@@ -110,7 +110,7 @@ Mali paket (Small parcel) stiže za 2 do 5 radnih dana nakon što ga Posti zapri
 
 Da, chat podrška dostupna je izravno u aplikaciji OmaPosti.
 
-### Što znači "Item accepted from transport" na Posti praćenju?
+### Što znači „Item accepted from transport“ na Posti praćenju?
 
 To je unutarnja transportna oznaka koja pokazuje da je vaš paket još uvijek na putu kroz Postijevu mrežu — ne znači da je pošiljka već uručena primatelju.
 

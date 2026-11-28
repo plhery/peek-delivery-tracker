@@ -32,20 +32,20 @@ Minden Meiteshun rendelés ugyanazt a forgatókönyvet követi, és a lépések 
 
 | Mit ír a Meiteshun | Mit jelent ez neked | Mit mutat a Peek |
 | --- | --- | --- |
-| `The package has been collected and is ready to be sent to the distribution center` | Az első lépés: a Meiteshun felvette a csomagot Sencsenben. | "Received by carrier" |
-| `item inbound in sorting center` | Egy elosztóközpontban, `ShenZhen` hellyel. | "In transit" |
-| `item outbound in sorting center` | Elhagyja ezt az elosztóközpontot. | "In transit" |
-| `Arriving at the terminal` | Repülőtéri terminálon, `Hong Kong` hellyel. | "In transit" |
-| `Leaving the terminal, the airline will take off` | A járat felszáll Hongkongból. | "In transit" |
-| `Arriving at the destination country` | Megérkezett a célországba, kétbetűs országkóddal (`US` az Egyesült Államoknál). | "In transit" |
-| `Customs clearanceisin progress` | Importvámkezelés az országodban. A hiányzó szóközök a Meiteshuntól erednek. | "At customs" |
-| `Customs clearance completed` | A vámkezelés kész, a csomag továbbhalad. | "In transit" |
-| `Arriving at the mail processing center` | Feldolgozóközpontban az országodban. | "In transit" |
-| `Arrive at the sorting and distribution center` | Hozzád közeli elosztóközpontban, a városod vagy régiód nevével. | "In transit" |
-| `package is on the way` | A kézbesítés előtti lépés. Nem jelenti, hogy a csomag már a futárnál van. | "In transit" |
-| `Delivered` | A forgatókönyv utolsó lépése (lásd alább). | "Delivered", hacsak a Peek vissza nem tartja (lásd alább) |
+| `The package has been collected and is ready to be sent to the distribution center` | Az első lépés: a Meiteshun felvette a csomagot Sencsenben. | „Received by carrier” |
+| `item inbound in sorting center` | Egy elosztóközpontban, `ShenZhen` hellyel. | „In transit” |
+| `item outbound in sorting center` | Elhagyja ezt az elosztóközpontot. | „In transit” |
+| `Arriving at the terminal` | Repülőtéri terminálon, `Hong Kong` hellyel. | „In transit” |
+| `Leaving the terminal, the airline will take off` | A járat felszáll Hongkongból. | „In transit” |
+| `Arriving at the destination country` | Megérkezett a célországba, kétbetűs országkóddal (`US` az Egyesült Államoknál). | „In transit” |
+| `Customs clearanceisin progress` | Importvámkezelés az országodban. A hiányzó szóközök a Meiteshuntól erednek. | „At customs” |
+| `Customs clearance completed` | A vámkezelés kész, a csomag továbbhalad. | „In transit” |
+| `Arriving at the mail processing center` | Feldolgozóközpontban az országodban. | „In transit” |
+| `Arrive at the sorting and distribution center` | Hozzád közeli elosztóközpontban, a városod vagy régiód nevével. | „In transit” |
+| `package is on the way` | A kézbesítés előtti lépés. Nem jelenti, hogy a csomag már a futárnál van. | „In transit” |
+| `Delivered` | A forgatókönyv utolsó lépése (lásd alább). | „Delivered”, hacsak a Peek vissza nem tartja (lásd alább) |
 
-Lépések nélküli rendelésnél a platform önmagában a `货物电子信息已经收到` („az áru elektronikus adatai megérkeztek”) sort írja ki. Az eladó létrehozta a rendelést, de a csomagot még senki sem olvasta be; a Peek ezt kínaiul jeleníti meg "Label created" alatt.
+Lépések nélküli rendelésnél a platform önmagában a `货物电子信息已经收到` („az áru elektronikus adatai megérkeztek”) sort írja ki. Az eladó létrehozta a rendelést, de a csomagot még senki sem olvasta be; a Peek ezt kínaiul jeleníti meg „Label created” alatt.
 
 A lépés helye a sor elején, vessző előtt áll, a célországbeli lépések pedig a szöveg után hozzáteszik a városodat vagy régiódat és az irányítószámot. Minden időpont pekingi óra szerint szerepel, még az országodbeli lépéseknél is: a Meiteshun nyomkövetőjén látható 21:00 Londonban délután, New Yorkban pedig reggel.
 
@@ -63,27 +63,27 @@ A Peek nem talált a Meiteshuntól közzétett kézbesítési határidőket, sem
 
 **Minden lépés pontos, még sincs csomag.** A lépéseket a rendelés létrehozásakor írták meg, így a tervet mutatják, nem a csomag valós helyét. A bolt által megadott kézbesítési becsléshez igazodj, és annak lejárta után fordulj az eladóhoz.
 
-**Sencsenben elakadva a Peekben.** Ha a Peek csak az első sencseni lépéseket mutatja, miközben az eladó linkjén több sor látszik, a hiányzó lépéseket előre írták meg, vagy a legutóbbi ellenőrzés utáni dátumúak (lásd alább). Egy előre megírt lépés soha nem számít beolvasásnak: nem módosít státuszt vagy várható dátumot, és nem küld értesítést. Amíg a csomagot nem kézbesítik vagy nem küldik vissza, a Peek az előzményt a "Other sites may show more steps, but they’re only predictions." sorral nyitja, és a visszatartott lépéseket szürkén listázza a "Show them" alatt, mindegyiket "Predicted for" és a napja megjelöléssel. Nézd meg a Meiteshun oldalán a helyi kézbesítő nevét és számát; ha nincs, kérdezd az eladót. Bővebben: [miért nem frissül a csomagkövetés](guide:tracking-not-updating) (angolul).
+**Sencsenben elakadva a Peekben.** Ha a Peek csak az első sencseni lépéseket mutatja, miközben az eladó linkjén több sor látszik, a hiányzó lépéseket előre írták meg, vagy a legutóbbi ellenőrzés utáni dátumúak (lásd alább). Egy előre megírt lépés soha nem számít beolvasásnak: nem módosít státuszt vagy várható dátumot, és nem küld értesítést. Amíg a csomagot nem kézbesítik vagy nem küldik vissza, a Peek az előzményt a „Other sites may show more steps, but they’re only predictions.” sorral nyitja, és a visszatartott lépéseket szürkén listázza a „Show them” alatt, mindegyiket „Predicted for” és a napja megjelöléssel. Nézd meg a Meiteshun oldalán a helyi kézbesítő nevét és számát; ha nincs, kérdezd az eladót. Bővebben: [miért nem frissül a csomagkövetés](guide:tracking-not-updating) (angolul).
 
-**Nincs találat.** Ismeretlen szám esetén a Meiteshun nyomkövetője referenciaként mutatja a számot, az összes többi mezőt üresen hagyva. A Peek ezt nem találhatóként kezeli: "Waiting for Meiteshun Logistics" feliratot, két nappal később pedig "Check the tracking number" üzenetet mutat. Egyeztesd a számot az eladóval.
+**Nincs találat.** Ismeretlen szám esetén a Meiteshun nyomkövetője referenciaként mutatja a számot, az összes többi mezőt üresen hagyva. A Peek ezt nem találhatóként kezeli: „Waiting for Meiteshun Logistics” feliratot, két nappal később pedig „Check the tracking number” üzenetet mutat. Egyeztesd a számot az eladóval.
 
 **Elveszett, sérült vagy visszaküldött.** A csomagot az eladó rendelte meg a Meiteshuntól, ezért visszatérítésért vagy új küldeményért az eladóhoz vagy a piactérhez fordulj.
 
 ## Meiteshun elérhetőség és ügyfélszolgálat
 
-A rendeléseddel kapcsolatos minden kérdéssel először az eladóhoz fordulj, mert ő kötött szerződést a Meiteshunnal. Ha az eladó nem válaszol, keresd a piacteret. Ha egyik sem segít, a 17TRACK Meiteshun-oldala megadja az `szmeiteshun@163.com` e-mail-címet, az `mtswl.com.cn` weboldalt és egy sencseni (Longgang kerület) irodát, telefonszám nélkül (2026. november 10-i állapot szerint): levélben add meg az `AMTS` számodat és az eladó nevét.
+A rendeléseddel kapcsolatos minden kérdéssel először az eladóhoz fordulj, mert ő kötött szerződést a Meiteshunnal. Ha az eladó nem válaszol, keresd a piacteret. Ha egyik sem segít, a 17TRACK Meiteshun-oldala megadja az szmeiteshun@163.com e-mail-címet, az mtswl.com.cn weboldalt és egy sencseni (Longgang kerület) irodát, telefonszám nélkül (2026. november 10-i állapot szerint): levélben add meg az `AMTS` számodat és az eladó nevét.
 
 ## Meiteshun csomag követése a Peekkel
 
-A [Peek](/) alakjáról felismeri a Meiteshun számát: `AMTS`, kilenc számjegy és `FS`, amelyet a katalógusában más fuvarozó nem használ. A Meiteshun nyomkövetőjének `documentCode=` részt és a számot vagy eladói referenciát tartalmazó hivatkozása is beilleszthető. Az eladói referenciát a Peek alak alapján nem ismeri fel: illeszd be mégis, mert a Peek több mint 4 500 fuvarozót követ, majd nyomd meg a "Change" gombot és válaszd a Meiteshun Logistics lehetőséget (a `美特顺` vagy `MTSCN` keresés is megtalálja), vagy használd a "Change carrier" gombot egy már hozzáadott csomagnál. Ekkor a Peek a rendelés `AMTS` számát is megmutatja. A Peek azonban eltávolítja a kötőjeleket mind gépeléskor, mind linkből, ezért a kötőjeles referenciát közvetlenül a Meiteshun oldalán ellenőrizd.
+A [Peek](/) alakjáról felismeri a Meiteshun számát: `AMTS`, kilenc számjegy és `FS`, amelyet a katalógusában más fuvarozó nem használ. A Meiteshun nyomkövetőjének `documentCode=` részt és a számot vagy eladói referenciát tartalmazó hivatkozása is beilleszthető. Az eladói referenciát a Peek alak alapján nem ismeri fel: illeszd be mégis, mert a Peek több mint 4 500 fuvarozót követ, majd nyomd meg a „Change” gombot és válaszd a Meiteshun Logistics lehetőséget (a `美特顺` vagy `MTSCN` keresés is megtalálja), vagy használd a „Change carrier” gombot egy már hozzáadott csomagnál. Ekkor a Peek a rendelés `AMTS` számát is megmutatja. A Peek azonban eltávolítja a kötőjeleket mind gépeléskor, mind linkből, ezért a kötőjeles referenciát közvetlenül a Meiteshun oldalán ellenőrizd.
 
 A Peek a Meiteshun saját nyomkövetőjét olvassa, és megjeleníti a státuszt, minden beolvasást a helyével, valamint a célországot. A sorok a Meiteshun megfogalmazásában jelennek meg: a `Customs clearanceisin progress` vámként, a `package is on the way` pedig úton lévőként (nem kiszállítás alattként) számít. A Peek megtartja a városodat a célországbeli lépésekből, az irányítószámot elhagyja. Az időpontokat pekingi idő szerint olvassa, és az eszközöd időzónájában mutatja. Kihagyja a Meiteshun rekordjában esetleg szereplő neveket, címet, súlyt, díjakat, aláírást és kézbesítési igazolást, és nem mutat várható kézbesítési dátumot, mert a Meiteshun nem ad meg ilyet.
 
-A Peek visszatart minden olyan lépést, amelyet több mint tizenkét órával a rajta szereplő időpont előtt írtak meg, továbbá minden pekingi idő szerint az ellenőrzés pillanata utánra dátumozott lépést. A megtartott lépésekre támaszkodik, nem a rekord összefoglaló státuszára. Ha egy rendelés teljes forgatókönyve a létrehozáskor íródott, a Peek csak az addig vagy legfeljebb hat órával későbbre dátumozott lépéseket tartja meg, így az akkor felírt `Delivered` visszatartásra kerül. Amikor a Peeknek a `trackIndex.htm` oldalt kell olvasnia, mert az adatlekérdezés nem listáz lépéseket, minden ottani `Delivered` sort visszatart, mert az oldal nem mutatja a létrehozás idejét. Az a rendelés, amelynek minden lépését visszatartották, még nem rendelkezik előzménnyel a Peekben, és "Waiting for Meiteshun Logistics" feliratot mutat a szám ellenőrzésére irányuló kérés nélkül: a Peek az előre megírt lépéseket annak jeleként veszi, hogy a rendelés a Meiteshunnál van (ahogy a beolvasás nélküli küldeményt is), és tovább kérdezi a nyomkövetőt. Akár részben, akár teljesen tartja vissza a lépéseket, a Peek a más követőszolgáltatások által lemásolt példányaikat is félreteszi.
+A Peek visszatart minden olyan lépést, amelyet több mint tizenkét órával a rajta szereplő időpont előtt írtak meg, továbbá minden pekingi idő szerint az ellenőrzés pillanata utánra dátumozott lépést. A megtartott lépésekre támaszkodik, nem a rekord összefoglaló státuszára. Ha egy rendelés teljes forgatókönyve a létrehozáskor íródott, a Peek csak az addig vagy legfeljebb hat órával későbbre dátumozott lépéseket tartja meg, így az akkor felírt `Delivered` visszatartásra kerül. Amikor a Peeknek a `trackIndex.htm` oldalt kell olvasnia, mert az adatlekérdezés nem listáz lépéseket, minden ottani `Delivered` sort visszatart, mert az oldal nem mutatja a létrehozás idejét. Az a rendelés, amelynek minden lépését visszatartották, még nem rendelkezik előzménnyel a Peekben, és „Waiting for Meiteshun Logistics” feliratot mutat a szám ellenőrzésére irányuló kérés nélkül: a Peek az előre megírt lépéseket annak jeleként veszi, hogy a rendelés a Meiteshunnál van (ahogy a beolvasás nélküli küldeményt is), és tovább kérdezi a nyomkövetőt. Akár részben, akár teljesen tartja vissza a lépéseket, a Peek a más követőszolgáltatások által lemásolt példányaikat is félreteszi.
 
 A Peek a Meiteshun nyomkövetőjén követi a csomagot. Mivel a Meiteshun rekordjai sosem nevezik meg a külföldi kézbesítőt, a Peek nem adja át automatikusan: az eladótól kapott helyi futárszámot külön csomagként add hozzá.
 
-Amíg a csomag nyitva van nálad, vagy a kézbesítés napján bekapcsolt értesítésekkel, a Peek legfeljebb 10 percenként, a "Out for delivery" megjelenésének napján pedig legfeljebb 2 percenként ellenőriz (helyi idő szerint reggel 6 órától, illetve a fuvarozó időablakának nyitása előtt fél órával), amíg a Meiteshun saját nyomkövetője válaszol — bár egyetlen ismert Meiteshun-lépés sem adja ezt a státuszt. Egyébként óránként ellenőriz. Követőszolgáltatásokon keresztül óránként, egy csendes nap után 3 óránként, a kézbesítés napján pedig azonos feltétellel legfeljebb 15 percenként. Két hírek nélküli nap után (vagy 12 óra után "Label created" vagy "Received by carrier" állapotban) óránként ellenőriz, amit egy előre megírt forgatókönyvű rendelés hamar elér. Értesíthet minden beolvasásról, csak a fontos lépésekről vagy "Delivery only" módban, és nem tud helyetted kapcsolatba lépni a Meiteshunnal vagy az eladóval.
+Amíg a csomag nyitva van nálad, vagy a kézbesítés napján bekapcsolt értesítésekkel, a Peek legfeljebb 10 percenként, a „Out for delivery” megjelenésének napján pedig legfeljebb 2 percenként ellenőriz (helyi idő szerint reggel 6 órától, illetve a fuvarozó időablakának nyitása előtt fél órával), amíg a Meiteshun saját nyomkövetője válaszol — bár egyetlen ismert Meiteshun-lépés sem adja ezt a státuszt. Egyébként óránként ellenőriz. Követőszolgáltatásokon keresztül óránként, egy csendes nap után 3 óránként, a kézbesítés napján pedig azonos feltétellel legfeljebb 15 percenként. Két hírek nélküli nap után (vagy 12 óra után „Label created” vagy „Received by carrier” állapotban) óránként ellenőriz, amit egy előre megírt forgatókönyvű rendelés hamar elér. Értesíthet minden beolvasásról, csak a fontos lépésekről vagy „Delivery only” módban, és nem tud helyetted kapcsolatba lépni a Meiteshunnal vagy az eladóval.
 
 ## Kérdések a Meiteshun csomagkövetésről
 
@@ -105,7 +105,7 @@ A Meiteshun lépései sosem nevezik meg a helyi kézbesítő céget. Nézd meg a
 
 ### Hogyan léphetek kapcsolatba a Meiteshun Logistics-szal eltűnt csomag ügyében?
 
-Kezdd az eladónál (vagy a piactéren), mivel ő adta fel a küldeményt. Ha egyik sem válaszol, a 17TRACK az `szmeiteshun@163.com` címet és az `mtswl.com.cn` weboldalt adja meg (sencseni Longgang iroda, telefonszám nélkül); írd meg az `AMTS` számodat és az eladó nevét.
+Kezdd az eladónál (vagy a piactéren), mivel ő adta fel a küldeményt. Ha egyik sem válaszol, a 17TRACK az szmeiteshun@163.com címet és az mtswl.com.cn weboldalt adja meg (sencseni Longgang iroda, telefonszám nélkül); írd meg az `AMTS` számodat és az eladó nevét.
 
 :::sources
 - [17TRACK: MTSCN tracking](https://www.17track.net/en/carriers/mtscn) – email address, website and Shenzhen office listed for Meiteshun, no phone

@@ -32,7 +32,7 @@ In het Verenigd Koninkrijk kun je een Amazon-bestelling laten bezorgen bij een A
 
 **Amazon Locker.** Kies een Locker bij het afrekenen: zoek op postcode, adres of herkenningspunt, of voeg er een toe onder Your Addresses. Amazon mailt vervolgens een bezorgbevestiging met instructies. Je hebt mogelijk de zescijferige code, een streepjescode of de Amazon Shopping-app nodig om de Locker te openen, dus neem je telefoon mee. Wil je iemand anders het pakket laten ophalen, stuur die e-mail dan door. Niet elk artikel kan naar een Locker: het moet onder meer lichter zijn dan 4,5 kg en kleiner dan 42 × 35 × 32 cm, en artikelen met een leeftijdsgrens zijn uitgesloten. Je hebt drie kalenderdagen om het op te halen. Daarna stuurt Amazon het pakket terug en betaalt het bedrag automatisch terug.
 
-**Amazon Counter.** Counters zijn bemande afhaalpunten in partnerwinkels. Kies bij het afrekenen «Find a collect location nearby» om Counters en Lockers met hun afhaaltijden te bekijken. Amazon mailt je zodra het pakket is aangekomen. Afhankelijk van de winkel heb je een afhaalcode, legitimatie en/of handtekening nodig; de code staat ook bij de trackinginformatie van je bestelling. Haal je het niet op tijd op, dan stuurt Amazon het pakket terug en krijg je automatisch je geld terug.
+**Amazon Counter.** Counters zijn bemande afhaalpunten in partnerwinkels. Kies bij het afrekenen "Find a collect location nearby" om Counters en Lockers met hun afhaaltijden te bekijken. Amazon mailt je zodra het pakket is aangekomen. Afhankelijk van de winkel heb je mogelijk een afhaalcode, legitimatie en/of handtekening nodig; de code staat ook bij de trackinginformatie van je bestelling. Haal je het niet op tijd op, dan stuurt Amazon het pakket terug en krijg je automatisch je geld terug.
 
 ## Amazon Logistics pakket vertraagd of niet ontvangen
 
@@ -45,8 +45,8 @@ In het Verenigd Koninkrijk kun je een Amazon-bestelling laten bezorgen bij een A
 Amazon Customer Service behandelt vragen over je bestellingen. Op Amazon.co.uk:
 
 - **Hulppagina's.** De pagina Customer Service beantwoordt veelgestelde vragen, van het volgen van een bestelling tot het vervangen van een beschadigd artikel.
-- **Livechat.** Kies op de pagina Customer Service voor Something else en daarna Contact Us (in de app: I need more help). Typ «Chat with an associate now».
-- **Telefoon.** Typ in dezelfde chat «Request a phone call», vul je nummer in en kies «Call me now»: Amazon belt jou. Medewerkers zijn elke dag bereikbaar van 6:00 tot middernacht.
+- **Livechat.** Kies op de pagina Customer Service voor Something else en daarna Contact Us (in de app: I need more help). Typ "Chat with an associate now".
+- **Telefoon.** Typ in dezelfde chat "Request a phone call", vul je nummer in en kies "Call me now": Amazon belt jou. Medewerkers zijn elke dag bereikbaar van 6:00 tot middernacht.
 - **Sociale media.** @AmazonHelp antwoordt 24/7 op Facebook, X en Instagram.
 - **Bij een Locker.** Op elke Amazon Locker staat het directe telefoonnummer van de klantenservice vermeld.
 
@@ -78,7 +78,7 @@ Your Orders toont de bezorgdag, en zodra de bezorger nog 10 stops verwijderd is 
 
 ### Hoe neem ik contact op met Amazon Logistics of meld ik een nep-sms?
 
-Gebruik Amazons Customer Service-pagina voor livechat («Chat with an associate now») of een terugbelverzoek («Request a phone call», dagelijks van 6:00 tot middernacht), of stuur 24/7 een bericht naar @AmazonHelp. Klik nooit op links in onverwachte aankoopberichten — Amazon vraagt nooit om betaling via telefoon of e-mail, en nooit om cadeaubonnen.
+Gebruik Amazons Customer Service-pagina voor livechat ("Chat with an associate now") of een terugbelverzoek ("Request a phone call", dagelijks van 6:00 tot middernacht), of stuur 24/7 een bericht naar @AmazonHelp. Klik nooit op links in onverwachte aankoopberichten — Amazon vraagt nooit om betaling via telefoon of e-mail, en nooit om cadeaubonnen.
 
 :::sources
 - [About Amazon UK: Who delivers my Amazon package in the UK?](https://www.aboutamazon.co.uk/news/operations/how-your-package-gets-from-amazons-warehouse-to-your-front-door) – Delivery Service Partners, Amazon Flex, other couriers

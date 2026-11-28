@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-27
 ---
 
-Para rastrear uma encomenda da Anjun Express (Anjun Logistics), cole o código `AJ` de 17 caracteres no campo acima, consulte remessas internacionais em [anjuntrack.com](https://anjuntrack.com/trajectory) ou acompanhe entregas no Brasil em [anjunexpress.com/trackPackage](https://anjunexpress.com/trackPackage). Fundada em 2011 na China e no Brasil desde 2019 (com cobertura nacional em 2025), a Anjun faz a coleta na China, o desembaraço aduaneiro no Brasil e a entrega final pela própria malha ou pelos Correios. Atenção ao contato: `sac@anjunexpress.com.br` foi desativado em 12/08/2026; os canais ativos são `sac@anjun.com.br` e `(11) 5026-7008`.
+Para rastrear uma encomenda da Anjun Express (Anjun Logistics), cole o código `AJ` de 17 caracteres no campo acima, consulte remessas internacionais em [anjuntrack.com](https://anjuntrack.com/trajectory) ou acompanhe entregas no Brasil em [anjunexpress.com/trackPackage](https://anjunexpress.com/trackPackage). Fundada em 2011 na China e no Brasil desde 2019 (com cobertura nacional em 2025), a Anjun faz a coleta na China, o desembaraço aduaneiro no Brasil e a entrega final pela própria malha ou pelos Correios. Atenção ao contato: `sac@anjunexpress.com.br` foi desativado em 12/08/2026; use agora `sac@anjun.com.br`, o telefone `(11) 5026-7008` ou o chat do site.
 
 ## Código de rastreio Anjun Express: formato e onde encontrar
 
@@ -95,7 +95,7 @@ Escolha o nível de avisos entre "Cada movimentação", "Etapas importantes" ou 
 
 ### Como rastrear um código `AJ` da Anjun Express?
 
-O código da Anjun tem 17 caracteres (`AJ` + 6 dígitos de data `AAMMDD` + 9 dígitos). Cole-o no campo acima no Peek (que consulta tanto o rastreio internacional quanto o nacional) ou consulte diretamente em `anjuntrack.com` (compras da China) e `anjunexpress.com/trackPackage` (entregas no Brasil).
+O código da Anjun tem 17 caracteres (`AJ` + 6 dígitos de data `AAMMDD` + 9 dígitos). Cole-o no campo acima no Peek (que consulta o rastreio internacional e, se ele não tiver registros, o nacional) ou consulte diretamente em `anjuntrack.com` (compras da China) e `anjunexpress.com/trackPackage` (entregas no Brasil).
 
 ### Por que o rastreio da Anjun mistura inglês e português?
 

@@ -103,7 +103,7 @@ A PRO number is R+L Carriers' freight tracking number: nine digits, or two lette
 
 ### What does "Shipment Delayed" mean on R+L Carriers tracking?
 
-Something has held the freight up between terminals without a published reason. R+L's summary labels the shipment delayed while keeping an expected delivery day, and Peek keeps it "In transit" — ask the shop or shipper for an update.
+Something has held the freight up on its way, and the line gives no reason. R+L's summary labels the shipment delayed while keeping an expected delivery day, and Peek keeps it "In transit" — ask the shop or shipper for an update.
 
 ### What is the R+L Carriers customer service phone number?
 
@@ -111,7 +111,7 @@ Call 800-543-5589 (listed at the top of R+L Carriers' website), or submit the R+
 
 ### How long do I have to file a freight claim with R+L Carriers?
 
-For interstate US freight, federal law (49 U.S.C. 14706 and 49 CFR Part 370) requires at least 9 months to file a written claim and at least 2 years to sue after a written denial; carriers must acknowledge a claim within 30 days and resolve or update it within 120 days. Start with whoever booked the freight and check R+L's Cargo Claims page.
+For interstate US freight, federal law (49 U.S.C. 14706 and 49 CFR Part 370) doesn't let a carrier give less than 9 months to file a written claim, or less than 2 years to sue after it turns down any part of it in writing, and the bill of lading or contract sets the actual limit; carriers must acknowledge a claim within 30 days and resolve or update it within 120 days. Start with whoever booked the freight and check R+L's Cargo Claims page.
 
 :::sources
 - [Universal Parcel Scraper: R+L Carriers](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/rl-carriers) – names, PRO shapes and the `I` in front, tracing links, the tracer's wordings and their stages, the summary, not-found and check-digit answers, expected delivery day, weight, clocks, what Peek leaves out

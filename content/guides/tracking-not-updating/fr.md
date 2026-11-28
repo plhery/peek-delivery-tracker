@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-11-27
 ---
 
-Un suivi de colis qui ne bouge plus signifie presque toujours que le colis n'a pas encore été scanné au centre suivant, pas qu'il est bloqué ou perdu. Les transporteurs scannent dans les centres de tri et aux frontières, pas sur la route : un week-end, un vol, la douane ou un changement de transporteur laissent couramment plusieurs jours de silence. Avant la date prévue, attends ; passé le délai du transporteur (chez [bpost](carrier:bpost), au moins 5 jours ouvrables vers un pays voisin ou 10 au-delà ; chez [La Poste suisse](carrier:swiss-post), plus de deux jours de retard ; chez [Mondial Relay](carrier:mondial-relay) en Belgique, au-delà des 3 à 6 jours ouvrés moyens), écris d'abord au vendeur : c'est lui qui a le contrat avec le transporteur.
+Un suivi de colis qui ne bouge plus veut en général dire que le colis n'a pas encore été scanné au centre suivant, pas qu'il est bloqué ou perdu. Les transporteurs scannent dans les centres de tri et aux frontières, pas sur la route : un week-end, un vol, la douane ou un changement de transporteur peuvent laisser plusieurs jours de silence. Avant la date prévue, attends ; passé le délai du transporteur (chez [bpost](carrier:bpost), au moins 5 jours ouvrables vers un pays voisin ou 10 au-delà ; chez [La Poste suisse](carrier:swiss-post), plus de deux jours de retard sur le délai habituel ; chez [Mondial Relay](carrier:mondial-relay) en Belgique, au-delà des 3 à 6 jours ouvrés moyens), écris d'abord au vendeur : c'est lui qui a le contrat avec le transporteur.
 
 ## Pourquoi le suivi de mon colis ne bouge plus ?
 

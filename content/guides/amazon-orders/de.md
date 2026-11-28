@@ -7,7 +7,7 @@ published: 2026-10-16
 updated: 2026-11-27
 ---
 
-Die Amazon-Sendungsnummer steht nicht in der Bestell-E-Mail, sondern in deinem Konto unter „Meine Bestellungen“ und dann „Sendung verfolgen“ – direkt unter dem Namen des Paketdiensts. Die 17-stellige Bestellnummer funktioniert dort nicht. Kopier die Sendungsnummer einfach in [Peek](/), um dein Paket neben allen anderen zu verfolgen; wenn Amazon selbst mit Amazon Logistics liefert, erkennst du es an der eigenen Nummer mit zwei Länderbuchstaben und zehn Ziffern.
+Die Amazon-Sendungsnummer steht in deinem Konto unter „Meine Bestellungen“ und dann „Sendung verfolgen“ – direkt unter dem Namen des Paketdiensts. Die 17-stellige Bestellnummer ist keine Sendungsnummer. Kopier die Sendungsnummer einfach in [Peek](/), um dein Paket neben allen anderen zu verfolgen; liefert Amazon selbst (Amazon Logistics), zeigt die Bestellung vielleicht gar keine Nummer oder Amazons eigene: zwei Buchstaben für das Land und zehn Ziffern.
 
 ## Wo finde ich die Sendungsnummer bei Amazon?
 

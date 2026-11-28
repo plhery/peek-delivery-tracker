@@ -7,7 +7,7 @@ published: 2026-10-25
 updated: 2026-11-27
 ---
 
-Track a Zara order under Purchases in your Zara account, or through the link in any Zara order email if you checked out as a guest ("Manage Your Order" in the US and Canada). Zara's UK, US, Ireland, Canada and Australia help pages don't name its delivery couriers; in the US and Canada, the courier's tracking number appears in your shipping confirmation email and order details. If a parcel is late or marked delivered with nothing there, check around first (Zara asks you to wait 72 hours in the US and 48 hours in Canada), then contact Zara — in the UK and Ireland it may ask for a denial of receipt form.
+Track a Zara order under Purchases in your Zara account, or through the link in any Zara order email if you checked out as a guest ("Manage Your Order" in the US and Canada). Zara's UK, US, Ireland, Canada and Australia help pages don't name its delivery couriers; in the US and Canada, the courier's tracking number appears in your shipping confirmation email and order details. If a parcel is marked delivered with nothing there, look around first (in the US, Zara asks you to wait 72 hours after the delivered status, and in Canada 48), then contact Zara; in the UK and Ireland it may ask for a denial of receipt form.
 
 ## Who delivers my Zara order?
 

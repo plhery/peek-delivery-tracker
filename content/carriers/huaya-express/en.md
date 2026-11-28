@@ -6,7 +6,7 @@ published: 2026-10-28
 updated: 2026-11-27
 ---
 
-Huaya Express (华亚运通, 华亚运通国际货运代理有限公司, Huaya Yuntong International Freight Forwarding) is a Guangzhou freight forwarder shipping online orders abroad from China. Its waybills start with `HYYT`, followed by twelve digits and `GZ`: paste yours in the box above, or follow the 物流跟踪 (logistics tracking) link in the top menu of hyytgz.com. Huaya's tracking usually stops at `It has been handed over to the service provider.` without naming the delivering carrier or its number — except on a US line where it relays scans up to `Delivered`, a German DHL line, a Mexico J&T Express line and a Swedish line naming Early Bird.
+Huaya Express (华亚运通, 华亚运通国际货运代理有限公司, Huaya Yuntong International Freight Forwarding) is a Guangzhou freight forwarder shipping online orders abroad from China. Huaya publishes no number format; the waybills Peek knows are `HYYT`, twelve digits and `GZ`: paste yours in the box above, or follow the 物流跟踪 (logistics tracking) link in the top menu of hyytgz.com. Huaya's tracking ends at `It has been handed over to the service provider.` or after some of the local carrier's scans (in the US, at times up to `Delivered`), and it never names that carrier or its number, except on a line through DHL in Germany and a line into Mexico, where it copies DHL's and J&T Express's scans, and on a Swedish line that names Early Bird.
 
 ## Huaya Express tracking number: what it looks like
 
@@ -84,19 +84,19 @@ Peek counts both customs lines as in transit, since they report clearance, not a
 
 ### What is Huaya Express (华亚运通)?
 
-It is 华亚运通国际货运代理有限公司 (Huaya Yuntong International Freight Forwarding), a Guangzhou forwarder that ships online orders for merchants such as Shopify, DHgate, Vova and Facebook sellers using China Post, duties-included US/Europe lines and major express carriers.
+It is 华亚运通国际货运代理有限公司 (Huaya Yuntong International Freight Forwarding), a Guangzhou forwarder that ships for Shopify stores, Vova, DHgate and Facebook sellers. Its site says it mainly uses China Post, its own duties-included lines to the US and Europe, lines for sensitive goods and the big four express companies.
 
 ### What does a Huaya Express tracking number look like?
 
-A Huaya waybill is 18 characters: `HYYT`, twelve digits and `GZ`. Paste it into the box above in Peek (which detects Huaya Express straight away) or open Huaya's tracker via the top-menu 物流跟踪 link on hyytgz.com.
+Huaya publishes no number format; the waybills Peek knows are 18 characters: `HYYT`, twelve digits and `GZ`. Paste it into the box above in Peek (which detects Huaya Express straight away) or open Huaya's tracker via the top-menu 物流跟踪 link on hyytgz.com.
 
 ### Why has my Huaya tracking stopped at "It has been handed over to the service provider."?
 
-Huaya's leg ends once a local carrier in your country collects the parcel after import customs. Outside a US line (which can relay scans up to `Delivered`), a German DHL line, a Mexico J&T Express line and a Swedish Early Bird line, Huaya names neither the local carrier nor its number — ask the seller for both.
+Huaya's leg ends once a local carrier in your country collects the parcel after import customs. Huaya names neither that carrier nor its number, even when it passes on a US carrier's scans (at times up to `Delivered`); only a line through DHL in Germany and a line into Mexico, whose DHL and J&T Express scans it copies, and a Swedish line that names Early Bird say who delivers. Ask the seller for the carrier and its number.
 
 ### Who do I contact about a missing or delayed Huaya Express parcel?
 
-Contact the shop or marketplace you bought from: Huaya's claim terms are written for shippers, and hyytgz.com lists only a Chinese mobile hotline (`18039073131`), a QQ Mail address (`2065332407@qq.com`) and a Chinese form with no recipient support.
+Contact the shop or marketplace you bought from: Huaya's claim terms are written for shippers, and hyytgz.com lists only a Chinese mobile hotline (`18039073131`), a QQ Mail address (`2065332407@qq.com`) and a complaints form, all in Chinese, and no page written for recipients.
 
 :::sources
 - [Huaya Express: 华亚运通国际货运代理有限公司 (home)](http://hyytgz.com/) – company name and logo, shops it serves, main services, the 物流跟踪 links (tracker in Chinese and English, 17TRACK), hotline, company email, Baiyun address

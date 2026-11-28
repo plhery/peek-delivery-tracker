@@ -5287,7 +5287,7 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       },
       {
-        "pattern": "^70\\d{15}$",
+        "pattern": "^7[03]\\d{15}$",
         "confidence": "low",
         "checksum": "gs1",
         "preferred": true
@@ -73716,11 +73716,13 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Los_Angeles",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "alaska-air-cargo"
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://alaska-icargo.ibsplc.aero/icargoportal/portal/loginFlow"
+    "trackingSearchUrl": "https://alaska-icargo.ibsplc.aero/icargoportal/portal/loginFlow",
+    "trackingUrlTemplate": "https://www.alaskacargo.com/",
+    "helpUrl": "https://www.alaskacargo.com/faqs"
   },
   "aloha-air-cargo": {
     "displayName": "Aloha Air Cargo",
@@ -76229,6 +76231,62 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": []
+  },
+  "iag-cargo": {
+    "displayName": "IAG Cargo",
+    "aliases": [
+      "British Airways World Cargo",
+      "British Airways Cargo",
+      "BA Cargo",
+      "Iberia Cargo",
+      "Aer Lingus Cargo"
+    ],
+    "countries": [
+      "GB",
+      "ES",
+      "IE"
+    ],
+    "color": "#40C1AC",
+    "selectable": true,
+    "timezone": "Europe/London",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "iag-cargo"
+    },
+    "trackingUrlTemplate": "https://www.iagcargo.com/en/track-landing/",
+    "linkRules": [
+      {
+        "domains": [
+          "ui.tracking.iagcargo.com"
+        ],
+        "pathPattern": "^/(?:en|es)/(?:125|075|053)-\\d{8}(?:/details)?/?$",
+        "path": "^/(?:en|es)/((?:125|075|053)-\\d{8})(?:/details)?/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.iagcargo.com/en/track-landing/"
+  },
+  "kalitta-air": {
+    "displayName": "Kalitta Air",
+    "aliases": [
+      "Kalitta Air LLC",
+      "Kalitta Airlines"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#b53835",
+    "selectable": true,
+    "timezone": "America/Detroit",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "kalitta-air"
+    },
+    "trackingUrlTemplate": "https://www.kalittaair.com/utilities/track-cargo",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.kalittaair.com/utilities/track-cargo",
+    "helpUrl": "https://www.kalittaair.com/services/cargo-services/sales-contacts"
   }
 } as const;
 
@@ -78581,7 +78639,9 @@ export const CARRIER_IDS = [
   "nanbei-express",
   "omg-express",
   "tobkk",
-  "yadex"
+  "yadex",
+  "iag-cargo",
+  "kalitta-air"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

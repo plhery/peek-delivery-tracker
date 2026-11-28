@@ -6,7 +6,7 @@ published: 2026-10-26
 updated: 2026-11-27
 ---
 
-För att spåra ett **Bring**-paket i Sverige (en del av norska Posten Bring-koncernen) klistrar du in ditt kollinummer (17, 18 eller 20 siffror, eller ett `…NO`-nummer) i fältet ovanför, på [Brings spårningssida](https://tracking.bring.se/tracking/) eller i Bring-appen. Bring levererar till ombud, dygnet-runt-öppna paketboxar och hem till dörren, och du kan gratis byta utlämningsställe i appen under `Ändra leverans` innan paketet skickats ut.
+För att spåra ett **Bring**-paket i Sverige (en del av norska Posten Bring-koncernen) klistrar du in ditt kollinummer (17, 18 eller 20 siffror, eller ett `…NO`-nummer) i fältet ovanför, på [Brings spårningssida](https://tracking.bring.se/tracking/) eller i Bring-appen. Bring levererar till ombud, dygnet-runt-öppna paketboxar och hem till dörren, och efter den första aviseringen kan du gratis byta utlämningsställe i appen under `Ändra leverans`, så länge paketet inte har skickats ut för leverans.
 
 ## Brings kollinummer
 
@@ -114,11 +114,11 @@ Normalt 7 dagar hos ombud (kan förlängas med 7 dagar vid första påminnelsen)
 
 ### Tillkommer tull och moms på Bring-paket från Norge eller länder utanför EU?
 
-Ja. Norge står utanför EU, så du betalar 25 % moms, en tullavgift på 3 euro per vara för försändelser upp till 150 euro (sedan 1 juli 2026) samt EU:s hanteringsavgift på 2 euro per vara oavsett värde (sedan 1 november 2026) — plus eventuell deklarationsavgift från transportören om inte butiken tog ut avgifterna i kassan.
+Ja. Norge står utanför EU, så du betalar moms (25 % för de flesta varor), en tullavgift på 3 euro per vara för försändelser upp till 150 euro (sedan 1 juli 2026) samt EU:s hanteringsavgift på 2 euro per vara oavsett värde (sedan 1 november 2026) — plus eventuell deklarationsavgift från transportören om inte butiken tog ut avgifterna i kassan.
 
 ### Vad gör jag om mitt Bring-paket är borta, och hur når jag kundservice?
 
-Klagomål om borttappat eller skadat paket tar du skriftligen med butiken, som ansvarar tills du fått varan och reklamerar till Bring (vid skada ber Bring dig kontakta butiken inom två dagar). Brings egen kundservice når du via chatt dygnet runt eller på telefon `0770-11 33 00` vardagar 08.00–17.00.
+Klagomål om borttappat eller skadat paket tar du skriftligen med butiken, som ansvarar tills du fått varan och reklamerar till Bring (vid skada ber Bring dig kontakta butiken inom två dagar). Brings egen kundservice når du via chatt dygnet runt eller på telefon 0770-11 33 00 vardagar 08.00–17.00.
 
 :::sources
 - [Bring: Spåra din sändning](https://tracking.bring.se/tracking/) – statusarna, uthämtningsperiod, förlängning, levererat på angiven plats, ingen träff, kollinummer och sändningsnummer

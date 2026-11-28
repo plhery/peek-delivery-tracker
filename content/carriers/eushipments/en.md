@@ -1,6 +1,6 @@
 ---
 title: euShipments tracking: statuses and who delivers your parcel
-description: Track a euShipments parcel across the EU and UK: New, Loaded hub & On delivery statuses, local courier handover, 1–4 day transit times and +359 700 70 755.
+description: Track a euShipments parcel across the EU and UK: New, Loaded hub & On delivery statuses, local courier handover, transit times by route and +359 700 70 755.
 slug: eushipments-tracking
 published: 2026-10-28
 updated: 2026-11-27
@@ -104,7 +104,7 @@ From its Sofia and Ruse hubs, euShipments quotes next-day delivery to Bulgaria a
 
 ### How do I contact euShipments or claim a missing parcel?
 
-Start with the online shop — it holds the contract, and under EU rules (Your Europe) must deliver within 30 days unless agreed otherwise and covers transit damage until receipt. For local delivery adjustments, contact the courier listed under "Courier Name:"; euShipments also lists `+359 700 70 755` and `office@eushipments.com`.
+Start with the online shop — it holds the contract, and under EU rules (Your Europe) must deliver within 30 days unless agreed otherwise and covers transit damage until receipt. For local delivery adjustments, contact the courier listed under "Courier Name:"; euShipments also lists +359 700 70 755 and office@eushipments.com.
 
 :::sources
 - [euShipments: Track Your Order](https://eushipments.com/tracking) – tracking form and its wording, phone, email

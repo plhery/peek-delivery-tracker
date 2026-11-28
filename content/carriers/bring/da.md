@@ -6,7 +6,7 @@ published: 2026-10-26
 updated: 2026-11-27
 ---
 
-For at spore en **Bring**-pakke i Danmark (Bring E-commerce & Logistics A/S, en del af Posten Bring-koncernen) indsætter du dit 20-, 18- eller 17-cifrede kollinummer (eller et `…NO`-nummer) i feltet ovenfor, på [Brings sporingsside](https://tracking.bring.dk/tracking/) eller i Bring-appen. Bring leverer til omkring 1.100 pakkeshops, døgnåbne pakkebokse og hjem til døren, og du kan gratis ændre leveringssted i appen, før pakken er ude til levering.
+For at spore en **Bring**-pakke i Danmark (Bring E-commerce & Logistics A/S, en del af Posten Bring-koncernen) indsætter du dit 20-, 18- eller 17-cifrede kollinummer (eller et `…NO`-nummer) i feltet ovenfor, på [Brings sporingsside](https://tracking.bring.dk/tracking/) eller i Bring-appen. Bring leverer til omkring 1.100 pakkeshops, døgnåbne pakkebokse og hjem til døren, og når Bring har givet besked om, at den har modtaget pakken, kan du gratis ændre leveringssted i appen, indtil pakken er ude til levering.
 
 ## Brings kollinummer
 
@@ -109,7 +109,7 @@ Ja. Norge står uden for EU, så på pakker fra lande uden for EU betaler du 25 
 
 ### Hvordan kontakter jeg Bring ved forsvundet eller beskadiget pakke?
 
-Som privatperson reklamerer du altid til webshoppen, som har ansvaret indtil levering og tager sagen videre med Bring. Brings egen kundeservice træffes døgnet rundt i chatten på `bring.dk` eller på telefon `70 28 60 70` hverdage kl. 8–17 (først AI-assistent).
+Som privatperson reklamerer du til webshoppen, som har ansvaret indtil levering og tager sagen videre med Bring. Brings egen kundeservice træffes døgnet rundt i chatten på bring.dk eller på telefon 70 28 60 70 hverdage kl. 8–17 (først svarer en AI-assistent).
 
 :::sources
 - [Bring: Om Bring](https://www.bring.dk/om-bring) – Posten Bring-koncernen

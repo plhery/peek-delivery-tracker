@@ -6,7 +6,7 @@ published: 2026-11-22
 updated: 2026-11-27
 ---
 
-Um ein Paket von **DHL eCommerce Netherlands** (früher *DHL Parcel*, in Belgien *DHL eCommerce Benelux*) zu verfolgen, füge deine `JVGL`-, `3S`-, `JJD000090`- oder `MDP`-Sendungsnummer oben ein oder nutze „Track and trace“ auf [dhlecommerce.nl](https://www.dhlecommerce.nl/en/consumer/track-and-trace) (für Belgien zusätzlich mit Postleitzahl). In den Niederlanden stellt DHL Montag bis Samstag zu (mit rund 5.000 ServicePoints), in Belgien übernimmt meist [bpost](carrier:bpost).
+Um ein Paket von **DHL eCommerce Netherlands** (früher *DHL Parcel*, in Belgien *DHL eCommerce Benelux*) zu verfolgen, füge die Sendungsnummer aus der E-Mail von DHL oder des Shops (auf dem Etikett meist der Code mit `JVGL`) oben ein oder nutze „Track and trace“ auf [dhlecommerce.nl](https://www.dhlecommerce.nl/en/consumer/track-and-trace) (für Belgien zusätzlich mit Postleitzahl). In den Niederlanden stellt DHL Montag bis Samstag zu (mit rund 5.000 ServicePoints), in Belgien übernimmt meist [bpost](carrier:bpost).
 
 ## Sendungsnummer von DHL eCommerce Niederlande
 
@@ -99,11 +99,11 @@ In den Niederlanden stellt DHL von Montag bis Samstag tagsüber oder abends zu. 
 
 ### Wie lange liegt ein Paket im DHL ServicePoint oder in der Paketstation?
 
-In den Niederlanden maximal 5 Tage im ServicePoint oder in der Paketstation (mit Erinnerung nach zwei Tagen), danach geht es zurück. In Belgien wartet es 14 Kalendertage an einem bpost-Punkt und 5 Tage in einer Paketstation.
+In den Niederlanden höchstens 5 Tage im ServicePoint (mit Erinnerung nach zwei Tagen, danach geht es zurück an den Absender) und 5 Tage in einer Paketstation. In Belgien wartet es 14 Kalendertage an einem bpost-Punkt und 5 Tage in einer Paketstation.
 
 ### Gibt es eine Telefonnummer für DHL eCommerce Niederlande oder Belgien?
 
-Nein — auf den Verbraucherseiten nennt DHL weder für die Niederlande noch für Belgien eine Hotline, sondern nur den Online-Chat (und die App My DHL). Bei Verlust, Schäden oder fehlenden Scans reklamiert der Online-Shop bei DHL; verdächtige Phishing-Mails meldest du als Anhang an `spam.ecommerce@dhl.com`.
+Nein — auf den Verbraucherseiten nennt DHL weder für die Niederlande noch für Belgien eine Hotline, sondern nur den Online-Chat (und die App My DHL). Bei Verlust oder Schäden meldest du dich beim Online-Shop, der bei DHL reklamiert; verdächtige Phishing-Mails leitest du als Anhang an spam.ecommerce@dhl.com weiter.
 
 :::sources
 - [DHL eCommerce: Track and trace](https://www.dhlecommerce.nl/en/consumer/track-and-trace) – Postleitzahl, Liefertage, Umleitung an ServicePoint, My DHL

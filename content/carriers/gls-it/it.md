@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Per tracciare un pacco **GLS Italy**, incolla nel riquadro qui sopra il numero di spedizione nazionale (due lettere — o una lettera e una cifra — seguite da fino a 9 cifre) o internazionale a 11 cifre ricevuto dal mittente, oppure cercalo nella [Ricerca Spedizione](https://gls-group.com/IT/it/servizi-online/ricerca-spedizioni/) o sull'app gratuita GLS. GLS consegna indicativamente dal lunedì al venerdì dalle 8.30 alle 18.30 (24 h sul continente, 48 h in Sicilia, Calabria e Sardegna) e dispone di oltre 10.000 GLS Point e locker.
+Per tracciare un pacco **GLS Italy**, incolla nel riquadro qui sopra il numero di spedizione nazionale (due lettere — o una lettera e una cifra — seguite da fino a 9 cifre) o internazionale a 11 cifre ricevuto dal mittente, oppure cercalo nella [Ricerca Spedizione](https://gls-group.com/IT/it/servizi-online/ricerca-spedizioni/) o sull'app gratuita GLS. GLS consegna indicativamente dal lunedì al venerdì dalle 8.30 alle 18.30 (24 h sul continente, 48 h in Sicilia, Calabria e Sardegna) e conta oltre 10.000 GLS Shop in Italia, oltre ai locker.
 
 ## Numero di spedizione GLS: dove si trova e com'è fatto
 
@@ -102,11 +102,11 @@ Per lo standard GLS indica **24 ore** sul continente e **48 ore** in Sicilia, Ca
 
 ### Qual è il numero verde di GLS Italy e come fare reclamo?
 
-Il numero verde del customer care è `800 184726` e la linea automatica 24 ore su 24 per lo stato spedizione è `02 98 03 55 56` (e-mail `customerservice@gls-italy.com`, lun.–ven. 9.00–13.00 e 14.30–17.30). I reclami scritti vanno inviati entro 90 giorni dalla spedizione (8 giorni di calendario per danni occulti tramite mittente) e GLS risponde entro 45 giorni.
+Il numero verde del customer care è 800 184726 e la linea automatica 24 ore su 24 per lo stato spedizione è 02 98 03 55 56 (e-mail customerservice@gls-italy.com; servizio clienti lun.–ven. 9.00–13.00 e 14.30–17.30). I reclami scritti vanno inviati entro 90 giorni dalla spedizione (8 giorni di calendario per danni occulti tramite mittente) e GLS risponde entro 45 giorni.
 
 ### Un SMS di GLS che chiede un pagamento con carta è una truffa?
 
-Sì: GLS Italy avverte che non chiede mai pagamenti con carta via SMS o e-mail (un pacco da fuori UE può però comportare una richiesta reale di dazi doganali). Non cliccare sui link sospetti e segnala i messaggi falsi a `cybersec@gls-italy.com`.
+Sì: GLS Italy avverte che non chiede mai pagamenti con carta via SMS o e-mail (un pacco da fuori UE può però comportare una richiesta reale di dazi doganali). Non cliccare sui link sospetti e segnala i messaggi falsi a cybersec@gls-italy.com.
 
 :::sources
 - [GLS Italia: Domande frequenti](https://gls-group.com/IT/it/faq/) – numeri, etichette di stato, orari, danni, contatti

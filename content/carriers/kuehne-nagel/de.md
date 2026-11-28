@@ -1,6 +1,6 @@
 ---
 title: Kühne+Nagel Sendungsverfolgung — Nummern und Status
-description: Kühne+Nagel Sendungsverfolgung (myKN): RWM-, RAPI- und 26A-Nummern für Land-, Luft- und Seefracht, 90-Tage-Fenster, Zollstatus, Freight handover und Kontakt.
+description: Kühne+Nagel Sendungsverfolgung (myKN) für Land-, Luft- und Seefracht: RWM-, RAPI- und 26A-Nummern, 90-Tage-Fenster, Zoll, Freight handover und Kontakt.
 slug: kuehne-nagel-sendungsverfolgung
 published: 2026-11-23
 updated: 2026-11-27
@@ -94,7 +94,7 @@ Auf der öffentlichen myKN-Seite stehen Prognosetermine neben tatsächlich errei
 
 ### Wie erreiche ich den Kühne+Nagel-Kundenservice in Deutschland oder der Schweiz?
 
-Nutze die [Standortsuche](https://www.kuehne-nagel.com/de/unternehmen/standorte) für das zuständige Büro oder das Kontaktformular [Experten kontaktieren](https://www.kuehne-nagel.com/de/kontakt/experten-kontaktieren). Die deutsche Zentrale in Bremen erreichst du laut Impressum unter `+49 (0)421 3605-0` oder `info.bremen@kuehne-nagel.com`.
+Nutze die [Standortsuche](https://www.kuehne-nagel.com/de/unternehmen/standorte) für das zuständige Büro oder das Kontaktformular [Experten kontaktieren](https://www.kuehne-nagel.com/de/kontakt/experten-kontaktieren). Die deutsche Zentrale in Bremen erreichst du laut Impressum unter +49 (0)421 3605-0 oder `info.bremen@kuehne-nagel.com`.
 
 :::sources
 - [Kühne+Nagel Deutschland](https://www.kuehne-nagel.com/de)

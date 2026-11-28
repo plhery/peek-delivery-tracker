@@ -7,7 +7,7 @@ published: 2026-10-25
 updated: 2026-11-27
 ---
 
-Pour suivre une commande Zara en France, en Belgique ou en Suisse, ouvre la rubrique « Achats » de ton compte Zara, ou utilise le lien présent dans les e-mails de commande si tu as commandé en invité. Tu y vois chaque étape (`En préparation`, `Envoyé`, `Retiré par le coursier`, `Livré au client`) ainsi que la date estimée pour la livraison à domicile, en magasin (15 jours de retrait) ou en point relais. Si le suivi indique livré sans que le colis soit arrivé, Zara demande en France une déclaration sur l'honneur de non-réception et en Belgique une attestation.
+Pour suivre une commande Zara en France, en Belgique ou en Suisse, ouvre la rubrique « Achats » de ton compte Zara, ou utilise le lien présent dans les e-mails de commande si tu as commandé en invité. Tu y vois le statut (de `En préparation` et `Envoyé` à `Retiré par le coursier` et `Livré au client`) et la date estimée, que tu te fasses livrer à domicile, dans un magasin Zara (où tu as 15 jours pour retirer ta commande) ou en point relais. Si le suivi indique livré sans que le colis soit arrivé, Zara demande en France une déclaration sur l'honneur de non-réception et en Belgique une attestation.
 
 ## Qui livre ma commande Zara en France, en Belgique et en Suisse ?
 

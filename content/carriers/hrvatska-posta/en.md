@@ -6,7 +6,7 @@ published: 2026-10-13
 updated: 2026-11-27
 ---
 
-Hrvatska pošta (Croatian Post) is Croatia's national post and runs the Paket24 parcel service and about 300 round-the-clock paketomat lockers. Track a parcel in English on its [English tracking page](https://posiljka.posta.hr/en/tracking) — the plain `posiljka.posta.hr` address opens in Croatian — or paste the item number (*prijamni broj pošiljke*) in the box above. Tracked items sent from Croatia end in `HR`, and parcels from abroad keep their sending post's number from your shipping email or Hrvatska pošta's SMS and notices.
+Hrvatska pošta (Croatian Post) is Croatia's national post and runs the Paket24 parcel service and, according to its English site, about 300 round-the-clock paketomat lockers. Track a parcel in English on its [English tracking page](https://posiljka.posta.hr/en/tracking) — the plain `posiljka.posta.hr` address opens in Croatian — or paste the item number (*prijamni broj pošiljke*) in the box above. Tracked items sent from Croatia end in `HR`, and parcels from abroad keep their sending post's number from your shipping email or Hrvatska pošta's SMS and notices.
 
 ## Hrvatska pošta tracking number
 

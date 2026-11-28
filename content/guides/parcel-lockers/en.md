@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-A collection locker lets you pick up an online order without queuing at a counter: choose a locker at checkout (such as an Amazon Locker, an InPost or Evri locker, or an Australia Post Parcel Locker address from your MyPost account), or redirect a parcel there once it's on the way. Tracking tells you when it arrives, and the carrier sends a one-time PIN, QR code or barcode (or leaves a mailbox key at Canada Post). Most lockers hold parcels for 2 to 5 days — 3 days at Amazon, InPost UK and Evri — before moving them to a Post Office or Parcel Collect counter, or returning them to the sender.
+A collection locker lets you pick up an online order without queuing at a counter: choose a locker at checkout (such as an Amazon Locker, an InPost or Evri locker, or an Australia Post Parcel Locker address from your MyPost account), or, with USPS and Evri, redirect a parcel there once it's on the way. Tracking tells you when it arrives, and the carrier sends a one-time PIN, QR code or barcode (or leaves a mailbox key at Canada Post). Most lockers hold parcels for 2 to 5 days — 3 days at Amazon, InPost UK and Evri. Then a post office counter takes over at USPS, Canada Post and Australia Post, while Amazon and InPost send the parcel back.
 
 ## How does parcel locker collection work?
 

@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-To track an Etsy package, open **Purchases and reviews** (or **You** → **Purchases** in the Etsy app), or tap **Track your package** in your shipping email if you checked out as a guest. Etsy doesn't ship orders itself: each shop makes or packs its own parcel, chooses the carrier, and adds a tracking number when the shipping method includes one. Next to each order you'll see its status, estimated delivery date and tracking link. If an Etsy delivery is late or missing, message the seller via **Help with order** first, then open a case with Etsy.
+To track an Etsy package, open **Purchases and reviews** (or **You** → **Purchases** in the Etsy app), or, if you checked out as a guest, use the **Track your package** link in your shipping email once the seller has added a tracking number. Etsy doesn't ship orders itself: each shop makes or packs its own parcel, chooses the carrier, and adds a tracking number when the shipping method includes one. Next to each order you'll see its status, its estimated delivery date and, if the seller added one, the tracking number (with a **Track Package** button for carriers Etsy supports). If an Etsy delivery is late or missing, message the seller via **Help with order** first, then open a case with Etsy.
 
 ## Why does my Etsy order still say Not Shipped?
 

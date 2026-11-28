@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-Open **Mein Konto** (my account) → **Bestellungen** (orders) and click **Sendungsverfolgung** (tracking) next to an item to see its delivery status and carrier. Parcels sold by OTTO mostly arrive with Hermes or DHL, while furniture and large appliances go by two-person Hermes freight (Spedition) or a supplier's freight forwarder; marketplace sellers ship independently with their own tracked carrier and tracking number. OTTO delivers only within Germany.
+Open **Mein Konto** (my account) → **Bestellungen** (orders) and click **Sendungsverfolgung** (tracking) next to an item to see its delivery status and carrier. Parcels sold by OTTO mostly arrive with Hermes or DHL, while furniture and large appliances go by two-person Hermes freight (Spedition) or a supplier's freight forwarder; marketplace sellers ship independently with their own carrier and tracking number. OTTO delivers only within Germany.
 
 OTTO's shop and help pages are in German. This guide gives OTTO's labels in German, with a translation.
 

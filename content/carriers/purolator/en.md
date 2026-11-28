@@ -1,6 +1,6 @@
 ---
 title: Purolator tracking: PIN, statuses and missed deliveries
-description: Track a Purolator parcel with your PIN: what "On vehicle for delivery" and other statuses mean, 5-day pickup holds, customs from the US and phone support.
+description: Track a Purolator parcel with your PIN: what "On vehicle for delivery" and other statuses mean, 5-business-day pickup holds, customs from the US and phone support.
 slug: purolator-tracking
 published: 2026-10-15
 updated: 2026-11-27
@@ -93,7 +93,7 @@ Peek can notify you of "Every scan", "Important steps" or "Delivery only".
 
 ### What does "On vehicle for delivery" mean on Purolator?
 
-It means your parcel is on the Purolator delivery truck for delivery today. If nobody can accept it or the driver cannot access the building, tracking typically updates to `Attempted delivery - receiver unavailable` or `Address correction required - missing entry code`, followed by transfer to a local pickup counter.
+It means your parcel is on the Purolator delivery truck for delivery today. If nobody can take it, tracking typically shows `Attempted delivery - receiver unavailable`, then `Available for pickup for 5 business days from arrival date at the counter`; if the driver can't get into your building, it shows `Address correction required - missing entry code`.
 
 ### Is a Purolator PIN the same as a tracking number?
 

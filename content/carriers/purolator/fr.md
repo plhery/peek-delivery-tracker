@@ -6,7 +6,7 @@ published: 2026-10-15
 updated: 2026-11-27
 ---
 
-Purolator est un transporteur canadien de colis et de fret, détenu à 91 % par Postes Canada. Pour suivre un colis Purolator en français, entre son NIC (numéro d'identification du colis, ou PIN en anglais) ou la référence de suivi de l'expéditeur dans l'outil de repérage de [purolator.com](https://www.purolator.com/fr/), ou colle le NIC dans le champ ci-dessus. Ce numéro se trouve dans le courriel de confirmation d'expédition envoyé par la boutique.
+Purolator est un transporteur canadien de colis et de fret, détenu à 91 % par Postes Canada. Pour suivre un colis Purolator en français, entre son NIC (numéro d'identification du colis, ou PIN en anglais) ou la référence de suivi de l'expéditeur dans l'outil de repérage de [purolator.com](https://www.purolator.com/fr/), ou colle le NIC dans le champ ci-dessus. Ce numéro vient de l'expéditeur : pour une commande en ligne, il est dans le courriel de confirmation d'expédition de la boutique.
 
 ## Numéro de suivi Purolator : le NIC et sa forme
 
@@ -91,7 +91,7 @@ Notifications au choix : « Chaque scan », « Étapes importantes » ou « Livr
 
 ### Que faire après une livraison manquée Purolator, et combien de temps le colis est-il gardé ?
 
-Après une tentative de livraison manquée, le colis est transféré vers un Centre d'expédition Purolator, un agent autorisé ou un magasin PostNet, où il reste disponible 5 jours ouvrables à partir de son arrivée au comptoir, comme le dit le statut de Purolator. Apporte une pièce d'identité avec photo émise par le gouvernement si le colis demande une signature d'adulte.
+Après une tentative de livraison manquée, le suivi indique d'habitude que le colis attend dans la même ville, à un comptoir (Centre d'expédition Purolator, agent autorisé ou magasin PostNet), où il reste disponible 5 jours ouvrables à partir de son arrivée au comptoir, comme le dit le statut de Purolator. Apporte une pièce d'identité avec photo émise par le gouvernement si le colis demande une signature d'adulte.
 
 ### Comment faire un suivi Purolator en français ?
 

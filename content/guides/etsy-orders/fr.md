@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-Etsy n'expédie pas les commandes lui-même : chaque boutique prépare son colis, choisit son transporteur (La Poste, bpost, La Poste suisse, USPS, Royal Mail, FedEx, UPS…) et ajoute le numéro de suivi dans **Achats et avis**. La date de livraison estimée additionne le temps de traitement du vendeur et le transit du transporteur ; en cas de retard ou de colis perdu, contacte d'abord le vendeur via **Aide concernant une commande**, puis ouvre un litige Etsy 48 heures plus tard (jusqu'à 30 jours après la date estimée).
+Etsy n'expédie pas les commandes lui-même : chaque boutique prépare son colis, choisit son transporteur (La Poste, bpost, La Poste suisse, USPS, Royal Mail, FedEx, UPS…) et ajoute un numéro de suivi quand le service en a un, à retrouver dans **Achats et avis**. La date de livraison estimée additionne le temps de traitement du vendeur et le transit du transporteur ; en cas de retard ou de colis perdu, contacte d'abord le vendeur via **Aide concernant une commande**, puis, une fois la date estimée passée, ouvre un litige Etsy 48 heures après ta demande (plus de 7 jours après la date estimée la plus tardive pour une commande jamais arrivée), au plus tard 30 jours après la date estimée.
 
 ## Pourquoi ma commande Etsy affiche-t-elle encore « Non envoyé » ?
 

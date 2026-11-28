@@ -6,7 +6,7 @@ published: 2026-10-13
 updated: 2026-11-27
 ---
 
-Geniki Taxydromiki (Γενική Ταχυδρομική, General Post) is a Greek courier founded in 1994 operating across Greece, Cyprus, Bulgaria and Romania. Track your 10-digit voucher (SYDETA) number on taxydromiki.com or paste it in the box above; below are English and Greek status meanings, delivery times (1–2 business days on the Greek mainland, next business day in Cyprus), BOX NOW locker and store pickup, claims and Call Center contacts.
+Geniki Taxydromiki (Γενική Ταχυδρομική, General Post) is a Greek courier founded in 1994 operating across Greece, Cyprus, Bulgaria and Romania. Track your 10-digit voucher (SYDETA) number on taxydromiki.com or paste it in the box above; below are English and Greek status meanings, Geniki's indicative delivery times (1–2 business days on the Greek mainland, the next business day within Cyprus), BOX NOW locker and store pickup, claims and Call Center contacts.
 
 ## Geniki Taxydromiki tracking number: what it looks like
 

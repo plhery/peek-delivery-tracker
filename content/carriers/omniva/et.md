@@ -123,11 +123,11 @@ Omniva avalik jälgimine töötab ainult jälgimisnumbri järgi. Kui logid aga O
 
 ### Mida tähendab Omniva olek „Delivery attempt made“?
 
-Kuller proovis pakki kätte toimetada, aga see ei õnnestunud. Kui kuller sind kätte ei saa, tehakse vähemalt kaks katset või viiakse pakk lähedal asuvasse pakiautomaati või postkontorisse.
+Kuller proovis pakki kätte toimetada, aga see ei õnnestunud. Kui Omniva sinuga ühendust ei saa, teeb kuller vähemalt kaks katset, ühe päevas; kui needki ei õnnestu, ootab pakk lähedal asuvas pakiautomaadis või postkontoris.
 
 ### Kuidas jälgida välismaalt Eestisse tulevat Omniva pakki ja deklareerida tollis?
 
-Välismaa pakki näed Omnivas, kui saatjariik on selle rahvusvahelisse andmebaasi lisanud; enne Eestisse jõudmist jälgi seda saatjariigi posti lehel. Kõik väljastpoolt ELi saabuvad pakid tuleb deklareerida 30 päeva jooksul e-MTA-s või Omniva kaudu (kuni 150 € e-poe pakkidele lisandub lisaks käibemaksule 3 € tollimaks ja igale ELi-välisele tellimusele 2 € käitlustasu kaubaartikli kohta).
+Välismaa pakki näed Omnivas, kui saatjariik on selle rahvusvahelisse andmebaasi lisanud; enne Eestisse jõudmist jälgi seda saatjariigi posti lehel. Kõik väljastpoolt ELi saabuvad pakid tuleb Omniva järgi deklareerida 30 päeva jooksul e-MTA-s või Omniva kaudu (kuni 150 € e-poe pakkidele lisandub käibemaksule 3 € tollimaks iga kaubaartikli kohta ning olenemata väärtusest 2 € käitlustasu iga kaubaartikli kohta).
 
 :::sources
 - [Omniva: Pakkide jälgimine ja kättesaamine](https://www.omniva.ee/saadetise-jalgimine-ja-kattesaamine/) – kulleri SMS ja kõne, sama uksekood, hilinenud pakk

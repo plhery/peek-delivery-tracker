@@ -6,7 +6,7 @@ published: 2026-11-18
 updated: 2026-11-27
 ---
 
-Xinghe Freight (星和货运, 广州星和货运代理有限公司, fondé en 2014 à Guangzhou) est un transitaire chinois dont les numéros de suivi suivent le format `GZXH`, dix chiffres et `YQ`. Colle ton numéro de 16 caractères dans le champ ci-dessus : le suivi de Xinghe passe par le serveur de [GZYL](carrier:gzyl) (avec ses libellés anglais), où certaines étapes — y compris `Delivered` — peuvent être écrites à l'avance comme prévision plutôt que comme scan réel.
+Xinghe Freight (星和货运, 广州星和货运代理有限公司, installé à Guangzhou, fondé en 2014 selon son site) est un transitaire chinois dont les numéros de suivi suivent le format `GZXH`, dix chiffres et `YQ`. Colle ton numéro de 16 caractères dans le champ ci-dessus : le suivi de Xinghe passe par le serveur de [GZYL](carrier:gzyl) (avec ses libellés anglais), où certaines étapes — y compris `Delivered` — peuvent être écrites à l'avance comme prévision plutôt que comme scan réel.
 
 ## Numéro de suivi Xinghe Freight : à quoi il ressemble
 
@@ -101,7 +101,7 @@ Hormis La Poste suisse, Peek ne transfère pas un colis Xinghe au transporteur f
 
 ### Qu'est-ce que Xinghe Freight (星和货运) ?
 
-C'est 广州星和货运代理有限公司 (Guangzhou Xinghe Freight Forwarding), un transitaire basé à Guangzhou en Chine, fondé en 2014 (fret maritime, aérien, terrestre et formalités douanières). Ses numéros suivent le format `GZXH`, dix chiffres et `YQ`.
+C'est 广州星和货运代理有限公司 (Guangzhou Xinghe Freight Forwarding), un transitaire basé à Guangzhou en Chine, fondé en 2014 selon son site (fret maritime, aérien, terrestre et formalités douanières). Ses numéros suivent le format `GZXH`, dix chiffres et `YQ`.
 
 ### Pourquoi mon colis Xinghe Freight affiche-t-il le suivi de GZYL ?
 

@@ -1,12 +1,12 @@
 ---
 title: Correos Express rastreio: estados, entregas e contacto
-description: Rastreio Correos Express Portugal (Grupo Correos): número de 16 ou 23 dígitos, estados em espanhol, Ponto Correos (7 dias), prazos 24–48h e 229 762 810.
+description: Rastreio Correos Express Portugal (Grupo Correos): número de envio, estados em espanhol, Ponto Correos (7 dias), prazos 24–48h e 229 762 810.
 slug: correos-express-rastreio
 published: 2026-10-10
 updated: 2026-11-27
 ---
 
-A Correos Express é a transportadora urgente do Grupo Correos (distinta dos Correos postais) e entrega em Portugal continental e Espanha em 24 a 48 horas através da Correos Express Portugal, na Maia. Rastreia o número de 16 ou 23 dígitos no [localizador português](https://s.correosexpress.com/SeguimientoSinCP/search-pt) ou na caixa acima; mais abaixo tens os estados em espanhol explicados, os prazos no Ponto Correos (7 dias) e cacifos (3 dias), segunda tentativa automática e contactos (229 762 810).
+A Correos Express é a transportadora urgente do Grupo Correos (distinta dos Correos postais) e entrega em Espanha e em Portugal, aqui através da Correos Express Portugal, na Maia; entre Espanha peninsular e Portugal continental indica 24 a 48 horas. Rastreia o número de envio no [localizador português](https://s.correosexpress.com/SeguimientoSinCP/search-pt) ou na caixa acima; mais abaixo tens os estados em espanhol explicados, os prazos no Ponto Correos (7 dias) e cacifos (3 dias), segunda tentativa automática e contactos (229 762 810).
 
 ## Número de seguimento Correos Express: como é e onde o encontrar
 
@@ -93,7 +93,7 @@ Consulta o seguimento até a cada 10 minutos, até a cada 2 minutos quando a enc
 
 ### O que é a Correos Express e qual a diferença para os Correos?
 
-É a empresa de encomendas urgentes do Grupo Correos (em Portugal, CEP II – Correos Express Portugal, S.A., comprada em 2019). Os Correos tratam do serviço postal tradicional (números acabados em `ES`); a Correos Express usa números de 16 ou 23 algarismos.
+É a empresa de encomendas urgentes do Grupo Correos (em Portugal, CEP II – Correos Express Portugal, S.A., comprada em 2019). Os Correos tratam do serviço postal tradicional (números acabados em `ES`); a Correos Express não publica o formato dos seus números, e os que o Peek conhece têm 16 ou 23 algarismos.
 
 ### Quanto tempo demora uma encomenda da Correos Express de Espanha para Portugal?
 

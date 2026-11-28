@@ -6,7 +6,7 @@ published: 2026-10-30
 updated: 2026-11-27
 ---
 
-TopYou (通邮, Tongyou, 通邮集团 oder SZTY56 — 深圳市通邮物流科技（集团）股份有限公司, 2016 in Shenzhen gegründet) ist ein chinesischer Spediteur mit internationalen Linien. Füg deine 17-stellige `TYZR…YQ`-Nummer oben ins Feld ein (oder in Großbuchstaben auf [track.szty56.com](https://track.szty56.com/)), um das Paket von China über Flug und Zoll bis zum Zusteller in Deutschland, Österreich oder der Schweiz (etwa iMile, DHL oder die Landespost) zu verfolgen.
+TopYou (通邮, Tongyou, 通邮集团 oder SZTY56 — 深圳市通邮物流科技（集团）股份有限公司, nach eigenen Angaben 2016 in Shenzhen gegründet) ist ein chinesischer Spediteur mit internationalen Linien. Füg deine 17-stellige `TYZR…YQ`-Nummer oben ins Feld ein (oder in Großbuchstaben auf [track.szty56.com](https://track.szty56.com/)), um das Paket von China über Flug und Zoll bis zum Zusteller in Deutschland, Österreich oder der Schweiz (etwa iMile, DHL oder die Landespost) zu verfolgen.
 
 ## TopYou Sendungsnummer: so sieht sie aus
 
@@ -114,7 +114,7 @@ Peek schaut bis zu alle 10 Minuten nach. Wird es bei TopYou still, nur noch stü
 
 ### Was ist TopYou (通邮 / SZTY56)?
 
-深圳市通邮物流科技（集团）股份有限公司, kurz 通邮, 通邮集团, Tongyou oder SZTY56, ist ein 2016 in Shenzhen gegründeter Spediteur mit Sortierzentren in Shenzhen, Guangzhou, Shanghai und weiteren Städten, der laut eigenen Angaben über 800.000 Aufträge täglich abwickelt.
+深圳市通邮物流科技（集团）股份有限公司, kurz 通邮, 通邮集团, Tongyou oder SZTY56, ist ein Spediteur aus Shenzhen. Nach eigenen Angaben wurde er 2016 gegründet, hat Sortierzentren in Shenzhen, Guangzhou, Shanghai und weiteren Städten und wickelt über 800.000 Aufträge täglich ab.
 
 ### Wie sieht eine TopYou-Sendungsnummer aus und warum wird sie nicht gefunden?
 
@@ -122,7 +122,7 @@ TopYou-Nummern sind 17 Zeichen lang: `TYZR` (teils ein anderer Buchstabe statt R
 
 ### Welcher Paketdienst stellt TopYou-Pakete in Deutschland, Österreich und der Schweiz zu?
 
-In Deutschland kann es [iMile](carrier:imile) sein (dessen Scans TopYou weitergibt) oder ein anderer Paketdienst wie DHL Paket; in Österreich übernimmt teils die Österreichische Post, in der Schweiz die Schweizerische Post. Da TopYous Datensatz nur eine zweite Nummer, aber keinen Namen nennt, frag im Zweifel den Shop.
+In Deutschland kann es [iMile](carrier:imile) sein (dessen Scans TopYou weitergibt) oder ein anderer Paketdienst wie DHL Paket; in Österreich und der Schweiz übernimmt teils die Österreichische beziehungsweise die Schweizerische Post. Da TopYous Datensatz nur eine zweite Nummer, aber keinen Namen nennt, frag im Zweifel den Shop.
 
 ### Warum zeigt TopYou mein Land, obwohl das Paket noch in China ist?
 

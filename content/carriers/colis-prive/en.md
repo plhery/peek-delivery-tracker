@@ -6,7 +6,7 @@ published: 2026-10-10
 updated: 2026-11-27
 ---
 
-Colis Privé is a French parcel carrier delivering online orders in France, Belgium and Luxembourg to homes, pickup points and (in France) outdoor lockers. Track your 12-character parcel number with the delivery postcode on [colisprive.fr](https://colisprive.fr/en/) (France), [colisprive.be](https://colisprive.be/en/) (Belgium and Luxembourg) or in Peek above; below are English meanings for its French statuses, 8-day pickup rules, claims and contacts. On 16 October 2026 Colis Privé announced that it and [Paack](carrier:paack) are uniting under the Paack brand from January 2027, with tracking and deliveries running as normal until then.
+Colis Privé is a French parcel carrier delivering online orders in France, Belgium and Luxembourg to homes, pickup points and (in France) outdoor lockers. Track your 12-character parcel number with the delivery postcode on [colisprive.fr](https://colisprive.fr/en/) (France), [colisprive.be](https://colisprive.be/en/) (Belgium and Luxembourg) or in Peek above; below are English meanings for its French statuses, 8-day pickup rules, claims and contacts. On 16 October 2026 Colis Privé announced that it and [Paack](carrier:paack) are uniting under the Paack brand, rolled out gradually from January 2027, with tracking and deliveries running as normal until then.
 
 ## Colis Privé tracking number: where to find it
 
@@ -79,7 +79,7 @@ While you have the parcel open in Peek, or on its delivery day with notification
 
 ### What is Colis Privé, and is it becoming Paack?
 
-Colis Privé is a French parcel carrier founded in 1993 that has also delivered in Belgium and Luxembourg since 2021. On 16 October 2026 it announced it is joining [Paack](carrier:paack) under the Paack brand from January 2027, with current tracking and delivery continuing as before until then.
+Colis Privé is a French parcel carrier founded in 1993 that has also delivered in Belgium and Luxembourg since 2021. On 16 October 2026 it announced it is joining [Paack](carrier:paack) under the Paack brand, rolled out gradually from January 2027, with current tracking and delivery continuing as before until then.
 
 ### How long does Colis Privé take to deliver, and does it deliver on Saturday?
 
@@ -87,7 +87,7 @@ Colis Privé advertises 24 to 48 hours across France, Belgium and Luxembourg. In
 
 ### How long does Colis Privé hold a parcel at a pickup point?
 
-8 days in France (over 5,500 pickup points) and 8 calendar days in Belgium and Luxembourg (800 pickup points), after which the parcel returns to the sender. In France you have 10 working days to reschedule a missed home delivery.
+8 days in France (Colis Privé says it has over 5,500 pickup points) and 8 calendar days in Belgium and Luxembourg (800 pickup points), after which the parcel returns to the sender. In France you have 10 working days to reschedule a missed home delivery.
 
 ### How do I claim for a late, damaged or missing Colis Privé parcel?
 

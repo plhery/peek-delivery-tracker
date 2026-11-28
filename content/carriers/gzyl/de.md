@@ -104,7 +104,7 @@ Nicht mit Sicherheit. `YL`, zehn Ziffern und `YQ` ist die Form von GZYL, und kei
 
 ### Warum meldet GZYL „Delivered“, obwohl mein Paket nicht da ist?
 
-Weil GZYL einen großen Teil des Verlaufs im Voraus schreibt und am Ende ein `Delivered` nach festem Zeitplan einträgt – das beweist keine echte Zustellung. Peek hält solche vorab geschriebenen Schritte zurück; sag dem Shop, dass nichts angekommen ist, und frag nach dem lokalen Zusteller.
+Vielleicht, weil GZYL einen großen Teil des Verlaufs im Voraus schreibt und ihn mit einem `Delivered` nach festem Zeitplan enden lässt: Ein solcher Schritt ist ein Plan, kein Scan, und beweist keine Zustellung. Peek hält solche vorab geschriebenen Schritte zurück; sag dem Shop, dass nichts angekommen ist, und frag nach dem lokalen Zusteller.
 
 ### Wer stellt GZYL-Pakete in Deutschland, Österreich und der Schweiz zu?
 

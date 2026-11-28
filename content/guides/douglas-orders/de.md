@@ -1,13 +1,13 @@
 ---
 title: Douglas Sendungsverfolgung: Lieferung, Rückgabe, Probleme
-description: Douglas-Bestellung verfolgen (DE/AT/CH): DHL-Sendungsnummer, Versandkosten ab 34,95 €, 14 Tage Widerruf, Retourenschein und Douglas-Kundenservice-Kontakte.
+description: Douglas-Bestellung verfolgen (DE/AT/CH): DHL-Sendungsnummer, versandkostenfrei ab 34,95 €, 14 Tage Widerruf, Retourenschein und Douglas-Kundenservice-Kontakte.
 slug: douglas-sendungsverfolgung
 picture: Ein hoher Parfumflakon und ein Lippenstift neben einer kleinen Geschenkbox und einem Lieferwagen, und Pip steht auf der Geschenkbox.
 published: 2026-10-26
 updated: 2026-11-27
 ---
 
-Deine Bestellung von **douglas.de** verfolgst du über den Link oder die Sendungsnummer in der Versandbestätigung per E-Mail (auch direkt in [Peek](/)). In Deutschland liefert DHL standardmäßig in 1–3 Werktagen und ab 34,95 € versandkostenfrei; in Österreich liefern DPD, die Österreichische Post oder Atalogic in 2–4 Werktagen. Bei fehlender, beschädigter oder ausgelaufener Ware erreichst du den Douglas-Kundenservice in Deutschland unter 0800 690 690 5 oder `service@douglas.de`.
+Deine Bestellung von **douglas.de** verfolgst du über den Link oder die Sendungsnummer in der Versandbestätigung per E-Mail (auch direkt in [Peek](/)). In Deutschland liefert DHL standardmäßig in 1–3 Werktagen und ab 34,95 € versandkostenfrei; in Österreich liefern laut AGB DPD, die Österreichische Post oder Atalogic in 2–4 Werktagen. Bei fehlender, beschädigter oder ausgelaufener Ware erreichst du den Douglas-Kundenservice in Deutschland unter 0800 690 690 5 oder service@douglas.de.
 
 ## Welcher Paketdienst liefert meine Douglas-Bestellung?
 

@@ -7,7 +7,7 @@ published: 2026-10-26
 updated: 2026-11-27
 ---
 
-Per tracciare un ordine effettuato su **douglas.it**, recupera il codice o il link del corriere nelle email di Douglas e incollalo su [Peek](/). Se il codice manca, il pacco è in ritardo, incompleto o arriva rotto, oppure vuoi chiedere un reso, scrivi al servizio clienti a `shop@douglas.it` indicando il numero d'ordine: hai 30 giorni lavorativi dalla consegna per richiedere il ritiro tramite corriere (oltre ai 14 giorni di recesso UE).
+Per tracciare un ordine effettuato su **douglas.it**, recupera il codice o il link del corriere nelle email di Douglas e incollalo su [Peek](/). Se il codice manca, il pacco è in ritardo, incompleto o arriva rotto, oppure vuoi chiedere un reso, scrivi al servizio clienti a shop@douglas.it indicando il numero d'ordine: hai 30 giorni lavorativi dalla consegna per richiedere il ritiro tramite corriere (oltre ai 14 giorni di recesso UE).
 
 ## Dove vende Douglas online?
 

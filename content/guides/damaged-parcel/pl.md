@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-11-27
 ---
 
-Jeśli paczka przyszła uszkodzona, sfotografuj karton i zawartość przed dalszym rozpakowywaniem, zachowaj opakowanie i zgłoś szkodę sprzedawcy jeszcze tego samego dnia. W zakupie od firmy za przesyłkę do chwili odbioru odpowiada sklep (art. 548 § 3 Kodeksu cywilnego) — nawet jeśli winny jest kurier — a przy ukrytym uszkodzeniu masz 7 dni na zgłoszenie go przewoźnikowi (Poczta Polska, DPD). Widocznie zgniecionego, rozdartego lub mokrego kartonu możesz nie przyjąć albo spisać z kurierem protokół szkody.
+Jeśli paczka przyszła uszkodzona, sfotografuj karton i zawartość przed dalszym rozpakowywaniem, zachowaj opakowanie i zgłoś szkodę sprzedawcy jeszcze tego samego dnia. W zakupie od firmy za przesyłkę do chwili odbioru odpowiada sklep (art. 548 § 3 Kodeksu cywilnego) — nawet jeśli winny jest kurier — a ukryte uszkodzenie trzeba zgłosić Poczcie Polskiej i DPD w ciągu 7 dni od odbioru. Widocznie zgniecionego, rozdartego lub mokrego kartonu możesz nie przyjąć albo spisać z kurierem protokół szkody.
 
 ## Uszkodzona paczka od kuriera — co zrobić krok po kroku?
 

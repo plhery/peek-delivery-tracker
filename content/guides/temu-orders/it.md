@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-Per tracciare un pacco **Temu** in Italia ti serve il **codice di tracciamento del corriere**, non il numero d'ordine Temu (`PO-…`) né un codice container che inizia per `TEMU`. Incolla il codice del corriere in [Peek](/): riconosce il corriere dalla forma del numero, scarta automaticamente l'eventuale numero d'ordine `PO` se incolli l'intero messaggio e passa al corriere italiano dell'ultimo tratto appena il primo corriere lo indica. Per i pacchi spediti da fuori UE si applicano inoltre il dazio di 3 € (fino a 150 €) e la tassa di gestione UE di 2 € per voce doganale.
+Per tracciare un pacco **Temu** in Italia ti serve il **codice di tracciamento del corriere**, non il numero d'ordine Temu (`PO-…`) né un codice container che inizia per `TEMU`. Incolla il codice del corriere in [Peek](/): riconosce il corriere dalla forma del numero, scarta automaticamente l'eventuale numero d'ordine `PO` se incolli l'intero messaggio e, se il primo corriere indica chi prende in carico il pacco in Italia, passa al nuovo corriere appena il suo tracciamento mostra novità. Per i pacchi spediti da fuori UE si applicano inoltre il dazio di 3 € (fino a 150 €) e la tassa di gestione UE di 2 € per voce doganale.
 
 ## Perché il numero d'ordine Temu (`PO`) non funziona come codice di tracciamento?
 

@@ -7,7 +7,7 @@ published: 2026-10-26
 updated: 2026-11-27
 ---
 
-Para seguir un pedido de **douglas.es** en España, busca el enlace o número de seguimiento en los correos de tu compra y pégalo en [Peek](/). Si no lo encuentras o tu paquete se retrasa, llega incompleto o con un frasco roto, contacta con Douglas en el `900 866 634` o `web@douglas.es` con tu número de pedido. Douglas responde del envío hasta que lo recibes y te ofrece 30 días naturales para devolverlo (frente a los 14 días legales).
+Para seguir un pedido de **douglas.es** en España, busca el enlace o número de seguimiento en los correos de tu compra y pégalo en [Peek](/). Si no lo encuentras o tu paquete se retrasa, llega incompleto o con un frasco roto, contacta con Douglas en el 900 866 634 o en web@douglas.es con tu número de pedido. Douglas responde del envío hasta que lo recibes y te ofrece 30 días naturales para devolverlo (frente a los 14 días legales).
 
 ## ¿Dónde vende Douglas online?
 

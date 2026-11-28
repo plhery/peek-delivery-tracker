@@ -1,13 +1,13 @@
 ---
 title: Śledzenie zamówienia Zara: dostawa, zwroty i problemy
-description: Jak śledzić zamówienie Zara w Polsce: statusy w „Zakupach”, ceny dostawy (od 6,90 zł), zwrot w 30 dni (sklep za darmo) i kontakt 800 702 469 przy problemach.
+description: Jak śledzić zamówienie Zara w Polsce: statusy w „Zakupach”, ceny dostawy (do sklepu gratis), zwrot w 30 dni (sklep za darmo) i kontakt 800 702 469 przy problemach.
 slug: sledzenie-zamowienia-zara
 picture: Papierowa torba z uchwytami ze sznurka obok samochodu dostawczego i Pip wyglądający ze środka torby.
 published: 2026-10-25
 updated: 2026-11-27
 ---
 
-Zamówienie z **zara.com/pl** sprawdzisz w sekcji „Zakupy” na swoim koncie albo — przy zakupie jako gość — przez link w dowolnym e-mailu od Zara, a jeśli masz numer kuriera, także w [Peek](/). Zara nie podaje z góry nazwy przewoźnika i przy opóźnieniu, braku paczki lub błędnym statusie „doręczone” sama wyjaśnia sprawę z firmą transportową (infolinia `800 702 469` lub czat). Na zwrot masz 30 dni od wysyłki: w sklepie Zara za darmo, w punkcie odbioru za 6,90 zł lub z odbiorem kuriera za 9,90 zł.
+Zamówienie z **zara.com/pl** sprawdzisz w sekcji „Zakupy” na swoim koncie albo — przy zakupie jako gość — przez link w dowolnym e-mailu od Zara, a jeśli masz numer kuriera, także w [Peek](/). Strony pomocy Zara nie podają nazwy przewoźnika: przy opóźnieniu, braku paczki lub błędnym statusie „doręczone” skontaktuj się z Zara (infolinia 800 702 469 lub czat), a Zara sprawdzi sprawę z firmą transportową. Na zwrot masz 30 dni od wysyłki: w sklepie Zara za darmo, w punkcie odbioru za 6,90 zł lub z odbiorem kuriera za 9,90 zł.
 
 ## Kto doręcza zamówienie z Zara i gdzie je odebrać?
 

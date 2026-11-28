@@ -1,6 +1,6 @@
 ---
 title: Suivi de commande PcComponentes : livraison et problèmes
-description: Suivre une commande PcComponentes (FR/BE) : transporteur, délai 3–5 jours ouvrés, livraison gratuite dès 50 €, retours sous 30 jours et numéro +33 1 59 13 10 38.
+description: Suivre une commande PcComponentes (FR/BE) : transporteur, 3–5 jours ouvrés, livraison offerte dès 50 € en métropole, retours sous 30 jours, +33 1 59 13 10 38.
 slug: suivi-commande-pccomponentes
 picture: Un grand carton de tour d'ordinateur et un carton d'écran sur un diable, une camionnette de livraison, et Pip sur le pas d'une porte d'entrée ouverte.
 published: 2026-10-17

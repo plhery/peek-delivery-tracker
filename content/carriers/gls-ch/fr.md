@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-En Suisse (GLS Suisse / GLS Schweiz), GLS n'a pas de filiale propre : c'est son partenaire Swiss Post GLS, une unité de La Poste à Bâle, qui dédouane et livre les colis GLS entrants. Pour suivre le tien, saisis son numéro puis ton code postal sur [la page de suivi de GLS](https://gls-group.com/EU/en/parcel-tracking), ou colle le numéro dans le champ ci-dessus. Ce numéro ou Track ID vient de l'expéditeur, dans l'e-mail d'expédition de la boutique ou la page de commande.
+En Suisse (GLS Suisse / GLS Schweiz), GLS n'a pas de filiale propre : son partenaire est Swiss Post GLS, une unité de La Poste à Bâle, et c'est La Poste qui dédouane et livre les colis GLS entrants. Pour suivre le tien, saisis son numéro puis ton code postal sur [la page de suivi de GLS](https://gls-group.com/EU/en/parcel-tracking), ou colle le numéro dans le champ ci-dessus. Ce numéro vient de l'expéditeur : cherche-le dans l'e-mail d'expédition de la boutique ou sur la page de ta commande.
 
 ## Numéro de colis GLS : formes et Track ID
 
@@ -91,7 +91,7 @@ Quand GLS nomme La Poste comme livreur, la page du colis affiche « Livraison pa
 
 ### Qui livre les colis GLS en Suisse, et comment contacter GLS Suisse ?
 
-C'est La Poste suisse (via son partenaire Swiss Post GLS) qui dédouane et livre les colis GLS en Suisse et au Liechtenstein. GLS n'a pas de hotline de suivi suisse : pour l'importation, la ligne Swiss Post GLS répond au +41 848 48 48 47 ou par e-mail à infogls@poste.ch.
+C'est La Poste suisse qui dédouane et livre les colis GLS en Suisse ; pour la Suisse et le Liechtenstein, le partenaire de GLS est Swiss Post GLS, une unité de La Poste. GLS n'a pas de hotline de suivi suisse : pour l'importation, la ligne Swiss Post GLS répond au +41 848 48 48 47 ou par e-mail à infogls@poste.ch.
 
 ### Combien de temps prend une livraison GLS en Suisse ?
 

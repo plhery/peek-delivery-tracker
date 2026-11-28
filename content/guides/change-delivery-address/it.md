@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-11-27
 ---
 
-Per modificare l'indirizzo di spedizione di un acquisto online prima che parta, agisci nel negozio: su Amazon.it puoi cambiarlo da **I miei ordini** finché l'ordine non entra nel processo di spedizione (entro 30 minuti per i venditori terzi), mentre su eBay e Vinted annulli l'ordine con il venditore e ricompri. Quando il pacco è già in viaggio, puoi modificare la consegna con il corriere — scegliendo un punto di ritiro, un vicino, un luogo sicuro o un altro giorno con PostePlus, myBRT, GLS FlexDeliveryService o La Posta — ma cambiare via dipende dal mittente e di solito non è più possibile quando il pacco è già in consegna.
+Per modificare l'indirizzo di spedizione di un acquisto online prima che parta, agisci nel negozio: su Amazon.it puoi cambiarlo da **I miei ordini** finché l'ordine non entra nel processo di spedizione (entro 30 minuti per i venditori terzi), mentre su eBay e Vinted annulli l'ordine con il venditore e ricompri. Quando il pacco è già in viaggio, chiedi al corriere (con PostePlus di Poste Italiane, myBRT, il FlexDeliveryService di GLS o La Posta): con il codice tracking di solito puoi scegliere tra le opzioni che il mittente permette, come un vicino, un luogo sicuro, un punto di ritiro o un altro giorno. Un indirizzo nuovo spesso non è tra queste, e quando il pacco è già in consegna di solito è tardi.
 
 ## Come modificare l'indirizzo di spedizione su Amazon, eBay o Vinted dopo l'ordine?
 

@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-Los envíos de Etsy los gestiona cada tienda por su cuenta: cada vendedor fabrica o empaqueta el pedido, elige el transportista y añade un número de seguimiento cuando el servicio lo incluye. En **Compras y reseñas** (o **Tu cuenta** → **Compras** en la app) ves el estado del envío, la fecha estimada de entrega y el enlace de seguimiento. Si el pedido llega tarde o no aparece, escribe primero al vendedor en **Ayuda con el pedido** y después abre un caso con Etsy.
+Los envíos de Etsy los gestiona cada tienda por su cuenta: cada vendedor fabrica o empaqueta el pedido, elige el transportista y añade un número de seguimiento cuando el servicio lo incluye. En **Compras y reseñas** (o **Tu cuenta** → **Compras** en la app) ves el estado del envío, la fecha estimada de entrega y, si el vendedor lo añadió, el número de seguimiento (con un botón **Seguir paquete** si el transportista es compatible con Etsy). Si el pedido llega tarde o no aparece, escribe primero al vendedor en **Ayuda con el pedido** y después abre un caso con Etsy.
 
 ## ¿Cómo funcionan los envíos de Etsy y por qué pone «No enviado»?
 

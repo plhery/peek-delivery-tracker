@@ -1,6 +1,6 @@
 ---
 title: Tracking WanbExpress: codici WNB…YQ, stati e consegna
-description: Traccia un pacco WanbExpress (WNB…YQ) dalla Cina: significato degli stati doganali, chi consegna in Italia, codice del corriere locale e pacco fermo.
+description: Traccia un pacco WanbExpress (WNB…YQ) dalla Cina: significato degli stati doganali, chi consegna nel tuo Paese, codice del corriere locale e pacco fermo.
 slug: tracking-wanbexpress
 published: 2026-11-21
 updated: 2026-11-27

@@ -2,7 +2,7 @@ import 'server-only';
 
 import { SCHEDULED_DELIVERIES } from '../lib/carriers';
 import { currentScan, EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
-import { recordPeekAiServed } from './metrics';
+import { recordPeekAiServed, recordPlaceCountryImplausible } from './metrics';
 import { captureOperationalError } from './observability';
 import { CARRIER_DEFINITIONS, classifyWording, RECIPIENT_ACTIONS, recipientAction, type CarrierId } from 'universal-parcel-scraper';
 import { scanTemplate, trackingLocationCountries, trackingPlace } from 'universal-parcel-scraper/app';
@@ -685,18 +685,38 @@ function parcelCountries(destination: string | null, carriers: readonly string[]
  * without a reader of their own: the country they name and the rest of them, read against the country the gazetteer
  * placed the scan in and the parcel's `countries` (`trackingPlace`; "BENTIVOGLIO (BO)" on a parcel to Italy is in
  * Italy). Scans in order, with `times`, also get the country the passport counts (`passport_country`,
- * `trackingLocationCountries`, which weighs the scans around each one and drops a code the parcel could not have reached).
+ * `trackingLocationCountries`, which weighs the scans around each one and drops a code the parcel could not have reached:
+ * `implausible` hears of each one dropped).
  */
 function writtenPlaces(locations: readonly (string | null)[], placed: readonly (string | null | undefined)[], countries: readonly string[],
-  times?: readonly (string | null)[]): (JsonObject | null)[] {
+  times?: readonly (string | null)[], implausible?: (index: number) => void): (JsonObject | null)[] {
   const passport = times ? trackingLocationCountries(locations.map((location, index) =>
     ({ location, time: times[index], placed: placed[index] ?? null })), countries) : null;
+  passport?.forEach((read, index) => { if (read.implausible) implausible?.(index); });
   return locations.map((location, index) => {
     if (!location?.trim()) return null;
     const { country, place } = trackingPlace(location, { placed: placed[index] ?? null, countries });
     const stamp = passport?.[index]?.country;
     return { ...country ? { country } : {}, name: place, ...stamp ? { passport_country: stamp } : {} };
   });
+}
+
+const countedImplausible = new Set<string>();
+const COUNTED_IMPLAUSIBLE = 50_000;
+
+/**
+ * Counts a scan whose words name a country the parcel could not have reached (`place_country_implausible_total`), once
+ * per scan however often it is served, by the carrier whose words they are: the scan's source, or the parcel's carrier
+ * for a universal provider's copy or Peek's own row.
+ */
+function countImplausible(row: JsonObject, event: JsonObject): void {
+  const id = String(event.id ?? '');
+  if (!id || countedImplausible.has(id)) return;
+  countedImplausible.add(id);
+  if (countedImplausible.size > COUNTED_IMPLAUSIBLE) countedImplausible.delete(countedImplausible.values().next().value!);
+  const source = sourceOf(event);
+  recordPlaceCountryImplausible(source && source !== 'unknown' && source !== 'app' ? source
+    : typeof row.carrier === 'string' ? row.carrier : 'unknown');
 }
 
 function placedEvents(row: JsonObject): JsonObject {
@@ -766,7 +786,8 @@ function placedEvents(row: JsonObject): JsonObject {
     }
     const written = writtenPlaces(ordered.map((event) => typeof event.location === 'string' ? event.location : null),
       places.map((place) => place?.country), parcelCountries(destination, carriers),
-      ordered.map((event) => typeof event.occurred_at === 'string' ? event.occurred_at : null));
+      ordered.map((event) => typeof event.occurred_at === 'string' ? event.occurred_at : null),
+      (index) => countImplausible(row, ordered[index]!));
     const byEvent = new Map(ordered.map((event, index) => [event, { place: places[index] ?? null, written: written[index] }]));
     return {
       ...row,

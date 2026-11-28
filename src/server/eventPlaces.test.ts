@@ -2,6 +2,8 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import * as observability from './observability';
 import * as places from 'universal-parcel-scraper/places';
 vi.mock('universal-parcel-scraper/places', { spy: true });
+import * as metrics from './metrics';
+vi.mock('./metrics', { spy: true });
 import { currentEvent, withRelays } from '../lib/stages';
 import type { Stage, TrackingEvent } from '../types';
 import { withEventPlaces, withoutEventSources } from './eventPlaces';
@@ -173,6 +175,26 @@ describe('withEventPlaces', () => {
       { country: 'CA', name: 'SCARBOROUGH - ON' },
       undefined,
     ]);
+  });
+
+  it('counts once, by the carrier whose words they are, a scan naming a country the parcel could not have reached', () => {
+    const counted = vi.mocked(metrics.recordPlaceCountryImplausible);
+    counted.mockClear();
+    const row = {
+      id: 'parcel',
+      carrier: 'poste-italiane',
+      carrier_data: { destination_country: 'IT' },
+      tracking_events: [
+        { ...event('implausible-1', 'Milano, IT', '2026-09-26T09:00:00+00:00'), provider_event_id: 'poste-italiane:1' },
+        // Bolivia an hour after Milan and an hour before Rome: Bologna's province, written after a comma.
+        { ...event('implausible-2', 'EXAMPLE TOWN, BO', '2026-09-26T10:00:00+00:00'), provider_event_id: 'unknown:2' },
+        { ...event('implausible-3', 'Roma, IT', '2026-09-26T11:00:00+00:00'), provider_event_id: 'poste-italiane:3' },
+      ],
+    };
+    const served = withEventPlaces(row) as { tracking_events: Record<string, unknown>[] };
+    expect(served.tracking_events[1].written_place).toEqual({ country: 'BO', name: 'EXAMPLE TOWN' });
+    withEventPlaces(row);
+    expect(counted.mock.calls).toEqual([['poste-italiane']]);
   });
 
   it('knows a carrier\'s country from the catalog, whatever clock its scans keep', () => {

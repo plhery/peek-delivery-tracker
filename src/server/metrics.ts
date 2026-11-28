@@ -66,6 +66,7 @@ interface PrometheusRuntime {
   publicDetectionTotal: Counter<'outcome'>;
   publicParcelReadTotal: Counter<'outcome'>;
   peekAiServedTotal: Counter<'says'>;
+  placeCountryImplausibleTotal: Counter<'carrier'>;
   parcelClaimTotal: Counter<'outcome'>;
   parcelForgottenTotal: Counter<'kind' | 'reason'>;
   parcelShareTotal: Counter<'kind' | 'change'>;
@@ -222,6 +223,12 @@ function createRuntime(): PrometheusRuntime {
       name: 'peek_ai_served_total',
       help: 'Parcels served with a Peek AI estimate, by what it says.',
       labelNames: ['says'] as const,
+      registers: [registry],
+    }),
+    placeCountryImplausibleTotal: new Counter({
+      name: 'place_country_implausible_total',
+      help: 'Scans served whose words name a country the parcel could not have reached between its neighbours, by carrier.',
+      labelNames: ['carrier'] as const,
       registers: [registry],
     }),
     parcelClaimTotal: new Counter({
@@ -608,6 +615,11 @@ export function recordPublicParcelRead(outcome: 'ok' | 'not_found' | 'stopped'):
 /** A parcel served with Peek AI's estimate. */
 export function recordPeekAiServed(says: string): void {
   count(runtime.peekAiServedTotal, 'peek_ai_served_total', { says });
+}
+
+/** A served scan whose words name a country the parcel could not have reached (`trackingLocationCountries`' implausible). */
+export function recordPlaceCountryImplausible(carrier: string): void {
+  count(runtime.placeCountryImplausibleTotal, 'place_country_implausible_total', { carrier });
 }
 
 export function recordParcelClaim(outcome: 'kept' | 'already' | 'quota' | 'unavailable'): void {

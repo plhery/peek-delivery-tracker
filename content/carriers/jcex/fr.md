@@ -90,7 +90,7 @@ Il vérifie jusqu'à toutes les 10 minutes, ou toutes les 2 minutes à partir de
 
 ### JCEX est-il fiable ?
 
-Oui. JCEX est la marque de Jiacheng International Logistics, fondée en 2000 à Hangzhou, en Chine, dans laquelle Huamao Logistics, cotée à Shanghai, détient une participation depuis 2021. La société indique être prestataire logistique agréé pour des plateformes comme Alibaba.com, Cainiao et DHgate.
+Oui. JCEX est la marque de Jiacheng International Logistics, fondée en 2000 à Hangzhou, en Chine, dans laquelle Huamao Logistics, cotée à Shanghai, détient une participation depuis 2021. La société se dit prestataire logistique désigné de plateformes comme Alibaba.com, Cainiao et DHgate.
 
 ### Que veut dire « Arrive at the delivery point » chez JCEX ?
 

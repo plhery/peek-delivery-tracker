@@ -25,7 +25,7 @@ Groß- und Kleinschreibung sowie Leerzeichen spielen in Peek keine Rolle. Der JC
 
 ## JCEX Tracking-Status erklärt
 
-Der JCEX-Tracker ist nur auf Chinesisch verfügbar, aber der Text der einzelnen Zeilen kann auf Englisch, Chinesisch oder in beiden Sprachen stehen — hinter einem UTC-Versatz, einer Uhrzeit und einem Ort. Die Zeilen, denen ein Paket typischerweise begegnet, und was Peek anzeigt, solange jede Zeile die neueste ist:
+Der JCEX-Tracker ist nur auf Chinesisch verfügbar, aber der Text der einzelnen Zeilen kann auf Englisch, Chinesisch oder in beiden Sprachen stehen — hinter einem UTC-Versatz, einer Uhrzeit und einem Ort. Die Zeilen, die man sieht, in der Reihenfolge, in der ein Paket ihnen meist begegnet, und was Peek anzeigt, solange jede Zeile die neueste ist:
 
 | JCEX meldet | Was das für dich bedeutet | Peek zeigt |
 | --- | --- | --- |
@@ -90,7 +90,7 @@ Peek prüft bis zu alle 10 Minuten — oder ab 6:00 Uhr Ortszeit an dem Tag, an 
 
 ### Ist JCEX seriös?
 
-Ja. JCEX ist die Marke von Jiacheng International Logistics, gegründet im Jahr 2000 in Hangzhou, China, an der das in Shanghai börsennotierte Unternehmen Huamao Logistics seit 2021 beteiligt ist. JCEX bezeichnet sich als zugelassenen Logistikpartner für Plattformen wie Alibaba.com, Cainiao und DHgate.
+Ja. JCEX ist die Marke von Jiacheng International Logistics, gegründet im Jahr 2000 in Hangzhou, China, an der das in Shanghai börsennotierte Unternehmen Huamao Logistics seit 2021 beteiligt ist. JCEX bezeichnet sich als ausgewiesenen Logistikdienstleister für Plattformen wie Alibaba.com, Cainiao und DHgate.
 
 ### Was bedeutet „Arrive at the delivery point“ bei JCEX?
 

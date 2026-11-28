@@ -31,36 +31,36 @@ Sledování HuaHan vypisuje každý sken s časem, textem a místem, nejnovějš
 
 | HuaHan uvádí | Co to pro tebe znamená | Peek zobrazí |
 | --- | --- | --- |
-| `快件电子信息已经收到 Shipment information received`, `Shipment information received` | Obchod poslal HuaHan údaje o zásilce. HuaHan balík ještě nemá. | "Label created" |
-| `快件到达作业中心 Shipment arrived at facility`, `Has entered the warehouse` | Středisko HuaHan v Číně balík přijalo: v záznamech v kódu Peeku v Šen-čenu. | "Received by carrier" |
-| `快件操作完成 Shipment departed from facility` | Zpracováno a na cestě z tohoto střediska. | "In transit" |
-| `Transfer to Origin airport` | Na cestě na letiště. | "In transit" |
-| `Export customs clearance completed` | Vývozní celní řízení na cestě ven je hotové. Nejde o celnici ve tvé zemi. | "In transit" |
-| `Departed from airport of Origin` | Letadlo odletělo. | "In transit" |
-| `Import Customs clearance started` | Zásilku má celnice v cílové zemi. | "At customs" |
-| `Arrived at destination airport` | Letadlo přistálo v cílové zemi. | "In transit" |
-| `Import Customs clearance completed` | Dovozní celnice zásilku propustila. | "In transit" |
-| `Has been given to local carrier` | HuaHan balík předal dopravci, který ho doručí. Dál následují řádky tohoto dopravce. | "In transit" |
+| `快件电子信息已经收到 Shipment information received`, `Shipment information received` | Obchod poslal HuaHan údaje o zásilce. HuaHan balík ještě nemá. | „Label created“ |
+| `快件到达作业中心 Shipment arrived at facility`, `Has entered the warehouse` | Středisko HuaHan v Číně balík přijalo: v záznamech v kódu Peeku v Šen-čenu. | „Received by carrier“ |
+| `快件操作完成 Shipment departed from facility` | Zpracováno a na cestě z tohoto střediska. | „In transit“ |
+| `Transfer to Origin airport` | Na cestě na letiště. | „In transit“ |
+| `Export customs clearance completed` | Vývozní celní řízení na cestě ven je hotové. Nejde o celnici ve tvé zemi. | „In transit“ |
+| `Departed from airport of Origin` | Letadlo odletělo. | „In transit“ |
+| `Import Customs clearance started` | Zásilku má celnice v cílové zemi. | „At customs“ |
+| `Arrived at destination airport` | Letadlo přistálo v cílové zemi. | „In transit“ |
+| `Import Customs clearance completed` | Dovozní celnice zásilku propustila. | „In transit“ |
+| `Has been given to local carrier` | HuaHan balík předal dopravci, který ho doručí. Dál následují řádky tohoto dopravce. | „In transit“ |
 
 **Řádky místního dopravce.** Po předání přebírá sledování HuaHan skeny místního dopravce. Peek je čte podle kódu kroku od HuaHan, kde existuje, nebo podle jejich znění. Formulace, s nimiž se kód Peeku setkal a které připisuje místnímu dopravci:
 
 | Po předání | Co to pro tebe znamená | Peek zobrazí |
 | --- | --- | --- |
-| `Ready to Ship, Parcel received and processed` | Místní dopravce balík má. | "In transit" |
-| `The parcel is in the central warehouse waiting to be processed.`, `In Transit, Shipment arrived to sorting centre / Shipment in the sorting centre`, `In Transit, Shipment remained at sorting hub` | V centrálním skladu nebo třídicím středisku místního dopravce, případně tam stále čeká. | "In transit" |
-| `In Transit, Arrived to HU HUB`, `In Transit, Parcel has entered the Linehaul network.` | V uzlu místního dopravce v Maďarsku, poté v přepravě mezi jeho uzly. | "In transit" |
-| `In Transit, Picked Up` (následováno německým `Einrollung` od DPD), `In Transit, Scanned By DPD At parcel delivery centre.`, `In Transit, At parcel delivery centre.` | V doručovacím depu DPD: příjmový sken v depu (nejde o vyzvednutí od tebe), pak jeden sken za každý den, kdy tam balík čeká. | "In transit" |
-| `Out for Delivery, Parcel is at courier, delivery expected soon.` | Na rozvozové trase u kurýra. | "Out for delivery" |
-| `The courier will deliver the parcel soon. Additional details are available in the SAMEDAY app, email or SMS.` | Na rozvozové trase, slovy kurýra [Sameday](carrier:sameday) působícího v Rumunsku a Bulharsku. | "Out for delivery" |
-| `Delivery Attempted`, `Delivery Attempted, Unfortunately we have not been able to deliver your parcel. Pickup parcelshop delivery after first delivery attempt.` | DPD se pokusilo doručit, ale neúspěšně. U delšího řádku míří balík po prvním pokusu na výdejní místo. | "Delivery attempted" |
-| `Awaiting Pickup, Parcel was deposited in Pickup parcel station` | Po pokusu o doručení uložilo DPD balík na výdejním místě k vyzvednutí. | "Ready for pickup" |
-| `The parcel has been successfully delivered.` | Doručeno. | "Delivered" |
+| `Ready to Ship, Parcel received and processed` | Místní dopravce balík má. | „In transit“ |
+| `The parcel is in the central warehouse waiting to be processed.`, `In Transit, Shipment arrived to sorting centre / Shipment in the sorting centre`, `In Transit, Shipment remained at sorting hub` | V centrálním skladu nebo třídicím středisku místního dopravce, případně tam stále čeká. | „In transit“ |
+| `In Transit, Arrived to HU HUB`, `In Transit, Parcel has entered the Linehaul network.` | V uzlu místního dopravce v Maďarsku, poté v přepravě mezi jeho uzly. | „In transit“ |
+| `In Transit, Picked Up` (následováno německým `Einrollung` od DPD), `In Transit, Scanned By DPD At parcel delivery centre.`, `In Transit, At parcel delivery centre.` | V doručovacím depu DPD: příjmový sken v depu (nejde o vyzvednutí od tebe), pak jeden sken za každý den, kdy tam balík čeká. | „In transit“ |
+| `Out for Delivery, Parcel is at courier, delivery expected soon.` | Na rozvozové trase u kurýra. | „Out for delivery“ |
+| `The courier will deliver the parcel soon. Additional details are available in the SAMEDAY app, email or SMS.` | Na rozvozové trase, slovy kurýra [Sameday](carrier:sameday) působícího v Rumunsku a Bulharsku. | „Out for delivery“ |
+| `Delivery Attempted`, `Delivery Attempted, Unfortunately we have not been able to deliver your parcel. Pickup parcelshop delivery after first delivery attempt.` | DPD se pokusilo doručit, ale neúspěšně. U delšího řádku míří balík po prvním pokusu na výdejní místo. | „Delivery attempted“ |
+| `Awaiting Pickup, Parcel was deposited in Pickup parcel station` | Po pokusu o doručení uložilo DPD balík na výdejním místě k vyzvednutí. | „Ready for pickup“ |
+| `The parcel has been successfully delivered.` | Doručeno. | „Delivered“ |
 
-HuaHan řadí skeny místního dopravce pro rozvoz, výdejní místo a doručení pod vlastní kódy a Peek je ukazuje jako "Out for delivery", "Ready for pickup" nebo "Delivered", pokud slova nepojmenovávají jiný krok: HuaHan pod svůj kód pro rozvoz řadí i odjezd USPS z distribučního centra.
+HuaHan řadí skeny místního dopravce pro rozvoz, výdejní místo a doručení pod vlastní kódy a Peek je ukazuje jako „Out for delivery“, „Ready for pickup“ nebo „Delivered“, pokud slova nepojmenovávají jiný krok: HuaHan pod svůj kód pro rozvoz řadí i odjezd USPS z distribučního centra.
 
-**Dva řádky, které matou.** `We will pick up your parcel from the sender soon.` se může objevit hned na začátku, ještě než HuaHan balík v Číně vůbec převzal: jde o oznámení místního dopravce, že o zásilce ví, nikoli o vyzvednutí od tebe. Peek ukáže "Label created". `The parcel was redirected. As soon as it is in the couriers possession, it will be processed as requested.` znamená, že dopravce zaznamenal požadované přesměrování — také se zapisuje, když je balík ještě v Číně. Balíkem to nepohne a Peek tomuto řádku vlastní stav nepřiřazuje.
+**Dva řádky, které matou.** `We will pick up your parcel from the sender soon.` se může objevit hned na začátku, ještě než HuaHan balík v Číně vůbec převzal: jde o oznámení místního dopravce, že o zásilce ví, nikoli o vyzvednutí od tebe. Peek ukáže „Label created“. `The parcel was redirected. As soon as it is in the couriers possession, it will be processed as requested.` znamená, že dopravce zaznamenal požadované přesměrování — také se zapisuje, když je balík ještě v Číně. Balíkem to nepohne a Peek tomuto řádku vlastní stav nepřiřazuje.
 
-**Data, nikoli skeny.** `The instruction data for this shipment have been provided by the sender to DHL electronically.` (někdy bez tečky na konci) je záznam DHL o datech zásilky pro poslední úsek, předaný předtím, než HuaHan balík v Číně přijal, nebo až po odletu. Čínský řádek `货物电子信息已经收到` (elektronická data o zboží přijata) znamená totéž a může se objevit i poté, co už HuaHan balík má. Ani jeden není pohyb: Peek ukáže "Label created", nebo ponechá dosavadní stav.
+**Data, nikoli skeny.** `The instruction data for this shipment have been provided by the sender to DHL electronically.` (někdy bez tečky na konci) je záznam DHL o datech zásilky pro poslední úsek, předaný předtím, než HuaHan balík v Číně přijal, nebo až po odletu. Čínský řádek `货物电子信息已经收到` (elektronická data o zboží přijata) je záznam dat objednávky a může se objevit i poté, co už HuaHan balík má. Ani jeden není pohyb: Peek ukáže „Label created“, nebo ponechá dosavadní stav.
 
 **Jeden sken, dva řádky.** Sledování HuaHan dokáže vypsat jeden sken místního dopravce dvakrát ve stejný čas: slovy toho dopravce i s místem a bez místa v obecných slovech HuaHan, jako `Delivered, Parcel was delivered successfully`. Peek ponechá řádek s místem.
 
@@ -68,35 +68,35 @@ HuaHan řadí skeny místního dopravce pro rozvoz, výdejní místo a doručen�
 
 | HuaHan přenáší | Co to pro tebe znamená | Peek zobrazí |
 | --- | --- | --- |
-| `中国邮政已收取邮件` | China Post převzala balík od HuaHan: odtud putuje poštou. | "In transit" |
-| `邮件已在【…】完成分拣，准备发出`, `邮件到达【…】`, `邮件离开【…】，正在发往【…】`, `邮件离开【…】，正在发往下一站` | Vytříděno, dorazilo nebo opustilo provozovnu China Post v Číně uvedenou v 【】. | "In transit" |
-| `送交出口海关` | Předáno vývozní celnici v Číně. Nejde o celnici ve tvé zemi. | "At customs" |
-| `出口海关/放行` | Vývozní celnice zásilku propustila. | "In transit" |
-| `已交承运商运输` | Předáno aerolince, která balík přepraví do zahraničí. | "In transit" |
-| `到达寄达地`, `到达寄达地处理中心`, `到达境外经转局` | Dorazilo do cílové země, do zpracovatelského centra její pošty nebo do tranzitní pošty po cestě. | "In transit" |
-| `境外进口海关留存待验(等待提交给边境机构/安全部门)` | Zadrženo pro dovozní celnici v cílové zemi; v závorce stojí, že čeká na předložení pohraničním či bezpečnostním orgánům. | "At customs" |
-| `境外进口互换局留存`, `送交境外进口海关` | Uloženo na vyměňovací poště cílové pošty, poté předáno dovozní celnici. | "At customs" |
-| `寄达地海关允许进口（无需缴税）` | Dovozní celnice povolila dovoz bez platby cla. | "In transit" |
-| `离开【…】处理中心`, `已到达【…】投递局` | Opustilo zpracovatelské centrum v zemi uvedené v 【】, poté dorazilo na dodací poštu. | "In transit" |
+| `中国邮政已收取邮件` | China Post převzala balík od HuaHan: odtud putuje poštou. | „In transit“ |
+| `邮件已在【…】完成分拣，准备发出`, `邮件到达【…】`, `邮件离开【…】，正在发往【…】`, `邮件离开【…】，正在发往下一站` | Vytříděno, dorazilo nebo opustilo provozovnu China Post v Číně uvedenou v 【】. | „In transit“ |
+| `送交出口海关` | Předáno vývozní celnici v Číně. Nejde o celnici ve tvé zemi. | „At customs“ |
+| `出口海关/放行` | Vývozní celnice zásilku propustila. | „In transit“ |
+| `已交承运商运输` | Předáno aerolince, která balík přepraví do zahraničí. | „In transit“ |
+| `到达寄达地`, `到达寄达地处理中心`, `到达境外经转局` | Dorazilo do cílové země, do zpracovatelského centra její pošty nebo do tranzitní pošty po cestě. | „In transit“ |
+| `境外进口海关留存待验(等待提交给边境机构/安全部门)` | Zadrženo pro dovozní celnici v cílové zemi; v závorce stojí, že čeká na předložení pohraničním či bezpečnostním orgánům. | „At customs“ |
+| `境外进口互换局留存`, `送交境外进口海关` | Uloženo na vyměňovací poště cílové pošty, poté předáno dovozní celnici. | „At customs“ |
+| `寄达地海关允许进口（无需缴税）` | Dovozní celnice povolila dovoz bez platby cla. | „In transit“ |
+| `离开【…】处理中心`, `已到达【…】投递局` | Opustilo zpracovatelské centrum v zemi uvedené v 【】, poté dorazilo na dodací poštu. | „In transit“ |
 
 **Přes Landmark Global.** U některých zásilek přenáší sledování HuaHan anglické řádky [Landmark Global](carrier:landmark-global). První dva se objeví ještě předtím, než HuaHan balík v Číně převezme; ostatní následují po předání do sítě [bpost](carrier:bpost), která doručuje:
 
 | HuaHan přenáší | Co to pro tebe znamená | Peek zobrazí |
 | --- | --- | --- |
-| `Shipment Data Uploaded` | Záznam Landmark Global o datech odesílatele. Nejde o pohyb. | "Label created" |
+| `Shipment Data Uploaded` | Záznam Landmark Global o datech odesílatele. Nejde o pohyb. | „Label created“ |
 | `Processed` | Zpracování u Landmark Global ve stejnou minutu jako předchozí záznam. Neznamená převzetí balíku, ale oznámení; Peek ponechá předchozí stav. | Předchozí stav |
-| `Incoming scan at facility` | Depo balík přijalo po předání do sítě bpost. | "In transit" |
-| `Outgoing scan at facility` | Balík toto depo opustil. Do rozvozu mohou zbývat ještě dny. | "In transit" |
-| `Out for delivery (On the way)` | Na rozvozové trase. | "Out for delivery" |
-| `Delivery attempt (Delivery not possible)` | Pokus o doručení, který se nezdařil. | "Delivery attempted" |
+| `Incoming scan at facility` | Depo balík přijalo po předání do sítě bpost. | „In transit“ |
+| `Outgoing scan at facility` | Balík toto depo opustil. Do rozvozu mohou zbývat ještě dny. | „In transit“ |
+| `Out for delivery (On the way)` | Na rozvozové trase. | „Out for delivery“ |
+| `Delivery attempt (Delivery not possible)` | Pokus o doručení, který se nezdařil. | „Delivery attempted“ |
 
-HuaHan řadí `Outgoing scan at facility` pod svůj kód pro rozvoz, ale text popisuje odjezd z depa, takže Peek zobrazuje "In transit".
+HuaHan řadí `Outgoing scan at facility` pod svůj kód pro rozvoz, ale text popisuje odjezd z depa, takže Peek zobrazuje „In transit“.
 
 ## Kdo doručuje zásilky HuaHan
 
 Po stavu `Has been given to local carrier` doručuje zásilku místní dopravce v cílové zemi a sledování HuaHan dokáže uvést jeho název i číslo.
 
-**Co ukazuje kód Peeku.** Jeden záznam HuaHan ukazuje doručení přes Sameday: jeho řádek při rozvozu odkazuje na aplikaci SAMEDAY. Kód Peeku počítá od HuaHan také s čísly [USPS](carrier:usps): když HuaHan předá dlouhý čárový kód štítku USPS, Peek z něj vytáhne vlastní sledovací číslo USPS. Pro poslední úsek některých zásilek se objednává [DHL](carrier:dhl): výše citovaný datový řádek je jeho záznamem údajů odesílatele. Jiné doručuje DPD: jeho skeny z depa, jako `In Transit, Scanned By DPD At parcel delivery centre.`, najdeš v tabulce výše. U dalších je pro poslední úsek ohlášen [CTT Express](carrier:ctt-express): sledování HuaHan přenáší jeho oznámení `Pendiente de recepción en CTT Express` („čeká na přijetí u CTT Express“) pár minut po příjmovém skenu HuaHan v Číně, v madridském čase, a Peek zobrazí "Label created". Další balíky jdou přes [Landmark Global](carrier:landmark-global): sledování HuaHan přenáší jeho řádky od záznamu dat až po rozvoz a po předání doručuje síť bpost (viz „Přes Landmark Global“ výše). Mimo tyto případy kód neváže žádného dopravce k určité zemi: Peek se řídí tím, kterého HuaHan uvede pro tvoji zásilku.
+**Co ukazuje kód Peeku.** Jeden záznam HuaHan ukazuje doručení přes Sameday: jeho řádek při rozvozu odkazuje na aplikaci SAMEDAY. Kód Peeku počítá od HuaHan také s čísly [USPS](carrier:usps): když HuaHan předá dlouhý čárový kód štítku USPS, Peek z něj vytáhne vlastní sledovací číslo USPS. Pro poslední úsek některých zásilek se objednává [DHL](carrier:dhl): výše citovaný datový řádek je jeho záznamem údajů odesílatele. Jiné doručuje DPD: jeho skeny z depa, jako `In Transit, Scanned By DPD At parcel delivery centre.`, najdeš v tabulce výše. U dalších je pro poslední úsek ohlášen [CTT Express](carrier:ctt-express): sledování HuaHan přenáší jeho oznámení `Pendiente de recepción en CTT Express` („čeká na přijetí u CTT Express“) pár minut po příjmovém skenu HuaHan v Číně, v madridském čase, a Peek zobrazí „Label created“. Další balíky jdou přes [Landmark Global](carrier:landmark-global): sledování HuaHan přenáší jeho řádky od záznamu dat až po rozvoz a po předání doručuje síť bpost (viz „Přes Landmark Global“ výše). Mimo tyto případy kód neváže žádného dopravce k určité zemi: Peek se řídí tím, kterého HuaHan uvede pro tvoji zásilku.
 
 **Pokusy o doručení a vyzvednutí.** Pokusy, oznámení a to, kde a jak dlouho nevyzvednutý balík čeká, se řídí pravidly místního dopravce: o změnu doručení žádej přímo jeho s jeho sledovacím číslem. Viz [missed delivery](guide:missed-delivery) a [uncollected parcels](guide:uncollected-parcel) (oboje v angličtině).
 
@@ -104,7 +104,7 @@ Po stavu `Has been given to local carrier` doručuje zásilku místní dopravce 
 
 ## Zásilka HuaHan nedorazila nebo se sledování nehýbe
 
-**Číslo nenalezeno.** Pokud HuaHan o čísle žádný záznam nemá, jeho sledování odpoví `没有找到记录` („záznam nenalezen“) a Peek zobrazí "Waiting for HuaHan Logistics" a kontroluje dál. Pokud HuaHan číslo nezná ani po dvou dnech a nic jiného na něj neodpovědělo, Peek zobrazí "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." Zkontroluj číslo znak po znaku podle zprávy od prodejce: `HHW`, dvě písmena, deset číslic, `YQ`. Pokud se ani po pár dnech nic neobjeví, zeptej se prodejce, zda balík skutečně odeslal.
+**Číslo nenalezeno.** Pokud HuaHan o čísle žádný záznam nemá, jeho sledování odpoví `没有找到记录` („záznam nenalezen“) a Peek zobrazí „Waiting for HuaHan Logistics“ a kontroluje dál. Pokud HuaHan číslo nezná ani po dvou dnech a nic jiného na něj neodpovědělo, Peek zobrazí „After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel.“ Zkontroluj číslo znak po znaku podle zprávy od prodejce: `HHW`, dvě písmena, deset číslic, `YQ`. Pokud se ani po pár dnech nic neobjeví, zeptej se prodejce, zda balík skutečně odeslal.
 
 **Zaseknuto na `Shipment information received`.** Obchod zásilku zaregistroval, ale HuaHan ji ještě nenaskenoval. Zeptej se obchodu, kdy balík předal.
 
@@ -112,7 +112,7 @@ Po stavu `Has been given to local carrier` doručuje zásilku místní dopravce 
 
 **Nic po `Has been given to local carrier`.** Balík má místní dopravce a jeho vlastní sledování může být napřed před HuaHan. Jeho název a číslo najdeš ve sledování HuaHan, nebo na kartě zásilky v Peeku, pokud Peek toho dopravce zná — jinak se zeptej prodejce, kdo doručuje.
 
-**Bez aktualizace několik dní.** Když zásilka na cestě nemá nový sken čtyři dny, Peek ji označí datem posledního skenu ("No tracking update since Mon 12 Oct") a poznamená, že balíky na dlouhých letech, na celnici nebo o víkendu často mlčí; po třech týdnech bez novinek radí oslovit prodejce. Viz [why tracking stops updating](guide:tracking-not-updating) a [tracking parcels from China](guide:tracking-from-china) (v angličtině).
+**Bez aktualizace několik dní.** Když zásilka na cestě nemá nový sken čtyři dny, Peek ji označí datem posledního skenu („No tracking update since Mon 12 Oct“) a poznamená, že balíky na dlouhých letech, na celnici nebo o víkendu často mlčí; po třech týdnech bez novinek radí oslovit prodejce. Viz [why tracking stops updating](guide:tracking-not-updating) a [tracking parcels from China](guide:tracking-from-china) (v angličtině).
 
 **Doručeno, ale nic nepřišlo.** Zkontroluj místo uložení a zeptej se sousedů, potom místního dopravce a prodejce. Viz [delivered but not received](guide:delivered-not-received) (v angličtině).
 
@@ -124,15 +124,15 @@ Na svém webu ([hh-exp.com/lxwm](https://www.hh-exp.com/lxwm)) uvádí HuaHan in
 
 ## Sledování zásilky HuaHan v Peeku
 
-[Peek](/) rozpozná HuaHan Logistics okamžitě z čísla `HHW…YQ` ("Detected carrier") a dotazuje se sledování HuaHan jen pomocí celého tohoto čísla: není potřeba účet, PSČ ani telefon. Pokud máš jen číslo objednávky, požádej prodejce o přepravní číslo `HHW…YQ`. Máš-li jen číslo místního dopravce, vlož místo něj to: Peek sleduje více než 4 500 dopravců.
+[Peek](/) rozpozná HuaHan Logistics okamžitě z čísla `HHW…YQ` („Detected carrier“) a dotazuje se sledování HuaHan jen pomocí celého tohoto čísla: není potřeba účet, PSČ ani telefon. Pokud máš jen číslo objednávky, požádej prodejce o přepravní číslo `HHW…YQ`. Máš-li jen číslo místního dopravce, vlož místo něj to: Peek sleduje více než 4 500 dopravců.
 
 Peek zobrazuje stav, každý sken s místem a cílovou zemi ze záznamu HuaHan. Sledování HuaHan uvádí časy bez časového pásma. Peek čte vlastní skeny HuaHan podle času jejich místa nebo úseku, na kterém balík byl: v Číně podle pekingského času. Skeny místního dopravce po `Has been given to local carrier` čte podle času tvé země, má-li jedno časové pásmo. Každý čas se zobrazuje v časovém pásmu tvého zařízení. HuaHan neuvádí předpokládané datum doručení ani hmotnost, takže Peek nezobrazuje ani jedno.
 
-Když HuaHan uvede místního dopravce, kterého Peek zná, spolu s číslem v jeho tvaru, karta zásilky to napíše (například "Delivery with USPS", nebo "Announced to USPS, not received yet", dokud má dopravce jen avízo bez vlastního skenu) a uvede číslo toho dopravce za číslem HuaHan. Peek se pak dotazuje i tohoto dopravce. Pokud HuaHan uvede poštovní číslo (dvě písmena, devět číslic, dvě písmena) bez dopravce známého Peeku, zeptá se Peek pošty cílové země; u jiného čísla jednoho dopravce, na kterého ukazuje jeho tvar. Jakmile ten dopravce ukáže sken alespoň tak čerstvý jako nejnovější sken HuaHan, sleduje Peek zásilku tam a historii HuaHan ponechá. Pokud HuaHan číslo místního dopravce neuvede, zůstává Peek u sledování HuaHan, které skeny tohoto dopravce dál přenáší.
+Když HuaHan uvede místního dopravce, kterého Peek zná, spolu s číslem v jeho tvaru, karta zásilky to napíše (například „Delivery with USPS“, nebo „Announced to USPS, not received yet“, dokud má dopravce jen avízo bez vlastního skenu) a uvede číslo toho dopravce za číslem HuaHan. Peek se pak dotazuje i tohoto dopravce. Pokud HuaHan uvede poštovní číslo (dvě písmena, devět číslic, dvě písmena) bez dopravce známého Peeku, zeptá se Peek pošty cílové země; u jiného čísla jednoho dopravce, na kterého ukazuje jeho tvar. Jakmile ten dopravce ukáže sken alespoň tak čerstvý jako nejnovější sken HuaHan, sleduje Peek zásilku tam a historii HuaHan ponechá. Pokud HuaHan číslo místního dopravce neuvede, zůstává Peek u sledování HuaHan, které skeny tohoto dopravce dál přenáší.
 
 Když sledování HuaHan není dostupné, Peek se místo něj ptá sledovacích služeb a zobrazí historii, kterou mají, v jejich formulacích.
 
-Dokud máš zásilku otevřenou, nebo v den doručení se zapnutými oznámeními, kontroluje Peek až každých 10 minut a od 6:00 místního času v den, kdy jde zásilka do rozvozu, až každé 2 minuty (každých 5, když kontrola otevírá prohlížeč), dokud odpovídá vlastní sledování HuaHan; jinak každou hodinu. Přes sledovací služby je to každou hodinu, po dni ticha každé 3 hodiny a v den doručení za stejné podmínky až každých 15 minut. Jakmile doručení převezme jiný dopravce, řídí se Peek jeho vlastním tempem. Po dvou dnech bez novinek (po 12 hodinách, dokud balík ukazuje "Label created" nebo "Received by carrier") kontroluje Peek každou hodinu. Oznámení si můžeš nastavit pro "Every scan", "Important steps" nebo "Delivery only". "Important steps" pokrývá `Import Customs clearance started`, čínské celní skeny China Post přenášené HuaHan u poštovní linky (např. `送交出口海关` a `送交境外进口海关`), rozvoz, výdejní místo a doručení — nikoli lety ani vlastní vývozní celní skeny HuaHan: vývozní proclení cestou na letiště, `快件从转运仓发出至机场，出口报关中（ The package is shipped from the transfer warehouse to the airport Export customs clearance in progress ）`, je běžný krok před odletem a Peek ho zobrazuje jako "In transit". Peek za tebe nemůže kontaktovat HuaHan ani prodejce.
+Dokud máš zásilku otevřenou, nebo v den doručení se zapnutými oznámeními, kontroluje Peek až každých 10 minut a od 6:00 místního času v den, kdy jde zásilka do rozvozu, až každé 2 minuty (každých 5, když kontrola otevírá prohlížeč), dokud odpovídá vlastní sledování HuaHan; jinak každou hodinu. Přes sledovací služby je to každou hodinu, po dni ticha každé 3 hodiny a v den doručení za stejné podmínky až každých 15 minut. Jakmile doručení převezme jiný dopravce, řídí se Peek jeho vlastním tempem. Po dvou dnech bez novinek (po 12 hodinách, dokud balík ukazuje „Label created“ nebo „Received by carrier“) kontroluje Peek každou hodinu. Oznámení si můžeš nastavit pro „Every scan“, „Important steps“ nebo „Delivery only“. „Important steps“ pokrývá `Import Customs clearance started`, čínské celní skeny China Post přenášené HuaHan u poštovní linky (např. `送交出口海关` a `送交境外进口海关`), rozvoz, výdejní místo a doručení — nikoli lety ani vlastní vývozní celní skeny HuaHan: vývozní proclení cestou na letiště, `快件从转运仓发出至机场，出口报关中（ The package is shipped from the transfer warehouse to the airport Export customs clearance in progress ）`, je běžný krok před odletem a Peek ho zobrazuje jako „In transit“. Peek za tebe nemůže kontaktovat HuaHan ani prodejce.
 
 ## Časté otázky ke sledování HuaHan
 

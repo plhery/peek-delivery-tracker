@@ -71,9 +71,9 @@ it('leads a carrier named by its id or another language’s slug to its page in 
   // The carrier's id.
   expect(carrierDestination('/carriers/yanwen')).toBe(`/carriers/${page('en', 'yanwen')}`);
   expect(carrierDestination('/de/carriers/yanwen')).toBe(`/de/carriers/${page('de', 'yanwen')}`);
-  // A language the carrier is not written in: its English page.
-  const englishOnly = CARRIER_LINKS.en.find((link) => !CARRIER_LINKS.de.some(({ id }) => id === link.id))!;
-  expect(carrierDestination(`/de/carriers/${englishOnly.id}`)).toBe(`/carriers/${englishOnly.slug}`);
+  // A language the carrier is not written in, Finnish as mocked above: its English page.
+  const englishOnly = CARRIER_LINKS.en.find((link) => !CARRIER_LINKS.fi.some(({ id }) => id === link.id))!;
+  expect(carrierDestination(`/fi/carriers/${englishOnly.id}`)).toBe(`/carriers/${englishOnly.slug}`);
   // A carrier's own page, a name no carrier has, anything below a page and any other address lead nowhere.
   for (const path of [`/carriers/${page('en', 'yanwen')}`, `/de/carriers/${page('de', 'jrt')}`, '/carriers', '/de/carriers', '/carriers/no-such-carrier',
     `/carriers/yanwen/more`, '/guides/yanwen', '/en/carriers/yanwen', '/yanwen']) expect(carrierDestination(path), path).toBeNull();

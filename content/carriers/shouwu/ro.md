@@ -32,62 +32,62 @@ Pagina de urmărire Shouwu este în engleză sub un titlu în chineză. Afișeaz
 
 | Statusul Shouwu | Ce înseamnă pentru tine | Peek afișează |
 | --- | --- | --- |
-| `Not Found` | Shouwu nu are încă nimic pe acest număr: „We seem can't identify the number.” | "Waiting for Shouwu International" |
-| `Preparing` | Shouwu îl explică drept colet predat depozitului său din China sau aflat acolo la cântărire și sigilare. Poate apărea înainte de primul scan. | "Label created", apoi "Received by carrier" după preluarea de la partener sau un scan în depozit |
-| `In Transit` | Orice etapă, de la predarea către transportator până la vamă și traseul din țara ta. | "In transit" sau etapa ultimului scan, precum "At customs"; "Label created" cât timp există doar datele comenzii și `Carrier received the shipment` |
-| `Undelivered` | O încercare de livrare a eșuat. | "Delivery attempted", sau "Ready for pickup" ori "Returned to sender" dacă ultimul scan spune asta |
-| `Delivered` | Livrat destinatarului. | "Delivered" |
+| `Not Found` | Shouwu nu are încă nimic pe acest număr: „We seem can't identify the number.” | „Waiting for Shouwu International” |
+| `Preparing` | Shouwu îl explică drept colet predat depozitului său din China sau aflat acolo la cântărire și sigilare. Poate apărea înainte de primul scan. | „Label created”, apoi „Received by carrier” după preluarea de la partener sau un scan în depozit |
+| `In Transit` | Orice etapă, de la predarea către transportator până la vamă și traseul din țara ta. | „In transit” sau etapa ultimului scan, precum „At customs”; „Label created” cât timp există doar datele comenzii și `Carrier received the shipment` |
+| `Undelivered` | O încercare de livrare a eșuat. | „Delivery attempted”, sau „Ready for pickup” ori „Returned to sender” dacă ultimul scan spune asta |
+| `Delivered` | Livrat destinatarului. | „Delivered” |
 
 Shouwu precizează că statusurile sale sunt „auto-judged by the system” și „only for information reference use”. Scurtele descrieri ale scanărilor spun mai mult:
 
 | Shouwu afișează | Ce înseamnă pentru tine | Peek afișează |
 | --- | --- | --- |
-| `Shipment information received`, `Order information received. We're expecting your parcel to arrive with us.` | Vânzătorul a rezervat expedierea. Shouwu nu are încă coletul. | "Label created" |
-| `Carrier received the shipment` | Shouwu scrie asta la două ore după datele comenzii, cu zile înainte de primul scan în depozit: nimeni nu are încă coletul. | "Label created" |
-| `Picked up by Shipping Partner` | Partenerul de transport al Shouwu a ridicat coletul de la vânzător: primul scan după datele comenzii. | "Received by carrier" |
-| `Arrival processing center` | Depozitul Shouwu din China a recepționat coletul. | "Received by carrier" |
-| `Package processing completed` | Depozitul a terminat procesarea, înainte de zbor. | "Received by carrier" |
-| `Shipment started the customs clearance process at origin` | A început vămuirea la export în China, un pas obișnuit înainte de zbor. Vama nu reține coletul. | "In transit" |
-| `The package is shipped from the transfer warehouse to the airport Export customs clearance in progress` | Trimis din depozitul de transfer la aeroport, unde are loc vămuirea la export în China: nu este vama țării tale. | "In transit" |
-| `Export customs declaration completed`, `Export customs clearance completed`, `Export Released` | China a acordat liberul de vamă la export; nimic nu este blocat. | "In transit" |
-| `The parcel has arrived at the airport and is currently being loaded onto a flight` | La aeroportul de plecare după vămuirea la export, în curs de încărcare în avion. | "In transit" |
-| `Arrived at Shanghai Pudong Airport`, `Departed from export airport` | La aeroportul din Shanghai, apoi plecat cu avionul din China. | "In transit" |
-| `The ship has already set sail` | Pe o rută maritimă: nava a plecat din China, după vămuirea la export și înainte să ajungă în portul din străinătate. | "In transit" |
-| `Arrived at airport of Destination`, `Shipment arrived in the destination country` | A aterizat în țara de destinație. | "In transit" |
-| `NOA received` | Agentul din țara de destinație a primit avizul de sosire de la compania aeriană; urmează vama. | "In transit" |
-| `Shipment started the customs clearance process at destination`, `Customs clearance in progress`, `Currently undergoing customs clearance in the destination country`, `Currently processing import customs clearance`, `Customs clearance for imports` | Vama țării de destinație îl procesează. | "At customs" |
-| `Custom clearance completed`, `Shipment completed the customs clearance process at destination`, `Customs clearance has been completed`, `Customs clearance in the destination country has been completed` | Vama țării de destinație i-a dat drumul. | "In transit" |
-| `Scheduled For Delivery` | Textul Shouwu după vămuirea la import, cu zile înainte de depozitul și traseul curierului: o livrare este planificată, nu în desfășurare. | "In transit" |
-| `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider`, `The goods have been delivered to the carrier` | Predat curierului care livrează în țara de destinație, nu livrat ție („deliverey” este grafia Shouwu). | "In transit" |
-| `Your consignment has been picked up` | Curierul l-a ridicat din depozitul Shouwu din străinătate, după vamă: nu este ridicarea de la vânzător (aceea este `Picked up by Shipping Partner`, la început) și nici o ridicare de către tine. | "In transit" |
-| `Picked up` | În SUA, FedEx a preluat coletul din depozitul Shouwu după vămuirea la import (rândul menționează orașul și codul poștal). Nu este ridicarea de la vânzător (`Picked up by Shipping Partner`) și nici o ridicare de către tine. | "In transit" |
-| `Arrived at FedEx location`, `Departed FedEx location` | Scanările proprii FedEx în centrele sale din SUA, după preluarea din depozitul Shouwu. | "In transit" |
-| `The shipment has been processed in the destination parcel center` | DHL l-a sortat în centrul de colete care deservește adresa ta, înaintea traseului de livrare. | "In transit" |
-| `Mis routed` | Curierul care livrează în Germania a trimis coletul la centrul greșit și îl redirecționează: o întârziere, nu o oprire. Livrarea poate avea loc chiar în aceeași zi. | "In transit" |
-| `Out for delivery` | Pe traseul de livrare al curierului local. | "Out for delivery" |
-| `Abnormal delivery` | Livrarea nu a reușit. Motivul curierului apare ca un scan separat între paranteze unghiulare, de exemplu `<Incorrect address.>`. | "Delivery attempted" |
-| `The recipient is unknown` | Curierul DHL din Germania nu a găsit acest destinatar la adresă; coletul se întoarce. | "Delivery attempted" |
-| `Shipment will be returned to origin-Bad address` | DHL trimite coletul înapoi deoarece nu a putut găsi adresa: este pe drumul de întoarcere, nu a ajuns încă la expeditor. Întreabă vânzătorul. | "Needs attention" |
-| `Delivered by post man`, `This parcel has been delivered` | Poșta sau curierul local l-a livrat. | "Delivered", odată ce statusul Shouwu spune `Delivered` |
-| `Shipment sent directly from parcel center to business customer` | DHL l-a livrat direct din centrul său către o adresă de firmă. Dacă DHL returnase coletul, aceeași linie înseamnă că returul a ajuns la expeditor. | "Delivered", sau "Returned to sender" după un retur |
+| `Shipment information received`, `Order information received. We're expecting your parcel to arrive with us.` | Vânzătorul a rezervat expedierea. Shouwu nu are încă coletul. | „Label created” |
+| `Carrier received the shipment` | Shouwu scrie asta la două ore după datele comenzii, cu zile înainte de primul scan în depozit: nimeni nu are încă coletul. | „Label created” |
+| `Picked up by Shipping Partner` | Partenerul de transport al Shouwu a ridicat coletul de la vânzător: primul scan după datele comenzii. | „Received by carrier” |
+| `Arrival processing center` | Depozitul Shouwu din China a recepționat coletul. | „Received by carrier” |
+| `Package processing completed` | Depozitul a terminat procesarea, înainte de zbor. | „Received by carrier” |
+| `Shipment started the customs clearance process at origin` | A început vămuirea la export în China, un pas obișnuit înainte de zbor. Vama nu reține coletul. | „In transit” |
+| `The package is shipped from the transfer warehouse to the airport Export customs clearance in progress` | Trimis din depozitul de transfer la aeroport, unde are loc vămuirea la export în China: nu este vama țării tale. | „In transit” |
+| `Export customs declaration completed`, `Export customs clearance completed`, `Export Released` | China a acordat liberul de vamă la export; nimic nu este blocat. | „In transit” |
+| `The parcel has arrived at the airport and is currently being loaded onto a flight` | La aeroportul de plecare după vămuirea la export, în curs de încărcare în avion. | „In transit” |
+| `Arrived at Shanghai Pudong Airport`, `Departed from export airport` | La aeroportul din Shanghai, apoi plecat cu avionul din China. | „In transit” |
+| `The ship has already set sail` | Pe o rută maritimă: nava a plecat din China, după vămuirea la export și înainte să ajungă în portul din străinătate. | „In transit” |
+| `Arrived at airport of Destination`, `Shipment arrived in the destination country` | A aterizat în țara de destinație. | „In transit” |
+| `NOA received` | Agentul din țara de destinație a primit avizul de sosire de la compania aeriană; urmează vama. | „In transit” |
+| `Shipment started the customs clearance process at destination`, `Customs clearance in progress`, `Currently undergoing customs clearance in the destination country`, `Currently processing import customs clearance`, `Customs clearance for imports` | Vama țării de destinație îl procesează. | „At customs” |
+| `Custom clearance completed`, `Shipment completed the customs clearance process at destination`, `Customs clearance has been completed`, `Customs clearance in the destination country has been completed` | Vama țării de destinație i-a dat drumul. | „In transit” |
+| `Scheduled For Delivery` | Textul Shouwu după vămuirea la import, cu zile înainte de depozitul și traseul curierului: o livrare este planificată, nu în desfășurare. | „In transit” |
+| `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider`, `The goods have been delivered to the carrier` | Predat curierului care livrează în țara de destinație, nu livrat ție („deliverey” este grafia Shouwu). | „In transit” |
+| `Your consignment has been picked up` | Curierul l-a ridicat din depozitul Shouwu din străinătate, după vamă: nu este ridicarea de la vânzător (aceea este `Picked up by Shipping Partner`, la început) și nici o ridicare de către tine. | „In transit” |
+| `Picked up` | În SUA, FedEx a preluat coletul din depozitul Shouwu după vămuirea la import (rândul menționează orașul și codul poștal). Nu este ridicarea de la vânzător (`Picked up by Shipping Partner`) și nici o ridicare de către tine. | „In transit” |
+| `Arrived at FedEx location`, `Departed FedEx location` | Scanările proprii FedEx în centrele sale din SUA, după preluarea din depozitul Shouwu. | „In transit” |
+| `The shipment has been processed in the destination parcel center` | DHL l-a sortat în centrul de colete care deservește adresa ta, înaintea traseului de livrare. | „In transit” |
+| `Mis routed` | Curierul care livrează în Germania a trimis coletul la centrul greșit și îl redirecționează: o întârziere, nu o oprire. Livrarea poate avea loc chiar în aceeași zi. | „In transit” |
+| `Out for delivery` | Pe traseul de livrare al curierului local. | „Out for delivery” |
+| `Abnormal delivery` | Livrarea nu a reușit. Motivul curierului apare ca un scan separat între paranteze unghiulare, de exemplu `<Incorrect address.>`. | „Delivery attempted” |
+| `The recipient is unknown` | Curierul DHL din Germania nu a găsit acest destinatar la adresă; coletul se întoarce. | „Delivery attempted” |
+| `Shipment will be returned to origin-Bad address` | DHL trimite coletul înapoi deoarece nu a putut găsi adresa: este pe drumul de întoarcere, nu a ajuns încă la expeditor. Întreabă vânzătorul. | „Needs attention” |
+| `Delivered by post man`, `This parcel has been delivered` | Poșta sau curierul local l-a livrat. | „Delivered”, odată ce statusul Shouwu spune `Delivered` |
+| `Shipment sent directly from parcel center to business customer` | DHL l-a livrat direct din centrul său către o adresă de firmă. Dacă DHL returnase coletul, aceeași linie înseamnă că returul a ajuns la expeditor. | „Delivered”, sau „Returned to sender” după un retur |
 
 Când iMile livrează în Italia, istoricul Shouwu preia liniile iMile, cu centrul între paranteze 【】 (al tău poate indica alt centru decât Milan center sau ROM 10):
 
 | Shouwu afișează | Ce înseamnă pentru tine | Peek afișează |
 | --- | --- | --- |
-| `【Milan center】Received.` | Centrul iMile a primit coletul. | "In transit" |
-| `【Milan center】Parcel shipped to【ROM 10】.`, `【ROM 10】Arrived.` | Trimis spre stația de livrare iMile, apoi sosit acolo. | "In transit" |
-| `【ROM 10】Shipment out for delivery.` | Pe traseul de livrare al iMile. | "Out for delivery" |
-| `<User not at home>`, `【ROM 10】 Back To DS.` | Șoferul nu te-a găsit acasă, iar coletul s-a întors la stația de livrare. | "Delivery attempted" |
-| `【ROM 10】Parcel shipped to【Milan Transit Center】.` | După două încercări eșuate, stația îl trimite înapoi la centrul iMile. | "In transit" |
-| `Back to Sender for reason: wrong recipient address or address related problem` | După încercările eșuate, iMile trimite coletul înapoi, aici din cauza adresei (după două puncte poate apărea alt motiv): este pe drumul de retur, nu încă la expeditor. Întreabă vânzătorul. | "Needs attention" |
-| `【Milan Transit Center】Order Closed.` | iMile închide comanda de livrare fără a livra; întreabă vânzătorul. | "Needs attention" |
+| `【Milan center】Received.` | Centrul iMile a primit coletul. | „In transit” |
+| `【Milan center】Parcel shipped to【ROM 10】.`, `【ROM 10】Arrived.` | Trimis spre stația de livrare iMile, apoi sosit acolo. | „In transit” |
+| `【ROM 10】Shipment out for delivery.` | Pe traseul de livrare al iMile. | „Out for delivery” |
+| `<User not at home>`, `【ROM 10】 Back To DS.` | Șoferul nu te-a găsit acasă, iar coletul s-a întors la stația de livrare. | „Delivery attempted” |
+| `【ROM 10】Parcel shipped to【Milan Transit Center】.` | După două încercări eșuate, stația îl trimite înapoi la centrul iMile. | „In transit” |
+| `Back to Sender for reason: wrong recipient address or address related problem` | După încercările eșuate, iMile trimite coletul înapoi, aici din cauza adresei (după două puncte poate apărea alt motiv): este pe drumul de retur, nu încă la expeditor. Întreabă vânzătorul. | „Needs attention” |
+| `【Milan Transit Center】Order Closed.` | iMile închide comanda de livrare fără a livra; întreabă vânzătorul. | „Needs attention” |
 
-**Când livrează DPD.** Pe o rută livrată de [DPD](carrier:dpd-de), istoricul Shouwu continuă cu formulările DPD, fiecare încheiată cu punct: `In transit.`, apoi `At parcel delivery centre.` — depozitul DPD care livrează, înainte de traseu și din nou după o livrare ratată ("In transit") — și `Out for delivery.` ("Out for delivery"). `Unfortunately we have not been able to deliver your parcel. Consignee address not correct.` reprezintă o încercare eșuată din cauza unei adrese greșite: coletul se întoarce la depozitul DPD, nu la expeditor ("Delivery attempted").
+**Când livrează DPD.** Pe o rută livrată de [DPD](carrier:dpd-de), istoricul Shouwu continuă cu formulările DPD, fiecare încheiată cu punct: `In transit.`, apoi `At parcel delivery centre.` — depozitul DPD care livrează, înainte de traseu și din nou după o livrare ratată („In transit”) — și `Out for delivery.` („Out for delivery”). `Unfortunately we have not been able to deliver your parcel. Consignee address not correct.` reprezintă o încercare eșuată din cauza unei adrese greșite: coletul se întoarce la depozitul DPD, nu la expeditor („Delivery attempted”).
 
-**Linii în chineză.** Unele colete primesc și linii scrise de Shouwu în chineză, pe care Peek le afișează așa cum sunt scrise. `货物电子信息已经收到` (datele electronice ale mărfii au fost primite) apare odată cu datele comenzii: "Label created". Apoi, toate "In transit": `申报过港中` după codul unui lot (lotul este declarat pentru drumul spre Hong Kong), `已到港，安排航班中` (la portul de plecare, în așteptarea unui zbor), `预计23号的航班` (zborul rezervat, aici pentru ziua de 23; cu `二程` în față pentru al doilea segment), `航班已飞` și `二程航班已飞` (zborul sau cel al segmentului al doilea a decolat) și `已落地` (a aterizat). `已落地，清关提货中` (aterizat, în vămuire și preluare de la compania aeriană) este "At customs"; `清关完成` (vămuit) și `已交仓扫描` (scanat la intrarea în depozitul curierului local) sunt din nou "In transit".
+**Linii în chineză.** Unele colete primesc și linii scrise de Shouwu în chineză, pe care Peek le afișează așa cum sunt scrise. `货物电子信息已经收到` (datele electronice ale mărfii au fost primite) apare odată cu datele comenzii: „Label created”. Apoi, toate „In transit”: `申报过港中` după codul unui lot (lotul este declarat pentru drumul spre Hong Kong), `已到港，安排航班中` (la portul de plecare, în așteptarea unui zbor), `预计23号的航班` (zborul rezervat, aici pentru ziua de 23; cu `二程` în față pentru al doilea segment), `航班已飞` și `二程航班已飞` (zborul sau cel al segmentului al doilea a decolat) și `已落地` (a aterizat). `已落地，清关提货中` (aterizat, în vămuire și preluare de la compania aeriană) este „At customs”; `清关完成` (vămuit) și `已交仓扫描` (scanat la intrarea în depozitul curierului local) sunt din nou „In transit”.
 
-**Ore decalate cu câteva ore.** Sistemul Shouwu înregistrează ora locală a fiecărui scan ca și cum ar fi ora Beijingului, inclusiv pentru scanările din străinătate, iar trackerul său afișează acea oră în fusul tău orar. Astfel, un scan din Europa sau SUA pare cu ore mai devreme, iar zborul pare mai scurt. Urmărește ordinea rândurilor. Peek determină fusul orar al fiecărui scan din locul lui sau din etapa traseului și afișează orele în fusul orar al dispozitivului tău; pe peektracker.com și în aplicațiile iPhone și Android, istoricul se încheie cu "Times are in your time zone:" și numele acestuia.
+**Ore decalate cu câteva ore.** Sistemul Shouwu înregistrează ora locală a fiecărui scan ca și cum ar fi ora Beijingului, inclusiv pentru scanările din străinătate, iar trackerul său afișează acea oră în fusul tău orar. Astfel, un scan din Europa sau SUA pare cu ore mai devreme, iar zborul pare mai scurt. Urmărește ordinea rândurilor. Peek determină fusul orar al fiecărui scan din locul lui sau din etapa traseului și afișează orele în fusul orar al dispozitivului tău; pe peektracker.com și în aplicațiile iPhone și Android, istoricul se încheie cu „Times are in your time zone:” și numele acestuia.
 
 ## Cine livrează coletele Shouwu
 
@@ -104,11 +104,11 @@ Pagina de urmărire Shouwu nu afișează numele sau numărul curierului, dincolo
 
 ## Coletul Shouwu nu ajunge sau urmărirea s-a blocat
 
-**`Not Found`.** Shouwu indică patru motive: nu a acceptat încă coletul, nu l-a scanat încă, numărul este greșit sau coletul a fost expediat demult și datele de urmărire au expirat. Procesarea durează de obicei câteva zile. Peek afișează "Waiting for Shouwu International" și continuă verificările. Dacă Shouwu nu cunoaște numărul nici după două zile și nimic altceva nu a răspuns pentru el, Peek afișează "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." Verifică numărul caracter cu caracter; dacă după câteva zile nu apare nimic, întreabă vânzătorul.
+**`Not Found`.** Shouwu indică patru motive: nu a acceptat încă coletul, nu l-a scanat încă, numărul este greșit sau coletul a fost expediat demult și datele de urmărire au expirat. Procesarea durează de obicei câteva zile. Peek afișează „Waiting for Shouwu International” și continuă verificările. Dacă Shouwu nu cunoaște numărul nici după două zile și nimic altceva nu a răspuns pentru el, Peek afișează „After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel.” Verifică numărul caracter cu caracter; dacă după câteva zile nu apare nimic, întreabă vânzătorul.
 
 **Blocat la `Preparing`, `Shipment information received` sau `Carrier received the shipment`.** Shouwu nu are încă coletul sau nu l-a expediat din depozit. Întreabă vânzătorul când l-a predat.
 
-**Blocat la vamă.** După `Shipment started the customs clearance process at destination`, `Customs clearance in progress`, `Currently undergoing customs clearance in the destination country`, `Currently processing import customs clearance`, `Customs clearance for imports` sau `已落地，清关提货中`, coletul așteaptă vama țării tale. Pe rutele către UE (inclusiv România), bunurile cumpărate online din afara UE datorează o taxă vamală de 3 € pe tip de produs pentru coletele în valoare de până la 150 € (de la 1 iulie 2026) și taxa de manipulare a UE de 2 € pe tip de produs, la orice valoare (de la 1 noiembrie 2026); paginile de rute Shouwu nu spun cine le plătește. Dacă ți se cer taxe de import, vezi [parcels held at customs](guide:customs) (în engleză).
+**Blocat la vamă.** După `Shipment started the customs clearance process at destination`, `Customs clearance in progress`, `Currently undergoing customs clearance in the destination country`, `Currently processing import customs clearance`, `Customs clearance for imports` sau `已落地，清关提货中`, coletul așteaptă vama țării tale. În UE, inclusiv în România, bunurile cumpărate online din afara UE datorează o taxă vamală de 3 € pe tip de produs pentru coletele în valoare de până la 150 € (de la 1 iulie 2026) și taxa de manipulare a UE de 2 € pe tip de produs, la orice valoare (de la 1 noiembrie 2026); paginile de rute Shouwu nu spun cine le plătește. Dacă ți se cer taxe de import, vezi [parcels held at customs](guide:customs) (în engleză).
 
 **Nimic după `Delivery to local courier`.** Curierul îl are, dar trackerul Shouwu nu dă numărul curierului. Cere vânzătorului numărul curierului și lipește-l în Peek. Mai multe detalii în [why tracking stops updating](guide:tracking-not-updating) și [tracking a parcel from China](guide:tracking-from-china) (în engleză).
 
@@ -128,9 +128,9 @@ Pentru comanda ta, întreabă vânzătorul: el a rezervat coletul la Shouwu și 
 
 Peek preia etapa coletului din statusul Shouwu, conform tabelelor de mai sus, și afișează țara de destinație și fiecare scan cu locul său, pe care pagina Shouwu îl omite. Un loc ce conține o cifră, precum un cod poștal, este eliminat. Shouwu nu oferă estimare de livrare, așa că Peek nu afișează o dată estimată.
 
-Fără un curier numit, Peek nu afișează linia "Delivery with" și nu predă urmărirea către curier, nici măcar când istoricul preia liniile iMile. Dacă ai numărul curierului, adaugă-l în Peek ca un colet separat.
+Fără un curier numit, Peek nu afișează linia „Delivery with” și nu predă urmărirea către curier, nici măcar când istoricul preia liniile iMile. Dacă ai numărul curierului, adaugă-l în Peek ca un colet separat.
 
-Cât timp ai coletul deschis, sau în ziua livrării cu notificările pornite, Peek verifică până la fiecare 10 minute, iar de la ora 6:00 ora locală în ziua în care coletul intră în livrare până la fiecare 2 minute, cât timp răspunde propriul tracker Shouwu; altfel din oră în oră. Prin servicii de urmărire verifică din oră în oră, la fiecare 3 ore după o zi fără noutăți și până la fiecare 15 minute în ziua livrării în aceeași condiție. După două zile fără noutăți (12 ore cât timp coletul încă arată "Label created" sau "Received by carrier"), Peek verifică din oră în oră. Îți poate trimite notificări pentru fiecare scan, doar pașii importanți (livrare, ridicare, vamă, încercări ratate și retururi) sau "Delivery only". Nu poate contacta Shouwu sau vânzătorul în locul tău.
+Cât timp ai coletul deschis, sau în ziua livrării cu notificările pornite, Peek verifică până la fiecare 10 minute, iar de la ora 6:00 ora locală în ziua în care coletul intră în livrare până la fiecare 2 minute, cât timp răspunde propriul tracker Shouwu; altfel din oră în oră. Prin servicii de urmărire verifică din oră în oră, la fiecare 3 ore după o zi fără noutăți și până la fiecare 15 minute în ziua livrării în aceeași condiție. După două zile fără noutăți (12 ore cât timp coletul încă arată „Label created” sau „Received by carrier”), Peek verifică din oră în oră. Îți poate trimite notificări pentru fiecare scan, doar pașii importanți (livrare, ridicare, vamă, încercări ratate și retururi) sau „Delivery only”. Nu poate contacta Shouwu sau vânzătorul în locul tău.
 
 ## Întrebări despre urmărirea Shouwu
 

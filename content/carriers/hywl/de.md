@@ -61,7 +61,7 @@ Die Wortlaute verraten mehr — in der Reihenfolge, in der ein Paket sie durchl�
 
 **Uhrzeiten.** HYWLs Tracker druckt jede Uhrzeit ohne Zeitzone. Schritte mit chinesischem Ortsnamen oder in Shenzhen, Guangzhou, Dongguan, Huizhou oder Hongkong gelten nach Pekinger Zeit: Im Winter ist 20:00 Uhr dort 13:00 Uhr in Deutschland, Österreich und der Schweiz (im Sommer 14:00 Uhr).
 
-**Vorausdatierte Schritte.** Laut HYWLs Tracking-Seite legen seine Mitarbeiter die Aufträge an und pflegen die Verläufe in einem internen Backoffice. Ein Datensatz kann Schritte enthalten, deren Zeitpunkt noch vor dir liegt, und HYWLs Tracker zeigt sie trotzdem an — oft unter einem Status, der ebenfalls voraus ist. Peek hält jeden solchen Schritt aus HYWLs Tracker zurück, bis seine Zeit verstrichen ist: bei Schritten in China nach Pekinger Zeit, bei allen anderen gelesen als UTC. Peek richtet sich nach den behaltenen Schritten, nicht nach HYWLs Gesamtstatus. Ein vorausdatierter Schritt hat noch nicht stattgefunden, selbst wenn dort `Delivered` steht.
+**Vorausdatierte Schritte.** Laut HYWLs Tracking-Seite legen seine Mitarbeiter die Aufträge an und pflegen die Verläufe in einem internen Backoffice. Ein Datensatz kann Schritte enthalten, deren Zeitpunkt noch vor dir liegt, und HYWLs Tracker zeigt sie trotzdem an — unter einem Status, der ebenfalls voraus sein kann. Peek hält jeden solchen Schritt aus HYWLs Tracker zurück, bis seine Zeit verstrichen ist: bei Schritten in China nach Pekinger Zeit, bei allen anderen gelesen als UTC. Peek richtet sich nach den behaltenen Schritten, nicht nach HYWLs Gesamtstatus. Ein vorausdatierter Schritt hat noch nicht stattgefunden, selbst wenn dort `Delivered` steht.
 
 ## Wer HYWL-Pakete zustellt
 

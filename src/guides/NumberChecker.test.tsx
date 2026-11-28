@@ -72,9 +72,11 @@ describe('the number checker in a guide', () => {
   it('names a carrier without a link where the guide’s language has no page for it', async () => {
     const user = userEvent.setup();
     page('de', de);
-    await user.type(screen.getByRole('textbox', { name: de['guides.checker.label'] }), 'JCZ1234567890DH');
+    // Deppon, which has no page in any language.
+    expect(Object.values(CARRIER_LINKS).flat().some(({ catalog }) => catalog === 'deppon')).toBe(false);
+    await user.type(screen.getByRole('textbox', { name: de['guides.checker.label'] }), 'DPK123456789012');
     const result = document.getElementById('number-checker-result')!;
-    expect(await within(result).findByText('JCEX')).toBeVisible();
+    expect(await within(result).findByText('Deppon')).toBeVisible();
     expect(within(result).queryByRole('link')).toBeNull();
   });
 

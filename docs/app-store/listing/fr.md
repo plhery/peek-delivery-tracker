@@ -73,6 +73,10 @@ suivre,paquet,commande,poste,courrier,envoi,tracking,tracker,relais,lettre,numé
 ## What's new
 
 ```text
-• Un colis parti en livraison un jour déjà terminé dans le fuseau horaire de son transporteur affiche désormais « Aucune mise à jour depuis » ce jour-là, avec le lien d’aide du transporteur, comme le fait un colis sans nouveau scan depuis quatre jours.
-• Peek IA : sur la page d’un colis, les jours ou les heures probables sont plus ou moins teintés selon leurs chances, de « Moins probable » à « Plus probable », et « Pourquoi » dit sur quoi se fonde chaque estimation.
+• Passeport : ton passeport a maintenant des pages. « Pays » affiche un tampon pour chaque pays traversé par tes colis, puis viennent « Timbres » et « Chiffres ». Chaque timbre indique le jour où tu l’as obtenu, et un nouveau timbre est signalé sous son colis. En décembre, le Passeport te propose « Ton 2026 en colis » à partager.
+• Amis : pose ton passeport à côté de celui d’un ami et vois les timbres que vous avez tous les deux. Un nouveau bouton « Pays » permet de choisir si tes amis voient tes pays.
+• Ajoute une note privée à n’importe quel colis, avec jusqu’à 5 photos ou PDF : un numéro de commande, une étiquette de retour, un reçu. Elle n’est visible que par toi, même quand tu partages le colis.
+• Colle le lien de suivi d’une boutique avant que la commande soit expédiée, et Peek attend le colis.
+• Sur la page d’un colis, « Qu’est-ce qui cloche ? » commence désormais par « Je ne l’ai pas reçu » et te dit quoi faire ensuite. Le menu du colis propose « Contacter le service client de <transporteur> » quand le transporteur a une page d’aide.
+• Les colis en livraison apparaissent sous « Livraison prévue aujourd’hui », les activités en direct se terminent avec la tournée de livraison et, dans Peek IA, « Pourquoi » cite les colis sur lesquels il se fonde.
 ```

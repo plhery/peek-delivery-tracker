@@ -71,6 +71,10 @@ pacco,spedizione,spedizioni,tracking,traccia,tracciare,consegna,segui,ordine,pos
 ## What's new
 
 ```text
-• Un pacco partito in consegna in un giorno ormai concluso nel fuso orario del suo corriere ora mostra «Nessun aggiornamento da» quel giorno, con il link di aiuto del corriere, come un pacco senza nuove scansioni da quattro giorni.
-• Peek IA: nella pagina di un pacco, i giorni o gli orari probabili sono colorati più o meno intensamente in base alla probabilità, da «Meno probabile» a «Più probabile», e «Perché» dice su cosa si basa ogni stima.
+• Passaporto: il tuo passaporto ora ha delle pagine. «Paesi» mostra un timbro per ogni paese attraversato dai tuoi pacchi, poi vengono «Francobolli» e «Numeri». Ogni francobollo mostra il giorno in cui l’hai ottenuto, e uno nuovo viene segnalato sotto il suo pacco. A dicembre il Passaporto ti propone «Il tuo 2026 in pacchi» da condividere.
+• Amici: metti il tuo passaporto accanto a quello di un amico e guarda i francobolli che avete entrambi. Un nuovo interruttore «Paesi» decide se gli amici vedono i tuoi paesi.
+• Aggiungi una nota privata a qualsiasi pacco, con fino a 5 foto o PDF: un numero d’ordine, un’etichetta di reso, una ricevuta. La vedi solo tu, anche quando condividi il pacco.
+• Incolla il link di tracciamento di un negozio prima che l’ordine sia spedito, e Peek aspetta il pacco.
+• Nella pagina di un pacco, «Cosa non torna?» ora inizia con «Non l’ho ricevuto» e ti dice cosa fare dopo. Il menu del pacco offre «Contatta l’assistenza di <corriere>» quando il corriere ha una pagina di aiuto.
+• I pacchi in consegna compaiono sotto «In arrivo oggi», le Attività Live terminano con il giro di consegne e, in Peek IA, «Perché» indica i pacchi su cui si basa.
 ```

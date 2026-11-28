@@ -71,6 +71,10 @@ pakete,paketverfolgung,tracker,tracking,verfolgen,sendung,lieferung,post,versand
 ## What's new
 
 ```text
-• Ein Paket, das an einem Tag in Zustellung ging, der in der Zeitzone seines Paketdienstes schon vorbei ist, zeigt jetzt „Keine Aktualisierung seit“ diesem Tag, mit dem Hilfe-Link des Paketdienstes, so wie ein Paket ohne neuen Scan seit vier Tagen.
-• Peek AI: Auf der Seite eines Pakets sind die wahrscheinlichen Tage oder Uhrzeiten je nach Wahrscheinlichkeit abgestuft eingefärbt, von „Weniger wahrscheinlich“ bis „Wahrscheinlicher“, und „Warum“ sagt, worauf jede Schätzung beruht.
+• Reisepass: Dein Reisepass hat jetzt Seiten. „Länder“ zeigt einen Stempel für jedes Land, durch das deine Pakete kamen, danach folgen „Briefmarken“ und „Zahlen“. Jede Briefmarke zeigt den Tag, an dem du sie gesammelt hast, und eine neue wird unter ihrem Paket gemeldet. Im Dezember bietet dir der Reisepass „Dein 2026 in Paketen“ zum Teilen an.
+• Freunde: Leg deinen Reisepass neben den eines Freundes und sieh, welche Briefmarken ihr beide habt. Ein neuer Schalter „Länder“ legt fest, ob Freunde deine Länder sehen.
+• Füge jedem Paket eine private Notiz hinzu, mit bis zu 5 Fotos oder PDFs: Bestellnummer, Rücksendeetikett, Kaufbeleg. Nur du siehst sie, auch wenn du das Paket teilst.
+• Füge den Tracking-Link eines Shops ein, bevor die Bestellung verschickt ist, und Peek wartet auf das Paket.
+• Auf der Seite eines Pakets beginnt „Was stimmt nicht?“ jetzt mit „Ich habe es nicht erhalten“ und sagt dir, was du als Nächstes tun kannst. Das Menü des Pakets bietet „Kundendienst von <Paketdienst> kontaktieren“ an, wenn der Paketdienst eine Hilfeseite hat.
+• Pakete in Zustellung stehen unter „Heute erwartet“, Live-Aktivitäten enden mit der Zustelltour, und bei Peek AI nennt „Warum“ die Pakete, auf denen die Schätzung beruht.
 ```

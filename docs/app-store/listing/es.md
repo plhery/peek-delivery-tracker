@@ -71,6 +71,10 @@ rastrear,rastreo,rastreador,localizar,seguir,paquete,envíos,pedido,pedidos,entr
 ## What's new
 
 ```text
-• Un paquete que salió a reparto un día que ya ha terminado en la zona horaria de su transportista ahora muestra «Sin novedades desde el» con la fecha de ese día y el enlace de ayuda del transportista, como un paquete sin escaneos nuevos desde hace cuatro días.
-• Peek IA: en la página de un paquete, los días u horas probables se sombrean más o menos según su probabilidad, de «Menos probable» a «Más probable», y «Por qué» explica en qué se basa cada estimación.
+• Pasaporte: tu pasaporte ahora tiene páginas. «Países» muestra un sello de tinta por cada país por el que pasaron tus paquetes, y después vienen «Sellos» y «Cifras». Cada sello muestra el día en que lo conseguiste, y uno nuevo se anuncia bajo su paquete. En diciembre, el Pasaporte te ofrece «Tu 2026 en paquetes» para compartir.
+• Amigos: pon tu pasaporte junto al de un amigo y mira los sellos que tenéis los dos. Un nuevo interruptor «Países» decide si tus amigos ven tus países.
+• Añade una nota privada a cualquier paquete, con hasta 5 fotos o PDF: un número de pedido, una etiqueta de devolución, un recibo. Solo tú puedes verla, aunque compartas el paquete.
+• Pega el enlace de seguimiento de una tienda antes de que se envíe el pedido y Peek esperará el paquete.
+• En la página de un paquete, «¿Qué falla?» ahora empieza por «No lo he recibido» y te dice qué hacer a continuación. El menú del paquete ofrece «Contactar con la atención al cliente de <transportista>» cuando el transportista tiene una página de ayuda.
+• Los paquetes en reparto aparecen en «Entrega prevista hoy», las actividades en directo terminan con la ruta de reparto y, en Peek IA, «Por qué» indica los paquetes en los que se basa.
 ```

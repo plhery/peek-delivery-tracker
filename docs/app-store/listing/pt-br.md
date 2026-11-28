@@ -71,6 +71,10 @@ rastrear,rastreamento,entrega,entregas,objeto,pedido,frete,envio,código,correio
 ## What's new
 
 ```text
-• Uma encomenda que saiu para entrega em um dia que já terminou no fuso horário da transportadora agora mostra “Sem atualizações desde” esse dia, com o link de ajuda da transportadora, como uma encomenda sem nova movimentação há quatro dias.
-• Peek IA: na página de uma encomenda, os dias ou horários prováveis ganham tons mais ou menos fortes conforme a chance de cada um, de “Menos provável” a “Mais provável”, e “Por quê” diz em que cada estimativa se baseia.
+• Passaporte: seu passaporte agora tem páginas. “Países” mostra um carimbo para cada país por onde suas encomendas passaram, e depois vêm “Selos” e “Números”. Cada selo mostra o dia em que você o conquistou, e um selo novo é anunciado embaixo da respectiva encomenda. Em dezembro, o Passaporte oferece “Seu 2026 em encomendas” para você compartilhar.
+• Amigos: coloque seu passaporte ao lado do de um amigo e veja os selos que vocês dois têm. Um novo botão “Países” define se seus amigos veem seus países.
+• Adicione uma anotação privada a qualquer encomenda, com até 5 fotos ou PDF: um número de pedido, uma etiqueta de devolução, um recibo. Só você vê, mesmo quando compartilha a encomenda.
+• Cole o link de rastreamento de uma loja antes de o pedido ser enviado, e o Peek aguarda a encomenda.
+• Na página de uma encomenda, “O que está errado?” agora começa com “Não recebi a encomenda” e diz o que fazer em seguida. O menu da encomenda oferece “Falar com o atendimento de <transportadora>” quando a transportadora tem uma página de ajuda.
+• As encomendas que saíram para entrega aparecem em “Chegando hoje”, as Atividades ao Vivo terminam junto com a rota de entrega e, no Peek IA, “Por quê” mostra as encomendas em que se baseia.
 ```

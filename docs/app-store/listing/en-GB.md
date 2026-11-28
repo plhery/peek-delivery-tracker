@@ -73,6 +73,10 @@ package,tracking,shipment,shipping,courier,carrier,mail,post,postal,number,where
 ## What's new
 
 ```text
-• A parcel out for delivery on a day that has ended on its carrier’s clock now says “No tracking update since” that day, with the carrier’s help link, as a parcel with no new scan for four days does.
-• Peek AI: on a parcel’s page, the likely days or hours are shaded by their chance, from “Less likely” to “More likely”, and Why says what each estimate goes by.
+• Passport: your passport now has pages. Countries shows an ink stamp for every country your parcels went through, then come Stamps and Numbers. Each stamp shows the day you earned it, and a new one says so under its parcel. In December, the Passport offers “Your 2026 in parcels” to share.
+• Friends: put your passport beside a friend’s and see the stamps you both have. A new “Countries” switch chooses whether friends see your countries.
+• Add a private note to any parcel, with up to 5 photos or PDFs: an order number, a return label, a receipt. Only you can see it, even when you share the parcel.
+• Paste a shop’s tracking link before the order has shipped, and Peek waits for the parcel.
+• On a parcel’s page, “What’s off?” now starts with “I haven’t received it” and tells you what to do next. The parcel’s menu offers “Contact <carrier> support” when the carrier has a help page.
+• Parcels out for delivery are listed under “Arriving today”, Live Activities end with the delivery round, and Peek AI’s Why names the parcels it goes by.
 ```

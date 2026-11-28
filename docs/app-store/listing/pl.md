@@ -71,6 +71,10 @@ paczka,paczki,paczek,przesyłka,przesyłki,kurier,poczta,tracking,status,dostawa
 ## What's new
 
 ```text
-• Przesyłka wydana do doręczenia w dniu, który w strefie czasowej przewoźnika już się skończył, pokazuje teraz „Brak aktualizacji od” tego dnia, z linkiem do pomocy przewoźnika, tak jak przesyłka bez nowego skanu od czterech dni.
-• Peek AI: na ekranie przesyłki prawdopodobne dni lub godziny są cieniowane w zależności od szans, od „Mniej prawdopodobne” do „Bardziej prawdopodobne”, a „Dlaczego” mówi, na czym opiera się każda prognoza.
+• Paszport: twój paszport ma teraz strony. Strona „Kraje” pokazuje pieczątkę z każdego kraju, przez który przeszły twoje przesyłki, a po niej są „Znaczki” i „Liczby”. Każdy znaczek pokazuje dzień, w którym został zdobyty, a nowy jest ogłaszany pod swoją przesyłką. W grudniu Paszport proponuje „Twój 2026 w przesyłkach” do udostępnienia.
+• Znajomi: połóż swój paszport obok paszportu znajomego i zobacz znaczki, które oboje macie. Nowy przełącznik „Kraje” decyduje, czy znajomi widzą twoje kraje.
+• Dodaj prywatną notatkę do dowolnej przesyłki, z maksymalnie 5 zdjęciami lub plikami PDF: numer zamówienia, etykieta zwrotna, paragon. Widzisz ją tylko ty, nawet gdy udostępniasz przesyłkę.
+• Wklej link śledzenia ze sklepu, zanim zamówienie zostanie wysłane, a Peek poczeka na przesyłkę.
+• Na ekranie przesyłki „Co się nie zgadza?” zaczyna się teraz od „Przesyłka do mnie nie dotarła” i podpowiada, co zrobić dalej. Menu przesyłki proponuje „Skontaktuj się z obsługą przewoźnika <nazwa>”, gdy przewoźnik ma stronę pomocy.
+• Przesyłki w doręczeniu widać w sekcji „Dostawa dziś”, aktywności na żywo kończą się wraz z trasą doręczeń, a w Peek AI „Dlaczego” wymienia przesyłki, na których się opiera.
 ```

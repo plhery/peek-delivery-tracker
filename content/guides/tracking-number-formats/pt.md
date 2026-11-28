@@ -1,13 +1,13 @@
 ---
 title: Como saber qual é a transportadora pelo número de seguimento
-description: Como saber qual é a transportadora pelo número de seguimento: formatos dos CTT, CTT Express, DPD, GLS, InPost, DHL, UPS (1Z) e código postal S10.
+description: Como saber qual é a transportadora pelo número de seguimento: formatos dos CTT, CTT Express, DPD, GLS, InPost, DHL, UPS (1Z) e o formato postal S10.
 slug: como-saber-qual-e-a-transportadora
 picture: Três etiquetas de seguimento divididas em partes coloridas, uma lupa sobre o código de país CH e o Pip, curioso.
 published: 2026-10-09
 updated: 2026-11-27
 ---
 
-As letras e o comprimento de um número de seguimento revelam muitas vezes qual é a transportadora: `1Z` + 16 caracteres é UPS, 13 caracteres no formato postal S10 levam duas letras, nove algarismos e o país no fim (`PT` nos CTT, `CN` na China Post), 22 ou 25 algarismos apontam para CTT Express, e 10 algarismos sem letras para a DHL Express. Já os números só com 8, 12 ou 14 algarismos (como DPD, SEUR ou InPost) são partilhados entre várias empresas — escreve o teu código abaixo para ver a que transportadoras corresponde.
+As letras e o comprimento de um número de seguimento revelam muitas vezes qual é a transportadora: `1Z` + 16 caracteres é UPS, 13 caracteres no formato postal S10 levam duas letras, nove algarismos e o país no fim (`PT` nos CTT, `CN` na China Post), e 22 ou 25 algarismos apontam para os CTT ou a CTT Express. Já os números só com 8, 10, 12 ou 14 algarismos (como InPost, DHL Express, DPD ou SEUR) são partilhados entre várias empresas — escreve o teu código abaixo para ver a que transportadoras corresponde.
 
 :::checker
 :::

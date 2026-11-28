@@ -1,12 +1,12 @@
 ---
 title: India Post tracking: Speed Post numbers and statuses
-description: Track an India Post or Speed Post parcel: 13-character IN barcode numbers, status meanings, 1–5 day Speed Post times, international tracking and 1800 266 6868.
+description: Track an India Post or Speed Post parcel: 13-character IN barcode numbers, status meanings, Speed Post standards, international tracking and 1800 266 6868.
 slug: india-post-tracking
 published: 2026-11-02
 updated: 2026-11-27
 ---
 
-India Post (the Department of Posts, with 164,999 post offices) runs domestic Speed Post, registered mail and India Post Parcel plus international EMS, tracked packets and air parcels. Track your 13-character `IN` article barcode number on [indiapost.gov.in](https://www.indiapost.gov.in/) or paste it in the box above; below are status meanings, Speed Post delivery times (1–5 days in India), overseas handover and toll-free care (1800 266 6868).
+India Post (the Department of Posts, with 164,999 post offices) runs domestic Speed Post, registered mail and India Post Parcel plus international EMS, tracked packets and air parcels. Track your 13-character article barcode number ending in `IN` on [indiapost.gov.in](https://www.indiapost.gov.in/) or paste it in the box above; below are status meanings, Speed Post's service standards, overseas handover and toll-free care (1800 266 6868).
 
 ## India Post tracking number: what it looks like
 
@@ -105,7 +105,7 @@ India Post's standard is 1 to 2 days locally, 1 to 3 days metro to metro and 4 t
 
 ### How do I track an India Post parcel sent abroad?
 
-Use the same 13-character `IN` number on the destination post's tracker — such as [USPS](carrier:usps), [Royal Mail](carrier:royal-mail) ([Parcelforce](carrier:parcelforce) for EMS), [Canada Post](carrier:canada-post) or [Australia Post](carrier:australia-post) — or let Peek switch automatically once inbound scans appear.
+Use the same 13-character `IN` number on the destination post's tracker — such as [USPS](carrier:usps), [Royal Mail](carrier:royal-mail) ([Parcelforce](carrier:parcelforce) for EMS), [Canada Post](carrier:canada-post) or [Australia Post](carrier:australia-post) — or let Peek switch to that post once it has fresh scans, where Peek knows one (not yet in the UAE, Kuwait, Oman, Singapore, Malaysia or Sri Lanka).
 
 ### What is the India Post customer care number and complaint deadline?
 

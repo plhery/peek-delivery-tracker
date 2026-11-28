@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-SEUR es la empresa española de paquetería urgente del grupo Geopost (como DPD), con entrega a domicilio y en miles de tiendas SEUR Pickup y lockers. Pega tu número de 14 o 21 cifras (o referencia `REC`) arriba o en miSEUR en seur.com sin cuenta; abajo tienes cada estado en mayúsculas explicado, plazos (24h en SEUR 24) y soporte.
+SEUR es la empresa española de paquetería urgente del grupo Geopost (como DPD), con entrega a domicilio y en miles de tiendas SEUR Pickup y lockers. Pega tu número, que suele tener 14 o 21 cifras (o una referencia `REC`), arriba o en miSEUR en seur.com sin cuenta; abajo tienes cada estado en mayúsculas explicado, plazos (24h en SEUR 24) y soporte.
 
 ## Número de seguimiento de SEUR: cómo es y dónde encontrarlo
 
@@ -96,7 +96,7 @@ SEUR ha marcado un retraso sin dar motivo ni plazo. Espera al siguiente escaneo 
 
 ### ¿Cuánto tarda un paquete de SEUR (SEUR 24, Canarias, Europa)?
 
-Según Packlink, los plazos estimados son de 24 horas hábiles con SEUR 24, de 48 a 72 horas a Canarias con SEUR Canarias Todo Incluido (72 a 96 a La Gomera y El Hierro) y de 2 a 4 días a Europa con SEUR Classic, sin franja horaria fija salvo servicios urgentes con hora.
+Depende del servicio del remitente. Según Packlink, los plazos estimados son de 24 horas hábiles con SEUR 24, de 48 a 72 horas desde la Península a Canarias con SEUR Canarias Todo Incluido (72 a 96 a La Gomera y El Hierro) y de 2 a 4 días a las principales ciudades europeas con SEUR Classic, sin franja horaria fija salvo servicios urgentes con hora.
 
 ### ¿Por qué no aparece mi número de seguimiento SEUR?
 
@@ -104,7 +104,7 @@ SEUR da la misma respuesta para un envío recién creado que para un número des
 
 ### ¿Qué pasa si no estaba en casa o mi paquete está en un punto SEUR Pickup?
 
-Si no había nadie, el seguimiento permite reprogramar una nueva entrega o desviar el envío a una tienda SEUR Pickup o locker; espera al aviso `EL ENVÍO ESTÁ DISPONIBLE PARA RECOGER EN EL PUNTO SEUR PICKUP.` antes de acudir.
+Si no había nadie, el seguimiento pone `EL ENVÍO NO SE HA ENTREGADO POR AUSENCIA O CIERRE. SE PUEDE REPROGRAMAR UNA NUEVA ENTREGA.` y puedes pedir otra entrega. Si la entrega pasa a un punto SEUR Pickup, espera al aviso `EL ENVÍO ESTÁ DISPONIBLE PARA RECOGER EN EL PUNTO SEUR PICKUP.` antes de acudir.
 
 ### ¿SEUR y DPD son la misma empresa?
 

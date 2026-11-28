@@ -117,7 +117,7 @@ SF gives reference times without a transit commitment: for E-Parcel, 7–12 work
 
 ### Does SF Express deliver to PO boxes or allow address changes?
 
-No PO boxes or postcode-only addresses. For Standard Express, Global Express+ and Economy Express from mainland China, customer service can correct an address for RMB 70 (plus extra shipping); E-Parcel and EX-CD don't accept returns, redelivery or address changes.
+No PO boxes or postcode-only addresses. For Standard Express, Global Express+ and Economy Express from mainland China, customer service can correct an address for RMB 70 (plus extra shipping); E-Parcel and EX-CD aren't on that list, and an EX-CD parcel can't be returned, sent to a new address or redelivered.
 
 ### What is the SF Express customer service phone number?
 

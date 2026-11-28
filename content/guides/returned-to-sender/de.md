@@ -1,13 +1,13 @@
 ---
 title: Paket zurück an Absender: Gründe, Kosten, Geld zurück
-description: Paket geht zurück an Absender (DHL, Hermes, DPD, GLS, Post): Gründe, ob du die Rücksendung stoppen kannst, Lagerfristen (7 Tage) und Geld zurück.
+description: Paket geht zurück an Absender (DHL, Hermes, DPD, GLS, Post): Gründe, ob du die Rücksendung stoppen kannst, Lagerfristen und wie du dein Geld zurückbekommst.
 slug: paket-zurueck-an-absender
 picture: Ein Lieferwagen mit einem Paket mit rundem Rücksendestempel fährt einen gebogenen Pfeil entlang zurück zu einem Laden, und Pip schaut ihm nach.
 published: 2026-10-14
 updated: 2026-11-27
 ---
 
-„Zurück an Absender“ bedeutet, dass der Paketdienst dein Paket nicht zustellen konnte — meist wegen Adressfehler, verweigerter Annahme, abgelaufener Lagerfrist (7 Werktage bei DHL, Hermes und GLS, 3 Kalendertage im Amazon Locker) oder unbezahltem Zoll. Läuft die Rücksendung bei DHL einmal, lässt sie sich nicht mehr stoppen. Schreib dem Shop sofort schriftlich, ob er neu schicken oder erstatten soll: Annahmeverweigerung oder Nichtabholen gilt in Deutschland und Österreich nicht als Widerruf.
+„Zurück an Absender“ bedeutet, dass der Paketdienst dein Paket nicht zustellen konnte — meist wegen Adressfehler, verweigerter Annahme, abgelaufener Lagerfrist (bei DHL 7 Werktage in der Filiale und 7 Kalendertage in der Packstation, bei Hermes 7 Werktage, bei GLS mindestens 7 Werktage, im Amazon Locker 3 Kalendertage) oder unbezahltem Zoll. Läuft die Rücksendung bei DHL einmal, lässt sie sich nicht mehr stoppen. Schreib dem Shop sofort schriftlich, ob er neu schicken oder erstatten soll: Annahmeverweigerung oder Nichtabholen gilt in Deutschland und Österreich nicht als Widerruf.
 
 Du hast selbst etwas an einen Shop zurückgeschickt? Das ist ein anderer Weg: [Retoure und Erstattung verfolgen](guide:returns-tracking).
 

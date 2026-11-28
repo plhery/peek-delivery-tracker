@@ -1,12 +1,12 @@
 ---
 title: Juxi Express tracking: JXC numbers, delivery and help
-description: Track a Juxi Express (SHJX) parcel from China: 17-character JXC…YQ numbers, delivery times (5–8d UK), local carriers (Royal Mail, DHL, Canada Post) and help.
+description: Track a Juxi Express (SHJX) parcel from China: JXC…YQ numbers, delivery times, local carriers (Royal Mail, DHL, Canada Post) and help.
 slug: juxi-express-tracking
 published: 2026-10-21
 updated: 2026-11-27
 ---
 
-Juxi Express (上海驹隙国际物流有限公司, founded in 2016 in Shanghai and listed as SHJX on 17TRACK) ships parcels from China on dedicated lines to the UK (Royal Mail), Germany (DHL Paket), Canada (Canada Post), the US and Europe. Because Juxi has no working tracking page of its own, paste your 17-character `JXC…YQ` waybill in the box above or look it up on 17TRACK.
+Juxi Express (上海驹隙国际物流有限公司, a Shanghai forwarder that says it began operating in 2016, listed as SHJX on 17TRACK) ships parcels from China on dedicated lines to the UK (Royal Mail on some orders), Germany (DHL Paket), Canada (Canada Post), the US and Europe. Because Juxi has no working tracking page of its own, paste your waybill in the box above or look it up on 17TRACK. Juxi publishes no number format; those seen so far are `JXC`, two letters, ten digits and `YQ`.
 
 ## Juxi Express tracking number: what it looks like
 
@@ -88,15 +88,15 @@ While Peek follows the parcel through tracking services, it checks hourly, every
 
 ### What is Juxi Express (SHJX)?
 
-Shanghai Juxi International Freight Forwarding Co., Ltd., a Shanghai forwarder operating since 2016 with its own lines to the US, UK, Germany, France, Australia and Canada, listed as SHJX on 17TRACK.
+Shanghai Juxi International Freight Forwarding Co., Ltd., a Shanghai forwarder that says it began operating in 2016 and runs its own lines to the US, UK, Germany, France, Australia and Canada, listed as SHJX on 17TRACK.
 
 ### Where can I track a Juxi Express JXC…YQ parcel?
 
-In the box above or on 17TRACK (as SHJX), since Juxi has no working tracker of its own. For `JXC` numbers starting `JXCYI`, `JXCZO`, `JXCUS` or `JXCZI`, Peek checks DHLink first — tap "Change" to pick Juxi Express if needed.
+In the box above or on 17TRACK (as SHJX), since Juxi has no working tracker of its own. For `JXC` numbers starting `JXCYI`, `JXCZO`, `JXCUS` or `JXCZI`, Peek asks only DHLink, whose tracker knows some of them: to follow one as Juxi's, tap "Change" while you add it and pick Juxi Express.
 
 ### Who delivers Juxi Express parcels in the UK, Germany, Canada and the US?
 
-A local carrier: Juxi names [Royal Mail](carrier:royal-mail) on UK orders, [DHL Paket](carrier:dhl) in Germany and [Canada Post](carrier:canada-post) in Canada, plus national posts on its postal products. On US lines, DHLink's tracker can show a "Last Leg No." for the local carrier.
+A local carrier: Juxi names [Royal Mail](carrier:royal-mail) on some UK orders, [DHL Paket](carrier:dhl) in Germany and [Canada Post](carrier:canada-post) in Canada, plus national posts on its postal products. On US lines, DHLink's tracker can show a "Last Leg No." for the local carrier.
 
 ### How long does Juxi Express take to deliver?
 
@@ -104,7 +104,7 @@ Juxi quotes 5 to 8 days on its UK line, 8 to 12 working days to Canada, 7 to 15 
 
 ### How do I contact Juxi Express or claim a lost parcel?
 
-Contact the seller or marketplace first: Juxi handles claims only from the shipper (within 30 days under its consignment terms, and 30–60 days from shipping on dedicated lines). Juxi's Shanghai landline on juxiex.com is +86 21 6073 9366, with no recipient support abroad.
+Contact the seller or marketplace first: Juxi takes claims only from the shipper, in writing within 30 days of the parcel's receipt; on its dedicated lines it investigates a parcel reported within 30 days of shipping, only makes enquiries between 30 and 60 days, and takes nothing after 60. Juxi's Shanghai landline on juxiex.com is +86 21 6073 9366, with no recipient support abroad.
 
 :::sources
 - [Juxi Express: 上海驹隙国际物流有限公司 (home page)](https://www.juxiex.com/) – company and English name, start in 2016, lines, untracked economy small packet, tracking button with no working link, hotline, address

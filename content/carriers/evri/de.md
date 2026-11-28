@@ -1,12 +1,12 @@
 ---
 title: Evri Sendungsverfolgung: Nummer, Status, Zoll und Zustellung
-description: Evri Sendungsverfolgung (ehem. Hermes UK): 16-stelliger Code, GlobalEco- und UK-Status, Laufzeiten DE/AT/CH (5–10 Tage), EU-Zoll und 0330 808 5456.
+description: Evri Sendungsverfolgung (ehem. Hermes UK): 16-stelliger Code, GlobalEco- und UK-Status, Laufzeiten nach DE/AT/CH, EU-Zoll und 0330 808 5456.
 slug: evri-sendungsverfolgung
 published: 2026-11-17
 updated: 2026-11-27
 ---
 
-Evri (bis März 2022 Hermes UK, eigenständig neben [Hermes in Deutschland](carrier:hermes-de)) bringt Bestellungen britischer Shops nach Deutschland und Österreich (5 bis 8 Tage) sowie in die Schweiz (7 bis 10 Tage) und übergibt sie dort an lokale Zustellpartner. Internationale Pakete verfolgst du im [GlobalEco-Portal](https://globaleco.app/track/), innerbritische Sendungen (oder 8-stellige *calling cards*) auf [evri.com](https://www.evri.com/track-a-parcel) – oder du gibst deinen 16-stelligen Code direkt oben ein.
+Evri (bis März 2022 Hermes UK, eigenständig neben [Hermes in Deutschland](carrier:hermes-de)) übernimmt häufig den Versand britischer Shops nach Deutschland, Österreich und in die Schweiz (laut Evris Länderseiten 5 bis 8 Tage, in die Schweiz 7 bis 10, vorbehaltlich Zoll und Feiertagen) und übergibt die Pakete dort an lokale Zustellpartner. Internationale Pakete verfolgst du im [GlobalEco-Portal](https://globaleco.app/track/), innerbritische Sendungen (oder 8-stellige *calling cards*) auf [evri.com](https://www.evri.com/track-a-parcel) – oder du gibst deinen 16-stelligen Code direkt oben ein.
 
 ## Evri-Sendungsnummer: Aufbau und wo du sie findest
 
@@ -100,7 +100,7 @@ Nein: Evri ist der seit März 2022 gültige Name von Hermes UK, während [Hermes
 
 ### Gehört Evri zu DHL oder Royal Mail?
 
-Zu keinem von beiden. Seit dem 1. Oktober 2025 bilden Evri und DHL eCommerce UK die Evri Group mit einer Minderheitsbeteiligung der DHL Group; DHL eCommerce UK tritt als **Evri Premium – a network of DHL** getrennt auf, während normale [DHL](carrier:dhl)-Sendungen nicht über Evri laufen.
+Zu keinem von beiden. Seit dem 1. Oktober 2025 bilden Evri und DHL eCommerce UK die Evri Group mit einer Minderheitsbeteiligung der DHL Group; DHL eCommerce UK tritt als **Evri Premium – a network of DHL** getrennt auf, während normale [DHL](carrier:dhl)-Sendungen nicht über das Standard-Tracking von Evri laufen.
 
 ### Wie lange dauert ein Evri-Paket nach Deutschland, Österreich und in die Schweiz?
 
@@ -108,7 +108,7 @@ Evris Länderseiten nennen ab Großbritannien 5 bis 8 Tage nach Deutschland und 
 
 ### Wie erreiche ich den Evri Kundenservice (Chat, Telefon, E-Mail)?
 
-Auf evri.com/contact-us steht rund um die Uhr der Chat-Assistent Ezra bereit (ohne britische Postleitzahl `0` eingeben), telefonisch gilt 0330 808 5456 (Mo–Fr 8–16 Uhr, Sa 8–14 Uhr UK-Zeit), und für das Senior-Team („Tell us straight“) nutzt Evri `noreply.priority@evri.com`.
+Auf evri.com/contact-us steht rund um die Uhr der Chat-Assistent Ezra bereit (ohne britische Postleitzahl `0` eingeben), telefonisch gilt 0330 808 5456 (Mo–Fr 8–16 Uhr, Sa 8–14 Uhr UK-Zeit), und konnte der Kundendienst nicht helfen, erreichst du über „Tell us straight“ das Senior-Team unter `noreply.priority@evri.com`.
 
 ### Kann ich ein Evri-Paket nur mit meiner Postleitzahl verfolgen?
 

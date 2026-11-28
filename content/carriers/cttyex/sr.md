@@ -96,7 +96,7 @@ Status u Peeku prati najnoviji sken koji razume, a zbirni status samo kada ne ra
 
 Sistem CTTYEX-a ne prikazuje procenu roka isporuke, težinu niti naziv usluge i ne imenuje ni kompaniju koja dostavlja ni drugi broj, pa ih nema ni Peek. On nastavlja da proverava sistem CTTYEX-a pod brojem CTTY i nikada ne prebacuje pošiljku na drugog prevoznika.
 
-Dok imate otvorenu pošiljku, ili na dan dostave uz uključena obaveštenja, Peek proverava najčešće na svakih 10 minuta; inače svakih sat vremena. Može da vas obavesti o svakom skenu, samo o važnim koracima ili uz opciju „Delivery only“. Nakon dva dana bez novosti (12 sati dok pošiljka još prikazuje „Label created“ ili „Received by carrier“), Peek proverava svakih sat vremena. Ne može da kontaktira CTTYEX ni prodavca umesto vas.
+Dok imate otvorenu pošiljku, ili na dan dostave uz uključena obaveštenja, Peek proverava do svakih 10 minuta; inače svakih sat vremena. Može da vas obavesti o svakom skenu, samo o važnim koracima ili uz opciju „Delivery only“. Nakon dva dana bez novosti (12 sati dok pošiljka još prikazuje „Label created“ ili „Received by carrier“), Peek proverava svakih sat vremena. Ne može da kontaktira CTTYEX ni prodavca umesto vas.
 
 ## Pitanja o CTTYEX praćenju
 

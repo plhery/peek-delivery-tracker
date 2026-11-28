@@ -100,7 +100,7 @@ O site da SXW não publica uma lista por país. Para os EUA, o registo pode incl
 
 ### Como contactar a SXW Express se a encomenda não chegar?
 
-Fala primeiro com o vendedor ou abre disputa no marketplace: `sxwexpress.cn` não divulga telefone, e-mail nem morada (a página *Contact US* está vazia e o acesso no porto `8082` destina-se apenas a contas de expedidores).
+Fala primeiro com o vendedor e, se ele não responder, abre disputa no marketplace: `sxwexpress.cn` não divulga telefone, e-mail nem morada (a página *Contact US* está vazia e o acesso no porto `8082` destina-se apenas a contas de expedidores).
 
 :::sources
 - [SXW Express: página inicial](http://www.sxwexpress.cn/) – denominação social, caixa Express Tracking e botão Track, ligação 17TRACK e serviço DDU/DDP

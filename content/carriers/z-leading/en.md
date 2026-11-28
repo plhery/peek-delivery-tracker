@@ -6,7 +6,7 @@ published: 2026-10-22
 updated: 2026-11-27
 ---
 
-Z-Leading (Shenzhen Z-leading International Logistics, listed as ZHONGLING on 17TRACK) is a Shenzhen freight forwarder shipping goods from China by express, air, sea, rail and road. Because Z-Leading has no tracking page of its own, it gives customers the underlying carrier's tracking number (such as DHL, UPS or FedEx, or a `ZL` reference) and carrier website once dispatched. Paste that number in the box above, or read below to see how DDP/DDU customs and claims work.
+Z-Leading (Shenzhen Z-leading International Logistics, listed as ZHONGLING on 17TRACK) is a Shenzhen freight forwarder shipping goods from China by express, air, sea, rail and road. Because Z-Leading has no tracking page of its own, it gives customers the underlying carrier's tracking number (such as DHL, UPS or FedEx) and that carrier's website once dispatched. Paste that number in the box above, or read below to see how DDP/DDU customs and claims work.
 
 ## Z-Leading tracking number: what it looks like
 
@@ -83,11 +83,11 @@ No. Once a shipment leaves, Z-Leading gives its customer the underlying carrier'
 
 ### What does a Z-Leading tracking number look like?
 
-Express shipments often carry a UPS (`1Z` + 16 characters), DHL Express (10 digits) or FedEx (12 digits) waybill printed by Z-Leading as their agent; tracking services also file `ZL` + two letters + nine digits under Zhongling, while air and sea freight use airline or shipping-line references.
+An express shipment can carry a UPS (`1Z` + 16 characters), DHL Express (10 digits) or FedEx (12 digits) waybill printed by Z-Leading as their agent; Peek also links `ZL` + two letters + nine digits to Z-Leading, as a weak match, while air and sea freight use airline or shipping-line references.
 
 ### Who delivers Z-Leading parcels and who pays customs?
 
-Express shipments with a DHL, UPS or FedEx number are delivered by that carrier under its rules; on DDP (Delivered Duty Paid) freight lines, Z-Leading clears customs and pays import duties and taxes without naming the local delivery partner, whereas on DDU (Delivered Duty Unpaid) the buyer pays duties or VAT.
+Express shipments with a DHL, UPS or FedEx number are delivered by that carrier under its rules; on DDP (Delivered Duty Paid) freight lines, Z-Leading says it handles customs clearance, duties and taxes, without naming the local delivery partner, whereas on DDU (Delivered Duty Unpaid) the buyer pays duties or VAT.
 
 ### How do I contact Z-Leading about a lost, damaged or delayed shipment?
 

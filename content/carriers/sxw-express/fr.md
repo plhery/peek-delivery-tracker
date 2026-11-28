@@ -100,7 +100,7 @@ SXW ne publie pas de liste par pays. Vers les États-Unis, le dossier peut inclu
 
 ### Comment contacter SXW Express si mon colis n'arrive pas ?
 
-Adressez-vous d'abord au vendeur ou ouvrez un litige sur la place de marché : `sxwexpress.cn` ne publie aucun téléphone, aucune adresse e-mail ni aucune adresse postale (sa page *Contact US* est vide et l'accès membre sur le port `8082` est réservé aux expéditeurs).
+Adressez-vous d'abord au vendeur, puis ouvrez un litige sur la place de marché s'il ne répond pas : `sxwexpress.cn` ne publie aucun téléphone, aucune adresse e-mail ni aucune adresse postale (sa page *Contact US* est vide et l'accès membre sur le port `8082` est réservé aux expéditeurs).
 
 :::sources
 - [SXW Express : page d'accueil](http://www.sxwexpress.cn/) – raison sociale, encadré Express Tracking et bouton Track, lien 17TRACK, présentation DDU/DDP

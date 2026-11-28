@@ -101,11 +101,11 @@ Un transportista local, ya que SunYou no reparte en Europa. Aunque SunYou muestr
 
 ### ¿Qué significan «Alert», «Expired» y «Hand Over To Last Mile»?
 
-En el resumen de sypost.net, `Alert` (`Posible excepción`) y `Expired` (`Transporte demorado`) indican un aviso o demora larga, no necesariamente una entrega fallida (esa es `Undelivered`). `Hand Over To Last Mile` (`Recepción para entrega`) significa que ya lo tiene el transportista local: desde ahí conviene seguir su propio número.
+En el resumen de sypost.net, `Alert` (`Posible excepción`) y `Expired` (`Transporte demorado`) avisan de un posible problema o de una demora larga; ninguna de las dos es una entrega fallida (esa es `Undelivered`). `Hand Over To Last Mile` (`Recepción para entrega`) significa que ya lo tiene el transportista local: desde ahí conviene seguir su propio número.
 
 ### ¿Cuánto tarda un paquete de SunYou en llegar?
 
-Las cifras comerciales que SunYou da a vendedores indican de 4 a 5 días desde la admisión en su línea general y desde 5 días como entrega más rápida a principales países de Europa en su línea comercial, pero no son un plazo garantizado para tu pedido.
+Las cifras comerciales que SunYou da a vendedores indican de 4 a 5 días desde la admisión hasta algunos destinos principales en su línea general y, como entrega más rápida, 5 días a los principales países de Europa y América en su línea comercial, pero no son un plazo garantizado para tu pedido.
 
 ### ¿Tiene SunYou teléfono de contacto en España?
 

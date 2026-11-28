@@ -6,7 +6,7 @@ published: 2026-11-26
 updated: 2026-11-27
 ---
 
-Huaya Express (华亚运通) é a marca da 华亚运通国际货运代理有限公司 (Huaya Yuntong International Freight Forwarding), agente de cargas de Guangzhou, na China, que transporta encomendas internacionais para lojas online. Um código da Huaya tem `HYYT`, doze dígitos e `GZ`: cole-o na caixa acima ou abra o rastreador oficial pelo link 物流跟踪 no menu superior de hyytgz.com. O histórico da Huaya termina quando a encomenda é repassada a uma transportadora local — ou após leituras copiadas da DHL na Alemanha, da J&T Express no México, de uma transportadora nos EUA ou da Early Bird na Suécia.
+Huaya Express (华亚运通) é a marca da 华亚运通国际货运代理有限公司 (Huaya Yuntong International Freight Forwarding), agente de cargas de Guangzhou, na China, que transporta encomendas internacionais para lojas online. Um código da Huaya tem `HYYT`, doze dígitos e `GZ`: cole-o na caixa acima ou abra o rastreador oficial pelo link 物流跟踪 no menu superior de hyytgz.com. O histórico da Huaya termina quando a encomenda é repassada a uma transportadora no seu país, ou após algumas leituras dessa transportadora (nos EUA, às vezes até a entrega), sem dizer qual empresa é, exceto em uma rota pela Alemanha e em uma para o México, em que copia leituras da DHL e da J&T Express, e em uma rota sueca que cita a Early Bird.
 
 ## Código de rastreamento Huaya Express: como ele é
 
@@ -84,7 +84,7 @@ O Peek classifica as duas linhas de alfândega em inglês como em trânsito — 
 
 ### O que é a Huaya Express (华亚运通)?
 
-É a marca da 华亚运通国际货运代理有限公司 (Huaya Yuntong International Freight Forwarding), agente de cargas de Guangzhou que despacha pedidos para lojas online via China Post, linhas próprias com impostos incluídos para EUA e Europa, rotas para itens sensíveis e as quatro grandes expressas.
+É a marca da 华亚运通国际货运代理有限公司 (Huaya Yuntong International Freight Forwarding), agente de cargas de Guangzhou que despacha pedidos para lojas online. Seu site diz usar principalmente China Post, linhas próprias com impostos incluídos para EUA e Europa, rotas para itens sensíveis e as quatro grandes expressas.
 
 ### Como é o código de rastreamento da Huaya Express e onde consultar?
 
@@ -92,7 +92,7 @@ O formato reconhecido pelo Peek é `HYYT`, doze dígitos e `GZ` (como `HYYT48291
 
 ### Por que o rastreamento Huaya parou em "It has been handed over to the service provider."?
 
-Porque a etapa da Huaya termina no repasse: uma transportadora local no seu país assumiu a encomenda sob código próprio, e a linha da Huaya não informa o nome nem o número dela (salvo leituras copiadas em rotas específicas nos EUA, Alemanha, México ou Suécia). Peça ao vendedor o nome e o código da entregadora local.
+Porque a etapa da Huaya termina no repasse: uma transportadora local no seu país assumiu a encomenda sob código próprio, e a linha da Huaya não informa o nome nem o número dela (salvo a DHL e a J&T Express, cujas leituras ela copia em uma rota pela Alemanha e em uma para o México, e a Early Bird, citada em uma linha sueca). Peça ao vendedor o nome e o código da entregadora local.
 
 ### Qual transportadora entrega encomendas da Huaya Express?
 
@@ -100,7 +100,7 @@ O registro da Huaya não divulga a entregadora final nem um segundo código, exc
 
 ### Como entrar em contato com a Huaya Express se a encomenda sumir?
 
-Procure primeiro a loja onde você comprou ou abra disputa no marketplace: os termos de reclamação da Huaya valem apenas para remetentes. O site hyytgz.com publica apenas canais em chinês: celular 18039073131, e-mail 2065332407@qq.com e o formulário 投诉建议.
+Procure primeiro a loja onde você comprou e, se ela não responder, abra disputa no marketplace: os termos de reclamação da Huaya valem apenas para remetentes. O site hyytgz.com publica apenas canais em chinês: celular 18039073131, e-mail 2065332407@qq.com e o formulário 投诉建议.
 
 :::sources
 - [Huaya Express: 华亚运通国际货运代理有限公司 (home)](http://hyytgz.com/) – razão social e logotipo, lojas atendidas, serviços principais, links 物流跟踪 (rastreador em chinês e inglês e 17TRACK), telefone, e-mail da empresa e bairro Baiyun

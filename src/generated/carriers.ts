@@ -19794,6 +19794,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#1928dc"
     },
     {
+      "id": "huahan",
+      "catalog": "huahan",
+      "slug": "huahan-logistics-otslezhivanie",
+      "title": "Отслеживание HuaHan Logistics: номера HHW…YQ и доставка",
+      "name": "HuaHan Logistics",
+      "color": "#0069e8"
+    },
+    {
       "id": "epost-global",
       "catalog": "epost-global",
       "slug": "epost-global-otslezhivanie",
@@ -22406,6 +22414,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef7d00"
     },
     {
+      "id": "dhlink",
+      "catalog": "dhlink",
+      "slug": "dhlink-pakket-volgen",
+      "title": "DHLink tracking: nummers, statussen en wie bezorgt",
+      "name": "DHLink",
+      "color": "#143167"
+    },
+    {
       "id": "jrt",
       "catalog": "jrt",
       "slug": "jrt-pakket-volgen",
@@ -22444,6 +22460,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "ZTO Express pakket volgen (中通快递): nummers, statussen",
       "name": "ZTO Express",
       "color": "#0279ff"
+    },
+    {
+      "id": "huahan",
+      "catalog": "huahan",
+      "slug": "huahan-logistics-pakket-volgen",
+      "title": "HuaHan Logistics tracking: HHW…YQ-nummers en bezorger",
+      "name": "HuaHan Logistics",
+      "color": "#0069e8"
     },
     {
       "id": "dpd-nl",
@@ -22568,6 +22592,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#4e79e1"
     },
     {
+      "id": "huahan",
+      "catalog": "huahan",
+      "slug": "huahan-logistics-spara-paket",
+      "title": "HuaHan Logistics spårning: HHW…YQ-nummer och leverans",
+      "name": "HuaHan Logistics",
+      "color": "#0069e8"
+    },
+    {
       "id": "posta-shqiptare",
       "catalog": "posta-shqiptare",
       "slug": "posta-shqiptare-spara-paket",
@@ -22642,6 +22674,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e30613"
     },
     {
+      "id": "dhlink",
+      "catalog": "dhlink",
+      "slug": "dhlink-spor-pakke",
+      "title": "DHLink sporing: numre, statusser og hvem der leverer",
+      "name": "DHLink",
+      "color": "#143167"
+    },
+    {
       "id": "topyou",
       "catalog": "topyou",
       "slug": "topyou-spor-pakke",
@@ -22714,6 +22754,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Helthjem sporing — sporingsnummer, statuser og hentested",
       "name": "Helthjem",
       "color": "#ffb202"
+    },
+    {
+      "id": "dhlink",
+      "catalog": "dhlink",
+      "slug": "dhlink-sporing",
+      "title": "DHLink sporing: numre, statuser og hvem som leverer",
+      "name": "DHLink",
+      "color": "#143167"
     },
     {
       "id": "mtscn",
@@ -23220,6 +23268,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Urmărire CNE Express: cod 3A5V, statusuri și contact",
       "name": "CNE Express",
       "color": "#e83828"
+    },
+    {
+      "id": "huahan",
+      "catalog": "huahan",
+      "slug": "huahan-logistics-urmarire-colet",
+      "title": "Urmărire HuaHan Logistics: coduri HHW…YQ și cine livrează",
+      "name": "HuaHan Logistics",
+      "color": "#0069e8"
     },
     {
       "id": "dpd-ro",

@@ -713,8 +713,9 @@ private struct ParcelListDay: View {
 }
 
 /// The stage, then the day, in the warning colour where the parcel needs the reader, after the list's dot where it marks
-/// the parcel. Where the line can't hold both, the day it is expected stays for a parcel the carrier has (`dayAlone`), as
-/// it says "expected" and the mark still names the carrier; else the stage, never a bare day. VoiceOver reads both.
+/// the parcel. Where the line can't hold both, the day it is expected stays for a parcel the carrier has that needs
+/// nothing of the reader (`dayAlone`), as it says "expected" and the mark still names the carrier; else the stage, never
+/// a bare day. VoiceOver reads both.
 private struct ParcelListStatus: View {
     let parcel: DeliveryWidgetParcel
     @Environment(\.peekAiCopy) private var peekAiCopy

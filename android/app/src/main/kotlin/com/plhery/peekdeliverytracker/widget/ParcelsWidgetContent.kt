@@ -196,9 +196,9 @@ internal fun openList(context: Context): Action = actionStartActivity(listIntent
 
 /**
  * `ParcelListStatus`'s `ViewThatFits`: a row's line where it fits `width`, the stage and the day; else the day it is
- * expected alone, for a parcel the carrier has ([listDayAlone]), never a bare day; else the stage, in the widget's
- * shorter words where the app's don't fit ([fittingStatus]). What opens the line takes a capital, "Expected tomorrow"
- * ([openingLine]).
+ * expected alone, for a parcel the carrier has that needs nothing of the reader ([listDayAlone]), never a bare day;
+ * else the stage, in the widget's shorter words where the app's don't fit ([fittingStatus]). What opens the line takes
+ * a capital, "Expected tomorrow" ([openingLine]).
  */
 internal fun fittingLine(parcel: DeliveryWidgetParcel, layout: ListLayout, width: Dp): String {
     fun fits(text: String) = layout.type.width(text, layout.statusPoints, FontWeight.Normal) <= width

@@ -124,7 +124,7 @@ parcels it shows (`DeliveryWidgetList.design`), with `k` = 1, 2 or 3 for the sma
   (`DeliveryWidgetList.layouts`), and larger text keeps fewer rows. The type is the iPhone's, in dp. A day it is
   expected says so ("expected tomorrow"): a bare day reads as the day a parcel came. Where a line doesn't fit, a
   parcel the carrier has keeps its day (`dayAlone`); a delivered one, one not handed over yet, whose label's day
-  seldom holds, or one whose day doesn't fit either keeps its stage, at a smaller size where it must (down to 0.8 of it).
+  seldom holds, one that needs the reader ("At customs"), or one whose day doesn't fit either keeps its stage, at a smaller size where it must (down to 0.8 of it).
   A stage too long even then takes the widget's shorter words (`widget.stage.*`, which the app publishes as the
   stage's `short`), in rows, passes and cards alike; the list and the parcel's page keep their own.
 

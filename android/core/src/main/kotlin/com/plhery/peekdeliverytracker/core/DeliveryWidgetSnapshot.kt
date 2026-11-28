@@ -76,7 +76,8 @@ data class DeliveryWidgetParcel(
     @Serializable(with = ReferenceDateSerializer::class) val peekAiUntil: Instant? = null,
     /**
      * Whether the day may stand for the stage where a line holds one or the other: the day it is expected, which says
-     * so, of a parcel the carrier has. None for the day it arrived, a bare day, or a parcel not handed over yet.
+     * so, of a parcel the carrier has. None for the day it arrived, a bare day, a parcel not handed over yet, or one that
+     * needs the reader, whose stage says why.
      */
     val dayAlone: Boolean? = null,
 ) {

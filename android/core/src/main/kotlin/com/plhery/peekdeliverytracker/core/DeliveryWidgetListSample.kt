@@ -89,7 +89,8 @@ object DeliveryWidgetListSample {
                 section = section(sample).rawValue,
                 nextUp = sample.stage == TrackingStage.ReadyForPickup,
                 carrierId = sample.carrierId,
-                dayAlone = (estimate != null && sample.stage !in setOf(null, TrackingStage.Pending, TrackingStage.Registered)).takeIf { it },
+                dayAlone = (estimate != null && sample.stage !in setOf(null, TrackingStage.Pending, TrackingStage.Registered)
+                    && section(sample) != ParcelSectionKind.Attention).takeIf { it },
             )
         }
         return DeliveryWidgetSnapshot(now, localizer.language.rawValue, parcels)

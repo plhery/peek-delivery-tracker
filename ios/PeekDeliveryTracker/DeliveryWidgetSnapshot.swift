@@ -50,7 +50,8 @@ struct DeliveryWidgetParcel: Codable, Equatable, Hashable, Identifiable, Sendabl
     /// Peek AI's words where they stand apart from the carrier's date, when they differ: "not today" for "unlikely".
     var peekAiAlone: String? = nil
     /// Whether the day may stand for the stage where a line holds one or the other: the day it is expected, which says
-    /// so, of a parcel the carrier has. None for the day it arrived, a bare day, or a parcel not handed over yet.
+    /// so, of a parcel the carrier has. None for the day it arrived, a bare day, a parcel not handed over yet, or one that
+    /// needs the reader, whose stage says why.
     var dayAlone: Bool? = nil
 
     var deepLink: URL {

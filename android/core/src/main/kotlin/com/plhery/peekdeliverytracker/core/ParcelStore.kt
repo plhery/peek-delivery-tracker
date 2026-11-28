@@ -2492,8 +2492,10 @@ class ParcelStore(
             return ordered.map { parcel ->
                 val item = widgetParcel(parcel, localizer, now, midnights) { localizer.parcelExpectedDay(parcel, it) }
                 // Where its line holds one or the other, a parcel the carrier has keeps its day, which says it is
-                // expected; one not handed over yet keeps its stage, as a label's date often doesn't hold.
-                if (parcel.currentStage in setOf(null, TrackingStage.Pending, TrackingStage.Registered)) item else item.copy(dayAlone = true)
+                // expected; one not handed over yet keeps its stage, as a label's date often doesn't hold, and so does
+                // one that needs the reader ("At customs"), which its day alone would read as on its way.
+                val keepsStage = parcel.currentStage in setOf(null, TrackingStage.Pending, TrackingStage.Registered) || parcel.attention(now) != null
+                if (keepsStage) item else item.copy(dayAlone = true)
             }
         }
 

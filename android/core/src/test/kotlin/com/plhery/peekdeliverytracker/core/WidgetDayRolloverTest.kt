@@ -225,4 +225,18 @@ class WidgetDayRolloverTest {
         val carried = ParcelStore.widgetOrder(listOf(parcel), french, morning).single()
         assertEquals("prévu aujourd’hui", carried.listDayAlone)
     }
+
+    /**
+     * A parcel at customs, under Needs attention: a row too narrow for its stage and its day keeps "At customs", which
+     * its day alone would read as on its way.
+     */
+    @Test
+    fun aParcelThatNeedsTheReaderKeepsItsStageWhereTheLineHoldsOne() {
+        val atCustoms = parcel.copy(trackingEvents = parcel.trackingEvents + event(id, TrackingStage.Customs, "2026-11-12T20:00:00Z"))
+        val row = ParcelStore.widgetOrder(listOf(atCustoms), localizer, morning).single()
+        assertEquals("attention", row.section)
+        assertEquals("expected today", row.listDay)
+        assertNull(row.dayAlone)
+        assertNull(row.listDayAlone)
+    }
 }

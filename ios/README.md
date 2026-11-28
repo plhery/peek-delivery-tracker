@@ -238,7 +238,7 @@ former. Server settings are in [DEPLOYMENT.md](../docs/DEPLOYMENT.md).
   widget and Siri's Next delivery read the words for the moment they show: "tomorrow" reads "today" on the day, last
   night's delivery "yesterday", and a passed estimate gives way to the status. An estimate says it is expected
   ("expected tomorrow"), as a bare day reads as the day a parcel came, and a row too narrow for the stage and the day
-  keeps the day only for a parcel the carrier has (`dayAlone`). A parcel out for delivery leads the
+  keeps the day only for a parcel the carrier has that needs nothing of the reader (`dayAlone`): "At customs" stays. A parcel out for delivery leads the
   widgets and Siri's answer until its round ends, at midnight on the carrier's clock, then waits among the others, its
   row saying "In transit" until a scan comes. The widget's timeline has an entry at those midnights, at the end of each round, and at
   the midnight after each step, whose time then names its weekday. When the time zone changes, the app words the

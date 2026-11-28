@@ -2830,6 +2830,23 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(carried.dayAlone, true)
     }
 
+    /// A parcel at customs, under Needs attention: a row too narrow for its stage and its day keeps "At customs", which
+    /// its day alone would read as on its way.
+    @MainActor
+    func testAParcelThatNeedsTheReaderKeepsItsStageWhereTheLineHoldsOne() throws {
+        let localizer = Localizer()
+        localizer.language = .en
+        let now = try XCTUnwrap(DateParser.date("2026-11-27T15:00:00Z"))
+        let id = UUID()
+        var atCustoms = makeParcel(id: id, events: [event(id, .inTransit, "2026-11-26T08:00:00Z"),
+                                                    event(id, .customs, "2026-11-27T06:00:00Z")])
+        atCustoms.expectedDelivery = "2026-11-27"
+
+        let published = try XCTUnwrap(ParcelStore.nextDeliveries(of: [atCustoms], localizer: localizer, now: now).first)
+        XCTAssertEqual(published.listLine.day, "expected today")
+        XCTAssertNil(published.dayAlone)
+    }
+
     /// The app publishes where its list puts each parcel, which one is its Next up, and the carrier shown, and the last
     /// steps of the first parcels, latest first, for a large widget's card.
     @MainActor

@@ -19810,6 +19810,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00b33c"
     },
     {
+      "id": "pin-ag",
+      "catalog": "pin-ag",
+      "slug": "pin-ag-otslezhivanie",
+      "title": "Отслеживание PIN AG: заказные письма, посылки, статусы",
+      "name": "PIN AG",
+      "color": "#003366"
+    },
+    {
       "id": "ozon-logistics",
       "catalog": "ozon-logistics",
       "slug": "ozon-otslezhivanie",
@@ -22586,6 +22594,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e30613"
     },
     {
+      "id": "topyou",
+      "catalog": "topyou",
+      "slug": "topyou-spor-pakke",
+      "title": "TopYou sporing: TYZR-numre, statusser og levering",
+      "name": "TopYou",
+      "color": "#045cd7"
+    },
+    {
       "id": "cne",
       "catalog": "cne",
       "slug": "cne-express-sporing",
@@ -22658,6 +22674,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Meiteshun-sporing (MTSCN): AMTS…FS-nummer og statuser",
       "name": "Meiteshun Logistics",
       "color": "#f89f3b"
+    },
+    {
+      "id": "topyou",
+      "catalog": "topyou",
+      "slug": "topyou-sporing",
+      "title": "TopYou sporing: TYZR-numre, statuser og hvem som leverer",
+      "name": "TopYou",
+      "color": "#045cd7"
     },
     {
       "id": "jrt",
@@ -23070,6 +23094,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f89f3b"
     },
     {
+      "id": "topyou",
+      "catalog": "topyou",
+      "slug": "topyou-urmarire-colet",
+      "title": "TopYou urmărire colet: numere TYZR, statusuri și curieri",
+      "name": "TopYou",
+      "color": "#045cd7"
+    },
+    {
       "id": "js-express",
       "catalog": "js-express",
       "slug": "js-express-urmarire-colet",
@@ -23166,6 +23198,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Проследяване на пратка Еконт — номера, офиси и Еконтомат",
       "name": "Econt",
       "color": "#234182"
+    },
+    {
+      "id": "j-and-t-de",
+      "catalog": "j-and-t-de",
+      "slug": "jt-express-germany-proslediavane",
+      "title": "J&T Express Germany проследяване: JTDE номера и статуси",
+      "name": "J&T Express Germany",
+      "color": "#e60000"
     },
     {
       "id": "eushipments",
@@ -23272,6 +23312,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Κυπριακά Ταχυδρομεία: εντοπισμός δέματος, κωδικός, τελωνείο",
       "name": "Cyprus Post",
       "color": "#e4a50e"
+    },
+    {
+      "id": "j-and-t-de",
+      "catalog": "j-and-t-de",
+      "slug": "jt-express-germany-entopismos",
+      "title": "J&T Express Germany εντοπισμός: κωδικοί JTDE & καταστάσεις",
+      "name": "J&T Express Germany",
+      "color": "#e60000"
     },
     {
       "id": "mtscn",
@@ -23589,6 +23637,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ],
   "uk": [
+    {
+      "id": "yunexpress",
+      "catalog": "yunexpress",
+      "slug": "yunexpress-vidstezhennia",
+      "title": "Відстеження YunExpress: номери YT, статуси та доставка",
+      "name": "YunExpress",
+      "color": "#008284"
+    },
     {
       "id": "gls-de",
       "catalog": "gls-de",

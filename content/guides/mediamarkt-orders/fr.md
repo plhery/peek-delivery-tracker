@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-Il n'existe pas de magasin MediaMarkt en France (seul `mediamarkt.lu` livre certains articles « Livrable en France ») : en français, tu commandes sur `mediamarkt.be` (Belgique, petits colis via bpost ou PostNL), `mediamarkt.lu` (Luxembourg, via DPD) ou `mediamarkt.ch` (Suisse, via La Poste suisse), tandis que les gros appareils arrivent sur rendez-vous. Suis ta commande dans ton compte client ou via le lien Track & Trace de l'e-mail d'expédition.
+Il n'existe pas de magasin MediaMarkt en France (seul mediamarkt.lu livre certains articles « Livrable en France ») : en français, tu commandes sur mediamarkt.be (Belgique, petits colis via bpost ou PostNL), mediamarkt.lu (Luxembourg, via DPD) ou mediamarkt.ch (Suisse, via La Poste suisse), tandis que les gros appareils arrivent sur rendez-vous. En Belgique, tu suis ta commande dans ton compte et avec l'e-mail d'expédition ; en Suisse, le lien de suivi arrive dans la confirmation d'expédition ou par SMS ; au Luxembourg, ton compte garde l'historique de tes commandes.
 
 ## Y a-t-il un MediaMarkt en France ?
 

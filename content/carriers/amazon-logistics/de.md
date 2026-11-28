@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Amazon Logistics ist Amazons eigener Lieferdienst für die letzte Meile in Deutschland und Österreich (in der Schweiz liefert die [Schweizerische Post](carrier:swiss-post)); neben eigenen Lieferpartnern versendet Amazon auch mit [DHL](carrier:dhl), [DPD](carrier:dpd-de) oder [Hermes](carrier:hermes-de). Sendungen mit `DE`- oder `TBA`-Nummer verfolgst du direkt im Amazon-Konto unter „Meine Bestellungen“ › „Lieferung verfolgen“ (inklusive Live-Karte und Zustellfoto).
+Amazon Logistics ist Amazons eigener Lieferdienst für die letzte Meile in Deutschland und Österreich (in der Schweiz liefert die [Schweizerische Post](carrier:swiss-post)); neben eigenen Lieferpartnern versendet Amazon auch mit [DHL](carrier:dhl), [DPD](carrier:dpd-de) oder [Hermes](carrier:hermes-de). Sendungen mit `DE`- oder `TBA`-Nummer verfolgst du direkt im Amazon-Konto unter „Meine Bestellungen“ › „Lieferung verfolgen“, mit der Live-Karte, sobald sie bereitsteht, und bei manchen Lieferungen einem Zustellfoto.
 
 ## Amazon Logistics Sendungsverfolgung und Trackingnummer
 
@@ -78,11 +78,11 @@ In Österreich ja: Amazon betreibt dort eigene Verteilzentren mit lokalen Liefer
 
 ### Wie lange liegt ein Paket im Amazon Locker und was gilt bei verpasster Zustellung?
 
-Im Amazon Locker hast du **3 Kalendertage** Zeit zur Abholung (Code per E-Mail, Barcode oder Amazon App); danach geht das Paket automatisch zurück und Amazon erstattet den Betrag. Vorab kannst du in den Lieferanweisungen einen Ablageort oder einen Amazon Liefertag festlegen.
+Im Amazon Locker hast du **3 Kalendertage** Zeit zur Abholung (Code per E-Mail, Barcode oder Amazon App); danach geht das Paket automatisch zurück und Amazon erstattet den Betrag. Vorab kannst du in den Lieferanweisungen einen Ablageort angeben; als Prime-Mitglied wählst du beim Bezahlen auch einen Amazon Liefertag.
 
 ### Wie erreiche ich den Amazon Logistics Kundenservice telefonisch?
 
-Es gibt keine frei wählbare Hotline für Amazon Logistics: Melde dich bei Amazon an, wähle unter „Meine Bestellungen“ den Artikel › „Ich benötige weitere Hilfe“ und fordere den kostenlosen Rückruf („Anruf per Klick“, täglich 6–24 Uhr, auch aus der Schweiz) oder den 24/7-Chat an. Auf jedem Amazon Locker steht zudem eine direkte Kundenservice-Nummer.
+Zuständig ist der Amazon-Kundenservice: Melde dich bei Amazon an, wähle unter „Meine Bestellungen“ den Artikel › „Ich benötige weitere Hilfe“ und fordere den kostenlosen Rückruf („Anruf per Klick“, täglich 6–24 Uhr, auch aus der Schweiz) oder den 24/7-Chat an. Auf jedem Amazon Locker steht zudem eine direkte Kundenservice-Nummer.
 
 :::sources
 - [About Amazon: Wie ist das Arbeiten als Fahrer:in bei einem Amazon Lieferpartner?](https://www.aboutamazon.de/news/logistik-und-zustellung/wie-ist-das-arbeiten-als-fahrer-in-bei-einem-amazon-lieferpartner) – Amazon Logistics, Lieferpartner in Deutschland, DHL, DPD, Hermes, Lieferungen am selben oder nächsten Tag

@@ -7,7 +7,7 @@ published: 2026-10-18
 updated: 2026-11-27
 ---
 
-Puedes seguir cualquier pedido online de IKEA España (Península) en «Sigue y gestiona tu pedido» con tu número de pedido y el correo o teléfono de la compra. Los pedidos pequeños (hasta 25 kg) viajan por paquetería con SEUR o Correos (3–6 días laborables) y llevan número de seguimiento del transportista; los muebles medianos o voluminosos llegan en camión con el transportista de IKEA en una franja horaria y se siguen en la web de IKEA.
+Puedes seguir cualquier pedido online de IKEA España (Península) en «Sigue y gestiona tu pedido» con tu número de pedido y el correo o teléfono de la compra. Los pedidos pequeños (hasta 25 kg) viajan por paquetería con SEUR o Correos (unos 3 a 6 días laborables) y llevan número de seguimiento del transportista; los muebles medianos o voluminosos llegan en camión con el transportista de IKEA en una franja horaria y se siguen en la web de IKEA.
 
 ## ¿Quién entrega un pedido de IKEA en España (SEUR, Correos o camión)?
 

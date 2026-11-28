@@ -6,7 +6,7 @@ published: 2026-10-22
 updated: 2026-11-27
 ---
 
-DHL Paket est le service colis allemand de Deutsche Post et DHL. Cette page couvre les livraisons en Allemagne (Filiale et Packstation) ainsi que les colis partis d'Allemagne vers la France ([La Poste / Colissimo](carrier:la-poste), 2–4 jours ouvrables), la Belgique ([bpost](carrier:bpost), 2–3 jours) et la Suisse (DHL Express CH / Poste suisse, 2–5 jours). Colle ton *Sendungsnummer* (10 à 39 caractères) ci-dessus ou suis-le sur dhl.de ou l'app Post & DHL.
+DHL Paket est le service colis allemand de Deutsche Post et DHL. Cette page couvre les livraisons en Allemagne (Filiale et Packstation) ainsi que les colis partis d'Allemagne vers la France ([La Poste / Colissimo](carrier:la-poste), 2–4 jours ouvrables), la Belgique ([bpost](carrier:bpost), 2–3 jours ouvrables) et la Suisse (DHL Express Suisse ou Poste suisse, 2–5 jours ouvrables), délais indicatifs selon DHL. Colle ton *Sendungsnummer* (10 à 39 caractères) ci-dessus ou suis-le sur dhl.de ou l'app Post & DHL.
 
 ## Numéro de suivi DHL Paket : où le trouver et à quoi il ressemble
 
@@ -98,15 +98,15 @@ Tu vois le statut, chaque scan sur une carte, avec son lieu et l'heure exacte de
 
 ### Qui livre en France, en Belgique ou en Suisse un colis DHL Paket ?
 
-Selon DHL, [La Poste / Colissimo](carrier:la-poste) livre en France, [bpost](carrier:bpost) en Belgique et DHL Express Suisse ou [la Poste suisse](carrier:swiss-post) en Suisse. Le suivi continue sur `dhl.de` avec le même numéro (et souvent sur le site du partenaire local).
+Selon DHL, [La Poste / Colissimo](carrier:la-poste) livre en France, [bpost](carrier:bpost) en Belgique et DHL Express Suisse ou [la Poste suisse](carrier:swiss-post) en Suisse. Le suivi continue sur dhl.de avec le même numéro (et souvent sur le site du partenaire local).
 
 ### Combien de temps met un colis DHL Paket depuis l'Allemagne ?
 
-DHL annonce à titre indicatif 2 à 4 jours ouvrables vers la France, 2 à 3 vers la Belgique, 2 à 5 vers la Suisse et 1 à 2 jours ouvrables en Allemagne. Un nouveau numéro met jusqu'à 24 heures à apparaître, et une pause de quelques jours à Francfort reste normale.
+DHL annonce à titre indicatif 2 à 4 jours ouvrables vers la France, 2 à 3 vers la Belgique, 2 à 5 vers la Suisse et 1 à 2 jours ouvrables en Allemagne. Un nouveau numéro peut mettre jusqu'à 24 heures à apparaître, et un suivi immobile quelques jours après le départ d'Allemagne (au centre international de Francfort, par exemple) reste normal tant que le délai habituel n'est pas dépassé.
 
 ### Combien de temps un colis DHL reste-t-il en Filiale ou en Packstation en Allemagne ?
 
-En Filiale ou Paketshop : 7 jours ouvrables (samedis compris) avec pièce d'identité. En Packstation : 7 jours calendaires (9 après une livraison manquée), sans prolongation.
+En Filiale ou Paketshop : 7 jours ouvrables (samedis compris) à partir du lendemain du premier passage, avec une pièce d'identité. En Packstation : 7 jours calendaires (9 après une livraison manquée), sans prolongation.
 
 ### Peut-on suivre un DHL Päckchen ou changer l'adresse d'un colis DHL Paket ?
 
@@ -114,7 +114,7 @@ Non : DHL Päckchen et Päckchen International n'ont aucun suivi, et l'adresse d
 
 ### Comment contacter DHL Paket, La Poste ou bpost en cas de problème ?
 
-Appelle DHL Paket au `+49 228 4333112` (`0228 4333112` en Allemagne, lun–ven 8 h–20 h, sam 8 h–18 h), La Poste au `3631` ou bpost au `02 278 51 27`. Pour un colis perdu, passe d'abord par l'expéditeur (l'enquête internationale DHL peut prendre jusqu'à 8 semaines).
+Appelle DHL Paket au +49 228 4333112 (0228 4333112 en Allemagne, lun–ven 8 h–20 h, sam 8 h–18 h, hors jours fériés allemands), La Poste au 3631 pour une réclamation ou bpost au 02 278 51 27. Pour un colis perdu, passe d'abord par l'expéditeur (l'enquête internationale DHL peut prendre jusqu'à 8 semaines).
 
 :::sources
 - [DHL : Was bedeutet mein Sendungsstatus?](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – statuts, 24 heures, lignes répétées, délais de garde

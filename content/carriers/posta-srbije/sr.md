@@ -6,7 +6,7 @@ published: 2026-10-26
 updated: 2026-11-27
 ---
 
-Pošta Srbije je nacionalni poštanski operator, a **Post-ekspres (Post Express)** njen kurirski servis („Danas za sutra” do 19 h). Pošiljku besplatno pratite pomoću 13-znakova prijemnog broja (npr. `PE…RS`, `CP…RS` ili strani broj iz inostranstva) u alatu [Praćenje pošiljke](https://www.posta.rs/lat/alati/pracenje-posiljke.aspx) na posta.rs, u aplikaciji Pošte Srbije ili u polju iznad — ispod su objašnjeni statusi, rokovi čuvanja, paketomat, carina (PDV 20% / carina preko 50 €) i kontakti.
+Pošta Srbije je nacionalni poštanski operator, a **Post-ekspres (Post Express)** njen kurirski servis („Danas za sutra” do 19 h). Pošiljku besplatno pratite pomoću prijemnog broja (npr. `PE…RS`, `CP…RS` ili broja strane pošte) u alatu [Praćenje pošiljke](https://www.posta.rs/lat/alati/pracenje-posiljke.aspx) na posta.rs, u aplikaciji Pošte Srbije ili u polju iznad — ispod su objašnjeni statusi, rokovi čuvanja, paketomat, carina (PDV 20% / carina preko 50 €) i kontakti.
 
 ## Prijemni broj pošiljke
 
@@ -111,23 +111,23 @@ Dok imate pošiljku otvorenu na ekranu, ili na dan dostave sa uključenim obave�
 
 ### Kako da pratim paket iz inostranstva preko Pošte Srbije?
 
-Unesite 13-znakovni prijemni broj od pošiljaoca (sa oznakom strane zemlje na kraju, npr. `…CN`) u alat Praćenje pošiljke na `posta.rs` ili u polje iznad. Po imenu i prezimenu ili adresi nije moguće proveriti da li je pošiljka stigla.
+Unesite prijemni broj od pošiljaoca (sa oznakom strane zemlje na kraju, npr. `…CN`) u alat Praćenje pošiljke na posta.rs ili u polje iznad. Po imenu i prezimenu ili adresi nije moguće proveriti da li je pošiljka stigla.
 
 ### Kako se prati Post-ekspres pošiljka i kad stiže?
 
-Prijemni broj Post-ekspresa počinje sa `PE` i završava se sa `RS`. Pratite ga na `posta.rs`, u aplikaciji Pošte Srbije ili preko Kontakt centra Post-ekspresa (`0800 100 808` / `011 3607 607`); usluga „Danas za sutra” stiže do 19 časova narednog radnog dana.
+Prijemni broj Post-ekspresa počinje sa `PE` i završava se sa `RS`. Pratite ga na posta.rs, u aplikaciji Pošte Srbije ili preko Kontakt centra Post-ekspresa (0800 100 808 ili 011 3607 607); usluga „Danas za sutra” stiže do 19 časova narednog radnog dana.
 
 ### Koliko dana Pošta Srbije čuva paket u pošti i paketomatu?
 
-U pošti se većina pošiljaka čuva **5 radnih dana**, a pošiljke iz inostranstva **20 dana** od narednog dana od obaveštenja (do 30 dana uz pisani zahtev ili u mestima sa dostavom jednom nedeljno). U Poštinom paketomatu pošiljka čeka 48 sati (2 radna dana), a zatim ide u nadležnu poštu.
+U pošti se većina pošiljaka čuva **5 radnih dana**, a pošiljke iz inostranstva **20 dana** od narednog dana od obaveštenja (do 30 dana uz pisani zahtev ili u mestima sa dostavom jednom nedeljno). U Poštinom paketomatu pošiljka čeka 48 sati prema sajtu paketomata, a 2 radna dana prema Najčešćim pitanjima: računajte na kraći rok. Zatim ide u poštu nadležnu za paketomat.
 
 ### Kada se plaćaju carina i PDV za pakete iz inostranstva u Srbiji?
 
-Na robu koju prodavnica šalje fizičkom licu plaća se PDV od 20%, dok se carina obračunava kada vrednost prelazi 50 evra (uz poštansku uslugu zastupanja i proviziju). Obračun možete proveriti na portalu Uprave carina `app1.carina.rs/info/portal/posta`.
+Na robu koju prodavnica šalje fizičkom licu plaća se PDV od 20%, dok se carina obračunava kada vrednost prelazi 50 evra (uz poštansku uslugu zastupanja i proviziju). Obračun možete proveriti na portalu Uprave carina app1.carina.rs/info/portal/posta.
 
 ### Koji je broj telefona i imejl Pošte Srbije — i kako prijaviti lažni SMS?
 
-Kontakt centar Pošte Srbije: `0700 100 300` (fiksna Telekoma) ili `011 3607 788` (mobilne i druge mreže, iz inostranstva `+381 11 3607 788`, radnim danima 8–20 h, vikendom 8–15 h); imejl `contact@ptt.rs`. Pošta nikada ne traži plaćanje karticom preko SMS linka — lažne poruke prijavite na `it.bezbednost@posta.rs`.
+Kontakt centar Pošte Srbije: 0700 100 300 iz fiksne mreže Telekoma Srbije ili 011 3607 788 iz drugih mreža (iz inostranstva +381 11 3607 788), radnim danima 8–20 h, vikendom 8–15 h; imejl contact@ptt.rs. Pošta nikada ne traži plaćanje karticom preko SMS linka — lažne poruke prijavite na it.bezbednost@posta.rs.
 
 :::sources
 - [Pošta Srbije: Praćenje pošiljke](https://www.posta.rs/lat/alati/pracenje-posiljke.aspx) – prijemni broj, prva slova, statusi, „Potpis”, izmenična pošta, besplatno praćenje

@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-To track an **eBay** order, open your **Purchase history** (or **Purchases**) and click the carrier tracking link uploaded by the seller, or paste the number into [Peek](/). Because each seller ships independently, the carrier depends on the postage service chosen — USPS, UPS, FedEx, Royal Mail, Evri, An Post, Canada Post, Australia Post, or eBay's international hubs (eBay International Shipping, GSP and SpeedPAK). If an item misses its estimated delivery date, you have 30 days to report it under the eBay Money Back Guarantee.
+To track an **eBay** order, open your **Purchase history** (or **Purchases**) and click the carrier tracking link uploaded by the seller, or paste the number into [Peek](/). Because each seller ships independently, the carrier depends on the postage service chosen — USPS, UPS, FedEx, Royal Mail, Evri, An Post, Canada Post, Australia Post, or one of eBay's international programmes (eBay International Shipping, GSP and SpeedPAK). If an item misses its estimated delivery date, you have 30 days to report it under the eBay Money Back Guarantee.
 
 ## Which carrier delivers my eBay order?
 

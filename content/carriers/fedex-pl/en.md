@@ -72,9 +72,9 @@ Because it's a FedEx Poland domestic parcel (13 digits starting with `6` and end
 
 FedEx's domestic page reports unknown or very old delivered numbers as not recognised, so check all 13 digits against the shop's email or ask the sender. If the message refers you to customer service instead, the parcel may exist without public web tracking.
 
-### What do Polish scans like `Przesyłka awizowana` or `Wydana do doręczenia` mean?
+### What do Polish scans like `Przesyłka awizowana` mean?
 
-`Wydana do doręczenia` (`Przesyłka wydana do doręczenia kurierowi FedEx.`) means the parcel is out with the courier today (often with a planned time window under `Planowane doręczenie w przedziale godzinowym`). `Nieudana próba doręczenia. Przesyłka awizowana.` means the courier missed you and left a notice, while `Zwrot przesyłki do nadawcy.` means it is returning to the sender.
+`Przesyłka wydana do doręczenia kurierowi FedEx.` means the parcel is out with the courier today; FedEx may add a planned time window under it, `Planowane doręczenie w przedziale godzinowym` and two times. `Nieudana próba doręczenia. Przesyłka awizowana.` means the courier missed you and left a notice, while `Zwrot przesyłki do nadawcy.` means it is returning to the sender.
 
 ### How do I complain about a lost or damaged FedEx Poland parcel?
 
@@ -82,7 +82,7 @@ If you bought online, contact the shop first — under Polish law (UOKiK), the s
 
 ### Is a text asking me to pay for a FedEx delivery real?
 
-It may be a scam. CERT Polska (CSIRT NASK) warns of fake courier texts linking to phishing sites that demand an extra redelivery fee to steal card details. Type your number into the box above instead of tapping links, contact FedEx only via its official website, forward suspicious texts to `8080`, and alert your bank immediately if you entered card details. See [delivery scam texts](guide:delivery-scam-texts).
+It may be a scam. CERT Polska (CSIRT NASK) warns of fake courier texts linking to phishing sites that demand an extra redelivery fee to steal card details. Type your number into the box above instead of tapping links, contact FedEx only via its official website, forward suspicious texts to 8080, and alert your bank immediately if you entered card details. See [delivery scam texts](guide:delivery-scam-texts).
 
 :::sources
 - [Universal Parcel Scraper: FedEx Poland](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex-pl) – 13-digit numbers and check digit, the domestic tracker and its answers, statuses, proof of delivery, what Peek shows

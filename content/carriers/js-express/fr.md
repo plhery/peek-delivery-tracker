@@ -1,12 +1,12 @@
 ---
 title: Suivi colis JS Express : numéro JSE, statuts et livraison
-description: Suivre un colis JS Express (numéro JSE…YQ) depuis la Chine : livraison Colissimo/poste locale, statuts douane (3 € et 2 € UE), délais et réclamations 30 jours.
+description: Suivre un colis JS Express (numéro JSE…YQ) depuis la Chine : statuts, livraison par Colissimo ou la poste locale, douane UE (3 € et 2 €), réclamation sous 30 jours.
 slug: js-express-suivi
 published: 2026-11-17
 updated: 2026-11-27
 ---
 
-Pour suivre un colis **JS Express** (急速国际, aussi *JS EXP*), colle dans le champ ci-dessus le numéro de 17 caractères commençant par `JSE` et finissant par `YQ`, ou utilise la page anglaise « Express Query » de `js-exp.com`. Exploité à Suzhou pour les boutiques en ligne transfrontalières, JS Express achemine les colis hors de Chine puis passe le relais à un transporteur local (en France, son suivi reprend souvent en français les scans de [Colissimo](carrier:la-poste)).
+Pour suivre un colis **JS Express** (急速国际, aussi *JS EXP*), colle dans le champ ci-dessus le numéro de 17 caractères commençant par `JSE` et finissant par `YQ`, ou utilise la page anglaise « Express Query » de `js-exp.com`. Exploité à Suzhou pour les boutiques en ligne transfrontalières, JS Express achemine les colis hors de Chine puis passe le relais à un transporteur local (en France, son suivi reprend parfois en français les scans de [Colissimo](carrier:la-poste)).
 
 ## Numéro de suivi JS Express : à quoi il ressemble
 

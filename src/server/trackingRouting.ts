@@ -138,9 +138,10 @@ export interface RoutingState extends JsonObject {
    * it knows the number, though its lookup was not adopted. `unanswered`: it gave no answer when last asked (an
    * outage, a block or a timeout), so a lookup nobody has answered for stays on the schedule for its next turn.
    * `asked_as`: what the carrier was asked with when it said it does not know the number (`recognitionAsk`); its wait
-   * holds only while the parcel still asks with the same.
+   * holds only while the parcel still asks with the same. `misses`: from the second, how many times in a row it said so
+   * asked with the same; from the third, each doubles the wait.
    */
-  candidate_probes?: Record<string, { count: number; retry_at: string; known?: true; unanswered?: true; asked_as?: string }>;
+  candidate_probes?: Record<string, { count: number; retry_at: string; known?: true; unanswered?: true; asked_as?: string; misses?: number }>;
   /**
    * When the number last asked each carrier with a minimum interval of its own (`minimumInterval`) that the parcel
    * is not filed under, by recognition or a lookup: until the interval has passed, it is not asked again.
@@ -842,6 +843,12 @@ export const CANDIDATE_PROBE_WINDOW = 30 * DAY;
  * time: the carrier often gets its data an hour or two after the parcel is added. Later misses wait a day.
  */
 const FIRST_MISS_WAIT = 2 * HOUR;
+/**
+ * How many times the wait after a miss doubles, from a day: from the third miss in a row asked with the same, each waits
+ * twice as long as the one before, up to 32 days, past the month recognition asks in. A carrier that never knows a
+ * parcel's number is asked about six times in that month rather than every day.
+ */
+const MISS_DOUBLINGS = 5;
 /** Every recognition answer a sync waits for; later answers are ignored. */
 const RECOGNITION_BUDGET_MS = 15_000;
 /** A recognition answer in a check's trail, from the least to the most a carrier said. */
@@ -1949,9 +1956,10 @@ export class TrackingRouter {
       // first scan, since a parcel shows up once it is handed over; so is a carrier that knew the number or gave no
       // answer, daily after six misses, and by the last hourly check of a number nobody has seen. Any other carrier
       // that said it does not know the number is asked again a day on, or once the number or what points to a carrier
-      // changes: asked at every check, such carriers almost never knew the number later. Its first miss on a parcel
-      // added less than a day ago waits two hours: such a parcel is often added before its carrier has its data. These
-      // answers decide neither the parcel's status nor the filed carrier's retry.
+      // changes: asked at every check, such carriers almost never knew the number later. From the third miss in a row,
+      // each doubles that wait (MISS_DOUBLINGS): asked daily, they almost never knew it after the first few. Its first miss
+      // on a parcel added less than a day ago waits two hours: such a parcel is often added before its carrier has its
+      // data. These answers decide neither the parcel's status nor the filed carrier's retry.
       const guessed = guessedCarrier(number);
       const stillAsked = new Set([...(recognize ? recognitionCandidates(number, recognitionOrder(excluded)) : []),
         ...(this.options.recognizeBrowser ? recognitionCandidates(number, { ...recognitionOrder(excluded), phase: 'browser' }) : [])]
@@ -1969,12 +1977,17 @@ export class TrackingRouter {
         const known = outcomes.some((outcome) => outcome.carrier === carrier && settleRecognition([outcome], now()).carrier === carrier);
         const answered = outcomes.some((outcome) => outcome.carrier === carrier && outcome.status !== 'failed');
         const missed = answered && !known && !pointsTo(carrier);
-        const missWait = addedToday && !state.candidate_probes?.[carrier]?.asked_as ? FIRST_MISS_WAIT : DAY;
+        const previous = state.candidate_probes?.[carrier];
+        // The misses in a row it answered asked with the same, this one included.
+        const misses = missed ? (previous?.asked_as === askedAs ? previous.misses ?? 1 : 0) + 1 : 0;
+        const missWait = misses === 1 ? addedToday && !previous?.asked_as ? FIRST_MISS_WAIT : DAY
+          : DAY * 2 ** Math.min(misses - 2, MISS_DOUBLINGS);
         state.candidate_probes = { ...state.candidate_probes, [carrier]: {
           count, retry_at: iso(missed ? now().getTime() + missWait : beforeHourlyEnd(now().getTime() + Math.min(longest, HOUR * 2 ** (count - 1)))),
           ...(known ? { known: true as const } : {}),
           ...(answered ? {} : { unanswered: true as const }),
           ...(missed ? { asked_as: askedAs } : {}),
+          ...(misses > 1 ? { misses } : {}),
         } };
       }
       // A carrier that gave no answer when last asked, whose turn came without this check asking it (its own

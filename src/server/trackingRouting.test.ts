@@ -1565,6 +1565,42 @@ describe('persistent tracking routing', () => {
       const older = await check('2026-09-10T08:20:00Z', '2026-09-09T08:05:00Z');
       expect(older.routing.candidate_probes).toMatchObject(missedProbes(1, '2026-09-11T08:20:00.000Z'));
     });
+    it('waits twice as long after each further miss in a row asked with the same', async () => {
+      const other = fourteen.find((carrier) => carrier !== 'dpd')!;
+      const same = recognitionAsk(swissDpd, 'unknown', undefined, null);
+      let saved: JsonObject | undefined;
+      const check = async (at: string, carrierData?: JsonObject) => {
+        const run = setup(new Date(at));
+        run.universal.mockRejectedValue(new NoHistoryError('ParcelsApp'));
+        const data = carrierData ?? (saved ? { routing: saved } : undefined);
+        const outcome = await run.router.fetch(parcel({ tracking_number: swissDpd, created_at: '2026-08-31T08:00:00Z',
+          ...(data ? { carrier_data: data } : {}) }), false).catch((deferred: unknown) => deferred);
+        saved = (outcome instanceof RoutingDeferred ? outcome.routing : (outcome as { result: { routing: JsonObject } }).result.routing) as JsonObject;
+        const probes = saved.candidate_probes as Record<string, JsonObject>;
+        return { asked: asked(run.recognize), probes, probe: probes[other]! };
+      };
+      // A day after the first miss and after the second, then 2, 4, 8 and 16 days: six asks in the month recognition asks in.
+      const first = await check('2026-09-01T09:00:00Z');
+      expect(first.probe).toEqual({ count: 1, retry_at: '2026-09-02T09:00:00.000Z', asked_as: same });
+      const second = await check('2026-09-02T09:00:00Z');
+      expect(second.probe).toEqual({ count: 2, retry_at: '2026-09-03T09:00:00.000Z', asked_as: same, misses: 2 });
+      expect((await check('2026-09-03T09:00:00Z')).probe).toMatchObject({ retry_at: '2026-09-05T09:00:00.000Z', misses: 3 });
+      expect((await check('2026-09-04T09:00:00Z')).asked).not.toContain(other);
+      expect((await check('2026-09-05T09:00:00Z')).probe).toMatchObject({ retry_at: '2026-09-09T09:00:00.000Z', misses: 4 });
+      expect((await check('2026-09-09T09:00:00Z')).probe).toMatchObject({ retry_at: '2026-09-17T09:00:00.000Z', misses: 5 });
+      const sixth = await check('2026-09-17T09:00:00Z');
+      expect(sixth.asked).toContain(other);
+      expect(sixth.probe).toEqual({ count: 6, retry_at: '2026-10-03T09:00:00.000Z', asked_as: same, misses: 6 });
+      // A miss asked with something else starts again from a day: here a lookup country given since.
+      const country = await check('2026-09-17T10:00:00Z', { routing: saved, lookup_country_hint: 'IE' });
+      const again = country.asked.find((carrier) => country.probes[carrier]?.misses === undefined && carrier !== 'dpd');
+      expect(again).toBeDefined();
+      expect(country.probes[again!]).toMatchObject({ retry_at: '2026-09-18T10:00:00.000Z' });
+      // A probe kept before the count was, after one miss asked with the same, counts that miss.
+      const kept = { routing: state({ consecutive_failures: 0, candidate_probes: Object.fromEntries(fourteen.map((carrier) =>
+        [carrier, { count: 4, retry_at: '2026-09-17T09:00:00.000Z', asked_as: same }])) }) };
+      expect((await check('2026-09-17T10:00:00Z', kept)).probe).toEqual({ count: 5, retry_at: '2026-09-18T10:00:00.000Z', asked_as: same, misses: 2 });
+    });
     it('asks again by the last hourly check of a number nobody has seen', async () => {
       // Added at 08:20 and checked hourly until 14:20; the carrier ranked first is among those asked.
       const added = '2026-09-10T08:20:00Z';

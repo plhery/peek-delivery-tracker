@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Para hacer el seguimiento de un paquete de MRW (más de 550 oficinas en España, Portugal, Andorra y Gibraltar), pega tu número de envío de 12 cifras (sin la barra si aparece partido en `5/7`) en la casilla de arriba o en «No abonados» en [mrw.es/seguimiento](https://www.mrw.es/seguimiento/), sin cuenta. Lo encontrarás en el correo de la tienda, el SMS de «MRW-es» o el justificante de oficina; el teléfono oficial de atención al cliente es `+34 91 829 66 89` (`900 103 668` en sus FAQ).
+Para hacer el seguimiento de un paquete de MRW (más de 550 oficinas en España, Portugal, Andorra y Gibraltar), pega tu número de envío (suele tener 12 cifras; quita la barra si aparece partido en 5 y 7 cifras) en la casilla de arriba o en «No abonados» en [mrw.es/seguimiento](https://www.mrw.es/seguimiento/), sin cuenta. Lo encontrarás en el correo de la tienda, el SMS de «MRW-es» o el justificante de oficina; el teléfono oficial de atención al cliente es `+34 91 829 66 89` (`900 103 668` en sus FAQ).
 
 ## Número de envío MRW: dónde encontrarlo
 
@@ -105,15 +105,15 @@ Las horas de MRW no llevan zona horaria: Peek las lee con la hora del lugar de c
 
 ### ¿Cómo seguir un envío MRW sin ser abonado?
 
-Introduce tu número de envío de 12 cifras (quitando la barra si aparece como `5/7` junto a «N.º Etiqueta») en la casilla «No abonados» de [mrw.es/seguimiento](https://www.mrw.es/seguimiento/) o en Peek (eligiendo MRW en «Cambiar» para 12 cifras).
+Introduce tu número de envío de 12 cifras (sin la barra si junto a «N.º Etiqueta» aparece partido en 5 y 7 cifras) en la casilla «No abonados» de [mrw.es/seguimiento](https://www.mrw.es/seguimiento/) o en Peek (eligiendo MRW en «Cambiar» para 12 cifras).
 
 ### ¿Qué significan «Pendiente de recoger» y «Pendiente de recibir en destino» en MRW?
 
-`Pendiente de recoger` (o `en origen`) significa que existe la etiqueta pero MRW aún no tiene el paquete; `Pendiente de recibir en destino`, que ya salió de origen rumbo a tu oficina; solo `Pendiente de recoger en Franquicia destino` o `Depositado en punto MRW` indica que te espera para ir a buscarlo.
+`Pendiente de recoger` (o `Pendiente de recoger en origen`) significa que existe la etiqueta pero MRW aún no tiene el paquete; `Pendiente de recibir en destino`, que ya salió de origen rumbo a tu oficina; `Pendiente de recoger en Franquicia destino`, `Depositado en punto MRW` y `Depositado en PointCorner destino` sí indican que te espera para ir a buscarlo.
 
 ### ¿Cuánto tarda MRW en entregar un pedido y reparte los sábados?
 
-Depende del servicio contratado: los envíos web en España peninsular se entregan antes de las 19:00 del día laborable siguiente (24–48 h con Urgente 19 Portugal). La entrega en sábado solo existe si el remitente contrata esa prestación complementaria (9:00–13:00 con Urgente 10/12 y Documentos 14; 9:00–12:00 en Portugal peninsular y Madeira).
+MRW no da un plazo para los pedidos de tiendas: depende del servicio que contrató el remitente. Para los envíos contratados en su web dentro de la España peninsular, MRW promete entregar antes de las 19:00 del día laborable siguiente a la recogida, y Urgente 19 Portugal tarda de 24 a 48 horas. La entrega en sábado solo existe si el remitente contrata esa prestación complementaria (9:00–13:00 con Urgente 10/12 y Documentos 14; 9:00–12:00 en Portugal peninsular y Madeira).
 
 ### ¿Cómo recojo en un MRW Point u oficina y qué pasa si estaba ausente?
 

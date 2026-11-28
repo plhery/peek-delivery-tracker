@@ -117,11 +117,11 @@ Yes. Chunghwa Post Co., Ltd. (中華郵政) is Taiwan's government-owned nationa
 
 ### Where do I track a Chunghwa Post parcel after it leaves Taiwan?
 
-After `已出口－資料詳如右方` (exported), track the exact same `TW` number on your destination country's national post — such as Poste Italiane in Italy, DHL/Deutsche Post in Germany, Chronopost in France, Correos in Spain, Royal Mail/Parcelforce in the UK, An Post in Ireland or PostNL in the Netherlands. Peek asks your local post automatically once fresh scans appear.
+After `已出口－資料詳如右方` (exported), follow the same `TW` number on the site Chunghwa Post's tracker links to: Poste Italiane in Italy, DHL in Germany, Chronopost in France and PostNL in the Netherlands for EMS and parcels (for letters, Deutsche Post in Germany and none in the other three), Correos in Spain, Royal Mail and Parcelforce in the UK, An Post in Ireland. Peek also asks the national post of the country you track it from, and follows the parcel there once that post shows fresh scans.
 
 ### What does 海關查驗 mean and what customs fees apply?
 
-`海關查驗` means the parcel is undergoing customs inspection. Shipments from Taiwan into the EU face a €3 flat customs duty per kind of product on orders up to €150 (since 1 July 2026) and a €2 EU handling fee per kind of product (since 1 November 2026), plus VAT; parcels into Taiwan are duty-free up to NT$2,000.
+`海關查驗` means the parcel is undergoing customs inspection. Goods bought online from outside the EU, Taiwan included, carry a €3 EU customs duty per kind of product in orders up to €150 since 1 July 2026, on top of VAT, and a €2 EU handling fee per kind of product since 1 November 2026, whatever the order's value; a parcel into Taiwan pays no duty or tax up to NT$2,000, counting goods, insurance and freight.
 
 ### What is the deadline for a lost Chunghwa Post parcel inquiry?
 
@@ -129,7 +129,7 @@ The sender must file a written inquiry at the Taiwan post office with the origin
 
 ### How do I contact Chunghwa Post customer service in English?
 
-Call the 24-hour customer service line `0800-700-365` and press `3` for English (from a mobile or abroad: `+886-4-2354-2030`), or submit the Opinion Box on [post.gov.tw](https://www.post.gov.tw/post/internet/U_english2/index.jsp?ID=35090601) (answered within 7 days). For inbound Taiwan mail customs/delivery queries, call `+886-3-3180-700` (ext. 2431 EMS, 2432 parcels, 2430 letters).
+Call the 24-hour customer service line `0800-700-365` and press `3` for English (from a mobile or abroad: `+886-4-2354-2030`), or submit the Opinion Box on [post.gov.tw](https://www.post.gov.tw/post/internet/U_english2/index.jsp?ID=35090601) (answered within 7 days). For items coming into Taiwan, call `+886-3-3180-700` (ext. 2431 EMS, 2432 parcels, 2430 letters).
 
 :::sources
 - [Chunghwa Post: Company Profile](https://www.post.gov.tw/post/internet/U_english2/index.jsp?ID=1637282383451) – government-owned national post, mail, savings and life insurance

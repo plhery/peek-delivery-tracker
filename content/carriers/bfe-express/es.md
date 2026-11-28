@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-27
 ---
 
-Para rastrear un paquete de BFE Express (*BFEexpress*, operado por Hongkong Bfe Info Tech Co Limited desde 2005 — habitual en envíos internacionales como Temu Argentina hacia Argentina, Perú, Uruguay y Estados Unidos), pega tu código `CK54…`, `CK512…`, `CK598…` o `WYB…` en el cuadro superior o consúltalo en [bfeexpress.com/tracking](https://www.bfeexpress.com/tracking). El historial combina el tramo aéreo y aduanero en inglés con los escaneos locales de última milla en español, y cada país cuenta con correo de soporte propio (lunes a viernes, 9:00 a 18:00).
+Para rastrear un paquete de BFE Express (*BFEexpress*, de Hongkong Bfe Info Tech Co Limited, que según su web existe desde 2005 y lleva a Argentina, Perú, Uruguay y Estados Unidos envíos de tiendas internacionales, entre ellas vendedores de Temu Argentina), pega tu código `CK54…`, `CK512…`, `CK598…` o `WYB…` en el cuadro superior o consúltalo en [bfeexpress.com/tracking](https://www.bfeexpress.com/tracking). El historial suele combinar el tramo aéreo y aduanero en inglés con los escaneos locales de última milla en español, y cada país tiene su correo de soporte (lunes a viernes de 9:00 a 18:00, excepto feriados).
 
 Como BFE Express gestiona la llegada aérea y la aduana antes de entregar el paquete al depósito local de última milla, un mismo historial suele combinar eventos internacionales en inglés con escaneos locales en español.
 
@@ -85,11 +85,11 @@ Ten a mano tu código completo `CK...` o `WYB...` al escribir al equipo local.
 
 ### ¿Qué indican `CK54`, `CK512`, `CK598` y `WYB` en BFE Express?
 
-Los prefijos señalan el país de destino: `CK54…` corresponde a Argentina (16 o 17 caracteres), `CK512…` a Perú (17 caracteres), `CK598…` a Uruguay (17 caracteres) y `WYB` + 9 dígitos es otro formato de guía para Perú. En Peek, si pegas el número suelto, pulsa «Cambiar» y selecciona BFE Express (o pega un enlace directo `bfeexpress.com/track?track_number=…`).
+Los prefijos señalan el país de destino: `CK54…` corresponde a Argentina (16 o 17 caracteres), `CK512…` a Perú (17 caracteres), `CK598…` a Uruguay (17 caracteres) y `WYB` + 9 dígitos es otro formato de guía para Perú. Al añadirlo, Peek pregunta a BFE Express; para seguirlo con BFE Express desde el principio, pulsa «Cambiar» y elige BFE Express, o pega un enlace `bfeexpress.com/track?track_number=…`, que va directo a BFE Express.
 
 ### ¿Por qué mi envío de BFE Express empieza recién en el aeropuerto de destino?
 
-El rastreador de BFE Express suele mostrar su primera línea con `Arrived at Airport of destination`, al aterrizar el vuelo en el país de destino. Antes de ese hito, consulta el avance del despacho en la página del pedido de la tienda.
+El rastreador de BFE Express puede empezar en `Arrived at Airport of destination`, cuando el vuelo aterriza en el país de destino. Antes de ese hito, consulta el avance del despacho en la página del pedido de la tienda.
 
 ### ¿Por qué aparecen estados en inglés y luego en español?
 

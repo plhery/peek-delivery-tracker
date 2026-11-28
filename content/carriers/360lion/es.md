@@ -1,12 +1,12 @@
 ---
 title: Seguimiento 360Lion: códigos WSH y AR, estados y ayuda
-description: Seguimiento 360Lion Express (纬狮物流) desde China a Latinoamérica y EE. UU.: códigos WSH…YQ y AR, estados WSO/WSD, entrega local y correo customerservice@360lion.com.
+description: Seguimiento 360Lion Express (纬狮物流) desde China a Latinoamérica y EE. UU.: códigos WSH…YQ y AR, escaneos WSO/WSD, entrega local y correo customerservice@360lion.com.
 slug: seguimiento-360lion
 published: 2026-11-24
 updated: 2026-11-27
 ---
 
-Para rastrear un paquete de 360Lion (*360Lion Express*, *纬狮物流*, fundado en Shenzhen en 2015), pega tu código `WSH…YQ` (por ejemplo `WSH` + país de 2 letras + 10 dígitos + `YQ`) o `AR` + 10 dígitos (Argentina) en el cuadro superior o en [360lion.com/en/](https://www.360lion.com/en/) (hasta 50 guías a la vez). 360Lion opera vuelos dedicados desde China a 15 países de Latinoamérica y EE. UU. para vendedores en Mercado Libre, Amazon, AliExpress, Shopee, SHEIN y Temu, y traspasa la entrega final a un socio local (`handover to lastmile`); su correo de consultas de paquetes es `customerservice@360lion.com`.
+Para rastrear un paquete de 360Lion (*360Lion Express*, *纬狮物流*, fundado en Shenzhen en 2015), pega tu código `WSH…YQ` (por ejemplo `WSH` + país de 2 letras + 10 dígitos + `YQ`) o `AR` + 10 dígitos (Argentina) en el cuadro superior o en [360lion.com/en/](https://www.360lion.com/en/) (hasta 50 guías a la vez). 360Lion opera líneas dedicadas de paquetería pequeña desde China a 15 países de Latinoamérica y a EE. UU. para vendedores en Mercado Libre, Amazon, AliExpress, Shopee, SHEIN y Temu, y traspasa la entrega final a un socio local (`handover to lastmile`); su correo de consultas de paquetes es `customerservice@360lion.com`.
 
 ## Números de seguimiento de 360Lion: formatos WSH y AR
 
@@ -92,7 +92,7 @@ Puedes elegir los avisos «Cada escaneo», «Pasos importantes» o «Solo la ent
 
 ### ¿Quién reparte localmente los paquetes de 360Lion?
 
-Un servicio postal o mensajería local del país de destino, cuyos eventos suelen aparecer dentro del mismo código en 360Lion sin mostrar un segundo número local. Si necesitas el dato del repartidor local tras un intento fallido, pídeselo al vendedor o a `customerservice@360lion.com`.
+Un servicio postal o mensajería local del país de destino, cuyos eventos suelen aparecer dentro del mismo código en 360Lion; Peek no muestra un segundo número local. Si necesitas el dato del repartidor local tras un intento fallido, pídeselo al vendedor o a `customerservice@360lion.com`.
 
 ### ¿Cómo contactar con 360Lion por un paquete atrasado o perdido?
 

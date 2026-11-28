@@ -6,7 +6,7 @@ published: 2026-11-02
 updated: 2026-11-27
 ---
 
-Track an Ozon (Ozon Rocket / Ozon Доставка) order in Russia, Belarus or Kazakhstan by pasting your order number **with its dashes** (three digit groups like 8-4-1 or 10-4-1, or a `PL-` code) in the box above or on tracking.ozon.ru. Peek reads Ozon's tracker directly without an account, shows English status labels alongside Ozon's Russian steps, and translates every domestic delivery, pickup-point (`Заказ в пункте выдачи`) and cross-border customs scan below.
+Track an Ozon (Ozon Rocket / Ozon Доставка) order in Russia, Belarus or Kazakhstan by pasting your order number **with its dashes** (three digit groups like 8-4-1 or 10-4-1, or a `PL-` code) in the box above or on tracking.ozon.ru. Peek reads Ozon's tracker directly without an account, shows English status labels alongside Ozon's Russian steps, and the tables below explain Ozon's delivery, pickup-point (`Заказ в пункте выдачи`) and customs steps.
 
 ## Ozon tracking number: what it looks like
 

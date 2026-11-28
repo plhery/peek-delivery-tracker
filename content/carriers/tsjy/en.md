@@ -6,7 +6,7 @@ published: 2026-11-03
 updated: 2026-11-27
 ---
 
-Track a TSJY (通世集运, 苏州通世供应链有限公司, Suzhou) consolidated parcel from China by pasting your `TSJY` or `CFJY` + nine digits + `CN` order number in the box above or under 订单查询 on [tsjy56.com](https://www.tsjy56.com/). Founded in 2005 with 180 days of free storage, TSJY consolidates Taobao, Tmall, Pinduoduo, JD and Douyin orders and ships to over 220 countries by air or sea — when an order hands over to [17FEIA](carrier:17feia) (`FEI…YQ`) or another known line, Peek follows the handover automatically.
+Track a TSJY (通世集运, 苏州通世供应链有限公司, Suzhou) consolidated parcel from China by pasting your `TSJY` or `CFJY` + nine digits + `CN` order number in the box above or under 订单查询 on [tsjy56.com](https://www.tsjy56.com/). TSJY consolidates Taobao, Tmall, Pinduoduo, JD and Douyin orders; its site says it was founded in 2005, stores parcels free for 180 days and ships to more than 220 countries by air or sea. When an order hands over to [17FEIA](carrier:17feia) (`FEI…YQ`) or another known line, Peek follows the handover automatically.
 
 ## TSJY tracking number: what it looks like
 
@@ -124,7 +124,7 @@ Peek can notify you of "Every scan", "Important steps" or "Delivery only". It ca
 
 ### What is TSJY (通世集运)?
 
-TSJY (苏州通世供应链有限公司, based in Huaqiao, Suzhou) is a Chinese parcel consolidation service (集运) founded in 2005 that offers 180 days of free storage for Taobao, Tmall, Pinduoduo, JD and Douyin purchases and ships by express air or economy sea to more than 220 countries and regions.
+TSJY (苏州通世供应链有限公司, in Suzhou, with its warehouse in Huaqiao) is a Chinese parcel consolidation service (集运) for Taobao, Tmall, Pinduoduo, JD and Douyin purchases. Its site says it was founded in 2005, stores parcels free for 180 days and ships by express air or economy sea to more than 220 countries and regions.
 
 ### What do `TSJY…CN` and `CFJY…CN` tracking numbers look like?
 

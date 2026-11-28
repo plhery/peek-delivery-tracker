@@ -72,7 +72,7 @@ HuaHan încadrează scanările curierului local pentru ieșirea în livrare, pun
 | `邮件已在【…】完成分拣，准备发出`, `邮件到达【…】`, `邮件离开【…】，正在发往【…】`, `邮件离开【…】，正在发往下一站` | Sortat la, sosit la sau plecând dintr-un oficiu China Post din China, numit în 【】. | „In transit” |
 | `送交出口海关` | Predat vămii de export din China. Nu este vama din țara ta. | „At customs” |
 | `出口海关/放行` | Vama de export l-a eliberat. | „In transit” |
-| `已交承运商运输` | Predat companiei aeriene care îl zboară în străinătate. | „In transit” |
+| `已交承运商运输` | Predat companiei aeriene care îl transportă în străinătate. | „In transit” |
 | `到达寄达地`, `到达寄达地处理中心`, `到达境外经转局` | A sosit în țara de destinație, la centrul de procesare al poștei acesteia sau la un oficiu de tranzit pe drum. | „In transit” |
 | `境外进口海关留存待验(等待提交给边境机构/安全部门)` | Reținut pentru vama de import a țării tale; paranteza spune că așteaptă să fie prezentat autorităților de frontieră sau de securitate. | „At customs” |
 | `境外进口互换局留存`, `送交境外进口海关` | Păstrat la biroul de schimb al poștei de destinație, apoi predat vămii de import. | „At customs” |

@@ -20,7 +20,7 @@ DHLink publiserer ikke noe fast nummerformat. Sporeren tar opptil 40 numre samti
 | `QH482910573648FS` | QH, 12 sifre, FS: en annen USA-linje som GOFO leverer. |
 | `EYT4829105736HZ` | EYT, 10 sifre, HZ: en USA-linje som SwiftX leverer. |
 | `CYS48291057364` | CYS og 11 sifre: en USA-linje som [UniUni](carrier:uniuni) leverer. |
-| `JXCYI4829105736YQ` | JXC, YI, ZO, US eller ZI, 10 sifre, YQ: en form av [Juxi Express](carrier:juxi-express) sine fraktbrev som DHLinks sporer også svarer på for enkelte pakker på en USA-linje. Peek spør DHLink om JXC-numre; dersom selgeren sendte med Juxi, velger du Juxi Express med "Change". |
+| `JXCYI4829105736YQ` | JXC, YI, ZO, US eller ZI, 10 sifre, YQ: en form av [Juxi Express](carrier:juxi-express) sine fraktbrev som DHLinks sporer også svarer på for enkelte pakker på en USA-linje. Peek kjenner igjen hvert JXC-nummer som Juxi Express og spør også DHLink om det. |
 | `RR482917367CN` | To bokstaver, 9 sifre og CN: et [China Post](carrier:china-post)-nummer. Noen DHLink-pakker reiser med China Post under et slikt nummer. |
 | `GFUS48291057364829` | Ikke DHLinks: et [GOFO Express](carrier:gofo)-nummer, siste etappe på enkelte USA-linjer. |
 
@@ -47,7 +47,7 @@ Et resultat viser statusen (`In transit`, `Delivered`), landkoder for opprinnels
 | `Dismantling the board` | Det samme: pallen brytes opp på ankomstflyplassen ("In transit" i Peek). |
 | `Shipment has arriveved at destination Country at …` | I ditt land. Stavingen er DHLinks egen. |
 | `Arrived to … hub`, `Linehaul transit; Parcel has entered the linehaul network.` | Etter flyturen: en partners knutepunkt i Europa, angitt med en kode der prikkene står, og deretter linjetransport videre. På linjen til Sørøst-Europa er dette Pactics rader fra knutepunktet i Ungarn (kode HU). Peek viser "In transit". |
-| `Customs clearance completed`, `Customs import clearance completed, awaiting pickup by local carrier` | Importtollen har frigitt den; transportøren i ditt land henter den neste gang. |
+| `Customs clearance completed`, `Customs import clearance completed, awaiting pickup by local carrier` | Importtollen har frigitt den; deretter henter transportøren i ditt land den. |
 | `UPS/USPS/Fedex` | En overlevering til den amerikanske transportøren er på vei. |
 | `货物已交UPS/USPS/Fedex,The goods have been delivered to UPS/USPS/Fedex` | Overlevert til den amerikanske transportøren. Ikke levert til deg ennå. |
 | `Package picked up by last-mile carrier` | Transportøren i ditt land har overtatt den. |
@@ -76,7 +76,7 @@ På DHLinks kontaktside, lest 4. november 2026, står én kundeserviceadresse, d
 
 ## Spor en DHLink-pakke med Peek
 
-[Peek](/) kjenner igjen et `YLUS`-nummer med 10 sifre direkte som DHLink. `FC`-, `XZG`-, `QH`-, `EYT`- og `CYS`-numrene er bare svake treff ut fra formen alene: lim det inn likevel, Peek følger mer enn 4 500 transportører. Det viser "Checking tracking services…" og deretter "DHLink has this parcel." når DHLink kjenner nummeret; ellers velger du DHLink med "Change". Et `JXC`-nummer (`JXCYI`, `JXCZO`, `JXCUS` eller `JXCZI` med 10 sifre og `YQ`) deler form med Juxi Express: Peek spør DHLink om disse `JXC`-numrene, og hvis selgeren sendte med Juxi, velger du Juxi Express med "Change". Et China Post-nummer (to bokstaver, 9 sifre, CN) går til China Post.
+[Peek](/) kjenner igjen et `YLUS`-nummer med 10 sifre direkte som DHLink. `FC`-, `XZG`-, `QH`-, `EYT`- og `CYS`-numrene er bare svake treff ut fra formen alene: lim det inn likevel, Peek følger mer enn 4 500 transportører. Det viser "Checking tracking services…" og deretter "DHLink has this parcel." når DHLink kjenner nummeret; ellers velger du DHLink med "Change". Et `JXC`-nummer (JXC, to bokstaver, 10 sifre og `YQ`) kjenner Peek igjen direkte som Juxi Express. Siden DHLinks sporer kjenner enkelte `JXCYI`-, `JXCZO`-, `JXCUS`- og `JXCZI`-numre, spør Peek også DHLink om hvert `JXC`-nummer: kjenner DHLink nummeret, viser Peek "DHLink has this parcel." og følger pakken der; ellers følger Peek den som Juxi Express. Et China Post-nummer (to bokstaver, 9 sifre, CN) går til China Post.
 
 Peek leser DHLinks sporer. Det viser statusen, historikken med stedet for hver skanning og destinasjonslandet, og viser hver skanning én gang. Skanninger i Kina leses etter Beijing-tid, USPS-skanninger etter tiden i den amerikanske delstaten og Pactics rader på en linje gjennom Ungarn etter Budapest-tid; andre beholder tiden DHLink oppgir. DHLink oppgir ingen leveringstid, vekt eller tjenestenavn, og Peek utelater postnumre og ordrereferanser. Dets eneste leveringsestimat er en videresendt USPS-skanning "Out for Delivery, Expected Delivery …" lest etter den amerikanske delstatens tid: mens den skanningen er nyest, viser Peek dagens tidsrom når skanningen gir et; en skanning med kun seneste tidspunkt legger ikke til noe estimat, siden "Out for delivery" allerede betyr i dag. Når "Last Leg No." er et GOFO-nummer (GFUS og 14 sifre), et SwiftX-nummer (SWX og 18 sifre) eller et DPD Switzerland-nummer (14 sifre som starter på 060 eller 061), viser Peek den transportøren og dens nummer, spør den og bytter over så snart den viser nyere fremgang. Andre siste-etappe-numre blir stående på DHLinks historikk.
 

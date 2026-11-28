@@ -32,7 +32,7 @@ HuaHans spårare listar varje skanning med tidpunkt, text och plats, nyast förs
 | HuaHan skriver | Vad det betyder för dig | Peek visar |
 | --- | --- | --- |
 | `快件电子信息已经收到 Shipment information received`, `Shipment information received` | Butiken har skickat paketuppgifterna till HuaHan. HuaHan har inte paketet ännu. | "Label created" |
-| `快件到达作业中心 Shipment arrived at facility`, `Has entered the warehouse` | HuaHans anläggning i Kina har paketet: i de historiker Peeks kod innehåller, i Shenzhen. | "Received by carrier" |
+| `快件到达作业中心 Shipment arrived at facility`, `Has entered the warehouse` | HuaHans anläggning i Kina har paketet: i de spårningshistoriker Peeks kod innehåller, i Shenzhen. | "Received by carrier" |
 | `快件操作完成 Shipment departed from facility` | Behandlat och på väg ut från den anläggningen. | "In transit" |
 | `Transfer to Origin airport` | På väg till flygplatsen. | "In transit" |
 | `Export customs clearance completed` | Exporttullklareringen på vägen ut är klar. Inte ditt lands tull. | "In transit" |
@@ -138,7 +138,7 @@ Medan du har paketet öppet, eller på leveransdagen med aviseringar påslagna, 
 
 ### Vad är HuaHan Logistics (华翰物流)?
 
-Ett kinesiskt fraktbolag, även kallat HuaHan Express eller 华翰速递, som skickar paket utomlands. I de historiker Peeks kod innehåller börjar skanningarna på anläggningen i Shenzhen, följer flyget och tullen och slutar med skanningarna från det lokala bolag som levererar i mottagarlandet.
+Ett kinesiskt fraktbolag, även kallat HuaHan Express eller 华翰速递, som skickar paket utomlands. I de spårningshistoriker Peeks kod innehåller börjar skanningarna på anläggningen i Shenzhen, följer flyget och tullen och slutar med skanningarna från det lokala bolag som levererar i mottagarlandet.
 
 ### Var kan jag spåra ett HuaHan-paket?
 

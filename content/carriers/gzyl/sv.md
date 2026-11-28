@@ -26,31 +26,31 @@ Mellanslag och små bokstäver spelar ingen roll när du klistrar in numret i Pe
 
 ## Vad statusarna hos GZYL betyder
 
-GZYL skriver sina steg på engelska, inklusive stavfel. Eftersom Peeks appgränssnitt inte finns på svenska visas Peeks egna etapper på engelska: «Label created» (etikett skapad), «Received by carrier» (mottaget av transportören), «In transit» (under transport), «At customs» (i tullen) och «Delivered» (levererat). I den ordning ett paket brukar få dem:
+GZYL skriver sina steg på engelska, inklusive stavfel. Eftersom Peeks appgränssnitt inte finns på svenska visas Peeks egna etapper på engelska: "Label created" (etikett skapad), "Received by carrier" (mottaget av transportören), "In transit" (under transport), "At customs" (i tullen) och "Delivered" (levererat). I den ordning ett paket brukar få dem:
 
 | GZYL skriver | Vad det betyder för dig | Peek visar |
 | --- | --- | --- |
-| `Order information received` | Säljaren har skickat orderuppgifterna till GZYL. GZYL har inte paketet fysiskt ännu. | «Label created» |
-| `Arrive at the cross border receiving point` | GZYL har paketet: första skanningen i deras händer. | «Received by carrier» |
-| `Goods leave the operation center` | Paketet har lämnat GZYL:s driftcenter. | «In transit» |
-| `Arrive at the international airport` | På flygplatsen, väntar på sitt flyg. | «In transit» |
-| `Departing from the airport` | Flyget har avgått. | «In transit» |
-| `Item arrives at destination airport` | Landat i destinationslandet. | «In transit» |
-| `local carrier Agent Import customs clearance` | Ett ombud i ditt land klarerar paketet genom importtullen. | «At customs» |
-| `The import customs keep it for inspection` | Tullen i ditt land inspekterar paketet. | «At customs» |
-| `Customs clearance completed` | Genom tullen och på väg vidare. | «In transit» |
-| `Internationaliy Package received at processing center` | Ett bearbetningscenter i ditt land har tagit emot det tullklarerade paketet. Det är inte en ny upphämtning. | «In transit» |
-| `Leave the email processing center` | Paketet har lämnat det bearbetningscentret. | «In transit» |
-| `Arrival sorting, distribution center` | Vid ett distributionscenter i ditt land, med orten efter texten. | «In transit» |
-| `Leaving the sorting center` | Lämnar ett sorteringscenter, med orten efter texten. | «In transit» |
-| `Package is on the way` | På väg vidare i ditt land, med en ort. Det betyder inte att paketet är ute för utdelning. | «In transit» |
-| `Delivered` | Leveransnotering med orten. Kan vara en plan, inte en skanning: se nedan. | «Delivered», med en notering om fast schema om inte Peek håller tillbaka den (se nedan) |
+| `Order information received` | Säljaren har skickat orderuppgifterna till GZYL. GZYL har inte paketet fysiskt ännu. | "Label created" |
+| `Arrive at the cross border receiving point` | GZYL har paketet: första skanningen i deras händer. | "Received by carrier" |
+| `Goods leave the operation center` | Paketet har lämnat GZYL:s driftcenter. | "In transit" |
+| `Arrive at the international airport` | På flygplatsen, väntar på sitt flyg. | "In transit" |
+| `Departing from the airport` | Flyget har avgått. | "In transit" |
+| `Item arrives at destination airport` | Landat i destinationslandet. | "In transit" |
+| `local carrier Agent Import customs clearance` | Ett ombud i ditt land klarerar paketet genom importtullen. | "At customs" |
+| `The import customs keep it for inspection` | Tullen i ditt land inspekterar paketet. | "At customs" |
+| `Customs clearance completed` | Genom tullen och på väg vidare. | "In transit" |
+| `Internationaliy Package received at processing center` | Ett bearbetningscenter i ditt land har tagit emot det tullklarerade paketet. Det är inte en ny upphämtning. | "In transit" |
+| `Leave the email processing center` | Paketet har lämnat det bearbetningscentret. | "In transit" |
+| `Arrival sorting, distribution center` | Vid ett distributionscenter i ditt land, med orten efter texten. | "In transit" |
+| `Leaving the sorting center` | Lämnar ett sorteringscenter, med orten efter texten. | "In transit" |
+| `Package is on the way` | På väg vidare i ditt land, med en ort. Det betyder inte att paketet är ute för utdelning. | "In transit" |
+| `Delivered` | Leveransnotering med orten. Kan vara en plan, inte en skanning: se nedan. | "Delivered", med en notering om fast schema om inte Peek håller tillbaka den (se nedan) |
 
-**Via USA.** Ett paket kan även visa `Los Angeles Processing Center has received it` följt av en stad inom klamrar: ett bearbetningscenter i USA har tagit emot paketet på vägen mot destinationen. Peek visar «In transit».
+**Via USA.** Ett paket kan även visa `Los Angeles Processing Center has received it` följt av en stad inom klamrar: ett bearbetningscenter i USA har tagit emot paketet på vägen mot destinationen. Peek visar "In transit".
 
-**En rad på kinesiska.** För en order utan skanningar ännu skriver plattformen själv `货物电子信息已经收到` (elektroniska uppgifter om godset mottagna). Säljaren har skapat ordern, men ingen har skannat paketet. Peek visar raden på kinesiska under «Label created».
+**En rad på kinesiska.** För en order utan skanningar ännu skriver plattformen själv `货物电子信息已经收到` (elektroniska uppgifter om godset mottagna). Säljaren har skapat ordern, men ingen har skannat paketet. Peek visar raden på kinesiska under "Label created".
 
-**Via China Post.** Ett paket kan också visa `广州处理中心已收寄` med staden inom klamrar: China Posts mottagning på centret i Guangzhou, förmedlad på kinesiska. På Xinghe Freights nummer är `香港处理中心已收寄` samma mottagning i Hongkong. Peek visar båda på kinesiska under «Received by carrier».
+**Via China Post.** Ett paket kan också visa `广州处理中心已收寄` med staden inom klamrar: China Posts mottagning på centret i Guangzhou, förmedlad på kinesiska. På Xinghe Freights nummer är `香港处理中心已收寄` samma mottagning i Hongkong. Peek visar båda på kinesiska under "Received by carrier".
 
 **Tider.** Varje klockslag på GZYL:s spårning står i Pekingtid (`UTC+8`), inklusive steg i Sverige, utan angiven tidszon. Vintertid är 20:00 i Peking lika med 13:00 svensk tid (`UTC+1`), och sommartid 14:00 (`UTC+2`).
 
@@ -70,11 +70,11 @@ Peek har inte hittat några leveranstider från GZYL och inga regler om leverans
 
 **Fast i tullen.** Om du ombeds betala importavgifter, se guiden om [paket i tullen](guide:customs) (på engelska). Står paketet still i flera dagar, meddela säljaren.
 
-**GZYL:s spårning eller en annan tjänst visar fler steg än Peek.** Peek håller tillbaka steg skrivna före den tid de visar, `Delivered` som avslutar GZYL:s plan och steg daterade efter senaste kontrollen (se nedan), så de extra stegen kan vara GZYL:s plan och inte skanningar. Ett förprogrammerat steg ändrar aldrig status eller skickar aviseringar. När Peek håller tillbaka förhandssteg öppnas historiken till leverans eller retur med raden «Other sites may show more steps, but they’re only predictions.», och «Show them» visar stegen i grått med sin dag («Predicted for Mon 12 Oct»). Gå efter butikens uppskattade leveranstid och fråga säljaren när den passerat. Mer i guiden om [paket från Kina](guide:tracking-from-china) (på engelska).
+**GZYL:s spårning eller en annan tjänst visar fler steg än Peek.** Peek håller tillbaka steg skrivna före den tid de visar, `Delivered` som avslutar GZYL:s plan och steg daterade efter senaste kontrollen (se nedan), så de extra stegen kan vara GZYL:s plan och inte skanningar. Ett förprogrammerat steg ändrar aldrig status eller skickar aviseringar. När Peek håller tillbaka förhandssteg öppnas historiken till leverans eller retur med raden "Other sites may show more steps, but they’re only predictions.", och "Show them" visar stegen i grått med sin dag ("Predicted for Mon 12 Oct"). Gå efter butikens uppskattade leveranstid och fråga säljaren när den passerat. Mer i guiden om [paket från Kina](guide:tracking-from-china) (på engelska).
 
-**`Delivered`, men inget har kommit.** Steget kan vara del av GZYL:s fasta plan, inte en skanning. Om inte Swiss Post levererar visar Peek under «Delivered»: «GZYL updates on a fixed schedule, with no signature. If nothing came, ask the seller.» Berätta för säljaren att inget kommit och fråga vilket företag som levererar och under vilket nummer. Mer i guiden om [levererat men inte mottaget](guide:delivered-not-received) (på engelska).
+**`Delivered`, men inget har kommit.** Steget kan vara del av GZYL:s fasta plan, inte en skanning. Om inte Swiss Post levererar visar Peek under "Delivered": "GZYL updates on a fixed schedule, with no signature. If nothing came, ask the seller." Berätta för säljaren att inget kommit och fråga vilket företag som levererar och under vilket nummer. Mer i guiden om [levererat men inte mottaget](guide:delivered-not-received) (på engelska).
 
-**Inget hittades.** För ett okänt nummer visar GZYL:s spårning ett resultat med ditt nummer under `参考号` (referens) och alla andra fält tomma. Peek tolkar svaret som ej funnet: det visar «Waiting for GZYL» och två dagar senare «Check the tracking number». Jämför numret tecken för tecken med säljarens meddelande.
+**Inget hittades.** För ett okänt nummer visar GZYL:s spårning ett resultat med ditt nummer under `参考号` (referens) och alla andra fält tomma. Peek tolkar svaret som ej funnet: det visar "Waiting for GZYL" och två dagar senare "Check the tracking number". Jämför numret tecken för tecken med säljarens meddelande.
 
 **Försvunnet eller returnerat.** Säljaren bokade paketet med GZYL, så be säljaren eller marknadsplatsen om återbetalning eller ett nytt paket.
 
@@ -84,13 +84,13 @@ På kontaktsidan (`联系我们`) på GZYL:s kinesiska webbplats (`yunlianhouyun
 
 ## Spåra ett GZYL-paket med Peek
 
-[Peek](/) känner genast igen ett nummer som börjar med `YL738`, sju ytterligare siffror och `YQ` («Detected carrier»). Övriga nummer med `YL`, tio siffror och `YQ` är en svag träff. Klistra in numret ändå: Peek följer över 4 500 transportörer. Medan du lägger till det frågar Peek GZYL:s spårning («Checking tracking services…») och visar «GZYL has this parcel.» när spårningen ger ett resultat (även det tomma svaret för ett okänt nummer). Annars trycker du på «Change» och väljer GZYL under «Fits this number» (du hittar den även med `广州云链`), eller använder «Change carrier» på ett redan tillagt paket. En säljarreferens fungerar också om du väljer GZYL manuellt, då visas orderns eget nummer under «GZYL tracks this as»; eftersom Peek tar bort bindestreck hittas dock inte referenser med bindestreck, så be säljaren om `YL…YQ`-numret.
+[Peek](/) känner genast igen ett nummer som börjar med `YL738`, sju ytterligare siffror och `YQ` ("Detected carrier"). Övriga nummer med `YL`, tio siffror och `YQ` är en svag träff. Klistra in numret ändå: Peek följer över 4 500 transportörer. Medan du lägger till det frågar Peek GZYL:s spårning ("Checking tracking services…") och visar "GZYL has this parcel." när spårningen ger ett resultat (även det tomma svaret för ett okänt nummer). Annars trycker du på "Change" och väljer GZYL under "Fits this number" (du hittar den även med `广州云链`), eller använder "Change carrier" på ett redan tillagt paket. En säljarreferens fungerar också om du väljer GZYL manuellt, då visas orderns eget nummer under "GZYL tracks this as"; eftersom Peek tar bort bindestreck hittas dock inte referenser med bindestreck, så be säljaren om `YL…YQ`-numret.
 
-Peek läser GZYL:s egen spårning och visar status, varje steg med plats och destinationsland när posten innehåller det. Tiderna läses i Pekingtid och visas i din enhets tidszon («Times are in your time zone:» i slutet av historiken). Peek utelämnar namn, adress, postnummer, vikt, avgifter, signatur och leveransbevis och visar inget beräknat leveransdatum eftersom GZYL inte anger något.
+Peek läser GZYL:s egen spårning och visar status, varje steg med plats och destinationsland när posten innehåller det. Tiderna läses i Pekingtid och visas i din enhets tidszon ("Times are in your time zone:" i slutet av historiken). Peek utelämnar namn, adress, postnummer, vikt, avgifter, signatur och leveransbevis och visar inget beräknat leveransdatum eftersom GZYL inte anger något.
 
-Peek håller tillbaka steg skrivna mer än tolv timmar före den tid de visar, steg skrivna i samma sekund som ett steg skrivet mer än en halvtimme före sin tid (utom orderregistreringen) samt steg daterade efter kontrolltidpunkten i Pekingtid. På en order med förhandssteg hålls även `Delivered` tillbaka, även om det skrevs samma dag. Om spårningens datagränssnitt inte har några steg läser Peek GZYL:s söksida i stället; där syns inte när ett steg skrevs, så där håller Peek tillbaka varje `Delivered`. Peek utgår från de behållna stegen och inte från postens sammanfattning. Om alla steg hålls tillbaka visas «Waiting for GZYL» utan uppmaning att kontrollera numret, eftersom förhandssteg visar att GZYL har ordern. Peek rensar också bort spårningstjänsters kopior av steg som hålls tillbaka som plan (`Delivered` inräknat). När GZYL:s spårning inte går att nå frågar Peek spårningstjänster, vars kopior kan innehålla förprogrammerade steg.
+Peek håller tillbaka steg skrivna mer än tolv timmar före den tid de visar, steg skrivna i samma sekund som ett steg skrivet mer än en halvtimme före sin tid (utom orderregistreringen) samt steg daterade efter kontrolltidpunkten i Pekingtid. På en order med förhandssteg hålls även `Delivered` tillbaka, även om det skrevs samma dag. Om spårningens datagränssnitt inte har några steg läser Peek GZYL:s söksida i stället; där syns inte när ett steg skrevs, så där håller Peek tillbaka varje `Delivered`. Peek utgår från de behållna stegen och inte från postens sammanfattning. Om alla steg hålls tillbaka visas "Waiting for GZYL" utan uppmaning att kontrollera numret, eftersom förhandssteg visar att GZYL har ordern. Peek rensar också bort spårningstjänsters kopior av steg som hålls tillbaka som plan (`Delivered` inräknat). När GZYL:s spårning inte går att nå frågar Peek spårningstjänster, vars kopior kan innehålla förprogrammerade steg.
 
-Bortsett från överlämning till Swiss Post stannar Peek hos GZYL: får du det lokala utdelningsföretagets nummer av säljaren, lägg till det som ett eget paket. Medan du har paketet öppet eller på leveransdagen med aviseringar på kontrollerar Peek upp till var 10:e minut, och upp till var 2:a minut den dag paketet visar «Out for delivery» (från kl. 06.00 lokal tid medan GZYL:s eller Swiss Posts egen spårning svarar, även om inget känt GZYL-steg ger den statusen). Annars samt efter två dagar utan nytt (12 timmar vid «Label created» eller «Received by carrier») kontrollerar Peek varje timme. Via spårningstjänster sker kontrollen varje timme, var 3:e timme efter en tyst dag och upp till var 15:e minut på leveransdagen. Du väljer aviseringar mellan «Every scan», «Important steps» (de två tullstegen och `Delivered`, inte flyg eller sortering) och «Delivery only». Peek kan inte kontakta GZYL eller säljaren åt dig.
+Bortsett från överlämning till Swiss Post stannar Peek hos GZYL: får du det lokala utdelningsföretagets nummer av säljaren, lägg till det som ett eget paket. Medan du har paketet öppet eller på leveransdagen med aviseringar på kontrollerar Peek upp till var 10:e minut, och upp till var 2:a minut den dag paketet visar "Out for delivery" (från kl. 06.00 lokal tid eller, när transportören anger ett tidsfönster, från en halvtimme innan det öppnar, medan GZYL:s eller Swiss Posts egen spårning svarar, även om inget känt GZYL-steg ger den statusen). Annars samt efter två dagar utan nytt (12 timmar vid "Label created" eller "Received by carrier") kontrollerar Peek varje timme. Via spårningstjänster sker kontrollen varje timme, var 3:e timme efter en tyst dag och upp till var 15:e minut på leveransdagen på samma villkor. Du väljer aviseringar mellan "Every scan", "Important steps" (de två tullstegen och `Delivered`, inte flyg eller sortering) och "Delivery only". Peek kan inte kontakta GZYL eller säljaren åt dig.
 
 ## Vanliga frågor om GZYL
 
@@ -102,7 +102,7 @@ GZYL är 广州云链货运代理有限公司 (Guangzhou Yunlian), en speditör 
 
 Inte automatiskt. `YL`, tio siffror och `YQ` är GZYL:s format — Peek väljer GZYL direkt för `YL738…YQ` och kontrollerar GZYL:s spårning för övriga `YL…YQ`-nummer. Nio eller elva siffror stämmer inte med GZYL, och `GZXH…YQ` tillhör Xinghe Freight.
 
-### Varför visar GZYL «Delivered» när inget paket har kommit?
+### Varför visar GZYL "Delivered" när inget paket har kommit?
 
 GZYL skriver ofta stora delar av resan i förväg och lägger till `Delivered` enligt fast schema snarare än från en lokal leveransskanning. Peek håller tillbaka förhandssteg och varnar om det fasta schemat — meddela säljaren att inget kommit och fråga vilket företag som levererar.
 
@@ -112,7 +112,7 @@ GZYL:s skanningar anger aldrig det lokala utdelningsföretaget i Sverige (bara i
 
 ### Hur kontaktar jag GZYL om ett försenat eller saknat paket?
 
-Kontakta säljaren eller marknadsplatsen först. Även om `yunlianhouyun.com` visar en kinesisk 24-timmarslinje, WeChat och QQ för företagskunder (säljare) erbjuder GZYL ingen kundtjänst för mottagare.
+Kontakta säljaren eller marknadsplatsen först. Även om `yunlianhouyun.com` visar en kinesisk 24-timmarslinje, WeChat och QQ för företagskunder (säljare) publicerar GZYL ingen kanal för mottagare.
 
 :::sources
 - [广州云链货运代理有限公司 (GZYL): startsida (på kinesiska)](http://yunlianhouyun.com/) – företagsnamn, kinesisk webbplats, paketsökning (`小包查询`) mot GZYL:s spårning

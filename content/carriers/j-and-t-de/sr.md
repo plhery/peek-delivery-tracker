@@ -73,7 +73,7 @@ U istorijama koje čuva kod Peek-a, kurir J&T-a utovaruje paket za dostavnu turu
 
 ## Paket J&T Express kasni, nedostaje ili se vraća
 
-Prodavnica je izabrala J&T, pa je za online porudžbinu prodavnica vaš prvi kontakt. Po nemačkom zakonu, kada kao potrošač kupujete od firme, prodavac snosi rizik gubitka ili oštećenja u prevozu, osim ako ste sami angažovali prevoznika a prodavac vam tog prevoznika prethodno nije ponudio.
+Prodavnica je izabrala J&T, pa je za online porudžbinu prodavnica vaš prvi kontakt. Po nemačkom zakonu, kada kao potrošač kupujete od firme, prodavac snosi rizik gubitka ili oštećenja u prevozu, osim ako ste sami angažovali prevoznika a prodavac vam tog prevoznika prethodno nije naveo.
 
 **Ne pomera se.** J&T ne objavljuje rokove dostave za primaoce. Paket koji pokazuje „Received by carrier“ ili „In transit“ bez novog reda četiri dana dobija oznaku u Peek-u sa danom poslednjeg reda („No tracking update since Mon 12 Oct“) i link „Get help from J&T Express Germany“. Ako se ni posle toga ništa ne pomera, pitajte prodavnicu ili pozovite dežurnu liniju J&T-a sa svojim brojem. Više o [praćenju koje se ne ažurira](guide:tracking-not-updating) (na engleskom).
 
@@ -103,7 +103,7 @@ Peek prikazuje status, svako skeniranje sa njegovim tačnim vremenom i vreme dos
 
 Dok J&T ne skenira paket, Peek nastavlja da pita i prikazuje „Waiting for J&T Express Germany“ (ili, ako J&T ni dva dana kasnije još ne poznaje broj, zahtev da ga proverite). Kada J&T tragač nije dostupan ili ne poznaje broj, Peek pita servise za praćenje i prikazuje njihovu istoriju, njihovim rečima. Ako kasnije i J&T tragač i servisi za praćenje svi odgovore bez skeniranja za paket koji ih već ima, Peek zadržava skeniranja koja je već pronašao i, ako to potraje, navodi „The carrier has no new scans for now. The ones already found are kept, and Peek keeps checking.“.
 
-Peek proverava do svakih 10 minuta, a od 6:00 po lokalnom vremenu na dan kada J&T skenira paket kao na dostavi do svaka 2 minuta, dok sopstveni tragač J&T-a odgovara (preko servisa za praćenje na svakih 15 minuta). Posle dva dana bez novog skeniranja (12 sati dok pokazuje „Received by carrier“) proverava na sat vremena. Može da vas obaveštava za „Every scan“, „Important steps“ ili „Delivery only“. Peek ne može umesto vas da kontaktira J&T ili prodavnicu, da promeni adresu niti da zakaže novu dostavu.
+Peek proverava do svakih 10 minuta, a od 6:00 po lokalnom vremenu na dan kada J&T skenira paket kao na dostavi do svaka 2 minuta, dok sopstveni tragač J&T-a odgovara (preko servisa za praćenje na svakih 15 minuta). Posle dva dana bez novog skeniranja (12 sati dok pokazuje „Received by carrier“) proverava svakih sat vremena. Može da vas obaveštava za „Every scan“, „Important steps“ ili „Delivery only“. Peek ne može umesto vas da kontaktira J&T ili prodavnicu, da promeni adresu niti da zakaže novu dostavu.
 
 ## Pitanja o praćenju J&T Express Germany
 

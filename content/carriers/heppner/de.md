@@ -6,7 +6,7 @@ published: 2026-10-27
 updated: 2026-11-27
 ---
 
-Heppner ist ein Straßburger Transportunternehmen für Pakete, Paletten und Onlinebestellungen über 30 kg (mit Heppner CONNECT) und liefert in der Schweiz über die Gruppengesellschaft **SAFRAM**. Verfolge deine Lieferung oben im Feld (Paketdienst Heppner wählen) oder auf [Heppners Empfängerseite](https://www.heppner-group.com/de/empfaenger-verfolgen-sie-ihre-bestellung/) mit der 8-stelligen Sendungsnummer aus der Benachrichtigung und deiner vierstelligen Postleitzahl.
+Heppner ist ein Straßburger Transportunternehmen, vom kleinen Paket bis zur Komplettladung; mit Heppner CONNECT stellt es Onlinebestellungen auch Privatpersonen zu, selbst solche über 30 kg. In der Schweiz liefert es über die Gruppengesellschaft **SAFRAM**. Verfolge deine Lieferung oben im Feld (Paketdienst Heppner wählen) oder auf [Heppners Empfängerseite](https://www.heppner-group.com/de/empfaenger-verfolgen-sie-ihre-bestellung/) mit der Sendungsnummer aus Heppners Benachrichtigung und deiner vierstelligen Postleitzahl.
 
 ## Heppner Sendungsnummer: wo du sie findest
 

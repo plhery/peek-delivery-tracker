@@ -6,7 +6,7 @@ published: 2026-11-02
 updated: 2026-11-27
 ---
 
-FAR International (泛远国际, FAR International Logistics, founded in Hangzhou in 2004) is a Chinese cross-border logistics company that collects and inspects parcels in China before partners carry them abroad, clear customs and hand them to a local carrier for delivery. Paste your `FAR…YQ` tracking number in the box above or look it up on [FAR's Track and Trace page](https://www.far800.com/en/logistics) to follow the parcel and check for a last-mile number.
+FAR International (泛远国际, FAR International Logistics, founded in Hangzhou in 2004) is a Chinese cross-border logistics company that collects and inspects parcels in China before partners carry them abroad, clear customs and hand them to a local carrier for delivery. Paste the number the shop gave you in the box above (Peek names FAR at once from a `FAR…YQ` number), or look it up on [FAR's Track and Trace page](https://www.far800.com/en/logistics) to follow the parcel and check for a last-mile number.
 
 ## FAR International tracking number: what it looks like
 
@@ -108,7 +108,7 @@ FAR gives its customers these times: Express 3 to 5 working days, Standard 6 to 
 
 ### Who delivers FAR International parcels in my country?
 
-FAR uses local delivery partners for the last mile and does not list them by country on its site. Look for a last-mile number (尾程单号) on FAR's result page — when FAR provides one, Peek can automatically follow the local post or carrier once it logs a scan at least as recent as FAR's newest.
+FAR uses local delivery partners for the last mile and does not list them by country on its site. Look for a last-mile number (尾程单号) on FAR's result page. When FAR gives one, Peek asks the carrier it belongs to (for a postal number, the post of the country you look it up from) and follows the parcel there once that carrier shows a scan at least as recent as FAR's newest.
 
 ### What does "Await Release from Sender" mean on FAR tracking?
 

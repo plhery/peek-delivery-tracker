@@ -6,7 +6,7 @@ published: 2026-10-13
 updated: 2026-11-27
 ---
 
-Pošta Srbije (the Post of Serbia) is Serbia's national post, alongside its next-day courier service Post Express. Track a domestic `RS` or `PE` item — or an incoming international parcel under the foreign post's number — for free on posta.rs's [Track and Trace](https://www.posta.rs/eng/alati/pracenje-posiljke.aspx), in the Post of Serbia app, or by pasting the number in the box above.
+Pošta Srbije (the Post of Serbia) is Serbia's national post, alongside its next-day courier service Post Express. Track an item for free on posta.rs's [Track and Trace](https://www.posta.rs/eng/alati/pracenje-posiljke.aspx), in the Post of Serbia app, or by pasting the number in the box above: an item posted in Serbia has a number ending in `RS` (`PE…RS` for Post Express), and an item from abroad keeps the foreign post's number.
 
 ## Serbian Post tracking number
 
@@ -103,7 +103,7 @@ Most items wait 5 working days at the post office and items from abroad wait 20 
 
 ### What is Pošta Srbije's contact number and email address?
 
-Call 0700 100 300 (Telekom Srbija landlines) or +381 11 3607 788 (mobiles and abroad; weekdays 08:00–20:00, weekends 08:00–15:00), or 0800 100 808 / +381 11 3607 607 for Post Express. Email contact@ptt.rs for complaints or compliments; damage claims must be made in person at the post office.
+Call 0700 100 300 (Telekom Srbija landlines) or +381 11 3607 788 (mobiles and abroad; weekdays 08:00–20:00, weekends 08:00–15:00), or 0800 100 808 / +381 11 3607 607 for Post Express. Email contact@ptt.rs for complaints or compliments; damage can't be claimed by email: claim at the post office when you receive the item, at the latest the next working day, since later claims bring no compensation.
 
 ### Are SMS messages asking for online payment from Pošta Srbije genuine?
 

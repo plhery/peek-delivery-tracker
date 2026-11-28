@@ -1,12 +1,12 @@
 ---
 title: Nova Poshta Sendungsverfolgung: Nummern, Status & Filialen
-description: Nova Poshta (Nova Post) Sendungsverfolgung: 14-stellige EW- und internationale SH/TN-Nummern, Status auf Deutsch, 5 Tage Lagerfrist, Zoll und Kontakt.
+description: Nova Poshta (Nova Post) Sendungsverfolgung: 14-stellige EW- und internationale SH/TN-Nummern, Statusmeldungen erklärt, 5 Tage Lagerfrist, Zoll und Kontakt.
 slug: nova-poshta-sendungsverfolgung
 published: 2026-11-22
 updated: 2026-11-27
 ---
 
-Nova Poshta — auf der englischen Website und im Ausland **Nova Post** genannt — ist ein ukrainischer Expressdienst mit Filialen, Paketstationen und Kurierzustellung in der gesamten Ukraine sowie Filialen in Polen und weiteren europäischen Ländern. Verfolge dein Paket mit der 14-stelligen Express-Frachtbriefnummer (EW) oder internationalen `SH`/`TN`-Nummer oben im Feld, in der App oder auf [novaposhta.ua/en/tracking](https://novaposhta.ua/en/tracking/).
+Nova Poshta — auf der englischen Website und im Ausland **Nova Post** genannt — ist ein ukrainischer Expressdienst mit Filialen, Paketstationen und Kurierzustellung in der gesamten Ukraine sowie Filialen in Polen und weiteren europäischen Ländern. Verfolge dein Paket mit der Express-Frachtbriefnummer (EW) oder der internationalen `SH`/`TN`-Nummer oben im Feld, in der App oder auf [novaposhta.ua/en/tracking](https://novaposhta.ua/en/tracking/).
 
 ## Nova-Poshta-Sendungsnummer: die EW-Nummer
 
@@ -98,7 +98,7 @@ Ja. Nova Poshta wurde 2001 in der Ukraine gegründet, steht an der Spitze der NO
 
 ### Wie verfolge ich ein Nova-Poshta-Paket auf Englisch oder Deutsch?
 
-Gib deine 14-stellige EW-Nummer oder internationale `SH`/`TN`-Nummer auf [novaposhta.ua/en/tracking](https://novaposhta.ua/en/tracking/) (auf Englisch) oder oben in Peek ein. Für Frachtbriefe, die älter als 90 Tage sind, zeigt die Website nichts mehr an.
+Gib deine EW-Nummer oder internationale `SH`/`TN`-Nummer auf [novaposhta.ua/en/tracking](https://novaposhta.ua/en/tracking/) (auf Englisch) oder oben in Peek ein. Für Frachtbriefe, die älter als 90 Tage sind, zeigt die Website nichts mehr an.
 
 ### Wie lange lagert Nova Poshta ein Paket in der Filiale oder Paketstation?
 
@@ -106,11 +106,11 @@ In der Ukraine lagert eine Filiale ein Paket seit dem 1. Oktober 2026 5 Tage kos
 
 ### Welche Zollregeln gelten bei Nova Poshta in die Ukraine und wie erreiche ich den Support?
 
-Bei Sendungen in die Ukraine fallen laut Nova Poshta über 150 € Warenwert 10 % Zoll auf den Mehrbetrag plus 20 % Mehrwertsteuer an. Der ukrainische Support ist rund um die Uhr unter +38 098 450 0609 (auch 050/093/044) oder support_ua@novaposhta.ua erreichbar, Nova Post Polen täglich 8–20 Uhr unter +48 182 111 609 oder support@novapost.pl.
+Bei Sendungen in die Ukraine fallen laut Nova Poshta über 150 € Warenwert 10 % Zoll auf den Mehrbetrag plus 20 % Mehrwertsteuer an. Der ukrainische Support ist rund um die Uhr unter +38 098 450 0609 (auch 050/093/044) erreichbar, per E-Mail unter support_ua@novaposhta.ua, Nova Post Polen täglich 8–20 Uhr unter +48 182 111 609 oder support@novapost.pl.
 
 ### Kann eine Nova-Post-E-Mail mit Zahlungsaufforderung Betrug sein?
 
-Ja, das ist möglich. Laut Nova Poshta stammen echte E-Mails ausschließlich von den offiziellen Domains; öffne keine Links zu Zahlungsformularen aus unbekannten Absendern.
+Ja, das ist möglich. Laut Nova Poshta stammen echte E-Mails ausschließlich von den offiziellen Domains; Nova Poshta verschickt keine Links zu Formularen, die Kartendaten abfragen. Öffne keine Links unbekannter Absender.
 
 :::sources
 - [Nova Post: Track your parcel](https://novaposhta.ua/en/tracking/) – Statustexte, Nicht-gefunden-Meldung, Reklamationsschaltfläche

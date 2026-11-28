@@ -6,7 +6,7 @@ published: 2026-11-18
 updated: 2026-11-27
 ---
 
-Meiteshun Logistics (美特顺物流, 深圳市美特顺物流有限公司, anche MTSCN) è uno spedizioniere di Shenzhen, in Cina, i cui codici di tracciamento hanno 15 caratteri (`AMTS`, nove cifre e `FS`). Incolla nel box qui sopra il numero fornito dal negozio per seguire il pacco, ma leggi il tracking di Meiteshun con cautela: il suo sistema registra l'intero percorso, `Delivered` compreso, già alla creazione dell'ordine, quindi un avviso di consegna non dimostra che il pacco sia arrivato davvero.
+Meiteshun Logistics (美特顺物流, 深圳市美特顺物流有限公司, anche MTSCN) è uno spedizioniere di Shenzhen, in Cina, i cui codici di tracciamento hanno 15 caratteri (`AMTS`, nove cifre e `FS`). Incolla nel box qui sopra il numero fornito dal negozio per seguire il pacco, ma leggi il tracking di Meiteshun con cautela: il suo sistema registra l'intero percorso, `Delivered` compreso, già alla creazione dell'ordine, quindi un `Delivered` lì non dimostra che il pacco sia arrivato davvero.
 
 ## Numero di tracking Meiteshun: com'è fatto
 

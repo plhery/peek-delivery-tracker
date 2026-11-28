@@ -311,6 +311,8 @@ class AppContainerTest {
         app.start(process.lifecycle)
         idleUntil("the demo's parcels") { app.parcels.parcels.isNotEmpty() }
         val secret = "Door code 4512 behind the blue gate"
+        // The note's words, not its digits: a parcel's random id holds 4512 about once in 1,500.
+        fun leaks(text: String) = text.contains("blue gate") || text.contains("Hidden receipt")
         var noted = false
         app.scope.launch {
             for (parcel in app.parcels.parcels) {
@@ -325,7 +327,7 @@ class AppContainerTest {
         assertTrue(app.parcels.parcels.all { it.note == secret })
         for (shortcut in dynamicShortcuts()) {
             for (text in listOf(shortcut.shortLabel, shortcut.longLabel, shortcut.intent.dataString)) {
-                assertFalse("$text", "$text".contains("4512") || "$text".contains("Hidden receipt"))
+                assertFalse("$text", leaks("$text"))
             }
         }
         val widget = context.getSharedPreferences("group.test.peek", Context.MODE_PRIVATE).all.filterKeys { it.startsWith("sdt.deliveryWidget") }
@@ -334,7 +336,7 @@ class AppContainerTest {
             // Data is kept as one Base64 string in a set.
             val text = (value as? Set<*>)?.joinToString { android.util.Base64.decode(it.toString(), android.util.Base64.NO_WRAP).decodeToString() }
                 ?: value.toString()
-            assertFalse(key, text.contains("4512") || text.contains("Hidden receipt"))
+            assertFalse(key, leaks(text))
         }
         val parcel = app.parcels.parcels.first()
         AppNotifications(context).post(mapOf("title" to parcel.label, "body" to "Out for delivery", "parcel_id" to "${parcel.id}"))
@@ -343,7 +345,7 @@ class AppContainerTest {
         // Every extra, whatever its type, which only the deprecated untyped read gives.
         @Suppress("DEPRECATION")
         val extras = posted.extras.keySet().joinToString { "${posted.extras.get(it)}" }
-        assertFalse(extras, extras.contains("4512") || extras.contains("Hidden receipt"))
+        assertFalse(extras, leaks(extras))
     }
 
     /** Firebase giving no token tells the store, as AppDelegate's failure does the iPhone's: the invitation offers it again. */

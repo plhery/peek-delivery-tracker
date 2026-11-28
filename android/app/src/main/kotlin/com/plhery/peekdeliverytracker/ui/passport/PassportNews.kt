@@ -156,25 +156,28 @@ val LocalPassportNews = compositionLocalOf<PassportNewsState?> { null }
 
 /**
  * The passport's news for the account (or guest) in: the seen list kept for it, read again at each write. Once its
- * parcels have loaded, a device's first read records everything the passport holds as seen, and a list kept from before
- * countries counted takes every country held now as seen ([PassportNews.catchUp]): neither shows as new.
+ * parcels have loaded without an error, a device's first read records everything the passport holds as seen, and a list
+ * kept from before countries counted takes every country held now as seen ([PassportNews.catchUp]): neither shows as
+ * new. A list that failed to load holds none of them yet, as on the iPhone.
  */
 @Composable
 internal fun rememberPassportNews(source: DeliveriesSource, openPassport: () -> Unit): PassportNewsState {
     val parcels by source.parcels.collectAsState()
     val loading by source.loading.collectAsState()
+    val error by source.errorMessage.collectAsState()
+    val loaded = !loading && error == null
     val session by source.session.collectAsState()
     val writes by source.passportSeen.changes.collectAsState()
     val scope = PassportSeenRecord.scope(session)
     val book = remember(parcels) { PassportBook(parcels) }
     val seen = remember(source, scope, writes) { source.passportSeen.seen(scope) }
     val news = remember(book, seen) { PassportNews(book, seen) }
-    LaunchedEffect(source, scope, news, loading) {
-        if (!loading) news.catchUp?.let { source.passportSeen.store(scope, it) }
+    LaunchedEffect(source, scope, news, loaded) {
+        if (loaded) news.catchUp?.let { source.passportSeen.store(scope, it) }
     }
     val open by rememberUpdatedState(openPassport)
-    return remember(news, loading, source, scope) {
-        PassportNewsState(news, loading, markSeen = { source.passportSeen.store(scope, news.earnedKeys) }, openPassport = { open() })
+    return remember(news, loaded, source, scope) {
+        PassportNewsState(news, !loaded, markSeen = { source.passportSeen.store(scope, news.earnedKeys) }, openPassport = { open() })
     }
 }
 

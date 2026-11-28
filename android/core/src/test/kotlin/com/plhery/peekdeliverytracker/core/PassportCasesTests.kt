@@ -203,6 +203,15 @@ class PassportCasesTests {
         assertNull(record.seen(scope))
     }
 
+    /** The demo keeps its own list, as on the iPhone: a guest's own parcels' stamps are not the demo's. */
+    @Test
+    fun theDemoKeepsItsOwnSeenListApartFromTheGuests() {
+        assertEquals("demo", PassportSeenRecord.scope(AuthenticationState.Demo))
+        assertEquals("guest", PassportSeenRecord.scope(AuthenticationState.Welcome))
+        val user = AuthUser(id = UUID.fromString("11111111-1111-4111-8111-111111111111"), email = null)
+        assertEquals("11111111-1111-4111-8111-111111111111", PassportSeenRecord.scope(AuthenticationState.SignedIn(user)))
+    }
+
     @Test
     fun aDeliveryAfterAnEmptyPassportNamesEveryStampItBrought() {
         val record = PassportSeenRecord(MemoryDefaults())

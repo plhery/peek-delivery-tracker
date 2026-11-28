@@ -27,9 +27,10 @@ cases ([`passport-cases.json`](../shared/passport-cases.json)).
   pressed in the first time it is shown.
 - **New.** What was earned since the passport was last opened is new: a line under the
   delivered or archived card that earned it, and a dot on the Passport tab. The list of
-  seen stamps and countries stays on the device, one per account and one for a guest; the
-  first time a passport is read on a device, everything it holds counts as seen. A list
-  kept before countries counted as news takes the countries it can see then as seen.
+  seen stamps and countries stays on the device, one per account, one for a guest and, in the
+  apps, one for the demo; the first time a passport is read on a device, once its parcels have
+  loaded without an error, everything it holds counts as seen. A list kept before countries
+  counted as news takes the countries it can see then as seen.
 - **The year's card.** In December, once a parcel was delivered that year, the passport
   offers "Your <year> in parcels": a 1080×1350 picture made on the device and handed to the
   share sheet or saved. It carries counts, the countries that year's parcels went through

@@ -39,8 +39,15 @@ class PassportSeenRecord(private val defaults: UserDefaults) {
 
         private fun key(scope: String) = "peek-passport-seen:$scope"
 
-        /** The list's scope: the account signed in, else the guest's (the demo's too). */
-        fun scope(state: AuthenticationState): String = (state as? AuthenticationState.SignedIn)?.user?.id?.toString() ?: "guest"
+        /**
+         * The list's scope: the account signed in, the demo's, else the guest's. The demo keeps its own, as on the
+         * iPhone: its countries and stamps are none of a guest's, who follows parcels of their own on this phone.
+         */
+        fun scope(state: AuthenticationState): String = when (state) {
+            is AuthenticationState.SignedIn -> state.user.id.toString()
+            AuthenticationState.Demo -> "demo"
+            else -> "guest"
+        }
     }
 }
 

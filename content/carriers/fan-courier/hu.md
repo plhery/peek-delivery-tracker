@@ -62,18 +62,18 @@ Ha a FAN nem tudja kézbesíteni a csomagot, általános feltételei szerint ér
 
 ## FAN Courier csomag késik, elveszett vagy sérült
 
-A FAN nem ad meg pontos napszámot, ami után aggódni kellene. Ha nem mozdul a csomag, keresd a boltot: ő áll szerződésben a FAN-nal, és nyithat „Delivery Delay” jegyet vagy írhat e-mailt a FAN-nak az AWB számmal, a tartalommal és az értékkel. Lásd: [nem frissülő csomagkövetés](guide:tracking-not-updating) (angolul).
+A FAN nem ad meg pontos napszámot, ami után aggódni kellene. Az ANCOM szerint, ha nem állapodtatok meg más időpontban, a román jog a rendeléstől számított 30 napot ad a webáruháznak a kézbesítésre, ezután elállhatsz a vásárlástól. Ha nem mozdul a csomag, keresd a boltot: ő áll szerződésben a FAN-nal, és nyithat „Delivery Delay” jegyet vagy írhat e-mailt a FAN-nak az AWB számmal, a tartalommal és az értékkel. Lásd: [nem frissülő csomagkövetés](guide:tracking-not-updating) (angolul).
 
 **Sérült átvételkor:** kérj a futártól kárfelvételi jegyzőkönyvet, majd vedd át vagy utasítsd vissza a csomagot. Rossz termék van benne? Keresd a feladót: a FAN nem ellenőrzi a tartalmat.
 
-**Reklamációt** a feladó vagy a címzett is benyújthat telefonon, e-mailben, írásban bármely FAN ponton vagy ajánlott levélben. A FAN feltételei szerinti határidők: a feladástól számított 6 hónapon belül reklamálhatsz, a FAN 3 hónapon belül válaszol, és a jóváhagyástól számított 30 napon belül fizet. A kártérítést a feladó kapja. Ha nem vagy elégedett, a feladástól számított egy éven belül fordulhatsz a román postai szabályozó hatósághoz (ANCOM) vagy bírósághoz.
+**Reklamációt** a feladó vagy a címzett is benyújthat telefonon, e-mailben, írásban bármely FAN ponton vagy ajánlott levélben. A FAN feltételei szerinti határidők: a feladástól számított 6 hónapon belül reklamálhatsz, a FAN 3 hónapon belül válaszol, és a jóváhagyástól számított 30 napon belül fizet. A kártérítést a feladó kapja. Ha nem vagy elégedett, a feladástól számított egy éven belül fordulhatsz a román postai szabályozó hatósághoz (ANCOM) vagy bírósághoz. Az ANCOM kivizsgálhatja a FAN eljárását és szankcionálhatja, de kártérítés fizetésére nem kötelezheti.
 
 ## FAN Courier ügyfélszolgálat és elérhetőségek
 
 A FAN csatornái:
 
-- **Telefon:** `021.9336` (külföldről `+40 21 9336`, normál díjas szám), `0723 55 22 33` vagy `0742 55 22 33` (Vodafone / Orange), illetve `*9336`. Hétfőtől péntekig 09:00–17:00 romániai idő szerint.
-- **E-mail:** `customer@fancourier.ro`; FANbox gondok: `fanbox@fancourier.ro`; Collect Point: `collectpoint@fancourier.ro`; külföldről vagy külföldre menő csomagok: `international@fancourier.ro`.
+- **Telefon:** 021.9336 (külföldről +40 21 9336, normál díjas szám), 0723 55 22 33 vagy 0742 55 22 33 (Vodafone / Orange), illetve \*9336. Hétfőtől péntekig 09:00–17:00 romániai idő szerint.
+- **E-mail:** customer@fancourier.ro; FANbox gondok: fanbox@fancourier.ro; Collect Point: collectpoint@fancourier.ro; külföldről vagy külföldre menő csomagok: international@fancourier.ro.
 - **ȘteFAN**, a fancourier.ro éjjel-nappal elérhető chat-asszisztense.
 - **A futár**, kizárólag a kézbesítés napján, az alkalmazáson vagy az SMS-ben lévő linken keresztül.
 
@@ -81,9 +81,9 @@ A FAN csatornái:
 
 ## FAN Courier csomag követése a Peekkel
 
-A [Peek](/) közvetlenül megkérdezi a FAN Couriert minden 13 számjegyű, `2`, `3`, `4`, `5` vagy `7` számjeggyel kezdődő számról, a `3`-mal kezdődőknél az iMile-t is. Ha a telefonod régiója vagy a kapcsolatod bolgár, megkérdezi az Econtot is, ha indiai, a [Delhivery](carrier:delhivery) rendszerét a szabályának megfelelő számoknál. Ha csak a FAN ismeri, a Peek "FAN Courier has this parcel." szöveget mutat; ha más fuvarozó is ismeri, te választasz. Más formátumú AWB-t nem ismer fel automatikusan: illeszd be mégis (a Peek több mint 4 500 fuvarozót követ), nyomd meg a "Change" gombot és válaszd a "FAN Courier" opciót. A FAN román (`/awb-tracking/`) vagy angol (`/en/awb-track/`) oldaláról származó link `tracking=`, `awb=` paraméterrel vagy a `/awb-tracking/` utáni 13 jegyű AWB-vel közvetlenül a FAN Courierhez ugrik.
+A [Peek](/) közvetlenül megkérdezi a FAN Couriert minden 13 számjegyű, `2`, `3`, `4`, `5` vagy `7` számjeggyel kezdődő számról, a `3`-mal kezdődőknél az iMile-t is. Ha a telefonod régiója vagy a kapcsolatod bolgár, megkérdezi az Econtot is, ha indiai, a [Delhivery](carrier:delhivery) rendszerét a szabályának megfelelő számoknál. Ha csak a FAN ismeri, a Peek „FAN Courier has this parcel.” szöveget mutat; ha más fuvarozó is ismeri, te választasz. Más formátumú AWB-t nem ismer fel automatikusan: illeszd be mégis (a Peek több mint 4 500 fuvarozót követ), nyomd meg a „Change” gombot és válaszd a „FAN Courier” opciót. A FAN román (`/awb-tracking/`) vagy angol (`/en/awb-track/`) oldaláról származó link `tracking=`, `awb=` paraméterrel vagy a `/awb-tracking/` utáni 13 jegyű AWB-vel közvetlenül a FAN Courierhez ugrik.
 
-A Peek minden FAN beolvasást megmutat a várossal és az időponttal. A FAN időpontjai időzóna nélkül érkeznek, így a Peek a megnevezett város órája szerint (Romániában romániai idővel) olvassa és az eszközöd időzónájában jeleníti meg őket; a peektracker.com oldalon és az iPhone/Android alkalmazásokban a történet a "Times are in your time zone:" sorral és a zóna nevével zárul. A beolvasások megtartják a FAN angol szövegét, kivéve a `Shipment picked up` sort, amely "Shipment collected" formában jelenik meg. Amíg a csomag nyitva van, vagy a kézbesítés napján bekapcsolt értesítésekkel, a Peek legfeljebb 10 percenként, a kiszállításra való beolvasás napján reggel 6 órától (romániai idő) pedig 2 percenként ellenőriz, amíg a FAN saját rendszere válaszol; egyébként óránként. Értesíthet a státuszváltozásokról. Két hír nélküli nap után (vagy 12 órával "Label created" / "Received by carrier" állapotban) óránként ellenőriz.
+A Peek minden FAN beolvasást megmutat a várossal és az időponttal. A FAN időpontjai időzóna nélkül érkeznek, így a Peek a megnevezett város órája szerint (Romániában romániai idővel) olvassa és az eszközöd időzónájában jeleníti meg őket; a peektracker.com oldalon és az iPhone/Android alkalmazásokban a történet a „Times are in your time zone:” sorral és a zóna nevével zárul. A beolvasások megtartják a FAN angol szövegét, kivéve a `Shipment picked up` sort, amely „Shipment collected” formában jelenik meg. Amíg a csomag nyitva van, vagy a kézbesítés napján bekapcsolt értesítésekkel, a Peek legfeljebb 10 percenként, a kiszállításra való beolvasás napján reggel 6 órától (romániai idő) pedig 2 percenként ellenőriz, amíg a FAN saját rendszere válaszol; egyébként óránként. Értesíthet a státuszváltozásokról. Két hír nélküli nap után (vagy 12 órával „Label created” / „Received by carrier” állapotban) óránként ellenőriz.
 
 Nem jelenít meg várható kézbesítési napot vagy FANbox nevet, és elhagyja a címzett nevét, a tartalmat, a súlyt és a fizetési adatokat. A visszaküldés saját AWB alatt utazik, ezért ez a szám sosem vált visszaküldöttre.
 
@@ -131,6 +131,7 @@ A FAN webes követőjében nem, mert az AWB-t vagy referenciaszámot kér. Kérd
 - [FAN Courier: FAN Courier app](https://www.fancourier.ro/en/app/) – 3,000+ lockers, login, automatic extension
 - [FAN Courier: Discover the FAN Courier Mobile App](https://www.fancourier.ro/en/discover-the-fan-courier-mobile-app/) – tracking without an account
 - [FAN Courier: Terms of use of the FAN Courier Mobile App](https://www.fancourier.ro/en/terms-of-use-of-the-fan-courier-mobile-app/) – AWB, account by phone number, registered orders, Locations
+- [ANCOM: Comanzi online? Ce obligatii au cei care iti livreaza colete?](https://www.ancom.ro/despre-noi/media/comunicate-de-presa/comanzi-online-63-ce-obligatii-au-cei-care-iti-livreaza-colete-63/) – 30 days to deliver, what ANCOM can and can't do about a courier
 - [Cargus: Track your parcel](https://www.cargus.ro/en/personal/track-your-parcel/) – Cargus's numbers are AWBs
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

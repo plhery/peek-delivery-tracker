@@ -6,7 +6,7 @@ published: 2026-11-27
 updated: 2026-11-27
 ---
 
-Urmărește un colet DAO în Danemarca introducând numărul de colet de 20, 13 sau 9 cifre pe pagina «Track your parcel» a DAO, în aplicația dao sau în caseta de mai sus. DAO (Dansk Avis Omdeling, care livrează din 1921) aduce comenzile online la ușa ta pe timpul nopții, 365 de zile pe an, sau la un punct de ridicare **daoSHOP**, de unde ridici coletul cu numărul coletului și codul de ridicare de 5 cifre trimis prin SMS și e-mail.
+Urmărește un colet DAO în Danemarca introducând numărul de colet de 20, 13 sau 9 cifre pe pagina „Track your parcel” a DAO, în aplicația dao sau în caseta de mai sus. DAO (Dansk Avis Omdeling, care livrează din 1921) aduce comenzile online la ușa ta pe timpul nopții, 365 de zile pe an, sau la un punct de ridicare **daoSHOP**, de unde ridici coletul cu numărul coletului și codul de ridicare de 5 cifre trimis prin SMS și e-mail.
 
 ## Unde găsești numărul de urmărire DAO
 
@@ -24,7 +24,7 @@ Spațiile nu contează. Coletele daneze de la alți curieri au forme diferite: n
 
 ## Statusurile de urmărire DAO explicate
 
-Sistemul DAO afișează statusurile în engleză pe versiunea în engleză și în daneză pe dao.as. Iată formulările în engleză, în ordine. După două puncte apare adesea un depozit sau terminal, de exemplu «Parcel arrived at dao depot: dao Erritsø».
+Sistemul DAO afișează statusurile în engleză pe versiunea în engleză și în daneză pe dao.as. Iată formulările în engleză, în ordine. După două puncte apare adesea un depozit sau terminal, de exemplu „Parcel arrived at dao depot: dao Erritsø”.
 
 | Status | Ce înseamnă pentru tine |
 | --- | --- |
@@ -47,7 +47,7 @@ Două detalii surprind adesea destinatarii. `Parcel has arrived at terminal` est
 
 **La domiciliu.** DAO livrează noaptea și dimineața devreme, 365 de zile pe an, fără semnătură; termenii săi menționează de cele mai multe ori înainte de ora 7:00. Pune coletul în cutia poștală dacă încape, altfel îl agață de ușă într-o pungă de plastic reciclat sau îl lasă lângă ușă, de exemplu pe preș. Nu există chitanță: înregistrările GPS, ora și fotografia DAO servesc drept dovadă.
 
-**De ce a ajuns la un daoSHOP.** Fie expeditorul a ales un daoSHOP, fie DAO a redirecționat un colet pe care nu l-a putut lăsa în siguranță, un colet peste 5 kg sau prea mare pentru livrarea la domiciliu (peste 55 cm lungime sau peste 120 cm lungime plus circumferință), ori cu o eroare de adresă. În blocurile de locuințe, DAO are nevoie de acces la intrare; locatarii pot oferi acces prin formularul «Grant access» al DAO.
+**De ce a ajuns la un daoSHOP.** Fie expeditorul a ales un daoSHOP, fie DAO a redirecționat un colet pe care nu l-a putut lăsa în siguranță, un colet peste 5 kg sau prea mare pentru livrarea la domiciliu (peste 55 cm lungime sau peste 120 cm lungime plus circumferință), ori cu o eroare de adresă. În blocurile de locuințe, DAO are nevoie de acces la intrare; locatarii pot oferi acces prin formularul „Grant access” al DAO.
 
 **Ridicare.** Ia cu tine numărul coletului și codul de ridicare de 5 cifre din SMS-ul sau e-mailul DAO. Altcineva îl poate ridica dacă îi redirecționezi mesajul. Paginile DAO pentru clienți privați menționează peste 1.500 de puncte daoSHOP, iar cele pentru companii peste 1.600; găsește unul după cod poștal, stradă sau oraș pe harta de pe dao.as, cu programul de funcționare. DAO poate folosi un alt magazin decât cel ales sau uneori un locker.
 
@@ -61,9 +61,9 @@ Contractul cu DAO aparține magazinului, dar pagina de contact DAO indică și c
 
 **Fără actualizări timp de 48 de ore.** Dacă coletul nu a mai fost scanat în ultimele 48 de ore, DAO îți cere să îl raportezi lipsă prin e-mail sau telefon, cu o descriere a conținutului. Primești confirmare pe e-mail, iar DAO are până la 10 zile lucrătoare să îl caute. Vezi [urmărire care nu se actualizează](guide:tracking-not-updating) (în engleză).
 
-**Marcat livrat, dar lipsește.** Verifică cutia poștală, ușa și zona din jur, apoi contactează DAO; pentru conținut lipsă scrie la `kundeservice@dao.as`. Vezi [marcat livrat, dar neprimit](guide:delivered-not-received) (în engleză).
+**Marcat livrat, dar lipsește.** Verifică cutia poștală, ușa și zona din jur, apoi contactează DAO; pentru conținut lipsă scrie la kundeservice@dao.as. Vezi [marcat livrat, dar neprimit](guide:delivered-not-received) (în engleză).
 
-**Deteriorat.** Pagina de ajutor DAO indică raportarea în 5 zile lucrătoare de la livrare (5 zile în răspunsul pentru expeditori), cu fotografii ale ambalajului exterior, interior și ale produsului deteriorat; termenii permit o reclamație scrisă în până la 7 zile de la livrare. Formularul de daune de pe pagină nu mai există, deci scrie la `kundeservice@dao.as`. Termenii limitează răspunderea la valoarea documentată sau 2.500 DKK per colet, oricare este mai mică. Daunele produse proprietății tale de un curier se trimit la `erstatning@dao.as`.
+**Deteriorat.** Pagina de ajutor DAO indică raportarea în 5 zile lucrătoare de la livrare (5 zile în răspunsul pentru expeditori), cu fotografii ale ambalajului exterior, interior și ale produsului deteriorat; termenii permit o reclamație scrisă în până la 7 zile de la livrare. Formularul de daune de pe pagină nu mai există, deci scrie la kundeservice@dao.as. Termenii limitează răspunderea la valoarea documentată sau 2.500 DKK per colet, oricare este mai mică. Daunele produse proprietății tale de un curier se trimit la erstatning@dao.as.
 
 **Nemulțumit de răspuns.** Reclamă mai întâi la DAO; licența sa poștală îi acordă o lună să răspundă. Dacă nu ești de acord cu decizia — de pildă privind o întârziere sau o despăgubire — adresează-te autorității Trafikstyrelsen, care licențiază DAO. Termenii DAO menționează Center for Klageløsning de la Nævnenes Hus, dar Nævnenes Hus direcționează reclamațiile despre operatori poștali licențiați către Trafikstyrelsen.
 
@@ -73,22 +73,22 @@ Contractul cu DAO aparține magazinului, dar pagina de contact DAO indică și c
 
 Conform paginii de contact DAO:
 
-- **Telefon:** `+45 72 33 08 50`, luni–vineri 8:00–19:00, sâmbătă și duminică 8:00–16:00, ora Danemarcei.
-- **E-mail:** `kundeservice@dao.as`, menționând numărul coletului de 20 de cifre.
-- **Formulare:** formularele «Need help?» și de feedback, disponibile pe [pagina de ajutor și contact DAO](https://dao.as/en/contact-dao/) (formularul de daune legat acolo nu mai funcționează).
-- **Reclamații privind curierii:** `kvalitetabo@dao.as` sau `44 51 75 70`.
+- **Telefon:** +45 72 33 08 50, luni–vineri 8:00–19:00, sâmbătă și duminică 8:00–16:00, ora Danemarcei.
+- **E-mail:** kundeservice@dao.as, menționând numărul coletului de 20 de cifre.
+- **Formulare:** formularele „Need help?” și de feedback, disponibile pe [pagina de ajutor și contact DAO](https://dao.as/en/contact-dao/) (formularul de daune legat acolo nu mai funcționează).
+- **Reclamații privind curierii:** kvalitetabo@dao.as sau 44 51 75 70.
 
 > DAO avertizează asupra SMS-urilor și e-mailurilor false în numele său privind un număr de casă lipsă, un colet blocat sau o taxă. DAO nu trimite linkuri de plată. Verifică în aplicația dao sau pe dao.as. Dacă ai introdus datele cardului, sună la bancă; dacă ai aprobat o cerere MitID pe care nu ai inițiat-o, blochează MitID.
 
 ## Urmărirea unui colet DAO cu Peek
 
-[Peek](/) verifică un număr de 20 de cifre care începe cu `0005712696` sau `0005715127` simultan la DAO și la alți curieri probabili, printre care PostNord. Când doar DAO îl cunoaște, apare "DAO has this parcel."; când și PostNord îl cunoaște, Peek arată câți curieri îl găsesc și îl alegi pe al tău. Pentru un număr de 13 sau 9 cifre folosește "Change" și alege DAO, ori lipește un link de urmărire dao.as, care funcționează cu orice format. DAO răspunde apoi cu numărul de 20 de cifre, care este urmărit mai departe.
+[Peek](/) verifică un număr de 20 de cifre care începe cu `0005712696` sau `0005715127` simultan la DAO și la alți curieri probabili, printre care PostNord. Când doar DAO îl cunoaște, apare „DAO has this parcel.”; când și PostNord îl cunoaște, Peek arată câți curieri îl găsesc și îl alegi pe al tău. Pentru un număr de 13 sau 9 cifre folosește „Change” și alege DAO, ori lipește un link de urmărire dao.as, care funcționează cu orice format. DAO răspunde apoi cu numărul de 20 de cifre, care este urmărit mai departe.
 
-Scanările DAO nu includ fus orar: Peek le citește după ceasul locului scanării (ora Danemarcei în Danemarca) și afișează istoricul propriu al DAO. Poate arăta punctul daoSHOP spre care merge sau în care așteaptă coletul. Statusurile păstrează formularea în engleză a DAO. Cât timp ai coletul deschis sau în ziua livrării cu notificările active, Peek verifică până la fiecare 10 minute, ori la fiecare 2 minute de la ora 6:00 ora Danemarcei în ziua în care apare `To be delivered today`, cât timp sistemul DAO răspunde (la 5 minute când necesită browser; prin servicii de urmărire la 15 minute); altfel la fiecare oră. Verifică de asemenea la oră după două zile fără noutăți (12 ore în "Label created" sau "Received by carrier") și la 6 ore după șapte zile fără noutăți la "Label created".
+Scanările DAO nu includ fus orar: Peek le citește după ceasul locului scanării (ora Danemarcei în Danemarca) și afișează istoricul propriu al DAO. Poate arăta punctul daoSHOP spre care merge sau în care așteaptă coletul. Statusurile păstrează formularea în engleză a DAO. Cât timp ai coletul deschis sau în ziua livrării cu notificările active, Peek verifică până la fiecare 10 minute, ori la fiecare 2 minute de la ora 6:00 ora Danemarcei în ziua în care apare `To be delivered today`, cât timp sistemul DAO răspunde (la 5 minute când necesită browser; prin servicii de urmărire la 15 minute); altfel la fiecare oră. Verifică de asemenea la oră după două zile fără noutăți (12 ore în „Label created” sau „Received by carrier”) și la 6 ore după șapte zile fără noutăți la „Label created”.
 
-Când cea mai recentă scanare are patru zile vechime iar coletul rămâne la "Label created", "Received by carrier" sau "In transit", Peek îl marchează cu data acelei scanări ("No tracking update since Mon 12 Oct") și afișează "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking DAO." cu linkul "Get help from DAO" către centrul de ajutor DAO. După trei săptămâni fără scanare nouă, mesajul este "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking DAO."
+Când cea mai recentă scanare are patru zile vechime iar coletul rămâne la „Label created”, „Received by carrier” sau „In transit”, Peek îl marchează cu data acelei scanări („No tracking update since Mon 12 Oct”) și afișează „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking DAO.” cu linkul „Get help from DAO” către centrul de ajutor DAO. După trei săptămâni fără scanare nouă, mesajul este „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking DAO.”
 
-Peek poate trimite notificări pentru "Every scan", "Important steps" sau "Delivery only". Pentru un colet expediat în străinătate apare codul partenerului, iar când linkul DAO indică un curier din lista Peek, coletul poate fi urmărit mai departe acolo. DAO nu oferă o zi estimată de sosire sau greutate, iar numele mascate, adresa și codul tău poștal, precum și adresa, programul și poziția pe hartă a magazinului sunt omise. Peek nu poate contacta DAO în numele tău.
+Peek poate trimite notificări pentru „Every scan”, „Important steps” sau „Delivery only”. Pentru un colet expediat în străinătate apare numărul de urmărire al partenerului, iar când linkul DAO indică un curier din lista Peek, coletul poate fi urmărit mai departe acolo. DAO nu oferă o zi estimată de sosire sau greutate, iar numele mascate, adresa și codul tău poștal, precum și adresa, programul și poziția pe hartă a magazinului sunt omise. Peek nu poate contacta DAO în numele tău.
 
 ## Întrebări despre urmărirea DAO
 
@@ -96,7 +96,7 @@ Peek poate trimite notificări pentru "Every scan", "Important steps" sau "Deliv
 
 Vino cu numărul coletului și codul de ridicare din 5 cifre trimis de DAO prin SMS și e-mail (sau redirecționează mesajul persoanei care îl ridică pentru tine). Poți verifica programul și locațiile din toată Danemarca pe harta daoSHOP de pe dao.as.
 
-### Ce înseamnă «Parcel has arrived at terminal»?
+### Ce înseamnă „Parcel has arrived at terminal”?
 
 Coletul a ajuns într-unul dintre terminalele de sortare DAO și se află încă în tranzit către depozitul tău local sau punctul daoSHOP.
 

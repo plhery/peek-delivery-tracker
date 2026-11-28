@@ -6,7 +6,7 @@ published: 2026-11-27
 updated: 2026-11-27
 ---
 
-Az ORLEN Paczka (korábban Paczka w RUCHu) egy lengyel csomagautomata- és átvételi pont hálózat, amelyet széles körben használnak lengyel webáruházak, az Allegro és a Vinted. Illeszd be a 13 számjegyű, `210`-zel kezdődő csomagszámodat a fenti mezőbe (vagy kövesd az orlenpaczka.pl oldalon) — alább megtalálod az ORLEN Paczka lengyel nyelvű státuszainak magyar fordítását, a 3 munkanapos átvételi határidőt, a vasárnapi nyitvatartást és az ügyfélszolgálati elérhetőségeket.
+Az ORLEN Paczka (korábban Paczka w RUCHu) egy lengyel csomagautomata- és átvételi pont hálózat, amelyet lengyel webáruházak, az Allegro és a Vinted használnak. Illeszd be a 13 számjegyű, `210`-zel kezdődő csomagszámodat a fenti mezőbe (vagy kövesd az orlenpaczka.pl oldalon) — alább megtalálod az ORLEN Paczka lengyel nyelvű státuszainak magyar fordítását, a 3 munkanapos átvételi határidőt, a vasárnapi nyitvatartást és az ügyfélszolgálati elérhetőségeket.
 
 ## ORLEN Paczka csomagszám és hol találod meg
 
@@ -69,7 +69,7 @@ Az ORLEN a másnapi kézbesítést emeli ki a szolgáltatás egyik erősségeké
 
 Allegro Delivery csomagnál az Allegrót keresd, amely ezek ügyfélszolgálatát látja el. Webáruházas rendelésnél először a bolthoz fordulj. Az ORLEN Paczka saját kapcsolati oldala a lengyel orlenpaczka.pl oldalon a „Kontakt” menüpont alatt található. A csatornák mind lengyel nyelvűek:
 
-- **Telefonos ügyfélszolgálat:** `22 33 33 999`, a szolgáltatód tarifája szerint. Hétfőtől péntekig 7:00–22:00, szombaton 9:00–19:00 (a GYIK 16:00-t említ), vasárnap 10:00–16:00 lengyel idő szerint.
+- **Telefonos ügyfélszolgálat:** 22 33 33 999, a szolgáltatód tarifája szerint. Hétfőtől péntekig 7:00–22:00, szombaton 9:00–19:00 (a GYIK 16:00-t említ), vasárnap 10:00–16:00 lengyel idő szerint.
 - **[Kapcsolatfelvételi űrlap](https://www.orlenpaczka.pl/formularz-kontaktowy/)**, például ha nincs átvételi kódod vagy eltűnt a csomag.
 - **[Reklamációs űrlap](https://www.orlenpaczka.pl/reklamacje/)** elvesztés, sérülés vagy késés esetére feladóknak, címzetteknek és fizetőknek.
 
@@ -77,21 +77,21 @@ Az ORLEN Paczka nem küld linkeket SMS-ben, és soha nem kér linkes utólagos f
 
 ## ORLEN Paczka csomag követése a Peekkel
 
-A [Peek](/) felismeri a 13 számjegyű, `210`-zel kezdődő, érvényes ellenőrző számjegyű kódokat. Más fuvarozók is használnak ilyen formátumot, ezért egyszerre megkérdezi az ORLEN Paczkát, az Ukrposhtát és a [FAN Couriert](carrier:fan-courier), majd a Delhiveryt, az Econtot, az Ozon Logisticsot és a Paquetexpresst (saját országukon kívül) csak akkor, ha az első három nem ismeri a számot. A Peek "ORLEN Paczka has this parcel." szöveget mutat, amikor egyedül az ORLEN Paczka ismeri. Más 2-vel vagy 3-mal kezdődő 13 számjegyű kódnál válaszd az ORLEN Paczkát a "Change" ("Change carrier" már hozzáadott csomagnál) gombbal, vagy illeszd be a 13 jegyű számot tartalmazó orlenpaczka.pl linket. A 7 és 10 jegyű feladási kódok nem követhetők a Peekben, az `AD` számok pedig nem az ORLEN Paczkához tartoznak.
+A [Peek](/) felismeri a 13 számjegyű, `210`-zel kezdődő, érvényes ellenőrző számjegyű kódokat. Más fuvarozók is használnak ilyen formátumot, ezért egyszerre megkérdezi az ORLEN Paczkát, az Ukrposhtát és a [FAN Couriert](carrier:fan-courier), majd a Delhiveryt, az Econtot, az Ozon Logisticsot és a Paquetexpresst (saját országukon kívül) csak akkor, ha az első három nem ismeri a számot. A Peek „ORLEN Paczka has this parcel.” szöveget mutat, amikor egyedül az ORLEN Paczka ismeri. Más 2-vel vagy 3-mal kezdődő 13 számjegyű kódnál válaszd az ORLEN Paczkát a „Change” („Change carrier” már hozzáadott csomagnál) gombbal, vagy illeszd be a 13 jegyű számot tartalmazó orlenpaczka.pl linket. A 7 és 10 jegyű feladási kódok nem követhetők a Peekben, az `AD` számok pedig nem az ORLEN Paczkához tartoznak.
 
-A Peek szó szerint jeleníti meg a lengyel szövegeket, térképen mutatja az elosztóközpont városát (ahol meg van nevezve), valamint az átvétel idejét; az időpontokat varsói idő szerint olvassa és az eszközöd időzónájában jeleníti meg, a peektracker.com oldalon és az iPhone/Android alkalmazásokban a "Times are in your time zone:" sorral és a zóna nevével a végén. Átvételi pont neve, várható kézbesítés, súly vagy feladó nem érkezik, a visszaküldési csomagszám pedig kimarad. Más ország fuvarozójának átadott Vinted-csomagot a Peek nem követ tovább, az tranzitban marad. A már átvett csomagok néhány hónap után eltűnnek az ORLEN Paczka követéséből.
+A Peek szó szerint jeleníti meg a lengyel szövegeket, térképen mutatja az elosztóközpont városát (ahol meg van nevezve), valamint az átvétel idejét; az időpontokat varsói idő szerint olvassa és az eszközöd időzónájában jeleníti meg, a peektracker.com oldalon és az iPhone/Android alkalmazásokban a „Times are in your time zone:” sorral és a zóna nevével a végén. Átvételi pont neve, várható kézbesítés, súly vagy feladó nem érkezik, a visszaküldési csomagszám pedig kimarad. Más ország fuvarozójának átadott Vinted-csomagot a Peek nem követ tovább, az tranzitban marad. A már átvett csomagok néhány hónap után eltűnnek az ORLEN Paczka követéséből.
 
-Amíg nyitva tartod a csomagot a Peekben, legfeljebb 10 percenként frissít. Mivel az ORLEN Paczka nem ad kézbesítési napot és nem küld kiszállítási státuszt, a Peek sosem vált kézbesítési napi vagy 2 perces ritmusra. Egyébként óránként ellenőriz. 12 órányi változatlan "Label created" vagy "Received by carrier" állapot, illetve két hír nélküli nap után mindig óránként ellenőriz, hét napnyi változatlan "Label created" után pedig 6 óránként.
+Amíg nyitva tartod a csomagot a Peekben, legfeljebb 10 percenként frissít. Mivel az ORLEN Paczka nem ad kézbesítési napot és nem küld kiszállítási státuszt, a Peek sosem vált kézbesítési napi vagy 2 perces ritmusra. Egyébként óránként ellenőriz. 12 órányi változatlan „Label created” vagy „Received by carrier” állapot, illetve két hír nélküli nap után mindig óránként ellenőriz, hét napnyi változatlan „Label created” után pedig 6 óránként.
 
-Ha a legfrissebb beolvasás négy napos és a csomag még mindig "Label created", "Received by carrier" vagy "In transit" állapotú, a Peek megjelöli a napjával ("No tracking update since Mon 12 Oct"), és megmutatja a "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking ORLEN Paczka." üzenetet a "Get help from ORLEN Paczka" kapcsolati hivatkozással. Három hét után új beolvasás nélkül a szöveg: "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking ORLEN Paczka."
+Ha a legfrissebb beolvasás négy napos és a csomag még mindig „Label created”, „Received by carrier” vagy „In transit” állapotú, a Peek megjelöli a napjával („No tracking update since Mon 12 Oct”), és megmutatja a „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking ORLEN Paczka.” üzenetet a „Get help from ORLEN Paczka” kapcsolati hivatkozással. Három hét után új beolvasás nélkül a szöveg: „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking ORLEN Paczka.”
 
-A Peek értesíthet "Every scan", "Important steps" vagy "Delivery only" módban.
+A Peek értesíthet „Every scan”, „Important steps” vagy „Delivery only” módban.
 
 ## Kérdések az ORLEN Paczka csomagkövetésről
 
 ### Mi az ORLEN Paczka és hogyan néz ki a csomagszáma?
 
-Az ORLEN Paczka egy 2021-ben elindított lengyel csomagautomata- és átvételi pont hálózat (korábban Paczka w RUCHu, a RUCH logisztikai partnerrel). Csomagszáma **13 számjegy, amely `210`-zel kezdődik** (a 10 jegyű leadási kódok és az Allegro Delivery `AD` számok külön követhetők).
+Az ORLEN Paczka egy 2021-ben elindított lengyel csomagautomata- és átvételi pont hálózat (korábban Paczka w RUCHu, a RUCH logisztikai partnerrel). Csomagszáma **13 számjegy, amely `210`-zel kezdődik** (a 10 jegyű kód a feladó leadási kódja, nem követési szám, az Allegro Delivery `AD` számok pedig az Allegro alkalmazásban vagy az allegro.pl oldalon követhetők).
 
 ### Követhetem az ORLEN Paczkát magyarul vagy angolul?
 
@@ -103,11 +103,11 @@ Az 5 vagy 6 jegyű kódot tartalmazó első SMS-től vagy e-mailtől számítva 
 
 ### Szállít külföldre az ORLEN Paczka (pl. nemzetközi Vinted-rendeléseknél)?
 
-Az ORLEN Paczka önállóan csak Lengyelországon belül kézbesít (webáruházas csomagok 98%-ánál 1 munkanap; magán- és Vinted-csomagoknál 1–3 munkanap). A határon átnyúló Vinted-csomagok a `Paczka przekazana do przewoźnika w innym kraju` (`Paczka w innym kraju`) üzenetet mutatják, és a Vinted alkalmazásban követhetők tovább.
+Az ORLEN Paczka önállóan csak Lengyelországon belül kézbesít (webáruházas csomagok 98%-ánál 1 munkanap; magán- és Vinted-csomagoknál 1–3 munkanap). A határon átnyúló Vinted-csomagok a `Paczka przekazana do przewoźnika w innym kraju. Dalszą drogę możesz śledzić w aplikacji Vinted` (`Paczka w innym kraju`) üzenetet mutatják, és a Vinted alkalmazásban követhetők tovább.
 
 ### Hogyan érhetem el az ORLEN Paczkát vagy tehetek reklamációt?
 
-Hívd a lengyel `22 33 33 999` számot (H–P 7:00–22:00, Szo 9:00–19:00, V 10:00–16:00 varsói idő szerint), vagy használd a [kapcsolatfelvételi űrlapot](https://www.orlenpaczka.pl/formularz-kontaktowy/) / [reklamációs űrlapot](https://www.orlenpaczka.pl/reklamacje/) 12 hónapon belül (rejtett sérülésnél 7 nap). Allegro Delivery csomagoknál az Allegrót keresd.
+Hívd a lengyel 22 33 33 999 számot (H–P 7:00–22:00, Szo 9:00–19:00, V 10:00–16:00 varsói idő szerint), vagy használd a [kapcsolatfelvételi űrlapot](https://www.orlenpaczka.pl/formularz-kontaktowy/) / [reklamációs űrlapot](https://www.orlenpaczka.pl/reklamacje/) (reklamáció a feladástól számított 12 hónapon belül, rejtett sérülésnél 7 nap). Allegro Delivery csomagoknál az Allegrót keresd.
 
 :::sources
 - [ORLEN Paczka: Najczęściej zadawane pytania](https://www.orlenpaczka.pl/faq/) – pickup code (5 or 6 digits, SMS, email, QR, app), collection by someone else, no code, wrong phone number, 3 working days from the first SMS or email and return to the sender or the drop-off point, Sunday pickup, no cash on delivery, delivery times (1 working day for 98% of shop parcels, 1–3 days from private senders and Vinted), refund after 4 working days, lost parcels, liability up to 500 zł (private customers) and 5,000 zł (businesses), deliveries in Poland only, helpline and hours, no links in SMS or payment requests by link

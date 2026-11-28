@@ -6,7 +6,7 @@ published: 2026-11-27
 updated: 2026-11-27
 ---
 
-ORLEN Paczka (tidigare Paczka w RUCHu) är ett polskt nätverk av paketskåp och paketombud som används flitigt av polska webbutiker, Allegro och Vinted. Klistra in ditt 13-siffriga paketnummer som börjar med `210` i fältet ovan (eller spåra paketet på orlenpaczka.pl) — nedan hittar du svenska översättningar av ORLEN Paczkas polska statusar, hämtningsfristen på 3 arbetsdagar, söndagsöppna skåp och kundtjänstnummer.
+ORLEN Paczka (tidigare Paczka w RUCHu) är ett polskt nätverk av paketskåp och paketombud som används av polska webbutiker, Allegro och Vinted. Klistra in ditt 13-siffriga paketnummer som börjar med `210` i fältet ovan (eller spåra paketet på orlenpaczka.pl) — nedan hittar du svenska översättningar av ORLEN Paczkas polska statusar, hämtningsfristen på 3 arbetsdagar, söndagsöppna skåp och kundtjänstnummer.
 
 ## ORLEN Paczka spårningsnummer och var du hittar det
 
@@ -33,7 +33,7 @@ ORLEN Paczkas spårning ger varje steg ett datum, en tid och en polsk text.
 | ORLEN Paczkas status | Vad det betyder för dig |
 | --- | --- |
 | `Twoja paczka jest w trakcie przygotowania przez nadawcę` | Avsändaren har skapat paketet. ORLEN Paczka har det inte ännu. |
-| `Paczka nadana w punkcie` | Avsändaren har lämnat in paketet hos ett ombud eller skåp. |
+| `Paczka nadana w punkcie` | Avsändaren har lämnat in paketet på ett inlämningsställe. |
 | `Twoja paczka została odebrana przez kuriera i ruszyła w drogę` | En kurir har hämtat upp paketet hos avsändaren. |
 | `Twoja paczka została przyjęta w sortowni` | På en regional sorteringsterminal, som namnges efter texten. |
 | `W sortowni centralnej` | På den centrala sorteringsterminalen. |
@@ -43,7 +43,7 @@ ORLEN Paczkas spårning ger varje steg ett datum, en tid och en polsk text.
 | `Paczka przekazana do przewoźnika w innym kraju. Dalszą drogę możesz śledzić w aplikacji Vinted` | Ett Vinted-paket som lämnats över till en transportör i ett annat land. Följ det i Vinted-appen. |
 | `Cieszymy się, że Twoja paczka została już odebrana z punktu odbioru` | Utlämnat från ombudet eller skåpet. |
 
-Vissa paket visar äldre formuleringar för samma steg: `Paczka przygotowywana przez nadawcę`, `Paczka przyjęta w sortowni regionalnej` (utan ortnamn) och `Odebrana przez Klienta`, där ”Klient” är du. Överlämningen till utlandet skrivs ibland kortare: `Paczka w innym kraju`. Den första raden är en ”label created”-status: paketet rör sig inte ännu.
+Vissa paket visar äldre formuleringar för samma steg: `Paczka przygotowywana przez nadawcę`, `Paczka przyjęta w sortowni regionalnej` (utan ortnamn) och `Odebrana przez Klienta`, där "Klient" är du. Överlämningen till utlandet skrivs ibland kortare: `Paczka w innym kraju`. Den första raden är en "label created"-status: paketet rör sig inte ännu.
 
 ## ORLEN Paczka paketskåp och utlämningsställen
 
@@ -53,7 +53,7 @@ ORLEN Paczka levererar till paketskåp (automat paczkowy) — många står vid b
 
 **Hur länge paketet ligger kvar.** Du har 3 arbetsdagar, räknat från det första SMS:et eller mejlet med hämtningskoden. Därefter går ett e-handelspaket tillbaka till avsändaren och ett privatpaket — till exempel från Vinted — tillbaka till inlämningsstället. Allegro ger samma 3 arbetsdagar för Allegro Delivery-paket hos ORLEN Paczkas skåp och ombud; outhämtade paket returneras till säljaren.
 
-**Allegro Delivery-paket** sköts av Allegro, som ansvarar för leverans och kundtjänst: aviseringen kommer via e-post, SMS eller i Allegro-appen, och du spårar och hämtar dem i Allegro-appen under ”Moje przesyłki”.
+**Allegro Delivery-paket** sköts av Allegro, som ansvarar för leverans och kundtjänst: aviseringen kommer via e-post, SMS eller i Allegro-appen, och du spårar och hämtar dem i Allegro-appen under "Moje przesyłki".
 
 ## ORLEN Paczka leveranstid, försening, skada och reklamation
 
@@ -67,9 +67,9 @@ ORLEN framhåller leverans nästa dag som en av tjänstens styrkor, och ORLEN Pa
 
 ## ORLEN Paczka kundtjänst och kontakt
 
-För ett Allegro Delivery-paket kontaktar du Allegro, som sköter kundtjänsten för dessa paket. Vid en butiksorder börjar du med butiken. ORLEN Paczkas egen kontaktsida finns på den polska sajten orlenpaczka.pl under ”Kontakt”. Alla kanaler är på polska:
+För ett Allegro Delivery-paket kontaktar du Allegro, som sköter kundtjänsten för dessa paket. Vid en butiksorder börjar du med butiken. ORLEN Paczkas egen kontaktsida finns på den polska sajten orlenpaczka.pl under "Kontakt". Alla kanaler är på polska:
 
-- **Telefon:** `22 33 33 999` till din operatörs taxa. Måndag–fredag 7:00–22:00, lördag 9:00–19:00 (FAQ säger till 16:00) och söndag 10:00–16:00 polsk tid.
+- **Telefon:** 22 33 33 999 till din operatörs taxa. Måndag–fredag 7:00–22:00, lördag 9:00–19:00 (FAQ säger till 16:00) och söndag 10:00–16:00 polsk tid.
 - **[Kontaktformulär](https://www.orlenpaczka.pl/formularz-kontaktowy/)**, till exempel om du saknar hämtningskod eller paketet är försvunnet.
 - **[Reklamationsformulär](https://www.orlenpaczka.pl/reklamacje/)** för förlust, skada eller försening, öppet för avsändare, mottagare och betalare.
 
@@ -91,7 +91,7 @@ Peek kan skicka notiser för "Every scan", "Important steps" eller "Delivery onl
 
 ### Vad är ORLEN Paczka och hur ser spårningsnumret ut?
 
-ORLEN Paczka är ett polskt nätverk av paketskåp och utlämningsställen som lanserades 2021 (tidigare Paczka w RUCHu, med RUCH som logistikpartner). Paketnumret består av **13 siffror som börjar med `210`** (10-siffriga inlämningskoder och Allegro Delivery `AD`-nummer spåras separat).
+ORLEN Paczka är ett polskt nätverk av paketskåp och utlämningsställen som lanserades 2021 (tidigare Paczka w RUCHu, med RUCH som logistikpartner). Paketnumret består av **13 siffror som börjar med `210`** (den 10-siffriga koden är avsändarens inlämningskod, inte ett spårningsnummer, och Allegro Delivery `AD`-nummer spåras i Allegro-appen eller på allegro.pl).
 
 ### Kan jag spåra ORLEN Paczka på svenska eller engelska?
 
@@ -103,11 +103,11 @@ Du har **3 arbetsdagar** från det första SMS:et eller mejlet med den 5- eller 
 
 ### Levererar ORLEN Paczka utomlands, till exempel för Vinted-paket?
 
-ORLEN Paczka levererar själv bara inom Polen (1 arbetsdag för 98 % av butikspaketen; 1–3 arbetsdagar för privata paket och Vinted). Gränsöverskridande Vinted-paket visar `Paczka przekazana do przewoźnika w innym kraju` (`Paczka w innym kraju`) och fortsätter i Vinted-appen.
+ORLEN Paczka levererar själv bara inom Polen (1 arbetsdag för 98 % av butikspaketen; 1–3 arbetsdagar för privata paket och Vinted). Gränsöverskridande Vinted-paket visar `Paczka przekazana do przewoźnika w innym kraju. Dalszą drogę możesz śledzić w aplikacji Vinted` (`Paczka w innym kraju`) och fortsätter i Vinted-appen.
 
 ### Hur kontaktar jag ORLEN Paczka eller gör en reklamation?
 
-Ring den polska telefonlinjen `22 33 33 999` (mån–fre 7:00–22:00, lör 9:00–19:00, sön 10:00–16:00 Warszawa-tid) eller använd [kontaktformuläret](https://www.orlenpaczka.pl/formularz-kontaktowy/) / [reklamationsformuläret](https://www.orlenpaczka.pl/reklamacje/) inom 12 månader (7 dagar för dolda skador). För Allegro Delivery-paket kontaktar du Allegro.
+Ring den polska telefonlinjen 22 33 33 999 (mån–fre 7:00–22:00, lör 9:00–19:00, sön 10:00–16:00 Warszawa-tid) eller använd [kontaktformuläret](https://www.orlenpaczka.pl/formularz-kontaktowy/) / [reklamationsformuläret](https://www.orlenpaczka.pl/reklamacje/) (en reklamation inom 12 månader från inlämningen, 7 dagar för dolda skador). För Allegro Delivery-paket kontaktar du Allegro.
 
 :::sources
 - [ORLEN Paczka: Najczęściej zadawane pytania](https://www.orlenpaczka.pl/faq/) – pickup code (5 or 6 digits, SMS, email, QR, app), collection by someone else, no code, wrong phone number, 3 working days from the first SMS or email and return to the sender or the drop-off point, Sunday pickup, no cash on delivery, delivery times (1 working day for 98% of shop parcels, 1–3 days from private senders and Vinted), refund after 4 working days, lost parcels, liability up to 500 zł (private customers) and 5,000 zł (businesses), deliveries in Poland only, helpline and hours, no links in SMS or payment requests by link

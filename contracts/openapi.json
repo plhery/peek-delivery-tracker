@@ -54782,7 +54782,8 @@
     "intime-hr": {
       "displayName": "In Time Croatia",
       "aliases": [
-        "IN TIME d.o.o."
+        "IN TIME d.o.o.",
+        "Intime Express"
       ],
       "countries": [
         "HR"
@@ -54792,7 +54793,7 @@
       "timezone": "Europe/Zagreb",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "intime-hr"
       },
       "trackingUrlTemplate": "https://www.in-time.hr/pracenje?id={trackingNumber}",
       "linkRules": [
@@ -76094,6 +76095,145 @@
       ],
       "trackingSearchUrl": "https://www.jtexpress.sg/trackmyparcel",
       "helpUrl": "https://www.jtexpress.sg/contact-us"
+    },
+    "dragonfe": {
+      "displayName": "DF Logistics",
+      "aliases": [
+        "DF物流",
+        "DragonFight",
+        "Qingdao DragonFight International Supply Chain",
+        "安贞吉",
+        "青岛安贞吉国际供应链服务有限公司"
+      ],
+      "countries": [
+        "JP",
+        "KR",
+        "CN"
+      ],
+      "color": "#F29417",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "dragonfe"
+      },
+      "linkRules": [
+        {
+          "domains": [
+            "dragonfe.com",
+            "www.dragonfe.com"
+          ],
+          "path": "^/index\\.php/Home/Index/getExpTrack/expNo/([A-Za-z0-9]{8,30})/?$"
+        }
+      ],
+      "detectionRules": []
+    },
+    "nanbei-express": {
+      "displayName": "Nanbei Express",
+      "aliases": [
+        "Anhui Nanbei Express",
+        "南北快运",
+        "安徽南北快运有限责任公司",
+        "蚁链南北快运"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#183883",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "nanbei-express"
+      },
+      "linkRules": [],
+      "detectionRules": []
+    },
+    "omg-express": {
+      "displayName": "OMG Express",
+      "aliases": [
+        "OMG国际速运",
+        "OMG International Express"
+      ],
+      "countries": [
+        "US",
+        "CN"
+      ],
+      "color": "#0F766E",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "omg-express"
+      },
+      "trackingUrlTemplate": "https://omg-exp.com/tracking/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "omg-exp.com",
+            "www.omg-exp.com"
+          ],
+          "path": "^/tracking/(OMG\\d{8,12})/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://omg-exp.com/tracking"
+    },
+    "tobkk": {
+      "displayName": "Thai Bear Logistics",
+      "aliases": [
+        "泰熊物流",
+        "Tobkk",
+        "Thai Bear"
+      ],
+      "countries": [
+        "CN",
+        "TH"
+      ],
+      "color": "#0084FF",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "tobkk"
+      },
+      "trackingUrlTemplate": "https://www.tobkk.cn/track.php?order_num={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "tobkk.cn",
+            "www.tobkk.cn"
+          ],
+          "pathPattern": "^/track(?:-int)?\\.php$",
+          "params": [
+            "order_num"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.tobkk.cn/track.php"
+    },
+    "yadex": {
+      "displayName": "Yadex",
+      "aliases": [
+        "Yuananda Express",
+        "源安达",
+        "源安达快递",
+        "源之安达",
+        "东莞市源之安达速运有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#0081CB",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "yadex"
+      },
+      "linkRules": [],
+      "detectionRules": []
     }
   },
   "servers": [
@@ -82650,7 +82790,12 @@
           "emirates-skycargo",
           "korean-air-cargo",
           "lufthansa-cargo",
-          "j-and-t-sg"
+          "j-and-t-sg",
+          "dragonfe",
+          "nanbei-express",
+          "omg-express",
+          "tobkk",
+          "yadex"
         ]
       },
       "Stage": {

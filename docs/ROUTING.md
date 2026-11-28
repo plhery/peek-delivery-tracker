@@ -1024,7 +1024,9 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
 A parcel often changes carrier at the border. The origin history is always kept.
 
 - Adapters can report `delivery_carrier`, `delivery_tracking_number` or an official
-  partner link. Names and links are resolved through the carrier catalog.
+  partner link. Names and links are resolved through the carrier catalog. An answer without
+  history can name them too, from a carrier that set its own scans aside once it handed the
+  parcel over (JRT to DHL).
 - With no named partner, a checksum-valid S10 number and a reported destination country can
   propose **one** national-post lookup ([catalog hints](https://github.com/plhery/universal-parcel-scraper/blob/main/core/catalog/hints.ts)).
   When the origin reports no destination, as An Post's doesn't, or cannot answer, the country

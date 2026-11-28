@@ -13,7 +13,7 @@ import { createHash } from 'node:crypto';
 import { DateTime } from 'luxon';
 import { STAGES } from '../generated/apiContract';
 import { normalizeCarrierResult, type CarrierResult } from 'universal-parcel-scraper';
-import { deliveryHandoff, hasDirectHandoffAdapter, type DeliveryHandoff } from 'universal-parcel-scraper';
+import { deliveryHandoff, hasDirectHandoffAdapter, noHistoryHandoff, type DeliveryHandoff } from 'universal-parcel-scraper';
 import {
   activeRequirements,
   AUTOMATIC_CARRIER_IDS,
@@ -3958,8 +3958,10 @@ export class TrackingSyncService {
         ));
       } catch (error) {
         // An international operator outage must not hide a confirmed local delivery, nor
-        // the post of the country a postal item is looked up from when nothing names one.
-        savedPartner = deliveryHandoff(carrierId, trackingNumber, metadata, lookupCountry);
+        // the post of the country a postal item is looked up from when nothing names one; nor the partner an answer
+        // without history names, a carrier that set its scans aside once it handed the parcel over (JRT to DHL).
+        savedPartner = deliveryHandoff(carrierId, trackingNumber, metadata, lookupCountry)
+          ?? noHistoryHandoff(carrierId, trackingNumber, error, lookupCountry);
         if (!savedPartner) throw error;
         originError = error;
         origin = { delivery_carrier: savedPartner.carrier, delivery_tracking_number: savedPartner.number };

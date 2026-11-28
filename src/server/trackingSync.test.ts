@@ -7626,6 +7626,26 @@ describe('TrackingSyncService', () => {
     });
   });
 
+  it('follows the partner an answer without history names, as a carrier sets its scans aside once it hands the parcel over', async () => {
+    const handedOver = new NoHistoryError('JRT', 'handed over', { reason: 'listed', deliveryCarrier: 'swiss-post', deliveryTrackingNumber: 'LX999999987CH' });
+    // Swiss Post scans the parcel: the check hands it over.
+    const client = fakeClient();
+    const adapter = { fetch: vi.fn().mockRejectedValueOnce(handedOver).mockResolvedValueOnce({ status: 'in_transit',
+      events: [{ time: '2026-09-10T09:00:00Z', description: 'Arrived', stage: 'in_transit' }] }) };
+    await new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-09-10T10:00:00Z'))
+      .syncPackage({ id: 'jrt-handed-over', carrier: 'jrt', tracking_number: 'JRT0000000001' });
+    expect(adapter.fetch.mock.calls.map((call) => call.slice(0, 2))).toEqual([['jrt', 'JRT0000000001'], ['swiss-post', 'LX999999987CH']]);
+    expect(client.updatePackage.mock.calls.at(-1)?.[1]).toMatchObject({ sync_status: 'ok', carrier_data: {
+      active_tracking_carrier: 'swiss-post', active_tracking_number: 'LX999999987CH', original_carrier: 'jrt' } });
+    // Swiss Post has only its record so far: the check fails as before, and the next one asks Swiss Post again.
+    const waiting = fakeClient();
+    const listed = { fetch: vi.fn().mockRejectedValueOnce(handedOver).mockResolvedValueOnce({ status: 'pending', current_stage: 'registered' }) };
+    await new TrackingSyncService(waiting as unknown as SupabaseServiceClient, listed, null, () => new Date('2026-09-10T10:00:00Z'))
+      .syncPackage({ id: 'jrt-listed', carrier: 'jrt', tracking_number: 'JRT0000000001' });
+    expect(listed.fetch.mock.calls.map((call) => call[0])).toEqual(['jrt', 'swiss-post']);
+    expect(waiting.updatePackage.mock.calls.at(-1)?.[1].carrier_data?.active_tracking_carrier).toBeUndefined();
+  });
+
   it('asks a saved partner after the first gap while the international tracker is unavailable', async () => {
     const client = fakeClient();
     const adapter = { fetch: vi.fn().mockRejectedValueOnce(new Error('Cainiao unavailable'))

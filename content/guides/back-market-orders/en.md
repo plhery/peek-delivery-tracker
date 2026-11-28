@@ -1,13 +1,13 @@
 ---
 title: Back Market order tracking: delivery, returns and problems
-description: Back Market order tracking: where to find your tracking number, UK and US carriers, missing or damaged parcels, 30-day returns and 12-month seller warranty.
+description: Back Market order tracking: where to find your tracking number, which carrier delivers, missing or damaged parcels, 30-day returns and the seller warranty.
 slug: back-market-order-tracking
 picture: A refurbished phone and a laptop with a green tag beside a delivery van, and Pip standing on the laptop.
 published: 2026-10-27
 updated: 2026-11-27
 ---
 
-Back Market is a marketplace where professional refurbishers pack and ship each order themselves — usually within 1 business day via Royal Mail, DPD, DHL, USPS, UPS or FedEx depending on your country. Your tracking number arrives within 24 hours in your shipping email and under "Orders" in your account. If a parcel is late, missing or damaged, select "Get help" on the order to contact the seller (and Back Market can step in if needed); every item includes 30-day returns and at least a 12-month seller warranty.
+Back Market is a marketplace where professional refurbishers pack and ship each order themselves, usually within 1 business day, with a carrier they choose, such as Royal Mail, DPD or DHL in the UK, USPS, UPS, FedEx or DHL Express in the US, and Australia Post in Australia. Your tracking number arrives within 24 hours in your shipping email and under "Orders" in your account. If a parcel is late, missing or damaged, select "Get help" on the order to contact the seller (and Back Market can step in if needed); every item includes 30-day returns and at least a 12-month seller warranty.
 
 ## Which countries does Back Market ship to?
 

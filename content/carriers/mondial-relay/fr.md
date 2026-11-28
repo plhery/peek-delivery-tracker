@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Mondial Relay (groupe InPost) livre en France et en Belgique en Point Relais chez des commerçants de proximité, en Locker et à domicile. Pour suivre ton colis, colle ton numéro d'expédition à 8 chiffres (ou le code-barres à 26 chiffres) dans le champ ci-dessus, ou saisis le numéro et le code postal du destinataire sur le site de Mondial Relay.
+Mondial Relay (groupe InPost) livre en France et en Belgique en Point Relais chez des commerçants de proximité, en Locker et à domicile. Pour suivre ton colis, colle dans le champ ci-dessus ton numéro d'expédition à 8 chiffres, puis le code postal de livraison, ou le code-barres à 26 chiffres ; sur le site de Mondial Relay, saisis le numéro et le code postal du destinataire.
 
 ## Numéro de suivi Mondial Relay : où le trouver
 
@@ -97,7 +97,7 @@ Pas sur le site belge de Mondial Relay, qui demande le numéro et le code postal
 
 ### Combien de jours reste un colis Mondial Relay en Point Relais ou Locker ?
 
-En Belgique comme en France (selon le tableau du site belge), le délai de garde est de 5 jours calendaires, dimanches et jours fériés compris, sans prolongation possible. Passé ce délai, le colis repart automatiquement vers l'expéditeur (point d'envoi ou vendeur).
+En Belgique, 5 jours calendaires, dimanches et jours fériés compris. Pour la France, le tableau du site belge indique aussi 5 jours, en Point Relais comme en Locker : vérifie les règles sur le site français de Mondial Relay. Selon le site belge, le délai ne peut pas être prolongé ; passé ce délai, le colis repart automatiquement vers l'expéditeur (point d'envoi ou vendeur).
 
 ### Quel est le numéro de téléphone de Mondial Relay et est-il surtaxé ?
 

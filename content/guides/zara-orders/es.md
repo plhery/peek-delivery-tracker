@@ -1,13 +1,13 @@
 ---
 title: Seguimiento de pedidos Zara: envío, entrega y problemas
-description: Seguimiento pedido Zara en España: cómo verlo en tu cuenta o como invitado, plazos y precios de envío, devolución gratis en 30 días y teléfono de atención.
+description: Seguimiento pedido Zara en España: cómo verlo en tu cuenta o como invitado, plazos y precios de envío, devoluciones en 30 días y teléfono de atención.
 slug: seguimiento-pedido-zara
 picture: Una bolsa de papel con asas de cuerda junto a una furgoneta de reparto, y Pip asomándose desde dentro de la bolsa.
 published: 2026-10-25
 updated: 2026-11-27
 ---
 
-Para seguir un pedido de Zara en España, entra en tu cuenta en el apartado «Compras» o abre el enlace de cualquiera de los correos de Zara si compraste como invitado. Zara no indica de antemano qué transportista lleva cada envío: si se retrasa o consta como `Entregado a cliente` sin haber llegado, contacta con Zara (chat, WhatsApp o 900 814 900) para que lo revise con la empresa de transporte. Además tienes 30 días desde el envío para devolverlo gratis en tienda o en un punto de entrega.
+Para seguir un pedido de Zara en España, entra en tu cuenta en el apartado «Compras» o abre el enlace de cualquiera de los correos de Zara si compraste como invitado. Zara no dice qué transportista lleva el pedido: si se retrasa o consta como `Entregado a cliente` sin haber llegado, contacta con Zara (chat, WhatsApp o 900 814 900) para que lo revise con la empresa de transporte. Además tienes 30 días desde el envío para devolverlo gratis en tienda o en un punto de entrega.
 
 ## ¿Qué transportista entrega mi pedido de Zara en España?
 

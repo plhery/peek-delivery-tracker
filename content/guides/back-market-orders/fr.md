@@ -7,7 +7,7 @@ published: 2026-10-27
 updated: 2026-11-27
 ---
 
-Sur Back Market, chaque commande est préparée et expédiée directement par un reconditionneur professionnel (sous 1 jour ouvré, avec Chronopost, Colissimo, DHL, FedEx ou UPS selon le pays). Tu reçois le numéro de suivi sous 24 heures dans « Mes commandes » et dans l'e-mail d'expédition. Si un colis tarde, disparaît ou arrive abîmé, clique sur « Obtenir de l'aide » sur la commande pour contacter le vendeur (Back Market peut intervenir si besoin) ; tu as 30 jours pour un retour et une garantie commerciale d'au moins 12 mois.
+Sur Back Market, chaque commande est préparée et expédiée directement par un reconditionneur professionnel (en général sous 1 jour ouvré, avec le transporteur de son choix, par exemple Chronopost, Colissimo ou DHL en France, DHL, FedEx ou UPS en Belgique). Tu reçois le numéro de suivi sous 24 heures dans « Mes commandes » et dans l'e-mail d'expédition. Si un colis tarde, disparaît ou arrive abîmé, clique sur « Obtenir de l'aide » sur la commande pour contacter le vendeur (Back Market peut intervenir si besoin) ; tu as 30 jours pour un retour et une garantie commerciale d'au moins 12 mois.
 
 ## Dans quels pays Back Market livre-t-il ?
 

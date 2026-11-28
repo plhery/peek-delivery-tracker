@@ -6,7 +6,7 @@ published: 2026-11-03
 updated: 2026-11-27
 ---
 
-SPX Express Singapore (also known as Shopee Xpress or Shopee Express) delivers domestic and overseas Shopee orders across Singapore, including parcels shipped from China through Shopee's Hong Kong sorting centre. Paste the `SPXSG` (or `SG`) tracking number from your Shopee order's shipping information in the box above, or look it up on spx.sg.
+SPX Express Singapore (also known as Shopee Xpress or Shopee Express) delivers domestic and overseas Shopee orders across Singapore, including parcels shipped from China through Shopee's Hong Kong sorting centre. Paste the tracking number from your Shopee order's shipping information in the box above, the `SPXSG` one if you have it, or look it up on spx.sg.
 
 ## SPX Express Singapore tracking number: what it looks like
 
@@ -114,7 +114,7 @@ Your parcel from abroad is in Singapore, and it has been handed to the local del
 
 ### Do I pay GST on overseas SPX Express parcels into Singapore?
 
-Under Singapore Customs' rules, items priced at S$400 or less from a GST-registered overseas seller or marketplace already include GST at checkout. If the seller is not GST-registered and the shipment's total CIF value exceeds S$400, GST is collected at import; ICA can hold parcels over S$400 without an invoice or with controlled goods.
+Under Singapore Customs' rules, items priced at S$400 or less from a GST-registered overseas seller or marketplace already include GST at checkout. If the seller is not GST-registered and the shipment's total CIF value exceeds S$400, GST is collected at import; ICA can hold a courier parcel with dutiable, controlled or prohibited goods, or one worth over S$400 with no invoice.
 
 ### Why is my SPX Express Singapore tracking not updating?
 

@@ -6,7 +6,7 @@ published: 2026-11-02
 updated: 2026-11-27
 ---
 
-Russian Post (Почта России, Pochta Rossii, pochta.ru) is Russia's national postal service, carrying parcels both within Russia and internationally to and from abroad. Paste your `RU` international postal code or 14-digit `80…` tracking number in the box above to read Russian Post's tracker in English and follow hand-offs with partner posts.
+Russian Post (Почта России, Pochta Rossii, pochta.ru) is Russia's national postal service, carrying parcels within Russia and to and from abroad. Paste the number the sender or the shop gave you in the box above: an `RU` number or 14 digits starting with `80` for a parcel posted with Russian Post, or the sending carrier's own number for a parcel sent to Russia. Peek reads Russian Post's tracker in English and can follow a parcel on to the post in your country.
 
 ## Russian Post tracking number: what it looks like
 
@@ -104,7 +104,7 @@ An international one is two letters, nine digits and `RU`, such as `RR482910576R
 
 ### What do Russian Post statuses like Прибыло в место вручения or Выпущено таможней mean?
 
-When Peek reads Russian Post steps in Russian (for example via Qwintry), `Выпущено таможней` means released by customs ("In transit"), `Прибыло в место вручения` means arrived at the local delivery post office, `Передано почтальону` means out for delivery, and `Вручение адресату` means delivered.
+On Qwintry's tracker, where Peek shows Russian Post's steps in Russian, `Выпущено таможней` means released by customs ("In transit"), `Прибыло в место вручения` means arrived at the post office that will deliver it or hand it over, `Передано почтальону` means out for delivery, and `Вручение адресату` means delivered.
 
 ### Why don't the steps in Peek match pochta.ru?
 
@@ -112,7 +112,7 @@ Peek reads Russian Post's tracker in English, so it shows Russian Post's English
 
 ### Can Peek track parcels sent to or from Russia with another country's post?
 
-Yes. For an `RU` parcel leaving Russia, Peek also checks the destination country's national post (such as USPS, Royal Mail, An Post, Canada Post or Australia Post) and follows it there once that post logs a scan at least as recent as Russian Post's latest. For a parcel sent to Russia, Peek follows the sending carrier and switches to Russian Post when that tracking names Russian Post.
+Yes. For an `RU` number filed under Russian Post, Peek asks the post of the country the parcel is going to, if it reads that post's own tracking, as it does for USPS, Royal Mail, An Post, Canada Post and Australia Post, and follows the parcel there once that post shows a scan at least as recent as Russian Post's latest. For a parcel sent to Russia, Peek follows the sending carrier; if that tracking names Russian Post as the company that delivers it, Peek asks Russian Post's tracker too and moves the parcel there once it shows a scan at least as recent.
 
 :::sources
 - [Universal Parcel Scraper: Russian Post](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/russian-post) – names, the 80 and RU number shapes with their check digits and weak matches, the tracker Peek reads and its English steps, places, destination and stages, help page

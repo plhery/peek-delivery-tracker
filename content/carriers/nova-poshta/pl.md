@@ -6,7 +6,7 @@ published: 2026-10-12
 updated: 2026-11-27
 ---
 
-Nova Poshta — działająca w Polsce jako **Nova Post** (NOVA POST POLAND) — to ukraińska firma kurierska z własnymi oddziałami w Polsce oraz dostawą kurierem i do Paczkomatów InPost. Aby sprawdzić przesyłkę z Ukrainy lub międzynarodową, wklej 14-cyfrowy numer listu przewozowego (albo międzynarodowy `SH`/`TN`) w pole powyżej lub wpisz go na [polskiej stronie śledzenia Nova Post](https://novapost.com/pl-pl/tracking/).
+Nova Poshta — działająca w Polsce jako **Nova Post** (NOVA POST POLAND) — to ukraińska firma kurierska z własnymi oddziałami w Polsce oraz dostawą kurierem i do Paczkomatów InPost. Aby sprawdzić przesyłkę z Ukrainy lub międzynarodową, wklej numer listu przewozowego (albo międzynarodowy `SH`/`TN`) w pole powyżej lub wpisz go na [polskiej stronie śledzenia Nova Post](https://novapost.com/pl-pl/tracking/).
 
 ## Numer przesyłki Nova Post: list przewozowy
 

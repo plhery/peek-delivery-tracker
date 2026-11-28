@@ -6,7 +6,7 @@ published: 2026-11-02
 updated: 2026-11-27
 ---
 
-CDEK (СДЭК, also spelled SDEK) is a courier and logistics network listed in Peek's catalog across Russia, Kazakhstan, Belarus and Serbia, delivering by courier to your door, to pickup points and to parcel lockers. Paste your CDEK order number (or `my.cdek.ru` link) in the box above to see your parcel's status in English alongside translations of CDEK's Russian scan lines.
+CDEK (СДЭК, also spelled SDEK) is a courier and logistics network listed in Peek's catalog across Russia, Kazakhstan, Belarus and Serbia, delivering by courier to your door, to pickup points and to parcel lockers. Paste your CDEK order number (or `my.cdek.ru` link) in the box above to see your parcel's status in English and CDEK's Russian scan lines, explained in the table below.
 
 ## CDEK tracking number: what it looks like
 
@@ -109,11 +109,11 @@ CDEK (also written SDEK or CDEK Express). Its official order tracking site is `m
 
 ### What does a CDEK order tracking number look like?
 
-Peek links 11 digits starting with `10` to CDEK (such as `10482917365`, invented), and CDEK's tracker also accepts linked external or international postal numbers of 5 to 40 letters and digits.
+Peek links 11 digits starting with `10` to CDEK (such as `10482917365`, invented), only as a weak match since other carriers have 11-digit numbers too, and CDEK's tracker also accepts linked external or international postal numbers of 5 to 40 letters and digits.
 
 ### What does "Поступил. Заберите заказ" or "Выдан курьеру" mean on CDEK?
 
-`"Поступил. Заберите заказ"` ("Ready for pickup" in Peek) means your parcel has arrived at your pickup point or parcel locker — check the address, hours and collection deadline on `my.cdek.ru`. `"Выдан курьеру"` ("Out for delivery") means the courier has taken the parcel out on a delivery run.
+`Поступил. Заберите заказ` ("Ready for pickup" in Peek) means your parcel has arrived at your pickup point or parcel locker — check the address, hours and collection deadline on `my.cdek.ru`. `Выдан курьеру` ("Out for delivery") means the courier has taken the parcel out on a delivery run.
 
 ### Can I track a CDEK parcel in English without logging in?
 

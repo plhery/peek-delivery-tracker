@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Poczta Polska to państwowy operator pocztowy, a **Pocztex** to jej usługa kurierska. Przesyłkę krajową lub zagraniczną sprawdzisz bez logowania w eMonitoringu (`poczta-polska.pl` i `pocztex.pl`) albo wklejając numer (`PX…`, 19/20 cyfr lub `…PL`) w pole powyżej. Numer nadania znajdziesz na potwierdzeniu ze sklepu oraz w SMS-ach i e-mailach z powiadomieniami Poczty Polskiej.
+Poczta Polska to państwowy operator pocztowy, a **Pocztex** to jej usługa kurierska. Przesyłkę krajową lub zagraniczną sprawdzisz bez logowania w eMonitoringu (`poczta-polska.pl` i `pocztex.pl`) albo wklejając numer w pole powyżej (Poczta Polska używa m.in. numerów `PX…`, 19- lub 20-cyfrowych i `…PL`). Numer nadania znajdziesz na potwierdzeniu ze sklepu oraz w SMS-ach i e-mailach z powiadomieniami Poczty Polskiej.
 
 ## Numer przesyłki Poczty Polskiej: gdzie go znaleźć
 
@@ -116,7 +116,7 @@ Jako odbiorca nie. Regulamin zostawia zmianę adresu lub odbiorcy nadawcy, a pac
 
 ### Jak śledzić przesyłkę zagraniczną i jaki jest numer infolinii Poczty Polskiej?
 
-Przesyłkę zagraniczną sprawdzisz tym samym numerem w eMonitoringu (po statusie `Przyjęta w kraju przeznaczenia` Poczta Polska odsyła na stronę operatora w kraju odbiorcy). Infolinia Poczty Polskiej to (+48) 438 420 600 (pn.–pt. 8:00–20:00), a Pocztex: 804 104 104 lub +48 43 842 0 842 (również soboty 8:00–16:00).
+Przesyłkę zagraniczną sprawdzisz tym samym numerem w eMonitoringu (gdy po statusie `Przyjęta w kraju przeznaczenia` eMonitoring nie pokazuje dalszych zdarzeń, Poczta Polska odsyła na stronę operatora w kraju odbiorcy). Infolinia Poczty Polskiej to (+48) 438 420 600 (pn.–pt. 8:00–20:00), a Pocztex: 804 104 104 lub +48 43 842 0 842 (również soboty 8:00–16:00).
 
 :::sources
 - [Poczta Polska: Śledź przesyłkę](https://www.poczta-polska.pl/sledzenie-przesylek/) – format numeru, zakres śledzenia, operatorzy zagraniczni, pełnomocnictwo do zgłoszenia celnego

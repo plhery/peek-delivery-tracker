@@ -6,7 +6,7 @@ published: 2026-10-15
 updated: 2026-11-27
 ---
 
-Aramex New Zealand (formerly Fastway Couriers) is a franchise courier network delivering parcels from Kaitaia to Bluff, with rural addresses onforwarded through NZ Post. Paste your 12-character label number in the box above or look it up on [aramex.co.nz](https://www.aramex.co.nz/tools/track/); the number comes from the sender's shipping email or a missed-delivery calling card.
+Aramex New Zealand (formerly Fastway Couriers) is a franchise courier network delivering parcels from Kaitaia to Bluff, with rural addresses onforwarded through NZ Post. Paste the label number in the box above or look it up on [aramex.co.nz](https://www.aramex.co.nz/tools/track/); the number comes from the sender's shipping email or a missed-delivery calling card.
 
 ## Aramex NZ tracking number: format and where to find it
 
@@ -103,7 +103,7 @@ Aramex aims for overnight within an island and 2 to 3 days between the North and
 
 ### What does "Delivery onforwarded" mean and how do I arrange redelivery?
 
-`"Delivery onforwarded"` means your address is rural and Aramex has handed the parcel to NZ Post. After a missed delivery, book one free redelivery to the same address or a paid redirect (or Parcel Connect pickup where offered) on Aramex's redelivery page within 7 days of the first attempt.
+`Delivery onforwarded` means your address is rural and Aramex has handed the parcel to NZ Post. After a missed delivery, book one free redelivery to the same address or a paid redirect (or Parcel Connect pickup where offered) on Aramex's redelivery page. If neither redelivery nor pickup happens within 7 days of the first attempt, Aramex's conditions let it return the parcel to the sender.
 
 ### Does Aramex NZ have an 0800 phone number?
 

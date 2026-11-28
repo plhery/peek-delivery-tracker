@@ -6,7 +6,7 @@ published: 2026-11-02
 updated: 2026-11-27
 ---
 
-Correos de Chile is Chile's national postal service, handling domestic parcels and postal online orders entering Chile from abroad. Paste your `CL` postal number or 13-digit tracking code in the box above (or look it up on www.correos.cl/seguimiento-en-linea) to follow each Spanish status in English and track hand-offs with partner posts abroad.
+Correos de Chile is Chile's national postal service, handling domestic parcels and postal online orders entering Chile from abroad. Paste the number the shop gave you in the box above: a `CL` postal number or a 13-digit tracking code for a parcel Correos de Chile numbered, which you can also look up on www.correos.cl/seguimiento-en-linea, or the sending post's own number for a parcel sent to Chile, which Peek follows with that post. Peek files the Spanish lines it knows under English stages and can follow a `CL` parcel on to the post abroad.
 
 ## Correos de Chile tracking number: what it looks like
 

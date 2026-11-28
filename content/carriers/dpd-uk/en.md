@@ -1,12 +1,12 @@
 ---
 title: DPD UK tracking: statuses, Pickup shops and contact
-description: Track a DPD UK parcel with your 14-digit number or calling card: what each status means, 1-hour Predict slots, 6,000+ Pickup shops and 0121 275 0500.
+description: Track a DPD UK parcel with your parcel number or calling card: what each status means, 1-hour Predict slots, 6,000+ Pickup shops and 0121 275 0500.
 slug: dpd-uk-tracking
 published: 2026-10-11
 updated: 2026-11-27
 ---
 
-DPD UK (part of Geopost and the La Poste group) delivers parcels across the UK for online shops. Track your parcel on [DPD's tracking page](https://track.dpd.co.uk/) with its 14-digit number (often starting `1550` or `1597`) or "sorry we missed you" calling card number and postcode, or paste the 14-digit number in the box above. On delivery day, DPD Predict sends a one-hour delivery window by SMS and email, and lets you redirect to a neighbour, a safe place or one of more than 6,000 DPD Pickup shops.
+DPD UK (part of Geopost and the La Poste group) delivers parcels across the UK for online shops. Track your parcel on [DPD's tracking page](https://track.dpd.co.uk/) with its parcel number (those seen have 14 digits, many starting `1550` or `1597`) or the "sorry we missed you" calling card number and postcode, or paste the parcel number in the box above. On delivery day, DPD Predict sends a one-hour delivery window by SMS and email, and lets you redirect to a neighbour, a safe place or one of more than 6,000 DPD Pickup shops.
 
 ## Where is my DPD tracking number?
 

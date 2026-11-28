@@ -74,7 +74,7 @@ Numer, którego nie zna, strona zgłasza jako nierozpoznany, więc sprawdź 13 c
 
 ### Jak złożyć reklamację zaginionej lub uszkodzonej przesyłki krajowej FedEx?
 
-Przy zakupie ze sklepu internetowego za paczkę odpowiada sklep. W samym FedEx reklamację (pisemnie, elektronicznie lub ustnie) składa nadawca, a adresat po doręczeniu lub z cesją praw, w ciągu 12 miesięcy od nadania (na ukryte uszkodzenia masz 7 dni od odbioru). FedEx ma 30 dni na odpowiedź, na odwołanie masz 14 dni, a spór może rozpatrzyć Prezes UKE.
+Przy zakupie ze sklepu internetowego za paczkę zwykle odpowiada sklep, dopóki jej nie otrzymasz. W samym FedEx reklamację (pisemnie, elektronicznie lub ustnie) składa nadawca, a adresat po doręczeniu lub z cesją praw, w ciągu 12 miesięcy od nadania (na ukryte uszkodzenia masz 7 dni od odbioru). FedEx ma 30 dni na odpowiedź, na odwołanie masz 14 dni, a spór może rozpatrzyć Prezes UKE.
 
 ### Czy SMS o dopłacie do przesyłki FedEx jest prawdziwy?
 

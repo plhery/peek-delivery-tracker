@@ -97,7 +97,7 @@ Die Uhrzeiten liest Peek mit Yanwens GMT-Abweichung und zeigt sie in der Zeitzon
 
 ### Welcher Paketdienst liefert Yanwen-Pakete in Deutschland, Österreich und der Schweiz aus?
 
-Yanwen nennt für DE, AT und CH keinen festen Partner: Ab `Batch delivery to carrier` übernimmt ein Paketdienst vor Ort, und der Hinweiskasten auf track.yw56.com.cn zeigt „Distributor“ und „Last Mile Tracking“, wenn Yanwen ihn kennt. In Yanwens Produktliste gibt es eine Deutschland-Linie über DHL, aber nicht jedes Paket läuft darüber.
+Yanwen nennt für DE, AT und CH keinen festen Partner: Ab `Batch delivery to carrier` übernimmt ein Paketdienst vor Ort, und der Hinweiskasten auf track.yw56.com.cn nennt ihn als „Distributor“, mit Website und Telefonnummer, wenn Yanwen ihn kennt. In Yanwens Produktliste gibt es eine Deutschland-Linie über DHL, aber nicht jedes Paket läuft darüber.
 
 ### Was bedeutet „Yanwen facility - Outbound“ oder „Tendered for Delivery“?
 
@@ -113,7 +113,7 @@ Nein. Yanwens Tracking-Seite gibt es nur auf Englisch und Chinesisch, und Yanwen
 
 ### Wie erreiche ich Yanwen bei einem verlorenen oder verspäteten Paket?
 
-Wende dich zuerst an den Shop oder Marktplatz: Er hat den Vertrag mit Yanwen und kann ab 10 bis 60 Tagen nach Versand eine Nachforschung beantragen. Yanwen nennt eine chinesische Hotline (400-108-5656, Mo–Sa 9–18 Uhr) und marketing@yw56.com.cn, veröffentlicht aber keinen eigenen Empfänger-Support für DE, AT oder CH.
+Wende dich zuerst an den Shop oder Marktplatz: Er hat den Vertrag mit Yanwen und kann zwischen 10 und 60 Tagen nach dem Versand eine Nachforschung beantragen. Yanwen nennt eine chinesische Hotline (400-108-5656, Mo–Sa 9–18 Uhr) und marketing@yw56.com.cn, veröffentlicht aber keinen eigenen Empfänger-Support für DE, AT oder CH.
 
 :::sources
 - [Yanwen: YW Tracking](https://track.yw56.com.cn/en/index) – Tracking-Seite, Sprachen, Spalten, Kategorien, Hinweiskasten, Hotline

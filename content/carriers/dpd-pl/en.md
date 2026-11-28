@@ -1,12 +1,12 @@
 ---
 title: DPD Poland tracking: statuses, pickup points and contact
-description: Track a DPD Poland (DPD Polska) parcel in English: 14-character numbers, status meanings, 35,000+ Pickup points and lockers, 2-day hold and phone numbers.
+description: Track a DPD Poland (DPD Polska) parcel in English: 14-character numbers, status meanings, Pickup points and lockers, 2-day hold and phone numbers.
 slug: dpd-poland-tracking
 published: 2026-10-11
 updated: 2026-11-27
 ---
 
-DPD Poland (DPD Polska) is the Warsaw-based Polish carrier in Geopost, owned by France's [La Poste](carrier:la-poste). Track a parcel in English on DPD's [Track & Trace page](https://tracktrace.dpd.com.pl/EN/findParcel) using your 14-character parcel number (13 digits plus a letter, or 14 digits) from the shop's shipping email, or paste it in the box above. Below you'll find English status meanings, Predict notices, rules for DPD's 35,000+ Pickup points and lockers (held two full working days), claims and Contact Center numbers.
+DPD Poland (DPD Polska) is the Warsaw-based Polish carrier in Geopost, owned by France's [La Poste](carrier:la-poste). Track a parcel in English on DPD's [Track & Trace page](https://tracktrace.dpd.com.pl/EN/findParcel) using your 14-character parcel number (13 digits plus a letter, or 14 digits) from the shop's shipping email, or paste it in the box above. Below you'll find English status meanings, Predict notices, rules for DPD's Pickup points and lockers (over 35,000, DPD counts; parcels wait two full working days), claims and Contact Center numbers.
 
 ## Where to find your DPD tracking number in Poland
 

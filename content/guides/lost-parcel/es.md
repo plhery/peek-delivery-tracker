@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-11-27
 ---
 
-Si un paquete no llega a su destino tras comprar en una tienda, la reclamación va al vendedor, no al transportista: en España el pedido viaja a riesgo de la tienda hasta que lo tienes en tus manos (art. 66 ter LGDCU) y el plazo máximo sin fecha pactada es de 30 días naturales. Pasado el plazo del transportista (4 días desde la admisión en un Paq Estándar de Correos, o 30 días en InPost), pide a la tienda el reenvío o el reembolso, o abre un caso en la plataforma; reclamar al transportista corresponde al remitente.
+Si un paquete no llega a su destino tras comprar en una tienda, la reclamación va al vendedor, no al transportista: en España el pedido viaja a riesgo de la tienda hasta que lo tienes en tus manos (art. 66 ter LGDCU) y, sin fecha pactada, la tienda tiene 30 días naturales desde la compra para entregarlo. Pasado el plazo del transportista (4 días desde la admisión en un Paq Estándar de Correos, o 30 días desde el aviso de envío en InPost), pide a la tienda el reenvío o el reembolso, o abre un caso en la plataforma; reclamar al transportista es sobre todo cosa del remitente.
 
 ## ¿Qué pasa si un paquete no llega a su destino y cómo reclamar?
 

@@ -1,13 +1,13 @@
 ---
 title: Seguir encomendas do Allegro: transportadoras e atrasos
-description: Como seguir encomendas do Allegro em Portugal: envio por Allegro Kurier DPD, DHL ou Kurier24 InPost, número em Moje zakupy, prazos e reclamações.
+description: Como seguir encomendas do Allegro em Portugal: envio por Allegro Kurier DPD ou DHL, número em Moje zakupy, prazos e reclamações.
 slug: seguir-encomenda-allegro
 picture: Uma encomenda num cacifo One Box aberto, um telemóvel com uma encomenda no ecrã e o Pip a correr para a levantar.
 published: 2026-10-17
 updated: 2026-11-27
 ---
 
-O Allegro é um marketplace polaco (allegro.pl, allegro.cz, allegro.sk e allegro.hu), sem site próprio para Portugal. Os vendedores do allegro.pl podem enviar para Portugal por Allegro Kurier DPD (4 dias úteis) ou Allegro Kurier DHL (4 a 5 dias úteis), se oferecerem esse método no anúncio; na Polónia, as entregas seguem por Allegro One, InPost (incluindo Allegro Kurier24 InPost), DPD, DHL, ORLEN Paczka ou Pocztex. O número de seguimento aparece em «Moje przesyłki» (As minhas encomendas), em «Moje zakupy» (As minhas compras) e no e-mail que o Allegro envia quando o número é adicionado.
+O Allegro é um marketplace polaco (allegro.pl, allegro.cz, allegro.sk e allegro.hu), sem site próprio para Portugal. Os vendedores do allegro.pl podem enviar para Portugal por Allegro Kurier DPD ou Allegro Kurier DHL, se oferecerem esse método no anúncio (segundo o Allegro, 4 e 4 a 5 dias úteis de transporte, mais o tempo de envio do vendedor); na Polónia, as entregas seguem por Allegro One, InPost (incluindo Allegro Kurier24 InPost), DPD, DHL, ORLEN Paczka ou Pocztex. O número de seguimento aparece em «Moje przesyłki» (As minhas encomendas), em «Moje zakupy» (As minhas compras) e no e-mail que o Allegro envia quando o número é adicionado.
 
 ## Que transportadora entrega no Allegro (Kurier24 InPost, DPD, DHL, Allegro One)?
 

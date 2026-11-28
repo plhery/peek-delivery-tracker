@@ -106,7 +106,7 @@ Die Adresse posiljka.posta.hr öffnet auf Kroatisch, aber über den EN-Schalter 
 
 ### Wie lange liegt ein Paket im Paketomat oder in der Postfiliale von Hrvatska pošta?
 
-Im Paketomat 3 Tage ab SMS- oder E-Mail-Benachrichtigung, mit einer Erinnerung 12 Stunden vor Ablauf. In der Postfiliale liegt ein allgemeines Paket sowie Paket 24 laut Hrvatska pošta 5 Werktage, ein gewöhnliches Paket oder ein Auslandspaket im Universaldienst 15 Werktage, bevor es zurückgeht.
+Im Paketomat 3 Tage ab SMS- oder E-Mail-Benachrichtigung, mit einer Erinnerung 12 Stunden vor Ablauf. In der Postfiliale gelten laut Hrvatska pošta allgemein 5 Werktage und für ein gewöhnliches Paket oder ein Auslandspaket im Universaldienst 15 Werktage; danach geht die Sendung zurück. Ein Paket 24 liegt 5 Werktage in der Filiale, dann fragt Hrvatska pošta dich oder den Absender, wie es weitergeht.
 
 ### Kann ich ein internationales Paket nach Kroatien verfolgen?
 
@@ -114,7 +114,7 @@ Ja, mit der Postnummer des Absenders, die auf das Länderkürzel des Absendeland
 
 ### Wie erreiche ich Hrvatska pošta bei Fragen oder Reklamationen?
 
-Telefonisch erreichst du das Kontaktzentrum unter `072 303 304` aus Kroatien bzw. `+385 1 6626 870` aus dem Ausland (Montag bis Freitag 7:00–19:00 Uhr, Samstag 7:00–15:00 Uhr), per E-Mail an `kontakt.szk@posta.hr` oder über das kroatische Webformular `obrasci.posta.hr/kontakt`. Reklamationen wegen Verlust, Schaden oder Verspätung nimmt Hrvatska pošta binnen 3 Monaten im Inland und 6 Monaten international entgegen.
+Telefonisch erreichst du das Kontaktzentrum unter 072 303 304 aus Kroatien bzw. +385 1 6626 870 aus dem Ausland (Montag bis Freitag 7:00–19:00 Uhr, Samstag 7:00–15:00 Uhr), per E-Mail an kontakt.szk@posta.hr oder über das kroatische [Webformular](https://obrasci.posta.hr/kontakt). Reklamationen wegen Verlust, Schaden oder Verspätung nimmt Hrvatska pošta binnen 3 Monaten nach Einlieferung im Inland und 6 Monaten international entgegen.
 
 :::sources
 - [Croatian Post: Track your item](https://posiljka.posta.hr/en/tracking) – englisches Tracking, Sendungsnummer, mindestens 5 Zeichen, Formatfehler, HR/EN-Schalter

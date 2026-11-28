@@ -6,7 +6,7 @@ published: 2026-10-13
 updated: 2026-11-27
 ---
 
-Gib deine 12- oder 15-stellige FedEx-Sendungsnummer oder einen fedex.com-Tracking-Link oben ins Feld ein, um dein Paket live zu verfolgen. Die offizielle FedEx-Sendungsverfolgung findest du ebenfalls auf fedex.com; deine Nummer steht in der Versandbestätigung des Shops.
+Gib deine FedEx-Sendungsnummer oder einen fedex.com-Tracking-Link oben ins Feld ein, um dein Paket live zu verfolgen. Die offizielle FedEx-Sendungsverfolgung findest du ebenfalls auf fedex.com; deine Nummer steht in der Versandbestätigung des Shops.
 
 ## FedEx Trackingnummer: wo du sie findest
 

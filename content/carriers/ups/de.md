@@ -6,7 +6,7 @@ published: 2026-10-13
 updated: 2026-11-27
 ---
 
-Gib deine 18-stellige UPS-Sendungsnummer mit `1Z` oder einen UPS-Tracking-Link oben ins Feld ein, um dein Paket live zu verfolgen. Die Nummer steht meist in der Versandbestätigung des Shops; die eigene Sendungsverfolgung von UPS (United Parcel Service) findest du außerdem direkt auf ups.com.
+Gib deine UPS-Sendungsnummer (meist `1Z` und 16 weitere Zeichen) oder einen UPS-Tracking-Link oben ins Feld ein, um dein Paket live zu verfolgen. Die Nummer steht meist in der Versandbestätigung des Shops; die eigene Sendungsverfolgung von UPS (United Parcel Service) findest du außerdem direkt auf ups.com.
 
 ## UPS Trackingnummer: wo sie steht und wie sie aussieht
 

@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Relais Colis livre des colis dans près de 7 000 commerces partenaires partout en France ; le réseau appartient désormais à [GLS France](carrier:gls-fr). Pour suivre ton colis, colle ton numéro de 12 à 16 caractères (par exemple en `CC…`) dans le champ ci-dessus ou saisis-le sur [la page « Suivre mon colis » de Relais Colis](https://relaiscolis.com/colis/suivre) — une recherche sans numéro reste aussi possible avec ton e-mail ou ton téléphone.
+Relais Colis livre des colis dans près de 7 000 commerces partenaires (selon GLS) partout en France ; le réseau appartient désormais à [GLS France](carrier:gls-fr). Pour suivre ton colis, colle ton numéro de 12 à 16 caractères (par exemple en `CC…`) dans le champ ci-dessus ou saisis-le sur [la page « Suivre mon colis » de Relais Colis](https://relaiscolis.com/colis/suivre) — une recherche sans numéro reste aussi possible avec ton e-mail ou ton téléphone.
 
 ## Numéro de suivi Relais Colis : où le trouver
 

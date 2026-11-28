@@ -96,7 +96,7 @@ Nos Lockers e Pontos Pack, não: a InPost Portugal distribui de segunda a sexta-
 
 ### Qual é o telefone da InPost Portugal (tem WhatsApp ou e-mail)?
 
-Em Portugal, o telefone de apoio é o `211 245 624` (segunda a sexta-feira, das 9h00 às 18h00). A página Fala connosco não indica WhatsApp nem e-mail: além do telefone, disponibiliza o assistente virtual 24/7 e os formulários de contacto online.
+Em Portugal, o telefone de apoio é o 211 245 624 (segunda a sexta-feira, das 9h00 às 18h00). A página Fala connosco não indica WhatsApp nem e-mail: além do telefone, disponibiliza o assistente virtual 24/7 e os formulários de contacto online.
 
 :::sources
 - [InPost Portugal: Rastrear Encomenda](https://www.inpost.pt/seguimento-do-envio) – campo único, exemplo de 8 caracteres, sem código postal

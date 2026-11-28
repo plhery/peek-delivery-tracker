@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-Ein verschickter Kauf auf Kleinanzeigen, willhaben, Ricardo oder tutti.ch läuft als reguläres Paket über DHL, Hermes, DPD oder die Post: Wer über „Sicher bezahlen“, PayLivery oder Käuferschutz+ zahlt, bekommt die Sendungsnummer automatisch über die Plattform, während das Geld bis nach der Zustellung verwahrt bleibt. Nur bei tutti.ch zahlst du direkt an den Verkäufer und fragst ihn nach der B-Post-Nummer. Für andere Plattformen gibt es eigene Ratgeber: [Vinted](guide:vinted-orders) und [eBay](guide:ebay-orders).
+Ein verschickter Kauf auf Kleinanzeigen, willhaben, Ricardo oder tutti.ch läuft als reguläres Paket über DHL, Hermes, DPD oder die Post: Wer über „Sicher bezahlen“, PayLivery oder Käuferschutz+ zahlt, bekommt die Sendungsnummer automatisch über die Plattform, während das Geld bis nach der Zustellung verwahrt bleibt. Nur bei tutti.ch zahlst du direkt an den Verkäufer; die Sendungsnummer bekommst du, wenn er sie dir schickt. Für andere Plattformen gibt es eigene Ratgeber: [Vinted](guide:vinted-orders) und [eBay](guide:ebay-orders).
 
 ## Wie läuft der Versand über Kleinanzeigen, willhaben, Ricardo und tutti.ch?
 

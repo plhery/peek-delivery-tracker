@@ -6,7 +6,7 @@ published: 2026-11-27
 updated: 2026-11-27
 ---
 
-Pratite Vinted Go pošiljku dodirom na gumb za praćenje u razgovoru vaše Vinted narudžbe ili lijepljenjem svog `VGS` ili 16-znamenkastog broja na [vintedgo.com/en/tracking](https://vintedgo.com/en/tracking) ili u polje iznad. Vinted Go (vlastita dostavna mreža Vinteda u Francuskoj, Belgiji, Nizozemskoj, Španjolskoj, Portugalu i Finskoj) dostavlja između paketomata i partnerskih trgovina — čuvajući pošiljke 7 kalendarskih dana od dolaska — dok sve prigovore za nestale pakete (nakon 25 radnih dana) i povrate novca rješava podrška Vinteda.
+Pratite Vinted Go pošiljku dodirom na gumb za praćenje u razgovoru vaše Vinted narudžbe ili lijepljenjem svog `VGS` ili 16-znamenkastog broja na [vintedgo.com/en/tracking](https://vintedgo.com/en/tracking) ili u polje iznad. Vinted Go (vlastita dostavna mreža Vinteda u Francuskoj, Belgiji, Nizozemskoj, Španjolskoj, Portugalu i Finskoj) dostavlja u paketomate, partnerske trgovine i kvartovska mjesta — čuvajući pošiljke 7 kalendarskih dana od dolaska — dok sve prigovore za nestale pakete (nakon 25 radnih dana) i povrate novca rješava podrška Vinteda.
 
 ## Gdje pronaći broj za praćenje Vinted Go pošiljke
 
@@ -16,14 +16,14 @@ Vinted Go ne objavljuje službeni format svojih brojeva. Ovo su oblici koje pozn
 
 | Broj (izmišljen) | Što predstavlja |
 | --- | --- |
-| `1748291736548291` | Oblik Vinted Go broja: 16 znamenki koje počinju sa 17 ili 18. [DHL eCommerce](carrier:dhl-ecommerce), TNT i [Evri](carrier:evri) također koriste 16-znamenkaste brojeve, pri čemu Evri samo kada zadnja znamenka prođe njegovu provjeru. |
-| `1748291736548292` | 16 znamenki čija zadnja znamenka ne prolazi provjeru, pa ne odgovara obliku Vinted Goa. |
+| `1748291736058413` | Oblik Vinted Go broja: 16 znamenki koje počinju sa 17 ili 18. [DHL eCommerce](carrier:dhl-ecommerce), TNT i [Evri](carrier:evri) također koriste 16-znamenkaste brojeve, pri čemu Evri samo kada zadnja znamenka prođe njegovu provjeru. |
+| `1748291736058414` | 16 znamenki čija zadnja znamenka ne prolazi provjeru, pa ne odgovara obliku Vinted Goa. |
 | `VGS4829173654829` | `VGS` i 13 ili 14 znamenki: broj na koji odgovara isključivo Vinted Go praćenje. |
 | `KLM4UW8291736548` | 16 znakova: 3 slova, znamenka, `UW`, znamenka i 9 slova ili znamenki. Vinted Go praćenje odgovara i na ovakve kodove. |
 
 Dvije stvari lako je pomiješati:
 
-- **Poveznica za praćenje.** Gumb za praćenje vodi na stranicu oblika `vintedgo.com/en/tracking/1748291736548291`. Ta poveznica najpouzdaniji je znak da paket prevozi Vinted Go.
+- **Poveznica za praćenje.** Gumb za praćenje vodi na stranicu oblika `vintedgo.com/en/tracking/1748291736058413`. Ta poveznica najpouzdaniji je znak da paket prevozi Vinted Go.
 - **Kod za preuzimanje.** To nije broj za praćenje: stiže e-poštom (a moguće i SMS-om) kada je paket spreman i uvijek počinje velikim slovom.
 
 Ne možete pronaći broj? Pogledajte [kako pronaći broj za praćenje](guide:find-tracking-number) (na engleskom). Poslano drugim prijevoznikom? Vodič za [Vinted praćenje](guide:vinted-orders) (na engleskom) obuhvaća svakog prijevoznika kojeg Vinted koristi.
@@ -58,7 +58,7 @@ Stranica Vinted Goa sadrži i oznake poput `Out for delivery`, `Couldn’t be de
 
 **Preuzimanje.** Na paketomatu skenirajte ili upišite kod za preuzimanje kako biste otvorili odgovarajući pretinac. U partnerskoj trgovini ili kvartovskoj lokaciji pokažite osoblju kod za preuzimanje ili osobnu iskaznicu. Radno vrijeme nalazi se na karti Vinted Goa.
 
-**Koliko čeka.** Imate 7 kalendarskih dana. Vinted Go ne može produljiti rok niti zaustaviti paket kad krene natrag. Nepreuzeti paket vraća se na mjesto na kojem ga je prodavatelj predao; Vinted tada otkazuje narudžbu i vraća vam novac.
+**Koliko čeka.** Imate 7 kalendarskih dana. Za paket u paketomatu ili paketnom centru uvjeti Vinted Goa dodaju plaćeno produljenje (Pickup Extension): u zadnja 24 sata roka za preuzimanje možete kupiti još 24 sata, i više puta, kada Vinted Go pokaže da je dostupno. Vinted Go ne može zaustaviti paket kad krene natrag. Nepreuzeti paket vraća se na mjesto na kojem ga je prodavatelj predao; Vinted tada otkazuje narudžbu i vraća vam novac.
 
 **Dostava na adresu.** U Francuskoj pojedine lokacije nude dostavu Uber kurirom u terminu koji rezervirate putem poveznice koju šalje Vinted. Gdje postoji kućna dostava, uvjeti Vinted Goa predviđaju jedan pokušaj uz zakazani termin i dva bez njega.
 
@@ -78,7 +78,7 @@ Rješavate s Vintedom, ne s Vinted Goom: korisnička podrška Vinteda obrađuje 
 
 ## Vinted Go kontakt telefon i korisnička podrška
 
-Prema stranicama Vinted Goa, kupcima nije dostupan e-mail ni obrazac, a telefonska linija služi isključivo za pomoć kod paketomata.
+Prema stranicama Vinted Goa, pročitanima 25. listopada 2026., kupcima nije dostupan e-mail ni obrazac, a telefonska linija služi isključivo za pomoć kod paketomata.
 
 - **Problemi s narudžbom** (kašnjenje, gubitak, oštećenje, pogrešan artikl): podrška Vinteda putem narudžbe na vašem Vinted računu.
 - **Poteškoće kod paketomata** u Francuskoj, Belgiji, Nizozemskoj ili Španjolskoj: pritisnite gumb „?“ na početnom zaslonu paketomata za prikaz broja i radnog vremena podrške Vinted Goa. Za Nizozemsku i Belgiju FAQ Vinted Goa navodi i broj: +31 20 793 2587, na engleskom (te na francuskom za Belgiju).
@@ -92,7 +92,7 @@ Vinted upozorava da se phishing pojavljuje i putem SMS-a; francuska stranica pom
 
 Peek odmah prepoznaje Vinted Go za brojeve koji počinju s `VGS`. Upišete li samo 16-znamenkasti broj, Peek pita Vinted Go i DHL eCommerce (za neke brojeve i druge prijevoznike) poznaju li ga, imenuje Vinted Go kad potvrdi, a TNT pita tek ako nitko od njih ne odgovori; za kod s `UW` pita Vinted Go. Inače pritisnite „Change“ i odaberite „Vinted Go“ ili zalijepite poveznicu vintedgo.com, koja odmah odabire Vinted Go.
 
-Peek provjerava do svakih 10 minuta, ili svaki sat nakon što prođe 48 sati bez novog skeniranja (12 sati dok paket još prikazuje „Label created“ ili „Received by carrier“), i može vam slati obavijesti o promjenama. Ako Vinted Go preda paket drugoj mreži pod novim kodom, Peek ga može nastaviti pratiti ako tu mrežu čita izravno. Kada zadnjih 13 znakova 16-znamenkastog `UW` koda odgovara kodu paketa [Poste Italiane](carrier:poste-italiane), Peek ga provjerava kod Poste Italiane i nastavlja praćenje ondje čim Poste ima najnovije skeniranje. Peek ne može kontaktirati Vinted ili Vinted Go niti prijaviti problem u vaše ime.
+Peek provjerava do svakih 10 minuta, ili svaki sat nakon što prođe 48 sati bez novog skeniranja (12 sati dok paket još prikazuje „Label created“ ili „Received by carrier“), i može vam slati obavijesti o promjenama. Ako Vinted Go preda paket drugoj mreži pod novim kodom, Peek ga može nastaviti pratiti ako tu mrežu čita izravno. Kada zadnjih 13 znakova 16-znakovnog `UW` koda odgovara kodu paketa [Poste Italiane](carrier:poste-italiane), Peek ga provjerava kod Poste Italiane i nastavlja praćenje ondje čim Poste ima najnovije skeniranje. Peek ne može kontaktirati Vinted ili Vinted Go niti prijaviti problem u vaše ime.
 
 ## Pitanja o praćenju Vinted Go pošiljke
 
@@ -106,7 +106,7 @@ Da. Vinted Go je vlastita dostavna mreža Vinteda kojom upravlja Vinted Go, UAB 
 
 ### Koliko dugo traje dostava s Vinted Goom?
 
-Vinted Go moli kupce da pričekaju do 25 radnih dana prije prijave nestalog paketa na Vintedu; nakon što je paket označen kao dostavljen ili preuzet, imate 2 dana za prijavu problema u razgovoru narudžbe.
+Uvjeti Vinted Goa predviđaju 3 do 6 radnih dana od predaje do vaše lokacije. Vinted Go moli kupce da pričekaju do 25 radnih dana prije prijave nestalog paketa na Vintedu; nakon što je paket označen kao dostavljen ili preuzet, imate 2 dana za prijavu problema u razgovoru narudžbe.
 
 ### Ima li Vinted Go telefonski broj korisničke podrške?
 
@@ -119,7 +119,7 @@ Praćenje se može pojaviti i do 48 sati nakon predaje; provjerite jeste li unij
 :::sources
 - [Vinted Go: Frequently Asked Questions](https://vintedgo.com/en/faq?country=fr&region=europe) – kod za preuzimanje, 7 dana, druga obližnja lokacija, 25 radnih dana, prijava u 2 dana, pauze na vremenskoj crti, telefon paketomata
 - [Vinted Go: Frequently Asked Questions (Netherlands)](https://vintedgo.com/en/faq?country=nl&region=europe) – telefonska linija paketomata za Nizozemsku i Belgiju
-- [Vinted Go: Terms and Conditions for Delivery Services](https://vintedgo.com/en/terms-and-conditions?country=fr&region=europe) – tvrtka, vrste lokacija, pokušaji kućne dostave, 3 do 6 radnih dana, podsjetnik, oštećenje u paketomatu, prigovori preko Vinteda
+- [Vinted Go: Terms and Conditions for Delivery Services](https://vintedgo.com/en/terms-and-conditions?country=fr&region=europe) – tvrtka, vrste lokacija, pokušaji kućne dostave, 3 do 6 radnih dana, podsjetnik, plaćeno produljenje roka, oštećenje u paketomatu, prigovori preko Vinteda
 - [Vinted Go: Shipping service, trusted by millions of Vinted users](https://vintedgo.com/en?country=fr&region=europe) – države, početak 2022.
 - [Vinted Go: Track your parcel](https://vintedgo.com/en/tracking) – obrazac za praćenje, jezici stranice, statusi, poruka kad nije pronađeno
 - [Vinted: Comment suivre un colis ?](https://www.vinted.fr/help/100) – broj u razgovoru, 48 sati, 25 radnih dana, dostavljeno ali nije primljeno

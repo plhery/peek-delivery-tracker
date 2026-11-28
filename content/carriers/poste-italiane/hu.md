@@ -21,7 +21,7 @@ A kódok többféle formátumban léteznek. Az alábbi példák kitaláltak:
 | `2IMA4829173654` | `2IMA` és 10 számjegy. |
 | `5PA4829173654` | `5P` és 11 betű vagy számjegy. |
 | `482917A365482` | Számjegyek közepén egy betűvel: SDA-stílusú kódok. |
-| `RR482917365IT` | Nemzetközi postai küldeményszám. |
+| `RR482917367IT` | Nemzetközi postai küldeményszám. |
 
 Sok formátum közös más szolgáltatókkal. Egy csak számjegyekből álló `5P` kód [La Poste (Colissimo)](carrier:la-poste) küldemény is lehet, az egyszerű 12 vagy 13 jegyű kódok pedig számos futárra illenek, ezért ellenőrizze, melyik fuvarozót nevezi meg a bolt levele. Külföldön feladott csomagnál a poste.it csak akkor mutat nyomkövetést, amikor a Poste Italiane Olaszországban átveszi a kezelést.
 
@@ -65,13 +65,13 @@ Az értesítő vagy az SMS tartalmazza az utolsó átvételi napot; a Poste olda
 
 A Poste oldalai nem adnak külön útmutatást a megállt követésre. Először a bolthoz forduljon, mivel az áll szerződésben a Postéval; lásd: [nem frissülő csomagkövetés](guide:tracking-not-updating) (angolul).
 
-A feladó és a címzett egyaránt tehet panaszt, de a kártérítés a feladót illeti, hacsak írásban le nem mond róla az Ön javára, ezért online rendelésnél a bolt a gyorsabb út. Külföldről érkező csomagnál a Poste azt javasolja, hogy a feladó keresse meg a feladási ország postáját. A sérülést kézbesítéskor jelezze: vegye át a csomagot „consegna cautelare” nyilatkozattal, vagy tagadja meg az átvételt.
+A feladó és a címzett egyaránt tehet panaszt, de a kártérítés a feladót illeti, hacsak hivatalosan le nem mond róla az Ön javára, ezért online rendelésnél a bolt a gyorsabb út. Külföldről érkező csomagnál a Poste azt javasolja, hogy a feladó keresse meg a feladási ország postáját. A sérülést kézbesítéskor jelezze: vegye át a csomagot „consegna cautelare” nyilatkozattal, vagy tagadja meg az átvételt.
 
 A határidők a feladó által választott szolgáltatástól függenek: Crono és Poste Delivery Business esetén 20 naptári nap attól, hogy a Poste átvette a feladótól; Poste Delivery Standard esetén a feladást követő 6. munkanaptól legfeljebb 3 hónapig. Panaszt nyújthat be online a csomagpanasz-űrlapon, hitelesített e-mailben (PEC) a Poste panaszlevelével, ajánlott levélben a Casella Postale 160, 00144 Roma címre vagy bármely postán. A Poste szolgáltatási chartája 45 napon belüli választ ígér, ezt követheti az egyeztetés (conciliazione), majd a szabályozó hatóság, az AGCOM. A [kézbesítettnek jelölt, de meg nem kapott csomag](guide:delivered-not-received) (angolul) ugyanerre az eljárásra tartozik: a Poste nem ad meg külön menetet.
 
 ## Poste Italiane telefonszám és ügyfélszolgálat
 
-A Poste Italiane poste.it oldalon feltüntetett elérhetőségei:
+A Poste Italiane poste.it oldalon 2026. október 11-én feltüntetett elérhetőségei:
 
 - **Külföldről vagy mobilról:** +39 06 4526 3160, hétfőtől szombatig ünnepnapok kivételével 8:00 és 20:00 között, saját szolgáltatói díjszabással.
 - **Olasz vezetékes telefonról:** 803 160, ingyenes, ugyanebben az időben.
@@ -106,7 +106,7 @@ A normál szállítási idők nem tartalmazzák a szombatot (a szombati kézbes�
 
 ### Hogyan hívhatom vagy érhetem el külföldről a Poste Italiane ügyfélszolgálatát?
 
-Külföldről vagy mobiltelefonról hívja a +39 06 4526 3160 számot (hétfőtől szombatig 8:00–20:00, ünnepnapok kivételével; szolgáltatói díjszabás). Írhat az `assistenza.spedizioni@posteitaliane.it` címre vagy az angol nyelvű [Contact us](https://www.poste.it/assistenza/scrivici-en) űrlapon is.
+Külföldről vagy mobiltelefonról hívja a +39 06 4526 3160 számot (hétfőtől szombatig 8:00–20:00, ünnepnapok kivételével; szolgáltatói díjszabás). Írhat az assistenza.spedizioni@posteitaliane.it címre vagy az angol nyelvű [Contact us](https://www.poste.it/assistenza/scrivici-en) űrlapon is.
 
 :::sources
 - [Poste Italiane: FAQ Spedizioni e consegne](https://www.poste.it/assistenza/faq-spedizioni-e-consegne/) – kód, értesítő, meghatalmazás, időpontfoglalás, külföldről érkező csomagok

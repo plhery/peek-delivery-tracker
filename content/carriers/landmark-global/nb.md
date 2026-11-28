@@ -6,7 +6,7 @@ published: 2026-11-27
 updated: 2026-11-27
 ---
 
-Spor en Landmark Global-pakke med ditt **LTN**-nummer (Landmark Tracking Number — `LTN` pluss 8 eller 9 sifre, av og til med `N1` til slutt) fra nettbutikkens sendingsbekreftelse på [track.landmarkglobal.com](https://track.landmarkglobal.com/) eller i søkefeltet over. Landmark Global er en del av Bnode (bposts konsern i Brussel), frakter netthandelsordrer over landegrenser til over 220 destinasjoner og overlater siste etappe til en lokal leveringspartner som bpost, Apple Express, UPS, DHL eCommerce eller Evri.
+Spor en Landmark Global-pakke med ditt **LTN**-nummer (Landmark Tracking Number — `LTN` pluss 8 eller 9 sifre, av og til med `N1` til slutt) fra nettbutikkens sendingsbekreftelse på [track.landmarkglobal.com](https://track.landmarkglobal.com/) eller i søkefeltet over. Landmark Global er en del av Bnode (bposts konsern i Brussel), frakter netthandelsordrer over landegrenser til over 220 destinasjoner og overlater i de fleste land siste etappe til en lokal leveringspartner som bpost, Apple Express, UPS, DHL eCommerce eller Evri.
 
 ## Landmark Global sporingsnummer
 
@@ -26,7 +26,7 @@ Et LTN-nummer med 7 eller 10 sifre, eller en annen endelse enn N1, følger ikke 
 
 ## Forklaring på Landmark Global sporingsstatuser
 
-Landmarks sporingsside har en språkmeny, men Peek leser den engelske siden, så dette er tekstene Peek viser. Landmarks side på et annet språk kan formulere et steg annerledes, og leveringspartnerens skanninger beholder partnerens egne ord. I rekkefølgen en pakke vanligvis møter dem:
+Landmarks sporingsside har en språkmeny, men Peek leser den engelske siden, så dette er tekstene Peek viser. Landmarks side på et annet språk kan formulere et steg annerledes, og leveringspartnerens skanninger beholder partnerens egne ord. I den rekkefølgen en pakke møter dem:
 
 | Landmark skriver | Hva det betyr for deg |
 | --- | --- |
@@ -70,7 +70,7 @@ For partnerens egne regler, se sidene for [Evri](carrier:evri), [Hermes](carrier
 
 ## Landmark Global kundeservice og telefonnummer
 
-Landmarks støttesider ber deg kontakte butikken først eller sjekke selskapets FAQ.
+Landmarks sider, lest 12. oktober 2026, ber deg kontakte butikken først eller sjekke selskapets FAQ.
 
 - **Storbritannia, Irland og Europa:** [kundestøttesiden](https://landmarkglobal.com/eu/en/customer-support/) har FAQ og en "Send Email"-knapp til ClientservicesEU@landmarkglobal-group.com. Legg ved sporingsnummer og sendingsdetaljer. Ingen telefon, chat eller åpningstider er oppgitt. Den britiske adressen er Unit 3, Heathrow Logistics Park, Bedfont Rd, Feltham TW14 8EE.
 - **USA og Canada:** [støtteskjemaet](https://landmarkglobal.com/us/en/customer-support-form/) oppgir telefon 1-888-205-2251, mandag til fredag kl. 08:00–20:00 EST, og clientservices@landmarkglobal.com.
@@ -95,7 +95,7 @@ LTN står for Landmark Tracking Number — Landmark Globals identifikator (`LTN`
 
 ### Hvem leverer Landmark Global-pakker i mitt land?
 
-Landmark Global overlater siste etappe til lokale partnere: bpost i Belgia, søsterselskapet Apple Express i Canada, DHL eCommerce og UPS i USA, samt flere logistikkpartnere i Storbritannia og Europa (som Evri eller nasjonale posttjenester). Sjekk "Delivery Partner" i Landmarks sporing eller i Peek for å se hvem som håndterer din pakke.
+I de fleste land overlater Landmark Global siste etappe til lokale partnere: bpost i Belgia, søsterselskapet Apple Express i Canada, DHL eCommerce og UPS i USA, og "multiple logistics partners" i Storbritannia (Evri, på pakker Peek har slått opp). Sjekk "Delivery Partner" i Landmarks sporing eller i Peek for å se hvem som håndterer din pakke.
 
 ### Er Landmark Global et budfirma?
 

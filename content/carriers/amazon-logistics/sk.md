@@ -1,6 +1,6 @@
 ---
 title: Amazon Logistics sledovanie zásielok: kde hľadať a pomoc
-description: Sledujte zásielku Amazon Logistics v Your Orders: čísla TBA a UK/DE/FR, Amazon Map Tracking, 3 dni v Amazon Locker a Counter, záruka A-to-z a kontakt.
+description: Sledujte zásielku Amazon Logistics v Your Orders: čísla TBA a UK/DE/FR, Amazon Map Tracking, Amazon Locker (3 dni) a Counter, záruka A-to-z a kontakt.
 slug: amazon-logistics-sledovanie-zasielok
 published: 2026-11-27
 updated: 2026-11-27

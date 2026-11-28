@@ -1,12 +1,12 @@
 ---
 title: Swiss Post Cargo volgen: SSCC, statussen en levering
-description: Volg een Swiss Post Cargo vrachtzending (voorheen PostLogistics): 20-cijferige SSCC of PL-referentie, statussen, levering aan de stoep en contact.
+description: Volg een Swiss Post Cargo vrachtzending (voorheen PostLogistics): streepjescode of referentie, statussen, levering aan stoep of laadperron en contact.
 slug: swiss-post-cargo-pakket-volgen
 published: 2026-11-27
 updated: 2026-11-27
 ---
 
-Swiss Post Cargo (voorheen PostLogistics, actief onder deze merknaam sinds 1 maart 2025) is het vrachtnetwerk van de Zwitserse Post voor pallets en zware goederen die per vrachtwagen worden vervoerd door Zwitserland, Liechtenstein en het buitenland. Volg je 20-cijferige `00`-SSCC-streepjescode of `PL-`-afzenderreferentie op `tt.swisspost-cargo.com` of plak die in het zoekvak hierboven (gewone pakketten van de Zwitserse Post vind je op de [pagina van Swiss Post](carrier:swiss-post)). Hieronder: wat `Data entry POST` en `Loaded for Delivery` betekenen, regels voor levering aan de stoep en contactgegevens.
+Swiss Post Cargo (voorheen PostLogistics, actief onder deze merknaam sinds 1 maart 2025) is het vrachtnetwerk van de Zwitserse Post voor pallets en zware goederen die per vrachtwagen worden vervoerd door Zwitserland, Liechtenstein en het buitenland. Volg de streepjescode of de referentie die de afzender je gaf op `tt.swisspost-cargo.com` of plak die in het zoekvak hierboven (gewone pakketten van de Zwitserse Post vind je op de [pagina van Swiss Post](carrier:swiss-post)). Hieronder: wat `Data entry POST` en `Loaded for Delivery` betekenen, regels voor levering aan de stoep en contactgegevens.
 
 ## Swiss Post Cargo trackingnummer
 
@@ -89,7 +89,7 @@ Ja. PostLogistics opereert nu als Swiss Post Cargo; de oude tracker `tracking.po
 
 ### Hoe lang duurt levering met Swiss Post Cargo en waar levert de chauffeur?
 
-De vrachtbrochure van Swiss Post vermeldt levering op de volgende werkdag vóór 17:00 uur in bereikbare delen van Zwitserland en Liechtenstein, en op de tweede werkdag vóór 17:00 uur in berggebieden (Wallis, Ticino, Graubünden). Standaard wordt geleverd tot de eerste deur op de begane grond, het perron of de stoeprand, waarbij de ontvanger lost tenzij de afzender extra diensten boekte.
+De vrachtbrochure van Swiss Post vermeldt levering op de volgende werkdag vóór 17:00 uur in bereikbare delen van Zwitserland en Liechtenstein, en op de tweede werkdag vóór 17:00 uur in berggebieden (Wallis, Ticino, Graubünden). Standaard wordt geleverd tot de eerste deur op de begane grond, het perron of de stoeprand, en het lossen is de taak van de ontvanger; levering op een verdieping is een extra dienst die de afzender boekt.
 
 ### Hoe neem ik contact op met Swiss Post Cargo over levering, sms of schade?
 

@@ -6,7 +6,7 @@ published: 2026-11-27
 updated: 2026-11-27
 ---
 
-Slovenská pošta (Slovak Post, haettu myös nimillä Pošta Slovakia tai SK Pošta) on Slovakian kansallinen postilaitos. Voit seurata lähetystä sen englanninkielisellä [Tracking of Items](https://www.posta.sk/en/tracking-of-items) -sivulla (`sledovanie` osoitteessa posta.sk), mobiilisovelluksessa tai liittämällä 13-merkkisen `SK`-päätteisen postikoodin (tai ulkomaisen postikoodin) yllä olevaan kenttään. Seurantakoodin saat lähettäjän toimitusvahvistuksesta tai tilaussivulta; asiakaspalvelu vastaa Slovakiassa numerossa 0850 122 413 ja ulkomailta numerossa +421 48 437 87 77.
+Slovenská pošta (Slovak Post, haettu myös nimillä Pošta Slovakia tai SK Pošta) on Slovakian kansallinen postilaitos. Voit seurata lähetystä sen englanninkielisellä [Tracking of Items](https://www.posta.sk/en/tracking-of-items) -sivulla (`sledovanie` osoitteessa posta.sk), mobiilisovelluksessa tai liittämällä 13-merkkisen postikoodin (Slovakiassa postitetussa lähetyksessä `SK`-päätteinen) yllä olevaan kenttään. Seurantakoodin saat lähettäjän toimitusvahvistuksesta tai tilaussivulta; asiakaspalvelu vastaa Slovakiassa numerossa 0850 122 413 ja ulkomailta numerossa +421 48 437 87 77.
 
 ## Slovenská pošta -seurantakoodi
 

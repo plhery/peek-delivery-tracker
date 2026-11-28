@@ -7,12 +7,13 @@ import { useNotificationPreferences } from '../store/notificationPreferences';
  * A switch this browser keeps, on until switched off, that follows the account: what the server holds replaces this
  * browser's copy whenever it is read or saved. A choice made here that the account has not taken, made without one or
  * while the server could not take it, stands until it is saved, and goes to the account when its preferences are next
- * read.
+ * read: one made without an account goes to the account signed in to, and one an account made waits for that account,
+ * so another signed in meanwhile neither takes it nor loses it.
  */
 export function accountChoice({ storageKey, unsavedKey, field, save }: {
   /** Where this browser keeps the choice: "off", or nothing for on. */
   storageKey: string;
-  /** Set while a choice made here has not been saved to the account. */
+  /** Set while a choice made here has not been saved to the account: whose it is ("device" without one) and what. */
   unsavedKey: string;
   /** The choice's name in the account's preferences. */
   field: 'markNewUpdates' | 'showPeekAi';
@@ -21,7 +22,7 @@ export function accountChoice({ storageKey, unsavedKey, field, save }: {
   const eventName = `peek-choice-change:${storageKey}`;
   // Storage that cannot be read or written leaves the choice working for as long as the page lives.
   let memory: boolean | null = null;
-  let unsavedMemory: boolean | null = null;
+  let unsavedMemory: Unsaved | null | undefined;
   /** The choice whose save is on its way, so a read answered meanwhile does not send it again. */
   let saving: boolean | null = null;
 
@@ -55,17 +56,24 @@ export function accountChoice({ storageKey, unsavedKey, field, save }: {
     };
   }
 
-  function unsaved(): boolean {
-    if (unsavedMemory !== null) return unsavedMemory;
-    try { return window.localStorage.getItem(unsavedKey) === '1'; } catch { return false; }
+  function unsaved(): Unsaved | null {
+    if (unsavedMemory !== undefined) return unsavedMemory;
+    let stored: string | null;
+    try { stored = window.localStorage.getItem(unsavedKey); } catch { return null; }
+    if (stored === null) return null;
+    // Left by an earlier version, which didn't say whose: the next account's, as it was then.
+    if (stored === '1') return { owner: null, enabled: read() };
+    const [owner, choice] = stored.split(' ');
+    if (!owner || (choice !== 'on' && choice !== 'off')) return null;
+    return { owner: owner === DEVICE ? null : owner, enabled: choice === 'on' };
   }
 
-  function setUnsaved(value: boolean): void {
+  function setUnsaved(value: Unsaved | null): void {
     unsavedMemory = value;
     try {
-      if (value) window.localStorage.setItem(unsavedKey, '1');
+      if (value) window.localStorage.setItem(unsavedKey, `${value.owner ?? DEVICE} ${value.enabled ? 'on' : 'off'}`);
       else window.localStorage.removeItem(unsavedKey);
-      unsavedMemory = null;
+      unsavedMemory = undefined;
     } catch {
       // Kept in memory.
     }
@@ -86,23 +94,36 @@ export function accountChoice({ storageKey, unsavedKey, field, save }: {
       saving = next;
       void save(next, auth).then((saved) => {
         // Switched again meanwhile: that choice stands, and its own save is on its way.
-        if (saved[field] === next && read() === next) setUnsaved(false);
+        const left = unsaved();
+        if (saved[field] === next && left?.enabled === next && mine(left, auth)) setUnsaved(null);
       }).catch(() => undefined).finally(() => { if (saving === next) saving = null; });
     }, [auth]);
     useEffect(() => {
       const stored = preferences?.[field];
       if (typeof stored !== 'boolean') return;
-      if (!unsaved()) write(stored);
-      else if (stored === read()) setUnsaved(false);
-      else keep(read());
-    }, [preferences, keep]);
+      const left = unsaved();
+      if (!left || !mine(left, auth)) return write(stored);
+      write(left.enabled);
+      if (stored === left.enabled) setUnsaved(null);
+      else keep(left.enabled);
+    }, [preferences, keep, auth]);
     const choose = useCallback((next: boolean) => {
       write(next);
-      setUnsaved(true);
+      setUnsaved({ owner: auth?.userId ?? null, enabled: next });
       keep(next);
-    }, [keep]);
+    }, [keep, auth]);
     return [enabled, choose];
   }
 
   return { useValue, useChoice };
+}
+
+const DEVICE = 'device';
+
+/** A choice made here (`enabled`) that the account `owner` has not taken, or made with no account (`owner` null). */
+interface Unsaved { owner: string | null; enabled: boolean }
+
+/** Whether an unsaved choice is the signed-in account's to take: its own, or one made without an account. */
+function mine(unsaved: Unsaved, auth: ApiAuth | undefined): boolean {
+  return !!auth && (unsaved.owner === null || unsaved.owner === auth.userId);
 }

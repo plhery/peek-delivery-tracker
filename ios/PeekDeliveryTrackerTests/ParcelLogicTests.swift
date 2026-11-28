@@ -5041,7 +5041,7 @@ extension SessionIsolationTests {
         for _ in 0..<300 where store.notificationPreferences?.markNewUpdates != false { try await Task.sleep(for: .milliseconds(10)) }
         XCTAssertEqual(log.requests.map(\.method), ["GET", "PATCH"])
         XCTAssertEqual(log.requests.last?.body["markNewUpdates"] as? Bool, false)
-        XCTAssertFalse(UserDefaults.standard.bool(forKey: ParcelStore.markNewUpdatesUnsavedKey))
+        XCTAssertNil(store.unsaved(.markNewUpdates))
 
         // Saved, it follows the account again.
         respond(try JSONEncoder.deliveryTracker.encode(on))
@@ -5178,14 +5178,67 @@ extension SessionIsolationTests {
         XCTAssertEqual(log.requests.last?.body["markNewUpdates"] as? Bool, false)
     }
 
+    /// A mark choice one account could not save waits for that account: another signed in meanwhile follows its own and
+    /// takes nothing, and the first takes it back. One an earlier version left, without saying whose, goes to the next.
+    @MainActor func testAMarkChoiceAnAccountCouldNotSaveWaitsForThatAccount() async throws {
+        forgetMarkNewUpdatesChoice()
+        defer { forgetMarkNewUpdatesChoice() }
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        let first = UUID()
+        try await authorize(session, id: first, email: "alex@example.com")
+        let store = store(session, transport)
+        var on = emailPreferences
+        on.markNewUpdates = true
+        respond(try JSONEncoder.deliveryTracker.encode(on))
+        await store.loadNotificationPreferences()
+        offline()
+        store.setMarkNewUpdates(false)
+        for _ in 0..<300 where store.markNewUpdatesSaving > 0 { try await Task.sleep(for: .milliseconds(10)) }
+        XCTAssertEqual(store.unsaved(.markNewUpdates), .init(owner: first, enabled: false))
+
+        session.forceSignOut()
+        try await authorize(session, email: "sam@example.com")
+        let log = RequestLog()
+        respond(try JSONEncoder.deliveryTracker.encode(on), recording: log)
+        await store.loadNotificationPreferences()
+        XCTAssertTrue(store.markNewUpdates)
+        try await Task.sleep(for: .milliseconds(100))
+        XCTAssertEqual(log.requests.map(\.method), ["GET"])
+        XCTAssertEqual(store.unsaved(.markNewUpdates), .init(owner: first, enabled: false))
+
+        session.forceSignOut()
+        try await authorize(session, id: first, email: "alex@example.com")
+        var off = on
+        off.markNewUpdates = false
+        let back = RequestLog()
+        SessionTestURLProtocol.handler = { request, complete in
+            back.record(request)
+            complete(.success((200, try! JSONEncoder.deliveryTracker.encode(request.httpMethod == "PATCH" ? off : on))))
+        }
+        await store.loadNotificationPreferences()
+        XCTAssertFalse(store.markNewUpdates)
+        for _ in 0..<300 where store.notificationPreferences?.markNewUpdates != false { try await Task.sleep(for: .milliseconds(10)) }
+        XCTAssertEqual(back.requests.map(\.method), ["GET", "PATCH"])
+        XCTAssertEqual(back.requests.last?.body["markNewUpdates"] as? Bool, false)
+        XCTAssertNil(store.unsaved(.markNewUpdates))
+
+        UserDefaults.standard.set(true, forKey: ParcelStore.DisplayChoice.markNewUpdates.legacyUnsavedKey)
+        XCTAssertEqual(store.unsaved(.markNewUpdates), .init(owner: nil, enabled: false))
+    }
+
     private func forgetMarkNewUpdatesChoice() {
         UserDefaults.standard.removeObject(forKey: ParcelStore.markNewUpdatesOffKey)
         UserDefaults.standard.removeObject(forKey: ParcelStore.markNewUpdatesUnsavedKey)
+        UserDefaults.standard.removeObject(forKey: ParcelStore.DisplayChoice.markNewUpdates.legacyUnsavedKey)
     }
 
     private func forgetPeekAiChoice() {
         UserDefaults.standard.removeObject(forKey: ParcelStore.DisplayChoice.showPeekAi.offKey)
         UserDefaults.standard.removeObject(forKey: ParcelStore.DisplayChoice.showPeekAi.unsavedKey)
+        UserDefaults.standard.removeObject(forKey: ParcelStore.DisplayChoice.showPeekAi.legacyUnsavedKey)
     }
 
     @MainActor func testPeekAiShowsUntilSwitchedOffAndTheChoiceFollowsTheAccount() async throws {

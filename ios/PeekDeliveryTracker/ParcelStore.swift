@@ -99,8 +99,16 @@ final class ParcelStore: ObservableObject {
         }
 
         /// Set while a choice made on this device, without an account or while the server could not take it, has not
-        /// been saved to the account: it stands over the account's until it is.
+        /// been saved to the account: whose it is ("device" without an account) and what it is (`UnsavedChoice`).
         var unsavedKey: String {
+            switch self {
+            case .markNewUpdates: "sdt.markNewUpdatesUnsaved.v2"
+            case .showPeekAi: "sdt.showPeekAiUnsaved.v2"
+            }
+        }
+
+        /// Where an earlier version kept an unsaved choice without saying whose.
+        var legacyUnsavedKey: String {
             switch self {
             case .markNewUpdates: "sdt.markNewUpdatesUnsaved.v1"
             case .showPeekAi: "sdt.showPeekAiUnsaved.v1"
@@ -364,13 +372,39 @@ final class ParcelStore: ObservableObject {
 
     /// An account's choice is saved with its preferences. A choice the account has not taken, made without one or while
     /// the server could not take it, stands on this device until it is saved, and goes to the account when its
-    /// preferences are next read.
+    /// preferences are next read: one made without an account goes to the account signed in to, and one an account made
+    /// waits for that account, so another signed in meanwhile neither takes it nor loses it.
     private func set(_ choice: DisplayChoice, _ enabled: Bool) {
         guard value(of: choice) != enabled else { return }
         keep(choice, enabled)
         guard !isDemo else { return }
-        UserDefaults.standard.set(true, forKey: choice.unsavedKey)
+        setUnsaved(choice, UnsavedChoice(owner: session.user?.id, enabled: enabled))
         save(choice, enabled)
+    }
+
+    /// A choice made on this device (`enabled`) that the account `owner` has not taken, or made with no account (`owner` nil).
+    struct UnsavedChoice: Equatable {
+        let owner: UUID?
+        let enabled: Bool
+    }
+
+    func unsaved(_ choice: DisplayChoice) -> UnsavedChoice? {
+        let defaults = UserDefaults.standard
+        if let stored = defaults.string(forKey: choice.unsavedKey) {
+            let parts = stored.split(separator: " ").map(String.init)
+            guard parts.count == 2 else { return nil }
+            let owner = UUID(uuidString: parts[0])
+            guard owner != nil || parts[0] == "device" else { return nil }
+            return UnsavedChoice(owner: owner, enabled: parts[1] != "off")
+        }
+        // Left by an earlier version, which didn't say whose: the next account's, as it was then.
+        return defaults.bool(forKey: choice.legacyUnsavedKey) ? UnsavedChoice(owner: nil, enabled: value(of: choice)) : nil
+    }
+
+    private func setUnsaved(_ choice: DisplayChoice, _ unsaved: UnsavedChoice?) {
+        UserDefaults.standard.removeObject(forKey: choice.legacyUnsavedKey)
+        guard let unsaved else { return UserDefaults.standard.removeObject(forKey: choice.unsavedKey) }
+        UserDefaults.standard.set("\(unsaved.owner?.uuidString ?? "device") \(unsaved.enabled ? "on" : "off")", forKey: choice.unsavedKey)
     }
 
     /// Saves the choice with the account's preferences, the rest as stored. Taken, the choice follows the account again.
@@ -394,7 +428,7 @@ final class ParcelStore: ObservableObject {
             case .showPeekAi: try? await api.saveDisplayPreferences(showPeekAi: enabled)
             }
             guard var saved = answer, generation == session.generation else { return }
-            if made == displayChoiceSaves[choice]?.choices { UserDefaults.standard.removeObject(forKey: choice.unsavedKey) }
+            if made == displayChoiceSaves[choice]?.choices { setUnsaved(choice, nil) }
             // Switched again meanwhile: that choice stands, and its own save is on its way.
             else { saved[keyPath: choice.field] = value(of: choice) }
             notificationPreferenceSaves += 1
@@ -403,13 +437,16 @@ final class ParcelStore: ObservableObject {
         displayChoiceSaves[choice] = saves
     }
 
-    /// The account's choice, as read or saved, unless one made on this device has not been saved: that one stands and
-    /// goes to the account, or, the account holding it already, follows the account again.
+    /// The account's choice, as read or saved, unless one made on this device for this account, or without one, has not
+    /// been saved: that one stands and goes to the account, or, the account holding it already, follows the account
+    /// again. One another account made here waits for that account.
     private func follow(_ choice: DisplayChoice, _ stored: Bool) {
-        guard UserDefaults.standard.bool(forKey: choice.unsavedKey) else { return keep(choice, stored) }
+        guard let unsaved = unsaved(choice), unsaved.owner == nil || unsaved.owner == session.user?.id else {
+            return keep(choice, stored)
+        }
         guard (displayChoiceSaves[choice]?.saving ?? 0) == 0 else { return }
-        if stored == value(of: choice) { UserDefaults.standard.removeObject(forKey: choice.unsavedKey) }
-        else { save(choice, value(of: choice)) }
+        keep(choice, unsaved.enabled)
+        if stored == unsaved.enabled { setUnsaved(choice, nil) } else { save(choice, unsaved.enabled) }
     }
 
     private func keep(_ choice: DisplayChoice, _ enabled: Bool) {

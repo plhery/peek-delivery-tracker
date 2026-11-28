@@ -146,6 +146,46 @@ describe('the choice to mark new updates', () => {
     expect(vi.mocked(saveNotificationPreferences).mock.calls[0][0].markNewUpdates).toBe(false);
   });
 
+  it('keeps a choice an account could not save for that account, not another signed in meanwhile', async () => {
+    const first = session();
+    await loadNotificationPreferences(first);
+    const made = renderHook(() => useMarkNewUpdatesChoice(first));
+    vi.mocked(saveNotificationPreferences).mockRejectedValueOnce(new Error('offline'));
+    act(() => made.result.current[1](false));
+    await waitFor(() => expect(saveNotificationPreferences).toHaveBeenCalledTimes(1));
+    await act(() => new Promise((settled) => setTimeout(settled, 0)));
+    made.unmount();
+
+    // Another account on this browser follows its own choice and takes nothing.
+    const other = { userId: 'user-2', getAccessToken: vi.fn().mockResolvedValue('token') };
+    const theirs = renderHook(() => useMarkNewUpdatesChoice(other));
+    await act(async () => { await loadNotificationPreferences(other); });
+    expect(theirs.result.current[0]).toBe(true);
+    await act(() => new Promise((settled) => setTimeout(settled, 0)));
+    expect(saveNotificationPreferences).toHaveBeenCalledTimes(1);
+    theirs.unmount();
+
+    // Back, the first account's choice stands and goes to it.
+    const back = session();
+    const again = renderHook(() => useMarkNewUpdatesChoice(back));
+    await act(async () => { await loadNotificationPreferences(back); });
+    expect(again.result.current[0]).toBe(false);
+    await waitFor(() => expect(saveNotificationPreferences).toHaveBeenCalledTimes(2));
+    expect(vi.mocked(saveNotificationPreferences).mock.calls[1][0].markNewUpdates).toBe(false);
+    expect(vi.mocked(saveNotificationPreferences).mock.calls[1][1].userId).toBe('user-1');
+  });
+
+  it('takes a choice an earlier version left unsaved to the account signed in to next', async () => {
+    window.localStorage.setItem(MARK_NEW_UPDATES_STORAGE_KEY, 'off');
+    window.localStorage.setItem(MARK_NEW_UPDATES_UNSAVED_KEY, '1');
+    const auth = session();
+    const choice = renderHook(() => useMarkNewUpdatesChoice(auth));
+    await act(async () => { await loadNotificationPreferences(auth); });
+    expect(choice.result.current[0]).toBe(false);
+    await waitFor(() => expect(saveNotificationPreferences).toHaveBeenCalledTimes(1));
+    expect(vi.mocked(saveNotificationPreferences).mock.calls[0][0].markNewUpdates).toBe(false);
+  });
+
   it('keeps this browser’s choice against a server that does not name one', async () => {
     const auth = session();
     window.localStorage.setItem(MARK_NEW_UPDATES_STORAGE_KEY, 'off');

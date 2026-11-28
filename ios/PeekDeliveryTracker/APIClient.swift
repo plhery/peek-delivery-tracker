@@ -441,18 +441,22 @@ final class DeliveryAPIClient {
         try await request("/api/push/preferences")
     }
 
+    /// Saves the display choices that changed, and the phone's time zone, which the delivery email and the
+    /// notifications write their times in, as the web's and Android's saves do.
     func saveDisplayPreferences(
         markNewUpdates: Bool? = nil, showPeekAi: Bool? = nil, clock: NotificationPreferencesClock? = nil,
-        distance: NotificationPreferencesDistance? = nil
+        distance: NotificationPreferencesDistance? = nil, timezone: String = TimeZone.current.identifier
     ) async throws -> NotificationPreferences {
         struct Patch: Encodable {
             let markNewUpdates: Bool?
             let showPeekAi: Bool?
             let clock: NotificationPreferencesClock?
             let distance: NotificationPreferencesDistance?
+            let timezone: String
         }
         return try await request("/api/push/preferences", method: "PATCH",
-                                 body: Patch(markNewUpdates: markNewUpdates, showPeekAi: showPeekAi, clock: clock, distance: distance))
+                                 body: Patch(markNewUpdates: markNewUpdates, showPeekAi: showPeekAi, clock: clock, distance: distance,
+                                             timezone: timezone))
     }
 
     /// Saves the events alone, and clears the retired quiet hours: the delivery email and the display choices save

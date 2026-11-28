@@ -112,7 +112,7 @@ Euroopan-linjalla JRT:n omat rivit ovat Pekingin ajassa: klo 17.00 siellä on ta
 
 ## JRT-yhteystiedot ja asiakaspalvelu
 
-29. lokakuuta 2026 mennessä Peek ei ollut löytänyt JRT:lle yhteystietoja: yhtiölle ei tunneta muuta verkkosivustoa kuin sen seurantasivu, eikä vastaanottajille tarkoitettua puhelinnumeroa, sähköpostiosoitetta tai katuosoitetta. Myyjä on tilannut kuljetuksen JRT:ltä, joten ota tilaustasi koskevissa asioissa yhteyttä myyjään tai kauppapaikkaan, jos myyjä ei vastaa.
+Peek ei ollut 29. lokakuuta 2026 mennessä löytänyt JRT:lle yhteystietoja: yhtiölle ei tunneta muuta verkkosivustoa kuin sen seurantasivu, eikä vastaanottajille tarkoitettua puhelinnumeroa, sähköpostiosoitetta tai katuosoitetta. Myyjä on tilannut kuljetuksen JRT:ltä, joten ota tilaustasi koskevissa asioissa yhteyttä myyjään tai kauppapaikkaan, jos myyjä ei vastaa.
 
 ## JRT-paketin seuranta Peekissä
 

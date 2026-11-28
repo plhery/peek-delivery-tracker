@@ -22406,6 +22406,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "gofo",
+      "catalog": "gofo",
+      "slug": "gofo-express-tracking",
+      "title": "GOFO Express-tracking: statussen, foto's en ondersteuning",
+      "name": "GOFO Express",
+      "color": "#fc4c02"
+    },
+    {
+      "id": "china-post",
+      "catalog": "china-post",
+      "slug": "china-post-tracking",
+      "title": "China Post-tracking: nummer, statussen en wie bezorgt",
+      "name": "China Post",
+      "color": "#006d46"
+    },
+    {
       "id": "postnl",
       "catalog": "spring-gds",
       "slug": "postnl-pakket-volgen",
@@ -22452,6 +22468,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GZYL track & trace: pakket volgen met een YL…YQ-nummer",
       "name": "GZYL",
       "color": "#4e79e1"
+    },
+    {
+      "id": "shouwu",
+      "catalog": "shouwu",
+      "slug": "shouwu-tracking",
+      "title": "Shouwu-tracking: SWECN…YQ-nummers, scans en wie bezorgt",
+      "name": "Shouwu International",
+      "color": "#be2c33"
     },
     {
       "id": "zto",
@@ -22674,6 +22698,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e30613"
     },
     {
+      "id": "china-post",
+      "catalog": "china-post",
+      "slug": "china-post-tracking",
+      "title": "China Post-sporing: nummer, statusser og hvem der leverer",
+      "name": "China Post",
+      "color": "#006d46"
+    },
+    {
       "id": "dhlink",
       "catalog": "dhlink",
       "slug": "dhlink-spor-pakke",
@@ -22844,6 +22876,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "JRT-seuranta: JRT…MM-numerot, lentoskannaukset ja DHL",
       "name": "JRT",
       "color": "#023053"
+    },
+    {
+      "id": "shouwu",
+      "catalog": "shouwu",
+      "slug": "shouwu-tracking",
+      "title": "Shouwu-seuranta: SWECN…YQ-numerot, tilat ja toimitus",
+      "name": "Shouwu International",
+      "color": "#be2c33"
     },
     {
       "id": "xinghe-freight",
@@ -23556,6 +23596,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#4e79e1"
     },
     {
+      "id": "shouwu",
+      "catalog": "shouwu",
+      "slug": "shouwu-tracking",
+      "title": "Praćenje Shouwu: SWECN…YQ brojevi, statusi i dostava",
+      "name": "Shouwu International",
+      "color": "#be2c33"
+    },
+    {
       "id": "cne",
       "catalog": "cne",
       "slug": "cne-express-pracenje-posiljke",
@@ -23844,6 +23892,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Відстеження Укрпошта — трек-номери, статуси та митниця",
       "name": "Ukrposhta",
       "color": "#ffbe0c"
+    },
+    {
+      "id": "gofo",
+      "catalog": "gofo",
+      "slug": "gofo-express-tracking",
+      "title": "Відстеження GOFO Express: статуси, фото та підтримка",
+      "name": "GOFO Express",
+      "color": "#fc4c02"
     },
     {
       "id": "j-and-t-de",

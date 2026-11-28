@@ -41,6 +41,21 @@ const LINK = /https?:\/\/[^\s<>"']+/gi;
  * nine digits.
  */
 const PERCENT_ESCAPE = /%[0-9A-F]{2}/gi;
+/**
+ * A shop's order label, in the door's languages and a few more: "Order #", "Bestelling", "Bestellnummer:", "N° de
+ * commande :", "número de pedido", "nr zamówienia". A number right after one is the order's, whatever carrier its
+ * shape fits, as DTDC's "N" and eight digits. "Encomenda" is left out: it names a parcel in Brazil.
+ */
+const ORDER_WORDS = String.raw`orders?|ordre|bestellung|bestelling|bestell|bestel|best[äa]llning|bestilling|auftrag|commande|ordine|pedido|orden|zam[óo]wieni[ae]|objedn[áa]vk[ay]|tilaus|rendel[ée]s|comand[aă]|заказа?`;
+const ORDER_NUMBER_WORDS = String.raw`numbers?|no|nr|nummer|numero|num[ée]ro|n[úu]mero|numer|n[°º]|n\.?º|id|ref|reference|č|номер|szám`;
+const ORDER_LABEL = new RegExp(String.raw`(?<![\p{L}0-9])(?:(?:${ORDER_NUMBER_WORDS})[\s.]*(?:(?:de|du|del|do|da|di|of)\s+|d['’]\s*)?)?`
+  + String.raw`(?:${ORDER_WORDS})(?:s?(?:nummer|nr|numero|szám))?(?:[\s.\-/]*(?:${ORDER_NUMBER_WORDS})(?![\p{L}]))*[\s.]*[:#]?\s*$`, 'iu');
+/** Whether the number starting at `index` of a line follows an order's label on it (ORDER_LABEL). */
+function followsOrderLabel(line: string, index: number): boolean {
+  return ORDER_LABEL.test(line.slice(Math.max(0, index - 48), index));
+}
+/** Whether the number starting at `index` of a line is another number's, by the label before it: a tax number's or an order's. */
+const followsOtherLabel = (line: string, index: number) => followsTaxLabel(line, index) || followsOrderLabel(line, index);
 /** Each country's IBAN length (ISO 13616), for the countries whose shops and carriers print one. */
 const IBAN_LENGTHS: Readonly<Record<string, number>> = {
   AD: 24, AT: 20, BE: 16, BG: 22, CH: 21, CY: 28, CZ: 24, DE: 22, DK: 18, EE: 20, ES: 24, FI: 18, FO: 18, FR: 27,
@@ -251,7 +266,8 @@ const CANDIDATE_PATTERNS = TRACKING_CANDIDATE_PATTERNS.map((pattern) => new RegE
  * escape is no part of a number, in a link the parser read as text or in the
  * rest of one an email's text wrapped onto the next line. A number after a
  * tax or company-number label ("VAT: BE0123456789") or inside a bank
- * account's IBAN is a business's, which Amazon's shape also fits.
+ * account's IBAN is a business's, which Amazon's shape also fits, and one
+ * after an order's label is the shop's order number.
  */
 export function numbersInText(text: string): NumberInText[] {
   const found = new Map<string, NumberInText>();
@@ -282,7 +298,7 @@ export function numbersInText(text: string): NumberInText[] {
     for (const pattern of CANDIDATE_PATTERNS) {
       for (const hit of prose.matchAll(pattern)) {
         const candidate = hit[0].trim();
-        if (!/\d/.test(candidate) || followsTaxLabel(prose, hit.index)) continue;
+        if (!/\d/.test(candidate) || followsOtherLabel(prose, hit.index)) continue;
         const detected = detection(candidate);
         if (detected?.confidence !== 'high') continue;
         const index = hit.index, end = index + hit[0].length;
@@ -322,7 +338,7 @@ function uncertainNumberInText(text: string): TrackingInputMatch | null {
     for (const pattern of TRACKING_CANDIDATE_PATTERNS) {
       for (const hit of prose.matchAll(new RegExp(pattern.source, pattern.flags))) {
         const candidate = hit[0].trim();
-        if (!/\d/.test(candidate) || followsTaxLabel(prose, hit.index)) continue;
+        if (!/\d/.test(candidate) || followsOtherLabel(prose, hit.index)) continue;
         const detection = detectCarrierMatch(candidate, IN_TEXT);
         if (detection.confidence !== 'low') continue;
         const normalized = normalizeTrackingNumber(candidate);
@@ -438,7 +454,8 @@ export function carrierNumberInText(text: string, carriers: readonly CarrierId[]
       for (const hit of prose.matchAll(pattern)) {
         const candidate = hit[0].trim();
         // "+41 44 123 45 67": a number after a plus sign is a phone's.
-        if (!/\d/.test(candidate) || PRINTED_DATE.test(candidate) || /\+[\d\s()]*$/.test(prose.slice(Math.max(0, hit.index - 8), hit.index + 1))) continue;
+        if (!/\d/.test(candidate) || PRINTED_DATE.test(candidate) || followsOrderLabel(prose, hit.index)
+          || /\+[\d\s()]*$/.test(prose.slice(Math.max(0, hit.index - 8), hit.index + 1))) continue;
         const normalized = normalizeTrackingNumber(candidate);
         if (!normalized || found.has(normalized) || nonTrackingShape(normalized)) continue;
         if (found.size >= MOST_CANDIDATES_READ) return null;

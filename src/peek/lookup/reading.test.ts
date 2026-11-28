@@ -67,6 +67,21 @@ describe('reading the field', () => {
     expect(read('Your parcel BE0123456789 is on its way')).toEqual([['BE0123456789', 'amazon-logistics']]);
   });
 
+  it('reads no number after an order label', () => {
+    const read = (text: string) => numbersInText(text).map(({ normalized, match }) => [normalized, match.carrier]);
+    // Made-up order numbers in DTDC's "N" and eight digits, which that carrier's detection takes as certain.
+    expect(read('Your order is on its way\nBestelling N12345678\nDHL RR123456785DE')).toEqual([['RR123456785DE', 'dhl']]);
+    expect(read('Order #N12345678 has shipped')).toEqual([]);
+    expect(read('Bestellnummer: N12345678')).toEqual([]);
+    expect(read('N° de commande : N12345678')).toEqual([]);
+    expect(read('Numero d’ordine N12345678')).toEqual([]);
+    expect(read('Nr zamówienia: N12345678')).toEqual([]);
+    // A number after the order's own number, or with no order label, is still read.
+    expect(read('Order 12345, tracking N12345678')).toEqual([['N12345678', 'dtdc']]);
+    expect(read('Your parcel N12345678 is on its way')).toEqual([['N12345678', 'dtdc']]);
+    expect(read('In order to follow it: N12345678')).toEqual([['N12345678', 'dtdc']]);
+  });
+
   it('reads no number out of a bank account', () => {
     const read = (text: string) => numbersInText(text).map(({ normalized, match }) => [normalized, match.carrier]);
     // The registry's example IBANs, after a bank's made-up name: their first twelve characters fit Amazon's shape.

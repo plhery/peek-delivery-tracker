@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-11-27
 ---
 
-Si el seguimiento de tu paquete no se actualiza desde hace días, casi siempre significa que nadie lo ha escaneado en el siguiente centro, no que esté perdido. Los transportistas escanean en plataformas y aduanas, no en ruta: un fin de semana, un vuelo, la aduana o `Pre-admisión`/`Etiqueta creada` dejan silencios habituales. Espera hasta la fecha prevista y el plazo de cada empresa ([Correos](carrier:correos-spain) admite reclamaciones desde 3 días en Paq Premium o 4 en Paq Estándar; InPost, por demora pasados 5 días desde el aviso de envío y por pérdida a los 30), y reclama siempre primero a la tienda que contrató el envío.
+Si el seguimiento de tu paquete no se actualiza desde hace días, casi siempre significa que nadie lo ha escaneado en el siguiente centro, no que esté perdido. Los transportistas escanean en plataformas y aduanas, no en ruta: un fin de semana, un vuelo, la aduana o `Pre-admisión`/`Etiqueta creada` dejan silencios habituales. Espera hasta la fecha prevista y el plazo de cada empresa ([Correos](carrier:correos-spain) admite reclamaciones desde 3 días después de la admisión en Paq Premium o 4 en Paq Estándar; InPost, por demora pasados 5 días desde el aviso de envío y por pérdida a los 30), y reclama siempre primero a la tienda que contrató el envío.
 
 ## ¿Por qué no se actualiza el seguimiento de mi paquete?
 

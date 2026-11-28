@@ -61,7 +61,7 @@ Os códigos da Amazon Shipping têm duas letras de país europeu (`PT`, `ES`, `F
 
 ### Quanto tempo demora a Amazon Shipping a entregar?
 
-Quando o rastreador público indica dia previsto, o Peek mostra-o automaticamente (exceto em códigos `TBA`, `TBC` e `TBM`), mantendo o histórico disponível durante 45 dias. Na UE, sem data combinada, o prazo legal máximo de entrega é de 30 dias.
+Quando o rastreador público indica dia previsto, o Peek mostra-o (exceto em códigos `TBA`, `TBC` e `TBM`); o rastreador da Amazon deixa de dar o histórico após 45 dias, e então o Peek avisa e pára de consultar. Na UE, sem data combinada, o prazo legal máximo de entrega é de 30 dias.
 
 ### A quem reclamar se uma encomenda Amazon Shipping atrasar ou não chegar?
 

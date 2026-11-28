@@ -6,7 +6,7 @@ published: 2026-10-28
 updated: 2026-11-27
 ---
 
-Track a CTTYEX (Shenzhen Chengtai Tongyun International Logistics / 深圳诚泰通运国际物流, founded in 2011) parcel from China by pasting its 16-character `CTTY` + ten digits + `CN` number in the box above or on [cttyvip888.com](https://www.cttyvip888.com/assets/html/search.html) (capitals only, last two months of parcels). CTTYEX flies parcels for sellers on platforms such as Amazon, Wish, Tophatter, VOVA and Shopify and logs every scan — even local scans in your country — in Beijing time (`UTC+8`), which Peek converts to your device's time zone.
+Track a CTTYEX (Shenzhen Chengtai Tongyun International Logistics / 深圳诚泰通运国际物流, which says it was founded in 2011) parcel from China by pasting its 16-character `CTTY` + ten digits + `CN` number in the box above or on [cttyvip888.com](https://www.cttyvip888.com/assets/html/search.html) (capitals only, last two months of parcels). CTTYEX flies parcels for sellers on platforms such as Amazon, Wish, Tophatter, VOVA and Shopify and logs every scan — even local scans in your country — in Beijing time (`UTC+8`), which Peek converts to your device's time zone.
 
 ## CTTYEX tracking number: what it looks like
 
@@ -102,7 +102,7 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ### What is CTTYEX (诚泰通运)?
 
-CTTYEX is Shenzhen Chengtai Tongyun International Logistics (深圳诚泰通运国际物流), a cross-border e-commerce forwarder founded in 2011 in Shenzhen that flies parcels abroad to the US, UK, Canada, Germany, Australia and other destinations. Its tracking numbers are 16 characters: `CTTY`, ten digits and `CN`.
+CTTYEX is Shenzhen Chengtai Tongyun International Logistics (深圳诚泰通运国际物流), a cross-border e-commerce forwarder in Shenzhen that says it was founded in 2011 and runs charter flights to the US, UK, Canada, Germany and Australia. Its tracking numbers are 16 characters: `CTTY`, ten digits and `CN`.
 
 ### Where do I track a CTTY…CN number and why must it be uppercase?
 

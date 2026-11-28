@@ -1,6 +1,6 @@
 ---
 title: GlobalPost tracking: GP numbers and who delivers
-description: Track a GlobalPost parcel (GP…US/GB or SDC): why Economy tracking stops after customs, local delivery partners, transit times, 30-day claims and support.
+description: Track a GlobalPost parcel (GP…US/GB or SDC): why Economy tracking stops after customs, local delivery partners, transit times, lost parcels and support.
 slug: globalpost-tracking
 published: 2026-11-02
 updated: 2026-11-27
@@ -105,7 +105,7 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ### Is GlobalPost legit and what does a GP tracking number look like?
 
-Yes: GlobalPost is part of Auctane, ships to over 220 countries through platforms like ShipStation and Stamps.com, and has delivered over 60 million shipments. Current numbers have 18 characters — `GP`, four service letters (such as `GPECON` or `GPSTND`), ten digits and `US` or `GB` — while older labels start with `SDC` plus 15 digits.
+Yes: GlobalPost is part of Auctane, ships to over 220 countries through platforms like ShipStation and Stamps.com, and says it has delivered more than 60 million shipments. Current numbers have 18 characters — `GP`, four letters for the service, ten digits and `US` or `GB` — while older labels start with `SDC` plus 15 digits.
 
 ### Why did my GlobalPost Economy tracking stop after customs?
 
@@ -113,11 +113,11 @@ On GlobalPost Economy, tracking ends once the parcel arrives in your country and
 
 ### Who delivers GlobalPost parcels in my country?
 
-A local postal or commercial carrier in your destination country. GlobalPost's tracker can show the carrier and its own tracking number under "Final Mile Tracking By", and when Peek recognises that carrier or postal code it automatically follows the handover.
+A local postal or commercial carrier in your destination country. GlobalPost's tracker can show the carrier and its own tracking number under "Final Mile Tracking By", and Peek asks that carrier too when it knows it, or your country's post for a postal number.
 
 ### How long does GlobalPost take to deliver?
 
-GlobalPost quotes 5 to 6 days to nearby countries and up to 20 days farther afield — specifically 10 to 14 business days for Economy, 6 to 10 for Standard and Flat Rate, and 5 to 8 for Plus (duties and taxes included) from when its shipping centre processes the parcel.
+GlobalPost quotes 5 to 6 days to nearby countries and up to 20 days farther afield; it quotes sellers 10 to 14 business days for Economy, 6 to 10 for Standard and Flat Rate, and 5 to 8 for Plus (duties and taxes included) from when its shipping centre processes the parcel.
 
 ### How do I contact GlobalPost or report a missing parcel?
 

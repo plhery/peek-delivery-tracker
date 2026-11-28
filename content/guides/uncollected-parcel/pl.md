@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-11-27
 ---
 
-Nieodebrana paczka z automatu, punktu odbioru lub poczty wraca do nadawcy zaraz po upływie terminu z SMS-a, e-maila albo awizo. Czas na odbiór zależy od przewoźnika: najdłużej czeka przesyłka polecona w Poczcie Polskiej (14 dni od dnia po pierwszym awizo), a najkrócej paczka w automacie — w Allegro One Box 2 dni kalendarzowe, w DPD Pickup i DHL BOX 24/7 2 dni robocze, a w Pocztex AUTOMAT 72 godziny. Pamiętaj, że samo nieodebranie paczki nie zastępuje odstąpienia od umowy: złóż sklepowi oświadczenie, aby otrzymać zwrot pieniędzy.
+Nieodebrana paczka z automatu, punktu odbioru lub poczty wraca do nadawcy po upływie terminu z SMS-a, e-maila albo awizo. Czas na odbiór zależy od przewoźnika: najdłużej czeka przesyłka polecona w Poczcie Polskiej (14 dni od dnia po pierwszym awizo), a najkrócej paczka w automacie — w Allegro One Box 2 dni kalendarzowe, w DPD Pickup i DHL BOX 24/7 2 dni robocze, a w Pocztex AUTOMAT 72 godziny. Pamiętaj, że samo nieodebranie paczki nie zastępuje odstąpienia od umowy: złóż sklepowi oświadczenie, aby otrzymać zwrot pieniędzy.
 
 Kod nie przyszedł albo automat był pełny? Zobacz [Paczkomat i automat paczkowy](guide:parcel-lockers).
 

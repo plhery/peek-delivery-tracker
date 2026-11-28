@@ -1,12 +1,12 @@
 ---
 title: DPD Portugal rastreio: estados, pontos Pickup e contactos
-description: Rastreio DPD Portugal: número de 14 algarismos, estados, janela Predict de 1 hora, 2.300 pontos Pickup (7–10 dias), cacifos (72h) e contacto 21 854 6001.
+description: Rastreio DPD Portugal: número de 14 algarismos, estados, janela Predict de 1 hora, pontos Pickup (conta com 7 dias úteis), cacifos (72h) e contacto 21 854 6001.
 slug: dpd-portugal-rastreio
 published: 2026-10-22
 updated: 2026-11-27
 ---
 
-A DPD Portugal (do grupo Geopost, o mesmo da [Chronopost](carrier:chronopost)) entrega no dia útil seguinte no continente e em 2 a 5 dias na Madeira e nos Açores. Escreve o número de 14 algarismos ou a referência no [Track & Trace](https://tracking.dpd.pt/track-and-trace) ou cola-o no topo desta página; mais abaixo encontras o significado dos estados, a janela Predict de 1 hora, os cerca de 2.300 pontos Pickup e 500 cacifos, reclamações e o contacto 21 854 6001.
+A DPD Portugal (do grupo Geopost, o mesmo da [Chronopost](carrier:chronopost)) entrega no continente, na Madeira e nos Açores; no serviço nacional, segundo a DPD, no dia útil seguinte à recolha no continente e em 2 a 5 dias nas ilhas. Escreve o número de 14 algarismos ou a referência no [Track & Trace](https://tracking.dpd.pt/track-and-trace) ou cola-o no topo desta página; mais abaixo encontras o significado dos estados, a janela Predict de 1 hora, os pontos Pickup (cerca de 2.300, entre lojas e cacifos) e os cacifos DPD, reclamações e o contacto 21 854 6001.
 
 ## Número de rastreio DPD: onde o encontrar
 

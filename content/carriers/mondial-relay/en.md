@@ -89,7 +89,7 @@ Mondial Relay aims for an average of 3 working days from drop-off to a Point Rel
 
 ### How long does a Mondial Relay Point Relais or locker keep a parcel?
 
-In Belgium and the Netherlands, 5 calendar days (Sundays and holidays included) with no extension, after which it returns to the sender. At a locker, enter the 6-digit pickup code sent by email, SMS or app.
+In Belgium and the Netherlands, 5 calendar days, Sundays and holidays included. Belgium allows no extension: the parcel then goes back to the sender. At a locker, enter the 6-digit pickup code sent by email, SMS or app.
 
 ### Is Mondial Relay the same as InPost?
 

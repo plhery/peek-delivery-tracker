@@ -6,7 +6,7 @@ published: 2026-10-28
 updated: 2026-11-27
 ---
 
-TopYou (通邮, Tongyou, 通邮集团 or SZTY56 — 深圳市通邮物流科技（集团）股份有限公司, founded in 2016 in Shenzhen) is a cross-border forwarder running international lines from China. Paste your 17-character `TYZR…YQ` waybill in the box above (or in capitals on `track.szty56.com`) to follow it from Shenzhen through export, flight, customs and last-mile handover, such as USPS in the US, GOFO in France and Italy, iMile in Germany or DPD in Austria.
+TopYou (通邮, Tongyou, 通邮集团 or SZTY56 — 深圳市通邮物流科技（集团）股份有限公司, which says it was founded in Shenzhen in 2016) is a cross-border forwarder running international lines from China. Paste your 17-character `TYZR…YQ` waybill in the box above (or in capitals on `track.szty56.com`) to follow it from Shenzhen through export, flight, customs and last-mile handover, such as USPS in the US, GOFO in France and Italy, iMile in Germany or DPD in Austria.
 
 ## TopYou tracking number: what it looks like
 
@@ -115,7 +115,7 @@ Peek checks up to every 10 minutes while you have the parcel open, or on its del
 
 ### What is TopYou (通邮 / SZTY56)?
 
-It is 深圳市通邮物流科技（集团）股份有限公司, also called 通邮集团, Tongyou or SZTY56, a cross-border forwarder in Shenzhen, China, founded in 2016 with sorting centres across Shenzhen, Guangzhou, Shanghai and other cities handling over 800,000 orders a day.
+It is 深圳市通邮物流科技（集团）股份有限公司, also called 通邮集团, Tongyou or SZTY56, a cross-border forwarder in Shenzhen, China. It says it was founded in 2016, has branches and sorting centres in Shenzhen, Guangzhou, Shanghai and other Chinese cities, and handles more than 800,000 orders a day.
 
 ### What does a TopYou tracking number look like, and why isn't it found?
 

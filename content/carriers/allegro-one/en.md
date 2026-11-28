@@ -108,7 +108,7 @@ The seller sets the delivery price in the offer's price list. With Allegro Smart
 
 ### How do I claim for a late, lost or damaged Allegro One parcel?
 
-Report a "problem z zakupem" to the seller from 1 hour after paying (the seller has 24 hours to reply excluding weekends and holidays, and 7 days to resolve delivery issues), or file a delivery complaint electronically with Allegro within 12 months of posting (7 days for hidden damage); Allegro replies within 30 days.
+Report a "problem z zakupem" to the seller from 1 hour after paying (the seller has 24 hours to reply excluding weekends and holidays, and 7 days to resolve delivery issues). If the parcel reached you, or the seller passed you the right to claim, you can also file a delivery complaint with Allegro within 12 months of posting (within 7 days of accepting it for hidden loss or damage); Allegro answers within 30 days at most.
 
 :::sources
 - [Allegro: The Allegro Delivery program, information for sellers](https://help.allegro.com/en/sell/a/the-allegro-delivery-program-information-for-sellers-MR7exl1wYS4) – One Box, One Punkt, One Kurier in selected cities, partners, waiting times, locker helpline, customer service, price lists

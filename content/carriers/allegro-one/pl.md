@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-27
 ---
 
-Allegro One to własna sieć dostaw Allegro w ramach Allegro Delivery: automaty paczkowe Allegro One Box, punkty Allegro One Punkt i kurier Allegro One Kurier. Kto dostarcza paczkę? Do One Punktu wozi ją DPD, do One Boxa DPD, DHL albo ORLEN Paczka, a w wybranych miastach do automatów, punktów i pod drzwi także własny Allegro One Kurier. Paczkę śledzisz w „Moich przesyłkach” na allegro.pl, w aplikacji Allegro, na stronie Allegro Delivery albo po wklejeniu numeru w pole powyżej; z opcją „dostawa jutro” One Kurier doręcza w najbliższym dniu roboczym lub w sobotę (gwarancja 3 dni robocze), a w wybranych miastach dostępna jest dostawa tego samego dnia do One Boxa z odbiorem 16:00–22:00.
+Allegro One to własna sieć dostaw Allegro w ramach Allegro Delivery: automaty paczkowe Allegro One Box, punkty Allegro One Punkt i kurier Allegro One Kurier. Kto dostarcza paczkę? Do One Punktu wozi ją DPD, do One Boxa DPD, DHL albo ORLEN Paczka, a w wybranych miastach do automatów, punktów i pod drzwi także własny Allegro One Kurier. Paczkę śledzisz w „Moich przesyłkach” na allegro.pl, w aplikacji Allegro, na stronie Allegro Delivery albo po wklejeniu numeru w pole powyżej; z opcją „dostawa jutro” Allegro zapowiada doręczenie przez One Kuriera w najbliższym dniu roboczym albo w sobotę po dniu nadania, a gwarantuje je w ciągu 3 dni roboczych, a w wybranych miastach dostępna jest dostawa tego samego dnia do One Boxa z odbiorem 16:00–22:00.
 
 ## Gdzie jest numer przesyłki Allegro One
 
@@ -112,7 +112,7 @@ Do One Boxa i One Punktu trafiają paczki do 20 kg i do 64 × 41 × 38 cm. One K
 
 ### Co zrobić, gdy paczka Allegro One jest opóźniona lub zaginęła?
 
-Zgłoś „problem z zakupem” sprzedającemu (ma 24 godziny robocze na odpowiedź i 7 dni na rozwiązanie sprawy opóźnienia lub zaginięcia). Reklamację samej dostawy — paczka uznawana jest za zaginioną po 30 dniach od nadania — składasz elektronicznie bezpośrednio w Allegro.
+Zgłoś „problem z zakupem” sprzedającemu: na pierwszą wiadomość ma 24 godziny, nie licząc sobót, niedziel i dni wolnych od pracy, a na rozwiązanie sprawy opóźnienia lub zaginięcia 7 dni. Reklamację dostawy składasz w Allegro, gdy paczka do ciebie dotarła albo gdy nie dotarła, a sprzedający przekazał ci prawo do reklamacji; paczka liczy się jako zaginiona, gdy w ciągu 30 dni od nadania nie została doręczona ani awizowana.
 
 :::sources
 - [Allegro: Program dostaw Allegro Delivery – informacje dla sprzedających](https://help.allegro.com/pl/sell/a/program-dostaw-allegro-delivery-informacje-dla-sprzedajacych-9gzevkzEGs1) – One Box, One Punkt, One Kurier w wybranych miastach, partnerzy, kto wozi paczki do One Punktu i One Boxa, dostawa tego samego dnia do One Boxa (odbiór 16:00–22:00), czas na odbiór, zaginięcie po 30 dniach, odpowiedź na reklamację zwykle w 7 dni, najpóźniej w 30, infolinia automatu, obsługa klienta, cena dostawy, wymiary

@@ -19858,6 +19858,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0e3a6b"
     },
     {
+      "id": "fan-courier-international",
+      "catalog": "fan-courier-international",
+      "slug": "fan-courier-international-tracking",
+      "title": "Отслеживание FAN Courier International: AWB и статусы",
+      "name": "FAN Courier International",
+      "color": "#2daae1"
+    },
+    {
       "id": "dobropost",
       "catalog": "dobropost",
       "slug": "dobropost-otslezhivanie",
@@ -22438,6 +22446,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#143167"
     },
     {
+      "id": "cttyex",
+      "catalog": "cttyex",
+      "slug": "cttyex-tracking",
+      "title": "CTTYEX-tracking: CTTY-nummers, scans en Pekingtijd",
+      "name": "CTTYEX",
+      "color": "#0068AC"
+    },
+    {
       "id": "jrt",
       "catalog": "jrt",
       "slug": "jrt-pakket-volgen",
@@ -23002,6 +23018,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "dpd-uk",
+      "catalog": "dpd-uk",
+      "slug": "dpd-uk-tracking",
+      "title": "Sledovanie DPD UK: stavy, odberné miesta Pickup a kontakt",
+      "name": "DPD UK",
+      "color": "#dc0032"
+    },
+    {
       "id": "slovak-parcel-service",
       "catalog": "slovak-parcel-service",
       "slug": "sps-sledovanie-zasielky",
@@ -23392,6 +23416,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "juxi-express",
+      "catalog": "juxi-express",
+      "slug": "juxi-express-tracking",
+      "title": "Проследяване на Juxi Express: JXC номера, доставка и помощ",
+      "name": "Juxi Express",
+      "color": "#e2393c"
+    },
+    {
       "id": "eushipments",
       "catalog": "eushipments",
       "slug": "prosledyavane-eushipments",
@@ -23446,6 +23478,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Транспрес (Transpress): проследяване на пратка и статуси",
       "name": "Transpress",
       "color": "#1e6ee2"
+    },
+    {
+      "id": "fan-courier-international",
+      "catalog": "fan-courier-international",
+      "slug": "fan-courier-international-tracking",
+      "title": "Проследяване на FAN Courier International: AWB и статуси",
+      "name": "FAN Courier International",
+      "color": "#2daae1"
     },
     {
       "id": "bulgarian-posts",
@@ -23910,6 +23950,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "juxi-express",
+      "catalog": "juxi-express",
+      "slug": "juxi-express-tracking",
+      "title": "Відстеження Juxi Express: номери JXC, доставка й допомога",
+      "name": "Juxi Express",
+      "color": "#e2393c"
+    },
+    {
       "id": "imile",
       "catalog": "imile",
       "slug": "imile-vidstezhennia",
@@ -24014,6 +24062,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "J&T Express Germany praćenje: JTDE brojevi i statusi",
       "name": "J&T Express Germany",
       "color": "#e60000"
+    },
+    {
+      "id": "cttyex",
+      "catalog": "cttyex",
+      "slug": "cttyex-tracking",
+      "title": "CTTYEX praćenje: CTTY brojevi, skenovi i pekinško vreme",
+      "name": "CTTYEX",
+      "color": "#0068AC"
     },
     {
       "id": "correos-chile",

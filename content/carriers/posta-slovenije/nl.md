@@ -6,7 +6,7 @@ published: 2026-11-27
 updated: 2026-11-27
 ---
 
-Volg een pakket of aangetekende zending van Pošta Slovenije (Post of Slovenia) via MojaPošta (in de MojaPošta-app of op moja.posta.si) of door je 13-tekens aanvaardingscode (*sprejemna številka*) met `SI` of een buitenlandse postcode in het zoekvak hierboven te plakken. Binnenlandse pakketten komen doorgaans in 1 tot 3 dagen aan, PS Paketomat-pakketkluizen bewaren zendingen 60 uur voordat ze 5 dagen naar een postkantoor verhuizen, en de klantenservice is bereikbaar via 080 14 00 (+386 2 449 20 00 vanuit het buitenland) of info@posta.si.
+Volg een pakket of aangetekende zending van Pošta Slovenije (Post of Slovenia) via MojaPošta (in de MojaPošta-app of op moja.posta.si) of door je 13-tekens aanvaardingscode (*sprejemna številka*) met `SI` of een buitenlandse postcode in het zoekvak hierboven te plakken. Een PS Paketomat-pakketkluis bewaart een zending 60 uur, daarna een postkantoor 5 dagen, en de klantenservice is bereikbaar via 080 14 00 (+386 2 449 20 00 vanuit het buitenland) of info@posta.si.
 
 ## Pošta Slovenije trackingnummer
 
@@ -21,11 +21,11 @@ Pošta Slovenije noemt het nummer de *sprejemna številka*. Het telt 13 tekens i
 
 Meestal vind je het nummer in het bericht van de afzender. Ook de eigen sms'jes van Pošta Slovenije (afzender "Paketomat" of "POSTA") en e-mails van @posta.si bevatten het nummer. Pakketten met jouw telefoonnummer op het adres verschijnen bovendien in de lijst "Moji paketi" (Mijn pakketten) in MojaPošta, waar gegevens 60 dagen bewaard blijven. Nummer kwijt? Zie [hoe je een trackingnummer vindt](guide:find-tracking-number) (Engels).
 
-Andere landletters horen bij een andere postdienst: `…HR` is [Hrvatska pošta](carrier:hrvatska-posta) en `…AT` is [Austrian Post](carrier:austrian-post).
+Andere landletters horen bij een andere postdienst: `…HR` is [Hrvatska pošta](carrier:hrvatska-posta) en `…AT` is [Austrian Post](carrier:austrian-post). De tracker dekt de laatste twee maanden; bij een ouder of verkeerd getypt nummer staat er "Check tracking number and try again."
 
 ## Wat de trackingstatussen van Pošta Slovenije betekenen
 
-Hieronder staan de Engelse statusteksten die Peek van Pošta Slovenije uitleest, in de volgorde waarin een pakket ze doorloopt. Veel stappen hebben een tweede regel met een detail of de volgende stap.
+De tracker toont elke stap in het Sloveens, of in het Engels met de taalschakelaar. Hieronder staan de Engelse teksten, in de volgorde waarin een pakket ze doorloopt. Veel stappen hebben een tweede regel met een detail of de volgende stap.
 
 | Status van Pošta Slovenije | Wat het voor jou betekent |
 | --- | --- |

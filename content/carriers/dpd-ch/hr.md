@@ -15,7 +15,7 @@ Broj paketa obično dobivate e-poštom, najčešće od trgovine. Nakon propušte
 | Broj (izmišljen) | Što predstavlja |
 | --- | --- |
 | `06094829173654` | 14-znamenkasti broj paketa. DPD-ovi obrasci za reklamacije navode da švicarski brojevi počinju s `060`. |
-| `06094829173654U` | Isti broj s kontrolnim znakom na kraju, koji švicarske stranice DPD-a ne spominju. |
+| `06094829173654B` | Isti broj s kontrolnim znakom na kraju, koji švicarske stranice DPD-a ne spominju. |
 
 Broj obavijesti na kartici koji počinje s `P00` nije broj paketa: služi za zakazivanje nove dostave. Ako myDPD ništa ne pronađe, paket možda još nije stigao u DPD, broj je stariji od 31 dan i arhiviran ili je pogrešan (DPD-ovi imaju 14 znamenki). Četrnaest znamenki odgovara i za [DPD Njemačka](carrier:dpd-de), [DPD Francuska](carrier:dpd-fr), [DPD UK](carrier:dpd-uk), SEUR, BRT i druge, pa provjerite kojeg prijevoznika navodi e-poruka trgovine.
 
@@ -42,9 +42,9 @@ myDPD također traži vaš poštanski broj pod stavkom „Data protection“ ili
 
 **Predict.** Ako ga pošiljatelj ugovori, DPD vam šalje dan dostave SMS-om ili e-poštom, a na dan dostave jednosatni vremenski prozor. Tijekom dostave možete pratiti pošiljku uživo i preusmjeriti je do 15 minuta prije predaje.
 
-**Promjene.** Na myDPD-u možete odabrati drugi dan ili preusmjeriti paket na radno mjesto, susjedu ili na Pickup lokaciju. Možete i odobriti DPD-u da ostavi paket bez potpisa („Safe place“).
+**Promjene.** Na myDPD-u možete odabrati drugi dan ili preusmjeriti paket na radno mjesto, susjedu ili na Pickup lokaciju. Možete i odobriti DPD-u da ostavi paket bez potpisa („Safe place“); od 12. listopada 2026. za to je potreban potvrđeni broj telefona.
 
-**Propuštena dostava.** DPD ostavlja obavijest. Ovisno o usluzi pošiljatelja, može pokušati ponovno (do tri puta, navodi DPD-ov članak iz 2022.), ostaviti paket kod susjeda u krugu od 50 metara, odnijeti ga na Pickup lokaciju ili vratiti pošiljatelju; ako je korištena Pickup lokacija, na obavijesti je naznačena. Novu dostavu zakažite na stranici za preusmjeravanje myDPD-a putem SMS koda ili broja `P00` s obavijesti.
+**Propuštena dostava.** DPD ostavlja obavijest. Ovisno o usluzi pošiljatelja, može pokušati ponovno (do tri puta, navodi DPD-ov članak iz 2022.), ostaviti paket kod susjeda u krugu od 50 metara, odnijeti ga na Pickup lokaciju ili vratiti pošiljatelju; ako je korištena Pickup lokacija, na obavijesti je naznačena. Novu dostavu zakažite na stranici za ponovnu dostavu myDPD-a putem SMS koda ili broja `P00` s obavijesti.
 
 **Pickup lokacije** možete koristiti navečer ili subotom; najbližu pronađite putem [tražilice DPD Pickup lokacija](https://www.dpd.com/ch/en/dpd-pickup-location/). DPD šalje e-poštu ili SMS kada paket stigne; trgovina ga čuva 7 kalendarskih dana, nakon čega se vraća pošiljatelju. Ponesite osobni dokument s fotografijom. Druga osoba treba vlastiti dokument s fotografijom te vašu digitalnu punomoć ili ispunjenu poleđinu obavijesti.
 
@@ -62,7 +62,7 @@ Ugovor s DPD-om ima pošiljatelj, pa vas DPD za štetu, gubitak i nestale pakete
 
 ## Telefon i korisnička podrška DPD Švicarska
 
-Kontakti navedeni na švicarskim stranicama DPD-a za cijelu zemlju:
+Kontakti navedeni na švicarskim stranicama DPD-a 10. listopada 2026., za cijelu zemlju:
 
 - **Telefon:** 058 311 13 13, od ponedjeljka do petka od 8:00 do 18:00, najviše CHF 0,08 po minuti; iz inozemstva +41 58 311 13 13. Dana 24. i 31. prosinca 2026. od 8:00 do 12:00.
 - **Kontaktni obrazac:** gumb „Contact DPD“ na [stranici podrške DPD-a](https://www.dpd.com/ch/en/support-centre/your-request/).
@@ -87,7 +87,7 @@ U pravilu jedan dan za domaći paket od početka naloga, navodi DPD. Međunarodn
 
 ### U koje vrijeme DPD dostavlja u Švicarskoj i dostavlja li subotom?
 
-DPD ne objavljuje fiksno radno vrijeme dostave; ako je pošiljatelj ugovorio Predict, na dan dostave SMS-om ili e-poštom dobivate jednosatni termin. Pickup lokacije rade i subotom, a DPD-ov kalendar blagdana navodi subotu 28. studenoga 2026. kao dostavni dan.
+DPD ne objavljuje fiksno radno vrijeme dostave; ako je pošiljatelj ugovorio Predict, na dan dostave SMS-om ili e-poštom dobivate jednosatni termin. DPD ne navodi dostavlja li subotom na kućne adrese; Pickup lokacije rade i subotom, a DPD-ov kalendar blagdana navodi subotu 28. studenoga 2026. kao dostavni dan.
 
 ### Koliko dugo DPD Pickup lokacija u Švicarskoj čuva paket?
 

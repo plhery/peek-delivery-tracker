@@ -106,7 +106,7 @@ Yes: mojePPL (Android and iOS) lists parcels linked to your email, redirects del
 
 ### Is PPL the same as DHL, and how do I contact PPL?
 
-PPL CZ is a Czech carrier in DHL Group since 2006 with its own 11-digit tracker. PPL publishes no recipient phone line: use the 24/7 chatbot on ppl.cz, the [Contact form](https://www.ppl.cz/en/contact-form), or [PPL's claims form](https://www.ppl.cz/en/claims) within 7 calendar days for damaged contents.
+PPL CZ is a Czech carrier in DHL Group since 2006 with its own 11-digit tracker. PPL publishes no recipient phone line: use the 24/7 chatbot on ppl.cz, the [Contact form](https://www.ppl.cz/en/contact-form), or [PPL's claims form](https://www.ppl.cz/en/claims) within 7 calendar days of delivery for damaged contents in an intact box.
 
 :::sources
 - [PPL CZ: Customer service](https://www.ppl.cz/en/customer-service) – 11-digit number, emails, change to a pickup point, missed delivery, holding times, cash on delivery, damage, complaints, fraud, chatbot

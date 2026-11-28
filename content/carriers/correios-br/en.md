@@ -120,7 +120,7 @@ Import taxes or Correios' Despacho Postal fee are due. Pay by boleto or Pix insi
 
 ### How do Remessa Conforme taxes and Minhas Importações work?
 
-On sites certified in Remessa Conforme (PRC), taxes are collected at checkout (0% duty up to US$50, or 60% minus US$30 above US$50 for declarations since 12 May 2026, plus 17–20% state ICMS). On non-PRC purchases, Receita Federal charges 60% import duty plus ICMS and Correios' fee via Minhas Importações, where you link your CPF and can request a "Revisão de Tributos" before generating payment.
+For a parcel to a private person from a site certified in Remessa Conforme (PRC), taxes are paid at checkout: 0% duty up to US$50, or 60% minus US$30 above US$50 for declarations since 12 May 2026, plus 17–20% state ICMS; if the checkout shows none, they are charged on arrival without the reduction. Otherwise Receita Federal's 60% import duty plus ICMS applies, and Correios' Despacho Postal fee may come on top. Taxes due on arrival are paid in Minhas Importações, where you link your CPF and can request a "Revisão de Tributos" before generating payment.
 
 ### How long does Correios take to deliver?
 

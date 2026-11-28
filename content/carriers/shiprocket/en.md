@@ -95,7 +95,7 @@ RTO means return to origin: the parcel could not be delivered (after up to three
 
 ### Is Shiprocket a courier company?
 
-No. Shiprocket is an Indian shipping platform working with 42 courier partners such as Delhivery, Blue Dart, Xpressbees, Ekart and India Post. For international ShiprocketX orders, parcels travel under Shiprocket's 13-digit `832` AWB and are delivered abroad by a destination carrier such as USPS.
+No. Shiprocket is an Indian shipping platform and says it works with 42 courier partners, such as Delhivery, Blue Dart, Xpressbees, Ekart and India Post. For international ShiprocketX orders, parcels travel under Shiprocket's 13-digit `832` AWB and are delivered abroad by a destination carrier such as USPS.
 
 ### Why does Shiprocket tracking say "AWB Not Found"?
 

@@ -89,7 +89,7 @@ W powiadomieniach możesz wybrać „Każdy skan”, „Ważne etapy” albo „
 
 ### Co to za firma Meest Polska (Meest Post)?
 
-To spółka grupy Meest z Dębicy prowadząca Meest Post (wysyłki do ponad 30 krajów, w tym między Polską, Niemcami, Czechami a Ukrainą); korzenie grupy sięgają 1989 r., a Meest Post rozwija połączenia Polska–Ukraina od 2015 r. Przesyłki ze sklepów zagranicznych obsługuje w Polsce Meest International sp. z o.o. z Warszawy.
+To spółka grupy Meest z Dębicy prowadząca Meest Post (wysyłki do ponad 30 krajów, w tym między Polską, Niemcami, Czechami a Ukrainą); według Meest Post korzenie grupy sięgają 1989 r., a Meest Post rozwija połączenia Polska–Ukraina od 2015 r. Przesyłki ze sklepów zagranicznych obsługuje w Polsce Meest International sp. z o.o. z Warszawy.
 
 ### Ile idzie paczka Meest Post z Ukrainy do Polski i z Polski do Ukrainy?
 
@@ -101,11 +101,11 @@ Krajowe formularze meest.com akceptują od 6 do 16 znaków, więc 17-znakowy num
 
 ### Co oznaczają statusy „urząd wymiany walut” i „Dostarczone do Box Now”?
 
-`Przybycie/Wyjazd z urzędu wymiany walut` w polskim trackerze to błędne tłumaczenie *office of exchange* (międzynarodowej sortowni pocztowej). `Dostarczone do Box Now` (`To be delivered to Box Now`) oznacza jedynie, że lokalny partner BOX NOW ma doręczyć paczkę — jeszcze jej nie doręczono.
+`Przybycie do urzędu wymiany walut` i `Wyjazd z urzędu wymiany walut` w polskim trackerze to błędne tłumaczenie *office of exchange* (międzynarodowej sortowni pocztowej). `Dostarczone do Box Now` (`To be delivered to Box Now`) oznacza jedynie, że lokalny partner BOX NOW ma doręczyć paczkę — jeszcze jej nie doręczono.
 
 ### Jaki jest numer telefonu do Meest Post i jak złożyć reklamację?
 
-Infolinia Meest Post działa pod numerem +48 22 113 40 54 (pon.–pt. 8:00–18:00, sob. 9:00–15:00) oraz pod adresem info@meestpost.com. Reklamację składa się w ciągu 6 miesięcy od nadania (7 dni od doręczenia przy uszkodzeniu z protokołem szkody); odpowiedź przychodzi w ciągu 3 miesięcy.
+Infolinia Meest Post działa pod numerem +48 22 113 40 54 (pon.–pt. 8:00–18:00, sob. 9:00–15:00) oraz pod adresem info@meestpost.com. Prawo do reklamacji ma nadawca (odbiorca, gdy nadawca zrzeknie się go na jego rzecz albo paczka zostanie mu doręczona); składa się ją w ciągu 6 miesięcy od nadania (7 dni od doręczenia przy uszkodzeniu z protokołem szkody); odpowiedź przychodzi w ciągu 3 miesięcy.
 
 :::sources
 - [Meest Post: Kontakt](https://www.meestpost.com/pl/contact-us) – telefon, e-mail, godziny infolinii

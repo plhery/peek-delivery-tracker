@@ -6,7 +6,7 @@ published: 2026-10-23
 updated: 2026-11-27
 ---
 
-Omniva (Lietuvoje – Omniva LT, UAB) pristato siuntas paštomatais ir kurjeriais Lietuvoje, Latvijoje ir Estijoje. Sekite savo `JJEE` ar `EE` siuntos kodą svetainėje [mano.omniva.lt](https://mano.omniva.lt/track), OMNIVA programėlėje arba laukelyje viršuje. Žemiau paaiškiname angliškus statusus, 4 dienų saugojimą paštomate ir pratęsimą, peradresavimą, muitinės mokesčius (3 € + 2 €) bei kontaktus.
+Omniva (Lietuvoje – Omniva LT, UAB) pristato siuntas paštomatais ir kurjeriais Lietuvoje, Latvijoje ir Estijoje. Siuntą sekite pagal jos kodą (pvz., prasidedantį `JJEE` arba besibaigiantį `EE`) svetainėje [mano.omniva.lt](https://mano.omniva.lt/track), OMNIVA programėlėje arba laukelyje viršuje. Žemiau paaiškiname angliškus statusus, 4 dienų saugojimą paštomate ir pratęsimą, peradresavimą, muitinės mokesčius (3 € + 2 €) bei kontaktus.
 
 ## Omniva siuntos numeris
 
@@ -106,7 +106,7 @@ Peek rodo Omniva būsenas angliškai, kaip lentelėje aukščiau, kiekvieno žin
 
 ### Kiek laiko keliauja Omniva siunta Lietuvoje ir tarp Baltijos šalių?
 
-Nuo perdavimo Omniva į paštomatą Lietuvoje siunta keliauja 1–2 darbo dienas, tarp Baltijos šalių – 2–3 darbo dienas, o kurjeriai pristato kitą darbo dieną (ne vėliau nei per 3 darbo dienas, išskyrus sekmadienius ir šventes). Kelionė iš užsienio iki Omniva į šiuos terminus neįskaičiuojama.
+Omniva nurodo, kad nuo perdavimo Omniva į paštomatą Lietuvoje siunta keliauja 1–2 darbo dienas, tarp Baltijos šalių – 2–3 darbo dienas, o kurjeriai pristato kitą darbo dieną (ne vėliau nei per 3 darbo dienas, išskyrus sekmadienius ir šventes). Kelionė iš užsienio iki Omniva į šiuos terminus neįskaičiuojama.
 
 ### Kiek laiko siunta laukia Omniva paštomate ir kaip pratęsti saugojimą?
 

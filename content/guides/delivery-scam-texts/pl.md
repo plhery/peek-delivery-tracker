@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-11-27
 ---
 
-SMS albo e-mail z prośbą o dopłatę do paczki (często ok. 1 zł), poprawienie adresu lub uniknięcie zwrotu i z linkiem do płatności to niemal na pewno oszustwo phishingowe. Nie klikaj: otwórz samodzielnie stronę albo aplikację przewoźnika i sprawdź prawdziwy numer przesyłki z e-maila ze sklepu. Jeśli wpisałeś dane karty, natychmiast zadzwoń do banku lub zastrzeż ją pod numerem +48 828 828 828, a fałszywy SMS przekaż bezpłatnie na 8080.
+SMS albo e-mail z prośbą o dopłatę do paczki (według policji bywa to ok. 1 zł), poprawienie adresu lub uniknięcie zwrotu i z linkiem do płatności to niemal na pewno oszustwo phishingowe. Nie klikaj: otwórz samodzielnie stronę albo aplikację przewoźnika i sprawdź prawdziwy numer przesyłki z e-maila ze sklepu. Jeśli wpisałeś dane karty, natychmiast zadzwoń do banku; jeśli twój bank uczestniczy w Systemie Zastrzegania Kart, zastrzeżesz ją też pod numerem +48 828 828 828, a fałszywy SMS przekaż bezpłatnie na 8080.
 
 ## Jak rozpoznać fałszywy SMS o paczce i dopłacie?
 

@@ -57,7 +57,7 @@ JRT (今日通, Jinritong, 厦门今日通商贸有限公司) — міжнаро
 
 - `Shipment arrived at facility`, `Sending to the airport`, `The goods have been packed and sent to the airline`, `Package has been packed and delivered to airport`, `Cargo handed over to the airline`: на шляху до рейсу. `Domestic customs clearance completed` — китайська експортна митниця, а не митниця твоєї країни.
 - `Arriving at the airport - arranging flights`, `Arriving at the airline, in the process of booking a flight`: бронювання рейсу.
-- `Flight is expected to take off on …`, `The flight is expected to depart on … and land on …`, `Estimated departure is …`, `Estimated arrival date is …`: заплановані дати рейсу у форматі місяць.день (`11.12` — 12 листопада).
+- `Flight is expected to take off on …`, `The flight is expected to depart on … and land on …`, `Estimated departure is …`, `Estimated arrival date is …`: рейс заброньовано.
 - `Flight has flown`, `The flight has departed and is expected to … land`, `The flight has taken off`: у польоті.
 - `Sorry, the second flight has been delayed and is expected to … land`: затримка стикувального рейсу з новою датою прильоту.
 - `During transportation to …`: перевезення до вказаної країни призначення.
@@ -65,6 +65,8 @@ JRT (今日通, Jinritong, 厦门今日通商贸有限公司) — міжнаро
 - `Customs clearance of the cargo is in progress` та `Arrived at customs clearance warehouse`: «At customs». Далі `Customs clearance completed` або `Customs clearance in destination country completed`.
 - `In transit to final service provider`, `Delivery to final service provider`, `The goods have been handed over to the carrier`, `The cargo has been picked up and arrived at the warehouse，awaiting outbound shipment`, `It has been handed over to the service provider.` і `It has been transferred to the provider`: на шляху до місцевого перевізника або передано йому, не доставка тобі.
 - `returned shipment has been received by processing center`: повернене відправлення повернулося до центру JRT («Returned to sender»).
+
+У `The flight is expected to depart on … and land on …`, `The flight has departed and is expected to … land` і `Sorry, the second flight has been delayed and is expected to … land` дати записано як місяць.день: `11.12` — це 12 листопада.
 
 **Рядки через скісну риску або кому.** Деякі посилки поєднують китайську й англійську через `/` або кому, усі «In transit»: `预计…航班/Flight scheduled for …`, `航班已启运/Package in transit to destination country`, `航班已落地，拆板中/Package arrived at destination country`, `货物已清关完成/Import customs clearance complete`, `国内清关完成` (китайська експортна митниця), `预计配载航班…月…日,Expected flight on …` (дата рейсу, не дата доставки) і `航班已起飞,The flight has taken off from the origin`.
 
@@ -108,7 +110,7 @@ Peek показує статус, кожен рядок із місцем та �
 
 Коли в записі JRT з'являється номер DHL, FedEx, [Swiss Post](carrier:swiss-post), міжнародний поштовий номер (дві літери, дев'ять цифр, дві літери) або номер, що однозначно відповідає іншому перевізнику, Peek запитує і його та перемикається на нього після появи не старішого скану, зберігаючи історію JRT. Будь-який інший локальний номер від продавця додай окремою посилкою.
 
-Поки посилка відкрита у Peek або в день доставки з увімкненими сповіщеннями, перевірки відбуваються до кожних 10 хвилин; інакше та після затишшя (12 годин на перших рядках чи два дні без оновлень) — щогодини. Після статусу «Out for delivery» Peek перевіряє до кожних 2 хвилин з 06:00 за місцевим часом у день розвозу, поки JRT або місцевий перевізник відповідає напряму (кожні 5 хвилин, якщо потрібен браузер, і щогодини / кожні 3 години після тихого дня / до кожних 15 хвилин у день доставки через сервіси відстеження). Сповіщення налаштовуються на «Every scan», «Important steps» (митні та поворотні рядки JRT і скопійовані події розвозу, невдалої спроби, пункту видачі, доставки та повернення від DHL, UPS і J&T — без рейсів і `已交服务商`) або «Delivery only». Peek не може зв'язатися з JRT чи продавцем замість тебе.
+Поки посилка відкрита у Peek або в день доставки з увімкненими сповіщеннями, перевірки відбуваються до кожних 10 хвилин; інакше та після затишшя (12 годин на перших рядках чи два дні без оновлень) — щогодини. Після статусу «Out for delivery» Peek перевіряє до кожних 2 хвилин з 06:00 за місцевим часом у день розвозу, поки JRT або місцевий перевізник відповідає напряму (кожні 5 хвилин, якщо пошук у цього перевізника потребує браузера, як у DHL, FedEx і UPS). Через сервіси відстеження Peek перевіряє щогодини, кожні 3 години після тихого дня і до кожних 15 хвилин у день доставки за тієї самої умови. Сповіщення налаштовуються на «Every scan», «Important steps» (рядки JRT «At customs» і `returned shipment has been received by processing center`, скопійовані рядки DHL про розвіз, невдалу спробу, пункт видачі, доставку та повернення, рядки UPS про розвіз і доставку та `…está en camino a tu domicilio.` від J&T Express Mexico — без рейсів, `已交服务商` і `已交仓`) або «Delivery only». Peek не може зв'язатися з JRT чи продавцем замість тебе.
 
 ## Поширені запитання про JRT
 

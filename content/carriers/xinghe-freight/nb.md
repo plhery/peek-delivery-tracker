@@ -32,7 +32,7 @@ Xinghe Freights sporing kjører på GZYL sin plattform, så hvert trinn kommer m
 | --- | --- | --- |
 | `Order information received` | Selgeren har sendt ordredataene. Ingen har pakken fysisk ennå. | «Label created» |
 | `Arrive at the cross border receiving point` | Speditøren har mottatt pakken: første ekte skanning i deres hender. | «Received by carrier» |
-| `Goods leave the operation center` | Pakken har forlatt driftssenteret i Kina. | «In transit» |
+| `Goods leave the operation center` | Pakken har forlatt driftssenteret. | «In transit» |
 | `Arrive at the international airport` | På den internasjonale flyplassen i påvente av fly. | «In transit» |
 | `Departing from the airport` | Flyet har lettet. | «In transit» |
 | `Item arrives at destination airport` | Landet i mottakerlandet. | «In transit» |
@@ -80,8 +80,8 @@ Nettstedet til Xinghe Freight oppgir verken leveringstider, antall leveringsfors
 
 På Xinghe Freights kinesiske nettsted (`xinghe-express.cn`) oppgis:
 
-- **Døgnåpen linje (24/7):** `19924483103` (`+86 199 2448 3103` fra utlandet), oppgitt som åpen hele døgnet hver dag.
-- **E-post:** `3975605292@qq.com` for bedriftshenvendelser og pristilbud.
+- **Døgnåpen linje (24/7):** 19924483103 (+86 199 2448 3103 fra utlandet), oppgitt som åpen hele døgnet hver dag.
+- **E-post:** 3975605292@qq.com for bedriftshenvendelser og pristilbud.
 - **Adresse:** Guangzhou, Guangdong-provinsen, uten gateadresse (besøkende bes ta kontakt på forhånd).
 
 Nettstedet er bare på kinesisk og har ingen støtte for mottakere i utlandet: kontaktskjemaet åpner bare en e-post til adressen over. Xinghes kunde er selgeren, så spør selgeren først, og markedsplassen hvis selgeren ikke svarer.
@@ -118,7 +118,7 @@ Enten har sporingen ikke registrert nummeret ennå, eller så inneholder posten 
 
 ### Hvordan kontakter jeg Xinghe Freight?
 
-Spør selgeren eller markedsplassen først, siden selgeren bestilte frakten. Det kinesiske nettstedet (`xinghe-express.cn`) oppgir døgnlinjen `19924483103` (`+86 199 2448 3103` fra utlandet) og bedriftse-posten `3975605292@qq.com`, uten egen kundestøtte for utenlandske mottakere.
+Spør selgeren eller markedsplassen først, siden selgeren bestilte frakten. Det kinesiske nettstedet (`xinghe-express.cn`) oppgir døgnlinjen 19924483103 (+86 199 2448 3103 fra utlandet) og bedriftse-posten 3975605292@qq.com, uten egen kundestøtte for utenlandske mottakere.
 
 :::sources
 - [Xinghe Freight: 广州星和货运代理有限公司 (forside, på kinesisk)](http://xinghe-express.cn/) – selskapsnavn, spedisjonstjenester, søkefelt mot GZYLs sporing, telefon og e-post

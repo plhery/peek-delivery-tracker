@@ -57,7 +57,7 @@ JRT (今日通, Jinritong, 厦门今日通商贸有限公司) — трансгр
 
 - `Shipment arrived at facility`, `Sending to the airport`, `The goods have been packed and sent to the airline`, `Package has been packed and delivered to airport`, `Cargo handed over to the airline`: на пути к рейсу. `Domestic customs clearance completed` — китайская экспортная таможня, а не ваша.
 - `Arriving at the airport - arranging flights`, `Arriving at the airline, in the process of booking a flight`: бронирование рейса.
-- `Flight is expected to take off on …`, `The flight is expected to depart on … and land on …`, `Estimated departure is …`, `Estimated arrival date is …`: плановые даты рейса в формате месяц.день (`11.12` — 12 ноября).
+- `Flight is expected to take off on …`, `The flight is expected to depart on … and land on …`, `Estimated departure is …`, `Estimated arrival date is …`: рейс забронирован.
 - `Flight has flown`, `The flight has departed and is expected to … land`, `The flight has taken off`: в полёте.
 - `Sorry, the second flight has been delayed and is expected to … land`: стыковочный рейс задержан, указана новая дата прилёта.
 - `During transportation to …`: перевозка в указанную страну назначения.
@@ -65,6 +65,8 @@ JRT (今日通, Jinritong, 厦门今日通商贸有限公司) — трансгр
 - `Customs clearance of the cargo is in progress` и `Arrived at customs clearance warehouse`: «На таможне». Затем `Customs clearance completed` или `Customs clearance in destination country completed`.
 - `In transit to final service provider`, `Delivery to final service provider`, `The goods have been handed over to the carrier`, `The cargo has been picked up and arrived at the warehouse，awaiting outbound shipment`, `It has been handed over to the service provider.` и `It has been transferred to the provider`: передача местному перевозчику, не доставка вам.
 - `returned shipment has been received by processing center`: возвращённая посылка снова в центре JRT («Возвращена отправителю»).
+
+В `The flight is expected to depart on … and land on …`, `The flight has departed and is expected to … land` и `Sorry, the second flight has been delayed and is expected to … land` даты записаны как месяц.день: `11.12` — это 12 ноября.
 
 **Строки через косую черту или запятую.** Часть отправлений объединяет китайский и английский через `/` или запятую, все со статусом «В пути»: `预计…航班/Flight scheduled for …`, `航班已启运/Package in transit to destination country`, `航班已落地，拆板中/Package arrived at destination country`, `货物已清关完成/Import customs clearance complete`, `国内清关完成` (экспортная таможня Китая), `预计配载航班…月…日,Expected flight on …` (дата рейса, а не доставки) и `航班已起飞,The flight has taken off from the origin`.
 
@@ -108,7 +110,7 @@ Peek показывает статус, каждую строку с место�
 
 Когда в записи JRT вместо её номера появляется номер DHL, FedEx, Swiss Post, международный почтовый номер (две буквы, девять цифр, две буквы) или номер, однозначно подходящий другой службе доставки, Peek опрашивает и её и переходит на её отслеживание, как только там появится скан не старее последнего у JRT, сохраняя историю JRT. Любой другой локальный номер от продавца добавляйте отдельной посылкой.
 
-Пока посылка открыта в Peek или в день доставки с включёнными уведомлениями, проверки идут до раза в 10 минут; в остальное время и при затишье (12 часов на первых строках или два дня без новостей) — раз в час. При статусе «Передана курьеру» Peek проверяет до раза в 2 минуты с 06:00 по местному времени в день доставки, пока JRT или местный перевозчик отвечает напрямую (каждые 5 минут, если требуется браузер; через сервисы отслеживания — раз в час, каждые 3 часа после тихого дня и до раза в 15 минут в день доставки). Уведомления настраиваются на «Каждая отметка», «Важные этапы» (таможня и возврат у JRT, а также скопированные отметки о курьере, неудачной попытке, пункте выдачи, доставке и возврате от DHL, UPS и J&T — без рейсов и `已交服务商`) или «Только доставка». Связаться с JRT или продавцом за вас Peek не может.
+Пока посылка открыта в Peek или в день доставки с включёнными уведомлениями, проверки идут до раза в 10 минут; в остальное время и при затишье (12 часов на первых строках или два дня без новостей) — раз в час. При статусе «Передана курьеру» Peek проверяет до раза в 2 минуты с 06:00 по местному времени в день доставки, пока JRT или местный перевозчик отвечает напрямую (каждые 5 минут, если поиск у этого перевозчика требует браузера, как у DHL, FedEx и UPS). Через сервисы отслеживания Peek проверяет раз в час, каждые 3 часа после тихого дня и до раза в 15 минут в день доставки при том же условии. Уведомления настраиваются на «Каждая отметка», «Важные этапы» (строки JRT «На таможне» и `returned shipment has been received by processing center`, скопированные отметки DHL о курьере, неудачной попытке, пункте выдачи, доставке и возврате, отметки UPS о курьере и доставке и `…está en camino a tu domicilio.` от J&T Express Mexico — без рейсов, `已交服务商` и `已交仓`) или «Только доставка». Связаться с JRT или продавцом за вас Peek не может.
 
 ## Вопросы об отслеживании JRT
 

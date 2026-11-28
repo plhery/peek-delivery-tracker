@@ -71,7 +71,7 @@ Peek fant ingen leveringstider fra Meiteshun og ingen regler for leveringsforsø
 
 ## Kontakt og kundeservice hos Meiteshun
 
-For alt som gjelder bestillingen din bør du spørre selgeren først, siden selgeren bestilte frakten hos Meiteshun. Svarer ikke selgeren, kontakt markedsplassen. Hvis ingen av dem hjelper, oppgir 17TRACKs side om Meiteshun e-postadressen `szmeiteshun@163.com`, nettstedet `mtswl.com.cn` og et kontor i Longgang-distriktet i Shenzhen, men intet telefonnummer: oppgi `AMTS`-nummeret ditt og navnet på selgeren hvis du skriver dit.
+For alt som gjelder bestillingen din bør du spørre selgeren først, siden selgeren bestilte frakten hos Meiteshun. Svarer ikke selgeren, kontakt markedsplassen. Hvis ingen av dem hjelper, oppgir 17TRACKs side om Meiteshun e-postadressen szmeiteshun@163.com, nettstedet `mtswl.com.cn` og et kontor i Longgang-distriktet i Shenzhen, men intet telefonnummer: oppgi `AMTS`-nummeret ditt og navnet på selgeren hvis du skriver dit.
 
 ## Spor en Meiteshun-pakke med Peek
 
@@ -79,7 +79,7 @@ For alt som gjelder bestillingen din bør du spørre selgeren først, siden selg
 
 Peek leser Meiteshuns egen sporing og viser status, hver skanning med sted og mottakerland. Tekstene vises slik Meiteshun skriver dem: `Customs clearanceisin progress` teller som toll («At customs») og `package is on the way` som «In transit», ikke ute til levering. Peek beholder byen fra trinn i landet ditt og utelater postnummeret. Tider leses på Peking-tid og vises i din egen tidssone. Peek utelater navn, adresse, vekt, gebyrer, signatur og leveringsbevis og viser ingen forventet leveringsdato siden Meiteshun ikke oppgir noen.
 
-Peek holder tilbake trinn skrevet mer enn tolv timer før sitt oppgitte klokkeslett, samt alle trinn datert etter kontrolltidspunktet i Peking-tid. Det avgjør statusen etter de beholdte trinnene, ikke etter postens sammendragsstatus. Når hele ordrens manuskript ble skrevet ved opprettelsen, beholder Peek bare trinn datert før det tidspunktet eller inntil seks timer etter, slik at `Delivered` som ble skrevet da holdes tilbake. Når Peek må lese `trackIndex.htm`-siden fordi oppslaget mangler trinn, holder det tilbake alle `Delivered` der siden den siden ikke viser når trinnene ble skrevet. Hvis alle trinn holdes tilbake, viser Peek «Waiting for Meiteshun Logistics» uten å be deg sjekke nummeret, og det fjerner også kopier av disse trinnene fra andre sporingstjenester.
+Peek holder tilbake trinn skrevet mer enn tolv timer før sitt oppgitte klokkeslett, samt alle trinn datert etter kontrolltidspunktet i Peking-tid. Det avgjør statusen etter de beholdte trinnene, ikke etter postens sammendragsstatus. Når hele ordrens manuskript ble skrevet ved opprettelsen, beholder Peek bare trinn datert før det tidspunktet eller inntil seks timer etter, slik at `Delivered` som ble skrevet da holdes tilbake. Når Peek må lese `trackIndex.htm`-siden fordi oppslaget mangler trinn, holder det tilbake alle `Delivered` der siden den siden ikke viser når trinnene ble skrevet. Hvis alle trinn holdes tilbake, viser Peek «Waiting for Meiteshun Logistics» uten å be deg sjekke nummeret. Enten Peek holder tilbake noen eller alle trinn, fjerner det også sporingstjenestenes kopier av dem.
 
 Peek følger pakken på Meiteshuns sporing uten automatisk overføring til lokal transportør, siden Meiteshun aldri navngir den lokale transportøren: legg inn det lokale nummeret fra selgeren som en egen pakke. Mens pakken er åpen, eller på leveringsdagen med varsler på, sjekker Peek opptil hvert 10. minutt, og ellers (samt etter to dager uten nytt eller 12 timer på «Label created» / «Received by carrier») én gang i timen. Varsler kan settes til «Every scan», «Important steps» eller «Delivery only». Peek kan ikke kontakte Meiteshun eller selgeren for deg.
 
@@ -103,7 +103,7 @@ Meiteshuns trinn oppgir aldri den lokale transportøren. Se etter et ekstra numm
 
 ### Hvordan kontakter jeg Meiteshun Logistics om en manglende pakke?
 
-Begynn med selgeren eller markedsplassen, siden selgeren bestilte frakten. Får du ikke svar der, oppgir 17TRACK e-posten `szmeiteshun@163.com` og nettstedet `mtswl.com.cn` (kontor i Longgang i Shenzhen, intet telefonnummer); legg ved `AMTS`-nummeret og selgerens navn.
+Begynn med selgeren eller markedsplassen, siden selgeren bestilte frakten. Får du ikke svar der, oppgir 17TRACK e-posten szmeiteshun@163.com og nettstedet `mtswl.com.cn` (kontor i Longgang i Shenzhen, intet telefonnummer); legg ved `AMTS`-nummeret og selgerens navn.
 
 :::sources
 - [17TRACK: MTSCN tracking (på engelsk)](https://www.17track.net/en/carriers/mtscn) – e-postadresse, nettsted og Shenzhen-kontor for Meiteshun, intet telefonnummer

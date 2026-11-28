@@ -26,29 +26,29 @@ Razmaci, crtice i mala slova nisu važni kad broj lijepiš u Peek.
 
 ## Što znače statusi praćenja Xinghe Freight
 
-Praćenje Xinghe Freighta radi na platformi GZYL-a, pa koraci dolaze na engleskom jeziku u GZYL-ovim formulacijama, zajedno s tipfelerima. Budući da sučelje aplikacije Peek nije prevedeno na hrvatski, i Peekove glavne faze prikazuju se na engleskom: «Label created» (naljepnica kreirana), «Received by carrier» (zaprimljeno kod prijevoznika), «In transit» (u tranzitu), «At customs» (na carini) i «Delivered» (dostavljeno). Koraci redoslijedom kojim pošiljka obično prolazi:
+Praćenje Xinghe Freighta radi na platformi GZYL-a, pa koraci dolaze na engleskom jeziku u GZYL-ovim formulacijama, zajedno s tipfelerima. Budući da sučelje aplikacije Peek nije prevedeno na hrvatski, i Peekove glavne faze prikazuju se na engleskom: „Label created“ (naljepnica kreirana), „Received by carrier“ (zaprimljeno kod prijevoznika), „In transit“ (u tranzitu), „At customs“ (na carini) i „Delivered“ (dostavljeno). Koraci redoslijedom kojim pošiljka obično prolazi:
 
 | Sustav piše | Što to znači za tebe | Peek prikazuje |
 | --- | --- | --- |
-| `Order information received` | Prodavatelj je poslao podatke o narudžbi. Nitko još fizički nema paket. | «Label created» |
-| `Arrive at the cross border receiving point` | Špediter je zaprimio paket: prvo stvarno skeniranje u njegovim rukama. | «Received by carrier» |
-| `Goods leave the operation center` | Paket je napustio operativni centar u Kini. | «In transit» |
-| `Arrive at the international airport` | Na međunarodnoj je zračnoj luci i čeka let. | «In transit» |
-| `Departing from the airport` | Zrakoplov je poletio. | «In transit» |
-| `Item arrives at destination airport` | Sletio je u odredišnu zemlju. | «In transit» |
-| `local carrier Agent Import customs clearance` | Agent u tvojoj zemlji obavlja uvozno carinjenje. | «At customs» |
-| `The import customs keep it for inspection` | Carina u tvojoj zemlji zadržala je paket radi pregleda. | «At customs» |
-| `Customs clearance completed` | Carinjenje je završeno i paket ide dalje. | «In transit» |
-| `Internationaliy Package received at processing center` | Centar za obradu u tvojoj zemlji preuzeo je ocarinjeni paket. To nije novo preuzimanje od pošiljatelja. | «In transit» |
-| `Leave the email processing center` | Paket je napustio taj centar za obradu. | «In transit» |
-| `Arrival sorting, distribution center` | Stigao u sortirni ili distribucijski centar u tvojoj zemlji, s imenom grada nakon teksta. | «In transit» |
-| `Leaving the sorting center` | Napušta sortirni centar, s gradom nakon teksta. | «In transit» |
-| `Package is on the way` | Kreće se dalje u odredišnoj zemlji, uz ime grada. To ne znači da je paket kod dostavljača za današnju dostavu. | «In transit» |
-| `Delivered` | Zabilježena dostava uz grad. Može biti unaprijed upisan plan, a ne skeniranje: vidi ispod. | «Delivered» uz napomenu o fiksnom rasporedu, osim ako Peek ne zadrži korak (vidi ispod) |
+| `Order information received` | Prodavatelj je poslao podatke o narudžbi. Nitko još fizički nema paket. | „Label created“ |
+| `Arrive at the cross border receiving point` | Špediter je zaprimio paket: prvo stvarno skeniranje u njegovim rukama. | „Received by carrier“ |
+| `Goods leave the operation center` | Paket je napustio operativni centar. | „In transit“ |
+| `Arrive at the international airport` | Na međunarodnoj je zračnoj luci i čeka let. | „In transit“ |
+| `Departing from the airport` | Zrakoplov je poletio. | „In transit“ |
+| `Item arrives at destination airport` | Sletio je u odredišnu zemlju. | „In transit“ |
+| `local carrier Agent Import customs clearance` | Agent u tvojoj zemlji obavlja uvozno carinjenje. | „At customs“ |
+| `The import customs keep it for inspection` | Carina u tvojoj zemlji zadržala je paket radi pregleda. | „At customs“ |
+| `Customs clearance completed` | Carinjenje je završeno i paket ide dalje. | „In transit“ |
+| `Internationaliy Package received at processing center` | Centar za obradu u tvojoj zemlji preuzeo je ocarinjeni paket. To nije novo preuzimanje od pošiljatelja. | „In transit“ |
+| `Leave the email processing center` | Paket je napustio taj centar za obradu. | „In transit“ |
+| `Arrival sorting, distribution center` | Stigao u sortirni ili distribucijski centar u tvojoj zemlji, s imenom grada nakon teksta. | „In transit“ |
+| `Leaving the sorting center` | Napušta sortirni centar, s gradom nakon teksta. | „In transit“ |
+| `Package is on the way` | Kreće se dalje u odredišnoj zemlji, uz ime grada. To ne znači da je paket kod dostavljača za današnju dostavu. | „In transit“ |
+| `Delivered` | Zabilježena dostava uz grad. Može biti unaprijed upisan plan, a ne skeniranje: vidi ispod. | „Delivered“ uz napomenu o fiksnom rasporedu, osim ako Peek ne zadrži korak (vidi ispod) |
 
-**Preko Hong Konga.** Može se pojaviti i `香港处理中心已收寄【Hong Kong】`: poštansko zaprimanje u centru za obradu u Hong Kongu, koje sustav prenosi na kineskom s gradom u zagradama. Peek ga prikazuje kako je napisan, pod fazom «Received by carrier».
+**Preko Hong Konga.** Može se pojaviti i `香港处理中心已收寄【Hong Kong】`: poštansko zaprimanje u centru za obradu u Hong Kongu, koje sustav prenosi na kineskom s gradom u zagradama. Peek ga prikazuje kako je napisan, pod fazom „Received by carrier“.
 
-**Redak na kineskom.** Za narudžbu bez ijednog skeniranja platforma sama upisuje `货物电子信息已经收到` (elektronički podaci o pošiljci su zaprimljeni). Prodavatelj je kreirao narudžbu, ali paket još nije skeniran. Peek taj redak prikazuje na kineskom pod «Label created».
+**Redak na kineskom.** Za narudžbu bez ijednog skeniranja platforma sama upisuje `货物电子信息已经收到` (elektronički podaci o pošiljci su zaprimljeni). Prodavatelj je kreirao narudžbu, ali paket još nije skeniran. Peek taj redak prikazuje na kineskom pod „Label created“.
 
 **Vremena.** Peek svako vrijeme u sustavu čita po pekinškom vremenu (`UTC+8`), uključujući korake u Hrvatskoj, i pretvara ga u vremensku zonu tvog uređaja. Zimi je 20:00 u Pekingu jednako 13:00 po hrvatskom vremenu (`UTC+1`), a ljeti 14:00 (`UTC+2`).
 
@@ -66,13 +66,13 @@ Web-stranica Xinghe Freighta ne objavljuje rokove dostave, broj pokušaja dostav
 
 **Samo `Order information received` ili `货物电子信息已经收到`.** Prodavatelj je kreirao narudžbu, ali paket još nitko nije skenirao. Ako se za nekoliko dana ništa ne promijeni, pitaj prodavatelja je li ga stvarno poslao.
 
-**«Waiting for Xinghe Freight».** Peek još nema potvrđeno skeniranje za tvoj broj: GZYL-ov sustav ga ne poznaje ili sadrži samo unaprijed upisan plan (koji može završiti s `Delivered`), a ni servisi za praćenje nemaju ništa. Peek nastavlja provjeravati. Za nepoznat broj GZYL-ov sustav vraća jedan prazan redak s brojem kao referencom; Peek to tumači kao nepostojeći broj, prikazuje «Waiting for Xinghe Freight» i nakon dva dana «Check the tracking number». Unaprijed upisan plan računa se kao potvrda da Xinghe ima narudžbu, pa «Waiting for Xinghe Freight» ostaje bez zahtjeva za provjerom broja. Ipak usporedi broj znak po znak s porukom prodavatelja.
+**„Waiting for Xinghe Freight“.** Peek još nema potvrđeno skeniranje za tvoj broj: GZYL-ov sustav ga ne poznaje ili sadrži samo unaprijed upisan plan (koji može završiti s `Delivered`), a ni servisi za praćenje nemaju ništa. Peek nastavlja provjeravati. Za nepoznat broj GZYL-ov sustav vraća jedan prazan redak s brojem kao referencom; Peek to tumači kao nepostojeći broj, prikazuje „Waiting for Xinghe Freight“ i nakon dva dana „Check the tracking number“. Unaprijed upisan plan računa se kao potvrda da Xinghe ima narudžbu, pa „Waiting for Xinghe Freight“ ostaje bez zahtjeva za provjerom broja. Ipak usporedi broj znak po znak s porukom prodavatelja.
 
 **Zapeo na carini.** Ako te traže plaćanje uvoznih davanja, pogledaj vodič o [paketima na carini](guide:customs) (na engleskom). Ako ondje stoji danima, javi prodavatelju.
 
 **Sustav ili druga stranica prikazuje više koraka nego Peek.** Dodatni koraci, uključujući `Delivered`, mogu biti unaprijed upisani plan koji Peek zadržava. Ravnaj se prema procijenjenom roku dostave trgovine i javi se prodavatelju kad prođe. Više u vodiču o [praćenju paketa iz Kine](guide:tracking-from-china) (na engleskom).
 
-**`Delivered`, ali ništa nije stiglo.** Korak može biti dio unaprijed zadanog rasporeda. Osim ako dostavlja Swiss Post, Peek ispod «Delivered» dodaje napomenu: «Xinghe Freight updates on a fixed schedule, with no signature. If nothing came, ask the seller.» Javi prodavatelju da paket nije stigao i traži naziv te broj lokalnog dostavljača. Više u vodiču o [paketu označenom kao dostavljenom koji nije stigao](guide:delivered-not-received) (na engleskom).
+**`Delivered`, ali ništa nije stiglo.** Korak može biti dio unaprijed zadanog rasporeda. Osim ako dostavlja Swiss Post, Peek ispod „Delivered“ dodaje napomenu: „Xinghe Freight updates on a fixed schedule, with no signature. If nothing came, ask the seller.“ Javi prodavatelju da paket nije stigao i traži naziv te broj lokalnog dostavljača. Više u vodiču o [paketu označenom kao dostavljenom koji nije stigao](guide:delivered-not-received) (na engleskom).
 
 **Izgubljen ili vraćen.** Prodavatelj je ugovorio slanje sa Xinghe Freightom, pa povrat novca ili novo slanje zatraži od prodavatelja ili platforme.
 
@@ -80,23 +80,23 @@ Web-stranica Xinghe Freighta ne objavljuje rokove dostave, broj pokušaja dostav
 
 Na kineskoj web-stranici Xinghe Freighta (`xinghe-express.cn`) navedeno je:
 
-- **Telefonska linija (24/7):** `19924483103` (`+86 199 2448 3103` iz inozemstva), navedena kao otvorena 24 sata dnevno, svaki dan.
-- **E-mail:** `3975605292@qq.com` za poslovne upite i ponude.
+- **Telefonska linija (24/7):** 19924483103 (+86 199 2448 3103 iz inozemstva), navedena kao otvorena 24 sata dnevno, svaki dan.
+- **E-mail:** 3975605292@qq.com za poslovne upite i ponude.
 - **Adresa:** Guangzhou, pokrajina Guangdong, bez naziva ulice (za punu adresu mole da ih se prvo kontaktira).
 
 Stranica je samo na kineskom i nema posebnu podršku za inozemne primatelje: kontaktni obrazac samo otvara e-mail prema gornjoj adresi. Klijent Xinghea je prodavatelj, stoga se prvo obrati prodavatelju, a zatim platformi ako ne odgovara.
 
 ## Praćenje paketa Xinghe Freight pomoću Peeka
 
-[Peek](/) odmah prepoznaje broj `GZXH…YQ` (kao i skraćeni `GZXH…Y`) kao Xinghe Freight s oznakom «Detected carrier». Ako ti je prodavatelj dao broj drugog formata, zalijepi ga svejedno: Peek prati više od 4 500 prijevoznika. Za ručni odabir pritisni «Change» i potraži Xinghe Freight (ili `星和货运`), odnosno «Change carrier» na već dodanom paketu.
+[Peek](/) odmah prepoznaje broj `GZXH…YQ` (kao i skraćeni `GZXH…Y`) kao Xinghe Freight s oznakom „Detected carrier“. Ako ti je prodavatelj dao broj drugog formata, zalijepi ga svejedno: Peek prati više od 4 500 prijevoznika. Za ručni odabir pritisni „Change“ i potraži Xinghe Freight (ili `星和货运`), odnosno „Change carrier“ na već dodanom paketu.
 
-Peek izravno pita GZYL-ov sustav, baš kao i polje na stranici Xinghea. Prikazuje status, svaki korak s mjestom i odredišnu zemlju kada je navedena. Vremena se čitaju u pekinškom vremenu i pretvaraju u vremensku zonu tvog uređaja («Times are in your time zone:» na kraju povijesti). Peek izostavlja imena, adresu, poštanske brojeve, masu, podatke o plaćanju, potpis i potvrdu dostave te ne prikazuje procijenjeni datum dostave jer ga sustav ne daje.
+Peek izravno pita GZYL-ov sustav, baš kao i polje na stranici Xinghea. Prikazuje status, svaki korak s mjestom i odredišnu zemlju kada je navedena. Vremena se čitaju u pekinškom vremenu i pretvaraju u vremensku zonu tvog uređaja („Times are in your time zone:“ na kraju povijesti). Peek izostavlja imena, adresu, poštanske brojeve, masu, podatke o plaćanju, potpis i potvrdu dostave te ne prikazuje procijenjeni datum dostave jer ga sustav ne daje.
 
-Kad sustav ne poznaje broj, Peek pita servise za praćenje i prikazuje njihovu kopiju. Dok nigdje nema koraka, stoji «Waiting for Xinghe Freight», a nakon dva dana «Check the tracking number».
+Kad sustav ne poznaje broj, Peek pita servise za praćenje i prikazuje njihovu kopiju. Dok nigdje nema koraka, stoji „Waiting for Xinghe Freight“, a nakon dva dana „Check the tracking number“.
 
-Peek zadržava svaki korak upisan više od 12 sati prije vremena koje prikazuje, svaki korak upisan u istoj sekundi s korakom upisanim više od pola sata prije svog vremena (osim registracije narudžbe) i svaki korak s datumom nakon trenutka provjere po pekinškom vremenu. Na zapisu s unaprijed upisanim koracima zadržava i `Delivered`, čak i ako je upisan istog dana. Status određuje prema zadržanim koracima, a ne prema sažetku zapisa, i uklanja kopije tih planiranih koraka i iz servisa za praćenje (`Delivered` uključeno). No ako sustav ne poznaje broj ili je nedostupan, Peek ne može razlikovati planirani korak kod vanjskog servisa od pravog skeniranja. Kada Peek zadrži predviđanja, povijest do dostave ili povrata otvara retkom «Other sites may show more steps, but they’re only predictions.», a «Show them» ih prikazuje sivo s danom iz sustava («Predicted for Mon 12 Oct»). Takvi koraci ne mijenjaju status i ne šalju obavijesti.
+Peek zadržava svaki korak upisan više od 12 sati prije vremena koje prikazuje, svaki korak upisan u istoj sekundi s korakom upisanim više od pola sata prije svog vremena (osim registracije narudžbe) i svaki korak s datumom nakon trenutka provjere po pekinškom vremenu. Na zapisu s unaprijed upisanim koracima zadržava i `Delivered`, čak i ako je upisan istog dana. Status određuje prema zadržanim koracima, a ne prema sažetku zapisa, i uklanja kopije tih planiranih koraka i iz servisa za praćenje (`Delivered` uključeno). No ako sustav ne poznaje broj ili je nedostupan, Peek ne može razlikovati planirani korak kod vanjskog servisa od pravog skeniranja. Kada Peek zadrži predviđanja, povijest do dostave ili povrata otvara retkom „Other sites may show more steps, but they’re only predictions.“, a „Show them“ ih prikazuje sivo s danom iz sustava („Predicted for Mon 12 Oct“). Takvi koraci ne mijenjaju status i ne šalju obavijesti.
 
-Osim za Swiss Post, Peek ne prelazi automatski na lokalnog dostavljača: ako od prodavatelja dobiješ lokalni broj, dodaj ga kao zaseban paket. Dok držiš paket otvorenim ili na dan dostave s uključenim obavijestima, Peek provjerava do svakih 10 minuta; inače i kad nema novosti jednom na sat. Obavijesti možeš postaviti na «Every scan», «Important steps» (dva carinska koraka i `Delivered`, bez letova i sortiranja) ili «Delivery only». Peek ne može kontaktirati Xinghe Freight, GZYL ili prodavatelja umjesto tebe.
+Osim za Swiss Post, Peek ne prelazi automatski na lokalnog dostavljača: ako od prodavatelja dobiješ lokalni broj, dodaj ga kao zaseban paket. Dok držiš paket otvorenim ili na dan dostave s uključenim obavijestima, Peek provjerava do svakih 10 minuta; inače i kad nema novosti jednom na sat. Obavijesti možeš postaviti na „Every scan“, „Important steps“ (dva carinska koraka i `Delivered`, bez letova i sortiranja) ili „Delivery only“. Peek ne može kontaktirati Xinghe Freight, GZYL ili prodavatelja umjesto tebe.
 
 ## Česta pitanja o Xinghe Freightu
 
@@ -114,11 +114,11 @@ Ni stranica Xinghea ni sustav za praćenje ne navode lokalnog partnera za dostav
 
 ### Zašto Peek prikazuje manje koraka ili nikakvo praćenje za moj broj GZXH?
 
-Ili sustav još nema zapis za broj, ili sadrži unaprijed upisane korake — uključujući planirani `Delivered` — koje Peek skriva iza «Show them» umjesto da ih broji kao skeniranja. Usporedi broj s porukom prodavatelja i javi mu se ako nakon nekoliko dana nema promjena.
+Ili sustav još nema zapis za broj, ili sadrži unaprijed upisane korake — uključujući planirani `Delivered` — koje Peek skriva iza „Show them“ umjesto da ih broji kao skeniranja. Usporedi broj s porukom prodavatelja i javi mu se ako nakon nekoliko dana nema promjena.
 
 ### Kako mogu kontaktirati Xinghe Freight?
 
-Prvo se obrati prodavatelju ili platformi, jer je prodavatelj ugovorio prijevoz. Kineska stranica (`xinghe-express.cn`) navodi 24-satnu liniju `19924483103` (`+86 199 2448 3103` iz inozemstva) i poslovni e-mail `3975605292@qq.com`, bez posebne podrške za inozemne primatelje.
+Prvo se obrati prodavatelju ili platformi, jer je prodavatelj ugovorio prijevoz. Kineska stranica (`xinghe-express.cn`) navodi 24-satnu liniju 19924483103 (+86 199 2448 3103 iz inozemstva) i poslovni e-mail 3975605292@qq.com, bez posebne podrške za inozemne primatelje.
 
 :::sources
 - [Xinghe Freight: 广州星和货运代理有限公司 (početna stranica, na kineskom)](http://xinghe-express.cn/) – naziv tvrtke, špediterske usluge, polje za praćenje prema sustavu GZYL, telefon i e-mail

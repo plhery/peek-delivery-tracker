@@ -112,7 +112,7 @@ Yes, in the OmaPosti app.
 
 ### What does "Item accepted from transport" mean on Posti tracking?
 
-It is an internal transport marking showing your parcel is still on its way through Posti's network — it does not mean the parcel has been delivered to you.
+Posti says it is a transport marking: the parcel is still on its way and nobody has handed it over yet, so it does not mean the parcel has been delivered to you.
 
 :::sources
 - [Posti: Picking up an item](https://www.posti.fi/en/receiving/picking-up-an-item) – JJFI item ID, notices, storage (14 days from abroad, 9 days with a letter notice), extension, lockers, codes, power of attorney, returns, phone, chat

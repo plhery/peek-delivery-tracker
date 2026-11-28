@@ -1,13 +1,13 @@
 ---
 title: Paket verpasst: Was tun? Erneut zustellen oder abholen
-description: Paket verpasst — was tun? Zweite Zustellung buchen, Lagerfrist bei DHL, Hermes, DPD und der Post, Ausweis & Vollmacht zur Abholung sowie Fake-SMS erkennen.
+description: Paket verpasst — was tun? Zweite Zustellung buchen, Lagerfrist bei DHL, Hermes, GLS und der Post, Ausweis & Vollmacht zur Abholung sowie Fake-SMS erkennen.
 slug: paket-verpasst-was-tun
 picture: Eine Haustür mit einer Karte darunter, ein Lieferwagen schon in der Ferne, und Pip kommt außer Atem einen Moment zu spät.
 published: 2026-10-14
 updated: 2026-11-27
 ---
 
-Hast du ein Paket verpasst, zeigt dir die Benachrichtigung (Benachrichtigungskarte in Deutschland, gelber Zettel in Österreich, Abholungseinladung in der Schweiz, oft auch per SMS oder E-Mail), wo das Paket liegt und bis wann du es abholen kannst. Abholen geht meist mit Benachrichtigung und Lichtbildausweis erst ab dem angegebenen Zeitpunkt, selten noch am selben Tag. Hermes unternimmt von selbst drei Zustellversuche an aufeinanderfolgenden Werktagen, DHL liefert sonst an Filiale, Paketshop oder Packstation (zweite Zustellung online buchbar), und die Schweizerische Post stellt auf Wunsch kostenlos ein zweites Mal zu.
+Hast du ein Paket verpasst, zeigt dir die Benachrichtigung (Benachrichtigungskarte in Deutschland, gelber Zettel in Österreich, Abholungseinladung in der Schweiz, oft auch per SMS oder E-Mail), wo das Paket liegt und bis wann du es abholen kannst. Abholen geht meist mit Benachrichtigung und Lichtbildausweis erst ab dem angegebenen Zeitpunkt, selten noch am selben Tag. Hermes unternimmt von selbst drei Zustellversuche an aufeinanderfolgenden Werktagen, DHL bringt das Paket, wenn kein Nachbar es annimmt, in eine Filiale, einen Paketshop oder eine Packstation (für ausgewählte Pakete kannst du von dort einmal eine zweite Zustellung buchen), und die Schweizerische Post stellt auf Wunsch kostenlos ein zweites Mal zu.
 
 ## Paket verpasst: Was tun Schritt für Schritt?
 

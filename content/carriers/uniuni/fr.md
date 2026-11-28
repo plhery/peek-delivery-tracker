@@ -130,7 +130,7 @@ Le plus souvent, le marchand n'a pas encore remis le colis à UniUni. La date es
 
 ### Comment voir la photo de preuve de livraison UniUni ou joindre le soutien ?
 
-Suis ton colis sur [uniuni.com/fr/suivi](https://www.uniuni.com/fr/suivi/), clique sur « Voir la confirmation de livraison » et entre ton code postal. Pour contacter UniUni au Canada : 1 604 229-2007 (Pacifique et Rocheuses) ou 1 647 360-4178 (Centre, Est et Atlantique), du lundi au samedi de 10 h à 21 h (HE), ou via le chatbot sur la page de soutien.
+Suis ton colis sur [uniuni.com/fr/suivi](https://www.uniuni.com/fr/suivi/), clique sur « Voir la confirmation de livraison » et entre le code postal de livraison. Pour contacter UniUni au Canada : 1 604 229-2007 (Pacifique et Rocheuses) ou 1 647 360-4178 (Centre, Est et Atlantique), du lundi au samedi de 10 h à 21 h (HE), ou via le chatbot sur la page de soutien.
 
 :::sources
 - [UniUni : Suivi](https://www.uniuni.com/fr/suivi/) – date estimée, tentatives, stockage 30 jours, informations pour une nouvelle livraison, boîte postale USPS, photos, récupération, boîtes postales

@@ -6,7 +6,7 @@ published: 2026-10-13
 updated: 2026-11-27
 ---
 
-Colissimo est le service de colis de La Poste. Pour suivre ton colis, colle son numéro d'envoi (13 à 15 caractères) ou un lien `laposte.fr` dans le champ ci-dessus, ou consulte `laposte.fr`. Ce numéro vient de l'expéditeur, dans l'e-mail d'expédition de la boutique.
+Colissimo est le service de colis de La Poste. Pour suivre ton colis, colle son numéro d'envoi (13 à 15 caractères) ou un lien `laposte.fr` dans le champ ci-dessus, ou consulte `laposte.fr`. Ce numéro vient de l'expéditeur, en général dans l'e-mail d'expédition de la boutique.
 
 ## Numéro de suivi Colissimo : à quoi il ressemble
 

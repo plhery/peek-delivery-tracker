@@ -1,12 +1,12 @@
 ---
 title: FIRST LINE tracking: 1ST numbers, statuses and delivery
-description: Track a FIRST LINE (壹号专线) 1ST parcel from China: 1ST number format, English tracking statuses, USPS/GOFO/UniUni delivery in the US, transit times and support.
+description: Track a FIRST LINE (壹号专线) 1ST parcel from China: the 1ST number, English tracking statuses, USPS/GOFO/UniUni delivery in the US, transit times and support.
 slug: first-line-tracking
 published: 2026-10-21
 updated: 2026-11-27
 ---
 
-FIRST LINE (壹号专线, *Shenzhen First Line Supply Chain Co., Ltd.*) is a Shenzhen forwarder in the 1ST group (*一代国际集团*) that ships e-commerce parcels from China — mostly to the US, Canada and Europe — and hands them to a local carrier for delivery. Paste your 14-character `1ST` tracking number (1ST + 11 digits) in the box above or into the tracking box on `firstline56.com`, using the number from your shop's shipping details.
+FIRST LINE (壹号专线, *Shenzhen First Line Supply Chain Co., Ltd.*) is a Shenzhen forwarder in the 1ST group (*一代国际集团*) that ships e-commerce parcels from China, mostly to the US but also to Canada and Europe, and hands them to a local carrier for delivery. Paste the number from your shop's shipping details (a FIRST LINE waybill is `1ST` and 11 digits) in the box above or into the tracking box on `firstline56.com`.
 
 ## FIRST LINE tracking number: what it looks like
 

@@ -1,6 +1,6 @@
 ---
 title: Suivi WanbExpress : numéros WNB…YQ, statuts et livraison
-description: Suivi WanbExpress (WNB…YQ) depuis la Chine : sens des statuts douaniers, qui livre en France, numéro du transporteur local et que faire si le colis bloque.
+description: Suivi WanbExpress (WNB…YQ) depuis la Chine : sens des statuts douaniers, qui livre dans ton pays, numéro du transporteur local et que faire si le colis bloque.
 slug: suivi-wanbexpress
 published: 2026-11-21
 updated: 2026-11-27

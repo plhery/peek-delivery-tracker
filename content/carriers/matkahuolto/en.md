@@ -1,6 +1,6 @@
 ---
 title: Matkahuolto tracking: statuses, pickup points and contact
-description: Track a Matkahuolto parcel in Finland with your shipment ID (MH, MA or 20 digits): English tracking statuses, 5-day pickup time, lockers and phone support.
+description: Track a Matkahuolto parcel in Finland with your shipment ID: English tracking statuses, pickup codes, 5-day pickup time, lockers and phone support.
 slug: matkahuolto-tracking
 published: 2026-10-13
 updated: 2026-11-27
@@ -107,7 +107,7 @@ Five days before returning it to the sender, or 14 days when the arrival notice 
 
 ### Can I track a Matkahuolto parcel without the shipment ID?
 
-Yes, if you're registered with Matkahuolto or use the Paketit app and the sender included your phone number or email: the parcel appears automatically. Otherwise ask the shop for the shipment ID (`MH…FI`, `MA` + 19 digits, or an 18- or 20-digit barcode).
+Yes, if you're registered with Matkahuolto or use the Paketit app and the sender included your phone number or email: the parcel appears automatically. Otherwise ask the shop for the shipment ID.
 
 ### How long does a Matkahuolto parcel take to arrive?
 

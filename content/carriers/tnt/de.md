@@ -6,7 +6,7 @@ published: 2026-10-27
 updated: 2026-11-27
 ---
 
-TNT liefert Pakete, Dokumente und Paletten per Express und gehört zu FedEx: In Deutschland firmieren FedEx Express und TNT seit dem 1. Dezember 2021 gemeinsam als FedEx Express Deutschland GmbH. Deine TNT-Sendung verfolgst du dennoch weiter auf tnt.com unter [Sendung verfolgen](https://www.tnt.com/express/de_de/site/shipping-tools/tracking.html) oder oben im Feld mit der 9-stelligen Sendungs- bzw. Frachtbriefnummer (mit der Referenz des Versenders sucht nur tnt.com, nicht Peek). Unten stehen alle Statusmeldungen auf Deutsch, Infos zu verpasster Zustellung, Zoll und Kontakt.
+TNT liefert Pakete, Dokumente und Paletten per Express und gehört zu FedEx: In Deutschland firmieren FedEx Express und TNT seit dem 1. Dezember 2021 gemeinsam als FedEx Express Deutschland GmbH. Deine TNT-Sendung verfolgst du dennoch weiter auf tnt.com unter [Sendung verfolgen](https://www.tnt.com/express/de_de/site/shipping-tools/tracking.html) oder oben im Feld mit der 9-stelligen Sendungs- bzw. Frachtbriefnummer (mit der Referenz des Versenders sucht nur tnt.com, nicht Peek). Unten stehen die Statusmeldungen auf Deutsch, Infos zu verpasster Zustellung, Zoll und Kontakt.
 
 ## TNT Sendungsnummer: wo sie steht und wie sie aussieht
 

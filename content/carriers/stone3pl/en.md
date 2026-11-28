@@ -1,12 +1,12 @@
 ---
 title: Stone3PL tracking: numbers, statuses and contact
-description: Track a Stone3PL parcel from China: S + 18-digit tracking format, status meanings, destination local carrier handover, EU customs rules and Shenzhen contact.
+description: Track a Stone3PL parcel from China: its number, status meanings, destination local carrier handover, EU customs rules and Shenzhen contact.
 slug: stone3pl-tracking
 published: 2026-11-03
 updated: 2026-11-27
 ---
 
-Stone3PL is a Shenzhen-based logistics company in the Stone Group that ships e-commerce parcels from China worldwide with local delivery partners. Track an `S` + 18-digit number (or another shipping code from your seller) in English on [Stone3PL's tracking page](https://stone3pl.com/?route=services/track) or paste it in the box above. Below: what Stone3PL statuses such as `Order Submited.` and `Pick up by local carrier at destination port` mean, how to find the local carrier's number, and how to get help.
+Stone3PL is a Shenzhen-based logistics company in the Stone Group that ships e-commerce parcels from China worldwide with local delivery partners. Track the number from your seller (Peek links `S` and 18 digits to Stone3PL) in English on [Stone3PL's tracking page](https://stone3pl.com/?route=services/track) or paste it in the box above. Below: what Stone3PL statuses such as `Order Submited.` and `Pick up by local carrier at destination port` mean, how to find the local carrier's number, and how to get help.
 
 ## Stone3PL tracking number: what it looks like
 
@@ -107,7 +107,7 @@ Stone3PL is part of the Stone Group, headquartered in Baoan, Shenzhen, citing 10
 
 ### Who delivers Stone3PL parcels in my country?
 
-Stone3PL hands parcels to destination logistics partners rather than delivering to your door itself. Check [Stone3PL's tracking page](https://stone3pl.com/?route=services/track) or Peek for the delivering company's name and local tracking number once your parcel reaches the destination country.
+Stone3PL hands parcels to destination logistics partners rather than delivering to your door itself. [Stone3PL's tracking page](https://stone3pl.com/?route=services/track) can name the company that delivers your parcel, with that company's own number, which you can track on its site or in Peek too.
 
 ### What does "Pick up by local carrier at destination port" mean?
 

@@ -6,7 +6,7 @@ published: 2026-10-28
 updated: 2026-11-27
 ---
 
-BYHD (博益弘达, Bo Yi Hong Da in pinyin) is 深圳市博益弘达物流有限公司, a logistics company in Shenzhen, China, that ships cross-border parcels abroad for online sellers. Paste your `BYHD` + 9-digit waybill in the box above, or enter it in the 快递查询 (parcel lookup) box on byhd56.com. Expect only a few early scans from BYHD plus a second number — the local delivering carrier's tracking number — once the parcel leaves Shenzhen.
+BYHD (博益弘达, Bo Yi Hong Da in pinyin) is 深圳市博益弘达物流有限公司, a logistics company in Shenzhen, China, that ships cross-border parcels abroad for online sellers. Paste your `BYHD` + 9-digit waybill in the box above, or enter it in the 快递查询 (parcel lookup) box on byhd56.com. Expect only a few early scans from BYHD, and a second number on its tracker: the one the company that delivers your parcel uses.
 
 ## BYHD tracking number: what it looks like
 
@@ -74,7 +74,7 @@ While you have the parcel open, or on its delivery day with notifications on, Pe
 
 ### What is BYHD (博益弘达) shipping?
 
-BYHD is 深圳市博益弘达物流有限公司, a Shenzhen logistics firm in Longhua District (`byhd56.com`) offering cross-border air and sea shipping, Amazon FBA first-leg transport and dropshipping for online sellers to Europe, America, Southeast Asia and the Middle East. Its waybills are `BYHD` plus nine digits.
+BYHD is 深圳市博益弘达物流有限公司, a Shenzhen logistics firm in Longhua District (byhd56.com) offering cross-border air and sea shipping, Amazon FBA first-leg transport and dropshipping for online sellers to Europe, America, Southeast Asia and the Middle East. Its waybills are `BYHD` plus nine digits.
 
 ### Why does BYHD's tracker show a different tracking number?
 

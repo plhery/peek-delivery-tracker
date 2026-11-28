@@ -20,7 +20,7 @@ Aplikacje czytają wklejony tekst tak samo: przycisk + otwiera „Dodaj przesył
 
 ## Jak Peek rozpoznaje przewoźnika po samym numerze przesyłki?
 
-Tak. Peek rozpozna przewoźnika po numerze albo zapyta przewoźników, do których numer może należeć.
+Peek rozpozna przewoźnika po numerze albo zapyta przewoźników, do których numer może należeć.
 
 Numer, którego kształt jednoznacznie wskazuje przewoźnika, na przykład numer UPS zaczynający się od `1Z`, od razu go zdradza: wiersz przewoźnika mówi „Wykryty przewoźnik”. W przeciwnym razie Peek pyta najbardziej prawdopodobnych przewoźników, po pięciu naraz, zaczynając od tych, którzy obsługują twój kraj, a wiersz mówi wtedy „Sprawdzanie usług śledzenia…”. Liczy się tylko odpowiedź o niedawnej przesyłce, bo przewoźnicy po czasie używają starych numerów ponownie. Jak wyglądają numery, opisuje poradnik o [formatach numerów przesyłek](guide:tracking-number-formats), a jak działają trackery, poradnik o [śledzeniu przesyłek wszystkich firm w jednym miejscu](guide:universal-tracker).
 

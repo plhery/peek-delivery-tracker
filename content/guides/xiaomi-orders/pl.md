@@ -1,13 +1,13 @@
 ---
 title: Śledzenie zamówienia Xiaomi: dostawa, zwroty i problemy
-description: Śledzenie zamówienia Xiaomi (mi.com/pl i Mi Store): dostawa InPost i Paczkomat®, darmowa od 159 zł, wysyłka do 4 dni roboczych, reklamacje i 14 dni na zwrot.
+description: Śledzenie zamówienia Xiaomi (mi.com/pl i Mi Store): InPost i Paczkomat®, darmowa dostawa powyżej 159 zł, wysyłka do 4 dni roboczych, reklamacje i 14 dni na zwrot.
 slug: sledzenie-zamowienia-xiaomi
 picture: Hulajnoga elektryczna, małe pudełko po telefonie i furgonetka kurierska, a Pip stoi na podeście hulajnogi.
 published: 2026-10-26
 updated: 2026-11-27
 ---
 
-Zamówienie z mi.com/pl lub aplikacji Mi Store śledzisz w Centrum Zamówień na koncie Mi albo na stronie przewoźnika z numerem przesyłki — strona Xiaomi o wysyłce w Polsce odsyła do śledzenia i protokołu szkody InPost. Zamówienia złożone przed 15:00 wychodzą w ciągu 4 dni roboczych, a dostawa powyżej 159 zł jest darmowa. Przy odbiorze sprawdź paczkę: jeśli jest uszkodzona, zaznacz to w pokwitowaniu, nie potwierdzaj odbioru i oddaj ją kurierowi.
+Zamówienie z mi.com/pl lub aplikacji Mi Store śledzisz w Centrum Zamówień na koncie Mi albo na stronie przewoźnika z numerem przesyłki — strona Xiaomi o wysyłce w Polsce odsyła do śledzenia i protokołu szkody InPost. Zamówienia złożone przed 15:00 wychodzą w ciągu 4 dni roboczych, a dostawa zamówień powyżej 159 zł jest darmowa, z wyjątkiem niektórych towarów. Przy odbiorze sprawdź paczkę: jeśli jest uszkodzona, zaznacz to w pokwitowaniu, nie potwierdzaj odbioru i oddaj ją kurierowi.
 
 ## Kto dostarcza zamówienie z Xiaomi (mi.com/pl) w Polsce?
 

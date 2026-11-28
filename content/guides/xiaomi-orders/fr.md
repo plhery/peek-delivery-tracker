@@ -7,7 +7,7 @@ published: 2026-10-26
 updated: 2026-11-27
 ---
 
-Tu suis une commande Xiaomi passée sur mi.com/fr ou mi.com/be-fr depuis ton compte Mi, ou sur le site du transporteur avec ton numéro de suivi. En France métropolitaine, Xiaomi expédie de son entrepôt de Paris avec Colissimo (gratuit dès 20 €, livré sous 4 jours ouvrables) ; en Belgique, il nomme DPD (gratuit au-delà de 69 €). Si le carton ou le scellé est abîmé à la livraison, tu as le droit de refuser le colis.
+Tu suis une commande Xiaomi passée sur mi.com/fr ou mi.com/be-fr depuis ton compte Mi, ou sur le site du transporteur avec ton numéro de suivi. En France métropolitaine, Xiaomi expédie de son entrepôt de Paris avec Colissimo (gratuit dès 20 €, livré en général sous 4 jours ouvrables, hors Corse) ; en Belgique, il nomme DPD (gratuit au-delà de 69 €). Si le carton ou le scellé est abîmé à la livraison, tu as le droit de refuser le colis.
 
 ## Qui livre ma commande Xiaomi en France et en Belgique ?
 

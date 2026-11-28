@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-27
 ---
 
-Du musst nicht wissen, welcher Paketdienst dein Paket bringt: Füge die Sendungsnummer, den Tracking-Link oder die ganze Versandmail oder SMS ins Feld auf [Peek](/) ein. Peek fischt die Nummer aus dem Text, erkennt den Paketdienst an ihrer Form oder fragt die wahrscheinlichsten unter mehr als 4.500 Paketdiensten ab und öffnet direkt die Sendungsseite — ganz ohne Konto.
+Du musst nicht wissen, welcher Paketdienst dein Paket bringt: Füge die Sendungsnummer, den Tracking-Link oder die ganze Versandmail oder SMS ins Feld auf [Peek](/) ein. Peek fischt die Nummer aus dem Text, erkennt den Paketdienst an ihrer Form oder fragt die wahrscheinlichsten unter mehr als 4.500 Paketdiensten ab und öffnet die Sendungsseite — ganz ohne Konto.
 
 :::steps
 - Öffne peektracker.com | Im Feld unter „Wo ist mein Paket?“ steht „Nummer, Link oder Nachricht einfügen“.
@@ -20,7 +20,7 @@ Die Apps lesen einen eingefügten Text genauso: Der +-Knopf öffnet „Paket hin
 
 ## Wie erkennt Peek den Paketdienst anhand der Sendungsnummer?
 
-Ja. Peek erkennt den Paketdienst an der Nummer oder fragt die Paketdienste, zu denen sie gehören könnte.
+Peek erkennt den Paketdienst an der Nummer oder fragt die Paketdienste, zu denen sie gehören könnte.
 
 Eine Nummer, deren Form ihren Paketdienst beweist, etwa eine UPS-Nummer, die mit `1Z` beginnt, verrät ihn sofort: In der Zeile des Paketdienstes steht „Erkannter Paketdienst“. Sonst fragt Peek die wahrscheinlichsten Paketdienste, fünf auf einmal, und nimmt die zuerst dran, die dein Land bedienen, während in der Zeile „Tracking-Dienste werden geprüft…“ steht. Es zählt nur die Antwort zu einem neueren Paket, denn Paketdienste vergeben alte Nummern neu. Die Formen zeigt [Sendungsnummern und ihre Paketdienste](guide:tracking-number-formats), und wie Tracker arbeiten, erklärt [Paketverfolgung aller Anbieter](guide:universal-tracker).
 

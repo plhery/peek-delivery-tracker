@@ -1,13 +1,13 @@
 ---
 title: Tracciamento ordine IKEA: pacchi, camion e problemi
-description: Tracciamento ordine IKEA Italia: «Traccia e gestisci il tuo ordine», Pacchi Leggeri con Poste Italiane, camion su appuntamento, costi, ritardi, danni e resi.
+description: Tracciamento ordine IKEA Italia: «Traccia e gestisci il tuo ordine», Pacchi Leggeri con corriere, camion su appuntamento, costi, ritardi, danni e resi.
 slug: tracciamento-ordine-ikea
 picture: Una pila di lunghe scatole piatte, una chiave a brugola, un camion delle consegne e Pip sulla scatola in cima.
 published: 2026-10-18
 updated: 2026-11-27
 ---
 
-Puoi seguire ogni ordine IKEA Italia su «Traccia e gestisci il tuo ordine» inserendo il numero d'ordine e l'email o il telefono usati per l'acquisto. Gli ordini fino a 30 kg viaggiano come Consegna Pacchi Leggeri tramite corriere (ad esempio Poste Italiane) con informazioni per tracciare la spedizione, mentre i mobili arrivano con i trasportatori di IKEA su appuntamento, che chiamano circa 30 minuti prima e si seguono nel tracking IKEA.
+Puoi seguire ogni ordine IKEA Italia su «Traccia e gestisci il tuo ordine» inserendo il numero d'ordine e l'email o il telefono usati per l'acquisto. Gli ordini fino a 30 kg, con colli sotto i 25 kg, possono viaggiare come Consegna Pacchi Leggeri tramite un corriere (ad esempio Poste Italiane), con informazioni per tracciare la spedizione. I mobili arrivano con i trasportatori di IKEA, di solito su appuntamento: allora li segui nel tracking IKEA e il trasportatore ti chiama circa 30 minuti prima.
 
 ## Chi consegna un ordine IKEA in Italia (Pacchi Leggeri e mobili)?
 

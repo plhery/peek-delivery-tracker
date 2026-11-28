@@ -75970,6 +75970,88 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://www.sutongst.com/list-1793.html"
+  },
+  "emirates-skycargo": {
+    "displayName": "Emirates SkyCargo",
+    "aliases": [
+      "Emirates Cargo",
+      "eSkyCargo"
+    ],
+    "countries": [
+      "AE"
+    ],
+    "color": "#D71921",
+    "selectable": true,
+    "timezone": "Asia/Dubai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "emirates-skycargo"
+    },
+    "trackingUrlTemplate": "https://eskycargo.emirates.com/app/offerandorder/#/home/find-offer",
+    "linkRules": [
+      {
+        "domains": [
+          "eskycargo.emirates.com"
+        ],
+        "pathPattern": "^/app/offerandorder/?$",
+        "fragment": "^/shipments/list\\?(?:[^#]*&)?values=(176\\d{8})(?:&|$)"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://eskycargo.emirates.com/app/offerandorder/#/home/find-offer"
+  },
+  "korean-air-cargo": {
+    "displayName": "Korean Air Cargo",
+    "aliases": [
+      "Korean Air",
+      "Korean Air Lines",
+      "대한항공 화물"
+    ],
+    "countries": [
+      "KR"
+    ],
+    "color": "#00256C",
+    "selectable": true,
+    "timezone": "Asia/Seoul",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "korean-air-cargo"
+    },
+    "trackingUrlTemplate": "https://cargo.koreanair.com/en/home",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://cargo.koreanair.com/en/tracking",
+    "helpUrl": "https://cargo.koreanair.com/en/Branch-Information"
+  },
+  "lufthansa-cargo": {
+    "displayName": "Lufthansa Cargo",
+    "aliases": [
+      "Lufthansa Cargo AG",
+      "LH Cargo"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#05164D",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "lufthansa-cargo"
+    },
+    "trackingUrlTemplate": "https://www.lufthansa-cargo.com/en/eservices/etracking",
+    "linkRules": [
+      {
+        "domains": [
+          "www.lufthansa-cargo.com",
+          "lufthansa-cargo.com"
+        ],
+        "pathPattern": "^/(?:[a-z]{2}/)?eservices/etracking/tracking/-/awb/020/\\d{8}/?$",
+        "path": "^/(?:[a-z]{2}/)?eservices/etracking/tracking/-/awb/020/(\\d{8})/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.lufthansa-cargo.com/en/eservices/etracking"
   }
 } as const;
 
@@ -78313,7 +78395,10 @@ export const CARRIER_IDS = [
   "lot-cargo",
   "morelink56",
   "sunspeedy",
-  "sutongst"
+  "sutongst",
+  "emirates-skycargo",
+  "korean-air-cargo",
+  "lufthansa-cargo"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

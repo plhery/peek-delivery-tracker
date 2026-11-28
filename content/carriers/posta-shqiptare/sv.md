@@ -6,7 +6,7 @@ published: 2026-11-27
 updated: 2026-11-27
 ---
 
-Posta Shqiptare (Albaniens post) är Albaniens nationella postverk med 533 postkontor för inrikes och internationell post, paket och EMS. Skriv in ditt 13-teckens spårningsnummer (som slutar på `AL` för försändelser postade i Albanien, eller avsändarlandets landskod för inkommande post) i fältet ”Gjurmo objektin” på [postashqiptare.al](https://www.postashqiptare.al/), i appen e-Posta eller i fältet ovan. Nedan hittar du svenska översättningar av Posta Shqiptares albanska statusar, tullregler över 22 € och hur du efterlyser en försenad försändelse.
+Posta Shqiptare (Albaniens post) är Albaniens nationella postverk med 533 postkontor för inrikes och internationell post, paket och EMS. Skriv in ditt 13-teckens spårningsnummer (som slutar på `AL` för försändelser postade i Albanien, eller avsändarlandets landskod för inkommande post) i fältet "Gjurmo objektin" på [postashqiptare.al](https://www.postashqiptare.al/), i appen e-Posta eller i fältet ovan. Nedan hittar du svenska översättningar av Posta Shqiptares albanska statusar, tullregler över 22 € och hur du efterlyser en försenad försändelse.
 
 ## Posta Shqiptare spårningsnummer: hur det ser ut
 
@@ -64,7 +64,7 @@ Peek placerar dessa rader under sina egna steg: "Received by carrier", "In trans
 
 **Vem som levererar.** Efter att paketet lämnat Albanien tar mottagarlandets post över, och Posta Shqiptares spårning återger dess rader på albanska. Kontrollera även ditt eget lands post med samma `AL`-nummer: [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), [An Post](carrier:an-post), [Canada Post](carrier:canada-post), [Australia Post](carrier:australia-post) eller [NZ Post](carrier:nz-post). Leveransförsök och hämtning följer din posts regler.
 
-**EU-tull.** Albanien står utanför EU, så ett paket till Sverige eller ett annat EU-land går genom tullen där. Sedan 1 juli 2026 beläggs varor köpta online utanför EU i beställningar upp till 150 € med 3 € EU-tull per varuslag. Sedan 1 november 2026 tillkommer dessutom en EU-hanteringsavgift på 2 € per varuslag oavsett värde. Ett varuslag är varorna i paketet med samma tullklassificering, beskrivning och eventuella ursprung.
+**EU-tull.** Albanien står utanför EU, så ett paket till Sverige eller ett annat EU-land går genom tullen där. Sedan 1 juli 2026 beläggs varor köpta online utanför EU i beställningar upp till 150 € med 3 € EU-tull per varuslag. Sedan 1 november 2026 tillkommer dessutom en EU-hanteringsavgift på 2 € per varuslag oavsett värde. Ett varuslag är varorna i paketet med samma tullklassificering, beskrivning och eventuella ursprung. Utanför EU gäller ditt eget lands regler.
 
 ## Posta Shqiptare uppdateras inte, försenat eller borttappat
 
@@ -72,7 +72,7 @@ Peek placerar dessa rader under sina egna steg: "Received by carrier", "In trans
 
 **Försenat utan uppdatering.** Avsändaren går personligen till inlämningskontoret och fyller i en efterlysningsblankett med bådas uppgifter, innehåll och telefonnummer. Posta Shqiptare frågar då mottagarlandets post.
 
-**Reklamation.** Avsändaren kan reklamera utebliven försändelse inom 3 månader från inlämning inom Albanien, eller 6 månader för utrikespost. För utrikespost är det kostnadsfritt via blankett på inlämningskontoret. Posta Shqiptare svarar inom 15 dagar, eller 2 månader för utrikespost. Väntar du på ett paket, be avsändaren eller butiken starta en reklamation.
+**Reklamation.** Avsändaren kan reklamera utebliven försändelse inom 3 månader från inlämning inom Albanien, eller 6 månader för utrikespost. För utrikespost är det kostnadsfritt via blankett på inlämningskontoret. Posta Shqiptare svarar inom 15 dagar, eller 2 månader för utrikespost. Väntar du på ett paket, be avsändaren kolla med den post de använde, eller butiken vid en onlinebeställning: se [borttappade paket](guide:lost-parcel) (på engelska).
 
 **Visas som levererad men saknas.** Ett Tracked-paket lämnas utan signatur, så fråga först den lokala post som levererade: se [levererad men ej mottagen](guide:delivered-not-received) (på engelska).
 
@@ -80,9 +80,9 @@ Peek placerar dessa rader under sina egna steg: "Received by carrier", "In trans
 
 Posta Shqiptares officiella kanaler:
 
-- **Telefon:** `+355 682044727`.
-- **E-post:** `asistence@postashqiptare.al`
-- **Huvudkontor:** Drejtoria e përgjithshme Posta Shqiptare, Rruga ”Reshit Çollaku” nr. 4, Tirana. Öppettider som anges under adressen på kontaktsidan: måndag–torsdag 08:00–16:30, fredag 08:00–14:00 (albansk tid).
+- **Telefon:** +355 682044727.
+- **E-post:** asistence@postashqiptare.al
+- **Huvudkontor:** Drejtoria e përgjithshme Posta Shqiptare, Rruga "Reshit Çollaku" nr. 4, Tirana. Öppettider som anges under adressen på kontaktsidan: måndag–torsdag 08:00–16:30, fredag 08:00–14:00 (albansk tid).
 - **Reklamationer av utrikespost:** på blankett hos det postkontor där försändelsen lämnades in.
 
 Posta Shqiptare varnar för falska meddelanden i dess namn: klicka inte på länkar och lämna inga uppgifter. Officiell information ges bara på postashqiptare.al och i dess sociala medier. Se [bluff-SMS om paket](guide:delivery-scam-texts) (på engelska).
@@ -105,11 +105,11 @@ Medan paketet är öppet i Peek eller på leveransdagen med notiser på frågar 
 
 ### Hur spårar jag ett paket från Posta Shqiptare?
 
-Skriv in den 13-teckens streckkoden (två bokstäver, nio siffror och `AL`, eller avsändarpostens landskod för inkommande post) i fältet ”Gjurmo objektin” på postashqiptare.al, i e-Posta-appen eller i Peek.
+Skriv in den 13-teckens streckkoden (två bokstäver, nio siffror och `AL`, eller avsändarpostens landskod för inkommande post) i fältet "Gjurmo objektin" på postashqiptare.al, i e-Posta-appen eller i Peek.
 
 ### Varför uppdateras inte min Posta Shqiptare-spårning?
 
-Småpaket som skickas utomlands som Tracked kräver bara tre skanningar, och efter `Objekti u fut ne thes dhe u dergua jashte` kommer nästa rader från mottagarlandets post. Kolla din egen posts spårning med samma nummer; är försändelsen kraftigt försenad kan avsändaren lämna in en efterlysning på inlämningskontoret.
+Småpaket som skickas utomlands som Tracked kräver bara tre skanningar, och efter `Objekti u fut ne thes dhe u dergua jashte` kommer nästa rader från mottagarlandets post. Kolla din egen posts spårning med samma nummer; är försändelsen försenad kan avsändaren lämna in en efterlysning på inlämningskontoret.
 
 ### Behöver jag betala tull på ett paket med Posta Shqiptare från utlandet?
 
@@ -121,7 +121,7 @@ Enligt dess standarder för samhällsomfattande posttjänst: nästa dag mellan a
 
 ### Vad är Posta Shqiptares telefonnummer och e-post?
 
-Ring `+355 682044727` eller mejla `asistence@postashqiptare.al`. Öppettiderna under huvudkontoret i Tirana på kontaktsidan är måndag–torsdag 08:00–16:30 och fredag 08:00–14:00 albansk tid.
+Ring +355 682044727 eller mejla asistence@postashqiptare.al. Öppettiderna under huvudkontoret i Tirana på kontaktsidan är måndag–torsdag 08:00–16:30 och fredag 08:00–14:00 albansk tid.
 
 :::sources
 - [Posta Shqiptare: Home](https://www.postashqiptare.al/) – tracking box, number shape, post offices

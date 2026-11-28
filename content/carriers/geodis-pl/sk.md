@@ -6,7 +6,7 @@ published: 2026-11-27
 updated: 2026-11-27
 ---
 
-GEODIS Poland (GEODIS Road Network so sídlom v Błonie, do akvizície spoločnosťou GEODIS v roku 2021 známa ako PEKAES) je poľská paletová a balíková sieť skupiny GEODIS patriacej pod SNCF, ktorá doručuje po Poľsku za 24 až 48 hodín (palety na súkromné adresy pondelok až piatok, 8:00 až 16:00). Ďalší postup závisí od toho, čo vám dal odosielateľ:
+GEODIS Poland (GEODIS Road Network so sídlom v Błonie, do akvizície spoločnosťou GEODIS v roku 2021 známa ako PEKAES) je poľská paletová a balíková sieť skupiny GEODIS patriacej pod SNCF, ktorá v rámci Poľska štandardne uvádza 24 až 48 hodín (palety na súkromné adresy prichádzajú pondelok až piatok, 8:00 až 16:00). Ďalší postup závisí od toho, čo vám dal odosielateľ:
 
 - **Číslo `PL` a 16 číslic alebo odkaz na Strefa Klienta:** ide o zásielku GEODIS Poland (balík alebo paletu). Vložte číslo či odkaz do poľa vyššie, alebo vyhľadajte číslo priamo na stránke [Strefa Klienta](https://strefaklienta.pekaes.geodis.pl/en/).
 - **Iné číslo GEODIS:** Peek číta ešte jeden sledovací systém GEODIS, a to GEODIS France, ktorého čísla začínajú na `1G` (nižšie). Vyhľadávanie na geodis.com nájde letecké, námorné a last-mile zásielky a cestné zásielky presmeruje na Strefa Klienta.
@@ -52,7 +52,7 @@ Všeobecné podmienky GEODIS platné od 4. novembra 2024 určujú priebeh doruč
 
 - **Nezastihnutý príjemca.** Ak nie ste doma, vodič zanechá správu o pokuse. Po druhom neúspešnom pokuse sa zásielka vracia odosielateľovi; vracia sa aj pri odmietnutí alebo nesprávnej adrese od odosielateľa.
 - **Palety na súkromnú adresu.** GEODIS ich doručuje iba v pracovných dňoch od pondelka do piatka, 8:00 až 16:00. Klient musí uviesť vaše mobilné číslo: GEODIS naň posiela upozornenia a vopred dohaduje doručenie telefonicky, SMS alebo e-mailom, pričom volá najneskôr v deň možného doručenia. Ak sa vám nedovolá do dvoch pracovných dní, kontaktuje klienta a vráti zásielku odosielateľovi.
-- **Vykládka.** Vodič zloží paletu na súkromnej adrese na úrovni terénu alebo na najbližšom bezpečnom spevnenom mieste, ak nákladné auto nemôže bezpečne zastaviť priamo pred vchodom. Vynesenie („wniesienie“), presná hodina či doručenie do 10:00 alebo 12:00 (len vybrané PSČ) sú samostatné služby, ktoré môže objednať klient.
+- **Vykládka.** Vodič zloží paletu na súkromnej adrese na úrovni terénu alebo na najbližšom bezpečnom spevnenom mieste, ak tam nákladné auto nemôže bezpečne zastaviť. Vynesenie („wniesienie“), presná hodina či doručenie do 10:00 alebo 12:00 (len vybrané PSČ) sú samostatné služby, ktoré môže objednať klient.
 - **Vyzdvihnutie na termináli.** Keď klient požiada o osobný odber na termináli GEODIS, zásielka čaká 48 hodín v pracovných dňoch od tohto pokynu. Vyzdvihuje sa pondelok až piatok od 11:00 do 16:00; potom sa vracia odosielateľovi.
 - **Dobierka.** Platiť možno v hotovosti, kartou, cez BLIK alebo inou bezhotovostnou metódou akceptovanou GEODIS až do 10 000 PLN.
 - **Podpis.** Podpisujete zariadenie vodiča alebo prepravné doklady. Podľa podmienok GEODIS nemôžete skontrolovať obsah pred podpisom, preto skontrolujte obal a prípadné poškodenie či chýbajúce kusy hneď zapíšte do dokladov.
@@ -65,24 +65,24 @@ Všeobecné podmienky GEODIS platné od 4. novembra 2024 určujú priebeh doruč
 
 **Poškodený alebo chýbajúci tovar.** Pri doručení spíšte s vodičom škodový zápis („protokół szkody“) na formulári GEODIS s podpismi oboch strán. Skryté poškodenie alebo úbytok nahláste GEODIS do 7 dní od prevzatia; kto reklamuje, musí preukázať, že škoda vznikla pred doručením. Tovar uchovajte na obhliadku a vyhotovte fotografie s dátumom a časom. Reklamačný formulár GEODIS upozorňuje, že samotný škodový zápis nie je reklamáciou. Pozrite aj [poškodený balík](guide:damaged-parcel) (v angličtine).
 
-**Kto reklamuje.** Podľa podmienok GEODIS podáva reklamáciu klient alebo ním písomne splnomocnená osoba — písomne na reklamačné oddelenie v Błonie bez zbytočného odkladu: do 14 dní od prevzatia pri poškodení alebo chýbajúcich kusoch a do 21 dní od plánovaného dňa doručenia pri omeškaní alebo strate. Ako kupujúci riešite vec s obchodom: podľa UOKiK nesie predajca zodpovednosť za zásielku až do prevzatia, aj keď škodu spôsobil dopravca.
+**Kto reklamuje.** Podľa podmienok GEODIS podáva reklamáciu klient alebo ním písomne splnomocnená osoba — písomne na reklamačné oddelenie v Błonie bez zbytočného odkladu: do 14 dní od prevzatia pri poškodení alebo chýbajúcich kusoch a do 21 dní od plánovaného dňa doručenia pri omeškaní alebo strate. Ako kupujúci riešite vec s obchodom: podľa UOKiK nesie predajca zodpovednosť za zásielku až do prevzatia, aj keď škodu spôsobil dopravca, takže reklamujete u predajcu a ten si nárok uplatní u dopravcu.
 
 ## Kontakt a zákaznícky servis GEODIS Poland
 
 Kanály GEODIS v Poľsku (overené 14. novembra 2026):
 
-- **Zákaznícky servis (Dział Obsługi Klienta):** `+48 22 460 26 26`, uvedené na poľskej stránke Strefa Klienta. Otváracie hodiny nie sú uvedené.
+- **Zákaznícky servis (Dział Obsługi Klienta):** +48 22 460 26 26, uvedené na poľskej stránke Strefa Klienta. Otváracie hodiny nie sú uvedené.
 - **Reklamácie poštou:** Dział Reklamacji, ul. Spedycyjna 1, 05-870 Błonie. Formuláre reklamácie a škodového zápisu sú na Strefa Klienta.
 - **Pobočky:** [poľská kontaktná stránka GEODIS](https://geodis.com/pl-pl/skontaktuj-sie-z-nami) uvádza 42 pobočiek v Poľsku s adresami vrátane pobočiek GEODIS Road Network.
 - **Online formulár:** formulár na geodis.com slúži na cenové ponuky a vyžaduje názov firmy (určený pre podniky).
 
 ## Sledovanie zásielky GEODIS Poland cez Peek
 
-Formát `PL` a 16 číslic nepatrí výlučne GEODIS (`PL` je kód Poľska), takže Peek ho nevie priradiť len z tvaru čísla. Vložte ho napriek tomu: Peek sleduje viac než 4 500 dopravcov. Opýta sa GEODIS Poland, či číslo pozná, a zobrazí "GEODIS Poland has this parcel.", keď áno. Ak ho GEODIS ešte neeviduje, zobrazí "Probably GEODIS Poland" a "Waiting for GEODIS Poland’s first scan", kým priebežne kontroluje; ak ho nepozná ani po týždni, navrhne overiť číslo u odosielateľa alebo vybrať iného dopravcu. Dopravcu môžete vybrať sami cez "Change" pod "Fits this number" alebo vyhľadaním (nájde ho aj zadanie `Pekaes`); samotné "GEODIS" je GEODIS France. Pri už pridanej zásielke použite "Change carrier". Odkaz na Strefa Klienta s číslom priradí GEODIS Poland automaticky.
+Formát `PL` a 16 číslic nepatrí výlučne GEODIS (`PL` je kód Poľska), takže Peek ho nevie priradiť len z tvaru čísla. Vložte ho napriek tomu: Peek sleduje viac než 4 500 dopravcov. Opýta sa GEODIS Poland, či číslo pozná, a zobrazí „GEODIS Poland has this parcel.“, keď áno. Ak ho GEODIS ešte neeviduje, zobrazí „Probably GEODIS Poland“ a „Waiting for GEODIS Poland’s first scan“, kým priebežne kontroluje; ak ho nepozná ani po týždni, navrhne overiť číslo u odosielateľa alebo vybrať iného dopravcu. Dopravcu môžete vybrať sami cez „Change“ pod „Fits this number“ alebo vyhľadaním (nájde ho aj zadanie `Pekaes`); samotné „GEODIS“ je GEODIS France. Pri už pridanej zásielke použite „Change carrier“. Odkaz na Strefa Klienta s číslom priradí GEODIS Poland automaticky.
 
-Peek číta Strefa Klienta v angličtine a zobrazuje stav, každý sken v anglickom znení GEODIS s miestom terminálu, čas doručenia a krajinu určenia. Skeny na poľských termináloch sa čítajú vo varšavskom čase; zahraničný terminál má vlastný čas. Peek ich ukazuje v časovom pásme vášho zariadenia; na peektracker.com a v aplikáciách iPhone a Android história končí riadkom "Times are in your time zone:" a názvom pásma. Keď `Pseudoscan` zruší staršie skeny, Peek ich odstráni tiež, a `Claim Received` nemení stav. Systém GEODIS neuvádza očakávaný dátum doručenia, hmotnosť, názov služby, meno príjemcu ani potvrdenie o doručení. Peek vynecháva PSČ a adresu doručenia, počet kusov, kódy terminálov a poznámky, ktoré môžu obsahovať meno podpisujúceho.
+Peek číta Strefa Klienta v angličtine a zobrazuje stav, každý sken v anglickom znení GEODIS s miestom terminálu, čas doručenia a krajinu určenia. Skeny na poľských termináloch sa čítajú vo varšavskom čase; zahraničný terminál má vlastný čas. Peek ich ukazuje v časovom pásme vášho zariadenia; na peektracker.com a v aplikáciách iPhone a Android história končí riadkom „Times are in your time zone:“ a názvom pásma. Keď `Pseudoscan` zruší staršie skeny, Peek ich odstráni tiež, a `Claim Received` nemení stav. Systém GEODIS neuvádza očakávaný dátum doručenia, hmotnosť, názov služby, meno príjemcu ani potvrdenie o doručení. Peek vynecháva PSČ a adresu doručenia, počet kusov, kódy terminálov a poznámky, ktoré môžu obsahovať meno podpisujúceho.
 
-Kým máte zásielku otvorenú alebo v deň doručenia so zapnutými notifikáciami, Peek kontroluje až každých 10 minút a v deň výjazdu na doručenie od 6:00 miestneho času až každé 2 minúty, pokiaľ vlastný systém GEODIS odpovedá (cez sledovacie služby až každých 15 minút); inak každú hodinu. Po dvoch dňoch bez správ (12 hodín v "Label created" alebo "Received by carrier") kontroluje každú hodinu. Môže upozorňovať na každý sken, dôležité kroky alebo len deň doručenia. Nemôže dohodnúť termín, osobný odber ani podať reklamáciu: zavolajte GEODIS alebo kontaktujte obchod.
+Kým máte zásielku otvorenú alebo v deň doručenia so zapnutými notifikáciami, Peek kontroluje až každých 10 minút a v deň výjazdu na doručenie od 6:00 miestneho času až každé 2 minúty, pokiaľ vlastný systém GEODIS odpovedá (cez sledovacie služby až každých 15 minút); inak každú hodinu. Po dvoch dňoch bez správ (12 hodín v „Label created“ alebo „Received by carrier“) kontroluje každú hodinu. Môže upozorňovať na každý sken, dôležité kroky alebo len deň doručenia. Nemôže dohodnúť termín, osobný odber ani podať reklamáciu: zavolajte GEODIS alebo kontaktujte obchod.
 
 ## Otázky o sledovaní GEODIS Poland
 
@@ -104,7 +104,7 @@ Po druhom neúspešnom pokuse sa zásielka vracia odosielateľovi. Pri vyžiadan
 
 ### Aké je telefónne číslo GEODIS Poland a ako nahlásiť poškodenie?
 
-Zavolajte Dział Obsługi Klienta na `+48 22 460 26 26`. Pri viditeľnom poškodení spíšte s vodičom škodový zápis („protokół szkody“); skryté poškodenie nahláste do 7 dní od prevzatia a pri online nákupoch kontaktujte obchod (klient podáva písomnú reklamáciu do 14 dní pri škode alebo 21 dní pri meškaní či strate).
+Zavolajte Dział Obsługi Klienta na +48 22 460 26 26. Pri viditeľnom poškodení spíšte s vodičom škodový zápis („protokół szkody“); skryté poškodenie nahláste do 7 dní od prevzatia a pri online nákupoch kontaktujte obchod (klient podáva písomnú reklamáciu do 14 dní od prevzatia pri škode alebo do 21 dní od plánovaného dňa doručenia pri meškaní či strate).
 
 :::sources
 - [GEODIS Poland: Strefa Klienta, shipment tracking](https://strefaklienta.pekaes.geodis.pl/en/) – search field and button (read 14 November 2026), not-found reply, claim and damage report forms

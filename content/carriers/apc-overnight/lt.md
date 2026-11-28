@@ -78,19 +78,19 @@ APC neturi nacionalinės telefoninės linijos, gyvo pokalbio ar bendro el. pašt
 - **Vietinis depas:** [Depot Finder](https://apc.co.uk/depot-finder/) pagal pašto kodą parodo jo kontaktus ir darbo laiką. APC Choice taip pat nurodo pristatantį depą ir jo el. paštą skiltyje „APC Pinpoint“.
 - **Užklausos forma (Customer Service Enquiry)** puslapyje [apc.co.uk/contact-us](https://apc.co.uk/contact-us/): įrašyk siuntos numerį ir pristatymo pašto kodą; APC persiunčia užklausą tavo vietiniam depui, kuris atsako telefonu arba el. paštu.
 
-> APC pabrėžia niekada neprašanti apmokėjimo ar kortelės duomenų už pristatymą. Nespausk nuorodų tokiose žinutėse: persiųsk laišką adresu `phishing@apc-overnight.com` ir pranešk Action Fraud.
+> APC pabrėžia niekada neprašanti apmokėjimo ar kortelės duomenų už pristatymą. Nespausk nuorodų tokiose žinutėse: persiųsk laišką adresu phishing@apc-overnight.com ir pranešk Action Fraud.
 
 ## APC siuntų sekimas su Peek
 
-Įklijuok 22 skaitmenų numerį arba `apcchoice.apc-overnight.com` nuorodą su `id=` į [Peek](/); pašto kodas nereikalingas. Kadangi forma sutampa su kitais, Peek vienu metu klausia APC Overnight ir Austrian Post ir parodo "APC Overnight has this parcel.", kai APC ją atpažįsta. 22 skaitmenų numeris be realios datos APC nesiūlomas ir nepriklauso: patikslink jį parduotuvėje. Vien 7 skaitmenų siuntos numerio čia sekti negalima, o `apc.co.uk` nuorodos neskaitomos.
+Įklijuok 22 skaitmenų numerį arba `apcchoice.apc-overnight.com` nuorodą su `id=` į [Peek](/); pašto kodas nereikalingas. Kadangi forma sutampa su kitais, Peek vienu metu klausia APC Overnight ir Austrian Post ir parodo „APC Overnight has this parcel.“, kai APC ją atpažįsta. 22 skaitmenų numeris be realios datos APC nesiūlomas ir nepriklauso: patikslink jį parduotuvėje. Vien 7 skaitmenų siuntos numerio čia sekti negalima, o `apc.co.uk` nuorodos neskaitomos.
 
 APC laikai neturi laiko juostos: Peek juos skaito JK laiku ir rodo pačios APC istoriją. Taip pat gali rodyti svorį. `Delivered` ir `Out for delivery` rodomi Peek žodžiais; kitos būsenos lieka APC formuluotėmis. Numatoma pristatymo diena, 2 valandų langas, atsiėmimo punktas ir pristatymo įrodymas nerodomi, o pristatymo pakeitimai atliekami per APC Choice.
 
-Kol siunta atidaryta arba jos pristatymo dieną su įjungtais pranešimais, Peek tikrina iki kas 10 minučių arba kas 2 minutes nuo 6:00 JK laiku dieną, kai rodoma `Out for delivery`, kol atsako APC Choice (kas 5 minutes, kai prireikia naršyklės; per sekimo servisus kas 15 minučių); kitu metu kas valandą. Kas valandą tikrinama ir po dviejų dienų be naujienų (12 valandų esant "Label created" ar "Received by carrier"), o po septynių dienų be naujienų esant "Label created" — kas 6 valandas.
+Kol siunta atidaryta arba jos pristatymo dieną su įjungtais pranešimais, Peek tikrina iki kas 10 minučių arba kas 2 minutes nuo 6:00 JK laiku dieną, kai rodoma `Out for delivery`, kol atsako APC Choice (kas 5 minutes, kai prireikia naršyklės; per sekimo servisus kas 15 minučių); kitu metu kas valandą. Kas valandą tikrinama ir po dviejų dienų be naujienų (12 valandų esant „Label created“ ar „Received by carrier“), o po septynių dienų be naujienų esant „Label created“ — kas 6 valandas.
 
-Kai naujausias skenavimas yra keturių dienų senumo, o siunta tebėra "Label created", "Received by carrier" ar "In transit", Peek pažymi jos dieną ("No tracking update since Mon 12 Oct") ir parodo "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking APC Overnight." su nuoroda "Get help from APC Overnight" į kontaktų puslapį. Po trijų savaičių be naujo skenavimo rašoma "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking APC Overnight."
+Kai naujausias skenavimas yra keturių dienų senumo, o siunta tebėra „Label created“, „Received by carrier“ ar „In transit“, Peek pažymi jos dieną („No tracking update since Mon 12 Oct“) ir parodo „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking APC Overnight.“ su nuoroda „Get help from APC Overnight“ į kontaktų puslapį. Po trijų savaičių be naujo skenavimo rašoma „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking APC Overnight.“
 
-Peek gali pranešti apie "Every scan", "Important steps" arba "Delivery only". Susisiekti su APC ar parduotuve tavo vardu Peek negali.
+Peek gali pranešti apie „Every scan“, „Important steps“ arba „Delivery only“. Susisiekti su APC ar parduotuve tavo vardu Peek negali.
 
 ## Klausimai apie APC sekimą
 
@@ -100,7 +100,7 @@ Peek gali pranešti apie "Every scan", "Important steps" arba "Delivery only". S
 
 ### Ką APC sekime reiškia „Carded“ ir kiek laiko APC saugo siuntas?
 
-`Carded` reiškia, kad vairuotojas bandė pristatyti, nieko nerado ir paliko kortelę „Sorry we missed you“. Per tris darbo dienas perkelk pristatymą, nukreipk į Parcelly parduotuvę (daugiau nei 2 500 JK) arba užsakyk atsiėmimą depe per APC Choice — kitaip siunta gali grįžti siuntėjui.
+`Carded` reiškia, kad vairuotojas bandė pristatyti, nieko nerado ir paliko kortelę „Sorry we missed you“. Per tris darbo dienas perkelk pristatymą, nukreipk į Parcelly parduotuvę (daugiau nei 2 500 JK) arba užsakyk atsiėmimą depe per APC Choice (kiek leidžia paslauga ir siuntėjas) — kitaip siunta gali grįžti siuntėjui.
 
 ### Kelintą valandą pristato APC Overnight ir ar yra 2 valandų langas?
 

@@ -15,7 +15,7 @@ CNE offentliggør intet officielt nummerformat. Den form, Peek kender som CNE’
 | Nummer | Hvad det er |
 | --- | --- |
 | `3A5V482910573` | `3A5V` og 9 cifre: et CNE Express-nummer. |
-| `3A5V48291057` | Kun 8 cifre: ikke CNE’s form. Peek nævner ikke CNE og tjekker det hos Colis Privé, hvis 12-tegns numre det matcher, samt sporingstjenester. Tjek for et manglende ciffer. |
+| `3A5V48291057` | Kun 8 cifre: ikke CNE’s form. Peek nævner ikke CNE, og da ingen transportørs form passer, slår Peek nummeret op hos sporingstjenester, når du tilføjer det. Tjek for et manglende ciffer. |
 
 Små bogstaver, mellemrum og bindestreger betyder intet i Peek. CNE’s sporing tager flere numre på én gang, adskilt af mellemrum eller kommaer.
 
@@ -36,7 +36,7 @@ CNE’s sporing viser en overordnet status øverst over linjerne. På engelsk, s
 | `Delivered` | Leveret. | "Delivered" |
 | `Invalid address`, `Lost`, `Exception`, `Destroyed` | Forkert adresse, bortkommet eller ødelagt pakke, eller et andet problem. | "Needs attention" |
 | `Returned` | Sendt retur til sælgeren. | "Returned to sender" |
-| `Not delivered` | CNE’s kinesiske side siger `未发送` («ikke afsendt»): pakken er ikke sendt endnu. | den nyeste linjes status |
+| `Not delivered` | CNE’s kinesiske side siger `未发送` ("ikke afsendt"): pakken er ikke sendt endnu. | den nyeste linjes status |
 
 `Time out` og `Unknown` kan også forekomme: der følger Peek de enkelte linjer. Hver linje har et tidspunkt, CNE’s tekst og et sted. De linjer, en pakke typisk møder i rækkefølge:
 
@@ -54,7 +54,7 @@ CNE’s sporing viser en overordnet status øverst over linjerne. På engelsk, s
 | `Released From Import Customs`, `Pickup from airport` | Gennem importtolden og afhentet fra lufthavnen. | "In transit" |
 | `Handled by local carrier` | CNE har overdraget den til transportøren, der leverer i dit land. Den lokale transportørs første scanning følger bagefter. | "In transit" |
 | `Arrived At The Delivery Company`, `Your shipment has arrived at sorting center`, `Your shipment is in process at sorting center`, `Parcel Unloaded From Container` | Hos det lokale fragtfirma eller på et sorteringscenter før det. | "In transit" |
-| `Your shipment has been processed at sorting center and ready for shipping`, `Your shipment has departed from the transit origin`, `Your shipment has arrived at the transit destination` | Sorteret i dit land og sendt videre til den lokale udbringningsstation, hvor den ankommer før omdelingen. «Transit» her er denne sidste etape, ikke et stop i udlandet. | "In transit" |
+| `Your shipment has been processed at sorting center and ready for shipping`, `Your shipment has departed from the transit origin`, `Your shipment has arrived at the transit destination` | Sorteret i dit land og sendt videre til den lokale udbringningsstation, hvor den ankommer før omdelingen. "Transit" her er denne sidste etape, ikke et stop i udlandet. | "In transit" |
 | `On Board with Courier` | I buddets bil: ude til levering. | "Out for delivery" |
 | `Your shipment delivery attempt failed [Recipient not at home]` | Buddet traf ingen hjemme. Leveringen forsøges igen. | "Delivery attempted", eller "Needs attention" mens CNE’s status er `Exception` |
 | `Sorting failed []` | Sorteringen fejlede. De tomme klammer er CNE’s. | "Needs attention" |
@@ -70,7 +70,7 @@ Peek genkender tre af CNE’s koder for lokale leverandører: DHL i Tyskland ([D
 
 CNE offentliggør ingen regler for leveringsforsøg, afhentningskort eller pakkeshops — dem fastsætter det lokale fragtfirma. Se for eksempel [Evri](carrier:evri), [La Poste / Colissimo](carrier:la-poste), [Correos](carrier:correos-spain), [Poste Italiane](carrier:poste-italiane), [Austrian Post](carrier:austrian-post) eller [POST Luxembourg](carrier:post-luxembourg).
 
-**Told i EU.** Varer købt online uden for EU har siden 1. juli 2026 haft en toldsats på 3 € pr. varetype på pakker op til 150 €, og siden 1. november 2026 et EU-håndteringsgebyr på 2 € pr. varetype uanset pakkens værdi. En varetype er varer med samme toldtarif, beskrivelse og eventuelle oprindelse. I EU’s momsområde betales også importmoms, medmindre den blev opkrævet ved købet via IOSS. CNE meddelte sine sælgere den 22. oktober 2026, at CNE på sine EU-ruter opkræver 2 €-gebyret forud hos sælgerne fra 26. oktober pr. tarifkode i hver pakke — oven i 3 €-tolden, som CNE har opkrævet på samme måde siden juli — og fortolder ud fra sælgerens deklaration. Meddelelsen siger intet om moms eller om gebyrer, den lokale transportør eventuelt opkræver. Se også [pakker i tolden](guide:customs) (på engelsk).
+**Told i EU.** Varer købt online uden for EU har siden 1. juli 2026 haft en toldsats på 3 € pr. varetype på pakker op til 150 €, og siden 1. november 2026 et EU-håndteringsgebyr på 2 € pr. varetype uanset pakkens værdi. En varetype er varer med samme toldtarif, beskrivelse og eventuelle oprindelse. I EU’s momsområde betales også importmoms, medmindre den blev opkrævet ved købet via IOSS. CNE meddelte sine sælgere den 22. oktober 2026, at CNE på sine EU-ruter opkræver 2 €-gebyret forud hos sælgerne fra 26. oktober pr. tarifkode i hver pakke — oven i 3 €-tolden, som CNE har opkrævet på samme måde siden juli — og fortolder ud fra sælgerens deklaration. Meddelelsen siger intet om moms eller om gebyrer, den lokale transportør eventuelt opkræver. Uden for EU afhænger det, du skal betale, af dit land: se [pakker i tolden](guide:customs) (på engelsk).
 
 **Forsinkelser.** CNE offentliggør driftsforstyrrelser som strejker eller dårligt vejr i udlandet på sin kinesiske nyhedsside (`新闻公告`).
 
@@ -92,8 +92,8 @@ CNE’s kunder er de sælgere, der bestiller fragten: ved forsinket, bortkommet,
 
 På CNE’s [kontaktside](https://www.cne.com/en/about/contact):
 
-- **Hotline:** `400-021-5600`, et kinesisk servicenummer (National Service Hotline).
-- **Hovedkontor i Shanghai:** `021-5109 6677`, 15/F, Block G, Lane 1777, Hualong Road, Qingpu District, Shanghai.
+- **Hotline:** 400-021-5600, et kinesisk servicenummer (National Service Hotline).
+- **Hovedkontor i Shanghai:** 021-5109 6677, 15/F, Block G, Lane 1777, Hualong Road, Qingpu District, Shanghai.
 - **Åbningstider:** 08:30 til 18:00, mandag til søndag. CNE angiver ingen tidszone; sorteringscentrene arbejder døgnet rundt.
 - **Onlineformular:** forespørgselsformularen på samme side. Vælg `Complaint` som type og angiv telefon, e-mail, navn, sporingsnummer og besked.
 
@@ -113,13 +113,13 @@ Mens du har pakken åben, eller på leveringsdagen med notifikationer tændt, tj
 
 ### Er CNE Express (递一物流) en ægte transportør?
 
-Ja. CNE EXPRESS CO LTD (递一国际物流有限公司), grundlagt i 2003 med hovedkontor i Shanghai, driver sorteringscentre i Jiaxing og Dongguan med kapacitet til over 2 millioner forsendelser om dagen siden 2020 og fragter for sælgere på Amazon, eBay, Walmart, TikTok, Temu og SHEIN.
+Ja. CNE EXPRESS CO LTD (递一国际物流有限公司), grundlagt i 2003 med hovedkontor i Shanghai, driver sorteringscentre i Jiaxing og Dongguan, der ifølge CNE har kunnet behandle over 2 millioner forsendelser om dagen siden 2020, og fragter for sælgere på Amazon, eBay, Walmart, TikTok, Temu og SHEIN.
 
 ### Hvem leverer CNE Express-pakker, og hvor finder jeg det lokale sporingsnummer?
 
 CNE overlader den endelige levering til en lokal post- eller pakkepartner — partnersiden omfatter USPS, Royal Mail, DHL, La Poste, Correos, Poste Italiane, Austrian Post, GLS, DPD, Evri og POST Luxembourg. Se under `Shipment Information` i CNE’s sporing efter `Last mile number` (Peek følger automatisk DHL Tyskland, Royal Mail, USPS og gyldige nationale postoverdragelser).
 
-### Hvad betyder «Arrived at destination» i CNE Express sporing?
+### Hvad betyder "Arrived at destination" i CNE Express sporing?
 
 Din pakke er landet i dit land — ikke på dit lokale udleveringssted. Sortering og importtoldbehandling kommer stadig før overdragelse til det lokale fragtfirma. Da CNE registrerer denne scanning på Beijing-tid mens lokale scanninger kan bruge lokal tid, kan klokkeslæt se forskudte ud.
 
@@ -129,7 +129,7 @@ CNE’s produktsider angiver referencetider på 3 til 8 hverdage for CNE Priorit
 
 ### Hvordan kontakter jeg CNE Express om en forsinket eller bortkommet pakke?
 
-Spørg sælgeren først, da sælgeren har fragtaftalen med CNE. Vil du kontakte CNE direkte, kan du ringe til den kinesiske hotline `400-021-5600` (eller Shanghai-kontoret `021-5109 6677`, man–søn 08:30–18:00) eller indsende formularen på [cne.com/en/about/contact](https://www.cne.com/en/about/contact) under `Complaint`.
+Spørg sælgeren først, da sælgeren har fragtaftalen med CNE. Vil du kontakte CNE direkte, kan du ringe til den kinesiske hotline `400-021-5600` eller Shanghai-kontoret `021-5109 6677` (08:30 til 18:00, mandag til søndag, uden angivet tidszone) eller indsende formularen på [cne.com/en/about/contact](https://www.cne.com/en/about/contact) under `Complaint`.
 
 :::sources
 - [CNE: Track your parcel](https://www.cne.com/en/track) – tracker, status labels, lines, Shipment Information, View POD

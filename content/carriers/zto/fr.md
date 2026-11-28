@@ -6,7 +6,7 @@ published: 2026-11-21
 updated: 2026-11-27
 ---
 
-ZTO Express (`中通快递`, Zhongtong) est un transporteur chinois fondé à **Shanghai** le 8 mai 2002 (38,52 milliards de colis acheminés en 2025). Un numéro ZTO Express (12 chiffres ou 14 chiffres commençant par `7`) suit un colis circulant en **Chine continentale** — souvent un achat Taobao ou en ligne en route vers une adresse chinoise ou vers l'entrepôt d'un transitaire. Suivez-le sur le [traceur chinois de ZTO](https://www.zto.com/check) ou dans le champ ci-dessus ; pour les envois transfrontaliers du groupe, ZTO International (`中通国际`) utilise des numéros en `771` sur `ztoglobal.com`.
+ZTO Express (`中通快递`, Zhongtong) est un transporteur chinois fondé à **Shanghai** le 8 mai 2002 (38,52 milliards de colis acheminés en 2025). Un numéro ZTO Express suit en général un colis circulant en **Chine continentale** — souvent un achat Taobao ou en ligne en route vers une adresse chinoise ou vers l'entrepôt d'un transitaire. Suivez-le sur le [traceur chinois de ZTO](https://www.zto.com/check) ou dans le champ ci-dessus ; pour les envois transfrontaliers du groupe, ZTO International (`中通国际`) utilise des numéros en `771` sur `ztoglobal.com`.
 
 ## Numéro de suivi ZTO Express : format et exemples
 

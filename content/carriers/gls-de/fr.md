@@ -1,12 +1,12 @@
 ---
 title: GLS Allemagne suivi colis : statuts, relais et contact
-description: Suivi colis GLS Allemagne (GLS Germany) : numéro à 11/12 chiffres ou Track-ID, code postal requis, statuts anglais, ParcelShop 7 jours ouvrables et contact.
+description: Suivi colis GLS Allemagne (GLS Germany) : numéro de colis ou Track-ID, code postal requis, statuts anglais, ParcelShop 7 jours ouvrables et contact.
 slug: gls-allemagne-suivi-colis
 published: 2026-11-14
 updated: 2026-11-27
 ---
 
-GLS Germany (*General Logistics Systems Germany GmbH & Co. OHG*) livre du lundi au vendredi (jamais le samedi) et s'appuie sur 9 000 ParcelShops et 200 consignes Parcelstation en Allemagne. Que ton colis arrive en Allemagne ou parte d'Allemagne vers la France, la Belgique, le Luxembourg ou la Suisse, suis-le avec son numéro de colis (ou son Track-ID à 6 lettres) et le code postal de livraison sur [la page de suivi GLS](https://gls-group.com/EU/en/parcel-tracking) ou dans le champ ci-dessus.
+GLS Germany (*General Logistics Systems Germany GmbH & Co. OHG*) livre du lundi au vendredi (jamais le samedi) et compte, selon le groupe, 9 000 ParcelShops et 200 consignes Parcelstation en Allemagne. Que ton colis arrive en Allemagne ou parte d'Allemagne vers la France, la Belgique, le Luxembourg ou la Suisse, suis-le avec son numéro de colis (ou son Track-ID à 6 lettres) et le code postal de livraison sur [la page de suivi GLS](https://gls-group.com/EU/en/parcel-tracking) ou dans le champ ci-dessus.
 
 ## Numéro de colis GLS et Track-ID : où les trouver
 
@@ -87,7 +87,7 @@ Tu vois alors le statut, les étapes telles que GLS les écrit (en anglais), la 
 
 ### Comment suivre un colis GLS Allemagne (numéro, Track-ID et code postal) ?
 
-Saisis le numéro de colis (11 ou 12 chiffres) ou le Track-ID de 6 lettres figurant sur l'avis de passage avec le code postal de livraison sur `gls-group.com/EU/en/parcel-tracking` ou dans Peek. `The parcel is in delivery.` annonce la livraison du jour et `The parcel is ready for collection at the ParcelShop.` le dépôt en relais.
+Saisis le numéro de colis ou le Track-ID de 6 lettres figurant sur l'avis de passage avec le code postal de livraison sur `gls-group.com/EU/en/parcel-tracking` ou dans Peek. `The parcel is in delivery.` annonce la livraison du jour et `The parcel is ready for collection at the ParcelShop.` le dépôt en relais.
 
 ### Quel est le délai de livraison GLS depuis l'Allemagne vers la France ou la Belgique ?
 

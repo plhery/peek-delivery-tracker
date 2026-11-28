@@ -91,7 +91,7 @@ Du siehst den Status, jeden Scan mit Ort und DHLs genauer Uhrzeit auf einer Kart
 
 ### Wie lange dauert es, bis die DHL Sendungsverfolgung ein Paket anzeigt?
 
-Bis zu 24 Stunden nach dem Versand. Solange DHL das Paket noch nicht gescannt hat, erscheint `Die Sendung wurde vom Absender elektronisch angekündigt.` oder der Hinweis, dass die Sendungsdaten in Kürze erwartet werden.
+Laut DHL bis zu 24 Stunden. Solange DHL das Paket noch nicht gescannt hat, erscheint `Die Sendung wurde vom Absender elektronisch angekündigt.` oder der Hinweis, dass die Sendungsdaten in Kürze erwartet werden.
 
 ### Wie lange braucht ein DHL Paket innerhalb Deutschlands — und wann kann ich nachforschen?
 
@@ -103,7 +103,7 @@ In einer Filiale oder einem Paketshop lagert das Paket 7 Werktage (inklusive Sam
 
 ### Kann ich ein DHL Paket ohne Sendungsnummer oder ein DHL Päckchen verfolgen?
 
-Nein. DHL verfolgt Sendungen nur mit gültiger Sendungsnummer (auch der Kundenservice unter `0228 4333112` braucht sie), und DHL Päckchen sowie DHL Päckchen International enthalten keine Sendungsverfolgung.
+Nein. DHL verfolgt Sendungen nur mit gültiger Sendungsnummer (auch der Kundenservice unter 0228 4333112 braucht sie), und DHL Päckchen sowie DHL Päckchen International enthalten keine Sendungsverfolgung.
 
 ### Kann ich Liefertag, Ablageort oder Adresse bei einem laufenden DHL Paket ändern?
 

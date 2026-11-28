@@ -96,7 +96,7 @@ While you have the shipment open, or on its delivery day with notifications on, 
 
 ### How do I track a Blue Dart shipment by waybill number?
 
-Enter your 11-digit waybill on bluedart.com or paste it into Peek. From India, Peek checks Blue Dart first automatically; outside India, press "Change" and choose Blue Dart under "Fits this number" (or paste a bluedart.com `trackNo=` link).
+Enter your 11-digit waybill on bluedart.com or paste it into Peek. From India, Peek asks Blue Dart first; elsewhere, it asks Blue Dart last, once the other carriers and tracking services have missed the number, or you can press "Change" and choose Blue Dart under "Fits this number". A bluedart.com link with the waybill in it (`trackNo=`) names Blue Dart at once.
 
 ### What does a Blue Dart 11-digit waybill number look like?
 

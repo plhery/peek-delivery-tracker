@@ -94,11 +94,11 @@ A CACESA (*Compañía Auxiliar al Cargo Express*) é um agente aduaneiro sediado
 
 ### Quem entrega em Portugal uma encomenda desalfandegada pela CACESA?
 
-A CACESA não entrega encomendas: passa-as à empresa de transporte escolhida pelo vendedor (por exemplo, um número `CNPRT` corresponde à Ecoscooting e um código postal terminado em `PT` aos CTT). A partir da linha `Parcel is going out from Cacesa facilities`, consulta essa transportadora ou o vendedor.
+A CACESA não entrega encomendas: passa-as à empresa de transporte escolhida pelo vendedor (o número pode dar uma pista: no catálogo do Peek, um `CNPRT` é da Ecoscooting e um número postal terminado em `PT` é dos CTT). A partir da linha `Parcel is going out from Cacesa facilities`, consulta essa transportadora ou o vendedor.
 
 ### Como pagar a alfândega ou enviar documentos à CACESA?
 
-Se a CACESA te contactar por e-mail ou SMS, envia a fatura/comprovativo de compra (com foto do artigo) e o comprovativo de pagamento para `atc@cacesa.com`, ou usa «Pagar impuestos» no cacesa.com (cartão, PayPal ou Bizum). Desde 1 de julho de 2026 aplicam-se 3 € de direitos aduaneiros por tipo de produto nas encomendas até 150 € quando não pagos na compra.
+Se a CACESA te contactar por e-mail ou SMS, envia para atc@cacesa.com a fatura ou um comprovativo de compra, com uma foto do artigo, e o comprovativo de pagamento; para pagar, usa «Pagar impuestos» no cacesa.com (cartão, PayPal ou Bizum). As páginas da CACESA descrevem isto com a Agência Tributária espanhola e não explicam se algo muda nas encomendas para Portugal. A FAQ da CACESA indica, desde 1 de julho de 2026, direitos aduaneiros de 3 € por tipo de produto nas encomendas até 150 €, se não foram pagos na compra.
 
 ### Quanto tempo demora uma encomenda CACESA depois de sair da alfândega?
 

@@ -7,7 +7,7 @@ published: 2026-10-27
 updated: 2026-11-27
 ---
 
-No Back Market Portugal (backmarket.pt), cada encomenda de telemóvel, portátil ou aparelho recondicionado é preparada e enviada pelo vendedor (recondicionador profissional) com a transportadora que escolhe — UPS, FedEx ou DHL Express. O número de seguimento chega em 24 horas no e-mail de envio e em «Encomendas» na tua conta. Se a encomenda se atrasar, se perder ou chegar danificada, abre «Encomendas» > «Obter ajuda» (o Back Market intervém se o vendedor não resolver). Tens 30 dias de devolução e 24 meses de garantia comercial.
+No Back Market Portugal (backmarket.pt), cada encomenda de telemóvel, portátil ou aparelho recondicionado é preparada e enviada pelo vendedor (recondicionador profissional) com a transportadora que escolhe, por exemplo UPS, FedEx ou DHL Express, as que a ajuda do Back Market em Portugal nomeia. O número de seguimento chega em 24 horas no e-mail de envio e em «Encomendas» na tua conta. Se a encomenda se atrasar, se perder ou chegar danificada, abre «Encomendas» > «Obter ajuda» (o Back Market pode intervir se o vendedor não resolver). Tens 30 dias de devolução e 24 meses de garantia comercial.
 
 ## Onde vende o Back Market?
 

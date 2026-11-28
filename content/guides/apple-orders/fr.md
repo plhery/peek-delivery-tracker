@@ -7,7 +7,7 @@ published: 2026-10-26
 updated: 2026-11-27
 ---
 
-Pour suivre une commande passée sur l'**Apple Store en ligne** (France, Belgique ou Suisse), ouvre la page **État de votre commande** sur `apple.com` avec ton compte Apple ou ton numéro de commande, ou utilise le lien de suivi de l'avis d'expédition envoyé par e-mail (disponible dans les 24 heures après l'envoi). Apple choisit le transporteur — en France, les commandes de moins de 100 € partent par service postal sans suivi en ligne, et celles de plus de 100 € par service de course — et gère directement les retards, colis perdus, dommages et retours gratuits sous 14 jours.
+Pour suivre une commande passée sur l'**Apple Store en ligne** (France, Belgique ou Suisse), ouvre la page **État de votre commande** sur `apple.com` avec ton compte Apple ou ton numéro de commande, ou utilise le lien de suivi de l'avis d'expédition envoyé par e-mail (disponible dans les 24 heures après l'envoi). Apple choisit le transporteur — en France, les commandes de moins de 100 € partent par service postal sans suivi en ligne, et celles de plus de 100 € par service de course — et gère directement les retards, colis perdus et dommages. Selon ses conditions françaises, le retour sous 14 jours est gratuit, sauf les frais liés à une livraison express.
 
 ## Qui livre ma commande Apple Store en France, Belgique et Suisse ?
 

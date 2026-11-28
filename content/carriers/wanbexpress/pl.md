@@ -1,6 +1,6 @@
 ---
 title: Śledzenie WanbExpress: numery WNB…YQ, statusy i doręczenie
-description: Jak śledzić paczkę WanbExpress (numer WNB…YQ) z Chin: znaczenie statusów celnych, lokalny przewoźnik (InPost, iMile), cło UE 3 € i 2 € oraz gdzie reklamować.
+description: Jak śledzić paczkę WanbExpress (numer WNB…YQ) z Chin: znaczenie statusów celnych, lokalny przewoźnik (np. iMile), cło UE 3 € i 2 € oraz gdzie reklamować.
 slug: sledzenie-wanbexpress
 published: 2026-11-21
 updated: 2026-11-27

@@ -10,7 +10,7 @@ Omniva (Estlands post / Eesti Post) sköter postutdelning och paketskåp i Estla
 
 ## Omniva spårningsnummer: hur det ser ut
 
-Omniva kallar numret ”shipment tracking code” eller ”shipment code (tracking number)”. Den engelska returhjälpen anger exemplet `CEXXXXXXXXEE`. Här är de vanligaste formaten (alla siffror påhittade):
+Omniva kallar numret "shipment tracking code" eller "shipment code (tracking number)". Den engelska returhjälpen anger exemplet `CEXXXXXXXXEE`. Här är de vanligaste formaten (alla siffror påhittade):
 
 | Kod | Vad det är |
 | --- | --- |
@@ -25,7 +25,7 @@ En kod som slutar på `LV` tillhör [Latvijas Pasts](carrier:latvijas-pasts), en
 
 ## Omnivas spårningsstatusar förklarade
 
-Omnivas spårningssidor finns på engelska, estniska, lettiska, litauiska och ryska, och appen rapporterar stegen på engelska. ”Track & trace details” öppnar hela tidslinjen. De vanliga stegen, ungefär i ordning:
+Omnivas spårningssidor finns på engelska, estniska, lettiska, litauiska och ryska, och appen rapporterar stegen på engelska. "Track & trace details" öppnar hela tidslinjen. De vanliga stegen, ungefär i ordning:
 
 | Omniva skriver | Vad det betyder för dig |
 | --- | --- |
@@ -60,11 +60,11 @@ Två formuleringar missförstås ofta: `Delivery attempt made` betyder att förs
 
 ## Omniva-paket försenat, skadat eller i tullen
 
-**Ej levererat eller ingen uppdatering.** Kontrollera först om Omnivas leveranstid (nedan) har passerat. Har den gjort det ber Omniva mottagaren kontakta avsändaren, som skickar in formuläret ”Request parcel delivery status”. Se [varför spårningen stannar](guide:tracking-not-updating) (på engelska).
+**Ej levererat eller ingen uppdatering.** Kontrollera först om Omnivas leveranstid (nedan) har passerat. Har den gjort det ber Omniva mottagaren kontakta avsändaren, som skickar in formuläret "Request parcel delivery status". Se [varför spårningen stannar](guide:tracking-not-updating) (på engelska).
 
 **Tomt fack eller fel plats.** Kontakta Omnivas privatkundtjänst i ditt land.
 
-**Skadat.** I Estland kan mottagaren skicka in formuläret för skadad eller förlorad försändelse inom 6 månader från överlämnandet, men normalt ersätts bara avsändaren. I Lettland och Litauen hänvisar hjälpsidorna mottagare till avsändaren (i Litauen med foton på paket och emballage), som gör reklamationen, men Omnivas lettiska villkor tillåter även skriftlig reklamation från mottagaren inom 6 månader.
+**Skadat.** I Estland kan mottagaren skicka in formuläret för skadad eller förlorad försändelse inom 6 månader från överlämnandet, men normalt ersätts bara avsändaren. I Lettland och Litauen hänvisar hjälpsidorna mottagare till avsändaren (i Litauen med foton på paket och emballage), som gör reklamationen, men Omnivas lettiska villkor tillåter även skriftlig reklamation från mottagaren inom 6 månader från överlämnandet.
 
 **Tull (Estland).** Sedan 1 juli 2021 måste varje paket från länder utanför EU deklareras oavsett värde inom 30 dagar. Du kan ge Omniva fullmakt eller deklarera själv hos skatte- och tullmyndigheten. Se [paket i tullen](guide:customs) (på engelska).
 
@@ -80,37 +80,37 @@ Omnivas kontaktsidor för privatkunder anger följande (lokal tid i respektive l
 | Lettland | +371 27042424 | info@omniva.lv | Mån–fre 8:00–18:00, lör 9:00–15:00 |
 | Litauen | +370 700 55077 | info@omniva.lt | Mån–fre 8:00–18:00, lör 9:00–15:00 |
 
-Varje webbplats har även formulär för leveransstatus, skadat eller borttappat paket samt omdirigering. I Litauen följer samtalskostnaden Telias taxa. Omniva har ingen chatt.
+Varje webbplats har även formulär för leveransstatus, skadat eller borttappat paket samt omdirigering. I Litauen följer samtalskostnaden Telias taxa. Omniva anger ingen chatt.
 
 ## Spåra Omniva med Peek
 
 [Peek](/) känner genast igen `JJEE`-koder i båda formaten ovan som Omniva. Länkar från minu.omniva.ee, mana.omniva.lv och mano.omniva.lt (`/track/` + koden) samt omniva.ee- eller omniva.lt-länkar med `barcode=` fungerar för alla koder. Inget postnummer behövs.
 
-En postkod som slutar på `EE`, börjar på C, R, E eller L (men inte CR, CV eller RO) och har giltig kontrollsiffra känns igen som Omniva direkt. För andra inledande bokstäver frågar Peek både Omniva och Chronopost och väljer den som känner till koden. Känner ingen av dem igen den än visas "Not found at … yet. Peek will keep checking after you add it." En kod under Omniva som ännu saknas där visar "Waiting for Omniva"; efter två dagar utan svar ber Peek dig kontrollera numret, välja en annan transportör eller ta bort paketet och kontrollerar därefter dagligen (och veckovis efter en vecka). Fel kontrollsiffra avvisas av Omniva även vid manuellt val. En utländsk postkod spåras hos Omniva efter "Change" eller via en Omniva-länk; när avsändarposten anger destination Estland (eller inget land när du spårar från Estland) frågar Peek även Omniva och byter dit när den har en minst lika ny skanning (för Lettland och Litauen frågar den Latvijas Pasts respektive Lietuvos paštas). Ett `EE`-paket utomlands kan på samma sätt följas vidare hos mottagarlandets post.
+Ett nummer i postformat som slutar på `EE`, börjar på C, R, E eller L (men inte CR, CV eller RO) och har giltig kontrollsiffra är Omnivas till formen, så Peek känner genast igen det som Omniva. För andra inledande bokstäver frågar Peek både Omniva och Chronopost och väljer den som känner till koden. Känner ingen av dem igen den än visas "Not found at … yet. Peek will keep checking after you add it.", och Peek fortsätter fråga, allt mer sällan ju fler dagar som går. En kod som Peek anger som Omnivas men som Omniva ännu inte listar visar "Waiting for Omniva"; känner Omniva fortfarande inte till den två dagar senare och inget annat har svarat för den, ber Peek dig kontrollera numret, välja en annan transportör eller ta bort paketet och kontrollerar därefter dagligen (och veckovis när en vecka har gått sedan du lade till det). Fel kontrollsiffra avvisas av Omniva även vid manuellt val. Ett utländskt nummer i postformat spåras hos Omniva efter "Change" eller via en Omniva-länk; när avsändarposten anger destination Estland (eller inget land när du spårar från Estland) frågar Peek även Omniva och byter dit när den har en minst lika ny skanning (för Lettland och Litauen frågar den Latvijas Pasts respektive Lietuvos paštas). Ett `EE`-paket utomlands kan på samma sätt följas vidare hos mottagarlandets post.
 
-Peek visar Omnivas engelska statusar, varje skanningsplats på kartan, destinationsland, utlämningstid samt vilket paketskåp eller postkontor paketet väntar i. Adresser, postnummer och orsaker till misslyckade försök utelämnas, och varken förväntad leverans eller vikt visas. Medan paketet är öppet eller på leveransdagen med notiser på frågar Peek Omniva upp till var 10:e minut och varannan minut från 06:00 estnisk tid den dag paketet skannas ut för leverans; annars varje timme. Efter två dagar utan nytt (12 timmar vid "Label created" eller "Received by carrier") kontrollerar den varje timme, och var 6:e timme efter sju dagar vid "Label created". Efter fyra dagar utan ny rad vid "Label created", "Received by carrier" eller "In transit" visas "No tracking update since …", "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Omniva." och länken "Get help from Omniva"; efter tre veckor "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Omniva." Notiser: "Every scan", "Important steps" eller "Delivery only".
+Peek visar Omnivas engelska statusar, varje skanningsplats på kartan, destinationsland, utlämningstid samt vilket paketskåp eller postkontor paketet väntar i. Adresser, postnummer och orsaker till misslyckade försök utelämnas, och varken förväntad leverans eller vikt visas. Medan paketet är öppet eller på leveransdagen med notiser på frågar Peek Omniva upp till var 10:e minut och varannan minut från 06:00 estnisk tid den dag Omniva skannar ut paketet för leverans, medan Omnivas egen spårning svarar; annars varje timme. Efter två dagar utan nytt (12 timmar vid "Label created" eller "Received by carrier") kontrollerar den varje timme, och var 6:e timme efter sju dagar vid "Label created". Efter fyra dagar utan ny rad vid "Label created", "Received by carrier" eller "In transit" visas "No tracking update since …", "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Omniva." och länken "Get help from Omniva"; efter tre veckor "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Omniva." Notiser: "Every scan", "Important steps" eller "Delivery only".
 
 ## Frågor om Omniva spårning
 
 ### Hur spårar jag ett Omniva-paket (Estlands post)?
 
-Skriv in spårningskoden (t.ex. `JJEE…` eller en 13-teckens postkod på `EE`) på minu.omniva.ee, i Omniva-appen eller i fältet ovan. Omniva spårar på kod och inte telefonnummer, men ett konto på minu.omniva.ee listar dina inkommande paket.
+Skriv in spårningskoden (t.ex. en `JJEE`-kod eller ett nummer på 13 tecken i postformat som slutar på `EE`) på minu.omniva.ee, i Omniva-appen eller i fältet ovan. Omniva spårar på kod och inte telefonnummer, men ett konto på minu.omniva.ee listar dina inkommande paket.
 
 ### Hur lång tid tar Omniva i Estland, Lettland och Litauen?
 
-Omniva anger 1 till 2 arbetsdagar inom ett baltiskt land och 2 till 3 arbetsdagar mellan dem från överlämning. Kurirer i Estland och Litauen levererar nästa arbetsdag och senast 3 dagar efter överlämning (inom 3 dagar i Lettland).
+Omniva anger 1 till 2 arbetsdagar inom ett baltiskt land och 2 till 3 arbetsdagar mellan dem från överlämning. Omnivas estniska och litauiska sidor säger att kurirer levererar nästa dag och senast 3 dagar efter överlämning; den lettiska sidan anger bara de 3 dagarna.
 
 ### Hur länge ligger ett paket i ett Omniva-paketskåp, och kan jag förlänga tiden?
 
 Omnivas paketskåp håller paket i 4 dagar i Estland, Lettland och Litauen. I e-tjänsten kan du mot avgift förlänga med upp till 4 dagar åt gången, högst 12 extra dagar totalt, innan paketet returneras till avsändaren.
 
-### Vad betyder «Delivery attempt made» på Omnivas spårning?
+### Vad betyder "Delivery attempt made" på Omnivas spårning?
 
 Det betyder att kuriren försökte leverera men misslyckades — inte att paketet levererades. Paket upp till storlek L hamnar då i ett närliggande paketskåp i 4 dagar.
 
 ### Hur kontaktar jag Omnivas kundtjänst?
 
-Ring `+372 661 6616` i Estland (`info@omniva.ee`), `+371 27042424` i Lettland (`info@omniva.lv`) eller `+370 700 55077` i Litauen (`info@omniva.lt`). Telefonlinjerna har öppet måndag–fredag (8:00–19:00 i Estland, 8:00–18:00 i Lettland och Litauen) och lördag 9:00–15:00.
+Ring +372 661 6616 i Estland (info@omniva.ee), +371 27042424 i Lettland (info@omniva.lv) eller +370 700 55077 i Litauen (info@omniva.lt). Telefonlinjerna har öppet måndag–fredag (8:00–19:00 i Estland, 8:00–18:00 i Lettland och Litauen) och lördag 9:00–15:00.
 
 :::sources
 - [Omniva Estonia: Track and receive parcels](https://www.omniva.ee/en/track-and-receive-parcels/) – shipment code, door code, receiving options, courier SMS and call

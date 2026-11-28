@@ -54,9 +54,9 @@ Amazon Logistics — власна мережа доставки останньо
 
 ## Відстеження Amazon Logistics у Peek
 
-[Peek](/) не може безпосередньо відстежувати або зберігати посилку Amazon Logistics: Amazon показує статус, історію та фото доставки лише всередині вашого акаунта. Якщо вставити один із цих номерів або посилання track.amazon, Peek спершу перевіряє публічний трекер Amazon Shipping. Якщо Amazon відповідає, це посилка [Amazon Shipping](carrier:amazon-shipping) (покупка поза Amazon, яку Amazon доставляє для продавця), і Peek відстежує її: "Public tracking is available with Amazon Shipping. Peek will keep this delivery up to date." Якщо Amazon більше не віддає історію, запис може залишитися як довідка.
+[Peek](/) не може безпосередньо відстежувати або зберігати посилку Amazon Logistics: Amazon показує статус, історію та фото доставки лише всередині вашого акаунта. Якщо вставити один із цих номерів або посилання track.amazon, Peek спершу перевіряє публічний трекер Amazon Shipping. Якщо Amazon відповідає, це посилка [Amazon Shipping](carrier:amazon-shipping) (покупка поза Amazon, яку Amazon доставляє для продавця), і Peek відстежує її: «Public tracking is available with Amazon Shipping. Peek will keep this delivery up to date.» Якщо Amazon більше не віддає історію, запис може залишитися як довідка.
 
-Інакше Peek показує "Amazon Logistics deliveries are usually tracked in Your Orders on Amazon." та кнопку "Open my Amazon orders", яка відкриває історію замовлень на відповідному сайті: amazon.co.uk для `UK` і `GB`, amazon.ie для `IE`, amazon.com для `TBA`, amazon.com.au для `TBAU`. Якщо перевірка не запускається, натисніть "Check again". На номер замовлення виводиться "That looks like an Amazon order number".
+Інакше Peek показує «Amazon Logistics deliveries are usually tracked in Your Orders on Amazon.» та кнопку «Open my Amazon orders», яка відкриває історію замовлень на відповідному сайті: amazon.co.uk для `UK` і `GB`, amazon.ie для `IE`, amazon.com для `TBA`, amazon.com.au для `TBAU`. Якщо перевірка не запускається, натисніть «Check again». На номер замовлення виводиться «That looks like an Amazon order number».
 
 ## Питання про Amazon Logistics
 

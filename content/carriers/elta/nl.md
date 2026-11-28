@@ -6,7 +6,7 @@ published: 2026-11-27
 updated: 2026-11-27
 ---
 
-ELTA Hellenic Post (ΕΛΤΑ) is het nationale postbedrijf van Griekenland, waar ook ELTA Courier nu deel van uitmaakt. Volg een zending op de [Engelse trackingpagina van ELTA](https://www.elta.gr/en/track), die tot vijf nummers tegelijk accepteert (één per regel), of plak het nummer in het vak hierboven. Een pakket van ELTA Courier kun je ook opzoeken op de [zoekpagina van elta-courier.gr](https://www.elta-courier.gr/search), die meerdere vouchernummers onder elkaar ondersteunt. Het nummer krijg je van de afzender: op het verzendbewijs, de koeriersvoucher of in het bericht van de webshop. Kort samengevat: de tabel hieronder legt elke status uit; een niet-bezorgd pakket wacht op het postkantoor of de koerierswinkel uit de tracking (binnenlandse pakketten volgens de termijn op het bericht of de sms, ingeklaarde pakketten 20 dagen vanaf het bericht); en de klantenservice van ELTA is bereikbaar op `800-11-82000` (vaste lijn in Griekenland), `212-0000-800` (mobiel) en `+30 212-0000-800` vanuit het buitenland.
+ELTA Hellenic Post (ΕΛΤΑ) is het nationale postbedrijf van Griekenland, waar ook ELTA Courier nu deel van uitmaakt. Volg een zending op de [Engelse trackingpagina van ELTA](https://www.elta.gr/en/track), die tot vijf nummers tegelijk accepteert (één per regel), of plak het nummer in het vak hierboven. Een pakket van ELTA Courier kun je ook opzoeken op de [zoekpagina van elta-courier.gr](https://www.elta-courier.gr/search), die meerdere vouchernummers onder elkaar ondersteunt. Het nummer krijg je van de afzender: op het verzendbewijs, de koeriersvoucher of in het bericht van de webshop. Kort samengevat: de tabel hieronder legt elke status uit; een niet-bezorgd pakket wacht op het postkantoor of de koerierswinkel uit de tracking (binnenlandse pakketten volgens de termijn op het bericht of de sms, ingeklaarde pakketten 20 dagen vanaf het bericht); en de klantenservice van ELTA is bereikbaar op 800-11-82000 (vaste lijn in Griekenland), 212-0000-800 (mobiel) en +30 212-0000-800 vanuit het buitenland.
 
 ## ELTA trackingnummer
 
@@ -20,7 +20,7 @@ Trackingnummers van ELTA tellen 13 tekens: twee Latijnse letters, negen cijfers 
 
 Nummer kwijt? Zie [hoe je een trackingnummer vindt](guide:find-tracking-number) (in het Engels).
 
-Vergelijkbare codes: een nummer dat eindigt op `CY` hoort bij [Cyprus Post](carrier:cyprus-post). Een gewone 10-cijferige voucher is niet van ELTA maar van [ACS Courier](carrier:acs-courier) of [Geniki Taxydromiki](carrier:geniki-taxydromiki).
+Vergelijkbare codes: een nummer dat eindigt op `CY` hoort bij [Cyprus Post](carrier:cyprus-post). Een gewone 10-cijferige voucher is niet van ELTA: dat is de vorm die [ACS Courier](carrier:acs-courier) en [Geniki Taxydromiki](carrier:geniki-taxydromiki) gebruiken.
 
 ## Wat ELTA trackingstatussen betekenen
 
@@ -45,7 +45,7 @@ De tracker van ELTA toont elke scan in het Grieks of Engels (met een taalknop), 
 
 Na `Arrival in` volgt een reeks spaties en dan het station, waardoor het afgebroken kan lijken. `Notification of attempted delivery` en de reden komen in dezelfde minuut.
 
-Antwoordt de tracker met «No Tracking History», dan zijn er nog geen scans of is de zending te oud: ELTA bewaart de geschiedenis zes maanden vanaf de verzenddatum.
+Antwoordt de tracker met "No Tracking History", dan zijn er nog geen scans of is de zending te oud: ELTA bewaart de geschiedenis zes maanden vanaf de verzenddatum.
 
 ## Bezorging, PostBox-kluisjes en ophalen bij ELTA
 
@@ -55,9 +55,9 @@ ELTA bezorgt binnenlandse pakketten aan huis, in een ELTA-winkel (je krijgt sms 
 
 **ELTA Courier** doet twee bezorgpogingen. Bel na het eerste bericht het lokale koerierspunt om een bezorging in te plannen; na twee berichten haal je het daar op of boek je een nieuwe bezorging (mogelijk tegen bijbetaling). Koerierswinkels zijn geopend van maandag t/m vrijdag 08:00–20:00 en zaterdag 08:00–14:00 (kan per regio verschillen). Een niet-bezorgbare deur-tot-deurzending gaat binnen twee weken na verzending terug naar de afzender, tenzij het contract van de afzender anders bepaalt.
 
-**PostBox-kluisjes.** De slimme kluisjes van ELTA zijn 24/7 open (kluisjes in metro- en ISAP-stations volgen de openingstijden van het station). Bij plaatsing ontvang je per Viber of sms een 6-cijferige pincode en de locatie. Haal binnen 48 uur op; daarna verhuist het pakket naar de dichtstbijzijnde ELTA-winkel en krijg je een nieuw bericht. Pakketten met douanerechten of belastingen gaan niet naar een PostBox. Je kunt een PostBox aanvragen met «Θέλω από PostBox» in de sms of Viber van ELTA; voor buitenlandse zendingen hangt de mogelijkheid af van het sorteermoment. Een PostBox accepteert pakketten tot 62 × 36 × 60 cm en 20 kg zonder extra kosten.
+**PostBox-kluisjes.** De slimme kluisjes van ELTA zijn 24/7 open (kluisjes in metro- en ISAP-stations volgen de openingstijden van het station). Bij plaatsing ontvang je per Viber of sms een 6-cijferige pincode en de locatie. Haal binnen 48 uur op; daarna verhuist het pakket naar de dichtstbijzijnde ELTA-winkel en krijg je een nieuw bericht. Pakketten met douanerechten of belastingen gaan niet naar een PostBox. Je kunt een PostBox aanvragen met "Θέλω από PostBox" in de sms of Viber van ELTA; voor buitenlandse zendingen hangt de mogelijkheid af van het sorteermoment. Een PostBox accepteert pakketten tot 62 × 36 × 60 cm en 20 kg zonder extra kosten.
 
-**Adres wijzigen.** Voor een koerierszending kan alleen de afzender dit schriftelijk doen via `customerservice@elta-courier.gr`. Voor een volledig gevolgde postzending dient de afzender het verzoek persoonlijk met legitimatie in bij een winkel.
+**Adres wijzigen.** Voor een koerierszending kan alleen de afzender dit schriftelijk doen via customerservice@elta-courier.gr. Voor een volledig gevolgde postzending dient de afzender het verzoek persoonlijk met legitimatie in bij een winkel.
 
 ## ELTA pakket vertraagd, kwijt of beschadigd
 
@@ -67,7 +67,7 @@ Staat de tracking dagen stil? Bekijk eerst [waarom tracking niet wordt bijgewerk
 
 **Vermist.** Afzender of ontvanger kan tot zes maanden na verzending een onderzoek aanvragen bij een ELTA-winkel met legitimatie en verzendbewijs (alleen voor volledig gevolgde zendingen). ELTA antwoordt per aangetekende brief binnen 8 weken (4 weken voor bepaalde buitenlandse zendingen).
 
-**Beschadigd koerierspakket.** Neem het onder voorbehoud aan en meld de schade binnen één werkdag via het contactformulier van ELTA Courier of in de winkel; zonder voorbehoud aanvaardt ELTA geen aansprakelijkheid. Het schadeformulier gaat met voucher, factuur en foto's van inhoud en verpakking naar `apozimiwseis@elta-courier.gr`. Voor vragen bel je de schadeafdeling op `+30 210-6073066`.
+**Beschadigd koerierspakket.** Neem het onder voorbehoud aan en meld de schade binnen één werkdag via het contactformulier van ELTA Courier of in de winkel; zonder voorbehoud aanvaardt ELTA geen aansprakelijkheid. Het schadeformulier gaat met voucher, factuur en foto's van inhoud en verpakking naar apozimiwseis@elta-courier.gr. De schadevergoeding gaat naar de afzender, of naar jou als de afzender er schriftelijk van afziet: vraag het bij een online bestelling aan de webshop. Voor vragen bel je de schadeafdeling op +30 210-6073066.
 
 **Klachten.** ELTA moet binnen 15 dagen antwoorden. Ben je niet tevreden, vraag de klantenservice dan schriftelijk om doorverwijzing naar de geschillencommissie.
 
@@ -75,14 +75,14 @@ Staat de tracking dagen stil? Bekijk eerst [waarom tracking niet wordt bijgewerk
 
 De kanalen van ELTA op elta.gr en elta-courier.gr:
 
-- **Callcenter:** `800-11-82000` vanaf een Griekse vaste lijn, `212-0000-800` mobiel, `+30 212-0000-800` vanuit het buitenland; maandag t/m vrijdag 08:00–18:00.
-- **Nieuwe servicepunten:** `212 00 00 700` (uitsluitend vragen over nieuwe ELTA-servicepunten, ma–vr 08:00–18:00 tegen lokaal tarief).
-- **E-mail:** `service@elta-net.gr`, of het formulier op [elta.gr/en/contact](https://www.elta.gr/en/contact).
-- **ELTA Courier:** `210 6073000` (normaal tarief) of `11120` (tarief van je provider), trackinghulp ma–vr 08:00–16:00 (weekenden en feestdagen alleen online tracking); `info@elta-courier.gr` en `customercare@elta-courier.gr`. Schriftelijke klachten per post: 200 Ionias Ave. & 61 Iakovaton St., 111 44 Athene, t.a.v. Customer Service Department.
+- **Callcenter:** 800-11-82000 vanaf een Griekse vaste lijn, 212-0000-800 mobiel, +30 212-0000-800 vanuit het buitenland; maandag t/m vrijdag 08:00–18:00.
+- **Nieuwe servicepunten:** 212 00 00 700 (uitsluitend vragen over nieuwe ELTA-servicepunten, ma–vr 08:00–18:00 tegen lokaal tarief).
+- **E-mail:** service@elta-net.gr, of het formulier op [elta.gr/en/contact](https://www.elta.gr/en/contact).
+- **ELTA Courier:** 210 6073000 (normaal tarief) of 11120 (tarief van je provider), trackinghulp ma–vr 08:00–16:00 (weekenden en feestdagen alleen online tracking); info@elta-courier.gr en customercare@elta-courier.gr. Schriftelijke klachten per post: 200 Ionias Ave. & 61 Iakovaton St., 111 44 Athene, t.a.v. Customer Service Department.
 - **Per post:** Hellenic Post Customer Service, Adrianoupoleos 45, 16070 Kessariani.
 - **Persoonlijk:** elk ELTA-kantoor (winkelzoeker op elta.gr).
 
-> ELTA vraagt nooit om bank- of kaartgegevens, vraagt nooit per sms of e-mail om bezorgkosten en belt nooit vanaf buitenlandse nummers. Douanekosten betaal je alleen in een ELTA-winkel. Nepmails met onderwerp «Ειδοποίηση αποτυχίας παράδοσης» komen niet van ELTA.
+> ELTA vraagt nooit om bank- of kaartgegevens, vraagt nooit per sms of e-mail om bezorgkosten en belt nooit vanaf buitenlandse nummers. Douanekosten betaal je alleen in een ELTA-winkel. Nepmails met onderwerp "Ειδοποίηση αποτυχίας παράδοσης" komen niet van ELTA.
 
 ## ELTA pakketten volgen met Peek
 
@@ -90,13 +90,13 @@ Voor een nummer op `GR` met geldig controlecijfer vraagt [Peek](/) direct ELTA (
 
 Een pakket uit het buitenland wordt eerst bij de buitenlandse post gevolgd. Zodra die aangeeft dat het naar Griekenland gaat (of geen land noemt terwijl je vanuit Griekenland volgt), vraagt Peek ook ELTA met hetzelfde nummer en schakelt over zodra ELTA een nieuwe scan heeft, met behoud van de eerdere geschiedenis. Om direct bij ELTA te volgen kies je "ELTA Hellenic Post" via "Change".
 
-ELTA geeft elke scan een datum en tijd zonder tijdzone: Peek leest ze in de lokale tijd van de genoemde plaats (Griekse tijd voor Griekenland) en toont ELTA's Engelse teksten. Tijden verschijnen in de tijdzone van je apparaat; op peektracker.com en in de iPhone- en Android-apps eindigt de geschiedenis met "Times are in your time zone:" en de naam. Peek toont het afhaalkantoor en kan meldingen sturen bij statuswijzigingen. ELTA geeft geen verwachte bezorgdag of gewicht.
+ELTA geeft elke scan een datum en tijd zonder tijdzone: Peek leest ze in de lokale tijd van de genoemde plaats (Griekse tijd voor Griekenland) en toont ELTA's Engelse teksten. Tijden verschijnen in de tijdzone van je apparaat; op peektracker.com en in de iPhone- en Android-apps eindigt de geschiedenis met "Times are in your time zone:" en de naam. Peek kan het postkantoor of koerierspunt tonen waar het pakket wacht en meldingen sturen bij statuswijzigingen. ELTA geeft geen verwachte bezorgdag of gewicht.
 
 ## Veelgestelde vragen over ELTA tracking
 
 ### Kan ik ELTA tracking in het Engels bekijken?
 
-Ja. Op `elta.gr/en/track` staan het formulier en alle scans in het Engels; `elta.gr/track` opent in het Grieks met een taalschakelaar.
+Ja. Op elta.gr/en/track staan het formulier en alle scans in het Engels; elta.gr/track opent in het Grieks met een taalschakelaar.
 
 ### Kan ik een internationaal pakket bij ELTA volgen?
 
@@ -104,7 +104,7 @@ Ja, met het postnummer van de afzender dat eindigt op de landcode van het land v
 
 ### Wat is ELTA Courier?
 
-De koeriersdienst van ELTA met eigen website (`elta-courier.gr`) voor deur-tot-deurbezorging in Griekenland, EMS en pakketten naar Cyprus. ELTA Courier is in 2024 opgegaan in ELTA.
+De koeriersdienst van ELTA met eigen website (elta-courier.gr) voor deur-tot-deurbezorging in Griekenland, EMS en pakketten naar Cyprus. ELTA Courier is in 2024 opgegaan in ELTA.
 
 ### Waar vind ik het dichtstbijzijnde ELTA-postkantoor?
 

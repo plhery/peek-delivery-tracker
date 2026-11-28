@@ -6,7 +6,7 @@ published: 2026-11-27
 updated: 2026-11-27
 ---
 
-ORLEN Paczka (anksčiau Paczka w RUCHu) yra Lenkijos paštomatų ir atsiėmimo punktų tinklas, kurį plačiai naudoja Lenkijos el. parduotuvės, Allegro ir Vinted. Įklijuok savo 13 skaitmenų siuntos numerį, prasidedantį `210`, į laukelį aukščiau (arba sek orlenpaczka.pl) — žemiau rasi ORLEN Paczka lenkiškų būsenų paaiškinimus lietuviškai, 3 darbo dienų atsiėmimo terminą, atsiėmimą sekmadieniais ir pagalbos kontaktus.
+ORLEN Paczka (anksčiau Paczka w RUCHu) yra Lenkijos paštomatų ir atsiėmimo punktų tinklas, kurį naudoja Lenkijos el. parduotuvės, Allegro ir Vinted. Įklijuok savo 13 skaitmenų siuntos numerį, prasidedantį `210`, į laukelį aukščiau (arba sek orlenpaczka.pl) — žemiau rasi ORLEN Paczka lenkiškų būsenų paaiškinimus lietuviškai, 3 darbo dienų atsiėmimo terminą, atsiėmimą sekmadieniais ir pagalbos kontaktus.
 
 ## ORLEN Paczka sekimo numeris ir kur jį rasti
 
@@ -49,7 +49,7 @@ Kai kurios siuntos rodo senesnes tų pačių etapų formuluotes: `Paczka przygot
 
 ORLEN Paczka pristato į paštomatus (automat paczkowy), kurių daug stovi degalinėse, arba į atsiėmimo punktus, tokius kaip Ruch kioskai ar partnerių parduotuvės. Siuntai atvykus atsiėmimo kodą gauni SMS, el. paštu arba pranešimu programėlėje. Sekmadieniais galima atsiimti iš paštomatų ir pasirinktų ORLEN degalinių. ORLEN Paczka nepristato siuntų su išperkamuoju mokesčiu (COD).
 
-**Atsiėmimas.** Prie paštomato įvesk penkių ar šešių skaitmenų atsiėmimo kodą, nuskenuok QR kodą iš žinutės ar programėlės, arba atidaryk dureles nuotoliniu būdu ORLEN Paczka programėlėje neliesdamas ekrano. Siuntą gali atsiimti ir kitas asmuo, jei perduosi jam kodą; be kodo ar programėlės siunta neišduodama. Jei SMS neatėjo, patikrink šlamštą, blokuotas žinutes ir el. paštą; jei kodo vis tiek nėra, rašyk klientų aptarnavimui per kontaktų formą. Jei nurodytas neteisingas telefono numeris, susisiek su siuntėju. Jei paštomatas neveikia, skambink žemiau nurodyta pagalbos linija.
+**Atsiėmimas.** Prie paštomato įvesk penkių ar šešių skaitmenų atsiėmimo kodą, nuskenuok QR kodą iš žinutės ar programėlės, arba atidaryk dureles nuotoliniu būdu ORLEN Paczka programėlėje neliesdamas paštomato. Siuntą gali atsiimti ir kitas asmuo, jei perduosi jam kodą; be kodo ar programėlės siunta neišduodama. Jei SMS neatėjo, patikrink šlamštą, blokuotas žinutes ir el. paštą; jei kodo vis tiek nėra, rašyk klientų aptarnavimui per kontaktų formą. Jei nurodytas neteisingas telefono numeris, susisiek su siuntėju. Jei paštomatas neveikia, skambink žemiau nurodyta pagalbos linija.
 
 **Kiek laiko saugoma.** Turi 3 darbo dienas, skaičiuojant nuo pirmojo SMS ar el. laiško su atsiėmimo kodu. Po to el. parduotuvės siunta grįžta siuntėjui, o privataus asmens (pvz., Vinted) siunta — į išsiuntimo punktą. Allegro taip pat suteikia 3 darbo dienas Allegro Delivery siuntoms ORLEN Paczka punktuose ir paštomatuose; neatsiimta siunta grįžta pardavėjui.
 
@@ -69,7 +69,7 @@ ORLEN pristatymą kitą dieną įvardija kaip vieną pagrindinių privalumų, o 
 
 Dėl Allegro Delivery siuntos kreipkis į Allegro. Dėl el. parduotuvės užsakymo pradėk nuo parduotuvės. Pačios ORLEN Paczka kontaktai skelbiami lenkiškoje svetainėje orlenpaczka.pl skiltyje „Kontakt“. Visi kanalai veikia lenkų kalba:
 
-- **Pagalbos linija:** `22 33 33 999` pagal tavo operatoriaus tarifą. Pirmadienį–penktadienį 7:00–22:00, šeštadienį 9:00–19:00 (DUK nurodo iki 16:00) ir sekmadienį 10:00–16:00 Lenkijos laiku.
+- **Pagalbos linija:** 22 33 33 999 pagal tavo operatoriaus tarifą. Pirmadienį–penktadienį 7:00–22:00, šeštadienį 9:00–19:00 (DUK nurodo iki 16:00) ir sekmadienį 10:00–16:00 Lenkijos laiku.
 - **[Kontaktų forma](https://www.orlenpaczka.pl/formularz-kontaktowy/)**, pvz., kai neturi atsiėmimo kodo ar siunta dingo.
 - **[Pretenzijų forma](https://www.orlenpaczka.pl/reklamacje/)** dėl dingimo, pažeidimo ar vėlavimo siuntėjams, gavėjams ir mokėtojams.
 
@@ -77,21 +77,21 @@ ORLEN Paczka nesiunčia nuorodų SMS žinutėmis ir neprašo papildomai mokėti 
 
 ## ORLEN Paczka siuntų sekimas su Peek
 
-[Peek](/) atpažįsta 13 skaitmenų numerius, prasidedančius `210` su teisingu kontroliniu skaitmeniu. Kadangi tą patį formatą naudoja ir kiti vežėjai, Peek vienu metu klausia ORLEN Paczka, Ukrposhta ir [FAN Courier](carrier:fan-courier), o Delhivery, Econt, Ozon Logistics ir Paquetexpress už jų šalių ribų — tik jei pirmi trys numerio nežino. Peek parodo "ORLEN Paczka has this parcel.", kai jį žino tik ORLEN Paczka. Kitiems 13 skaitmenų numeriams nuo 2 arba 3 pasirink ORLEN Paczka per "Change" ("Change carrier" jau pridėtai siuntai) arba įklijuok orlenpaczka.pl nuorodą su 13 skaitmenų numeriu. 7 ir 10 skaitmenų išsiuntimo kodai Peek nesekami, o `AD` numeriai nepriklauso ORLEN Paczka.
+[Peek](/) atpažįsta 13 skaitmenų numerius, prasidedančius `210` su teisingu kontroliniu skaitmeniu. Kadangi tą patį formatą naudoja ir kiti vežėjai, Peek vienu metu klausia ORLEN Paczka, Ukrposhta ir [FAN Courier](carrier:fan-courier), o Delhivery, Econt ir Paquetexpress už jų šalių ribų — tik jei pirmi trys numerio nežino. Peek parodo „ORLEN Paczka has this parcel.“, kai jį žino tik ORLEN Paczka. Kitiems 13 skaitmenų numeriams nuo 2 arba 3 pasirink ORLEN Paczka per „Change“ („Change carrier“ jau pridėtai siuntai) arba įklijuok orlenpaczka.pl nuorodą su 13 skaitmenų numeriu. 7 ir 10 skaitmenų išsiuntimo kodai Peek nesekami, o `AD` numeriai nepriklauso ORLEN Paczka.
 
-Peek rodo lenkiškus tekstus pažodžiui, skirstymo centro miestą žemėlapyje (kur jis nurodytas) ir atsiėmimo laiką; laikai skaitomi Varšuvos laiku ir rodomi tavo įrenginio laiko juostoje, o istorija peektracker.com ir iPhone bei Android programėlėse baigiasi "Times are in your time zone:" ir juostos pavadinimu. Atsiėmimo punkto, numatomos datos, svorio ar siuntėjo nėra, o grąžinimo siuntos numeris praleidžiamas. Vinted siunta, perduota kitos šalies vežėjui, toliau nesekama ir lieka tranzite. Jau atsiimtos siuntos po kelių mėnesių dingsta iš ORLEN Paczka sekimo.
+Peek rodo lenkiškus tekstus pažodžiui, skirstymo centro miestą žemėlapyje (kur jis nurodytas) ir atsiėmimo laiką; laikai skaitomi Varšuvos laiku ir rodomi tavo įrenginio laiko juostoje, o istorija peektracker.com ir iPhone bei Android programėlėse baigiasi „Times are in your time zone:“ ir juostos pavadinimu. Atsiėmimo punkto, numatomos datos, svorio ar siuntėjo nėra, o grąžinimo siuntos numeris praleidžiamas. Vinted siunta, perduota kitos šalies vežėjui, toliau nesekama ir lieka tranzite. Jau atsiimtos siuntos po kelių mėnesių dingsta iš ORLEN Paczka sekimo.
 
-Kol siunta atidaryta Peek, tikrinama iki kas 10 minučių. Kadangi ORLEN Paczka nepateikia pristatymo dienos ir neturi išvykimo kurjeriu skenavimo, Peek niekada neperjungia 2 minučių ritmo. Kitu metu tikrinama kas valandą. Po 12 valandų su vienu "Label created" ar "Received by carrier" arba po dviejų dienų be naujienų tikrinama kas valandą, o po septynių dienų esant "Label created" — kas 6 valandas.
+Kol siunta atidaryta Peek, tikrinama iki kas 10 minučių. Kadangi ORLEN Paczka nepateikia pristatymo dienos ir neturi išvykimo kurjeriu skenavimo, Peek niekada neperjungia 2 minučių ritmo. Kitu metu tikrinama kas valandą. Po 12 valandų su vienu „Label created“ ar „Received by carrier“ arba po dviejų dienų be naujienų tikrinama kas valandą, o po septynių dienų esant „Label created“ — kas 6 valandas.
 
-Kai naujausias skenavimas yra keturių dienų senumo, o siunta tebėra "Label created", "Received by carrier" ar "In transit", Peek pažymi jo datą ("No tracking update since Mon 12 Oct") ir parodo "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking ORLEN Paczka." su nuoroda "Get help from ORLEN Paczka". Po trijų savaičių be naujo skenavimo rašoma "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking ORLEN Paczka."
+Kai naujausias skenavimas yra keturių dienų senumo, o siunta tebėra „Label created“, „Received by carrier“ ar „In transit“, Peek pažymi jo datą („No tracking update since Mon 12 Oct“) ir parodo „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking ORLEN Paczka.“ su nuoroda „Get help from ORLEN Paczka“. Po trijų savaičių be naujo skenavimo rašoma „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking ORLEN Paczka.“
 
-Peek gali pranešti apie "Every scan", "Important steps" arba "Delivery only".
+Peek gali pranešti apie „Every scan“, „Important steps“ arba „Delivery only“.
 
 ## Klausimai apie ORLEN Paczka sekimą
 
 ### Kas yra ORLEN Paczka ir kaip atrodo jos sekimo numeris?
 
-ORLEN Paczka yra 2021 m. pradėtas Lenkijos paštomatų ir atsiėmimo punktų tinklas (buvęs Paczka w RUCHu, su logistikos partneriu RUCH). Siuntos numerį sudaro **13 skaitmenų, prasidedančių `210`** (10 skaitmenų išsiuntimo kodai ir Allegro Delivery `AD` numeriai sekami atskirai).
+ORLEN Paczka yra 2021 m. pradėtas Lenkijos paštomatų ir atsiėmimo punktų tinklas (buvęs Paczka w RUCHu, su logistikos partneriu RUCH). Siuntos numerį sudaro **13 skaitmenų, prasidedančių `210`** (10 skaitmenų kodas – tai siuntėjo išsiuntimo kodas, ne sekimo numeris; Allegro Delivery `AD` numeriai sekami Allegro programėlėje arba allegro.pl).
 
 ### Ar galiu sekti ORLEN Paczka lietuviškai arba angliškai?
 
@@ -103,11 +103,11 @@ Turi **3 darbo dienas** nuo pirmojo SMS ar el. laiško su 5 ar 6 skaitmenų atsi
 
 ### Ar ORLEN Paczka pristato į užsienį (pvz., tarptautinius Vinted užsakymus)?
 
-Pati ORLEN Paczka pristato tik Lenkijoje (1 darbo diena 98 % parduotuvių siuntų; 1–3 darbo dienos privačioms ir Vinted siuntoms). Tarptautinės Vinted siuntos rodo `Paczka przekazana do przewoźnika w innym kraju` (`Paczka w innym kraju`) ir toliau sekamos Vinted programėlėje.
+Pati ORLEN Paczka pristato tik Lenkijoje (1 darbo diena 98 % parduotuvių siuntų; 1–3 darbo dienos privačioms ir Vinted siuntoms). Tarptautinės Vinted siuntos rodo `Paczka przekazana do przewoźnika w innym kraju. Dalszą drogę możesz śledzić w aplikacji Vinted` (`Paczka w innym kraju`) ir toliau sekamos Vinted programėlėje.
 
 ### Kaip susisiekti su ORLEN Paczka arba pateikti pretenziją?
 
-Skambink lenkiška linija `22 33 33 999` (I–V 7:00–22:00, VI 9:00–19:00, VII 10:00–16:00 Varšuvos laiku) arba naudok [kontaktų formą](https://www.orlenpaczka.pl/formularz-kontaktowy/) / [pretenzijų formą](https://www.orlenpaczka.pl/reklamacje/) per 12 mėnesių (7 dienos nematomai žalai). Dėl Allegro Delivery siuntų kreipkis į Allegro.
+Skambink lenkiška linija 22 33 33 999 (I–V 7:00–22:00, VI 9:00–19:00, VII 10:00–16:00 Varšuvos laiku) arba naudok [kontaktų formą](https://www.orlenpaczka.pl/formularz-kontaktowy/) / [pretenzijų formą](https://www.orlenpaczka.pl/reklamacje/) (pretenzija per 12 mėnesių nuo išsiuntimo, 7 dienos nematomai žalai). Dėl Allegro Delivery siuntų kreipkis į Allegro.
 
 :::sources
 - [ORLEN Paczka: Najczęściej zadawane pytania](https://www.orlenpaczka.pl/faq/) – pickup code (5 or 6 digits, SMS, email, QR, app), collection by someone else, no code, wrong phone number, 3 working days from the first SMS or email and return to the sender or the drop-off point, Sunday pickup, no cash on delivery, delivery times (1 working day for 98% of shop parcels, 1–3 days from private senders and Vinted), refund after 4 working days, lost parcels, liability up to 500 zł (private customers) and 5,000 zł (businesses), deliveries in Poland only, helpline and hours, no links in SMS or payment requests by link

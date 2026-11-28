@@ -54,9 +54,9 @@ Klausimus dėl užsakymų tvarko Amazon Customer Service. Svetainėje Amazon.co.
 
 ## Amazon Logistics sekimas su Peek
 
-[Peek](/) negali sekti ar išsaugoti Amazon Logistics siuntos tiesiogiai: Amazon rodo būseną, istoriją ir pristatymo nuotrauką tik tavo paskyroje. Įklijavus tokį numerį arba track.amazon nuorodą, Peek pirmiausia patikrina viešą Amazon Shipping sistemą. Jei Amazon atsako, tai yra [Amazon Shipping](carrier:amazon-shipping) siunta (pirkinys ne iš Amazon, kurį Amazon pristato pardavėjui), ir Peek ją seka: "Public tracking is available with Amazon Shipping. Peek will keep this delivery up to date." Jei Amazon istorijos nebegrąžina, įrašas gali likti kaip nuoroda.
+[Peek](/) negali sekti ar išsaugoti Amazon Logistics siuntos tiesiogiai: Amazon rodo būseną, istoriją ir pristatymo nuotrauką tik tavo paskyroje. Įklijavus tokį numerį arba track.amazon nuorodą, Peek pirmiausia patikrina viešą Amazon Shipping sistemą. Jei Amazon atsako, tai yra [Amazon Shipping](carrier:amazon-shipping) siunta (pirkinys ne iš Amazon, kurį Amazon pristato pardavėjui), ir Peek ją seka: „Public tracking is available with Amazon Shipping. Peek will keep this delivery up to date.“ Jei Amazon istorijos nebegrąžina, įrašas gali likti kaip nuoroda.
 
-Priešingu atveju Peek rodo "Amazon Logistics deliveries are usually tracked in Your Orders on Amazon." ir siūlo mygtuką "Open my Amazon orders", atidarantį užsakymų istoriją numerį atitinkančioje svetainėje: amazon.co.uk (`UK` ir `GB`), amazon.ie (`IE`), amazon.com (`TBA`), amazon.com.au (`TBAU`). Jei patikra negali įvykti, spausk "Check again". Įvedus užsakymo numerį rodoma "That looks like an Amazon order number".
+Priešingu atveju Peek rodo „Amazon Logistics deliveries are usually tracked in Your Orders on Amazon.“ ir siūlo mygtuką „Open my Amazon orders“, atidarantį užsakymų istoriją numerį atitinkančioje svetainėje: amazon.co.uk (`UK` ir `GB`), amazon.ie (`IE`), amazon.com (`TBA`), amazon.com.au (`TBAU`). Jei patikra negali įvykti, spausk „Check again“. Įvedus užsakymo numerį rodoma „That looks like an Amazon order number“.
 
 ## Klausimai apie Amazon Logistics
 

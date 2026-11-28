@@ -95,7 +95,7 @@ Peek can notify you of "Every scan", "Important steps" or "Delivery only".
 
 ### How do I track an ACS Courier parcel in English?
 
-Enter your 10-digit shipping number (voucher) on the `/en/` Track and Trace page of acscourier.net (five milestones) or cyp.acscourier.net (full scan history), or paste it in Peek and select ACS Courier. ACS Courier and Postal Services S.A. has operated since 1981 as part of the Quest Group, with over 350 service points across Greece, Cyprus, Albania and Bulgaria.
+Enter your 10-digit shipping number (voucher) on the `/en/` Track and Trace page of acscourier.net (five milestones) or cyp.acscourier.net (full scan history), or paste it in Peek and select ACS Courier. ACS Courier and Postal Services S.A., part of the Quest Group, has operated since 1981, with over 350 service points across Greece, Cyprus, Albania and Bulgaria.
 
 ### Why does my 10-digit ACS tracking number show DHL?
 

@@ -1,6 +1,6 @@
 ---
 title: Sameday tracking: AWB, easybox and statuses explained
-description: Track a Sameday parcel in Romania or Bulgaria with your AWB: English status meanings, easybox 36–72h pickup windows, missed delivery options and phone support.
+description: Track a Sameday parcel in Romania or Bulgaria with your AWB: English status meanings, easybox pickup times, missed delivery options and phone support.
 slug: sameday-tracking
 published: 2026-10-13
 updated: 2026-11-27

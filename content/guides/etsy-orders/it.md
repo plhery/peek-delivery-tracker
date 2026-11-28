@@ -9,7 +9,7 @@ updated: 2026-11-27
 
 Su Etsy ogni negozio spedisce in autonomia: sceglie il corriere che preferisce e aggiunge il codice di tracciamento quando la spedizione lo prevede. In **Acquisti e recensioni** vedi se l'ordine è ancora «Non spedito», «Pre-transito» o «In transito» insieme alla data prevista; con il codice segui il pacco fino alla consegna. Qui sotto trovi cosa significano gli stati Etsy, quali corrieri consegnano in Italia, quando si pagano dogana e oneri UE e come aprire una disputa se l'ordine non arriva.
 
-## Perché il mio ordine Etsy è fermo su «Non spedito» o «Pre-transito»?
+## Perché il mio ordine Etsy è fermo su «Non spedito»?
 
 Perché il venditore non l'ha ancora creato, imballato o segnato come spedito. Etsy calcola la data di consegna prevista così: «Tempo di lavorazione + Tempo di transito del corriere = Data di consegna prevista». Il tempo di lavorazione è il tempo che serve al venditore per creare l'articolo e prepararlo per la spedizione. L'esempio di Etsy: 3-5 giorni di lavorazione e 2-4 giorni di transito danno una consegna tra 5 e 9 giorni. Sulla ricevuta trovi anche la data di spedizione a cui il venditore si è impegnato.
 

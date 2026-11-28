@@ -103,7 +103,7 @@ GLS's indicative standard delivery time is 24 hours on the Italian mainland and 
 
 Only if the sender paid for Saturday delivery, which covers provincial capitals. Otherwise Saturday morning (8.30 to 12.00) is for picking up Fermo Deposito parcels at the Sede.
 
-### How do I contact GLS Italy customer service in English?
+### How do I contact GLS Italy customer service?
 
 Call the Italian freephone 800 184726 or the 24-hour automated tracking line on 02 98 03 55 56 (+39 02 98 03 55 56 from abroad), email customerservice@gls-italy.com (Monday to Friday 9.00–13.00 and 14.30–17.30 Italian time), use the form on GLS's [Customer Service updates](https://gls-group.com/IT/en/online-services/contacts/) page, or look up your local Sede on Trova Sede.
 

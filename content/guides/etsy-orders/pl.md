@@ -7,9 +7,9 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-Etsy samo nie magazynuje ani nie wysyła towaru: każdy sklep sam przygotowuje zamówienie, nadaje je u wybranego przewoźnika i dodaje numer śledzenia, jeśli usługa go obejmuje. W zakładce **Zakupy i oceny** sprawdzisz status („Niewysłane”, „Wysłane”, „Przygotowane do nadania”, „W drodze”) oraz szacowaną datę dostawy, a po numerze przewoźnika wyśledzisz paczkę aż do doręczenia. Niżej wyjaśniamy, kto dostarcza przesyłki z Etsy do Polski, jakie opłaty celne UE obowiązują i kiedy złożyć reklamację.
+Etsy samo niczego nie wysyła: każdy sklep sam przygotowuje zamówienie, nadaje je u wybranego przewoźnika i dodaje numer śledzenia, jeśli usługa go obejmuje. W zakładce **Zakupy i oceny** sprawdzisz status („Niewysłane”, „Wysłane”, „Przygotowane do nadania”, „W drodze”) oraz szacowaną datę dostawy, a po numerze przewoźnika wyśledzisz paczkę aż do doręczenia. Niżej wyjaśniamy, kto dostarcza przesyłki z Etsy do Polski, jakie opłaty celne UE obowiązują i kiedy złożyć reklamację.
 
-## Dlaczego zamówienie z Etsy ma status „Niewysłane” albo „Przygotowane do nadania”?
+## Dlaczego zamówienie z Etsy wciąż ma status „Niewysłane”?
 
 Bo sprzedawca jeszcze go nie wykonał, nie spakował albo nie oznaczył jako wysłane. Etsy liczy szacowaną datę dostawy tak: „Czas przetwarzania + czas wysyłki u danego przewoźnika = szacowana data dostawy”. Czas przetwarzania to czas, którego sprzedawca potrzebuje, żeby wytworzyć produkt i przygotować go do wysyłki. Przykład Etsy: 3–5 dni przetwarzania i 2–4 dni wysyłki dają dostawę za 5–9 dni. Na potwierdzeniu zakupu widzisz też datę wysyłki, do której zobowiązał się sprzedawca.
 

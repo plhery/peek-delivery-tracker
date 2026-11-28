@@ -1,13 +1,13 @@
 ---
 title: Do kiedy wysłać paczkę przed świętami: terminy przewoźników
-description: Do kiedy wysłać paczkę przed świętami 2026: zeszłoroczne terminy InPost, Poczty Polskiej, DPD i GLS, dni wolne w grudniu oraz czasy wysyłki za granicę.
+description: Do kiedy wysłać paczkę przed świętami 2026: zeszłoroczne terminy InPostu i Poczty Polskiej, dni wolne w grudniu oraz czasy wysyłki za granicę.
 slug: do-kiedy-wyslac-paczke-przed-swietami
 picture: Kartka z kalendarza z zakreślonym jednym grudniowym dniem, samochód dostawczy wiozący przez padający śnieg paczkę przewiązaną czerwoną wstążką i biegnący obok Pip.
 published: 2026-10-09
 updated: 2026-11-27
 ---
 
-InPost, Poczta Polska, ORLEN Paczka, DPD i GLS nie podały jeszcze terminów na święta 2026, a u DHL eCommerce też ich nie znaleźliśmy. W 2025 roku [Poczta Polska](carrier:poczta-polska) radziła nadać paczkę najpóźniej w niedzielę 21 grudnia, a [InPost](carrier:inpost) gwarantował, że paczki krajowe nadane w Paczkomacie lub PaczkoPunkcie do poniedziałku 22 grudnia dotrą do wtorku 23 grudnia. Wszystkie terminy w tabelach poniżej są więc zeszłoroczne (Poczty Polskiej i DPD z ich stron, a InPostu za portalem Super Biznes) — wraz ze strefami odbioru, dniami wolnymi i czasami wysyłki za granicę.
+InPost, Poczta Polska, ORLEN Paczka, DPD i GLS nie podały jeszcze terminów na święta 2026, a u DHL eCommerce też ich nie znaleźliśmy. W 2025 roku [Poczta Polska](carrier:poczta-polska) radziła nadać paczkę najpóźniej w niedzielę 21 grudnia, a [InPost](carrier:inpost) gwarantował, że paczki krajowe nadane w Paczkomacie lub PaczkoPunkcie do poniedziałku 22 grudnia dotrą do wtorku 23 grudnia. Wszystkie terminy w tabelach poniżej są więc zeszłoroczne (Poczty Polskiej i DPD z ich stron, a InPostu za portalem Super Biznes). Poniżej znajdziesz też godziny nadania w strefach InPostu, dni wolne przewoźników i czasy dostawy za granicę.
 
 ## Do kiedy wysłać paczkę w Polsce: InPost, Poczta Polska, DPD, GLS i ORLEN Paczka
 

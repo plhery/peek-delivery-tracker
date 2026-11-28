@@ -6,7 +6,7 @@ published: 2026-11-27
 updated: 2026-11-27
 ---
 
-Volg een ZTO Express-pakket (`中通快递`, Zhongtong) op het Chinese vasteland door het 12-cijferige of 14-cijferige (beginnend met `7`) vrachtbriefnummer (`运单号`) in het vak hierboven of op [de Chinese tracker van ZTO](https://www.zto.com/check) in te voeren. ZTO werd op 8 mei 2002 opgericht in Shanghai (38,52 miljard pakketten in 2025) en vervoert binnenlandse bestellingen — vaak richting het magazijn van een expediteur, waar `已签收` («Signed for») betekent dat de expediteur het pakket heeft ontvangen. Internationale zendingen lopen via [ZTO International](carrier:zto-international) met `771`-nummers op `ztoglobal.com`, en de Chinese hotline van ZTO is `95311`.
+Volg een ZTO Express-pakket (`中通快递`, Zhongtong) op het Chinese vasteland door het 12-cijferige of 14-cijferige (beginnend met `7`) vrachtbriefnummer (`运单号`) in het vak hierboven of op [de Chinese tracker van ZTO](https://www.zto.com/check) in te voeren. ZTO werd op 8 mei 2002 opgericht in Shanghai (38,52 miljard pakketten in 2025) en vervoert pakketten binnen China, zoals onlinebestellingen op weg naar een adres in China of naar het magazijn van een expediteur, waar `已签收` ("Signed for") betekent dat de expediteur het pakket heeft ontvangen. Internationale zendingen lopen via [ZTO International](carrier:zto-international) met `771`-nummers op `ztoglobal.com`, en de Chinese hotline van ZTO is `95311`.
 
 ## ZTO Express-trackingnummer: hoe het eruitziet
 
@@ -30,17 +30,17 @@ Elke scan heeft een korte Chinese stapnaam. Omdat de app van Peek niet in het Ne
 
 | ZTO zegt | Peek toont | Fase in Peek | Wat dit voor jou betekent |
 | --- | --- | --- | --- |
-| `已取件` | «Collected» | «Received by carrier» | Een koerier van ZTO heeft het pakket opgehaald bij de afzender. |
-| `已收件` | «Received» | «Received by carrier» | Een vestiging van ZTO heeft het pakket ingenomen. |
-| `运输中` | «In transit» | «In transit» | Onderweg tussen hubs en vestigingen van ZTO. |
-| `派件中` | «Out for delivery» | «Out for delivery» | Een bezorger heeft het pakket mee op zijn rit. |
-| `已代收` | «Held at a collection point for the recipient» | «Ready for pickup» | Een afhaalpunt, zoals een pakketstation (`驿站`), heeft het voor je aangenomen. |
-| `已签收` | «Signed for» | «Delivered» | Iemand heeft getekend (`签收`): jijzelf, iemand namens jou of het magazijn waarnaar het verzonden is. |
-| `异常通知` | «Exception notice» | «Needs attention» | ZTO meldt een uitzondering. Peek toont alleen de stapnaam; de volledige tekst staat op de tracker van ZTO. |
+| `已取件` | "Collected" | "Received by carrier" | Een koerier van ZTO heeft het pakket opgehaald bij de afzender. |
+| `已收件` | "Received" | "Received by carrier" | Een vestiging van ZTO heeft het pakket ingenomen. |
+| `运输中` | "In transit" | "In transit" | Onderweg tussen hubs en vestigingen van ZTO. |
+| `派件中` | "Out for delivery" | "Out for delivery" | Een bezorger heeft het pakket mee op zijn rit. |
+| `已代收` | "Held at a collection point for the recipient" | "Ready for pickup" | Een afhaalpunt, zoals een pakketstation (`驿站`), heeft het voor je aangenomen. |
+| `已签收` | "Signed for" | "Delivered" | Iemand heeft getekend (`签收`): jijzelf, iemand namens jou of het magazijn waarnaar het verzonden is. |
+| `异常通知` | "Exception notice" | "Needs attention" | ZTO meldt een uitzondering. Peek toont alleen de stapnaam; de volledige tekst staat op de tracker van ZTO. |
 
 Overige stappen, zoals een retour of omleiding, blijven in Peek in het Chinees staan.
 
-**Naar een expediteur gestuurd?** Dan betekent `已签收` dat het magazijn van de expediteur voor ontvangst heeft getekend en het ZTO-traject voorbij is: vanaf daar volg je het eigen nummer van de expediteur. ZTO heeft ook een eigen internationale bundeldienst (`中通国际集运`) die pakketten in een magazijn samenvoegt; hiervoor bel je `95311` op het Chinese vasteland en vraag je naar de internationale afdeling.
+**Naar een expediteur gestuurd?** Dan betekent `已签收` dat het magazijn van de expediteur voor ontvangst heeft getekend en het ZTO-traject voorbij is: vanaf daar volg je het eigen nummer van de expediteur. ZTO heeft ook een eigen internationale bundeldienst (`中通国际集运`) die pakketten in een magazijn samenvoegt; hiervoor bel je 95311 op het Chinese vasteland en vraag je naar de internationale afdeling.
 
 ## Bezorging door ZTO Express in China: koeriers, stations en pakketkluizen
 
@@ -50,47 +50,47 @@ De overeenkomst van ZTO raadt bovendien aan om het ophalen en openen van een pak
 
 Uit de veelgestelde vragen van ZTO:
 
-- **Geen afhaalcode voor een kluis?** Zoek het filiaal voor jouw adres via de [vestigingszoeker van ZTO](https://www.zto.com/service/station) (`服务网点查询`) of geef het nummer door aan `95311` voor het telefoonnummer van de bezorger of vestiging.
+- **Geen afhaalcode voor een kluis?** Zoek het filiaal voor jouw adres via de [vestigingszoeker van ZTO](https://www.zto.com/service/station) (`服务网点查询`) of geef het nummer door aan 95311 voor het telefoonnummer van de bezorger of vestiging.
 - **Gevraagd te betalen voor te lang liggen in een kluis?** ZTO zegt bij het ophalen op overslaan (`跳过`) te tikken zodat je niets betaalt.
 - **Bezorgkosten gevraagd?** Het bezorgende filiaal mag geen bezorgkosten bij je in rekening brengen.
 - **Buiten het bezorggebied?** Haal het pakket op bij de vestiging of vraag de afzender om doorsturen met een andere vervoerder.
-- **Verkeerd adres?** Zodra het pakket in bezorging of afgeleverd is, kan het adres niet meer worden gewijzigd. Daarvoor kan alleen de afzender een verzoek doen bij het versturende filiaal.
+- **Verkeerd adres?** Zodra het pakket in bezorging of afgeleverd is, kan het adres niet meer worden gewijzigd. Daarvoor kan de afzender het versturende ZTO-filiaal vragen; of het adres nog kan worden gewijzigd, hangt af van waar het pakket is.
 
 ## ZTO-pakket zonder updates, vermist of retour
 
-**Nog niets te zien.** Vindt de tracker van ZTO niets op het nummer, controleer het dan bij de verkoper. Een pakket onder ZTO Express toont «Waiting for ZTO Express», en zonder gekozen vervoerder «No tracking history yet».
+**Nog niets te zien.** Vindt de tracker van ZTO niets op het nummer, controleer het dan bij de verkoper. Een pakket onder ZTO Express toont "Waiting for ZTO Express", en zonder gekozen vervoerder "No tracking history yet".
 
-**Geen updates.** Als een pakket onderweg 4 dagen geen nieuwe scan krijgt, meldt Peek dat pauzes vaak voorkomen en plaatst het een link «Get help from ZTO Express» naar de contactpagina van ZTO. Zie ook de gids over [pakketten uit China volgen](guide:tracking-from-china) (in het Engels).
+**Geen updates.** Als een pakket onderweg 4 dagen geen nieuwe scan krijgt, meldt Peek dat pauzes vaak voorkomen en plaatst het een link "Get help from ZTO Express" naar de contactpagina van ZTO. Zie ook de gids over [pakketten uit China volgen](guide:tracking-from-china) (in het Engels).
 
 **Verloren of beschadigd (op het Chinese vasteland).** Vraag de verkoper: volgens de overeenkomst van ZTO dient de afzender binnen 30 dagen na ontdekking schriftelijk een claim in. Zonder verzekering (`保价`) vergoedt ZTO maximaal 500 yuan, en met verzekering tot de aangegeven waarde. Ontbrekende of beschadigde inhoud bij onbeschadigde buitenverpakking is uitgesloten.
 
 **Retour.** Op het Chinese vasteland mag ZTO een pakket terugsturen bij een onduidelijk adres, weigering door de ontvanger of na twee mislukte bezorgpogingen buiten de schuld van ZTO.
 
-**Bezorgd gemeld, maar niets ontvangen.** `已代收` betekent dat een afhaalpunt het bewaart en `已签收` dat iemand heeft getekend — niet altijd jijzelf. Controleer pakketstations, kluizen, receptie en eventueel de expediteur. Voor een klacht in China bel je `95311` of gebruik je het klachtenformulier (`投诉反馈`, inloggen vereist), met recht op beroep bij de Chinese postautoriteiten als ZTO niet tijdig of naar tevredenheid antwoordt. Meer in de gids over [bezorgd maar niet ontvangen](guide:delivered-not-received) (in het Engels).
+**Bezorgd gemeld, maar niets ontvangen.** `已代收` betekent dat een afhaalpunt het bewaart en `已签收` dat iemand heeft getekend — niet altijd jijzelf. Controleer pakketstations, kluizen, receptie en eventueel de expediteur. Voor een klacht in China bel je 95311 of gebruik je het klachtenformulier (`投诉反馈`, inloggen vereist), met recht op beroep bij de Chinese postautoriteiten als ZTO niet tijdig of naar tevredenheid antwoordt. Meer in de gids over [bezorgd maar niet ontvangen](guide:delivered-not-received) (in het Engels).
 
 ## Telefoonnummer en klantenservice van ZTO Express
 
 Door ZTO gepubliceerde kanalen:
 
-- **`95311`:** nationale klantenservice op het Chinese vasteland (`全国统一客服热线`), volgens de FAQ bereikbaar van 08:30 tot 17:30 Chinese tijd (op de Engelse site «Customer Service Hotline»).
-- **`95720`:** het uitgaande nummer waarmee ZTO-koeriers je bellen (`中通业务员专属外呼号码`).
+- **95311:** nationale klantenservice op het Chinese vasteland (`全国统一客服热线`), volgens de FAQ bereikbaar van 08:30 tot 17:30 Chinese tijd (op de Engelse site "Customer Service Hotline").
+- **95720:** het uitgaande nummer waarmee ZTO-koeriers je bellen (`中通业务员专属外呼号码`).
 - **Online klantenservice (`在线客服`):** op `zto.com`, plus de WeChat-miniprogramma's en de app van ZTO.
 
 Voor je bestelling zelf neem je eerst contact op met de verkoper, want de verkoper boekte de zending bij ZTO.
 
 ## Een ZTO Express-pakket volgen met Peek
 
-Plak het nummer in [Peek](/): het volgt meer dan 4.500 vervoerders. Aan het nummer alleen ziet Peek niet meteen dat het ZTO Express is. Het vraagt eerst andere vervoerders met dezelfde vorm (FedEx, DHL, BRT en Colis Privé bij 12 cijfers, nooit ZTO; DPD, SEUR en BRT bij 14 cijfers; ZTO International eerst bij `771`), daarna trackingdiensten («Checking tracking services…»). Als die het pakket vinden en ZTO Express noemen, zet Peek het onder ZTO Express en raadpleegt het ZTO bij de volgende controle. Voor 14 cijfers beginnend met `73` of `79` opent Peek daarna ook zelf de ZTO-tracker in een browser. Om ZTO meteen vanaf het begin te gebruiken tik je op «Change» en kies je ZTO Express (of zoek je op `ZTO` of `中通快递`; alleen `中通` toont ook ZTO International), of gebruik je «Change carrier» bij een bestaand pakket. Peek accepteert voor ZTO alleen 12 cijfers of 14 cijfers beginnend met `7`.
+Plak het nummer in [Peek](/): het volgt meer dan 4.500 vervoerders. Aan het nummer alleen ziet Peek niet meteen dat het ZTO Express is. Het vraagt eerst andere vervoerders met dezelfde vorm (FedEx, DHL, BRT en Colis Privé bij 12 cijfers, nooit ZTO; DPD, SEUR en BRT bij 14 cijfers; ZTO International eerst bij `771`), daarna trackingdiensten ("Checking tracking services…"). Als die het pakket vinden en ZTO Express noemen, zet Peek het onder ZTO Express en raadpleegt het ZTO bij de volgende controle. Voor 14 cijfers beginnend met `73` of `79` opent Peek daarna ook zelf de ZTO-tracker in een browser. Om ZTO meteen vanaf het begin te gebruiken tik je op "Change" en kies je ZTO Express (of zoek je op `ZTO` of `中通快递`; alleen `中通` toont ook ZTO International), of gebruik je "Change carrier" bij een bestaand pakket. Peek accepteert voor ZTO alleen 12 cijfers of 14 cijfers beginnend met `7`.
 
 Peek leest de eigen tracker van ZTO en opent een browser als ZTO om een puzzelcontrole vraagt. Voor elke scan zie je de stap (tabel hierboven), de plaats van de ZTO-vestiging (of de Chinese naam als die niet te plaatsen is) en het tijdstip in de tijdzone van jouw apparaat. Peek laat de volledige regel van ZTO, telefoonnummers van bezorgers en naam en adres van de ontvanger weg en toont geen verwachte bezorgdatum. De openbare tracker van ZTO kan de vroegste scans weglaten, waardoor die ook in Peek ontbreken. Peek volgt alleen het ZTO-nummer: een nummer van een internationale expediteur voeg je apart toe.
 
-Zolang je het pakket open hebt of op de bezorgdag met meldingen aan controleert Peek tot elke 10 minuten, en op de dag van «Out for delivery» vanaf 06:00 lokale tijd tot elke 2 minuten (elke 5 minuten als een browser nodig was) zolang ZTO's eigen tracker antwoordt (via trackingdiensten elke 15 minuten); anders en na twee dagen zonder nieuws (12 uur bij «Label created» of «Received by carrier») elk uur. Meldingen stel je in op «Every scan», «Important steps» of «Delivery only». Peek kan geen contact opnemen met ZTO, de expediteur of de verkoper.
+Zolang je het pakket open hebt of op de bezorgdag met meldingen aan controleert Peek tot elke 10 minuten, en op de dag van "Out for delivery" vanaf 06:00 lokale tijd tot elke 2 minuten (elke 5 minuten als een browser nodig was) zolang ZTO's eigen tracker antwoordt (via trackingdiensten tot elke 15 minuten); anders en na twee dagen zonder nieuws (12 uur bij "Label created" of "Received by carrier") elk uur. Meldingen stel je in op "Every scan", "Important steps" of "Delivery only". Peek kan geen contact opnemen met ZTO, de expediteur of de verkoper.
 
 ## Veelgestelde vragen over ZTO Express
 
 ### Is ZTO Express (中通快递) betrouwbaar?
 
-Ja. ZTO Express werd op 8 mei 2002 opgericht in Shanghai, is beursgenoteerd in New York (27 oktober 2016) en Hongkong (29 september 2020), verwerkte 38,52 miljard pakketten in 2025 en heeft meer dan 31.000 vestigingen die ruim 99% van de Chinese districten dekken.
+Ja. ZTO Express werd op 8 mei 2002 opgericht in Shanghai, is beursgenoteerd in New York (27 oktober 2016) en Hongkong (29 september 2020), verwerkte 38,52 miljard pakketten in 2025 en zegt dat zijn netwerk in 2025 meer dan 31.000 vestigingen had, in ruim 99% van de Chinese districten en arrondissementen.
 
 ### Wat is het verschil tussen ZTO Express en ZTO International?
 
@@ -98,11 +98,11 @@ Eén groep, twee diensten en twee trackers: ZTO Express bezorgt binnen het Chine
 
 ### Hoe lang duurt levering met ZTO Express?
 
-Als richtlijn noemt de FAQ van ZTO de volgende dag binnen een provincie en tussen Jiangsu, Zhejiang, Shanghai en Anhui, 3 tot 5 dagen tussen andere provincies en 5 tot 7 dagen naar afgelegen gebieden. Gaat je bestelling eerst naar een expediteur, tel daar dan de internationale levertijd van de expediteur bij op.
+Als richtlijn noemt de FAQ van ZTO de volgende dag binnen een provincie en tussen Jiangsu, Zhejiang, Shanghai en Anhui, 3 tot 5 dagen tussen andere provincies en 5 tot 7 dagen naar sommige afgelegen gebieden. Gaat je bestelling eerst naar een expediteur, tel daar dan de internationale levertijd van de expediteur bij op.
 
 ### Wat betekenen 已签收 en 已代收 bij ZTO Express?
 
-`已签收` («Signed for», bezorgd) betekent dat jij, iemand namens jou of het magazijn van een expediteur heeft getekend — volg het vervolgtraject dan met het nummer van de expediteur. `已代收` («Held at a collection point for the recipient», klaar om af te halen) betekent dat een pakketstation (`驿站`) of kluis het bewaart.
+`已签收` ("Signed for", bezorgd) betekent dat jij, iemand namens jou of het magazijn van een expediteur heeft getekend; ging het naar een expediteur, volg het vervolgtraject dan met het nummer van de expediteur. `已代收` ("Held at a collection point for the recipient", klaar om af te halen) betekent dat een pakketstation (`驿站`) of kluis het bewaart.
 
 ### Wat is het telefoonnummer van de klantenservice van ZTO Express?
 
@@ -112,7 +112,7 @@ Op het Chinese vasteland bel je `95311` (08:30 tot 17:30 Chinese tijd) of gebrui
 - [ZTO Express: 运单查询 (vrachtbrief zoeken, in het Chinees)](https://www.zto.com/check) – Chinese tracker, tot 10 nummers, WeChat-updates
 - [ZTO Express: 关于中通 (over ZTO, in het Chinees)](https://www.zto.com/introduce/about/home) – oprichting, beursnoteringen, 38,52 miljard pakketten in 2025 en netwerk
 - [ZTO Express: 首页 (startpagina, in het Chinees)](https://www.zto.com/) – 95311, 95720, app en WeChat
-- [ZTO Express: Home (in het Engels)](https://en.zto.com/) – «Customer Service Hotline: 95311»
+- [ZTO Express: Home (in het Engels)](https://en.zto.com/) – "Customer Service Hotline: 95311"
 - [ZTO Express: 联系我们 (contact, in het Chinees)](https://www.zto.com/introduce/about/contact) – online klantenservice
 - [ZTO Express: 常见问题 (FAQ, in het Chinees)](https://www.zto.com/after/answers) – openingstijden, pakketkluizen, geen bezorgkosten, adreswijziging en levertijden
 - [ZTO Express: 服务网点查询 (vestigingen zoeken, in het Chinees)](https://www.zto.com/service/station) – filiaal bij adres vinden

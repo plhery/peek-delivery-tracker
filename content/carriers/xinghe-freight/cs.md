@@ -26,29 +26,29 @@ Mezery, pomlčky ani malá písmena při vkládání do Peeku nevadí.
 
 ## Co znamenají stavy sledování Xinghe Freight
 
-Sledování Xinghe Freight běží na platformě GZYL, takže jednotlivé kroky přicházejí v anglických formulacích GZYL včetně překlepů. Protože rozhraní aplikace Peek nemá českou verzi, hlavní fáze Peeku jsou také v angličtině: «Label created» (štítek vytvořen), «Received by carrier» (přijato dopravcem), «In transit» (na cestě), «At customs» (na celnici) a «Delivered» (doručeno). Kroky v obvyklém pořadí:
+Sledování Xinghe Freight běží na platformě GZYL, takže jednotlivé kroky přicházejí v anglických formulacích GZYL včetně překlepů. Protože rozhraní aplikace Peek nemá českou verzi, hlavní fáze Peeku jsou také v angličtině: „Label created“ (štítek vytvořen), „Received by carrier“ (přijato dopravcem), „In transit“ (na cestě), „At customs“ (na celnici) a „Delivered“ (doručeno). Kroky v obvyklém pořadí:
 
 | Tracker píše | Co to znamená pro tebe | Peek ukazuje |
 | --- | --- | --- |
-| `Order information received` | Prodejce odeslal údaje k objednávce. Balík ještě nikdo fyzicky nepřevzal. | «Label created» |
-| `Arrive at the cross border receiving point` | Spediter balík převzal: první skutečný sken v jeho rukou. | «Received by carrier» |
-| `Goods leave the operation center` | Balík opustil operační centrum v Číně. | «In transit» |
-| `Arrive at the international airport` | Na mezinárodním letišti, čeká na let. | «In transit» |
-| `Departing from the airport` | Letadlo odletělo. | «In transit» |
-| `Item arrives at destination airport` | Přistálo v cílové zemi. | «In transit» |
-| `local carrier Agent Import customs clearance` | Místní zástupce vyřizuje dovozní celní odbavení. | «At customs» |
-| `The import customs keep it for inspection` | Celní úřad v tvé zemi zadržel balík ke kontrole. | «At customs» |
-| `Customs clearance completed` | Celní odbavení skončilo a balík pokračuje dál. | «In transit» |
-| `Internationaliy Package received at processing center` | Zpracovatelské centrum v cílové zemi převzalo proclený balík. Nejde o nové vyzvednutí u odesílatele. | «In transit» |
-| `Leave the email processing center` | Balík toto centrum opustil. | «In transit» |
-| `Arrival sorting, distribution center` | Dorazil do třídicího nebo distribučního centra v tvé zemi, s městem za textem. | «In transit» |
-| `Leaving the sorting center` | Opouští třídicí centrum, s městem za textem. | «In transit» |
-| `Package is on the way` | Pokračuje dál po cílové zemi s uvedením města. Neznamená to, že balík dnes rozváží kurýr. | «In transit» |
-| `Delivered` | Záznam o doručení s městem. Může jít o plán, ne o sken: viz níže. | «Delivered» s poznámkou o pevném rozvrhu, pokud Peek krok nezadrží (viz níže) |
+| `Order information received` | Prodejce odeslal údaje k objednávce. Balík ještě nikdo fyzicky nepřevzal. | „Label created“ |
+| `Arrive at the cross border receiving point` | Spediter balík převzal: první skutečný sken v jeho rukou. | „Received by carrier“ |
+| `Goods leave the operation center` | Balík opustil operační centrum. | „In transit“ |
+| `Arrive at the international airport` | Na mezinárodním letišti, čeká na let. | „In transit“ |
+| `Departing from the airport` | Letadlo odletělo. | „In transit“ |
+| `Item arrives at destination airport` | Přistálo v cílové zemi. | „In transit“ |
+| `local carrier Agent Import customs clearance` | Místní zástupce vyřizuje dovozní celní odbavení. | „At customs“ |
+| `The import customs keep it for inspection` | Celní úřad v tvé zemi zadržel balík ke kontrole. | „At customs“ |
+| `Customs clearance completed` | Celní odbavení skončilo a balík pokračuje dál. | „In transit“ |
+| `Internationaliy Package received at processing center` | Zpracovatelské centrum v cílové zemi převzalo proclený balík. Nejde o nové vyzvednutí u odesílatele. | „In transit“ |
+| `Leave the email processing center` | Balík toto centrum opustil. | „In transit“ |
+| `Arrival sorting, distribution center` | Dorazil do třídicího nebo distribučního centra v tvé zemi, s městem za textem. | „In transit“ |
+| `Leaving the sorting center` | Opouští třídicí centrum, s městem za textem. | „In transit“ |
+| `Package is on the way` | Pokračuje dál po cílové zemi s uvedením města. Neznamená to, že balík dnes rozváží kurýr. | „In transit“ |
+| `Delivered` | Záznam o doručení s městem. Může jít o plán, ne o sken: viz níže. | „Delivered“ s poznámkou o pevném rozvrhu, pokud Peek krok nezadrží (viz níže) |
 
-**Přes Hongkong.** Může se objevit i řádek `香港处理中心已收寄【Hong Kong】`: poštovní převzetí ve zpracovatelském centru v Hongkongu, přenášené v čínštině s městem v závorkách. Peek jej ukazuje beze změny pod «Received by carrier».
+**Přes Hongkong.** Může se objevit i řádek `香港处理中心已收寄【Hong Kong】`: poštovní převzetí ve zpracovatelském centru v Hongkongu, přenášené v čínštině s městem v závorkách. Peek jej ukazuje beze změny pod „Received by carrier“.
 
-**Řádek v čínštině.** U objednávky bez skenů zapisuje platforma sama `货物电子信息已经收到` (přijaty elektronické údaje o zásilce). Prodejce vytvořil objednávku, ale balík ještě nikdo neoskenoval. Peek řádek zobrazuje čínsky pod «Label created».
+**Řádek v čínštině.** U objednávky bez skenů zapisuje platforma sama `货物电子信息已经收到` (přijaty elektronické údaje o zásilce). Prodejce vytvořil objednávku, ale balík ještě nikdo neoskenoval. Peek řádek zobrazuje čínsky pod „Label created“.
 
 **Časy.** Peek čte všechny časy v trackeru jako pekingský čas (`UTC+8`), včetně kroků v Česku, a převádí je do časového pásma tvého zařízení. V zimě je 20:00 v Pekingu 13:00 českého času (`UTC+1`), v létě 14:00 (`UTC+2`).
 
@@ -66,13 +66,13 @@ Web Xinghe Freight neuvádí dodací lhůty, počet pokusů o doručení ani vý
 
 **Pouze `Order information received` nebo `货物电子信息已经收到`.** Prodejce vytvořil objednávku, ale balík ještě nikdo neoskenoval. Pokud se několik dní nic nezmění, zeptej se prodejce, zda byl skutečně odeslán.
 
-**«Waiting for Xinghe Freight».** Peek zatím nemá potvrzený sken: tracker GZYL číslo buď nezná, nebo obsahuje jen předem napsaný plán (klidně až po `Delivered`), a externí služby také nic nemají. Peek kontroluje dál. Pro neznámé číslo vrátí tracker GZYL jeden prázdný řádek s číslem jako referencí; Peek to bere jako nenalezené, zobrazí «Waiting for Xinghe Freight» a po dvou dnech «Check the tracking number». Předem zapsaný plán naopak dokládá, že Xinghe objednávku má, takže «Waiting for Xinghe Freight» zůstává bez výzvy ke kontrole čísla. Přesto číslo porovnej znak po znaku se zprávou od prodejce.
+**„Waiting for Xinghe Freight“.** Peek zatím nemá potvrzený sken: tracker GZYL číslo buď nezná, nebo obsahuje jen předem napsaný plán (klidně až po `Delivered`), a externí služby také nic nemají. Peek kontroluje dál. Pro neznámé číslo vrátí tracker GZYL jeden prázdný řádek s číslem jako referencí; Peek to bere jako nenalezené, zobrazí „Waiting for Xinghe Freight“ a po dvou dnech „Check the tracking number“. Předem zapsaný plán naopak dokládá, že Xinghe objednávku má, takže „Waiting for Xinghe Freight“ zůstává bez výzvy ke kontrole čísla. Přesto číslo porovnej znak po znaku se zprávou od prodejce.
 
 **Zaseknuto na celnici.** Pokud po tobě chtějí dovozní poplatky, projdi si průvodce [balíky na celnici](guide:customs) (anglicky). Stojí-li balík několik dní, napiš prodejci.
 
 **Tracker nebo jiný web ukazuje víc kroků než Peek.** Kroky navíc — včetně `Delivered` — mohou být předem zapsaný plán, který Peek zadržuje. Řiď se odhadem doručení z obchodu a po jeho uplynutí kontaktuj prodejce. Více v průvodci [sledování balíků z Číny](guide:tracking-from-china) (anglicky).
 
-**`Delivered`, ale nic nepřišlo.** Krok může být součástí pevného rozvrhu. Pokud nedoručuje Swiss Post, Peek pod «Delivered» vypíše: «Xinghe Freight updates on a fixed schedule, with no signature. If nothing came, ask the seller.» Napiš prodejci, že balík nedorazil, a vyžádej si název a číslo místního dopravce. Více v průvodci [doručeno, ale nedorazilo](guide:delivered-not-received) (anglicky).
+**`Delivered`, ale nic nepřišlo.** Krok může být součástí pevného rozvrhu. Pokud nedoručuje Swiss Post, Peek pod „Delivered“ vypíše: „Xinghe Freight updates on a fixed schedule, with no signature. If nothing came, ask the seller.“ Napiš prodejci, že balík nedorazil, a vyžádej si název a číslo místního dopravce. Více v průvodci [doručeno, ale nedorazilo](guide:delivered-not-received) (anglicky).
 
 **Ztraceno nebo vráceno.** Přepravu u Xinghe Freight objednal prodejce, proto vrácení peněz nebo nové zaslání řeš s prodejcem či tržištěm.
 
@@ -80,23 +80,23 @@ Web Xinghe Freight neuvádí dodací lhůty, počet pokusů o doručení ani vý
 
 Čínský web Xinghe Freight (`xinghe-express.cn`) uvádí:
 
-- **Nepřetržitá linka (24/7):** `19924483103` (`+86 199 2448 3103` ze zahraničí), uvedena jako otevřená 24 hodin denně každý den.
-- **E-mail:** `3975605292@qq.com` pro obchodní dotazy a cenové nabídky.
+- **Nepřetržitá linka (24/7):** 19924483103 (+86 199 2448 3103 ze zahraničí), uvedena jako otevřená 24 hodin denně každý den.
+- **E-mail:** 3975605292@qq.com pro obchodní dotazy a cenové nabídky.
 - **Adresa:** Kuang-čou (Guangzhou), provincie Kuang-tung, bez ulice (pro přesnou adresu prosí nejprve o kontakt).
 
 Web je pouze v čínštině a nenabízí podporu pro zahraniční příjemce: kontaktní formulář jen otevře e-mail na uvedenou adresu. Zákazníkem Xinghe je prodejce, takže kontaktuj nejprve prodejce a při neodpovídání tržiště.
 
 ## Sledování zásilky Xinghe Freight v Peeku
 
-[Peek](/) okamžitě rozpozná číslo `GZXH…YQ` (i zkrácené `GZXH…Y`) jako Xinghe Freight se štítkem «Detected carrier». Dal-li ti prodejce číslo jiného tvaru, vlož ho stejně: Peek sleduje přes 4 500 dopravců. Ručně zvolíš Xinghe Freight přes «Change» a vyhledání Xinghe Freight (nebo `星和货运`), případně přes «Change carrier» u již přidané zásilky.
+[Peek](/) okamžitě rozpozná číslo `GZXH…YQ` (i zkrácené `GZXH…Y`) jako Xinghe Freight se štítkem „Detected carrier“. Dal-li ti prodejce číslo jiného tvaru, vlož ho stejně: Peek sleduje přes 4 500 dopravců. Ručně zvolíš Xinghe Freight přes „Change“ a vyhledání Xinghe Freight (nebo `星和货运`), případně přes „Change carrier“ u již přidané zásilky.
 
-Peek se ptá přímo trackeru GZYL stejně jako pole na webu Xinghe. Ukazuje stav, každý krok s místem a cílovou zemi, pokud je v záznamu. Časy čte v pekingském čase a zobrazuje ve tvém časovém pásmu («Times are in your time zone:» na konci historie). Peek vynechává jména, adresu, PSČ, hmotnost, platební údaje, podpis i doklad o doručení a nezobrazuje odhadované datum doručení, protože ho tracker neposkytuje.
+Peek se ptá přímo trackeru GZYL stejně jako pole na webu Xinghe. Ukazuje stav, každý krok s místem a cílovou zemi, pokud je v záznamu. Časy čte v pekingském čase a zobrazuje ve tvém časovém pásmu („Times are in your time zone:“ na konci historie). Peek vynechává jména, adresu, PSČ, hmotnost, platební údaje, podpis i doklad o doručení a nezobrazuje odhadované datum doručení, protože ho tracker neposkytuje.
 
-Když tracker číslo nezná, Peek osloví sledovací služby a ukáže jejich kopii. Dokud nikde není žádný krok, zobrazuje «Waiting for Xinghe Freight» a po dvou dnech «Check the tracking number».
+Když tracker číslo nezná, Peek osloví sledovací služby a ukáže jejich kopii. Dokud nikde není žádný krok, zobrazuje „Waiting for Xinghe Freight“ a po dvou dnech „Check the tracking number“.
 
-Peek zadržuje každý krok zapsaný více než 12 hodin před časem, který uvádí, každý krok zapsaný ve stejné sekundě s krokem napsaným více než půl hodiny dopředu (kromě registrace objednávky) a každý krok datovaný po okamžiku kontroly v pekingském čase. U záznamu s předem zapsanými kroky zadrží i `Delivered`, i když byl zapsán tentýž den. Řídí se ponechanými kroky, ne souhrnným stavem, a vyřazuje i kopie těchto plánovaných kroků ze sledovacích služeb (`Delivered` včetně). Pokud však tracker nemá záznam nebo neodpovídá, Peek nedokáže odlišit plánovaný krok z externí služby od pravého skenu. Když zadrží předpovědi, historie do doručení či vrácení začíná větou «Other sites may show more steps, but they’re only predictions.» a «Show them» je zobrazí šedě s datem («Predicted for Mon 12 Oct») beze změny stavu a bez upozornění.
+Peek zadržuje každý krok zapsaný více než 12 hodin před časem, který uvádí, každý krok zapsaný ve stejné sekundě s krokem napsaným více než půl hodiny dopředu (kromě registrace objednávky) a každý krok datovaný po okamžiku kontroly v pekingském čase. U záznamu s předem zapsanými kroky zadrží i `Delivered`, i když byl zapsán tentýž den. Řídí se ponechanými kroky, ne souhrnným stavem, a vyřazuje i kopie těchto plánovaných kroků ze sledovacích služeb (`Delivered` včetně). Pokud však tracker nemá záznam nebo neodpovídá, Peek nedokáže odlišit plánovaný krok z externí služby od pravého skenu. Když zadrží předpovědi, historie do doručení či vrácení začíná větou „Other sites may show more steps, but they’re only predictions.“ a „Show them“ je zobrazí šedě s datem („Predicted for Mon 12 Oct“) beze změny stavu a bez upozornění.
 
-Kromě Swiss Post nepředává Peek zásilku místnímu dopravci: dostaneš-li od prodejce místní číslo, přidej ho jako samostatný balík. Dokud máš balík otevřený nebo v den doručení se zapnutými upozorněními, Peek kontroluje až každých 10 minut; jinak a v klidném období jednou za hodinu. Upozornění lze nastavit na «Every scan», «Important steps» (dva celní kroky a `Delivered`, nikoli lety či třídění) nebo «Delivery only». Peek nemůže za tebe kontaktovat Xinghe Freight, GZYL ani prodejce.
+Kromě Swiss Post nepředává Peek zásilku místnímu dopravci: dostaneš-li od prodejce místní číslo, přidej ho jako samostatný balík. Dokud máš balík otevřený nebo v den doručení se zapnutými upozorněními, Peek kontroluje až každých 10 minut; jinak a v klidném období jednou za hodinu. Upozornění lze nastavit na „Every scan“, „Important steps“ (dva celní kroky a `Delivered`, nikoli lety či třídění) nebo „Delivery only“. Peek nemůže za tebe kontaktovat Xinghe Freight, GZYL ani prodejce.
 
 ## Časté otázky k Xinghe Freight
 
@@ -114,11 +114,11 @@ Ani web Xinghe, ani tracker nejmenují místního partnera v Česku (Peek automa
 
 ### Proč Peek ukazuje méně kroků nebo žádné sledování pro mé číslo GZXH?
 
-Tracker buď číslo ještě nezná, nebo obsahuje předem zapsané kroky — včetně plánovaného `Delivered` — které Peek schovává pod «Show them», místo aby je počítal jako skeny. Zkontroluj číslo podle e-mailu od prodejce a po několika dnech mu napiš.
+Tracker buď číslo ještě nezná, nebo obsahuje předem zapsané kroky — včetně plánovaného `Delivered` — které Peek schovává pod „Show them“, místo aby je počítal jako skeny. Zkontroluj číslo podle e-mailu od prodejce a po několika dnech mu napiš.
 
 ### Jak mohu kontaktovat Xinghe Freight?
 
-Nejprve kontaktuj prodejce nebo tržiště, protože přepravu objednal prodejce. Čínský web (`xinghe-express.cn`) uvádí nepřetržitou linku `19924483103` (`+86 199 2448 3103` ze zahraničí) a obchodní e-mail `3975605292@qq.com` bez zvláštní podpory pro zahraniční příjemce.
+Nejprve kontaktuj prodejce nebo tržiště, protože přepravu objednal prodejce. Čínský web (`xinghe-express.cn`) uvádí nepřetržitou linku 19924483103 (+86 199 2448 3103 ze zahraničí) a obchodní e-mail 3975605292@qq.com bez zvláštní podpory pro zahraniční příjemce.
 
 :::sources
 - [Xinghe Freight: 广州星和货运代理有限公司 (úvodní stránka, čínsky)](http://xinghe-express.cn/) – název firmy, spediční služby, vyhledávací pole k trackeru GZYL, telefon a e-mail

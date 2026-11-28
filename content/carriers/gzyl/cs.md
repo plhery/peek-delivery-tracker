@@ -26,31 +26,31 @@ Mezery ani malá písmena při vkládání do Peeku nevadí.
 
 ## Význam sledovacích stavů GZYL
 
-GZYL píše své kroky v angličtině včetně překlepů. Protože rozhraní Peeku není v češtině, hlavní etapy Peeku se zobrazují také anglicky: «Label created» (štítek vytvořen), «Received by carrier» (přijato dopravcem), «In transit» (na cestě), «At customs» (na celnici) a «Delivered» (doručeno). V obvyklém pořadí:
+GZYL píše své kroky v angličtině včetně překlepů. Protože rozhraní Peeku není v češtině, hlavní etapy Peeku se zobrazují také anglicky: „Label created“ (štítek vytvořen), „Received by carrier“ (přijato dopravcem), „In transit“ (na cestě), „At customs“ (na celnici) a „Delivered“ (doručeno). V obvyklém pořadí:
 
 | GZYL píše | Co to znamená pro tebe | Peek ukazuje |
 | --- | --- | --- |
-| `Order information received` | Prodejce poslal GZYL údaje k objednávce. GZYL balík fyzicky ještě nemá. | «Label created» |
-| `Arrive at the cross border receiving point` | GZYL převzala balík: první sken v jejích rukou. | «Received by carrier» |
-| `Goods leave the operation center` | Balík opustil operační centrum GZYL. | «In transit» |
-| `Arrive at the international airport` | Na letišti, čeká na svůj let. | «In transit» |
-| `Departing from the airport` | Let odletěl. | «In transit» |
-| `Item arrives at destination airport` | Přistálo v cílové zemi. | «In transit» |
-| `local carrier Agent Import customs clearance` | Zástupce v tvé zemi provádí dovozní celní odbavení. | «At customs» |
-| `The import customs keep it for inspection` | Celní úřad v tvé zemi balík kontroluje. | «At customs» |
-| `Customs clearance completed` | Procleno a jede dál. | «In transit» |
-| `Internationaliy Package received at processing center` | Zpracovatelské centrum v tvé zemi převzalo proclený balík. Nejde o nové vyzvednutí u odesílatele. | «In transit» |
-| `Leave the email processing center` | Balík opustil toto zpracovatelské centrum. | «In transit» |
-| `Arrival sorting, distribution center` | V distribučním centru v tvé zemi, s městem za textem. | «In transit» |
-| `Leaving the sorting center` | Opouští třídicí centrum, s městem za textem. | «In transit» |
-| `Package is on the way` | Pokračuje po cílové zemi, s městem. Neznamená to rozvoz kurýrem. | «In transit» |
-| `Delivered` | Doručení s městem. Může jít o plán, nikoli sken: viz níže. | «Delivered» s poznámkou o pevném rozvrhu, pokud Peek krok nezadrží (viz níže) |
+| `Order information received` | Prodejce poslal GZYL údaje k objednávce. GZYL balík fyzicky ještě nemá. | „Label created“ |
+| `Arrive at the cross border receiving point` | GZYL převzala balík: první sken v jejích rukou. | „Received by carrier“ |
+| `Goods leave the operation center` | Balík opustil operační centrum GZYL. | „In transit“ |
+| `Arrive at the international airport` | Na letišti, čeká na svůj let. | „In transit“ |
+| `Departing from the airport` | Let odletěl. | „In transit“ |
+| `Item arrives at destination airport` | Přistálo v cílové zemi. | „In transit“ |
+| `local carrier Agent Import customs clearance` | Zástupce v tvé zemi provádí dovozní celní odbavení. | „At customs“ |
+| `The import customs keep it for inspection` | Celní úřad v tvé zemi balík kontroluje. | „At customs“ |
+| `Customs clearance completed` | Procleno a jede dál. | „In transit“ |
+| `Internationaliy Package received at processing center` | Zpracovatelské centrum v tvé zemi převzalo proclený balík. Nejde o nové vyzvednutí u odesílatele. | „In transit“ |
+| `Leave the email processing center` | Balík opustil toto zpracovatelské centrum. | „In transit“ |
+| `Arrival sorting, distribution center` | V distribučním centru v tvé zemi, s městem za textem. | „In transit“ |
+| `Leaving the sorting center` | Opouští třídicí centrum, s městem za textem. | „In transit“ |
+| `Package is on the way` | Pokračuje po cílové zemi, s městem. Neznamená to rozvoz kurýrem. | „In transit“ |
+| `Delivered` | Doručení s městem. Může jít o plán, nikoli sken: viz níže. | „Delivered“ s poznámkou o pevném rozvrhu, pokud Peek krok nezadrží (viz níže) |
 
-**Přes USA.** Může se objevit i `Los Angeles Processing Center has received it` s městem v závorkách: zpracovatelské centrum v USA přijalo zásilku cestou do cíle («In transit»).
+**Přes USA.** Může se objevit i `Los Angeles Processing Center has received it` s městem v závorkách: zpracovatelské centrum v USA přijalo zásilku cestou do cíle („In transit“).
 
-**Řádek v čínštině.** U objednávky bez skenů zapisuje platforma sama `货物电子信息已经收到` (přijaty elektronické údaje o zboží). Prodejce vytvořil objednávku, ale balík ještě nikdo neoskenoval («Label created»).
+**Řádek v čínštině.** U objednávky bez skenů zapisuje platforma sama `货物电子信息已经收到` (přijaty elektronické údaje o zboží). Prodejce vytvořil objednávku, ale balík ještě nikdo neoskenoval („Label created“).
 
-**Přes China Post.** Zásilka může ukázat i `广州处理中心已收寄` s městem v závorkách: převzetí China Post v Kuang-čou (u čísel Xinghe Freight pak `香港处理中心已收寄` v Hongkongu). Peek ukazuje oba řádky čínsky pod «Received by carrier».
+**Přes China Post.** Zásilka může ukázat i `广州处理中心已收寄` s městem v závorkách: převzetí China Post v Kuang-čou (u čísel Xinghe Freight pak `香港处理中心已收寄` v Hongkongu). Peek ukazuje oba řádky čínsky pod „Received by carrier“.
 
 **Časy.** Každý čas v trackeru GZYL je v pekingském čase (`UTC+8`), včetně kroků v Česku, bez vypsané časové zóny. V zimě odpovídá 20:00 v Pekingu 13:00 českého času (`UTC+1`), v létě 14:00 (`UTC+2`).
 
@@ -70,11 +70,11 @@ Peek nenašel od GZYL žádné dodací lhůty ani pravidla pro pokusy o doručen
 
 **Zaseknuto na celnici.** Pokud po tobě požadují dovozní poplatky, podívej se na průvodce [balíky na celnici](guide:customs) (anglicky). Stojí-li zásilka několik dní, napiš prodejci.
 
-**Tracker GZYL nebo jiná služba ukazuje víc kroků než Peek.** Peek zadržuje kroky zapsané před časem, který ukazují, závěrečné `Delivered` plánu GZYL i kroky datované po poslední kontrole (viz níže). Předem zapsaný krok nemění stav ani neposílá upozornění. Když Peek takové kroky zadrží, historie do doručení či vrácení začíná větou «Other sites may show more steps, but they’re only predictions.» a «Show them» je ukáže šedě s datem («Predicted for Mon 12 Oct»). Řiď se odhadem obchodu a zeptej se prodejce, až uplyne. Více v průvodci [balíky z Číny](guide:tracking-from-china) (anglicky).
+**Tracker GZYL nebo jiná služba ukazuje víc kroků než Peek.** Peek zadržuje kroky zapsané před časem, který ukazují, závěrečné `Delivered` plánu GZYL i kroky datované po poslední kontrole (viz níže). Předem zapsaný krok nemění stav ani neposílá upozornění. Když Peek takové kroky zadrží, historie do doručení či vrácení začíná větou „Other sites may show more steps, but they’re only predictions.“ a „Show them“ je ukáže šedě s datem („Predicted for Mon 12 Oct“). Řiď se odhadem obchodu a zeptej se prodejce, až uplyne. Více v průvodci [balíky z Číny](guide:tracking-from-china) (anglicky).
 
-**`Delivered`, ale nic nepřišlo.** Krok může být součástí pevného plánu GZYL, ne skenem. Pokud nedoručuje Swiss Post, Peek pod «Delivered» vypíše: «GZYL updates on a fixed schedule, with no signature. If nothing came, ask the seller.» Napiš prodejci a vyžádej si název i číslo místního dopravce. Více v průvodci [doručeno, ale nedorazilo](guide:delivered-not-received) (anglicky).
+**`Delivered`, ale nic nepřišlo.** Krok může být součástí pevného plánu GZYL, ne skenem. Pokud nedoručuje Swiss Post, Peek pod „Delivered“ vypíše: „GZYL updates on a fixed schedule, with no signature. If nothing came, ask the seller.“ Napiš prodejci a vyžádej si název i číslo místního dopravce. Více v průvodci [doručeno, ale nedorazilo](guide:delivered-not-received) (anglicky).
 
-**Nic nenalezeno.** Pro neznámé číslo ukáže tracker GZYL jeden výsledek s tvým číslem pod `参考号` (reference) a ostatními poli prázdnými. Peek zobrazí «Waiting for GZYL» a po dvou dnech «Check the tracking number». Porovnej číslo se zprávou prodejce.
+**Nic nenalezeno.** Pro neznámé číslo ukáže tracker GZYL jeden výsledek s tvým číslem pod `参考号` (reference) a ostatními poli prázdnými. Peek zobrazí „Waiting for GZYL“ a po dvou dnech „Check the tracking number“. Porovnej číslo se zprávou prodejce.
 
 **Ztraceno nebo vráceno.** Přepravu u GZYL objednal prodejce, proto žádej vrácení peněz nebo novou zásilku u prodejce či tržiště.
 
@@ -84,13 +84,13 @@ Kontaktní stránka (`联系我们`) čínského webu GZYL (`yunlianhouyun.com`)
 
 ## Sledování balíku GZYL v Peeku
 
-[Peek](/) okamžitě pozná GZYL u čísla začínajícího na `YL738` se sedmi dalšími číslicemi a `YQ` («Detected carrier»). Ostatní čísla `YL`, deset číslic a `YQ` jsou slabá shoda. Přesto ho vlož: Peek sleduje přes 4 500 dopravců. Při přidávání se zeptá trackeru GZYL («Checking tracking services…») a při nalezení ukáže «GZYL has this parcel.» (i u prázdné odpovědi na neznámé číslo). Jinak stiskni «Change» a vyber GZYL pod «Fits this number» (najdeš ji i zadáním `广州云链`), nebo použij «Change carrier». Funguje i reference prodejce, pokud GZYL vybereš ručně — Peek pak ukáže číslo objednávky jako «GZYL tracks this as» (protože však odstraňuje pomlčky, referenci s pomlčkami nenajde, požádej o `YL…YQ`).
+[Peek](/) okamžitě pozná GZYL u čísla začínajícího na `YL738` se sedmi dalšími číslicemi a `YQ` („Detected carrier“). Ostatní čísla `YL`, deset číslic a `YQ` jsou slabá shoda. Přesto ho vlož: Peek sleduje přes 4 500 dopravců. Při přidávání se zeptá trackeru GZYL („Checking tracking services…“) a při nalezení ukáže „GZYL has this parcel.“ (i u prázdné odpovědi na neznámé číslo). Jinak stiskni „Change“ a vyber GZYL pod „Fits this number“ (najdeš ji i zadáním `广州云链`), nebo použij „Change carrier“. Funguje i reference prodejce, pokud GZYL vybereš ručně — Peek pak ukáže číslo objednávky jako „GZYL tracks this as“ (protože však odstraňuje pomlčky, referenci s pomlčkami nenajde, požádej o `YL…YQ`).
 
-Peek čte vlastní tracker GZYL a zobrazuje stav, každý krok s místem a cílovou zemi. Časy čte v pekingském čase a zobrazuje ve tvém časovém pásmu («Times are in your time zone:» na konci historie). Vynechává jména, adresu, PSČ, hmotnost, poplatky, podpis i doklad o doručení a nezobrazuje odhadované datum doručení.
+Peek čte vlastní tracker GZYL a zobrazuje stav, každý krok s místem a cílovou zemi. Časy čte v pekingském čase a zobrazuje ve tvém časovém pásmu („Times are in your time zone:“ na konci historie). Vynechává jména, adresu, PSČ, hmotnost, poplatky, podpis i doklad o doručení a nezobrazuje odhadované datum doručení.
 
-Peek zadržuje kroky zapsané více než 12 hodin před časem, který ukazují, kroky zapsané ve stejné sekundě s krokem zapsaným více než půl hodiny dopředu (kromě registrace) a kroky po okamžiku kontroly v pekingském čase. U objednávek s předem zapsanými kroky zadrží i `Delivered`. Když datové rozhraní nemá kroky, čte vyhledávací stránku GZYL a zadržuje tam každé `Delivered`. Jsou-li všechny kroky zadrženy, zobrazuje «Waiting for GZYL» bez výzvy ke kontrole čísla a vyřazuje i kopie plánovaných kroků z externích služeb. Pokud však tracker GZYL neodpovídá, kopie z externích služeb mohou obsahovat předem zapsané kroky.
+Peek zadržuje kroky zapsané více než 12 hodin před časem, který ukazují, kroky zapsané ve stejné sekundě s krokem zapsaným více než půl hodiny dopředu (kromě registrace) a kroky po okamžiku kontroly v pekingském čase. U objednávek s předem zapsanými kroky zadrží i `Delivered`. Když datové rozhraní nemá kroky, čte vyhledávací stránku GZYL a zadržuje tam každé `Delivered`. Jsou-li všechny kroky zadrženy, zobrazuje „Waiting for GZYL“ bez výzvy ke kontrole čísla. Kopie kroků, které zadrží jako plán GZYL (`Delivered` včetně), vyřazuje i z externích služeb, i když jiné kroky objednávky ponechá. Pokud však tracker GZYL neodpovídá, kopie z externích služeb mohou obsahovat předem zapsané kroky.
 
-Kromě předání Swiss Post zůstává Peek u GZYL: dostaneš-li číslo místního dopravce, přidej ho jako samostatný balík. Dokud balík sleduješ otevřený nebo v den doručení se zapnutými upozorněními, Peek kontroluje až každých 10 minut (a každé 2 minuty v den «Out for delivery» od 6:00 místního času, ačkoli žádný známý krok GZYL tento stav nedává); jinak a po dvou dnech klidu (12 hodin u «Label created» / «Received by carrier») každou hodinu (přes sledovací služby každou hodinu, každé 3 hodiny po klidném dni a každých 15 minut v den doručení). Upozornění lze nastavit na «Every scan», «Important steps» (dva celní kroky a `Delivered`, bez letů či třídění) nebo «Delivery only». Peek nemůže kontaktovat GZYL ani prodejce za tebe.
+Kromě předání Swiss Post zůstává Peek u GZYL: dostaneš-li číslo místního dopravce, přidej ho jako samostatný balík. Dokud balík sleduješ otevřený nebo v den doručení se zapnutými upozorněními, Peek kontroluje až každých 10 minut a v den „Out for delivery“ až každé 2 minuty (od 6:00 místního času, nebo půl hodiny před začátkem časového okna, pokud ho dopravce uvede), dokud odpovídá vlastní tracker GZYL nebo Swiss Post, ačkoli žádný známý krok GZYL tento stav nedává; jinak a po dvou dnech klidu (12 hodin u „Label created“ / „Received by carrier“) každou hodinu. Přes sledovací služby kontroluje každou hodinu, každé 3 hodiny po klidném dni a až každých 15 minut v den doručení za stejné podmínky. Upozornění lze nastavit na „Every scan“, „Important steps“ (dva celní kroky a `Delivered`, bez letů či třídění) nebo „Delivery only“. Peek nemůže kontaktovat GZYL ani prodejce za tebe.
 
 ## Časté otázky o GZYL
 
@@ -102,7 +102,7 @@ GZYL je 广州云链货运代理有限公司 (Guangzhou Yunlian), spediční fir
 
 Ne automaticky. `YL`, deset číslic a `YQ` je formát GZYL — Peek okamžitě určí GZYL pro `YL738…YQ` a u ostatních `YL…YQ` ověří tracker GZYL. Devět ani jedenáct číslic GZYL neodpovídá a `GZXH…YQ` patří Xinghe Freight.
 
-### Proč GZYL hlásí «Delivered», když nic nedorazilo?
+### Proč GZYL hlásí „Delivered“, když nic nedorazilo?
 
 GZYL často zapisuje velkou část trasy předem a přidává `Delivered` podle pevného rozvrhu, nikoli na základě místního skenu doručení. Peek předem zapsané kroky zadržuje a upozorňuje na pevný rozvrh — napiš prodejci a zjisti místního dopravce.
 

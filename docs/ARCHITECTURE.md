@@ -141,7 +141,7 @@ Key server modules:
   while the phone's app is not connected, so a device whose send failed waits before the
   next: a minute, twice as long after each failure in a row, up to a quarter of an hour.
   The device keeps the failures and the wait (`retry_failures`, `retry_at`), so a server just
-  deployed waits and counts on as the last one did.
+  deployed waits and counts on as the last one did; a device registered again starts over.
   Its notices stay pending until one goes through or they are a day old. A device refused
   five times in a row while its oldest notice has waited half a day is put away, until the
   app registers again at its next launch. Without one, the notices wait in its inbox, which the app empties

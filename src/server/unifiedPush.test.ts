@@ -220,6 +220,23 @@ describe('an account\'s notices to a UnifiedPush device', () => {
     expect(update).toHaveBeenLastCalledWith('device-1', expect.objectContaining({ last_error: null, retry_failures: 0, retry_at: null }));
   });
 
+  it('start over once the device registered again, as its row does', async () => {
+    const first = { failures: 0, at: 0, since: '2026-10-02T08:00:00.000Z' };
+    vi.mocked(client.nativePushRetries).mockResolvedValue(new Map([['device-1', first]]));
+    await service.dispatch();
+    clock += 60_000;
+    await service.dispatch();
+    // Refused twice: the next waits two minutes, while the device keeps its registration.
+    clock += 60_000;
+    expect(await service.dispatch()).toMatchObject({ attempted: 0 });
+    // The phone registers again, its distributor subscribed anew: the row starts over, and so does this server.
+    vi.mocked(client.nativePushRetries).mockResolvedValue(new Map([['device-1', { ...first, since: '2026-10-02T09:00:00.000Z' }]]));
+    expect(await service.dispatch()).toMatchObject({ attempted: 1, failed: 1 });
+    expect(client.updateNativePushDevice).toHaveBeenLastCalledWith('device-1', expect.objectContaining({
+      retry_failures: 1, retry_at: new Date(clock + 60_000).toISOString(),
+    }));
+  });
+
   it('count a refusal of the server, as of its VAPID signature, as a failure of its own', async () => {
     post.mockResolvedValue(403);
     expect(await service.dispatch()).toEqual({ attempted: 1, sent: 0, failed: 1, expired: 0 });

@@ -31,7 +31,7 @@ import { repeatedScans } from './scanRepeats';
 import { stageNotices } from './stageNotices';
 import { messagesFor } from './requestLocale';
 import { siteName } from './siteSettings';
-import type { RecentScan, SupabaseServiceClient } from './supabase';
+import type { NativePushRetry, RecentScan, SupabaseServiceClient } from './supabase';
 import { errorMessage, isRecord, type JsonObject } from './types';
 import { WorkerLease } from './workerLease';
 
@@ -1518,9 +1518,10 @@ abstract class AppPushNotificationService {
    * The UnifiedPush devices whose sends failed: how many in a row, and until when the next waits. The endpoint is on a
    * host the phone chose, which may refuse each send alike for hours (ntfy answers 507 while the phone's app is not
    * connected): the device is not asked again on every dispatch, and its notices stay pending until a send goes through
-   * or they are a day old. Kept on the device too (`retry_failures`, `retry_at`), which a server just started reads.
+   * or they are a day old. Kept on the device too (`retry_failures`, `retry_at`), which a server just started reads. A
+   * device that registered again since (`since`, its `subscribed_at`) starts over, as its row does.
    */
-  readonly #retries = new Map<string, { failures: number; at: number }>();
+  readonly #retries = new Map<string, NativePushRetry>();
   abstract readonly client: SupabaseServiceClient;
   /** Seconds. */
   abstract readonly now: () => number;
@@ -1550,11 +1551,19 @@ abstract class AppPushNotificationService {
     }
     const summary = emptySummary();
     const times = await parcelTimes(this.client, grouped.values(), this.now() * 1_000);
+    const subscribed = new Map<string, string | undefined>();
     if (this.transport === 'unifiedpush') {
-      // A server just started waits as the last one did, and counts on from its refusals.
-      const devices = [...new Set([...grouped.values()].map((events) => stringField(events[0]!, 'device_id')))].filter((id) => !this.#retries.has(id));
-      const stored = devices.length ? await orNone(() => this.client.nativePushRetries(devices), new Map<string, { failures: number; at: number }>()) : new Map();
-      for (const [deviceId, retry] of stored) this.#retries.set(deviceId, retry);
+      // A server just started waits as the last one did, and counts on from its refusals; a device registered again
+      // since this server counted starts over.
+      const devices = [...new Set([...grouped.values()].map((events) => stringField(events[0]!, 'device_id')))];
+      const stored = devices.length ? await orNone(() => this.client.nativePushRetries(devices), new Map<string, NativePushRetry>()) : new Map<string, NativePushRetry>();
+      for (const [deviceId, retry] of stored) {
+        subscribed.set(deviceId, retry.since);
+        const known = this.#retries.get(deviceId);
+        if (known && known.since === retry.since) continue;
+        if (retry.failures > 0) this.#retries.set(deviceId, retry);
+        else this.#retries.delete(deviceId);
+      }
     }
     for (const events of grouped.values()) {
       signal?.throwIfAborted();
@@ -1598,9 +1607,11 @@ abstract class AppPushNotificationService {
           summary.expired += 1;
         } else {
           if (this.transport === 'unifiedpush') {
-            const failures = (this.#retries.get(deviceId)?.failures ?? 0) + 1;
+            const known = this.#retries.get(deviceId);
+            const failures = (known?.failures ?? 0) + 1;
             const wait = Math.min(UNIFIEDPUSH_RETRY_MAX_MS, UNIFIEDPUSH_RETRY_MS * 2 ** Math.min(failures - 1, 10));
-            this.#retries.set(deviceId, { failures, at: this.now() * 1_000 + wait });
+            const since = known ? known.since : subscribed.get(deviceId);
+            this.#retries.set(deviceId, { failures, at: this.now() * 1_000 + wait, ...since ? { since } : {} });
             if (error instanceof UnifiedPushError && error.statusCode >= 500) {
               summary.distributorFailed = (summary.distributorFailed ?? 0) + 1;
             }

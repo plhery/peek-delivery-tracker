@@ -278,6 +278,9 @@ export interface DeliveryEmailClaim {
 type NativePushTransport = ApiNativePushTransport;
 
 /** Where UnifiedPush sends a phone's notices: its distributor's endpoint and the Web Push keys the app made for it. */
+/** A UnifiedPush device's refusals in a row, until when its next send waits (ms), and when it last registered. */
+export interface NativePushRetry { failures: number; at: number; since?: string }
+
 export interface WebPushKeys {
   endpoint: string;
   p256dh: string;
@@ -1178,16 +1181,20 @@ export class SupabaseClient {
   }
 
   /** The devices among these whose sends were refused in a row: how many, and when the next may go (`retry_at`). */
-  async nativePushRetries(deviceIds: string[]): Promise<Map<string, { failures: number; at: number }>> {
+  /** The refusals in a row of each device, until when its next send waits, and when it last registered (`since`). */
+  async nativePushRetries(deviceIds: string[]): Promise<Map<string, NativePushRetry>> {
     const ids = [...new Set(deviceIds)];
     const pages = Array.from({ length: Math.ceil(ids.length / 100) }, (_, page) => ids.slice(page * 100, page * 100 + 100));
     const found = (await Promise.all(pages.map(async (page) => rows(await this.request(`/rest/v1/native_push_devices?${query([
       ['id', `in.(${page.join(',')})`],
-      ['retry_failures', 'gt.0'],
-      ['select', 'id,retry_failures,retry_at'],
+      ['select', 'id,retry_failures,retry_at,subscribed_at'],
     ])}`))))).flat();
-    return new Map(found.flatMap(({ id, retry_failures, retry_at }) => typeof id === 'string' && Number.isInteger(retry_failures)
-      ? [[id, { failures: retry_failures as number, at: typeof retry_at === 'string' ? Date.parse(retry_at) || 0 : 0 }] as const] : []));
+    return new Map(found.flatMap(({ id, retry_failures, retry_at, subscribed_at }) => typeof id === 'string' && Number.isInteger(retry_failures)
+      ? [[id, {
+        failures: retry_failures as number,
+        at: typeof retry_at === 'string' ? Date.parse(retry_at) || 0 : 0,
+        ...typeof subscribed_at === 'string' ? { since: subscribed_at } : {},
+      }] as const] : []));
   }
 
   async updateNativePushDevice(deviceId: string, values: JsonObject): Promise<void> {

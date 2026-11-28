@@ -43,7 +43,7 @@ begin
     'public.owned_package_share(uuid)',
     'public.share_owned_package(uuid,boolean,boolean,jsonb)',
     'public.stop_owned_package_share(uuid)',
-    'public.claim_parcel_link(text,text,text,text)'
+    'public.claim_parcel_link(text,text,text,text,boolean,boolean)'
   ] loop
     if not has_function_privilege('authenticated', account_function, 'EXECUTE')
         or has_function_privilege('anon', account_function, 'EXECUTE')

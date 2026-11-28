@@ -917,7 +917,7 @@ class DeviceParcels(
      * The account now has the parcel of link `linkId` as `packageId`: its note's files are marked to be sent there,
      * and stay here until they have arrived.
      */
-    fun handOverNote(linkId: String, packageId: UUID): Int = noteFiles?.handOver(linkId, packageId) ?: 0
+    fun handOverNote(linkId: String, packageId: UUID, account: UUID? = null): Int = noteFiles?.handOver(linkId, packageId, account) ?: 0
 
     fun setArchived(id: UUID, archived: Boolean): Parcel = update(id) { it.copy(archivedAt = if (archived) DateParser.isoString(now()) else null) }
 
@@ -1244,14 +1244,23 @@ class DeviceParcels(
 
     /**
      * What an account needs to take the device's parcels over: its own with their keys, those whose saved copy was lost
-     * included, and someone else's that the link lets an account keep. Never a link still to be forgotten.
+     * included, and someone else's that the link lets an account keep. Never a link still to be forgotten. One archived
+     * here, or turned off with its bell, says so, and the account keeps it so in the same step.
      */
     val claims: List<ClaimParcelLink>
         get() = entries.mapNotNull { entry ->
+            val muted = if (entry.isMuted) true else null
+            val archived = if (entry.archivedAt != null) true else null
             if (entry.isViewer) {
-                if (entry.canKeep == true) ClaimParcelLink(id = entry.linkId, label = entry.label.nonEmpty, note = entry.note?.nonEmpty) else null
+                if (entry.canKeep == true) {
+                    ClaimParcelLink(id = entry.linkId, label = entry.label.nonEmpty, note = entry.note?.nonEmpty, muted = muted, archived = archived)
+                } else {
+                    null
+                }
             } else {
-                keys.keyOf(entry.linkId)?.let { ClaimParcelLink(id = entry.linkId, key = it, label = entry.label.nonEmpty, note = entry.note?.nonEmpty) }
+                keys.keyOf(entry.linkId)?.let {
+                    ClaimParcelLink(id = entry.linkId, key = it, label = entry.label.nonEmpty, note = entry.note?.nonEmpty, muted = muted, archived = archived)
+                }
             }
         } + keys.mapNotNull { (linkId, key) ->
             if (entries.any { it.linkId.equalsCanonically(linkId) }) null else ClaimParcelLink(id = linkId, key = key)

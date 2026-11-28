@@ -377,6 +377,45 @@ $$;
 reset role;
 rollback;
 
+-- A parcel quiet or archived on the device joins the account so, copied or taken over; one the account had already
+-- keeps its own settings.
+begin;
+insert into auth.users (id, email, is_anonymous) values
+  ('e3100000-0000-4000-8000-000000000001', 'quiet-keeper@example.test', false);
+set local role service_role;
+select set_config('quiet_test.copied', public.create_one_off_parcel('QUIETTEST0401', 'unknown', null, null, repeat('7', 64))#>>'{link,id}', true);
+select set_config('quiet_test.again', public.create_one_off_parcel('QUIETTEST0401', 'unknown', null, null, repeat('8', 64))#>>'{link,id}', true);
+select set_config('quiet_test.taken', public.create_one_off_parcel('QUIETTEST0402', 'unknown', null, null, repeat('9', 64))#>>'{link,id}', true);
+reset role;
+set local role authenticated;
+select set_config('request.jwt.claim.sub', 'e3100000-0000-4000-8000-000000000001', true);
+do $$
+declare
+  answer jsonb;
+  kept public.packages;
+begin
+  -- Its lookup has another link: the account gets a copy.
+  answer := public.claim_parcel_link(current_setting('quiet_test.copied'), repeat('7', 64), 'Lamp', p_muted => true);
+  select * into kept from public.packages where id = (answer->>'package_id')::uuid;
+  if answer->>'outcome' <> 'kept' or kept.one_off or not kept.notifications_muted or kept.archived_at is not null then
+    raise exception 'A quiet parcel was copied as %, muted %, archived %', answer, kept.notifications_muted, kept.archived_at;
+  end if;
+  answer := public.claim_parcel_link(current_setting('quiet_test.again'), repeat('8', 64), 'Lamp', p_archived => true);
+  select * into kept from public.packages where id = kept.id;
+  if answer->>'outcome' <> 'already' or kept.archived_at is not null then
+    raise exception 'A parcel the account had was archived by another device''s claim: %', answer;
+  end if;
+  -- Its lookup's only link: the account takes the lookup over.
+  answer := public.claim_parcel_link(current_setting('quiet_test.taken'), repeat('9', 64), 'Desk', p_archived => true);
+  select * into kept from public.packages where id = (answer->>'package_id')::uuid;
+  if answer->>'outcome' <> 'kept' or kept.one_off or kept.notifications_muted or kept.archived_at is null then
+    raise exception 'An archived parcel was taken over as %, muted %, archived %', answer, kept.notifications_muted, kept.archived_at;
+  end if;
+end;
+$$;
+reset role;
+rollback;
+
 -- A link shows neither the note nor the files, to its viewers or its owner. A gift's sender may show its note and who
 -- it is from before delivery, never its name.
 begin;

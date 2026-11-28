@@ -250,7 +250,10 @@ Key server modules:
     sends the note with the claim, then uploads each file to the account's parcel; a file goes
     from the device once uploaded, or once the server says it never will (the parcel has gone,
     or its size or type is refused). One the account has no room for waits a day before it is
-    offered again; any other failure, the next signed-in visit. The apps do the same.
+    offered again, then two, four, eight and sixteen, and leaves the device at the sixth
+    refusal; any other failure, the next signed-in visit. A file waits for the account that
+    kept its parcel: another account signed in on the device leaves it alone. The apps do
+    the same.
     Forgetting the parcel deletes both; a frozen copy keeps them. Neither ever reaches a link.
   - A lookup whose number starts with the number of one the browser, or the iPhone or Android
     app, looked up at most 10 minutes earlier replaces that one when it has no scan yet and
@@ -268,7 +271,8 @@ Key server modules:
     archived parcels at its end, never leads with one and doesn't read them in the
     background; their alerts stay as they were, but turning alerts on for every parcel
     passes them over. Kept in an account, a parcel archived here is archived there too, and
-    one whose alerts were turned off here is muted there, unless the account had it already. From five parcels on, the list can be searched as
+    one whose alerts were turned off here is muted there, in the claim itself
+    (`claim_parcel_link`), unless the account had it already. From five parcels on, the list can be searched as
     the account's is, by name, number, carrier, status, scans and the note's words and files' names, archived parcels included.
     Its download button saves the list as a JSON file, as the apps do for a guest: each parcel
     as last shown, with its name, link, archive date, note and its files' names, and never its owner key. "Open them

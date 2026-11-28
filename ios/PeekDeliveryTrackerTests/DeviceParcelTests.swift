@@ -230,7 +230,7 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(storage.parcels.map(\.alertToken), ["token1"])
         XCTAssertEqual(storage.keys, ["22222222222A": key])
         XCTAssertEqual(storage.forgetting, [:])
-        XCTAssertEqual(device.claims, [ClaimParcelLink(id: "22222222222A", key: key, label: "Moon lamp")])
+        XCTAssertEqual(device.claims, [ClaimParcelLink(id: "22222222222A", key: key, label: "Moon lamp", archived: true)])
     }
 
     func testALinkTheServiceNoLongerHasIsLookedUpAgainUnderItsName() async throws {
@@ -2423,10 +2423,13 @@ final class DeviceParcelTests: XCTestCase {
         defer { session.forceSignOut() }
         let answer = PostcodeTestURLProtocol.handler
         let sent = Calls()
+        let claimed = Calls()
         PostcodeTestURLProtocol.handler = { request in
-            if let path = request.url?.path, path.hasPrefix("/api/packages/"), path != "/api/packages/claim" {
-                let body = String(data: PostcodeTestURLProtocol.body(of: request), encoding: .utf8) ?? ""
-                sent.add("\(request.httpMethod ?? "") \(path.hasSuffix("/notifications") ? "notifications \(body)" : "parcel")")
+            if let path = request.url?.path, path == "/api/packages/claim",
+               let links = try? JSONDecoder().decode(ClaimParcelsRequest.self, from: PostcodeTestURLProtocol.body(of: request)).links {
+                for link in links { claimed.add("\(link.id) muted \(link.muted == true) archived \(link.archived == true)") }
+            } else if let path = request.url?.path, path.hasPrefix("/api/packages/") {
+                sent.add("\(request.httpMethod ?? "") \(path)")
                 return (200, Data())
             }
             return answer?(request) ?? (404, Data())
@@ -2436,9 +2439,12 @@ final class DeviceParcelTests: XCTestCase {
         await store.claimDeviceParcels()
 
         XCTAssertEqual(device.claims, [])
-        // The archived one is archived in the account, the one turned off with its bell is muted there, and the third
-        // is left as it comes.
-        XCTAssertEqual(sent.all.sorted(), ["DELETE parcel", "PATCH notifications {\"muted\":true}"])
+        // The claim itself says the archived one is archived and the one turned off with its bell is quiet, and the third
+        // is left as it comes: no later request can leave either out.
+        XCTAssertEqual(claimed.all.sorted(), [
+            "22222222222A muted false archived true", "22222222222B muted true archived false", "22222222222C muted false archived false",
+        ])
+        XCTAssertEqual(sent.all, [])
     }
 
     func testARefreshOrARelaunchWhileTheAccountIsStillFullSaysNothingAgain() async throws {

@@ -34,7 +34,8 @@ export const POST = apiRoute(async (context) => {
   }
   const requested = links.map((link) => {
     if (!isRecord(link) || typeof link.id !== 'string' || (link.key != null && typeof link.key !== 'string')
-      || (link.note != null && typeof link.note !== 'string')) {
+      || (link.note != null && typeof link.note !== 'string')
+      || (link.muted != null && typeof link.muted !== 'boolean') || (link.archived != null && typeof link.archived !== 'boolean')) {
       throw new HttpError(400, 'Send a valid parcel link');
     }
     return {
@@ -43,6 +44,8 @@ export const POST = apiRoute(async (context) => {
       label: packageLabel({ label: link.label ?? '' }),
       // The note the parcel had on the device; its files follow once it is kept.
       note: packageNote(link.note ?? null),
+      // Quiet or archived on the device: kept so, in the claim itself, unless the account had the parcel already.
+      quiet: { muted: link.muted === true, archived: link.archived === true },
     };
   });
 
@@ -53,7 +56,8 @@ export const POST = apiRoute(async (context) => {
   let queued = false;
   for (const link of requested) {
     // A malformed id is an unknown link: the answer never says which.
-    const claimed = isParcelLinkId(link.id) ? await client.claimParcelLink(link.id, link.keyHash, link.label, link.note) : null;
+    const claimed = isParcelLinkId(link.id) ? await client.claimParcelLink(link.id, link.keyHash, link.label, link.note, link.quiet)
+      : null;
     const outcome = claimed?.outcome ?? 'unavailable';
     recordParcelClaim(outcome);
     results.push({ id: link.id, outcome, ...(claimed?.packageId ? { packageId: claimed.packageId } : {}) });

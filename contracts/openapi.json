@@ -85458,6 +85458,14 @@
             "type": "string",
             "maxLength": 1000,
             "description": "The note the parcel had on the device. Its files follow through POST /api/packages/{packageId}/files once the parcel is kept."
+          },
+          "muted": {
+            "type": "boolean",
+            "description": "Its alerts were turned off on the device: a parcel the account keeps now is kept quiet. One the account had already keeps its own setting."
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "It was archived on the device: a parcel the account keeps now is kept archived. One the account had already keeps its own setting."
           }
         }
       },

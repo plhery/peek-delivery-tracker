@@ -16,7 +16,8 @@ import {
   type KeepOutcome,
 } from './pending';
 import * as keptNotes from './keptNotes';
-import { forgetAllRecents, noteParcel, recentFor, rememberParcel, renameParcel } from './recents';
+import { noteLink } from './deviceNotes';
+import { archiveRecent, forgetAllRecents, noteParcel, recentFor, rememberParcel, renameParcel } from './recents';
 
 const mocks = vi.hoisted(() => ({
   claim: vi.fn(),
@@ -139,6 +140,17 @@ describe('keeping after sign-in', () => {
     expect(mocks.claim).toHaveBeenCalledWith([{ id: LINK_ID, key: OWNER_KEY, label: null, note: 'Door code 4812' }], auth, undefined);
     expect(handed).toHaveBeenCalledWith(LINK_ID, 'p1', auth);
     expect(recentFor(LINK_ID)).toBeNull();
+  });
+
+  it('asks the account to keep quiet and archived, in the claim itself, a parcel that was so on this device', async () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView() });
+    archiveRecent(LINK_ID, true);
+    noteLink(LINK_ID, { muted: true });
+    rememberPendingKeep(LINK_ID);
+    mocks.claim.mockResolvedValueOnce([{ id: LINK_ID, outcome: 'kept', packageId: 'p1' }]);
+    await keepPendingParcel(auth);
+    expect(mocks.claim.mock.calls[0][0]).toMatchObject([{ id: LINK_ID, muted: true, archived: true }]);
+    noteLink(LINK_ID, { muted: false });
   });
 
   it('drops the device’s copy for a parcel the account already follows, and keeps it when the account cannot take it', async () => {

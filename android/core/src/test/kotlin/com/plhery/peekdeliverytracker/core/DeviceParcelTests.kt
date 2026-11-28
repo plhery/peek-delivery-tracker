@@ -2038,14 +2038,17 @@ class DeviceParcelTests {
     private class AccountRoom(room: Int) {
         private var left = room
         private val sent = mutableListOf<List<String>>()
+        private val links = mutableListOf<ClaimParcelLink>()
 
         var room: Int
             get() = synchronized(this) { left }
             set(value) = synchronized(this) { left = value }
         val claims: List<List<String>> get() = synchronized(this) { sent.toList() }
+        val claimed: List<ClaimParcelLink> get() = synchronized(this) { links.toList() }
 
         fun answer(request: ClaimParcelsRequest): ClaimParcelsResponse = synchronized(this) {
             sent += request.links.map { it.id }
+            links += request.links
             ClaimParcelsResponse(
                 request.links.map { link ->
                     if (left > 0) {
@@ -2248,12 +2251,14 @@ class DeviceParcelTests {
             val kept = noteFiles.sending.single()
             assertEquals("Box.jpg", kept.name)
             assertEquals(clock.toEpochMilli(), kept.refusedAt)
+            // It waits for the account that kept its parcel.
+            assertEquals(session.user?.id, kept.account)
 
             // Read again from its folder, as after a restart: the refusal was kept, and the file waits.
             val restarted = DeviceNoteFiles(folder, now = { clock })
             assertEquals(clock.toEpochMilli(), restarted.sending.single().refusedAt)
             clock = clock.plusSeconds(60 * 60)
-            assertEquals(emptyList<DeviceNoteFile>(), restarted.due)
+            assertEquals(emptyList<DeviceNoteFile>(), restarted.due(kept.account))
             phone.store(session, backgroundScope).start()
             runCurrent()
             assertEquals(3, uploads().size)
@@ -2316,8 +2321,9 @@ class DeviceParcelTests {
 
     @Test
     fun signingInKeepsAParcelArchivedHereArchivedAndOneTurnedOffHereQuiet() = runTest {
+        val account = AccountRoom(3)
         val phone = signingIn(
-            listOf("22222222222A", "22222222222B", "22222222222C"), AccountRoom(3), backgroundScope,
+            listOf("22222222222A", "22222222222B", "22222222222C"), account, backgroundScope,
             archived = setOf("22222222222A"), muted = setOf("22222222222B"),
         )
         val session = phone.session(backgroundScope)
@@ -2328,11 +2334,14 @@ class DeviceParcelTests {
         store.start()
 
         assertEquals(emptyList<ClaimParcelLink>(), phone.device.claims)
-        // The archived one is archived in the account, the one turned off with its bell is muted there, and the third is
-        // left as it comes.
+        // The claim itself keeps the archived one archived in the account and the one turned off with its bell muted
+        // there, and leaves the third as it comes: no call after it that a sign-out or a lost connection could miss.
+        assertEquals(
+            listOf("22222222222A muted null archived true", "22222222222B muted true archived null", "22222222222C muted null archived null"),
+            account.claimed.map { "${it.id} muted ${it.muted} archived ${it.archived}" }.sorted(),
+        )
         val sent = phone.transport.requests.filter { it.path?.startsWith("/api/packages/") == true && it.path != "/api/packages/claim" }
-            .map { request -> "${request.method} " + if (request.path?.endsWith("/notifications") == true) "notifications ${request.body?.decodeToString()}" else "parcel" }
-        assertEquals(listOf("DELETE parcel", "PATCH notifications {\"muted\":true}"), sent.sorted())
+        assertEquals(emptyList<String?>(), sent.map { it.path })
         session.forceSignOut()
     }
 

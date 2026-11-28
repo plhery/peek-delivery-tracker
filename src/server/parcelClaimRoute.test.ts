@@ -58,11 +58,12 @@ it('keeps each link under the caller\'s own token and queues a check for every k
     { id: 'not a link id', outcome: 'unavailable' },
   ] });
   // The database sees the key's hash and the trimmed name; a malformed key is no key, a malformed id no link.
+  const loud = { muted: false, archived: false };
   expect(decide.mock.calls).toEqual([
-    ['keptLink2345', keyHash, 'Sneakers', null],
-    ['ownedLink234', keyHash, '', null],
-    ['quotaLink234', null, '', null],
-    ['unknownLink2', null, '', null],
+    ['keptLink2345', keyHash, 'Sneakers', null, loud],
+    ['ownedLink234', keyHash, '', null, loud],
+    ['quotaLink234', null, '', null, loud],
+    ['unknownLink2', null, '', null, loud],
   ]);
   expect(enqueue).toHaveBeenCalledExactlyOnceWith({ userId, packageId: kept, reason: 'added' });
   expect(wake).toHaveBeenCalledOnce();
@@ -81,9 +82,28 @@ it('keeps the note each parcel had on the device with it, its lines kept and the
   const response = await claim({ links });
   expect(response.status).toBe(200);
   expect(decide).toHaveBeenCalledTimes(20);
-  expect(decide.mock.calls[0]).toEqual(['keptLinkabau', keyHash, 'ü'.repeat(80), 'Size 42\nReturn by Friday']);
+  expect(decide.mock.calls[0]).toEqual(['keptLinkabau', keyHash, 'ü'.repeat(80), 'Size 42\nReturn by Friday', { muted: false, archived: false }]);
   expect(decide.mock.calls[1]![3]).toBeNull();
   expect(decide.mock.calls[2]![3]).toBe(note);
+});
+
+it('keeps a parcel quiet or archived on the device so, in the claim itself', async () => {
+  const decide = vi.spyOn(SupabaseUserClient.prototype, 'claimParcelLink').mockResolvedValue({ outcome: 'kept', packageId: kept });
+  const response = await claim({ links: [
+    { id: 'quietLink234', key: ownerKey, muted: true },
+    { id: 'storeLink234', key: ownerKey, archived: true, muted: false },
+  ] });
+  expect(response.status).toBe(200);
+  expect(decide.mock.calls.map((call) => call[4])).toEqual([{ muted: true, archived: false }, { muted: false, archived: true }]);
+});
+
+it.each([
+  [{ links: [{ id: 'keptLink2345', muted: 'yes' }] }],
+  [{ links: [{ id: 'keptLink2345', archived: 1 }] }],
+])('refuses a quiet or archived flag that is not true or false before asking the database', async (body) => {
+  const decide = vi.spyOn(SupabaseUserClient.prototype, 'claimParcelLink');
+  expect((await claim(body)).status).toBe(400);
+  expect(decide).not.toHaveBeenCalled();
 });
 
 it.each([

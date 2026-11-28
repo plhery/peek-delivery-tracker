@@ -3350,20 +3350,24 @@ export class SupabaseUserClient extends SupabaseClient {
   }
 
   /**
-   * Keeps the parcel behind a link in this account. Null when the link is
-   * unknown or the caller has no right to it; the database does not say which.
+   * Keeps the parcel behind a link in this account, quiet (`muted`) or archived as it was on the device when the account
+   * keeps it now. Null when the link is unknown or the caller has no right to it; the database does not say which.
    */
   async claimParcelLink(
     linkId: string,
     ownerKeyHash: string | null,
     label: string,
     note: string | null = null,
+    { muted = false, archived = false }: { muted?: boolean; archived?: boolean } = {},
   ): Promise<{ outcome: 'kept' | 'already' | 'quota'; packageId: string | null } | null> {
     let result: unknown;
     try {
       result = await this.request('/rest/v1/rpc/claim_parcel_link', {
         method: 'POST',
-        body: { p_link_id: linkId, p_owner_key_hash: ownerKeyHash, p_label: label, ...(note ? { p_note: note } : {}) },
+        body: {
+          p_link_id: linkId, p_owner_key_hash: ownerKeyHash, p_label: label, ...(note ? { p_note: note } : {}),
+          ...(muted ? { p_muted: true } : {}), ...(archived ? { p_archived: true } : {}),
+        },
       });
     } catch (error) {
       if (error instanceof SupabaseError && error.code === 'P0002') return null;

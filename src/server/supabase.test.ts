@@ -842,6 +842,17 @@ describe('one-off parcels and their links', () => {
     request.mockResolvedValueOnce({ outcome: 'stolen' });
     await expect(user.claimParcelLink('k7Qm2xHd9RtW', null, '')).rejects.toThrow('kept parcel');
   });
+
+  it('keeps a parcel quiet or archived in the claim itself, and names neither when it is not', async () => {
+    const user = new SupabaseUserClient('https://database.example', 'public-key', 'token');
+    const request = vi.spyOn(user, 'request').mockResolvedValue({ outcome: 'kept', package_id: 'package-2' });
+    await user.claimParcelLink('k7Qm2xHd9RtW', null, '', null, { muted: true, archived: true });
+    await user.claimParcelLink('k7Qm2xHd9RtW', null, '', null, { muted: false, archived: false });
+    expect(request.mock.calls.map(([, options]) => options)).toEqual([
+      { method: 'POST', body: { p_link_id: 'k7Qm2xHd9RtW', p_owner_key_hash: null, p_label: '', p_muted: true, p_archived: true } },
+      { method: 'POST', body: { p_link_id: 'k7Qm2xHd9RtW', p_owner_key_hash: null, p_label: '' } },
+    ]);
+  });
 });
 
 describe('tracking audit PostgREST client', () => {

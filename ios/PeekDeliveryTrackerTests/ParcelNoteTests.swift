@@ -343,7 +343,7 @@ final class ParcelNoteTests: XCTestCase {
         }
         let start = Date(timeIntervalSince1970: 1_800_000_000)
 
-        let first = await store.sendKept(now: start, send)
+        let first = await store.sendKept(account: nil, now: start, send)
         XCTAssertEqual(first, 0)
         XCTAssertEqual(offered.count, 5)
         XCTAssertEqual(store.kept.map(\.name).sorted(), ["Down.pdf", "Full.pdf"])
@@ -351,17 +351,71 @@ final class ParcelNoteTests: XCTestCase {
         // Relaunched an hour later: the one with no room waits, the other is offered again.
         let again = LocalNoteFiles(space: store.space, root: root)
         offered = []
-        let soon = await again.sendKept(now: start.addingTimeInterval(3_600), send)
+        let soon = await again.sendKept(account: nil, now: start.addingTimeInterval(3_600), send)
         XCTAssertEqual(soon, 0)
         XCTAssertEqual(offered, ["Down.pdf"])
 
         // A day later both go, and leave the device.
         statuses = [:]
         offered = []
-        let later = await again.sendKept(now: start.addingTimeInterval(25 * 3_600), send)
+        let later = await again.sendKept(account: nil, now: start.addingTimeInterval(25 * 3_600), send)
         XCTAssertEqual(later, 2)
         XCTAssertEqual(offered.sorted(), ["Down.pdf", "Full.pdf"])
         XCTAssertEqual(LocalNoteFiles(space: store.space, root: root).all, [])
+    }
+
+    /// A file the account had no room for waits a day, then two, four, eight and sixteen, after a relaunch too; refused a
+    /// sixth time, a month on, it leaves the device instead of ten megabytes going out for good.
+    func testAKeptFileWithNoRoomWaitsLongerEachTimeAndLeavesAfterAMonth() async throws {
+        let root = FileManager.default.temporaryDirectory.appending(path: "NoteFilesTests-\(UUID().uuidString)", directoryHint: .isDirectory)
+        let store = files("full", root: root)
+        try store.add(PreparedNoteFile(data: pdf().data, name: "Full.pdf", type: .applicationPdf), to: "link-full")
+        store.handOver("link-full", to: UUID())
+        var offered = 0
+        func send(_ packageID: UUID, _ file: PreparedNoteFile) async throws {
+            offered += 1
+            throw NoteFileError(problem: .upload(status: 409, code: .accountFilesFull), status: 409)
+        }
+        var now = Date(timeIntervalSince1970: 1_800_000_000)
+        _ = await store.sendKept(account: nil, now: now, send)
+        XCTAssertEqual(offered, 1)
+        for days in [1.0, 2, 4, 8] {
+            // Not before its wait is over, a relaunch or not.
+            _ = await LocalNoteFiles(space: store.space, root: root).sendKept(account: nil, now: now.addingTimeInterval(days * 86_400 - 3_600), send)
+            XCTAssertEqual(offered, Int(log2(days)) + 1, "offered again before \(days) days")
+            now = now.addingTimeInterval(days * 86_400 + 60)
+            _ = await LocalNoteFiles(space: store.space, root: root).sendKept(account: nil, now: now, send)
+            XCTAssertEqual(offered, Int(log2(days)) + 2)
+            XCTAssertEqual(LocalNoteFiles(space: store.space, root: root).kept.count, 1)
+        }
+        now = now.addingTimeInterval(16 * 86_400 + 60)
+        _ = await LocalNoteFiles(space: store.space, root: root).sendKept(account: nil, now: now, send)
+        XCTAssertEqual(offered, 6)
+        XCTAssertEqual(LocalNoteFiles(space: store.space, root: root).all, [])
+    }
+
+    /// A file waits for the account that kept its parcel: another signed in meanwhile neither sends it nor, told that the
+    /// parcel is none of its own, deletes it. One handed over by an earlier version, without an account, goes to the next.
+    func testAKeptFileWaitsForTheAccountThatKeptItsParcel() async throws {
+        let store = files()
+        let alex = UUID(), sam = UUID()
+        try store.add(PreparedNoteFile(data: pdf().data, name: "Alex.pdf", type: .applicationPdf), to: "link-alex")
+        try store.add(PreparedNoteFile(data: pdf().data, name: "Earlier.pdf", type: .applicationPdf), to: "link-earlier")
+        store.handOver("link-alex", to: UUID(), account: alex)
+        store.handOver("link-earlier", to: UUID())
+        var offered: [String] = []
+        func gone(_ packageID: UUID, _ file: PreparedNoteFile) async throws {
+            offered.append(file.name)
+            throw NoteFileError(problem: .upload(status: 404, code: nil), status: 404)
+        }
+        _ = await store.sendKept(account: sam, gone)
+        XCTAssertEqual(offered, ["Earlier.pdf"])
+        XCTAssertEqual(store.kept.map(\.name), ["Alex.pdf"])
+        offered = []
+        let sent = await store.sendKept(account: alex) { _, file in offered.append(file.name) }
+        XCTAssertEqual(sent, 1)
+        XCTAssertEqual(offered, ["Alex.pdf"])
+        XCTAssertEqual(store.kept, [])
     }
 
     // MARK: - The demo

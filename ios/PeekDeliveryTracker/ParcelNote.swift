@@ -419,8 +419,12 @@ struct LocalNoteFile: Codable, Equatable, Sendable {
     /// The account's parcel it goes to, once the parcel was kept there: it is sent there, and leaves the device once it
     /// arrived.
     var packageID: UUID? = nil
-    /// When the account last had no room for it: it is offered again a day later.
+    /// The account that kept the parcel: only it sends the file, so another signed in meanwhile neither sends it nor, told
+    /// the parcel is none of its own, deletes it. Nil when an earlier version handed it over: the next account sends it.
+    var account: UUID? = nil
+    /// When the account last had no room for it, and how many times in a row (`LocalNoteFiles.refusedWait`).
     var refusedAt: String? = nil
+    var refusals: Int? = nil
 }
 
 /// The photos and PDFs of the notes kept on this device, in Application Support (never the App Group container,
@@ -524,28 +528,36 @@ final class LocalNoteFiles {
         relabel(old) { $0.key = new }
     }
 
-    /// Marks a parcel's files for the account's parcel it was kept as: they are sent there, and forgetting the link keeps
-    /// them.
+    /// Marks a parcel's files for the account's parcel it was kept as, by `account`: they are sent there, and forgetting
+    /// the link keeps them.
     @discardableResult
-    func handOver(_ key: String, to packageID: UUID) -> Int {
-        relabel(key) { $0.packageID = packageID }
+    func handOver(_ key: String, to packageID: UUID, account: UUID? = nil) -> Int {
+        relabel(key) {
+            $0.packageID = packageID
+            $0.account = account
+        }
     }
 
-    /// How long a file the account had no room for waits before it is offered again.
+    /// How long a file the account had no room for waits before it is offered again: a day, then twice as long after each
+    /// refusal in a row. Refused `refusalsKept` times, a sixth refusal sends it off the device: about a month of asking
+    /// for a parcel that already holds five files, or an account whose files fill its 200 MB.
     static let refusedWait: TimeInterval = 24 * 60 * 60
+    static let refusalsKept = 5
 
-    /// Sends the files waiting for an account's parcels, one at a time, while `going` holds. Each leaves the device once
-    /// it arrived, or once the service says it never will: 404, the parcel has gone; 413 or 415, its size or type. One
-    /// the account had no room for (409) waits a day, after a relaunch too; any other failure, the next start. `send`
-    /// throws a `NoteFileError` with the service's status. Returns how many arrived.
+    /// Sends the files waiting for `account`'s parcels, one at a time, while `going` holds. Each leaves the device once
+    /// it arrived, or once the service says it never will: 404, the parcel has gone; 413 or 415, its size or type; 409 a
+    /// sixth time in a row, it has had no room for a month. One the account had no room for (409) waits a day, then two,
+    /// four, eight and sixteen, after a relaunch too; any other failure, the next start. A file another account kept
+    /// waits for that account. `send` throws a `NoteFileError` with the service's status. Returns how many arrived.
     @MainActor
-    func sendKept(now: Date = Date(), going: () -> Bool = { true },
+    func sendKept(account: UUID?, now: Date = Date(), going: () -> Bool = { true },
                   _ send: (UUID, PreparedNoteFile) async throws -> Void) async -> Int {
         var sent = 0
-        for file in kept {
+        for file in kept where file.account == nil || file.account == account {
             guard going(), let packageID = file.packageID else { return sent }
             // Not ten megabytes again at every start for an account that has no room.
-            if let refused = file.refusedAt.flatMap(DateParser.date), now.timeIntervalSince(refused) < Self.refusedWait { continue }
+            if let refused = file.refusedAt.flatMap(DateParser.date),
+               now.timeIntervalSince(refused) < Self.refusedWait * pow(2, Double(max(file.refusals ?? 1, 1) - 1)) { continue }
             guard let data = data(of: file.id) else { remove([file.id]); continue }
             do {
                 try await send(packageID, PreparedNoteFile(data: data, name: file.name, type: file.type, width: file.width, height: file.height))
@@ -554,8 +566,12 @@ final class LocalNoteFiles {
             } catch let error as NoteFileError where [404, 413, 415].contains(error.status) {
                 remove([file.id])
             } catch let error as NoteFileError where error.status == 409 {
-                if let index = all.firstIndex(where: { $0.id == file.id }) {
+                let refusals = (file.refusals ?? (file.refusedAt == nil ? 0 : 1)) + 1
+                if refusals > Self.refusalsKept {
+                    remove([file.id])
+                } else if let index = all.firstIndex(where: { $0.id == file.id }) {
                     all[index].refusedAt = DateParser.isoString(now)
+                    all[index].refusals = refusals
                     save()
                 }
             } catch {

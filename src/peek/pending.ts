@@ -4,6 +4,7 @@ import { ParcelAlreadyExistsError, type ParcelRepo } from '../types';
 import { claimParcelLinks, forgetParcelLink, readParcelLink } from './links';
 import { isParcelLinkId, type ParcelClaimResult } from './linkModel';
 import { handOverNoteFiles, moveNoteIntoDemo } from './keptNotes';
+import { linkNote } from './deviceNotes';
 import { forgetRecent, recentFor } from './recents';
 
 /**
@@ -115,7 +116,10 @@ const settled = (outcome: KeepOutcome['outcome']) => outcome === 'kept' || outco
  */
 export async function keepParcelLink(id: string, auth: ApiAuth, signal?: AbortSignal): Promise<KeepOutcome> {
   const recent = recentFor(id);
-  const [result] = await claimParcelLinks([{ id, key: recent?.key, label: recent?.name, note: recent?.note }], auth, signal);
+  const [result] = await claimParcelLinks([{
+    id, key: recent?.key, label: recent?.name, note: recent?.note, muted: linkNote(id).muted || undefined,
+    archived: recent?.archivedAt ? true : undefined,
+  }], auth, signal);
   const outcome: KeepOutcome = {
     id,
     outcome: result?.outcome ?? 'unavailable',

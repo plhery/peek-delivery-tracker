@@ -1,4 +1,4 @@
-import { authenticatedFetch, type ApiAuth } from '../../lib/apiClient';
+import type { ApiAuth } from '../../lib/apiClient';
 import { ParcelAlreadyExistsError, type ParcelRepo } from '../../types';
 import { linkNote } from '../deviceNotes';
 import { claimParcelLinks, forgetParcelLink, readParcelLink } from '../links';
@@ -67,39 +67,24 @@ export interface BroughtAlong {
 }
 
 /** Archives a parcel the account has just taken: one the device had archived stays archived. A failure leaves it listed. */
-async function archiveKept(packageId: string, auth: ApiAuth): Promise<void> {
-  await authenticatedFetch(`/api/packages/${encodeURIComponent(packageId)}`, auth, { method: 'DELETE', signal: auth.signal })
-    .catch(() => undefined);
-}
-
-/** Mutes a parcel the account has just taken whose alerts were turned off here. A failure leaves its alerts on. */
-async function muteKept(packageId: string, auth: ApiAuth): Promise<void> {
-  await authenticatedFetch(`/api/packages/${encodeURIComponent(packageId)}/notifications`, auth, {
-    method: 'PATCH',
-    body: JSON.stringify({ muted: true }),
-    signal: auth.signal,
-  }).catch(() => undefined);
-}
-
 /**
  * Keeps several of the device's parcels in the account, twenty to a request. A
  * parcel the account now has leaves the device as soon as its request answers,
  * archived in the account when it was archived here, and muted there when its
- * alerts were turned off here, unless the account had it already.
+ * alerts were turned off here, unless the account had it already: the claim
+ * itself says so, so no later request can leave it out.
  */
 export async function bringAlong(parcels: readonly RecentParcel[], auth: ApiAuth): Promise<BroughtAlong> {
   const outcome: BroughtAlong = { brought: 0, refused: [] };
   for (let start = 0; start < parcels.length; start += CLAIM_BATCH) {
     const batch = parcels.slice(start, start + CLAIM_BATCH);
-    const results = await claimParcelLinks(batch.map(({ id, key, name, note }) => ({ id, key, label: name, note })), auth, auth.signal);
+    const results = await claimParcelLinks(batch.map(({ id, key, name, note, archivedAt }) => ({
+      id, key, label: name, note, muted: linkNote(id).muted || undefined, archived: archivedAt ? true : undefined,
+    })), auth, auth.signal);
     for (const result of results) {
       if (result.outcome === 'quota' || result.outcome === 'unavailable') {
         outcome.refused.push({ id: result.id, reason: result.outcome });
         continue;
-      }
-      if (result.outcome === 'kept' && result.packageId) {
-        if (batch.find((recent) => recent.id === result.id)?.archivedAt) await archiveKept(result.packageId, auth);
-        if (linkNote(result.id).muted) await muteKept(result.packageId, auth);
       }
       await handOverNoteFiles(result.id, result.packageId, auth);
       forgetRecent(result.id);

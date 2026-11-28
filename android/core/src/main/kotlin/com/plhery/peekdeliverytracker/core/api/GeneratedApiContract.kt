@@ -5474,6 +5474,8 @@ data class ClaimParcelLink(
     val key: String? = null,
     val label: String? = null,
     val note: String? = null,
+    val muted: Boolean? = null,
+    val archived: Boolean? = null,
 )
 
 @Serializable

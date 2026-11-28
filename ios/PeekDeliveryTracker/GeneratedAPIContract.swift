@@ -5627,6 +5627,8 @@ struct ClaimParcelLink: Codable, Equatable, Hashable, Sendable, Identifiable {
     var key: String? = nil
     var label: String? = nil
     var note: String? = nil
+    var muted: Bool? = nil
+    var archived: Bool? = nil
 }
 
 struct ClaimParcelsRequest: Codable, Equatable, Hashable, Sendable {

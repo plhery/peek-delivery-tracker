@@ -149,6 +149,42 @@ describe("a guest's note files", () => {
     expect(deviceNoteFiles()).toEqual([]);
   });
 
+  it('waits twice as long after each refusal, and lets the file go after the sixth', async () => {
+    await addDeviceNoteFile('link-1', picked('Box.jpg', 10));
+    await handOverDeviceNoteFiles('link-1', 'package-1', 'user-1');
+    let at = Date.parse('2026-11-26T10:00:00Z');
+    const send = vi.fn<SendNoteFile>(async () => { throw new NoteFileError('account-full', 10, 409); });
+    for (const days of [1, 2, 4, 8, 16]) {
+      expect(await sendKeptNoteFiles(send, () => at, 'user-1')).toEqual({ sent: 0, left: 1 });
+      at += days * 86_400_000 - 60_000;
+      // Read again from the database, as on the next visit: the count was kept with the file.
+      resetDeviceNoteFilesForTests();
+      const calls = send.mock.calls.length;
+      expect(await sendKeptNoteFiles(send, () => at, 'user-1')).toEqual({ sent: 0, left: 1 });
+      expect(send).toHaveBeenCalledTimes(calls);
+      at += 60_000;
+    }
+    expect(deviceNoteFiles()[0].refusals).toBe(5);
+    expect(await sendKeptNoteFiles(send, () => at, 'user-1')).toEqual({ sent: 0, left: 1 });
+    expect(send).toHaveBeenCalledTimes(6);
+    expect(deviceNoteFiles()).toEqual([]);
+    expect(idb.rows('peek-parcel-files', 'files')).toEqual([]);
+  });
+
+  it('keeps a file for the account that kept its parcel; one handed over before accounts were noted goes to any', async () => {
+    await addDeviceNoteFile('link-1', picked('Box.jpg'));
+    await addDeviceNoteFile('link-2', picked('Door.jpg'));
+    await handOverDeviceNoteFiles('link-1', 'package-1', 'user-1');
+    await handOverDeviceNoteFiles('link-2', 'package-2');
+    const send = vi.fn<SendNoteFile>(async () => undefined);
+    expect(await sendKeptNoteFiles(send, Date.now, 'user-2')).toEqual({ sent: 1, left: 0 });
+    expect(send.mock.calls.map(([packageId]) => packageId)).toEqual(['package-2']);
+    expect(deviceNoteFiles()).toEqual([expect.objectContaining({ name: 'Box.jpg', account: 'user-1' })]);
+    resetDeviceNoteFilesForTests();
+    expect(await sendKeptNoteFiles(send, Date.now, 'user-1')).toEqual({ sent: 1, left: 0 });
+    expect(deviceNoteFiles()).toEqual([]);
+  });
+
   it('joins a send already on its way, and sends what was handed over meanwhile', async () => {
     await addDeviceNoteFile('link-1', picked('Box.jpg'));
     await handOverDeviceNoteFiles('link-1', 'package-1');

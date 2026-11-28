@@ -78852,6 +78852,8 @@ export interface ApiClaimParcelLink {
   "key"?: string;
   "label"?: string;
   "note"?: string;
+  "muted"?: boolean;
+  "archived"?: boolean;
 }
 
 export interface ApiClaimParcelsRequest {

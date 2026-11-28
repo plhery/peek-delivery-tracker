@@ -195,6 +195,65 @@ class ParcelNoteTests {
         }
     }
 
+    /** As the iPhone's ParcelNoteTests: an account with no room is asked a day later, then twice as long each time. */
+    @Test
+    fun aKeptFileWithNoRoomWaitsLongerEachTimeAndLeavesAfterAMonth() {
+        val folder = Files.createTempDirectory("note-files").toFile()
+        try {
+            var clock = Instant.parse("2026-11-26T10:00:00Z")
+            val files = DeviceNoteFiles(folder, now = { clock })
+            val account = UUID.randomUUID()
+            files.add("22222222222A", NoteFileUpload(byteArrayOf(1, 2, 3), "Box.jpg", PackageFileType.ImageJpeg, 400, 300))
+            files.handOver("22222222222A", UUID.randomUUID(), account)
+            val id = files.sending.single().id
+            for (days in listOf(1L, 2, 4, 8, 16)) {
+                assertEquals(listOf(id), files.due(account).map { it.id })
+                files.refused(id)
+                clock = clock.plusSeconds(days * 86_400 - 60)
+                assertEquals("Asked again before $days days", emptyList<DeviceNoteFile>(), files.due(account))
+                clock = clock.plusSeconds(60)
+            }
+            // Read again, as after a restart: the count was kept, and the sixth refusal is the last.
+            val restarted = DeviceNoteFiles(folder, now = { clock })
+            assertEquals(5, restarted.sending.single().refusals)
+            restarted.refused(id)
+            assertEquals(emptyList<DeviceNoteFile>(), restarted.all)
+            assertEquals(emptyList<String>(), folder.list()!!.toList())
+
+            // One refused before the count was kept counts as refused once.
+            val old = DeviceNoteFiles(folder, now = { clock })
+            old.add("22222222222B", NoteFileUpload(byteArrayOf(1), "Old.jpg", PackageFileType.ImageJpeg))
+            old.handOver("22222222222B", UUID.randomUUID(), account)
+            old.refused(old.sending.single().id)
+            assertEquals(1, old.sending.single().refusals)
+        } finally {
+            folder.deleteRecursively()
+        }
+    }
+
+    /** A file handed over to one account waits for it: another signing in on the phone isn't sent it. */
+    @Test
+    fun aKeptFileWaitsForTheAccountThatKeptItsParcel() {
+        val folder = Files.createTempDirectory("note-files").toFile()
+        try {
+            val files = DeviceNoteFiles(folder)
+            val first = UUID.randomUUID()
+            val photo = NoteFileUpload(byteArrayOf(1, 2, 3), "Box.jpg", PackageFileType.ImageJpeg, 400, 300)
+            files.add("22222222222A", photo)
+            files.add("22222222222B", photo)
+            files.handOver("22222222222A", UUID.randomUUID(), first)
+            // Handed over before the account was noted: any account that signs in may send it, as before.
+            files.handOver("22222222222B", UUID.randomUUID())
+            val (mine, unnoted) = files.sending.partition { it.account == first }
+            assertEquals(1, mine.size)
+            assertEquals(listOf(unnoted.single().id), files.due(UUID.randomUUID()).map { it.id })
+            assertEquals((mine + unnoted).map { it.id }.toSet(), files.due(first).map { it.id }.toSet())
+            assertEquals(first, DeviceNoteFiles(folder).sending.first { it.linkId == "22222222222A" }.account)
+        } finally {
+            folder.deleteRecursively()
+        }
+    }
+
     @Test
     fun theDemosNoteSpeaksTheDemosLanguageAndItsFilesAreDrawn() {
         val demo = DemoRepository(MemoryDefaults(), language = { AppLanguage.Fr })

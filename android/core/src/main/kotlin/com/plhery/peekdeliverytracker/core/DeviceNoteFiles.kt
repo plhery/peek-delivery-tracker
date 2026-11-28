@@ -15,8 +15,9 @@ import kotlinx.serialization.json.Json
 
 /**
  * A file of a guest's note, kept on this phone beside its link (`linkId`). Once an account keeps the parcel, it is
- * marked for the account's parcel (`packageId`) until it has been sent there. `refusedAt` (ms) is when the account last
- * had no room for it: it is offered again a day later.
+ * marked for the account's parcel (`packageId`) and that account (`account`, none on a file marked before it was noted)
+ * until it has been sent there. `refusedAt` (ms) is when the account last had no room for it, `refusals` how many times
+ * in a row: it is offered again a day later, then twice as long after each refusal ([DeviceNoteFiles.due]).
  */
 @Serializable
 data class DeviceNoteFile(
@@ -30,6 +31,8 @@ data class DeviceNoteFile(
     val createdAt: String,
     @Serializable(with = UuidSerializer::class) val packageId: UUID? = null,
     val refusedAt: Long? = null,
+    @Serializable(with = UuidSerializer::class) val account: UUID? = null,
+    val refusals: Int? = null,
 ) {
     val fileType: PackageFileType get() = PackageFileType.fromRawValue(type) ?: PackageFileType.ImageJpeg
 
@@ -69,19 +72,29 @@ class DeviceNoteFiles(
     /** The files an account's parcel is still to receive. */
     val sending: List<DeviceNoteFile> get() = files.filter { it.packageId != null }
 
-    /** Those to send now: one the account had no room for isn't sent again, 10 MB at a time, before a day has passed. */
-    val due: List<DeviceNoteFile>
-        get() {
-            val at = now().toEpochMilli()
-            return sending.filter { file -> file.refusedAt.let { it == null || at - it >= REFUSED_WAIT_MS } }
+    /**
+     * Those to send now to `account`'s parcels: another account's wait for it to sign in again. One the account had no
+     * room for isn't sent again before a day has passed, then two, four, eight and sixteen.
+     */
+    fun due(account: UUID?): List<DeviceNoteFile> {
+        val at = now().toEpochMilli()
+        return sending.filter { file ->
+            (file.account == null || file.account == account) &&
+                file.refusedAt.let { it == null || at - it >= wait(file.refusals) }
         }
+    }
 
-    /** Notes that the account had no room for file `id`, now. */
+    /**
+     * Notes that the account had no room for file `id`, now. After [REFUSALS_KEPT] refusals in a row, about a month,
+     * the file leaves the phone: the account's room isn't coming back.
+     */
     @Synchronized
     fun refused(id: UUID) {
-        if (files.none { it.id == id }) return
+        val file = files.firstOrNull { it.id == id } ?: return
+        val refusals = (file.refusals ?: if (file.refusedAt == null) 0 else 1) + 1
+        if (refusals > REFUSALS_KEPT) return remove(id)
         val at = now().toEpochMilli()
-        save(files.map { if (it.id == id) it.copy(refusedAt = at) else it })
+        save(files.map { if (it.id == id) it.copy(refusedAt = at, refusals = refusals) else it })
     }
 
     /** Where the bytes of file `id` are, while it is kept here. */
@@ -134,9 +147,10 @@ class DeviceNoteFiles(
         save(files - gone.toSet())
     }
 
-    /** Marks link `linkId`'s files for the account's parcel `packageId`; returns how many. */
+    /** Marks link `linkId`'s files for parcel `packageId` of `account`; returns how many. */
     @Synchronized
-    fun handOver(linkId: String, packageId: UUID): Int = relabel(linkId) { it.copy(packageId = packageId) }
+    fun handOver(linkId: String, packageId: UUID, account: UUID? = null): Int =
+        relabel(linkId) { it.copy(packageId = packageId, account = account) }
 
     /** Moves the files of a link that gave way to another of the same parcel. */
     @Synchronized
@@ -186,8 +200,13 @@ class DeviceNoteFiles(
     }
 
     companion object {
-        /** How long a file the account had no room for waits before it is offered again. */
+        /** How long a file the account had no room for waits before it is offered again, the first time. */
         const val REFUSED_WAIT_MS = 24L * 60 * 60 * 1000
+
+        /** How many refusals in a row a file waits through. */
+        const val REFUSALS_KEPT = 5
+
+        private fun wait(refusals: Int?): Long = REFUSED_WAIT_MS shl (maxOf(refusals ?: 1, 1) - 1).coerceAtMost(REFUSALS_KEPT)
 
         private const val INDEX = "files.json"
 

@@ -188,6 +188,25 @@ describe("a guest's note kept in an account", () => {
     expect(deviceNoteFiles()).toHaveLength(1);
   });
 
+  it('leaves a file to the account that kept its parcel when another signs in', async () => {
+    await addDeviceNoteFile(LINK_ID, picked('Box.jpg'));
+    FakeUpload.status = 500;
+    await handOverNoteFiles(LINK_ID, 'package-1', auth);
+    await vi.waitFor(() => expect(FakeUpload.sent).toHaveLength(1));
+    await settle();
+
+    // Another account: the file isn't sent to its account, where the parcel isn't, and isn't dropped for it.
+    FakeUpload.sent = [];
+    FakeUpload.status = 404;
+    expect(await sendKeptFiles({ ...auth, userId: 'user-2' })).toEqual({ sent: 0, left: 0 });
+    expect(FakeUpload.sent).toEqual([]);
+    expect(deviceNoteFiles()).toHaveLength(1);
+
+    FakeUpload.status = 201;
+    expect(await sendKeptFiles(auth)).toEqual({ sent: 1, left: 0 });
+    expect(deviceNoteFiles()).toEqual([]);
+  });
+
   it('moves into the demo’s parcel, words and files', async () => {
     await addDeviceNoteFile(LINK_ID, picked('Box.jpg'));
     const added: string[] = [];

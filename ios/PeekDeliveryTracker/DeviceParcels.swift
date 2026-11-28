@@ -799,7 +799,9 @@ final class DeviceParcels {
     /// Once the account has the parcel behind the link, its files are marked for the account's parcel: they are sent
     /// there, and leave this iPhone once they arrived.
     @discardableResult
-    func handOverNoteFiles(linkID: String, to packageID: UUID) -> Int { noteFiles.handOver(linkID, to: packageID) }
+    func handOverNoteFiles(linkID: String, to packageID: UUID, account: UUID?) -> Int {
+        noteFiles.handOver(linkID, to: packageID, account: account)
+    }
 
     /// The note of an entry that gives way to `entry` goes along: its words where `entry` has none, and its files.
     private func inherit(_ old: DeviceParcel, into entry: inout DeviceParcel) {
@@ -1041,9 +1043,17 @@ final class DeviceParcels {
     /// link still to be forgotten, nor a copy no longer updated: neither has a key.
     var claims: [ClaimParcelLink] {
         let listed = entries.compactMap { entry -> ClaimParcelLink? in
-            if entry.isViewer { return entry.canKeep == true ? ClaimParcelLink(id: entry.linkID, label: entry.label.nonEmpty) : nil }
+            // Archived or quiet here, the account keeps it so, in the claim itself.
+            let muted: Bool? = entry.isMuted ? true : nil
+            let archived: Bool? = entry.archivedAt != nil ? true : nil
+            if entry.isViewer {
+                return entry.canKeep == true
+                    ? ClaimParcelLink(id: entry.linkID, label: entry.label.nonEmpty, muted: muted, archived: archived) : nil
+            }
             // Its note goes with it; its files follow once it is kept (`handOverNoteFiles`).
-            return keys[entry.linkID].map { ClaimParcelLink(id: entry.linkID, key: $0, label: entry.label.nonEmpty, note: entry.note) }
+            return keys[entry.linkID].map {
+                ClaimParcelLink(id: entry.linkID, key: $0, label: entry.label.nonEmpty, note: entry.note, muted: muted, archived: archived)
+            }
         }
         let unlisted = keys.filter { pair in !entries.contains { $0.linkID == pair.key } }
             .sorted { $0.key < $1.key }

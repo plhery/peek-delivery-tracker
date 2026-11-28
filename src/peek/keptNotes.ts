@@ -9,7 +9,8 @@ import {
 /**
  * A guest's note goes with the parcel into the account: its words with the claim (`ParcelClaim.note`), its files
  * afterwards, one upload each to the account's parcel. A file leaves the device once it arrived, or once the service
- * says it never will; one that could not go waits for the next visit, a day when the account had no room for it.
+ * says it never will; one that could not go waits for the next visit, a day or more when the account had no room for
+ * it. Each waits for the account that kept its parcel.
  */
 export function sendKeptFiles(auth: ApiAuth): Promise<SentFiles> {
   return sendKeptNoteFiles(async (packageId, blob, name) => {
@@ -21,13 +22,13 @@ export function sendKeptFiles(auth: ApiAuth): Promise<SentFiles> {
       if (error instanceof NoteFileError && (error.status === 404 || error.status === 413 || error.status === 415)) return;
       throw error;
     }
-  });
+  }, Date.now, auth.userId);
 }
 
 /** Once the account has the parcel, its files are marked for it, so forgetting the link keeps them, and sent. */
 export async function handOverNoteFiles(linkId: string, packageId: string | undefined, auth: ApiAuth): Promise<void> {
   if (!packageId) return;
-  if (await handOverDeviceNoteFiles(linkId, packageId)) void sendKeptFiles(auth);
+  if (await handOverDeviceNoteFiles(linkId, packageId, auth.userId)) void sendKeptFiles(auth);
 }
 
 /** The demo's counterpart: the note and its files move into the demo parcel, and leave the device. */

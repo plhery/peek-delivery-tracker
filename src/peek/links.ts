@@ -445,11 +445,13 @@ export function createAccountFeedback(auth: ApiAuth): (packageId: string, feedba
  */
 export async function claimParcelLinks(links: ParcelClaim[], auth: ApiAuth, signal?: AbortSignal): Promise<ParcelClaimResult[]> {
   const body: ApiClaimParcelsRequest = {
-    links: links.map(({ id, key, label, note }) => ({
+    links: links.map(({ id, key, label, note, muted, archived }) => ({
       id,
       ...(key ? { key } : {}),
       ...(label?.trim() ? { label: label.trim() } : {}),
       ...(note?.trim() ? { note: note.trim() } : {}),
+      ...(muted ? { muted } : {}),
+      ...(archived ? { archived } : {}),
     })),
   };
   let response: Response;

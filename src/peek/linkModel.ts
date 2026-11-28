@@ -96,6 +96,9 @@ export interface ParcelClaim {
   label?: string | null;
   /** The private note this device kept about the parcel, which goes with it into the account. */
   note?: string | null;
+  /** Its alerts were turned off here, or it was archived here: the account keeps it so, unless it had it already. */
+  muted?: boolean;
+  archived?: boolean;
 }
 
 export interface ParcelLinksClient {

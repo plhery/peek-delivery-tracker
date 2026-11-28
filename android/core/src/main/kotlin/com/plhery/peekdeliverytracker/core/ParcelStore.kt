@@ -1248,9 +1248,10 @@ class ParcelStore(
 
     /**
      * Sends the files of guest notes that the account now keeps, one at a time, each leaving the phone once it
-     * arrived. One that fails stays for the next start, and one the account had no room for (409) for a start a day
-     * later. One whose parcel has left the account (404), or whose size or type the service refuses (413, 415), has
-     * nowhere to go. Returns how many arrived.
+     * arrived; those another account kept wait for it. One that fails stays for the next start, and one the account
+     * had no room for (409) for a start a day later, then longer each time, until it leaves after about a month. One
+     * whose parcel has left the account (404), or whose size or type the service refuses (413, 415), has nowhere to
+     * go. Returns how many arrived.
      */
     private suspend fun sendKeptNoteFiles(): Int {
         val files = device.noteFiles ?: return 0
@@ -1267,9 +1268,10 @@ class ParcelStore(
     private var sendingNoteFiles = false
 
     private suspend fun sendNoteFiles(files: DeviceNoteFiles): Int {
+        val account = session.user?.id ?: return 0
         val generation = session.generation
         var sent = 0
-        for (file in files.due) {
+        for (file in files.due(account)) {
             val packageId = file.packageId ?: continue
             val bytes = withContext(noteFileContext) { files.bytes(file.id) }
             if (bytes == null) {
@@ -2395,15 +2397,10 @@ class ParcelStore(
             }
             if (generation != session.generation) return
             for (result in response.results) {
-                // The note's words went with the claim; its files follow, to the parcel the account has now.
+                // The note's words, and whether the parcel was archived or quiet here, went with the claim; its files
+                // follow, to the parcel this account has now.
                 val kept = result.outcome == ClaimParcelResultOutcome.Kept || result.outcome == ClaimParcelResultOutcome.Already
-                result.packageId?.let { if (kept) device.handOverNote(result.id, it) }
-                if (result.outcome != ClaimParcelResultOutcome.Kept) continue
-                val id = result.packageId ?: continue
-                // What was archived here stays archived there, and a parcel whose notifications were turned off here
-                // stays quiet there.
-                if (device.isArchived(result.id)) tryQuietly { api.archive(id) }
-                if (device.isMuted(result.id)) tryQuietly { api.setMuted(id, muted = true) }
+                result.packageId?.let { if (kept) device.handOverNote(result.id, it, user.id) }
             }
             // A parcel the account has no room for stays on the device, and so does someone else's that it could not keep.
             device.release(

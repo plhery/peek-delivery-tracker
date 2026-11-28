@@ -280,27 +280,28 @@ describe('the device’s parcels to bring along', () => {
     expect(recentFor(SHARED_LINK_ID)).toBeNull();
   });
 
-  it('archive in the account a parcel archived on this device that it took, not one it already had', async () => {
+  it('ask the account, in the claim itself, to keep archived a parcel archived on this device', async () => {
     archiveRecent(LINK_ID, true);
-    archiveRecent(OTHER_LINK_ID, true);
-    mocks.fetch.mockRejectedValue(new Error('offline'));
     mocks.claim.mockResolvedValue([{ id: LINK_ID, outcome: 'kept', packageId: 'p1' }, { id: OTHER_LINK_ID, outcome: 'already', packageId: 'p2' }]);
-    // An archive that fails still brings the parcel: the account lists it.
     expect(await bringAlong([recentFor(LINK_ID)!, recentFor(OTHER_LINK_ID)!], auth)).toEqual({ brought: 2, refused: [] });
-    expect(mocks.fetch).toHaveBeenCalledExactlyOnceWith('/api/packages/p1', auth, { method: 'DELETE', signal: undefined });
+    const [claimed] = mocks.claim.mock.calls[0] as [{ id: string; archived?: boolean; muted?: boolean }[]];
+    expect(claimed.map(({ id, archived, muted }) => ({ id, archived, muted }))).toEqual([
+      { id: LINK_ID, archived: true, muted: undefined }, { id: OTHER_LINK_ID, archived: undefined, muted: undefined },
+    ]);
+    // Nothing is left to ask afterwards, which a closed tab or a lost connection could leave out.
+    expect(mocks.fetch).not.toHaveBeenCalled();
     expect(recentFor(LINK_ID)).toBeNull();
   });
 
-  it('mute in the account a parcel whose alerts were turned off on this device that it took, not one it already had', async () => {
+  it('ask the account, in the claim itself, to keep quiet a parcel whose alerts were turned off on this device', async () => {
     noteLink(LINK_ID, { muted: true });
-    noteLink(OTHER_LINK_ID, { muted: true });
-    mocks.fetch.mockRejectedValue(new Error('offline'));
     mocks.claim.mockResolvedValue([{ id: LINK_ID, outcome: 'kept', packageId: 'p1' }, { id: OTHER_LINK_ID, outcome: 'already', packageId: 'p2' }]);
-    // A mute that fails still brings the parcel: the account lists it.
     expect(await bringAlong([recentFor(LINK_ID)!, recentFor(OTHER_LINK_ID)!], auth)).toEqual({ brought: 2, refused: [] });
-    expect(mocks.fetch).toHaveBeenCalledExactlyOnceWith('/api/packages/p1/notifications', auth, {
-      method: 'PATCH', body: JSON.stringify({ muted: true }), signal: undefined,
-    });
+    const [claimed] = mocks.claim.mock.calls[0] as [{ id: string; archived?: boolean; muted?: boolean }[]];
+    expect(claimed.map(({ id, archived, muted }) => ({ id, archived, muted }))).toEqual([
+      { id: LINK_ID, archived: undefined, muted: true }, { id: OTHER_LINK_ID, archived: undefined, muted: undefined },
+    ]);
+    expect(mocks.fetch).not.toHaveBeenCalled();
     expect(recentFor(LINK_ID)).toBeNull();
   });
 

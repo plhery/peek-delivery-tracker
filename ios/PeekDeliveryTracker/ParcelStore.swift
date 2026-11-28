@@ -1163,15 +1163,15 @@ final class ParcelStore: ObservableObject {
     }
 
     /// The photos and PDFs of guest notes kept in the account go after them, one at a time, each leaving this iPhone once
-    /// it arrived or once the service says it never will. One the account has no room for waits a day; one that failed
-    /// otherwise, the next start (`LocalNoteFiles.sendKept`).
+    /// it arrived or once the service says it never will. One the account has no room for waits a day, then longer; one
+    /// that failed otherwise, the next start; one another account kept, for that account (`LocalNoteFiles.sendKept`).
     @discardableResult
     func sendKeptNoteFiles() async -> Int {
-        guard session.user != nil, !sendingKeptNoteFiles else { return 0 }
+        guard let user = session.user, !sendingKeptNoteFiles else { return 0 }
         sendingKeptNoteFiles = true
         defer { sendingKeptNoteFiles = false }
         let generation = session.generation
-        return await device.noteFiles.sendKept(going: { generation == session.generation }) { packageID, file in
+        return await device.noteFiles.sendKept(account: user.id, going: { generation == session.generation }) { packageID, file in
             _ = try await api.addFile(id: packageID, file)
         }
     }
@@ -2605,7 +2605,7 @@ final class ParcelStore: ObservableObject {
     }
 
     /// The parcels followed on this iPhone before signing in join the account, under the names they had here, and
-    /// archived or quiet as they were here, each time the account's list starts: at sign-in, at each launch and as an
+    /// archived or quiet as they were here (the claim says so), each time the account's list starts: at sign-in, at each launch and as an
     /// invitation comes or goes. The device lets go of each one the account now has. One the account
     /// has no room for stays here, and the list says how many stayed once a sign-in, and again only
     /// when that number changes; a claim cut short says nothing. Tests call it directly: the rest of
@@ -2621,14 +2621,7 @@ final class ParcelStore: ObservableObject {
                   generation == session.generation else { return }
             for result in response.results where result.outcome == .kept || result.outcome == .already {
                 // The note went with the claim; its files follow, to the account's parcel.
-                if let id = result.packageID { device.handOverNoteFiles(linkID: result.id, to: id) }
-            }
-            for result in response.results where result.outcome == .kept {
-                guard let id = result.packageID else { continue }
-                // What was archived here stays archived there, and a parcel whose notifications were turned off here
-                // stays quiet there.
-                if device.isArchived(linkID: result.id) { try? await api.archive(id: id) }
-                if device.isMuted(linkID: result.id) { _ = try? await api.setMuted(id: id, muted: true) }
+                if let id = result.packageID { device.handOverNoteFiles(linkID: result.id, to: id, account: user.id) }
             }
             // A parcel the account has no room for stays on the device, and so does someone else's that it could not keep.
             device.release(Set(response.results.filter { result in

@@ -19754,6 +19754,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#023053"
     },
     {
+      "id": "js-express",
+      "catalog": "js-express",
+      "slug": "js-express-otslezhivanie",
+      "title": "Отслеживание JS Express: номера JSE…YQ и статусы",
+      "name": "JS Express",
+      "color": "#fe9b00"
+    },
+    {
       "id": "gzyl",
       "catalog": "gzyl",
       "slug": "gzyl-otslezhivanie",
@@ -22366,6 +22374,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#023053"
     },
     {
+      "id": "js-express",
+      "catalog": "js-express",
+      "slug": "js-express-pakket-volgen",
+      "title": "JS Express pakket volgen: JSE…YQ-nummers, status & bezorger",
+      "name": "JS Express",
+      "color": "#fe9b00"
+    },
+    {
       "id": "wanbexpress",
       "catalog": "wanbexpress",
       "slug": "wanbexpress-pakket-volgen",
@@ -22462,6 +22478,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Spåra Matkahuolto-paket: statusar, hämtning och kundtjänst",
       "name": "Matkahuolto",
       "color": "#001e60"
+    },
+    {
+      "id": "china-post",
+      "catalog": "china-post",
+      "slug": "china-post-spara-paket",
+      "title": "China Post spårning: CN-nummer, statusar och leverans",
+      "name": "China Post",
+      "color": "#006d46"
     },
     {
       "id": "topyou",
@@ -22818,6 +22842,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f9bb00"
     },
     {
+      "id": "china-post",
+      "catalog": "china-post",
+      "slug": "china-post-sledovanie-zasielok",
+      "title": "China Post sledovanie zásielok: čísla CN, stavy, doručenie",
+      "name": "China Post",
+      "color": "#006d46"
+    },
+    {
       "id": "gzyl",
       "catalog": "gzyl",
       "slug": "gzyl-sledovanie-zasielky",
@@ -23036,6 +23068,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Urmărire Meiteshun (MTSCN): cod AMTS…FS și statusuri",
       "name": "Meiteshun Logistics",
       "color": "#f89f3b"
+    },
+    {
+      "id": "js-express",
+      "catalog": "js-express",
+      "slug": "js-express-urmarire-colet",
+      "title": "JS Express urmărire colet: JSE…YQ, statusuri și curieri",
+      "name": "JS Express",
+      "color": "#fe9b00"
     },
     {
       "id": "gzyl",
@@ -23606,6 +23646,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffbe0c"
     },
     {
+      "id": "imile",
+      "catalog": "imile",
+      "slug": "imile-vidstezhennia",
+      "title": "Відстеження iMile: трек-номери, статуси та контакти",
+      "name": "iMile",
+      "color": "#0032a0"
+    },
+    {
       "id": "mtscn",
       "catalog": "mtscn",
       "slug": "meiteshun-vidstezhennia",
@@ -23620,6 +23668,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Відстеження JRT: номер JRT…MM, статуси та місцева доставка",
       "name": "JRT",
       "color": "#023053"
+    },
+    {
+      "id": "js-express",
+      "catalog": "js-express",
+      "slug": "js-express-vidstezhennia",
+      "title": "Відстеження JS Express: номери JSE…YQ, статуси, доставка",
+      "name": "JS Express",
+      "color": "#fe9b00"
     },
     {
       "id": "gzyl",

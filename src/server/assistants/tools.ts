@@ -2,10 +2,12 @@ import 'server-only';
 
 import { McpServer } from '@modelcontextprotocol/server';
 import { DateTime, IANAZone } from 'luxon';
+import { normalizeDeliveryPostcode } from 'universal-parcel-scraper';
 import { z } from 'zod';
 import en from '../../../shared/locales/en.json';
 import type {
   ApiPackageRow, ApiPeekAi, ApiShopWait, ApiTokenParcel, ApiTokenParcelSort, ApiTokenParcelStatus, ApiTokenParcelsResponse, ApiTokenPeekAi,
+  ApiTokenPostcodeAsk,
 } from '../../generated/apiContract';
 import { searchCarriers, shapeCarrier } from '../../lib/carrierPicker';
 import { tagLocale } from '../../lib/locale';
@@ -24,6 +26,7 @@ import { HttpError } from '../api';
 import { queueCarrierCheck } from '../carrierCheck';
 import { withEventPlaces } from '../eventPlaces';
 import { wakeAssistantAddedWorker } from '../background';
+import { recordProviderInput } from '../metrics';
 import { captureOperationalError, errorType, logOperationalEvent } from '../observability';
 import { addParcelsFromText, MOST_TEXT_LENGTH, type ParcelAddition } from '../parcelsFromText';
 import { assistantNote, type AssistantNote } from '../parcelNotes';
@@ -72,6 +75,7 @@ function displayReference(parcel: { carrier: string; trackingNumber: string }): 
 function parcelSummary(parcel: ParcelWithEvents, showPeekAi: boolean, now = Date.now(), noted = false): ApiTokenParcel {
   const latest = currentEvent(parcel.events, parcel.returnHeld);
   const delivered = latest?.stage === 'delivered' ? latest : null;
+  const ask = postcodeAsk(parcel);
   return {
     id: parcel.id,
     name: parcel.label || null,
@@ -81,7 +85,8 @@ function parcelSummary(parcel: ParcelWithEvents, showPeekAi: boolean, now = Date
     // The newest scan, as the apps head the parcel and as `status` and `lastUpdate` read it: the saved summary is the
     // delivery carrier's after a handoff, while the earlier carrier may have scanned the parcel since.
     statusText: latest?.description ?? parcel.lastStatusText ?? null,
-    needsAttention: parcelAttention(parcel, now),
+    needsAttention: tokenAttention(parcel, now, ask),
+    ...(ask ? { postcodeAsk: ask } : {}),
     ...(parcel.servedElsewhere ? { carrierWarning: ENGLISH['detail.pickedCarrierSilent']!
       .replace('{{picked}}', carrierInfo(parcel.carrier).name).replace('{{carrier}}', carrierInfo(parcel.servedElsewhere).name) } : {}),
     expectedDelivery: parcel.expectedDelivery ?? null,
@@ -95,6 +100,46 @@ function parcelSummary(parcel: ParcelWithEvents, showPeekAi: boolean, now = Date
     // A list says only that the user wrote a note or added a file; get_parcel reads them.
     ...(noted ? { hasNote: true } : {}),
   };
+}
+
+/**
+ * The delivery postcode a parcel's lookup asks for, as the parcel's page in the app asks for it, for an assistant to ask
+ * the user and answer with change_carrier: a tracking service's when the parcel's carrier had no news of it (ParcelsApp's
+ * for a new Swiss Post parcel), else the carrier's own when it needs the postcode to find the parcel or refused the one
+ * given. It never holds the postcode, not even a refused one.
+ */
+export function postcodeAsk(parcel: ParcelWithEvents): ApiTokenPostcodeAsk | null {
+  if (parcel.archivedAt) return null;
+  const ask = (askedBy: string, carrierId: string, refused: boolean): ApiTokenPostcodeAsk => ({
+    askedBy,
+    carrierId,
+    says: `${askedBy} ${refused ? 'didn\'t find this parcel with the delivery postcode it was given' : 'needs the delivery postcode to look up this parcel'}. `
+      + `Ask the user for ${refused ? 'the right postcode' : 'it'} and send it to change_carrier with carrier "${carrierId}".`,
+    ...refused ? { refused: true } : {},
+  });
+  const provider = parcel.providerInputNeeded;
+  if (provider) return ask(provider.provider, parcel.carrier, Boolean(provider.refusedPostcode));
+  const stage = currentStage(parcel.events, parcel.returnHeld);
+  if (stage === 'delivered' || stage === 'returned') return null;
+  // As the page reads `inputNeeded`: another carrier recognised the number, or the parcel's own carrier can't find it
+  // without a postcode it doesn't have.
+  const needed = parcel.inputNeeded;
+  if (needed?.field === 'dpdPostcode' && (needed.carrier !== parcel.carrier || !parcel.dpdPostcode)) {
+    return ask(carrierInfo(needed.carrier).name, needed.carrier, false);
+  }
+  if (parcel.postcodeRefused && parcel.dpdPostcode) return ask(carrierInfo(parcel.carrier).name, parcel.carrier, true);
+  return null;
+}
+
+/**
+ * What a parcel needs of the user, as a tool says it: where the carrier waits on the user first, then a postcode its
+ * lookup asks for (`postcodeAsk`), then the app's other reasons (`parcelAttention`).
+ */
+function tokenAttention(parcel: ParcelWithEvents, now: number, ask = postcodeAsk(parcel)): string | null {
+  const attention = parcelAttention(parcel, now);
+  const carrierWaits = attention !== null && (attention.startsWith('customs') || ['failed_attempt', 'ready_for_pickup', 'exception'].includes(attention));
+  if (!ask || carrierWaits) return attention;
+  return ask.refused ? 'postcode_refused' : 'postcode_needed';
 }
 
 /** Peek AI's estimate as an assistant reads it: what its words say, without the page's strips of days and hours. */
@@ -135,6 +180,7 @@ function daysAhead(now: number, timeZone: string): { today: string; last: string
  */
 function hasStatus(parcel: ParcelWithEvents, status: ParcelStatus, now: number, days: { today: string; last: string }): boolean {
   if (status === 'delivered') return currentStage(parcel.events, parcel.returnHeld) === 'delivered';
+  if (status === 'attention') return isActiveParcel(parcel) && tokenAttention(parcel, now) !== null;
   if (status !== 'today' && status !== 'week') return parcelMatchesStatus(parcel, status, now);
   const day = expectedDeliveryDay(parcel.expectedDelivery);
   return isActiveParcel(parcel) && day !== null && day >= days.today && day <= (status === 'today' ? days.today : days.last);
@@ -255,6 +301,13 @@ async function ownedParcel(service: SupabaseServiceClient, userId: string, named
 
 function nullableText(value: unknown): string | null {
   return typeof value === 'string' && value ? value : null;
+}
+
+/** The tracking service that asks for a stored parcel's delivery postcode, as the app reads it (`toParcel`), or null. */
+function askingProvider(row: JsonObject): string | null {
+  const routing = isRecord(row.carrier_data) && isRecord(row.carrier_data.routing) ? row.carrier_data.routing : null;
+  const needed = routing && isRecord(routing.provider_input_needed) ? routing.provider_input_needed : null;
+  return needed && typeof needed.provider === 'string' ? needed.provider : null;
 }
 
 /** What a carrier asks for besides the number, under the names `change_carrier` takes them. */
@@ -462,6 +515,7 @@ function additionSummary(addition: ParcelAddition) {
     outcome: addition.outcome,
     ...('packageId' in addition && addition.packageId ? { id: addition.packageId } : {}),
     ...(addition.outcome === 'refused' ? { reason: addition.reason } : {}),
+    ...(addition.outcome === 'added' && addition.postcode ? { withPostcode: true } : {}),
   };
 }
 
@@ -501,7 +555,11 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
         + 'instructions. When the user gives you shipping emails, or asks you to add the parcels from emails you can already '
         + 'see, send each email\'s shipping part to add_parcels. A tracking number whose carrier Peek can\'t tell is '
         + 'added all the same, and Peek looks for its carrier; when you know the carrier, give add_parcels its id from '
-        + 'find_carriers. ' + amazonInstructions(english !== null),
+        + 'find_carriers. When the user gives the delivery postcode, give it to add_parcels as postcode. When a parcel\'s '
+        + 'needsAttention is postcode_needed or postcode_refused, a tracking service or the carrier needs the delivery '
+        + 'postcode to look it up: postcodeAsk says who asks; ask the user for the postcode and send it to change_carrier '
+        + 'with the carrier postcodeAsk names. '
+        + amazonInstructions(english !== null),
     },
   );
   /** A tool's work, once the token's scopes cover it. */
@@ -514,7 +572,9 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
     description: 'Finds the tracking numbers in a text, such as the shipping part of an order email, and adds each to '
       + 'the user\'s Peek, which then follows it. Send only the shipping part: the tracking numbers, the carrier names '
       + 'next to them and tracking links; never addresses, names or payment details. Peek keeps the numbers and the '
-      + 'name, nothing else. A number the user already follows is left as it is. At most 10 numbers a call. A number '
+      + 'name, nothing else, and the delivery postcode when you give it as postcode: each parcel whose carrier asks for '
+      + 'one is added with it, as in Peek\'s Add sheet (withPostcode). A tracking service that asks for it later shows '
+      + 'in get_parcel\'s postcodeAsk. A number the user already follows is left as it is. At most 10 numbers a call. A number '
       + 'the text labels as a tracking number, or one sent alone as the text, is added even when Peek can\'t tell its '
       + 'carrier, which it then looks for; when you know the carrier, as when a shop\'s tracking page names it, give '
       + 'its id from find_carriers. A shop\'s tracking-page link, such as H&M\'s "Follow package", is read for the '
@@ -526,19 +586,26 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
       carrier: z.string().max(60).optional().describe('The id from find_carriers of the carrier that delivers '
         + 'the parcels, such as "dhl", when you know it: Peek asks that carrier rather than looking for one. A number '
         + 'whose shape is another carrier\'s stays that carrier\'s'),
+      postcode: z.string().max(20).optional().describe('The delivery postcode of the parcels, when the user gives it: '
+        + 'each parcel whose carrier asks for one is added with it'),
+      postcodeCountry: z.string().max(2).optional().describe('The postcode\'s country as two letters, such as "DE", when '
+        + 'it is not the carrier\'s own'),
     }),
     annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: true, openWorldHint: false },
     _meta: security('add_parcels'),
-  }, allowed('add_parcels', async ({ text, name, carrier: named }: { text: string; name?: string; carrier?: string }) => {
-    // An empty carrier is none given, as assistants fill in what they leave out.
+  }, allowed('add_parcels', async ({ text, name, carrier: named, postcode: given, postcodeCountry }: {
+    text: string; name?: string; carrier?: string; postcode?: string; postcodeCountry?: string;
+  }) => {
+    // An empty carrier or postcode is none given, as assistants fill in what they leave out.
     const carrier = named?.trim() ?? '';
     if (carrier && !VALID_CARRIER_IDS.has(carrier)) return refusal(NO_CARRIER);
     const label = name?.trim() ?? '';
+    const postcode = given?.trim() ? { postcode: given, country: postcodeCountry ?? '' } : undefined;
     const waits: ApiShopWait[] = [];
     const onWaiting = (kept: ApiShopWait[]) => { waits.push(...kept); };
     const additions = carrier
-      ? await addParcelsFromText(service, caller.userId, text, label, [carrier as CarrierId], { trust: 'named', onWaiting })
-      : await addParcelsFromText(service, caller.userId, text, label, [], { trust: 'sent', onWaiting });
+      ? await addParcelsFromText(service, caller.userId, text, label, [carrier as CarrierId], { trust: 'named', onWaiting, ...postcode ? { postcode } : {} })
+      : await addParcelsFromText(service, caller.userId, text, label, [], { trust: 'sent', onWaiting, ...postcode ? { postcode } : {} });
     await announce(service, caller, additions);
     if (!additions.length && waits.length) {
       const waiting = waits.map((wait) => ({ shop: wait.shop_name, via: wait.platform_name, until: wait.expires_at }));
@@ -559,7 +626,8 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
       const summary = additionSummary(addition);
       return summary.reason ? { ...summary, reason: await withAmazonGuide(summary.reason) } : summary;
     }));
-    const lines = additions.map((addition) => `${displayReference(addition)} (${carrierInfo(addition.carrier as Parameters<typeof carrierInfo>[0]).name}): ${OUTCOME_TEXT[addition.outcome]}`);
+    const lines = additions.map((addition) => `${displayReference(addition)} (${carrierInfo(addition.carrier as Parameters<typeof carrierInfo>[0]).name}): `
+      + `${OUTCOME_TEXT[addition.outcome]}${addition.outcome === 'added' && addition.postcode ? ', with the delivery postcode' : ''}`);
     // A parcel added without a carrier is one Peek looks for: the assistant says so rather than that Peek doesn't know it.
     const searching = additions.some((addition) => addition.outcome === 'added' && addition.carrier === 'unknown')
       ? ['Peek is looking for the carrier of the parcels added under "Unknown carrier": that can take a while.']
@@ -643,16 +711,51 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
     return answer({ id: parcel.id, name: label || null });
   }));
 
+  /**
+   * Gives a tracking service the delivery postcode it asked for, saved where the app's "Add postcode" saves it, and
+   * checks the parcel again with it. The answer names the service, never the postcode.
+   */
+  const givePostcode = async (row: JsonObject, provider: string, given: string) => {
+    const id = String(row.id);
+    const notPostcode = 'That is not a delivery postcode: give the postcode alone, such as 8001 or 75011.';
+    let postcode: string;
+    try {
+      postcode = normalizeDeliveryPostcode(given);
+    } catch {
+      return refusal(notPostcode);
+    }
+    try {
+      if (!await service.setAccountProviderPostcode(caller.userId, id, postcode)) return refusal(NO_PARCEL);
+    } catch (error) {
+      if (error instanceof SupabaseError && error.code === '22023') return refusal(notPostcode);
+      throw error;
+    }
+    recordProviderInput(provider, 'supplied');
+    logOperationalEvent('package_provider_input_changed', {
+      package_id: id,
+      previous_carrier: String(row.carrier ?? 'unknown'),
+      carrier: String(row.carrier ?? 'unknown'),
+      archived: row.archived_at != null,
+      via: 'assistant',
+    });
+    const checking = row.archived_at == null && (await queueCarrierCheck(service, caller.userId, id)).length > 0;
+    const carrier = String(row.carrier);
+    return answer({ id, carrier: carrierInfo(carrier as CarrierId).name, carrierId: carrier, postcodeFor: provider, checking });
+  };
+
   server.registerTool('change_carrier', {
     title: 'Change a parcel\'s carrier',
     description: 'Sets the carrier that delivers one of the user\'s parcels, when Peek has the wrong one, and checks the '
       + 'parcel with it at once. Take the carrier\'s id from find_carriers. A carrier that asks for the delivery '
       + 'postcode, its tracking link or the last digits of the recipient\'s phone takes it here; the parcel keeps its '
-      + 'postcode and phone digits unless others are given.',
+      + 'postcode and phone digits unless others are given. It also answers a parcel\'s postcodeAsk: give the carrier '
+      + 'it names and the delivery postcode, and Peek saves the postcode where its app\'s "Add postcode" does and checks '
+      + 'the parcel again (postcodeFor names the tracking service it went to).',
     inputSchema: z.object({
       parcel: z.string().min(1).max(100).describe('The parcel\'s id from list_parcels, or its tracking number'),
       carrier: z.string().min(1).max(60).describe('The carrier\'s id from find_carriers, such as "dhl"'),
-      postcode: z.string().max(20).optional().describe('The delivery postcode, for a carrier whose inputs list one; "" removes it'),
+      postcode: z.string().max(20).optional().describe('The delivery postcode, for a carrier whose inputs list one or a '
+        + 'parcel whose postcodeAsk asks for it; "" removes a carrier\'s'),
       postcodeCountry: z.string().max(2).optional().describe('The postcode\'s country as two letters, such as "DE", when '
         + 'it is not the carrier\'s own; "" for the carrier\'s own. A postcode the parcel keeps keeps its country unless given'),
       trackingLink: z.string().max(4096).optional().describe('The carrier\'s tracking link, for a carrier whose inputs list one'),
@@ -663,16 +766,22 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
   }, allowed('change_carrier', async ({ parcel: named, carrier, postcode, postcodeCountry, trackingLink, phoneDigits }: {
     parcel: string; carrier: string; postcode?: string; postcodeCountry?: string; trackingLink?: string; phoneDigits?: string;
   }) => {
-    if (!VALID_CARRIER_IDS.has(carrier)) return refusal(NO_CARRIER);
+    if (!VALID_CARRIER_IDS.has(carrier) && carrier !== 'unknown') return refusal(NO_CARRIER);
     const row = await ownedRow(service, caller.userId, named);
     if (!row || typeof row.tracking_number !== 'string') return refusal(NO_PARCEL);
+    // A parcel under no carrier keeps it only to give a tracking service its postcode, as below.
+    if (!VALID_CARRIER_IDS.has(carrier) && carrier !== row.carrier) return refusal(NO_CARRIER);
     const id = String(row.id);
     const number = row.tracking_number;
     // A carrier that takes a postcode or phone digits keeps the ones the parcel has, as the edit sheet shows them filled
     // in, and a postcode kept, or given again, keeps the country it was given with.
     const takes = new Set(carrierRequirements(carrier as CarrierId, number).map((requirement) => requirement.field));
+    // A tracking service's ask for the postcode, answered as the app's "Add postcode" answers it: under the parcel's own
+    // carrier, when that carrier takes no postcode itself, the postcode is kept for the tracking services alone.
+    const provider = askingProvider(row);
+    const forProvider = provider !== null && carrier === row.carrier && !takes.has('dpdPostcode') && Boolean(postcode?.trim());
     const storedPostcode = nullableText(row.dpd_postcode);
-    const keptPostcode = postcode ?? (takes.has('dpdPostcode') ? storedPostcode ?? '' : '');
+    const keptPostcode = forProvider ? '' : postcode ?? (takes.has('dpdPostcode') ? storedPostcode ?? '' : '');
     const keptCountry = keptPostcode.trim() && keptPostcode.trim() === storedPostcode
       ? storedPostcodeCountry(row.carrier_data, storedPostcode) ?? ''
       : '';
@@ -682,7 +791,7 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
         carrier,
         trackingUrl: trackingLink ?? '',
         dpdPostcode: keptPostcode,
-        dpdPostcodeCountry: postcodeCountry ?? keptCountry,
+        dpdPostcodeCountry: forProvider ? '' : postcodeCountry ?? keptCountry,
         phoneDigits: phoneDigits ?? (carrier === row.carrier && takes.has('phoneDigits') ? nullableText(row.phone_digits) ?? '' : ''),
       }, number);
       const unchanged = row.carrier === values.carrier
@@ -690,6 +799,10 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
         && storedPostcode === values.dpdPostcode
         && nullableText(row.phone_digits) === values.phoneDigits
         && holdsPostcodeCountry(row, values.dpdPostcodeCountry);
+      if (forProvider) {
+        if (!unchanged) return refusal('Give the postcode a tracking service asks for in its own call, with the parcel\'s carrier and nothing else changed.');
+        return await givePostcode(row, provider, postcode!);
+      }
       if (unchanged) return answer({ id, carrier: carrierInfo(values.carrier as CarrierId).name, carrierId: values.carrier, checking: false });
       await verifyAmazonShippingAddition(values.carrier, number);
     } catch (error) {
@@ -754,13 +867,16 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
     description: 'The user\'s parcels in Peek, with each one\'s status, expected delivery day (expectedDelivery), delivery '
       + 'time once delivered (deliveredAt) and latest scan, and, when Peek has a strong hint and the account shows it, '
       + 'Peek AI\'s own estimate of when it will come (peekAi): Peek\'s, not the carrier\'s, so say it as Peek AI\'s. '
-      + 'hasNote says the user keeps a private note on the parcel, which get_parcel gives. '
+      + 'hasNote says the user keeps a private note on the parcel, which get_parcel gives. needsAttention says why a '
+      + 'parcel needs the user; postcode_needed and postcode_refused come with postcodeAsk, which says who needs the '
+      + 'delivery postcode and how to give it. '
       + 'Choose the status, sort and search that answer the question, '
       + 'and a small limit when one parcel will do; total says how many match. For example: the latest delivered parcel '
       + 'is status "delivered" with limit 1; what arrives this week is status "week"; the parcel from IKEA is search "IKEA".',
     inputSchema: z.object({
       status: z.enum(PARCEL_STATUSES).optional().describe('Which parcels: "active" every one still on its way (the default); '
-        + '"attention" those that need the user, such as a failed delivery or one waiting at a pickup point; "today" those '
+        + '"attention" those that need the user, such as a failed delivery, one waiting at a pickup point or one whose '
+        + 'lookup needs the delivery postcode; "today" those '
         + 'expected today; "week" those expected in the next seven days; "delivered" those delivered, archived or not; '
         + '"archived" those put away; "all" every parcel. With a search, "all" unless given.'),
       sort: z.enum(PARCEL_SORTS).optional().describe('The order: "expected" soonest expected day first (the default for '
@@ -782,7 +898,8 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
     title: 'Get a parcel',
     description: 'One of the user\'s parcels: its status, expected delivery day, pickup point and the carrier\'s scans, newest first. Each scan is listed once: '
       + 'when another carrier told it in other words, those come as also. note is the user\'s own private note on the parcel, '
-      + 'and files the names and types of the photos and PDFs on it.',
+      + 'and files the names and types of the photos and PDFs on it. postcodeAsk, when there, says a tracking service or '
+      + 'the carrier needs the delivery postcode to look the parcel up, and how to give it with change_carrier.',
     inputSchema: z.object({ parcel: z.string().min(1).max(100).describe('The parcel\'s id from list_parcels, or its tracking number') }),
     annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
     _meta: security('get_parcel'),

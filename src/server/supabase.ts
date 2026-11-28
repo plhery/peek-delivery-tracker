@@ -1759,6 +1759,18 @@ export class SupabaseServiceClient extends SupabaseClient {
   }
 
   /**
+   * Gives the delivery postcode a tracking service asked for to the account's parcel with the owner's own function
+   * (set_owned_package_provider_postcode), where the app's "Add postcode" saves it: false when it is not the account's;
+   * a postcode of no postcode's shape throws 22023.
+   */
+  async setAccountProviderPostcode(userId: string, packageId: string, postcode: string): Promise<boolean> {
+    return await this.request('/rest/v1/rpc/set_account_package_provider_postcode', {
+      method: 'POST',
+      body: { p_user_id: userId, p_package_id: packageId, p_postcode: postcode },
+    }) === true;
+  }
+
+  /**
    * Archives or restores the account's parcel with the owner's own function (set_owned_package_archived): false when it
    * is not the account's; a restore past the account's parcel limit throws P0001.
    */

@@ -79789,6 +79789,7 @@ export interface ApiTokenParcel {
   "status": ApiStage;
   "statusText": string | null;
   "needsAttention": string | null;
+  "postcodeAsk"?: ApiTokenPostcodeAsk;
   "carrierWarning"?: string;
   "expectedDelivery": string | null;
   "peekAi"?: ApiTokenPeekAi;
@@ -79799,6 +79800,13 @@ export interface ApiTokenParcel {
   "archived": boolean;
   "addedAt": string;
   "hasNote"?: boolean;
+}
+
+export interface ApiTokenPostcodeAsk {
+  "askedBy": string;
+  "carrierId": string;
+  "says": string;
+  "refused"?: boolean;
 }
 
 export interface ApiTokenParcelsResponse {

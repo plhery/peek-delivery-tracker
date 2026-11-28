@@ -445,6 +445,49 @@ describe('the MCP endpoint', () => {
     expect(parcels.find((parcel) => parcel.id === moved.id)).not.toHaveProperty('carrierWarning');
   });
 
+  it('says when a tracking service or the carrier needs the delivery postcode, as the app asks for it, and never the postcode', async () => {
+    const asking = (index: number, carrier: string, routing: Record<string, unknown>, postcode: string | null = null) => {
+      const base = stored(index, 'pending');
+      return { ...base, carrier, dpd_postcode: postcode, sync_status: 'waiting', tracking_events: [], carrier_data: { ...base.carrier_data, routing } };
+    };
+    // A new Swiss Post parcel its carrier has no news of yet, which ParcelsApp needs the postcode to look up.
+    const swiss = { ...asking(1, 'swiss-post', { provider_input_needed: { provider: 'ParcelsApp', field: 'dpdPostcode' } }), tracking_number: 'RR471035825CH' };
+    // One whose own postcode ParcelsApp was given and found nothing with.
+    const refused = asking(2, 'dpd-de', { provider_input_needed: { provider: 'ParcelsApp', field: 'dpdPostcode', refused_postcode: POSTCODE } }, POSTCODE);
+    // One under no carrier whose number DPD recognised and can't look up without the postcode.
+    const recognised = asking(3, 'unknown', { input_needed: { carrier: 'dpd-de', field: 'dpdPostcode' } });
+    // An archived one is asked about no more, as on its page.
+    const archived = { ...asking(4, 'swiss-post', { provider_input_needed: { provider: 'ParcelsApp', field: 'dpdPostcode' } }), archived_at: ago(2) };
+    const moving = stored(5, 'in_transit');
+    vi.spyOn(service, 'listAccountPackages').mockResolvedValue([swiss, refused, recognised, archived, moving]);
+    const secret = connect(['parcels:read']);
+
+    const all = await call(secret, 'list_parcels', { status: 'all' });
+    const listed = (answer: RpcAnswer) => answer.result!.structuredContent!.parcels as Array<Record<string, unknown>>;
+    const of = (row: { id: string }) => listed(all).find((parcel) => parcel.id === row.id);
+    expect(of(swiss)).toMatchObject({ needsAttention: 'postcode_needed', postcodeAsk: {
+      askedBy: 'ParcelsApp',
+      carrierId: 'swiss-post',
+      says: 'ParcelsApp needs the delivery postcode to look up this parcel. Ask the user for it and send it to change_carrier with carrier "swiss-post".',
+    } });
+    expect(of(refused)).toMatchObject({ needsAttention: 'postcode_refused', postcodeAsk: { askedBy: 'ParcelsApp', carrierId: 'dpd-de', refused: true } });
+    expect(of(recognised)).toMatchObject({ needsAttention: 'postcode_needed', postcodeAsk: { askedBy: 'DPD Germany', carrierId: 'dpd-de' } });
+    expect(of(archived)).not.toHaveProperty('postcodeAsk');
+    expect(of(moving)).toMatchObject({ needsAttention: null });
+    expect(of(moving)).not.toHaveProperty('postcodeAsk');
+    // The parcels asked about need the user.
+    const attention = await call(secret, 'list_parcels', { status: 'attention' });
+    expect(listed(attention).map((parcel) => parcel.id).sort()).toEqual([swiss.id, refused.id, recognised.id].sort());
+
+    ownParcel(swiss);
+    const one = await call(secret, 'get_parcel', { parcel: 'RR471035825CH' });
+    expect(one.result!.structuredContent).toMatchObject({ needsAttention: 'postcode_needed', postcodeAsk: { askedBy: 'ParcelsApp', carrierId: 'swiss-post' } });
+    for (const text of [JSON.stringify(all), JSON.stringify(attention), JSON.stringify(one)]) {
+      expect(text).not.toContain(POSTCODE);
+      expect(text).not.toContain(RECEIVER);
+    }
+  });
+
   it('gives the newest scan as the status line, as the apps head the parcel, and the saved one for a parcel without scans', async () => {
     // Handed over: the saved summary is the delivery carrier's, older than the earlier carrier's latest scan.
     const handedOver = { ...stored(5, 'in_transit'), last_status_text: 'Announced to the delivery carrier' };
@@ -676,6 +719,32 @@ describe('the MCP endpoint', () => {
     expect(service.parcelsAddedByAssistant).toHaveBeenCalledExactlyOnceWith(userId, owners.get(secretDigest(writer))!.grantId, ['7d000000-0000-4000-a000-0000000000aa']);
 
     expect(addParcelsFromText).toHaveBeenCalledTimes(1);
+  });
+
+  it('adds parcels with the delivery postcode the assistant gives, and says which took it, never the postcode', async () => {
+    // A synthetic DPD Germany number, whose carrier takes a postcode, and UPS's sample, whose carrier takes none.
+    const DPD = '09981234567452';
+    vi.mocked(addParcelsFromText).mockResolvedValue([
+      { trackingNumber: DPD, carrier: 'dpd-de', outcome: 'added', packageId: '7d000000-0000-4000-a000-0000000000ab', jobId: null, postcode: true },
+      { trackingNumber: UPS, carrier: 'ups', outcome: 'added', packageId: '7d000000-0000-4000-a000-0000000000ac', jobId: null },
+    ]);
+    const writer = connect(['parcels:write']);
+    const text = `DPD: ${DPD}\nUPS: ${UPS}`;
+    const answer = await call(writer, 'add_parcels', { text, postcode: '10115', postcodeCountry: 'DE' });
+    expect(addParcelsFromText).toHaveBeenCalledExactlyOnceWith(expect.any(SupabaseServiceClient), userId, text, '', [], {
+      trust: 'sent', onWaiting: expect.any(Function), postcode: { postcode: '10115', country: 'DE' },
+    });
+    expect(answer.result!.structuredContent).toEqual({ parcels: [
+      { trackingNumber: DPD, carrier: 'DPD Germany', outcome: 'added', id: '7d000000-0000-4000-a000-0000000000ab', withPostcode: true },
+      { trackingNumber: UPS, carrier: 'UPS', outcome: 'added', id: '7d000000-0000-4000-a000-0000000000ac' },
+    ] });
+    expect(answer.result!.content![0]!.text).toContain(`${DPD} (DPD Germany): added, with the delivery postcode\n${UPS} (UPS): added\n`);
+    expect(JSON.stringify(answer)).not.toContain('10115');
+    // An empty postcode is none given, as assistants fill in what they leave out.
+    await call(writer, 'add_parcels', { text, carrier: 'dpd-de', postcode: ' ' });
+    expect(addParcelsFromText).toHaveBeenLastCalledWith(expect.any(SupabaseServiceClient), userId, text, '', ['dpd-de'], {
+      trust: 'named', onWaiting: expect.any(Function),
+    });
   });
 
   it('announces nothing when no parcel was added, and still answers when the announcement fails', async () => {
@@ -1046,6 +1115,50 @@ describe('the MCP endpoint', () => {
     await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'hermes-de' });
     expect(change).toHaveBeenLastCalledWith(userId, parcel.id, 'hermes-de', null, null, null);
     expect(enqueue).not.toHaveBeenCalled();
+  });
+
+  it('gives a tracking service the postcode it asks for where the app\'s "Add postcode" saves it, and checks the parcel again', async () => {
+    const base = stored(19, 'pending', { trackingNumber: 'RR471035825CH' });
+    const asked = { ...base, carrier: 'swiss-post', dpd_postcode: null, sync_status: 'waiting', tracking_events: [],
+      carrier_data: { ...base.carrier_data, routing: { provider_input_needed: { provider: 'ParcelsApp', field: 'dpdPostcode' } } } };
+    ownParcel(asked);
+    const give = vi.spyOn(service, 'setAccountProviderPostcode').mockResolvedValue(true);
+    const change = vi.spyOn(service, 'changeAccountPackageCarrier').mockResolvedValue(true);
+    const enqueue = vi.spyOn(service, 'enqueueSyncJob').mockResolvedValue({ row: { id: '8e000000-0000-4000-a000-000000000003' }, queued: true } as Awaited<ReturnType<typeof service.enqueueSyncJob>>);
+    const secret = connect(['parcels:read', 'parcels:edit']);
+
+    const given = await call(secret, 'change_carrier', { parcel: asked.id, carrier: 'swiss-post', postcode: ' 8001 ' });
+    expect(given.result!.structuredContent).toEqual({ id: asked.id, carrier: 'Swiss Post', carrierId: 'swiss-post', postcodeFor: 'ParcelsApp', checking: true });
+    expect(JSON.stringify(given)).not.toContain('8001');
+    expect(give).toHaveBeenCalledExactlyOnceWith(userId, asked.id, '8001');
+    expect(enqueue).toHaveBeenCalledExactlyOnceWith({ userId, packageId: asked.id, reason: 'changed' });
+
+    // What is no postcode is refused, by Peek or by the database.
+    expect((await call(secret, 'change_carrier', { parcel: asked.id, carrier: 'swiss-post', postcode: 'not one' })).result).toMatchObject({
+      isError: true, content: [{ text: expect.stringContaining('not a delivery postcode') }],
+    });
+    give.mockRejectedValueOnce(new SupabaseError('Invalid delivery postcode', 400, '22023'));
+    expect((await call(secret, 'change_carrier', { parcel: asked.id, carrier: 'swiss-post', postcode: '8001' })).result).toMatchObject({
+      isError: true, content: [{ text: expect.stringContaining('not a delivery postcode') }],
+    });
+    expect((await call(otherAccount(), 'change_carrier', { parcel: asked.id, carrier: 'swiss-post', postcode: '8001' })).result).toMatchObject({
+      isError: true, content: [{ text: 'No such parcel in this Peek account.' }],
+    });
+
+    // A parcel under no carrier keeps it to give the tracking service its postcode.
+    const unknown = { ...asked, carrier: 'unknown' };
+    ownParcel(unknown);
+    expect((await call(secret, 'change_carrier', { parcel: asked.id, carrier: 'unknown', postcode: '8001' })).result!.structuredContent)
+      .toMatchObject({ carrierId: 'unknown', postcodeFor: 'ParcelsApp' });
+    expect(give).toHaveBeenCalledTimes(3);
+    expect(change).not.toHaveBeenCalled();
+
+    // Where nothing asks, a carrier that takes no postcode is given none, as before.
+    ownParcel({ ...asked, carrier_data: base.carrier_data });
+    expect((await call(secret, 'change_carrier', { parcel: asked.id, carrier: 'swiss-post', postcode: '8001' })).result).toMatchObject({
+      isError: true, content: [{ text: expect.stringContaining('not used for this carrier') }],
+    });
+    expect(give).toHaveBeenCalledTimes(3);
   });
 
   it('keeps the country a kept postcode was given with, or takes another', async () => {

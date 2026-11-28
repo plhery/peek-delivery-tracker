@@ -1,5 +1,6 @@
-import { describe, expect, it } from 'vitest';
-import { trackingNumbersInText } from './parcelsFromText';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { addParcelsFromText, trackingNumbersInText } from './parcelsFromText';
+import { SupabaseServiceClient } from './supabase';
 
 // Every number here is made up, but UPS's published sample.
 const UPS = '1Z999AA10123456784';
@@ -94,5 +95,47 @@ describe('an order confirmation or an offer', () => {
 
   it('still adds the tracking number an order email names', () => {
     expect(read(`${ORDER_EMAILS.commande}\nNuméro de suivi : ${UPS}`)).toEqual([`${UPS} ups`]);
+  });
+});
+
+describe('a postcode that comes with a text', () => {
+  afterEach(() => { vi.restoreAllMocks(); });
+
+  /** A database that adds each number as a new parcel, without asking anyone. */
+  function database() {
+    const service = new SupabaseServiceClient('https://database.example', 'service-key');
+    vi.spyOn(service, 'latestLookupCountry').mockResolvedValue(null);
+    vi.spyOn(service, 'accountTrackingNumbers').mockResolvedValue(new Map());
+    vi.spyOn(service, 'claimAccountTracking').mockResolvedValue({ allowed: true, scope: null, overallUsed: 1 } as never);
+    const create = vi.spyOn(service, 'createAccountPackage').mockImplementation(async (_, number) => `new-${number}`);
+    vi.spyOn(service, 'getPackage').mockImplementation(async (id) => ({ id, carrier_data: {}, dpd_postcode: null }));
+    const update = vi.spyOn(service, 'updatePackage').mockResolvedValue(undefined as never);
+    vi.spyOn(service, 'ignoreTypedTrackingSupportCases').mockResolvedValue(0);
+    vi.spyOn(service, 'enqueueSyncJob').mockImplementation(async ({ packageId }) => ({ row: { id: `job-${packageId}` }, queued: true }) as never);
+    return { service, create, update };
+  }
+  // A synthetic DPD Germany number, whose carrier takes a postcode, and UPS's published sample, whose carrier takes none.
+  const DPD = '09981234567452';
+  const text = `DPD tracking number: ${DPD}\nUPS tracking number: ${UPS}`;
+
+  it('goes to each parcel whose carrier takes one, as the Add sheet sends it, and to no other', async () => {
+    const { service, create } = database();
+    const added = await addParcelsFromText(service, 'user', text, 'Example Shop', ['dpd-de'], {
+      trust: 'named', postcode: { postcode: ' 10115 ', country: '' },
+    });
+    expect(added.map(({ trackingNumber, carrier, outcome, ...rest }) => [trackingNumber, carrier, outcome, 'postcode' in rest]))
+      .toEqual([[UPS, 'ups', 'added', false], [DPD, 'dpd-de', 'added', true]]);
+    expect(create).toHaveBeenCalledWith('user', DPD, 'Example Shop', 'dpd-de', null, '10115');
+    expect(create).toHaveBeenCalledWith('user', UPS, 'Example Shop', 'ups', null, null);
+  });
+
+  it('refuses a parcel whose carrier takes no postcode from its country, as the Add sheet does', async () => {
+    const { service, create } = database();
+    const [ups, dpd] = await addParcelsFromText(service, 'user', text, 'Example Shop', ['dpd-de'], {
+      trust: 'named', postcode: { postcode: '75011', country: 'FR' },
+    });
+    expect(dpd).toMatchObject({ carrier: 'dpd-de', outcome: 'refused', reason: expect.stringContaining('takes no delivery postcode from that country') });
+    expect(ups).toMatchObject({ carrier: 'ups', outcome: 'added' });
+    expect(create).toHaveBeenCalledOnce();
   });
 });

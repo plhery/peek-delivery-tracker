@@ -5974,6 +5974,7 @@ struct TokenParcel: Codable, Equatable, Hashable, Sendable, Identifiable {
     var status: TrackingStage
     var statusText: String? = nil
     var needsAttention: String? = nil
+    var postcodeAsk: TokenPostcodeAsk? = nil
     var carrierWarning: String? = nil
     var expectedDelivery: String? = nil
     var peekAi: TokenPeekAi? = nil
@@ -5984,6 +5985,20 @@ struct TokenParcel: Codable, Equatable, Hashable, Sendable, Identifiable {
     var archived: Bool
     var addedAt: String
     var hasNote: Bool? = nil
+}
+
+struct TokenPostcodeAsk: Codable, Equatable, Hashable, Sendable {
+    var askedBy: String
+    var carrierID: String
+    var says: String
+    var refused: Bool? = nil
+
+    private enum CodingKeys: String, CodingKey {
+        case askedBy
+        case carrierID = "carrierId"
+        case says
+        case refused
+    }
 }
 
 struct TokenParcelsResponse: Codable, Equatable, Hashable, Sendable {

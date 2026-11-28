@@ -1,6 +1,7 @@
 import 'server-only';
 
 import { isAmazonTrackingNumber } from '../lib/amazon';
+import { carrierRequirements } from '../lib/carriers';
 import {
   carrierNumberInText, fromCarrier, labelledNumbersInText, nonTrackingShape, numberAlone, numbersInText, type NumberInText, type TextTrust,
 } from '../peek/lookup/reading';
@@ -30,7 +31,8 @@ export const MOST_TEXT_LENGTH = 16_000;
 
 /** What became of one number a text named. */
 export type ParcelAddition =
-  | { trackingNumber: string; carrier: string; outcome: 'added'; packageId: string; jobId: string | null }
+  /** `postcode`: the parcel was given the delivery postcode the text came with (AddingOptions.postcode). */
+  | { trackingNumber: string; carrier: string; outcome: 'added'; packageId: string; jobId: string | null; postcode?: true }
   | { trackingNumber: string; carrier: string; outcome: 'known'; packageId: string | null }
   /** Not a number the account can follow, such as an Amazon number only Amazon's own account tracks. */
   | { trackingNumber: string; carrier: string; outcome: 'refused'; reason: string }
@@ -167,6 +169,13 @@ export interface AddingOptions {
    * the shop platform's link when the text names no parcel with a sure carrier.
    */
   redirectLinks?: readonly ShopTrackingLink[];
+  /**
+   * The delivery postcode, and the country it is from ("" for the carrier's own), that comes with the text, as an
+   * assistant gives it: each parcel whose carrier takes a postcode is added with it, as the Add sheet sends the one
+   * typed in its carrier's field. A postcode its carrier refuses refuses the parcel, as the sheet does; a carrier that
+   * takes none is given none.
+   */
+  postcode?: { postcode: string; country: string };
 }
 
 /**
@@ -180,7 +189,7 @@ export async function addNumbersToAccount(
   userId: string,
   numbers: readonly NumberInText[],
   label: string,
-  { addNew = true, retryEligibility = false, twins = false }: AddingOptions = {},
+  { addNew = true, retryEligibility = false, twins = false, postcode }: AddingOptions = {},
 ): Promise<ParcelAddition[]> {
   const known = await service.accountTrackingNumbers(userId, numbers.map(({ normalized }) => normalized));
   const pair = twins && !numbers.some(({ normalized }) => reviewDemoCarrier(userId, normalized)) ? twinNumbers(numbers) : null;
@@ -214,9 +223,13 @@ export async function addNumbersToAccount(
     }
     let values;
     country ??= accountLookupCountry(service, userId);
+    const withPostcode = !demo && postcode !== undefined
+      && carrierRequirements(carrier as CarrierId, normalized).some(({ field }) => field === 'dpdPostcode');
     try {
-      values = newPackageValues({ trackingNumber: match.trackingNumber, label, carrier, trackingUrl: demo ? '' : match.trackingUrl ?? '' },
-        await country);
+      values = newPackageValues({
+        trackingNumber: match.trackingNumber, label, carrier, trackingUrl: demo ? '' : match.trackingUrl ?? '',
+        ...withPostcode ? { dpdPostcode: postcode.postcode, dpdPostcodeCountry: postcode.country } : {},
+      }, await country);
     } catch (error) {
       if (!(error instanceof HttpError)) throw error;
       additions.push({ trackingNumber: normalized, carrier, outcome: 'refused', reason: error.message });
@@ -276,10 +289,10 @@ export async function addNumbersToAccount(
       captureOperationalError(error, { component: 'packages', operation: 'remember_lookup_country' });
       return null;
     });
-    if (parcel) await rememberLookupCountry(service, parcel, await country);
+    if (parcel) await rememberLookupCountry(service, parcel, await country, values.dpdPostcodeCountry);
     await settleTypedSupportCases(service, trackingNumber);
     const jobId = await queueFirstCheck(service, userId, packageId);
-    additions.push({ trackingNumber, carrier: values.carrier, outcome: 'added', packageId, jobId });
+    additions.push({ trackingNumber, carrier: values.carrier, outcome: 'added', packageId, jobId, ...values.dpdPostcode ? { postcode: true as const } : {} });
   }
   if (pair && twin) await keepTwins(service, userId, twin, pair);
   return additions;

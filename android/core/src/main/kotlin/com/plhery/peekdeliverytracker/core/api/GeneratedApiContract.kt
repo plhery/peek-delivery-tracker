@@ -5874,6 +5874,7 @@ data class TokenParcel(
     val status: TrackingStage,
     val statusText: String? = null,
     val needsAttention: String? = null,
+    val postcodeAsk: TokenPostcodeAsk? = null,
     val carrierWarning: String? = null,
     val expectedDelivery: String? = null,
     val peekAi: TokenPeekAi? = null,
@@ -5884,6 +5885,14 @@ data class TokenParcel(
     val archived: Boolean,
     val addedAt: String,
     val hasNote: Boolean? = null,
+)
+
+@Serializable
+data class TokenPostcodeAsk(
+    val askedBy: String,
+    val carrierId: String,
+    val says: String,
+    val refused: Boolean? = null,
 )
 
 @Serializable

@@ -87146,7 +87146,11 @@
               "string",
               "null"
             ],
-            "description": "Why the parcel needs the user, such as failed_attempt or ready_for_pickup; null when it doesn't."
+            "description": "Why the parcel needs the user, such as failed_attempt or ready_for_pickup, or postcode_needed and postcode_refused when its lookup asks for the delivery postcode (see postcodeAsk); null when it doesn't."
+          },
+          "postcodeAsk": {
+            "description": "Only when a tracking service or the carrier needs the delivery postcode to look the parcel up, as the app asks for it (see TokenPostcodeAsk).",
+            "$ref": "#/components/schemas/TokenPostcodeAsk"
           },
           "carrierWarning": {
             "type": "string",
@@ -87204,6 +87208,35 @@
             "type": "boolean",
             "const": true,
             "description": "Only when the user keeps a private note on the parcel. get_parcel gives the note itself."
+          }
+        }
+      },
+      "TokenPostcodeAsk": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "A lookup that asks for the parcel's delivery postcode. It never holds the postcode itself.",
+        "required": [
+          "askedBy",
+          "carrierId",
+          "says"
+        ],
+        "properties": {
+          "askedBy": {
+            "type": "string",
+            "description": "Who asks: a tracking service, such as ParcelsApp, or a carrier's name."
+          },
+          "carrierId": {
+            "type": "string",
+            "description": "The carrier id to give change_carrier with the postcode: the parcel's own carrier for a tracking service's ask."
+          },
+          "says": {
+            "type": "string",
+            "description": "What is asked and how to answer, in English, such as \"ParcelsApp needs the delivery postcode to look up this parcel.\""
+          },
+          "refused": {
+            "type": "boolean",
+            "const": true,
+            "description": "Only when the postcode the parcel has was refused: the user is to check it."
           }
         }
       },

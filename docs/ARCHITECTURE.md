@@ -646,11 +646,18 @@ Key server modules:
   - The tools work on the token's account alone, through the owner-checked functions the
     app uses. A carrier change, an archive and a restore run the owner's own database
     functions for the token's account (`change_account_package_carrier`,
-    `set_account_package_archived`), so the carrier list, each carrier's inputs and the
+    `set_account_package_archived`, `set_account_package_provider_postcode`), so the carrier list, each carrier's inputs and the
     active-parcel limit hold as in the app, and a carrier change queues the check the edit
     sheet's change does (`src/server/carrierCheck.ts`). `change_carrier` keeps the parcel's
     postcode, with its country, and its phone digits for a carrier that takes them unless
-    given others; a call that changes nothing queues no check. A grant that may not read
+    given others; a call that changes nothing queues no check. A parcel whose lookup asks for
+    the delivery postcode, as its page in the app asks, says so: `needsAttention` is
+    `postcode_needed` or `postcode_refused`, and `postcodeAsk` names the tracking service or
+    carrier that asks and the carrier id to answer with. `change_carrier` with the parcel's own
+    carrier and the postcode saves it where the app's "Add postcode" does, for the tracking
+    services alone when that carrier takes no postcode. `add_parcels` takes a postcode and its
+    country, given to each parcel whose carrier takes one, as the Add sheet sends it. No answer
+    holds a postcode. A grant that may not read
     hears back only what it set. `find_carriers` searches the catalog as the carrier pickers do and lists
     the carriers a number's shape fits, with the inputs each asks for; it asks no carrier.
   - No tool deletes a parcel: deleting for good is too easy for an assistant to get wrong,

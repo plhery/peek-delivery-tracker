@@ -487,6 +487,8 @@ psql "$database_url" -X -v ON_ERROR_STOP=1 \
 psql "$database_url" -X -v ON_ERROR_STOP=1 \
   -f "$repo_root/supabase/tests/account_package_edits.sql"
 psql "$database_url" -X -v ON_ERROR_STOP=1 \
+  -f "$repo_root/supabase/tests/account_provider_postcode.sql"
+psql "$database_url" -X -v ON_ERROR_STOP=1 \
   -f "$repo_root/supabase/tests/restaged_scan_copies.sql"
 psql "$database_url" -X -v ON_ERROR_STOP=1 \
   -f "$repo_root/supabase/tests/dhl_express_wall_clock_copies.sql"

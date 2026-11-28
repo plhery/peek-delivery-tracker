@@ -98,7 +98,7 @@ Assicurati di aver inserito il codice di spedizione di 24 cifre ricevuto per e-m
 
 ### Quanto resta in giacenza un pacco InPost al locker o InPost Point — e si può prolungare?
 
-Di solito circa 3 giorni (la scadenza esatta è nell'e-mail di InPost, ma i tempi dipendono dal negozio). Prolungare la giacenza non è possibile «salvo rare eccezioni»: scrivi a `servizioclienti@inpost24.it` con il codice di spedizione oppure fai ritirare il pacco a un'altra persona.
+Di solito circa 3 giorni (la scadenza esatta è nell'e-mail di InPost, ma i tempi dipendono dal negozio). Prolungare la giacenza non è possibile «salvo rare eccezioni»: scrivi a servizioclienti@inpost24.it con il codice di spedizione oppure fai ritirare il pacco a un'altra persona.
 
 ### Chi può ritirare un pacco InPost al posto mio?
 
@@ -110,7 +110,7 @@ Per la consegna a casa, InPost Italia indica dal lunedì al venerdì (9:00–20:
 
 ### Qual è il numero di telefono del servizio clienti InPost Italia?
 
-Il numero indicato come gratuito è `+39 0238582894` (lunedì–sabato, 8:00–20:00), utile anche per segnalare smarrimenti, ritardi o locker guasti; in alternativa scrivi a `servizioclienti@inpost24.it` o usa il [modulo di reclamo](https://inpost.it/reclamo/utente-privato).
+Il numero indicato come gratuito è +39 0238582894 (lunedì–sabato, 8:00–20:00), utile anche per segnalare smarrimenti, ritardi o locker guasti; in alternativa scrivi a servizioclienti@inpost24.it o usa il [modulo di reclamo](https://inpost.it/reclamo/utente-privato).
 
 :::sources
 - [InPost Italia: Traccia il tuo pacco con il tracking InPost](https://inpost.it/trova-il-tuo-pacco) – forme accettate, fino a 5 codici, titoli degli stati

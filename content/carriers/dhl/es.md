@@ -98,7 +98,7 @@ Muestra el estado, cada evento con su lugar en el mapa, el día previsto de entr
 
 ### ¿Quién reparte un paquete de DHL Paket en España (Correos, DHL eCommerce o CTT Express)?
 
-En España, DHL Paket entrega a través de un socio local: DHL cita a [Correos](carrier:correos-spain) y en la península también a [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) (solo Correos en Canarias, Ceuta y Melilla), y tras la alianza de mayo de 2026 muchas entregas a particulares pasan a [CTT Express](carrier:ctt-express). El seguimiento o el aviso te indican cuál lo tiene.
+En España, DHL Paket entrega a través de un socio local: DHL cita a [Correos](carrier:correos-spain) y en la península también a [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) (solo Correos en Canarias, Ceuta y Melilla), y, con la alianza que DHL eCommerce y CTT firmaron en mayo de 2026, algunas entregas a particulares pueden llegar con [CTT Express](carrier:ctt-express). El seguimiento o el aviso te indican cuál lo tiene.
 
 ### ¿Cuánto tarda un paquete DHL Paket de Alemania a España y cuándo aparece el seguimiento?
 
@@ -114,7 +114,7 @@ No: ni DHL Päckchen ni DHL Päckchen International tienen seguimiento, y en DHL
 
 ### ¿Cuál es el teléfono de DHL Paket y de Correos si hay un problema?
 
-Desde fuera de Alemania llama a DHL Paket al `+49 228 4333112` (`0228 4333112` en Alemania, lun–vie 8–20 h, sáb 8–18 h) o a Correos en España al `915 197 197` / `900 400 004`. Si el envío se pierde, contacta primero con el remitente (la búsqueda internacional tarda hasta 8 semanas).
+Desde fuera de Alemania llama a DHL Paket al +49 228 4333112 (0228 4333112 en Alemania, lun–vie 8–20 h, sáb 8–18 h) o a Correos en España al 915 197 197 o 900 400 004. Si el envío se pierde, contacta primero con el remitente (la búsqueda internacional tarda hasta 8 semanas).
 
 :::sources
 - [DHL: What does my shipment status mean?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – estados en inglés, centro de destino, reparto, Filiale 7 días laborables, documento, autorización

@@ -77,7 +77,7 @@ Peek mostra le diciture francesi originali di Mondial Relay così come sono pubb
 
 ### Chi consegna un pacco Mondial Relay in Italia (InPost, BRT o Poste Italiane)?
 
-In Italia il gruppo di Mondial Relay opera direttamente come [InPost](carrier:inpost) (Locker InPost Italia S.r.l.). Sugli ordini Vinted diretti in Italia, Vinted collabora con [Poste Italiane](carrier:poste-italiane), InPost, [BRT](carrier:brt)-fermopoint, GLS (con Verifica dell'articolo) e [DHL Express](carrier:dhl-express): se nella chat trovi un secondo codice italiano, aggiungilo separatamente su Peek.
+In Italia il gruppo di Mondial Relay opera direttamente come [InPost](carrier:inpost) (Locker InPost Italia S.r.l.). Sugli ordini Vinted diretti in Italia, Vinted collabora con [Poste Italiane](carrier:poste-italiane), InPost, [BRT](carrier:brt)-fermopoint, GLS (solo con la Verifica dell'articolo) e [DHL Express](carrier:dhl-express): se nella chat trovi un secondo codice italiano, aggiungilo separatamente su Peek.
 
 ### Posso tracciare un pacco Mondial Relay senza codice postale (CAP)?
 
@@ -85,7 +85,7 @@ Su Peek il codice a barre completo da 26 cifre e le varianti da 10, 12 o 14 cifr
 
 ### Quanto tempo impiega una spedizione Mondial Relay con Vinted e cosa fare se è bloccata?
 
-Su Vinted il primo aggiornamento può richiedere fino a 48 ore e la consegna internazionale impiega mediamente **7 giorni lavorativi** (circa 5 nazionali). Se il pacco non arriva entro **25 giorni lavorativi**, tocca **«Ho un problema»** nella chat dell'ordine per l'annullamento e il rimborso.
+Su Vinted il primo aggiornamento può richiedere fino a 48 ore e la consegna internazionale impiega mediamente **7 giorni lavorativi** (circa 5 nazionali). Se il pacco non arriva entro **25 giorni lavorativi** dall'invio, tocca **«Ho un problema»** nella chat dell'ordine per l'annullamento e il rimborso.
 
 ### Qual è la differenza tra Mondial Relay e InPost?
 

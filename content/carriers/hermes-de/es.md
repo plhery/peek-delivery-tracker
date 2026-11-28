@@ -6,7 +6,7 @@ published: 2026-10-23
 updated: 2026-11-27
 ---
 
-Hermes Germany (grupo Otto, sede en Hamburgo) reparte dentro de Alemania y entrega paquetes en España a través de un socio local (*Systempartner*). Sigue tu envío pegando el *Sendungsnummer* (14 a 20 caracteres, como `H` + 16–19 cifras o 14 cifras) en la casilla de arriba o en [myhermes.de](https://www.myhermes.de/empfangen/sendungsverfolgung/) — debajo explicamos los estados, cómo ver al repartidor en España, plazos y reclamaciones.
+Hermes Germany (grupo Otto, sede en Hamburgo) reparte dentro de Alemania y entrega paquetes en España a través de un socio local (*Systempartner*). Sigue tu envío pegando el *Sendungsnummer* (myhermes.de acepta de 14 a 20 letras y cifras) en la casilla de arriba o en [myhermes.de](https://www.myhermes.de/empfangen/sendungsverfolgung/) — debajo explicamos los estados, cómo ver al repartidor en España, plazos y reclamaciones.
 
 ## Número de seguimiento Hermes: dónde está y cómo es
 
@@ -107,7 +107,7 @@ Si lo envía un particular desde un PaketShop en Alemania, Hermes da un plazo or
 
 ### ¿Qué empresa reparte los paquetes de Hermes Germany en España?
 
-Hermes trabaja con un socio local (*Systempartner*) cuyo nombre no publica en sus condiciones. Si `myhermes.de` muestra «Internat. Versandpartner» con el enlace «Sendungsdetails» en el detalle del envío, ahí verás el transportista español y su seguimiento.
+Hermes trabaja con un socio local (*Systempartner*) cuyo nombre no publica en sus condiciones. Si myhermes.de muestra «Internat. Versandpartner» con el enlace «Sendungsdetails» en el detalle del envío, ahí verás el transportista español y su seguimiento.
 
 ### ¿Hay que pagar aduana por un paquete de Hermes desde Alemania y llega a Canarias?
 
@@ -115,7 +115,7 @@ De Alemania a la península o Baleares no hay aduana (ambos países están en la
 
 ### ¿Por qué Hermes no encuentra mi número o el seguimiento está parado?
 
-Un paquete nuevo aparece como muy tarde al día siguiente (hasta 2 días laborables si se dejó un viernes), y Hermes borra los datos tras 30 días. Si lleva más de 5 días laborables parado, se puede pedir una búsqueda (*Sendungsrecherche*) por el formulario — y si compraste en una tienda, reclama primero al vendedor.
+Un paquete nuevo aparece como muy tarde al día siguiente (hasta 2 días laborables si se dejó un viernes), y Hermes borra los datos tras 30 días. A partir de 5 días laborables desde el envío, se puede pedir una búsqueda (*Sendungsrecherche*) por el formulario — y si compraste en una tienda, reclama primero al vendedor.
 
 ### ¿Cómo contactar con Hermes Germany (tiene teléfono o WhatsApp)?
 

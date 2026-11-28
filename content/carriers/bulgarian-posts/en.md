@@ -111,11 +111,11 @@ It means Bulgarian customs cleared your parcel and returned it to Bulgarian Post
 
 ### How much are Bulgarian Posts customs fees and the €3 / €2 EU charges?
 
-Effective 2 November 2026, Bulgarian Posts' VAT-included representation fee is €2.70 (IOSS orders up to €150 or C2C gifts up to €45), €3.80 (non-IOSS up to €150 or gifts €45–€1,000), €12.00 (€150–€1,000) and €20.00 (+ €5.00 per extra item type) over €1,000, on top of VAT, the €3 EU flat duty (B2C up to €150) and the €2 EU Union Handling Fee.
+Effective 2 November 2026, Bulgarian Posts' VAT-included representation fee is €2.70 (IOSS orders up to €150 or C2C gifts up to €45), €3.80 (non-IOSS up to €150 or gifts €45–€1,000), €12.00 (€150–€1,000) and €20.00 (+ €5.00 per extra item type) over €1,000, on top of VAT, the €3 EU flat duty (B2C up to €150) and, on online purchases, the €2 EU Union Handling Fee.
 
 ### How do I contact Bulgarian Posts or file a claim for a lost parcel?
 
-Call `*7678` or `+359 2 962 50 50` (working days 08:00–17:30) or email `info@bgpost.bg` (customs: `customerservice@bgpost.bg`). Before delivery, only the sender (or the recipient with the sender's written consent) can file a claim within 6 months via a post office or the RQMS portal.
+Call `*7678` or `+359 2 962 50 50` (working days 08:00–17:30) or email `info@bgpost.bg` (customs: `customerservice@bgpost.bg`). Before delivery, only the sender (or the recipient with the sender's written consent) can file a claim within 6 months of posting, at a post office or through the RQMS portal.
 
 :::sources
 - [Bulgarian Posts: Home](https://www.bgpost.bg/en) – national postal operator overview

@@ -1,12 +1,12 @@
 ---
 title: Suivi InPost : numéros, statuts, Lockers et Mondial Relay
-description: Suivi colis InPost (groupe Mondial Relay) en France, Belgique, Suisse et Europe : numéros 24/8 chiffres, Locker & Point Relais (3–5 jours), douane et contacts.
+description: Suivi colis InPost (groupe de Mondial Relay) en France, Belgique, Suisse et Europe : numéros 24/8 chiffres, Locker & Point Relais (3–5 jours), douane et contacts.
 slug: inpost-suivi
 published: 2026-11-17
 updated: 2026-11-27
 ---
 
-Le groupe **InPost** (`InPost S.A.`, 95 000 Lockers et points de retrait dans 9 pays européens) a racheté [Mondial Relay](carrier:mondial-relay) en 2021 : il conserve le nom Mondial Relay en France, Belgique et Luxembourg, opère comme InPost en Pologne, Italie, Espagne, Portugal et au Royaume-Uni (avec Yodel by InPost), et remplace Mondial Relay aux Pays-Bas. Colle ton numéro InPost (24 chiffres, `8YDR`, `JD`/`JJD` ou `FV`) ci-dessus pour suivre le trajet, les délais de garde et les règles douanières.
+Le groupe **InPost** (`InPost S.A.`, environ 95 000 Lockers et points de retrait dans 9 pays européens) a racheté [Mondial Relay](carrier:mondial-relay) en 2021 : il conserve le nom Mondial Relay en France, Belgique et Luxembourg, opère comme InPost en Pologne, Italie, Espagne, Portugal et au Royaume-Uni (avec Yodel by InPost), et passe progressivement sous le nom InPost aux Pays-Bas. Collez votre numéro InPost (24 chiffres, `8YDR`, `JD`/`JJD` ou `FV`) ci-dessus pour suivre le trajet, les délais de garde et les règles douanières.
 
 Pour suivre un colis InPost venant de Pologne, d'Italie ou du Royaume-Uni, collez le numéro fourni par le marchand ci-dessus ou sur le site du pays d'envoi comme [inpost.co.uk/tracking](https://inpost.co.uk/tracking). Pour un envoi français ou belge à 8 chiffres, consultez aussi la page [Mondial Relay](carrier:mondial-relay).
 
@@ -105,19 +105,19 @@ Oui : InPost (`InPost S.A.`) a racheté [Mondial Relay](carrier:mondial-relay) e
 
 ### Combien de jours un colis reste-t-il en Locker ou Point Relais InPost ?
 
-Comptez 5 jours en France, Belgique, Luxembourg, Espagne et Portugal (certaines pages portugaises mentionnent encore 8 jours), 3 jours en Italie et 3 jours sans prolongation au Royaume-Uni (48 h annoncées à l'international pour la Pologne ; 7 ou 15 jours chez la Poste suisse).
+Comptez 5 jours en France, Belgique, Luxembourg, Espagne et Portugal (certaines pages portugaises mentionnent encore 8 jours), 3 jours en Italie et 3 jours sans prolongation au Royaume-Uni (pour la Pologne, 48 h annoncées à l'international et, sur place, selon l'application InPost Mobile ; 7 ou 15 jours chez la Poste suisse).
 
 ### Pourquoi mon code PIN à 6 chiffres ou code à 9 chiffres ne fonctionne pas dans le suivi ?
 
-Les codes à 6 chiffres (Espagne/Portugal) et 9 chiffres (Royaume-Uni ou « kod nadania » polonais) servent uniquement au retrait ou au dépôt, pas au suivi. Saisis le numéro d'expédition (24 chiffres, 8 chiffres pour Mondial Relay, `8YDR`, `JD`/`JJD` ou `FV`).
+Les codes à 6 chiffres (Espagne/Portugal) et 9 chiffres (Royaume-Uni ou « kod nadania » polonais) servent uniquement au retrait ou au dépôt, pas au suivi. Saisissez le numéro d'expédition (24 chiffres, 8 chiffres pour Mondial Relay, `8YDR`, `JD`/`JJD` ou `FV`).
 
 ### Faut-il payer des frais de douane sur un colis InPost depuis l'étranger ?
 
-Aucun frais au sein de l'UE (Pologne, Italie, Espagne, France, Belgique, Luxembourg). Depuis le Royaume-Uni ou hors UE vers l'UE, la TVA (hors IOSS), le droit forfaitaire de 3 € (jusqu'à 150 €) et les frais européens de 2 € par catégorie peuvent s'appliquer ; ne paie jamais via un lien SMS imprévu.
+Aucun frais au sein de l'UE (Pologne, Italie, Espagne, France, Belgique, Luxembourg). Depuis le Royaume-Uni ou hors UE vers l'UE, la TVA (hors IOSS), le droit forfaitaire de 3 € (jusqu'à 150 €) et les frais européens de 2 € par catégorie peuvent s'appliquer ; ne payez jamais via un lien SMS imprévu.
 
 ### Quel est le délai de livraison InPost et comment contacter le service client ?
 
-Au Royaume-Uni, InPost annonce 3 jours ouvrés vers un Locker/Shop et 4 jours ouvrés à domicile (pour France/Belgique, voir [Mondial Relay](carrier:mondial-relay)). Contacts : UK `0330 335 0950`, Pologne `+48 722 444 000`, Italie `+39 0238582894`, Espagne `+34 938 16 62 34`, Portugal `211 245 624`.
+Au Royaume-Uni, InPost annonce aux expéditeurs 3 jours ouvrés vers un Locker/Shop et 4 jours ouvrés à domicile (pour France/Belgique, voir [Mondial Relay](carrier:mondial-relay)). Contacts : UK `0330 335 0950`, Pologne `+48 722 444 000`, Italie `+39 0238582894`, Espagne `+34 938 16 62 34`, Portugal `211 245 624`.
 
 :::sources
 - [InPost : Who we are](https://inpost.eu/who-we-are) – Pologne 1999, InPost S.A. au Luxembourg

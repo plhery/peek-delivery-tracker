@@ -100,7 +100,7 @@ Peek viser status, historikken med kontoret for hver scanning (et kontor skrevet
 
 For et nummer, der ender på `CN`, spørger Peek — så snart China Post nævner dit land — også dit nationale postvæsen med det samme nummer (USPS, Royal Mail, An Post, Canada Post eller Australia Post; Parcelforce for EMS-numre til Storbritannien) og skifter over til det, så snart det viser friske scanninger, mens China Posts historik bevares. Nævner China Post intet land, går Peek ud fra dit: i iPhone- og Android-appen den region, der er indstillet på telefonen; på peektracker.com det land, du tilføjede pakken fra.
 
-Peek tjekker China Post hver time, også på leveringsdagen. Når dit postvæsen overtager leveringen, følger Peek tempoet for det fragtfirma, der leverer pakken. Peek kan give dig besked ved "Every scan", "Important steps" eller "Delivery only". Det kan ikke kontakte China Post, dit postvæsen eller butikken for dig.
+Peek tjekker China Post hver time, også når pakken er ude til levering. Når dit postvæsen overtager leveringen, følger Peek tempoet for det fragtfirma, der leverer pakken. Peek kan give dig besked ved "Every scan", "Important steps" eller "Delivery only". Det kan ikke kontakte China Post, dit postvæsen eller butikken for dig.
 
 ## Spørgsmål om China Post-sporing
 

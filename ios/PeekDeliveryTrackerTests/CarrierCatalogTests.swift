@@ -2812,6 +2812,15 @@ extension CarrierCatalogTests {
         XCTAssertEqual(listed("Track it\nhttps://shop.example/r?U=https%3A%2F%2Fshop.example%2Ftrack%3Fid%3D1ZDEMO202600000001\nAlso 1Z999AA10123456784"),
                        ["1ZDEMO202600000001", "1Z999AA10123456784"])
         XCTAssertEqual(listed("Your parcels \(two), 100% on time"), ["1Z999AA10123456784", "1ZDEMO202600000001"])
+        // A link pasted alone, or in a message, reads no number; nor does "%2F" before nine digits.
+        XCTAssertEqual(catalog.parse(help).trackingNumber, "")
+        XCTAssertEqual(catalog.parse("https://shop.example/help?nodeId%3D201234567").trackingNumber, "")
+        XCTAssertEqual(catalog.parse("https://shop.example/help%2F201234567").trackingNumber, "")
+        XCTAssertEqual(catalog.read("Read our help page\n\(help)\nThank you").trackingNumber, "")
+        let track = catalog.parse("https://shop.example/r?U=https%3A%2F%2Fshop.example%2Ftrack%3Fid%3D1ZDEMO202600000001")
+        XCTAssertEqual(track.trackingNumber, "1ZDEMO202600000001")
+        XCTAssertEqual(track.source, .link)
+        XCTAssertEqual(catalog.parse("Your parcel 1ZDEMO202600000001, 100% on time").trackingNumber, "1ZDEMO202600000001")
     }
 
     /// The shared engine's patterns and separators are JavaScript's.

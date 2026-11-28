@@ -1256,8 +1256,9 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
             }
         }
 
-        // No part of a shop's order number is read as a tracking number.
-        let prose = Self.withoutOrders(input)
+        // No part of a shop's order number is read as a tracking number, nor a link's percent escape: a link whose
+        // decoded text named nothing is read here as it was pasted, where "%3D" before nine digits fits WeDo's shape.
+        let prose = Self.withoutOrders(Self.blanking(Self.percentEscapePattern, in: input, caseInsensitive: true))
         if let recognized = recognizedNumber(in: prose) {
             return makeMatch(recognized, source: input == recognized ? .number : .text)
         }

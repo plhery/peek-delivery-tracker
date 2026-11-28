@@ -26,29 +26,29 @@ Spaties, streepjes en kleine letters maken niets uit wanneer je het nummer in Pe
 
 ## Betekenis van de statussen bij Xinghe Freight
 
-De tracking van Xinghe Freight draait op het platform van GZYL, dus de stappen staan in de Engelse bewoordingen van GZYL, spelfouten inbegrepen. Omdat de app van Peek niet in het Nederlands is vertaald, zie je ook de eigen fasen van Peek in het Engels: «Label created» (label aangemaakt), «Received by carrier» (ontvangen door vervoerder), «In transit» (onderweg), «At customs» (bij de douane) en «Delivered» (bezorgd). De stappen in de volgorde waarin een pakket ze meestal krijgt:
+De tracking van Xinghe Freight draait op het platform van GZYL, dus de stappen staan in de Engelse bewoordingen van GZYL, spelfouten inbegrepen. Omdat de app van Peek niet in het Nederlands is vertaald, zie je ook de eigen fasen van Peek in het Engels: "Label created" (label aangemaakt), "Received by carrier" (ontvangen door vervoerder), "In transit" (onderweg), "At customs" (bij de douane) en "Delivered" (bezorgd). De stappen in de volgorde waarin een pakket ze meestal krijgt:
 
 | De tracker zegt | Wat dit voor jou betekent | Peek toont |
 | --- | --- | --- |
-| `Order information received` | De verkoper heeft de ordergegevens doorgestuurd. Niemand heeft het pakket fysiek in handen. | «Label created» |
-| `Arrive at the cross border receiving point` | De expediteur heeft het pakket ontvangen: de eerste echte scan. | «Received by carrier» |
-| `Goods leave the operation center` | Het pakket heeft het sorteer- of verwerkingscentrum in China verlaten. | «In transit» |
-| `Arrive at the international airport` | Op de internationale luchthaven, wachtend op de vlucht. | «In transit» |
-| `Departing from the airport` | Het vliegtuig is vertrokken. | «In transit» |
-| `Item arrives at destination airport` | Geland in het land van bestemming. | «In transit» |
-| `local carrier Agent Import customs clearance` | Een agent in jouw land klaart het pakket in bij de invoerdouane. | «At customs» |
-| `The import customs keep it for inspection` | De douane in jouw land houdt het pakket vast voor controle. | «At customs» |
-| `Customs clearance completed` | De inklaring is afgerond en het pakket gaat weer verder. | «In transit» |
-| `Internationaliy Package received at processing center` | Een verwerkingscentrum in jouw land heeft het ingeklaarde pakket ontvangen. Dit is geen nieuwe ophaling bij de afzender. | «In transit» |
-| `Leave the email processing center` | Het pakket heeft dat verwerkingscentrum verlaten. | «In transit» |
-| `Arrival sorting, distribution center` | Aangekomen in een sorteer- of distributiecentrum in jouw land, met de plaatsnaam erachter. | «In transit» |
-| `Leaving the sorting center` | Vertrekt uit een sorteercentrum, met de plaatsnaam erachter. | «In transit» |
-| `Package is on the way` | Onderweg binnen het land van bestemming, met een plaatsnaam. Dat betekent nog niet dat een bezorger onderweg is naar je deur. | «In transit» |
-| `Delivered` | Bezorgmelding met plaatsnaam. Kan een planning zijn in plaats van een scan: zie hieronder. | «Delivered», met een melding over het vaste schema, tenzij Peek de stap achterhoudt (zie hieronder) |
+| `Order information received` | De verkoper heeft de ordergegevens doorgestuurd. Niemand heeft het pakket fysiek in handen. | "Label created" |
+| `Arrive at the cross border receiving point` | De expediteur heeft het pakket ontvangen: de eerste echte scan. | "Received by carrier" |
+| `Goods leave the operation center` | Het pakket heeft het operationele centrum verlaten. | "In transit" |
+| `Arrive at the international airport` | Op de internationale luchthaven, wachtend op de vlucht. | "In transit" |
+| `Departing from the airport` | Het vliegtuig is vertrokken. | "In transit" |
+| `Item arrives at destination airport` | Geland in het land van bestemming. | "In transit" |
+| `local carrier Agent Import customs clearance` | Een agent in jouw land klaart het pakket in bij de invoerdouane. | "At customs" |
+| `The import customs keep it for inspection` | De douane in jouw land houdt het pakket vast voor controle. | "At customs" |
+| `Customs clearance completed` | De inklaring is afgerond en het pakket gaat weer verder. | "In transit" |
+| `Internationaliy Package received at processing center` | Een verwerkingscentrum in jouw land heeft het ingeklaarde pakket ontvangen. Dit is geen nieuwe ophaling bij de afzender. | "In transit" |
+| `Leave the email processing center` | Het pakket heeft dat verwerkingscentrum verlaten. | "In transit" |
+| `Arrival sorting, distribution center` | Aangekomen in een sorteer- of distributiecentrum in jouw land, met de plaatsnaam erachter. | "In transit" |
+| `Leaving the sorting center` | Vertrekt uit een sorteercentrum, met de plaatsnaam erachter. | "In transit" |
+| `Package is on the way` | Onderweg binnen het land van bestemming, met een plaatsnaam. Dat betekent nog niet dat een bezorger onderweg is naar je deur. | "In transit" |
+| `Delivered` | Bezorgmelding met plaatsnaam. Kan een planning zijn in plaats van een scan: zie hieronder. | "Delivered", met een melding over het vaste schema, tenzij Peek de stap achterhoudt (zie hieronder) |
 
-**Via Hongkong.** Soms zie je `香港处理中心已收寄【Hong Kong】`: een postale inname op het verwerkingscentrum in Hongkong, die de tracker in het Chinees met de stad tussen haakjes doorgeeft. Peek toont de regel zoals die is onder «Received by carrier».
+**Via Hongkong.** Soms zie je `香港处理中心已收寄【Hong Kong】`: een postale inname op het verwerkingscentrum in Hongkong, die de tracker in het Chinees met de stad tussen haakjes doorgeeft. Peek toont de regel zoals die is onder "Received by carrier".
 
-**Een regel in het Chinees.** Bij een bestelling zonder scans zet het trackingplatform er zelf `货物电子信息已经收到` neer (elektronische goedereninformatie ontvangen). De verkoper heeft de bestelling aangemaakt, maar niemand heeft het pakket al gescand. Peek toont die regel in het Chinees onder «Label created».
+**Een regel in het Chinees.** Bij een bestelling zonder scans zet het trackingplatform er zelf `货物电子信息已经收到` neer (elektronische goedereninformatie ontvangen). De verkoper heeft de bestelling aangemaakt, maar niemand heeft het pakket al gescand. Peek toont die regel in het Chinees onder "Label created".
 
 **Tijden.** Peek leest elk tijdstip op de tracker als Pekingtijd (`UTC+8`), ook bij stappen in Nederland of België, en rekent het om naar de tijdzone van je apparaat. In de winter is 20:00 in Peking gelijk aan 13:00 Nederlandse en Belgische tijd (`UTC+1`), en in de zomer 14:00 (`UTC+2`).
 
@@ -66,13 +66,13 @@ De website van Xinghe Freight geeft geen levertijden, bezorgpogingen of afhaalpu
 
 **Alleen `Order information received` of `货物电子信息已经收到`.** De verkoper heeft de order aangemaakt, maar niemand heeft het pakket gescand. Komt er na een paar dagen niets bij, vraag de verkoper dan of het echt is verzonden.
 
-**«Waiting for Xinghe Freight».** Peek heeft nog geen echte scan voor je nummer: de tracker van GZYL kent het niet of bevat alleen een vooraf opgestelde planning (die kan eindigen met `Delivered`), en andere trackingdiensten hebben ook niets. Peek blijft controleren. Voor een onbekend nummer geeft de tracker van GZYL één resultaat met het nummer als referentie en alle andere velden leeg; Peek ziet dat als niet gevonden, toont «Waiting for Xinghe Freight» en na twee dagen «Check the tracking number». Een vooraf geschreven planning telt wel als bewijs dat Xinghe de order kent, dus dan blijft «Waiting for Xinghe Freight» staan zonder verzoek om het nummer te controleren. Vergelijk het nummer toch teken voor teken met het bericht van de verkoper.
+**"Waiting for Xinghe Freight".** Peek heeft nog geen echte scan voor je nummer: de tracker van GZYL kent het niet of bevat alleen een vooraf opgestelde planning (die kan eindigen met `Delivered`), en andere trackingdiensten hebben ook niets. Peek blijft controleren. Voor een onbekend nummer geeft de tracker van GZYL één resultaat met het nummer als referentie en alle andere velden leeg; Peek ziet dat als niet gevonden, toont "Waiting for Xinghe Freight" en na twee dagen "Check the tracking number". Een vooraf geschreven planning telt wel als bewijs dat Xinghe de order kent, dus dan blijft "Waiting for Xinghe Freight" staan zonder verzoek om het nummer te controleren. Vergelijk het nummer toch teken voor teken met het bericht van de verkoper.
 
 **Vast bij de douane.** Als je gevraagd wordt invoerkosten te betalen, zie de gids over [pakketten bij de douane](guide:customs) (in het Engels). Blijft het dagenlang hangen, laat het de verkoper weten.
 
 **De tracker of een andere site toont meer stappen dan Peek.** De extra regels, inclusief `Delivered`, kunnen een vooraf gemaakte planning zijn die Peek achterhoudt. Houd de geschatte levertijd van de winkel aan en neem contact op met de verkoper zodra die is verstreken. Meer in de gids over [pakketten uit China volgen](guide:tracking-from-china) (in het Engels).
 
-**`Delivered`, maar niets ontvangen.** Die melding kan onderdeel zijn van een vooraf ingevuld schema. Behalve wanneer Swiss Post bezorgt, toont Peek onder «Delivered»: «Xinghe Freight updates on a fixed schedule, with no signature. If nothing came, ask the seller.» Laat de verkoper weten dat het pakket niet is aangekomen en vraag welke lokale vervoerder bezorgt en onder welk nummer. Meer in de gids over [bezorgd maar niet ontvangen](guide:delivered-not-received) (in het Engels).
+**`Delivered`, maar niets ontvangen.** Die melding kan onderdeel zijn van een vooraf ingevuld schema. Behalve wanneer Swiss Post bezorgt, toont Peek onder "Delivered": "Xinghe Freight updates on a fixed schedule, with no signature. If nothing came, ask the seller." Laat de verkoper weten dat het pakket niet is aangekomen en vraag welke lokale vervoerder bezorgt en onder welk nummer. Meer in de gids over [bezorgd maar niet ontvangen](guide:delivered-not-received) (in het Engels).
 
 **Verloren of retour.** De verkoper heeft de zending bij Xinghe Freight geboekt, dus vraag de verkoper of het verkoopplatform om terugbetaling of een nieuwe zending.
 
@@ -80,23 +80,23 @@ De website van Xinghe Freight geeft geen levertijden, bezorgpogingen of afhaalpu
 
 De Chinese website van Xinghe Freight (`xinghe-express.cn`) vermeldt:
 
-- **Telefoon (24/7):** `19924483103` (`+86 199 2448 3103` vanuit het buitenland), opgegeven als 24 uur per dag, elke dag bereikbaar.
-- **E-mail:** `3975605292@qq.com`, voor zakelijke aanvragen en offertes.
+- **Telefoon (24/7):** 19924483103 (+86 199 2448 3103 vanuit het buitenland), opgegeven als 24 uur per dag, elke dag bereikbaar.
+- **E-mail:** 3975605292@qq.com, voor zakelijke aanvragen en offertes.
 - **Adres:** Guangzhou, provincie Guangdong, zonder straatnaam (voor het volledige adres vraagt de site eerst contact op te nemen).
 
 De site is alleen in het Chinees en biedt niets voor buitenlandse ontvangers: het contactformulier opent enkel een e-mail naar dat adres. De verkoper is de klant van Xinghe, dus neem eerst contact op met de verkoper en met het platform als die niet reageert.
 
 ## Een Xinghe Freight-pakket volgen met Peek
 
-[Peek](/) herkent een `GZXH…YQ`-nummer (en ook een afgekapt `GZXH…Y`-nummer) meteen als Xinghe Freight met «Detected carrier». Gaf de verkoper een nummer met een andere vorm, plak het dan toch: Peek volgt meer dan 4.500 vervoerders. Om Xinghe Freight handmatig te kiezen druk je op «Change» en zoek je op Xinghe Freight (of `星和货运`), of gebruik je «Change carrier» bij een al toegevoegd pakket.
+[Peek](/) herkent een `GZXH…YQ`-nummer (en ook een afgekapt `GZXH…Y`-nummer) meteen als Xinghe Freight met "Detected carrier". Gaf de verkoper een nummer met een andere vorm, plak het dan toch: Peek volgt meer dan 4.500 vervoerders. Om Xinghe Freight handmatig te kiezen druk je op "Change" en zoek je op Xinghe Freight (of `星和货运`), of gebruik je "Change carrier" bij een al toegevoegd pakket.
 
-Peek vraagt direct de tracker van GZYL op, net als het zoekvak op de site van Xinghe. Je ziet de status, elke stap met plaatsnaam en het bestemmingsland wanneer dat in het record staat. Tijden worden gelezen in Pekingtijd en getoond in de tijdzone van je apparaat («Times are in your time zone:» onderaan de geschiedenis). Peek laat namen, adres, postcodes, gewicht, betaalgegevens, handtekening en afleverbewijs weg en toont geen verwachte bezorgdatum omdat de tracker die niet geeft.
+Peek vraagt direct de tracker van GZYL op, net als het zoekvak op de site van Xinghe. Je ziet de status, elke stap met plaatsnaam en het bestemmingsland wanneer dat in het record staat. Tijden worden gelezen in Pekingtijd en getoond in de tijdzone van je apparaat ("Times are in your time zone:" onderaan de geschiedenis). Peek laat namen, adres, postcodes, gewicht, betaalgegevens, handtekening en afleverbewijs weg en toont geen verwachte bezorgdatum omdat de tracker die niet geeft.
 
-Als de tracker je nummer niet kent, raadpleegt Peek trackingdiensten en toont hun kopie van de stappen. Zolang geen van beide stappen heeft, staat er «Waiting for Xinghe Freight» en na twee dagen «Check the tracking number».
+Als de tracker je nummer niet kent, raadpleegt Peek trackingdiensten en toont hun kopie van de stappen. Zolang geen van beide stappen heeft, staat er "Waiting for Xinghe Freight" en na twee dagen "Check the tracking number".
 
-Peek houdt elke stap achter die meer dan 12 uur vóór het getoonde tijdstip is geschreven, elke stap die in dezelfde seconde is geschreven als een stap die meer dan een halfuur vóór zijn tijdstip is geschreven (behalve de orderregistratie) en elke stap met een tijdstip in de toekomst in Pekingtijd op het moment van controle. Bij een record met vooraf geschreven stappen houdt Peek ook `Delivered` achter, zelfs als dat op dezelfde dag is geschreven. Peek baseert zich op de bewaarde stappen, niet op de samenvattingsstatus, en filtert ook kopieën van die geplande stappen uit trackingdiensten, inclusief `Delivered`. Wanneer de tracker het nummer niet kent of onbereikbaar is, kan Peek echter geen geplande stap van een trackingdienst onderscheiden van een echte scan. Zodra Peek voorspellingen achterhoudt, opent de geschiedenis tot aan bezorging of retour met «Other sites may show more steps, but they’re only predictions.», en laat «Show them» die regels in het grijs zien met de dag van de tracker («Predicted for Mon 12 Oct»). Zo'n stap telt nooit als scan: hij verandert geen status en stuurt geen melding.
+Peek houdt elke stap achter die meer dan 12 uur vóór het getoonde tijdstip is geschreven, elke stap die in dezelfde seconde is geschreven als een stap die meer dan een halfuur vóór zijn tijdstip is geschreven (behalve de orderregistratie) en elke stap met een tijdstip in de toekomst in Pekingtijd op het moment van controle. Bij een record met vooraf geschreven stappen houdt Peek ook `Delivered` achter, zelfs als dat op dezelfde dag is geschreven. Peek baseert zich op de bewaarde stappen, niet op de samenvattingsstatus, en filtert ook kopieën van die geplande stappen uit trackingdiensten, inclusief `Delivered`. Wanneer de tracker het nummer niet kent of onbereikbaar is, kan Peek echter geen geplande stap van een trackingdienst onderscheiden van een echte scan. Zodra Peek voorspellingen achterhoudt, opent de geschiedenis tot aan bezorging of retour met "Other sites may show more steps, but they’re only predictions.", en laat "Show them" die regels in het grijs zien met de dag van de tracker ("Predicted for Mon 12 Oct"). Zo'n stap telt nooit als scan: hij verandert geen status en stuurt geen melding.
 
-Op Swiss Post na volgt Peek het pakket niet door naar het lokale bezorgbedrijf: krijg je dat lokale nummer van de verkoper, voeg het dan als apart pakket toe. Zolang je het pakket geopend houdt, of op de bezorgdag met meldingen aan, controleert Peek tot elke 10 minuten; anders en wanneer het stil blijft elk uur. Je kunt meldingen kiezen voor «Every scan», «Important steps» (de twee douanestappen en `Delivered`, niet vluchten of sortering) of «Delivery only». Peek kan geen contact opnemen met Xinghe Freight, GZYL of de verkoper voor je.
+Op Swiss Post na volgt Peek het pakket niet door naar het lokale bezorgbedrijf: krijg je dat lokale nummer van de verkoper, voeg het dan als apart pakket toe. Zolang je het pakket geopend houdt, of op de bezorgdag met meldingen aan, controleert Peek tot elke 10 minuten; anders en wanneer het stil blijft elk uur. Je kunt meldingen kiezen voor "Every scan", "Important steps" (de twee douanestappen en `Delivered`, niet vluchten of sortering) of "Delivery only". Peek kan geen contact opnemen met Xinghe Freight, GZYL of de verkoper voor je.
 
 ## Veelgestelde vragen over Xinghe Freight
 
@@ -114,11 +114,11 @@ Noch de website van Xinghe noch de tracker noemt een lokale bezorgpartner (Peek 
 
 ### Waarom toont Peek minder stappen of geen tracking voor mijn GZXH-nummer?
 
-Ofwel staat het nummer nog niet in de tracker, ofwel bevat het record vooraf geschreven stappen — inclusief een gepland `Delivered` — die Peek achterhoudt achter «Show them» in plaats van ze als scans te tellen. Controleer het nummer met de mail van de verkoper en vraag de verkoper na een paar dagen om uitleg.
+Ofwel staat het nummer nog niet in de tracker, ofwel bevat het record vooraf geschreven stappen — inclusief een gepland `Delivered` — die Peek achterhoudt achter "Show them" in plaats van ze als scans te tellen. Controleer het nummer met de mail van de verkoper en vraag de verkoper na een paar dagen om uitleg.
 
 ### Hoe neem ik contact op met Xinghe Freight?
 
-Neem eerst contact op met de verkoper of het platform, want de verkoper heeft de zending geboekt. De Chinese site (`xinghe-express.cn`) noemt de 24-uurslijn `19924483103` (`+86 199 2448 3103` vanuit het buitenland) en het zakelijke e-mailadres `3975605292@qq.com`, maar heeft geen speciaal kanaal voor buitenlandse ontvangers.
+Neem eerst contact op met de verkoper of het platform, want de verkoper heeft de zending geboekt. De Chinese site (`xinghe-express.cn`) noemt de 24-uurslijn 19924483103 (+86 199 2448 3103 vanuit het buitenland) en het zakelijke e-mailadres 3975605292@qq.com, maar heeft geen speciaal kanaal voor buitenlandse ontvangers.
 
 :::sources
 - [Xinghe Freight: 广州星和货运代理有限公司 (startpagina, in het Chinees)](http://xinghe-express.cn/) – bedrijfsnaam, expeditiediensten, zoekvak naar de tracker van GZYL, telefoonnummer en e-mail

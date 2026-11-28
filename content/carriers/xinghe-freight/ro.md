@@ -26,29 +26,29 @@ Spațiile, cratimele și literele mici nu contează când lipești codul în Pee
 
 ## Ce înseamnă statusurile Xinghe Freight
 
-Urmărirea Xinghe Freight rulează pe platforma GZYL, astfel că mesajele vin în formulările în engleză ale GZYL, cu greșelile de scriere cu tot. Deoarece interfața Peek nu are versiune în română, etapele Peek apar tot în engleză: «Label created» (etichetă creată), «Received by carrier» (primit de curier), «In transit» (în tranzit), «At customs» (la vamă) și «Delivered» (livrat). Pașii în ordinea obișnuită:
+Urmărirea Xinghe Freight rulează pe platforma GZYL, astfel că mesajele vin în formulările în engleză ale GZYL, cu greșelile de scriere cu tot. Deoarece interfața Peek nu are versiune în română, etapele Peek apar tot în engleză: „Label created” (etichetă creată), „Received by carrier” (primit de curier), „In transit” (în tranzit), „At customs” (la vamă) și „Delivered” (livrat). Pașii în ordinea obișnuită:
 
 | Trackerul scrie | Ce înseamnă pentru tine | Peek afișează |
 | --- | --- | --- |
-| `Order information received` | Vânzătorul a trimis datele comenzii. Nimeni nu are încă coletul fizic. | «Label created» |
-| `Arrive at the cross border receiving point` | Expeditorul a preluat coletul: prima scanare reală. | «Received by carrier» |
-| `Goods leave the operation center` | Coletul a plecat din centrul operațional din China. | «In transit» |
-| `Arrive at the international airport` | La aeroportul internațional, așteptând zborul. | «In transit» |
-| `Departing from the airport` | Avionul a decolat. | «In transit» |
-| `Item arrives at destination airport` | A aterizat în țara de destinație. | «In transit» |
-| `local carrier Agent Import customs clearance` | Un agent din țara ta efectuează vămuirea de import. | «At customs» |
-| `The import customs keep it for inspection` | Vama din țara ta a reținut coletul pentru verificare. | «At customs» |
-| `Customs clearance completed` | Vămuirea s-a încheiat și coletul își continuă drumul. | «In transit» |
-| `Internationaliy Package received at processing center` | Un centru de procesare din țara ta a primit coletul vămuit. Nu este o nouă preluare de la expeditor. | «In transit» |
-| `Leave the email processing center` | Coletul a părăsit acel centru de procesare. | «In transit» |
-| `Arrival sorting, distribution center` | Sosit la un centru de sortare sau distribuție din țara ta, urmat de oraș. | «In transit» |
-| `Leaving the sorting center` | Pleacă dintr-un centru de sortare, urmat de oraș. | «In transit» |
-| `Package is on the way` | În drum prin țara de destinație, cu un oraș. Nu înseamnă că este ieșit în livrare cu curierul. | «In transit» |
-| `Delivered` | Livrarea, cu orașul. Poate fi un plan, nu o scanare: vezi mai jos. | «Delivered», cu o notă despre programul fix, dacă Peek nu reține pasul (vezi mai jos) |
+| `Order information received` | Vânzătorul a trimis datele comenzii. Nimeni nu are încă coletul fizic. | „Label created” |
+| `Arrive at the cross border receiving point` | Expeditorul a preluat coletul: prima scanare reală. | „Received by carrier” |
+| `Goods leave the operation center` | Coletul a plecat din centrul operațional. | „In transit” |
+| `Arrive at the international airport` | La aeroportul internațional, așteptând zborul. | „In transit” |
+| `Departing from the airport` | Avionul a decolat. | „In transit” |
+| `Item arrives at destination airport` | A aterizat în țara de destinație. | „In transit” |
+| `local carrier Agent Import customs clearance` | Un agent din țara ta efectuează vămuirea de import. | „At customs” |
+| `The import customs keep it for inspection` | Vama din țara ta a reținut coletul pentru verificare. | „At customs” |
+| `Customs clearance completed` | Vămuirea s-a încheiat și coletul își continuă drumul. | „In transit” |
+| `Internationaliy Package received at processing center` | Un centru de procesare din țara ta a primit coletul vămuit. Nu este o nouă preluare de la expeditor. | „In transit” |
+| `Leave the email processing center` | Coletul a părăsit acel centru de procesare. | „In transit” |
+| `Arrival sorting, distribution center` | Sosit la un centru de sortare sau distribuție din țara ta, urmat de oraș. | „In transit” |
+| `Leaving the sorting center` | Pleacă dintr-un centru de sortare, urmat de oraș. | „In transit” |
+| `Package is on the way` | În drum prin țara de destinație, cu un oraș. Nu înseamnă că este ieșit în livrare cu curierul. | „In transit” |
+| `Delivered` | Livrarea, cu orașul. Poate fi un plan, nu o scanare: vezi mai jos. | „Delivered”, cu o notă despre programul fix, dacă Peek nu reține pasul (vezi mai jos) |
 
-**Prin Hong Kong.** Poate apărea și `香港处理中心已收寄【Hong Kong】`: o acceptare poștală la centrul de procesare din Hong Kong, transmisă de tracker în chineză cu orașul între paranteze. Peek o afișează ca atare, la etapa «Received by carrier».
+**Prin Hong Kong.** Poate apărea și `香港处理中心已收寄【Hong Kong】`: o acceptare poștală la centrul de procesare din Hong Kong, transmisă de tracker în chineză cu orașul între paranteze. Peek o afișează ca atare, la etapa „Received by carrier”.
 
-**O linie în chineză.** Pentru o comandă fără scanări încă, platforma scrie automat `货物电子信息已经收到` (informațiile electronice ale mărfii au fost primite). Vânzătorul a creat comanda, dar nimeni nu a scanat încă coletul. Peek o afișează în chineză sub «Label created».
+**O linie în chineză.** Pentru o comandă fără scanări încă, platforma scrie automat `货物电子信息已经收到` (informațiile electronice ale mărfii au fost primite). Vânzătorul a creat comanda, dar nimeni nu a scanat încă coletul. Peek o afișează în chineză sub „Label created”.
 
 **Orele.** Peek citește fiecare oră din tracker la ora Beijingului (`UTC+8`), inclusiv pașii din România, și o convertește la fusul orar al dispozitivului tău. Iarna, 20:00 la Beijing înseamnă 14:00 ora României (`UTC+2`), iar vara 15:00 (`UTC+3`).
 
@@ -66,13 +66,13 @@ Site-ul Xinghe Freight nu publică termene de livrare, număr de încercări sau
 
 **Doar `Order information received` sau `货物电子信息已经收到`.** Vânzătorul a creat comanda, dar nimeni nu a scanat coletul încă. Dacă nu apare nimic după câteva zile, întreabă vânzătorul dacă a fost expediat cu adevărat.
 
-**«Waiting for Xinghe Freight».** Peek nu are încă pași confirmați pentru codul tău: fie trackerul GZYL nu îl cunoaște, fie conține doar pași programați dinainte (care pot ajunge până la `Delivered`), iar serviciile de urmărire nu au nici ele nimic. Peek continuă să verifice. Pentru un cod necunoscut, trackerul GZYL întoarce un rând cu codul ca referință și toate celelalte câmpuri goale; Peek îl tratează ca negăsit, afișează «Waiting for Xinghe Freight» și, după două zile, «Check the tracking number». Un plan scris dinainte contează ca dovadă că Xinghe are comanda, deci «Waiting for Xinghe Freight» rămâne fără solicitarea de a verifica codul. Compară totuși codul caracter cu caracter cu mesajul vânzătorului.
+**„Waiting for Xinghe Freight”.** Peek nu are încă pași confirmați pentru codul tău: fie trackerul GZYL nu îl cunoaște, fie conține doar pași programați dinainte (care pot ajunge până la `Delivered`), iar serviciile de urmărire nu au nici ele nimic. Peek continuă să verifice. Pentru un cod necunoscut, trackerul GZYL întoarce un rând cu codul ca referință și toate celelalte câmpuri goale; Peek îl tratează ca negăsit, afișează „Waiting for Xinghe Freight” și, după două zile, „Check the tracking number”. Un plan scris dinainte contează ca dovadă că Xinghe are comanda, deci „Waiting for Xinghe Freight” rămâne fără solicitarea de a verifica codul. Compară totuși codul caracter cu caracter cu mesajul vânzătorului.
 
 **Blocat la vamă.** Dacă ți se cer taxe de import, consultă ghidul despre [colete la vamă](guide:customs) (în engleză). Dacă stă acolo mai multe zile, anunță vânzătorul.
 
 **Trackerul sau alt site arată mai mulți pași decât Peek.** Pașii în plus, inclusiv `Delivered`, pot fi un plan scris dinainte pe care Peek îl reține. Ghidează-te după termenul estimat dat de magazin și contactează vânzătorul după ce a trecut. Mai multe în ghidul despre [urmărirea coletelor din China](guide:tracking-from-china) (în engleză).
 
-**`Delivered`, dar nu a venit nimic.** Pasul poate face parte dintr-un program scris dinainte. Cu excepția livrărilor prin Swiss Post, Peek afișează sub «Delivered» nota: «Xinghe Freight updates on a fixed schedule, with no signature. If nothing came, ask the seller.» Spune-i vânzătorului că nu ai primit coletul și cere numele și codul curierului local. Mai multe în ghidul despre [colet marcat livrat, dar neprimit](guide:delivered-not-received) (în engleză).
+**`Delivered`, dar nu a venit nimic.** Pasul poate face parte dintr-un program scris dinainte. Cu excepția livrărilor prin Swiss Post, Peek afișează sub „Delivered” nota: „Xinghe Freight updates on a fixed schedule, with no signature. If nothing came, ask the seller.” Spune-i vânzătorului că nu ai primit coletul și cere numele și codul curierului local. Mai multe în ghidul despre [colet marcat livrat, dar neprimit](guide:delivered-not-received) (în engleză).
 
 **Pierdut sau returnat.** Vânzătorul a rezervat transportul la Xinghe Freight, așa că cere rambursare sau reexpediere de la vânzător sau de pe platforma unde ai comandat.
 
@@ -80,23 +80,23 @@ Site-ul Xinghe Freight nu publică termene de livrare, număr de încercări sau
 
 Site-ul în chineză al Xinghe Freight (`xinghe-express.cn`) publică:
 
-- **Linie telefonică (24/7):** `19924483103` (`+86 199 2448 3103` din străinătate), declarată disponibilă non-stop, zilnic.
-- **E-mail:** `3975605292@qq.com`, pentru solicitări comerciale și oferte de preț.
+- **Linie telefonică (24/7):** 19924483103 (+86 199 2448 3103 din străinătate), declarată disponibilă non-stop, zilnic.
+- **E-mail:** 3975605292@qq.com, pentru solicitări comerciale și oferte de preț.
 - **Adresă:** Guangzhou, provincia Guangdong, fără stradă (pentru adresa completă cere să îi contactezi mai întâi).
 
 Site-ul este exclusiv în chineză și nu are un canal dedicat destinatarilor din străinătate: formularul de contact doar deschide un e-mail către adresa de mai sus. Clientul Xinghe este vânzătorul, deci întreabă mai întâi vânzătorul și apoi platforma dacă nu primești răspuns.
 
 ## Urmărește un colet Xinghe Freight cu Peek
 
-[Peek](/) recunoaște pe loc codul `GZXH…YQ` (și varianta trunchiată `GZXH…Y`) ca Xinghe Freight cu eticheta «Detected carrier». Dacă vânzătorul ți-a dat un cod în alt format, lipește-l oricum: Peek urmărește peste 4 500 de curieri. Pentru a selecta Xinghe Freight manual, apasă «Change» și caută Xinghe Freight (sau `星和货运`), ori folosește «Change carrier» pe un colet deja adăugat.
+[Peek](/) recunoaște pe loc codul `GZXH…YQ` (și varianta trunchiată `GZXH…Y`) ca Xinghe Freight cu eticheta „Detected carrier”. Dacă vânzătorul ți-a dat un cod în alt format, lipește-l oricum: Peek urmărește peste 4 500 de curieri. Pentru a selecta Xinghe Freight manual, apasă „Change” și caută Xinghe Freight (sau `星和货运`), ori folosește „Change carrier” pe un colet deja adăugat.
 
-Peek interoghează direct trackerul GZYL, la fel ca formularul de pe site-ul Xinghe. Afișează statusul, fiecare pas cu localitatea lui și țara de destinație când fișa o include. Orele sunt citite la ora Beijingului și convertite la fusul orar al dispozitivului tău («Times are in your time zone:» la finalul istoricului). Peek omite numele, adresa, codurile poștale, greutatea, detaliile de plată, semnătura și dovada livrării și nu afișează o dată estimată de livrare, deoarece trackerul nu oferă una.
+Peek interoghează direct trackerul GZYL, la fel ca formularul de pe site-ul Xinghe. Afișează statusul, fiecare pas cu localitatea lui și țara de destinație când fișa o include. Orele sunt citite la ora Beijingului și convertite la fusul orar al dispozitivului tău („Times are in your time zone:” la finalul istoricului). Peek omite numele, adresa, codurile poștale, greutatea, detaliile de plată, semnătura și dovada livrării și nu afișează o dată estimată de livrare, deoarece trackerul nu oferă una.
 
-Când trackerul nu cunoaște codul, Peek întreabă servicii de urmărire și arată copia lor de pași. Cât timp niciuna nu are pași, apare «Waiting for Xinghe Freight», iar după două zile «Check the tracking number».
+Când trackerul nu cunoaște codul, Peek întreabă servicii de urmărire și arată copia lor de pași. Cât timp niciuna nu are pași, apare „Waiting for Xinghe Freight”, iar după două zile „Check the tracking number”.
 
-Peek reține orice pas scris cu mai mult de 12 ore înainte de ora pe care o afișează, orice pas scris în aceeași secundă cu un pas scris cu mai mult de o jumătate de oră înainte de ora lui (cu excepția înregistrării comenzii) și orice pas datat după momentul verificării la ora Beijingului. Pentru fișele cu pași scriși dinainte, Peek reține și `Delivered`, chiar dacă a fost scris în aceeași zi. Se ghidează după pașii păstrați, nu după statusul rezumat al fișei, și elimină și copiile acestor pași din serviciile de urmărire, inclusiv `Delivered`. Totuși, dacă trackerul nu are fișa sau nu răspunde, Peek nu poate deosebi un pas planificat dintr-un serviciu terț de o scanare reală. Când reține predicții, istoricul începe până la livrare sau retur cu «Other sites may show more steps, but they’re only predictions.», iar «Show them» le afișează cu gri și cu ziua dată de tracker («Predicted for Mon 12 Oct»). Acești pași nu schimbă statusul și nu declanșează notificări.
+Peek reține orice pas scris cu mai mult de 12 ore înainte de ora pe care o afișează, orice pas scris în aceeași secundă cu un pas scris cu mai mult de o jumătate de oră înainte de ora lui (cu excepția înregistrării comenzii) și orice pas datat după momentul verificării la ora Beijingului. Pentru fișele cu pași scriși dinainte, Peek reține și `Delivered`, chiar dacă a fost scris în aceeași zi. Se ghidează după pașii păstrați, nu după statusul rezumat al fișei, și elimină și copiile acestor pași din serviciile de urmărire, inclusiv `Delivered`. Totuși, dacă trackerul nu are fișa sau nu răspunde, Peek nu poate deosebi un pas planificat dintr-un serviciu terț de o scanare reală. Când reține predicții, istoricul începe până la livrare sau retur cu „Other sites may show more steps, but they’re only predictions.”, iar „Show them” le afișează cu gri și cu ziua dată de tracker („Predicted for Mon 12 Oct”). Acești pași nu schimbă statusul și nu declanșează notificări.
 
-În afară de Swiss Post, Peek nu trece automat la curierul local: dacă vânzătorul îți dă numărul acestuia, adaugă-l ca un colet separat. Cât timp ai coletul deschis sau în ziua livrării cu notificările pornite, Peek verifică până la fiecare 10 minute; altfel și când nu mai apar noutăți, o dată pe oră. Poți alege notificări pentru «Every scan», «Important steps» (cei doi pași de vamă și `Delivered`, fără zboruri sau sortare) sau «Delivery only». Peek nu poate contacta Xinghe Freight, GZYL sau vânzătorul în numele tău.
+În afară de Swiss Post, Peek nu trece automat la curierul local: dacă vânzătorul îți dă numărul acestuia, adaugă-l ca un colet separat. Cât timp ai coletul deschis sau în ziua livrării cu notificările pornite, Peek verifică până la fiecare 10 minute; altfel și când nu mai apar noutăți, o dată pe oră. Poți alege notificări pentru „Every scan”, „Important steps” (cei doi pași de vamă și `Delivered`, fără zboruri sau sortare) sau „Delivery only”. Peek nu poate contacta Xinghe Freight, GZYL sau vânzătorul în numele tău.
 
 ## Întrebări frecvente despre Xinghe Freight
 
@@ -114,11 +114,11 @@ Nici site-ul Xinghe, nici trackerul nu numesc curierul local din România (Peek 
 
 ### De ce arată Peek mai puțini pași sau niciun pas pentru codul meu GZXH?
 
-Fie trackerul nu are încă nicio înregistrare, fie conține pași scriși dinainte — inclusiv un `Delivered` programat — pe care Peek îi ascunde sub «Show them» în loc să îi numere ca scanări. Verifică codul în e-mailul vânzătorului și scrie-i dacă nu apare nicio actualizare după câteva zile.
+Fie trackerul nu are încă nicio înregistrare, fie conține pași scriși dinainte — inclusiv un `Delivered` programat — pe care Peek îi ascunde sub „Show them” în loc să îi numere ca scanări. Verifică codul în e-mailul vânzătorului și scrie-i dacă nu apare nicio actualizare după câteva zile.
 
 ### Cum contactez Xinghe Freight?
 
-Întreabă mai întâi vânzătorul sau platforma unde ai comandat, deoarece vânzătorul a rezervat transportul. Site-ul chinez (`xinghe-express.cn`) afișează linia non-stop `19924483103` (`+86 199 2448 3103` din străinătate) și adresa comercială `3975605292@qq.com`, fără suport dedicat destinatarilor din afara Chinei.
+Întreabă mai întâi vânzătorul sau platforma unde ai comandat, deoarece vânzătorul a rezervat transportul. Site-ul chinez (`xinghe-express.cn`) afișează linia non-stop 19924483103 (+86 199 2448 3103 din străinătate) și adresa comercială 3975605292@qq.com, fără suport dedicat destinatarilor din afara Chinei.
 
 :::sources
 - [Xinghe Freight: 广州星和货运代理有限公司 (pagina principală, în chineză)](http://xinghe-express.cn/) – numele companiei, servicii de expediție, casetă de căutare spre trackerul GZYL, telefon și e-mail

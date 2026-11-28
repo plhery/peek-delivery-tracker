@@ -1,13 +1,13 @@
 ---
 title: Paczka zatrzymana przez urząd celny: ile trwa i ile płacisz
-description: Paczka zatrzymana przez urząd celny w Polsce: ile trwa odprawa, cło 3 € i opłata 2 € za paczkę spoza UE (Temu, AliExpress), Poczta Polska i fałszywe SMS-y.
+description: Paczka zatrzymana przez urząd celny w Polsce: ile trwa odprawa, cło 3 € i opłata 2 € za rodzaj produktu spoza UE (Temu, AliExpress), Poczta Polska i fałszywe SMS-y.
 slug: paczka-zatrzymana-przez-urzad-celny
 picture: Budka celna z pasiastym szlabanem, dokument z okrągłą pieczątką i ptaszkiem, a przed szlabanem cierpliwie czeka Pip.
 published: 2026-10-09
 updated: 2026-11-27
 ---
 
-Status „paczka zatrzymana przez urząd celny” oznacza zwykle standardową odprawę przesyłki spoza Unii Europejskiej (np. z Temu, Shein czy AliExpress), a nie jej konfiskatę. Jeśli przesyłka stoi dłużej, [Poczta Polska](carrier:poczta-polska) lub kurier może czekać na twoje pełnomocnictwo (dla paczek wartych 150–1000 euro), dokumenty zakupu albo zapłatę VAT, cła 3 euro za rodzaj produktu (do 150 euro) i unijnej opłaty manipulacyjnej 2 euro. Sprawdzaj to na stronie lub w aplikacji przewoźnika, nigdy przez link z SMS-a.
+Status „paczka zatrzymana przez urząd celny” oznacza zwykle standardową odprawę przesyłki spoza Unii Europejskiej (np. z Temu, Shein czy AliExpress), a nie jej konfiskatę. Jeśli przesyłka stoi dłużej, [Poczta Polska](carrier:poczta-polska) lub kurier może czekać na twoje pełnomocnictwo (dla paczek wartych 150–1000 euro), dokumenty zakupu albo zapłatę tego, czego sklep nie pobrał: VAT, cła 3 euro za rodzaj produktu (przy paczkach do 150 euro) i unijnej opłaty manipulacyjnej 2 euro za rodzaj produktu. Sprawdzaj to na stronie lub w aplikacji przewoźnika, nigdy przez link z SMS-a.
 
 ## Co znaczy status „paczka zatrzymana przez urząd celny”?
 

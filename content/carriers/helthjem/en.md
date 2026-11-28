@@ -6,7 +6,7 @@ published: 2026-10-13
 updated: 2026-11-27
 ---
 
-Helthjem is a Norwegian parcel courier for online shops that delivers parcels to your doormat or mailbox — often on night rounds — or to a pickup point (*hentested*). Paste your 18-digit (`37072476…`) or 20-digit (`0037072476…`) Helthjem number in the box above or look it up on `helthjem.no`. Since Helthjem writes its tracking in Norwegian Bokmål, every status is translated into English below.
+Helthjem is a Norwegian parcel courier for online shops that delivers parcels to your doormat or mailbox, including on night rounds, or to a pickup point (*hentested*). Paste your Helthjem number in the box above (Peek recognises 18-digit numbers starting `37072476`, and the same with `00` in front) or look it up on `helthjem.no`. Since Helthjem writes its tracking in Norwegian Bokmål, every status is translated into English below.
 
 ## Where to find your Helthjem tracking number
 

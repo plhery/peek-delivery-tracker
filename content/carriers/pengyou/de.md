@@ -6,7 +6,7 @@ published: 2026-11-18
 updated: 2026-11-27
 ---
 
-Pengyou (捧友, 深圳市捧友供应链有限公司, im englischen Logo *Shenzhen Pony Supply Chain Co., Ltd*) ist ein Spediteur aus Shenzhen, der Pakete per Luftfracht für Exporteure und Online-Händler nach Europa und in die USA befördert. Gib deine 14-stellige Sendungsnummer auf `PY` (z. B. `ZXA…PY`) oder die Händler-Referenz im Feld `运单查询` auf `szpy56.com` oder oben im Suchfeld ein — Peek blendet dabei vorab eingetragene Prognose-Schritte aus den echten Scans aus.
+Pengyou (捧友, 深圳市捧友供应链有限公司, im englischen Logo *Shenzhen Pony Supply Chain Co., Ltd*) ist ein Spediteur aus Shenzhen, der Pakete per Luftfracht für Exporteure und Online-Händler nach Europa und in die USA befördert. Gib deine Sendungsnummer (Peek erkennt Nummern aus `ZXA`, neun Ziffern und `PY` sofort) oder die Referenz des Händlers im Feld `运单查询` auf `szpy56.com` oder oben im Suchfeld ein; vorab eingetragene Prognose-Schritte hält Peek aus den echten Scans heraus.
 
 ## Pengyou-Sendungsnummer: wie sie aufgebaut ist
 
@@ -80,7 +80,7 @@ Peek prüft bis zu alle 10 Minuten, solange du das Paket geöffnet hast oder am 
 
 ### Was ist Pengyou (捧友) und wie sieht die PY-Nummer aus?
 
-Dahinter steht 深圳市捧友供应链有限公司 – im eigenen englischen Logo Shenzhen Pony Supply Chain Co., Ltd –, ein Spediteur aus Shenzhen, dessen Luftfrachtlinien Pakete für Exporteure, Spediteure und Online-Händler nach Europa und in die USA befördern. Die Sendungsnummern bestehen aus drei Buchstaben, neun Ziffern und `PY` (14 Zeichen, z. B. `ZXA…PY`), seine Website ist szpy56.com.
+Dahinter steht 深圳市捧友供应链有限公司 – im eigenen englischen Logo Shenzhen Pony Supply Chain Co., Ltd –, ein Spediteur aus Shenzhen, dessen Luftfrachtlinien Pakete für Exporteure, Spediteure und Online-Händler nach Europa und in die USA befördern. Ein Nummernformat veröffentlicht Pengyou nicht: Peek verknüpft drei Buchstaben, neun Ziffern und `PY` mit Pengyou, sicher nur mit `ZXA` am Anfang. Seine Website ist szpy56.com.
 
 ### Warum zeigt Pengyous Tracker mehr Schritte als Peek?
 

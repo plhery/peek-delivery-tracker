@@ -6,7 +6,7 @@ published: 2026-10-13
 updated: 2026-11-27
 ---
 
-Latvijas Pasts (Latvian Post) is Latvia's state-owned national post and runs the country's largest network of parcel lockers. Track a `…LV` item (or an incoming foreign postal parcel) in English with the language switch on [mans.pasts.lv/track](https://mans.pasts.lv/track), or paste the number in the box above. The number comes from the shop's shipping message or from Latvijas Pasts's courier or locker SMS.
+Latvijas Pasts (Latvian Post) is Latvia's state-owned national post and runs the country's largest network of parcel lockers. Track a `…LV` item (or an incoming foreign postal parcel) in English with the language switch on [mans.pasts.lv/track](https://mans.pasts.lv/track), or paste the number in the box above. The number comes from the shop's shipping message, or from Latvijas Pasts's courier SMS before delivery.
 
 ## Latvijas Pasts tracking number
 

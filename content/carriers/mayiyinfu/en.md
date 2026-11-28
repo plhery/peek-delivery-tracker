@@ -6,7 +6,7 @@ published: 2026-10-28
 updated: 2026-11-27
 ---
 
-Mayi Yinfu (蚂蚁银服) is the short name of 广东蚂蚁银服国际物流有限公司, a forwarder in Guangdong, mainland China, that flies express and small parcels abroad and hands them to a local courier — Deutsche Post DHL into Europe. Paste your `MY…US` (14 characters) or `MYYF…CN` tracking number in the box above, or enter it in the `快递查询` (parcel lookup) box on `mayiyinfu.com.cn`, to see real scans and follow the local courier once it clears customs.
+Mayi Yinfu (蚂蚁银服) is the short name of 广东蚂蚁银服国际物流有限公司, a forwarder in Guangdong, mainland China, that flies express and small parcels abroad and hands them to a local courier — Deutsche Post DHL into Europe. Paste your `MY…US` (14 characters) or `MYYF…CN` tracking number in the box above, or enter it in the `快递查询` (parcel lookup) box on `mayiyinfu.com.cn`, which opens Mayi Yinfu's tracker; after customs, the tracker shows the delivering company's number.
 
 ## Mayi Yinfu tracking number: what it looks like
 

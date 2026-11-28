@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-Pour voir où en est ta dernière commande Temu, ouvre **Vos commandes** puis touche **Suivre** : tu y récupères le numéro de suivi du transporteur — indispensable, car le numéro de commande Temu (`PO` et 20 chiffres) ne suffit pas. Colle ce numéro dans [Peek](/), qui reconnaît plus de 4 500 transporteurs (dont La Poste / Colissimo en France et bpost en Belgique) et suit le partenaire local dès qu'il est nommé. Un numéro tout neuf peut ne rien afficher pendant un jour ou deux avant le premier scan.
+Pour voir où en est ta dernière commande Temu, ouvre **Vos commandes** puis touche **Suivre** : tu y récupères le numéro de suivi du transporteur — indispensable, car le numéro de commande Temu (`PO` et 20 chiffres) ne suffit pas. Colle ce numéro dans [Peek](/), qui reconnaît plus de 4 500 transporteurs (dont La Poste / Colissimo en France et bpost en Belgique) et, quand le premier transporteur nomme un partenaire local, suit ce partenaire dès que son suivi montre du nouveau. Un numéro tout neuf peut ne rien afficher pendant un jour ou deux avant le premier scan.
 
 ## Où voir ma dernière commande Temu, et le numéro PO suffit-il ?
 

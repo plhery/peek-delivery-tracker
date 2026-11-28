@@ -120,7 +120,7 @@ Yes, if it has a tracking number. For an item you sent abroad, POST's tracking a
 
 ### How long does POST Luxembourg hold a parcel at a PackUp station or post office?
 
-POST keeps parcels and registered letters for 15 days at a sales outlet or PackUp Point (seven days for legal documents), and seven days in a PackUp 24/24 parcel station.
+POST keeps a parcel or registered letter for 15 days at a sales outlet (seven days for legal documents). A PackUp Point keeps a parcel up to 15 days, and a PackUp 24/24 parcel station seven days.
 
 :::sources
 - [POST Luxembourg: Track and Trace](https://www.post.lu/en/particuliers/colis-courrier/track-and-trace) – tracking page

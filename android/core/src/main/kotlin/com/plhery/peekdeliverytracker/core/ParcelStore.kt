@@ -2580,7 +2580,7 @@ class ParcelStore(
                     // A step dated by its day alone is on that day where the reader is, and has no time.
                     at = day ?: at,
                     text = localizer.journalWording(event),
-                    place = event.journalLocation?.let { TrackingLocation.spoken(it, event.place, localizer.language) } ?: event.place?.name,
+                    place = event.journalLocation?.let { TrackingLocation.spoken(it, event.place, localizer.language, event.writtenPlace) } ?: event.place?.name,
                     clock = if (day == null) localizer.clockTime(at) else "",
                 )
             }

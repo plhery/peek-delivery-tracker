@@ -156,7 +156,7 @@ struct PassportStatistics {
 
             // Never skip an unknown first scan and promote a destination scan into
             // an origin. City names and tracking-number suffixes are insufficient.
-            if let country = TrackingLocation.countryCode(in: first.event.location, placedIn: first.event.place?.country) {
+            if let country = TrackingLocation.countryCode(in: first.event.location, placedIn: first.event.place?.country, written: first.event.writtenPlace) {
                 countries[country, default: 0] += 1
             }
 
@@ -211,7 +211,7 @@ struct PassportStatistics {
     /// Where a scan was, as the passport's countries count it: the country its words name, else the one the server
     /// placed it in.
     static func passportCountry(_ event: TrackingEvent) -> String? {
-        TrackingLocation.countryCode(in: event.location, placedIn: event.place?.country) ?? event.place?.country
+        TrackingLocation.countryCode(in: event.location, placedIn: event.place?.country, written: event.writtenPlace) ?? event.place?.country
     }
 
     /// Stages that move a parcel: notices, problem reports and a delivery itself do not.
@@ -618,11 +618,14 @@ enum TrackingLocation {
 
     /// For display: a location written in a script the reader may not read (`romanises`) is named by the town the
     /// server placed it in ("深圳市" is Shenzhen), or by the country alone where it placed it no closer, and kept as
-    /// written where it placed it nowhere. Otherwise as `place(_:placedIn:)` reads it.
-    static func place(_ location: String, placed: EventPlace?, language: AppLanguage) -> Place {
+    /// written where it placed it nowhere. Otherwise as the server read its words (`written`), against the scan's place
+    /// and the parcel's countries ("BENTIVOGLIO (BO)" on a parcel to Italy is in Italy), or for a row the server did not
+    /// read, as `place(_:placedIn:)` reads it.
+    static func place(_ location: String, placed: EventPlace?, written: WrittenPlace? = nil, language: AppLanguage) -> Place {
         if let placed, romanises(location, language: language) {
             return Place(country: placed.country, name: placed.precision == .city ? placed.name : "")
         }
+        if let written { return Place(country: written.country, name: written.name) }
         return place(location, placedIn: placed?.country)
     }
 
@@ -631,6 +634,13 @@ enum TrackingLocation {
     static func countryCode(in location: String?, placedIn placed: String?) -> String? {
         guard let location else { return nil }
         return countryCode(in: location) ?? placedCode(location, placedIn: placed)?.country
+    }
+
+    /// Passport evidence as the server read the words (`passportCountry`, none when it found none), or for a row it
+    /// did not read, as `countryCode(in:placedIn:)` reads them.
+    static func countryCode(in location: String?, placedIn placed: String?, written: WrittenPlace?) -> String? {
+        guard let written else { return countryCode(in: location, placedIn: placed) }
+        return written.passportCountry
     }
 
     static func countryName(_ code: String, language: AppLanguage) -> String {

@@ -5,7 +5,7 @@ import { currentScan, EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
 import { recordPeekAiServed } from './metrics';
 import { captureOperationalError } from './observability';
 import { CARRIER_DEFINITIONS, classifyWording, RECIPIENT_ACTIONS, recipientAction, type CarrierId } from 'universal-parcel-scraper';
-import { scanTemplate } from 'universal-parcel-scraper/app';
+import { scanTemplate, trackingLocationCountries, trackingPlace } from 'universal-parcel-scraper/app';
 import { placesForEvents, type EventPoint } from 'universal-parcel-scraper/places';
 import { clockDay, placesApart, placeWithin, placeWords, scanDay, UNWORDED_STEP } from './eventIdentity';
 import { DIRECT_HISTORY, heldRows, providerCopies, providerCopyScans } from './providerCopies';
@@ -661,16 +661,42 @@ function placedSteps(row: JsonObject, steps: JsonObject[]): JsonObject[] {
   if (!steps.length) return steps;
   const data = isRecord(row.carrier_data) ? row.carrier_data : {};
   try {
-    const places = placesForEvents(steps.map((step) => typeof step.location === 'string' ? step.location : null), {
-      destinationCountry: typeof data.destination_country === 'string' ? data.destination_country : null,
-      carriers: [data.active_tracking_carrier, row.carrier].filter((carrier): carrier is string => typeof carrier === 'string'),
-    });
-    return steps.map((step, index) => ({ ...step, place: places[index] ?? null }));
+    const destination = typeof data.destination_country === 'string' ? data.destination_country : null;
+    const carriers = [data.active_tracking_carrier, row.carrier].filter((carrier): carrier is string => typeof carrier === 'string');
+    const locations = steps.map((step) => typeof step.location === 'string' ? step.location : null);
+    const places = placesForEvents(locations, { destinationCountry: destination, carriers });
+    const written = writtenPlaces(locations, places.map((place) => place?.country), parcelCountries(destination, carriers));
+    return steps.map((step, index) => ({ ...step, place: places[index] ?? null, ...written[index] ? { written_place: written[index] } : {} }));
   } catch (error) {
     if (!reported) captureOperationalError(error, { component: 'api', operation: 'locate_event_places' });
     reported = true;
     return steps;
   }
+}
+
+/** The countries a parcel's scans may be in, as the place lookup takes them: its destination and its carriers' home countries. */
+function parcelCountries(destination: string | null, carriers: readonly string[]): string[] {
+  return [...new Set([destination, ...carriers.flatMap((carrier) => CARRIER_DEFINITIONS[carrier as CarrierId]?.countries ?? [])]
+    .filter((country): country is string => Boolean(country)))];
+}
+
+/**
+ * How each location's words read (`written_place`), by the scraper's reader, so the apps read them as the web does
+ * without a reader of their own: the country they name and the rest of them, read against the country the gazetteer
+ * placed the scan in and the parcel's `countries` (`trackingPlace`; "BENTIVOGLIO (BO)" on a parcel to Italy is in
+ * Italy). Scans in order, with `times`, also get the country the passport counts (`passport_country`,
+ * `trackingLocationCountries`, which weighs the scans around each one and drops a code the parcel could not have reached).
+ */
+function writtenPlaces(locations: readonly (string | null)[], placed: readonly (string | null | undefined)[], countries: readonly string[],
+  times?: readonly (string | null)[]): (JsonObject | null)[] {
+  const passport = times ? trackingLocationCountries(locations.map((location, index) =>
+    ({ location, time: times[index], placed: placed[index] ?? null })), countries) : null;
+  return locations.map((location, index) => {
+    if (!location?.trim()) return null;
+    const { country, place } = trackingPlace(location, { placed: placed[index] ?? null, countries });
+    const stamp = passport?.[index]?.country;
+    return { ...country ? { country } : {}, name: place, ...stamp ? { passport_country: stamp } : {} };
+  });
 }
 
 function placedEvents(row: JsonObject): JsonObject {
@@ -738,10 +764,16 @@ function placedEvents(row: JsonObject): JsonObject {
         if (lender && countries.has(borrowed[index]?.country)) places[index] = borrowed[index];
       });
     }
-    const byEvent = new Map(ordered.map((event, index) => [event, places[index]]));
+    const written = writtenPlaces(ordered.map((event) => typeof event.location === 'string' ? event.location : null),
+      places.map((place) => place?.country), parcelCountries(destination, carriers),
+      ordered.map((event) => typeof event.occurred_at === 'string' ? event.occurred_at : null));
+    const byEvent = new Map(ordered.map((event, index) => [event, { place: places[index] ?? null, written: written[index] }]));
     return {
       ...row,
-      tracking_events: events.map((event) => ({ ...shown(event), place: byEvent.get(event) ?? null })),
+      tracking_events: events.map((event) => {
+        const { place, written: words } = byEvent.get(event) ?? { place: null, written: null };
+        return { ...shown(event), place, ...words ? { written_place: words } : {} };
+      }),
     };
   } catch (error) {
     // A map is a nice extra: the parcel still loads without one.

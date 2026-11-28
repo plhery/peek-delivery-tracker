@@ -7,7 +7,7 @@ import passportData from '../../shared/passport.json';
 export { trackingLocationCountry as firstScanCountry } from 'universal-parcel-scraper/app';
 
 /** A scan's country as evidence: its final field, a code that is also a state counting once the scan was placed in that country. */
-const countryOf = (event: TrackingEvent) => scanCountry(event.location, event.place?.country);
+const countryOf = (event: TrackingEvent) => scanCountry(event.location, event.place?.country, event.writtenPlace);
 /** Where a scan was, as the passport's countries count it: the country its words name, else the one the server placed it in. */
 const passportCountryOf = (event: TrackingEvent) => countryOf(event) ?? event.place?.country ?? null;
 

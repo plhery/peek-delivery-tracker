@@ -2077,7 +2077,7 @@ private struct JournalEventRow: View {
                     .font(.footnote)
                     .fixedSize(horizontal: false, vertical: true)
                 if let location = event.location?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty {
-                    EventLocation(location: location, placed: event.place)
+                    EventLocation(location: location, placed: event.place, written: event.writtenPlace)
                         .font(.caption2).foregroundStyle(Brand.secondaryText)
                 }
                 // A copy's words stay in sight, in case it was a scan of its own.
@@ -2195,7 +2195,7 @@ private struct PredictedStepRow: View {
                         .padding(.top, 3)
                 }
                 if let location {
-                    EventLocation(location: location, placed: step.place)
+                    EventLocation(location: location, placed: step.place, written: step.writtenPlace)
                         .font(.caption2).foregroundStyle(Brand.secondaryText)
                         .padding(.top, 4)
                 }
@@ -2214,7 +2214,7 @@ private struct PredictedStepRow: View {
             }
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel([wording, when, location.map { EventLocation.spoken($0, placed: step.place, language: localizer.language) }]
+        .accessibilityLabel([wording, when, location.map { EventLocation.spoken($0, placed: step.place, written: step.writtenPlace, language: localizer.language) }]
             .compactMap { $0?.nonEmpty }.joined(separator: ", "))
     }
 }
@@ -2236,26 +2236,29 @@ private struct DashedRule: Shape {
     }
 }
 
-/// The flag leads and the country closes the place, named in the reader's language. A place written in Chinese,
-/// Japanese or Korean script is named by the town it was placed in (`TrackingLocation.place(_:placed:language:)`).
+/// The flag leads and the country closes the place, named in the reader's language, as the server read the words. A
+/// place written in Chinese, Japanese or Korean script is named by the town it was placed in
+/// (`TrackingLocation.place(_:placed:written:language:)`).
 struct EventLocation: View {
     let location: String
     /// Where the server placed the scan: its country settles a final code that is also a state or canton.
     let placed: EventPlace?
+    /// How the server read the words; without it the app reads them itself.
+    var written: WrittenPlace? = nil
     @EnvironmentObject private var localizer: Localizer
 
     /// What VoiceOver reads of the place: its words without the flag.
-    static func spoken(_ location: String, placed: EventPlace?, language: AppLanguage) -> String {
-        let place = TrackingLocation.place(location, placed: placed, language: language)
+    static func spoken(_ location: String, placed: EventPlace?, written: WrittenPlace? = nil, language: AppLanguage) -> String {
+        let place = TrackingLocation.place(location, placed: placed, written: written, language: language)
         guard let country = place.country else { return place.name }
         let name = TrackingLocation.countryName(country, language: language)
         return place.name.isEmpty ? name : "\(place.name), \(name)"
     }
 
     var body: some View {
-        let place = TrackingLocation.place(location, placed: placed, language: localizer.language)
+        let place = TrackingLocation.place(location, placed: placed, written: written, language: localizer.language)
         if let country = place.country {
-            let text = Self.spoken(location, placed: placed, language: localizer.language)
+            let text = Self.spoken(location, placed: placed, written: written, language: localizer.language)
             HStack(alignment: .firstTextBaseline, spacing: 4) {
                 Text(TrackingLocation.flag(country)).font(.caption)
                 Text(text).fixedSize(horizontal: false, vertical: true)

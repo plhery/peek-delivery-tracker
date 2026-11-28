@@ -148,6 +148,33 @@ describe('withEventPlaces', () => {
     expect(located.tracking_events[2].place).toMatchObject({ country: 'DE', name: 'Köln' });
   });
 
+  it('serves how each location\'s words read, against its place and the parcel\'s countries, with the passport\'s country', () => {
+    const row = {
+      id: 'parcel',
+      carrier: 'poste-italiane',
+      carrier_data: { destination_country: 'IT' },
+      tracking_events: [
+        event('1', 'BENTIVOGLIO (BO)', '2026-09-26T09:00:00+00:00'),
+        event('2', 'EXAMPLE TOWN [France]', '2026-09-27T12:00:00+00:00'),
+        event('3', 'Wilmington, DE', '2026-09-28T07:00:00+00:00'),
+        event('4', 'SCARBOROUGH - ON - CANADA', '2026-09-29T07:00:00+00:00'),
+        event('5', null, '2026-09-30T07:00:00+00:00'),
+      ],
+    };
+    const served = withEventPlaces(row) as { tracking_events: Record<string, unknown>[] };
+    expect(served.tracking_events.map((scan) => scan.written_place)).toEqual([
+      // An Italian province, not Bolivia: it keeps its code.
+      { country: 'IT', name: 'BENTIVOGLIO (BO)', passport_country: 'IT' },
+      // Square brackets set a field apart.
+      { country: 'FR', name: 'EXAMPLE TOWN', passport_country: 'FR' },
+      // A state's code reads as the country the town was placed in, and stays with the town.
+      { country: 'US', name: 'Wilmington, DE', passport_country: 'US' },
+      // A country after a dash shows; the passport counts only a final field or a region's code.
+      { country: 'CA', name: 'SCARBOROUGH - ON' },
+      undefined,
+    ]);
+  });
+
   it('knows a carrier\'s country from the catalog, whatever clock its scans keep', () => {
     const row = {
       id: 'parcel',

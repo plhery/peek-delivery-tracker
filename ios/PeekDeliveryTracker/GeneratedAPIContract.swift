@@ -4449,6 +4449,12 @@ struct EventPlace: Codable, Equatable, Hashable, Sendable {
     var region: String? = nil
 }
 
+struct WrittenPlace: Codable, Equatable, Hashable, Sendable {
+    var country: String? = nil
+    var name: String
+    var passportCountry: String? = nil
+}
+
 struct PostcodeCountry: Codable, Equatable, Hashable, Sendable {
     var postcode: String
     var country: String
@@ -4482,6 +4488,7 @@ struct TrackingEvent: Codable, Equatable, Hashable, Sendable, Identifiable {
     var recipientAction: RecipientAction? = nil
     var tieOrder: Int? = nil
     var template: ScanTemplate? = nil
+    var writtenPlace: WrittenPlace? = nil
 
     private enum CodingKeys: String, CodingKey {
         case id
@@ -4497,6 +4504,7 @@ struct TrackingEvent: Codable, Equatable, Hashable, Sendable, Identifiable {
         case recipientAction
         case tieOrder
         case template
+        case writtenPlace
     }
 }
 
@@ -4513,6 +4521,7 @@ struct PlannedTrackingEvent: Codable, Equatable, Hashable, Sendable {
     var expiresAt: String? = nil
     var day: String? = nil
     var place: EventPlace? = nil
+    var writtenPlace: WrittenPlace? = nil
 }
 
 struct CarrierOutage: Codable, Equatable, Hashable, Sendable {

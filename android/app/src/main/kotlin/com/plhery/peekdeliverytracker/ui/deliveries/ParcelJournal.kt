@@ -62,6 +62,7 @@ import com.plhery.peekdeliverytracker.core.JournalDay
 import com.plhery.peekdeliverytracker.core.JournalEntry
 import com.plhery.peekdeliverytracker.core.TrackingLocation
 import com.plhery.peekdeliverytracker.core.api.EventPlace
+import com.plhery.peekdeliverytracker.core.api.WrittenPlace
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
@@ -397,7 +398,7 @@ private fun PredictedStepRow(step: PlannedTrackingEvent, joinsNext: Boolean, now
                     style = type.caption2.copy(fontStyle = FontStyle.Italic).monospacedDigit().sfLines(),
                 )
             }
-            step.journalLocation?.let { location -> Box(Modifier.padding(top = 4.dp)) { EventLocation(location, step.place) } }
+            step.journalLocation?.let { location -> Box(Modifier.padding(top = 4.dp)) { EventLocation(location, step.place, step.writtenPlace) } }
         }
     }
     val label = localizer.predictedStepLabel(step, now)
@@ -510,7 +511,7 @@ private fun JournalEventRow(entry: JournalEntry, tint: Color, current: Boolean, 
                 color = colors.label,
                 style = type.footnote.sfLines(),
             )
-            event.journalLocation?.let { EventLocation(it, event.place) }
+            event.journalLocation?.let { EventLocation(it, event.place, event.writtenPlace) }
             // A copy's words stay in sight, in case it was a scan of its own.
             for (line in localizer.relayedWordings(entry)) {
                 Text(line, color = colors.secondaryText, style = type.caption2.sfLines())
@@ -538,15 +539,16 @@ private fun JournalEventRow(entry: JournalEntry, tint: Color, current: Boolean, 
  * `EventLocation` (B-S16), in caption2 in the opaque secondary grey: with a country, its flag in caption, then 4 on and
  * on the flag's baseline the place and the country named in the app language, or the country alone where the place has
  * no name; TalkBack reads the words without the flag. Without a country, the place as written. `placed` is where the
- * server placed the scan: its country settles a final code that is also a state or canton, and its town names a place
- * written in Chinese, Japanese or Korean script ([TrackingLocation.place]).
+ * server placed the scan: its town names a place written in Chinese, Japanese or Korean script. `written` is how the
+ * server read the words; a row without it is read here, where the placed country settles a final code that is also a
+ * state or canton ([TrackingLocation.place]).
  */
 @Composable
-private fun EventLocation(location: String, placed: EventPlace?) {
+private fun EventLocation(location: String, placed: EventPlace?, written: WrittenPlace?) {
     val language = LocalLanguage.current
     val type = PeekTheme.type
     val secondary = PeekTheme.colors.secondaryText
-    val place = TrackingLocation.place(location, placed, language)
+    val place = TrackingLocation.place(location, placed, language, written)
     val country = place.country
     if (country == null) {
         Text(place.name, color = secondary, style = type.caption2.sfLines())

@@ -1,6 +1,6 @@
 import { trackingLocationCountry, trackingPlace, type TrackingPlace } from 'universal-parcel-scraper/app';
 import type { Locale } from './locale';
-import type { EventPlace } from '../types';
+import type { EventPlace, WrittenPlace } from '../types';
 
 /** A final two-letter field, as in "Haiger, DE" or "Haiger (DE)". */
 const FINAL_CODE = /^(.*\S)\s*[,;|(]\s*([A-Z]{2})\)?$/;
@@ -38,17 +38,26 @@ export function romanisesPlace(location: string, locale?: Locale): boolean {
 }
 
 /**
- * A scan's location for display: the country it names, and the rest of it. One written in a script the reader may
- * not read, or behind CTT's site code (`romanisesPlace`), is named by the town the server placed it in ("深圳市" is Shenzhen), or by the country
- * alone where the server placed it no closer, and kept as written where it placed it nowhere.
+ * A scan's location for display: the country it names, and the rest of it, as the server read its words against the
+ * scan's place and the parcel's countries (`written_place`), or as read here for a row without that. One written
+ * in a script the reader may not read, or behind CTT's site code (`romanisesPlace`), is named by the town the server
+ * placed it in ("深圳市" is Shenzhen), or by the country alone where the server placed it no closer, and kept as
+ * written where it placed it nowhere.
  */
-export function scanPlace(location: string, placed?: Pick<EventPlace, 'country' | 'name' | 'precision'> | null, locale?: Locale): TrackingPlace {
+export function scanPlace(location: string, placed?: Pick<EventPlace, 'country' | 'name' | 'precision'> | null, locale?: Locale,
+  written?: Pick<WrittenPlace, 'country' | 'name'> | null): TrackingPlace {
   if (placed && romanisesPlace(location, locale)) return { country: placed.country, place: placed.precision === 'city' ? placed.name : '' };
-  const written = trackingPlace(location);
-  return written.country ? written : placedCode(location, placed?.country) ?? written;
+  if (written) return { country: written.country ?? null, place: written.name };
+  const read = trackingPlace(location);
+  return read.country ? read : placedCode(location, placed?.country) ?? read;
 }
 
-/** The country a scan's location names in its final field, as the passport counts it: never one guessed from a town. */
-export function scanCountry(location: string | undefined, placed?: string | null): string | null {
+/**
+ * The country a scan's location names, as the passport counts it: a final field or a region's code, never one guessed
+ * from a town. The server's reading (`passport_country`) when it read the words; else its final field, or a code that
+ * is also a state counting once the scan was placed in that country.
+ */
+export function scanCountry(location: string | undefined, placed?: string | null, written?: WrittenPlace | null): string | null {
+  if (written) return written.passport_country ?? null;
   return trackingLocationCountry(location) ?? (location ? placedCode(location, placed)?.country ?? null : null);
 }

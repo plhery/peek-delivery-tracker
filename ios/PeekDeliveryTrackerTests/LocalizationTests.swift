@@ -623,6 +623,28 @@ final class LocalizationTests: XCTestCase {
         XCTAssertEqual(TrackingLocation.countryName("CH", language: .de), "Schweiz")
     }
 
+    /// A location the server read is shown and stamped as it read the words, against the scan's place and the parcel's
+    /// countries: an Italian province in brackets is not Bolivia. A script the reader may not read is still named by its
+    /// town, and a row the server did not read is read here.
+    func testTrackingLocationTakesTheServersReading() {
+        let bologna = WrittenPlace(country: "IT", name: "BENTIVOGLIO (BO)", passportCountry: "IT")
+        XCTAssertEqual(TrackingLocation.place("BENTIVOGLIO (BO)", placed: nil, written: bologna, language: .en), .init(country: "IT", name: "BENTIVOGLIO (BO)"))
+        XCTAssertEqual(TrackingLocation.place("Example Depot", placed: nil, written: WrittenPlace(name: "Example Depot"), language: .en),
+                       .init(country: nil, name: "Example Depot"))
+        let shenzhen = EventPlace(latitude: 22.55, longitude: 114.07, precision: .city, country: "CN", name: "Shenzhen")
+        XCTAssertEqual(TrackingLocation.place("深圳市", placed: shenzhen, written: WrittenPlace(name: "深圳市"), language: .en), .init(country: "CN", name: "Shenzhen"))
+        XCTAssertEqual(TrackingLocation.countryCode(in: "BENTIVOGLIO (BO)", placedIn: "IT", written: bologna), "IT")
+        XCTAssertNil(TrackingLocation.countryCode(in: "Haiger, DE", placedIn: "DE", written: WrittenPlace(name: "Haiger, DE")))
+        XCTAssertEqual(TrackingLocation.countryCode(in: "Haiger, DE", placedIn: "DE", written: nil), "DE")
+        var scan = TrackingEvent(id: UUID(), packageID: UUID(), stage: .accepted, description: "", location: "BENTIVOGLIO (BO)", occurredAt: "2026-08-04T10:00:00Z")
+        scan.place = EventPlace(latitude: 44.63, longitude: 11.42, precision: .city, country: "IT", name: "Bentivoglio")
+        scan.writtenPlace = bologna
+        XCTAssertEqual(PassportStatistics.passportCountry(scan), "IT")
+        // Words the server found no country in count where the scan was placed.
+        scan.writtenPlace = WrittenPlace(name: "BENTIVOGLIO (BO)")
+        XCTAssertEqual(PassportStatistics.passportCountry(scan), "IT")
+    }
+
     private func localizationDictionaries() throws -> [String: [String: String]] {
         let url = try XCTUnwrap(Bundle.main.url(forResource: "Localization", withExtension: "json"))
         return try JSONDecoder().decode([String: [String: String]].self, from: Data(contentsOf: url))

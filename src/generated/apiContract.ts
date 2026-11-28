@@ -74894,6 +74894,12 @@ export interface ApiEventPlace {
   "region"?: string;
 }
 
+export interface ApiWrittenPlace {
+  "country"?: string;
+  "name": string;
+  "passport_country"?: string;
+}
+
 export interface ApiPostcodeCountry {
   "postcode": string;
   "country": string;
@@ -74927,6 +74933,7 @@ export interface ApiTrackingEventRow {
   "recipient_action"?: ApiRecipientAction;
   "tie_order"?: number;
   "template"?: ApiScanTemplate;
+  "written_place"?: ApiWrittenPlace;
 }
 
 export interface ApiScanTemplate {
@@ -74942,6 +74949,7 @@ export interface ApiPlannedTrackingEvent {
   "expires_at"?: string;
   "day"?: string;
   "place"?: ApiEventPlace | null;
+  "written_place"?: ApiWrittenPlace;
 }
 
 export interface ApiCarrierOutage {

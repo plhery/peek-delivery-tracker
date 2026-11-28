@@ -9,6 +9,7 @@ import type {
   ApiScanTemplate,
   ApiStage,
   ApiSyncStatus,
+  ApiWrittenPlace,
 } from './generated/apiContract';
 
 export type CarrierId = ApiCarrierId;
@@ -165,6 +166,9 @@ export interface Parcel {
 /** Where a scan happened, located on the server from its free-text location. */
 export type EventPlace = ApiEventPlace;
 
+/** How a location's words read on the server: the country they name, the rest of them, and the passport's country. */
+export type WrittenPlace = ApiWrittenPlace;
+
 export interface TrackingEvent {
   id: string;
   parcelId: string;
@@ -172,6 +176,8 @@ export interface TrackingEvent {
   description: string;
   location?: string;
   place?: EventPlace;
+  /** How the server read the location's words; the reader reads them itself without it. */
+  writtenPlace?: WrittenPlace;
   occurredAt: string; // ISO timestamp
   /** The day (YYYY-MM-DD) of a scan the carrier dated by its day alone; `occurredAt` then only puts it in order. */
   day?: string;
@@ -201,6 +207,8 @@ export interface PlannedEvent {
   day?: string;
   /** Where the server places its location, which names its town as a scan's place does; no map shows it. */
   place?: EventPlace;
+  /** How the server read the location's words, as a scan's. */
+  writtenPlace?: WrittenPlace;
 }
 
 export interface ParcelWithEvents extends Parcel {

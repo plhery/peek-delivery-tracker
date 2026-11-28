@@ -127,6 +127,7 @@ export function toEvent(row: ApiTrackingEventRow): TrackingEvent {
     description: row.description,
     location: row.location ?? undefined,
     place: row.place ?? undefined,
+    ...(row.written_place ? { writtenPlace: row.written_place } : {}),
     occurredAt: row.occurred_at,
     day: row.day ?? undefined,
     ...(row.observed ? { observed: true } : {}),
@@ -249,6 +250,7 @@ export function toPlannedEvent(row: ApiPlannedTrackingEvent): PlannedEvent {
     occurredAt: row.occurred_at,
     day: row.day ?? undefined,
     place: row.place ?? undefined,
+    ...(row.written_place ? { writtenPlace: row.written_place } : {}),
   };
 }
 

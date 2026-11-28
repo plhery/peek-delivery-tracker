@@ -260,7 +260,7 @@ fun Localizer.predictedDate(step: PlannedTrackingEvent, now: Instant = AppClock.
  */
 fun Localizer.predictedStepLabel(step: PlannedTrackingEvent, now: Instant = AppClock.now()): String {
     val place = step.journalLocation?.let { location ->
-        val place = TrackingLocation.place(location, step.place, language)
+        val place = TrackingLocation.place(location, step.place, language, step.writtenPlace)
         val country = place.country
         when {
             country == null -> place.name

@@ -8,6 +8,7 @@ import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
 import com.plhery.peekdeliverytracker.core.api.ScanTemplate
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
+import com.plhery.peekdeliverytracker.core.api.WrittenPlace
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
@@ -751,6 +752,28 @@ class LocalizationTests {
         assertEquals("Россия", TrackingLocation.countryName("RU", language = AppLanguage.Ru))
         assertEquals("Suíça", TrackingLocation.countryName("CH", language = AppLanguage.PtBr))
         assertEquals("Schweiz", TrackingLocation.countryName("CH", language = AppLanguage.De))
+    }
+
+    /**
+     * A location the server read is shown and stamped as it read the words, against the scan's place and the parcel's
+     * countries: an Italian province in brackets is not Bolivia. A script the reader may not read is still named by its
+     * town, and a row the server did not read is read here.
+     */
+    @Test
+    fun trackingLocationTakesTheServersReading() {
+        val bologna = Json.decodeFromString(WrittenPlace.serializer(), "{\"country\":\"IT\",\"name\":\"BENTIVOGLIO (BO)\",\"passport_country\":\"IT\"}")
+        assertEquals(WrittenPlace(country = "IT", name = "BENTIVOGLIO (BO)", passportCountry = "IT"), bologna)
+        assertEquals(TrackingLocation.Place(country = "IT", name = "BENTIVOGLIO (BO)"), TrackingLocation.place("BENTIVOGLIO (BO)", null, AppLanguage.En, bologna))
+        assertEquals(
+            TrackingLocation.Place(country = null, name = "Example Depot"),
+            TrackingLocation.place("Example Depot", null, AppLanguage.En, WrittenPlace(name = "Example Depot")),
+        )
+        val shenzhen = EventPlace(latitude = 22.55, longitude = 114.07, precision = EventPlacePrecision.City, country = "CN", name = "Shenzhen")
+        assertEquals(TrackingLocation.Place(country = "CN", name = "Shenzhen"), TrackingLocation.place("深圳市", shenzhen, AppLanguage.En, WrittenPlace(name = "深圳市")))
+        assertEquals("BENTIVOGLIO (BO), Italy", TrackingLocation.spoken("BENTIVOGLIO (BO)", null, AppLanguage.En, bologna))
+        assertEquals("IT", TrackingLocation.countryCode("BENTIVOGLIO (BO)", "IT", bologna))
+        assertNull(TrackingLocation.countryCode("Haiger, DE", "DE", WrittenPlace(name = "Haiger, DE")))
+        assertEquals("DE", TrackingLocation.countryCode("Haiger, DE", "DE", null))
     }
 
     private fun <T : Any> assertNotNull(value: T?): T {

@@ -18,6 +18,18 @@ describe('scan places', () => {
     expect(scanPlace(location, placed ? { country: placed, name: 'Town', precision: 'city' } : undefined)).toEqual({ country, place });
   });
 
+  it('reads a location as the server read its words, unless it names it by the town it was placed in', () => {
+    const bologna = { country: 'IT', name: 'BENTIVOGLIO (BO)', passport_country: 'IT' };
+    expect(scanPlace('BENTIVOGLIO (BO)', undefined, 'en', bologna)).toEqual({ country: 'IT', place: 'BENTIVOGLIO (BO)' });
+    expect(scanPlace('Wilmington, DE', { country: 'US', name: 'Wilmington', precision: 'city' }, 'en', { country: 'US', name: 'Wilmington, DE' }))
+      .toEqual({ country: 'US', place: 'Wilmington, DE' });
+    expect(scanPlace('Example Depot', undefined, 'en', { name: 'Example Depot' })).toEqual({ country: null, place: 'Example Depot' });
+    expect(scanPlace('深圳市', { country: 'CN', name: 'Shenzhen', precision: 'city' }, 'en', { name: '深圳市' })).toEqual({ country: 'CN', place: 'Shenzhen' });
+    expect(scanCountry('BENTIVOGLIO (BO)', 'IT', bologna)).toBe('IT');
+    // Words the server found no country in count where the scan was placed, as the passport reads them.
+    expect(scanCountry('Switzerland Haerkingen', 'CH', { country: 'CH', name: 'Haerkingen' })).toBeNull();
+  });
+
   it('names a place behind CTT\'s site code by the town it was placed in', () => {
     const coimbra = { country: 'PT', name: 'Coimbra', precision: 'city' as const };
     expect(scanPlace('1234567 - (CDP) 3045 - Coimbra 3045', coimbra, 'en')).toEqual({ country: 'PT', place: 'Coimbra' });

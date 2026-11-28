@@ -1962,7 +1962,7 @@ final class ParcelStore: ObservableObject {
                     text: localizer.eventDescription(
                         event.description.nonEmpty ?? localizer.text(event.stage.localizationKey), template: event.template
                     ),
-                    place: location.map { EventLocation.spoken($0, placed: event.place, language: localizer.language) } ?? event.place?.name,
+                    place: location.map { EventLocation.spoken($0, placed: event.place, written: event.writtenPlace, language: localizer.language) } ?? event.place?.name,
                     clock: event.calendarDay == nil ? localizer.clockTime(step.at) : ""
                 )
             }

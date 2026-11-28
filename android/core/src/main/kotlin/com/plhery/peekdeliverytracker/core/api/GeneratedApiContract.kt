@@ -4449,6 +4449,13 @@ data class EventPlace(
 )
 
 @Serializable
+data class WrittenPlace(
+    val country: String? = null,
+    val name: String,
+    @SerialName("passport_country") val passportCountry: String? = null,
+)
+
+@Serializable
 data class PostcodeCountry(
     val postcode: String,
     val country: String,
@@ -4485,6 +4492,7 @@ data class TrackingEvent(
     @SerialName("recipient_action") val recipientAction: RecipientAction? = null,
     @SerialName("tie_order") val tieOrder: Int? = null,
     val template: ScanTemplate? = null,
+    @SerialName("written_place") val writtenPlace: WrittenPlace? = null,
 )
 
 @Serializable
@@ -4502,6 +4510,7 @@ data class PlannedTrackingEvent(
     @SerialName("expires_at") val expiresAt: String? = null,
     val day: String? = null,
     val place: EventPlace? = null,
+    @SerialName("written_place") val writtenPlace: WrittenPlace? = null,
 )
 
 @Serializable

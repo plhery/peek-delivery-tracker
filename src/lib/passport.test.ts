@@ -37,6 +37,15 @@ describe('passport journeys', () => {
     expect(stats).toMatchObject({ originCountries: [{ code: 'CA', count: 1 }, { code: 'DE', count: 1 }], domesticDeliveryCount: 2, crossBorderCount: 0 });
   });
 
+  it('counts a scan\'s country as the server read its words when it did', () => {
+    const bologna = parcel('bologna', [['accepted', '2026-08-04T10:00:00Z', 'BENTIVOGLIO (BO)', 'IT'], ['delivered', '2026-08-06T10:00:00Z', 'Milano, IT', 'IT']]);
+    bologna.events[0].writtenPlace = { country: 'IT', name: 'BENTIVOGLIO (BO)', passport_country: 'IT' };
+    // The server found no country in these words: the scan counts where it was placed, and starts no journey's origin.
+    const unnamed = parcel('unnamed', [['accepted', '2026-08-04T10:00:00Z', 'Haiger, DE', 'DE'], ['delivered', '2026-08-06T10:00:00Z', 'Koblenz', 'DE']]);
+    unnamed.events[0].writtenPlace = { name: 'Haiger, DE' };
+    expect(passportStatistics([bologna, unnamed], 'UTC')).toMatchObject({ originCountries: [{ code: 'IT', count: 1 }], domesticDeliveryCount: 2 });
+  });
+
   it('does not manufacture durations from partial, invalid, or zero-length histories', () => {
     const stats = passportStatistics([
       parcel('partial', [['out_for_delivery', '2026-08-04T10:00:00Z'], ['delivered', '2026-08-04T12:00:00Z']]),

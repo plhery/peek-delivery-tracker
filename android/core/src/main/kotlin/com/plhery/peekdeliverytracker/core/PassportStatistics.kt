@@ -4,6 +4,7 @@ import com.plhery.peekdeliverytracker.core.api.ApiJson
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.EventPlace
 import com.plhery.peekdeliverytracker.core.api.EventPlacePrecision
+import com.plhery.peekdeliverytracker.core.api.WrittenPlace
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
@@ -178,7 +179,7 @@ class PassportStatistics(parcels: List<Parcel>, timeZone: ZoneId = ZoneId.system
 
             // Never skip an unknown first scan and promote a destination scan into
             // an origin. City names and tracking-number suffixes are insufficient.
-            val origin = TrackingLocation.countryCode(first.event.location, first.event.place?.country)
+            val origin = TrackingLocation.countryCode(first.event.location, first.event.place?.country, first.event.writtenPlace)
             if (origin != null) countries.getOrPut(origin.nfc()) { Tally(origin, 0) }.count += 1
 
             if (currentStage != TrackingStage.Delivered || completion == null) continue
@@ -232,7 +233,7 @@ class PassportStatistics(parcels: List<Parcel>, timeZone: ZoneId = ZoneId.system
 
         /** Where a scan was, as the passport's countries count it: the country its words name, else the one the server placed it in. */
         private fun passportCountry(event: TrackingEvent): String? =
-            TrackingLocation.countryCode(event.location, event.place?.country) ?: event.place?.country
+            TrackingLocation.countryCode(event.location, event.place?.country, event.writtenPlace) ?: event.place?.country
 
         private fun twoDigits(value: Int): String = value.toString().padStart(2, '0')
 
@@ -521,13 +522,16 @@ object TrackingLocation {
     /**
      * For display: a location written in a script the reader may not read ([romanises]) is named by the town the
      * server placed it in ("深圳市" is Shenzhen), or by the country alone where it placed it no closer, and kept as
-     * written where it placed it nowhere. Otherwise as [place] with the country it was placed in reads it.
+     * written where it placed it nowhere. Otherwise as the server read its words ([written]), against the scan's place
+     * and the parcel's countries ("BENTIVOGLIO (BO)" on a parcel to Italy is in Italy), or for a row the server did not
+     * read, as [place] with the country it was placed in reads it.
      */
-    fun place(location: String, placed: EventPlace?, language: AppLanguage): Place =
-        if (placed != null && romanises(location, language)) {
-            Place(country = placed.country, name = if (placed.precision == EventPlacePrecision.City) placed.name else "")
-        } else {
-            place(location, placed?.country)
+    fun place(location: String, placed: EventPlace?, language: AppLanguage, written: WrittenPlace? = null): Place =
+        when {
+            placed != null && romanises(location, language) ->
+                Place(country = placed.country, name = if (placed.precision == EventPlacePrecision.City) placed.name else "")
+            written != null -> Place(country = written.country, name = written.name)
+            else -> place(location, placed?.country)
         }
 
     /**
@@ -540,11 +544,18 @@ object TrackingLocation {
     }
 
     /**
+     * Passport evidence as the server read the words ([WrittenPlace.passportCountry], none when it found none), or for
+     * a row it did not read, as [countryCode] with the country it was placed in reads them.
+     */
+    fun countryCode(location: String?, placedIn: String?, written: WrittenPlace?): String? =
+        if (written != null) written.passportCountry else countryCode(location, placedIn)
+
+    /**
      * `EventLocation.spoken`: a scan's place as the parcel's page writes it, in words, the country's name after the
      * place's ("Zürich, Switzerland"), or alone.
      */
-    fun spoken(location: String, placed: EventPlace?, language: AppLanguage): String {
-        val place = place(location, placed, language)
+    fun spoken(location: String, placed: EventPlace?, language: AppLanguage, written: WrittenPlace? = null): String {
+        val place = place(location, placed, language, written)
         val country = place.country ?: return place.name
         val name = countryName(country, language)
         return if (place.name.isEmpty()) name else "${place.name}, $name"

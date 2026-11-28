@@ -5,7 +5,7 @@ import { countryFlag, countryName } from 'universal-parcel-scraper/app';
 import { localizedEventDescription, localizedScanWording, stageLabel, useI18n } from '../i18n';
 import { scanPlace } from '../lib/scanPlace';
 import { currentEvent, sortEventsDesc, withRelays } from '../lib/stages';
-import type { EventPlace as EventPlaceData, PlannedEvent, TrackingEvent } from '../types';
+import type { EventPlace as EventPlaceData, PlannedEvent, TrackingEvent, WrittenPlace } from '../types';
 
 /** A folded journal keeps this many days open, and this many more as one line each. */
 const FOLD_FROM_EVENTS = 12;
@@ -77,7 +77,7 @@ export function TrackingJournal({ events: allEvents, planned = [], written = [],
         {when && !when.timed ? <time dateTime={event.day} />
           : <time dateTime={when ? event.occurredAt : undefined} title={dateTitle(when)}>{when ? localizedClockTime(when.date, languageTag, use24HourTime) : '—'}</time>}
         <div><p>{syncing && isCurrent && event.stage === 'pending' ? t('timeline.syncing') : wording(event)}</p>
-          {event.location?.trim() && <EventPlace location={event.location} placed={event.place} />}
+          {event.location?.trim() && <EventPlace location={event.location} placed={event.place} written={event.writtenPlace} />}
           {relayed.map(line => <p key={line} className="tracking-journal__relay">{line}</p>)}
         </div>
       </li>;
@@ -160,7 +160,7 @@ function PredictedSteps({ steps, note }: { steps: PlannedEvent[]; note: string }
         <div>
           <p>{localizedEventDescription(step.description, t) || stageLabel(t, step.stage)}</p>
           <time className="tracking-journal__predicted-when" dateTime={step.day ?? step.occurredAt} title={dateTitle(scanDate(step))}>{when(step)}</time>
-          {step.location?.trim() && <EventPlace location={step.location} placed={step.place} />}
+          {step.location?.trim() && <EventPlace location={step.location} placed={step.place} written={step.writtenPlace} />}
         </div>
       </li>)}
     </ol>
@@ -168,14 +168,15 @@ function PredictedSteps({ steps, note }: { steps: PlannedEvent[]; note: string }
 }
 
 /**
- * The flag leads and the country closes the place, named in the reader's language. A final code
- * that is also a state or canton ("Haiger, DE", "Wilmington, DE") names a country only when the
- * scan was placed in that country. A place written in a script other than Latin and the reader's own
- * is named by the town it was placed in (`scanPlace`), a planned step's as a scan's.
+ * The flag leads and the country closes the place, named in the reader's language, as the server read the words
+ * (`written`): a final code that is also a state or canton ("Haiger, DE", "Wilmington, DE") names a country only when
+ * the scan was placed in that country or one of the parcel's countries writes its regions so. A place written in a
+ * script other than Latin and the reader's own is named by the town it was placed in (`scanPlace`), a planned step's
+ * as a scan's.
  */
-function EventPlace({ location, placed }: { location: string; placed?: EventPlaceData | null }) {
+function EventPlace({ location, placed, written }: { location: string; placed?: EventPlaceData | null; written?: WrittenPlace }) {
   const { languageTag, locale } = useI18n();
-  const { country, place } = scanPlace(location, placed, locale);
+  const { country, place } = scanPlace(location, placed, locale, written);
   if (!country) return <span className="tracking-journal__location">{place}</span>;
   const name = countryName(country, languageTag);
   return <span className="tracking-journal__location">

@@ -24,12 +24,18 @@ translating the rest.
   reads wording to pick a stage. It doesn't translate.
 - Scan locations keep the carrier's text, except for a country it wrote out: a flag leads
   the place and the country's name in the reader's language closes it, so "Zürich, CH"
-  reads "🇨🇭 Zürich, Switzerland" (the scraper's
+  reads "🇨🇭 Zürich, Switzerland". The server reads the words with the scraper's
   [`trackingLocation.ts`](https://github.com/plhery/universal-parcel-scraper/blob/main/places/trackingLocation.ts),
-  `TrackingLocation` in `PassportStatistics.swift`). Passport and Friends stamps count a
-  final country field, or a code that is also a state or canton once the scan was placed in
-  that country ([`scanPlace.ts`](../src/lib/scanPlace.ts)); the passport's countries also
-  take the country the server placed a scan in.
+  against the country it placed the scan in and the parcel's destination and carriers' home
+  countries, and serves the reading with each scan and planned step (`written_place`,
+  `writtenPlaces` in [`eventPlaces.ts`](../src/server/eventPlaces.ts)): a region's code reads
+  as its country and stays with its town ("BENTIVOGLIO (BO)" on a parcel to Italy is in
+  Italy). The web and both apps show that reading, and read a row without it themselves
+  ([`scanPlace.ts`](../src/lib/scanPlace.ts), `TrackingLocation` in
+  `PassportStatistics.swift` and `PassportStatistics.kt`). Passport and Friends stamps count
+  the served `passport_country`: a final country field or a region's code, read against the
+  scans around it too, never a country read from a town; else the country the server placed
+  the scan in.
 - A scan or planned step location written in a script other than Latin shows the town the
   server placed it in, by the name the scraper's place reader gives it, with its flag and
   country: "深圳市" reads "🇨🇳 Shenzhen, China", and one placed only in a country shows the

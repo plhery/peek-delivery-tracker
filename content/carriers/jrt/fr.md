@@ -6,7 +6,7 @@ published: 2026-11-18
 updated: 2026-11-27
 ---
 
-JRT (今日通, Jinritong, *厦门今日通商贸有限公司*) est un transitaire de Xiamen, en Chine, dont les lettres de transport de 15 caractères commencent par `JRT` et finissent par `MM`. Colle ton numéro `JRT…MM` dans le champ ci-dessus pour suivre le colis depuis la Chine, à travers le vol et la douane, jusqu'au transporteur final dont JRT recopie les scans : DHL en Europe, UPS aux États-Unis, FedEx sur sa ligne vers l'Irlande, CTT Express en Espagne, InPost en Pologne et J&T Express Mexique au Mexique.
+JRT (今日通, Jinritong, *厦门今日通商贸有限公司*) est un transitaire de Xiamen, en Chine, dont les lettres de transport de 15 caractères commencent par `JRT` et finissent par `MM`. Colle ton numéro `JRT…MM` dans le champ ci-dessus pour suivre le colis depuis la Chine, à travers le vol et la douane, jusqu'au transporteur final dont JRT recopie les scans : DHL en Europe, UPS aux États-Unis, FedEx sur sa ligne vers l'Irlande dont le nom de produit mentionne FedEx, CTT Express en Espagne, InPost en Pologne et J&T Express Mexique au Mexique.
 
 ## Numéro de suivi JRT : à quoi il ressemble
 

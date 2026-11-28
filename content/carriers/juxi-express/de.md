@@ -6,7 +6,7 @@ published: 2026-11-03
 updated: 2026-11-27
 ---
 
-Juxi Express (*Shanghai Juxi International Freight Forwarding Co., Ltd.*, auch `SHJX` oder `驹隙`) ist ein Spediteur aus Shanghai, der Pakete chinesischer Onlinehändler über eigene Linien und Postdienste nach Europa bringt — auf der Deutschland-Kleinpaketlinie übernimmt vor Ort DHL Paket. Weil Juxi keine eigene Sendungsverfolgung mehr betreibt, füg deine 17-stellige `JXC…YQ`-Sendungsnummer direkt oben ins Feld ein.
+Juxi Express (*Shanghai Juxi International Freight Forwarding Co., Ltd.*, auch `SHJX` oder `驹隙`) ist ein Spediteur aus Shanghai, der Pakete chinesischer Onlinehändler über eigene Linien und die Post ins Ausland bringt; auf seiner Kleinpaketlinie nach Großbritannien und Deutschland stellt in Deutschland DHL Paket zu. Eine eigene Sendungsverfolgung hat Juxi nicht mehr: Füg die Sendungsnummer vom Shop oben ins Feld ein (die bisher bekannten haben 17 Zeichen, `JXC…YQ`).
 
 ## Juxi Express Sendungsnummer: so sieht sie aus
 

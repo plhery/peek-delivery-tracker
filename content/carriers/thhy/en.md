@@ -1,6 +1,6 @@
 ---
 title: Tianhui Hengyuan (THHY) tracking: AT numbers and scans
-description: Track a Tianhui Hengyuan (天汇恒源, THHY) AT…TH parcel from China: 14-character format, scripted Hualei tracks vs real scans, Swiss Post handover and seller help.
+description: Track a Tianhui Hengyuan (天汇恒源, THHY) AT…TH parcel from China: 14-character format, scripted Hualei tracks vs real scans, who delivers and seller help.
 slug: tianhui-hengyuan-tracking
 published: 2026-10-30
 updated: 2026-11-27

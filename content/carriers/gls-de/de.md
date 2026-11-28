@@ -1,6 +1,6 @@
 ---
 title: GLS Sendungsverfolgung Deutschland: Status und Paketshop
-description: GLS Sendungsverfolgung Deutschland: Paketnummer oder Track-ID mit PLZ prüfen, Status-Bedeutungen, Paketshop-Lagerfrist (7 Werktage), Zoll und GLS-Kontakt.
+description: GLS Sendungsverfolgung Deutschland: Paketnummer oder Track-ID mit PLZ prüfen, Status-Bedeutungen, Paketshop-Lagerfrist (mind. 7 Werktage), Zoll und GLS-Kontakt.
 slug: gls-sendungsverfolgung-deutschland
 published: 2026-10-11
 updated: 2026-11-27

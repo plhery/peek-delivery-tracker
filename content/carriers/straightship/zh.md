@@ -6,7 +6,7 @@ published: 2026-11-03
 updated: 2026-11-27
 ---
 
-Straightship（中文名迅联捷航，全称 Straightship Solutions Limited）总部位于加拿大不列颠哥伦比亚省本拿比（Burnaby），承运亚洲至北美跨境包裹并用自有司机在加拿大派送（官网列出 SHEIN 为合作伙伴）。如果快递单号以 `STRTD`、`STRCA` 或 `STSH` 开头，你可以在 [Straightship 中文官网](https://www.straightship.com/new/cn/)的“跟踪您的货物”一栏输入单号查询，或直接粘贴到上方查询框；单号通常在商家的发货邮件或订单详情中。
+Straightship（中文名迅联捷航，全称 Straightship Solutions Limited）总部位于加拿大不列颠哥伦比亚省本拿比（Burnaby），承运亚洲至北美跨境包裹并用自有司机在加拿大派送（它的网站把 SHEIN 列为合作伙伴之一）。快递单号以 `STRTD` 或 `STRCA` 开头的，就是 Straightship 在送；以 `STSH` 开头的也可能是它。你可以在 [Straightship 中文网站](https://www.straightship.com/new/cn/)的“跟踪您的货物”一栏输入单号查询，或直接粘贴到上方查询框；单号通常在商家的发货邮件或订单详情中。
 
 ## Straightship 快递单号长什么样
 

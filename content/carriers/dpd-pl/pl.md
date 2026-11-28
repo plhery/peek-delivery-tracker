@@ -1,12 +1,12 @@
 ---
 title: DPD Poland śledzenie paczki: statusy, Pickup i kontakt
-description: DPD Polska śledzenie paczki po 14-znakowym numerze: statusy, DPD Pickup (2 dni robocze), numer do kuriera, reklamacja w 30 dni oraz infolinia 22 577 55 55.
+description: DPD Polska śledzenie paczki po 14-znakowym numerze: statusy, DPD Pickup (2 dni robocze), numer do kuriera, decyzja w reklamacji w 30 dni, infolinia 22 577 55 55.
 slug: dpd-poland-sledzenie-paczki
 published: 2026-10-11
 updated: 2026-11-27
 ---
 
-DPD Polska (część grupy Geopost należącej do francuskiej La Poste) dostarcza paczki kurierem oraz do ponad 35 000 punktów i automatów DPD Pickup. Wpisz 14-znakowy numer przesyłki (13 cyfr i litera lub 14 cyfr) na stronie [Track & Trace DPD](https://tracktrace.dpd.com.pl/findParcel) albo wklej go w pole powyżej — numer znajdziesz w e-mailu ze sklepu lub w aplikacji DPD Mobile.
+DPD Polska (część grupy Geopost należącej do francuskiej La Poste) dostarcza paczki kurierem oraz, jak podaje, do ponad 35 000 punktów i automatów DPD Pickup. Wpisz 14-znakowy numer przesyłki (13 cyfr i litera lub 14 cyfr) na stronie [Track & Trace DPD](https://tracktrace.dpd.com.pl/findParcel) albo wklej go w pole powyżej — numer zwykle podaje sklep w e-mailu o wysyłce, a w aplikacji DPD Mobile paczki przypisane do twojego telefonu lub e-maila widać i bez niego.
 
 ## DPD: gdzie jest numer paczki i jak wygląda
 

@@ -6,7 +6,7 @@ published: 2026-10-30
 updated: 2026-11-27
 ---
 
-GEODIS Poland (GEODIS Road Network, based in Błonie, formerly PEKAES until GEODIS bought it in 2021) is the Polish pallet and parcel network of SNCF-owned GEODIS, delivering across Poland in 24 to 48 hours (pallets to private addresses Monday to Friday, 8:00 to 16:00). What to do depends on what the sender gave you:
+GEODIS Poland (GEODIS Road Network, based in Błonie, formerly PEKAES until GEODIS bought it in 2021) is the Polish pallet and parcel network of SNCF-owned GEODIS, which quotes 24 to 48 hours within Poland as standard (pallets to private addresses arrive Monday to Friday, 8:00 to 16:00). What to do depends on what the sender gave you:
 
 - **A number of PL and 16 digits, or a link to Strefa Klienta:** a GEODIS Poland shipment, parcel or pallet. Paste either in the box above, or search the number on GEODIS Poland's tracker, [Strefa Klienta](https://strefaklienta.pekaes.geodis.pl/en/).
 - **Another GEODIS number:** Peek reads one other GEODIS tracker, GEODIS France's, whose numbers start with 1G (below). GEODIS's search on geodis.com finds its air, sea and last-mile shipments, and points road shipments to Strefa Klienta.
@@ -104,7 +104,7 @@ After a second failed attempt the shipment returns to the sender. When the sende
 
 ### What is the GEODIS Poland customer service phone number and how do I report damage?
 
-Call Dział Obsługi Klienta on +48 22 460 26 26. For visible damage, sign a damage report ("protokół szkody") with the driver; report hidden damage within 7 days of receipt, and contact the shop for online orders (the client files written claims within 14 days for damage or 21 days for delay/loss).
+Call Dział Obsługi Klienta on +48 22 460 26 26. For visible damage, sign a damage report ("protokół szkody") with the driver; report hidden damage within 7 days of receipt, and contact the shop for online orders (the client files written claims within 14 days of receipt for damage, or 21 days from the planned delivery day for delay or loss).
 
 :::sources
 - [GEODIS Poland: Strefa Klienta, shipment tracking](https://strefaklienta.pekaes.geodis.pl/en/) – search field and button (read 14 November 2026), not-found reply, claim and damage report forms

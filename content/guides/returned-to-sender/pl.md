@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-11-27
 ---
 
-„Zwrot do nadawcy” oznacza, że przewoźnik (np. DPD, InPost, Allegro One lub Poczta Polska) nie doręczył przesyłki i odsyła ją do nadawcy — zwykle przez błędny adres, odmowę przyjęcia, miniony termin odbioru (2 dni w One Boxie, 14 dni na Poczcie Polskiej) albo nieopłacone cło. Gdy paczka już wraca, nie da się jej zatrzymać; wcześniej może to zrobić wyłącznie nadawca. Napisz od razu do sklepu, czy chcesz ponownej wysyłki, czy zwrotu pieniędzy — samo nieodebranie nie jest odstąpieniem od umowy (sklep oddaje środki w ciągu 14 dni od oświadczenia).
+„Zwrot do nadawcy” oznacza, że przewoźnik (np. DPD, InPost, Allegro One lub Poczta Polska) nie doręczył przesyłki i odsyła ją do nadawcy — zwykle przez błędny adres, odmowę przyjęcia, miniony termin odbioru (2 dni w One Boxie, 14 dni na Poczcie Polskiej) albo nieopłacone cło. Gdy paczka już wraca, raczej nie da się jej zatrzymać; wcześniej zwykle może to zrobić tylko nadawca. Napisz od razu do sklepu, czy chcesz ponownej wysyłki, czy zwrotu pieniędzy — samo nieodebranie nie jest odstąpieniem od umowy (sklep oddaje środki w ciągu 14 dni od oświadczenia, ale może poczekać, aż paczka do niego wróci).
 
 Sam odsyłasz coś do sklepu? To inna droga: [śledzenie zwrotu i zwrotu pieniędzy](guide:returns-tracking).
 

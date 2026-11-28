@@ -1,13 +1,13 @@
 ---
 title: Sendungsverfolgung aktualisiert sich nicht: was tun?
-description: Sendungsverfolgung aktualisiert sich nicht? Gründe bei DHL, Hermes, DPD und Post, wie lange „elektronisch angekündigt“ dauert und wann du reklamierst.
+description: Sendungsverfolgung aktualisiert sich nicht? Gründe bei DHL, Hermes und der Post, wie lange „elektronisch angekündigt“ dauert und wann du reklamierst.
 slug: sendungsverfolgung-aktualisiert-sich-nicht
 picture: Ein Kalender mit mehreren durchgestrichenen Tagen, eine Fortschrittslinie, die auf halbem Weg abbricht, und Pip wartet ein bisschen gelangweilt.
 published: 2026-10-09
 updated: 2026-11-27
 ---
 
-Wenn sich die Sendungsverfolgung seit Tagen nicht aktualisiert, fehlt meist nur ein neuer Scan: Paketdienste scannen an Paketzentren, im Zoll und beim Beladen, nicht unterwegs auf der Straße. Erst wenn die Wartefrist vorbei ist — bei [DHL](carrier:dhl) mehr als 5 Werktage, bei [Hermes](carrier:hermes-de) 5 Werktage, bei der [Österreichischen Post](carrier:austrian-post) 3 bis 5 Werktage und bei der [Schweizerischen Post](carrier:swiss-post) mehr als zwei Tage über der Laufzeit — solltest du handeln, und zwar zuerst beim Händler.
+Wenn sich die Sendungsverfolgung seit Tagen nicht aktualisiert, fehlt meist nur ein neuer Scan: Paketdienste scannen an Paketzentren, im Zoll und beim Beladen, nicht unterwegs auf der Straße. Erst wenn die Frist des Paketdienstes vorbei ist — bei [DHL](carrier:dhl) mehr als 5 Werktage ohne neuen Status, bei [Hermes](carrier:hermes-de) 5 Werktage, bei der [Österreichischen Post](carrier:austrian-post) mehr als 3 bis 5 Werktage (ins Ausland meist 2 bis 3 Wochen) und bei der [Schweizerischen Post](carrier:swiss-post) im Inland mehr als zwei Tage über der erwarteten Laufzeit — solltest du handeln, und zwar zuerst beim Händler.
 
 ## Warum hängt die Sendungsverfolgung seit Tagen fest?
 

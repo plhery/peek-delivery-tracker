@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-11-27
 ---
 
-Si no recoges un paquete a tiempo en una oficina, punto de recogida o locker, vuelve al remitente. El plazo depende del transportista —15 días en oficina de Correos (5 en Citypaq), 5 días naturales en InPost, 7 días en GLS y Correos Express, 10 en Punto Collectt de CTT Express (5 en Locky) y 3 en Amazon Locker—, aunque siempre manda la fecha de tu aviso, SMS o email. Si cambias de idea tras comprar en una tienda en España, debes comunicar el desistimiento para recibir el reembolso.
+Si no recoges un paquete a tiempo en una oficina, punto de recogida o locker, vuelve al remitente. El plazo depende del transportista —15 días en oficina de Correos (5 en Citypaq), 5 días naturales en InPost (envíos nacionales), 7 días naturales en Correos Express y en GLS desde el primer intento, 10 en Punto Collectt de CTT Express (5 en Locky) y 3 en Amazon Locker—, aunque siempre manda la fecha de tu aviso, SMS o email. Si cambias de idea tras comprar en una tienda en España, debes comunicar el desistimiento para recibir el reembolso.
 
 ¿No te ha llegado el código o la taquilla estaba llena? Lo tienes en [paquete en una taquilla](guide:parcel-lockers).
 

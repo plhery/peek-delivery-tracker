@@ -93,11 +93,11 @@ Las horas se leen con el desfase GMT que da Yanwen y se muestran en la zona hora
 
 ### ¿Qué es Yanwen y cómo es su número de seguimiento?
 
-Es un operador logístico chino fundado en Pekín en 1998 (con oficinas en Pekín, Shenzhen, Shanghái y Hangzhou) y proveedor de plataformas como AliExpress y eBay. Sus números son `BYS` y 9 cifras, o dos letras, 9 cifras y `YP`; en la web también aparece el «Last Mile Tracking» local.
+Es un operador logístico chino fundado en Pekín en 1998 (con oficinas en Pekín, Shenzhen, Shanghái y Hangzhou) y, según su perfil, proveedor logístico recomendado de plataformas como AliExpress y eBay. Sus números son `BYS` y 9 cifras, o dos letras, 9 cifras y `YP`; en la web también aparece el «Last Mile Tracking» local.
 
 ### ¿Quién reparte los paquetes de Yanwen en España y a qué hora entrega?
 
-Yanwen no reparte directamente en España ni publica una empresa fija ni horarios: entrega el paquete a un transportista local (`Batch delivery to carrier`). Consulta el cuadro «Distributor» y «Last Mile Tracking» en track.yw56.com.cn para ver qué empresa local lo entrega y sus horarios.
+Yanwen no reparte directamente en España ni publica una empresa fija ni horarios: entrega el paquete a un transportista local (`Batch delivery to carrier`). En track.yw56.com.cn, el cuadro «Distributor», cuando aparece, y el número «Last Mile Tracking» te dicen qué empresa local lo entrega; sus horarios, consúltalos con ella.
 
 ### ¿Qué significa «Yanwen facility - Outbound» o «Tendered for Delivery»?
 
@@ -109,7 +109,7 @@ Yanwen no publica plazos de entrega para destinatarios, así que guíate por la 
 
 ### ¿Cómo contactar con Yanwen si mi paquete no llega o se pierde?
 
-Contacta primero con la tienda o el marketplace: el vendedor puede abrir una búsqueda entre los 10 y los 60 días desde el envío. Yanwen no tiene soporte en España; solo publica el teléfono chino 400-108-5656 (lun–sáb 9:00–18:00) y marketing@yw56.com.cn.
+Contacta primero con la tienda o el marketplace: la tienda puede pedir una búsqueda entre los 10 y los 60 días desde el envío. Yanwen no publica ningún contacto para España; publica un teléfono chino, el 400-108-5656 (lun–sáb 9:00–18:00), marketing@yw56.com.cn y, en chino y para vendedores, un chat, un portal de clientes y WeChat.
 
 :::sources
 - [Yanwen: YW Tracking](https://track.yw56.com.cn/en/index) – web de seguimiento, idiomas, columnas, categorías, cuadro de notas, teléfono

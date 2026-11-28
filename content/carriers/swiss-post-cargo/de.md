@@ -6,7 +6,7 @@ published: 2026-10-12
 updated: 2026-11-27
 ---
 
-Swiss Post Cargo ist seit 1. März 2025 die Güterlogistik-Marke der Schweizerischen Post (ehemals PostLogistics) für Paletten und Stückgut per Lastwagen, keine gewöhnlichen Pakete. Im Track & Trace auf tt.swisspost-cargo.com oder im Feld oben verfolgst du deinen 20-stelligen SSCC-Barcode (`00…`) oder eine `PL-`Referenz; Stückgut kommt in der Regel am nächsten Arbeitstag bis 17 Uhr. Normale Postpakete gehören auf [die Seite der Schweizerischen Post](carrier:swiss-post).
+Swiss Post Cargo ist seit 1. März 2025 die Güterlogistik-Marke der Schweizerischen Post (ehemals PostLogistics) für Paletten und Stückgut per Lastwagen, keine gewöhnlichen Pakete. Im Track & Trace auf tt.swisspost-cargo.com oder im Feld oben verfolgst du deinen 20-stelligen SSCC-Barcode (`00…`) oder eine `PL-`Referenz; laut der Stückgut-Broschüre der Post kommt Stückgut in der Regel am nächsten Arbeitstag, an Orte in der Schweiz und in Liechtenstein, die ein Lastwagen erreicht, bis 17 Uhr. Normale Postpakete gehören auf [die Seite der Schweizerischen Post](carrier:swiss-post).
 
 ## Swiss Post Cargo Sendungsnummer: Barcode oder Referenz
 

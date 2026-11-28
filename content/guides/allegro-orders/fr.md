@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-27
 ---
 
-Allegro est une place de marché polonaise (allegro.pl, allegro.cz, allegro.sk et allegro.hu), sans site dédié pour la France, la Belgique ou la Suisse. Les vendeurs d'allegro.pl peuvent livrer en Belgique via Allegro Kurier DPD (3 jours ouvrés) ou Allegro Kurier DHL (2 à 3 jours ouvrés) lorsqu'ils proposent l'option, tandis que la France et la Suisse ne figurent pas dans ces modes d'expédition. Le numéro de suivi se trouve dans « Moje przesyłki » (Mes envois), « Moje zakupy » (Mes achats) et dans l'e-mail d'Allegro, avec une protection des acheteurs jusqu'à 20 000 zł en cas de souci.
+Allegro est une place de marché polonaise (allegro.pl, allegro.cz, allegro.sk et allegro.hu), sans site dédié pour la France, la Belgique ou la Suisse. Les vendeurs d'allegro.pl peuvent livrer en Belgique via Allegro Kurier DPD ou Allegro Kurier DHL lorsqu'ils proposent l'option (selon Allegro, 3 et 2 à 3 jours ouvrés de transport, plus le délai d'expédition du vendeur), tandis que la France et la Suisse ne figurent pas dans ces modes d'expédition. Le numéro de suivi se trouve dans « Moje przesyłki » (Mes envois), « Moje zakupy » (Mes achats) et dans l'e-mail d'Allegro, avec une protection des acheteurs jusqu'à 20 000 zł en cas de souci.
 
 ## Quel transporteur livre une commande Allegro (One Box, InPost, DPD, DHL) ?
 

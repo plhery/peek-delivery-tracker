@@ -22246,6 +22246,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#df0024"
     },
     {
+      "id": "yanwen",
+      "catalog": "yanwen",
+      "slug": "yanwen-pakket-volgen",
+      "title": "Yanwen tracking: UL…YP-nummer, statussen en bezorger",
+      "name": "Yanwen",
+      "color": "#8cbe1e"
+    },
+    {
       "id": "vinted-go",
       "catalog": "vinted-go",
       "slug": "vinted-go-pakket-volgen",
@@ -22440,6 +22448,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "sv": [
     {
+      "id": "yunexpress",
+      "catalog": "yunexpress",
+      "slug": "yunexpress-spara-paket",
+      "title": "YunExpress spårning: YT-nummer, statusar och leverans",
+      "name": "YunExpress",
+      "color": "#008284"
+    },
+    {
       "id": "orlen-paczka",
       "catalog": "orlen-paczka",
       "slug": "orlen-paczka-spara-paket",
@@ -22494,6 +22510,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "China Post spårning: CN-nummer, statusar och leverans",
       "name": "China Post",
       "color": "#006d46"
+    },
+    {
+      "id": "postnl",
+      "catalog": "spring-gds",
+      "slug": "postnl-spara-paket",
+      "title": "PostNL spårning: nummer, statusar och leverans utomlands",
+      "name": "PostNL",
+      "color": "#ef7d00"
     },
     {
       "id": "topyou",
@@ -22776,6 +22800,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ba1b02"
     },
     {
+      "id": "yanwen",
+      "catalog": "yanwen",
+      "slug": "yanwen-sledovani-zasilek",
+      "title": "Yanwen sledování zásilek: číslo UL…YP, stavy a doručení",
+      "name": "Yanwen",
+      "color": "#8cbe1e"
+    },
+    {
       "id": "ppl",
       "catalog": "ppl",
       "slug": "ppl-sledovani-zasilky",
@@ -23005,6 +23037,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ],
   "ro": [
+    {
+      "id": "yunexpress",
+      "catalog": "yunexpress",
+      "slug": "yunexpress-urmarire-colet",
+      "title": "Urmărire YunExpress: coduri YT, statusuri și cine livrează",
+      "name": "YunExpress",
+      "color": "#008284"
+    },
     {
       "id": "packeta",
       "catalog": "packeta",
@@ -23702,6 +23742,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffbe0c"
     },
     {
+      "id": "j-and-t-de",
+      "catalog": "j-and-t-de",
+      "slug": "jt-express-germany-vidstezhennia",
+      "title": "J&T Express Germany відстеження: номери JTDE і статуси",
+      "name": "J&T Express Germany",
+      "color": "#e60000"
+    },
+    {
       "id": "imile",
       "catalog": "imile",
       "slug": "imile-vidstezhennia",
@@ -23790,6 +23838,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "MaltaPost praćenje pošiljke: brojevi, statusi i kontakt",
       "name": "MaltaPost",
       "color": "#d43b2c"
+    },
+    {
+      "id": "j-and-t-de",
+      "catalog": "j-and-t-de",
+      "slug": "jt-express-germany-pracenje-posiljke",
+      "title": "J&T Express Germany praćenje: JTDE brojevi i statusi",
+      "name": "J&T Express Germany",
+      "color": "#e60000"
     },
     {
       "id": "correos-chile",

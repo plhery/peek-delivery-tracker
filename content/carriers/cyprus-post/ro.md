@@ -3,10 +3,10 @@ title: Urmărire Cyprus Post: coduri CY, statusuri și taxe vamale
 description: Urmărește un colet sau o trimitere recomandată Cyprus Post: coduri S10 de 13 caractere cu CY, statusuri UPU, taxe vamale UE de 3 € + 2 € și OCECPR.
 slug: cyprus-post-urmarire-colet
 published: 2026-11-27
-updated: 2026-11-27
+updated: 2026-11-28
 ---
 
-Urmărește un colet sau o trimitere recomandată Cyprus Post pe cypruspost.post sau în caseta de mai sus folosind codul poștal S10 din 13 caractere (terminat în `CY` sau codul de țară al poștei străine). Cyprus Post (Κυπριακά Ταχυδρομεία), Departamentul Serviciilor Poștale, este operatorul poștal național desemnat al Republicii Cipru; dacă nu ai codul, vezi [unde găsești numărul de urmărire](guide:find-tracking-number) (în engleză).
+Urmărește un colet sau o trimitere recomandată Cyprus Post pe cypruspost.post sau în caseta de mai sus folosind numărul poștal internațional S10 din 13 caractere (terminat în `CY` sau codul de țară al poștei străine). Cyprus Post (Κυπριακά Ταχυδρομεία), Departamentul Serviciilor Poștale, este operatorul poștal național desemnat al Republicii Cipru; dacă nu ai codul, vezi [unde găsești numărul de urmărire](guide:find-tracking-number) (în engleză).
 
 ## Numărul de urmărire Cyprus Post
 
@@ -59,7 +59,7 @@ Dacă urmărirea s-a oprit, vezi [urmărire care nu se actualizează](guide:trac
 
 ## Urmărirea coletelor Cyprus Post cu Peek
 
-Pentru un cod poștal terminat în `CY` cu cifră de control corectă, [Peek](/) verifică Cyprus Post și [Chronopost](carrier:chronopost) și afișează „Cyprus Post has this parcel.” când Cyprus Post cunoaște numărul, sau „Not found at … yet. Peek will keep checking after you add it.” Cu o cifră de control greșită, Peek nu interoghează Cyprus Post nici dacă o alegi cu „Change”: verifică numărul cu expeditorul. Un link cypruspost.post funcționează atunci când conține numărul.
+Pentru un număr poștal internațional terminat în `CY` cu cifră de control corectă, [Peek](/) verifică Cyprus Post și [Chronopost](carrier:chronopost) și afișează „Cyprus Post has this parcel.” când Cyprus Post cunoaște numărul, sau „Not found at … yet. Peek will keep checking after you add it.” Cu o cifră de control greșită, Peek nu interoghează Cyprus Post nici dacă o alegi cu „Change”: verifică numărul cu expeditorul. Un link cypruspost.post funcționează atunci când conține numărul.
 
 Pentru o trimitere expediată din străinătate, Peek interoghează mai întâi poșta care a emis codul acolo unde poate — cum ar fi [ELTA](carrier:elta) pentru `…GR` — sau servicii de urmărire. Sistemul Cyprus Post acceptă și aceste numere: alege „Cyprus Post” prin „Change”. Peek încearcă singur Cyprus Post atunci când poșta străină indică destinația Cipru sau, dacă nu precizează destinația, când îl adaugi din Cipru, și comută de îndată ce Cyprus Post are scanări la fel de recente ca poșta străină. Peek întreabă Cyprus Post doar despre numere de 13 caractere. Nu ești sigur de curier? Lipește numărul oricum: Peek urmărește peste 4.500 de curieri.
 
@@ -69,7 +69,7 @@ Peek afișează statusurile Cyprus Post așa cum sunt scrise, oficiul sau centru
 
 ### Cum urmăresc un colet internațional cu Cyprus Post?
 
-Introdu codul poștal S10 de 13 caractere (două litere, nouă cifre și `CY`, sau codul de două litere al altei țări) pe cypruspost.post ori în Peek. În istoricul în engleză, `(Otb)` indică evenimente din țara de origine, iar `(Inb)` evenimente din țara de destinație.
+Introdu numărul poștal internațional S10 de 13 caractere (două litere, nouă cifre și `CY`, sau codul de două litere al altei țări) pe cypruspost.post ori în Peek. În istoricul în engleză, `(Otb)` indică evenimente din țara de origine, iar `(Inb)` evenimente din țara de destinație.
 
 ### Este Cyprus Post același lucru cu Department of Postal Services?
 

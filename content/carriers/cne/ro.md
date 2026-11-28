@@ -3,7 +3,7 @@ title: Urmărire CNE Express: cod 3A5V, statusuri și contact
 description: Urmărește un colet CNE Express (递一物流) din China: formatul 3A5V, statusuri Arrived at destination și vamă, parteneri locali, timp de tranzit și contact.
 slug: cne-express-urmarire-colet
 published: 2026-11-27
-updated: 2026-11-27
+updated: 2026-11-28
 ---
 
 Urmărește un colet CNE Express (递一物流, CNE EXPRESS CO LTD, fondată în Shanghai în 2003) din China lipind numărul `3A5V` urmat de 9 cifre în caseta de mai sus sau pe [pagina de urmărire în engleză CNE](https://www.cne.com/en/track). CNE expediază comenzi transfrontaliere pentru vânzători de pe eBay, Walmart, TikTok, Temu și SHEIN și predă livrarea finală unor parteneri locali precum USPS, Royal Mail, DHL, La Poste, Evri, GLS sau DPD — verifică `Last mile number` sub `Shipment Information` la CNE sau lasă Peek să preia automat predările recunoscute.
@@ -105,7 +105,7 @@ CNE nu afișează un e-mail de suport clienți; celelalte birouri din China dese
 
 Peek citește direct sistemul CNE: statusul, fiecare linie cu locul ei, țara de destinație și curierul local când CNE numește unul dintre cei trei de mai sus cu codul său. Citește `Arrived at destination` și predarea către curierul local pe ora Beijingului, deduce fusul celorlalte linii după loc sau etapă și afișează fiecare oră în fusul dispozitivului tău. Omite numărul de comandă al vânzătorului, site-ul și telefonul curierului local, precum și dovada livrării CNE. CNE nu oferă dată estimată de livrare sau greutate.
 
-Când CNE indică curierul local și codul acestuia, Peek întreabă și acel curier: unul dintre cei trei de mai sus, poșta țării tale pentru un cod poștal (două litere, nouă cifre, două litere) sau curierul unic indicat de formatul codului. Odată ce acel curier afișează o scanare cel puțin la fel de recentă ca ultima de la CNE, Peek continuă urmărirea acolo păstrând istoricul CNE.
+Când CNE indică curierul local și codul acestuia, Peek întreabă și acel curier: unul dintre cei trei de mai sus, poșta țării tale pentru un număr poștal internațional (două litere, nouă cifre, două litere) sau curierul unic indicat de formatul codului. Odată ce acel curier afișează o scanare cel puțin la fel de recentă ca ultima de la CNE, Peek continuă urmărirea acolo păstrând istoricul CNE.
 
 Cât timp ai coletul deschis sau în ziua livrării cu notificările pornite, Peek verifică până la fiecare 10 minute și până la fiecare 2 minute de la ora 6:00 locală în ziua în care CNE îl scanează în curs de livrare, cât timp sistemul CNE răspunde (prin servicii de urmărire până la fiecare 15 minute); altfel la fiecare oră. Când preia alt curier, Peek trece la ritmul lui. După două zile fără noutăți (12 ore în „Label created” sau „Received by carrier”), verifică la oră. Te poate notifica pentru „Every scan”, „Important steps” sau „Delivery only”, și nu poate contacta CNE sau vânzătorul pentru tine.
 

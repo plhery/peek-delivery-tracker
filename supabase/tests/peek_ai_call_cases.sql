@@ -56,6 +56,21 @@ begin
       or public.peek_ai_call_record('missed_date', 30, 500) <> '{"cases": 3, "right": 1}'::jsonb then
     raise exception 'Peek AI scored a case whose time ended before its window';
   end if;
+  -- A delivery tried before the call, then back at the depot, is not the arrival it calls: checked since, it was wrong.
+  -- One tried before the note with nothing after it is: the server had not read it yet.
+  update public.peek_ai_call_cases set holds_until = now() - interval '4 days' where package_id = waiting.id;
+  insert into public.tracking_events(package_id, provider_event_id, stage, description, occurred_at) values
+    (waiting.id, 'gls:tried', 'failed_attempt', 'Tried', now() - interval '6 days'),
+    (waiting.id, 'gls:depot', 'in_transit', 'At the depot', now() - interval '5 days');
+  scored := public.peek_ai_call_record('missed_date');
+  if scored <> '{"cases": 3, "right": 1}'::jsonb then
+    raise exception 'Peek AI counted an arrival it had seen before its call as right: %', scored;
+  end if;
+  update public.peek_ai_call_cases set noted_at = now() - interval '5 days 12 hours' where package_id = waiting.id;
+  scored := public.peek_ai_call_record('missed_date');
+  if scored <> '{"cases": 3, "right": 2}'::jsonb then
+    raise exception 'Peek AI did not count an arrival it had not read when noted: %', scored;
+  end if;
   begin
     insert into public.peek_ai_call_cases(package_id, why, carrier_day, holds_until) values (arrived.id, 'other', current_date, now());
     raise exception 'Peek AI noted a case of a call it does not prove';

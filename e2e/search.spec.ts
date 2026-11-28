@@ -119,8 +119,18 @@ test('sitemap.xml lists the landing, the guides and the carriers’ pages in eve
     expect(entry).not.toContain('xhtml:link');
     expect(entry).not.toContain('<lastmod>');
   }
-  // Every address in it answers.
-  await fewAtATime(addresses, async (address) => { expect((await request.get(address)).status(), address).toBe(200); });
+  // Every address in it answers, of the carriers' pages each language's first and last: the server draws each page when
+  // it is asked for, and those number in the thousands, more each day. Its first and last reach a language's route; that
+  // every listed carrier's page is a file its route serves, carrierPages.test.ts holds without drawing them.
+  const pagesOf = new Map<string, string[]>();
+  for (const address of carriers.slice(hubCount)) {
+    const language = new URL(address).pathname.split('/carriers/')[0];
+    if (!pagesOf.has(language)) pagesOf.set(language, []);
+    pagesOf.get(language)!.push(address);
+  }
+  const ends = [...pagesOf.values()].flatMap((listed) => [...new Set([listed[0], listed.at(-1)!])]);
+  const asked = [...addresses.slice(0, landings.length + guides.length + hubCount), ...ends, ...documents];
+  await fewAtATime(asked, async (address) => { expect((await request.get(address)).status(), address).toBe(200); });
 });
 
 test('the demo, the sample and the offline page stay out of search results, with their links followed', async ({ request, baseURL }) => {
